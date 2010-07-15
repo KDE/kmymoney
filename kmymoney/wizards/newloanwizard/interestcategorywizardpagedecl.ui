@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>InterestCategoryWizardPageDecl</class>
+ <widget class="QWizardPage" name="InterestCategoryWizardPageDecl">
+  <attribute name="title">
+    <string>Interest category</string>
+  </attribute>
+  <layout class="QVBoxLayout">
+    <property name="margin">
+      <number>11</number>
+    </property>
+    <property name="spacing">
+      <number>6</number>
+    </property>
+    <item>
+      <widget class="QLabel" name="TextLabel20_2">
+        <property name="text">
+          <string>
+Please select the category you want to assign the interest payments to or create a new category.</string>
+        </property>
+        <property name="alignment">
+          <set>Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+      </widget>
+    </item>
+    <item>
+      <spacer name="Spacer90">
+        <property name="sizeHint">
+          <size>
+            <width>0</width>
+            <height>38</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+    <item>
+      <widget class="kMyMoneyAccountSelector" name="m_interestAccountEdit"/>
+    </item>
+    <item>
+      <layout class="QHBoxLayout">
+        <property name="margin">
+          <number>0</number>
+        </property>
+        <property name="spacing">
+          <number>6</number>
+        </property>
+        <item>
+          <spacer name="Spacer54_2">
+            <property name="sizeHint">
+              <size>
+                <width>264</width>
+                <height>0</height>
+              </size>
+            </property>
+            <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+            </property>
+          </spacer>
+        </item>
+        <item>
+          <widget class="KPushButton" name="m_createCategoryButton">
+            <property name="text">
+              <string/>
+            </property>
+          </widget>
+        </item>
+      </layout>
+    </item>
+    <item>
+      <spacer name="Spacer91">
+        <property name="sizeHint">
+          <size>
+            <width>0</width>
+            <height>22</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+ <customwidgets>
+ </customwidgets>
+ <tabstops>
+ </tabstops>
+</ui>

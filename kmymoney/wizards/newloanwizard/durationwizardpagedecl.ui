@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DurationWizardPageDecl</class>
+ <widget class="QWizardPage" name="DurationWizardPageDecl">
+  <attribute name="title">
+    <string>Duration</string>
+  </attribute>
+  <layout class="QVBoxLayout">
+    <item>
+      <widget class="QLabel" name="TextLabel15_2">
+        <property name="text">
+          <string>
+Please enter the term of this loan or leave the field empty to calculate it. The term is the time that is required to fully repay the loan. This time might be different from the time your loan contract is signed for.</string>
+        </property>
+        <property name="alignment">
+          <set>Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+      </widget>
+    </item>
+    <item>
+      <spacer name="Spacer67_2">
+        <property name="sizeHint">
+          <size>
+            <width>16</width>
+            <height>54</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+    <item>
+      <layout class="QHBoxLayout">
+        <item>
+          <widget class="QLabel" name="TextLabel2_3">
+            <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>1</horstretch>
+                <verstretch>0</verstretch>
+              </sizepolicy>
+            </property>
+            <property name="text">
+              <string>Term</string>
+            </property>
+            <property name="wordWrap">
+              <bool>false</bool>
+            </property>
+          </widget>
+        </item>
+        <item>
+          <widget class="KIntNumInput" name="m_durationValueEdit"/>
+        </item>
+        <item>
+          <widget class="KMyMoneyGeneralCombo" name="m_durationUnitEdit"/>
+        </item>
+      </layout>
+    </item>
+    <item>
+      <widget class="QFrame" name="Frame3_2_2">
+        <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout">
+          <property name="margin">
+            <number>11</number>
+          </property>
+          <property name="spacing">
+            <number>6</number>
+          </property>
+          <item row="0" column="0">
+            <widget class="QLabel" name="TextLabel6_3_2">
+              <property name="text">
+                <string>Loan amount:</string>
+              </property>
+              <property name="alignment">
+                <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              </property>
+              <property name="wordWrap">
+                <bool>true</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="1" column="0">
+            <widget class="QLabel" name="TextLabel8_3_2">
+              <property name="text">
+                <string>Interest rate:</string>
+              </property>
+              <property name="alignment">
+                <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="2" column="0">
+            <widget class="QLabel" name="TextLabel9_2_2">
+              <property name="text">
+                <string>Term:</string>
+              </property>
+              <property name="alignment">
+                <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="3" column="0">
+            <widget class="QLabel" name="TextLabel10_2_2">
+              <property name="text">
+                <string>Principal + Interest:</string>
+              </property>
+              <property name="alignment">
+                <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="4" column="0">
+            <widget class="QLabel" name="TextLabel11_3_2">
+              <property name="text">
+                <string>Final amortization payment</string>
+              </property>
+              <property name="alignment">
+                <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="0" column="1">
+            <widget class="QLabel" name="m_loanAmount3">
+              <property name="font">
+                <font>
+                  <bold>true</bold>
+                </font>
+              </property>
+              <property name="text">
+                <string>1</string>
+              </property>
+              <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="1" column="1">
+            <widget class="QLabel" name="m_interestRate3">
+              <property name="font">
+                <font>
+                  <bold>true</bold>
+                </font>
+              </property>
+              <property name="text">
+                <string>1</string>
+              </property>
+              <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="2" column="1">
+            <widget class="QLabel" name="m_duration3">
+              <property name="font">
+                <font>
+                  <bold>true</bold>
+                </font>
+              </property>
+              <property name="text">
+                <string>1</string>
+              </property>
+              <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="3" column="1">
+            <widget class="QLabel" name="m_payment3">
+              <property name="font">
+                <font>
+                  <bold>true</bold>
+                </font>
+              </property>
+              <property name="text">
+                <string>1</string>
+              </property>
+              <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="4" column="1">
+            <widget class="QLabel" name="m_balloon3">
+              <property name="font">
+                <font>
+                  <bold>true</bold>
+                </font>
+              </property>
+              <property name="text">
+                <string>1</string>
+              </property>
+              <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </widget>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+ <customwidgets>
+  <customwidget>
+   <class>KIntNumInput</class>
+   <extends>QWidget</extends>
+   <header>knuminput.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyGeneralCombo</class>
+   <extends>QWidget</extends>
+   <header>kmymoneymvccombo.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+ </tabstops>
+</ui>

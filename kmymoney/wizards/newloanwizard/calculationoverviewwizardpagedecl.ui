@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CalculationOverviewWizardPageDecl</class>
+ <widget class="QWizardPage" name="CalculationOverviewWizardPageDecl">
+  <attribute name="title">
+    <string>Calculation Overview</string>
+  </attribute>
+  <layout class="QVBoxLayout">
+    <property name="margin">
+      <number>11</number>
+    </property>
+    <property name="spacing">
+      <number>6</number>
+    </property>
+    <item>
+      <widget class="QLabel" name="TextLabel18_2">
+        <property name="text">
+          <string>
+KMyMoney has calculated the loan as shown in the overview below. You can accept these values by selecting &quot;Next&quot; or change them by choosing &quot;Back&quot; to return to the input field for the information you want to change.</string>
+        </property>
+        <property name="alignment">
+          <set>Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+      </widget>
+    </item>
+    <item>
+      <spacer name="Spacer79">
+        <property name="sizeHint">
+          <size>
+            <width>0</width>
+            <height>22</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+    <item>
+      <widget class="QFrame" name="Frame3_2_2_2_2_2">
+        <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout">
+          <property name="margin">
+            <number>11</number>
+          </property>
+          <property name="spacing">
+            <number>6</number>
+          </property>
+          <item row="0" column="0">
+            <widget class="QLabel" name="TextLabel6_3_2_2_2_2">
+              <property name="text">
+                <string>Loan amount:</string>
+              </property>
+              <property name="alignment">
+                <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              </property>
+              <property name="wordWrap">
+                <bool>true</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="1" column="0">
+            <widget class="QLabel" name="TextLabel8_3_2_2_2_2">
+              <property name="text">
+                <string>Interest rate:</string>
+              </property>
+              <property name="alignment">
+                <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="2" column="0">
+            <widget class="QLabel" name="TextLabel9_2_2_2_2_2">
+              <property name="text">
+                <string>Term:</string>
+              </property>
+              <property name="alignment">
+                <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="3" column="0">
+            <widget class="QLabel" name="TextLabel10_2_2_2_2_2">
+              <property name="text">
+                <string>Principal + Interest:</string>
+              </property>
+              <property name="alignment">
+                <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="4" column="0">
+            <widget class="QLabel" name="TextLabel11_3_2_2_2_2">
+              <property name="text">
+                <string>Final amortization payment</string>
+              </property>
+              <property name="alignment">
+                <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="0" column="1">
+            <widget class="QLabel" name="m_loanAmount6">
+              <property name="font">
+                <font>
+                  <bold>true</bold>
+                </font>
+              </property>
+              <property name="text">
+                <string>1</string>
+              </property>
+              <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="1" column="1">
+            <widget class="QLabel" name="m_interestRate6">
+              <property name="font">
+                <font>
+                  <bold>true</bold>
+                </font>
+              </property>
+              <property name="text">
+                <string>1</string>
+              </property>
+              <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="2" column="1">
+            <widget class="QLabel" name="m_duration6">
+              <property name="font">
+                <font>
+                  <bold>true</bold>
+                </font>
+              </property>
+              <property name="text">
+                <string>1</string>
+              </property>
+              <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="3" column="1">
+            <widget class="QLabel" name="m_payment6">
+              <property name="font">
+                <font>
+                  <bold>true</bold>
+                </font>
+              </property>
+              <property name="text">
+                <string>1</string>
+              </property>
+              <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+          <item row="4" column="1">
+            <widget class="QLabel" name="m_balloon6">
+              <property name="font">
+                <font>
+                  <bold>true</bold>
+                </font>
+              </property>
+              <property name="text">
+                <string>1</string>
+              </property>
+              <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+              </property>
+              <property name="wordWrap">
+                <bool>false</bool>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </widget>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+ <customwidgets>
+ </customwidgets>
+ <tabstops>
+ </tabstops>
+</ui>

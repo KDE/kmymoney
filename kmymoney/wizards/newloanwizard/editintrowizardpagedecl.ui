@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditIntroWizardPageDecl</class>
+ <widget class="QWizardPage" name="EditIntroWizardPageDecl">
+  <attribute name="title">
+    <string/>
+  </attribute>
+  <layout class="QVBoxLayout">
+    <item>
+      <layout class="QHBoxLayout">
+        <property name="margin">
+          <number>0</number>
+        </property>
+        <property name="spacing">
+          <number>6</number>
+        </property>
+        <item>
+          <spacer name="Spacer2_2">
+            <property name="sizeHint">
+              <size>
+                <width>98</width>
+                <height>0</height>
+              </size>
+            </property>
+            <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+            </property>
+          </spacer>
+        </item>
+        <item>
+          <widget class="QLabel" name="TextLabel1_1_2">
+            <property name="font">
+              <font>
+                <family>Helvetica</family>
+                <pointsize>16</pointsize>
+                <bold>true</bold>
+              </font>
+            </property>
+            <property name="text">
+              <string>Edit Loan Account Wizard</string>
+            </property>
+            <property name="alignment">
+              <set>Qt::AlignTop|Qt::AlignHCenter</set>
+            </property>
+            <property name="wordWrap">
+              <bool>false</bool>
+            </property>
+          </widget>
+        </item>
+        <item>
+          <spacer name="Spacer3_2">
+            <property name="sizeHint">
+              <size>
+                <width>119</width>
+                <height>0</height>
+              </size>
+            </property>
+            <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+            </property>
+          </spacer>
+        </item>
+      </layout>
+    </item>
+    <item>
+      <widget class="QLabel" name="TextLabel1_2_2">
+        <property name="text">
+          <string>
+Welcome to the Edit Loan Account Wizard. Please use this wizard to modify information about your loan account.
+
+Please make sure that you have the relevant information handy. You usually get the information out of your contract and the last statement.</string>
+        </property>
+        <property name="alignment">
+          <set>Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+      </widget>
+    </item>
+    <item>
+      <spacer name="spacer79">
+        <property name="sizeHint">
+          <size>
+            <width>20</width>
+            <height>20</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+ <customwidgets>
+ </customwidgets>
+ <tabstops>
+ </tabstops>
+</ui>

@@ -41,7 +41,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <knewloanwizard.h>
+#include "knewloanwizard.h"
 #include "kmymoneylineedit.h"
 #include "kmymoneyedit.h"
 #include "kmymoneyaccountselector.h"
@@ -55,10 +55,7 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent)
   MyMoneyFile* file = MyMoneyFile::instance();
 
   setWindowTitle(i18n("Edit loan wizard"));
-  m_effectiveDateLabel->setText(QString("\n") + i18n(
-                                  "Please enter the date from which on the following changes will be effective. "
-                                  "The date entered must be later than the opening date of this account (%1), but must "
-                                  "not be in the future. The default will be today.", KGlobal::locale()->formatDate(account.openingDate())));
+
   m_account = account;
   try {
     QString id = m_account.value("schedule");
@@ -68,38 +65,33 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent)
   }
 
   m_lastSelection = -1;
-  m_editInterestRateButton->animateClick();
 
   loadWidgets(m_account);
 
   if (m_account.openingDate() > QDate::currentDate()) {
-    m_effectiveDateNoteLabel->setText(QString("\n") + i18n(
+    //FIXME: port
+    m_effectiveDatePage->m_effectiveDateNoteLabel->setText(QString("\n") + i18n(
                                         "Note: you will not be able to modify this account today, because the opening date \"%1\" is in the future. "
                                         "Please revisit this dialog when the time has come.", KGlobal::locale()->formatDate(m_account.openingDate())));
   } else {
-    m_effectiveDateNoteLabel->hide();
+    m_effectiveDatePage->m_effectiveDateNoteLabel->hide();
   }
   // turn off all pages that are contained here for derived classes
-  setAppropriate(m_newIntroPage, false);
-  setAppropriate(m_newGeneralInfoPage, false);
-  setAppropriate(m_lendBorrowPage, false);
-  setAppropriate(m_namePage, false);
-  setAppropriate(m_newCalculateLoanPage, false);
-  setAppropriate(m_newPaymentsPage, false);
-  removePage(m_assetAccountPage);
+  m_pages.clearBit(Page_Intro);
+  m_pages.clearBit(Page_NewGeneralInfo);
+  m_pages.clearBit(Page_LendBorrow);
+  m_pages.clearBit(Page_Name);
+  m_pages.clearBit(Page_NewCalculateLoan);
+  m_pages.clearBit(Page_NewPayments);
+  removePage(Page_AssetAccount);
   m_assetAccountPage = 0;
 
   // turn on all pages that are contained here for derived classes
-  setAppropriate(m_editIntroPage, true);
-  setAppropriate(m_editSelectionPage, true);
-
-  // setup connections
-  connect(m_effectiveChangeDateEdit, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotCheckPageFinished()));
-  connect(m_newPaymentEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotCheckPageFinished()));
-  connect(m_newInterestRateEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotCheckPageFinished()));
+  m_pages.setBit(Page_EditIntro);
+  m_pages.setBit(Page_EditSelection);
 
   // make sure, we show the correct start page
-  showPage(m_editIntroPage);
+  setStartId(Page_EditIntro);
 }
 
 KEditLoanWizard::~KEditLoanWizard()
@@ -111,15 +103,17 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
   MyMoneyFile* file = MyMoneyFile::instance();
   QString paymentAccountId, interestAccountId;
 
-  m_nameEdit->loadText(m_account.name());
-  m_loanAmountEdit->loadText(m_account.loanAmount().formatMoney(m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()))));
-  m_finalPaymentEdit->loadText(m_account.finalPayment().formatMoney(m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()))));
-  m_firstDueDateEdit->setDate(m_account.openingDate());
+  //FIXME: port
+  m_namePage->m_nameEdit->loadText(m_account.name());
+  m_loanAmountPage->m_loanAmountEdit->loadText(m_account.loanAmount().formatMoney(m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()))));
+  m_finalPaymentPage->m_finalPaymentEdit->loadText(m_account.finalPayment().formatMoney(m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()))));
+  setField("firstDueDateEdit", m_account.openingDate());
 
+  //FIXME: port
   if (m_account.fixedInterestRate()) {
-    m_fixedInterestButton->animateClick();
+    m_interestTypePage->m_fixedInterestButton->animateClick();
   } else {
-    m_variableInterestButton->animateClick();
+    m_interestTypePage->m_variableInterestButton->animateClick();
   }
 
   MyMoneyMoney ir;
@@ -128,13 +122,14 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
   } else {
     ir = m_account.interestRate(QDate::currentDate());
   }
-  m_interestRateEdit->loadText(ir.formatMoney("", 3));
-  m_newInterestRateEdit->loadText(ir.formatMoney("", 3));
-  m_newInterestRateEdit->setPrecision(3);
-  m_interestRateLabel->setText(QString(" ") + ir.formatMoney("", 3) + QString("%"));
+  //FIXME: port
+  m_interestPage->m_interestRateEdit->loadText(ir.formatMoney("", 3));
+  m_interestEditPage->m_newInterestRateEdit->loadText(ir.formatMoney("", 3));
+  m_interestEditPage->m_newInterestRateEdit->setPrecision(3);
+  m_interestEditPage->m_interestRateLabel->setText(QString(" ") + ir.formatMoney("", 3) + QString("%"));
 
-  m_paymentFrequencyUnitEdit->setCurrentItem(i18n(m_schedule.occurrenceToString().toLatin1()));
-  updateTermWidgets(m_account.term());
+  m_paymentFrequencyPage->m_paymentFrequencyUnitEdit->setCurrentItem(i18n(m_schedule.occurrenceToString().toLatin1()));
+  m_durationPage->updateTermWidgets(m_account.term());
 
   // the base payment (amortization and interest) is determined
   // by adding all splits that are not automatically calculated.
@@ -144,32 +139,29 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
 
   m_transaction = m_schedule.transaction();
 
-  QList<MyMoneySplit>::const_iterator it_s;
-  for (it_s = m_schedule.transaction().splits().begin();
-       it_s != m_schedule.transaction().splits().end();
-       ++it_s) {
-    MyMoneyAccount acc = file->account((*it_s).accountId());
+  foreach (const MyMoneySplit& it_s, m_schedule.transaction().splits()) {
+    MyMoneyAccount acc = file->account(it_s.accountId());
     // if it's the split that references the source/dest
     // of the money, we check if we borrow or loan money
     if (paymentAccountId.isEmpty()
         && acc.isAssetLiability() && !acc.isLoan()
-        && (*it_s).value() != MyMoneyMoney::autoCalc) {
-      if ((*it_s).value().isNegative()) {
-        m_lendButton->setChecked(false);
-        m_borrowButton->setChecked(true);
+        && it_s.value() != MyMoneyMoney::autoCalc) {
+      if (it_s.value().isNegative()) {
+        setField("lendButton", false);
+        setField("borrowButton", true);
       } else {
-        m_lendButton->setChecked(true);
-        m_borrowButton->setChecked(false);
+        setField("lendButton", true);
+        setField("borrowButton", false);
       }
       // we keep the amount of the full payment and subtract the
       // base payment later to get information about the additional payment
-      addPayment = (*it_s).value();
-      paymentAccountId = (*it_s).accountId();
+      addPayment = it_s.value();
+      paymentAccountId = it_s.accountId();
       MyMoneyPayee payee;
-      if (!(*it_s).payeeId().isEmpty()) {
+      if (!it_s.payeeId().isEmpty()) {
         try {
-          payee = file->payee((*it_s).payeeId());
-          m_payeeEdit->setSelectedItem(payee.id());
+          payee = file->payee(it_s.payeeId());
+          setField("payeeEdit", payee.id());
         } catch (MyMoneyException *e) {
           delete e;
           qWarning("Payee for schedule has been deleted");
@@ -178,25 +170,25 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
 
       // remove this split with one that will be replaced
       // later and has a phony id
-      m_transaction.removeSplit(*it_s);
+      m_transaction.removeSplit(it_s);
       m_split.clearId();
       m_transaction.addSplit(m_split);
     }
 
-    if ((*it_s).action() == MyMoneySplit::ActionInterest) {
-      interestAccountId = (*it_s).accountId();
+    if (it_s.action() == MyMoneySplit::ActionInterest) {
+      interestAccountId = it_s.accountId();
     }
 
-    if ((*it_s).value() != MyMoneyMoney::autoCalc) {
-      basePayment += (*it_s).value();
+    if (it_s.value() != MyMoneyMoney::autoCalc) {
+      basePayment += it_s.value();
     } else {
       // remove the splits which should not show up
       // for additional fees
-      m_transaction.removeSplit(*it_s);
+      m_transaction.removeSplit(it_s);
     }
 
   }
-  if (m_borrowButton->isChecked()) {
+  if (field("borrowButton").toBool()) {
     basePayment = -basePayment;
     addPayment = -addPayment;
   }
@@ -208,38 +200,39 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
   loadAccountList();
 
   int fraction = m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()));
-  m_paymentEdit->loadText(basePayment.formatMoney(fraction));
-  m_newPaymentEdit->loadText(basePayment.formatMoney(fraction));
-  m_paymentLabel->setText(QString(" ") + basePayment.formatMoney(fraction));
+  //FIXME: port
+  m_paymentPage->m_paymentEdit->loadText(basePayment.formatMoney(fraction));
+  m_paymentEditPage->m_newPaymentEdit->loadText(basePayment.formatMoney(fraction));
+  m_paymentEditPage->m_paymentLabel->setText(QString(" ") + basePayment.formatMoney(fraction));
 
-  m_additionalCost->setText(addPayment.formatMoney(fraction));
-  m_interestAccountEdit->setSelected(interestAccountId);
-  m_paymentAccountEdit->setSelected(paymentAccountId);
-  m_nextDueDateEdit->setDate(m_schedule.nextPayment());
+  setField("additionalCost", addPayment.formatMoney(fraction));
+  m_interestCategoryPage->m_interestAccountEdit->setSelected(interestAccountId);
+  m_schedulePage->m_paymentAccountEdit->setSelected(paymentAccountId);
+  setField("nextDueDateEdit", m_schedule.nextPayment());
 
   int changeFrequencyUnit;
   int amt = m_account.interestChangeFrequency(&changeFrequencyUnit);
   if (amt != -1) {
-    m_interestFrequencyAmountEdit->setValue(amt);
-    m_interestFrequencyUnitEdit->setCurrentItem(changeFrequencyUnit);
+    setField("interestFrequencyAmountEdit", amt);
+    setField("interestFrequencyUnitEdit", changeFrequencyUnit);
   }
 
   // keep track, if the loan should be fully repayed
   m_fullyRepayLoan = m_account.finalPayment() < basePayment;
 
   updateLoanInfo();
-  updateSummary();
 }
 
-void KEditLoanWizard::next()
+bool KEditLoanWizard::validateCurrentPage()
 {
   bool dontLeavePage = false;
-  QAbstractButton* button = m_selectionButtonGroup->button(m_lastSelection);
+  //FIXME: port m_lastSelection
+  QAbstractButton* button = m_editSelectionPage->m_selectionButtonGroup->button(m_lastSelection);
 
   if (currentPage() == m_editSelectionPage) {
 
     if (button != 0
-        && m_lastSelection != m_selectionButtonGroup->checkedId()) {
+        && m_lastSelection != m_editSelectionPage->m_selectionButtonGroup->checkedId()) {
 
       QString errMsg = i18n(
                          "Your previous selection was \"%1\". If you select another option, "
@@ -254,103 +247,101 @@ void KEditLoanWizard::next()
     }
 
     if (!dontLeavePage) {
-      button = m_selectionButtonGroup->checkedButton();
-
       // turn off all pages except the summary at the end
       // and the one's we need for the selected option
       // and load the widgets with the current values
 
       // general info
-      setAppropriate(m_namePage, false);
-      setAppropriate(m_interestTypePage, false);
-      setAppropriate(m_previousPaymentsPage, false);
-      setAppropriate(m_recordPaymentPage, false);
-      setAppropriate(m_variableInterestDatePage, false);
-      setAppropriate(m_firstPaymentPage, false);
-      // loan calculation
-      setAppropriate(m_paymentEditPage, false);
-      setAppropriate(m_interestEditPage, false);
-      setAppropriate(m_paymentFrequencyPage, false);
-      setAppropriate(m_interestCalculationPage, false);
-      setAppropriate(m_loanAmountPage, false);
-      setAppropriate(m_interestPage, false);
-      setAppropriate(m_durationPage, false);
-      setAppropriate(m_paymentPage, false);
-      setAppropriate(m_finalPaymentPage, false);
-      setAppropriate(m_calculationOverviewPage, false);
-      // payment
-      setAppropriate(m_interestCategoryPage, false);
-      setAppropriate(m_additionalFeesPage, false);
-      setAppropriate(m_schedulePage, false);
-      setAppropriate(m_summaryPage, true);
+      m_pages.clearBit(Page_Name);
+      m_pages.clearBit(Page_InterestType);
+      m_pages.clearBit(Page_PreviousPayments);
+      m_pages.clearBit(Page_RecordPayment);
+      m_pages.clearBit(Page_VariableInterestDate);
+      m_pages.clearBit(Page_FirstPayment);
 
-      setAppropriate(m_effectiveDatePage, true);
-      if (indexOf(m_summaryPage) != -1) {
-        removePage(m_summaryPage);
-        setFinishEnabled(m_summaryEditPage, true);
+      // loan calculation
+      m_pages.clearBit(Page_PaymentEdit);
+      m_pages.clearBit(Page_InterestEdit);
+      m_pages.clearBit(Page_PaymentFrequency);
+      m_pages.clearBit(Page_InterestCalculation);
+      m_pages.clearBit(Page_LoanAmount);
+      m_pages.clearBit(Page_Interest);
+      m_pages.clearBit(Page_Duration);
+      m_pages.clearBit(Page_Payment);
+      m_pages.clearBit(Page_FinalPayment);
+      m_pages.clearBit(Page_CalculationOverview);
+
+      // payment
+      m_pages.clearBit(Page_InterestCategory);
+      m_pages.clearBit(Page_AdditionalFees);
+      m_pages.clearBit(Page_Schedule);
+      m_pages.setBit(Page_Summary);
+
+      m_pages.setBit(Page_EffectiveDate);
+
+      if (page(Page_Summary) != 0) {
+        removePage(Page_Summary);
       }
 
-      if (button ==  m_editInterestRateButton) {
-        setAppropriate(m_interestTypePage, true);
-        setAppropriate(m_variableInterestDatePage, true);
-        setAppropriate(m_paymentEditPage, true);
-        setAppropriate(m_interestEditPage, true);
-        setAppropriate(m_summaryEditPage, true);
+      if (field("editInterestRateButton").toBool()) {
+        m_pages.setBit(Page_InterestType);
+        m_pages.setBit(Page_VariableInterestDate);
+        m_pages.setBit(Page_PaymentEdit);
+        m_pages.setBit(Page_InterestEdit);
+        m_pages.setBit(Page_SummaryEdit);
 
-      } else if (button == m_editOtherCostButton) {
-        setAppropriate(m_additionalFeesPage, true);
-        setAppropriate(m_summaryEditPage, true);
+      } else if (field("editOtherCostButton").toBool()) {
+        m_pages.setBit(Page_AdditionalFees);
+        m_pages.setBit(Page_SummaryEdit);
 
-      } else if (button == m_editOtherInfoButton) {
-        setAppropriate(m_namePage, true);
-        setAppropriate(m_interestCalculationPage, true);
-        setAppropriate(m_interestPage, true);
-        setAppropriate(m_durationPage, true);
-        setAppropriate(m_paymentPage, true);
-        setAppropriate(m_finalPaymentPage, true);
-        setAppropriate(m_calculationOverviewPage, true);
-        setAppropriate(m_interestCategoryPage, true);
-        setAppropriate(m_additionalFeesPage, true);
-        setAppropriate(m_schedulePage, true);
-        setAppropriate(m_summaryEditPage, false);
-        addPage(m_summaryPage, i18n("Summary"));
-        setAppropriate(m_summaryPage, true);
-        setFinishEnabled(m_summaryEditPage, false);
-        setFinishEnabled(m_summaryPage, true);
+      } else if (field("editOtherInfoButton").toBool()) {
+        m_pages.setBit(Page_Name);
+        m_pages.setBit(Page_InterestCalculation);
+        m_pages.setBit(Page_Interest);
+        m_pages.setBit(Page_Duration);
+        m_pages.setBit(Page_Payment);
+        m_pages.setBit(Page_FinalPayment);
+        m_pages.setBit(Page_CalculationOverview);
+        m_pages.setBit(Page_InterestCategory);
+        m_pages.setBit(Page_AdditionalFees);
+        m_pages.setBit(Page_Schedule);
+        m_pages.clearBit(Page_SummaryEdit);
+        setPage(Page_Summary, m_summaryPage);
+        m_pages.setBit(Page_Summary);
 
       } else {
         qFatal("%s,%d: This should never happen", __FILE__, __LINE__);
       }
 
-      m_lastSelection = m_selectionButtonGroup->checkedId();
+      m_lastSelection = m_editSelectionPage->m_selectionButtonGroup->checkedId();
     } // if(!dontLeavePage)
 
   } else if (currentPage() == m_additionalFeesPage) {
-    button = m_selectionButtonGroup->checkedButton();
-    if (button == m_editOtherCostButton) {
+    if (field("editOtherCostButton").toBool()) {
       updateLoanInfo();
       updateEditSummary();
     }
 
   } else if (currentPage() == m_interestEditPage) {
     // copy the necessary data to the widgets used for calculation
-    m_interestRateEdit->setValue(m_newInterestRateEdit->value());
-    m_paymentEdit->setValue(m_newPaymentEdit->value());
+    //FIXME: port to fields
+    m_interestPage->m_interestRateEdit->setValue(field("newInterestRateEdit").value<MyMoneyMoney>());
+    m_paymentPage->m_paymentEdit->setValue(field("newPaymentEdit").value<MyMoneyMoney>());
 
     // if interest rate and payment amount is given, then force
     // the term to be recalculated. The final payment is adjusted to
     // 0 if the loan was ment to be fully repayed
-    updateTermWidgets(m_account.term());
-    if (!m_interestRateEdit->lineedit()->text().isEmpty()
-        && !m_paymentEdit->lineedit()->text().isEmpty()) {
+    m_durationPage->updateTermWidgets(m_account.term());
+    if (field("interestRateEditValid").toBool()
+        && field("paymentEditValid").toBool()) {
       // if there's an amortization going on, we can evaluate
       // the new term. If the amortization is 0 (interest only
       // payments) then we keep the term as entered by the user.
-      if (m_loanAmountEdit->value() != m_finalPaymentEdit->value()) {
-        m_durationValueEdit->setValue(0);
+      if (field("loanAmountEdit").value<MyMoneyMoney>() != field("finalPaymentEdit").value<MyMoneyMoney>()) {
+        setField("durationValueEdit", 0);
       }
       if (m_fullyRepayLoan)
-        m_finalPaymentEdit->loadText(MyMoneyMoney(0).formatMoney(m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()))));
+        m_finalPaymentPage->m_finalPaymentEdit->loadText(MyMoneyMoney(0).formatMoney(m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()))));
     }
 
     /*
@@ -384,12 +375,12 @@ void KEditLoanWizard::next()
         }
         m_loanAmountEdit->setText(balance.formatMoney());
     */
-
     // now re-calculate the figures
     dontLeavePage = !calculateLoan();
 
     // reset the original loan amount to the widget
-    m_loanAmountEdit->setValue(m_account.loanAmount());
+    //FIXME: port to fields
+    m_loanAmountPage->m_loanAmountEdit->setValue(m_account.loanAmount());
 
     if (!dontLeavePage) {
       updateLoanInfo();
@@ -398,79 +389,56 @@ void KEditLoanWizard::next()
   }
 
   if (!dontLeavePage)
-    KNewLoanWizard::next();
+    dontLeavePage = ! KNewLoanWizard::validateCurrentPage();
 
-  // These might have been set by KNewLoanWizard::next()
-  setAppropriate(m_previousPaymentsPage, false);
-  setAppropriate(m_recordPaymentPage, false);
+  // These might have been set by KNewLoanWizard
+  m_pages.clearBit(Page_PreviousPayments);
+  m_pages.clearBit(Page_RecordPayment);
+
+  if (dontLeavePage)
+    return false;
+
   // we never need to show this page
   if (currentPage() == m_previousPaymentsPage)
-    KNewLoanWizard::next();
-}
+    dontLeavePage = KNewLoanWizard::validateCurrentPage();
 
-void KEditLoanWizard::slotCheckPageFinished(void)
-{
-  KNewLoanWizard::slotCheckPageFinished();
-
-  // if we're on one of the specific edit pages, the next button
-  // is enabled. If the values in the edit widgets are not
-  // appropriate, we just have to disable it.
-
-  if (currentPage() == m_effectiveDatePage) {
-    if (m_effectiveChangeDateEdit->date() < m_account.openingDate()
-        || m_effectiveChangeDateEdit->date() > QDate::currentDate())
-      nextButton()->setEnabled(false);
-
-  } else if (currentPage() == m_interestEditPage) {
-    if (!m_newPaymentEdit->isValid()
-        && !m_newInterestRateEdit->isValid())
-      nextButton()->setEnabled(false);
-  }
+  return ! dontLeavePage;
 }
 
 void KEditLoanWizard::updateEditSummary(void)
 {
-  updateSummary();
-  m_payment7->setText(m_summaryPeriodicPayment->text());
-  m_additionalFees7->setText(m_summaryAdditionalFees->text());
-  m_totalPayment7->setText(m_summaryTotalPeriodicPayment->text());
-  m_interestRate7->setText(m_summaryInterestRate->text());
-  m_startDateChanges->setText(KGlobal::locale()->formatDate(m_effectiveChangeDateEdit->date()));
-
   // calculate the number of affected transactions
   MyMoneyTransactionFilter filter(m_account.id());
-  filter.setDateFilter(m_effectiveChangeDateEdit->date(), QDate());
+  filter.setDateFilter(field("effectiveChangeDateEdit").toDate(), QDate());
 
   int count = 0;
   QList<MyMoneyTransaction> list;
-  QList<MyMoneyTransaction>::const_iterator it;
   list = MyMoneyFile::instance()->transactionList(filter);
 
-  for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    QList<MyMoneySplit>::const_iterator it_s;
+  foreach (const MyMoneyTransaction& it, list) {
     int match = 0;
-    for (it_s = (*it).splits().begin(); it_s != (*it).splits().end(); ++it_s) {
+    foreach (const MyMoneySplit& it_s, it.splits()) {
       // we only count those transactions that have an interest
       // and amortization part
-      if ((*it_s).action() == MyMoneySplit::ActionInterest)
+      if (it_s.action() == MyMoneySplit::ActionInterest)
         match |= 0x01;
-      if ((*it_s).action() == MyMoneySplit::ActionAmortization)
+      if (it_s.action() == MyMoneySplit::ActionAmortization)
         match |= 0x02;
     }
     if (match == 0x03)
-      count++;
+      ++count;
   }
 
-  m_affectedPayments->setText(QString().sprintf("%d", count));
+  setField("affectedPayments", QString().sprintf("%d", count));
 }
 
 const MyMoneySchedule KEditLoanWizard::schedule(void) const
 {
   MyMoneySchedule sched = m_schedule;
   sched.setTransaction(transaction());
-  sched.setOccurrence(MyMoneySchedule::stringToOccurrence(m_paymentFrequencyUnitEdit->currentText()));
-  if (m_nextDueDateEdit->date() < m_schedule.startDate())
-    sched.setStartDate(m_nextDueDateEdit->date());
+  sched.setOccurrence(MyMoneySchedule::stringToOccurrence(field("paymentFrequencyUnitEdit").toString()));
+  if (field("nextDueDateEdit").toDate() < m_schedule.startDate())
+    sched.setStartDate(field("nextDueDateEdit").toDate());
 
   return sched;
 }
@@ -479,23 +447,23 @@ const MyMoneyAccount KEditLoanWizard::account(void) const
 {
   MyMoneyAccountLoan acc(m_account);
 
-  if (m_interestOnReceptionButton->isChecked())
+  if (field("interestOnReceptionButton").toBool())
     acc.setInterestCalculation(MyMoneyAccountLoan::paymentReceived);
   else
     acc.setInterestCalculation(MyMoneyAccountLoan::paymentDue);
 
-  acc.setFixedInterestRate(m_fixedInterestButton->isChecked());
-  acc.setFinalPayment(MyMoneyMoney(m_finalPaymentEdit->text()));
-  acc.setTerm(term());
-  acc.setPeriodicPayment(m_paymentEdit->value());
-  acc.setInterestRate(m_effectiveChangeDateEdit->date(), m_interestRateEdit->value());
+  acc.setFixedInterestRate(field("fixedInterestButton").toBool());
+  acc.setFinalPayment(field("finalPaymentEdit").value<MyMoneyMoney>());
+  acc.setTerm(m_durationPage->term());
+  acc.setPeriodicPayment(field("paymentEdit").value<MyMoneyMoney>());
+  acc.setInterestRate(field("effectiveChangeDateEdit").toDate(), field("interestRateEdit").value<MyMoneyMoney>());
 
-  acc.setPayee(m_payeeEdit->selectedItem());
+  acc.setPayee(field("payeeEdit").toString());
 
-  if (m_variableInterestButton->isChecked()) {
-    acc.setNextInterestChange(m_interestChangeDateEdit->date());
-    acc.setInterestChangeFrequency(m_interestFrequencyAmountEdit->value(),
-                                   m_interestFrequencyUnitEdit->currentItem());
+  if (field("variableInterestButton").toBool()) {
+    acc.setNextInterestChange(field("interestChangeDateEdit").toDate());
+    acc.setInterestChangeFrequency(field("interestFrequencyAmountEdit").toInt(),
+                                   field("interestFrequencyUnitEdit").toInt());
   }
 
   return acc;

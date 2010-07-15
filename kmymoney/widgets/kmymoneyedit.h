@@ -93,7 +93,7 @@ class kMyMoneyEdit : public KHBox
   Q_PROPERTY(bool resetButtonVisibility READ isResetButtonVisible WRITE setResetButtonVisible)
   Q_PROPERTY(bool allowEmpty READ isEmptyAllowed WRITE setAllowEmpty)
   Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
-  Q_PROPERTY(MyMoneyMoney value READ value WRITE setValue DESIGNABLE false STORED false)
+  Q_PROPERTY(MyMoneyMoney value READ value WRITE setValue DESIGNABLE false STORED false USER true)
   Q_PROPERTY(bool valid READ isValid DESIGNABLE false STORED false)
 
 private:

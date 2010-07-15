@@ -335,7 +335,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   ::timetrace("start kmymoneyapp constructor");
 
   // Register the main engine types used as meta-objects
-  // NOTE: only MyMoneySecurity is used for now, add others as needed
+  qRegisterMetaType<MyMoneyMoney>("MyMoneyMoney");
   qRegisterMetaType<MyMoneySecurity>("MyMoneySecurity");
 
   // preset the pointer because we need it during the course of this constructor

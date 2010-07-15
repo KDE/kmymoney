@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PreviousPaymentsWizardPageDecl</class>
+ <widget class="QWizardPage" name="PreviousPaymentsWizardPageDecl">
+  <attribute name="title">
+    <string>Payments?</string>
+  </attribute>
+  <layout class="QVBoxLayout">
+    <property name="margin">
+      <number>11</number>
+    </property>
+    <property name="spacing">
+      <number>6</number>
+    </property>
+    <item>
+      <widget class="QLabel" name="TextLabel6_2">
+        <property name="text">
+          <string>
+Were there any payments for this loan whether they are entered into KMyMoney or not?</string>
+        </property>
+        <property name="alignment">
+          <set>Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+      </widget>
+    </item>
+    <item>
+      <spacer name="Spacer28">
+        <property name="sizeHint">
+          <size>
+            <width>0</width>
+            <height>32</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+    <item>
+      <layout class="QHBoxLayout">
+        <property name="margin">
+          <number>0</number>
+        </property>
+        <property name="spacing">
+          <number>6</number>
+        </property>
+        <item>
+          <widget class="QFrame" name="frame_4">
+            <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+            </property>
+            <layout class="QVBoxLayout">
+              <property name="margin">
+                <number>11</number>
+              </property>
+              <property name="spacing">
+                <number>6</number>
+              </property>
+              <item>
+                <widget class="QRadioButton" name="m_noPreviousPaymentButton">
+                  <property name="text">
+                    <string>No, no payments were made yet.</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                    <string>ButtonGroup3</string>
+                  </attribute>
+                </widget>
+              </item>
+              <item>
+                <widget class="QRadioButton" name="m_previousPaymentButton">
+                  <property name="text">
+                    <string>Yes, payments were made.</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                    <string>ButtonGroup3</string>
+                  </attribute>
+                </widget>
+              </item>
+            </layout>
+          </widget>
+        </item>
+        <item>
+          <spacer name="Spacer14_2_2">
+            <property name="sizeHint">
+              <size>
+                <width>202</width>
+                <height>0</height>
+              </size>
+            </property>
+            <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+            </property>
+          </spacer>
+        </item>
+      </layout>
+    </item>
+    <item>
+      <spacer name="Spacer29">
+        <property name="sizeHint">
+          <size>
+            <width>0</width>
+            <height>32</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+    <item>
+      <widget class="QLabel" name="TextLabel3_3">
+        <property name="text">
+          <string>Note: Payments made to obtain the loan (e.g. Dissagio) are not considered as payments in this context.</string>
+        </property>
+        <property name="alignment">
+          <set>Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+      </widget>
+    </item>
+    <item>
+      <spacer name="Spacer41">
+        <property name="sizeHint">
+          <size>
+            <width>0</width>
+            <height>32</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+ <customwidgets>
+ </customwidgets>
+ <tabstops>
+ </tabstops>
+ <buttongroups>
+  <buttongroup name="ButtonGroup3"/>
+ </buttongroups>
+</ui>

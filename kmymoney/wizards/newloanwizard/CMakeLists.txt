@@ -3,10 +3,42 @@ INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 SET (libnewloanwizard_a_SOURCES
   knewloanwizard.cpp
   keditloanwizard.cpp
+  additionalfeeswizardpage.cpp       lendborrowwizardpage.cpp
+  assetaccountwizardpage.cpp         loanamountwizardpage.cpp
+  calculationoverviewwizardpage.cpp  namewizardpage.cpp
+  durationwizardpage.cpp             newcalculateloanwizardpage.cpp
+  editintrowizardpage.cpp            newgeneralinfowizardpage.cpp
+  editselectionwizardpage.cpp        newintrowizardpage.cpp
+  effectivedatewizardpage.cpp        newpaymentswizardpage.cpp
+  finalpaymentwizardpage.cpp         paymenteditwizardpage.cpp
+  firstpaymentwizardpage.cpp         paymentfrequencywizardpage.cpp
+  interestcalculationwizardpage.cpp  paymentwizardpage.cpp
+  interestcategorywizardpage.cpp     previouspaymentswizardpage.cpp
+  interesteditwizardpage.cpp         recordpaymentwizardpage.cpp
+  interesttypewizardpage.cpp         schedulewizardpage.cpp
+  interestwizardpage.cpp             summaryeditwizardpage.cpp
+  keditloanwizard.cpp                summarywizardpage.cpp
+  knewloanwizard.cpp                 variableinterestdatewizardpage.cpp
   )
 
 SET (libnewloanwizard_a_UI
   knewloanwizarddecl.ui
+  additionalfeeswizardpagedecl.ui       loanamountwizardpagedecl.ui
+  assetaccountwizardpagedecl.ui         namewizardpagedecl.ui
+  calculationoverviewwizardpagedecl.ui  newcalculateloanwizardpagedecl.ui
+  durationwizardpagedecl.ui             newgeneralinfowizardpagedecl.ui
+  editintrowizardpagedecl.ui            newintrowizardpagedecl.ui
+  editselectionwizardpagedecl.ui        newpaymentswizardpagedecl.ui
+  effectivedatewizardpagedecl.ui        paymenteditwizardpagedecl.ui
+  finalpaymentwizardpagedecl.ui         paymentfrequencywizardpagedecl.ui
+  firstpaymentwizardpagedecl.ui         paymentwizardpagedecl.ui
+  interestcalculationwizardpagedecl.ui  previouspaymentswizardpagedecl.ui
+  interestcategorywizardpagedecl.ui     recordpaymentwizardpagedecl.ui
+  interesteditwizardpagedecl.ui         schedulewizardpagedecl.ui
+  interesttypewizardpagedecl.ui         summaryeditwizardpagedecl.ui
+  interestwizardpagedecl.ui             summarywizardpagedecl.ui
+  knewloanwizarddecl.ui                 variableinterestdatewizardpagedecl.ui
+  lendborrowwizardpagedecl.ui
 	)
 
 kde4_add_ui_files(libnewloanwizard_a_SOURCES ${libnewloanwizard_a_UI} )

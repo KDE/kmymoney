@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RecordPaymentWizardPageDecl</class>
+ <widget class="QWizardPage" name="RecordPaymentWizardPageDecl">
+  <attribute name="title">
+    <string>Recording payments?</string>
+  </attribute>
+  <layout class="QVBoxLayout">
+    <property name="margin">
+      <number>11</number>
+    </property>
+    <property name="spacing">
+      <number>6</number>
+    </property>
+    <item>
+      <widget class="QLabel" name="TextLabel7_2">
+        <property name="text">
+          <string>
+Do you want to record all payments of this loan with KMyMoney?</string>
+        </property>
+        <property name="alignment">
+          <set>Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+      </widget>
+    </item>
+    <item>
+      <spacer name="Spacer33">
+        <property name="sizeHint">
+          <size>
+            <width>0</width>
+            <height>69</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+    <item>
+      <layout class="QHBoxLayout">
+        <property name="margin">
+          <number>0</number>
+        </property>
+        <property name="spacing">
+          <number>6</number>
+        </property>
+        <item>
+          <widget class="QFrame" name="frame_5">
+            <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+            </property>
+            <layout class="QVBoxLayout">
+              <property name="margin">
+                <number>11</number>
+              </property>
+              <property name="spacing">
+                <number>6</number>
+              </property>
+              <item>
+                <widget class="QRadioButton" name="m_allPaymentsButton">
+                  <property name="text">
+                    <string>Yes, record all payments.</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                    <string>ButtonGroup4</string>
+                  </attribute>
+                </widget>
+              </item>
+              <item>
+                <widget class="QRadioButton" name="m_thisYearPaymentButton">
+                  <property name="text">
+                    <string>No, only record payments since the beginning of this year.</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                    <string>ButtonGroup4</string>
+                  </attribute>
+                </widget>
+              </item>
+            </layout>
+          </widget>
+        </item>
+        <item>
+          <spacer name="Spacer14_2_2_2">
+            <property name="sizeHint">
+              <size>
+                <width>137</width>
+                <height>0</height>
+              </size>
+            </property>
+            <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+            </property>
+          </spacer>
+        </item>
+      </layout>
+    </item>
+    <item>
+      <spacer name="Spacer34">
+        <property name="sizeHint">
+          <size>
+            <width>0</width>
+            <height>69</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+ <customwidgets>
+ </customwidgets>
+ <tabstops>
+ </tabstops>
+ <buttongroups>
+  <buttongroup name="ButtonGroup4"/>
+ </buttongroups>
+</ui>

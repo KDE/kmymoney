@@ -70,11 +70,7 @@ public:
 
   const MyMoneyTransaction transaction() const;
 
-public slots:
-  void next();
-
-protected slots:
-  virtual void slotCheckPageFinished(void);
+  bool validateCurrentPage();
 
 protected:
   void updateEditSummary(void);

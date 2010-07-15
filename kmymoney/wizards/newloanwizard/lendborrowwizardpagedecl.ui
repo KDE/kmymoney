@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LendBorrowWizardPageDecl</class>
+ <widget class="QWizardPage" name="LendBorrowWizardPageDecl">
+  <attribute name="title">
+    <string>Lending or borrowing money</string>
+  </attribute>
+  <layout class="QVBoxLayout">
+    <property name="margin">
+      <number>11</number>
+    </property>
+    <property name="spacing">
+      <number>6</number>
+    </property>
+    <item>
+      <widget class="QLabel" name="TextLabel3_2">
+        <property name="text">
+          <string>
+Do you borrow or lend money?</string>
+        </property>
+        <property name="alignment">
+          <set>Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+      </widget>
+    </item>
+    <item>
+      <spacer name="Spacer15">
+        <property name="sizeHint">
+          <size>
+            <width>0</width>
+            <height>61</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+    <item>
+      <layout class="QHBoxLayout">
+        <property name="margin">
+          <number>0</number>
+        </property>
+        <property name="spacing">
+          <number>6</number>
+        </property>
+        <item>
+          <widget class="QFrame" name="frame_2">
+            <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+            </property>
+            <layout class="QVBoxLayout">
+              <property name="margin">
+                <number>11</number>
+              </property>
+              <property name="spacing">
+                <number>6</number>
+              </property>
+              <item>
+                <widget class="QRadioButton" name="m_borrowButton">
+                  <property name="text">
+                    <string>I am borrowing money</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                    <string>ButtonGroup1</string>
+                  </attribute>
+                </widget>
+              </item>
+              <item>
+                <widget class="QRadioButton" name="m_lendButton">
+                  <property name="text">
+                    <string>I am lending money</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                    <string>ButtonGroup1</string>
+                  </attribute>
+                </widget>
+              </item>
+            </layout>
+          </widget>
+        </item>
+        <item>
+          <spacer name="Spacer14">
+            <property name="sizeHint">
+              <size>
+                <width>299</width>
+                <height>0</height>
+              </size>
+            </property>
+            <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+            </property>
+          </spacer>
+        </item>
+      </layout>
+    </item>
+    <item>
+      <spacer name="Spacer16">
+        <property name="sizeHint">
+          <size>
+            <width>0</width>
+            <height>60</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+ <customwidgets>
+ </customwidgets>
+ <tabstops>
+ </tabstops>
+ <buttongroups>
+  <buttongroup name="ButtonGroup1"/>
+ </buttongroups>
+</ui>

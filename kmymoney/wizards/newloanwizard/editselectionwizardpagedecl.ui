@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditSelectionWizardPageDecl</class>
+ <widget class="QWizardPage" name="EditSelectionWizardPageDecl">
+  <attribute name="title">
+    <string>Edit selection</string>
+  </attribute>
+  <layout class="QVBoxLayout">
+    <property name="margin">
+      <number>11</number>
+    </property>
+    <property name="spacing">
+      <number>6</number>
+    </property>
+    <item>
+      <widget class="QLabel" name="TextLabel2_2_1">
+        <property name="text">
+          <string>
+Please select, which data of the loan you want to modify.</string>
+        </property>
+        <property name="alignment">
+          <set>Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+          <bool>true</bool>
+        </property>
+      </widget>
+    </item>
+    <item>
+      <spacer name="Spacer64">
+        <property name="sizeHint">
+          <size>
+            <width>0</width>
+            <height>48</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+    <item>
+      <layout class="QHBoxLayout">
+        <property name="margin">
+          <number>0</number>
+        </property>
+        <property name="spacing">
+          <number>6</number>
+        </property>
+        <item>
+          <spacer name="Spacer67_4">
+            <property name="sizeHint">
+              <size>
+                <width>93</width>
+                <height>0</height>
+              </size>
+            </property>
+            <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+            </property>
+          </spacer>
+        </item>
+        <item>
+          <widget class="QFrame" name="frame">
+            <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+            </property>
+            <layout class="QVBoxLayout">
+              <property name="margin">
+                <number>11</number>
+              </property>
+              <property name="spacing">
+                <number>6</number>
+              </property>
+              <item>
+                <widget class="QRadioButton" name="m_editInterestRateButton">
+                  <property name="text">
+                    <string>Modify the interest rate</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                    <string>m_selectionButtonGroup</string>
+                  </attribute>
+                </widget>
+              </item>
+              <item>
+                <widget class="QRadioButton" name="m_editOtherCostButton">
+                  <property name="text">
+                    <string>Modify additional fees</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                    <string>m_selectionButtonGroup</string>
+                  </attribute>
+                </widget>
+              </item>
+              <item>
+                <widget class="QRadioButton" name="m_editOtherInfoButton">
+                  <property name="text">
+                    <string>Modify other loan information</string>
+                  </property>
+                  <attribute name="buttonGroup">
+                    <string>m_selectionButtonGroup</string>
+                  </attribute>
+                </widget>
+              </item>
+            </layout>
+          </widget>
+        </item>
+        <item>
+          <spacer name="Spacer66">
+            <property name="sizeHint">
+              <size>
+                <width>108</width>
+                <height>0</height>
+              </size>
+            </property>
+            <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+            </property>
+          </spacer>
+        </item>
+      </layout>
+    </item>
+    <item>
+      <spacer name="Spacer65">
+        <property name="sizeHint">
+          <size>
+            <width>0</width>
+            <height>47</height>
+          </size>
+        </property>
+        <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="orientation">
+          <enum>Qt::Vertical</enum>
+        </property>
+      </spacer>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+ <buttongroups>
+  <buttongroup name="m_selectionButtonGroup"/>
+ </buttongroups>
+ <customwidgets>
+ </customwidgets>
+ <tabstops>
+ </tabstops>
+</ui>

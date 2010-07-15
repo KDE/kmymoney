@@ -26,7 +26,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QBitArray>
 #include <QWidget>
+#include <QWizard>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,10 +36,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <ui_knewloanwizarddecl.h>
-#include <mymoneyscheduled.h>
-#include <kmymoneyaccountselector.h>
-#include <kmymoneydateinput.h>
+#include "ui_knewloanwizarddecl.h"
+#include "mymoneyscheduled.h"
+#include "kmymoneyaccountselector.h"
+#include "kmymoneydateinput.h"
 
 /**
   * @author Thomas Baumgart
@@ -52,17 +54,32 @@
   * created loan.
   *
   */
-class KNewLoanWizardDecl : public Q3Wizard, public Ui::KNewLoanWizardDecl
+class KNewLoanWizardDecl : public QWizard, public Ui::KNewLoanWizardDecl
 {
 public:
-  KNewLoanWizardDecl(QWidget *parent) : Q3Wizard(parent) {
+  KNewLoanWizardDecl(QWidget *parent) : QWizard(parent) {
     setupUi(this);
   }
 };
+
 class KNewLoanWizard : public KNewLoanWizardDecl
 {
   Q_OBJECT
+
+  //TODO: find a way to make this not a friend class
+  friend class AdditionalFeesWizardPage;
 public:
+  enum { Page_Intro, Page_EditIntro, Page_NewGeneralInfo, Page_EditSelection,
+         Page_EffectiveDate, Page_LendBorrow, Page_Name, Page_InterestType,
+         Page_PreviousPayments, Page_RecordPayment, Page_VariableInterestDate,
+         Page_PaymentEdit, Page_InterestEdit, Page_FirstPayment,
+         Page_NewCalculateLoan, Page_PaymentFrequency,
+         Page_InterestCalculation, Page_LoanAmount, Page_Interest,
+         Page_Duration, Page_Payment, Page_FinalPayment,
+         Page_CalculationOverview, Page_NewPayments, Page_InterestCategory,
+         Page_AdditionalFees, Page_Schedule, Page_SummaryEdit,
+         Page_AssetAccount, Page_Summary };
+
   KNewLoanWizard(QWidget *parent = 0);
   ~KNewLoanWizard();
 
@@ -98,6 +115,18 @@ public:
     */
   QDate initialPaymentDate(void) const;
 
+  bool validateCurrentPage();
+
+  const MyMoneyAccountLoan account() const;
+
+  /**
+   * This method returns the id of the next page in the wizard.
+   * It is overloaded here to support the dynamic nature of this wizard.
+   *
+   * @return id of the next page or -1 if there is no next page
+   */
+  int nextId() const;
+
 protected:
   /**
     * This method returns the transaction that is stored within
@@ -107,26 +136,12 @@ protected:
     */
   MyMoneyTransaction transaction(void) const;
 
-public slots:
-  void next();
-
 protected slots:
-  void slotLiabilityLoan(void);
-  void slotAssetLoan(void);
-  virtual void slotCheckPageFinished(void);
-  void slotPaymentsMade(void);
-  void slotNoPaymentsMade(void);
-  void slotRecordAllPayments(void);
-  void slotRecordThisYearsPayments(void);
-  void slotInterestOnPayment(void);
-  void slotInterestOnReception(void);
-  void slotCreateCategory(void);
-  virtual void slotAdditionalFees(void);
+
   // void slotNewPayee(const QString&);
   void slotReloadEditWidgets(void);
 
 protected:
-  void loadComboBoxes(void);
   void loadAccountList(void);
   void resetCalculator(void);
   void updateLoanAmount(void);
@@ -135,11 +150,7 @@ protected:
   void updatePayment(void);
   void updateFinalPayment(void);
   void updateLoanInfo(void);
-  QString updateTermWidgets(const long double v);
-  void updatePeriodicPayment(void);
-  void updateSummary(void);
   int calculateLoan(void);
-  int term(void) const;
 
 signals:
   /**
@@ -162,7 +173,8 @@ signals:
     * @sa KMyMoneyCombo::createItem()
     *
     * @param txt The name of the payee to be created
-    * @param id A connected slot should store the id of the created object in this variable
+    * @param id A connected slot should store the id of the created object 
+    * in this variable
     */
   void createPayee(const QString& txt, QString& id);
 
@@ -170,6 +182,7 @@ protected:
   MyMoneyAccountLoan  m_account;
   MyMoneyTransaction  m_transaction;
   MyMoneySplit        m_split;
+  QBitArray           m_pages;
 };
 
 #endif
