@@ -40,10 +40,10 @@
 /**
   * @author Thomas Baumgart
   */
-class KCurrencyCalculatorDecl : public QDialog, public Ui::KCurrencyCalculatorDecl
+class KCurrencyCalculatorDecl : public KDialog, public Ui::KCurrencyCalculatorDecl
 {
 public:
-  KCurrencyCalculatorDecl(QWidget *parent) : QDialog(parent) {
+  KCurrencyCalculatorDecl(QWidget *parent) : KDialog(parent) {
     setupUi(this);
   }
 };

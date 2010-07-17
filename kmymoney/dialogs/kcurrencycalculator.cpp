@@ -34,6 +34,7 @@
 // KDE Includes
 
 #include <KLocale>
+#include <KPushButton>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -120,6 +121,11 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
+  //set main widget of KDialog
+  setMainWidget(m_layoutWidget);
+
+  setButtons(KDialog::Ok | KDialog::Cancel);
+
   buttonGroup1->setId(m_amountButton, 0);
   buttonGroup1->setId(m_rateButton, 1);
 
@@ -129,19 +135,20 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
   else
     m_dateEdit->setDate(QDate::currentDate());
 
-  m_fromCurrencyText->setText(m_fromCurrency.isCurrency() ? m_fromCurrency.id() : m_fromCurrency.tradingSymbol());
-  m_toCurrencyText->setText(m_toCurrency.isCurrency() ? m_toCurrency.id() : m_toCurrency.tradingSymbol());
+  m_fromCurrencyText->setText(QString(KMyMoneyUtils::securityTypeToString(m_fromCurrency.securityType()) + " " + (m_fromCurrency.isCurrency() ? m_fromCurrency.id() : m_fromCurrency.tradingSymbol())));
+  m_toCurrencyText->setText(QString(KMyMoneyUtils::securityTypeToString(m_toCurrency.securityType()) + " " + (m_toCurrency.isCurrency() ? m_toCurrency.id() : m_toCurrency.tradingSymbol())));
+
+  //set bold font
+  QFont boldFont = m_fromCurrencyText->font();
+  boldFont.setBold(true);
+  m_fromCurrencyText->setFont(boldFont);
+  boldFont = m_toCurrencyText->font();
+  boldFont.setBold(true);
+  m_toCurrencyText->setFont(boldFont);
 
   m_fromAmount->setText(m_value.formatMoney("", MyMoneyMoney::denomToPrec(m_fromCurrency.smallestAccountFraction())));
 
   m_dateText->setText(KGlobal::locale()->formatDate(date));
-
-  m_fromType->setText(KMyMoneyUtils::securityTypeToString(m_fromCurrency.securityType()));
-  m_toType->setText(KMyMoneyUtils::securityTypeToString(m_toCurrency.securityType()));
-
-  // load button icons
-  m_cancelButton->setGuiItem(KStandardGuiItem::cancel());
-  m_okButton->setGuiItem(KStandardGuiItem::ok());
 
   m_updateButton->setChecked(KMyMoneyGlobalSettings::priceHistoryUpdate());
 
@@ -164,8 +171,6 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
 
   connect(m_toAmount, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateResult(const QString&)));
   connect(m_conversionRate, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateRate(const QString&)));
-  connect(m_cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
-  connect(m_okButton, SIGNAL(clicked()), this, SLOT(accept()));
 
   // use this as the default
   m_amountButton->animateClick();
@@ -177,7 +182,7 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
     m_amountButton->hide();
     m_toAmount->hide();
   }
-  m_okButton->setFocus();
+  button(KDialog::Ok)->setFocus();
 }
 
 KCurrencyCalculator::~KCurrencyCalculator()
@@ -268,7 +273,7 @@ void KCurrencyCalculator::updateExample(const MyMoneyMoney& price)
     }
   }
   m_conversionExample->setText(msg);
-  m_okButton->setEnabled(!price.isZero());
+  button(KDialog::Ok)->setEnabled(!price.isZero());
 }
 
 void KCurrencyCalculator::accept(void)
