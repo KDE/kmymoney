@@ -50,6 +50,7 @@
 #include "kmymoneylineedit.h"
 #include "kmymoneydateinput.h"
 #include "kmymoneyedit.h"
+#include "kmymoneyglobalsettings.h"
 #include "kmymoneyaccountselector.h"
 #include "knewaccountdlg.h"
 #include "ksplittransactiondlg.h"
@@ -63,6 +64,8 @@ KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
     KNewLoanWizardDecl(parent), m_pages(Page_Summary + 1, true)
 {
   setModal(true);
+
+  KMyMoneyGlobalSettings::setSubstringSearch(m_namePage);
 
   // connect(m_payeeEdit, SIGNAL(newPayee(const QString&)), this, SLOT(slotNewPayee(const QString&)));
   connect(m_namePage->m_payeeEdit, SIGNAL(createItem(const QString&, QString&)), this, SIGNAL(createPayee(const QString&, QString&)));
@@ -526,7 +529,8 @@ void KNewLoanWizard::loadAccountList(void)
     interestSet.addAccountType(MyMoneyAccount::Income);
   }
   //FIXME: port
-  interestSet.load(m_interestCategoryPage->m_interestAccountEdit);
+  if (m_interestCategoryPage)
+    interestSet.load(m_interestCategoryPage->m_interestAccountEdit);
 
   assetSet.addAccountType(MyMoneyAccount::Checkings);
   assetSet.addAccountType(MyMoneyAccount::Savings);
@@ -534,12 +538,14 @@ void KNewLoanWizard::loadAccountList(void)
   assetSet.addAccountType(MyMoneyAccount::Asset);
   assetSet.addAccountType(MyMoneyAccount::Currency);
   //FIXME: port
-  assetSet.load(m_assetAccountPage->m_assetAccountEdit);
+  if (m_assetAccountPage)
+    assetSet.load(m_assetAccountPage->m_assetAccountEdit);
 
   assetSet.addAccountType(MyMoneyAccount::CreditCard);
   assetSet.addAccountType(MyMoneyAccount::Liability);
   //FIXME: port
-  assetSet.load(m_schedulePage->m_paymentAccountEdit);
+  if (m_schedulePage)
+    assetSet.load(m_schedulePage->m_paymentAccountEdit);
 }
 
 MyMoneyTransaction KNewLoanWizard::transaction() const
