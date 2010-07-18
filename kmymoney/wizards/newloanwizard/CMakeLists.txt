@@ -1,8 +1,6 @@
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
 SET (libnewloanwizard_a_SOURCES
-  knewloanwizard.cpp
-  keditloanwizard.cpp
   additionalfeeswizardpage.cpp       lendborrowwizardpage.cpp
   assetaccountwizardpage.cpp         loanamountwizardpage.cpp
   calculationoverviewwizardpage.cpp  namewizardpage.cpp
