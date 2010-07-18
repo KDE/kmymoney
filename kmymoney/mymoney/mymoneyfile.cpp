@@ -1789,7 +1789,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
   }
 
   MyMoneyPriceList pricesList = priceList();
-  QMap<QString, QDate> securityPriceDate;
+  QMap<MyMoneySecurityPair, QDate> securityPriceDate;
 
   //get the first date of the price for each security
   MyMoneyPriceList::const_iterator prices_it;
@@ -1800,25 +1800,8 @@ const QStringList MyMoneyFile::consistencyCheck(void)
     if (currencyList.contains(firstPrice.from()) || currencyList.contains(firstPrice.to())) {
       //check the security in the from field
       //if it is there, check if it is older
-      if (securityPriceDate.contains(firstPrice.from())
-          && firstPrice.from() != baseCurrency().id()) {
-        if (securityPriceDate.value(firstPrice.from()) > firstPrice.date()) {
-          securityPriceDate[firstPrice.from()] = firstPrice.date();
-        }
-      } else if (firstPrice.from() != baseCurrency().id()) {
-        securityPriceDate.insert(firstPrice.from(), firstPrice.date());
-      }
-
-      //check the security in the to field
-      //if it is there, check if it is older
-      if (securityPriceDate.contains(firstPrice.to())
-          && firstPrice.to() != baseCurrency().id()) {
-        if (securityPriceDate.value(firstPrice.to()) > firstPrice.date()) {
-          securityPriceDate[firstPrice.to()] = firstPrice.date();
-        }
-      } else if (firstPrice.to() != baseCurrency().id()) {
-        securityPriceDate.insert(firstPrice.to(), firstPrice.date());
-      }
+      QPair<QString, QString> pricePair = qMakePair(firstPrice.from(), firstPrice.to());
+      securityPriceDate[pricePair] = firstPrice.date();
     }
   }
 
@@ -1826,8 +1809,23 @@ const QStringList MyMoneyFile::consistencyCheck(void)
   QList<MyMoneyAccount>::const_iterator accForeignList_it;
   bool firstInvProblem = true;
   for (accForeignList_it = accountForeignCurrency.constBegin(); accForeignList_it != accountForeignCurrency.constEnd(); ++accForeignList_it) {
+    //setup the price pair correctly
+    QPair<QString, QString> pricePair;
+    if((*accForeignList_it).isInvest())
+    {
+      //if it is a stock, we have to search for a price from its stock to the currency of the account
+      QString securityId = (*accForeignList_it).currencyId();
+      QString tradingCurrencyId = security(securityId).tradingCurrency();
+      pricePair = qMakePair(securityId, tradingCurrencyId);
+    } else {
+      //if it is a regular account we search for a price from the currency of the account to the base currency
+      QString currency = (*accForeignList_it).currencyId();
+      QString baseCurrencyId = baseCurrency().id();
+      pricePair = qMakePair(currency, baseCurrencyId);
+    }
+
     //compare the first price with the opening date of the account
-    if (securityPriceDate.value((*accForeignList_it).currencyId()) > (*accForeignList_it).openingDate()) {
+    if (!securityPriceDate.contains(pricePair) || securityPriceDate.value(pricePair) > (*accForeignList_it).openingDate()) {
       if (firstInvProblem) {
         firstInvProblem = false;
         rc << i18n("* Potential problem with investments/currencies");
