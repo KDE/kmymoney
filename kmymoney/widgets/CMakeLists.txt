@@ -55,6 +55,7 @@ SET(_uncritial_common_sources
   kmymoneyselector.cpp
   kmymoneytitlelabel.cpp
   kmymoneywizard.cpp
+  kpricetreeitem.cpp
   registeritem.cpp
   scheduledtransaction.cpp
   selectedtransaction.cpp

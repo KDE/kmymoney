@@ -48,8 +48,6 @@ public:
   }
 };
 
-enum ePriceColumns { ePriceCommodity = 0, ePriceStockName, ePriceCurrency, ePriceDate, ePricePrice, ePriceSource };
-
 class KMyMoneyPriceDlg : public KMyMoneyPriceDlgDecl
 {
   Q_OBJECT

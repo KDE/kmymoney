@@ -38,13 +38,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kupdatestockpricedlg.h"
-#include "kcurrencycalculator.h"
+#include <kupdatestockpricedlg.h>
+#include <kcurrencycalculator.h>
 #include <mymoneyprice.h>
-#include "kequitypriceupdatedlg.h"
+#include <kequitypriceupdatedlg.h>
 #include <kmymoneycurrencyselector.h>
 #include <mymoneyfile.h>
-#include "kmymoneyglobalsettings.h"
+#include <kmymoneyglobalsettings.h>
+#include <kpricetreeitem.h>
 
 KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
     KMyMoneyPriceDlgDecl(parent)
@@ -150,7 +151,7 @@ void KMyMoneyPriceDlg::slotLoadWidgets(void)
   }
   //reenable sorting and sort by the commodity column
   m_priceList->setSortingEnabled(true);
-  m_priceList->sortByColumn(ePriceCommodity);
+  m_priceList->sortByColumn(KPriceTreeItem::ePriceCommodity);
 }
 
 QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
@@ -158,7 +159,7 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
   MyMoneySecurity from, to;
   MyMoneyPrice price = MyMoneyPrice(basePrice);
 
-  QTreeWidgetItem* priceTreeItem = new QTreeWidgetItem(m_priceList);
+  KPriceTreeItem* priceTreeItem = new KPriceTreeItem(m_priceList);
 
   if (!price.isValid())
     price = MyMoneyFile::instance()->price(price.from(), price.to(), price.date());
@@ -173,14 +174,17 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
       priceBase = price.from();
     }
 
-    priceTreeItem->setData(ePriceCommodity, Qt::UserRole, QVariant::fromValue(price));
-    priceTreeItem->setText(ePriceCommodity, (from.isCurrency()) ? from.id() : from.tradingSymbol());
-    priceTreeItem->setText(ePriceStockName, (from.isCurrency()) ? QString() : m_stockNameMap.value(from.id()));
-    priceTreeItem->setToolTip(ePriceStockName, (from.isCurrency()) ? QString() : m_stockNameMap.value(from.id()));
-    priceTreeItem->setText(ePriceCurrency, to.id());
-    priceTreeItem->setText(ePriceDate, KGlobal::locale()->formatDate(price.date(), KLocale::ShortDate));
-    priceTreeItem->setText(ePricePrice, price.rate(priceBase).formatMoney("", m_pricePrecision));
-    priceTreeItem->setText(ePriceSource, price.source());
+    priceTreeItem->setData(KPriceTreeItem::ePriceCommodity, Qt::UserRole, QVariant::fromValue(price));
+    priceTreeItem->setText(KPriceTreeItem::ePriceCommodity, (from.isCurrency()) ? from.id() : from.tradingSymbol());
+    priceTreeItem->setText(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : m_stockNameMap.value(from.id()));
+    priceTreeItem->setToolTip(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : m_stockNameMap.value(from.id()));
+    priceTreeItem->setText(KPriceTreeItem::ePriceCurrency, to.id());
+    priceTreeItem->setText(KPriceTreeItem::ePriceDate, KGlobal::locale()->formatDate(price.date(), KLocale::ShortDate));
+    priceTreeItem->setData(KPriceTreeItem::ePriceDate, KPriceTreeItem::OrderRole, QVariant(price.date()));
+    priceTreeItem->setText(KPriceTreeItem::ePricePrice, price.rate(priceBase).formatMoney("", m_pricePrecision));
+    priceTreeItem->setTextAlignment(KPriceTreeItem::ePricePrice, Qt::AlignRight);
+    priceTreeItem->setData(KPriceTreeItem::ePricePrice, KPriceTreeItem::OrderRole, QVariant::fromValue(price.rate(priceBase)));
+    priceTreeItem->setText(KPriceTreeItem::ePriceSource, price.source());
   }
   return priceTreeItem;
 }
@@ -307,7 +311,7 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
       //if it is not a currency, send a null String, which will trigger the update for all prices
       QString stringId;
       if (security.isCurrency()) {
-        stringId = (item->text(ePriceCommodity) + ' ' + item->text(ePriceCurrency)).toUtf8();
+        stringId = (item->text(KPriceTreeItem::ePriceCommodity) + ' ' + item->text(KPriceTreeItem::ePriceCurrency)).toUtf8();
       }
       QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, stringId);
       if (dlg->exec() == Accepted)
