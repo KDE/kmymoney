@@ -69,6 +69,9 @@ KSortOptionDlg::KSortOptionDlg(QWidget *parent)
 void KSortOptionDlg::init()
 {
   setButtons(ButtonCodes(KDialog::None));
+  m_cancelButton->setGuiItem(KStandardGuiItem::cancel());
+  m_okButton->setGuiItem(KStandardGuiItem::ok());
+  m_helpButton->setGuiItem(KStandardGuiItem::help());
 }
 
 void KSortOptionDlg::setSortOption(const QString& option, const QString& def)
