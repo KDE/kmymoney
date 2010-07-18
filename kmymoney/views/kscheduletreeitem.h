@@ -1,5 +1,5 @@
 /***************************************************************************
-                          kscheduledview.h  -  description
+                          kscheduletreeitem.h  -  description
                              -------------------
     begin                : Fri Jul 16 2010
     copyright            : (C) 2010 by Alvaro Soliverez
@@ -35,8 +35,6 @@
 class KScheduleTreeItem : public QTreeWidgetItem
 {
 public:
-  KScheduleTreeItem();
-
   KScheduleTreeItem(QTreeWidget* parent);
 
   KScheduleTreeItem(QTreeWidgetItem* &parent);

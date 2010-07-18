@@ -70,11 +70,6 @@ public:
     */
   void showEvent(QShowEvent* event);
 
-  enum ScheduleItemDataRole {
-    ScheduleIdRole = Qt::UserRole,
-    OrderRole = Qt::UserRole + 1
-  };
-
 public slots:
   void slotSelectSchedule(const QString& schedule);
   void slotReloadView(void);

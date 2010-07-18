@@ -167,7 +167,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     KScheduleTreeItem *itemBills = new KScheduleTreeItem(m_scheduleTree);
     itemBills->setIcon(0, KIcon("account-types-expense"));
     itemBills->setText(0, i18n("Bills"));
-    itemBills->setData(0, OrderRole, QVariant("0"));
+    itemBills->setData(0, KScheduleTreeItem::OrderRole, QVariant("0"));
     itemBills->setFirstColumnSpanned(true);
     itemBills->setFlags(Qt::ItemIsEnabled);
     QFont bold = itemBills->font(0);
@@ -176,21 +176,21 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     KScheduleTreeItem *itemDeposits = new KScheduleTreeItem(m_scheduleTree);
     itemDeposits->setIcon(0, KIcon("account-types-income"));
     itemDeposits->setText(0, i18n("Deposits"));
-    itemDeposits->setData(0, OrderRole, QVariant("1"));
+    itemDeposits->setData(0, KScheduleTreeItem::OrderRole, QVariant("1"));
     itemDeposits->setFirstColumnSpanned(true);
     itemDeposits->setFlags(Qt::ItemIsEnabled);
     itemDeposits->setFont(0, bold);
     KScheduleTreeItem *itemLoans = new KScheduleTreeItem(m_scheduleTree);
     itemLoans->setIcon(0, KIcon("account-types-loan"));
     itemLoans->setText(0, i18n("Loans"));
-    itemLoans->setData(0, OrderRole, QVariant("2"));
+    itemLoans->setData(0, KScheduleTreeItem::OrderRole, QVariant("2"));
     itemLoans->setFirstColumnSpanned(true);
     itemLoans->setFlags(Qt::ItemIsEnabled);
     itemLoans->setFont(0, bold);
     KScheduleTreeItem *itemTransfers = new KScheduleTreeItem(m_scheduleTree);
     itemTransfers->setIcon(0, KIcon("transaction"));
     itemTransfers->setText(0, i18n("Transfers"));
-    itemTransfers->setData(0, OrderRole, QVariant("3"));
+    itemTransfers->setData(0, KScheduleTreeItem::OrderRole, QVariant("3"));
     itemTransfers->setFirstColumnSpanned(true);
     itemTransfers->setFlags(Qt::ItemIsEnabled);
     itemTransfers->setFont(0, bold);
@@ -290,7 +290,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
 {
   KScheduleTreeItem* item = new KScheduleTreeItem(parent);
   item->setData(0, Qt::UserRole, QVariant::fromValue(schedule));
-  item->setData(0, OrderRole, schedule.name());
+  item->setData(0, KScheduleTreeItem::OrderRole, schedule.name());
   if(!schedule.isFinished()) {
     if(schedule.isOverdue()) {
       item->setIcon(0, KIcon("view-calendar-upcoming-events"));
@@ -362,7 +362,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
     } else {
       item->setText(1, "---");
     }
-    item->setData(1, OrderRole, QVariant(accName));
+    item->setData(1, KScheduleTreeItem::OrderRole, QVariant(accName));
 
     QString payeeName;
     if (!s1.payeeId().isEmpty()) {
@@ -371,7 +371,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
     } else {
       item->setText(2, "---");
     }
-    item->setData(2, OrderRole, QVariant(payeeName));
+    item->setData(2, KScheduleTreeItem::OrderRole, QVariant(payeeName));
 
     MyMoneyMoney amount = split.shares().abs();
     item->setData(3, Qt::UserRole, QVariant::fromValue(amount));
@@ -384,7 +384,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
       item->setText(3, QString("%1  ").arg(amount.formatMoney(MyMoneyFile::instance()->baseCurrency())));
     }
     item->setTextAlignment(3, Qt::AlignRight);
-    item->setData(3, OrderRole, QVariant::fromValue(amount));
+    item->setData(3, KScheduleTreeItem::OrderRole, QVariant::fromValue(amount));
 
     // Do the real next payment like ms-money etc
     QDate nextDueDate;
@@ -394,7 +394,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
       nextDueDate = schedule.adjustedNextDueDate();
       item->setText(4, KGlobal::locale()->formatDate(schedule.adjustedNextDueDate(), KLocale::ShortDate));
     }
-    item->setData(4, OrderRole, QVariant(nextDueDate));
+    item->setData(4, KScheduleTreeItem::OrderRole, QVariant(nextDueDate));
     item->setText(5, i18n(schedule.occurrenceToString().toLatin1()));
     item->setText(6, KMyMoneyUtils::paymentMethodToString(schedule.paymentType()));
   } catch (MyMoneyException *e) {

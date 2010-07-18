@@ -32,10 +32,6 @@
 
 #include <mymoneymoney.h>
 
-KScheduleTreeItem::KScheduleTreeItem() : QTreeWidgetItem()
-{
-}
-
 KScheduleTreeItem::KScheduleTreeItem(QTreeWidget* parent) : QTreeWidgetItem(parent)
 {
 }
