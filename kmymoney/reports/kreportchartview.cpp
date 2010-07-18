@@ -565,12 +565,22 @@ void KReportChartView::setLineWidth(const int lineWidth)
 
 void KReportChartView::drawLimitLine(const double limit)
 {
+  // temporarily disconnect the view from the model to aovid update of view on
+  // emission of the dataChanged() signal for each call of setDataCell().
+  // This speeds up the runtime of drawLimitLine() by a factor of
+  // approx. 60 on my box (1831ms vs. 31ms).
+  AbstractDiagram* planeDiagram = coordinatePlane()->diagram();
+  planeDiagram->setModel(0);
+
   //we get the current number of rows and we add one after that
   int row = m_model.rowCount();
 
   for (int col = 0; col < m_numColumns; ++col) {
     setDataCell(col, row, limit);
   }
+
+  planeDiagram->setModel(&m_model);
+
 //TODO: add format to the line
 }
 
