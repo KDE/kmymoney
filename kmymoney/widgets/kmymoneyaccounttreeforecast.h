@@ -31,7 +31,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "kmymoneyaccounttree.h"
+#include "kmymoneyaccounttreebase.h"
 #include "mymoneyforecast.h"
 
 class KMyMoneyAccountTreeForecastItem;
