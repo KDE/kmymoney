@@ -60,7 +60,8 @@ KScheduledView::KScheduledView(QWidget *parent) :
     m_openBills(true),
     m_openDeposits(true),
     m_openTransfers(true),
-    m_openLoans(true)
+    m_openLoans(true),
+    m_sortColumn(0)
 {
   setupUi(this);
 
@@ -103,6 +104,8 @@ KScheduledView::KScheduledView(QWidget *parent) :
   connect(m_calendar, SIGNAL(skipClicked(const MyMoneySchedule&, const QDate&)), this, SLOT(slotBriefSkipClicked(const MyMoneySchedule&, const QDate&)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotReloadView()));
+
+  m_scheduleTree->sortByColumn(m_sortColumn, Qt::AscendingOrder);
 }
 
 KScheduledView::~KScheduledView()
@@ -283,7 +286,6 @@ void KScheduledView::refresh(bool full, const QString& schedId)
 
   //reenable sorting after loading items
   m_scheduleTree->setSortingEnabled(true);
-  m_scheduleTree->sortByColumn(0, Qt::AscendingOrder);
 }
 
 QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMoneySchedule& schedule)
@@ -457,11 +459,8 @@ void KScheduledView::readConfig(void)
   m_openTransfers = grp.readEntry("KScheduleView_openTransfers", true);
   m_openLoans = grp.readEntry("KScheduleView_openLoans", true);
   m_tabWidget->setCurrentIndex(grp.readEntry("KScheduleView_tab", 0));
-
+  m_sortColumn = grp.readEntry("KScheduleView_sortColumn", 0);
   m_scheduleTree->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
-  grp = config->group("Schedule View Settings");
-  //m_scheduleTree->restoreLayout(grp);
-
 }
 
 void KScheduledView::writeConfig(void)
@@ -473,10 +472,8 @@ void KScheduledView::writeConfig(void)
   grp.writeEntry("KScheduleView_openTransfers", m_openTransfers);
   grp.writeEntry("KScheduleView_openLoans", m_openLoans);
   grp.writeEntry("KScheduleView_tab", m_tabWidget->currentIndex());
+  grp.writeEntry("KScheduleView_sortColumn", m_scheduleTree->sortColumn());
   config->sync();
-
-  grp = config->group("Schedule View Settings");
-  //m_scheduleTree->saveLayout(grp);
 }
 
 void KScheduledView::slotListViewContextMenu(const QPoint& pos)
