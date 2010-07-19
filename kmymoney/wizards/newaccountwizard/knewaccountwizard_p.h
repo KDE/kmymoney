@@ -53,7 +53,6 @@
 
 class Wizard;
 class MyMoneyInstitution;
-class KMyMoneyAccountTreeItem;
 
 namespace NewAccountWizard
 {
