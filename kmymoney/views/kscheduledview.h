@@ -141,7 +141,6 @@ private:
   bool m_openTransfers;
   bool m_openLoans;
   bool m_needReload;
-  int  m_sortColumn;
 
   /**
    * Search widget for the list

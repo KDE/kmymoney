@@ -60,8 +60,7 @@ KScheduledView::KScheduledView(QWidget *parent) :
     m_openBills(true),
     m_openDeposits(true),
     m_openTransfers(true),
-    m_openLoans(true),
-    m_sortColumn(0)
+    m_openLoans(true)
 {
   setupUi(this);
 
@@ -104,8 +103,6 @@ KScheduledView::KScheduledView(QWidget *parent) :
   connect(m_calendar, SIGNAL(skipClicked(const MyMoneySchedule&, const QDate&)), this, SLOT(slotBriefSkipClicked(const MyMoneySchedule&, const QDate&)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotReloadView()));
-
-  m_scheduleTree->sortByColumn(m_sortColumn, Qt::AscendingOrder);
 }
 
 KScheduledView::~KScheduledView()
@@ -459,7 +456,9 @@ void KScheduledView::readConfig(void)
   m_openTransfers = grp.readEntry("KScheduleView_openTransfers", true);
   m_openLoans = grp.readEntry("KScheduleView_openLoans", true);
   m_tabWidget->setCurrentIndex(grp.readEntry("KScheduleView_tab", 0));
-  m_sortColumn = grp.readEntry("KScheduleView_sortColumn", 0);
+  QByteArray columns;
+  columns = grp.readEntry("KScheduleView_treeState", columns);
+  m_scheduleTree->header()->restoreState(columns);
   m_scheduleTree->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
 }
 
@@ -472,7 +471,9 @@ void KScheduledView::writeConfig(void)
   grp.writeEntry("KScheduleView_openTransfers", m_openTransfers);
   grp.writeEntry("KScheduleView_openLoans", m_openLoans);
   grp.writeEntry("KScheduleView_tab", m_tabWidget->currentIndex());
-  grp.writeEntry("KScheduleView_sortColumn", m_scheduleTree->sortColumn());
+  QByteArray columns = m_scheduleTree->header()->saveState();
+  grp.writeEntry("KScheduleView_treeState", columns);
+
   config->sync();
 }
 
