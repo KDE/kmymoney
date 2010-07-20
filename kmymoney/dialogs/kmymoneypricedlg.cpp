@@ -50,7 +50,7 @@
 KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
     KMyMoneyPriceDlgDecl(parent)
 {
-  setButtons(KDialog::Ok);
+  setButtons(KDialog::Close);
   setButtonsOrientation(Qt::Horizontal);
   setMainWidget(m_layoutWidget);
 
