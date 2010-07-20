@@ -35,8 +35,8 @@
 // Project Includes
 
 class kMyMoneyEdit;
-#include <kmymoneydateinput.h>
-#include <mymoneyaccount.h>
+#include "kmymoneydateinput.h"
+#include "mymoneyaccount.h"
 #include "ui_kendingbalancedlgdecl.h"
 
 /**
@@ -47,10 +47,10 @@ class kMyMoneyEdit;
   *
   * @author Thomas Baumgart
   */
-class KEndingBalanceDlgDecl : public Q3Wizard, public Ui::KEndingBalanceDlgDecl
+class KEndingBalanceDlgDecl : public QWizard, public Ui::KEndingBalanceDlgDecl
 {
 public:
-  KEndingBalanceDlgDecl(QWidget *parent) : Q3Wizard(parent) {
+  KEndingBalanceDlgDecl(QWidget *parent) : QWizard(parent) {
     setupUi(this);
   }
 };
@@ -58,25 +58,35 @@ class KEndingBalanceDlg : public KEndingBalanceDlgDecl
 {
   Q_OBJECT
 public:
+  enum { Page_CheckingStart, Page_PreviousPostpone,
+         Page_CheckingStatementInfo, Page_InterestChargeCheckings };
+
   explicit KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent = 0);
   ~KEndingBalanceDlg();
 
   const MyMoneyMoney endingBalance(void) const;
   const MyMoneyMoney previousBalance(void) const;
   const QDate statementDate(void) const {
-    return m_statementDate->date();
+    return field("statementDate").toDate();
   };
 
   const MyMoneyTransaction interestTransaction(void);
   const MyMoneyTransaction chargeTransaction(void);
 
+  /**
+   * This method returns the id of the next page in the wizard.
+   * It is overloaded here to support the dynamic nature of this wizard.
+   *
+   * @return id of the next page or -1 if there is no next page
+   */
+  int nextId() const;
+
 protected:
-  bool createTransaction(MyMoneyTransaction& t, const int sign, kMyMoneyEdit *amountEdit, KMyMoneyCategory *categoryEdit, kMyMoneyDateInput* dateEdit);
+  bool createTransaction(MyMoneyTransaction& t, const int sign, const MyMoneyMoney& amount, const QString& category, const QDate& date);
   const MyMoneyMoney adjustedReturnValue(const MyMoneyMoney& v) const;
   void createCategory(const QString& txt, QString& id, const MyMoneyAccount& parent);
 
 protected slots:
-  void slotCheckPageFinished(void);
   void slotReloadEditWidgets(void);
   void help(void);
   void slotCreateInterestCategory(const QString& txt, QString& id);
@@ -94,60 +104,6 @@ signals:
     * emit when a category is about to be created
     */
   void createCategory(MyMoneyAccount& acc, const MyMoneyAccount& parent);
-
-private:
-  /// \internal d-pointer class.
-  class Private;
-  /// \internal d-pointer instance.
-  Private* const d;
-};
-
-/**
-  * This dialog is wizard based and used to enter additional
-  * information required to start the reconciliation process.
-  * This version is implements the behaviour for loan accounts.
-  */
-class KEndingBalanceLoanDlg : public KEndingBalanceDlgDecl
-{
-  Q_OBJECT
-public:
-  explicit KEndingBalanceLoanDlg(const MyMoneyAccount& account, QWidget* parent = 0);
-  ~KEndingBalanceLoanDlg();
-
-  /**
-    * This method returns the adjustment transaction if one
-    * has been created. If not, an empty transaction will be returned.
-    */
-  const MyMoneyTransaction adjustmentTransaction(void) const;
-
-  /**
-    * This method returns the starting date of the statement as provided
-    * by the user. The value returned is only valid if the dialog returned
-    * with QDialog::accept.
-    */
-  const QDate startDate(void) const {
-    return m_startDateEdit->date();
-  };
-
-  /**
-    * This method returns the ending date of the statement as provided
-    * by the user. The value returned is only valid if the dialog returned
-    * with QDialog::accept.
-    */
-  const QDate endDate(void) const {
-    return m_endDateEdit->date();
-  };
-
-protected:
-  const MyMoneyMoney totalInterest(const QDate& start, const QDate& end) const;
-  const MyMoneyMoney totalAmortization(const QDate& start, const QDate& end) const;
-
-public slots:
-  void next();
-
-protected slots:
-  void slotCheckPageFinished(void);
-  void help(void);
 
 private:
   /// \internal d-pointer class.

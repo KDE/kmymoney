@@ -48,6 +48,7 @@ class kMyMoneyLineEdit;
 class KMyMoneyCombo : public KComboBox
 {
   Q_OBJECT
+  Q_PROPERTY(QString selectedItem READ selectedItem WRITE setSelectedItem STORED false)
 public:
   KMyMoneyCombo(QWidget *w = 0);
   explicit KMyMoneyCombo(bool rw, QWidget *w = 0);
