@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="introduction">
 <chapterinfo>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-19</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
 <title>Introduction</title>
@@ -25,8 +25,9 @@
     <formalpara><title>Feature Parity</title>
       <para>
         &kappname; intends to provide all important features found in the
-        commercially-available personal finance managers.  Although this release
-        is closer than ever to that goal, there is still work to be done.
+        commercially available personal finance managers.  Although every release
+        of &kappname; gets closer and closer to that goal, there is still work to
+	be done.
       </para>
     </formalpara>
   </listitem>
@@ -57,12 +58,14 @@
 
 <para>
   As a personal finance manager, &kappname; is not intended to scale to the
-  needs of an average business.  However, it would be possible to create client
-  / supplier / document features through plugins.
+  needs of an average business.  A small business might find sufficient
+  functionality to use &kappname;, but features such as accounts-receivable and
+  accounts-payable are not directly supported.  However, it would be possible to
+  create client, supplier, document, or other features through plugins.
 </para>
 
 <para>
-  &kappname; is not simply a clone of the commercially-available personal
+  &kappname; is not simply a clone of the commercially available personal
   finance programs. Although many of the features present in &kappname; can be
   found in other similar applications, &kappname; strives to present an
   individual and unique view of your finances.
