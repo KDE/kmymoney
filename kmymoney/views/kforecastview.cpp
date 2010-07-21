@@ -39,7 +39,6 @@
 #include "kmymoney.h"
 #include "kmymoneyutils.h"
 #include "mymoneyforecast.h"
-#include "kmymoneyforecastlistviewitem.h"
 #include "kmymoneyaccounttreeforecast.h"
 #include "pivottable.h"
 #include "pivotgrid.h"
@@ -398,12 +397,12 @@ void KForecastView::loadAdvancedView(void)
   }
   //clear the list, including columns
   m_advancedList->clear();
-  for (; m_advancedList->columns() > 0;) {
-    m_advancedList->removeColumn(0);
-  }
+  m_advancedList->setColumnCount(0);
+
+  QStringList headerLabels;
 
   //add first column of both lists
-  int accountColumn = m_advancedList->addColumn(i18n("Account"), -1);
+  headerLabels << i18n("Account");
 
   //if beginning of forecast is today, set the begin day to next cycle to avoid repeating the first cycle
   if (QDate::currentDate() < forecast.beginForecastDate()) {
@@ -414,19 +413,18 @@ void KForecastView::loadAdvancedView(void)
 
   //add columns
   for (int i = 1; ((i * forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
-    int col = m_advancedList->addColumn(i18n("Min Bal %1", i), -1);
-    m_advancedList->setColumnAlignment(col, Qt::AlignRight);
-    m_advancedList->addColumn(i18n("Min Date %1", i), -1);
+    headerLabels << i18n("Min Bal %1", i);
+    headerLabels << i18n("Min Date %1", i);
   }
   for (int i = 1; ((i * forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
-    int col = m_advancedList->addColumn(i18n("Max Bal %1", i), -1);
-    m_advancedList->setColumnAlignment(col, Qt::AlignRight);
-    m_advancedList->addColumn(i18n("Max Date %1", i), -1);
+    headerLabels << i18n("Max Bal %1", i);
+    headerLabels << i18n("Max Date %1", i);
   }
-  int col = m_advancedList->addColumn(i18nc("Average balance", "Average"), -1);
-  m_advancedList->setColumnAlignment(col, Qt::AlignRight);
-  m_advancedList->setSorting(-1);
-  KMyMoneyForecastListViewItem *advancedItem = 0;
+  headerLabels << i18nc("Average balance", "Average");
+
+  m_advancedList->setHeaderLabels(headerLabels);
+
+  QTreeWidgetItem *advancedItem = 0;
 
   QMap<QString, QString>::ConstIterator it_nc;
   for (it_nc = m_nameIdx.constBegin(); it_nc != m_nameIdx.constEnd(); ++it_nc) {
@@ -444,8 +442,8 @@ void KForecastView::loadAdvancedView(void)
     }
 
 
-    advancedItem = new KMyMoneyForecastListViewItem(m_advancedList, advancedItem, false);
-    advancedItem->setText(accountColumn, acc.name());
+    advancedItem = new QTreeWidgetItem(m_advancedList, advancedItem, false);
+    advancedItem->setText(0, acc.name());
     int it_c = 1; // iterator for the columns of the listview
 
     //get minimum balance list
@@ -456,11 +454,17 @@ void KForecastView::loadAdvancedView(void)
       amountMM = forecast.forecastBalance(acc, minDate);
 
       amount = amountMM.formatMoney(acc, currency);
-      advancedItem->setText(it_c, amount, amountMM.isNegative());
+      advancedItem->setText(it_c, amount);
+      if (amountMM.isNegative()) {
+        advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
+      }
       it_c++;
 
       QString dateString = KGlobal::locale()->formatDate(minDate, KLocale::ShortDate);
-      advancedItem->setText(it_c, dateString, amountMM.isNegative());
+      advancedItem->setText(it_c, dateString);
+      if (amountMM.isNegative()) {
+        advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
+      }
       it_c++;
     }
 
@@ -472,19 +476,29 @@ void KForecastView::loadAdvancedView(void)
       amountMM = forecast.forecastBalance(acc, maxDate);
 
       amount = amountMM.formatMoney(acc, currency);
-      advancedItem->setText(it_c, amount, amountMM.isNegative());
+      advancedItem->setText(it_c, amount);
+      if (amountMM.isNegative()) {
+        advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
+      }
       it_c++;
 
       QString dateString = KGlobal::locale()->formatDate(maxDate, KLocale::ShortDate);
-      advancedItem->setText(it_c, dateString, amountMM.isNegative());
+      advancedItem->setText(it_c, dateString);
+      if (amountMM.isNegative()) {
+        advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
+      }
       it_c++;
     }
     //get average balance
     amountMM = forecast.accountAverageBalance(acc);
     amount = amountMM.formatMoney(acc, currency);
-    advancedItem->setText(it_c, amount, amountMM.isNegative());
+    advancedItem->setText(it_c, amount);
+    if (amountMM.isNegative()) {
+      advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
+    }
     it_c++;
   }
+  m_advancedList->resizeColumnToContents(0);
   m_advancedList->show();
 }
 

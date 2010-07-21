@@ -133,7 +133,6 @@ SET(libwidgets_a_SOURCES
   ${_critial_common_sources}
   kmymoneybriefschedule.cpp
   kmymoneycalendar.cpp
-  kmymoneyforecastlistviewitem.cpp
   kmymoneyscheduledcalendar.cpp
   kmymoneyscheduleddatetbl.cpp
   registersearchline.cpp
