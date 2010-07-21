@@ -351,12 +351,12 @@
 
 <para>	
   To enter a new transaction into the register you can now either click on an
-  empty entry, press <keycombo action="simul">&Ctrl;&Insert;</keycombo>, or
-  click <guibutton>New</guibutton> at the foot of the window. The
-  <keycap>Up</keycap> and <keycap>Down</keycap> arrow keys let you navigate
-  through the list.  After pressing &Enter; or double clicking on
-  an entry, the transaction list displays the fields required to enter the
-  transaction and waits for input.
+  empty entry, press <keycombo
+  action="simul">&Ctrl;<keycap>Ins</keycap></keycombo>, or click
+  <guibutton>New</guibutton> at the foot of the window. The <keycap>Up</keycap>
+  and <keycap>Down</keycap> arrow keys let you navigate through the list.  After
+  pressing &Enter; or double clicking on an entry, the transaction list displays
+  the fields required to enter the transaction and waits for input.
 </para>
 
 <para>
@@ -399,9 +399,9 @@
 <para>
   In the split editor screen, double-click an empty line to enter a new
   sub-transaction or press <keycombo
-  action="simul">&Ctrl;&Insert;</keycombo>. Specify the category, add an
-  (optional) memo, and enter the amount. To save this part of the split, press
-  the green check mark under the category. To cancel, press the red cross.
+  action="simul">&Ctrl;<keycap>Ins</keycap></keycombo>. Specify the category,
+  add an (optional) memo, and enter the amount. To save this part of the split,
+  press the green check mark under the category. To cancel, press the red cross.
 </para> 
  
 <para>
