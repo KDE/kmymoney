@@ -25,6 +25,7 @@
 #include <QPushButton>
 #include <QDialog>
 #include <QDateTime>
+#include <QWizard>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
