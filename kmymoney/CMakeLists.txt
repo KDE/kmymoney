@@ -67,8 +67,8 @@ SET( kmymoney_common_LIBS
   endingbalancedlg wizardpages
   dialogs widgets settings converter models kmm_config
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
-  ${QT_AND_KDECORE_LIBS} ${QT_QT3SUPPORT_LIBRARY} ${QT_QTSQL_LIBRARY}
-  ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KUTILS_LIBRARY})
+  ${QT_AND_KDECORE_LIBS} ${QT_QTSQL_LIBRARY}
+  ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KUTILS_LIBRARY})
 
 ########### kmymoney executable ###############
 
