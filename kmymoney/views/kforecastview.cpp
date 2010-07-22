@@ -66,6 +66,7 @@ KForecastView::KForecastView(QWidget *parent) :
   m_forecastList->setAllColumnsShowFocus(true);
   m_summaryList->setAllColumnsShowFocus(true);
   m_advancedList->setAllColumnsShowFocus(true);
+  m_advancedList->setAlternatingRowColors(true);
 
   m_forecastChart->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   m_chartLayout = m_tabChart->layout();
@@ -503,7 +504,16 @@ void KForecastView::loadAdvancedView(void)
     }
     it_c++;
   }
-  m_advancedList->resizeColumnToContents(0);
+  
+  // make sure all data is shown
+  QTreeWidgetItem *header = m_advancedList->headerItem();
+  for (int i = 0; i < headerLabels.size(); ++i) {
+    if(i && header) {
+      header->setData(i, Qt::TextAlignmentRole, Qt::AlignRight);
+    }
+    m_advancedList->resizeColumnToContents(i);
+  }
+  
   m_advancedList->show();
 }
 
