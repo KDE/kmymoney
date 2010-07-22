@@ -480,10 +480,11 @@ bool KOnlineBankingSetupWizard::chosenSettings(MyMoneyKeyValueContainer& setting
         if (d->m_walletIsOpen) {
           QString key = OFX_PASSWORD_KEY(settings.value("url"), settings.value("uniqueId"));
           d->m_wallet->writePassword(key, settings.value("password"));
-        } else
-          m_storePassword->setChecked(false);
+          settings.deletePair("password");
+        }
+      } else {
+        settings.deletePair("password");
       }
-      settings.deletePair("password");
       result = true;
     }
   }

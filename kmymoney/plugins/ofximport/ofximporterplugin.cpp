@@ -595,6 +595,10 @@ MyMoneyKeyValueContainer OfxImporterPlugin::onlineBankingSettings(const MyMoneyK
           d->m_wallet->removeEntry(key);
         }
       }
+    } else {
+      if (d->m_statusDlg->m_storePassword->isChecked()) {
+        kvp.setValue("password", d->m_statusDlg->m_password->text());
+      }
     }
 
     if (!d->m_statusDlg->appId().isEmpty())
