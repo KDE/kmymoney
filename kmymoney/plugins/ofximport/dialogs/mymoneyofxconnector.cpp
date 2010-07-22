@@ -163,15 +163,12 @@ QString MyMoneyOfxConnector::password(void) const
   // and retrieve it from the settings stored in the KMyMoney data storage.
   // in case we don't have a password on file, we ask the user
   QString key = OFX_PASSWORD_KEY(m_fiSettings.value("url"), m_fiSettings.value("uniqueId"));
-  QString pwd;
-  if (Wallet::keyDoesNotExist(Wallet::NetworkWallet(), Wallet::PasswordFolder(), key)) {
-    pwd = m_fiSettings.value("password");
-  } else {
-    Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), qApp->activeWindow()->winId(), Wallet::Synchronous);
-    if (wallet) {
-      wallet->setFolder(Wallet::PasswordFolder());
-      wallet->readPassword(key, pwd);
-    }
+  QString pwd = m_fiSettings.value("password");
+  Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), qApp->activeWindow()->winId(), Wallet::Synchronous);
+  if (wallet
+      && !Wallet::keyDoesNotExist(Wallet::NetworkWallet(), Wallet::PasswordFolder(), key)) {
+    wallet->setFolder(Wallet::PasswordFolder());
+    wallet->readPassword(key, pwd);
   }
 
   if (pwd.isEmpty()) {
