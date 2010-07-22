@@ -99,7 +99,7 @@
 
 <para>
   The menu and toolbars provide access to the features of &kappname; and allow
-  you to <link linkend="firsttime-3">Create</link> files or configure how
+  you to <link linkend="firsttime.3">Create</link> files or configure how
   &kappname; operates.
 </para>
 
@@ -317,7 +317,7 @@
 </itemizedlist>
 </sect1>
 
-<sect1 id="firsttime-3">
+<sect1 id="firsttime.3">
 <title>Creating a new file</title>
 
 <para>
@@ -518,7 +518,7 @@ transactions this is currently empty.</para>
 -->
 </sect1>
 
-<sect1 id="firsttime-4">
+<sect1 id="firsttime.4">
 <title>Creating accounts</title>
 
 <para>
@@ -635,7 +635,7 @@ transactions this is currently empty.</para>
 </para>
 </sect1>
 
-<sect1 id="firsttime-import">
+<sect1 id="firsttime.import">
 <title>Quicken Interchange Format (QIF) Import</title>
 
 <para>
@@ -651,7 +651,7 @@ transactions this is currently empty.</para>
 </para>
 </sect1>
 
-<sect1 id="firsttime-find">
+<sect1 id="firsttime.find">
 <title>Searching for transactions</title>
 
 <para>
@@ -674,7 +674,7 @@ transactions this is currently empty.</para>
 
 </sect1>
 
-<sect1 id="firsttime-reconcile">
+<sect1 id="firsttime.reconcile">
 <title>Reconciliation</title>
 
 <para>
@@ -701,7 +701,7 @@ transactions this is currently empty.</para>
 
 </sect1>
 
-<sect1 id="firsttime-backup">
+<sect1 id="firsttime.backup">
 <title>Backing up</title>
 
 <para>
@@ -728,7 +728,41 @@ transactions this is currently empty.</para>
 </para>
 </sect1>
 
-<sect1 id="firsttime-contact">
+<sect1 id="firsttime.launch">
+<title>Launching &kappname;</title>
+
+<para>
+  Most commonly, you will launch &kappname; from an icon or a start menu of your
+  window manager.  In this case, the default behavior is that &kappname; will
+  open the last file you had open.  However, in some circumstances, you will
+  want or need to launch &kappname; from the command line.
+</para>
+
+<para>
+  For a complete description of all the available line options, see the man page
+  for &kappname;  However, there are two special cases which we describe here.
+</para>
+
+<formalpara><title><command>kmymoney -n</command></title>
+  <para>
+    The -n option tells &kappname; not to open the last file it had open.  This
+    can be useful if the program crashes on startup.
+  </para>
+</formalpara>
+
+<formalpara><title><command>kmymoney &lt;filepath&gt;</command></title>
+  <para>
+    Giving &kappname; a filename on the command line tells it to open that file
+    instead of the last file it had open.  You can use the name of any valid
+    &kappname; file, as described in the chapter on <link
+    linkend="details.formats">file formats</link>.  In addition, this can be
+    used to import a <link linkend="details.impexp.gnucash">GnuCash</link> file.
+  </para>
+</formalpara>
+
+</sect1>
+
+<sect1 id="firsttime.contact">
 <title>Contacting the developers / Reporting Bugs</title>
 
 <sect2>
