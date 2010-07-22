@@ -6,8 +6,7 @@ PROJECT(widgets)
 SET(kmymoney_STAT_HEADERS
   kaccounttemplateselector.h kbudgetvalues.h kguiutils.h
   kmymoneyaccountcombo.h kmymoneyaccountcompletion.h
-  kmymoneyaccountselector.h kmymoneyaccounttreebase.h
-  kmymoneyaccounttreeforecast.h
+  kmymoneyaccountselector.h
   kmymoneycategory.h kmymoneychecklistitem.h
   kmymoneycombo.h kmymoneymvccombo.h kmymoneycompletion.h
   kmymoneycurrencyselector.h  kmymoneydateinput.h kmymoneyedit.h
@@ -69,8 +68,6 @@ SET(_uncritial_common_sources
 SET (_critial_common_sources
   kaccounttemplateselector.cpp
   kmymoneyaccountcompletion.cpp
-  kmymoneyaccounttreebase.cpp
-  kmymoneyaccounttreeforecast.cpp
   kmymoneycategory.cpp
   register.cpp
   )

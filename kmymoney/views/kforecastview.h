@@ -30,10 +30,11 @@
 // Project Includes
 
 #include <mymoneyaccount.h>
+#include <mymoneyprice.h>
+#include <mymoneyforecast.h>
 #include <mymoneyutils.h>
 
 #include "ui_kforecastviewdecl.h"
-#include "kmymoneyaccounttreeforecast.h"
 #include "kreportchartview.h"
 
 using namespace reports;
@@ -48,6 +49,8 @@ class KForecastView : public QWidget, public Ui::KForecastViewDecl
   Q_OBJECT
 
 public:
+  enum EForecastViewType { eSummary = 0, eDetailed, eAdvanced, eBudget, eUndefined };
+
   KForecastView(QWidget *parent = 0);
   virtual ~KForecastView();
 
@@ -67,6 +70,13 @@ protected:
     // insert new values above this line
     MaxViewTabs
   } ForecastViewTab;
+
+  enum ForecastViewRoles {
+    ForecastRole = Qt::UserRole,     /**< The forecast is held in this role.*/
+    AccountRole = Qt::UserRole + 1,  /**< The MyMoneyAccount is stored in this role in column 0.*/
+    AmountRole = Qt::UserRole + 2,   /**< The amount.*/
+    ValueRole = Qt::UserRole + 3,    /**< The value.*/
+  };
 
   QMap<QString, QString> m_nameIdx;
 
@@ -119,16 +129,30 @@ protected slots:
 private:
   void addAssetLiabilityRows(const MyMoneyForecast& forecast);
   void addIncomeExpenseRows(const MyMoneyForecast& forecast);
-  void addTotalRow(KMyMoneyAccountTreeForecast* forecastList, const MyMoneyForecast& forecast);
+  void addTotalRow(QTreeWidget* forecastList, const MyMoneyForecast& forecast);
   bool includeAccount(MyMoneyForecast& forecast, const MyMoneyAccount& acc);
-  void loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount& account, KMyMoneyAccountTreeForecastItem* parentItem, int forecastType);
+  void loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount& account, QTreeWidgetItem* parentItem, int forecastType);
 
-  bool                                m_needReload[MaxViewTabs];
-  KMyMoneyAccountTreeForecastItem*    m_totalItem;
-  KMyMoneyAccountTreeForecastItem*    m_assetItem;
-  KMyMoneyAccountTreeForecastItem*    m_liabilityItem;
-  KMyMoneyAccountTreeForecastItem*    m_incomeItem;
-  KMyMoneyAccountTreeForecastItem*    m_expenseItem;
+  void updateSummary(QTreeWidgetItem *item);
+  void updateDetailed(QTreeWidgetItem *item);
+  void updateBudget(QTreeWidgetItem *item);
+
+  /**
+    * Sets the whole item to be shown with negative colors
+    */
+  void setNegative(QTreeWidgetItem *item, bool isNegative);
+  void showAmount(QTreeWidgetItem *item, int column, const MyMoneyMoney &amount, const MyMoneySecurity &security);
+  void adjustParentValue(QTreeWidgetItem *item, int column, const MyMoneyMoney& value);
+  void setValue(QTreeWidgetItem *item, int column, const MyMoneyMoney &amount, const QDate &forecastDate);
+  void setAmount(QTreeWidgetItem *item, int column, const MyMoneyMoney &amount);
+
+  bool m_needReload[MaxViewTabs];
+
+  QTreeWidgetItem* m_totalItem;
+  QTreeWidgetItem* m_assetItem;
+  QTreeWidgetItem* m_liabilityItem;
+  QTreeWidgetItem* m_incomeItem;
+  QTreeWidgetItem* m_expenseItem;
 
   QLayout* m_chartLayout;
   KReportChartView* m_forecastChart;

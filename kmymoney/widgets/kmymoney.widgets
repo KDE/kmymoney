@@ -13,9 +13,6 @@ ToolTip=The KMyMoney edit widget
 [kMyMoneyDateInput]
 ToolTip=The KMyMoney date input widget
 
-[KMyMoneyAccountTree]
-ToolTip=The KMyMoney widget that displays an account tree
-
 [KMyMoneySecuritySelector]
 ToolTip=The KMyMoney widget for selecting a security
 IncludeFile=kmymoneycurrencyselector.h

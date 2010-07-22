@@ -338,42 +338,34 @@
       <attribute name="title">
        <string>Summary</string>
       </attribute>
-      <layout class="QVBoxLayout">
-       <property name="margin">
-        <number>0</number>
-       </property>
-       <item>
-        <layout class="QHBoxLayout">
-         <item>
-          <widget class="KMyMoneyAccountTreeForecast" name="m_summaryList" native="true">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>2</horstretch>
-             <verstretch>1</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="midLineWidth" stdset="0">
-            <number>1</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="KTextEdit" name="m_adviceText">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>1</horstretch>
-             <verstretch>1</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <layout class="QHBoxLayout"/>
+       </item>
+       <item>
+        <widget class="QSplitter" name="splitter">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QTreeWidget" name="m_summaryList">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>1</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+          <column>
+           <property name="text">
+            <string notr="true">1</string>
+           </property>
+          </column>
+         </widget>
+         <widget class="KTextEdit" name="m_adviceText">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -386,7 +378,19 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="KMyMoneyAccountTreeForecast" name="m_forecastList" native="true"/>
+        <widget class="QTreeWidget" name="m_forecastList">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <column>
+          <property name="text">
+           <string notr="true">1</string>
+          </property>
+         </column>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -421,7 +425,13 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="KMyMoneyAccountTreeForecast" name="m_budgetList" native="true"/>
+        <widget class="QTreeWidget" name="m_budgetList">
+         <column>
+          <property name="text">
+           <string notr="true">1</string>
+          </property>
+         </column>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -461,11 +471,6 @@
    <class>KTextEdit</class>
    <extends>QTextEdit</extends>
    <header>ktextedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyAccountTreeForecast</class>
-   <extends>QWidget</extends>
-   <header>kmymoneyaccounttreeforecast.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

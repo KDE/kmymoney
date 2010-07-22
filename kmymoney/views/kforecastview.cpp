@@ -39,7 +39,6 @@
 #include "kmymoney.h"
 #include "kmymoneyutils.h"
 #include "mymoneyforecast.h"
-#include "kmymoneyaccounttreeforecast.h"
 #include "pivottable.h"
 #include "pivotgrid.h"
 
@@ -65,7 +64,7 @@ KForecastView::KForecastView(QWidget *parent) :
 
   m_forecastList->setAllColumnsShowFocus(true);
   m_summaryList->setAllColumnsShowFocus(true);
-  m_advancedList->setAllColumnsShowFocus(true);
+  m_budgetList->setAllColumnsShowFocus(true);
   m_advancedList->setAlternatingRowColors(true);
 
   m_forecastChart->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -186,8 +185,6 @@ void KForecastView::loadListView(void)
   MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  m_forecastList->setBaseCurrency(file->baseCurrency());
-
   //get the settings from current page
   forecast.setForecastDays(m_forecastDays->value());
   forecast.setAccountsCycle(m_accountsCycle->value());
@@ -196,22 +193,43 @@ void KForecastView::loadListView(void)
   forecast.setHistoryMethod(m_historyMethod->checkedId());
   forecast.doForecast();
 
-  //clear the list, including columns
-  m_forecastList->clearColumns();
+  m_forecastList->setIconSize(QSize(22, 22));
+  m_forecastList->setSortingEnabled(true);
+  m_forecastList->sortByColumn(0, Qt::Ascending);
 
   //add columns
-  m_forecastList->showAccount();
-  m_forecastList->showDetailed(forecast);
+  QStringList headerLabels;
+  headerLabels << i18n("Account");
+
+  //add cycle interval columns
+  headerLabels << i18nc("Today's forecast", "Current");
+
+  for (int i = 1; i <= forecast.forecastDays(); ++i) {
+    QDate forecastDate = QDate::currentDate().addDays(i);
+    headerLabels << KGlobal::locale()->formatDate(forecastDate, KLocale::LongDate);
+  }
+
+  //add variation columns
+  headerLabels << i18n("Total variation");
+
+  //set the columns
+  m_forecastList->setHeaderLabels(headerLabels);
 
   //add default rows
   addTotalRow(m_forecastList, forecast);
   addAssetLiabilityRows(forecast);
 
   //load asset and liability forecast accounts
-  loadAccounts(forecast, file->asset(), m_assetItem, KMyMoneyAccountTreeForecastItem::eDetailed);
-  loadAccounts(forecast, file->liability(), m_liabilityItem, KMyMoneyAccountTreeForecastItem::eDetailed);
+  loadAccounts(forecast, file->asset(), m_assetItem, eDetailed);
+  loadAccounts(forecast, file->liability(), m_liabilityItem, eDetailed);
 
-  m_forecastList->show();
+  QTreeWidgetItem *header = m_advancedList->headerItem();
+  for (int i = 0; i < headerLabels.size(); ++i) {
+    if (i && header) {
+      header->setData(i, Qt::TextAlignmentRole, Qt::AlignRight);
+    }
+    m_forecastList->resizeColumnToContents(i);
+  }
 }
 
 void KForecastView::loadSummaryView(void)
@@ -223,8 +241,6 @@ void KForecastView::loadSummaryView(void)
 
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  m_summaryList->setBaseCurrency(file->baseCurrency());
-
   //get the settings from current page
   forecast.setForecastDays(m_forecastDays->value());
   forecast.setAccountsCycle(m_accountsCycle->value());
@@ -233,19 +249,47 @@ void KForecastView::loadSummaryView(void)
   forecast.setHistoryMethod(m_historyMethod->checkedId());
   forecast.doForecast();
 
-  //clear the list, including columns
-  m_summaryList->clearColumns();
-
   //add columns
-  m_summaryList->showAccount();
-  m_summaryList->showSummary(forecast);
+  QStringList headerLabels;
+  headerLabels << i18n("Account");
+  headerLabels << i18nc("Today's forecast", "Current");
+
+  //if beginning of forecast is today, set the begin day to next cycle to avoid repeating the first cycle
+  int daysToBeginDay;
+  if (QDate::currentDate() < forecast.beginForecastDate()) {
+    daysToBeginDay = QDate::currentDate().daysTo(forecast.beginForecastDate());
+  } else {
+    daysToBeginDay = forecast.accountsCycle();
+  }
+  for (int i = 0; ((i*forecast.accountsCycle()) + daysToBeginDay) <= forecast.forecastDays(); ++i) {
+    int intervalDays = ((i * forecast.accountsCycle()) + daysToBeginDay);
+    headerLabels << i18np("1 day", "%1 days", intervalDays);
+  }
+
+  //add variation columns
+  headerLabels << i18n("Total variation");
+
+  //set the columns
+  m_summaryList->setHeaderLabels(headerLabels);
+
+  m_summaryList->setIconSize(QSize(22, 22));
+  m_summaryList->setSortingEnabled(true);
+  m_summaryList->sortByColumn(0, Qt::Ascending);
 
   //add default rows
   addTotalRow(m_summaryList, forecast);
   addAssetLiabilityRows(forecast);
 
-  loadAccounts(forecast, file->asset(), m_assetItem, KMyMoneyAccountTreeForecastItem::eSummary);
-  loadAccounts(forecast, file->liability(), m_liabilityItem, KMyMoneyAccountTreeForecastItem::eSummary);
+  loadAccounts(forecast, file->asset(), m_assetItem, eSummary);
+  loadAccounts(forecast, file->liability(), m_liabilityItem, eSummary);
+
+  QTreeWidgetItem *header = m_advancedList->headerItem();
+  for (int i = 0; i < headerLabels.size(); ++i) {
+    if (i && header) {
+      header->setData(i, Qt::TextAlignmentRole, Qt::AlignRight);
+    }
+    m_summaryList->resizeColumnToContents(i);
+  }
 
   //Add comments to the advice list
   m_adviceText->clear();
@@ -366,7 +410,6 @@ void KForecastView::loadSummaryView(void)
       m_adviceText->append(msg);
     }
   }
-  m_summaryList->show();
   m_adviceText->show();
 }
 
@@ -522,8 +565,6 @@ void KForecastView::loadBudgetView(void)
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
 
-  m_budgetList->setBaseCurrency(file->baseCurrency());
-
   //get the settings from current page and calculate this year based on last year
   QDate historyEndDate = QDate(QDate::currentDate().year() - 1, 12, 31);
   QDate historyStartDate = historyEndDate.addDays(-m_accountsCycle->value() * m_forecastCycles->value());
@@ -534,22 +575,45 @@ void KForecastView::loadBudgetView(void)
   MyMoneyBudget budget;
   forecast.createBudget(budget, historyStartDate, historyEndDate, forecastStartDate, forecastEndDate, false);
 
-  //clear the list, including columns
-  m_budgetList->clearColumns();
+  m_budgetList->setIconSize(QSize(22, 22));
+  m_budgetList->setSortingEnabled(true);
+  m_budgetList->sortByColumn(0, Qt::Ascending);
 
   //add columns
-  m_budgetList->showAccount();
-  m_budgetList->showBudget(forecast);
+  QStringList headerLabels;
+  headerLabels << i18n("Account");
+
+  {
+    QDate forecastStartDate = forecast.forecastStartDate();
+    QDate forecastEndDate = forecast.forecastEndDate();
+
+    //add cycle interval columns
+    QDate f_date = forecastStartDate;
+    for (; f_date <= forecastEndDate; f_date = f_date.addMonths(1)) {
+      headerLabels << QDate::longMonthName(f_date.month());
+    }
+  }
+  //add total column
+  headerLabels << i18nc("Total balance", "Total");
+
+  //set the columns
+  m_budgetList->setHeaderLabels(headerLabels);
 
   //add default rows
   addTotalRow(m_budgetList, forecast);
   addIncomeExpenseRows(forecast);
 
   //load income and expense budget accounts
-  loadAccounts(forecast, file->income(), m_incomeItem, KMyMoneyAccountTreeForecastItem::eBudget);
-  loadAccounts(forecast, file->expense(), m_expenseItem, KMyMoneyAccountTreeForecastItem::eBudget);
+  loadAccounts(forecast, file->income(), m_incomeItem, eBudget);
+  loadAccounts(forecast, file->expense(), m_expenseItem, eBudget);
 
-  m_budgetList->show();
+  QTreeWidgetItem *header = m_advancedList->headerItem();
+  for (int i = 0; i < headerLabels.size(); ++i) {
+    if (i && header) {
+      header->setData(i, Qt::TextAlignmentRole, Qt::AlignRight);
+    }
+    m_budgetList->resizeColumnToContents(i);
+  }
 }
 
 QList<MyMoneyPrice> KForecastView::getAccountPrices(const MyMoneyAccount& acc)
@@ -582,30 +646,59 @@ void KForecastView::addAssetLiabilityRows(const MyMoneyForecast& forecast)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  QList<MyMoneyPrice> basePrices;
-  m_assetItem = new KMyMoneyAccountTreeForecastItem(m_totalItem, file->asset(), forecast, basePrices, file->baseCurrency());
-  m_assetItem->setOpen(true);
-  m_liabilityItem = new KMyMoneyAccountTreeForecastItem(m_totalItem, file->liability(), forecast, basePrices, file->baseCurrency());
-  m_liabilityItem->setOpen(true);
+  //QList<MyMoneyPrice> basePrices;
+  m_assetItem = new QTreeWidgetItem(m_totalItem);
+  //basePrices, file->baseCurrency());
+  m_assetItem->setText(0, file->asset().name());
+  m_assetItem->setIcon(0, file->asset().accountPixmap());
+  m_assetItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
+  m_assetItem->setData(0, AccountRole, QVariant::fromValue(file->asset()));
+  m_assetItem->setExpanded(true);
+
+  m_liabilityItem = new QTreeWidgetItem(m_totalItem);
+  //basePrices, file->baseCurrency());
+  m_liabilityItem->setText(0, file->liability().name());
+  m_liabilityItem->setIcon(0, file->liability().accountPixmap());
+  m_liabilityItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
+  m_liabilityItem->setData(0, AccountRole, QVariant::fromValue(file->liability()));
+  m_liabilityItem->setExpanded(true);
 }
 
 void KForecastView::addIncomeExpenseRows(const MyMoneyForecast& forecast)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  QList<MyMoneyPrice> basePrices;
-  m_incomeItem = new KMyMoneyAccountTreeForecastItem(m_totalItem, file->income(), forecast, basePrices, file->baseCurrency());
-  m_incomeItem->setOpen(true);
-  m_expenseItem = new KMyMoneyAccountTreeForecastItem(m_totalItem, file->expense(), forecast, basePrices, file->baseCurrency());
-  m_expenseItem->setOpen(true);
+  //QList<MyMoneyPrice> basePrices;
+  m_incomeItem = new QTreeWidgetItem(m_totalItem);
+  //basePrices, file->baseCurrency());
+  m_incomeItem->setText(0, file->income().name());
+  m_incomeItem->setIcon(0, file->income().accountPixmap());
+  m_incomeItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
+  m_incomeItem->setData(0, AccountRole, QVariant::fromValue(file->income()));
+  m_incomeItem->setExpanded(true);
+
+  m_expenseItem = new QTreeWidgetItem(m_totalItem);
+  //basePrices, file->baseCurrency());
+  m_expenseItem->setText(0, file->expense().name());
+  m_expenseItem->setIcon(0, file->expense().accountPixmap());
+  m_expenseItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
+  m_expenseItem->setData(0, AccountRole, QVariant::fromValue(file->expense()));
+  m_expenseItem->setExpanded(true);
 }
 
-void KForecastView::addTotalRow(KMyMoneyAccountTreeForecast* forecastList, const MyMoneyForecast& forecast)
+void KForecastView::addTotalRow(QTreeWidget* forecastList, const MyMoneyForecast& forecast)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  m_totalItem = new KMyMoneyAccountTreeForecastItem(forecastList, file->asset(), forecast, file->baseCurrency(), i18nc("Total balance", "Total"));
-  m_totalItem->setOpen(true);
+  m_totalItem = new QTreeWidgetItem(forecastList);
+  QFont font;
+  font.setBold(true);
+  m_totalItem->setFont(0, font);
+  m_totalItem->setText(0, i18nc("Total balance", "Total"));//file->baseCurrency()
+  m_totalItem->setIcon(0, file->asset().accountPixmap());
+  m_totalItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
+  m_totalItem->setData(0, AccountRole, QVariant::fromValue(file->asset()));
+  m_totalItem->setExpanded(true);
 }
 
 bool KForecastView::includeAccount(MyMoneyForecast& forecast, const MyMoneyAccount& acc)
@@ -628,12 +721,12 @@ bool KForecastView::includeAccount(MyMoneyForecast& forecast, const MyMoneyAccou
   return false;
 }
 
-void KForecastView::loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount& account, KMyMoneyAccountTreeForecastItem* parentItem, int forecastType)
+void KForecastView::loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount& account, QTreeWidgetItem* parentItem, int forecastType)
 {
   QMap<QString, QString> nameIdx;
   QStringList accList;
   MyMoneyFile* file = MyMoneyFile::instance();
-  KMyMoneyAccountTreeForecastItem *forecastItem = 0;
+  QTreeWidgetItem *forecastItem = 0;
 
   //Get all accounts of the right type to calculate forecast
   accList = account.accountList();
@@ -669,11 +762,221 @@ void KForecastView::loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount
     //get prices
     QList<MyMoneyPrice> prices = getAccountPrices(subAccount);
 
-    forecastItem = new KMyMoneyAccountTreeForecastItem(parentItem, subAccount, forecast, prices, currency, static_cast<KMyMoneyAccountTreeForecastItem::EForecastViewType>(forecastType));
-    forecastItem->setOpen(true);
+    forecastItem = new QTreeWidgetItem(parentItem);
+    //prices, currency, static_cast<EForecastViewType>(forecastType));
+    forecastItem->setText(0, subAccount.name());
+    forecastItem->setIcon(0, subAccount.accountPixmap());
+    forecastItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
+    forecastItem->setData(0, AccountRole, QVariant::fromValue(subAccount));
+    forecastItem->setExpanded(true);
+
+    switch (forecastType) {
+    case eSummary:
+      updateSummary(forecastItem);
+      break;
+    case eDetailed:
+      updateDetailed(forecastItem);
+      break;
+    case eBudget:
+      updateBudget(forecastItem);
+      break;
+    default:
+      break;
+  }
 
     loadAccounts(forecast, subAccount, forecastItem, forecastType);
   }
+}
+
+void KForecastView::updateSummary(QTreeWidgetItem *item)
+{
+  MyMoneyMoney amountMM;
+  int it_c = 1; // iterator for the columns of the listview
+  MyMoneyFile* file = MyMoneyFile::instance();
+  int daysToBeginDay;
+
+  MyMoneyForecast forecast = item->data(0, ForecastRole).value<MyMoneyForecast>();
+
+  if (QDate::currentDate() < forecast.beginForecastDate()) {
+    daysToBeginDay = QDate::currentDate().daysTo(forecast.beginForecastDate());
+  } else {
+    daysToBeginDay = forecast.accountsCycle();
+  }
+
+  MyMoneyAccount account = item->data(0, AccountRole).value<MyMoneyAccount>();
+  MyMoneySecurity currency;
+  if (account.isInvest()) {
+    MyMoneySecurity underSecurity = file->security(account.currencyId());
+    currency = file->security(underSecurity.tradingCurrency());
+  } else {
+    currency = file->security(account.currencyId());
+  }
+
+
+  //add current balance column
+  QDate summaryDate = QDate::currentDate();
+  amountMM = forecast.forecastBalance(account, summaryDate);
+
+  //calculate the balance in base currency for the total row
+  setAmount(item, it_c, amountMM);
+  setValue(item, it_c, amountMM, summaryDate);
+  showAmount(item, it_c, amountMM, currency);
+  it_c++;
+
+  //iterate through all other columns
+  for (QDate summaryDate = QDate::currentDate().addDays(daysToBeginDay); summaryDate <= forecast.forecastEndDate(); summaryDate = summaryDate.addDays(forecast.accountsCycle()), ++it_c) {
+    amountMM = forecast.forecastBalance(account, summaryDate);
+
+    //calculate the balance in base currency for the total row
+    setAmount(item, it_c, amountMM);
+    setValue(item, it_c, amountMM, summaryDate);
+    showAmount(item, it_c, amountMM, currency);
+  }
+  //calculate and add variation per cycle
+  setNegative(item, forecast.accountTotalVariation(account).isNegative());
+  setAmount(item, it_c, forecast.accountTotalVariation(account));
+  setValue(item, it_c, forecast.accountTotalVariation(account), forecast.forecastEndDate());
+  showAmount(item, it_c, forecast.accountTotalVariation(account), currency);
+}
+
+void KForecastView::updateDetailed(QTreeWidgetItem *item)
+{
+  QString amount;
+  QString vAmount;
+  MyMoneyMoney vAmountMM;
+  MyMoneyFile* file = MyMoneyFile::instance();
+
+  MyMoneyAccount account = item->data(0, AccountRole).value<MyMoneyAccount>();
+
+  MyMoneySecurity currency;
+  if (account.isInvest()) {
+    MyMoneySecurity underSecurity = file->security(account.currencyId());
+    currency = file->security(underSecurity.tradingCurrency());
+  } else {
+    currency = file->security(account.currencyId());
+  }
+
+  int it_c = 1; // iterator for the columns of the listview
+
+  MyMoneyForecast forecast = item->data(0, ForecastRole).value<MyMoneyForecast>();
+
+  for (QDate forecastDate = QDate::currentDate(); forecastDate <= forecast.forecastEndDate(); ++it_c, forecastDate = forecastDate.addDays(1)) {
+    MyMoneyMoney amountMM = forecast.forecastBalance(account, forecastDate);
+
+    //calculate the balance in base currency for the total row
+    setAmount(item, it_c, amountMM);
+    setValue(item, it_c, amountMM, forecastDate);
+    showAmount(item, it_c, amountMM, currency);
+  }
+
+  //calculate and add variation per cycle
+  vAmountMM = forecast.accountTotalVariation(account);
+  setAmount(item, it_c, vAmountMM);
+  setValue(item, it_c, vAmountMM, forecast.forecastEndDate());
+  showAmount(item, it_c, vAmountMM, currency);
+}
+
+void KForecastView::updateBudget(QTreeWidgetItem *item)
+{
+  MyMoneySecurity currency;
+  MyMoneyMoney tAmountMM;
+
+  MyMoneyForecast forecast = item->data(0, ForecastRole).value<MyMoneyForecast>();
+
+  MyMoneyFile* file = MyMoneyFile::instance();
+  int it_c = 1; // iterator for the columns of the listview
+  QDate forecastDate = forecast.forecastStartDate();
+
+  MyMoneyAccount account = item->data(0, AccountRole).value<MyMoneyAccount>();
+
+  if (account.isInvest()) {
+    MyMoneySecurity underSecurity = file->security(account.currencyId());
+    currency = file->security(underSecurity.tradingCurrency());
+  } else {
+    currency = file->security(account.currencyId());
+  }
+
+  //iterate columns
+  for (; forecastDate <= forecast.forecastEndDate(); forecastDate = forecastDate.addMonths(1), ++it_c) {
+    MyMoneyMoney amountMM;
+    amountMM = forecast.forecastBalance(account, forecastDate);
+    if (account.accountType() == MyMoneyAccount::Expense)
+      amountMM = -amountMM;
+
+    tAmountMM += amountMM;
+    setAmount(item, it_c, amountMM);
+    setValue(item, it_c, amountMM, forecastDate);
+    showAmount(item, it_c, amountMM, currency);
+  }
+
+  //set total column
+  setAmount(item, it_c, tAmountMM);
+  setValue(item, it_c, tAmountMM, forecast.forecastEndDate());
+  showAmount(item, it_c, tAmountMM, currency);
+}
+
+void KForecastView::setNegative(QTreeWidgetItem *item, bool isNegative)
+{
+  if (isNegative) {
+    for (int i = 0; i < item->columnCount(); ++i) {
+      item->setForeground(i, KMyMoneyGlobalSettings::listNegativeValueColor());
+    }
+  }
+}
+
+void KForecastView::showAmount(QTreeWidgetItem* item, int column, const MyMoneyMoney& amount, const MyMoneySecurity& security)
+{
+  item->setText(column, amount.formatMoney(item->data(0, AccountRole).value<MyMoneyAccount>(), security));
+  item->setTextAlignment(column, Qt::AlignRight);
+  item->setFont(column, item->font(0));
+  if (amount.isNegative()) {
+    item->setForeground(column, KMyMoneyGlobalSettings::listNegativeValueColor());
+  }
+}
+
+void KForecastView::adjustParentValue(QTreeWidgetItem *item, int column, const MyMoneyMoney& value)
+{
+  if (!item)
+    return;
+
+  item->setData(column, ValueRole, QVariant::fromValue(item->data(column, ValueRole).value<MyMoneyMoney>() + value));
+  item->setData(column, ValueRole, QVariant::fromValue(item->data(column, ValueRole).value<MyMoneyMoney>().convert(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
+
+  // if the entry has no children,
+  // or it is the top entry
+  // or it is currently not open
+  // we need to display the value of it
+  if (item->childCount() == 0 || !item->parent() || (!item->isExpanded() && item->childCount() > 0) || (item->parent() && !item->parent()->parent())) {
+    if (item->childCount() > 0)
+      item->setText(column, " ");
+    MyMoneyMoney amount = item->data(column, ValueRole).value<MyMoneyMoney>();
+    showAmount(item, column, amount, MyMoneyFile::instance()->baseCurrency());
+  }
+
+  // now make sure, the upstream accounts also get notified about the value change
+  adjustParentValue(item->parent(), column, value);
+}
+
+void KForecastView::setValue(QTreeWidgetItem* item, int column, const MyMoneyMoney& amount, const QDate& forecastDate)
+{
+  MyMoneyAccount account = item->data(0, AccountRole).value<MyMoneyAccount>();
+  //calculate the balance in base currency for the total row
+  if (account.currencyId() != MyMoneyFile::instance()->baseCurrency().id()) {
+    ReportAccount repAcc = ReportAccount(account.id());
+    MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(forecastDate);
+    MyMoneyMoney baseAmountMM = amount * curPrice;
+    MyMoneyMoney value = baseAmountMM.convert(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction());
+    item->setData(column, ValueRole, QVariant::fromValue(value));
+    adjustParentValue(item->parent(), column, value);
+  } else {
+    item->setData(column, ValueRole, QVariant::fromValue(item->data(column, ValueRole).value<MyMoneyMoney>() + amount));
+    adjustParentValue(item->parent(), column, amount);
+  }
+}
+
+void KForecastView::setAmount(QTreeWidgetItem* item, int column, const MyMoneyMoney& amount)
+{
+  item->setData(column, AmountRole, QVariant::fromValue(amount));
 }
 
 void KForecastView::loadChartView(void)
