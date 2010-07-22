@@ -366,8 +366,6 @@ void KReportsView::loadView(void)
 {
   ::timetrace("Start KReportsView::loadView");
 
-  QString cm = "KReportsView::loadView:";
-
   // remember the id of the current selected item
   QTreeWidgetItem* item = m_tocTreeWidget->currentItem();
   QString selectedItem = (item) ? item->text(0) : QString();
@@ -595,10 +593,7 @@ void KReportsView::loadView(void)
   m_tocTreeWidget->setUpdatesEnabled(false);
 
   // expand all top-level items
-  for (int i = 0; i < m_tocTreeWidget->topLevelItemCount(); i++) {
-    QTreeWidgetItem* item = m_tocTreeWidget->topLevelItem(i);
-    item->setExpanded(true);
-  }
+  m_tocTreeWidget->expandAll();
 
   // resize columns
   m_tocTreeWidget->resizeColumnToContents(0);
@@ -649,10 +644,10 @@ void KReportsView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,
     else if (command == "delete")
       slotDelete();
     else
-      qDebug("Unknown command '%s' in KReportsView::slotOpenUrl()", qPrintable(command));
+      qWarning() << i18n("Unknown command '%1' in KReportsView::slotOpenUrl()", qPrintable(command));
 
   } else {
-    qDebug("Unknown view '%s' in KReportsView::slotOpenUrl()", qPrintable(view));
+    qWarning() << i18n("Unknown view '%1' in KReportsView::slotOpenUrl()", qPrintable(view));
   }
 }
 
@@ -784,6 +779,9 @@ void KReportsView::slotConfigure(void)
           // also inform user
           KMessageBox::error(m_reportTabWidget, error, i18n("Critical Error"));
 
+          // cleanup
+          delete dlg;
+
           return;
         }
 
@@ -838,6 +836,9 @@ void KReportsView::slotDuplicate(void)
         // also inform user
         KMessageBox::error(m_reportTabWidget, error, i18n("Critical Error"));
 
+        // cleanup
+        delete dlg;
+
         return;
       }
 
@@ -846,7 +847,14 @@ void KReportsView::slotDuplicate(void)
 
       addReportTab(newReport);
     } catch (MyMoneyException* e) {
-      qDebug("Cannot add report");
+      QString error = i18n("Cannot add report, reason: \"%1\"", e->what());
+
+      // write to messagehandler
+      qWarning() << cm << error;
+
+      // also inform user
+      KMessageBox::error(m_reportTabWidget, error, i18n("Critical Error"));
+
       delete e;
     }
   }
@@ -1056,8 +1064,6 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
 
 void KReportsView::slotListContextMenu(const QPoint & p)
 {
-  QString cm = "KReportsView::slotListContextMenu";
-
   QTreeWidgetItem *item = m_tocTreeWidget->itemAt(p);
 
   if (!item) {

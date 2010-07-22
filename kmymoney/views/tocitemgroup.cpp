@@ -1,5 +1,5 @@
 /***************************************************************************
-                          tocitem.cpp  -  description
+                          tocitemgroup.cpp  -  description
                              -------------------
     begin                : Sat Jul 03 2010
     copyright            : (C) Bernd Gonsior
