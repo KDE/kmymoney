@@ -17,6 +17,16 @@
 <title>File Formats</title>
 
 <para>
+  Unless you choose to use a <link linkend="details.database">relational
+  database</link>, &kappname; will store all your financial information in a
+  file ending in .kmy.  Also, unless you use a <link
+  linkend="firsttime.launch">command line option</link> that tells it not to do
+  so, when you launch &kappname;, it will open the last file it had open.
+  However, it is important to know that there is more than one type of file
+  &kappname; can use to hold your financial data.
+</para>
+
+<para>
   This chapter describes the formats in which &kappname; stores its data in
   permanent form on the user's storage device. In general, &kappname; stores its
   information in form of an &XML; document. Depending on the actual format, this
@@ -152,7 +162,8 @@
   case you lose your own private key. This is possible because the data is not
   only encrypted for your own key, but also for the &kappname; recover key. This
   key is only available to selected &kappname; developers (at the time of
-  writing only to the author).
+  writing only to the author).  As of the release of &kappname; version 4.5, the
+  release key is set to expire on 3 January 2015.
 </para>
 
 <para>
@@ -168,17 +179,28 @@
 <sect1 id="details.formats.anonymous">
 <title>Anonymous file</title>
 <para>
-  This format is not intended to be used for normal data storage. It is
-  supported in case of a problem as a method of supplying the &kappname;
-  development team with your file without disclosing any of your financial
-  data. If instructed by the developers, use the <guimenuitem>Save
-  as...</guimenuitem> menu item to store your data in anonymous format by
-  selecting <literal role="extension">.anon.xml</literal> as the file
-  extension. To verify that your problem still exists, reload this anonymized
-  file and try to duplicate your problem. If the problem is still present, send
-  the file to the developer mailing list at &devlist; for further
-  investigation. If the problem does not show ... well, I don't want to think
-  about this scenario right now.
+  This format is not intended to be used for normal data storage.  It is
+  supported so that in case of a problem, you can supply the &kappname;
+  development team with your file without disclosing any of the confidential
+  details in your financial data.  For example, it changes institution, account,
+  payee, and category names to strings such as "I000001" and "A000001," it makes
+  similar changes to all data such as account numbers, and it also randomly
+  changes the amounts of transactions.
+</para>
+
+<para>
+  If instructed by the developers, use the <guimenuitem>Save as...</guimenuitem>
+  menu item to store your data in anonymous format by selecting <literal
+  role="filter">Anonymous files</literal> as the filter. This also changes the
+  file extension to <literal role="extension">.anon.xml</literal>.
+</para>
+
+<para>
+  To verify that your problem still exists, reload this anonymized
+  file and try to duplicate your problem. If the problem is still
+  present, send the file to the developer mailing list at &devlist;
+  for further investigation. If the problem does not show ... well, I
+  don't want to think about this scenario right now.
 </para>
 </sect1>
 </chapter>
