@@ -4,8 +4,14 @@
 
 <para>
   We have been working hard to make this release better and easier to use in
-  every way. We have also made quite a few improvements. We are confident you 
+  every way. We have also made quite a few improvements. We are confident you
   will like what you see.
+</para>
+
+<para>
+  This is the first full release of &kappname; for KDE4.  There have been no
+  major changes in functionality from the 1.0 release, but the user interface
+  has been improved, and a number of bugs have been eliminated.
 </para>
 
 <para>
@@ -16,6 +22,12 @@
   <listitem>
     <para>
       <link linkend="firsttime.mainwindow">Runs natively on KDE4</link>
+    </para>
+  </listitem> 
+
+  <listitem>
+    <para>
+      Runs on all operating systems supported by KDE
     </para>
   </listitem> 
   
@@ -40,10 +52,11 @@
 
   <listitem>
     <para>
-      Runs on all operating systems supported by KDE
+      The consistency checks runs automatically before saving your data, it now
+      checks for a wider range of problems, and it automatically corrects many
+      of them.
     </para>
   </listitem> 
 </itemizedlist>
 
 </chapter>
-
