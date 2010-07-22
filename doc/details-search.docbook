@@ -149,9 +149,8 @@
   button, all accounts are marked for searching. If you click the
   <guibutton>None</guibutton> button, no accounts will be marked for
   searching. Individual accounts can be marked or unmarked by clicking on the
-  box next to the account name using the left mouse button. A complete hierarchy
-  of accounts can be marked or unmarked by clicking on the box using the right
-  mouse button.
+  box next to the account name using the &LMB;. A complete hierarchy of accounts
+  can be marked or unmarked by clicking on the box using the &RMB;.
 </para>
 </sect2>
 
@@ -240,9 +239,8 @@
 
 <para>
   Individual categories can be marked or unmarked by clicking on the box next to
-  the category name using the left mouse button. A complete hierarchy of
-  categories can be marked or unmarked by clicking on the box using the right
-  mouse button.
+  the category name using the &LMB;. A complete hierarchy of categories can be
+  marked or unmarked by clicking on the box using the &RMB;.
 </para>
 </sect2>
 
