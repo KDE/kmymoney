@@ -78,7 +78,8 @@ public:
          Page_Duration, Page_Payment, Page_FinalPayment,
          Page_CalculationOverview, Page_NewPayments, Page_InterestCategory,
          Page_AdditionalFees, Page_Schedule, Page_SummaryEdit,
-         Page_AssetAccount, Page_Summary };
+         Page_AssetAccount, Page_Summary
+       };
 
   KNewLoanWizard(QWidget *parent = 0);
   ~KNewLoanWizard();
@@ -173,7 +174,7 @@ signals:
     * @sa KMyMoneyCombo::createItem()
     *
     * @param txt The name of the payee to be created
-    * @param id A connected slot should store the id of the created object 
+    * @param id A connected slot should store the id of the created object
     * in this variable
     */
   void createPayee(const QString& txt, QString& id);

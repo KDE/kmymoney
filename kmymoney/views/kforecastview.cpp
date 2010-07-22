@@ -504,16 +504,16 @@ void KForecastView::loadAdvancedView(void)
     }
     it_c++;
   }
-  
+
   // make sure all data is shown
   QTreeWidgetItem *header = m_advancedList->headerItem();
   for (int i = 0; i < headerLabels.size(); ++i) {
-    if(i && header) {
+    if (i && header) {
       header->setData(i, Qt::TextAlignmentRole, Qt::AlignRight);
     }
     m_advancedList->resizeColumnToContents(i);
   }
-  
+
   m_advancedList->show();
 }
 

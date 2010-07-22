@@ -37,7 +37,7 @@ class KPriceTreeItem : public QTreeWidgetItem
 public:
   KPriceTreeItem(QTreeWidget* parent);
 
-  bool operator<( const QTreeWidgetItem &otherItem ) const;
+  bool operator<(const QTreeWidgetItem &otherItem) const;
 
   enum PriceItemDataRole {
     ScheduleIdRole = Qt::UserRole,

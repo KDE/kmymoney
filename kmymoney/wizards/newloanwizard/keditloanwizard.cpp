@@ -71,8 +71,8 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent)
   if (m_account.openingDate() > QDate::currentDate()) {
     //FIXME: port
     m_effectiveDatePage->m_effectiveDateNoteLabel->setText(QString("\n") + i18n(
-                                        "Note: you will not be able to modify this account today, because the opening date \"%1\" is in the future. "
-                                        "Please revisit this dialog when the time has come.", KGlobal::locale()->formatDate(m_account.openingDate())));
+          "Note: you will not be able to modify this account today, because the opening date \"%1\" is in the future. "
+          "Please revisit this dialog when the time has come.", KGlobal::locale()->formatDate(m_account.openingDate())));
   } else {
     m_effectiveDatePage->m_effectiveDateNoteLabel->hide();
   }

@@ -52,8 +52,8 @@ void EffectiveDateWizardPage::initializePage()
  */
 bool EffectiveDateWizardPage::isComplete() const
 {
-  return ! (m_effectiveChangeDateEdit->date() < qobject_cast<KNewLoanWizard*>(wizard())->account().openingDate()
-        || m_effectiveChangeDateEdit->date() > QDate::currentDate());
+  return !(m_effectiveChangeDateEdit->date() < qobject_cast<KNewLoanWizard*>(wizard())->account().openingDate()
+           || m_effectiveChangeDateEdit->date() > QDate::currentDate());
   return true;
 }
 

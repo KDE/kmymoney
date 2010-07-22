@@ -49,8 +49,7 @@ class KEndingBalanceDlg::Private
 public:
 
   explicit Private(int numPages)
-    : m_pages(numPages, true)
-  {}
+      : m_pages(numPages, true) {}
 
   MyMoneyTransaction        m_tInterest;
   MyMoneyTransaction        m_tCharges;

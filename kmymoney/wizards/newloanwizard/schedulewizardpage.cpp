@@ -49,8 +49,8 @@ ScheduleWizardPage::ScheduleWizardPage(QWidget *parent)
 bool ScheduleWizardPage::isComplete() const
 {
   return m_nextDueDateEdit->date().isValid()
-        && m_nextDueDateEdit->date() >= field("firstDueDateEdit").toDate()
-        && m_paymentAccountEdit->selectedItems().count() > 0;
+         && m_nextDueDateEdit->date() >= field("firstDueDateEdit").toDate()
+         && m_paymentAccountEdit->selectedItems().count() > 0;
 }
 
 void ScheduleWizardPage::initializePage()

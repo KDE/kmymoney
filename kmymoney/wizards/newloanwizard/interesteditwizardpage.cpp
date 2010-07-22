@@ -45,7 +45,7 @@ bool InterestEditWizardPage::isComplete() const
 {
   //FIXME: this only exists in the EditLoanWizard subclass
   return field("newPaymentEditValid").toBool()
-        || m_newInterestRateEdit->isValid();
+         || m_newInterestRateEdit->isValid();
 }
 
 #include "interesteditwizardpage.moc"

@@ -1813,8 +1813,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
     QPair<QString, QString> pricePair;
     //setup the reverse, which can also be used for rate conversion
     QPair<QString, QString> reversePricePair;
-    if((*accForeignList_it).isInvest())
-    {
+    if ((*accForeignList_it).isInvest()) {
       //if it is a stock, we have to search for a price from its stock to the currency of the account
       QString securityId = (*accForeignList_it).currencyId();
       QString tradingCurrencyId = security(securityId).tradingCurrency();
@@ -1830,7 +1829,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
 
     //compare the first price with the opening date of the account
     if ((!securityPriceDate.contains(pricePair) || securityPriceDate.value(pricePair) > (*accForeignList_it).openingDate())
-      && (!securityPriceDate.contains(reversePricePair) || securityPriceDate.value(reversePricePair) > (*accForeignList_it).openingDate())) {
+        && (!securityPriceDate.contains(reversePricePair) || securityPriceDate.value(reversePricePair) > (*accForeignList_it).openingDate())) {
       if (firstInvProblem) {
         firstInvProblem = false;
         rc << i18n("* Potential problem with investments/currencies");

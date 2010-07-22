@@ -53,7 +53,7 @@ LoanAmountWizardPage::LoanAmountWizardPage(QWidget *parent)
 bool LoanAmountWizardPage::isComplete() const
 {
   return !(field("thisYearPaymentButton").toBool()
-        && !m_loanAmountEdit->isValid());
+           && !m_loanAmountEdit->isValid());
 }
 
 void LoanAmountWizardPage::initializePage()
@@ -65,8 +65,8 @@ void LoanAmountWizardPage::initializePage()
            "empty to be calculated."));
   } else if (field("thisYearPaymentButton").toBool()) {
     m_balanceLabel->setText(QString("\n") +
-      i18n("Please enter the remaining loan amount of last years final "
-           "statement in the field below. You should not leave this field empty."));
+                            i18n("Please enter the remaining loan amount of last years final "
+                                 "statement in the field below. You should not leave this field empty."));
 
   }
 }

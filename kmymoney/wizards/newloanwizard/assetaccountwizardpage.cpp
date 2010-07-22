@@ -61,17 +61,17 @@ AssetAccountWizardPage::AssetAccountWizardPage(QWidget *parent)
 bool AssetAccountWizardPage::isComplete() const
 {
   if (m_dontCreatePayoutCheckBox->isChecked()) {
-      m_assetAccountEdit->setEnabled(false);
-      m_paymentDate->setEnabled(false);
-      m_createNewAssetButton->setEnabled(false);
-      return true;
+    m_assetAccountEdit->setEnabled(false);
+    m_paymentDate->setEnabled(false);
+    m_createNewAssetButton->setEnabled(false);
+    return true;
   } else {
-      m_assetAccountEdit->setEnabled(true);
-      m_paymentDate->setEnabled(true);
-      m_createNewAssetButton->setEnabled(true);
-      if (!m_assetAccountEdit->selectedItems().isEmpty()
-          && m_paymentDate->date().isValid())
-        return true;
+    m_assetAccountEdit->setEnabled(true);
+    m_paymentDate->setEnabled(true);
+    m_createNewAssetButton->setEnabled(true);
+    if (!m_assetAccountEdit->selectedItems().isEmpty()
+        && m_paymentDate->date().isValid())
+      return true;
   }
   return false;
 }

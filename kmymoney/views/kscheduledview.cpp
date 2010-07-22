@@ -277,7 +277,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     delete e;
   }
 
-  for(int i = 0; i < m_scheduleTree->columnCount(); ++i) {
+  for (int i = 0; i < m_scheduleTree->columnCount(); ++i) {
     m_scheduleTree->resizeColumnToContents(i);
   }
 
@@ -290,12 +290,12 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
   KScheduleTreeItem* item = new KScheduleTreeItem(parent);
   item->setData(0, Qt::UserRole, QVariant::fromValue(schedule));
   item->setData(0, KScheduleTreeItem::OrderRole, schedule.name());
-  if(!schedule.isFinished()) {
-    if(schedule.isOverdue()) {
+  if (!schedule.isFinished()) {
+    if (schedule.isOverdue()) {
       item->setIcon(0, KIcon("view-calendar-upcoming-events"));
       QBrush brush = item->foreground(0);
       brush.setColor(Qt::red);
-      for(int i = 0; i < m_scheduleTree->columnCount(); ++i) {
+      for (int i = 0; i < m_scheduleTree->columnCount(); ++i) {
         item->setForeground(i, brush);
       }
     } else {
@@ -305,7 +305,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
     item->setIcon(0, KIcon("dialog-close"));
     QBrush brush = item->foreground(0);
     brush.setColor(Qt::darkGreen);
-    for(int i = 0; i < m_scheduleTree->columnCount(); ++i) {
+    for (int i = 0; i < m_scheduleTree->columnCount(); ++i) {
       item->setForeground(i, brush);
     }
   }
@@ -356,7 +356,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
     MyMoneySecurity currency = MyMoneyFile::instance()->currency(acc.currencyId());
 
     QString accName =  acc.name();
-    if(!accName.isEmpty()) {
+    if (!accName.isEmpty()) {
       item->setText(1, accName);
     } else {
       item->setText(1, "---");
@@ -374,7 +374,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
 
     MyMoneyMoney amount = split.shares().abs();
     item->setData(3, Qt::UserRole, QVariant::fromValue(amount));
-    if(!accName.isEmpty()) {
+    if (!accName.isEmpty()) {
       item->setText(3, QString("%1  ").arg(amount.formatMoney(acc, currency)));
     } else {
       //there are some cases where the schedule does not have an account

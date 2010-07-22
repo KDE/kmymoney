@@ -148,7 +148,7 @@ bool TocItem::operator<(const QTreeWidgetItem &other)const
   // this can be removed
   if (thisItemsType != otherItemsType) {
     qWarning() << cm << "comparing different types: thisItemsType:"
-               << thisItemsType << ", otherItemsType:" << otherItemsType;
+    << thisItemsType << ", otherItemsType:" << otherItemsType;
     return false;
   }
 
