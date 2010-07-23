@@ -1181,6 +1181,7 @@ void MyMoneyStorageSql::writeAccounts()
 
   QList<MyMoneyAccount> list;
   m_storage->accountList(list);
+  unsigned progress = 0;
   signalProgress(0, list.count(), "Writing Accounts...");
   if (dbList.isEmpty()) { // new table, insert standard accounts
     q.prepare(m_db.m_tables["kmmAccounts"].insertString());
@@ -1251,7 +1252,8 @@ void MyMoneyStorageSql::writeAccounts()
     } else {
       insertList << it;
     }
-    signalProgress(++m_accounts, 0);
+    signalProgress(++progress, 0);
+    ++m_accounts;
   }
 
   writeAccountList(updateList, q);
@@ -2482,7 +2484,7 @@ void MyMoneyStorageSql::deleteKeyValuePairs(const QString& kvpType, const QVaria
 void MyMoneyStorageSql::readFileInfo(void)
 {
   DBG("*** Entering MyMoneyStorageSql::readFileInfo");
-  signalProgress(0, 18, QObject::tr("Loading file information..."));
+  signalProgress(0, 1, QObject::tr("Loading file information..."));
   MyMoneyDbTable& t = m_db.m_tables["kmmFileInfo"];
   QSqlQuery q(*this);
   q.prepare(t.selectAllString());
@@ -2542,7 +2544,8 @@ void MyMoneyStorageSql::readInstitutions(void)
 const QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QStringList& idList, bool forUpdate) const
 {
   DBG("*** Entering MyMoneyStorageSql::fetchInstitutions");
-  signalProgress(0, m_institutions, QObject::tr("Loading institutions..."));
+  int institutionsNb = (idList.isEmpty() ? m_institutions : idList.size());
+  signalProgress(0, institutionsNb, QObject::tr("Loading institutions..."));
   int progress = 0;
   QMap<QString, MyMoneyInstitution> iList;
   unsigned long lastId = 0;
@@ -2638,7 +2641,8 @@ const QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringLi
   DBG("*** Entering MyMoneyStorageSql::fetchPayees");
   MyMoneyDbTransaction trans(const_cast <MyMoneyStorageSql&>(*this), Q_FUNC_INFO);
   if (m_displayStatus) {
-    signalProgress(0, m_payees, QObject::tr("Loading payees..."));
+    int payeesNb = (idList.isEmpty() ? m_payees : idList.size());
+    signalProgress(0, payeesNb, QObject::tr("Loading payees..."));
   } else {
 //    if (m_payeeListRead) return;
   }
@@ -2716,7 +2720,8 @@ const QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringLi
 const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStringList& idList, bool forUpdate) const
 {
   DBG("*** Entering MyMoneyStorageSql::fetchAccounts");
-  signalProgress(0, m_accounts, QObject::tr("Loading accounts..."));
+  int accountsNb = (idList.isEmpty() ? m_accounts : idList.size());
+  signalProgress(0, accountsNb, QObject::tr("Loading accounts..."));
   int progress = 0;
   QMap<QString, MyMoneyAccount> accList;
   QStringList kvpAccountList(idList);
@@ -2935,7 +2940,10 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
 {
   DBG("*** Entering MyMoneyStorageSql::fetchTransactions");
 //  if (m_transactionListRead) return; // all list already in memory
-  if (m_displayStatus) signalProgress(0, m_transactions, QObject::tr("Loading transactions..."));
+  if (m_displayStatus) {
+    int transactionsNb = (tidList.isEmpty() ? m_transactions : tidList.size());
+    signalProgress(0, transactionsNb, QObject::tr("Loading transactions..."));
+  }
   int progress = 0;
 //  m_payeeList.clear();
   QString whereClause = " WHERE txType = 'N' ";
@@ -3312,7 +3320,8 @@ void MyMoneyStorageSql::readSchedules(void)
 const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QStringList& idList, bool forUpdate) const
 {
   DBG("*** Entering MyMoneyStorageSql::fetchSchedules");
-  signalProgress(0, m_schedules, QObject::tr("Loading schedules..."));
+  int schedulesNb = (idList.isEmpty() ? m_schedules : idList.size());
+  signalProgress(0, schedulesNb, QObject::tr("Loading schedules..."));
   int progress = 0;
   const MyMoneyDbTable& t = m_db.m_tables["kmmSchedules"];
   QSqlQuery q(*const_cast <MyMoneyStorageSql*>(this));
@@ -3575,7 +3584,8 @@ const  MyMoneyPrice MyMoneyStorageSql::fetchSinglePrice(const QString& fromId, c
 const MyMoneyPriceList MyMoneyStorageSql::fetchPrices(const QStringList& fromIdList, const QStringList& toIdList, bool forUpdate) const
 {
   DBG("*** Entering MyMoneyStorageSql::fetchPrices");
-  signalProgress(0, m_prices, QObject::tr("Loading prices..."));
+  int pricesNb = (fromIdList.isEmpty() ? m_prices : fromIdList.size());
+  signalProgress(0, pricesNb, QObject::tr("Loading prices..."));
   int progress = 0;
   const_cast <MyMoneyStorageSql*>(this)->m_readingPrices = true;
   MyMoneyPriceList pList;
@@ -3650,7 +3660,8 @@ void MyMoneyStorageSql::readCurrencies(void)
 const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies(const QStringList& idList, bool forUpdate) const
 {
   DBG("*** Entering MyMoneyStorageSql::fetchCurrencies");
-  signalProgress(0, m_currencies, QObject::tr("Loading currencies..."));
+  int currenciesNb = (idList.isEmpty() ? m_currencies : idList.size());
+  signalProgress(0, currenciesNb, QObject::tr("Loading currencies..."));
   int progress = 0;
   QMap<QString, MyMoneySecurity> cList;
   const MyMoneyDbTable& t = m_db.m_tables["kmmCurrencies"];
@@ -3755,7 +3766,8 @@ const QMap<QString, MyMoneyReport> MyMoneyStorageSql::fetchReports(const QString
 const QMap<QString, MyMoneyBudget> MyMoneyStorageSql::fetchBudgets(const QStringList& idList, bool forUpdate) const
 {
   DBG("*** Entering MyMoneyStorageSql::fetchBudgets");
-  signalProgress(0, m_budgets, QObject::tr("Loading budgets..."));
+  int budgetsNb = (idList.isEmpty() ? m_budgets : idList.size());
+  signalProgress(0, budgetsNb, QObject::tr("Loading budgets..."));
   int progress = 0;
   const MyMoneyDbTable& t = m_db.m_tables["kmmBudgetConfig"];
   QSqlQuery q(*const_cast <MyMoneyStorageSql*>(this));

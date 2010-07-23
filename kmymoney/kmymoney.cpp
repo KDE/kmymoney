@@ -194,6 +194,7 @@ public:
       m_smtReader(0),
       m_searchDlg(0),
       m_autoSaveTimer(0),
+      m_progressTimer(0),
       m_inAutoSaving(false),
       m_transactionEditor(0),
       m_endingBalanceDlg(0),
@@ -292,6 +293,7 @@ public:
   // This is Auto Saving related
   bool                  m_autoSaveEnabled;
   QTimer*               m_autoSaveTimer;
+  QTimer*               m_progressTimer;
   int                   m_autoSavePeriod;
   bool                  m_inAutoSaving;
 
@@ -403,7 +405,10 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   }
 
   d->m_autoSaveTimer = new QTimer(this);
+  d->m_progressTimer = new QTimer(this);
+
   connect(d->m_autoSaveTimer, SIGNAL(timeout()), this, SLOT(slotAutoSave()));
+  connect(d->m_progressTimer, SIGNAL(timeout()), this, SLOT(slotStatusProgressDone()));
 
   // make sure, we get a note when the engine changes state
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotDataChanged()));
@@ -1916,11 +1921,15 @@ bool KMyMoneyApp::isReady(void)
 void KMyMoneyApp::slotStatusProgressBar(int current, int total)
 {
   if (total == -1 && current == -1) {     // reset
-    d->m_progressBar->reset();
-    d->m_progressBar->hide();
+    if (d->m_progressTimer) {
+      d->m_progressTimer->start(500);     // remove from screen in 500 msec
+      d->m_progressBar->setValue(d->m_progressBar->maximum());
+    }
 
   } else if (total != 0) {                // init
+    d->m_progressTimer->stop();
     d->m_progressBar->setMaximum(total);
+    d->m_progressBar->setValue(0);
     d->m_progressBar->show();
 
   } else {                                // update
@@ -1931,6 +1940,14 @@ void KMyMoneyApp::slotStatusProgressBar(int current, int total)
       d->m_lastUpdate = currentTime;
     }
   }
+}
+
+void KMyMoneyApp::slotStatusProgressDone(void)
+{
+  d->m_progressTimer->stop();
+  d->m_progressBar->reset();
+  d->m_progressBar->hide();
+  d->m_progressBar->setValue(0);
 }
 
 void KMyMoneyApp::progressCallback(int current, int total, const QString& msg)

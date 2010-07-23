@@ -164,45 +164,49 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
     } else if (s == "transactions") {
       qDebug("reading transactions");
       if (atts.count()) {
-        int count = atts.value(QString("count")).toUInt();
+        int count = atts.value(QLatin1String("count")).toInt();
         m_reader->signalProgress(0, count, i18n("Loading transactions..."));
         m_elementCount = 0;
       }
     } else if (s == "accounts") {
       qDebug("reading accounts");
       if (atts.count()) {
-        int count = atts.value(QString("count")).toUInt();
+        int count = atts.value(QLatin1String("count")).toInt();
         m_reader->signalProgress(0, count, i18n("Loading accounts..."));
         m_elementCount = 0;
       }
     } else if (s == "securities") {
       qDebug("reading securities");
       if (atts.count()) {
-        int count = atts.value(QString("count")).toUInt();
+        int count = atts.value(QLatin1String("count")).toInt();
         m_reader->signalProgress(0, count, i18n("Loading securities..."));
         m_elementCount = 0;
       }
     } else if (s == "currencies") {
       qDebug("reading currencies");
       if (atts.count()) {
-        int count = atts.value(QString("count")).toUInt();
+        int count = atts.value(QLatin1String("count")).toInt();
         m_reader->signalProgress(0, count, i18n("Loading currencies..."));
         m_elementCount = 0;
       }
     } else if (s == "reports") {
       qDebug("reading reports");
       if (atts.count()) {
-        int count = atts.value(QString("count")).toUInt();
+        int count = atts.value(QLatin1String("count")).toInt();
         m_reader->signalProgress(0, count, i18n("Loading reports..."));
         m_elementCount = 0;
       }
     } else if (s == "prices") {
       qDebug("reading prices");
-      m_elementCount = 0;
+      if (atts.count()) {
+        int count = atts.value(QLatin1String("count")).toInt();
+        m_reader->signalProgress(0, count, i18n("Loading prices..."));
+        m_elementCount = 0;
+      }
     } else if (s == "pricepair") {
       if (atts.count()) {
-        m_reader->d->m_fromSecurity = atts.value(QString("from"));
-        m_reader->d->m_toSecurity = atts.value(QString("to"));
+        m_reader->d->m_fromSecurity = atts.value(QLatin1String("from"));
+        m_reader->d->m_toSecurity = atts.value(QLatin1String("to"));
       }
     }
 
@@ -231,10 +235,12 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           MyMoneyTransaction t(m_baseNode);
           if (!t.id().isEmpty())
             m_reader->d->tList[t.uniqueSortKey()] = t;
+          m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == "account") {
           MyMoneyAccount a(m_baseNode);
           if (!a.id().isEmpty())
             m_reader->d->aList[a.id()] = a;
+          m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == "payee") {
           MyMoneyPayee p(m_baseNode);
           if (!p.id().isEmpty())
@@ -243,10 +249,12 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           MyMoneySecurity s(m_baseNode);
           if (!s.id().isEmpty())
             m_reader->d->secList[s.id()] = s;
+          m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == "security") {
           MyMoneySecurity s(m_baseNode);
           if (!s.id().isEmpty())
             m_reader->d->secList[s.id()] = s;
+          m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == "keyvaluepairs") {
           MyMoneyKeyValueContainer kvp(m_baseNode);
           m_reader->m_storage->setPairs(kvp.pairs());
@@ -258,14 +266,17 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           MyMoneyReport r(m_baseNode);
           if (!r.id().isEmpty())
             m_reader->d->rList[r.id()] = r;
+          m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == "budget") {
           MyMoneyBudget b(m_baseNode);
           if (!b.id().isEmpty())
             m_reader->d->bList[b.id()] = b;
         } else if (s == "fileinfo") {
           rc = m_reader->readFileInformation(m_baseNode);
+          m_reader->signalProgress(-1, -1);
         } else if (s == "user") {
           rc = m_reader->readUserInformation(m_baseNode);
+          m_reader->signalProgress(-1, -1);
         } else if (s == "scheduled_tx") {
           MyMoneySchedule s(m_baseNode);
           if (!s.id().isEmpty())
@@ -273,12 +284,12 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
         } else if (s == "price") {
           MyMoneyPrice p(m_reader->d->m_fromSecurity, m_reader->d->m_toSecurity, m_baseNode);
           m_reader->d->prList[MyMoneySecurityPair(m_reader->d->m_fromSecurity, m_reader->d->m_toSecurity)][p.date()] = p;
+          m_reader->signalProgress(++m_elementCount, 0);
         } else {
           m_errMsg = i18n("Unknown XML tag %1 found in line %2", qName, m_loc->lineNumber());
           kWarning() << m_errMsg;
           rc = false;
         }
-        m_reader->signalProgress(++m_elementCount, 0);
       } catch (MyMoneyException* e) {
         m_errMsg = i18n("Exception while creating a %1 element: %2", s, e->what());
         kWarning() << m_errMsg;
@@ -292,7 +303,6 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       // last institution read, now dump them into the engine
       m_reader->m_storage->loadInstitutions(m_reader->d->iList);
       m_reader->d->iList.clear();
-      m_reader->signalProgress(-1, -1);
     } else if (s == "accounts") {
       // last account read, now dump them into the engine
       m_reader->m_storage->loadAccounts(m_reader->d->aList);
@@ -302,7 +312,6 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       // last payee read, now dump them into the engine
       m_reader->m_storage->loadPayees(m_reader->d->pList);
       m_reader->d->pList.clear();
-      m_reader->signalProgress(-1, -1);
     } else if (s == "transactions") {
       // last transaction read, now dump them into the engine
       m_reader->m_storage->loadTransactions(m_reader->d->tList);
@@ -312,7 +321,6 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       // last schedule read, now dump them into the engine
       m_reader->m_storage->loadSchedules(m_reader->d->sList);
       m_reader->d->sList.clear();
-      m_reader->signalProgress(-1, -1);
     } else if (s == "securities") {
       // last security read, now dump them into the engine
       m_reader->m_storage->loadSecurities(m_reader->d->secList);
@@ -332,7 +340,6 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       // last budget read, now dump them into the engine
       m_reader->m_storage->loadBudgets(m_reader->d->bList);
       m_reader->d->bList.clear();
-      m_reader->signalProgress(-1, -1);
     } else if (s == "prices") {
       // last price read, now dump them into the engine
       m_reader->m_storage->loadPrices(m_reader->d->prList);
@@ -663,9 +670,9 @@ void MyMoneyStorageXML::writeAccounts(QDomElement& accounts)
 
   signalProgress(0, list.count(), i18n("Saving accounts..."));
   int i = 0;
-  for (it = list.constBegin(); it != list.constEnd(); ++it, ++i) {
+  for (it = list.constBegin(); it != list.constEnd(); ++it) {
     writeAccount(accounts, *it);
-    signalProgress(i, 0);
+    signalProgress(++i, 0);
   }
 }
 
@@ -687,9 +694,9 @@ void MyMoneyStorageXML::writeTransactions(QDomElement& transactions)
   signalProgress(0, list.count(), i18n("Saving transactions..."));
 
   int i = 0;
-  for (it = list.constBegin(); it != list.constEnd(); ++it, ++i) {
+  for (it = list.constBegin(); it != list.constEnd(); ++it) {
     writeTransaction(transactions, *it);
-    signalProgress(i, 0);
+    signalProgress(++i, 0);
   }
 }
 

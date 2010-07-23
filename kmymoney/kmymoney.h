@@ -436,6 +436,8 @@ protected slots:
   void slotManageGpgKeys(void);
   void slotKeySelected(int idx);
 
+  void slotStatusProgressDone(void);
+
 public:
   /**
     * This method checks if there is at least one asset or liability account
