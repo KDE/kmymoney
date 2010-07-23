@@ -42,8 +42,10 @@
   <!ENTITY details-formats SYSTEM "details-formats.docbook">
   <!ENTITY details-database SYSTEM "details-database.docbook">
   <!ENTITY details-hbciofx SYSTEM "details-hbciofx.docbook">
+  <!ENTITY faq SYSTEM "faq.docbook">
   <!ENTITY reference SYSTEM "reference.docbook">
   <!ENTITY credits SYSTEM "credits.docbook">
+  <!ENTITY installation SYSTEM "installation.docbook">
 ]>
 
 <book lang="&language;">
@@ -212,9 +214,10 @@ consistent documentation style across all KDE apps. -->
 &details-search;
 &details-formats;
 &details-database;
+&faq;
 &reference;
 &credits;
-
+&installation;
 &documentation.index;
 </book>
 <!--

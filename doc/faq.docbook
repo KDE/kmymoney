@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="faq">
+<title>Questions and Answers</title>
+<!-- Note: this is only preliminary.  More questions will be added over the next
+     days, and the questions will likely be reordered. -->
+<para>
+  This chapter addresses a number of issues that frequently cause confusion,
+  especially in new users of &kappname; If you find that &kappname; is doing
+  something you don't understand (or sometimes not doing something you want it
+  to do,) please check this list before asking for help on one of the mailing
+  lists.  If your problem is not mentioned here, refer to the section on <link
+  linkend="firsttime.contact">getting help</link>.
+</para>
+
+<qandaset>
+
+<qandadiv><title>Account and Transaction Questions</title>
+
+<qandaentry>
+ <question><para>
+  Why can't I edit a transaction?
+ </para></question>
+ <answer>
+   <para>You cannot make any changes to a transaction with a date before the
+   opening date of the account it is in.  The most common reason for this is
+   importing all the data for an account.  If the import file does not contain
+   an opening date for the account, &kappname; will use the current date.  The
+   way to fix this is to edit the account, and <link
+   linkend="details.accounts.edit">change the opening date</link> to be earlier
+   than any transaction in that account.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para>Why can't I add an opening balance to an account?</para>
+ </question>
+ <answer>
+   <para>If you provid an opening balance when you create an account, it is
+   shown as the first transaction for the account.  If you do not, then the
+   transaction is not there, and because it is a special type of transaction,
+   you cannot simply add it as you could a deposit or withdrawal.  However, you
+   can add it later by <link linkend="details.accounts.edit">editing the
+   account</link>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para>When I created an account, I used the wrong type, and now it won't let
+   me change it.  I can edit the account, but the dropdown for account type is
+   either disabled, or does not list all the possible types.</para>
+ </question>
+ <answer>
+   <para>You can easily change an account type between checking, savings, and
+   cash.  However, because of the way &kappname; stores the account information,
+   it does not allow other changes of account type.  The way around this is to
+   create a new account of the correct type, move all the transactions from the
+   old to the new account, and then delete the old account.</para>
+   <!-- this should have links to the sections on new acct, move transactions,
+        delete account. -->
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para>I have a loan with 0% interest, but I get an error in the new loan
+   wizard that does not let me use this value.</para>
+ </question>
+ <answer>
+   <para>The internal calculations of the new loan wizard do not allow a 0%
+   interest rate.  The best way to handle this situation is to <link
+   linkend="details.accounts.create.account">create a simple liability
+   account</link> with a starting balance for the amount of the loan, and then
+   <link linkend="details.schedules.new">create a schedule</link> for the
+   required payments.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para>Why don't I see all my transactions in the ledger?</para>
+ </question>
+ <answer>
+   <para>There are several settings that control which transactions are
+   displayed in the ledger view of an account.  First, check the <link
+   linkend="details.ledgers.view.filter">ledger filter area</link>.  If there is
+   anything typed in the search box, only transactions containing that text will
+   be shown.  If the status dropdown has been changed from <quote>Any
+   status,</quote> then only transaction of the selected type will be shown.  In
+   addition, there are two important settings in the <link
+   linkend="details.settings.general.filter">filter options</link> section on
+   the &kappname; Settings dialog.  If the <quote>Don't show transactions prior
+   to</quote> field is set, only transactions on or after that date will be
+   shown in the ledger.  If the <quote>Don't show reconciled
+   transactions</quote> box is checked, then no reconciled transactions will be
+   shown.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv><title>Installation and Startup Questions</title>
+
+<qandaentry>
+ <question>
+   <para>&kappname; crashes when I try to launch it.</para>
+ </question>
+ <answer>
+   <para>There are many reasons &kappname; might crash or give an error instead
+   of starting up normally.  You first need to determine if the problem is with
+   the software or with your data.  So, the first thing to try is to <link
+   linkend="firsttime.launch">launch &kappname;</link> without opening your data
+   file.  If the application starts up, but crashes when you try to load your
+   data file, try loading an older copy of your file.  (You did make a backup,
+   didn't you?)</para>
+   <para>If &kappname; crashes on startup without trying to load a data file,
+   there may be a problem with your installation.  See the section on <link
+   linkend="installation">installing &kappname;</link> or the section on <link
+   linkend="firsttime.contact">getting help</link>.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<!-- <link linkend=""> </link> -->
+<qandadiv><title>Next set of questions</title>
+
+<qandaentry>
+ <question>
+   <para>q</para>
+ </question>
+ <answer>
+   <para>a</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para>q</para>
+ </question>
+ <answer>
+   <para>a</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para>q</para>
+ </question>
+ <answer>
+   <para>a</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para>q</para>
+ </question>
+ <answer>
+   <para>a</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+</qandaset>
+
+</chapter>

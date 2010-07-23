@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appendix id="installation">
+<title>Installation</title>
+
+<para>
+  &kappname; is most commonly used under the Linux operating system, and most of
+  this Appendix addresses that usage.  However, it is possible to use it under
+  other operating systems; for further information see <link
+  linkend="installation.nonlinux">Installing &kappname; without Linux</link>.
+</para>
+
+<sect1 id="installation.getting">
+<title>How to obtain &kappname;</title>
+
+<!-- This first entity contains boiler plate for applications that are part of
+     KDE CVS.  You should remove it if you are releasing your application.
+     &install.intro.documentation; I don't think this will be correct until we
+     move from extragear to the main section of KDE in the future. -->
+
+<para>
+  &kappname; is part of the larger KDE project, but is not yet packaged as part
+  of the complete KDE installation.  Previous stable versions (1.0.x) required
+  libraries from KDE 3, and so was not available in most Linux distributions.
+  However, with the release of version 4.5, &kappname; can now be easily
+  compiled and installed on any version of &kde; 4.3 or higher. 
+</para>
+<para>
+  The rest of this section will describe installing &kappname; using the
+  standard software installation process for your Linux distribution.  The
+  following section will discuss compiling from source.
+</para>
+
+<sect2 id="installation.distribution">
+<title>Official Distribution Packages</title>
+<para>
+  &kappname; is part of the larger KDE project, but is not yet packaged as part
+  of the complete KDE installation.  Previous stable versions (1.0.x) required
+  libraries from KDE 3, and so it was not available in most Linux distributions,
+  which had all moved to KDE 4.  However, with the release of version 4.5,
+  &kappname; can now be easily compiled and installed on any version of &kde;
+  4.3 or higher.
+</para>
+<para>
+  The best way to install &kappname; is to use the package manager of your
+  distribution, such as apt-get, yum, portage, or pacman.  This will take care
+  of all the dependencies and required libraries.  Although it will take some
+  time after the release of this version for all the distributions to add
+  &kappname; to their official repositories, please check there first.
+</para>
+</sect2>
+
+<sect2 id="installation.unsupported">
+<title>Unsupported Repositories</title>
+<para>
+  Many Linux distributions have users who provide unsupported repositories that
+  offer more up-to-date packages than the distributions' official repositories.
+  A list of these may be found at the <ulink
+  url="http://techbase.kde.org/Projects/KMyMoney">&kappname; home page</ulink>
+</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="installation.fromsource">
+<title>Compiling &kappname; from Source</title>
+
+<para>
+  More up-to-date information on the latest available verson and any known
+  installation issues will be available on the <ulink
+  url="http://techbase.kde.org/Projects/KMyMoney">&kappname; home page</ulink>.
+  That page will also have links to tarballs of recent versions as well as
+  instructions for obtaining the source from KDE SVN, in case you want to
+  compile the latest, development version.
+</para>
+
+<para>
+  &kappname; depends on libraries from KDE version 4.3 or later, specifically
+  kdelibs and kde PIM libs.  You may need to explicitly load the
+  <quote>-devel</quote> versions in order to compile &kappname;, rather then
+  just running a pre-compiled version.  Additional functionality can be obtained
+  if extra libraries are available at compile time &ndash; see the web site for
+  details.
+</para>
+
+<para>
+  &kappname; uses the cmake build system.  Further information can be found in
+  the README.cmake file in the root folder of the source.  The basic steps are
+  the following:
+</para>
+
+<simplelist>
+<member><command>$ mkdir build</command></member>
+<member><command>$ cd build</command></member>
+<member><command>$ cmake .. -DCMAKE_INSTALL_PREFIX=/usr/</command></member>
+<member><command>$ make</command></member>
+<member><command>$ sudo make install</command></member>
+</simplelist>
+
+<important><para>
+  Note that the last step is required.  &kappname; expects to find certain
+  components in standard locations, and if you run it from within the build
+  directory without the install step, you will have missing icons or other
+  surprises.
+</para></important>
+</sect1>
+
+<sect1 id="installation.nonlinux">
+<title>Installing &kappname; without Linux</title>
+
+<para>
+  &kappname; has been successfully compiled for &MacOS; X, and is available at
+  the <ulink url="http://www.macports.com">MacPorts web site</ulink>.  If you
+  know of &kappname; being successfully compiled and made available for any
+  other operating system, please let us know, so we can spread the word.
+</para>
+
+</sect1>
+</appendix>
