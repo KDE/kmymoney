@@ -67,6 +67,7 @@ class MyMoneyObjectContainer;
   * @li  Income
   * @li  Expense
   * @li  Loan (given)
+  * @li  Stock
   * @li  Equity
   *
   * @see MyMoneyInstitution
