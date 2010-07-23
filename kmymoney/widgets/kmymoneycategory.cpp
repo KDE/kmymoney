@@ -65,6 +65,8 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
 {
   if (splitButton) {
     d->frame = new QFrame(0);
+    // don't change the following name unless you want to break TransactionEditor::setup()
+    d->frame->setObjectName("KMyMoneyCategoryFrame");
     d->frame->setFocusProxy(this);
     QHBoxLayout* layout = new QHBoxLayout(d->frame);
     layout->setContentsMargins(0, 0, 0, 0);
