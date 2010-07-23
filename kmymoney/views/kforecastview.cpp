@@ -771,18 +771,18 @@ void KForecastView::loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount
     forecastItem->setExpanded(true);
 
     switch (forecastType) {
-    case eSummary:
-      updateSummary(forecastItem);
-      break;
-    case eDetailed:
-      updateDetailed(forecastItem);
-      break;
-    case eBudget:
-      updateBudget(forecastItem);
-      break;
-    default:
-      break;
-  }
+      case eSummary:
+        updateSummary(forecastItem);
+        break;
+      case eDetailed:
+        updateDetailed(forecastItem);
+        break;
+      case eBudget:
+        updateBudget(forecastItem);
+        break;
+      default:
+        break;
+    }
 
     loadAccounts(forecast, subAccount, forecastItem, forecastType);
   }

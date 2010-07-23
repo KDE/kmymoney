@@ -25,11 +25,11 @@ using namespace KDChart;
 
 class KBalanceAxis : public KDChart::CartesianAxis
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
   KBalanceAxis();
-  explicit KBalanceAxis( KDChart::AbstractCartesianDiagram* parent );
-  const QString customizedLabel( const QString& label ) const;
+  explicit KBalanceAxis(KDChart::AbstractCartesianDiagram* parent);
+  const QString customizedLabel(const QString& label) const;
 };
 
 

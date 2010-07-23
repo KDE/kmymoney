@@ -36,12 +36,12 @@ KBalanceAxis::KBalanceAxis()
 {
 }
 
-KBalanceAxis::KBalanceAxis( KDChart::AbstractCartesianDiagram* parent )
-    : KDChart::CartesianAxis( parent )
+KBalanceAxis::KBalanceAxis(KDChart::AbstractCartesianDiagram* parent)
+    : KDChart::CartesianAxis(parent)
 {
 }
 
-const QString KBalanceAxis::customizedLabel( const QString& label ) const
+const QString KBalanceAxis::customizedLabel(const QString& label) const
 {
   //TODO: make precision variable
   int precision = 2;

@@ -164,12 +164,12 @@ QString MyMoneyOfxConnector::password(void) const
   // in case we don't have a password on file, we ask the user
   QString key = OFX_PASSWORD_KEY(m_fiSettings.value("url"), m_fiSettings.value("uniqueId"));
   QString pwd = m_fiSettings.value("password");
-  
+
   // make sure, we have a reference to an active window, otherwise use 0 as ID
   WId winId = 0;
-  if(qApp->activeWindow())
+  if (qApp->activeWindow())
     winId = qApp->activeWindow()->winId();
-  
+
   // now check for the wallet
   Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), winId, Wallet::Synchronous);
   if (wallet
