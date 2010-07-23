@@ -67,6 +67,13 @@ KForecastView::KForecastView(QWidget *parent) :
   m_budgetList->setAllColumnsShowFocus(true);
   m_advancedList->setAlternatingRowColors(true);
 
+  connect(m_forecastList, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(itemExpanded(QTreeWidgetItem*)));
+  connect(m_forecastList, SIGNAL(itemCollapsed(QTreeWidgetItem*)), this, SLOT(itemCollapsed(QTreeWidgetItem*)));
+  connect(m_summaryList, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(itemExpanded(QTreeWidgetItem*)));
+  connect(m_summaryList, SIGNAL(itemCollapsed(QTreeWidgetItem*)), this, SLOT(itemCollapsed(QTreeWidgetItem*)));
+  connect(m_budgetList, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(itemExpanded(QTreeWidgetItem*)));
+  connect(m_budgetList, SIGNAL(itemCollapsed(QTreeWidgetItem*)), this, SLOT(itemCollapsed(QTreeWidgetItem*)));
+
   m_forecastChart->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   m_chartLayout = m_tabChart->layout();
   m_chartLayout->setSpacing(6);
@@ -958,6 +965,22 @@ void KForecastView::setAmount(QTreeWidgetItem* item, int column, const MyMoneyMo
 {
   item->setData(column, AmountRole, QVariant::fromValue(amount));
   item->setTextAlignment(column, Qt::AlignRight | Qt::AlignVCenter);
+}
+
+void KForecastView::itemExpanded(QTreeWidgetItem *item)
+{
+  if (!item->parent() || !item->parent()->parent())
+    return;
+  for (int i = 1; i < item->columnCount(); ++i) {
+    showAmount(item, i, item->data(i, AmountRole).value<MyMoneyMoney>(), MyMoneyFile::instance()->security(item->data(0, AccountRole).value<MyMoneyAccount>().currencyId()));
+  }
+}
+
+void KForecastView::itemCollapsed(QTreeWidgetItem *item)
+{
+  for (int i = 1; i < item->columnCount(); ++i) {
+    showAmount(item, i, item->data(i, ValueRole).value<MyMoneyMoney>(), MyMoneyFile::instance()->baseCurrency());
+  }
 }
 
 void KForecastView::loadChartView(void)

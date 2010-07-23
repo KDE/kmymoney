@@ -126,6 +126,10 @@ protected slots:
    */
   QList<MyMoneyPrice> getAccountPrices(const MyMoneyAccount& acc);
 
+private slots:
+  void itemExpanded(QTreeWidgetItem *item);
+  void itemCollapsed(QTreeWidgetItem *item);
+
 private:
   void addAssetLiabilityRows(const MyMoneyForecast& forecast);
   void addIncomeExpenseRows(const MyMoneyForecast& forecast);
