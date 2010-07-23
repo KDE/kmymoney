@@ -10,14 +10,14 @@
       </affiliation>
     </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-19</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
 <title>Making the most of &kappname;</title>
 
 <para>
-  Whilst you could go ahead, clicking some buttons and filling in some data,
+  While you could go ahead, clicking some buttons and filling in some data,
   after a time, you could decide you have done it wrong and start again, even if
   you did read the documentation on each part of &kappname;.
 </para>
@@ -32,27 +32,29 @@
 
 <para>
   Imagine your money as balls, or beans, and to stop them rolling around you
-  keep them in a box, or pot. Accounting, or Book Keeping, is the process of
-  counting the beans in the pot, or several pots.
+  keep them in a box, or pot. Accounting, or Bookkeeping, is the process of
+  counting and keeping track of the beans in the pot, or several pots.
 </para>
 
 <para>
   You have some money in the pot marked <quote>Cash</quote>. You buy some goods,
   so you take some beans out of the cash pot and place them into another pot
-  marked <quote>Supplier</quote>. The supplier gives you some goods in exchange
+  marked <quote>Supplier.</quote> The supplier gives you some goods in exchange
   for the cash, so you take the beans out of the pot marked
   <quote>Supplier</quote> and put them in the pot marked <quote>Goods</quote>.
 </para>
+
 <para>
   The goods have a value (the price you paid) so you still have the same amount
   of beans, some representing cash and some representing goods.
 </para>
+
 <para>
   In this case you have two movements of beans, or transactions. Each
   transaction needs two entries, one to take beans out and one to put beans
-  in. This is called <quote>double entry book keeping</quote> or <quote>double
-  entry accounting</quote>. The recording of the transactions is done in a
-  <quote>Ledger</quote>; each pot is known as an <quote>Account</quote> or
+  in. This is called <quote>double entry bookkeeping</quote> or <quote>double
+  entry accounting.</quote> The recording of the transactions is done in a
+  <quote>Ledger;</quote> each pot is known as an <quote>Account</quote> or
   <quote>Ledger code</quote>.
 </para>
 
@@ -61,43 +63,51 @@
   in exchange. The goods were worth some beans and, hopefully, the customer has
   given us more beans than that, so making a profit. To over simplify, the beans
   from the Goods pot come back as Cash, but we can split that as the <quote>Cost
-  of Goods sold</quote> and <quote>Profit</quote>. This transaction has three
+  of Goods sold</quote> and <quote>Profit.</quote>  This transaction has three
   entries; one side of the <quote>double entry</quote> has been split.
 </para>
 
 <para>
-  This will be covered properly in setting up accounts for Businesses.
+  This will be covered in more detail later on in this handbook.
 </para>
+<!-- **** don't forget to make sure this is actually covered, and linked to from
+     here.  Also, I have removed "in setting up accounts for Businesses." and
+     modified the section below, since we explicitly say that KMM is not for
+     business use. -->
 
 <sect2 id="makingmostof.basicaccounting.personalaccounts">
 <title>Defining the accounts (personal records)</title>
 
 <para>
-  Most accounts, or pots, above represent a measure of our
-  <quote>Worth</quote>. The cash and goods represent our <quote>Assets</quote>;
-  so does what we are owed if our customers have not yet given us the money. The
-  money we owe, say if we had not paid our suppliers, are our
-  <quote>Liabilities</quote>. These accounts are transferable to Cash and have a
-  value.
+  Most accounts, or pots, above represent a measure of our <quote>Worth.</quote>
+  The cash and goods represent our <quote>Assets;</quote> so does what we are
+  owed if our customers have not yet given us the money. The money we owe, say
+  if we had not paid our suppliers, are our <quote>Liabilities.</quote> These
+  accounts are transferable to Cash and have a value.
 </para>
 
 <para>
   Any pots that cannot be valued are <quote>Income</quote> or
-  <quote>Expense</quote>, such as an unpaid phone bill that would be an expense
-  as we have already made the calls. Although these do not have a value, it is
-  useful to monitor how much is in each.
+  <quote>Expense.</quote> Our phone bill (or the phone company to which we pay
+  the bill) cannot be valued; we know how much we have paid, but not how much
+  anyone else has paid.  We know how much our employer has paid us, but we do
+  not know how much they have paid anybody else, or how much money they have
+  left to pay us next month.  Although we cannot determine an actual value for
+  these pots, it is useful to monitor how much we have put into or taken out of
+  each of them.
 </para>
 
 <para>
-  In some cases a supplier is a <quote>Liability</quote>, in others it is an
-  <quote>Expense</quote>. This is something we need to consider and decide for
+  In some cases a supplier is a <quote>Liability,</quote> in others it is an
+  <quote>Expense.</quote> This is something we need to consider and decide for
   each case. Similarly, you may set up a loan as a Liability, particularly if
   you transfer the money into your bank account, but it could be an Expense if
   it was to buy some furniture.
 </para>
 
 <para>
-  Consider how you want to analyze your income and expenses. This will decide how you set them up.
+  Consider how you want to track and analyze your income and expenses. This will
+  help you decide how to set them up in &kappname;.
 </para>
 
 <para>
@@ -111,9 +121,12 @@
 <title>Defining the accounts (business records)</title>
 
 <para>
-  This is similar to setting up for personal use, but needs to follow legal
-  guidelines. We do not discuss them here, but you should be aware of what these
-  are.
+  There are similarities to setting up accounts for personal use, but there are
+  addional considerations, including legal guidelines and requirements.
+  &kappname; does not explicitly address any of these issues, as it has been
+  designed as a <quote>personal</quote> finance manager.  In addition, these
+  additional issues are not addressed in this handbook, but you must be aware of
+  them if you are going to attempt to use &kappname; for a business.
 </para>
 </sect2>
 </sect1>
