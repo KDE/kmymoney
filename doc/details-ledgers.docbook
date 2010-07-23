@@ -18,8 +18,8 @@
       </affiliation>
     </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-23</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
 <title>Ledgers</title>
@@ -69,7 +69,7 @@
   </listitem>
 </itemizedlist>
 
-<sect2>
+<sect2 id="details.ledgers.view.filter">
 <title>The filter area</title>
 
 <para>
