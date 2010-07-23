@@ -45,6 +45,7 @@
 #include <KDChartCartesianAxis>
 #include <KDChartFrameAttributes>
 #include "kmymoneyglobalsettings.h"
+#include <kbalanceaxis.h>
 
 using namespace reports;
 
@@ -188,7 +189,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     }
 
     //set y axis
-    CartesianAxis *yAxis = new CartesianAxis();
+    KBalanceAxis *yAxis = new KBalanceAxis();
     yAxis->setPosition(CartesianAxis::Left);
     yAxis->setTitleText(i18n("Balance"));
     TextAttributes yAxisTextAttr(yAxis->titleTextAttributes());
