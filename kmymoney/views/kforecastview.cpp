@@ -487,7 +487,7 @@ void KForecastView::loadAdvancedView(void)
 
       amount = amountMM.formatMoney(acc, currency);
       advancedItem->setText(it_c, amount);
-      advancedItem->setTextAlignment(it_c, Qt::AlignRight);
+      advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {
         advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
       }
@@ -495,7 +495,7 @@ void KForecastView::loadAdvancedView(void)
 
       QString dateString = KGlobal::locale()->formatDate(minDate, KLocale::ShortDate);
       advancedItem->setText(it_c, dateString);
-      advancedItem->setTextAlignment(it_c, Qt::AlignRight);
+      advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {
         advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
       }
@@ -511,7 +511,7 @@ void KForecastView::loadAdvancedView(void)
 
       amount = amountMM.formatMoney(acc, currency);
       advancedItem->setText(it_c, amount);
-      advancedItem->setTextAlignment(it_c, Qt::AlignRight);
+      advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {
         advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
       }
@@ -519,7 +519,7 @@ void KForecastView::loadAdvancedView(void)
 
       QString dateString = KGlobal::locale()->formatDate(maxDate, KLocale::ShortDate);
       advancedItem->setText(it_c, dateString);
-      advancedItem->setTextAlignment(it_c, Qt::AlignRight);
+      advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {
         advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
       }
@@ -529,7 +529,7 @@ void KForecastView::loadAdvancedView(void)
     amountMM = forecast.accountAverageBalance(acc);
     amount = amountMM.formatMoney(acc, currency);
     advancedItem->setText(it_c, amount);
-    advancedItem->setTextAlignment(it_c, Qt::AlignRight);
+    advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
     if (amountMM.isNegative()) {
       advancedItem->setForeground(it_c, KMyMoneyGlobalSettings::listNegativeValueColor());
     }
@@ -907,7 +907,7 @@ void KForecastView::setNegative(QTreeWidgetItem *item, bool isNegative)
 void KForecastView::showAmount(QTreeWidgetItem* item, int column, const MyMoneyMoney& amount, const MyMoneySecurity& security)
 {
   item->setText(column, amount.formatMoney(item->data(0, AccountRole).value<MyMoneyAccount>(), security));
-  item->setTextAlignment(column, Qt::AlignRight);
+  item->setTextAlignment(column, Qt::AlignRight | Qt::AlignVCenter);
   item->setFont(column, item->font(0));
   if (amount.isNegative()) {
     item->setForeground(column, KMyMoneyGlobalSettings::listNegativeValueColor());
@@ -957,6 +957,7 @@ void KForecastView::setValue(QTreeWidgetItem* item, int column, const MyMoneyMon
 void KForecastView::setAmount(QTreeWidgetItem* item, int column, const MyMoneyMoney& amount)
 {
   item->setData(column, AmountRole, QVariant::fromValue(amount));
+  item->setTextAlignment(column, Qt::AlignRight | Qt::AlignVCenter);
 }
 
 void KForecastView::loadChartView(void)
