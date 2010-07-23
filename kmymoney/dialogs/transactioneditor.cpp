@@ -138,7 +138,22 @@ void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount
     if (editWidgets.contains(*it_w)) {
       ++it_w;
     } else {
-      it_w = tabOrderWidgets.erase(it_w);
+      // before we remove the widget, we make sure it's not a part of a known one.
+      // these could be a direct child in case of KMyMoneyDateInput and KMyMoneyEdit
+      // where we store the pointer to the surrounding frame in editWidgets
+      // or the parent is called "KMyMoneyCategoryFrame"
+      if (*it_w) {
+        if (editWidgets.contains((*it_w)->parentWidget())
+            || ((*it_w)->parentWidget() && (*it_w)->parentWidget()->objectName() == QLatin1String("KMyMoneyCategoryFrame"))) {
+          ++it_w;
+
+        } else {
+          // qDebug("Remove '%s' from taborder", qPrintable((*it_w)->objectName()));
+          it_w = tabOrderWidgets.erase(it_w);
+        }
+      } else {
+        it_w = tabOrderWidgets.erase(it_w);
+      }
     }
   }
 
