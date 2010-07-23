@@ -669,16 +669,16 @@
 </sect1>
 
 <sect1 id="details.accounts.edit">
-<title id="details.accounts.edit.title">Editing Account Information</title>
+<title>Editing Account Information</title>
 
 <para>
   To edit a particular account, right-click that account and choose
   <guimenuitem>Edit account...</guimenuitem>. A details window will pop-up.
-  This window allows you to change the name and start date of the account,
-  associated banking institution, and the parent account. Changing the parent
-  account is also possible in the main Accounts screen, by dragging the account
-  and dropping it on a different parent account. In this window, you can also
-  create a new banking institution and associate the account with that
+  This window allows you to change the name and start or opening date of the
+  account, associated banking institution, and the parent account. Changing the
+  parent account is also possible in the main Accounts screen, by dragging the
+  account and dropping it on a different parent account. In this window, you can
+  also create a new banking institution and associate the account with that
   institution.
 </para>
 
