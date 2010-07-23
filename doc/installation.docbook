@@ -3,10 +3,9 @@
 <title>Installation</title>
 
 <para>
-  &kappname; is most commonly used under the Linux operating system, and most of
-  this Appendix addresses that usage.  However, it is possible to use it under
-  other operating systems; for further information see <link
-  linkend="installation.nonlinux">Installing &kappname; without Linux</link>.
+  This appendix primarily addresses the installation of &kappname under the
+  &Linux; operating system.  The <link linkend="installation.nonlinux">final
+  section</link> addresses other operating systems.
 </para>
 
 <sect1 id="installation.getting">
@@ -18,11 +17,12 @@
      move from extragear to the main section of KDE in the future. -->
 
 <para>
-  &kappname; is part of the larger KDE project, but is not yet packaged as part
-  of the complete KDE installation.  Previous stable versions (1.0.x) required
-  libraries from KDE 3, and so was not available in most Linux distributions.
-  However, with the release of version 4.5, &kappname; can now be easily
-  compiled and installed on any version of &kde; 4.3 or higher. 
+  Although &kappname; has existed for a number of years, we are still working on
+  full integration into &kde;.  Previous stable versions (1.0.x) required
+  libraries from &kde; 3, and so were not available in most recent Linux
+  distributions, which had already migrated to &kde; 4. However, with the
+  release of version 4.5, &kappname; can now be easily compiled and installed on
+  any version of &kde; 4.3 or higher.
 </para>
 <para>
   The rest of this section will describe installing &kappname; using the
@@ -32,14 +32,6 @@
 
 <sect2 id="installation.distribution">
 <title>Official Distribution Packages</title>
-<para>
-  &kappname; is part of the larger KDE project, but is not yet packaged as part
-  of the complete KDE installation.  Previous stable versions (1.0.x) required
-  libraries from KDE 3, and so it was not available in most Linux distributions,
-  which had all moved to KDE 4.  However, with the release of version 4.5,
-  &kappname; can now be easily compiled and installed on any version of &kde;
-  4.3 or higher.
-</para>
 <para>
   The best way to install &kappname; is to use the package manager of your
   distribution, such as apt-get, yum, portage, or pacman.  This will take care
@@ -55,7 +47,7 @@
   Many Linux distributions have users who provide unsupported repositories that
   offer more up-to-date packages than the distributions' official repositories.
   A list of these may be found at the <ulink
-  url="http://techbase.kde.org/Projects/KMyMoney">&kappname; home page</ulink>
+  url="http://techbase.kde.org/Projects/KMyMoney">&kappname; home page</ulink>.
 </para>
 </sect2>
 
