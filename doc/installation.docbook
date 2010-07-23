@@ -3,7 +3,7 @@
 <title>Installation</title>
 
 <para>
-  This appendix primarily addresses the installation of &kappname under the
+  This appendix primarily addresses the installation of &kappname; under the
   &Linux; operating system.  The <link linkend="installation.nonlinux">final
   section</link> addresses other operating systems.
 </para>
@@ -64,6 +64,31 @@
   instructions for obtaining the source from KDE SVN, in case you want to
   compile the latest, development version.
 </para>
+
+<para>
+  As the previous paragraph implied, there are two distinct reasons to compile
+  &kappname; from source.  If you cannot find a version specifically packaged
+  for your distribution, please download the tarball of the most recent stable
+  release.  This is version 4.5.0 as of the time this is being written.  This is
+  the compile option recommended for normal users.
+</para>
+
+<para>
+  On the other hand, if you want to see the current state of development, to
+  check out a recent bug fix or new feature, you can download a tarball which is
+  a snapshot of the development repository.  You can also check the source
+  directly out of the repository.  (The version 4.x source is in &kde; svn and
+  the version 1.0.x source is in SourceForge cvs.  Instructions for access are
+  on the project home page.)
+</para>
+<warning>
+ <para>
+   The code in the repositories and in development snapshots is under active
+   development: it may have bugs, it may crash, and it may mess up or lose data.
+   If you use it, be absolutely sure to make adequate backups.  Unless you have
+   a good reason to use this, stick to a stable released version.
+ </para>
+</warning>
 
 <para>
   &kappname; depends on libraries from KDE version 4.3 or later, specifically
