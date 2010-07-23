@@ -223,13 +223,7 @@ void KForecastView::loadListView(void)
   loadAccounts(forecast, file->asset(), m_assetItem, eDetailed);
   loadAccounts(forecast, file->liability(), m_liabilityItem, eDetailed);
 
-  QTreeWidgetItem *header = m_advancedList->headerItem();
-  for (int i = 0; i < headerLabels.size(); ++i) {
-    if (i && header) {
-      header->setData(i, Qt::TextAlignmentRole, Qt::AlignRight);
-    }
-    m_forecastList->resizeColumnToContents(i);
-  }
+  adjustHeadersAndResizeToContents(m_forecastList);
 }
 
 void KForecastView::loadSummaryView(void)
@@ -283,13 +277,7 @@ void KForecastView::loadSummaryView(void)
   loadAccounts(forecast, file->asset(), m_assetItem, eSummary);
   loadAccounts(forecast, file->liability(), m_liabilityItem, eSummary);
 
-  QTreeWidgetItem *header = m_advancedList->headerItem();
-  for (int i = 0; i < headerLabels.size(); ++i) {
-    if (i && header) {
-      header->setData(i, Qt::TextAlignmentRole, Qt::AlignRight);
-    }
-    m_summaryList->resizeColumnToContents(i);
-  }
+  adjustHeadersAndResizeToContents(m_summaryList);
 
   //Add comments to the advice list
   m_adviceText->clear();
@@ -549,13 +537,7 @@ void KForecastView::loadAdvancedView(void)
   }
 
   // make sure all data is shown
-  QTreeWidgetItem *header = m_advancedList->headerItem();
-  for (int i = 0; i < headerLabels.size(); ++i) {
-    if (i && header) {
-      header->setData(i, Qt::TextAlignmentRole, Qt::AlignRight);
-    }
-    m_advancedList->resizeColumnToContents(i);
-  }
+  adjustHeadersAndResizeToContents(m_advancedList);
 
   m_advancedList->show();
 }
@@ -607,13 +589,7 @@ void KForecastView::loadBudgetView(void)
   loadAccounts(forecast, file->income(), m_incomeItem, eBudget);
   loadAccounts(forecast, file->expense(), m_expenseItem, eBudget);
 
-  QTreeWidgetItem *header = m_advancedList->headerItem();
-  for (int i = 0; i < headerLabels.size(); ++i) {
-    if (i && header) {
-      header->setData(i, Qt::TextAlignmentRole, Qt::AlignRight);
-    }
-    m_budgetList->resizeColumnToContents(i);
-  }
+  adjustHeadersAndResizeToContents(m_budgetList);
 }
 
 QList<MyMoneyPrice> KForecastView::getAccountPrices(const MyMoneyAccount& acc)
@@ -646,9 +622,7 @@ void KForecastView::addAssetLiabilityRows(const MyMoneyForecast& forecast)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  //QList<MyMoneyPrice> basePrices;
   m_assetItem = new QTreeWidgetItem(m_totalItem);
-  //basePrices, file->baseCurrency());
   m_assetItem->setText(0, file->asset().name());
   m_assetItem->setIcon(0, file->asset().accountPixmap());
   m_assetItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
@@ -656,7 +630,6 @@ void KForecastView::addAssetLiabilityRows(const MyMoneyForecast& forecast)
   m_assetItem->setExpanded(true);
 
   m_liabilityItem = new QTreeWidgetItem(m_totalItem);
-  //basePrices, file->baseCurrency());
   m_liabilityItem->setText(0, file->liability().name());
   m_liabilityItem->setIcon(0, file->liability().accountPixmap());
   m_liabilityItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
@@ -668,9 +641,7 @@ void KForecastView::addIncomeExpenseRows(const MyMoneyForecast& forecast)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  //QList<MyMoneyPrice> basePrices;
   m_incomeItem = new QTreeWidgetItem(m_totalItem);
-  //basePrices, file->baseCurrency());
   m_incomeItem->setText(0, file->income().name());
   m_incomeItem->setIcon(0, file->income().accountPixmap());
   m_incomeItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
@@ -678,7 +649,6 @@ void KForecastView::addIncomeExpenseRows(const MyMoneyForecast& forecast)
   m_incomeItem->setExpanded(true);
 
   m_expenseItem = new QTreeWidgetItem(m_totalItem);
-  //basePrices, file->baseCurrency());
   m_expenseItem->setText(0, file->expense().name());
   m_expenseItem->setIcon(0, file->expense().accountPixmap());
   m_expenseItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
@@ -694,7 +664,7 @@ void KForecastView::addTotalRow(QTreeWidget* forecastList, const MyMoneyForecast
   QFont font;
   font.setBold(true);
   m_totalItem->setFont(0, font);
-  m_totalItem->setText(0, i18nc("Total balance", "Total"));//file->baseCurrency()
+  m_totalItem->setText(0, i18nc("Total balance", "Total"));
   m_totalItem->setIcon(0, file->asset().accountPixmap());
   m_totalItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
   m_totalItem->setData(0, AccountRole, QVariant::fromValue(file->asset()));
@@ -719,6 +689,17 @@ bool KForecastView::includeAccount(MyMoneyForecast& forecast, const MyMoneyAccou
     }
   }
   return false;
+}
+
+void KForecastView::adjustHeadersAndResizeToContents(QTreeWidget *widget)
+{
+  QTreeWidgetItem *header = widget->headerItem();
+  for (int i = 0; i < header->columnCount(); ++i) {
+    if (i && header) {
+      header->setData(i, Qt::TextAlignmentRole, Qt::AlignRight);
+    }
+    widget->resizeColumnToContents(i);
+  }
 }
 
 void KForecastView::loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount& account, QTreeWidgetItem* parentItem, int forecastType)
@@ -763,7 +744,6 @@ void KForecastView::loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount
     QList<MyMoneyPrice> prices = getAccountPrices(subAccount);
 
     forecastItem = new QTreeWidgetItem(parentItem);
-    //prices, currency, static_cast<EForecastViewType>(forecastType));
     forecastItem->setText(0, subAccount.name());
     forecastItem->setIcon(0, subAccount.accountPixmap());
     forecastItem->setData(0, ForecastRole, QVariant::fromValue(forecast));

@@ -133,6 +133,8 @@ private:
   bool includeAccount(MyMoneyForecast& forecast, const MyMoneyAccount& acc);
   void loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount& account, QTreeWidgetItem* parentItem, int forecastType);
 
+  void adjustHeadersAndResizeToContents(QTreeWidget *widget);
+
   void updateSummary(QTreeWidgetItem *item);
   void updateDetailed(QTreeWidgetItem *item);
   void updateBudget(QTreeWidgetItem *item);
