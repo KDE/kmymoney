@@ -1210,9 +1210,13 @@ void Register::adjustColumn(int col)
   w = qMax(w, 20);
 
   int maxWidth = 0;
+  int minWidth = 0;
   switch (col) {
     case NumberColumn:
       maxWidth = cellFontMetrics.width("0123456789");
+      break;
+    case DateColumn:
+      minWidth = cellFontMetrics.width(KGlobal::locale()->formatDate(QDate(6999, 12, 29), KLocale::ShortDate) + "  ");
       break;
     default:
       break;
@@ -1244,6 +1248,10 @@ void Register::adjustColumn(int col)
           w = maxWidth;
           break;
         }
+      }
+      if (w < minWidth) {
+        w = minWidth;
+        break;
       }
     }
   }
