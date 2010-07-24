@@ -25,13 +25,6 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-//FIXME: Port to KDE4
-//#ifdef HAVE_KDCHART
-//#include <KDChartWidget.h>
-//#include <KDChartTable.h>
-//#include <KDChartParams.h>
-//#endif
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
