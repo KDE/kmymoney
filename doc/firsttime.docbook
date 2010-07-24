@@ -371,7 +371,7 @@
 </para>
 
 <para>
-  In case you have an address for yourself stored in the KAddressbook, the
+  In case you have an address for yourself stored in the &kaddressbook;, the
   button <guibutton>Load from Addressbook</guibutton> is enabled and pressing it
   imports all information into &kappname;.
 </para>
@@ -429,7 +429,7 @@
 </para>
 
 <para>
-  In case you don't want to setup an initial account, please uncheck the checkbox
+  In case you don't want to setup an initial account, please uncheck the check box
 </para>
 
 <para>
@@ -485,21 +485,21 @@
 </para>
 
 <para>
-  The last page of the wizard allows you to select the filename that will be
-  used to store your financial data. An initial filename will be constructed out
+  The last page of the wizard allows you to select the file name that will be
+  used to store your financial data. An initial file name will be constructed out
   of your HOME folder and user name. In case the file exists, a warning will
   be displayed which reminds you to select a name of a non-existing file.
 </para>
 
 <para>
 	<screenshot>
-	<screeninfo>Filename selection Page</screeninfo>
+	<screeninfo>File name selection Page</screeninfo>
 	<mediaobject>
 	<imageobject>
 	<imagedata fileref="newfile-6.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase>Filename selection page</phrase>
+	<phrase>File name selection page</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
@@ -724,7 +724,7 @@ transactions this is currently empty.</para>
 
 <para>
   The file will be copied to the folder specified with the current date
-  appended to the filename so it is easy to see the date the file was backed up.
+  appended to the file name so it is easy to see the date the file was backed up.
 </para>
 </sect1>
 
@@ -750,9 +750,9 @@ transactions this is currently empty.</para>
   </para>
 </formalpara>
 
-<formalpara><title><command>kmymoney &lt;filepath&gt;</command></title>
+<formalpara><title><command>kmymoney &lt;path to file&gt;</command></title>
   <para>
-    Giving &kappname; a filename on the command line tells it to open that file
+    Giving &kappname; a file name on the command line tells it to open that file
     instead of the last file it had open.  You can use the name of any valid
     &kappname; file, as described in the chapter on <link
     linkend="details.formats">file formats</link>.  In addition, this can be
@@ -763,7 +763,7 @@ transactions this is currently empty.</para>
 </sect1>
 
 <sect1 id="firsttime.contact">
-<title>Contacting the developers / Reporting Bugs</title>
+<title>Contacting the Developers / Reporting Bugs</title>
 
 <sect2>
 <title>Contacting the developers</title>
@@ -784,6 +784,18 @@ transactions this is currently empty.</para>
   To report a bug please use the interface provided by &kappname; by selecting
   <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
   Bug</guimenuitem></menuchoice> and filling in the required information.
+  However, in case you have any difficulties with that method, you can report a
+  bug (or file a wish-list or enhancement request) directly at the <ulink
+  url="http://bugs.kde.org">&kde; bug reporting web page</ulink>.  Reports
+  should be filed against the product <quote>kmymoney4</quote>.
+  <quote>kmymoney2</quote> is specifically for bugs in the 1.0.x versions of the
+  application.
+</para>
+
+<para>
+  In any case, before reporting a bug, please read through the guidelines below.
+  Following them will make it more likely that the developers will be able to
+  quickly identify the problem without having to ask you for more information.
 </para>
 
 <sect3 id="firsttime.bugs.quality">

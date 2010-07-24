@@ -110,7 +110,7 @@
 <member><command>$ cd build</command></member>
 <member><command>$ cmake .. -DCMAKE_INSTALL_PREFIX=/usr/</command></member>
 <member><command>$ make</command></member>
-<member><command>$ sudo make install</command></member>
+<member><command>$ sudo make install/fast</command></member>
 </simplelist>
 
 <important><para>
@@ -119,6 +119,36 @@
   directory without the install step, you will have missing icons or other
   surprises.
 </para></important>
+
+<para>
+  If you have compiled the source from svn, and want to update to the latest
+  revision, most of the time you can do the following:
+</para>
+
+<simplelist>
+<member><command>$ cd &lt;path to root of source&gt;</command></member>
+<member><command>$ svn update</command></member>
+<member><command>$ cd build</command></member>
+<member><command>$ make</command></member>
+<member><command>$ sudo make install/fast</command></member>
+</simplelist>
+
+<para>
+  However, changes made by the developers sometimes cause compile problems if
+  you do not start with a clean code base.  In these cases, you need to the
+  following:
+</para>
+
+<simplelist>
+<member><command>$ cd &lt;path to root of source&gt;</command></member>
+<member><command>$ svn update</command></member>
+<member><command>$ rm -r build</command></member>
+<member><command>$ mkdir build</command></member>
+<member><command>$ cd build</command></member>
+<member><command>$ cmake .. -DCMAKE_INSTALL_PREFIX=/usr/</command></member>
+<member><command>$ make</command></member>
+<member><command>$ sudo make install/fast</command></member>
+</simplelist>
 </sect1>
 
 <sect1 id="installation.nonlinux">
@@ -126,9 +156,16 @@
 
 <para>
   &kappname; has been successfully compiled for &MacOS; X, and is available at
-  the <ulink url="http://www.macports.com">MacPorts web site</ulink>.  If you
-  know of &kappname; being successfully compiled and made available for any
-  other operating system, please let us know, so we can spread the word.
+  the <ulink url="http://www.macports.com">MacPorts web site</ulink>.
+</para>
+<para>
+  &kappname; has also been reported to be available for &Windows;, but details
+  were not available in time to include here.  Please check the <ulink
+  url="http://techbase.kde.org/Projects/KMyMoney">&kappname; home page</ulink>
+  for updated information.</para> 
+<para>
+  If you know of &kappname; being successfully compiled and made available for
+  any other operating system, please let us know, so we can spread the word.
 </para>
 
 </sect1>
