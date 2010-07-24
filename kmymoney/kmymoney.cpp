@@ -3878,7 +3878,15 @@ void KMyMoneyApp::slotAccountReconcileFinish(void)
     // Turn off reconciliation mode
     d->m_myMoneyView->finishReconciliation(d->m_reconciliationAccount);
 
-    d->m_reconciliationAccount.setValue("lastStatementBalance", d->m_endingBalanceDlg->endingBalance().toString());
+    // only update the last statement balance here, if we haven't a newer one due
+    // to download of online statements.
+    if (d->m_reconciliationAccount.value("lastImportedTransactionDate").isEmpty()
+       || QDate::fromString(d->m_reconciliationAccount.value("lastImportedTransactionDate"), Qt::ISODate) < d->m_endingBalanceDlg->statementDate()) {
+      d->m_reconciliationAccount.setValue("lastStatementBalance", d->m_endingBalanceDlg->endingBalance().toString());
+      // in case we override the last statement balance here, we have to make sure
+      // that we don't show the online balance anymore, as it might be different
+      d->m_reconciliationAccount.deletePair("lastImportedTransactionDate");
+    }
     d->m_reconciliationAccount.setLastReconciliationDate(d->m_endingBalanceDlg->statementDate());
 
     d->m_reconciliationAccount.deletePair("lastReconciledBalance");
