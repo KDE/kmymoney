@@ -280,7 +280,7 @@ void MyMoneyQifReader::setProfile(const QString& profile)
 
 void MyMoneyQifReader::slotSendDataToFilter(void)
 {
-  Q_LONG len;
+  long len;
 
   if (m_file->atEnd()) {
     m_filter.closeWriteChannel();

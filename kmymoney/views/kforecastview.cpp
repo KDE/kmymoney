@@ -202,7 +202,7 @@ void KForecastView::loadListView(void)
 
   m_forecastList->setIconSize(QSize(22, 22));
   m_forecastList->setSortingEnabled(true);
-  m_forecastList->sortByColumn(0, Qt::Ascending);
+  m_forecastList->sortByColumn(0, Qt::AscendingOrder);
 
   //add columns
   QStringList headerLabels;
@@ -275,7 +275,7 @@ void KForecastView::loadSummaryView(void)
 
   m_summaryList->setIconSize(QSize(22, 22));
   m_summaryList->setSortingEnabled(true);
-  m_summaryList->sortByColumn(0, Qt::Ascending);
+  m_summaryList->sortByColumn(0, Qt::AscendingOrder);
 
   //add default rows
   addTotalRow(m_summaryList, forecast);
@@ -566,7 +566,7 @@ void KForecastView::loadBudgetView(void)
 
   m_budgetList->setIconSize(QSize(22, 22));
   m_budgetList->setSortingEnabled(true);
-  m_budgetList->sortByColumn(0, Qt::Ascending);
+  m_budgetList->sortByColumn(0, Qt::AscendingOrder);
 
   //add columns
   QStringList headerLabels;

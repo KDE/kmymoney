@@ -78,7 +78,7 @@ QString reports::ReportTable::renderHeader(const QString& title, bool includeCSS
   if (includeCSS) {
     // include css inline
     QFile cssFile(cssfilename);
-    if (cssFile.open(IO_ReadOnly)) {
+    if (cssFile.open(QIODevice::ReadOnly)) {
       QTextStream cssStream(&cssFile);
       header += QString("\n<style type=\"text/css\">")
                 + "\n<!--\n"

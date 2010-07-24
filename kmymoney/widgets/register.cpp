@@ -284,15 +284,15 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
   cellRect.setWidth(m_parent->viewport()->width());
   cellRect.setHeight(m_parent->rowHeight(index.row()));
 
-  option.palette.setColor(QColorGroup::Base, KMyMoneyGlobalSettings::groupMarkerColor());
+  option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::groupMarkerColor());
 
-  QBrush backgroundBrush(option.palette.color(QColorGroup::Base));
+  QBrush backgroundBrush(option.palette.color(QPalette::Base));
   painter->fillRect(cellRect, backgroundBrush);
   painter->setPen(KMyMoneyGlobalSettings::listGridColor());
   painter->drawLine(cellRect.x(), cellRect.height() - 1, cellRect.width(), cellRect.height() - 1);
 
   // now write the text
-  painter->setPen(option.palette.color(QColorGroup::Text));
+  painter->setPen(option.palette.color(QPalette::Text));
   QFont font = painter->font();
   font.setBold(true);
   painter->setFont(font);

@@ -483,7 +483,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
 
   // make sure to run through all stuff that is tied to 'focusout events'.
   m_regForm->parentWidget()->setFocus();
-  QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 10);
+  QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents, 10);
   // we don't need to update our widgets anymore, so we just disconnect the signal
   disconnect(file, SIGNAL(dataChanged()), this, SLOT(slotReloadEditWidgets()));
 

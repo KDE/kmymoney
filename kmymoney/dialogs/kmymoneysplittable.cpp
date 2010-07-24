@@ -766,7 +766,7 @@ void kMyMoneySplitTable::destroyEditWidgets(void)
   removeCellWidget(m_currentRow, 2);
   removeCellWidget(m_currentRow + 1, 0);
   setState(QAbstractItemView::NoState);
-  QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 100);
+  QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents, 100);
 }
 
 QWidget* kMyMoneySplitTable::createEditWidgets(void)

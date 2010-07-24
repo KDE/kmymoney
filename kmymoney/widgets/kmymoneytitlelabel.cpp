@@ -92,7 +92,7 @@ void KMyMoneyTitleLabel::paintEvent(QPaintEvent *e)
   // first draw pixmap
   style()->drawItemPixmap(&painter, contentsRect(), alignment(), result);
   // then draw text on top
-  style()->drawItemText(&painter, contentsRect(), alignment(), QColorGroup(palette()), isEnabled(), QString("   ") + m_text);
+  style()->drawItemText(&painter, contentsRect(), alignment(), palette(), isEnabled(), QString("   ") + m_text);
 }
 
 void KMyMoneyTitleLabel::setText(const QString& txt)

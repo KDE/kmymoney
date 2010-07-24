@@ -133,7 +133,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
 
   d->m_dateFrame = new KVBox(this);
   d->m_dateFrame->setWindowFlags(Qt::Popup);
-  d->m_dateFrame->setFrameStyle(QFrame::PopupPanel | QFrame::Raised);
+  d->m_dateFrame->setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
   d->m_dateFrame->setLineWidth(3);
   d->m_dateFrame->hide();
 

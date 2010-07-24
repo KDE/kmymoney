@@ -418,7 +418,7 @@ void Transaction::setupPalette(const QPalette& palette, QMap<QString, QWidget*>&
 void Transaction::setupFormPalette(QMap<QString, QWidget*>& editWidgets)
 {
   QPalette palette = m_parent->palette();
-  palette.setColor(QPalette::Active, QColorGroup::Base, palette.color(QPalette::Active, QColorGroup::Base));
+  palette.setColor(QPalette::Active, QPalette::Base, palette.color(QPalette::Active, QPalette::Base));
   setupPalette(palette, editWidgets);
 }
 
@@ -428,7 +428,7 @@ void Transaction::setupRegisterPalette(QMap<QString, QWidget*>& editWidgets)
   QPalette palette = m_parent->palette();
 
   // use the highlight color as background
-  palette.setColor(QPalette::Active, QColorGroup::Background, palette.color(QPalette::Active, QColorGroup::Highlight));
+  palette.setColor(QPalette::Active, QPalette::Background, palette.color(QPalette::Active, QPalette::Highlight));
 
   setupPalette(palette, editWidgets);
 }
