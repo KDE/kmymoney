@@ -5,7 +5,7 @@
      days, and the questions will likely be reordered. -->
 <para>
   This chapter addresses a number of issues that frequently cause confusion,
-  especially in new users of &kappname; If you find that &kappname; is doing
+  especially in new users of &kappname;. If you find that &kappname; is doing
   something you don't understand (or sometimes not doing something you want it
   to do,) please check this list before asking for help on one of the mailing
   lists.  If your problem is not mentioned here, refer to the section on <link
@@ -36,7 +36,7 @@
    <para>Why can't I add an opening balance to an account?</para>
  </question>
  <answer>
-   <para>If you provid an opening balance when you create an account, it is
+   <para>If you provide an opening balance when you create an account, it is
    shown as the first transaction for the account.  If you do not, then the
    transaction is not there, and because it is a special type of transaction,
    you cannot simply add it as you could a deposit or withdrawal.  However, you
@@ -90,10 +90,10 @@
    status,</quote> then only transaction of the selected type will be shown.  In
    addition, there are two important settings in the <link
    linkend="details.settings.general.filter">filter options</link> section on
-   the &kappname; Settings dialog.  If the <quote>Don't show transactions prior
-   to</quote> field is set, only transactions on or after that date will be
-   shown in the ledger.  If the <quote>Don't show reconciled
-   transactions</quote> box is checked, then no reconciled transactions will be
+   the &kappname; Settings dialog.  If the <guilabel>Do not show transactions prior
+   to</guilabel> field is set, only transactions on or after that date will be
+   shown in the ledger.  If the <guilabel>Do not show reconciled
+   transactions</guilabel> box is checked, then no reconciled transactions will be
    shown.</para>
  </answer>
 </qandaentry>
