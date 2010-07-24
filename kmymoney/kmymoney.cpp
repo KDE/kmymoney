@@ -5535,7 +5535,12 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
 void KMyMoneyApp::slotUpdateMoveToAccountMenu(void)
 {
   createTransactionMoveMenu();
-  Q_ASSERT(d->m_moveToAccountSelector != 0);
+
+  // in case we were not able to create the selector, we
+  // better get out of here. Anything else would cause
+  // a crash later on (accountSet.load)
+  if (!d->m_moveToAccountSelector)
+    return;
 
   if (!d->m_selectedAccount.id().isEmpty()) {
     AccountSet accountSet;
