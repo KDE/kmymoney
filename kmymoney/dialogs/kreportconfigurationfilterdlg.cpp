@@ -88,8 +88,8 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   // the Apply button is always enabled
   disconnect(SIGNAL(selectionNotEmpty(bool)));
   enableButtonApply(true);
-  setButtonText(KDialog::Apply, i18n("Ok"));
-  setButtonToolTip(KDialog::Apply, i18n("Apply the configuration changes to the report"));
+  setButtonGuiItem(KDialog::Apply, KStandardGuiItem::ok());
+  setButtonToolTip(KDialog::Apply, i18nc("@info:tooltip for report configuration apply button", "Apply the configuration changes to the report"));
 
   //
   // Add new tabs

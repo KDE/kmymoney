@@ -155,7 +155,8 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
 
   // only allow searches when a selection has been made
   enableButtonApply(false);
-  setButtonText(KDialog::Apply, i18n("&Find"));
+  setButtonGuiItem(KDialog::Apply, KStandardGuiItem::find());
+  setButtonToolTip(KDialog::Apply, i18nc("@info:tooltip for find transaction apply button", "Search transactions"));
   connect(this, SIGNAL(selectionNotEmpty(bool)), this, SLOT(enableButtonApply(bool)));
 
   // get signal about engine changes
