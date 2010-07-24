@@ -545,7 +545,7 @@
 </sect1>
 
 <sect1 id="details.settings.colors">
-<title id="details.settings.colors.title">Colours</title>
+<title id="details.settings.colors.title">Colors</title>
 
 <para>
    These options allow you to change colors within &kappname;.
@@ -571,7 +571,7 @@
 </sect1>
 
 <sect1 id="details.settings.fonts">
-<title id="details.settings.fonts.title">Fonts</title>
+<title>Fonts</title>
 
 <para>
   These options allow you to modify the fonts.
