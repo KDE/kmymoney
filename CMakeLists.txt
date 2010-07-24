@@ -66,30 +66,6 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
 
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}" )
 
-# check for JPEG
-FIND_PACKAGE(JPEG)
-IF (JPEG_FOUND)
-  SET(HAVE_LIBJPEG 1)
-ENDIF (JPEG_FOUND)
-
-# check for PNGL
-FIND_PACKAGE(PNG)
-IF (PNG_FOUND)
-  SET(HAVE_LIBPNG 1)
-ENDIF (PNG_FOUND)
-
-# check for THREAD model
-Find_PACKAGE(Threads)
-IF (CMAKE_USE_PTHREADS_INIT)
-  SET(HAVE_LIBPTHREAD 1)
-ENDIF (CMAKE_USE_PTHREADS_INIT)
-
-# check for ZLIB
-FIND_PACKAGE(ZLIB)
-IF (ZLIB_FOUND)
-  SET(HAVE_LIBZ 1)
-ENDIF (ZLIB_FOUND)
-
 # check for Doxygen
 FIND_PACKAGE(Doxygen)
 IF(DOXYGEN_FOUND)
@@ -112,8 +88,6 @@ pkg_check_modules (PKGS libxml-2.0 libxml++-2.6 glib-2.0 glibmm-2.4)
 # check some functions
 INCLUDE (CheckFunctionExists) 
 CHECK_FUNCTION_EXISTS(atoll HAVE_ATOLL)
-CHECK_FUNCTION_EXISTS(vsnprintf HAVE_VSNPRINTF)
-CHECK_FUNCTION_EXISTS(strtoll HAVE_STRTOLL)
 
 IF(NOT WIN32)
     SET(CMAKE_REQUIRED_FLAGS "-std=c99")
@@ -124,31 +98,10 @@ CHECK_FUNCTION_EXISTS(round HAVE_ROUND)
 # check for function in header
 INCLUDE(CheckSymbolExists)
 SET(CMAKE_REQUIRED_DEFINITIONS -D_XOPEN_SOURCE=500 -D_BSD_SOURCE)
-CHECK_SYMBOL_EXISTS(res_init "sys/types.h;netinet/in.h;arpa/nameser.h;resolv.h" HAVE_RES_INIT)
-
-# check for res_init with prototype
-INCLUDE(CheckPrototypeExists)
-CHECK_PROTOTYPE_EXISTS(res_init "sys/types.h;netinet/in.h;arpa/nameser.h;resolv.h" HAVE_RES_INIT_PROTO)
-
-# special handling of crypt() check
-# ----------------------- crypt() ---------------------------------
-IF(NOT WIN32)
-    SET(CMAKE_REQUIRED_LIBRARIES crypt) 
-ENDIF(NOT WIN32)
-CHECK_FUNCTION_EXISTS(crypt HAVE_CRYPT)
-# -----------------------------------------------------------------
 
 # check some include files exists
 INCLUDE (CheckIncludeFile)
 CHECK_INCLUDE_FILE("stdint.h" HAVE_STDINT_H)
-CHECK_INCLUDE_FILE("dlfcn.h" HAVE_DLFCN_H)
-CHECK_INCLUDE_FILE("inttypes.h" HAVE_INTTYPES_H)
-CHECK_INCLUDE_FILE("memory.h" HAVE_MEMORY_H)
-CHECK_INCLUDE_FILE("stdlib.h" HAVE_STDLIB_H)
-CHECK_INCLUDE_FILE("strings.h" HAVE_STRINGS_H)
-CHECK_INCLUDE_FILE("string.h" HAVE_STRING_H)
-CHECK_INCLUDE_FILE("sys/bitypes.h" HAVE_SYS_BITYPES_H)
-CHECK_INCLUDE_FILE("sys/stat.h" HAVE_SYS_STAT_H)
 CHECK_INCLUDE_FILE("sys/types.h" HAVE_SYS_TYPES_H)
 CHECK_INCLUDE_FILE("unistd.h" HAVE_UNISTD_H)
 
