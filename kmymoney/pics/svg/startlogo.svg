@@ -17,7 +17,7 @@
    inkscape:version="0.47 r22583"
    sodipodi:docname="startlogo.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/al/desarrollo/kmm/kde4/kmymoney/kmymoney/pics/startlogo.png"
+   inkscape:export-filename="../startlogo.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
    version="1.1">
@@ -81,10 +81,10 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1032"
-     inkscape:window-x="-4"
-     inkscape:window-y="-3"
+     inkscape:window-width="1912"
+     inkscape:window-height="1130"
+     inkscape:window-x="0"
+     inkscape:window-y="43"
      showguides="true"
      inkscape:window-maximized="1" />
   <metadata
@@ -104,12 +104,13 @@
      inkscape:groupmode="layer"
      id="layer1">
     <image
-       y="12.477626"
-       x="32.49992"
-       id="image2915"
-       height="300"
+       sodipodi:relref="../background.png"
+       xlink:href="../background.png"
        width="400"
-       xlink:href="file:///home/al/desarrollo/kmm/kde4/kmymoney/kmymoney/pics/background.png" />
+       height="300"
+       id="image2915"
+       x="32.49992"
+       y="12.477626" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot2478"
