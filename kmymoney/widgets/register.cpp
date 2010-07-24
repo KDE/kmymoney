@@ -519,8 +519,6 @@ Register::Register(QWidget *parent) :
 Register::~Register()
 {
   clear();
-  //delete m_tooltip;
-  //m_tooltip = 0;
 }
 
 bool Register::eventFilter(QObject* o, QEvent* e)

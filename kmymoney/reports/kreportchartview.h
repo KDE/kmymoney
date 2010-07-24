@@ -58,13 +58,6 @@ public:
   ~KReportChartView() {}
 
   /**
-    * Whether the calling report has chart capabilities
-    */
-  static bool implemented(void) {
-    return true;
-  }
-
-  /**
     * Returns the labels for the X axis
     * @see m_abscissaNames
     */
