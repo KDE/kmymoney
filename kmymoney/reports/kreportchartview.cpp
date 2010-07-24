@@ -200,11 +200,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     if (config.chartType() == MyMoneyReport::eChartLine) {
       KDChart::LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(planeDiagram);
 
-      //set line width
-      /*QPen linePen(lineDiagram->pen());
-      linePen.setWidth(config.chartLineWidth());
-      lineDiagram->setPen(linePen);*/
-
       //remove all existing axes before inserting new ones
       while (lineDiagram->axes().count() > 0) {
         CartesianAxis *delAxis  = lineDiagram->axes().at(0);
