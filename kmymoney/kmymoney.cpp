@@ -3007,7 +3007,7 @@ void KMyMoneyApp::createCategory(MyMoneyAccount& account, const MyMoneyAccount& 
 void KMyMoneyApp::slotAccountNew(void)
 {
   MyMoneyAccount acc;
-  acc.setOpeningDate(QDate::currentDate());
+  acc.setOpeningDate(KMyMoneyGlobalSettings::firstFiscalDate());
 
   slotAccountNew(acc);
 }

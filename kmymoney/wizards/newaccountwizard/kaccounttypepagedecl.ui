@@ -74,7 +74,8 @@
         <enum>Qt::StrongFocus</enum>
        </property>
        <property name="whatsThis">
-        <string>The opening balance is the balance of the account when you start using it with KMyMoney. For new accounts this is usually 0 but for existing accounts this may well differ. Please consult the account statements to figure out this value. The opening balance is to be provided in the currency of the account as selected with the currency button.</string>
+        <string>&lt;p&gt;The opening balance is the balance of the account when you start using it with KMyMoney. For new accounts this is usually 0 but for existing accounts this may well differ. Please consult the account statements to figure out this value. The opening balance is to be provided in the currency of the account as selected with the currency button.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;Note&lt;/i&gt;: If you do not know the exact amount of the opening balance, enter an estimate. You can change this value later before you reconcile this account for the first time.&lt;/p&gt;</string>
        </property>
        <property name="resetButtonVisibility" stdset="0">
         <bool>false</bool>
@@ -97,9 +98,8 @@
         <enum>Qt::StrongFocus</enum>
        </property>
        <property name="whatsThis">
-        <string>The opening date would be the date of the last statement. In case you want to keep track of transactions prior to this date, enter the ending balance and statement date of a prior statement and add all following transactions into KMyMoney.
-&lt;br&gt;
-&lt;i&gt;Note&lt;/i&gt;: If you do not know the exact amount of the opening balance, enter an estimate. You can change this value later before you reconcile this account for the first time.</string>
+        <string>&lt;p&gt;The opening date would be the date of the last statement. In case you want to keep track of transactions prior to this date, enter the ending balance and statement date of a prior statement and add all following transactions into KMyMoney. KMyMoney will not allow you to enter or modify transactions prior to this date.&lt;p/&gt;
+&lt;p&gt;&lt;i&gt;Note&lt;/i&gt;: If you do not know the exact amount of the opening balance, enter an estimate. You can change this value later before you reconcile this account for the first time.&lt;/p&gt;</string>
        </property>
       </widget>
      </item>

@@ -102,6 +102,14 @@ int KMyMoneyGlobalSettings::firstFiscalDay(void)
   return KMyMoneySettings::fiscalYearBeginDay();
 }
 
+QDate KMyMoneyGlobalSettings::firstFiscalDate(void)
+{
+  QDate date = QDate(QDate::currentDate().year(), firstFiscalMonth(), firstFiscalDay());
+  if (date > QDate::currentDate())
+    date.addYears(-1);
+  return date;
+}
+
 void KMyMoneyGlobalSettings::setSubstringSearch(QWidget* w)
 {
   if (w) {

@@ -42,8 +42,21 @@ public:
   static QColor listColor(void);
   static QColor listBGColor(void);
   static QStringList itemList(void);
+
+  /**
+    * returns the number of the first month in the fiscal year
+    */
   static int firstFiscalMonth(void);
+
+  /**
+    * returns the number of the first day of the fiscal year
+    */
   static int firstFiscalDay(void);
+
+  /**
+    * returns the date of the first day in the current fiscal year
+    */
+  static QDate firstFiscalDate(void);
 
   /**
     * Construct a MyMoneyForecast object setup with all KMyMoneySettings
