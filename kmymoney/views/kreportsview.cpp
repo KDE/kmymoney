@@ -85,7 +85,17 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   if (!KReportChartView::implemented() ||
       m_report.reportType() != MyMoneyReport::ePivotTable) {
     m_control->buttonChart->hide();
+  } else {
+    m_control->buttonChart->setIcon(KIcon("office-chart-tall-pie"));
   }
+
+  //set button icons
+  m_control->buttonClose->setIcon(KIcon("document-close"));
+  m_control->buttonConfigure->setIcon(KIcon("configure"));
+  m_control->buttonCopy->setIcon(KIcon("edit-copy"));
+  m_control->buttonDelete->setIcon(KIcon("edit-delete"));
+  m_control->buttonExport->setIcon(KIcon("document-export"));
+  m_control->buttonNew->setIcon(KIcon("document-new"));
 
   m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   m_chartView->hide();
