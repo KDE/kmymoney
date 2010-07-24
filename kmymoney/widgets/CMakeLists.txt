@@ -105,11 +105,6 @@ IF( USE_QT_DESIGNER )
 
   KDE4_ADD_PLUGIN(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
 
-  # For now, be NOT pedantic about this library.
-  # Some undefined references remain.
-  SET_TARGET_PROPERTIES(kmymoneywidgets PROPERTIES
-    LINK_FLAGS "-Wl,--undefined")
-
   INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
   ##### Is the option -DKMM_DESIGNER needed??
