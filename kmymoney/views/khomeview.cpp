@@ -593,8 +593,6 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
     if (!acc.id().isEmpty()) {
       MyMoneyTransaction t = sched.transaction();
       // only show the entry, if it is still active
-      // FIXME clean old code
-      // if(!sched.isFinished() && sched.nextPayment(sched.lastPayment()) != QDate()) {
       if (!sched.isFinished()) {
         MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
