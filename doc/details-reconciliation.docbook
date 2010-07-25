@@ -79,7 +79,6 @@
 	</mediaobject>
 </screenshot>
 </para>
-
 </sect2>
 
 <sect2 id="details.reconcile.wizard.interest">
@@ -89,6 +88,13 @@
   interest and/or charges fees, then enter these values in the appropriate
   fields.  A category can be assigned for each of these amounts.
 </para>
+
+<note>
+<para>
+  The interest field is for interest you gained. If you have to pay interest,
+  &eg;, for a credit card account, this has to be entered as a charge.
+</para>
+</note>
 
 <para>
 <screenshot>
@@ -102,17 +108,10 @@
 	</textobject>
 	</mediaobject>
 </screenshot>
-
-<note>
-<para>
-  The interest field is for interest you gained. If you have to pay interest,
-  &eg;, for a credit card account, this has to be entered as a charge.
-</para>
-</note>
 </para>
 
 <para>
-  Click on <guibutton>Finish</guibutton> to start matching your statement to
+  Click on <guibutton>Continue</guibutton> to start matching your statement to
   what you have entered.  Note that this completes the Reconciliation Wizard,
   but not the process of reconciliation.  It also changes the ledger display by
   only showing transactions that have not already been marked as reconciled.  As
@@ -179,21 +178,38 @@
 <title>Postponing Reconciliation</title>
 <para>
   If you're having trouble completing the reconciliation, or you need to gather
-  some additional information before you can complete the process, you can tell
-  &kappname; to postpone it to a later time by clicking on the
-  <guibutton>Postpone</guibutton> button.  When you do this, &kappname;
-  remembers the values you entered when you started the wizard, it does not mark
-  cleared transactions as reconciled, and it returns the ledger to its normal
-  view.  Any edits you have made, such as marking transactions cleared or
-  entering new transactions, are not touched, and you can still save them before
-  you exit &kappname;.  However, you will have to run the reconciliation wizard
-  again in order to reconcile the account.  At that time &kappname; will
-  remember the values you entered when you previously ran the wizard, and you
-  will be able to change them, if necessary.  If you exit &kappname; before
-  clicking either <guibutton>Finish</guibutton> or
+  some additional information before you can complete the process, you can
+  postpone the process to a later time by clicking on the
+  <guibutton>Postpone</guibutton> button. When you do this, &kappname; remembers
+  the values you entered when you started the wizard, it does not mark cleared
+  transactions as reconciled, and it returns the ledger to its normal view.  If
+  you exit &kappname; before clicking either <guibutton>Finish</guibutton> or
   <guibutton>Postpone</guibutton>, it has the same effect as clicking
-  <guibutton>Postpone</guibutton>.
+  <guibutton>Postpone</guibutton>.  Any edits you have made, such as marking
+  transactions cleared or entering new transactions, are not touched, and you
+  can still save them before you exit &kappname;.  However, you will have to run
+  the reconciliation wizard again in order to reconcile the account.
 </para>
+
+<para>
+  When you run the reconciliation wizard on this account the next time,
+  &kappname; remembers the values you entered when you previously ran the
+  wizard, and you will be able to change them, if necessary.  In this case, the
+  initial screen of of the wizard is different, to remind you of this.
+</para>
+
+<screenshot>
+	<screeninfo>Reconciliation wizard</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile-redo.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Reconciliation wizard</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+
 </sect3>
 </sect2>
 </sect1>
