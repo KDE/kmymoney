@@ -55,7 +55,7 @@
   Many Linux distributions have users who provide unsupported repositories that
   offer more up-to-date packages than the distributions' official repositories.
   A list of these may be found at the <ulink
-  url="http://techbase.kde.org/Projects/KMyMoney">&kappname; home page</ulink>.
+  url="http://www.kmymoney.org">&kappname; home page</ulink>.
 </para>
 </sect2>
 
@@ -67,10 +67,10 @@
 <para>
   More up-to-date information on the latest available version and any known
   installation issues will be available on the <ulink
-  url="http://techbase.kde.org/Projects/KMyMoney">&kappname; home page</ulink>.
-  That page will also have links to tarballs of recent versions as well as
-  instructions for obtaining the source from KDE SVN, in case you want to
-  compile the latest, development version.
+  url="http://www.kmymoney.org">&kappname; home page</ulink>.  That page will
+  also have links to tarballs of recent versions as well as instructions for
+  obtaining the source from KDE SVN, in case you want to compile the latest,
+  development version.
 </para>
 
 <para>
@@ -169,8 +169,8 @@
 <para>
   &kappname; has also been reported to be available for &Windows;, but details
   were not available in time to include here.  Please check the <ulink
-  url="http://techbase.kde.org/Projects/KMyMoney">&kappname; home page</ulink>
-  for updated information.</para> 
+  url="http://www.kmymoney.org">&kappname; home page</ulink> for updated
+  information.</para>
 <para>
   If you know of &kappname; being successfully compiled and made available for
   any other operating system, please let us know, so we can spread the word.
