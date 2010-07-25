@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="credits">
 <chapterinfo>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
 <title>Credits</title>
@@ -72,6 +72,27 @@
       <para>Database support.</para>
     </formalpara>
   </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Cristian Oneţ &lt;onet.cristian@gmail.com&gt;</title>
+      <para>Patches and Plugins</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Jack H. Ostroff &lt;ostroffjh@users.sourceforge.net&gt;</title>
+      <para>Documentation.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Migration to &kde;4/&Qt;4</title>
+      <para>Many developers contributed to this effort.</para>
+    </formalpara>
+  </listitem>
 </itemizedlist>
 
 </sect1>
@@ -138,13 +159,6 @@
     <formalpara>
       <title>Darin Strait &lt;darin.strait@ashdar-partners.com&gt;</title>
       <para>Documentation</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title>Cristian Oneţ &lt;onet.cristian@gmail.com&gt;</title>
-      <para>Patches and Plugins</para>
     </formalpara>
   </listitem>
 
