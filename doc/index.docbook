@@ -16,7 +16,32 @@
        from entities/general.entities and $LANG/user.entities. -->
   <!ENTITY devlist "<email>kmymoney-devel@kde.org</email>">
   <!ENTITY userlist "<email>kmymoney2-user@lists.sourceforge.net</email>">
-  <!ENTITY Insert "<keycap>Ins</keycap>">
+
+  <!-- the following author entities need to be added to contributor.entities in 4.5 branch and trunk of svn -->
+  <!ENTITY Michael.T.Edwardes "<personname><firstname>Michael</firstname><othername>T.</othername><surname>Edwardes</surname></personname>">
+  <!ENTITY Michael.T.Edwardes.mail "<email>mte@users.sourceforge.net</email>">
+
+  <!ENTITY Thomas.Baumgart "<personname><firstname>Thomas</firstname><surname>Baumgart</surname></personname>">
+  <!ENTITY Thomas.Baumgart.mail "<email>ipwizard@users.sourceforge.net</email>">
+
+  <!ENTITY Ace.Jones "  <personname><firstname>Ace</firstname><surname>Jones</surname></personname>">
+  <!ENTITY Ace.Jones.mail "<email>acejones@users.sourceforge.net</email>">
+
+  <!ENTITY Tony.Bloomfield "<personname><firstname>Tony</firstname><surname>Bloomfield</surname></personname>">
+  <!ENTITY Tony.Bloomfield.mail "<email>tonybloom@users.sourceforge.net</email>">
+
+  <!ENTITY Robert.Wadley "<personname><firstname>Robert</firstname><surname>Wadley</surname></personname>">
+  <!ENTITY Robert.Wadley.mail "<email>robntina@users.sourceforge.net</email>">
+
+  <!ENTITY Darin.Strait "<personname><firstname>Darin</firstname><surname>Strait</surname></personname> ">
+  <!ENTITY Darin.Strait.mail "<email>darin.strait@ashdar-partners.com</email>">
+
+  <!ENTITY Roger.Lum "<personname><firstname>Roger</firstname><surname>Lum</surname></personname>">
+  <!ENTITY Roger.Lum.mail "<email>rogerlum@gmail.com</email>">
+
+  <!ENTITY Jack.H.Ostroff "<personname><firstname>Jack</firstname><othername>H.</othername><surname>Ostroff</surname></personname>">
+  <!ENTITY Jack.H.Ostroff.mail "<email>ostroffjh@users.sourceforge.net</email>">
+
 <!-- the chapters -->
   <!ENTITY introduction SYSTEM "introduction.docbook">
   <!ENTITY makemostof SYSTEM "makemostof.docbook">
@@ -52,7 +77,7 @@
 
 <bookinfo>
 <title>The &kappname; Handbook</title>
-<subtitle>for &kappname; version 3.97</subtitle>
+<subtitle>for &kappname; version 4.5</subtitle>
 
 <authorgroup>
 <!-- This is just put in as an example.  For real documentation, please
@@ -61,65 +86,14 @@
 <!ENTITY George.N.Ugnacious.mail "<email>gnu@kde.org</email>">
 and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
  -->
-<author>
-  <personname>
-    <firstname>Michael</firstname>
-    <othername>T.</othername>
-    <surname>Edwardes</surname>
-  </personname>
-  <email>mte@users.sourceforge.net</email>
-</author>
-
-<author>
-  <personname>
-    <firstname>Thomas</firstname>
-    <surname>Baumgart</surname>
-  </personname>
-  <email>ipwizard@users.sourceforge.net</email>
-</author>
-
-<author>
-  <personname>
-    <firstname>Ace</firstname>
-    <surname>Jones</surname>
-  </personname>
-  <email>acejones@users.sourceforge.net</email>
-</author>
-
-<author>
-  <personname>
-    <firstname>Tony</firstname>
-    <surname>Bloomfield</surname>
-  </personname>
-  <email>tonybloom@users.sourceforge.net</email>
-</author>
-
-<author>
-  <personname>
-    <firstname>Robert</firstname>
-    <surname>Wadley</surname>
-  </personname>
-  <email>robntina@users.sourceforge.net</email>
-</author>
-
-<author>
-  <personname>
-    <firstname>Darin</firstname>
-    <surname>Strait</surname>
-  </personname>
-  <email>darin.strait@ashdar-partners.com</email>
-</author>
-
-<author>
-  <personname>
-    <firstname>Roger</firstname>
-    <surname>Lum</surname>
-  </personname>
-  <email>rogerlum@gmail.com</email>
-</author>
-
+<author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+<author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+<author> &Ace.Jones; &Ace.Jones.mail; </author>
+<author> &Tony.Bloomfield; &Tony.Bloomfield.mail; </author>
+<author> &Robert.Wadley; &Robert.Wadley.mail; </author>
+<author> &Darin.Strait;	&Darin.Strait.mail; </author>
+<author> &Roger.Lum; &Roger.Lum.mail; </author>
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
-
 </authorgroup>
 
 <copyright>
@@ -147,8 +121,8 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2010-03-07</date>
-<releaseinfo>3.97.00</releaseinfo>
+<date>2010-07-24</date>
+<releaseinfo>4.05.00</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -158,24 +132,25 @@ Do NOT change these in the translation. -->
 </para>
 
 <para>
-  This handbook describes &kappname; version 3.97.
+  This handbook describes &kappname; version 4.5.
 </para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
 Please at least include KDE, the KDE package it is in, the name
  of your application, and a few relevant keywords. -->
-
 <keywordset>
 <keyword>KDE</keyword>
-<keyword>KMyMoney2</keyword>
+<keyword>office</keyword>
+<keyword>KMyMoney4</keyword>
 <keyword>KMyMoney</keyword>
-<keyword>kmymoney2</keyword>
+<keyword>kmymoney4</keyword>
 <keyword>kmymoney</keyword>
 <keyword>finance</keyword>
 <keyword>accounts</keyword>
 <keyword>accounting</keyword>
 <keyword>financial</keyword>
+<keyword>bookkeeping</keyword>
 </keywordset>
 
 </bookinfo>
