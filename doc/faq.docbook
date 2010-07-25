@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="faq">
+<chapterinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
+</chapterinfo>
+
 <title>Questions and Answers</title>
-<!-- Note: this is only preliminary.  More questions will be added over the next
-     days, and the questions will likely be reordered. -->
+
 <para>
   This chapter addresses a number of issues that frequently cause confusion,
   especially in new users of &kappname;. If you find that &kappname; is doing
@@ -214,8 +218,8 @@
 
 <qandaentry>
  <question>
-   <para>Will &kappname; work on my X/&ubuntu; desktop?</para>
-   <para>Will &kappname; work without a full KDE desktop?</para>
+   <para>Will &kappname; work on my X/&ubuntu; desktop? Will &kappname; work
+   without a full KDE desktop?</para>
  </question>
  <answer>
    <para>Yes, &kappname; will work without a full &kde; desktop, but you will
@@ -282,8 +286,7 @@
 
 <qandaentry>
  <question>
-   <para>How can I report a bug?</para>
-   <para>How can I request a new feature?</para>
+   <para>How can I report a bug? How can I request a new feature?</para>
  </question>
  <answer>
    <para>The developers encourage your feedback.  See the section on <link
