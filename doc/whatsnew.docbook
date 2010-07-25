@@ -41,12 +41,18 @@
     <para>
       Better performance of the user interface
     </para>
-  </listitem> 
+  </listitem>
   
   <listitem>
     <para>
       <link linkend="details.impexp">Now works with latest version of AqBanking
       and the usability of the online banking features has been improved</link>
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Uses KWallet to store online accounts password if present
     </para>
   </listitem>
 
