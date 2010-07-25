@@ -1281,13 +1281,37 @@ QString PivotTable::renderCSV(void) const
   result += i18n("Account");
 
   int column = 1;
-  while (column < m_numColumns)
+  while (column < m_numColumns) {
     result += QString(",%1").arg(QString(m_columnHeadings[column++]));
+    if(m_rowTypeList.size() > 1) {
+      QString separator;
+      separator = separator.fill(',', m_rowTypeList.size() - 1);
+      result += separator;
+    }
+  }
 
+  //show total columns
   if (m_config_f.isShowingRowTotals())
     result += QString(",%1").arg(i18nc("Total balance", "Total"));
 
   result += '\n';
+
+  // Row Type Header
+  if(m_rowTypeList.size() > 1) {
+    int column = 1;
+    while (column < m_numColumns) {
+      for (int i = 0; i < m_rowTypeList.size(); ++i) {
+        result += QString(",%1").arg(m_columnTypeHeaderList[i]);
+      }
+      column++;
+    }
+    if (m_config_f.isShowingRowTotals()) {
+      for (int i = 0; i < m_rowTypeList.size(); ++i) {
+        result += QString(",%1").arg(m_columnTypeHeaderList[i]);
+      }
+    }
+    result += '\n';
+  }
 
   int fraction = MyMoneyFile::instance()->baseCurrency().smallestAccountFraction();
 
