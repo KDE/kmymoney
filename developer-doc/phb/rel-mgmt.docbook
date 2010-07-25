@@ -569,7 +569,7 @@ The news system for &app; on SourceForge.net:  Create a news entry on https://so
 </para></listitem>
 
 <listitem><para>
-The &app; web-site at http://kmymoney2.sourceforge.net/:  Update all version info
+The &app; web-site at http://kmymoney.org/:  Update all version info
 for the stable and development releases and update the links to the source tar-balls.
 </para></listitem>
 
@@ -578,7 +578,7 @@ The &app; web-site at http://www.kde-apps.arg/: Add the release notes and update
 </para></listitem>
 
 <listitem><para>
-The &app; web-site at http://kmymoney2.sourceforge.net/: Update the links to the latest stable and development release.
+The &app; web-site at http://kmymoney.org/: Update the links to the latest stable and development release.
 If you created a fresh stable release, comment the development release entry.
 </para></listitem>
 </orderedlist>

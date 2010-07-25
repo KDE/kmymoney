@@ -17,7 +17,7 @@
 Name:           @RPM_NAME@
 Summary:		A Personal Finance Manager for KDE4
 Group:			Productivity/Office/Finance
-URL:			http://kmymoney2.sourceforge.net
+URL:			http://kmymoney.org
 License:		GPL
 Version:        @CPACK_PACKAGE_VERSION@
 Release:        0.pm.%{_cvs}

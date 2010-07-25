@@ -91,7 +91,7 @@ standards, configuration management and error reporting, just to name a few.
 The focus of this document is on configuration management and coding
 standards. More
 information about the &app; project can be found on the
-<ulink url="http://kmymoney2.sourceforge.net/">project's hompage</ulink>.
+<ulink url="http://kmymoney.org/">project's hompage</ulink>.
 </para>
 <para>
 If you have any comments to raise about this document please send an email
@@ -100,8 +100,8 @@ the project's developer mailing list and we will try to rectify it.
 
 Please note that the most up-to-date version of this document can be
 found in the source tree and is online on the
-<ulink url="http://kmymoney2.sourceforge.net/">project's homepage</ulink>.
-A <ulink url="http://kmymoney2.sourceforge.net/phb/kmymoney-phb.pdf">PDF
+<ulink url="http://kmymoney.org/">project's homepage</ulink>.
+A <ulink url="http://kmymoney.org/phb/kmymoney-phb.pdf">PDF
 version</ulink> is also available for download.
 </para>
 

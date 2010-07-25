@@ -29,6 +29,6 @@ X-KDE-PluginInfo-Name=KBanking
 X-KDE-PluginInfo-Author=Martin Preuss,Thomas Baumgart
 X-KDE-PluginInfo-Email=aquamaniac@users.sourceforge.net,ipwizard@users.sourceforge.net
 X-KDE-PluginInfo-Version=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${VERSION_SUFFIX}
-X-KDE-PluginInfo-Website=http://kmymoney2.sourceforge.net/plugins.html
+X-KDE-PluginInfo-Website=http://kmymoney.org/plugins.html
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true

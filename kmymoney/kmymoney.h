@@ -60,7 +60,7 @@ class KPluginInfo;
  * read for new features that have been developed in KMyMoney.
  *
  * The latest version of this document is available from the project's web-site
- * at http://kmymoney2.sourceforge.net/ and is generated daily by doxygen reading
+ * at http://kmymoney.org/ and is generated daily by doxygen reading
  * the header files found in the CVS main branch.
  */
 
