@@ -51,8 +51,8 @@
   <!ENTITY Fernando.Vilas "<personname><firstname>Fernando</firstname><surname>Vilas</surname></personname>">
   <!ENTITY Fernando.Vilas.mail "<email>fvilas@users.sourceforge.net</email>">
 
-  <!ENTITY Christian.Onet "<personname><firstname>Christian</firstname><surname>Oneţ</surname></personname>">
-  <!ENTITY Christian.Onet.mail "<email>onet.christian@gmail.com</email>">
+  <!ENTITY Cristian.Onet "<personname><firstname>Cristian</firstname><surname>Oneț</surname></personname>">
+  <!ENTITY Cristian.Onet.mail "<email>onet.cristian@gmail.com</email>">
 
 <!-- the chapters -->
   <!ENTITY introduction SYSTEM "introduction.docbook">
