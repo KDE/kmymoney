@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="faq">
 <chapterinfo>
+  <authorgroup>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
   <date>2010-07-25</date>
   <releaseinfo>4.5</releaseinfo>
 </chapterinfo>

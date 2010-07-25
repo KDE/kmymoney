@@ -30,7 +30,7 @@
   </inlinemediaobject>Reconcile</guiicon> icon, select
   <menuchoice><guimenu>Account</guimenu>
   <guimenuitem>Reconcile...</guimenuitem></menuchoice> or use the key
-  combination Ctl+Shift+R.
+  combination <keycombo>&Ctrl;&Shift;<keycap>R</keycap></keycombo>.
 </para>
 </sect1>
 

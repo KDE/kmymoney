@@ -2,16 +2,10 @@
 <chapter id="details.loans">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Darin</firstname>
-      <surname>Strait</surname>
-      <affiliation>
-        <address><email>darin.strait@ashdar-partners.com</email></address>
-      </affiliation>
-    </author>
+    <author> &Darin.Strait;	&Darin.Strait.mail; </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
 <title>Loans</title>

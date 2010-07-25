@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="reference">
 <chapterinfo>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
 <title>Reference</title>
 
 <sect1 id="reference.menus">
 <sect1info>
-  <author>
-    <firstname>Roger</firstname>
-    <surname>Lum</surname>
-    <affiliation>
-      <address><email>rogerlum@gmail.com</email></address>
-    </affiliation>
-  </author>
+  <author> &Roger.Lum; &Roger.Lum.mail; </author>
 </sect1info>
 <title>Menus</title>
 

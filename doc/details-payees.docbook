@@ -2,24 +2,11 @@
 <chapter id="details.payees">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Roger</firstname>
-      <surname>Lum</surname>
-      <affiliation>
-       <address><email>rogerlum@gmail.com</email></address>
-      </affiliation>
-    </author>
-    <author>
-      <firstname>Ace</firstname>
-      <surname>Jones</surname>
-      <affiliation>
-        <address><email>acejones@users.sf.net</email></address>
-      </affiliation>
-    </author>
+    <author> &Roger.Lum; &Roger.Lum.mail; </author>
+    <author> &Ace.Jones; &Ace.Jones.mail; </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
-
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
 <title id="details.payees.title">Payees</title>
@@ -208,7 +195,7 @@
   <quote>SUNTRUST BANK MAPLE VALLEY,GA</quote> or even
   <quote>MORGENSUNTRUST&amp;LOAN</quote>.  So choose your Match Keys carefully.
   <note><para> If a transaction payee matches more than one Match Key, the
-  behaviour is undefined.  &kappname; will arbitrarily pick one of the matching
+  behavior is undefined.  &kappname; will arbitrarily pick one of the matching
   payees.  </para></note>
 </para>
 </sect3>

@@ -2,15 +2,14 @@
 <chapter id="details.budgets">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <surname>Colin Wright &lt;cdwright@gwi.net&gt;</surname>
-    </author>
+    <author> &Colin.Wright; &Colin.Wright.mail; </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
-<title id="details.budgets.title">Budgets</title>
+<title>Budgets</title>
+
 <sect1 id="details.budgets.define">
 <title>What is a budget?</title>
 

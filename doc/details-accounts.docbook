@@ -2,23 +2,10 @@
 <chapter id="details.accounts">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Michael</firstname>
-      <othername>T.</othername>
-      <surname>Edwardes</surname>
-      <affiliation>
-        <address><email>mte@users.sourceforge.net</email></address>
-      </affiliation>
-    </author>
-    <author>
-      <firstname>Roger</firstname>
-      <surname>Lum</surname>
-      <affiliation>
-        <address><email>rogerlum@gmail.com</email></address>
-      </affiliation>
-    </author>
+    <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author> &Roger.Lum; &Roger.Lum.mail; </author>
   </authorgroup>
-  <date>2010-07-23</date>
+  <date>2010-07-25</date>
   <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
   
@@ -579,13 +566,13 @@
 	
 <para>
   If you re-financed an existing Loan check the "Refinance existing loan"
-  checkbox, select the Loan account and &kappname; will create a transfer
+  check box, select the Loan account and &kappname; will create a transfer
   transaction paying off the existing loan.
 </para>
 	
 <para>
   If you don't want to create the payout transaction, check the "Do not create
-  transaction" checkbox.
+  transaction" check box.
 </para>
 </sect2>
 
@@ -619,7 +606,7 @@
 
 <para>
   The Parent Account page is not currently shown for Loans because they cannot
-  be created as sub-accounts.  Also, Investment accounts cannot contain other
+  be created as subaccounts.  Also, Investment accounts cannot contain other
   accounts so they are not shown in the tree.
 </para>
 </sect2>

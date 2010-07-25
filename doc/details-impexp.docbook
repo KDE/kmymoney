@@ -2,16 +2,10 @@
 <chapter id="details.impexp">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Ace</firstname>
-      <surname>Jones</surname>
-      <affiliation>
-        <address><email>acejones@users.sourceforge.net</email></address>
-      </affiliation>
-    </author>
+    <author> &Ace.Jones; &Ace.Jones.mail; </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
 <title>Importing and Export</title>
@@ -54,8 +48,8 @@
 </para>
 
 <para>
-  Files can be opened by specifying the file name on the command line
-  (<command>kmymoney &lt;filepath&gt;</command>), or by means of the &kappname;
+  Files can be opened by specifying the filename on the command line
+  (<command>kmymoney &lt;path to file&gt;</command>), or by means of the &kappname;
   <menuchoice>
     <shortcut><keycombo>&Ctrl;<keycap>O</keycap></keycombo></shortcut>
     <guimenu>File</guimenu><guimenuitem>Open</guimenuitem>
@@ -262,7 +256,7 @@
   <link linkend="details.currencies">currency</link> types.  &kappname; also
   requires that the user specify a base currency, this being the default
   currency for new accounts. The importer will attempt to determine the most
-  likely base currency, though this choice may be rejected in favour of an
+  likely base currency, though this choice may be rejected in favor of an
   alternative.
 </para>
 
@@ -960,7 +954,7 @@
   If you have installed from RPM, the OFX Importer Plugin is contained within
   the kmymoney-ofx RPM.  It should be available from whatever source you got the
   base &kappname; RPM.  If you have built from sources, all you need to do is
-  have preferrably the libOFX 0.9 development headers and libraries installed
+  have preferably the libOFX 0.9 development headers and libraries installed
   on your system.  The &kappname; build process will detect these and compile
   the plugin.  libOFX 0.8.2 is supported as well, but some features are not
   supported with this version of the library.

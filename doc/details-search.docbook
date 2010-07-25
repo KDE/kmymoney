@@ -2,17 +2,12 @@
 <chapter id="details.search">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Darin</firstname>
-      <surname>Strait</surname>
-      <affiliation>
-        <address><email>darin.strait@ashdar-partners.com</email></address>
-      </affiliation>
-    </author>
+    <author> &Darin.Strait; &Darin.Strait.mail; </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
+
 <title>Search Transactions</title>
 
 <sect1 id="details.search.general">
@@ -27,7 +22,7 @@
 
 <para>
   There are two main tabs in this dialog. The <quote>Criteria</quote> tab
-  displays a number of sub-tabs for specifying the search critera.
+  displays a number of sub-tabs for specifying the search criteria.
 </para>
 
 <para>
@@ -46,7 +41,7 @@
 
 <para>
  The <guibutton>Reset</guibutton> button resets all of the fields on all of the
- critera sub-tabs back to the defaults. This allows you to specify new search
+ criteria sub-tabs back to the defaults. This allows you to specify new search
  criteria.
 </para>
 
@@ -82,7 +77,7 @@
 </screenshot>
 
 <para>
-  This tab allows you to speicify text to search for.  There are also two check
+  This tab allows you to specify text to search for.  There are also two check
   boxes that control how the text is used in the search.
 </para>
 
@@ -118,7 +113,7 @@
 
 <para>
   If you check the <guilabel>Treat Text as regular expression</guilabel> box,
-  the text will be treated as a regular expresssion.  For details on how to
+  the text will be treated as a regular expression.  For details on how to
   craft a regular expression, visit the &Qt; documentation about the
   <ulink url="http://qt.nokia.com/doc/3.3/qregexp.html#1">QRegExp
   class</ulink>.

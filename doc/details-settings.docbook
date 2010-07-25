@@ -2,21 +2,16 @@
 <chapter id="details.settings">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Roger</firstname>
-      <surname>Lum</surname>
-	<affiliation>
-          <address><email>rogerlum@gmail.com</email></address>
-	</affiliation>
-    </author>
+    <author> &Roger.Lum; &Roger.Lum.mail; </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
+
 <title id="details.settings.title">&kappname; Settings</title>
 
 <para>
-   The settings described below modify the behaviour of &kappname;. These
+   The settings described below modify the behavior of &kappname;. These
    settings can be changed
    through <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
    &kappname;...</guimenuitem></menuchoice>.
@@ -156,7 +151,7 @@
 <title id="details.settings.register.title">Register</title>
 
 <para>
-   These options allow you to modify the behaviour of the transaction registers.
+   These options allow you to modify the behavior of the transaction registers.
 </para>
 
 <sect2 id="details.settings.register.display"><title>Display tab</title>
@@ -458,7 +453,7 @@
 <title id="details.settings.schedules.title">Schedules</title>
 
 <para>
-  These options allow you to modify the behaviour of
+  These options allow you to modify the behavior of
   the <link linkend="details.schedules">scheduling features</link>.
 </para>
 

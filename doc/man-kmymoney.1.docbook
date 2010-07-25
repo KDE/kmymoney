@@ -7,21 +7,44 @@
 
 <refentry lang="&language;">
 <refentryinfo>
-<author><personname><firstname>Michael</firstname><surname>Edwardes</surname></personname>
-<email>mte@users.sourceforge.net</email></author>
 
-<author><personname><firstname>Felix</firstname><surname>Rodriguez</surname></personname>
-<email>frodriguez@users.sourceforge.net</email></author>
+<author><personname><firstname>Michael</firstname><othername>T.</othername><surname>Edwardes</surname></personname>
+<email>mte@users.sourceforge.net</email></author>
 
 <author><personname><firstname>Thomas</firstname><surname>Baumgart</surname></personname>
 <email>ipwizard@users.sourceforge.net</email></author>
 
+<author><personname><firstname>Tony</firstname><surname>Bloomfield</surname></personname>
+<email>tonybloom@users.sourceforge.net</email></author>
+
+<author><personname><firstname>Robert</firstname><surname>Wadley</surname></personname>
+<email>robntina@users.sourceforge.net</email></author>
+
+<author><personname><firstname>Alvaro</firstname><surname>Soliverez</surname></personname>
+<email>asoliverez@users.sourceforge.net</email></author>
+
+<author><personname><firstname>Fernando</firstname><surname>Vilas</surname></personname>
+<email>fvilas@users.sourceforge.net</email></author>
+
+<author><personname><firstname>Christian</firstname><surname>Oneţ</surname></personname>
+<email>onet.christian@gmail.com</email></author>
+
+<author><personname><firstname>Jack</firstname><othername>H.</othername><surname>Ostroff</surname></personname>
+<email>ostroffjh@users.sourceforge.net</email></author>
+
+<author><personname><firstname>Felix</firstname><surname>Rodriguez</surname></personname>
+<email>frodriguez@users.sourceforge.net</email></author>
+
 <author><personname><firstname>Kevin</firstname><surname>Tambascio</surname></personname>
 <email>ktambascio@users.sourceforge.net</email></author>
 
-<author><personname><firstname>Arni</firstname><surname>Ingimundarson</surname></personname>
-<email>arniing@users.sourceforge.net</email></author>
+<!-- This person was previously listed as an author here, but is not currently
+     included in credits.docbook.  He should either be dropped from here or
+     included there.
 
+    <author><personname><firstname>Arni</firstname><surname>Ingimundarson</surname></personname>
+    <email>arniing@users.sourceforge.net</email></author>
+ -->
 </refentryinfo>
 
 <refmeta>
@@ -50,10 +73,10 @@
 <refsect1>
 <title>Description</title>
 
-<para>&kmymoney; is the Personal Finance Manager for the KDE environment.
-It provides the functions required to balance your checkbooks,
-manage your personal loans and categorise your incomes and
-expenses using a checkbook style graphical user interface.</para>
+<para>&kmymoney; is the Personal Finance Manager for the &kde; environment.  It
+provides the functions required to balance your checkbooks, manage your personal
+loans and categories your incomes and expenses using a checkbook style graphical
+user interface.</para>
 
 </refsect1>
 
@@ -155,31 +178,29 @@ Show license information
 <term>$<envar>KDE_LANG</envar></term>
 <listitem>
 <para>Language locale setting to use. This option makes it possible to set
-another language environment for a program than what is the default. The
-correct language pack for this language has to be installed for this option
-to work. The default language when there is none set is en_US. When
-deciding upon a language, the following resources are looked up, in
-order: <envar>KDE_LANG</envar>, configuration file, <envar>LC_CTYPE</envar>, <envar>LC_MESSAGES</envar>, <envar>LC_ALL</envar>, <envar>LANG</envar>.
-</para>
+another language environment for a program than what is the default. The correct
+language pack for this language has to be installed for this option to work. The
+default language when there is none set is en_US. When deciding upon a language,
+the following resources are looked up, in order: <envar>KDE_LANG</envar>,
+configuration file, <envar>LC_CTYPE</envar>, <envar>LC_MESSAGES</envar>,
+<envar>LC_ALL</envar>, <envar>LANG</envar>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>$<envar>KDE_UTF8_FILENAMES</envar></term>
 <listitem>
-<para>Assume that all filenames are in UTF-8 format regardless of the
-current language setting. Otherwise the filename format is defined by
-the language.
-</para>
+<para>Assume that all filenames are in UTF-8 format regardless of the current
+language setting. Otherwise the filename format is defined by the
+language.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>$<envar>KDE_MULTIHEAD</envar></term>
 <listitem>
-<para>If this variable has the value true multihead multiple display mode is enabled. 
-The KDE display will be shared over more than one screen.
-</para>
+<para>If this variable has the value true multihead multiple display mode is
+enabled.  The KDE display will be shared over more than one screen.</para>
 </listitem>
 </varlistentry>
 
@@ -193,9 +214,8 @@ The KDE display will be shared over more than one screen.
 <varlistentry>
 <term>$<envar>SESSION_MANAGER</envar></term>
 <listitem>
-<para>The session manager to use. This option is set automatically by KDE
-and is a network path to the session manager socket.
-</para>
+<para>The session manager to use. This option is set automatically by KDE and is
+a network path to the session manager socket.</para>
 </listitem>
 </varlistentry>
 
@@ -219,10 +239,12 @@ and is a network path to the session manager socket.
 <refsect1>
 <title>See Also</title>
 
-<para>The full documentation for &kmymoney; is maintained as a docbook manual. 
-If the &khelpcenter; program is properly installed at your site, the command <userinput><command>khelpcenter</command>
-<parameter>help:/kmymoney</parameter></userinput> should give you access to the complete manual. 
-Alternatively the manual can be browsed in &konqueror; giving it the <acronym>URL</acronym> <ulink
+<para>The full documentation for &kmymoney; is maintained as a docbook manual.
+If the &khelpcenter; program is properly installed at your site, the command
+<userinput><command>khelpcenter</command>
+<parameter>help:/kmymoney</parameter></userinput> should give you access to the
+complete manual.  Alternatively the manual can be browsed in &konqueror; giving
+it the <acronym>URL</acronym> <ulink
 url="help:/kmymoney">help:/kmymoney</ulink></para>
 
 </refsect1>

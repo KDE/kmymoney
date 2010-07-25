@@ -23,7 +23,7 @@
 <itemizedlist>
   <listitem>
     <formalpara>
-      <title>Michael Edwardes &lt;mte@users.sourceforge.net&gt;</title>
+      <title>Michael Edwardes <email>mte@users.sourceforge.net</email></title>
       <para>
         Original idea, much initial source code. Project admin.
       </para>
@@ -38,7 +38,7 @@
 <itemizedlist>
   <listitem>
     <formalpara>
-      <title>Thomas Baumgart &lt;ipwizard@users.sourceforge.net&gt;</title>
+      <title>Thomas Baumgart <email>ipwizard@users.sourceforge.net</email></title>
       <para>
         Release manager and de-facto Maintainer. Core engine. Project admin.
       </para>
@@ -47,42 +47,42 @@
 
   <listitem>
     <formalpara>
-      <title>Tony Bloomfield &lt;tonybloom@users.sourceforge.net&gt;</title>
+      <title>Tony Bloomfield <email>tonybloom@users.sourceforge.net</email></title>
       <para>GnuCash Importer. Database support.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Robert Wadley &lt;robntina@users.sourceforge.net&gt;</title>
+      <title>Robert Wadley <email>robntina@users.sourceforge.net</email></title>
       <para>Artist. Icons, splash screen, home view. Screenshots.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Alvaro Soliverez &lt;asoliverez@users.sourceforge.net&gt;</title>
+      <title>Alvaro Soliverez <email>asoliverez@users.sourceforge.net</email></title>
       <para>Forecast. Reports.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Fernando Vilas &lt;fvilas@users.sourceforge.net&gt;</title>
+      <title>Fernando Vilas <email>fvilas@users.sourceforge.net</email></title>
       <para>Database support.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Cristian Oneţ &lt;onet.cristian@gmail.com&gt;</title>
+      <title>Cristian Oneţ <email>onet.cristian@gmail.com</email></title>
       <para>Patches and Plugins</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Jack H. Ostroff &lt;ostroffjh@users.sourceforge.net&gt;</title>
+      <title>Jack H. Ostroff <email>ostroffjh@users.sourceforge.net</email></title>
       <para>Documentation.</para>
     </formalpara>
   </listitem>
@@ -90,7 +90,8 @@
   <listitem>
     <formalpara>
       <title>Migration to &kde;4/&Qt;4</title>
-      <para>Many developers contributed to this effort.</para>
+      <para>This was a massive effort, and many developers contributed.
+      Apologies to any we forgot to name explicitly.</para>
     </formalpara>
   </listitem>
 </itemizedlist>
@@ -102,28 +103,28 @@
 <itemizedlist>
   <listitem>
     <formalpara>
-      <title>Ace Jones &lt;acejones@users.sourceforge.net&gt;</title>
+      <title>Ace Jones <email>acejones@users.sourceforge.net</email></title>
       <para>Reports. OFX Import. Online Quotes. Documentation editor.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Kevin Tambascio &lt;ktambascio@users.sourceforge.net&gt;</title>
+      <title>Kevin Tambascio <email>ktambascio@users.sourceforge.net</email></title>
       <para>Initial investment support.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Felix Rodriguez &lt;frodriguez@users.sourceforge.net&gt;</title>
+      <title>Felix Rodriguez <email>frodriguez@users.sourceforge.net</email></title>
       <para>Project admin.</para>
     </formalpara>
   </listitem>
  
   <listitem>
     <formalpara>
-      <title>John C &lt;tacoturtle@users.sourceforge.net&gt;</title>
+      <title>John C <email>tacoturtle@users.sourceforge.net</email></title>
       <para>Developer.</para>
     </formalpara>
   </listitem>
@@ -136,50 +137,57 @@
 <itemizedlist>
   <listitem>
     <formalpara>
-      <title>Javier Campos Morales &lt;javi_c@users.sourceforge.net&gt;</title>
-      <para>Developer &amp; Artist</para>
+      <title>Javier Campos Morales <email>javi_c@users.sourceforge.net</email></title>
+      <para>Developer &amp; Artist.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Laurent Montel &lt;montel@kde.org&gt;</title>
-      <para>Patches</para>
+      <title>Laurent Montel <email>montel@kde.org</email></title>
+      <para>Patches.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Roger Lum &lt;rogerlum@gmail.com&gt;</title>
-      <para>Documentation</para>
+      <title>Roger Lum <email>rogerlum@gmail.com</email></title>
+      <para>Documentation.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Darin Strait &lt;darin.strait@ashdar-partners.com&gt;</title>
-      <para>Documentation</para>
+      <title>Darin Strait <email>darin.strait@ashdar-partners.com</email></title>
+      <para>Documentation.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Allan Anderson &lt;aganderson@ukonline.co.uk&gt;</title>
-      <para>Patches</para>
+      <title>Allan Anderson <email>aganderson@ukonline.co.uk</email></title>
+      <para>Patches.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Colin Wright &lt;cdwright@gwi.net&gt;</title>
-      <para>Patches and Documentation</para>
+      <title>Colin Wright <email>cdwright@gwi.net</email></title>
+      <para>Patches and Documentation.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Jack Ostroff &lt;ostroffjh@users.sourceforge.net&gt;</title>
-      <para>Documentation</para>
+      <title>Bernd Gonsior <email>bernd.gonsior@googlemail.com</email></title>
+      <para>Reports. Migration to &kde;4/&Qt;4.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Ian Neal<email>iann_bugzilla@blueyonder.co.uk</email></title>
+      <para>Scheduled transactions and calendars.</para>
     </formalpara>
   </listitem>
 </itemizedlist>

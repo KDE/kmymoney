@@ -2,16 +2,10 @@
 <chapter id="details.reports">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Ace</firstname>
-      <surname>Jones</surname>
-      <affiliation>
-        <address><email>acejones@users.sourceforge.net</email></address>
-      </affiliation>
-    </author>
+    <author> &Ace.Jones; &Ace.Jones.mail; </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
 <title>Reports</title>
@@ -138,7 +132,7 @@
 <para>
   The forecast reports are just like the net worth reports, but they use the
   information to display forecast information.  You can display the information
-  at various levels and for the timeframe of your choosing.
+  at various levels and for the time frame of your choosing.
 </para>
 </sect2>
 

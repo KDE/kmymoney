@@ -2,12 +2,8 @@
 <chapter id="makingmostof">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Joe</firstname>
-      <surname>(joe1011010)</surname>
-      <affiliation>
-        <address><email>joe1011010_km@users.sourceforge.net</email></address>
-      </affiliation>
+    <author><personname><firstname>Joe</firstname><surname>(joe1011010)</surname></personname>
+            <email>joe1011010_km@users.sourceforge.net</email>
     </author>
   </authorgroup>
   <date>2010-07-19</date>
@@ -305,7 +301,7 @@
 <para>
   Unless you keep you money under the floorboards, you probably make use of one
   or more institutions where you have accounts which may be in credit or
-  debit. In order to familiarise yourself with the way &kappname; works, choose
+  debit. In order to familiarize yourself with the way &kappname; works, choose
   an account you want to track of with &kappname; and select <guimenu>File</guimenu> <guimenuitem>New</guimenuitem> in order
   to set up an account file.
 </para>
@@ -344,10 +340,10 @@
 </para>
 
 <para>
-  When you make a payment, &kappname; will work out what the next cheque number
-  should be; delete this if you are not making a cheque payment or edit it if
-  the first cheque you enter is not cheque number 1. Alternatively, it is
-  possible to switch off auto-increment of cheque numbers.
+  When you make a payment, &kappname; will work out what the next check number
+  should be; delete this if you are not making a check payment or edit it if
+  the first check you enter is not check number 1. Alternatively, it is
+  possible to switch off auto-increment of check numbers.
 </para>
 
 <para>
@@ -357,18 +353,18 @@
 </para>
 
 <para>
-  If you go to Reports, you will find several default reports; to customise
-  these, open one similar to the sort you perfer and then select 'New' (not
-  'Copy'); you can then customise this to your needs and mark it as a preferred
+  If you go to Reports, you will find several default reports; to customize
+  these, open one similar to the sort you prefer and then select 'New' (not
+  'Copy'); you can then customize this to your needs and mark it as a preferred
   report if you wish.
 </para>
 
 <para>
   Though &kappname; is not intended for use in a business context, if you are
   running a business on your own and so do not need payroll functions, you will
-  probably find that &kappname; is sufficiently customisable to meet your needs
+  probably find that &kappname; is sufficiently customizable to meet your needs
   particularly as it comes with budgeting and forecasting features and you can
-  export your customised reports via CSV into other applications.
+  export your customized reports via CSV into other applications.
 </para>
 </sect1>
 </chapter>

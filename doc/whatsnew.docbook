@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="whatsnew">
+<chapterinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
+</chapterinfo>
+
 <title>What's new in this release</title>
 
 <para>

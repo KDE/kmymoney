@@ -2,17 +2,12 @@
 <chapter id="details.database">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Tony</firstname>
-      <surname>Bloomfield</surname>
-      <affiliation>
-        <address><email></email></address>
-      </affiliation>
-    </author>
+    <author> &Tony.Bloomfield; &Tony.Bloomfield.mail; </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
+
 <title>Database</title>
 
 <sect1 id="details.database.usage">
@@ -170,14 +165,15 @@
 </sect3>
 
 <sect3>
-<title>File (Sqlite only)</title>
+<title>File (SQLite only)</title>
 <para>
-  SQLite has one database per file so enter the file name in which you wish to create the database.
-  To browse the file system, click the icon to the right of the file name.
-  For SQLite databases, the <guilabel>Host name</guilabel>, <guilabel>Username</guilabel>, and 
-  <guilabel>Password</guilabel> fields are not relevant. The SQLite file must have the 
-  appropriate read/write permissions set by the underlying file system to enable the appropriate
-  access for the currently logged-in user.
+  SQLite has one database per file so enter the filename in which you wish to
+  create the database.  To browse the file system, click the icon to the right
+  of the filename.  For SQLite databases, the <guilabel>Host name</guilabel>,
+  <guilabel>Username</guilabel>, and <guilabel>Password</guilabel> fields are
+  not relevant. The SQLite file must have the appropriate read/write permissions
+  set by the underlying file system to enable the appropriate access for the
+  currently logged-in user.
 </para>
 </sect3>
 
@@ -484,7 +480,7 @@
   to complete the other fields in the dialog, as detailed in <link
   linkend="details.database.selectdatabase">Creating a Database</link> above,
   and click <guibutton>Create Tables</guibutton>. Note that,
-  except in the case of Sqlite, you will need either to include a suitable CREATE DATABASE statement
+  except in the case of SQLite, you will need either to include a suitable CREATE DATABASE statement
   as the first command, or have previously issued such a command externally to &kappname;
 </para>
 </sect3>

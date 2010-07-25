@@ -2,19 +2,13 @@
 <chapter id="details.institutions">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Roger</firstname>
-      <surname>Lum</surname>
-      <affiliation>
-        <address><email>rogerlum@gmail.com</email></address>
-      </affiliation>
-    </author>
+    <author> &Roger.Lum; &Roger.Lum.mail; </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
-<title id="details.institutions.title">Institutions</title>
+<title>Institutions</title>
 
 <para>
   The Institutions screen provides a summary of all the accounts grouped under

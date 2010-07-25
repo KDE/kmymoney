@@ -2,17 +2,10 @@
 <chapter id="firsttime">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Michael</firstname>
-      <othername>T.</othername>
-      <surname>Edwardes</surname>
-      <affiliation>
-        <address><email>mte@users.sourceforge.net</email></address>
-      </affiliation>
-    </author>
+    <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
 <title>Using &kappname; for the first time</title>
@@ -485,21 +478,21 @@
 </para>
 
 <para>
-  The last page of the wizard allows you to select the file name that will be
-  used to store your financial data. An initial file name will be constructed out
-  of your HOME folder and user name. In case the file exists, a warning will
-  be displayed which reminds you to select a name of a non-existing file.
+  The last page of the wizard allows you to select the filename that will be
+  used to store your financial data. An initial filename will be constructed out
+  of your HOME folder and user name. In case the file exists, a warning will be
+  displayed which reminds you to select a name of a non-existing file.
 </para>
 
 <para>
 	<screenshot>
-	<screeninfo>File name selection Page</screeninfo>
+	<screeninfo>Filename selection Page</screeninfo>
 	<mediaobject>
 	<imageobject>
 	<imagedata fileref="newfile-6.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase>File name selection page</phrase>
+	<phrase>Filename selection page</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
@@ -723,8 +716,8 @@ transactions this is currently empty.</para>
 </para>
 
 <para>
-  The file will be copied to the folder specified with the current date
-  appended to the file name so it is easy to see the date the file was backed up.
+  The file will be copied to the folder specified with the current date appended
+  to the filename so it is easy to see the date the file was backed up.
 </para>
 </sect1>
 
@@ -752,7 +745,7 @@ transactions this is currently empty.</para>
 
 <formalpara><title><command>kmymoney &lt;path to file&gt;</command></title>
   <para>
-    Giving &kappname; a file name on the command line tells it to open that file
+    Giving &kappname; a filename on the command line tells it to open that file
     instead of the last file it had open.  You can use the name of any valid
     &kappname; file, as described in the chapter on <link
     linkend="details.formats">file formats</link>.  In addition, this can be

@@ -2,24 +2,11 @@
 <chapter id="details.schedules">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Roger</firstname>
-      <surname>Lum</surname>
-      <affiliation>
-        <address><email>rogerlum@gmail.com</email></address>
-      </affiliation>
-    </author>
-    <author>
-      <firstname>Michael</firstname>
-      <othername>T.</othername>
-      <surname>Edwardes</surname>
-      <affiliation>
-        <address><email>mte@users.sourceforge.net</email></address>
-      </affiliation>
-    </author>
+    <author> &Roger.Lum; &Roger.Lum.mail; </author>
+    <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
 <title>Schedules</title>
@@ -412,7 +399,7 @@
   one instance of the schedule or to all subsequent transactions.  After
   checking that all the data is correct clicking on <guibutton>OK</guibutton>
   will add the transaction to the ledger and update the next due date of the
-  schedule to the next occurence.  If you have changed any of the transaction
+  schedule to the next occurrence.  If you have changed any of the transaction
   data a further confirmation of what you changed will be displayed, giving you
   a final chance to accept or reject the changes.
 </para>

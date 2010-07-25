@@ -2,16 +2,10 @@
 <chapter id="details.formats">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Thomas</firstname>
-      <surname>Baumgart</surname>
-      <affiliation>
-       <address><email>ipwizard@users.sourceforge.net</email></address>
-      </affiliation>
-    </author>
+    <author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
   </authorgroup>
-  <date>2010-03-07</date>
-  <releaseinfo>3.97</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
 <title>File Formats</title>

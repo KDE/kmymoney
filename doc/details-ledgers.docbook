@@ -2,21 +2,8 @@
 <chapter id="details.ledgers">
 <chapterinfo>
   <authorgroup>
-    <author>
-      <firstname>Michael</firstname>
-      <othername>T.</othername>
-      <surname>Edwardes</surname>
-      <affiliation>
-	<address><email>mte@users.sourceforge.net</email></address>
-      </affiliation>
-    </author>
-    <author>
-      <firstname>Roger</firstname>
-      <surname>Lum</surname>
-      <affiliation>
-	<address><email>rogerlum@gmail.com</email></address>
-      </affiliation>
-    </author>
+    <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author> &Roger.Lum; &Roger.Lum.mail; </author>
   </authorgroup>
   <date>2010-07-23</date>
   <releaseinfo>4.5</releaseinfo>
@@ -487,7 +474,7 @@
   the manual matching interface. This allows you to match an imported
   transaction with a hand-entered (non-imported) transaction. To do so, select
   one of the transactions to be matched by clicking on it, then select the other
-  by left clicking on it while pressing the Ctrl key, and then select
+  by left clicking on it while pressing the &Ctrl; key, and then select
   <guimenuitem>Match</guimenuitem> from the context menu. This changes the
   background color to a pale green. This will match and combine the two
   transactions together. The values of both transactions must be the same for
@@ -561,7 +548,7 @@
 <sect1 id="details.ledgers.settings"><title id="details.ledgers.settings.title">Changing Transaction Settings</title>
 
 <para>
-  There are several settings options that change the appearance and behaviour of
+  There are several settings options that change the appearance and behavior of
   the ledger view in terms of transactions. These settings are found by
   selecting <guimenu>Settings</guimenu> <guimenuitem>Configure
   &kappname;</guimenuitem> from the menu bar, and selecting the
@@ -628,7 +615,7 @@
     <para>
       Keep changes when selecting a different transaction/split - by selecting
       the next line in the transaction list or split editor, the changes are
-      kept, instead of the default behaviour where you have to push the green
+      kept, instead of the default behavior where you have to push the green
       check mark to save changes.
     </para>
   </listitem>

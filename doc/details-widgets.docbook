@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sect1 id="reference.widgets">
 <sect1info>
-  <author>
-    <firstname>Thomas</firstname>
-    <surname>Baumgart</surname>
-    <affiliation>
-      <address><email>ipwizard@users.sourceforge.net</email></address>
-    </affiliation>
-  </author>
+  <authorgroup>
+    <author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </sect1info>
 
 <title>Widgets</title>
@@ -100,7 +98,7 @@
 </para>
 
 <para>
-  Negative values can be entered by preceeding the value with a minus sign. In
+  Negative values can be entered by preceding the value with a minus sign. In
   case your locale is set to display negative numbers with parentheses around
   the value, the value can also be enclosed in parenthesis in the value entry
   widget.
