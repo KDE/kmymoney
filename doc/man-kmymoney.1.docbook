@@ -38,8 +38,10 @@
 <cmdsynopsis>
 <command>kmymoney</command>
 
-<group><option>Qt Generic Options</option></group>
-<group><option>KDE Generic Options</option></group>
+<group><option>Generic Options</option></group>
+<group><option>Qt Options</option></group>
+<group><option>KDE Options</option></group>
+<group><option>Options</option></group>
 <group><option>File</option></group>
 
 </cmdsynopsis>
