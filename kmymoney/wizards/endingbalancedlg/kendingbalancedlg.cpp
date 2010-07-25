@@ -30,6 +30,7 @@
 #include <kglobal.h>
 #include <kstandarddirs.h>
 #include <kapplication.h>
+#include <kstandardguiitem.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -41,7 +42,7 @@
 #include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
 #include "ktoolinvocation.h"
-
+#include "kmymoneyutils.h"
 #include "kcurrencycalculator.h"
 
 class KEndingBalanceDlg::Private
@@ -145,6 +146,12 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
   } catch (MyMoneyException *e) {
     delete e;
   }
+
+  KMyMoneyUtils::updateWizardButtons(this);
+  
+  // setup different text and icon on finish button
+  setButtonText(QWizard::FinishButton, KStandardGuiItem::cont().text());
+  button(QWizard::FinishButton)->setIcon(KStandardGuiItem::cont().icon());
 }
 
 KEndingBalanceDlg::~KEndingBalanceDlg()

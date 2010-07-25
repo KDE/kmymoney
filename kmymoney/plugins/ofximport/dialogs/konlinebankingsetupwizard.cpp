@@ -46,8 +46,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <../ofxpartner.h>
-#include <mymoneyofxconnector.h>
+#include "../ofxpartner.h"
+#include "mymoneyofxconnector.h"
 
 using KWallet::Wallet;
 
@@ -103,6 +103,16 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   connect(m_url, SIGNAL(textChanged(const QString&)), this, SLOT(checkNextButton()));
   connect(m_editUsername, SIGNAL(userTextChanged(const QString&)), this, SLOT(checkNextButton()));
   connect(m_editPassword, SIGNAL(userTextChanged(const QString&)), this, SLOT(checkNextButton()));
+
+  // setup text on buttons
+  setButtonText(QWizard::NextButton, i18nc("Go to next page of the wizard", "&Next"));
+  setButtonText(QWizard::BackButton, KStandardGuiItem::back().text());
+  
+  // setup icons
+  button(QWizard::FinishButton)->setIcon(KStandardGuiItem::ok().icon());
+  button(QWizard::CancelButton)->setIcon(KStandardGuiItem::cancel().icon());
+  button(QWizard::NextButton)->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
+  button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
 }
 
 KOnlineBankingSetupWizard::~KOnlineBankingSetupWizard()
@@ -176,8 +186,17 @@ void KOnlineBankingSetupWizard::newPage(int id)
       // force to go back to prev page
       back();
     }
+  } else {
+    // going backwards, we're never done
+    m_fDone = false;
   }
+  
   button(QWizard::FinishButton)->setEnabled(m_fDone);
+  
+  // hide cancel and back button on last page
+  button(QWizard::CancelButton)->setVisible(!m_fDone);
+  button(QWizard::BackButton)->setVisible(!m_fDone);
+  
   if (ok)
     d->m_prevPage = id;
 }

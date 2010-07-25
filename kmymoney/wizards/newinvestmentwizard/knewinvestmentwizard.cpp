@@ -110,6 +110,8 @@ void KNewInvestmentWizard::init1(void)
   if (!m_security.id().isEmpty()) {
     m_investmentTypePage->setIntroLabelText(i18n("This wizard allows you to modify the selected security."));
   }
+  
+  KMyMoneyUtils::updateWizardButtons(this);
 }
 
 void KNewInvestmentWizard::init2(void)

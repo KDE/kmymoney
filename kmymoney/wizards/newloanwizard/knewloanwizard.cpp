@@ -104,6 +104,8 @@ KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
   m_split.setAccountId(m_account.id());
   m_split.setValue(MyMoneyMoney(0));
   m_transaction.addSplit(m_split);
+  
+  KMyMoneyUtils::updateWizardButtons(this);
 }
 
 KNewLoanWizard::~KNewLoanWizard()

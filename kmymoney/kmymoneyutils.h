@@ -48,6 +48,7 @@
   * @author Thomas Baumgart
   */
 
+class QWizard;
 class KMyMoneyUtils
 {
 public:
@@ -382,6 +383,12 @@ public:
    * @return the first KXmlGuiWindow found in QApplication::topLevelWidgets()
    */
   static KXmlGuiWindow* mainWindow();
+  
+  /**
+    * This method sets the button text and icons to the KDE standard ones
+    * for the QWizard passed as argument.
+    */
+  static void updateWizardButtons(QWizard *);
 };
 
 #endif
