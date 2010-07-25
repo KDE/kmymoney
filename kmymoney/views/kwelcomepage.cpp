@@ -213,6 +213,8 @@ const QStringList KWelcomePage::featuresList(void)
   featuresList.append(i18n("Better performance of the user interface"));
   featuresList.append(i18n("Better date handling when importing QIF files"));
   featuresList.append(i18n("Improved usability of the online banking features"));
+  featuresList.append(i18n("Uses KWallet to store online accounts password if present"));
+  featuresList.append(i18n("The consistency checks runs automatically before saving your data, it now checks for a wider range of problems, and it automatically corrects many of them."));
   featuresList.append(i18n("Runs on all operating systems supported by KDE"));
 
 
