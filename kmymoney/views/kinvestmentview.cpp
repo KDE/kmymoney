@@ -314,6 +314,11 @@ void KInvestmentView::clear(void)
 
   // and the selected account in the combo box
   m_accountComboBox->setSelected(QString());
+  
+  // right align col headers for quantity, price and value
+  for(int i = 2; i < 5; ++i) {
+    m_investmentsList->headerItem()->setTextAlignment(i, Qt::AlignRight | Qt::AlignVCenter);
+  }
 }
 
 void KInvestmentView::loadInvestmentTab(void)
