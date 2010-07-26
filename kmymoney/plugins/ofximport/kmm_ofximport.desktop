@@ -2,6 +2,7 @@
 Name=KMyMoney OFX
 Name[en_GB]=KMyMoney OFX
 Name[es]=KMyMoney OFX
+Name[fr]=OFX KMyMoney
 Name[it]=KMyMoney OFX
 Name[nds]=KMyMoney-OFX
 Name[nl]=KMyMoney OFX
@@ -13,6 +14,7 @@ Name[x-test]=xxKMyMoney OFXxx
 Comment=Add OFX importing to KMyMoney
 Comment[en_GB]=Add OFX importing to KMyMoney
 Comment[es]=Añade la importación de OFX a KMyMoney
+Comment[fr]=Ajoute l'importation OFX à KMyMoney
 Comment[it]=Aggiungi l'importazione OFX a KMyMoney
 Comment[nl]=Voeg OFX importeren toe aan KMyMoney
 Comment[pt]=Adiciona a importação de OFX ao KMyMoney
