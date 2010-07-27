@@ -200,6 +200,7 @@ void KForecastView::loadListView(void)
   forecast.setHistoryMethod(m_historyMethod->checkedId());
   forecast.doForecast();
 
+  m_forecastList->clear();
   m_forecastList->setIconSize(QSize(22, 22));
   m_forecastList->setSortingEnabled(true);
   m_forecastList->sortByColumn(0, Qt::AscendingOrder);
@@ -270,6 +271,7 @@ void KForecastView::loadSummaryView(void)
   //add variation columns
   headerLabels << i18n("Total variation");
 
+  m_summaryList->clear();
   //set the columns
   m_summaryList->setHeaderLabels(headerLabels);
 
@@ -564,6 +566,7 @@ void KForecastView::loadBudgetView(void)
   MyMoneyBudget budget;
   forecast.createBudget(budget, historyStartDate, historyEndDate, forecastStartDate, forecastEndDate, false);
 
+  m_budgetList->clear();
   m_budgetList->setIconSize(QSize(22, 22));
   m_budgetList->setSortingEnabled(true);
   m_budgetList->sortByColumn(0, Qt::AscendingOrder);
