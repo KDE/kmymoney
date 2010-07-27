@@ -259,6 +259,11 @@ OPTION(USE_QT_DESIGNER
 OPTION(USE_DEVELOPER_DOC
   "Install KMyMoney specific developer documentation (default=OFF)" OFF)
 
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
+  OPTION(USE_HTML_HANDBOOK
+    "Generate KMyMoney manual in HTML format (default=OFF)" OFF)
+endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
+
 IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   SET(CMAKE_INSTALL_PREFIX "${KDE4_INSTALL_DIR}" CACHE PATH
     "KMyMoney install prefix defaults to the KDE4 install prefix: ${KDE4_INSTALL_DIR}" FORCE)
@@ -280,6 +285,13 @@ INCLUDE_DIRECTORIES(
   ${KDE4_INCLUDE_DIR}
   ${QT_INCLUDE_DIR}
   ${PKGS_INCLUDE_DIRS})
+
+
+# Generation of the HTML version of the manual
+IF(${USE_HTML_HANDBOOK})
+  # to be done. See KDE4Macros.cmake for custom target "htmlhandbook"
+  # and kmymoney2/doc/en/Makefile.am on how one could do that
+ENDIF(${USE_HTML_HANDBOOK})
 
 ######################### The Actual Targets ##########################
 
@@ -370,6 +382,7 @@ nice_yesno("USE_QT_DESIGNER")
 nice_yesno("USE_DEVELOPER_DOC")
 nice_yesno("KDE4_BUILD_TESTS")
 nice_yesno("DOXYGEN_FOUND")
+nice_yesno("USE_HTML_HANDBOOK")
 message("
 -------- KMyMoney ${CPACK_PACKAGE_VERSION}${VERSION_SUFFIX} --------
 
@@ -387,18 +400,25 @@ Configure results (developer options):
 --------------------------------------------
 Qt-Designer library support:             ${nice_USE_QT_DESIGNER}
 
-Developer documentation generation:      ${nice_USE_DEVELOPER_DOC}
+Generate developer documentation:        ${nice_USE_DEVELOPER_DOC}
 
 Build unit tests:                        ${nice_KDE4_BUILD_TESTS}
 
-Doxygen support:                         ${nice_DOXYGEN_FOUND}
+Generate API documentation w/ Doxygen:   ${nice_DOXYGEN_FOUND}")
 
-Build type: ${CMAKE_BUILD_TYPE}")
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
+  message("
+Generate HTML documentation:             ${nice_USE_HTML_HANDBOOK}")
+
+endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
 
 if(USE_LEAK_CHECK)
   message("
 Memory leak check support (deprecated):  ${nice_USE_LEAK_CHECK}")
 endif(USE_LEAK_CHECK)
+
+message("
+Build type: ${CMAKE_BUILD_TYPE}")
 
 message("--------------------------------------------
 ")
