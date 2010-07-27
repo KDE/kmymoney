@@ -195,7 +195,7 @@
   When you run the reconciliation wizard on this account the next time,
   &kappname; remembers the values you entered when you previously ran the
   wizard, and you will be able to change them, if necessary.  In this case, the
-  initial screen of of the wizard is different, to remind you of this.
+  initial screen of the wizard is different, to remind you of this.
 </para>
 
 <screenshot>
