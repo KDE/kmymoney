@@ -18,11 +18,6 @@
 #ifndef REGISTER_H
 #define REGISTER_H
 
-// Some STL headers in GCC4.3 contain operator new. Memory checker mangles these
-#ifdef _CHECK_MEMORY
-#undef new
-#endif
-
 #include <algorithm>
 
 // ----------------------------------------------------------------------------
@@ -48,9 +43,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#ifdef _CHECK_MEMORY
-#include <mymoneyutils.h>
-#endif
 
 #include <mymoneyaccount.h>
 #include <registeritem.h>

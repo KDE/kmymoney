@@ -140,10 +140,6 @@ allow us to test the structure, if not the data content, of the file.
 #ifndef MYMONEYGNCREADER_H
 #define MYMONEYGNCREADER_H
 
-// Some STL headers in GCC4.3 contain operator new. Memory checker mangles these
-#ifdef _CHECK_MEMORY
-#undef new
-#endif
 // system includes
 #include <stdlib.h>
 
@@ -162,9 +158,6 @@ class QIODevice;
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#ifdef _CHECK_MEMORY
-#include <mymoneyutils.h>
-#endif
 
 #ifndef _GNCFILEANON
 #include "storage/imymoneyserialize.h" // not used any more, but call interface requires it

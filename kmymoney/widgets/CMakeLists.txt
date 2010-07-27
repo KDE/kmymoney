@@ -107,12 +107,6 @@ IF( USE_QT_DESIGNER )
 
   INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
-  ##### Is the option -DKMM_DESIGNER needed??
-  # The option -DKMM_DESIGNER will leave away any code that breaks uic.
-  SET_TARGET_PROPERTIES(kmymoneywidgets PROPERTIES
-    COMPILE_FLAGS "-U_CHECK_MEMORY -DKMM_DESIGNER")
-  #####
-
   TARGET_LINK_LIBRARIES(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_config dialogs models converter ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
 
   INSTALL(TARGETS kmymoneywidgets DESTINATION ${QT_PLUGINS_DIR}/designer )

@@ -57,23 +57,11 @@ KMyMoneyApp* kmymoney;
 
 static KCmdLineArgs* args = 0;
 
-static void _cleanup(void)
-{
-#ifdef _CHECK_MEMORY
-  chkmem.CheckMemoryLeak(false);
-  _CheckMemory_End();
-#endif
-}
-
 int main(int argc, char *argv[])
 {
   timer.start();
 
   QString feature;
-
-#ifdef _CHECK_MEMORY
-  feature += "\t- " I18N_NOOP("Memory leakage detection") "\n";
-#endif
 
   if (!feature.isEmpty())
     feature = I18N_NOOP("Compiled with the following settings:\n") + feature;
@@ -123,11 +111,6 @@ int main(int argc, char *argv[])
   // create the singletons before we start memory checking
   // to avoid false error reports
   MyMoneyFile::instance();
-
-#ifdef _CHECK_MEMORY
-  _CheckMemory_Init(0);
-#endif
-  atexit(_cleanup);
 
   KMyMoneyUtils::checkConstants();
 

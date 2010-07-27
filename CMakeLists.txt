@@ -247,12 +247,6 @@ IF(NOT MSVC)
   ENDIF(CMAKE_SYSTEM_NAME MATCHES Linux)
 ENDIF(NOT MSVC)
 
-OPTION(USE_LEAK_CHECK "Enable to compile with memory leak check support (deprecated)" OFF)
-if(USE_LEAK_CHECK)
-  message("Warning: Leak check support is activated but deprecated. Better use valgrind.")
-  ADD_DEFINITIONS( -D_CHECK_MEMORY )
-endif(USE_LEAK_CHECK)
-
 OPTION(USE_QT_DESIGNER
   "Install KMyMoney specific widget library for Qt-Designer (default=OFF)" OFF)
 
@@ -377,7 +371,6 @@ ENDMACRO(nice_yesno _varname)
 nice_yesno("LIBOFX_FOUND")
 nice_yesno("KBANKING_FOUND")
 nice_yesno("LIBICAL_FOUND")
-nice_yesno("USE_LEAK_CHECK")
 nice_yesno("USE_QT_DESIGNER")
 nice_yesno("USE_DEVELOPER_DOC")
 nice_yesno("KDE4_BUILD_TESTS")
@@ -411,11 +404,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
 Generate HTML documentation:             ${nice_USE_HTML_HANDBOOK}")
 
 endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
-
-if(USE_LEAK_CHECK)
-  message("
-Memory leak check support (deprecated):  ${nice_USE_LEAK_CHECK}")
-endif(USE_LEAK_CHECK)
 
 message("
 Build type: ${CMAKE_BUILD_TYPE}")

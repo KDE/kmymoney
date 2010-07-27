@@ -23,11 +23,6 @@
 #ifndef KREPORTSVIEW_H
 #define KREPORTSVIEW_H
 
-// Some STL headers in GCC4.3 contain operator new. Memory checker mangles these
-#ifdef _CHECK_MEMORY
-#undef new
-#endif
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
