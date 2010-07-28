@@ -1502,6 +1502,7 @@ void KMyMoneyApp::slotFileOpenRecent(const KUrl& url)
         if (d->m_myMoneyView->readFile(newurl)) {
           if ((d->m_myMoneyView->isNativeFile())) {
             d->m_fileName = newurl;
+            updateCaption();
             d->m_recentFiles->addUrl(newurl.pathOrUrl());
             writeLastUsedFile(newurl.pathOrUrl());
           } else {
