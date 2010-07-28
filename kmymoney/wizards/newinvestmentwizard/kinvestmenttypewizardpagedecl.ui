@@ -78,21 +78,6 @@
         </item>
         <item>
           <widget class="KComboBox" name="m_securityType">
-            <item>
-              <property name="text">
-                <string>Stock</string>
-              </property>
-            </item>
-            <item>
-              <property name="text">
-                <string>Mutual Fund</string>
-              </property>
-            </item>
-            <item>
-              <property name="text">
-                <string>Bond</string>
-              </property>
-            </item>
           </widget>
         </item>
         <item>
