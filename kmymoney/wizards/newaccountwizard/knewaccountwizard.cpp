@@ -955,6 +955,12 @@ void LoanDetailsPage::slotCalculate(void)
     } else if (m_interestRate->lineedit()->text().isEmpty()) {
       // calculate the interest rate out of the other information
       val = calc.interestRate();
+
+      //FIXME: Allow 0% interest rates when the remaining issues are fixed
+      //BUGS 246103 and 246105 on BKO
+      if(val == 0)
+        throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
+
       m_interestRate->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));
       result = i18n("KMyMoney has calculated the interest rate to %1%.", m_interestRate->lineedit()->text());
 

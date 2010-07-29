@@ -411,6 +411,12 @@ int KNewLoanWizard::calculateLoan(void)
     } else if (!field("interestRateEditValid").toBool()) {
       // calculate the interest rate out of the other information
       val = calc.interestRate();
+
+      //FIXME: Allow 0% interest rates when the remaining issues are fixed
+      //BUGS 246103 and 246105 on BKO
+      if(val == 0)
+        throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
+
       m_interestPage->m_interestRateEdit->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));
       result = i18n("KMyMoney has calculated the interest rate to %1%.", m_interestPage->m_interestRateEdit->lineedit()->text());
 
