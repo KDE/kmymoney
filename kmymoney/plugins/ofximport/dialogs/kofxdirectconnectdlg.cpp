@@ -190,16 +190,18 @@ void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
     m_job->ui()->showErrorMessage();
   } else if (m_job->isErrorPage()) {
     QString details;
-    QFile f(m_tmpfile->fileName());
-    if (f.open(QIODevice::ReadOnly)) {
-      QTextStream stream(&f);
-      QString line;
-      while (!stream.atEnd()) {
-        details += stream.readLine(); // line of text excluding '\n'
-      }
-      f.close();
+    if (m_tmpfile) {
+      QFile f(m_tmpfile->fileName());
+      if (f.open(QIODevice::ReadOnly)) {
+        QTextStream stream(&f);
+        QString line;
+        while (!stream.atEnd()) {
+          details += stream.readLine(); // line of text excluding '\n'
+        }
+        f.close();
 
-      kDebug(2) << "The HTTP request failed: " << details;
+        kDebug(2) << "The HTTP request failed: " << details;
+      }
     }
     KMessageBox::detailedSorry(this, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
   } else if (m_tmpfile) {
