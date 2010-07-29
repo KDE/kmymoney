@@ -1283,7 +1283,7 @@ QString PivotTable::renderCSV(void) const
   int column = 1;
   while (column < m_numColumns) {
     result += QString(",%1").arg(QString(m_columnHeadings[column++]));
-    if(m_rowTypeList.size() > 1) {
+    if (m_rowTypeList.size() > 1) {
       QString separator;
       separator = separator.fill(',', m_rowTypeList.size() - 1);
       result += separator;
@@ -1297,7 +1297,7 @@ QString PivotTable::renderCSV(void) const
   result += '\n';
 
   // Row Type Header
-  if(m_rowTypeList.size() > 1) {
+  if (m_rowTypeList.size() > 1) {
     int column = 1;
     while (column < m_numColumns) {
       for (int i = 0; i < m_rowTypeList.size(); ++i) {

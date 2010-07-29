@@ -1712,14 +1712,14 @@ void MyMoneySeqAccessMgrTest::testDuplicateTransactionId()
   // load two different transactions with the same ID
   QMap<QString, MyMoneyTransaction> tmap;
   MyMoneyTransaction t("T000000108", MyMoneyTransaction());
-  t.setPostDate(QDate(2010,10,10));
+  t.setPostDate(QDate(2010, 10, 10));
   tmap[t.uniqueSortKey()] = t;
-  t.setPostDate(QDate(2010,10,11));
+  t.setPostDate(QDate(2010, 10, 11));
   tmap[t.uniqueSortKey()] = t;
-  t.setPostDate(QDate(2010,10,12));
+  t.setPostDate(QDate(2010, 10, 12));
   tmap[t.uniqueSortKey()] = t;
   QVERIFY(tmap.count() == 3);
-  
+
   m->loadTransactions(tmap);
   QVERIFY(m->m_transactionList.values().count() == tmap.values().count());
   QVERIFY(m->m_transactionList.keys().count() == tmap.keys().count());

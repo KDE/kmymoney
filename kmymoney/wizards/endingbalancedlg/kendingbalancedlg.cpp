@@ -148,7 +148,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
   }
 
   KMyMoneyUtils::updateWizardButtons(this);
-  
+
   // setup different text and icon on finish button
   setButtonText(QWizard::FinishButton, KStandardGuiItem::cont().text());
   button(QWizard::FinishButton)->setIcon(KStandardGuiItem::cont().icon());

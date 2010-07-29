@@ -99,7 +99,7 @@ void KNewInvestmentWizard::init1(void)
 
   // make sure, the back button does not clear fields
   setOption(QWizard::IndependentPages, true);
-  
+
   // enable the help button
   setOption(HaveHelpButton, true);
   connect(this, SIGNAL(helpRequested()), this, SLOT(slotHelp(void)));
@@ -113,7 +113,7 @@ void KNewInvestmentWizard::init1(void)
   if (!m_security.id().isEmpty()) {
     m_investmentTypePage->setIntroLabelText(i18n("This wizard allows you to modify the selected security."));
   }
-  
+
   KMyMoneyUtils::updateWizardButtons(this);
 }
 

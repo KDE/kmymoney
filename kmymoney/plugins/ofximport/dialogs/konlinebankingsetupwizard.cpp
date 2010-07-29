@@ -107,7 +107,7 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   // setup text on buttons
   setButtonText(QWizard::NextButton, i18nc("Go to next page of the wizard", "&Next"));
   setButtonText(QWizard::BackButton, KStandardGuiItem::back().text());
-  
+
   // setup icons
   button(QWizard::FinishButton)->setIcon(KStandardGuiItem::ok().icon());
   button(QWizard::CancelButton)->setIcon(KStandardGuiItem::cancel().icon());
@@ -190,13 +190,13 @@ void KOnlineBankingSetupWizard::newPage(int id)
     // going backwards, we're never done
     m_fDone = false;
   }
-  
+
   button(QWizard::FinishButton)->setEnabled(m_fDone);
-  
+
   // hide cancel and back button on last page
   button(QWizard::CancelButton)->setVisible(!m_fDone);
   button(QWizard::BackButton)->setVisible(!m_fDone);
-  
+
   if (ok)
     d->m_prevPage = id;
 }

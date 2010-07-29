@@ -958,7 +958,7 @@ void LoanDetailsPage::slotCalculate(void)
 
       //FIXME: Allow 0% interest rates when the remaining issues are fixed
       //BUGS 246103 and 246105 on BKO
-      if(val == 0)
+      if (val == 0)
         throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
 
       m_interestRate->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));

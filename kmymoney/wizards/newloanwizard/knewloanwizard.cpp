@@ -104,7 +104,7 @@ KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
   m_split.setAccountId(m_account.id());
   m_split.setValue(MyMoneyMoney(0));
   m_transaction.addSplit(m_split);
-  
+
   KMyMoneyUtils::updateWizardButtons(this);
 }
 
@@ -414,7 +414,7 @@ int KNewLoanWizard::calculateLoan(void)
 
       //FIXME: Allow 0% interest rates when the remaining issues are fixed
       //BUGS 246103 and 246105 on BKO
-      if(val == 0)
+      if (val == 0)
         throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
 
       m_interestPage->m_interestRateEdit->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));

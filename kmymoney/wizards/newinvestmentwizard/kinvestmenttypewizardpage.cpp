@@ -44,8 +44,8 @@ void KInvestmentTypeWizardPage::init2(const MyMoneySecurity& security)
 {
   //get the current text of the security and set the combo index accordingly
   QString text = KMyMoneyUtils::securityTypeToString(security.securityType());
-  for(int i = 0; i < m_securityType->count(); ++i) {
-    if(m_securityType->itemText(i) == text)
+  for (int i = 0; i < m_securityType->count(); ++i) {
+    if (m_securityType->itemText(i) == text)
       m_securityType->setCurrentIndex(i);
   }
 

@@ -473,7 +473,7 @@ void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)
   // setup text on buttons
   wizard->setButtonText(QWizard::NextButton, i18nc("Go to next page of the wizard", "&Next"));
   wizard->setButtonText(QWizard::BackButton, KStandardGuiItem::back().text());
-  
+
   // setup icons
   wizard->button(QWizard::FinishButton)->setIcon(KStandardGuiItem::ok().icon());
   wizard->button(QWizard::CancelButton)->setIcon(KStandardGuiItem::cancel().icon());
