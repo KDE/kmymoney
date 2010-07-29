@@ -1510,6 +1510,14 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
     }
   }
 
+  // check for multiple transactions being selected in an investment account
+  // we do not allow editing in this case: https://bugs.kde.org/show_bug.cgi?id=240816
+  // later on, we might allow to edit investment transactions of the same type
+  if (rc == true && investmentTransactions > 1) {
+    // tooltip = i18n("Cannot edit multiple investment transactions at once");
+    rc = false;
+  }
+
   // now check that we have the correct account type for investment transactions
   if (rc == true && investmentTransactions != 0) {
     if (m_account.accountType() != MyMoneyAccount::Investment) {
