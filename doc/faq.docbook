@@ -264,8 +264,13 @@
    most likely reason is that no one has offered to translate it yet.
    Translating &kde;/&Qt;-based applications is very simple, and does not
    require any programming skills. If you would like to translate &kappname;
-   into your language, please post a message to the &kappname; Developers List at
-   &devlist;, and we will give you the details on how you can
+   into your language, please post a message to the proper <ulink
+   url="http://l10n.kde.org/teams-list.php">team mailing list</ulink>. Should
+   you failed to find your language in the list or could not contact to the team
+   members please mail directly to <ulink url="mailto:kde-i18n-doc@kde.org">KDE
+   translation mailing list</ulink> (<ulink
+   url="https://mail.kde.org/mailman/listinfo/kde-i18n-doc">subscription</ulink>
+   required) and we will give you the details on how you can
    easily provide a translation for us.
 </para>
  </answer>
