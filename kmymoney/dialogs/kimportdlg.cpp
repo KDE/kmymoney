@@ -160,17 +160,11 @@ void KImportDlg::slotNewProfile(void)
   editor->setObjectName("QIF Profile Editor");
 
   if (editor->exec()) {
-    m_profileComboBox->setItemText(m_profileComboBox->currentIndex(), editor->selectedProfile());
     loadProfiles();
+    m_profileComboBox->setCurrentIndex(m_profileComboBox->findText(editor->selectedProfile(), Qt::MatchExactly));
   }
 
   delete editor;
-}
-
-void KImportDlg::slotSelectProfile(const QString& profile)
-{
-  m_profileComboBox->setItemText(m_profileComboBox->currentIndex(), profile);
-  loadProfiles();
 }
 
 void KImportDlg::loadProfiles(const bool selectLast)
@@ -198,9 +192,11 @@ void KImportDlg::loadProfiles(const bool selectLast)
     current = grp.readEntry("KImportDlg_LastProfile");
   }
 
-  m_profileComboBox->setCurrentItem(0);
-  if (list.contains(current) > 0) {
-    m_profileComboBox->setItemText(m_profileComboBox->currentIndex(), current);
+  int index = m_profileComboBox->findText(current, Qt::MatchExactly);
+  if (index > -1) {
+    m_profileComboBox->setCurrentIndex(index);
+  } else {
+    m_profileComboBox->setCurrentIndex(0);
   }
 }
 

@@ -98,8 +98,6 @@ protected slots:
 
   void slotOkClicked(void);
 
-  void slotSelectProfile(const QString& text);
-
 private:
   /**
     * This method loads the available profiles into

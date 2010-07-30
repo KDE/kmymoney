@@ -262,12 +262,11 @@ void MyMoneyQifProfileEditor::slotLoadProfileFromConfig(const QString& profile)
   m_profile.loadProfile("Profile-" + profileName);
 
   QList<QListWidgetItem*> lbi = m_profileListBox->findItems(profileName, Qt::MatchExactly | Qt::MatchCaseSensitive);
-  showProfile();
+
   if (!lbi.empty()) {
-    foreach (QListWidgetItem* idx, lbi) {
-      idx->setSelected(true);
-    }
+    m_profileListBox->setCurrentItem(lbi.at(0));
   }
+  showProfile();
 }
 
 void MyMoneyQifProfileEditor::showProfile(void)
