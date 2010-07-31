@@ -221,6 +221,12 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
     option.state &= ~QStyle::State_Selected;
   }
 
+  if(m_focus) {
+    option.state |= QStyle::State_HasFocus;
+  } else {
+    option.state &= ~QStyle::State_HasFocus;
+  }
+
   if (index.column() == 0) {
     option.viewItemPosition = QStyleOptionViewItemV4::Beginning;
   } else if (index.column() == MaxColumns - 1) {
@@ -261,7 +267,7 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
     // clear the mouse ove state before painting the background
     option.state &= ~QStyle::State_MouseOver;
     // the background
-    if (option.state & QStyle::State_Selected) {
+    if (option.state & QStyle::State_Selected || option.state & QStyle::State_HasFocus) {
       // if this is not the first row of the transaction paint the previous rows
       // since the selection background is painted from the first row of the transaction
       if (index.row() > startRow()) {
