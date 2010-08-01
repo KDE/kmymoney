@@ -1,3 +1,7 @@
+UPDATE: Removed temporarily from the repository because the source is not available.
+There will be a version available soon as a plugin
+
+
                           csvConverter-0.2
                           ----------------
 The purpose of the program is to convert CSV format files to QIF format, to allow import into KMyMoney. It is written in C++, and requires QT4 and KDE4.  Its primary focus is on converting bank statements, but I have now added a basic capability to import some investment statements.
