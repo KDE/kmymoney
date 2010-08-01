@@ -152,7 +152,7 @@ public:
           MyMoneyMoney vatRate = MyMoneyMoney(account.value("VatRate")) * MyMoneyMoney(100, 1);
           newIndex = model->index(index.row(), index.column() + VAT, index.parent());
           model->setData(newIndex, QString("%1 %").arg(vatRate.formatMoney("", 1)), Qt::DisplayRole);
-          model->setData(newIndex, Qt::AlignRight, Qt::TextAlignmentRole);
+          model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
         }
         break;
       default:

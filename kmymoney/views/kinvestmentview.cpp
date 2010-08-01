@@ -392,12 +392,12 @@ void KInvestmentView::loadInvestmentItem(const MyMoneyAccount& account)
   } else {
     item->setText(eValueColumn, "---");
   }
-  item->setTextAlignment(eValueColumn, Qt::AlignRight);
+  item->setTextAlignment(eValueColumn, Qt::AlignRight | Qt::AlignVCenter);
 
   //column 3 (COLUMN_QUANTITY_INDEX) is the quantity of shares owned
   prec = MyMoneyMoney::denomToPrec(security.smallestAccountFraction());
   item->setText(eQuantityColumn, file->balance(account.id()).formatMoney("", prec));
-  item->setTextAlignment(eQuantityColumn, Qt::AlignRight);
+  item->setTextAlignment(eQuantityColumn, Qt::AlignRight | Qt::AlignVCenter);
 
   //column 4 is the current price
   // Get the price precision from the configuration
@@ -409,7 +409,7 @@ void KInvestmentView::loadInvestmentItem(const MyMoneyAccount& account)
   } else {
     item->setText(ePriceColumn, "---");
   }
-  item->setTextAlignment(ePriceColumn, Qt::AlignRight);
+  item->setTextAlignment(ePriceColumn, Qt::AlignRight | Qt::AlignVCenter);
 }
 
 void KInvestmentView::showEvent(QShowEvent* event)

@@ -182,7 +182,7 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
     priceTreeItem->setText(KPriceTreeItem::ePriceDate, KGlobal::locale()->formatDate(price.date(), KLocale::ShortDate));
     priceTreeItem->setData(KPriceTreeItem::ePriceDate, KPriceTreeItem::OrderRole, QVariant(price.date()));
     priceTreeItem->setText(KPriceTreeItem::ePricePrice, price.rate(priceBase).formatMoney("", m_pricePrecision));
-    priceTreeItem->setTextAlignment(KPriceTreeItem::ePricePrice, Qt::AlignRight);
+    priceTreeItem->setTextAlignment(KPriceTreeItem::ePricePrice, Qt::AlignRight | Qt::AlignVCenter);
     priceTreeItem->setData(KPriceTreeItem::ePricePrice, KPriceTreeItem::OrderRole, QVariant::fromValue(price.rate(priceBase)));
     priceTreeItem->setText(KPriceTreeItem::ePriceSource, price.source());
   }

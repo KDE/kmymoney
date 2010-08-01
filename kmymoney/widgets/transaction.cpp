@@ -334,7 +334,7 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
       if (m_erronous) {
         QPixmap attention;
         attention.loadFromData(attentionSign, sizeof(attentionSign), 0, 0);
-        style->drawItemPixmap(painter, option.rect, Qt::AlignRight, attention);
+        style->drawItemPixmap(painter, option.rect, Qt::AlignRight | Qt::AlignVCenter, attention);
       }
     }
   }
@@ -926,6 +926,7 @@ bool StdTransaction::formCellText(QString& txt, int& align, int row, int col, QP
           break;
       }
   }
+
   // }
   if (col == ValueColumn2 && row == 1) {
     return haveNumberField();

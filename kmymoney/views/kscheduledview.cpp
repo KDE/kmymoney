@@ -382,7 +382,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
       //use base currency instead
       item->setText(3, QString("%1  ").arg(amount.formatMoney(MyMoneyFile::instance()->baseCurrency())));
     }
-    item->setTextAlignment(3, Qt::AlignRight);
+    item->setTextAlignment(3, Qt::AlignRight | Qt::AlignVCenter);
     item->setData(3, KScheduleTreeItem::OrderRole, QVariant::fromValue(amount));
 
     // Do the real next payment like ms-money etc
