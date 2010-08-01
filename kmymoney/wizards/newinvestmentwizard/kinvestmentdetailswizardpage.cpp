@@ -76,7 +76,7 @@ void KInvestmentDetailsWizardPage::init2(const MyMoneySecurity& security)
 {
   MyMoneySecurity tradingCurrency = MyMoneyFile::instance()->currency(security.tradingCurrency());
   m_investmentSymbol->setText(security.tradingSymbol());
-  m_tradingMarket->setItemText(m_tradingMarket->currentIndex(), security.tradingMarket());
+  m_tradingMarket->setCurrentIndex(m_tradingMarket->findText(security.tradingMarket(), Qt::MatchExactly));
   m_fraction->setValue(MyMoneyMoney(security.smallestAccountFraction(), 1));
   m_tradingCurrencyEdit->setSecurity(tradingCurrency);
 

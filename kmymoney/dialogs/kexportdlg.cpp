@@ -113,7 +113,7 @@ void KExportDlg::slotNewProfile(void)
   QPointer<MyMoneyQifProfileEditor> editor = new MyMoneyQifProfileEditor(true, this);
   editor->setObjectName("QIF Profile Editor");
   if (editor->exec()) {
-    m_profileComboBox->setItemText(m_profileComboBox->currentIndex(), editor->selectedProfile());
+    m_profileComboBox->setCurrentIndex(m_profileComboBox->findText(editor->selectedProfile(), Qt::MatchExactly));
     loadProfiles();
   }
   delete editor;
@@ -146,7 +146,7 @@ void KExportDlg::loadProfiles(const bool selectLast)
 
   m_profileComboBox->setCurrentItem(0);
   if (list.contains(current) > 0)
-    m_profileComboBox->setItemText(m_profileComboBox->currentIndex(), current);
+    m_profileComboBox->setCurrentIndex(m_profileComboBox->findText(current, Qt::MatchExactly));
 }
 
 void KExportDlg::slotOkClicked()

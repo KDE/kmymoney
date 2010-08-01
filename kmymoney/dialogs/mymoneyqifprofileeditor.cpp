@@ -457,8 +457,8 @@ void MyMoneyQifProfileEditor::slotAmountTypeSelected()
   QList<QTreeWidgetItem*> selectedItems = m_editAmounts->selectedItems();
   if (! selectedItems.empty()) {
     QTreeWidgetItem* item = selectedItems.at(0);
-    m_decimalBox->setItemText(m_decimalBox->currentIndex(), item->text(2));
-    m_thousandsBox->setItemText(m_thousandsBox->currentIndex(), item->text(3));
+    m_decimalBox->setCurrentIndex(m_decimalBox->findText(item->text(2), Qt::MatchExactly));
+    m_thousandsBox->setCurrentIndex(m_thousandsBox->findText(item->text(3), Qt::MatchExactly));
     m_selectedAmountType = item;
   }
 }
