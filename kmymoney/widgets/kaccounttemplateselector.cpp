@@ -150,6 +150,7 @@ KAccountTemplateSelector::KAccountTemplateSelector(QWidget* parent) :
     d(new Private(this))
 {
   m_accountList->header()->hide();
+  m_groupList->setSelectionMode(QAbstractItemView::ExtendedSelection);
   connect(m_groupList, SIGNAL(itemSelectionChanged()), this, SLOT(slotLoadHierarchy()));
 
   // kick off loading of account template data
