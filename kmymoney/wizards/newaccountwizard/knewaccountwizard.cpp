@@ -590,8 +590,13 @@ const MyMoneySecurity& AccountTypePage::currency(void) const
 
 void AccountTypePage::setAccount(const MyMoneyAccount& acc)
 {
-  if (acc.accountType() != MyMoneyAccount::UnknownAccountType)
-    m_typeSelection->setCurrentItem(acc.accountType());
+  if (acc.accountType() != MyMoneyAccount::UnknownAccountType) {
+    if(acc.accountType() == MyMoneyAccount::AssetLoan) {
+      m_typeSelection->setCurrentItem(MyMoneyAccount::Loan);
+    } else {
+      m_typeSelection->setCurrentItem(acc.accountType());
+    }
+  }
   m_openingDate->setDate(acc.openingDate());
   m_accountName->setText(acc.name());
 }
