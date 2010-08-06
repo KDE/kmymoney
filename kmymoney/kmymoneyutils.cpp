@@ -127,12 +127,12 @@ const QString KMyMoneyUtils::securityTypeToString(const MyMoneySecurity::eSECURI
 
 const QString KMyMoneyUtils::occurrenceToString(const MyMoneySchedule::occurrenceE occurrence)
 {
-  return i18n(MyMoneySchedule::occurrenceToString(occurrence).toLatin1());
+  return i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(occurrence).toLatin1());
 }
 
 const QString KMyMoneyUtils::paymentMethodToString(MyMoneySchedule::paymentTypeE paymentType)
 {
-  return i18n(MyMoneySchedule::paymentMethodToString(paymentType).toLatin1());
+  return i18nc("Scheduled Transaction payment type", MyMoneySchedule::paymentMethodToString(paymentType).toLatin1());
 }
 
 const QString KMyMoneyUtils::weekendOptionToString(MyMoneySchedule::weekendOptionE weekendOption)
@@ -142,7 +142,7 @@ const QString KMyMoneyUtils::weekendOptionToString(MyMoneySchedule::weekendOptio
 
 const QString KMyMoneyUtils::scheduleTypeToString(MyMoneySchedule::typeE type)
 {
-  return i18n(MyMoneySchedule::scheduleTypeToString(type).toLatin1());
+  return i18nc("Scheduled transaction type", MyMoneySchedule::scheduleTypeToString(type).toLatin1());
 }
 
 KGuiItem KMyMoneyUtils::scheduleNewGuiItem(void)

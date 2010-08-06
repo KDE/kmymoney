@@ -128,7 +128,7 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
   m_interestEditPage->m_newInterestRateEdit->setPrecision(3);
   m_interestEditPage->m_interestRateLabel->setText(QString(" ") + ir.formatMoney("", 3) + QString("%"));
 
-  m_paymentFrequencyPage->m_paymentFrequencyUnitEdit->setCurrentItem(i18n(m_schedule.occurrenceToString().toLatin1()));
+  m_paymentFrequencyPage->m_paymentFrequencyUnitEdit->setCurrentItem(i18nc("Frequency of schedule", m_schedule.occurrenceToString().toLatin1()));
   m_durationPage->updateTermWidgets(m_account.term());
 
   // the base payment (amortization and interest) is determined
