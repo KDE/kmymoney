@@ -137,7 +137,7 @@ INSTALL(FILES mimetype_kmy_48x48.png
   RENAME kmy.png
   )
 INSTALL(FILES hi64-app-kmymoney.png
-  DESTINATION ${ICON_INSTALL_DIR}/oxygen/68x68/apps
+  DESTINATION ${ICON_INSTALL_DIR}/oxygen/64x64/apps
   RENAME kmymoney.png
   )
 INSTALL(FILES mimetype_kmy_64x64.png
