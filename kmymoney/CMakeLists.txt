@@ -62,7 +62,7 @@ TARGET_LINK_LIBRARIES(kmymoney_common
 ADD_DEPENDENCIES(kmymoney_common generate_base_ui_srcs kmm_config)
 
 SET( kmymoney_common_LIBS
-  views reports kmymoney_common
+  views reports kmymoney_base kmymoney_common
   newuserwizard newaccountwizard newinvestmentwizard newloanwizard
   endingbalancedlg wizardpages
   dialogs widgets settings converter models kmm_config

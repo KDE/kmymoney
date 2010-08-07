@@ -45,7 +45,6 @@ SET(_uncritial_common_sources
   kmymoneychecklistitem.cpp
   kmymoneycombo.cpp
   kmymoneycompletion.cpp
-  kmymoneycurrencyselector.cpp
   kmymoneydatetbl.cpp
   kmymoneyedit.cpp
   kmymoneylineedit.cpp
@@ -67,6 +66,7 @@ SET(_uncritial_common_sources
 # sources that contain the KMM_DESIGNER flag
 SET (_critial_common_sources
   kaccounttemplateselector.cpp
+  kmymoneycurrencyselector.cpp
   kmymoneyaccountcompletion.cpp
   kmymoneycategory.cpp
   register.cpp
