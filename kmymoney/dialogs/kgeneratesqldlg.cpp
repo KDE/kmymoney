@@ -153,9 +153,10 @@ void KGenerateSqlDlg::slotcreateTables()
         q.prepare(*cit);
         if (!q.exec()) {
           QSqlError e = q.lastError();
-          message = i18n("Creation failed executing statement");
-          message += QString("\nExecuted: %1").arg(q.executedQuery());
-          message += QString("\nError No %1: %2").arg(e.number()).arg(e.text());
+          message = i18n("Creation failed executing statement"
+                         "\nExecuted: %1"
+                         "\nError No %2: %3",
+                    q.executedQuery(), e.number(), e.text());
           break;
         }
       }
