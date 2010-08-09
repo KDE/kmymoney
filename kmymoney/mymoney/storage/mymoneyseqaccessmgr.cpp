@@ -449,7 +449,7 @@ void MyMoneySeqAccessMgr::addTransaction(MyMoneyTransaction& transaction, const 
 
 void MyMoneySeqAccessMgr::adjustBalance(MyMoneyAccount& acc, const MyMoneySplit& split, bool reverse)
 {
-  // in case of an investment we can't just add or substract the
+  // in case of an investment we can't just add or subtract the
   // amount of the split since we don't know about stock splits.
   // so in the case of those stocks, we simply recalculate the balance from scratch
   if (acc.isInvest()) {
