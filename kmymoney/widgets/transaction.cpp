@@ -221,7 +221,7 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
     option.state &= ~QStyle::State_Selected;
   }
 
-  if(m_focus) {
+  if (m_focus) {
     option.state |= QStyle::State_HasFocus;
   } else {
     option.state &= ~QStyle::State_HasFocus;

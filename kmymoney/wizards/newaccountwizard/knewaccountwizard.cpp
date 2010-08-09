@@ -591,7 +591,7 @@ const MyMoneySecurity& AccountTypePage::currency(void) const
 void AccountTypePage::setAccount(const MyMoneyAccount& acc)
 {
   if (acc.accountType() != MyMoneyAccount::UnknownAccountType) {
-    if(acc.accountType() == MyMoneyAccount::AssetLoan) {
+    if (acc.accountType() == MyMoneyAccount::AssetLoan) {
       m_typeSelection->setCurrentItem(MyMoneyAccount::Loan);
     } else {
       m_typeSelection->setCurrentItem(acc.accountType());

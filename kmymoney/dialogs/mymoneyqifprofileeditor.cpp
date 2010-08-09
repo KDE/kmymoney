@@ -439,9 +439,9 @@ void MyMoneyQifProfileEditor::slotDelete(void)
     deleteProfile(profile);
     loadProfileListFromConfig();
 
-    if(idx >= m_profileListBox->count())
+    if (idx >= m_profileListBox->count())
       idx = m_profileListBox->count() - 1;
-    
+
     m_profileListBox->setCurrentRow(idx);
     slotLoadProfileFromConfig(m_profileListBox->item(idx)->text());
   }

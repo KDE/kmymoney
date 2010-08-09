@@ -156,7 +156,7 @@ void KGenerateSqlDlg::slotcreateTables()
           message = i18n("Creation failed executing statement"
                          "\nExecuted: %1"
                          "\nError No %2: %3",
-                    q.executedQuery(), e.number(), e.text());
+                         q.executedQuery(), e.number(), e.text());
           break;
         }
       }
