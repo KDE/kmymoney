@@ -80,7 +80,6 @@ signals:
 protected slots:
   void slotOfxFinished(KJob*);
   void slotOfxData(KIO::Job*, const QByteArray&);
-  void slotOfxConnected(KIO::Job*);
   virtual void reject(void);
 
 protected:

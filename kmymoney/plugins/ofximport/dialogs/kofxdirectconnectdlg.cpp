@@ -51,7 +51,9 @@
 class KOfxDirectConnectDlg::Private
 {
 public:
+  Private() : m_firstData(true) {}
   QFile    m_fpTrace;
+  bool     m_firstData;
 };
 
 KOfxDirectConnectDlg::KOfxDirectConnectDlg(const MyMoneyAccount& account, QWidget *parent) :
@@ -109,10 +111,24 @@ bool KOfxDirectConnectDlg::init(void)
     d->m_fpTrace.write("response:\n", 10);
   }
 
+  // open the temp file. We come around here twice if init() is called twice
+  if (m_tmpfile) {
+    kDebug(0) << "Already connected, using " << m_tmpfile->fileName();
+    delete m_tmpfile; //delete otherwise we mem leak
+  }
+  m_tmpfile = new KTemporaryFile();
+  // for debugging purposes one might want to leave the temp file around
+  // in order to achieve this, please uncomment the next line
+  // m_tmpfile->setAutoRemove(false);
+  if (!m_tmpfile->open()) {
+    qWarning("Unable to open tempfile '%s' for download.", qPrintable(m_tmpfile->fileName()));
+    return false;
+  }
+
   m_job->addMetaData("content-type", "Content-type: application/x-ofx");
+
   connect(m_job, SIGNAL(result(KJob*)), this, SLOT(slotOfxFinished(KJob*)));
   connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)), this, SLOT(slotOfxData(KIO::Job*, const QByteArray&)));
-  connect(m_job, SIGNAL(connected(KIO::Job*)), this, SLOT(slotOfxConnected(KIO::Job*)));
 
   setStatus(QString("Contacting %1...").arg(m_connector.url()));
   kProgress1->setMaximum(3);
@@ -123,43 +139,22 @@ bool KOfxDirectConnectDlg::init(void)
 void KOfxDirectConnectDlg::setStatus(const QString& _status)
 {
   textLabel1->setText(_status);
-  kDebug(2) << "STATUS: " << _status;
+  kDebug(0) << "STATUS:" << _status;
 }
 
 void KOfxDirectConnectDlg::setDetails(const QString& _details)
 {
-  kDebug(2) << "DETAILS: " << _details;
-}
-
-void KOfxDirectConnectDlg::slotOfxConnected(KIO::Job*)
-{
-  if (m_tmpfile) {
-//     throw new MYMONEYEXCEPTION(QString("Already connected, using %1.").arg(m_tmpfile->name()));
-    kDebug(2) << "Already connected, using " << m_tmpfile->fileName();
-    delete m_tmpfile; //delete otherwise we mem leak
-  }
-  m_tmpfile = new KTemporaryFile();
-  // for debugging purposes one might want to leave the temp file around
-  // in order to achieve this, please uncomment the next line
-  // m_tmpfile->setAutoRemove(false);
-
-  // we don't check the return code here. If opening fails, we will not be
-  // able to read/parse the file and signal that to the user later on.
-  // we currently don't have a choice to interrupt the download anyway,
-  // other than dropping a line on the console
-  if (!m_tmpfile->open())
-    qWarning("Unable to open tempfile '%s' for download.", qPrintable(m_tmpfile->fileName()));
-
-  setStatus("Connection established, retrieving data...");
-  setDetails(QString("Downloading data to %1...").arg(m_tmpfile->fileName()));
-  kProgress1->setValue(kProgress1->value() + 1);
+  kDebug(0) << "DETAILS: " << _details;
 }
 
 void KOfxDirectConnectDlg::slotOfxData(KIO::Job*, const QByteArray& _ba)
 {
-  if (!m_tmpfile)
-//     throw new MYMONEYEXCEPTION("Not currently connected!!");
-    kDebug(2) << "void ofxdcon::slotOfxData():: Not currently connected!";
+  if (d->m_firstData) {
+    setStatus("Connection established, retrieving data...");
+    setDetails(QString("Downloading data to %1...").arg(m_tmpfile->fileName()));
+    kProgress1->setValue(kProgress1->value() + 1);
+    d->m_firstData = false;
+  }
   QTextStream out(m_tmpfile);
   out << QString(_ba);
 
@@ -200,7 +195,7 @@ void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
         }
         f.close();
 
-        kDebug(2) << "The HTTP request failed: " << details;
+        kDebug(0) << "The HTTP request failed: " << details;
       }
     }
     KMessageBox::detailedSorry(this, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
