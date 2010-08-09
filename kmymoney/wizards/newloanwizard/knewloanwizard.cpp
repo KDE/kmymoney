@@ -67,6 +67,9 @@ KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
 
   KMyMoneyGlobalSettings::setSubstringSearch(m_namePage);
 
+  // make sure, the back button does not clear fields
+  setOption(QWizard::IndependentPages, true);
+
   // connect(m_payeeEdit, SIGNAL(newPayee(const QString&)), this, SLOT(slotNewPayee(const QString&)));
   connect(m_namePage->m_payeeEdit, SIGNAL(createItem(const QString&, QString&)), this, SIGNAL(createPayee(const QString&, QString&)));
 
