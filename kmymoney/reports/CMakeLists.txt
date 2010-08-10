@@ -25,6 +25,7 @@ IF( KDE4_BUILD_TESTS )
 
   target_link_libraries( pivotgridtest reports kmymoney_base kmymoney_common kmm_storage ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
+IF(NOT WIN32)
   # Pivot Table
   set( pivottabletest_SRCS pivottabletest.cpp reportstestcommon.cpp ../mymoney/mymoneytestutils.cpp )
 
@@ -41,5 +42,6 @@ IF( KDE4_BUILD_TESTS )
   ADD_DEPENDENCIES( querytabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_storage kmm_config )
 
   target_link_libraries( querytabletest reports kmymoney_base kmymoney_common dialogs widgets kmm_storage kmm_config ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
+ENDIF(NOT WIN32)
 
 ENDIF( KDE4_BUILD_TESTS )

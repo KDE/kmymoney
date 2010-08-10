@@ -72,7 +72,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyfiletest TESTNAME kmymoney-mymoneyfiletest ${mymoneyfiletest_SRCS} )
   ADD_DEPENDENCIES( mymoneyfiletest kmm_mymoney kmm_storage )
 
-  target_link_libraries( mymoneyfiletest kmm_mymoney kmm_storage ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneyfiletest kmm_storage kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyFinancialCalculatorTest
   set( mymoneyfinancialcalculatortest_SRCS mymoneyfinancialcalculatortest.cpp mymoneytestutils.cpp )
@@ -88,7 +88,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyforecasttest TESTNAME kmymoney-mymoneyforecasttest ${mymoneyforecasttest_SRCS} )
   ADD_DEPENDENCIES( mymoneyforecasttest kmm_mymoney kmm_storage )
 
-  target_link_libraries( mymoneyforecasttest kmm_mymoney kmm_storage ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
+  target_link_libraries( mymoneyforecasttest kmm_storage kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
   # MyMoneyInstitution
   set( mymoneyinstitutiontest_SRCS mymoneyinstitutiontest.cpp )
