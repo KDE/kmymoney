@@ -153,6 +153,11 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
   int lines = viewport()->height() / rowHeight(0);
   QWidget* w;
 
+  if (o == this && e->type() == QEvent::Resize && isEditMode()) {
+    rc = false;
+    endEdit(false);
+  }
+
   if (e->type() == QEvent::KeyPress && !isEditMode()) {
     rc = true;
     switch (k->key()) {
