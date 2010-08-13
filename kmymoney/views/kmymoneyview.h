@@ -80,7 +80,6 @@ class KForecastView;
 class KMyMoneyView : public KPageWidget
 {
   Q_OBJECT
-
 public:
   enum viewID {
     HomeView = 0,
@@ -150,8 +149,7 @@ private:
 
   int  m_fmode;
 
-  // bool m_bankRightClick;
-  // MyMoneyInstitution m_accountsInstitution;
+  int m_lastViewSelected;
 
   // Keep a note of the file type
   typedef enum _fileTypeE {

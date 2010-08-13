@@ -93,6 +93,10 @@
    <label>Start with last selected view or homepage</label>
    <default>0</default>
   </entry>
+  <entry name="LastViewSelected" type="Int">
+   <label>The last selected view</label>
+   <default>0</default>
+  </entry>
   <entry name="WriteDataEncrypted" type="Bool">
    <label>Use GPG to encrypt data file</label>
    <default>false</default>

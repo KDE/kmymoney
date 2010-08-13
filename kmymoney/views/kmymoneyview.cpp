@@ -102,10 +102,10 @@
 
 KMyMoneyView::KMyMoneyView(QWidget *parent)
     : KPageWidget(parent),
-    // m_bankRightClick(false),
     m_inConstructor(true),
     m_fileOpen(false),
-    m_fmode(0600)
+    m_fmode(0600),
+    m_lastViewSelected(0)
 {
   // the global variable kmymoney is not yet assigned. So we construct it here
   QObject* kmymoney = parent->parent();
@@ -265,6 +265,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
 
 KMyMoneyView::~KMyMoneyView()
 {
+  KMyMoneyGlobalSettings::setLastViewSelected(m_lastViewSelected);
   removeStorage();
 }
 
@@ -309,7 +310,6 @@ void KMyMoneyView::updateViewType(void)
 
 void KMyMoneyView::showPage(KPageWidgetItem* pageItem)
 {
-
   // reset all selected items before showing the selected view
   // but not while we're in our own constructor
   if (!m_inConstructor && pageItem != currentPage()) {
@@ -920,14 +920,11 @@ bool KMyMoneyView::initializeStorage()
   }
 
   KSharedConfigPtr config = KGlobal::config();
-  int pageIndex = 0;
   KPageWidgetItem* page;
   KConfigGroup grp = config->group("General Options");
 
   if (KMyMoneyGlobalSettings::startLastViewSelected() != 0) {
-    KConfigGroup _grp2 = config->group("Last Use Settings");
-    pageIndex = _grp2.readEntry("LastViewSelected", 0);
-    page = m_model->item(m_model->index(pageIndex, 0));
+    page = m_model->item(m_model->index(KMyMoneyGlobalSettings::lastViewSelected(), 0));
   } else {
     page = m_homeViewFrame;
   }
@@ -993,7 +990,7 @@ bool KMyMoneyView::initializeStorage()
   MyMoneyFile::instance()->forceDataChanged();
 
   // if we currently see a different page, then select the right one
-  if (pageIndex != KPageView::currentPage().row()) {
+  if (m_model->index(page).row() != KPageView::currentPage().row()) {
     showPage(page);
   }
 
@@ -1650,13 +1647,7 @@ void KMyMoneyView::progressCallback(int current, int total, const QString& msg)
 
 void KMyMoneyView::slotRememberPage(const QModelIndex current, const QModelIndex)
 {
-  // only remember a changed setting if we're not called during construction
-  if (!m_inConstructor) {
-    KSharedConfigPtr config = KGlobal::config();
-    KConfigGroup grp = config->group("Last Use Settings");
-    grp.writeEntry("LastViewSelected", current.row());
-    config->sync();
-  }
+  m_lastViewSelected = current.row();
 }
 
 /* DO NOT ADD code to this function or any of it's called ones.
