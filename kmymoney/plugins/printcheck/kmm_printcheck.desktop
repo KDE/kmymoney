@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Print check
+Name[de]=Schecks drucken
 Name[en_GB]=Print cheque
 Name[es]=Imprimir cheque
 Name[fr]=Imprimer un chèque
@@ -13,6 +14,7 @@ Name[sv]=Skriv ut check
 Name[uk]=Надрукувати чек
 Name[x-test]=xxPrint checkxx
 Comment=Provides the capability to print checks
+Comment[de]=Stellt die Möglichkeit bereit, Schecks zu drucken
 Comment[en_GB]=Provides the capability to print cheques
 Comment[es]=Proporciona la capacidad de imprimir cheques
 Comment[fr]=Fournit la possibilité d'imprimer des chèques

@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=iCalendar
 Name[cs]=iCalendar
+Name[de]=iCalendar
 Name[en_GB]=iCalendar
 Name[es]=iCalendar
 Name[fr]=iCalendar
@@ -14,6 +15,7 @@ Name[sv]=iCalendar
 Name[uk]=iCalendar
 Name[x-test]=xxiCalendarxx
 Comment=Exports schedules to iCalendar files
+Comment[de]=Exportiert geplante Buchungen in iCalendar-Dateien
 Comment[en_GB]=Exports schedules to iCalendar files
 Comment[es]=Exporta programaciones a archivos de iCalendar
 Comment[fr]=Exportes des calendrier dans des fichiers iCalendar

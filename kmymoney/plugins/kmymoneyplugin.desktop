@@ -2,6 +2,7 @@
 Type=ServiceType
 Name=KMyMoney Plugin
 Name[cs]=Modul KMyMoney
+Name[de]=KMyMoney-Modul
 Name[en_GB]=KMyMoney Plugin
 Name[es]=Complemento de KmyMoney
 Name[fr]=Module KMyMoney
@@ -16,6 +17,7 @@ Name[x-test]=xxKMyMoney Pluginxx
 X-KDE-ServiceType=KMyMoneyPlugin
 Comment=A KMyMoney plugin
 Comment[cs]=Modul KMyMoney
+Comment[de]=Ein KMyMoney-Modul
 Comment[en_GB]=A KMyMoney plugin
 Comment[es]=Un complemento de KMyMoney
 Comment[fr]=Un module de KMyMoney

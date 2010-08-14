@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Configure icalendar export plugin
+Name[de]=iCalendar-Export-Modul konfigurieren
 Name[en_GB]=Configure icalendar export plugin
 Name[es]=Configurar el complemento de exportación de icalendar
 Name[fr]=Configurer le module d'exportation iCalendar
@@ -17,6 +18,7 @@ Exec=kcmshell4 kmm_icalendarexport
 Categories=QT;KDE;kmymoney;
 Keywords=icalendar;kmymoney
 Keywords[cs]=icalendar;kmymoney
+Keywords[de]=icalendar;kmymoney
 Keywords[en_GB]=icalendar;kmymoney
 Keywords[es]=icalendar;kmymoney
 Keywords[fr]=icalendar;kmymoney
@@ -32,6 +34,7 @@ X-KDE-Library=kcm_kmm_icalendarexport
 X-KDE-ParentApp=iCalendar
 X-KDE-ParentComponents=iCalendar
 Comment=Permits the configuration of the iCalendar plugin's options
+Comment[de]=Erlaubt die Konfiguration des iCalendar-Moduls
 Comment[en_GB]=Permits the configuration of the iCalendar plugin's options
 Comment[es]=Permite la configuración de las opciones del complemento de iCalendar
 Comment[fr]=Permet la configuration des options du module d'iCalendar
