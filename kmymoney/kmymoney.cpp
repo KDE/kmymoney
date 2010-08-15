@@ -6897,6 +6897,7 @@ void KMyMoneyApp::slotAccountUpdateOnline(void)
 
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
 {
+  #if KDE_IS_VERSION(4,5,0)
   //since the cost of updating the cache is now not negligible
   //check whether the region has been modified
   if(!d->m_holidayRegion || d->m_holidayRegion->regionCode() != holidayRegion) {
@@ -6908,6 +6909,12 @@ void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
     //clear and update the holiday cache
     preloadHolidays();
   }
+#else
+  // Delete the previous holidayRegion before creating a new one.
+  delete d->m_holidayRegion;
+  // Create a new holidayRegion.
+  d->m_holidayRegion = new KHolidays::HolidayRegion(holidayRegion);
+#endif
 }
 
 bool KMyMoneyApp::isProcessingDate(const QDate& date) const
