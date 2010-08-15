@@ -671,6 +671,11 @@ protected:
    */
   void transactionMatch(void);
 
+  /**
+    * This method preloads the holidays for the duration of the default forecast period
+    */
+  void preloadHolidays(void);
+
 public slots:
   void slotFileInfoDialog(void);
 

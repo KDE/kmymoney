@@ -319,6 +319,7 @@ public:
   // used by the calendar interface for schedules
   KHolidays::HolidayRegion* m_holidayRegion;
   QBitArray             m_processingDays;
+  QMap<QDate, bool>     m_holidayMap;
 
 
   // methods
@@ -403,7 +404,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     else
       d->m_processingDays.setBit(i, (i >= weekStart || i <= weekEnd));
   }
-
   d->m_autoSaveTimer = new QTimer(this);
   d->m_progressTimer = new QTimer(this);
 
@@ -6897,18 +6897,70 @@ void KMyMoneyApp::slotAccountUpdateOnline(void)
 
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
 {
-  // Delete the previous holidayRegion before creating a new one.
-  delete d->m_holidayRegion;
-  // Create a new holidayRegion.
-  d->m_holidayRegion = new KHolidays::HolidayRegion(holidayRegion);
+  //since the cost of updating the cache is now not negligible
+  //check whether the region has been modified
+  if(!d->m_holidayRegion || d->m_holidayRegion->regionCode() != holidayRegion) {
+    // Delete the previous holidayRegion before creating a new one.
+    delete d->m_holidayRegion;
+    // Create a new holidayRegion.
+    d->m_holidayRegion = new KHolidays::HolidayRegion(holidayRegion);
+
+    //clear and update the holiday cache
+    preloadHolidays();
+  }
 }
 
 bool KMyMoneyApp::isProcessingDate(const QDate& date) const
 {
   if (!d->m_processingDays.testBit(date.dayOfWeek()))
     return false;
-  return (!d->m_holidayRegion || !d->m_holidayRegion->isValid()) ? true :
-         !d->m_holidayRegion->isHoliday(date);
+  if(!d->m_holidayRegion || !d->m_holidayRegion->isValid())
+    return true;
+
+  //check first whether it's already in cache
+  if(d->m_holidayMap.contains(date)) {
+    return d->m_holidayMap.value(date, true);
+  } else {
+    bool processingDay = !d->m_holidayRegion->isHoliday(date);
+    d->m_holidayMap.insert(date, processingDay);
+    return processingDay;
+  }
+}
+
+void KMyMoneyApp::preloadHolidays()
+{
+  //clear the cache before loading
+  d->m_holidayMap.clear();
+#if KDE_IS_VERSION(4,5,0)
+  //only do this if it is a valid region
+  if(d->m_holidayRegion && d->m_holidayRegion->isValid()) {
+    //load holidays for the forecast days plus 1 cycle, to be on the safe side
+    int forecastDays = KMyMoneyGlobalSettings::forecastDays() + KMyMoneyGlobalSettings::forecastAccountCycle();
+    QDate endDate = QDate::currentDate().addDays(forecastDays);
+
+    //look for holidays for the next 2 years as a minimum. That should give a good margin for the cache
+    if(endDate < QDate::currentDate().addYears(2))
+      endDate = QDate::currentDate().addYears(2);
+
+    KHolidays::Holiday::List holidayList = d->m_holidayRegion->holidays(QDate::currentDate(), endDate);
+    KHolidays::Holiday::List::const_iterator holiday_it;
+    for(holiday_it = holidayList.constBegin(); holiday_it != holidayList.constEnd(); ++holiday_it) {
+      d->m_holidayMap.insert((*holiday_it).date(), false);
+    }
+
+    for(QDate date = QDate::currentDate(); date <= endDate; date = date.addDays(1)) {
+      //if it is not a processing day, set it to false
+      if (!d->m_processingDays.testBit(date.dayOfWeek())) {
+        d->m_holidayMap.insert(date, false);
+        break;
+      }
+
+      //if it is not a holiday nor a weekend, it is a processing day
+      if(!d->m_holidayMap.contains(date))
+        d->m_holidayMap.insert(date, true);
+    }
+  }
+#endif
 }
 
 KMStatus::KMStatus(const QString &text)
