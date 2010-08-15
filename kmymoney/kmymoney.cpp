@@ -6914,6 +6914,8 @@ void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
   delete d->m_holidayRegion;
   // Create a new holidayRegion.
   d->m_holidayRegion = new KHolidays::HolidayRegion(holidayRegion);
+  // clear the holiday cache
+  preloadHolidays();
 #endif
 }
 
