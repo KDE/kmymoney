@@ -6961,12 +6961,10 @@ void KMyMoneyApp::preloadHolidays()
       //if it is not a processing day, set it to false
       if (!d->m_processingDays.testBit(date.dayOfWeek())) {
         d->m_holidayMap.insert(date, false);
-        break;
-      }
-
-      //if it is not a holiday nor a weekend, it is a processing day
-      if (!d->m_holidayMap.contains(date))
+      } else if (!d->m_holidayMap.contains(date)) {
+        //if it is not a holiday nor a weekend, it is a processing day
         d->m_holidayMap.insert(date, true);
+      }
     }
   }
 #endif
