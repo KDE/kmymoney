@@ -1781,7 +1781,9 @@ const QStringList MyMoneyFile::consistencyCheck(void)
   QList<MyMoneyAccount>::const_iterator account_it;
   for (account_it = accList.constBegin(); account_it != accList.constEnd(); ++account_it) {
     MyMoneyAccount account = *account_it;
-    if (!currencyList.contains(account.currencyId()) && account.currencyId() != baseCurrency().id()) {
+    if (!currencyList.contains(account.currencyId())
+        && account.currencyId() != baseCurrency().id()
+        && !account.currencyId().isEmpty()) {
       //add the currency and the account-currency pair
       currencyList.append(account.currencyId());
       accountForeignCurrency.append(account);
