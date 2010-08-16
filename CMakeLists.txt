@@ -20,9 +20,9 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
 ######################### KMyMoney Version ##########################
 
 # The current version of KMyMoney (used for packages and config.h)
-SET(VERSION_MAJOR "3")
-SET(VERSION_MINOR "98")
-SET(VERSION_PATCH "2")
+SET(VERSION_MAJOR "4")
+SET(VERSION_MINOR "5")
+SET(VERSION_PATCH "0")
 
 # Determine the SVN revision number (if we're based on SVN)
 IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
@@ -253,10 +253,10 @@ OPTION(USE_QT_DESIGNER
 OPTION(USE_DEVELOPER_DOC
   "Install KMyMoney specific developer documentation (default=OFF)" OFF)
 
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
-  OPTION(USE_HTML_HANDBOOK
-    "Generate KMyMoney manual in HTML format (default=OFF)" OFF)
-endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
+#if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
+#  OPTION(USE_HTML_HANDBOOK
+#    "Generate KMyMoney manual in HTML format (default=OFF)" OFF)
+#endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
 
 IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   SET(CMAKE_INSTALL_PREFIX "${KDE4_INSTALL_DIR}" CACHE PATH
@@ -282,10 +282,10 @@ INCLUDE_DIRECTORIES(
 
 
 # Generation of the HTML version of the manual
-IF(${USE_HTML_HANDBOOK})
+#IF(USE_HTML_HANDBOOK)
   # to be done. See KDE4Macros.cmake for custom target "htmlhandbook"
   # and kmymoney2/doc/en/Makefile.am on how one could do that
-ENDIF(${USE_HTML_HANDBOOK})
+#ENDIF(USE_HTML_HANDBOOK)
 
 ######################### The Actual Targets ##########################
 
@@ -375,7 +375,7 @@ nice_yesno("USE_QT_DESIGNER")
 nice_yesno("USE_DEVELOPER_DOC")
 nice_yesno("KDE4_BUILD_TESTS")
 nice_yesno("DOXYGEN_FOUND")
-nice_yesno("USE_HTML_HANDBOOK")
+#nice_yesno("USE_HTML_HANDBOOK")
 message("
 -------- KMyMoney ${CPACK_PACKAGE_VERSION}${VERSION_SUFFIX} --------
 
@@ -399,11 +399,11 @@ Build unit tests:                        ${nice_KDE4_BUILD_TESTS}
 
 Generate API documentation w/ Doxygen:   ${nice_DOXYGEN_FOUND}")
 
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
-  message("
-Generate HTML documentation:             ${nice_USE_HTML_HANDBOOK}")
-
-endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
+#if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
+#  message("
+#Generate HTML documentation:             ${nice_USE_HTML_HANDBOOK}")
+#
+#endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
 
 message("
 Build type: ${CMAKE_BUILD_TYPE}")
