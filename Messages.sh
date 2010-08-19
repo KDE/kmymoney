@@ -6,7 +6,7 @@ $EXTRACTRC `find . -name \*.rc -o -name \*.ui -o -name \*.kcfg` >> rc.cpp
 cd kmymoney/ && $PREPARETIPS > tips.cpp
 cd ..
 # call xgettext on all source files. If your sources have other filename
-# extensions besides .cc, .cpp, and .h, just add them in the find call.
+# extensions besides .cpp, and .h, just add them in the find call.
 $XGETTEXT `find . -name \*.cpp -o -name \*.h` -o $podir/kmymoney.pot
 
 # Remove these two generated files again
