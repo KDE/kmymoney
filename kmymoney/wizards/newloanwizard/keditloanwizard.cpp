@@ -292,6 +292,8 @@ bool KEditLoanWizard::validateCurrentPage()
 
       } else if (field("editOtherCostButton").toBool()) {
         m_pages.setBit(Page_AdditionalFees);
+        m_pages.setBit(Page_InterestCategory);
+        m_pages.setBit(Page_Schedule);
         m_pages.setBit(Page_SummaryEdit);
 
       } else if (field("editOtherInfoButton").toBool()) {
