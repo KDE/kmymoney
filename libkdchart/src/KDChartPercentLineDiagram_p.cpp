@@ -67,9 +67,10 @@ void PercentLineDiagram::paint(  PaintContext* ctx )
     reverseMapper().clear();
 
     const QPair<QPointF, QPointF> boundaries = diagram()->dataBoundaries();
+/*
     const QPointF bottomLeft = boundaries.first;
     const QPointF topRight = boundaries.second;
-
+*/
     const int columnCount = compressor().modelDataColumns();
     const int rowCount = compressor().modelDataRows();
 
@@ -88,7 +89,7 @@ void PercentLineDiagram::paint(  PaintContext* ctx )
 
     DataValueTextInfoList list;
     LineAttributesInfoList lineList;
-    LineAttributes::MissingValuesPolicy policy;
+    LineAttributes::MissingValuesPolicy policy = LineAttributes::MissingValuesAreBridged;
 
     //FIXME(khz): add LineAttributes::MissingValuesPolicy support for LineDiagram::Stacked and ::Percent
 

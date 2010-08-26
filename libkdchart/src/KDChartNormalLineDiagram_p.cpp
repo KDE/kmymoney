@@ -113,7 +113,7 @@ void NormalLineDiagram::paint( PaintContext* ctx )
         LineAttributesInfoList lineList;
         LineAttributes laPreviousCell;
         CartesianDiagramDataCompressor::DataPoint lastPoint;
-        qreal lastAreaBoundingValue = 0;
+        qreal lastAreaBoundingValue = 0.0;
 
         // Get min. y value, used as lower or upper bounding for area highlighting
         const qreal minYValue = plane->visibleDataRange().bottom();

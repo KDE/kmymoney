@@ -152,7 +152,7 @@ void CartesianCoordinatePlane::slotLayoutChanged ( AbstractDiagram* )
 QRectF CartesianCoordinatePlane::getRawDataBoundingRectFromDiagrams() const
 {
     // determine unit of the rectangles of all involved diagrams:
-    qreal minX, maxX, minY, maxY;
+    qreal minX, maxX, minY, maxY = 0.0;
     bool bStarting = true;
     Q_FOREACH( const AbstractDiagram* diagram, diagrams() )
     {

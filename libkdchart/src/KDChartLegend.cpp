@@ -379,8 +379,9 @@ void Legend::removeDiagram( AbstractDiagram* oldDiagram )
 
 void Legend::removeDiagrams()
 {
-    for (int i = 0; i < d->observers.size(); ++i)
-        removeDiagram( d->observers.at(i)->diagram() );
+    const DiagramList diags = diagrams();
+    KDAB_FOREACH( AbstractDiagram* diag, diags )
+        removeDiagram( diag );
 }
 
 void Legend::replaceDiagram( AbstractDiagram* newDiagram,
@@ -978,7 +979,10 @@ void Legend::buildLegend()
         // as well as through the dataset brush set in the diagram, whereas the
         // MarkerAttributes are preferred.
         const QBrush markerBrush = markerAttrs[dataset].markerColor().isValid() ?
-                                   QBrush(markerAttrs[dataset].markerColor()) : brush( dataset );
+                                   QBrush(markerAttrs[dataset].markerColor()) : d->modelBrushes[ dataset ];
+
+        //qDebug()<<"Legend::buildLegend:"<<markerBrush<<markerAttrs[dataset].markerColor().isValid()<<dataset;
+
         switch( style ){
             case( MarkersOnly ):
                 markerLineItem = new KDChart::MarkerLayoutItem(
@@ -1085,6 +1089,7 @@ void Legend::buildLegend()
 void Legend::setHiddenDatasets( const QList<uint> hiddenDatasets )
 {
     d->hiddenDatasets = hiddenDatasets;
+    setNeedRebuild();
 }
 
 const QList<uint> Legend::hiddenDatasets() const
@@ -1094,10 +1099,13 @@ const QList<uint> Legend::hiddenDatasets() const
 
 void Legend::setDatasetHidden( uint dataset, bool hidden )
 {
-    if( hidden && !d->hiddenDatasets.contains( dataset ) )
+    if( hidden && !d->hiddenDatasets.contains( dataset ) ) {
         d->hiddenDatasets.append( dataset );
-    else if( !hidden && d->hiddenDatasets.contains( dataset ) )
+        setNeedRebuild();
+    } else if( !hidden && d->hiddenDatasets.contains( dataset ) ) {
         d->hiddenDatasets.removeAll( dataset );
+        setNeedRebuild();
+    }
 }
 
 bool Legend::datasetIsHidden( uint dataset ) const

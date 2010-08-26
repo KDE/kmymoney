@@ -502,7 +502,7 @@ void PieDiagram::drawPieSurface( QPainter* painter,
                 degree += granularity;
                 ++iPoint;
             }
-            int last = poly.size();
+            /*int last = poly.size();*/
             // if necessary add one more point to fill the last small gap
             if( ! perfectMatch ){
                 poly[ iPoint ] = pointOnCircle( drawPosition, startAngle + angleLen );

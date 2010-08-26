@@ -113,7 +113,7 @@ qreal Measure::calculatedValue( const QSizeF& autoSize,
             else
                 size = sizeOfArea( area );
             //qDebug() << ( area == autoArea ) << "size" << size;
-            qreal referenceValue;
+            qreal referenceValue = 0.0;
             switch( orientation ){
                 case KDChartEnums::MeasureOrientationAuto: // fall through intended
                 case KDChartEnums::MeasureOrientationMinimum:
@@ -238,11 +238,11 @@ QPaintDevice* GlobalMeasureScaling::paintDevice()
 QDebug operator<<(QDebug dbg, const KDChart::Measure& m)
 {
     dbg << "KDChart::Measure("
-	<< "value="<<m.value()
-	<< "calculationmode="<<m.calculationMode()
-	<< "referencearea="<<m.referenceArea()
-	<< "referenceorientation="<<m.referenceOrientation()
-	<< ")";
+        << "value="<<m.value()
+        << "calculationmode="<<m.calculationMode()
+        << "referencearea="<<m.referenceArea()
+        << "referenceorientation="<<m.referenceOrientation()
+        << ")";
     return dbg;
 }
 #endif /* QT_NO_DEBUG_STREAM */
