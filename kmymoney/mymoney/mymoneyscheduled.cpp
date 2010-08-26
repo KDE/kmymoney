@@ -1217,51 +1217,6 @@ QDate MyMoneySchedule::addHalfMonths(QDate date, int mult) const
   return newdate;
 }
 
-MyMoneySchedule::occurrenceE MyMoneySchedule::stringToOccurrence(const QString& text)
-{
-  MyMoneySchedule::occurrenceE occurrence = MyMoneySchedule::OCCUR_ANY;
-  QString tmp = text.toLower();
-
-  if (tmp == i18nc("Frequency of schedule", "Once").toLower())
-    occurrence = MyMoneySchedule::OCCUR_ONCE;
-  else if (tmp == i18nc("Frequency of schedule", "Daily").toLower())
-    occurrence = MyMoneySchedule::OCCUR_DAILY;
-  else if (tmp == i18nc("Frequency of schedule", "Weekly").toLower())
-    occurrence = MyMoneySchedule::OCCUR_WEEKLY;
-  else if (tmp == i18nc("Frequency of schedule", "Fortnightly").toLower())
-    occurrence = MyMoneySchedule::OCCUR_FORTNIGHTLY;
-  else if (tmp == i18nc("Frequency of schedule", "Every other week").toLower())
-    occurrence = MyMoneySchedule::OCCUR_EVERYOTHERWEEK;
-  else if (tmp == i18nc("Frequency of schedule", "Every half month").toLower())
-    occurrence = MyMoneySchedule::OCCUR_EVERYHALFMONTH;
-  else if (tmp == i18nc("Frequency of schedule", "Every three weeks").toLower())
-    occurrence = MyMoneySchedule::OCCUR_EVERYTHREEWEEKS;
-  else if (tmp == i18nc("Frequency of schedule", "Every four weeks").toLower())
-    occurrence = MyMoneySchedule::OCCUR_EVERYFOURWEEKS;
-  else if (tmp == i18nc("Frequency of schedule", "Every thirty days").toLower())
-    occurrence = MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS;
-  else if (tmp == i18nc("Frequency of schedule", "Monthly").toLower())
-    occurrence = MyMoneySchedule::OCCUR_MONTHLY;
-  else if (tmp == i18nc("Frequency of schedule", "Every eight weeks").toLower())
-    occurrence = MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS;
-  else if (tmp == i18nc("Frequency of schedule", "Every two months").toLower())
-    occurrence = MyMoneySchedule::OCCUR_EVERYOTHERMONTH;
-  else if (tmp == i18nc("Frequency of schedule", "Every three months").toLower())
-    occurrence = MyMoneySchedule::OCCUR_EVERYTHREEMONTHS;
-  else if (tmp == i18nc("Frequency of schedule", "Quarterly").toLower())
-    occurrence = MyMoneySchedule::OCCUR_QUARTERLY;
-  else if (tmp == i18nc("Frequency of schedule", "Every four months").toLower())
-    occurrence = MyMoneySchedule::OCCUR_EVERYFOURMONTHS;
-  else if (tmp == i18nc("Frequency of schedule", "Twice yearly").toLower())
-    occurrence = MyMoneySchedule::OCCUR_TWICEYEARLY;
-  else if (tmp == i18nc("Frequency of schedule", "Yearly").toLower())
-    occurrence = MyMoneySchedule::OCCUR_YEARLY;
-  else if (tmp == i18nc("Frequency of schedule", "Every other year").toLower())
-    occurrence = MyMoneySchedule::OCCUR_EVERYOTHERYEAR;
-
-  return occurrence;
-}
-
 /**
   * Helper method to convert simple occurrence to compound occurrence + multiplier
   *

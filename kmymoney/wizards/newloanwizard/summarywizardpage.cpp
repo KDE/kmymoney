@@ -60,7 +60,7 @@ void SummaryWizardPage::initializePage()
     m_summaryInterestDue->setText(i18n("on reception"));
   else
     m_summaryInterestDue->setText(i18n("on due date"));
-  m_summaryPaymentFrequency->setText(field("paymentFrequencyUnitEdit").toString());
+  m_summaryPaymentFrequency->setText(MyMoneySchedule::occurrenceToString(MyMoneySchedule::occurrenceE(field("paymentFrequencyUnitEdit").toInt())));
   m_summaryAmount->setText(field("loanAmount6").toString());
   m_summaryInterestRate->setText(field("interestRate6").toString());
   m_summaryTerm->setText(field("duration6").toString());

@@ -657,15 +657,6 @@ public:
   static void compoundToSimpleOccurrence(int& multiplier, occurrenceE& occurrence);
 
   /**
-    * This method is used to convert the occurrence type from the
-    * human readable form into its internal representation.
-    *
-    * @param text reference to QString representing the human readable format
-    * @return numerical representation of the occurrence
-    */
-  static MyMoneySchedule::occurrenceE stringToOccurrence(const QString& text);
-
-  /**
     * This method is used to set the static point to relevant
     * IMyMoneyProcessingCalendar.
     */

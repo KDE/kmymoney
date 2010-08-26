@@ -1010,46 +1010,6 @@ void MyMoneyScheduleTest::testDaysBetweenEvents()
   QVERIFY(MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::OCCUR_EVERYOTHERYEAR) == 0);
 }
 
-void MyMoneyScheduleTest::testStringToOccurrence()
-{
-  // For each occurrenceE:
-  // test MyMoneySchedule::stringToOccurrence(QString) == occurrence
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18nc("Occurs once", "Once")) == MyMoneySchedule::OCCUR_ONCE);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18nc("Occurs daily", "Daily")) == MyMoneySchedule::OCCUR_DAILY);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18nc("Occurs weekly", "Weekly")) == MyMoneySchedule::OCCUR_WEEKLY);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18n("Every other week")) == MyMoneySchedule::OCCUR_EVERYOTHERWEEK);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18n("Fortnightly")) == MyMoneySchedule::OCCUR_FORTNIGHTLY);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18n("Every half month")) == MyMoneySchedule::OCCUR_EVERYHALFMONTH);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18n("Every four weeks")) == MyMoneySchedule::OCCUR_EVERYFOURWEEKS);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18nc("Occurs monthly", "Monthly")) == MyMoneySchedule::OCCUR_MONTHLY);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18n("Every eight weeks")) == MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18n("Every two months")) == MyMoneySchedule::OCCUR_EVERYOTHERMONTH);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18n("Every three months")) == MyMoneySchedule::OCCUR_EVERYTHREEMONTHS);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18n("Quarterly")) == MyMoneySchedule::OCCUR_QUARTERLY);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18n("Every four months")) == MyMoneySchedule::OCCUR_EVERYFOURMONTHS);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18n("Twice yearly")) == MyMoneySchedule::OCCUR_TWICEYEARLY);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18nc("Occurs yearly", "Yearly")) == MyMoneySchedule::OCCUR_YEARLY);
-  QVERIFY(MyMoneySchedule::stringToOccurrence(i18n("Every other year")) == MyMoneySchedule::OCCUR_EVERYOTHERYEAR);
-  // test occurrence == stringToOccurrence(i18n(occurrenceToString(occurrence)))
-  QVERIFY(MyMoneySchedule::OCCUR_ONCE == MyMoneySchedule::stringToOccurrence(i18n("Once")));
-  QVERIFY(MyMoneySchedule::OCCUR_DAILY == MyMoneySchedule::stringToOccurrence(i18nc("Occurs daily", "Daily")));
-  QVERIFY(MyMoneySchedule::OCCUR_WEEKLY == MyMoneySchedule::stringToOccurrence(i18nc("Occurs weekly", "Weekly")));
-  QVERIFY(MyMoneySchedule::OCCUR_EVERYOTHERWEEK == MyMoneySchedule::stringToOccurrence(i18n("Every other week")));
-  QVERIFY(MyMoneySchedule::OCCUR_FORTNIGHTLY == MyMoneySchedule::stringToOccurrence(i18n("Fortnightly")));
-  QVERIFY(MyMoneySchedule::OCCUR_EVERYHALFMONTH == MyMoneySchedule::stringToOccurrence(i18n("Every half month")));
-//  QVERIFY( MyMoneySchedule::OCCUR_EVERYTHREEWEEKS == MyMoneySchedule::stringToOccurrence(i18n(""))) );
-//  QVERIFY( MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS == MyMoneySchedule::stringToOccurrence(i18n(MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS))) );
-  QVERIFY(MyMoneySchedule::OCCUR_EVERYFOURWEEKS == MyMoneySchedule::stringToOccurrence(i18n("Every four weeks")));
-  QVERIFY(MyMoneySchedule::OCCUR_MONTHLY == MyMoneySchedule::stringToOccurrence(i18nc("Occurs monthly", "Monthly")));
-  QVERIFY(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS == MyMoneySchedule::stringToOccurrence(i18n("Every eight weeks")));
-  QVERIFY(MyMoneySchedule::OCCUR_EVERYOTHERMONTH == MyMoneySchedule::stringToOccurrence(i18n("Every two months")));
-  QVERIFY(MyMoneySchedule::OCCUR_EVERYTHREEMONTHS == MyMoneySchedule::stringToOccurrence(i18n("Every three months")));
-  QVERIFY(MyMoneySchedule::OCCUR_QUARTERLY == MyMoneySchedule::stringToOccurrence(i18n("Quarterly")));
-  QVERIFY(MyMoneySchedule::OCCUR_EVERYFOURMONTHS == MyMoneySchedule::stringToOccurrence(i18n("Every four months")));
-  QVERIFY(MyMoneySchedule::OCCUR_TWICEYEARLY == MyMoneySchedule::stringToOccurrence(i18n("Twice yearly")));
-  QVERIFY(MyMoneySchedule::OCCUR_YEARLY == MyMoneySchedule::stringToOccurrence(i18nc("Occurs yearly", "Yearly")));
-  QVERIFY(MyMoneySchedule::OCCUR_EVERYOTHERYEAR == MyMoneySchedule::stringToOccurrence(i18n("Every other year")));
-}
 void MyMoneyScheduleTest::testEventsPerYear()
 {
   QVERIFY(MyMoneySchedule::eventsPerYear(MyMoneySchedule::OCCUR_ONCE) == 0);

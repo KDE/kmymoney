@@ -42,7 +42,6 @@ private slots:
   void testEventsPerYear();
   void testOccurrenceToString();
   void testOccurrencePeriodToString();
-  void testStringToOccurrence();
   void testOccurrencePeriod();
   void testSimpleToFromCompoundOccurrence();
   void testProcessingDates();

@@ -362,8 +362,7 @@ int KNewLoanWizard::calculateLoan(void)
   // FIXME: for now, we only support periodic compounding
   calc.setDisc();
 
-  PF = MyMoneySchedule::eventsPerYear(MyMoneySchedule::stringToOccurrence(
-                                        field("paymentFrequencyUnitEdit").toString()));
+  PF = MyMoneySchedule::eventsPerYear(MyMoneySchedule::occurrenceE(field("paymentFrequencyUnitEdit").toInt()));
   if (PF == 0)
     return 0;
   calc.setPF(PF);
@@ -624,7 +623,7 @@ MyMoneySchedule KNewLoanWizard::schedule(void) const
 {
   MyMoneySchedule sched(field("nameEdit").toString(),
                         MyMoneySchedule::TYPE_LOANPAYMENT,
-                        MyMoneySchedule::stringToOccurrence(field("paymentFrequencyUnitEdit").toString()), 1,
+                        MyMoneySchedule::occurrenceE(field("paymentFrequencyUnitEdit").toInt()), 1,
                         MyMoneySchedule::STYPE_OTHER,
                         QDate(),
                         QDate(),

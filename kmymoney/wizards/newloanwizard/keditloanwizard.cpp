@@ -63,7 +63,6 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent)
   } catch (MyMoneyException *e) {
     delete e;
   }
-
   m_lastSelection = -1;
 
   loadWidgets(m_account);
@@ -128,7 +127,7 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
   m_interestEditPage->m_newInterestRateEdit->setPrecision(3);
   m_interestEditPage->m_interestRateLabel->setText(QString(" ") + ir.formatMoney("", 3) + QString("%"));
 
-  m_paymentFrequencyPage->m_paymentFrequencyUnitEdit->setCurrentItem(i18nc("Frequency of schedule", m_schedule.occurrenceToString().toLatin1()));
+  m_paymentFrequencyPage->m_paymentFrequencyUnitEdit->setCurrentIndex(m_paymentFrequencyPage->m_paymentFrequencyUnitEdit->findData(QVariant(m_schedule.occurrencePeriod()), Qt::UserRole, Qt::MatchExactly));
   m_durationPage->updateTermWidgets(m_account.term());
 
   // the base payment (amortization and interest) is determined
@@ -284,13 +283,17 @@ bool KEditLoanWizard::validateCurrentPage()
       }
 
       if (field("editInterestRateButton").toBool()) {
+        m_pages.setBit(Page_PaymentFrequency);
         m_pages.setBit(Page_InterestType);
         m_pages.setBit(Page_VariableInterestDate);
         m_pages.setBit(Page_PaymentEdit);
         m_pages.setBit(Page_InterestEdit);
+        m_pages.setBit(Page_InterestCategory);
+        m_pages.setBit(Page_Schedule);
         m_pages.setBit(Page_SummaryEdit);
 
       } else if (field("editOtherCostButton").toBool()) {
+        m_pages.setBit(Page_PaymentFrequency);
         m_pages.setBit(Page_AdditionalFees);
         m_pages.setBit(Page_InterestCategory);
         m_pages.setBit(Page_Schedule);
@@ -438,7 +441,7 @@ const MyMoneySchedule KEditLoanWizard::schedule(void) const
 {
   MyMoneySchedule sched = m_schedule;
   sched.setTransaction(transaction());
-  sched.setOccurrence(MyMoneySchedule::stringToOccurrence(field("paymentFrequencyUnitEdit").toString()));
+  sched.setOccurrence(MyMoneySchedule::occurrenceE(field("paymentFrequencyUnitEdit").toInt()));
   if (field("nextDueDateEdit").toDate() < m_schedule.startDate())
     sched.setStartDate(field("nextDueDateEdit").toDate());
 

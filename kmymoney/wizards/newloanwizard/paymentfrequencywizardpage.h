@@ -48,7 +48,6 @@ class PaymentFrequencyWizardPage : public PaymentFrequencyWizardPageDecl
   Q_OBJECT
 public:
   explicit PaymentFrequencyWizardPage(QWidget *parent = 0);
-
 };
 
 #endif

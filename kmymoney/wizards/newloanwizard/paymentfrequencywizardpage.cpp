@@ -20,7 +20,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -33,28 +32,8 @@
 PaymentFrequencyWizardPage::PaymentFrequencyWizardPage(QWidget *parent)
     : PaymentFrequencyWizardPageDecl(parent)
 {
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_DAILY).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_WEEKLY).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_FORTNIGHTLY).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYOTHERWEEK).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYHALFMONTH).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYFOURWEEKS).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_MONTHLY).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYOTHERMONTH).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_QUARTERLY).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_EVERYFOURMONTHS).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_TWICEYEARLY).toLatin1()));
-  m_paymentFrequencyUnitEdit->addItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_YEARLY).toLatin1()));
-
-  // Register the fields with the QWizard and connect the
-  // appropriate signals to update the "Next" button correctly
-  registerField("paymentFrequencyUnitEdit", m_paymentFrequencyUnitEdit, "currentText", SIGNAL(currentIndexChanged(const QString&)));
-
-  m_paymentFrequencyUnitEdit->setCurrentItem(i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(MyMoneySchedule::OCCUR_MONTHLY).toLatin1()));
-
+  registerField("paymentFrequencyUnitEdit", m_paymentFrequencyUnitEdit, "data", SIGNAL(currentDataChanged(QVariant)));
+  m_paymentFrequencyUnitEdit->setCurrentIndex(m_paymentFrequencyUnitEdit->findData(QVariant(MyMoneySchedule::OCCUR_MONTHLY), Qt::UserRole, Qt::MatchExactly));
 }
 
 #include "paymentfrequencywizardpage.moc"

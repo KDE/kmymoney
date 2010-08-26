@@ -67,7 +67,7 @@ How often will there be payments made to this loan?</string>
           </spacer>
         </item>
         <item>
-          <widget class="KComboBox" name="m_paymentFrequencyUnitEdit"/>
+          <widget class="KMyMoneyFrequencyCombo" name="m_paymentFrequencyUnitEdit"/>
         </item>
         <item>
           <spacer name="Spacer56">
@@ -108,6 +108,17 @@ How often will there be payments made to this loan?</string>
  <resources/>
  <connections/>
  <customwidgets>
+ <customwidget>
+  <class>KMyMoneyFrequencyCombo</class>
+  <extends>KComboBox</extends>
+  <header>kmymoneymvccombo.h</header>
+ </customwidget>
+ <customwidget>
+  <class>KComboBox</class>
+  <extends>QComboBox</extends>
+  <header>kcombobox.h</header>
+ </customwidget>
+
  </customwidgets>
  <tabstops>
  </tabstops>

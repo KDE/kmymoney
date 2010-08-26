@@ -338,8 +338,9 @@ public:
 class KMyMoneyOccurrencePeriodCombo : public KMyMoneyOccurrenceCombo
 {
   Q_OBJECT
-public:
-  KMyMoneyOccurrencePeriodCombo(QWidget* parent = 0);
+  public:
+    KMyMoneyOccurrencePeriodCombo(QWidget* parent = 0);
+
 };
 
 /**
@@ -349,6 +350,9 @@ public:
 class KMyMoneyFrequencyCombo : public KMyMoneyOccurrenceCombo
 {
   Q_OBJECT
+
+  Q_PROPERTY(QVariant data READ currentData WRITE setCurrentData STORED false)
+
 public:
   KMyMoneyFrequencyCombo(QWidget* parent = 0);
 
@@ -365,5 +369,19 @@ public:
    * on 30 days and the year is 360 days long.
    */
   int daysBetweenEvents(void) const;
+
+  QVariant currentData(void) const;
+
+  void setCurrentData(QVariant data);
+
+Q_SIGNALS:
+  void currentDataChanged(QVariant data);
+
+protected slots:
+  void slotCurrentDataChanged();
+
+private:
+    QVariant data;
+
 };
 #endif

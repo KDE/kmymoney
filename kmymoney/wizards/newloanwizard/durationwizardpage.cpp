@@ -73,8 +73,7 @@ int DurationWizardPage::term(void) const
         factor *= m_durationValueEdit->value();
         // factor now is the duration in days. we divide this by the
         // payment frequency and get the number of payments
-        factor /= MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::stringToOccurrence(
-                    field("paymentFrequencyUnitEdit").toString()));
+        factor /= MyMoneySchedule::daysBetweenEvents(MyMoneySchedule::occurrenceE(field("paymentFrequencyUnitEdit").toInt()));
         break;
 
       case MyMoneySchedule::OCCUR_ONCE: // payments
@@ -91,7 +90,7 @@ QString DurationWizardPage::updateTermWidgets(const long double val)
 
   QString valString;
   MyMoneySchedule::occurrenceE unit;
-  unit = MyMoneySchedule::stringToOccurrence(field("paymentFrequencyUnitEdit").toString());
+  unit = MyMoneySchedule::occurrenceE(field("paymentFrequencyUnitEdit").toInt());
 
   if ((unit == MyMoneySchedule::OCCUR_MONTHLY)
       && ((vl % 12) == 0)) {
