@@ -393,7 +393,7 @@ void KReportsView::loadView(void)
   QTreeWidgetItem* visibleTopItem = m_tocTreeWidget->itemAt(0, 0);
 
   // text of column 0 identifies the item visible on top
-  QString visibleTopItemText = QString();
+  QString visibleTopItemText;
 
   bool visibleTopItemFound = true;
   if (visibleTopItem == NULL) {
