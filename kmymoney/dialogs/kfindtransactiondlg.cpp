@@ -341,7 +341,7 @@ void KFindTransactionDlg::selectAllItems(QTreeWidget* view, const bool state)
   for (int i = 0; i < view->invisibleRootItem()->childCount(); ++i) {
     it_v = view->invisibleRootItem()->child(i);
     if (it_v->flags() & Qt::ItemIsUserCheckable) {
-      it_v->setCheckState(0, Qt::Checked);
+      it_v->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     }
     selectAllSubItems(it_v, state);
   }
