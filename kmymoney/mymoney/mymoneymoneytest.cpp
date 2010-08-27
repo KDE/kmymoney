@@ -40,7 +40,6 @@
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"
 #include <iostream>
-#include <stdint.h>
 
 QTEST_MAIN(MyMoneyMoneyTest)
 
