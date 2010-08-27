@@ -34,8 +34,6 @@
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 #include <kstdguiitem.h>
-#include <klineedit.h>
-#include <knuminput.h>
 #include <knuminput.h>
 #include <klineedit.h>
 #include <KToolInvocation>
@@ -52,7 +50,6 @@
 #include "kmymoneymvccombo.h"
 #include "kguiutils.h"
 #include "kmymoneyutils.h"
-#include "kmymoneydateinput.h"
 
 #include "kmymoney.h"
 
