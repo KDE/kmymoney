@@ -91,7 +91,8 @@ KPayeesView::KPayeesView(QWidget *parent) :
     m_needConnection(true),
     m_updatesQueued(0),
     m_inSelection(false),
-    m_payeeInEditing(false)
+    m_payeeInEditing(false),
+    m_payeeFilterType(0)
 {
   setupUi(this);
 
@@ -111,10 +112,15 @@ KPayeesView::KPayeesView(QWidget *parent) :
   // create the searchline widget
   // and insert it into the existing layout
   m_searchWidget = new KListWidgetSearchLine(this, m_payeesList);
-  m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
+  m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
   m_payeesList->setContextMenuPolicy(Qt::CustomContextMenu);
+  m_listTopHLayout->insertWidget(0, m_searchWidget);
 
-  m_listLayout->insertWidget(1, m_searchWidget);
+  //load the filter type
+  m_filterBox->addItem(i18nc("@item Show all payees", "All"));
+  m_filterBox->addItem(i18nc("@item Show only used payees", "Used"));
+  m_filterBox->addItem(i18nc("@item Show only unused payees", "Unused"));
+  m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
   KGuiItem newButtonItem(QString(""),
                          KIcon("list-add-user"),
@@ -168,6 +174,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(m_payeesList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(slotSelectPayee()));
   connect(m_payeesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotRenamePayee(QListWidgetItem*)));
+  connect(m_payeesList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotOpenContextMenu(const QPoint&)));
 
   connect(m_renameButton, SIGNAL(clicked()), this, SLOT(slotRenameButtonCliked()));
   connect(m_deleteButton, SIGNAL(clicked()), kmymoney->action("payee_delete"), SLOT(trigger()));
@@ -192,11 +199,11 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(m_updateButton, SIGNAL(clicked()), this, SLOT(slotUpdatePayee()));
   connect(m_helpButton, SIGNAL(clicked()), this, SLOT(slotHelp()));
 
-  connect(m_payeesList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotOpenContextMenu(const QPoint&)));
-
   connect(m_register, SIGNAL(editTransaction()), this, SLOT(slotSelectTransaction()));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadPayees()));
+
+  connect(m_filterBox, SIGNAL(currentIndexChanged(int)), this, SLOT(slotChangeFilter(int)));
 
   // use the size settings of the last run (if any)
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
@@ -660,6 +667,7 @@ void KPayeesView::loadPayees(void)
 
   QMap<QString, bool> isSelected;
   QString id;
+  MyMoneyFile* file = MyMoneyFile::instance();
 
   ::timetrace("Start KPayeesView::loadPayees");
 
@@ -684,15 +692,19 @@ void KPayeesView::loadPayees(void)
   m_register->clear();
   currentItem = 0;
 
-  QList<MyMoneyPayee>list = MyMoneyFile::instance()->payeeList();
+  QList<MyMoneyPayee>list = file->payeeList();
   QList<MyMoneyPayee>::ConstIterator it;
 
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    KPayeeListItem* item = new KPayeeListItem(m_payeesList, *it);
-    if (item->payee().id() == id)
-      currentItem = item;
-    if (isSelected[item->payee().id()])
-      item->setSelected(true);
+    if(m_payeeFilterType == eAllPayees ||
+       (m_payeeFilterType == eReferencedPayees && file->isReferenced(*it)) ||
+       (m_payeeFilterType == eUnusedPayees && !file->isReferenced(*it))) {
+      KPayeeListItem* item = new KPayeeListItem(m_payeesList, *it);
+      if (item->payee().id() == id)
+        currentItem = item;
+      if (isSelected[item->payee().id()])
+        item->setSelected(true);
+    }
   }
   m_payeesList->sortItems();
 
@@ -794,6 +806,13 @@ void KPayeesView::slotPayeeNew(void)
 void KPayeesView::slotHelp(void)
 {
   KToolInvocation::invokeHelp("details.payees.personalinformation");
+}
+
+void KPayeesView::slotChangeFilter(int index)
+{
+  //update the filter type then reload the payees list
+  m_payeeFilterType = index;
+  loadPayees();
 }
 
 #include "kpayeesview.moc"

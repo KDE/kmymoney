@@ -82,6 +82,8 @@ public:
   ~KPayeesView();
   void showEvent(QShowEvent* event);
 
+  enum filterTypeE { eAllPayees = 0, eReferencedPayees = 1, eUnusedPayees = 2 };
+
 public slots:
   void slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& transactionId = QString());
   void slotLoadPayees(void);
@@ -132,6 +134,8 @@ protected slots:
   void slotPayeeNew(void);
 
   void slotRenameButtonCliked(void);
+
+  void slotChangeFilter(int index);
 
 private slots:
   /**
@@ -185,6 +189,11 @@ private:
    * This signals whether a payee is being edited
    **/
   bool m_payeeInEditing;
+
+  /**
+    * This holds the filter type
+    */
+  int m_payeeFilterType;
 
   AccountNamesFilterProxyModel *m_filterProxyModel;
 };
