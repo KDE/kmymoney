@@ -169,7 +169,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_scheduleViewFrame->setIcon(KIcon("view-pim-calendar"));
   m_scheduleViewFrame->setHeader(QString(""));
   addTitleBar(m_scheduledView, i18n("Scheduled transactions"));
-  connect(kmymoney, SIGNAL(fileLoaded(const KUrl&)), m_scheduledView, SLOT(slotReloadView()));
   connect(m_scheduledView, SIGNAL(scheduleSelected(const MyMoneySchedule&)), kmymoney, SLOT(slotSelectSchedule(const MyMoneySchedule&)));
   connect(m_scheduledView, SIGNAL(openContextMenu()), kmymoney, SLOT(slotShowScheduleContextMenu()));
   connect(m_scheduledView, SIGNAL(enterSchedule()), kmymoney, SLOT(slotScheduleEnter()));
@@ -240,7 +239,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_budgetViewFrame->setIcon(KIcon("budget"));
   m_budgetViewFrame->setHeader(QString(""));
   addTitleBar(m_budgetView, i18n("Budgets"));
-  connect(kmymoney, SIGNAL(fileLoaded(const KUrl&)), m_budgetView, SLOT(slotRefreshView()));
   connect(m_budgetView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowBudgetContextMenu()));
   connect(m_budgetView, SIGNAL(selectObjects(const QList<MyMoneyBudget>&)), kmymoney, SLOT(slotSelectBudget(const QList<MyMoneyBudget>&)));
   connect(kmymoney, SIGNAL(budgetRename()), m_budgetView, SLOT(slotStartRename()));
