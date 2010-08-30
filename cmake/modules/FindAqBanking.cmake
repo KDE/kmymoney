@@ -26,6 +26,20 @@ endif(AQBANKING_INCLUDE_DIRS AND AQBANKING_LIBRARIES)
 PKG_CHECK_MODULES(AQBANKING aqbanking>=${AQBANKING_MIN_VERSION} aqbanking<=${AQBANKING_MAX_VERSION})
 
 if(${AQBANKING_FOUND})
+   find_file(Q4BANKING_QBANKING_H
+      NAMES qbanking.h
+      PATHS ${AQBANKING_INCLUDE_DIRS}
+      PATH_SUFFIXES q4banking)
+   if (NOT EXISTS ${Q4BANKING_QBANKING_H})
+      set(AQBANKING_FOUND FALSE)
+      unset(AQBANKING_INCLUDE_DIRS)
+      unset(AQBANKING_LIBRARIES)
+      unset(AQBANKING_VERSION)
+      message(STATUS "AqBanking does not have the Q4Banking frontend enabled")
+   endif (NOT EXISTS ${Q4BANKING_QBANKING_H})
+endif(${AQBANKING_FOUND})
+
+if(${AQBANKING_FOUND})
   # if AqBanking has been found make sure to add the q4banking lib
   set(AQBANKING_LIBRARIES ${AQBANKING_LIBRARIES} q4banking)
 endif(${AQBANKING_FOUND})
