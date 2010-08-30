@@ -1514,7 +1514,7 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
   // we do not allow editing in this case: https://bugs.kde.org/show_bug.cgi?id=240816
   // later on, we might allow to edit investment transactions of the same type
   if (rc == true && investmentTransactions > 1) {
-    // tooltip = i18n("Cannot edit multiple investment transactions at once");
+    tooltip = i18n("Cannot edit multiple investment transactions at once");
     rc = false;
   }
 
