@@ -178,7 +178,7 @@ void kMyMoneyCalculator::plusminusClicked(void)
 
   if (operand.length() > 0) {
     if (operand.indexOf('-') != -1)
-      operand.replace('-', QChar());
+      operand.remove('-');
     else
       operand.prepend('-');
     changeDisplay(operand);
@@ -426,12 +426,12 @@ void kMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
   operand.replace(QRegExp(QString('\\') + m_comma), ".");
   if (operand.contains('(')) {
     negative = true;
-    operand.replace('(', QChar());
-    operand.replace(')', QChar());
+    operand.remove('(');
+    operand.remove(')');
   }
   if (operand.contains('-')) {
     negative = true;
-    operand.replace('-', QChar());
+    operand.remove('-');
   }
   if (operand.isEmpty())
     operand = '0';
