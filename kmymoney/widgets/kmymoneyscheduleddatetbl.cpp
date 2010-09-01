@@ -271,7 +271,7 @@ void kMyMoneyScheduledDateTbl::addDayPostfix(QString& text)
     QStringList postfixList =
       i18nc("These are the suffix strings of the days in the calendar view; please make sure that you keep all the 30 separators (the '-' character) when translating",
             "st-nd-rd-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-th-st-nd-rd-th-th-th-th-th-th-th-st").split('-', QString::KeepEmptyParts);
-    if (postfixList.size() <= d) // make sure that an improper translation will not cause a crash
+    if (d <= postfixList.size()) // make sure that an improper translation will not cause a crash
       text += postfixList[d-1];
   }
 }
