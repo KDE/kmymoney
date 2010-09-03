@@ -121,7 +121,7 @@ void KInvestmentDetailsWizardPage::setPriceModeEnabled(bool enabled)
 void KInvestmentDetailsWizardPage::setupInvestmentSymbol()
 {
   m_investmentSymbol->setFocus();
-  connect(m_investmentSymbol, SIGNAL(lineChanged(const QString&)), this, SLOT(slotCheckForExistingSymbol(const QString&)));
+  connect(m_investmentSymbol, SIGNAL(lineChanged(const QString&)), this, SIGNAL(checkForExistingSymbol(const QString&)));
 }
 
 #include "kinvestmentdetailswizardpage.moc"
