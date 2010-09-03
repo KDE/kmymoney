@@ -38,6 +38,9 @@ KInvestmentTypeWizardPage::KInvestmentTypeWizardPage(QWidget *parent)
   model->sort(0, Qt::AscendingOrder);
 
   m_securityType->setModel(model);
+
+  // Register the fields with the QWizard
+  registerField("securityType", m_securityType, "currentText", SIGNAL(currentIndexChanged(const QString&)));
 }
 
 void KInvestmentTypeWizardPage::init2(const MyMoneySecurity& security)
@@ -48,9 +51,6 @@ void KInvestmentTypeWizardPage::init2(const MyMoneySecurity& security)
     if (m_securityType->itemText(i) == text)
       m_securityType->setCurrentIndex(i);
   }
-
-  // Register the fields with the QWizard
-  registerField("securityType", m_securityType, "currentText", SIGNAL(currentIndexChanged(const QString&)));
 }
 
 void KInvestmentTypeWizardPage::setIntroLabelText(const QString& text)
