@@ -374,11 +374,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   ::timetrace("init options");
   readOptions();
 
-#if 0
-  m_pluginSignalMapper = new QSignalMapper(this);
-  connect(m_pluginSignalMapper, SIGNAL(mapped(const QString&)), this, SLOT(slotPluginImport(const QString&)));
-#endif
-
   // now initialize the plugin structure
   ::timetrace("load plugins");
   createInterfaces();
