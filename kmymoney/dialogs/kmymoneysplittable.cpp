@@ -925,11 +925,13 @@ bool kMyMoneySplitTable::focusNextPrevChild(bool next)
 
     if (currentWidgetIndex != -1) {
       // if(w) qDebug("tab order is at '%s'", w->className());
-      QWidgetList::const_iterator it = m_tabOrderWidgets.constBegin() + currentWidgetIndex;
-      if (next)
-        w = ((it + 1) != m_tabOrderWidgets.constEnd()) ? *(it + 1) : m_tabOrderWidgets.first();
-      else
-        w = ((it - 1) != m_tabOrderWidgets.constBegin()) ? *(it - 1) : m_tabOrderWidgets.last();
+      currentWidgetIndex += next ? 1 : -1;
+      if (currentWidgetIndex < 0)
+        currentWidgetIndex = m_tabOrderWidgets.size() - 1;
+      else if (currentWidgetIndex >= m_tabOrderWidgets.size())
+        currentWidgetIndex = 0;
+
+      w = m_tabOrderWidgets[currentWidgetIndex];
 
       if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
         // qDebug("Selecting '%s' as focus", w->className());
