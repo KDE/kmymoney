@@ -1845,9 +1845,6 @@ void InvestTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
   // memo
   tabOrderWidgets.append(focusWidget(m_form->cellWidget(5, ValueColumn1)));
 
-  // total
-  tabOrderWidgets.append(focusWidget(m_form->cellWidget(5, ValueColumn2)));
-
   // state
   tabOrderWidgets.append(focusWidget(m_form->cellWidget(6, ValueColumn2)));
 }
