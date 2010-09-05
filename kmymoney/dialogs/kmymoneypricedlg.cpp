@@ -154,7 +154,8 @@ void KMyMoneyPriceDlg::slotLoadWidgets(void)
   m_priceList->sortByColumn(KPriceTreeItem::ePriceCommodity);
 
   //update the search widget so the list gets refreshed correctly if it was being filtered
-  m_searchWidget->searchLine()->updateSearch(m_searchWidget->searchLine()->text());
+  if(!m_searchWidget->searchLine()->text().isEmpty())
+    m_searchWidget->searchLine()->updateSearch(m_searchWidget->searchLine()->text());
 }
 
 QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
