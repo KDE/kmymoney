@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Configure the print check plugin
+Name[da]=Indstil plugin til udskrift af checks
 Name[de]=Das Modul zum Drucken von Schecks konfigurieren
 Name[en_GB]=Configure the print cheque plugin
 Name[es]=Configurar el complemento de impresión de cheques
@@ -19,6 +20,7 @@ ServiceTypes=KCModule
 Exec=kcmshell kmm_printcheck
 Categories=QT;KDE;kmymoney;
 Keywords=printcheck;kmymoney
+Keywords[da]=printcheck;kmymoney
 Keywords[de]=printcheck;kmymoney
 Keywords[en_GB]=printcheque;kmymoney
 Keywords[es]=printcheck;kmymoney
@@ -36,6 +38,7 @@ X-KDE-Library=kcm_kmm_printcheck
 X-KDE-ParentApp=Print check
 X-KDE-ParentComponents=Print check
 Comment=Permits the configuration of the print check plugin's options
+Comment[da]=Muliggør konfiguration af indstillingerne til pluginet til udskrift af checks
 Comment[de]=Erlaubt die Konfiguration des Moduls zum Drucken von Schecks
 Comment[en_GB]=Permits the configuration of the print cheque plugin's options
 Comment[es]=Permite la configuración de las opciones del complemento de impresión de cheques
