@@ -233,7 +233,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
   KMyMoneyRegister::RegisterItem* item = m_register->firstItem();
   while (item) {
     //only walk through selectable items. eg. transactions and not group markers
-    if(item->isSelectable()) {
+    if (item->isSelectable()) {
       KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(item);
 
       MyMoneySplit s = t->transaction().splitByPayee(m_payee.id());
@@ -696,9 +696,9 @@ void KPayeesView::loadPayees(void)
   QList<MyMoneyPayee>::ConstIterator it;
 
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    if(m_payeeFilterType == eAllPayees ||
-       (m_payeeFilterType == eReferencedPayees && file->isReferenced(*it)) ||
-       (m_payeeFilterType == eUnusedPayees && !file->isReferenced(*it))) {
+    if (m_payeeFilterType == eAllPayees ||
+        (m_payeeFilterType == eReferencedPayees && file->isReferenced(*it)) ||
+        (m_payeeFilterType == eUnusedPayees && !file->isReferenced(*it))) {
       KPayeeListItem* item = new KPayeeListItem(m_payeesList, *it);
       if (item->payee().id() == id)
         currentItem = item;

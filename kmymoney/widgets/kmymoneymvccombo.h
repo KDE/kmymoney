@@ -338,8 +338,8 @@ public:
 class KMyMoneyOccurrencePeriodCombo : public KMyMoneyOccurrenceCombo
 {
   Q_OBJECT
-  public:
-    KMyMoneyOccurrencePeriodCombo(QWidget* parent = 0);
+public:
+  KMyMoneyOccurrencePeriodCombo(QWidget* parent = 0);
 
 };
 
@@ -381,7 +381,7 @@ protected slots:
   void slotCurrentDataChanged();
 
 private:
-    QVariant data;
+  QVariant data;
 
 };
 #endif
