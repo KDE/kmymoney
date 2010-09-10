@@ -22,6 +22,7 @@
 
 #include <QRegExp>
 #include <QPixmap>
+#include <QPixmapCache>
 #include <QPainter>
 
 // ----------------------------------------------------------------------------
@@ -676,7 +677,13 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
       break;
   }
 
-  QPixmap result = DesktopIcon(icon, size);
+  QString iconKey = icon + QString(size);
+  QPixmap result;
+  if(!QPixmapCache::find(iconKey, result)) {
+    result = DesktopIcon(icon, size);
+    QPixmapCache::insert(iconKey, result);
+  }
+
   QPainter pixmapPainter(&result);
   if (isClosed()) {
     QPixmap ovly = DesktopIcon("account-types-closed", size);

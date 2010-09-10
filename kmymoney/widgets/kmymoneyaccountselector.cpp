@@ -33,6 +33,7 @@
 #include <QRect>
 #include <QList>
 #include <QVBoxLayout>
+#include <QPixmapCache>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -273,7 +274,14 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
   // create the favorite section first and sort it to the beginning
   key = QString("A%1").arg(i18n("Favorites"));
   m_favorites = selector->newItem(i18n("Favorites"), key);
-  m_favorites->setIcon(0, QIcon(DesktopIcon("account")));  //krazy:exclude=iconnames
+
+  //get the account icon from cache or insert it if it is not there
+  QPixmap accountPixmap;
+  if(!QPixmapCache::find("account", accountPixmap)) {
+    accountPixmap = DesktopIcon("account"); //krazy:exclude=iconnames
+    QPixmapCache::insert("account", accountPixmap);
+  }
+  m_favorites->setIcon(0, QIcon(accountPixmap));
 
   for (int mask = 0x01; mask != KMyMoneyUtils::last; mask <<= 1) {
     QTreeWidgetItem* item = 0;

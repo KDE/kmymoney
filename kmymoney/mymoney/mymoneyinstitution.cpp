@@ -21,6 +21,7 @@
 // QT Includes
 
 #include <QPixmap>
+#include <QPixmapCache>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -182,6 +183,11 @@ bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const
 
 QPixmap MyMoneyInstitution::pixmap() const
 {
-  return QPixmap(DesktopIcon("institution"));
+  QPixmap institution;
+  if(!QPixmapCache::find("institution", institution)) {
+    institution = DesktopIcon("institution");
+    QPixmapCache::insert("institution", institution);
+  }
+  return institution;
 }
 
