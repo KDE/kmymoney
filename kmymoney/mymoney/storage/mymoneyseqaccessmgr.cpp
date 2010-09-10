@@ -999,54 +999,26 @@ void MyMoneySeqAccessMgr::loadAccounts(const QMap<QString, MyMoneyAccount>& map)
 
 void MyMoneySeqAccessMgr::loadTransactions(const QMap<QString, MyMoneyTransaction>& map)
 {
+  m_transactionList = map;
 
   // now fill the key map and
   // identify the last used id
   QString lastId("");
   QMap<QString, QString> keys;
   QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
-  QList<MyMoneyTransaction> duplicates;
 
   for (it_t = map.constBegin(); it_t != map.constEnd(); ++it_t) {
-    if (keys.contains((*it_t).id())) {
-      qDebug("Duplicate detected for transaction '%s'", qPrintable((*it_t).id()));
-      duplicates << (*it_t);
-    } else {
-      keys[(*it_t).id()] = it_t.key();
-      if ((*it_t).id() > lastId)
-        lastId = (*it_t).id();
-    }
+    keys[(*it_t).id()] = it_t.key();
+    if ((*it_t).id() > lastId)
+      lastId = (*it_t).id();
   }
+  m_transactionKeys = keys;
 
-  // keep track of hightes used ID so far
+  // determine highest used ID so far
   int pos = lastId.indexOf(QRegExp("\\d+"), 0);
   if (pos != -1) {
     m_nextTransactionID = lastId.mid(pos).toInt();
   }
-
-  // process duplicates
-  QList<MyMoneyTransaction>::ConstIterator it_d;
-  if (duplicates.count() > 0) {
-    QMap<QString, MyMoneyTransaction> newMap;
-    newMap = map;
-    for (it_d = duplicates.constBegin(); it_d != duplicates.constEnd(); ++it_d) {
-      // remove old reference from map
-      newMap.remove((*it_d).uniqueSortKey());
-
-      // create transaction with new id
-      MyMoneyTransaction newTransaction(nextTransactionID(), *it_d);
-      QString key = newTransaction.uniqueSortKey();
-
-      newMap[key] = newTransaction;
-      keys[newTransaction.id()] = key;
-      qDebug("Duplicate got new id '%s'", qPrintable(newTransaction.id()));
-    }
-    m_transactionList = newMap;
-  } else {
-    m_transactionList = map;
-  }
-
-  m_transactionKeys = keys;
 }
 
 void MyMoneySeqAccessMgr::loadInstitutions(const QMap<QString, MyMoneyInstitution>& map)
