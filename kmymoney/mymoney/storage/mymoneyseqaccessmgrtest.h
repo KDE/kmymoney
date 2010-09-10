@@ -77,7 +77,6 @@ private slots:
   void testCurrencyList();
   void testAccountList();
   void testLoaderFunctions();
-  void testDuplicateTransactionId();
 };
 
 #endif

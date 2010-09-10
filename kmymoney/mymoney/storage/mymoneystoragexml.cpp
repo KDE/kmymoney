@@ -46,12 +46,11 @@
 unsigned int MyMoneyStorageXML::fileVersionRead = 0;
 unsigned int MyMoneyStorageXML::fileVersionWrite = 0;
 
-
 class MyMoneyStorageXML::Private
 {
   friend class MyMoneyStorageXML;
 public:
-  Private() {}
+  Private() : m_nextTransactionID(0) {}
 
   QMap<QString, MyMoneyInstitution> iList;
   QMap<QString, MyMoneyAccount> aList;
@@ -65,6 +64,16 @@ public:
 
   QString           m_fromSecurity;
   QString           m_toSecurity;
+  unsigned long     m_nextTransactionID;
+  static const int  TRANSACTION_ID_SIZE = 18;
+
+  QString nextTransactionID(void) {
+    QString id;
+    id.setNum(++m_nextTransactionID);
+    id = 'T' + id.rightJustified(TRANSACTION_ID_SIZE, '0');
+    return id;
+  }
+
 
 };
 
@@ -222,6 +231,7 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
   return true;
 }
 
+
 bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, const QString& /* localName */, const QString& qName)
 {
   bool rc = true;
@@ -232,9 +242,11 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
     if (!m_level) {
       try {
         if (s == "transaction") {
-          MyMoneyTransaction t(m_baseNode);
-          if (!t.id().isEmpty())
-            m_reader->d->tList[t.uniqueSortKey()] = t;
+          MyMoneyTransaction t0(m_baseNode);
+          if (!t0.id().isEmpty()) {
+            MyMoneyTransaction t1(m_reader->d->nextTransactionID(), t0);
+            m_reader->d->tList[t1.uniqueSortKey()] = t1;
+          }
           m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == "account") {
           MyMoneyAccount a(m_baseNode);
