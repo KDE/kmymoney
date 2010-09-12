@@ -1,5 +1,7 @@
 ADD_SUBDIRECTORY( interfaces )
 
+ADD_SUBDIRECTORY( csvimport )
+
 if(LIBOFX_FOUND)
 	ADD_SUBDIRECTORY( ofximport )
 endif(LIBOFX_FOUND)

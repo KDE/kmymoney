@@ -1,0 +1,38 @@
+[Columns]
+AmountCol=-1
+CreditCol=2
+DateCol=0
+DebitCol=3
+MemoCol=4
+NumberCol=-1
+PayeeCol=1
+
+[InvColumns]
+AmountCol=8
+DateCol=1
+FeeCol=-1
+MemoCol=4
+PayeeCol=3
+PriceCol=7
+QuantityCol=6
+
+[InvestmentSettings]
+BrokerageParam=Bill Payment,Check
+BuyParam=Purchase,Buy,New Inv,Switch In
+DivXParam=Dividend,Interest
+InvDirectory=$HOME/
+ReinvdivParam=Reinv,Re-inv,ReInv
+RemoveParam=Remove
+SellParam=Sell
+ShrsinParam=Add,Stock Dividend,Divd Reinv,Transfer In,Re-Registration In,Journal Entry
+StartLine=5
+
+[MainWindow]
+Height=767
+
+[Profile]
+CsvDirectory=$HOME/
+DateFormat=2
+Encoding=0
+FieldDelimiter=0
+StartLine=6

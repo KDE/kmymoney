@@ -1,0 +1,110 @@
+/***************************************************************************
+                           csvdatetest.cpp
+                         -------------------
+    begin                : Sat Jan 01 2010
+    copyright            : (C) 2010 by Allan Anderson
+    email                : aganderson@ukonline.co.uk
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+#include "csvdatetest.h"
+
+#include <QtTest/QtTest>
+#include <QtCore/QString>
+
+#include <KLocalizedString>
+
+#include "convdate.h"
+
+QTEST_MAIN(CsvDateTest);
+
+CsvDateTest::CsvDateTest()
+{
+}
+
+void CsvDateTest::init()
+{
+  m_convert = new ConvertDate;
+}
+
+void CsvDateTest::cleanup()
+{
+  delete m_convert;
+}
+
+void CsvDateTest::testConstructor()
+{
+}
+
+void CsvDateTest::testDefaultConstructor()
+{
+}
+
+void CsvDateTest::testDateConvert()
+{
+  QString format = "dd/MM/yyyy";
+
+  m_convert->m_dateFormatIndex = 2;//             UK/EU date format;
+
+  QVERIFY(m_convert->convertDate("13/09/81") ==
+          QDate::fromString("13/09/1981", format));//a = "13/09/81"
+  QVERIFY(m_convert->convertDate("13/09/01") ==
+          QDate::fromString("13/09/2001", format));//b = "13/09/01"
+  QVERIFY(m_convert->convertDate("13-09-81") ==
+          QDate::fromString("13/09/1981", format));//c = "13-09-81"
+  QVERIFY(m_convert->convertDate("13-09-01") ==
+          QDate::fromString("13/09/2001", format));//d = "13-09-01"
+  QVERIFY(m_convert->convertDate(i18n("25-December-2000")) ==
+          QDate::fromString("25/12/2000", format));//e = "25-December-2000"
+  QVERIFY(m_convert->convertDate(i18n("5-Nov-1999")) ==
+          QDate::fromString("05/11/1999", format));//f = "5-Nov-1999"
+  QVERIFY(m_convert->convertDate("13.09.81") ==
+          QDate::fromString("13/09/1981", format));//g = "13.09.81"
+  QVERIFY(m_convert->convertDate("32/01/2000") ==
+          QDate());//                             h ="32/01/2000" invalid day
+  QVERIFY(m_convert->convertDate(i18n("13-rubbishmonth-2000")) ==
+          QDate());//        i = "13-rubbishmonth-2000" invalid month
+  QVERIFY(m_convert->convertDate("01/13/2000") ==
+          QDate());//                  j = "01/13/2000"  invalid month
+  QVERIFY(m_convert->convertDate("01/12/200") ==
+          QDate());//                   k = "01/12/200"  invalid year
+  QVERIFY(m_convert->convertDate("") ==
+          QDate());//                            l = ""   empty date
+  format = "ddMMyyyy";
+  QVERIFY(m_convert->convertDate("31-1-2010") ==
+          QDate::fromString("31012010", format));//m = "31-1-2010" single digit month
+}
+
+void CsvDateTest::testDateConvertFormats()
+{
+  QString aDate = "2001-11-30";
+  QString format = "yyyy/MM/dd";
+
+  m_convert->m_dateFormatIndex = 0;//           ISO date format
+
+  QVERIFY(m_convert->convertDate(aDate) == QDate::fromString("2001/11/30", format));
+
+  m_convert->m_dateFormatIndex = 1;//           US date format
+
+  QVERIFY(m_convert->convertDate(aDate) == QDate());
+
+  aDate = "11-30-2001";
+  format = "MM/dd/yyyy";
+
+  m_convert->m_dateFormatIndex = 0;//             ISO date format
+
+  QVERIFY(m_convert->convertDate(aDate) == QDate());
+
+  m_convert->m_dateFormatIndex = 1;//           US date format
+
+  QVERIFY(m_convert->convertDate(aDate) == QDate::fromString("11/30/2001", format));
+}
+
+#include "csvdatetest.moc"
