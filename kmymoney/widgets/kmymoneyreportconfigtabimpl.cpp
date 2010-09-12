@@ -18,6 +18,7 @@
 */
 
 #include "kmymoneyreportconfigtabimpl.h"
+#include "mymoney/mymoneyreport.h"
 
 kMyMoneyReportConfigTab1Decl::kMyMoneyReportConfigTab1Decl(QWidget *parent)
     : QWidget(parent)
@@ -52,4 +53,10 @@ kMyMoneyReportConfigTabChartDecl::kMyMoneyReportConfigTabChartDecl(QWidget *pare
     : QWidget(parent)
 {
   setupUi(this);
+
+  m_comboType->addItem(i18nc("type of graphic chart", "Line"), MyMoneyReport::eChartLine);
+  m_comboType->addItem(i18nc("type of graphic chart", "Bar"), MyMoneyReport::eChartBar);
+  m_comboType->addItem(i18nc("type of graphic chart", "Stacked Bar"), MyMoneyReport::eChartStackedBar);
+  m_comboType->addItem(i18nc("type of graphic chart", "Pie"), MyMoneyReport::eChartPie);
+  m_comboType->addItem(i18nc("type of graphic chart", "Ring"), MyMoneyReport::eChartRing);
 }

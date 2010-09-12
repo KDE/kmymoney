@@ -1,203 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0" stdsetdef="0">
-  <author></author>
-  <comment></comment>
-  <exportmacro></exportmacro>
-  <class>kMyMoneyReportConfigTabChartDecl</class>
-  <widget class="QWidget" name="kMyMoneyReportConfigTabChartDecl">
-    <property name="geometry">
-      <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>600</width>
-        <height>174</height>
-      </rect>
-    </property>
-    <property name="windowTitle">
-      <string>Chart Tab</string>
-    </property>
-    <property name="toolTip" stdset="0">
-      <string/>
-    </property>
-    <property name="whatsThis" stdset="0">
-      <string>&lt;p&gt;On this tab, you configure the chart drawn for this report.&lt;/p&gt;</string>
-    </property>
-    <layout class="QVBoxLayout">
-      <item>
-        <layout class="QHBoxLayout">
-          <item>
-            <widget class="QLabel" name="textLabel1">
-              <property name="sizePolicy">
-                <sizepolicy>
-                  <hsizetype>5</hsizetype>
-                  <vsizetype>5</vsizetype>
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                </sizepolicy>
-              </property>
-              <property name="text">
-                <string>Chart Type</string>
-              </property>
-              <property name="toolTip" stdset="0">
-                <string>&lt;p&gt;Select what form you would like the chart to be drawn as.&lt;/p&gt;</string>
-              </property>
-              <property name="wordWrap">
-                <bool>false</bool>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <widget class="KComboBox" name="m_comboType">
-              <item>
-                <property name="text">
-                  <string comment="@item type of chart">Line</string>
-                </property>
-              </item>
-              <item>
-                <property name="text">
-                  <string comment="@item type of chart">Bar</string>
-                </property>
-              </item>
-              <item>
-                <property name="text">
-                  <string comment="@item type of chart">Stacked Bar</string>
-                </property>
-              </item>
-              <item>
-                <property name="text">
-                  <string comment="@item type of chart">Pie</string>
-                </property>
-              </item>
-              <item>
-                <property name="text">
-                  <string>Ring</string>
-                </property>
-              </item>
-            </widget>
-          </item>
-          <item>
-            <spacer name="spacer1">
-              <property name="sizeHint">
-                <size>
-                  <width>121</width>
-                  <height>20</height>
-                </size>
-              </property>
-              <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-              </property>
-            </spacer>
-          </item>
-        </layout>
-      </item>
-      <item>
-        <widget class="QCheckBox" name="m_checkGridLines">
-          <property name="text">
-            <string>Show grid lines</string>
-          </property>
-          <property name="toolTip" stdset="0">
-            <string>&lt;p&gt;Select this option to show horizontal and vertical grid lines on the chart.&lt;/p&gt;</string>
-          </property>
-        </widget>
-      </item>
-      <item>
-        <widget class="QCheckBox" name="m_checkValues">
-          <property name="text">
-            <string>Draw values on chart</string>
-          </property>
-          <property name="toolTip" stdset="0">
-            <string>&lt;p&gt;Select this option to draw the numeric values for data points next to their plot location.&lt;/p&gt;</string>
-          </property>
-        </widget>
-      </item>
-      <item>
-        <widget class="QCheckBox" name="m_checkShowChart">
-          <property name="text">
-            <string>Show as chart by default</string>
-          </property>
-          <property name="toolTip" stdset="0">
-            <string>&lt;p&gt;Select this option to cause the report to be shown as a chart when you first open the report.  Otherwise, it will come up as a text report.&lt;/p&gt;</string>
-          </property>
-        </widget>
-      </item>
-      <item>
-        <layout class="QHBoxLayout">
-          <item>
-            <widget class="QLabel" name="textLabel6">
-              <property name="sizePolicy">
-                <sizepolicy>
-                  <hsizetype>5</hsizetype>
-                  <vsizetype>5</vsizetype>
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                </sizepolicy>
-              </property>
-              <property name="text">
-                <string>Line width</string>
-              </property>
-              <property name="toolTip" stdset="0">
-                <string>&lt;p&gt;Select what width should be used to draw the line on the chart&lt;/p&gt;</string>
-              </property>
-              <property name="wordWrap">
-                <bool>false</bool>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <widget class="QSpinBox" name="m_lineWidth">
-              <property name="maximum">
-                <number>10</number>
-              </property>
-              <property name="minimum">
-                <number>1</number>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <spacer name="spacer2">
-              <property name="sizeHint">
-                <size>
-                  <width>121</width>
-                  <height>20</height>
-                </size>
-              </property>
-              <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-              </property>
-            </spacer>
-          </item>
-        </layout>
-      </item>
-      <item>
-        <spacer name="spacer15">
-          <property name="sizeHint">
-            <size>
-              <width>20</width>
-              <height>20</height>
-            </size>
-          </property>
-          <property name="sizeType">
-            <enum>QSizePolicy::Expanding</enum>
-          </property>
-          <property name="orientation">
-            <enum>Qt::Vertical</enum>
-          </property>
-        </spacer>
-      </item>
+<ui version="4.0">
+ <class>kMyMoneyReportConfigTabChartDecl</class>
+ <widget class="QWidget" name="kMyMoneyReportConfigTabChartDecl">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>174</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Chart Tab</string>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <property name="whatsThis">
+   <string>&lt;p&gt;On this tab, you configure the chart drawn for this report.&lt;/p&gt;</string>
+  </property>
+  <layout class="QVBoxLayout">
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QLabel" name="textLabel1">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>&lt;p&gt;Select what form you would like the chart to be drawn as.&lt;/p&gt;</string>
+       </property>
+       <property name="text">
+        <string>Chart Type</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KMyMoneyGeneralCombo" name="m_comboType"/>
+     </item>
+     <item>
+      <spacer name="spacer1">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>121</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
     </layout>
-  </widget>
-  <layoutdefault spacing="6" margin="11"/>
-  <customwidgets>
-    <customwidget>
-      <class>KComboBox</class>
-      <extends>QComboBox</extends>
-      <header location="global">kcombobox.h</header>
-    </customwidget>
-  </customwidgets>
-  </ui>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_checkGridLines">
+     <property name="toolTip">
+      <string>&lt;p&gt;Select this option to show horizontal and vertical grid lines on the chart.&lt;/p&gt;</string>
+     </property>
+     <property name="text">
+      <string>Show grid lines</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_checkValues">
+     <property name="toolTip">
+      <string>&lt;p&gt;Select this option to draw the numeric values for data points next to their plot location.&lt;/p&gt;</string>
+     </property>
+     <property name="text">
+      <string>Draw values on chart</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="m_checkShowChart">
+     <property name="toolTip">
+      <string>&lt;p&gt;Select this option to cause the report to be shown as a chart when you first open the report.  Otherwise, it will come up as a text report.&lt;/p&gt;</string>
+     </property>
+     <property name="text">
+      <string>Show as chart by default</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QLabel" name="textLabel6">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>&lt;p&gt;Select what width should be used to draw the line on the chart&lt;/p&gt;</string>
+       </property>
+       <property name="text">
+        <string>Line width</string>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="m_lineWidth">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>10</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacer2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>121</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="spacer15">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>KMyMoneyGeneralCombo</class>
+   <extends>KComboBox</extends>
+   <header>kmymoneymvccombo.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -418,20 +418,14 @@ void KReportConfigurationFilterDlg::slotReset(void)
   if (m_tabChart) {
     switch (m_initialState.chartType()) {
       case MyMoneyReport::eChartNone:
+        m_tabChart->m_comboType->setCurrentItem(MyMoneyReport::eChartLine);
+        break;
       case MyMoneyReport::eChartLine:
-        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart", "Line"), false);
-        break;
       case MyMoneyReport::eChartBar:
-        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart", "Bar"), false);
-        break;
       case MyMoneyReport::eChartStackedBar:
-        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart", "Stacked Bar"), false);
-        break;
       case MyMoneyReport::eChartPie:
-        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart", "Pie"), false);
-        break;
       case MyMoneyReport::eChartRing:
-        m_tabChart->m_comboType->setCurrentItem(i18nc("type of graphic chart", "Ring"), false);
+        m_tabChart->m_comboType->setCurrentItem(m_initialState.chartType());
         break;
       case MyMoneyReport::eChartEnd:
         throw new MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
