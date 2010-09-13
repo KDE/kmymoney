@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=KMyMoney CSV
+Name=csvimport
 Name[x-test]=xxKMyMoney CSVxx
 Comment=Add CSV importing to KMyMoney
 Comment[x-test]=xxAdd CSV importing to KMyMoneyxx
@@ -10,7 +10,7 @@ X-KDE-Library=kmm_csvimport
 X-KDE-PluginInfo-Name=csvimport
 X-KDE-PluginInfo-Author=Allan Anderson
 X-KDE-PluginInfo-Email=aganderson@ukonline.co.uk
-X-KDE-PluginInfo-Version=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${VERSION_SUFFIX}
+X-KDE-PluginInfo-Version=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX}
 X-KDE-PluginInfo-Website=http://kmymoney2.sourceforge.net/plugins.html
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true

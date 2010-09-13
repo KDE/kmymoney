@@ -50,6 +50,6 @@ INSTALL(FILES kmm_csvimport.rc
 INSTALL(TARGETS kmm_csvimport
         DESTINATION ${PLUGIN_INSTALL_DIR})
 
-INSTALL(FILES kmm_csvimport.desktop
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_csvimport.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
