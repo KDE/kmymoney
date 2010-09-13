@@ -53,10 +53,3 @@ INSTALL(TARGETS kmm_csvimport
 INSTALL(FILES kmm_csvimport.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
-INSTALL(FILES nogo.png
-  DESTINATION ${ICON_INSTALL_DIR}/oxygen/16x16/apps
-)
-
-INSTALL(FILES tick.png
-  DESTINATION ${ICON_INSTALL_DIR}/oxygen/16x16/apps
-)
