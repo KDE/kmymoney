@@ -34,6 +34,7 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
+#include <kdeversion.h>
 #include <KAction>
 #include <KSharedConfig>
 #include <KMessageBox>
@@ -627,7 +628,12 @@ void CsvProcessing::saveAs()
   QStringList outFile[1] = m_inFileName.split('.');
   const KUrl& name = outFile[0].at(0) + ".qif";
 
-  QString outFileName = KFileDialog::getSaveFileName(name, "*.qif | QIF Files", 0, i18n("Save QIF"), KFileDialog::ConfirmOverwrite);//, i18n("Save QIF")
+  QString outFileName = KFileDialog::getSaveFileName(name, "*.qif | QIF Files", 0, i18n("Save QIF")
+#if KDE_IS_VERSION(4,4,0)
+, KFileDialog::ConfirmOverwrite
+#endif
+  );
+
   QFile oFile(outFileName);
   oFile.open(QIODevice::WriteOnly);
   QTextStream out(&oFile);
