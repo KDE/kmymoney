@@ -55,6 +55,7 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, KUrl openURL, QWidget *)
   m_requiredFields = 0;
   m_url = openURL;
   m_mode = openMode;
+  m_sqliteSelected = false;
   m_widget->checkPreLoad->setEnabled(openMode == QIODevice::ReadWrite);
 }
 
