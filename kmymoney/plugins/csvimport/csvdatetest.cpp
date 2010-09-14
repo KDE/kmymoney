@@ -55,28 +55,40 @@ void CsvDateTest::testDateConvert()
 
   QVERIFY(m_convert->convertDate("13/09/81") ==
           QDate::fromString("13/09/1981", format));//a = "13/09/81"
+  
   QVERIFY(m_convert->convertDate("13/09/01") ==
           QDate::fromString("13/09/2001", format));//b = "13/09/01"
+  
   QVERIFY(m_convert->convertDate("13-09-81") ==
           QDate::fromString("13/09/1981", format));//c = "13-09-81"
+  
   QVERIFY(m_convert->convertDate("13-09-01") ==
           QDate::fromString("13/09/2001", format));//d = "13-09-01"
-  QVERIFY(m_convert->convertDate(i18n("25-December-2000")) ==
-          QDate::fromString("25/12/2000", format));//e = "25-December-2000"
-  QVERIFY(m_convert->convertDate(i18n("5-Nov-1999")) ==
-          QDate::fromString("05/11/1999", format));//f = "5-Nov-1999"
+
+  QVERIFY(m_convert->convertDate(QString("25-" + QDate::longMonthName(12) + "-2000")) ==
+  QDate::fromString("25/12/2000", format));//e = "25-December-2000"
+
+  QVERIFY(m_convert->convertDate(QString("5-" + QDate::shortMonthName(11) + "-1999")) ==
+  QDate::fromString("5/11/1999", format));//f = "5-Nov-1999"
+  
   QVERIFY(m_convert->convertDate("13.09.81") ==
           QDate::fromString("13/09/1981", format));//g = "13.09.81"
+  
   QVERIFY(m_convert->convertDate("32/01/2000") ==
           QDate());//                             h ="32/01/2000" invalid day
-  QVERIFY(m_convert->convertDate(i18n("13-rubbishmonth-2000")) ==
+	
+	QVERIFY(m_convert->convertDate(QLatin1String("13-rubbishmonth-2000")) ==
           QDate());//        i = "13-rubbishmonth-2000" invalid month
+  
   QVERIFY(m_convert->convertDate("01/13/2000") ==
           QDate());//                  j = "01/13/2000"  invalid month
+  
   QVERIFY(m_convert->convertDate("01/12/200") ==
           QDate());//                   k = "01/12/200"  invalid year
+  
   QVERIFY(m_convert->convertDate("") ==
           QDate());//                            l = ""   empty date
+  
   format = "ddMMyyyy";
   QVERIFY(m_convert->convertDate("31-1-2010") ==
           QDate::fromString("31012010", format));//m = "31-1-2010" single digit month
