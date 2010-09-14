@@ -1,7 +1,14 @@
 [Desktop Entry]
 Name=csvimport
-Name[x-test]=xxKMyMoney CSVxx
+Name[uk]=csvimport
+Name[x-test]=xxcsvimportxx
 Comment=Add CSV importing to KMyMoney
+Comment[da]=Føj CSV-import til KMyMoney
+Comment[nl]=Voeg CSV importeren toe aan KMyMoney
+Comment[pt]=Adição da importação de CSV ao KMyMoney
+Comment[pt_BR]=Adiciona a importação de CSV ao KMyMoney
+Comment[sv]=Lägg till CSV-import till Kmymoney
+Comment[uk]=Додає можливість імпортування CSV до KMyMoney
 Comment[x-test]=xxAdd CSV importing to KMyMoneyxx
 ServiceTypes=KMyMoneyPlugin
 Type=Service
