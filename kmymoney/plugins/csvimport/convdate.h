@@ -18,6 +18,7 @@ email                : aganderson@ukonline.co.uk
 #ifndef CONVDATE_H
 #define CONVDATE_H
 
+#include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QDate>
 
