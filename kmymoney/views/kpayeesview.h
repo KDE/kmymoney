@@ -182,9 +182,9 @@ private:
   bool m_inSelection;
 
   /**
-   * This signals whether a payee is being edited
+   * This signals whether a payee can be edited
    **/
-  bool m_payeeInEditing;
+  bool m_allowEditing;
 
   AccountNamesFilterProxyModel *m_filterProxyModel;
 };

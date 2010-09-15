@@ -91,7 +91,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
     m_needConnection(true),
     m_updatesQueued(0),
     m_inSelection(false),
-    m_payeeInEditing(false)
+    m_allowEditing(true)
 {
   setupUi(this);
 
@@ -264,7 +264,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
 
 void KPayeesView::slotStartRename(QListWidgetItem* item)
 {
-  m_payeeInEditing = true;
+  m_allowEditing = true;
   m_payeesList->editItem(item);
 }
 
@@ -280,10 +280,9 @@ void KPayeesView::slotRenameButtonCliked()
 void KPayeesView::slotRenamePayee(QListWidgetItem* p)
 {
   //if there is no current item selected, exit
-  if (m_payeeInEditing == false || !m_payeesList->currentItem() || p != m_payeesList->currentItem())
+  if (m_allowEditing == false || !m_payeesList->currentItem() || p != m_payeesList->currentItem())
     return;
 
-  m_payeeInEditing = false;
   //kDebug() << "[KPayeesView::slotRenamePayee]";
   // create a copy of the new name without appended whitespaces
   QString new_name = p->text();
@@ -360,7 +359,7 @@ void KPayeesView::selectedPayees(QList<MyMoneyPayee>& payeesList) const
 
 void KPayeesView::slotSelectPayee(void)
 {
-  m_payeeInEditing = false;
+  m_allowEditing = false;
 
   // check if the content of a currently selected payee was modified
   // and ask to store the data
@@ -445,6 +444,7 @@ void KPayeesView::slotSelectPayee(void)
     m_payee = MyMoneyPayee();
     delete e;
   }
+  m_allowEditing = true;
 }
 
 void KPayeesView::clearItemData(void)
@@ -679,6 +679,7 @@ void KPayeesView::loadPayees(void)
   if (currentItem)
     id = currentItem->payee().id();
 
+  m_allowEditing = false;
   // clear the list
   m_payeesList->clear();
   m_register->clear();
@@ -707,6 +708,7 @@ void KPayeesView::loadPayees(void)
   comboDefaultAccount->expandAll();
 
   slotSelectPayee();
+  m_allowEditing = true;
 
   ::timetrace("End KPayeesView::loadPayees");
 }
