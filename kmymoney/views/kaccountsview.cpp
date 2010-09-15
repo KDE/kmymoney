@@ -330,7 +330,7 @@ QListWidgetItem* KAccountsView::selectedIcon(void) const
 void KAccountsView::slotAssetsSelectIcon()
 {
   QList<QListWidgetItem*> selectedItems = m_assetsList->selectedItems();
-  if (selectedItems.at(0)) {
+  if (selectedItems.count() > 0) {
     slotSelectIcon(selectedItems.at(0));
   }
 }
@@ -338,7 +338,7 @@ void KAccountsView::slotAssetsSelectIcon()
 void KAccountsView::slotLiabilitiesSelectIcon()
 {
   QList<QListWidgetItem*> selectedItems = m_liabilitiesList->selectedItems();
-  if (selectedItems.at(0)) {
+  if (selectedItems.count() > 0) {
     slotSelectIcon(selectedItems.at(0));
   }
 }
@@ -346,7 +346,7 @@ void KAccountsView::slotLiabilitiesSelectIcon()
 void KAccountsView::slotEquitiesSelectIcon()
 {
   QList<QListWidgetItem*> selectedItems = m_equitiesList->selectedItems();
-  if (selectedItems.at(0)) {
+  if (selectedItems.count() > 0) {
     slotSelectIcon(selectedItems.at(0));
   }
 }
