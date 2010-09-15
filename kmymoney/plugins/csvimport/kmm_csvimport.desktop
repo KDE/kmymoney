@@ -1,5 +1,8 @@
 [Desktop Entry]
 Name=csvimport
+Name[pt]=csvimport
+Name[pt_BR]=csvimport
+Name[sv]=CSV-import
 Name[uk]=csvimport
 Name[x-test]=xxcsvimportxx
 Comment=Add CSV importing to KMyMoney
