@@ -226,7 +226,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
   KMyMoneyRegister::RegisterItem* item = m_register->firstItem();
   while (item) {
     //only walk through selectable items. eg. transactions and not group markers
-    if(item->isSelectable()) {
+    if (item->isSelectable()) {
       KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(item);
 
       MyMoneySplit s = t->transaction().splitByPayee(m_payee.id());
@@ -234,15 +234,15 @@ void KPayeesView::slotChooseDefaultAccount(void)
 
       QString txt;
       if (s.action() != MyMoneySplit::ActionAmortization
-	  && acc.accountType() != MyMoneyAccount::AssetLoan
-	  && !file->isTransfer(t->transaction())
-	  && t->transaction().splitCount() == 2) {
-	MyMoneySplit s0 = t->transaction().splitByAccount(s.accountId(), false);
-	if (account_count.contains(s0.accountId())) {
-	  account_count[s0.accountId()]++;
-	} else {
-	  account_count[s0.accountId()] = 1;
-	}
+          && acc.accountType() != MyMoneyAccount::AssetLoan
+          && !file->isTransfer(t->transaction())
+          && t->transaction().splitCount() == 2) {
+        MyMoneySplit s0 = t->transaction().splitByAccount(s.accountId(), false);
+        if (account_count.contains(s0.accountId())) {
+          account_count[s0.accountId()]++;
+        } else {
+          account_count[s0.accountId()] = 1;
+        }
       }
     }
     item = item->nextItem();

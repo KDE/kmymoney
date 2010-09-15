@@ -38,7 +38,7 @@ KInvestmentTypeWizardPage::KInvestmentTypeWizardPage(QWidget *parent)
   model->sort(0, Qt::AscendingOrder);
 
   m_securityType->setModel(model);
-  
+
   // Register the fields with the QWizard
   registerField("securityType", m_securityType, "currentText", SIGNAL(currentIndexChanged(const QString&)));
 }

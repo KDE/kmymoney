@@ -71,7 +71,7 @@ public:
   void setName(const QString& name);
 
   void setupInvestmentSymbol();
-  
+
 signals:
   void checkForExistingSymbol(const QString& symbol);
 

@@ -53,7 +53,7 @@ KNewInvestmentWizard::KNewInvestmentWizard(QWidget *parent) :
   m_onlineUpdatePage->slotCheckPage(QString());
 
   m_investmentDetailsPage->setupInvestmentSymbol();
-  
+
   connect(m_investmentDetailsPage, SIGNAL(checkForExistingSymbol(QString)), this, SLOT(slotCheckForExistingSymbol(QString)));
 }
 
