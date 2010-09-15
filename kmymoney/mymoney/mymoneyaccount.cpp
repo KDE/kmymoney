@@ -679,7 +679,7 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
 
   QString iconKey = icon + QString(size);
   QPixmap result;
-  if(!QPixmapCache::find(iconKey, result)) {
+  if (!QPixmapCache::find(iconKey, result)) {
     result = DesktopIcon(icon, size);
     QPixmapCache::insert(iconKey, result);
   }

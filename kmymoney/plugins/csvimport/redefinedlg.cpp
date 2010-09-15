@@ -95,23 +95,20 @@ void RedefineDlg::displayLine(const QString& info)
       QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
       item->setText("Quantity");
       m_widget->tableWidget->setItem(row, col, item);
-    } else
-      if (col == m_priceColumn) {
-        QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
-        item->setText("Price");
-        m_widget->tableWidget->setItem(row, col, item);
-      } else
-        if (col == m_amountColumn) {
-          QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
-          item->setText("Amount");
-          m_widget->tableWidget->setItem(row, col, item);
-        } else
-          if (col == m_typeColumn) {
-            QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
-            item->setText("Type");
-            m_widget->tableWidget->setItem(row, col, item);
-            m_widget->tableWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter);
-          }
+    } else if (col == m_priceColumn) {
+      QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
+      item->setText("Price");
+      m_widget->tableWidget->setItem(row, col, item);
+    } else if (col == m_amountColumn) {
+      QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
+      item->setText("Amount");
+      m_widget->tableWidget->setItem(row, col, item);
+    } else if (col == m_typeColumn) {
+      QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
+      item->setText("Type");
+      m_widget->tableWidget->setItem(row, col, item);
+      m_widget->tableWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter);
+    }
   }
   updateWindow();
 }
@@ -225,19 +222,17 @@ void RedefineDlg::buildOkTypeList()
   m_okTypeList.clear();
   if ((m_quantity > 0) && (m_price > 0) && (m_amount != 0))
     m_okTypeList << "reinvdiv" << "buy" << "sell";
-  else
-    if ((m_quantity == 0) && (m_price == 0) && (m_amount != 0))
-      m_okTypeList << "divx";
-    else
-      if ((m_quantity > 0) && (m_price == 0) && (m_amount == 0))
-        m_okTypeList << "shrsin" << "shrsout";
-      else {
-        m_okTypeList.clear();
-        KMessageBox::sorry(this, i18n(" The values in the columns you have selected\
+  else if ((m_quantity == 0) && (m_price == 0) && (m_amount != 0))
+    m_okTypeList << "divx";
+  else if ((m_quantity > 0) && (m_price == 0) && (m_amount == 0))
+    m_okTypeList << "shrsin" << "shrsout";
+  else {
+    m_okTypeList.clear();
+    KMessageBox::sorry(this, i18n(" The values in the columns you have selected\
                                       \n do not match any expected investment type.\
                                       \n Please check the fields in the current transaction,\
                                       \n                   and also your selections."), i18n("CSV import"));
-      }
+  }
 }
 
 QString RedefineDlg::getParameter(QString aName)
@@ -266,13 +261,13 @@ void RedefineDlg::updateWindow()
   int hght = 4 + (m_widget->tableWidget->rowHeight(0) * 2);
   hght += m_widget->tableWidget->horizontalHeader()->height() + 2;//  frig factor for vert. headers?
 
-  if (m_columnTotalWidth >  (m_mainWidth - 12))
+  if (m_columnTotalWidth > (m_mainWidth - 12))
     hght += m_widget->tableWidget->horizontalScrollBar()->height() + 1;//  ....and for hor. scroll bar
 
   m_widget->tableWidget->setFixedHeight(hght);
   w = m_widget->tableWidget->width();
 }
- 
+
 void RedefineDlg::getValues()
 {
   m_price = m_columnList[m_priceColumn].remove('"').toFloat();

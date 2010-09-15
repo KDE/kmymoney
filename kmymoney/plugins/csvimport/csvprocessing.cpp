@@ -339,7 +339,7 @@ void CsvProcessing::displayLine(const QString& data)
   QString tmp;
   tmp.clear();
 
-  foreach (const QString& txt, listIn[0]) {    // look for '"' in case of fieldDelim_char within string
+  foreach (const QString& txt, listIn[0]) {      // look for '"' in case of fieldDelim_char within string
     if (!txt.startsWith('"')) { // if no leading '"', no problem so...
       if (!tmp.isEmpty()) {
         tmp += txt;// append delimited strings
@@ -630,9 +630,9 @@ void CsvProcessing::saveAs()
 
   QString outFileName = KFileDialog::getSaveFileName(name, "*.qif | QIF Files", 0, i18n("Save QIF")
 #if KDE_IS_VERSION(4,4,0)
-, KFileDialog::ConfirmOverwrite
+                        , KFileDialog::ConfirmOverwrite
 #endif
-  );
+                                                    );
 
   QFile oFile(outFileName);
   oFile.open(QIODevice::WriteOnly);

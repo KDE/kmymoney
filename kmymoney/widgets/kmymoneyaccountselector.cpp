@@ -277,7 +277,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
 
   //get the account icon from cache or insert it if it is not there
   QPixmap accountPixmap;
-  if(!QPixmapCache::find("account", accountPixmap)) {
+  if (!QPixmapCache::find("account", accountPixmap)) {
     accountPixmap = DesktopIcon("account"); //krazy:exclude=iconnames
     QPixmapCache::insert("account", accountPixmap);
   }

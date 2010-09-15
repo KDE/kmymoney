@@ -75,7 +75,7 @@ InvestmentDlg::InvestmentDlg(QWidget* parent) :
   int y = (screenHeight - height()) / 2;
 
   this->move(x, y);
-  
+
   m_convertDat = new ConvertDate;
   m_investProcessing = new InvestProcessing;
   m_investProcessing->m_investDlg = this;

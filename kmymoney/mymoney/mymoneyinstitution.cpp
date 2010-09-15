@@ -184,7 +184,7 @@ bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const
 QPixmap MyMoneyInstitution::pixmap() const
 {
   QPixmap institution;
-  if(!QPixmapCache::find("institution", institution)) {
+  if (!QPixmapCache::find("institution", institution)) {
     institution = DesktopIcon("institution");
     QPixmapCache::insert("institution", institution);
   }

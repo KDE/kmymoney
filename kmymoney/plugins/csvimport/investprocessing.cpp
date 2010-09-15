@@ -870,9 +870,9 @@ void InvestProcessing::saveAs()
 
   QString outFileName = KFileDialog::getSaveFileName(name, "*.qif | QIF Files", 0, i18n("Save QIF")
 #if KDE_IS_VERSION(4,4,0)
-  , KFileDialog::ConfirmOverwrite
+                        , KFileDialog::ConfirmOverwrite
 #endif
-  );
+                                                    );
   QFile oFile(outFileName);
   oFile.open(QIODevice::WriteOnly);
   QTextStream out(&oFile);
