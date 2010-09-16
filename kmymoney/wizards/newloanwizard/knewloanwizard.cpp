@@ -414,11 +414,6 @@ int KNewLoanWizard::calculateLoan(void)
       // calculate the interest rate out of the other information
       val = calc.interestRate();
 
-      //FIXME: Allow 0% interest rates when the remaining issues are fixed
-      //BUGS 246103 and 246105 on BKO
-      if (val == 0)
-        throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
-
       m_interestPage->m_interestRateEdit->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));
       result = i18n("KMyMoney has calculated the interest rate to %1%.", m_interestPage->m_interestRateEdit->lineedit()->text());
 
@@ -538,7 +533,6 @@ void KNewLoanWizard::loadAccountList(void)
   } else {
     interestSet.addAccountType(MyMoneyAccount::Income);
   }
-  //FIXME: port
   if (m_interestCategoryPage)
     interestSet.load(m_interestCategoryPage->m_interestAccountEdit);
 
@@ -547,13 +541,11 @@ void KNewLoanWizard::loadAccountList(void)
   assetSet.addAccountType(MyMoneyAccount::Cash);
   assetSet.addAccountType(MyMoneyAccount::Asset);
   assetSet.addAccountType(MyMoneyAccount::Currency);
-  //FIXME: port
   if (m_assetAccountPage)
     assetSet.load(m_assetAccountPage->m_assetAccountEdit);
 
   assetSet.addAccountType(MyMoneyAccount::CreditCard);
   assetSet.addAccountType(MyMoneyAccount::Liability);
-  //FIXME: port
   if (m_schedulePage)
     assetSet.load(m_schedulePage->m_paymentAccountEdit);
 }
@@ -561,13 +553,22 @@ void KNewLoanWizard::loadAccountList(void)
 MyMoneyTransaction KNewLoanWizard::transaction() const
 {
   MyMoneyTransaction t;
+  bool hasInterest = !field("interestRateEdit").value<MyMoneyMoney>().isZero();
 
   MyMoneySplit sPayment, sInterest, sAmortization;
   // setup accounts. at this point, we cannot fill in the id of the
   // account that the amortization will be performed on, because we
   // create the account. So the id is yet unknown.
   sPayment.setAccountId(field("paymentAccountEdit").toStringList().first());
-  sInterest.setAccountId(field("interestAccountEdit").toStringList().first());
+
+
+  //Only create the interest split if not zero
+  if(hasInterest) {
+    sInterest.setAccountId(field("interestAccountEdit").toStringList().first());
+    sInterest.setValue(MyMoneyMoney::autoCalc);
+    sInterest.setShares(sInterest.value());
+    sInterest.setAction(MyMoneySplit::ActionInterest);
+  }
 
   // values
   if (field("borrowButton").toBool()) {
@@ -575,11 +576,11 @@ MyMoneyTransaction KNewLoanWizard::transaction() const
   } else {
     sPayment.setValue(field("paymentEdit").value<MyMoneyMoney>());
   }
-  sInterest.setValue(MyMoneyMoney::autoCalc);
+
   sAmortization.setValue(MyMoneyMoney::autoCalc);
   // don't forget the shares
   sPayment.setShares(sPayment.value());
-  sInterest.setShares(sInterest.value());
+
   sAmortization.setShares(sAmortization.value());
 
   // setup the commodity
@@ -589,7 +590,6 @@ MyMoneyTransaction KNewLoanWizard::transaction() const
   // actions
   sPayment.setAction(MyMoneySplit::ActionAmortization);
   sAmortization.setAction(MyMoneySplit::ActionAmortization);
-  sInterest.setAction(MyMoneySplit::ActionInterest);
 
   // payee
   QString payeeId = field("payeeEdit").toString();
@@ -603,7 +603,10 @@ MyMoneyTransaction KNewLoanWizard::transaction() const
   //            the schedule view expects it this way during display
   t.addSplit(sPayment);
   t.addSplit(sAmortization);
-  t.addSplit(sInterest);
+
+  if(hasInterest) {
+    t.addSplit(sInterest);
+  }
 
   // copy the splits from the other costs and update the payment split
   foreach (const MyMoneySplit& it, m_transaction.splits()) {

@@ -208,9 +208,14 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::futureValue(void)
     throw new MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
 
   FCALC_DOUBLE eint = eff_int();
-  FCALC_DOUBLE AA = _Ax(eint);
-  FCALC_DOUBLE CC = _Cx(eint);
-  m_fv = rnd(-(m_pv + AA * (m_pv + CC)));
+
+  if (eint == 0.0) {
+    m_fv = rnd(-(m_pv + (m_npp * m_pmt)));
+  } else {
+    FCALC_DOUBLE AA = _Ax(eint);
+    FCALC_DOUBLE CC = _Cx(eint);
+    m_fv = rnd(-(m_pv + AA * (m_pv + CC)));
+  }
 
   m_mask |= FV_SET;
   return m_fv;

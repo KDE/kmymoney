@@ -287,13 +287,16 @@ const MyMoneySchedule& Wizard::schedule(void)
       t.addSplit(s);
 
       // interest split
-      s.clearId();
-      s.setAccountId(m_loanSchedulePage->m_interestCategory->selectedItem());
-      s.setShares(MyMoneyMoney::autoCalc);
-      s.setValue(MyMoneyMoney::autoCalc);
-      s.setMemo(i18n("Interest"));
-      s.setAction(MyMoneySplit::ActionInterest);
-      t.addSplit(s);
+      //only add if interest is above zero
+      if(!m_loanDetailsPage->m_interestRate->value().isZero()) {
+        s.clearId();
+        s.setAccountId(m_loanSchedulePage->m_interestCategory->selectedItem());
+        s.setShares(MyMoneyMoney::autoCalc);
+        s.setValue(MyMoneyMoney::autoCalc);
+        s.setMemo(i18n("Interest"));
+        s.setAction(MyMoneySplit::ActionInterest);
+        t.addSplit(s);
+      }
 
       // additional fee splits
       QList<MyMoneySplit> additionalSplits;
@@ -960,11 +963,6 @@ void LoanDetailsPage::slotCalculate(void)
     } else if (m_interestRate->lineedit()->text().isEmpty()) {
       // calculate the interest rate out of the other information
       val = calc.interestRate();
-
-      //FIXME: Allow 0% interest rates when the remaining issues are fixed
-      //BUGS 246103 and 246105 on BKO
-      if (val == 0)
-        throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
 
       m_interestRate->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));
       result = i18n("KMyMoney has calculated the interest rate to %1%.", m_interestRate->lineedit()->text());
