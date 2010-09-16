@@ -377,8 +377,8 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
   m_investDlg->m_redefine->m_accountName.clear();
   m_brokerageItems = false;
   QString name = QDir::homePath();
-  QStringList outFile[1] = name.split('.');
-  QString outFileName = outFile[0].at(0) + ".qif";
+  QStringList outFile = name.split('.');
+  QString outFileName = (outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif";
 
   if (!fname.isEmpty())
     m_inFileName  = fname;
@@ -865,8 +865,8 @@ void InvestProcessing::acceptClicked(bool checked)
 
 void InvestProcessing::saveAs()
 {
-  QStringList outFile[1] = m_inFileName .split('.');
-  const KUrl& name = outFile[0].at(0) + ".qif";
+  QStringList outFile = m_inFileName .split('.');
+  const KUrl& name = (outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif";
 
   QString outFileName = KFileDialog::getSaveFileName(name, "*.qif | QIF Files", 0, i18n("Save QIF")
 #if KDE_IS_VERSION(4,4,0)

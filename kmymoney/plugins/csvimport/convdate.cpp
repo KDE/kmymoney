@@ -44,25 +44,25 @@ QDate ConvertDate::convertDate(const QString& txt)
   QString buffer = txt;
   buffer = buffer.replace(rx, QString('/'));//    ....with '/'
 
-  QStringList dateSplit[3] = buffer.split('/');
-  if (dateSplit[0].count() != 3) {//                          not a valid date
+  QStringList dateSplit = buffer.split('/');
+  if (dateSplit.count() != 3) {//                          not a valid date
     return QDate();
   }
   switch (m_dateFormatIndex) {
     case(0):    //                                          %y %m %d
-      aYear =  dateSplit[0].at(0);
-      aMonth = dateSplit[0].at(1);
-      aDay =   dateSplit[0].at(2);
+      aYear =  dateSplit[0];
+      aMonth = dateSplit[1];
+      aDay =   dateSplit[2];
       break;
     case(1):    //                                          %m %d %y
-      aMonth = dateSplit[0].at(0);
-      aDay =   dateSplit[0].at(1);
-      aYear =  dateSplit[0].at(2);
+      aMonth = dateSplit[0];
+      aDay =   dateSplit[1];
+      aYear =  dateSplit[2];
       break;
     case(2):    //                                          %d %m %y
-      aDay =   dateSplit[0].at(0);
-      aMonth = dateSplit[0].at(1);
-      aYear =  dateSplit[0].at(2);
+      aDay =   dateSplit[0];
+      aMonth = dateSplit[1];
+      aYear =  dateSplit[2];
       break;
     default:
       qDebug("ConvertDate - not a valid date format");
@@ -93,8 +93,8 @@ QDate ConvertDate::convertDate(const QString& txt)
     aMonth = '0' + aMonth;
     aFormat = "MM";
   } else if (aMonth.length() == 2) {//                     assume numeric
-    bool datefound = ((aMonth > "0") and(aMonth < "13"));
-    if (not datefound) {
+    bool datefound = ((aMonth > "0") && (aMonth < "13"));
+    if (!datefound) {
       return QDate();//                                        not a valid day
     }
     aFormat = "MM";//                                       aMonth is numeric

@@ -334,7 +334,7 @@ void CsvProcessing::displayLine(const QString& data)
     }
   }
 
-  QStringList listIn[MAXCOL] = m_inBuffer.split(m_fieldDelimiterCharacter);// firstly, split on m_fieldDelim_char
+  QStringList listIn = m_inBuffer.split(m_fieldDelimiterCharacter);// firstly, split on m_fieldDelim_char
   QStringList listOut;
   QString tmp;
   tmp.clear();
@@ -625,8 +625,8 @@ void CsvProcessing::readSettings()
 
 void CsvProcessing::saveAs()
 {
-  QStringList outFile[1] = m_inFileName.split('.');
-  const KUrl& name = outFile[0].at(0) + ".qif";
+  QStringList outFile = m_inFileName.split('.');
+  const KUrl& name = (outFile.isEmpty() ? "CsvProcessing" : outFile[0]) + ".qif";
 
   QString outFileName = KFileDialog::getSaveFileName(name, "*.qif | QIF Files", 0, i18n("Save QIF")
 #if KDE_IS_VERSION(4,4,0)
