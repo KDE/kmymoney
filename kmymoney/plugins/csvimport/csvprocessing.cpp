@@ -334,12 +334,12 @@ void CsvProcessing::displayLine(const QString& data)
     }
   }
 
-  QStringList listIn = m_inBuffer.split(m_fieldDelimiterCharacter);// firstly, split on m_fieldDelim_char
+QStringList listIn = m_inBuffer.split(m_fieldDelimiterCharacter);// firstly, split on m_fieldDelim_char
   QStringList listOut;
   QString tmp;
   tmp.clear();
 
-  foreach (const QString& txt, listIn[0]) {      // look for '"' in case of fieldDelim_char within string
+  foreach (const QString& txt, listIn) {      // look for '"' in case of fieldDelim_char within string
     if (!txt.startsWith('"')) { // if no leading '"', no problem so...
       if (!tmp.isEmpty()) {
         tmp += txt;// append delimited strings
