@@ -156,12 +156,19 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::numPayments(void)
     throw new MYMONEYEXCEPTION("Not all parameters set for calculation of numPayments");
 
   FCALC_DOUBLE eint = eff_int();
-  FCALC_DOUBLE CC = _Cx(eint);
 
-  CC = (CC - m_fv) / (CC + m_pv);
-  m_npp = (CC > 0.0) ? logl(CC) / logl(eint + 1.0) : 0.0;
+  //add exception for zero interest
+  if (eint == 0.0) {
+    m_npp = -(m_pv / m_pmt);
 
-  m_mask |= NPP_SET;
+  } else {
+    FCALC_DOUBLE CC = _Cx(eint);
+
+    CC = (CC - m_fv) / (CC + m_pv);
+    m_npp = (CC > 0.0) ? logl(CC) / logl(eint + 1.0) : 0.0;
+
+    m_mask |= NPP_SET;
+  }
   return m_npp;
 }
 
@@ -173,11 +180,17 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::payment(void)
     throw new MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
 
   FCALC_DOUBLE eint = eff_int();
-  FCALC_DOUBLE AA = _Ax(eint);
-  FCALC_DOUBLE BB = _Bx(eint);
 
-  m_pmt = -rnd((m_fv + m_pv * (AA + 1.0)) / (AA * BB));
-  //m_pmt = -floorl((m_fv + m_pv * (AA + 1.0)) / (AA * BB));
+  //add exception for zero interest
+  if (eint == 0.0) {
+    m_pmt = -(m_pv / m_npp);
+  } else {
+    FCALC_DOUBLE AA = _Ax(eint);
+    FCALC_DOUBLE BB = _Bx(eint);
+
+    m_pmt = -rnd((m_fv + m_pv * (AA + 1.0)) / (AA * BB));
+    //m_pmt = -floorl((m_fv + m_pv * (AA + 1.0)) / (AA * BB));
+  }
 
   m_mask |= PMT_SET;
   return m_pmt;
@@ -191,10 +204,17 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::presentValue(void)
     throw new MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
 
   FCALC_DOUBLE eint = eff_int();
-  FCALC_DOUBLE AA = _Ax(eint);
-  FCALC_DOUBLE CC = _Cx(eint);
 
-  m_pv = rnd(-(m_fv + (AA * CC)) / (AA + 1.0));
+  //add exception for zero interest
+  if (eint == 0.0) {
+    m_pv = -(m_fv + (m_npp * m_pmt));
+  } else {
+    FCALC_DOUBLE AA = _Ax(eint);
+    FCALC_DOUBLE CC = _Cx(eint);
+
+    m_pv = rnd(-(m_fv + (AA * CC)) / (AA + 1.0));
+
+  }
 
   m_mask |= PV_SET;
   return m_pv;
@@ -209,6 +229,7 @@ FCALC_DOUBLE MyMoneyFinancialCalculator::futureValue(void)
 
   FCALC_DOUBLE eint = eff_int();
 
+  //add exception for zero interest
   if (eint == 0.0) {
     m_fv = rnd(-(m_pv + (m_npp * m_pmt)));
   } else {
