@@ -447,13 +447,12 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   ::timetrace("finished drawing chart");
 
   //set data value attributes
+  //make sure to show only the required number of fractional digits on the labels of the graph
   DataValueAttributes valueAttr(planeDiagram->dataValueAttributes());
   valueAttr.setVisible(config.isChartDataLabels());
   valueAttr.setDecimalDigits(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
   planeDiagram->setDataValueAttributes(valueAttr);
   planeDiagram->setAllowOverlappingDataValueTexts(true);
-  //make sure to show only the required number of fractional digits on the labels of the graph
-  //chartView.params()->setDataValuesCalc(0, );
 }
 
 unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int endColumn)
