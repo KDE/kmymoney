@@ -46,6 +46,7 @@
 #include <KDChartFrameAttributes>
 #include "kmymoneyglobalsettings.h"
 #include <kbalanceaxis.h>
+#include <mymoneyfile.h>
 
 using namespace reports;
 
@@ -153,11 +154,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   gridAttr.setGridVisible(config.isChartGridLines());
   coordinatePlane()->setGlobalGridAttributes(gridAttr);
 
-  //set data value attributes
-  DataValueAttributes valueAttr(planeDiagram->dataValueAttributes());
-  valueAttr.setVisible(config.isChartDataLabels());
-  planeDiagram->setDataValueAttributes(valueAttr);
-  planeDiagram->setAllowOverlappingDataValueTexts(false);
+
 
   //Subdued colors - we set it here again because it is a property of the diagram
   planeDiagram->useSubduedColors();
@@ -448,8 +445,15 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   //this sets the line width only for line diagrams
   setLineWidth(config.chartLineWidth());
   ::timetrace("finished drawing chart");
+
+  //set data value attributes
+  DataValueAttributes valueAttr(planeDiagram->dataValueAttributes());
+  valueAttr.setVisible(config.isChartDataLabels());
+  valueAttr.setDecimalDigits(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+  planeDiagram->setDataValueAttributes(valueAttr);
+  planeDiagram->setAllowOverlappingDataValueTexts(true);
   //make sure to show only the required number of fractional digits on the labels of the graph
-  //chartView.params()->setDataValuesCalc(0, MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+  //chartView.params()->setDataValuesCalc(0, );
 }
 
 unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int endColumn)
