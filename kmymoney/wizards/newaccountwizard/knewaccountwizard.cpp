@@ -288,7 +288,7 @@ const MyMoneySchedule& Wizard::schedule(void)
 
       // interest split
       //only add if interest is above zero
-      if(!m_loanDetailsPage->m_interestRate->value().isZero()) {
+      if (!m_loanDetailsPage->m_interestRate->value().isZero()) {
         s.clearId();
         s.setAccountId(m_loanSchedulePage->m_interestCategory->selectedItem());
         s.setShares(MyMoneyMoney::autoCalc);

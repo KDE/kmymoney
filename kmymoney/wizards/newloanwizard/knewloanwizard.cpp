@@ -563,7 +563,7 @@ MyMoneyTransaction KNewLoanWizard::transaction() const
 
 
   //Only create the interest split if not zero
-  if(hasInterest) {
+  if (hasInterest) {
     sInterest.setAccountId(field("interestAccountEdit").toStringList().first());
     sInterest.setValue(MyMoneyMoney::autoCalc);
     sInterest.setShares(sInterest.value());
@@ -604,7 +604,7 @@ MyMoneyTransaction KNewLoanWizard::transaction() const
   t.addSplit(sPayment);
   t.addSplit(sAmortization);
 
-  if(hasInterest) {
+  if (hasInterest) {
     t.addSplit(sInterest);
   }
 
