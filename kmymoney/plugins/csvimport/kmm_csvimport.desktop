@@ -2,6 +2,7 @@
 Name=csvimport
 Name[da]=csvimport
 Name[en_GB]=csvimport
+Name[it]=csvimport
 Name[pt]=csvimport
 Name[pt_BR]=csvimport
 Name[sv]=CSV-import
@@ -10,6 +11,7 @@ Name[x-test]=xxcsvimportxx
 Comment=Add CSV importing to KMyMoney
 Comment[da]=Føj CSV-import til KMyMoney
 Comment[en_GB]=Add CSV importing to KMyMoney
+Comment[it]=Aggiungi l'importazione CSV a KMyMoney
 Comment[nl]=Voeg CSV importeren toe aan KMyMoney
 Comment[pt]=Adição da importação de CSV ao KMyMoney
 Comment[pt_BR]=Adiciona a importação de CSV ao KMyMoney
