@@ -1637,6 +1637,16 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setIncludingForecast(true);
 
     list.push_back(MyMoneyReport(
+                     MyMoneyReport::eExpenseIncome,
+                     MyMoneyReport::eMonths,
+                     MyMoneyTransactionFilter::currentYear,
+                     MyMoneyReport::eDetailTop,
+                     i18n("Income and Expenses Forecast This Year"),
+                     i18n("Default Report")
+                   ));
+    list.back().setIncludingForecast(true);
+
+    list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,
                      MyMoneyReport::eMonths,
                      MyMoneyTransactionFilter::next3Months,

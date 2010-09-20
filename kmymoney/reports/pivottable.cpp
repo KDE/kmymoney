@@ -1939,7 +1939,12 @@ void PivotTable::calculateForecast(void)
   }
 
   //run forecast
-  forecast.doForecast();
+  if (m_config_f.rowType() == MyMoneyReport::eAssetLiability) { //asset and liability
+    forecast.doForecast();
+  } else { //income and expenses
+    MyMoneyBudget budget;
+    forecast.createBudget(budget, m_beginDate.addYears(-1), m_beginDate.addDays(-1), m_beginDate, m_endDate, false);
+  }
 
   //go through the data and add forecast
   PivotGrid::iterator it_outergroup = m_grid.begin();
