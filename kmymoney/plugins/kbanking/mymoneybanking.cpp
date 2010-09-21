@@ -777,8 +777,8 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
   // - remove leading blanks
   // - remove trailing blanks
   // - reduce multiple blanks to one
-  kt.m_strMemo = kt.m_strMemo.trimmed();
-  kt.m_strPayee = kt.m_strPayee.trimmed();
+  kt.m_strMemo = kt.m_strMemo.simplified();
+  kt.m_strPayee = kt.m_strPayee.simplified();
 
   // date
   ti = AB_Transaction_GetDate(t);
