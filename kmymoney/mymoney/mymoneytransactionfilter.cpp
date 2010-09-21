@@ -690,10 +690,8 @@ void MyMoneyTransactionFilter::setFiscalYearStart(int firstMonth, int firstDay)
 bool MyMoneyTransactionFilter::translateDateRange(dateOptionE id, QDate& start, QDate& end)
 {
   bool rc = true;
-  int yr, mon;
-  yr = QDate::currentDate().year();
-  mon = QDate::currentDate().month();
-  QDate tmp;
+  int yr = QDate::currentDate().year();
+  int mon = QDate::currentDate().month();
 
   switch (id) {
     case MyMoneyTransactionFilter::allDates:

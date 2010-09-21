@@ -535,7 +535,7 @@ KMyMoneyPeriodCombo::KMyMoneyPeriodCombo(QWidget* parent) :
   insertItem(i18n("Next 7 days"), MyMoneyTransactionFilter::next7Days);
   insertItem(i18n("Next 30 days"), MyMoneyTransactionFilter::next30Days);
   insertItem(i18n("Next 3 months"), MyMoneyTransactionFilter::next3Months);
-  insertItem(i18n("Next quarter"), MyMoneyTransactionFilter::lastQuarter);
+  insertItem(i18n("Next quarter"), MyMoneyTransactionFilter::nextQuarter);
   insertItem(i18n("Next 6 months"), MyMoneyTransactionFilter::next6Months);
   insertItem(i18n("Next 12 months"), MyMoneyTransactionFilter::next12Months);
   insertItem(i18n("Last 3 months to next 3 months"), MyMoneyTransactionFilter::last3ToNext3Months);
