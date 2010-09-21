@@ -306,16 +306,6 @@
             </property>
            </spacer>
           </item>
-          <item>
-           <widget class="KPushButton" name="m_saveButton">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Save</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
        </layout>
