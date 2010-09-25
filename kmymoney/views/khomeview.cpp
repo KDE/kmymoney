@@ -835,13 +835,13 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoney value;
-  value = file->balance(acc.id());
+  value = file->balance(acc.id(), QDate::currentDate());
   QList<QString>::const_iterator it_a;
   for (it_a = acc.accountList().begin(); it_a != acc.accountList().end(); ++it_a) {
     MyMoneyAccount stock = file->account(*it_a);
     try {
       MyMoneyMoney val;
-      MyMoneyMoney balance = file->balance(stock.id());
+      MyMoneyMoney balance = file->balance(stock.id(), QDate::currentDate());
       MyMoneySecurity security = file->security(stock.currencyId());
       MyMoneyPrice price = file->price(stock.currencyId(), security.tradingCurrency());
       val = (balance * price.rate(security.tradingCurrency())).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()));
@@ -1615,7 +1615,7 @@ void KHomeView::showCashFlowSummary()
           if (QDate::currentDate() >= nextDate)
             schedDate = QDate::currentDate().addDays(1);
 
-          balanceMap[acc.id()] += file->balance(acc.id());
+          balanceMap[acc.id()] += file->balance(acc.id(), QDate::currentDate());
         }
         KMyMoneyUtils::calculateAutoLoan(*sched_it, transaction, balanceMap);
       }
