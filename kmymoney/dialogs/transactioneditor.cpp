@@ -946,10 +946,11 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
 
     if ((w = haveWidget("number")) != 0) {
       dynamic_cast<kMyMoneyLineEdit*>(w)->loadText(m_split.number());
-      if (m_transaction.id().isEmpty()                           // new transaction
-          && dynamic_cast<kMyMoneyLineEdit*>(w)->text().isEmpty()    // no number filled in
-          && m_account.accountType() == MyMoneyAccount::Checkings    // checkings account
-          && KMyMoneyGlobalSettings::autoIncCheckNumber()) {         // and auto inc number turned on?
+      if (m_transaction.id().isEmpty()                              // new transaction
+          && dynamic_cast<kMyMoneyLineEdit*>(w)->text().isEmpty()   // no number filled in
+          && m_account.accountType() == MyMoneyAccount::Checkings   // checkings account
+          && KMyMoneyGlobalSettings::autoIncCheckNumber()           // and auto inc number turned on?
+          && action != KMyMoneyRegister::ActionDeposit) {           // only transfers or withdrawals
         assignNextNumber();
       }
     }
