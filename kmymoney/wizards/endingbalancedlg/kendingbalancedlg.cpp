@@ -173,13 +173,26 @@ void KEndingBalanceDlg::slotUpdateBalances(void)
   //                                        up to statement date)
   MyMoneyTransactionFilter filter(d->m_account.id());
   filter.addState(MyMoneyTransactionFilter::notReconciled);
-  filter.addState(MyMoneyTransactionFilter::cleared);
   filter.setReportAllSplits(true);
 
   QList<QPair<MyMoneyTransaction, MyMoneySplit> > transactionList;
   QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
 
   // retrieve the list from the engine
+  MyMoneyFile::instance()->transactionList(transactionList, filter);
+
+  //first retrieve the oldest not reconciled transaction
+  QDate oldestTransactionDate;
+  it = transactionList.constBegin();
+  if(it != transactionList.constEnd())
+  {
+    oldestTransactionDate = (*it).first.postDate();
+    m_statementInfoPageCheckings->m_oldestTransactionDate->setText(i18n("Oldest not reconciled transaction: %1", KGlobal::locale()->formatDate(oldestTransactionDate)));
+  }
+
+  filter.addState(MyMoneyTransactionFilter::cleared);
+
+  // retrieve the list from the engine to calculate the starting and ending balance
   MyMoneyFile::instance()->transactionList(transactionList, filter);
 
   MyMoneyMoney balance = MyMoneyFile::instance()->balance(d->m_account.id());
