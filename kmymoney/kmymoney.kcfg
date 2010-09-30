@@ -35,6 +35,10 @@
    <min>0</min>
    <max>60</max>
   </entry>
+  <entry name="AutoSaveOnClose" type="Bool">
+   <label>Autosave file upon close</label>
+   <default>false</default>
+  </entry>
   <entry name="CheckSchedule" type="Bool">
    <label>Check schedules upon startup</label>
    <default>false</default>

@@ -1123,13 +1123,25 @@ void KMyMoneyApp::resizeEvent(QResizeEvent* ev)
   updateCaption(true);
 }
 
+int KMyMoneyApp::askSaveOnClose(void)
+{
+  int ans;
+  if (KMyMoneyGlobalSettings::autoSaveOnClose()) {
+    ans = KMessageBox::Yes;
+  } else {
+    ans = KMessageBox::warningYesNoCancel(this, i18n("The file has been changed, save it ?"));
+  }
+  return ans;
+}
+
 bool KMyMoneyApp::queryClose(void)
 {
   if (!isReady())
     return false;
 
   if (d->m_myMoneyView->dirty()) {
-    int ans = KMessageBox::warningYesNoCancel(this, i18n("KMyMoney file needs saving.  Save ?"));
+    int ans = askSaveOnClose();
+
     if (ans == KMessageBox::Cancel)
       return false;
     else if (ans == KMessageBox::Yes)
@@ -1782,7 +1794,7 @@ void KMyMoneyApp::slotFileCloseWindow(void)
   KMSTATUS(i18n("Closing window..."));
 
   if (d->m_myMoneyView->dirty()) {
-    int answer = KMessageBox::warningYesNoCancel(this, i18n("The file has been changed, save it ?"));
+    int answer = askSaveOnClose();
     if (answer == KMessageBox::Cancel)
       return;
     else if (answer == KMessageBox::Yes)
@@ -1803,7 +1815,7 @@ void KMyMoneyApp::slotFileClose(void)
 
   // no update status here, as we might delete the status too early.
   if (d->m_myMoneyView->dirty()) {
-    int answer = KMessageBox::warningYesNoCancel(this, i18n("The file has been changed, save it ?"));
+    int answer = askSaveOnClose();
     if (answer == KMessageBox::Cancel)
       return;
     else if (answer == KMessageBox::Yes)

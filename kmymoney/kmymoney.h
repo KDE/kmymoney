@@ -1082,6 +1082,14 @@ private:
     */
   bool isProcessingDate(const QDate& date) const;
 
+  /**
+    * Depending on the setting of AutoSaveOnQuit, this method
+    * asks the user to save the file or not.
+    *
+    * @returns see return values of KMessageBox::warningYesNoCancel()
+    */
+  int askSaveOnClose(void);
+
 signals:
   /**
     * This signal is emitted when a new file is loaded. In the case file
