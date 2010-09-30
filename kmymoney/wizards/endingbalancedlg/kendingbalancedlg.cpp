@@ -184,8 +184,7 @@ void KEndingBalanceDlg::slotUpdateBalances(void)
   //first retrieve the oldest not reconciled transaction
   QDate oldestTransactionDate;
   it = transactionList.constBegin();
-  if(it != transactionList.constEnd())
-  {
+  if (it != transactionList.constEnd()) {
     oldestTransactionDate = (*it).first.postDate();
     m_statementInfoPageCheckings->m_oldestTransactionDate->setText(i18n("Oldest unmarked transaction: %1", KGlobal::locale()->formatDate(oldestTransactionDate)));
   }
