@@ -27,7 +27,9 @@
 
 All relevant information necessary for this process is usually printed on your statement.
 
-On the next page you will verify that the starting and ending balances match those on your statement. If not, please modify the figures.</string>
+On the next page you will verify that the ending balance matches that on your statement. If not, please modify it.
+
+The starting balance is the sum of your cleared and reconciled transactions.</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignTop</set>

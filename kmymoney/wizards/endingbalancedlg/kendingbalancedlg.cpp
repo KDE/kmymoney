@@ -187,7 +187,7 @@ void KEndingBalanceDlg::slotUpdateBalances(void)
   if(it != transactionList.constEnd())
   {
     oldestTransactionDate = (*it).first.postDate();
-    m_statementInfoPageCheckings->m_oldestTransactionDate->setText(i18n("Oldest not reconciled transaction: %1", KGlobal::locale()->formatDate(oldestTransactionDate)));
+    m_statementInfoPageCheckings->m_oldestTransactionDate->setText(i18n("Oldest unmarked transaction: %1", KGlobal::locale()->formatDate(oldestTransactionDate)));
   }
 
   filter.addState(MyMoneyTransactionFilter::cleared);
