@@ -156,8 +156,6 @@ public:
 
   void paintCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index);
 
-  void resize(int col);
-
   void arrangeEditWidgets(QMap<QString, QWidget*>& editWidgets, KMyMoneyRegister::Transaction* t);
   void removeEditWidgets(QMap<QString, QWidget*>& editWidgets);
   void tabOrder(QWidgetList& tabOrderWidgets, KMyMoneyRegister::Transaction* t) const;
@@ -217,10 +215,9 @@ protected:
 
 public slots:
   void slotSetTransaction(KMyMoneyRegister::Transaction* item);
+  void resize(int col);
 
 protected slots:
-  void resize(void);
-
   /**
     * Helper method to convert @a int into @a KMyMoneyRegister::Action
     */

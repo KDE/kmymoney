@@ -231,9 +231,7 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
 {
   m_transaction = transaction;
 
-  bool updatesNeedToBeDisabled = updatesEnabled();
-  if (updatesNeedToBeDisabled)
-    setUpdatesEnabled(false);
+  setUpdatesEnabled(false);
 
   if (m_transaction) {
     // the next call sets up a back pointer to the form and also sets up the col and row span
@@ -264,15 +262,14 @@ void TransactionForm::slotSetTransaction(KMyMoneyRegister::Transaction* transact
   setMaximumHeight(height);
   setMinimumHeight(height);
 
-  if (updatesNeedToBeDisabled)
-    setUpdatesEnabled(true); // see the call to setUpdatesEnabled(false) above
+  setUpdatesEnabled(true); // see the call to setUpdatesEnabled(false) above
 
   for (int i = 0; i < rowCount(); ++i) {
     setItemDelegateForRow(i, m_itemDelegate);
   }
 
   // force resizeing of the columns
-  QTimer::singleShot(0, this, SLOT(resize()));
+  QMetaObject::invokeMethod(this, "resize", Qt::QueuedConnection, QGenericReturnArgument(), Q_ARG(int, ValueColumn1));
 }
 
 void TransactionForm::paintCell(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index)
@@ -352,16 +349,9 @@ void TransactionForm::setupForm(const MyMoneyAccount& acc)
   m_tabBar->blockSignals(blocked);
 }
 
-void TransactionForm::resize(void)
-{
-  resize(ValueColumn1);
-}
-
 void TransactionForm::resize(int col)
 {
-  bool updatesNeedToBeDisabled = updatesEnabled();
-  if (updatesNeedToBeDisabled)
-    setUpdatesEnabled(false);
+  setUpdatesEnabled(false);
 
   // resize the register
   int w = viewport()->width();
@@ -386,9 +376,7 @@ void TransactionForm::resize(int col)
   if (col < nc && w >= 0)
     setColumnWidth(col, w);
 
-  if (updatesNeedToBeDisabled)
-    setUpdatesEnabled(true); // see the call to setUpdatesEnabled(false) above
-  update();
+  setUpdatesEnabled(true);
 }
 
 void TransactionForm::adjustColumn(Column col)

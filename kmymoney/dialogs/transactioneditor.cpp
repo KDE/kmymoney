@@ -688,7 +688,7 @@ void TransactionEditor::resizeForm(void)
   // force resizeing of the columns in the form
   KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_regForm);
   if (form) {
-    QTimer::singleShot(0, form, SLOT(resize()));
+    QMetaObject::invokeMethod(form, "resize", Qt::QueuedConnection, QGenericReturnArgument(), Q_ARG(int, ValueColumn1));
   }
 }
 
