@@ -182,13 +182,13 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   m_filterProxyModel->setCurrentAccountId(m_account.id());
   m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
   m_filterProxyModel->setDynamicSortFilter(true);
-  m_filterProxyModel->sort(0);
 
   m_parentAccounts->setAlternatingRowColors(true);
   m_parentAccounts->setIconSize(QSize(22, 22));
   m_parentAccounts->setSortingEnabled(true);
   m_parentAccounts->setAllColumnsShowFocus(true);
   m_parentAccounts->setModel(m_filterProxyModel);
+  m_parentAccounts->sortByColumn(0, Qt::AscendingOrder);
 
   m_subAccountLabel->setText(i18n("Is a sub account"));
 
