@@ -3015,6 +3015,7 @@ void KMyMoneyApp::createCategory(MyMoneyAccount& account, const MyMoneyAccount& 
 void KMyMoneyApp::slotAccountNew(void)
 {
   MyMoneyAccount acc;
+  acc.setInstitutionId(d->m_selectedInstitution.id());
   acc.setOpeningDate(KMyMoneyGlobalSettings::firstFiscalDate());
 
   slotAccountNew(acc);

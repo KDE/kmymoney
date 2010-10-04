@@ -113,6 +113,10 @@ void Wizard::setAccount(const MyMoneyAccount& acc)
 {
   m_account = acc;
   m_accountTypePage->setAccount(m_account);
+
+  if(!acc.institutionId().isEmpty()) {
+    m_institutionPage->selectExistingInstitution(acc.institutionId());
+  }
 }
 
 const MyMoneySecurity& Wizard::currency(void) const
@@ -418,10 +422,24 @@ void InstitutionPage::slotNewInstitution(void)
   }
 }
 
-void InstitutionPage::slotSelectInstitution(int id)
+void InstitutionPage::slotSelectInstitution(const int index)
 {
-  m_accountNumber->setEnabled(id != 0);
-  m_iban->setEnabled(id != 0);
+  m_accountNumber->setEnabled(index != 0);
+  m_iban->setEnabled(index != 0);
+}
+
+void InstitutionPage::selectExistingInstitution(const QString id)
+{
+  QList<MyMoneyInstitution>::const_iterator it = d->m_list.constBegin();
+
+  for(int i = 0; i < d->m_list.length(); ++i)
+  {
+    if(d->m_list[i].id() == id) {
+      m_institutionComboBox->setCurrentIndex(i + 1);
+      slotSelectInstitution(i + 1);
+      break;
+    }
+  }
 }
 
 const MyMoneyInstitution& InstitutionPage::institution(void) const

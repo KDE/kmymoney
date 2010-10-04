@@ -85,10 +85,12 @@ public:
     */
   const MyMoneyInstitution& institution(void) const;
 
+  void selectExistingInstitution(const QString id);
+
 private slots:
   void slotLoadWidgets(void);
   void slotNewInstitution(void);
-  void slotSelectInstitution(int id);
+  void slotSelectInstitution(int index);
 
 private:
   /// \internal d-pointer class.
