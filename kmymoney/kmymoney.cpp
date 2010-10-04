@@ -270,7 +270,6 @@ public:
   QString m_mountpoint;
 
   QProgressBar* m_progressBar;
-  bool          m_applicationIsReady;
   QTime         m_lastUpdate;
 
   MyMoneyQifReader* m_qifReader;
@@ -322,6 +321,7 @@ public:
   QBitArray             m_processingDays;
   QMap<QDate, bool>     m_holidayMap;
 
+  bool          m_applicationIsReady;
 
   // methods
   void consistencyCheck(bool alwaysDisplayResults);
