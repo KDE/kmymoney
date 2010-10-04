@@ -202,7 +202,8 @@ public:
       m_additionalKeyLabel(0),
       m_additionalKeyButton(0),
       m_recentFiles(0),
-      m_holidayRegion(0) {
+      m_holidayRegion(0),
+      m_applicationIsReady(true) {
     // since the days of the week are from 1 to 7,
     // and a day of the week is used to index this bit array,
     // resize the array to 8 elements (element 0 is left unused)
@@ -269,7 +270,7 @@ public:
   QString m_mountpoint;
 
   QProgressBar* m_progressBar;
-  QString       m_statusMsg;
+  bool          m_applicationIsReady;
   QTime         m_lastUpdate;
 
   MyMoneyQifReader* m_qifReader;
@@ -1906,14 +1907,18 @@ const QString KMyMoneyApp::slotStatusMsg(const QString &text)
 {
   ///////////////////////////////////////////////////////////////////
   // change status message permanently
-  QString msg = d->m_statusMsg;
+  QString previousMessage = statusBar()->itemText(ID_STATUS_MSG);
+  d->m_applicationIsReady = false;
 
-  d->m_statusMsg = text;
-  if (d->m_statusMsg.isEmpty())
-    d->m_statusMsg = i18nc("Application is ready to use", "Ready.");
+  QString currentMessage = text;
+  if (currentMessage.isEmpty() || currentMessage == i18nc("Application is ready to use", "Ready."))
+  {
+    d->m_applicationIsReady = true;
+    currentMessage = i18nc("Application is ready to use", "Ready.");
+  }
   statusBar()->clearMessage();
-  statusBar()->changeItem(text, ID_STATUS_MSG);
-  return msg;
+  statusBar()->changeItem(currentMessage, ID_STATUS_MSG);
+  return previousMessage;
 }
 
 void KMyMoneyApp::ready(void)
@@ -1923,7 +1928,7 @@ void KMyMoneyApp::ready(void)
 
 bool KMyMoneyApp::isReady(void)
 {
-  return d->m_statusMsg == i18nc("Application is ready to use", "Ready.");
+  return d->m_applicationIsReady;
 }
 
 void KMyMoneyApp::slotStatusProgressBar(int current, int total)
