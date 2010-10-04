@@ -1477,7 +1477,7 @@ HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
   */
 bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-  if (!source_parent.isValid() && source_row == 0) {
+  if (!source_parent.isValid()) {
     QVariant data = sourceModel()->data(sourceModel()->index(source_row, 0, source_parent), AccountsModel::AccountIdRole);
     if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
       return false;
@@ -1509,12 +1509,12 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
   m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
   m_filterProxyModel->setDynamicSortFilter(true);
-  m_filterProxyModel->sort(0);
 
   m_parentAccounts->setAlternatingRowColors(true);
   m_parentAccounts->setIconSize(QSize(22, 22));
   m_parentAccounts->setSortingEnabled(true);
   m_parentAccounts->setModel(m_filterProxyModel);
+  m_parentAccounts->sortByColumn(0, Qt::AscendingOrder);
 
   connect(m_parentAccounts->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(parentAccountChanged()));
 }
