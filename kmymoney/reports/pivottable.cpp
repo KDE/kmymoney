@@ -1269,6 +1269,7 @@ QString PivotTable::renderCSV(void) const
   //
 
   QString result = QString("\"Report: %1\"\n").arg(m_config_f.name());
+  result += i18nc("Report date range", "%1 through %2\n", KGlobal::locale()->formatDate(m_config_f.fromDate(), KLocale::ShortDate), KGlobal::locale()->formatDate(m_config_f.toDate(), KLocale::ShortDate));
   if (m_config_f.isConvertCurrency())
     result += i18n("All currencies converted to %1\n", MyMoneyFile::instance()->baseCurrency().name());
   else
