@@ -716,11 +716,12 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     GWEN_STRINGLISTENTRY *se;
 
     se = GWEN_StringList_FirstEntry(sl);
-    if (se) {
+    while (se) {
       p = GWEN_StringListEntry_Data(se);
       assert(p);
       s = QString::fromUtf8(p);
-    }
+      se = GWEN_StringListEntry_Next(se);
+    } // while
   }
   kt.m_strPayee = s;
   h = MyMoneyTransaction::hash(s.trimmed());
