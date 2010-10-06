@@ -716,11 +716,12 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     GWEN_STRINGLISTENTRY *se;
 
     se = GWEN_StringList_FirstEntry(sl);
-    if (se) {
+    while (se) {
       p = GWEN_StringListEntry_Data(se);
       assert(p);
       s = QString::fromUtf8(p);
-    }
+      se = GWEN_StringListEntry_Next(se);
+    } // while
   }
   kt.m_strPayee = s;
   h = MyMoneyTransaction::hash(s.trimmed());
@@ -777,8 +778,8 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
   // - remove leading blanks
   // - remove trailing blanks
   // - reduce multiple blanks to one
-  kt.m_strMemo = kt.m_strMemo.trimmed();
-  kt.m_strPayee = kt.m_strPayee.trimmed();
+  kt.m_strMemo = kt.m_strMemo.simplified();
+  kt.m_strPayee = kt.m_strPayee.simplified();
 
   // date
   ti = AB_Transaction_GetDate(t);
