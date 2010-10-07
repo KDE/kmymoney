@@ -417,6 +417,9 @@ private:
   bool alterTable(const MyMoneyDbTable& t, int fromVersion);
   void clean();
   int isEmpty();
+  // for bug 252841
+  const QStringList tables(QSql::TableType tt) {return (m_driver->tables(tt, static_cast<const QSqlDatabase&>(*this)));};
+
   // data
   KSharedPtr<MyMoneyDbDriver> m_driver;
 

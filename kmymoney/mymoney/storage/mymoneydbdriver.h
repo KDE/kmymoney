@@ -22,6 +22,7 @@
 // QT Includes
 #include <QMap>
 #include <QString>
+#include <QSqlDatabase>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -154,6 +155,11 @@ public:
       @ return additional option string
     */
   virtual const QString tableOptionString() const;
+  /**
+    * Override standard tables() call for bug 252841
+    */
+  virtual const QStringList tables(QSql::TableType tt, const QSqlDatabase& db) const;
+
 protected:
   MyMoneyDbDriver(); // only allow create() and derived types to construct
 };
