@@ -1071,12 +1071,45 @@ void MyMoneyFileTest::testBalanceTotal()
     MyMoneyAccount q = m->account("A000002");
     m->reparentAccount(p, q);
     ft.commit();
+    // check totalBalance() and balance() with combinations of parameters
     QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(-1000));
     QVERIFY(m->totalBalance("A000002") == MyMoneyMoney(-2000));
+    QVERIFY(m->totalBalance("A000002", QDate(2002, 1, 15)).isZero());
+
+    QVERIFY(m->balance("A000001") == MyMoneyMoney(-1000));
+    QVERIFY(m->balance("A000002") == MyMoneyMoney(-1000));
+    // Date of a transaction
+    QVERIFY(m->balance("A000001", QDate(2002, 2, 1)) == MyMoneyMoney(-1000));
+    QVERIFY(m->balance("A000002", QDate(2002, 2, 1)) == MyMoneyMoney(-1000));
+    // Date after last transaction
+    QVERIFY(m->balance("A000001", QDate(2002, 2, 1)) == MyMoneyMoney(-1000));
+    QVERIFY(m->balance("A000002", QDate(2002, 2, 1)) == MyMoneyMoney(-1000));
+    // Date before first transaction
+    QVERIFY(m->balance("A000001", QDate(2002, 1, 15)).isZero());
+    QVERIFY(m->balance("A000002", QDate(2002, 1, 15)).isZero());
+
   } catch (MyMoneyException *e) {
     delete e;
     QFAIL("Unexpected exception!");
   }
+
+  // Now check for exceptions
+  try {
+    // Account not found for balance()
+    QVERIFY(m->balance("A000005").isZero());
+    QFAIL("Exception expected");
+  } catch (MyMoneyException *e) {
+    delete e;
+  }
+
+  try {
+    // Account not found for totalBalance()
+    QVERIFY(m->totalBalance("A000005").isZero());
+    QFAIL("Exception expected");
+  } catch (MyMoneyException *e) {
+    delete e;
+  }
+
 }
 
 void MyMoneyFileTest::testSetAccountName()
