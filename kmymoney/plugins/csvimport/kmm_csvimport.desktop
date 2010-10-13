@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=csvimport
 Name[da]=csvimport
+Name[el]=csvimport
 Name[en_GB]=csvimport
 Name[es]=csvimport
 Name[it]=csvimport
@@ -12,6 +13,7 @@ Name[uk]=csvimport
 Name[x-test]=xxcsvimportxx
 Comment=Add CSV importing to KMyMoney
 Comment[da]=Føj CSV-import til KMyMoney
+Comment[el]=Προσθήκη εισαγωγής CSV στο KMyMoney
 Comment[en_GB]=Add CSV importing to KMyMoney
 Comment[es]=Añade la importación de CSV a KMyMoney
 Comment[it]=Aggiungi l'importazione CSV a KMyMoney
