@@ -91,6 +91,7 @@ private slots:
   void slotFrequencyChanged(int item);
   void slotShowHelp(void);
   void slotOccurrenceMultiplierChanged(int mult);
+  void slotFilterPaymentType(int index);
 
   /// Overridden for internal reasons. No API changes.
   void accept(void);

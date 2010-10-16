@@ -283,6 +283,8 @@ signals:
    */
   void balanceWarning(QWidget* parent, const MyMoneyAccount& account, const QString& msg);
 
+  void operationTypeChanged(int index);
+
 protected:
   QList<MyMoneySplit>                               m_splits;
   KMyMoneyRegister::SelectedTransactions            m_transactions;

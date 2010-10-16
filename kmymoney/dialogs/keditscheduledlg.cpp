@@ -204,6 +204,7 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
     connect(editor, SIGNAL(createCategory(MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotCategoryNew(MyMoneyAccount&, const MyMoneyAccount&)));
     connect(editor, SIGNAL(createSecurity(MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotInvestmentNew(MyMoneyAccount&, const MyMoneyAccount&)));
     connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), editor, SLOT(slotReloadEditWidgets()));
+    connect(editor, SIGNAL(operationTypeChanged(int)), this, SLOT(slotFilterPaymentType(int)));
 
     // create the widgets, place them in the parent and load them with data
     // setup tab order
@@ -569,6 +570,37 @@ void KEditScheduleDlg::updateTransactionsRemaining(void)
 void KEditScheduleDlg::slotShowHelp(void)
 {
   KToolInvocation::invokeHelp("details.schedules.intro");
+}
+
+void KEditScheduleDlg::slotFilterPaymentType(int index)
+{
+  //save selected item to reload if possible
+  int selectedId = m_paymentMethodEdit->itemData(m_paymentMethodEdit->currentIndex(), Qt::UserRole).toInt();
+
+  //clear and reload the widget with the correct items
+  m_paymentMethodEdit->clear();
+
+  // load option widgets
+  KMyMoneyRegister::Action action = static_cast<KMyMoneyRegister::Action>(index);
+  if(action != KMyMoneyRegister::ActionWithdrawal) {
+    m_paymentMethodEdit->insertItem(i18n("Direct deposit"), MyMoneySchedule::STYPE_DIRECTDEPOSIT);
+    m_paymentMethodEdit->insertItem(i18n("Manual deposit"), MyMoneySchedule::STYPE_MANUALDEPOSIT);
+  }
+  if(action != KMyMoneyRegister::ActionDeposit) {
+    m_paymentMethodEdit->insertItem(i18n("Direct debit"), MyMoneySchedule::STYPE_DIRECTDEBIT);
+    m_paymentMethodEdit->insertItem(i18n("Write check"), MyMoneySchedule::STYPE_WRITECHEQUE);
+  }
+  m_paymentMethodEdit->insertItem(i18n("Standing order"), MyMoneySchedule::STYPE_STANDINGORDER);
+  m_paymentMethodEdit->insertItem(i18n("Bank transfer"), MyMoneySchedule::STYPE_BANKTRANSFER);
+  m_paymentMethodEdit->insertItem(i18nc("Other payment method", "Other"), MyMoneySchedule::STYPE_OTHER);
+
+  int newIndex = m_paymentMethodEdit->findData(QVariant(selectedId), Qt::UserRole, Qt::MatchExactly);
+  if(newIndex > -1 ) {
+      m_paymentMethodEdit->setCurrentIndex(newIndex);
+  } else {
+      m_paymentMethodEdit->setCurrentIndex(0);
+  }
+
 }
 
 #include <keditscheduledlg.moc>

@@ -853,6 +853,7 @@ void StdTransactionEditor::createEditWidgets(void)
     tabbar->setObjectName(QLatin1String("TabBar"));
     tabbar->copyTabs(form->tabBar());
     connect(tabbar, SIGNAL(tabCurrentChanged(int)), this, SLOT(slotUpdateAction(int)));
+    connect(tabbar, SIGNAL(tabCurrentChanged(int)), this, SIGNAL(operationTypeChanged(int)));
   }
 
   setupPrecision();
