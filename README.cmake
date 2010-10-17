@@ -29,7 +29,7 @@ To build KMyMoney in the subdirectory ./build/ type
 
 $ mkdir build
 $ cd build
-$ cmake ..
+$ cmake .. -DCMAKE_INSTALL_PREFIX=/usr
     to generate the Makefiles.
 $ ccmake .
     to change the configuration of the build process. (optional) 
@@ -42,6 +42,10 @@ $ make
 
 Note that 'make' automatically checks whether any CMakeLists.txt file
 has changed and reruns cmake if necessary.
+
+$ make install
+    to install the project. You have to install KMyMoney to run it. 
+Use sudo or switch to a superuser to run this command.
 
 Congratulations, you will never have a chaos of generated files
 between the important source files again!
@@ -75,19 +79,19 @@ If you want to reset your changes, you will have to delete this file.
 Quick-start 3: More options
 -----------------------------------------------------
 
--D CMAKE_INSTALL_PREFIX=<path_to_install_dir>
+-DCMAKE_INSTALL_PREFIX=<path_to_install_dir>
     This option tells cmake where to install KMyMoney to.
     During development, this should be a directory in your development
     environment, such that you can debug the program and test the
     installation.
     The default is ${KDE3PREFIX}, which is usually "/opt/kde3/".
 
--D CMAKE_BUILD_TYPE=<type>
+-DCMAKE_BUILD_TYPE=<type>
     Choose the type of build. Possible values are:
       'Release' 'RelWithDebInfo' 'Debug' 'Debugfull' 'Profile'
     The default value is: 'RelWithDebInfo'
 
--D KDE4_BUILD_TESTS=ON
+-DKDE4_BUILD_TESTS=ON
     To also build the unit tests.
 
 -----------------------------------------------------
