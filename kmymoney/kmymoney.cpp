@@ -4321,7 +4321,7 @@ void KMyMoneyApp::slotScheduleSkip(void)
       if (!schedule.isFinished()) {
         if (schedule.occurrence() != MyMoneySchedule::OCCUR_ONCE) {
           QDate next = schedule.nextDueDate();
-          if (!schedule.isFinished() && (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?", schedule.name(), KGlobal::locale()->formatDateTime(QDateTime(next), KLocale::ShortDate, false)) + QString("</qt>"))) == KMessageBox::Yes) {
+          if (!schedule.isFinished() && (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?", schedule.name(), KGlobal::locale()->formatDate(next, KLocale::ShortDate)) + QString("</qt>"))) == KMessageBox::Yes) {
             MyMoneyFileTransaction ft;
             schedule.setLastPayment(next);
             schedule.setNextDueDate(schedule.nextPayment(next));
