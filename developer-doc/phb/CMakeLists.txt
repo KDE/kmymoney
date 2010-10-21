@@ -1,2 +1,2 @@
 KDE4_CREATE_HANDBOOK(index.docbook INSTALL_DESTINATION ${HTML_INSTALL_DIR}/en SUBDIR kmymoney-developer)
-INSTALL(FILES kmymoney-developer.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR})
+INSTALL(PROGRAMS kmymoney-developer.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR})
