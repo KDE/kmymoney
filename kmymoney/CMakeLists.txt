@@ -93,7 +93,7 @@ INSTALL(FILES kmymoneyui.rc tips
 INSTALL(FILES ${_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
   )
-INSTALL(FILES kmymoney.desktop
+INSTALL(PROGRAMS kmymoney.desktop
   DESTINATION ${XDG_APPS_INSTALL_DIR}
   )
 
