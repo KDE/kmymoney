@@ -315,7 +315,8 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
     if (m_transaction != MyMoneyTransaction() && !m_inRegisterEdit) {
       registerCellText(txt, align, index.row() - startRow(), index.column(), painter);
     }
-    style->drawItemText(painter, option.rect, align, option.palette, true, txt, m_selected ? QPalette::HighlightedText : QPalette::Text);
+    // adjust the text rectangle to obtain a reasonable spacing between the text and the grid
+    style->drawItemText(painter, option.rect.adjusted(2, 0, -2, 0), align, option.palette, true, txt, m_selected ? QPalette::HighlightedText : QPalette::Text);
 
     // draw the grid if it's needed
     if (KMyMoneySettings::showGrid()) {
