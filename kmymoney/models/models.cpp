@@ -78,9 +78,8 @@ void Models::dataChanged(void)
     QTimer::singleShot(0, accountsModel(), SLOT(load()));
   } else
   {
-    // make sure we load the accounts model initially after that it can be loaded when the event loop is idle
-    d->m_loadOnIdle = true;
-    accountsModel()->load();
+    // make sure we load the accounts model when the event loop is idle only after we loaded some real accounts
+    d->m_loadOnIdle = accountsModel()->load();
   }
 }
 

@@ -108,7 +108,7 @@ public slots:
 
   void slotReconcileAccount(const MyMoneyAccount &account, const QDate &reconciliationDate, const MyMoneyMoney &endingBalance);
 
-  void load();
+  bool load();
 
 signals:
   /**
