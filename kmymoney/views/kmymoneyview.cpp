@@ -1388,7 +1388,7 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("BRL", i18n("Brazilian Real"),         "R$"), create);
   loadDefaultCurrency(MyMoneySecurity("GBP", i18n("British Pound"),          QChar(0x00A3)), create);
   loadDefaultCurrency(MyMoneySecurity("BND", i18n("Brunei Dollar"),          "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("BGL", i18n("Bulgarian Lev")), create);
+  loadDefaultCurrency(MyMoneySecurity("BGN", i18n("Bulgarian Lev (new)")), true);
   loadDefaultCurrency(MyMoneySecurity("BIF", i18n("Burundi Franc")), create);
   loadDefaultCurrency(MyMoneySecurity("XAF", i18n("CFA Franc BEAC")), create);
   loadDefaultCurrency(MyMoneySecurity("XOF", i18n("CFA Franc BCEAO")), create);
@@ -1572,6 +1572,9 @@ void KMyMoneyView::loadAncientCurrencies(void)
   loadAncientCurrency("IEP", i18n("Irish Pound"), QChar(0x00A3), QDate(1998, 12, 31), MyMoneyMoney(1000000, 787564), "EUR");
   loadAncientCurrency("FIM", i18n("Finnish Markka"), QString(), QDate(1998, 12, 31), MyMoneyMoney(100000, 594573), "EUR");
   loadAncientCurrency("GRD", i18n("Greek Drachma"), QChar(0x20AF), QDate(1998, 12, 31), MyMoneyMoney(100, 34075), "EUR");
+
+  // http://en.wikipedia.org/wiki/Bulgarian_lev
+  loadAncientCurrency("BGL", i18n("Bulgarian Lev"), "BGL", QDate(1999, 7, 5), MyMoneyMoney(1, 1000), "BGN");
 
   loadAncientCurrency("ROL", i18n("Romanian Leu"), "ROL", QDate(2005, 6, 30), MyMoneyMoney(1, 10000), "RON");
 
