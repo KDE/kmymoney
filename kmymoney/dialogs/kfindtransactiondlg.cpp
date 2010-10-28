@@ -483,6 +483,8 @@ void KFindTransactionDlg::setupPayeesPage(void)
   m_payeesView->setAlternatingRowColors(true);
 
   loadPayees();
+  
+  m_payeesView->sortItems(0, Qt::AscendingOrder);
   m_emptyPayeesButton->setCheckState(Qt::Unchecked);
 
   connect(m_allPayeesButton, SIGNAL(clicked()), this, SLOT(slotSelectAllPayees()));
