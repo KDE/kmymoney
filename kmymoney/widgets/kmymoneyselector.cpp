@@ -355,13 +355,13 @@ void KMyMoneySelector::setSelected(const QString& id, const bool state)
   QTreeWidgetItem* it_visible = 0;
 
   while ((item = *it) != 0) {
-    if (item->flags().testFlag(Qt::ItemIsUserCheckable)) {
-      if (item->data(0, IdRole).toString() == id) {
+    if (item->data(0, IdRole).toString() == id) {
+      if (item->flags().testFlag(Qt::ItemIsUserCheckable)) {
         item->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
-        m_treeWidget->setCurrentItem(item);
-        if (!it_visible)
-          it_visible = item;
       }
+      m_treeWidget->setCurrentItem(item);
+      if (!it_visible)
+        it_visible = item;
     }
     it++;
   }
