@@ -490,6 +490,7 @@ void KFindTransactionDlg::setupPayeesPage(void)
   connect(m_allPayeesButton, SIGNAL(clicked()), this, SLOT(slotSelectAllPayees()));
   connect(m_clearPayeesButton, SIGNAL(clicked()), this, SLOT(slotDeselectAllPayees()));
   connect(m_emptyPayeesButton, SIGNAL(stateChanged(int)), this, SLOT(slotUpdateSelections()));
+  connect(m_payeesView, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateSelections()));
 }
 
 void KFindTransactionDlg::loadPayees(void)
@@ -502,7 +503,6 @@ void KFindTransactionDlg::loadPayees(void)
   // load view
   for (it_l = list.begin(); it_l != list.end(); ++it_l) {
     KMyMoneyCheckListItem* item = new KMyMoneyCheckListItem(m_payeesView, (*it_l).name(), QString(), (*it_l).id());
-    connect(item, SIGNAL(stateChanged(bool)), this, SLOT(slotUpdateSelections()));
     item->setCheckState(0, Qt::Checked);
   }
 }
@@ -572,7 +572,7 @@ void KFindTransactionDlg::scanCheckListItems(const QTreeWidgetItem* item, const 
     KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
     if (it_c) {
       if (it_c->flags() & Qt::ItemIsUserCheckable) {
-        if (it_c->checkState(0) & Qt::Checked)
+        if (it_c->checkState(0) == Qt::Checked)
           addItemToFilter(op, (*it_c).id());
       }
       scanCheckListItems(it_v, op);
@@ -588,9 +588,10 @@ void KFindTransactionDlg::scanCheckListItems(const QTreeWidget* view, const opTy
     it_v = view->invisibleRootItem()->child(i);
     KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
     if (it_c) {
-      if (it_c->flags() == Qt::ItemIsUserCheckable) {
-        if (it_c->checkState(0) & Qt::Checked)
+      if (it_c->flags() & Qt::ItemIsUserCheckable) {
+        if (it_c->checkState(0) == Qt::Checked) {
           addItemToFilter(op, (*it_c).id());
+        }
       }
       scanCheckListItems(it_v, op);
     }
