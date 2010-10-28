@@ -360,7 +360,11 @@ void kMyMoneyEdit::ensureFractionalPart(void)
 {
   QString s(m_edit->text());
   ensureFractionalPart(s);
-  m_edit->setText(s);
+  // by setting the text only when it's different then the one that it is already there
+  // we preserve the edit widget's state (like the selection for example) during a
+  // call to ensureFractionalPart() that does not change anything
+  if (s != m_edit->text())
+    m_edit->setText(s);
 }
 
 void kMyMoneyEdit::ensureFractionalPart(QString& s) const
