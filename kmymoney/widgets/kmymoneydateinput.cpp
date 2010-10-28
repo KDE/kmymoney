@@ -59,12 +59,13 @@ const QDate INVALID_DATE = QDate(1800, 1, 1);
 
 void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* k)
 {
-  if (lineEdit()->text().isEmpty() && QChar(k->key()).isDigit()) {
+  if ((lineEdit()->text().isEmpty() || lineEdit()->selectedText() == lineEdit()->text()) && QChar(k->key()).isDigit()) {
     // the line edit is empty which means that the date was cleared
-    // and a digit character was entered, in this case set the date
+    // or the whole text is selected and a digit character was entered
+    // (the same meaning as clearing the date) - in this case set the date
     // to the current date and let the editor do the actual work
     setDate(QDate::currentDate());
-    setSelectedSection(currentSection());
+    setSelectedSection(QDateTimeEdit::DaySection); // start as when focused in if the date was cleared
   }
   QDateEdit::keyPressEvent(k);
 }
