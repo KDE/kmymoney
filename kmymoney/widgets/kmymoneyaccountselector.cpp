@@ -46,7 +46,6 @@
 
 #include <mymoneyutils.h>
 #include <mymoneyfile.h>
-#include <kmymoneychecklistitem.h>
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 

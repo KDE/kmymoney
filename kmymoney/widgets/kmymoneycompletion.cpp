@@ -39,7 +39,6 @@
 // Project Includes
 
 #include <kmymoneyselector.h>
-#include <kmymoneychecklistitem.h>
 #include "kmymoneycombo.h"
 
 const int kMyMoneyCompletion::MAX_ITEMS = 16;

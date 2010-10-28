@@ -52,12 +52,15 @@
 #include <kmymoneylineedit.h>
 #include <kmymoneyaccountselector.h>
 #include <mymoneyfile.h>
-#include <kmymoneychecklistitem.h>
 #include <kmymoneyglobalsettings.h>
 #include <register.h>
 #include <transaction.h>
 #include <ktoolinvocation.h>
 
+enum ItemRoles
+{
+  ItemIdRole = Qt::UserRole
+};
 
 KSortOptionDlg::KSortOptionDlg(QWidget *parent)
     : KDialog(parent)
@@ -354,9 +357,9 @@ void KFindTransactionDlg::selectItems(QTreeWidget* view, const QStringList& list
 
   for (int i = 0; i < view->invisibleRootItem()->childCount(); ++i) {
     it_v = view->invisibleRootItem()->child(i);
-    KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
-    if (it_c->flags() & Qt::ItemIsUserCheckable && list.contains(it_c->id())) {
-      it_c->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
+    QVariant idData = it_v->data(0, ItemIdRole);
+    if (it_v->flags() & Qt::ItemIsUserCheckable && list.contains(idData.toString())) {
+      it_v->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     }
     selectSubItems(it_v, list, state);
   }
@@ -391,9 +394,9 @@ void KFindTransactionDlg::selectSubItems(QTreeWidgetItem* item, const QStringLis
 
   for (int i = 0; i < item->childCount(); ++i) {
     it_v = item->child(i);
-    KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
-    if (list.contains(it_c->id()))
-      it_c->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
+    QVariant idData = it_v->data(0, ItemIdRole);
+    if (list.contains(idData.toString()))
+      it_v->setCheckState(0, state ? Qt::Checked : Qt::Unchecked);
     selectSubItems(it_v, list, state);
   }
 }
@@ -502,7 +505,9 @@ void KFindTransactionDlg::loadPayees(void)
   list = file->payeeList();
   // load view
   for (it_l = list.begin(); it_l != list.end(); ++it_l) {
-    KMyMoneyCheckListItem* item = new KMyMoneyCheckListItem(m_payeesView, (*it_l).name(), QString(), (*it_l).id());
+    QTreeWidgetItem* item = new QTreeWidgetItem(m_payeesView);
+    item->setText(0, (*it_l).name());
+    item->setData(0, ItemIdRole, (*it_l).id());
     item->setCheckState(0, Qt::Checked);
   }
 }
@@ -569,14 +574,12 @@ void KFindTransactionDlg::scanCheckListItems(const QTreeWidgetItem* item, const 
 
   for (int i = 0; i < item->childCount(); ++i) {
     it_v = item->child(i);
-    KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
-    if (it_c) {
-      if (it_c->flags() & Qt::ItemIsUserCheckable) {
-        if (it_c->checkState(0) == Qt::Checked)
-          addItemToFilter(op, (*it_c).id());
-      }
-      scanCheckListItems(it_v, op);
+    QVariant idData = it_v->data(0, ItemIdRole);
+    if (it_v->flags() & Qt::ItemIsUserCheckable) {
+      if (it_v->checkState(0) == Qt::Checked)
+        addItemToFilter(op, idData.toString());
     }
+    scanCheckListItems(it_v, op);
   }
 }
 
@@ -586,15 +589,13 @@ void KFindTransactionDlg::scanCheckListItems(const QTreeWidget* view, const opTy
 
   for (int i = 0; i < view->invisibleRootItem()->childCount(); ++i) {
     it_v = view->invisibleRootItem()->child(i);
-    KMyMoneyCheckListItem* it_c = static_cast<KMyMoneyCheckListItem*>(it_v);
-    if (it_c) {
-      if (it_c->flags() & Qt::ItemIsUserCheckable) {
-        if (it_c->checkState(0) == Qt::Checked) {
-          addItemToFilter(op, (*it_c).id());
-        }
+    QVariant idData = it_v->data(0, ItemIdRole);
+    if (it_v->flags() & Qt::ItemIsUserCheckable) {
+      if (it_v->checkState(0) == Qt::Checked) {
+        addItemToFilter(op, idData.toString());
       }
-      scanCheckListItems(it_v, op);
     }
+    scanCheckListItems(it_v, op);
   }
 }
 

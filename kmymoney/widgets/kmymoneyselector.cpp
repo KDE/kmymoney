@@ -37,7 +37,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneychecklistitem.h"
 #include "kmymoneyglobalsettings.h"
 
 KMyMoneySelector::KMyMoneySelector(QWidget *parent, Qt::WFlags flags) :
