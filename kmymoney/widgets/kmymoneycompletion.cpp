@@ -31,6 +31,8 @@
 #include <QEvent>
 #include <QDesktopWidget>
 #include <QLineEdit>
+#include <QInputContext>
+#include <QInputContextFactory>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -46,13 +48,14 @@ const int kMyMoneyCompletion::MAX_ITEMS = 16;
 kMyMoneyCompletion::kMyMoneyCompletion(QWidget *parent) :
     KVBox(parent)
 {
-  setWindowFlags(Qt::Popup);
-  setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
+  setWindowFlags(Qt::ToolTip);
+  // make it look like the Qt completer
+  setMargin(0);
+  setLineWidth(0);
 
   m_parent = parent;
-  setFocusProxy(parent);
-
   m_selector = new KMyMoneySelector(this);
+  m_selector->listView()->setFocusProxy(parent);
 
   // to handle the keyboard events received by this widget in the same way as
   // the keyboard events received by the other widgets
@@ -129,9 +132,10 @@ void kMyMoneyCompletion::adjustSize(const int count)
   }
 }
 
-void kMyMoneyCompletion::showEvent(QShowEvent*)
+void kMyMoneyCompletion::showEvent(QShowEvent* e)
 {
   show(true);
+  KVBox::showEvent(e);
 }
 
 void kMyMoneyCompletion::show(bool presetSelected)
@@ -151,8 +155,12 @@ void kMyMoneyCompletion::show(bool presetSelected)
       c->lineEdit()->installEventFilter(this);
     }
   }
-
   KVBox::show();
+  // after the popup is shown for the first time the input context of the combobox gets messed up
+  // so replace it whit a new input context of the same type to handle input methods correctly
+  if (m_parent) {
+    m_parent->setInputContext(QInputContextFactory::create(m_parent->inputContext()->identifierName(), m_parent));
+  }
 }
 
 void kMyMoneyCompletion::hide(void)
@@ -175,6 +183,9 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
   KMyMoneyCombo *c = dynamic_cast<KMyMoneyCombo*>(m_parent);
   if (o == m_parent || (c && o == c->lineEdit()) || o == this) {
     if (isVisible()) {
+      if (e->type() == QEvent::FocusOut) {
+        hide();
+      }
       if (e->type() == QEvent::KeyPress) {
         QTreeWidgetItem* item = 0;
         QKeyEvent* ev = static_cast<QKeyEvent*>(e);
@@ -265,9 +276,6 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
       }
     }
   }
-  // forward any keyboard event that was received by this widget and was not handled to the parent widget
-  if (o == this && c && (e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease))
-    c->event(e);
   return KVBox::eventFilter(o, e);
 }
 

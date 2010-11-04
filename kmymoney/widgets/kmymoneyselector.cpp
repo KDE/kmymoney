@@ -42,6 +42,8 @@
 KMyMoneySelector::KMyMoneySelector(QWidget *parent, Qt::WFlags flags) :
     QWidget(parent, flags)
 {
+  setAutoFillBackground(true);
+
   m_selMode = QTreeWidget::SingleSelection;
 
   m_treeWidget = new QTreeWidget(this);
@@ -50,11 +52,6 @@ KMyMoneySelector::KMyMoneySelector(QWidget *parent, Qt::WFlags flags) :
 
   m_treeWidget->setSortingEnabled(false);
   m_treeWidget->setAlternatingRowColors(true);
-
-  if (parent) {
-    setFocusProxy(parent->focusProxy());
-    m_treeWidget->setFocusProxy(parent->focusProxy());
-  }
 
   m_treeWidget->setAllColumnsShowFocus(true);
 

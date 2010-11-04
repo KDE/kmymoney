@@ -43,7 +43,7 @@ kMyMoneyAccountCompletion::kMyMoneyAccountCompletion(QWidget *parent) :
 {
   delete m_selector;
   m_selector = new kMyMoneyAccountSelector(this, 0, false);
-  m_selector->listView()->setFocusProxy(this);
+  m_selector->listView()->setFocusProxy(parent);
 
 #ifndef KMM_DESIGNER
   // Default is to show all accounts
