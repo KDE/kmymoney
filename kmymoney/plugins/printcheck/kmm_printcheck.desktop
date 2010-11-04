@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Print check
+Name[ca]=Imprimeix el xec
 Name[da]=Udskriv check
 Name[de]=Schecks drucken
 Name[el]=Εκτύπωση επιταγής
@@ -17,6 +18,7 @@ Name[sv]=Skriv ut check
 Name[uk]=Надрукувати чек
 Name[x-test]=xxPrint checkxx
 Comment=Provides the capability to print checks
+Comment[ca]=Aporta la capacitat d'imprimir xecs
 Comment[da]=Giver mulighed for at udskrive checks
 Comment[de]=Stellt die Möglichkeit bereit, Schecks zu drucken
 Comment[el]=Παρέχει την δυνατότητα εκτύπωσης επιταγών

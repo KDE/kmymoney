@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=iCalendar
+Name[ca]=iCalendar
 Name[cs]=iCalendar
 Name[da]=iCalendar
 Name[de]=iCalendar
@@ -18,6 +19,7 @@ Name[sv]=iCalendar
 Name[uk]=iCalendar
 Name[x-test]=xxiCalendarxx
 Comment=Exports schedules to iCalendar files
+Comment[ca]=Exporta les programacions als fitxers de l'iCalendar
 Comment[da]=Eksporterer skemaer til iCalendar-filer
 Comment[de]=Exportiert geplante Buchungen in iCalendar-Dateien
 Comment[el]=Εξαγωγή ημερολογίων σε αρχεία iCalendar
