@@ -427,9 +427,15 @@ AccountsModel::~AccountsModel()
 /**
   * This function synchronizes the data of the model with the data
   * from the @ref MyMoneyFile.
+  *
+  * @return true if a real account was actually loaded into the model
+  *         false otherwise
   */
-void AccountsModel::load()
+bool AccountsModel::load()
 {
+  // the return value
+  bool realAccountWasLoaded = false;
+
   // mark all rows as candidates for cleaning up
   QModelIndexList list = match(index(0, 0), Qt::DisplayRole, "*", -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
   foreach (const QModelIndex &index, list) {
@@ -550,6 +556,7 @@ void AccountsModel::load()
         d->loadSubAccounts(this, item, favoriteAccountsItem, acc.accountList());
       }
       d->setAccountData(this, item->index(), acc);
+      realAccountWasLoaded = true;
       // set the account data after the children have been loaded
       if (acc.value("PreferredAccount") == "Yes") {
         QStandardItem *item = d->itemFromAccountId(favoriteAccountsItem, acc.id());
@@ -642,6 +649,7 @@ void AccountsModel::load()
     d->m_lastProfit = profit;
     emit profitChanged(d->m_lastProfit);
   }
+  return realAccountWasLoaded;
 }
 
 MyMoneyMoney AccountsModel::accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance)

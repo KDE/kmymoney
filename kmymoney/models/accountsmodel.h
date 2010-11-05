@@ -93,8 +93,6 @@ public:
 
   ~AccountsModel();
 
-  void load();
-
   /**
     * Compute the value of the given account using the provided balance.
     * The value is defined as the balance of the account converted to the base currency.
@@ -109,6 +107,8 @@ public:
 public slots:
 
   void slotReconcileAccount(const MyMoneyAccount &account, const QDate &reconciliationDate, const MyMoneyMoney &endingBalance);
+
+  bool load();
 
 signals:
   /**

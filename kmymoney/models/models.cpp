@@ -23,6 +23,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QTimer>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -32,8 +34,13 @@
 #include "accountsmodel.h"
 
 struct Models::Private {
-  Private() : m_accountsModel(0) {}
+  Private() :
+    m_accountsModel(0),
+    m_loadOnIdle(false)
+  {}
+
   AccountsModel *m_accountsModel;
+  bool m_loadOnIdle;
 };
 
 Models Models::models;
@@ -65,7 +72,15 @@ AccountsModel* Models::accountsModel()
 
 void Models::dataChanged(void)
 {
-  accountsModel()->load();
+  if (d->m_loadOnIdle)
+  {
+    // load the accounts model on idle
+    QTimer::singleShot(0, accountsModel(), SLOT(load()));
+  } else
+  {
+    // make sure we load the accounts model when the event loop is idle only after we loaded some real accounts
+    d->m_loadOnIdle = accountsModel()->load();
+  }
 }
 
 void Models::fileClosed(void)
@@ -73,4 +88,6 @@ void Models::fileClosed(void)
   // TODO: make this cleaner in the future, for now just clear the accounts model before the file is closed
   // to avoid any uncaught KMyMoneyExceptions while using the account objects from this model after the file has been closed
   accountsModel()->removeRows(0, accountsModel()->rowCount());
+  // make sure that the accounts model will be loaded immediately on the next dataChanged() signal
+  d->m_loadOnIdle = false;
 }
