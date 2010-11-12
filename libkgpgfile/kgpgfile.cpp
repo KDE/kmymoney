@@ -132,17 +132,23 @@ bool KGPGFile::open(OpenMode mode)
     return false;
   }
 
-  if (d->m_fn.isEmpty())
+  if (d->m_fn.isEmpty()) {
+    setOpenMode(NotOpen);
     return false;
+  }
 
-  if (!d->ctx)
+  if (!d->ctx) {
+    setOpenMode(NotOpen);
     return false;
+  }
 
   setOpenMode(mode);
 
   // qDebug("check valid access mode");
-  if (!(isReadable() || isWritable()))
+  if (!(isReadable() || isWritable())) {
+    setOpenMode(NotOpen);
     return false;
+  }
 
   if (isWritable()) {
 
@@ -153,8 +159,10 @@ bool KGPGFile::open(OpenMode mode)
     }
 
     // qDebug("check access rights");
-    if (!KStandardDirs::checkAccess(d->m_fn, W_OK))
+    if (!KStandardDirs::checkAccess(d->m_fn, W_OK)) {
+      setOpenMode(NotOpen);
       return false;
+    }
 
     // write out in ASCII armor mode
     d->ctx->setArmor(true);
