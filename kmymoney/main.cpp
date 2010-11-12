@@ -160,7 +160,7 @@ int main(int argc, char *argv[])
     // widgets by running the event loop for some time to catch all those
     // widgets that are requested to be destroyed using the deleteLater() method.
     //QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput, 10);
-    QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 10);
+    QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents, 10);
 
     delete kmymoney;
     delete splash;
@@ -194,7 +194,7 @@ int main(int argc, char *argv[])
               // Before we delete the application, we make sure that we destroy all
               // widgets by running the event loop for some time to catch all those
               // widgets that are requested to be destroyed using the deleteLater() method.
-              QCoreApplication::processEvents(QEventLoop::ExcludeUserInput, 10);
+              QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents, 10);
 
               delete kmymoney;
               delete splash;

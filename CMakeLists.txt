@@ -60,7 +60,6 @@ if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
   add_definitions (-DQT_STRICT_ITERATORS)
   set(KMM_DEBUG 1)
 endif()
-add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
 

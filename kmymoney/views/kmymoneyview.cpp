@@ -1087,17 +1087,17 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
   ft.commit();
 
   pWriter->setProgressCallback(&KMyMoneyView::progressCallback);
-  dev->resetStatus();
   pWriter->writeFile(dev, dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage()));
   MyMoneyFile::instance()->blockSignals(blocked);
-  if (statusDevice->status() != IO_Ok) {
+  QFile *fileStatusDevice = qobject_cast<QFile*>(statusDevice);
+  if (fileStatusDevice->error() != QFile::NoError) {
     throw new MYMONEYEXCEPTION(i18n("Failure while writing to '%1'", localFile));
   }
   pWriter->setProgressCallback(0);
 
   if (base != 0) {
     dev->close();
-    if (statusDevice->status() != IO_Ok) {
+    if (fileStatusDevice->error() != QFile::NoError) {
       delete dev;
       dev = 0;
       throw new MYMONEYEXCEPTION(i18n("Failure while writing to '%1'", localFile));
