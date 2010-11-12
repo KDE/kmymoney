@@ -446,7 +446,6 @@ void QueryTable::constructTransactionTable(void)
 
     const QList<MyMoneySplit>& splits = (*it_transaction).splits();
     QList<MyMoneySplit>::const_iterator myBegin, it_split;
-    //S_end = splits.end();
 
     for (it_split = splits.begin(), myBegin = splits.end(); it_split != splits.end(); ++it_split) {
       ReportAccount splitAcc = (* it_split).accountId();
@@ -469,6 +468,11 @@ void QueryTable::constructTransactionTable(void)
     } else {
       myBegin = it_split;
     }
+
+    // skip this transaction if we didn't find a valid base account - see the above description
+    // for the base account's description - if we don't find it avoid a crash by skipping the transaction
+    if (myBegin == splits.end())
+      continue;
 
     // if the split is still unknown, use the first one. I have seen this
     // happen with a transaction that has only a single split referencing an income or expense
