@@ -957,7 +957,7 @@ const MyMoneyMoney MyMoneyDatabaseMgr::balance(const QString& id, const QDate& d
   //if (date_ == QDate()) date_ = QDate::currentDate();
 // END DEBUG
 
-  MyMoneyMoney result(0);
+  MyMoneyMoney result;
   MyMoneyAccount acc;
   QMap<QString, MyMoneyAccount> accountList = m_sql->fetchAccounts(/*QString(id)*/);
   //QMap<QString, MyMoneyAccount>::const_iterator accpos = accountList.find(id);

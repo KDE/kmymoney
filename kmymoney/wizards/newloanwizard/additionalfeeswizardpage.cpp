@@ -56,7 +56,7 @@ void AdditionalFeesWizardPage::slotAdditionalFees(void)
   MyMoneyAccount account("Phony-ID", MyMoneyAccount());
 
   QMap<QString, MyMoneyMoney> priceInfo;
-  QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(qobject_cast<KNewLoanWizard*>(wizard())->m_transaction, qobject_cast<KNewLoanWizard*>(wizard())->m_split, account, false, !field("borrowButton").toBool(), MyMoneyMoney(0), priceInfo);
+  QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(qobject_cast<KNewLoanWizard*>(wizard())->m_transaction, qobject_cast<KNewLoanWizard*>(wizard())->m_split, account, false, !field("borrowButton").toBool(), MyMoneyMoney(), priceInfo);
   connect(dlg, SIGNAL(newCategory(MyMoneyAccount&)), this, SIGNAL(newCategory(MyMoneyAccount&)));
 
   if (dlg->exec() == QDialog::Accepted) {

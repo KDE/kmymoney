@@ -409,7 +409,7 @@ MyMoneyMoney KSplitTransactionDlg::splitsValue(void)
 
 MyMoneyMoney KSplitTransactionDlg::diffAmount(void)
 {
-  MyMoneyMoney diff(0);
+  MyMoneyMoney diff;
 
   // if there is an amount specified in the transaction, we need to calculate the
   // difference, otherwise we display the difference as 0 and display the same sum.

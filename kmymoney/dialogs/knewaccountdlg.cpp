@@ -824,7 +824,7 @@ void KNewAccountDlg::slotCheckFinished(void)
     showButton = false;
   }
 
-  if (m_vatCategory->isChecked() && m_vatRate->value() <= MyMoneyMoney(0)) {
+  if (m_vatCategory->isChecked() && m_vatRate->value() <= MyMoneyMoney()) {
     showButton = false;
   } else {
     if (m_vatAssignment->isChecked() && m_vatAccount->selectedItems().isEmpty())

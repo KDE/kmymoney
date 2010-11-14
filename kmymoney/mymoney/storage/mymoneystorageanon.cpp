@@ -233,18 +233,18 @@ MyMoneyMoney MyMoneyStorageANON::hideNumber(const MyMoneyMoney& _in) const
 
   // preserve sign
   if (_in.isNegative())
-    result = MyMoneyMoney(-1);
+    result = MyMoneyMoney(-1,1);
   else
-    result = MyMoneyMoney(1);
+    result = MyMoneyMoney(1,1);
 
   result = result * counter;
   counter += MyMoneyMoney("10/100");
 
   // preserve > 1000
-  if (_in >= MyMoneyMoney(1000))
-    result = result * MyMoneyMoney(1000);
-  if (_in <= MyMoneyMoney(-1000))
-    result = result * MyMoneyMoney(1000);
+  if (_in >= MyMoneyMoney(1000,1))
+    result = result * MyMoneyMoney(1000,1);
+  if (_in <= MyMoneyMoney(-1000,1))
+    result = result * MyMoneyMoney(1000,1);
 
   return result.convert();
 }

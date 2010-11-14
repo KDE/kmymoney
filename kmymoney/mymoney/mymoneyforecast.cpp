@@ -1268,7 +1268,7 @@ void MyMoneyForecast::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoney
       calc.setIr(static_cast<FCALC_DOUBLE>(acc.interestRate(dueDate).abs().toDouble()));
       calc.setPmt(acc.periodicPayment().toDouble());
 
-      MyMoneyMoney interest(calc.interestDue()), amortization;
+      MyMoneyMoney interest(calc.interestDue(), 100), amortization;
       interest = interest.abs();    // make sure it's positive for now
       amortization = acc.periodicPayment() - interest;
 

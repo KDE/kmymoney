@@ -230,7 +230,7 @@ const QString MyMoneyTransaction::firstSplitID()
 
 const MyMoneyMoney MyMoneyTransaction::splitSum(void) const
 {
-  MyMoneyMoney result(0);
+  MyMoneyMoney result;
   QList<MyMoneySplit>::ConstIterator it;
 
   for (it = m_splits.begin(); it != m_splits.end(); ++it) {

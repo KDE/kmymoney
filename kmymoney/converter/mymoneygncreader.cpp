@@ -253,14 +253,14 @@ QString GncObject::hide(QString data, unsigned int anonClass)
         break;
       case MONEY1:
         in = MyMoneyMoney(data);
-        if (data == "-1/0") in = MyMoneyMoney(0);  // spurious gnucash data - causes a crash sometimes
+        if (data == "-1/0") in = MyMoneyMoney();  // spurious gnucash data - causes a crash sometimes
         mresult = MyMoneyMoney(m_moneyHideFactor) * in;
         mresult.convert(10000);
         result = mresult.toString();
         break;
       case MONEY2:
         in = MyMoneyMoney(data);
-        if (data == "-1/0") in = MyMoneyMoney(0);
+        if (data == "-1/0") in = MyMoneyMoney();
         mresult  = MyMoneyMoney(m_moneyHideFactor) * in;
         mresult.convert(10000);
         mresult.setThousandSeparator(' ');
@@ -1659,12 +1659,12 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
   // 3. others (categories)
   // but keeping each in same order as gnucash
   MyMoneySecurity e;
-  MyMoneyMoney price, newPrice(0);
+  MyMoneyMoney price, newPrice;
 
   switch (splitAccount.accountGroup()) {
     case MyMoneyAccount::Asset:
       if (splitAccount.accountType() == MyMoneyAccount::Stock) {
-        split.value() == MyMoneyMoney(0) ?
+        split.value() == MyMoneyMoney() ?
         split.setAction(MyMoneySplit::ActionAddShares) :      // free shares?
         split.setAction(MyMoneySplit::ActionBuyShares);
         m_potentialTransfer = false; // ?
@@ -1844,7 +1844,7 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
         validSlotCount++;
       }
       // validate numeric, work out sign
-      MyMoneyMoney exFormula(0);
+      MyMoneyMoney exFormula;
       exFormula.setNegativeMonetarySignPosition(MyMoneyMoney::BeforeQuantityMoney);
       QString numericTest;
       char crdr = 0 ;

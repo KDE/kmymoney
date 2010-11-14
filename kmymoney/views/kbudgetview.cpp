@@ -195,7 +195,7 @@ bool BudgetAccountsProxyModel::filterAcceptsRow(int source_row, const QModelInde
     QVariant accountData = sourceModel()->data(index, AccountsModel::AccountRole);
     if (accountData.canConvert<MyMoneyAccount>()) {
       MyMoneyAccount account = accountData.value<MyMoneyAccount>();
-      MyMoneyMoney balance(0);
+      MyMoneyMoney balance;
       // find out if the account is budgeted
       MyMoneyBudget::AccountGroup budgetAccount = m_budget.account(account.id());
       if (budgetAccount.id() == account.id()) {
@@ -229,7 +229,7 @@ bool BudgetAccountsProxyModel::filterAcceptsColumn(int source_column, const QMod
 
 MyMoneyMoney BudgetAccountsProxyModel::accountBalance(const QString &accountId) const
 {
-  MyMoneyMoney balance(0);
+  MyMoneyMoney balance;
   // find out if the account is budgeted
   MyMoneyBudget::AccountGroup budgetAccount = m_budget.account(accountId);
   if (budgetAccount.id() == accountId) {
@@ -252,7 +252,7 @@ MyMoneyMoney BudgetAccountsProxyModel::accountValue(const MyMoneyAccount &accoun
 
 MyMoneyMoney BudgetAccountsProxyModel::computeTotalValue(const QModelIndex &source_index) const
 {
-  MyMoneyMoney totalValue(0);
+  MyMoneyMoney totalValue;
   QVariant accountData = sourceModel()->data(source_index, AccountsModel::AccountRole);
   if (accountData.canConvert<MyMoneyAccount>()) {
     MyMoneyAccount account = accountData.value<MyMoneyAccount>();

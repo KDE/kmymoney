@@ -88,10 +88,10 @@ public:
 
   // construction
   MyMoneyMoney();
-  explicit MyMoneyMoney(const int iAmount, const signed64 denom = 100);
-  explicit MyMoneyMoney(const long int iAmount, const signed64 denom = 100);
+  explicit MyMoneyMoney(const int iAmount, const signed64 denom);
+  explicit MyMoneyMoney(const long int iAmount, const signed64 denom);
   explicit MyMoneyMoney(const QString& pszAmount);
-  explicit MyMoneyMoney(const signed64 Amount, const signed64 denom = 100);
+  explicit MyMoneyMoney(const signed64 Amount, const signed64 denom);
   explicit MyMoneyMoney(const double dAmount, const signed64 denom = 100);
 #ifdef SIZEOF_LONG_DOUBLE
   explicit MyMoneyMoney(const long double dAmount, const signed64 denom = 100);

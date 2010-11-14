@@ -637,8 +637,8 @@ const MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMe
       denom_neg   = 1;
       temp_a      = (in.m_num < 0) ? -in.m_num : in.m_num;
       temp_bc     = in.m_denom * denom;
-      remainder   = in.m_num % temp_bc;
-      out.m_num   = in.m_num / temp_bc;
+      remainder   = temp_a % temp_bc;
+      out.m_num   = temp_a / temp_bc;
       out.m_denom = -denom;
     } else {
       /* do all the modulo and int division on positive values to make

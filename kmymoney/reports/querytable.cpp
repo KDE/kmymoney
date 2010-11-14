@@ -64,7 +64,7 @@ QDate CashFlowListItem::m_sToday = QDate::currentDate();
 MyMoneyMoney CashFlowListItem::NPV(double _rate) const
 {
   double T = static_cast<double>(m_sToday.daysTo(m_date)) / 365.0;
-  MyMoneyMoney result(m_value.toDouble() / pow(1 + _rate, T));
+  MyMoneyMoney result(m_value.toDouble() / pow(1 + _rate, T), 100);
 
   //kDebug(2) << "CashFlowListItem::NPV( " << _rate << " ) == " << result;
 
@@ -92,7 +92,7 @@ CashFlowListItem CashFlowList::mostRecent(void) const
 
 MyMoneyMoney CashFlowList::NPV(double _rate) const
 {
-  MyMoneyMoney result(0.0);
+  MyMoneyMoney result;
 
   const_iterator it_cash = begin();
   while (it_cash != end()) {
@@ -1088,7 +1088,7 @@ void QueryTable::constructAccountTable(void)
       // Handle currency conversion
       //
 
-      MyMoneyMoney displayprice(1.0);
+      MyMoneyMoney displayprice(1,1);
       if (m_config.isConvertCurrency()) {
         // display currency is base currency, so set the price
         if (account.isForeignCurrency())

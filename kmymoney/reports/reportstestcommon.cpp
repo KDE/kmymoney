@@ -178,8 +178,8 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
     // mark this transaction as a cash dividend and note which stock account
     // it belongs to.
     MyMoneySplit s2;
-    s2.setValue(MyMoneyMoney(0));
-    s2.setShares(MyMoneyMoney(0));
+    s2.setValue(MyMoneyMoney());
+    s2.setShares(MyMoneyMoney());
     s2.setAction(_action);
     s2.setAccountId(_stockaccountid);
     addSplit(s2);

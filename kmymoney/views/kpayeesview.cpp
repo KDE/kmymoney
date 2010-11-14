@@ -466,7 +466,7 @@ void KPayeesView::clearItemData(void)
 
 void KPayeesView::showTransactions(void)
 {
-  MyMoneyMoney balance(0);
+  MyMoneyMoney balance;
 
   // setup sort order
   m_register->setSortOrder(KMyMoneyGlobalSettings::sortSearchView());

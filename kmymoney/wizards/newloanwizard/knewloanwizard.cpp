@@ -105,7 +105,7 @@ KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
   // setup a phony transaction for additional fee processing
   m_account = MyMoneyAccount("Phony-ID", MyMoneyAccount());
   m_split.setAccountId(m_account.id());
-  m_split.setValue(MyMoneyMoney(0));
+  m_split.setValue(MyMoneyMoney());
   m_transaction.addSplit(m_split);
 
   KMyMoneyUtils::updateWizardButtons(this);
@@ -140,7 +140,7 @@ void KNewLoanWizard::resetCalculator(void)
   m_paymentPage->resetCalculator();
   m_finalPaymentPage->resetCalculator();
 
-  setField("additionalCost", MyMoneyMoney(0).formatMoney(m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()))));
+  setField("additionalCost", MyMoneyMoney().formatMoney(m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()))));
 }
 
 void KNewLoanWizard::updateLoanAmount(void)

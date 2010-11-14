@@ -54,8 +54,8 @@ void MyMoneySplitTest::testSetFunctions()
   m->setMemo("Memo");
   m->setReconcileDate(QDate(1, 2, 3));
   m->setReconcileFlag(MyMoneySplit::Cleared);
-  m->setShares(MyMoneyMoney(1234));
-  m->setValue(MyMoneyMoney(3456));
+  m->setShares(MyMoneyMoney(1234, 100));
+  m->setValue(MyMoneyMoney(3456, 100));
   m->setId("MyID");
   m->setPayeeId("Payee");
   m->setAction("Action");
@@ -66,8 +66,8 @@ void MyMoneySplitTest::testSetFunctions()
   QVERIFY(m->memo() == "Memo");
   QVERIFY(m->reconcileDate() == QDate(1, 2, 3));
   QVERIFY(m->reconcileFlag() == MyMoneySplit::Cleared);
-  QVERIFY(m->shares() == MyMoneyMoney(1234));
-  QVERIFY(m->value() == MyMoneyMoney(3456));
+  QVERIFY(m->shares() == MyMoneyMoney(1234, 100));
+  QVERIFY(m->value() == MyMoneyMoney(3456, 100));
   QVERIFY(m->id() == "MyID");
   QVERIFY(m->payeeId() == "Payee");
   QVERIFY(m->action() == "Action");
@@ -86,8 +86,8 @@ void MyMoneySplitTest::testCopyConstructor()
   QVERIFY(n.memo() == "Memo");
   QVERIFY(n.reconcileDate() == QDate(1, 2, 3));
   QVERIFY(n.reconcileFlag() == MyMoneySplit::Cleared);
-  QVERIFY(n.shares() == MyMoneyMoney(1234));
-  QVERIFY(n.value() == MyMoneyMoney(3456));
+  QVERIFY(n.shares() == MyMoneyMoney(1234, 100));
+  QVERIFY(n.value() == MyMoneyMoney(3456, 100));
   QVERIFY(n.id() == "MyID");
   QVERIFY(n.payeeId() == "Payee");
   QVERIFY(n.action() == "Action");
@@ -107,8 +107,8 @@ void MyMoneySplitTest::testAssignmentConstructor()
   QVERIFY(n.memo() == "Memo");
   QVERIFY(n.reconcileDate() == QDate(1, 2, 3));
   QVERIFY(n.reconcileFlag() == MyMoneySplit::Cleared);
-  QVERIFY(n.shares() == MyMoneyMoney(1234));
-  QVERIFY(n.value() == MyMoneyMoney(3456));
+  QVERIFY(n.shares() == MyMoneyMoney(1234, 100));
+  QVERIFY(n.value() == MyMoneyMoney(3456, 100));
   QVERIFY(n.id() == "MyID");
   QVERIFY(n.payeeId() == "Payee");
   QVERIFY(n.action() == "Action");
@@ -131,7 +131,7 @@ void MyMoneySplitTest::testInequality()
 
   MyMoneySplit n(*m);
 
-  n.setShares(MyMoneyMoney(3456));
+  n.setShares(MyMoneyMoney(3456, 100));
   QVERIFY(!(n == *m));
 
   n = *m;
@@ -167,11 +167,11 @@ void MyMoneySplitTest::testInequality()
   QVERIFY(!(n == *m));
 
   n = *m;
-  n.setShares(MyMoneyMoney(4567));
+  n.setShares(MyMoneyMoney(4567, 100));
   QVERIFY(!(n == *m));
 
   n = *m;
-  n.setValue(MyMoneyMoney(9876));
+  n.setValue(MyMoneyMoney(9876, 100));
   QVERIFY(!(n == *m));
 
   n = *m;
@@ -195,22 +195,22 @@ void MyMoneySplitTest::testAmortization()
 
 void MyMoneySplitTest::testValue()
 {
-  m->setValue(MyMoneyMoney(1));
-  m->setShares(MyMoneyMoney(2));
-  QVERIFY(m->value("EUR", "EUR") == MyMoneyMoney(1));
-  QVERIFY(m->value("EUR", "USD") == MyMoneyMoney(2));
+  m->setValue(MyMoneyMoney(1, 100));
+  m->setShares(MyMoneyMoney(2, 100));
+  QVERIFY(m->value("EUR", "EUR") == MyMoneyMoney(1, 100));
+  QVERIFY(m->value("EUR", "USD") == MyMoneyMoney(2, 100));
 }
 
 void MyMoneySplitTest::testSetValue()
 {
   QVERIFY(m->value().isZero());
   QVERIFY(m->shares().isZero());
-  m->setValue(MyMoneyMoney(1), "EUR", "EUR");
-  QVERIFY(m->value() == MyMoneyMoney(1));
+  m->setValue(MyMoneyMoney(1, 100), "EUR", "EUR");
+  QVERIFY(m->value() == MyMoneyMoney(1, 100));
   QVERIFY(m->shares().isZero());
-  m->setValue(MyMoneyMoney(3), "EUR", "USD");
-  QVERIFY(m->value() == MyMoneyMoney(1));
-  QVERIFY(m->shares() == MyMoneyMoney(3));
+  m->setValue(MyMoneyMoney(3, 100), "EUR", "USD");
+  QVERIFY(m->value() == MyMoneyMoney(1, 100));
+  QVERIFY(m->shares() == MyMoneyMoney(3, 100));
 }
 
 void MyMoneySplitTest::testSetAction()
@@ -241,9 +241,9 @@ void MyMoneySplitTest::testIsAutoCalc()
   QVERIFY(m->isAutoCalc() == true);
   m->setShares(MyMoneyMoney::autoCalc);
   QVERIFY(m->isAutoCalc() == true);
-  m->setValue(MyMoneyMoney(0));
+  m->setValue(MyMoneyMoney());
   QVERIFY(m->isAutoCalc() == true);
-  m->setShares(MyMoneyMoney(1));
+  m->setShares(MyMoneyMoney(1, 100));
   QVERIFY(m->isAutoCalc() == false);
 }
 
