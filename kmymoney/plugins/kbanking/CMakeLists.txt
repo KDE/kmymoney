@@ -17,7 +17,10 @@ ADD_SUBDIRECTORY( widgets )
 
 ########### next target ###############
 
-SET(kmm_kbanking_PART_SRCS kbanking.cpp mymoneybanking.cpp)
+SET(kmm_kbanking_PART_SRCS 
+    mymoneybanking.cpp
+    banking.cpp
+    )
 
 KDE4_ADD_PLUGIN(kmm_kbanking ${kmm_kbanking_PART_SRCS})
 

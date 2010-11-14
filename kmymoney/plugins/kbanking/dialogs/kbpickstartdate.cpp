@@ -25,7 +25,6 @@
 
 // QBanking includes
 #include "kbpickstartdate.h"
-#include <q4banking/qbanking.h>
 
 // Gwenhywfar includes
 #include <gwenhywfar/debug.h>
@@ -46,7 +45,7 @@
 
 
 
-KBPickStartDate::KBPickStartDate(QBanking *qb,
+KBPickStartDate::KBPickStartDate(KMyMoneyBanking* qb,
                                  const QDate &firstPossible,
                                  const QDate &lastUpdate,
                                  const QString& accountName,
@@ -139,6 +138,5 @@ QDate KBPickStartDate::date()
 
 void KBPickStartDate::slotHelpClicked()
 {
-  _banking->invokeHelp("KBPickStartDate", "none");
 }
 

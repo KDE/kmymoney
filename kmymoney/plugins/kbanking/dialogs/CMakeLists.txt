@@ -4,12 +4,13 @@
 SET(kmm_kbanking_dialogs_la_SOURCES
     kbaccountsettings.cpp
     kbpickstartdate.cpp
-    kbsettings.cpp
+    kbmapaccount.cpp
     )
 
 SET(kmm_kbanking_dialogs_UI
     kbaccountsettings.ui
     kbpickstartdate.ui
+    kbmapaccount.ui
     )
 
 KDE4_ADD_UI_FILES(kmm_kbanking_dialogs_la_SOURCES

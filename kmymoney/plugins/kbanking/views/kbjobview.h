@@ -32,14 +32,14 @@ class KBJobView;
 
 
 #include "kbjoblist.h"
-#include "kbanking.h"
+#include "mymoneybanking.h"
 
 
 class KBJobView: public QWidget, public Ui::KBJobViewUi
 {
   Q_OBJECT
 public:
-  explicit KBJobView(KBanking *kb,
+  explicit KBJobView(KMyMoneyBanking *kb,
                      QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   ~KBJobView();
 
@@ -47,7 +47,7 @@ public:
   bool fini();
 
 private:
-  KBanking *m_app;
+  KMyMoneyBanking *m_app;
   KBJobListView *m_jobList;
 
 protected slots:

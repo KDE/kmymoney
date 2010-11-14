@@ -38,14 +38,13 @@
 #include <KIconLoader>
 #include <KMessageBox>
 
-#include "kbanking.h"
 #include <aqbanking/jobgetbalance.h>
 #include <aqbanking/jobgettransactions.h>
 
 #include <gwenhywfar/debug.h>
 
 
-KBJobView::KBJobView(KBanking *kb,
+KBJobView::KBJobView(KMyMoneyBanking *kb,
                      QWidget* parent,
                      const char* name,
                      Qt::WFlags fl) :
@@ -64,8 +63,6 @@ KBJobView::KBJobView(KBanking *kb,
   m_jobList = new KBJobListView(jobBox);
   jobBoxLayout->addWidget(m_jobList);
 
-  QObject::connect(m_app->flagStaff(), SIGNAL(signalQueueUpdated()),
-                   this, SLOT(slotQueueUpdated()));
   QObject::connect(executeButton, SIGNAL(clicked()),
                    this, SLOT(slotExecute()));
   QObject::connect(dequeueButton, SIGNAL(clicked()),
@@ -154,9 +151,6 @@ void KBJobView::slotExecute()
     DBG_ERROR(0, "Error: %d", rv);
   }
   AB_ImExporterContext_free(ctx);
-
-  // let App emit signals to inform account views
-  m_app->accountsUpdated();
 }
 
 

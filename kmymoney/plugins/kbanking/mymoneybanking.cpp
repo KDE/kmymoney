@@ -1,6 +1,7 @@
 /***************************************************************************
- *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
  *   Copyright 2004  Martin Preuss aquamaniac@users.sourceforge.net        *
+ *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
+ *   Copyright 2010  Thomas Baumgart ipwizard@users.sourceforge.net        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -33,6 +34,7 @@
 #include <QRegExp>
 #include <QCheckBox>
 #include <QLabel>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -59,9 +61,12 @@
 #include <aqbanking/jobgettransactions.h>
 #include <aqbanking/jobgetbalance.h>
 #include <aqbanking/job.h>
-#include <q4banking/qbgui.h>
+#include <aqbanking/abgui.h>
+#include <aqbanking/dlg_setup.h>
+#include <aqbanking/dlg_importer.h>
 #include <gwenhywfar/logger.h>
 #include <gwenhywfar/debug.h>
+#include <gwen-gui-qt4/qt4_gui.hpp>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -69,6 +74,7 @@
 #include "kbjobview.h"
 #include "kbsettings.h"
 #include "kbaccountsettings.h"
+#include "kbmapaccount.h"
 #include <kmymoney/mymoneyfile.h>
 #include <kmymoney/kmymoneyview.h>
 #include <kmymoney/mymoneykeyvaluecontainer.h>
@@ -80,7 +86,7 @@ K_EXPORT_COMPONENT_FACTORY(kmm_kbanking,
 class KBankingPlugin::Private
 {
 public:
-  Private() {
+  Private() : passwordCacheTimer(0) {
     QString gwenProxy = QString::fromLocal8Bit(qgetenv("GWEN_PROXY"));
     if (gwenProxy.isEmpty()) {
       KConfig *cfg = new KConfig("kioslaverc");
@@ -112,6 +118,8 @@ public:
       delete cfg;
     }
   }
+
+  QTimer *passwordCacheTimer;
 };
 
 KBankingPlugin::KBankingPlugin(QObject *parent, const QStringList&) :
@@ -122,10 +130,14 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QStringList&) :
 {
   m_kbanking = new KMyMoneyBanking(this, "KMyMoney");
 
-  if (m_kbanking) {
-    QBGui *gui;
+  d->passwordCacheTimer = new QTimer(this);
+  d->passwordCacheTimer->setSingleShot(true);
+  d->passwordCacheTimer->setInterval(60000);
+  connect(d->passwordCacheTimer, SIGNAL(timeout()), this, SLOT(slotClearPasswordCache()));
 
-#if AQB_IS_VERSION(4,99,0,0)
+  if (m_kbanking) {
+    QT4_Gui *gui;
+
     if (AB_Banking_HasConf4(m_kbanking->getCInterface())) {
       qDebug("KBankingPlugin: No AqB4 config found.");
       if (AB_Banking_HasConf3(m_kbanking->getCInterface())) {
@@ -139,32 +151,19 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QStringList&) :
         AB_Banking_ImportConf3(m_kbanking->getCInterface());
       }
     }
-#elif AQB_IS_VERSION(3,9,0,0)
-    if (AB_Banking_HasConf4(m_kbanking->getCInterface(), 0)) {
-      qDebug("KBankingPlugin: No AqB4 config found.");
-      if (AB_Banking_HasConf3(m_kbanking->getCInterface(), 0)) {
-        qDebug("KBankingPlugin: No AqB3 config found.");
-        if (!AB_Banking_HasConf2(m_kbanking->getCInterface(), 0)) {
-          qDebug("KBankingPlugin: AqB2 config found - converting.");
-          AB_Banking_ImportConf2(m_kbanking->getCInterface(), 0);
-        }
-      } else {
-        qDebug("KBankingPlugin: AqB3 config found - converting.");
-        AB_Banking_ImportConf3(m_kbanking->getCInterface(), 0);
-      }
-    }
-#endif
 
-    gui = new QBGui(m_kbanking);
+    gui = new QT4_Gui();
     GWEN_Gui_SetGui(gui->getCInterface());
     GWEN_Logger_SetLevel(0, GWEN_LoggerLevel_Info);
     GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Debug);
-    m_kbanking->setGui(gui);
     if (m_kbanking->init() == 0) {
       // Tell the host application to load my GUI component
       setComponentData(KGenericFactory<KBankingPlugin>::componentData());
       setXMLFile("kmm_kbanking.rc");
       qDebug("KMyMoney kbanking plugin loaded");
+
+      // get certificate handling and dialog settings management
+      AB_Gui_Extend(gui->getCInterface(), m_kbanking->getCInterface());
 
       // create view
       createJobView();
@@ -281,6 +280,7 @@ void KBankingPlugin::createJobView(void)
   QWidget* w = new KBJobView(m_kbanking, view, "JobView");
   viewInterface()->addWidget(view, w);
   connect(viewInterface(), SIGNAL(viewStateChanged(bool)), view, SLOT(setEnabled(bool)));
+  connect(this, SIGNAL(queueChanged()), w, SLOT(slotQueueUpdated()));
 }
 
 void KBankingPlugin::createActions(void)
@@ -298,15 +298,24 @@ void KBankingPlugin::createActions(void)
 
 void KBankingPlugin::slotSettings(void)
 {
-  QPointer<KBankingSettings> bs = new KBankingSettings(m_kbanking);
-  if (bs->init())
-    qWarning("Error on ini of settings dialog.");
-  else {
-    bs->exec();
-    if (bs && bs->fini())
-      qWarning("Error on fini of settings dialog.");
+  if (m_kbanking) {
+    GWEN_DIALOG *dlg;
+    int rv;
+
+    dlg = AB_SetupDialog_new(m_kbanking->getCInterface());
+    if (dlg == NULL) {
+      DBG_ERROR(0, "Could not create setup dialog.");
+      return;
+    }
+
+    rv = GWEN_Gui_ExecDialog(dlg, 0);
+    if (rv == 0) {
+      DBG_ERROR(0, "Aborted by user");
+      GWEN_Dialog_free(dlg);
+      return;
+    }
+    GWEN_Dialog_free(dlg);
   }
-  delete bs;
 }
 
 bool KBankingPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& settings)
@@ -346,7 +355,7 @@ bool KBankingPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContai
     // at this point, the account should be mapped
     // so we search it and setup the account reference in the KMyMoney object
     AB_ACCOUNT* ab_acc;
-    ab_acc = AB_BANKING_GETACCOUNTBYALIAS(m_kbanking->getCInterface(), acc.id().toUtf8().data());
+    ab_acc = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), acc.id().toUtf8().data());
     if (ab_acc) {
       MyMoneyAccount a(acc);
       setupAccountReference(a, ab_acc);
@@ -360,7 +369,7 @@ bool KBankingPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContai
 QString KBankingPlugin::stripLeadingZeroes(const QString& s) const
 {
   QString rc(s);
-  QRegExp exp("(0*)(.*)");
+  QRegExp exp("^(0*)([^0]*)");
   if (exp.exactMatch(s) != -1) {
     rc = exp.cap(2);
   }
@@ -402,7 +411,7 @@ bool KBankingPlugin::accountIsMapped(const MyMoneyAccount& acc)
 {
   AB_ACCOUNT* ab_acc = 0;
   if (m_kbanking)
-    ab_acc = AB_BANKING_GETACCOUNTBYALIAS(m_kbanking->getCInterface(), acc.id().toUtf8().data());
+    ab_acc = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), acc.id().toUtf8().data());
   return ab_acc != 0;
 }
 
@@ -427,7 +436,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
     QDate qd;
 
     /* get AqBanking account */
-    ba = AB_BANKING_GETACCOUNTBYALIAS(m_kbanking->getCInterface(), acc.id().toUtf8().data());
+    ba = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), acc.id().toUtf8().data());
     if (!ba) {
       KMessageBox::error(0,
                          i18n("<qt>"
@@ -448,7 +457,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       if (acc.onlineBankingSettings().value("kbanking-txn-download") != "no") {
         /* create getTransactions job */
         job = AB_JobGetTransactions_new(ba);
-        rv = AB_BANKING_JOB_CHECKAVAILABILITY(job);
+        rv = AB_Job_CheckAvailability(job);
         if (rv) {
           DBG_ERROR(0, "Job \"GetTransactions\" is not available (%d)", rv);
           KMessageBox::error(0,
@@ -540,7 +549,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 
       /* create getBalance job */
       job = AB_JobGetBalance_new(ba);
-      rv = AB_BANKING_JOB_CHECKAVAILABILITY(job);
+      rv = AB_Job_CheckAvailability(job);
       if (!rv)
         rv = m_kbanking->enqueueJob(job);
       else
@@ -559,6 +568,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 
     // make sure, we have at least one job in the queue before we continue.
     if (m_kbanking->getEnqueuedJobs().size() > 0) {
+      emit queueChanged();
 
       // ask if the user want's to execute this job right away or spool it
       // for later execution
@@ -607,9 +617,6 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           DBG_ERROR(0, "Error: %d", rv);
         }
         AB_ImExporterContext_free(ctx);
-
-        // let application emit signals to inform views
-        m_kbanking->accountsUpdated();
       }
       rc = true;
     }
@@ -617,7 +624,17 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
   return rc;
 }
 
+void KBankingPlugin::startPasswordTimer(void)
+{
+  if (d->passwordCacheTimer->isActive())
+    d->passwordCacheTimer->stop();
+  d->passwordCacheTimer->start();
+}
 
+void KBankingPlugin::slotClearPasswordCache(void)
+{
+  m_kbanking->clearPasswordCache();
+}
 
 void KBankingPlugin::slotImport(void)
 {
@@ -644,11 +661,176 @@ void KBankingPlugin::setAccountOnlineParameters(const MyMoneyAccount& acc, const
 
 
 KMyMoneyBanking::KMyMoneyBanking(KBankingPlugin* parent, const char* appname, const char* fname)
-    : KBanking(appname, fname)
+    : AB_Banking(appname, fname)
     , m_parent(parent)
+    , _jobQueue(0)
 {
 }
 
+int KMyMoneyBanking::init()
+{
+  int rv;
+
+  rv = AB_Banking::init();
+  if (rv < 0)
+    return rv;
+
+  rv = onlineInit();
+  if (rv) {
+    fprintf(stderr, "Error on online init (%d).\n", rv);
+    AB_Banking::fini();
+    return rv;
+  }
+
+  _jobQueue = AB_Job_List2_new();
+
+  return 0;
+}
+
+int KMyMoneyBanking::fini()
+{
+  int rv;
+
+  if (_jobQueue) {
+    AB_Job_List2_FreeAll(_jobQueue);
+    _jobQueue = 0;
+  }
+
+  rv = onlineFini();
+  if (rv) {
+    AB_Banking::fini();
+    return rv;
+  }
+  return AB_Banking::fini();
+}
+
+int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
+{
+  int rv;
+  AB_JOB_LIST2 *oldQ;
+
+  m_parent->startPasswordTimer();
+
+  rv = AB_Banking::executeJobs(_jobQueue, ctx);
+  oldQ = _jobQueue;
+  _jobQueue = AB_Job_List2_new();
+  AB_Job_List2_FreeAll(oldQ);
+
+  emit m_parent->queueChanged();
+  m_parent->startPasswordTimer();
+
+  return rv;
+}
+
+void KMyMoneyBanking::clearPasswordCache(void)
+{
+  /* clear password DB */
+  GWEN_Gui_SetPasswordStatus(NULL, NULL, GWEN_Gui_PasswordStatus_Remove, 0);
+}
+
+std::list<AB_JOB*> KMyMoneyBanking::getEnqueuedJobs()
+{
+  AB_JOB_LIST2 *ll;
+  std::list<AB_JOB*> rl;
+
+  ll = _jobQueue;
+  if (ll && AB_Job_List2_GetSize(ll)) {
+    AB_JOB *j;
+    AB_JOB_LIST2_ITERATOR *it;
+
+    it = AB_Job_List2_First(ll);
+    assert(it);
+    j = AB_Job_List2Iterator_Data(it);
+    assert(j);
+    while (j) {
+      rl.push_back(j);
+      j = AB_Job_List2Iterator_Next(it);
+    }
+    AB_Job_List2Iterator_free(it);
+  }
+  return rl;
+}
+
+int KMyMoneyBanking::enqueueJob(AB_JOB *j)
+{
+  assert(_jobQueue);
+  assert(j);
+  AB_Job_Attach(j);
+  AB_Job_List2_PushBack(_jobQueue, j);
+  return 0;
+}
+
+
+
+int KMyMoneyBanking::dequeueJob(AB_JOB *j)
+{
+  assert(_jobQueue);
+  AB_Job_List2_Remove(_jobQueue, j);
+  AB_Job_free(j);
+  emit m_parent->queueChanged();
+  return 0;
+}
+
+bool KMyMoneyBanking::askMapAccount(const char *id,
+                                    const char *bankCode,
+                                    const char *accountId)
+{
+  KBMapAccount *w;
+
+  w = new KBMapAccount(this, bankCode, accountId);
+  if (w->exec() == QDialog::Accepted) {
+    AB_ACCOUNT *a;
+
+    a = w->getAccount();
+    assert(a);
+    DBG_NOTICE(0,
+               "Mapping application account \"%s\" to "
+               "online account \"%s/%s\"",
+               id,
+               AB_Account_GetBankCode(a),
+               AB_Account_GetAccountNumber(a));
+    setAccountAlias(a, id);
+    delete w;
+    return true;
+  }
+
+  delete w;
+  return false;
+}
+
+bool KMyMoneyBanking::interactiveImport()
+{
+  AB_IMEXPORTER_CONTEXT *ctx;
+  GWEN_DIALOG *dlg;
+  int rv;
+
+  ctx = AB_ImExporterContext_new();
+  dlg = AB_ImporterDialog_new(getCInterface(), ctx, NULL);
+  if (dlg == NULL) {
+    DBG_ERROR(0, "Could not create importer dialog.");
+    AB_ImExporterContext_free(ctx);
+    return false;
+  }
+
+  rv = GWEN_Gui_ExecDialog(dlg, 0);
+  if (rv == 0) {
+    DBG_ERROR(0, "Aborted by user");
+    GWEN_Dialog_free(dlg);
+    AB_ImExporterContext_free(ctx);
+    return false;
+  }
+
+  if (!importContext(ctx, 0)) {
+    DBG_ERROR(0, "Error on importContext");
+    GWEN_Dialog_free(dlg);
+    AB_ImExporterContext_free(ctx);
+    return false;
+  }
+
+  GWEN_Dialog_free(dlg);
+  AB_ImExporterContext_free(ctx);
+  return true;
+}
 
 
 const AB_ACCOUNT_STATUS* KMyMoneyBanking::_getAccountStatus(AB_IMEXPORTER_ACCOUNTINFO *ai)
@@ -719,7 +901,8 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     while (se) {
       p = GWEN_StringListEntry_Data(se);
       assert(p);
-      s = QString::fromUtf8(p);
+      s += QString::fromUtf8(p);
+      se = GWEN_StringListEntry_Next(se);
       se = GWEN_StringListEntry_Next(se);
     } // while
   }
