@@ -72,7 +72,6 @@
 // Project Includes
 
 #include "kbjobview.h"
-#include "kbsettings.h"
 #include "kbaccountsettings.h"
 #include "kbmapaccount.h"
 #include <kmymoney/mymoneyfile.h>
