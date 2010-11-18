@@ -23,7 +23,7 @@
 ### Boston, MA  02111-1307,  USA       gnu@gnu.org
 ######################################################################
 
-use diagnostics; # while testing
+#use diagnostics; # while testing
 use strict;
 use Data::Dumper;
 
