@@ -182,7 +182,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   m_toolbarFrame = new QFrame(this);
   QHBoxLayout* toolbarLayout = new QHBoxLayout(m_toolbarFrame);
   toolbarLayout->setContentsMargins(0, 0, 0, 0);
-  toolbarLayout->setSpacing(0);
+  toolbarLayout->setSpacing(6);
 
   // the account selector widget
   d->m_accountComboBox = new KMyMoneyAccountCombo(d->m_filterProxyModel, m_toolbarFrame);
