@@ -902,7 +902,6 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
       assert(p);
       s += QString::fromUtf8(p);
       se = GWEN_StringListEntry_Next(se);
-      se = GWEN_StringListEntry_Next(se);
     } // while
   }
   kt.m_strPayee = s;
