@@ -1130,7 +1130,7 @@ int KMyMoneyApp::askSaveOnClose(void)
   if (KMyMoneyGlobalSettings::autoSaveOnClose()) {
     ans = KMessageBox::Yes;
   } else {
-    ans = KMessageBox::warningYesNoCancel(this, i18n("The file has been changed, save it ?"));
+    ans = KMessageBox::warningYesNoCancel(this, i18n("The file has been changed, save it?"));
   }
   return ans;
 }
@@ -2523,7 +2523,7 @@ void KMyMoneyApp::slotProcessExited(void)
         d->m_backupResult = 0;
         QFile f(backupfile);
         if (f.exists()) {
-          int answer = KMessageBox::warningContinueCancel(this, i18n("Backup file for today exists on that device.  Replace ?"), i18n("Backup"), KGuiItem(i18n("&Replace")));
+          int answer = KMessageBox::warningContinueCancel(this, i18n("Backup file for today exists on that device. Replace?"), i18n("Backup"), KGuiItem(i18n("&Replace")));
           if (answer == KMessageBox::Cancel) {
             d->m_backupResult = 1;
 
@@ -4486,7 +4486,7 @@ void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
 
   if (newnameBase != i18n("New Payee")) {
     // Ask the user if that is what he intended to do?
-    QString msg = QString("<qt>") + i18n("Do you want to add <b>%1</b> as payer/receiver ?", newnameBase) + QString("</qt>");
+    QString msg = QString("<qt>") + i18n("Do you want to add <b>%1</b> as payer/receiver?", newnameBase) + QString("</qt>");
 
     if (KMessageBox::questionYesNo(this, msg, i18n("New payee/receiver"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "NewPayee") == KMessageBox::No) {
       doit = false;
