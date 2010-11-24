@@ -18,6 +18,7 @@ Name[ru]=Модуль импорта KMyMoney
 Name[sv]=Kmymoney importinsticksprogram
 Name[uk]=Додаток імпортування KMyMoney
 Name[x-test]=xxKMyMoney Importer Pluginxx
+Name[zh_TW]=KMyMoney 匯入器外掛程式
 X-KDE-ServiceType=KMyMoneyImporterPlugin
 Comment=A KMyMoney plugin
 Comment[ca]=Un endollable de KMyMoney
@@ -38,4 +39,5 @@ Comment[ru]=Модуль KMyMoney
 Comment[sv]=Ett Kmymoney insticksprogram
 Comment[uk]=Додаток KMyMoney
 Comment[x-test]=xxA KMyMoney pluginxx
+Comment[zh_TW]=KMyMoney 外掛程式
 

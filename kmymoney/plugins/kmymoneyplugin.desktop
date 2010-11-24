@@ -19,6 +19,7 @@ Name[ru]=Модуль KMyMoney
 Name[sv]=Kmymoney insticksprogram
 Name[uk]=Додаток KMyMoney
 Name[x-test]=xxKMyMoney Pluginxx
+Name[zh_TW]=KMyMoney 外掛程式
 X-KDE-ServiceType=KMyMoneyPlugin
 Comment=A KMyMoney plugin
 Comment[ca]=Un endollable de KMyMoney
@@ -39,4 +40,5 @@ Comment[ru]=Модуль KMyMoney
 Comment[sv]=Ett Kmymoney insticksprogram
 Comment[uk]=Додаток KMyMoney
 Comment[x-test]=xxA KMyMoney pluginxx
+Comment[zh_TW]=KMyMoney 外掛程式
 
