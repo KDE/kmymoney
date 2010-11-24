@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>469</width>
-    <height>263</height>
+    <width>669</width>
+    <height>221</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -91,24 +91,6 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QCheckBox" name="m_hideUnusedButton">
-           <property name="text">
-            <string>Hide unused budget categories</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="KLineEdit" name="m_searchWidget">
-           <property name="showClearButton" stdset="0">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout">
-         <item>
           <widget class="KPushButton" name="m_updateButton">
            <property name="enabled">
             <bool>false</bool>
@@ -139,6 +121,20 @@
          </item>
          <item>
           <widget class="KPushButton" name="m_expandButton"/>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="m_hideUnusedButton">
+           <property name="text">
+            <string>Hide unused budget categories</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="KLineEdit" name="m_searchWidget">
+           <property name="showClearButton" stdset="0">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -252,14 +248,14 @@
  <layoutdefault spacing="6" margin="0"/>
  <customwidgets>
   <customwidget>
-   <class>kMyMoneyEdit</class>
-   <extends>QFrame</extends>
-   <header>kmymoneyedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>KMyMoneyAccountTreeView</class>
    <extends>QTreeView</extends>
    <header>kmymoneyaccounttreeview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>kMyMoneyEdit</class>
+   <extends>QFrame</extends>
+   <header>kmymoneyedit.h</header>
   </customwidget>
   <customwidget>
    <class>KPushButton</class>
