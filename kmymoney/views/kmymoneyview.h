@@ -66,7 +66,7 @@ class KMyMoneyViewBase;
 class MyMoneyReport;
 class TransactionEditor;
 class KForecastView;
-
+class KMyMoneyTitleLabel;
 /**
   * This class represents the view of the MyMoneyFile which contains
   * Banks/Accounts/Transactions, Recurring transactions (or Bills & Deposits)
@@ -142,6 +142,8 @@ private:
   KPageWidgetItem* m_investmentViewFrame;
   KPageWidgetItem* m_reportsViewFrame;
   KPageWidgetItem* m_forecastViewFrame;
+  
+  KMyMoneyTitleLabel* m_header;
 
   bool m_inConstructor;
 
@@ -164,8 +166,6 @@ private:
   fileTypeE m_fileType;
 
 private:
-  void addTitleBar(QWidget* parent, const QString& title);
-
   void ungetString(QIODevice *qfile, char * buf, int len);
 
   /**
@@ -440,6 +440,13 @@ public:
     */
   void updateViewType(void);
 
+protected:
+  /**
+    * Overwritten because KMyMoney has it's custom header.
+    */
+  virtual bool showPageHeader() const;
+
+
 public slots:
   /**
     * This slot writes information about the page passed as argument @current
@@ -448,7 +455,7 @@ public slots:
     *
     * @param widget pointer to page widget
     */
-  void slotRememberPage(const QModelIndex current, const QModelIndex previous);
+  void slotCurrentPageChanged(const QModelIndex current, const QModelIndex previous);
 
   /**
     * Brings up a dialog to change the list(s) settings and saves them into the
