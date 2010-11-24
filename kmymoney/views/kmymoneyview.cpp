@@ -54,6 +54,7 @@
 #include <kapplication.h>
 #include <kdebug.h>
 #include <kdeversion.h>
+#include <ktitlewidget.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -105,8 +106,31 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
     m_inConstructor(true),
     m_fileOpen(false),
     m_fmode(0600),
-    m_lastViewSelected(0)
+    m_lastViewSelected(0),
+    m_header(0)
 {
+  // this is a workaround for the bug in KPageWidget that causes the header to be shown
+  // for a short while during page switch which causes a kind of bouncing of the page's
+  // content and if the page's content is at it's minimum size then during a page switch
+  // the main window's size is also increased to fit the header that is shown for a sort
+  // period - reading the code in kpagewidget.cpp we know that the header should be at (1,1)
+  // in a grid layout so if we find it there remove it for good to avoid the described issues
+  QGridLayout* gridLayout =  qobject_cast<QGridLayout*>(layout());
+  if (gridLayout) {
+    QLayoutItem* headerItem = gridLayout->itemAtPosition(1, 1);
+    // make sure that we remove only the header - we avoid surprises if the header is not at (1,1) in the layout
+    if (headerItem && qobject_cast<KTitleWidget*>(headerItem->widget()) != NULL) {
+      gridLayout->removeItem(headerItem);
+      // after we remove the KPageWidget standard header replace it with our own title label
+      m_header = new KMyMoneyTitleLabel(this);
+      m_header->setObjectName("titleLabel");
+      m_header->setMinimumSize(QSize(100, 30));
+      m_header->setRightImageFile("pics/titlelabel_background.png");
+      m_header->setVisible(KMyMoneyGlobalSettings::showTitleBar());
+      gridLayout->addWidget(m_header, 1, 1);
+    }
+  }
+
   // the global variable kmymoney is not yet assigned. So we construct it here
   QObject* kmymoney = parent->parent();
   newStorage();
@@ -122,7 +146,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_homeView = new KHomeView();
   m_homeViewFrame = m_model->addPage(m_homeView, i18n("Home"));
   m_homeViewFrame->setIcon(KIcon("go-home"));
-  m_homeViewFrame->setHeader(QString(""));
   connect(m_homeView, SIGNAL(ledgerSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
   connect(m_homeView, SIGNAL(scheduleSelected(const QString&)),
@@ -134,8 +157,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_institutionsView = new KInstitutionsView();
   m_institutionsViewFrame = m_model->addPage(m_institutionsView, i18n("Institutions"));
   m_institutionsViewFrame->setIcon(KIcon("institution"));
-  m_institutionsViewFrame->setHeader(QString(""));
-  addTitleBar(m_institutionsView, i18n("Institutions"));
 
   connect(m_institutionsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_institutionsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectInstitution(const MyMoneyObject&)));
@@ -148,8 +169,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_accountsView = new KAccountsView();
   m_accountsViewFrame = m_model->addPage(m_accountsView, i18n("Accounts"));
   m_accountsViewFrame->setIcon(KIcon("account")); //krazy:exclude=iconnames
-  m_accountsViewFrame->setHeader(QString(""));
-  addTitleBar(m_accountsView, i18n("Accounts"));
 
   connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_accountsView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectInstitution(const MyMoneyObject&)));
@@ -167,8 +186,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_scheduleViewFrame = m_model->addPage(m_scheduledView, i18n("Scheduled\ntransactions"));
 #endif
   m_scheduleViewFrame->setIcon(KIcon("view-pim-calendar"));
-  m_scheduleViewFrame->setHeader(QString(""));
-  addTitleBar(m_scheduledView, i18n("Scheduled transactions"));
+
   connect(m_scheduledView, SIGNAL(scheduleSelected(const MyMoneySchedule&)), kmymoney, SLOT(slotSelectSchedule(const MyMoneySchedule&)));
   connect(m_scheduledView, SIGNAL(openContextMenu()), kmymoney, SLOT(slotShowScheduleContextMenu()));
   connect(m_scheduledView, SIGNAL(enterSchedule()), kmymoney, SLOT(slotScheduleEnter()));
@@ -179,8 +197,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_categoriesView = new KCategoriesView();
   m_categoriesViewFrame = m_model->addPage(m_categoriesView, i18n("Categories"));
   m_categoriesViewFrame->setIcon(KIcon("categories"));
-  m_categoriesViewFrame->setHeader(QString(""));
-  addTitleBar(m_categoriesView, i18n("Categories"));
+  
   connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectInstitution(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
@@ -191,8 +208,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_payeesView = new KPayeesView();
   m_payeesViewFrame = m_model->addPage(m_payeesView, i18n("Payees"));
   m_payeesViewFrame->setIcon(KIcon("system-users"));
-  m_payeesViewFrame->setHeader(QString(""));
-  addTitleBar(m_payeesView, i18n("Payees"));
+
   connect(kmymoney, SIGNAL(payeeCreated(const QString&)), m_payeesView, SLOT(slotSelectPayeeAndTransaction(const QString&)));
   connect(kmymoney, SIGNAL(payeeRename()), m_payeesView, SLOT(slotRenameButtonCliked()));
   connect(m_payeesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowPayeeContextMenu()));
@@ -203,7 +219,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_ledgerView = new KGlobalLedgerView();
   m_ledgerViewFrame = m_model->addPage(m_ledgerView, i18n("Ledgers"));
   m_ledgerViewFrame->setIcon(KIcon("ledger"));  //krazy:exclude=iconnames
-  m_ledgerViewFrame->setHeader(QString(""));
+
   connect(m_ledgerView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_ledgerView, SIGNAL(openContextMenu()), kmymoney, SLOT(slotShowTransactionContextMenu()));
   connect(m_ledgerView, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), kmymoney, SLOT(slotSelectTransactions(const KMyMoneyRegister::SelectedTransactions&)));
@@ -220,8 +236,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_investmentView = new KInvestmentView();
   m_investmentViewFrame = m_model->addPage(m_investmentView, i18n("Investments"));
   m_investmentViewFrame->setIcon(KIcon("investment"));
-  m_investmentViewFrame->setHeader(QString(""));
-  addTitleBar(m_investmentView, i18n("Investments"));
+
   connect(m_investmentView, SIGNAL(accountSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
   connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
@@ -231,14 +246,12 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_reportsView = new KReportsView();
   m_reportsViewFrame = m_model->addPage(m_reportsView, i18n("Reports"));
   m_reportsViewFrame->setIcon(KIcon("office-chart-tall-pie"));
-  m_reportsViewFrame->setHeader(QString(""));
 
   // Page 9
   m_budgetView = new KBudgetView();
   m_budgetViewFrame = m_model->addPage(m_budgetView, i18n("Budgets"));
   m_budgetViewFrame->setIcon(KIcon("budget"));
-  m_budgetViewFrame->setHeader(QString(""));
-  addTitleBar(m_budgetView, i18n("Budgets"));
+
   connect(m_budgetView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowBudgetContextMenu()));
   connect(m_budgetView, SIGNAL(selectObjects(const QList<MyMoneyBudget>&)), kmymoney, SLOT(slotSelectBudget(const QList<MyMoneyBudget>&)));
   connect(kmymoney, SIGNAL(budgetRename()), m_budgetView, SLOT(slotStartRename()));
@@ -247,17 +260,15 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_forecastView = new KForecastView();
   m_forecastViewFrame = m_model->addPage(m_forecastView, i18n("Forecast"));
   m_forecastViewFrame->setIcon(KIcon("forecast"));
-  m_forecastViewFrame->setHeader(QString(""));
-  addTitleBar(m_forecastView, i18n("Forecast"));
 
   //set the model
   setModel(m_model);
 
   setCurrentPage(m_homeViewFrame);
-  connect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRememberPage(const QModelIndex, const QModelIndex)));
+  connect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotCurrentPageChanged(const QModelIndex, const QModelIndex)));
 
   updateViewType();
-
+  
   m_inConstructor = false;
 }
 
@@ -267,25 +278,10 @@ KMyMoneyView::~KMyMoneyView()
   removeStorage();
 }
 
-void KMyMoneyView::addTitleBar(QWidget* parent, const QString& title)
-{
-  KMyMoneyTitleLabel* label = new KMyMoneyTitleLabel(parent);
-  label->setObjectName("titleLabel");
-  label->setMinimumSize(QSize(100, 30));
-  label->setRightImageFile("pics/titlelabel_background.png");
-  label->setText(title);
-  label->setVisible(KMyMoneyGlobalSettings::showTitleBar());
-  QBoxLayout* pBoxLayout = dynamic_cast<QBoxLayout *>(parent->layout());
-  if (pBoxLayout)
-    pBoxLayout->insertWidget(0, label);
-}
-
 void KMyMoneyView::showTitleBar(bool show)
 {
-  QList<KMyMoneyTitleLabel *> l = findChildren<KMyMoneyTitleLabel *>("titleLabel");
-
-  for (QList<KMyMoneyTitleLabel *>::const_iterator it = l.constBegin(); it != l.constEnd(); ++it)
-    (*it)->setVisible(show);
+  if (m_header)
+    m_header->setVisible(show);
 }
 
 void KMyMoneyView::updateViewType(void)
@@ -304,6 +300,11 @@ void KMyMoneyView::updateViewType(void)
       break;
   }
   setFaceType(faceType);
+}
+
+bool KMyMoneyView::showPageHeader() const
+{
+  return false;
 }
 
 void KMyMoneyView::showPage(KPageWidgetItem* pageItem)
@@ -1646,9 +1647,13 @@ void KMyMoneyView::progressCallback(int current, int total, const QString& msg)
   kmymoney->progressCallback(current, total, msg);
 }
 
-void KMyMoneyView::slotRememberPage(const QModelIndex current, const QModelIndex)
+void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QModelIndex)
 {
+  // remember the current page
   m_lastViewSelected = current.row();
+  // set the current page's title in the header
+  if (m_header)
+    m_header->setText(m_model->data(current).toString());
 }
 
 /* DO NOT ADD code to this function or any of it's called ones.
@@ -2184,7 +2189,6 @@ KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString&
 
   KPageWidgetItem* frm = m_model->addPage(viewBase, title);
   frm->setIcon(KIcon(icon));
-  frm->setHeader(QString("")); // hide the header and let the title bar do it's job
 
   connect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRememberPage(const QModelIndex, const QModelIndex)));
 
@@ -2208,7 +2212,6 @@ KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString&
 class KMyMoneyViewBase::Private
 {
 public:
-  KMyMoneyTitleLabel* m_titleLabel;
   QVBoxLayout* m_viewLayout;
 };
 
@@ -2220,14 +2223,6 @@ KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent, const QString& name, const Q
   d->m_viewLayout = new QVBoxLayout(this);
   d->m_viewLayout->setSpacing(6);
   d->m_viewLayout->setMargin(0);
-
-  d->m_titleLabel = new KMyMoneyTitleLabel(this);
-  d->m_titleLabel->setObjectName("titleLabel");
-  d->m_titleLabel->setMinimumSize(QSize(100, 30));
-  d->m_titleLabel->setRightImageFile("pics/titlelabel_background.png");
-  d->m_titleLabel->setText(title);
-  d->m_titleLabel->setVisible(KMyMoneyGlobalSettings::showTitleBar());
-  d->m_viewLayout->addWidget(d->m_titleLabel);
 }
 
 KMyMoneyViewBase::~KMyMoneyViewBase()
