@@ -353,11 +353,17 @@ public:
     if (parentAccounItem)
       setAccountData(model, parentAccounItem->index(), m_file->account(account.parentAccountId()));
     MyMoneyMoney accountTotalValue = item->data(AccountTotalValueRole).value<MyMoneyMoney>();
+    if (account.accountGroup() == MyMoneyAccount::Liability) {
+      accountTotalValue = -accountTotalValue; // the account is a liability so change the account value sign
+    }
     MyMoneyMoney institutionValue = institutionItem->data(AccountTotalValueRole).value<MyMoneyMoney>() + accountTotalValue;
     institutionItem->setData(QVariant::fromValue(institutionValue), AccountTotalValueRole);
     institutionItem->setData(false, CleanupRole);
     QModelIndex instIndex = institutionItem->index();
     QModelIndex newIndex = model->index(instIndex.row(), instIndex.column() + TotalValue, instIndex.parent());
+    if (institutionValue.isNegative()) {
+      model->setData(newIndex, KMyMoneyGlobalSettings::listNegativeValueColor(), Qt::ForegroundRole);
+    }
     model->setData(newIndex, institutionValue.formatMoney(m_file->baseCurrency()), Qt::DisplayRole);
     model->setData(newIndex, institutionValue.formatMoney(m_file->baseCurrency()), AccountTotalValueDisplayRole);
     model->setData(newIndex, font, Qt::FontRole);
