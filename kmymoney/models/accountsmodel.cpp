@@ -28,6 +28,7 @@
 
 #include <KLocalizedString>
 #include <KIconLoader>
+#include <KColorScheme>
 #include <KDebug>
 
 // ----------------------------------------------------------------------------
@@ -364,6 +365,8 @@ public:
     QModelIndex newIndex = model->index(instIndex.row(), instIndex.column() + TotalValue, instIndex.parent());
     if (institutionValue.isNegative()) {
       model->setData(newIndex, KMyMoneyGlobalSettings::listNegativeValueColor(), Qt::ForegroundRole);
+    } else {
+      model->setData(newIndex, KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color(), Qt::ForegroundRole);
     }
     model->setData(newIndex, institutionValue.formatMoney(m_file->baseCurrency()), Qt::DisplayRole);
     model->setData(newIndex, institutionValue.formatMoney(m_file->baseCurrency()), AccountTotalValueDisplayRole);
