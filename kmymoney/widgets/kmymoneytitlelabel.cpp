@@ -103,6 +103,7 @@ void KMyMoneyTitleLabel::paintEvent(QPaintEvent *e)
 void KMyMoneyTitleLabel::setText(const QString& txt)
 {
   m_text = txt;
+  m_text.replace('\n', QLatin1String(" "));
   update();
 }
 
