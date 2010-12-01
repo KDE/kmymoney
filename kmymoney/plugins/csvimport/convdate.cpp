@@ -134,3 +134,7 @@ void ConvertDate::dateFormatSelected(int dateFormat)
   m_dateFormatIndex = dateFormat;
 }
 
+void ConvertDate::setDateFormatIndex(int index)
+{
+  m_dateFormatIndex = index;
+}

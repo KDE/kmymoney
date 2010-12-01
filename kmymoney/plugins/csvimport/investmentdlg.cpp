@@ -43,6 +43,7 @@
 #include <KIO/NetAccess>
 #include <KAboutData>
 #include <KAboutApplicationDialog>
+
 // ----------------------------------------------------------------------------
 // Project Headers
 
@@ -95,7 +96,7 @@ InvestmentDlg::InvestmentDlg(QWidget* parent) :
   connect(comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(dateFormatSelected(int)));
   connect(comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), m_convertDat, SLOT(dateFormatSelected(int)));
   connect(comboBox_dateFormat, SIGNAL(activated(int)), m_convertDat, SLOT(dateFormatSelected(int)));
-  connect(comboBox_typeCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(typeColumnChanged(int)));
+  connect(comboBox_typeCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(typeColumnSelected(int)));
   connect(comboBox_dateCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(dateColumnSelected(int)));
   connect(comboBox_quantityCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(quantityColumnSelected(int)));
   connect(comboBox_priceCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(priceColumnSelected(int)));
@@ -120,7 +121,7 @@ void InvestmentDlg::changedType(const QString& newType)
 {
   if ((newType == "buy") || (newType == "sell") || (newType == "divx") ||
       (newType == "reinvdiv") || (newType == "shrsin") || (newType == "shrsout")) {
-    m_investProcessing->m_trInvestData.type = newType;
+    m_investProcessing->setTrInvestDataType(newType);
   }
 }
 
@@ -136,7 +137,7 @@ void InvestmentDlg::slotClose()
 
   KConfigGroup investmentGroup(config, "InvestmentSettings");
 
-  QString str = "$HOME/" + m_investProcessing->m_csvPath.section('/', 3);
+  QString str = "$HOME/" + m_investProcessing->csvPath().section('/', 3);
   investmentGroup.writeEntry("InvDirectory", str);
   investmentGroup.writeEntry("StartLine", spinBox_skip->value() - 1);
   investmentGroup.config()->sync();
@@ -147,7 +148,7 @@ void InvestmentDlg::slotClose()
   profileGroup.writeEntry("FieldDelimiter", comboBox_fieldDelim->currentIndex());
   profileGroup.config()->sync();
 
-  if (!m_investProcessing->m_inFileName.isEmpty()) { //          don't save column numbers if no file loaded
+  if (!m_investProcessing->inFileName().isEmpty()) { //          don't save column numbers if no file loaded
     KConfigGroup invcolumnsGroup(config, "InvColumns");
     invcolumnsGroup.writeEntry("DateCol", comboBox_dateCol->currentIndex());
     invcolumnsGroup.writeEntry("PayeeCol", comboBox_typeCol->currentIndex());
@@ -169,7 +170,7 @@ void InvestmentDlg::slotClose()
   investmentGroup.writeEntry( "RemoveParam", invcsv->removeList);
   investmentGroup.config()->sync();*/
 
-  m_investProcessing->m_inFileName.clear();
+  m_investProcessing->inFileName().clear();
   tableWidget->clear();//     in case later reopening window, clear old contents now
   m_csvImportDlg->show();
   InvestmentDlg::close();
@@ -184,13 +185,13 @@ void InvestmentDlg::closeEvent(QCloseEvent *event)
 void InvestmentDlg::resizeEvent(QResizeEvent * event)
 {
   event->accept();
-  if (!m_investProcessing->m_inFileName.isEmpty())
+  if (!m_investProcessing->inFileName().isEmpty())
     m_investProcessing->updateScreen();
 }
 
 void InvestmentDlg::helpSelected()
 {
-  KAboutData aboutData("csvImporter",  0,  ki18n("CSV Importer"),  "0.2.5",
+  KAboutData aboutData("csvImporter",  0,  ki18n("CSV Importer"),  "0.3.0",
                        ki18n("A plugin to enable import of \n   CSV format files into KMyMoney."),
                        KAboutData::License_GPL,  ki18n("Copyright (c) 2010 Allan Anderson"),
                        // Optional text shown in the About box.
@@ -210,3 +211,24 @@ void InvestmentDlg::helpSelected()
   KAboutApplicationDialog* aboutDlg = new KAboutApplicationDialog(&aboutData,  0);
   aboutDlg->show();
 }
+
+int InvestmentDlg::tableFrameHeight()
+{
+  return m_tableFrameHeight;
+}
+
+void InvestmentDlg::setTableFrameHeight(int val)
+{
+  m_tableFrameHeight = val;
+}
+
+int InvestmentDlg::tableFrameWidth()
+{
+  return m_tableFrameWidth;
+}
+
+void InvestmentDlg::setTableFrameWidth(int val)
+{
+  m_tableFrameWidth = val;
+}
+

@@ -1,6 +1,6 @@
 /***************************************************************************
-                            redefine.h
-                        -------------------
+redefine.h
+-------------------
 begin                 : Sat Jan 01 2010
 copyright             : (C) 2010 by Allan Anderson
 email                 : aganderson@ukonline.co.uk
@@ -20,11 +20,13 @@ email                 : aganderson@ukonline.co.uk
 
 #include <KDialog>
 
+#include "mymoneymoney.h"
 #include "ui_redefinedlgdecl.h"
 
 #define defMAXCOL 14
 
 class InvestmentDlg;
+class MyMoneyMoney;
 
 class RedefineDlgDecl : public QWidget, public Ui::RedefineDlgDecl
 {
@@ -42,18 +44,17 @@ public:
   RedefineDlg();
   ~RedefineDlg();
 
-  int              m_amountColumn;
-  int              m_columnTotalWidth;
-  int              m_mainHeight;
-  int              m_mainWidth;
-  int              m_priceColumn;
-  int              m_quantityColumn;
-  int              m_typeColumn;
+  QString          accountName();
 
-  QString          m_accountName;
-  QString          m_inBuffer;
+  void             setAmountColumn(int col);
+  void             setPriceColumn(int col);
+  void             setQuantityColumn(int col);
+  void             setTypeColumn(int col);
+  void             setAccountName(const QString& val);
+  void             clearAccountName();
+  void             setInBuffer(const QString& val);
 
-  QStringList      m_columnList;
+  void             setColumnList(const QStringList& list);
 
   /**
   * This method validates the column numbers entered by the user.  It then
@@ -67,7 +68,7 @@ public:
   * based on the input values.  It then displays the transaction, allowing
   * the user to select the proper activity type.  This selection also is validated.
   */
-  int              suspectType(QString info);
+  int              suspectType(const QString& info);
 
 signals:
   /**
@@ -84,14 +85,25 @@ private:
   QPixmap          m_iconYes;
   QPixmap          m_iconNo;
 
+  QString          m_accountName;
+  QString          m_inBuffer;
   QString          m_newType;
+
   QStringList      m_okTypeList;
+  QStringList      m_columnList;
 
+  int              m_amountColumn;
+  int              m_columnTotalWidth;
+  int              m_mainHeight;
+  int              m_mainWidth;
+  int              m_priceColumn;
+  int              m_quantityColumn;
   int              m_ret;
+  int              m_typeColumn;
 
-  float            m_price;
-  float            m_quantity;
-  float            m_amount;
+  MyMoneyMoney     m_price;
+  MyMoneyMoney     m_quantity;
+  MyMoneyMoney     m_amount;
 
   /**
   * This method displays the transaction, highlighting the column containing the
@@ -104,7 +116,7 @@ private:
   * This method displays a dialog box, requiring the user to enter a checking/brokerage
   * account name for transfer of funds for buy, sell or dividend transactions.
   */
-  QString          getParameter(QString aName);
+  QString          inputParameter(const QString& aName);
 
   void             resizeEvent(QResizeEvent * event);
 
@@ -125,7 +137,7 @@ private slots:
   * This method is called when the user selects a new investment type, which replaces the
   * original one.  The OK button is then enabled.
   */
-  void             slotNewActionSelected(QString type);
+  void             slotNewActionSelected(const QString& type);
 
   /**
   * This method is called if the user cancels the dialog, and returns KMessageBox::Cancel
@@ -142,7 +154,7 @@ private slots:
   /**
   * This method extracts the transaction values from the columns selected by the user.
   */
-  void             getValues();
+  void             convertValues();
 };
 
 #endif // REDEFINEDLG_H

@@ -1,5 +1,5 @@
 # patch the version with the version defined in the build system
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/kmm_csvimport.desktop 
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/kmm_csvimport.desktop
   ${CMAKE_CURRENT_BINARY_DIR}/kmm_csvimport.desktop
 )
 
@@ -16,8 +16,8 @@ SET(kmm_csvimport_PART_SRCS
   investprocessing.cpp
   redefinedlg.cpp
   convdate.cpp
+  csvutil.cpp
 )
-
 
 KDE4_ADD_UI_FILES(kmm_csvimport_PART_SRCS
   csvimporterdlgdecl.ui
@@ -39,6 +39,12 @@ IF(KDE4_BUILD_TESTS)
   KDE4_ADD_UNIT_TEST(csvdatetest TESTNAME kmymoney-plugin-csvdatetest
     ${csvdatetest_SRCS})
   TARGET_LINK_LIBRARIES(csvdatetest ${QT_AND_KDECORE_LIBS}
+    ${QT_QTTEST_LIBRARY} ${KDE4_KDECORE_LIBS} )
+
+  SET(parsedatatest_SRCS parsedatatest.cpp csvutil.cpp)
+  KDE4_ADD_UNIT_TEST(parsedatatest TESTNAME kmymoney-plugin-parsedatatest
+    ${parsedatatest_SRCS})
+  TARGET_LINK_LIBRARIES(parsedatatest ${QT_AND_KDECORE_LIBS}
     ${QT_QTTEST_LIBRARY} ${KDE4_KDECORE_LIBS} )
 ENDIF(KDE4_BUILD_TESTS)
 

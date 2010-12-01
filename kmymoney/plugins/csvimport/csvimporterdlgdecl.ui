@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>703</width>
-    <height>767</height>
+    <width>682</width>
+    <height>754</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>600</width>
+    <width>640</width>
     <height>0</height>
    </size>
   </property>
@@ -30,7 +30,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
-       <layout class="QVBoxLayout" name="verticalLayout" stretch="55,125,300">
+       <layout class="QVBoxLayout" name="verticalLayout" stretch="35,80,160">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_top" stretch="40,322,40">
           <property name="rightMargin">
@@ -225,11 +225,6 @@
                    <string comment="punctuation mark  used as field delimiter">Tab (\t)</string>
                   </property>
                  </item>
-                 <item>
-                  <property name="text">
-                   <string comment="punctuation markcombination  used as field delimiter" extracomment="special case format">Quote (\&quot;,\&quot;)</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
               </layout>
@@ -280,12 +275,12 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_mid" stretch="30,300,30">
+         <layout class="QHBoxLayout" name="horizontalLayout_mid" stretch="5,600,5">
           <item>
            <widget class="QFrame" name="frame_4">
             <property name="minimumSize">
              <size>
-              <width>10</width>
+              <width>0</width>
               <height>0</height>
              </size>
             </property>
@@ -301,13 +296,13 @@
            <widget class="QGroupBox" name="groupBox">
             <property name="minimumSize">
              <size>
-              <width>500</width>
+              <width>600</width>
               <height>160</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>600</width>
+              <width>720</width>
               <height>600</height>
              </size>
             </property>
@@ -334,7 +329,7 @@
               </widget>
              </item>
              <item row="1" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout">
+              <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0,0">
                <item>
                 <layout class="QVBoxLayout" name="verticalLayout_A">
                  <property name="leftMargin">
@@ -436,6 +431,12 @@
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>120</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
                    <property name="font">
                     <font>
                      <underline>false</underline>
@@ -450,6 +451,12 @@
                   <widget class="KComboBox" name="comboBox_dateCol">
                    <property name="enabled">
                     <bool>false</bool>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>120</width>
+                     <height>16777215</height>
+                    </size>
                    </property>
                    <property name="font">
                     <font>
@@ -466,6 +473,12 @@
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>120</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
                    <property name="font">
                     <font>
                      <underline>false</underline>
@@ -480,6 +493,12 @@
                   <widget class="KComboBox" name="comboBox_memoCol">
                    <property name="enabled">
                     <bool>false</bool>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>120</width>
+                     <height>16777215</height>
+                    </size>
                    </property>
                    <property name="font">
                     <font>
@@ -845,7 +864,7 @@ Ensure no trailer lines are imported.</string>
            <widget class="QFrame" name="frame_5">
             <property name="minimumSize">
              <size>
-              <width>10</width>
+              <width>0</width>
               <height>0</height>
              </size>
             </property>

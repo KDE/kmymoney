@@ -38,6 +38,7 @@ class CsvProcessing;
 class InvestmentDlg;
 class CsvImporterPlugin;
 class MyMoneyStatement;
+class ValidateColumn;
 
 class CsvImporterDlgDecl : public QWidget, public Ui::CsvImporterDlgDecl
 {
@@ -55,20 +56,52 @@ public:
   CsvImporterDlg(QWidget* parent = 0);
   ~CsvImporterDlg();
 
-  void m_action(bool arg1);
-
   ConvertDate*        m_convertDate;
   CsvProcessing*      m_csvprocessing;
   InvestmentDlg*      m_investmentDlg;//below
+  ValidateColumn*     m_validateColumn;
   CsvImporterPlugin*  m_plugin;
+
+  QString          columnType(int column);
+  void             clearColumnType(int column);
+  void             clearPreviousColumn();
+  bool             amountSelected();
+  void             setAmountSelected(bool val);
+  bool             creditSelected();
+  void             setCreditSelected(bool val);
+  bool             debitSelected();
+  void             setDebitSelected(bool val);
+  bool             dateSelected();
+  void             setDateSelected(bool val);
+  bool             payeeSelected();
+  void             setPayeeSelected(bool val);
+  void             setMemoSelected(bool val);
+  void             setNumberSelected(bool val);
+  int              amountColumn();
+  void             setAmountColumn(int column);
+  int              creditColumn();
+  void             setCreditColumn(int column);
+  int              debitColumn();
+  void             setDebitColumn(int val);
+  int              tableFrameHeight();
+  void             setTableFrameHeight(int val);
+  int              tableFrameWidth();
+  void             setTableFrameWidth(int val);
+  int              maxColumnCount();
+  void             setMaxColumnCount(int val);
+
+private:
+  QString          m_columnType[MAXCOL];//  holds field types - date, payee, etc.
+  QString          m_previousType;
 
   bool             m_amountSelected;
   bool             m_creditSelected;
-  bool             m_debitSelected;
   bool             m_dateSelected;
-  bool             m_payeeSelected;
+  bool             m_debitSelected;
+  bool             m_duplicate;
   bool             m_memoSelected;
   bool             m_numberSelected;
+  bool             m_payeeSelected;
 
   int              m_amountColumn;
   int              m_creditColumn;
@@ -77,14 +110,10 @@ public:
   int              m_memoColumn;
   int              m_numberColumn;
   int              m_payeeColumn;
-
+  int              m_previousColumn;
   int              m_tableFrameHeight;
   int              m_tableFrameWidth;
   int              m_maxColumnCount;
-
-  QString          m_columnType[MAXCOL];
-
-private:
 
   /**
   * This method will receive close events, calling slotClose().
@@ -142,7 +171,7 @@ private slots:
   * This method is called when the Number column is activated.
   * It will validate the column selection.
   */
-  void           numberColumnChanged(int);
+  void           numberColumnSelected(int);
 
   /**
   * This method is called when the Payee column is activated.
@@ -161,6 +190,15 @@ private slots:
   * be saved and the plugin will be terminated.
   */
   void           slotClose();
+
+  /**
+  * This method is called when it is detected that the user has selected the
+  * same column for two different fields.  The column detecting the error
+  * has to reset the other column.
+  */
+  void           resetComboBox(const QString& comboBox, const int& col);
+
+  int            validateColumn(const int& col, const QString& type);
 
 signals:
   /**

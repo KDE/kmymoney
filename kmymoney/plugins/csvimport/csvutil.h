@@ -1,6 +1,6 @@
 /***************************************************************************
-                        convDate.h
-                    -------------------
+                               csvutil.h
+                              -----------
 begin                : Sat Jan 01 2010
 copyright            : (C) 2010 by Allan Anderson
 email                : aganderson@ukonline.co.uk
@@ -15,39 +15,47 @@ email                : aganderson@ukonline.co.uk
 *                                                                         *
 ***************************************************************************/
 
-#ifndef CONVDATE_H
-#define CONVDATE_H
+#ifndef CSVUTIL_H
+#define CSVUTIL_H
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QDate>
+#include <QtCore/QStringList>
+#include <QObject>
 
-class ConvertDate: public QObject
+
+class ParseLine: public QObject
 {
   Q_OBJECT
 
 public:
-  ConvertDate();
-  ~ConvertDate();
+  ParseLine();
+  ~ParseLine();
 
   /**
-  * This method is used to convert a QString date into QDate() format.
-  * If the  date is invalid, QDate() is returned.
-  */
-  QDate convertDate(const QString& txt);
+   * This method is used to parse each line of data, splitting it into
+   * separate fields, via the field delimiter character.  It also detects
+   * where a string has been erroneously split because it contains one or
+   * more 'thousand separators' which happen to be the same as the field
+   * delimiter, and re-assembles the string.
+   */
+  QStringList      parseLine(const QString& data);
 
-  void setDateFormatIndex(int index);
+  QString          fieldDelimiterCharacter(int index);
 
-private:
-  int m_dateFormatIndex;
+  void             setFieldDelimiterIndex(int index);
+  void             setFieldDelimiterCharacter(int index);
 
-private slots:
+private :
 
-  /**
-  * This method is called when the user clicks the Date button and selects
-  * the date format for the input file.
-  */
-  void dateFormatSelected(int dateFormat);
+  QStringList      m_delimCharList;
+
+  QString          m_fieldDelimiterCharacter;
+  QString          m_inBuffer;
+
+  int              m_fieldDelimiterIndex;
+
 }
 ;
 #endif

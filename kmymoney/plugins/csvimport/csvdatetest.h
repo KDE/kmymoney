@@ -1,24 +1,23 @@
 /***************************************************************************
-                            csvdatetest.h
-                         -------------------
-    begin                : Sat Jan 01 2010
-    copyright            : (C) 2010 by Allan Anderson
-    email                : aganderson@ukonline.co.uk
- ***************************************************************************/
+                        csvdatetest.h
+                     -------------------
+begin                : Sat Jan 01 2010
+copyright            : (C) 2010 by Allan Anderson
+email                : aganderson@ukonline.co.uk
+***************************************************************************/
 
 /***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+*                                                                         *
+*   This program is free software; you can redistribute it and/or modify  *
+*   it under the terms of the GNU General Public License as published by  *
+*   the Free Software Foundation; either version 2 of the License, or     *
+*   (at your option) any later version.                                   *
+*                                                                         *
+***************************************************************************/
 #ifndef CSVDATETEST_H
 #define CSVDATETEST_H
 
 #include <QtCore/QObject>
-///#include <QtCore/QString>
 
 class ConvertDate;
 

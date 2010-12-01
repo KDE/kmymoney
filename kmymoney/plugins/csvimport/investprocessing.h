@@ -1,6 +1,6 @@
 /***************************************************************************
-                        investprocessing.h
-                        ------------------
+                       investprocessing.h
+                       ------------------
 begin                 : Sat Jan 01 2010
 copyright             : (C) 2010 by Allan Anderson
 email                 : aganderson@ukonline.co.uk
@@ -38,9 +38,11 @@ email                 : aganderson@ukonline.co.uk
 
 class ConvertDate;
 class CsvImporterDlg;
+///class ValidateColumn;
 class InvestmentDlg;
-class MyMoneyStatement;
 class RedefineDlg;
+class ParseLine;
+class MyMoneyStatement;
 
 class InvestProcessing : public QObject
 {
@@ -50,24 +52,11 @@ public:
   InvestProcessing();
   ~InvestProcessing();
 
-  struct qifInvestData {
+  InvestmentDlg*    m_investDlg;
+  ParseLine*        m_parseline;
+///  ValidateColumn*   m_validateColumn;
 
-    QString      memo;
-    QString      price;
-    QString      quantity;
-    QString      amount;
-    QString      fee;
-    QString      payee;
-    QString      security;
-    QString      brokerageAccnt;
-    QString      type;
-    QDate        date;
-  }              m_trInvestData;
-
-  InvestmentDlg* m_investDlg;
-
-  QString        m_inFileName;
-  QString        m_csvPath;
+  void           setTrInvestDataType(const QString& val);
 
   /**
   * This method is called after startup, to initialise some parameters.
@@ -78,7 +67,35 @@ public:
   * This method is called to redraw the window according to the number of
   * columns and rows to be displayed.
   */
+
+  /**
+  * This method is called when it is detected that the user has selected the
+  * same column for two different fields.  The column detecting the error
+  * has to reset the other column.
+  */
+///  void           resetComboBox(const QString& comboBox, int& col);///, int col
+
+  void           clearColumnType(int column);
+  void           setColumnType(int column, const QString& type);
+
+///  int            previousColumn();
+///  void           setPreviousColumn(int col);
+
+  QString        previousType();
+  void           clearPreviousType();
+  void           setPreviousType(const QString& type);
+
+  void           setInFileName(const QString& val);
   void           updateScreen();
+
+  QString        columnType(int column);
+  QString        csvPath();
+  QString        inFileName();
+
+
+
+  int            m_endColumn;
+///  void*         caller;
 
 public:
 signals:
@@ -126,7 +143,7 @@ public slots:
   * This method is called when the Memo column is activated.
   * Multiple columns may be selected sequentially.
   */
-  void           memoColumnSelected(int);
+  void           memoColumnSelected(int col);
 
   /**
   * This method is called when the Quantity column is activated.
@@ -182,7 +199,7 @@ public slots:
   * This method is called when the activity 'Type/Action' column is activated.
   * It will validate the column selection.
   */
-  void           typeColumnChanged(int);
+  void           typeColumnSelected(int);
 
 private:
 
@@ -253,7 +270,7 @@ private:
   * This method is called during input.  It validates the action types
   * in the input file, and assigns appropriate QString types.
   */
-  int            processActionType(QString&);
+  int            processActionType(QString& type);
 
   /**
   * This method is called when the user clicks 'Accept'.
@@ -267,19 +284,52 @@ private:
   * It will request user input of the brokerage/current account to be used, and
   * also of the column defining the payee/detail.
   */
-  QString        getAccountName(QString);
+  QString        accountName(const QString& aName);
 
   /**
   * This method is called during input if a brokerage type activity is found.
   * It will request user input of the column defining the payee/detail.
   */
-  int            getColumnNumber(QString column);
+  int            columnNumber(const QString& column);
 
   /**
   * This method is called on opening the plugin.
   * It will add all codec names to the encoding combobox.
   */
   void           setCodecList(const QList<QTextCodec *> &list);
+
+  /**
+  * This method is called when it is detected that the user has selected the
+  * same column for two different fields.  The column detecting the error
+  * has to reset the other column.
+  */
+///  void           resetComboBox(const QString& comboBox, int col);
+
+  /**
+  * Because the memo field allows multiple selections, it helps to be able
+  * to see which columns are selected already, particularly if a column
+  * selection gets deleted. This is achieved by adding a '*' character
+  * after the column number of each selected column in the menu combobox.
+  * This method is called to remove the '*' characters when a file is
+  * reloaded, or when the user clears his selections.
+  */
+  void           clearComboBoxText();
+
+///  int validateNewColumn(int col, const QString& type);
+
+  struct qifInvestData {
+
+    QString      memo;
+    MyMoneyMoney price;
+    MyMoneyMoney quantity;
+    MyMoneyMoney amount;
+    MyMoneyMoney fee;
+    QString      payee;
+    QString      security;
+    QString      brokerageAccnt;
+    QString      type;
+    QDate        date;
+  }              m_trInvestData;
 
   bool           m_amountSelected;
   bool           m_brokerage;
@@ -293,16 +343,23 @@ private:
   bool           m_typeSelected;
 
   int            m_dateFormatIndex;
+  int            m_fieldDelimiterIndex;
   int            m_maxColumnCount;
   int            m_maxWidth;
   int            m_payeeColumn;
   int            m_amountColumn;
+  int            m_dateColumn;
+  int            m_feeColumn;
+  int            m_memoColumn;
+  int            m_priceColumn;
+  int            m_previousColumn;
+  int            m_quantityColumn;
+  int            m_typeColumn;
   int            m_width;
   int            m_endLine;
   int            m_startLine;
   int            m_row;
   int            m_height;
-  int            m_lastColumn;
 
   QString        m_accountName;
   QString        m_brokerBuff;
@@ -310,7 +367,10 @@ private:
   QString        m_dateFormat;
   QString        m_fieldDelimiter_char;
   QString        m_inBuffer;
+  QString        m_csvPath;
+  QString        m_inFileName;
   QString        m_outBuffer;
+  QString        m_previousType;
   QString        m_tempBuffer;
 
   QList<QTextCodec *>   m_codecs;
@@ -323,6 +383,7 @@ private:
   QStringList    m_sellList;
   QStringList    m_removeList;
   QStringList    m_dateFormats;
+  QStringList    m_columnList;
 
   KUrl           m_url;
   QFile*         m_inFile;
@@ -340,5 +401,14 @@ private slots:
   * All column selections are cleared.
   */
   void           clearColumnsSelected();
+
+  /**
+  * This method is called when it is detected that the user has selected the
+  * same column for two different fields.  The column detecting the error
+  * has to reset the other column.
+  */
+  void           resetComboBox(const QString& comboBox, const int& col);
+
+  int            validateNewColumn(const int& col, const QString& type);
 };
 #endif // INVESTPROCESSING_H

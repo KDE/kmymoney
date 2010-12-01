@@ -52,30 +52,39 @@
 #include "investmentdlg.h"
 #include "mymoneystatement.h"
 #include "mymoneyaccount.h"
-
-class CsvImporterPlugin;
-class ConvertDate;
-class InvestmentDlg;
-class CsvImporterDlgDecl;
+#include "csvutil.h"
 
 CsvProcessing::CsvProcessing()
 {
+  m_importNow = false;
+
+  m_dateFormatIndex = 0;
+  m_endLine = 0;
+  m_fieldDelimiterIndex = 0;
+  m_endColumn = 0;
+  m_maxWidth = 0;
+  m_row = 0;
+  m_startLine = 0;
+  m_width = 0;
+
+  m_parseline = new ParseLine;
 }
 
 CsvProcessing::~CsvProcessing()
 {
+  delete m_parseline;
 }
 
 void CsvProcessing::init()
 {
   m_dateFormats << "yyyy/MM/dd" << "MM/dd/yyyy" << "dd/MM/yyyy";
-  m_lastColumn = MAXCOL;
+  m_endColumn = MAXCOL;
   clearSelectedFlags();
   readSettings();
 
   m_dateFormatIndex = m_csvDialog->comboBox_dateFormat->currentIndex();
   m_date = m_dateFormats[m_dateFormatIndex];
-  m_csvDialog->m_convertDate->m_dateFormatIndex = m_dateFormatIndex;
+  m_csvDialog->m_convertDate->setDateFormatIndex(m_dateFormatIndex);
 
   findCodecs();
   setCodecList(m_codecs);
@@ -88,9 +97,10 @@ void CsvProcessing::fileDialog()
   if (m_csvPath.isEmpty()) {
     m_csvPath = "~/";
   }
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-csvbank"),
-      i18n("*.csv *.PRN *.txt | CSV Files\n *.*|All files (*.*)"),
-      0);
+  QPointer<KFileDialog> dialog =
+    new KFileDialog(KUrl("kfiledialog:///kmymoney-csvbank"),
+                    i18n("*.csv *.PRN *.txt | CSV Files\n *.*|All files (*.*)"),
+                    0);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
   if (dialog->exec() == QDialog::Accepted) {
     m_url = dialog->selectedUrl();
@@ -111,11 +121,11 @@ void CsvProcessing::fileDialog()
 
   if (m_inFileName.isEmpty()) return;
   m_importNow = false;//   Avoid attempting date formatting on headers
-
+  clearComboBoxText();//                    to clear any '*' in memo combo text
   readFile(m_inFileName, 0);
   m_csvPath = m_inFileName;
   posn = m_csvPath.lastIndexOf("/");
-  m_csvPath.truncate(posn + 1);//   keep last "/"
+  m_csvPath.truncate(posn + 1);   //   keep last "/"
 
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
 
@@ -156,22 +166,24 @@ void CsvProcessing::enableInputs()
 
 void CsvProcessing::clearColumnsSelected()
 {
+  m_csvDialog->clearPreviousColumn();
   clearSelectedFlags();
   clearColumnNumbers();
+  clearComboBoxText();
 }
 
 void CsvProcessing::clearSelectedFlags()
 {
   for (int i = 0; i < MAXCOL; i++)
-    m_csvDialog->m_columnType[i].clear();//   set to all empty
+    m_csvDialog->clearColumnType(i);   //   set to all empty
 
-  m_csvDialog->m_dateSelected = false;
-  m_csvDialog->m_payeeSelected = false;
-  m_csvDialog->m_amountSelected = false;
-  m_csvDialog->m_debitSelected = false;
-  m_csvDialog->m_creditSelected = false;
-  m_csvDialog->m_memoSelected = false;
-  m_csvDialog->m_numberSelected = false;
+  m_csvDialog->setDateSelected(false);
+  m_csvDialog->setPayeeSelected(false);
+  m_csvDialog->setAmountSelected(false);
+  m_csvDialog->setDebitSelected(false);
+  m_csvDialog->setCreditSelected(false);
+  m_csvDialog->setMemoSelected(false);
+  m_csvDialog->setNumberSelected(false);
   m_csvDialog->radio_amount->setEnabled(true);
   m_csvDialog->radio_debCred->setEnabled(true);
 }
@@ -187,21 +199,11 @@ void CsvProcessing::clearColumnNumbers()
   m_csvDialog->comboBox_creditCol->setCurrentIndex(-1);
 }
 
-void CsvProcessing::disableInputs()
+void CsvProcessing::clearComboBoxText()
 {
-  m_csvDialog->checkBox_qif->setEnabled(false);
-  m_csvDialog->checkBox_qif->setChecked(false);
-  m_csvDialog->spinBox_skip->setEnabled(false);
-  m_csvDialog->comboBox_numberCol->setEnabled(false);
-  m_csvDialog->comboBox_dateCol->setEnabled(false);
-  m_csvDialog->comboBox_payeeCol->setEnabled(false);
-  m_csvDialog->comboBox_memoCol->setEnabled(false);
-  m_csvDialog->comboBox_amountCol->setEnabled(false);
-  m_csvDialog->comboBox_debitCol->setEnabled(false);
-  m_csvDialog->comboBox_creditCol->setEnabled(false);
-  m_csvDialog->button_clear->setEnabled(false);
-  m_csvDialog->spinBox_skipLast->setEnabled(false);
-  m_csvDialog->button_saveAs->setEnabled(false);
+  for (int i = 0; i < MAXCOL; i++) {
+    m_csvDialog->comboBox_memoCol->setItemText(i, QString().setNum(i + 1));
+  }
 }
 
 void CsvProcessing::encodingChanged()
@@ -221,9 +223,9 @@ void CsvProcessing::findCodecs()
     QString sortKey = codec->name().toUpper();
     int rank;
 
-    if (sortKey.startsWith("UTF-8")) {  // krazy:exclude=strings
+    if (sortKey.startsWith("UTF-8")) {       // krazy:exclude=strings
       rank = 1;
-    } else if (sortKey.startsWith("UTF-16")) {  // krazy:exclude=strings
+    } else if (sortKey.startsWith("UTF-16")) {      // krazy:exclude=strings
       rank = 2;
     } else if (iso8859RegExp.exactMatch(sortKey)) {
       if (iso8859RegExp.cap(1).size() == 1)
@@ -261,7 +263,7 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
   QTextStream inStream(&m_inFile);
 
   int encodeIndex = m_csvDialog->comboBox_encoding->currentIndex();
-  QTextCodec *codec = QTextCodec::codecForMib(encodeIndex);
+  QTextCodec* codec = QTextCodec::codecForMib(encodeIndex);
   inStream.setCodec(codec);
 
   m_csvDialog->tableWidget->clear();// including vert headers
@@ -270,7 +272,7 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
   m_outBuffer = "!Type:Bank\n";
   m_row = 0;
   m_maxWidth = 0;
-  m_csvDialog->m_maxColumnCount = 0;
+  m_csvDialog->setMaxColumnCount(0);
 
   m_fieldDelimiterIndex = m_csvDialog->comboBox_fieldDelim->currentIndex();
 
@@ -280,105 +282,78 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
     if (m_inBuffer.isEmpty())
       continue;
     lineCount ++;
-
-    if (lineCount < m_startLine) { //not yet reached first wanted line
+    if (lineCount < m_startLine) {   //not yet reached first wanted line
       continue;
     }
     //  if first pass or if not at last line, continue
-    if ((!m_endLine == 0) && (lineCount >= m_endLine)) { // m_endLine is set after first pass
-      m_csvDialog->spinBox_skipLast->setValue(lineCount);//  else break
+    if ((!m_endLine == 0) && (lineCount >= m_endLine)) {       // m_endLine is set after first pass
+      m_csvDialog->spinBox_skipLast->setValue(lineCount);   //  else break
       break;
     }
 
     displayLine(m_inBuffer);
 
-    if (m_importNow) {// user now ready to continue
-      int ret = (processQifLine(m_inBuffer));// parse a line
+    if (m_importNow) {  // user now ready to continue
+      int ret = (processQifLine(m_inBuffer));     // parse a line
       if (ret == KMessageBox::Ok) {
         csvImportTransaction(st);
       } else
         m_importNow = false;
     }
   }// end of while
-//reached end of data
+  //reached end of data
 
   updateScreen();// discard unwanted header lines
   m_csvDialog->label_skip->setEnabled(true);
   m_csvDialog->spinBox_skip->setEnabled(true);
   m_csvDialog->spinBox_skipLast->setValue(lineCount + 1);
-  m_lastColumn = m_csvDialog->m_maxColumnCount;
+  m_endColumn = m_csvDialog->maxColumnCount();
 
   if (m_importNow) {
     emit statementReady(st);
     m_importNow = false;
   }
-
+  m_csvDialog->checkBox_qif->setChecked(false);
   m_inFile.close();
 }
 
 void CsvProcessing::displayLine(const QString& data)
 {
-  const QString  delimChar[] = {",", ";", ":", "\t", "\",\""};
-  m_inBuffer = data;
-  m_fieldDelimiterIndex = m_csvDialog->comboBox_fieldDelim->currentIndex();
-  m_fieldDelimiterCharacter = delimChar[m_fieldDelimiterIndex];
   if (m_importNow) {
     if (m_csvDialog->radio_amount->isChecked()) {
-      m_csvDialog->m_amountColumn = m_csvDialog->comboBox_amountCol->currentIndex();
-      m_csvDialog->m_debitColumn = -1;
-      m_csvDialog->m_creditColumn = -1;
+      m_csvDialog->setAmountColumn(m_csvDialog->comboBox_amountCol->currentIndex());
+      m_csvDialog->setDebitColumn(-1);
+      m_csvDialog->setCreditColumn(-1);
     } else {
-      m_csvDialog->m_amountColumn = -1;
-      m_csvDialog->m_debitColumn = m_csvDialog->comboBox_debitCol->currentIndex();
-      m_csvDialog->m_creditColumn = m_csvDialog->comboBox_creditCol->currentIndex();
-    }
-  }
-
-  QStringList listIn = m_inBuffer.split(m_fieldDelimiterCharacter);// firstly, split on m_fieldDelim_char
-  QStringList listOut;
-  QString tmp;
-  tmp.clear();
-
-  // look for '"' in case of fieldDelim_char within string
-  foreach (const QString& txt, listIn) {
-    if (!txt.startsWith('"')) { // if no leading '"', no problem so...
-      if (!tmp.isEmpty()) {
-        tmp += txt;// append delimited strings
-        if (txt.endsWith('"')) { // end of text string
-          listOut << tmp;//   ...now complete string is in tmp
-          tmp.clear();
-        }
-      } else
-        listOut << txt;//  .split(m_fieldDelim_char, QString::SkipEmptyParts);//
-    } else//  has leading "
-    {//   text string might contain embedded field delim
-      if (txt.endsWith('"'))
-        listOut << txt;//   this string OK, just quoted
-      else
-        tmp = txt;//" at start, none at end so string not complete, so retain
-      //
+      m_csvDialog->setAmountColumn(-1);
+      m_csvDialog->setDebitColumn(m_csvDialog->comboBox_debitCol->currentIndex());
+      m_csvDialog->setCreditColumn(m_csvDialog->comboBox_creditCol->currentIndex());
     }
   }
 
   int col = 0;
   m_width = 6;
 
-  int columnCount = listOut.count();
-  if (columnCount > m_csvDialog->m_maxColumnCount)
-    m_csvDialog->m_maxColumnCount = columnCount;//   find highest column count
+  m_parseline->setFieldDelimiterIndex(m_csvDialog->comboBox_fieldDelim->currentIndex());
+  m_fieldDelimiterCharacter = m_parseline->fieldDelimiterCharacter(m_fieldDelimiterIndex);
+
+  m_columnList = m_parseline->parseLine(data);   //              split data into fields
+  int columnCount = m_columnList.count();
+  if (columnCount > m_csvDialog->maxColumnCount())
+    m_csvDialog->setMaxColumnCount(columnCount);   //            find maximum column count
   else
-    columnCount = m_csvDialog->m_maxColumnCount;
+    columnCount = m_csvDialog->maxColumnCount();
   m_csvDialog->tableWidget->setColumnCount(columnCount);
   m_inBuffer.clear();
   QStringList::const_iterator constIterator;
 
-  for (constIterator = listOut.constBegin(); constIterator != listOut.constEnd();
+  for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
        ++constIterator) {
     QString txt = (*constIterator);
-    QTableWidgetItem *item = new QTableWidgetItem; //new item for UI
+    QTableWidgetItem *item = new QTableWidgetItem; //         new item for UI
     item->setText(txt);
     m_csvDialog->tableWidget->setRowCount(m_row + 1);
-    m_csvDialog->tableWidget->setItem(m_row, col, item); //add items to UI here
+    m_csvDialog->tableWidget->setItem(m_row, col, item);    //   add items to UI here
     m_width += m_csvDialog->tableWidget->columnWidth(col) ;
     m_inBuffer += txt + m_fieldDelimiterCharacter;
     col ++;
@@ -419,7 +394,6 @@ void CsvProcessing::csvImportTransaction(MyMoneyStatement& st)
 
       case KMessageBox::Cancel:
         m_importNow = false;//Don't process statement
-        disableInputs();
         st = MyMoneyStatement();
         return ;
     }
@@ -428,15 +402,13 @@ void CsvProcessing::csvImportTransaction(MyMoneyStatement& st)
   tr.m_shares = m_trData.amount;
 
   tmp = m_trData.number;
-  if (!tmp.isEmpty())
-    tr.m_strNumber = tmp;
+  tr.m_strNumber = tmp;
 
   if (!payee.isEmpty()) {
     tr.m_strPayee = m_trData.payee;
   }
 
   tr.m_strMemo = m_trData.memo;
-
   // Add the transaction to the statement
 
   st.m_listTransactions += tr;
@@ -449,31 +421,31 @@ void CsvProcessing::csvImportTransaction(MyMoneyStatement& st)
   return;
 }
 
-int CsvProcessing::processQifLine(QString& iBuff)// parse input line
+int CsvProcessing::processQifLine(QString& iBuff)      //          parse input line
 {
   QString memo;
   QString txt;
   iBuff = iBuff.remove('"');
 
-  memo.clear();
-  for (int i = 0; i < m_lastColumn; i++) {//  check each column
-    if (m_csvDialog->m_columnType[i] == "number") {
-      txt = iBuff.section(m_fieldDelimiterCharacter, i, i);
+  memo.clear();//                                              memo & number may not have been used
+  m_trData.number.clear();//                                   .. so need to clear prior contents
+  for (int i = 0; i < m_endColumn; i++) {  //                 check each column
+    if (m_csvDialog->columnType(i) == "number") {
+      txt = m_columnList[i];
       m_trData.number = txt;
-      m_outBuffer = m_outBuffer + 'N' + txt + '\n';// Number column
+      m_outBuffer = m_outBuffer + 'N' + txt + '\n';//        Number column
     }
 
-    else if (m_csvDialog->m_columnType[i] == "date") {
-      txt = iBuff.section(m_fieldDelimiterCharacter, i, i);
-      txt = txt.remove('"');// "16/09/2009
-      QDate dat = m_csvDialog->m_convertDate->convertDate(txt);//   Date column
+    else if (m_csvDialog->columnType(i) == "date") {
+      txt = m_columnList[i];
+      txt = txt.remove('"');   // "16/09/2009
+      QDate dat = m_csvDialog->m_convertDate->convertDate(txt);   //   Date column
       if (dat == QDate()) {
         qDebug() << i18n("date ERROR");
 
-        KMessageBox::sorry(m_csvDialog, i18n("<center>\
-        An invalid date has been detected during import.</center>\
-        <center><b>%1</b></center>\
-        Please check that you have set the correct date format."
+        KMessageBox::sorry(m_csvDialog, i18n("<center>An invalid date has been detected during import.</center>"
+                                             "<center><b>%1</b></center>"
+                                             "Please check that you have set the correct date format."
                                              , txt), i18n("CSV import"));
         return KMessageBox::Cancel;
       }
@@ -482,47 +454,45 @@ int CsvProcessing::processQifLine(QString& iBuff)// parse input line
       m_trData.date = dat;
     }
 
-    else if (m_csvDialog->m_columnType[i] == "payee") {
-      txt = iBuff.section(m_fieldDelimiterCharacter, i, i);
+    else if (m_csvDialog->columnType(i) == "payee") {
+      txt = m_columnList[i];
       txt = txt.remove('\'');
       m_trData.payee = txt;
-      m_outBuffer = m_outBuffer + 'P' + txt + '\n';//Detail column
+      m_outBuffer = m_outBuffer + 'P' + txt + '\n';//        Detail column
     }
 
-    else if (m_csvDialog->m_columnType[i] == "amount") { //  Is this Amount column
-      txt = iBuff.section(m_fieldDelimiterCharacter, i, i);
-      if ((m_csvDialog->m_amountColumn == i) && (txt.contains("("))) {
-        txt = txt.remove('(');
-        txt = txt.remove(')');
-        txt = '-' + txt;  //   Mark as -ve
-      } else if (m_csvDialog->m_debitColumn == i) {
-        txt = '-' + txt;  //   Mark as -ve
+    else if (m_csvDialog->columnType(i) == "amount") {      //  Is this Amount column
+      txt = m_columnList[i];
+      if ((m_csvDialog->amountColumn() == i) && (txt.contains("("))) {
+        txt = txt.remove(QRegExp("[()]"));
+        txt = '-' + txt;  //                                 Mark as -ve
+      } else if (m_csvDialog->debitColumn() == i) {
+        txt = '-' + txt;  //                                 Mark as -ve
       }
       m_trData.amount = txt;
       m_outBuffer = m_outBuffer + 'T' + txt + '\n';
     }
 
-    else if ((m_csvDialog->m_columnType[i] == "debit") || (m_csvDialog->m_columnType[i] == "credit")) { //  Credit or debit?
-      txt = iBuff.section(m_fieldDelimiterCharacter, i, i);
+    else if ((m_csvDialog->columnType(i) == "debit") || (m_csvDialog->columnType(i) == "credit")) {             //  Credit or debit?
+      txt = m_columnList[i];
       if (!txt.isEmpty()) {
-        if (m_csvDialog->m_debitColumn == i)
+        if (m_csvDialog->debitColumn() == i)
           txt = '-' + txt;//  Mark as -ve
-        if ((m_csvDialog->m_debitColumn == i) || (m_csvDialog->m_creditColumn == i)) {
+        if ((m_csvDialog->debitColumn() == i) || (m_csvDialog->creditColumn() == i)) {
           m_trData.amount = txt;
           m_outBuffer = m_outBuffer + 'T' + txt + '\n';
         }
       }
     }
 
-    else if (m_csvDialog->m_columnType[i] == "memo") {
-      txt = iBuff.section(m_fieldDelimiterCharacter, i, i);
-      if (m_csvDialog->m_columnType[i] == "memo") {
-        if (!memo.isEmpty())
-          memo += " : ";//   separate multiple memos
-        memo += txt;//   next memo
-      }
+    else if (m_csvDialog->columnType(i) == "memo") {
+      txt = m_columnList[i];
+      if (!memo.isEmpty())
+        memo += " : ";//                                   separate multiple memos
+      memo += txt;//                                       next memo
     }//end of memo field
   }//end of col loop
+
   m_trData.memo = memo;
   m_outBuffer = m_outBuffer + 'M' + memo + '\n' + "^\n";
   return KMessageBox::Ok;
@@ -531,13 +501,13 @@ int CsvProcessing::processQifLine(QString& iBuff)// parse input line
 void CsvProcessing::importClicked(bool checked)
 {
   if (checked) {
-    if ((m_csvDialog->m_dateSelected) && (m_csvDialog->m_payeeSelected) &&
-        ((m_csvDialog->m_amountSelected || (m_csvDialog->m_debitSelected && m_csvDialog->m_creditSelected)))) {
+    if ((m_csvDialog->dateSelected()) && (m_csvDialog->payeeSelected()) &&
+        ((m_csvDialog->amountSelected() || (m_csvDialog->debitSelected() && m_csvDialog->creditSelected())))) {
       m_importNow = true; //   all necessary data is present
       m_csvDialog->checkBox_qif->setChecked(true);
       int skp = m_csvDialog->spinBox_skip->value() - 1;
 
-      readFile(m_inFileName, skp);//   skip all headers
+      readFile(m_inFileName, skp);   //   skip all headers
       //--- create the (revised) vertical (row) headers ---
       QStringList vertHeaders;
       for (int i = skp; i < m_csvDialog->tableWidget->rowCount() + skp; i++) {
@@ -549,19 +519,18 @@ void CsvProcessing::importClicked(bool checked)
       m_csvDialog->tableWidget->setVerticalHeaderLabels(vertHeaders);
       m_csvDialog->tableWidget->hide();// to ensure....
       m_csvDialog->tableWidget->show();//....vertical header width redraws
-      m_csvDialog->spinBox_skip->setEnabled(false);
       int h = m_csvDialog->tableWidget->verticalHeader()->width();
       m_width += h - oldwdth;
       m_csvDialog->tableWidget->setFixedWidth(m_width);
     } else {
-      KMessageBox::information(0, i18n("<center>An amount-type column, and Date and\
+      KMessageBox::information(0, i18n("<center>An Amount-type column, and Date and\
         Payee columns are needed!</center>\
         <center>Please try again.</center>"));
     }
   } else {
     m_importNow = false;
-    m_csvDialog->checkBox_qif->setChecked(false);
   }
+  m_csvDialog->checkBox_qif->setChecked(false);
 }
 
 void CsvProcessing::readSettings()
@@ -673,26 +642,46 @@ void CsvProcessing::dateFormatSelected(int dF)
 void CsvProcessing::updateScreen()
 {
   m_width = m_maxWidth;
-  m_csvDialog->m_tableFrameHeight = m_csvDialog->frame_low->frameGeometry().size().height();
-  m_csvDialog->m_tableFrameWidth = m_csvDialog->frame_low->frameGeometry().size().width();
+  m_csvDialog->setTableFrameHeight(m_csvDialog->frame_low->frameGeometry().size().height());
+  m_csvDialog->setTableFrameWidth(m_csvDialog->frame_low->frameGeometry().size().width());
   m_csvDialog->tableWidget->setRowCount(m_row);
   int hght = 4 + (m_csvDialog->tableWidget->rowHeight(m_row - 1)) * m_row;
   hght += m_csvDialog->tableWidget->horizontalHeader()->height() + 2;//  frig factor for vert. headers?
 
-  if (m_maxWidth > m_csvDialog->m_tableFrameWidth)
+  if (m_maxWidth > m_csvDialog->tableFrameWidth())
     hght += m_csvDialog->tableWidget->horizontalScrollBar()->height() + 1;//  ....and for hor. scroll bar
-  if (hght > m_csvDialog->m_tableFrameHeight) {
+  if (hght > m_csvDialog->tableFrameHeight()) {
     int w = m_csvDialog->tableWidget->verticalScrollBar()->width() + 2;
     m_width += w;//
-    hght = m_csvDialog->m_tableFrameHeight - 12;//  allow for border
+    hght = m_csvDialog->tableFrameHeight() - 12;//  allow for border
   }
   int h = m_csvDialog->tableWidget->verticalHeader()->width();
   m_width += h;
-  if (m_width >= m_csvDialog->m_tableFrameWidth) {
-    m_width = m_csvDialog->m_tableFrameWidth - 12;//  allow for border
+  if (m_width >= m_csvDialog->tableFrameWidth()) {
+    m_width = m_csvDialog->tableFrameWidth() - 12;//  allow for border
   }
 
   m_csvDialog->tableWidget->setFixedHeight(hght);
   m_csvDialog->tableWidget->setFixedWidth(m_width);
   m_csvDialog->tableWidget->setFocus();
+}
+
+QString CsvProcessing::csvPath()
+{
+  return m_csvPath;
+}
+
+QString CsvProcessing::inFileName()
+{
+  return m_inFileName;
+}
+
+int CsvProcessing::fieldDelimiterIndex()
+{
+  return m_fieldDelimiterIndex;
+}
+
+int CsvProcessing::endColumn()
+{
+  return m_endColumn;
 }

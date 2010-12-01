@@ -34,6 +34,7 @@
 
 class CsvImporterDlgDecl;
 class MyMoneyStatement;
+class ParseLine;
 
 #define MAXCOL 14    //                 maximum no. of columns (arbitrary value)
 
@@ -42,25 +43,12 @@ class CsvProcessing: public QObject
   Q_OBJECT
 
 public:
+
   CsvProcessing();
   ~CsvProcessing();
 
-  struct qifData {
-    QString number;
-    QDate   date;
-    QString payee;
-    QString amount;
-    QString memo;
-  } m_trData;
-
-  CsvImporterDlg* m_csvDialog;
-  QString        m_csvPath;
-  QString        m_fieldDelimiterCharacter;
-  QString        m_inFileName;
-
-  int            m_fieldDelimiterIndex;
-  int            m_maxWidth;
-  int            m_lastColumn;
+  CsvImporterDlg*   m_csvDialog;
+  ParseLine*        m_parseline ;
 
   /**
   * This method is called after startup, to initialise some parameters.
@@ -71,7 +59,13 @@ public:
   * This method is called to redraw the window according to the number of
   * columns and rows to be displayed.
   */
-  void            updateScreen();
+  void           updateScreen();
+
+  QString        csvPath();
+  QString        inFileName();
+
+  int            fieldDelimiterIndex();
+  int            endColumn();
 
 signals:
 
@@ -79,7 +73,7 @@ signals:
   * This signal is raised when the plugin has completed a transaction.  This
   * then needs to be processed by MyMoneyStatement.
   */
-  void statementReady(MyMoneyStatement&);
+  void           statementReady(MyMoneyStatement&);
 
 public slots:
   /**
@@ -196,10 +190,33 @@ private:
   */
   void           clearColumnNumbers();
 
+  /**
+  * Because the memo field allows multiple selections, it helps to be able
+  * to see which columns are selected already, particularly if a column
+  * selection gets deleted. This is achieved by adding a '*' character
+  * after the column number of each selected column in the menu combobox.
+  * This method is called to remove the '*' characters when a file is
+  * reloaded, or when the user clears his selections.
+  */
+  void           clearComboBoxText();
+
+  QString        m_csvPath;
+  QString        m_fieldDelimiterCharacter;
+  QString        m_inFileName;
+
+  struct qifData {
+    QString number;
+    QDate   date;
+    QString payee;
+    QString amount;
+    QString memo;
+  } m_trData;
+
   QList<MyMoneyStatement> statements;
   QList<QTextCodec *>     m_codecs;
 
   QStringList    m_dateFormats;
+  QStringList    m_columnList;
 
   QString        m_date;
   QString        m_filename;
@@ -208,10 +225,13 @@ private:
 
   bool           m_importNow;
 
-  int            m_startLine;
-  int            m_endLine;
-  int            m_row;
   int            m_dateFormatIndex;
+  int            m_endLine;
+  int            m_fieldDelimiterIndex;
+  int            m_endColumn;
+  int            m_maxWidth;
+  int            m_row;
+  int            m_startLine;
   int            m_width;
 
   KUrl           m_url;

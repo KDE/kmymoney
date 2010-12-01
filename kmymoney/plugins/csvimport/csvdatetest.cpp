@@ -1,19 +1,19 @@
 /***************************************************************************
-                           csvdatetest.cpp
-                         -------------------
-    begin                : Sat Jan 01 2010
-    copyright            : (C) 2010 by Allan Anderson
-    email                : aganderson@ukonline.co.uk
- ***************************************************************************/
+                        csvdatetest.cpp
+                      -------------------
+begin                : Sat Jan 01 2010
+copyright            : (C) 2010 by Allan Anderson
+email                : aganderson@ukonline.co.uk
+***************************************************************************/
 
 /***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+*                                                                         *
+*   This program is free software; you can redistribute it and/or modify  *
+*   it under the terms of the GNU General Public License as published by  *
+*   the Free Software Foundation; either version 2 of the License, or     *
+*   (at your option) any later version.                                   *
+*                                                                         *
+***************************************************************************/
 #include "csvdatetest.h"
 
 #include <QtTest/QtTest>
@@ -51,7 +51,7 @@ void CsvDateTest::testDateConvert()
 {
   QString format = "dd/MM/yyyy";
 
-  m_convert->m_dateFormatIndex = 2;//             UK/EU date format;
+  m_convert->setDateFormatIndex(2);//             UK/EU date format;
 
   QVERIFY(m_convert->convertDate("13/09/81") ==
           QDate::fromString("13/09/1981", format));//a = "13/09/81"
@@ -104,22 +104,22 @@ void CsvDateTest::testDateConvertFormats()
   QString aDate = "2001-11-30";
   QString format = "yyyy/MM/dd";
 
-  m_convert->m_dateFormatIndex = 0;//           ISO date format
+  m_convert->setDateFormatIndex(0);//           ISO date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate::fromString("2001/11/30", format));
 
-  m_convert->m_dateFormatIndex = 1;//           US date format
+  m_convert->setDateFormatIndex(1);//           US date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate());
 
   aDate = "11-30-2001";
   format = "MM/dd/yyyy";
 
-  m_convert->m_dateFormatIndex = 0;//             ISO date format
+  m_convert->setDateFormatIndex(0);//             ISO date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate());
 
-  m_convert->m_dateFormatIndex = 1;//           US date format
+  m_convert->setDateFormatIndex(1);//           US date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate::fromString("11/30/2001", format));
 }

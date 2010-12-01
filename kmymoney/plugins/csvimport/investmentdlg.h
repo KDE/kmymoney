@@ -58,15 +58,21 @@ public:
   InvestmentDlg(QWidget *parent = 0);
   ~InvestmentDlg();
 
-  int                m_tableFrameHeight;
-  int                m_tableFrameWidth;
-
   CsvImporterDlg*    m_csvImportDlg;
   ConvertDate*       m_convertDat;
   RedefineDlg*       m_redefine;
 
+  int                tableFrameHeight();
+  void               setTableFrameHeight(int val);
+  int                tableFrameWidth();
+  void               setTableFrameWidth(int val);
+  void               clearComboBoxText();
+
 private:
   InvestProcessing*  m_investProcessing;
+
+  int                m_tableFrameHeight;
+  int                m_tableFrameWidth;
 
   /**
   * This method will receive close events, calling slotClose().
@@ -109,6 +115,8 @@ signals:
   * then needs to be processed by MyMoneyStatement.
   */
   void           statementReady(MyMoneyStatement&);
+
+  
 };
 
 #endif // INVESTMENTDLG_H

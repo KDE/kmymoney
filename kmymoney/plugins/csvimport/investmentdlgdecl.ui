@@ -12,20 +12,20 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>600</width>
-    <height>450</height>
+    <width>640</width>
+    <height>500</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Investment Importer</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_8">
+  <layout class="QGridLayout" name="gridLayout_11">
    <item row="0" column="0">
     <widget class="QFrame" name="frame_main">
      <property name="minimumSize">
       <size>
-       <width>500</width>
-       <height>0</height>
+       <width>640</width>
+       <height>500</height>
       </size>
      </property>
      <property name="frameShape">
@@ -34,11 +34,11 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout_11">
+     <layout class="QGridLayout" name="gridLayout_10">
       <item row="0" column="0">
-       <layout class="QVBoxLayout" name="verticalLayout">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="40,300,30">
+         <layout class="QHBoxLayout" name="horizontalLayout_top" stretch="40,300,30">
           <property name="sizeConstraint">
            <enum>QLayout::SetMaximumSize</enum>
           </property>
@@ -269,11 +269,6 @@
                      <string comment="punctuation mark  used as field delimiter">Tab (\t)</string>
                     </property>
                    </item>
-                   <item>
-                    <property name="text">
-                     <string comment="punctuation mark  combination used as field delimiter" extracomment="special case format">Quote (\&quot;,\&quot;)</string>
-                    </property>
-                   </item>
                   </widget>
                  </item>
                 </layout>
@@ -326,7 +321,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="30,240,30">
+         <layout class="QHBoxLayout" name="horizontalLayout_center" stretch="20,400,20">
           <item>
            <widget class="QFrame" name="frame_4">
             <property name="minimumSize">
@@ -354,7 +349,7 @@
             <property name="maximumSize">
              <size>
               <width>550</width>
-              <height>200</height>
+              <height>240</height>
              </size>
             </property>
             <property name="accessibleName">
@@ -363,495 +358,499 @@
             <property name="title">
              <string>Input Columns and Parameters to use</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_10">
+            <layout class="QGridLayout" name="gridLayout_8">
              <item row="0" column="0">
-              <widget class="Line" name="line">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <layout class="QGridLayout" name="gridLayout_6" columnstretch="40,33,42">
-               <item row="0" column="0">
-                <widget class="QFrame" name="frame_A">
-                 <property name="minimumSize">
-                  <size>
-                   <width>150</width>
-                   <height>98</height>
-                  </size>
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <item>
+                <widget class="Line" name="line">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
-                 </property>
-                 <property name="lineWidth">
-                  <number>0</number>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout_5">
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label">
-                    <property name="toolTip">
-                     <string extracomment="verb, Select column containing date field">Select column containing date field</string>
-                    </property>
-                    <property name="accessibleName">
-                     <string comment="column containing date field"/>
-                    </property>
-                    <property name="text">
-                     <string>Date</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_2">
-                    <property name="accessibleName">
-                     <string comment="column containing investment type/action field"/>
-                    </property>
-                    <property name="text">
-                     <string extracomment="column containing investment type/action field">Type/Action</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_Memo">
-                    <property name="accessibleName">
-                     <string comment="column containing memo field"/>
-                    </property>
-                    <property name="text">
-                     <string>Memo</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="KComboBox" name="comboBox_dateCol">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="toolTip">
-                     <string extracomment="verb, Select column containing date field">Select column containing date field</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="1">
-                   <widget class="KComboBox" name="comboBox_typeCol">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="toolTip">
-                     <string extracomment="verb, Select column containing investment type field">Select column containing investment type field</string>
-                    </property>
-                    <property name="accessibleName">
-                     <string/>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="1">
-                   <widget class="KComboBox" name="comboBox_memoCol">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="toolTip">
-                     <string extracomment="verb, Select column containing memo field. More than one column may be entered successively.">Select column containing memo field. More than one column may be entered successively.</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QFrame" name="frame_B">
-                 <property name="minimumSize">
-                  <size>
-                   <width>140</width>
-                   <height>98</height>
-                  </size>
-                 </property>
-                 <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
-                 </property>
-                 <property name="lineWidth">
-                  <number>0</number>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout_4" columnstretch="30,40">
-                  <property name="rightMargin">
-                   <number>8</number>
-                  </property>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_price">
-                    <property name="enabled">
-                     <bool>true</bool>
-                    </property>
-                    <property name="accessibleName">
-                     <string comment="column containing price field"/>
-                    </property>
-                    <property name="text">
-                     <string>Price</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_quantity">
-                    <property name="enabled">
-                     <bool>true</bool>
-                    </property>
-                    <property name="accessibleName">
-                     <string comment="column containing quantity field"/>
-                    </property>
-                    <property name="text">
-                     <string>Quantity</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_amount">
-                    <property name="enabled">
-                     <bool>true</bool>
-                    </property>
-                    <property name="text">
-                     <string extracomment="column for monetary value">Amount</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="KComboBox" name="comboBox_priceCol">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="toolTip">
-                     <string extracomment="Select column containing price field">Select column containing price field</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="1">
-                   <widget class="KComboBox" name="comboBox_quantityCol">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="toolTip">
-                     <string extracomment="Select column containing quantity field">Select column containing quantity field</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="1">
-                   <widget class="KComboBox" name="comboBox_amountCol">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="toolTip">
-                     <string extracomment="Select column containing amount field">Select column containing amount field</string>
-                    </property>
-                    <property name="accessibleName">
-                     <string comment="column containing amount field"/>
-                    </property>
-                    <property name="currentIndex">
-                     <number>-1</number>
-                    </property>
-                    <property name="minimumContentsLength">
-                     <number>0</number>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item row="0" column="2">
-                <widget class="QFrame" name="frame_C">
-                 <property name="minimumSize">
-                  <size>
-                   <width>154</width>
-                   <height>98</height>
-                  </size>
-                 </property>
-                 <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
-                 </property>
-                 <property name="lineWidth">
-                  <number>0</number>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout">
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_3">
-                    <property name="accessibleName">
-                     <string comment="noun, fraction/multiplier to use"/>
-                    </property>
-                    <property name="text">
-                     <string extracomment="noun, fraction/multiplier to use">Price Fraction</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_feeCol">
-                    <property name="accessibleName">
-                     <string comment="column containing fee field"/>
-                    </property>
-                    <property name="layoutDirection">
-                     <enum>Qt::LeftToRight</enum>
-                    </property>
-                    <property name="text">
-                     <string extracomment="column containing fee field">Fee Column</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0" colspan="2">
-                   <widget class="QCheckBox" name="checkBox_feeType">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="toolTip">
-                     <string comment="Check as in click" extracomment="verb, Check box if any fee is a percentage figure rather than a value">Check if any fee is a percentage figure rather than a value</string>
-                    </property>
-                    <property name="accessibleName">
-                     <string comment="select if fee is a percentage (not value)"/>
-                    </property>
-                    <property name="layoutDirection">
-                     <enum>Qt::RightToLeft</enum>
-                    </property>
-                    <property name="text">
-                     <string extracomment="select if fee is a percentage (not value)">Fee is  Percentage</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="KComboBox" name="comboBox_priceFraction">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="toolTip">
-                     <string extracomment="verb, If necessary, select fractio/multiplier for compatibility between imported and stored prices, for instance, if one is in dollars and the other in cents.">If necessary, select fraction/multiplier for compatibility 
+               <item>
+                <layout class="QGridLayout" name="gridLayout_6" columnstretch="125,120,150">
+                 <item row="0" column="0">
+                  <widget class="QFrame" name="frame_A">
+                   <property name="minimumSize">
+                    <size>
+                     <width>150</width>
+                     <height>98</height>
+                    </size>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::NoFrame</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Plain</enum>
+                   </property>
+                   <property name="lineWidth">
+                    <number>0</number>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_5" columnminimumwidth="30,30">
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label">
+                      <property name="toolTip">
+                       <string extracomment="verb, Select column containing date field">Select column containing date field</string>
+                      </property>
+                      <property name="accessibleName">
+                       <string comment="column containing date field"/>
+                      </property>
+                      <property name="text">
+                       <string>Date</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="label_2">
+                      <property name="accessibleName">
+                       <string comment="column containing investment type/action field"/>
+                      </property>
+                      <property name="text">
+                       <string extracomment="column containing investment type/action field">Type/Action</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_Memo">
+                      <property name="accessibleName">
+                       <string comment="column containing memo field"/>
+                      </property>
+                      <property name="text">
+                       <string>Memo</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="KComboBox" name="comboBox_dateCol">
+                      <property name="enabled">
+                       <bool>false</bool>
+                      </property>
+                      <property name="toolTip">
+                       <string extracomment="verb, Select column containing date field">Select column containing date field</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="KComboBox" name="comboBox_typeCol">
+                      <property name="enabled">
+                       <bool>false</bool>
+                      </property>
+                      <property name="toolTip">
+                       <string extracomment="verb, Select column containing investment type field">Select column containing investment type field</string>
+                      </property>
+                      <property name="accessibleName">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="KComboBox" name="comboBox_memoCol">
+                      <property name="enabled">
+                       <bool>false</bool>
+                      </property>
+                      <property name="toolTip">
+                       <string extracomment="verb, Select column containing memo field. More than one column may be entered successively.">Select column containing memo field. More than one column may be entered successively.</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QFrame" name="frame_C">
+                   <property name="minimumSize">
+                    <size>
+                     <width>154</width>
+                     <height>98</height>
+                    </size>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::NoFrame</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Plain</enum>
+                   </property>
+                   <property name="lineWidth">
+                    <number>0</number>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout">
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_3">
+                      <property name="accessibleName">
+                       <string comment="noun, conversion factor to align pricing in the imported file with KMM's internal prices. "/>
+                      </property>
+                      <property name="text">
+                       <string extracomment="noun, conversion fraction/multiplier to use to make compatible the csv pricing with KMM pricing.">Price Fraction</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="label_feeCol">
+                      <property name="accessibleName">
+                       <string comment="column containing fee field"/>
+                      </property>
+                      <property name="layoutDirection">
+                       <enum>Qt::LeftToRight</enum>
+                      </property>
+                      <property name="text">
+                       <string extracomment="column containing fee field">Fee Column</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0" colspan="2">
+                     <widget class="QCheckBox" name="checkBox_feeType">
+                      <property name="enabled">
+                       <bool>false</bool>
+                      </property>
+                      <property name="toolTip">
+                       <string comment="Check as in click" extracomment="verb, Check box if any fee is a percentage figure rather than a value">Check if any fee is a percentage figure rather than a value</string>
+                      </property>
+                      <property name="accessibleName">
+                       <string comment="select if fee is a percentage (not value)"/>
+                      </property>
+                      <property name="layoutDirection">
+                       <enum>Qt::RightToLeft</enum>
+                      </property>
+                      <property name="text">
+                       <string extracomment="select if fee is a percentage (not value)">Fee is  Percentage</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="KComboBox" name="comboBox_priceFraction">
+                      <property name="enabled">
+                       <bool>false</bool>
+                      </property>
+                      <property name="toolTip">
+                       <string extracomment="verb, If necessary, select fraction/multiplier for compatibility between imported and stored prices, for instance, if one is in dollars and the other in cents.">If necessary, select fraction/multiplier for compatibility 
 between imported and stored prices.  For instance, if 
 the import price is in cents  but the file is priced in dollars,
 select 0.01.</string>
-                    </property>
-                    <property name="accessibleName">
-                     <string notr="true"/>
-                    </property>
-                    <property name="accessibleDescription">
-                     <string notr="true"/>
-                    </property>
-                    <item>
-                     <property name="text">
-                      <string notr="true">0.01</string>
-                     </property>
+                      </property>
+                      <property name="accessibleName">
+                       <string notr="true"/>
+                      </property>
+                      <property name="accessibleDescription">
+                       <string notr="true"/>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string notr="true">0.01</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string notr="true">0.1</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string notr="true">1</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string notr="true">10</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string notr="true">100</string>
+                       </property>
+                      </item>
+                     </widget>
                     </item>
-                    <item>
-                     <property name="text">
-                      <string notr="true">0.1</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string notr="true">1</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string notr="true">10</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string notr="true">100</string>
-                     </property>
-                    </item>
-                   </widget>
-                  </item>
-                  <item row="1" column="1">
-                   <widget class="KComboBox" name="comboBox_feeCol">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                    <property name="toolTip">
-                     <string extracomment="verb, If necessary, select column containing fee.  Warning. This might already have been incorporated into the price">If necessary, select column containing fee.  
+                    <item row="1" column="1">
+                     <widget class="KComboBox" name="comboBox_feeCol">
+                      <property name="enabled">
+                       <bool>false</bool>
+                      </property>
+                      <property name="toolTip">
+                       <string extracomment="verb, If necessary, select column containing fee.  Warning. This might already have been incorporated into the price">If necessary, select column containing fee.  
 Warning. This might already have been 
 incorporated into the price</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QFrame" name="frame_B">
+                   <property name="minimumSize">
+                    <size>
+                     <width>140</width>
+                     <height>98</height>
+                    </size>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::NoFrame</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Plain</enum>
+                   </property>
+                   <property name="lineWidth">
+                    <number>0</number>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_4" columnstretch="30,30">
+                    <property name="rightMargin">
+                     <number>8</number>
                     </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="2" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_3">
-               <property name="leftMargin">
-                <number>5</number>
-               </property>
-               <property name="rightMargin">
-                <number>5</number>
-               </property>
-               <item>
-                <widget class="QLabel" name="label_security">
-                 <property name="accessibleName">
-                  <string comment="name of security"/>
-                 </property>
-                 <property name="text">
-                  <string>Security Name  </string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="KLineEdit" name="lineEdit_securityName">
-                 <property name="toolTip">
-                  <string extracomment="verb, Enter name of security">Enter name of security</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="KPushButton" name="button_clear">
-                 <property name="toolTip">
-                  <string extracomment="verb, Clear selected column entries">Clear selected column entries</string>
-                 </property>
-                 <property name="text">
-                  <string extracomment="verb, to clear selected columns">Clear Selections</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="3" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="15,20,15,20,0,25,35">
-               <item>
-                <widget class="QLabel" name="label_skip">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                 <property name="accessibleName">
-                  <string comment="number of first line"/>
-                 </property>
-                 <property name="text">
-                  <string>Start line..</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="spinBox_skip">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                 <property name="focusPolicy">
-                  <enum>Qt::StrongFocus</enum>
-                 </property>
-                 <property name="toolTip">
-                  <string extracomment="verb, Select first line to be imported">Select first line to be imported</string>
-                 </property>
-                 <property name="buttonSymbols">
-                  <enum>QAbstractSpinBox::UpDownArrows</enum>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="value">
-                  <number>2</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_skipTo">
-                 <property name="accessibleName">
-                  <string comment="number of last line"/>
-                 </property>
-                 <property name="text">
-                  <string>End line..</string>
-                 </property>
-                </widget>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_price">
+                      <property name="enabled">
+                       <bool>true</bool>
+                      </property>
+                      <property name="accessibleName">
+                       <string comment="column containing price field"/>
+                      </property>
+                      <property name="text">
+                       <string>Price</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="label_quantity">
+                      <property name="enabled">
+                       <bool>true</bool>
+                      </property>
+                      <property name="accessibleName">
+                       <string comment="column containing quantity field"/>
+                      </property>
+                      <property name="text">
+                       <string>Quantity</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_amount">
+                      <property name="enabled">
+                       <bool>true</bool>
+                      </property>
+                      <property name="text">
+                       <string extracomment="column for monetary value">Amount</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="KComboBox" name="comboBox_quantityCol">
+                      <property name="enabled">
+                       <bool>false</bool>
+                      </property>
+                      <property name="toolTip">
+                       <string extracomment="Select column containing quantity field">Select column containing quantity field</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="KComboBox" name="comboBox_amountCol">
+                      <property name="enabled">
+                       <bool>false</bool>
+                      </property>
+                      <property name="toolTip">
+                       <string extracomment="Select column containing amount field">Select column containing amount field</string>
+                      </property>
+                      <property name="accessibleName">
+                       <string comment="column containing amount field"/>
+                      </property>
+                      <property name="currentIndex">
+                       <number>-1</number>
+                      </property>
+                      <property name="minimumContentsLength">
+                       <number>0</number>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="KComboBox" name="comboBox_priceCol">
+                      <property name="enabled">
+                       <bool>false</bool>
+                      </property>
+                      <property name="toolTip">
+                       <string extracomment="Select column containing price field">Select column containing price field</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
                </item>
                <item>
-                <widget class="QSpinBox" name="spinBox_skipLast">
-                 <property name="enabled">
-                  <bool>false</bool>
+                <layout class="QHBoxLayout" name="horizontalLayout_mid">
+                 <property name="leftMargin">
+                  <number>5</number>
                  </property>
-                 <property name="focusPolicy">
-                  <enum>Qt::StrongFocus</enum>
+                 <property name="rightMargin">
+                  <number>5</number>
                  </property>
-                 <property name="toolTip">
-                  <string extracomment="verb, Select last line to be imported.  Ensure no trailer lines are imported.">Select last line to be imported.  
+                 <item>
+                  <widget class="QLabel" name="label_security">
+                   <property name="accessibleName">
+                    <string comment="name of security"/>
+                   </property>
+                   <property name="text">
+                    <string>Security Name  </string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="KLineEdit" name="lineEdit_securityName">
+                   <property name="toolTip">
+                    <string extracomment="verb, Enter name of security">Enter name of security</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="KPushButton" name="button_clear">
+                   <property name="toolTip">
+                    <string extracomment="verb, Clear selected column entries">Clear selected column entries</string>
+                   </property>
+                   <property name="text">
+                    <string extracomment="verb, to clear selected columns">Clear Selections</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_low" stretch="15,20,15,20,0,25,35">
+                 <item>
+                  <widget class="QLabel" name="label_skip">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="accessibleName">
+                    <string comment="number of first line"/>
+                   </property>
+                   <property name="text">
+                    <string>Start line..</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="spinBox_skip">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="focusPolicy">
+                    <enum>Qt::StrongFocus</enum>
+                   </property>
+                   <property name="toolTip">
+                    <string extracomment="verb, Select first line to be imported">Select first line to be imported</string>
+                   </property>
+                   <property name="buttonSymbols">
+                    <enum>QAbstractSpinBox::UpDownArrows</enum>
+                   </property>
+                   <property name="minimum">
+                    <number>1</number>
+                   </property>
+                   <property name="value">
+                    <number>2</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_skipTo">
+                   <property name="accessibleName">
+                    <string comment="number of last line"/>
+                   </property>
+                   <property name="text">
+                    <string>End line..</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="spinBox_skipLast">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="focusPolicy">
+                    <enum>Qt::StrongFocus</enum>
+                   </property>
+                   <property name="toolTip">
+                    <string extracomment="verb, Select last line to be imported.  Ensure no trailer lines are imported.">Select last line to be imported.  
 Ensure no trailer lines are included.</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="buttonSymbols">
-                  <enum>QAbstractSpinBox::NoButtons</enum>
-                 </property>
-                 <property name="maximum">
-                  <number>3000</number>
-                 </property>
-                 <property name="value">
-                  <number>99</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="checkBox_qif">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                 <property name="toolTip">
-                  <string extracomment="verb, Click when ready to proceed.">Click when ready to proceed.</string>
-                 </property>
-                 <property name="accessibleName">
-                  <string comment="verb to accept"/>
-                 </property>
-                 <property name="text">
-                  <string>Accept</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="KPushButton" name="button_saveAs">
-                 <property name="toolTip">
-                  <string extracomment="verb, Click if a QIF file is required, after clicking accept">Click if a QIF file is required, after clicking accept</string>
-                 </property>
-                 <property name="text">
-                  <string extracomment="verb to save QIF file">Save as QIF</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="KPushButton" name="button_close">
-                 <property name="toolTip">
-                  <string comment="verb, Click to close this window" extracomment="verb, Click to close this window">Click to close this window</string>
-                 </property>
-                 <property name="text">
-                  <string comment="verb to exit form" extracomment="verb to exit form">Quit</string>
-                 </property>
-                </widget>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="buttonSymbols">
+                    <enum>QAbstractSpinBox::NoButtons</enum>
+                   </property>
+                   <property name="maximum">
+                    <number>3000</number>
+                   </property>
+                   <property name="value">
+                    <number>99</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="checkBox_qif">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="toolTip">
+                    <string extracomment="verb, Click when ready to proceed.">Click when ready to proceed.</string>
+                   </property>
+                   <property name="accessibleName">
+                    <string comment="verb to accept"/>
+                   </property>
+                   <property name="text">
+                    <string>Accept</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="KPushButton" name="button_saveAs">
+                   <property name="toolTip">
+                    <string extracomment="verb, Click if a QIF file is required, after clicking accept">Click if a QIF file is required, after clicking accept</string>
+                   </property>
+                   <property name="text">
+                    <string extracomment="verb to save QIF file">Save as QIF</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="KPushButton" name="button_close">
+                   <property name="toolTip">
+                    <string comment="verb, Click to close this window" extracomment="verb, Click to close this window">Click to close this window</string>
+                   </property>
+                   <property name="text">
+                    <string comment="verb to exit form" extracomment="verb to exit form">Quit</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
               </layout>
              </item>
