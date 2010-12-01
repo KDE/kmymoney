@@ -103,11 +103,11 @@
 
 KMyMoneyView::KMyMoneyView(QWidget *parent)
     : KPageWidget(parent),
+    m_header(0),
     m_inConstructor(true),
     m_fileOpen(false),
     m_fmode(0600),
-    m_lastViewSelected(0),
-    m_header(0)
+    m_lastViewSelected(0)
 {
   // this is a workaround for the bug in KPageWidget that causes the header to be shown
   // for a short while during page switch which causes a kind of bouncing of the page's
@@ -2220,6 +2220,7 @@ KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent, const QString& name, const Q
     d(new Private)
 {
   setAccessibleName(name);
+  setAccessibleDescription(title);
   d->m_viewLayout = new QVBoxLayout(this);
   d->m_viewLayout->setSpacing(6);
   d->m_viewLayout->setMargin(0);

@@ -142,7 +142,7 @@ private:
   KPageWidgetItem* m_investmentViewFrame;
   KPageWidgetItem* m_reportsViewFrame;
   KPageWidgetItem* m_forecastViewFrame;
-  
+
   KMyMoneyTitleLabel* m_header;
 
   bool m_inConstructor;
