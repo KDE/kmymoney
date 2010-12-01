@@ -82,7 +82,7 @@ public:
   * of the method dirty() can be used.
   */
 class MyMoneySeqAccessMgr : public IMyMoneyStorage, public IMyMoneySerialize,
-    public MyMoneyKeyValueContainer
+      public MyMoneyKeyValueContainer
 {
   KMM_MYMONEY_UNIT_TESTABLE
 

@@ -582,11 +582,11 @@ void KEditScheduleDlg::slotFilterPaymentType(int index)
 
   // load option widgets
   KMyMoneyRegister::Action action = static_cast<KMyMoneyRegister::Action>(index);
-  if(action != KMyMoneyRegister::ActionWithdrawal) {
+  if (action != KMyMoneyRegister::ActionWithdrawal) {
     m_paymentMethodEdit->insertItem(i18n("Direct deposit"), MyMoneySchedule::STYPE_DIRECTDEPOSIT);
     m_paymentMethodEdit->insertItem(i18n("Manual deposit"), MyMoneySchedule::STYPE_MANUALDEPOSIT);
   }
-  if(action != KMyMoneyRegister::ActionDeposit) {
+  if (action != KMyMoneyRegister::ActionDeposit) {
     m_paymentMethodEdit->insertItem(i18n("Direct debit"), MyMoneySchedule::STYPE_DIRECTDEBIT);
     m_paymentMethodEdit->insertItem(i18n("Write check"), MyMoneySchedule::STYPE_WRITECHEQUE);
   }
@@ -595,10 +595,10 @@ void KEditScheduleDlg::slotFilterPaymentType(int index)
   m_paymentMethodEdit->insertItem(i18nc("Other payment method", "Other"), MyMoneySchedule::STYPE_OTHER);
 
   int newIndex = m_paymentMethodEdit->findData(QVariant(selectedId), Qt::UserRole, Qt::MatchExactly);
-  if(newIndex > -1 ) {
-      m_paymentMethodEdit->setCurrentIndex(newIndex);
+  if (newIndex > -1) {
+    m_paymentMethodEdit->setCurrentIndex(newIndex);
   } else {
-      m_paymentMethodEdit->setCurrentIndex(0);
+    m_paymentMethodEdit->setCurrentIndex(0);
   }
 
 }

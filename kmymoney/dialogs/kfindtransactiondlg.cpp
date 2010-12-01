@@ -57,8 +57,7 @@
 #include <transaction.h>
 #include <ktoolinvocation.h>
 
-enum ItemRoles
-{
+enum ItemRoles {
   ItemIdRole = Qt::UserRole
 };
 
@@ -486,14 +485,14 @@ void KFindTransactionDlg::setupPayeesPage(void)
   m_payeesView->setAlternatingRowColors(true);
 
   loadPayees();
-  
+
   m_payeesView->sortItems(0, Qt::AscendingOrder);
   m_emptyPayeesButton->setCheckState(Qt::Unchecked);
 
   connect(m_allPayeesButton, SIGNAL(clicked()), this, SLOT(slotSelectAllPayees()));
   connect(m_clearPayeesButton, SIGNAL(clicked()), this, SLOT(slotDeselectAllPayees()));
   connect(m_emptyPayeesButton, SIGNAL(stateChanged(int)), this, SLOT(slotUpdateSelections()));
-  connect(m_payeesView, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateSelections()));
+  connect(m_payeesView, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(slotUpdateSelections()));
 }
 
 void KFindTransactionDlg::loadPayees(void)

@@ -114,7 +114,7 @@ void Wizard::setAccount(const MyMoneyAccount& acc)
   m_account = acc;
   m_accountTypePage->setAccount(m_account);
 
-  if(!acc.institutionId().isEmpty()) {
+  if (!acc.institutionId().isEmpty()) {
     m_institutionPage->selectExistingInstitution(acc.institutionId());
   }
 }
@@ -432,9 +432,8 @@ void InstitutionPage::selectExistingInstitution(const QString id)
 {
   QList<MyMoneyInstitution>::const_iterator it = d->m_list.constBegin();
 
-  for(int i = 0; i < d->m_list.length(); ++i)
-  {
-    if(d->m_list[i].id() == id) {
+  for (int i = 0; i < d->m_list.length(); ++i) {
+    if (d->m_list[i].id() == id) {
       m_institutionComboBox->setCurrentIndex(i + 1);
       slotSelectInstitution(i + 1);
       break;

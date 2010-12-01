@@ -339,7 +339,7 @@ void CsvProcessing::displayLine(const QString& data)
   QString tmp;
   tmp.clear();
 
-  foreach (const QString& txt, listIn) {         // look for '"' in case of fieldDelim_char within string
+  foreach (const QString& txt, listIn) {          // look for '"' in case of fieldDelim_char within string
     if (!txt.startsWith('"')) { // if no leading '"', no problem so...
       if (!tmp.isEmpty()) {
         tmp += txt;// append delimited strings

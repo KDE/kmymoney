@@ -1088,7 +1088,7 @@ void QueryTable::constructAccountTable(void)
       // Handle currency conversion
       //
 
-      MyMoneyMoney displayprice(1,1);
+      MyMoneyMoney displayprice(1, 1);
       if (m_config.isConvertCurrency()) {
         // display currency is base currency, so set the price
         if (account.isForeignCurrency())

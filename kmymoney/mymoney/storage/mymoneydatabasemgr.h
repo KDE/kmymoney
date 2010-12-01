@@ -43,7 +43,7 @@
   *
   */
 class MyMoneyDatabaseMgr : public IMyMoneyStorage, public IMyMoneySerialize,
-    public MyMoneyKeyValueContainer
+      public MyMoneyKeyValueContainer
 {
   KMM_MYMONEY_UNIT_TESTABLE
 

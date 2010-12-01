@@ -624,27 +624,29 @@ const QString MyMoneyDbDriver::tableOptionString() const
 //*************************************************
 // replace the QSqlDatabase::tables() call for Mysql only
 // see bug 252841
-const QStringList MyMoneyDbDriver::tables(QSql::TableType tt, const QSqlDatabase& db) const {
+const QStringList MyMoneyDbDriver::tables(QSql::TableType tt, const QSqlDatabase& db) const
+{
   return (db.tables(tt));
 }
 
-const QStringList MyMoneyMysqlDriver::tables(QSql::TableType tt, const QSqlDatabase& db) const {
+const QStringList MyMoneyMysqlDriver::tables(QSql::TableType tt, const QSqlDatabase& db) const
+{
   QStringList tableList;
   QSqlQuery q(db);
   QString selectString;
   switch (tt) {
-  case QSql::AllTables:
-    selectString = QString("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '%1'").arg(db.databaseName());
-    if (!q.exec(selectString)) {
-      throw new MYMONEYEXCEPTION("select names failed in mymoneydbdriver.cpp");
-    }
-    while (q.next())
-      tableList.append(q.value(0).toString());
-    break;
-  case QSql::Tables:
-  case QSql::SystemTables:
-  case QSql::Views:
-    qFatal("Programming error in mymoneydbdriver.cpp"); // KMM only uses AllTables; implement other options if required
+    case QSql::AllTables:
+      selectString = QString("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '%1'").arg(db.databaseName());
+      if (!q.exec(selectString)) {
+        throw new MYMONEYEXCEPTION("select names failed in mymoneydbdriver.cpp");
+      }
+      while (q.next())
+        tableList.append(q.value(0).toString());
+      break;
+    case QSql::Tables:
+    case QSql::SystemTables:
+    case QSql::Views:
+      qFatal("Programming error in mymoneydbdriver.cpp"); // KMM only uses AllTables; implement other options if required
   }
 
   return (tableList);
