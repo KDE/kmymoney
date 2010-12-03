@@ -32,43 +32,42 @@
          <string>Your payees</string>
         </property>
         <layout class="QVBoxLayout">
-          <item>
-            <layout class="QHBoxLayout">
-             <item>
-              <widget class="KPushButton" name="m_newButton">
-               <property name="text">
-                <string comment="New payee">New</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="KPushButton" name="m_renameButton">
-               <property name="text">
-                <string>Ren</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="KPushButton" name="m_deleteButton">
-               <property name="text">
-                <string>Del</string>
-               </property>
-               <property name="shortcut">
-                <string/>
-               </property>
-              </widget>
-             </item>
-            </layout>
-          </item>
-          <item>
-            <layout class="QHBoxLayout" name="m_listTopHLayout">
-              <item>
-                <widget class="KComboBox" name="m_filterBox">
-                </widget>
-              </item>
-            </layout>
-          </item>
-          <item>
+         <item>
+          <layout class="QHBoxLayout">
+           <item>
+            <widget class="KPushButton" name="m_newButton">
+             <property name="text">
+              <string comment="New payee">New</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="KPushButton" name="m_renameButton">
+             <property name="text">
+              <string>Ren</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="KPushButton" name="m_deleteButton">
+             <property name="text">
+              <string>Del</string>
+             </property>
+             <property name="shortcut">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="m_listTopHLayout">
+           <item>
+            <widget class="KComboBox" name="m_filterBox"/>
+           </item>
+          </layout>
+         </item>
+         <item>
           <widget class="KListWidget" name="m_payeesList">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -76,11 +75,14 @@
              <verstretch>1</verstretch>
             </sizepolicy>
            </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
            <property name="selectionMode">
             <enum>QAbstractItemView::ExtendedSelection</enum>
            </property>
           </widget>
-          </item>
+         </item>
         </layout>
        </widget>
        <widget class="KTabWidget" name="m_tabWidget">
@@ -536,14 +538,14 @@ new transactions with this payee</string>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KMyMoneyRegister::Register</class>
-   <extends>QTableWidget</extends>
-   <header>register.h</header>
-  </customwidget>
-  <customwidget>
    <class>KMyMoneyAccountCombo</class>
    <extends>KComboBox</extends>
    <header>kmymoneyaccountcombo.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyRegister::Register</class>
+   <extends>QTableWidget</extends>
+   <header>register.h</header>
   </customwidget>
   <customwidget>
    <class>KListWidget</class>

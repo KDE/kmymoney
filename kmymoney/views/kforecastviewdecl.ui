@@ -338,6 +338,9 @@
             <verstretch>1</verstretch>
            </sizepolicy>
           </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
           <column>
            <property name="text">
             <string notr="true">1</string>
@@ -369,6 +372,9 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
          <column>
           <property name="text">
            <string notr="true">1</string>
@@ -388,6 +394,9 @@
        </property>
        <item>
         <widget class="QTreeWidget" name="m_advancedList">
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
          <property name="rootIsDecorated">
           <bool>false</bool>
          </property>
@@ -410,6 +419,9 @@
        </property>
        <item>
         <widget class="QTreeWidget" name="m_budgetList">
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
          <column>
           <property name="text">
            <string notr="true">1</string>

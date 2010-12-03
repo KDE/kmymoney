@@ -66,6 +66,9 @@
        </item>
        <item>
         <widget class="QTreeWidget" name="m_budgetList">
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
          <property name="allColumnsShowFocus">
           <bool>true</bool>
          </property>
