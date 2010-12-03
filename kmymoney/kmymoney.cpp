@@ -325,6 +325,7 @@ public:
 
   // methods
   void consistencyCheck(bool alwaysDisplayResults);
+  void setCustomColors();
 };
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
@@ -345,6 +346,8 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   // preset the pointer because we need it during the course of this constructor
   kmymoney = this;
   d->m_config = KGlobal::config();
+
+  d->setCustomColors();
 
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneyGlobalSettings::firstFiscalMonth(), KMyMoneyGlobalSettings::firstFiscalDay());
 
@@ -2442,6 +2445,8 @@ void KMyMoneyApp::slotUpdateConfiguration(void)
     d->m_autoSaveTimer->setSingleShot(true);
     d->m_autoSaveTimer->start(d->m_autoSavePeriod * 60 * 1000);
   }
+
+  d->setCustomColors();
 }
 
 /** No descriptions */
@@ -6423,6 +6428,20 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
     KMessageBox::informationList(0, i18n("The consistency check has found some issues in your data. Details are presented below. Those issues that could not be corrected automatically need to be solved by the user."), msg, i18n("Consistency check result"));
   } else if (alwaysDisplayResult) {
     KMessageBox::informationList(0, i18n("The consistency check has found no issues in your data. Details are presented below."), msg, i18n("Consistency check result"));
+  }
+}
+
+void KMyMoneyApp::Private::setCustomColors()
+{
+  // setup the kmymoney custom colors if needed
+  if (KMyMoneyGlobalSettings::useSystemColors()) {
+    qApp->setStyleSheet(QString());
+  } else {
+    qApp->setStyleSheet("QAbstractItemView { background-color: " + KMyMoneyGlobalSettings::listBGColor().name() + ";" +
+                                            "alternate-background-color: " + KMyMoneyGlobalSettings::listColor().name() + ";" +
+                                            "background-clip: content;}" +
+                               "QTableView { gridline-color: " + KMyMoneyGlobalSettings::listGridColor().name() + ";}" +
+                              "QHeaderView { background-color: pallete(base);}");
   }
 }
 

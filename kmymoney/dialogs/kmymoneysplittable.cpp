@@ -101,8 +101,6 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
   horizontalHeader()->restoreState(columns);
   horizontalHeader()->setStretchLastSection(true);
 
-  setStyleSheet("QTableWidget { gridline-color: " + KMyMoneyGlobalSettings::listGridColor().name() + "; background-color: " + KMyMoneyGlobalSettings::listColor().name() + "; alternate-background-color: " + KMyMoneyGlobalSettings::listBGColor().name() + "; }");
-
   setShowGrid(KMyMoneyGlobalSettings::showGrid());
 
   setEditTriggers(QAbstractItemView::NoEditTriggers);
