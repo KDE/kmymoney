@@ -377,6 +377,9 @@ void KEquityPriceUpdateDlg::slotUpdateSelection(void)
 
 void KEquityPriceUpdateDlg::slotUpdateSelectedClicked(void)
 {
+  // disable sorting while the update is running to maintain the current order of items on which
+  // the update process depends and which could be changed with sorting enabled due to the updated values
+  lvEquityList->setSortingEnabled(false);
   QTreeWidgetItem* item = lvEquityList->invisibleRootItem()->child(0);
   int skipCnt = 1;
   while (item && !item->isSelected()) {
@@ -394,6 +397,9 @@ void KEquityPriceUpdateDlg::slotUpdateSelectedClicked(void)
 
 void KEquityPriceUpdateDlg::slotUpdateAllClicked(void)
 {
+  // disable sorting while the update is running to maintain the current order of items on which
+  // the update process depends and which could be changed with sorting enabled due to the updated values
+  lvEquityList->setSortingEnabled(false);
   QTreeWidgetItem* item = lvEquityList->invisibleRootItem()->child(0);
   if (item) {
     prgOnlineProgress->setMaximum(1 + lvEquityList->invisibleRootItem()->childCount());
@@ -548,6 +554,8 @@ void KEquityPriceUpdateDlg::finishUpdate(void)
   m_fUpdateAll = false;
   // force progress bar to show 100%
   prgOnlineProgress->setValue(prgOnlineProgress->maximum());
+  // re-enable the sorting that was disabled during the update process
+  lvEquityList->setSortingEnabled(true);
 }
 
 // Make sure, that these definitions are only used within this file
