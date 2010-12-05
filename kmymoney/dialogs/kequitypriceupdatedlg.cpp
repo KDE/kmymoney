@@ -65,7 +65,6 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
     KEquityPriceUpdateDlgDecl(parent),
     m_fUpdateAll(false)
 {
-  lvEquityList->setRootIsDecorated(false);
   QStringList headerList;
   headerList << i18n("Symbol") << i18nc("Equity name", "Name")
   << i18n("Price") << i18n("Date");
