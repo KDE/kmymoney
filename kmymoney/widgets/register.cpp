@@ -1707,8 +1707,10 @@ void Register::removeEditWidgets(QMap<QString, QWidget*>& editWidgets)
   KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(focusItem());
   for (int row = t->startRow(); row < t->startRow() + t->numRowsRegister(true); ++row) {
     for (int col = 0; col < columnCount(); ++col) {
-      if (cellWidget(row, col))
+      if (cellWidget(row, col)) {
+        cellWidget(row, col)->hide();
         setCellWidget(row, col, 0);
+      }
     }
     // make sure to reduce the possibly size to what it was before editing started
     setRowHeight(row, t->rowHeightHint());
