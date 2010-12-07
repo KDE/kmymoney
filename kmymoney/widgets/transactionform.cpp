@@ -435,8 +435,10 @@ void TransactionForm::removeEditWidgets(QMap<QString, QWidget*>& editWidgets)
 
   for (int row = 0; row < rowCount(); ++row) {
     for (int col = 0; col < columnCount(); ++col) {
-      if (cellWidget(row, col))
+      if (cellWidget(row, col)) {
+        cellWidget(row, col)->hide();
         setCellWidget(row, col, 0);
+      }
     }
   }
   resize(ValueColumn1);
