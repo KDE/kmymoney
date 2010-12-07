@@ -306,7 +306,7 @@ int InvestProcessing::validateNewColumn(const int& col, const QString& type)
 //                                              selection was in range
 //                                              ...but does it clash?
   if ((!m_columnType[col].isEmpty())  && (m_columnType[col] != type)) {// column is already in use
-    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected !\
+    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected.\
     <center>Please reselect both entries as necessary.</center>", m_columnType[col]));
 
     m_previousColumn = -1;

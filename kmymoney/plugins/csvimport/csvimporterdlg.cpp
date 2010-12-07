@@ -176,7 +176,7 @@ int CsvImporterDlg::validateColumn(const int& col, const QString& type)
   QString returnMessage();
   //                                               selection was in range
   if ((!m_columnType[col].isEmpty())  && (m_columnType[col] != type)) {//            column is already in use
-    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected !\
+    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected.\
     <center>Please reselect both entries as necessary.</center>", m_columnType[col]));
 
     m_previousColumn = -1;
@@ -350,7 +350,7 @@ void CsvImporterDlg::memoColumnSelected(int col)
     return;
   } else {//                                    clashes with prior selection
     m_memoSelected = false;//                   clear incorrect selection
-    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected !\
+    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected.\
     <center>Please reselect both entries as necessary.</center>", m_columnType[col]));
     comboBox_memoCol->setCurrentIndex(-1);
     m_previousColumn = -1;
