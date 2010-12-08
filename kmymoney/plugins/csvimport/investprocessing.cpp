@@ -306,8 +306,7 @@ int InvestProcessing::validateNewColumn(const int& col, const QString& type)
 //                                              selection was in range
 //                                              ...but does it clash?
   if ((!m_columnType[col].isEmpty())  && (m_columnType[col] != type)) {// column is already in use
-    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected.\
-    <center>Please reselect both entries as necessary.</center>", m_columnType[col]));
+    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>", m_columnType[col]));
 
     m_previousColumn = -1;
     resetComboBox(m_columnType[col], col);//      clash,  so reset ..
@@ -405,8 +404,7 @@ void InvestProcessing::memoColumnSelected(int col)
     return;
   } else {//                                    clashes with prior selection
     m_memoSelected = false;//                   clear incorrect selection
-    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected !\
-    <center>Please reselect both entries as necessary.</center>", m_columnType[col]));
+    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>", m_columnType[col]));
     m_investDlg->comboBox_memoCol->setCurrentIndex(-1);
     m_previousColumn = -1;
     resetComboBox(m_columnType[col], col);//      clash,  so reset ..
@@ -674,10 +672,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       txt = txt.remove('"');
       QDate dat = m_investDlg->m_convertDat->convertDate(txt);//      Date column
       if (dat == QDate()) {
-        KMessageBox::sorry(m_investDlg, i18n("<center>\
-        An invalid date has been detected during import.</center>\
-        <center><b>%1</b></center>\
-        Please check that you have set the correct date format.", txt), i18n("CSV import"));
+        KMessageBox::sorry(m_investDlg, i18n("<center>An invalid date has been detected during import.</center> <center><b>%1</b></center> Please check that you have set the correct date format.", txt), i18n("CSV import"));
         return KMessageBox::Cancel;
       }
       QString qifDate = dat.toString(m_dateFormats[m_dateFormatIndex]);
@@ -690,10 +685,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       txt = m_columnList[i].trimmed();
       QString txt = inBuffer.section(m_fieldDelimiter_char, i, i).trimmed();
       if (txt.isEmpty()) {
-        KMessageBox::sorry(m_investDlg, i18n("<center>\
-        The type/action that has been detected during import is empty.</center>\
-        <center><b>%1</b></center>\
-        Check that you have selected the correct column.", txt), i18n("CSV import"));
+        KMessageBox::sorry(m_investDlg, i18n("<center> The type/action that has been detected during import is empty.</center> <center><b>%1</b></center> Check that you have selected the correct column.", txt), i18n("CSV import"));
         return KMessageBox::Cancel;
       }
       m_trInvestData.type = txt;
@@ -770,8 +762,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
   }//end of col loop
   m_investDlg->m_redefine->setInBuffer(inBuffer);
   if (m_trInvestData.type != "0") { //      Don't need to do this check on checking items.
-    int ret = (m_investDlg->m_redefine->checkValid(m_trInvestData.type, i18n("The quantity, price and amount parameters in the\n\
-    current transaction don't match with the action type.\n Please select another action type\n")));
+    int ret = (m_investDlg->m_redefine->checkValid(m_trInvestData.type, i18n("The quantity, price and amount parameters in the\ncurrent transaction don't match with the action type.\nPlease select another action type.")));
     if (ret == KMessageBox::Cancel) return ret;
   }
 
@@ -818,8 +809,7 @@ int InvestProcessing::processActionType(QString& type)
   QString payee;
 
   if (m_buyList.isEmpty()) {
-    KMessageBox::information(0, i18n("buyList of transaction types was not found!\
-    <center>Check existence of correct resource file - 'csvimporterrc'.</center>"));
+    KMessageBox::information(0, i18n("buyList of transaction types was not found. <center>Check existence of correct resource file - 'csvimporterrc'.</center>"));
     return KMessageBox::Cancel;
   }
   for (it = m_shrsinList.constBegin(); it != m_shrsinList.constEnd(); ++it) { // Shrsin
@@ -894,8 +884,7 @@ int InvestProcessing::processActionType(QString& type)
   //   no valid type found
 
   m_investDlg->m_redefine->setInBuffer(m_inBuffer);
-  int ret = m_investDlg->m_redefine->suspectType(i18n(" The transaction below has an unrecognised type/action. \n \
-  Please select an appropriate entry."));
+  int ret = m_investDlg->m_redefine->suspectType(i18n(" The transaction below has an unrecognised type/action.\nPlease select an appropriate entry."));
   return ret;
 }//   end of Type Col
 
@@ -916,10 +905,8 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
     st.m_eType = MyMoneyStatement::etInvestment;
   tr.m_datePosted = m_trInvestData.date;
   if (!m_trInvestData.date.isValid()) {
-    int rc = KMessageBox::warningContinueCancel(0, i18n("The date entry \"%1\" read from the file\
-    cannot be interpreted through the current date format setting of \"%2.\"\n\n"
-             "Pressing \'Continue\' will assign today's date to the transaction. Pressing \'Cancel\'' will\
-    abort the import operation. You can then restart the import and select a different date format.",
+    int rc = KMessageBox::warningContinueCancel(0, i18n("The date entry \"%1\" read from the file cannot be interpreted through the current date format setting of \"%2.\"\n\n"
+             "Pressing \'Continue\' will assign today's date to the transaction. Pressing \'Cancel\'' will abort the import operation. You can then restart the import and select a different date format.",
              m_trInvestData.date.toString(m_dateFormats[m_dateFormatIndex]),
              m_dateFormats[m_dateFormatIndex]), i18n("Invalid date format"));
     switch (rc) {
@@ -1010,9 +997,7 @@ void InvestProcessing::acceptClicked(bool checked)
       m_investDlg->tableWidget->show();//    ....vertical header width redraws
     } else {
 
-      KMessageBox::information(0, i18n("The Security Name, and Date and Type columns are needed!\
-      <center>Also, the Price, Quantity and Amount columns.</center>\
-      <center>Please try again.</center>"));
+      KMessageBox::information(0, i18n("The Security Name, and Date and Type columns are needed! <center>Also, the Price, Quantity and Amount columns.</center> <center>Please try again.</center>"));
     }
   } else {
     m_importNow = false;
@@ -1260,9 +1245,7 @@ void InvestProcessing::resetComboBox(const QString& comboBox, const int& col)
       break;
     default:
       qDebug() << i18n("1195 ERROR. Field name not recognised.") << comboBox;
-      KMessageBox::sorry(0, i18n("<center>Field name not recognised.</center>\
-      <center>'<b>%1</b>'</center>\
-      Please re-enter your column selections."
+      KMessageBox::sorry(0, i18n("<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> Please re-enter your column selections."
                                  , comboBox), i18n("CSV import"));
   }
   m_columnType[col].clear();

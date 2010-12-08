@@ -523,9 +523,7 @@ void CsvProcessing::importClicked(bool checked)
       m_width += h - oldwdth;
       m_csvDialog->tableWidget->setFixedWidth(m_width);
     } else {
-      KMessageBox::information(0, i18n("<center>An Amount-type column, and Date and\
-        Payee columns are needed!</center>\
-        <center>Please try again.</center>"));
+      KMessageBox::information(0, i18n("<center>An Amount-type column, and Date and Payee columns are needed!</center><center>Please try again.</center>"));
     }
   } else {
     m_importNow = false;
