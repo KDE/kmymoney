@@ -99,7 +99,7 @@ void CsvProcessing::fileDialog()
   }
   QPointer<KFileDialog> dialog =
     new KFileDialog(KUrl("kfiledialog:///kmymoney-csvbank"),
-                    i18n("*.csv *.PRN *.txt | CSV Files\n *.*|All files (*.*)"),
+                    i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"),
                     0);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
   if (dialog->exec() == QDialog::Accepted) {

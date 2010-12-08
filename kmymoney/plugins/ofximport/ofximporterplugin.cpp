@@ -105,7 +105,7 @@ void OfxImporterPlugin::slotImportFile(void)
 {
   KUrl url = importInterface()->selectFile(i18n("OFX import file selection"),
              "",
-             "*.ofx *.qfx *.ofc|OFX files (*.ofx, *.qfx, *.ofc)\n*.*|All files (*.*)",
+             "*.ofx *.qfx *.ofc|OFX files (*.ofx, *.qfx, *.ofc)\n*|All files",
              static_cast<KFile::Mode>((int)(KFile::File | KFile::ExistingOnly)));
   if (url.isValid()) {
     if (isMyFormat(url.path())) {

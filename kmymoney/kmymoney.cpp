@@ -1410,7 +1410,7 @@ void KMyMoneyApp::slotFileOpen(void)
   KMSTATUS(i18n("Open a file."));
 
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-open"),
-      i18n("*.kmy *.xml|KMyMoney files\n *.*|All files (*.*)"),
+      i18n("*.kmy *.xml|KMyMoney files\n*|All files"),
       this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
 
@@ -2054,7 +2054,7 @@ void KMyMoneyApp::slotSaveAccountTemplates(void)
 
   QString newName = KFileDialog::getSaveFileName(KGlobalSettings::documentPath(),
                     i18n("*.kmt|KMyMoney template files\n"
-                         "*.*|All files"), this, i18n("Save as..."));
+                         "*|All files"), this, i18n("Save as..."));
   //
   // If there is no file extension, then append a .kmt at the end of the file name.
   // If there is a file extension, make sure it is .kmt, delete any others.
@@ -2192,7 +2192,7 @@ void KMyMoneyApp::slotGncImport(void)
   KMSTATUS(i18n("Importing a Gnucash file."));
 
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-import"),
-      i18n(" * |Gnucash files\n * |All files (*.*)"),
+      i18n("*|Gnucash files\n*|All files"),
       this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
 
@@ -2234,7 +2234,7 @@ void KMyMoneyApp::slotStatementImport(void)
   KMSTATUS(i18n("Importing an XML Statement."));
 
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-import"),
-      i18n("*.xml|XML files\n *.*|All files (*.*)"),
+      i18n("*.xml|XML files\n*|All files"),
       this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
 

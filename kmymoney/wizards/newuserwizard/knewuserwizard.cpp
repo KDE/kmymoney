@@ -335,7 +335,7 @@ FilePage::FilePage(Wizard* wizard) :
 
   KUser user;
   m_dataFileEdit->setUrl(QString("%1/%2.kmy").arg(QDir::homePath(), user.loginName()));
-  m_dataFileEdit->fileDialog()->setFilter(i18n("*.kmy *.xml|KMyMoney files\n *.*|All files (*.*)"));
+  m_dataFileEdit->fileDialog()->setFilter(i18n("*.kmy *.xml|KMyMoney files\n *|All files"));
   m_dataFileEdit->fileDialog()->setOperationMode(KFileDialog::Saving);
   m_dataFileEdit->setMode(KFile::File);
 }

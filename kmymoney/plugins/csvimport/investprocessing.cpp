@@ -136,7 +136,7 @@ void InvestProcessing::fileDialog()
     m_csvPath  = "~/";
   }
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-csvinvest"),
-      i18n("*.csv *.PRN *.txt | CSV Files\n *.*|All files (*.*)"), 0);
+      i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"), 0);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
   if (dialog->exec() == QDialog::Accepted) {
     m_url = dialog->selectedUrl();
