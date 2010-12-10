@@ -438,13 +438,13 @@ void KHomeView::showPayments(void)
     QList<MyMoneySchedule> todays;
     QList<MyMoneySchedule>::Iterator t_it;
     for (t_it = schedule.begin(); t_it != schedule.end();) {
-      if ((*t_it).nextDueDate() == QDate::currentDate()) {
+      if ((*t_it).adjustedNextDueDate() == QDate::currentDate()) {
         todays.append(*t_it);
-        (*t_it).setNextDueDate((*t_it).nextPayment((*t_it).nextDueDate()));
+        (*t_it).setNextDueDate((*t_it).nextPayment(QDate::currentDate()));
 
-        // if nextDueDate is still currentDate then remove it from
+        // if adjustedNextDueDate is still currentDate then remove it from
         // scheduled payments
-        if ((*t_it).nextDueDate() == QDate::currentDate()) {
+        if ((*t_it).adjustedNextDueDate() == QDate::currentDate()) {
           t_it = schedule.erase(t_it);
           continue;
         }
