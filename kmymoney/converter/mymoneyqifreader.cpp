@@ -364,9 +364,13 @@ void MyMoneyQifReader::slotProcessData(void)
   } else
     list = dateFormats;
 
-  m_qifProfile.setInputDateFormat(list.first());
-
-  qDebug("Selected date format: '%s'", qPrintable(list.first()));
+  if (!list.empty()) {
+    m_qifProfile.setInputDateFormat(list.first());
+    qDebug("Selected date format: '%s'", qPrintable(list.first()));
+  } else {
+    // cancel the process because there is probably nothing to work with
+    m_userAbort = true;
+  }
 
   signalProgress(0, m_qifLines.count(), i18n("Importing QIF ..."));
   QStringList::iterator it;
