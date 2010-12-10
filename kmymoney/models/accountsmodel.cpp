@@ -734,14 +734,28 @@ AccountsFilterProxyModel::~AccountsFilterProxyModel()
   */
 bool AccountsFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-  QVariant leftData = sourceModel()->data(left, AccountsModel::DisplayOrderRole);
-  QVariant rightData = sourceModel()->data(right, AccountsModel::DisplayOrderRole);
+  // different sorting based on the column which is being sorted
+  switch (left.column()) {
+    // for the accounts column sort based on the DisplayOrderRole
+    case AccountsModel::Account: {
+      QVariant leftData = sourceModel()->data(left, AccountsModel::DisplayOrderRole);
+      QVariant rightData = sourceModel()->data(right, AccountsModel::DisplayOrderRole);
 
-  if (leftData.toInt() == rightData.toInt()) {
-    // sort items of the same display order alphabetically
-    return QSortFilterProxyModel::lessThan(left, right);
+      if (leftData.toInt() == rightData.toInt()) {
+        // sort items of the same display order alphabetically
+        return QSortFilterProxyModel::lessThan(left, right);
+      }
+      return leftData.toInt() < rightData.toInt();
+    }
+    // the total balance and value columns are sorted based on the value of the account
+    case AccountsModel::TotalBalance:
+    case AccountsModel::TotalValue: {
+      QVariant leftData = sourceModel()->data(sourceModel()->index(left.row(), 0, left.parent()), AccountsModel::AccountTotalValueRole);
+      QVariant rightData = sourceModel()->data(sourceModel()->index(right.row(), 0, right.parent()), AccountsModel::AccountTotalValueRole);
+      return leftData.value<MyMoneyMoney>() < rightData.value<MyMoneyMoney>();
+    }
   }
-  return leftData.toInt() < rightData.toInt();
+  return QSortFilterProxyModel::lessThan(left, right);
 }
 
 /**
