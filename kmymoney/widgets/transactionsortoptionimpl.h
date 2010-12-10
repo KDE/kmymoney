@@ -55,6 +55,7 @@ protected slots:
   void slotRemoveItem(void);
   void slotUpItem(void);
   void slotDownItem(void);
+  void slotFocusChanged(QWidget *o, QWidget *n);
 private:
   void init();
 signals:

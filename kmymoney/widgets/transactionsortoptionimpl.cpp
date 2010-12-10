@@ -42,10 +42,9 @@ void TransactionSortOption::init()
 
   setSettings(QString());
 
-  QListWidgetItem* p;
-  if ((p = m_availableList->item(0)) != 0) {
-    m_availableList->setCurrentItem(p);
-  }
+  // update UI when focus changes
+  connect(qApp, SIGNAL(focusChanged(QWidget *, QWidget *)),
+          this, SLOT(slotFocusChanged(QWidget *, QWidget *)));
 }
 
 /**
@@ -64,7 +63,9 @@ void TransactionSortOption::init()
 void TransactionSortOption::setSettings(const QString& settings)
 {
   m_availableList->clear();
+  m_availableList->setCurrentItem(0);
   m_selectedList->clear();
+  m_selectedList->setCurrentItem(0);
 
   QStringList list = settings.split(',', QString::SkipEmptyParts);
   QMap<int, bool> selectedMap;
@@ -107,6 +108,17 @@ void TransactionSortOption::setSettings(const QString& settings)
       addEntry(m_availableList, 0, val);
     }
   }
+
+  // update the current item on the lists
+  QListWidgetItem* p;
+  if ((p = m_availableList->item(0)) != 0) {
+    m_availableList->setCurrentItem(p);
+  }
+  if ((p = m_selectedList->item(0)) != 0) {
+    m_selectedList->setCurrentItem(p);
+  }
+  
+  slotAvailableSelected();
 }
 
 QListWidgetItem* TransactionSortOption::addEntry(KListWidget* p, QListWidgetItem* after, int idx)
@@ -164,9 +176,19 @@ QString TransactionSortOption::settings(void) const
   return rc;
 }
 
+void TransactionSortOption::slotFocusChanged(QWidget *o, QWidget *n)
+{
+  Q_UNUSED(o);
+  
+  if(n == m_availableList)
+    slotAvailableSelected();
+  if(n == m_selectedList)
+    slotSelectedSelected();
+}
+
 void TransactionSortOption::slotAvailableSelected()
 {
-  QListWidgetItem* item = m_selectedList->currentItem();
+  QListWidgetItem* item = m_availableList->currentItem();
   m_addButton->setEnabled(item != 0);
   m_removeButton->setDisabled(true);
   m_upButton->setDisabled(true);
