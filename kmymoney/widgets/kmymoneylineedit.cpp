@@ -26,6 +26,7 @@
 #include <QPalette>
 #include <QKeyEvent>
 #include <QFocusEvent>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -76,10 +77,15 @@ void kMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
 void kMyMoneyLineEdit::focusInEvent(QFocusEvent *ev)
 {
   KLineEdit::focusInEvent(ev);
-  // select the text so it can be edited by the user - only if the widget is not focused
-  // after a popup is closed (which could be the completer of the KMyMoneyCombo)
+  // select the text so it can be edited by the user - only if the widget
+  // is not focused after a popup is closed (which could be the completer
+  // of the KMyMoneyCombo).
+  //
+  // Delay that selection until the application is idle to prevent a
+  // recursive loop which otherwise entered when the focus is set to this
+  // widget using the mouse. (bko #259369)
   if (ev->reason() != Qt::PopupFocusReason)
-    selectAll();
+    QTimer::singleShot(0, this, SLOT(selectAll()));
 }
 
 void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
