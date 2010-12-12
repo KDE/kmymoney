@@ -70,7 +70,8 @@ MyMoneyPrice::MyMoneyPrice(const QString& from, const QString& to, const QDate& 
   if (!m_rate.isZero())
     m_invRate = MyMoneyMoney(1, 1) / m_rate;
   else
-    qDebug("Price with zero value created");
+    qDebug("Price with zero value created for '%s' to '%s'",
+           qPrintable(from),qPrintable(to));
 }
 
 MyMoneyPrice::~MyMoneyPrice()

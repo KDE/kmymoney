@@ -1382,14 +1382,16 @@ void MyMoneyGncReader::convertPrice(const GncPrice *gpr)
   if (gpr->commodity()->isCurrency()) {
     MyMoneyPrice exchangeRate(gpr->commodity()->id().toUtf8(), gpr->currency()->id().toUtf8(),
                               gpr->priceDate(), rate, i18n("Imported History"));
-    m_storage->addPrice(exchangeRate);
+    if(!exchangeRate.rate(QString()).isZero())
+      m_storage->addPrice(exchangeRate);
   } else {
     MyMoneySecurity e = m_storage->security(m_mapEquities[gpr->commodity()->id().toUtf8()]);
     if (gncdebug) qDebug() << "Searching map, key = " << gpr->commodity()->id()
       << ", found id =" << e.id().data();
     e.setTradingCurrency(gpr->currency()->id().toUtf8());
     MyMoneyPrice stockPrice(e.id(), gpr->currency()->id().toUtf8(), gpr->priceDate(), rate, i18n("Imported History"));
-    m_storage->addPrice(stockPrice);
+    if(!stockPrice.rate(QString()).isZero())
+      m_storage->addPrice(stockPrice);
     m_storage->modifySecurity(e);
   }
   signalProgress(++m_priceCount, 0);
