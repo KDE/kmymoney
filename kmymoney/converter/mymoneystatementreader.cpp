@@ -1089,6 +1089,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
   }
 
   // Add the transaction
+  TransactionEditor* editor = 0;
   try {
 
     // check for matches already stored in the engine
@@ -1128,7 +1129,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           MyMoneySchedule schedule(*(dynamic_cast<const MyMoneySchedule*>(o)));
           if (KMessageBox::questionYesNo(0, QString("<qt>%1</qt>").arg(i18n("KMyMoney has found a scheduled transaction named <b>%1</b> which matches an imported transaction. Do you want KMyMoney to enter this schedule now so that the transaction can be matched? ", schedule.name())), i18n("Schedule found")) == KMessageBox::Yes) {
             KEnterScheduleDlg dlg(0, schedule);
-            TransactionEditor* editor = dlg.startEdit();
+            editor = dlg.startEdit();
             if (editor) {
               MyMoneyTransaction torig;
               // in case the amounts of the scheduled transaction and the
@@ -1173,7 +1174,6 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
               matcher.match(torig, matchedSplit, t, s1);
               d->transactionsMatched++;
             }
-            delete editor;
           }
         }
       }
@@ -1182,7 +1182,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       qDebug("Detected as duplicate");
     }
     delete o;
+    // destroy the editor
+    delete editor;
   } catch (MyMoneyException *e) {
+    // destroy the editor
+    delete editor;
     QString message(i18n("Problem adding or matching imported transaction with id '%1': %2", t_in.m_strBankID, e->what()));
     qDebug("%s", qPrintable(message));
     delete e;
