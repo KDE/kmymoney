@@ -198,7 +198,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_categoriesView = new KCategoriesView();
   m_categoriesViewFrame = m_model->addPage(m_categoriesView, i18n("Categories"));
   m_categoriesViewFrame->setIcon(KIcon("categories"));
-  
+
   connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(selectObject(const MyMoneyObject&)), kmymoney, SLOT(slotSelectInstitution(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
@@ -270,7 +270,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotCurrentPageChanged(const QModelIndex, const QModelIndex)));
 
   updateViewType();
-  
+
   m_inConstructor = false;
 }
 

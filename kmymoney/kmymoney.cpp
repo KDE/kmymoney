@@ -1904,8 +1904,7 @@ const QString KMyMoneyApp::slotStatusMsg(const QString &text)
   d->m_applicationIsReady = false;
 
   QString currentMessage = text;
-  if (currentMessage.isEmpty() || currentMessage == i18nc("Application is ready to use", "Ready."))
-  {
+  if (currentMessage.isEmpty() || currentMessage == i18nc("Application is ready to use", "Ready.")) {
     d->m_applicationIsReady = true;
     currentMessage = i18nc("Application is ready to use", "Ready.");
   }

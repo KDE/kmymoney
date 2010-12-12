@@ -117,7 +117,7 @@ void TransactionSortOption::setSettings(const QString& settings)
   if ((p = m_selectedList->item(0)) != 0) {
     m_selectedList->setCurrentItem(p);
   }
-  
+
   slotAvailableSelected();
 }
 
@@ -179,10 +179,10 @@ QString TransactionSortOption::settings(void) const
 void TransactionSortOption::slotFocusChanged(QWidget *o, QWidget *n)
 {
   Q_UNUSED(o);
-  
-  if(n == m_availableList)
+
+  if (n == m_availableList)
     slotAvailableSelected();
-  if(n == m_selectedList)
+  if (n == m_selectedList)
     slotSelectedSelected();
 }
 

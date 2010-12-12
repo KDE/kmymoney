@@ -35,9 +35,8 @@
 
 struct Models::Private {
   Private() :
-    m_accountsModel(0),
-    m_loadOnIdle(false)
-  {}
+      m_accountsModel(0),
+      m_loadOnIdle(false) {}
 
   AccountsModel *m_accountsModel;
   bool m_loadOnIdle;
@@ -72,12 +71,10 @@ AccountsModel* Models::accountsModel()
 
 void Models::dataChanged(void)
 {
-  if (d->m_loadOnIdle)
-  {
+  if (d->m_loadOnIdle) {
     // load the accounts model on idle
     QTimer::singleShot(0, accountsModel(), SLOT(load()));
-  } else
-  {
+  } else {
     // make sure we load the accounts model when the event loop is idle only after we loaded some real accounts
     d->m_loadOnIdle = accountsModel()->load();
   }
