@@ -23,6 +23,7 @@
 #include <QFile>
 #include <QRegExp>
 #include <QTextStream>
+#include <QTextCodec>
 #include <QByteArray>
 
 // ----------------------------------------------------------------------------
@@ -40,6 +41,7 @@
 #include <kshell.h>
 #include <KConfigGroup>
 #include <kprocess.h>
+#include <kencodingprober.h>
 // ----------------------------------------------------------------------------
 // Project Headers
 
@@ -129,7 +131,11 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
       QFile f(tmpFile);
       if (f.open(QIODevice::ReadOnly)) {
         result = true;
-        QString quote = QTextStream(&f).readAll();
+        // Find out the page encoding and convert it to unicode
+        QByteArray page = f.readAll();
+        KEncodingProber prober(KEncodingProber::Universal);
+        prober.feed(page);
+        QString quote = QTextCodec::codecForName(prober.encoding())->toUnicode(page);
         f.close();
         slotParseQuote(quote);
       } else {
