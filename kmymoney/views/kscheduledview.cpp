@@ -394,7 +394,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
       item->setText(4, KGlobal::locale()->formatDate(schedule.adjustedNextDueDate(), KLocale::ShortDate));
     }
     item->setData(4, KScheduleTreeItem::OrderRole, QVariant(nextDueDate));
-    item->setText(5, i18n(schedule.occurrenceToString().toLatin1()));
+    item->setText(5, i18nc("Frequency of schedule", schedule.occurrenceToString().toLatin1()));
     item->setText(6, KMyMoneyUtils::paymentMethodToString(schedule.paymentType()));
   } catch (MyMoneyException *e) {
     item->setText(0, "Error:");
