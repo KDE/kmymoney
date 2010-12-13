@@ -301,7 +301,8 @@ void KMyMoneyView::updateViewType(void)
       faceType = KPageView::Tabbed;
       break;
   }
-  setFaceType(faceType);
+  if (faceType != KMyMoneyView::faceType())
+    setFaceType(faceType);
 }
 
 bool KMyMoneyView::showPageHeader() const
