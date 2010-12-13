@@ -1433,6 +1433,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     list.back().setIncludingPrice(true);
     list.back().setConvertCurrency(true);
     list.back().setChartDataLabels(false);
+    list.back().setSkipZero(true);
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAssetLiability,

@@ -182,6 +182,12 @@ private:
     * Model to store chart data
     */
   QStandardItemModel m_model;
+
+  /**
+    * whether to skip values if zero
+    */
+  bool m_skipZero;
+
 };
 
 } // end namespace reports

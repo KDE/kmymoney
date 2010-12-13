@@ -202,6 +202,12 @@ public:
   int currentDateColumn(void) const {
     return m_currentDateColumn;
   }
+  /**
+   * @see #m_skipZero
+   */
+  bool isSkippingZero(void) const {
+    return m_skipZero;
+  }
 
   // Simple set operations
   void setName(const QString& _s) {
@@ -291,6 +297,12 @@ public:
   }
   void setCurrentDateColumn(int _f) {
     m_currentDateColumn = _f;
+  }
+  /**
+   * @see #m_skipZero
+   */
+  void setSkipZero(int _f) {
+    m_skipZero = _f;
   }
 
   /**
@@ -654,6 +666,31 @@ private:
     */
   static int m_lineWidth;
 
+  /**
+    * This option is for investments reports only which
+    * show prices instead of balances as all other reports do.
+    * <p>
+    * Select this option to include prices for the given period (week, month,
+    * quarter, ...) only.
+    * </p>
+    * <p>
+    * If this option is off the last existing price is shown for a period, if
+    * it is on, in a table the value is '0' shown and in a chart a linear
+    * interpolation for the missing values will be performed.
+    * <br>Example:
+    * <br>There are prices for January and March, but there is no price for
+    * February.
+    * <ul>
+    * <li><b>OFF</b>: shows the price for February as the last price of
+    * January
+    * <li><b>ON</b>: in a table the value is '0', in a chart a linear
+    * interpolation for the February-price will be performed
+    * (so it makes a kind of average-value using the January- and the
+    * March-price in the chart)
+    * </ul>
+    * </p>
+    */
+  bool m_skipZero;
 };
 
 /**

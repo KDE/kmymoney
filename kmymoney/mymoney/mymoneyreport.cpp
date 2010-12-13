@@ -79,7 +79,8 @@ MyMoneyReport::MyMoneyReport() :
     m_includePrice(false),
     m_includeAveragePrice(false),
     m_mixedTime(false),
-    m_currentDateColumn(0)
+    m_currentDateColumn(0),
+    m_skipZero(false)
 {
   m_chartLineWidth = m_lineWidth;
 }
@@ -120,7 +121,8 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_includePrice(false),
     m_includeAveragePrice(false),
     m_mixedTime(false),
-    m_currentDateColumn(0)
+    m_currentDateColumn(0),
+    m_skipZero(false)
 {
   //set initial values
   m_chartLineWidth = m_lineWidth;
@@ -353,6 +355,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   e.setAttribute("chartgridlines", m_chartGridLines);
   e.setAttribute("chartbydefault", m_chartByDefault);
   e.setAttribute("chartlinewidth", m_chartLineWidth);
+  e.setAttribute("skipZero", m_skipZero);
 
   if (m_reportType == ePivotTable) {
     e.setAttribute("type", "pivottable 1.15");
@@ -609,6 +612,7 @@ bool MyMoneyReport::read(const QDomElement& e)
     m_includeAveragePrice = e.attribute("includesaverageprice", "0").toUInt();
     m_mixedTime = e.attribute("mixedtime", "0").toUInt();
     m_includeMovingAverage = e.attribute("includesmovingaverage", "0").toUInt();
+    m_skipZero = e.attribute("skipZero", "0").toUInt();
     if (m_includeMovingAverage)
       m_movingAverageDays = e.attribute("movingaveragedays", "1").toUInt();
 

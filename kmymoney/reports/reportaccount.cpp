@@ -97,7 +97,7 @@ void ReportAccount::calculateAccountHierarchy(void)
   }
 }
 
-MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date) const
+MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date, bool exactDate) const
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -106,7 +106,7 @@ MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date) const
 
   MyMoneySecurity undersecurity = file->security(currencyId());
   if (! undersecurity.isCurrency()) {
-    MyMoneyPrice price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), date);
+    MyMoneyPrice price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), date, exactDate);
     if (price.isValid()) {
       result = price.rate(undersecurity.tradingCurrency());
 
@@ -120,13 +120,14 @@ MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date) const
                    .arg(undersecurity.name())
                    .arg(file->security(undersecurity.tradingCurrency()).name())
                    .arg(date.toString()));
+      result = MyMoneyMoney(0, 1);
     }
   }
 
   return result;
 }
 
-MyMoneyMoney ReportAccount::baseCurrencyPrice(const QDate& date) const
+MyMoneyMoney ReportAccount::baseCurrencyPrice(const QDate& date, bool exactDate) const
 {
   // Note that whether or not the user chooses to convert to base currency, all the values
   // for a given account/category are converted to the currency for THAT account/category
@@ -146,13 +147,13 @@ MyMoneyMoney ReportAccount::baseCurrencyPrice(const QDate& date) const
   MyMoneyFile* file = MyMoneyFile::instance();
 
   if (isForeignCurrency()) {
-    result = foreignCurrencyPrice(file->baseCurrency().id(), date);
+    result = foreignCurrencyPrice(file->baseCurrency().id(), date, exactDate);
   }
 
   return result;
 }
 
-MyMoneyMoney ReportAccount::foreignCurrencyPrice(const QString foreignCurrency, const QDate& date) const
+MyMoneyMoney ReportAccount::foreignCurrencyPrice(const QString foreignCurrency, const QDate& date, bool exactDate) const
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -171,7 +172,7 @@ MyMoneyMoney ReportAccount::foreignCurrencyPrice(const QString foreignCurrency, 
 
   //It makes no sense to get the price if both currencies are the same
   if (currency().id() != tradingCurrency) {
-    price = file->price(currency().id(), tradingCurrency, date);
+    price = file->price(currency().id(), tradingCurrency, date, exactDate);
 
     if (price.isValid()) {
       result = price.rate(tradingCurrency);

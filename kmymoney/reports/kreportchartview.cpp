@@ -75,6 +75,9 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   //set the number of columns
   setNumColumns(numberColumns);
 
+  //set skipZero
+  m_skipZero = config.isSkippingZero();
+
   //remove existing headers
   while (headerFooters().count() > 0) {
     HeaderFooter* delHeader = headerFooters().at(0);
@@ -107,6 +110,13 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     case MyMoneyReport::eChartEnd:
     case MyMoneyReport::eChartLine: {
         KDChart::LineDiagram* diagram = new KDChart::LineDiagram;
+
+        if (config.isSkippingZero()) {
+          LineAttributes attributes = diagram->lineAttributes();
+          attributes.setMissingValuesPolicy(LineAttributes::MissingValuesAreBridged);
+          diagram->setLineAttributes(attributes);
+        }
+
         CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
         replaceCoordinatePlane(cartesianPlane);
         coordinatePlane()->replaceDiagram(diagram);
@@ -188,7 +198,16 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     //set y axis
     KBalanceAxis *yAxis = new KBalanceAxis();
     yAxis->setPosition(CartesianAxis::Left);
-    yAxis->setTitleText(i18n("Balance"));
+
+    // TODO
+    // if the chart shows prices and no balance
+    // the axis title should be 'Price'
+    if(config.isIncludingPrice()) {
+        yAxis->setTitleText(i18n("Price"));
+    } else {
+        yAxis->setTitleText(i18n("Balance"));
+    }
+
     TextAttributes yAxisTextAttr(yAxis->titleTextAttributes());
     yAxisTextAttr.setMinimalFontSize(KGlobalSettings::generalFont().pointSize());
     yAxis->setTitleTextAttributes(yAxisTextAttr);
@@ -483,16 +502,23 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
     int column = startColumn;
     while (column <= endColumn && column < numColumns()) {
       double value = rowSet[rowType][column].toDouble();
-      QString toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
-                        .arg(legendText)
-                        .arg(value, 0, 'f', 2);
 
-      if (accountSeries()) {
-        this->setDataCell(column - 1, rowNum, value);
-        this->setCellTip(column - 1, rowNum, toolTip);
+      //if zero and set to skip, increase column and continue with next value
+      if(m_skipZero && rowSet[rowType][column].isZero()) {
+        ++column;
+        continue;
       } else {
-        this->setDataCell(rowNum, column - 1, value);
-        this->setCellTip(rowNum, column - 1, toolTip);
+          QString toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
+                            .arg(legendText)
+                            .arg(value, 0, 'f', 2);
+
+          if (accountSeries()) {
+            this->setDataCell(column - 1, rowNum, value);
+            this->setCellTip(column - 1, rowNum, toolTip);
+          } else {
+            this->setDataCell(rowNum, column - 1, value);
+            this->setCellTip(rowNum, column - 1, toolTip);
+          }
       }
       ++column;
     }

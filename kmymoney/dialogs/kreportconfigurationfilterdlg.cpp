@@ -153,6 +153,7 @@ void KReportConfigurationFilterDlg::slotSearch(void)
   m_currentState.setComment(m_tab1->m_editComment->text());
   m_currentState.setConvertCurrency(m_tab1->m_checkCurrency->isChecked());
   m_currentState.setFavorite(m_tab1->m_checkFavorite->isChecked());
+  m_currentState.setSkipZero(m_tab1->m_skipZero->isChecked());
 
   if (m_tab2) {
     MyMoneyReport::EDetailLevel dl[4] = { MyMoneyReport::eDetailAll, MyMoneyReport::eDetailTop, MyMoneyReport::eDetailGroup, MyMoneyReport::eDetailTotal };
@@ -277,6 +278,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
   m_tab1->m_editComment->setText(m_initialState.comment());
   m_tab1->m_checkCurrency->setChecked(m_initialState.isConvertCurrency());
   m_tab1->m_checkFavorite->setChecked(m_initialState.isFavorite());
+  m_tab1->m_skipZero->setChecked(m_initialState.isSkippingZero());
 
   if (m_tab2) {
     switch (m_initialState.detailLevel()) {

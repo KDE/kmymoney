@@ -964,7 +964,7 @@ void PivotTable::convertToBaseCurrency(void)
           QDate valuedate = columnDate(column);
 
           //get base price for that date
-          MyMoneyMoney conversionfactor = it_row.key().baseCurrencyPrice(valuedate);
+          MyMoneyMoney conversionfactor = it_row.key().baseCurrencyPrice(valuedate, m_config_f.isSkippingZero());
 
           for (int i = 0; i < m_rowTypeList.size(); ++i) {
             if (m_rowTypeList[i] != eAverage) {
@@ -1009,7 +1009,7 @@ void PivotTable::convertToDeepCurrency(void)
           QDate valuedate = columnDate(column);
 
           //get conversion factor for the account and date
-          MyMoneyMoney conversionfactor = it_row.key().deepCurrencyPrice(valuedate);
+          MyMoneyMoney conversionfactor = it_row.key().deepCurrencyPrice(valuedate, m_config_f.isSkippingZero());
 
           //use the fraction relevant to the account at hand
           int fraction = it_row.key().currency().smallestAccountFraction();
