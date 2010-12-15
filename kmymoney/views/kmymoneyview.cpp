@@ -574,7 +574,6 @@ bool KMyMoneyView::readFile(const KUrl& url)
 {
   QString filename;
 
-//  newStorage();
   m_fileOpen = false;
   bool isEncrypted = false;
 
@@ -777,15 +776,17 @@ bool KMyMoneyView::readFile(const KUrl& url)
   if (rc == false)
     return rc;
 
-  // make sure we setup the encryption key correctly
+  // encapsulate transactions to the engine to be able to commit/rollback
   MyMoneyFileTransaction ft;
+  
+  // make sure we setup the encryption key correctly
   if (isEncrypted && MyMoneyFile::instance()->value("kmm-encryption-key").isEmpty()) {
     MyMoneyFile::instance()->setValue("kmm-encryption-key", KMyMoneyGlobalSettings::gpgRecipientList().join(","));
   }
 
   // make sure we setup the name of the base accounts in translated form
   try {
-    MyMoneyFile* file = MyMoneyFile::instance();
+    MyMoneyFile *file = MyMoneyFile::instance();
     checkAccountName(file->asset(), i18n("Asset"));
     checkAccountName(file->liability(), i18n("Liability"));
     checkAccountName(file->income(), i18n("Income"));
@@ -897,12 +898,26 @@ bool KMyMoneyView::initializeStorage()
 
   // make sure, we have a base currency and all accounts are
   // also assigned to a currency.
-  if (MyMoneyFile::instance()->baseCurrency().id().isEmpty()) {
+  QString baseId;
+  try {
+    baseId = MyMoneyFile::instance()->baseCurrency().id();
+  } catch (MyMoneyException *e) {
+    qDebug("%s", qPrintable(e->what()));
+    delete e;
+  }
+  
+  if (baseId.isEmpty()) {
     // Stay in this endless loop until we have a base currency,
     // as without it the application does not work anymore.
-    while (MyMoneyFile::instance()->baseCurrency().id().isEmpty())
+    while (baseId.isEmpty()) {
       selectBaseCurrency();
-
+      try {
+        baseId = MyMoneyFile::instance()->baseCurrency().id();
+      } catch (MyMoneyException *e) {
+        qDebug("%s", qPrintable(e->what()));
+        delete e;
+      }
+    }
   } else {
     // in some odd intermediate cases there could be files out there
     // that have a base currency set, but still have accounts that
@@ -1279,7 +1294,15 @@ void KMyMoneyView::newFile(void)
 void KMyMoneyView::slotSetBaseCurrency(const MyMoneySecurity& baseCurrency)
 {
   if (!baseCurrency.id().isEmpty()) {
-    if (baseCurrency.id() != MyMoneyFile::instance()->baseCurrency().id()) {
+    QString baseId;
+    try {
+      baseId = MyMoneyFile::instance()->baseCurrency().id();
+    } catch (MyMoneyException *e) {
+      qDebug("%s", qPrintable(e->what()));
+      delete e;
+    }
+
+    if (baseCurrency.id() != baseId) {
       MyMoneyFileTransaction ft;
       try {
         MyMoneyFile::instance()->setBaseCurrency(baseCurrency);
@@ -1297,14 +1320,29 @@ void KMyMoneyView::selectBaseCurrency(void)
   MyMoneyFile* file = MyMoneyFile::instance();
 
   // check if we have a base currency. If not, we need to select one
-  if (file->baseCurrency().id().isEmpty()) {
+  QString baseId;
+  try {
+    baseId = MyMoneyFile::instance()->baseCurrency().id();
+  } catch (MyMoneyException *e) {
+    qDebug("%s", qPrintable(e->what()));
+    delete e;
+  }
+
+  if (baseId.isEmpty()) {
     QPointer<KCurrencyEditDlg> dlg = new KCurrencyEditDlg(this);
     connect(dlg, SIGNAL(selectBaseCurrency(const MyMoneySecurity&)), this, SLOT(slotSetBaseCurrency(const MyMoneySecurity&)));
     dlg->exec();
     delete dlg;
   }
 
-  if (!file->baseCurrency().id().isEmpty()) {
+  try {
+    baseId = MyMoneyFile::instance()->baseCurrency().id();
+  } catch (MyMoneyException *e) {
+    qDebug("%s", qPrintable(e->what()));
+    delete e;
+  }
+  
+  if (!baseId.isEmpty()) {
     // check that all accounts have a currency
     QList<MyMoneyAccount> list;
     file->accountList(list);
@@ -1319,8 +1357,16 @@ void KMyMoneyView::selectBaseCurrency(void)
 
 
     for (it = list.begin(); it != list.end(); ++it) {
-      if ((*it).currencyId().isEmpty() || (*it).currencyId().length() == 0) {
-        (*it).setCurrencyId(file->baseCurrency().id());
+      QString cid;
+      try {
+        if(!(*it).currencyId().isEmpty() || (*it).currencyId().length() != 0)
+          cid = MyMoneyFile::instance()->currency((*it).currencyId()).id();
+      } catch (MyMoneyException *e) {
+        delete e;
+      }
+      
+      if (cid.isEmpty()) {
+        (*it).setCurrencyId(baseId);
         MyMoneyFileTransaction ft;
         try {
           file->modifyAccount(*it);

@@ -111,7 +111,14 @@ void KCurrencyEditDlg::slotLoadCurrencies(void)
   QString localCurrency(localeconv()->int_curr_symbol);
   localCurrency.truncate(3);
 
-  QString baseCurrency = MyMoneyFile::instance()->baseCurrency().id();
+  QString baseCurrency;
+  try {
+    baseCurrency = MyMoneyFile::instance()->baseCurrency().id();
+  } catch (MyMoneyException *e) {
+    qDebug("%s", qPrintable(e->what()));
+    delete e;
+  }
+
   // construct a transparent 16x16 pixmap
   QPixmap empty(16, 16);
   QBitmap mask(16, 16);
@@ -210,17 +217,24 @@ void KCurrencyEditDlg::slotSelectCurrency(const QString& id)
 void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
+  QString baseId;
+  try {
+    baseId = MyMoneyFile::instance()->baseCurrency().id();
+  } catch (MyMoneyException *e) {
+    delete e;
+  }
+
   m_currencyInEditing = false;
 
   if (item) {
     try {
       m_currency = file->security(item->text(1));
-
+      
     } catch (MyMoneyException *e) {
       delete e;
       m_currency = MyMoneySecurity();
     }
-    button(KDialog::User1)->setDisabled(m_currency.id() == file->baseCurrency().id());
+    button(KDialog::User1)->setDisabled(m_currency.id() == baseId);
     emit selectObject(m_currency);
   }
 }
