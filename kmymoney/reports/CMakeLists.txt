@@ -14,6 +14,8 @@ SET (libreports_a_SOURCES
 
 KDE4_ADD_LIBRARY(reports STATIC ${libreports_a_SOURCES})
 
+ADD_DEPENDENCIES(reports kmm_config)
+
 ############## tests ####################
 IF( KDE4_BUILD_TESTS )
 
