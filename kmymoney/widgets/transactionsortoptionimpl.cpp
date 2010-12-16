@@ -18,27 +18,34 @@
 */
 
 #include "transactionsortoptionimpl.h"
+
 #include <kiconloader.h>
 #include "register.h"
-//#include "sortoptionlistitem.h"
+
+#include "ui_transactionsortoptiondecl.h"
 
 TransactionSortOption::TransactionSortOption(QWidget *parent)
     : QWidget(parent)
 {
-  setupUi(this);
+  ui = new Ui::TransactionSortOptionDecl;
+  ui->setupUi(this);
   init();
 }
 
+TransactionSortOption::~TransactionSortOption()
+{
+  delete ui;
+}
 
 void TransactionSortOption::init()
 {
-  m_addButton->setIcon(KIcon("arrow-right"));
-  m_removeButton->setIcon(KIcon("arrow-left"));
-  m_upButton->setIcon(KIcon("arrow-up"));
-  m_downButton->setIcon(KIcon("arrow-down"));
+  ui->m_addButton->setIcon(KIcon("arrow-right"));
+  ui->m_removeButton->setIcon(KIcon("arrow-left"));
+  ui->m_upButton->setIcon(KIcon("arrow-up"));
+  ui->m_downButton->setIcon(KIcon("arrow-down"));
 
   // don't allow sorting of the selected entries
-  m_selectedList->setSortingEnabled(false);
+  ui->m_selectedList->setSortingEnabled(false);
 
   setSettings(QString());
 
@@ -62,10 +69,10 @@ void TransactionSortOption::init()
   */
 void TransactionSortOption::setSettings(const QString& settings)
 {
-  m_availableList->clear();
-  m_availableList->setCurrentItem(0);
-  m_selectedList->clear();
-  m_selectedList->setCurrentItem(0);
+  ui->m_availableList->clear();
+  ui->m_availableList->setCurrentItem(0);
+  ui->m_selectedList->clear();
+  ui->m_selectedList->setCurrentItem(0);
 
   QStringList list = settings.split(',', QString::SkipEmptyParts);
   QMap<int, bool> selectedMap;
@@ -82,7 +89,7 @@ void TransactionSortOption::setSettings(const QString& settings)
       dateSign = (val < 0) ? -1 : 1;
       continue;
     }
-    last = addEntry(m_selectedList, last, val);
+    last = addEntry(ui->m_selectedList, last, val);
   }
 
   // make sure to create EntryOrderSort if missing but required
@@ -90,7 +97,7 @@ void TransactionSortOption::setSettings(const QString& settings)
       && selectedMap.find(static_cast<int>(KMyMoneyRegister::EntryOrderSort)) == selectedMap.end()) {
     int val = dateSign * static_cast<int>(KMyMoneyRegister::EntryOrderSort);
     selectedMap[static_cast<int>(KMyMoneyRegister::EntryOrderSort)] = true;
-    last = addEntry(m_selectedList, last, val);
+    last = addEntry(ui->m_selectedList, last, val);
   }
 
   // fill available list
@@ -105,17 +112,17 @@ void TransactionSortOption::setSettings(const QString& settings)
       int val = i;
       if (i == static_cast<int>(KMyMoneyRegister::ValueSort))
         val = -val;
-      addEntry(m_availableList, 0, val);
+      addEntry(ui->m_availableList, 0, val);
     }
   }
 
   // update the current item on the lists
   QListWidgetItem* p;
-  if ((p = m_availableList->item(0)) != 0) {
-    m_availableList->setCurrentItem(p);
+  if ((p = ui->m_availableList->item(0)) != 0) {
+    ui->m_availableList->setCurrentItem(p);
   }
-  if ((p = m_selectedList->item(0)) != 0) {
-    m_selectedList->setCurrentItem(p);
+  if ((p = ui->m_selectedList->item(0)) != 0) {
+    ui->m_selectedList->setCurrentItem(p);
   }
   
   slotAvailableSelected();
@@ -160,7 +167,7 @@ void TransactionSortOption::setDirectionIcon(QListWidgetItem* item)
 QString TransactionSortOption::settings(void) const
 {
   QString rc;
-  QListWidgetItem* item = dynamic_cast<QListWidgetItem*>(m_selectedList->item(0));
+  QListWidgetItem* item = dynamic_cast<QListWidgetItem*>(ui->m_selectedList->item(0));
   while (item) {
     int option = KMyMoneyRegister::textToSortOrder(item->text());
     // if we look at the EntryOrderSort option, we have to make
@@ -169,7 +176,7 @@ QString TransactionSortOption::settings(void) const
       rc  += QString::number(static_cast<int>(KMyMoneyRegister::EntryDateSort) * item->data(Qt::UserRole).toInt()) + ',';
     }
     rc += QString::number(KMyMoneyRegister::textToSortOrder(item->text()) * item->data(Qt::UserRole).toInt());
-    item = m_selectedList->item(m_selectedList->row(item) + 1);
+    item = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);
     if (item != 0)
       rc += ',';
   }
@@ -179,48 +186,48 @@ QString TransactionSortOption::settings(void) const
 void TransactionSortOption::slotFocusChanged(QWidget *o, QWidget *n)
 {
   Q_UNUSED(o);
-  
-  if(n == m_availableList)
+
+  if(n == ui->m_availableList)
     slotAvailableSelected();
-  if(n == m_selectedList)
+  if(n == ui->m_selectedList)
     slotSelectedSelected();
 }
 
 void TransactionSortOption::slotAvailableSelected()
 {
-  QListWidgetItem* item = m_availableList->currentItem();
-  m_addButton->setEnabled(item != 0);
-  m_removeButton->setDisabled(true);
-  m_upButton->setDisabled(true);
-  m_downButton->setDisabled(true);
+  QListWidgetItem* item = ui->m_availableList->currentItem();
+  ui->m_addButton->setEnabled(item != 0);
+  ui->m_removeButton->setDisabled(true);
+  ui->m_upButton->setDisabled(true);
+  ui->m_downButton->setDisabled(true);
 }
 
 void TransactionSortOption::slotSelectedSelected()
 {
-  QListWidgetItem* item = m_selectedList->currentItem();
-  m_addButton->setDisabled(true);
-  m_removeButton->setEnabled(item != 0);
+  QListWidgetItem* item = ui->m_selectedList->currentItem();
+  ui->m_addButton->setDisabled(true);
+  ui->m_removeButton->setEnabled(item != 0);
   if (item) {
-    m_upButton->setEnabled(m_selectedList->row(item) != 0);
-    m_downButton->setEnabled(m_selectedList->row(item) < m_selectedList->count() - 1);
+    ui->m_upButton->setEnabled(ui->m_selectedList->row(item) != 0);
+    ui->m_downButton->setEnabled(ui->m_selectedList->row(item) < ui->m_selectedList->count() - 1);
   } else {
-    m_upButton->setEnabled(false);
-    m_downButton->setEnabled(false);
+    ui->m_upButton->setEnabled(false);
+    ui->m_downButton->setEnabled(false);
   }
 }
 
 void TransactionSortOption::slotAddItem(void)
 {
   QListWidgetItem* item;
-  if ((item = m_availableList->currentItem()) != 0) {
-    QListWidgetItem* next = m_availableList->item(m_availableList->row(item) + 1);
+  if ((item = ui->m_availableList->currentItem()) != 0) {
+    QListWidgetItem* next = ui->m_availableList->item(ui->m_availableList->row(item) + 1);
     if (!next)
-      next = m_availableList->item(m_availableList->row(item) + 1);
-    m_availableList->takeItem(m_availableList->row(item));
-    m_selectedList->addItem(item);
-    m_addButton->setEnabled((m_availableList->count() > 0));
+      next = ui->m_availableList->item(ui->m_availableList->row(item) + 1);
+    ui->m_availableList->takeItem(ui->m_availableList->row(item));
+    ui->m_selectedList->addItem(item);
+    ui->m_addButton->setEnabled((ui->m_availableList->count() > 0));
     if (next) {
-      m_availableList->setCurrentItem(next);
+      ui->m_availableList->setCurrentItem(next);
     }
     emit settingsChanged(settings());
   }
@@ -229,15 +236,15 @@ void TransactionSortOption::slotAddItem(void)
 void TransactionSortOption::slotRemoveItem(void)
 {
   QListWidgetItem* item;
-  if ((item = m_selectedList->currentItem()) != 0) {
-    QListWidgetItem* next = m_selectedList->item(m_selectedList->row(item) + 1);
+  if ((item = ui->m_selectedList->currentItem()) != 0) {
+    QListWidgetItem* next = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);
     if (!next)
-      next = m_selectedList->item(m_selectedList->row(item) + 1);
-    m_selectedList->takeItem(m_selectedList->row(item));
-    m_availableList->addItem(item);
-    m_removeButton->setEnabled(m_selectedList->count() > 0);
+      next = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);
+    ui->m_selectedList->takeItem(ui->m_selectedList->row(item));
+    ui->m_availableList->addItem(item);
+    ui->m_removeButton->setEnabled(ui->m_selectedList->count() > 0);
     if (next) {
-      m_selectedList->setCurrentItem(next);
+      ui->m_selectedList->setCurrentItem(next);
     }
     emit settingsChanged(settings());
   }
@@ -245,30 +252,30 @@ void TransactionSortOption::slotRemoveItem(void)
 
 void TransactionSortOption::slotUpItem(void)
 {
-  QListWidgetItem *item = m_selectedList->currentItem();
-  QListWidgetItem *prev = m_selectedList->item(m_selectedList->row(item) - 1);
-  int prevRow = m_selectedList->row(prev);
+  QListWidgetItem *item = ui->m_selectedList->currentItem();
+  QListWidgetItem *prev = ui->m_selectedList->item(ui->m_selectedList->row(item) - 1);
+  int prevRow = ui->m_selectedList->row(prev);
   if (prev) {
-    m_selectedList->takeItem(m_selectedList->row(item));
-    m_selectedList->insertItem(prevRow, item);
-    m_selectedList->setCurrentRow(m_selectedList->row(item));
-    m_upButton->setEnabled(m_selectedList->row(item) > 0);
-    m_downButton->setEnabled(m_selectedList->row(item) < m_selectedList->count() - 1);
+    ui->m_selectedList->takeItem(ui->m_selectedList->row(item));
+    ui->m_selectedList->insertItem(prevRow, item);
+    ui->m_selectedList->setCurrentRow(ui->m_selectedList->row(item));
+    ui->m_upButton->setEnabled(ui->m_selectedList->row(item) > 0);
+    ui->m_downButton->setEnabled(ui->m_selectedList->row(item) < ui->m_selectedList->count() - 1);
     emit settingsChanged(settings());
   }
 }
 
 void TransactionSortOption::slotDownItem(void)
 {
-  QListWidgetItem *item = m_selectedList->currentItem();
-  QListWidgetItem *next = m_selectedList->item(m_selectedList->row(item) + 1);
-  int nextRow = m_selectedList->row(next);
+  QListWidgetItem *item = ui->m_selectedList->currentItem();
+  QListWidgetItem *next = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);
+  int nextRow = ui->m_selectedList->row(next);
   if (next) {
-    m_selectedList->takeItem(m_selectedList->row(item));
-    m_selectedList->insertItem(nextRow, item);
-    m_selectedList->setCurrentRow(m_selectedList->row(item));
-    m_upButton->setEnabled(m_selectedList->row(item) > 0);
-    m_downButton->setEnabled(m_selectedList->row(item) < m_selectedList->count() - 1);
+    ui->m_selectedList->takeItem(ui->m_selectedList->row(item));
+    ui->m_selectedList->insertItem(nextRow, item);
+    ui->m_selectedList->setCurrentRow(ui->m_selectedList->row(item));
+    ui->m_upButton->setEnabled(ui->m_selectedList->row(item) > 0);
+    ui->m_downButton->setEnabled(ui->m_selectedList->row(item) < ui->m_selectedList->count() - 1);
     emit settingsChanged(settings());
   }
 }

@@ -20,9 +20,6 @@
 #ifndef TRANSACTIONSORTOPTIONIMPL_H
 #define TRANSACTIONSORTOPTIONIMPL_H
 
-#include "ui_transactionsortoptiondecl.h"
-
-
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QListWidgetItem>
@@ -33,13 +30,17 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+namespace Ui
+{
+  class TransactionSortOptionDecl;
+};
 
-
-class TransactionSortOption : public QWidget, public Ui::TransactionSortOptionDecl
+class TransactionSortOption : public QWidget
 {
   Q_OBJECT
 public:
   TransactionSortOption(QWidget *parent);
+  ~TransactionSortOption();
   QString settings(void) const;
 public slots:
   void setSettings(const QString& settings);
@@ -60,9 +61,9 @@ private:
   void init();
 signals:
   void settingsChanged(const QString&);
+
+private:
+  Ui::TransactionSortOptionDecl *ui;
 };
 
-
-
 #endif /* TRANSACTIONSORTOPTIONIMPL_H */
-
