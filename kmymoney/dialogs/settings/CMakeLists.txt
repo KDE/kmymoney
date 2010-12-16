@@ -31,3 +31,5 @@ SET (libsettings_a_UI
 kde4_add_ui_files(libsettings_a_SOURCES ${libsettings_a_UI} )
 
 KDE4_ADD_LIBRARY(settings STATIC ${libsettings_a_SOURCES})
+
+ADD_DEPENDENCIES(settings widgets kmm_config)
