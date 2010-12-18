@@ -1407,6 +1407,10 @@ void Register::mouseReleaseEvent(QMouseEvent *e)
 void Register::contextMenuEvent(QContextMenuEvent *e)
 {
   if (e->reason() == QContextMenuEvent::Mouse) {
+    // since mouse release event is not called,
+    // we need to fake the right mouse button release here
+    m_mouseButton = Qt::RightButton;
+    
     // if a selected item is clicked don't change the selection
     RegisterItem* item = itemAtRow(rowAt(e->y()));
     if (item && !item->isSelected())
@@ -1885,6 +1889,9 @@ void Register::scrollPage(int key, Qt::KeyboardModifiers modifiers)
 
   if (item->isSelectable()) {
     handleItemChange(oldFocusItem, modifiers & Qt::ShiftModifier, modifiers & Qt::ControlModifier);
+    // tell the world about the changes in selection
+    SelectedTransactions list(this);
+    emit selectionChanged(list);
   }
 
   if (m_focusItem && !m_focusItem->isSelected() && m_selectionMode == SingleSelection)
