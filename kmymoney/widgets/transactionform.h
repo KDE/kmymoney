@@ -37,9 +37,6 @@
 #include <mymoneyobject.h>
 #include <register.h>
 
-#include "kmymoneysettings.h"
-
-
 namespace KMyMoneyTransactionForm
 {
 
