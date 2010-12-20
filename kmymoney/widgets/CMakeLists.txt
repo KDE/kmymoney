@@ -151,6 +151,8 @@ KDE4_ADD_LIBRARY(widgets STATIC
   )
 TARGET_LINK_LIBRARIES(widgets kmymoney_base)
 
+ADD_DEPENDENCIES(widgets kmm_config)
+
 ########### install files ###############
 
 INSTALL(FILES ${kmymoney_STAT_HEADERS} 
