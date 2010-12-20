@@ -34,7 +34,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"

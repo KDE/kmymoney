@@ -31,7 +31,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
 #include "ui_ksettingsreportsdecl.h"
 
 class KSettingsReportsDecl : public QWidget, public Ui::KSettingsReportsDecl

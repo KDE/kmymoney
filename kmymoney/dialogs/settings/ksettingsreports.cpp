@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "ksettingsreports.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -23,7 +25,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ksettingsreports.h"
+#include "kmymoneyglobalsettings.h"
 
 class KSettingsReports::Private
 {

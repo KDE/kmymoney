@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "reporttable.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -24,7 +26,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "reporttable.h"
+#include "kmymoneyglobalsettings.h"
 
 reports::ReportTable::ReportTable(void):
     m_resourceHtml("html"),
