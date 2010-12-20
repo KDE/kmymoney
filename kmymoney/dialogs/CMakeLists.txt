@@ -34,7 +34,6 @@ SET(libdialogs_a_SOURCES
   knewbudgetdlg.cpp 
   knewequityentrydlg.cpp
   knewfiledlg.cpp 
-  konlinequoteconfigurationdlg.cpp
   kpayeereassigndlg.cpp 
   kreportconfigurationfilterdlg.cpp
   kselectdatabasedlg.cpp
@@ -64,8 +63,7 @@ SET(dialogs_UI
   kgncpricesourcedlgdecl.ui kimportdlgdecl.ui kloadtemplatedlgdecl.ui
   kmymoneyfileinfodlgdecl.ui kmymoneypricedlgdecl.ui
   knewaccountdlgdecl.ui knewbankdlgdecl.ui knewbudgetdlgdecl.ui
-  knewequityentrydecl.ui knewfiledlgdecl.ui
-  konlinequoteconfigurationdecl.ui kpayeereassigndlgdecl.ui
+  knewequityentrydecl.ui knewfiledlgdecl.ui kpayeereassigndlgdecl.ui
   kselectdatabasedlgdecl.ui kselecttransactionsdlgdecl.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlgdecl.ui
   kupdatestockpricedlgdecl.ui mymoneyqifprofileeditordecl.ui
