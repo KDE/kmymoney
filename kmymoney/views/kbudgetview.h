@@ -131,6 +131,9 @@ protected:
   const MyMoneyBudget& selectedBudget(void) const;
   void askSave(void);
 
+  bool collectSubBudgets(MyMoneyBudget::AccountGroup &destination, const QModelIndex &index) const;
+  void clearSubBudgets(const QModelIndex &index);
+
 protected slots:
 
   /**

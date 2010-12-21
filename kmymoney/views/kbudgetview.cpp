@@ -178,9 +178,27 @@ Qt::ItemFlags BudgetAccountsProxyModel::flags(const QModelIndex &index) const
   Qt::ItemFlags flags = AccountsViewFilterProxyModel::flags(index);
   if (!index.parent().isValid())
     return flags & ~Qt::ItemIsSelectable;
+
+  // check if any of the parent accounts has the 'include subaccounts'
+  // flag set. If so, we don't allow selecting this account
+  QModelIndex idx = index.parent();
+  while(idx.isValid()) {
+    QModelIndex source_idx = mapToSource(idx);
+    QVariant accountData = sourceModel()->data(source_idx, AccountsModel::AccountRole);
+    if (accountData.canConvert<MyMoneyAccount>()) {
+      MyMoneyAccount account = accountData.value<MyMoneyAccount>();
+      // find out if the account is budgeted
+      MyMoneyBudget::AccountGroup budgetAccount = m_budget.account(account.id());
+      if (budgetAccount.id() == account.id()) {
+        if(budgetAccount.budgetSubaccounts()) {
+          return flags & ~Qt::ItemIsEnabled;
+        }
+      }
+    }
+    idx = idx.parent();
+  }
   return flags;
 }
-
 
 void BudgetAccountsProxyModel::setBudget(const MyMoneyBudget& budget)
 {
@@ -755,15 +773,74 @@ void KBudgetView::cb_includesSubaccounts_clicked()
   QModelIndexList indexes = m_accountTree->selectionModel()->selectedIndexes();
   if (!indexes.empty()) {
     QString accountID = m_accountTree->model()->data(indexes.front(), AccountsModel::AccountIdRole).toString();
-    // now, we get a reference to the accountgroup, to mofify its atribute,
+    // now, we get a reference to the accountgroup, to modify its attribute,
     // and then put the resulting account group instead of the original
-
     MyMoneyBudget::AccountGroup auxAccount = m_budget.account(accountID);
     auxAccount.setBudgetSubaccounts(m_cbBudgetSubaccounts->isChecked());
+
+    // in case we turn the option on, we check that no subordinate account
+    // has a budget. If we find some, we ask the user if he wants to move it
+    // to the current account or leave things as they are
+    if (m_cbBudgetSubaccounts->isChecked()) {
+      // TODO: asking the user needs to be added. So long, we assume yes
+      if(1) {
+        MyMoneyBudget::AccountGroup subAccount;
+        if (collectSubBudgets(subAccount, indexes.front())) {
+          // we found a sub-budget somewhere
+          // so we add those figures found and
+          // clear the subaccounts
+          auxAccount += subAccount;
+          clearSubBudgets(indexes.front());
+        }
+
+        if (auxAccount.budgetLevel() == MyMoneyBudget::AccountGroup::eNone) {
+          MyMoneyBudget::PeriodGroup period;
+          auxAccount.addPeriod(m_budget.budgetStart(), period);
+          auxAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
+        }
+      }
+    }
+
     m_budget.setAccount(auxAccount, accountID);
+    m_filterProxyModel->setBudget(m_budget);
+    m_budgetValue->setBudgetValues(m_budget, auxAccount);
 
     loadAccounts();
   }
+}
+
+void KBudgetView::clearSubBudgets(const QModelIndex &index)
+{
+  int children = m_accountTree->model()->rowCount(index);
+
+  for(int i = 0; i < children; ++i) {
+    QModelIndex childIdx = index.child(i, 0);
+    QString accountID = m_accountTree->model()->data(childIdx, AccountsModel::AccountIdRole).toString();
+    m_budget.removeReference(accountID);
+    clearSubBudgets(childIdx);
+  }
+}
+
+bool KBudgetView::collectSubBudgets(MyMoneyBudget::AccountGroup &destination, const QModelIndex &index) const
+{
+  bool rc = false;
+  int children = m_accountTree->model()->rowCount(index);
+
+  for(int i = 0; i < children; ++i) {
+    QModelIndex childIdx = index.child(i, 0);
+    QString accountID = m_accountTree->model()->data(childIdx, AccountsModel::AccountIdRole).toString();
+    MyMoneyBudget::AccountGroup auxAccount = m_budget.account(accountID);
+    if(auxAccount.budgetLevel() != MyMoneyBudget::AccountGroup::eNone
+    && !auxAccount.isZero()) {
+      rc = true;
+      // add the subaccount
+      // TODO: deal with budgets in different currencies
+      //    https://bugs.kde.org/attachment.cgi?id=54813 contains a demo file
+      destination += auxAccount;
+    }
+    rc |= collectSubBudgets(destination, childIdx);
+  }
+  return rc;
 }
 
 void KBudgetView::slotNewBudget(void)
