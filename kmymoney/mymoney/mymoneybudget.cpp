@@ -80,7 +80,7 @@ void MyMoneyBudget::AccountGroup::convertToMonthByMonth(void)
   QDate date;
 
   switch (m_budgetlevel) {
-    case eMonthByMonth:
+    case eYearly:
     case eMonthly:
       period = *(m_periods.begin());
       period.setAmount(totalBalance() / MyMoneyMoney(12, 1));
@@ -95,11 +95,15 @@ void MyMoneyBudget::AccountGroup::convertToMonthByMonth(void)
     default:
       break;
   }
-  m_budgetlevel = eYearly;
+  m_budgetlevel = eMonthByMonth;
 }
 
 MyMoneyBudget::AccountGroup MyMoneyBudget::AccountGroup::operator += (const MyMoneyBudget::AccountGroup & _r)
 {
+  // in case the right side is empty, we're done
+  if (_r.m_budgetlevel == eNone)
+    return *this;
+
   MyMoneyBudget::AccountGroup r(_r);
 
   // make both operands based on the same budget level
@@ -121,12 +125,29 @@ MyMoneyBudget::AccountGroup MyMoneyBudget::AccountGroup::operator += (const MyMo
     }
   }
 
+  QMap<QDate, MyMoneyBudget::PeriodGroup> rPeriods = r.m_periods;
+  QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_pr;
+
+  // in case the left side is empty, we add empty periods
+  // so that both budgets are identical
+  if (m_budgetlevel == eNone) {
+    it_pr = rPeriods.constBegin();
+    QDate date = (*it_pr).startDate();
+    while (it_pr != rPeriods.constEnd()) {
+      MyMoneyBudget::PeriodGroup period = *it_pr;
+      period.setAmount(MyMoneyMoney());
+      addPeriod(date, period);
+      date = date.addMonths(1);
+      ++it_pr;
+    }
+    m_budgetlevel = r.m_budgetlevel;
+  }
+
+  QMap<QDate, MyMoneyBudget::PeriodGroup> periods = m_periods;
+  QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_p;
+
   // now both budgets should be of the same type and we simply need
   // to iterate over the period list and add the values
-  QMap<QDate, MyMoneyBudget::PeriodGroup> periods = m_periods;
-  QMap<QDate, MyMoneyBudget::PeriodGroup> rPeriods = r.m_periods;
-  QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_p;
-  QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_pr;
   m_periods.clear();
   it_p = periods.constBegin();
   it_pr = rPeriods.constBegin();
@@ -201,7 +222,8 @@ void MyMoneyBudget::write(QDomElement& e, QDomDocument *doc) const
   QMap<QString, AccountGroup>::const_iterator it;
   for (it = m_accounts.begin(); it != m_accounts.end(); ++it) {
     // only add the account if there is a budget entered
-    if (!(*it).balance().isZero()) {
+    // or it covers some sub accounts
+    if (!(*it).balance().isZero() || (*it).budgetSubaccounts()) {
       QDomElement domAccount = doc->createElement("ACCOUNT");
       domAccount.setAttribute("id", it.key());
       domAccount.setAttribute("budgetlevel", AccountGroup::kBudgetLevelText[it.value().budgetLevel()]);
