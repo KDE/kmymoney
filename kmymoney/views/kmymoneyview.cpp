@@ -2231,17 +2231,11 @@ KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString&
 {
   KMyMoneyViewBase* viewBase = new KMyMoneyViewBase(this, title, title);
 
-  //avoid setting this page as the last selected page since this is called by plugins adding to the view interface
-  disconnect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRememberPage(const QModelIndex, const QModelIndex)));
-
   KPageWidgetItem* frm = m_model->addPage(viewBase, title);
   frm->setIcon(KIcon(icon));
 
-  connect(this, SIGNAL(currentPageChanged(const QModelIndex, const QModelIndex)), this, SLOT(slotRememberPage(const QModelIndex, const QModelIndex)));
-
   return viewBase;
 }
-
 
 /* ------------------------------------------------------------------------ */
 /*                 KMyMoneyViewBase                                         */
