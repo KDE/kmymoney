@@ -18,7 +18,7 @@
 
 #include <QtTest/QtTest>
 
-#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyMoneyTest;
+#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyBudgetTest;
 
 #include "mymoneybudget.h"
 
