@@ -170,4 +170,12 @@ IF( KDE4_BUILD_TESTS )
 
   target_link_libraries( mymoneytransactiontest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
+  # MyMoneyBudget
+  set( mymoneybudgettest_SRCS mymoneybudgettest.cpp mymoneytestutils.cpp )
+
+  kde4_add_unit_test( mymoneybudgettest TESTNAME kmymoney-mymoneybudgettest ${mymoneybudgettest_SRCS} )
+  add_dependencies( mymoneybudgettest kmm_mymoney )
+
+  target_link_libraries( mymoneybudgettest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
+
 ENDIF( KDE4_BUILD_TESTS )
