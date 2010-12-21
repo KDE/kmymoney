@@ -53,6 +53,8 @@ class QDomDocument;
   */
 class KMM_MYMONEY_EXPORT MyMoneyBudget: public MyMoneyObject
 {
+  KMM_MYMONEY_UNIT_TESTABLE
+
 public:
   MyMoneyBudget(void);
   ~MyMoneyBudget();

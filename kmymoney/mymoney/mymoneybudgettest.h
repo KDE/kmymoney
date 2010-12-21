@@ -26,6 +26,15 @@ class MyMoneyBudgetTest : public QObject
 protected:
 private slots:
   void init();
+  void addMonthlyToMonthly();
+  void addMonthlyToYearly();
+  void addMonthlyToMonthByMonth();
+  void addYearlyToMonthly();
+  void addYearlyToYearly();
+  void addYearlyToMonthByMonth();
+  void addMonthByMonthToMonthly();
+  void addMonthByMonthToYearly();
+  void addMonthByMonthToMonthByMonth();
   void cleanup();
 };
 
