@@ -38,6 +38,15 @@ IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
 ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
 
 ######################### General Requirements ##########################
+
+# setup default CMAKE_INSTALL_PREFIX before calling FIND_PACKAGE(KDE4)
+# see https://bugs.kde.org/show_bug.cgi?id=261132
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  execute_process(COMMAND kde4-config --prefix COMMAND tr -d "\n" OUTPUT_VARIABLE KDE4_INSTALL_PREFIX)
+  set(CMAKE_INSTALL_PREFIX "${KDE4_INSTALL_PREFIX}" CACHE PATH
+    "KMyMoney install prefix defaults to the KDE4 install prefix: ${KDE4_INSTALL_PREFIX}" FORCE)
+endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+
 FIND_PACKAGE(KDE4 REQUIRED)
 
 include( KDE4Defaults )
@@ -256,11 +265,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
   OPTION(USE_HTML_HANDBOOK
     "Generate KMyMoney manual in HTML format (default=OFF)" OFF)
 endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
-
-IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  SET(CMAKE_INSTALL_PREFIX "${KDE4_INSTALL_DIR}" CACHE PATH
-    "KMyMoney install prefix defaults to the KDE4 install prefix: ${KDE4_INSTALL_DIR}" FORCE)
-ENDIF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
 # the RPATH to be used when installing
 # (cf. http://www.vtk.org/Wiki/CMake_RPATH_handling)
