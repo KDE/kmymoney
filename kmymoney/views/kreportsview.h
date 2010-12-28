@@ -125,6 +125,7 @@ public:
     }
     void showEvent(QShowEvent * event);
     void loadTab(void);
+    KParts::BrowserExtension* browserExtenstion(void) const { return m_part->browserExtension(); }
   };
 
   /**
@@ -238,7 +239,10 @@ signals:
     */
   void reportSelected(const MyMoneyReport&);
 
-
+  /**
+    * This signal is emitted whenever a transaction is selected
+    */
+  void ledgerSelected(const QString&, const QString&);
 };
 
 #endif

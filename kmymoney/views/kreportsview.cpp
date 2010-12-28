@@ -628,6 +628,8 @@ void KReportsView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,
 {
   QString view = url.fileName();
   QString command = url.queryItem("command");
+  QString id = url.queryItem("id");
+  QString tid = url.queryItem("tid");
 
   if (view == VIEW_REPORTS) {
 
@@ -650,6 +652,8 @@ void KReportsView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&,
     else
       qWarning() << i18n("Unknown command '%1' in KReportsView::slotOpenUrl()", qPrintable(command));
 
+  } else if (view == VIEW_LEDGER) {
+    emit ledgerSelected(id, tid);
   } else {
     qWarning() << i18n("Unknown view '%1' in KReportsView::slotOpenUrl()", qPrintable(view));
   }
@@ -1058,6 +1062,10 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
 
   connect(tab->control()->buttonClose, SIGNAL(clicked()),
           this, SLOT(slotCloseCurrent(void)));
+
+  connect(tab->browserExtenstion(), SIGNAL(openUrlRequest(const KUrl &,
+          const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
+          this, SLOT(slotOpenUrl(const KUrl&, const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)));
 
   // if this is a default report, then you can't delete it!
   if (report.id().isEmpty())

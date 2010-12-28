@@ -246,6 +246,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_reportsView = new KReportsView();
   m_reportsViewFrame = m_model->addPage(m_reportsView, i18n("Reports"));
   m_reportsViewFrame->setIcon(KIcon("office-chart-tall-pie"));
+  connect(m_reportsView, SIGNAL(ledgerSelected(const QString&, const QString&)),
+          this, SLOT(slotLedgerSelected(const QString&, const QString&)));
 
   // Page 9
   m_budgetView = new KBudgetView();

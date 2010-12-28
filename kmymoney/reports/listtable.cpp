@@ -410,8 +410,13 @@ void ListTable::render(QString& result, QString& csv) const
 
     bool need_label = true;
 
+    QString tlink;  // link information to account and transaction
     // ***DV***
-    if ((* it_row)["rank"] == "0") row_odd = ! row_odd;
+    if ((* it_row)["rank"] == "0") {
+      row_odd = ! row_odd;
+      tlink = QString("id=%1&tid=%2")
+              .arg((* it_row)["accountid"], (* it_row)["id"]);
+    }
 
     if ((* it_row)["rank"] == "-2")
       result += QString("<tr class=\"item%1\">").arg((* it_row)["id"]);
@@ -480,12 +485,18 @@ void ListTable::render(QString& result, QString& csv) const
       // TODO: This and the i18n headings are handled
       // as a set of parallel vectors.  Would be much better to make a single
       // vector of a properties class.
+      QString tlinkBegin, tlinkEnd;
+      if( !tlink.isEmpty()) {
+        tlinkBegin = QString("<a href=ledger?%1>").arg(tlink);
+        tlinkEnd = QLatin1String("</a>");
+      }
+
       if (sharesColumns.contains(*it_column)) {
         if (data.isEmpty()) {
           result += QString("<td></td>");
           csv += "\"\",";
         } else {
-          result += QString("<td>%1</td>").arg(MyMoneyMoney(data).formatMoney("", 3));
+          result += QString("<td>%2%1%3</td>").arg(MyMoneyMoney(data).formatMoney("", 3), tlinkBegin, tlinkEnd);
           csv += "\"" + MyMoneyMoney(data).formatMoney("", 3, false) + "\",";
         }
       } else if (moneyColumns.contains(*it_column)) {
@@ -494,24 +505,25 @@ void ListTable::render(QString& result, QString& csv) const
                     .arg((*it_column == "value") ? " class=\"value\"" : "");
           csv += "\"\",";
         } else if (MyMoneyMoney(data) == MyMoneyMoney::autoCalc) {
-          result += QString("<td%1>%2</td>")
+          result += QString("<td%1>%3%2%4</td>")
                     .arg((*it_column == "value") ? " class=\"value\"" : "")
-                    .arg(i18n("Calculated"));
+                    .arg(i18n("Calculated"), tlinkBegin, tlinkEnd);
           csv += "\"" + i18n("Calculated") + "\",";
         } else if (*it_column == "price") {
-          result += QString("<td>%2</td>")
-                    .arg(MyMoneyMoney(data).formatMoney(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
+          result += QString("<td>%2%1%3</td>")
+                    .arg(MyMoneyMoney(data).formatMoney(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())), tlinkBegin, tlinkEnd);
           csv += "\"" + (*it_row)["currency"] + " " + MyMoneyMoney(data).formatMoney(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()), false) + "\",";
         } else {
-          result += QString("<td%1>%2&nbsp;%3</td>")
+          result += QString("<td%1>%4%2&nbsp;%3%5</td>")
                     .arg((*it_column == "value") ? " class=\"value\"" : "")
                     .arg((*it_row)["currency"])
-                    .arg(MyMoneyMoney(data).formatMoney(fraction));
+                    .arg(MyMoneyMoney(data).formatMoney(fraction))
+                    .arg(tlinkBegin, tlinkEnd);
           csv += "\"" + (*it_row)["currency"] + " " + MyMoneyMoney(data).formatMoney(fraction, false) + "\",";
         }
       } else if (percentColumns.contains(*it_column)) {
         data = (MyMoneyMoney(data) * MyMoneyMoney(100, 1)).formatMoney(fraction);
-        result += QString("<td>%1%</td>").arg(data);
+        result += QString("<td>%2%1%%%3</td>").arg(data, tlinkBegin, tlinkEnd);
         csv += data + "%,";
       } else if (dateColumns.contains(*it_column)) {
         // do this before we possibly change data
@@ -522,12 +534,13 @@ void ListTable::render(QString& result, QString& csv) const
           QDate qd = QDate::fromString(data, Qt::ISODate);
           data = KGlobal::locale()->formatDate(qd, KLocale::ShortDate);
         }
-        result += QString("<td class=\"left\">%1</td>").arg(data);
+        result += QString("<td class=\"left\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd);
       } else {
-        result += QString("<td class=\"left\">%1</td>").arg(data);
+        result += QString("<td class=\"left\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd);
         csv += "\"" + data + "\",";
       }
       ++it_column;
+      tlink.clear();
     }
 
     result += "</tr>\n";
