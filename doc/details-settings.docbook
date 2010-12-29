@@ -148,7 +148,7 @@
 </sect1>
 
 <sect1 id="details.settings.register">
-<title id="details.settings.register.title">Register</title>
+<title id="details.settings.register.title">Ledger</title>
 
 <para>
    These options allow you to modify the behavior of the transaction registers.
@@ -450,7 +450,7 @@
 </sect1>
 
 <sect1 id="details.settings.schedules">
-<title id="details.settings.schedules.title">Schedules</title>
+<title id="details.settings.schedules.title">Scheduled Transactions</title>
 
 <para>
   These options allow you to modify the behavior of
@@ -499,7 +499,7 @@
 
 <variablelist>
   <varlistentry>
-    <term><guilabel>Use GPG</guilabel></term>
+    <term><guilabel>Use GPG encryption</guilabel></term>
     <listitem>
       <para>Enables the use of GPG to encrypt data file.  See the section
         on <link linkend="details.formats.encrypted">GPG Encryption</link> for

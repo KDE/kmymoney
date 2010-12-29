@@ -244,7 +244,7 @@
   <varlistentry>
     <term><menuchoice>
       <shortcut>
-        <keycombo>&Ctrl;<keycap>r</keycap></keycombo>
+        <keycombo>&Ctrl;<keycap>R</keycap></keycombo>
       </shortcut>
       <guimenu>View</guimenu>
         <guimenuitem>Hide reconciled transactions</guimenuitem>
@@ -378,7 +378,7 @@
 
   <varlistentry>
     <term><menuchoice>
-      <guimenu>Account</guimenu><guimenuitem>Postpone</guimenuitem>
+      <guimenu>Account</guimenu><guimenuitem>Postpone reconciliation</guimenuitem>
     </menuchoice></term>
     <listitem>
       <para><action>Postpones reconciliation of an account.</action></para>
@@ -511,7 +511,7 @@
   <varlistentry>
     <term><menuchoice>
       <shortcut>
-        <keycombo>&Ctrl;<keycap>Insert</keycap></keycombo>
+        <keycombo>&Ctrl;<keycap>Ins</keycap></keycombo>
       </shortcut>
       <guimenu>Transaction</guimenu><guimenuitem>New</guimenuitem>
     </menuchoice></term>
@@ -742,7 +742,7 @@
 
   <varlistentry>
     <term><menuchoice>
-      <guimenu>Tools</guimenu><guimenuitem>Performance-Check</guimenuitem>
+      <guimenu>Tools</guimenu><guimenuitem>Performance-Test</guimenuitem>
     </menuchoice></term>
     <listitem>
       <para><action>Runs a performance test on your file and displays the

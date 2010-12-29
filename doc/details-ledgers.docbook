@@ -324,8 +324,8 @@
 </para>
 
 <para>
-  This is performed by selecting <guimenu>Settings</guimenu>
-  <guimenuitem>Configure &kappname;</guimenuitem> from the menu bar and
+  This is performed by selecting <menuchoice><guimenu>Settings</guimenu>
+  <guimenuitem>Configure &kappname;</guimenuitem></menuchoice> from the menu bar and
   selecting the <guiicon><inlinemediaobject><imageobject><imagedata
   fileref="ledgers_view.png"/></imageobject></inlinemediaobject>
   Register</guiicon> icon from the list on the left. The option to uncheck is

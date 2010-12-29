@@ -302,7 +302,8 @@
   Unless you keep you money under the floorboards, you probably make use of one
   or more institutions where you have accounts which may be in credit or
   debit. In order to familiarize yourself with the way &kappname; works, choose
-  an account you want to track of with &kappname; and select <guimenu>File</guimenu> <guimenuitem>New</guimenuitem> in order
+  an account you want to track of with &kappname; and select <menuchoice><guimenu>File</guimenu> 
+  <guimenuitem>New</guimenuitem></menuchoice> in order
   to set up an account file.
 </para>
 

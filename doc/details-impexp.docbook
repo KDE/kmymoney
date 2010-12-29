@@ -596,8 +596,8 @@
 
 <para>
   To import a QIF file, first ensure you have a valid &kappname; file open.
-  Then select <guimenuitem>Import</guimenuitem> <guimenuitem>QIF</guimenuitem>
-  from the <guimenu>File</guimenu> menu.
+  Then select <menuchoice><guimenuitem>Import</guimenuitem> <guimenuitem>QIF</guimenuitem>
+  </menuchoice> from the <guimenu>File</guimenu> menu.
 </para>
 	
 <para>
@@ -893,7 +893,7 @@
 <title>QIF Exporter</title>
 <para>
   To export one of your accounts to a QIF file, choose
-  the <guimenuitem>Export</guimenuitem> <guimenuitem>QIF</guimenuitem> from
+  the <menuchoice><guimenuitem>Export</guimenuitem> <guimenuitem>QIF</guimenuitem></menuchoice> from
   the <guimenu>File</guimenu> menu.  You will be prompted for which single
   account to export, what file to export it to, and what QIF Profile to use.
 </para>
@@ -942,7 +942,7 @@
   &kappname; will import OFX files painlessly.  However, this functionality is
   not built into the core program.  You must obtain and install the OFX Importer
   Plugin.  Once that is installed, the command to import OFX files will
-  automatically show up under the <guimenu>File</guimenu> <guimenuitem>Import</guimenuitem> menu.
+  automatically show up under the <menuchoice><guimenu>File</guimenu> <guimenuitem>Import</guimenuitem></menuchoice> menu.
 </para>
 <para>
   Note that many prepackaged versions of &kappname; were built with the OFX

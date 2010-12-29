@@ -30,8 +30,8 @@
 <title>Creating categories</title>
 
 <para>
-  To create a new category, either select <guimenu>Category</guimenu>
-  <guimenuitem>New category</guimenuitem> in the menu, or in the Categories
+  To create a new category, either select <menuchoice><guimenu>Category</guimenu>
+  <guimenuitem>New category</guimenuitem></menuchoice> in the menu, or in the Categories
   view, select a parent in the tree, right click and select the <guimenuitem>New
   Category</guimenuitem> option. Either way will open the Create new categories
   wizard. Enter the new category name, and select the currency if the default
