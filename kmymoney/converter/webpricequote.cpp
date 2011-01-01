@@ -413,7 +413,7 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources(void
   result["Gielda Papierow Wartosciowych (GPW)"] = WebPriceQuoteSource("Gielda Papierow Wartosciowych (GPW)",
       "http://stooq.com/q/?s=%1",
       QString(),                   // symbol regexp
-      "Kurs.*(\\d+\\.\\d+).*Data",    // price regexp
+      "Last.*(\\d+\\.\\d+).*Date",    // price regexp
       "(\\d{4,4}-\\d{2,2}-\\d{2,2})", // date regexp
       "%y %m %d"                   // date format
                                                                      );
