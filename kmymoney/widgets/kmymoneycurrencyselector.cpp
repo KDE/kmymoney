@@ -46,15 +46,6 @@ KMyMoneySecuritySelector::KMyMoneySecuritySelector(QWidget *parent) :
   // update(QString());
 }
 
-KMyMoneySecuritySelector::KMyMoneySecuritySelector(displayTypeE type, QWidget *parent) :
-    KComboBox(parent),
-    m_displayItem(FullName),
-    m_displayOnly(false),
-    m_displayType(type)
-{
-  // update(QString());
-}
-
 KMyMoneySecuritySelector::~KMyMoneySecuritySelector()
 {
 }
@@ -171,8 +162,9 @@ void KMyMoneySecuritySelector::setSecurity(const MyMoneySecurity& currency)
 }
 
 KMyMoneyCurrencySelector::KMyMoneyCurrencySelector(QWidget *parent) :
-    KMyMoneySecuritySelector(TypeCurrencies, parent)
+    KMyMoneySecuritySelector(parent)
 {
+  setDisplayType(TypeCurrencies);
 }
 
 #include "kmymoneycurrencyselector.moc"

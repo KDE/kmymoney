@@ -96,7 +96,7 @@ private:
   Models& operator=(Models&);
 
 private:
-  class Private;
+  struct Private;
   Private* const d;
 };
 
