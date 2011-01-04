@@ -145,7 +145,7 @@ public:
   }
 
   void paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
-  void paintFormCell(QPainter */*painter*/, const QStyleOptionViewItem &/*option*/, const QModelIndex &/*index*/) {}
+  void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index);
 
   int rowHeightHint(void) const;
 

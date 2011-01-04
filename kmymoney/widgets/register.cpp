@@ -316,6 +316,13 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
   painter->restore();
 }
 
+void GroupMarker::paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index)
+{
+  Q_UNUSED(painter);
+  Q_UNUSED(option);
+  Q_UNUSED(index);
+}
+
 int GroupMarker::rowHeightHint(void) const
 {
   if (!m_visible)
