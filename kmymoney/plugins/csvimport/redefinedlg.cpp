@@ -50,6 +50,8 @@ RedefineDlg::RedefineDlg()
   m_quantity = 0;
   m_amount = 0;
 
+  m_typesList << "buy" << "sell" << "divx" << "reinvdiv" << "shrsin" << "shrsout";
+
   m_iconYes = QPixmap(KIconLoader::global()->loadIcon("dialog-ok", KIconLoader::Small, KIconLoader::DefaultState));
   m_iconNo = QPixmap(KIconLoader::global()->loadIcon("dialog-cancel", KIconLoader::Small, KIconLoader::DefaultState));
 
@@ -65,7 +67,7 @@ RedefineDlg::RedefineDlg()
   this->enableButtonOk(false);
   m_widget->kcombobox_Actions->setCurrentIndex(-1);
 
-  connect(m_widget->kcombobox_Actions, SIGNAL(activated(const QString&)), this, SLOT(slotNewActionSelected(const QString&)));
+  connect(m_widget->kcombobox_Actions, SIGNAL(activated(const int&)), this, SLOT(slotNewActionSelected(const int&)));
   connect(this, SIGNAL(okClicked()), this, SLOT(slotAccepted()));
   connect(this, SIGNAL(cancelClicked()), this, SLOT(slotRejected()));
 }
@@ -140,12 +142,12 @@ void RedefineDlg::slotAccepted()
   accept();
 }
 
-void RedefineDlg::slotNewActionSelected(const QString& type)
+void RedefineDlg::slotNewActionSelected(const int& index)
 {
-  m_newType = type.section('-', 1, 1);
+  m_newType = m_typesList[index];
   if (m_okTypeList.contains(m_newType)) {
     QTableWidgetItem *item = new QTableWidgetItem;//        add new type to UI
-    item->setText(type);
+    item->setText(m_newType);
     m_widget->tableWidget->setItem(1, m_typeColumn, item);
     this->enableButtonOk(true);
   }
@@ -219,10 +221,11 @@ int RedefineDlg::suspectType(const QString& info)
   displayLine(info);
   buildOkTypeList();
   for (int i = 0; i < 6 ; i++) {
-    if (m_okTypeList.contains(m_widget->kcombobox_Actions->itemText(i).section('-', 1, 1)))
+    if (m_okTypeList.contains(m_typesList[i])) {
       m_widget->kcombobox_Actions->setItemIcon(i, m_iconYes);
-    else
+    } else {
       m_widget->kcombobox_Actions->setItemIcon(i, m_iconNo);
+    }
   }
 
   int ret = exec();
@@ -246,10 +249,8 @@ void RedefineDlg::buildOkTypeList()
     m_okTypeList << "shrsin" << "shrsout";
   } else {
     m_okTypeList.clear();
-    KMessageBox::sorry(this, i18n(" The values in the columns you have selected\
-    \n do not match any expected investment type.\
-    \n Please check the fields in the current transaction,\
-    \n and also your selections."), i18n("CSV import"));
+    KMessageBox::sorry(this, i18n(" The values in the columns you have selected\n do not match any expected investment type.\n Please check the fields in the current transaction,\n and also your selections.")
+                                 , i18n("CSV import"));
   }
 }
 
@@ -299,7 +300,7 @@ void RedefineDlg::convertValues()
   }
   txt = txt.remove('"');
 
-  if (txt.contains(')')) { //          replace negative ( ) with '-'
+  if (txt.contains(')')) {  //          replace negative ( ) with '-'
     txt = '-' + txt.remove(QRegExp("[(),]"));
   }
   m_amount = txt;

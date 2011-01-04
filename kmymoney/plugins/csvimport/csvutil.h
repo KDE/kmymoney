@@ -43,19 +43,23 @@ public:
   QStringList      parseLine(const QString& data);
 
   QString          fieldDelimiterCharacter(int index);
+  QString          textDelimiterCharacter();
 
   void             setFieldDelimiterIndex(int index);
   void             setFieldDelimiterCharacter(int index);
+
+  void             setTextDelimiterCharacter(QString val);
 
 private :
 
   QStringList      m_delimCharList;
 
   QString          m_fieldDelimiterCharacter;
+  QString          m_textDelimiterCharacter;
   QString          m_inBuffer;
 
   int              m_fieldDelimiterIndex;
-
+  int              m_textDelimiterIndex;
 }
 ;
 #endif

@@ -94,8 +94,11 @@
                  </property>
                  <item>
                   <widget class="KPushButton" name="button_open">
+                   <property name="toolTip">
+                    <string comment="verb, Click to select file">Click to select file</string>
+                   </property>
                    <property name="text">
-                    <string extracomment="to open a file">Open File</string>
+                    <string comment="to open a file">Open File</string>
                    </property>
                   </widget>
                  </item>
@@ -108,7 +111,7 @@
                     <string comment="codec for character-set encoding"/>
                    </property>
                    <property name="text">
-                    <string extracomment="codec for character-set encoding">Encoding  </string>
+                    <string comment="codec for character-set encoding">Encoding</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -118,7 +121,7 @@
                  <item>
                   <widget class="KComboBox" name="comboBox_encoding">
                    <property name="toolTip">
-                    <string extracomment="verb, Select codec for character-set decoding">Select codec for character-set decoding</string>
+                    <string comment="verb, Select codec for character-set decoding">Select codec for character-set decoding</string>
                    </property>
                    <property name="accessibleName">
                     <string notr="true" extracomment="noun, character-set decoding">codec for character-set decoding</string>
@@ -143,13 +146,13 @@
                  <item>
                   <widget class="KPushButton" name="button_banking">
                    <property name="toolTip">
-                    <string extracomment="verb, Switch to Banking window">Switch to Banking window</string>
+                    <string comment="verb, Switch to Banking window">Switch to Banking window</string>
                    </property>
                    <property name="accessibleName">
                     <string extracomment="verb, Switch to Banking window">Switch to Banking window</string>
                    </property>
                    <property name="text">
-                    <string extracomment="select banking window">Go to Banking</string>
+                    <string comment="select banking window">Go to Banking</string>
                    </property>
                   </widget>
                  </item>
@@ -210,17 +213,17 @@
                    </property>
                    <item>
                     <property name="text">
-                     <string notr="true" extracomment="abbreviation for 'year', 'month', 'day'">y m d</string>
+                     <string comment="abbreviation for 'year', 'month', 'day'">y m d</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string notr="true" extracomment="abbreviation for 'month', 'day', 'year'">m d y</string>
+                     <string comment="abbreviation for 'month', 'day', 'year'">m d y</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string notr="true" extracomment="abbreviation for  'day', 'month', 'year'">d m y</string>
+                     <string comment="abbreviation for  'day', 'month', 'year'">d m y</string>
                     </property>
                    </item>
                   </widget>
@@ -247,7 +250,7 @@
                     <bool>true</bool>
                    </property>
                    <property name="toolTip">
-                    <string extracomment="verb, Select field delimiter/separator character">Select field delimiter/separator character</string>
+                    <string comment="verb, Select field delimiter/separator character">Select field delimiter/separator character</string>
                    </property>
                    <item>
                     <property name="text">
@@ -391,7 +394,7 @@
                     <item row="0" column="0">
                      <widget class="QLabel" name="label">
                       <property name="toolTip">
-                       <string extracomment="verb, Select column containing date field">Select column containing date field</string>
+                       <string comment="verb, Select column containing date field">Select column containing date field</string>
                       </property>
                       <property name="accessibleName">
                        <string comment="column containing date field"/>
@@ -410,7 +413,7 @@
                        <string comment="column containing investment type/action field"/>
                       </property>
                       <property name="text">
-                       <string extracomment="column containing investment type/action field">Type/Action</string>
+                       <string comment="column containing investment type/action field">Type/Action</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -436,7 +439,7 @@
                        <bool>false</bool>
                       </property>
                       <property name="toolTip">
-                       <string extracomment="verb, Select column containing date field">Select column containing date field</string>
+                       <string comment="verb, Select column containing date field">Select column containing date field</string>
                       </property>
                      </widget>
                     </item>
@@ -446,7 +449,7 @@
                        <bool>false</bool>
                       </property>
                       <property name="toolTip">
-                       <string extracomment="verb, Select column containing investment type field">Select column containing investment type field</string>
+                       <string comment="verb, Select column containing investment type field">Select column containing investment type field</string>
                       </property>
                       <property name="accessibleName">
                        <string/>
@@ -459,7 +462,7 @@
                        <bool>false</bool>
                       </property>
                       <property name="toolTip">
-                       <string extracomment="verb, Select column containing memo field. More than one column may be entered successively.">Select column containing memo field. More than one column may be entered successively.</string>
+                       <string comment="verb, Select column containing memo field. More than one column may be entered successively.">Select column containing memo field. More than one column may be entered successively.</string>
                       </property>
                      </widget>
                     </item>
@@ -490,7 +493,7 @@
                        <string comment="noun, conversion factor to align pricing in the imported file with KMM's internal prices. "/>
                       </property>
                       <property name="text">
-                       <string extracomment="noun, conversion fraction/multiplier to use to make compatible the csv pricing with KMM pricing.">Price Fraction</string>
+                       <string comment="noun, conversion fraction/multiplier to use to make compatible the csv pricing with KMM pricing.">Price Fraction</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -506,7 +509,7 @@
                        <enum>Qt::LeftToRight</enum>
                       </property>
                       <property name="text">
-                       <string extracomment="column containing fee field">Fee Column</string>
+                       <string comment="column containing fee field">Fee Column</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -519,7 +522,7 @@
                        <bool>false</bool>
                       </property>
                       <property name="toolTip">
-                       <string comment="Check as in click" extracomment="verb, Check box if any fee is a percentage figure rather than a value">Check if any fee is a percentage figure rather than a value</string>
+                       <string comment="verb, Check box if any fee is a percentage figure rather than a value">Check if any fee is a percentage figure rather than a value</string>
                       </property>
                       <property name="accessibleName">
                        <string comment="select if fee is a percentage (not value)"/>
@@ -528,7 +531,7 @@
                        <enum>Qt::RightToLeft</enum>
                       </property>
                       <property name="text">
-                       <string extracomment="select if fee is a percentage (not value)">Fee is  Percentage</string>
+                       <string comment="select if fee is a percentage (not value)">Fee is  Percentage</string>
                       </property>
                      </widget>
                     </item>
@@ -538,7 +541,7 @@
                        <bool>false</bool>
                       </property>
                       <property name="toolTip">
-                       <string extracomment="verb, If necessary, select fraction/multiplier for compatibility between imported and stored prices, for instance, if one is in dollars and the other in cents.">If necessary, select fraction/multiplier for compatibility 
+                       <string comment="verb, If necessary, select fraction/multiplier for compatibility between imported and stored prices, for instance, if one is in dollars and the other in cents.">If necessary, select fraction/multiplier for compatibility 
 between imported and stored prices.  For instance, if 
 the import price is in cents  but the file is priced in dollars,
 select 0.01.</string>
@@ -582,7 +585,7 @@ select 0.01.</string>
                        <bool>false</bool>
                       </property>
                       <property name="toolTip">
-                       <string extracomment="verb, If necessary, select column containing fee.  Warning. This might already have been incorporated into the price">If necessary, select column containing fee.  
+                       <string comment="verb, If necessary, select column containing fee.  Warning. This might already have been incorporated into the price">If necessary, select column containing fee.  
 Warning. This might already have been 
 incorporated into the price</string>
                       </property>
@@ -650,7 +653,7 @@ incorporated into the price</string>
                        <bool>true</bool>
                       </property>
                       <property name="text">
-                       <string extracomment="column for monetary value">Amount</string>
+                       <string comment="column for monetary value">Amount</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -663,7 +666,7 @@ incorporated into the price</string>
                        <bool>false</bool>
                       </property>
                       <property name="toolTip">
-                       <string extracomment="Select column containing quantity field">Select column containing quantity field</string>
+                       <string comment="Select column containing quantity field">Select column containing quantity field</string>
                       </property>
                      </widget>
                     </item>
@@ -673,7 +676,7 @@ incorporated into the price</string>
                        <bool>false</bool>
                       </property>
                       <property name="toolTip">
-                       <string extracomment="Select column containing amount field">Select column containing amount field</string>
+                       <string comment="Select column containing amount field">Select column containing amount field</string>
                       </property>
                       <property name="accessibleName">
                        <string comment="column containing amount field"/>
@@ -692,7 +695,7 @@ incorporated into the price</string>
                        <bool>false</bool>
                       </property>
                       <property name="toolTip">
-                       <string extracomment="Select column containing price field">Select column containing price field</string>
+                       <string comment="Select column containing price field">Select column containing price field</string>
                       </property>
                      </widget>
                     </item>
@@ -725,17 +728,17 @@ incorporated into the price</string>
                  <item>
                   <widget class="KLineEdit" name="lineEdit_securityName">
                    <property name="toolTip">
-                    <string extracomment="verb, Enter name of security">Enter name of security</string>
+                    <string comment="verb, Enter name of security">Enter name of security</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="KPushButton" name="button_clear">
                    <property name="toolTip">
-                    <string extracomment="verb, Clear selected column entries">Clear selected column entries</string>
+                    <string comment="verb, Clear selected column entries">Clear selected column entries</string>
                    </property>
                    <property name="text">
-                    <string extracomment="verb, to clear selected columns">Clear Selections</string>
+                    <string comment="verb, to clear selected columns">Clear Selections</string>
                    </property>
                   </widget>
                  </item>
@@ -765,7 +768,7 @@ incorporated into the price</string>
                     <enum>Qt::StrongFocus</enum>
                    </property>
                    <property name="toolTip">
-                    <string extracomment="verb, Select first line to be imported">Select first line to be imported</string>
+                    <string comment="verb, Select first line to be imported">Select first line to be imported</string>
                    </property>
                    <property name="buttonSymbols">
                     <enum>QAbstractSpinBox::UpDownArrows</enum>
@@ -797,7 +800,7 @@ incorporated into the price</string>
                     <enum>Qt::StrongFocus</enum>
                    </property>
                    <property name="toolTip">
-                    <string extracomment="verb, Select last line to be imported.  Ensure no trailer lines are imported.">Select last line to be imported.  
+                    <string comment="verb, Select last line to be imported.  Ensure no trailer lines are imported.">Select last line to be imported.  
 Ensure no trailer lines are included.</string>
                    </property>
                    <property name="alignment">
@@ -820,7 +823,7 @@ Ensure no trailer lines are included.</string>
                     <bool>false</bool>
                    </property>
                    <property name="toolTip">
-                    <string extracomment="verb, Click when ready to proceed.">Click when ready to proceed.</string>
+                    <string comment="verb, Click when ready to proceed.">Click when ready to proceed.</string>
                    </property>
                    <property name="accessibleName">
                     <string comment="verb to accept"/>
@@ -833,20 +836,20 @@ Ensure no trailer lines are included.</string>
                  <item>
                   <widget class="KPushButton" name="button_saveAs">
                    <property name="toolTip">
-                    <string extracomment="verb, Click if a QIF file is required, after clicking accept">Click if a QIF file is required, after clicking accept</string>
+                    <string comment="verb, Click if a QIF file is required, after clicking accept">Click if a QIF file is required, after clicking accept</string>
                    </property>
                    <property name="text">
-                    <string extracomment="verb to save QIF file">Save as QIF</string>
+                    <string comment="verb to save QIF file">Save as QIF</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="KPushButton" name="button_close">
                    <property name="toolTip">
-                    <string comment="verb, Click to close this window" extracomment="verb, Click to close this window">Click to close this window</string>
+                    <string comment="verb, Click to close this window">Click to close this window</string>
                    </property>
                    <property name="text">
-                    <string comment="verb to exit form" extracomment="verb to exit form">Quit</string>
+                    <string comment="verb to exit form">Quit</string>
                    </property>
                   </widget>
                  </item>

@@ -53,7 +53,7 @@
 #include "redefinedlg.h"
 
 InvestmentDlg::InvestmentDlg(QWidget* parent) :
-    InvestmentDlgDecl(parent)
+  InvestmentDlgDecl(parent)
 {
   m_tableFrameHeight = groupBox->frameGeometry().bottom() - frame_main->frameGeometry().bottom();
   m_tableFrameWidth = tableWidget->size().width();

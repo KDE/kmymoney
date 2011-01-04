@@ -18,6 +18,7 @@ email                : aganderson@ukonline.co.uk
 
 #include <QtTest/QtTest>
 #include <QtCore/QString>
+#include <QtCore/QDebug>
 
 #include <KLocalizedString>
 
@@ -97,6 +98,11 @@ void CsvDateTest::testDateConvert()
   format = "ddMMyyyy";
   QVERIFY(m_convert->convertDate("31-1-2010") ==
           QDate::fromString("31012010", format));//m = "31-1-2010" single digit month
+
+// Now with no separators
+
+  QVERIFY(m_convert->convertDate("13091981") ==
+          QDate(1981, 9, 13));
 }
 
 void CsvDateTest::testDateConvertFormats()
@@ -112,6 +118,18 @@ void CsvDateTest::testDateConvertFormats()
 
   QVERIFY(m_convert->convertDate(aDate) == QDate());
 
+// Now with no separators
+
+  aDate = "20011130";
+
+  m_convert->setDateFormatIndex(0);//           ISO date format
+
+  QVERIFY(m_convert->convertDate(aDate) == QDate(2001, 11, 30));
+
+  m_convert->setDateFormatIndex(1);//           US date format
+
+  QVERIFY(m_convert->convertDate(aDate) == QDate());
+
   aDate = "11-30-2001";
   format = "MM/dd/yyyy";
 
@@ -122,6 +140,18 @@ void CsvDateTest::testDateConvertFormats()
   m_convert->setDateFormatIndex(1);//           US date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate::fromString("11/30/2001", format));
+
+  // Now with no separators
+
+  aDate = "11302001";
+
+  m_convert->setDateFormatIndex(0);//             ISO date format
+
+  QVERIFY(m_convert->convertDate(aDate) == QDate());
+
+  m_convert->setDateFormatIndex(1);//           US date format
+
+  QVERIFY(m_convert->convertDate(aDate) == QDate(2001, 11, 30));
 }
 
 #include "csvdatetest.moc"

@@ -25,6 +25,7 @@ ParseLine::ParseLine(): m_fieldDelimiterIndex(0)
 {
   m_delimCharList << "," << ";" << ":" << "\t";
   m_fieldDelimiterCharacter = m_delimCharList[m_fieldDelimiterIndex];
+  m_textDelimiterCharacter = '"';
 }
 
 ParseLine::~ParseLine()
@@ -45,19 +46,18 @@ QStringList ParseLine::parseLine(const QString& data)
   QStringList::const_iterator constIterator;
 
   for (constIterator = listIn.constBegin(); constIterator < listIn.constEnd();
-       ++constIterator) {
+      ++constIterator) {
     txt = (*constIterator);
-
     // detect where a "quoted" string has been erroneously split, because of a comma,
     // or in a value, a 'thousand separator' being mistaken for a field delimitor.
 
-    while ((txt.startsWith('"')) && (!txt.endsWith('"')))  {
+    while((txt.startsWith(m_textDelimiterCharacter)) && (!txt.endsWith(m_textDelimiterCharacter)))  {
       if (++constIterator < listIn.constEnd())  {
         txt1 = (*constIterator);//                       second part of the split string
         txt += m_fieldDelimiterCharacter + txt1;//       rejoin the string
       } else break;
     }
-    listOut += txt.remove('"');
+    listOut += txt.remove(m_textDelimiterCharacter);
   }
   return listOut;
 }
@@ -77,3 +77,12 @@ void ParseLine::setFieldDelimiterIndex(int index)
   m_fieldDelimiterIndex = index;
 }
 
+void ParseLine::setTextDelimiterCharacter(QString chr)
+{
+  m_textDelimiterCharacter = chr;
+}
+
+QString ParseLine::textDelimiterCharacter()
+{
+  return m_textDelimiterCharacter;
+}

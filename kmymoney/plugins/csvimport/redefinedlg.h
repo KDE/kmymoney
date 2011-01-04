@@ -43,7 +43,7 @@ class RedefineDlg : public KDialog
 public:
   RedefineDlg();
   ~RedefineDlg();
-
+	
   QString          accountName();
 
   void             setAmountColumn(int col);
@@ -91,6 +91,7 @@ private:
 
   QStringList      m_okTypeList;
   QStringList      m_columnList;
+  QStringList      m_typesList;
 
   int              m_amountColumn;
   int              m_columnTotalWidth;
@@ -104,6 +105,7 @@ private:
   MyMoneyMoney     m_price;
   MyMoneyMoney     m_quantity;
   MyMoneyMoney     m_amount;
+
 
   /**
   * This method displays the transaction, highlighting the column containing the
@@ -137,7 +139,7 @@ private slots:
   * This method is called when the user selects a new investment type, which replaces the
   * original one.  The OK button is then enabled.
   */
-  void             slotNewActionSelected(const QString& type);
+  void             slotNewActionSelected(const int& index);
 
   /**
   * This method is called if the user cancels the dialog, and returns KMessageBox::Cancel

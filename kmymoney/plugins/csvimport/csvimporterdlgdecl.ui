@@ -31,27 +31,14 @@
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <layout class="QVBoxLayout" name="verticalLayout" stretch="35,80,160">
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_top" stretch="40,322,40">
-          <property name="rightMargin">
-           <number>6</number>
-          </property>
-          <item>
-           <widget class="QFrame" name="frame_left">
-            <property name="minimumSize">
-             <size>
-              <width>25</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-           </widget>
-          </item>
+         <layout class="QHBoxLayout" name="horizontalLayout_top" stretch="600">
           <item>
            <widget class="QFrame" name="frame_top">
             <property name="minimumSize">
@@ -62,7 +49,7 @@
             </property>
             <property name="maximumSize">
              <size>
-              <width>600</width>
+              <width>640</width>
               <height>100</height>
              </size>
             </property>
@@ -74,7 +61,7 @@
             </property>
             <layout class="QGridLayout" name="gridLayout_2">
              <item row="0" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_AA" stretch="50,40,50,50">
+              <layout class="QHBoxLayout" name="horizontalLayout_AA" stretch="40,20,40,40,20">
                <property name="leftMargin">
                 <number>20</number>
                </property>
@@ -83,8 +70,11 @@
                </property>
                <item>
                 <widget class="KPushButton" name="button_open">
+                 <property name="toolTip">
+                  <string comment="verb, Click to select file">Click to select file</string>
+                 </property>
                  <property name="text">
-                  <string extracomment="to open a file">Open File</string>
+                  <string comment="to open a file">Open File</string>
                  </property>
                 </widget>
                </item>
@@ -97,7 +87,7 @@
                   <string extracomment="codec for character-set encoding"/>
                  </property>
                  <property name="text">
-                  <string extracomment="codec for character-set encoding">Encoding</string>
+                  <string comment="codec for character-set encoding">Encoding</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -107,7 +97,7 @@
                <item>
                 <widget class="KComboBox" name="comboBox_encoding">
                  <property name="toolTip">
-                  <string extracomment="verb, Select codec for character-set decoding">Select codec for character-set decoding</string>
+                  <string comment="verb, Select codec for character-set decoding">Select codec for character-set decoding</string>
                  </property>
                  <property name="accessibleName">
                   <string extracomment="noun, codec for character-set encoding"/>
@@ -132,17 +122,36 @@
                <item>
                 <widget class="KPushButton" name="button_invest">
                  <property name="toolTip">
-                  <string extracomment="verb, Click to display investment window">Click to display investment window</string>
+                  <string comment="verb, Click to display investment window">Click to display investment window</string>
                  </property>
                  <property name="text">
-                  <string extracomment="select Investment window">Go to Investments</string>
+                  <string comment="select Investment window">Go to Investments</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="KPushButton" name="pushButton">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Help</string>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
              <item row="1" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_AB" stretch="30,50,50,50">
+              <layout class="QHBoxLayout" name="horizontalLayout_AB" stretch="25,30,30,30,30,30">
                <property name="leftMargin">
                 <number>13</number>
                </property>
@@ -155,7 +164,7 @@
                   <string comment="date format to use"/>
                  </property>
                  <property name="text">
-                  <string extracomment="date format to use">Date format</string>
+                  <string comment="date format to use">Date format</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
@@ -165,24 +174,24 @@
                <item>
                 <widget class="KComboBox" name="comboBox_dateFormat">
                  <property name="toolTip">
-                  <string extracomment="verb, Select date format">Select date format</string>
+                  <string comment="verb, Select date format">Select date format</string>
                  </property>
                  <property name="accessibleName">
-                  <string comment="abbreviation for 'year', 'month', 'day'" extracomment="abbreviation for 'year', 'month', 'day'">Date format</string>
+                  <string comment="abbreviation for 'year', 'month', 'day'">Date format</string>
                  </property>
                  <item>
                   <property name="text">
-                   <string notr="true" comment="abbreviation of 'year', 'month', 'day'" extracomment="abbreviation of 'year', 'month', 'day'">y m d</string>
+                   <string comment="abbreviation of 'year', 'month', 'day'">y m d</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string notr="true" comment="abbreviation of 'month', day', 'year'" extracomment="abbreviation of 'month', day', 'year'">m d y</string>
+                   <string comment="abbreviation of 'month', day', 'year'">m d y</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string notr="true" comment="abbreviation of 'day', 'month', 'year'" extracomment="abbreviation of 'day', 'month', 'year'">d m y</string>
+                   <string comment="abbreviation of 'day', 'month', 'year'">d m y</string>
                   </property>
                  </item>
                 </widget>
@@ -196,14 +205,17 @@
                   <string comment="punctuation mark used as field delimiter" extracomment="punctuation mark used as field delimiter"/>
                  </property>
                  <property name="text">
-                  <string extracomment="punctuation mark used as field delimiter">Field Delimiter character</string>
+                  <string comment="punctuation mark used as field delimiter">Field Delimiter</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="KComboBox" name="comboBox_fieldDelim">
                  <property name="toolTip">
-                  <string extracomment="verb, Select field delimiter/separator">Select field delimiter/separator character</string>
+                  <string comment="verb, Select field delimiter/separator">Select field delimiter/separator character</string>
                  </property>
                  <item>
                   <property name="text">
@@ -227,47 +239,31 @@
                  </item>
                 </widget>
                </item>
+               <item>
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>Text Delimiter</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBox_textDelimiter">
+                 <item>
+                  <property name="text">
+                   <string>&quot;</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>'</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
               </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="frame_right">
-            <property name="minimumSize">
-             <size>
-              <width>25</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Plain</enum>
-            </property>
-            <property name="lineWidth">
-             <number>0</number>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="0">
-              <widget class="KPushButton" name="pushButton">
-               <property name="minimumSize">
-                <size>
-                 <width>25</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Help</string>
-               </property>
-              </widget>
              </item>
             </layout>
            </widget>
@@ -355,7 +351,7 @@
                     <string comment="column containing number field"/>
                    </property>
                    <property name="text">
-                    <string extracomment="column containing number field">Number</string>
+                    <string comment="column containing number field">Number</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -391,7 +387,7 @@
                     <string comment="column containing payee or description field"/>
                    </property>
                    <property name="text">
-                    <string extracomment="column containing payee or description field">Payee/Description</string>
+                    <string comment="column containing payee or description field">Payee/Description</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -443,7 +439,7 @@
                     </font>
                    </property>
                    <property name="toolTip">
-                    <string extracomment="verb, Select column containing number field.">Select column containing number field.</string>
+                    <string comment="verb, Select column containing number field.">Select column containing number field.</string>
                    </property>
                   </widget>
                  </item>
@@ -464,7 +460,7 @@
                     </font>
                    </property>
                    <property name="toolTip">
-                    <string extracomment="verb, Select column containing number field.">Select column containing date field.</string>
+                    <string comment="verb, Select column containing number field.">Select column containing date field.</string>
                    </property>
                   </widget>
                  </item>
@@ -485,7 +481,7 @@
                     </font>
                    </property>
                    <property name="toolTip">
-                    <string extracomment="verb, Select column containing payee or description field.">Select column containing payee or description field.</string>
+                    <string comment="verb, Select column containing payee or description field.">Select column containing payee or description field.</string>
                    </property>
                   </widget>
                  </item>
@@ -506,7 +502,7 @@
                     </font>
                    </property>
                    <property name="toolTip">
-                    <string extracomment="verb, Select column containing memo field. More than one column may be entered successively.">Select column containing memo field.
+                    <string comment="verb, Select column containing memo field. More than one column may be entered successively.">Select column containing memo field.
  More than one column may be entered successively.</string>
                    </property>
                   </widget>
@@ -526,7 +522,7 @@
                     </font>
                    </property>
                    <property name="toolTip">
-                    <string extracomment="Select 'Amount' if only one value column, otherwise select 'Debit/credit'.">Select 'Amount' if only one value column, otherwise select 'Debit/credit'.</string>
+                    <string comment="Select 'Amount' if only one value column, otherwise select 'Debit/credit'.">Select 'Amount' if only one value column, otherwise select 'Debit/credit'.</string>
                    </property>
                    <property name="whatsThis">
                     <string extracomment="Select 'Amount' if only one value column, otherwise select "/>
@@ -535,7 +531,7 @@
                     <string comment="presence of amount column"/>
                    </property>
                    <property name="text">
-                    <string extracomment="presence of amount column">Amount column</string>
+                    <string comment="presence of amount column">Amount column</string>
                    </property>
                    <property name="checked">
                     <bool>true</bool>
@@ -563,13 +559,13 @@
                     </font>
                    </property>
                    <property name="toolTip">
-                    <string extracomment="verb, Select 'Debit/credit' if both columns exist,, otherwise select 'Amount'.">Select 'Debit/credit' if both columns exist, otherwise select 'Amount'.</string>
+                    <string comment="verb, Select 'Debit/credit' if both columns exist,, otherwise select 'Amount'.">Select 'Debit/credit' if both columns exist, otherwise select 'Amount'.</string>
                    </property>
                    <property name="accessibleName">
                     <string comment="presence of debit and credit column"/>
                    </property>
                    <property name="text">
-                    <string extracomment="presence of debit/credit columns">Debit / credit columns</string>
+                    <string comment="presence of debit/credit columns">Debit / credit columns</string>
                    </property>
                    <property name="checked">
                     <bool>false</bool>
@@ -579,10 +575,10 @@
                  <item>
                   <widget class="KPushButton" name="button_clear">
                    <property name="toolTip">
-                    <string extracomment="Clear selected column entries">Clear selected column entries</string>
+                    <string comment="Clear selected column entries">Clear selected column entries</string>
                    </property>
                    <property name="text">
-                    <string extracomment="verb, to clear selected columns">Clear selections</string>
+                    <string comment="verb, to clear selected columns">Clear selections</string>
                    </property>
                   </widget>
                  </item>
@@ -613,7 +609,7 @@
                     <string comment="presence of amount column"/>
                    </property>
                    <property name="text">
-                    <string extracomment="location of amount column">Amount in Col...</string>
+                    <string comment="location of amount column">Amount in Col...</string>
                    </property>
                   </widget>
                  </item>
@@ -631,7 +627,7 @@
                     <string comment="column containing debits field"/>
                    </property>
                    <property name="text">
-                    <string extracomment="location of debit column">Debits in Col...</string>
+                    <string comment="location of debit column">Debits in Col...</string>
                    </property>
                   </widget>
                  </item>
@@ -649,7 +645,7 @@
                     <string comment="column containing credits field"/>
                    </property>
                    <property name="text">
-                    <string extracomment="location of credit column">Credits in Col...</string>
+                    <string comment="location of credit column">Credits in Col...</string>
                    </property>
                   </widget>
                  </item>
@@ -692,7 +688,7 @@
                     </font>
                    </property>
                    <property name="toolTip">
-                    <string extracomment="verb, Select column containing debit field.">Select column containing debit field.</string>
+                    <string comment="verb, Select column containing debit field.">Select column containing debit field.</string>
                    </property>
                   </widget>
                  </item>
@@ -707,7 +703,7 @@
                     </font>
                    </property>
                    <property name="toolTip">
-                    <string extracomment="verb, Select column containing credit field.">Select column containing credit field.</string>
+                    <string comment="verb, Select column containing credit field.">Select column containing credit field.</string>
                    </property>
                   </widget>
                  </item>
@@ -755,7 +751,7 @@
                   <enum>Qt::StrongFocus</enum>
                  </property>
                  <property name="toolTip">
-                  <string extracomment="verb, Select first line to be imported">Select first line to be imported</string>
+                  <string comment="verb, Select first line to be imported">Select first line to be imported</string>
                  </property>
                  <property name="buttonSymbols">
                   <enum>QAbstractSpinBox::UpDownArrows</enum>
@@ -797,7 +793,7 @@
                   <enum>Qt::StrongFocus</enum>
                  </property>
                  <property name="toolTip">
-                  <string extracomment="verb, Select last line to be imported.  Ensure no trailer lines are imported.">Select last line to be imported.
+                  <string comment="verb, Select last line to be imported.  Ensure no trailer lines are imported.">Select last line to be imported.
 Ensure no trailer lines are imported.</string>
                  </property>
                  <property name="alignment">
@@ -825,33 +821,33 @@ Ensure no trailer lines are imported.</string>
                   </font>
                  </property>
                  <property name="toolTip">
-                  <string extracomment="verb, Click when ready to proceed.">Click when ready to proceed.</string>
+                  <string comment="verb, Click when ready to proceed.">Click when ready to proceed.</string>
                  </property>
                  <property name="accessibleName">
                   <string comment="verb to accept"/>
                  </property>
                  <property name="text">
-                  <string extracomment="verb to accept">Accept</string>
+                  <string comment="verb to accept">Accept</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="KPushButton" name="button_saveAs">
                  <property name="toolTip">
-                  <string extracomment="verb, Click if a QIF file is required, after clicking accept">Click if a QIF file is required, after clicking accept</string>
+                  <string comment="verb, Click if a QIF file is required, after clicking accept">Click if a QIF file is required, after clicking accept</string>
                  </property>
                  <property name="text">
-                  <string extracomment="verb to save QIF file">Save as QIF</string>
+                  <string comment="verb to save QIF file">Save as QIF</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="KPushButton" name="button_close">
                  <property name="toolTip">
-                  <string comment="verb, Click to close this window" extracomment="verb, Click to close this window">Click to close this window</string>
+                  <string comment="verb, Click to close this window">Click to close this window</string>
                  </property>
                  <property name="text">
-                  <string comment="verb to exit form" extracomment="verb to exit form">Quit</string>
+                  <string comment="verb to exit form">Quit</string>
                  </property>
                 </widget>
                </item>
@@ -888,7 +884,7 @@ Ensure no trailer lines are imported.</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>490</width>
+            <width>318</width>
             <height>210</height>
            </size>
           </property>
@@ -918,7 +914,7 @@ Ensure no trailer lines are imported.</string>
              </property>
              <property name="minimumSize">
               <size>
-               <width>480</width>
+               <width>0</width>
                <height>200</height>
               </size>
              </property>

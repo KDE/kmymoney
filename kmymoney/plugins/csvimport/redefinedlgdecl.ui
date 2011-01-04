@@ -57,7 +57,7 @@
           <string notr="true"/>
          </property>
          <property name="text">
-          <string comment="the number of the column containing error" extracomment="the number of the column containing error">Type/action column</string>
+          <string comment="the number of the column containing error">Type/action column</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -117,32 +117,32 @@
          </property>
          <item>
           <property name="text">
-           <string comment="description of investment activity" extracomment="don't translate part after '-'">Buy Shares-buy</string>
+           <string comment="description of investment activity" extracomment="don't translate part after '-'">Buy Shares</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string comment="description of investment activity" extracomment="don't translate part after '-'">Sell Shares-sell</string>
+           <string comment="description of investment activity" extracomment="don't translate part after '-'">Sell Shares</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string comment="description of investment activity" extracomment="don't translate part after '-'">Dividend-divx</string>
+           <string comment="description of investment activity" extracomment="don't translate part after '-'">Dividend</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string comment="description of investment activity" extracomment="don't translate part after '-'">Reinvest Dividend-reinvdiv</string>
+           <string comment="description of investment activity" extracomment="don't translate part after '-'">Reinvest Dividend</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string comment="description of investment activity" extracomment="don't translate part after '-'">Add Shares-shrsin</string>
+           <string comment="description of investment activity" extracomment="don't translate part after '-'">Add Shares</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string comment="description of investment activity" extracomment="don't translate part after '-'">Remove Shares-shrsout</string>
+           <string comment="description of investment activity" extracomment="don't translate part after '-'">Remove Shares</string>
           </property>
          </item>
         </widget>

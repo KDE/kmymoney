@@ -25,22 +25,19 @@ email                 : aganderson@ukonline.co.uk
 #include <QtCore/QDate>
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
-#include <QtCore/QStringList>
-
 // ----------------------------------------------------------------------------
 // KDE Headers
 #include <KUrl>
-
 // ----------------------------------------------------------------------------
 // Project Headers
 
 #include <mymoneystatement.h>
+#include "ui_investmentdlgdecl.h"
 
 #define invMAXCOL 14    //                 maximum no. of columns (arbitrary value)
 
 class ConvertDate;
 class CsvImporterDlg;
-///class ValidateColumn;
 class InvestmentDlg;
 class RedefineDlg;
 class ParseLine;
@@ -56,7 +53,6 @@ public:
 
   InvestmentDlg*    m_investDlg;
   ParseLine*        m_parseline;
-///  ValidateColumn*   m_validateColumn;
 
   void           setTrInvestDataType(const QString& val);
 
@@ -65,23 +61,8 @@ public:
   */
   void           init();
 
-  /**
-  * This method is called to redraw the window according to the number of
-  * columns and rows to be displayed.
-  */
-
-  /**
-  * This method is called when it is detected that the user has selected the
-  * same column for two different fields.  The column detecting the error
-  * has to reset the other column.
-  */
-///  void           resetComboBox(const QString& comboBox, int& col);///, int col
-
   void           clearColumnType(int column);
   void           setColumnType(int column, const QString& type);
-
-///  int            previousColumn();
-///  void           setPreviousColumn(int col);
 
   QString        previousType();
   void           clearPreviousType();
@@ -97,7 +78,6 @@ public:
 
 
   int            m_endColumn;
-///  void*         caller;
 
 public:
 signals:
@@ -301,13 +281,6 @@ private:
   void           setCodecList(const QList<QTextCodec *> &list);
 
   /**
-  * This method is called when it is detected that the user has selected the
-  * same column for two different fields.  The column detecting the error
-  * has to reset the other column.
-  */
-///  void           resetComboBox(const QString& comboBox, int col);
-
-  /**
   * Because the memo field allows multiple selections, it helps to be able
   * to see which columns are selected already, particularly if a column
   * selection gets deleted. This is achieved by adding a '*' character
@@ -316,8 +289,6 @@ private:
   * reloaded, or when the user clears his selections.
   */
   void           clearComboBoxText();
-
-///  int validateNewColumn(int col, const QString& type);
 
   struct qifInvestData {
 

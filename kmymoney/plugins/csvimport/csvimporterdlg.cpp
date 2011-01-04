@@ -56,7 +56,7 @@ class ConvertDate;
 class InvestmentDlg;
 
 CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
-    CsvImporterDlgDecl(parent)
+  CsvImporterDlgDecl(parent)
 {
   m_amountSelected = false;
   m_creditSelected = false;
@@ -105,6 +105,7 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
 
   m_debitColumn = -1;
   m_creditColumn = -1;
+  m_amountColumn = -1;
 
   m_convertDate = new ConvertDate;
   m_investmentDlg = new InvestmentDlg;
@@ -127,7 +128,8 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
   connect(button_saveAs, SIGNAL(clicked()), m_csvprocessing, SLOT(saveAs()));
   connect(pushButton, SIGNAL(clicked()), m_investmentDlg, SLOT(helpSelected()));
   connect(comboBox_encoding, SIGNAL(currentIndexChanged(int)), m_csvprocessing, SLOT(encodingChanged()));
-  connect(comboBox_fieldDelim, SIGNAL(currentIndexChanged(int)), m_csvprocessing, SLOT(fieldDelimiterChanged()));
+  connect(comboBox_fieldDelim, SIGNAL(currentIndexChanged(int)), m_csvprocessing, SLOT(delimiterChanged()));
+  connect(comboBox_textDelimiter, SIGNAL(currentIndexChanged(int)), m_csvprocessing, SLOT(delimiterChanged()));
   connect(comboBox_memoCol, SIGNAL(currentIndexChanged(int)), this, SLOT(memoColumnSelected(int)));
   connect(comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), m_csvprocessing, SLOT(dateFormatSelected(int)));
   connect(comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), m_convertDate, SLOT(dateFormatSelected(int)));
@@ -155,9 +157,20 @@ void CsvImporterDlg::amountRadioClicked(bool checked)
     comboBox_amountCol->setEnabled(true);//  disable credit & debit ui choices
     label_amount->setEnabled(true);
     comboBox_debitCol->setEnabled(false);
+    comboBox_debitCol->setCurrentIndex(-1);
     label_debits->setEnabled(false);
     comboBox_creditCol->setEnabled(false);
+    comboBox_creditCol->setCurrentIndex(-1);
     label_credits->setEnabled(false);
+
+    //   the 'm_creditColumn/m_debitColumn' could just have been reassigned, so ensure
+    //   ...they == "credit or debit" before clearing them
+    if ((m_creditColumn >= 0) && (m_columnType[m_creditColumn] == "credit")) {
+      m_columnType[m_creditColumn].clear();//       because amount col chosen...
+    }
+    if ((m_debitColumn >= 0) && (m_columnType[m_debitColumn] == "debit")) {
+      m_columnType[m_debitColumn].clear();//        ...drop any credit & debit
+    }
     m_debitColumn = -1;
     m_creditColumn = -1;
   }
@@ -173,55 +186,51 @@ int CsvImporterDlg::validateColumn(const int& col, const QString& type)
   if ((col == m_previousColumn) && (type == m_previousType)) {
     return -1;
   }
-  QString returnMessage();
   //                                               selection was in range
-  if ((!m_columnType[col].isEmpty())  && (m_columnType[col] != type)) {//            column is already in use
-    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected."
-    " <center>Please reselect both entries as necessary.</center>", m_columnType[col]));
+
+  if ((!m_columnType[col].isEmpty())  && (m_columnType[col] != type)) {
+    //                         BUT column is already in use
+
+    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>"
+                                    , m_columnType[col]));
 
     m_previousColumn = -1;
     resetComboBox(m_columnType[col], col);
-    resetComboBox(type, col);//       reset this combobox
+    resetComboBox(type, col);//                    reset this combobox
     m_previousType.clear();
     m_columnType[col].clear();
     return KMessageBox::Cancel;
   }
-  //                                            is this type already in use
-  for (int i = 0; i < m_csvprocessing->endColumn(); i++) {  //  check each column
-    if (m_columnType[i] == type) {//            this type already in use
-      m_columnType[i].clear();//                ...so clear it
+  //                                               is this type already in use
+  for (int i = 0; i < m_csvprocessing->endColumn(); i++) {   //  check each column
+    if (m_columnType[i] == type) { //               this type already in use
+      m_columnType[i].clear();//                   ...so clear it
     }//  end this col
 
-  }// end all columns checked                   type not in use
-  m_columnType[col] = type;//               accept new type
+  }// end all columns checked                      type not in use
+  m_columnType[col] = type;//                      accept new type
   if (m_previousColumn != -1) {
     m_previousColumn = col;
   }
   m_previousType = type;
-  return KMessageBox::Ok; //         accept new type
+  return KMessageBox::Ok; //                       accept new type
 }
 
 void CsvImporterDlg::amountColumnSelected(int col)
 {
   QString type = "amount";
-  if (col < 0) {//                              it is unset
+  if (col < 0) { //                                 it is unset
     return;
   }
-// A new column has been selected for this field so clear old one
-  if ((m_columnType[m_amountColumn] == type)  && (m_amountColumn != col)) {
+// if a previous amount field is detected, but in a different column...
+  if ((m_amountColumn != -1) && (m_columnType[m_amountColumn] == type)  && (m_amountColumn != col)) {
     m_columnType[m_amountColumn].clear();
   }
   int ret = validateColumn(col, type);
 
   if (ret == KMessageBox::Ok) {
-    comboBox_amountCol->setCurrentIndex(col);// accept new column
+    comboBox_amountCol->setCurrentIndex(col);//    accept new column
     m_amountSelected = true;
-    if (m_amountColumn != -1) {
-//          if a previous amount column is detected, but in a different column...
-      if ((m_columnType[m_amountColumn] == type)  && (m_amountColumn != col)) {
-        m_columnType[m_amountColumn].clear();//   clear it
-      }
-    }
     m_amountColumn = col;
     m_columnType[m_amountColumn] = type;
     return;
@@ -234,12 +243,19 @@ void CsvImporterDlg::amountColumnSelected(int col)
 
 void CsvImporterDlg::debitCreditRadioClicked(bool checked)
 {
-  if (checked) {//
-    comboBox_debitCol->setEnabled(true);// if 'debit/credit' selected
+  if (checked) {
+    comboBox_debitCol->setEnabled(true);//         if 'debit/credit' selected
     label_debits->setEnabled(true);
     comboBox_creditCol->setEnabled(true);
     label_credits->setEnabled(true);
-    comboBox_amountCol->setEnabled(false);//  disable 'amount' ui choices
+    comboBox_amountCol->setEnabled(false);//       disable 'amount' ui choices
+    comboBox_amountCol->setCurrentIndex(-1);//     as credit/debit chosen
+
+    //   the 'm_amountColumn' could just have been reassigned, so ensure
+    //   ...m_columnType[m_amountColumn] == "amount" before clearing it
+    if ((m_amountColumn >= 0) && (m_columnType[m_amountColumn] == "amount")) {
+      m_columnType[m_amountColumn].clear();//      ...drop any amount choice
+    }
     label_amount->setEnabled(false);
   }
 }
@@ -247,11 +263,11 @@ void CsvImporterDlg::debitCreditRadioClicked(bool checked)
 void CsvImporterDlg::creditColumnSelected(int col)
 {
   QString type = "credit";
-  if (col < 0) {//                              it is unset
+  if (col < 0) { //                              it is unset
     return;
   }
-// A new column has been selected for this field so clear old one
-  if ((m_columnType[m_creditColumn] == type)  && (m_creditColumn != col)) {
+// if a previous credit field is detected, but in a different column...
+  if ((m_creditColumn != -1) && (m_columnType[m_creditColumn] == type)  && (m_creditColumn != col)) {
     m_columnType[m_creditColumn].clear();
   }
   int ret = validateColumn(col, type);
@@ -259,12 +275,6 @@ void CsvImporterDlg::creditColumnSelected(int col)
   if (ret == KMessageBox::Ok) {
     comboBox_creditCol->setCurrentIndex(col);// accept new column
     m_creditSelected = true;
-    if (m_creditColumn != -1) {
-//          if a previous credit column is detected, but in a different column...
-      if ((m_columnType[m_creditColumn] == type)  && (m_creditColumn != col)) {
-        m_columnType[m_creditColumn].clear();//   clear it
-      }
-    }
     m_creditColumn = col;
     m_columnType[m_creditColumn] = type;
     return;
@@ -278,24 +288,18 @@ void CsvImporterDlg::creditColumnSelected(int col)
 void CsvImporterDlg::debitColumnSelected(int col)
 {
   QString type = "debit";
-  if (col < 0) {//                              it is unset
+  if (col < 0) { //                                 it is unset
     return;
   }
 // A new column has been selected for this field so clear old one
-  if ((m_columnType[m_debitColumn] == type)  && (m_debitColumn != col)) {
+  if ((m_debitColumn != -1) && (m_columnType[m_debitColumn] == type)  && (m_debitColumn != col)) {
     m_columnType[m_debitColumn].clear();
   }
   int ret = validateColumn(col, type);
 
   if (ret == KMessageBox::Ok) {
-    comboBox_debitCol->setCurrentIndex(col);// accept new column
+    comboBox_debitCol->setCurrentIndex(col);//     accept new column
     m_debitSelected = true;
-    if (m_debitColumn != -1) {
-//          if a previous debit column is detected, but in a different column...
-      if ((m_columnType[m_debitColumn] == type)  && (m_debitColumn != col)) {
-        m_columnType[m_debitColumn].clear();//   clear it
-      }
-    }
     m_debitColumn = col;
     m_columnType[m_debitColumn] = type;
     return;
@@ -308,24 +312,18 @@ void CsvImporterDlg::debitColumnSelected(int col)
 void CsvImporterDlg::dateColumnSelected(int col)
 {
   QString type = "date";
-  if (col < 0) {//                              it is unset
+  if (col < 0) { //                                 it is unset
     return;
   }
 // A new column has been selected for this field so clear old one
-  if ((m_columnType[m_dateColumn] == type)  && (m_dateColumn != col)) {
+  if ((m_dateColumn != -1) && (m_columnType[m_dateColumn] == type)  && (m_dateColumn != col)) {
     m_columnType[m_dateColumn].clear();
   }
   int ret = validateColumn(col, type);
 
   if (ret == KMessageBox::Ok) {
-    comboBox_dateCol->setCurrentIndex(col);// accept new column
+    comboBox_dateCol->setCurrentIndex(col);//      accept new column
     m_dateSelected = true;
-    if (m_dateColumn != -1) {
-//          if a previous date column is detected, but in a different column...
-      if ((m_columnType[m_dateColumn] == type)  && (m_dateColumn != col)) {
-        m_columnType[m_dateColumn].clear();//   clear it
-      }
-    }
     m_dateColumn = col;
     m_columnType[m_dateColumn] = type;
     return;
@@ -338,55 +336,47 @@ void CsvImporterDlg::dateColumnSelected(int col)
 void CsvImporterDlg::memoColumnSelected(int col)
 {
   QString type = "memo";
-  if ((col < 0) || (col >= m_csvprocessing->endColumn())) {//      out of range so...
+  if ((col < 0) || (col >= m_csvprocessing->endColumn())) { // out of range so...
     comboBox_memoCol->setCurrentIndex(-1);// ..clear selection
     return;
   }
-  if (m_columnType[col].isEmpty()) {//      accept new  entry
+  if (m_columnType[col].isEmpty()) { //             accept new  entry
     comboBox_memoCol->setItemText(col, QString().setNum(col + 1) + '*');
     m_columnType[col] = type;
     m_memoColumn = col;
     m_memoSelected = true;
     return;
-  } else {//                                    clashes with prior selection
-    m_memoSelected = false;//                   clear incorrect selection
-    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected."
-    " <center>Please reselect both entries as necessary.</center>", m_columnType[col]));
+  } else {//                                       clashes with prior selection
+    if (m_columnType[col] == type) { //               nothing changed
+      return;
+    }
+    m_memoSelected = false;//                      clear incorrect selection
+    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>"
+                                    , m_columnType[col]));
     comboBox_memoCol->setCurrentIndex(-1);
     m_previousColumn = -1;
-    resetComboBox(m_columnType[col], col);//      clash,  so reset ..
-    resetComboBox(type, col);//                   ... both comboboxes
+    resetComboBox(m_columnType[col], col);//       clash,  so reset ..
+    resetComboBox(type, col);//                    ... both comboboxes
     m_previousType.clear();
     m_columnType[col].clear();
-    if (m_memoColumn >= 0) {
-      m_columnType[m_memoColumn].clear();
-      comboBox_memoCol->setItemText(m_memoColumn, QString().setNum(m_memoColumn + 1));//  reset the '*'
-      comboBox_memoCol->setCurrentIndex(-1);//       and this one
-    }
+    comboBox_memoCol->setItemText(col, QString().setNum(col + 1));//  reset the '*'
   }
 }
 
 void CsvImporterDlg::payeeColumnSelected(int col)
 {
   QString type = "payee";
-  if (col < 0) {//                              it is unset
+  if (col < 0) { //                              it is unset
     return;
   }
-// A new column has been selected for this field so clear old one
-  if ((m_columnType[m_payeeColumn] == type)  && (m_payeeColumn != col)) {
+// if a previous payee field is detected, but in a different column...
+  if ((m_payeeColumn != -1) && (m_columnType[m_payeeColumn] == type)  && (m_payeeColumn != col)) {
     m_columnType[m_payeeColumn].clear();
   }
   int ret = validateColumn(col, type);
-
   if (ret == KMessageBox::Ok) {
     comboBox_payeeCol->setCurrentIndex(col);// accept new column
     m_payeeSelected = true;
-    if (m_payeeColumn != -1) {
-//          if a previous payee column is detected, but in a different column...
-      if ((m_columnType[m_payeeColumn] == type)  && (m_payeeColumn != col)) {
-        m_columnType[m_payeeColumn].clear();//   clear it
-      }
-    }
     m_payeeColumn = col;
     m_columnType[m_payeeColumn] = type;
     return;
@@ -399,11 +389,11 @@ void CsvImporterDlg::payeeColumnSelected(int col)
 void CsvImporterDlg::numberColumnSelected(int col)
 {
   QString type = "number";
-  if (col < 0) {//                              it is unset
+  if (col < 0) { //                              it is unset
     return;
   }
-// A new column has been selected for this field so clear old one
-  if ((m_columnType[m_numberColumn] == type)  && (m_numberColumn != col)) {
+// if a previous number field is detected, but in a different column...
+  if ((m_numberColumn != -1) && (m_columnType[m_numberColumn] == type)  && (m_numberColumn != col)) {
     m_columnType[m_numberColumn].clear();
   }
   int ret = validateColumn(col, type);
@@ -411,12 +401,6 @@ void CsvImporterDlg::numberColumnSelected(int col)
   if (ret == KMessageBox::Ok) {
     comboBox_numberCol->setCurrentIndex(col);// accept new column
     m_numberSelected = true;
-    if (m_numberColumn != -1) {
-//          if a previous number column is detected, but in a different column...
-      if ((m_columnType[m_numberColumn] == type)  && (m_numberColumn != col)) {
-        m_columnType[m_numberColumn].clear();//   clear it
-      }
-    }
     m_numberColumn = col;
     m_columnType[m_numberColumn] = type;
     return;
@@ -452,7 +436,7 @@ void CsvImporterDlg::slotClose()
 
   profileGroup.config()->sync();
 
-  if (!m_csvprocessing->inFileName().isEmpty()) { //  don't save column numbers if no file loaded
+  if (!m_csvprocessing->inFileName().isEmpty()) {  //  don't save column numbers if no file loaded
     KConfigGroup columnsGroup(config, "Columns");
     columnsGroup.writeEntry("DateCol", comboBox_dateCol->currentIndex());
     columnsGroup.writeEntry("PayeeCol", comboBox_payeeCol->currentIndex());
@@ -620,7 +604,7 @@ void CsvImporterDlg::resetComboBox(const QString& comboBox, const int& col)
   QStringList fieldType;
   fieldType << "amount" << "credit" << "date" << "debit" << "memo" << "number" << "payee";
   int index = fieldType.indexOf(comboBox);
-  switch (index) {
+  switch(index) {
     case 0://  amount
       comboBox_amountCol->setCurrentIndex(-1);
       m_amountSelected = false;
@@ -652,10 +636,8 @@ void CsvImporterDlg::resetComboBox(const QString& comboBox, const int& col)
       break;
     default:
       qDebug() << i18n("588 ERROR. Field name not recognised.") << comboBox;
-      KMessageBox::sorry(this, i18n("<center>Field name not recognised.</center>"
-                                    " <center>'<b>%1</b>'</center>"
-                                    " Please re-enter your column selections."
-                                    , comboBox), i18n("CSV import"));
+      KMessageBox::sorry(this, i18n("<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> Please re-enter your column selections."
+                                   , comboBox), i18n("CSV import"));
   }
   m_columnType[col].clear();
   return;

@@ -36,10 +36,18 @@ public:
   */
   QDate convertDate(const QString& txt);
 
-  void setDateFormatIndex(int index);
+  /**
+  * This method converts the selected date setting into
+  * a QString date format string.
+  */
+  QString          stringFormat();
+
+  void             setDateFormatIndex(int index);
 
 private:
-  int m_dateFormatIndex;
+  int              m_dateFormatIndex;
+
+  QString          m_dateFormatString;
 
 private slots:
 

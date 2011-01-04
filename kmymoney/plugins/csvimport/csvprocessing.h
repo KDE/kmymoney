@@ -86,7 +86,7 @@ public slots:
   * This method is called when the user selects a new field delimiter.  The
   * input file is reread using the current delimiter.
   */
-  void           fieldDelimiterChanged();
+  void           delimiterChanged();
 
   /**
   * This method is called when the user clicks 'import'. It performs further
@@ -164,7 +164,7 @@ private:
   * It will evaluate a line and prepare it to be added to a statement,
   * and to a QIF file, if required.
   */
-  int           processQifLine(QString& iBuff);
+  int            processQifLine(QString& iBuff);
 
   /**
   * This method is called on opening the plugin.
@@ -200,6 +200,11 @@ private:
   */
   void           clearComboBoxText();
 
+  void           clearColumnTypes();
+
+  int            columnNumber(const QString& msg);
+
+  QString         m_textDelimiterCharacter;
   QString        m_csvPath;
   QString        m_fieldDelimiterCharacter;
   QString        m_inFileName;
@@ -222,13 +227,17 @@ private:
   QString        m_filename;
   QString        m_inBuffer;
   QString        m_outBuffer;
+  QString        m_qifBuffer;
 
   bool           m_importNow;
 
   int            m_dateFormatIndex;
+  int            m_debitFlag;
   int            m_endLine;
   int            m_fieldDelimiterIndex;
+  int            m_textDelimiterIndex;
   int            m_endColumn;
+  int            m_flagCol;
   int            m_maxWidth;
   int            m_row;
   int            m_startLine;

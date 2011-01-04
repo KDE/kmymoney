@@ -116,7 +116,7 @@ signals:
   */
   void           statementReady(MyMoneyStatement&);
 
-  
+
 };
 
 #endif // INVESTMENTDLG_H
