@@ -29,9 +29,8 @@
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
-      <string>From this dialog you are able to import transactions from a Quicken&lt;b&gt;&amp;trade;&lt;/b&gt; compatible file, (known as a QIF file, because of the extension).&lt;p&gt;
-
-Please enter the path to the QIF file or select it by clicking on the Browse button. Once you have the file's path press the Import button and KMyMoney will import all the transactions, categories and payees it finds.</string>
+      <string>&lt;p&gt;From this dialog you are able to import transactions from a Quicken&lt;b&gt;&amp;trade;&lt;/b&gt; compatible file, (known as a QIF file, because of the extension).&lt;/p&gt;
+&lt;p&gt;Please enter the path to the QIF file or select it by clicking on the Browse button. Once you have the file's path press the Import button and KMyMoney will import all the transactions, categories and payees it finds.&lt;/p&gt;</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
