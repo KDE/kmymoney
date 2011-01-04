@@ -25,14 +25,17 @@ email                 : aganderson@ukonline.co.uk
 #include <QtCore/QDate>
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
+#include <QtCore/QStringList>
+
 // ----------------------------------------------------------------------------
 // KDE Headers
+
 #include <KUrl>
+
 // ----------------------------------------------------------------------------
 // Project Headers
 
 #include <mymoneystatement.h>
-#include "ui_investmentdlgdecl.h"
 
 #define invMAXCOL 14    //                 maximum no. of columns (arbitrary value)
 
