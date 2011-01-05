@@ -1415,6 +1415,7 @@ private:
     * @see attach, detach
     */
   void addNotification(const QString& id, bool reload = true);
+  void addNotification(const QString& id, const QDate& date, bool reload = true);
 
   /**
     * This method is used to clear the notification list

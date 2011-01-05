@@ -858,11 +858,6 @@ public:
 
 
   /**
-    * Clear all internal caches (used internally for performance measurements)
-    */
-  virtual void clearCache(void) = 0;
-
-  /**
     * This method checks, if the given @p object is referenced
     * by another engine object.
     *

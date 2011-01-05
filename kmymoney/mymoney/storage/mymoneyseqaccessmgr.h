@@ -39,36 +39,6 @@
   */
 
 /**
-  * This member represents an item in the balance cache. The balance cache
-  * is used for fast processing of the balance of an account. Several
-  * of these objects are held by the MyMoneySeqAccessMgr() object in a map
-  * with the account Id as key. If such a cache item is present in the map,
-  * the contained balance of it will be used as current balance for this
-  * account. If the balance is changed by any operation, the
-  * MyMoneyBalanceCacheItem for the modified account will be removed from
-  * the map and the next time the balance for this account is requested,
-  * it has to be recalculated. After recalculation, a new MyMoneyBalanceCacheItem
-  * will be created containing the new balance value.
-  *
-  * @see MyMoneySeqAccessMgr::balance() and
-  *      MyMoneySeqAccessMgr::invalidateBalanceCache() for a usage example
-  */
-class MyMoneyBalanceCacheItem
-{
-public:
-  MyMoneyBalanceCacheItem() {
-    valid = false;
-  };
-  MyMoneyBalanceCacheItem(const MyMoneyMoney& val) {
-    balance = val; valid = true;
-  };
-
-  bool operator == (const MyMoneyBalanceCacheItem& right) const;
-  bool          valid;
-  MyMoneyMoney  balance;
-};
-
-/**
   * The MyMoneySeqAccessMgr class represents the storage engine for sequential
   * files. The actual file type and it's internal storage format (e.g. binary
   * or XML) is not important and handled through the IMyMoneySerialize() interface.
@@ -1007,11 +977,6 @@ public:
   const MyMoneyPriceList priceList(void) const;
 
   /**
-    * Clear all internal caches (used internally for performance measurements)
-    */
-  void clearCache(void);
-
-  /**
     * This method checks, if the given @p object is referenced
     * by another engine object.
     *
@@ -1053,14 +1018,6 @@ private:
     * date of the last modification.
     */
   void touch(void);
-
-  /**
-    * This method is used to invalidate the cached balance for
-    * the selected account and all it's parents.
-    *
-    * @param id id of the account in question
-    */
-  void invalidateBalanceCache(const QString& id);
 
   /**
     * Adjust the balance for account @a acc by the amount of shares in split @a split.
@@ -1136,19 +1093,6 @@ private:
     * known within this file.
     */
   MyMoneyMap<QString, MyMoneyAccount> m_accountList;
-
-  /**
-    * The member variable m_balanceCache is the container for the
-    * accounts actual balance
-    */
-  mutable QMap<QString, MyMoneyBalanceCacheItem> m_balanceCache;
-
-  /**
-    * This member keeps the date for which the m_balanceCache member
-    * is valid. In case the whole cache is invalid it is set to
-    * QDate().
-    */
-  mutable QDate          m_balanceCacheDate;
 
   /**
     * The member variable m_transactionList is the container for all
