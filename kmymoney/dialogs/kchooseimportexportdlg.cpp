@@ -41,8 +41,7 @@
 
 #include "ui_kchooseimportexportdlgdecl.h"
 
-struct KChooseImportExportDlg::Private
-{
+struct KChooseImportExportDlg::Private {
   Ui::KChooseImportExportDlgDecl ui;
 };
 

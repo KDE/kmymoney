@@ -40,8 +40,7 @@
 #include <mymoneytransaction.h>
 #include "ui_kconfirmmanualenterdlgdecl.h"
 
-struct KConfirmManualEnterDlg::Private
-{
+struct KConfirmManualEnterDlg::Private {
   Ui::KConfirmManualEnterDlgDecl ui;
 };
 

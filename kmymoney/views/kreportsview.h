@@ -125,7 +125,9 @@ public:
     }
     void showEvent(QShowEvent * event);
     void loadTab(void);
-    KParts::BrowserExtension* browserExtenstion(void) const { return m_part->browserExtension(); }
+    KParts::BrowserExtension* browserExtenstion(void) const {
+      return m_part->browserExtension();
+    }
   };
 
   /**

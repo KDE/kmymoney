@@ -53,7 +53,7 @@
 #include "redefinedlg.h"
 
 InvestmentDlg::InvestmentDlg(QWidget* parent) :
-  InvestmentDlgDecl(parent)
+    InvestmentDlgDecl(parent)
 {
   tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
   tableWidget->setWordWrap(false);

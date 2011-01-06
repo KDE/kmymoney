@@ -302,7 +302,7 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
   QString::const_iterator constIterator;
 
   for (constIterator = Buffer.constBegin(); constIterator != Buffer.constEnd();
-      ++constIterator) {
+       ++constIterator) {
     QString chr = (*constIterator);
     count -= 1;
     if (chr == m_textDelimiterCharacter) {
@@ -405,7 +405,7 @@ void CsvProcessing::displayLine(const QString& data)
   QStringList::const_iterator constIterator;
 
   for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
-      ++constIterator) {
+       ++constIterator) {
     QString txt = (*constIterator);
     QTableWidgetItem *item = new QTableWidgetItem;//             new item for UI
     item->setText(txt);
@@ -437,7 +437,7 @@ void CsvProcessing::csvImportTransaction(MyMoneyStatement& st)
              "assign today's date to the transaction. Pressing \'Cancel\'' will abort "
              "the import operation. You can then restart the import and select a different "
              "date format.", m_trData.date.toString(m_date), m_dateFormats[m_dateFormatIndex]), i18n("Invalid date format"));
-    switch(rc) {
+    switch (rc) {
       case KMessageBox::Continue:
         tr.m_datePosted = (QDate::currentDate());
         break;
@@ -512,7 +512,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
 
     else if (m_csvDialog->columnType(i) == "amount") { // Is this Amount column
       if (m_flagCol == -1) { //                        it's a new file
-        switch(m_debitFlag) {  //                     Flag if amount is debit or credit
+        switch (m_debitFlag) { //                     Flag if amount is debit or credit
           case -1://                                  Ignore flag
             m_flagCol = 0;//                          ...and continue
             break;

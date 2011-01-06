@@ -40,8 +40,7 @@
 
 #include "ui_knewfiledlgdecl.h"
 
-struct KNewFileDlg::Private
-{
+struct KNewFileDlg::Private {
   Ui::KNewFileDlgDecl ui;
 };
 
@@ -141,7 +140,7 @@ void KNewFileDlg::loadFromKABC(void)
 
 KPushButton* KNewFileDlg::cancelButton(void)
 {
-    return d->ui.cancelBtn;
+  return d->ui.cancelBtn;
 }
 
 #include "knewfiledlg.moc"

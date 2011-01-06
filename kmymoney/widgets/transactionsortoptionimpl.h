@@ -32,7 +32,7 @@
 // Project Includes
 namespace Ui
 {
-  class TransactionSortOptionDecl;
+class TransactionSortOptionDecl;
 };
 
 class TransactionSortOption : public QWidget

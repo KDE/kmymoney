@@ -50,7 +50,7 @@ K_EXPORT_COMPONENT_FACTORY(kmm_csvimport,
                            KGenericFactory<CsvImporterPlugin>("kmm_csvimport"))
 
 CsvImporterPlugin::CsvImporterPlugin(QObject *parent, const QStringList&) :
-  KMyMoneyPlugin::Plugin(parent, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   setComponentData(KGenericFactory<CsvImporterPlugin>::componentData());
   setXMLFile("kmm_csvimport.rc");

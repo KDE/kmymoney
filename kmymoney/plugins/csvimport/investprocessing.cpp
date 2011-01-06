@@ -715,7 +715,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       MyMoneyMoney fraction = MyMoneyMoney(txt);
       txt = m_columnList[i].remove('"');//                     price
       MyMoneyMoney price = MyMoneyMoney(txt);
-      price = price * fraction;    
+      price = price * fraction;
       double val = price.toDouble();
       txt.setNum(val, 'f', 6);
       m_trInvestData.price = price;
@@ -899,7 +899,7 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
              "Pressing \'Continue\' will assign today's date to the transaction. Pressing \'Cancel\'' will abort the import operation. You can then restart the import and select a different date format.",
              m_trInvestData.date.toString(m_dateFormats[m_dateFormatIndex]),
              m_dateFormats[m_dateFormatIndex]), i18n("Invalid date format"));
-    switch(rc) {
+    switch (rc) {
       case KMessageBox::Continue:
         tr.m_datePosted = (QDate::currentDate());
         break;
@@ -1182,7 +1182,7 @@ void InvestProcessing::resetComboBox(const QString& comboBox, const int& col)
   QStringList fieldType;
   fieldType << "amount" << "date" << "fee" << "memo" << "price" << "quantity" << "type";
   int index = fieldType.indexOf(comboBox);
-  switch(index) {
+  switch (index) {
     case 0://  amount
       m_investDlg->comboBox_amountCol->setCurrentIndex(-1);
       m_amountSelected = false;
@@ -1215,7 +1215,7 @@ void InvestProcessing::resetComboBox(const QString& comboBox, const int& col)
     default:
       qDebug() << i18n("ERROR. Field name not recognised.") << comboBox;
       KMessageBox::sorry(0, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", comboBox)
-      , i18n("CSV import"));
+                         , i18n("CSV import"));
   }
   m_columnType[col].clear();
 }

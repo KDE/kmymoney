@@ -780,7 +780,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
 
   // encapsulate transactions to the engine to be able to commit/rollback
   MyMoneyFileTransaction ft;
-  
+
   // make sure we setup the encryption key correctly
   if (isEncrypted && MyMoneyFile::instance()->value("kmm-encryption-key").isEmpty()) {
     MyMoneyFile::instance()->setValue("kmm-encryption-key", KMyMoneyGlobalSettings::gpgRecipientList().join(","));
@@ -907,7 +907,7 @@ bool KMyMoneyView::initializeStorage()
     qDebug("%s", qPrintable(e->what()));
     delete e;
   }
-  
+
   if (baseId.isEmpty()) {
     // Stay in this endless loop until we have a base currency,
     // as without it the application does not work anymore.
@@ -1343,7 +1343,7 @@ void KMyMoneyView::selectBaseCurrency(void)
     qDebug("%s", qPrintable(e->what()));
     delete e;
   }
-  
+
   if (!baseId.isEmpty()) {
     // check that all accounts have a currency
     QList<MyMoneyAccount> list;
@@ -1361,12 +1361,12 @@ void KMyMoneyView::selectBaseCurrency(void)
     for (it = list.begin(); it != list.end(); ++it) {
       QString cid;
       try {
-        if(!(*it).currencyId().isEmpty() || (*it).currencyId().length() != 0)
+        if (!(*it).currencyId().isEmpty() || (*it).currencyId().length() != 0)
           cid = MyMoneyFile::instance()->currency((*it).currencyId()).id();
       } catch (MyMoneyException *e) {
         delete e;
       }
-      
+
       if (cid.isEmpty()) {
         (*it).setCurrencyId(baseId);
         MyMoneyFileTransaction ft;

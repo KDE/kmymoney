@@ -58,7 +58,7 @@ QDate ConvertDate::convertDate(const QString& txt)
   if (dateSplit.count() != 3) { //                  not a valid date
     return QDate();
   }
-  switch(m_dateFormatIndex) {
+  switch (m_dateFormatIndex) {
     case(0):    //                                 %y %m %d
       aYear =  dateSplit[0];
       aMonth = dateSplit[1];
@@ -116,7 +116,7 @@ QDate ConvertDate::convertDate(const QString& txt)
     else
       aFormat = "MMMM";
   QString dateFormat;
-  switch(m_dateFormatIndex) {
+  switch (m_dateFormatIndex) {
     case(0):    //                                 %y %m %d
       dateFormat = "yyyy" + aFormat + "dd";
       dat = aYear + aMonth + aDay;
@@ -152,7 +152,7 @@ void ConvertDate::setDateFormatIndex(int index)
 QString ConvertDate::stringFormat()
 {
   QString dateFormatString;
-  switch(m_dateFormatIndex) {
+  switch (m_dateFormatIndex) {
     case(0):    //                                 %y %m %d
       dateFormatString = "yyyyMMdd";
       break;

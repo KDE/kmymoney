@@ -47,8 +47,7 @@ public:
 };
 
 
-struct KGncPriceSourceDlg::Private
-{
+struct KGncPriceSourceDlg::Private {
   Private() : currentButton(0), widget(0) {}
   int currentButton;
   KGncPriceSourceDlgDecl* widget;
@@ -132,9 +131,9 @@ QString KGncPriceSourceDlg::selectedSource() const
   return (s);
 }
 
-bool KGncPriceSourceDlg::alwaysUse() const 
+bool KGncPriceSourceDlg::alwaysUse() const
 {
-    return d->widget->checkAlwaysUse->isChecked();
+  return d->widget->checkAlwaysUse->isChecked();
 }
 
 void KGncPriceSourceDlg::slotHelp(void)

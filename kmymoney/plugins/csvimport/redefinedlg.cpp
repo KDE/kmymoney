@@ -250,7 +250,7 @@ void RedefineDlg::buildOkTypeList()
   } else {
     m_okTypeList.clear();
     KMessageBox::sorry(this, i18n(" The values in the columns you have selected\n do not match any expected investment type.\n Please check the fields in the current transaction,\n and also your selections.")
-                                 , i18n("CSV import"));
+                       , i18n("CSV import"));
   }
 }
 

@@ -1382,7 +1382,7 @@ void MyMoneyGncReader::convertPrice(const GncPrice *gpr)
   if (gpr->commodity()->isCurrency()) {
     MyMoneyPrice exchangeRate(gpr->commodity()->id().toUtf8(), gpr->currency()->id().toUtf8(),
                               gpr->priceDate(), rate, i18n("Imported History"));
-    if(!exchangeRate.rate(QString()).isZero())
+    if (!exchangeRate.rate(QString()).isZero())
       m_storage->addPrice(exchangeRate);
   } else {
     MyMoneySecurity e = m_storage->security(m_mapEquities[gpr->commodity()->id().toUtf8()]);
@@ -1390,7 +1390,7 @@ void MyMoneyGncReader::convertPrice(const GncPrice *gpr)
       << ", found id =" << e.id().data();
     e.setTradingCurrency(gpr->currency()->id().toUtf8());
     MyMoneyPrice stockPrice(e.id(), gpr->currency()->id().toUtf8(), gpr->priceDate(), rate, i18n("Imported History"));
-    if(!stockPrice.rate(QString()).isZero())
+    if (!stockPrice.rate(QString()).isZero())
       m_storage->addPrice(stockPrice);
     m_storage->modifySecurity(e);
   }

@@ -1417,7 +1417,7 @@ void Register::contextMenuEvent(QContextMenuEvent *e)
     // since mouse release event is not called,
     // we need to fake the right mouse button release here
     m_mouseButton = Qt::RightButton;
-    
+
     // if a selected item is clicked don't change the selection
     RegisterItem* item = itemAtRow(rowAt(e->y()));
     if (item && !item->isSelected())

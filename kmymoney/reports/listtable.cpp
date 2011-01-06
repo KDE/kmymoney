@@ -486,7 +486,7 @@ void ListTable::render(QString& result, QString& csv) const
       // as a set of parallel vectors.  Would be much better to make a single
       // vector of a properties class.
       QString tlinkBegin, tlinkEnd;
-      if( !tlink.isEmpty()) {
+      if (!tlink.isEmpty()) {
         tlinkBegin = QString("<a href=ledger?%1>").arg(tlink);
         tlinkEnd = QLatin1String("</a>");
       }

@@ -202,10 +202,10 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     // TODO
     // if the chart shows prices and no balance
     // the axis title should be 'Price'
-    if(config.isIncludingPrice()) {
-        yAxis->setTitleText(i18n("Price"));
+    if (config.isIncludingPrice()) {
+      yAxis->setTitleText(i18n("Price"));
     } else {
-        yAxis->setTitleText(i18n("Balance"));
+      yAxis->setTitleText(i18n("Balance"));
     }
 
     TextAttributes yAxisTextAttr(yAxis->titleTextAttributes());
@@ -504,21 +504,21 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
       double value = rowSet[rowType][column].toDouble();
 
       //if zero and set to skip, increase column and continue with next value
-      if(m_skipZero && rowSet[rowType][column].isZero()) {
+      if (m_skipZero && rowSet[rowType][column].isZero()) {
         ++column;
         continue;
       } else {
-          QString toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
-                            .arg(legendText)
-                            .arg(value, 0, 'f', 2);
+        QString toolTip = QString("<h2>%1</h2><strong>%2</strong><br>")
+                          .arg(legendText)
+                          .arg(value, 0, 'f', 2);
 
-          if (accountSeries()) {
-            this->setDataCell(column - 1, rowNum, value);
-            this->setCellTip(column - 1, rowNum, toolTip);
-          } else {
-            this->setDataCell(rowNum, column - 1, value);
-            this->setCellTip(rowNum, column - 1, toolTip);
-          }
+        if (accountSeries()) {
+          this->setDataCell(column - 1, rowNum, value);
+          this->setCellTip(column - 1, rowNum, toolTip);
+        } else {
+          this->setDataCell(rowNum, column - 1, value);
+          this->setCellTip(rowNum, column - 1, toolTip);
+        }
       }
       ++column;
     }

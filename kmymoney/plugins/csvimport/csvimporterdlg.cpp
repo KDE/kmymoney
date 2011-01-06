@@ -56,7 +56,7 @@ class ConvertDate;
 class InvestmentDlg;
 
 CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
-  CsvImporterDlgDecl(parent)
+    CsvImporterDlgDecl(parent)
 {
   m_amountSelected = false;
   m_creditSelected = false;
@@ -190,7 +190,7 @@ int CsvImporterDlg::validateColumn(const int& col, const QString& type)
     //                         BUT column is already in use
 
     KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>"
-                                    , m_columnType[col]));
+                                     , m_columnType[col]));
 
     m_previousColumn = -1;
     resetComboBox(m_columnType[col], col);
@@ -350,7 +350,7 @@ void CsvImporterDlg::memoColumnSelected(int col)
     }
     m_memoSelected = false;//                      clear incorrect selection
     KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>"
-                                    , m_columnType[col]));
+                                     , m_columnType[col]));
     comboBox_memoCol->setCurrentIndex(-1);
     m_previousColumn = -1;
     resetComboBox(m_columnType[col], col);//       clash,  so reset ..
@@ -582,7 +582,7 @@ void CsvImporterDlg::resetComboBox(const QString& comboBox, const int& col)
   QStringList fieldType;
   fieldType << "amount" << "credit" << "date" << "debit" << "memo" << "number" << "payee";
   int index = fieldType.indexOf(comboBox);
-  switch(index) {
+  switch (index) {
     case 0://  amount
       comboBox_amountCol->setCurrentIndex(-1);
       m_amountSelected = false;
@@ -615,7 +615,7 @@ void CsvImporterDlg::resetComboBox(const QString& comboBox, const int& col)
     default:
       qDebug() << i18n("588 ERROR. Field name not recognised.") << comboBox;
       KMessageBox::sorry(this, i18n("<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> Please re-enter your column selections."
-                                   , comboBox), i18n("CSV import"));
+                                    , comboBox), i18n("CSV import"));
   }
   m_columnType[col].clear();
   return;

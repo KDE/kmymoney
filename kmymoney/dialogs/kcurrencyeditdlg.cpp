@@ -229,7 +229,7 @@ void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
   if (item) {
     try {
       m_currency = file->security(item->text(1));
-      
+
     } catch (MyMoneyException *e) {
       delete e;
       m_currency = MyMoneySecurity();

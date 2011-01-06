@@ -37,13 +37,13 @@ void MyMoneyBalanceCacheTest::cleanup()
 
 void MyMoneyBalanceCacheTest::testCacheItem()
 {
-  MyMoneyBalanceCacheItem item (MyMoneyMoney(10,100), QDate(2010,9,18));
-  MyMoneyBalanceCacheItem invalid (MyMoneyMoney::minValue, QDate());
+  MyMoneyBalanceCacheItem item(MyMoneyMoney(10, 100), QDate(2010, 9, 18));
+  MyMoneyBalanceCacheItem invalid(MyMoneyMoney::minValue, QDate());
   //MyMoneyBalanceCacheItem noarg;
 
 
-  QVERIFY(item.balance() == MyMoneyMoney(10,100));
-  QVERIFY(item.date() == QDate(2010,9,18));
+  QVERIFY(item.balance() == MyMoneyMoney(10, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 18));
   QVERIFY(item.isValid());
 
   QVERIFY(! invalid.isValid());
@@ -61,15 +61,15 @@ void MyMoneyBalanceCacheTest::testEmpty()
 
 void MyMoneyBalanceCacheTest::testInsert()
 {
-  m->insert("A000001", QDate(2010,9,16), MyMoneyMoney(10,100));
+  m->insert("A000001", QDate(2010, 9, 16), MyMoneyMoney(10, 100));
 
   // The next 2 lines have the same date and account.
   // This is intentional to see that the balance for that
   // account and date gets overwritten.
-  m->insert("A000001", QDate(2010,9,18), MyMoneyMoney(15,100));
-  m->insert("A000001", QDate(2010,9,18), MyMoneyMoney(20,100));
-  m->insert("A000002", QDate(2010,9,17), MyMoneyMoney(30,100));
-  m->insert("A000002", QDate(2010,9,19), MyMoneyMoney(40,100));
+  m->insert("A000001", QDate(2010, 9, 18), MyMoneyMoney(15, 100));
+  m->insert("A000001", QDate(2010, 9, 18), MyMoneyMoney(20, 100));
+  m->insert("A000002", QDate(2010, 9, 17), MyMoneyMoney(30, 100));
+  m->insert("A000002", QDate(2010, 9, 19), MyMoneyMoney(40, 100));
 }
 
 void MyMoneyBalanceCacheTest::testClear()
@@ -80,12 +80,12 @@ void MyMoneyBalanceCacheTest::testClear()
 
   // Delete an item that is not in the cache. The cache should
   // be unaffected.
-  m->clear("A000003", QDate(2010,9,17));
+  m->clear("A000003", QDate(2010, 9, 17));
   QVERIFY(m->size() == 4);
 
   // Now delete a value before the last one in the account.
   // All values after it should also be gone.
-  m->clear("A000001", QDate(2010,9,17));
+  m->clear("A000001", QDate(2010, 9, 17));
   QVERIFY(m->size() == 3);
 
   // Verify that the items not deleted still exist
@@ -115,53 +115,53 @@ void MyMoneyBalanceCacheTest::testRetrieve()
 {
   testInsert();
 
-  MyMoneyBalanceCacheItem item = m->balance("A000003", QDate(2010,9,17));
+  MyMoneyBalanceCacheItem item = m->balance("A000003", QDate(2010, 9, 17));
   QVERIFY(! item.isValid());
 
-  item = m->balance("A000001", QDate(2010,9,16));
+  item = m->balance("A000001", QDate(2010, 9, 16));
   QVERIFY(item.isValid());
-  QVERIFY(item.balance() == MyMoneyMoney(10,100));
-  QVERIFY(item.date() == QDate(2010,9,16));
+  QVERIFY(item.balance() == MyMoneyMoney(10, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 16));
 
-  item = m->balance("A000001", QDate(2010,9,17));
+  item = m->balance("A000001", QDate(2010, 9, 17));
   QVERIFY(! item.isValid());
 
-  item = m->balance("A000001", QDate(2010,9,18));
+  item = m->balance("A000001", QDate(2010, 9, 18));
   QVERIFY(item.isValid());
-  QVERIFY(item.balance() == MyMoneyMoney(20,100));
-  QVERIFY(item.date() == QDate(2010,9,18));
+  QVERIFY(item.balance() == MyMoneyMoney(20, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 18));
 
   // Test bad acct
-  item = m->mostRecentBalance("A000003", QDate(2010,9,17));
+  item = m->mostRecentBalance("A000003", QDate(2010, 9, 17));
   QVERIFY(! item.isValid());
 
   // Test date too old
-  item = m->mostRecentBalance("A000001", QDate(2010,9,15));
+  item = m->mostRecentBalance("A000001", QDate(2010, 9, 15));
   QVERIFY(!item.isValid());
 
   // Test date found
-  item = m->mostRecentBalance("A000001", QDate(2010,9,16));
+  item = m->mostRecentBalance("A000001", QDate(2010, 9, 16));
   QVERIFY(item.isValid());
-  QVERIFY(item.balance() == MyMoneyMoney(10,100));
-  QVERIFY(item.date() == QDate(2010,9,16));
+  QVERIFY(item.balance() == MyMoneyMoney(10, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 16));
 
   // Test date in between
-  item = m->mostRecentBalance("A000001", QDate(2010,9,17));
+  item = m->mostRecentBalance("A000001", QDate(2010, 9, 17));
   QVERIFY(item.isValid());
-  QVERIFY(item.balance() == MyMoneyMoney(10,100));
-  QVERIFY(item.date() == QDate(2010,9,16));
+  QVERIFY(item.balance() == MyMoneyMoney(10, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 16));
 
   // Test date found
-  item = m->mostRecentBalance("A000001", QDate(2010,9,18));
+  item = m->mostRecentBalance("A000001", QDate(2010, 9, 18));
   QVERIFY(item.isValid());
-  QVERIFY(item.balance() == MyMoneyMoney(20,100));
-  QVERIFY(item.date() == QDate(2010,9,18));
+  QVERIFY(item.balance() == MyMoneyMoney(20, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 18));
 
   // Test date later than all entries
-  item = m->mostRecentBalance("A000001", QDate(2010,9,19));
+  item = m->mostRecentBalance("A000001", QDate(2010, 9, 19));
   QVERIFY(item.isValid());
-  QVERIFY(item.balance() == MyMoneyMoney(20,100));
-  QVERIFY(item.date() == QDate(2010,9,18));
+  QVERIFY(item.balance() == MyMoneyMoney(20, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 18));
 }
 
 #include "mymoneybalancecachetest.moc"

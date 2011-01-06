@@ -27,7 +27,7 @@
 // Project Includes
 
 MyMoneyBalanceCacheItem::MyMoneyBalanceCacheItem(const MyMoneyMoney& balance, const QDate& date)
-  : m_balance(balance), m_date(date)
+    : m_balance(balance), m_date(date)
 {}
 
 const MyMoneyMoney& MyMoneyBalanceCacheItem::balance() const
@@ -71,8 +71,7 @@ void MyMoneyBalanceCache::clear(const QString& accountId, const QDate& date)
   if (date.isValid()) {
     datePos = (*acctPos).lowerBound(date);
 
-    while ((*acctPos).end() != datePos)
-    {
+    while ((*acctPos).end() != datePos) {
       datePos = (*acctPos).erase(datePos);
     }
   }
@@ -87,8 +86,7 @@ int MyMoneyBalanceCache::size() const
 {
   int sum = 0;
 
-  for (BalanceCacheType::ConstIterator i = m_cache.constBegin(); i != m_cache.constEnd(); ++i)
-  {
+  for (BalanceCacheType::ConstIterator i = m_cache.constBegin(); i != m_cache.constEnd(); ++i) {
     sum += (*i).size();
   }
   return sum;
@@ -121,8 +119,7 @@ const MyMoneyBalanceCacheItem MyMoneyBalanceCache::mostRecentBalance(const QStri
 
   BalanceCacheType::mapped_type::ConstIterator datePos = (*acctPos).lowerBound(date);
 
-  while ((*acctPos).constEnd() == datePos || ((*acctPos).constBegin() != datePos && datePos.key() > date))
-  {
+  while ((*acctPos).constEnd() == datePos || ((*acctPos).constBegin() != datePos && datePos.key() > date)) {
     --datePos;
   }
 

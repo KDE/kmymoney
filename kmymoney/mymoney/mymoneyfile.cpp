@@ -86,7 +86,7 @@ public:
     * the one supplied. If the date is invalid, the entire
     * balance cache is cleared for that account.
     */
-    BalanceNotifyList m_balanceNotifyList;
+  BalanceNotifyList m_balanceNotifyList;
 
 };
 
@@ -1141,7 +1141,7 @@ void MyMoneyFile::notify(void)
       d->m_cache.clear(it.key());
   }
 
-  foreach(const BalanceNotifyList::value_type & i, d->m_balanceNotifyList) {
+  foreach (const BalanceNotifyList::value_type & i, d->m_balanceNotifyList) {
     if (i.second.isValid()) {
       d->m_balanceCache.clear(i.first, i.second);
     } else {

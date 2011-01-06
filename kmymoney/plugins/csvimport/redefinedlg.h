@@ -43,7 +43,7 @@ class RedefineDlg : public KDialog
 public:
   RedefineDlg();
   ~RedefineDlg();
-	
+
   QString          accountName();
 
   void             setAmountColumn(int col);
