@@ -38,9 +38,17 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-KNewFileDlg::KNewFileDlg(QWidget *parent, const QString& title)
-    : KNewFileDlgDecl(parent)
+#include "ui_knewfiledlgdecl.h"
+
+struct KNewFileDlg::Private
 {
+  Ui::KNewFileDlgDecl ui;
+};
+
+KNewFileDlg::KNewFileDlg(QWidget *parent, const QString& title)
+    : QDialog(parent), d(new Private)
+{
+  d->ui.setupUi(this);
   setModal(true);
   init(title);
 }
@@ -48,16 +56,17 @@ KNewFileDlg::KNewFileDlg(QWidget *parent, const QString& title)
 KNewFileDlg::KNewFileDlg(QString userName, QString userStreet,
                          QString userTown, QString userCounty, QString userPostcode, QString userTelephone,
                          QString userEmail, QWidget *parent, const QString& title)
-    : KNewFileDlgDecl(parent)
+    : QDialog(parent), d(new Private)
 {
+  d->ui.setupUi(this);
   setModal(true);
-  userNameEdit->setText(userName);
-  streetEdit->setText(userStreet);
-  townEdit->setText(userTown);
-  countyEdit->setText(userCounty);
-  postcodeEdit->setText(userPostcode);
-  telephoneEdit->setText(userTelephone);
-  emailEdit->setText(userEmail);
+  d->ui.userNameEdit->setText(userName);
+  d->ui.streetEdit->setText(userStreet);
+  d->ui.townEdit->setText(userTown);
+  d->ui.countyEdit->setText(userCounty);
+  d->ui.postcodeEdit->setText(userPostcode);
+  d->ui.telephoneEdit->setText(userTelephone);
+  d->ui.emailEdit->setText(userEmail);
 
   init(title);
 }
@@ -65,8 +74,8 @@ KNewFileDlg::KNewFileDlg(QString userName, QString userStreet,
 void KNewFileDlg::init(const QString& title)
 {
   bool showLoadButton = false;
-  okBtn->setGuiItem(KStandardGuiItem::ok());
-  cancelBtn->setGuiItem(KStandardGuiItem::cancel());
+  d->ui.okBtn->setGuiItem(KStandardGuiItem::ok());
+  d->ui.cancelBtn->setGuiItem(KStandardGuiItem::cancel());
 
   if (!title.isEmpty())
     setWindowTitle(title);
@@ -77,28 +86,29 @@ void KNewFileDlg::init(const QString& title)
     showLoadButton = true;
 
   if (!showLoadButton)
-    kabcBtn->hide();
+    d->ui.kabcBtn->hide();
 
-  userNameEdit->setFocus();
+  d->ui.userNameEdit->setFocus();
 
-  connect(cancelBtn, SIGNAL(clicked()), this, SLOT(reject()));
-  connect(okBtn, SIGNAL(clicked()), this, SLOT(okClicked()));
-  connect(kabcBtn, SIGNAL(clicked()), this, SLOT(loadFromKABC()));
+  connect(d->ui.cancelBtn, SIGNAL(clicked()), this, SLOT(reject()));
+  connect(d->ui.okBtn, SIGNAL(clicked()), this, SLOT(okClicked()));
+  connect(d->ui.kabcBtn, SIGNAL(clicked()), this, SLOT(loadFromKABC()));
 }
 
 KNewFileDlg::~KNewFileDlg()
 {
+  delete d;
 }
 
 void KNewFileDlg::okClicked()
 {
-  userNameText = userNameEdit->text();
-  userStreetText = streetEdit->text();
-  userTownText = townEdit->text();
-  userCountyText = countyEdit->text();
-  userPostcodeText = postcodeEdit->text();
-  userTelephoneText = telephoneEdit->text();
-  userEmailText = emailEdit->text();
+  userNameText = d->ui.userNameEdit->text();
+  userStreetText = d->ui.streetEdit->text();
+  userTownText = d->ui.townEdit->text();
+  userCountyText = d->ui.countyEdit->text();
+  userPostcodeText = d->ui.postcodeEdit->text();
+  userTelephoneText = d->ui.telephoneEdit->text();
+  userEmailText = d->ui.emailEdit->text();
 
   accept();
 }
@@ -116,17 +126,22 @@ void KNewFileDlg::loadFromKABC(void)
     return;
   }
 
-  userNameEdit->setText(addr.formattedName());
-  emailEdit->setText(addr.preferredEmail());
+  d->ui.userNameEdit->setText(addr.formattedName());
+  d->ui.emailEdit->setText(addr.preferredEmail());
 
   KABC::PhoneNumber phone = addr.phoneNumber(KABC::PhoneNumber::Home);
-  telephoneEdit->setText(phone.number());
+  d->ui.telephoneEdit->setText(phone.number());
 
   KABC::Address a = addr.address(KABC::Address::Home);
-  countyEdit->setText(a.country() + " / " + a.region());
-  postcodeEdit->setText(a.postalCode());
-  townEdit->setText(a.locality());
-  streetEdit->setText(a.street());
+  d->ui.countyEdit->setText(a.country() + " / " + a.region());
+  d->ui.postcodeEdit->setText(a.postalCode());
+  d->ui.townEdit->setText(a.locality());
+  d->ui.streetEdit->setText(a.street());
+}
+
+KPushButton* KNewFileDlg::cancelButton(void)
+{
+    return d->ui.cancelBtn;
 }
 
 #include "knewfiledlg.moc"

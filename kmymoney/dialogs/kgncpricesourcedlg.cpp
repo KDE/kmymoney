@@ -34,65 +34,83 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
 #include "webpricequote.h"
+#include "ui_kgncpricesourcedlgdecl.h"
 
-KGncPriceSourceDlg::KGncPriceSourceDlg(QWidget *parent) : KDialog(parent)
+
+class KGncPriceSourceDlgDecl : public QWidget, public Ui::KGncPriceSourceDlgDecl
+{
+public:
+  KGncPriceSourceDlgDecl() {
+    setupUi(this);
+  }
+};
+
+
+struct KGncPriceSourceDlg::Private
+{
+  Private() : currentButton(0), widget(0) {}
+  int currentButton;
+  KGncPriceSourceDlgDecl* widget;
+};
+
+KGncPriceSourceDlg::KGncPriceSourceDlg(QWidget *parent) : KDialog(parent), d(new Private)
 {
 }
 
-KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString& gncSource, QWidget * parent) : KDialog(parent)
+KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString& gncSource, QWidget * parent) : KDialog(parent), d(new Private)
 {
   setButtons(Ok | Help);
-  m_widget = new KGncPriceSourceDlgDecl();
-  setMainWidget(m_widget);
+  d->widget = new KGncPriceSourceDlgDecl();
+  setMainWidget(d->widget);
   // signals and slots connections
-  connect(m_widget->buttonsSource, SIGNAL(buttonClicked(int)), this, SLOT(buttonPressed(int)));
+  connect(d->widget->buttonsSource, SIGNAL(buttonClicked(int)), this, SLOT(buttonPressed(int)));
   connect(this, SIGNAL(helpClicked()), this, SLOT(slotHelp()));
   // initialize data fields
-  m_widget->textStockName->setText(i18n("Investment: %1", stockName));
-  m_widget->textGncSource->setText(i18n("Quote source: %1", gncSource));
-  m_widget->listKnownSource->clear();
-  m_widget->listKnownSource->insertItems(0, WebPriceQuote::quoteSources());
-  m_widget->lineUserSource->setText(gncSource);
-  m_widget->checkAlwaysUse->setChecked(true);
-  m_widget->buttonsSource->setId(m_widget->buttonNoSource, 0);
-  m_widget->buttonsSource->setId(m_widget->buttonSelectSource, 1);
-  m_widget->buttonsSource->setId(m_widget->buttonUserSource, 2);
-  m_widget->buttonsSource->button(0)->setChecked(true);
+  d->widget->textStockName->setText(i18n("Investment: %1", stockName));
+  d->widget->textGncSource->setText(i18n("Quote source: %1", gncSource));
+  d->widget->listKnownSource->clear();
+  d->widget->listKnownSource->insertItems(0, WebPriceQuote::quoteSources());
+  d->widget->lineUserSource->setText(gncSource);
+  d->widget->checkAlwaysUse->setChecked(true);
+  d->widget->buttonsSource->setId(d->widget->buttonNoSource, 0);
+  d->widget->buttonsSource->setId(d->widget->buttonSelectSource, 1);
+  d->widget->buttonsSource->setId(d->widget->buttonUserSource, 2);
+  d->widget->buttonsSource->button(0)->setChecked(true);
   buttonPressed(0);
   return;
 }
 
 KGncPriceSourceDlg::~KGncPriceSourceDlg()
 {
+  delete d;
 }
 
 enum ButtonIds {NOSOURCE = 0, KMMSOURCE, USERSOURCE};
 
 void KGncPriceSourceDlg::buttonPressed(int buttonId)
 {
-  m_currentButton = buttonId;
-  switch (m_currentButton) {
+  d->currentButton = buttonId;
+  switch (d->currentButton) {
     case NOSOURCE:
-      m_widget->listKnownSource->clearSelection();
-      m_widget->listKnownSource->setEnabled(false);
-      m_widget->lineUserSource->deselect();
-      m_widget->lineUserSource->setEnabled(false);
+      d->widget->listKnownSource->clearSelection();
+      d->widget->listKnownSource->setEnabled(false);
+      d->widget->lineUserSource->deselect();
+      d->widget->lineUserSource->setEnabled(false);
       break;
     case KMMSOURCE:
-      m_widget->lineUserSource->deselect();
-      m_widget->lineUserSource->setEnabled(false);
-      m_widget->listKnownSource->setEnabled(true);
-      m_widget->listKnownSource->setFocus();
-      m_widget->listKnownSource->setCurrentRow(0);
+      d->widget->lineUserSource->deselect();
+      d->widget->lineUserSource->setEnabled(false);
+      d->widget->listKnownSource->setEnabled(true);
+      d->widget->listKnownSource->setFocus();
+      d->widget->listKnownSource->setCurrentRow(0);
       break;
     case USERSOURCE:
-      m_widget->listKnownSource->clearSelection();
-      m_widget->listKnownSource->setEnabled(false);
-      m_widget->lineUserSource->setEnabled(true);
-      m_widget->lineUserSource->selectAll();
-      m_widget->lineUserSource->setFocus();
+      d->widget->listKnownSource->clearSelection();
+      d->widget->listKnownSource->setEnabled(false);
+      d->widget->lineUserSource->setEnabled(true);
+      d->widget->lineUserSource->selectAll();
+      d->widget->lineUserSource->setFocus();
       break;
   }
 }
@@ -100,18 +118,23 @@ void KGncPriceSourceDlg::buttonPressed(int buttonId)
 QString KGncPriceSourceDlg::selectedSource() const
 {
   QString s;
-  switch (m_currentButton) {
+  switch (d->currentButton) {
     case NOSOURCE:
       s = "";
       break;
     case KMMSOURCE:
-      s = m_widget->listKnownSource->currentItem()->text();
+      s = d->widget->listKnownSource->currentItem()->text();
       break;
     case USERSOURCE:
-      s = m_widget->lineUserSource->text();
+      s = d->widget->lineUserSource->text();
       break;
   }
   return (s);
+}
+
+bool KGncPriceSourceDlg::alwaysUse() const 
+{
+    return d->widget->checkAlwaysUse->isChecked();
 }
 
 void KGncPriceSourceDlg::slotHelp(void)

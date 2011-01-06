@@ -37,22 +37,35 @@
 
 #include <mymoneyfile.h>
 #include <kmymoneyutils.h>
+#include <mymoneytransaction.h>
+#include "ui_kconfirmmanualenterdlgdecl.h"
+
+struct KConfirmManualEnterDlg::Private
+{
+  Ui::KConfirmManualEnterDlgDecl ui;
+};
 
 KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent) :
-    KConfirmManualEnterDlgDecl(parent)
+    QDialog(parent), d(new Private)
 {
-  buttonGroup1->setId(m_discardRadio, 0);
-  buttonGroup1->setId(m_onceRadio, 1);
-  buttonGroup1->setId(m_setRadio, 2);
+  d->ui.setupUi(this);
+  d->ui.buttonGroup1->setId(d->ui.m_discardRadio, 0);
+  d->ui.buttonGroup1->setId(d->ui.m_onceRadio, 1);
+  d->ui.buttonGroup1->setId(d->ui.m_setRadio, 2);
 
-  buttonOk->setGuiItem(KStandardGuiItem::ok());
-  buttonCancel->setGuiItem(KStandardGuiItem::cancel());
-  m_onceRadio->setChecked(true);
+  d->ui.buttonOk->setGuiItem(KStandardGuiItem::ok());
+  d->ui.buttonCancel->setGuiItem(KStandardGuiItem::cancel());
+  d->ui.m_onceRadio->setChecked(true);
 
   if (schedule.type() == MyMoneySchedule::TYPE_LOANPAYMENT) {
-    m_setRadio->setEnabled(false);
-    m_discardRadio->setEnabled(false);
+    d->ui.m_setRadio->setEnabled(false);
+    d->ui.m_discardRadio->setEnabled(false);
   }
+}
+
+KConfirmManualEnterDlg::~KConfirmManualEnterDlg()
+{
+  delete d;
 }
 
 void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, const MyMoneyTransaction& tn)
@@ -153,15 +166,15 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
   }
 
   messageDetail += "</qt>";
-  m_details->setText(messageDetail);
+  d->ui.m_details->setText(messageDetail);
   return;
 }
 
 KConfirmManualEnterDlg::Action KConfirmManualEnterDlg::action(void) const
 {
-  if (m_discardRadio->isChecked())
+  if (d->ui.m_discardRadio->isChecked())
     return UseOriginal;
-  if (m_setRadio->isChecked())
+  if (d->ui.m_setRadio->isChecked())
     return ModifyAlways;
   return ModifyOnce;
 }

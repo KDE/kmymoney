@@ -24,23 +24,14 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <klocale.h>
+#include <kpushbutton.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "ui_knewfiledlgdecl.h"
 
 // This dialog lets the user create/edit a file.
 // Use the second constructor to edit a file.
-
-class KNewFileDlgDecl : public QDialog, public Ui::KNewFileDlgDecl
-{
-public:
-  KNewFileDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-
-class KNewFileDlg : public KNewFileDlgDecl
+class KNewFileDlg : public QDialog
 {
   Q_OBJECT
 public:
@@ -50,9 +41,7 @@ public:
                        QString userEmail, QWidget *parent = 0, const QString& title = QString());
   ~KNewFileDlg();
 
-  KPushButton* cancelButton(void) {
-    return cancelBtn;
-  };
+  KPushButton* cancelButton(void);
 
 public:
   QString userNameText;
@@ -70,6 +59,12 @@ protected:
 protected slots:
   void okClicked();
   void loadFromKABC(void);
+
+private:
+  /// \internal d-pointer class.
+  struct Private;
+  /// \internal d-pointer instance.
+  Private* const d;
 };
 
 #endif

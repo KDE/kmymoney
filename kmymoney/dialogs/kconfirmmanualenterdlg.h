@@ -21,34 +21,24 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDialog>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-// ----------------------------------------------------------------------------
-// Project Includes
-
-#include <mymoneytransaction.h>
-#include "ui_kconfirmmanualenterdlgdecl.h"
-
 class MyMoneySchedule;
+class MyMoneyTransaction;
 
-class KConfirmManualEnterDlgDecl : public QDialog, public Ui::KConfirmManualEnterDlgDecl
-{
-public:
-  KConfirmManualEnterDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-
-
-class KConfirmManualEnterDlg : public KConfirmManualEnterDlgDecl
+class KConfirmManualEnterDlg : public QDialog
 {
   Q_OBJECT
+
 public:
   explicit KConfirmManualEnterDlg(const MyMoneySchedule& schedule, QWidget* parent = 0);
+  ~KConfirmManualEnterDlg();
 
   typedef enum {
     UseOriginal = 0,
@@ -66,6 +56,12 @@ public:
     * Returns information about what to do with the transaction
     */
   Action action(void) const;
+
+private:
+  /// \internal d-pointer class.
+  struct Private;
+  /// \internal d-pointer instance.
+  Private* const d;
 };
 
 #endif // KCONFIRMMANUALENTERDLG_H

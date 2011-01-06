@@ -20,25 +20,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QCheckBox>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <kdialog.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include "ui_kgncpricesourcedlgdecl.h"
-
-
-class KGncPriceSourceDlgDecl : public QWidget, public Ui::KGncPriceSourceDlgDecl
-{
-public:
-  KGncPriceSourceDlgDecl() {
-    setupUi(this);
-  }
-};
 
 class KGncPriceSourceDlg : public KDialog
 {
@@ -49,17 +36,17 @@ public:
   ~KGncPriceSourceDlg();
 
   QString selectedSource() const;
-  bool alwaysUse() const {
-    return (m_widget->checkAlwaysUse->isChecked());
-  }
+  bool alwaysUse() const;
 
 public slots:
   void buttonPressed(int);
   void slotHelp();
 
 private:
-  int m_currentButton;
-  KGncPriceSourceDlgDecl* m_widget;
+  /// \internal d-pointer class.
+  struct Private;
+  /// \internal d-pointer instance.
+  Private* const d;
 };
 
 #endif

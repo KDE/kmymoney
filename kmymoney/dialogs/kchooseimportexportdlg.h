@@ -21,22 +21,21 @@
 #ifndef KCHOOSEIMPORTEXPORTDLG_H
 #define KCHOOSEIMPORTEXPORTDLG_H
 
-#include <QWidget>
-#include "ui_kchooseimportexportdlgdecl.h"
+// ----------------------------------------------------------------------------
+// QT Includes
+
+#include <QDialog>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+// ----------------------------------------------------------------------------
+// Project Includes
 
 /**
   *@author Michael Edwardes
   */
-
-class KChooseImportExportDlgDecl : public QDialog, public Ui::KChooseImportExportDlgDecl
-{
-public:
-  explicit KChooseImportExportDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-
-class KChooseImportExportDlg : public KChooseImportExportDlgDecl
+class KChooseImportExportDlg : public QDialog
 {
   Q_OBJECT
 private:
@@ -51,6 +50,12 @@ public:
   explicit KChooseImportExportDlg(int type, QWidget *parent = 0);
   ~KChooseImportExportDlg();
   QString importExportType(void);
+
+private:
+  /// \internal d-pointer class.
+  struct Private;
+  /// \internal d-pointer instance.
+  Private* const d;
 };
 
 #endif
