@@ -83,10 +83,6 @@ public:
   void             setCreditColumn(int column);
   int              debitColumn();
   void             setDebitColumn(int val);
-  int              tableFrameHeight();
-  void             setTableFrameHeight(int val);
-  int              tableFrameWidth();
-  void             setTableFrameWidth(int val);
   int              maxColumnCount();
   void             setMaxColumnCount(int val);
 
@@ -111,8 +107,6 @@ private:
   int              m_numberColumn;
   int              m_payeeColumn;
   int              m_previousColumn;
-  int              m_tableFrameHeight;
-  int              m_tableFrameWidth;
   int              m_maxColumnCount;
 
   /**

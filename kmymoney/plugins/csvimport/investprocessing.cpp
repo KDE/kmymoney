@@ -68,7 +68,6 @@ InvestProcessing::InvestProcessing()
   m_dateFormatIndex = 0;
   m_fieldDelimiterIndex = 0;
   m_maxColumnCount = 0;
-  m_maxWidth = 0;
   m_payeeColumn = 0;
   m_amountColumn = 0;
   m_dateColumn = 0;
@@ -76,7 +75,6 @@ InvestProcessing::InvestProcessing()
   m_priceColumn = 0;
   m_quantityColumn = 0;
   m_typeColumn = 0;
-  m_width = 0;
   m_endLine = 0;
   m_startLine = 0;
   m_row = 0;
@@ -548,7 +546,6 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
   m_outBuffer = "!Type:Invst\n";
   m_brokerBuff.clear();
   m_row = 0;
-  m_maxWidth = 0;
   m_maxColumnCount = 0;
   m_payeeColumn = - 1;
 
@@ -616,7 +613,6 @@ void InvestProcessing::displayLine(const QString& data)
   m_investDlg->tableWidget->setColumnCount(columnCount);
 
   int col = 0;
-  m_width = 6;
 
   QStringList::const_iterator constIterator;
   for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
@@ -631,15 +627,9 @@ void InvestProcessing::displayLine(const QString& data)
       item->setTextAlignment(Qt::AlignRight);
     m_investDlg->tableWidget->setRowCount(m_row + 1);
     m_investDlg->tableWidget->setItem(m_row, col, item);     //add items to UI here
-    m_width += m_investDlg->tableWidget->columnWidth(col) ;
     QRect rect = m_investDlg->tableWidget->visualItemRect(item);
     col ++;
   }
-  if (m_width > m_maxWidth)
-    m_maxWidth = m_width;
-  else
-    m_width = m_maxWidth;
-
   m_row += 1;
 }
 
@@ -1138,28 +1128,7 @@ void InvestProcessing::updateScreen()
 {
   if (m_row < 1)
     return;
-  m_width = m_maxWidth;
-  m_investDlg->setTableFrameHeight(m_investDlg->frame_low->frameGeometry().size().height());
-  m_investDlg->setTableFrameWidth(m_investDlg->frame_low->frameGeometry().size().width());
-
-  int hght = 4 + (m_investDlg->tableWidget->rowHeight(m_row - 1)) * m_row;
-  hght += m_investDlg->tableWidget->horizontalHeader()->height() + 2;//  frig factor plus vert. headers
-  if (m_maxWidth > m_investDlg->tableFrameWidth())
-    hght += m_investDlg->tableWidget->horizontalScrollBar()->height();//  ....and for hor. scroll bar
-  if (hght > m_investDlg->tableFrameHeight()) {
-    int w = m_investDlg->tableWidget->verticalScrollBar()->width() + 2;
-    m_width += w;//19
-    hght = m_investDlg->tableFrameHeight() - 12;//                        allow for border
-  }
-  int h = m_investDlg->tableWidget->verticalHeader()->width();
-  m_width += h;
-
-  if (m_width >= m_investDlg->tableFrameWidth()) {
-    m_width = m_investDlg->tableFrameWidth() - 12;//                      allow for border
-    hght += 1;
-  }
-  m_investDlg->tableWidget->setFixedHeight(hght);
-  m_investDlg->tableWidget->setFixedWidth(m_width);
+  m_investDlg->tableWidget->setRowCount(m_row);
   m_investDlg->tableWidget->setFocus();
 }
 

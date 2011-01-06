@@ -321,7 +321,6 @@ private:
   int            m_dateFormatIndex;
   int            m_fieldDelimiterIndex;
   int            m_maxColumnCount;
-  int            m_maxWidth;
   int            m_payeeColumn;
   int            m_amountColumn;
   int            m_dateColumn;
@@ -331,7 +330,6 @@ private:
   int            m_previousColumn;
   int            m_quantityColumn;
   int            m_typeColumn;
-  int            m_width;
   int            m_endLine;
   int            m_startLine;
   int            m_row;

@@ -238,10 +238,8 @@ private:
   int            m_textDelimiterIndex;
   int            m_endColumn;
   int            m_flagCol;
-  int            m_maxWidth;
   int            m_row;
   int            m_startLine;
-  int            m_width;
 
   KUrl           m_url;
   QFile*         m_inFile;

@@ -55,8 +55,8 @@
 InvestmentDlg::InvestmentDlg(QWidget* parent) :
   InvestmentDlgDecl(parent)
 {
-  m_tableFrameHeight = groupBox->frameGeometry().bottom() - frame_main->frameGeometry().bottom();
-  m_tableFrameWidth = tableWidget->size().width();
+  tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+  tableWidget->setWordWrap(false);
 
   for (int i = 0; i < MAXCOL; i++) {
     QString t;
@@ -211,24 +211,3 @@ void InvestmentDlg::helpSelected()
   KAboutApplicationDialog* aboutDlg = new KAboutApplicationDialog(&aboutData,  0);
   aboutDlg->show();
 }
-
-int InvestmentDlg::tableFrameHeight()
-{
-  return m_tableFrameHeight;
-}
-
-void InvestmentDlg::setTableFrameHeight(int val)
-{
-  m_tableFrameHeight = val;
-}
-
-int InvestmentDlg::tableFrameWidth()
-{
-  return m_tableFrameWidth;
-}
-
-void InvestmentDlg::setTableFrameWidth(int val)
-{
-  m_tableFrameWidth = val;
-}
-

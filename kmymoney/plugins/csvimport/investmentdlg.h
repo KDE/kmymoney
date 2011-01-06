@@ -62,17 +62,10 @@ public:
   ConvertDate*       m_convertDat;
   RedefineDlg*       m_redefine;
 
-  int                tableFrameHeight();
-  void               setTableFrameHeight(int val);
-  int                tableFrameWidth();
-  void               setTableFrameWidth(int val);
   void               clearComboBoxText();
 
 private:
   InvestProcessing*  m_investProcessing;
-
-  int                m_tableFrameHeight;
-  int                m_tableFrameWidth;
 
   /**
   * This method will receive close events, calling slotClose().

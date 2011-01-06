@@ -75,14 +75,12 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
   m_numberColumn = 0;
   m_payeeColumn = 0;
   m_previousColumn = 0;
-  m_tableFrameHeight = 0;
-  m_tableFrameWidth = 0;
   m_maxColumnCount = 0;
 
   m_previousType.clear();
 
-  m_tableFrameHeight =  groupBox->frameGeometry().bottom() - frame_main->frameGeometry().bottom();
-  m_tableFrameWidth = tableWidget->size().width();
+  tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+  tableWidget->setWordWrap(false);
 
   for (int i = 0; i < MAXCOL; i++) {//  populate comboboxes with col # values
     QString t;
@@ -472,26 +470,6 @@ int CsvImporterDlg::maxColumnCount()
 void CsvImporterDlg::setMaxColumnCount(int val)
 {
   m_maxColumnCount = val;
-}
-
-int CsvImporterDlg::tableFrameWidth()
-{
-  return m_tableFrameWidth;
-}
-
-void CsvImporterDlg::setTableFrameWidth(int val)
-{
-  m_tableFrameWidth = val;
-}
-
-int CsvImporterDlg::tableFrameHeight()
-{
-  return m_tableFrameHeight;
-}
-
-void CsvImporterDlg::setTableFrameHeight(int val)
-{
-  m_tableFrameHeight = val;
 }
 
 int CsvImporterDlg::debitColumn()

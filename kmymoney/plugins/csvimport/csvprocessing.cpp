@@ -65,10 +65,8 @@ CsvProcessing::CsvProcessing()
   m_textDelimiterIndex = 0;
   m_endColumn = 0;
   m_flagCol = -1;
-  m_maxWidth = 0;
   m_row = 0;
   m_startLine = 0;
-  m_width = 0;
 
   m_parseline = new ParseLine;
 }
@@ -291,7 +289,6 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
 
   m_qifBuffer = "!Type:Bank\n";
   m_row = 0;
-  m_maxWidth = 0;
   m_csvDialog->setMaxColumnCount(0);
 
   m_fieldDelimiterIndex = m_csvDialog->comboBox_fieldDelim->currentIndex();
@@ -391,7 +388,6 @@ void CsvProcessing::displayLine(const QString& data)
     }
   }
   int col = 0;
-  m_width = 25;
 
   m_parseline->setFieldDelimiterIndex(m_csvDialog->comboBox_fieldDelim->currentIndex());
   m_fieldDelimiterCharacter = m_parseline->fieldDelimiterCharacter(m_fieldDelimiterIndex);
@@ -415,14 +411,9 @@ void CsvProcessing::displayLine(const QString& data)
     item->setText(txt);
     m_csvDialog->tableWidget->setRowCount(m_row + 1);
     m_csvDialog->tableWidget->setItem(m_row, col, item);//       add items to UI here
-    m_width += m_csvDialog->tableWidget->columnWidth(col);
     m_inBuffer += txt + m_fieldDelimiterCharacter;
     col ++;
   }
-  if (m_width > m_maxWidth)
-    m_maxWidth = m_width;
-  else
-    m_width = m_maxWidth;
   m_row += 1;
 }
 
@@ -603,13 +594,9 @@ void CsvProcessing::importClicked(bool checked)
         vertHeaders += hdr;
       }
       //  verticalHeader()->width() varies with its content so....
-      int oldwdth = m_csvDialog->tableWidget->verticalHeader()->width();
       m_csvDialog->tableWidget->setVerticalHeaderLabels(vertHeaders);
       m_csvDialog->tableWidget->hide();//             to ensure....
       m_csvDialog->tableWidget->show();//             ..vertical header width redraws
-      int h = m_csvDialog->tableWidget->verticalHeader()->width();
-      m_width += h - oldwdth;
-      m_csvDialog->tableWidget->setFixedWidth(m_width);
     } else {
       KMessageBox::information(0, i18n("<center>An Amount-type column, and Date and Payee columns are needed!</center> <center>Please try again.</center>"));
     }
@@ -740,26 +727,7 @@ void CsvProcessing::dateFormatSelected(int dF)
 
 void CsvProcessing::updateScreen()
 {
-  m_width = m_maxWidth;
-  m_csvDialog->setTableFrameHeight(m_csvDialog->frame_low->frameGeometry().size().height());
-  m_csvDialog->setTableFrameWidth(m_csvDialog->frame_low->frameGeometry().size().width());
   m_csvDialog->tableWidget->setRowCount(m_row);
-  int hght = 4 + (m_csvDialog->tableWidget->rowHeight(m_row - 1)) * m_row;
-  hght += m_csvDialog->tableWidget->horizontalHeader()->height() + 2;//  frig factor for vert. headers?
-
-  if (m_maxWidth > m_csvDialog->tableFrameWidth())
-    hght += m_csvDialog->tableWidget->horizontalScrollBar()->height() + 1;//  ....and for hor. scroll bar
-  if (hght > m_csvDialog->tableFrameHeight()) {
-    int w = m_csvDialog->tableWidget->verticalScrollBar()->width() + 2;
-    m_width += w;//
-    hght = m_csvDialog->tableFrameHeight() - 12;//  allow for border
-  }
-  if (m_width >= m_csvDialog->tableFrameWidth()) {
-    m_width = m_csvDialog->tableFrameWidth() - 12;//  allow for border
-  }
-
-  m_csvDialog->tableWidget->setFixedHeight(hght);
-  m_csvDialog->tableWidget->setFixedWidth(m_width);
   m_csvDialog->tableWidget->setFocus();
 }
 
