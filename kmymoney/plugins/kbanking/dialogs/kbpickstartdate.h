@@ -21,7 +21,6 @@
 #ifndef KBPICKSTARTDATE_H
 #define KBPICKSTARTDATE_H
 
-#include "ui_kbpickstartdate.h"
 #include <QDateTime>
 #include <QDialog>
 
@@ -34,13 +33,9 @@
   * @author Martin Preuss
   * @author Thomas Baumgart
   */
-class KBPickStartDate : public QDialog, public Ui::KBPickStartDateUi
+class KBPickStartDate : public QDialog
 {
   Q_OBJECT
-private:
-  KMyMoneyBanking *_banking;
-  const QDate &_firstPossible;
-  const QDate &_lastUpdate;
 public:
   KBPickStartDate(KMyMoneyBanking* qb,
                   const QDate &firstPossible,
@@ -55,6 +50,12 @@ public:
 
 public slots:
   void slotHelpClicked();
+
+private:
+  /// \internal d-pointer class.
+  struct Private;
+  /// \internal d-pointer instance.
+  Private* const d;
 };
 
 #endif

@@ -27,85 +27,81 @@
 #include <qlineedit.h>
 
 
+#include "ui_kbmapaccount.h"
 
+struct KBMapAccount::Private {
+  Ui::KBMapAccount ui;
+  KMyMoneyBanking *banking;
+  AB_ACCOUNT *account;
+};
 
 KBMapAccount::KBMapAccount(KMyMoneyBanking *kb,
                            const char *bankCode,
                            const char *accountId,
                            QWidget* parent,
-                           Qt::WFlags fl)
-    : QDialog(parent, fl)
-    , _banking(kb)
-    , _account(0)
+                           Qt::WFlags fl) :
+    QDialog(parent, fl),
+    d(new Private)
 {
-  _ui.setupUi(this);
+  d->banking = kb;
+  d->account = 0;
+  d->ui.setupUi(this);
 
-  _ui.accountList->setSelectionMode(QAbstractItemView::SingleSelection);
+  d->ui.accountList->setSelectionMode(QAbstractItemView::SingleSelection);
 
   if (bankCode)
-    _ui.bankCodeEdit->setText(QString::fromUtf8(bankCode));
+    d->ui.bankCodeEdit->setText(QString::fromUtf8(bankCode));
   else
-    _ui.bankCodeEdit->setEnabled(false);
+    d->ui.bankCodeEdit->setEnabled(false);
   if (accountId)
-    _ui.accountIdEdit->setText(QString::fromUtf8(accountId));
+    d->ui.accountIdEdit->setText(QString::fromUtf8(accountId));
   else
-    _ui.accountIdEdit->setEnabled(false);
+    d->ui.accountIdEdit->setEnabled(false);
 
-  QObject::connect(_ui.accountList, SIGNAL(itemSelectionChanged()),
+  QObject::connect(d->ui.accountList, SIGNAL(itemSelectionChanged()),
                    this, SLOT(slotSelectionChanged()));
-  QObject::connect(_ui.helpButton, SIGNAL(clicked()),
+  QObject::connect(d->ui.helpButton, SIGNAL(clicked()),
                    this, SLOT(slotHelpClicked()));
 
-  _ui.accountList->addAccounts(_banking->getAccounts());
+  d->ui.accountList->addAccounts(d->banking->getAccounts());
 }
-
 
 KBMapAccount::~KBMapAccount()
 {
+  delete d;
 }
-
-
 
 AB_ACCOUNT *KBMapAccount::getAccount()
 {
-  return _account;
+  return d->account;
 }
-
-
 
 void KBMapAccount::accept()
 {
-  if (_account)
+  if (d->account)
     QDialog::accept();
 }
-
-
 
 void KBMapAccount::slotSelectionChanged()
 {
   std::list<AB_ACCOUNT*> al;
   AB_ACCOUNT *a;
 
-  al = _ui.accountList->getSelectedAccounts();
+  al = d->ui.accountList->getSelectedAccounts();
   if (al.empty()) {
-    _ui.assignButton->setEnabled(false);
-    _account = 0;
+    d->ui.assignButton->setEnabled(false);
+    d->account = 0;
     return;
   }
   a = al.front();
   if (AB_Account_GetUniqueId(a) != 0) {
-    _account = a;
-    _ui.assignButton->setEnabled(true);
+    d->account = a;
+    d->ui.assignButton->setEnabled(true);
   } else
-    _ui.assignButton->setEnabled(false);
+    d->ui.assignButton->setEnabled(false);
 }
-
-
 
 void KBMapAccount::slotHelpClicked()
 {
 }
-
-
-
 

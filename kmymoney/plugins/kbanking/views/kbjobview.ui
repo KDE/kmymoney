@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KBJobViewUi</class>
- <widget class="QWidget" name="KBJobViewUi">
+ <class>KBJobView</class>
+ <widget class="QWidget" name="KBJobView">
   <property name="geometry">
    <rect>
     <x>0</x>

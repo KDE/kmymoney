@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KBMapAccountUi</class>
- <widget class="QDialog" name="KBMapAccountUi">
+ <class>KBMapAccount</class>
+ <widget class="QDialog" name="KBMapAccount">
   <property name="geometry">
    <rect>
     <x>0</x>

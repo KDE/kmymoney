@@ -53,6 +53,7 @@
 #include <KEditListBox>
 #include <KComboBox>
 #include <KConfig>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Library Includes
@@ -229,17 +230,7 @@ QWidget* KBankingPlugin::accountConfigTab(const MyMoneyAccount& acc, QString& na
   name = i18n("Online settings");
   if (m_kbanking) {
     m_accountSettings = new KBAccountSettings(acc, 0);
-    m_accountSettings->m_usePayeeAsIsButton->setChecked(true);
-    m_accountSettings->m_transactionDownload->setChecked(kvp.value("kbanking-txn-download") != "no");
-    m_accountSettings->m_preferredJobMethod->setCurrentIndex(kvp.value("kbanking-jobexec").toInt());
-    m_accountSettings->m_preferredStatementDate->setCurrentIndex(kvp.value("kbanking-statementDate").toInt());
-    if (!kvp.value("kbanking-payee-regexp").isEmpty()) {
-      m_accountSettings->m_extractPayeeButton->setChecked(true);
-      m_accountSettings->m_payeeRegExpEdit->setText(kvp.value("kbanking-payee-regexp"));
-      m_accountSettings->m_memoRegExpEdit->setText(kvp.value("kbanking-memo-regexp"));
-      m_accountSettings->m_payeeExceptions->clear();
-      m_accountSettings->m_payeeExceptions->insertStringList(kvp.value("kbanking-payee-exceptions").split(';', QString::SkipEmptyParts));
-    }
+    m_accountSettings->loadUi(kvp);
     return m_accountSettings;
   }
   QLabel* label = new QLabel(i18n("KBanking module not correctly initialized"), 0);
@@ -252,23 +243,7 @@ MyMoneyKeyValueContainer KBankingPlugin::onlineBankingSettings(const MyMoneyKeyV
   MyMoneyKeyValueContainer kvp(current);
   kvp["provider"] = objectName();
   if (m_accountSettings) {
-    kvp.deletePair("kbanking-payee-regexp");
-    kvp.deletePair("kbanking-memo-regexp");
-    kvp.deletePair("kbanking-payee-exceptions");
-    kvp.deletePair("kbanking-txn-download");
-    if (m_accountSettings->m_extractPayeeButton->isChecked()
-        && !m_accountSettings->m_payeeRegExpEdit->text().isEmpty()
-        && !m_accountSettings->m_memoRegExpEdit->text().isEmpty()) {
-      kvp["kbanking-payee-regexp"] = m_accountSettings->m_payeeRegExpEdit->text();
-      kvp["kbanking-memo-regexp"] = m_accountSettings->m_memoRegExpEdit->text();
-      kvp["kbanking-payee-exceptions"] = m_accountSettings->m_payeeExceptions->items().join(";");
-    } else if (m_accountSettings->m_extractPayeeButton->isChecked()) {
-      KMessageBox::information(0, i18n("You selected to extract the payee from the memo field but did not supply a regular expression for payee and memo extraction. The option will not be activated."), i18n("Missing information"));
-    }
-    if (!m_accountSettings->m_transactionDownload->isChecked())
-      kvp["kbanking-txn-download"] = "no";
-    kvp["kbanking-jobexec"] = QString("%1").arg(m_accountSettings->m_preferredJobMethod->currentIndex());
-    kvp["kbanking-statementDate"] = QString("%1").arg(m_accountSettings->m_preferredStatementDate->currentIndex());
+    m_accountSettings->loadKvp(kvp);
   }
   return kvp;
 }

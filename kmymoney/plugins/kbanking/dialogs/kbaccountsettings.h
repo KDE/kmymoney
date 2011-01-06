@@ -22,15 +22,25 @@
 #ifndef KBANKING_KBACCOUNTSETTINGS_H
 #define KBANKING_KBACCOUNTSETTINGS_H
 
-#include "ui_kbaccountsettings.h"
-class MyMoneyAccount;
+#include <QWidget>
 
-class KBAccountSettings: public QWidget, public Ui::KBAccountSettingsUI
+class MyMoneyAccount;
+class MyMoneyKeyValueContainer;
+
+class KBAccountSettings: public QWidget
 {
-private:
 public:
   KBAccountSettings(const MyMoneyAccount& acc, QWidget* parent);
   ~KBAccountSettings();
+
+  void loadUi(const MyMoneyKeyValueContainer& kvp);
+  void loadKvp(MyMoneyKeyValueContainer& kvp);
+
+private:
+  /// \internal d-pointer class.
+  struct Private;
+  /// \internal d-pointer instance.
+  Private* const d;
 };
 
 

@@ -23,19 +23,15 @@
 #ifndef KBANKING_KBJOBVIEW_H
 #define KBANKING_KBJOBVIEW_H
 
-#include "ui_kbjobview.h"
-
 #include <QWidget>
 
-
 class KBJobView;
-
 
 #include "kbjoblist.h"
 #include "mymoneybanking.h"
 
 
-class KBJobView: public QWidget, public Ui::KBJobViewUi
+class KBJobView: public QWidget
 {
   Q_OBJECT
 public:
@@ -47,6 +43,11 @@ public:
   bool fini();
 
 private:
+  /// \internal d-pointer class.
+  struct Private;
+  /// \internal d-pointer instance.
+  Private* const d;
+
   KMyMoneyBanking *m_app;
   KBJobListView *m_jobList;
 

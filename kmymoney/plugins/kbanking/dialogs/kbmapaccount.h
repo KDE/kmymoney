@@ -10,15 +10,14 @@
 #ifndef QBANKING_MAPACCOUNT_H
 #define QBANKING_MAPACCOUNT_H
 
+#include <QDialog>
+
 #include "mymoneybanking.h"
 #include "kbaccountlist.h"
-#include "ui_kbmapaccount.h"
 
 #include <aqbanking/account.h>
 
-
 class KMyMoneyBanking;
-
 
 class KBMapAccount: public QDialog
 {
@@ -40,10 +39,15 @@ protected slots:
   void slotHelpClicked();
 
 private:
-  Ui_KBMapAccountUi _ui;
-  KMyMoneyBanking *_banking;
-  AB_ACCOUNT *_account;
-  KBAccountListView *_accountList;
+  /// \internal d-pointer class.
+  struct Private;
+  /// \internal d-pointer instance.
+  Private* const d;
+  /*
+    KMyMoneyBanking *_banking;
+    AB_ACCOUNT *_account;
+    KBAccountListView *_accountList;
+  */
 };
 
 
