@@ -64,6 +64,7 @@
 #include <mymoneyfile.h>
 #include <mymoneyreport.h>
 #include <ktoolinvocation.h>
+#include "ui_kfindtransactiondlgdecl.h"
 
 KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   MyMoneyReport report, QWidget *parent)
@@ -79,7 +80,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   //
 
   setWindowTitle(i18n("Report Configuration"));
-  delete TextLabel1;
+  delete m_ui->TextLabel1;
 
   //
   // Rework the buttons
@@ -95,34 +96,34 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
   // Add new tabs
   //
 
-  m_tab1 = new kMyMoneyReportConfigTab1Decl(m_criteriaTab);
+  m_tab1 = new kMyMoneyReportConfigTab1Decl(m_ui->m_criteriaTab);
   m_tab1->setObjectName("kMyMoneyReportConfigTab1");
-  m_criteriaTab->insertTab(0, m_tab1, i18n("Report"));
+  m_ui->m_criteriaTab->insertTab(0, m_tab1, i18n("Report"));
 
   if (m_initialState.reportType() == MyMoneyReport::ePivotTable) {
-    m_tab2 = new kMyMoneyReportConfigTab2Decl(m_criteriaTab);
+    m_tab2 = new kMyMoneyReportConfigTab2Decl(m_ui->m_criteriaTab);
     m_tab2->setObjectName("kMyMoneyReportConfigTab2");
-    m_criteriaTab->insertTab(1, m_tab2, i18n("Rows/Columns"));
+    m_ui->m_criteriaTab->insertTab(1, m_tab2, i18n("Rows/Columns"));
     connect(m_tab2->m_comboRows, SIGNAL(highlighted(int)), this, SLOT(slotRowTypeChanged(int)));
     connect(m_tab2->m_comboColumns, SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
     //control the state of the includeTransfer check
-    connect(m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateCheckTransfers()));
+    connect(m_ui->m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateCheckTransfers()));
 
-    m_tabChart = new kMyMoneyReportConfigTabChartDecl(m_criteriaTab);
+    m_tabChart = new kMyMoneyReportConfigTabChartDecl(m_ui->m_criteriaTab);
     m_tabChart->setObjectName("kMyMoneyReportConfigTabChart");
-    m_criteriaTab->insertTab(2, m_tabChart, i18n("Chart"));
+    m_ui->m_criteriaTab->insertTab(2, m_tabChart, i18n("Chart"));
   } else if (m_initialState.reportType() == MyMoneyReport::eQueryTable) {
     // eInvestmentHoldings is a special-case report, and you cannot configure the
     // rows & columns of that report.
     if (m_initialState.rowType() < MyMoneyReport::eAccountByTopAccount) {
-      m_tab3 = new kMyMoneyReportConfigTab3Decl(m_criteriaTab);
+      m_tab3 = new kMyMoneyReportConfigTab3Decl(m_ui->m_criteriaTab);
       m_tab3->setObjectName("kMyMoneyReportConfigTab3");
-      m_criteriaTab->insertTab(1, m_tab3, i18n("Rows/Columns"));
+      m_ui->m_criteriaTab->insertTab(1, m_tab3, i18n("Rows/Columns"));
     }
   }
 
-  m_criteriaTab->setCurrentIndex(m_criteriaTab->indexOf(m_tab1));
-  m_criteriaTab->setMinimumSize(500, 200);
+  m_ui->m_criteriaTab->setCurrentIndex(m_ui->m_criteriaTab->indexOf(m_tab1));
+  m_ui->m_criteriaTab->setMinimumSize(500, 200);
 
   QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
   QList<MyMoneyBudget>::const_iterator it_b;
@@ -245,7 +246,7 @@ void KReportConfigurationFilterDlg::slotSearch(void)
   }
 
   // setup the date lock
-  MyMoneyTransactionFilter::dateOptionE range = m_dateRange->currentItem();
+  MyMoneyTransactionFilter::dateOptionE range = m_ui->m_dateRange->currentItem();
   m_currentState.setDateFilter(range);
 
   done(true);
@@ -444,10 +445,10 @@ void KReportConfigurationFilterDlg::slotReset(void)
 
   QRegExp textfilter;
   if (m_initialState.textFilter(textfilter)) {
-    m_textEdit->setText(textfilter.pattern());
-    m_caseSensitive->setChecked(Qt::CaseSensitive == textfilter.caseSensitivity());
-    m_regExp->setChecked(!(QRegExp::RegExp == textfilter.patternSyntax()));
-    m_textNegate->setCurrentIndex(m_initialState.isInvertingText());
+    m_ui->m_textEdit->setText(textfilter.pattern());
+    m_ui->m_caseSensitive->setChecked(Qt::CaseSensitive == textfilter.caseSensitivity());
+    m_ui->m_regExp->setChecked(!(QRegExp::RegExp == textfilter.patternSyntax()));
+    m_ui->m_textNegate->setCurrentIndex(m_initialState.isInvertingText());
   }
 
   //
@@ -456,11 +457,11 @@ void KReportConfigurationFilterDlg::slotReset(void)
 
   int type;
   if (m_initialState.firstType(type))
-    m_typeBox->setCurrentIndex(type);
+    m_ui->m_typeBox->setCurrentIndex(type);
 
   int state;
   if (m_initialState.firstState(state))
-    m_stateBox->setCurrentIndex(state);
+    m_ui->m_stateBox->setCurrentIndex(state);
 
   //
   // Number Filter
@@ -469,33 +470,33 @@ void KReportConfigurationFilterDlg::slotReset(void)
   QString nrFrom, nrTo;
   if (m_initialState.numberFilter(nrFrom, nrTo)) {
     if (nrFrom == nrTo) {
-      m_nrEdit->setEnabled(true);
-      m_nrFromEdit->setEnabled(false);
-      m_nrToEdit->setEnabled(false);
-      m_nrEdit->setText(nrFrom);
-      m_nrFromEdit->setText(QString());
-      m_nrToEdit->setText(QString());
-      m_nrButton->setChecked(true);
-      m_nrRangeButton->setChecked(false);
+      m_ui->m_nrEdit->setEnabled(true);
+      m_ui->m_nrFromEdit->setEnabled(false);
+      m_ui->m_nrToEdit->setEnabled(false);
+      m_ui->m_nrEdit->setText(nrFrom);
+      m_ui->m_nrFromEdit->setText(QString());
+      m_ui->m_nrToEdit->setText(QString());
+      m_ui->m_nrButton->setChecked(true);
+      m_ui->m_nrRangeButton->setChecked(false);
     } else {
-      m_nrEdit->setEnabled(false);
-      m_nrFromEdit->setEnabled(true);
-      m_nrToEdit->setEnabled(false);
-      m_nrEdit->setText(QString());
-      m_nrFromEdit->setText(nrFrom);
-      m_nrToEdit->setText(nrTo);
-      m_nrButton->setChecked(false);
-      m_nrRangeButton->setChecked(true);
+      m_ui->m_nrEdit->setEnabled(false);
+      m_ui->m_nrFromEdit->setEnabled(true);
+      m_ui->m_nrToEdit->setEnabled(false);
+      m_ui->m_nrEdit->setText(QString());
+      m_ui->m_nrFromEdit->setText(nrFrom);
+      m_ui->m_nrToEdit->setText(nrTo);
+      m_ui->m_nrButton->setChecked(false);
+      m_ui->m_nrRangeButton->setChecked(true);
     }
   } else {
-    m_nrEdit->setEnabled(true);
-    m_nrFromEdit->setEnabled(false);
-    m_nrToEdit->setEnabled(false);
-    m_nrEdit->setText(QString());
-    m_nrFromEdit->setText(QString());
-    m_nrToEdit->setText(QString());
-    m_nrButton->setChecked(true);
-    m_nrRangeButton->setChecked(false);
+    m_ui->m_nrEdit->setEnabled(true);
+    m_ui->m_nrFromEdit->setEnabled(false);
+    m_ui->m_nrToEdit->setEnabled(false);
+    m_ui->m_nrEdit->setText(QString());
+    m_ui->m_nrFromEdit->setText(QString());
+    m_ui->m_nrToEdit->setText(QString());
+    m_ui->m_nrButton->setChecked(true);
+    m_ui->m_nrRangeButton->setChecked(false);
   }
 
   //
@@ -505,33 +506,33 @@ void KReportConfigurationFilterDlg::slotReset(void)
   MyMoneyMoney from, to;
   if (m_initialState.amountFilter(from, to)) { // bool getAmountFilter(MyMoneyMoney&,MyMoneyMoney&);
     if (from == to) {
-      m_amountEdit->setEnabled(true);
-      m_amountFromEdit->setEnabled(false);
-      m_amountToEdit->setEnabled(false);
-      m_amountEdit->loadText(QString::number(from.toDouble()));
-      m_amountFromEdit->loadText(QString());
-      m_amountToEdit->loadText(QString());
-      m_amountButton->setChecked(true);
-      m_amountRangeButton->setChecked(false);
+      m_ui->m_amountEdit->setEnabled(true);
+      m_ui->m_amountFromEdit->setEnabled(false);
+      m_ui->m_amountToEdit->setEnabled(false);
+      m_ui->m_amountEdit->loadText(QString::number(from.toDouble()));
+      m_ui->m_amountFromEdit->loadText(QString());
+      m_ui->m_amountToEdit->loadText(QString());
+      m_ui->m_amountButton->setChecked(true);
+      m_ui->m_amountRangeButton->setChecked(false);
     } else {
-      m_amountEdit->setEnabled(false);
-      m_amountFromEdit->setEnabled(true);
-      m_amountToEdit->setEnabled(true);
-      m_amountEdit->loadText(QString());
-      m_amountFromEdit->loadText(QString::number(from.toDouble()));
-      m_amountToEdit->loadText(QString::number(to.toDouble()));
-      m_amountButton->setChecked(false);
-      m_amountRangeButton->setChecked(true);
+      m_ui->m_amountEdit->setEnabled(false);
+      m_ui->m_amountFromEdit->setEnabled(true);
+      m_ui->m_amountToEdit->setEnabled(true);
+      m_ui->m_amountEdit->loadText(QString());
+      m_ui->m_amountFromEdit->loadText(QString::number(from.toDouble()));
+      m_ui->m_amountToEdit->loadText(QString::number(to.toDouble()));
+      m_ui->m_amountButton->setChecked(false);
+      m_ui->m_amountRangeButton->setChecked(true);
     }
   } else {
-    m_amountEdit->setEnabled(true);
-    m_amountFromEdit->setEnabled(false);
-    m_amountToEdit->setEnabled(false);
-    m_amountEdit->loadText(QString());
-    m_amountFromEdit->loadText(QString());
-    m_amountToEdit->loadText(QString());
-    m_amountButton->setChecked(true);
-    m_amountRangeButton->setChecked(false);
+    m_ui->m_amountEdit->setEnabled(true);
+    m_ui->m_amountFromEdit->setEnabled(false);
+    m_ui->m_amountToEdit->setEnabled(false);
+    m_ui->m_amountEdit->loadText(QString());
+    m_ui->m_amountFromEdit->loadText(QString());
+    m_ui->m_amountToEdit->loadText(QString());
+    m_ui->m_amountButton->setChecked(true);
+    m_ui->m_amountRangeButton->setChecked(false);
   }
 
   //
@@ -541,13 +542,13 @@ void KReportConfigurationFilterDlg::slotReset(void)
   QStringList payees;
   if (m_initialState.payees(payees)) {
     if (payees.empty()) {
-      m_emptyPayeesButton->setChecked(true);
+      m_ui->m_emptyPayeesButton->setChecked(true);
     } else {
-      selectAllItems(m_payeesView, false);
-      selectItems(m_payeesView, payees, true);
+      selectAllItems(m_ui->m_payeesView, false);
+      selectItems(m_ui->m_payeesView, payees, true);
     }
   } else {
-    selectAllItems(m_payeesView, true);
+    selectAllItems(m_ui->m_payeesView, true);
   }
 
   //
@@ -556,20 +557,20 @@ void KReportConfigurationFilterDlg::slotReset(void)
 
   QStringList accounts;
   if (m_initialState.accounts(accounts)) {
-    m_accountsView->selectAllItems(false);
-    m_accountsView->selectItems(accounts, true);
+    m_ui->m_accountsView->selectAllItems(false);
+    m_ui->m_accountsView->selectItems(accounts, true);
   } else
-    m_accountsView->selectAllItems(true);
+    m_ui->m_accountsView->selectAllItems(true);
 
   //
   // Categories Filter
   //
 
   if (m_initialState.categories(accounts)) {
-    m_categoriesView->selectAllItems(false);
-    m_categoriesView->selectItems(accounts, true);
+    m_ui->m_categoriesView->selectAllItems(false);
+    m_ui->m_categoriesView->selectItems(accounts, true);
   } else
-    m_categoriesView->selectAllItems(true);
+    m_ui->m_categoriesView->selectAllItems(true);
 
   //
   // Date Filter
@@ -582,16 +583,16 @@ void KReportConfigurationFilterDlg::slotReset(void)
   QDate dateFrom, dateTo;
   if (m_initialState.dateFilter(dateFrom, dateTo)) {
     if (m_initialState.isUserDefined()) {
-      m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
-      m_fromDate->setDate(dateFrom);
-      m_toDate->setDate(dateTo);
+      m_ui->m_dateRange->setCurrentItem(MyMoneyTransactionFilter::userDefined);
+      m_ui->m_fromDate->setDate(dateFrom);
+      m_ui->m_toDate->setDate(dateTo);
     } else {
-      m_fromDate->setDate(dateFrom);
-      m_toDate->setDate(dateTo);
+      m_ui->m_fromDate->setDate(dateFrom);
+      m_ui->m_toDate->setDate(dateTo);
       KFindTransactionDlg::slotDateChanged();
     }
   } else {
-    m_dateRange->setCurrentItem(MyMoneyTransactionFilter::allDates);
+    m_ui->m_dateRange->setCurrentItem(MyMoneyTransactionFilter::allDates);
     slotDateRangeChanged(MyMoneyTransactionFilter::allDates);
   }
 
@@ -600,7 +601,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
 
 void KReportConfigurationFilterDlg::slotDateChanged(void)
 {
-  if (m_dateRange->currentItem() != MyMoneyTransactionFilter::userDefined) {
+  if (m_ui->m_dateRange->currentItem() != MyMoneyTransactionFilter::userDefined) {
     KFindTransactionDlg::slotDateChanged();
   }
   slotUpdateSelections();
@@ -614,7 +615,7 @@ void KReportConfigurationFilterDlg::slotShowHelp(void)
 //TODO Fix the reports and engine to include transfers even if categories are filtered - bug #1523508
 void KReportConfigurationFilterDlg::slotUpdateCheckTransfers(void)
 {
-  if (!m_categoriesView->allItemsSelected()) {
+  if (!m_ui->m_categoriesView->allItemsSelected()) {
     m_tab2->m_checkTransfers->setChecked(false);
     m_tab2->m_checkTransfers->setDisabled(true);
   } else {

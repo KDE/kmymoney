@@ -32,6 +32,8 @@
 #include <QResizeEvent>
 #include <QEvent>
 #include <QVBoxLayout>
+#include <QHeaderView>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

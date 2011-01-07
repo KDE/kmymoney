@@ -29,14 +29,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KDialog>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneyutils.h"
 #include "mymoneytransactionfilter.h"
-
-#include "ui_kfindtransactiondlgdecl.h"
-#include "ui_ksortoptiondlg.h"
 
 class QTreeWidget;
 class QTreeWidgetItem;
@@ -44,32 +43,29 @@ class QTreeWidgetItem;
 /**
   * @author Thomas Baumgart
   */
-
-
-class KSortOptionDlg : public KDialog, public Ui::KSortOptionDlg
+class KSortOptionDlg : public KDialog
 {
 public:
   KSortOptionDlg(QWidget *parent);
+  ~KSortOptionDlg();
   void init();
   void setSortOption(const QString& option, const QString& def);
   QString sortOption() const;
   void hideDefaultButton();
+
+private:
+  struct Private;
+  Private* const d;
 };
 
+namespace Ui {
+  class KFindTransactionDlgDecl;
+}
 
-
-class KFindTransactionDlgDecl : public KDialog, public Ui::KFindTransactionDlgDecl
-{
-public:
-  KFindTransactionDlgDecl(QWidget *parent) : KDialog(parent) {
-    setupUi(this);
-    setMainWidget(m_tabWidget);
-  }
-};
-
-class KFindTransactionDlg : public KFindTransactionDlgDecl
+class KFindTransactionDlg : public KDialog
 {
   Q_OBJECT
+
 public:
 
   /*
@@ -103,7 +99,7 @@ public:
   };
   */
   KFindTransactionDlg(QWidget *parent = 0);
-  ~KFindTransactionDlg() {}
+  ~KFindTransactionDlg();
 
   virtual bool eventFilter(QObject *o, QEvent *e);
 
@@ -223,6 +219,8 @@ protected:
   QMap<QWidget*, QString>         m_helpAnchor;
 
   bool                            m_needReload;
+
+  Ui::KFindTransactionDlgDecl*    m_ui;
 };
 
 #endif

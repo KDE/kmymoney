@@ -21,51 +21,34 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
-// ----------------------------------------------------------------------------
-// KDE Includes
+#include <QDialog>
 #include <QDateTime>
 #include <QComboBox>
 
 // ----------------------------------------------------------------------------
+// KDE Includes
+
+// ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_knewbudgetdlgdecl.h"
-
-
-class KNewBudgetDlgDecl : public QDialog, public Ui::KNewBudgetDlgDecl
-{
-public:
-  KNewBudgetDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
-};
-
-class KNewBudgetDlg : public KNewBudgetDlgDecl
+class KNewBudgetDlg : public QDialog
 {
   Q_OBJECT
+
 public:
   KNewBudgetDlg(QWidget* parent);
   ~KNewBudgetDlg();
 
-  QString& getYear() {
-    return m_year;
-  };
-  QString& getName() {
-    return m_name;
-  };
+  QString& getYear();
+  QString& getName();
 
 public slots:
   virtual void m_pbCancel_clicked();
   virtual void m_pbOk_clicked();
 
 private:
-  // the combobox should look m_icNextYears into the future
-  static const int m_icFutureYears;
-  static const int m_icPastYears;
-
-  QString m_year;
-  QString m_name;
+  struct Private;
+  Private* const d;
 };
 
 #endif // KNEWBUDGETDLG_H

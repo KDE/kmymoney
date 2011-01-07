@@ -31,26 +31,39 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-const int KNewBudgetDlg::m_icFutureYears = 5;
-const int KNewBudgetDlg::m_icPastYears = 2;
+#include "ui_knewbudgetdlgdecl.h"
+
+struct KNewBudgetDlg::Private
+{
+  QString m_year;
+  QString m_name;
+
+  Ui::KNewBudgetDlgDecl ui;
+};
+
+// the combobox should look m_icNextYears into the future
+static const int icFutureYears = 5;
+static const int icPastYears = 2;
 
 KNewBudgetDlg::KNewBudgetDlg(QWidget* parent) :
-    KNewBudgetDlgDecl(parent)
+    QDialog(parent), d(new Private)
 {
+  d->ui.setupUi(this);
   QStringList slYear;
   QDate dToday = QDate::currentDate();
   int iYear = dToday.year();
 
-  for (int i = 0; i <= m_icFutureYears; i++)
-    m_cbYear->addItem(QString::number(iYear++));
+  for (int i = 0; i <= icFutureYears; i++)
+    d->ui.m_cbYear->addItem(QString::number(iYear++));
 
   iYear = dToday.year();
-  for (int i = 0; i <= m_icFutureYears; i++)
-    m_cbYear->addItem(QString::number(--iYear));
+  for (int i = 0; i <= icFutureYears; i++)
+    d->ui.m_cbYear->addItem(QString::number(--iYear));
 }
 
 KNewBudgetDlg::~KNewBudgetDlg()
 {
+  delete d;
 }
 
 void KNewBudgetDlg::m_pbCancel_clicked()
@@ -61,19 +74,28 @@ void KNewBudgetDlg::m_pbCancel_clicked()
 void KNewBudgetDlg::m_pbOk_clicked()
 {
   // force focus change to update all data
-  m_pbOk->setFocus();
+  d->ui.m_pbOk->setFocus();
 
-  if (m_leBudgetName->displayText().isEmpty()) {
+  if (d->ui.m_leBudgetName->displayText().isEmpty()) {
     KMessageBox::information(this, i18n("Please specify a budget name"));
-    m_leBudgetName->setFocus();
+    d->ui.m_leBudgetName->setFocus();
     return;
   }
 
-  m_year = m_cbYear->currentText();
-  m_name = m_leBudgetName->displayText();
+  d->m_year = d->ui.m_cbYear->currentText();
+  d->m_name = d->ui.m_leBudgetName->displayText();
 
   accept();
 }
 
+QString& KNewBudgetDlg::getYear()
+{
+  return d->m_year;
+}
+
+QString& KNewBudgetDlg::getName()
+{
+  return d->m_name;
+}
 
 #include "knewbudgetdlg.moc"
