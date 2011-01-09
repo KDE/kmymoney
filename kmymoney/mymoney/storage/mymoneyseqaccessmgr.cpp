@@ -861,8 +861,10 @@ const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& 
 {
   MyMoneyMoney result;
   MyMoneyAccount acc = account(id);
-  // if (date != QDate()) qDebug ("request balance for %s at %s", id.data(), date.toString(Qt::ISODate).toLatin1());
-  if (!date.isValid() && !acc.isInvest()) {
+  if (!date.isValid()) {
+    // the balance of all transactions for this account has
+    // been requested. no need to calculate anything as we
+    // have this number with the account object already.
     if (m_accountList.find(id) != m_accountList.end()) {
       return m_accountList[id].balance();
     }
@@ -882,7 +884,7 @@ const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& 
   transactionList(list, filter);
 
   for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
-    for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
+    for (it_s = (*it_t).splits().constBegin(); it_s != (*it_t).splits().constEnd(); ++it_s) {
       const QString& aid = (*it_s).accountId();
       if ((*it_s).action() == MyMoneySplit::ActionSplitShares) {
         balances[aid] = balances[aid] * (*it_s).shares();
