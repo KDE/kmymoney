@@ -7,8 +7,8 @@
  *          Please see toplevel file COPYING for license details           *
  ***************************************************************************/
 
-#ifndef Q4BANKING_ACCOUNTLIST_H
-#define Q4BANKING_ACCOUNTLIST_H
+#ifndef KBACCOUNTLIST_H
+#define KBACCOUNTLIST_H
 
 
 #include <QTreeWidget>

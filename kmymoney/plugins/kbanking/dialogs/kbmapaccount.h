@@ -7,8 +7,8 @@
  *          Please see toplevel file COPYING for license details           *
  ***************************************************************************/
 
-#ifndef QBANKING_MAPACCOUNT_H
-#define QBANKING_MAPACCOUNT_H
+#ifndef KBMAPACCOUNT_H
+#define KBMAPACCOUNT_H
 
 #include <QDialog>
 

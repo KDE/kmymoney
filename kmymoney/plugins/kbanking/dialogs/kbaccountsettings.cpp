@@ -22,9 +22,10 @@
 # include <config-kmymoney.h>
 #endif
 
+#include "kbaccountsettings.h"
+
 #include <KMessageBox>
 
-#include "kbaccountsettings.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneyaccount.h"
 

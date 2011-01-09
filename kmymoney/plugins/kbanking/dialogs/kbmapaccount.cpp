@@ -23,7 +23,6 @@
 #include <qpushbutton.h>
 #include <qmessagebox.h>
 #include <qlayout.h>
-#include <qpushbutton.h>
 #include <qlineedit.h>
 
 
