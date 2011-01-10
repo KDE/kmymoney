@@ -449,7 +449,7 @@ AccountsModel::~AccountsModel()
   */
 bool AccountsModel::load()
 {
-  ::timetrace("Start AccountsModel::load");
+  //::timetrace("Start AccountsModel::load");
   // the return value
   bool realAccountWasLoaded = false;
 
@@ -490,7 +490,7 @@ bool AccountsModel::load()
     // don't remove any real institution but remove 'none' if it does not contain accounts
     institutionItem->setData(institution.id().isEmpty(), CleanupRole);
   }
-  ::timetrace("Done institutions");
+  //::timetrace("Done institutions");
 
   // Favorite accounts
   QStandardItem *favoriteAccountsItem = d->itemFromAccountId(rootItem, favoritesAccountId);
@@ -591,7 +591,7 @@ bool AccountsModel::load()
     d->setAccountData(this, accountsItem->index(), account);
   }
 
-  ::timetrace("Done loading");
+  //::timetrace("Done loading");
   // run cleanup procedure
   list = match(index(0, 0), AccountsModel::CleanupRole, true, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
   QModelIndexList parentsOnlyList;
@@ -615,7 +615,7 @@ bool AccountsModel::load()
     removeRow(index.row(), index.parent());
   }
 
-  ::timetrace("Done cleanup");
+  //::timetrace("Done cleanup");
   // compute the net woth
   QModelIndexList assetList = match(index(0, 0),
                                     AccountsModel::AccountIdRole,
@@ -642,7 +642,7 @@ bool AccountsModel::load()
     d->m_lastNetWorth = netWorth;
     emit netWorthChanged(d->m_lastNetWorth);
   }
-  ::timetrace("Done networth");
+  //::timetrace("Done networth");
 
   // compute the profit
   QModelIndexList incomeList = match(index(0, 0),
@@ -670,7 +670,7 @@ bool AccountsModel::load()
     d->m_lastProfit = profit;
     emit profitChanged(d->m_lastProfit);
   }
-  ::timetrace("Done AccountsModel::load");
+  //::timetrace("Done AccountsModel::load");
   return realAccountWasLoaded;
 }
 
