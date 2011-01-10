@@ -50,7 +50,7 @@ Please choose the &lt;b&gt;online&lt;/b&gt; account you want the
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="bankCodeEdit">
+       <widget class="KLineEdit" name="bankCodeEdit">
         <property name="readOnly">
          <bool>true</bool>
         </property>
@@ -67,7 +67,7 @@ Please choose the &lt;b&gt;online&lt;/b&gt; account you want the
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="accountIdEdit">
+       <widget class="KLineEdit" name="accountIdEdit">
         <property name="readOnly">
          <bool>true</bool>
         </property>
