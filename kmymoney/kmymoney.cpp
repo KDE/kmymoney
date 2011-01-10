@@ -429,7 +429,6 @@ KMyMoneyApp::~KMyMoneyApp()
   delete d->m_transactionEditor;
   delete d->m_endingBalanceDlg;
   delete d->m_moveToAccountSelector;
-  delete d->m_myMoneyView;
   delete d->m_holidayRegion;
   delete d;
 }
@@ -3582,6 +3581,7 @@ void KMyMoneyApp::slotAccountEdit(void)
             delete e;
           }
         }
+
         delete dlg;
       } else {
         QPointer<KEditLoanWizard> wizard = new KEditLoanWizard(d->m_selectedAccount);
@@ -6437,11 +6437,11 @@ void KMyMoneyApp::Private::setCustomColors()
   if (KMyMoneyGlobalSettings::useSystemColors()) {
     qApp->setStyleSheet(QString());
   } else {
-    qApp->setStyleSheet("QAbstractItemView { background-color: " + KMyMoneyGlobalSettings::listBGColor().name() + ";" +
-                                            "alternate-background-color: " + KMyMoneyGlobalSettings::listColor().name() + ";" +
-                                            "background-clip: content;}" +
-                               "QTableView { gridline-color: " + KMyMoneyGlobalSettings::listGridColor().name() + ";}" +
-                              "QHeaderView { background-color: pallete(base);}");
+    qApp->setStyleSheet("QAbstractItemView { background-color: " + KMyMoneyGlobalSettings::listBGColor().name() + ';' +
+                        "alternate-background-color: " + KMyMoneyGlobalSettings::listColor().name() + ';' +
+                        "background-clip: content;}" +
+                        "QTableView { gridline-color: " + KMyMoneyGlobalSettings::listGridColor().name() + ";}" +
+                        "QHeaderView { background-color: pallete(base);}");
   }
 }
 
