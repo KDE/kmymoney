@@ -63,8 +63,7 @@ enum ItemRoles {
   ItemIdRole = Qt::UserRole
 };
 
-struct KSortOptionDlg::Private
-{
+struct KSortOptionDlg::Private {
   Ui::KSortOptionDlg ui;
 };
 
@@ -185,7 +184,7 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   m_ui->m_textEdit->setFocus();
 }
 
-KFindTransactionDlg::~KFindTransactionDlg() 
+KFindTransactionDlg::~KFindTransactionDlg()
 {
   delete m_ui;
 }

@@ -58,8 +58,9 @@ private:
   Private* const d;
 };
 
-namespace Ui {
-  class KFindTransactionDlgDecl;
+namespace Ui
+{
+class KFindTransactionDlgDecl;
 }
 
 class KFindTransactionDlg : public KDialog

@@ -33,8 +33,7 @@
 
 #include "ui_knewbudgetdlgdecl.h"
 
-struct KNewBudgetDlg::Private
-{
+struct KNewBudgetDlg::Private {
   QString m_year;
   QString m_name;
 
