@@ -2,6 +2,7 @@
 Type=ServiceType
 Name=KMyMoney Importer Plugin
 Name[ca]=Endolable d'importació del KMyMoney
+Name[ca@valencia]=Endolable d'importació del KMyMoney
 Name[da]=KMyMoney import-plugin
 Name[de]=KMyMoney-Import-Modul
 Name[el]=Προσθετό εισαγωγής για το KMyMoney
@@ -23,6 +24,7 @@ Name[zh_TW]=KMyMoney 匯入器外掛程式
 X-KDE-ServiceType=KMyMoneyImporterPlugin
 Comment=A KMyMoney plugin
 Comment[ca]=Un endollable de KMyMoney
+Comment[ca@valencia]=Un endollable de KMyMoney
 Comment[cs]=Modul KMyMoney
 Comment[da]=Et KMyMoney-plugin
 Comment[de]=Ein KMyMoney-Modul

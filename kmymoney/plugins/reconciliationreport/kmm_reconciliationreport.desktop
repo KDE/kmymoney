@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Reconciliation report
 Name[ca]=Informe de conciliació
+Name[ca@valencia]=Informe de conciliació
 Name[da]=Afstemningsrapport
 Name[de]=Abgleichbericht
 Name[el]=Αναφορά διευθέτησης
@@ -22,6 +23,7 @@ Name[x-test]=xxReconciliation reportxx
 Name[zh_TW]=對帳報告
 Comment=Creates a report after each reconciliation containing data about the reconciliation process
 Comment[ca]=Crea un informe després de cada conciliació amb les dades sobre el procés de conciliació
+Comment[ca@valencia]=Crea un informe després de cada conciliació amb les dades sobre el procés de conciliació
 Comment[da]=Opretter en rapport efter hver afstemning som indeholder data om afstemningsprocessen
 Comment[de]=Erstellt nach jedem Abgleich einen Bericht, der Daten über den Abgleich-Prozess enthält
 Comment[el]=Δημιουργεί μια αναφορά έπειτα από κάθε συμφωνία η οποία περιέχει δεδομένα σχετικά με την διεργασία της συμφωνίας

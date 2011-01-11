@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Print check
 Name[ca]=Imprimeix el xec
+Name[ca@valencia]=Imprimeix el xec
 Name[da]=Udskriv check
 Name[de]=Schecks drucken
 Name[el]=Εκτύπωση επιταγής
@@ -22,6 +23,7 @@ Name[x-test]=xxPrint checkxx
 Name[zh_TW]=列印支票
 Comment=Provides the capability to print checks
 Comment[ca]=Aporta la capacitat d'imprimir xecs
+Comment[ca@valencia]=Aporta la capacitat d'imprimir xecs
 Comment[da]=Giver mulighed for at udskrive checks
 Comment[de]=Stellt die Möglichkeit bereit, Schecks zu drucken
 Comment[el]=Παρέχει την δυνατότητα εκτύπωσης επιταγών

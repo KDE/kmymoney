@@ -2,6 +2,7 @@
 Type=ServiceType
 Name=KMyMoney Plugin
 Name[ca]=Endollable de KMyMoney
+Name[ca@valencia]=Endollable de KMyMoney
 Name[cs]=Modul KMyMoney
 Name[da]=KMyMoney-plugin
 Name[de]=KMyMoney-Modul
@@ -24,6 +25,7 @@ Name[zh_TW]=KMyMoney 外掛程式
 X-KDE-ServiceType=KMyMoneyPlugin
 Comment=A KMyMoney plugin
 Comment[ca]=Un endollable de KMyMoney
+Comment[ca@valencia]=Un endollable de KMyMoney
 Comment[cs]=Modul KMyMoney
 Comment[da]=Et KMyMoney-plugin
 Comment[de]=Ein KMyMoney-Modul

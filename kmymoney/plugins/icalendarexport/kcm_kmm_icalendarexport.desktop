@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Configure icalendar export plugin
 Name[ca]=Configura l'endollable d'exportació de l'icalendar
+Name[ca@valencia]=Configura l'endollable d'exportació de l'icalendar
 Name[da]=Indstil plugin til iCalendar-eksport
 Name[de]=iCalendar-Export-Modul konfigurieren
 Name[el]=Ρύθμιση πρόσθετου εξαγωγής icalendar
@@ -26,6 +27,7 @@ Exec=kcmshell4 kmm_icalendarexport
 Categories=QT;KDE;kmymoney;
 Keywords=icalendar;kmymoney
 Keywords[ca]=icalendar;kmymoney
+Keywords[ca@valencia]=icalendar;kmymoney
 Keywords[cs]=icalendar;kmymoney
 Keywords[da]=icalendar;kmymoney
 Keywords[de]=icalendar;kmymoney
@@ -50,6 +52,7 @@ X-KDE-ParentApp=iCalendar
 X-KDE-ParentComponents=iCalendar
 Comment=Permits the configuration of the iCalendar plugin's options
 Comment[ca]=Permet la configuració de les opcions de l'endollable iCalendar
+Comment[ca@valencia]=Permet la configuració de les opcions de l'endollable iCalendar
 Comment[da]=Muliggør konfiguration af indstillingerne til iCalendar-pluginet
 Comment[de]=Erlaubt die Konfiguration des iCalendar-Moduls
 Comment[el]=Επιτρέπει την ρύθμιση των επιλογών του πρόσθετου iCalendar
