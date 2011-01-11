@@ -15,13 +15,14 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneybalancecachetest.h"
+
 #include <QtCore/QDebug>
 
 #include <QtTest/QtTest>
 
 #include "autotest.h"
 #include "mymoneybalancecache.h"
-#include "mymoneybalancecachetest.h"
 
 QTEST_MAIN(MyMoneyBalanceCacheTest)
 

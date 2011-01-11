@@ -419,7 +419,7 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
     connect(m_job, SIGNAL(requestFinished(int, bool)),
             this, SLOT(slotOfxFinished(int, bool)));
 
-    m_eventLoop.exec();
+    m_eventLoop.exec();  // krazy:exclude=crashy
 
     if (m_error != QHttp::NoError)
       errorMsg = m_job->errorString();

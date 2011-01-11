@@ -179,10 +179,11 @@ QString MyMoneyOfxConnector::password(void) const
   }
 
   if (pwd.isEmpty()) {
-    KPasswordDialog dlg(0);
-    dlg.setPrompt(i18n("Enter your password"));
-    if (dlg.exec())
-      pwd = dlg.password();
+    QPointer<KPasswordDialog> dlg = new KPasswordDialog(0);
+    dlg->setPrompt(i18n("Enter your password"));
+    if (dlg->exec())
+      pwd = dlg->password();
+    delete dlg;
   }
   return pwd;
 }
