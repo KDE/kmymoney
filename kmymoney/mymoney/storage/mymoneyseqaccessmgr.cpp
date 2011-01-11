@@ -435,7 +435,7 @@ void MyMoneySeqAccessMgr::adjustBalance(MyMoneyAccount& acc, const MyMoneySplit&
   // amount of the split since we don't know about stock splits.
   // so in the case of those stocks, we simply recalculate the balance from scratch
   if (acc.isInvest()) {
-    acc.setBalance(balance(acc.id()));
+    acc.setBalance(calculateBalance(acc.id()));
   } else {
     acc.adjustBalance(split, reverse);
   }
@@ -561,9 +561,14 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
 
   for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
     MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
-    adjustBalance(acc, *it_s, true);
-    acc.touch();
-    m_accountList.modify(acc.id(), acc);
+    // we only need to adjust non-investment accounts here
+    // as for investment accounts the balance will be recalculated
+    // after the transaction has been added.
+    if (!acc.isInvest()) {
+      adjustBalance(acc, *it_s, true);
+      acc.touch();
+      m_accountList.modify(acc.id(), acc);
+    }
   }
 
   // remove old transaction from lists
@@ -648,22 +653,25 @@ void MyMoneySeqAccessMgr::removeTransaction(const MyMoneyTransaction& transactio
   if (it_t == m_transactionList.end())
     throw new MYMONEYEXCEPTION("invalid transaction key");
 
-  QList<MyMoneySplit>::ConstIterator it_s;
-
-  // scan the splits and collect all accounts that need
-  // to be updated after the removal of this transaction
-  for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
-    MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
-    adjustBalance(acc, *it_s, true);
-    acc.touch();
-    m_accountList.modify(acc.id(), acc);
-  }
+  // keep a copy so that we still have the data after removal
+  MyMoneyTransaction t(*it_t);
 
   // FIXME: check if any split is frozen and throw exception
 
   // remove the transaction from the two lists
   m_transactionList.remove(*it_k);
   m_transactionKeys.remove(transaction.id());
+
+  // scan the splits and collect all accounts that need
+  // to be updated after the removal of this transaction
+  QList<MyMoneySplit>::ConstIterator it_s;
+  for (it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
+    MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
+    adjustBalance(acc, *it_s, true);
+    acc.touch();
+    m_accountList.modify(acc.id(), acc);
+  }
+
 }
 
 void MyMoneySeqAccessMgr::removeAccount(const MyMoneyAccount& account)
@@ -859,7 +867,6 @@ const MyMoneyTransaction MyMoneySeqAccessMgr::transaction(const QString& account
 
 const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& date) const
 {
-  MyMoneyMoney result;
   MyMoneyAccount acc = account(id);
   if (!date.isValid()) {
     // the balance of all transactions for this account has
@@ -871,6 +878,11 @@ const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& 
     return MyMoneyMoney();
   }
 
+  return calculateBalance(id, date);
+}
+
+MyMoneyMoney MyMoneySeqAccessMgr::calculateBalance(const QString& id, const QDate& date) const
+{
   QMap<QString, MyMoneyMoney> balances;
   QMap<QString, MyMoneyMoney>::ConstIterator it_b;
 
@@ -894,9 +906,7 @@ const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& 
     }
   }
 
-  result = balances[id];
-
-  return result;
+  return balances[id];
 }
 
 const MyMoneyMoney MyMoneySeqAccessMgr::totalBalance(const QString& id, const QDate& date) const

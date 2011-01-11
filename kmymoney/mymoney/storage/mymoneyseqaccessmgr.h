@@ -1002,6 +1002,19 @@ public:
 protected:
   void removeReferences(const QString& id);
 
+  /**
+    * This method is used to calculate the actual balance of an account
+    * without it's sub-ordinate accounts. If a @p date is presented,
+    * the balance at the beginning of this date (not including any
+    * transaction on this date) is returned. Otherwise all recorded
+    * transactions are included in the balance.
+    *
+    * @param id id of the account in question
+    * @param date return balance for specific date
+    * @return balance of the account as MyMoneyMoney object
+    */
+  MyMoneyMoney calculateBalance(const QString& id, const QDate& date = QDate()) const;
+
 private:
 
   static const int INSTITUTION_ID_SIZE = 6;
