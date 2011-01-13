@@ -204,7 +204,7 @@ private:
 
   int            columnNumber(const QString& msg);
 
-  QString         m_textDelimiterCharacter;
+  QString        m_textDelimiterCharacter;
   QString        m_csvPath;
   QString        m_fieldDelimiterCharacter;
   QString        m_inFileName;

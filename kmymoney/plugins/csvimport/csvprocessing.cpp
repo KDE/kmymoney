@@ -314,10 +314,10 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
       }
       continue;
     } else if (chr == "\n") {
-      if (inQuotes == true) { //                embedded '\n'
-        chr = "~";//                           substitute for '\n'
+      if (inQuotes == true) {//                embedded '\n'
+        chr = '~';//                           substitute for '\n'
         m_outBuffer += chr;
-        if (count > 0)
+        if (count > 0)//                       more chars yet               
           continue;
       }
       //                                       true EOL
@@ -325,23 +325,23 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
         continue;
       }
       lineCount ++;
-      if (lineCount < m_startLine) {//          not yet reached first wanted line
+      if (lineCount < m_startLine) {//         not yet reached first wanted line
         m_outBuffer.clear();
         continue;
       }
-      m_outBuffer += chr;
+//      m_outBuffer += chr;// was adding a trailing '\n'
       m_inBuffer = m_outBuffer;
       m_outBuffer.clear();
 
       //  if first pass or if not at last line, proceed
-      if ((!m_endLine == 0) && (lineCount >= m_endLine)) { // m_endLine is set from UI after first pass
+      if ((!m_endLine == 0) && (lineCount >= m_endLine)) {// m_endLine is set from UI after first pass
         m_csvDialog->spinBox_skipLast->setValue(lineCount - 1); //  else break
         break;
       }
-    }//                                        finish of end of line detected
+    }//                                        end of EOL detected loop
     else {
       m_outBuffer += chr;
-      if (count > 0) {
+      if (count > 0) {//                       more chars yet
         continue;
       }//                                      else eoFile = true;
     }
@@ -350,22 +350,22 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
       m_inBuffer = m_outBuffer;
     }
     displayLine(m_inBuffer);
-    if (m_importNow) { //                         user now ready to continue
-      int ret = (processQifLine(m_inBuffer));//  parse a line
+    if (m_importNow) { //                      user now ready to continue
+      int ret = (processQifLine(m_inBuffer));// parse a line
       if (ret == KMessageBox::Ok) {
         csvImportTransaction(st);
       } else
         m_importNow = false;
 
-    }//                                            reached end of data
-
-    updateScreen();//                              discard unwanted header lines
-
-    m_csvDialog->label_skip->setEnabled(true);
-    m_csvDialog->spinBox_skip->setEnabled(true);
-    m_csvDialog->spinBox_skipLast->setValue(lineCount + 1);
-    m_endColumn = m_csvDialog->maxColumnCount();
+    }//                                        reached end of data
   }
+  updateScreen();//                            discard unwanted header lines
+
+  m_csvDialog->label_skip->setEnabled(true);
+  m_csvDialog->spinBox_skip->setEnabled(true);
+  m_csvDialog->spinBox_skipLast->setValue(lineCount + 1);
+  m_endColumn = m_csvDialog->maxColumnCount();
+
   if (m_importNow) {
     emit statementReady(st);
     m_importNow = false;
@@ -403,16 +403,24 @@ void CsvProcessing::displayLine(const QString& data)
   m_csvDialog->tableWidget->setColumnCount(columnCount);
   m_inBuffer.clear();
   QStringList::const_iterator constIterator;
-
+  QString txt;
+  int width = 0;
   for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
        ++constIterator) {
-    QString txt = (*constIterator);
+    txt = (*constIterator);
     QTableWidgetItem *item = new QTableWidgetItem;//             new item for UI
     item->setText(txt);
     m_csvDialog->tableWidget->setRowCount(m_row + 1);
     m_csvDialog->tableWidget->setItem(m_row, col, item);//       add items to UI here
     m_inBuffer += txt + m_fieldDelimiterCharacter;
+    width += m_csvDialog->tableWidget->columnWidth(col);
     col ++;
+  }
+  
+  //  if last char. of last column added to UI (txt string) is not '"', ie an unterminated string
+  //  remove the unwanted trailing m_fieldDelimiterCharacter
+  if (!txt.endsWith('"')) {
+   m_inBuffer = m_inBuffer.remove(-1,1);
   }
   m_row += 1;
 }
@@ -560,9 +568,9 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
 
     else if (m_csvDialog->columnType(i) == "memo") { // could be more than one
       txt = m_columnList[i];
-      txt.replace("~", "\n");//                       replace NL which was substituted
+      txt.replace('~', "\n");//                       replace NL which was substituted
       if (!memo.isEmpty())
-        memo += "\n";//                               separator for multiple memos
+        memo += '\n';//                               separator for multiple memos
       memo += txt;//                                  next memo
     }//end of memo field
   }//end of col loop
@@ -753,9 +761,11 @@ int CsvProcessing::endColumn()
 
 int CsvProcessing::columnNumber(const QString& msg)
 {
+  //  This dialog box is for use with the debit/credit flag resource file entry,
+  //  indicating the sign of the value column. ie a debit or a credit.
   bool ok;
   static int ret;
-  ret = KInputDialog::getInteger(i18n("Enter column number"), msg, 0, 1, m_endColumn, 1, 10, &ok);
+  ret = KInputDialog::getInteger(i18n("Enter column number of debit/credit code"), msg, 0, 1, m_endColumn, 1, 10, &ok);
   if (ok && ret > 0)
     return ret;
   return 0;
