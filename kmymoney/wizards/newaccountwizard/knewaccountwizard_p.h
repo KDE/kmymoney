@@ -85,7 +85,7 @@ public:
     */
   const MyMoneyInstitution& institution(void) const;
 
-  void selectExistingInstitution(const QString id);
+  void selectExistingInstitution(const QString& id);
 
 private slots:
   void slotLoadWidgets(void);

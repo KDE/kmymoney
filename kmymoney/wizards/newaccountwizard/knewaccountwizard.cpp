@@ -428,7 +428,7 @@ void InstitutionPage::slotSelectInstitution(const int index)
   m_iban->setEnabled(index != 0);
 }
 
-void InstitutionPage::selectExistingInstitution(const QString id)
+void InstitutionPage::selectExistingInstitution(const QString& id)
 {
   QList<MyMoneyInstitution>::const_iterator it = d->m_list.constBegin();
 
