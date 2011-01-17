@@ -306,11 +306,11 @@ bool kMyMoneyDateInput::eventFilter(QObject *, QEvent *e)
     d->m_datePopup->show(mapToGlobal(QPoint(0, height())));
 #endif
     // select the date section, but we need to delay it a bit
-  } else if (e->type() == QEvent::FocusOut)
+  } else if (e->type() == QEvent::FocusOut) {
 #ifndef Q_OS_MAC
     d->m_datePopup->hide();
 #endif
-  else if (e->type() == QEvent::KeyPress) {
+  } else if (e->type() == QEvent::KeyPress) {
     if (QKeyEvent *k = dynamic_cast<QKeyEvent*>(e)) {
       keyPressEvent(k);
       if (k->isAccepted())
