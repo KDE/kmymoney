@@ -98,7 +98,7 @@ protected:
   bool eventFilter(QObject *o, QEvent *e);
 
   void resizeEvent(QResizeEvent*);
-  QWidget* createEditWidgets(void);
+  KMyMoneyCategory* createEditWidgets(bool setFocus);
   void destroyEditWidgets(void);
 
   /**
@@ -130,7 +130,7 @@ public slots:
 
   void selectRow(int row);
 
-  QWidget* slotStartEdit(void);
+  KMyMoneyCategory* slotStartEdit(void);
   void slotEndEdit(void);
   void slotEndEditKeyboard(void);
   void slotDeleteSplit(void);

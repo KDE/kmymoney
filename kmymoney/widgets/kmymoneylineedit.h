@@ -63,6 +63,12 @@ public:
     */
   void resetText(void);
 
+  /**
+    * Do not select the text upon the next focus in event if
+    * @p skipIt is set to @p true. When object is constructed,
+    * the default is @p false.
+    */
+  void skipSelectAll(bool skipIt);
 
 public slots:
   void loadText(const QString& text);
@@ -105,19 +111,10 @@ protected:
   void keyReleaseEvent(QKeyEvent* ev);
 
 private:
-  /**
-    * This member keeps the initial value. It is used during
-    * resetText() to set the widgets text back to this initial value
-    * and as comparison during focusOutEvent() to emit the lineChanged
-    * signal if the current text is different.
-    */
-  QString m_text;
-
-  /**
-    * This member keeps the status if overriding the numeric keypad comma key
-    * is requested or not.
-    */
-  bool m_forceMonetaryDecimalSymbol;
+  /// \internal d-pointer class.
+  struct Private;
+  /// \internal d-pointer instance.
+  Private* const d;
 };
 
 #endif

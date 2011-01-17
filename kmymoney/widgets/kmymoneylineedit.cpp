@@ -37,25 +37,51 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class kMyMoneyLineEdit::Private {
+public:
+  /**
+    * This member keeps the initial value. It is used during
+    * resetText() to set the widgets text back to this initial value
+    * and as comparison during focusOutEvent() to emit the lineChanged
+    * signal if the current text is different.
+    */
+  QString m_text;
+
+  /**
+    * This member keeps the status if overriding the numeric keypad comma key
+    * is requested or not.
+    */
+  bool m_forceMonetaryDecimalSymbol;
+  bool	skipSelectAll;
+};
+
 kMyMoneyLineEdit::kMyMoneyLineEdit(QWidget *w, bool forceMonetaryDecimalSymbol, Qt::Alignment alignment) :
     KLineEdit(w),
-    m_forceMonetaryDecimalSymbol(forceMonetaryDecimalSymbol)
+    d(new Private)
 {
+  d->m_forceMonetaryDecimalSymbol = forceMonetaryDecimalSymbol;
   setAlignment(alignment);
+  skipSelectAll(false);
 }
 
 kMyMoneyLineEdit::~kMyMoneyLineEdit()
 {
+  delete d;
+}
+
+void kMyMoneyLineEdit::skipSelectAll(bool skipIt)
+{
+  d->skipSelectAll = skipIt;
 }
 
 void kMyMoneyLineEdit::resetText(void)
 {
-  setText(m_text);
+  setText(d->m_text);
 }
 
 void kMyMoneyLineEdit::loadText(const QString& text)
 {
-  m_text = text;
+  d->m_text = text;
   setText(text);
 }
 
@@ -64,7 +90,7 @@ void kMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
   // if the current text is not in the list of
   // possible completions, we have a new payee
   // and signal that to the outside world.
-  if (text() != m_text) {
+  if (text() != d->m_text) {
     emit lineChanged(text());
   }
   KLineEdit::focusOutEvent(ev);
@@ -84,13 +110,16 @@ void kMyMoneyLineEdit::focusInEvent(QFocusEvent *ev)
   // Delay that selection until the application is idle to prevent a
   // recursive loop which otherwise entered when the focus is set to this
   // widget using the mouse. (bko #259369)
-  if (ev->reason() != Qt::PopupFocusReason)
-    QTimer::singleShot(0, this, SLOT(selectAll()));
+  if (ev->reason() != Qt::PopupFocusReason) {
+    if (!d->skipSelectAll)
+      QTimer::singleShot(0, this, SLOT(selectAll()));
+    d->skipSelectAll = false;
+  }
 }
 
 void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
 {
-  if (m_forceMonetaryDecimalSymbol) {
+  if (d->m_forceMonetaryDecimalSymbol) {
     if (k->modifiers() & Qt::KeypadModifier) {
       if (k->key() == Qt::Key_Comma
           || k->key() == Qt::Key_Period) {
@@ -115,7 +144,7 @@ void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
 
 void kMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
 {
-  if (m_forceMonetaryDecimalSymbol) {
+  if (d->m_forceMonetaryDecimalSymbol) {
     if (k->modifiers() & Qt::KeypadModifier) {
       if (k->key() == Qt::Key_Comma
           || k->key() == Qt::Key_Period) {

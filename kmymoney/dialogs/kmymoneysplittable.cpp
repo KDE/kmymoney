@@ -151,7 +151,6 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
   bool rc = false;
   int row = currentRow();
   int lines = viewport()->height() / rowHeight(0);
-  QWidget* w;
 
   if (o == this && e->type() == QEvent::Resize && isEditMode()) {
     rc = false;
@@ -229,9 +228,19 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
           slotStartEdit();
 
         } else if (k->text()[ 0 ].isPrint()) {
-          w = slotStartEdit();
-          // make sure, the widget receives the key again
-          QApplication::sendEvent(w, e);
+          KMyMoneyCategory* cat = createEditWidgets(false);
+          if (cat) {
+            kMyMoneyLineEdit *le = qobject_cast<kMyMoneyLineEdit*>(cat->lineEdit());
+            if (le) {
+              // make sure, the widget receives the key again
+              // and does not select the text this time
+              le->setText(k->text());
+              le->end(false);
+              le->deselect();
+              le->skipSelectAll(true);
+              le->setFocus();
+            }
+          }
         }
         break;
     }
@@ -410,7 +419,7 @@ void kMyMoneySplitTable::mouseDoubleClickEvent(QMouseEvent *e)
     editWidget->selectAll();
     // we need to call setFocus on the edit widget from the
     // main loop again to get the keyboard focus to the widget also
-    QTimer::singleShot(0, editWidget, SLOT(setFocus()));
+    // QTimer::singleShot(0, editWidget, SLOT(setFocus()));
   }
 }
 
@@ -617,10 +626,10 @@ void kMyMoneySplitTable::slotDeleteSplit(void)
   }
 }
 
-QWidget* kMyMoneySplitTable::slotStartEdit(void)
+KMyMoneyCategory* kMyMoneySplitTable::slotStartEdit(void)
 {
   MYMONEYTRACER(tracer);
-  return createEditWidgets();
+  return createEditWidgets(true);
 }
 
 void kMyMoneySplitTable::slotEndEdit(void)
@@ -774,7 +783,7 @@ void kMyMoneySplitTable::destroyEditWidgets(void)
   QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents, 100);
 }
 
-QWidget* kMyMoneySplitTable::createEditWidgets(void)
+KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
 {
   MYMONEYTRACER(tracer);
 
@@ -859,14 +868,16 @@ QWidget* kMyMoneySplitTable::createEditWidgets(void)
     }
   }
 
-  m_editCategory->setFocus();
+  if (setFocus)
+    m_editCategory->lineEdit()->setFocus();
+
   m_editCategory->lineEdit()->selectAll();
   setState(QAbstractItemView::EditingState);
 
   // resize the rows so the added edit widgets would fit appropriately
   resizeRowsToContents();
 
-  return m_editCategory->lineEdit();
+  return m_editCategory;
 }
 
 void kMyMoneySplitTable::slotLoadEditWidgets(void)
