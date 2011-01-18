@@ -1027,7 +1027,7 @@ void MyMoneyQifReader::processTransactionEntry(void)
   if (d->firstTransaction) {
     // check if this is an opening balance transaction and process it out of the statement
     if (!payee.isEmpty() && ((payee.toLower() == "opening balance") || KMyMoneyGlobalSettings::qifOpeningBalance().toLower().contains(payee.toLower()))) {
-      createOpeningBalance();
+      createOpeningBalance(d->accountType);
       d->firstTransaction = false;
       return;
     }
