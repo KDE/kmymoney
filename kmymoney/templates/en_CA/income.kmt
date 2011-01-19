@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/fr_CA/acctchrt_revenus.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Employment Earnings</title>
+ <shortdesc>Accounts to track earnings.</shortdesc>
+ <longdesc>Select this group of accounts if you want to track your income and employment expenses.</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Taxes">
+    <account type="13" name="Employment">
+     <account type="13" name="Medicare"/>
+     <account type="13" name="Provincial"/>
+     <account type="13" name="CPP / QPP"/>
+     <account type="13" name="Federal"/>
+     <account type="13" name="EI"/>
+    </account>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Employment">
+    <account type="12" name="Expenses reimbursed"/>
+    <account type="12" name="Commisssion"/>
+    <account type="12" name="Salary"/>
+    <account type="12" name="Bonus"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

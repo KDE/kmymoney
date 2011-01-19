@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/fr_CA/acctchrt_locataire.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Renting a home</title>
+ <shortdesc>Costs associated with renting a home .</shortdesc>
+ <longdesc>Select the group of accounts if you rent a residence or building (rent, insurance, ...).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Insurances">
+    <account type="13" name="Tenant"/>
+   </account>
+   <account type="13" name="Rent"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

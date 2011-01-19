@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+
+        accounts/fr_CA/acctchrt_basecommune.gnucash-xea
+
+     Please check the source file for possible copyright
+     and licence information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Basis of joint accounts</title>
+ <shortdesc>All basic accounts most widely used</shortdesc>
+ <longdesc>Most users will select the group / hierarchy of accounts. It includes basic accounts commonly used by individuals, such as checking account, savings account, cash, credit card. income and expenditure.</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Line of credit"/>
+   <account type="10" name="Credit card"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Other"/>
+   <account type="12" name="Gifts received"/>
+   <account type="12" name="Interest">
+    <account type="12" name="Cheques"/>
+    <account type="12" name="Savings"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Public transport"/>
+   <account type="13" name="Medical expenses"/>
+   <account type="13" name="Gifts"/>
+   <account type="13" name="Miscellaneous"/>
+   <account type="13" name="Entertainment">
+    <account type="13" name="Leisure"/>
+    <account type="13" name="Hobby"/>
+    <account type="13" name="Travel"/>
+    <account type="13" name="Music/Films"/>
+   </account>
+   <account type="13" name="Contributions"/>
+   <account type="13" name="Laundry"/>
+   <account type="13" name="Clothing"/>
+   <account type="13" name="Subscriptions"/>
+   <account type="13" name="Computers"/>
+   <account type="13" name="Books"/>
+   <account type="13" name="Daycare"/>
+   <account type="13" name="Insurance">
+    <account type="13" name="Healthcare"/>
+    <account type="13" name="Life"/>
+   </account>
+   <account type="13" name="Adjustments"/>
+   <account type="13" name="Bank charges"/>
+   <account type="13" name="Restaurant"/>
+   <account type="13" name="Training"/>
+   <account type="13" name="Services">
+    <account type="13" name="Phone"/>
+    <account type="13" name="Natural gas"/>
+    <account type="13" name="Cable"/>
+    <account type="13" name="Internet"/>
+    <account type="13" name="Electricity"/>
+    <account type="13" name="Garbage"/>
+    <account type="13" name="Cellular"/>
+    <account type="13" name="Water"/>
+   </account>
+   <account type="13" name="Supplies"/>
+   <account type="13" name="Donations"/>
+   <account type="13" name="Interest">
+    <account type="13" name="Line of credit"/>
+    <account type="13" name="Creditcard"/>
+   </account>
+   <account type="13" name="Food"/>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Opening"/>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Cash">
+    <account type="1" name="Savings"/>
+    <account type="3" name="Cash"/>
+    <account type="1" name="Cheques"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>
