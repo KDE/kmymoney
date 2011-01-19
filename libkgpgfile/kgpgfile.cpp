@@ -37,6 +37,7 @@
 // KDE Includes
 
 #include <kstandarddirs.h>
+#include <ksavefile.h>
 
 #include <gpg-error.h>
 #include <gpgme++/context.h>
@@ -51,6 +52,8 @@ class KGPGFile::Private
 {
 public:
   Private() {
+    m_fileRead = 0;
+    m_fileWrite = 0;
     GpgME::initializeLibrary();
     ctx = GpgME::Context::createForProtocol(GpgME::OpenPGP);
     if (!ctx)
@@ -62,7 +65,8 @@ public:
   }
 
   QString m_fn;
-  QFile* m_file;
+  QFile* m_fileRead;
+  KSaveFile* m_fileWrite;
 
   GpgME::Error m_lastError;
 
@@ -84,7 +88,7 @@ KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& opt
   Q_UNUSED(homedir);
   Q_UNUSED(options);
 
-  setFileName(fn);
+  KGPGFile::setFileName(fn);
 }
 
 KGPGFile::~KGPGFile()
@@ -166,25 +170,37 @@ bool KGPGFile::open(OpenMode mode)
 
     // write out in ASCII armor mode
     d->ctx->setArmor(true);
+    d->m_fileWrite = new KSaveFile;
+
+  } else if(isReadable()) {
+    d->m_fileRead = new QFile;
   }
 
   // open the 'physical' file
   // qDebug("open physical file");
-  d->m_file = new QFile;
-  d->m_file->setFileName(d->m_fn);
-  if (!d->m_file->open(mode)) {
-    setOpenMode(NotOpen);
-    return false;
-  }
-
-  if (isReadable()) {
-    GpgME::Data dcipher(d->m_file->handle());
+  // Since some of the methods in QFile are not virtual, we need to
+  // differentiate here between the QFile* and the KSaveFile* case
+  if(isReadable()) {
+    d->m_fileRead->setFileName(d->m_fn);
+    if (!d->m_fileRead->open(mode)) {
+      setOpenMode(NotOpen);
+      return false;
+    }
+    GpgME::Data dcipher(d->m_fileRead->handle());
     d->m_lastError = d->ctx->decrypt(dcipher, d->m_data).error();
     if (d->m_lastError.encodedError()) {
       return false;
     }
     d->m_data.seek(0, SEEK_SET);
+
+  } else if (isWritable()) {
+    d->m_fileWrite->setFileName(d->m_fn);
+    if (!d->m_fileWrite->open(mode)) {
+      setOpenMode(NotOpen);
+      return false;
+    }
   }
+
   // qDebug("KGPGFile: file is open");
   return true;
 }
@@ -200,19 +216,20 @@ void KGPGFile::close(void)
 
   if (isWritable()) {
     d->m_data.seek(0, SEEK_SET);
-    GpgME::Data dcipher(d->m_file->handle());
+    GpgME::Data dcipher(d->m_fileWrite->handle());
     d->m_lastError = d->ctx->encrypt(d->m_recipients, d->m_data, dcipher, GpgME::Context::AlwaysTrust).error();
     if (d->m_lastError.encodedError()) {
+      d->m_fileWrite->abort();
       qDebug("Failure while writing file: '%s'", d->m_lastError.asString());
     }
   }
 
-  d->m_file->close();
-  setOpenMode(NotOpen);
-
+  delete d->m_fileWrite; // this will do the actual write to the target file 
+  delete d->m_fileRead;
+  d->m_fileWrite = 0;
+  d->m_fileRead = 0;
   d->m_recipients.clear();
-  delete d->m_file;
-  d->m_file = 0;
+  setOpenMode(NotOpen);
 }
 
 qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
@@ -229,7 +246,7 @@ qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
   // size_t boundaries.
   qint64 bytesWritten = 0;
   while (maxlen) {
-    size_t len = 2 ^ 31;
+    qint64 len = 2 ^ 31;
     if (len > maxlen)
       len = maxlen;
     bytesWritten += d->m_data.write(data, len);
@@ -254,7 +271,7 @@ qint64 KGPGFile::readData(char *data, qint64 maxlen)
   // size_t boundaries.
   qint64 bytesRead = 0;
   while (maxlen) {
-    size_t len = 2 ^ 31;
+    qint64 len = 2 ^ 31;
     if (len > maxlen)
       len = maxlen;
     bytesRead += d->m_data.read(data, len);
