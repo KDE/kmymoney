@@ -1177,6 +1177,8 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
         int mask = umask((~fmode) & 0777);
         umask(mask);
         try {
+          // make sure to keep the last 10 files in the same directory
+          KSaveFile::numberedBackupFile(filename); 
           saveToLocalFile(filename, pWriter, plaintext, keyList);
         } catch (MyMoneyException* e) {
           delete e;
