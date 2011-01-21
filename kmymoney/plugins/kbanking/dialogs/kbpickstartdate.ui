@@ -183,7 +183,7 @@
   <connection>
    <sender>buttonOk</sender>
    <signal>clicked()</signal>
-   <receiver>KBPickStartDateUi</receiver>
+   <receiver>KBPickStartDate</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -199,7 +199,7 @@
   <connection>
    <sender>buttonCancel</sender>
    <signal>clicked()</signal>
-   <receiver>KBPickStartDateUi</receiver>
+   <receiver>KBPickStartDate</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
