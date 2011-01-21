@@ -350,7 +350,7 @@ Selecting 0% will list all transactions.</string>
                     <item>
                       <widget class="QRadioButton" name="radioButton3">
                         <property name="text">
-                          <string>with previously most often used transaction for the payee</string>
+                          <string>With previously most often used transaction for the payee</string>
                         </property>
                         <property name="whatsThis" stdset="0">
                           <string>The data of the last transaction assigned to the category used most often for this payee is autofilled into the transaction editor.</string>
