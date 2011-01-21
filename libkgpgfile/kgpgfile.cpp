@@ -172,7 +172,7 @@ bool KGPGFile::open(OpenMode mode)
     d->ctx->setArmor(true);
     d->m_fileWrite = new KSaveFile;
 
-  } else if(isReadable()) {
+  } else if (isReadable()) {
     d->m_fileRead = new QFile;
   }
 
@@ -180,7 +180,7 @@ bool KGPGFile::open(OpenMode mode)
   // qDebug("open physical file");
   // Since some of the methods in QFile are not virtual, we need to
   // differentiate here between the QFile* and the KSaveFile* case
-  if(isReadable()) {
+  if (isReadable()) {
     d->m_fileRead->setFileName(d->m_fn);
     if (!d->m_fileRead->open(mode)) {
       setOpenMode(NotOpen);
@@ -224,7 +224,7 @@ void KGPGFile::close(void)
     }
   }
 
-  delete d->m_fileWrite; // this will do the actual write to the target file 
+  delete d->m_fileWrite; // this will do the actual write to the target file
   delete d->m_fileRead;
   d->m_fileWrite = 0;
   d->m_fileRead = 0;

@@ -182,7 +182,7 @@ Qt::ItemFlags BudgetAccountsProxyModel::flags(const QModelIndex &index) const
   // check if any of the parent accounts has the 'include subaccounts'
   // flag set. If so, we don't allow selecting this account
   QModelIndex idx = index.parent();
-  while(idx.isValid()) {
+  while (idx.isValid()) {
     QModelIndex source_idx = mapToSource(idx);
     QVariant accountData = sourceModel()->data(source_idx, AccountsModel::AccountRole);
     if (accountData.canConvert<MyMoneyAccount>()) {
@@ -190,7 +190,7 @@ Qt::ItemFlags BudgetAccountsProxyModel::flags(const QModelIndex &index) const
       // find out if the account is budgeted
       MyMoneyBudget::AccountGroup budgetAccount = m_budget.account(account.id());
       if (budgetAccount.id() == account.id()) {
-        if(budgetAccount.budgetSubaccounts()) {
+        if (budgetAccount.budgetSubaccounts()) {
           return flags & ~Qt::ItemIsEnabled;
         }
       }
@@ -783,7 +783,7 @@ void KBudgetView::cb_includesSubaccounts_clicked()
     // to the current account or leave things as they are
     if (m_cbBudgetSubaccounts->isChecked()) {
       // TODO: asking the user needs to be added. So long, we assume yes
-      if(1) {
+      if (1) {
         MyMoneyBudget::AccountGroup subAccount;
         if (collectSubBudgets(subAccount, indexes.front())) {
           // we found a sub-budget somewhere
@@ -813,7 +813,7 @@ void KBudgetView::clearSubBudgets(const QModelIndex &index)
 {
   int children = m_accountTree->model()->rowCount(index);
 
-  for(int i = 0; i < children; ++i) {
+  for (int i = 0; i < children; ++i) {
     QModelIndex childIdx = index.child(i, 0);
     QString accountID = m_accountTree->model()->data(childIdx, AccountsModel::AccountIdRole).toString();
     m_budget.removeReference(accountID);
@@ -826,12 +826,12 @@ bool KBudgetView::collectSubBudgets(MyMoneyBudget::AccountGroup &destination, co
   bool rc = false;
   int children = m_accountTree->model()->rowCount(index);
 
-  for(int i = 0; i < children; ++i) {
+  for (int i = 0; i < children; ++i) {
     QModelIndex childIdx = index.child(i, 0);
     QString accountID = m_accountTree->model()->data(childIdx, AccountsModel::AccountIdRole).toString();
     MyMoneyBudget::AccountGroup auxAccount = m_budget.account(accountID);
-    if(auxAccount.budgetLevel() != MyMoneyBudget::AccountGroup::eNone
-    && !auxAccount.isZero()) {
+    if (auxAccount.budgetLevel() != MyMoneyBudget::AccountGroup::eNone
+        && !auxAccount.isZero()) {
       rc = true;
       // add the subaccount
       // TODO: deal with budgets in different currencies

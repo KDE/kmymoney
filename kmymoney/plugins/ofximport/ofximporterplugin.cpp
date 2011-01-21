@@ -143,11 +143,11 @@ bool OfxImporterPlugin::isMyFormat(const QString& filename) const
     while (!ts.atEnd() && !result  && lineCount != 0) {
       // get a line of data and remove all unnecessary whitepace chars
       QString line = ts.readLine().simplified();
-      if ( line.contains("<OFX>", Qt::CaseInsensitive)
-        || line.contains("<OFC>", Qt::CaseInsensitive) )
+      if (line.contains("<OFX>", Qt::CaseInsensitive)
+          || line.contains("<OFC>", Qt::CaseInsensitive))
         result = true;
       // count only lines that contain some non white space chars
-      if(!line.isEmpty())
+      if (!line.isEmpty())
         lineCount--;
     }
     f.close();
