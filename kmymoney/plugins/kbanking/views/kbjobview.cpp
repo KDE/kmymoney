@@ -38,37 +38,40 @@
 #include <KIconLoader>
 #include <KMessageBox>
 
-#include "kbanking.h"
 #include <aqbanking/jobgetbalance.h>
 #include <aqbanking/jobgettransactions.h>
 
 #include <gwenhywfar/debug.h>
 
+#include <ui_kbjobview.h>
 
-KBJobView::KBJobView(KBanking *kb,
+struct KBJobView::Private {
+  Ui::KBJobView ui;
+};
+
+KBJobView::KBJobView(KMyMoneyBanking *kb,
                      QWidget* parent,
                      const char* name,
                      Qt::WFlags fl) :
     QWidget(parent, fl),
+    d(new Private),
     m_app(kb)
 {
   assert(kb);
   setObjectName(name);
-  setupUi(this);
+  d->ui.setupUi(this);
 
   // Manually create and add layout here because the .ui-generated
   // QGroupBox doesn't have one.
-  QBoxLayout *jobBoxLayout = new QHBoxLayout(jobBox);
+  QBoxLayout *jobBoxLayout = new QHBoxLayout(d->ui.jobBox);
   jobBoxLayout->setAlignment(Qt::AlignTop);
 
-  m_jobList = new KBJobListView(jobBox);
+  m_jobList = new KBJobListView(d->ui.jobBox);
   jobBoxLayout->addWidget(m_jobList);
 
-  QObject::connect(m_app->flagStaff(), SIGNAL(signalQueueUpdated()),
-                   this, SLOT(slotQueueUpdated()));
-  QObject::connect(executeButton, SIGNAL(clicked()),
+  QObject::connect(d->ui.executeButton, SIGNAL(clicked()),
                    this, SLOT(slotExecute()));
-  QObject::connect(dequeueButton, SIGNAL(clicked()),
+  QObject::connect(d->ui.dequeueButton, SIGNAL(clicked()),
                    this, SLOT(slotDequeue()));
   connect(m_jobList, SIGNAL(itemSelectionChanged()),
           this, SLOT(slotSelectionChanged()));
@@ -84,26 +87,27 @@ KBJobView::KBJobView(KBanking *kb,
                        i18n("Execute all jobs in the queue"),
                        i18n("Execute all jobs in the queue"));
 
-  dequeueButton->setGuiItem(dequeueItem);
-  executeButton->setGuiItem(executeItem);
-  dequeueButton->setToolTip(dequeueItem.toolTip());
-  executeButton->setToolTip(executeItem.toolTip());
+  d->ui.dequeueButton->setGuiItem(dequeueItem);
+  d->ui.executeButton->setGuiItem(executeItem);
+  d->ui.dequeueButton->setToolTip(dequeueItem.toolTip());
+  d->ui.executeButton->setToolTip(executeItem.toolTip());
 
-  dequeueButton->setEnabled(false);
-  executeButton->setEnabled(false);
+  d->ui.dequeueButton->setEnabled(false);
+  d->ui.executeButton->setEnabled(false);
 }
 
 
 
 KBJobView::~KBJobView()
 {
+  delete d;
 }
 
 void KBJobView::slotSelectionChanged(void)
 {
-  dequeueButton->setEnabled(false);
+  d->ui.dequeueButton->setEnabled(false);
   if (m_jobList->currentItem())
-    dequeueButton->setEnabled(m_jobList->currentItem()->isSelected() != 0);
+    d->ui.dequeueButton->setEnabled(m_jobList->currentItem()->isSelected() != 0);
 }
 
 bool KBJobView::init()
@@ -127,7 +131,7 @@ void KBJobView::slotQueueUpdated()
   std::list<AB_JOB*> jl;
   jl = m_app->getEnqueuedJobs();
   m_jobList->addJobs(jl);
-  executeButton->setEnabled(jl.size() > 0);
+  d->ui.executeButton->setEnabled(jl.size() > 0);
   slotSelectionChanged();
 }
 
@@ -154,9 +158,6 @@ void KBJobView::slotExecute()
     DBG_ERROR(0, "Error: %d", rv);
   }
   AB_ImExporterContext_free(ctx);
-
-  // let App emit signals to inform account views
-  m_app->accountsUpdated();
 }
 
 

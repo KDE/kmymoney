@@ -1,6 +1,7 @@
 /***************************************************************************
- *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
  *   Copyright 2004  Martin Preuss aquamaniac@users.sourceforge.net        *
+ *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
+ *   Copyright 2010  Thomas Baumgart ipwizard@users.sourceforge.net        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -25,6 +26,22 @@
 #include <config-kmymoney.h>
 #endif
 
+#include <aqbanking/version.h>
+#include <aqbanking/banking.h>
+#include "banking.hpp"
+
+#ifndef AQB_MAKE_VERSION
+#define AQB_MAKE_VERSION(a,b,c,d) (((a)<<24) | ((b)<<16) | (c<<8) | (d))
+#endif
+
+#ifndef AQBANKING_VERSION
+#define AQBANKING_VERSION AQB_MAKE_VERSION(AQBANKING_VERSION_MAJOR,AQBANKING_VERSION_MINOR,AQBANKING_VERSION_PATCHLEVEL,AQBANKING_VERSION_BUILD)
+#endif
+
+#ifndef AQB_IS_VERSION
+#define AQB_IS_VERSION(a,b,c,d) (AQBANKING_VERSION >= AQB_MAKE_VERSION(a,b,c,d))
+#endif
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -39,7 +56,6 @@ class KBAccountSettings;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kbanking.h"
 #include <kmymoney/kmymoneyplugin.h>
 #include <kmymoney/mymoneyaccount.h>
 #include <kmymoney/mymoneykeyvaluecontainer.h>
@@ -146,9 +162,18 @@ private:
     */
   bool updateAccount(const MyMoneyAccount& acc);
 
+  /**
+    * Trigger the password cache timer
+    */
+  void startPasswordTimer(void);
+
 protected slots:
   void slotSettings(void);
   void slotImport(void);
+  void slotClearPasswordCache(void);
+
+signals:
+  void queueChanged(void);
 
 private:
   class Private;
@@ -162,27 +187,45 @@ private:
 };
 
 /**
-  * This class is the special implementation to glue the KBanking class
+  * This class is the special implementation to glue the AB_Banking class
   * with the KMyMoneyPlugin structure.
   */
-class KMyMoneyBanking : public KBanking
+class KMyMoneyBanking : public AB_Banking
 {
+  friend class KBankingPlugin;
 
 public:
   KMyMoneyBanking(KBankingPlugin* parent, const char* appname, const char* fname = 0);
   virtual ~KMyMoneyBanking() {};
 
-  bool importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags);
+  int executeQueue(AB_IMEXPORTER_CONTEXT *ctx);
+
+  int enqueueJob(AB_JOB *j);
+  int dequeueJob(AB_JOB *j);
+  std::list<AB_JOB*> getEnqueuedJobs();
+
+  bool askMapAccount(const char *id,
+                     const char *bankCode,
+                     const char *accountId);
+
+  virtual bool interactiveImport();
 
 protected:
+  int init();
+  int fini();
+
+  bool importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags);
   const AB_ACCOUNT_STATUS* _getAccountStatus(AB_IMEXPORTER_ACCOUNTINFO *ai);
   void _xaToStatement(MyMoneyStatement &ks,
                       const MyMoneyAccount&,
                       const AB_TRANSACTION *t);
+  void clearPasswordCache(void);
 
 private:
   KBankingPlugin* m_parent;
   QMap<QString, bool> m_hashMap;
+  AB_JOB_LIST2 *_jobQueue;
+
 };
 
 #endif

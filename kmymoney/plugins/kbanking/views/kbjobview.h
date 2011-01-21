@@ -23,23 +23,19 @@
 #ifndef KBANKING_KBJOBVIEW_H
 #define KBANKING_KBJOBVIEW_H
 
-#include "ui_kbjobview.h"
-
 #include <QWidget>
-
 
 class KBJobView;
 
-
 #include "kbjoblist.h"
-#include "kbanking.h"
+#include "mymoneybanking.h"
 
 
-class KBJobView: public QWidget, public Ui::KBJobViewUi
+class KBJobView: public QWidget
 {
   Q_OBJECT
 public:
-  explicit KBJobView(KBanking *kb,
+  explicit KBJobView(KMyMoneyBanking *kb,
                      QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   ~KBJobView();
 
@@ -47,7 +43,12 @@ public:
   bool fini();
 
 private:
-  KBanking *m_app;
+  /// \internal d-pointer class.
+  struct Private;
+  /// \internal d-pointer instance.
+  Private* const d;
+
+  KMyMoneyBanking *m_app;
   KBJobListView *m_jobList;
 
 protected slots:
