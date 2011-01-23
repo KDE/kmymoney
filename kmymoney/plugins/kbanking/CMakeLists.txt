@@ -25,10 +25,10 @@ SET(kmm_kbanking_PART_SRCS
 KDE4_ADD_PLUGIN(kmm_kbanking ${kmm_kbanking_PART_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_kbanking
-                      kmm_mymoney
                       kmm_kbanking_dialogs
                       kmm_kbanking_views
                       kmm_kbanking_widgets
+                      kmm_mymoney
                       kmm_widgets
                       kmm_plugin
                       ${KDE4_KDEUI_LIBS}
