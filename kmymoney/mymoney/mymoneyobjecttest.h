@@ -31,6 +31,7 @@ private slots:
   void testCopyConstructor();
   void testAssignmentConstructor();
   void testEquality();
+  void testReadXML();
 };
 
 #endif

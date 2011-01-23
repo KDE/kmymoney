@@ -20,6 +20,16 @@
 
 #include "mymoneyaccount.h"
 
+class TestMyMoneyObject : public MyMoneyObject
+{
+public:
+  TestMyMoneyObject() : MyMoneyObject() {}
+  TestMyMoneyObject(const QDomElement& node, const bool forceId = true) :
+    MyMoneyObject(node, forceId) {}
+  virtual bool hasReferenceTo(const QString&) const { return false; }
+  virtual void writeXML(QDomDocument&, QDomElement&) const {}
+};
+
 QTEST_MAIN(MyMoneyObjectTest)
 
 void MyMoneyObjectTest::testEmptyConstructor()
@@ -69,6 +79,84 @@ void MyMoneyObjectTest::testEquality()
 
   QVERIFY(a.MyMoneyObject::operator==(b));
   QVERIFY(!(a.MyMoneyObject::operator==(c)));
+}
+
+void MyMoneyObjectTest::testReadXML()
+{
+  TestMyMoneyObject t;
+
+  QString ref_ok = QString(
+                     "<!DOCTYPE TEST>\n"
+                     "<TRANSACTION-CONTAINER>\n"
+                     " <MYMONEYOBJECT id=\"T000000000000000001\" >\n"
+                     " </MYMONEYOBJECT>\n"
+                     "</TRANSACTION-CONTAINER>\n"
+                   );
+
+  QString ref_false1 = QString(
+                     "<!DOCTYPE TEST>\n"
+                     "<TRANSACTION-CONTAINER>\n"
+                     " <MYMONEYOBJECT id=\"\" >\n"
+                     " </MYMONEYOBJECT>\n"
+                     "</TRANSACTION-CONTAINER>\n"
+                   );
+
+  QString ref_false2 = QString(
+                     "<!DOCTYPE TEST>\n"
+                     "<TRANSACTION-CONTAINER>\n"
+                     " <MYMONEYOBJECT >\n"
+                     " </MYMONEYOBJECT>\n"
+                     "</TRANSACTION-CONTAINER>\n"
+                   );
+
+  QDomDocument doc;
+  QDomElement node;
+
+  // id="" but required
+  doc.setContent(ref_false1);
+  node = doc.documentElement().firstChild().toElement();
+
+  try {
+    t = TestMyMoneyObject(node);
+    QFAIL("Missing expected exception");
+  } catch (MyMoneyException *e) {
+    delete e;
+  }
+
+  // id attribute missing but required
+  doc.setContent(ref_false2);
+  node = doc.documentElement().firstChild().toElement();
+
+  try {
+    t = TestMyMoneyObject(node);
+    QFAIL("Missing expected exception");
+  } catch (MyMoneyException *e) {
+    delete e;
+  }
+
+  // id present
+  doc.setContent(ref_ok);
+  node = doc.documentElement().firstChild().toElement();
+
+  try {
+    t = TestMyMoneyObject(node);
+    QVERIFY(t.id() == "T000000000000000001");
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception");
+  }
+
+  // id="" but not required
+  doc.setContent(ref_false1);
+  node = doc.documentElement().firstChild().toElement();
+
+  try {
+    t = TestMyMoneyObject(node, false);
+    QVERIFY(t.id().isEmpty());
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception");
+  }
 }
 
 #include "mymoneyobjecttest.moc"
