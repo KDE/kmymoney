@@ -32,6 +32,7 @@
 #include <QList>
 #include <QVBoxLayout>
 #include <QVariant>
+#include <QCheckBox>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

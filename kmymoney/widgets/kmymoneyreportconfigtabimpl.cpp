@@ -18,45 +18,76 @@
 */
 
 #include "kmymoneyreportconfigtabimpl.h"
+
+#include "ui_kmymoneyreportconfigtab1decl.h"
+#include "ui_kmymoneyreportconfigtab2decl.h"
+#include "ui_kmymoneyreportconfigtab3decl.h"
+#include "ui_kmymoneyreportconfigtabchartdecl.h"
+
 #include "mymoney/mymoneyreport.h"
 
 kMyMoneyReportConfigTab1Decl::kMyMoneyReportConfigTab1Decl(QWidget *parent)
     : QWidget(parent)
 {
-  setupUi(this);
+  ui = new Ui::kMyMoneyReportConfigTab1Decl;
+  ui->setupUi(this);
+}
+
+kMyMoneyReportConfigTab1Decl::~kMyMoneyReportConfigTab1Decl()
+{
+  delete ui;
 }
 
 kMyMoneyReportConfigTab2Decl::kMyMoneyReportConfigTab2Decl(QWidget *parent)
     : QWidget(parent)
 {
-  setupUi(this);
+  ui = new Ui::kMyMoneyReportConfigTab2Decl;
+  ui->setupUi(this);
+}
+
+kMyMoneyReportConfigTab2Decl::~kMyMoneyReportConfigTab2Decl()
+{
+  delete ui;
 }
 
 kMyMoneyReportConfigTab3Decl::kMyMoneyReportConfigTab3Decl(QWidget *parent)
     : QWidget(parent)
 {
-  setupUi(this);
-  buttonGroup1->setExclusive(false);
-  buttonGroup1->setId(m_checkMemo, 0);
-  buttonGroup1->setId(m_checkShares, 1);
-  buttonGroup1->setId(m_checkPrice, 2);
-  buttonGroup1->setId(m_checkReconciled, 3);
-  buttonGroup1->setId(m_checkAccount, 4);
-  buttonGroup1->setId(m_checkNumber, 5);
-  buttonGroup1->setId(m_checkPayee, 6);
-  buttonGroup1->setId(m_checkCategory, 7);
-  buttonGroup1->setId(m_checkAction, 8);
-  buttonGroup1->setId(m_checkBalance, 9);
+  ui = new Ui::kMyMoneyReportConfigTab3Decl;
+  ui->setupUi(this);
+  ui->buttonGroup1->setExclusive(false);
+  ui->buttonGroup1->setId(ui->m_checkMemo, 0);
+  ui->buttonGroup1->setId(ui->m_checkShares, 1);
+  ui->buttonGroup1->setId(ui->m_checkPrice, 2);
+  ui->buttonGroup1->setId(ui->m_checkReconciled, 3);
+  ui->buttonGroup1->setId(ui->m_checkAccount, 4);
+  ui->buttonGroup1->setId(ui->m_checkNumber, 5);
+  ui->buttonGroup1->setId(ui->m_checkPayee, 6);
+  ui->buttonGroup1->setId(ui->m_checkCategory, 7);
+  ui->buttonGroup1->setId(ui->m_checkAction, 8);
+  ui->buttonGroup1->setId(ui->m_checkBalance, 9);
+}
+
+kMyMoneyReportConfigTab3Decl::~kMyMoneyReportConfigTab3Decl()
+{
+  delete ui;
 }
 
 kMyMoneyReportConfigTabChartDecl::kMyMoneyReportConfigTabChartDecl(QWidget *parent)
     : QWidget(parent)
 {
-  setupUi(this);
+  ui = new Ui::kMyMoneyReportConfigTabChartDecl;
+  ui->setupUi(this);
 
-  m_comboType->addItem(i18nc("type of graphic chart", "Line"), MyMoneyReport::eChartLine);
-  m_comboType->addItem(i18nc("type of graphic chart", "Bar"), MyMoneyReport::eChartBar);
-  m_comboType->addItem(i18nc("type of graphic chart", "Stacked Bar"), MyMoneyReport::eChartStackedBar);
-  m_comboType->addItem(i18nc("type of graphic chart", "Pie"), MyMoneyReport::eChartPie);
-  m_comboType->addItem(i18nc("type of graphic chart", "Ring"), MyMoneyReport::eChartRing);
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Line"), MyMoneyReport::eChartLine);
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Bar"), MyMoneyReport::eChartBar);
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Stacked Bar"), MyMoneyReport::eChartStackedBar);
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Pie"), MyMoneyReport::eChartPie);
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Ring"), MyMoneyReport::eChartRing);
 }
+
+kMyMoneyReportConfigTabChartDecl::~kMyMoneyReportConfigTabChartDecl()
+{
+  delete ui;
+}
+

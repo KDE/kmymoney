@@ -20,35 +20,51 @@
 #ifndef KMYMONEYREPORTCONFIGTABIMPL_H
 #define KMYMONEYREPORTCONFIGTABIMPL_H
 
-#include "ui_kmymoneyreportconfigtab1decl.h"
-#include "ui_kmymoneyreportconfigtab2decl.h"
-#include "ui_kmymoneyreportconfigtab3decl.h"
-#include "ui_kmymoneyreportconfigtabchartdecl.h"
+#include <QWidget>
 
+namespace Ui
+{
+class kMyMoneyReportConfigTab1Decl;
+class kMyMoneyReportConfigTab2Decl;
+class kMyMoneyReportConfigTab3Decl;
+class kMyMoneyReportConfigTabChartDecl;
+};
 
-
-class kMyMoneyReportConfigTab1Decl : public QWidget, public Ui::kMyMoneyReportConfigTab1Decl
+class kMyMoneyReportConfigTab1Decl : public QWidget
 {
 public:
   kMyMoneyReportConfigTab1Decl(QWidget *parent);
+  virtual ~kMyMoneyReportConfigTab1Decl();
+private:
+  Ui::kMyMoneyReportConfigTab1Decl* ui;
 };
 
-class kMyMoneyReportConfigTab2Decl : public QWidget, public Ui::kMyMoneyReportConfigTab2Decl
+class kMyMoneyReportConfigTab2Decl : public QWidget
 {
 public:
   kMyMoneyReportConfigTab2Decl(QWidget *parent);
+  virtual ~kMyMoneyReportConfigTab2Decl();
+private:
+  Ui::kMyMoneyReportConfigTab2Decl* ui;
 };
 
-class kMyMoneyReportConfigTab3Decl : public QWidget, public Ui::kMyMoneyReportConfigTab3Decl
+class kMyMoneyReportConfigTab3Decl : public QWidget
 {
 public:
   kMyMoneyReportConfigTab3Decl(QWidget *parent);
+  virtual ~kMyMoneyReportConfigTab3Decl();
+private:
+  Ui::kMyMoneyReportConfigTab3Decl* ui;
 };
 
-class kMyMoneyReportConfigTabChartDecl : public QWidget, public Ui::kMyMoneyReportConfigTabChartDecl
+class kMyMoneyReportConfigTabChartDecl : public QWidget
 {
 public:
   kMyMoneyReportConfigTabChartDecl(QWidget *parent);
+  virtual ~kMyMoneyReportConfigTabChartDecl();
+private:
+  Ui::kMyMoneyReportConfigTabChartDecl* ui;
 };
+
 #endif /* KMYMONEYREPORTCONFIGTABIMPL_H */
 
