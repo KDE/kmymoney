@@ -833,7 +833,7 @@ int InvestProcessing::processActionType(QString& type)
     if ((type).contains(*it, Qt::CaseInsensitive)) {
       m_brokerage = true;//                                     these are non-investment items
       if (m_investDlg->m_redefine->accountName().isEmpty())
-        m_investDlg->m_redefine->setAccountName(accountName(i18n(" inv  Brokerage or Chk. Account name:")));
+        m_investDlg->m_redefine->setAccountName(accountName(i18n("   Brokerage or Chk. Account name:")));
       m_tempBuffer +=  "L[" + m_investDlg->m_redefine->accountName() + ']' + '\n';
 
       if (m_payeeColumn < 0)

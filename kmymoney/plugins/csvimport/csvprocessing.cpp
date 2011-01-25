@@ -480,12 +480,13 @@ void CsvProcessing::csvImportTransaction(MyMoneyStatement& st)
 
 int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
 {
+  int neededFieldsCount = 0;///                       ensure essential fields are present
   QString memo;
   QString txt;
   iBuff = iBuff.remove(m_textDelimiterCharacter);
   memo.clear();//                                     memo & number may not have been used
   m_trData.number.clear();//                          .. so need to clear prior contents
-  for (int i = 0; i <= m_endColumn; i++) {   //        check each column
+  for (int i = 0; i < m_endColumn; i++) {   //        check each column
     if (m_csvDialog->columnType(i) == "number") {
       txt = m_columnList[i];
       m_trData.number = txt;
@@ -493,6 +494,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
     }
 
     else if (m_csvDialog->columnType(i) == "date") {
+      neededFieldsCount +=1;
       txt = m_columnList[i];
       txt = txt.remove(m_textDelimiterCharacter);//   "16/09/2009
       QDate dat = m_csvDialog->m_convertDate->convertDate(txt);// Date column
@@ -511,6 +513,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
     }
 
     else if (m_csvDialog->columnType(i) == "payee") {
+      neededFieldsCount +=1;
       txt = m_columnList[i];
       txt.remove('~');//                              replace NL which was substituted
       txt = txt.remove('\'');
@@ -519,6 +522,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
     }
 
     else if (m_csvDialog->columnType(i) == "amount") { // Is this Amount column
+      neededFieldsCount +=1;
       if (m_flagCol == -1) { //                        it's a new file
         switch (m_debitFlag) { //                     Flag if amount is debit or credit
           case -1://                                  Ignore flag
@@ -554,7 +558,8 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
       m_qifBuffer = m_qifBuffer + 'T' + txt + '\n';
     }
 
-    else if ((m_csvDialog->columnType(i) == "debit") || (m_csvDialog->columnType(i) == "credit")) {              //  Credit or debit?
+    else if ((m_csvDialog->columnType(i) == "debit") || (m_csvDialog->columnType(i) == "credit")) {//  Credit or debit?
+      neededFieldsCount +=1;
       txt = m_columnList[i];
       if (!txt.isEmpty()) {
         if (m_csvDialog->debitColumn() == i)
@@ -577,6 +582,13 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
 
   m_trData.memo = memo;
   m_qifBuffer = m_qifBuffer + 'M' + memo + '\n' + "^\n";
+  if (neededFieldsCount > 2) {///
+    return KMessageBox::Ok;///
+  } else {///
+    KMessageBox::sorry(0, i18n("<center>The columns selected are invalid.\n</center>"
+                                   "There must be an amount or debit and credit fields, plus date and payee and fields."), i18n("CSV import"));
+    return KMessageBox::Cancel;///
+  }
   return KMessageBox::Ok;
 }
 

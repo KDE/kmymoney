@@ -176,10 +176,11 @@ int RedefineDlg::checkValid(const QString& type, QString info)
     m_widget->label_info->setText("OK");
     if ((m_quantity.isPositive()) && (m_price.isPositive()) && (!m_amount.isZero())) {
       m_okTypeList << "reinvdiv" << "buy" << "sell";
-      if (m_accountName.isEmpty())
+      if ((m_accountName.isEmpty()) && (type != "reinvdiv")) {
         m_accountName =  inputParameter(i18n("   Brokerage or Chk. Account name:"));
-      if (m_accountName.isEmpty())
-        return KMessageBox::Cancel;
+        if (m_accountName.isEmpty())
+          return KMessageBox::Cancel;
+      }
       m_newType = type;
       this->enableButtonOk(true);
       return KMessageBox::Ok;
