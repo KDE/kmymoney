@@ -586,7 +586,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
     return KMessageBox::Ok;///
   } else {///
     KMessageBox::sorry(0, i18n("<center>The columns selected are invalid.\n</center>"
-                                   "There must be an amount or debit and credit fields, plus date and payee and fields."), i18n("CSV import"));
+                                   "There must be an amount or debit and credit fields, plus date and payee fields."), i18n("CSV import"));
     return KMessageBox::Cancel;///
   }
   return KMessageBox::Ok;
