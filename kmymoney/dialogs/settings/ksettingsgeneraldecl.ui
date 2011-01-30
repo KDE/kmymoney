@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>400</height>
+    <height>499</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -141,6 +141,54 @@
              <string>Autosave when file is modified upon close</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QSpinBox" name="kcfg_AutoBackupCopies">
+              <property name="toolTip">
+               <string>Setup number of backups to keep (local file only)</string>
+              </property>
+              <property name="whatsThis">
+               <string>Whenever the current data is saved into a local file, KMyMoney keeps the selected number of previous states of the file.
+
+Set it to 0 to turn the feature off.</string>
+              </property>
+              <property name="frame">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="maximum">
+               <number>20</number>
+              </property>
+              <property name="singleStep">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Number of backups to keep (0=off)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -532,11 +580,6 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>kMyMoneyDateInput</class>
-   <extends>QFrame</extends>
-   <header>kmymoneydateinput.h</header>
-  </customwidget>
-  <customwidget>
    <class>KIntSpinBox</class>
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
@@ -561,6 +604,12 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
    <class>KTabWidget</class>
    <extends>QTabWidget</extends>
    <header>ktabwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>kMyMoneyDateInput</class>
+   <extends>QFrame</extends>
+   <header>kmymoneydateinput.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
