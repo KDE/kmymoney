@@ -1666,7 +1666,7 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
   switch (splitAccount.accountGroup()) {
     case MyMoneyAccount::Asset:
       if (splitAccount.accountType() == MyMoneyAccount::Stock) {
-        split.value() == MyMoneyMoney() ?
+        split.value().isZero() ?
         split.setAction(MyMoneySplit::ActionAddShares) :      // free shares?
         split.setAction(MyMoneySplit::ActionBuyShares);
         m_potentialTransfer = false; // ?
