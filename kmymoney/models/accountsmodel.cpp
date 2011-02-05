@@ -185,11 +185,15 @@ public:
     */
   MyMoneyMoney balance(const MyMoneyAccount &account) {
     MyMoneyMoney balance;
-    // account.balance() is not compatable with stock accounts
-    if (account.isInvest())
-      balance = m_file->balance(account.id());
-    else
-      balance = account.balance();
+    // a closed account has a zero balance by definition
+    if (!account.isClosed()) {
+      // account.balance() is not compatable with stock accounts
+      if (account.isInvest())
+        balance = m_file->balance(account.id());
+      else
+        balance = account.balance();
+    }
+
     // for income and liability accounts, we reverse the sign
     switch (account.accountGroup()) {
       case MyMoneyAccount::Income:
@@ -215,6 +219,9 @@ public:
     * @see balance
     */
   MyMoneyMoney value(const MyMoneyAccount &account, const MyMoneyMoney &balance) {
+    if (account.isClosed())
+      return MyMoneyMoney();
+
     QList<MyMoneyPrice> prices;
     MyMoneySecurity security = m_file->baseCurrency();
     try {

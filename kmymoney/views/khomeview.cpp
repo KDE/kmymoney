@@ -202,6 +202,7 @@ void KHomeView::loadView(void)
 {
   d->m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
+  ::timetrace("Start KHomeView::loadView");
   QList<MyMoneyAccount> list;
   MyMoneyFile::instance()->accountList(list);
   if (list.count() == 0) {
@@ -230,16 +231,19 @@ void KHomeView::loadView(void)
 
     QStringList::ConstIterator it;
 
+    ::timetrace("Done preparation");
     for (it = settings.constBegin(); it != settings.constEnd(); ++it) {
       int option = (*it).toInt();
       if (option > 0) {
         switch (option) {
           case 1:         // payments
             showPayments();
+            ::timetrace("Done KHomeView::showPayments");
             break;
 
           case 2:         // preferred accounts
             showAccounts(Preferred, i18n("Preferred Accounts"));
+            ::timetrace("Done KHomeView::showPreferredAccounts");
             break;
 
           case 3:         // payment accounts
@@ -250,24 +254,31 @@ void KHomeView::loadView(void)
             } else {
               showAccounts(Payment, i18n("Payment Accounts"));
             }
+            ::timetrace("Done KHomeView::showPaymentAccounts");
             break;
           case 4:         // favorite reports
             showFavoriteReports();
+            ::timetrace("Done KHomeView::showFavoriteReports");
             break;
           case 5:         // forecast
             showForecast();
+            ::timetrace("Done KHomeView::showForecast");
             break;
           case 6:         // net worth graph over all accounts
             showNetWorthGraph();
+            ::timetrace("Done KHomeView::showNetWorthGraph");
             break;
           case 8:         // assets and liabilities
             showAssetsLiabilities();
+            ::timetrace("Done KHomeView::showAssetsLiabilities");
             break;
           case 9:         // budget
             showBudget();
+            ::timetrace("Done KHomeView::showBudget");
             break;
           case 10:         // cash flow summary
             showCashFlowSummary();
+            ::timetrace("Done KHomeView::showCashFlowSummary");
             break;
 
 
@@ -286,6 +297,7 @@ void KHomeView::loadView(void)
     d->m_part->write(d->m_html);
     d->m_part->end();
   }
+  ::timetrace("Done KHomeView::loadView");
 }
 
 void KHomeView::showNetWorthGraph(void)
@@ -835,24 +847,26 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoney value;
-  value = file->balance(acc.id());
+  value = file->balance(acc.id(), QDate::currentDate());
   QList<QString>::const_iterator it_a;
   for (it_a = acc.accountList().begin(); it_a != acc.accountList().end(); ++it_a) {
     MyMoneyAccount stock = file->account(*it_a);
-    try {
-      MyMoneyMoney val;
-      MyMoneyMoney balance = file->balance(stock.id());
-      MyMoneySecurity security = file->security(stock.currencyId());
-      MyMoneyPrice price = file->price(stock.currencyId(), security.tradingCurrency());
-      val = (balance * price.rate(security.tradingCurrency())).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()));
-      // adjust value of security to the currency of the account
-      MyMoneySecurity accountCurrency = file->currency(acc.currencyId());
-      val = val * file->price(security.tradingCurrency(), accountCurrency.id()).rate(accountCurrency.id());
-      val = val.convert(acc.fraction());
-      value += val;
-    } catch (MyMoneyException* e) {
-      qWarning("%s", qPrintable(QString("cannot convert stock balance of %1 to base currency: %2").arg(stock.name(), e->what())));
-      delete e;
+    if (!stock.isClosed()) {
+      try {
+        MyMoneyMoney val;
+        MyMoneyMoney balance = file->balance(stock.id(), QDate::currentDate());
+        MyMoneySecurity security = file->security(stock.currencyId());
+        MyMoneyPrice price = file->price(stock.currencyId(), security.tradingCurrency());
+        val = (balance * price.rate(security.tradingCurrency())).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()));
+        // adjust value of security to the currency of the account
+        MyMoneySecurity accountCurrency = file->currency(acc.currencyId());
+        val = val * file->price(security.tradingCurrency(), accountCurrency.id()).rate(accountCurrency.id());
+        val = val.convert(acc.fraction());
+        value += val;
+      } catch (MyMoneyException* e) {
+        qWarning("%s", qPrintable(QString("cannot convert stock balance of %1 to base currency: %2").arg(stock.name(), e->what())));
+        delete e;
+      }
     }
   }
   return value;
@@ -1137,7 +1151,7 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&, co
 void KHomeView::showAssetsLiabilities(void)
 {
   QList<MyMoneyAccount> accounts;
-  QList<MyMoneyAccount>::Iterator it;
+  QList<MyMoneyAccount>::ConstIterator it;
   QMap<QString, MyMoneyAccount> nameAssetsIdx;
   QMap<QString, MyMoneyAccount> nameLiabilitiesIdx;
   MyMoneyMoney netAssets;
@@ -1148,10 +1162,10 @@ void KHomeView::showAssetsLiabilities(void)
   int prec = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
   int i = 0;
 
-
   // get list of all accounts
   file->accountList(accounts);
-  for (it = accounts.begin(); it != accounts.end();) {
+
+  for (it = accounts.constBegin(); it != accounts.constEnd();) {
     if (!(*it).isClosed()) {
       switch ((*it).accountType()) {
           // group all assets into one list but make sure that investment accounts always show up
@@ -1222,6 +1236,7 @@ void KHomeView::showAssetsLiabilities(void)
         } else {
           value = MyMoneyFile::instance()->balance((*asset_it).id(), QDate::currentDate());
         }
+
         //calculate balance for foreign currency accounts
         if ((*asset_it).currencyId() != file->baseCurrency().id()) {
           ReportAccount repAcc = ReportAccount((*asset_it).id());
@@ -1266,6 +1281,7 @@ void KHomeView::showAssetsLiabilities(void)
       }
       d->m_html += "</tr>";
     }
+
     //calculate net worth
     MyMoneyMoney netWorth = netAssets + netLiabilities;
 
@@ -1615,7 +1631,7 @@ void KHomeView::showCashFlowSummary()
           if (QDate::currentDate() >= nextDate)
             schedDate = QDate::currentDate().addDays(1);
 
-          balanceMap[acc.id()] += file->balance(acc.id());
+          balanceMap[acc.id()] += file->balance(acc.id(), QDate::currentDate());
         }
         KMyMoneyUtils::calculateAutoLoan(*sched_it, transaction, balanceMap);
       }
