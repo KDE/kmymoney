@@ -27,12 +27,6 @@
 #define CATCH } catch (MyMoneyException *e) {
 #define PASS } catch (MyMoneyException *e) { throw; }
 
-bool MyMoneyBalanceCacheItem::operator ==(const MyMoneyBalanceCacheItem & right) const
-{
-  return ((balance == right.balance)
-          && (valid == right.valid));
-}
-
 MyMoneySeqAccessMgr::MyMoneySeqAccessMgr()
 {
   m_nextAccountID = 0;
@@ -82,15 +76,6 @@ MyMoneySeqAccessMgr::MyMoneySeqAccessMgr()
 
   // load account list with initial accounts
   m_accountList = map;
-
-  MyMoneyBalanceCacheItem balance;
-
-  m_balanceCache.clear();
-  m_balanceCache[STD_ACC_LIABILITY] = balance;
-  m_balanceCache[STD_ACC_ASSET] = balance;
-  m_balanceCache[STD_ACC_EXPENSE] = balance;
-  m_balanceCache[STD_ACC_INCOME] = balance;
-  m_balanceCache[STD_ACC_EQUITY] = balance;
 
   // initialize for file fixes (see kmymoneyview.cpp)
   m_currentFixVersion = 2;
@@ -279,8 +264,6 @@ void MyMoneySeqAccessMgr::addAccount(MyMoneyAccount& parent, MyMoneyAccount& acc
   m_accountList.modify(acc.id(), acc);
   account = acc;
 
-  MyMoneyBalanceCacheItem balance;
-  m_balanceCache[account.id()] = balance;
 }
 
 void MyMoneySeqAccessMgr::addInstitution(MyMoneyInstitution& institution)
@@ -441,7 +424,6 @@ void MyMoneySeqAccessMgr::addTransaction(MyMoneyTransaction& transaction, const 
     adjustBalance(acc, *it_s);
     if (!skipAccountUpdate) {
       acc.touch();
-      invalidateBalanceCache(acc.id());
     }
     m_accountList.modify(acc.id(), acc);
   }
@@ -453,7 +435,6 @@ void MyMoneySeqAccessMgr::adjustBalance(MyMoneyAccount& acc, const MyMoneySplit&
   // amount of the split since we don't know about stock splits.
   // so in the case of those stocks, we simply recalculate the balance from scratch
   if (acc.isInvest()) {
-    invalidateBalanceCache(acc.id());
     acc.setBalance(balance(acc.id()));
   } else {
     acc.adjustBalance(split, reverse);
@@ -517,9 +498,6 @@ void MyMoneySeqAccessMgr::modifyAccount(const MyMoneyAccount& account, const boo
       }
       // update information in account list
       m_accountList.modify(account.id(), account);
-
-      // invalidate cached balance
-      invalidateBalanceCache(account.id());
 
     } else
       throw new MYMONEYEXCEPTION("Invalid information for update");
@@ -585,7 +563,6 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
     MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
     adjustBalance(acc, *it_s, true);
     acc.touch();
-    invalidateBalanceCache(acc.id());
     m_accountList.modify(acc.id(), acc);
   }
 
@@ -602,7 +579,6 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
     MyMoneyAccount acc = m_accountList[(*it_s).accountId()];
     adjustBalance(acc, *it_s);
     acc.touch();
-    invalidateBalanceCache(acc.id());
     m_accountList.modify(acc.id(), acc);
   }
 }
@@ -681,7 +657,6 @@ void MyMoneySeqAccessMgr::removeTransaction(const MyMoneyTransaction& transactio
     adjustBalance(acc, *it_s, true);
     acc.touch();
     m_accountList.modify(acc.id(), acc);
-    invalidateBalanceCache(acc.id());
   }
 
   // FIXME: check if any split is frozen and throw exception
@@ -761,10 +736,6 @@ void MyMoneySeqAccessMgr::removeAccount(const MyMoneyAccount& account)
 
     // remove account from the global account pool
     m_accountList.remove(account.id());
-
-    // remove from balance list
-    m_balanceCache.remove(account.id());
-    invalidateBalanceCache(parent.id());
   }
 }
 
@@ -897,54 +868,31 @@ const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& 
     }
     return MyMoneyMoney();
   }
-  if (m_balanceCache[id].valid == false || date != m_balanceCacheDate || acc.isInvest()) {
-    QMap<QString, MyMoneyMoney> balances;
-    QMap<QString, MyMoneyMoney>::ConstIterator it_b;
-    if (date != m_balanceCacheDate) {
-      m_balanceCache.clear();
-      m_balanceCacheDate = date;
-    }
 
-    QList<MyMoneyTransaction> list;
-    QList<MyMoneyTransaction>::ConstIterator it_t;
-    QList<MyMoneySplit>::ConstIterator it_s;
+  QMap<QString, MyMoneyMoney> balances;
+  QMap<QString, MyMoneyMoney>::ConstIterator it_b;
 
-    MyMoneyTransactionFilter filter;
-    filter.setDateFilter(QDate(), date);
-    filter.setReportAllSplits(false);
-    transactionList(list, filter);
+  QList<MyMoneyTransaction> list;
+  QList<MyMoneyTransaction>::ConstIterator it_t;
+  QList<MyMoneySplit>::ConstIterator it_s;
 
-    for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
-      for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
-        const QString& aid = (*it_s).accountId();
-        if ((*it_s).action() == MyMoneySplit::ActionSplitShares) {
-          balances[aid] = balances[aid] * (*it_s).shares();
-        } else {
-          balances[aid] += (*it_s).shares();
-        }
-      }
-    }
+  MyMoneyTransactionFilter filter;
+  filter.setDateFilter(QDate(), date);
+  filter.setReportAllSplits(false);
+  transactionList(list, filter);
 
-    // fill the found balances into the cache
-    for (it_b = balances.constBegin(); it_b != balances.constEnd(); ++it_b) {
-      MyMoneyBalanceCacheItem balance(*it_b);
-      m_balanceCache[it_b.key()] = balance;
-    }
-
-    // fill all accounts w/o transactions to zero
-    QMap<QString, MyMoneyAccount>::ConstIterator it_a;
-    for (it_a = m_accountList.begin(); it_a != m_accountList.end(); ++it_a) {
-      if (m_balanceCache[(*it_a).id()].valid == false) {
-        MyMoneyBalanceCacheItem balance(MyMoneyMoney(0, 1));
-        m_balanceCache[(*it_a).id()] = balance;
+  for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
+    for (it_s = (*it_t).splits().begin(); it_s != (*it_t).splits().end(); ++it_s) {
+      const QString& aid = (*it_s).accountId();
+      if ((*it_s).action() == MyMoneySplit::ActionSplitShares) {
+        balances[aid] = balances[aid] * (*it_s).shares();
+      } else {
+        balances[aid] += (*it_s).shares();
       }
     }
   }
 
-  if (m_balanceCache[id].valid == true)
-    result = m_balanceCache[id].balance;
-  else
-    qDebug("Cache mishit should never happen at this point");
+  result = balances[id];
 
   return result;
 }
@@ -963,20 +911,6 @@ const MyMoneyMoney MyMoneySeqAccessMgr::totalBalance(const QString& id, const QD
   }
 
   return result;
-}
-
-void MyMoneySeqAccessMgr::invalidateBalanceCache(const QString& id)
-{
-  if (!id.isEmpty()) {
-    try {
-      m_balanceCache[id].valid = false;
-      if (!isStandardAccount(id)) {
-        invalidateBalanceCache(account(id).parentAccountId());
-      }
-    } catch (MyMoneyException *e) {
-      delete e;
-    }
-  }
 }
 
 void MyMoneySeqAccessMgr::loadAccounts(const QMap<QString, MyMoneyAccount>& map)
@@ -1724,11 +1658,6 @@ const MyMoneyPrice MyMoneySeqAccessMgr::price(const QString& fromId, const QStri
     }
   }
   return rc;
-}
-
-void MyMoneySeqAccessMgr::clearCache(void)
-{
-  m_balanceCache.clear();
 }
 
 void MyMoneySeqAccessMgr::rebuildAccountBalances(void)

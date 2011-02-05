@@ -1,0 +1,167 @@
+/***************************************************************************
+                         mymoneybalancecachetest  -  description
+                            -------------------
+   begin                : Tue Sep 21 2010
+   copyright            : (C) 2010 by Fernando Vilas
+   email                : kmymoney-devel@kde.org
+***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
+#include <QtCore/QDebug>
+
+#include <QtTest/QtTest>
+
+#include "autotest.h"
+#include "mymoneybalancecache.h"
+#include "mymoneybalancecachetest.h"
+
+QTEST_MAIN(MyMoneyBalanceCacheTest)
+
+void MyMoneyBalanceCacheTest::init()
+{
+  m = new MyMoneyBalanceCache();
+}
+
+void MyMoneyBalanceCacheTest::cleanup()
+{
+  delete m;
+}
+
+void MyMoneyBalanceCacheTest::testCacheItem()
+{
+  MyMoneyBalanceCacheItem item(MyMoneyMoney(10, 100), QDate(2010, 9, 18));
+  MyMoneyBalanceCacheItem invalid(MyMoneyMoney::minValue, QDate());
+  //MyMoneyBalanceCacheItem noarg;
+
+
+  QVERIFY(item.balance() == MyMoneyMoney(10, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 18));
+  QVERIFY(item.isValid());
+
+  QVERIFY(! invalid.isValid());
+
+  //QVERIFY(! noarg.isValid());
+
+}
+
+void MyMoneyBalanceCacheTest::testEmpty()
+{
+  QVERIFY(m->isEmpty());
+  testInsert();
+  QVERIFY(! m->isEmpty());
+}
+
+void MyMoneyBalanceCacheTest::testInsert()
+{
+  m->insert("A000001", QDate(2010, 9, 16), MyMoneyMoney(10, 100));
+
+  // The next 2 lines have the same date and account.
+  // This is intentional to see that the balance for that
+  // account and date gets overwritten.
+  m->insert("A000001", QDate(2010, 9, 18), MyMoneyMoney(15, 100));
+  m->insert("A000001", QDate(2010, 9, 18), MyMoneyMoney(20, 100));
+  m->insert("A000002", QDate(2010, 9, 17), MyMoneyMoney(30, 100));
+  m->insert("A000002", QDate(2010, 9, 19), MyMoneyMoney(40, 100));
+}
+
+void MyMoneyBalanceCacheTest::testClear()
+{
+  QVERIFY(m->size() == 0);
+  testInsert();
+  QVERIFY(m->size() == 4);
+
+  // Delete an item that is not in the cache. The cache should
+  // be unaffected.
+  m->clear("A000003", QDate(2010, 9, 17));
+  QVERIFY(m->size() == 4);
+
+  // Now delete a value before the last one in the account.
+  // All values after it should also be gone.
+  m->clear("A000001", QDate(2010, 9, 17));
+  QVERIFY(m->size() == 3);
+
+  // Verify that the items not deleted still exist
+  m->clear("A000001");
+  QVERIFY(m->size() == 2);
+  m->clear();
+  QVERIFY(m->size() == 0);
+
+  // Verify that searching for something not in the list is safe
+  try {
+    m->clear("A000001");
+  } catch (MyMoneyException *e) {
+    QFAIL("Unexpected exception");
+    delete e;
+  }
+
+}
+
+void MyMoneyBalanceCacheTest::testSize()
+{
+  QVERIFY(m->size() == 0);
+  testInsert();
+  QVERIFY(m->size() == 4);
+}
+
+void MyMoneyBalanceCacheTest::testRetrieve()
+{
+  testInsert();
+
+  MyMoneyBalanceCacheItem item = m->balance("A000003", QDate(2010, 9, 17));
+  QVERIFY(! item.isValid());
+
+  item = m->balance("A000001", QDate(2010, 9, 16));
+  QVERIFY(item.isValid());
+  QVERIFY(item.balance() == MyMoneyMoney(10, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 16));
+
+  item = m->balance("A000001", QDate(2010, 9, 17));
+  QVERIFY(! item.isValid());
+
+  item = m->balance("A000001", QDate(2010, 9, 18));
+  QVERIFY(item.isValid());
+  QVERIFY(item.balance() == MyMoneyMoney(20, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 18));
+
+  // Test bad acct
+  item = m->mostRecentBalance("A000003", QDate(2010, 9, 17));
+  QVERIFY(! item.isValid());
+
+  // Test date too old
+  item = m->mostRecentBalance("A000001", QDate(2010, 9, 15));
+  QVERIFY(!item.isValid());
+
+  // Test date found
+  item = m->mostRecentBalance("A000001", QDate(2010, 9, 16));
+  QVERIFY(item.isValid());
+  QVERIFY(item.balance() == MyMoneyMoney(10, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 16));
+
+  // Test date in between
+  item = m->mostRecentBalance("A000001", QDate(2010, 9, 17));
+  QVERIFY(item.isValid());
+  QVERIFY(item.balance() == MyMoneyMoney(10, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 16));
+
+  // Test date found
+  item = m->mostRecentBalance("A000001", QDate(2010, 9, 18));
+  QVERIFY(item.isValid());
+  QVERIFY(item.balance() == MyMoneyMoney(20, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 18));
+
+  // Test date later than all entries
+  item = m->mostRecentBalance("A000001", QDate(2010, 9, 19));
+  QVERIFY(item.isValid());
+  QVERIFY(item.balance() == MyMoneyMoney(20, 100));
+  QVERIFY(item.date() == QDate(2010, 9, 18));
+}
+
+#include "mymoneybalancecachetest.moc"

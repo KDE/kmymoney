@@ -17,12 +17,15 @@
 
 #include "mymoneyfile.h"
 
+#include <utility>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QString>
 #include <QDateTime>
 #include <QList>
+#include <QtGlobal>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,6 +37,7 @@
 // Project Includes
 #include "storage/mymoneyseqaccessmgr.h"
 #include "mymoneyreport.h"
+#include "mymoneybalancecache.h"
 #include "mymoneybudget.h"
 #include "mymoneyprice.h"
 #include "mymoneyobjectcontainer.h"
@@ -51,6 +55,8 @@ const QString MyMoneyFile::AccountSeperator = QChar(':');
 // #include <iostream>
 MyMoneyFile* MyMoneyFile::_instance = 0;
 
+typedef QList<std::pair<QString, QDate> > BalanceNotifyList;
+
 class MyMoneyFile::Private
 {
 public:
@@ -61,6 +67,7 @@ public:
   MyMoneySecurity        m_baseCurrency;
   MyMoneyObjectContainer m_cache;
   MyMoneyPriceList       m_priceCache;
+  MyMoneyBalanceCache    m_balanceCache;
 
   /**
     * This member keeps a list of ids to notify after an
@@ -71,6 +78,15 @@ public:
     * true  - reload the object immediately
     */
   QMap<QString, bool>   m_notificationList;
+
+  /**
+    * This member keeps a list of account ids to notify
+    * after an operation is completed. The balance cache
+    * is cleared for that account and all dates on or after
+    * the one supplied. If the date is invalid, the entire
+    * balance cache is cleared for that account.
+    */
+  BalanceNotifyList m_balanceNotifyList;
 
 };
 
@@ -110,6 +126,7 @@ void MyMoneyFile::attachStorage(IMyMoneyStorage* const storage)
   d->m_baseCurrency = MyMoneySecurity();
 
   // and the whole cache
+  d->m_balanceCache.clear();
   d->m_cache.clear(storage);
   d->m_priceCache.clear();
   preloadCache();
@@ -120,6 +137,7 @@ void MyMoneyFile::attachStorage(IMyMoneyStorage* const storage)
 
 void MyMoneyFile::detachStorage(IMyMoneyStorage* const /* storage */)
 {
+  d->m_balanceCache.clear();
   d->m_cache.clear();
   d->m_priceCache.clear();
   m_storage = 0;
@@ -252,7 +270,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   // scan the splits again to update notification list
   // and mark all accounts that are referenced
   for (it_s = tr.splits().constBegin(); it_s != tr.splits().constEnd(); ++it_s) {
-    addNotification((*it_s).accountId());
+    addNotification((*it_s).accountId(), tr.postDate());
     addNotification((*it_s).payeeId());
   }
 
@@ -261,7 +279,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
 
   // and mark all accounts that are referenced
   for (it_s = t->splits().constBegin(); it_s != t->splits().constEnd(); ++it_s) {
-    addNotification((*it_s).accountId());
+    addNotification((*it_s).accountId(), t->postDate());
     addNotification((*it_s).payeeId());
   }
 }
@@ -315,7 +333,7 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
 
   m_storage->modifyAccount(account);
 
-  addNotification(account.id());
+  addNotification(account.id(), QDate());
 }
 
 void MyMoneyFile::reparentAccount(MyMoneyAccount &account, MyMoneyAccount& parent)
@@ -340,13 +358,13 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &account, MyMoneyAccount& paren
     MyMoneyNotifier notifier(this);
 
     // keep a notification of the current parent
-    addNotification(account.parentAccountId());
+    addNotification(account.parentAccountId(), QDate());
 
     m_storage->reparentAccount(account, parent);
 
     // and also keep one for the account itself and the new parent
-    addNotification(account.id());
-    addNotification(parent.id());
+    addNotification(account.id(), QDate());
+    addNotification(parent.id(), QDate());
 
   } else
     throw new MYMONEYEXCEPTION("Unable to reparent to different account type");
@@ -396,7 +414,7 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
     MyMoneyAccount acc = account((*it_s).accountId());
     if (acc.isClosed())
       throw new MYMONEYEXCEPTION(i18n("Cannot remove transaction that references a closed account."));
-    addNotification((*it_s).accountId());
+    addNotification((*it_s).accountId(), tr.postDate());
     addNotification((*it_s).payeeId());
   }
 
@@ -454,9 +472,9 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
   // collect all sub-ordinate accounts for notification
   QStringList::ConstIterator it;
   for (it = acc.accountList().constBegin(); it != acc.accountList().constEnd(); ++it)
-    addNotification(*it);
+    addNotification(*it, QDate());
   // don't forget the parent and a possible institution
-  addNotification(parent.id());
+  addNotification(parent.id(), QDate());
   addNotification(account.institutionId());
 
   if (!institution.id().isEmpty()) {
@@ -468,6 +486,7 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
   m_storage->removeAccount(acc);
   addNotification(acc.id(), false);
   d->m_cache.clear(acc.id());
+  d->m_balanceCache.clear(acc.id());
 }
 
 void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned int level)
@@ -850,7 +869,7 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
 
   // scan the splits again to update notification list
   for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
-    addNotification((*it_s).accountId());
+    addNotification((*it_s).accountId(), transaction.postDate());
     addNotification((*it_s).payeeId());
   }
 }
@@ -1074,9 +1093,21 @@ unsigned int MyMoneyFile::institutionCount(void) const
 
 const MyMoneyMoney MyMoneyFile::balance(const QString& id, const QDate& date) const
 {
+  if (date.isValid()) {
+    MyMoneyBalanceCacheItem bal = d->m_balanceCache.balance(id, date);
+    if (bal.isValid())
+      return bal.balance();
+  }
+
   checkStorage();
 
-  return m_storage->balance(id, date);
+  MyMoneyMoney returnValue = m_storage->balance(id, date);
+
+  if (date.isValid()) {
+    d->m_balanceCache.insert(id, date, returnValue);
+  }
+
+  return returnValue;
 }
 
 const MyMoneyMoney MyMoneyFile::totalBalance(const QString& id, const QDate& date) const
@@ -1109,6 +1140,15 @@ void MyMoneyFile::notify(void)
     else
       d->m_cache.clear(it.key());
   }
+
+  foreach (const BalanceNotifyList::value_type & i, d->m_balanceNotifyList) {
+    if (i.second.isValid()) {
+      d->m_balanceCache.clear(i.first, i.second);
+    } else {
+      d->m_balanceCache.clear(i.first);
+    }
+  }
+
   clearNotification();
 }
 
@@ -1118,10 +1158,19 @@ void MyMoneyFile::addNotification(const QString& id, bool reload)
     d->m_notificationList[id] = reload;
 }
 
+void MyMoneyFile::addNotification(const QString& id, const QDate& date, bool reload)
+{
+  if (!id.isEmpty()) {
+    d->m_notificationList[id] = reload;
+    d->m_balanceNotifyList.append(std::make_pair(id, date));
+  }
+}
+
 void MyMoneyFile::clearNotification()
 {
   // reset list to be empty
   d->m_notificationList.clear();
+  d->m_balanceNotifyList.clear();
 }
 
 void MyMoneyFile::transactionList(QList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
@@ -2322,8 +2371,8 @@ QString MyMoneyFile::highestCheckNo(const QString& accId) const
 void MyMoneyFile::clearCache(void)
 {
   checkStorage();
-  m_storage->clearCache();
   d->m_cache.clear();
+  d->m_balanceCache.clear();
 }
 
 void MyMoneyFile::preloadCache(void)

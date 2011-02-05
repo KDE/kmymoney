@@ -1149,8 +1149,6 @@ void MyMoneySeqAccessMgrTest::testEquality(const MyMoneySeqAccessMgr *t)
   QVERIFY(m->m_accountList.values() == t->m_accountList.values());
   QVERIFY(m->m_transactionList.keys() == t->m_transactionList.keys());
   QVERIFY(m->m_transactionList.values() == t->m_transactionList.values());
-  QVERIFY(m->m_balanceCache.keys() == t->m_balanceCache.keys());
-  QVERIFY(m->m_balanceCache.values() == t->m_balanceCache.values());
 
 // QVERIFY(m->m_scheduleList.keys() == t->m_scheduleList.keys());
 // QVERIFY(m->m_scheduleList.values() == t->m_scheduleList.values());

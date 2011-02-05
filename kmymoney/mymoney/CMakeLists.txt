@@ -16,6 +16,7 @@ SET(kmm_mymoney_LIB_SRCS
   mymoneyreport.cpp mymoneystatement.cpp mymoneyprice.cpp mymoneybudget.cpp
   mymoneyobjectcontainer.cpp 
   mymoneyforecast.cpp
+  mymoneybalancecache.cpp
   )
 
 
@@ -169,5 +170,13 @@ IF( KDE4_BUILD_TESTS )
   ADD_DEPENDENCIES( mymoneytransactiontest kmm_mymoney )
 
   target_link_libraries( mymoneytransactiontest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
+
+  # MyMoneyBalanceCache
+  set( mymoneybalancecachetest_SRCS mymoneybalancecachetest.cpp mymoneytestutils.cpp )
+
+  kde4_add_unit_test( mymoneybalancecachetest TESTNAME kmymoney-mymoneybalancecachetest ${mymoneybalancecachetest_SRCS} )
+  ADD_DEPENDENCIES( mymoneybalancecachetest kmm_mymoney )
+
+  target_link_libraries( mymoneybalancecachetest kmm_mymoney ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 
 ENDIF( KDE4_BUILD_TESTS )
