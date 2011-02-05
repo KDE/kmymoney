@@ -776,11 +776,11 @@ void MyMoneyFileTest::testAddTransaction()
   MyMoneySplit split2;
 
   split1.setAccountId("A000001");
-  split1.setShares(MyMoneyMoney(-1000));
-  split1.setValue(MyMoneyMoney(-1000));
+  split1.setShares(MyMoneyMoney(-1000, 100));
+  split1.setValue(MyMoneyMoney(-1000, 100));
   split2.setAccountId("A000003");
-  split2.setValue(MyMoneyMoney(1000));
-  split2.setShares(MyMoneyMoney(1000));
+  split2.setValue(MyMoneyMoney(1000, 100));
+  split2.setShares(MyMoneyMoney(1000, 100));
   try {
     t.addSplit(split1);
     t.addSplit(split2);
@@ -818,11 +818,11 @@ void MyMoneyFileTest::testAddTransaction()
   // check the balance of the accounts
   a = m->account("A000001");
   QVERIFY(a.lastModified() == QDate::currentDate());
-  QVERIFY(a.balance() == MyMoneyMoney(-1000));
+  QVERIFY(a.balance() == MyMoneyMoney(-1000, 100));
 
   MyMoneyAccount b = m->account("A000003");
   QVERIFY(b.lastModified() == QDate::currentDate());
-  QVERIFY(b.balance() == MyMoneyMoney(1000));
+  QVERIFY(b.balance() == MyMoneyMoney(1000, 100));
 
   storage->m_dirty = false;
 
@@ -1053,26 +1053,26 @@ void MyMoneyFileTest::testBalanceTotal()
   MyMoneyFileTransaction ft;
   try {
     split1.setAccountId("A000002");
-    split1.setShares(MyMoneyMoney(-1000));
-    split1.setValue(MyMoneyMoney(-1000));
+    split1.setShares(MyMoneyMoney(-1000, 100));
+    split1.setValue(MyMoneyMoney(-1000, 100));
     split2.setAccountId("A000004");
-    split2.setValue(MyMoneyMoney(1000));
-    split2.setShares(MyMoneyMoney(1000));
+    split2.setValue(MyMoneyMoney(1000, 100));
+    split2.setShares(MyMoneyMoney(1000, 100));
     t.addSplit(split1);
     t.addSplit(split2);
     m->addTransaction(t);
     ft.commit();
     ft.restart();
     QVERIFY(t.id() == "T000000000000000002");
-    QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(-1000));
-    QVERIFY(m->totalBalance("A000002") == MyMoneyMoney(-1000));
+    QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(-1000, 100));
+    QVERIFY(m->totalBalance("A000002") == MyMoneyMoney(-1000, 100));
 
     MyMoneyAccount p = m->account("A000001");
     MyMoneyAccount q = m->account("A000002");
     m->reparentAccount(p, q);
     ft.commit();
-    QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(-1000));
-    QVERIFY(m->totalBalance("A000002") == MyMoneyMoney(-2000));
+    QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(-1000, 100));
+    QVERIFY(m->totalBalance("A000002") == MyMoneyMoney(-2000, 100));
   } catch (MyMoneyException *e) {
     delete e;
     QFAIL("Unexpected exception!");
@@ -1205,11 +1205,11 @@ void MyMoneyFileTest::testAddTransactionStd()
   MyMoneySplit split2;
 
   split1.setAccountId("A000001");
-  split1.setShares(MyMoneyMoney(-1000));
-  split1.setValue(MyMoneyMoney(-1000));
+  split1.setShares(MyMoneyMoney(-1000, 100));
+  split1.setValue(MyMoneyMoney(-1000, 100));
   split2.setAccountId(STD_ACC_EXPENSE);
-  split2.setValue(MyMoneyMoney(1000));
-  split2.setShares(MyMoneyMoney(1000));
+  split2.setValue(MyMoneyMoney(1000, 100));
+  split2.setShares(MyMoneyMoney(1000, 100));
   try {
     t.addSplit(split1);
     t.addSplit(split2);

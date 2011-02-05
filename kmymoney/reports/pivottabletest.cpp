@@ -70,14 +70,14 @@ void PivotTableTest::init()
   acIncome = (MyMoneyFile::instance()->income().id());
   acChecking = makeAccount(QString("Checking Account"), MyMoneyAccount::Checkings, moCheckingOpen, QDate(2004, 5, 15), acAsset);
   acCredit = makeAccount(QString("Credit Card"), MyMoneyAccount::CreditCard, moCreditOpen, QDate(2004, 7, 15), acLiability);
-  acSolo = makeAccount(QString("Solo"), MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 1, 11), acExpense);
-  acParent = makeAccount(QString("Parent"), MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 1, 11), acExpense);
-  acChild = makeAccount(QString("Child"), MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 2, 11), acParent);
-  acForeign = makeAccount(QString("Foreign"), MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 1, 11), acExpense);
+  acSolo = makeAccount(QString("Solo"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acParent = makeAccount(QString("Parent"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acChild = makeAccount(QString("Child"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
+  acForeign = makeAccount(QString("Foreign"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
 
-  acSecondChild = makeAccount(QString("Second Child"), MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 2, 11), acParent);
-  acGrandChild1 = makeAccount(QString("Grand Child 1"), MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 2, 11), acChild);
-  acGrandChild2 = makeAccount(QString("Grand Child 2"), MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 2, 11), acChild);
+  acSecondChild = makeAccount(QString("Second Child"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
+  acGrandChild1 = makeAccount(QString("Grand Child 1"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild);
+  acGrandChild2 = makeAccount(QString("Grand Child 2"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acChild);
 
   MyMoneyInstitution i("Bank of the World", "", "", "", "", "", "");
   file->addInstitution(i);
@@ -386,8 +386,8 @@ void PivotTableTest::testMultipleCurrencies()
 
   QString acCanChecking = makeAccount(QString("Canadian Checking"), MyMoneyAccount::Checkings, moCanOpening, QDate(2003, 11, 15), acAsset, "CAD");
   QString acJpyChecking = makeAccount(QString("Japanese Checking"), MyMoneyAccount::Checkings, moJpyOpening, QDate(2003, 11, 15), acAsset, "JPY");
-  QString acCanCash = makeAccount(QString("Canadian"), MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 2, 11), acForeign, "CAD");
-  QString acJpyCash = makeAccount(QString("Japanese"), MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 2, 11), acForeign, "JPY");
+  QString acCanCash = makeAccount(QString("Canadian"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acForeign, "CAD");
+  QString acJpyCash = makeAccount(QString("Japanese"), MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acForeign, "JPY");
 
   makePrice("CAD", QDate(2004, 1, 1), MyMoneyMoney(moCanPrice));
   makePrice("JPY", QDate(2004, 1, 1), MyMoneyMoney(moJpyPrice));

@@ -53,9 +53,9 @@ QTEST_MAIN(MyMoneyMoneyTest)
 
 void MyMoneyMoneyTest::init()
 {
-  m_0 = new MyMoneyMoney(12);
-  m_1 = new MyMoneyMoney(-10);
-  m_2 = new MyMoneyMoney(2);
+  m_0 = new MyMoneyMoney(12, 100);
+  m_1 = new MyMoneyMoney(-10, 100);
+  m_2 = new MyMoneyMoney(2, 100);
   m_3 = new MyMoneyMoney(123, 1);
   m_4 = new MyMoneyMoney(1234, 1000);
   m_5 = new MyMoneyMoney(195883, 100000);
@@ -222,12 +222,12 @@ void MyMoneyMoneyTest::testEquality()
   QVERIFY(*m_1 == *m_1);
   QVERIFY(!(*m_1 == *m_0));
 
-  MyMoneyMoney m1(LLCONST(999666555444));
-  MyMoneyMoney m2(LLCONST(999666555444));
+  MyMoneyMoney m1(LLCONST(999666555444), 100);
+  MyMoneyMoney m2(LLCONST(999666555444), 100);
   QVERIFY(m1 == m2);
 
-  MyMoneyMoney m3(LLCONST(-999666555444));
-  MyMoneyMoney m4(LLCONST(-999666555444));
+  MyMoneyMoney m3(LLCONST(-999666555444), 100);
+  MyMoneyMoney m4(LLCONST(-999666555444), 100);
   QVERIFY(m3 == m4);
 
   MyMoneyMoney m5(1230, 100);
@@ -246,12 +246,12 @@ void MyMoneyMoneyTest::testInequality()
   QVERIFY(*m_1 != *m_0);
   QVERIFY(!(*m_1 != *m_1));
 
-  MyMoneyMoney m1(LLCONST(999666555444));
-  MyMoneyMoney m2(LLCONST(-999666555444));
+  MyMoneyMoney m1(LLCONST(999666555444), 100);
+  MyMoneyMoney m2(LLCONST(-999666555444), 100);
   QVERIFY(m1 != m2);
 
-  MyMoneyMoney m3(LLCONST(-999666555444));
-  MyMoneyMoney m4(LLCONST(999666555444));
+  MyMoneyMoney m3(LLCONST(-999666555444), 100);
+  MyMoneyMoney m4(LLCONST(999666555444), 100);
   QVERIFY(m3 != m4);
 
   QVERIFY(m4 != QString("999666555444"));
@@ -265,13 +265,13 @@ void MyMoneyMoneyTest::testAddition()
 {
   QVERIFY(*m_0 + *m_1 == *m_2);
 
-  MyMoneyMoney m1(100);
+  MyMoneyMoney m1(100, 100);
 
   // QVERIFY((m1 + 50) == MyMoneyMoney(51,1));
   // QVERIFY((m1 + 1000000000) == MyMoneyMoney(1000000001,1));
   // QVERIFY((m1 + -50) == MyMoneyMoney(-49,1));
 
-  QVERIFY((m1 += *m_0) == MyMoneyMoney(112));
+  QVERIFY((m1 += *m_0) == MyMoneyMoney(112, 100));
   // QVERIFY((m1 += -12) == MyMoneyMoney(100));
 
   // m1++;
@@ -291,13 +291,13 @@ void MyMoneyMoneyTest::testSubtraction()
 {
   QVERIFY(*m_2 - *m_1 == *m_0);
 
-  MyMoneyMoney m1(100);
+  MyMoneyMoney m1(100, 100);
 
   // QVERIFY((m1-50) == MyMoneyMoney(-49,1));
   // QVERIFY((m1-1000000000) == MyMoneyMoney(-999999999,1));
   // QVERIFY((m1 - -50) == MyMoneyMoney(51,1));
 
-  QVERIFY((m1 -= *m_0) == MyMoneyMoney(88));
+  QVERIFY((m1 -= *m_0) == MyMoneyMoney(88, 100));
   // QVERIFY((m1 -= -12) == MyMoneyMoney(100));
 
   // m1--;
@@ -319,7 +319,7 @@ void MyMoneyMoneyTest::testMultiplication()
 
   QVERIFY((m1 * MyMoneyMoney(50, 1)) == MyMoneyMoney(5000, 1));
   QVERIFY((m1 * MyMoneyMoney(10000000, 1)) == MyMoneyMoney(1000000000, 1));
-  QVERIFY((m1 *(*m_0)) == MyMoneyMoney(1200));
+  QVERIFY((m1 *(*m_0)) == MyMoneyMoney(1200, 100));
 
   MyMoneyMoney m2(QString("-73010.28"));
   m1 = QString("1.95583");
@@ -328,22 +328,22 @@ void MyMoneyMoneyTest::testMultiplication()
 
 void MyMoneyMoneyTest::testDivision()
 {
-  MyMoneyMoney m1(100);
-  QVERIFY((m1 / MyMoneyMoney(50)) == MyMoneyMoney(2, 1));
+  MyMoneyMoney m1(100, 100);
+  QVERIFY((m1 / MyMoneyMoney(50, 100)) == MyMoneyMoney(2, 1));
 
   MyMoneyMoney m2(QString("-142795.69"));
   m1 = QString("1.95583");
   QVERIFY((m2 / m1).convert(100000000) == QString("-73010.27696681"));
 
-  MyMoneyMoney m3 = MyMoneyMoney(0) / MyMoneyMoney(100);
+  MyMoneyMoney m3 = MyMoneyMoney() / MyMoneyMoney(100, 100);
   QVERIFY(m3.m_num == 0);
   QVERIFY(m3.m_denom != 0);
 }
 
 void MyMoneyMoneyTest::testSetDecimalSeparator()
 {
-  MyMoneyMoney m1(100000);
-  MyMoneyMoney m2(200000);
+  MyMoneyMoney m1(100000, 100);
+  MyMoneyMoney m2(200000, 100);
 
   QVERIFY(m1.formatMoney("", 2) == QString("1,000.00"));
   QVERIFY(MyMoneyMoney::decimalSeparator() == '.');
@@ -357,8 +357,8 @@ void MyMoneyMoneyTest::testSetDecimalSeparator()
 
 void MyMoneyMoneyTest::testSetThousandSeparator()
 {
-  MyMoneyMoney m1(100000);
-  MyMoneyMoney m2(200000);
+  MyMoneyMoney m1(100000, 100);
+  MyMoneyMoney m2(200000, 100);
 
   QVERIFY(m1.formatMoney("", 2) == QString("1,000.00"));
   QVERIFY(MyMoneyMoney::thousandSeparator() == ',');
@@ -375,7 +375,7 @@ void MyMoneyMoneyTest::testFormatMoney()
   QVERIFY(m_0->formatMoney("", 2) == QString("0.12"));
   QVERIFY(m_1->formatMoney("", 2) == QString("-0.10"));
 
-  MyMoneyMoney m1(10099);
+  MyMoneyMoney m1(10099, 100);
   QVERIFY(m1.formatMoney("", 2) == QString("100.99"));
 
   m1 = MyMoneyMoney(100, 1);
@@ -415,9 +415,9 @@ void MyMoneyMoneyTest::testFormatMoney()
 
 void MyMoneyMoneyTest::testRelation()
 {
-  MyMoneyMoney m1(100);
-  MyMoneyMoney m2(50);
-  MyMoneyMoney m3(100);
+  MyMoneyMoney m1(100, 100);
+  MyMoneyMoney m2(50, 100);
+  MyMoneyMoney m3(100, 100);
 
   // tests with same denominator
   QVERIFY(m1 > m2);
@@ -447,39 +447,39 @@ void MyMoneyMoneyTest::testRelation()
 
 void MyMoneyMoneyTest::testUnaryMinus()
 {
-  MyMoneyMoney m1(100);
+  MyMoneyMoney m1(100, 100);
   MyMoneyMoney m2;
 
   m2 = -m1;
 
-  QVERIFY(m1 == MyMoneyMoney(100));
-  QVERIFY(m2 == MyMoneyMoney(-100));
+  QVERIFY(m1 == MyMoneyMoney(100, 100));
+  QVERIFY(m2 == MyMoneyMoney(-100, 100));
 }
 
 void MyMoneyMoneyTest::testDoubleConstructor()
 {
   for (int i = -123456; i < 123456; ++i) {
     double d = i;
-    MyMoneyMoney r(i);
+    MyMoneyMoney r(i, 100);
     d /= 100;
-    MyMoneyMoney t(d);
+    MyMoneyMoney t(d, 100);
     QVERIFY(t == r);
   }
 }
 
 void MyMoneyMoneyTest::testAbsoluteFunction()
 {
-  MyMoneyMoney m1(-100);
-  MyMoneyMoney m2(100);
+  MyMoneyMoney m1(-100, 100);
+  MyMoneyMoney m2(100, 100);
 
-  QVERIFY(m2.abs() == MyMoneyMoney(100));
-  QVERIFY(m1.abs() == MyMoneyMoney(100));
+  QVERIFY(m2.abs() == MyMoneyMoney(100, 100));
+  QVERIFY(m1.abs() == MyMoneyMoney(100, 100));
 }
 
 void MyMoneyMoneyTest::testToString()
 {
-  MyMoneyMoney m1(-100);
-  MyMoneyMoney m2(1234);
+  MyMoneyMoney m1(-100, 100);
+  MyMoneyMoney m2(1234, 100);
   MyMoneyMoney m3;
 
   QVERIFY(m1.toString() == QString("-100/100"));

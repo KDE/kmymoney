@@ -382,7 +382,7 @@ int InvestTransactionEditor::editSplits(const QString& categoryWidgetName, const
           d->m_phonyAccount,
           false,
           isIncome,
-          MyMoneyMoney(0),
+          MyMoneyMoney(),
           m_priceInfo,
           m_regForm);
       // connect(dlg, SIGNAL(newCategory(MyMoneyAccount&)), this, SIGNAL(newCategory(MyMoneyAccount&)));

@@ -1219,8 +1219,8 @@ LoanPaymentPage::LoanPaymentPage(Wizard* wizard) :
   d->phonyAccount = MyMoneyAccount(QString("Phony-ID"), MyMoneyAccount());
 
   d->phonySplit.setAccountId(d->phonyAccount.id());
-  d->phonySplit.setValue(MyMoneyMoney(0));
-  d->phonySplit.setShares(MyMoneyMoney(0));
+  d->phonySplit.setValue(MyMoneyMoney());
+  d->phonySplit.setShares(MyMoneyMoney());
 
   d->additionalFeesTransaction.addSplit(d->phonySplit);
 
@@ -1274,7 +1274,7 @@ void LoanPaymentPage::enterPage(void)
 void LoanPaymentPage::slotAdditionalFees(void)
 {
   QMap<QString, MyMoneyMoney> priceInfo;
-  QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(d->additionalFeesTransaction, d->phonySplit, d->phonyAccount, false, !m_wizard->moneyBorrowed(), MyMoneyMoney(0), priceInfo);
+  QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(d->additionalFeesTransaction, d->phonySplit, d->phonyAccount, false, !m_wizard->moneyBorrowed(), MyMoneyMoney(), priceInfo);
 
   // connect(dlg, SIGNAL(newCategory(MyMoneyAccount&)), this, SIGNAL(newCategory(MyMoneyAccount&)));
 
@@ -1283,7 +1283,7 @@ void LoanPaymentPage::slotAdditionalFees(void)
     // sum up the additional fees
     QList<MyMoneySplit>::ConstIterator it;
 
-    d->additionalFees = MyMoneyMoney(0);
+    d->additionalFees = MyMoneyMoney();
     for (it = d->additionalFeesTransaction.splits().constBegin(); it != d->additionalFeesTransaction.splits().constEnd(); ++it) {
       if ((*it).accountId() != d->phonyAccount.id()) {
         d->additionalFees += (*it).shares();

@@ -74,10 +74,10 @@ void ConverterTest::init()
   acIncome = (MyMoneyFile::instance()->income().id());
   acChecking = makeAccount("Checking Account", MyMoneyAccount::Checkings, moConverterCheckingOpen, QDate(2004, 5, 15), acAsset);
   acCredit = makeAccount("Credit Card", MyMoneyAccount::CreditCard, moConverterCreditOpen, QDate(2004, 7, 15), acLiability);
-  acSolo = makeAccount("Solo", MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 1, 11), acExpense);
-  acParent = makeAccount("Parent", MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 1, 11), acExpense);
-  acChild = makeAccount("Child", MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 2, 11), acParent);
-  acForeign = makeAccount("Foreign", MyMoneyAccount::Expense, MyMoneyMoney(0), QDate(2004, 1, 11), acExpense);
+  acSolo = makeAccount("Solo", MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acParent = makeAccount("Parent", MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
+  acChild = makeAccount("Child", MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acParent);
+  acForeign = makeAccount("Foreign", MyMoneyAccount::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
 
   MyMoneyInstitution i("Bank of the World", "", "", "", "", "", "");
   file->addInstitution(i);

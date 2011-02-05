@@ -126,8 +126,8 @@ void MyMoneyTransactionTest::testAddSplits()
   MyMoneySplit split1, split2;
   split1.setAccountId("A000001");
   split2.setAccountId("A000002");
-  split1.setValue(MyMoneyMoney(100));
-  split2.setValue(MyMoneyMoney(200));
+  split1.setValue(MyMoneyMoney(100, 100));
+  split2.setValue(MyMoneyMoney(200, 100));
 
   try {
     QVERIFY(m->accountReferenced("A000001") == false);
@@ -207,7 +207,7 @@ void MyMoneyTransactionTest::testDeleteSplits()
 
   // add a third split
   split.setAccountId("A000003");
-  split.setValue(MyMoneyMoney(300));
+  split.setValue(MyMoneyMoney(300, 100));
   try {
     m->addSplit(split);
   } catch (MyMoneyException *e) {
@@ -311,25 +311,25 @@ void MyMoneyTransactionTest::testSplitSum()
   MyMoneySplit s1, s2;
 
   s1 = m->splits()[0];
-  s1.setValue(MyMoneyMoney(0));
+  s1.setValue(MyMoneyMoney());
   s2 = m->splits()[1];
-  s2.setValue(MyMoneyMoney(0));
+  s2.setValue(MyMoneyMoney());
 
   m->modifySplit(s1);
   m->modifySplit(s2);
   QVERIFY(m->splitSum().isZero());
 
-  s1.setValue(MyMoneyMoney(1234));
+  s1.setValue(MyMoneyMoney(1234, 100));
   m->modifySplit(s1);
-  QVERIFY(m->splitSum() == MyMoneyMoney(1234));
+  QVERIFY(m->splitSum() == MyMoneyMoney(1234, 100));
 
-  s2.setValue(MyMoneyMoney(-1234));
+  s2.setValue(MyMoneyMoney(-1234, 100));
   m->modifySplit(s2);
   QVERIFY(m->splitSum().isZero());
 
-  s1.setValue(MyMoneyMoney(5678));
+  s1.setValue(MyMoneyMoney(5678, 100));
   m->modifySplit(s1);
-  QVERIFY(m->splitSum() == MyMoneyMoney(4444));
+  QVERIFY(m->splitSum() == MyMoneyMoney(4444, 100));
 }
 
 void MyMoneyTransactionTest::testIsLoanPayment()

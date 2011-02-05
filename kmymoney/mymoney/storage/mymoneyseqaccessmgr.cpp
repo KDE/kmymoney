@@ -888,14 +888,14 @@ const MyMoneyTransaction MyMoneySeqAccessMgr::transaction(const QString& account
 
 const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& date) const
 {
-  MyMoneyMoney result(0);
+  MyMoneyMoney result;
   MyMoneyAccount acc = account(id);
   // if (date != QDate()) qDebug ("request balance for %s at %s", id.data(), date.toString(Qt::ISODate).toLatin1());
   if (!date.isValid() && !acc.isInvest()) {
     if (m_accountList.find(id) != m_accountList.end()) {
       return m_accountList[id].balance();
     }
-    return MyMoneyMoney(0);
+    return MyMoneyMoney();
   }
   if (m_balanceCache[id].valid == false || date != m_balanceCacheDate || acc.isInvest()) {
     QMap<QString, MyMoneyMoney> balances;
@@ -1739,7 +1739,7 @@ void MyMoneySeqAccessMgr::rebuildAccountBalances(void)
 
   QMap<QString, MyMoneyAccount>::iterator it_a;
   for (it_a = map.begin(); it_a != map.end(); ++it_a) {
-    (*it_a).setBalance(MyMoneyMoney(0));
+    (*it_a).setBalance(MyMoneyMoney());
   }
 
   // now scan over all transactions and all splits and setup the balances

@@ -510,15 +510,15 @@ void MyMoneySeqAccessMgrTest::testAddTransactions()
   try {
     // I made some money, great
     s.setAccountId("A000006"); // Checkings
-    s.setShares(MyMoneyMoney(100000));
-    s.setValue(MyMoneyMoney(100000));
+    s.setShares(MyMoneyMoney(100000, 100));
+    s.setValue(MyMoneyMoney(100000, 100));
     QVERIFY(s.id().isEmpty());
     t1.addSplit(s);
 
     s.setId(QString()); // enable re-usage of split variable
     s.setAccountId("A000005"); // Salary
-    s.setShares(MyMoneyMoney(-100000));
-    s.setValue(MyMoneyMoney(-100000));
+    s.setShares(MyMoneyMoney(-100000, 100));
+    s.setValue(MyMoneyMoney(-100000, 100));
     QVERIFY(s.id().isEmpty());
     t1.addSplit(s);
 
@@ -544,29 +544,29 @@ void MyMoneySeqAccessMgrTest::testAddTransactions()
     // I spent some money, not so great
     s.setId(QString()); // enable re-usage of split variable
     s.setAccountId("A000004"); // Grosseries
-    s.setShares(MyMoneyMoney(10000));
-    s.setValue(MyMoneyMoney(10000));
+    s.setShares(MyMoneyMoney(10000, 100));
+    s.setValue(MyMoneyMoney(10000, 100));
     QVERIFY(s.id().isEmpty());
     t2.addSplit(s);
 
     s.setId(QString()); // enable re-usage of split variable
     s.setAccountId("A000002"); // 16% sales tax
-    s.setShares(MyMoneyMoney(1200));
-    s.setValue(MyMoneyMoney(1200));
+    s.setShares(MyMoneyMoney(1200, 100));
+    s.setValue(MyMoneyMoney(1200, 100));
     QVERIFY(s.id().isEmpty());
     t2.addSplit(s);
 
     s.setId(QString()); // enable re-usage of split variable
     s.setAccountId("A000003"); // 7% sales tax
-    s.setShares(MyMoneyMoney(400));
-    s.setValue(MyMoneyMoney(400));
+    s.setShares(MyMoneyMoney(400, 100));
+    s.setValue(MyMoneyMoney(400, 100));
     QVERIFY(s.id().isEmpty());
     t2.addSplit(s);
 
     s.setId(QString()); // enable re-usage of split variable
     s.setAccountId("A000006"); // Checkings account
-    s.setShares(MyMoneyMoney(-11600));
-    s.setValue(MyMoneyMoney(-11600));
+    s.setShares(MyMoneyMoney(-11600, 100));
+    s.setValue(MyMoneyMoney(-11600, 100));
     QVERIFY(s.id().isEmpty());
     t2.addSplit(s);
 
@@ -636,12 +636,12 @@ void MyMoneySeqAccessMgrTest::testBalance()
   testAddTransactions();
 
   QVERIFY(m->balance("A000001").isZero());
-  QVERIFY(m->balance("A000002") == MyMoneyMoney(1200));
-  QVERIFY(m->balance("A000003") == MyMoneyMoney(400));
-  QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(1600));
-  QVERIFY(m->balance("A000006", QDate(2002, 5, 9)) == MyMoneyMoney(-11600));
-  QVERIFY(m->balance("A000005", QDate(2002, 5, 10)) == MyMoneyMoney(-100000));
-  QVERIFY(m->balance("A000006", QDate(2002, 5, 10)) == MyMoneyMoney(88400));
+  QVERIFY(m->balance("A000002") == MyMoneyMoney(1200, 100));
+  QVERIFY(m->balance("A000003") == MyMoneyMoney(400, 100));
+  QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(1600, 100));
+  QVERIFY(m->balance("A000006", QDate(2002, 5, 9)) == MyMoneyMoney(-11600, 100));
+  QVERIFY(m->balance("A000005", QDate(2002, 5, 10)) == MyMoneyMoney(-100000, 100));
+  QVERIFY(m->balance("A000006", QDate(2002, 5, 10)) == MyMoneyMoney(88400, 100));
 }
 
 void MyMoneySeqAccessMgrTest::testModifyTransaction()
@@ -656,24 +656,24 @@ void MyMoneySeqAccessMgrTest::testModifyTransaction()
   QVERIFY(t.splitCount() == 4);
 
   s = t.splits()[0];
-  s.setShares(MyMoneyMoney(11000));
-  s.setValue(MyMoneyMoney(11000));
+  s.setShares(MyMoneyMoney(11000, 100));
+  s.setValue(MyMoneyMoney(11000, 100));
   t.modifySplit(s);
 
   QVERIFY(t.splitCount() == 4);
   s = t.splits()[3];
-  s.setShares(MyMoneyMoney(-12600));
-  s.setValue(MyMoneyMoney(-12600));
+  s.setShares(MyMoneyMoney(-12600, 100));
+  s.setValue(MyMoneyMoney(-12600, 100));
   t.modifySplit(s);
 
   try {
-    QVERIFY(m->balance("A000004") == MyMoneyMoney(10000));
-    QVERIFY(m->balance("A000006") == MyMoneyMoney(100000 - 11600));
-    QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(1600));
+    QVERIFY(m->balance("A000004") == MyMoneyMoney(10000, 100));
+    QVERIFY(m->balance("A000006") == MyMoneyMoney(100000 - 11600, 100));
+    QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(1600, 100));
     m->modifyTransaction(t);
-    QVERIFY(m->balance("A000004") == MyMoneyMoney(11000));
-    QVERIFY(m->balance("A000006") == MyMoneyMoney(100000 - 12600));
-    QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(1600));
+    QVERIFY(m->balance("A000004") == MyMoneyMoney(11000, 100));
+    QVERIFY(m->balance("A000006") == MyMoneyMoney(100000 - 12600, 100));
+    QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(1600, 100));
   } catch (MyMoneyException *e) {
     delete e;
     QFAIL("Unexpected exception");
@@ -683,9 +683,9 @@ void MyMoneySeqAccessMgrTest::testModifyTransaction()
   t.setPostDate(QDate(2002, 5, 11));
   try {
     m->modifyTransaction(t);
-    QVERIFY(m->balance("A000004") == MyMoneyMoney(11000));
-    QVERIFY(m->balance("A000006") == MyMoneyMoney(100000 - 12600));
-    QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(1600));
+    QVERIFY(m->balance("A000004") == MyMoneyMoney(11000, 100));
+    QVERIFY(m->balance("A000006") == MyMoneyMoney(100000 - 12600, 100));
+    QVERIFY(m->totalBalance("A000001") == MyMoneyMoney(1600, 100));
 
     QMap<QString, QString>::ConstIterator it_k;
     QMap<QString, MyMoneyTransaction>::ConstIterator it_t;

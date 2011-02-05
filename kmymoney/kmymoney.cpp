@@ -3623,7 +3623,7 @@ QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticR
 
   // optimize the most common case - all transactions should be cleared
   QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplitResult(result);
-  MyMoneyMoney transactionsBalance(0);
+  MyMoneyMoney transactionsBalance;
   while (itTransactionSplitResult.hasNext()) {
     const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplitResult.next();
     transactionsBalance += transactionSplit.second.shares();
@@ -3653,7 +3653,7 @@ QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticR
   double precision = 0.1 / account.fraction(security);
 
   QList<MyMoneyMoney> sumList;
-  sumList << MyMoneyMoney(0);
+  sumList << MyMoneyMoney();
 
   QMap<MyMoneyMoney, QList<QPair<QString, QString> > > sumToComponentsMap;
 

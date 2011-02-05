@@ -45,8 +45,7 @@ public:
     * The pimpl.
     */
   Private() :
-      m_file(MyMoneyFile::instance()),
-      m_lastNetWorth(0) {
+      m_file(MyMoneyFile::instance()) {
   }
 
   ~Private() {
@@ -266,9 +265,9 @@ public:
     */
   MyMoneyMoney childrenTotalValue(const QModelIndex &index) {
     if (!index.isValid())
-      return MyMoneyMoney(0);
+      return MyMoneyMoney();
 
-    MyMoneyMoney totalValue(0);
+    MyMoneyMoney totalValue;
     const QAbstractItemModel *model = index.model();
     for (int i = 0; i < model->rowCount(index); ++i) {
       QModelIndex childIndex = model->index(i, index.column(), index);
@@ -470,9 +469,9 @@ bool AccountsModel::load()
     }
     institutionItem->setData(institution.name(), Qt::DisplayRole);
     institutionItem->setData(QVariant::fromValue(institution), AccountRole);
-    institutionItem->setData(QVariant::fromValue(MyMoneyMoney(0)), AccountBalanceRole);
-    institutionItem->setData(QVariant::fromValue(MyMoneyMoney(0)), AccountValueRole);
-    institutionItem->setData(QVariant::fromValue(MyMoneyMoney(0)), AccountTotalValueRole);
+    institutionItem->setData(QVariant::fromValue(MyMoneyMoney()), AccountBalanceRole);
+    institutionItem->setData(QVariant::fromValue(MyMoneyMoney()), AccountValueRole);
+    institutionItem->setData(QVariant::fromValue(MyMoneyMoney()), AccountTotalValueRole);
     institutionItem->setData(institution.id(), AccountIdRole);
     institutionItem->setData(6, DisplayOrderRole);
     institutionItem->setColumnCount(columnCount());
@@ -618,7 +617,7 @@ bool AccountsModel::load()
                                         1,
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
 
-  MyMoneyMoney netWorth(0);
+  MyMoneyMoney netWorth;
   if (!assetList.isEmpty() && !liabilityList.isEmpty()) {
     QVariant assetValue = data(assetList.front(), AccountsModel::AccountTotalValueRole);
     QVariant liabilityValue = data(liabilityList.front(), AccountsModel::AccountTotalValueRole);
@@ -645,7 +644,7 @@ bool AccountsModel::load()
                                       1,
                                       Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
 
-  MyMoneyMoney profit(0);
+  MyMoneyMoney profit;
   if (!incomeList.isEmpty() && !expenseList.isEmpty()) {
     QVariant incomeValue = data(incomeList.front(), AccountsModel::AccountTotalValueRole);
     QVariant expenseValue = data(expenseList.front(), AccountsModel::AccountTotalValueRole);

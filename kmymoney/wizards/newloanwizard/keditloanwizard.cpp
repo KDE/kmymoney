@@ -343,7 +343,7 @@ bool KEditLoanWizard::validateCurrentPage()
         setField("durationValueEdit", 0);
       }
       if (m_fullyRepayLoan)
-        m_finalPaymentPage->m_finalPaymentEdit->loadText(MyMoneyMoney(0).formatMoney(m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()))));
+        m_finalPaymentPage->m_finalPaymentEdit->loadText(MyMoneyMoney().formatMoney(m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()))));
     }
 
     /*
