@@ -746,13 +746,6 @@ void KForecastView::loadAccounts(MyMoneyForecast& forecast, const MyMoneyAccount
       currency = file->security(subAccount.currencyId());
     }
 
-    QString amount;
-    QString vAmount;
-    MyMoneyMoney vAmountMM;
-
-    //get prices
-    QList<MyMoneyPrice> prices = getAccountPrices(subAccount);
-
     forecastItem = new QTreeWidgetItem(parentItem);
     forecastItem->setText(0, subAccount.name());
     forecastItem->setIcon(0, subAccount.accountPixmap());

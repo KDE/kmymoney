@@ -306,6 +306,7 @@ KReportsView::KReportsView(QWidget *parent, const char *name) :
   headers << i18n("Reports") << i18n("Comment");
   m_tocTreeWidget->setHeaderLabels(headers);
 
+  m_tocTreeWidget->setAlternatingRowColors(true);
   m_tocTreeWidget->setSortingEnabled(true);
   m_tocTreeWidget->sortByColumn(0, Qt::AscendingOrder);
 
@@ -393,7 +394,7 @@ void KReportsView::loadView(void)
   QTreeWidgetItem* visibleTopItem = m_tocTreeWidget->itemAt(0, 0);
 
   // text of column 0 identifies the item visible on top
-  QString visibleTopItemText = QString();
+  QString visibleTopItemText;
 
   bool visibleTopItemFound = true;
   if (visibleTopItem == NULL) {
