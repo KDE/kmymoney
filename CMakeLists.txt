@@ -22,7 +22,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
 # The current version of KMyMoney (used for packages and config.h)
 SET(VERSION_MAJOR "4")
 SET(VERSION_MINOR "5")
-SET(VERSION_PATCH "2")
+SET(VERSION_PATCH "3")
 
 # Determine the SVN revision number (if we're based on SVN)
 IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
@@ -266,13 +266,6 @@ OPTION(USE_DEVELOPER_DOC
 #  OPTION(USE_HTML_HANDBOOK
 #    "Generate KMyMoney manual in HTML format (default=OFF)" OFF)
 #endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
-
-# the RPATH to be used when installing
-# (cf. http://www.vtk.org/Wiki/CMake_RPATH_handling)
-SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
-# add the automatically determined parts of the RPATH
-# which point to directories outside the build tree to the install RPATH
-SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 # remark: these directories are used to find libs and .h files.
 # they are set globally after this point. no need to add everywhere.
