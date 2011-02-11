@@ -266,13 +266,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
     "Generate KMyMoney manual in HTML format (default=OFF)" OFF)
 endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
 
-# the RPATH to be used when installing
-# (cf. http://www.vtk.org/Wiki/CMake_RPATH_handling)
-SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
-# add the automatically determined parts of the RPATH
-# which point to directories outside the build tree to the install RPATH
-SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-
 # remark: these directories are used to find libs and .h files.
 # they are set globally after this point. no need to add everywhere.
 LINK_DIRECTORIES( ${KDE4_LIB_DIR} )
