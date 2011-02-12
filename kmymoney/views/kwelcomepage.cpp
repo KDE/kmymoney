@@ -19,7 +19,6 @@
 // Project Includes
 #include "kwelcomepage.h"
 #include <config-kmymoney.h>
-#include "config-kmymoney-version.h"
 #include "kmymoneyutils.h"
 
 // ----------------------------------------------------------------------------
@@ -31,7 +30,8 @@
 // KDE Includes
 #include <klocale.h>
 #include <kstandarddirs.h>
-
+#include <kcmdlineargs.h>
+#include <kaboutdata.h>
 
 KWelcomePage::KWelcomePage()
 {
@@ -154,7 +154,7 @@ const QString KWelcomePage::whatsNewPage(void)
   body += QString("<img id=\"background_image\" src=\"%1\" height=\"100%\">").arg(backgroundFilename);
   const QString logoFilename = KGlobal::dirs()->findResource("appdata", "html/images/trans_logo.png");
   body += QString("<img id=\"KMyMoneyLogo\" src=\"%1\">").arg(logoFilename);
-  body += QString("<h3 id=\"title\">" + i18n("What's new in KMyMoney %1", QString(VERSION)) + "</h3>");
+  body += QString("<h3 id=\"title\">" + i18n("What's new in KMyMoney %1", KCmdLineArgs::aboutData()->version()) + "</h3>");
   const QString backArrowFilename = KGlobal::dirs()->findResource("appdata", "html/images/backarrow.png");
   body += QString("<div id=\"returnLink\"><img src=\"%1\">").arg(backArrowFilename);
   body += QString("<a href=\"/welcome\">" + i18n("Return to the Welcome page") + "</a></div>");

@@ -19,7 +19,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QApplication>
 #include <QPixmap>
 #include <QPainter>
 
@@ -29,9 +28,10 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <kapplication.h>
 #include <kcolorscheme.h>
 #include <ksplashscreen.h>
+#include <kcmdlineargs.h>
+#include <kaboutdata.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -56,11 +56,12 @@ KStartupLogo::KStartupLogo() :
   pixmapPainter.drawPixmap(0, 0, logoOverlay, 0, 0, logoOverlay.width(), logoOverlay.height());
 
   if (!logoOverlay.isNull()) {
+    const KAboutData *aboutData = KCmdLineArgs::aboutData();
     KSplashScreen* splash = new KSplashScreen(logoPixmap);
     splash->setFixedSize(logoPixmap.size());
 
     splash->show();
-    splash->showMessage(i18n("Loading ..."),  //krazy:exclude=qmethods
+    splash->showMessage(i18n("Loading %1 ...", aboutData->version()),  //krazy:exclude=qmethods
                         Qt::AlignLeft | Qt::AlignBottom,
                         KColorScheme(QPalette::Active, KColorScheme::Selection)
                         .foreground(KColorScheme::NormalText).color());
