@@ -399,7 +399,6 @@ void MyMoneyQifProfileEditor::slotNew(void)
 const QString MyMoneyQifProfileEditor::enterName(bool& ok)
 {
   MyMoneyQifProfileNameValidator val(this);
-#if KDE_IS_VERSION(3,2,0)
   return KInputDialog::getText(i18n("QIF Profile Editor"),
                                i18n("Enter new profile name"),
                                QString(),
@@ -408,25 +407,6 @@ const QString MyMoneyQifProfileEditor::enterName(bool& ok)
 
                                &val,
                                0);
-#else
-  QString rc;
-
-  // the blank in the next line as the value for the edit box is
-  // there on purpose, so that with the following call to validateAndSet
-  // the state is changed and the OK-Button is grayed
-  QPointer<KLineEditDlg> dlg = new KLineEditDlg(i18n("Enter new profile name"), " ", this);
-  dlg->lineEdit()->setValidator(&val);
-  dlg->lineEdit()->validateAndSet("", 0, 0, 0);
-
-  ok = false;
-  if (dlg->exec()) {
-    ok = true;
-  }
-  rc = dlg->lineEdit()->text();
-  delete dlg;
-
-  return rc;
-#endif
 }
 
 void MyMoneyQifProfileEditor::slotDelete(void)
