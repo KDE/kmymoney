@@ -12,43 +12,50 @@
 # Redistribution and use is allowed according to the terms of the BSD license.
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 
+if(NOT LIBOFX_MIN_VERSION)
+  set(LIBOFX_MIN_VERSION "0.9.2")
+endif(NOT LIBOFX_MIN_VERSION)
 
 IF (LIBOFX_INCLUDE_DIR AND LIBOFX_LIBRARIES)
    # in cache already
-   SET(LibOfx_FIND_QUIETLY TRUE)
+   SET(LIBOFX_FIND_QUIETLY TRUE)
 ENDIF (LIBOFX_INCLUDE_DIR AND LIBOFX_LIBRARIES)
 
 IF (NOT WIN32)
    # use pkg-config to get the directories and then use these values
    # in the FIND_PATH() and FIND_LIBRARY() calls
-   find_package(PkgConfig)
-   pkg_check_modules(PC_OFX libofx)
-   SET(LIBOFX_DEFINITIONS ${PC_OFX_CFLAGS_OTHER})
+   FIND_PACKAGE(PkgConfig)
+   PKG_CHECK_MODULES(LIBOFX libofx>=${LIBOFX_MIN_VERSION})
+   # I am not sure what the next statement should do, since the
+   # var LIBOFX_DEFINITIONS is not used anywhere. Leave it here
+   # in case I overlooked something, but it could really go
+   # at some point in time (ipwizard, 2011-02-15)
+   # SET(LIBOFX_DEFINITIONS ${LIBOFX_CFLAGS_OTHER})
+
+ELSE (NOT WIN32)
+  FIND_PATH(LIBOFX_INCLUDE_DIR libofx/libofx.h
+      PATHS
+      ${PC_OFX_INCLUDEDIR}
+      ${PC_OFX_INCLUDE_DIRS}
+    )
+
+  FIND_LIBRARY(LIBOFX_LIBRARIES NAMES ofx libofx
+      PATHS
+      ${PC_OFX_LIBDIR}
+      ${PC_OFX_LIBRARY_DIRS}
+    )
+
+  IF (LIBOFX_INCLUDE_DIR AND LIBOFX_LIBRARIES)
+    SET(LIBOFX_FOUND TRUE)
+  ELSE (LIBOFX_INCLUDE_DIR AND LIBOFX_LIBRARIES)
+    SET(LIBOFX_FOUND FALSE)
+  ENDIF (LIBOFX_INCLUDE_DIR AND LIBOFX_LIBRARIES)
 ENDIF (NOT WIN32)
 
-FIND_PATH(LIBOFX_INCLUDE_DIR libofx/libofx.h
-    PATHS
-    ${PC_OFX_INCLUDEDIR}
-    ${PC_OFX_INCLUDE_DIRS}
-  )
-
-FIND_LIBRARY(LIBOFX_LIBRARIES NAMES ofx libofx
-    PATHS
-    ${PC_OFX_LIBDIR}
-    ${PC_OFX_LIBRARY_DIRS}
-  )
-
-
-IF (LIBOFX_INCLUDE_DIR AND LIBOFX_LIBRARIES)
-   SET(LIBOFX_FOUND TRUE)
-ELSE (LIBOFX_INCLUDE_DIR AND LIBOFX_LIBRARIES)
-   SET(LIBOFX_FOUND FALSE)
-ENDIF (LIBOFX_INCLUDE_DIR AND LIBOFX_LIBRARIES)
-
 IF (LIBOFX_FOUND)
-   IF (NOT LibOfx_FIND_QUIETLY)
-      MESSAGE(STATUS "Found LibOfx: ${LIBOFX_LIBRARIES}")
-   ENDIF (NOT LibOfx_FIND_QUIETLY)
+   IF (NOT LIBOFX_FIND_QUIETLY)
+      MESSAGE(STATUS "Found LibOfx: ${LIBOFX_LIBRARY_DIRS}")
+   ENDIF (NOT LIBOFX_FIND_QUIETLY)
 ELSE (LIBOFX_FOUND)
    IF (LibOfx_FIND_REQUIRED)
       MESSAGE(FATAL_ERROR "Could NOT find LibOfx")
