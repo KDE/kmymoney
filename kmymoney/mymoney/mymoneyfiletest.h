@@ -34,6 +34,7 @@ protected:
   MyMoneyAccount  m_inv;
 
 private slots:
+  void initTestCase();
   void init();
   void cleanup();
   void testEmptyConstructor();
@@ -71,13 +72,24 @@ private slots:
   void testHasAccount();
   void testAddEquityAccount();
   void testReparentEquity();
-  void testReparentEquity(QList<MyMoneyAccount::accountTypeE>& list, MyMoneyAccount& parent);
   void testBaseCurrency();
   void testOpeningBalanceNoBase();
   void testOpeningBalance();
 
+private slots:
+  void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);
+  void objectModified(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);
+  void objectRemoved(MyMoneyFile::notificationObjectT type, const QString& id);
+
 private:
   void testRemoveStdAccount(const MyMoneyAccount& acc);
+  void testReparentEquity(QList<MyMoneyAccount::accountTypeE>& list, MyMoneyAccount& parent);
+  void clearObjectLists(void);
+
+private:
+  QStringList m_objectsAdded;
+  QStringList m_objectsModified;
+  QStringList m_objectsRemoved;
 };
 
 #endif

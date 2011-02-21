@@ -140,19 +140,26 @@ class KMM_MYMONEY_EXPORT MyMoneyFile : public QObject
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
+  /**
+    * notificationObject identifies the type of the object
+    * for which this notification is stored
+    */
+  typedef enum {
+    notifyAccount = 1,
+    notifyInstitution,
+    notifyPayee,
+    notifySecurity
+  } notificationObjectT;
 
-  class MyMoneyNotifier
-  {
-  public:
-    MyMoneyNotifier(MyMoneyFile* file) {
-      m_file = file; m_file->clearNotification();
-    };
-    ~MyMoneyNotifier() {
-      m_file->notify();
-    };
-  private:
-    MyMoneyFile* m_file;
-  };
+  /**
+    * notificationMode identifies the type of notifiation
+    * (add, modify, remove)
+    */
+  typedef enum {
+    notifyAdd = 1,
+    notifyModify,
+    notifyRemove
+  } notificationModeT;
 
   friend class MyMoneyNotifier;
 
@@ -223,9 +230,7 @@ public:
     *
     * @return true if storage object is attached, false otherwise
     */
-  bool storageAttached(void) const {
-    return m_storage != 0;
-  };
+  bool storageAttached(void) const;
 
   /**
     * This method returns a pointer to the storage object
@@ -233,9 +238,7 @@ public:
     * @return const pointer to the current attached storage object.
     *         If no object is attached, returns 0.
     */
-  IMyMoneyStorage* storage(void) const {
-    return m_storage;
-  };
+  IMyMoneyStorage* storage(void) const;
 
   /**
     * This method must be called before any single change or a series of changes
@@ -371,7 +374,7 @@ public:
     * The ID is stored as QString in the object passed as argument.
     *
     * An exception will be thrown upon error conditions.
-    *
+
     * @param institution The complete institution information in a
     *        MyMoneyInstitution object
     */
@@ -1381,6 +1384,38 @@ signals:
     */
   void dataChanged(void);
 
+  /**
+    * This signal is emitted by the engine whenever a new object
+    * had been added. The data for the new object is contained in
+    * @a obj.
+    */
+  void objectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
+
+  /**
+    * This signal is emitted by the engine whenever an object
+    * had been removed.
+    *
+    * @note: The data contained in @a obj is only for reference
+    * purposes and should not be used to call any MyMoneyFile
+    * method anymore as the object is already deleted in the storage
+    * when the signal is emitted.
+    */
+  void objectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id);
+
+  /**
+    * This signal is emitted by the engine whenever an object
+    * had been changed. The new state of the object is contained
+    * in @a obj.
+    */
+  void objectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
+
+  /**
+    * This signal is emitted by the engine whenever the balance
+    * of an account had been changed by adding, modifying or
+    * removing transactions from the MyMoneyFile object.
+    */
+  void balanceChanged(const MyMoneyAccount& acc);
+
 private:
   static MyMoneyFile file;
 
@@ -1406,56 +1441,10 @@ private:
   const MyMoneyAccount openingBalanceAccount_internal(const MyMoneySecurity& security) const;
 
 private:
-  /**
-    * This method is used to add an id to the list of objects
-    * to be removed from the cache. If id is empty, then nothing is added to the list.
-    *
-    * @param id id of object to be notified
-    * @param reload reload the object (@c true) or not (@c false). The default is @c true
-    * @see attach, detach
-    */
-  void addNotification(const QString& id, bool reload = true);
-  void addNotification(const QString& id, const QDate& date, bool reload = true);
-
-  /**
-    * This method is used to clear the notification list
-    */
-  void clearNotification(void);
-
-  /**
-    * This method is used to clear all
-    * objects mentioned in m_notificationList from the cache.
-    */
-  void notify(void);
-
-  /**
-    * This method checks if a storage object is attached and
-    * throws and exception if not.
-    */
-  inline void checkStorage(void) const {
-    if (m_storage == 0)
-      throw new MYMONEYEXCEPTION("No storage object attached to MyMoneyFile");
-  }
-
-  /**
-    * This method checks that a transaction has been started with
-    * startTransaction() and throws an exception otherwise. Calls
-    * checkStorage() to make sure a storage object is present and attached.
-    */
-  void checkTransaction(const char* txt) const;
-
-private:
-  /**
-    * This member points to the storage strategy
-    */
-  IMyMoneyStorage *m_storage;
-
   /// \internal d-pointer class.
   class Private;
   /// \internal d-pointer instance.
   Private* const d;
-
-  static MyMoneyFile* _instance;
 };
 
 class KMM_MYMONEY_EXPORT MyMoneyFileTransaction
