@@ -25,8 +25,10 @@ class TestMyMoneyObject : public MyMoneyObject
 public:
   TestMyMoneyObject() : MyMoneyObject() {}
   TestMyMoneyObject(const QDomElement& node, const bool forceId = true) :
-    MyMoneyObject(node, forceId) {}
-  virtual bool hasReferenceTo(const QString&) const { return false; }
+      MyMoneyObject(node, forceId) {}
+  virtual bool hasReferenceTo(const QString&) const {
+    return false;
+  }
   virtual void writeXML(QDomDocument&, QDomElement&) const {}
 };
 
@@ -94,20 +96,20 @@ void MyMoneyObjectTest::testReadXML()
                    );
 
   QString ref_false1 = QString(
-                     "<!DOCTYPE TEST>\n"
-                     "<TRANSACTION-CONTAINER>\n"
-                     " <MYMONEYOBJECT id=\"\" >\n"
-                     " </MYMONEYOBJECT>\n"
-                     "</TRANSACTION-CONTAINER>\n"
-                   );
+                         "<!DOCTYPE TEST>\n"
+                         "<TRANSACTION-CONTAINER>\n"
+                         " <MYMONEYOBJECT id=\"\" >\n"
+                         " </MYMONEYOBJECT>\n"
+                         "</TRANSACTION-CONTAINER>\n"
+                       );
 
   QString ref_false2 = QString(
-                     "<!DOCTYPE TEST>\n"
-                     "<TRANSACTION-CONTAINER>\n"
-                     " <MYMONEYOBJECT >\n"
-                     " </MYMONEYOBJECT>\n"
-                     "</TRANSACTION-CONTAINER>\n"
-                   );
+                         "<!DOCTYPE TEST>\n"
+                         "<TRANSACTION-CONTAINER>\n"
+                         " <MYMONEYOBJECT >\n"
+                         " </MYMONEYOBJECT>\n"
+                         "</TRANSACTION-CONTAINER>\n"
+                       );
 
   QDomDocument doc;
   QDomElement node;
