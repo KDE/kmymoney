@@ -317,7 +317,7 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
       if (inQuotes == true) {//                embedded '\n'
         chr = '~';//                           substitute for '\n'
         m_outBuffer += chr;
-        if (count > 0)//                       more chars yet               
+        if (count > 0)//                       more chars yet
           continue;
       }
       //                                       true EOL
@@ -416,11 +416,11 @@ void CsvProcessing::displayLine(const QString& data)
     width += m_csvDialog->tableWidget->columnWidth(col);
     col ++;
   }
-  
+
   //  if last char. of last column added to UI (txt string) is not '"', ie an unterminated string
   //  remove the unwanted trailing m_fieldDelimiterCharacter
   if (!txt.endsWith('"')) {
-   m_inBuffer = m_inBuffer.remove(-1,1);
+    m_inBuffer = m_inBuffer.remove(-1, 1);
   }
   m_row += 1;
 }
@@ -494,7 +494,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
     }
 
     else if (m_csvDialog->columnType(i) == "date") {
-      neededFieldsCount +=1;
+      neededFieldsCount += 1;
       txt = m_columnList[i];
       txt = txt.remove(m_textDelimiterCharacter);//   "16/09/2009
       QDate dat = m_csvDialog->m_convertDate->convertDate(txt);// Date column
@@ -513,7 +513,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
     }
 
     else if (m_csvDialog->columnType(i) == "payee") {
-      neededFieldsCount +=1;
+      neededFieldsCount += 1;
       txt = m_columnList[i];
       txt.remove('~');//                              replace NL which was substituted
       txt = txt.remove('\'');
@@ -522,7 +522,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
     }
 
     else if (m_csvDialog->columnType(i) == "amount") { // Is this Amount column
-      neededFieldsCount +=1;
+      neededFieldsCount += 1;
       if (m_flagCol == -1) { //                        it's a new file
         switch (m_debitFlag) { //                     Flag if amount is debit or credit
           case -1://                                  Ignore flag
@@ -559,7 +559,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
     }
 
     else if ((m_csvDialog->columnType(i) == "debit") || (m_csvDialog->columnType(i) == "credit")) {//  Credit or debit?
-      neededFieldsCount +=1;
+      neededFieldsCount += 1;
       txt = m_columnList[i];
       if (!txt.isEmpty()) {
         if (m_csvDialog->debitColumn() == i)
@@ -586,7 +586,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
     return KMessageBox::Ok;///
   } else {///
     KMessageBox::sorry(0, i18n("<center>The columns selected are invalid.\n</center>"
-                                   "There must be an amount or debit and credit fields, plus date and payee fields."), i18n("CSV import"));
+                               "There must be an amount or debit and credit fields, plus date and payee fields."), i18n("CSV import"));
     return KMessageBox::Cancel;///
   }
   return KMessageBox::Ok;
