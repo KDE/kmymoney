@@ -233,10 +233,8 @@ public:
           prices += m_file->price(sec.id(), m_file->baseCurrency().id());
         }
       } else if (account.currencyId() != m_file->baseCurrency().id()) {
-        if (account.currencyId() != m_file->baseCurrency().id()) {
-          security = m_file->security(account.currencyId());
-          prices += m_file->price(account.currencyId(), m_file->baseCurrency().id());
-        }
+        security = m_file->security(account.currencyId());
+        prices += m_file->price(account.currencyId(), m_file->baseCurrency().id());
       }
 
     } catch (MyMoneyException *e) {
@@ -977,7 +975,7 @@ bool AccountsFilterProxyModel::hideUnusedIncomeExpenseAccounts(void) const
 }
 
 /**
-  * Set if equity and investment accounts should be hidden or not.
+  * Set if institutions should be hidden or not.
   * @param hideInstitutions
   */
 void AccountsFilterProxyModel::setHideInstitutions(bool hideInstitutions)
@@ -989,7 +987,7 @@ void AccountsFilterProxyModel::setHideInstitutions(bool hideInstitutions)
 }
 
 /**
-  * Check if equity and investment accounts are hidden or not.
+  * Check if institutions are hidden or not.
   */
 bool AccountsFilterProxyModel::hideInstitutions(void) const
 {
