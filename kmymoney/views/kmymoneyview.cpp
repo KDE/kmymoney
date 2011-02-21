@@ -586,9 +586,10 @@ bool KMyMoneyView::readFile(const KUrl& url)
     return false;
   }
 
+  // disconnect the current storga manager from the engine
+  MyMoneyFile::instance()->detachStorage();
+
   if (url.protocol() == "sql") { // handle reading of database
-    //newStorage(Database);
-    MyMoneyFile::instance()->detachStorage();
     m_fileType = KmmDb;
     // get rid of the mode parameter which is now redundant
     KUrl newUrl(url);
@@ -598,7 +599,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
     return (openDatabase(newUrl)); // on error, any message will have been displayed
   }
 
-  newStorage();
+  IMyMoneyStorage *storage = new MyMoneySeqAccessMgr;
 
   if (url.isLocalFile()) {
     filename = url.toLocalFile();
@@ -722,10 +723,13 @@ bool KMyMoneyView::readFile(const KUrl& url)
                   m_fileType = KmmXML;
                 } else if (gncexp.indexIn(txt) != -1) {
                   ::timetrace("is GNC format");
+                  MyMoneyFile::instance()->attachStorage(storage);
                   MyMoneyFileTransaction ft;
                   loadDefaultCurrencies(); // currency list required for gnc
                   loadAncientCurrencies(); // these too
                   ft.commit();
+                  MyMoneyFile::instance()->detachStorage(storage);
+
                   pReader = new MyMoneyGncReader;
                   m_fileType = GncXML;
                 }
@@ -734,7 +738,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
             if (pReader) {
               pReader->setProgressCallback(&KMyMoneyView::progressCallback);
               ::timetrace("read data to memory");
-              pReader->readFile(qfile, dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage()));
+              pReader->readFile(qfile, dynamic_cast<IMyMoneySerialize*>(storage));
               ::timetrace("done reading to memory");
             } else {
               if (m_fileType == KmmBinary) {
@@ -773,6 +777,11 @@ bool KMyMoneyView::readFile(const KUrl& url)
     KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> not found.", filename)));
     rc = false;
   }
+
+  // things are finished, now we connect the storage to the engine
+  // which forces a reload of the cache in the engine with those
+  // objects that are cached
+  MyMoneyFile::instance()->attachStorage(storage);
 
   ::timetrace("done reading file");
   if (rc == false)
@@ -1179,7 +1188,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
         try {
           unsigned int nbak = KMyMoneyGlobalSettings::autoBackupCopies();
           if (nbak) {
-            KSaveFile::numberedBackupFile(filename, QString(), QString::fromLatin1("~"), nbak); 
+            KSaveFile::numberedBackupFile(filename, QString(), QString::fromLatin1("~"), nbak);
           }
           saveToLocalFile(filename, pWriter, plaintext, keyList);
         } catch (MyMoneyException* e) {
