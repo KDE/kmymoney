@@ -37,7 +37,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class kMyMoneyLineEdit::Private {
+class kMyMoneyLineEdit::Private
+{
 public:
   /**
     * This member keeps the initial value. It is used during
@@ -52,7 +53,7 @@ public:
     * is requested or not.
     */
   bool m_forceMonetaryDecimalSymbol;
-  bool	skipSelectAll;
+  bool  skipSelectAll;
 };
 
 kMyMoneyLineEdit::kMyMoneyLineEdit(QWidget *w, bool forceMonetaryDecimalSymbol, Qt::Alignment alignment) :
