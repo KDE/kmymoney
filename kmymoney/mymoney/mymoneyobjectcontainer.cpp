@@ -56,6 +56,16 @@ void MyMoneyObjectContainer::clear(const QString& id)
   }
 }
 
+const MyMoneyObject * const MyMoneyObjectContainer::object(const QString& id) const
+{
+  QMap<QString, MyMoneyObject const *>::const_iterator it;
+  it = m_map.find(id);
+  if (it != m_map.end()) {
+    return (*it);
+  }
+  return 0;
+}
+
 #define listMethod(a, T) \
   void MyMoneyObjectContainer::a(QList<T>& list) \
   { \
@@ -121,16 +131,20 @@ const MyMoneyAccount& MyMoneyObjectContainer::account(const QString& id)
     return nullElement;
   QMap<QString, MyMoneyObject const *>::iterator it;
   it = m_map.find(id);
+  MyMoneyAccount* item = 0;
   if (it == m_map.end()) {
     /* not found, need to load from engine */
     MyMoneyAccount x = m_storage->account(id);
     MyMoneyAccount* item = new MyMoneyAccount(x);
-    assignFraction(dynamic_cast<MyMoneyAccount*>(item));
+    assignFraction(item);
     m_map[id] = item;
-    return dynamic_cast<const MyMoneyAccount&>(*m_map[id]);
+    return static_cast<const MyMoneyAccount&>(*m_map[id]);
+
+  } else if ((item = dynamic_cast<MyMoneyAccount*>(const_cast<MyMoneyObject*>(*it))) != 0) {
+    assignFraction(item);
+    return const_cast<const MyMoneyAccount&>(*item);
   }
-  assignFraction(dynamic_cast<MyMoneyAccount*>(const_cast<MyMoneyObject*>(*it)));
-  return dynamic_cast<const MyMoneyAccount&>(*(*it));
+  return nullElement;
 }
 
 void MyMoneyObjectContainer::assignFraction(MyMoneyAccount* acc)
@@ -192,7 +206,6 @@ void MyMoneyObjectContainer::refresh(const QString& id)
     } else {
       qWarning("Ooops, should preload an unknown object with id '%s'", qPrintable(id));
     }
-    return;
   }
 }
 
@@ -211,6 +224,7 @@ preloadMethod(Account, MyMoneyAccount)
 preloadMethod(Security, MyMoneySecurity)
 preloadMethod(Payee, MyMoneyPayee)
 preloadMethod(Institution, MyMoneyInstitution)
+preloadMethod(Schedule, MyMoneySchedule)
 
 listMethod(payee, MyMoneyPayee)
 listMethod(institution, MyMoneyInstitution)

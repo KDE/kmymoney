@@ -74,11 +74,14 @@ public:
   void preloadSecurity(const MyMoneySecurity& security);
   void preloadPayee(const MyMoneyPayee& payee);
   void preloadInstitution(const MyMoneyInstitution& institution);
+  void preloadSchedule(const MyMoneySchedule& schedule);
 
   void clear(const QString& id);
   void clear(IMyMoneyStorage* storage = 0);
 
   const MyMoneyAccount& accountByName(const QString& name) const;
+
+  const MyMoneyObject * const object(const QString& id) const;
 
   /**
    * This method refreshes an already existing object in the container
