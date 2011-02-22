@@ -460,6 +460,27 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources(void
                                 "%d/%m/%y"                         // dateformat
                                                    );
 
+
+  // I suggest to include www.cash.ch as one of the pre-populated online
+  // quote sources.
+
+  // Rationale
+  // It features Swiss funds that are otherwise hard to find. A typical
+  // example: Swiss private pension accounts (in German termed 'Säule 3a')
+  // may usually only invest in dedicated funds that are otherwise (almost)
+  // not traded; the UBS Vitainvest series
+  // (http://www.ubs.com/1/e/ubs_ch/private/insurance/fisca/securities/part_wealth.html)
+  //  is such a series of funds.
+
+  result["Cash CH"] = WebPriceQuoteSource("Cash CH",
+                      "http://www.cash.ch/boerse/fonds/fondsguide/kursinfo/fullquote/%1",
+                      "",  // symbolregexp
+                      "<span class=\"fgdhLast\">([1-9][0-9]*\\.[0-9][0-9])</span>", // priceregexp
+                      "<span class=\"fgdhLastdt\">([0-3][0-9]\\.[0-1][0-9]\\.[1-2][0-9][0-9][0-9])</span>", // dateregexp
+                      "%d.%m.%y",                         // dateformat
+                      true                                // skip stripping
+                                         );
+
   return result;
 }
 
