@@ -349,17 +349,20 @@ void MyMoneyFile::commitTransaction(void)
   bool changed = d->m_storage->commitTransaction();
   d->m_inTransaction = false;
 
-  // TODO we need to send out signals about object changes here
+  // Now it's time to send out some signals to the outside world
+  // First we go through the d->m_changeSet and emit respective
+  // signals about addition, modification and removal of engine objects
   QList<MyMoneyNotification>::const_iterator it = d->m_changeSet.constBegin();
   while (it != d->m_changeSet.constEnd()) {
-    // foreach (const MyMoneyNotification& notification, d->m_changeSet) {
     if ((*it).notificationMode() == notifyRemove) {
       emit objectRemoved((*it).objectType(), (*it).id());
+
     } else {
       const MyMoneyObject * const obj = d->m_cache.object((*it).id());
       if (obj) {
         if ((*it).notificationMode() == notifyAdd) {
           emit objectAdded((*it).objectType(), obj);
+
         } else {
           emit objectModified((*it).objectType(), obj);
         }
@@ -380,7 +383,7 @@ void MyMoneyFile::commitTransaction(void)
   }
   d->m_balanceChangedSet.clear();
 
-  // send out the global dataChanged signal
+  // as a last action, send out the global dataChanged signal
   if (changed) {
     emit dataChanged();
   }
@@ -549,7 +552,7 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
 
   d->m_storage->modifyAccount(account);
 
-  d->addCacheNotification(account.id(), QDate());
+  d->addCacheNotification(account.id());
   d->m_changeSet += MyMoneyNotification(notifyModify, account);
 }
 
@@ -577,13 +580,13 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
     // keep a notification of the current parent
     MyMoneyAccount curParent = account(acc.parentAccountId());
 
-    d->addCacheNotification(curParent.id(), QDate());
+    d->addCacheNotification(curParent.id());
 
     d->m_storage->reparentAccount(acc, parent);
 
     // and also keep one for the account itself and the new parent
-    d->addCacheNotification(acc.id(), QDate());
-    d->addCacheNotification(parent.id(), QDate());
+    d->addCacheNotification(acc.id());
+    d->addCacheNotification(parent.id());
 
     d->m_changeSet += MyMoneyNotification(notifyModify, curParent);
     d->m_changeSet += MyMoneyNotification(notifyModify, parent);
@@ -700,12 +703,12 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
   // collect all sub-ordinate accounts for notification
   foreach (const QString& id, acc.accountList()) {
-    d->addCacheNotification(id, QDate());
+    d->addCacheNotification(id);
     const MyMoneyAccount& acc = MyMoneyFile::account(id);
     d->m_changeSet += MyMoneyNotification(notifyModify, acc);
   }
   // don't forget the parent and a possible institution
-  d->addCacheNotification(parent.id(), QDate());
+  d->addCacheNotification(parent.id());
   d->addCacheNotification(account.institutionId());
 
   if (!institution.id().isEmpty()) {
