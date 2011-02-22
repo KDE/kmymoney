@@ -18,13 +18,15 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <kglobal.h>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include <mymoneykeyvaluecontainer.h>
 #include <mymoneyexception.h>
 
-static QString nullString;
+K_GLOBAL_STATIC(QString, nullString)
 
 MyMoneyKeyValueContainer::MyMoneyKeyValueContainer()
 {
@@ -57,7 +59,7 @@ const QString& MyMoneyKeyValueContainer::value(const QString& key) const
   it = m_kvp.find(key);
   if (it != m_kvp.end())
     return (*it);
-  return nullString;
+  return *nullString;
 }
 
 void MyMoneyKeyValueContainer::setValue(const QString& key, const QString& value)
