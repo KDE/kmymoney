@@ -21,7 +21,6 @@ SET(kmm_csvimport_PART_SRCS
 
 KDE4_ADD_UI_FILES(kmm_csvimport_PART_SRCS
   csvimporterdlgdecl.ui
-  investmentdlgdecl.ui
   redefinedlgdecl.ui
 )
 
