@@ -37,14 +37,17 @@ email                 : aganderson@ukonline.co.uk
 
 #include <mymoneystatement.h>
 
-#define invMAXCOL 14    //                 maximum no. of columns (arbitrary value)
+#define invMAXCOL 25    //                 maximum no. of columns (arbitrary value)
 
 class ConvertDate;
 class CsvImporterDlg;
 class InvestmentDlg;
 class RedefineDlg;
-class ParseLine;
+class Parse;
 class MyMoneyStatement;
+class KAbstractFileWidget;
+class KHBox;
+class KComboBox;
 
 class InvestProcessing : public QObject
 {
@@ -54,8 +57,13 @@ public:
   InvestProcessing();
   ~InvestProcessing();
 
+  CsvImporterDlg*   m_csvDialog;
   InvestmentDlg*    m_investDlg;
-  ParseLine*        m_parseline;
+  Parse*            m_parse;
+  ConvertDate*      m_convertDat;
+  RedefineDlg*      m_redefine;
+
+  KComboBox*        m_comboBoxEncode;
 
   void           setTrInvestDataType(const QString& val);
 
@@ -64,6 +72,11 @@ public:
   */
   void           init();
 
+  /**
+  * This method is called on opening, to load settings from the resource file.
+  */
+  void           readSettings();
+
   void           clearColumnType(int column);
   void           setColumnType(int column, const QString& type);
 
@@ -71,14 +84,34 @@ public:
   void           clearPreviousType();
   void           setPreviousType(const QString& type);
 
+  /**
+  * This method is called when the user clicks 'Clear selections', in order to
+  * clear incorrect column number entries.  Also called on initialisation.
+  */
+  void           clearSelectedFlags();
+
+  /**
+  * This method is called when the user clicks 'Clear selections', in order to
+  * clear incorrect column number entries.
+  */
+  void           clearColumnNumbers();
+
+  /**
+  * Because the memo field allows multiple selections, it helps to be able
+  * to see which columns are selected already, particularly if a column
+  * selection gets deleted. This is achieved by adding a '*' character
+  * after the column number of each selected column in the menu combobox.
+  * This method is called to remove the '*' characters when a file is
+  * reloaded, or when the user clears his selections.
+  */
+  void           clearComboBoxText();
+
   void           setInFileName(const QString& val);
   void           updateScreen();
 
   QString        columnType(int column);
-  QString        csvPath();
+  QString        invPath();
   QString        inFileName();
-
-
 
   int            m_endColumn;
 
@@ -108,7 +141,7 @@ public slots:
   * This method is called when the user clicks 'Encoding' and selects an
   * encoding setting.  The file is re-read with the corresponding codec.
   */
-  void           encodingChanged();
+  void           encodingChanged(int);
 
   /**
   * This method is called when the user selects a new field delimiter.  The
@@ -154,7 +187,7 @@ public slots:
   * Finally, it rereads the file, which this time will result in the import
   * actually taking place.
   */
-  void           acceptClicked(bool checked);
+  void           importClicked();
 
   /**
   * This method is called when the user clicks the Date button and selects
@@ -187,18 +220,6 @@ public slots:
   void           typeColumnSelected(int);
 
 private:
-
-  /**
-  * This method is called when the user clicks 'Clear selections', in order to
-  * clear incorrect column number entries.
-  */
-  void           clearColumnNumbers();
-
-  /**
-  * This method is called when the user clicks 'Clear selections', in order to
-  * clear incorrect column number entries.  Also called on initialisation.
-  */
-  void           clearSelectedFlags();
 
   /**
   * This method is called during import, to convert the QString activity type
@@ -241,11 +262,6 @@ private:
   void           readFile(const QString& fname, int skipLines);
 
   /**
-  * This method is called on opening, to load settings from the resource file.
-  */
-  void           readSettings();
-
-  /**
   * This method is called on opening the plugin.
   * It will populate a list with all available codecs.
   */
@@ -283,16 +299,6 @@ private:
   */
   void           setCodecList(const QList<QTextCodec *> &list);
 
-  /**
-  * Because the memo field allows multiple selections, it helps to be able
-  * to see which columns are selected already, particularly if a column
-  * selection gets deleted. This is achieved by adding a '*' character
-  * after the column number of each selected column in the menu combobox.
-  * This method is called to remove the '*' characters when a file is
-  * reloaded, or when the user clears his selections.
-  */
-  void           clearComboBoxText();
-
   struct qifInvestData {
 
     QString      memo;
@@ -316,11 +322,13 @@ private:
   bool           m_memoSelected;
   bool           m_priceSelected;
   bool           m_quantitySelected;
+  bool           m_screenUpdated;
   bool           m_typeSelected;
 
   int            m_dateFormatIndex;
   int            m_fieldDelimiterIndex;
   int            m_maxColumnCount;
+  int            m_encodeIndex;
   int            m_payeeColumn;
   int            m_amountColumn;
   int            m_dateColumn;
@@ -329,6 +337,7 @@ private:
   int            m_priceColumn;
   int            m_previousColumn;
   int            m_quantityColumn;
+  int            m_textDelimiterIndex;
   int            m_typeColumn;
   int            m_endLine;
   int            m_startLine;
@@ -339,9 +348,10 @@ private:
   QString        m_brokerBuff;
   QString        m_columnType[invMAXCOL];
   QString        m_dateFormat;
-  QString        m_fieldDelimiter_char;
+  QString        m_fieldDelimiterCharacter;
+  QString        m_textDelimiterCharacter;
   QString        m_inBuffer;
-  QString        m_csvPath;
+  QString        m_invPath;
   QString        m_inFileName;
   QString        m_outBuffer;
   QString        m_previousType;
@@ -362,13 +372,8 @@ private:
   KUrl           m_url;
   QFile*         m_inFile;
 
-private slots:
 
-  /**
-  * This method is called when 'Go to Banking' is clicked.  The current
-  * Investment window will be hidden and the Banking dialog will be shown.
-  */
-  void           bankingSelected();
+private slots:
 
   /**
   * This method is called when the user clicks 'Clear selections'.
@@ -383,6 +388,9 @@ private slots:
   */
   void           resetComboBox(const QString& comboBox, const int& col);
 
+  void           changedType(const QString& newType);
+
   int            validateNewColumn(const int& col, const QString& type);
+
 };
 #endif // INVESTPROCESSING_H

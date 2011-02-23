@@ -34,9 +34,11 @@
 
 class CsvImporterDlgDecl;
 class MyMoneyStatement;
-class ParseLine;
+class Parse;
+class KAbstractFileWidget;
+class KHBox;
 
-#define MAXCOL 14    //                 maximum no. of columns (arbitrary value)
+#define MAXCOL 25    //                 maximum no. of columns (arbitrary value)
 
 class CsvProcessing: public QObject
 {
@@ -48,12 +50,20 @@ public:
   ~CsvProcessing();
 
   CsvImporterDlg*   m_csvDialog;
-  ParseLine*        m_parseline ;
+  Parse*            m_parse;
+  KComboBox*        m_comboBoxEncode;
+
+  bool              m_screenUpdated;
 
   /**
   * This method is called after startup, to initialise some parameters.
   */
   void           init();
+
+  /**
+  * This method is called on opening, to load settings from the resource file.
+  */
+  void           readSettings();
 
   /**
   * This method is called to redraw the window according to the number of
@@ -64,8 +74,14 @@ public:
   QString        csvPath();
   QString        inFileName();
 
-  int            fieldDelimiterIndex();
+
   int            endColumn();
+  int            fieldDelimiterIndex();
+  int            lastLine();
+  int            startLine();
+  int            textDelimiterIndex();
+
+  bool           importNow();
 
 signals:
 
@@ -83,8 +99,8 @@ public slots:
   void           fileDialog();
 
   /**
-  * This method is called when the user selects a new field delimiter.  The
-  * input file is reread using the current delimiter.
+  * This method is called when the user selects a new field or text delimiter.  The
+  * input file is reread using the new delimiter.
   */
   void           delimiterChanged();
 
@@ -94,7 +110,7 @@ public slots:
   * Finally, it rereads the file, which this time will result in the import
   * actually taking place.
   */
-  void           importClicked(bool checked);
+  void           importClicked();
 
   /**
   * This method is called when the user clicks 'Date format' and selects a
@@ -121,6 +137,9 @@ public slots:
   void           endLineChanged();
 
 private:
+
+  KHBox*         m_encodeBox;
+
   /**
   * This method is called when an input file has been selected.
   * It will enable the UI elements for column selection.
@@ -147,11 +166,6 @@ private:
   * deletion, or to reread following encoding or delimiter change.
   */
   void           readFile(const QString& fname, int skipLines);
-
-  /**
-  * This method is called on opening, to load settings from the resource file.
-  */
-  void           readSettings();
 
   /**
   * This method is called on opening the input file.
@@ -204,11 +218,6 @@ private:
 
   int            columnNumber(const QString& msg);
 
-  QString        m_textDelimiterCharacter;
-  QString        m_csvPath;
-  QString        m_fieldDelimiterCharacter;
-  QString        m_inFileName;
-
   struct qifData {
     QString number;
     QDate   date;
@@ -223,16 +232,25 @@ private:
   QStringList    m_dateFormats;
   QStringList    m_columnList;
 
+  QString        m_csvPath;
   QString        m_date;
+  QString        m_decimalSymbol;
+  QString        m_fieldDelimiterCharacter;
   QString        m_filename;
   QString        m_inBuffer;
+  QString        m_inFileName;
   QString        m_outBuffer;
   QString        m_qifBuffer;
+  QString        m_textDelimiterCharacter;
+  QString        m_thousandsSeparator;
 
   bool           m_importNow;
+  bool           m_showEmptyCheckBox;
+  bool           m_accept;
 
   int            m_dateFormatIndex;
   int            m_debitFlag;
+  int            m_encodeIndex;
   int            m_endLine;
   int            m_fieldDelimiterIndex;
   int            m_textDelimiterIndex;
@@ -249,7 +267,7 @@ private slots:
   * This method is called when the user clicks 'Encoding' and selects an
   * encoding setting.  The file is re-read with the corresponding codec.
   */
-  void           encodingChanged();
+  void           encodingChanged(int index);
 
   /**
   * This method is called when the user clicks 'Clear selections'.

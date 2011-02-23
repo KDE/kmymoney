@@ -32,9 +32,9 @@ email                 : aganderson@ukonline.co.uk
 // Project Headers
 
 #include <mymoneystatement.h>
-#include "ui_investmentdlgdecl.h"
+#include "ui_csvimporterdlgdecl.h"
 
-#define invMAXCOL 14    //                 maximum no. of columns (arbitrary value)
+#define invMAXCOL 25    //                 maximum no. of columns (arbitrary value)
 
 class ConvertDate;
 class CsvImporterDlg;
@@ -42,31 +42,27 @@ class InvestProcessing;
 class MyMoneyStatement;
 class RedefineDlg;
 
-class InvestmentDlgDecl : public QWidget, public Ui::InvestmentDlgDecl
-{
-public:
-  InvestmentDlgDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
-};
-
-class InvestmentDlg: public InvestmentDlgDecl
+class InvestmentDlg: public QObject
 {
   Q_OBJECT
 
 public:
-  InvestmentDlg(QWidget *parent = 0);
+  InvestmentDlg();
   ~InvestmentDlg();
 
-  CsvImporterDlg*    m_csvImportDlg;
+  CsvImporterDlg*    m_csvDialog;
   ConvertDate*       m_convertDat;
   RedefineDlg*       m_redefine;
-
-  void               clearComboBoxText();
-
-private:
   InvestProcessing*  m_investProcessing;
 
+  void               clearComboBoxText();
+  void               init();
+
+public slots:
+
+  void           fileDialog();
+
+private:
   /**
   * This method will receive close events, calling slotClose().
   */
@@ -86,12 +82,6 @@ private slots:
   void           slotClose();
 
   /**
-  * This slot is called when 'Go to Banking' is clicked.  The current
-  * Investment window will be hidden and the Banking dialog will be shown.
-  */
-  void           bankingSelected();
-
-  /**
   * This slot is called following the user selecting a new investment type
   * in the RedefineDlg window.  The new value is saved.
   */
@@ -101,6 +91,8 @@ private slots:
   * This method displays the help dialog.
   */
   void           helpSelected();
+
+
 
 signals:
   /**

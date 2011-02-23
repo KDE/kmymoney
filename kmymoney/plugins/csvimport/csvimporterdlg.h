@@ -29,6 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
+//#include "ui_csvNewA.h"
 #include "ui_csvimporterdlgdecl.h"
 #include "csvprocessing.h"
 #include "csvimporterplugin.h"
@@ -36,9 +37,10 @@
 class ConvertDate;
 class CsvProcessing;
 class InvestmentDlg;
+class InvestProcessing;
 class CsvImporterPlugin;
 class MyMoneyStatement;
-class ValidateColumn;
+class Parse;
 
 class CsvImporterDlgDecl : public QWidget, public Ui::CsvImporterDlgDecl
 {
@@ -58,11 +60,21 @@ public:
 
   ConvertDate*        m_convertDate;
   CsvProcessing*      m_csvprocessing;
+  CsvImporterDlg*     m_csvDialog;
   InvestmentDlg*      m_investmentDlg;//below
-  ValidateColumn*     m_validateColumn;
+  InvestProcessing*   m_investProcessing;
   CsvImporterPlugin*  m_plugin;
+  Parse*              m_parse;
+
+  bool             m_decimalSymbolChanged;
 
   QString          columnType(int column);
+
+  QString          currentUI();
+  void             setCurrentUI(QString val);
+  
+  QString          decimalSymbol();
+
   void             clearColumnType(int column);
   void             clearPreviousColumn();
   bool             amountSelected();
@@ -85,10 +97,28 @@ public:
   void             setDebitColumn(int val);
   int              maxColumnCount();
   void             setMaxColumnCount(int val);
+  
+  /**
+  * This method is called when the user selects a new decimal symbol.  The
+  * UI is updated using the new symbol, and on importing, the new symbol
+  * also will be used.
+  */
+  void             updateDecimalSymbol(const QString&, int col);
+
+  void             updateDecimalColumns();
+
+  QString          m_fileType;
+  QString          m_tab;
+
+public slots:
+  void             tabSelected(int index);
 
 private:
   QString          m_columnType[MAXCOL];//  holds field types - date, payee, etc.
+  QString          m_currentUI;
+  QString          m_decimalSymbol;
   QString          m_previousType;
+  QString          m_thousandsSeparator;
 
   bool             m_amountSelected;
   bool             m_creditSelected;
@@ -108,6 +138,17 @@ private:
   int              m_payeeColumn;
   int              m_previousColumn;
   int              m_maxColumnCount;
+  int              m_decimalSymbolIndex;
+
+  QBrush           m_brushClr;
+  QBrush           m_brushSet;
+  QColor           m_colrClr;
+  QColor           m_colrSet;
+
+  /**
+  * This method checks that any column contents are numeric.
+  */
+  bool           checkContents(int col);
 
   /**
   * This method will receive close events, calling slotClose().
@@ -118,6 +159,10 @@ private:
   * This method will receive resize events, calling updateScreen().
   */
   void           resizeEvent(QResizeEvent * event);
+
+  void           restoreBackground();
+
+  int            validateColumn(const int& col, const QString& type);
 
 private slots:
   /**
@@ -156,6 +201,12 @@ private slots:
   void           debitColumnSelected(int);
 
   /**
+  * This method is called when the user selects a new decimal symbol.  The
+  * UI is updated using the new symbol.
+  */
+  void           decimalSymbolSelected(int val);
+
+  /**
   * This method is called when the Memo column is activated.
   * Multiple columns may be selected sequentially.
   */
@@ -174,16 +225,16 @@ private slots:
   void           payeeColumnSelected(int);
 
   /**
-  * This method is called when 'Go to Investments' is clicked.  The current
-  * Banking window will be hidden and the Investment dialog will be shown.
-  */
-  void           investmentSelected();
-
-  /**
   * This method is called when 'Quit' is clicked.  The plugin settings will
   * be saved and the plugin will be terminated.
   */
   void           slotClose();
+
+  /**
+    * This method is called when the user selects a new thousands separator.  The
+    * UI is updated using the new symbol.
+    */
+  void           thousandsSeparatorChanged();
 
   /**
   * This method is called when it is detected that the user has selected the
@@ -191,8 +242,6 @@ private slots:
   * has to reset the other column.
   */
   void           resetComboBox(const QString& comboBox, const int& col);
-
-  int            validateColumn(const int& col, const QString& type);
 
 signals:
   /**

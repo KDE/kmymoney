@@ -21,7 +21,7 @@
 
 #include <QtCore/QObject>
 
-class ParseLine;
+class Parse;
 
 class ParseDataTest : public QObject
 {
@@ -30,7 +30,7 @@ class ParseDataTest : public QObject
 public:
   ParseDataTest();
 
-  ParseLine* m_parseline;
+  Parse* m_parseline;
 
 private slots:
   void init();
@@ -49,7 +49,7 @@ private slots:
   * is the field separator, is detected and rebuilt.  If the field
   * separator is not a comma, the split does not occur.
   */
-  void parse();
+  void parseSplitString();
   void parse_data();
 
 };

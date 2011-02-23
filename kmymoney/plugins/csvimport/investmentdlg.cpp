@@ -42,6 +42,7 @@
 #include <KLocale>
 #include <KIO/NetAccess>
 #include <KAboutData>
+#include <KAction>
 #include <KAboutApplicationDialog>
 
 // ----------------------------------------------------------------------------
@@ -52,128 +53,97 @@
 #include "mymoneystatement.h"
 #include "redefinedlg.h"
 
-InvestmentDlg::InvestmentDlg(QWidget* parent) :
-    InvestmentDlgDecl(parent)
+InvestmentDlg::InvestmentDlg()
 {
-  tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
-  tableWidget->setWordWrap(false);
-
-  for (int i = 0; i < MAXCOL; i++) {
-    QString t;
-    t.setNum(i + 1);
-    comboBox_amountCol->addItem(t) ;
-    comboBox_dateCol->addItem(t) ;
-    comboBox_memoCol->addItem(t) ;
-    comboBox_priceCol->addItem(t) ;
-    comboBox_quantityCol->addItem(t) ;
-    comboBox_typeCol->addItem(t) ;
-    comboBox_feeCol->addItem(t) ;
-  }
-
-  int screenWidth = QApplication::desktop()->width();
-  int screenHeight = QApplication::desktop()->height();
-  int x = (screenWidth - width()) / 2;
-  int y = (screenHeight - height()) / 2;
-
-  this->move(x, y);
-
-  m_convertDat = new ConvertDate;
-  m_investProcessing = new InvestProcessing;
-  m_investProcessing->m_investDlg = this;
-  m_redefine = new RedefineDlg;
-
-  connect(checkBox_qif, SIGNAL(clicked(bool)), m_investProcessing, SLOT(acceptClicked(bool)));
-  connect(button_clear, SIGNAL(clicked()), m_investProcessing, SLOT(clearColumnsSelected()));
-  connect(button_close, SIGNAL(clicked()), this, SLOT(slotClose()));
-  connect(button_banking, SIGNAL(clicked()), this, SLOT(bankingSelected()));
-  connect(button_open, SIGNAL(clicked()), m_investProcessing, SLOT(fileDialog()));
-  connect(button_saveAs, SIGNAL(clicked()), m_investProcessing, SLOT(saveAs()));
-  connect(pushButton, SIGNAL(clicked()), this, SLOT(helpSelected()));
-  connect(comboBox_encoding, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(encodingChanged()));
-  connect(comboBox_fieldDelim, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(fieldDelimiterChanged()));
-  connect(comboBox_memoCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(memoColumnSelected(int)));
-  connect(comboBox_dateFormat, SIGNAL(activated(int)), m_investProcessing, SLOT(dateFormatSelected(int)));
-  connect(comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(dateFormatSelected(int)));
-  connect(comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), m_convertDat, SLOT(dateFormatSelected(int)));
-  connect(comboBox_dateFormat, SIGNAL(activated(int)), m_convertDat, SLOT(dateFormatSelected(int)));
-  connect(comboBox_typeCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(typeColumnSelected(int)));
-  connect(comboBox_dateCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(dateColumnSelected(int)));
-  connect(comboBox_quantityCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(quantityColumnSelected(int)));
-  connect(comboBox_priceCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(priceColumnSelected(int)));
-  connect(comboBox_amountCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(amountColumnSelected(int)));
-  connect(comboBox_feeCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(feeColumnSelected(int)));
-  connect(spinBox_skip, SIGNAL(editingFinished()), m_investProcessing, SLOT(startLineChanged()));
-  connect(spinBox_skipLast, SIGNAL(editingFinished()), m_investProcessing, SLOT(endLineChanged()));
-  connect(m_investProcessing, SIGNAL(statementReady(MyMoneyStatement&)), this, SIGNAL(statementReady(MyMoneyStatement&)));
-  connect(m_redefine, SIGNAL(changedType(const QString&)), this, SLOT(changedType(const QString&)));
-
-  m_investProcessing->init();
 }
 
 InvestmentDlg::~InvestmentDlg()
 {
-  delete       m_investProcessing;
-  delete       m_convertDat;
-  delete       m_redefine;
+}
+
+void InvestmentDlg::init()
+{
+  m_investProcessing->init();
+  m_investProcessing->m_investDlg = this;
+
+  m_csvDialog->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+  m_csvDialog->tableWidget->setWordWrap(false);
+
+  for(int i = 0; i < MAXCOL; i++) {
+    QString t;
+    t.setNum(i + 1);
+    m_csvDialog->comboBoxInv_amountCol->addItem(t) ;
+    m_csvDialog->comboBoxInv_dateCol->addItem(t) ;
+    m_csvDialog->comboBoxInv_memoCol->addItem(t) ;
+    m_csvDialog->comboBoxInv_priceCol->addItem(t) ;
+    m_csvDialog->comboBoxInv_quantityCol->addItem(t) ;
+    m_csvDialog->comboBoxInv_typeCol->addItem(t) ;
+    m_csvDialog->comboBoxInv_feeCol->addItem(t) ;
+  }
+
+  connect(m_csvDialog->button_open, SIGNAL(clicked()), m_investProcessing, SLOT(fileDialog()));
+
+  connect(m_csvDialog->comboBoxInv_memoCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(memoColumnSelected(int)));
+  connect(m_csvDialog->comboBoxInv_typeCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(typeColumnSelected(int)));
+  connect(m_csvDialog->comboBoxInv_dateCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(dateColumnSelected(int)));
+  connect(m_csvDialog->comboBoxInv_quantityCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(quantityColumnSelected(int)));
+  connect(m_csvDialog->comboBoxInv_priceCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(priceColumnSelected(int)));
+  connect(m_csvDialog->comboBoxInv_amountCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(amountColumnSelected(int)));
+  connect(m_csvDialog->comboBoxInv_feeCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(feeColumnSelected(int)));
+  connect(m_investProcessing, SIGNAL(statementReady(MyMoneyStatement&)), this, SIGNAL(statementReady(MyMoneyStatement&)));
 }
 
 void InvestmentDlg::changedType(const QString& newType)
 {
-  if ((newType == "buy") || (newType == "sell") || (newType == "divx") ||
+  if((newType == "buy") || (newType == "sell") || (newType == "divx") ||
       (newType == "reinvdiv") || (newType == "shrsin") || (newType == "shrsout")) {
     m_investProcessing->setTrInvestDataType(newType);
   }
 }
 
-void InvestmentDlg::bankingSelected()
-{
-  this->hide();
-  m_csvImportDlg->show();
-}
-
 void InvestmentDlg::slotClose()
 {
-  KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+  if(!m_investProcessing->inFileName().isEmpty()) {  //          don't save column numbers if no file loaded
+    KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
 
-  KConfigGroup investmentGroup(config, "InvestmentSettings");
+    KConfigGroup investmentGroup(config, "InvestmentSettings");
 
-  QString str = "$HOME/" + m_investProcessing->csvPath().section('/', 3);
-  investmentGroup.writeEntry("InvDirectory", str);
-  investmentGroup.writeEntry("StartLine", spinBox_skip->value() - 1);
-  investmentGroup.config()->sync();
+    QString str = "$HOME/" + m_investProcessing->invPath().section('/', 3);
+    investmentGroup.writeEntry("InvDirectory", str);
+    investmentGroup.writeEntry("StartLine", m_csvDialog->spinBox_skip->value() - 1);
+    investmentGroup.config()->sync();
 
-  KConfigGroup profileGroup(config, "Profile");
-  profileGroup.writeEntry("DateFormat", comboBox_dateFormat->currentIndex());
-  profileGroup.writeEntry("Encoding", comboBox_encoding->currentIndex());
-  profileGroup.writeEntry("FieldDelimiter", comboBox_fieldDelim->currentIndex());
-  profileGroup.config()->sync();
+    KConfigGroup profileGroup(config, "Profile");
+    profileGroup.writeEntry("DateFormat", m_csvDialog->comboBox_dateFormat->currentIndex());
+    profileGroup.writeEntry("FieldDelimiter", m_csvDialog->comboBox_fieldDelimiter->currentIndex());
+    profileGroup.config()->sync();
 
-  if (!m_investProcessing->inFileName().isEmpty()) { //          don't save column numbers if no file loaded
     KConfigGroup invcolumnsGroup(config, "InvColumns");
-    invcolumnsGroup.writeEntry("DateCol", comboBox_dateCol->currentIndex());
-    invcolumnsGroup.writeEntry("PayeeCol", comboBox_typeCol->currentIndex());
-    invcolumnsGroup.writeEntry("MemoCol", comboBox_memoCol->currentIndex());
-    invcolumnsGroup.writeEntry("QuantityCol", comboBox_quantityCol->currentIndex());
-    invcolumnsGroup.writeEntry("AmountCol", comboBox_amountCol->currentIndex());
-    invcolumnsGroup.writeEntry("PriceCol", comboBox_priceCol->currentIndex());
-    invcolumnsGroup.writeEntry("FeeCol", comboBox_feeCol->currentIndex());
+    invcolumnsGroup.writeEntry("DateCol", m_csvDialog->comboBoxInv_dateCol->currentIndex());
+    invcolumnsGroup.writeEntry("PayeeCol", m_csvDialog->comboBoxInv_typeCol->currentIndex());
+    invcolumnsGroup.writeEntry("MemoCol", m_csvDialog->comboBoxInv_memoCol->currentIndex());
+    invcolumnsGroup.writeEntry("QuantityCol", m_csvDialog->comboBoxInv_quantityCol->currentIndex());
+    invcolumnsGroup.writeEntry("AmountCol", m_csvDialog->comboBoxInv_amountCol->currentIndex());
+    invcolumnsGroup.writeEntry("PriceCol", m_csvDialog->comboBoxInv_priceCol->currentIndex());
+    invcolumnsGroup.writeEntry("FeeCol", m_csvDialog->comboBoxInv_feeCol->currentIndex());
     invcolumnsGroup.config()->sync();
+
+    /*    These settings do not get altered so need not be saved.
+
+    investmentGroup.writeEntry( "ShrsinParam", invcsv->shrsinList);
+    investmentGroup.writeEntry( "DivXParam", invcsv->divXList);
+    investmentGroup.writeEntry( "BrokerageParam", invcsv->brokerageList);
+    investmentGroup.writeEntry( "ReinvdivParam", invcsv->reinvdivList);
+    investmentGroup.writeEntry( "BuyParam", invcsv->buyList);
+    investmentGroup.writeEntry( "SellParam", invcsv->sellList);
+    investmentGroup.writeEntry( "RemoveParam", invcsv->removeList);
+    investmentGroup.config()->sync();*/
+
+    m_investProcessing->inFileName().clear();
   }
-  /*    These settings do not get altered so need not be saved.
-
-  investmentGroup.writeEntry( "ShrsinParam", invcsv->shrsinList);
-  investmentGroup.writeEntry( "DivXParam", invcsv->divXList);
-  investmentGroup.writeEntry( "BrokerageParam", invcsv->brokerageList);
-  investmentGroup.writeEntry( "ReinvdivParam", invcsv->reinvdivList);
-  investmentGroup.writeEntry( "BuyParam", invcsv->buyList);
-  investmentGroup.writeEntry( "SellParam", invcsv->sellList);
-  investmentGroup.writeEntry( "RemoveParam", invcsv->removeList);
-  investmentGroup.config()->sync();*/
-
-  m_investProcessing->inFileName().clear();
-  tableWidget->clear();//     in case later reopening window, clear old contents now
-  m_csvImportDlg->show();
-  InvestmentDlg::close();
+  m_csvDialog->tableWidget->clear();//     in case later reopening window, clear old contents now
+  m_csvDialog->m_plugin->m_action->setEnabled(true);
+  m_csvDialog->CsvImporterDlg::close();
 }
 
 void InvestmentDlg::closeEvent(QCloseEvent *event)
@@ -185,7 +155,7 @@ void InvestmentDlg::closeEvent(QCloseEvent *event)
 void InvestmentDlg::resizeEvent(QResizeEvent * event)
 {
   event->accept();
-  if (!m_investProcessing->inFileName().isEmpty())
+  if(!m_investProcessing->inFileName().isEmpty())
     m_investProcessing->updateScreen();
 }
 
@@ -210,4 +180,9 @@ void InvestmentDlg::helpSelected()
 
   KAboutApplicationDialog* aboutDlg = new KAboutApplicationDialog(&aboutData,  0);
   aboutDlg->show();
+}
+
+void InvestmentDlg::fileDialog()
+{
+  m_investProcessing->fileDialog();
 }

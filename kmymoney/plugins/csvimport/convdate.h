@@ -47,8 +47,6 @@ public:
 private:
   int              m_dateFormatIndex;
 
-  QString          m_dateFormatString;
-
 private slots:
 
   /**

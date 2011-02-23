@@ -23,7 +23,7 @@
 
 QTEST_MAIN(ParseDataTest);
 
-ParseLine* m_parseline;
+Parse* m_parseline;
 
 ParseDataTest::ParseDataTest()
 {
@@ -31,7 +31,7 @@ ParseDataTest::ParseDataTest()
 
 void ParseDataTest::init()
 {
-  m_parseline = new ParseLine;
+  m_parseline = new Parse;
 }
 
 void ParseDataTest::cleanup()
@@ -39,9 +39,9 @@ void ParseDataTest::cleanup()
   delete m_parseline;
 }
 
-void ParseDataTest::parse()
+void ParseDataTest::parseSplitString()
 {
-  for (int i = 0; i <= 3; i++)  {//        All four delimiters should produce same result
+  for(int i = 0; i <= 3; i++)  { //        All four delimiters should produce same result
     m_parseline->setFieldDelimiterIndex(i);
     m_parseline->setFieldDelimiterCharacter(i);
 

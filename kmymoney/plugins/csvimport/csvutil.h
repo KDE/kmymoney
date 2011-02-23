@@ -24,14 +24,17 @@ email                : aganderson@ukonline.co.uk
 #include <QtCore/QStringList>
 #include <QObject>
 
+class CsvImporterDlg;
 
-class ParseLine: public QObject
+class Parse: public QObject
 {
   Q_OBJECT
 
 public:
-  ParseLine();
-  ~ParseLine();
+  Parse();
+  ~Parse();
+
+  CsvImporterDlg*     m_csvDialog;
 
   /**
    * This method is used to parse each line of data, splitting it into
@@ -42,24 +45,50 @@ public:
    */
   QStringList      parseLine(const QString& data);
 
+  QStringList      parseFile(const QString& buf, int strt, int end);
+
   QString          fieldDelimiterCharacter(int index);
-  QString          textDelimiterCharacter();
+  QString          decimalSymbol(int index);
+  QString          textDelimiterCharacter(int index);
+  void             thousandsSeparatorChanged(int index);
+  QString          thousandsSeparator();
 
   void             setFieldDelimiterIndex(int index);
   void             setFieldDelimiterCharacter(int index);
 
-  void             setTextDelimiterCharacter(QString val);
+  void             setTextDelimiterIndex(int index);
+  void             setTextDelimiterCharacter(int index);
+
+  void             setDecimalSymbolIndex(int index);
+  void             setDecimalSymbol(int index);
+
+  void             setThousandsSeparatorIndex(int index);
+  void             setThousandsSeparator(int index);
+  
+  int              lastLine();
+
+public slots:
+
+  void             decimalSymbolSelected(int index);
 
 private :
 
-  QStringList      m_delimCharList;
+  QStringList      m_decimalSymbolList;
+  QStringList      m_fieldDelimiterCharList;
+  QStringList      m_textDelimiterCharList;
+  QStringList      m_thousandsSeparatorList;
 
+  QString          m_decimalSymbol;
   QString          m_fieldDelimiterCharacter;
   QString          m_textDelimiterCharacter;
+  QString          m_thousandsSeparator;
   QString          m_inBuffer;
 
+  int              m_decimalSymbolIndex;
   int              m_fieldDelimiterIndex;
+  int              m_lastLine;
   int              m_textDelimiterIndex;
+  int              m_thousandsSeparatorIndex;
 }
 ;
 #endif

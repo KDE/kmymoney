@@ -23,7 +23,7 @@ email                 : aganderson@ukonline.co.uk
 #include "mymoneymoney.h"
 #include "ui_redefinedlgdecl.h"
 
-#define defMAXCOL 14
+#define defMAXCOL 25
 
 class InvestmentDlg;
 class MyMoneyMoney;
@@ -97,6 +97,7 @@ private:
   int              m_columnTotalWidth;
   int              m_mainHeight;
   int              m_mainWidth;
+  int              m_maxCol;
   int              m_priceColumn;
   int              m_quantityColumn;
   int              m_ret;
@@ -105,6 +106,7 @@ private:
   MyMoneyMoney     m_price;
   MyMoneyMoney     m_quantity;
   MyMoneyMoney     m_amount;
+
 
 
   /**
