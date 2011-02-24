@@ -56,9 +56,9 @@ class KBAccountSettings;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoney/kmymoneyplugin.h>
-#include <kmymoney/mymoneyaccount.h>
-#include <kmymoney/mymoneykeyvaluecontainer.h>
+#include "kmymoneyplugin.h"
+#include "mymoneyaccount.h"
+#include "mymoneykeyvaluecontainer.h"
 
 /**
   * This class represents the KBanking plugin towards KMymoney.

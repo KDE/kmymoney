@@ -49,8 +49,6 @@ SET(dialogs_HEADERS
   investtransactioneditor.h kcurrencycalculator.h transactioneditor.h
   )
 
-KMM_CREATE_LINKS( ${dialogs_HEADERS} )
-
 SET(dialogs_UI
   kaccountselectdlgdecl.ui kbackupdlgdecl.ui
   kcategoryreassigndlgdecl.ui kchooseimportexportdlgdecl.ui

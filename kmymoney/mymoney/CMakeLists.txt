@@ -31,8 +31,6 @@ SET(mymoney_HEADERS kmm_mymoney_export.h
   imymoneyprocessingcalendar.h
   )
 
-KMM_CREATE_LINKS( ${mymoney_HEADERS} )
-
 KDE4_ADD_LIBRARY(kmm_mymoney SHARED 
 	${kmm_mymoney_LIB_SRCS})
 

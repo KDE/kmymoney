@@ -75,10 +75,9 @@
 #include "kbjobview.h"
 #include "kbaccountsettings.h"
 #include "kbmapaccount.h"
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/kmymoneyview.h>
-#include <kmymoney/mymoneykeyvaluecontainer.h>
-#include <kbpickstartdate.h>
+#include "mymoneyfile.h"
+#include "kmymoneyview.h"
+#include "kbpickstartdate.h"
 
 K_EXPORT_COMPONENT_FACTORY(kmm_kbanking,
                            KGenericFactory<KBankingPlugin>("kmm_kbanking"))

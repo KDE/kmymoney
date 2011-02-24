@@ -2,13 +2,11 @@ SET (libconverter_a_SOURCES
 	mymoneygncreader.cpp
 	mymoneyqifprofile.cpp
 	mymoneyqifreader.cpp
-  mymoneyqifwriter.cpp
+	mymoneyqifwriter.cpp
 	mymoneystatementreader.cpp
 	mymoneytemplate.cpp
 	webpricequote.cpp
 	)
-
-KMM_CREATE_LINKS( mymoneytemplate.h )
 
 KDE4_ADD_LIBRARY(converter STATIC ${libconverter_a_SOURCES})
 

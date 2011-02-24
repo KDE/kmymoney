@@ -12,8 +12,6 @@ SET(storage_a_SOURCES
   mymoneydbdriver.cpp
   )
 
-KMM_CREATE_LINKS(${storage_HEADERS})
-
 # This library is actually not needed. It is built just for
 # convenience, and then linked into kmm_mymoney.
 KDE4_ADD_LIBRARY( kmm_storage STATIC ${storage_a_SOURCES} )

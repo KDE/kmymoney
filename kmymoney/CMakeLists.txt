@@ -41,9 +41,6 @@ ADD_SUBDIRECTORY( misc )
 
 SET( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 
-# we call a macro that creates symbolic links in kmymoney/
-KMM_CREATE_LINKS( ${_HEADERS} )
-
 ########### settings code (kmm_config) STATIC ###############
 SET( kmm_config_SRCS kmymoneyglobalsettings.cpp )
 KDE4_ADD_KCFG_FILES( kmm_config_SRCS kmymoneysettings.kcfgc )

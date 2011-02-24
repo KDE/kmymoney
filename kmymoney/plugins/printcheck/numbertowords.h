@@ -22,7 +22,7 @@
 
 #include <QStringList>
 
-#include <kmymoney/mymoneymoney.h>
+#include "mymoneymoney.h"
 
 class MyMoneyMoneyToWordsConverter
 {

@@ -31,8 +31,8 @@
 #include <kplugininfo.h>
 
 // KMyMoney includes
-#include <kmymoney/mymoneyfile.h>
-#include <kmymoney/pluginloader.h>
+#include "mymoneyfile.h"
+#include "pluginloader.h"
 
 #include "numbertowords.h"
 #include "pluginsettings.h"
