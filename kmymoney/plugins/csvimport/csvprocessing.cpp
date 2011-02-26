@@ -90,6 +90,7 @@ void CsvProcessing::init()
   m_date = m_dateFormats[m_dateFormatIndex];
   m_csvDialog->m_convertDate->setDateFormatIndex(m_dateFormatIndex);
   m_csvDialog->button_import->setEnabled(false);
+  m_csvDialog->tabWidget_Main->setCurrentIndex(0);
 
   findCodecs();//                             returns m_codecs = codecMap.values();
 }
@@ -108,7 +109,7 @@ void CsvProcessing::fileDialog()
 
   m_debitFlag = profileGroup.readEntry("DebitFlag", QString().toInt());
   m_csvDialog->comboBox_decimalSymbol->setEnabled(true);
-  m_csvDialog->comboBox_decimalSymbol->setCurrentIndex(-1);// ensure click causes a change
+
   m_endLine = 0;
   m_flagCol = -1;
   m_accept = false;
@@ -339,7 +340,7 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
   m_csvDialog->spinBox_skipToLast->setValue(m_parse->lastLine());
   m_csvDialog->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Interactive);
   m_screenUpdated = false;
-  
+
   //  Display the buffer
 
   for(int i = 0; i < lineList.count(); i++) {
@@ -646,15 +647,14 @@ void CsvProcessing::importClicked()
 
 void CsvProcessing::readSettings()
 {
-  m_csvDialog->tabWidget_Main->setCurrentIndex(0);
   int tmp;
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
 
   KConfigGroup profileGroup(config, "Profile");
   m_dateFormatIndex = profileGroup.readEntry("DateFormat", QString()).toInt();
+  m_csvDialog->comboBox_dateFormat->setCurrentIndex(m_dateFormatIndex);
   QString txt = profileGroup.readEntry("CurrentUI", QString());
   m_csvDialog->setCurrentUI(txt);
-  m_csvDialog->comboBox_dateFormat->setCurrentIndex(m_dateFormatIndex);
   tmp = profileGroup.readEntry("StartLine", QString()).toInt();
   m_csvDialog->spinBox_skip->setValue(tmp + 1);
 

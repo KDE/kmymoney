@@ -57,6 +57,7 @@ public:
 
   void               clearComboBoxText();
   void               init();
+  void               saveSettings();
 
 public slots:
 

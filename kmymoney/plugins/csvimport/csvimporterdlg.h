@@ -72,7 +72,9 @@ public:
 
   QString          currentUI();
   void             setCurrentUI(QString val);
-  
+
+  void             saveSettings();
+
   QString          decimalSymbol();
 
   void             clearColumnType(int column);
@@ -97,7 +99,7 @@ public:
   void             setDebitColumn(int val);
   int              maxColumnCount();
   void             setMaxColumnCount(int val);
-  
+
   /**
   * This method is called when the user selects a new decimal symbol.  The
   * UI is updated using the new symbol, and on importing, the new symbol
@@ -105,7 +107,7 @@ public:
   */
   void             updateDecimalSymbol(const QString&, int col);
 
-  void             updateDecimalColumns();
+///  void             updateDecimalColumns();
 
   QString          m_fileType;
   QString          m_tab;

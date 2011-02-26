@@ -68,6 +68,7 @@ void InvestmentDlg::init()
 
   m_csvDialog->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
   m_csvDialog->tableWidget->setWordWrap(false);
+  m_csvDialog->comboBox_decimalSymbol->setCurrentIndex(-1);
 
   for(int i = 0; i < MAXCOL; i++) {
     QString t;
@@ -102,6 +103,13 @@ void InvestmentDlg::changedType(const QString& newType)
 }
 
 void InvestmentDlg::slotClose()
+{
+  saveSettings();
+  m_csvDialog->m_plugin->m_action->setEnabled(true);
+  m_csvDialog->CsvImporterDlg::close();
+}
+
+void InvestmentDlg::saveSettings()
 {
   if(!m_investProcessing->inFileName().isEmpty()) {  //          don't save column numbers if no file loaded
     KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
@@ -142,8 +150,6 @@ void InvestmentDlg::slotClose()
     m_investProcessing->inFileName().clear();
   }
   m_csvDialog->tableWidget->clear();//     in case later reopening window, clear old contents now
-  m_csvDialog->m_plugin->m_action->setEnabled(true);
-  m_csvDialog->CsvImporterDlg::close();
 }
 
 void InvestmentDlg::closeEvent(QCloseEvent *event)

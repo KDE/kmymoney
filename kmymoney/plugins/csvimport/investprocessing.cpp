@@ -145,6 +145,9 @@ void InvestProcessing::fileDialog()
   if(m_invPath.isEmpty()) {
     m_invPath  = "~/";
   }
+  m_csvDialog->m_decimalSymbolChanged = false;
+  if(m_inFileName.isEmpty()) {
+  }
 
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-csvinvest"),
       i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"), 0);
@@ -596,7 +599,9 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
   //  Parse the buffer
 
   QStringList lineList = m_parse->parseFile(buf, m_startLine, m_endLine);
+  m_endLine = m_parse->lastLine();
   m_csvDialog->spinBox_skipToLast->setValue(m_parse->lastLine());
+
   m_csvDialog->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Interactive);
   m_screenUpdated = false;
   //  Display the buffer
@@ -631,7 +636,6 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
     if(m_brokerageItems) {
       emit statementReady(stBrokerage);//   brokerage statement ready
     }
-    m_screenUpdated = true;
     m_importNow = false;
   }
   inFile.close();
@@ -753,14 +757,19 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
 
     else if(m_columnType[i] == "quantity") {  //           Quantity Col
       txt = m_columnList[i];
+      txt = txt.remove(m_parse->thousandsSeparator());
+      txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
       m_trInvestData.quantity = MyMoneyMoney(txt);
       m_tempBuffer += 'Q' + txt + '\n';
     }
 
     else if(m_columnType[i] == "price") {  //              Price Col
       txt = m_csvDialog->comboBoxInv_priceFraction->currentText(); //fraction
+      txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
       MyMoneyMoney fraction = MyMoneyMoney(txt);
       txt = m_columnList[i].remove('"');//                     price
+      txt = txt.remove(m_parse->thousandsSeparator());
+      txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
       MyMoneyMoney price = MyMoneyMoney(txt);
       price = price * fraction;
       double val = price.toDouble();
@@ -775,6 +784,8 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       if(txt.contains(')')) {
         txt = '-' + txt.remove(QRegExp("[()]"));//             Mark as -ve
       }
+      txt = txt.remove(m_parse->thousandsSeparator());
+      txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
       MyMoneyMoney amount = MyMoneyMoney(txt);
       m_trInvestData.amount = amount;
       m_tempBuffer +=  'T' + txt + '\n';//                 amount column
@@ -1023,12 +1034,13 @@ void InvestProcessing::importClicked()
   m_priceSelected = (m_csvDialog->comboBoxInv_priceCol->currentIndex() > 0);
   m_quantitySelected = (m_csvDialog->comboBoxInv_quantityCol->currentIndex() > 0);
   m_amountSelected = (m_csvDialog->comboBoxInv_amountCol->currentIndex() > 0);
+
   if(m_dateSelected && m_typeSelected && securitySelected && m_quantitySelected && m_priceSelected && m_amountSelected) {
     m_importNow = true;//  all necessary data is present
     m_endLine = m_csvDialog->spinBox_skipToLast->value();
     int skp = m_csvDialog->spinBox_skip->value() - 1;//         skip all headers
     readFile(m_inFileName, skp);//StartLines
-
+    m_screenUpdated = true;
     //--- create the vertical (row) headers ---
     QStringList vertHeaders;
     for(int i = skp; i < m_csvDialog->tableWidget->rowCount() + skp; i++) {
@@ -1113,6 +1125,7 @@ QString InvestProcessing::accountName(const QString& aName)
 void InvestProcessing::readSettings()
 {
   int tmp;
+
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
 
   KConfigGroup investmentGroup(config, "InvestmentSettings");
@@ -1276,3 +1289,22 @@ void InvestProcessing::resetComboBox(const QString& comboBox, const int& col)
   m_columnType[col].clear();
 }
 
+int InvestProcessing::lastLine()
+{
+  return m_endLine;
+}
+
+int InvestProcessing::amountColumn()
+{
+  return m_amountColumn;
+}
+
+int InvestProcessing::quantityColumn()
+{
+  return m_quantityColumn;
+}
+
+int InvestProcessing::priceColumn()
+{
+  return m_priceColumn;
+}

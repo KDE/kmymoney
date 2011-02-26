@@ -113,7 +113,14 @@ public:
   QString        invPath();
   QString        inFileName();
 
+  int            lastLine();
+  int            amountColumn();
+  int            priceColumn();
+  int            quantityColumn();
+
   int            m_endColumn;
+
+  bool           m_screenUpdated;
 
 public:
 signals:
@@ -322,7 +329,6 @@ private:
   bool           m_memoSelected;
   bool           m_priceSelected;
   bool           m_quantitySelected;
-  bool           m_screenUpdated;
   bool           m_typeSelected;
 
   int            m_dateFormatIndex;

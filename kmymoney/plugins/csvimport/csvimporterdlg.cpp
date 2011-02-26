@@ -3,7 +3,7 @@
 *                             ---------------------
 *  begin: Sat Jan 01 2010
 *  copyright: (C) 2010 by Allan Anderson
-*  email: aganderson@ukonline.co.uk
+*  email:
 ****************************************************************************/
 
 /***************************************************************************
@@ -85,6 +85,7 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
   m_thousandsSeparator = ',';
 
   tableWidget->setWordWrap(false);
+  comboBox_decimalSymbol->setCurrentIndex(-1);
 
   m_colrSet.setRgb(0, 255, 127, 100);
   m_colrClr.setRgb(255, 255, 255, 255);
@@ -171,7 +172,7 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
 
   connect(spinBox_skip, SIGNAL(valueChanged(int)), m_csvprocessing, SLOT(startLineChanged()));
   connect(spinBox_skipToLast, SIGNAL(editingFinished()), m_csvprocessing, SLOT(endLineChanged()));
-
+  connect(spinBox_skipToLast, SIGNAL(editingFinished()), m_investProcessing, SLOT(endLineChanged()));
   connect(m_csvprocessing, SIGNAL(statementReady(MyMoneyStatement&)), this, SIGNAL(statementReady(MyMoneyStatement&)));
   connect(m_investmentDlg, SIGNAL(statementReady(MyMoneyStatement&)), this, SIGNAL(statementReady(MyMoneyStatement&)));
 
@@ -444,6 +445,13 @@ void CsvImporterDlg::numberColumnSelected(int col)
 
 void CsvImporterDlg::slotClose()
 {
+  saveSettings();
+  m_plugin->m_action->setEnabled(true);
+  CsvImporterDlg::close();
+}
+
+void CsvImporterDlg::saveSettings()
+{
   if(!m_csvprocessing->inFileName().isEmpty()) { //  don't save column numbers if no file loaded
     KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
 
@@ -473,8 +481,6 @@ void CsvImporterDlg::slotClose()
     m_csvprocessing->inFileName().clear();
   }
   tableWidget->clear();//     in case later reopening window, clear old contents now
-  m_plugin->m_action->setEnabled(true);
-  CsvImporterDlg::close();
 }
 
 void CsvImporterDlg::closeEvent(QCloseEvent *event)
@@ -649,18 +655,21 @@ void CsvImporterDlg::resetComboBox(const QString& comboBox, const int& col)
 
 void CsvImporterDlg::tabSelected(int index)
 {
-  
   switch(index) {
-    case 0 :
-      if (m_csvprocessing->inFileName().isEmpty()) {
-        m_csvprocessing->readSettings();
+    case 0 ://  "Banking" selected
+      if((m_csvprocessing->inFileName().isEmpty()) || (m_currentUI == "Invest")) {
+        m_investmentDlg->saveSettings();//            leaving "Invest" so save settings
+        m_csvprocessing->readSettings();//            ...and load "Banking"
+        tableWidget->reset();
       }
       m_fileType = "Banking";
       m_currentUI = "Banking";
       break;
-    case 1 :
-      if (m_investProcessing->inFileName().isEmpty()) {
-        m_investProcessing->readSettings();
+    case 1 ://  "Invest" selected
+      if((m_investProcessing->inFileName().isEmpty()) || (m_currentUI == "Banking")) {
+        saveSettings();//                             leaving "Banking" so save settings
+        m_investProcessing->readSettings();//         ...and load "Invest"
+        tableWidget->reset();
       }
       m_fileType = "Invest";
       m_currentUI = "Invest";
@@ -671,52 +680,91 @@ void CsvImporterDlg::tabSelected(int index)
 void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
 {
   QString txt;
-
-  for(int row = 0; row < m_csvprocessing->lastLine(); row++) {
+  int last = 0;
+  if(m_fileType == "Banking") {
+    last = m_csvprocessing->lastLine();
+  } else {
+    last = m_investProcessing->lastLine();
+  }
+  //  Clear background
+  for(int row = 0; row < last; row++) {
     if(tableWidget->item(row, col) != 0) {
       tableWidget->item(row, col)->setBackground(m_brushClr);
     }
   }
-  if(m_decimalSymbol == KGlobal::locale()->decimalSymbol()) {
-    return;
-  }
 
-  if(type == "amount" || type == "credit" || type == "debit") {
+  if(type == "amount" || type == "credit" || type == "debit" || type == "price" || type == "quantity") {
+
+    //  Set first and last rows
+
+    int first = 0;
+    int last = 0;
+    bool symbolFound = false;
+
+    if(m_fileType == "Banking") {
+      last = m_csvprocessing->lastLine();
+      if(m_csvprocessing->m_screenUpdated == true) {//  if headers have been deleted
+        first = 0;//                                    ..first data row is '0'
+      } else {
+        first = spinBox_skip->value() - 1;//            if not, this is first
+      }
+    } else {
+      last = m_investProcessing->lastLine();
+      if(m_investProcessing->m_screenUpdated == true) {
+        first = 0;
+        last = last - spinBox_skip->value() + 1;
+      } else {
+        first = spinBox_skip->value() - 1;
+      }
+    }
+
+    //  Check if this col contains decimal symbol
+
+    for(int row = first; row < last; row++) {
+      if(tableWidget->item(row, col) != 0) {
+        txt = tableWidget->item(row, col)->text();
+      }
+      if(txt.contains(m_decimalSymbol)) { //          symbol found
+        symbolFound = true;
+        break;
+      }
+    }
+    if(!symbolFound) { //                             no symbol found
+      KMessageBox::sorry(this, i18n("<center>The selected decimal symbol is not present in column %1.</center>"
+                                    "<center>This might not be a problem, but please check your selection.</center>",
+                                    col + 1), i18n("CSV import"));
+      return;
+    }
 
     //  If the start line has a value set, but incorrectly, some header lines may
     //  have fewer columns than the data lines, so check if this item exists.
 
-    int i;
-    if(m_csvprocessing->m_screenUpdated == true) {
-      i = 0;
-    } else {
-      i = spinBox_skip->value() - 1;
-    }
-
-    for(int row = i; row < m_csvprocessing->lastLine(); row++) {
-      if(tableWidget->item(row, col) == 0) { //            empty cell
-        if(m_csvprocessing->importNow()) { //              if importing, this is error
+    for(int row = first; row < last; row++) {
+      if(tableWidget->item(row, col) == 0) { //       empty cell
+        if(m_csvprocessing->importNow()) { //         if importing, this is error
           KMessageBox::sorry(this, (i18n("Row number %1 may be a header line, as it has an incomplete set of entries."
                                          "<center>It may be that the start line is incorrectly set.</center>",
                                          row + 1), i18n("CSV import")));
           return;
         }
-//                                                         if not importing, query
-        int ret = KMessageBox::warningContinueCancel(this, i18n("<center>The '%1' field on row %2 is empty.</center>"
+//                                                    if not importing, query
+        int ret = KMessageBox::warningContinueCancel(this, i18n("<center>The cell in column '%1' on row %2 is empty.</center>"
                   "<center>Please check your selections.</center><center>Continue or Cancel?</center>",
-                  m_columnType[col], row + 1), i18n("Selections Warning"), KStandardGuiItem::cont(),
+                  col + 1 , row + 1), i18n("Selections Warning"), KStandardGuiItem::cont(),
                   KStandardGuiItem::cancel());
         if(ret == KMessageBox::Continue) {
           continue;
         }
         return;
       }
+
+      //  Finally, replace any decimal symbol
       txt = tableWidget->item(row, col)->text();
-      if(!txt.isEmpty()) { //                              entry exists so update it
-        txt.remove(m_thousandsSeparator);
+      if(!txt.isEmpty()) { //                         entry exists so update it
+        txt.remove(m_thousandsSeparator);//           remove to avoid complications
         txt.replace(m_decimalSymbol, KGlobal::locale()->decimalSymbol());
       }
-      tableWidget->item(row, col)->setText(txt);
+      tableWidget->item(row, col)->setText(txt);//    highlight selection
       tableWidget->item(row, col)->setBackground(m_brushSet);
     }
   }
@@ -724,16 +772,9 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
 
 void CsvImporterDlg::decimalSymbolSelected(int index)
 {
-  restoreBackground();
+  restoreBackground();//                              remove selection highlighting
 
   if(index < 0) return;
-  comboBox_thousandsDelimiter->setCurrentIndex(index);
-  thousandsSeparatorChanged();
-  QString tmp = m_parse->decimalSymbol(index);
-
-  if(m_parse->decimalSymbol(index) == KGlobal::locale()->decimalSymbol()) {
-    return;
-  }
 
   if(m_decimalSymbolChanged) {
     int ret = KMessageBox::questionYesNo(this, i18n("<center>The Decimal Symbol has already been changed.</center>"
@@ -746,21 +787,34 @@ void CsvImporterDlg::decimalSymbolSelected(int index)
       return;
     }
   }
+
+  //  Save new decimal symbol and thousands separator
+
   m_decimalSymbolIndex = index;
   m_parse->setDecimalSymbolIndex(index);
   m_decimalSymbol = m_parse->decimalSymbol(index);
+  comboBox_thousandsDelimiter->setCurrentIndex(index);
   thousandsSeparatorChanged();
 
-  if(m_decimalSymbol == KGlobal::locale()->decimalSymbol()) {
-    return;
-  }
+  //  Update the UI
 
-  if((!m_csvprocessing->inFileName().isEmpty()) && ((m_amountColumn >= 0) || ((m_debitColumn >= 0) && (m_creditColumn >= 0)))) {
-    if(m_amountColumn >= 0) {
-      updateDecimalSymbol("amount", m_amountColumn);
-    } else {
-      updateDecimalSymbol("debit", m_debitColumn);
-      updateDecimalSymbol("credit", m_creditColumn);
+  if(m_fileType == "Banking") {
+    if((!m_csvprocessing->inFileName().isEmpty()) && ((m_amountColumn >= 0) || ((m_debitColumn >= 0) && (m_creditColumn >= 0)))) {
+      if(m_amountColumn >= 0) {
+        updateDecimalSymbol("amount", m_amountColumn);
+      } else {
+        updateDecimalSymbol("debit", m_debitColumn);
+        updateDecimalSymbol("credit", m_creditColumn);
+      }
+      m_decimalSymbolChanged = true;
+    }
+  } else {
+    if(m_fileType == "Invest") {
+      if(!m_investProcessing->inFileName().isEmpty()) {
+        updateDecimalSymbol("amount", m_investProcessing->amountColumn());
+        updateDecimalSymbol("price", m_investProcessing->priceColumn());
+        updateDecimalSymbol("quantity", m_investProcessing->quantityColumn());
+      }
     }
     m_decimalSymbolChanged = true;
   }
@@ -769,16 +823,6 @@ void CsvImporterDlg::decimalSymbolSelected(int index)
 QString CsvImporterDlg::decimalSymbol()
 {
   return m_decimalSymbol;
-}
-
-void CsvImporterDlg::updateDecimalColumns()
-{
-  if(m_amountColumn >= 0) {
-    updateDecimalSymbol("amount", m_amountColumn);
-  } else if((m_debitColumn >= 0) && (m_creditColumn >= 0)) {
-    updateDecimalSymbol("debit", m_debitColumn);
-    updateDecimalSymbol("credit", m_creditColumn);
-  }
 }
 
 void CsvImporterDlg::thousandsSeparatorChanged()

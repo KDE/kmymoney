@@ -64,7 +64,7 @@ public:
 
   void             setThousandsSeparatorIndex(int index);
   void             setThousandsSeparator(int index);
-  
+
   int              lastLine();
 
 public slots:
