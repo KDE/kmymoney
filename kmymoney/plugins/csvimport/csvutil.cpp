@@ -15,14 +15,14 @@
  *                                                                         *
  ***************************************************************************/
 #include "csvutil.h"
-#include "csvimporterdlg.h"
 #include "investprocessing.h"
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QDebug>
 
-class CsvImporterDlg;
+#include <KGlobal>
+#include <KLocale>
 
 Parse::Parse(): m_fieldDelimiterIndex(0), m_textDelimiterIndex(0)
 {
