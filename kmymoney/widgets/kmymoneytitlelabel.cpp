@@ -94,7 +94,7 @@ void KMyMoneyTitleLabel::paintEvent(QPaintEvent *e)
 
   // then draw text on top with a larger font (relative to the pixmap size) and with the appropriate color
   QFont font = painter.font();
-  font.setPointSizeF(qMax(result.height() / 2.5, font.pointSizeF()));
+  font.setPointSizeF(qMax(result.height() / static_cast<qreal>(2.5), font.pointSizeF()));
   painter.setFont(font);
   painter.setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground(KColorScheme::NormalText).color());
   style()->drawItemText(&painter, contentsRect(), alignment(), palette(), isEnabled(), QString("   ") + m_text);
