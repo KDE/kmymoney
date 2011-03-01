@@ -79,6 +79,8 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
   m_payeeColumn = 0;
   m_previousColumn = 0;
   m_maxColumnCount = 0;
+  m_endLine = 0;
+  m_startLine = 1;
 
   m_decimalSymbol = '.';
   m_previousType.clear();
@@ -86,13 +88,14 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
 
   tableWidget->setWordWrap(false);
   comboBox_decimalSymbol->setCurrentIndex(-1);
+  comboBox_thousandsDelimiter->setEnabled(false);
 
-  m_colrSet.setRgb(0, 255, 127, 100);
-  m_colrClr.setRgb(255, 255, 255, 255);
-  m_brushSet.setColor(m_colrSet);
-  m_brushClr.setColor(m_colrClr);
-  m_brushSet.setStyle(Qt::SolidPattern);
-  m_brushClr.setStyle(Qt::SolidPattern);
+  m_setColor.setRgb(0, 255, 127, 100);
+  m_clearColor.setRgb(255, 255, 255, 255);
+  m_colorBrush.setColor(m_setColor);
+  m_clearBrush.setColor(m_clearColor);
+  m_colorBrush.setStyle(Qt::SolidPattern);
+  m_clearBrush.setStyle(Qt::SolidPattern);
 
   for(int i = 0; i < MAXCOL; i++) { //  populate comboboxes with col # values
     QString t;
@@ -170,7 +173,9 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
   connect(comboBoxBnk_dateCol, SIGNAL(currentIndexChanged(int)), this, SLOT(dateColumnSelected(int)));
   connect(comboBoxBnk_payeeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(payeeColumnSelected(int)));
 
+  connect(spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
   connect(spinBox_skip, SIGNAL(valueChanged(int)), m_csvprocessing, SLOT(startLineChanged()));
+  connect(spinBox_skipToLast, SIGNAL(valueChanged(int)), this, SLOT(endLineChanged(int)));
   connect(spinBox_skipToLast, SIGNAL(editingFinished()), m_csvprocessing, SLOT(endLineChanged()));
   connect(spinBox_skipToLast, SIGNAL(editingFinished()), m_investProcessing, SLOT(endLineChanged()));
   connect(m_csvprocessing, SIGNAL(statementReady(MyMoneyStatement&)), this, SIGNAL(statementReady(MyMoneyStatement&)));
@@ -211,6 +216,16 @@ void CsvImporterDlg::amountRadioClicked(bool checked)
     m_debitColumn = -1;
     m_creditColumn = -1;
   }
+}
+
+void CsvImporterDlg::endLineChanged(int val)
+{
+  m_endLine = val;
+}
+
+void CsvImporterDlg::startLineChanged(int val)
+{
+  m_startLine = val;
 }
 
 int CsvImporterDlg::validateColumn(const int& col, const QString& type)
@@ -680,16 +695,12 @@ void CsvImporterDlg::tabSelected(int index)
 void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
 {
   QString txt;
-  int last = 0;
-  if(m_fileType == "Banking") {
-    last = m_csvprocessing->lastLine();
-  } else {
-    last = m_investProcessing->lastLine();
-  }
+
   //  Clear background
-  for(int row = 0; row < last; row++) {
+
+  for(int row = 0; row < m_endLine; row++) {
     if(tableWidget->item(row, col) != 0) {
-      tableWidget->item(row, col)->setBackground(m_brushClr);
+      tableWidget->item(row, col)->setBackground(m_clearBrush);
     }
   }
 
@@ -697,49 +708,31 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
 
     //  Set first and last rows
 
-    int first = 0;
+    int first = 1;
     int last = 0;
-    bool symbolFound = false;
+    m_parse->setSymbolFound(false);
 
     if(m_fileType == "Banking") {
-      last = m_csvprocessing->lastLine();
-      if(m_csvprocessing->m_screenUpdated == true) {//  if headers have been deleted
-        first = 0;//                                    ..first data row is '0'
+      last = m_endLine;
+      if(m_csvprocessing->m_screenUpdated == true) {//if headers have been deleted
+        first = 1;//                                  ..first data row is '1'
+        last = last - m_startLine + 1;
       } else {
-        first = spinBox_skip->value() - 1;//            if not, this is first
+        first = m_startLine;//                        if not, this is first
       }
     } else {
-      last = m_investProcessing->lastLine();
-      if(m_investProcessing->m_screenUpdated == true) {
-        first = 0;
-        last = last - spinBox_skip->value() + 1;
+      last = m_endLine;
+      if(m_investProcessing->m_screenUpdated == true) {//  as above
+        first = 1;
+        last = last - m_startLine + 1;
       } else {
-        first = spinBox_skip->value() - 1;
+        first = m_startLine;
       }
     }
+    QString newTxt;
+    //  Check if this col contains empty cells
 
-    //  Check if this col contains decimal symbol
-
-    for(int row = first; row < last; row++) {
-      if(tableWidget->item(row, col) != 0) {
-        txt = tableWidget->item(row, col)->text();
-      }
-      if(txt.contains(m_decimalSymbol)) { //          symbol found
-        symbolFound = true;
-        break;
-      }
-    }
-    if(!symbolFound) { //                             no symbol found
-      KMessageBox::sorry(this, i18n("<center>The selected decimal symbol is not present in column %1.</center>"
-                                    "<center>This might not be a problem, but please check your selection.</center>",
-                                    col + 1), i18n("CSV import"));
-      return;
-    }
-
-    //  If the start line has a value set, but incorrectly, some header lines may
-    //  have fewer columns than the data lines, so check if this item exists.
-
-    for(int row = first; row < last; row++) {
+    for(int row = first - 1; row < last; row++) {
       if(tableWidget->item(row, col) == 0) { //       empty cell
         if(m_csvprocessing->importNow()) { //         if importing, this is error
           KMessageBox::sorry(this, (i18n("Row number %1 may be a header line, as it has an incomplete set of entries."
@@ -756,16 +749,30 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
           continue;
         }
         return;
-      }
+      } else {
 
-      //  Finally, replace any decimal symbol
-      txt = tableWidget->item(row, col)->text();
-      if(!txt.isEmpty()) { //                         entry exists so update it
-        txt.remove(m_thousandsSeparator);//           remove to avoid complications
-        txt.replace(m_decimalSymbol, KGlobal::locale()->decimalSymbol());
+        //  Check if this col contains decimal symbol
+
+        txt = tableWidget->item(row, col)->text();//         get data
+
+        newTxt = m_parse->possiblyReplaceSymbol(txt);//      update data
+        if(newTxt == txt) { //                               no matching symbol found
+          tableWidget->item(row, col)->setText(newTxt);//    highlight selection
+          tableWidget->item(row, col)->setBackground(m_colorBrush);
+          continue;
+        }
       }
-      tableWidget->item(row, col)->setText(txt);//    highlight selection
-      tableWidget->item(row, col)->setBackground(m_brushSet);
+      tableWidget->item(row, col)->setText(newTxt);//        highlight selection
+      tableWidget->item(row, col)->setBackground(m_colorBrush);
+    }//  last row
+
+    if(!m_parse->symbolFound()) { //                         no symbol found
+      KMessageBox::sorry(this, i18n("<center>The selected decimal symbol is not present in column %1.</center>"
+                                    "<center>If the symbol displayed does not match your system setting</center>"
+                                    "<center>your data is unlikely to import correctly.</center>"
+                                    "<center>Please check your selection.</center>",
+                                    col + 1), i18n("CSV import"));
+      return;
     }
   }
 }
@@ -775,6 +782,12 @@ void CsvImporterDlg::decimalSymbolSelected(int index)
   restoreBackground();//                              remove selection highlighting
 
   if(index < 0) return;
+
+  if(m_startLine > m_endLine) {
+    KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
+                               "<center>Please correct your settings.</center>"), i18n("CSV import"));
+    return;
+  }
 
   if(m_decimalSymbolChanged) {
     int ret = KMessageBox::questionYesNo(this, i18n("<center>The Decimal Symbol has already been changed.</center>"
@@ -835,7 +848,7 @@ void CsvImporterDlg::restoreBackground()
   for(int row = 0; row < m_csvprocessing->lastLine(); row++)
     for(int col = 0; col < m_csvprocessing->endColumn(); col++)
       if(tableWidget->item(row, col) != 0) {
-        tableWidget->item(row, col)->setBackground(m_brushClr);
+        tableWidget->item(row, col)->setBackground(m_clearBrush);
       }
 }
 

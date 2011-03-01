@@ -3,7 +3,7 @@
 *                              --------------------
 * begin                       : Sat Jan 01 2010
 * copyright                   : (C) 2010 by Allan Anderson
-* email                       : aganderson@ukonline.co.uk
+* email                       :
 ********************************************************************************/
 
 /*******************************************************************************
@@ -680,6 +680,7 @@ void InvestProcessing::displayLine(const QString& data)
 
 int InvestProcessing::processInvestLine(const QString& inBuffer)
 {
+  QString newTxt;
   if((m_priceColumn >= m_maxColumnCount) || (m_quantityColumn >= m_maxColumnCount) || (m_amountColumn >= m_maxColumnCount)) {
     KMessageBox::sorry(0, (i18n("The price, quantity and/or amount column values appear to be invalid."
                                 "<center>Please correct the settings.</center>")),
@@ -757,10 +758,9 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
 
     else if(m_columnType[i] == "quantity") {  //           Quantity Col
       txt = m_columnList[i];
-      txt = txt.remove(m_parse->thousandsSeparator());
-      txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
-      m_trInvestData.quantity = MyMoneyMoney(txt);
-      m_tempBuffer += 'Q' + txt + '\n';
+      newTxt = m_parse->possiblyReplaceSymbol(txt);
+      m_trInvestData.quantity = MyMoneyMoney(newTxt);
+      m_tempBuffer += 'Q' + newTxt + '\n';
     }
 
     else if(m_columnType[i] == "price") {  //              Price Col
@@ -768,27 +768,25 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
       MyMoneyMoney fraction = MyMoneyMoney(txt);
       txt = m_columnList[i].remove('"');//                     price
-      txt = txt.remove(m_parse->thousandsSeparator());
-      txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
-      MyMoneyMoney price = MyMoneyMoney(txt);
+      newTxt = m_parse->possiblyReplaceSymbol(txt);
+      MyMoneyMoney price = MyMoneyMoney(newTxt);
       price = price * fraction;
       double val = price.toDouble();
-      txt.setNum(val, 'f', 6);
+      newTxt.setNum(val, 'f', 6);
       m_trInvestData.price = price;
-      m_tempBuffer +=  'I' + txt + '\n';//                 price column
+      m_tempBuffer +=  'I' + newTxt + '\n';//                 price column
     }
 
     else if(m_columnType[i] == "amount") {  //             Amount Col
       txt = m_columnList[i];
       txt = txt.remove('"');
       if(txt.contains(')')) {
-        txt = '-' + txt.remove(QRegExp("[()]"));//             Mark as -ve
+        txt = '-' + txt.remove(QRegExp("[()]"));//            Mark as -ve
       }
-      txt = txt.remove(m_parse->thousandsSeparator());
-      txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
-      MyMoneyMoney amount = MyMoneyMoney(txt);
+      newTxt = m_parse->possiblyReplaceSymbol(txt);
+      MyMoneyMoney amount = MyMoneyMoney(newTxt);
       m_trInvestData.amount = amount;
-      m_tempBuffer +=  'T' + txt + '\n';//                 amount column
+      m_tempBuffer +=  'T' + newTxt + '\n';//                 amount column
     }
 
     else if(m_columnType[i] == "fee") {  //                Fee Col
@@ -1039,6 +1037,13 @@ void InvestProcessing::importClicked()
     m_importNow = true;//  all necessary data is present
     m_endLine = m_csvDialog->spinBox_skipToLast->value();
     int skp = m_csvDialog->spinBox_skip->value() - 1;//         skip all headers
+
+    if(skp > m_endLine) {
+      KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
+                                 "<center>Please correct your settings.</center>"), i18n("CSV import"));
+      return;
+    }
+
     readFile(m_inFileName, skp);//StartLines
     m_screenUpdated = true;
     //--- create the vertical (row) headers ---

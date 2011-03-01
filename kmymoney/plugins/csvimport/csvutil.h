@@ -3,7 +3,7 @@
                               -----------
 begin                : Sat Jan 01 2010
 copyright            : (C) 2010 by Allan Anderson
-email                : aganderson@ukonline.co.uk
+email                :
 ***************************************************************************/
 
 /**************************************************************************
@@ -44,7 +44,6 @@ public:
    * delimiter, and re-assembles the string.
    */
   QStringList      parseLine(const QString& data);
-
   QStringList      parseFile(const QString& buf, int strt, int end);
 
   QString          fieldDelimiterCharacter(int index);
@@ -52,6 +51,7 @@ public:
   QString          textDelimiterCharacter(int index);
   void             thousandsSeparatorChanged(int index);
   QString          thousandsSeparator();
+  QString          possiblyReplaceSymbol(const QString&  str);
 
   void             setFieldDelimiterIndex(int index);
   void             setFieldDelimiterCharacter(int index);
@@ -64,6 +64,9 @@ public:
 
   void             setThousandsSeparatorIndex(int index);
   void             setThousandsSeparator(int index);
+
+  bool             symbolFound();
+  void             setSymbolFound(bool found);
 
   int              lastLine();
 
@@ -89,6 +92,8 @@ private :
   int              m_lastLine;
   int              m_textDelimiterIndex;
   int              m_thousandsSeparatorIndex;
+
+  bool             m_symbolFound;
 }
 ;
 #endif

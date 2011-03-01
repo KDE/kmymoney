@@ -3,7 +3,7 @@
 *                             -----------------                            *
 *  begin: Sat Jan 01 2010                                                  *
 *  copyright: (C) 2010 by Allan Anderson                                   *
-*  email: aganderson@ukonline.co.uk                                        *
+*  email:                                       *
 ****************************************************************************/
 
 /***************************************************************************
@@ -340,7 +340,7 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
   m_csvDialog->spinBox_skipToLast->setValue(m_parse->lastLine());
   m_csvDialog->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Interactive);
   m_screenUpdated = false;
-
+  m_endLine = m_parse->lastLine();
   //  Display the buffer
 
   for(int i = 0; i < lineList.count(); i++) {
@@ -483,6 +483,8 @@ void CsvProcessing::csvImportTransaction(MyMoneyStatement& st)
 
 int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
 {
+  QString newTxt;
+
   if(m_columnList.count() < m_endColumn) {
     if(!m_accept) {
       QString row = QString::number(m_row);
@@ -544,6 +546,11 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
 
     else if(m_csvDialog->columnType(i) == "amount") {  // Is this Amount column
       ++neededFieldsCount;
+
+      //  For a file which uses a flag field value to indicate if amount is a debit or a credit.
+      //  Resource file DebitFlag setting of -1 means 'ignore/notused'.
+      //  DebitFlag setting of >=0 indicates the column containing the flag.
+
       if(m_flagCol == -1) { //                        it's a new file
         switch(m_debitFlag) { //                      Flag if amount is debit or credit
           case -1://                                  Ignore flag
@@ -567,7 +574,8 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
       if(m_flagCol > 0) {
         flag = m_columnList[m_flagCol - 1];//         indicates if amount is debit or credit
       }//                                             if flagCol == 0, flag is empty
-      txt = m_columnList[i];
+
+      txt = m_columnList[i];//                        amount column value
       if((m_csvDialog->amountColumn() == i) &&
           (((txt.contains("("))) || (flag.startsWith('A')))) {//  "(" or "Af" = debit
         txt = txt.remove(QRegExp("[()]"));
@@ -575,10 +583,9 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
       } else if(m_csvDialog->debitColumn() == i) {
         txt = '-' + txt;  //                          Mark as -ve
       }
-      txt = txt.remove(m_parse->thousandsSeparator());
-      txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
-      m_trData.amount = txt;
-      m_qifBuffer = m_qifBuffer + 'T' + txt + '\n';
+      newTxt = m_parse->possiblyReplaceSymbol(txt);
+      m_trData.amount = newTxt;
+      m_qifBuffer = m_qifBuffer + 'T' + newTxt + '\n';
     }
 
     else if((m_csvDialog->columnType(i) == "debit") || (m_csvDialog->columnType(i) == "credit")) { //  Credit or debit?
@@ -588,9 +595,9 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
         if(m_csvDialog->debitColumn() == i)
           txt = '-' + txt;//  Mark as -ve
         if((m_csvDialog->debitColumn() == i) || (m_csvDialog->creditColumn() == i)) {
-          txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
-          m_trData.amount = txt;
-          m_qifBuffer = m_qifBuffer + 'T' + txt + '\n';
+          newTxt = m_parse->possiblyReplaceSymbol(txt);
+          m_trData.amount = newTxt;
+          m_qifBuffer = m_qifBuffer + 'T' + newTxt + '\n';
         }
       }
     }
@@ -628,15 +635,22 @@ void CsvProcessing::importClicked()
     m_importNow = true; //                          all necessary data is present
     int skp = m_csvDialog->spinBox_skip->value() - 1;
 
+    if(skp > m_endLine) {
+      KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
+                                 "<center>Please correct your settings.</center>"), i18n("CSV import"));
+      return;
+    }
     readFile(m_inFileName, skp);   //               skip all headers
 
     //--- create the (revised) vertical (row) headers ---
+
     QStringList vertHeaders;
     for(int i = skp; i < m_csvDialog->tableWidget->rowCount() + skp; i++) {
       QString hdr = (QString::number(i + 1));
       vertHeaders += hdr;
     }
     //  verticalHeader()->width() varies with its content so....
+
     m_csvDialog->tableWidget->setVerticalHeaderLabels(vertHeaders);
     m_csvDialog->tableWidget->hide();//             to ensure....
     m_csvDialog->tableWidget->show();//             ..vertical header width redraws
@@ -656,7 +670,8 @@ void CsvProcessing::readSettings()
   QString txt = profileGroup.readEntry("CurrentUI", QString());
   m_csvDialog->setCurrentUI(txt);
   tmp = profileGroup.readEntry("StartLine", QString()).toInt();
-  m_csvDialog->spinBox_skip->setValue(tmp + 1);
+  m_csvDialog->spinBox_skip->setValue(- 1);
+  m_csvDialog->spinBox_skip->setValue(tmp + 1);//     force index change
 
   m_encodeIndex = profileGroup.readEntry("Encoding", QString()).toInt();
 

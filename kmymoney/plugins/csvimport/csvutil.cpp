@@ -3,7 +3,7 @@
                                      -------------
     begin                        : Sat Jan 01 2010
     copyright                : (C) 2010 by Allan Anderson
-    email                        : aganderson@ukonline.co.uk
+    email                        :
  ***************************************************************************/
 
 /***************************************************************************
@@ -118,7 +118,7 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
       //                                       look for start of wanted data
       //  if first pass or if not at last line, proceed
       if((!end == 0) && (lineCount >= end - 1)) { // m_endLine is set from UI after first pass
-        m_lastLine = lineCount - 1;///setLastLine(lineCount - 1)
+        m_lastLine = lineCount - 1;
         break;
       }
     }//                                        end of 'EOL detected' loop
@@ -170,14 +170,10 @@ void Parse::setTextDelimiterIndex(int index)
 void Parse::decimalSymbolSelected(int val)
 {
   if(val < 0) return;
-  if(m_decimalSymbol == KGlobal::locale()->decimalSymbol()) return;
 
   m_decimalSymbolIndex = val;
-  m_decimalSymbol = m_decimalSymbol[val];
+  m_decimalSymbol = m_decimalSymbolList[val];
   thousandsSeparatorChanged(val);
-  if(m_decimalSymbol == KGlobal::locale()->decimalSymbol()) {
-    return;
-  }
 }
 
 QString Parse::decimalSymbol(int index)
@@ -222,4 +218,35 @@ void Parse::setThousandsSeparatorIndex(int index)
 int Parse::lastLine()
 {
   return m_lastLine;
+}
+
+bool Parse::symbolFound()
+{
+  return m_symbolFound;
+}
+
+void Parse::setSymbolFound(bool found)
+{
+  m_symbolFound = found;
+}
+
+QString Parse::possiblyReplaceSymbol(const QString&  str)
+{
+  QString txt = str;
+  //  Check if this col contains decimal symbol
+
+  int index = txt.indexOf(m_decimalSymbol, 0); //  check for decimalSymbol, keep its index
+  if(index == -1) { //                           there is no decimal
+    return str;
+  }
+
+  int length = txt.length();//                   but it could be prior thousands separator
+  if((length == index + 4) ||//                  ...thousands separator with no decimal part
+      (txt.indexOf(m_thousandsSeparator, 0) == index + 4)) { //  or with decimal part
+    txt.remove(m_decimalSymbol);//               remove unwanted old thousands separator
+  } else {
+    m_symbolFound = true;//                      found genuine decimal
+    txt.replace(m_decimalSymbol, KGlobal::locale()->decimalSymbol());// so swap it
+  }
+  return txt;
 }

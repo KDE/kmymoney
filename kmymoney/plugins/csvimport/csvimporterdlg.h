@@ -3,7 +3,7 @@
 *                          ---------------
 * begin                  : Sat Jan 01 2010
 * copyright            : (C) 2010 by Allan Anderson
-* email                : aganderson@ukonline.co.uk
+* email                :
 ****************************************************************************/
 
 /***************************************************************************
@@ -29,7 +29,6 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-//#include "ui_csvNewA.h"
 #include "ui_csvimporterdlgdecl.h"
 #include "csvprocessing.h"
 #include "csvimporterplugin.h"
@@ -68,13 +67,9 @@ public:
 
   bool             m_decimalSymbolChanged;
 
-  QString          columnType(int column);
-
-  QString          currentUI();
-  void             setCurrentUI(QString val);
-
   void             saveSettings();
 
+  QString          columnType(int column);
   QString          decimalSymbol();
 
   void             clearColumnType(int column);
@@ -95,6 +90,9 @@ public:
   void             setAmountColumn(int column);
   int              creditColumn();
   void             setCreditColumn(int column);
+  QString          currentUI();
+  void             setCurrentUI(QString val);
+
   int              debitColumn();
   void             setDebitColumn(int val);
   int              maxColumnCount();
@@ -106,8 +104,6 @@ public:
   * also will be used.
   */
   void             updateDecimalSymbol(const QString&, int col);
-
-///  void             updateDecimalColumns();
 
   QString          m_fileType;
   QString          m_tab;
@@ -141,11 +137,13 @@ private:
   int              m_previousColumn;
   int              m_maxColumnCount;
   int              m_decimalSymbolIndex;
+  int              m_endLine;
+  int              m_startLine;
 
-  QBrush           m_brushClr;
-  QBrush           m_brushSet;
-  QColor           m_colrClr;
-  QColor           m_colrSet;
+  QBrush           m_clearBrush;
+  QBrush           m_colorBrush;
+  QColor           m_clearColor;
+  QColor           m_setColor;
 
   /**
   * This method checks that any column contents are numeric.
@@ -209,6 +207,16 @@ private slots:
   void           decimalSymbolSelected(int val);
 
   /**
+  * This method is called when the user edits the lastLine setting.
+  */
+  void           endLineChanged(int val);
+
+  /**
+  * This method is called when the user edits the startLine setting.
+  */
+  void           startLineChanged(int val);
+
+  /**
   * This method is called when the Memo column is activated.
   * Multiple columns may be selected sequentially.
   */
@@ -250,7 +258,7 @@ signals:
   * This signal is raised when the plugin has completed a transaction.  This
   * then needs to be processed by MyMoneyStatement.
   */
-  void statementReady(MyMoneyStatement&);
+  void           statementReady(MyMoneyStatement&);
 };
 
 #endif // CSVIMPORTERDLG_H
