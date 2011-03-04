@@ -643,25 +643,25 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           key = "minBalanceEarly";
           if (!acc.value(key).isEmpty()) {
             if (minBalanceEarly[acc.id()] == false && balance < MyMoneyMoney(acc.value(key))) {
-              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the warning balance of %2.", acc.name(), MyMoneyMoney(acc.value(key)).formatMoney(acc, sec)));
+              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the warning balance of %2.", acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(acc.value(key)), acc, sec)));
             }
           }
           key = "minBalanceAbsolute";
           if (!acc.value(key).isEmpty()) {
             if (minBalanceAbsolute[acc.id()] == false && balance < MyMoneyMoney(acc.value(key))) {
-              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the minimum balance of %2.", acc.name(), MyMoneyMoney(acc.value(key)).formatMoney(acc, sec)));
+              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the minimum balance of %2.", acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(acc.value(key)), acc, sec)));
             }
           }
           key = "maxCreditEarly";
           if (!acc.value(key).isEmpty()) {
             if (maxCreditEarly[acc.id()] == false && balance < MyMoneyMoney(acc.value(key))) {
-              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the maximum credit warning limit of %2.", acc.name(), MyMoneyMoney(acc.value(key)).formatMoney(acc, sec)));
+              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the maximum credit warning limit of %2.", acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(acc.value(key)), acc, sec)));
             }
           }
           key = "maxCreditAbsolute";
           if (!acc.value(key).isEmpty()) {
             if (maxCreditAbsolute[acc.id()] == false && balance < MyMoneyMoney(acc.value(key))) {
-              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the maximum credit limit of %2.", acc.name(), MyMoneyMoney(acc.value(key)).formatMoney(acc, sec)));
+              msg = QString("<qt>%1</qt>").arg(i18n("The balance of account <b>%1</b> dropped below the maximum credit limit of %2.", acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(acc.value(key)), acc, sec)));
             }
           }
 

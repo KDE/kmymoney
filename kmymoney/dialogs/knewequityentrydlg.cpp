@@ -69,7 +69,7 @@ void KNewEquityEntryDlg::onOKClicked()
 {
   m_strSymbolName = edtMarketSymbol->text();
   m_strName = edtEquityName->text();
-  m_fraction = edtFraction->value().abs();
+  m_fraction = edtFraction->value().abs().formatMoney("", 0).toUInt();
   accept();
 }
 

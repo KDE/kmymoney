@@ -83,7 +83,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
 
   // verify that the amounts are the same, otherwise we should not be matching!
   if (sm.shares() != si.shares()) {
-    throw new MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)", m_account.name(), sm.shares().formatMoney(m_account, sec), si.shares().formatMoney(m_account, sec)));
+    throw new MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)", m_account.name(), MyMoneyUtils::formatMoney(sm.shares(), m_account, sec), MyMoneyUtils::formatMoney(si.shares(), m_account, sec)));
   }
 
   // ipwizard: I took over the code to keep the bank id found in the endMatchTransaction
