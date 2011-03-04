@@ -207,10 +207,10 @@ QString scheduleToDescription(const MyMoneySchedule& schedule)
   }
 
   QString description =
-    isTransfer ? i18n("Transfer from %1 to %2, Payee %3, amount %4", account.name(), category, payeeName, amount.formatMoney(file->currency(account.currencyId())))
+    isTransfer ? i18n("Transfer from %1 to %2, Payee %3, amount %4", account.name(), category, payeeName, MyMoneyUtils::formatMoney(amount, file->currency(account.currencyId())))
     : (
-      isIncome ? i18n("From %1 into %2, Category %3, sum of %4", payeeName, account.name(), category, amount.formatMoney(file->currency(account.currencyId())))
-      : i18n("From account %1, Pay to %2, Category %3, sum of %4", account.name(), payeeName, category, amount.formatMoney(file->currency(account.currencyId())))
+      isIncome ? i18n("From %1 into %2, Category %3, sum of %4", payeeName, account.name(), category, MyMoneyUtils::formatMoney(amount, file->currency(account.currencyId())))
+      : i18n("From account %1, Pay to %2, Category %3, sum of %4", account.name(), payeeName, category, MyMoneyUtils::formatMoney(amount, file->currency(account.currencyId())))
     );
   if (!transaction.memo().isEmpty())
     description = i18nc<QString, QString>("The first string is the schedules details", "%1, memo %2", description, transaction.memo());
