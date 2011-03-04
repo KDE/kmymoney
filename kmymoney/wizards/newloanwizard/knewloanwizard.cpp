@@ -326,7 +326,7 @@ bool KNewLoanWizard::validateCurrentPage()
         && !field("finalPaymentEditValid").toBool()) {
       // if two fields are empty and one of them is the final payment
       // we assume the final payment to be 0 instead of presenting a dialog
-      setField("finalPaymentEdit", QVariant(MyMoneyMoney(0, 1)));
+      setField("finalPaymentEdit", QVariant::fromValue<MyMoneyMoney>((MyMoneyMoney())));
     }
     updateFinalPayment();
     if (!calculateLoan()) {
@@ -420,7 +420,7 @@ int KNewLoanWizard::calculateLoan(void)
     } else if (!field("paymentEditValid").toBool()) {
       // calculate the periodical amount of the payment out of the other information
       val = calc.payment();
-      setField("paymentEdit", QVariant(MyMoneyMoney(static_cast<double>(val)).abs()));
+      setField("paymentEdit", QVariant::fromValue<MyMoneyMoney>(MyMoneyMoney(val).abs()));
       // reset payment as it might have changed due to rounding
       val = static_cast<long double>(field("paymentEdit").value<MyMoneyMoney>().abs().toDouble());
       if (field("lendButton").toBool())

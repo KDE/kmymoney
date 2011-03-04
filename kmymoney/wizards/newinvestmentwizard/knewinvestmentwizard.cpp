@@ -180,7 +180,7 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
     newSecurity.setName(field("investmentName").toString());
     newSecurity.setTradingSymbol(field("investmentSymbol").toString());
     newSecurity.setTradingMarket(field("tradingMarket").toString());
-    newSecurity.setSmallestAccountFraction(field("fraction").value<MyMoneyMoney>());
+    newSecurity.setSmallestAccountFraction(field("fraction").value<MyMoneyMoney>().formatMoney("", 0).toUInt());
     newSecurity.setTradingCurrency(field("tradingCurrencyEdit").value<MyMoneySecurity>().id());
     newSecurity.setSecurityType(type);
     newSecurity.deletePair("kmm-online-source");

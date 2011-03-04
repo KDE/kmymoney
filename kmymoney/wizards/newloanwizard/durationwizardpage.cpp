@@ -17,6 +17,8 @@
 
 #include "durationwizardpage.h"
 
+#include <cmath>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 

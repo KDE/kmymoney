@@ -1594,7 +1594,7 @@ void AccountSummaryPage::enterPage(void)
     m_dataList->append(QString(i18n("Conversion rate") + ": %1").arg(m_wizard->conversionRate().rate(QString()).formatMoney("", KMyMoneyGlobalSettings::pricePrecision())));
   }
   if (!acc.isLoan() || !m_wizard->openingBalance().isZero())
-    m_dataList->append(QString(i18n("Opening balance") + ": %1").arg(m_wizard->openingBalance().formatMoney(acc, sec)));
+    m_dataList->append(QString(i18n("Opening balance") + ": %1").arg(MyMoneyUtils::formatMoney(m_wizard->openingBalance(), acc, sec)));
 
   if (!m_wizard->m_institutionPage->institution().id().isEmpty()) {
     m_dataList->append(QString(i18n("Institution") + ": %1").arg(m_wizard->m_institutionPage->institution().name()));
@@ -1633,8 +1633,8 @@ void AccountSummaryPage::enterPage(void)
     }
     m_dataList->append(QString(i18n("Interest rate") + ": %1 %").arg(m_wizard->m_loanDetailsPage->m_interestRate->value().formatMoney("", -1)));
     m_dataList->append(i18n("Interest rate is %1", m_wizard->m_generalLoanInfoPage->m_interestType->currentText()));
-    m_dataList->append(QString(i18n("Principal and interest") + ": %1").arg(m_wizard->m_loanDetailsPage->m_paymentAmount->value().formatMoney(acc, sec)));
-    m_dataList->append(QString(i18n("Additional fees") + ": %1").arg(m_wizard->m_loanPaymentPage->additionalFees().formatMoney(acc, sec)));
+    m_dataList->append(QString(i18n("Principal and interest") + ": %1").arg(MyMoneyUtils::formatMoney(m_wizard->m_loanDetailsPage->m_paymentAmount->value(), acc, sec)));
+    m_dataList->append(QString(i18n("Additional fees") + ": %1").arg(MyMoneyUtils::formatMoney(m_wizard->m_loanPaymentPage->additionalFees(), acc, sec)));
     m_dataList->append(QString(i18n("Payment frequency") + ": %1").arg(m_wizard->m_generalLoanInfoPage->m_paymentFrequency->currentText()));
     m_dataList->append(QString(i18n("Payment account") + ": %1").arg(m_wizard->m_loanSchedulePage->m_paymentAccount->currentText()));
 
@@ -1665,13 +1665,13 @@ void AccountSummaryPage::enterPage(void)
       m_dataList->append(QString(i18nc("Schedule occurrence", "Occurrence") + ": %1").arg(i18nc("Once per month schedule occurrence", "Monthly")));
       m_dataList->append(i18n("Paid from %1", paymentAccount.name()));
       m_dataList->append(i18n("Pay to %1", m_wizard->m_schedulePage->m_payee->currentText()));
-      m_dataList->append(QString(i18n("Amount") + ": %1").arg(m_wizard->m_schedulePage->m_amount->value().formatMoney(acc, sec)));
+      m_dataList->append(QString(i18n("Amount") + ": %1").arg(MyMoneyUtils::formatMoney(m_wizard->m_schedulePage->m_amount->value(), acc, sec)));
       m_dataList->append(i18n("First payment due on %1", KGlobal::locale()->formatDate(sch.nextDueDate())));
       m_dataList->append(QString(i18n("Payment method") + ": %1").arg(m_wizard->m_schedulePage->m_method->currentText()));
     }
     if (acc.isLoan()) {
       m_dataList->append(QString(i18n("Occurrence") + ": %1").arg(m_wizard->m_generalLoanInfoPage->m_paymentFrequency->currentText()));
-      m_dataList->append(QString(i18n("Amount") + ": %1").arg((m_wizard->m_loanPaymentPage->basePayment() + m_wizard->m_loanPaymentPage->additionalFees()).formatMoney(acc, sec)));
+      m_dataList->append(QString(i18n("Amount") + ": %1").arg(MyMoneyUtils::formatMoney(m_wizard->m_loanPaymentPage->basePayment() + m_wizard->m_loanPaymentPage->additionalFees(), acc, sec)));
       m_dataList->append(i18n("First payment due on %1", KGlobal::locale()->formatDate(m_wizard->m_loanSchedulePage->firstPaymentDueDate())));
     }
   }
