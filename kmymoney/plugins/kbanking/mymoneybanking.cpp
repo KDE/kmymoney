@@ -975,7 +975,14 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     }
 
     kt.m_amount = MyMoneyMoney(AB_Value_GetValueAsDouble(val));
-    h = MyMoneyTransaction::hash(kt.m_amount.toString(), h);
+    // The initial implementation of this feature was based on
+    // a denominator of 100. Since the denominator might be
+    // different nowadays, we make sure to use 100 for the
+    // duplicate detection
+    QString tmpVal = kt.m_amount.formatMoney(100, false);
+    tmpVal.remove(QRegExp("[,\\.]"));
+    tmpVal += QLatin1String("/100");
+    h = MyMoneyTransaction::hash(tmpVal, h);
   } else {
     DBG_WARN(0, "No value for transaction");
   }
