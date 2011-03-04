@@ -505,7 +505,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
       msg = QString("<qt>%1</qt>").arg(i18n("Transaction is missing a category assignment."));
     } else {
       const MyMoneySecurity& sec = MyMoneyFile::instance()->security(m_account.currencyId());
-      msg = QString("<qt>%1</qt>").arg(i18n("The transaction has a missing assignment of <b>%1</b>.", m_transaction.splitSum().abs().formatMoney(m_account, sec)));
+      msg = QString("<qt>%1</qt>").arg(i18n("The transaction has a missing assignment of <b>%1</b>.", MyMoneyUtils::formatMoney(m_transaction.splitSum().abs(), m_account, sec)));
     }
     return true;
   }
@@ -526,7 +526,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
         continue;
       const MyMoneyAccount& acc = file->account((*it_s).accountId());
       QString category = file->accountToCategory(acc.id());
-      QString amount = ((*it_s).value() * factor).formatMoney(acc, sec);
+      QString amount = MyMoneyUtils::formatMoney(((*it_s).value() * factor), acc, sec);
 
       txt += QString("<tr><td><nobr>%1</nobr></td><td align=right><nobr>%2</nobr></td></tr>").arg(category, amount);
     }
@@ -1463,7 +1463,7 @@ bool InvestTransaction::formCellText(QString& txt, int& align, int row, int col,
           align |= Qt::AlignRight;
           if (haveFees()) {
             if ((fieldEditable = !m_feeCategory.isEmpty()) == true) {
-              txt = m_feeAmount.formatMoney(m_currency);
+              txt = MyMoneyUtils::formatMoney(m_feeAmount, m_currency);
             }
           }
           break;
@@ -1495,7 +1495,7 @@ bool InvestTransaction::formCellText(QString& txt, int& align, int row, int col,
           align |= Qt::AlignRight;
           if (haveInterest()) {
             if ((fieldEditable = !m_interestCategory.isEmpty()) == true) {
-              txt = (-m_interestAmount).formatMoney(m_currency);
+              txt = MyMoneyUtils::formatMoney(-m_interestAmount, m_currency);
             }
           }
           break;
@@ -1527,7 +1527,7 @@ bool InvestTransaction::formCellText(QString& txt, int& align, int row, int col,
         case ValueColumn2:
           align |= Qt::AlignRight;
           if ((fieldEditable = haveAmount()) == true) {
-            txt = m_assetAccountSplit.value().abs().formatMoney(m_currency);
+            txt = MyMoneyUtils::formatMoney(m_assetAccountSplit.value().abs(), m_currency);
           }
       }
       break;
@@ -1595,10 +1595,10 @@ void InvestTransaction::registerCellText(QString& txt, int& align, int row, int 
         case ValueColumn:
           align |= Qt::AlignRight;
           if (haveAmount()) {
-            txt = m_assetAccountSplit.value().abs().formatMoney(m_currency);
+            txt = MyMoneyUtils::formatMoney(m_assetAccountSplit.value().abs(), m_currency);
 
           } else if (haveInterest()) {
-            txt = (-m_interestAmount).formatMoney(m_currency);
+            txt = MyMoneyUtils::formatMoney(-m_interestAmount, m_currency);
           }
           break;
 
@@ -1634,9 +1634,9 @@ void InvestTransaction::registerCellText(QString& txt, int& align, int row, int 
           if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()) {
             // txt = m_interestAmount.abs().formatMoney(m_currency);
           } else if (haveInterest() && m_interestSplits.count()) {
-            txt = (-m_interestAmount).formatMoney(m_currency);
+            txt = MyMoneyUtils::formatMoney(-m_interestAmount, m_currency);
           } else if (haveFees() && m_feeSplits.count()) {
-            txt = m_feeAmount.formatMoney(m_currency);
+            txt = MyMoneyUtils::formatMoney(m_feeAmount, m_currency);
           }
           break;
 
@@ -1662,9 +1662,9 @@ void InvestTransaction::registerCellText(QString& txt, int& align, int row, int 
           align |= Qt::AlignRight;
           if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()
               && haveInterest() && m_interestSplits.count()) {
-            txt = (-m_interestAmount).formatMoney(m_currency);
+            txt = MyMoneyUtils::formatMoney(-m_interestAmount, m_currency);
           } else if (haveFees() && m_feeSplits.count()) {
-            txt = m_feeAmount.formatMoney(m_currency);
+            txt = MyMoneyUtils::formatMoney(m_feeAmount, m_currency);
           }
           break;
 
@@ -1690,7 +1690,7 @@ void InvestTransaction::registerCellText(QString& txt, int& align, int row, int 
           if (haveAssetAccount() && !m_assetAccountSplit.accountId().isEmpty()
               && haveInterest() && m_interestSplits.count()
               && haveFees() && m_feeSplits.count()) {
-            txt = m_feeAmount.formatMoney(m_currency);
+            txt = MyMoneyUtils::formatMoney(m_feeAmount, m_currency);
           }
           break;
 
