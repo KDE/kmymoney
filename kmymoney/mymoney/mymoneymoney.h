@@ -22,16 +22,18 @@
 #include <config-kmymoney.h>
 #endif
 
-#include <cmath>
+// #include <cmath>
+
+//FIXME workaround for dealing with lond double
+#include <sstream>
 
 // So we can save this object
 #include <QChar>
 #include <QString>
-#include <QDataStream>
 #include <QMetaType>
 
-#include <kmm_mymoney_export.h>
-#include <mymoneyexception.h>
+#include "kmm_mymoney_export.h"
+#include "mymoneyexception.h"
 
 // Check for standard definitions
 #ifdef HAVE_STDINT_H
@@ -45,18 +47,20 @@
 #define INT64_MIN LLONG_MIN
 #endif
 
+// Including the AlkValue class
+#include <alkimia/alkvalue.h>
+
 typedef qint64 signed64;
 typedef quint64 unsigned64;
 
-class MyMoneyAccount;
-class MyMoneySecurity;
 
 /**
   * This class represents a value within the MyMoney Engine
   *
   * @author Michael Edwardes
+  * @author Thomas Baumgart
   */
-class KMM_MYMONEY_EXPORT MyMoneyMoney
+class KMM_MYMONEY_EXPORT MyMoneyMoney : public AlkValue
 {
   KMM_MYMONEY_UNIT_TESTABLE
 
@@ -98,11 +102,11 @@ public:
 #endif
 
   // copy constructor
-  MyMoneyMoney(const MyMoneyMoney& AmountInPence);
+  MyMoneyMoney(const MyMoneyMoney& Amount);
+  MyMoneyMoney(const AlkValue& Amount);
 
-  // signed64 value(const int prec = 2) const;
   const MyMoneyMoney abs(void) const {
-    return m_num < 0 ? -(*this) : *this;
+    return AlkValue::abs();
   };
 
   /**
@@ -114,28 +118,17 @@ public:
     *
     * @param currency The currency symbol
     * @param prec The number of fractional digits
-    * @param showThousandSeparator should the thousandSeparator symbol be inserted
-    *                              (@a true) or not (@a false) (default true)
+    * @param showThousandSeparator should the thousandSeparator symbol
+    *                               be inserted (@a true)
+    *                               or not (@a false) (default true)
     */
   QString formatMoney(const QString& currency, const int prec, bool showThousandSeparator = true) const;
 
   /**
-   * This is a convenience method. It behaves exactly as the above one, but takes the information
-   * about currency symbol and precision out of the MyMoneySecurity and MyMoneyAccount objects
-   * @a acc and @a sec.
-   */
-  QString formatMoney(const MyMoneyAccount& acc, const MyMoneySecurity& sec, bool showThousandSeparator = true) const;
-
-  /**
-   * This is a convenience method. It behaves exactly as the above one, but takes the information
-   * about currency symbol and precision out of the MyMoneySecurity object @a sec.
-   */
-  QString formatMoney(const MyMoneySecurity& sec, bool showThousandSeparator = true) const;
-
-  /**
-   * This is a convenience method. It behaves exactly as the above one, but takes the information
-   * about precision out of the denomination @a denom. No currency symbol is shown. If you want
-   * to see a currency symbol, please use formatMoney(const MyMoneyAccount& acc, const MyMoneySecurity& sec, bool showThousandSeparator)
+   * This is a convenience method. It behaves exactly as the above one,
+   * but takes the information about precision out of the denomination
+   * @a denom. No currency symbol is shown. If you want to add a currency
+   * symbol, please use MyMoneyUtils::formatMoney(const MyMoneyAccount& acc, const MyMoneySecurity& sec, bool showThousandSeparator)
    * instead.
    *
    * @note denom is often set to account.fraction(security).
@@ -151,8 +144,7 @@ public:
     */
   static int denomToPrec(signed64 fract);
 
-  const QString toString(void) const;
-  const MyMoneyMoney convert(const signed64 denom = 100, const roundingMethod how = RndRound) const;
+  MyMoneyMoney convert(const signed64 denom = 100, const roundingMethod how = RndRound) const;
   static signed64 precToDenom(int prec);
   double toDouble(void) const;
 
@@ -169,9 +161,8 @@ public:
   static const signPosition positiveMonetarySignPosition(void);
   static void setFileVersion(const fileVersionE version);
 
-  // assignment
-  const MyMoneyMoney& operator=(const MyMoneyMoney& Amount);
   const MyMoneyMoney& operator=(const QString& pszAmount);
+  const MyMoneyMoney& operator=(const AlkValue& val);
 
   // comparison
   bool operator==(const MyMoneyMoney& Amount) const;
@@ -190,36 +181,24 @@ public:
 
   // calculation
   const MyMoneyMoney operator+(const MyMoneyMoney& Amount) const;
-
   const MyMoneyMoney operator-(const MyMoneyMoney& Amount) const;
-  const MyMoneyMoney operator-() const;
-
   const MyMoneyMoney operator*(const MyMoneyMoney& factor) const;
-  const MyMoneyMoney operator*(int factor) const;
-  const MyMoneyMoney operator*(signed64 factor) const;
   const MyMoneyMoney operator/(const MyMoneyMoney& Amount) const;
-
-  // unary operators
-  MyMoneyMoney& operator+= (const MyMoneyMoney&  Amount);
-  MyMoneyMoney& operator-= (const MyMoneyMoney&  Amount);
-  MyMoneyMoney& operator*= (const MyMoneyMoney&  Amount);
-  MyMoneyMoney& operator/= (const MyMoneyMoney&  Amount);
-
-  // conversion
-  operator int() const;
+  const MyMoneyMoney operator-() const;
+  const MyMoneyMoney operator*(int factor) const;
 
   static MyMoneyMoney maxValue;
   static MyMoneyMoney minValue;
   static MyMoneyMoney autoCalc;
 
   bool isNegative() const {
-    return (m_num < 0) ? true : false;
+    return (valueRef() < 0) ? true : false;
   }
   bool isPositive() const {
-    return (m_num > 0) ? true : false;
+    return (valueRef() > 0) ? true : false;
   }
   bool isZero() const {
-    return m_num == 0;
+    return valueRef() == 0;
   }
   bool isAutoCalc(void) const {
     return (*this == autoCalc);
@@ -228,13 +207,6 @@ public:
   const MyMoneyMoney reduce(void) const;
 
 private:
-  signed64 m_num;
-  signed64 m_denom;
-
-  signed64 getLcd(const MyMoneyMoney& b) const;
-
-  KMM_MYMONEY_EXPORT friend QDataStream &operator<<(QDataStream &, const MyMoneyMoney &);
-  KMM_MYMONEY_EXPORT friend QDataStream &operator>>(QDataStream &, MyMoneyMoney &);
 
   static QChar _thousandSeparator;
   static QChar _decimalSeparator;
@@ -243,7 +215,6 @@ private:
   static bool _negativePrefixCurrencySymbol;
   static bool _positivePrefixCurrencySymbol;
   static MyMoneyMoney::fileVersionE _fileVersion;
-
 };
 
 //=============================================================================
@@ -260,10 +231,9 @@ private:
 // Arguments: None
 //
 ////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney::MyMoneyMoney()
+inline MyMoneyMoney::MyMoneyMoney() :
+    AlkValue()
 {
-  m_num = 0;
-  m_denom = 1;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -280,8 +250,7 @@ inline MyMoneyMoney::MyMoneyMoney(signed64 Amount, const signed64 denom)
   if (!denom)
     throw new MYMONEYEXCEPTION("Denominator 0 not allowed!");
 
-  m_num = Amount;
-  m_denom = denom;
+  *this = AlkValue(QString("%1/%2").arg(Amount).arg(denom), _decimalSeparator);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -293,11 +262,9 @@ inline MyMoneyMoney::MyMoneyMoney(signed64 Amount, const signed64 denom)
 //            denom   - denominator of the object
 //
 ////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney::MyMoneyMoney(const double dAmount, const signed64 denom)
+inline MyMoneyMoney::MyMoneyMoney(const double dAmount, const signed64 denom) :
+    AlkValue(dAmount, denom)
 {
-  double adj = dAmount < 0 ? -0.5 : 0.5;
-  m_denom = denom;
-  m_num = (signed64)(dAmount * (double)m_denom + adj);
 }
 
 #ifdef SIZEOF_LONG_DOUBLE
@@ -312,9 +279,15 @@ inline MyMoneyMoney::MyMoneyMoney(const double dAmount, const signed64 denom)
 ////////////////////////////////////////////////////////////////////////////////
 inline MyMoneyMoney::MyMoneyMoney(const long double dAmount, const signed64 denom)
 {
-  long double adj = dAmount < 0 ? -0.5 : 0.5;
-  m_denom = denom;
-  m_num = static_cast<signed64>(dAmount * m_denom + adj);
+  std::stringstream ss;
+  ss << dAmount;
+  QString num = QString(ss.str().c_str());
+  // now convert the string but don't forget to replace the dot with
+  // the current active decimalSeparator
+  *this = MyMoneyMoney(num.replace(QLatin1Char('.'), _decimalSeparator));
+  if (denom != 0) {
+    *this = convert(denom);
+  }
 }
 #endif
 
@@ -331,9 +304,7 @@ inline MyMoneyMoney::MyMoneyMoney(const int iAmount, const signed64 denom)
 {
   if (!denom)
     throw new MYMONEYEXCEPTION("Denominator 0 not allowed!");
-
-  m_num = static_cast<signed64>(iAmount);
-  m_denom = denom;
+  *this = AlkValue(iAmount, denom);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -349,35 +320,31 @@ inline MyMoneyMoney::MyMoneyMoney(const long int iAmount, const signed64 denom)
 {
   if (!denom)
     throw new MYMONEYEXCEPTION("Denominator 0 not allowed!");
-
-  m_num = static_cast<signed64>(iAmount);
-  m_denom = denom;
+  *this = AlkValue(QString("%1/%2").arg(iAmount).arg(denom), _decimalSeparator);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //      Name: MyMoneyMoney
-//   Purpose: Copy Constructor - constructs object from another MyMoneyMoney object
+//   Purpose: Copy Constructor - constructs object from another
+//            MyMoneyMoney object
 //   Returns: None
 //    Throws: Nothing.
 // Arguments: Amount - MyMoneyMoney object to be copied
 //
 ////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney::MyMoneyMoney(const MyMoneyMoney& Amount)
-    : m_num(Amount.m_num), m_denom(Amount.m_denom)
-{ }
-
-////////////////////////////////////////////////////////////////////////////////
-//      Name: operator=
-//   Purpose: Assignment operator - modifies object from input MyMoneyMoney object
-//   Returns: Const reference to the object
-//    Throws: Nothing.
-// Arguments: Amount - MyMoneyMoney object to be modified from
-//
-////////////////////////////////////////////////////////////////////////////////
-inline const MyMoneyMoney& MyMoneyMoney::operator=(const MyMoneyMoney & Amount)
+inline MyMoneyMoney::MyMoneyMoney(const MyMoneyMoney& Amount) :
+    AlkValue(Amount)
 {
-  m_num = Amount.m_num;
-  m_denom = Amount.m_denom;
+}
+
+inline MyMoneyMoney::MyMoneyMoney(const AlkValue& Amount) :
+    AlkValue(Amount)
+{
+}
+
+inline const MyMoneyMoney& MyMoneyMoney::operator=(const AlkValue & val)
+{
+  AlkValue::operator=(val);
   return *this;
 }
 
@@ -392,7 +359,7 @@ inline const MyMoneyMoney& MyMoneyMoney::operator=(const MyMoneyMoney & Amount)
 ////////////////////////////////////////////////////////////////////////////////
 inline const MyMoneyMoney& MyMoneyMoney::operator=(const QString & pszAmount)
 {
-  *this = MyMoneyMoney(pszAmount);
+  AlkValue::operator=(pszAmount);
   return *this;
 }
 
@@ -406,13 +373,7 @@ inline const MyMoneyMoney& MyMoneyMoney::operator=(const QString & pszAmount)
 ////////////////////////////////////////////////////////////////////////////////
 inline bool MyMoneyMoney::operator==(const MyMoneyMoney& Amount) const
 {
-  if (m_denom == Amount.m_denom)
-    return m_num == Amount.m_num;
-
-  if (m_num == 0 && Amount.m_num == 0)
-    return true;
-
-  return (*this - Amount).m_num == 0;
+  return AlkValue::operator==(Amount);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -425,10 +386,7 @@ inline bool MyMoneyMoney::operator==(const MyMoneyMoney& Amount) const
 ////////////////////////////////////////////////////////////////////////////////
 inline bool MyMoneyMoney::operator!=(const MyMoneyMoney& Amount) const
 {
-  if (m_num == Amount.m_num && m_denom == Amount.m_denom)
-    return false;
-
-  return (*this - Amount).m_num != 0;
+  return AlkValue::operator!=(Amount);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -441,15 +399,7 @@ inline bool MyMoneyMoney::operator!=(const MyMoneyMoney& Amount) const
 ////////////////////////////////////////////////////////////////////////////////
 inline bool MyMoneyMoney::operator<(const MyMoneyMoney& Amount) const
 {
-  if (m_denom == Amount.m_denom)
-    return (m_num < Amount.m_num);
-
-  signed64 ab, ba;
-
-  ab = m_num * Amount.m_denom;
-  ba = m_denom * Amount.m_num;
-
-  return (ab < ba) ;
+  return AlkValue::operator<(Amount);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -463,15 +413,7 @@ inline bool MyMoneyMoney::operator<(const MyMoneyMoney& Amount) const
 ////////////////////////////////////////////////////////////////////////////////
 inline bool MyMoneyMoney::operator>(const MyMoneyMoney& Amount) const
 {
-  if (m_denom == Amount.m_denom)
-    return (m_num > Amount.m_num);
-
-  signed64 ab, ba;
-
-  ab = m_num * Amount.m_denom;
-  ba = m_denom * Amount.m_num;
-
-  return (ab > ba) ;
+  return AlkValue::operator>(Amount);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -485,15 +427,7 @@ inline bool MyMoneyMoney::operator>(const MyMoneyMoney& Amount) const
 ////////////////////////////////////////////////////////////////////////////////
 inline bool MyMoneyMoney::operator<=(const MyMoneyMoney& Amount) const
 {
-  if (m_denom == Amount.m_denom)
-    return (m_num <= Amount.m_num);
-
-  signed64 ab, ba;
-
-  ab = m_num * Amount.m_denom;
-  ba = m_denom * Amount.m_num;
-
-  return (ab <= ba) ;
+  return AlkValue::operator<=(Amount);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -507,15 +441,7 @@ inline bool MyMoneyMoney::operator<=(const MyMoneyMoney& Amount) const
 ////////////////////////////////////////////////////////////////////////////////
 inline bool MyMoneyMoney::operator>=(const MyMoneyMoney& Amount) const
 {
-  if (m_denom == Amount.m_denom)
-    return (m_num >= Amount.m_num);
-
-  signed64 ab, ba;
-
-  ab = m_num * Amount.m_denom;
-  ba = m_denom * Amount.m_num;
-
-  return (ab >= ba) ;
+  return AlkValue::operator>=(Amount);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -529,8 +455,7 @@ inline bool MyMoneyMoney::operator>=(const MyMoneyMoney& Amount) const
 ////////////////////////////////////////////////////////////////////////////////
 inline bool MyMoneyMoney::operator==(const QString& pszAmount) const
 {
-  MyMoneyMoney Amount(pszAmount);
-  return (*this == Amount) ;
+  return *this == MyMoneyMoney(pszAmount);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -544,8 +469,7 @@ inline bool MyMoneyMoney::operator==(const QString& pszAmount) const
 ////////////////////////////////////////////////////////////////////////////////
 inline bool MyMoneyMoney::operator!=(const QString& pszAmount) const
 {
-  MyMoneyMoney Amount(pszAmount);
-  return (*this != Amount) ;
+  return ! operator==(pszAmount) ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -558,24 +482,7 @@ inline bool MyMoneyMoney::operator!=(const QString& pszAmount) const
 ////////////////////////////////////////////////////////////////////////////////
 inline const MyMoneyMoney MyMoneyMoney::operator-() const
 {
-  MyMoneyMoney result(*this);
-  result.m_num = -result.m_num;
-  return result;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//      Name: operator*
-//   Purpose: Multiplication operator - multiplies the object with factor
-//   Returns: The current object
-//    Throws: Nothing.
-// Arguments: AmountInPence - signed64 object to be multiplied
-//
-////////////////////////////////////////////////////////////////////////////////
-inline const MyMoneyMoney MyMoneyMoney::operator*(signed64 factor) const
-{
-  MyMoneyMoney result(*this);
-  result.m_num *= factor;
-  return result;
+  return AlkValue::operator-();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -588,61 +495,12 @@ inline const MyMoneyMoney MyMoneyMoney::operator*(signed64 factor) const
 ////////////////////////////////////////////////////////////////////////////////
 inline const MyMoneyMoney MyMoneyMoney::operator*(int factor) const
 {
-  MyMoneyMoney result(*this);
-  result.m_num *= factor;
-  return result;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//      Name: operator+=
-//   Purpose: Addition operator - adds the input amount to the object together
-//   Returns: Reference to the current object
-//    Throws: Nothing.
-// Arguments: AmountInPence - MyMoneyMoney object to be added
-//
-////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney& MyMoneyMoney::operator+=(const MyMoneyMoney & AmountInPence)
-{
-  *this = *this + AmountInPence;
-  return *this;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//      Name: operator-=
-//   Purpose: Subtraction operator - subtracts the input amount from the object
-//   Returns: Reference to the current object
-//    Throws: Nothing.
-// Arguments: AmountInPence - MyMoneyMoney object to be subtracted
-//
-////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney& MyMoneyMoney::operator-=(const MyMoneyMoney & AmountInPence)
-{
-  *this = *this - AmountInPence;
-  return *this;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//      Name: operator*=
-//   Purpose: Multiplication operator - multiplies the input amount by the object
-//   Returns: Reference to the current object
-//    Throws: Nothing.
-// Arguments: AmountInPence - MyMoneyMoney object to be multiplied
-//
-////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney& MyMoneyMoney::operator*=(const MyMoneyMoney & AmountInPence)
-{
-  *this = *this * AmountInPence;
-  return *this;
-}
-
-inline MyMoneyMoney& MyMoneyMoney::operator/=(const MyMoneyMoney & AmountInPence)
-{
-  *this = *this / AmountInPence;
-  return *this;
+  return AlkValue::operator*(factor);
 }
 
 /**
-  * Make it possible to hold @ref MyMoneyMoney objects inside @ref QVariant objects.
+  * Make it possible to hold @ref MyMoneyMoney objects
+  * inside @ref QVariant objects.
   */
 Q_DECLARE_METATYPE(MyMoneyMoney)
 

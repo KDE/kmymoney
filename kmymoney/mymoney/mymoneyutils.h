@@ -53,11 +53,15 @@ typedef long long DLONG;
 typedef QString String;
 #endif // 0
 
+class MyMoneyMoney;
+class MyMoneySecurity;
+class MyMoneyAccount;
+
 void timetrace(const char *);
 void timestamp(const char *);
 
 //class that has utility functions to use throughout the application.
-class MyMoneyUtils
+class KMM_MYMONEY_EXPORT MyMoneyUtils
 {
 public:
   MyMoneyUtils() {}
@@ -65,6 +69,28 @@ public:
 
   //static function to add the correct file extension at the end of the file name
   static QString getFileExtension(QString strFileName);
+
+  /**
+   * This is a convenience method. It behaves exactly as
+   * MyMoneyMoney::formatMoney, but takes the information
+   * about currency symbol and precision out of the MyMoneySecurity
+   * and MyMoneyAccount objects @a acc and @a sec. The value to be
+   * formatted is passed as @a val.
+   */
+  static QString formatMoney(const MyMoneyMoney& val,
+                             const MyMoneyAccount& acc,
+                             const MyMoneySecurity& sec,
+                             bool showThousandSeparator = true);
+
+  /**
+   * This is a convenience method. It behaves exactly as the above one,
+   * but takes the information about currency symbol and precision out
+   * of the MyMoneySecurity object @a sec.  The value to be
+   * formatted is passed as @a val.
+   */
+  static QString formatMoney(const MyMoneyMoney& val,
+                             const MyMoneySecurity& sec,
+                             bool showThousandSeparator = true);
 
 };
 

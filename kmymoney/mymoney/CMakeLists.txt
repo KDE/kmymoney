@@ -1,3 +1,5 @@
+INCLUDE_DIRECTORIES( ${KMyMoney_SOURCE_DIR}/libalkimia )
+
 ADD_SUBDIRECTORY( storage )
 
 ########### next target ###############
@@ -34,7 +36,16 @@ SET(mymoney_HEADERS kmm_mymoney_export.h
 KDE4_ADD_LIBRARY(kmm_mymoney SHARED 
 	${kmm_mymoney_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(kmm_mymoney ${KDE4_KDEUI_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDE4_KIO_LIBS} kmm_storage)
+TARGET_LINK_LIBRARIES(kmm_mymoney
+                      ${KDE4_KDEUI_LIBS}
+                      ${QT_QTGUI_LIBRARY}
+                      ${QT_QTXML_LIBRARY}
+                      ${QT_QTCORE_LIBRARY}
+                      ${KDE4_KDECORE_LIBS}
+                      ${KDE4_KIO_LIBS}
+                      ${GMP_LIBRARIES}
+                      ${LIBALKIMIA_LIBRARY}
+                      kmm_storage)
 
 SET_TARGET_PROPERTIES(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 
@@ -109,7 +120,7 @@ IF( KDE4_BUILD_TESTS )
   set( mymoneymoneytest_SRCS mymoneymoneytest.cpp )
 
   kde4_add_unit_test( mymoneymoneytest TESTNAME kmymoney-mymoneymoneytest ${mymoneymoneytest_SRCS} )
-  ADD_DEPENDENCIES( mymoneymoneytest kmm_mymoney )
+  ADD_DEPENDENCIES( mymoneymoneytest kmm_mymoney %{${GMP_LIBRARIES})
 
   target_link_libraries( mymoneymoneytest kmm_mymoney ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
 

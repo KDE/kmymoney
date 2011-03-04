@@ -100,9 +100,7 @@ void MyMoneyForecastTest::testEmptyConstructor()
   MyMoneyForecast a;
   MyMoneyAccount b;
 
-  int f = a.forecastBalance(b, QDate::currentDate());
-
-  QVERIFY(f == 0);
+  QVERIFY(a.forecastBalance(b, QDate::currentDate()).isZero());
   QVERIFY(!a.isForecastAccount(b));
   QVERIFY(a.forecastBalance(b, QDate::currentDate()) == MyMoneyMoney(0, 1));
   QVERIFY(a.daysToMinimumBalance(b) == -1);

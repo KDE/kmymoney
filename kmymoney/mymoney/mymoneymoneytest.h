@@ -26,7 +26,7 @@ class MyMoneyMoneyTest : public QObject
   Q_OBJECT
 
 protected:
-  MyMoneyMoney *m_0, *m_1, *m_2, *m_3, *m_4, *m_5;
+  MyMoneyMoney *m_0, *m_1, *m_2, *m_3, *m_4, *m_5, *m_6;
 private slots:
   void init();
   void cleanup();

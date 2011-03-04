@@ -25,6 +25,7 @@
 #include <iostream>
 
 #include "mymoneyaccount.h"
+#include "mymoneymoney.h"
 
 #include <cstdio>
 #include <cstdarg>
@@ -45,6 +46,26 @@ QString MyMoneyUtils::getFileExtension(QString strFileName)
   }
   return strTemp;
 }
+
+QString MyMoneyUtils::formatMoney(const MyMoneyMoney& val,
+                                  const MyMoneyAccount& acc,
+                                  const MyMoneySecurity& sec,
+                                  bool showThousandSeparator)
+{
+  return val.formatMoney(sec.tradingSymbol(),
+                         val.denomToPrec(acc.fraction()),
+                         showThousandSeparator);
+}
+
+QString MyMoneyUtils::formatMoney(const MyMoneyMoney& val,
+                                  const MyMoneySecurity& sec,
+                                  bool showThousandSeparator)
+{
+  return val.formatMoney(sec.tradingSymbol(),
+                         val.denomToPrec(sec.smallestAccountFraction()),
+                         showThousandSeparator);
+}
+
 
 int MyMoneyTracer::m_indentLevel = 0;
 int MyMoneyTracer::m_onoff = 0;

@@ -39,7 +39,6 @@
 
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"
-#include <iostream>
 
 QTEST_MAIN(MyMoneyMoneyTest)
 
@@ -58,6 +57,7 @@ void MyMoneyMoneyTest::init()
   m_3 = new MyMoneyMoney(123, 1);
   m_4 = new MyMoneyMoney(1234, 1000);
   m_5 = new MyMoneyMoney(195883, 100000);
+  m_6 = new MyMoneyMoney(1.247658435, 1000000000);
 
   MyMoneyMoney::setDecimalSeparator('.');
   MyMoneyMoney::setThousandSeparator(',');
@@ -72,60 +72,69 @@ void MyMoneyMoneyTest::cleanup()
   delete m_3;
   delete m_4;
   delete m_5;
+  delete m_6;
 }
 
 void MyMoneyMoneyTest::testEmptyConstructor()
 {
+  //qDebug("testing %s", qPrintable(m_0->toString()));
   MyMoneyMoney *m = new MyMoneyMoney();
-  QVERIFY(m->m_num == 0);
-  QVERIFY(m->m_denom == 1);
+  QVERIFY(m->valueRef() == 0);
+  QVERIFY(m->toString() == QString("0/1"));
+  QVERIFY(m->valueRef().get_den() == 1);
   delete m;
 }
 
 void MyMoneyMoneyTest::testIntConstructor()
 {
-  QVERIFY(m_0->m_num == 12);
-  QVERIFY(m_0->m_denom == 100);
+  //qDebug("Current value: %s",qPrintable( m_0->toString()) );
+  //QVERIFY(m_0->valueRef().get_num() == 12);
+  //QVERIFY(m_0->valueRef().get_den() == 100);
+  QVERIFY(m_0->valueRef().get_num() == 3);
+  QVERIFY(m_0->valueRef().get_den() == 25);
 
   MyMoneyMoney a(123, 10000);
-  QVERIFY(a.m_num == 123);
-  QVERIFY(a.m_denom == 10000);
+  QVERIFY(a.valueRef().get_num() == 123);
+  QVERIFY(a.valueRef().get_den() == 10000);
 }
 
 void MyMoneyMoneyTest::testAssignment()
 {
   MyMoneyMoney *m = new MyMoneyMoney();
   *m = *m_1;
-  QVERIFY(m->m_num == -10);
-  QVERIFY(m->m_denom == 100);
+  //qDebug() << "Current value: "<< qPrintable( m->toString()) ;
+  QVERIFY(m->valueRef().get_num() == -1);
+  QVERIFY(m->valueRef().get_den() == 10);
+  //QVERIFY(m->valueRef().get_num() == -10);
+  //QVERIFY(m->valueRef().get_den() == 100);
 #if 0
   *m = 0;
-  QVERIFY(m->m_num == 0);
-  QVERIFY(m->m_denom == 100);
+  QVERIFY(m->valueRef().get_num() == 0);
+  QVERIFY(m->valueRef().get_den() == 100);
 
   *m = 777888999;
-  QVERIFY(m->m_num == 777888999);
-  QVERIFY(m->m_denom == 100);
+  QVERIFY(m->valueRef().get_num() == 777888999);
+  QVERIFY(m->valueRef().get_den() == 100);
 
   *m = (int) - 5678;
-  QVERIFY(m->m_num == -5678);
-  QVERIFY(m->m_denom == 100);
+  QVERIFY(m->valueRef().get_num() == -5678);
+  QVERIFY(m->valueRef().get_den() == 100);
 
   *m = QString("-987");
-  QVERIFY(m->m_num == -987);
-  QVERIFY(m->m_denom == 1);
+  QVERIFY(m->valueRef().get_num() == -987);
+  QVERIFY(m->valueRef().get_den() == 1);
 
   *m = QString("9998887776665554.44");
-  QVERIFY(m->m_num == 999888777666555444LL);
-  QVERIFY(m->m_denom == 100);
+  QVERIFY(m->valueRef().get_num() == 999888777666555444LL);
+  QVERIFY(m->valueRef().get_den() == 100);
 
   *m = QString("-99988877766655.444");
-  QVERIFY(m->m_num == -99988877766655444LL);
-  QVERIFY(m->m_denom == 1000);
+  QVERIFY(m->valueRef().get_num() == -99988877766655444LL);
+  QVERIFY(m->valueRef().get_den() == 1000);
 
   *m = -666555444333222111LL;
-  QVERIFY(m->m_num == -666555444333222111LL);
-  QVERIFY(m->m_denom == 100);
+  QVERIFY(m->valueRef().get_num() == -666555444333222111LL);
+  QVERIFY(m->valueRef().get_den() == 100);
 #endif
   delete m;
 }
@@ -133,87 +142,128 @@ void MyMoneyMoneyTest::testAssignment()
 void MyMoneyMoneyTest::testStringConstructor()
 {
   MyMoneyMoney *m1 = new MyMoneyMoney("-999666555444");
-  QVERIFY(m1->m_num == LLCONST(-999666555444));
-  QVERIFY(m1->m_denom == 1);
 
+  mpz_class testnum = mpz_class("-999666555444");
+  //qDebug("Created %s", qPrintable(m1->toString()));
+
+  QVERIFY(m1->valueRef().get_num() == testnum);
+  QVERIFY(m1->valueRef().get_den() == 1);
+
+  testnum = mpz_class("444555666999");
   MyMoneyMoney *m2 = new MyMoneyMoney("4445556669.99");
-  QVERIFY(m2->m_num == LLCONST(444555666999));
-  QVERIFY(m2->m_denom == 100);
+  QVERIFY(m2->valueRef().get_num() == testnum);
+  QVERIFY(m2->valueRef().get_den() == 100);
 
   delete m1;
   delete m2;
 
+  //new tests
+  m1 = new MyMoneyMoney("0.01");
+  QVERIFY(m1->valueRef().get_num() == 1);
+  QVERIFY(m1->valueRef().get_den() == 100);
+  delete m1;
+
+  m1 = new MyMoneyMoney("0.07");
+  QVERIFY(m1->valueRef().get_num() == 7);
+  QVERIFY(m1->valueRef().get_den() == 100);
+  delete m1;
+
+  m1 = new MyMoneyMoney("0.08");
+  QVERIFY(m1->valueRef().get_num() == 2);
+  QVERIFY(m1->valueRef().get_den() == 25);
+  delete m1;
+
+  m1 = new MyMoneyMoney(".");
+  //qDebug("Created %s", qPrintable(m1->toString()));
+  QVERIFY(m1->valueRef().get_num() == 0);
+  QVERIFY(m1->valueRef().get_den() == 1);
+  delete m1;
+
   m1 = new MyMoneyMoney("");
-  QVERIFY(m1->m_num == LLCONST(0));
-  QVERIFY(m1->m_denom == 1);
+  QVERIFY(m1->valueRef().get_num() == 0);
+  QVERIFY(m1->valueRef().get_den() == 1);
   delete m1;
 
   m1 = new MyMoneyMoney("1,123.");
-  QVERIFY(m1->m_num == LLCONST(1123));
-  QVERIFY(m1->m_denom == 1);
+
+  QVERIFY(m1->valueRef().get_num() == (1123));
+  QVERIFY(m1->valueRef().get_den() == 1);
   delete m1;
 
   m1 = new MyMoneyMoney("123.1");
-  QVERIFY(m1->m_num == LLCONST(1231));
-  QVERIFY(m1->m_denom == 10);
+  QVERIFY(m1->valueRef().get_num() == (1231));
+  QVERIFY(m1->valueRef().get_den() == 10);
   delete m1;
 
   m1 = new MyMoneyMoney("123.456");
-  QVERIFY(m1->m_num == LLCONST(123456));
-  QVERIFY(m1->m_denom == 1000);
+  //qDebug("Created: %s", m1->valueRef().get_str().c_str());
+  QVERIFY(m1->valueRef().get_num() == 15432);
+  QVERIFY(m1->valueRef().get_den() == 125);
+  //QVERIFY(m1->valueRef().get_num() == 123456);
+  //QVERIFY(m1->valueRef().get_den() == 1000);
   delete m1;
 
   m1 = new MyMoneyMoney("12345/100");
-  QVERIFY(m1->m_num == LLCONST(12345));
-  QVERIFY(m1->m_denom == 100);
+  //qDebug("Created: %s", m1->valueRef().get_str().c_str());
+  QVERIFY(m1->valueRef().get_num() == 2469);
+  QVERIFY(m1->valueRef().get_den() == 20);
+//  QVERIFY(m1->valueRef().get_num() == (12345));
+//  QVERIFY(m1->valueRef().get_den() == 100);
   delete m1;
 
   m1 = new MyMoneyMoney("-54321/100");
-  QVERIFY(m1->m_num == LLCONST(-54321));
-  QVERIFY(m1->m_denom == 100);
+//  qDebug("Created: %s", m1->valueRef().get_str().c_str());
+  QVERIFY(m1->valueRef().get_num() == (-54321));
+  QVERIFY(m1->valueRef().get_den() == 100);
   delete m1;
+
 
   MyMoneyMoney::setDecimalSeparator(',');
   MyMoneyMoney::setThousandSeparator('.');
   MyMoneyMoney::setNegativeMonetarySignPosition(MyMoneyMoney::ParensAround);
   m1 = new MyMoneyMoney("x1.234,567 EUR");
-  QVERIFY(m1->m_num == LLCONST(1234567));
-  QVERIFY(m1->m_denom == 1000);
+  QVERIFY(m1->valueRef().get_num() == (1234567));
+  QVERIFY(m1->valueRef().get_den() == 1000);
   delete m1;
 
   m1 = new MyMoneyMoney("x(1.234,567) EUR");
-  QVERIFY(m1->m_num == LLCONST(-1234567));
-  QVERIFY(m1->m_denom == 1000);
+  QVERIFY(m1->valueRef().get_num() == (-1234567));
+  QVERIFY(m1->valueRef().get_den() == 1000);
   delete m1;
 
   m1 = new MyMoneyMoney("1 5/8");
-  QVERIFY(m1->m_num == LLCONST(13));
-  QVERIFY(m1->m_denom == 8);
+  QVERIFY(m1->valueRef().get_num() == (13));
+  QVERIFY(m1->valueRef().get_den() == 8);
   delete m1;
+
 }
 
 void MyMoneyMoneyTest::testConvert()
 {
-  MyMoneyMoney a("123.456");
-  MyMoneyMoney b = a.convert(100);
-  QVERIFY(b.m_num == 12346);
-  QVERIFY(b.m_denom == 100);
+  MyMoneyMoney a(123.456);
+  MyMoneyMoney b = a.convertDenominator(100);
+  QVERIFY(b == MyMoneyMoney(12346 , 100));
+
   a = QString("-123.456");
+
   b = a.convert(100);
-  QVERIFY(b.m_num == -12346);
-  QVERIFY(b.m_denom == 100);
+  QVERIFY(b == MyMoneyMoney(-12346 , 100));
+
 
   a = QString("123.1");
   b = a.convert(100);
-  QVERIFY(b.m_num == 12310);
-  QVERIFY(b.m_denom == 100);
+  QVERIFY(b == MyMoneyMoney(12310, 100));
 
   a = QString("-73010.28");
   b = QString("1.95583");
+
   QVERIFY((a * b).convert(100) == QString("-142795.70"));
+  QVERIFY((a * b).convert(100) == QString("-14279570/100"));
+// QVERIFY((a * b).convert(100).toString() == QString("-14279570/100"));
 
   a = QString("-142795.69");
   QVERIFY((a / b).convert(100) == QString("-73010.28"));
+  //QVERIFY((a / b).convert(100).toString() == QString("-7301028/100"));
 }
 
 void MyMoneyMoneyTest::testEquality()
@@ -232,12 +282,24 @@ void MyMoneyMoneyTest::testEquality()
   MyMoneyMoney m5(1230, 100);
   MyMoneyMoney m6(123, 10);
   MyMoneyMoney m7(246, 20);
+
   QVERIFY(m5 == m6);
   QVERIFY(m5 == m7);
 
   QVERIFY(m5 == QString("369/30"));
 
   QVERIFY(MyMoneyMoney::autoCalc == MyMoneyMoney::autoCalc);
+
+
+  MyMoneyMoney mm1, mm2;
+  mm1 = QLatin1String("-14279570/100");
+  mm2 = QLatin1String("-1427957/10");
+  QVERIFY(mm1 == mm2);
+  QVERIFY(mm1 == QLatin1String("-14279570/100"));
+
+  mm1 = QLatin1String("-7301028/100");
+  mm2 = QLatin1String("-1825257/25");
+  QVERIFY(mm1 == mm2);
 }
 
 void MyMoneyMoneyTest::testInequality()
@@ -282,8 +344,11 @@ void MyMoneyMoneyTest::testAddition()
   QVERIFY((m1 + m2) == QString("123.24"));
 
   m1 += m2;
-  QVERIFY(m1.m_num == 123240);
-  QVERIFY(m1.m_denom == 1000);
+  //FIXME check after deciding about normalization
+  QVERIFY(m1.valueRef().get_num() == 3081);
+  QVERIFY(m1.valueRef().get_den() == 25);
+  //QVERIFY(m1.valueRef().get_num() == 123240);
+  //QVERIFY(m1.valueRef().get_den() == 1000);
 }
 
 void MyMoneyMoneyTest::testSubtraction()
@@ -308,8 +373,12 @@ void MyMoneyMoneyTest::testSubtraction()
   QVERIFY((m1 - m2) == MyMoneyMoney(123, 1));
 
   m1 -= m2;
-  QVERIFY(m1.m_num == 12300);
-  QVERIFY(m1.m_denom == 100);
+  //FIXME check after deciding about normalization
+  QVERIFY(m1.valueRef().get_num() == 123);
+  QVERIFY(m1.valueRef().get_den() == 1);
+  //QVERIFY(m1.valueRef().get_num() == 12300);
+  //QVERIFY(m1.valueRef().get_den() == 100);
+
 }
 
 void MyMoneyMoneyTest::testMultiplication()
@@ -323,6 +392,11 @@ void MyMoneyMoneyTest::testMultiplication()
   MyMoneyMoney m2(QString("-73010.28"));
   m1 = QString("1.95583");
   QVERIFY((m1 * m2) == QString("-142795.6959324"));
+
+  MyMoneyMoney m3(100, 1);
+  QVERIFY((m3 * 10) == MyMoneyMoney(1000, 1));
+  //QVERIFY( (m3 *= (*m_0))  == MyMoneyMoney(1200));
+  QVERIFY((m3 *= (*m_0))  == MyMoneyMoney(1200, 100));
 }
 
 void MyMoneyMoneyTest::testDivision()
@@ -335,8 +409,8 @@ void MyMoneyMoneyTest::testDivision()
   QVERIFY((m2 / m1).convert(100000000) == QString("-73010.27696681"));
 
   MyMoneyMoney m3 = MyMoneyMoney() / MyMoneyMoney(100, 100);
-  QVERIFY(m3.m_num == 0);
-  QVERIFY(m3.m_denom != 0);
+  QVERIFY(m3.valueRef().get_num() == 0);
+  QVERIFY(m3.valueRef().get_den() != 0);
 }
 
 void MyMoneyMoneyTest::testSetDecimalSeparator()
@@ -371,23 +445,39 @@ void MyMoneyMoneyTest::testSetThousandSeparator()
 
 void MyMoneyMoneyTest::testFormatMoney()
 {
+  qDebug() << "Value:" << qPrintable(m_0->toString());
+  qDebug() << "Converted: " << qPrintable(m_0->convert(100).toString());
+  qDebug() << " Formatted: " << qPrintable(m_0->formatMoney("", 2));
+
   QVERIFY(m_0->formatMoney("", 2) == QString("0.12"));
   QVERIFY(m_1->formatMoney("", 2) == QString("-0.10"));
 
   MyMoneyMoney m1(10099, 100);
+  qDebug() << "Value:" << qPrintable(m1.toString());
+  qDebug() << "Converted: " << qPrintable(m1.convert(100).toString());
+  qDebug() << " Formatted: " << qPrintable(m1.formatMoney("", 2));
   QVERIFY(m1.formatMoney("", 2) == QString("100.99"));
 
   m1 = MyMoneyMoney(100, 1);
+  qDebug() << "Value:" << qPrintable(m1.toString());
+  qDebug() << "Converted: " << qPrintable(m1.convert(100).toString());
+  qDebug() << " Formatted: " << qPrintable(m1.formatMoney("", 2));
   QVERIFY(m1.formatMoney("", 2) == QString("100.00"));
   QVERIFY(m1.formatMoney("", -1) == QString("100"));
 
-  m1 = m1 * 10;
+  MyMoneyMoney mTemp(100099, 100);
+
+  m1 = m1 * MyMoneyMoney(10, 1);
+
+  QVERIFY(m1 == MyMoneyMoney(1000, 1));
+
   QVERIFY(m1.formatMoney("", 2) == QString("1,000.00"));
   QVERIFY(m1.formatMoney("", -1) == QString("1,000"));
   QVERIFY(m1.formatMoney("", -1, false) == QString("1000"));
   QVERIFY(m1.formatMoney("", 3, false) == QString("1000.000"));
 
   m1 = MyMoneyMoney(INT64_MAX, 100);
+
   QVERIFY(m1.formatMoney("", 2) == QString("92,233,720,368,547,758.07"));
   QVERIFY(m1.formatMoney(100) == QString("92,233,720,368,547,758.07"));
   QVERIFY(m1.formatMoney("", 2, false) == QString("92233720368547758.07"));
@@ -399,6 +489,13 @@ void MyMoneyMoneyTest::testFormatMoney()
   QVERIFY(m1.formatMoney("", 2, false) == QString("-92233720368547758.08"));
   QVERIFY(m1.formatMoney(100, false) == QString("-92233720368547758.08"));
 
+  // make sure we support numbers that need more than 64 bit
+  m1 = MyMoneyMoney(321, 100) * MyMoneyMoney(INT64_MAX, 100);
+  QVERIFY(m1.formatMoney("", 2) == QString("296,070,242,383,038,303.40"));
+  QVERIFY(m1.formatMoney("", 4) == QString("296,070,242,383,038,303.4047"));
+  QVERIFY(m1.formatMoney("", 6) == QString("296,070,242,383,038,303.404700"));
+
+
   m1 = MyMoneyMoney(1, 5);
   QVERIFY(m1.formatMoney("", 2) == QString("0.20"));
   QVERIFY(m1.formatMoney(1000) == QString("0.200"));
@@ -406,6 +503,7 @@ void MyMoneyMoneyTest::testFormatMoney()
   QVERIFY(m1.formatMoney(10) == QString("0.2"));
 
   m1 = MyMoneyMoney(13333, 5000);
+
   QVERIFY(m1.formatMoney("", 10) == QString("2.6666000000"));
 
   m1 = MyMoneyMoney(-1404, 100);
@@ -432,6 +530,7 @@ void MyMoneyMoneyTest::testRelation()
   m2 = QString("1/7");
   QVERIFY(m1 < m2);
   QVERIFY(m2 > m1);
+
   m2 = QString("-1/7");
   QVERIFY(m2 < m1);
   QVERIFY(m1 > m2);
@@ -458,6 +557,7 @@ void MyMoneyMoneyTest::testUnaryMinus()
 void MyMoneyMoneyTest::testDoubleConstructor()
 {
   for (int i = -123456; i < 123456; ++i) {
+    // int i = -123456;
     double d = i;
     MyMoneyMoney r(i, 100);
     d /= 100;
@@ -481,9 +581,16 @@ void MyMoneyMoneyTest::testToString()
   MyMoneyMoney m2(1234, 100);
   MyMoneyMoney m3;
 
-  QVERIFY(m1.toString() == QString("-100/100"));
-  QVERIFY(m2.toString() == QString("1234/100"));
+  //qDebug("Created: %s", m3.valueRef().get_str().c_str());
+
+  //QVERIFY(m1.toString() == QString("-100/100"));
+  QVERIFY(m1.toString() == QString("-1/1"));
+// qDebug("Current value: %s",qPrintable( m2.toString()) );
+  //QVERIFY(m2.toString() == QString("1234/100"));
+  QVERIFY(m2.toString() == QString("617/50"));
   QVERIFY(m3.toString() == QString("0/1"));
+  //FIXME check the impact of the canonicalize in the whole code
+  //QVERIFY(m3.toString() == QString("0"));
 }
 
 void MyMoneyMoneyTest::testNegativeSignPos(void)
@@ -559,21 +666,27 @@ void MyMoneyMoneyTest::testNegativeStringConstructor(void)
   MyMoneyMoney::setThousandSeparator('.');
   MyMoneyMoney::setNegativeMonetarySignPosition(MyMoneyMoney::ParensAround);
   m1 = new MyMoneyMoney("x(1.234,567) EUR");
-  QVERIFY(m1->m_num == LLCONST(-1234567));
-  QVERIFY(m1->m_denom == 1000);
+
+  QVERIFY(m1->valueRef().get_num() == (-1234567));
+  QVERIFY(m1->valueRef().get_den() == 1000);
   delete m1;
+
   MyMoneyMoney::setNegativeMonetarySignPosition(MyMoneyMoney::BeforeQuantityMoney);
   m1 = new MyMoneyMoney("x1.234,567- EUR");
-  QVERIFY(m1->m_num == LLCONST(-1234567));
-  QVERIFY(m1->m_denom == 1000);
+  //qDebug("Created: %s", m1->valueRef().get_str().c_str());
+
+  QVERIFY(m1->valueRef().get_num() == (-1234567));
+  QVERIFY(m1->valueRef().get_den() == 1000);
   delete m1;
+
   m1 = new MyMoneyMoney("x1.234,567 -EUR");
-  QVERIFY(m1->m_num == LLCONST(-1234567));
-  QVERIFY(m1->m_denom == 1000);
+  QVERIFY(m1->valueRef().get_num() == (-1234567));
+  QVERIFY(m1->valueRef().get_den() == 1000);
   delete m1;
+
   m1 = new MyMoneyMoney("-1.234,567 EUR");
-  QVERIFY(m1->m_num == LLCONST(-1234567));
-  QVERIFY(m1->m_denom == 1000);
+  QVERIFY(m1->valueRef().get_num() == (-1234567));
+  QVERIFY(m1->valueRef().get_den() == 1000);
   delete m1;
 }
 
@@ -583,12 +696,12 @@ void MyMoneyMoneyTest::testReduce(void)
   MyMoneyMoney b(-a);
 
   a = a.reduce();
-  QVERIFY(a.m_num == 364881);
-  QVERIFY(a.m_denom == 12673900);
+  QVERIFY(a.valueRef().get_num() == 364881);
+  QVERIFY(a.valueRef().get_den() == 12673900);
 
   b = b.reduce();
-  QVERIFY(b.m_num == -364881);
-  QVERIFY(b.m_denom == 12673900);
+  QVERIFY(b.valueRef().get_num() == -364881);
+  QVERIFY(b.valueRef().get_den() == 12673900);
 }
 
 void MyMoneyMoneyTest::testZeroDenominator()
