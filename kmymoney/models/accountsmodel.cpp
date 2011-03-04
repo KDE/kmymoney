@@ -163,17 +163,17 @@ public:
     newIndex = model->index(index.row(), index.column() + TotalBalance, index.parent());
     // only show the balance, if its a different security/currency
     if (m_file->security(account.currencyId()) != m_file->baseCurrency()) {
-      model->setData(newIndex, accountBalance.formatMoney(m_file->security(account.currencyId())), Qt::DisplayRole);
-      model->setData(newIndex, accountBalance.formatMoney(m_file->security(account.currencyId())), AccountBalanceDisplayRole);
+      model->setData(newIndex, MyMoneyUtils::formatMoney(accountBalance, m_file->security(account.currencyId())), Qt::DisplayRole);
+      model->setData(newIndex, MyMoneyUtils::formatMoney(accountBalance, m_file->security(account.currencyId())), AccountBalanceDisplayRole);
     }
     model->setData(newIndex, font, Qt::FontRole);
     model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
 
     // Total Value
     newIndex = model->index(index.row(), index.column() + TotalValue, index.parent());
-    model->setData(newIndex, accountValue.formatMoney(m_file->baseCurrency()), Qt::DisplayRole);
-    model->setData(newIndex, accountValue.formatMoney(m_file->baseCurrency()), AccountValueDisplayRole);
-    model->setData(newIndex, accountTotalValue.formatMoney(m_file->baseCurrency()), AccountTotalValueDisplayRole);
+    model->setData(newIndex, MyMoneyUtils::formatMoney(accountValue, m_file->baseCurrency()), Qt::DisplayRole);
+    model->setData(newIndex, MyMoneyUtils::formatMoney(accountValue, m_file->baseCurrency()), AccountValueDisplayRole);
+    model->setData(newIndex, MyMoneyUtils::formatMoney(accountTotalValue, m_file->baseCurrency()), AccountTotalValueDisplayRole);
     model->setData(newIndex, font, Qt::FontRole);
     model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
   }
@@ -373,8 +373,8 @@ public:
       model->setData(newIndex, KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color(), Qt::ForegroundRole);
     }
 
-    model->setData(newIndex, institutionValue.formatMoney(m_file->baseCurrency()), Qt::DisplayRole);
-    model->setData(newIndex, institutionValue.formatMoney(m_file->baseCurrency()), AccountTotalValueDisplayRole);
+    model->setData(newIndex, MyMoneyUtils::formatMoney(institutionValue, m_file->baseCurrency()), Qt::DisplayRole);
+    model->setData(newIndex, MyMoneyUtils::formatMoney(institutionValue, m_file->baseCurrency()), AccountTotalValueDisplayRole);
     model->setData(newIndex, font, Qt::FontRole);
     model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
   }
