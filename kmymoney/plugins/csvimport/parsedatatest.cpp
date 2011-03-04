@@ -41,7 +41,7 @@ void ParseDataTest::cleanup()
 
 void ParseDataTest::parseSplitString()
 {
-  for(int i = 0; i <= 3; i++)  { //        All four delimiters should produce same result
+  for (int i = 0; i <= 3; i++)  { //        All four delimiters should produce same result
     m_parseline->setFieldDelimiterIndex(i);
     m_parseline->setFieldDelimiterCharacter(i);
 

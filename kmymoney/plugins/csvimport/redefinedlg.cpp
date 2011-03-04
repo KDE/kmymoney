@@ -95,7 +95,7 @@ void RedefineDlg::displayLine(const QString& info)
   int row;
   m_columnTotalWidth = 0;
   m_widget->tableWidget->setRowCount(2);
-  for(int col = 0; col < m_maxCol; col++) {
+  for (int col = 0; col < m_maxCol; col++) {
     row = 1;
     txt = m_columnList[col];
     txt = txt.remove('"');
@@ -103,26 +103,26 @@ void RedefineDlg::displayLine(const QString& info)
     QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
     item->setText(txt);
     m_widget->tableWidget->setItem(row, col, item);//     add items to UI here
-    if(m_typeColumn == col) {
+    if (m_typeColumn == col) {
       item->setBackground(brush);
     }
     m_columnTotalWidth += m_widget->tableWidget->columnWidth(col);
 
     row = 0;
-    if(col == m_quantityColumn) {
+    if (col == m_quantityColumn) {
       QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
       item->setText(i18n("Quantity"));
       m_widget->tableWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter);
       m_widget->tableWidget->setItem(row, col, item);
-    } else if(col == m_priceColumn) {
+    } else if (col == m_priceColumn) {
       QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
       item->setText(i18n("Price"));
       m_widget->tableWidget->setItem(row, col, item);
-    } else if(col == m_amountColumn) {
+    } else if (col == m_amountColumn) {
       QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
       item->setText(i18n("Amount"));
       m_widget->tableWidget->setItem(row, col, item);
-    } else if(col == m_typeColumn) {
+    } else if (col == m_typeColumn) {
       QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
       item->setText(i18n("Type"));
       m_widget->tableWidget->setItem(row, col, item);
@@ -144,7 +144,7 @@ void RedefineDlg::slotAccepted()
 void RedefineDlg::slotNewActionSelected(const int& index)
 {
   m_newType = m_typesList[index];
-  if(m_okTypeList.contains(m_newType)) {
+  if (m_okTypeList.contains(m_newType)) {
     QTableWidgetItem *item = new QTableWidgetItem;//        add new type to UI
     item->setText(m_newType);
     m_widget->tableWidget->setItem(1, m_typeColumn, item);
@@ -165,7 +165,7 @@ int RedefineDlg::checkValid(const QString& type, QString info)
   m_maxCol = m_columnList.count();
   this->enableButtonOk(false);
   convertValues();
-  if((m_priceColumn < 1) || (m_priceColumn >= m_maxCol) ||
+  if ((m_priceColumn < 1) || (m_priceColumn >= m_maxCol) ||
       (m_quantityColumn < 1) || (m_quantityColumn >= m_maxCol) ||
       (m_amountColumn < 1) || (m_amountColumn >= m_maxCol)) {
     info = i18n("There is a problem with the columns selected\n for 'Price', 'Quantity and 'Amount'.\n \
@@ -173,14 +173,14 @@ int RedefineDlg::checkValid(const QString& type, QString info)
     int ret = suspectType(info);
     return ret;
   }
-  if((type == "reinvdiv") || (type == "buy") || (type == "sell")) {
+  if ((type == "reinvdiv") || (type == "buy") || (type == "sell")) {
     m_widget->label_info->setText("OK");
-    if((m_quantity.isPositive()) && (m_price.isPositive()) && (!m_amount.isZero())) {
+    if ((m_quantity.isPositive()) && (m_price.isPositive()) && (!m_amount.isZero())) {
       m_okTypeList << "reinvdiv" << "buy" << "sell";
-      if((m_accountName.isEmpty()) && (type != "reinvdiv")) {
+      if ((m_accountName.isEmpty()) && (type != "reinvdiv")) {
         m_accountName =  inputParameter(i18n("Enter the name of the Brokerage or Checking Account"
                                              "<center>to/from which funds will be transferred :</center>"));
-        if(m_accountName.isEmpty())
+        if (m_accountName.isEmpty())
           return KMessageBox::Cancel;
       }
       m_newType = type;
@@ -189,14 +189,14 @@ int RedefineDlg::checkValid(const QString& type, QString info)
     }
     int ret = suspectType(info);
     return ret;
-  } else if(type.toLower() == "divx") {
+  } else if (type.toLower() == "divx") {
     m_widget->label_info->setText("OK");
-    if((m_quantity.isZero()) && (m_price.isZero()) && (!m_amount.isZero())) {
+    if ((m_quantity.isZero()) && (m_price.isZero()) && (!m_amount.isZero())) {
       m_okTypeList << "divx";
-      if(m_accountName.isEmpty())
+      if (m_accountName.isEmpty())
         m_accountName =  inputParameter(i18n("Enter the name of the Brokerage or Checking Account"
                                              "<center>to/from which funds will be transferred :</center>"));
-      if(m_accountName.isEmpty())
+      if (m_accountName.isEmpty())
         return KMessageBox::Cancel;
       m_newType = type;
       this->enableButtonOk(true);
@@ -205,9 +205,9 @@ int RedefineDlg::checkValid(const QString& type, QString info)
     //                    validity suspect
     int ret = suspectType(info);
     return ret;
-  } else if((type == "shrsin") || (type == "shrsout")) {
+  } else if ((type == "shrsin") || (type == "shrsout")) {
     m_widget->label_info->setText("OK");
-    if((m_quantity.isPositive()) && (m_price.isZero()) && (m_amount.isZero())) {
+    if ((m_quantity.isPositive()) && (m_price.isZero()) && (m_amount.isZero())) {
       m_okTypeList << "shrsin" << "shrsout";
       m_newType = type;
       this->enableButtonOk(true);
@@ -224,8 +224,8 @@ int RedefineDlg::suspectType(const QString& info)
 {
   displayLine(info);
   buildOkTypeList();
-  for(int i = 0; i < 6 ; i++) {
-    if(m_okTypeList.contains(m_typesList[i])) {
+  for (int i = 0; i < 6 ; i++) {
+    if (m_okTypeList.contains(m_typesList[i])) {
       m_widget->kcombobox_Actions->setItemIcon(i, m_iconYes);
     } else {
       m_widget->kcombobox_Actions->setItemIcon(i, m_iconNo);
@@ -233,7 +233,7 @@ int RedefineDlg::suspectType(const QString& info)
   }
 
   int ret = exec();
-  if(ret == QDialog::Rejected)
+  if (ret == QDialog::Rejected)
     ret = KMessageBox::Cancel;
   return ret;
 }
@@ -245,11 +245,11 @@ void RedefineDlg::buildOkTypeList()
   m_okTypeList.clear();
 
   MyMoneyMoney zero = MyMoneyMoney();
-  if((m_quantity > zero) && (m_price > zero) && (m_amount != zero))
+  if ((m_quantity > zero) && (m_price > zero) && (m_amount != zero))
     m_okTypeList << "reinvdiv" << "buy" << "sell";
-  else if((m_quantity == zero) && (m_price == zero) && (m_amount != zero)) {
+  else if ((m_quantity == zero) && (m_price == zero) && (m_amount != zero)) {
     m_okTypeList << "divx";
-  } else if((m_quantity > zero) && (m_price == zero) && (m_amount == zero)) {
+  } else if ((m_quantity > zero) && (m_price == zero) && (m_amount == zero)) {
     m_okTypeList << "shrsin" << "shrsout";
   } else {
     m_okTypeList.clear();
@@ -264,7 +264,7 @@ QString RedefineDlg::inputParameter(const QString& aName)
   static QString accntName;
   accntName = KInputDialog::getText(i18n("Enter Account Name"), aName, QString(), &ok, 0, 0, 0);
 
-  if(ok && !accntName.isEmpty())
+  if (ok && !accntName.isEmpty())
     return accntName;
   else return "";
 }
@@ -284,7 +284,7 @@ void RedefineDlg::updateWindow()
   int hght = 4 + (m_widget->tableWidget->rowHeight(0) * 2);
   hght += m_widget->tableWidget->horizontalHeader()->height() + 2;//  frig factor for vert. headers?
 
-  if(m_columnTotalWidth > (m_mainWidth - 12))
+  if (m_columnTotalWidth > (m_mainWidth - 12))
     hght += m_widget->tableWidget->horizontalScrollBar()->height() + 1;//  ....and for hor. scroll bar
 
   m_widget->tableWidget->setFixedHeight(hght);
@@ -298,13 +298,13 @@ void RedefineDlg::convertValues()
   m_price = m_columnList[m_priceColumn].remove('"');
   m_quantity = m_columnList[m_quantityColumn].remove('"');
   txt = m_columnList[m_amountColumn];
-  if((txt.startsWith('"')) && (!txt.endsWith('"')))  {
+  if ((txt.startsWith('"')) && (!txt.endsWith('"')))  {
     txt1 = m_columnList[m_amountColumn + 1];
     txt += txt1;
   }
   txt = txt.remove('"');
 
-  if(txt.contains(')')) {   //          replace negative ( ) with '-'
+  if (txt.contains(')')) {  //          replace negative ( ) with '-'
     txt = '-' + txt.remove(QRegExp("[(),]"));
   }
   m_amount = txt;
