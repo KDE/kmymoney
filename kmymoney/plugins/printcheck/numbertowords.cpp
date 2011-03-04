@@ -73,7 +73,7 @@ QString MyMoneyMoneyToWordsConverter::convertTreeDigitGroup(int threeDigitNumber
 QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
 {
   // Zero rule
-  if (static_cast<int>(money) == 0)
+  if (money.isZero())
     return m_smallNumbers[0];
 
   // hold three-digit groups

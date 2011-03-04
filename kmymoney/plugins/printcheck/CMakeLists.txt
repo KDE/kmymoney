@@ -16,6 +16,8 @@ KDE4_ADD_PLUGIN(kmm_printcheck ${kmm_printcheck_PART_SRCS})
 TARGET_LINK_LIBRARIES(kmm_printcheck
                       ${KDE4_KDEUI_LIBS}
                       ${KDE4_KHTML_LIBS}
+                      ${GMP_LIBRARIES} 
+                      ${LIBALKIMIA_LIBRARY}
                       kmm_mymoney kmm_plugin
                       )
 

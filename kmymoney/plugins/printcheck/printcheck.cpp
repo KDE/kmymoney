@@ -150,7 +150,7 @@ void KMMPrintCheckPlugin::slotPrintCheck(void)
     checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
     checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
     checkHTML.replace("$AMMOUNT_STRING", converter.convert((*it).split().shares().abs()));
-    checkHTML.replace("$AMMOUNT_DECIMAL", (*it).split().shares().abs().formatMoney(currency));
+    checkHTML.replace("$AMMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
     checkHTML.replace("$MEMO", (*it).split().memo());
 
     // print the check
