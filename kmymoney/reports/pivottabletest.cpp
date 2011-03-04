@@ -159,7 +159,11 @@ void PivotTableTest::testNetWorthOpeningPrior()
   filter.setName("Net Worth Opening Prior 2");
   PivotTable networth_f2(filter);
   writeTabletoCSV(networth_f2);
-  QVERIFY(networth_f2.m_grid["Liability"]["Credit Card"].m_total[eActual][1] == -moCreditOpen + moParent);
+
+  MyMoneyMoney m1 = (networth_f2.m_grid["Liability"]["Credit Card"].m_total[eActual][1]);
+  MyMoneyMoney m2 = (-moCreditOpen + moParent);
+
+  QVERIFY((networth_f2.m_grid["Liability"]["Credit Card"].m_total[eActual][1]) == (-moCreditOpen + moParent));
   QVERIFY(networth_f2.m_grid["Asset"]["Checking Account"].m_total[eActual][1] == moCheckingOpen - moChild);
   QVERIFY(networth_f2.m_grid.m_total[eActual][1] == moCheckingOpen + moCreditOpen - moChild - moParent);
 }
