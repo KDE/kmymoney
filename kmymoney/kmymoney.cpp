@@ -2888,8 +2888,8 @@ void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
                              "Please click Yes to change the opening balance to %1,\n"
                              "Please click No to leave the amount as %2,\n"
                              "Please click Cancel to abort the account creation."
-                             , (-openingBal).formatMoney(newAccount, sec)
-                             , openingBal.formatMoney(newAccount, sec));
+                             , MyMoneyUtils::formatMoney(-openingBal, newAccount, sec)
+                             , MyMoneyUtils::formatMoney(openingBal, newAccount, sec));
 
       int ans = KMessageBox::questionYesNoCancel(this, message);
       if (ans == KMessageBox::Yes) {
@@ -3706,7 +3706,7 @@ QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticR
     QListIterator<MyMoneyMoney> itUnion(unionList);
     while (itUnion.hasNext()) {
       MyMoneyMoney sumFromUnion = itUnion.next();
-      if (smallestSumFromUnion < (1 - precision / transactions.size())*sumFromUnion) {
+      if (smallestSumFromUnion < MyMoneyMoney(1 - precision / transactions.size())*sumFromUnion) {
         smallestSumFromUnion = sumFromUnion;
         sumList.append(sumFromUnion);
       }
@@ -3727,7 +3727,7 @@ QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticR
 
 #ifdef KMM_DEBUG
   qDebug("For the amount %s a number of %d possible sums where computed from the set of %d transactions: ",
-         qPrintable(amount.formatMoney(security)), sumToComponentsMap.size(), transactions.size());
+         qPrintable(MyMoneyUtils::formatMoney(amount, security)), sumToComponentsMap.size(), transactions.size());
 #endif
 
   kmymoney->slotStatusProgressBar(-1, -1);

@@ -52,7 +52,7 @@ KDE4_ADD_LIBRARY(kmm_config STATIC ${kmm_config_SRCS})
 SET( kmymoney_common_SRCS kmymoneyutils.cpp kstartuplogo.cpp )
 KDE4_ADD_LIBRARY(kmymoney_common STATIC ${kmymoney_common_SRCS})
 TARGET_LINK_LIBRARIES(kmymoney_common
-  ${QT_AND_KDECORE_LIBS} ${KDEPIMLIBS_KHOLIDAYS_LIBS} kmm_widgets kmm_mymoney)
+  ${QT_AND_KDECORE_LIBS} ${KDEPIMLIBS_KHOLIDAYS_LIBS} ${GMP_LIBRARIES} ${LIBALKIMIA_LIBRARY} kmm_widgets kmm_mymoney)
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
