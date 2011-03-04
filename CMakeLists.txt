@@ -86,6 +86,9 @@ IF(DOXYGEN_FOUND)
   ADD_CUSTOM_TARGET(apidoc ${DOXYGEN} ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen)
 ENDIF(DOXYGEN_FOUND)
 
+FIND_PACKAGE(GMP REQUIRED)
+FIND_PACKAGE(Libalkimia REQUIRED)
+
 # check for PkgConfig
 FIND_PACKAGE(PkgConfig)
 # check for some modules we require
@@ -284,7 +287,6 @@ IF(USE_HTML_HANDBOOK)
 ENDIF(USE_HTML_HANDBOOK)
 
 ######################### The Actual Targets ##########################
-
 ADD_SUBDIRECTORY( libkgpgfile )
 ADD_SUBDIRECTORY( libkdchart )
 ADD_SUBDIRECTORY( kmymoney )
