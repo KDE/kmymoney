@@ -473,12 +473,12 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources(void
   //  is such a series of funds.
 
   result["Cash CH"] = WebPriceQuoteSource("Cash CH",
-                      "http://www.cash.ch/boerse/fonds/fondsguide/kursinfo/fullquote/%1",
-                      "",  // symbolregexp
-                      "<span class=\"fgdhLast\">([1-9][0-9]*\\.[0-9][0-9])</span>", // priceregexp
-                      "<span class=\"fgdhLastdt\">([0-3][0-9]\\.[0-1][0-9]\\.[1-2][0-9][0-9][0-9])</span>", // dateregexp
-                      "%d.%m.%y",                         // dateformat
-                      true                                // skip stripping
+                                          "http://www.cash.ch/boerse/fonds/fondsguide/kursinfo/fullquote/%1",
+                                          "",  // symbolregexp
+                                          "<span class=\"fgdhLast\">([1-9][0-9]*\\.[0-9][0-9])</span>", // priceregexp
+                                          "<span class=\"fgdhLastdt\">([0-3][0-9]\\.[0-1][0-9]\\.[1-2][0-9][0-9][0-9])</span>", // dateregexp
+                                          "%d.%m.%y",                         // dateformat
+                                          true                                // skip stripping
                                          );
 
   return result;
