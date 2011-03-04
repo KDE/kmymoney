@@ -31,6 +31,8 @@ KDE4_ADD_PLUGIN(kmm_csvimport
 TARGET_LINK_LIBRARIES(kmm_csvimport
   kmm_mymoney kmm_plugin
   ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS}
+  ${GMP_LIBRARIES} 
+  ${LIBALKIMIA_LIBRARY}
 )
 
 IF(KDE4_BUILD_TESTS)
