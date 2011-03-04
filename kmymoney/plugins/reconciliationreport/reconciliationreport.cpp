@@ -130,25 +130,25 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   report += "<tr class=\"row-odd\"><td class=\"left\">";
   report += i18n("Starting balance on bank statement");
   report += "</td><td>";
-  report += startingBalance.formatMoney(currency);
+  report += MyMoneyUtils::formatMoney(startingBalance, currency);
   report += "</td></tr>";
   // row 2
   report += "<tr class=\"row-even\"><td class=\"left\">";
   report += i18np("%1 cleared payment", "%1 cleared payments in total", clearedPayments);
   report += "</td><td>";
-  report += clearedPaymentAmount.formatMoney(currency);
+  report += MyMoneyUtils::formatMoney(clearedPaymentAmount, currency);
   report += "</td></tr>";
   // row 3
   report += "<tr class=\"row-odd\"><td class=\"left\">";
   report += i18np("%1 cleared deposit", "%1 cleared deposits in total", clearedDeposits);
   report += "</td><td>";
-  report += clearedDepositAmount.formatMoney(currency);
+  report += MyMoneyUtils::formatMoney(clearedDepositAmount, currency);
   report += "</td></tr>";
   // row 4
   report += "<tr class=\"row-even\"><td class=\"left\">";
   report += i18n("Ending balance on bank statement");
   report += "</td><td>";
-  report += endingBalance.formatMoney(currency);
+  report += MyMoneyUtils::formatMoney(endingBalance, currency);
   report += "</td></tr>";
 
   // separator
@@ -158,25 +158,25 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   report += "<tr class=\"row-odd\"><td class=\"left\">";
   report += i18n("Cleared balance");
   report += "</td><td>";
-  report += clearedBalance.formatMoney(currency);
+  report += MyMoneyUtils::formatMoney(clearedBalance, currency);
   report += "</td></tr>";
   // row 6
   report += "<tr class=\"row-even\"><td class=\"left\">";
   report += i18np("%1 outstanding payment", "%1 outstanding payments in total", outstandingPayments);
   report += "</td><td>";
-  report += outstandingPaymentAmount.formatMoney(currency);
+  report += MyMoneyUtils::formatMoney(outstandingPaymentAmount, currency);
   report += "</td></tr>";
   // row 7
   report += "<tr class=\"row-odd\"><td class=\"left\">";
   report += i18np("%1 outstanding deposit", "%1 outstanding deposits in total", outstandingDeposits);
   report += "</td><td>";
-  report += outstandingDepositAmount.formatMoney(currency);
+  report += MyMoneyUtils::formatMoney(outstandingDepositAmount, currency);
   report += "</td></tr>";
   // row 8
   report += "<tr class=\"row-even\"><td class=\"left\">";
   report += i18n("Register balance as of %1", KGlobal::locale()->formatDate(date, KLocale::ShortDate));
   report += "</td><td>";
-  report += MyMoneyFile::instance()->balance(account.id(), date).formatMoney(currency);
+  report += MyMoneyUtils::formatMoney(MyMoneyFile::instance()->balance(account.id(), date), currency);
   report += "</td></tr>";
 
   // retrieve list of all transactions after the reconciliation date that are not reconciled or cleared
@@ -209,19 +209,19 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   report += "<tr class=\"row-odd\"><td class=\"left\">";
   report += i18np("%1 payment after %2", "%1 payments after %2", afterPayments, KGlobal::locale()->formatDate(date, KLocale::ShortDate));
   report += "</td><td>";
-  report += afterPaymentAmount.formatMoney(currency);
+  report += MyMoneyUtils::formatMoney(afterPaymentAmount, currency);
   report += "</td></tr>";
   // row 10
   report += "<tr class=\"row-even\"><td class=\"left\">";
   report += i18np("%1 deposit after %2", "%1 deposits after %2", afterDeposits, KGlobal::locale()->formatDate(date, KLocale::ShortDate));
   report += "</td><td>";
-  report += afterDepositAmount.formatMoney(currency);
+  report += MyMoneyUtils::formatMoney(afterDepositAmount, currency);
   report += "</td></tr>";
   // row 11
   report += "<tr class=\"row-odd\"><td class=\"left\">";
   report += i18n("Register ending balance");
   report += "</td><td>";
-  report += MyMoneyFile::instance()->balance(account.id()).formatMoney(currency);
+  report += MyMoneyUtils::formatMoney(MyMoneyFile::instance()->balance(account.id()), currency);
   report += "</td></tr>";
 
   // end of the table
@@ -265,13 +265,13 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
       detailsReport += "</td><td>";
       detailsReport += QString("%1").arg(category);
       detailsReport += "</td><td>";
-      detailsReport += QString("%1").arg((*it).second.shares().formatMoney(file->currency(account.currencyId())));
+      detailsReport += QString("%1").arg(MyMoneyUtils::formatMoney((*it).second.shares(), file->currency(account.currencyId())));
       detailsReport += "</td></tr>";
     }
   }
 
   detailsReport += "<tr class=\"sectionfooter\">";
-  detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18np("One outstanding payment of", "Total of %1 outstanding payments amounting to", outstandingPayments)).arg(outstandingPaymentAmount.formatMoney(currency));
+  detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18np("One outstanding payment of", "Total of %1 outstanding payments amounting to", outstandingPayments)).arg(MyMoneyUtils::formatMoney(outstandingPaymentAmount, currency));
 
   detailsReport += "</table>\n";
   detailsReport += QString("<h2 class=\"report\">%1</h2>\n").arg(i18n("Outstanding deposits"));
@@ -301,13 +301,13 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
       detailsReport += "</td><td>";
       detailsReport += QString("%1").arg(category);
       detailsReport += "</td><td>";
-      detailsReport += QString("%1").arg((*it).second.shares().formatMoney(file->currency(account.currencyId())));
+      detailsReport += QString("%1").arg(MyMoneyUtils::formatMoney((*it).second.shares(), file->currency(account.currencyId())));
       detailsReport += "</td></tr>";
     }
   }
 
   detailsReport += "<tr class=\"sectionfooter\">";
-  detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18np("One outstanding deposit of", "Total of %1 outstanding deposits amounting to", outstandingDeposits)).arg(outstandingDepositAmount.formatMoney(currency));
+  detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18np("One outstanding deposit of", "Total of %1 outstanding deposits amounting to", outstandingDeposits)).arg(MyMoneyUtils::formatMoney(outstandingDepositAmount, currency));
 
   // end of the table
   detailsReport += "</table>\n";
