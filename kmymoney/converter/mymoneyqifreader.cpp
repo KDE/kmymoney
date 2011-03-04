@@ -2165,7 +2165,7 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
                   const MyMoneySecurity&  sec = file->security(account.currencyId());
                   if (KMessageBox::questionYesNo(
                         KMyMoneyUtils::mainWindow(),
-                        i18n("The %1 account currently has an opening balance of %2. This QIF file reports an opening balance of %3. Would you like to overwrite the current balance with the one from the QIF file?", account.name(), split.shares().formatMoney(account, sec), balance.formatMoney(account, sec)),
+                        i18n("The %1 account currently has an opening balance of %2. This QIF file reports an opening balance of %3. Would you like to overwrite the current balance with the one from the QIF file?", account.name(), MyMoneyUtils::formatMoney(split.shares(), account, sec), MyMoneyUtils::formatMoney(balance, account, sec)),
                         i18n("Overwrite opening balance"),
                         KStandardGuiItem::yes(),
                         KStandardGuiItem::no(),
