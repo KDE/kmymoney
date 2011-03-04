@@ -149,14 +149,14 @@ QVariant BudgetAccountsProxyModel::data(const QModelIndex &index, int role) cons
           return QVariant::fromValue(balance);
         case AccountsModel::AccountBalanceDisplayRole:
           if (MyMoneyFile::instance()->security(account.currencyId()) != MyMoneyFile::instance()->baseCurrency()) {
-            return balance.formatMoney(MyMoneyFile::instance()->security(account.currencyId()));
+            return MyMoneyUtils::formatMoney(balance, MyMoneyFile::instance()->security(account.currencyId()));
           } else {
             return QVariant();
           }
         case AccountsModel::AccountValueRole:
           return QVariant::fromValue(value);
         case AccountsModel::AccountValueDisplayRole:
-          return value.formatMoney(MyMoneyFile::instance()->baseCurrency());
+          return MyMoneyUtils::formatMoney(value, MyMoneyFile::instance()->baseCurrency());
       }
     }
   }
@@ -167,7 +167,7 @@ QVariant BudgetAccountsProxyModel::data(const QModelIndex &index, int role) cons
       case AccountsModel::AccountTotalValueRole:
         return QVariant::fromValue(totalValue);
       case AccountsModel::AccountTotalValueDisplayRole:
-        return totalValue.formatMoney(MyMoneyFile::instance()->baseCurrency());
+        return MyMoneyUtils::formatMoney(totalValue, MyMoneyFile::instance()->baseCurrency());
     }
   }
   return AccountsViewFilterProxyModel::data(index, role);

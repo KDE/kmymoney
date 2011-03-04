@@ -180,7 +180,7 @@ void KCategoriesView::slotProfitChanged(const MyMoneyMoney &profit)
     s += "<b><font color=\"red\">";
   }
   const MyMoneySecurity& sec = MyMoneyFile::instance()->baseCurrency();
-  QString v(profit.abs().formatMoney(sec));
+  QString v(MyMoneyUtils::formatMoney(profit.abs(), sec));
   s += v.replace(QString(" "), QString("&nbsp;"));
   if (profit.isNegative()) {
     s += "</font></b>";

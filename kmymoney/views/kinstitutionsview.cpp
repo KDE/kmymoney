@@ -135,7 +135,7 @@ void KInstitutionsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
     s += "<b><font color=\"red\">";
   }
   const MyMoneySecurity& sec = MyMoneyFile::instance()->baseCurrency();
-  QString v(netWorth.formatMoney(sec));
+  QString v(MyMoneyUtils::formatMoney(netWorth, sec));
   s += v.replace(QString(" "), QString("&nbsp;"));
   if (netWorth.isNegative()) {
     s += "</font></b>";

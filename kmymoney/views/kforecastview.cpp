@@ -343,14 +343,14 @@ void KForecastView::loadSummaryView(void)
           break;
         case 0:
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-          msg += i18n("The balance of %1 is below the minimum balance %2 today.", acc.name(), minBalance.formatMoney(acc, currency));
+          msg += i18n("The balance of %1 is below the minimum balance %2 today.", acc.name(), MyMoneyUtils::formatMoney(minBalance, acc, currency));
           msg += QString("</font>");
           break;
         default:
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
           msg += i18np("The balance of %2 will drop below the minimum balance %3 in %1 day.",
                        "The balance of %2 will drop below the minimum balance %3 in %1 days.",
-                       dropMinimum - 1, acc.name(), minBalance.formatMoney(acc, currency));
+                       dropMinimum - 1, acc.name(), MyMoneyUtils::formatMoney(minBalance, acc, currency));
           msg += QString("</font>");
       }
 
@@ -367,12 +367,12 @@ void KForecastView::loadSummaryView(void)
       case 0:
         if (acc.accountGroup() == MyMoneyAccount::Asset) {
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-          msg += i18n("The balance of %1 is below %2 today.", acc.name(), MyMoneyMoney().formatMoney(acc, currency));
+          msg += i18n("The balance of %1 is below %2 today.", acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), acc, currency));
           msg += QString("</font>");
           break;
         }
         if (acc.accountGroup() == MyMoneyAccount::Liability) {
-          msg = i18n("The balance of %1 is above %2 today.", acc.name(), MyMoneyMoney().formatMoney(acc, currency));
+          msg = i18n("The balance of %1 is above %2 today.", acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), acc, currency));
           break;
         }
         break;
@@ -381,14 +381,14 @@ void KForecastView::loadSummaryView(void)
           msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
           msg += i18np("The balance of %2 will drop below %3 in %1 day.",
                        "The balance of %2 will drop below %3 in %1 days.",
-                       dropZero, acc.name(), MyMoneyMoney().formatMoney(acc, currency));
+                       dropZero, acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), acc, currency));
           msg += QString("</font>");
           break;
         }
         if (acc.accountGroup() == MyMoneyAccount::Liability) {
           msg = i18np("The balance of %2 will raise above %3 in %1 day.",
                       "The balance of %2 will raise above %3 in %1 days.",
-                      dropZero, acc.name(), MyMoneyMoney().formatMoney(acc, currency));
+                      dropZero, acc.name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), acc, currency));
           break;
         }
     }
@@ -401,7 +401,7 @@ void KForecastView::loadSummaryView(void)
     MyMoneyMoney accCycleVariation = forecast.accountCycleVariation(acc);
     if (accCycleVariation < MyMoneyMoney(0, 1)) {
       msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
-      msg += i18n("The account %1 is decreasing %2 per cycle.", acc.name(), accCycleVariation.formatMoney(acc, currency));
+      msg += i18n("The account %1 is decreasing %2 per cycle.", acc.name(), MyMoneyUtils::formatMoney(accCycleVariation, acc, currency));
       msg += QString("</font>");
     }
 
@@ -496,7 +496,7 @@ void KForecastView::loadAdvancedView(void)
       QDate minDate = *t_min;
       amountMM = forecast.forecastBalance(acc, minDate);
 
-      amount = amountMM.formatMoney(acc, currency);
+      amount = MyMoneyUtils::formatMoney(amountMM, acc, currency);
       advancedItem->setText(it_c, amount);
       advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {
@@ -520,7 +520,7 @@ void KForecastView::loadAdvancedView(void)
       QDate maxDate = *t_max;
       amountMM = forecast.forecastBalance(acc, maxDate);
 
-      amount = amountMM.formatMoney(acc, currency);
+      amount = MyMoneyUtils::formatMoney(amountMM, acc, currency);
       advancedItem->setText(it_c, amount);
       advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {
@@ -538,7 +538,7 @@ void KForecastView::loadAdvancedView(void)
     }
     //get average balance
     amountMM = forecast.accountAverageBalance(acc);
-    amount = amountMM.formatMoney(acc, currency);
+    amount = MyMoneyUtils::formatMoney(amountMM, acc, currency);
     advancedItem->setText(it_c, amount);
     advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
     if (amountMM.isNegative()) {
@@ -911,7 +911,7 @@ void KForecastView::setNegative(QTreeWidgetItem *item, bool isNegative)
 
 void KForecastView::showAmount(QTreeWidgetItem* item, int column, const MyMoneyMoney& amount, const MyMoneySecurity& security)
 {
-  item->setText(column, amount.formatMoney(item->data(0, AccountRole).value<MyMoneyAccount>(), security));
+  item->setText(column, MyMoneyUtils::formatMoney(amount, item->data(0, AccountRole).value<MyMoneyAccount>(), security));
   item->setTextAlignment(column, Qt::AlignRight | Qt::AlignVCenter);
   item->setFont(column, item->font(0));
   if (amount.isNegative()) {

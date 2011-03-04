@@ -636,7 +636,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         tmp += "</td><td align=\"right\">";
 
         const MyMoneySecurity& currency = MyMoneyFile::instance()->currency(acc.currencyId());
-        QString amount = (sp.value() * cnt).formatMoney(acc, currency);
+        QString amount = MyMoneyUtils::formatMoney(sp.value() * cnt, acc, currency);
         amount.replace(QChar(' '), "&nbsp;");
         tmp += showColoredAmount(amount, (sp.value() * cnt).isNegative()) ;
         tmp += "</td>";
@@ -645,7 +645,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         MyMoneyMoney payment = MyMoneyMoney((sp.value() * cnt));
         QDate paymentDate = QDate(sched.adjustedNextDueDate());
         MyMoneyMoney balanceAfter = forecastPaymentBalance(acc, payment, paymentDate);
-        QString balance = balanceAfter.formatMoney(acc, currency);
+        QString balance = MyMoneyUtils::formatMoney(balanceAfter, acc, currency);
         balance.replace(QChar(' '), "&nbsp;");
         tmp += showColoredAmount(balance, balanceAfter.isNegative());
         tmp += "</td>";
@@ -816,10 +816,10 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
   QString amountToMinBal;
 
   //format amounts
-  amount = value.formatMoney(acc, currency);
+  amount = MyMoneyUtils::formatMoney(value, acc, currency);
   amount.replace(QChar(' '), "&nbsp;");
   if (showMinBal) {
-    amountToMinBal = valueToMinBal.formatMoney(acc, currency);
+    amountToMinBal = MyMoneyUtils::formatMoney(valueToMinBal, acc, currency);
     amountToMinBal.replace(QChar(' '), "&nbsp;");
   }
 
@@ -981,7 +981,7 @@ void KHomeView::showForecast(void)
       for (int f = beginDay; f <= d->m_forecast.forecastDays(); f += d->m_forecast.accountsCycle()) {
         forecastBalance = d->m_forecast.forecastBalance(*it_account, QDate::currentDate().addDays(f));
         QString amount;
-        amount = forecastBalance.formatMoney(*it_account, currency);
+        amount = MyMoneyUtils::formatMoney(forecastBalance, *it_account, currency);
         amount.replace(QChar(' '), "&nbsp;");
         d->m_html += QString("<td width=\"%1%\" align=\"right\">").arg(colWidth);
         d->m_html += QString("%1</td>").arg(showColoredAmount(amount, forecastBalance.isNegative()));
@@ -1012,13 +1012,13 @@ void KHomeView::showForecast(void)
           case -1:
             break;
           case 0:
-            msg = i18n("The balance of %1 is below the minimum balance %2 today.", (*it_account).name(), minBalance.formatMoney(*it_account, currency));
+            msg = i18n("The balance of %1 is below the minimum balance %2 today.", (*it_account).name(), MyMoneyUtils::formatMoney(minBalance, *it_account, currency));
             msg = showColoredAmount(msg, true);
             break;
           default:
             msg = i18np("The balance of %2 will drop below the minimum balance %3 in %1 day.",
                         "The balance of %2 will drop below the minimum balance %3 in %1 days.",
-                        dropMinimum - 1, (*it_account).name(), minBalance.formatMoney(*it_account, currency));
+                        dropMinimum - 1, (*it_account).name(), MyMoneyUtils::formatMoney(minBalance, *it_account, currency));
             msg = showColoredAmount(msg, true);
             break;
         }
@@ -1034,12 +1034,12 @@ void KHomeView::showForecast(void)
           break;
         case 0:
           if ((*it_account).accountGroup() == MyMoneyAccount::Asset) {
-            msg = i18n("The balance of %1 is below %2 today.", (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+            msg = i18n("The balance of %1 is below %2 today.", (*it_account).name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), *it_account, currency));
             msg = showColoredAmount(msg, true);
             break;
           }
           if ((*it_account).accountGroup() == MyMoneyAccount::Liability) {
-            msg = i18n("The balance of %1 is above %2 today.", (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+            msg = i18n("The balance of %1 is above %2 today.", (*it_account).name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), *it_account, currency));
             break;
           }
           break;
@@ -1047,14 +1047,14 @@ void KHomeView::showForecast(void)
           if ((*it_account).accountGroup() == MyMoneyAccount::Asset) {
             msg = i18np("The balance of %2 will drop below %3 in %1 day.",
                         "The balance of %2 will drop below %3 in %1 days.",
-                        dropZero, (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+                        dropZero, (*it_account).name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), *it_account, currency));
             msg = showColoredAmount(msg, true);
             break;
           }
           if ((*it_account).accountGroup() == MyMoneyAccount::Liability) {
             msg = i18np("The balance of %2 will raise above %3 in %1 day.",
                         "The balance of %2 will raise above %3 in %1 days.",
-                        dropZero, (*it_account).name(), MyMoneyMoney().formatMoney(*it_account, currency));
+                        dropZero, (*it_account).name(), MyMoneyUtils::formatMoney(MyMoneyMoney(), *it_account, currency));
             break;
           }
       }
