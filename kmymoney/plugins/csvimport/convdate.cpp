@@ -21,8 +21,6 @@
 #include <QtCore/QDebug>
 #include <QtCore/QRegExp>
 
-class CsvImporterDlg;
-
 ConvertDate::ConvertDate()
 {
   m_dateFormatIndex = 0;

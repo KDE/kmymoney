@@ -67,7 +67,6 @@ void CsvImporterPlugin::createActions(void)
 {
   m_action = actionCollection()->addAction("file_import_csv");
   m_action->setText(i18n("CSV..."));
-  m_action->setIcon(KIcon("kmymoney"));
   connect(m_action, SIGNAL(triggered(bool)), this, SLOT(slotImportFile()));
 }
 
@@ -76,7 +75,7 @@ void CsvImporterPlugin::slotImportFile(void)
   m_csvDlg = new CsvImporterDlg;
   m_csvDlg->m_plugin = this;
 
-  m_csvDlg->setWindowTitle(QApplication::translate("CSV Importer", "CSV Importer"));
+  m_csvDlg->setWindowTitle(i18nc("CSV Importer dialog title", "CSV Importer"));
   m_csvDlg->spinBox_skip->setEnabled(true);
 
   m_action->setEnabled(false);//            disable csv menuitem once plugin is loaded
