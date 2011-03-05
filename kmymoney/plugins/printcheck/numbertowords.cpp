@@ -81,7 +81,7 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
 
   int precision = KGlobal::locale()->fracDigits();
   int integer = static_cast<int>(money.toDouble()); // retain the integer part
-  int fraction = static_cast<int>((money.toDouble() - integer) * MyMoneyMoney::precToDenom(precision));
+  int fraction = qRound((money.toDouble() - integer) * MyMoneyMoney::precToDenom(precision));
 
   // Extract the three-digit groups
   for (int i = 0; i < 4; i++) {

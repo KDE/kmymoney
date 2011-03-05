@@ -148,9 +148,10 @@ void KMMPrintCheckPlugin::slotPrintCheck(void)
     checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
     checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());
     checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
+    checkHTML.replace("$PAYEE_POSTCODE", file->payee((*it).split().payeeId()).postcode());
     checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
-    checkHTML.replace("$AMMOUNT_STRING", converter.convert((*it).split().shares().abs()));
-    checkHTML.replace("$AMMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
+    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs()));
+    checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
     checkHTML.replace("$MEMO", (*it).split().memo());
 
     // print the check
