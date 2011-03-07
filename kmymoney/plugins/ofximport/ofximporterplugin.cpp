@@ -519,7 +519,7 @@ int OfxImporterPlugin::ofxStatusCallback(struct OfxStatusData data, void * pv)
   // if we got this far, we know we were able to parse the file.
   // so if it fails after here it can only because there were no actual
   // accounts in the file!
-  pofx->d->m_fatalerror = "No accounts found.";
+  pofx->d->m_fatalerror = i18n("No accounts found.");
 
   if (data.ofx_element_name_valid == true)
     message.prepend(QString("%1: ").arg(data.ofx_element_name));
