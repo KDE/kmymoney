@@ -303,8 +303,6 @@ xx</string>
     <tabstop>m_amountButton</tabstop>
     <tabstop>m_rateButton</tabstop>
     <tabstop>m_updateButton</tabstop>
-    <tabstop>m_okButton</tabstop>
-    <tabstop>m_cancelButton</tabstop>
   </tabstops>
   <buttongroups>
     <buttongroup name="buttonGroup1"/>
