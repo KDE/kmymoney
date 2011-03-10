@@ -301,8 +301,18 @@ void KMyMoneyView::updateViewType(void)
       faceType = KPageView::Tabbed;
       break;
   }
-  if (faceType != KMyMoneyView::faceType())
+  if (faceType != KMyMoneyView::faceType()) {
     setFaceType(faceType);
+    if (faceType == KPageView::Tree) {
+      QList<QTreeView *> views = findChildren<QTreeView*>();
+      foreach (QTreeView * view, views) {
+        if (view && (view->parent() == this)) {
+          view->setRootIsDecorated(false);
+          break;
+        }
+      }
+    }
+  }
 }
 
 bool KMyMoneyView::showPageHeader() const
