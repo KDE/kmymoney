@@ -34,6 +34,7 @@
 // Project Includes
 
 #include "mymoneyaccount.h"
+#include "mymoneyfile.h"
 
 /**
   * A model for the accounts.
@@ -69,7 +70,6 @@ public:
     AccountValueDisplayRole = Qt::UserRole + 7,       /**< The account value (the balance converted to base currency) is stored in this role in column TotalValue as a formated string for the user.*/
     AccountTotalValueDisplayRole = Qt::UserRole + 8,  /**< The account total value is stored in this role in column TotalValue as a formatted string for the user.*/
     DisplayOrderRole = Qt::UserRole + 9,              /**< This role is used by the filtering proxies to order the accounts for displaying.*/
-    CleanupRole = Qt::UserRole + 10                   /**< This role is used internally by the model to clean up removed accounts. */
   };
 
   /**
@@ -94,6 +94,11 @@ public:
   ~AccountsModel();
 
   /**
+    * This method must be used to perform the initial load of the model.
+    */
+  void load();
+
+  /**
     * Compute the value of the given account using the provided balance.
     * The value is defined as the balance of the account converted to the base currency.
     *
@@ -107,8 +112,10 @@ public:
 public slots:
 
   void slotReconcileAccount(const MyMoneyAccount &account, const QDate &reconciliationDate, const MyMoneyMoney &endingBalance);
-
-  bool load();
+  void slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
+  void slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
+  void slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id);
+  void slotBalanceChanged(const MyMoneyAccount &account);
 
 signals:
   /**
@@ -124,6 +131,8 @@ signals:
 private:
   AccountsModel(QObject *parent = 0);
 
+  void init();
+
   /**
     * The copy-constructor is private so that only the @ref Models object can create such an object.
     */
@@ -135,9 +144,56 @@ private:
     */
   friend class Models;
 
-private:
+protected:
   class Private;
   Private* const d;
+  
+  /**
+    * This constructor can be used from derived classes in order to use a derived Private class.
+    */
+  AccountsModel(Private* const priv, QObject *parent = 0);
+};
+
+/**
+  * A model for the accounts grouped by institutions. It extends the functionality already present
+  * in @ref AccountsModel to enable the grouping of the accounts by institutions.
+  *
+  * @author Cristian Onet 2011
+  *
+  */
+class InstitutionsModel : public AccountsModel
+{
+  Q_OBJECT
+
+public:
+  /**
+    * This method must be used to perform the initial load of the model.
+    */
+  void load();
+
+public slots:
+  void slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
+  void slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
+  void slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id);
+  
+private:
+  InstitutionsModel(QObject *parent = 0);
+
+  /**
+    * The copy-constructor is private so that only the @ref Models object can create such an object.
+    */
+  InstitutionsModel(const InstitutionsModel&);
+  InstitutionsModel& operator=(InstitutionsModel&);
+
+  /**
+    * Allow only the @ref Models object to create such an object.
+    */
+  friend class Models;
+
+  /**
+    * The implementation object is derived from the @ref AccountsModel objects implementation object.
+    */
+  class InstitutionsPrivate;
 };
 
 /**
@@ -185,9 +241,6 @@ public:
 
   void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
   bool hideUnusedIncomeExpenseAccounts(void) const;
-
-  void setHideInstitutions(bool hideInstitutions);
-  bool hideInstitutions(void) const;
 
 protected:
   virtual bool lessThan(const QModelIndex &left, const QModelIndex &right) const;

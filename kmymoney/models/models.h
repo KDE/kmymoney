@@ -35,6 +35,7 @@
   * Forward declarations for the returned models.
   */
 class AccountsModel;
+class InstitutionsModel;
 
 /**
   * This object is the owner and maintainer of all the core models of KMyMoney.
@@ -69,16 +70,17 @@ public:
   }
 
   AccountsModel* accountsModel();
+  InstitutionsModel* institutionsModel();
 
 public slots:
   /**
-    * This slot is used to keep the managed models in sync with the data from the
+    * This slot is used to notify the models that the data has been loaded and ready to use.
     * @ref MyMoneyFile.
     */
-  void dataChanged(void);
+  void fileOpened(void);
 
   /**
-    * This slot is used to keep the managed models in sync with the data from the
+    * This slot is used to notify the models that the data has been unloaded.
     * @ref MyMoneyFile.
     */
   void fileClosed(void);

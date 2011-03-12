@@ -61,8 +61,7 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Equity);
-  m_filterProxyModel->setHideInstitutions(false);
-  m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
+  m_filterProxyModel->setSourceModel(Models::instance()->institutionsModel());
   m_filterProxyModel->setFilterKeyColumn(-1);
 
   m_accountTree->setConfigGroupName("KInstitutionsView");
@@ -120,6 +119,7 @@ void KInstitutionsView::loadAccounts(void)
 {
   m_filterProxyModel->invalidate();
   m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
+  m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
 }
 
 void KInstitutionsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)

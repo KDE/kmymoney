@@ -558,6 +558,25 @@ void KMyMoneyView::closeFile(void)
   if (m_reportsView)
     m_reportsView->slotCloseAll();
 
+  // disconnect the signals
+  disconnect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)), 
+             Models::instance()->accountsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)));
+  disconnect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)), 
+             Models::instance()->accountsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)));
+  disconnect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT, const QString&)),
+             Models::instance()->accountsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT, const QString&)));
+  disconnect(MyMoneyFile::instance(), SIGNAL(balanceChanged(const MyMoneyAccount&)), 
+             Models::instance()->accountsModel(), SLOT(slotBalanceChanged(const MyMoneyAccount&)));
+
+  disconnect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)), 
+             Models::instance()->institutionsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)));
+  disconnect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)), 
+             Models::instance()->institutionsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)));
+  disconnect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT, const QString&)),
+             Models::instance()->institutionsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT, const QString&)));
+  disconnect(MyMoneyFile::instance(), SIGNAL(balanceChanged(const MyMoneyAccount&)), 
+             Models::instance()->institutionsModel(), SLOT(slotBalanceChanged(const MyMoneyAccount&)));
+
   // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
   Models::instance()->fileClosed();
 
@@ -570,8 +589,6 @@ void KMyMoneyView::closeFile(void)
 
   emit kmmFilePlugin(postClose);
   m_fileOpen = false;
-
-  disconnect(MyMoneyFile::instance(), SIGNAL(dataChanged()), Models::instance(), SLOT(dataChanged()));
 }
 
 void KMyMoneyView::ungetString(QIODevice *qfile, char *buf, int len)
@@ -1019,7 +1036,26 @@ bool KMyMoneyView::initializeStorage()
   m_fileOpen = true;
   emit kmmFilePlugin(postOpen);
 
-  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), Models::instance(), SLOT(dataChanged()));
+  Models::instance()->fileOpened();
+  
+  // connect the needed signals
+  connect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)), 
+          Models::instance()->accountsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)));
+  connect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)), 
+          Models::instance()->accountsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)));
+  connect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT, const QString&)),
+          Models::instance()->accountsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT, const QString&)));
+  connect(MyMoneyFile::instance(), SIGNAL(balanceChanged(const MyMoneyAccount&)), 
+          Models::instance()->accountsModel(), SLOT(slotBalanceChanged(const MyMoneyAccount&)));
+
+  connect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)), 
+          Models::instance()->institutionsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)));
+  connect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)), 
+          Models::instance()->institutionsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)));
+  connect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT, const QString&)),
+          Models::instance()->institutionsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT, const QString&)));
+  connect(MyMoneyFile::instance(), SIGNAL(balanceChanged(const MyMoneyAccount&)), 
+          Models::instance()->institutionsModel(), SLOT(slotBalanceChanged(const MyMoneyAccount&)));
 
   // inform everyone about new data
   MyMoneyFile::instance()->preloadCache();
