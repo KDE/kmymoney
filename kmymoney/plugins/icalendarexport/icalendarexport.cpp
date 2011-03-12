@@ -87,6 +87,7 @@ KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QStrin
 
   d->m_action = actionCollection()->addAction("file_export_icalendar");
   d->m_action->setText(actionName);
+  connect(d->m_action, SIGNAL(triggered(bool)), this, SLOT(slotFirstExport()));
 
   connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(plug(KPluginInfo*)), this, SLOT(slotPlug(KPluginInfo*)));
   connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(unplug(KPluginInfo*)), this, SLOT(slotUnplug(KPluginInfo*)));
