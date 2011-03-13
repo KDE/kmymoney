@@ -147,7 +147,7 @@ private:
 protected:
   class Private;
   Private* const d;
-  
+
   /**
     * This constructor can be used from derived classes in order to use a derived Private class.
     */
@@ -175,7 +175,7 @@ public slots:
   void slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
   void slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
   void slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id);
-  
+
 private:
   InstitutionsModel(QObject *parent = 0);
 

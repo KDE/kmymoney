@@ -588,7 +588,7 @@ void AccountsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, co
   const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
   if (!account)
     return;
-  
+
   QStandardItem *favoriteAccountsItem = d->itemFromAccountId(this, favoritesAccountId);
   QStandardItem *parentAccountItem = d->itemFromAccountId(this, account->parentAccountId());
   QStandardItem *item = d->itemFromAccountId(parentAccountItem, account->id());
@@ -829,7 +829,7 @@ void InstitutionsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType
   const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
   if (!account || account->parentAccountId().isEmpty())
     return;
-  
+
   static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, *account);
 }
 
