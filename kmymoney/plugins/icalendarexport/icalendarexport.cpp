@@ -110,6 +110,7 @@ void KMMiCalendarExportPlugin::slotFirstExport(void)
     KUrl newURL = fileDialog->selectedUrl();
     if (newURL.isLocalFile()) {
       PluginSettings::setIcalendarFile(newURL.toLocalFile());
+      PluginSettings::self()->writeConfig();
       slotExport();
     }
   }
