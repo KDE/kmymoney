@@ -3,7 +3,7 @@
 *                             -----------------                            *
 *  begin: Sat Jan 01 2010                                                  *
 *  copyright: (C) 2010 by Allan Anderson                                   *
-*  email:                                       *
+*  email: agander93@gmail.com                                              *
 ****************************************************************************/
 
 /***************************************************************************
@@ -163,6 +163,7 @@ void CsvProcessing::fileDialog()
   QRect rect = m_csvDialog->tableWidget->geometry();
   rect.setHeight(9999);
   m_csvDialog->tableWidget->setGeometry(rect);
+  m_parse->setSymbolFound(false);
 
   readFile(m_inFileName, 0);
   m_csvPath = m_inFileName;
@@ -509,7 +510,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
   iBuff = iBuff.remove(m_textDelimiterCharacter);
   memo.clear();//                                     memo & number may not have been used
   m_trData.number.clear();//                          .. so need to clear prior contents
-  for(int i = 0; i < m_endColumn; i++) { //        check each column
+  for(int i = 0; i < m_endColumn; i++) {//            check each column
     if(m_csvDialog->columnType(i) == "number") {
       txt = m_columnList[i];
       m_trData.number = txt;
@@ -593,7 +594,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
       txt = m_columnList[i];
       if(!txt.isEmpty()) {
         if(m_csvDialog->debitColumn() == i)
-          txt = '-' + txt;//  Mark as -ve
+          txt = '-' + txt;//                          Mark as -ve
         if((m_csvDialog->debitColumn() == i) || (m_csvDialog->creditColumn() == i)) {
           newTxt = m_parse->possiblyReplaceSymbol(txt);
           m_trData.amount = newTxt;
@@ -640,6 +641,8 @@ void CsvProcessing::importClicked()
                                  "<center>Please correct your settings.</center>"), i18n("CSV import"));
       return;
     }
+
+    m_parse->setSymbolFound(false);
     readFile(m_inFileName, skp);   //               skip all headers
 
     //--- create the (revised) vertical (row) headers ---
@@ -662,13 +665,13 @@ void CsvProcessing::importClicked()
 void CsvProcessing::readSettings()
 {
   int tmp;
+  QString txt;
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
 
   KConfigGroup profileGroup(config, "Profile");
   m_dateFormatIndex = profileGroup.readEntry("DateFormat", QString()).toInt();
   m_csvDialog->comboBox_dateFormat->setCurrentIndex(m_dateFormatIndex);
-  QString txt = profileGroup.readEntry("CurrentUI", QString());
-  m_csvDialog->setCurrentUI(txt);
+
   tmp = profileGroup.readEntry("StartLine", QString()).toInt();
   m_csvDialog->spinBox_skip->setValue(- 1);
   m_csvDialog->spinBox_skip->setValue(tmp + 1);//     force index change

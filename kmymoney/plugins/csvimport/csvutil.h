@@ -3,7 +3,7 @@
                               -----------
 begin                : Sat Jan 01 2010
 copyright            : (C) 2010 by Allan Anderson
-email                :
+email                : agander93@gmail.com
 ***************************************************************************/
 
 /**************************************************************************
@@ -51,6 +51,12 @@ public:
   QString          textDelimiterCharacter(int index);
   void             thousandsSeparatorChanged(int index);
   QString          thousandsSeparator();
+
+  /**
+   * Check for presence of the selected decimal symbol
+   * and evaluate if the proposed conversion is valid.
+   * If so, change the symbol.
+   */
   QString          possiblyReplaceSymbol(const QString&  str);
 
   void             setFieldDelimiterIndex(int index);
@@ -67,6 +73,8 @@ public:
 
   bool             symbolFound();
   void             setSymbolFound(bool found);
+
+  bool             invalidConversion();
 
   int              lastLine();
 
@@ -94,6 +102,7 @@ private :
   int              m_thousandsSeparatorIndex;
 
   bool             m_symbolFound;
+  bool             m_invalidConversion;
 }
 ;
 #endif

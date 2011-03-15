@@ -3,7 +3,7 @@
                        ------------------
 begin                 : Sat Jan 01 2010
 copyright             : (C) 2010 by Allan Anderson
-email                 :
+email                 : agander93@gmail.com
 ****************************************************************************/
 
 /***************************************************************************
@@ -118,6 +118,8 @@ public:
   int            priceColumn();
   int            quantityColumn();
 
+  bool           importNow();
+
   int            m_endColumn;
 
   bool           m_screenUpdated;
@@ -203,6 +205,14 @@ public slots:
   void           dateFormatSelected(int dF);
 
   /**
+  * This method is called initially after an input file has been selected.
+  * It will call other routines to display file content and to complete the
+  * statement import. It will also be called to reposition the file after row
+  * deletion, or to reread following encoding or delimiter change.
+  */
+  void           readFile(const QString& fname, int skipLines);
+
+  /**
   * This method is called should the user click 'Save as QIF'. A File Selection
   * dialog is presented and the data is output in QIF format.
   */
@@ -265,9 +275,9 @@ private:
   * It will call other routines to display file content and to complete the
   * statement import. It will also be called to reposition the file after row
   * deletion, or to reread following encoding or delimiter change.
-  */
-  void           readFile(const QString& fname, int skipLines);
 
+  void           readFile(const QString& fname, int skipLines);
+  *///
   /**
   * This method is called on opening the plugin.
   * It will populate a list with all available codecs.
@@ -307,7 +317,6 @@ private:
   void           setCodecList(const QList<QTextCodec *> &list);
 
   struct qifInvestData {
-
     QString      memo;
     MyMoneyMoney price;
     MyMoneyMoney quantity;

@@ -3,7 +3,7 @@
 *                              -----------------
 * begin                       : Sat Jan 01 2010
 * copyright                   : (C) 2010 by Allan Anderson
-* email                       :
+* email                       : agander93@gmail.com
 ********************************************************************************/
 
 /*******************************************************************************
@@ -163,29 +163,6 @@ void InvestmentDlg::resizeEvent(QResizeEvent * event)
   event->accept();
   if(!m_investProcessing->inFileName().isEmpty())
     m_investProcessing->updateScreen();
-}
-
-void InvestmentDlg::helpSelected()
-{
-  KAboutData aboutData("csvImporter",  0,  ki18n("CSV Importer"),  "0.3.0",
-                       ki18n("A plugin to enable import of \n   CSV format files into KMyMoney."),
-                       KAboutData::License_GPL,  ki18n("Copyright (c) 2010 Allan Anderson"),
-                       // Optional text shown in the About box.
-                       // Can contain any information desired.
-                       ki18n("Information..."),
-                       // The program homepage string.
-                       "http://kmymoney-devel@kde.org/",
-                       // The bug report email address
-                       "submit@bugs.kde.org"
-                      );
-
-  aboutData.addAuthor(ki18n("Allan Anderson"), ki18n("CSV Importer plugin"), "aganderson@ukonline.co.uk");
-  aboutData.addAuthor(ki18n("Ace Jones"), ki18n("Original OFX Importer plugin"), "acejones@users.sourceforge.net");
-  aboutData.addCredit(ki18n("The KMyMoney development team"), ki18n("For help and guidance"), "");
-  aboutData.setProgramIconName("kmymoney");
-
-  KAboutApplicationDialog* aboutDlg = new KAboutApplicationDialog(&aboutData,  0);
-  aboutDlg->show();
 }
 
 void InvestmentDlg::fileDialog()

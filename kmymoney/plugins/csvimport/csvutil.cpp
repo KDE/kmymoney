@@ -1,9 +1,9 @@
 /***************************************************************************
                                       csvutil.cpp
                                      -------------
-    begin                        : Sat Jan 01 2010
+    begin                    :      Sat Jan 01 2010
     copyright                : (C) 2010 by Allan Anderson
-    email                        :
+    email                    :    agander93@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -15,7 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 #include "csvutil.h"
-#include "investprocessing.h"
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
@@ -32,6 +31,7 @@ Parse::Parse(): m_fieldDelimiterIndex(0), m_textDelimiterIndex(0)
   m_textDelimiterCharacter = m_textDelimiterCharList[m_textDelimiterIndex];
   m_decimalSymbolList << "." << ",";
   m_thousandsSeparatorList << "," << ".";
+  m_invalidConversion = false;
 }
 
 Parse::~Parse()
@@ -232,21 +232,53 @@ void Parse::setSymbolFound(bool found)
 
 QString Parse::possiblyReplaceSymbol(const QString&  str)
 {
-  QString txt = str;
-  //  Check if this col contains decimal symbol
+  m_symbolFound = false;
+  m_invalidConversion = false;
 
-  int index = txt.indexOf(m_decimalSymbol, 0); //  check for decimalSymbol, keep its index
-  if(index == -1) { //                           there is no decimal
-    return str;
+  if(str.isEmpty()) return str;
+  QString txt = str.trimmed();//                 don't want trailing blanks
+  if(txt.contains('(')) {//              "(" or "Af" = debit
+    txt = txt.remove(QRegExp("[()]"));
+    txt = '-' + txt;
+  }
+  int decimalIndex = txt.indexOf(m_decimalSymbol, 0);
+  int length = txt.length();
+  int thouIndex = txt.lastIndexOf(m_thousandsSeparator, -1);
+
+  //  Check if this col/cell contains decimal symbol
+
+  if(decimalIndex == -1) {//                     there is no decimal
+    m_symbolFound = false;
+    if((thouIndex == -1) || (thouIndex == length - 4))  { //no separator || correct format
+      txt.remove(m_thousandsSeparator);
+      QString tmp = txt + KGlobal::locale()->decimalSymbol() + "00";
+      return tmp;
+    } else
+      m_invalidConversion = true;
+    return txt;
   }
 
-  int length = txt.length();//                   but it could be prior thousands separator
-  if((length == index + 4) ||//                  ...thousands separator with no decimal part
-      (txt.indexOf(m_thousandsSeparator, 0) == index + 4)) { //  or with decimal part
-    txt.remove(m_decimalSymbol);//               remove unwanted old thousands separator
-  } else {
-    m_symbolFound = true;//                      found genuine decimal
-    txt.replace(m_decimalSymbol, KGlobal::locale()->decimalSymbol());// so swap it
-  }
+  txt.remove(m_thousandsSeparator);//    remove unwanted old thousands separator
+  //  Found decimal
+
+  m_symbolFound = true;//                        found genuine decimal
+
+  if(thouIndex >= 0) { //                        there was a separator
+    if(decimalIndex < thouIndex) { //            invalid conversion
+      m_invalidConversion = true;
+    }
+    if(length == decimalIndex + 4) { //          ...thousands separator with no decimal part
+      txt += m_decimalSymbol + "00";
+    }
+  }//  thouIndex = -1                            no thousands separator
+
+  //  m_symbolFound = true                      found genuine decimal
+
+  txt.replace(m_decimalSymbol, KGlobal::locale()->decimalSymbol());// so swap it
   return txt;
+}
+
+bool Parse::invalidConversion()
+{
+  return m_invalidConversion;
 }

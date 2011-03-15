@@ -47,6 +47,12 @@ IF(KDE4_BUILD_TESTS)
     ${parsedatatest_SRCS})
   TARGET_LINK_LIBRARIES(parsedatatest ${QT_AND_KDECORE_LIBS}
     ${QT_QTTEST_LIBRARY} ${KDE4_KDECORE_LIBS} )
+
+  SET(symboltest_SRCS symboltest.cpp csvutil.cpp)
+  KDE4_ADD_UNIT_TEST(symboltest TESTNAME kmymoney-plugin-symboltest
+    ${symboltest_SRCS})
+  TARGET_LINK_LIBRARIES(symboltest ${QT_AND_KDECORE_LIBS}
+    ${QT_QTTEST_LIBRARY} ${KDE4_KDECORE_LIBS} )
 ENDIF(KDE4_BUILD_TESTS)
 
 ########### install files ###############

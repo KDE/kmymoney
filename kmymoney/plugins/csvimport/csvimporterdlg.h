@@ -3,7 +3,7 @@
 *                          ---------------
 * begin                  : Sat Jan 01 2010
 * copyright            : (C) 2010 by Allan Anderson
-* email                :
+* email                : agander93@gmail.com
 ****************************************************************************/
 
 /***************************************************************************
@@ -142,8 +142,10 @@ private:
 
   QBrush           m_clearBrush;
   QBrush           m_colorBrush;
+  QBrush           m_errorBrush;
   QColor           m_clearColor;
   QColor           m_setColor;
+  QColor           m_errorColor;
 
   /**
   * This method checks that any column contents are numeric.

@@ -3,7 +3,7 @@
                       -------------------
 begin                 : Sat Jan 01 2010
 copyright             : (C) 2010 by Allan Anderson
-email                 :
+email                 : agander93@gmail.com
 ****************************************************************************/
 
 /***************************************************************************
@@ -88,21 +88,12 @@ private slots:
   */
   void           changedType(const QString&);
 
-  /**
-  * This method displays the help dialog.
-  */
-  void           helpSelected();
-
-
-
 signals:
   /**
   * This signal is raised when the plugin has completed a transaction.  This
   * then needs to be processed by MyMoneyStatement.
   */
   void           statementReady(MyMoneyStatement&);
-
-
 };
 
 #endif // INVESTMENTDLG_H

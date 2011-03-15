@@ -3,7 +3,7 @@
 *                          ---------------
 * begin                  : Sat Jan 01 2010
 * copyright            : (C) 2010 by Allan Anderson
-* email                :
+* email                : agander93@gmail.com
 ****************************************************************************/
 
 /***************************************************************************
@@ -119,6 +119,14 @@ public slots:
   void           dateFormatSelected(int dF);
 
   /**
+  * This method is called initially after an input file has been selected.
+  * It will call other routines to display file content and to complete the
+  * statement import. It will also be called to reposition the file after row
+  * deletion, or to reread following encoding or delimiter change.
+  */
+  void           readFile(const QString& fname, int skipLines);
+
+  /**
   * This method is called when the user clicks 'Save as QIF'. A file selector
   * dialog is shown, where the user may select the save location.
   */
@@ -158,14 +166,6 @@ private:
   * It will populate a list with all available codecs.
   */
   void           findCodecs();
-
-  /**
-  * This method is called initially after an input file has been selected.
-  * It will call other routines to display file content and to complete the
-  * statement import. It will also be called to reposition the file after row
-  * deletion, or to reread following encoding or delimiter change.
-  */
-  void           readFile(const QString& fname, int skipLines);
 
   /**
   * This method is called on opening the input file.

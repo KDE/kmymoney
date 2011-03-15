@@ -1,5 +1,5 @@
 /***************************************************************************
-                           parsedatatest.h
+                           symboltest.h
                          ------------------
     begin                : Sat Jan 01 2010
     copyright            : (C) 2010 by Allan Anderson
@@ -14,8 +14,8 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#ifndef PARSEDATATEST_H
-#define PARSEDATATEST_H
+#ifndef SYMBOLTEST_H
+#define SYMBOLTEST_H
 
 #include "csvutil.h"
 
@@ -23,14 +23,22 @@
 
 class Parse;
 
-class ParseDataTest : public QObject
+class SymbolTest : public QObject
 {
   Q_OBJECT
 
 public:
-  ParseDataTest();
+  SymbolTest();
 
-  Parse* m_parse;
+  Parse*           m_parse;
+
+  QStringList      m_input;
+  QStringList      m_expected;
+
+private:
+  QString          m_localeDecimal;
+  QString          m_testDecimal;
+  QString          m_localeThousands;
 
 private slots:
   void init();
@@ -44,13 +52,17 @@ private slots:
   void initTestCase_data();
 
   /**
-  * This method is used to test that a quoted string containing
-  * a comma, which would get split by QString::split() when comma
-  * is the field separator, is detected and rebuilt.  If the field
-  * separator is not a comma, the split does not occur.
+  * There are three sub-tests in this class, for checking various
+  * data strings, using both the dot '.' and the comma ',' as
+  * decimal symbols, plus a format that should produce an invalid
+  * conversion.
   */
-  void parseSplitString();
-  void parse_data();
+  void       testDecimalSymbolDot();
+  void       testDecimalSymbolDot_data();
+  void       testDecimalSymbolComma();
+  void       testDecimalSymbolComma_data();
+  void       testDecimalSymbolInvalid();
+  void       testDecimalSymbolInvalid_data();
 
 };
 #endif

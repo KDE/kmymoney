@@ -4,7 +4,7 @@
                              -------------------
     begin                : Sat Jan 01 2010
     copyright            : (C) 2010 by Allan Anderson
-    email                :
+    email                : agander93@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -44,13 +44,11 @@
 #include "mymoneystatement.h"
 #include "csvimporterdlg.h"
 
-///class Csv;
-
 K_EXPORT_COMPONENT_FACTORY(kmm_csvimport,
                            KGenericFactory<CsvImporterPlugin>("kmm_csvimport"))
 
 CsvImporterPlugin::CsvImporterPlugin(QObject *parent, const QStringList&) :
-    KMyMoneyPlugin::Plugin(parent, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
+  KMyMoneyPlugin::Plugin(parent, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   setComponentData(KGenericFactory<CsvImporterPlugin>::componentData());
   setXMLFile("kmm_csvimport.rc");
@@ -67,6 +65,7 @@ void CsvImporterPlugin::createActions(void)
 {
   m_action = actionCollection()->addAction("file_import_csv");
   m_action->setText(i18n("CSV..."));
+  m_action->setIcon(KIcon("kmymoney"));
   connect(m_action, SIGNAL(triggered(bool)), this, SLOT(slotImportFile()));
 }
 

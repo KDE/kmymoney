@@ -3,7 +3,7 @@
 *                              --------------------
 * begin                       : Sat Jan 01 2010
 * copyright                   : (C) 2010 by Allan Anderson
-* email                       :
+* email                       : agander93@gmail.com
 ********************************************************************************/
 
 /*******************************************************************************
@@ -1152,8 +1152,6 @@ void InvestProcessing::readSettings()
   m_csvDialog->spinBox_skip->setValue(tmp + 1);
 
   KConfigGroup profileGroup(config, "Profile");
-  QString txt = profileGroup.readEntry("CurrentUI", QString());
-  m_csvDialog->setCurrentUI(txt);
   m_dateFormatIndex = profileGroup.readEntry("DateFormat", QString()).toInt();
   m_csvDialog->comboBox_dateFormat->setCurrentIndex(m_dateFormatIndex);
   m_encodeIndex = profileGroup.readEntry("Encoding", QString()).toInt();
@@ -1312,4 +1310,9 @@ int InvestProcessing::quantityColumn()
 int InvestProcessing::priceColumn()
 {
   return m_priceColumn;
+}
+
+bool InvestProcessing::importNow()
+{
+  return m_importNow;
 }

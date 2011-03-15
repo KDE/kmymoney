@@ -3,7 +3,7 @@
                           -------------------
     begin                : Sat Jan 01 2010
     copyright            : (C) 2010 by Allan Anderson
-    email                : aganderson@ukonline.co.uk
+    email                : agander93@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,27 +23,25 @@
 
 QTEST_MAIN(ParseDataTest);
 
-Parse* m_parseline;
-
 ParseDataTest::ParseDataTest()
 {
 }
 
 void ParseDataTest::init()
 {
-  m_parseline = new Parse;
+  m_parse = new Parse;
 }
 
 void ParseDataTest::cleanup()
 {
-  delete m_parseline;
+  delete m_parse;
 }
 
 void ParseDataTest::parseSplitString()
 {
-  for (int i = 0; i <= 3; i++)  { //        All four delimiters should produce same result
-    m_parseline->setFieldDelimiterIndex(i);
-    m_parseline->setFieldDelimiterCharacter(i);
+  for(int i = 0; i <= 3; i++)  {  //        All four delimiters should produce same result
+    m_parse->setFieldDelimiterIndex(i);
+    m_parse->setFieldDelimiterCharacter(i);
 
     QString input = "abc,defgh,";//  When this string is QString::split(), two strings
     //  ....will result if ',' is the field delimiter.
@@ -52,7 +50,7 @@ void ParseDataTest::parseSplitString()
     input.append('"');
     QStringList expected;
     expected << "abc,defgh,";
-    QVERIFY(m_parseline->parseLine(input) == expected);// if parseLine() detects the condition,
+    QVERIFY(m_parse->parseLine(input) == expected);// if parseLine() detects the condition,
   }                                                   // ...it rebuilds the string
 }
 
