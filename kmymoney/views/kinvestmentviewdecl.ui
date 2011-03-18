@@ -28,7 +28,7 @@
         <number>0</number>
        </property>
        <item>
-        <layout class="QHBoxLayout">
+        <layout class="QHBoxLayout" stretch="70,250,300">
          <item>
           <widget class="QLabel" name="textLabel1">
            <property name="text">

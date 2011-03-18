@@ -191,7 +191,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   toolbarLayout->addWidget(d->m_accountComboBox);
 
   layout()->addWidget(m_toolbarFrame);
-
+  toolbarLayout->setStretchFactor(d->m_accountComboBox,60);
   // create the register frame
   m_registerFrame = new QFrame(this);
   QVBoxLayout* registerFrameLayout = new QVBoxLayout(m_registerFrame);
@@ -211,7 +211,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
 
   d->m_registerSearchLine = new KMyMoneyRegister::RegisterSearchLineWidget(m_register, m_toolbarFrame);
   toolbarLayout->addWidget(d->m_registerSearchLine);
-
+  toolbarLayout->setStretchFactor(d->m_registerSearchLine,100);
   // create the summary frame
   m_summaryFrame = new QFrame(this);
   QHBoxLayout* summaryFrameLayout = new QHBoxLayout(m_summaryFrame);
