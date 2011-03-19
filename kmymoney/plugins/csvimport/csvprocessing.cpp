@@ -97,7 +97,7 @@ void CsvProcessing::init()
 
 void CsvProcessing::fileDialog()
 {
-  if(m_csvDialog->m_fileType != "Banking") return;
+  if (m_csvDialog->m_fileType != "Banking") return;
   KSharedConfigPtr config =
     KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
   KConfigGroup profileGroup(config, "Profile");
@@ -115,7 +115,7 @@ void CsvProcessing::fileDialog()
   m_accept = false;
   m_csvDialog->m_decimalSymbolChanged = false;
   int posn;
-  if(m_csvPath.isEmpty()) {
+  if (m_csvPath.isEmpty()) {
     m_csvPath = "~/";
   }
 
@@ -133,28 +133,28 @@ void CsvProcessing::fileDialog()
   dialog->fileWidget()->setCustomWidget("Encoding", m_comboBoxEncode);
   m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
-  if(dialog->exec() == QDialog::Accepted) {
+  if (dialog->exec() == QDialog::Accepted) {
     m_url = dialog->selectedUrl();
   }
   delete dialog;
 
-  if(m_url.isEmpty())
+  if (m_url.isEmpty())
     return;
   m_inFileName.clear();
 
-  if(!KIO::NetAccess::download(m_url, m_inFileName, 0)) {
+  if (!KIO::NetAccess::download(m_url, m_inFileName, 0)) {
     KMessageBox::detailedError(0,
                                i18n("Error while loading file '%1'.", m_url.prettyUrl()),
                                KIO::NetAccess::lastErrorString(),
                                i18n("File access error"));
     return;
   }
-  if(m_inFileName.isEmpty()) return;
+  if (m_inFileName.isEmpty()) return;
   m_importNow = false;//                       Avoid attempting date formatting on headers
   clearComboBoxText();//                       to clear any '*' in memo combo text
 
-  for(int i = 0; i < MAXCOL; i++)
-    if(m_csvDialog->columnType(i) == "memo") {
+  for (int i = 0; i < MAXCOL; i++)
+    if (m_csvDialog->columnType(i) == "memo") {
       m_csvDialog->clearColumnType(i);   //    ensure no memo entries remain
     }
 
@@ -194,7 +194,7 @@ void CsvProcessing::enableInputs()
   m_csvDialog->button_saveAs->setEnabled(true);
   m_csvDialog->comboBox_fieldDelimiter->setEnabled(true);
 
-  if(m_csvDialog->radioBnk_amount->isChecked()) {
+  if (m_csvDialog->radioBnk_amount->isChecked()) {
     m_csvDialog->comboBoxBnk_amountCol->setEnabled(true);
     m_csvDialog->comboBoxBnk_debitCol->setEnabled(false);
     m_csvDialog->comboBoxBnk_creditCol->setEnabled(false);
@@ -207,12 +207,12 @@ void CsvProcessing::enableInputs()
 
 void CsvProcessing::clearColumnsSelected()
 {
-  if(m_csvDialog->m_fileType == "Banking") {
+  if (m_csvDialog->m_fileType == "Banking") {
     m_csvDialog->clearPreviousColumn();
     clearSelectedFlags();
     clearColumnNumbers();
     clearComboBoxText();
-  } else if(m_csvDialog->m_fileType == "Invest") {
+  } else if (m_csvDialog->m_fileType == "Invest") {
     m_csvDialog->m_investProcessing->clearSelectedFlags();
     m_csvDialog->m_investProcessing->clearColumnNumbers();
     m_csvDialog->m_investProcessing->clearComboBoxText();
@@ -221,7 +221,7 @@ void CsvProcessing::clearColumnsSelected()
 
 void CsvProcessing::clearSelectedFlags()
 {
-  for(int i = 0; i < MAXCOL; i++)
+  for (int i = 0; i < MAXCOL; i++)
     m_csvDialog->clearColumnType(i);   //   set to all empty
 
   m_csvDialog->setDateSelected(false);
@@ -248,14 +248,14 @@ void CsvProcessing::clearColumnNumbers()
 
 void CsvProcessing::clearComboBoxText()
 {
-  for(int i = 0; i < MAXCOL; i++) {
+  for (int i = 0; i < MAXCOL; i++) {
     m_csvDialog->comboBoxBnk_memoCol->setItemText(i, QString().setNum(i + 1));
   }
 }
 
 void CsvProcessing::clearColumnTypes()
 {
-  for(int i = 0; i < MAXCOL; i++) {
+  for (int i = 0; i < MAXCOL; i++) {
     m_csvDialog->clearColumnType(i);
   }
 }
@@ -263,7 +263,7 @@ void CsvProcessing::clearColumnTypes()
 void CsvProcessing::encodingChanged(int index)
 {
   m_encodeIndex = index;
-  if(!m_inFileName.isEmpty())
+  if (!m_inFileName.isEmpty())
     readFile(m_inFileName, 0);
 }
 
@@ -278,12 +278,12 @@ void CsvProcessing::findCodecs()
     QString sortKey = codec->name().toUpper();
     int rank;
 
-    if(sortKey.startsWith("UTF-8")) {         // krazy:exclude=strings
+    if (sortKey.startsWith("UTF-8")) {        // krazy:exclude=strings
       rank = 1;
-    } else if(sortKey.startsWith("UTF-16")) {        // krazy:exclude=strings
+    } else if (sortKey.startsWith("UTF-16")) {       // krazy:exclude=strings
       rank = 2;
-    } else if(iso8859RegExp.exactMatch(sortKey)) {
-      if(iso8859RegExp.cap(1).size() == 1)
+    } else if (iso8859RegExp.exactMatch(sortKey)) {
+      if (iso8859RegExp.cap(1).size() == 1)
         rank = 3;
       else
         rank = 4;
@@ -299,15 +299,15 @@ void CsvProcessing::findCodecs()
 
 void CsvProcessing::delimiterChanged()
 {
-  if(m_csvDialog->m_fileType != "Banking") return;
-  if(!m_inFileName.isEmpty())
+  if (m_csvDialog->m_fileType != "Banking") return;
+  if (!m_inFileName.isEmpty())
     readFile(m_inFileName, 0);
 }
 
 void CsvProcessing::readFile(const QString& fname, int skipLines)
 {
   MyMoneyStatement st = MyMoneyStatement();
-  if(!fname.isEmpty()) {
+  if (!fname.isEmpty()) {
     m_inFileName = fname;
   }
   m_startLine = skipLines;
@@ -344,14 +344,14 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
   m_endLine = m_parse->lastLine();
   //  Display the buffer
 
-  for(int i = 0; i < lineList.count(); i++) {
+  for (int i = 0; i < lineList.count(); i++) {
     m_inBuffer = lineList[i];
 
     displayLine(m_inBuffer);
 
-    if(m_importNow) {  //                        user now ready to continue
+    if (m_importNow) { //                        user now ready to continue
       int ret = (processQifLine(m_inBuffer));// parse a line
-      if(ret == KMessageBox::Ok) {
+      if (ret == KMessageBox::Ok) {
         csvImportTransaction(st);
       } else
         m_importNow = false;
@@ -368,7 +368,7 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
 
   //  Export statement
 
-  if(m_importNow) {
+  if (m_importNow) {
     emit statementReady(st);
     m_screenUpdated = true;
     m_importNow = false;
@@ -378,8 +378,8 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
 
 void CsvProcessing::displayLine(const QString& data)
 {
-  if(m_importNow) {
-    if(m_csvDialog->radioBnk_amount->isChecked()) {
+  if (m_importNow) {
+    if (m_csvDialog->radioBnk_amount->isChecked()) {
       m_csvDialog->setAmountColumn(m_csvDialog->comboBoxBnk_amountCol->currentIndex());
       m_csvDialog->setDebitColumn(-1);
       m_csvDialog->setCreditColumn(-1);
@@ -398,7 +398,7 @@ void CsvProcessing::displayLine(const QString& data)
 
   m_columnList = m_parse->parseLine(data);//                 split data into fields
   int columnCount = m_columnList.count();
-  if(columnCount > m_csvDialog->maxColumnCount())
+  if (columnCount > m_csvDialog->maxColumnCount())
     m_csvDialog->setMaxColumnCount(columnCount);//               find maximum column count
   else
     columnCount = m_csvDialog->maxColumnCount();
@@ -407,8 +407,8 @@ void CsvProcessing::displayLine(const QString& data)
   QStringList::const_iterator constIterator;
   QString txt;
 
-  for(constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
-      ++constIterator) {
+  for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
+       ++constIterator) {
     txt = (*constIterator);
 
     QTableWidgetItem *item = new QTableWidgetItem;//             new item for UI
@@ -422,7 +422,7 @@ void CsvProcessing::displayLine(const QString& data)
 
   //  if last char. of last column added to UI (txt string) is not '"', ie an unterminated string
   //  remove the unwanted trailing m_fieldDelimiterCharacter
-  if(!txt.endsWith('"')) {
+  if (!txt.endsWith('"')) {
     m_inBuffer = m_inBuffer.remove(-1, 1);
   }
   ++m_row;
@@ -443,13 +443,13 @@ void CsvProcessing::csvImportTransaction(MyMoneyStatement& st)
   tr.m_strBankID = result;
   st.m_eType = MyMoneyStatement::etCheckings;
   tr.m_datePosted = m_trData.date;
-  if(!tr.m_datePosted.isValid()) {
+  if (!tr.m_datePosted.isValid()) {
     int rc = KMessageBox::warningContinueCancel(0, i18n("The date entry \"%1\" read from the file cannot be interpreted through the current "
              "date format setting of \"%2.\"" "\n\nPressing \'Continue\' will "
              "assign today's date to the transaction. Pressing \'Cancel\'' will abort "
              "the import operation. You can then restart the import and select a different "
              "date format.", m_trData.date.toString(m_date), m_dateFormats[m_dateFormatIndex]), i18n("Invalid date format"));
-    switch(rc) {
+    switch (rc) {
       case KMessageBox::Continue:
         tr.m_datePosted = (QDate::currentDate());
         break;
@@ -466,14 +466,14 @@ void CsvProcessing::csvImportTransaction(MyMoneyStatement& st)
   tmp = m_trData.number;
   tr.m_strNumber = tmp;
 
-  if(!payee.isEmpty()) {
+  if (!payee.isEmpty()) {
     tr.m_strPayee = m_trData.payee;
   }
 
   tr.m_strMemo = m_trData.memo;
   // Add the transaction to the statement
   st.m_listTransactions += tr;
-  if((st.m_listTransactions.count()) > 0) {
+  if ((st.m_listTransactions.count()) > 0) {
     statements += st;// this not used
     qDebug("Statement with %d transactions ready.",
            st.m_listTransactions.count());
@@ -486,8 +486,8 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
 {
   QString newTxt;
 
-  if(m_columnList.count() < m_endColumn) {
-    if(!m_accept) {
+  if (m_columnList.count() < m_endColumn) {
+    if (!m_accept) {
       QString row = QString::number(m_row);
       int ret = KMessageBox::questionYesNoCancel(m_csvDialog, i18n("<center>Row number %1 does not have the expected number of columns.</center>"
                 "<center>This might not be a problem, but it may be a header line.</center>"
@@ -496,10 +496,10 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
                 KGuiItem(i18n("Accept All")),
                 KGuiItem(i18n("Accept This")),
                 KGuiItem(i18n("Cancel")));
-      if(ret == KMessageBox::Cancel) {
+      if (ret == KMessageBox::Cancel) {
         return ret;
       }
-      if(ret == KMessageBox::Yes) {
+      if (ret == KMessageBox::Yes) {
         m_accept = true;
       }
     }
@@ -510,19 +510,19 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
   iBuff = iBuff.remove(m_textDelimiterCharacter);
   memo.clear();//                                     memo & number may not have been used
   m_trData.number.clear();//                          .. so need to clear prior contents
-  for(int i = 0; i < m_endColumn; i++) {//            check each column
-    if(m_csvDialog->columnType(i) == "number") {
+  for (int i = 0; i < m_endColumn; i++) {//            check each column
+    if (m_csvDialog->columnType(i) == "number") {
       txt = m_columnList[i];
       m_trData.number = txt;
       m_qifBuffer = m_qifBuffer + 'N' + txt + '\n';///     Number column
     }
 
-    else if(m_csvDialog->columnType(i) == "date") {
+    else if (m_csvDialog->columnType(i) == "date") {
       ++neededFieldsCount;
       txt = m_columnList[i];
       txt = txt.remove(m_textDelimiterCharacter);//   "16/09/2009
       QDate dat = m_csvDialog->m_convertDate->convertDate(txt);/// Date column
-      if(dat == QDate()) {
+      if (dat == QDate()) {
         qDebug() << i18n("date ERROR");
 
         KMessageBox::sorry(m_csvDialog, i18n("<center>An invalid date has been detected during import.</center>"
@@ -536,7 +536,7 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
       m_trData.date = dat;
     }
 
-    else if(m_csvDialog->columnType(i) == "payee") {
+    else if (m_csvDialog->columnType(i) == "payee") {
       ++neededFieldsCount;
       txt = m_columnList[i];
       txt.remove('~');//                              replace NL which was substituted
@@ -545,43 +545,43 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
       m_qifBuffer = m_qifBuffer + 'P' + txt + '\n';/// Detail column
     }
 
-    else if(m_csvDialog->columnType(i) == "amount") {  // Is this Amount column
+    else if (m_csvDialog->columnType(i) == "amount") { // Is this Amount column
       ++neededFieldsCount;
 
       //  For a file which uses a flag field value to indicate if amount is a debit or a credit.
       //  Resource file DebitFlag setting of -1 means 'ignore/notused'.
       //  DebitFlag setting of >=0 indicates the column containing the flag.
 
-      if(m_flagCol == -1) { //                        it's a new file
-        switch(m_debitFlag) { //                      Flag if amount is debit or credit
+      if (m_flagCol == -1) { //                        it's a new file
+        switch (m_debitFlag) { //                      Flag if amount is debit or credit
           case -1://                                  Ignore flag
             m_flagCol = 0;//                          ...and continue
             break;
           case  0://                                  Ask for column no.of flag
             m_flagCol = columnNumber(i18n("Enter debit flag column number"));
-            if(m_flagCol == 0) {  //                  0 means Cancel was pressed
+            if (m_flagCol == 0) { //                  0 means Cancel was pressed
               return KMessageBox::Cancel;//           ... so exit
             }
             break;
           default : m_flagCol = m_debitFlag;//        Contains flag/column no.
         }
       }
-      if((m_flagCol < 0) || (m_flagCol > m_endColumn)) {  // shouldn't get here
+      if ((m_flagCol < 0) || (m_flagCol > m_endColumn)) { // shouldn't get here
         KMessageBox::sorry(0, i18n("An invalid column was entered.\n"
                                    "Must be between 1 and %1.", m_endColumn), i18n("CSV import"));
         return KMessageBox::Cancel;
       }
       QString flag;//                                 m_flagCol == valid column (or zero)
-      if(m_flagCol > 0) {
+      if (m_flagCol > 0) {
         flag = m_columnList[m_flagCol - 1];//         indicates if amount is debit or credit
       }//                                             if flagCol == 0, flag is empty
 
       txt = m_columnList[i];//                        amount column value
-      if((m_csvDialog->amountColumn() == i) &&
+      if ((m_csvDialog->amountColumn() == i) &&
           (((txt.contains("("))) || (flag.startsWith('A')))) {//  "(" or "Af" = debit
         txt = txt.remove(QRegExp("[()]"));
         txt = '-' + txt;  //                          Mark as -ve
-      } else if(m_csvDialog->debitColumn() == i) {
+      } else if (m_csvDialog->debitColumn() == i) {
         txt = '-' + txt;  //                          Mark as -ve
       }
       newTxt = m_parse->possiblyReplaceSymbol(txt);
@@ -589,13 +589,13 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
       m_qifBuffer = m_qifBuffer + 'T' + newTxt + '\n';
     }
 
-    else if((m_csvDialog->columnType(i) == "debit") || (m_csvDialog->columnType(i) == "credit")) { //  Credit or debit?
+    else if ((m_csvDialog->columnType(i) == "debit") || (m_csvDialog->columnType(i) == "credit")) { //  Credit or debit?
       ++neededFieldsCount;
       txt = m_columnList[i];
-      if(!txt.isEmpty()) {
-        if(m_csvDialog->debitColumn() == i)
+      if (!txt.isEmpty()) {
+        if (m_csvDialog->debitColumn() == i)
           txt = '-' + txt;//                          Mark as -ve
-        if((m_csvDialog->debitColumn() == i) || (m_csvDialog->creditColumn() == i)) {
+        if ((m_csvDialog->debitColumn() == i) || (m_csvDialog->creditColumn() == i)) {
           newTxt = m_parse->possiblyReplaceSymbol(txt);
           m_trData.amount = newTxt;
           m_qifBuffer = m_qifBuffer + 'T' + newTxt + '\n';
@@ -603,17 +603,17 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
       }
     }
 
-    else if(m_csvDialog->columnType(i) == "memo") {  // could be more than one
+    else if (m_csvDialog->columnType(i) == "memo") { // could be more than one
       txt = m_columnList[i];
       txt.replace('~', "\n");//                       replace NL which was substituted
-      if(!memo.isEmpty())
+      if (!memo.isEmpty())
         memo += '\n';//                               separator for multiple memos
       memo += txt;//                                  next memo
     }//end of memo field
   }//end of col loop
   m_trData.memo = memo;
   m_qifBuffer = m_qifBuffer + 'M' + memo + '\n' + "^\n";
-  if(neededFieldsCount > 2) {
+  if (neededFieldsCount > 2) {
     return KMessageBox::Ok;
   } else {
     KMessageBox::sorry(0, i18n("<center>The columns selected are invalid.\n</center>"
@@ -624,19 +624,19 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
 
 void CsvProcessing::importClicked()
 {
-  if(m_csvDialog->m_fileType != "Banking") return;
+  if (m_csvDialog->m_fileType != "Banking") return;
 
   // The following two fields are optional so must be cleared
   // ...of any prior choices in UI
   m_csvDialog->comboBoxBnk_memoCol->setCurrentIndex(-1);
   m_csvDialog->comboBoxBnk_numberCol->setCurrentIndex(-1);
 
-  if((m_csvDialog->dateSelected()) && (m_csvDialog->payeeSelected()) &&
+  if ((m_csvDialog->dateSelected()) && (m_csvDialog->payeeSelected()) &&
       ((m_csvDialog->amountSelected() || (m_csvDialog->debitSelected() && m_csvDialog->creditSelected())))) {
     m_importNow = true; //                          all necessary data is present
     int skp = m_csvDialog->spinBox_skip->value() - 1;
 
-    if(skp > m_endLine) {
+    if (skp > m_endLine) {
       KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
                                  "<center>Please correct your settings.</center>"), i18n("CSV import"));
       return;
@@ -648,7 +648,7 @@ void CsvProcessing::importClicked()
     //--- create the (revised) vertical (row) headers ---
 
     QStringList vertHeaders;
-    for(int i = skp; i < m_csvDialog->tableWidget->rowCount() + skp; i++) {
+    for (int i = skp; i < m_csvDialog->tableWidget->rowCount() + skp; i++) {
       QString hdr = (QString::number(i + 1));
       vertHeaders += hdr;
     }
@@ -692,7 +692,7 @@ void CsvProcessing::readSettings()
 
   KConfigGroup columnsGroup(config, "Columns");
 
-  if(columnsGroup.exists()) {
+  if (columnsGroup.exists()) {
     tmp = columnsGroup.readEntry("DateCol", QString()).toInt();
     m_csvDialog->comboBoxBnk_dateCol->setCurrentIndex(-1);
     m_csvDialog->comboBoxBnk_dateCol->setCurrentIndex(tmp);
@@ -702,7 +702,7 @@ void CsvProcessing::readSettings()
     m_csvDialog->comboBoxBnk_payeeCol->setCurrentIndex(tmp);
 
     tmp = columnsGroup.readEntry("AmountCol", QString()).toInt();
-    if(tmp >= 0) {  //                            If amount previously selected, set check radio_amount
+    if (tmp >= 0) { //                            If amount previously selected, set check radio_amount
       m_csvDialog->radioBnk_amount->setChecked(true);
       m_csvDialog->labelBnk_amount->setEnabled(true);
       m_csvDialog->labelBnk_credits->setEnabled(false);
@@ -741,7 +741,7 @@ void CsvProcessing::readSettings()
 
 void CsvProcessing::saveAs()
 {
-  if(m_csvDialog->m_fileType == "Banking") {
+  if (m_csvDialog->m_fileType == "Banking") {
     QStringList outFile = m_inFileName.split('.');
     const KUrl& name = (outFile.isEmpty() ? "CsvProcessing" : outFile[0]) + ".qif";
 
@@ -775,7 +775,7 @@ int CsvProcessing::startLine()
 void CsvProcessing::startLineChanged()
 {
   int val = m_csvDialog->spinBox_skip->value();
-  if(val < 1) {
+  if (val < 1) {
     return;
   }
   m_startLine = val - 1;
@@ -788,7 +788,7 @@ void CsvProcessing::endLineChanged()
 
 void CsvProcessing::dateFormatSelected(int dF)
 {
-  if(dF == -1) return;
+  if (dF == -1) return;
   m_dateFormatIndex = dF;
   m_date = m_dateFormats[m_dateFormatIndex];
 }
@@ -838,7 +838,7 @@ int CsvProcessing::columnNumber(const QString& msg)
   bool ok;
   static int ret;
   ret = KInputDialog::getInteger(i18n("Enter column number of debit/credit code"), msg, 0, 1, m_endColumn, 1, 10, &ok);
-  if(ok && ret > 0)
+  if (ok && ret > 0)
     return ret;
   return 0;
 }

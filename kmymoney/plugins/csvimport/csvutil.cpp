@@ -46,7 +46,7 @@ QStringList Parse::parseLine(const QString& data)
   QString txt1;
 
   m_inBuffer = data;
-  if(m_inBuffer.endsWith(',')) {
+  if (m_inBuffer.endsWith(',')) {
     m_inBuffer.chop(1);
   }
 
@@ -55,14 +55,14 @@ QStringList Parse::parseLine(const QString& data)
 
   QStringList::const_iterator constIterator;
 
-  for(constIterator = listIn.constBegin(); constIterator < listIn.constEnd();
-      ++constIterator) {
+  for (constIterator = listIn.constBegin(); constIterator < listIn.constEnd();
+       ++constIterator) {
     txt = (*constIterator);
     // detect where a "quoted" string has been erroneously split, because of a comma,
     // or in a value, a 'thousand separator' being mistaken for a field delimitor.
 
-    while((txt.startsWith(m_textDelimiterCharacter)) && (!txt.endsWith(m_textDelimiterCharacter)))  {
-      if(++constIterator < listIn.constEnd())  {
+    while ((txt.startsWith(m_textDelimiterCharacter)) && (!txt.endsWith(m_textDelimiterCharacter)))  {
+      if (++constIterator < listIn.constEnd())  {
         txt1 = (*constIterator);//                       second part of the split string
         txt += m_fieldDelimiterCharacter + txt1;//       rejoin the string
       } else break;
@@ -84,31 +84,31 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
 
   QString::const_iterator constIterator;
 
-  for(constIterator = buf.constBegin(); constIterator != buf.constEnd();
-      ++constIterator) {
+  for (constIterator = buf.constBegin(); constIterator != buf.constEnd();
+       ++constIterator) {
     QString chr = (*constIterator);
     count -= 1;
-    if(chr == m_textDelimiterCharacter) {
+    if (chr == m_textDelimiterCharacter) {
       tmpBuffer += chr;
-      if(inQuotes == true) { //                if already in quoted field..
+      if (inQuotes == true) { //                if already in quoted field..
         inQuotes = false;//                    ..end it
       } else {//                               if not..
         inQuotes = true;//                     ..start it
       }
       continue;
-    } else if(chr == "\n") {
-      if(inQuotes == true) {  //               embedded '\n' in quoted field
+    } else if (chr == "\n") {
+      if (inQuotes == true) { //               embedded '\n' in quoted field
         chr = '~';//                           replace it with ~ for now
         tmpBuffer += chr;
-        if(count > 0) //                       more chars yet
+        if (count > 0) //                       more chars yet
           continue;//                          more chars yet
       }
       //                                       true EOL (not in quotes)
-      if(tmpBuffer.isEmpty()) {
+      if (tmpBuffer.isEmpty()) {
         continue;
       }
       lineCount ++;
-      if(lineCount < strt) { //   startLine      not yet reached first wanted line
+      if (lineCount < strt) { //   startLine      not yet reached first wanted line
         tmpBuffer.clear();
         continue;
       }
@@ -117,19 +117,19 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
 
       //                                       look for start of wanted data
       //  if first pass or if not at last line, proceed
-      if((!end == 0) && (lineCount >= end - 1)) { // m_endLine is set from UI after first pass
+      if ((!end == 0) && (lineCount >= end - 1)) { // m_endLine is set from UI after first pass
         m_lastLine = lineCount - 1;
         break;
       }
     }//                                        end of 'EOL detected' loop
     else {//                                   must be data char
       tmpBuffer += chr;
-      if(count > 0) { //                       more chars yet
+      if (count > 0) { //                       more chars yet
         continue;
       }//                                      else eoFile = true;
     }
 
-    if(!tmpBuffer.isEmpty()) {
+    if (!tmpBuffer.isEmpty()) {
       outBuffer << tmpBuffer;
     }
   }
@@ -169,7 +169,7 @@ void Parse::setTextDelimiterIndex(int index)
 
 void Parse::decimalSymbolSelected(int val)
 {
-  if(val < 0) return;
+  if (val < 0) return;
 
   m_decimalSymbolIndex = val;
   m_decimalSymbol = m_decimalSymbolList[val];
@@ -195,7 +195,7 @@ void Parse::thousandsSeparatorChanged(int val)
 {
   m_thousandsSeparatorIndex = val;
   m_thousandsSeparator = m_thousandsSeparatorList[val];
-  if(m_thousandsSeparator == KGlobal::locale()->thousandsSeparator()) {
+  if (m_thousandsSeparator == KGlobal::locale()->thousandsSeparator()) {
     return;
   }
 }
@@ -235,9 +235,9 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
   m_symbolFound = false;
   m_invalidConversion = false;
 
-  if(str.isEmpty()) return str;
+  if (str.isEmpty()) return str;
   QString txt = str.trimmed();//                 don't want trailing blanks
-  if(txt.contains('(')) {//              "(" or "Af" = debit
+  if (txt.contains('(')) {//              "(" or "Af" = debit
     txt = txt.remove(QRegExp("[()]"));
     txt = '-' + txt;
   }
@@ -247,9 +247,9 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
 
   //  Check if this col/cell contains decimal symbol
 
-  if(decimalIndex == -1) {//                     there is no decimal
+  if (decimalIndex == -1) {//                     there is no decimal
     m_symbolFound = false;
-    if((thouIndex == -1) || (thouIndex == length - 4))  { //no separator || correct format
+    if ((thouIndex == -1) || (thouIndex == length - 4))  { //no separator || correct format
       txt.remove(m_thousandsSeparator);
       QString tmp = txt + KGlobal::locale()->decimalSymbol() + "00";
       return tmp;
@@ -263,11 +263,11 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
 
   m_symbolFound = true;//                        found genuine decimal
 
-  if(thouIndex >= 0) { //                        there was a separator
-    if(decimalIndex < thouIndex) { //            invalid conversion
+  if (thouIndex >= 0) { //                        there was a separator
+    if (decimalIndex < thouIndex) { //            invalid conversion
       m_invalidConversion = true;
     }
-    if(length == decimalIndex + 4) { //          ...thousands separator with no decimal part
+    if (length == decimalIndex + 4) { //          ...thousands separator with no decimal part
       txt += m_decimalSymbol + "00";
     }
   }//  thouIndex = -1                            no thousands separator

@@ -131,7 +131,7 @@ void InvestProcessing::init()
 
 void InvestProcessing::changedType(const QString& newType)
 {
-  if((newType == "buy") || (newType == "sell") || (newType == "divx") ||
+  if ((newType == "buy") || (newType == "sell") || (newType == "divx") ||
       (newType == "reinvdiv") || (newType == "shrsin") || (newType == "shrsout")) {
     m_trInvestData.type = newType;
   }
@@ -139,14 +139,14 @@ void InvestProcessing::changedType(const QString& newType)
 
 void InvestProcessing::fileDialog()
 {
-  if(m_csvDialog->m_fileType != "Invest") return;
+  if (m_csvDialog->m_fileType != "Invest") return;
   m_endLine = 0;
   int position;
-  if(m_invPath.isEmpty()) {
+  if (m_invPath.isEmpty()) {
     m_invPath  = "~/";
   }
   m_csvDialog->m_decimalSymbolChanged = false;
-  if(m_inFileName.isEmpty()) {
+  if (m_inFileName.isEmpty()) {
   }
 
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-csvinvest"),
@@ -161,27 +161,27 @@ void InvestProcessing::fileDialog()
   dialog->fileWidget()->setCustomWidget("Encoding", m_comboBoxEncode);
   m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
-  if(dialog->exec() == QDialog::Accepted) {
+  if (dialog->exec() == QDialog::Accepted) {
     m_url = dialog->selectedUrl();
   }
   delete dialog;
-  if(m_url.isEmpty())
+  if (m_url.isEmpty())
     return;
   m_inFileName.clear();
 
-  if(!KIO::NetAccess::download(m_url, m_inFileName, 0)) {
+  if (!KIO::NetAccess::download(m_url, m_inFileName, 0)) {
     KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.prettyUrl()),
                                KIO::NetAccess::lastErrorString(),
                                i18n("File access error"));
     return;
   }
-  if(m_inFileName.isEmpty())
+  if (m_inFileName.isEmpty())
     return;
   clearComboBoxText();//                    to clear any '*' in memo combo text
   m_importNow = false;//                    Avoid attempting date formatting on headers
 
-  for(int i = 0; i < MAXCOL; i++)
-    if(columnType(i) == "memo") {
+  for (int i = 0; i < MAXCOL; i++)
+    if (columnType(i) == "memo") {
       clearColumnType(i);   //    ensure no memo entries remain
     }
 
@@ -235,7 +235,7 @@ void InvestProcessing::clearColumnsSelected()
 
 void InvestProcessing::clearSelectedFlags()
 {
-  for(int i = 0; i < MAXCOL; i++) {
+  for (int i = 0; i < MAXCOL; i++) {
     m_columnType[i].clear();//               set to all empty
   }
 
@@ -262,7 +262,7 @@ void InvestProcessing::clearColumnNumbers()
 
 void InvestProcessing::clearComboBoxText()
 {
-  for(int i = 0; i < MAXCOL; i++) {
+  for (int i = 0; i < MAXCOL; i++) {
     m_csvDialog->comboBoxInv_memoCol->setItemText(i, QString().setNum(i + 1));
   }
 }
@@ -270,28 +270,28 @@ void InvestProcessing::clearComboBoxText()
 void InvestProcessing::encodingChanged(int index)
 {
   m_encodeIndex = index;
-  if(!m_inFileName.isEmpty())
+  if (!m_inFileName.isEmpty())
     readFile(m_inFileName, 0);
 }
 
 void InvestProcessing::dateColumnSelected(int col)
 {
   QString type = "date";
-  if(col < 0) { //                              it is unset
+  if (col < 0) { //                              it is unset
     return;
   }
 // A new column has been selected for this field so clear old one
-  if((m_columnType[m_dateColumn] == type)  && (m_dateColumn != col)) {
+  if ((m_columnType[m_dateColumn] == type)  && (m_dateColumn != col)) {
     m_columnType[m_dateColumn].clear();
   }
   int ret = validateNewColumn(col, type);
 
-  if(ret == KMessageBox::Ok) {
+  if (ret == KMessageBox::Ok) {
     m_csvDialog->comboBoxInv_dateCol->setCurrentIndex(col);// accept new column
     m_dateSelected = true;
-    if(m_dateColumn != -1) {
+    if (m_dateColumn != -1) {
 //          if a previous date column is detected, but in a different column...
-      if((m_columnType[m_dateColumn] == type)  && (m_dateColumn != col)) {
+      if ((m_columnType[m_dateColumn] == type)  && (m_dateColumn != col)) {
         m_columnType[m_dateColumn].clear();//   clear it
       }
     }
@@ -299,7 +299,7 @@ void InvestProcessing::dateColumnSelected(int col)
     m_columnType[m_dateColumn] = type;
     return;
   }
-  if(ret == KMessageBox::No) {
+  if (ret == KMessageBox::No) {
     m_csvDialog->comboBoxInv_dateCol->setCurrentIndex(-1);
   }
 }
@@ -315,12 +315,12 @@ void InvestProcessing::findCodecs()
     QString sortKey = codec->name().toUpper();
     int rank;
 
-    if(sortKey.startsWith("UTF-8")) {   // krazy:exclude=strings
+    if (sortKey.startsWith("UTF-8")) {  // krazy:exclude=strings
       rank = 1;
-    } else if(sortKey.startsWith("UTF-16")) {   // krazy:exclude=strings
+    } else if (sortKey.startsWith("UTF-16")) {  // krazy:exclude=strings
       rank = 2;
-    } else if(iso8859RegExp.exactMatch(sortKey)) {
-      if(iso8859RegExp.cap(1).size() == 1)
+    } else if (iso8859RegExp.exactMatch(sortKey)) {
+      if (iso8859RegExp.cap(1).size() == 1)
         rank = 3;
       else
         rank = 4;
@@ -337,15 +337,15 @@ void InvestProcessing::findCodecs()
 int InvestProcessing::validateNewColumn(const int& col, const QString& type)
 {
   //  First check if selection is in range
-  if((col < 0) || (col >= m_endColumn)) {
+  if ((col < 0) || (col >= m_endColumn)) {
     return KMessageBox::No;
   }
-  if((col == m_previousColumn) && (type == m_previousType)) {
+  if ((col == m_previousColumn) && (type == m_previousType)) {
     return -1;
   }
 //                                              selection was in range
 //                                              ...but does it clash?
-  if((!m_columnType[col].isEmpty())  && (m_columnType[col] != type)) { // column is already in use
+  if ((!m_columnType[col].isEmpty())  && (m_columnType[col] != type)) { // column is already in use
     KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>", m_columnType[col]));
 
     m_previousColumn = -1;
@@ -356,14 +356,14 @@ int InvestProcessing::validateNewColumn(const int& col, const QString& type)
     return KMessageBox::Cancel;
   }
   //                                            is this type already in use
-  for(int i = 0; i < m_endColumn; i++) {   //  check each column
-    if(m_columnType[i] == type) { //            this type already in use
+  for (int i = 0; i < m_endColumn; i++) {  //  check each column
+    if (m_columnType[i] == type) { //            this type already in use
       m_columnType[i].clear();//                ...so clear it
     }//  end this col
 
   }// end all columns checked                   type not in use
   m_columnType[col] = type;//                   accept new type
-  if(m_previousColumn != -1) {
+  if (m_previousColumn != -1) {
     m_previousColumn = col;
   }
   m_previousType = type;
@@ -373,20 +373,20 @@ int InvestProcessing::validateNewColumn(const int& col, const QString& type)
 void InvestProcessing::feeColumnSelected(int col)
 {
   QString type = "fee";
-  if(col < 0) { //                              it is unset
+  if (col < 0) { //                              it is unset
     return;
   }
   // A new column has been selected for this field so clear old one
-  if((m_columnType[m_feeColumn] == type)  && (m_feeColumn != col)) {
+  if ((m_columnType[m_feeColumn] == type)  && (m_feeColumn != col)) {
     m_columnType[m_feeColumn].clear();
   }
   int ret = validateNewColumn(col, type);
-  if(ret == KMessageBox::Ok) {
+  if (ret == KMessageBox::Ok) {
     m_csvDialog->comboBoxInv_feeCol->setCurrentIndex(col);// accept new column
     m_feeSelected = true;
-    if(m_feeColumn != -1) {
+    if (m_feeColumn != -1) {
 //          if a previous fee column is detected, but in a different column...
-      if((m_columnType[m_feeColumn] == type)  && (m_feeColumn != col)) {
+      if ((m_columnType[m_feeColumn] == type)  && (m_feeColumn != col)) {
         m_columnType[m_feeColumn].clear();//    ..clear it
       }
     }
@@ -394,7 +394,7 @@ void InvestProcessing::feeColumnSelected(int col)
     m_columnType[m_feeColumn] = type;
     return;
   }
-  if(ret == KMessageBox::No) {
+  if (ret == KMessageBox::No) {
     m_csvDialog->comboBoxInv_feeCol->setCurrentIndex(-1);
   }
 }
@@ -402,21 +402,21 @@ void InvestProcessing::feeColumnSelected(int col)
 void InvestProcessing::typeColumnSelected(int col)
 {
   QString type = "type";
-  if(col < 0) { //                              it is unset
+  if (col < 0) { //                              it is unset
     return;
   }
 // A new column has been selected for this field so clear old one
-  if((m_columnType[m_typeColumn] == type)  && (m_typeColumn != col)) {
+  if ((m_columnType[m_typeColumn] == type)  && (m_typeColumn != col)) {
     m_columnType[m_typeColumn].clear();
   }
   int ret = validateNewColumn(col, type);
 
-  if(ret == KMessageBox::Ok) {
+  if (ret == KMessageBox::Ok) {
     m_csvDialog->comboBoxInv_typeCol->setCurrentIndex(col);// accept new column
     m_typeSelected = true;
-    if(m_typeColumn != -1) {
+    if (m_typeColumn != -1) {
 //          if a previous type column is detected, but in a different column...
-      if((m_columnType[m_typeColumn] == type)  && (m_typeColumn != col)) {
+      if ((m_columnType[m_typeColumn] == type)  && (m_typeColumn != col)) {
         m_columnType[m_typeColumn].clear();//   ...clear it
       }
     }
@@ -424,7 +424,7 @@ void InvestProcessing::typeColumnSelected(int col)
     m_columnType[m_typeColumn] = type;
     return;
   }
-  if(ret == KMessageBox::No) {
+  if (ret == KMessageBox::No) {
     m_csvDialog->comboBoxInv_typeCol->setCurrentIndex(-1);
   }
 }
@@ -432,11 +432,11 @@ void InvestProcessing::typeColumnSelected(int col)
 void InvestProcessing::memoColumnSelected(int col)
 {
   QString type = "memo";
-  if((col < 0) || (col >= m_endColumn)) { //      out of range so...
+  if ((col < 0) || (col >= m_endColumn)) { //      out of range so...
     m_csvDialog->comboBoxInv_memoCol->setCurrentIndex(-1);// ..clear selection
     return;
   }
-  if(m_columnType[col].isEmpty()) { //      accept new  entry
+  if (m_columnType[col].isEmpty()) { //      accept new  entry
     m_csvDialog->comboBoxInv_memoCol->setItemText(col, QString().setNum(col + 1) + '*');
     m_columnType[col] = type;
     m_memoColumn = col;
@@ -451,7 +451,7 @@ void InvestProcessing::memoColumnSelected(int col)
     resetComboBox(type, col);//                   ... both comboboxes
     m_previousType.clear();
     m_columnType[col].clear();
-    if(m_memoColumn >= 0) {
+    if (m_memoColumn >= 0) {
       m_columnType[m_memoColumn].clear();
       m_csvDialog->comboBoxInv_memoCol->setItemText(m_memoColumn, QString().setNum(m_memoColumn + 1));//  reset the '*'
       m_csvDialog->comboBoxInv_memoCol->setCurrentIndex(-1);//       and this one
@@ -462,21 +462,21 @@ void InvestProcessing::memoColumnSelected(int col)
 void InvestProcessing::quantityColumnSelected(int col)
 {
   QString type = "quantity";
-  if(col < 0) { //                              it is unset
+  if (col < 0) { //                              it is unset
     return;
   }
   m_redefine->setQuantityColumn(col);
 // A new column has been selected for this field so clear old one
-  if((m_columnType[m_quantityColumn] == type)  && (m_quantityColumn != col)) {
+  if ((m_columnType[m_quantityColumn] == type)  && (m_quantityColumn != col)) {
     m_columnType[m_quantityColumn].clear();
   }
   int ret = validateNewColumn(col, type);
-  if(ret == KMessageBox::Ok) {
+  if (ret == KMessageBox::Ok) {
     m_csvDialog->comboBoxInv_quantityCol->setCurrentIndex(col);// accept new column
     m_quantitySelected = true;
-    if(m_quantityColumn != -1) {
+    if (m_quantityColumn != -1) {
 //          if a previous fee column is detected, but in a different column...
-      if((m_columnType[m_quantityColumn] == type)  && (m_quantityColumn != col)) {
+      if ((m_columnType[m_quantityColumn] == type)  && (m_quantityColumn != col)) {
         m_columnType[m_quantityColumn].clear();// ...clear it
       }
     }
@@ -484,7 +484,7 @@ void InvestProcessing::quantityColumnSelected(int col)
     m_columnType[m_quantityColumn] = type;
     return;
   }
-  if(ret == KMessageBox::No) {
+  if (ret == KMessageBox::No) {
     m_csvDialog->comboBoxInv_quantityCol->setCurrentIndex(-1);
   }
 }
@@ -492,21 +492,21 @@ void InvestProcessing::quantityColumnSelected(int col)
 void InvestProcessing::priceColumnSelected(int col)
 {
   QString type = "price";
-  if(col < 0) { //                              it is unset
+  if (col < 0) { //                              it is unset
     return;
   }
 
 // A new column has been selected for this field so clear old one
-  if((m_columnType[m_priceColumn] == type)  && (m_priceColumn != col)) {
+  if ((m_columnType[m_priceColumn] == type)  && (m_priceColumn != col)) {
     m_columnType[m_priceColumn].clear();
   }
   int ret = validateNewColumn(col, type);
-  if(ret == KMessageBox::Ok) {
+  if (ret == KMessageBox::Ok) {
     m_csvDialog->comboBoxInv_priceCol->setCurrentIndex(col);// accept new column
     m_priceSelected = true;
-    if(m_priceColumn != -1) {
+    if (m_priceColumn != -1) {
 //          if a previous price column is detected, but in a different column...
-      if((m_columnType[m_priceColumn] == type)  && (m_priceColumn != col)) {
+      if ((m_columnType[m_priceColumn] == type)  && (m_priceColumn != col)) {
         m_columnType[m_priceColumn].clear();//  ...clear it
       }
     }
@@ -515,7 +515,7 @@ void InvestProcessing::priceColumnSelected(int col)
     m_redefine->setPriceColumn(col);
     return;
   }
-  if(ret == KMessageBox::No) {
+  if (ret == KMessageBox::No) {
     m_csvDialog->comboBoxInv_priceCol->setCurrentIndex(-1);
   }
 }
@@ -523,21 +523,21 @@ void InvestProcessing::priceColumnSelected(int col)
 void InvestProcessing::amountColumnSelected(int col)
 {
   QString type = "amount";
-  if(col < 0) { //                              it is unset
+  if (col < 0) { //                              it is unset
     return;
   }
   m_redefine->setAmountColumn(col);
 // A new column has been selected for this field so clear old one
-  if((m_columnType[m_amountColumn] == type)  && (m_amountColumn != col)) {
+  if ((m_columnType[m_amountColumn] == type)  && (m_amountColumn != col)) {
     m_columnType[m_amountColumn].clear();
   }
   int ret = validateNewColumn(col, type);
-  if(ret == KMessageBox::Ok) {
+  if (ret == KMessageBox::Ok) {
     m_csvDialog->comboBoxInv_amountCol->setCurrentIndex(col);// accept new column
     m_amountSelected = true;
-    if(m_amountColumn != -1) {
+    if (m_amountColumn != -1) {
 //          if a previous amount column is detected, but in a different column...
-      if((m_columnType[m_amountColumn] == type)  && (m_amountColumn != col)) {
+      if ((m_columnType[m_amountColumn] == type)  && (m_amountColumn != col)) {
         m_columnType[m_amountColumn].clear();// ...clear it
       }
     }
@@ -545,15 +545,15 @@ void InvestProcessing::amountColumnSelected(int col)
     m_columnType[m_amountColumn] = type;
     return;
   }
-  if(ret == KMessageBox::No) {
+  if (ret == KMessageBox::No) {
     m_csvDialog->comboBoxInv_amountCol->setCurrentIndex(-1);
   }
 }
 
 void InvestProcessing::fieldDelimiterChanged()
 {
-  if(m_csvDialog->m_fileType != "Invest") return;
-  if(!m_inFileName.isEmpty())
+  if (m_csvDialog->m_fileType != "Invest") return;
+  if (!m_inFileName.isEmpty())
     readFile(m_inFileName, 0);
 }
 
@@ -584,7 +584,7 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
   QStringList outFile = name.split('.');
   QString outFileName = (outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif";
 
-  if(!fname.isEmpty())
+  if (!fname.isEmpty())
     m_inFileName  = fname;
   m_startLine = skipLines;
   QFile inFile(m_inFileName);
@@ -606,14 +606,14 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
   m_screenUpdated = false;
   //  Display the buffer
 
-  for(int i = 0; i < lineList.count(); i++) {
+  for (int i = 0; i < lineList.count(); i++) {
     m_inBuffer = lineList[i];
 
     displayLine(m_inBuffer);//                            else display it
-    if(m_importNow) {
+    if (m_importNow) {
       int ret = processInvestLine(m_inBuffer);  //       parse input line
-      if(ret == KMessageBox::Ok) {
-        if(m_brokerage)
+      if (ret == KMessageBox::Ok) {
+        if (m_brokerage)
           investCsvImport(stBrokerage);//       add non-investment transaction to Brokerage statement
         else
           investCsvImport(st);//                 add investment transaction to statement
@@ -631,9 +631,9 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
 
   m_endColumn = m_maxColumnCount;
 
-  if(m_importNow) {
+  if (m_importNow) {
     emit statementReady(st);//              investment statement ready
-    if(m_brokerageItems) {
+    if (m_brokerageItems) {
       emit statementReady(stBrokerage);//   brokerage statement ready
     }
     m_importNow = false;
@@ -650,7 +650,7 @@ void InvestProcessing::displayLine(const QString& data)
   m_redefine->setColumnList(m_columnList);
   int columnCount = m_columnList.count();
 
-  if(columnCount > m_maxColumnCount)
+  if (columnCount > m_maxColumnCount)
     m_maxColumnCount = columnCount;//           find highest column count
   else
     columnCount = m_maxColumnCount;
@@ -659,13 +659,13 @@ void InvestProcessing::displayLine(const QString& data)
   int col = 0;
 
   QStringList::const_iterator constIterator;
-  for(constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
-      ++constIterator) {
+  for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
+       ++constIterator) {
     QString txt = (*constIterator);
 
     QTableWidgetItem *item = new QTableWidgetItem;        //new item for UI
     item->setText(txt);
-    if((col < 2))
+    if ((col < 2))
       item->setTextAlignment(Qt::AlignLeft);
     else
       item->setTextAlignment(Qt::AlignRight);
@@ -681,7 +681,7 @@ void InvestProcessing::displayLine(const QString& data)
 int InvestProcessing::processInvestLine(const QString& inBuffer)
 {
   QString newTxt;
-  if((m_priceColumn >= m_maxColumnCount) || (m_quantityColumn >= m_maxColumnCount) || (m_amountColumn >= m_maxColumnCount)) {
+  if ((m_priceColumn >= m_maxColumnCount) || (m_quantityColumn >= m_maxColumnCount) || (m_amountColumn >= m_maxColumnCount)) {
     KMessageBox::sorry(0, (i18n("The price, quantity and/or amount column values appear to be invalid."
                                 "<center>Please correct the settings.</center>")),
                        i18n("CSV import"));
@@ -708,12 +708,12 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
   m_brokerage = false;
   memo.clear();
 
-  for(int i = 0; i < m_endColumn; i++) {
-    if(m_columnType[i] == "date") {  //                    Date Col
+  for (int i = 0; i < m_endColumn; i++) {
+    if (m_columnType[i] == "date") { //                    Date Col
       txt = m_columnList[i];
       txt = txt.remove('"');
       QDate dat = m_convertDat->convertDate(txt);
-      if(dat == QDate()) {
+      if (dat == QDate()) {
         KMessageBox::sorry(0, i18n("<center>An invalid date has been detected during import.</center> <center><b>%1</b></center> Please check that you have set the correct date format.", txt), i18n("CSV import"));
         return KMessageBox::Cancel;
       }
@@ -722,31 +722,31 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       m_trInvestData.date = dat;
     }
 
-    else if(m_columnType[i] == "type") {  //               Type Col
+    else if (m_columnType[i] == "type") { //               Type Col
       m_redefine->setTypeColumn(i);
       txt = m_columnList[i].trimmed();
       QString txt = inBuffer.section(m_fieldDelimiterCharacter, i, i).trimmed();
-      if(txt.isEmpty()) {
+      if (txt.isEmpty()) {
         KMessageBox::sorry(0, i18n("<center> The type/action that has been detected during import is empty.</center> <center><b>%1</b></center> Check that you have selected the correct column.", txt), i18n("CSV import"));
         return KMessageBox::Cancel;
       }
       m_trInvestData.type = txt;
       int ret = processActionType(m_trInvestData.type);
-      if(ret == KMessageBox::Cancel) {
+      if (ret == KMessageBox::Cancel) {
         return KMessageBox::Cancel;
       }
 
-      if(m_brokerage) {
+      if (m_brokerage) {
         m_trInvestData.payee = inBuffer.section(m_fieldDelimiterCharacter, m_payeeColumn, m_payeeColumn);
         m_tempBuffer += 'P' + m_trInvestData.payee + '\n';
       }
     }
 
-    else if(m_columnType[i] == "memo") {  //               Memo Col
+    else if (m_columnType[i] == "memo") { //               Memo Col
       txt = m_columnList[i];
-      if(m_columnType[i] == "memo") {
-        if(memo.isEmpty()) {
-          if(m_brokerage) {
+      if (m_columnType[i] == "memo") {
+        if (memo.isEmpty()) {
+          if (m_brokerage) {
             payee = txt;
             m_trInvestData.payee = txt;
           }
@@ -756,14 +756,14 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       }
     }//end of memo field
 
-    else if(m_columnType[i] == "quantity") {  //           Quantity Col
+    else if (m_columnType[i] == "quantity") { //           Quantity Col
       txt = m_columnList[i];
       newTxt = m_parse->possiblyReplaceSymbol(txt);
       m_trInvestData.quantity = MyMoneyMoney(newTxt);
       m_tempBuffer += 'Q' + newTxt + '\n';
     }
 
-    else if(m_columnType[i] == "price") {  //              Price Col
+    else if (m_columnType[i] == "price") { //              Price Col
       txt = m_csvDialog->comboBoxInv_priceFraction->currentText(); //fraction
       txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
       MyMoneyMoney fraction = MyMoneyMoney(txt);
@@ -777,10 +777,10 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       m_tempBuffer +=  'I' + newTxt + '\n';//                 price column
     }
 
-    else if(m_columnType[i] == "amount") {  //             Amount Col
+    else if (m_columnType[i] == "amount") { //             Amount Col
       txt = m_columnList[i];
       txt = txt.remove('"');
-      if(txt.contains(')')) {
+      if (txt.contains(')')) {
         txt = '-' + txt.remove(QRegExp("[()]"));//            Mark as -ve
       }
       newTxt = m_parse->possiblyReplaceSymbol(txt);
@@ -789,11 +789,11 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       m_tempBuffer +=  'T' + newTxt + '\n';//                 amount column
     }
 
-    else if(m_columnType[i] == "fee") {  //                Fee Col
+    else if (m_columnType[i] == "fee") { //                Fee Col
       MyMoneyMoney amount;
       double percent = m_columnList[i].toDouble();// fee val or percent
-      if(percent > 0.00) {
-        if(m_csvDialog->checkBoxInv_feeType->isChecked()) {  //   fee is percent
+      if (percent > 0.00) {
+        if (m_csvDialog->checkBoxInv_feeType->isChecked()) { //   fee is percent
           //have to use amountCol as amount field may not yet have been processed
           txt = inBuffer.section(m_fieldDelimiterCharacter, m_amountColumn, m_amountColumn);
           amount = MyMoneyMoney(txt);
@@ -807,20 +807,20 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
 
   }//end of col loop
   m_redefine->setInBuffer(inBuffer);
-  if(m_trInvestData.type != "0") {   //      Don't need to do this check on checking items.
+  if (m_trInvestData.type != "0") {  //      Don't need to do this check on checking items.
     int ret = (m_redefine->checkValid(m_trInvestData.type, i18n("The quantity, price and amount parameters in the\n current transaction don't match with the action type.\n Please select another action type\n")));
-    if(ret == KMessageBox::Cancel) return ret;
+    if (ret == KMessageBox::Cancel) return ret;
   }
 
-  if((m_trInvestData.type == "buy") || (m_trInvestData.type == "sell") || (m_trInvestData.type == "divx")) {
+  if ((m_trInvestData.type == "buy") || (m_trInvestData.type == "sell") || (m_trInvestData.type == "divx")) {
     m_trInvestData.brokerageAccnt = m_redefine->accountName();
     m_tempBuffer +=  "L[" + m_redefine->accountName() + ']' + '\n';
   }
 
-  if(m_brokerage) {  //                                          brokerage items
-    if(m_brokerBuff.isEmpty()) {  //                             start building data
+  if (m_brokerage) { //                                          brokerage items
+    if (m_brokerBuff.isEmpty()) { //                             start building data
 
-      if(m_redefine->accountName().isEmpty()) {
+      if (m_redefine->accountName().isEmpty()) {
         m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account"
                                                "<center>to/from which funds will be transferred :</center>")));
       }
@@ -831,7 +831,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       m_brokerBuff += "!Type:Bank\n";
     }
     m_brokerBuff += m_tempBuffer;
-    if(!memo.isEmpty())
+    if (!memo.isEmpty())
       m_brokerBuff += 'M' + memo + '\n';
     m_brokerBuff += "^\n";
     m_brokerBuff = m_brokerBuff.remove('"');
@@ -841,7 +841,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     m_trInvestData.memo = memo;
     m_trInvestData.security = m_csvDialog->lineEditInv_securityName->text();
     m_outBuffer = m_outBuffer + 'Y' + m_csvDialog->lineEditInv_securityName->text() + '\n';
-    if(!memo.isEmpty())
+    if (!memo.isEmpty())
       m_outBuffer = m_outBuffer + 'M' + memo + '\n';
     m_outBuffer += "^\n";
     m_outBuffer = m_outBuffer.remove('"');
@@ -855,13 +855,13 @@ int InvestProcessing::processActionType(QString& type)
   QString memo;
   QString payee;
 
-  if(m_buyList.isEmpty()) {
+  if (m_buyList.isEmpty()) {
     KMessageBox::information(0, i18n("<center>buyList of transaction types was not found.</center>"
                                      "<center>Check existence of correct resource file - 'csvimporterrc'.</center>"));
     return KMessageBox::Cancel;
   }
-  for(it = m_shrsinList.constBegin(); it != m_shrsinList.constEnd(); ++it) {   // Shrsin
-    if((type).contains(*it, Qt::CaseInsensitive)) {
+  for (it = m_shrsinList.constBegin(); it != m_shrsinList.constEnd(); ++it) {  // Shrsin
+    if ((type).contains(*it, Qt::CaseInsensitive)) {
       (type) = "shrsin";
       m_trInvestData.type = "shrsin";
       return KMessageBox::Ok;
@@ -869,10 +869,10 @@ int InvestProcessing::processActionType(QString& type)
   }
   //                            Needs to be before DivX
   //          because of "ReInvestorContract Buy         : ReInvested Units"
-  for(it = m_reinvdivList.constBegin(); it != m_reinvdivList.constEnd(); ++it) {   //Reinvdiv
+  for (it = m_reinvdivList.constBegin(); it != m_reinvdivList.constEnd(); ++it) {  //Reinvdiv
 
     QString txt = (*it);
-    if((type).contains(*it, Qt::CaseInsensitive)) {
+    if ((type).contains(*it, Qt::CaseInsensitive)) {
       (type) = "reinvdiv";
       m_trInvestData.type = (type);
       return KMessageBox::Ok;
@@ -880,26 +880,26 @@ int InvestProcessing::processActionType(QString& type)
   }
 
   //                            Needs to be after Reinvdiv
-  for(it = m_divXList.constBegin(); it != m_divXList.constEnd(); ++it) {   //          DivX
-    if((type).contains(*it, Qt::CaseInsensitive)) {
+  for (it = m_divXList.constBegin(); it != m_divXList.constEnd(); ++it) {  //          DivX
+    if ((type).contains(*it, Qt::CaseInsensitive)) {
       (type) = "divx";
       m_trInvestData.type = (type);
       return KMessageBox::Ok;
     }
   }
 
-  for(it = m_brokerageList.constBegin(); it != m_brokerageList.constEnd(); ++it) {   //Brokerage
-    if((type).contains(*it, Qt::CaseInsensitive)) {
+  for (it = m_brokerageList.constBegin(); it != m_brokerageList.constEnd(); ++it) {  //Brokerage
+    if ((type).contains(*it, Qt::CaseInsensitive)) {
       m_brokerage = true;//                                     these are non-investment items
-      if(m_redefine->accountName().isEmpty())
+      if (m_redefine->accountName().isEmpty())
         m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account"
                                                "<center>to/from which funds will be transferred :</center>")));
       m_tempBuffer +=  "L[" + m_redefine->accountName() + ']' + '\n';
 
-      if(m_payeeColumn < 0)
+      if (m_payeeColumn < 0)
         m_payeeColumn = columnNumber(i18n("<center>For a brokerage item, enter the column</center>"
                                           "<center>containing the Payee or Detail :</center>")) - 1;//payee column
-      if(m_payeeColumn == 0) {
+      if (m_payeeColumn == 0) {
         KMessageBox::sorry(0, i18n("An invalid column was entered.\n"
                                    "Must be between 1 and %1.", m_endColumn), i18n("CSV import"));
         return KMessageBox::Cancel;
@@ -909,24 +909,24 @@ int InvestProcessing::processActionType(QString& type)
     }
   }
 
-  for(it = m_buyList.constBegin(); it != m_buyList.constEnd(); ++it) {  // Buy
-    if((type).contains(*it, Qt::CaseInsensitive)) {
+  for (it = m_buyList.constBegin(); it != m_buyList.constEnd(); ++it) { // Buy
+    if ((type).contains(*it, Qt::CaseInsensitive)) {
       (type) = "buy";
       m_trInvestData.type = (type);
       return KMessageBox::Ok;
     }
   }
 
-  for(it = m_sellList.constBegin(); it != m_sellList.constEnd(); ++it) {  // Sell
-    if((type).contains(*it, Qt::CaseInsensitive)) {
+  for (it = m_sellList.constBegin(); it != m_sellList.constEnd(); ++it) { // Sell
+    if ((type).contains(*it, Qt::CaseInsensitive)) {
       (type) = "sell";
       m_trInvestData.type = (type);
       return KMessageBox::Ok;
     }
   }
 
-  for(it = m_removeList.constBegin(); it != m_removeList.constEnd(); ++it) {  // shrsout
-    if((type).contains(*it, Qt::CaseInsensitive)) {
+  for (it = m_removeList.constBegin(); it != m_removeList.constEnd(); ++it) { // shrsout
+    if ((type).contains(*it, Qt::CaseInsensitive)) {
       (type) = "shrsout";
       m_trInvestData.type = (type);
       return KMessageBox::Ok;
@@ -949,18 +949,18 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
 
   // Process transaction data
 
-  if(m_brokerage) {
+  if (m_brokerage) {
     m_brokerageItems = true;
     st.m_eType = MyMoneyStatement::etCheckings;
   } else
     st.m_eType = MyMoneyStatement::etInvestment;
   tr.m_datePosted = m_trInvestData.date;
-  if(!m_trInvestData.date.isValid()) {
+  if (!m_trInvestData.date.isValid()) {
     int rc = KMessageBox::warningContinueCancel(0, i18n("The date entry \"%1\" read from the file cannot be interpreted through the current date format setting of \"%2.\"\n\n"
              "Pressing \'Continue\' will assign today's date to the transaction. Pressing \'Cancel\'' will abort the import operation. You can then restart the import and select a different date format.",
              m_trInvestData.date.toString(m_dateFormats[m_dateFormatIndex]),
              m_dateFormats[m_dateFormatIndex]), i18n("Invalid date format"));
-    switch(rc) {
+    switch (rc) {
       case KMessageBox::Continue:
         tr.m_datePosted = (QDate::currentDate());
         break;
@@ -974,18 +974,18 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
   tr.m_strMemo = m_trInvestData.memo;
   tr.m_eAction = convType;
   tr.m_amount = m_trInvestData.amount;
-  if((tr.m_eAction == (MyMoneyStatement::Transaction::eaCashDividend)) ||
+  if ((tr.m_eAction == (MyMoneyStatement::Transaction::eaCashDividend)) ||
       (tr.m_eAction == (MyMoneyStatement::Transaction::eaBuy)) ||
       (tr.m_eAction == (MyMoneyStatement::Transaction::eaSell))) {
     tr.m_strBrokerageAccount = m_trInvestData.brokerageAccnt;
     tr.m_amount = - tr.m_amount;
   }
 
-  else if(tr.m_eAction == (MyMoneyStatement::Transaction::eaNone))
+  else if (tr.m_eAction == (MyMoneyStatement::Transaction::eaNone))
     tr.m_strBrokerageAccount = m_accountName ;
 
   tr.m_shares = m_trInvestData.quantity;//                 extractLine('T'));
-  if(!payee.isEmpty()) {
+  if (!payee.isEmpty()) {
     tr.m_strPayee = m_trInvestData.payee;
   }
 
@@ -997,7 +997,7 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
 
   st.m_listTransactions += tr;
   QList<MyMoneyStatement>   statements;
-  if((st.m_listTransactions.count()) > 0) {
+  if ((st.m_listTransactions.count()) > 0) {
     statements += st;//          this not used
     qDebug("Statement with %d transactions ready", st.m_listTransactions.count());
   }
@@ -1007,17 +1007,17 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
 
 void InvestProcessing::convertType(const QString& type, MyMoneyStatement::Transaction::EAction& convType)
 {
-  if(type == "buy")
+  if (type == "buy")
     convType = MyMoneyStatement::Transaction::eaBuy;
-  else if(type == "sell")
+  else if (type == "sell")
     convType = MyMoneyStatement::Transaction::eaSell;
-  else if(type == "divx")
+  else if (type == "divx")
     convType = MyMoneyStatement::Transaction::eaCashDividend;
-  else if(type == "reinvdiv")
+  else if (type == "reinvdiv")
     convType = MyMoneyStatement::Transaction::eaReinvestDividend;
-  else if(type == "shrsin")
+  else if (type == "shrsin")
     convType = MyMoneyStatement::Transaction::eaShrsin;
-  else if(type == "shrsout")
+  else if (type == "shrsout")
     convType = MyMoneyStatement::Transaction::eaShrsout;
   else convType = MyMoneyStatement::Transaction::eaNone;
   return;
@@ -1025,7 +1025,7 @@ void InvestProcessing::convertType(const QString& type, MyMoneyStatement::Transa
 
 void InvestProcessing::importClicked()
 {
-  if(m_csvDialog->m_fileType != "Invest") {
+  if (m_csvDialog->m_fileType != "Invest") {
     return;
   }
   bool securitySelected = (!m_csvDialog->lineEditInv_securityName->text().isEmpty());
@@ -1033,12 +1033,12 @@ void InvestProcessing::importClicked()
   m_quantitySelected = (m_csvDialog->comboBoxInv_quantityCol->currentIndex() > 0);
   m_amountSelected = (m_csvDialog->comboBoxInv_amountCol->currentIndex() > 0);
 
-  if(m_dateSelected && m_typeSelected && securitySelected && m_quantitySelected && m_priceSelected && m_amountSelected) {
+  if (m_dateSelected && m_typeSelected && securitySelected && m_quantitySelected && m_priceSelected && m_amountSelected) {
     m_importNow = true;//  all necessary data is present
     m_endLine = m_csvDialog->spinBox_skipToLast->value();
     int skp = m_csvDialog->spinBox_skip->value() - 1;//         skip all headers
 
-    if(skp > m_endLine) {
+    if (skp > m_endLine) {
       KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
                                  "<center>Please correct your settings.</center>"), i18n("CSV import"));
       return;
@@ -1048,7 +1048,7 @@ void InvestProcessing::importClicked()
     m_screenUpdated = true;
     //--- create the vertical (row) headers ---
     QStringList vertHeaders;
-    for(int i = skp; i < m_csvDialog->tableWidget->rowCount() + skp; i++) {
+    for (int i = skp; i < m_csvDialog->tableWidget->rowCount() + skp; i++) {
       QString hdr = QString::number(i + 1);
       vertHeaders += hdr;
     }
@@ -1063,7 +1063,7 @@ void InvestProcessing::importClicked()
 
 void InvestProcessing::saveAs()
 {
-  if(m_csvDialog->m_fileType == "Invest") {
+  if (m_csvDialog->m_fileType == "Invest") {
     QStringList outFile = m_inFileName .split('.');
     const KUrl& name = (outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif";
 
@@ -1091,7 +1091,7 @@ void InvestProcessing::setCodecList(const QList<QTextCodec *> &list)
 void InvestProcessing::startLineChanged()
 {
   int val = m_csvDialog->spinBox_skip->value();
-  if(val < 1) return;
+  if (val < 1) return;
   m_startLine = val - 1;
 }
 
@@ -1102,7 +1102,7 @@ void InvestProcessing::endLineChanged()
 
 void InvestProcessing::dateFormatSelected(int dF)
 {
-  if(dF == -1) return;
+  if (dF == -1) return;
   m_dateFormatIndex = dF;
   m_dateFormat = m_dateFormats[m_dateFormatIndex];
 }
@@ -1112,7 +1112,7 @@ int InvestProcessing::columnNumber(const QString& column)
   bool ok;
   static int ret;
   ret = KInputDialog::getInteger(i18n("Brokerage Item"), column, 0, 1, m_endColumn, 1, 10, &ok);
-  if(ok && ret > 0)
+  if (ok && ret > 0)
     return ret;
   return 0;
 }
@@ -1122,7 +1122,7 @@ QString InvestProcessing::accountName(const QString& aName)
   bool ok;
   static QString accntName;
   accntName = KInputDialog::getText(i18n("Parameters"), aName, QString(), &ok, 0, 0, 0);
-  if(ok && !accntName.isEmpty())
+  if (ok && !accntName.isEmpty())
     return accntName;
   else return "";
 }
@@ -1135,14 +1135,14 @@ void InvestProcessing::readSettings()
 
   KConfigGroup investmentGroup(config, "InvestmentSettings");
   QStringList list = investmentGroup.readEntry("BuyParam", QStringList());
-  if(!list.isEmpty()) {
+  if (!list.isEmpty()) {
     m_buyList = list;
   }
   m_shrsinList = investmentGroup.readEntry("ShrsinParam", QStringList());
   m_divXList = investmentGroup.readEntry("DivXParam", QStringList());
   m_brokerageList = investmentGroup.readEntry("BrokerageParam", QStringList());
   list = investmentGroup.readEntry("ReinvdivParam", QStringList());
-  if(!list.isEmpty()) {
+  if (!list.isEmpty()) {
     m_reinvdivList = list;
   }
   m_sellList = investmentGroup.readEntry("SellParam", QStringList());
@@ -1159,7 +1159,7 @@ void InvestProcessing::readSettings()
   m_csvDialog->comboBox_fieldDelimiter->setCurrentIndex(fieldDelimiterIndx);
 
   KConfigGroup invcolumnsGroup(config, "InvColumns");
-  if(invcolumnsGroup.exists()) {
+  if (invcolumnsGroup.exists()) {
     tmp = invcolumnsGroup.readEntry("DateCol", QString()).toInt();
     m_csvDialog->comboBoxInv_dateCol->setCurrentIndex(-1);
     m_csvDialog->comboBoxInv_dateCol->setCurrentIndex(tmp);
@@ -1198,7 +1198,7 @@ void InvestProcessing::readSettings()
 
 void InvestProcessing::updateScreen()
 {
-  if(m_row < 1)
+  if (m_row < 1)
     return;
   m_csvDialog->tableWidget->setRowCount(m_row);
   m_csvDialog->tableWidget->setFocus();
@@ -1254,7 +1254,7 @@ void InvestProcessing::resetComboBox(const QString& comboBox, const int& col)
   QStringList fieldType;
   fieldType << "amount" << "date" << "fee" << "memo" << "price" << "quantity" << "type";
   int index = fieldType.indexOf(comboBox);
-  switch(index) {
+  switch (index) {
     case 0://  amount
       m_csvDialog->comboBoxInv_amountCol->setCurrentIndex(-1);
       m_amountSelected = false;

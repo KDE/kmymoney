@@ -59,7 +59,7 @@ class InvestmentDlg;
 class InvestProcessing;
 
 CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
-  CsvImporterDlgDecl(parent)
+    CsvImporterDlgDecl(parent)
 {
   m_amountSelected = false;
   m_creditSelected = false;
@@ -100,7 +100,7 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
   m_errorBrush.setColor(m_errorColor);
   m_errorBrush.setStyle(Qt::SolidPattern);
 
-  for(int i = 0; i < MAXCOL; i++) { //  populate comboboxes with col # values
+  for (int i = 0; i < MAXCOL; i++) { //  populate comboboxes with col # values
     QString t;
     t.setNum(i + 1);
     comboBoxBnk_numberCol->addItem(t) ;
@@ -197,7 +197,7 @@ CsvImporterDlg::~CsvImporterDlg()
 
 void CsvImporterDlg::amountRadioClicked(bool checked)
 {
-  if(checked) {
+  if (checked) {
     comboBoxBnk_amountCol->setEnabled(true);//  disable credit & debit ui choices
     labelBnk_amount->setEnabled(true);
     comboBoxBnk_debitCol->setEnabled(false);
@@ -209,10 +209,10 @@ void CsvImporterDlg::amountRadioClicked(bool checked)
 
     //   the 'm_creditColumn/m_debitColumn' could just have been reassigned, so ensure
     //   ...they == "credit or debit" before clearing them
-    if((m_creditColumn >= 0) && (m_columnType[m_creditColumn] == "credit")) {
+    if ((m_creditColumn >= 0) && (m_columnType[m_creditColumn] == "credit")) {
       m_columnType[m_creditColumn].clear();//       because amount col chosen...
     }
-    if((m_debitColumn >= 0) && (m_columnType[m_debitColumn] == "debit")) {
+    if ((m_debitColumn >= 0) && (m_columnType[m_debitColumn] == "debit")) {
       m_columnType[m_debitColumn].clear();//        ...drop any credit & debit
     }
     m_debitColumn = -1;
@@ -233,12 +233,12 @@ void CsvImporterDlg::startLineChanged(int val)
 int CsvImporterDlg::validateColumn(const int& col, const QString& type)
 {
   //  First check if selection is in range
-  if((col < 0) || (col >= m_csvprocessing->endColumn())) {
+  if ((col < 0) || (col >= m_csvprocessing->endColumn())) {
     return KMessageBox::No;
   }//                                               selection was in range
 
 
-  if((!m_columnType[col].isEmpty())  && (m_columnType[col] != type)) {
+  if ((!m_columnType[col].isEmpty())  && (m_columnType[col] != type)) {
     //                                              BUT column is already in use
 
     KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>"
@@ -252,14 +252,14 @@ int CsvImporterDlg::validateColumn(const int& col, const QString& type)
     return KMessageBox::Cancel;
   }
   //                                               is this type already in use
-  for(int i = 0; i < m_csvprocessing->endColumn(); i++) {    //  check each column
-    if(m_columnType[i] == type) {  //               this type already in use
+  for (int i = 0; i < m_csvprocessing->endColumn(); i++) {   //  check each column
+    if (m_columnType[i] == type) { //               this type already in use
       m_columnType[i].clear();//                   ...so clear it
     }//  end this col
 
   }// end all columns checked                      type not in use
   m_columnType[col] = type;//                      accept new type
-  if(m_previousColumn != -1) {
+  if (m_previousColumn != -1) {
     m_previousColumn = col;
   }
   m_previousType = type;
@@ -269,15 +269,15 @@ int CsvImporterDlg::validateColumn(const int& col, const QString& type)
 void CsvImporterDlg::amountColumnSelected(int col)
 {
   QString type = "amount";
-  if(col < 0) {  //                                 it is unset
+  if (col < 0) { //                                 it is unset
     return;
   }
 // if a previous amount field is detected, but in a different column...
-  if((m_amountColumn != -1) && (m_columnType[m_amountColumn] == type)  && (m_amountColumn != col)) {
+  if ((m_amountColumn != -1) && (m_columnType[m_amountColumn] == type)  && (m_amountColumn != col)) {
     m_columnType[m_amountColumn].clear();
   }
   int ret = validateColumn(col, type);
-  if(ret == KMessageBox::Ok) {
+  if (ret == KMessageBox::Ok) {
     comboBoxBnk_amountCol->setCurrentIndex(col);//    accept new column
     m_amountSelected = true;
     m_amountColumn = col;
@@ -285,14 +285,14 @@ void CsvImporterDlg::amountColumnSelected(int col)
     restoreBackground();
     return;
   }
-  if(ret == KMessageBox::No) {
+  if (ret == KMessageBox::No) {
     comboBoxBnk_amountCol->setCurrentIndex(-1);
   }
 }
 
 void CsvImporterDlg::debitCreditRadioClicked(bool checked)
 {
-  if(checked) {
+  if (checked) {
     comboBoxBnk_debitCol->setEnabled(true);//         if 'debit/credit' selected
     labelBnk_debits->setEnabled(true);
     comboBoxBnk_creditCol->setEnabled(true);
@@ -302,7 +302,7 @@ void CsvImporterDlg::debitCreditRadioClicked(bool checked)
 
     //   the 'm_amountColumn' could just have been reassigned, so ensure
     //   ...m_columnType[m_amountColumn] == "amount" before clearing it
-    if((m_amountColumn >= 0) && (m_columnType[m_amountColumn] == "amount")) {
+    if ((m_amountColumn >= 0) && (m_columnType[m_amountColumn] == "amount")) {
       m_columnType[m_amountColumn].clear();//          ...drop any amount choice
       m_amountColumn = -1;
     }
@@ -313,16 +313,16 @@ void CsvImporterDlg::debitCreditRadioClicked(bool checked)
 void CsvImporterDlg::creditColumnSelected(int col)
 {
   QString type = "credit";
-  if(col < 0) {  //                                    it is unset
+  if (col < 0) { //                                    it is unset
     return;
   }
 // if a previous credit field is detected, but in a different column...
-  if((m_creditColumn != -1) && (m_columnType[m_creditColumn] == type)  && (m_creditColumn != col)) {
+  if ((m_creditColumn != -1) && (m_columnType[m_creditColumn] == type)  && (m_creditColumn != col)) {
     m_columnType[m_creditColumn].clear();
   }
   int ret = validateColumn(col, type);
 
-  if(ret == KMessageBox::Ok) {
+  if (ret == KMessageBox::Ok) {
     comboBoxBnk_creditCol->setCurrentIndex(col);//    accept new column
     m_creditSelected = true;
     m_creditColumn = col;
@@ -330,7 +330,7 @@ void CsvImporterDlg::creditColumnSelected(int col)
     restoreBackground();
     return;
   }
-  if(ret == KMessageBox::No) {
+  if (ret == KMessageBox::No) {
     comboBoxBnk_creditCol->setCurrentIndex(-1);
   }
 }
@@ -338,23 +338,23 @@ void CsvImporterDlg::creditColumnSelected(int col)
 void CsvImporterDlg::debitColumnSelected(int col)
 {
   QString type = "debit";
-  if(col < 0) {  //                                    it is unset
+  if (col < 0) { //                                    it is unset
     return;
   }
 // A new column has been selected for this field so clear old one
-  if((m_debitColumn != -1) && (m_columnType[m_debitColumn] == type)  && (m_debitColumn != col)) {
+  if ((m_debitColumn != -1) && (m_columnType[m_debitColumn] == type)  && (m_debitColumn != col)) {
     m_columnType[m_debitColumn].clear();
   }
   int ret = validateColumn(col, type);
 
-  if(ret == KMessageBox::Ok) {
+  if (ret == KMessageBox::Ok) {
     comboBoxBnk_debitCol->setCurrentIndex(col);//     accept new column
     m_debitSelected = true;
     m_debitColumn = col;
     m_columnType[m_debitColumn] = type;
     return;
   }
-  if(ret == KMessageBox::No) {
+  if (ret == KMessageBox::No) {
     comboBoxBnk_debitCol->setCurrentIndex(-1);
   }
 }
@@ -362,23 +362,23 @@ void CsvImporterDlg::debitColumnSelected(int col)
 void CsvImporterDlg::dateColumnSelected(int col)
 {
   QString type = "date";
-  if(col < 0) {  //                                 it is unset
+  if (col < 0) { //                                 it is unset
     return;
   }
 // A new column has been selected for this field so clear old one
-  if((m_dateColumn != -1) && (m_columnType[m_dateColumn] == type)  && (m_dateColumn != col)) {
+  if ((m_dateColumn != -1) && (m_columnType[m_dateColumn] == type)  && (m_dateColumn != col)) {
     m_columnType[m_dateColumn].clear();
   }
   int ret = validateColumn(col, type);
 
-  if(ret == KMessageBox::Ok) {
+  if (ret == KMessageBox::Ok) {
     comboBoxBnk_dateCol->setCurrentIndex(col);//      accept new column
     m_dateSelected = true;
     m_dateColumn = col;
     m_columnType[m_dateColumn] = type;
     return;
   }
-  if(ret == KMessageBox::No) {
+  if (ret == KMessageBox::No) {
     comboBoxBnk_dateCol->setCurrentIndex(-1);
   }
 }
@@ -386,18 +386,18 @@ void CsvImporterDlg::dateColumnSelected(int col)
 void CsvImporterDlg::memoColumnSelected(int col)
 {
   QString type = "memo";
-  if((col < 0) || (col >= m_csvprocessing->endColumn())) {  // out of range so...
+  if ((col < 0) || (col >= m_csvprocessing->endColumn())) { // out of range so...
     comboBoxBnk_memoCol->setCurrentIndex(-1);// ..clear selection
     return;
   }
-  if(m_columnType[col].isEmpty()) {  //             accept new  entry
+  if (m_columnType[col].isEmpty()) { //             accept new  entry
     comboBoxBnk_memoCol->setItemText(col, QString().setNum(col + 1) + '*');
     m_columnType[col] = type;
     m_memoColumn = col;
     m_memoSelected = true;
     return;
   } else {//                                       clashes with prior selection
-    if(m_columnType[col] == type) {  //               nothing changed
+    if (m_columnType[col] == type) { //               nothing changed
       return;
     }
     m_memoSelected = false;//                      clear incorrect selection
@@ -416,22 +416,22 @@ void CsvImporterDlg::memoColumnSelected(int col)
 void CsvImporterDlg::payeeColumnSelected(int col)
 {
   QString type = "payee";
-  if(col < 0) {  //                              it is unset
+  if (col < 0) { //                              it is unset
     return;
   }
 // if a previous payee field is detected, but in a different column...
-  if((m_payeeColumn != -1) && (m_columnType[m_payeeColumn] == type)  && (m_payeeColumn != col)) {
+  if ((m_payeeColumn != -1) && (m_columnType[m_payeeColumn] == type)  && (m_payeeColumn != col)) {
     m_columnType[m_payeeColumn].clear();
   }
   int ret = validateColumn(col, type);
-  if(ret == KMessageBox::Ok) {
+  if (ret == KMessageBox::Ok) {
     comboBoxBnk_payeeCol->setCurrentIndex(col);// accept new column
     m_payeeSelected = true;
     m_payeeColumn = col;
     m_columnType[m_payeeColumn] = type;
     return;
   }
-  if(ret == KMessageBox::No) {
+  if (ret == KMessageBox::No) {
     comboBoxBnk_payeeCol->setCurrentIndex(-1);
   }
 }
@@ -439,23 +439,23 @@ void CsvImporterDlg::payeeColumnSelected(int col)
 void CsvImporterDlg::numberColumnSelected(int col)
 {
   QString type = "number";
-  if(col < 0) {  //                              it is unset
+  if (col < 0) { //                              it is unset
     return;
   }
 // if a previous number field is detected, but in a different column...
-  if((m_numberColumn != -1) && (m_columnType[m_numberColumn] == type)  && (m_numberColumn != col)) {
+  if ((m_numberColumn != -1) && (m_columnType[m_numberColumn] == type)  && (m_numberColumn != col)) {
     m_columnType[m_numberColumn].clear();
   }
   int ret = validateColumn(col, type);
 
-  if(ret == KMessageBox::Ok) {
+  if (ret == KMessageBox::Ok) {
     comboBoxBnk_numberCol->setCurrentIndex(col);// accept new column
     m_numberSelected = true;
     m_numberColumn = col;
     m_columnType[m_numberColumn] = type;
     return;
   }
-  if(ret == KMessageBox::No) {
+  if (ret == KMessageBox::No) {
     comboBoxBnk_numberCol->setCurrentIndex(-1);
   }
 }
@@ -469,7 +469,7 @@ void CsvImporterDlg::slotClose()
 
 void CsvImporterDlg::saveSettings()
 {
-  if(!m_csvprocessing->inFileName().isEmpty()) { //  don't save column numbers if no file loaded
+  if (!m_csvprocessing->inFileName().isEmpty()) { //  don't save column numbers if no file loaded
     KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
 
     KConfigGroup mainGroup(config, "MainWindow");
@@ -631,7 +631,7 @@ void CsvImporterDlg::resetComboBox(const QString& comboBox, const int& col)
   QStringList fieldType;
   fieldType << "amount" << "credit" << "date" << "debit" << "memo" << "number" << "payee";
   int index = fieldType.indexOf(comboBox);
-  switch(index) {
+  switch (index) {
     case 0://  amount
       comboBoxBnk_amountCol->setCurrentIndex(-1);
       m_amountSelected = false;
@@ -672,20 +672,20 @@ void CsvImporterDlg::resetComboBox(const QString& comboBox, const int& col)
 
 void CsvImporterDlg::tabSelected(int index)
 {
-  if(index == 2) return; //                      Settings
+  if (index == 2) return; //                      Settings
 
-  switch(index) {
+  switch (index) {
     case 0 ://  "Banking" selected
-      if((!m_investProcessing->inFileName().isEmpty()) && (m_currentUI == "Invest")) {
+      if ((!m_investProcessing->inFileName().isEmpty()) && (m_currentUI == "Invest")) {
         int ret = KMessageBox::warningContinueCancel(this, i18n("<center>Are you sure you want to switch from '%1'?.</center>"
                   "<center>You will lose your current settings.</center><center>Continue or Cancel?</center>",
                   m_currentUI), i18n("Changing Tab"), KStandardGuiItem::cont(),
                   KStandardGuiItem::cancel());
-        if(ret == KMessageBox::Cancel) {
+        if (ret == KMessageBox::Cancel) {
           return;
         }
       }
-      if((m_csvprocessing->inFileName().isEmpty()) || (m_currentUI == "Invest")) {
+      if ((m_csvprocessing->inFileName().isEmpty()) || (m_currentUI == "Invest")) {
         m_investmentDlg->saveSettings();//            leaving "Invest" so save settings
         m_csvprocessing->readSettings();//            ...and load "Banking"
         tableWidget->reset();
@@ -696,16 +696,16 @@ void CsvImporterDlg::tabSelected(int index)
       m_currentUI = "Banking";
       break;
     case 1 ://  "Invest" selected
-      if((!m_csvprocessing->inFileName().isEmpty())  && (m_currentUI == "Banking")) {
+      if ((!m_csvprocessing->inFileName().isEmpty())  && (m_currentUI == "Banking")) {
         int ret = KMessageBox::warningContinueCancel(this, i18n("<center>Are you sure you want to switch from '%1'?.</center>"
                   "<center>You will lose your current settings.</center><center>Continue or Cancel?</center>",
                   m_currentUI), i18n("Changing Tab"), KStandardGuiItem::cont(),
                   KStandardGuiItem::cancel());
-        if(ret == KMessageBox::Cancel) {
+        if (ret == KMessageBox::Cancel) {
           return;
         }
       }
-      if((m_investProcessing->inFileName().isEmpty()) || (m_currentUI == "Banking")) {
+      if ((m_investProcessing->inFileName().isEmpty()) || (m_currentUI == "Banking")) {
         saveSettings();//                             leaving "Banking" so save settings
         m_investProcessing->readSettings();//         ...and load "Invest"
         tableWidget->reset();
@@ -726,13 +726,13 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
 
   //  Clear background
 
-  for(int row = 0; row < m_endLine; row++) {
-    if(tableWidget->item(row, col) != 0) {
+  for (int row = 0; row < m_endLine; row++) {
+    if (tableWidget->item(row, col) != 0) {
       tableWidget->item(row, col)->setBackground(m_clearBrush);
     }
   }
 
-  if(type == "amount" || type == "credit" || type == "debit" || type == "price" || type == "quantity") {
+  if (type == "amount" || type == "credit" || type == "debit" || type == "price" || type == "quantity") {
 
     //  Set first and last rows
 
@@ -745,9 +745,9 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
     QTableWidgetItem* errorItem(0);
     //  Check if this col contains empty cells
     int row = 0;
-    for(row = first - 1; row < last; row++) {
-      if(tableWidget->item(row, col) == 0) { //       empty cell
-        if(((m_fileType == "Banking") && (m_csvprocessing->importNow())) ||
+    for (row = first - 1; row < last; row++) {
+      if (tableWidget->item(row, col) == 0) { //       empty cell
+        if (((m_fileType == "Banking") && (m_csvprocessing->importNow())) ||
             ((m_fileType == "Invest") && (m_investProcessing->importNow()))) {
           //                                     if importing, this is error
           KMessageBox::sorry(this, (i18n("Row number %1 may be a header line, as it has an incomplete set of entries."
@@ -760,7 +760,7 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
                   "<center>Please check your selections.</center><center>Continue or Cancel?</center>",
                   col + 1 , row + 1), i18n("Selections Warning"), KStandardGuiItem::cont(),
                   KStandardGuiItem::cancel());
-        if(ret == KMessageBox::Continue) {
+        if (ret == KMessageBox::Continue) {
           continue;
         }
         return;//                                     empty cell
@@ -773,29 +773,29 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
         newTxt = m_parse->possiblyReplaceSymbol(txt);//  update data
         tableWidget->item(row, col)->setText(newTxt);//  highlight selection
         tableWidget->item(row, col)->setBackground(m_colorBrush);
-        if(m_parse->invalidConversion()) {
+        if (m_parse->invalidConversion()) {
           invalidResult = true;
           errorItem = tableWidget->item(row, col);
           errorItem->setBackground(m_errorBrush);
           tableWidget->scrollToItem(errorItem, QAbstractItemView::EnsureVisible);
-          if(errorRow == 0) {
+          if (errorRow == 0) {
             errorRow = row;
           }
         }
-        if(m_parse->symbolFound()) {
+        if (m_parse->symbolFound()) {
           symbolFound = true;
         }
-        if(newTxt == txt) { //                        no matching symbol found
+        if (newTxt == txt) { //                        no matching symbol found
           continue;
         }
       }
-      if(!symbolFound) {
+      if (!symbolFound) {
         errorItem = tableWidget->item(row, col);
         errorItem->setBackground(m_errorBrush);
       }
     }//  last row
 
-    if(!symbolFound) {//                            no symbol found
+    if (!symbolFound) {//                            no symbol found
       tableWidget->scrollToItem(errorItem, QAbstractItemView::EnsureVisible);
       KMessageBox::sorry(this, i18n("<center>The selected decimal symbol was not present in column %1.</center>"
                                     "<center>If the <b>decimal</b> symbol displayed does not match your system setting</center>"
@@ -805,11 +805,11 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
       return;
     }
 
-    if(invalidResult) {
+    if (invalidResult) {
       KMessageBox::sorry(0, i18n("<center>The selected decimal symbol/thousands separator</center>"
                                  "<center>have produced invalid results in row %1, and possibly more.</center>"
                                  "<center>Please try again.</center>", errorRow + 1), i18n("Invalid Conversion"));
-      if(m_fileType == "Banking") {
+      if (m_fileType == "Banking") {
         m_csvprocessing->readFile("", 0);
       } else {
         m_investProcessing->readFile("", 0);
@@ -822,16 +822,16 @@ void CsvImporterDlg::decimalSymbolSelected(int index)
 {
   restoreBackground();//                              remove selection highlighting
 
-  if(index < 0) return;
+  if (index < 0) return;
 
-  if(m_startLine > m_endLine) {
+  if (m_startLine > m_endLine) {
     KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
                                "<center>Please correct your settings.</center>"), i18n("CSV import"));
     return;
   }
 
-  if(m_decimalSymbolChanged) {
-    if(m_fileType == "Banking") {
+  if (m_decimalSymbolChanged) {
+    if (m_fileType == "Banking") {
       m_csvprocessing->readFile("", 0);
     } else {
       m_investProcessing->readFile("", 0);
@@ -848,9 +848,9 @@ void CsvImporterDlg::decimalSymbolSelected(int index)
 
   //  Update the UI
 
-  if(m_fileType == "Banking") {
-    if((!m_csvprocessing->inFileName().isEmpty()) && ((m_amountColumn >= 0) || ((m_debitColumn >= 0) && (m_creditColumn >= 0)))) {
-      if(m_amountColumn >= 0) {
+  if (m_fileType == "Banking") {
+    if ((!m_csvprocessing->inFileName().isEmpty()) && ((m_amountColumn >= 0) || ((m_debitColumn >= 0) && (m_creditColumn >= 0)))) {
+      if (m_amountColumn >= 0) {
         updateDecimalSymbol("amount", m_amountColumn);
       } else {
         updateDecimalSymbol("debit", m_debitColumn);
@@ -859,8 +859,8 @@ void CsvImporterDlg::decimalSymbolSelected(int index)
       m_decimalSymbolChanged = true;
     }
   } else {
-    if(m_fileType == "Invest") {
-      if(!m_investProcessing->inFileName().isEmpty()) {
+    if (m_fileType == "Invest") {
+      if (!m_investProcessing->inFileName().isEmpty()) {
         updateDecimalSymbol("amount", m_investProcessing->amountColumn());
         updateDecimalSymbol("price", m_investProcessing->priceColumn());
         updateDecimalSymbol("quantity", m_investProcessing->quantityColumn());
@@ -882,9 +882,9 @@ void CsvImporterDlg::thousandsSeparatorChanged()
 
 void CsvImporterDlg::restoreBackground()
 {
-  for(int row = 0; row < m_csvprocessing->lastLine(); row++)
-    for(int col = 0; col < m_csvprocessing->endColumn(); col++)
-      if(tableWidget->item(row, col) != 0) {
+  for (int row = 0; row < m_csvprocessing->lastLine(); row++)
+    for (int col = 0; col < m_csvprocessing->endColumn(); col++)
+      if (tableWidget->item(row, col) != 0) {
         tableWidget->item(row, col)->setBackground(m_clearBrush);
       }
 }

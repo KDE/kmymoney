@@ -70,7 +70,7 @@ void InvestmentDlg::init()
   m_csvDialog->tableWidget->setWordWrap(false);
   m_csvDialog->comboBox_decimalSymbol->setCurrentIndex(-1);
 
-  for(int i = 0; i < MAXCOL; i++) {
+  for (int i = 0; i < MAXCOL; i++) {
     QString t;
     t.setNum(i + 1);
     m_csvDialog->comboBoxInv_amountCol->addItem(t) ;
@@ -96,7 +96,7 @@ void InvestmentDlg::init()
 
 void InvestmentDlg::changedType(const QString& newType)
 {
-  if((newType == "buy") || (newType == "sell") || (newType == "divx") ||
+  if ((newType == "buy") || (newType == "sell") || (newType == "divx") ||
       (newType == "reinvdiv") || (newType == "shrsin") || (newType == "shrsout")) {
     m_investProcessing->setTrInvestDataType(newType);
   }
@@ -111,7 +111,7 @@ void InvestmentDlg::slotClose()
 
 void InvestmentDlg::saveSettings()
 {
-  if(!m_investProcessing->inFileName().isEmpty()) {  //          don't save column numbers if no file loaded
+  if (!m_investProcessing->inFileName().isEmpty()) { //          don't save column numbers if no file loaded
     KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
 
     KConfigGroup investmentGroup(config, "InvestmentSettings");
@@ -161,7 +161,7 @@ void InvestmentDlg::closeEvent(QCloseEvent *event)
 void InvestmentDlg::resizeEvent(QResizeEvent * event)
 {
   event->accept();
-  if(!m_investProcessing->inFileName().isEmpty())
+  if (!m_investProcessing->inFileName().isEmpty())
     m_investProcessing->updateScreen();
 }
 
