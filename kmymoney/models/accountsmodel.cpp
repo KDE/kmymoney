@@ -827,7 +827,8 @@ void InstitutionsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType
 
   // if an account was added then add the item which will represent it only for real accounts
   const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
-  if (!account || account->parentAccountId().isEmpty())
+  // nothing to do for root accounts and categories
+  if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense())
     return;
 
   static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, *account);
@@ -855,7 +856,8 @@ void InstitutionsModel::slotObjectModified(MyMoneyFile::notificationObjectT objT
 
   // if an account was modified then modify the item which represents it
   const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
-  if (!account || account->parentAccountId().isEmpty())
+  // nothing to do for root accounts and categories
+  if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense())
     return;
 
   QStandardItem *accountItem = d->itemFromAccountId(this, account->id());
@@ -888,6 +890,8 @@ void InstitutionsModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objTy
 
   // if an account was removed then remove the item which represents it and recompute the institution's value
   QStandardItem *accountItem = d->itemFromAccountId(this, id);
+  if (!accountItem)
+    return; // this could happen if the account isIncomeExpense
   MyMoneyAccount oldAccount = accountItem->data(AccountRole).value<MyMoneyAccount>();
   QStandardItem *institutionItem = d->itemFromAccountId(this, oldAccount.institutionId());
 
