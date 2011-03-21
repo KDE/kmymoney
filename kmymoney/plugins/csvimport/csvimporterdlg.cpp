@@ -677,7 +677,7 @@ void CsvImporterDlg::tabSelected(int index)
   switch (index) {
     case 0 ://  "Banking" selected
       if ((!m_investProcessing->inFileName().isEmpty()) && (m_currentUI == "Invest")) {
-        int ret = KMessageBox::warningContinueCancel(this, i18n("<center>Are you sure you want to switch from '%1'?.</center>"
+        int ret = KMessageBox::warningContinueCancel(this, i18n("<center>Are you sure you want to switch from '%1'?</center>"
                   "<center>You will lose your current settings.</center><center>Continue or Cancel?</center>",
                   m_currentUI), i18n("Changing Tab"), KStandardGuiItem::cont(),
                   KStandardGuiItem::cancel());
