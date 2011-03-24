@@ -16,6 +16,9 @@
    </property>
    <item>
     <widget class="KTabWidget" name="m_tab">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <widget class="QWidget" name="list">
       <attribute name="title">
        <string>List</string>
@@ -65,54 +68,63 @@
        <string>Icons</string>
       </attribute>
       <layout class="QVBoxLayout" name="m_iconGroupLayout">
-        <item>
-          <widget class="QGroupBox" name="m_assetsGroup">
-            <property name="title">
-               <string>Assets</string>
+       <item>
+        <widget class="QGroupBox" name="m_assetsGroup">
+         <property name="title">
+          <string>Assets</string>
+         </property>
+         <layout class="QVBoxLayout" name="m_assetsListLayout">
+          <item>
+           <widget class="KListWidget" name="m_assetsList">
+            <property name="dragDropMode">
+             <enum>QAbstractItemView::InternalMove</enum>
             </property>
-            <layout class="QVBoxLayout" name="m_assetsListLayout">
-              <item>
-                <widget class="KListWidget" name="m_assetsList">
-                  <property name="viewMode">
-                    <enum>QListView::IconMode</enum>
-                  </property>
-                </widget>
-                </item>
-            </layout>
-          </widget>
-        </item>
-        <item>
-          <widget class="QGroupBox" name="m_liabilitiesGroup">
-            <property name="title">
-               <string>Liabilities</string>
+            <property name="viewMode">
+             <enum>QListView::IconMode</enum>
             </property>
-            <layout class="QVBoxLayout" name="m_liabilitiesListLayout">
-              <item>
-                <widget class="KListWidget" name="m_liabilitiesList">
-                  <property name="viewMode">
-                    <enum>QListView::IconMode</enum>
-                  </property>
-                </widget>
-              </item>
-            </layout>
-          </widget>
-        </item>
-        <item>
-          <widget class="QGroupBox" name="m_equitiesGroup">
-            <property name="title">
-               <string>Equities</string>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="m_liabilitiesGroup">
+         <property name="title">
+          <string>Liabilities</string>
+         </property>
+         <layout class="QVBoxLayout" name="m_liabilitiesListLayout">
+          <item>
+           <widget class="KListWidget" name="m_liabilitiesList">
+            <property name="dragDropMode">
+             <enum>QAbstractItemView::InternalMove</enum>
             </property>
-            <layout class="QVBoxLayout" name="m_equitiesListLayout">
-              <item>
-                <widget class="KListWidget" name="m_equitiesList">
-                  <property name="viewMode">
-                    <enum>QListView::IconMode</enum>
-                  </property>
-                </widget>
-              </item>
-            </layout>
-          </widget>
-        </item>
+            <property name="viewMode">
+             <enum>QListView::IconMode</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="m_equitiesGroup">
+         <property name="title">
+          <string>Equities</string>
+         </property>
+         <layout class="QVBoxLayout" name="m_equitiesListLayout">
+          <item>
+           <widget class="KListWidget" name="m_equitiesList">
+            <property name="dragDropMode">
+             <enum>QAbstractItemView::InternalMove</enum>
+            </property>
+            <property name="viewMode">
+             <enum>QListView::IconMode</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
       </layout>
      </widget>
     </widget>
@@ -179,6 +191,11 @@
    <header>kmymoneyaccounttreeview.h</header>
   </customwidget>
   <customwidget>
+   <class>KListWidget</class>
+   <extends>QListWidget</extends>
+   <header>klistwidget.h</header>
+  </customwidget>
+  <customwidget>
    <class>KPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
@@ -193,11 +210,6 @@
    <extends>QTabWidget</extends>
    <header>ktabwidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>KListWidget</class>
-   <extends>QlistWidget</extends>
-   <header>klistwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
