@@ -33,34 +33,34 @@
 #include <kurlrequester.h>
 
 #include "pluginsettings.h"
-#include "ui_pluginsettingsdecl.h"
 
-class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
+PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
+  QWidget(parent)
 {
-public:
-  PluginSettingsWidget(QWidget* parent = 0) : QWidget(parent) {
-    setupUi(this);
-    m_checkTemplatePreviewHTMLPart = new KHTMLPart(m_previewFrame);
-    QVBoxLayout *layout = new QVBoxLayout;
-    m_previewFrame->setLayout(layout);
-    layout->addWidget(m_checkTemplatePreviewHTMLPart->view());
+  setupUi(this);
+  m_checkTemplatePreviewHTMLPart = new KHTMLPart(m_previewFrame);
+  QVBoxLayout *layout = new QVBoxLayout;
+  m_previewFrame->setLayout(layout);
+  layout->addWidget(m_checkTemplatePreviewHTMLPart->view());
 
-    connect(kcfg_checkTemplateFile, SIGNAL(urlSelected(const KUrl&)), this, SLOT(urlSelected(const KUrl&)));
-    connect(kcfg_checkTemplateFile, SIGNAL(returnPressed(const QString&)), this, SLOT(returnPressed(const QString&)));
-  }
+  connect(kcfg_checkTemplateFile, SIGNAL(urlSelected(const KUrl&)),
+          this, SLOT(urlSelected(const KUrl&)));
+  connect(kcfg_checkTemplateFile, SIGNAL(returnPressed(const QString&)),
+          this, SLOT(returnPressed(const QString&)));
+}
 
-public slots:
-  virtual void urlSelected(const KUrl& url) {
+void PluginSettingsWidget::urlSelected(const KUrl& url)
+{
+  if (!url.isEmpty())
     m_checkTemplatePreviewHTMLPart->openUrl(url);
-  }
+}
 
-  virtual void returnPressed(const QString& url) {
+void PluginSettingsWidget::returnPressed(const QString& url)
+{
+  if (!url.isEmpty())
     m_checkTemplatePreviewHTMLPart->openUrl(url);
-  }
+}
 
-private:
-  KHTMLPart* m_checkTemplatePreviewHTMLPart;
-};
 
 K_PLUGIN_FACTORY(KCMPrintCheckFactory,
                  registerPlugin<KCMPrintCheck>();

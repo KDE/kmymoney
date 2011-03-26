@@ -21,9 +21,26 @@
 #define KCM_PRINTCHECK_H
 
 #include <kcmodule.h>
+#include <QWidget>
+#include "ui_pluginsettingsdecl.h"
 
 class QStringList;
 class KPluginInfo;
+class KHTMLPart;
+
+class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
+{
+  Q_OBJECT
+public:
+  PluginSettingsWidget(QWidget* parent = 0);
+
+public slots:
+  void urlSelected(const KUrl& url);
+  void returnPressed(const QString& url);
+
+private:
+  KHTMLPart* m_checkTemplatePreviewHTMLPart;
+};
 
 class KCMPrintCheck : public KCModule
 {
