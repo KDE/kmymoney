@@ -6437,11 +6437,10 @@ void KMyMoneyApp::Private::setCustomColors()
   if (KMyMoneyGlobalSettings::useSystemColors()) {
     qApp->setStyleSheet(QString());
   } else {
-    qApp->setStyleSheet("QAbstractItemView { background-color: " + KMyMoneyGlobalSettings::listBGColor().name() + ';' +
+    qApp->setStyleSheet("QTreeView, QTableView#register, QTableView#m_register, QTableView#splittable, QListView { background-color: " + 
+                        KMyMoneyGlobalSettings::listBGColor().name() + ';' +
                         "alternate-background-color: " + KMyMoneyGlobalSettings::listColor().name() + ';' +
-                        "background-clip: content;}" +
-                        "QTableView { gridline-color: " + KMyMoneyGlobalSettings::listGridColor().name() + ";}" +
-                        "QHeaderView { background-color: pallete(base);}");
+                        "background-clip: content;}");
   }
 }
 

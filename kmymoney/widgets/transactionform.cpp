@@ -199,7 +199,6 @@ TransactionForm::TransactionForm(QWidget *parent) :
   // make sure, that the table is 'invisible' by setting up the right background
   // keep the original color group for painting the cells though
   QPalette p = palette();
-  m_cellColorGroup = p;
   QBrush brush = p.brush(QPalette::Background);
   QColor color = brush.color();
   color.setAlpha(0);

@@ -229,7 +229,6 @@ signals:
 
 protected:
   KMyMoneyRegister::Transaction*       m_transaction;
-  QPalette                             m_cellColorGroup;
   TabBar*                              m_tabBar;
   TransactionFormItemDelegate         *m_itemDelegate;
 };

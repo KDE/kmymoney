@@ -75,6 +75,9 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
     m_editMemo(0),
     m_editAmount(0)
 {
+  // used for custom coloring with the help of the application's stylesheet
+  setObjectName(QLatin1String("splittable"));
+
   // setup the transactions table
   setRowCount(1);
   setColumnCount(3);

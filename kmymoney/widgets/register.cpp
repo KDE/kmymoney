@@ -475,6 +475,8 @@ Register::Register(QWidget *parent) :
     m_modifiers(Qt::KeyboardModifiers(Qt::NoModifier)),
     m_detailsColumnType(PayeeFirst)
 {
+  // used for custom coloring with the help of the application's stylesheet
+  setObjectName(QLatin1String("register"));
   m_itemDelegate = new RegisterItemDelegate(this);
 
   setEditTriggers(QAbstractItemView::NoEditTriggers);
