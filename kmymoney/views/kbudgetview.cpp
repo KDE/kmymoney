@@ -134,6 +134,8 @@ BudgetAccountsProxyModel::BudgetAccountsProxyModel(QObject *parent/* = 0*/) :
   */
 QVariant BudgetAccountsProxyModel::data(const QModelIndex &index, int role) const
 {
+  if (!MyMoneyFile::instance()->storageAttached())
+    return QVariant();
   QModelIndex normalizedIndex = BudgetAccountsProxyModel::index(index.row(), 0, index.parent());
   if (role == AccountsModel::AccountBalanceRole ||
       role == AccountsModel::AccountBalanceDisplayRole ||
