@@ -1450,10 +1450,18 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
       if (acc.isAssetLiability()
           || acc.accountGroup() == MyMoneyAccount::Equity) {
         if (tabbar) {
+          tabbar->setCurrentIndex(KMyMoneyRegister::ActionTransfer);
           tabbar->setTabEnabled(KMyMoneyRegister::ActionDeposit, false);
           tabbar->setTabEnabled(KMyMoneyRegister::ActionWithdrawal, false);
         }
-        if (val.isNegative())
+        if (val.isZero()) {
+          KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(m_editWidgets["cashflow"]);
+          if (cashflow && (cashflow->direction() == KMyMoneyRegister::Deposit)) {
+            categoryLabel->setText(i18n("Transfer from"));
+          } else {
+            categoryLabel->setText(i18n("Transfer to"));
+          }
+        } else if (val.isNegative())
           categoryLabel->setText(i18n("Transfer from"));
         else
           categoryLabel->setText(i18n("Transfer to"));
