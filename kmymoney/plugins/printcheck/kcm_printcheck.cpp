@@ -35,7 +35,7 @@
 #include "pluginsettings.h"
 
 PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
-  QWidget(parent)
+    QWidget(parent)
 {
   setupUi(this);
   m_checkTemplatePreviewHTMLPart = new KHTMLPart(m_previewFrame);
