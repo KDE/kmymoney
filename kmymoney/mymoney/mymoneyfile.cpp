@@ -356,7 +356,9 @@ void MyMoneyFile::commitTransaction(void)
   while (it != d->m_changeSet.constEnd()) {
     if ((*it).notificationMode() == notifyRemove) {
       emit objectRemoved((*it).objectType(), (*it).id());
-
+      // if there is a balance change recorded for this account remove it since the account itself will be removed
+      // this can happen when deleting categories that have transactions and the reassign category feature was used
+      d->m_balanceChangedSet.remove((*it).id());
     } else {
       const MyMoneyObject * const obj = d->m_cache.object((*it).id());
       if (obj) {
