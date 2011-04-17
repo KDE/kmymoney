@@ -3364,6 +3364,11 @@ void KMyMoneyApp::slotAccountDelete(void)
   if (exit)
     return;
 
+  // retain the account name for a possible later usage in the error message box
+  // since the account removal notifies the views the selected account can be changed
+  // so we make sure by doing this that we display the correct name in the error message
+  QString selectedAccountName = d->m_selectedAccount.name();
+
   // at this point, we must not have a reference to the account
   // to be deleted anymore
   switch (d->m_selectedAccount.accountGroup()) {
@@ -3374,14 +3379,14 @@ void KMyMoneyApp::slotAccountDelete(void)
 
         // case A - only a single, unused category without subcats selected
         if (d->m_selectedAccount.accountList().isEmpty()) {
-          if (!needAskUser || (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("Do you really want to delete category <b>%1</b>?", d->m_selectedAccount.name()) + QString("</qt>")) == KMessageBox::Yes)) {
+          if (!needAskUser || (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("Do you really want to delete category <b>%1</b>?", selectedAccountName) + QString("</qt>")) == KMessageBox::Yes)) {
             try {
               file->removeAccount(d->m_selectedAccount);
               d->m_selectedAccount.clearId();
               slotUpdateActions();
               ft.commit();
             } catch (MyMoneyException* e) {
-              KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete category <b>%1</b>. Cause: %2", d->m_selectedAccount.name(), e->what()) + QString("</qt>"));
+              KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete category <b>%1</b>. Cause: %2", selectedAccountName, e->what()) + QString("</qt>"));
               delete e;
             }
           }
@@ -3395,7 +3400,7 @@ void KMyMoneyApp::slotAccountDelete(void)
         int result = KMessageBox::questionYesNoCancel(this, QString("<qt>") +
                      i18n("Do you want to delete category <b>%1</b> with all its sub-categories or only "
                           "the category itself? If you only delete the category itself, all its sub-categories "
-                          "will be made sub-categories of <b>%2</b>.", d->m_selectedAccount.name(), parentAccount.name()) + QString("</qt>"),
+                          "will be made sub-categories of <b>%2</b>.", selectedAccountName, parentAccount.name()) + QString("</qt>"),
                      QString(),
                      KGuiItem(i18n("Delete all")),
                      KGuiItem(i18n("Just the category")));
@@ -3428,7 +3433,7 @@ void KMyMoneyApp::slotAccountDelete(void)
         }
         if (!accountsToReparent.isEmpty() && need_confirmation) {
           if (KMessageBox::questionYesNo(this, i18n("<p>Some sub-categories of category <b>%1</b> cannot "
-                                         "be deleted, because they are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>", d->m_selectedAccount.name(), parentAccount.name())) != KMessageBox::Yes) {
+                                         "be deleted, because they are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>", selectedAccountName, parentAccount.name())) != KMessageBox::Yes) {
             return; // user gets wet feet...
           }
         }
@@ -3447,7 +3452,7 @@ void KMyMoneyApp::slotAccountDelete(void)
           // the old account list, which is no longer valid
           d->m_selectedAccount = file->account(d->m_selectedAccount.id());
         } catch (MyMoneyException* e) {
-          KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete a sub-category of category <b>%1</b>. Reason: %2", d->m_selectedAccount.name(), e->what()) + QString("</qt>"));
+          KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete a sub-category of category <b>%1</b>. Reason: %2", selectedAccountName, e->what()) + QString("</qt>"));
           delete e;
           return;
         }
@@ -3459,7 +3464,7 @@ void KMyMoneyApp::slotAccountDelete(void)
         return; // can't delete accounts which still have subaccounts
 
       if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to "
-                                     "delete account <b>%1</b>?</p>", d->m_selectedAccount.name())) != KMessageBox::Yes) {
+                                     "delete account <b>%1</b>?</p>", selectedAccountName)) != KMessageBox::Yes) {
         return; // ok, you don't want to? why did you click then, hmm?
       }
   } // switch;
@@ -3470,7 +3475,7 @@ void KMyMoneyApp::slotAccountDelete(void)
     slotUpdateActions();
     ft.commit();
   } catch (MyMoneyException* e) {
-    KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", d->m_selectedAccount.name(), e->what()));
+    KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", selectedAccountName, e->what()));
     delete e;
   }
 }
