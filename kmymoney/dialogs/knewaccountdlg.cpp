@@ -147,6 +147,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   MyMoneyFile *file = MyMoneyFile::instance();
 
   // initialize the m_parentAccount member
+  MyMoneyAccount::accountTypeE filterAccountGroup = m_account.accountGroup();
   switch (m_account.accountGroup()) {
     case MyMoneyAccount::Asset:
       m_parentAccount = file->asset();
@@ -165,10 +166,13 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
       break;
     default:
       qDebug("Seems we have an account that hasn't been mapped to the top five");
-      if (m_categoryEditor)
+      if (m_categoryEditor) {
         m_parentAccount = file->income();
-      else
+        filterAccountGroup = MyMoneyAccount::Income;
+      } else {
         m_parentAccount = file->asset();
+        filterAccountGroup = MyMoneyAccount::Asset;
+      }
   }
 
   m_amountGroup->setId(m_grossAmount, 0);
@@ -178,7 +182,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   m_filterProxyModel = new HierarchyFilterProxyModel(this);
   m_filterProxyModel->setHideClosedAccounts(true);
   m_filterProxyModel->setHideEquityAccounts(true);
-  m_filterProxyModel->addAccountGroup(m_account.accountGroup());
+  m_filterProxyModel->addAccountGroup(filterAccountGroup);
   m_filterProxyModel->setCurrentAccountId(m_account.id());
   m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
   m_filterProxyModel->setDynamicSortFilter(true);
@@ -231,15 +235,15 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income));
     typeCombo->addItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense));
 
-    // Hardcoded but acceptable
+    // Hardcoded but acceptable - if above we set the default to income do the same here
     switch (account.accountType()) {
-      case MyMoneyAccount::Income:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income), false);
+      case MyMoneyAccount::Expense:
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense), false);
         break;
 
-      case MyMoneyAccount::Expense:
+      case MyMoneyAccount::Income:
       default:
-        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Expense), false);
+        typeCombo->setCurrentItem(KMyMoneyUtils::accountTypeToString(MyMoneyAccount::Income), false);
         break;
     }
     m_currency->setEnabled(true);
@@ -809,6 +813,9 @@ void KNewAccountDlg::slotAccountTypeChanged(const QString& typeStr)
           break;
       }
       m_account.setAccountType(type);
+      // update the account group displayed in the accounts hierarchy
+      m_filterProxyModel->clear();
+      m_filterProxyModel->addAccountGroup(m_account.accountGroup());
     }
   } catch (MyMoneyException *e) {
     delete e;
