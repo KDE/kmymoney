@@ -151,6 +151,7 @@ int KSelectDatabaseDlg::exec()
     m_requiredFields->setOkButton(button(KDialog::Ok));
 
     m_widget->checkPreLoad->setChecked(false);
+    m_sqliteSelected = !m_widget->urlSqlite->text().isEmpty();
   }
 
   return (KDialog::exec());
