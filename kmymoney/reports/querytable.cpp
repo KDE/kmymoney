@@ -980,20 +980,16 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
       // find the split with the category, which has the actual amount of the dividend
       QList<MyMoneySplit> splits = (*it_transaction).splits();
       QList<MyMoneySplit>::const_iterator it_split = splits.constBegin();
-      bool found = false;
       while (it_split != splits.constEnd()) {
         ReportAccount acc = (*it_split).accountId();
         if (acc.isIncomeExpense()) {
-          found = true;
-          break;
+          cashincome += CashFlowListItem((*it_transaction).postDate(), -(*it_split).value() * price);
+	  paidDividend += ((-(*it_split).value()) * price).convert(fraction);
         }
         ++it_split;
       }
-
-      if (found) {
-        cashincome += CashFlowListItem((*it_transaction).postDate(), -(*it_split).value() * price);
-        paidDividend += ((-(*it_split).value()) * price).convert(fraction);
-      }
+    } else if (action == MyMoneySplit::ActionAddShares) {
+       // Add shares is not a buy operation, do nothing
     } else {
       //if the split does not match any action above, add it as buy or sell depending on sign
 
