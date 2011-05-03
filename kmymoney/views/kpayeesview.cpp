@@ -401,17 +401,10 @@ void KPayeesView::slotSelectPayee(void)
     m_tabWidget->setEnabled(false); // disable tab widget
     m_balanceLabel->hide();
     clearItemData();
-    // disable renaming in all listviewitem
-    for (int i = 0; i < m_payeesList->count(); ++i)
-      m_payeesList->item(i)->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    return;
   }
   // otherwise we have just one selected, enable payee information widget
   m_tabWidget->setEnabled(true);
   m_balanceLabel->show();
-  // enable renaming in all listviewitem
-  for (int i = 0; i < m_payeesList->count(); ++i)
-    m_payeesList->item(i)->setFlags(Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
   // as of now we are updating only the last selected payee, and until
   // selection mode of the QListView has been changed to Extended, this
