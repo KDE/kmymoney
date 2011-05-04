@@ -60,7 +60,7 @@ public:
   ConvertDate*        m_convertDate;
   CsvProcessing*      m_csvprocessing;
   CsvImporterDlg*     m_csvDialog;
-  InvestmentDlg*      m_investmentDlg;//below
+  InvestmentDlg*      m_investmentDlg;
   InvestProcessing*   m_investProcessing;
   CsvImporterPlugin*  m_plugin;
   Parse*              m_parse;

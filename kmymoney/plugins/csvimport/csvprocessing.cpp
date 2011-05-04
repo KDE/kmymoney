@@ -97,7 +97,9 @@ void CsvProcessing::init()
 
 void CsvProcessing::fileDialog()
 {
-  if (m_csvDialog->m_fileType != "Banking") return;
+  if (m_csvDialog->m_fileType != "Banking") {
+    return;
+  }
   KSharedConfigPtr config =
     KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
   KConfigGroup profileGroup(config, "Profile");
@@ -149,7 +151,9 @@ void CsvProcessing::fileDialog()
                                i18n("File access error"));
     return;
   }
-  if (m_inFileName.isEmpty()) return;
+  if (m_inFileName.isEmpty()) {
+    return;
+  }
   m_importNow = false;//                       Avoid attempting date formatting on headers
   clearComboBoxText();//                       to clear any '*' in memo combo text
 
@@ -299,7 +303,9 @@ void CsvProcessing::findCodecs()
 
 void CsvProcessing::delimiterChanged()
 {
-  if (m_csvDialog->m_fileType != "Banking") return;
+  if (m_csvDialog->m_fileType != "Banking") {
+    return;
+  }
   if (!m_inFileName.isEmpty())
     readFile(m_inFileName, 0);
 }
@@ -624,7 +630,9 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
 
 void CsvProcessing::importClicked()
 {
-  if (m_csvDialog->m_fileType != "Banking") return;
+  if (m_csvDialog->m_fileType != "Banking") {
+    return;
+  }
 
   // The following two fields are optional so must be cleared
   // ...of any prior choices in UI
@@ -788,7 +796,9 @@ void CsvProcessing::endLineChanged()
 
 void CsvProcessing::dateFormatSelected(int dF)
 {
-  if (dF == -1) return;
+  if (dF == -1) {
+    return;
+  }
   m_dateFormatIndex = dF;
   m_date = m_dateFormats[m_dateFormatIndex];
 }

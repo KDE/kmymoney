@@ -492,7 +492,7 @@
         <attribute name="title">
          <string>Investment</string>
         </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
+        <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0,0">
          <item>
           <widget class="QLabel" name="labelInv_hdg">
            <property name="maximumSize">
@@ -618,10 +618,11 @@
               </size>
              </property>
              <property name="toolTip">
-              <string comment="verb, If necessary, select fraction/multiplier for compatibility between imported and stored prices, for instance, if one is in dollars and the other in cents.">If necessary, select fraction/multiplier for compatibility 
-between imported and stored prices.  For instance, if 
-the import price is in cents  but the file is priced in dollars,
-select 0.01.</string>
+              <string comment="verb, If necessary, select fraction/multiplier for compatibility between imported and stored prices, for instance, if one is in dollars and the other in cents.">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;If necessary, select fraction/multiplier for compatibility between imported and stored prices.  &lt;br /&gt;For instance, if the import price is in cents but the file is priced in dollars, select 0.01.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="accessibleName">
               <string notr="true"/>
@@ -867,7 +868,7 @@ incorporated into the price</string>
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="80,300,100">
            <property name="topMargin">
             <number>4</number>
            </property>
@@ -892,26 +893,42 @@ incorporated into the price</string>
               <string comment="name of security"/>
              </property>
              <property name="text">
-              <string>Security Name  </string>
+              <string>Security Name</string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="KLineEdit" name="lineEditInv_securityName">
+            <widget class="KComboBox" name="comboBoxInv_securityName">
              <property name="enabled">
               <bool>false</bool>
              </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>25</height>
-              </size>
-             </property>
              <property name="toolTip">
-              <string comment="verb, Enter name of security">Enter name of security</string>
+              <string>Name of security to import.</string>
+             </property>
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+             <property name="insertPolicy">
+              <enum>QComboBox::InsertAlphabetically</enum>
+             </property>
+             <property name="autoCompletion">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="KPushButton" name="buttonInv_hideSecurity">
+             <property name="toolTip">
+              <string>&lt;p align=&quot;center&quot;&gt;Remove security name from selection list. &lt;br&gt; It does not affect the underlying security itself.</string>
+             </property>
+             <property name="statusTip">
+              <string/>
+             </property>
+             <property name="text">
+              <string>Hide security</string>
              </property>
             </widget>
            </item>
@@ -1567,11 +1584,6 @@ Re-enabled after Open File clicked.</string>
    <class>KPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
   </customwidget>
   <customwidget>
    <class>KComboBox</class>

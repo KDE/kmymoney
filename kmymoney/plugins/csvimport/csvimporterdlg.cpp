@@ -29,6 +29,7 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QPointer>
 #include <QtCore/QFile>
+#include <QTableWidgetItem>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -82,7 +83,7 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
   m_endLine = 0;
   m_startLine = 1;
 
-  m_decimalSymbol = '.';
+  m_decimalSymbol.clear();
   m_previousType.clear();
   m_thousandsSeparator = ',';
 
@@ -154,6 +155,7 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
   connect(button_open, SIGNAL(clicked()), m_csvprocessing, SLOT(fileDialog()));
   connect(button_saveAs, SIGNAL(clicked()), m_csvprocessing, SLOT(saveAs()));
   connect(button_saveAs, SIGNAL(clicked()), m_investProcessing, SLOT(saveAs()));
+  connect(buttonInv_hideSecurity, SIGNAL(clicked()), m_investProcessing, SLOT(hideSecurity()));
 
   connect(comboBoxBnk_amountCol, SIGNAL(currentIndexChanged(int)), this, SLOT(amountColumnSelected(int)));
   connect(comboBoxBnk_amountCol, SIGNAL(activated(int)), this, SLOT(amountColumnSelected(int)));
@@ -161,7 +163,7 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
   connect(comboBoxBnk_debitCol, SIGNAL(activated(int)), this, SLOT(debitColumnSelected(int)));
   connect(comboBoxBnk_creditCol, SIGNAL(currentIndexChanged(int)), this, SLOT(creditColumnSelected(int)));
   connect(comboBoxBnk_creditCol, SIGNAL(activated(int)), this, SLOT(creditColumnSelected(int)));
-  connect(comboBox_decimalSymbol, SIGNAL(currentIndexChanged(int)), m_parse, SLOT(decimalSymbolSelected(int)));
+  connect(comboBox_decimalSymbol, SIGNAL(activated(int)), m_parse, SLOT(decimalSymbolSelected(int)));
   connect(comboBox_decimalSymbol, SIGNAL(activated(int)), this, SLOT(decimalSymbolSelected(int)));
   connect(comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), m_csvprocessing, SLOT(delimiterChanged()));
   connect(comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), m_investmentDlg->m_investProcessing, SLOT(fieldDelimiterChanged()));
@@ -173,6 +175,7 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
   connect(comboBoxBnk_numberCol, SIGNAL(currentIndexChanged(int)), this, SLOT(numberColumnSelected(int)));
   connect(comboBoxBnk_dateCol, SIGNAL(currentIndexChanged(int)), this, SLOT(dateColumnSelected(int)));
   connect(comboBoxBnk_payeeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(payeeColumnSelected(int)));
+  connect(comboBoxInv_securityName, SIGNAL(activated(QString)), m_investProcessing, SLOT(securityNameSelected(QString)));
 
   connect(spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
   connect(spinBox_skip, SIGNAL(valueChanged(int)), m_csvprocessing, SLOT(startLineChanged()));
@@ -672,7 +675,9 @@ void CsvImporterDlg::resetComboBox(const QString& comboBox, const int& col)
 
 void CsvImporterDlg::tabSelected(int index)
 {
-  if (index == 2) return; //                      Settings
+  if (index == 2) {
+    return; //                      Settings
+  }
 
   switch (index) {
     case 0 ://  "Banking" selected
@@ -822,7 +827,9 @@ void CsvImporterDlg::decimalSymbolSelected(int index)
 {
   restoreBackground();//                              remove selection highlighting
 
-  if (index < 0) return;
+  if (index < 0) {
+    return;
+  }
 
   if (m_startLine > m_endLine) {
     KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"

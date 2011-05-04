@@ -23,6 +23,7 @@
 #include <QtGui/QScrollBar>
 #include <QtGui/QDesktopWidget>
 #include <QtGui/QCloseEvent>
+#include <QtGui/QLineEdit>
 
 #include <QtCore/QFile>
 #include <QFileDialog>
@@ -44,6 +45,7 @@
 #include <KAboutData>
 #include <KAboutApplicationDialog>
 #include <kvbox.h>
+
 // ----------------------------------------------------------------------------
 // Project Headers
 
@@ -82,9 +84,11 @@ InvestProcessing::InvestProcessing()
   m_row = 0;
   m_height = 0;
   m_endColumn = 0;
+  m_completer = 0;
 
   m_inFileName.clear();
 
+  m_convertDat = new ConvertDate;
   m_parse = new Parse;
   m_redefine = new RedefineDlg;
 
@@ -96,6 +100,7 @@ InvestProcessing::~InvestProcessing()
 {
   delete m_parse;
   delete m_convertDat;
+  delete m_completer;
   delete m_redefine;
 }
 
@@ -114,6 +119,19 @@ void InvestProcessing::init()
   clearSelectedFlags();
 
   readSettings();
+
+  m_csvDialog->comboBoxInv_securityName->setCurrentIndex(-1);
+  m_csvDialog->comboBoxInv_securityName->setInsertPolicy(QComboBox::InsertAlphabetically);
+  m_csvDialog->comboBoxInv_securityName->setDuplicatesEnabled(false);
+  m_securityName = m_csvDialog->comboBoxInv_securityName->currentText();
+  QLineEdit* securityLineEdit = m_csvDialog->comboBoxInv_securityName->lineEdit();//krazy:exclude=<qclasses
+
+  m_completer = new QCompleter(m_securityList, this);
+  m_completer->setCaseSensitivity(Qt::CaseInsensitive);
+  securityLineEdit->setCompleter(m_completer);
+  
+  connect(securityLineEdit, SIGNAL(editingFinished()), this, SLOT(securityNameEdited()));
+
   m_dateFormatIndex = m_csvDialog->comboBox_dateFormat->currentIndex();
   m_convertDat->setDateFormatIndex(m_dateFormatIndex);
   m_dateFormat = m_dateFormats[m_dateFormatIndex];
@@ -139,7 +157,9 @@ void InvestProcessing::changedType(const QString& newType)
 
 void InvestProcessing::fileDialog()
 {
-  if (m_csvDialog->m_fileType != "Invest") return;
+  if (m_csvDialog->m_fileType != "Invest") {
+    return;
+  }
   m_endLine = 0;
   int position;
   if (m_invPath.isEmpty()) {
@@ -190,7 +210,6 @@ void InvestProcessing::fileDialog()
   QRect rect = m_csvDialog->tableWidget->geometry();
   rect.setHeight(9999);
   m_csvDialog->tableWidget->setGeometry(rect);
-
   readFile(m_inFileName , 0);
   m_invPath  = m_inFileName ;
   position = m_invPath .lastIndexOf("/");
@@ -222,7 +241,7 @@ void InvestProcessing::enableInputs()
   m_csvDialog->button_clear->setEnabled(true);
   m_csvDialog->spinBox_skipToLast->setEnabled(true);
   m_csvDialog->button_saveAs->setEnabled(true);
-  m_csvDialog->lineEditInv_securityName->setEnabled(true);
+  m_csvDialog->comboBoxInv_securityName->setEnabled(true);
   m_csvDialog->checkBoxInv_feeType->setEnabled(true);
 }
 
@@ -552,7 +571,9 @@ void InvestProcessing::amountColumnSelected(int col)
 
 void InvestProcessing::fieldDelimiterChanged()
 {
-  if (m_csvDialog->m_fileType != "Invest") return;
+  if (m_csvDialog->m_fileType != "Invest") {
+    return;
+  }
   if (!m_inFileName.isEmpty())
     readFile(m_inFileName, 0);
 }
@@ -604,19 +625,20 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
 
   m_csvDialog->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Interactive);
   m_screenUpdated = false;
+
   //  Display the buffer
 
   for (int i = 0; i < lineList.count(); i++) {
     m_inBuffer = lineList[i];
 
-    displayLine(m_inBuffer);//                            else display it
+    displayLine(m_inBuffer);//                             display it
     if (m_importNow) {
-      int ret = processInvestLine(m_inBuffer);  //       parse input line
+      int ret = processInvestLine(m_inBuffer);  //         parse input line
       if (ret == KMessageBox::Ok) {
         if (m_brokerage)
           investCsvImport(stBrokerage);//       add non-investment transaction to Brokerage statement
         else
-          investCsvImport(st);//                 add investment transaction to statement
+          investCsvImport(st);//                add investment transaction to statement
       } else
         m_importNow = false;
     }
@@ -839,10 +861,12 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     m_tempBuffer += 'N' + m_trInvestData.type + '\n';
     m_outBuffer += m_tempBuffer;
     m_trInvestData.memo = memo;
-    m_trInvestData.security = m_csvDialog->lineEditInv_securityName->text();
-    m_outBuffer = m_outBuffer + 'Y' + m_csvDialog->lineEditInv_securityName->text() + '\n';
-    if (!memo.isEmpty())
+    m_trInvestData.security = m_securityName;
+    m_outBuffer = m_outBuffer + 'Y' + m_csvDialog->comboBoxInv_securityName->currentText() + '\n';
+
+    if (!memo.isEmpty()) {
       m_outBuffer = m_outBuffer + 'M' + memo + '\n';
+    }
     m_outBuffer += "^\n";
     m_outBuffer = m_outBuffer.remove('"');
   }
@@ -1028,7 +1052,23 @@ void InvestProcessing::importClicked()
   if (m_csvDialog->m_fileType != "Invest") {
     return;
   }
-  bool securitySelected = (!m_csvDialog->lineEditInv_securityName->text().isEmpty());
+
+  if (m_csvDialog->decimalSymbol().isEmpty()) {
+    KMessageBox::sorry(0, i18n("<center>Please select the decimal symbol used in your file.\n</center>"), i18n("Investment import"));
+    return;
+  }
+
+  m_securityName = m_csvDialog->comboBoxInv_securityName->currentText();
+
+  if (m_securityName.isEmpty()) {
+    KMessageBox::sorry(0, i18n("<center>Please enter a name for the security.\n</center>"), i18n("CSV import"));
+    return;
+  }
+
+  bool securitySelected = true;
+  if (!m_securityList.contains(m_securityName)) {
+    m_securityList << m_securityName;
+  }
   m_priceSelected = (m_csvDialog->comboBoxInv_priceCol->currentIndex() > 0);
   m_quantitySelected = (m_csvDialog->comboBoxInv_quantityCol->currentIndex() > 0);
   m_amountSelected = (m_csvDialog->comboBoxInv_amountCol->currentIndex() > 0);
@@ -1091,7 +1131,9 @@ void InvestProcessing::setCodecList(const QList<QTextCodec *> &list)
 void InvestProcessing::startLineChanged()
 {
   int val = m_csvDialog->spinBox_skip->value();
-  if (val < 1) return;
+  if (val < 1) {
+    return;
+  }
   m_startLine = val - 1;
 }
 
@@ -1102,7 +1144,9 @@ void InvestProcessing::endLineChanged()
 
 void InvestProcessing::dateFormatSelected(int dF)
 {
-  if (dF == -1) return;
+  if (dF == -1) {
+    return;
+  }
   m_dateFormatIndex = dF;
   m_dateFormat = m_dateFormats[m_dateFormatIndex];
 }
@@ -1194,6 +1238,13 @@ void InvestProcessing::readSettings()
     m_csvDialog->comboBoxInv_amountCol->setCurrentIndex(-1);
     m_csvDialog->comboBoxInv_feeCol->setCurrentIndex(-1);
   }
+
+  KConfigGroup securitiesGroup(config, "Securities");
+  m_securityList.clear();
+  m_csvDialog->comboBoxInv_securityName->clear();
+  m_securityList = securitiesGroup.readEntry("SecurityNameList", QStringList());
+  m_csvDialog->comboBoxInv_securityName->addItems(m_securityList);
+  m_csvDialog->comboBoxInv_securityName->setCurrentIndex(-1);
 }
 
 void InvestProcessing::updateScreen()
@@ -1315,4 +1366,68 @@ int InvestProcessing::priceColumn()
 bool InvestProcessing::importNow()
 {
   return m_importNow;
+}
+
+void InvestProcessing::securityNameSelected(const QString& name)
+{
+  if ((m_securityList.contains(name)) || (name.isEmpty())) {
+    return;
+  }
+
+  m_csvDialog->comboBoxInv_securityName->setInsertPolicy(QComboBox::InsertAlphabetically);
+  m_csvDialog->comboBoxInv_securityName->setDuplicatesEnabled(false);
+  m_securityName = name;
+  m_securityList << name;
+  m_securityList.removeDuplicates();
+  m_securityList.sort();
+}
+
+void InvestProcessing::securityNameEdited()
+{
+  QString name = m_csvDialog->comboBoxInv_securityName->currentText();
+  int index = m_csvDialog->comboBoxInv_securityName->findText(name);
+  if ((index >= 0) || (name.isEmpty())) {
+    return;
+  }
+  int rc = KMessageBox::warningContinueCancel(0, i18n("<center>Do you want to add a new security</center>\n"
+           "<center>%1 </center>\n"
+           "<center>to the selection list?</center>\n"
+           "<center>Click \'Continue\' to add the name.</center>\n"
+           "<center>Otherwise, click \'Cancel\'.</center>",
+           name), i18n("Add Security Name"));
+  if (rc == KMessageBox::Cancel) {
+    m_csvDialog->comboBoxInv_securityName->clearEditText();///
+    m_csvDialog->comboBoxInv_securityName->setCurrentIndex(-1);
+  } else {
+    m_securityName = name;
+    m_securityList << name;
+    m_securityList.removeDuplicates();
+    m_securityList.sort();
+    m_csvDialog->comboBoxInv_securityName->clear();
+    m_csvDialog->comboBoxInv_securityName->addItems(m_securityList);
+  }
+}
+
+QStringList InvestProcessing::securityList()
+{
+  return m_securityList;
+}
+
+void InvestProcessing::hideSecurity()
+{
+  QString name = m_csvDialog->comboBoxInv_securityName->currentText();
+  if (name.isEmpty()) {
+    return;
+  }
+  int rc = KMessageBox::warningContinueCancel(0, i18n("<center>You have selected to remove from the selection list</center>\n"
+           "<center>%1. </center>\n"
+           "<center>Click \'Continue\' to remove the name, or</center>\n"
+           "<center>Click \'Cancel\'' to leave 'as is'.</center>",
+           name), i18n("Hide Security Name"));
+  if (rc == KMessageBox::Continue) {
+    int index = m_csvDialog->comboBoxInv_securityName->currentIndex();
+    m_csvDialog->comboBoxInv_securityName->removeItem(index);
+    m_securityList.removeAt(index);
+    m_securityName.clear();
+  }
 }

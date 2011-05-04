@@ -90,7 +90,7 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
     count -= 1;
     if (chr == m_textDelimiterCharacter) {
       tmpBuffer += chr;
-      if (inQuotes == true) { //                if already in quoted field..
+      if (inQuotes == true) { //               if already in quoted field..
         inQuotes = false;//                    ..end it
       } else {//                               if not..
         inQuotes = true;//                     ..start it
@@ -100,7 +100,7 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
       if (inQuotes == true) { //               embedded '\n' in quoted field
         chr = '~';//                           replace it with ~ for now
         tmpBuffer += chr;
-        if (count > 0) //                       more chars yet
+        if (count > 0) //                      more chars yet
           continue;//                          more chars yet
       }
       //                                       true EOL (not in quotes)
@@ -124,7 +124,7 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
     }//                                        end of 'EOL detected' loop
     else {//                                   must be data char
       tmpBuffer += chr;
-      if (count > 0) { //                       more chars yet
+      if (count > 0) { //                      more chars yet
         continue;
       }//                                      else eoFile = true;
     }
@@ -169,7 +169,9 @@ void Parse::setTextDelimiterIndex(int index)
 
 void Parse::decimalSymbolSelected(int val)
 {
-  if (val < 0) return;
+  if (val < 0) {
+    return;
+  }
 
   m_decimalSymbolIndex = val;
   m_decimalSymbol = m_decimalSymbolList[val];

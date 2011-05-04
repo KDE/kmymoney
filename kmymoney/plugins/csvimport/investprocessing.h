@@ -26,6 +26,7 @@ email                 : agander93@gmail.com
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
 #include <QtCore/QStringList>
+#include <QtGui/QCompleter>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -112,6 +113,8 @@ public:
   QString        columnType(int column);
   QString        invPath();
   QString        inFileName();
+
+  QStringList    securityList();
 
   int            lastLine();
   int            amountColumn();
@@ -271,14 +274,6 @@ private:
   void           investCsvImport(MyMoneyStatement&);
 
   /**
-  * This method is called initially after an input file has been selected.
-  * It will call other routines to display file content and to complete the
-  * statement import. It will also be called to reposition the file after row
-  * deletion, or to reread following encoding or delimiter change.
-
-  void           readFile(const QString& fname, int skipLines);
-  *///
-  /**
   * This method is called on opening the plugin.
   * It will populate a list with all available codecs.
   */
@@ -370,6 +365,7 @@ private:
   QString        m_inFileName;
   QString        m_outBuffer;
   QString        m_previousType;
+  QString        m_securityName;
   QString        m_tempBuffer;
 
   QList<QTextCodec *>   m_codecs;
@@ -383,10 +379,12 @@ private:
   QStringList    m_removeList;
   QStringList    m_dateFormats;
   QStringList    m_columnList;
+  QStringList    m_securityList;
 
   KUrl           m_url;
   QFile*         m_inFile;
 
+  QCompleter*     m_completer; 
 
 private slots:
 
@@ -404,6 +402,15 @@ private slots:
   void           resetComboBox(const QString& comboBox, const int& col);
 
   void           changedType(const QString& newType);
+
+  /**
+  * This method is called to remove a security name from the combobox list.
+  * It does not affect the underlying security.
+  */
+  void           hideSecurity();
+
+  void           securityNameSelected(const QString& name);
+  void           securityNameEdited();
 
   int            validateNewColumn(const int& col, const QString& type);
 

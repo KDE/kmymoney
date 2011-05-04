@@ -136,6 +136,10 @@ void InvestmentDlg::saveSettings()
     invcolumnsGroup.writeEntry("FeeCol", m_csvDialog->comboBoxInv_feeCol->currentIndex());
     invcolumnsGroup.config()->sync();
 
+    KConfigGroup securitiesGroup(config, "Securities");
+    securitiesGroup.writeEntry("SecurityNameList", m_investProcessing->securityList());
+    securitiesGroup.config()->sync();
+
     /*    These settings do not get altered so need not be saved.
 
     investmentGroup.writeEntry( "ShrsinParam", invcsv->shrsinList);
