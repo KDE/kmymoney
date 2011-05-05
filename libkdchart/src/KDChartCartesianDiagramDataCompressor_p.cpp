@@ -761,7 +761,7 @@ bool CartesianDiagramDataCompressor::isValidCachePosition( const CachePosition& 
     if ( ! m_model ) return false;
     if ( m_data.size() == 0 || m_data[0].size() == 0 ) return false;
     if ( position.second < 0 || position.second >= m_data.size() ) return false;
-    if ( position.first < 0 || position.first >= m_data[0].size() ) return false;
+    if ( position.first < 0 || position.first >= m_data[position.second].size() ) return false;
     return true;
 }
 
