@@ -168,7 +168,11 @@ double CashFlowList::xirrResult(double& rate) const
     double e_i = ((* list_it).today().daysTo((* list_it).date())) / 365.0;
     MyMoneyMoney val = (* list_it).value();
 
-    res += val.toDouble() / pow(r, e_i);
+    if (e_i < 0) {
+      res += val.toDouble() * pow(r, -e_i);
+    } else {
+      res += val.toDouble() / pow(r, e_i);
+    }
     ++list_it;
   }
 
@@ -1038,7 +1042,8 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
   }
 
   try {
-    MyMoneyMoney annualReturn = MyMoneyMoney(all.IRR(), 10000);
+    double irr = all.IRR();
+    MyMoneyMoney annualReturn = MyMoneyMoney(std::isnan(irr) ? 0 : irr, 10000);
     result["return"] = annualReturn.toString();
     result["returninvestment"] = returnInvestment.toString();
   } catch (QString e) {
