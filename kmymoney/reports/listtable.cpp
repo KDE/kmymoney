@@ -523,7 +523,7 @@ void ListTable::render(QString& result, QString& csv) const
         }
       } else if (percentColumns.contains(*it_column)) {
         data = (MyMoneyMoney(data) * MyMoneyMoney(100, 1)).formatMoney(fraction);
-        result += QString("<td>%2%1%%%3</td>").arg(data, tlinkBegin, tlinkEnd);
+        result += QString("<td>%2%1%%3</td>").arg(data, tlinkBegin, tlinkEnd);
         csv += data + "%,";
       } else if (dateColumns.contains(*it_column)) {
         // do this before we possibly change data
