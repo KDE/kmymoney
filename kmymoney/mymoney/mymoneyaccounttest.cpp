@@ -299,6 +299,9 @@ void MyMoneyAccountTest::testWriteXML()
   r.setInstitutionId(institutionid);
   r.setValue(QString("key"), "value");
   r.addAccountId("A000002");
+  r.addReconciliation(QDate(2011, 1, 1), MyMoneyMoney(123, 100));
+  r.addReconciliation(QDate(2011, 2, 1), MyMoneyMoney(456, 100));
+
   // QVERIFY(r.m_kvp.count() == 1);
   // QVERIFY(r.value("key") == "value");
 
@@ -318,6 +321,7 @@ void MyMoneyAccountTest::testWriteXML()
                   "  </SUBACCOUNTS>\n"
                   "  <KEYVALUEPAIRS>\n"
                   "   <PAIR key=\"key\" value=\"value\" />\n"
+                  "   <PAIR key=\"reconciliationHistory\" value=\"2011-01-01:123/100;2011-02-01:114/25\"/>\n"
                   "  </KEYVALUEPAIRS>\n"
                   " </ACCOUNT>\n"
                   "</ACCOUNT-CONTAINER>\n").
@@ -328,8 +332,8 @@ void MyMoneyAccountTest::testWriteXML()
   ref.replace(QString(" >\n"), QString(">\n"));
 #endif
 
-  //qDebug("ref = '%s'", qPrintable(ref));
-  //qDebug("doc = '%s'", qPrintable(doc.toString()));
+  // qDebug("ref = '%s'", qPrintable(ref));
+  // qDebug("doc = '%s'", qPrintable(doc.toString()));
 
   QVERIFY(doc.toString() == ref);
 }
@@ -348,6 +352,7 @@ void MyMoneyAccountTest::testReadXML()
                      "  <KEYVALUEPAIRS>\n"
                      "   <PAIR key=\"key\" value=\"value\" />\n"
                      "   <PAIR key=\"Key\" value=\"Value\" />\n"
+                     "   <PAIR key=\"reconciliationHistory\" value=\"2011-01-01:123/100;2011-02-01:114/25\"/>\n"
                      "  </KEYVALUEPAIRS>\n"
                      " </ACCOUNT>\n"
                      "</ACCOUNT-CONTAINER>\n").
@@ -402,10 +407,13 @@ void MyMoneyAccountTest::testReadXML()
     QVERIFY(a.accountList().count() == 2);
     QVERIFY(a.accountList()[0] == "A000002");
     QVERIFY(a.accountList()[1] == "A000003");
-    QVERIFY(a.pairs().count() == 3);
+    QVERIFY(a.pairs().count() == 4);
     QVERIFY(a.value("key") == "value");
     QVERIFY(a.value("Key") == "Value");
     QVERIFY(a.value("lastStatementDate").isEmpty());
+    QVERIFY(a.reconciliationHistory().count() == 2);
+    QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 1)] == MyMoneyMoney(123, 100));
+    QVERIFY(a.reconciliationHistory()[QDate(2011, 2, 1)] == MyMoneyMoney(456, 100));
   } catch (MyMoneyException *e) {
     delete e;
     QFAIL("Unexpected exception");
@@ -607,5 +615,37 @@ void MyMoneyAccountTest::testIsLoan(void)
   a.setAccountType(MyMoneyAccount::Equity);
   QVERIFY(a.isLoan() == false);
 }
+
+void MyMoneyAccountTest::addReconciliation()
+{
+  MyMoneyAccount a;
+
+  QVERIFY(a.addReconciliation(QDate(2011, 1, 2), MyMoneyMoney(123, 100)) == true);
+  QVERIFY(a.reconciliationHistory().count() == 1);
+  QVERIFY(a.addReconciliation(QDate(2011, 2, 1), MyMoneyMoney(456, 100)) == true);
+  QVERIFY(a.reconciliationHistory().count() == 2);
+  QVERIFY(a.addReconciliation(QDate(2011, 2, 1), MyMoneyMoney(789, 100)) == true);
+  QVERIFY(a.reconciliationHistory().count() == 2);
+  QVERIFY(a.reconciliationHistory().values().last() == MyMoneyMoney(789, 100));
+}
+
+void MyMoneyAccountTest::reconciliationHistory()
+{
+  MyMoneyAccount a;
+
+  QVERIFY(a.reconciliationHistory().isEmpty() == true);
+  QVERIFY(a.addReconciliation(QDate(2011, 1, 2), MyMoneyMoney(123, 100)) == true);
+  QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 2)] == MyMoneyMoney(123, 100));
+  QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 1)] == MyMoneyMoney());
+  QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 3)] == MyMoneyMoney());
+
+  QVERIFY(a.addReconciliation(QDate(2011, 2, 1), MyMoneyMoney(456, 100)) == true);
+  QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 2)] == MyMoneyMoney(123, 100));
+  QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 1)] == MyMoneyMoney());
+  QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 3)] == MyMoneyMoney());
+  QVERIFY(a.reconciliationHistory()[QDate(2011, 2, 1)] == MyMoneyMoney(456, 100));
+  QVERIFY(a.reconciliationHistory().count() == 2);
+}
+
 #include "mymoneyaccounttest.moc"
 

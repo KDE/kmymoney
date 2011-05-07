@@ -573,6 +573,23 @@ public:
    */
   static QString accountTypeToString(const MyMoneyAccount::accountTypeE accountType);
 
+  /**
+    * keeps a history record of a reconciliation for this account on @a date
+    * with @a amount.
+    *
+    * @return @p true in case entry was added, @p false otherwise
+    *
+    * @sa reconciliationHistory()
+    */
+  bool addReconciliation(const QDate& date, const MyMoneyMoney& amount);
+
+  /**
+    * @return QMap with the reconciliation history for the account
+    *
+    * @sa addReconciliation()
+    */
+  const QMap<QDate, MyMoneyMoney>& reconciliationHistory();
+
   QDataStream &operator<<(const MyMoneyAccount &);
   QDataStream &operator>>(MyMoneyAccount &);
 
@@ -660,6 +677,10 @@ private:
     */
   int             m_fraction;
 
+  /**
+    * This member keeps the reconciliation history
+    */
+  QMap<QDate, MyMoneyMoney> m_reconciliationHistory;
 };
 
 /**

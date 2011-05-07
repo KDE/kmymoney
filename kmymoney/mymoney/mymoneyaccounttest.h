@@ -46,6 +46,8 @@ private slots:
   void testIsIncomeExpense();
   void testIsAssetLiability();
   void testIsLoan();
+  void addReconciliation();
+  void reconciliationHistory();
 };
 
 #endif

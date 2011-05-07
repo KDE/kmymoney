@@ -128,7 +128,6 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
       m_onlineBankingSettings.setValue(it_attr.name(), it_attr.value());
     }
   }
-
 }
 
 void MyMoneyAccount::setName(const QString& name)
@@ -756,4 +755,41 @@ QString MyMoneyAccount::accountTypeToString(const MyMoneyAccount::accountTypeE a
   }
 
   return returnString;
+}
+
+bool MyMoneyAccount::addReconciliation(const QDate& date, const MyMoneyMoney& amount)
+{
+  m_reconciliationHistory[date] = amount;
+  QString history, sep;
+  QMap<QDate, MyMoneyMoney>::const_iterator it;
+  for (it = m_reconciliationHistory.constBegin();
+       it != m_reconciliationHistory.constEnd();
+       ++it) {
+
+    history += QString("%1%2:%3").arg(sep,
+                                      it.key().toString(Qt::ISODate),
+                                      (*it).toString());
+    sep = QLatin1Char(';');
+  }
+  setValue("reconciliationHistory", history);
+  return true;
+}
+
+const QMap<QDate, MyMoneyMoney>& MyMoneyAccount::reconciliationHistory()
+{
+  // check if the internal history member is already loaded
+  if (m_reconciliationHistory.count() == 0
+      && !value("reconciliationHistory").isEmpty()) {
+    QStringList entries = value("reconciliationHistory").split(';');
+    foreach (QString entry, entries) {
+      QStringList parts = entry.split(':');
+      QDate date = QDate::fromString(parts[0], Qt::ISODate);
+      MyMoneyMoney amount(parts[1]);
+      if (parts.count() == 2 && date.isValid()) {
+        m_reconciliationHistory[date] = amount;
+      }
+    }
+  }
+
+  return m_reconciliationHistory;
 }
