@@ -308,6 +308,8 @@ protected slots:
 
   void slotAboutToSelectItem(KMyMoneyRegister::RegisterItem*, bool&);
 
+  void slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTransactions&);
+
 protected:
   /**
     * This member keeps the date that was used as the last posting date.

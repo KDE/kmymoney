@@ -88,6 +88,8 @@ public:
 
   // widgets
   KMyMoneyAccountCombo* m_accountComboBox;
+
+  MyMoneyMoney         m_totalBalance;
 };
 
 MousePressFilter::MousePressFilter(QWidget* parent) :
@@ -203,6 +205,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   registerFrameLayout->addWidget(m_register);
   m_register->installEventFilter(this);
   connect(m_register, SIGNAL(openContextMenu()), this, SIGNAL(openContextMenu()));
+  connect(m_register, SIGNAL(selectionChanged(const KMyMoneyRegister::SelectedTransactions&)), this, SLOT(slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTransactions&)));
   connect(m_register->horizontalHeader(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotSortOptions()));
   connect(m_register, SIGNAL(reconcileStateColumnClicked(KMyMoneyRegister::Transaction*)), this, SLOT(slotToggleTransactionMark(KMyMoneyRegister::Transaction*)));
   connect(&d->m_viewPosTimer, SIGNAL(timeout()), this, SLOT(slotUpdateViewPos()));
@@ -758,7 +761,10 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
     if (m_account.accountType() != MyMoneyAccount::Investment) {
       m_leftSummaryLabel->setText(i18n("Statement: %1", d->m_endingBalance.formatMoney("", d->m_precision)));
       m_centerSummaryLabel->setText(i18nc("Cleared balance", "Cleared: %1", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
-      m_rightSummaryLabel->setText(i18n("Difference: %1", (clearedBalance[m_account.id()] - d->m_endingBalance).formatMoney("", d->m_precision)));
+      d->m_totalBalance = clearedBalance[m_account.id()] - d->m_endingBalance;
+      KMyMoneyRegister::SelectedTransactions selection;
+      m_register->selectedTransactions(selection);
+      slotUpdateSummaryLine(selection);
     }
   } else {
     // update summary line in normal mode
@@ -774,13 +780,11 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
     palette.setColor(m_rightSummaryLabel->foregroundRole(), m_leftSummaryLabel->palette().color(foregroundRole()));
     if (m_account.accountType() != MyMoneyAccount::Investment) {
       m_centerSummaryLabel->setText(i18nc("Cleared balance", "Cleared: %1", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
-      m_rightSummaryLabel->setText(i18n("Balance: %1", actBalance[m_account.id()].formatMoney("", d->m_precision)));
-      bool showNegative = actBalance[m_account.id()].isNegative();
-      if (m_account.accountGroup() == MyMoneyAccount::Liability && !actBalance[m_account.id()].isZero())
-        showNegative = !showNegative;
-      if (showNegative) {
-        palette.setColor(m_rightSummaryLabel->foregroundRole(), KMyMoneyGlobalSettings::listNegativeValueColor());
-      }
+      d->m_totalBalance = actBalance[m_account.id()];
+      // determine the number of selected transactions
+      KMyMoneyRegister::SelectedTransactions selection;
+      m_register->selectedTransactions(selection);
+      slotUpdateSummaryLine(selection);
     } else {
       m_centerSummaryLabel->hide();
       MyMoneyMoney balance;
@@ -811,6 +815,35 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
       m_rightSummaryLabel->setText(i18n("Investment value: %1%2", approx ? "~" : "", balance.formatMoney(base.tradingSymbol(), d->m_precision)));
     }
     m_rightSummaryLabel->setPalette(palette);
+  }
+}
+
+void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTransactions& selection)
+{
+  QPalette palette = m_rightSummaryLabel->palette();
+  palette.setColor(m_rightSummaryLabel->foregroundRole(), m_leftSummaryLabel->palette().color(foregroundRole()));
+  if (selection.count() > 1) {
+    MyMoneyMoney balance;
+    foreach (KMyMoneyRegister::SelectedTransaction t, selection) {
+      if (!t.isScheduled()) {
+        balance += t.split().shares();
+      }
+    }
+    m_rightSummaryLabel->setText(QString("%1: %2").arg(QChar(0x2211), balance.formatMoney("", d->m_precision)));
+
+  } else {
+    if (isReconciliationAccount()) {
+      m_rightSummaryLabel->setText(i18n("Difference: %1", d->m_totalBalance.formatMoney("", d->m_precision)));
+
+    } else {
+      m_rightSummaryLabel->setText(i18n("Balance: %1", d->m_totalBalance.formatMoney("", d->m_precision)));
+      bool showNegative = d->m_totalBalance.isNegative();
+      if (m_account.accountGroup() == MyMoneyAccount::Liability && !d->m_totalBalance.isZero())
+        showNegative = !showNegative;
+      if (showNegative) {
+        palette.setColor(m_rightSummaryLabel->foregroundRole(), KMyMoneyGlobalSettings::listNegativeValueColor());
+      }
+    }
   }
 }
 
