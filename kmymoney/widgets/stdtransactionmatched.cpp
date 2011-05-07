@@ -113,7 +113,10 @@ void StdTransactionMatched::registerCellText(QString& txt, int& align, int row, 
 
           case DetailColumn:
             align |= Qt::AlignLeft;
-            txt = QString("%1 %2").arg(matchedTransaction.postDate().toString(Qt::ISODate)).arg(matchedTransaction.memo());
+            memo = matchedTransaction.memo();
+            memo.replace("\n\n", "\n");
+            memo.replace('\n', ", ");
+            txt = QString("%1 %2").arg(matchedTransaction.postDate().toString(Qt::ISODate)).arg(memo);
             break;
 
           case PaymentColumn:
@@ -151,9 +154,10 @@ void StdTransactionMatched::registerCellText(QString& txt, int& align, int row, 
               if (pos != -1) {
                 memo = memo.left(pos);
                 // replace all new line characters because we only have one line available for the displayed data
-                memo.replace('\n', " ");
               }
             }
+            memo.replace("\n\n", "\n");
+            memo.replace('\n', ", ");
             txt = QString("%1 %2").arg(postDate.toString(Qt::ISODate)).arg(memo);
             break;
 
