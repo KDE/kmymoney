@@ -57,6 +57,8 @@ KMyMoneyApp* kmymoney;
 
 static KCmdLineArgs* args = 0;
 
+static int runKMyMoney(KApplication *a, KStartupLogo *splash);
+
 int main(int argc, char *argv[])
 {
   timer.start();
@@ -68,7 +70,7 @@ int main(int argc, char *argv[])
 
   KAboutData aboutData("kmymoney", 0, ki18n("KMyMoney"),
                        VERSION, ki18n("\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions."), KAboutData::License_GPL,
-                       ki18n("(c) 2000-2010 The KMyMoney development team"), /*feature*/KLocalizedString(),
+                       ki18n("(c) 2000-2011 The KMyMoney development team"), /*feature*/KLocalizedString(),
                        I18N_NOOP("http://kmymoney.org/")/*,
                                                       "kmymoney-devel@kde.org")*/);
 
@@ -95,6 +97,7 @@ int main(int argc, char *argv[])
   options.add("lang <lang-code>", ki18n("language to be used"));
   options.add("n", ki18n("do not open last used file"));
   options.add("timers", ki18n("enable performance timers"));
+  options.add("nocatch", ki18n("do not globally catch uncaught exceptions"));
 
 #ifdef KMM_DEBUG
   // The following options are only available when compiled in debug mode
@@ -170,105 +173,118 @@ int main(int argc, char *argv[])
 #endif
 
   int rc = 0;
-  try {
-    do {
-      if (QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmymoney")) {
-        const QList<QString> instances = kmymoney->instanceList();
-        if (instances.count() > 0) {
-
-          // If the user launches a second copy of the app and includes a file to
-          // open, they are probably attempting a "WebConnect" session.  In this case,
-          // we'll check to make sure it's an importable file that's passed in, and if so, we'll
-          // notify the primary instance of the file and kill ourselves.
-
-          if (args->count() > 0) {
-            KUrl url = args->url(0);
-            if (kmymoney->isImportableFile(url.path())) {
-              // if there are multiple instances, we'll send this to the first one
-              QString primary = instances[0];
-
-              // send a message to the primary client to import this file
-              QDBusInterface remoteApp(primary, "/KMymoney", "org.kde.kmymoney");
-              remoteApp.call("webConnect", url.path(), kapp->startupId());
-
-              // Before we delete the application, we make sure that we destroy all
-              // widgets by running the event loop for some time to catch all those
-              // widgets that are requested to be destroyed using the deleteLater() method.
-              QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents, 10);
-
-              delete kmymoney;
-              delete splash;
-              break;
-            }
-          }
-
-          if (KMessageBox::questionYesNo(0, i18n("Another instance of KMyMoney is already running. Do you want to quit?")) == KMessageBox::Yes) {
-            rc = 1;
-            delete kmymoney;
-            delete splash;
-            break;
-          }
-        }
-      } else {
-        qDebug("D-Bus registration failed. Some functions are not available.");
-      }
-      kmymoney->show();
-      kmymoney->centralWidget()->setEnabled(false);
-
-      delete splash;
-
-      // force complete paint of widgets
-      qApp->processEvents();
-
-      QString importfile;
-      KUrl url;
-      // make sure, we take the file provided on the command
-      // line before we go and open the last one used
-      if (args->count() > 0) {
-        url = args->url(0);
-
-        // Check to see if this is an importable file, as opposed to a loadable
-        // file.  If it is importable, what we really want to do is load the
-        // last used file anyway and then immediately import this file.  This
-        // implements a "web connect" session where there is not already an
-        // instance of the program running.
-
-        if (kmymoney->isImportableFile(url.path())) {
-          importfile = url.path();
-          url = kmymoney->readLastUsedFile();
-        }
-
-      } else {
-        url = kmymoney->readLastUsedFile();
-      }
-
-      KTipDialog::showTip(kmymoney, "", false);
-      if (url.isValid() && !args->isSet("n")) {
-        kmymoney->slotFileOpenRecent(url);
-      } else if (KMyMoneyGlobalSettings::firstTimeRun()) {
-        kmymoney->slotFileNew();
-      }
-      KMyMoneyGlobalSettings::setFirstTimeRun(false);
-
-      if (! importfile.isEmpty())
-        kmymoney->webConnect(importfile, kapp->startupId());
-
-      if (kmymoney != 0) {
-        kmymoney->updateCaption();
-        args->clear();
-        kmymoney->centralWidget()->setEnabled(true);
-        rc = a->exec();
-      }
-    } while (0);
-  } catch (MyMoneyException *e) {
-    KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"),
-                               i18n("%1 in file %2 line %3", e->what(), e->file(), e->line()));
-    throw e;
+  if (args->isSet("catch") == false) {
+    qDebug("Running w/o global try/catch block");
+    rc = runKMyMoney(a, splash);
+  } else {
+    try {
+      rc = runKMyMoney(a, splash);
+    } catch (MyMoneyException *e) {
+      KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"),
+                                 i18n("%1 in file %2 line %3", e->what(), e->file(), e->line()));
+      throw e;
+    }
   }
   delete a;
 
   return rc;
 }
+
+int runKMyMoney(KApplication *a, KStartupLogo *splash)
+{
+  int rc = 0;
+  do {
+    if (QDBusConnection::sessionBus().interface()->isServiceRegistered("org.kde.kmymoney")) {
+      const QList<QString> instances = kmymoney->instanceList();
+      if (instances.count() > 0) {
+
+        // If the user launches a second copy of the app and includes a file to
+        // open, they are probably attempting a "WebConnect" session.  In this case,
+        // we'll check to make sure it's an importable file that's passed in, and if so, we'll
+        // notify the primary instance of the file and kill ourselves.
+
+        if (args->count() > 0) {
+          KUrl url = args->url(0);
+          if (kmymoney->isImportableFile(url.path())) {
+            // if there are multiple instances, we'll send this to the first one
+            QString primary = instances[0];
+
+            // send a message to the primary client to import this file
+            QDBusInterface remoteApp(primary, "/KMymoney", "org.kde.kmymoney");
+            remoteApp.call("webConnect", url.path(), kapp->startupId());
+
+            // Before we delete the application, we make sure that we destroy all
+            // widgets by running the event loop for some time to catch all those
+            // widgets that are requested to be destroyed using the deleteLater() method.
+            QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents, 10);
+
+            delete kmymoney;
+            delete splash;
+            break;
+          }
+        }
+
+        if (KMessageBox::questionYesNo(0, i18n("Another instance of KMyMoney is already running. Do you want to quit?")) == KMessageBox::Yes) {
+          rc = 1;
+          delete kmymoney;
+          delete splash;
+          break;
+        }
+      }
+    } else {
+      qDebug("D-Bus registration failed. Some functions are not available.");
+    }
+    kmymoney->show();
+    kmymoney->centralWidget()->setEnabled(false);
+
+    delete splash;
+
+    // force complete paint of widgets
+    qApp->processEvents();
+
+    QString importfile;
+    KUrl url;
+    // make sure, we take the file provided on the command
+    // line before we go and open the last one used
+    if (args->count() > 0) {
+      url = args->url(0);
+
+      // Check to see if this is an importable file, as opposed to a loadable
+      // file.  If it is importable, what we really want to do is load the
+      // last used file anyway and then immediately import this file.  This
+      // implements a "web connect" session where there is not already an
+      // instance of the program running.
+
+      if (kmymoney->isImportableFile(url.path())) {
+        importfile = url.path();
+        url = kmymoney->readLastUsedFile();
+      }
+
+    } else {
+      url = kmymoney->readLastUsedFile();
+    }
+
+    KTipDialog::showTip(kmymoney, "", false);
+    if (url.isValid() && !args->isSet("n")) {
+      kmymoney->slotFileOpenRecent(url);
+    } else if (KMyMoneyGlobalSettings::firstTimeRun()) {
+      kmymoney->slotFileNew();
+    }
+    KMyMoneyGlobalSettings::setFirstTimeRun(false);
+
+    if (! importfile.isEmpty())
+      kmymoney->webConnect(importfile, kapp->startupId());
+
+    if (kmymoney != 0) {
+      kmymoney->updateCaption();
+      args->clear();
+      kmymoney->centralWidget()->setEnabled(true);
+      rc = a->exec();
+    }
+  } while (0);
+  return rc;
+}
+
 
 void timestamp(char *txt)
 {
