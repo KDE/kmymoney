@@ -384,7 +384,7 @@ private:
   KUrl           m_url;
   QFile*         m_inFile;
 
-  QCompleter*     m_completer; 
+  QCompleter*     m_completer;
 
 private slots:
 

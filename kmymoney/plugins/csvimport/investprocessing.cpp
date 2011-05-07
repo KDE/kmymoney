@@ -129,7 +129,7 @@ void InvestProcessing::init()
   m_completer = new QCompleter(m_securityList, this);
   m_completer->setCaseSensitivity(Qt::CaseInsensitive);
   securityLineEdit->setCompleter(m_completer);
-  
+
   connect(securityLineEdit, SIGNAL(editingFinished()), this, SLOT(securityNameEdited()));
 
   m_dateFormatIndex = m_csvDialog->comboBox_dateFormat->currentIndex();

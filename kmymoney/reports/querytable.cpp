@@ -988,12 +988,12 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
         ReportAccount acc = (*it_split).accountId();
         if (acc.isIncomeExpense()) {
           cashincome += CashFlowListItem((*it_transaction).postDate(), -(*it_split).value() * price);
-	  paidDividend += ((-(*it_split).value()) * price).convert(fraction);
+          paidDividend += ((-(*it_split).value()) * price).convert(fraction);
         }
         ++it_split;
       }
     } else if (action == MyMoneySplit::ActionAddShares) {
-       // Add shares is not a buy operation, do nothing
+      // Add shares is not a buy operation, do nothing
     } else {
       //if the split does not match any action above, add it as buy or sell depending on sign
 
