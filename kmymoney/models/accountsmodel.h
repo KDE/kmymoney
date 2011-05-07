@@ -132,6 +132,8 @@ private:
   AccountsModel(QObject *parent = 0);
 
   void init();
+  void checkNetWorth();
+  void checkProfit();
 
   /**
     * The copy-constructor is private so that only the @ref Models object can create such an object.

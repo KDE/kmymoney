@@ -487,8 +487,16 @@ void AccountsModel::load()
     d->setAccountData(this, accountsItem->index(), account);
   }
 
-  //::timetrace("Done loading");
+  checkNetWorth();
+  checkProfit();
+  //::timetrace("Done AccountsModel::load");
+}
 
+/**
+  * Check if netWorthChanged should be emitted.
+  */
+void AccountsModel::checkNetWorth()
+{
   // compute the net woth
   QModelIndexList assetList = match(index(0, 0),
                                     AccountsModel::AccountIdRole,
@@ -515,8 +523,13 @@ void AccountsModel::load()
     d->m_lastNetWorth = netWorth;
     emit netWorthChanged(d->m_lastNetWorth);
   }
-  //::timetrace("Done networth");
+}
 
+/**
+  * Check if profitChanged should be emitted.
+  */
+void AccountsModel::checkProfit()
+{
   // compute the profit
   QModelIndexList incomeList = match(index(0, 0),
                                      AccountsModel::AccountIdRole,
@@ -543,7 +556,6 @@ void AccountsModel::load()
     d->m_lastProfit = profit;
     emit profitChanged(d->m_lastProfit);
   }
-  //::timetrace("Done AccountsModel::load");
 }
 
 MyMoneyMoney AccountsModel::accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance)
@@ -615,6 +627,9 @@ void AccountsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, co
     }
     d->setAccountData(this, item->index(), *account);
   }
+
+  checkNetWorth();
+  checkProfit();
 }
 
 /**
@@ -640,6 +655,9 @@ void AccountsModel::slotObjectModified(MyMoneyFile::notificationObjectT objType,
     slotObjectRemoved(MyMoneyFile::notifyAccount, oldAccount.id());
     slotObjectAdded(MyMoneyFile::notifyAccount, obj);
   }
+
+  checkNetWorth();
+  checkProfit();
 }
 
 /**
@@ -655,6 +673,9 @@ void AccountsModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objType, 
   foreach (const QModelIndex &index, list) {
     removeRow(index.row(), index.parent());
   }
+
+  checkNetWorth();
+  checkProfit();
 }
 
 /**
@@ -669,6 +690,8 @@ void AccountsModel::slotBalanceOrValueChanged(const MyMoneyAccount &account)
     currentItem = currentItem->parent();
     currentAccount = &d->m_file->account(currentAccount->parentAccountId());
   }
+  checkNetWorth();
+  checkProfit();
 }
 
 /**
