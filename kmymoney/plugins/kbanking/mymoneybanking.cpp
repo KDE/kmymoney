@@ -342,7 +342,7 @@ bool KBankingPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContai
 QString KBankingPlugin::stripLeadingZeroes(const QString& s) const
 {
   QString rc(s);
-  QRegExp exp("^(0*)([^0]*)");
+  QRegExp exp("^(0*)([^0].*)");
   if (exp.exactMatch(s) != -1) {
     rc = exp.cap(2);
   }
@@ -1005,6 +1005,13 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     }
   } else {
     DBG_WARN(0, "No date in current transaction");
+  }
+
+  // add information about remote account to memo in case we have something
+  const char *remoteAcc = AB_Transaction_GetRemoteAccountNumber(t);
+  const char *remoteBankCode = AB_Transaction_GetRemoteBankCode(t);
+  if (remoteAcc && remoteBankCode) {
+    kt.m_strMemo += QString("\n%1/%2").arg(remoteBankCode, remoteAcc);
   }
 
   // make hash value unique in case we don't have one already
