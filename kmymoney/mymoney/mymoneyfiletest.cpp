@@ -52,11 +52,17 @@ void MyMoneyFileTest::clearObjectLists(void)
   m_objectsModified.clear();
   m_objectsRemoved.clear();
   m_balanceChanged.clear();
+  m_valueChanged.clear();
 }
 
 void MyMoneyFileTest::balanceChanged(const MyMoneyAccount& account)
 {
   m_balanceChanged += account.id();
+}
+
+void MyMoneyFileTest::valueChanged(const MyMoneyAccount& account)
+{
+  m_valueChanged += account.id();
 }
 
 // this method will be called once at the beginning of the test
@@ -68,6 +74,7 @@ void MyMoneyFileTest::initTestCase()
   connect(m, SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT, const QString&)), this, SLOT(objectRemoved(MyMoneyFile::notificationObjectT, const QString&)));
   connect(m, SIGNAL(objectModified(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)), this, SLOT(objectModified(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)));
   connect(m, SIGNAL(balanceChanged(const MyMoneyAccount&)), this, SLOT(balanceChanged(const MyMoneyAccount&)));
+  connect(m, SIGNAL(valueChanged(const MyMoneyAccount&)), this, SLOT(valueChanged(const MyMoneyAccount&)));
 }
 
 // this method will be called before each testfunction
@@ -137,6 +144,7 @@ void MyMoneyFileTest::testAddOneInstitution()
     QVERIFY(m_objectsAdded.count() == 1);
     QVERIFY(m_objectsModified.count() == 0);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(m_objectsAdded[0] == QLatin1String("I000001"));
   } catch (MyMoneyException *e) {
     QFAIL("Unexpected exception");
@@ -167,6 +175,7 @@ void MyMoneyFileTest::testAddOneInstitution()
   QVERIFY(m_objectsAdded.count() == 0);
   QVERIFY(m_objectsModified.count() == 0);
   QVERIFY(m_balanceChanged.count() == 0);
+  QVERIFY(m_valueChanged.count() == 0);
 }
 
 void MyMoneyFileTest::testAddTwoInstitutions()
@@ -241,6 +250,7 @@ void MyMoneyFileTest::testRemoveInstitution()
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_objectsModified.count() == 0);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(m_objectsRemoved[0] == QLatin1String("I000001"));
   } catch (MyMoneyException *e) {
     QFAIL("Unexpected exception");
@@ -358,6 +368,7 @@ void MyMoneyFileTest::testInstitutionModify()
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_objectsModified.count() == 1);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(m_objectsModified[0] == QLatin1String("I000001"));
   } catch (MyMoneyException *e) {
     delete e;
@@ -464,6 +475,7 @@ void MyMoneyFileTest::testAddAccounts()
 
   a.setName("Account1");
   a.setInstitutionId(institution.id());
+  a.setCurrencyId("EUR");
 
   clearObjectLists();
   MyMoneyFileTransaction ft;
@@ -475,6 +487,7 @@ void MyMoneyFileTest::testAddAccounts()
     QVERIFY(a.parentAccountId() == "AStd::Asset");
     QVERIFY(a.id() == "A000001");
     QVERIFY(a.institutionId() == "I000001");
+    QVERIFY(a.currencyId() == "EUR");
     QVERIFY(m->dirty() == true);
     QVERIFY(m->asset().accountList().count() == 1);
     QVERIFY(m->asset().accountList()[0] == "A000001");
@@ -487,6 +500,7 @@ void MyMoneyFileTest::testAddAccounts()
     QVERIFY(m_objectsAdded.count() == 1);
     QVERIFY(m_objectsModified.count() == 2);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(m_objectsAdded.contains(QLatin1String("A000001")));
     QVERIFY(m_objectsModified.contains(QLatin1String("I000001")));
     QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Asset")));
@@ -528,6 +542,7 @@ void MyMoneyFileTest::testAddAccounts()
   institution = m->institution("I000002");
   b.setName("Account2");
   b.setInstitutionId(institution.id());
+  b.setCurrencyId("EUR");
   clearObjectLists();
   ft.restart();
   try {
@@ -536,6 +551,7 @@ void MyMoneyFileTest::testAddAccounts()
     ft.commit();
     QVERIFY(m->dirty() == true);
     QVERIFY(b.id() == "A000002");
+    QVERIFY(b.currencyId() == "EUR");
     QVERIFY(b.parentAccountId() == "AStd::Asset");
     QVERIFY(m->accountCount() == 7);
 
@@ -555,6 +571,7 @@ void MyMoneyFileTest::testAddAccounts()
     QVERIFY(m_objectsAdded.count() == 1);
     QVERIFY(m_objectsModified.count() == 2);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(m_objectsAdded.contains(QLatin1String("A000002")));
     QVERIFY(m_objectsModified.contains(QLatin1String("I000002")));
     QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Asset")));
@@ -571,6 +588,7 @@ void MyMoneyFileTest::testAddAccounts()
   QVERIFY(p.id() == "A000002");
   QVERIFY(p.name() == "Account2");
   QVERIFY(p.institutionId() == "I000002");
+  QVERIFY(p.currencyId() == "EUR");
 }
 
 void MyMoneyFileTest::testModifyAccount()
@@ -600,6 +618,7 @@ void MyMoneyFileTest::testModifyAccount()
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_objectsModified.count() == 1);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(m_objectsModified.contains(QLatin1String("A000001")));
 
   } catch (MyMoneyException *e) {
@@ -634,6 +653,7 @@ void MyMoneyFileTest::testModifyAccount()
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_objectsModified.count() == 3);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(m_objectsModified.contains(QLatin1String("A000001")));
     QVERIFY(m_objectsModified.contains(QLatin1String("I000001")));
     QVERIFY(m_objectsModified.contains(QLatin1String("I000002")));
@@ -715,6 +735,7 @@ void MyMoneyFileTest::testReparentAccount()
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_objectsModified.count() == 3);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(m_objectsModified.contains(QLatin1String("A000001")));
     QVERIFY(m_objectsModified.contains(QLatin1String("A000002")));
     QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Asset")));
@@ -782,6 +803,7 @@ void MyMoneyFileTest::testRemoveAccount()
     QVERIFY(m_objectsModified.count() == 2);
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
 
     QVERIFY(m_objectsRemoved.contains(QLatin1String("A000001")));
     QVERIFY(m_objectsModified.contains(QLatin1String("I000001")));
@@ -818,6 +840,7 @@ void MyMoneyFileTest::testRemoveAccountTree()
     QVERIFY(m_objectsModified.count() == 3);
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
 
     QVERIFY(m_objectsRemoved.contains(QLatin1String("A000002")));
     QVERIFY(m_objectsModified.contains(QLatin1String("A000001")));
@@ -953,6 +976,7 @@ void MyMoneyFileTest::testAddTransaction()
     QVERIFY(m_balanceChanged.count() == 2);
     QVERIFY(m_balanceChanged.count("A000001") == 1);
     QVERIFY(m_balanceChanged.count("A000003") == 1);
+    QVERIFY(m_valueChanged.count() == 0);
   } catch (MyMoneyException *e) {
     delete e;
     QFAIL("Unexpected exception!");
@@ -981,6 +1005,7 @@ void MyMoneyFileTest::testAddTransaction()
   try {
     p = m->transaction("T000000000000000001");
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(p.splitCount() == 2);
     QVERIFY(p.memo() == "Memotext");
     QVERIFY(p.splits()[0].accountId() == "A000001");
@@ -995,6 +1020,7 @@ void MyMoneyFileTest::testAddTransaction()
   try {
     p = m->transaction("A000001", 0);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(p.id() == "T000000000000000001");
     QVERIFY(p.splitCount() == 2);
     QVERIFY(p.memo() == "Memotext");
@@ -1008,6 +1034,7 @@ void MyMoneyFileTest::testAddTransaction()
   try {
     p = m->transaction("A000003", 0);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(p.id() == "T000000000000000001");
     QVERIFY(p.splitCount() == 2);
     QVERIFY(p.memo() == "Memotext");
@@ -1057,6 +1084,7 @@ void MyMoneyFileTest::testModifyTransactionSimple()
     QVERIFY(m_balanceChanged.count() == 2);
     QVERIFY(m_balanceChanged.count(QLatin1String("A000001")) == 1);
     QVERIFY(m_balanceChanged.count(QLatin1String("A000003")) == 1);
+    QVERIFY(m_valueChanged.count() == 0);
     t = m->transaction("T000000000000000001");
     QVERIFY(t.memo() == "New Memotext");
     QVERIFY(m->dirty() == true);
@@ -1094,6 +1122,7 @@ void MyMoneyFileTest::testModifyTransactionNewPostDate()
     QVERIFY(m_balanceChanged.count() == 2);
     QVERIFY(m_balanceChanged.count(QLatin1String("A000001")) == 1);
     QVERIFY(m_balanceChanged.count(QLatin1String("A000003")) == 1);
+    QVERIFY(m_valueChanged.count() == 0);
   } catch (MyMoneyException *e) {
     delete e;
     QFAIL("Unexpected exception!");
@@ -1140,6 +1169,8 @@ void MyMoneyFileTest::testModifyTransactionNewAccount()
     QVERIFY(m_balanceChanged.count(QLatin1String("A000001")) == 1);
     QVERIFY(m_balanceChanged.count(QLatin1String("A000002")) == 1);
     QVERIFY(m_balanceChanged.count(QLatin1String("A000003")) == 1);
+    QVERIFY(m_valueChanged.count() == 0);
+
 
   } catch (MyMoneyException *e) {
     delete e;
@@ -1175,6 +1206,7 @@ void MyMoneyFileTest::testRemoveTransaction()
     QVERIFY(m_balanceChanged.count() == 2);
     QVERIFY(m_balanceChanged.count(QLatin1String("A000001")) == 1);
     QVERIFY(m_balanceChanged.count(QLatin1String("A000003")) == 1);
+    QVERIFY(m_valueChanged.count() == 0);
 
   } catch (MyMoneyException *e) {
     delete e;
@@ -1292,6 +1324,7 @@ void MyMoneyFileTest::testSetAccountName()
     QVERIFY(m_objectsModified.count() == 1);
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Liability")));
 
   } catch (MyMoneyException *e) {
@@ -1307,6 +1340,7 @@ void MyMoneyFileTest::testSetAccountName()
     QVERIFY(m_objectsModified.count() == 1);
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Asset")));
 
   } catch (MyMoneyException *e) {
@@ -1322,6 +1356,7 @@ void MyMoneyFileTest::testSetAccountName()
     QVERIFY(m_objectsModified.count() == 1);
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Expense")));
 
   } catch (MyMoneyException *e) {
@@ -1337,6 +1372,7 @@ void MyMoneyFileTest::testSetAccountName()
     QVERIFY(m_objectsModified.count() == 1);
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
     QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Income")));
 
   } catch (MyMoneyException *e) {
@@ -1376,6 +1412,7 @@ void MyMoneyFileTest::testAddPayee()
     QVERIFY(m_objectsModified.count() == 0);
     QVERIFY(m_objectsAdded.count() == 1);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
 
     QVERIFY(m_objectsAdded.contains(QLatin1String("P000001")));
   } catch (MyMoneyException *e) {
@@ -1404,6 +1441,7 @@ void MyMoneyFileTest::testModifyPayee()
     QVERIFY(m_objectsModified.count() == 1);
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
 
     QVERIFY(m_objectsModified.contains(QLatin1String("P000001")));
   } catch (MyMoneyException *e) {
@@ -1431,6 +1469,7 @@ void MyMoneyFileTest::testRemovePayee()
     QVERIFY(m_objectsModified.count() == 0);
     QVERIFY(m_objectsAdded.count() == 0);
     QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
 
     QVERIFY(m_objectsRemoved.contains(QLatin1String("P000001")));
 
@@ -1869,6 +1908,56 @@ void MyMoneyFileTest::testModifyStdAccount()
     delete e;
   }
 
+}
+
+void MyMoneyFileTest::testAddPrice()
+{
+  testAddAccounts();
+  testBaseCurrency();
+  MyMoneyAccount p;
+  
+  MyMoneyFileTransaction ft;
+  try {
+    p = m->account("A000002");
+    p.setCurrencyId("RON");
+    m->modifyAccount(p);
+    ft.commit();
+
+    QVERIFY(m->account("A000002").currencyId() == "RON");
+  } catch (MyMoneyException *e) {
+    unexpectedException(e);
+  }
+
+  clearObjectLists();
+  ft.restart();
+  MyMoneyPrice price("EUR", "RON", QDate::currentDate(), MyMoneyMoney(4.1), "Test source");
+  m->addPrice(price);
+  ft.commit();
+  QVERIFY(m_balanceChanged.count() == 0);
+  QVERIFY(m_valueChanged.count() == 1);
+  QVERIFY(m_valueChanged.count("A000002") == 1);
+
+  clearObjectLists();
+  ft.restart();
+  MyMoneyPrice priceReciprocal("RON", "EUR", QDate::currentDate(), MyMoneyMoney(1/4.1), "Test source reciprocal price");
+  m->addPrice(priceReciprocal);
+  ft.commit();
+  QVERIFY(m_balanceChanged.count() == 0);
+  QVERIFY(m_valueChanged.count() == 1);
+  QVERIFY(m_valueChanged.count("A000002") == 1);
+}
+
+void MyMoneyFileTest::testRemovePrice()
+{
+  testAddPrice();
+  clearObjectLists();
+  MyMoneyFileTransaction ft;
+  MyMoneyPrice price("EUR", "RON", QDate::currentDate(), MyMoneyMoney(4.1), "Test source");
+  m->removePrice(price);
+  ft.commit();
+  QVERIFY(m_balanceChanged.count() == 0);
+  QVERIFY(m_valueChanged.count() == 1);
+  QVERIFY(m_valueChanged.count("A000002") == 1);
 }
 
 #include "mymoneyfiletest.moc"

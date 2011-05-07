@@ -75,12 +75,15 @@ private slots:
   void testBaseCurrency();
   void testOpeningBalanceNoBase();
   void testOpeningBalance();
+  void testAddPrice();
+  void testRemovePrice();
 
 private slots:
   void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);
   void objectModified(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);
   void objectRemoved(MyMoneyFile::notificationObjectT type, const QString& id);
   void balanceChanged(const MyMoneyAccount& account);
+  void valueChanged(const MyMoneyAccount& account);
 
 private:
   void testRemoveStdAccount(const MyMoneyAccount& acc);
@@ -92,6 +95,7 @@ private:
   QStringList m_objectsModified;
   QStringList m_objectsRemoved;
   QStringList m_balanceChanged;
+  QStringList m_valueChanged;
 };
 
 #endif

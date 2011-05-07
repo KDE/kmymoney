@@ -77,13 +77,13 @@ public:
   }
 
   MyMoneyNotification(MyMoneyFile::notificationModeT mode, const MyMoneySchedule& schedule) :
-      m_objType(MyMoneyFile::notifyPayee),
+      m_objType(MyMoneyFile::notifySchedule),
       m_notificationMode(mode),
       m_id(schedule.id()) {
   }
 
   MyMoneyNotification(MyMoneyFile::notificationModeT mode, const MyMoneySecurity& security) :
-      m_objType(MyMoneyFile::notifyPayee),
+      m_objType(MyMoneyFile::notifySecurity),
       m_notificationMode(mode),
       m_id(security.id()) {
   }
@@ -202,6 +202,19 @@ public:
     }
   }
 
+  void priceChanged(const MyMoneyFile& file, const MyMoneyPrice price) {
+    // get all affected accounts and add them to the m_valueChangedSet
+    QList<MyMoneyAccount> accList;
+    file.accountList(accList);
+    QList<MyMoneyAccount>::const_iterator account_it;
+    for (account_it = accList.constBegin(); account_it != accList.constEnd(); ++account_it) {
+      QString currencyId = account_it->currencyId();
+      if (currencyId != file.baseCurrency().id() && (currencyId == price.from() || currencyId == price.to())) {
+        // this account is not in the base currency and the price affects it's value
+        m_valueChangedSet.insert(account_it->id());
+      }
+    }
+  }
 
   /**
     * This member points to the storage strategy
@@ -242,6 +255,15 @@ public:
     * @sa MyMoneyFile::commitTransaction()
     */
   QSet<QString>     m_balanceChangedSet;
+
+  /**
+    * This member keeps a list of account ids for which
+    * a valueChanged() signal needs to be emitted when
+    * a set of operations has been committed.
+    *
+    * @sa MyMoneyFile::commitTransaction()
+    */
+  QSet<QString>     m_valueChangedSet;
 
   /**
     * This member keeps the list of changes in the engine
@@ -380,10 +402,20 @@ void MyMoneyFile::commitTransaction(void)
   // accounts for which we have an indication about a possible
   // change.
   foreach (const QString& id, d->m_balanceChangedSet) {
+    // if we notify about balance change we don't need to notify about value change
+    // for the same account since a balance change implies a value change
+    d->m_valueChangedSet.remove(id);
     const MyMoneyAccount& acc = d->m_cache.account(id);
     emit balanceChanged(acc);
   }
   d->m_balanceChangedSet.clear();
+
+  // now notify about the remaining value changes
+  foreach (const QString& id, d->m_valueChangedSet) {
+    const MyMoneyAccount& acc = d->m_cache.account(id);
+    emit valueChanged(acc);
+  }
+  d->m_valueChangedSet.clear();
 
   // as a last action, send out the global dataChanged signal
   if (changed) {
@@ -399,6 +431,7 @@ void MyMoneyFile::rollbackTransaction(void)
   d->m_inTransaction = false;
   preloadCache();
   d->m_balanceChangedSet.clear();
+  d->m_valueChangedSet.clear();
   d->m_changeSet.clear();
 }
 
@@ -2376,6 +2409,9 @@ void MyMoneyFile::addPrice(const MyMoneyPrice& price)
   // clear all changed objects from cache
   MyMoneyNotifier notifier(d);
 
+  // store the account's which are affected by this price regarding their value
+  d->priceChanged(*this, price);
+
   d->m_storage->addPrice(price);
 }
 
@@ -2385,6 +2421,9 @@ void MyMoneyFile::removePrice(const MyMoneyPrice& price)
 
   // clear all changed objects from cache
   MyMoneyNotifier notifier(d);
+
+  // store the account's which are affected by this price regarding their value
+  d->priceChanged(*this, price);
 
   d->m_storage->removePrice(price);
 }

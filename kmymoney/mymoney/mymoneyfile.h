@@ -148,6 +148,7 @@ public:
     notifyAccount = 1,
     notifyInstitution,
     notifyPayee,
+    notifySchedule,
     notifySecurity
   } notificationObjectT;
 
@@ -1415,6 +1416,13 @@ signals:
     * removing transactions from the MyMoneyFile object.
     */
   void balanceChanged(const MyMoneyAccount& acc);
+
+  /**
+    * This signal is emitted by the engine whenever the value
+    * of an account had been changed by adding or removing
+    * prices from the MyMoneyFile object.
+    */
+  void valueChanged(const MyMoneyAccount& acc);
 
 private:
   static MyMoneyFile file;

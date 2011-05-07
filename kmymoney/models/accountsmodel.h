@@ -115,7 +115,7 @@ public slots:
   void slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
   void slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj);
   void slotObjectRemoved(MyMoneyFile::notificationObjectT objType, const QString& id);
-  void slotBalanceChanged(const MyMoneyAccount &account);
+  void slotBalanceOrValueChanged(const MyMoneyAccount &account);
 
 signals:
   /**

@@ -660,7 +660,7 @@ void AccountsModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objType, 
 /**
   * Notify the model that the account balance has been changed.
   */
-void AccountsModel::slotBalanceChanged(const MyMoneyAccount &account)
+void AccountsModel::slotBalanceOrValueChanged(const MyMoneyAccount &account)
 {
   QStandardItem *currentItem = d->itemFromAccountId(this, account.id());
   const MyMoneyAccount *currentAccount = &account;
