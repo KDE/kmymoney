@@ -487,7 +487,7 @@ void KGlobalLedgerView::loadView(void)
           // certainly be posted in the past. So we take today's date
           // as the alternative
           if (s.isOverdue()) {
-            t.setPostDate(QDate::currentDate());
+            t.setPostDate(s.adjustedDate(QDate::currentDate(), s.weekendOption()));
           } else {
             t.setPostDate(s.adjustedNextDueDate());
           }
