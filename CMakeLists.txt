@@ -6,7 +6,9 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6.4)
 
 # cmake 2.6 proposed to add this policy
 if(COMMAND cmake_policy)
-  cmake_policy(SET CMP0017 NEW)
+  if(POLICY CMP0017)
+    cmake_policy(SET CMP0017 NEW)
+  endif(POLICY CMP0017)
   cmake_policy(SET CMP0003 NEW)
   # until the createtarball script generates different custom targets
   # for the various translations, we need to keep the following setting
