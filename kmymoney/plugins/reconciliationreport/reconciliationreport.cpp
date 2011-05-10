@@ -36,11 +36,10 @@
 
 #include "kreconciliationreportdlg.h"
 
-typedef KGenericFactory<KMMReconciliationReportPlugin> reconciliationreportFactory;
+K_PLUGIN_FACTORY(ReconciliationReportFactory, registerPlugin<KMMReconciliationReportPlugin>();)
+K_EXPORT_PLUGIN(ReconciliationReportFactory("kmm_reconciliationreport", "kmymoney"))
 
-K_EXPORT_COMPONENT_FACTORY(kmm_reconciliationreport, reconciliationreportFactory("kmm_reconciliationreport", "kmymoney"))
-
-KMMReconciliationReportPlugin::KMMReconciliationReportPlugin(QObject *parent, const QStringList&)
+KMMReconciliationReportPlugin::KMMReconciliationReportPlugin(QObject *parent, const QVariantList&)
     : KMyMoneyPlugin::Plugin(parent, "Reconciliation report"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   // For ease announce that we have been loaded.

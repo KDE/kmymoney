@@ -79,8 +79,8 @@
 #include "kmymoneyview.h"
 #include "kbpickstartdate.h"
 
-K_EXPORT_COMPONENT_FACTORY(kmm_kbanking,
-                           KGenericFactory<KBankingPlugin>("kmm_kbanking"))
+K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<KBankingPlugin>();)
+K_EXPORT_PLUGIN(KBankingFactory("kmm_kbanking"))
 
 class KBankingPlugin::Private
 {
@@ -121,7 +121,7 @@ public:
   QTimer *passwordCacheTimer;
 };
 
-KBankingPlugin::KBankingPlugin(QObject *parent, const QStringList&) :
+KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::Plugin(parent, "KBanking"/*must be the same as X-KDE-PluginInfo-Name*/),
     KMyMoneyPlugin::OnlinePlugin(),
     d(new Private),
@@ -157,7 +157,7 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QStringList&) :
     GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Debug);
     if (m_kbanking->init() == 0) {
       // Tell the host application to load my GUI component
-      setComponentData(KGenericFactory<KBankingPlugin>::componentData());
+      setComponentData(KBankingFactory::componentData());
       setXMLFile("kmm_kbanking.rc");
       qDebug("KMyMoney kbanking plugin loaded");
 

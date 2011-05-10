@@ -38,7 +38,7 @@ class CsvImporterPlugin : public KMyMoneyPlugin::Plugin
   Q_OBJECT
 
 public:
-  explicit CsvImporterPlugin(QObject *parent, const QStringList& = QStringList());
+  explicit CsvImporterPlugin(QObject* parent, const QVariantList&);
   ~CsvImporterPlugin();
 
   CsvImporterDlg*  m_csvDlg;

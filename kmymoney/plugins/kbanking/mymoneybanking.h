@@ -70,7 +70,7 @@ class KBankingPlugin : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::Onl
 
   Q_OBJECT
 public:
-  KBankingPlugin(QObject* parent, const QStringList&);
+  KBankingPlugin(QObject *parent, const QVariantList&);
   virtual ~KBankingPlugin();
 
   bool importStatement(const MyMoneyStatement& s);

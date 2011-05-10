@@ -44,13 +44,13 @@
 #include "mymoneystatement.h"
 #include "csvimporterdlg.h"
 
-K_EXPORT_COMPONENT_FACTORY(kmm_csvimport,
-                           KGenericFactory<CsvImporterPlugin>("kmm_csvimport"))
+K_PLUGIN_FACTORY(CsvImporterFactory, registerPlugin<CsvImporterPlugin>();)
+K_EXPORT_PLUGIN(CsvImporterFactory("kmm_csvimport"))
 
-CsvImporterPlugin::CsvImporterPlugin(QObject *parent, const QStringList&) :
+CsvImporterPlugin::CsvImporterPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::Plugin(parent, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
-  setComponentData(KGenericFactory<CsvImporterPlugin>::componentData());
+  setComponentData(CsvImporterFactory::componentData());
   setXMLFile("kmm_csvimport.rc");
   createActions();
 // For information, announce that we have been loaded.

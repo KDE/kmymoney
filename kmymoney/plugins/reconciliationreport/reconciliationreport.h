@@ -33,7 +33,7 @@ class KMMReconciliationReportPlugin: public KMyMoneyPlugin::Plugin
   Q_OBJECT
 
 public:
-  KMMReconciliationReportPlugin(QObject* parent, const QStringList& name);
+  KMMReconciliationReportPlugin(QObject* parent, const QVariantList& name);
 
 protected slots:
   // reconciliation of an account has finished

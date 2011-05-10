@@ -45,8 +45,8 @@
 #include "konlinebankingsetupwizard.h"
 #include "kofxdirectconnectdlg.h"
 
-K_EXPORT_COMPONENT_FACTORY(kmm_ofximport,
-                           KGenericFactory<OfxImporterPlugin>("kmm_ofximport"))
+K_PLUGIN_FACTORY(OfxImportFactory, registerPlugin<OfxImporterPlugin>();)
+K_EXPORT_PLUGIN(OfxImportFactory("kmm_ofximport"))
 
 using KWallet::Wallet;
 
@@ -71,7 +71,7 @@ public:
 
 
 
-OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QStringList&) :
+OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::Plugin(parent, "KMyMoney OFX"),
     /*
      * the string in the line above must be the same as
@@ -81,7 +81,7 @@ OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QStringList&) :
     KMyMoneyPlugin::ImporterPlugin(),
     d(new Private)
 {
-  setComponentData(KGenericFactory<OfxImporterPlugin>::componentData());
+  setComponentData(OfxImportFactory::componentData());
   setXMLFile("kmm_ofximport.rc");
   createActions();
 

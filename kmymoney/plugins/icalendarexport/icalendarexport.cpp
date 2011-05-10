@@ -37,9 +37,8 @@
 #include "schedulestoicalendar.h"
 #include "pluginsettings.h"
 
-typedef KGenericFactory<KMMiCalendarExportPlugin> icalendarexportFactory;
-
-K_EXPORT_COMPONENT_FACTORY(kmm_icalendarexport, icalendarexportFactory("kmm_icalendarexport"))
+K_PLUGIN_FACTORY(ICalendarExportFactory, registerPlugin<KMMiCalendarExportPlugin>();)
+K_EXPORT_PLUGIN(ICalendarExportFactory("kmm_icalendarexport"))
 
 struct KMMiCalendarExportPlugin::Private {
   KAction* m_action;
@@ -48,7 +47,7 @@ struct KMMiCalendarExportPlugin::Private {
   KMMSchedulesToiCalendar m_exporter;
 };
 
-KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QStringList&)
+KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QVariantList&)
     : KMyMoneyPlugin::Plugin(parent, "iCalendar"/*must be the same as X-KDE-PluginInfo-Name*/),
     d(new Private)
 {
@@ -56,7 +55,7 @@ KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QStrin
   d->m_iCalendarFileEntryName = "iCalendarFile";
 
   // Tell the host application to load my GUI component
-  setComponentData(icalendarexportFactory::componentData());
+  setComponentData(ICalendarExportFactory::componentData());
   setXMLFile("kmm_icalendarexport.rc");
 
   // For ease announce that we have been loaded.

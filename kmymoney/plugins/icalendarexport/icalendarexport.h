@@ -33,7 +33,7 @@ class KMMiCalendarExportPlugin: public KMyMoneyPlugin::Plugin
   Q_OBJECT
 
 public:
-  KMMiCalendarExportPlugin(QObject *parent, const QStringList&);
+  KMMiCalendarExportPlugin(QObject *parent, const QVariantList&);
   ~KMMiCalendarExportPlugin();
 
 protected slots:

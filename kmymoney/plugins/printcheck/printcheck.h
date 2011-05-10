@@ -33,7 +33,7 @@ class KMMPrintCheckPlugin: public KMyMoneyPlugin::Plugin
   Q_OBJECT
 
 public:
-  KMMPrintCheckPlugin(QObject *parent, const QStringList&);
+  KMMPrintCheckPlugin(QObject *parent, const QVariantList&);
   ~KMMPrintCheckPlugin();
 
 private:
