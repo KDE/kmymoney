@@ -585,11 +585,6 @@ int MyMoneyAccount::fraction(const MyMoneySecurity& sec)
 
 int MyMoneyAccount::fraction(void) const
 {
-  //replaced Q_ASSERT by qWarning because the Qt4 Q_ASSERT exits after printing the message
-  //For new schedules it is valid to have fraction == -1
-  if (m_fraction == -1)
-    qWarning("fraction == -1");
-
   return m_fraction;
 }
 
