@@ -90,6 +90,7 @@ public:
   KMyMoneyAccountCombo* m_accountComboBox;
 
   MyMoneyMoney         m_totalBalance;
+  bool                 m_balanceIsApproximated;
 };
 
 MousePressFilter::MousePressFilter(QWidget* parent) :
@@ -159,7 +160,8 @@ KGlobalLedgerView::Private::Private() :
     m_recursion(false),
     m_showDetails(false),
     m_filterProxyModel(0),
-    m_accountComboBox(0)
+    m_accountComboBox(0),
+    m_balanceIsApproximated(false)
 {
 }
 
@@ -762,9 +764,6 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
       m_leftSummaryLabel->setText(i18n("Statement: %1", d->m_endingBalance.formatMoney("", d->m_precision)));
       m_centerSummaryLabel->setText(i18nc("Cleared balance", "Cleared: %1", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
       d->m_totalBalance = clearedBalance[m_account.id()] - d->m_endingBalance;
-      KMyMoneyRegister::SelectedTransactions selection;
-      m_register->selectedTransactions(selection);
-      slotUpdateSummaryLine(selection);
     }
   } else {
     // update summary line in normal mode
@@ -781,16 +780,13 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
     if (m_account.accountType() != MyMoneyAccount::Investment) {
       m_centerSummaryLabel->setText(i18nc("Cleared balance", "Cleared: %1", clearedBalance[m_account.id()].formatMoney("", d->m_precision)));
       d->m_totalBalance = actBalance[m_account.id()];
-      // determine the number of selected transactions
-      KMyMoneyRegister::SelectedTransactions selection;
-      m_register->selectedTransactions(selection);
-      slotUpdateSummaryLine(selection);
     } else {
       m_centerSummaryLabel->hide();
       MyMoneyMoney balance;
       MyMoneySecurity base = file->baseCurrency();
       QMap<QString, MyMoneyMoney>::const_iterator it_b;
-      bool approx = false;
+      // reset the approximated flag
+      d->m_balanceIsApproximated = false;
       for (it_b = actBalance.begin(); it_b != actBalance.end(); ++it_b) {
         MyMoneyAccount stock = file->account(it_b.key());
         QString currencyId = stock.currencyId();
@@ -801,27 +797,29 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
         if (stock.isInvest()) {
           currencyId = sec.tradingCurrency();
           priceInfo = file->price(sec.id(), currencyId);
-          approx |= !priceInfo.isValid();
+          d->m_balanceIsApproximated |= !priceInfo.isValid();
           rate = priceInfo.rate(sec.tradingCurrency());
         }
 
         if (currencyId != base.id()) {
           priceInfo = file->price(sec.tradingCurrency(), base.id());
-          approx |= !priceInfo.isValid();
+          d->m_balanceIsApproximated |= !priceInfo.isValid();
           rate = (rate * priceInfo.rate(base.id())).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()));
         }
         balance += ((*it_b) * rate).convert(base.smallestAccountFraction());
       }
-      m_rightSummaryLabel->setText(i18n("Investment value: %1%2", approx ? "~" : "", balance.formatMoney(base.tradingSymbol(), d->m_precision)));
+      d->m_totalBalance = balance;
     }
     m_rightSummaryLabel->setPalette(palette);
   }
+  // determine the number of selected transactions
+  KMyMoneyRegister::SelectedTransactions selection;
+  m_register->selectedTransactions(selection);
+  slotUpdateSummaryLine(selection);
 }
 
 void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTransactions& selection)
 {
-  QPalette palette = m_rightSummaryLabel->palette();
-  palette.setColor(m_rightSummaryLabel->foregroundRole(), m_leftSummaryLabel->palette().color(foregroundRole()));
   if (selection.count() > 1) {
     MyMoneyMoney balance;
     foreach (KMyMoneyRegister::SelectedTransaction t, selection) {
@@ -836,12 +834,20 @@ void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTr
       m_rightSummaryLabel->setText(i18n("Difference: %1", d->m_totalBalance.formatMoney("", d->m_precision)));
 
     } else {
-      m_rightSummaryLabel->setText(i18n("Balance: %1", d->m_totalBalance.formatMoney("", d->m_precision)));
-      bool showNegative = d->m_totalBalance.isNegative();
-      if (m_account.accountGroup() == MyMoneyAccount::Liability && !d->m_totalBalance.isZero())
-        showNegative = !showNegative;
-      if (showNegative) {
-        palette.setColor(m_rightSummaryLabel->foregroundRole(), KMyMoneyGlobalSettings::listNegativeValueColor());
+      if (m_account.accountType() != MyMoneyAccount::Investment) {
+        m_rightSummaryLabel->setText(i18n("Balance: %1", d->m_totalBalance.formatMoney("", d->m_precision)));
+        bool showNegative = d->m_totalBalance.isNegative();
+        if (m_account.accountGroup() == MyMoneyAccount::Liability && !d->m_totalBalance.isZero())
+          showNegative = !showNegative;
+        if (showNegative) {
+          QPalette palette = m_rightSummaryLabel->palette();
+          palette.setColor(m_rightSummaryLabel->foregroundRole(), KMyMoneyGlobalSettings::listNegativeValueColor());
+          m_rightSummaryLabel->setPalette(palette);
+        }
+      } else {
+        m_rightSummaryLabel->setText(i18n("Investment value: %1%2",
+                                          d->m_balanceIsApproximated ? "~" : "",
+                                          d->m_totalBalance.formatMoney(MyMoneyFile::instance()->baseCurrency().tradingSymbol(), d->m_precision)));
       }
     }
   }
