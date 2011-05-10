@@ -1915,7 +1915,7 @@ void MyMoneyFileTest::testAddPrice()
   testAddAccounts();
   testBaseCurrency();
   MyMoneyAccount p;
-  
+
   MyMoneyFileTransaction ft;
   try {
     p = m->account("A000002");
@@ -1939,7 +1939,7 @@ void MyMoneyFileTest::testAddPrice()
 
   clearObjectLists();
   ft.restart();
-  MyMoneyPrice priceReciprocal("RON", "EUR", QDate::currentDate(), MyMoneyMoney(1/4.1), "Test source reciprocal price");
+  MyMoneyPrice priceReciprocal("RON", "EUR", QDate::currentDate(), MyMoneyMoney(1 / 4.1), "Test source reciprocal price");
   m->addPrice(priceReciprocal);
   ft.commit();
   QVERIFY(m_balanceChanged.count() == 0);
