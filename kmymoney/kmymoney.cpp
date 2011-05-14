@@ -4998,7 +4998,7 @@ void KMyMoneyApp::slotTransactionsDelete(void)
   // if the action is enabled
   if (!kmymoney->action("transaction_delete")->isEnabled())
     return;
-  if (d->m_selectedTransactions.count() == 0)
+  if (d->m_selectedTransactions.isEmpty())
     return;
   if (d->m_selectedTransactions.warnLevel() == 1) {
     if (KMessageBox::warningContinueCancel(0,
@@ -5480,7 +5480,7 @@ void KMyMoneyApp::slotMoveToAccount(const QString& id)
     w->close();
   }
 
-  if (d->m_selectedTransactions.count() > 0) {
+  if (!d->m_selectedTransactions.isEmpty()) {
     MyMoneyFileTransaction ft;
     try {
       KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
@@ -5709,7 +5709,7 @@ void KMyMoneyApp::showContextMenu(const QString& containerName)
 
 void KMyMoneyApp::slotShowTransactionContextMenu(void)
 {
-  if (d->m_selectedTransactions.count() == 0 && d->m_selectedSchedule != MyMoneySchedule()) {
+  if (d->m_selectedTransactions.isEmpty() && d->m_selectedSchedule != MyMoneySchedule()) {
     showContextMenu("schedule_context_menu");
   } else {
     showContextMenu("transaction_context_menu");
@@ -5950,16 +5950,14 @@ void KMyMoneyApp::slotUpdateActions(void)
   //       can select at least a single transaction
   action("transaction_select_all")->setEnabled(true);
   if (!d->m_selectedTransactions.isEmpty()) {
-    if (d->m_selectedTransactions.count() != 0) {
-      // enable 'delete transaction' only if at least one of the
-      // selected transactions does not reference a closed account
-      bool enable = false;
-      KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
-      for (it_t = d->m_selectedTransactions.constBegin(); (enable == false) && (it_t != d->m_selectedTransactions.constEnd()); ++it_t) {
-        enable = !file->referencesClosedAccount((*it_t).transaction());
-      }
-      action("transaction_delete")->setEnabled(enable);
+    // enable 'delete transaction' only if at least one of the
+    // selected transactions does not reference a closed account
+    bool enable = false;
+    KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
+    for (it_t = d->m_selectedTransactions.constBegin(); (enable == false) && (it_t != d->m_selectedTransactions.constEnd()); ++it_t) {
+      enable = !file->referencesClosedAccount((*it_t).transaction());
     }
+    action("transaction_delete")->setEnabled(enable);
 
     if (!d->m_transactionEditor) {
       tooltip = i18n("Duplicate the current selected transactions");
