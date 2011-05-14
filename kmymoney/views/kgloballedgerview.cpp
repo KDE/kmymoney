@@ -750,6 +750,8 @@ void KGlobalLedgerView::loadView(void)
 
   // and tell everyone what's selected
   emit accountSelected(m_account);
+  KMyMoneyRegister::SelectedTransactions actualSelection(m_register);
+  emit transactionsSelected(actualSelection);
 }
 
 void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& actBalance, const QMap<QString, MyMoneyMoney>& clearedBalance)
