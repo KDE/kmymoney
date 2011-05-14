@@ -96,17 +96,17 @@ void MyMoneyDatabaseMgrTest::testCreateDb()
     }
 
     QString dir(qgetenv("TMPDIR"));
-    if( !dir.isEmpty() && !dir.endsWith('/')) {
+    if (!dir.isEmpty() && !dir.endsWith('/')) {
       dir += '/';
     }
 
-    QString mode = 
-            //"QPSQL&mode=single";
-            "QSQLITE&mode=single";
-            //"QMYSQL&mode=single";
+    QString mode =
+      //"QPSQL&mode=single";
+      //"QMYSQL&mode=single";
+      "QSQLITE&mode=single";
 
     m_url = QString("sql://%1@localhost/%2kmm_test_driver?driver=%3")
-                  .arg(userName, dir, mode);
+            .arg(userName, dir, mode);
 
     KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
     QVERIFY(0 != sql);
