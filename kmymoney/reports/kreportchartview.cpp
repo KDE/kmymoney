@@ -49,11 +49,11 @@
 
 using namespace reports;
 
-KReportChartView::KReportChartView(QWidget* parent) : 
-  KDChart::Chart(parent),
-  m_backgroundBrush(KColorScheme(QPalette::Current).background()),
-  m_foregroundBrush(KColorScheme(QPalette::Current).foreground())
-  
+KReportChartView::KReportChartView(QWidget* parent) :
+    KDChart::Chart(parent),
+    m_backgroundBrush(KColorScheme(QPalette::Current).background()),
+    m_foregroundBrush(KColorScheme(QPalette::Current).foreground())
+
 {
   // ********************************************************************
   // Set KMyMoney's Chart Parameter Defaults
@@ -172,18 +172,18 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   //the palette - we set it here because it is a property of the diagram
   switch (KMyMoneySettings::chartsPalette()) {
-  case 0:
-    planeDiagram->useDefaultColors();
-    break;
-  case 1:
-    planeDiagram->useRainbowColors();
-    break;
-  case 2:
-  default:
-    planeDiagram->useSubduedColors();
-    break;
+    case 0:
+      planeDiagram->useDefaultColors();
+      break;
+    case 1:
+      planeDiagram->useRainbowColors();
+      break;
+    case 2:
+    default:
+      planeDiagram->useSubduedColors();
+      break;
   }
-  
+
   //the legend will be used later
   Legend* legend = new Legend(planeDiagram, this);
   legend->setTitleText(i18nc("Chart legend title", "Legend"));
@@ -243,18 +243,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     //add the axes to the corresponding diagram
     if (config.chartType() == MyMoneyReport::eChartLine) {
       KDChart::LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(planeDiagram);
-
-      //remove all existing axes before inserting new ones
-      while (lineDiagram->axes().count() > 0) {
-        CartesianAxis *delAxis  = lineDiagram->axes().at(0);
-        lineDiagram->takeAxis(delAxis);
-        delete delAxis;
-      }
-
-      //add the new axes
       lineDiagram->addAxis(xAxis);
       lineDiagram->addAxis(yAxis);
-
     } else if (config.chartType() == MyMoneyReport::eChartBar) {
       KDChart::BarDiagram* barDiagram = qobject_cast<BarDiagram*>(planeDiagram);
       barDiagram->addAxis(xAxis);
@@ -450,34 +440,24 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   //set the legend basic attributes
   //this is done after adding the legend because the values are overridden when adding the legend to the chart
-  if (legend->texts().count() <= KMyMoneyGlobalSettings::maximumLegendItems()) {
-    legend->setPosition(Position::East);
-    TextAttributes legendTextAttr(legend->textAttributes());
-    legendTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize() + 2);
-    legendTextAttr.setAutoShrink(true);
-    legendTextAttr.setPen(m_foregroundBrush.color());
-    legend->setTextAttributes(legendTextAttr);
-
-    TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
-    legendTitleTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize() + 4);
-    legendTitleTextAttr.setAutoShrink(true);
-    legendTitleTextAttr.setPen(m_foregroundBrush.color());
-    legend->setTitleTextAttributes(legendTitleTextAttr);
-    legend->setTitleText(i18nc("Chart lines legend", "Legend"));
-    legend->setUseAutomaticMarkerSize(false);
-
-    replaceLegend(legend);
-  } else {
-    //if it is over the limit delete the legend
-    takeLegend(legend);
-    delete legend;
-    if (legends().size()) {
-      Legend* initialLegend = legends().at(0);
-      takeLegend(initialLegend);
-      delete initialLegend;
-    }
-
+  for (uint i = static_cast<uint>(KMyMoneyGlobalSettings::maximumLegendItems()); i < legend->datasetCount(); ++i) {
+    legend->setDatasetHidden(i, true);
   }
+  legend->setPosition(Position::East);
+  TextAttributes legendTextAttr(legend->textAttributes());
+  legendTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize() + 2);
+  legendTextAttr.setAutoShrink(true);
+  legendTextAttr.setPen(m_foregroundBrush.color());
+  legend->setTextAttributes(legendTextAttr);
+
+  TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
+  legendTitleTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize() + 4);
+  legendTitleTextAttr.setAutoShrink(true);
+  legendTitleTextAttr.setPen(m_foregroundBrush.color());
+  legend->setTitleTextAttributes(legendTitleTextAttr);
+  legend->setTitleText(i18nc("Chart lines legend", "Legend"));
+  legend->setUseAutomaticMarkerSize(false);
+  replaceLegend(legend);
 
   //this sets the line width only for line diagrams
   setLineWidth(config.chartLineWidth());
