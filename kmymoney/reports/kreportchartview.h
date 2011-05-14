@@ -74,12 +74,6 @@ public:
     */
   void removeLegend(void);
 
-protected:
-  /**
-    * This is an overload method needed to capture the mouse events
-    */
-  bool event(QEvent* event);
-
 private:
 
   /**

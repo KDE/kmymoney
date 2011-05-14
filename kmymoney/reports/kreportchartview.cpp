@@ -19,7 +19,6 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QMouseEvent>
 #include <QLabel>
 #include <QFrame>
 #include <QStandardItemModel>
@@ -50,11 +49,11 @@
 
 using namespace reports;
 
-KReportChartView::KReportChartView(QWidget* parent) :
-    KDChart::Chart(parent),
-    m_backgroundBrush(KColorScheme(QPalette::Current).background()),
-    m_foregroundBrush(KColorScheme(QPalette::Current).foreground())
-
+KReportChartView::KReportChartView(QWidget* parent) : 
+  KDChart::Chart(parent),
+  m_backgroundBrush(KColorScheme(QPalette::Current).background()),
+  m_foregroundBrush(KColorScheme(QPalette::Current).foreground())
+  
 {
   // ********************************************************************
   // Set KMyMoney's Chart Parameter Defaults
@@ -173,18 +172,18 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   //the palette - we set it here because it is a property of the diagram
   switch (KMyMoneySettings::chartsPalette()) {
-    case 0:
-      planeDiagram->useDefaultColors();
-      break;
-    case 1:
-      planeDiagram->useRainbowColors();
-      break;
-    case 2:
-    default:
-      planeDiagram->useSubduedColors();
-      break;
+  case 0:
+    planeDiagram->useDefaultColors();
+    break;
+  case 1:
+    planeDiagram->useRainbowColors();
+    break;
+  case 2:
+  default:
+    planeDiagram->useSubduedColors();
+    break;
   }
-
+  
   //the legend will be used later
   Legend* legend = new Legend(planeDiagram, this);
   legend->setTitleText(i18nc("Chart legend title", "Legend"));
@@ -262,9 +261,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       barDiagram->addAxis(yAxis);
     }
   }
-
-  // For onMouseOver events, we want to activate mouse tracking
-  setMouseTracking(true);
 
   ::timetrace("loading rows");
   switch (config.detailLevel()) {
@@ -595,11 +591,6 @@ void KReportChartView::justifyModelSize(int rows, int columns)
 
   Q_ASSERT(m_model.rowCount() >= rows);
   Q_ASSERT(m_model.columnCount() >= columns);
-}
-
-bool KReportChartView::event(QEvent* event)
-{
-  return Chart::event(event);
 }
 
 void KReportChartView::setLineWidth(const int lineWidth)

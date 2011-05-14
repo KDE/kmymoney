@@ -191,7 +191,6 @@ void KReportsView::KReportTab::updateReport(void)
   m_part->end();
 
   m_table->drawChart(*m_chartView);
-  m_chartView->update();
 
   if (m_report.isChartByDefault() && !m_showingChart)
     toggleChart();
