@@ -50,16 +50,20 @@
 
 using namespace reports;
 
-KReportChartView::KReportChartView(QWidget* parent): KDChart::Chart(parent)
+KReportChartView::KReportChartView(QWidget* parent) : 
+  KDChart::Chart(parent),
+  m_backgroundBrush(KColorScheme(QPalette::Current).background()),
+  m_foregroundBrush(KColorScheme(QPalette::Current).foreground())
+  
 {
   // ********************************************************************
   // Set KMyMoney's Chart Parameter Defaults
   // ********************************************************************
 
-  //Set the background to white
-  BackgroundAttributes backAttr = backgroundAttributes();
-  KColorScheme colorScheme(QPalette::Normal);
-  backAttr.setBrush(colorScheme.background());
+
+  //Set the background obtained from the color scheme
+  BackgroundAttributes backAttr(backgroundAttributes());
+  backAttr.setBrush(m_backgroundBrush);
   backAttr.setVisible(true);
   setBackgroundAttributes(backAttr);
 
@@ -94,6 +98,9 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   header->setText(config.name());
   header->setType(HeaderFooter::Header);
   header->setPosition(Position::North);
+  TextAttributes headerTextAttr(header->textAttributes());
+  headerTextAttr.setPen(m_foregroundBrush.color());
+  header->setTextAttributes(headerTextAttr);
   addHeaderFooter(header);
 
   // whether to limit the chart to use series totals only.  Used for reports which only
@@ -181,9 +188,16 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     CartesianAxis *xAxis = new CartesianAxis();
     xAxis->setPosition(CartesianAxis::Bottom);
     xAxis->setTitleText(i18n("Time"));
-    TextAttributes xAxisTextAttr(xAxis->titleTextAttributes());
-    xAxisTextAttr.setMinimalFontSize(KGlobalSettings::generalFont().pointSize());
-    xAxis->setTitleTextAttributes(xAxisTextAttr);
+    TextAttributes xAxisTitleTextAttr(xAxis->titleTextAttributes());
+    xAxisTitleTextAttr.setMinimalFontSize(KGlobalSettings::generalFont().pointSize());
+    xAxisTitleTextAttr.setPen(m_foregroundBrush.color());
+    xAxis->setTitleTextAttributes(xAxisTitleTextAttr);
+    TextAttributes xAxisTextAttr(xAxis->textAttributes());
+    xAxisTextAttr.setPen(m_foregroundBrush.color());
+    xAxis->setTextAttributes(xAxisTextAttr);
+    RulerAttributes xAxisRulerAttr(xAxis->rulerAttributes());
+    xAxisRulerAttr.setTickMarkPen(m_foregroundBrush.color());
+    xAxis->setRulerAttributes(xAxisRulerAttr);
 
     // Set up X axis labels (ie "abscissa" to use the technical term)
     QStringList abscissaNames;
@@ -208,9 +222,16 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       yAxis->setTitleText(i18n("Balance"));
     }
 
-    TextAttributes yAxisTextAttr(yAxis->titleTextAttributes());
-    yAxisTextAttr.setMinimalFontSize(KGlobalSettings::generalFont().pointSize());
-    yAxis->setTitleTextAttributes(yAxisTextAttr);
+    TextAttributes yAxisTitleTextAttr(yAxis->titleTextAttributes());
+    yAxisTitleTextAttr.setMinimalFontSize(KGlobalSettings::generalFont().pointSize());
+    yAxisTitleTextAttr.setPen(m_foregroundBrush.color());
+    yAxis->setTitleTextAttributes(yAxisTitleTextAttr);
+    TextAttributes yAxisTextAttr(yAxis->textAttributes());
+    yAxisTextAttr.setPen(m_foregroundBrush.color());
+    yAxis->setTextAttributes(yAxisTextAttr);
+    RulerAttributes yAxisRulerAttr(yAxis->rulerAttributes());
+    yAxisRulerAttr.setTickMarkPen(m_foregroundBrush.color());
+    yAxis->setRulerAttributes(yAxisRulerAttr);
 
     //add the axes to the corresponding diagram
     if (config.chartType() == MyMoneyReport::eChartLine) {
@@ -233,15 +254,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       barDiagram->addAxis(yAxis);
     }
   }
-
-  //line markers
-  DataValueAttributes dataValueAttr(planeDiagram->dataValueAttributes());
-  MarkerAttributes markerAttr(dataValueAttr.markerAttributes());
-  markerAttr.setVisible(true);
-  markerAttr.setMarkerStyle(MarkerAttributes::MarkerCircle);
-  markerAttr.setMarkerSize(QSize(8, 8));
-  dataValueAttr.setMarkerAttributes(markerAttr);
-  planeDiagram->setDataValueAttributes(dataValueAttr);
 
   // For onMouseOver events, we want to activate mouse tracking
   setMouseTracking(true);
@@ -439,11 +451,13 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     TextAttributes legendTextAttr(legend->textAttributes());
     legendTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize() + 2);
     legendTextAttr.setAutoShrink(true);
+    legendTextAttr.setPen(m_foregroundBrush.color());
     legend->setTextAttributes(legendTextAttr);
 
     TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
     legendTitleTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize() + 4);
     legendTitleTextAttr.setAutoShrink(true);
+    legendTitleTextAttr.setPen(m_foregroundBrush.color());
     legend->setTitleTextAttributes(legendTitleTextAttr);
     legend->setTitleText(i18nc("Chart lines legend", "Legend"));
     legend->setUseAutomaticMarkerSize(false);
@@ -467,10 +481,18 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   //set data value attributes
   //make sure to show only the required number of fractional digits on the labels of the graph
-  DataValueAttributes valueAttr(planeDiagram->dataValueAttributes());
-  valueAttr.setVisible(config.isChartDataLabels());
-  valueAttr.setDecimalDigits(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
-  planeDiagram->setDataValueAttributes(valueAttr);
+  DataValueAttributes dataValueAttr(planeDiagram->dataValueAttributes());
+  MarkerAttributes markerAttr(dataValueAttr.markerAttributes());
+  markerAttr.setVisible(true);
+  markerAttr.setMarkerStyle(MarkerAttributes::MarkerCircle);
+  markerAttr.setMarkerSize(QSize(8, 8));
+  dataValueAttr.setMarkerAttributes(markerAttr);
+  TextAttributes dataValueTextAttr(dataValueAttr.textAttributes());
+  dataValueTextAttr.setPen(m_foregroundBrush.color());
+  dataValueAttr.setTextAttributes(dataValueTextAttr);
+  dataValueAttr.setVisible(config.isChartDataLabels());
+  dataValueAttr.setDecimalDigits(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+  planeDiagram->setDataValueAttributes(dataValueAttr);
   planeDiagram->setAllowOverlappingDataValueTexts(true);
 }
 

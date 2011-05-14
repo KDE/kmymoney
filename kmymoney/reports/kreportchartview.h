@@ -188,6 +188,15 @@ private:
     */
   bool m_skipZero;
 
+  /**
+    * The cached background brush obtained from the style.
+    */
+  QBrush m_backgroundBrush;
+
+  /**
+    * The cached foreground brush obtained from the style.
+    */
+  QBrush m_foregroundBrush;
 };
 
 } // end namespace reports
