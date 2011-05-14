@@ -50,11 +50,11 @@
 
 using namespace reports;
 
-KReportChartView::KReportChartView(QWidget* parent) : 
-  KDChart::Chart(parent),
-  m_backgroundBrush(KColorScheme(QPalette::Current).background()),
-  m_foregroundBrush(KColorScheme(QPalette::Current).foreground())
-  
+KReportChartView::KReportChartView(QWidget* parent) :
+    KDChart::Chart(parent),
+    m_backgroundBrush(KColorScheme(QPalette::Current).background()),
+    m_foregroundBrush(KColorScheme(QPalette::Current).foreground())
+
 {
   // ********************************************************************
   // Set KMyMoney's Chart Parameter Defaults
@@ -171,13 +171,21 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   gridAttr.setGridVisible(config.isChartGridLines());
   coordinatePlane()->setGlobalGridAttributes(gridAttr);
 
-
-
-  //Subdued colors - we set it here again because it is a property of the diagram
-  planeDiagram->useSubduedColors();
+  //the palette - we set it here because it is a property of the diagram
+  switch (KMyMoneySettings::chartsPalette()) {
+    case 0:
+      planeDiagram->useDefaultColors();
+      break;
+    case 1:
+      planeDiagram->useRainbowColors();
+      break;
+    case 2:
+    default:
+      planeDiagram->useSubduedColors();
+      break;
+  }
 
   //the legend will be used later
-
   Legend* legend = new Legend(planeDiagram, this);
   legend->setTitleText(i18nc("Chart legend title", "Legend"));
 

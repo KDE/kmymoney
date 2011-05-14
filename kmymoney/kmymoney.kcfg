@@ -401,6 +401,12 @@
    <min>0</min>
    <max>256</max>
   </entry>
+  <entry name="ChartsPalette" type="Int">
+   <label>The palette used to render charts</label>
+   <default>2</default>
+   <min>0</min>
+   <max>2</max>
+  </entry>
   <entry name="CssFileDefault" type="String">
    <label>name of default css file</label>
    <default></default>
