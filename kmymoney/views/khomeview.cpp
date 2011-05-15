@@ -1345,19 +1345,19 @@ void KHomeView::showBudget(void)
     d->m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
 
     //display budget summary
-    d->m_html += "<table width=\"75%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+    d->m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
     d->m_html += "<tr class=\"itemtitle\">";
     d->m_html += "<td class=\"left\" colspan=\"3\">";
     d->m_html += i18n("Current Month Summary");
     d->m_html += "</td></tr>";
     d->m_html += "<tr class=\"item\">";
-    d->m_html += "<td class=\"right\" width=\"33%\">";
+    d->m_html += "<td class=\"right\" width=\"50%\">";
     d->m_html += i18n("Budgeted");
     d->m_html += "</td>";
-    d->m_html += "<td class=\"right\" width=\"33%\">";
+    d->m_html += "<td class=\"right\" width=\"20%\">";
     d->m_html += i18n("Actual");
     d->m_html += "</td>";
-    d->m_html += "<td class=\"right\" width=\"33%\">";
+    d->m_html += "<td class=\"right\" width=\"20%\">";
     d->m_html += i18n("Difference");
     d->m_html += "</td></tr>";
 
@@ -1379,7 +1379,7 @@ void KHomeView::showBudget(void)
 
     //budget overrun
     d->m_html += "<div class=\"gap\">&nbsp;</div>\n";
-    d->m_html += "<table width=\"75%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+    d->m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
     d->m_html += "<tr class=\"itemtitle\">";
     d->m_html += "<td class=\"left\" colspan=\"4\">";
     d->m_html += i18n("Budget Overruns");
