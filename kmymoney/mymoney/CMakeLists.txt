@@ -1,5 +1,3 @@
-INCLUDE_DIRECTORIES( ${KMyMoney_SOURCE_DIR}/libalkimia )
-
 ADD_SUBDIRECTORY( storage )
 
 ########### next target ###############
