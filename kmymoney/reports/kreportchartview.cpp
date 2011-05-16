@@ -52,6 +52,7 @@ using namespace reports;
 // the percent from the height of the widget which will be set as the maximum height of the legend
 // note that this will work as long as we have the legend positioned at Position::East
 static const qreal LEGEND_HEIGHT_PERCENT = 0.8;
+static const qreal LEGEND_WIDTH_PERCENT = 0.2;
 
 KReportChartView::KReportChartView(QWidget* parent) :
     KDChart::Chart(parent),
@@ -466,6 +467,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   legend->setFrameAttributes(legendFrameAttr);
   // see also KReportChartView::resizeEvent
   legend->setMaximumHeight(height() * LEGEND_HEIGHT_PERCENT);
+  legend->setMaximumWidth(width() * LEGEND_WIDTH_PERCENT);
   replaceLegend(legend);
 
   //this sets the line width only for line diagrams
@@ -494,6 +496,7 @@ void KReportChartView::resizeEvent(QResizeEvent* event)
   Legend* legend = KReportChartView::legend();
   if (legend) {
     legend->setMaximumHeight(height() * LEGEND_HEIGHT_PERCENT);
+    legend->setMaximumWidth(width() * LEGEND_WIDTH_PERCENT);
   }
   Chart::resizeEvent(event);
 }
