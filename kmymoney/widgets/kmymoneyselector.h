@@ -245,17 +245,6 @@ public:
   virtual bool match(const QRegExp& exp, QTreeWidgetItem* item) const;
 
   /**
-    * This method delays the call for m_listView->ensureItemVisible(item)
-    * for about 10ms. This seems to be necessary when the widget is not (yet)
-    * visible on the screen after creation.
-    *
-    * @param item pointer to QListViewItem that should be made visible
-    *
-    * @sa slotShowSelected()
-    */
-  void ensureItemVisible(const QTreeWidgetItem *item);
-
-  /**
     * This method returns a pointer to the QListViewItem with the id @a id.
     * If such an item is not contained in the list, @a 0 will be returned.
     *
@@ -359,15 +348,6 @@ public slots:
 
 protected slots:
   /**
-    * This slot is usually connected to a timer signal and simply
-    * calls m_listView->ensureItemVisible() for the last selected item
-    * in this widget.
-    *
-    * @sa ensureItemVisible(), setSelected(const QString&)
-    */
-  void slotShowSelected(void);
-
-  /**
     * This slot is connected to the QTreeWidget executed signal
     */
   void slotItemSelected(QTreeWidgetItem *it_v);
@@ -386,9 +366,6 @@ protected:
   QString                    m_baseName;
   QTreeWidget::SelectionMode m_selMode;
   QHBoxLayout*               m_layout;
-
-private:
-  const QTreeWidgetItem*     m_visibleItem;
 };
 
 #endif

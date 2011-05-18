@@ -205,7 +205,7 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
             }
             if (item) {
               m_lv->setCurrentItem(item);
-              selector()->ensureItemVisible(item);
+              m_lv->scrollToItem(item);
             }
             ev->accept();
             return true;
@@ -223,7 +223,7 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
               // make sure, we always see a possible (non-selectable) group item
               if (m_lv->itemAbove(item))
                 item = m_lv->itemAbove(item);
-              selector()->ensureItemVisible(item);
+              m_lv->scrollToItem(item);
             }
             ev->accept();
             return true;
@@ -263,7 +263,7 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
                 // make sure, we always see a possible (non-selectable) group item
                 if (m_lv->itemAbove(item))
                   item = m_lv->itemAbove(item);
-                selector()->ensureItemVisible(item);
+                m_lv->scrollToItem(item);
               }
               ev->accept();
               return true;

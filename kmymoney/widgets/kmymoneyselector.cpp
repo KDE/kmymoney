@@ -78,7 +78,6 @@ KMyMoneySelector::~KMyMoneySelector()
 void KMyMoneySelector::clear(void)
 {
   m_treeWidget->clear();
-  m_visibleItem = 0;
 }
 
 void KMyMoneySelector::setSelectable(QTreeWidgetItem *item, bool selectable)
@@ -364,27 +363,7 @@ void KMyMoneySelector::setSelected(const QString& id, const bool state)
 
   // make sure the first one found is visible
   if (it_visible)
-    ensureItemVisible(it_visible);
-}
-
-void KMyMoneySelector::ensureItemVisible(const QTreeWidgetItem *it_v)
-{
-  // for some reason, I could only use the ensureItemVisible() method
-  // of QListView successfully, after the widget was drawn on the screen.
-  // If called before it had no effect (if the item was not visible).
-  //
-  // The solution was to store the item we wanted to see in a local var
-  // and call QListView::ensureItemVisible() about 10ms later in
-  // the slot slotShowSelected.  (ipwizard, 12/29/2003)
-  m_visibleItem = it_v;
-
-  QTimer::singleShot(100, this, SLOT(slotShowSelected()));
-}
-
-void KMyMoneySelector::slotShowSelected(void)
-{
-  if (m_treeWidget && m_visibleItem)
-    m_treeWidget->scrollToItem(m_visibleItem);
+    m_treeWidget->scrollToItem(it_visible);
 }
 
 int KMyMoneySelector::slotMakeCompletion(const QString& _txt)
@@ -487,7 +466,7 @@ int KMyMoneySelector::slotMakeCompletion(const QRegExp& exp)
   if (m_selMode == QTreeWidget::SingleSelection) {
     if (firstMatch) {
       m_treeWidget->setCurrentItem(firstMatch);
-      ensureItemVisible(firstMatch);
+      m_treeWidget->scrollToItem(firstMatch);
     } else
       m_treeWidget->clearSelection();
   }
