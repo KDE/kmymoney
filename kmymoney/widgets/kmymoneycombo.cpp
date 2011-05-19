@@ -169,6 +169,13 @@ void KMyMoneyCombo::mousePressEvent(QMouseEvent *e)
   if (m_timer.isActive()) {
     m_timer.stop();
     m_completion->slotMakeCompletion("");
+    // the above call clears the selection in the selector but maintains the current index, use that index to restore the selection
+    QTreeWidget* listView = selector()->listView();
+    QModelIndex currentIndex = listView->currentIndex();
+    if (currentIndex.isValid()) {
+      listView->selectionModel()->select(currentIndex, QItemSelectionModel::Select);
+      listView->scrollToItem(listView->currentItem());
+    }    
   } else {
     KConfig config("kcminputrc");
     KConfigGroup grp = config.group("KDE");
