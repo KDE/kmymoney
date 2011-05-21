@@ -228,9 +228,7 @@ void kMyMoneyEdit::init(void)
   m_calculatorFrame->setFixedSize(m_calculator->width() + 3, m_calculator->height() + 3);
   m_calculatorFrame->hide();
 
-  m_calcButton = new KPushButton(KIcon(QPixmap(KIconLoader::global()->iconPath("accessories-calculator", -KIconLoader::SizeSmall))), QString(""), this);
-  m_calcButton->setFixedWidth(m_calcButton->sizeHint().width());
-  m_calcButton->setFixedHeight(m_edit->sizeHint().height());
+  m_calcButton = new KPushButton(KIcon("accessories-calculator"), QString(""), this);
   m_calcButton->setFocusProxy(m_edit);
 
   QPixmap pixmap;
@@ -245,8 +243,6 @@ void kMyMoneyEdit::init(void)
   KConfigGroup grp = kconfig->group("General Options");
   if (grp.readEntry("DontShowCalculatorButton", false) == true)
     setCalculatorButtonVisible(false);
-
-  setSpacing(0);
 
   connect(m_edit, SIGNAL(textChanged(const QString&)), this, SLOT(theTextChanged(const QString&)));
   connect(m_calculator, SIGNAL(signalResultAvailable()), this, SLOT(slotCalculatorResult()));
