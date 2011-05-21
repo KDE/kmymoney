@@ -175,7 +175,7 @@ void KMyMoneyCombo::mousePressEvent(QMouseEvent *e)
     if (currentIndex.isValid()) {
       listView->selectionModel()->select(currentIndex, QItemSelectionModel::Select);
       listView->scrollToItem(listView->currentItem());
-    }    
+    }
   } else {
     KConfig config("kcminputrc");
     KConfigGroup grp = config.group("KDE");
