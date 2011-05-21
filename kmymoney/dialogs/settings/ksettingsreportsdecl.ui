@@ -98,17 +98,17 @@
           </property>
           <item>
            <property name="text">
-            <string>Default</string>
+            <string comment="@item KDChart color palette">Default</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Rainbow</string>
+            <string comment="@item KDChart color palette">Rainbow</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Subdued</string>
+            <string comment="@item KDChart color palette">Subdued</string>
            </property>
           </item>
          </widget>
