@@ -35,6 +35,7 @@
 #include <kmymoneyedit.h>
 #include <kmymoneyaccountselector.h>
 #include <kmymoneycompletion.h>
+#include <kmymoneysettings.h>
 #include <mymoneyfile.h>
 
 using namespace Invest;
@@ -158,7 +159,10 @@ void Activity::setLabelText(const QString& idx, const QString& txt) const
   if (w) {
     w->setText(txt);
   } else {
-    qDebug("Unknown QLabel named '%s'", qPrintable(idx));
+    if (KMyMoneySettings::transactionForm()) {
+      // labels are only used in the transaction form
+      qDebug("Unknown QLabel named '%s'", qPrintable(idx));
+    }
   }
 }
 
