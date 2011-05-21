@@ -260,7 +260,7 @@ void KReportConfigurationFilterDlg::slotRowTypeChanged(int row)
 void KReportConfigurationFilterDlg::slotColumnTypeChanged(int row)
 {
   if (m_tab2->findChild<KMyMoneyGeneralCombo*>("m_comboBudget")->isEnabled() && row < 2) {
-    m_tab2->findChild<KComboBox*>("m_comboColumns")->setCurrentItem(i18nc("column will show monthly data", "Monthly"), false);
+    m_tab2->findChild<KComboBox*>("m_comboColumns")->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
   }
 }
 
@@ -320,10 +320,10 @@ void KReportConfigurationFilterDlg::slotReset(void)
       switch (m_initialState.columnType()) {
         case MyMoneyReport::eNoColumns:
         case MyMoneyReport::eDays:
-          combo->setCurrentItem(i18nc("column will show daily data", "Daily"), false);
+          combo->setCurrentItem(i18nc("@item the columns will display daily data", "Daily"), false);
           break;
         case MyMoneyReport::eWeeks:
-          combo->setCurrentItem(i18nc("column will show weekly data", "Weekly"), false);
+          combo->setCurrentItem(i18nc("@item the columns will display weekly data", "Weekly"), false);
           break;
         default:
           break;
@@ -332,16 +332,16 @@ void KReportConfigurationFilterDlg::slotReset(void)
       switch (m_initialState.columnType()) {
         case MyMoneyReport::eNoColumns:
         case MyMoneyReport::eMonths:
-          combo->setCurrentItem(i18nc("column will show monthly data", "Monthly"), false);
+          combo->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
           break;
         case MyMoneyReport::eBiMonths:
-          combo->setCurrentItem(i18nc("column will show bi-monthly data", "Bi-Monthly"), false);
+          combo->setCurrentItem(i18nc("@item the columns will display bi-monthly data", "Bi-Monthly"), false);
           break;
         case MyMoneyReport::eQuarters:
-          combo->setCurrentItem(i18nc("column will show quarterly data", "Quarterly"), false);
+          combo->setCurrentItem(i18nc("@item the columns will display quarterly data", "Quarterly"), false);
           break;
         case MyMoneyReport::eYears:
-          combo->setCurrentItem(i18nc("column will show yearly data", "Yearly"), false);
+          combo->setCurrentItem(i18nc("@item the columns will display yearly data", "Yearly"), false);
           break;
         default:
           break;

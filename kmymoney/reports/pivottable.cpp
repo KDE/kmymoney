@@ -510,6 +510,12 @@ void PivotTable::calculateColumnHeadings(void)
 
   int columnpitch = m_config_f.columnPitch();
 
+  if (columnpitch == 0) {
+    // output the warning but don't crash by dividing with 0
+    qWarning("PivotTable::calculateColumnHeadings() Invalid column pitch");
+    return;
+  }
+
   // if this is a days-based report
   if (m_config_f.isColumnsAreDays()) {
     if (columnpitch == 1) {
