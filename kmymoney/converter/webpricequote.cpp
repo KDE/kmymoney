@@ -726,7 +726,7 @@ void FinanceQuoteProcess::launch(const QString& scriptPath)
   *this << "perl" << scriptPath << "-l";
   setOutputChannelMode(KProcess::OnlyStdoutChannel);
   start();
-  if (! waitForStarted()) qFatal("Unable to start FQ script");
+  if (! waitForStarted()) qWarning("Unable to start FQ script");
   return;
 }
 

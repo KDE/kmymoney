@@ -1144,9 +1144,9 @@ bool XmlReader::startElement(const QString&, const QString&, const QString& elNa
 #ifndef _GNCFILEANON
     // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
     KMessageBox::error(0, i18n("Import failed:\n\n%1", e->what()), PACKAGE);
-    qFatal("%s", qPrintable(e->what()));
+    qWarning("%s", qPrintable(e->what()));
 #else
-    qFatal("%s", e->toLatin1());
+    qWarning("%s", e->toLatin1());
 #endif // _GNCFILEANON
   }
   return true; // to keep compiler happy
@@ -1183,9 +1183,9 @@ bool XmlReader::endElement(const QString&, const QString&, const QString&elName)
 #ifndef _GNCFILEANON
     // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
     KMessageBox::error(0, i18n("Import failed:\n\n%1", e->what()), PACKAGE);
-    qFatal("%s", qPrintable(e->what()));
+    qWarning("%s", qPrintable(e->what()));
 #else
-    qFatal("%s", e->toLatin1());
+    qWarning("%s", e->toLatin1());
 #endif // _GNCFILEANON
   }
   return (true); // to keep compiler happy
@@ -1275,21 +1275,21 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
     ft.commit();
   } catch (MyMoneyException *e) {
     KMessageBox::error(0, i18n("Import failed:\n\n%1", e->what()), PACKAGE);
-    qFatal("%s", qPrintable(e->what()));
+    qWarning("%s", qPrintable(e->what()));
   } // end catch
   signalProgress(0, 1, i18n("Import complete"));  // switch off progress bar
   delete m_xr;
   qDebug("Exiting gnucash importer");
-  return ;
+  return;
 }
 #else
 // Control code for the file anonymizer
 void MyMoneyGncReader::readFile(QString in, QString out)
 {
   QFile pDevice(in);
-  if (!pDevice.open(QIODevice::ReadOnly)) qFatal("Can't open input file");
+  if (!pDevice.open(QIODevice::ReadOnly)) qWarning("Can't open input file");
   QFile outFile(out);
-  if (!outFile.open(QIODevice::WriteOnly)) qFatal("Can't open output file");
+  if (!outFile.open(QIODevice::WriteOnly)) qWarning("Can't open output file");
   oStream.setDevice(&outFile);
   bAnonymize = true;
   // get a file anonymization factor from the user
@@ -1298,7 +1298,7 @@ void MyMoneyGncReader::readFile(QString in, QString out)
   try {
     m_xr->processFile(&pDevice);
   } catch (MyMoneyException *e) {
-    qFatal("%s", e->toLatin1());
+    qWarning("%s", e->toLatin1());
   } // end catch
   delete m_xr;
   pDevice.close();
@@ -1320,7 +1320,7 @@ int main(int argc, char ** argv)
                                           "Gnucash files(*.nc *)",
                                           0);
   }
-  if (inFile.isEmpty()) qFatal("Input file required");
+  if (inFile.isEmpty()) qWarning("Input file required");
   if (outFile.isEmpty()) outFile = inFile + ".anon";
   m.readFile(inFile, outFile);
   exit(0);
@@ -2487,7 +2487,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
       //      if (((*acc).accountGroup() == MyMoneyAccount::Asset) && ((*acc).accountType() != MyMoneyAccount::Stock)) accList.append ((*acc).name());
       if ((*acc).accountType() == MyMoneyAccount::Investment) accList.append((*acc).name());
     }
-    //if (accList.isEmpty()) qFatal ("No available accounts");
+    //if (accList.isEmpty()) qWarning ("No available accounts");
     bool ok = false;
     while (!ok) { // keep going till we have a valid investment parent
       QString invAccName = KInputDialog::getItem(
@@ -2527,7 +2527,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
               break;
             default:
               // convert it - but what if it has splits???
-              qFatal("Not yet implemented");
+              qWarning("Not yet implemented");
               ok = true;
               break;
           }
@@ -2535,7 +2535,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
           switch (KMessageBox::questionYesNo(0, i18n("%1 is not an Investment Account. Do you wish to make it one?", invAcc.name()), PACKAGE)) {
             case KMessageBox::Yes:
               // convert it - but what if it has splits???
-              qFatal("Not yet implemented");
+              qWarning("Not yet implemented");
               ok = true;
               break;
             default:
@@ -2548,7 +2548,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
     m_mapIds [invAcc.id()] = invAcc.id(); // so stock account gets parented (again) to investment account later
     m_storage->addAccount(invAcc, stockAcc);
   } else { // investment option != 0, 1, 2
-    qFatal("Invalid investment option %d", m_investmentOption);
+    qWarning("Invalid investment option %d", m_investmentOption);
   }
 }
 

@@ -812,7 +812,7 @@ bool MyMoneyTransactionFilter::translateDateRange(dateOptionE id, QDate& start, 
       end =  QDate::currentDate();
       break;
     default:
-      qFatal("Unknown date identifier %d in MyMoneyTransactionFilter::translateDateRange()", id);
+      qWarning("Unknown date identifier %d in MyMoneyTransactionFilter::translateDateRange()", id);
       rc = false;
       break;
   }

@@ -315,7 +315,7 @@ bool KEditLoanWizard::validateCurrentPage()
         m_pages.setBit(Page_Summary);
 
       } else {
-        qFatal("%s,%d: This should never happen", __FILE__, __LINE__);
+        qWarning("%s,%d: This should never happen", __FILE__, __LINE__);
       }
 
       m_lastSelection = m_editSelectionPage->m_selectionButtonGroup->checkedId();

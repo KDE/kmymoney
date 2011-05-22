@@ -192,7 +192,7 @@ int MyMoneyStorageSql::open(const KUrl& url, int openMode, bool clear)
         }
         break;
       default:
-        qFatal("%s", qPrintable(QString("%1 - unknown open mode %2").arg(Q_FUNC_INFO).arg(openMode)));
+        qWarning("%s", qPrintable(QString("%1 - unknown open mode %2").arg(Q_FUNC_INFO).arg(openMode)));
     }
     if (rc != 0) return (rc);
     // bypass logon check if we are creating a database
@@ -367,7 +367,7 @@ int MyMoneyStorageSql::upgradeDb()
       case 6:
         break;
       default:
-        qFatal("Unknown version number in database - %d", m_dbVersion);
+        qWarning("Unknown version number in database - %d", m_dbVersion);
     }
   }
 

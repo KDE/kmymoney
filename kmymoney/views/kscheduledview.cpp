@@ -339,7 +339,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
           }
         }
         if (it_s == transaction.splits().constEnd()) {
-          qFatal("Split for payment account not found in %s:%d.", __FILE__, __LINE__);
+          qWarning("Split for payment account not found in %s:%d.", __FILE__, __LINE__);
         }
         break;
 

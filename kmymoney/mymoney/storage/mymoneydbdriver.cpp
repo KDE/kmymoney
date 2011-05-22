@@ -646,7 +646,7 @@ const QStringList MyMoneyMysqlDriver::tables(QSql::TableType tt, const QSqlDatab
     case QSql::Tables:
     case QSql::SystemTables:
     case QSql::Views:
-      qFatal("Programming error in mymoneydbdriver.cpp"); // KMM only uses AllTables; implement other options if required
+      qWarning("Programming error in mymoneydbdriver.cpp"); // KMM only uses AllTables; implement other options if required
   }
 
   return (tableList);
