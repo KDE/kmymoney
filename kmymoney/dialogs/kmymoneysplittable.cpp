@@ -400,16 +400,20 @@ void kMyMoneySplitTable::mouseDoubleClickEvent(QMouseEvent *e)
 
   int col = columnAt(e->pos().x());
   slotSetFocus(model()->index(rowAt(e->pos().y()), col), e->button());
-  slotStartEdit();
+  createEditWidgets(false);
 
-  KLineEdit* editWidget = 0;
+  QLineEdit* editWidget = 0;
   switch (col) {
+    case 0:
+      editWidget = m_editCategory->lineEdit();
+      break;
+
     case 1:
       editWidget = m_editMemo;
       break;
 
     case 2:
-      editWidget = dynamic_cast<KLineEdit*>(m_editAmount->focusWidget());
+      editWidget = m_editAmount->lineedit();
       break;
 
     default:
@@ -418,9 +422,6 @@ void kMyMoneySplitTable::mouseDoubleClickEvent(QMouseEvent *e)
   if (editWidget) {
     editWidget->setFocus();
     editWidget->selectAll();
-    // we need to call setFocus on the edit widget from the
-    // main loop again to get the keyboard focus to the widget also
-    // QTimer::singleShot(0, editWidget, SLOT(setFocus()));
   }
 }
 
@@ -869,10 +870,11 @@ KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
     }
   }
 
-  if (setFocus)
+  if (setFocus) {
     m_editCategory->lineEdit()->setFocus();
+    m_editCategory->lineEdit()->selectAll();
+  }
 
-  m_editCategory->lineEdit()->selectAll();
   setState(QAbstractItemView::EditingState);
 
   // resize the rows so the added edit widgets would fit appropriately
