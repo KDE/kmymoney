@@ -1416,9 +1416,10 @@ void Register::mouseReleaseEvent(QMouseEvent *e)
 void Register::contextMenuEvent(QContextMenuEvent *e)
 {
   if (e->reason() == QContextMenuEvent::Mouse) {
-    // since mouse release event is not called,
-    // we need to fake the right mouse button release here
-    m_mouseButton = Qt::RightButton;
+    // since mouse release event is not called, we need
+    // to reset the mouse button and the modifiers here
+    m_mouseButton = Qt::NoButton;
+    m_modifiers = Qt::NoModifier;
 
     // if a selected item is clicked don't change the selection
     RegisterItem* item = itemAtRow(rowAt(e->y()));
@@ -1567,28 +1568,6 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
             }
             break;
         }
-      }
-    } else if (buttonState & Qt::RightButton) {
-      // if the right button is pressed then only change the
-      // selection if none of the Shift/Ctrl button is pressed and
-      // one of the following conditions is true:
-      //
-      // a) single transaction is selected
-      // b) multiple transactions are selected and the one to be selected is not
-      if (!(modifiers & (Qt::ShiftModifier | Qt::ControlModifier))) {
-        if ((cnt > 0) && (!item->isSelected())) {
-          okToSelect = sameEntryType;
-          emit aboutToSelectItem(item, okToSelect);
-          if (okToSelect) {
-            // pointer 'item' might have changed. reconstruct it.
-            item = itemById(id);
-            unselectItems();
-            item->setSelected(true);
-            setFocusItem(item);
-          }
-        }
-        if (okToSelect)
-          m_selectAnchor = item;
       }
     } else {
       // we get here when called by application logic
