@@ -295,9 +295,12 @@ void RedefineDlg::convertValues()
 {
   QString txt;
   QString txt1;
-  m_price = m_columnList[m_priceColumn].remove('"');
-  m_quantity = m_columnList[m_quantityColumn].remove('"');
-  txt = m_columnList[m_amountColumn];
+  if (m_priceColumn < m_columnList.count())//  Ensure this is valid column
+    m_price = m_columnList[m_priceColumn].remove('"');
+  if (m_quantityColumn <  m_columnList.count())//  Ensure this is valid column
+    m_quantity = m_columnList[m_quantityColumn].remove('"');
+  if (m_amountColumn <  m_columnList.count())//  Ensure this is valid column
+    txt = m_columnList[m_amountColumn];
   if ((txt.startsWith('"')) && (!txt.endsWith('"')))  {
     txt1 = m_columnList[m_amountColumn + 1];
     txt += txt1;

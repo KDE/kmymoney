@@ -269,9 +269,9 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
     if (decimalIndex < thouIndex) { //            invalid conversion
       m_invalidConversion = true;
     }
-    if (length == decimalIndex + 4) { //          ...thousands separator with no decimal part
+   if (decimalIndex == length - 1) { //          ...decimal point with no decimal part (strange?)
       txt += m_decimalSymbol + "00";
-    }
+    } 
   }//  thouIndex = -1                            no thousands separator
 
   //  m_symbolFound = true                      found genuine decimal

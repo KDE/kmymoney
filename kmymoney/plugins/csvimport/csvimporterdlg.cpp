@@ -802,7 +802,8 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
 
     if (!symbolFound) {//                            no symbol found
       tableWidget->scrollToItem(errorItem, QAbstractItemView::EnsureVisible);
-      KMessageBox::sorry(this, i18n("<center>The selected decimal symbol was not present in column %1.</center>"
+      KMessageBox::sorry(this, i18n("<center>The selected decimal symbol was not present in column %1,</center>"
+                                    "<center>- but may now have been added.</center>"
                                     "<center>If the <b>decimal</b> symbol displayed does not match your system setting</center>"
                                     "<center>your data is unlikely to import correctly.</center>"
                                     "<center>Please check your selection.</center>",
