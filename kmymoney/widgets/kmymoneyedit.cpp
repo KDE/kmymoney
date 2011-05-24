@@ -234,8 +234,6 @@ void kMyMoneyEdit::init(void)
   QPixmap pixmap;
   pixmap.loadFromData(resetButtonImage, sizeof(resetButtonImage), "PNG", 0);
   m_resetButton = new KPushButton(KIcon(pixmap), QString(""), this);
-  m_resetButton->setFixedWidth(m_resetButton->sizeHint().width());
-  m_resetButton->setFixedHeight(m_edit->sizeHint().height());
   m_resetButton->setEnabled(false);
   m_resetButton->setFocusProxy(m_edit);
 
