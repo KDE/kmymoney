@@ -710,6 +710,38 @@ void CartesianAxis::paintCtx( PaintContext* context )
             if (  centerAbscissaTicks )
                 headerLabels.append( QString() );
         }
+        RulerAttributes rulerAttr = rulerAttributes();
+        if ( rulerAttr.showRulerLine() )
+        {
+            QPointF start;
+            QPointF end;
+            switch( position() )
+            {
+            case( CartesianAxis::Bottom ):
+                start = QPointF( dimX.start, dimY.start );
+                end = QPointF( dimX.end, dimY.start );
+                break;
+            case( CartesianAxis::Top ):
+                start = QPointF( dimX.start, dimY.end );
+                end = QPointF( dimX.end, dimY.end );
+                break;
+            case( CartesianAxis::Left ):
+                start = QPointF( dimX.start, dimY.start );
+                end = QPointF( dimX.start, dimY.end );
+                break;
+            case( CartesianAxis::Right ):
+                start = QPointF( dimX.end, dimY.start );
+                end = QPointF( dimX.end, dimY.end );
+                break;
+            }
+            start = plane->translate( start );
+            end = plane->translate( end );
+            bool clip = context->painter()->hasClipping();
+            context->painter()->setClipping( false );
+            context->painter()->drawLine( start, end );
+            context->painter()->setClipping( clip );
+
+        }
 
         const int headerLabelsCount = headerLabels.count();
         //qDebug() << "headerLabelsCount" << headerLabelsCount;

@@ -209,6 +209,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     xAxis->setTextAttributes(xAxisTextAttr);
     RulerAttributes xAxisRulerAttr(xAxis->rulerAttributes());
     xAxisRulerAttr.setTickMarkPen(m_foregroundBrush.color());
+    xAxisRulerAttr.setShowRulerLine(true);
     xAxis->setRulerAttributes(xAxisRulerAttr);
 
     // Set up X axis labels (ie "abscissa" to use the technical term)
@@ -243,6 +244,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     yAxis->setTextAttributes(yAxisTextAttr);
     RulerAttributes yAxisRulerAttr(yAxis->rulerAttributes());
     yAxisRulerAttr.setTickMarkPen(m_foregroundBrush.color());
+    yAxisRulerAttr.setShowRulerLine(true);
     yAxis->setRulerAttributes(yAxisRulerAttr);
 
     //add the axes to the corresponding diagram

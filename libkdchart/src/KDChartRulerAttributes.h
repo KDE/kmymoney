@@ -89,6 +89,13 @@ public:
     bool showMinorTickMarks() const;
 
     /**
+      * Shows or hides the ruler line
+      */
+    void setShowRulerLine( bool show );
+    bool showRulerLine() const;
+
+
+    /**
       * Shows or hides major tick marks
       */
     void setShowMajorTickMarks( bool show );
