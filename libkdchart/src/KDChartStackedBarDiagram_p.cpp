@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2010 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -10,7 +10,7 @@
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 and version 3 as published by the
-** Free Software Foundation and appearing in the file LICENSE.GPL included.
+** Free Software Foundation and appearing in the file LICENSE.GPL.txt included.
 **
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
@@ -173,8 +173,9 @@ void StackedBarDiagram::paint(  PaintContext* ctx )
                     barWidth = 0;
                     maxDepth = offset - (width/rowCount);
                 }
-            } else
+            } else {
                 barWidth =  (width - (offset*rowCount))/ rowCount ;
+            }
 
             for ( int k = col; k >= 0; --k )
             {
@@ -184,7 +185,17 @@ void StackedBarDiagram::paint(  PaintContext* ctx )
                     stackedValues += point.value;
                 key = point.key;
             }
+
+            const double usedDepth = threeDAttrs.depth();
+
             QPointF point = ctx->coordinatePlane()->translate( QPointF( key, stackedValues ) );
+
+            const double dy = point.y() - usedDepth;
+            if ( dy < 0 ) {
+                threeDAttrs.setDepth( point.y() - 1 );
+                diagram()->setThreeDBarAttributes( threeDAttrs );
+            }
+
             point.rx() += offset / 2;
             const QPointF previousPoint = ctx->coordinatePlane()->translate( QPointF( key, stackedValues - value ) );
             const double barHeight = previousPoint.y() - point.y();

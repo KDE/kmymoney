@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2010 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -10,7 +10,7 @@
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 and version 3 as published by the
-** Free Software Foundation and appearing in the file LICENSE.GPL included.
+** Free Software Foundation and appearing in the file LICENSE.GPL.txt included.
 **
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
@@ -77,7 +77,7 @@ bool ThreeDLineAttributes::operator==( const ThreeDLineAttributes& r ) const
 
 
 
-void ThreeDLineAttributes::setLineXRotation( uint degrees )
+void ThreeDLineAttributes::setLineXRotation( const uint degrees )
 {
     d->lineXRotation = degrees;
 }
@@ -87,7 +87,7 @@ uint ThreeDLineAttributes::lineXRotation() const
     return d->lineXRotation;
 }
 
-void ThreeDLineAttributes::setLineYRotation( uint degrees )
+void ThreeDLineAttributes::setLineYRotation( const uint degrees )
 {
     d->lineYRotation = degrees;
 }

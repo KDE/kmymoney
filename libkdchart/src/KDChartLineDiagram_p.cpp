@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2010 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -10,7 +10,7 @@
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 and version 3 as published by the
-** Free Software Foundation and appearing in the file LICENSE.GPL included.
+** Free Software Foundation and appearing in the file LICENSE.GPL.txt included.
 **
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
@@ -144,12 +144,19 @@ void LineDiagram::LineDiagramType::paintElements(
                 points << lineInfo.value << lineInfo.nextValue;
             }
         }
-
-        if( vt.isEnabled() )
-            paintValueTracker( ctx, vt, lineInfo.value );
     }
     if( points.count() )
         paintPolyline( ctx, curBrush, curPen, points );
+
+    itline.toFront();
+    while ( itline.hasNext() ) {
+        const LineAttributesInfo& lineInfo = itline.next();
+        const QModelIndex& index = lineInfo.index;
+        const ValueTrackerAttributes vt = diagram()->valueTrackerAttributes( index );
+        if( vt.isEnabled() )
+            paintValueTracker( ctx, vt, lineInfo.value );
+    }
+
     // paint all data value texts and the point markers
     paintDataValueTextsAndMarkers( diagram(), ctx, list, true );
 }

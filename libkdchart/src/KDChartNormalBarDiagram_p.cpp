@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2010 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -10,7 +10,7 @@
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 and version 3 as published by the
-** Free Software Foundation and appearing in the file LICENSE.GPL included.
+** Free Software Foundation and appearing in the file LICENSE.GPL.txt included.
 **
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
@@ -51,6 +51,8 @@ const QPair<QPointF, QPointF> NormalBarDiagram::calculateDataBoundaries() const
     double xMax = diagram()->model() ? diagram()->model()->rowCount( diagram()->rootIndex() ) : 0;
     double yMin = 0.0, yMax = 0.0;
 
+    double usedDepth = 0;
+
     bool bStarting = true;
     for ( int column = 0; column < colCount; ++column )
     {
@@ -59,6 +61,13 @@ const QPair<QPointF, QPointF> NormalBarDiagram::calculateDataBoundaries() const
             const CartesianDiagramDataCompressor::CachePosition position( row, column );
             const CartesianDiagramDataCompressor::DataPoint point = compressor().data( position );
             const double value = ISNAN( point.value ) ? 0.0 : point.value;
+
+            QModelIndex sourceIndex = attributesModel()->mapToSource( point.index );
+            ThreeDBarAttributes threeDAttrs = diagram()->threeDBarAttributes( sourceIndex );
+
+            if ( threeDAttrs.isEnabled() )
+                usedDepth = qMax( usedDepth, threeDAttrs.depth() );
+
             // this is always true yMin can be 0 in case all values
             // are the same
             // same for yMax it can be zero if all values are negative
@@ -85,6 +94,8 @@ const QPair<QPointF, QPointF> NormalBarDiagram::calculateDataBoundaries() const
     const QPointF bottomLeft ( QPointF( xMin, yMin ) );
     const QPointF topRight ( QPointF( xMax, yMax ) );
 
+    //qDebug() << "KDChart::NormalBarDiagram::calculateDataBoundaries() returns " << bottomLeft << topRight;
+
     return QPair< QPointF, QPointF >( bottomLeft,  topRight );
 }
 
@@ -101,6 +112,7 @@ void NormalBarDiagram::paint(  PaintContext* ctx )
     const int colCount = attributesModel()->columnCount(attributesModelRootIndex());
 
     BarAttributes ba = diagram()->barAttributes( diagram()->model()->index( 0, 0, diagram()->rootIndex() ) );
+    ThreeDBarAttributes threeDAttrs = diagram()->threeDBarAttributes( diagram()->model()->index( 0, 0, diagram()->rootIndex() ) );
     double barWidth = 0;
     double maxDepth = 0;
     double width = boundRight.x() - boundLeft.x();
@@ -173,6 +185,12 @@ void NormalBarDiagram::paint(  PaintContext* ctx )
             if ( ! point.hidden && !ISNAN( value ) ) {
                 QPointF topPoint = ctx->coordinatePlane()->translate( QPointF( point.key + 0.5, value ) );
                 QPointF bottomPoint =  ctx->coordinatePlane()->translate( QPointF( point.key, 0 ) );
+
+                if ( threeDAttrs.isEnabled() ) {
+                    const double usedDepth = threeDAttrs.depth()/4;
+                    topPoint.setY( topPoint.y() + usedDepth + 1.0 );
+                }
+
                 const double barHeight = bottomPoint.y() - topPoint.y();
                 topPoint.setX( topPoint.x() + offset );
                 const QRectF rect( topPoint, QSizeF( barWidth, barHeight ) );

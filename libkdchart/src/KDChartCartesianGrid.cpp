@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2010 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -10,7 +10,7 @@
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 and version 3 as published by the
-** Free Software Foundation and appearing in the file LICENSE.GPL included.
+** Free Software Foundation and appearing in the file LICENSE.GPL.txt included.
 **
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
@@ -224,6 +224,9 @@ void CartesianGrid::drawGrid( PaintContext* context )
             }else{
                 f += dimX.subStepWidth;
             }
+
+            if(maxValueX == 0 && minValueX == 0)
+                break;
         }
     }
 
@@ -257,6 +260,9 @@ void CartesianGrid::drawGrid( PaintContext* context )
             }else{
                 f += dimY.subStepWidth;
             }
+
+            if(maxValueY == 0 && minValueY == 0)
+                break;
         }
     }
 
@@ -297,6 +303,9 @@ void CartesianGrid::drawGrid( PaintContext* context )
             }
             else
                 f += dimX.stepWidth;
+
+            if(maxValueX == 0 && minValueX == 0)
+                break;
         }
         // draw the last line if not logarithmic calculation
         // we need the in order to get the right grid line painted
@@ -336,6 +345,9 @@ void CartesianGrid::drawGrid( PaintContext* context )
             }
             else
                 f += dimY.stepWidth;
+
+            if(maxValueY == 0 && minValueY == 0)
+                break;
         }
     }
     //qDebug() << "Z";

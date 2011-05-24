@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2010 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -10,7 +10,7 @@
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 and version 3 as published by the
-** Free Software Foundation and appearing in the file LICENSE.GPL included.
+** Free Software Foundation and appearing in the file LICENSE.GPL.txt included.
 **
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
@@ -722,6 +722,7 @@ void CartesianAxis::paintCtx( PaintContext* context )
                                   KDChartEnums::MeasureOrientationMinimum,
                                   Qt::AlignLeft )
             : 0;
+        labelItem->setTextAttributes( textAttributes() );
         TextLayoutItem* labelItem2 =
             drawLabels
             ? new TextLayoutItem( QString::number( minValueY ),
@@ -730,6 +731,7 @@ void CartesianAxis::paintCtx( PaintContext* context )
                                   KDChartEnums::MeasureOrientationMinimum,
                                   Qt::AlignLeft )
             : 0;
+        labelItem2->setTextAttributes( textAttributes() );
         const QFontMetricsF met(
             drawLabels
             ? labelItem->realFont()
@@ -1181,6 +1183,7 @@ void CartesianAxis::paintCtx( PaintContext* context )
             const double steg = dimY.stepWidth;
             int maxLabelsWidth = 0;
             qreal labelValue;
+
             if( drawLabels && position() == Right ){
                 // Find the widest label, so we to know how much we need to right-shift
                 // our labels, to get them drawn right aligned:
@@ -1191,8 +1194,10 @@ void CartesianAxis::paintCtx( PaintContext* context )
                                               diagram()->unitSuffix( static_cast< int >( labelValue ), diagramOrientation, true );
                     labelItem->setText( customizedLabel( labelText ) );
                     maxLabelsWidth = qMax( maxLabelsWidth, diagramIsVertical ? labelItem->sizeHint().width() : labelItem->sizeHint().height() );
-
                     calculateNextLabel( labelValue, steg, isLogarithmicY, dimensions.last().start );
+
+                    if(maxValueY == 0 && minValueY == 0)
+                       break;
                 }
             }
 
@@ -1692,6 +1697,9 @@ QSize CartesianAxis::Private::calculateMaximumSize() const
                     calculateOverlap( 0, 0, 0, diagramIsVertical ? siz.height() : siz.width(), false,// bar diagram flag is ignored for Ordinates
                                     topOverlap, bottomOverlap );
                     calculateNextLabel( labelValue, step, isLogarithmicY, plane->gridDimensionsList().last().start );
+
+                    if(maxValue == 0 && minValue == 0)
+                        break;
                 }
             }else{
                 // find the longest label text:

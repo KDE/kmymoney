@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2010 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -10,7 +10,7 @@
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 and version 3 as published by the
-** Free Software Foundation and appearing in the file LICENSE.GPL included.
+** Free Software Foundation and appearing in the file LICENSE.GPL.txt included.
 **
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
@@ -506,13 +506,20 @@ void Chart::Private::slotLayoutPlanes()
         int row = pi.verticalOffset;
         //qDebug() << "processing plane at column" << column << "and row" << row;
         QGridLayout *planeLayout = pi.gridLayout;
-        if ( !planeLayout ) {
-            // this plane is sharing an axis with another one, so use
-            // the grid of that one as well
-            planeLayout = planeInfos[pi.referencePlane].gridLayout;
-            Q_ASSERT( planeLayout );
+
+        if(!planeLayout){
+            PlaneInfo& refPi = pi;
+            // if this plane is sharing an axis with another one, recursively check for the original plane and use
+            // the grid of that as planeLayout.
+            while ( !planeLayout && refPi.referencePlane) {
+                refPi = planeInfos[refPi.referencePlane];
+                planeLayout = refPi.gridLayout;
+            }
+            Q_ASSERT_X(planeLayout,
+                       "Chart::Private::slotLayoutPlanes()",
+                       "Invalid reference plane. Please Check whether the reference plane is added to the Chart or not" );
         } else {
-            planesLayout->addLayout( planeLayout );
+             planesLayout->addLayout( planeLayout );
         }
 
         /* Put the plane in the center of the layout. If this is our own, that's
@@ -982,6 +989,7 @@ void Chart::takeCoordinatePlane( AbstractCoordinatePlane* plane )
                     d, SLOT( slotUnregisterDestroyedPlane( AbstractCoordinatePlane* ) ) );
         plane->removeFromParentLayout();
         plane->setParent( 0 );
+        d->mouseClickedPlanes.removeAll(plane);
     }
     d->slotLayoutPlanes();
     // Need to emit the signal: In case somebody has connected the signal
