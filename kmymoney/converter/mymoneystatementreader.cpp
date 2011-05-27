@@ -220,7 +220,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   // For testing, save the statement to an XML file
   // (uncomment this line)
   //
-  //MyMoneyStatement::writeXMLFile(s,"Imported.Xml");
+  MyMoneyStatement::writeXMLFile(s,"Imported.Xml");///
 
   //
   // Select the account
@@ -542,7 +542,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     // determine the brokerage account
     brokerageactid = m_account.value("kmm-brokerage-account").toUtf8();
     if (brokerageactid.isEmpty()) {
-      brokerageactid = file->accountByName(m_account.brokerageName()).id();
+      brokerageactid = file->nameToAccount(t_in.m_strBrokerageAccount);
     }
 
     // find the security transacted, UNLESS this transaction didn't
@@ -1031,7 +1031,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
   if (! transfervalue.isZero()) {
     // in case the transaction has a reference to the brokerage account, we use it
     if (!t_in.m_strBrokerageAccount.isEmpty()) {
-      brokerageactid = file->accountByName(t_in.m_strBrokerageAccount).id();
+      brokerageactid = file->nameToAccount(t_in.m_strBrokerageAccount);
     }
 
     if (!brokerageactid.isEmpty()) {
