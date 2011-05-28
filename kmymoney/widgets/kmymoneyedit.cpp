@@ -225,7 +225,6 @@ void kMyMoneyEdit::init(void)
   m_calculatorFrame->setLineWidth(3);
 
   m_calculator = new kMyMoneyCalculator(m_calculatorFrame);
-  m_calculatorFrame->setFixedSize(m_calculator->width() + 3, m_calculator->height() + 3);
   m_calculatorFrame->hide();
 
   m_calcButton = new KPushButton(KIcon("accessories-calculator"), QString(""), this);

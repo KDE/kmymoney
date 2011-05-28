@@ -135,11 +135,8 @@ kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
     buttons[i]->setMinimumSize(40, 30);
     buttons[i]->setMaximumSize(40, 30);
   }
-  int height = 4 * (buttons[0]->minimumHeight() + 6) + 15;
-  int width = 5 * (buttons[0]->minimumWidth() + 6);
-
-  setMinimumSize(width, height);
-  setMaximumSize(width, height);
+  // keep the size determined by the size of the contained buttons no matter what
+  setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 }
 
 kMyMoneyCalculator::~kMyMoneyCalculator()
