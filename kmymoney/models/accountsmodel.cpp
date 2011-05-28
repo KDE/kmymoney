@@ -879,8 +879,8 @@ void InstitutionsModel::slotObjectModified(MyMoneyFile::notificationObjectT objT
 
   // if an account was modified then modify the item which represents it
   const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
-  // nothing to do for root accounts and categories
-  if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense())
+  // nothing to do for root accounts, categories and equity accounts since they don't have a representation in this model
+  if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense() || account->accountType() == MyMoneyAccount::Equity)
     return;
 
   QStandardItem *accountItem = d->itemFromAccountId(this, account->id());
