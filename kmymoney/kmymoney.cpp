@@ -1652,7 +1652,7 @@ bool KMyMoneyApp::slotFileSaveAs(void)
   // the following code is copied from KFileDialog::getSaveFileName,
   // adjust to our local needs (filetypes etc.) and
   // enhanced to show the d->m_saveEncrypted combo box
-  bool specialDir = prevDir.at(0) == ':';
+  bool specialDir = !prevDir.isEmpty() && prevDir.at(0) == QLatin1Char(':');
   QPointer<KFileDialog> dlg =
     new KFileDialog(specialDir ? prevDir : QString(),
                     QString("%1|%2\n").arg("*.kmy").arg(i18nc("KMyMoney (Filefilter)", "KMyMoney files")) +
