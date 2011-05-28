@@ -683,6 +683,8 @@ void KPayeesView::loadPayees(void)
 
   m_allowEditing = false;
   // clear the list
+  m_searchWidget->clear();
+  m_searchWidget->updateSearch();
   m_payeesList->clear();
   m_register->clear();
   currentItem = 0;
@@ -707,8 +709,6 @@ void KPayeesView::loadPayees(void)
     m_payeesList->setCurrentItem(currentItem);
     m_payeesList->scrollToItem(currentItem);
   }
-
-  m_searchWidget->updateSearch(QString());
 
   m_filterProxyModel->invalidate();
   comboDefaultAccount->expandAll();
