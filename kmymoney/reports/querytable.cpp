@@ -1043,7 +1043,11 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
 
   try {
     double irr = all.IRR();
+#ifdef Q_CC_MSVC
+    MyMoneyMoney annualReturn = MyMoneyMoney(_isnan(irr) ? 0 : irr, 10000);
+#else
     MyMoneyMoney annualReturn = MyMoneyMoney(std::isnan(irr) ? 0 : irr, 10000);
+#endif
     result["return"] = annualReturn.toString();
     result["returninvestment"] = returnInvestment.toString();
   } catch (QString e) {
