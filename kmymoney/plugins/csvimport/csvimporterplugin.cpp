@@ -65,7 +65,6 @@ void CsvImporterPlugin::createActions(void)
 {
   m_action = actionCollection()->addAction("file_import_csv");
   m_action->setText(i18n("CSV..."));
-  m_action->setIcon(KIcon("kmymoney"));
   connect(m_action, SIGNAL(triggered(bool)), this, SLOT(slotImportFile()));
 }
 
