@@ -129,6 +129,9 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
     }
   }
 
+  // always draw the y axis zero value line
+  chartWidget->drawLimitLine(0);
+
   //remove the legend
   chartWidget->removeLegend();
 
