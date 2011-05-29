@@ -46,7 +46,14 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   setModal(true);
   setButtons(KDialog::Close);
   setButtonsOrientation(Qt::Horizontal);
-  resize(QSize(700, 500).expandedTo(minimumSizeHint()));
+
+  // restore the last used dialog size 
+  KConfigGroup grp = KGlobal::config()->group("KBalanceChartDlg");
+  if (grp.isValid()) {
+    restoreDialogSize(grp);
+  }
+  // let the minimum size be 700x500
+  resize(QSize(700, 500).expandedTo(size()));
 
   //draw the chart and add it to the main layout
   KReportChartView* chartWidget = drawChart(account);
@@ -56,6 +63,11 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
 
 KBalanceChartDlg::~KBalanceChartDlg()
 {
+  // store the last used dialog size 
+  KConfigGroup grp = KGlobal::config()->group("KBalanceChartDlg");
+  if (grp.isValid()) {
+    saveDialogSize(grp);
+  }
 }
 
 KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
