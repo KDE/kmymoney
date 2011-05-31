@@ -111,7 +111,7 @@ void kMyMoneyLineEdit::focusInEvent(QFocusEvent *ev)
   // Delay that selection until the application is idle to prevent a
   // recursive loop which otherwise entered when the focus is set to this
   // widget using the mouse. (bko #259369)
-  if (ev->reason() != Qt::PopupFocusReason) {
+  if (ev->reason() != Qt::PopupFocusReason && ev->reason() != Qt::ActiveWindowFocusReason) {
     if (!d->skipSelectAll)
       QTimer::singleShot(0, this, SLOT(selectAll()));
     d->skipSelectAll = false;
