@@ -231,6 +231,11 @@ void KMyMoneyCombo::disconnectNotify(const char* signal)
 
 void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
 {
+  // don't do anything if the focus is lost due to window activation, this way switching
+  // windows while typing a category will not popup the category creation dialog
+  if (e->reason() == Qt::ActiveWindowFocusReason)
+    return;
+
   if (m_inFocusOutEvent) {
     KComboBox::focusOutEvent(e);
     return;

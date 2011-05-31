@@ -183,7 +183,12 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
   KMyMoneyCombo *c = dynamic_cast<KMyMoneyCombo*>(m_parent);
   if (o == m_parent || (c && o == c->lineEdit()) || o == this) {
     if (isVisible()) {
+#ifdef Q_OS_WIN32                   //krazy:exclude=cpp 
+      // hide the completer only if the focus was not lost because of windows activation or the activated window is not an application window
+      if (e->type() == QEvent::FocusOut && (static_cast<QFocusEvent*>(e)->reason() != Qt::ActiveWindowFocusReason || QApplication::activeWindow() == 0)) {
+#else
       if (e->type() == QEvent::FocusOut) {
+#endif
         hide();
       }
       if (e->type() == QEvent::KeyPress) {
