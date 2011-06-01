@@ -868,10 +868,13 @@ void MyMoneyQifReader::processCategoryEntry(void)
   account.setDescription(extractLine('D'));
 
   MyMoneyAccount parentAccount;
-  if (!extractLine('I').isEmpty()) {
+  //The extractline routine will more than likely return 'empty',
+  // so also have to test that either the 'I' or 'E' was detected
+  //and set up accounts accordingly.
+  if ((!extractLine('I').isEmpty()) || (m_extractedLine != -1)) {
     account.setAccountType(MyMoneyAccount::Income);
     parentAccount = file->income();
-  } else if (!extractLine('E').isEmpty()) {
+  } else if ((!extractLine('E').isEmpty()) || (m_extractedLine != -1)) {
     account.setAccountType(MyMoneyAccount::Expense);
     parentAccount = file->expense();
   }
