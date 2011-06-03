@@ -3223,21 +3223,6 @@ void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& ne
   }
 }
 
-bool KMyMoneyApp::exchangeAccountInTransaction(MyMoneyTransaction& _t, const QString& fromId, const QString& toId)
-{
-  bool rc = false;
-  MyMoneyTransaction t(_t);
-  QList<MyMoneySplit>::iterator it_s;
-  for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
-    if ((*it_s).accountId() == fromId) {
-      (*it_s).setAccountId(toId);
-      _t.modifySplit(*it_s);
-      rc = true;
-    }
-  }
-  return rc;
-}
-
 void KMyMoneyApp::slotAccountDelete(void)
 {
   if (d->m_selectedAccount.id().isEmpty())
@@ -3311,7 +3296,7 @@ void KMyMoneyApp::slotAccountDelete(void)
         for (it_t = tlist.begin(); it_t != tlist.end(); ++it_t) {
           slotStatusProgressBar(++cnt, 0);
           MyMoneyTransaction t = (*it_t);
-          if (exchangeAccountInTransaction(t, d->m_selectedAccount.id(), categoryId))
+          if (t.replaceId(categoryId, d->m_selectedAccount.id()))
             file->modifyTransaction(t);
         }
         slotStatusProgressBar(tlist.count(), 0);
@@ -3326,10 +3311,9 @@ void KMyMoneyApp::slotAccountDelete(void)
         slotStatusProgressBar(0, slist.count());
         for (it_s = slist.begin(); it_s != slist.end(); ++it_s) {
           slotStatusProgressBar(++cnt, 0);
-          MyMoneyTransaction t = (*it_s).transaction();
-          if (exchangeAccountInTransaction(t, d->m_selectedAccount.id(), categoryId)) {
-            (*it_s).setTransaction(t);
-            file->modifySchedule(*it_s);
+          MyMoneySchedule sch = (*it_s);
+          if (sch.replaceId(categoryId, d->m_selectedAccount.id())) {
+            file->modifySchedule(sch);
           }
         }
         slotStatusProgressBar(slist.count(), 0);

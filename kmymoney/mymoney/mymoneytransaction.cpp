@@ -446,3 +446,14 @@ QString MyMoneyTransaction::uniqueSortKey(void) const
   key = year + '-' + month + '-' + day + '-' + m_id;
   return key;
 }
+
+bool MyMoneyTransaction::replaceId(const QString& newId, const QString& oldId)
+{
+  bool changed = false;
+  QList<MyMoneySplit>::Iterator it;
+
+  for (it = m_splits.begin(); it != m_splits.end(); ++it) {
+    changed |= (*it).replaceId(newId, oldId);
+  }
+  return changed;
+}

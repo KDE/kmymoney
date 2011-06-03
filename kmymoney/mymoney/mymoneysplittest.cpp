@@ -22,6 +22,7 @@
 
 #include "mymoneyexception.h"
 #include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 
 QTEST_MAIN(MyMoneySplitTest)
 
@@ -329,6 +330,77 @@ void MyMoneySplitTest::testReadXML()
     delete e;
   }
 
+}
+
+void MyMoneySplitTest::testReplaceId(void)
+{
+  MyMoneySplit s;
+  bool changed;
+
+  s.setPayeeId("P000001");
+  s.setAccountId("A000076");
+
+  changed = s.replaceId("X0001", "Y00001");
+  QVERIFY(changed == false);
+  QVERIFY(s.payeeId() == "P000001");
+  QVERIFY(s.accountId() == "A000076");
+
+  changed = s.replaceId("P000002", "P000001");
+  QVERIFY(changed == true);
+  QVERIFY(s.payeeId() == "P000002");
+  QVERIFY(s.accountId() == "A000076");
+
+  changed = s.replaceId("A000079", "A000076");
+  QVERIFY(changed == true);
+  QVERIFY(s.payeeId() == "P000002");
+  QVERIFY(s.accountId() == "A000079");
+
+  QString ref_ok = QString(
+                     "<!DOCTYPE TEST>\n"
+                     "<SPLIT-CONTAINER>\n"
+                     "  <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"-125000/100\" action=\"Transfer\" bankid=\"A000076-2010-03-05-b6850c0-1\" number=\"\" reconcileflag=\"1\" memo=\"UMBUCHUNG\" value=\"-125000/100\" id=\"S0001\" account=\"A000076\" >\n"
+                     "   <KEYVALUEPAIRS>\n"
+                     "    <PAIR key=\"kmm-match-split\" value=\"S0002\" />\n"
+                     "    <PAIR key=\"kmm-matched-tx\" value=\"&amp;lt;!DOCTYPE MATCH>\n"
+                     "    &amp;lt;CONTAINER>\n"
+                     "     &amp;lt;TRANSACTION postdate=&quot;2010-03-05&quot; memo=&quot;UMBUCHUNG&quot; id=&quot;&quot; commodity=&quot;EUR&quot; entrydate=&quot;2010-03-08&quot; >\n"
+                     "      &amp;lt;SPLITS>\n"
+                     "       &amp;lt;SPLIT payee=&quot;P000010&quot; reconciledate=&quot;&quot; shares=&quot;125000/100&quot; action=&quot;Transfer&quot; bankid=&quot;&quot; number=&quot;&quot; reconcileflag=&quot;0&quot; memo=&quot;UMBUCHUNG&quot; value=&quot;125000/100&quot; id=&quot;S0001&quot; account=&quot;A000087&quot; />\n"
+                     "       &amp;lt;SPLIT payee=&quot;P000011&quot; reconciledate=&quot;&quot; shares=&quot;-125000/100&quot; action=&quot;&quot; bankid=&quot;A000076-2010-03-05-b6850c0-1&quot; number=&quot;&quot; reconcileflag=&quot;0&quot; memo=&quot;UMBUCHUNG&quot; value=&quot;-125000/100&quot; id=&quot;S0002&quot; account=&quot;A000076&quot; />\n"
+                     "      &amp;lt;/SPLITS>\n"
+                     "      &amp;lt;KEYVALUEPAIRS>\n"
+                     "       &amp;lt;PAIR key=&quot;Imported&quot; value=&quot;true&quot; />\n"
+                     "      &amp;lt;/KEYVALUEPAIRS>\n"
+                     "     &amp;lt;/TRANSACTION>\n"
+                     "    &amp;lt;/CONTAINER>\n"
+                     "\" />\n"
+                     "    <PAIR key=\"kmm-orig-memo\" value=\"\" />\n"
+                     "   </KEYVALUEPAIRS>\n"
+                     "  </SPLIT>\n"
+                     "</SPLIT-CONTAINER>\n"
+                   );
+  QDomDocument doc;
+  QDomElement node;
+  doc.setContent(ref_ok);
+  node = doc.documentElement().firstChild().toElement();
+
+  try {
+    s = MyMoneySplit(node);
+    QVERIFY(s.payeeId() == "P000001");
+    QVERIFY(s.replaceId("P2", "P1") == false);
+    QVERIFY(s.matchedTransaction().splits()[0].payeeId() == "P000010");
+    QVERIFY(s.matchedTransaction().splits()[1].payeeId() == "P000011");
+    QVERIFY(s.replaceId("P0010", "P000010") == true);
+    QVERIFY(s.matchedTransaction().splits()[0].payeeId() == "P0010");
+    QVERIFY(s.matchedTransaction().splits()[1].payeeId() == "P000011");
+    QVERIFY(s.replaceId("P0011", "P000011") == true);
+    QVERIFY(s.matchedTransaction().splits()[0].payeeId() == "P0010");
+    QVERIFY(s.matchedTransaction().splits()[1].payeeId() == "P0011");
+
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception");
+  }
 }
 
 #include "mymoneysplittest.moc"

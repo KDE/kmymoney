@@ -1071,13 +1071,6 @@ private:
   void doDeleteTransactions(void);
 
   /**
-    * Exchanges all references in transaction @a _t to account @a fromId
-    * into references to account @a toId. Returns @a true if at least
-    * one split has been changed, @a false otherwise.
-    */
-  bool exchangeAccountInTransaction(MyMoneyTransaction& _t, const QString& fromId, const QString& toId);
-
-  /**
     * Re-implemented from IMyMoneyProcessingCalendar
     */
   bool isProcessingDate(const QDate& date) const;

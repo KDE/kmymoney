@@ -1364,3 +1364,9 @@ IMyMoneyProcessingCalendar* MyMoneySchedule::processingCalendar(void) const
 {
   return processingCalendarPtr;
 }
+
+bool MyMoneySchedule::replaceId(const QString& newId, const QString& oldId)
+{
+  return m_transaction.replaceId(newId, oldId);
+}
+

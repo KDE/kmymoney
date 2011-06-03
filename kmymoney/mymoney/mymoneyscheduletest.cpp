@@ -1564,5 +1564,49 @@ void MyMoneyScheduleTest::testAdjustedNextPayment()
   //this is the expected behaviour
   QVERIFY(s.adjustedNextPayment(s.adjustedNextDueDate()) == s.adjustedDate(nextDueDate, s.weekendOption()));
 }
+
+void MyMoneyScheduleTest::testReplaceId()
+{
+  MyMoneySchedule sch;
+  QDate paymentInFuture = QDate::currentDate().addDays(7);
+
+  QString ref_ok = QString(
+                     "<!DOCTYPE TEST>\n"
+                     "<SCHEDULE-CONTAINER>\n"
+                     " <SCHEDULED_TX startDate=\"%1\" autoEnter=\"0\" weekendOption=\"1\" lastPayment=\"%2\" paymentType=\"2\" endDate=\"%3\" type=\"4\" id=\"SCH0042\" name=\"A Name\" fixed=\"1\" occurenceMultiplier=\"1\" occurence=\"32\" >\n" // krazy:exclude=spelling
+                     "  <PAYMENTS/>\n"
+                     "  <TRANSACTION postdate=\"\" memo=\"\" id=\"\" commodity=\"GBP\" entrydate=\"\" >\n"
+                     "   <SPLITS>\n"
+                     "    <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"96379/100\" action=\"Transfer\" number=\"\" reconcileflag=\"2\" memo=\"\" value=\"96379/100\" id=\"S0001\" account=\"A000076\" />\n"
+                     "    <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"-96379/100\" action=\"Transfer\" number=\"\" reconcileflag=\"2\" memo=\"\" value=\"-96379/100\" id=\"S0002\" account=\"A000276\" />\n"
+                     "   </SPLITS>\n"
+                     "  </TRANSACTION>\n"
+                     " </SCHEDULED_TX>\n"
+                     "</SCHEDULE-CONTAINER>\n"
+                   ).arg(paymentInFuture.toString(Qt::ISODate))
+                   .arg(paymentInFuture.toString(Qt::ISODate))
+                   .arg(paymentInFuture.toString(Qt::ISODate));
+
+  QDomDocument doc;
+  QDomElement node;
+  doc.setContent(ref_ok);
+  node = doc.documentElement().firstChild().toElement();
+
+  try {
+    sch = MyMoneySchedule(node);
+    QVERIFY(sch.transaction().postDate().isValid() == false);
+    QVERIFY(sch.transaction().splits()[0].accountId() == "A000076");
+    QVERIFY(sch.transaction().splits()[1].accountId() == "A000276");
+    QVERIFY(sch.replaceId("A000079", "A000076") == true);
+    QVERIFY(sch.transaction().splits()[0].accountId() == "A000079");
+    QVERIFY(sch.transaction().splits()[1].accountId() == "A000276");
+
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception");
+  }
+
+}
+
 #include "mymoneyscheduletest.moc"
 

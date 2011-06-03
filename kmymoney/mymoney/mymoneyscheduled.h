@@ -539,6 +539,15 @@ public:
   virtual bool hasReferenceTo(const QString& id) const;
 
   /**
+   * This method replaces all occurences of id @a oldId with
+   * @a newId.  All other ids are not changed.
+   *
+   * @return true if any change has been performed
+   * @return false if nothing has been modified
+   */
+  bool replaceId(const QString& newId, const QString& oldId);
+
+  /**
    * Returns the human-readable format of Schedule's occurrence
    *
    * @return QString representing the human readable format

@@ -269,4 +269,29 @@ MyMoneyTransaction MyMoneySplit::matchedTransaction(void) const
   return MyMoneyTransaction();
 }
 
+bool MyMoneySplit::replaceId(const QString& newId, const QString& oldId)
+{
+  bool changed = false;
+
+  if (m_payee == oldId) {
+    m_payee = newId;
+    changed = true;
+  } else if (m_account == oldId) {
+    m_account = newId;
+    changed = true;
+  }
+
+  if (isMatched()) {
+    MyMoneyTransaction t = matchedTransaction();
+    if (t.replaceId(newId, oldId)) {
+      removeMatch();
+      addMatch(t);
+      changed = true;
+    }
+  }
+
+  return changed;
+}
+
+
 // vim:cin:si:ai:et:ts=2:sw=2:

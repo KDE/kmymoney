@@ -324,6 +324,16 @@ public:
    */
   static unsigned long hash(const QString& txt, unsigned long h = 0);
 
+  /**
+   * This method replaces all occurences of id @a oldId with
+   * @a newId.  All other ids are not changed.
+   *
+   * @return true if any change has been performed
+   * @return false if nothing has been modified
+   */
+  bool replaceId(const QString& newId, const QString& oldId);
+
+
 private:
   /**
     * This method returns the next id to be used for a split

@@ -57,5 +57,6 @@ private slots:
   void testIsStockSplit();
   void testAddMissingAccountId();
   void testModifyMissingAccountId();
+  void testReplaceId();
 };
 #endif

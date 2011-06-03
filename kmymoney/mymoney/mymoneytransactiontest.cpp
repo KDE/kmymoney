@@ -661,5 +661,33 @@ void MyMoneyTransactionTest::testModifyMissingAccountId()
     delete e;
   }
 }
+
+void MyMoneyTransactionTest::testReplaceId(void)
+{
+  testAddSplits();
+
+  bool changed;
+
+  try {
+    changed = m->replaceId("Joe", "Bla");
+    QVERIFY(changed == false);
+    QVERIFY(m->splits()[0].accountId() == "A000001");
+    QVERIFY(m->splits()[1].accountId() == "A000002");
+
+    changed = m->replaceId("A000003", "A000001");
+    QVERIFY(changed == true);
+    QVERIFY(m->splits()[0].accountId() == "A000003");
+    QVERIFY(m->splits()[1].accountId() == "A000002");
+
+    changed = m->replaceId("A000004", "A000002");
+    QVERIFY(changed == true);
+    QVERIFY(m->splits()[0].accountId() == "A000003");
+    QVERIFY(m->splits()[1].accountId() == "A000004");
+
+  } catch (MyMoneyException *e) {
+    unexpectedException(e);
+  }
+}
+
 #include "mymoneytransactiontest.moc"
 

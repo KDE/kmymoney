@@ -44,6 +44,7 @@ private slots:
   void testIsAutoCalc();
   void testWriteXML();
   void testReadXML();
+  void testReplaceId();
 };
 
 #endif
