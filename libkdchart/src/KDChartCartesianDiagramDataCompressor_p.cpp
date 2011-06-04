@@ -105,7 +105,7 @@ CartesianDiagramDataCompressor::DataValueAttributesList CartesianDiagramDataComp
             while (i != allAttrs.constEnd()) {
                 if( i.value() == attrs ){
                     isDuplicate = true;
-                    continue;
+                    break;
                 }
                 ++i;
             }
