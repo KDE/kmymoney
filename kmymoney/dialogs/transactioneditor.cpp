@@ -628,12 +628,12 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
         m_transactions.append(st);
       }
 
-      //    Save pricing information 
+      //    Save pricing information
       QList<MyMoneySplit>::const_iterator it_t;
       for (it_t = t.splits().constBegin(); it_t != t.splits().constEnd(); ++it_t) {
-        if (((*it_t).action() != "Buy") && 
-          ((*it_t).action() != "Sell") && 
-          ((*it_t).action() != "Reinvest")) {
+        if (((*it_t).action() != "Buy") &&
+            ((*it_t).action() != "Sell") &&
+            ((*it_t).action() != "Reinvest")) {
           continue;
         }
         QString id = (*it_t).accountId();

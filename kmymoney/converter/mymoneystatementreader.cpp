@@ -220,7 +220,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   // For testing, save the statement to an XML file
   // (uncomment this line)
   //
-  MyMoneyStatement::writeXMLFile(s,"Imported.Xml");///
+  MyMoneyStatement::writeXMLFile(s, "Imported.Xml");///
 
   //
   // Select the account

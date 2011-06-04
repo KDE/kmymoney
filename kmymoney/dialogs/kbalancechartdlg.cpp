@@ -47,7 +47,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   setButtons(KDialog::Close);
   setButtonsOrientation(Qt::Horizontal);
 
-  // restore the last used dialog size 
+  // restore the last used dialog size
   KConfigGroup grp = KGlobal::config()->group("KBalanceChartDlg");
   if (grp.isValid()) {
     restoreDialogSize(grp);
@@ -63,7 +63,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
 
 KBalanceChartDlg::~KBalanceChartDlg()
 {
-  // store the last used dialog size 
+  // store the last used dialog size
   KConfigGroup grp = KGlobal::config()->group("KBalanceChartDlg");
   if (grp.isValid()) {
     saveDialogSize(grp);
