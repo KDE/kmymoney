@@ -123,6 +123,7 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
   }
   //FIXME: port
   m_interestPage->m_interestRateEdit->loadText(ir.formatMoney("", 3));
+  m_interestPage->m_interestRateEdit->setPrecision(3);
   m_interestEditPage->m_newInterestRateEdit->loadText(ir.formatMoney("", 3));
   m_interestEditPage->m_newInterestRateEdit->setPrecision(3);
   m_interestEditPage->m_interestRateLabel->setText(QString(" ") + ir.formatMoney("", 3) + QString("%"));
