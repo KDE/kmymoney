@@ -5211,17 +5211,20 @@ void KMyMoneyApp::slotTransactionsCancelOrEnter(bool& okToSelect)
       } else {
         // okToSelect is preset to true if a cancel of the dialog is useful and false if it is not
         int rc;
-        KGuiItem noGuiItem = KStandardGuiItem::no();
+        KGuiItem noGuiItem = KStandardGuiItem::save();
+        KGuiItem yesGuiItem = KStandardGuiItem::discard();
+        KGuiItem cancelGuiItem = KStandardGuiItem::cont();
+
         // if the transaction can't be entered make sure that it can't be entered by pressing no either
         if (!kmymoney->action("transaction_enter")->isEnabled()) {
           noGuiItem.setEnabled(false);
           noGuiItem.setToolTip(kmymoney->action("transaction_enter")->toolTip());
         }
         if (okToSelect == true) {
-          rc = KMessageBox::warningYesNoCancel(0, i18n("<p>Do you really want to cancel editing this transaction without saving it?</p><p>- <b>Yes</b> cancels editing the transaction<br/>- <b>No</b> saves the transaction prior to canceling and</p><p>- <b>Cancel</b> returns to the transaction editor.</p><p>You can also select an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), noGuiItem, KStandardGuiItem::cancel(), dontShowAgain);
+          rc = KMessageBox::warningYesNoCancel(0, i18n("<p>Please select what you want to do: discard the changes, save the changes or continue to edit the transaction.</p><p>You can also set an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("End transaction edit"), yesGuiItem, noGuiItem, cancelGuiItem, dontShowAgain);
 
         } else {
-          rc = KMessageBox::warningYesNo(0, i18n("<p>Do you really want to cancel editing this transaction without saving it?</p><p>- <b>Yes</b> cancels editing the transaction</p><p>- <b>No</b> saves the transaction prior to canceling.</p><p>You can also select an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("Cancel transaction edit"), KStandardGuiItem::yes(), noGuiItem, dontShowAgain);
+          rc = KMessageBox::warningYesNo(0, i18n("<p>Please select what you want to do: discard the changes, save the changes or continue to edit the transaction.</p><p>You can also set an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("End transaction edit"), yesGuiItem, noGuiItem, dontShowAgain);
         }
 
         switch (rc) {
