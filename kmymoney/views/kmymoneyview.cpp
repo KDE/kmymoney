@@ -1602,6 +1602,7 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("WST", i18n("Samoan Tala")), create);
   loadDefaultCurrency(MyMoneySecurity("STD", i18n("Sao Tome and Principe Dobra")), create);
   loadDefaultCurrency(MyMoneySecurity("SAR", i18n("Saudi Riyal")), create);
+  loadDefaultCurrency(MyMoneySecurity("RSD", i18n("Serbian Dinar")), create);
   loadDefaultCurrency(MyMoneySecurity("SCR", i18n("Seychelles Rupee")), create);
   loadDefaultCurrency(MyMoneySecurity("SLL", i18n("Sierra Leone Leone")), create);
   loadDefaultCurrency(MyMoneySecurity("SGD", i18n("Singapore Dollar"),       "$"), create);
