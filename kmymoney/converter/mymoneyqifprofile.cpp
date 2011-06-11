@@ -827,19 +827,21 @@ void MyMoneyQifProfile::autoDetect(const QStringList& lines)
     QChar c((*it)[0]);
     if (c == '!') {
       QString sname = (*it).toLower();
-      section = 0;
-      if (sname.startsWith(QLatin1String("!account")))
-        section = 1;
-      else if (sname.startsWith(QLatin1String("!type"))) {
-        if (sname.startsWith(QLatin1String("!type:cat"))
-            || sname.startsWith(QLatin1String("!type:payee"))
-            || sname.startsWith(QLatin1String("!type:security"))
-            || sname.startsWith(QLatin1String("!type:class"))) {
-          section = 0;
-        } else if (sname.startsWith(QLatin1String("!type:price"))) {
-          section = 3;
-        } else
-          section = 2;
+      if(!sname.startsWith(QLatin1String("!option:"))) {
+        section = 0;
+        if (sname.startsWith(QLatin1String("!account")))
+          section = 1;
+        else if (sname.startsWith(QLatin1String("!type"))) {
+          if (sname.startsWith(QLatin1String("!type:cat"))
+              || sname.startsWith(QLatin1String("!type:payee"))
+              || sname.startsWith(QLatin1String("!type:security"))
+              || sname.startsWith(QLatin1String("!type:class"))) {
+            section = 0;
+          } else if (sname.startsWith(QLatin1String("!type:price"))) {
+            section = 3;
+          } else
+            section = 2;
+        }
       }
     }
 
