@@ -172,11 +172,13 @@ bool OfxImporterPlugin::import(const QString& filename)
   LibofxContextPtr ctx = libofx_get_new_context();
   Q_CHECK_PTR(ctx);
 
+  qDebug("setup callback routines");
   ofx_set_transaction_cb(ctx, ofxTransactionCallback, this);
   ofx_set_statement_cb(ctx, ofxStatementCallback, this);
   ofx_set_account_cb(ctx, ofxAccountCallback, this);
   ofx_set_security_cb(ctx, ofxSecurityCallback, this);
   ofx_set_status_cb(ctx, ofxStatusCallback, this);
+  qDebug("process data");
   libofx_proc_file(ctx, filename_deep, AUTODETECT);
   libofx_free_context(ctx);
 
@@ -640,6 +642,7 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
 {
   Q_UNUSED(moreAccounts);
 
+  qDebug("OfxImporterPlugin::updateAccount");
   try {
     if (!acc.id().isEmpty()) {
       // Save the value of preferName to be used by ofxTransactionCallback
@@ -663,7 +666,7 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
 
 void OfxImporterPlugin::slotImportFile(const QString& url)
 {
-
+  qDebug("OfxImporterPlugin::slotImportFile");
   if (!import(url)) {
     KMessageBox::error(0, QString("<qt>%1</qt>").arg(i18n("<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin returned the following error:</p><p>%2</p>", url, lastError())), i18n("Importing error"));
   }

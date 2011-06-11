@@ -98,6 +98,7 @@ bool KOfxDirectConnectDlg::init(void)
     d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append);
   }
 
+  qDebug("creating job");
   m_job = KIO::http_post(m_connector.url(), request, KIO::HideProgressInfo);
 
   if (d->m_fpTrace.isOpen()) {
@@ -149,6 +150,7 @@ void KOfxDirectConnectDlg::setDetails(const QString& _details)
 
 void KOfxDirectConnectDlg::slotOfxData(KIO::Job*, const QByteArray& _ba)
 {
+  qDebug("Got %d bytes of data", _ba.size());
   if (d->m_firstData) {
     setStatus("Connection established, retrieving data...");
     setDetails(QString("Downloading data to %1...").arg(m_tmpfile->fileName()));
@@ -167,6 +169,7 @@ void KOfxDirectConnectDlg::slotOfxData(KIO::Job*, const QByteArray& _ba)
 
 void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
 {
+  qDebug("Job finished");
   kProgress1->setValue(kProgress1->value() + 1);
   setStatus("Completed.");
 
@@ -177,13 +180,17 @@ void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
   int error = m_job->error();
 
   if (m_tmpfile) {
+    qDebug("Closing tempfile");
     m_tmpfile->close();
   }
+  qDebug("Tempfile closed");
 
   if (error) {
+    qDebug("Show error message");
     m_job->ui()->setWindow(0);
     m_job->ui()->showErrorMessage();
   } else if (m_job->isErrorPage()) {
+    qDebug("Process error page");
     QString details;
     if (m_tmpfile) {
       QFile f(m_tmpfile->fileName());
@@ -200,13 +207,14 @@ void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
     }
     KMessageBox::detailedSorry(this, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
   } else if (m_tmpfile) {
-
+    qDebug("Emit statementReady signal with '%s'", qPrintable(m_tmpfile->fileName()));
     emit statementReady(m_tmpfile->fileName());
-
+    qDebug("Return from signal statementReady() processing");
   }
   delete m_tmpfile;
   m_tmpfile = 0;
   hide();
+  qDebug("Finishing slotOfxFinished");
 }
 
 void KOfxDirectConnectDlg::reject(void)

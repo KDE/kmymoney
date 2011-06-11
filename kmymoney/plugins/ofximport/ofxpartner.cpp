@@ -52,6 +52,9 @@
 #undef DELETE
 #endif
 
+#define MSN 0
+#define OFXHOME 1
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -87,6 +90,15 @@ void ValidateIndexCache(void)
   KUrl fname;
 
   QMap<QString, QString> attr;
+
+#if OFXHOME
+  fname = directory + kBankFilename;
+  QFileInfo i(fname.path());
+  if (needReload(i))
+    get("", attr, KUrl("http://www.ofxhome.com/api.php?all=yes"), fname);
+#endif
+
+#if MSN
   attr["content-type"] = "application/x-www-form-urlencoded";
   attr["accept"] = "*/*";
 
@@ -104,6 +116,7 @@ void ValidateIndexCache(void)
   i = QFileInfo(fname.path());
   if (needReload(i))
     post("T=3&S=*&R=1&O=0&TEST=0", attr, KUrl("http://moneycentral.msn.com/money/2005/mnynet/service/ols/filist.aspx?SKU=3&VER=" VER), fname);
+#endif
 }
 
 static void ParseFile(QMap<QString, QString>& result, const QString& fileName, const QString& bankName)
@@ -111,6 +124,31 @@ static void ParseFile(QMap<QString, QString>& result, const QString& fileName, c
   QFile f(fileName);
   if (f.open(QIODevice::ReadOnly)) {
     QTextStream stream(&f);
+#if OFXHOME
+    stream.setCodec("UTF-8");
+    QString msg;
+    int errl, errc;
+    QDomDocument doc;
+    if (doc.setContent(stream.readAll(), &msg, &errl, &errc)) {
+      QDomNodeList olist = doc.elementsByTagName("institutionid");
+      for (int i = 0; i < olist.count(); ++i) {
+        QDomNode onode = olist.item(i);
+        if (onode.isElement()) {
+          QDomElement elo = onode.toElement();
+          QString name = elo.attribute("name");
+
+          if (bankName.isEmpty())
+            result[name].clear();
+
+          else if (name == bankName) {
+            result[elo.attribute("id")].clear();
+          }
+        }
+      }
+    }
+#endif
+
+#if MSN
     stream.setCodec("UTF-16");
     QString msg;
     int errl, errc;
@@ -140,6 +178,7 @@ static void ParseFile(QMap<QString, QString>& result, const QString& fileName, c
         }
       }
     }
+#endif
     f.close();
   }
 }
@@ -152,8 +191,10 @@ QStringList BankNames(void)
   ValidateIndexCache();
 
   ParseFile(result, directory + kBankFilename, QString());
+#if MSN
   ParseFile(result, directory + kCcFilename, QString());
   ParseFile(result, directory + kInvFilename, QString());
+#endif
 
   // Add Innovision
   result["Innovision"].clear();
@@ -166,8 +207,10 @@ QStringList FipidForBank(const QString& bank)
   QMap<QString, QString> result;
 
   ParseFile(result, directory + kBankFilename, bank);
+#if MSN
   ParseFile(result, directory + kCcFilename, bank);
   ParseFile(result, directory + kInvFilename, bank);
+#endif
 
   // the fipid for Innovision is 1.
   if (bank == "Innovision")
@@ -237,8 +280,6 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
   }
 
   QMap<QString, QString> attr;
-  attr["content-type"] = "application/x-www-form-urlencoded";
-  attr["accept"] = "*/*";
 
   KUrl guidFile(QString("%1fipid-%2.xml").arg(directory).arg(fipid));
 
@@ -247,6 +288,38 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
   // Increasing to VER=9 solved the problem. This may happen again in the
   // future.
   QFileInfo i(guidFile.path());
+
+#if OFXHOME
+  if (!i.isReadable() || i.lastModified().addDays(7) < QDateTime::currentDateTime())
+    get("", attr, KUrl(QString("http://www.ofxhome.com/api.php?lookup=%1").arg(fipid)), guidFile);
+
+  QFile f(guidFile.path());
+  if (f.open(QIODevice::ReadOnly)) {
+    QTextStream stream(&f);
+    stream.setCodec("UTF-8");
+    QString msg;
+    int errl, errc;
+    QDomDocument doc;
+    if (doc.setContent(stream.readAll(), &msg, &errl, &errc)) {
+      QString fid = extractNodeText(doc, "institution/fid");
+      QString org = extractNodeText(doc, "institution/org");
+      QString url = extractNodeText(doc, "institution/url");
+      strncpy(result.fid, fid.toLatin1(), OFX_FID_LENGTH - 1);
+      strncpy(result.org, org.toLatin1(), OFX_ORG_LENGTH - 1);
+      strncpy(result.url, url.toLatin1(), OFX_URL_LENGTH - 1);
+
+      result.accountlist = true;
+      result.statements = true;
+      result.billpay = false;
+      result.investments = true;
+    }
+  }
+#endif
+
+#if MSN
+  attr["content-type"] = "application/x-www-form-urlencoded";
+  attr["accept"] = "*/*";
+
   if (!i.isReadable() || i.lastModified().addDays(7) < QDateTime::currentDateTime())
     get("", attr, KUrl(QString("http://moneycentral.msn.com/money/2005/mnynet/service/olsvcupd/OnlSvcBrandInfo.aspx?MSNGUID=&GUID=%1&SKU=3&VER=" VER).arg(fipid)), guidFile);
 
@@ -270,6 +343,7 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
       result.investments = (extractNodeText(doc, "InvestmentCapabilities/BrkStmt") == "1");
     }
   }
+#endif
 
   return result;
 }
@@ -331,7 +405,9 @@ OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QBy
   connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)), this, SLOT(slotOfxData(KIO::Job*, const QByteArray&)));
   connect(m_job, SIGNAL(connected(KIO::Job*)), this, SLOT(slotOfxConnected(KIO::Job*)));
 
+  qDebug("Starting eventloop");
   m_eventLoop.exec();
+  qDebug("Ending eventloop");
 }
 
 OfxHttpsRequest::~OfxHttpsRequest()
@@ -392,6 +468,7 @@ void OfxHttpsRequest::slotOfxFinished(KJob* /* e */)
     unlink(m_dst.path().toUtf8().data());
   }
 
+  qDebug("Finishing eventloop");
   m_eventLoop.exit();
 }
 
@@ -419,7 +496,9 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
     connect(m_job, SIGNAL(requestFinished(int, bool)),
             this, SLOT(slotOfxFinished(int, bool)));
 
+    qDebug("Starting eventloop");
     m_eventLoop.exec();  // krazy:exclude=crashy
+    qDebug("Ending eventloop");
 
     if (m_error != QHttp::NoError)
       errorMsg = m_job->errorString();
@@ -442,6 +521,7 @@ void OfxHttpRequest::slotOfxFinished(int, bool rc)
   if (rc) {
     m_error = m_job->error();
   }
+  qDebug("Finishing eventloop");
   m_eventLoop.exit();
 }
 
