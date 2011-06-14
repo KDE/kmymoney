@@ -538,7 +538,7 @@ bool MyMoneyQifReader::finishImport(void)
       ft.commit();
   } catch (MyMoneyException *e) {
     KMessageBox::detailedSorry(0, i18n("Unable to add transactions"),
-                               (e->what() + " " + i18n("thrown in") + " " + e->file() + ":%1").arg(e->line()));
+                               i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
     delete e;
     rc = false;
   }

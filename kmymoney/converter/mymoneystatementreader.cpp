@@ -930,7 +930,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
         } catch (MyMoneyException *e) {
           KMessageBox::detailedSorry(0, i18n("Unable to add payee/receiver"),
-                                     QString(e->what() + ' ' + i18n("thrown in") + ' ' + e->file() + ":%1").arg(e->line()));
+                                     i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
           delete e;
 
         }

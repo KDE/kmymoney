@@ -4518,7 +4518,7 @@ void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
       ft.commit();
     } catch (MyMoneyException *e) {
       KMessageBox::detailedSorry(this, i18n("Unable to add payee"),
-                                 QString("%1 thrown in %2:%3").arg(e->what()).arg(e->file()).arg(e->line()));
+                                 i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
       delete e;
     }
   }
@@ -4668,7 +4668,7 @@ void KMyMoneyApp::slotPayeeDelete(void)
         } // for - Schedules
       } catch (MyMoneyException *e) {
         KMessageBox::detailedSorry(0, i18n("Unable to reassign payee of transaction/split"),
-                                   QString(e->what() + ' ' + i18n("thrown in") + ' ' + e->file() + ":%1").arg(e->line()));
+                                   i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
         delete e;
       }
     } // if !translist.isEmpty()
@@ -4725,7 +4725,7 @@ void KMyMoneyApp::slotPayeeDelete(void)
 
   } catch (MyMoneyException *e) {
     KMessageBox::detailedSorry(0, i18n("Unable to remove payee(s)"),
-                               QString(e->what() + ' ' + i18n("thrown in") + ' ' + e->file() + ":%1").arg(e->line()));
+                               i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
     delete e;
   }
 }

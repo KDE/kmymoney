@@ -331,7 +331,7 @@ void KPayeesView::slotRenamePayee(QListWidgetItem* p)
 
     } catch (MyMoneyException *e) {
       KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
-                                 QString(e->what() + ' ' + i18n("thrown in") + ' ' + e->file() + ":%1").arg(e->line()));
+                                 i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
       delete e;
     }
   } else {
@@ -621,7 +621,7 @@ void KPayeesView::slotUpdatePayee(void)
 
     } catch (MyMoneyException *e) {
       KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
-                                 QString(e->what() + ' ' + i18n("thrown in") + ' ' + e->file() + ":%1").arg(e->line()));
+                                 i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
       delete e;
     }
   }
