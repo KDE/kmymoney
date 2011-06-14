@@ -749,11 +749,11 @@ void CsvProcessing::readSettings()
 
 void CsvProcessing::saveAs()
 {
-  if (m_csvDialog->m_fileType == "Banking") {
+  if (m_csvDialog->m_fileType == QLatin1String("Banking")) {
     QStringList outFile = m_inFileName.split('.');
-    const KUrl& name = (outFile.isEmpty() ? "CsvProcessing" : outFile[0]) + ".qif";
+    const KUrl& name = QString((outFile.isEmpty() ? "CsvProcessing" : outFile[0]) + ".qif");
 
-    QString outFileName = KFileDialog::getSaveFileName(name, "*.qif | QIF Files", 0, i18n("Save QIF")
+    QString outFileName = KFileDialog::getSaveFileName(name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")), 0, i18n("Save QIF")
 #if KDE_IS_VERSION(4,4,0)
                           , KFileDialog::ConfirmOverwrite
 #endif

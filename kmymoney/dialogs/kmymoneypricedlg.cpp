@@ -315,7 +315,7 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
       //if it is not a currency, send a null String, which will trigger the update for all prices
       QString stringId;
       if (security.isCurrency()) {
-        stringId = (item->text(KPriceTreeItem::ePriceCommodity) + ' ' + item->text(KPriceTreeItem::ePriceCurrency)).toUtf8();
+        stringId = QString(item->text(KPriceTreeItem::ePriceCommodity) + ' ' + item->text(KPriceTreeItem::ePriceCurrency)).toUtf8();
       }
       QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, stringId);
       if (dlg->exec() == Accepted)
@@ -324,7 +324,7 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
     }
   } else {
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this);
-    if (dlg->exec() == Accepted)
+    if (dlg->exec() == Accepted && dlg)
       dlg->storePrices();
     delete dlg;
   }

@@ -1105,7 +1105,7 @@ void InvestProcessing::saveAs()
 {
   if (m_csvDialog->m_fileType == "Invest") {
     QStringList outFile = m_inFileName .split('.');
-    const KUrl& name = (outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif";
+    const KUrl& name = QString((outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif");
 
     QString outFileName = KFileDialog::getSaveFileName(name, "*.qif | QIF Files", 0, i18n("Save QIF")
 #if KDE_IS_VERSION(4,4,0)

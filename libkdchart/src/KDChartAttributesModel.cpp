@@ -326,7 +326,7 @@ QVariant AttributesModel::defaultHeaderData ( int section, Qt::Orientation orien
   switch ( role ) {
   case Qt::DisplayRole:
       //TODO for KDChart 3.0: Change to "return QString::number( section+1 );"
-      return QLatin1String( orientation == Qt::Vertical ?  "Series " : "Item " ) + QString::number( section ) ;
+      return QString(QLatin1String( orientation == Qt::Vertical ?  "Series " : "Item " ) + QString::number( section ) );
 
   case KDChart::DatasetBrushRole: {
       if ( paletteType() == PaletteTypeSubdued )

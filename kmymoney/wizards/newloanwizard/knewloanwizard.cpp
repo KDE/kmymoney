@@ -238,7 +238,7 @@ void KNewLoanWizard::updateLoanInfo(void)
 
   int fraction = m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()));
   setField("loanAmount6", field("loanAmountEdit").value<MyMoneyMoney>().formatMoney(fraction));
-  setField("interestRate6", field("interestRateEdit").value<MyMoneyMoney>().formatMoney("", 3) + QString("%"));
+  setField("interestRate6", QString(field("interestRateEdit").value<MyMoneyMoney>().formatMoney("", 3) + QString("%")));
   txt = QString().sprintf("%d ", field("durationValueEdit").toInt())
         + field("durationUnitEdit").toString();
   setField("duration6", txt);

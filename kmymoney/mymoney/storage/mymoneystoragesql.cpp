@@ -1705,7 +1705,7 @@ void MyMoneyStorageSql::writeSplitList
     postDateList << m_txPostDate.toString(Qt::ISODate); // FIXME: when Tom puts date into split object
     bankIdList << s.bankID();
 
-    kvpIdList << txId + QString::number(splitIdList[i]);
+    kvpIdList << QString(txId + QString::number(splitIdList[i]));
     kvpPairsList << s.pairs();
     ++i;
   }
