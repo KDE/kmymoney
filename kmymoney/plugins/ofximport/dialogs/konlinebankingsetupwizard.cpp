@@ -142,8 +142,7 @@ void KOnlineBankingSetupWizard::checkNextButton(void)
         enableButton = (m_listFi->currentItem() != 0)
                        && m_listFi->currentItem()->isSelected();
       } else {
-        enableButton = !(m_fid->text().isEmpty()
-                         || m_url->url().isEmpty()
+        enableButton = !(m_url->url().isEmpty()
                          || m_bankName->text().isEmpty());
       }
       break;
