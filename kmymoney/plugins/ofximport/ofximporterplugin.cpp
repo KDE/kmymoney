@@ -53,10 +53,14 @@ using KWallet::Wallet;
 class OfxImporterPlugin::Private
 {
 public:
-  Private() : m_valid(false), m_preferName(false), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0) {}
+  Private() : m_valid(false), m_preferName(PreferId), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0) {}
 
   bool m_valid;
-  bool m_preferName;
+  enum NamePreference {
+    PreferId = 0,
+    PreferName,
+    PreferMemo
+  } m_preferName;
   bool m_walletIsOpen;
   QList<MyMoneyStatement> m_statementlist;
   QList<MyMoneyStatement::Security> m_securitylist;
@@ -240,21 +244,50 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
   } else if (data.reference_number_valid == true) {
     t.m_strBankID = QString("REF ") + data.reference_number;
   }
-  // Decide whether to import NAME or PAYEEID if both are present in the download
-  if (pofx->d->m_preferName) {
-    if (data.name_valid == true) {
-      t.m_strPayee = data.name;
-    } else if (data.payee_id_valid == true) {
-      t.m_strPayee = data.payee_id;
-    }
-  } else {
-    if (data.payee_id_valid == true) {
-      t.m_strPayee = data.payee_id;
-    } else if (data.name_valid == true) {
-      t.m_strPayee = data.name;
+
+  // Decide whether to use NAME, PAYEEID or MEMO to construct the payee
+  bool validity[3] = {false, false, false};
+  QStringList values;
+  switch (pofx->d->m_preferName) {
+    case OfxImporterPlugin::Private::PreferId:  // PAYEEID
+    default:
+      validity[0] = data.payee_id_valid;
+      validity[1] = data.name_valid;
+      validity[2] = data.memo_valid;
+      values[0] += data.payee_id;
+      values[1] += data.name;
+      values[2] += data.memo;
+      break;
+
+    case OfxImporterPlugin::Private::PreferName:  // NAME
+      validity[0] = data.name_valid;
+      validity[1] = data.payee_id_valid;
+      validity[2] = data.memo_valid;
+      values[0] += data.name;
+      values[1] += data.payee_id;
+      values[2] += data.memo;
+      break;
+
+    case OfxImporterPlugin::Private::PreferMemo:  // MEMO
+      validity[1] = data.memo_valid;
+      validity[1] = data.payee_id_valid;
+      validity[2] = data.name_valid;
+      values[0] += data.memo;
+      values[1] += data.payee_id;
+      values[2] += data.name;
+      break;
+  }
+
+  for (int idx = 0; idx < 3; ++idx) {
+    if (validity[idx]) {
+      t.m_strPayee = values[idx];
+      break;
     }
   }
-  if (data.memo_valid == true) {
+
+  // extract memo field if we haven't used it as payee
+  if ((data.memo_valid == true)
+      && (pofx->d->m_preferName != OfxImporterPlugin::Private::PreferMemo)) {
     t.m_strMemo = data.memo;
   }
 
@@ -615,8 +648,9 @@ MyMoneyKeyValueContainer OfxImporterPlugin::onlineBankingSettings(const MyMoneyK
     kvp.setValue("kmmofx-lastUpdate", QString::number(d->m_statusDlg->m_lastUpdateRB->isChecked()));
     kvp.setValue("kmmofx-pickDate", QString::number(d->m_statusDlg->m_pickDateRB->isChecked()));
     kvp.setValue("kmmofx-specificDate", d->m_statusDlg->m_specificDate->date().toString());
-    kvp.setValue("kmmofx-preferPayeeid", QString::number(d->m_statusDlg->m_payeeidRB->isChecked()));
-    kvp.setValue("kmmofx-preferName", QString::number(d->m_statusDlg->m_nameRB->isChecked()));
+    kvp.setValue("kmmofx-preferName", QString::number(d->m_statusDlg->m_preferredPayee->currentIndex()));
+    // TODO get rid of pre 4.6 values
+    // kvp.deletePair("kmmofx-preferPayeeid");
   }
   return kvp;
 }
@@ -646,7 +680,7 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
   try {
     if (!acc.id().isEmpty()) {
       // Save the value of preferName to be used by ofxTransactionCallback
-      d->m_preferName = acc.onlineBankingSettings().value("kmmofx-preferName").toInt() != 0;
+      d->m_preferName = static_cast<OfxImporterPlugin::Private::NamePreference>(acc.onlineBankingSettings().value("kmmofx-preferName").toInt());
       QPointer<KOfxDirectConnectDlg> dlg = new KOfxDirectConnectDlg(acc);
 
       connect(dlg, SIGNAL(statementReady(const QString&)),

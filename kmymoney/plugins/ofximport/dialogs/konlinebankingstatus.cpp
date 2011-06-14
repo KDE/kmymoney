@@ -55,8 +55,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
 {
   m_ledOnlineStatus->off();
 
-  buttonGroup1->setId(m_payeeidRB, 0);
-  buttonGroup1->setId(m_nameRB, 1);
+  m_preferredPayee->setCurrentIndex(0);
 
   buttonGroupBox2->setContentsMargins(0, 0, 0, 0);
 
@@ -95,8 +94,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
   else
     m_specificDate->setDate(QDate::currentDate());
   m_specificDate->setMaximumDate(QDate::currentDate());
-  m_payeeidRB->setChecked(settings.value("kmmofx-preferPayeeid").isEmpty() || settings.value("kmmofx-preferPayeeid").toInt() != 0);
-  m_nameRB->setChecked(!settings.value("kmmofx-preferName").isEmpty() && settings.value("kmmofx-preferName").toInt() != 0);
+  m_preferredPayee->setCurrentIndex(settings.value("kmmofx-preferName").toInt());
 
   QString key = OFX_PASSWORD_KEY(settings.value("url"), settings.value("uniqueId"));
   QString pwd;
