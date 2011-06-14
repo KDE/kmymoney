@@ -827,7 +827,7 @@ void MyMoneyQifProfile::autoDetect(const QStringList& lines)
     QChar c((*it)[0]);
     if (c == '!') {
       QString sname = (*it).toLower();
-      if(!sname.startsWith(QLatin1String("!option:"))) {
+      if (!sname.startsWith(QLatin1String("!option:"))) {
         section = 0;
         if (sname.startsWith(QLatin1String("!account")))
           section = 1;
