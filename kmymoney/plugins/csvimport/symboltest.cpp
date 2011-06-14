@@ -91,22 +91,22 @@ void SymbolTest::testDecimalSymbolDot_data()
   QTest::addColumn<QString>("result");
 
   //  Detect '.' as decimal and replace from locale
-  QTest::newRow("test 1") << "1234.56" << "1234" + m_localeDecimal + "56";
+  QTest::newRow("test 1") << "1234.56" << QString("1234" + m_localeDecimal + "56");
 
   //  Check for '.' as decimal, and none present
-  QTest::newRow("test 2") << "145" << "145" + m_localeDecimal + "00";
+  QTest::newRow("test 2") << "145" << QString("145" + m_localeDecimal + "00");
 
   //  Detect '.' as decimal and replace from locale,
   //  with thousands separator present
-  QTest::newRow("test 3") << "-123,456.78" << "-123456" + m_localeDecimal + "78";
+  QTest::newRow("test 3") << "-123,456.78" << QString("-123456" + m_localeDecimal + "78");
 
   //  Detect '.' as decimal and replace from locale
   //  and thousands separator present
-  QTest::newRow("test 4") << "123,456.78" << "123456" + m_localeDecimal + "78";
+  QTest::newRow("test 4") << "123,456.78" << QString("123456" + m_localeDecimal + "78");
 
   //  Detect '.' as decimal and replace from locale
   //  and thousands separator present
-  QTest::newRow("test 5") << "987,654.32" << "987654" + m_localeDecimal + "32";
+  QTest::newRow("test 5") << "987,654.32" << QString("987654" + m_localeDecimal + "32");
 }
 
 void SymbolTest::testDecimalSymbolComma_data()
@@ -116,17 +116,17 @@ void SymbolTest::testDecimalSymbolComma_data()
 
   //  Detect ',' as decimal and replace from locale
 
-  QTest::newRow("test 1") << "$987,654" << "$987" + m_localeDecimal + "654";
+  QTest::newRow("test 1") << "$987,654" << QString("$987" + m_localeDecimal + "654");
 
   //  Detect ',' as decimal and replace from locale
   //  with thousands separator present
 
-  QTest::newRow("test 2") << "-123.456,78" << "-123456" + m_localeDecimal + "78" ;
+  QTest::newRow("test 2") << "-123.456,78" << QString("-123456" + m_localeDecimal + "78");
 
-  QTest::newRow("test 3") << "145" << "145" + m_localeDecimal + "00" ;
+  QTest::newRow("test 3") << "145" << QString("145" + m_localeDecimal + "00");
 
   //  Check for ',' as decimal
-  QTest::newRow("test 4") << "123.456" << "123456" + m_localeDecimal + "00";
+  QTest::newRow("test 4") << "123.456" << QString("123456" + m_localeDecimal + "00");
 }
 
 void SymbolTest::testDecimalSymbolInvalid_data()
