@@ -254,27 +254,27 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
       validity[0] = data.payee_id_valid;
       validity[1] = data.name_valid;
       validity[2] = data.memo_valid;
-      values[0] += data.payee_id;
-      values[1] += data.name;
-      values[2] += data.memo;
+      values += data.payee_id;
+      values += data.name;
+      values += data.memo;
       break;
 
     case OfxImporterPlugin::Private::PreferName:  // NAME
       validity[0] = data.name_valid;
       validity[1] = data.payee_id_valid;
       validity[2] = data.memo_valid;
-      values[0] += data.name;
-      values[1] += data.payee_id;
-      values[2] += data.memo;
+      values += data.name;
+      values += data.payee_id;
+      values += data.memo;
       break;
 
     case OfxImporterPlugin::Private::PreferMemo:  // MEMO
       validity[1] = data.memo_valid;
       validity[1] = data.payee_id_valid;
       validity[2] = data.name_valid;
-      values[0] += data.memo;
-      values[1] += data.payee_id;
-      values[2] += data.name;
+      values += data.memo;
+      values += data.payee_id;
+      values += data.name;
       break;
   }
 
