@@ -120,7 +120,6 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
 
   d->m_dateEdit = new KMyMoneyDateEdit(d->m_date, this);
   setFocusProxy(d->m_dateEdit);
-  focusWidget()->installEventFilter(this); // To get d->m_dateEdit's FocusIn/Out and some KeyPress events
   d->m_dateEdit->installEventFilter(this); // To get d->m_dateEdit's FocusIn/Out and some KeyPress events
 
   // we use INVALID_DATE as a special value for multi transaction editing
