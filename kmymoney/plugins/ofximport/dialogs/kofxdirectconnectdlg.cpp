@@ -98,9 +98,6 @@ bool KOfxDirectConnectDlg::init(void)
     d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append);
   }
 
-  qDebug("creating job");
-  m_job = KIO::http_post(m_connector.url(), request, KIO::HideProgressInfo);
-
   if (d->m_fpTrace.isOpen()) {
     QByteArray data = m_connector.url().toUtf8();
     d->m_fpTrace.write("url: ", 5);
@@ -111,6 +108,9 @@ bool KOfxDirectConnectDlg::init(void)
     d->m_fpTrace.write("\n", 1);
     d->m_fpTrace.write("response:\n", 10);
   }
+
+  qDebug("creating job");
+  m_job = KIO::http_post(m_connector.url(), request, KIO::HideProgressInfo);
 
   // open the temp file. We come around here twice if init() is called twice
   if (m_tmpfile) {
