@@ -75,6 +75,7 @@ public:
   const QString& feeId(const MyMoneyAccount& invAcc);
   const QString& interestId(const MyMoneyAccount& invAcc);
   QString interestId(const QString& name);
+  QString expenseId(const QString& name);
   QString feeId(const QString& name);
   void assignUniqueBankID(MyMoneySplit& s, const MyMoneyStatement::Transaction& t_in);
 
@@ -111,18 +112,48 @@ const QString& MyMoneyStatementReader::Private::interestId(const MyMoneyAccount&
   return m_interestId;
 }
 
-QString MyMoneyStatementReader::Private::nameToId(const QString&name, MyMoneyAccount& parent)
+QString MyMoneyStatementReader::Private::nameToId(const QString& name, MyMoneyAccount& parent)
 {
+  //  Adapted from KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
+  //  Needed to find/create category:sub-categories
   MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneyAccount acc = file->accountByName(name);
+
+  QString id = file->categoryToAccount(name, MyMoneyAccount::UnknownAccountType);
   // if it does not exist, we have to create it
-  if (acc.id().isEmpty()) {
-    acc.setName(name);
-    acc.setAccountType(parent.accountType());
-    acc.setCurrencyId(parent.currencyId());
-    file->addAccount(acc, parent);
+  if (id.isEmpty()) {
+    MyMoneyAccount newAccount;
+    MyMoneyAccount parentAccount = parent;
+    newAccount.setName(name) ;
+    int pos;
+    // check for ':' in the name and use it as separator for a hierarchy
+    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
+      QString part = newAccount.name().left(pos);
+      QString remainder = newAccount.name().mid(pos + 1);
+      const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
+      if (existingAccount.id().isEmpty()) {
+        newAccount.setName(part);
+        newAccount.setAccountType(parentAccount.accountType());
+        file->addAccount(newAccount, parentAccount);
+        parentAccount = newAccount;
+      } else {
+        parentAccount = existingAccount;
+      }
+      newAccount.setParentAccountId(QString());  // make sure, there's no parent
+      newAccount.clearId();                       // and no id set for adding
+      newAccount.removeAccountIds();              // and no sub-account ids
+      newAccount.setName(remainder);
+    }//end while
+    newAccount.setAccountType(parentAccount.accountType());
+    file->addAccount(newAccount, parentAccount);
+    id = newAccount.id();
   }
-  return acc.id();
+  return id;
+}
+
+QString MyMoneyStatementReader::Private::expenseId(const QString& name)
+{
+  MyMoneyAccount parent = MyMoneyFile::instance()->expense();
+  return nameToId(name, parent);
 }
 
 QString MyMoneyStatementReader::Private::interestId(const QString& name)
@@ -220,7 +251,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   // For testing, save the statement to an XML file
   // (uncomment this line)
   //
-  MyMoneyStatement::writeXMLFile(s, "Imported.Xml");///
+  //MyMoneyStatement::writeXMLFile(s, "Imported.Xml");
 
   //
   // Select the account
@@ -542,13 +573,17 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     // determine the brokerage account
     brokerageactid = m_account.value("kmm-brokerage-account").toUtf8();
     if (brokerageactid.isEmpty()) {
+      brokerageactid = file->accountByName(t_in.m_strBrokerageAccount).id();
+    }
+    if (brokerageactid.isEmpty()) {
       brokerageactid = file->nameToAccount(t_in.m_strBrokerageAccount);
     }
 
     // find the security transacted, UNLESS this transaction didn't
     // involve any security.
     if ((t_in.m_eAction != MyMoneyStatement::Transaction::eaNone)
-        && (t_in.m_eAction != MyMoneyStatement::Transaction::eaInterest)
+        //  eaInterest transactions MAY have a security.
+        //  && (t_in.m_eAction != MyMoneyStatement::Transaction::eaInterest)
         && (t_in.m_eAction != MyMoneyStatement::Transaction::eaFees)) {
       // the correct account is the stock account which matches two criteria:
       // (1) it is a sub-account of the selected investment account, and
@@ -634,7 +669,6 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         }
       }
     }
-
     s1.setAccountId(thisaccount.id());
     d->assignUniqueBankID(s1, t_in);
 
@@ -687,8 +721,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
       if (t_in.m_strInterestCategory.isEmpty())
         s1.setAccountId(d->interestId(thisaccount));
-      else
+      else {//  Ensure category sub-accounts are dealt with properly
         s1.setAccountId(d->interestId(t_in.m_strInterestCategory));
+      }
       s1.setShares(t_in.m_amount);
       s1.setValue(t_in.m_amount);
 
@@ -705,17 +740,32 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     } else if (t_in.m_eAction == MyMoneyStatement::Transaction::eaInterest) {
       if (t_in.m_strInterestCategory.isEmpty())
         s1.setAccountId(d->interestId(thisaccount));
-      else
-        s1.setAccountId(d->interestId(t_in.m_strInterestCategory));
+      else {//  Ensure category sub-accounts are dealt with properly
+        if (t_in.m_amount.isPositive())
+          s1.setAccountId(d->expenseId(t_in.m_strInterestCategory));
+        else
+          s1.setAccountId(d->interestId(t_in.m_strInterestCategory));
+      }
       s1.setShares(t_in.m_amount);
       s1.setValue(t_in.m_amount);
+      
+/// ***********   Add split as per Div       **********
+      // Split 2 will be the zero-amount investment split that serves to
+      // mark this transaction as a cash dividend and note which stock account
+      // it belongs to.
+      MyMoneySplit s2;
+      s2.setMemo(t_in.m_strMemo);
+      s2.setAction(MyMoneySplit::ActionInterestIncome);
+      s2.setAccountId(thisaccount.id());
+      t.addSplit(s2);
+      
 
       transfervalue = -t_in.m_amount;
 
     } else if (t_in.m_eAction == MyMoneyStatement::Transaction::eaFees) {
       if (t_in.m_strInterestCategory.isEmpty())
         s1.setAccountId(d->feeId(thisaccount));
-      else
+      else//  Ensure category sub-accounts are dealt with properly
         s1.setAccountId(d->feeId(t_in.m_strInterestCategory));
       s1.setShares(t_in.m_amount);
       s1.setValue(t_in.m_amount);
@@ -1033,7 +1083,10 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     if (!t_in.m_strBrokerageAccount.isEmpty()) {
       brokerageactid = file->nameToAccount(t_in.m_strBrokerageAccount);
     }
-
+    if (brokerageactid.isEmpty()) {
+      brokerageactid = file->accountByName(t_in.m_strBrokerageAccount).id();
+    }
+//  There is no BrokerageAccount so have to nowhere to put this split.
     if (!brokerageactid.isEmpty()) {
       // FIXME This may not deal with foreign currencies properly
       MyMoneySplit s;
@@ -1046,7 +1099,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     }
   }
 
-  if ((t_in.m_eAction != MyMoneyStatement::Transaction::eaReinvestDividend) && (t_in.m_eAction != MyMoneyStatement::Transaction::eaCashDividend)
+  if ((t_in.m_eAction != MyMoneyStatement::Transaction::eaReinvestDividend) && (t_in.m_eAction != MyMoneyStatement::Transaction::eaCashDividend) && (t_in.m_eAction != MyMoneyStatement::Transaction::eaInterest)
      ) {
     //******************************************
     //                   process splits
@@ -1320,7 +1373,6 @@ void MyMoneyStatementReader::signalProgress(int current, int total, const QStrin
   if (m_progressCallback != 0)
     (*m_progressCallback)(current, total, msg);
 }
-
 
 #include "mymoneystatementreader.moc"
 // vim:cin:si:ai:et:ts=2:sw=2:

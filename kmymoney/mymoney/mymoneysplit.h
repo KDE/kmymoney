@@ -88,7 +88,8 @@ public:
     Yield,
     AddShares,
     RemoveShares,
-    SplitShares
+    SplitShares,
+    InterestIncome///
   } investTransactionTypeE;
 
   MyMoneySplit();
@@ -268,6 +269,7 @@ public:
   static const char ActionYield[];
   static const char ActionAddShares[];  // negative amount is removeShares
   static const char ActionSplitShares[];
+  static const char ActionInterestIncome[];
 
 private:
   /**

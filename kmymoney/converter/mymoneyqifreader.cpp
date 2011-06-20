@@ -211,7 +211,7 @@ bool MyMoneyQifReader::Private::isTransfer(QString& tmp, const QString& leftDeli
   // it's a transfer, extract the account name
   // I've seen entries like this
   //
-  // S[Mehrwertsteuer]/_VATCode_N_I
+  // S[Mehrwertsteuer]/_VATCode_N_I          (The '/' is the Quicken class symbol)
   //
   // so extracting is a bit more complex and we use a regexp for it
   QRegExp exp(QString("\\%1(.*)\\%2(.*)").arg(leftDelim, rightDelim));
@@ -1179,7 +1179,7 @@ void MyMoneyQifReader::processTransactionEntry(void)
     QList<qSplit> listqSplits;
 
     extractSplits(listqSplits);   //      ****** ensure each field is ******
-    //      *   attached to correct split    *
+                                  //      *   attached to correct split    *
     int   count;
 
     for (count = 1; !extractLine('$', count).isEmpty(); ++count) {
@@ -1460,7 +1460,9 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
       tr.m_strBrokerageAccount = tmp;
       transferAccount(tmp);           // make sure the account exists
     } else {
+      tmp = tmp.remove(QRegExp("[\\[\\]]"));//  xAction != true so ignore any'[ and ]'
       tr.m_strInterestCategory = tmp;
+      tr.m_strBrokerageAccount = m_account.brokerageName();
     }
 
     // make sure, we have valid category. Either taken from the L-Record above,
@@ -1493,22 +1495,28 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
     if ((xAction == true)
         && (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1)) == true)) {
       tr.m_strBrokerageAccount = tmp;
-      transferAccount(tmp);           // make sure the account exists
+      transferAccount(tmp);           // make sure the account exists      
     } else {
+      tmp = tmp.remove(QRegExp("[\\[\\]]"));//  xAction != true so ignore any '[ and ]'
       tr.m_strInterestCategory = tmp;
+      tr.m_strBrokerageAccount = m_account.brokerageName();
     }
-
     // make sure, we have a valid category. Either taken from the L-Record above,
     // or derived from the action code
     if (tr.m_strInterestCategory.isEmpty()) {
       tr.m_strInterestCategory = d->typeToAccountName(action);
     }
 
-
-    // For historic reasons (coming from the OFX importer) the statement
-    // reader expects the dividend with a reverse sign. So we just do that.
-    if (action != "miscexp")
+    if (action == "intinc") {
+      MyMoneyMoney price = m_qifProfile.value('I', extractLine('I'));
       tr.m_amount = -(amount - tr.m_fees);
+      if ((!quantity.isZero()) && (!price.isZero())) 
+        tr.m_amount = -(quantity * price);
+    } else
+      // For historic reasons (coming from the OFX importer) the statement
+      // reader expects the dividend with a reverse sign. So we just do that.
+      if (action != "miscexp")
+        tr.m_amount = -(amount - tr.m_fees);
 
     if (tr.m_strMemo.isEmpty())
       tr.m_strMemo = (QString("%1 %2").arg(extractLine('Y')).arg(d->typeToAccountName(action))).trimmed();
@@ -1942,7 +1950,7 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
   QString tmp;
 
   account.setName(extractLine('N'));
-  // qDebug("Process account '%s'", account.name().data());
+  //   qDebug("Process account '%s'", account.name().data());
 
   account.setDescription(extractLine('D'));
 

@@ -38,6 +38,7 @@ const char MyMoneySplit::ActionReinvestDividend[] = "Reinvest";
 const char MyMoneySplit::ActionYield[] = "Yield";
 const char MyMoneySplit::ActionAddShares[] = "Add";
 const char MyMoneySplit::ActionSplitShares[] = "Split";
+const char MyMoneySplit::ActionInterestIncome[] = "IntIncome";
 
 MyMoneySplit::MyMoneySplit()
 {
@@ -157,8 +158,11 @@ void MyMoneySplit::setAction(investTransactionTypeE type)
     case RemoveShares:
       setAction(ActionAddShares);
       break;
-    case MyMoneySplit::SplitShares:
+    case SplitShares:
       setAction(ActionSplitShares);
+      break;
+    case InterestIncome:
+      setAction(ActionInterestIncome);
       break;
     case MyMoneySplit::UnknownTransactionType:
       break;

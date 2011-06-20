@@ -630,4 +630,59 @@ bool Split::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySp
   return true;
 }
 
+void IntInc::showWidgets(void) const
+{
+  KMyMoneyCategory* cat;
+  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
+  cat->parentWidget()->show();
+  haveWidget("asset-account")->show();
+  haveWidget("total")->show();
+
+  setLabelText("interest-amount-label", i18n("Amount"));
+  setLabelText("interest-label", i18n("Interest"));
+  setLabelText("asset-label", i18n("Account"));
+  setLabelText("total-label", i18nc("Total value", "Total"));
+}
+
+bool IntInc::isComplete(QString& reason) const
+{
+  Q_UNUSED(reason)
+
+  bool rc = haveAssetAccount();
+  rc &= haveInterest(false);
+  return rc;
+}
+
+bool IntInc::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
+{
+  Q_UNUSED(m_feeSplits);
+  Q_UNUSED(security);
+  Q_UNUSED(currency);
+
+  QString reason;
+  if (!isComplete(reason))
+    return false;
+
+  s0.setAction(MyMoneySplit::InterestIncome);
+
+  // for dividends, we only use the stock split as a marker
+  MyMoneyMoney shares;
+  s0.setShares(shares);
+  s0.setValue(shares);
+  s0.setPrice(MyMoneyMoney(1, 1));
+
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney(-1, 1), interestSplits, m_interestSplits))
+    return false;
+
+  createAssetAccountSplit(assetAccountSplit, s0);
+
+  MyMoneyMoney total = sumSplits(s0, feeSplits, interestSplits);
+  assetAccountSplit.setValue(-total);
+
+  if (!m_parent->setupPrice(t, assetAccountSplit))
+    return false;
+
+  return true;
+}
+
 

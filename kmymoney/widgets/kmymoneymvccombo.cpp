@@ -444,6 +444,7 @@ KMyMoneyActivityCombo::KMyMoneyActivityCombo(QWidget* w) :
   addItem(i18n("Add shares"), QVariant(MyMoneySplit::AddShares));
   addItem(i18n("Remove shares"), QVariant(MyMoneySplit::RemoveShares));
   addItem(i18n("Split shares"), QVariant(MyMoneySplit::SplitShares));
+  addItem(i18n("Interest Income"), QVariant(MyMoneySplit::InterestIncome));
 
   connect(this, SIGNAL(itemSelected(const QString&)), this, SLOT(slotSetActivity(const QString&)));
 }
@@ -458,7 +459,7 @@ void KMyMoneyActivityCombo::setActivity(MyMoneySplit::investTransactionTypeE act
 void KMyMoneyActivityCombo::slotSetActivity(const QString& id)
 {
   QString num;
-  for (int i = MyMoneySplit::BuyShares; i <= MyMoneySplit::SplitShares; ++i) {
+  for (int i = MyMoneySplit::BuyShares; i <= MyMoneySplit::InterestIncome; ++i) {
     num.setNum(i);
     if (num == id) {
       m_activity = static_cast<MyMoneySplit::investTransactionTypeE>(i);

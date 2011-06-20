@@ -731,6 +731,8 @@ StdTransaction::StdTransaction(Register *parent, const MyMoneyTransaction& trans
       addon = i18n("Dividend");
     } else if (split.action() == MyMoneySplit::ActionYield) {
       addon = i18n("Yield");
+    } else if (split.action() == MyMoneySplit::ActionInterestIncome) {
+      addon = i18n("Interest Income");
     }
     if (!addon.isEmpty()) {
       m_payee += QString(" (%1)").arg(addon);
@@ -1335,6 +1337,9 @@ void InvestTransaction::activity(QString& txt, MyMoneySplit::investTransactionTy
       break;
     case MyMoneySplit::SplitShares:
       txt = i18n("Split shares");
+      break;
+    case MyMoneySplit::InterestIncome:
+      txt = i18n("Interest Income");
       break;
     default:
       txt = i18nc("Unknown investment activity", "Unknown");
@@ -1947,6 +1952,7 @@ bool InvestTransaction::haveShares(void) const
     case MyMoneySplit::Dividend:
     case MyMoneySplit::Yield:
     case MyMoneySplit::SplitShares:
+    case MyMoneySplit::InterestIncome:
       rc = false;
       break;
 
@@ -1981,6 +1987,7 @@ bool InvestTransaction::haveInterest(void) const
     case MyMoneySplit::Dividend:
     case MyMoneySplit::ReinvestDividend:
     case MyMoneySplit::Yield:
+    case MyMoneySplit::InterestIncome:
       rc = true;
       break;
 
@@ -2014,6 +2021,7 @@ bool InvestTransaction::haveAmount(void) const
     case MyMoneySplit::SellShares:
     case MyMoneySplit::Dividend:
     case MyMoneySplit::Yield:
+    case MyMoneySplit::InterestIncome:
       rc = true;
       break;
 

@@ -181,6 +181,19 @@ public:
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
 };
 
+class IntInc : public Activity
+{
+public:
+  IntInc(InvestTransactionEditor* editor) : Activity(editor) {}
+  virtual ~IntInc() {}
+  virtual MyMoneySplit::investTransactionTypeE type(void) const {
+    return MyMoneySplit::InterestIncome;
+  }
+  virtual void showWidgets(void) const;
+  virtual bool isComplete(QString& reason) const;
+  virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency);
+};
+
 } // namespace Invest
 
 

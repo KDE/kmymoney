@@ -140,6 +140,9 @@ void InvestTransactionEditor::activityFactory(MyMoneySplit::investTransactionTyp
       case MyMoneySplit::SplitShares:
         d->m_activity = new Split(this);
         break;
+      case MyMoneySplit::InterestIncome:
+        d->m_activity = new IntInc(this);
+        break;
     }
   }
 }
@@ -180,6 +183,8 @@ void InvestTransactionEditor::dissectTransaction(const MyMoneyTransaction& trans
     transactionType = MyMoneySplit::Yield;
   } else if (split.action() == MyMoneySplit::ActionSplitShares) {
     transactionType = MyMoneySplit::SplitShares;
+  } else if (split.action() == MyMoneySplit::ActionInterestIncome) {
+    transactionType = MyMoneySplit::InterestIncome;
   } else
     transactionType = MyMoneySplit::BuyShares;
 
