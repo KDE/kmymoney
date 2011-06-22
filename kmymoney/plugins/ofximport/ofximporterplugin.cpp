@@ -240,9 +240,9 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
   }
 
   if (data.fi_id_valid == true) {
-    t.m_strBankID = QString("ID ") + data.fi_id;
+    t.m_strBankID = QString("ID ") + QString(data.fi_id);
   } else if (data.reference_number_valid == true) {
-    t.m_strBankID = QString("REF ") + data.reference_number;
+    t.m_strBankID = QString("REF ") + QString(data.reference_number);
   }
 
   // Decide whether to use NAME, PAYEEID or MEMO to construct the payee
