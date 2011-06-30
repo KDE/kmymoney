@@ -3,9 +3,10 @@
 <chapterinfo>
   <authorgroup>
     <author> &Colin.Wright; &Colin.Wright.mail; </author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2011-06-29</date>
+  <releaseinfo>4.6</releaseinfo>
 </chapterinfo>
 
 <title>Budgets</title>
@@ -46,8 +47,10 @@
 </variablelist>
 
 <para>
-  &kappname; provides a number of reports which compare actual income and
-  expenses against the entered Budgets.
+  &kappname; provides a number of reports which compare actual income
+  and expenses against the entered Budgets.  These are described in
+  more detail in 
+  <link linkend="budget.details.reports">another section</link>.
 </para>
 </sect1>
 
@@ -59,14 +62,25 @@
   pane at the left hand side of your &kappname; window.
 </para>
 
+<para>
+  There are two major sections to the budget window.  These are
+  described in more detail below.  On the left, the main section
+  displays the list of budgets you have created.  Above that are
+  buttons for creating, renaming, and deleting budgets.  On the right,
+  there are three sections.  At the top is the Accounts List.  At the
+  bottom is a display of the amounts assigned to the budget for the
+  category selected in the Accounts List above.  Between those two
+  areas are some additional controls for managing the budget.
+</para>
+
 <sect2>
-<title>Creating, changing, and deleting budgets</title>
+<title>Viewing, creating, renaming, and deleting budgets</title>
 
 <para>
-  This section of the Budgets window displays the list of Budgets contained in
-  the current file. If no Budget has yet been created the list will display a
-  single empty Budget called "Budget &lt;year&gt;" where &lt;year&gt; is the
-  current fiscal year. The list of Budgets has two columns:
+  This section of the Budgets window displays the list of Budgets
+  contained in the current &kappname; file. If no Budget has yet been
+  created the list will be empty.  The list of Budgets has two
+  columns:
 </para>
 
 <variablelist>
@@ -80,7 +94,10 @@
   <varlistentry>
     <term>Year</term>
     <listitem>
-      <para>Fiscal year of the Budget</para>
+      <para>Fiscal year of the Budget.  Note that the starting month
+        and day of the fiscal year can be specified in
+        the <link linkend="details.settings.general.global">Configure
+        $kappname; dialog.</link></para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -90,18 +107,22 @@
   different Budget you can click on the Budget in the list.  Alternatively, when
   the list has focus, you can select a different Budget using the up and down
   keys. If you have made changes to a Budget and then select a different budget
-  &kappname; will ask you whether you want to discard the changes.
+  &kappname; will ask you whether you want to save or discard the changes.
 </para>
 
 <para>
-  There are five buttons above the list of Budgets.
+  There are three buttons above the list of Budgets.
 </para>
 
 <variablelist>
   <varlistentry>
     <term>New</term>
     <listitem>
-      <para>Create a new budget</para>
+      <para>
+	Create a new, empty budget.  The default name of a new budget
+	is "Budget &lt;year&gt;" where &lt;year&gt; is the current
+	fiscal year.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -110,9 +131,8 @@
     <listitem>
       <para>Edit the name of the selected Budget.</para>
 
-      <para>You can also edit the name of a Budget by clicking on the name of
-        the selected Budget or double-clicking on the name of a different
-        Budget.</para>
+      <para>You can also edit the name of a Budget by double-clicking
+        on the name of a Budget in the list.</para>
     </listitem>
   </varlistentry>
 
@@ -123,6 +143,8 @@
     </listitem>
   </varlistentry>
 
+<!--  buttons moved in the UI - they are now described below.  Will remove
+      from here after this chapter has been reviewed.
   <varlistentry>
     <term>Revert</term>
     <listitem>
@@ -137,6 +159,7 @@
         stores them.</para>
     </listitem>
   </varlistentry>
+ -->
 </variablelist>
 
 <para>
@@ -148,7 +171,7 @@
   <varlistentry>
     <term>New Budget</term>
     <listitem>
-      <para>Create a new, blank Budget.</para>
+      <para>Create a new, empty Budget.</para>
     </listitem>
   </varlistentry>
 
@@ -162,8 +185,8 @@
   <varlistentry>
     <term>Change budget year</term>
     <listitem>
-      <para>Displays a window with a list of years to select a different budget
-        year.</para>
+      <para>Displays a window with a list of years to select a
+        different fiscal year for the budget.</para>
     </listitem>
   </varlistentry>
 
@@ -182,6 +205,17 @@
         Budget.</para>
     </listitem>
   </varlistentry>
+
+  <varlistentry>
+    <term>Budget based on forecast</term>
+    <listitem>
+      <para>Fills in budget amounts based on data from &kappname;'s
+	Forecast values.  See the section on
+	<link linkend="details.forecast.define">Forecasts</link> for
+	more information.
+      </para>
+    </listitem>
+  </varlistentry>
 </variablelist>
 </sect2>
 
@@ -189,10 +223,12 @@
 <title>Account List</title>
 
 <para>
-  The Account List displays the list of Income and Expense Categories. As in
-  other places in &kappname; the list is organized in a tree structure. The list
-  can be expanded or collapsed to show or hide Subcategories within a
-  Category. The Account List has a number of columns:</para>
+  The Account List displays the list of Income and Expense Categories.
+  (Remember, within &kappname;, categories are treated as a special
+  type of account.)  As in other places in &kappname;, the list is
+  organized in a tree structure. The list can be expanded or collapsed
+  to show or hide Subcategories within a Category. The Account List
+  has a number of columns:</para>
 
 <variablelist>
   <varlistentry>
@@ -209,6 +245,8 @@
     </listitem>
   </varlistentry>
 
+<!-- these seem to have been removed from the display.  Remove from here
+     once this is confirmed by the programmers.
   <varlistentry>
     <term>Tax</term>
     <listitem>
@@ -222,16 +260,17 @@
       <para>Checked if a Category marked as a VAT Category</para>
     </listitem>
   </varlistentry>
+-->
 
   <varlistentry>
-    <term>Balance</term>
+    <term>Total Balance</term>
     <listitem>
       <para>Current balance of Account. Blank for Categories</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Value</term>
+    <term>Total Value</term>
     <listitem>
       <para>Total yearly value in the Budget. If an Account has Subaccounts and
         the Account's list of Subaccounts is collapsed the value displayed is
@@ -240,27 +279,47 @@
   </varlistentry>
 </variablelist>
 
+<!-- It would be nice to include the actual button icons here to confirm
+     which buttons are referred to.  -->
 <para>
-  The Account List can be filtered using "Hide unused Categories".  In Budgets
-  this hides any Categories for which no value has been assigned to the Category
-  or any of its Subcategories.
+  Below the Account list are several controls.  The Update and Revert
+  buttons are described further below.  The collapse and expand
+  buttons collapse or expand the entire Account List.
 </para>
+
+<para>
+  The Account List can be filtered in two ways.  Checking the "Hide
+  unused categories" checkbox hides any Categories for which no value
+  has been assigned to the Category or any of its Subcategories.  To
+  the right of this, is an unlabelled text box.  Only categories which
+  include whatever is typed in this box are listed, but their parent
+  categories are also listed.
+</para>
+
+<para>
+  Note that changing either the "Hide unused budget categories" or the
+  filter value is likley to change the list of Categories display.
+  You may need to re-expand the list to see all the Categories that
+  should be displayed with the current settings..
+</para>
+
 </sect2>
 
 <sect2>
 <title>Assignments</title>
 
 <para>
-  The Assignments area shows the value for the selected Account.
+  The Assignments area shows the values for the Category selected in
+  the Accounts List.
 </para>
 
 <variablelist>
   <varlistentry>
     <term>Account</term>
     <listitem>
-      <para>Displays the name of the selected Account. If the Account is a
-        Subaccount, the full name of the selected Account is displayed in the
-        Account:Subaccount format.</para>
+      <para>Displays the name of the selected Category. If the
+        Category is a Subcategory, its full name is displayed in the
+        Category:Subcategory format.</para>
     </listitem>
   </varlistentry>
 
@@ -274,11 +333,27 @@
   <varlistentry>
     <term>Include subaccounts</term>
     <listitem>
-      <para>In Reports show actual income or expenses in Subcategories belonging
-        to the Category against the Category instead of the Subcategory.</para>
+      <para>If this is checked, then Reports show actual income or
+        expenses in Subcategories belonging to the Category against
+        the Category instead of the Subcategory.</para>
 
-      <para>If a Subcategory has a value defined in the Budget the income and
-        expenses are shown against the Subcategory.</para>
+      <para>If a Subcategory has a value defined in the Budget, then
+        the income and expenses are shown against the
+        Subcategory.</para>
+
+      <para>If the Account selected in the Accounts List has its
+        Subaccounts collapsed, although its Total Value will show the
+        sum of the Total Values for all its Subaccounts, the amounts
+        in the Assignments area may still show 0, unless this box has
+        been checked or an amount has explicitly been assigned to the
+        Category.</para>
+
+      <para>In general, for you will either check this box and assign
+	values to the Category and not to any of its Subcategories, or
+	not check the box, and assign values to the Subcategories but
+	not the Category.  If any Subcategories have assigned amounts
+	when this box is checked, then those amounts are rolled up to
+	the Category.</para>
     </listitem>
   </varlistentry>
 
@@ -331,7 +406,6 @@
     </listitem>
   </varlistentry>
 </variablelist>
-
 </sect2>
 
 <sect2>
@@ -339,15 +413,14 @@
 
 <para>
   For performance reasons, changes made to a Budget are not saved
-  immediately. Instead, they first have to be stored using the Update button and
-  then permanently saved using the &kappname; Save.
+  immediately.  Instead, they must first be stored using the Update
+  button and then permanently saved using the &kappname; Save.
 </para>
 
 <para>
   When a Budget's values are first modified, the Update and Revert buttons are
   enabled.  Multiple changes can be made to the Budget.  Pressing Update will
-  store the changes, disable the Update and Revert buttons and enable the
-  &kappname; Save.
+  store the changes and disable the Update and Revert buttons.
 </para>
 
 <para>
@@ -374,49 +447,63 @@
 
 <para>
   &kappname; provides a number of reports to compare actual income and expenses
-  against Budgets. These are listed in Reports under "Budgeting". There are two
-  types of Reports:
+  against a Budget. These are listed in Reports under "Budgeting". There are two
+  types of Bidget Reports:
 </para>
 
 <variablelist>
   <varlistentry>
     <term>Budget only</term>
-    <listitem><para>Reports displaying values from a Budget: Monthly Budget
-      Displays the monthly values from a Budget. Yearly Budget Displays the
-      monthly values from a Budget, with yearly total.</para>
+    <listitem><para>These reports display values from a Budget.</para>
+      <variablelist>
+        <varlistentry>
+          <term>Monthly Budget</term> 
+          <listitem><para>Displays the monthly values from a Budget.</para>
+          </listitem></varlistentry>
+        <varlistentry>
+          <term>Yearly Budget</term> 
+          <listitem><para>Displays the monthly values from a Budget,
+              with yearly total.</para>
+          </listitem></varlistentry>
+      </variablelist>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Compare Budget and Actual</term>
-    <listitem><para>Reports comparing values from a Budget to actual income and expenses. In
-      each budget report you can find the columns Budget, Actual and
-      Difference. Each report differs in the period that is shown:</para>
+    <term>Budget vs. Actual</term>
+    <listitem><para>These reports compare values from a Budget to
+      actual income and expenses.  In each budget report you can find
+      the columns Budget, Actual, and Difference. Each report differs
+      in the period that is shown.</para>
       <variablelist>
       <varlistentry>
-      <term>Budget vs. Actual This Year:</term> 
+      <term>Budget vs. Actual This Year</term> 
       <listitem><para>From the beginning of the year until today</para>
       </listitem></varlistentry>
       <varlistentry>
-      <term>Budget vs. Actual This Year (YTM):</term> 
-      <listitem><para>From the beginning of the year until the last day of the previous month</para>
+      <term>Budget vs. Actual This Year (YTM)</term> 
+      <listitem><para>From the beginning of the year until the last
+	  day of the previous month</para>
       </listitem></varlistentry>
       <varlistentry>
-      <term>Yearly Budgeted vs. Actual:</term> 
+      <term>Monthly Budgeted vs. Actual</term> 
+      <listitem><para>From the beginning of the year until the last
+	  day of the current month</para>
+      </listitem></varlistentry>
+      <varlistentry>
+      <term>Yearly Budgeted vs. Actual</term> 
       <listitem><para>From January 1st until December 31st</para>
       </listitem></varlistentry>
       <varlistentry>
-      <term>Monthly Budgeted vs. Actual:</term> 
-      <listitem><para>From the beginning of the year until the last day of the current month</para>
-      </listitem></varlistentry>
-      <varlistentry>
-      <term>Yearly Budgeted vs. Actual (Graph):</term> 
-      <listitem><para>Same as the previous report but it shows the graph by default</para>
+      <term>Yearly Budgeted vs. Actual (Graph)</term> 
+      <listitem><para>Same as the previous report but it shows the
+	  graph by default</para>
       </listitem></varlistentry>
       </variablelist>
 
-      <para>These reports provide a base from which custom reports can be created by
-      changing the date range and Budget, among other options. </para>
+      <para>These reports provide a base from which custom reports can
+	be created by changing the date range and Budget, among other
+	options. </para>
     </listitem>
   </varlistentry>
 </variablelist>
