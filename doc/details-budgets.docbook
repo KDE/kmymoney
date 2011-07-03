@@ -223,25 +223,25 @@
 <title>Account List</title>
 
 <para>
-  The Account List displays the list of Income and Expense Categories.
-  (Remember, within &kappname;, categories are treated as a special
-  type of account.)  As in other places in &kappname;, the list is
-  organized in a tree structure. The list can be expanded or collapsed
-  to show or hide Subcategories within a Category. The Account List
-  has a number of columns:</para>
+  The Accounts List displays the list of Income and Expense Categories.
+  (Remember, within &kappname;, categories are treated as a special type of
+  account.)  As in other places in &kappname;, the list is organized in a tree
+  structure. The list can be expanded or collapsed to show or hide Subcategories
+  within a Category. The Accounts List has a number of columns:
+</para>
 
 <variablelist>
   <varlistentry>
     <term>Account</term>
     <listitem>
-      <para>Account name</para>
+      <para>Account (Category) name</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term>Type</term>
     <listitem>
-      <para>Account Type (Income or Expense)</para>
+      <para>Category Type (Income or Expense)</para>
     </listitem>
   </varlistentry>
 
@@ -265,16 +265,20 @@
   <varlistentry>
     <term>Total Balance</term>
     <listitem>
-      <para>Current balance of Account. Blank for Categories</para>
+      <para>Current balance of Account.  This will be blank for Categories, unless the Category
+        is defined in a foreign currency.  In this case, Total Balance will show the value for the
+        Category in its defined currency.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term>Total Value</term>
     <listitem>
-      <para>Total yearly value in the Budget. If an Account has Subaccounts and
-        the Account's list of Subaccounts is collapsed the value displayed is
-        the sum of the values for the Account and all of its Subaccounts.</para>
+      <para>Total yearly value in the Budget. If an Category has Subcategories
+        and the Category's list of Subcategories is collapsed the value displayed
+        is the sum of the values for the Category and all of its Subcategories.
+        If a Category is defined in a foreign currency, the Total Value will show
+        the value in the base currency.</para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -282,13 +286,13 @@
 <!-- It would be nice to include the actual button icons here to confirm
      which buttons are referred to.  -->
 <para>
-  Below the Account list are several controls.  The Update and Revert
-  buttons are described further below.  The collapse and expand
-  buttons collapse or expand the entire Account List.
+  Below the Accounts List are several controls.  The Update and Revert buttons
+  are described further below.  The collapse and expand buttons collapse or
+  expand the entire Accounts List.
 </para>
 
 <para>
-  The Account List can be filtered in two ways.  Checking the "Hide
+  The Accounts List can be filtered in two ways.  Checking the "Hide
   unused categories" checkbox hides any Categories for which no value
   has been assigned to the Category or any of its Subcategories.  To
   the right of this, is an unlabelled text box.  Only categories which
@@ -326,7 +330,7 @@
   <varlistentry>
     <term>Total</term>
     <listitem>
-      <para>Displays the total yearly value assigned to the Account</para>
+      <para>Displays the total yearly value assigned to the Category</para>
     </listitem>
   </varlistentry>
 
@@ -341,9 +345,9 @@
         the income and expenses are shown against the
         Subcategory.</para>
 
-      <para>If the Account selected in the Accounts List has its
-        Subaccounts collapsed, although its Total Value will show the
-        sum of the Total Values for all its Subaccounts, the amounts
+      <para>If the Category selected in the Accounts List has its
+        Subcategories collapsed, although its Total Value will show the
+        sum of the Total Values for all its Subcategories, the amounts
         in the Assignments area may still show 0, unless this box has
         been checked or an amount has explicitly been assigned to the
         Category.</para>
@@ -360,7 +364,7 @@
   <varlistentry>
     <term>Clear</term>
     <listitem>
-      <para>The Clear button resets the budgeted account value or values to
+      <para>The Clear button resets the budgeted category value or values to
         zero.</para>
     </listitem>
   </varlistentry>
