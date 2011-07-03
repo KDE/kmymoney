@@ -8,48 +8,95 @@
 <refentry lang="&language;">
 <refentryinfo>
 
-<author><personname><firstname>Michael</firstname><othername>T.</othername><surname>Edwardes</surname></personname>
-<email>mte@users.sourceforge.net</email></author>
+<author>
+  <firstname>Michael</firstname><othername>T.</othername><surname>Edwardes</surname>
+  <contrib>Original concept, much initial source code.  Project administration</contrib>
+  <email>mte@users.sourceforge.net</email>
+</author>
 
-<author><personname><firstname>Thomas</firstname><surname>Baumgart</surname></personname>
-<email>ipwizard@users.sourceforge.net</email></author>
+<author>
+  <firstname>Thomas</firstname><surname>Baumgart</surname>
+  <contrib>Release manager and de-facto Maintainer.  Core engine.  Project administration</contrib>
+  <email>ipwizard@users.sourceforge.net</email>
+</author>
 
-<author><personname><firstname>Tony</firstname><surname>Bloomfield</surname></personname>
-<email>tonybloom@users.sourceforge.net</email></author>
+<author>
+  <firstname>Tony</firstname><surname>Bloomfield</surname>
+  <contrib>GnuCash Importer.  Database support.</contrib>
+  <email>tonybloom@users.sourceforge.net</email>
+</author>
 
-<author><personname><firstname>Robert</firstname><surname>Wadley</surname></personname>
-<email>robntina@users.sourceforge.net</email></author>
+<author>
+  <firstname>Robert</firstname><surname>Wadley</surname>
+  <contrib>Artist.  Icons, splash screen, home view.  Screenshots.</contrib>
+  <email>robntina@users.sourceforge.net</email>
+</author>
 
-<author><personname><firstname>Alvaro</firstname><surname>Soliverez</surname></personname>
-<email>asoliverez@users.sourceforge.net</email></author>
+<author>
+  <firstname>Alvaro</firstname><surname>Soliverez</surname>
+  <contrib>Forecast.  Reports.</contrib>
+  <email>asoliverez@users.sourceforge.net</email>
+</author>
 
-<author><personname><firstname>Fernando</firstname><surname>Vilas</surname></personname>
-<email>fvilas@users.sourceforge.net</email></author>
+<author>
+  <firstname>Fernando</firstname><surname>Vilas</surname>
+  <contrib>Database support.</contrib>
+  <email>fvilas@users.sourceforge.net</email>
+</author>
 
-<author><personname><firstname>Cristian</firstname><surname>Oneț</surname></personname>
-<email>onet.cristian@gmail.com</email></author>
+<author>
+  <firstname>Cristian</firstname><surname>Oneț</surname>
+  <contrib>Patches and plugins.</contrib>
+  <email>onet.cristian@gmail.com</email>
+</author>
 
-<author><personname><firstname>Jack</firstname><othername>H.</othername><surname>Ostroff</surname></personname>
-<email>ostroffjh@users.sourceforge.net</email></author>
+<author>
+  <firstname>Jack</firstname><othername>H.</othername><surname>Ostroff</surname>
+  <contrib>Documentation.</contrib>
+  <email>ostroffjh@users.sourceforge.net</email>
+</author>
 
-<author><personname><firstname>Felix</firstname><surname>Rodriguez</surname></personname>
-<email>frodriguez@users.sourceforge.net</email></author>
+<author>
+  <firstname>Felix</firstname><surname>Rodriguez</surname>
+  <contrib>Project administration, previous versions.</contrib>
+  <email>frodriguez@users.sourceforge.net</email>
+</author>
 
-<author><personname><firstname>Kevin</firstname><surname>Tambascio</surname></personname>
-<email>ktambascio@users.sourceforge.net</email></author>
+<author>
+  <firstname>Kevin</firstname><surname>Tambascio</surname>
+  <contrib>Initial investment support.</contrib>
+  <email>ktambascio@users.sourceforge.net</email>
+</author>
 
 <!-- This person was previously listed as an author here, but is not currently
      included in credits.docbook.  He should either be dropped from here or
      included there.
 
-    <author><personname><firstname>Arni</firstname><surname>Ingimundarson</surname></personname>
+    <author><firstname>Arni</firstname><surname>Ingimundarson</surname>
+    <contrib>Developer, previous versions.</contrib>
     <email>arniing@users.sourceforge.net</email></author>
- -->
+
+    These persons were not previously listed as authors here, but are included
+    in credits.docbook.  They should either be dropped from there or included
+    here.
+
+    <author><firstname>Ace</firstname><surname>Jones</surname>
+    <contrib>Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
+    <email>acejones@users.sourceforge.net</email></author>
+
+    <author><firstname>John</firstname><surname>C</surname>
+    <contrib>Developer, previous versions.</contrib>
+    <email>tacoturtle@users.sourceforge.net</email></author>
+
+    There are eight additional people in credits.docbook for "Special Thanks."
+    Should any of them be included here?  -->
 </refentryinfo>
 
 <refmeta>
 <refentrytitle><command>kmymoney</command></refentrytitle>
 <manvolnum>1</manvolnum>
+<refmiscinfo class="source">&kmymoney;</refmiscinfo>
+<refmiscinfo class="manual">Executable programs</refmiscinfo>
 </refmeta>
 
 <refnamediv>
