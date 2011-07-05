@@ -137,12 +137,13 @@ protected:
 protected slots:
 
   /**
-    * This slot is called when the name of a budget is changed inside
+    * This slot is called when the data of a budget is changed inside
     * the budget list view and only a single budget is selected.
     *
     * @param p The listviewitem containing the budget name
+    * @param col The column that has changed
     */
-  void slotRenameBudget(QTreeWidgetItem *p);
+  void slotItemChanged(QTreeWidgetItem* p, int col);
 
   /**
     * This slot is called when the amount of a budget is changed. It

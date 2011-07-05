@@ -287,8 +287,7 @@ MyMoneyMoney BudgetAccountsProxyModel::computeTotalValue(const QModelIndex &sour
 KBudgetView::KBudgetView(QWidget *parent) :
     QWidget(parent),
     m_needReload(false),
-    m_inSelection(false),
-    m_budgetInEditing(false)
+    m_inSelection(false)
 {
   setupUi(this);
 
@@ -363,8 +362,8 @@ KBudgetView::KBudgetView(QWidget *parent) :
 
   connect(m_budgetList, SIGNAL(customContextMenuRequested(const QPoint&)),
           this, SLOT(slotOpenContextMenu(const QPoint&)));
-  connect(m_budgetList, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(slotRenameBudget(QTreeWidgetItem*)));
   connect(m_budgetList->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(slotSelectBudget()));
+  connect(m_budgetList, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(slotItemChanged(QTreeWidgetItem*, int)));
 
   connect(m_cbBudgetSubaccounts, SIGNAL(clicked()), this, SLOT(cb_includesSubaccounts_clicked()));
 
@@ -457,7 +456,6 @@ void KBudgetView::loadBudgets(void)
 
   // clear the budget list
   m_budgetList->clear();
-  m_budgetValue->clear();
 
   // add the correct years to the drop down list
   QDate date = QDate::currentDate();
@@ -499,6 +497,7 @@ void KBudgetView::loadBudgets(void)
 
   // make sure the world around us knows what we have selected
   slotSelectBudget();
+
 
   ::timetrace("End KBudgetView::loadBudgets");
 }
@@ -579,7 +578,6 @@ void KBudgetView::slotSelectBudget(void)
 {
   askSave();
   KBudgetListItem* item;
-  m_budgetInEditing = false;
 
   QTreeWidgetItemIterator widgetIt = QTreeWidgetItemIterator(m_budgetList);
   if (m_budget.id().isEmpty()) {
@@ -604,6 +602,13 @@ void KBudgetView::slotSelectBudget(void)
 
   slotRefreshHideUnusedButton();
   loadAccounts();
+  QModelIndex index = m_accountTree->currentIndex();
+  if (index.isValid()) {
+    MyMoneyAccount acc = m_accountTree->model()->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
+    slotSelectAccount(acc);
+  } else {
+    m_budgetValue->clear();
+  }
 
   QList<MyMoneyBudget> budgetList;
   if (!m_budget.id().isEmpty())
@@ -643,7 +648,6 @@ void KBudgetView::slotOpenContextMenu(const QPoint& p)
 
 void KBudgetView::slotStartRename(void)
 {
-  m_budgetInEditing = true;
   QTreeWidgetItemIterator it_l(m_budgetList, QTreeWidgetItemIterator::Selected);
   QTreeWidgetItem* it_v;
   if ((it_v = *it_l) != 0) {
@@ -651,20 +655,16 @@ void KBudgetView::slotStartRename(void)
   }
 }
 
-// This variant is only called when a single budget is selected and renamed.
-void KBudgetView::slotRenameBudget(QTreeWidgetItem* p)
+void KBudgetView::slotItemChanged(QTreeWidgetItem* p, int col)
 {
-  KBudgetListItem *pBudget = dynamic_cast<KBudgetListItem*>(p);
-
-  //if there is no current item selected, exit
-  if (m_budgetInEditing == false || !m_budgetList->currentItem() || p != m_budgetList->currentItem())
+  // if we don't have an item or something changed in the year column
+  // we actually don't care about it
+  if (!p || col != 0)
     return;
 
-  m_budgetInEditing = false;
-
-  //kDebug() << "[KPayeesView::slotRenamePayee]";
-  // create a copy of the new name without appended whitespaces
-  QString new_name = p->text(0);
+  KBudgetListItem *pBudget = dynamic_cast<KBudgetListItem*>(p);
+  // create a copy of the new name without leading and trailing whitespaces
+  QString new_name = p->text(0).trimmed();
 
   if (pBudget->budget().name() != new_name) {
     MyMoneyFileTransaction ft;
@@ -856,6 +856,14 @@ void KBudgetView::slotResetBudget(void)
   try {
     m_budget = MyMoneyFile::instance()->budget(m_budget.id());
     loadAccounts();
+    QModelIndex index = m_accountTree->currentIndex();
+    if (index.isValid()) {
+      MyMoneyAccount acc = m_accountTree->model()->data(index, AccountsModel::AccountRole).value<MyMoneyAccount>();
+      slotSelectAccount(acc);
+    } else {
+      m_budgetValue->clear();
+    }
+
   } catch (MyMoneyException *e) {
     KMessageBox::detailedSorry(0, i18n("Unable to reset budget"),
                                i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
