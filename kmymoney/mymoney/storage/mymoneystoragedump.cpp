@@ -344,6 +344,16 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
     s << "  ID = " << (*it_r).id() << "\n";
     s << "  Name = " << (*it_r).name() << "\n";
   }
+
+  s << "Budgets" << "\n";
+  s << "-------" << "\n";
+
+  QList<MyMoneyBudget> list_b = storage->budgetList();
+  QList<MyMoneyBudget>::ConstIterator it_b;
+  for (it_b = list_b.constBegin(); it_b != list_b.constEnd(); ++it_b) {
+    s << "  ID = " << (*it_b).id() << "\n";
+    s << "  Name = " << (*it_b).name() << "\n";
+  }
 }
 
 void MyMoneyStorageDump::dumpKVP(const QString& headline, QTextStream& s, const MyMoneyKeyValueContainer &kvp, int indent)
