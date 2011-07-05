@@ -1960,5 +1960,39 @@ void MyMoneyFileTest::testRemovePrice()
   QVERIFY(m_valueChanged.count("A000002") == 1);
 }
 
+void MyMoneyFileTest::testAddAccountMissingCurrency()
+{
+  testAddTwoInstitutions();
+  MyMoneySecurity base("EUR", "Euro", QChar(0x20ac));
+  MyMoneyAccount  a;
+  a.setAccountType(MyMoneyAccount::Checkings);
+
+  MyMoneyInstitution institution;
+
+  storage->m_dirty = false;
+
+  QVERIFY(m->accountCount() == 5);
+
+  institution = m->institution("I000001");
+  QVERIFY(institution.id() == "I000001");
+
+  a.setName("Account1");
+  a.setInstitutionId(institution.id());
+
+  clearObjectLists();
+  MyMoneyFileTransaction ft;
+  try {
+    m->addCurrency(base);
+    m->setBaseCurrency(base);
+    MyMoneyAccount parent = m->asset();
+    m->addAccount(a, parent);
+    ft.commit();
+    QVERIFY(m->account("A000001").currencyId() == "EUR");
+  } catch (MyMoneyException *e) {
+    unexpectedException(e);
+  }
+}
+
+
 #include "mymoneyfiletest.moc"
 

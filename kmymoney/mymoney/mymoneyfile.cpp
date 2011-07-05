@@ -914,11 +914,17 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
     institution = MyMoneyFile::institution(account.institutionId());
   }
 
-
+  // if we don't have a valid opening date use today
   if (!account.openingDate().isValid()) {
     account.setOpeningDate(QDate::currentDate());
   }
 
+  // if we don't have a currency assigned use the base currency
+  if (account.currencyId().isEmpty()) {
+    account.setCurrencyId(baseCurrency().id());
+  }
+
+  // make sure the parent id is setup
   account.setParentAccountId(parent.id());
 
   d->m_storage->addAccount(account);

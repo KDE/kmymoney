@@ -77,6 +77,7 @@ private slots:
   void testOpeningBalance();
   void testAddPrice();
   void testRemovePrice();
+  void testAddAccountMissingCurrency();
 
 private slots:
   void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);
