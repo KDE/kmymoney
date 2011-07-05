@@ -144,6 +144,11 @@ QString MyMoneyStatementReader::Private::nameToId(const QString& name, MyMoneyAc
       newAccount.setName(remainder);
     }//end while
     newAccount.setAccountType(parentAccount.accountType());
+    
+    // make sure we have a currency. If none is assigned, we assume base currency
+    if (newAccount.currencyId().isEmpty())
+      newAccount.setCurrencyId(file->baseCurrency().id());
+    
     file->addAccount(newAccount, parentAccount);
     id = newAccount.id();
   }
