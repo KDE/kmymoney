@@ -19,6 +19,7 @@ Name[sv]=CSV-import
 Name[tr]=csvimport
 Name[uk]=csvimport
 Name[x-test]=xxcsvimportxx
+Name[zh_CN]=csv 导入
 Name[zh_TW]=csvimport
 Comment=Add CSV importing to KMyMoney
 Comment[ca]=Afegeix la importació CSV al KMyMoney

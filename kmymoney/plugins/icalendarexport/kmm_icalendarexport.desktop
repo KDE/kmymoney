@@ -21,6 +21,7 @@ Name[ru]=iCalendar
 Name[sv]=iCalendar
 Name[uk]=iCalendar
 Name[x-test]=xxiCalendarxx
+Name[zh_CN]=iCalendar
 Name[zh_TW]=iCalendar
 Comment=Exports schedules to iCalendar files
 Comment[ca]=Exporta les programacions als fitxers de l'iCalendar

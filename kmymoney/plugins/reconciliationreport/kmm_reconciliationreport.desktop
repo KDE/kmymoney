@@ -20,6 +20,7 @@ Name[ru]=Отчёт по сверке
 Name[sv]=Avstämningsrapport
 Name[uk]=Звіт щодо звірки
 Name[x-test]=xxReconciliation reportxx
+Name[zh_CN]=对帐报告
 Name[zh_TW]=對帳報告
 Comment=Creates a report after each reconciliation containing data about the reconciliation process
 Comment[ca]=Crea un informe després de cada conciliació amb les dades sobre el procés de conciliació
