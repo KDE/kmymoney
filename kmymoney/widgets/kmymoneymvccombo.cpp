@@ -220,9 +220,11 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
     if (d->m_canCreateObjects) {
       // in case we tab out, we make sure that if the current completion
       // contains the current text that we set the current text to
-      // the full completion text
+      // the full completion text but only if the completion box is visible.
+      // BUG 254984 is resolved with the visbility check
       if (e->reason() != Qt::MouseFocusReason) {
-        if (d->m_completer->currentCompletion().contains(currentText(), Qt::CaseInsensitive)) {
+        if (d->m_completer->popup() && d->m_completer->popup()->isVisible()
+            && d->m_completer->currentCompletion().contains(currentText(), Qt::CaseInsensitive)) {
           lineEdit()->setText(d->m_completer->currentCompletion());
         }
       }
