@@ -274,7 +274,7 @@
   <varlistentry>
     <term>Total Value</term>
     <listitem>
-      <para>Total yearly value in the Budget. If an Category has Subcategories
+      <para>Total yearly value in the Budget. If a Category has Subcategories
         and the Category's list of Subcategories is collapsed the value displayed
         is the sum of the values for the Category and all of its Subcategories.
         If a Category is defined in a foreign currency, the Total Value will show
