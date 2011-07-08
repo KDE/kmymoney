@@ -97,7 +97,7 @@
       <para>Fiscal year of the Budget.  Note that the starting month
         and day of the fiscal year can be specified in
         the <link linkend="details.settings.general.global">Configure
-        $kappname; dialog.</link></para>
+        &kappname; dialog.</link></para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -302,9 +302,9 @@
 
 <para>
   Note that changing either the "Hide unused budget categories" or the
-  filter value is likley to change the list of Categories display.
+  filter value is likely to change the list of Categories display.
   You may need to re-expand the list to see all the Categories that
-  should be displayed with the current settings..
+  should be displayed with the current settings.
 </para>
 
 </sect2>
@@ -452,7 +452,7 @@
 <para>
   &kappname; provides a number of reports to compare actual income and expenses
   against a Budget. These are listed in Reports under "Budgeting". There are two
-  types of Bidget Reports:
+  types of Budget Reports:
 </para>
 
 <variablelist>
