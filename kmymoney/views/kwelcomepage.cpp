@@ -207,14 +207,12 @@ const QStringList KWelcomePage::featuresList(void)
 {
   QStringList featuresList;
 
-  featuresList.append(i18n("Runs natively on KDE4"));
+  featuresList.append(i18n("Can import csv files with the new CSV Import plugin"));
   featuresList.append(i18n("Documentation and translations have been improved"));
   featuresList.append(i18n("Now works with latest version of AqBanking"));
   featuresList.append(i18n("Better performance of the user interface"));
-  featuresList.append(i18n("Better date handling when importing QIF files"));
   featuresList.append(i18n("Improved usability of the online banking features"));
-  featuresList.append(i18n("Uses KWallet to store online accounts password if present"));
-  featuresList.append(i18n("The consistency checks runs automatically before saving your data, it now checks for a wider range of problems, and it automatically corrects many of them."));
+  featuresList.append(i18n("Allow to base the payee name from either the PAYEEID, NAME or MEMO field in an OFX transaction"));
   featuresList.append(i18n("Runs on all operating systems supported by KDE"));
 
 
