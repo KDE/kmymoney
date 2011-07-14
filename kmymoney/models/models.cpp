@@ -28,10 +28,14 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <kglobal.h>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "accountsmodel.h"
+
+K_GLOBAL_STATIC(Models, models);
 
 struct Models::Private {
   Private() :
@@ -41,8 +45,6 @@ struct Models::Private {
   AccountsModel *m_accountsModel;
   InstitutionsModel *m_institutionsModel;
 };
-
-Models Models::models;
 
 /**
   * This object is a singleton so it will be created very early in the application's life
@@ -55,6 +57,10 @@ Models::Models() : QObject(), d(new Private)
 Models::~Models()
 {
   delete d;
+}
+
+Models* Models::instance() {
+  return models;
 }
 
 /**

@@ -65,9 +65,7 @@ public:
     * This is the function to access the Models object.
     * It returns a pointer to the single instance of the object.
     */
-  static inline Models* instance() {
-    return &models;
-  }
+  static Models* instance();
 
   AccountsModel* accountsModel();
   InstitutionsModel* institutionsModel();
@@ -86,7 +84,6 @@ public slots:
   void fileClosed(void);
 
 private:
-  static Models models;
 
   /**
     * This class defines a singleton.
@@ -103,3 +100,4 @@ private:
 };
 
 #endif // MODELS_H
+
