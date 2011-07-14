@@ -6455,7 +6455,7 @@ void KMyMoneyApp::slotCheckSchedules(void)
 
       if (schedule.autoEnter()) {
         try {
-          while (!schedule.isFinished() && (schedule.nextDueDate() <= checkDate)
+          while (!schedule.isFinished() && (schedule.adjustedNextDueDate() <= checkDate)
                  && rc != KMyMoneyUtils::Ignore
                  && rc != KMyMoneyUtils::Cancel) {
             rc = enterSchedule(schedule, true, true);
