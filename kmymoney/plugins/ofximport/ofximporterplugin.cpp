@@ -269,7 +269,7 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
       break;
 
     case OfxImporterPlugin::Private::PreferMemo:  // MEMO
-      validity[1] = data.memo_valid;
+      validity[0] = data.memo_valid;
       validity[1] = data.payee_id_valid;
       validity[2] = data.name_valid;
       values += data.memo;
