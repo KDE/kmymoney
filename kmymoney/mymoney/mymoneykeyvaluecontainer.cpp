@@ -23,8 +23,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneykeyvaluecontainer.h>
-#include <mymoneyexception.h>
+#include "mymoneykeyvaluecontainer.h"
+#include "mymoneyexception.h"
 
 K_GLOBAL_STATIC(QString, nullString)
 

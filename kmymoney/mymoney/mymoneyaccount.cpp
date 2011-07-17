@@ -776,7 +776,7 @@ const QMap<QDate, MyMoneyMoney>& MyMoneyAccount::reconciliationHistory()
   if (m_reconciliationHistory.count() == 0
       && !value("reconciliationHistory").isEmpty()) {
     QStringList entries = value("reconciliationHistory").split(';');
-    foreach (QString entry, entries) {
+    foreach (const QString& entry, entries) {
       QStringList parts = entry.split(':');
       QDate date = QDate::fromString(parts[0], Qt::ISODate);
       MyMoneyMoney amount(parts[1]);

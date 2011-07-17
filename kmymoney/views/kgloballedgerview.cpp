@@ -824,7 +824,7 @@ void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTr
 {
   if (selection.count() > 1) {
     MyMoneyMoney balance;
-    foreach (KMyMoneyRegister::SelectedTransaction t, selection) {
+    foreach (const KMyMoneyRegister::SelectedTransaction& t, selection) {
       if (!t.isScheduled()) {
         balance += t.split().shares();
       }
