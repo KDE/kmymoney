@@ -246,7 +246,7 @@ public:
   MyMoneyTransaction matchedTransaction(void) const;
 
   /**
-   * This method replaces all occurences of id @a oldId with
+   * This method replaces all occurrences of id @a oldId with
    * @a newId.  All other ids are not changed.
    *
    * @return true if any change has been performed
