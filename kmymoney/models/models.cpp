@@ -59,7 +59,8 @@ Models::~Models()
   delete d;
 }
 
-Models* Models::instance() {
+Models* Models::instance()
+{
   return models;
 }
 

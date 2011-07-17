@@ -1179,7 +1179,7 @@ void MyMoneyQifReader::processTransactionEntry(void)
     QList<qSplit> listqSplits;
 
     extractSplits(listqSplits);   //      ****** ensure each field is ******
-                                  //      *   attached to correct split    *
+    //      *   attached to correct split    *
     int   count;
 
     for (count = 1; !extractLine('$', count).isEmpty(); ++count) {
@@ -1495,7 +1495,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
     if ((xAction == true)
         && (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1)) == true)) {
       tr.m_strBrokerageAccount = tmp;
-      transferAccount(tmp);           // make sure the account exists      
+      transferAccount(tmp);           // make sure the account exists
     } else {
       tmp = tmp.remove(QRegExp("[\\[\\]]"));//  xAction != true so ignore any '[ and ]'
       tr.m_strInterestCategory = tmp;
@@ -1510,7 +1510,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
     if (action == "intinc") {
       MyMoneyMoney price = m_qifProfile.value('I', extractLine('I'));
       tr.m_amount = -(amount - tr.m_fees);
-      if ((!quantity.isZero()) && (!price.isZero())) 
+      if ((!quantity.isZero()) && (!price.isZero()))
         tr.m_amount = -(quantity * price);
     } else
       // For historic reasons (coming from the OFX importer) the statement
