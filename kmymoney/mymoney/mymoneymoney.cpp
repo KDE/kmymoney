@@ -1,13 +1,10 @@
 /***************************************************************************
                           mymoneymymoney.cpp  -  description
                              -------------------
-    begin                : Thu Feb 21 2002
-    copyright            : (C) 2000-2002 by Michael Edwardes
-                           (C) 2001-2011 by Thomas Baumgart
-                           (C) 2011 by Carlos Eduardo da Silva
-    email                : mte@users.sourceforge.net
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Carlos Eduardo da Silva <kaduardo@gmail.com>
+    begin      : Thu Feb 21 2002
+    copyright  : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
+                 (C) 2001-2011 by Thomas Baumgart <tbaumgart@kde.org>
+                 (C) 2011 by Carlos Eduardo da Silva <kaduardo@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
