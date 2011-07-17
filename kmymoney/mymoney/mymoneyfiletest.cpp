@@ -1993,6 +1993,21 @@ void MyMoneyFileTest::testAddAccountMissingCurrency()
   }
 }
 
+void MyMoneyFileTest::testAddTransactionToClosedAccount()
+{
+  QSKIP("Test not implemented yet", SkipAll);
+}
+
+void MyMoneyFileTest::testRemoveTransactionFromClosedAccount()
+{
+  QSKIP("Test not implemented yet", SkipAll);
+}
+
+void MyMoneyFileTest::testModifyTransactionInClosedAccount()
+{
+  QSKIP("Test not implemented yet", SkipAll);
+}
+
 
 #include "mymoneyfiletest.moc"
 

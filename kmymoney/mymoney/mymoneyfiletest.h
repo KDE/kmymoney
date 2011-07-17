@@ -78,6 +78,9 @@ private slots:
   void testAddPrice();
   void testRemovePrice();
   void testAddAccountMissingCurrency();
+  void testAddTransactionToClosedAccount();
+  void testRemoveTransactionFromClosedAccount();
+  void testModifyTransactionInClosedAccount();
 
 private slots:
   void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);
