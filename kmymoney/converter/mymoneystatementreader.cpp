@@ -144,11 +144,11 @@ QString MyMoneyStatementReader::Private::nameToId(const QString& name, MyMoneyAc
       newAccount.setName(remainder);
     }//end while
     newAccount.setAccountType(parentAccount.accountType());
-    
+
     // make sure we have a currency. If none is assigned, we assume base currency
     if (newAccount.currencyId().isEmpty())
       newAccount.setCurrencyId(file->baseCurrency().id());
-    
+
     file->addAccount(newAccount, parentAccount);
     id = newAccount.id();
   }
@@ -753,7 +753,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       }
       s1.setShares(t_in.m_amount);
       s1.setValue(t_in.m_amount);
-      
+
 /// ***********   Add split as per Div       **********
       // Split 2 will be the zero-amount investment split that serves to
       // mark this transaction as a cash dividend and note which stock account
@@ -763,7 +763,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       s2.setAction(MyMoneySplit::ActionInterestIncome);
       s2.setAccountId(thisaccount.id());
       t.addSplit(s2);
-      
+
 
       transfervalue = -t_in.m_amount;
 
@@ -1042,8 +1042,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             while (it_trans != list.constBegin()) {
               MyMoneySplit s = (*it_trans).splitByAccount(thisaccount.id());
               if (s.value() == s1.value()) {
-                t_old = *it_trans;
-                break;
+                // keep searching if this transaction references a closed account
+                if (!MyMoneyFile::instance()->referencesClosedAccount(*it_trans)) {
+                  t_old = *it_trans;
+                  break;
+                }
               }
               --it_trans;
             }
@@ -1056,22 +1059,25 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             }
           }
 
-          QList<MyMoneySplit>::ConstIterator it_split;
-          for (it_split = t_old.splits().constBegin(); it_split != t_old.splits().constEnd(); ++it_split) {
-            // We don't need the split that covers this account,
-            // we just need the other ones.
-            if ((*it_split).accountId() != thisaccount.id()) {
-              MyMoneySplit s(*it_split);
-              s.setReconcileFlag(MyMoneySplit::NotReconciled);
-              s.clearId();
-              s.setBankID(QString());
+          // Only copy the splits if the transaction found does not reference a closed account
+          if (!MyMoneyFile::instance()->referencesClosedAccount(t_old)) {
+            QList<MyMoneySplit>::ConstIterator it_split;
+            for (it_split = t_old.splits().constBegin(); it_split != t_old.splits().constEnd(); ++it_split) {
+              // We don't need the split that covers this account,
+              // we just need the other ones.
+              if ((*it_split).accountId() != thisaccount.id()) {
+                MyMoneySplit s(*it_split);
+                s.setReconcileFlag(MyMoneySplit::NotReconciled);
+                s.clearId();
+                s.setBankID(QString());
 
-              if (t_old.splits().count() == 2) {
-                s.setShares(-s1.shares());
-                s.setValue(-s1.value());
-                s.setMemo(s1.memo());
+                if (t_old.splits().count() == 2) {
+                  s.setShares(-s1.shares());
+                  s.setValue(-s1.value());
+                  s.setMemo(s1.memo());
+                }
+                t.addSplit(s);
               }
-              t.addSplit(s);
             }
           }
         }
