@@ -1,0 +1,76 @@
+SampleIncFund.csv
+
+NOTE
+	Please bear in mind that this import file was made to be complicated in order to 
+		demonstrate the different possibilities the plugin can handle.  In particular, 
+		it icludes unclear investment activity types, and also two brokerage transactions.
+		Generally, most files can be imported with far	less interaction,
+
+a)	Click Investment tab.
+			On the right, Click 'Open File' and select your file to be imported.
+b)	Check that fields are properly separated.
+			If not, on Settings tab, choose ',' as separator.
+c)	On Investment tab, choose appropriate columns/fields.
+			Set Col	2 in Date.
+			Set Col	4 in Type/Action.
+			Set Col	6 in Quantity.
+			Set Col	7 in Price.
+			Set Col	8 in Amount.
+			Set any other columns you wish to import as Memo, successively.  Notice an '*' 
+				marks the choices made.
+			Set Price/Fraction to '1' if the Price is to be imported 'as is', eg £.pence.
+	 or	Set Price/Fraction to '0.1' if the Price is to be imported as eg
+			pence.decimal.
+			These depend on your existing KMyMoney security file content.
+	 Leave 'Fee' settings empty as there is no fee data in the file.  If there
+		were, choose the column, and check 'Fee is a percentage' if the fee is that.
+d)	Enter the security name in that field to match exactly the name in
+			KMyMoney.  The name will be retained in the pop-up.  If you wish to remove
+			an entry from that list, click 'Hide Security'.  This has no effect on
+			KMyMoney data.
+e)	Click Settings tab.
+			The Field Delimiter should already be correctly set.
+			The Text Delimiter should not normally need to be changed.
+			Set the Start Line to your first data line - '9' in this case.
+			Set the End Line to your last data line - '22', to drop the trailer line.
+			Set the Decimal Symbol to match those in your file, not your locale.  If your 
+			locale setting has a different value, conversion will be seen to take	place.  
+			When you click on	'dot', you will see that your values get highlighted in green, 
+			if they	are correct.  If an error is found, the colour will be red, and one, 
+			or	more than one, warning message will appear.  Try setting it to ';' to see
+			the effect.
+			Set the Date appropriately - 'd m y' in this case.
+f)		Now, finally, click 'Import' on the right.
+g)	The plugin will now evaluate your data.
+h)	As the first two lines appear to be Buy transactions, a message box will ask
+			for the account name from which to take the funds.  Respond with your
+			checking or brokerage account name.
+i)	Next you will get a new window indicating that an Invalid Transaction Type
+			has been encountered.  This is because the investment	type is shown as
+			'reinvestment', but only an Amount entry has been supplied.  Click on
+			'Select Transaction Type'.  A drop-down will appear, with the dividend
+			item ticked.  Assuming you choose this, the 'OK' box will be enabled, to
+			accept the change.
+j)	Another message box now appears.  This is because on line 11, a 'Bill
+			Payment'entry has been found, and the column number of the payee is
+			needed.  This appears in column 5, so enter 5.
+k)	Another Invalid Transaction type has been found, 'Purchase', on line 13. 
+		The drop-down now gives three choices.  Choose 'Buy' and click'OK'.
+l)	The plugin has now finished its work and control has passed to KMyMoney,
+		and the Account Selector wants your investment account to be selected.
+m)	Once you supply this, the Statement Stats box appears, for the investment
+		import.  Almost there now.
+n)	Another account selector now appears!  This is for the two brokerage items,
+		and you need to enter the brokerage/checking account for those transactions.
+o)	Another Statement Stats box appears, this time for these two non-investment
+		transactions.
+p)	Finally, the import is complete.  Please bear in mind that this import was
+		made to be complicated in order to demonstrate the different possibilities
+		the plugin can handle.  Generally, most files can be imported with far
+		less interaction, particularly as your selections are retained and should make
+		the next import quicker.
+
+If you have any comments, or encounter difficulties, first check the handbook in 
+KMyMoney.  If still having difficulty, contact us on 
+the developer list - kmymoney-devel@kde.org, or 
+the user list - kmymoney@kde.org.
