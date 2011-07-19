@@ -400,7 +400,7 @@ Generate developer documentation:        ${nice_USE_DEVELOPER_DOC}
 
 Build unit tests:                        ${nice_KDE4_BUILD_TESTS}
 
-Generate API documentation w/ Doxygen:   ${nice_DOXYGEN_FOUND}")
+Generate API documentation with Doxygen: ${nice_DOXYGEN_FOUND}")
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
   message("
