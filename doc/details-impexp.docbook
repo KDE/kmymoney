@@ -539,13 +539,7 @@
 
 <sect1 id="details.impexp.qifimp">
 <sect1info>
-  <author>
-    <firstname>Thomas</firstname>
-    <surname>Baumgart</surname>
-    <affiliation>
-      <address><email>ipwizard@users.sourceforge.net</email></address>
-    </affiliation>
-  </author>
+  <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
 </sect1info>
 
 <title>QIF Importer</title>
@@ -915,20 +909,8 @@
 
 <sect1 id="details.impexp.ofx">
 <sect1info>
-  <author>
-    <firstname>Ace</firstname>
-    <surname>Jones</surname>
-    <affiliation>
-      <address><email>acejones@users.sourceforge.net</email></address>
-    </affiliation>
-  </author>
-  <author>
-    <firstname>Thomas</firstname>
-    <surname>Baumgart</surname>
-    <affiliation>
-      <address><email>ipwizard@users.sourceforge.net</email></address>
-    </affiliation>
-  </author>
+  <author>&Ace.Jones; &Ace.Jones.mail;</author>
+  <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
 </sect1info>
 <title>OFX Importer Plugin</title>
 
