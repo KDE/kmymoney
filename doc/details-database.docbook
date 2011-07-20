@@ -20,7 +20,7 @@
   database. One of the advantages of using this industry-standard format is that
   it may allow you to view your data using one of the graphic front ends such as
   OpenOffice.org<trademark class="copyright"/> or LibreOffice<trademark
-  class="trademark"/>, perhaps in some format that &kappname; currently doesn't
+  class="copyright"/>, perhaps in some format that &kappname; currently doesn't
   provide. Also, a little knowledge of SQL (Structured Query Language, the
   language used world-wide to access relational databases) should enable you
   more easily to export data to an external program, for example, a budgeting
