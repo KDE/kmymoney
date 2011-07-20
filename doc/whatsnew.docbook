@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="whatsnew">
 <chapterinfo>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2011-07-21</date>
+  <releaseinfo>4.6</releaseinfo>
 </chapterinfo>
 
 <title>What's new in this release</title>
 
 <para>
-  We have been working hard to make this release better and easier to use in
-  every way. We have also made quite a few improvements. We are confident you
-  will like what you see.
+  As with every release, the &kappname; development team has been working hard
+  to make this release better and easier to use in every way. We have also made
+  quite a few improvements. We are confident you will like what you see.
 </para>
 
 <para>
-  This is the first full release of &kappname; for KDE4.  There have been no
-  major changes in functionality from the 1.0 release, but the user interface
-  has been improved, and a number of bugs have been eliminated.
+  This is the second full release of &kappname; for KDE4.  Many of the
+  performance issues noticed with the 4.5 release have been resolved.  The user
+  interface has been further improved, and over 100 bugs have been eliminated.
 </para>
 
 <para>
@@ -26,48 +26,52 @@
 <itemizedlist>
   <listitem>
     <para>
-      <link linkend="firsttime.mainwindow">Runs natively on KDE4</link>
+      <link linkend="firsttime.mainwindow">Runs natively on KDE4</link> and on
+      all operating systems supported by KDE, with many improvements especially
+      for the &MacOS; X and &Windows; platforms.
     </para>
   </listitem> 
 
   <listitem>
     <para>
-      Runs on all operating systems supported by KDE
-    </para>
-  </listitem> 
-  
-  <listitem>
-    <para>
-      Documentation and translations have been improved
-    </para>
-  </listitem> 
-  
-  <listitem>
-    <para>
-      Better performance of the user interface
+      Better performance of the user interface.  Performance in general has been
+      improved, addressing the degradation that was introduced with the
+      migration to KDE4.
     </para>
   </listitem>
   
   <listitem>
     <para>
-      <link linkend="details.impexp">Now works with latest version of AqBanking
-      and the usability of the online banking features has been improved</link>
+      Documentation and translations have been further improved.
     </para>
-  </listitem>
+  </listitem> 
+  
+  <listitem>
+    <para>
+      Many improvements in the importing and online banking modules, including:
+    </para>
+  </listitem> 
+
+  <itemizedlist>
+    <listitem>
+      <para>
+	There is a new plugin to import csv files
+      </para>
+    </listitem> 
+
+    <listitem>
+      <para>
+	The payee name can now be based on either the PAYEEID, NAME, or MEMO
+	field when importing an OFX transaction
+      </para>
+    </listitem>
+  </itemizedlist>
 
   <listitem>
     <para>
-      Uses KWallet to store online accounts password if present
+      Improvements have been made to the database back end.
     </para>
   </listitem>
-
-  <listitem>
-    <para>
-      The consistency checks runs automatically before saving your data, it now
-      checks for a wider range of problems, and it automatically corrects many
-      of them.
-    </para>
-  </listitem> 
 </itemizedlist>
 
 </chapter>

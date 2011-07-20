@@ -2,10 +2,10 @@
 <appendix id="installation">
 <appendixinfo>
   <authorgroup>
-    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+    <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2011-07-20</date>
+  <releaseinfo>4.6</releaseinfo>
 </appendixinfo>
 
 <title>Installation</title>
@@ -19,19 +19,16 @@
 <sect1 id="installation.getting">
 <title>How to obtain &kappname;</title>
 
-<!-- This first entity contains boiler plate for applications that are part of
-     KDE CVS.  You should remove it if you are releasing your application.
-     &install.intro.documentation; I don't think this will be correct until we
-     move from extragear to the main section of KDE in the future. -->
-
 <para>
   Although &kappname; has existed for a number of years, we are still working on
-  full integration into &kde;.  Previous stable versions (1.0.x) required
-  libraries from &kde; 3, and so were not available in most recent Linux
-  distributions, which had already migrated to &kde; 4. However, with the
-  release of version 4.5, &kappname; can now be easily compiled and installed on
-  any version of &kde; 4.3 or higher.
+  full integration into &kde;.  Early stable versions (1.0.x) required libraries
+  from &kde; 3, and so were not available in many Linux distributions, which had
+  already migrated to &kde; 4.  However, with the release of version 4.5 in
+  August 2010, &kappname; could be easily compiled and installed on any version
+  of &kde; 4.3 or higher.  The current versoin, 4.6, requires &kde; 4.3,
+  specifically kdelibs and kdepimlibs.
 </para>
+
 <para>
   The rest of this section will describe installing &kappname; using the
   standard software installation process for your Linux distribution.  The
@@ -43,9 +40,9 @@
 <para>
   The best way to install &kappname; is to use the package manager of your
   distribution, such as apt-get, yum, portage, or pacman.  This will take care
-  of all the dependencies and required libraries.  Although it will take some
-  time after the release of this version for all the distributions to add
-  &kappname; to their official repositories, please check there first.
+  of all the dependencies and required libraries.  Although it takes some time
+  after the release a new version of &kappname; for all the distributions to add
+  it to their official repositories, please check there first.
 </para>
 </sect2>
 
@@ -58,7 +55,6 @@
   url="http://www.kmymoney.org">&kappname; home page</ulink>.
 </para>
 </sect2>
-
 </sect1>
 
 <sect1 id="installation.fromsource">
@@ -77,7 +73,7 @@
   As the previous paragraph implied, there are two distinct reasons to compile
   &kappname; from source.  If you cannot find a version specifically packaged
   for your distribution, please download the tarball of the most recent stable
-  release.  This is version 4.5.0 as of the time this is being written.  This is
+  release.  This is version 4.6.0 as of the time this is being written.  This is
   the compile option recommended for normal users.
 </para>
 
@@ -85,13 +81,14 @@
   On the other hand, if you want to see the current state of development, to
   check out a recent bug fix or new feature, you can download a tarball which is
   a snapshot of the development repository.  You can also check the source
-  directly out of the repository.  (The version 4.x source is in &kde; svn and
-  the version 1.0.x source is in SourceForge cvs.  Instructions for access are
-  on the project home page.)
+  directly out of the repository.  The version 4.x source is in &kde; svn.  (The
+  version 1.0.x source is in SourceForge cvs, but it is no longer being
+  developed.)  Instructions for access are on the project home page.
 </para>
+
 <warning>
  <para>
-   The code in the repositories and in development snapshots is under active
+   The code in the svn repository and in development snapshots is under active
    development: it may have bugs, it may crash, and it may mess up or lose data.
    If you use it, be absolutely sure to make adequate backups.  Unless you have
    a good reason to use this, stick to a stable released version.
@@ -100,8 +97,8 @@
 
 <para>
   &kappname; depends on libraries from KDE version 4.3 or later, specifically
-  kdelibs and kde PIM libs.  You may need to explicitly load the
-  <quote>-devel</quote> versions in order to compile &kappname;, rather then
+  kdelibs and kdepimlibs.  You may need to explicitly load the
+  <quote>-devel</quote> versions in order to compile &kappname;, rather than
   just running a pre-compiled version.  Additional functionality can be obtained
   if extra libraries are available at compile time &ndash; see the web site for
   details.
@@ -167,10 +164,11 @@
   the <ulink url="http://www.macports.com">MacPorts web site</ulink>.
 </para>
 <para>
-  &kappname; has also been reported to be available for &Windows;, but details
-  were not available in time to include here.  Please check the <ulink
-  url="http://www.kmymoney.org">&kappname; home page</ulink> for updated
-  information.</para>
+  &kappname; is also reported to be available for &Windows;.  This initiative is
+  still a work in progress, and more information can be found at the <ulink
+  url="http://windows.kde.org">KDE on Windows Initiative</ulink> page.
+</para>
+
 <para>
   If you know of &kappname; being successfully compiled and made available for
   any other operating system, please let us know, so we can spread the word.
