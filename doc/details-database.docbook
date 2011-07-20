@@ -2,10 +2,10 @@
 <chapter id="details.database">
 <chapterinfo>
   <authorgroup>
-    <author> &Tony.Bloomfield; &Tony.Bloomfield.mail; </author>
+    <author>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2011-07-21</date>
+  <releaseinfo>4.6</releaseinfo>
 </chapterinfo>
 
 <title>Database</title>
@@ -19,11 +19,12 @@
   As of release 1.0, &kappname; allows you to hold your data in a relational
   database. One of the advantages of using this industry-standard format is that
   it may allow you to view your data using one of the graphic front ends such as
-  OpenOffice.org<trademark class="copyright"/>, perhaps in some format that
-  &kappname; currently doesn't provide. Also, a little knowledge of SQL
-  (Structured Query Language, the language used world-wide to access relational
-  databases) should enable you more easily to export data to an external
-  program, for example, a budgeting application.
+  OpenOffice.org<trademark class="copyright"/> or LibreOffice<trademark
+  class="trademark"/>, perhaps in some format that &kappname; currently doesn't
+  provide. Also, a little knowledge of SQL (Structured Query Language, the
+  language used world-wide to access relational databases) should enable you
+  more easily to export data to an external program, for example, a budgeting
+  application.
 </para>
 <para/>
 </sect2>
@@ -221,6 +222,19 @@
   Database</guimenuitem> entry in the <guimenu>File</guimenu> menu. This will
   open a dialog similar to the above.
 </para>
+
+<note>
+<para>
+  If you created your database by first opening a file, and then doing
+  <guimenuitem>Save as Database</guimenuitem>, as described above, then any
+  subsequent changes to your data are saved only in the database, not in the
+  file.  This means that you can use the file as a backup or snapshot of your
+  data at a particular time.  To make a new backup like this, open your
+  database, do <menuchoice><guimenu>File</guimenu><guimenuitem>Save
+  As...</guimenuitem></menuchoice>, giving an appropriate file name.  Remember
+  to re-open your database, so &kappname; does not continue to use the file.
+</para>
+</note>
 
 <para>
   To access your data in other formats, you will need to know a little about how
@@ -441,6 +455,7 @@
     This section covers more advanced database usage and may be skipped by the general user.
   </para>
 </note>
+
 <sect3>
 <title>When to use</title>
 <para>
