@@ -15,7 +15,8 @@
   <!-- Do not define any other entities; instead, use the entities
        from entities/general.entities and $LANG/user.entities. -->
   <!ENTITY devlist "<email>kmymoney-devel@kde.org</email>">
-  <!ENTITY userlist "<email>kmymoney2-user@lists.sourceforge.net</email>">
+  <!ENTITY userlist "<email>kmymoney@kde.org</email>">
+  <!ENTITY olduserlist "<email>kmymoney2-user@lists.sourceforge.net</email>">
 
   <!-- the following author entities need to be added to contributor.entities in 4.5 branch and trunk of svn -->
   <!ENTITY Michael.T.Edwardes "<personname><firstname>Michael</firstname><othername>T.</othername><surname>Edwardes</surname></personname>">
@@ -54,6 +55,10 @@
   <!ENTITY Cristian.Onet "<personname><firstname>Cristian</firstname><surname>Oneț</surname></personname>">
   <!ENTITY Cristian.Onet.mail "<email>onet.cristian@gmail.com</email>">
 
+  <!-- the following author entities need to be added to contributor.entities in trunk and probably 4.6 branch of git -->
+  <!ENTITY Allan.Anderson "<personname><firstname>Allan</firstname><surname>Anderson</surname></personname>">
+  <!ENTITY Allan.Anderson.mail "<email>agander93@gmail.com</email>">
+
 <!-- the chapters -->
   <!ENTITY introduction SYSTEM "introduction.docbook">
   <!ENTITY makemostof SYSTEM "makemostof.docbook">
@@ -89,7 +94,7 @@
 
 <bookinfo>
 <title>The &kappname; Handbook</title>
-<subtitle>for &kappname; version 4.5</subtitle>
+<subtitle>for &kappname; version 4.6</subtitle>
 
 <authorgroup>
 <!-- This is just put in as an example.  For real documentation, please
@@ -120,6 +125,7 @@ and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
 <year>2008</year>
 <year>2009</year>
 <year>2010</year>
+<year>2011</year>
 <holder>The &kappname; Development Team</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
@@ -134,8 +140,8 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2010-07-24</date>
-<releaseinfo>4.05.00</releaseinfo>
+<date>2011-07-04</date>
+<releaseinfo>4.05.97</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -145,7 +151,7 @@ Do NOT change these in the translation. -->
 </para>
 
 <para>
-  This handbook describes &kappname; version 4.5.
+  This handbook describes &kappname; version 4.6.
 </para>
 </abstract>
 
