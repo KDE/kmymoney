@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="credits">
 <chapterinfo>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2011-07-20</date>
+  <releaseinfo>4.6</releaseinfo>
 </chapterinfo>
 
 <title>Credits</title>
 
 <para>
-  Program Copyright &copy; 2000, 2001, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010
-  The KMyMoney Development Team
+  Program Copyright &copy; 2000, 2001, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
+  2010, 2011 The KMyMoney Development Team
 </para>
 
 <para>
   Documentation Copyright &copy; 2000, 2001, 2003, 2004, 2005, 2006, 2007, 2008,
-  2009, 2010 The KMyMoney Development Team
+  2009, 2010, 2011 The KMyMoney Development Team
 </para>
 
 <sect1 id="credits.original">
@@ -23,7 +23,7 @@
 <itemizedlist>
   <listitem>
     <formalpara>
-      <title>Michael Edwardes <email>mte@users.sourceforge.net</email></title>
+      <title>Michael Edwardes &Michael.T.Edwardes.mail;</title>
       <para>
         Original idea, much initial source code. Project admin.
       </para>
@@ -38,7 +38,7 @@
 <itemizedlist>
   <listitem>
     <formalpara>
-      <title>Thomas Baumgart <email>ipwizard@users.sourceforge.net</email></title>
+      <title>Thomas Baumgart &Thomas.Baumgart.mail;</title>
       <para>
         Release manager and de-facto Maintainer. Core engine. Project admin.
       </para>
@@ -47,42 +47,42 @@
 
   <listitem>
     <formalpara>
-      <title>Tony Bloomfield <email>tonybloom@users.sourceforge.net</email></title>
+      <title>Tony Bloomfield &Tony.Bloomfield.mail;</title>
       <para>GnuCash Importer. Database support.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Robert Wadley <email>robntina@users.sourceforge.net</email></title>
+      <title>Robert Wadley &Robert.Wadley.mail;</title>
       <para>Artist. Icons, splash screen, home view. Screenshots.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Alvaro Soliverez <email>asoliverez@users.sourceforge.net</email></title>
+      <title>Alvaro Soliverez &Alvaro.Soliverez.mail;</title>
       <para>Forecast. Reports.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Fernando Vilas <email>fvilas@users.sourceforge.net</email></title>
+      <title>Fernando Vilas &Fernando.Vilas.mail;</title>
       <para>Database support.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Cristian Oneţ <email>onet.cristian@gmail.com</email></title>
+      <title>Cristian Oneţ &Cristian.Onet.mail;</title>
       <para>Patches and Plugins</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Jack H. Ostroff <email>ostroffjh@users.sourceforge.net</email></title>
+      <title>Jack H. Ostroff &Jack.H.Ostroff.mail;</title>
       <para>Documentation.</para>
     </formalpara>
   </listitem>
@@ -103,7 +103,7 @@
 <itemizedlist>
   <listitem>
     <formalpara>
-      <title>Ace Jones <email>acejones@users.sourceforge.net</email></title>
+      <title>Ace Jones &Ace.Jones.mail;</title>
       <para>Reports. OFX Import. Online Quotes. Documentation editor.</para>
     </formalpara>
   </listitem>
@@ -151,28 +151,28 @@
 
   <listitem>
     <formalpara>
-      <title>Roger Lum <email>rogerlum@gmail.com</email></title>
+      <title>Roger Lum &Roger.Lum.mail;</title>
       <para>Documentation.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Darin Strait <email>darin.strait@ashdar-partners.com</email></title>
+      <title>Darin Strait &Darin.Strait.mail;</title>
       <para>Documentation.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Allan Anderson <email>aganderson@ukonline.co.uk</email></title>
-      <para>Patches.</para>
+      <title>Allan Anderson &Allan.Anderson.mail;</title>
+      <para>Patches.  CSV Importer Plugin.</para>
     </formalpara>
   </listitem>
 
   <listitem>
     <formalpara>
-      <title>Colin Wright <email>cdwright@gwi.net</email></title>
+      <title>Colin Wright &Colin.Wright.mail;</title>
       <para>Patches and Documentation.</para>
     </formalpara>
   </listitem>
