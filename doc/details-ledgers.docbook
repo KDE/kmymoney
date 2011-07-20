@@ -117,6 +117,43 @@
   linkend="details.settings.register.sorting">Sorting tab</link> section of the
   <link linkend="details.settings">&kappname; Settings</link> Chapter.
 </para>
+
+<para>
+   Note that the balance column is based on the currently displayed sort order,
+   and will not be calculated if the display is filtered by the search box or
+   transaction type dropdown, as desribed above.
+</para>
+
+<para>
+  At the bottom of the transaction list, &kappname; displays three values:
+</para>
+
+<formalpara><title>Last reconciled</title>
+  <para>
+    This is the most recent date on which you reconciled this account.
+    Reconciliation is an important process for many accounts, and is described
+    <link linkend="details.reconcile">here</link>.
+  </para>
+</formalpara>
+
+<formalpara><title>Cleared</title>
+  <para>
+    This is the total of all cleared and reconciled transactions in this
+    account.  See <link linkend="details.ledgers.cleared">this section</link>
+    for more information about the cleared and reconciled states of
+    transactions.
+  </para>
+</formalpara>
+
+<formalpara><title>Balance</title>
+  <para>
+    This is where &kappname; displays the total balance of the account, which is
+    the sum of all transactions in the account.  However, if you select more
+    than one transaction in the transaction list, this changes to display the
+    sum of the selected transactions.  This returns to the balance when only one
+    transaction is selected.
+  </para>
+</formalpara>
 </sect2>
 
 <sect2>
