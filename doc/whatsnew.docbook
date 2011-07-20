@@ -52,20 +52,22 @@
     </para>
   </listitem> 
 
-  <itemizedlist>
-    <listitem>
-      <para>
-	There is a new plugin to import csv files
-      </para>
-    </listitem> 
+  <listitem>
+    <itemizedlist>
+      <listitem>
+	<para>
+	  There is a new plugin to import csv files
+	</para>
+      </listitem> 
 
-    <listitem>
-      <para>
-	The payee name can now be based on either the PAYEEID, NAME, or MEMO
-	field when importing an OFX transaction
-      </para>
-    </listitem>
-  </itemizedlist>
+      <listitem>
+	<para>
+	  The payee name can now be based on either the PAYEEID, NAME, or MEMO
+	  field when importing an OFX transaction
+	</para>
+      </listitem>
+    </itemizedlist>
+  </listitem>
 
   <listitem>
     <para>
