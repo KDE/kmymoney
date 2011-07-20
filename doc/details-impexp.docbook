@@ -1302,7 +1302,7 @@
 <formalpara><title>Field Delimiter</title>
   <para>
     Even though the file is still called comma delimited, the character used to
-    separate values in the file may be a comma, semi-colon, or tab.  Once this
+    separate values in the file may be a comma, semicolon, or tab.  Once this
     is set correctly, your data should appear correctly split into fields.
   </para>
 </formalpara>
@@ -1375,7 +1375,7 @@
   <para>
     The importer will automatically set this to the last line in the file.  You
     will only need to adjust it if there are footer lines in the file the
-    importer should ignore.  Otherwise, you are likely to get a date error
+    importer should ignore.  Otherwise, you are likely to get a data error
     warning.
   </para>
 </formalpara>
@@ -1385,7 +1385,7 @@
 <title>Importing banking data</title>
 
 <para>
-  Importing banking data is fairly straight-forward, you just need to select
+  Importing banking data is fairly straightforward, you just need to select
   the appropriate column numbers, which is done on the
   <guilabel>Banking</guilabel> tab.
 </para>
