@@ -694,8 +694,8 @@ void CsvImporterDlg::tabSelected(int index)
         m_investmentDlg->saveSettings();//            leaving "Invest" so save settings
         m_csvprocessing->readSettings();//            ...and load "Banking"
         tableWidget->reset();
-        tabWidget_Main->setTabText(0, "Banking*");
-        tabWidget_Main->setTabText(1, "Investment");
+        tabWidget_Main->setTabText(0, i18n("Banking") + '*');
+        tabWidget_Main->setTabText(1, i18n("Investment"));
       }
       m_fileType = "Banking";
       m_currentUI = "Banking";
@@ -714,8 +714,8 @@ void CsvImporterDlg::tabSelected(int index)
         saveSettings();//                             leaving "Banking" so save settings
         m_investProcessing->readSettings();//         ...and load "Invest"
         tableWidget->reset();
-        tabWidget_Main->setTabText(0, "Banking");
-        tabWidget_Main->setTabText(1, "Investment*");
+        tabWidget_Main->setTabText(0, i18n("Banking"));
+        tabWidget_Main->setTabText(1, i18n("Investment") + '*');
       }
       m_fileType = "Invest";
       m_currentUI = "Invest";
