@@ -660,15 +660,13 @@
 
 <para>
   To edit a particular account, right-click that account and choose
-  <menuchoice><guimenuitem>Edit account...</guimenuitem></menuchoice>
-  or with that account open in the ledger, select
+  <menuchoice><guimenuitem>Edit account...</guimenuitem></menuchoice> or
+  with that account open in the ledger, select
   <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit
-  Account...</guimenuitem></menuchoice>. A window will pop-up with
-  several tabs, each allowing you to view and change certain
-  information about the acount.  For more information on any of these
-  details, see the section on
-  <ulink url="details.accounts.create">creating a new
-  account</ulink>.
+  Account...</guimenuitem></menuchoice>. A window will pop-up with several
+  tabs, each allowing you to view and change certain information about the
+  acount.  For more information on any of these details, see the section on
+  <link linkend="details.accounts.create">creating a new account</link>.
 </para>
 
 <para>
@@ -728,9 +726,9 @@
 
 <formalpara><title>Online Settings</title>
 <para>
-  This tab is only be present if the account has been mapped to an
-  <ulink url="details.impexp.ofxdirectconnect">online
-  account</ulink>.  It has three subtabs.
+  This tab is only be present if the account has been mapped to an <link
+  linkend="details.impexp.ofxdirectconnect">online account</link>.  It has
+  three subtabs.
 </para>
 </formalpara>
 

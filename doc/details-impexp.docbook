@@ -1063,7 +1063,7 @@
     either the PAYEEID, NAME, or MEMO field in the OFX transaction.  You can
     configure this feature and some other OFX direct connect settings by
     selecting the appropriate tab in
-    the <ulink url="details.accounts.edit">Edit account</ulink> dialog.
+    the <link linkend="details.accounts.edit">Edit account</link> dialog.
   </para>
 </note>
 </sect2>
