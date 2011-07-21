@@ -938,9 +938,8 @@
   base &kappname; RPM.  If you have built from sources, all you need to do is
   have preferably the libOFX 0.9 development headers and libraries installed on
   your system.  The &kappname; build process will detect these and compile the
-  plugin.  libOFX 0.8.2 is supported as well, but some features are not
-  supported with this version of the library.  At the time of release of
-  &kappname; 4.6, the latest libofx version was 0.9.4.
+  plugin.  At the time of release of &kappname; 4.6, the latest libofx version
+  was 0.9.4, which is also the minimum required version.
 </para>
 
 <para>
