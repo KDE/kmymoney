@@ -121,7 +121,7 @@
 <para>
    Note that the balance column is based on the currently displayed sort order,
    and will not be calculated if the display is filtered by the search box or
-   transaction type dropdown, as desribed above.
+   transaction type dropdown, as described above.
 </para>
 
 <para>

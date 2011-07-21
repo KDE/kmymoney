@@ -25,7 +25,7 @@
   from &kde; 3, and so were not available in many Linux distributions, which had
   already migrated to &kde; 4.  However, with the release of version 4.5 in
   August 2010, &kappname; could be easily compiled and installed on any version
-  of &kde; 4.3 or higher.  The current versoin, 4.6, requires &kde; 4.3,
+  of &kde; 4.3 or higher.  The current version, 4.6, requires &kde; 4.3,
   specifically kdelibs and kdepimlibs.
 </para>
 
