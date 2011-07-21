@@ -1291,7 +1291,7 @@
 
 <formalpara><title>Text Delimiter</title>
   <para>
-    This will usually be a single or double quote character.  It it important in
+    This will usually be a single or double quote character.  It is important in
     case the field delimiter character appears within a column, such as the memo
     field.
   </para>
@@ -1570,7 +1570,7 @@
 <caution>
 <para>
   Note that it may appear that the displayed entries in the lower
-  section of the plugin window may be edited, and in fact they they
+  section of the plugin window may be edited, and in fact they
   may, but the edits are not kept.  The display is purely for display,
   not for editing.  The input file is never altered by the plugin, and
   the data actually imported comes from the input file, not from the
