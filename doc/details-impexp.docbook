@@ -1058,12 +1058,12 @@
 
 <note>
   <para>
-    In version of &kappname; prior to 4.6, the payee name was always taken from
-    the PAYEEID field.  As of version 4.6, the payee name can be based on either
-    the PAYEEID, NAME, or MEMO field in the OFX transaction.  You can configure
-    this feature by selecting the appropriate tab in the
-    <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit</guimenuitem></menuchoice>
-    dialog.
+    In version of &kappname; prior to 4.6, the payee name was always taken
+    from the PAYEEID field.  As of version 4.6, the payee name can be based on
+    either the PAYEEID, NAME, or MEMO field in the OFX transaction.  You can
+    configure this feature and some other OFX direct connect settings by
+    selecting the appropriate tab in
+    the <ulink url="details.accounts.edit">Edit account</ulink> dialog.
   </para>
 </note>
 </sect2>

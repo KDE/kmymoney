@@ -5,8 +5,8 @@
     <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2011-07-21</date>
+  <releaseinfo>4.6</releaseinfo>
 </chapterinfo>
   
 <title>Accounts</title>
@@ -660,13 +660,15 @@
 
 <para>
   To edit a particular account, right-click that account and choose
-  <guimenuitem>Edit account...</guimenuitem>. A details window will pop-up.
-  This window allows you to change the name and start or opening date of the
-  account, associated banking institution, and the parent account. Changing the
-  parent account is also possible in the main Accounts screen, by dragging the
-  account and dropping it on a different parent account. In this window, you can
-  also create a new banking institution and associate the account with that
-  institution.
+  <menuchoice><guimenuitem>Edit account...</guimenuitem></menuchoice>
+  or with that account open in the ledger, select
+  <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit
+  Account...</guimenuitem></menuchoice>. A window will pop-up with
+  several tabs, each allowing you to view and change certain
+  information about the acount.  For more information on any of these
+  details, see the section on
+  <ulink url="details.accounts.create">creating a new
+  account</ulink>.
 </para>
 
 <para>
@@ -684,6 +686,82 @@
         </mediaobject>
   </screenshot>
 </para>
+
+<formalpara><title>General</title>
+<para>
+  View the general information about the account, and change the name,
+  start or opening date, as well as some of the other basic settings
+  of the account.
+</para>
+</formalpara>
+
+<formalpara><title>Institution</title>
+<para>
+  View and change the associated banking institution and account
+  numbers.  You can also create a new institution here.
+</para>
+</formalpara>
+
+<formalpara><title>Hierarchy</title>
+<para>
+  You can change the parent account by dragging the account in this
+  view of the account hierarchy.  Changing the parent account is also
+  possible in the main Accounts screen, by dragging the account and
+  dropping it on a different parent account.
+</para>
+</formalpara>
+
+<formalpara><title>Limits</title>
+<para>
+  This tab is only present for asset and liability accounts.  If you
+  enter amounts in the available fields, &kappname; will warn you when
+  the account balance reaches those values.
+</para>
+</formalpara>
+
+<formalpara><title>Tax</title>
+<para>
+  Here you can check whether this is a VAT account, and whether to
+  include this account on tax reports.
+</para>
+</formalpara>
+
+<formalpara><title>Online Settings</title>
+<para>
+  This tab is only be present if the account has been mapped to an
+  <ulink url="details.impexp.ofxdirectconnect">online
+  account</ulink>.  It has three subtabs.
+</para>
+</formalpara>
+
+<itemizedlist>
+<listitem>
+<para>
+  <emphasis>Account Details</emphasis> This shows the status of the
+  online connection, the bank/broker and account number, and allows
+  you to store or change the password for the online account.
+</para>
+</listitem>
+
+<listitem>
+<para>
+  <emphasis>OFX Details</emphasis> Here you can adjust certain details
+  &kappname; uses when it establishes an OFX connection with the
+  institution.  This should only be necessary if you get certain
+  errors when you first set up the online account, or perhaps if your
+  institution changes is OFX server software.
+</para>
+</listitem>
+
+<listitem>
+<para>
+  <emphasis>Import Details</emphasis> Here you can tell &kappname;
+ what to use as the start date for the import.  In addition, starting
+ with verision 4.6, you can choose whether the payee's name is based
+ on the PAYEEID, NAME, or MEMO field of the imported transaction.
+</para>
+</listitem>
+</itemizedlist>
 </sect1>
 
 <sect1 id="details.accounts.delete">
