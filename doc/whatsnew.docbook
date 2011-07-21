@@ -63,7 +63,7 @@
       <listitem>
 	<para>
 	  The payee name can now be based on either the PAYEEID, NAME, or MEMO
-	  field when importing an OFX transaction
+	  field when importing a transaction via OFX direct connect
 	</para>
       </listitem>
     </itemizedlist>
