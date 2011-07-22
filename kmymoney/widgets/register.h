@@ -564,8 +564,7 @@ protected slots:
   void slotDoubleClicked(int row, int);
 
 signals:
-  void selectionChanged(void);
-  void selectionChanged(const KMyMoneyRegister::SelectedTransactions& list);
+  void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& list);
   /**
     * This signal is emitted when the focus and selection changes to @p item.
     *

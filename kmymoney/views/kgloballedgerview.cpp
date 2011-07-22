@@ -207,7 +207,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   registerFrameLayout->addWidget(m_register);
   m_register->installEventFilter(this);
   connect(m_register, SIGNAL(openContextMenu()), this, SIGNAL(openContextMenu()));
-  connect(m_register, SIGNAL(selectionChanged(const KMyMoneyRegister::SelectedTransactions&)), this, SLOT(slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTransactions&)));
+  connect(m_register, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), this, SLOT(slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTransactions&)));
   connect(m_register->horizontalHeader(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotSortOptions()));
   connect(m_register, SIGNAL(reconcileStateColumnClicked(KMyMoneyRegister::Transaction*)), this, SLOT(slotToggleTransactionMark(KMyMoneyRegister::Transaction*)));
   connect(&d->m_viewPosTimer, SIGNAL(timeout()), this, SLOT(slotUpdateViewPos()));
@@ -268,7 +268,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   connect(m_register, SIGNAL(focusChanged(KMyMoneyRegister::Transaction*)), m_form, SLOT(slotSetTransaction(KMyMoneyRegister::Transaction*)));
   connect(m_register, SIGNAL(focusChanged()), kmymoney, SLOT(slotUpdateActions()));
   connect(d->m_accountComboBox, SIGNAL(accountSelected(const QString&)), this, SLOT(slotSelectAccount(const QString&)));
-  connect(m_register, SIGNAL(selectionChanged(const KMyMoneyRegister::SelectedTransactions&)), this, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)));
+  connect(m_register, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), this, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)));
   connect(m_register, SIGNAL(editTransaction()), this, SIGNAL(startEdit()));
   connect(m_register, SIGNAL(emptyItemSelected()), this, SLOT(slotNewTransaction()));
   connect(m_register, SIGNAL(aboutToSelectItem(KMyMoneyRegister::RegisterItem*, bool&)), this, SLOT(slotAboutToSelectItem(KMyMoneyRegister::RegisterItem*, bool&)));

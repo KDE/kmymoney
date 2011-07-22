@@ -48,13 +48,6 @@ public:
   }
 
   virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
-
-  /**
-    * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
-    */
-  int numRowsRegister(void) const {
-    return StdTransaction::numRowsRegister();
-  }
 };
 
 class InvestTransactionDownloaded : public InvestTransaction
@@ -68,12 +61,6 @@ public:
   }
 
   virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
-  /**
-     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
-   */
-  int numRowsRegister(void) const {
-    return InvestTransaction::numRowsRegister();
-  }
 };
 
 

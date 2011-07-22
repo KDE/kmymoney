@@ -60,6 +60,13 @@ public:
   int numRowsRegister(bool expanded) const {
     return StdTransaction::numRowsRegister(expanded) + m_additionalRows;
   }
+
+  /**
+    * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
+    */
+  int numRowsRegister() const {
+    return StdTransaction::numRowsRegister();
+  }
 };
 
 } // namespace

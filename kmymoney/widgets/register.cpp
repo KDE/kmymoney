@@ -1584,7 +1584,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
     }
     if (okToSelect) {
       SelectedTransactions list(this);
-      emit selectionChanged(list);
+      emit transactionsSelected(list);
     }
   }
 }
@@ -1879,7 +1879,7 @@ void Register::scrollPage(int key, Qt::KeyboardModifiers modifiers)
     handleItemChange(oldFocusItem, modifiers & Qt::ShiftModifier, modifiers & Qt::ControlModifier);
     // tell the world about the changes in selection
     SelectedTransactions list(this);
-    emit selectionChanged(list);
+    emit transactionsSelected(list);
   }
 
   if (m_focusItem && !m_focusItem->isSelected() && m_selectionMode == SingleSelection)
