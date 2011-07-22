@@ -56,7 +56,7 @@ void MyMoneyObjectContainer::clear(const QString& id)
   }
 }
 
-const MyMoneyObject * const MyMoneyObjectContainer::object(const QString& id) const
+const MyMoneyObject * MyMoneyObjectContainer::object(const QString& id) const
 {
   QMap<QString, MyMoneyObject const *>::const_iterator it;
   it = m_map.find(id);

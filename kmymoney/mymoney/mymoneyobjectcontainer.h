@@ -81,7 +81,7 @@ public:
 
   const MyMoneyAccount& accountByName(const QString& name) const;
 
-  const MyMoneyObject * const object(const QString& id) const;
+  const MyMoneyObject * object(const QString& id) const;
 
   /**
    * This method refreshes an already existing object in the container

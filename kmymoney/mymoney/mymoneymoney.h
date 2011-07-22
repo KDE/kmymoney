@@ -157,8 +157,8 @@ public:
 
   static const QChar thousandSeparator(void);
   static const QChar decimalSeparator(void);
-  static const signPosition negativeMonetarySignPosition(void);
-  static const signPosition positiveMonetarySignPosition(void);
+  static signPosition negativeMonetarySignPosition(void);
+  static signPosition positiveMonetarySignPosition(void);
   static void setFileVersion(const fileVersionE version);
 
   const MyMoneyMoney& operator=(const QString& pszAmount);

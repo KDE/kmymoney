@@ -63,7 +63,7 @@ void MyMoneyMoney::setNegativeMonetarySignPosition(const signPosition pos)
   _negativeMonetarySignPosition = pos;
 }
 
-const MyMoneyMoney::signPosition MyMoneyMoney::negativeMonetarySignPosition(void)
+MyMoneyMoney::signPosition MyMoneyMoney::negativeMonetarySignPosition(void)
 {
   return _negativeMonetarySignPosition;
 }
@@ -73,7 +73,7 @@ void MyMoneyMoney::setPositiveMonetarySignPosition(const signPosition pos)
   _positiveMonetarySignPosition = pos;
 }
 
-const MyMoneyMoney::signPosition MyMoneyMoney::positiveMonetarySignPosition(void)
+MyMoneyMoney::signPosition MyMoneyMoney::positiveMonetarySignPosition(void)
 {
   return _positiveMonetarySignPosition;
 }
