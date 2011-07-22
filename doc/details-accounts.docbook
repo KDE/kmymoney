@@ -665,7 +665,7 @@
   <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit
   Account...</guimenuitem></menuchoice>. A window will pop-up with several
   tabs, each allowing you to view and change certain information about the
-  acount.  For more information on any of these details, see the section on
+  account.  For more information on any of these details, see the section on
   <link linkend="details.accounts.create">creating a new account</link>.
 </para>
 
@@ -755,7 +755,7 @@
 <para>
   <emphasis>Import Details</emphasis> Here you can tell &kappname;
  what to use as the start date for the import.  In addition, starting
- with verision 4.6, you can choose whether the payee's name is based
+ with version 4.6, you can choose whether the payee's name is based
  on the PAYEEID, NAME, or MEMO field of the imported transaction.
 </para>
 </listitem>
