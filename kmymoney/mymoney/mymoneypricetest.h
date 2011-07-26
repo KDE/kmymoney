@@ -28,7 +28,7 @@ class MyMoneyPriceTest : public QObject
 protected:
   MyMoneyPrice* m;
 
-public:
+private slots:
   void init();
   void cleanup();
 
