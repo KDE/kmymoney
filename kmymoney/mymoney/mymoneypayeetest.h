@@ -19,9 +19,13 @@
 class MyMoneyPayeeTest : public QObject
 {
   Q_OBJECT
-public:
+private slots:
   void testXml();
   void testDefaultAccount();
+  void testEmptyMatchKeyBegin();
+  void testEmptyMatchKeyEnd();
+  void testEmptyMatchKeyMiddle();
+  void testEmptyMatchKeyMix();
 };
 
 #endif

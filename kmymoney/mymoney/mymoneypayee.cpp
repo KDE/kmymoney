@@ -75,9 +75,9 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
 
   m_matchingEnabled = node.attribute("matchingenabled", "0").toUInt();
   if (m_matchingEnabled) {
-    m_usingMatchKey = node.attribute("usingmatchkey", "0").toUInt();
-    m_matchKeyIgnoreCase = node.attribute("matchignorecase", "0").toUInt();
-    m_matchKey = node.attribute("matchkey");
+    setMatchData((node.attribute("usingmatchkey", "0").toUInt() != 0) ? matchKey : matchName,
+                 node.attribute("matchignorecase", "0").toUInt(),
+                 node.attribute("matchkey"));
   }
 
   if (node.hasAttribute("notes")) {
@@ -209,6 +209,13 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
     m_usingMatchKey = (type == matchKey);
     if (m_usingMatchKey) {
       m_matchKey = keys.join(";");
+      QRegExp exp("^;*([^;].*[^;]);*$");
+      if (exp.indexIn(m_matchKey) != -1) {
+        m_matchKey = exp.cap(1);
+      }
+      while (m_matchKey.contains(QLatin1String(";;"))) {
+        m_matchKey.replace(QLatin1String(";;"), QLatin1String(";"));
+      }
     }
   }
 }

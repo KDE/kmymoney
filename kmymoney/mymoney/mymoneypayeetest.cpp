@@ -75,5 +75,73 @@ void MyMoneyPayeeTest::testDefaultAccount()
   QVERIFY(payee.defaultAccountId().isEmpty());
 }
 
+void MyMoneyPayeeTest::testEmptyMatchKeyBegin()
+{
+  MyMoneyPayee payee;
+  QString keys;
+  bool ignoreCase;
+
+  payee.setMatchData(MyMoneyPayee::matchKey, false, ";test1;test2");
+  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  QVERIFY(ignoreCase == false);
+  QVERIFY(keys == QLatin1String("test1;test2"));
+
+  payee.setMatchData(MyMoneyPayee::matchKey, false, ";;test1;test2");
+  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  QVERIFY(ignoreCase == false);
+  QVERIFY(keys == QLatin1String("test1;test2"));
+}
+
+void MyMoneyPayeeTest::testEmptyMatchKeyEnd()
+{
+  MyMoneyPayee payee;
+  QString keys;
+  bool ignoreCase;
+
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1;test2;");
+  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  QVERIFY(ignoreCase == false);
+  QVERIFY(keys == QLatin1String("test1;test2"));
+
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1;test2;;");
+  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  QVERIFY(ignoreCase == false);
+  QVERIFY(keys == QLatin1String("test1;test2"));
+}
+
+void MyMoneyPayeeTest::testEmptyMatchKeyMiddle()
+{
+  MyMoneyPayee payee;
+  QString keys;
+  bool ignoreCase;
+
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1;;test2");
+  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  QVERIFY(ignoreCase == false);
+  QVERIFY(keys == QLatin1String("test1;test2"));
+
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1;;;test2");
+  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  QVERIFY(ignoreCase == false);
+  QVERIFY(keys == QLatin1String("test1;test2"));
+}
+
+void MyMoneyPayeeTest::testEmptyMatchKeyMix()
+{
+  MyMoneyPayee payee;
+  QString keys;
+  bool ignoreCase;
+
+  payee.setMatchData(MyMoneyPayee::matchKey, false, ";test1;;test2;");
+  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  QVERIFY(ignoreCase == false);
+  QVERIFY(keys == QLatin1String("test1;test2"));
+
+  payee.setMatchData(MyMoneyPayee::matchKey, false, ";;test1;;;test2;;");
+  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  QVERIFY(ignoreCase == false);
+  QVERIFY(keys == QLatin1String("test1;test2"));
+}
+
 #include "mymoneypayeetest.moc"
 
