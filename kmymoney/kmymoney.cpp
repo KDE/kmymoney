@@ -2235,11 +2235,16 @@ void KMyMoneyApp::slotStatementImport(void)
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-import"),
       i18n("*.xml|XML files\n*|All files"),
       this);
-  dialog->setMode(KFile::File | KFile::ExistingOnly);
+  dialog->setMode(KFile::Files | KFile::ExistingOnly);
 
   if (dialog->exec() == QDialog::Accepted) {
-    result = slotStatementImport(dialog->selectedUrl().path());
+    KUrl::List files = dialog->selectedUrls();
+    d->m_collectingStatements = (files.count() > 1);
 
+    foreach (const KUrl& url, files) {
+      qDebug("Processing '%s'", qPrintable(url.path()));
+      result |= slotStatementImport(url.path());
+    }
     /*    QFile f( dialog->selectedURL().path() );
         f.open( QIODevice::ReadOnly );
         QString error = "Unable to parse file";
