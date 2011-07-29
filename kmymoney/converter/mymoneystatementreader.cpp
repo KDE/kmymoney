@@ -530,11 +530,10 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
   MyMoneyTransaction t;
 
-#if 0
+
   QString dbgMsg;
   dbgMsg = QString("Process %1, '%3', %2").arg(t_in.m_datePosted.toString(Qt::ISODate)).arg(t_in.m_amount.formatMoney("", 2)).arg(t_in.m_strBankID);
   qDebug("%s", qPrintable(dbgMsg));
-#endif
 
   // mark it imported for the view
   t.setImported();
@@ -846,7 +845,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
   QString payeename = t_in.m_strPayee;
   if (!payeename.isEmpty()) {
-    // qDebug("Start matching payee");
+    qDebug("Start matching payee");
     QString payeeid;
     try {
       QList<MyMoneyPayee> pList = file->payeeList();
@@ -868,7 +867,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             for (it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
               QRegExp exp(*it_s, ignoreCase ? Qt::CaseInsensitive : Qt::CaseSensitive);
               if (exp.indexIn(payeename) != -1) {
-                // qDebug("Found match with '%s' on '%s'", qPrintable(payeename), qPrintable((*it_p).name()));
+                qDebug("Found match with '%s' on '%s'", qPrintable(payeename), qPrintable((*it_p).name()));
                 matchMap[exp.matchedLength()] = (*it_p).id();
               }
             }
@@ -885,12 +884,12 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // in case of a) we take the one with the largest matchedLength()
       // which happens to be the last one in the map
       if (matchMap.count() > 1) {
-        // qDebug("Multiple matches");
+        qDebug("Multiple matches");
         QMap<int, QString>::const_iterator it_m = matchMap.constEnd();
         --it_m;
         payeeid = *it_m;
       } else if (matchMap.count() == 1) {
-        // qDebug("Single matches");
+        qDebug("Single matches");
         payeeid = *(matchMap.constBegin());
       }
 
@@ -1075,12 +1074,14 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 s.setReconcileFlag(MyMoneySplit::NotReconciled);
                 s.clearId();
                 s.setBankID(QString());
+                s.removeMatch();
 
                 if (t_old.splits().count() == 2) {
                   s.setShares(-s1.shares());
                   s.setValue(-s1.value());
                   s.setMemo(s1.memo());
                 }
+                qDebug("Adding second split to %s", qPrintable(s.accountId()));
                 t.addSplit(s);
               }
             }
