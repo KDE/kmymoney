@@ -95,15 +95,38 @@
  </para>
 </warning>
 
+<sect2><title>Required libraries</title>
 <para>
-  &kappname; depends on libraries from KDE version 4.3 or later, specifically
-  kdelibs and kdepimlibs.  You may need to explicitly load the
-  <quote>-devel</quote> versions in order to compile &kappname;, rather than
-  just running a pre-compiled version.  Additional functionality can be obtained
-  if extra libraries are available at compile time &ndash; see the web site for
-  details.
+  &kappname; depends on certain libraries in order to compile and run
+  properly.  First is KDE version 4.3.5 or later, specifically kdelibs and
+  kdepimlibs.  Depending on your distribution, you may need to explicitly load
+  the <quote>-devel</quote> versions in order to compile &kappname;, rather
+  than just running a pre-compiled version.  As of version 4.6.0, &kappname;
+  also depends on libalkimia, version 4.3.1 or higher.  Additional
+  requirements may be detected during the <quote>cmake</quote> step below.
 </para>
 
+<para>
+  Additional functionality can be obtained if extra libraries are available at
+  compile time.  The two most common are
+</para>
+
+<itemizedlist>
+<listitem>
+  <para>libofx, version 0.9.4 or higher, to be able to import financial data
+  in the OFX format, and</para>
+</listitem>
+
+<listitem>
+  <para>AqBanking, version 5.0.0 or higher, to be able to use certain on-line
+  banking features.  Note that version 5.0.14 or higher is strongly
+  recommended, due to bugs in earlier versions.</para>
+</listitem>
+&ndash; see the web site for more details.
+</itemizedlist>
+</sect2>
+
+<sect2><title>Build instructions</title>
 <para>
   &kappname; uses the cmake build system.  Further information can be found in
   the README.cmake file in the root folder of the source.  The basic steps are
@@ -154,6 +177,7 @@
 <member><command>$ make</command></member>
 <member><command>$ sudo make install/fast</command></member>
 </simplelist>
+</sect2>
 </sect1>
 
 <sect1 id="installation.nonlinux">
