@@ -567,6 +567,10 @@ bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
   if (temp != QDomElement()) {
     QString strFixVersion = QStringEmpty(temp.attribute("id"));
     m_storage->setFileFixVersion(strFixVersion.toUInt());
+    // skip KMyMoneyView::fixFile_2()
+    if (m_storage->fileFixVersion() == 2) {
+      m_storage->setFileFixVersion(3);
+    }
   }
   // FIXME The old version stuff used this rather odd number
   //       We now use increments
