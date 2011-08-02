@@ -2110,7 +2110,10 @@ void KMyMoneyApp::slotQifImport(void)
       d->m_ft = new MyMoneyFileTransaction();
       d->m_collectingStatements = true;
       d->m_statementResults.clear();
-      d->m_qifReader->startImport();
+      if (!d->m_qifReader->startImport()) {
+        // if the import failed to start make sure that slotQifImportFinished is called otherwise the application will be left disabled
+        QTimer::singleShot(0, this, SLOT(slotQifImportFinished()));
+      }
     }
     delete dlg;
 
