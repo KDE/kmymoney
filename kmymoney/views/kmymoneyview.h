@@ -212,6 +212,7 @@ private:
   void fixFile_0(void);
   void fixFile_1(void);
   void fixFile_2(void);
+  void fixFile_3(void);
 
   /**
     */

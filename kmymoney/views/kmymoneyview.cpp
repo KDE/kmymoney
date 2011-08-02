@@ -33,6 +33,7 @@
 #include <QList>
 #include <QVBoxLayout>
 #include <QByteArray>
+#include <QUuid>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -440,6 +441,16 @@ void KMyMoneyView::newStorage(storageTypeE t)
     file->attachStorage(new MyMoneySeqAccessMgr);
   else
     file->attachStorage(new MyMoneyDatabaseMgr);
+
+  MyMoneyFileTransaction ft;
+  try {
+    QUuid uid = QUuid::createUuid();
+    file->setValue("kmm-id", uid.toString());
+    ft.commit();
+  } catch(MyMoneyException *e) {
+    qDebug("Unable to setup UID for new storage object");
+    delete e;
+  }
 }
 
 void KMyMoneyView::removeStorage(void)
@@ -1011,6 +1022,11 @@ bool KMyMoneyView::initializeStorage()
           case 2:
             fixFile_2();
             s->setFileFixVersion(3);
+            break;
+
+          case 3:
+            fixFile_3();
+            s->setFileFixVersion(4);
             break;
 
             // add new levels above. Don't forget to increase currentFixVersion() for all
@@ -1776,6 +1792,17 @@ void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QMode
 /* DO NOT ADD code to this function or any of it's called ones.
    Instead, create a new function, fixFile_n, and modify the initializeStorage()
    logic above to call it */
+
+void KMyMoneyView::fixFile_3(void)
+{
+  // make sure each storage object contains a (unique) id
+  MyMoneyFile* file = MyMoneyFile::instance();
+  if (file->value("kmm-id").isEmpty()) {
+    QUuid uid = QUuid::createUuid();
+    file->setValue("kmm-id", uid.toString());
+    qDebug("UID generated: '%s'", qPrintable(uid.toString()));
+  }
+}
 
 void KMyMoneyView::fixFile_2(void)
 {

@@ -1034,7 +1034,7 @@ private:
   // Increment this to force an update in KMMView.
   // This is different from the db schema version stored in
   // MMStorageSql::m_majorVersion
-  static const int CURRENT_FIX_VERSION = 3;
+  static const int CURRENT_FIX_VERSION = 4;
 
 };
 #endif
