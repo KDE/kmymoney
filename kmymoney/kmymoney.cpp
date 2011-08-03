@@ -4459,7 +4459,14 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
                 MyMoneyTransaction t = MyMoneyFile::instance()->transaction(newId);
                 schedule.setLastPayment(t.postDate());
               }
-              schedule.setNextDueDate(schedule.nextPayment(origDueDate));
+              // in case the next due date is invalid, the schedule is finished
+              // we mark it as such by setting the next due date to one day past the end
+              QDate nextDueDate = schedule.nextPayment(origDueDate);
+              if (!nextDueDate.isValid()) {
+                schedule.setNextDueDate(schedule.endDate().addDays(1));
+              } else {
+                schedule.setNextDueDate(nextDueDate);
+              }
               MyMoneyFile::instance()->modifySchedule(schedule);
               rc = KMyMoneyUtils::Enter;
 
