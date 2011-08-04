@@ -253,6 +253,13 @@ MyMoneyObject const * TransactionMatcher::findMatch(const MyMoneyTransaction& ti
   result = notMatched;
   sm = MyMoneySplit();
 
+  MyMoneyAccount acc = MyMoneyFile::instance()->account(si.accountId());
+  qDebug("findMatch in %s(%s) from %s to %s and amount %s",
+         qPrintable(acc.name()),
+         qPrintable(si.accountId()),
+         qPrintable(ti.postDate().addDays(-m_days).toString(Qt::ISODate)),
+         qPrintable(ti.postDate().addDays(m_days).toString(Qt::ISODate)),
+         qPrintable(si.shares().formatMoney("", 2)));
   MyMoneyTransactionFilter filter(si.accountId());
   filter.setReportAllSplits(false);
   filter.setDateFilter(ti.postDate().addDays(-m_days), ti.postDate().addDays(m_days));
@@ -261,6 +268,7 @@ MyMoneyObject const * TransactionMatcher::findMatch(const MyMoneyTransaction& ti
   QList<QPair<MyMoneyTransaction, MyMoneySplit> > list;
   MyMoneyFile::instance()->transactionList(list, filter);
 
+  qDebug("Found %d transactions", list.count());
   // parse list
   QList<QPair<MyMoneyTransaction, MyMoneySplit> >::iterator it_l;
   QPair<MyMoneyTransaction, MyMoneySplit> lastMatch;

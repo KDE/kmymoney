@@ -1081,7 +1081,10 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                   s.setValue(-s1.value());
                   s.setMemo(s1.memo());
                 }
-                qDebug("Adding second split to %s", qPrintable(s.accountId()));
+                MyMoneyAccount acc = file->account(s.accountId());
+                qDebug("Adding second split to %s(%s)",
+                       qPrintable(acc.name()),
+                       qPrintable(s.accountId()));
                 t.addSplit(s);
               }
             }
