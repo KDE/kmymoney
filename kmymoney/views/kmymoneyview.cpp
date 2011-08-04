@@ -447,7 +447,7 @@ void KMyMoneyView::newStorage(storageTypeE t)
     QUuid uid = QUuid::createUuid();
     file->setValue("kmm-id", uid.toString());
     ft.commit();
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     qDebug("Unable to setup UID for new storage object");
     delete e;
   }
