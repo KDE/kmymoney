@@ -42,7 +42,7 @@ QDate ConvertDate::convertDate(const QString& txt)
   QString dateFormatString = stringFormat();
 
   QRegExp rx("[. -]");//                           replace date field separators '.' ' ' '-'
-  QString buffer = txt;
+  QString buffer = txt.trimmed();//                remove leading/trailing whitespace
   buffer = buffer.replace(rx, QString('/'));//     ....with '/'
   int count = buffer.count('/', Qt::CaseSensitive);
   if (count == 0) { //                              no separators so use QDate()
