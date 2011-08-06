@@ -300,12 +300,14 @@ public:
     if (list.count() > 0) {
       return model->itemFromIndex(list.front());
     }
-    // TODO: if not found at this item search for in int the model and if found reparent it.
+    // TODO: if not found at this item search for it in the model and if found reparent it.
     return 0;
   }
 
   /**
     * Function to get the item from an account id without knowing it's parent item.
+    * Note that for the accounts which have two items in the model (favorite accounts)
+    * the account item which is not the child of the favorite accounts item is always returned.
     *
     * @param model The model in which to search.
     * @param accountId Search based on this parameter.
@@ -313,11 +315,13 @@ public:
     * @return The item corresponding to the given account id, NULL if the account was not found.
     */
   QStandardItem *itemFromAccountId(QStandardItemModel *model, const QString &accountId) {
-    QModelIndexList list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, QVariant(accountId), 1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-    if (list.count() > 0) {
-      return model->itemFromIndex(list.front());
+    QModelIndexList list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, QVariant(accountId), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+    foreach (const QModelIndex &index, list) {
+      // always return the account which is not the child of the favorite accounts item
+      if (model->data(index.parent(), AccountsModel::AccountIdRole).toString() != AccountsModel::favoritesAccountId) {
+        return model->itemFromIndex(index);
+      }
     }
-    // TODO: if not found at this item search for in int the model and if found reparent it.
     return 0;
   }
 
@@ -645,11 +649,29 @@ void AccountsModel::slotObjectModified(MyMoneyFile::notificationObjectT objType,
   if (!account)
     return;
 
+  QStandardItem *favoriteAccountsItem = d->itemFromAccountId(this, favoritesAccountId);
   QStandardItem *accountItem = d->itemFromAccountId(this, account->id());
   MyMoneyAccount oldAccount = accountItem->data(AccountRole).value<MyMoneyAccount>();
   if (oldAccount.parentAccountId() == account->parentAccountId()) {
     // the hierarchy did not change so update the account data
     d->setAccountData(this, accountItem->index(), *account);
+    // and the child of the favorite item if the account is a favorite account or it's favorite status has just changed
+    QStandardItem *item = d->itemFromAccountId(favoriteAccountsItem, account->id());
+    if (account->value("PreferredAccount") == "Yes") {
+      if (!item) {
+        // the favorite item for this account does not exist and the account is favorite
+        item = new QStandardItem(account->name());
+        favoriteAccountsItem->appendRow(item);
+        item->setColumnCount(columnCount());
+        item->setEditable(false);
+      }
+      d->setAccountData(this, item->index(), *account);
+    } else {
+      if (item) {
+        // it's not favorite anymore
+        removeRow(item->index().row(), item->index().parent());
+      }
+    }
   } else {
     // this means that the hierarchy was changed - simulate this with a remove followed by and add operation
     slotObjectRemoved(MyMoneyFile::notifyAccount, oldAccount.id());
@@ -1085,9 +1107,7 @@ void AccountsFilterProxyModel::addAccountType(MyMoneyAccount::accountTypeE type)
   */
 void AccountsFilterProxyModel::removeAccountType(MyMoneyAccount::accountTypeE type)
 {
-  int index = d->m_typeList.indexOf(type);
-  if (index != -1) {
-    d->m_typeList.removeAt(index);
+  if (d->m_typeList.removeAll(type) > 0) {
     invalidate();
   }
 }
