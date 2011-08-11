@@ -295,40 +295,12 @@ bool KBankingPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContai
 {
   bool rc = false;
   if (m_kbanking && !acc.id().isEmpty()) {
-    MyMoneyFile* file = MyMoneyFile::instance();
-
-    QString bankId;
-    QString accountId;
-    // extract some information about the bank. if we have a sortcode
-    // (BLZ) we display it, otherwise the name is enough.
-    try {
-      const MyMoneyInstitution &bank = file->institution(acc.institutionId());
-      bankId = bank.name();
-      if (!bank.sortcode().isEmpty())
-        bankId = bank.sortcode();
-    } catch (MyMoneyException *e) {
-      // no bank assigned, we just leave the field emtpy
-      delete e;
-    }
-
-    // extract account information. if we have an account number
-    // we show it, otherwise the name will be displayed
-    accountId = acc.number();
-    if (accountId.isEmpty())
-      accountId = m_account.name();
-
-    // do the mapping. the return value of this method is either
-    // true, when the user mapped the account or false, if he
-    // decided to quit the dialog. So not really a great thing
-    // to present some more information.
-    m_kbanking->askMapAccount(acc.id().toUtf8().data(),
-                              bankId.toUtf8().data(),
-                              accountId.toUtf8().data());
+    m_kbanking->askMapAccount(acc);
 
     // at this point, the account should be mapped
     // so we search it and setup the account reference in the KMyMoney object
     AB_ACCOUNT* ab_acc;
-    ab_acc = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), acc.id().toUtf8().data());
+    ab_acc = aqbAccount(acc);
     if (ab_acc) {
       MyMoneyAccount a(acc);
       setupAccountReference(a, ab_acc);
@@ -337,6 +309,25 @@ bool KBankingPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContai
     }
   }
   return rc;
+}
+
+AB_ACCOUNT* KBankingPlugin::aqbAccount(const MyMoneyAccount& acc) const
+{
+  if(m_kbanking == 0)
+    return 0;
+
+  AB_ACCOUNT *ab_acc = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), m_kbanking->mappingId(acc).toUtf8().data());
+  // if the account is not found, we temporarily scan for the 'old' mapping (the one w/o the file id)
+  // in case we find it, we setup the new mapping in addition on the fly.
+  if (!ab_acc) {
+    ab_acc = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), acc.id().toUtf8().data());
+    if (ab_acc) {
+      qDebug("Found old mapping for '%s' but not new. Setup new mapping", qPrintable(acc.name()));
+      m_kbanking->setAccountAlias(ab_acc, m_kbanking->mappingId(acc).toUtf8().constData());
+      // TODO at some point in time, we should remove the old mapping
+    }
+  }
+  return ab_acc;
 }
 
 QString KBankingPlugin::stripLeadingZeroes(const QString& s) const
@@ -382,10 +373,7 @@ void KBankingPlugin::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT
 
 bool KBankingPlugin::accountIsMapped(const MyMoneyAccount& acc)
 {
-  AB_ACCOUNT* ab_acc = 0;
-  if (m_kbanking)
-    ab_acc = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), acc.id().toUtf8().data());
-  return ab_acc != 0;
+  return aqbAccount(acc) != 0;
 }
 
 bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc)
@@ -409,7 +397,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
     QDate qd;
 
     /* get AqBanking account */
-    ba = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), acc.id().toUtf8().data());
+    ba = aqbAccount(acc);
     if (!ba) {
       KMessageBox::error(0,
                          i18n("<qt>"
@@ -744,13 +732,39 @@ int KMyMoneyBanking::dequeueJob(AB_JOB *j)
   return 0;
 }
 
-bool KMyMoneyBanking::askMapAccount(const char *id,
-                                    const char *bankCode,
-                                    const char *accountId)
+bool KMyMoneyBanking::askMapAccount(const MyMoneyAccount& acc)
 {
-  KBMapAccount *w;
+  MyMoneyFile* file = MyMoneyFile::instance();
 
-  w = new KBMapAccount(this, bankCode, accountId);
+  QString bankId;
+  QString accountId;
+  // extract some information about the bank. if we have a sortcode
+  // (BLZ) we display it, otherwise the name is enough.
+  try {
+    const MyMoneyInstitution &bank = file->institution(acc.institutionId());
+    bankId = bank.name();
+    if (!bank.sortcode().isEmpty())
+      bankId = bank.sortcode();
+  } catch (MyMoneyException *e) {
+    // no bank assigned, we just leave the field emtpy
+    delete e;
+  }
+
+  // extract account information. if we have an account number
+  // we show it, otherwise the name will be displayed
+  accountId = acc.number();
+  if (accountId.isEmpty())
+    accountId = acc.name();
+
+  // do the mapping. the return value of this method is either
+  // true, when the user mapped the account or false, if he
+  // decided to quit the dialog. So not really a great thing
+  // to present some more information.
+
+  KBMapAccount *w;
+  w = new KBMapAccount(this,
+                       bankId.toUtf8().constData(),
+                       accountId.toUtf8().constData());
   if (w->exec() == QDialog::Accepted) {
     AB_ACCOUNT *a;
 
@@ -759,16 +773,34 @@ bool KMyMoneyBanking::askMapAccount(const char *id,
     DBG_NOTICE(0,
                "Mapping application account \"%s\" to "
                "online account \"%s/%s\"",
-               id,
+               qPrintable(acc.name()),
                AB_Account_GetBankCode(a),
                AB_Account_GetAccountNumber(a));
-    setAccountAlias(a, id);
+
+    // TODO remove the following line once we don't need backward compatability
+    setAccountAlias(a, acc.id().toUtf8().constData());
+    qDebug("Setup mapping to '%s'", acc.id().toUtf8().constData());
+
+    setAccountAlias(a, mappingId(acc).toUtf8().constData());
+    qDebug("Setup mapping to '%s'", mappingId(acc).toUtf8().constData());
+
     delete w;
     return true;
   }
 
   delete w;
   return false;
+}
+
+QString KMyMoneyBanking::mappingId(const MyMoneyAccount& acc) const
+{
+  MyMoneyFile* file = MyMoneyFile::instance();
+  QString id = file->value("kmm-id") + QLatin1Char('-') + acc.id();
+
+  // AqBanking does not handle the enclosing parens, so we remove it
+  id.remove('{');
+  id.remove('}');
+  return id;
 }
 
 bool KMyMoneyBanking::interactiveImport()

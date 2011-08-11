@@ -148,6 +148,12 @@ private:
   bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& settings);
 
   /**
+   * This method translates a MyMoneyAccount to the corresponding AB_ACCOUNT object pointer.
+   * If no mapped account can be detected, it returns 0.
+   */
+  AB_ACCOUNT* aqbAccount(const MyMoneyAccount& acc) const;
+
+  /**
     * Called by the application framework to update the
     * KMyMoney account @a acc with data from the online source.
     * Store the jobs in the outbox in case @a moreAccounts is true
@@ -178,7 +184,6 @@ signals:
 private:
   class Private;
   Private* const d;
-  MyMoneyAccount        m_account;
   KAction*              m_configAction;
   KAction*              m_importAction;
   KMyMoneyBanking*      m_kbanking;
@@ -204,15 +209,15 @@ public:
   int dequeueJob(AB_JOB *j);
   std::list<AB_JOB*> getEnqueuedJobs();
 
-  bool askMapAccount(const char *id,
-                     const char *bankCode,
-                     const char *accountId);
 
   virtual bool interactiveImport();
 
 protected:
   int init();
   int fini();
+
+  bool askMapAccount(const MyMoneyAccount& acc);
+  QString mappingId(const MyMoneyAccount& acc) const;
 
   bool importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags);
   const AB_ACCOUNT_STATUS* _getAccountStatus(AB_IMEXPORTER_ACCOUNTINFO *ai);
