@@ -496,15 +496,18 @@ QList<QDate> MyMoneySchedule::paymentDates(const QDate& _startDate, const QDate&
   QDate paymentDate(nextDueDate());
   QList<QDate> theDates;
 
-  QDate endDate(_endDate);
-  if (willEnd() && m_endDate < endDate)
-    endDate = m_endDate;
-
   weekendOptionE option(weekendOption());
+
+  QDate endDate(_endDate);
+  if (willEnd() && m_endDate < endDate) {
+    // consider the adjusted end date instead of the plain end date
+    endDate = adjustedDate(m_endDate, option);
+  }
+
   QDate start_date(adjustedDate(startDate(), option));
-  // if the period specified by the parameters and the period
+  // if the period specified by the parameters and the adjusted period
   // defined for this schedule don't overlap, then the list remains empty
-  if ((willEnd() && m_endDate < _startDate)
+  if ((willEnd() && adjustedDate(m_endDate, option) < _startDate)
       || start_date > endDate)
     return theDates;
 
