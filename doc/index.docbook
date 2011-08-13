@@ -18,7 +18,9 @@
   <!ENTITY userlist "<email>kmymoney@kde.org</email>">
   <!ENTITY olduserlist "<email>kmymoney2-user@lists.sourceforge.net</email>">
 
-  <!-- the following author entities need to be added to contributor.entities in 4.5 branch and trunk of svn -->
+  <!-- the following author entities have been added to contributor.entities in 4.5 branch and trunk of svn 
+       they can be removed from this file once they are present in the kdelibs minimum version required by &kappname; -->
+  
   <!ENTITY Michael.T.Edwardes "<personname><firstname>Michael</firstname><othername>T.</othername><surname>Edwardes</surname></personname>">
   <!ENTITY Michael.T.Edwardes.mail "<email>mte@users.sourceforge.net</email>">
 
@@ -55,9 +57,35 @@
   <!ENTITY Cristian.Onet "<personname><firstname>Cristian</firstname><surname>Oneț</surname></personname>">
   <!ENTITY Cristian.Onet.mail "<email>onet.cristian@gmail.com</email>">
 
-  <!-- the following author entities need to be added to contributor.entities in trunk and probably 4.6 branch of git -->
+  <!-- the following author entity has been added to contributor.entities in trunk and probably 4.6 branch of svn 
+       it can be removed from this file once it is present in the kdelibs minimum version required by &kappname; -->
+
   <!ENTITY Allan.Anderson "<personname><firstname>Allan</firstname><surname>Anderson</surname></personname>">
   <!ENTITY Allan.Anderson.mail "<email>agander93@gmail.com</email>">
+
+  <!-- the following entities have been added to user.entities in trunk and probably 4.7 branch of svn
+       they are only in the french branch, and are required for processing of the french documentation
+       they can be removed from this file once they are present in the kdelibs minimum version required by &kappname; -->
+
+  <!ENTITY traducteurJoseFournier
+     '<othercredit role="translator"><firstname>José</firstname><surname>Fournier</surname>
+      <affiliation><address><email>jaaf.forums@zoraldia.com</email></address></affiliation>
+      <contrib>Traduction française&nbsp;</contrib></othercredit>'>
+  <!ENTITY relecteurJoseFournier
+     '<othercredit role="reviewer"><firstname>José</firstname><surname>Fournier</surname>
+      <affiliation><address><email>jaaf.forums@zoraldia.com</email></address></affiliation>
+      <contrib>Relecture de la documentation française&nbsp;</contrib></othercredit>'>
+  <!ENTITY JoseFournier 'José Fournier <email>jaaf.forums@zoraldia.com</email>'>
+
+  <!ENTITY traducteurSimonDepiets
+     '<othercredit role="translator"><firstname>Simon</firstname><surname>Depiets</surname>
+      <affiliation><address><email>2df@tuxfamily.org</email></address></affiliation>
+      <contrib>Traduction française&nbsp;</contrib></othercredit>'>
+  <!ENTITY relecteurSimonDepiets
+     '<othercredit role="reviewer"><firstname>Simon</firstname><surname>Depiets</surname>
+      <affiliation><address><email>2df@tuxfamily.org</email></address></affiliation>
+      <contrib>Relecture de la documentation française&nbsp;</contrib></othercredit>'>
+  <!ENTITY SimonDepiets    'Simon Depiets <email>2df@tuxfamily.org</email>'>
 
 <!-- the chapters -->
   <!ENTITY introduction SYSTEM "introduction.docbook">
