@@ -1608,5 +1608,20 @@ void MyMoneyScheduleTest::testReplaceId()
 
 }
 
+void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
+{
+  MyMoneySchedule s;
+
+  QDate endDate(2011, 8, 13); // this is a nonprocessing day because it's a Saturday
+  s.setStartDate(endDate.addMonths(-1));
+  s.setOccurrence(MyMoneySchedule::OCCUR_MONTHLY);
+  s.setEndDate(endDate);
+  s.setWeekendOption(MyMoneySchedule::MoveAfter);
+  s.setNextDueDate(endDate);  // the next due date is on this day but the policy is to move the schedule to the next processing day
+
+  // the payment should be found between the respective date and one month after
+  QVERIFY(s.paymentDates(endDate, endDate.addMonths(1)).count() == 1);
+}
+
 #include "mymoneyscheduletest.moc"
 

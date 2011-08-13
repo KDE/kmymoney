@@ -48,6 +48,7 @@ private slots:
   void testPaidEarlyOneTime();
   void testAdjustedNextPayment();
   void testReplaceId();
+  void testAdjustedWhenItWillEnd();
 };
 
 #endif
