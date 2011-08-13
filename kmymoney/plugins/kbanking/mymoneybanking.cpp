@@ -313,7 +313,7 @@ bool KBankingPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContai
 
 AB_ACCOUNT* KBankingPlugin::aqbAccount(const MyMoneyAccount& acc) const
 {
-  if(m_kbanking == 0)
+  if (m_kbanking == 0)
     return 0;
 
   AB_ACCOUNT *ab_acc = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), m_kbanking->mappingId(acc).toUtf8().data());
