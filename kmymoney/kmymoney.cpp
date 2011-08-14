@@ -181,7 +181,8 @@ enum backupStateE {
 class KMyMoneyApp::Private
 {
 public:
-  Private() :
+  Private(KMyMoneyApp *app) :
+      q(app),
       m_ft(0),
       m_moveToAccountSelector(0),
       m_statementXMLindex(0),
@@ -210,6 +211,7 @@ public:
     m_processingDays.resize(8);
   }
 
+  void closeFile(void);
   void unlinkStatementXML(void);
   void moveInvestmentTransaction(const QString& fromId,
                                  const QString& toId,
@@ -218,6 +220,11 @@ public:
       const QList<QPair<MyMoneyTransaction, MyMoneySplit> > &transactions,
       const MyMoneyMoney &amount);
 
+
+  /**
+    * The public interface.
+    */
+  KMyMoneyApp * const q;
 
   MyMoneyFileTransaction*       m_ft;
   kMyMoneyAccountSelector*      m_moveToAccountSelector;
@@ -330,7 +337,7 @@ public:
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     KXmlGuiWindow(parent),
-    d(new Private)
+    d(new Private(this))
 {
   new KmymoneyAdaptor(this);
   QDBusConnection::sessionBus().registerObject("/KMymoney", this);
@@ -1825,27 +1832,7 @@ void KMyMoneyApp::slotFileClose(void)
       slotFileSave();
   }
 
-  slotSelectAccount();
-  slotSelectInstitution();
-  slotSelectInvestment();
-  slotSelectSchedule();
-  slotSelectCurrency();
-  slotSelectBudget(QList<MyMoneyBudget>());
-  slotSelectPayees(QList<MyMoneyPayee>());
-  slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());
-
-  d->m_reconciliationAccount = MyMoneyAccount();
-  d->m_myMoneyView->finishReconciliation(d->m_reconciliationAccount);
-
-  d->m_myMoneyView->closeFile();
-  d->m_fileName = KUrl();
-  updateCaption();
-
-  // just create a new balance warning object
-  delete d->m_balanceWarning;
-  d->m_balanceWarning = new KBalanceWarning(this);
-
-  emit fileLoaded(d->m_fileName);
+  d->closeFile();
 }
 
 void KMyMoneyApp::slotFileQuit(void)
@@ -2183,8 +2170,7 @@ void KMyMoneyApp::slotGncImport(void)
         slotFileSave();
         break;
       case KMessageBox::No:
-        d->m_myMoneyView->closeFile();
-        d->m_fileName = KUrl();
+        d->closeFile();
         break;
       default:
         return;
@@ -2199,10 +2185,6 @@ void KMyMoneyApp::slotGncImport(void)
   dialog->setMode(KFile::File | KFile::ExistingOnly);
 
   if (dialog->exec() == QDialog::Accepted) {
-//    slotFileClose();
-//    if(d->myMoneyView->fileOpen())
-//      return;
-
     // call the importer
     d->m_myMoneyView->readFile(dialog->selectedUrl());
     // imported files don't have a name
@@ -7027,6 +7009,31 @@ void KMyMoneyApp::Private::unlinkStatementXML(void)
     d.remove(QString("/home/thb/%1").arg(d[i]));
   }
   m_statementXMLindex = 0;
+}
+
+void KMyMoneyApp::Private::closeFile(void)
+{
+  q->slotSelectAccount();
+  q->slotSelectInstitution();
+  q->slotSelectInvestment();
+  q->slotSelectSchedule();
+  q->slotSelectCurrency();
+  q->slotSelectBudget(QList<MyMoneyBudget>());
+  q->slotSelectPayees(QList<MyMoneyPayee>());
+  q->slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());
+
+  m_reconciliationAccount = MyMoneyAccount();
+  m_myMoneyView->finishReconciliation(m_reconciliationAccount);
+
+  m_myMoneyView->closeFile();
+  m_fileName = KUrl();
+  q->updateCaption();
+
+  // just create a new balance warning object
+  delete m_balanceWarning;
+  m_balanceWarning = new KBalanceWarning(q);
+
+  emit q->fileLoaded(m_fileName);
 }
 
 #include "kmymoney.moc"
