@@ -39,7 +39,7 @@
 // dialog constructor
 KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *)
 {
-  setButtons(Ok | Cancel | Help);
+  setButtons(Ok | Help);
   m_widget = new KGncImportOptionsDlgDecl();
   setMainWidget(m_widget);
 
