@@ -356,9 +356,9 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
             count += loadSubAccounts(selector, subItem, tmpKey, acc.accountList());
           }
 
-          //disable the item if it has been added only because a subaccount matches the type
+          // the item is not selectable if it has been added only because a subaccount matches the type
           if (!m_typeList.contains(acc.accountType())) {
-            subItem->setDisabled(true);
+            selector->setSelectable(subItem, false);
           }
           subItem->sortChildren(1, Qt::AscendingOrder);
         }
@@ -453,9 +453,9 @@ int AccountSet::loadSubAccounts(kMyMoneyAccountSelector* selector, QTreeWidgetIt
         count += loadSubAccounts(selector, item, tmpKey, acc.accountList());
       }
 
-      //disable the item if it has been added only because a subaccount matches the type
+      // the item is not selectable if it has been added only because a subaccount matches the type
       if (!m_typeList.contains(acc.accountType())) {
-        item->setDisabled(true);
+        selector->setSelectable(item, false);
       }
       item->sortChildren(1, Qt::AscendingOrder);
     }
