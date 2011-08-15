@@ -1267,6 +1267,7 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
   if (bAnonymize) setFileHideFactor();
   //m_defaultPayee = createPayee (i18n("Unknown payee"));
 
+  MyMoneyFile::instance()->attachStorage(m_storage);
   MyMoneyFileTransaction ft;
   m_xr = new XmlReader(this);
   try {
@@ -1277,6 +1278,7 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
     KMessageBox::error(0, i18n("Import failed:\n\n%1", e->what()), PACKAGE);
     qWarning("%s", qPrintable(e->what()));
   } // end catch
+  MyMoneyFile::instance()->detachStorage(m_storage);
   signalProgress(0, 1, i18n("Import complete"));  // switch off progress bar
   delete m_xr;
   qDebug("Exiting gnucash importer");
