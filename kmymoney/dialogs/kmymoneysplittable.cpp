@@ -579,8 +579,9 @@ void kMyMoneySplitTable::updateTransactionTableSize(void)
   m_maxRows = splitCount;
 }
 
-void kMyMoneySplitTable::resizeEvent(QResizeEvent* /* ev */)
+void kMyMoneySplitTable::resizeEvent(QResizeEvent* ev)
 {
+  QTableWidget::resizeEvent(ev);
   updateTransactionTableSize();
 }
 
