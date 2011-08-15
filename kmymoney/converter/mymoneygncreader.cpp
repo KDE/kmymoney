@@ -2270,7 +2270,7 @@ QString MyMoneyGncReader::buildReportSection(const QString& source)
       s.append(QString::number(m_scheduleCount) + i18n(" schedules\n"));
       s.append("\n\n");
       if (m_ccCount == 0) {
-        s.append(i18n("No inconsistencies were detected"));
+        s.append(i18n("No inconsistencies were detected\n"));
       } else {
         s.append(QString::number(m_ccCount) + i18n(" inconsistencies were detected and corrected\n"));
         more = true;
