@@ -76,7 +76,7 @@ InvestProcessing::InvestProcessing()
   m_amountColumn = 0;
   m_dateColumn = 0;
   m_feeColumn = 0;
-	m_memoColumn = 0;//  Bug 280117
+  m_memoColumn = 0;//  Bug 280117
   m_priceColumn = 0;
   m_quantityColumn = 0;
   m_typeColumn = 0;
