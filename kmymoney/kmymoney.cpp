@@ -3319,7 +3319,7 @@ void KMyMoneyApp::slotAccountDelete(void)
             MyMoneyBudget::AccountGroup fromBudget = b.account(d->m_selectedAccount.id());
             MyMoneyBudget::AccountGroup toBudget = b.account(categoryId);
             toBudget += fromBudget;
-            b.setAccount(toBudget, toBudget.id());
+            b.setAccount(toBudget, categoryId);
             b.removeReference(d->m_selectedAccount.id());
             file->modifyBudget(b);
 
