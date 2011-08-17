@@ -4603,15 +4603,31 @@ void KMyMoneyApp::slotPayeeDelete(void)
     }
 //     kDebug() << "[KPayeesView::slotDeletePayee]  " << used_schedules.count() << " schedules use one of the selected payees";
 
+    // and a list of all loan accounts that references one of the payees
+    QList<MyMoneyAccount> allAccounts;
+    QList<MyMoneyAccount> usedAccounts;
+    file->accountList(allAccounts);
+    foreach (const MyMoneyAccount &account, allAccounts) {
+      if (account.isLoan()) {
+        MyMoneyAccountLoan loanAccount(account);
+        foreach (const MyMoneyPayee &payee, d->m_selectedPayees) {
+          if (loanAccount.hasReferenceTo(payee.id())) {
+            usedAccounts.append(account);
+          }
+        }
+      }
+    }
+
+
     MyMoneyPayee newPayee;
     bool addToMatchList = false;
     // if at least one payee is still referenced, we need to reassign its transactions first
-    if (!translist.isEmpty() || !used_schedules.isEmpty()) {
+    if (!translist.isEmpty() || !used_schedules.isEmpty() || !usedAccounts.isEmpty()) {
       // show error message if no payees remain
       if (remainingPayees.isEmpty()) {
-        KMessageBox::sorry(this, i18n("At least one transaction/scheduled transaction is still referenced by a payee. "
+        KMessageBox::sorry(this, i18n("At least one transaction/scheduled transaction or loan account is still referenced by a payee. "
                                       "Currently you have all payees selected. However, at least one payee must remain so "
-                                      "that the transaction/scheduled transaction can be reassigned."));
+                                      "that the transaction/scheduled transaction or loan account can be reassigned."));
         return;
       }
 
@@ -4663,6 +4679,14 @@ void KMyMoneyApp::slotPayeeDelete(void)
           (*it).setTransaction(trans);
           file->modifySchedule(*it);  // modify the schedule in the MyMoney engine
         } // for - Schedules
+
+        // reassign the payees in the loans that reference the deleted payees
+        foreach (const MyMoneyAccount &account, usedAccounts) {
+          MyMoneyAccountLoan loanAccount(account);
+          loanAccount.setPayee(payee_id);
+          file->modifyAccount(loanAccount);
+        }
+
       } catch (MyMoneyException *e) {
         KMessageBox::detailedSorry(0, i18n("Unable to reassign payee of transaction/split"),
                                    i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));

@@ -292,10 +292,7 @@ void ObjectInfoTable::constructAccountLoanTable(void)
     ReportAccount account = *it_account;
     MyMoneyAccountLoan loan = *it_account;
 
-    if (m_config.includes(account) &&
-        (account.accountType() == MyMoneyAccount::Loan
-         || account.accountType() == MyMoneyAccount::AssetLoan)
-        && !account.isClosed()) {
+    if (m_config.includes(account) && account.isLoan() && !account.isClosed()) {
       //convert to base currency if needed
       MyMoneyMoney xr = MyMoneyMoney(1, 1);
       if (m_config.isConvertCurrency() && account.isForeignCurrency()) {
