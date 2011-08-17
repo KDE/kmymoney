@@ -1824,9 +1824,23 @@ const QStringList MyMoneyFile::consistencyCheck(void)
 
     // see if it is a loan account. if so, remember the assigned interest account
     if ((*it_a).isLoan()) {
-      const MyMoneyAccountLoan* loan = dynamic_cast<MyMoneyAccountLoan*>(&(*it_a));
-      if (!loan->interestAccountId().isEmpty())
-        interestAccounts[loan->interestAccountId()] = true;
+      MyMoneyAccountLoan loan(*it_a);
+      if (!loan.interestAccountId().isEmpty()) {
+        interestAccounts[loan.interestAccountId()] = true;
+      }
+      try {
+        payee(loan.payee());
+      } catch (MyMoneyException *e) {
+        problemCount++;
+        if (problemAccount != (*it_a).name()) {
+          problemAccount = (*it_a).name();
+          rc << i18n("* Problem with account '%1'", problemAccount);
+        }
+        rc << i18n("  * The payee with id %1 referenced by the loan does not exist anymore.", loan.payee());
+        rc << i18n("    The payee will be romved.");
+        // remove the payee - the account will be modified in the engine later
+        (*it_a).deletePair("payee");
+      }
     }
 
     // check for clear text online password in the online settings
