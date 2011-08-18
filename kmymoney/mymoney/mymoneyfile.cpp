@@ -1837,7 +1837,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
           rc << i18n("* Problem with account '%1'", problemAccount);
         }
         rc << i18n("  * The payee with id %1 referenced by the loan does not exist anymore.", loan.payee());
-        rc << i18n("    The payee will be romved.");
+        rc << i18n("    The payee will be removed.");
         // remove the payee - the account will be modified in the engine later
         (*it_a).deletePair("payee");
       }
