@@ -735,26 +735,26 @@ void StdTransactionEditor::createEditWidgets(void)
     account->setClickMessage(i18n("Account"));
     account->setObjectName(QLatin1String("Account"));
     m_editWidgets["account"] = account;
-    connect(account, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
-    connect(account, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateAccount(const QString&)));
+    connect(account, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+    connect(account, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateAccount(QString)));
   }
 
   KMyMoneyPayeeCombo* payee = new KMyMoneyPayeeCombo;
   payee->setClickMessage(i18n("Payer/Receiver"));
   payee->setObjectName(QLatin1String("Payee"));
   m_editWidgets["payee"] = payee;
-  connect(payee, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
-  connect(payee, SIGNAL(createItem(const QString&, QString&)), this, SIGNAL(createPayee(const QString&, QString&)));
+  connect(payee, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(payee, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createPayee(QString,QString&)));
   connect(payee, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
-  connect(payee, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdatePayee(const QString&)));
+  connect(payee, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdatePayee(QString)));
 
   KMyMoneyCategory* category = new KMyMoneyCategory(0, true);
   category->setClickMessage(i18n("Category/Account"));
   category->setObjectName(QLatin1String("Category/Account"));
   m_editWidgets["category"] = category;
-  connect(category, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateCategory(const QString&)));
-  connect(category, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
-  connect(category, SIGNAL(createItem(const QString&, QString&)), this, SLOT(slotCreateCategory(const QString&, QString&)));
+  connect(category, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateCategory(QString)));
+  connect(category, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(category, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateCategory(QString,QString&)));
   connect(category, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(category->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditSplits()));
   // initially disable the split button since we don't have an account set
@@ -792,7 +792,7 @@ void StdTransactionEditor::createEditWidgets(void)
     number->setClickMessage(i18n("Number"));
     number->setObjectName(QLatin1String("Number"));
     m_editWidgets["number"] = number;
-    connect(number, SIGNAL(lineChanged(const QString&)), this, SLOT(slotNumberChanged(const QString&)));
+    connect(number, SIGNAL(lineChanged(QString)), this, SLOT(slotNumberChanged(QString)));
     // number->installEventFilter(this);
   }
 
@@ -800,28 +800,28 @@ void StdTransactionEditor::createEditWidgets(void)
   m_editWidgets["postdate"] = postDate;
   postDate->setObjectName(QLatin1String("PostDate"));
   postDate->setDate(QDate());
-  connect(postDate, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotUpdateButtonState()));
+  connect(postDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotUpdateButtonState()));
 
   kMyMoneyEdit* value = new kMyMoneyEdit;
   m_editWidgets["amount"] = value;
   value->setObjectName(QLatin1String("Amount"));
   value->setResetButtonVisible(false);
-  connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateAmount(const QString&)));
-  connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
+  connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateAmount(QString)));
+  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
 
   value = new kMyMoneyEdit;
   m_editWidgets["payment"] = value;
   value->setObjectName(QLatin1String("Payment"));
   value->setResetButtonVisible(false);
-  connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdatePayment(const QString&)));
-  connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
+  connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdatePayment(QString)));
+  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
 
   value = new kMyMoneyEdit;
   m_editWidgets["deposit"] = value;
   value->setObjectName(QLatin1String("Deposit"));
   value->setResetButtonVisible(false);
-  connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateDeposit(const QString&)));
-  connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
+  connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateDeposit(QString)));
+  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyCashFlowCombo* cashflow = new KMyMoneyCashFlowCombo(0, m_account.accountGroup());
   m_editWidgets["cashflow"] = cashflow;
@@ -832,7 +832,7 @@ void StdTransactionEditor::createEditWidgets(void)
   KMyMoneyReconcileCombo* reconcile = new KMyMoneyReconcileCombo;
   m_editWidgets["status"] = reconcile;
   reconcile->setObjectName(QLatin1String("Reconcile"));
-  connect(reconcile, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateButtonState()));
+  connect(reconcile, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyRegister::QWidgetContainer::iterator it_w;
   for (it_w = m_editWidgets.begin(); it_w != m_editWidgets.end(); ++it_w) {
@@ -1888,7 +1888,7 @@ int StdTransactionEditor::slotEditSplits(void)
                                  m_priceInfo,
                                  m_regForm);
       connect(dlg, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
-      connect(dlg, SIGNAL(createCategory(MyMoneyAccount&, const MyMoneyAccount&)), this, SIGNAL(createCategory(MyMoneyAccount&, const MyMoneyAccount&)));
+      connect(dlg, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)), this, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)));
 
       if ((rc = dlg->exec()) == KDialog::Accepted) {
         m_transaction = dlg->transaction();

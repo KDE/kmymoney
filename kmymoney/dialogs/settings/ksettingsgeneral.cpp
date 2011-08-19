@@ -37,10 +37,10 @@ KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
   kcfg_StartDate->hide();
 
   // setup connections, so that the sort optios get loaded once the edit fields are filled
-  connect(kcfg_StartDate, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotLoadStartDate(const QDate&)));
+  connect(kcfg_StartDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotLoadStartDate(QDate)));
 
   // setup connections, so that changes by the user are forwarded to the (hidden) edit fields
-  connect(m_startDateEdit, SIGNAL(dateChanged(const QDate&)), kcfg_StartDate, SLOT(setDate(const QDate&)));
+  connect(m_startDateEdit, SIGNAL(dateChanged(QDate)), kcfg_StartDate, SLOT(setDate(QDate)));
 }
 
 KSettingsGeneral::~KSettingsGeneral()
@@ -50,7 +50,7 @@ KSettingsGeneral::~KSettingsGeneral()
 void KSettingsGeneral::slotLoadStartDate(const QDate&)
 {
   // only need this once
-  disconnect(kcfg_StartDate, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotLoadStartDate(const QDate&)));
+  disconnect(kcfg_StartDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotLoadStartDate(QDate)));
   m_startDateEdit->setDate(kcfg_StartDate->date());
 }
 

@@ -85,13 +85,13 @@ KExportDlg::KExportDlg(QWidget *parent)
   connect(m_qbuttonCancel, SIGNAL(clicked()), this, SLOT(reject()));
 
   // connect the change signals to the check slot and perform initial check
-  connect(m_qlineeditFile, SIGNAL(textChanged(const QString&)), this, SLOT(checkData()));
+  connect(m_qlineeditFile, SIGNAL(textChanged(QString)), this, SLOT(checkData()));
   connect(m_qcheckboxAccount, SIGNAL(toggled(bool)), this, SLOT(checkData()));
   connect(m_qcheckboxCategories, SIGNAL(toggled(bool)), this, SLOT(checkData()));
-  connect(m_accountComboBox, SIGNAL(accountSelected(const QString&)), this, SLOT(checkData(const QString&)));
+  connect(m_accountComboBox, SIGNAL(accountSelected(QString)), this, SLOT(checkData(QString)));
   connect(m_profileComboBox, SIGNAL(activated(int)), this, SLOT(checkData()));
-  connect(m_kmymoneydateStart, SIGNAL(dateChanged(const QDate&)), this, SLOT(checkData()));
-  connect(m_kmymoneydateEnd, SIGNAL(dateChanged(const QDate&)), this, SLOT(checkData()));
+  connect(m_kmymoneydateStart, SIGNAL(dateChanged(QDate)), this, SLOT(checkData()));
+  connect(m_kmymoneydateEnd, SIGNAL(dateChanged(QDate)), this, SLOT(checkData()));
 
   checkData(QString());
 }

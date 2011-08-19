@@ -241,7 +241,7 @@ void kMyMoneyEdit::init(void)
   if (grp.readEntry("DontShowCalculatorButton", false) == true)
     setCalculatorButtonVisible(false);
 
-  connect(m_edit, SIGNAL(textChanged(const QString&)), this, SLOT(theTextChanged(const QString&)));
+  connect(m_edit, SIGNAL(textChanged(QString)), this, SLOT(theTextChanged(QString)));
   connect(m_calculator, SIGNAL(signalResultAvailable()), this, SLOT(slotCalculatorResult()));
   connect(m_calcButton, SIGNAL(clicked()), this, SLOT(slotCalculatorOpen()));
   connect(m_resetButton, SIGNAL(clicked()), this, SLOT(resetText()));

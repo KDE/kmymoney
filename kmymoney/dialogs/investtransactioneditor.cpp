@@ -208,34 +208,34 @@ void InvestTransactionEditor::createEditWidgets(void)
   KMyMoneySecurity* security = new KMyMoneySecurity;
   security->setClickMessage(i18n("Security"));
   m_editWidgets["security"] = security;
-  connect(security, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateSecurity(const QString&)));
-  connect(security, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
-  connect(security, SIGNAL(createItem(const QString&, QString&)), this, SLOT(slotCreateSecurity(const QString&, QString&)));
+  connect(security, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateSecurity(QString)));
+  connect(security, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(security, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateSecurity(QString,QString&)));
   connect(security, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   KMyMoneyCategory* asset = new KMyMoneyCategory(0, false);
   asset->setClickMessage(i18n("Asset account"));
   m_editWidgets["asset-account"] = asset;
-  connect(asset, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
+  connect(asset, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
   connect(asset, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   KMyMoneyCategory* fees = new KMyMoneyCategory(0, true);
   fees->setClickMessage(i18n("Fees"));
   m_editWidgets["fee-account"] = fees;
-  connect(fees, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateFeeCategory(const QString&)));
-  connect(fees, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
-  connect(fees, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateFeeVisibility(const QString&)));
-  connect(fees, SIGNAL(createItem(const QString&, QString&)), this, SLOT(slotCreateFeeCategory(const QString&, QString&)));
+  connect(fees, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateFeeCategory(QString)));
+  connect(fees, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(fees, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateFeeVisibility(QString)));
+  connect(fees, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateFeeCategory(QString,QString&)));
   connect(fees, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(fees->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditFeeSplits()));
 
   KMyMoneyCategory* interest = new KMyMoneyCategory(0, true);
   interest->setClickMessage(i18n("Interest"));
   m_editWidgets["interest-account"] = interest;
-  connect(interest, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateInterestCategory(const QString&)));
-  connect(interest, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
-  connect(interest, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateInterestVisibility(const QString&)));
-  connect(interest, SIGNAL(createItem(const QString&, QString&)), this, SLOT(slotCreateInterestCategory(const QString&, QString&)));
+  connect(interest, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateInterestCategory(QString)));
+  connect(interest, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(interest, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateInterestVisibility(QString)));
+  connect(interest, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateInterestCategory(QString,QString&)));
   connect(interest, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(interest->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditInterestSplits()));
 
@@ -247,36 +247,36 @@ void InvestTransactionEditor::createEditWidgets(void)
   value->setClickMessage(i18n("Shares"));
   value->setResetButtonVisible(false);
   m_editWidgets["shares"] = value;
-  connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
-  connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateTotalAmount()));
+  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateTotalAmount()));
 
   value = new kMyMoneyEdit;
   value->setClickMessage(i18n("Price"));
   value->setResetButtonVisible(false);
   value->setPrecision(KMyMoneyGlobalSettings::pricePrecision());
   m_editWidgets["price"] = value;
-  connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
-  connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateTotalAmount()));
+  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateTotalAmount()));
 
   value = new kMyMoneyEdit;
   // TODO once we have the selected transactions as array of Transaction
   // we can allow multiple splits for fee and interest
   value->setResetButtonVisible(false);
   m_editWidgets["fee-amount"] = value;
-  connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
-  connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateTotalAmount()));
+  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateTotalAmount()));
 
   value = new kMyMoneyEdit;
   // TODO once we have the selected transactions as array of Transaction
   // we can allow multiple splits for fee and interest
   value->setResetButtonVisible(false);
   m_editWidgets["interest-amount"] = value;
-  connect(value, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateButtonState()));
-  connect(value, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateTotalAmount()));
+  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateTotalAmount()));
 
   KMyMoneyReconcileCombo* reconcile = new KMyMoneyReconcileCombo;
   m_editWidgets["status"] = reconcile;
-  connect(reconcile, SIGNAL(itemSelected(const QString&)), this, SLOT(slotUpdateButtonState()));
+  connect(reconcile, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyRegister::QWidgetContainer::iterator it_w;
   for (it_w = m_editWidgets.begin(); it_w != m_editWidgets.end(); ++it_w) {

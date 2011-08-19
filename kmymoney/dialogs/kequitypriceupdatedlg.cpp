@@ -132,14 +132,14 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   connect(btnUpdateSelected, SIGNAL(clicked()), this, SLOT(slotUpdateSelectedClicked()));
   connect(btnUpdateAll, SIGNAL(clicked()), this, SLOT(slotUpdateAllClicked()));
 
-  connect(&m_webQuote, SIGNAL(quote(const QString&, const QString&, const QDate&, const double&)),
-          this, SLOT(slotReceivedQuote(const QString&, const QString&, const QDate&, const double&)));
-  connect(&m_webQuote, SIGNAL(failed(const QString&, const QString&)),
-          this, SLOT(slotQuoteFailed(const QString&, const QString&)));
-  connect(&m_webQuote, SIGNAL(status(const QString&)),
-          this, SLOT(logStatusMessage(const QString&)));
-  connect(&m_webQuote, SIGNAL(error(const QString&)),
-          this, SLOT(logErrorMessage(const QString&)));
+  connect(&m_webQuote, SIGNAL(quote(QString,QString,QDate,double)),
+          this, SLOT(slotReceivedQuote(QString,QString,QDate,double)));
+  connect(&m_webQuote, SIGNAL(failed(QString,QString)),
+          this, SLOT(slotQuoteFailed(QString,QString)));
+  connect(&m_webQuote, SIGNAL(status(QString)),
+          this, SLOT(logStatusMessage(QString)));
+  connect(&m_webQuote, SIGNAL(error(QString)),
+          this, SLOT(logErrorMessage(QString)));
 
   connect(lvEquityList, SIGNAL(itemSelectionChanged()), this, SLOT(slotUpdateSelection()));
 

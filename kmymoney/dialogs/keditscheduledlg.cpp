@@ -150,8 +150,8 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
 
   connect(m_RemainingEdit, SIGNAL(valueChanged(int)),
           this, SLOT(slotRemainingChanged(int)));
-  connect(m_FinalPaymentEdit, SIGNAL(dateChanged(const QDate&)),
-          this, SLOT(slotEndDateChanged(const QDate&)));
+  connect(m_FinalPaymentEdit, SIGNAL(dateChanged(QDate)),
+          this, SLOT(slotEndDateChanged(QDate)));
   connect(m_frequencyEdit, SIGNAL(itemSelected(int)),
           this, SLOT(slotFrequencyChanged(int)));
   connect(m_frequencyNoEdit, SIGNAL(valueChanged(int)),
@@ -199,10 +199,10 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
     connect(editor, SIGNAL(returnPressed()), buttonOk, SLOT(animateClick()));
 
     connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), editor, SLOT(slotReloadEditWidgets()));
-    // connect(editor, SIGNAL(finishEdit(const KMyMoneyRegister::SelectedTransactions&)), this, SLOT(slotLeaveEditMode(const KMyMoneyRegister::SelectedTransactions&)));
-    connect(editor, SIGNAL(createPayee(const QString&, QString&)), kmymoney, SLOT(slotPayeeNew(const QString&, QString&)));
-    connect(editor, SIGNAL(createCategory(MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotCategoryNew(MyMoneyAccount&, const MyMoneyAccount&)));
-    connect(editor, SIGNAL(createSecurity(MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotInvestmentNew(MyMoneyAccount&, const MyMoneyAccount&)));
+    // connect(editor, SIGNAL(finishEdit(KMyMoneyRegister::SelectedTransactions)), this, SLOT(slotLeaveEditMode(KMyMoneyRegister::SelectedTransactions)));
+    connect(editor, SIGNAL(createPayee(QString,QString&)), kmymoney, SLOT(slotPayeeNew(QString,QString&)));
+    connect(editor, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)), kmymoney, SLOT(slotCategoryNew(MyMoneyAccount&,MyMoneyAccount)));
+    connect(editor, SIGNAL(createSecurity(MyMoneyAccount&,MyMoneyAccount)), kmymoney, SLOT(slotInvestmentNew(MyMoneyAccount&,MyMoneyAccount)));
     connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), editor, SLOT(slotReloadEditWidgets()));
     connect(editor, SIGNAL(operationTypeChanged(int)), this, SLOT(slotFilterPaymentType(int)));
 
@@ -299,7 +299,7 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
     // connect the postdate modification signal to our update routine
     kMyMoneyDateInput* dateEdit = dynamic_cast<kMyMoneyDateInput*>(editor->haveWidget("postdate"));
     if (dateEdit)
-      connect(dateEdit, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotPostDateChanged(const QDate&)));
+      connect(dateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(slotPostDateChanged(QDate)));
 
 
     m_nameEdit->setFocus();

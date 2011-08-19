@@ -70,8 +70,8 @@ KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
   // make sure, the back button does not clear fields
   setOption(QWizard::IndependentPages, true);
 
-  // connect(m_payeeEdit, SIGNAL(newPayee(const QString&)), this, SLOT(slotNewPayee(const QString&)));
-  connect(m_namePage->m_payeeEdit, SIGNAL(createItem(const QString&, QString&)), this, SIGNAL(createPayee(const QString&, QString&)));
+  // connect(m_payeeEdit, SIGNAL(newPayee(QString)), this, SLOT(slotNewPayee(QString)));
+  connect(m_namePage->m_payeeEdit, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createPayee(QString,QString&)));
 
   connect(m_additionalFeesPage, SIGNAL(newCategory(MyMoneyAccount&)), this, SIGNAL(newCategory(MyMoneyAccount&)));
 

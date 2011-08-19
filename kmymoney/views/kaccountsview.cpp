@@ -74,7 +74,7 @@ KAccountsView::KAccountsView(QWidget *parent) :
 
   connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabCurrentChanged(QWidget*)));
 
-  connect(Models::instance()->accountsModel(), SIGNAL(netWorthChanged(const MyMoneyMoney&)), this, SLOT(slotNetWorthChanged(const MyMoneyMoney&)));
+  connect(Models::instance()->accountsModel(), SIGNAL(netWorthChanged(MyMoneyMoney)), this, SLOT(slotNetWorthChanged(MyMoneyMoney)));
 
   // the proxy filter model
   m_filterProxyModel = new AccountsViewFilterProxyModel(this);
@@ -107,26 +107,26 @@ KAccountsView::KAccountsView(QWidget *parent) :
   m_equitiesList->setContextMenuPolicy(Qt::CustomContextMenu);
   m_equitiesList->setWordWrap(true);
 
-  connect(m_searchWidget, SIGNAL(textChanged(const QString &)), m_filterProxyModel, SLOT(setFilterFixedString(const QString &)));
+  connect(m_searchWidget, SIGNAL(textChanged(QString)), m_filterProxyModel, SLOT(setFilterFixedString(QString)));
 
   // let the model know if the item is expanded or collapsed
-  connect(m_accountTree, SIGNAL(collapsed(const QModelIndex &)), m_filterProxyModel, SLOT(collapsed(const QModelIndex &)));
-  connect(m_accountTree, SIGNAL(expanded(const QModelIndex &)), m_filterProxyModel, SLOT(expanded(const QModelIndex &)));
+  connect(m_accountTree, SIGNAL(collapsed(QModelIndex)), m_filterProxyModel, SLOT(collapsed(QModelIndex)));
+  connect(m_accountTree, SIGNAL(expanded(QModelIndex)), m_filterProxyModel, SLOT(expanded(QModelIndex)));
 
-  connect(m_accountTree, SIGNAL(selectObject(const MyMoneyObject&)), this, SIGNAL(selectObject(const MyMoneyObject&)));
-  connect(m_accountTree, SIGNAL(openContextMenu(const MyMoneyObject&)), this, SIGNAL(openContextMenu(const MyMoneyObject&)));
-  connect(m_accountTree, SIGNAL(openObject(const MyMoneyObject&)), this, SIGNAL(openObject(const MyMoneyObject&)));
+  connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), this, SIGNAL(selectObject(MyMoneyObject)));
+  connect(m_accountTree, SIGNAL(openContextMenu(MyMoneyObject)), this, SIGNAL(openContextMenu(MyMoneyObject)));
+  connect(m_accountTree, SIGNAL(openObject(MyMoneyObject)), this, SIGNAL(openObject(MyMoneyObject)));
 
   connect(m_assetsList, SIGNAL(itemSelectionChanged()), this, SLOT(slotAssetsSelectIcon()));
-  connect(m_assetsList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotAssetsOpenContextMenu(const QPoint&)));
+  connect(m_assetsList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotAssetsOpenContextMenu(QPoint)));
   connect(m_assetsList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotOpenObject(QListWidgetItem*)));
 
   connect(m_liabilitiesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotLiabilitiesSelectIcon()));
-  connect(m_liabilitiesList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotLiabilitiesOpenContextMenu(const QPoint&)));
+  connect(m_liabilitiesList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotLiabilitiesOpenContextMenu(QPoint)));
   connect(m_liabilitiesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotOpenObject(QListWidgetItem*)));
 
   connect(m_equitiesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotEquitiesSelectIcon()));
-  connect(m_equitiesList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotEquitiesOpenContextMenu(const QPoint&)));
+  connect(m_equitiesList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotEquitiesOpenContextMenu(QPoint)));
   connect(m_equitiesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotOpenObject(QListWidgetItem*)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadAccounts()));

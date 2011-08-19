@@ -37,16 +37,16 @@ KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyApp* app, KMyMoneyVie
     m_app(app),
     m_view(view)
 {
-  connect(app, SIGNAL(accountSelected(const MyMoneyAccount&)), this, SIGNAL(accountSelected(const MyMoneyAccount&)));
-  connect(app, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), this, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)));
-  connect(app, SIGNAL(accountReconciled(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&, const MyMoneyMoney&, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >&)),
-          this, SIGNAL(accountReconciled(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&, const MyMoneyMoney&, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >&)));
+  connect(app, SIGNAL(accountSelected(MyMoneyAccount)), this, SIGNAL(accountSelected(MyMoneyAccount)));
+  connect(app, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)), this, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)));
+  connect(app, SIGNAL(accountReconciled(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)),
+          this, SIGNAL(accountReconciled(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)));
 
 
-  connect(app, SIGNAL(institutionSelected(const MyMoneyInstitution&)), this, SIGNAL(institutionSelected(const MyMoneyInstitution&)));
+  connect(app, SIGNAL(institutionSelected(MyMoneyInstitution)), this, SIGNAL(institutionSelected(MyMoneyInstitution)));
 
   connect(m_view, SIGNAL(viewStateChanged(bool)), this, SIGNAL(viewStateChanged(bool)));
-  connect(m_view, SIGNAL(kmmFilePlugin(unsigned int)), this, SIGNAL(kmmFilePlugin(unsigned int)));
+  connect(m_view, SIGNAL(kmmFilePlugin(uint)), this, SIGNAL(kmmFilePlugin(uint)));
 }
 
 KMyMoneyViewBase* KMyMoneyPlugin::KMMViewInterface::addPage(const QString& item, const QString& icon)

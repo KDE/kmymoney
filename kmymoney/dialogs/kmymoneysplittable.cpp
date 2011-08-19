@@ -121,8 +121,8 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
   connect(this, SIGNAL(clicked(QModelIndex)),
           this, SLOT(slotSetFocus(QModelIndex)));
 
-  connect(this, SIGNAL(transactionChanged(const MyMoneyTransaction&)),
-          this, SLOT(slotUpdateData(const MyMoneyTransaction&)));
+  connect(this, SIGNAL(transactionChanged(MyMoneyTransaction)),
+          this, SLOT(slotUpdateData(MyMoneyTransaction)));
 
   installEventFilter(this);
 }
@@ -801,7 +801,7 @@ KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
   m_editCategory = new KMyMoneyCategory();
   m_editCategory->setClickMessage(i18n("Category"));
   m_editCategory->setFont(cellFont);
-  connect(m_editCategory, SIGNAL(createItem(const QString&, QString&)), this, SIGNAL(createCategory(const QString&, QString&)));
+  connect(m_editCategory, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createCategory(QString,QString&)));
   connect(m_editCategory, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   m_editMemo = new kMyMoneyLineEdit(0, false, Qt::AlignLeft | Qt::AlignVCenter);

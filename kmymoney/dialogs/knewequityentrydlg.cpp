@@ -47,9 +47,9 @@ KNewEquityEntryDlg::KNewEquityEntryDlg(QWidget *parent)
   connect(btnOK, SIGNAL(clicked()), this, SLOT(onOKClicked()));
   connect(btnCancel, SIGNAL(clicked()), this, SLOT(reject()));
 
-  connect(edtFraction, SIGNAL(textChanged(const QString&)), this, SLOT(slotDataChanged()));
-  connect(edtMarketSymbol, SIGNAL(textChanged(const QString&)), this, SLOT(slotDataChanged()));
-  connect(edtEquityName, SIGNAL(textChanged(const QString&)), this, SLOT(slotDataChanged()));
+  connect(edtFraction, SIGNAL(textChanged(QString)), this, SLOT(slotDataChanged()));
+  connect(edtMarketSymbol, SIGNAL(textChanged(QString)), this, SLOT(slotDataChanged()));
+  connect(edtEquityName, SIGNAL(textChanged(QString)), this, SLOT(slotDataChanged()));
 
   // add icons to buttons
   btnOK->setGuiItem(KStandardGuiItem::ok());

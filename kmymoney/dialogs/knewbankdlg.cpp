@@ -59,7 +59,7 @@ KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent)
 
   connect(okBtn, SIGNAL(clicked()), SLOT(okClicked()));
   connect(cancelBtn, SIGNAL(clicked()), SLOT(reject()));
-  connect(nameEdit, SIGNAL(textChanged(const QString &)), SLOT(institutionNameChanged(const QString &)));
+  connect(nameEdit, SIGNAL(textChanged(QString)), SLOT(institutionNameChanged(QString)));
   institutionNameChanged(nameEdit->text());
 
   kMandatoryFieldGroup* requiredFields = new kMandatoryFieldGroup(this);

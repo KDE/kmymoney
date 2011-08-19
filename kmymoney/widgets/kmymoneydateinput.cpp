@@ -176,7 +176,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   setStretchFactor(d->m_dateEdit, 3);
 
   connect(d->m_dateButton, SIGNAL(clicked()), SLOT(toggleDatePicker()));
-  connect(d->m_dateEdit, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotDateChosenRef(const QDate&)));
+  connect(d->m_dateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(slotDateChosenRef(QDate)));
   connect(d->m_datePicker, SIGNAL(dateSelected(QDate)), this, SLOT(slotDateChosen(QDate)));
   connect(d->m_datePicker, SIGNAL(dateEntered(QDate)), this, SLOT(slotDateChosen(QDate)));
   connect(d->m_datePicker, SIGNAL(dateSelected(QDate)), d->m_dateFrame, SLOT(hide()));

@@ -70,11 +70,11 @@ void MyMoneyFileTest::initTestCase()
 {
   m = MyMoneyFile::instance();
 
-  connect(m, SIGNAL(objectAdded(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)), this, SLOT(objectAdded(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)));
-  connect(m, SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT, const QString&)), this, SLOT(objectRemoved(MyMoneyFile::notificationObjectT, const QString&)));
-  connect(m, SIGNAL(objectModified(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)), this, SLOT(objectModified(MyMoneyFile::notificationObjectT, const MyMoneyObject * const)));
-  connect(m, SIGNAL(balanceChanged(const MyMoneyAccount&)), this, SLOT(balanceChanged(const MyMoneyAccount&)));
-  connect(m, SIGNAL(valueChanged(const MyMoneyAccount&)), this, SLOT(valueChanged(const MyMoneyAccount&)));
+  connect(m, SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)), this, SLOT(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
+  connect(m, SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)), this, SLOT(objectRemoved(MyMoneyFile::notificationObjectT,QString)));
+  connect(m, SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)), this, SLOT(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
+  connect(m, SIGNAL(balanceChanged(MyMoneyAccount)), this, SLOT(balanceChanged(MyMoneyAccount)));
+  connect(m, SIGNAL(valueChanged(MyMoneyAccount)), this, SLOT(valueChanged(MyMoneyAccount)));
 }
 
 // this method will be called before each testfunction

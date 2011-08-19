@@ -326,11 +326,11 @@ KReportsView::KReportsView(QWidget *parent, const char *name) :
   connect(m_reportTabWidget, SIGNAL(closeRequest(QWidget*)),
           this, SLOT(slotClose(QWidget*)));
 
-  connect(m_tocTreeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
-          this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*, int)));
+  connect(m_tocTreeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
+          this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
 
-  connect(m_tocTreeWidget, SIGNAL(customContextMenuRequested(const QPoint &)),
-          this, SLOT(slotListContextMenu(const QPoint &)));
+  connect(m_tocTreeWidget, SIGNAL(customContextMenuRequested(QPoint)),
+          this, SLOT(slotListContextMenu(QPoint)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
 }
@@ -686,8 +686,8 @@ void KReportsView::slotSaveView(void)
       new KFileDialog(KUrl("kfiledialog:///kmymoney-export"), filterList, this,
                       qobject_cast<QWidget*>(d->fSavProps->includeCssCheckBox));
 
-    connect(dlg, SIGNAL(filterChanged(const QString&)),
-            this, SLOT(slotSaveFilterChanged(const QString&)));
+    connect(dlg, SIGNAL(filterChanged(QString)),
+            this, SLOT(slotSaveFilterChanged(QString)));
 
     dlg->setOperationMode(KFileDialog::Saving);
     dlg->setCaption(i18n("Export as"));
@@ -1043,29 +1043,29 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
   KReportTab* tab = new KReportTab(m_reportTabWidget, report);
 
   connect(tab->control()->buttonChart, SIGNAL(clicked()),
-          this, SLOT(slotToggleChart(void)));
+          this, SLOT(slotToggleChart()));
 
   connect(tab->control()->buttonConfigure, SIGNAL(clicked()),
-          this, SLOT(slotConfigure(void)));
+          this, SLOT(slotConfigure()));
 
   connect(tab->control()->buttonNew, SIGNAL(clicked()),
-          this, SLOT(slotDuplicate(void)));
+          this, SLOT(slotDuplicate()));
 
   connect(tab->control()->buttonCopy, SIGNAL(clicked()),
-          this, SLOT(slotCopyView(void)));
+          this, SLOT(slotCopyView()));
 
   connect(tab->control()->buttonExport, SIGNAL(clicked()),
-          this, SLOT(slotSaveView(void)));
+          this, SLOT(slotSaveView()));
 
   connect(tab->control()->buttonDelete, SIGNAL(clicked()),
-          this, SLOT(slotDelete(void)));
+          this, SLOT(slotDelete()));
 
   connect(tab->control()->buttonClose, SIGNAL(clicked()),
-          this, SLOT(slotCloseCurrent(void)));
+          this, SLOT(slotCloseCurrent()));
 
   connect(tab->browserExtenstion(), SIGNAL(openUrlRequest(const KUrl &,
           const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
-          this, SLOT(slotOpenUrl(const KUrl&, const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)));
+          this, SLOT(slotOpenUrl(KUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
 
   // if this is a default report, then you can't delete it!
   if (report.id().isEmpty())

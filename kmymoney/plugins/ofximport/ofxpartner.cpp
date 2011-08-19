@@ -402,7 +402,7 @@ OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QBy
   }
 
   connect(m_job, SIGNAL(result(KJob*)), this, SLOT(slotOfxFinished(KJob*)));
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)), this, SLOT(slotOfxData(KIO::Job*, const QByteArray&)));
+  connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(slotOfxData(KIO::Job*,QByteArray)));
   connect(m_job, SIGNAL(connected(KIO::Job*)), this, SLOT(slotOfxConnected(KIO::Job*)));
 
   qDebug("Starting eventloop");
@@ -493,8 +493,8 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
 
     m_job->request(header, postData, &f);
 
-    connect(m_job, SIGNAL(requestFinished(int, bool)),
-            this, SLOT(slotOfxFinished(int, bool)));
+    connect(m_job, SIGNAL(requestFinished(int,bool)),
+            this, SLOT(slotOfxFinished(int,bool)));
 
     qDebug("Starting eventloop");
     m_eventLoop.exec();  // krazy:exclude=crashy

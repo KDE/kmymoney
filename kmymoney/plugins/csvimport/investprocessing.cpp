@@ -93,7 +93,7 @@ InvestProcessing::InvestProcessing()
   m_parse = new Parse;
   m_redefine = new RedefineDlg;
 
-  connect(m_redefine, SIGNAL(changedType(const QString&)), this, SLOT(changedType(const QString&)));
+  connect(m_redefine, SIGNAL(changedType(QString)), this, SLOT(changedType(QString)));
 
 }
 

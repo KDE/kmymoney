@@ -66,7 +66,7 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
   m_collapseButton->setGuiItem(collapseGuiItem);
   m_expandButton->setGuiItem(expandGuiItem);
 
-  connect(Models::instance()->accountsModel(), SIGNAL(profitChanged(const MyMoneyMoney&)), this, SLOT(slotProfitChanged(const MyMoneyMoney&)));
+  connect(Models::instance()->accountsModel(), SIGNAL(profitChanged(MyMoneyMoney)), this, SLOT(slotProfitChanged(MyMoneyMoney)));
 
   // the proxy filter model
   m_filterProxyModel = new AccountsViewFilterProxyModel(this);
@@ -83,14 +83,14 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
   m_accountTree->setSortingEnabled(true);
   m_accountTree->setModel(m_filterProxyModel);
 
-  connect(m_searchWidget, SIGNAL(textChanged(const QString &)), m_filterProxyModel, SLOT(setFilterFixedString(const QString &)));
+  connect(m_searchWidget, SIGNAL(textChanged(QString)), m_filterProxyModel, SLOT(setFilterFixedString(QString)));
 
   // let the model know if the item is expanded or collapsed
-  connect(m_accountTree, SIGNAL(collapsed(const QModelIndex &)), m_filterProxyModel, SLOT(collapsed(const QModelIndex &)));
-  connect(m_accountTree, SIGNAL(expanded(const QModelIndex &)), m_filterProxyModel, SLOT(expanded(const QModelIndex &)));
-  connect(m_accountTree, SIGNAL(selectObject(const MyMoneyObject&)), this, SIGNAL(selectObject(const MyMoneyObject&)));
-  connect(m_accountTree, SIGNAL(openContextMenu(const MyMoneyObject&)), this, SIGNAL(openContextMenu(const MyMoneyObject&)));
-  connect(m_accountTree, SIGNAL(openObject(const MyMoneyObject&)), this, SIGNAL(openObject(const MyMoneyObject&)));
+  connect(m_accountTree, SIGNAL(collapsed(QModelIndex)), m_filterProxyModel, SLOT(collapsed(QModelIndex)));
+  connect(m_accountTree, SIGNAL(expanded(QModelIndex)), m_filterProxyModel, SLOT(expanded(QModelIndex)));
+  connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), this, SIGNAL(selectObject(MyMoneyObject)));
+  connect(m_accountTree, SIGNAL(openContextMenu(MyMoneyObject)), this, SIGNAL(openContextMenu(MyMoneyObject)));
+  connect(m_accountTree, SIGNAL(openObject(MyMoneyObject)), this, SIGNAL(openObject(MyMoneyObject)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadAccounts()));
   connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));

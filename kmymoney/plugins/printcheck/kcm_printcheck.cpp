@@ -43,10 +43,10 @@ PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
   m_previewFrame->setLayout(layout);
   layout->addWidget(m_checkTemplatePreviewHTMLPart->view());
 
-  connect(kcfg_checkTemplateFile, SIGNAL(urlSelected(const KUrl&)),
-          this, SLOT(urlSelected(const KUrl&)));
-  connect(kcfg_checkTemplateFile, SIGNAL(returnPressed(const QString&)),
-          this, SLOT(returnPressed(const QString&)));
+  connect(kcfg_checkTemplateFile, SIGNAL(urlSelected(KUrl)),
+          this, SLOT(urlSelected(KUrl)));
+  connect(kcfg_checkTemplateFile, SIGNAL(returnPressed(QString)),
+          this, SLOT(returnPressed(QString)));
 }
 
 void PluginSettingsWidget::urlSelected(const KUrl& url)

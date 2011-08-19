@@ -169,8 +169,8 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
   connect(m_amountButton, SIGNAL(clicked()), this, SLOT(slotSetToAmount()));
   connect(m_rateButton, SIGNAL(clicked()), this, SLOT(slotSetExchangeRate()));
 
-  connect(m_toAmount, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateResult(const QString&)));
-  connect(m_conversionRate, SIGNAL(valueChanged(const QString&)), this, SLOT(slotUpdateRate(const QString&)));
+  connect(m_toAmount, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateResult(QString)));
+  connect(m_conversionRate, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateRate(QString)));
 
   // use this as the default
   m_amountButton->animateClick();

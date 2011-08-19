@@ -35,23 +35,23 @@ InterestChargeCheckingsWizardPage::InterestChargeCheckingsWizardPage(QWidget *pa
 
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("interestDateEdit", m_interestDateEdit, "date", SIGNAL(dateChanged(const QDate&)));
-  registerField("chargesDateEdit", m_chargesDateEdit, "date", SIGNAL(dateChanged(const QDate&)));
+  registerField("interestDateEdit", m_interestDateEdit, "date", SIGNAL(dateChanged(QDate)));
+  registerField("chargesDateEdit", m_chargesDateEdit, "date", SIGNAL(dateChanged(QDate)));
 
   registerField("interestEdit", m_interestEdit, "value", SIGNAL(textChanged()));
   registerField("interestEditValid", m_interestEdit, "valid", SIGNAL(textChanged()));
   registerField("chargesEdit", m_chargesEdit, "value", SIGNAL(textChanged()));
   registerField("chargesEditValid", m_chargesEdit, "valid", SIGNAL(textChanged()));
 
-  registerField("interestCategoryEdit", m_interestCategoryEdit, "selectedItem", SIGNAL(itemSelected(const QString&)));
-  registerField("chargesCategoryEdit", m_chargesCategoryEdit, "selectedItem", SIGNAL(itemSelected(const QString&)));
+  registerField("interestCategoryEdit", m_interestCategoryEdit, "selectedItem", SIGNAL(itemSelected(QString)));
+  registerField("chargesCategoryEdit", m_chargesCategoryEdit, "selectedItem", SIGNAL(itemSelected(QString)));
 
-  registerField("payeeEdit", m_payeeEdit, "selectedItem", SIGNAL(itemSelected(const QString&)));
+  registerField("payeeEdit", m_payeeEdit, "selectedItem", SIGNAL(itemSelected(QString)));
 
-  connect(m_interestEdit, SIGNAL(textChanged(const QString&)), this, SIGNAL(completeChanged()));
-  connect(m_interestCategoryEdit, SIGNAL(textChanged(const QString&)), this, SIGNAL(completeChanged()));
-  connect(m_chargesEdit, SIGNAL(textChanged(const QString&)), this, SIGNAL(completeChanged()));
-  connect(m_chargesCategoryEdit, SIGNAL(textChanged(const QString&)), this, SIGNAL(completeChanged()));
+  connect(m_interestEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+  connect(m_interestCategoryEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+  connect(m_chargesEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+  connect(m_chargesCategoryEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
 
 
 }

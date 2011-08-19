@@ -74,7 +74,7 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent) :
 void RegisterSearchLine::init(Register *reg)
 {
   d->reg = reg;
-  connect(this, SIGNAL(textChanged(const QString&)), this, SLOT(queueSearch(const QString&)));
+  connect(this, SIGNAL(textChanged(QString)), this, SLOT(queueSearch(QString)));
 
   QLabel* label = new QLabel(i18nc("label for status combo", "Stat&us"), parentWidget());
   d->combo = new KComboBox(parentWidget());

@@ -521,8 +521,8 @@ Register::Register(QWidget *parent) :
   horizontalHeader()->setClickable(false);
   horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
 
-  connect(this, SIGNAL(cellClicked(int, int)), this, SLOT(selectItem(int, int)));
-  connect(this, SIGNAL(cellDoubleClicked(int, int)), this, SLOT(slotDoubleClicked(int, int)));
+  connect(this, SIGNAL(cellClicked(int,int)), this, SLOT(selectItem(int,int)));
+  connect(this, SIGNAL(cellDoubleClicked(int,int)), this, SLOT(slotDoubleClicked(int,int)));
 }
 
 Register::~Register()

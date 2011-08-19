@@ -318,14 +318,14 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
 void KMMReconciliationReportPlugin::slotPlug(KPluginInfo* info)
 {
   if (info->pluginName() == objectName()) {
-    connect(viewInterface(), SIGNAL(accountReconciled(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&, const MyMoneyMoney&, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >&)), this, SLOT(slotGenerateReconciliationReport(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&, const MyMoneyMoney&, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >&)));
+    connect(viewInterface(), SIGNAL(accountReconciled(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)), this, SLOT(slotGenerateReconciliationReport(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)));
   }
 }
 
 void KMMReconciliationReportPlugin::slotUnplug(KPluginInfo* info)
 {
   if (info->pluginName() == objectName()) {
-    disconnect(viewInterface(), SIGNAL(accountReconciled(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&, const MyMoneyMoney&, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >&)), this, SLOT(slotGenerateReconciliationReport(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&, const MyMoneyMoney&, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >&)));
+    disconnect(viewInterface(), SIGNAL(accountReconciled(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)), this, SLOT(slotGenerateReconciliationReport(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)));
   }
 }
 

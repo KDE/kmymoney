@@ -128,7 +128,7 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   m_ui->m_tabWidget->setTabEnabled(m_ui->m_tabWidget->indexOf(m_ui->m_resultPage), false);
 
   // 'cause we don't have a separate setupTextPage
-  connect(m_ui->m_textEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateSelections()));
+  connect(m_ui->m_textEdit, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateSelections()));
 
   setupAccountsPage();
   setupCategoriesPage();
@@ -428,8 +428,8 @@ void KFindTransactionDlg::setupDatePage(void)
   }
 
   connect(m_ui->m_dateRange, SIGNAL(itemSelected(int)), this, SLOT(slotDateRangeChanged(int)));
-  connect(m_ui->m_fromDate, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotDateChanged()));
-  connect(m_ui->m_toDate, SIGNAL(dateChanged(const QDate&)), this, SLOT(slotDateChanged()));
+  connect(m_ui->m_fromDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotDateChanged()));
+  connect(m_ui->m_toDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotDateChanged()));
 
   slotDateRangeChanged(MyMoneyTransactionFilter::allDates);
 }
@@ -474,9 +474,9 @@ void KFindTransactionDlg::setupAmountPage(void)
   connect(m_ui->m_amountButton, SIGNAL(clicked()), this, SLOT(slotAmountSelected()));
   connect(m_ui->m_amountRangeButton, SIGNAL(clicked()), this, SLOT(slotAmountRangeSelected()));
 
-  connect(m_ui->m_amountEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateSelections()));
-  connect(m_ui->m_amountFromEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateSelections()));
-  connect(m_ui->m_amountToEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateSelections()));
+  connect(m_ui->m_amountEdit, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateSelections()));
+  connect(m_ui->m_amountFromEdit, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateSelections()));
+  connect(m_ui->m_amountToEdit, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateSelections()));
 
   m_ui->m_amountButton->setChecked(true);
   slotAmountSelected();
@@ -512,7 +512,7 @@ void KFindTransactionDlg::setupPayeesPage(void)
   connect(m_ui->m_allPayeesButton, SIGNAL(clicked()), this, SLOT(slotSelectAllPayees()));
   connect(m_ui->m_clearPayeesButton, SIGNAL(clicked()), this, SLOT(slotDeselectAllPayees()));
   connect(m_ui->m_emptyPayeesButton, SIGNAL(stateChanged(int)), this, SLOT(slotUpdateSelections()));
-  connect(m_ui->m_payeesView, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(slotUpdateSelections()));
+  connect(m_ui->m_payeesView, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateSelections()));
 }
 
 void KFindTransactionDlg::loadPayees(void)
@@ -548,9 +548,9 @@ void KFindTransactionDlg::setupDetailsPage(void)
 
   connect(m_ui->m_nrButton, SIGNAL(clicked()), this, SLOT(slotNrSelected()));
   connect(m_ui->m_nrRangeButton, SIGNAL(clicked()), this, SLOT(slotNrRangeSelected()));
-  connect(m_ui->m_nrEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateSelections()));
-  connect(m_ui->m_nrFromEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateSelections()));
-  connect(m_ui->m_nrToEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateSelections()));
+  connect(m_ui->m_nrEdit, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateSelections()));
+  connect(m_ui->m_nrFromEdit, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateSelections()));
+  connect(m_ui->m_nrToEdit, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateSelections()));
 
   m_ui->m_nrButton->setChecked(true);
   slotNrSelected();

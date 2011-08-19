@@ -67,8 +67,8 @@ KMyMoneySelector::KMyMoneySelector(QWidget *parent, Qt::WFlags flags) :
   m_selMode = QTreeWidget::MultiSelection;
   setSelectionMode(QTreeWidget::SingleSelection);
 
-  connect(m_treeWidget, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(slotItemPressed(QTreeWidgetItem*, int)));
-  connect(m_treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SIGNAL(stateChanged(void)));
+  connect(m_treeWidget, SIGNAL(itemPressed(QTreeWidgetItem*,int)), this, SLOT(slotItemPressed(QTreeWidgetItem*,int)));
+  connect(m_treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SIGNAL(stateChanged()));
 }
 
 KMyMoneySelector::~KMyMoneySelector()
@@ -98,13 +98,13 @@ void KMyMoneySelector::setSelectionMode(const QTreeWidget::SelectionMode mode)
     // make sure, it's either Multi or Single
     if (mode != QTreeWidget::MultiSelection) {
       m_selMode = QTreeWidget::SingleSelection;
-      connect(m_treeWidget, SIGNAL(itemSelectionChanged(void)), this, SIGNAL(stateChanged(void)));
-      connect(m_treeWidget, SIGNAL(itemActivated(QTreeWidgetItem*, int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
-      connect(m_treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
+      connect(m_treeWidget, SIGNAL(itemSelectionChanged()), this, SIGNAL(stateChanged()));
+      connect(m_treeWidget, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
+      connect(m_treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
     } else {
-      disconnect(m_treeWidget, SIGNAL(itemSelectionChanged(void)), this, SIGNAL(stateChanged(void)));
-      disconnect(m_treeWidget, SIGNAL(itemActivated(QTreeWidgetItem*, int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
-      disconnect(m_treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
+      disconnect(m_treeWidget, SIGNAL(itemSelectionChanged()), this, SIGNAL(stateChanged()));
+      disconnect(m_treeWidget, SIGNAL(itemActivated(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
+      disconnect(m_treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(slotItemSelected(QTreeWidgetItem*)));
     }
   }
   QWidget::update();

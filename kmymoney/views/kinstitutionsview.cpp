@@ -71,11 +71,11 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
   m_accountTree->setModel(m_filterProxyModel);
 
   // let the model know if the item is expanded or collapsed
-  connect(m_accountTree, SIGNAL(collapsed(const QModelIndex &)), m_filterProxyModel, SLOT(collapsed(const QModelIndex &)));
-  connect(m_accountTree, SIGNAL(expanded(const QModelIndex &)), m_filterProxyModel, SLOT(expanded(const QModelIndex &)));
-  connect(m_accountTree, SIGNAL(selectObject(const MyMoneyObject&)), this, SIGNAL(selectObject(const MyMoneyObject&)));
-  connect(m_accountTree, SIGNAL(openContextMenu(const MyMoneyObject&)), this, SIGNAL(openContextMenu(const MyMoneyObject&)));
-  connect(m_accountTree, SIGNAL(openObject(const MyMoneyObject&)), this, SIGNAL(openObject(const MyMoneyObject&)));
+  connect(m_accountTree, SIGNAL(collapsed(QModelIndex)), m_filterProxyModel, SLOT(collapsed(QModelIndex)));
+  connect(m_accountTree, SIGNAL(expanded(QModelIndex)), m_filterProxyModel, SLOT(expanded(QModelIndex)));
+  connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), this, SIGNAL(selectObject(MyMoneyObject)));
+  connect(m_accountTree, SIGNAL(openContextMenu(MyMoneyObject)), this, SIGNAL(openContextMenu(MyMoneyObject)));
+  connect(m_accountTree, SIGNAL(openObject(MyMoneyObject)), this, SIGNAL(openObject(MyMoneyObject)));
 
   // connect the two buttons to all required slots
   connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
@@ -85,9 +85,9 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
   connect(m_expandButton, SIGNAL(clicked()), m_accountTree, SLOT(expandAll()));
   connect(m_expandButton, SIGNAL(clicked()), m_filterProxyModel, SLOT(expandAll()));
 
-  connect(m_searchWidget, SIGNAL(textChanged(const QString &)), m_filterProxyModel, SLOT(setFilterFixedString(const QString &)));
+  connect(m_searchWidget, SIGNAL(textChanged(QString)), m_filterProxyModel, SLOT(setFilterFixedString(QString)));
 
-  connect(Models::instance()->accountsModel(), SIGNAL(netWorthChanged(const MyMoneyMoney&)), this, SLOT(slotNetWorthChanged(const MyMoneyMoney&)));
+  connect(Models::instance()->accountsModel(), SIGNAL(netWorthChanged(MyMoneyMoney)), this, SLOT(slotNetWorthChanged(MyMoneyMoney)));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadAccounts()));
 }
 

@@ -121,8 +121,8 @@ KSettingsReports::KSettingsReports(QWidget* parent) :
 
   d->m_fileKLineEdit = kcfg_CssFileDefault->lineEdit();
 
-  connect(kcfg_CssFileDefault, SIGNAL(urlSelected(const KUrl&)),
-          this, SLOT(slotCssUrlSelected(const KUrl&)));
+  connect(kcfg_CssFileDefault, SIGNAL(urlSelected(KUrl)),
+          this, SLOT(slotCssUrlSelected(KUrl)));
 
   connect(d->m_fileKLineEdit, SIGNAL(editingFinished()),
           this, SLOT(slotEditingFinished()));

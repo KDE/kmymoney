@@ -129,7 +129,7 @@ bool KOfxDirectConnectDlg::init(void)
   m_job->addMetaData("content-type", "Content-type: application/x-ofx");
 
   connect(m_job, SIGNAL(result(KJob*)), this, SLOT(slotOfxFinished(KJob*)));
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)), this, SLOT(slotOfxData(KIO::Job*, const QByteArray&)));
+  connect(m_job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(slotOfxData(KIO::Job*,QByteArray)));
 
   setStatus(QString("Contacting %1...").arg(m_connector.url()));
   kProgress1->setMaximum(3);

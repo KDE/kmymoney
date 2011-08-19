@@ -80,7 +80,7 @@ PluginLoader::PluginLoader(QObject* parent)
   d->m_pluginSelector->load();
 
   connect(d->m_pluginSelector, SIGNAL(changed(bool)), this, SLOT(changed()));
-  connect(d->m_pluginSelector, SIGNAL(configCommitted(const QByteArray &)), this, SLOT(changedConfigOfPlugin(const QByteArray &)));
+  connect(d->m_pluginSelector, SIGNAL(configCommitted(QByteArray)), this, SLOT(changedConfigOfPlugin(QByteArray)));
 }
 
 PluginLoader::~PluginLoader()
