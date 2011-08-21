@@ -81,6 +81,7 @@ private slots:
   void testAddTransactionToClosedAccount();
   void testRemoveTransactionFromClosedAccount();
   void testModifyTransactionInClosedAccount();
+  void testStorageId();
 
 private slots:
   void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);

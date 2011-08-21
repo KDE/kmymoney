@@ -33,7 +33,6 @@
 #include <QList>
 #include <QVBoxLayout>
 #include <QByteArray>
-#include <QUuid>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -442,15 +441,6 @@ void KMyMoneyView::newStorage(storageTypeE t)
   else
     file->attachStorage(new MyMoneyDatabaseMgr);
 
-  MyMoneyFileTransaction ft;
-  try {
-    QUuid uid = QUuid::createUuid();
-    file->setValue("kmm-id", uid.toString());
-    ft.commit();
-  } catch (MyMoneyException *e) {
-    qDebug("Unable to setup UID for new storage object");
-    delete e;
-  }
 }
 
 void KMyMoneyView::removeStorage(void)
@@ -1796,12 +1786,7 @@ void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QMode
 void KMyMoneyView::fixFile_3(void)
 {
   // make sure each storage object contains a (unique) id
-  MyMoneyFile* file = MyMoneyFile::instance();
-  if (file->value("kmm-id").isEmpty()) {
-    QUuid uid = QUuid::createUuid();
-    file->setValue("kmm-id", uid.toString());
-    qDebug("UID generated: '%s'", qPrintable(uid.toString()));
-  }
+  MyMoneyFile::instance()->storageId();
 }
 
 void KMyMoneyView::fixFile_2(void)
