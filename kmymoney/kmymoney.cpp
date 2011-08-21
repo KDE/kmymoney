@@ -5195,6 +5195,10 @@ void KMyMoneyApp::slotTransactionsEnter(void)
   // since we jump here via code, we have to make sure to react only
   // if the action is enabled
   if (kmymoney->action("transaction_enter")->isEnabled()) {
+    // disable the action while we process it to make sure it's processed only once since
+    // d->m_transactionEditor->enterTransactions(newId) will run QCoreApplication::processEvents
+    // we could end up here twice which will cause a crash slotUpdateActions() will enable the action again
+    kmymoney->action("transaction_enter")->setEnabled(false);
     if (d->m_transactionEditor) {
       QString accountId = d->m_selectedAccount.id();
       QString newId;
