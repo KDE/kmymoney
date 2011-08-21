@@ -856,6 +856,8 @@ public:
   /**
     * This method is used to extract a value from the storage's
     * KeyValueContainer. For details see MyMoneyKeyValueContainer::value().
+    * @note Do not use this method to return the value of the key @p kmm-id. Use
+    * storageId() instead.
     *
     * @param key const reference to QString containing the key
     * @return QString containing the value
@@ -873,6 +875,17 @@ public:
     *       by the MyMoneyFile object.
     */
   void setValue(const QString& key, const QString& val);
+
+  /**
+   * This method returns the unique id of the attached storage object.
+   * In case the storage object does not have an id yet, a new one will be
+   * assigned.
+   *
+   * @return QString containing the value
+   *
+   * An exception is thrown if no storage object is attached.
+   */
+  QString storageId(void);
 
   /**
     * This method is used to delete a key-value-pair from the

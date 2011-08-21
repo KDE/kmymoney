@@ -795,7 +795,7 @@ bool KMyMoneyBanking::askMapAccount(const MyMoneyAccount& acc)
 QString KMyMoneyBanking::mappingId(const MyMoneyAccount& acc) const
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  QString id = file->value("kmm-id") + QLatin1Char('-') + acc.id();
+  QString id = file->storageId() + QLatin1Char('-') + acc.id();
 
   // AqBanking does not handle the enclosing parens, so we remove it
   id.remove('{');

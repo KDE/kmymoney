@@ -27,6 +27,7 @@
 #include <QList>
 #include <QtGlobal>
 #include <QVariant>
+#include <QUuid>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -2734,6 +2735,24 @@ bool MyMoneyFile::referencesClosedAccount(const MyMoneySplit& s) const
     delete e;
   }
   return false;
+}
+
+QString MyMoneyFile::storageId(void)
+{
+  QString id = value("kmm-id");
+  if (id.isEmpty()) {
+    MyMoneyFileTransaction ft;
+    try {
+      QUuid uid = QUuid::createUuid();
+      setValue("kmm-id", uid.toString());
+      ft.commit();
+      id = uid.toString();
+    } catch (MyMoneyException *e) {
+      qDebug("Unable to setup UID for new storage object");
+      delete e;
+    }
+  }
+  return id;
 }
 
 MyMoneyFileTransaction::MyMoneyFileTransaction() :

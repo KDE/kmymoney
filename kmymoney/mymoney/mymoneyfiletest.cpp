@@ -2008,6 +2008,29 @@ void MyMoneyFileTest::testModifyTransactionInClosedAccount()
   QSKIP("Test not implemented yet", SkipAll);
 }
 
+void MyMoneyFileTest::testStorageId()
+{
+  QString id;
+
+  // make sure id will be setup if it does not exist
+  MyMoneyFileTransaction ft;
+  try {
+    m->setValue("kmm-id", "");
+    ft.commit();
+  } catch (MyMoneyException *e) {
+    unexpectedException(e);
+  }
+
+  try {
+    // check for a new id
+    id = m->storageId();
+    QVERIFY(!id.isEmpty());
+    // check that it is the same if we ask again
+    QVERIFY(id == m->storageId());
+  } catch (MyMoneyException *e) {
+    unexpectedException(e);
+  }
+}
 
 #include "mymoneyfiletest.moc"
 
