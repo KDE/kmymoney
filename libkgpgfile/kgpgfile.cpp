@@ -288,6 +288,7 @@ QString KGPGFile::errorToString() const
 
 bool KGPGFile::GPGAvailable(void)
 {
+  GpgME::initializeLibrary();
   bool rc = (GpgME::checkEngine(GpgME::OpenPGP) == 0);
   // qDebug("KGPGFile::GPGAvailable returns %d", rc);
   return rc;
