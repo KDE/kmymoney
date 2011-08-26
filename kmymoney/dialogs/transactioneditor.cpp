@@ -1780,12 +1780,15 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     if (amount && !(amount->value().isZero()))
       break;
 
-    // the following two widgets are only checked if we are editing multiple transactions
+    // the following widgets are only checked if we are editing multiple transactions
     if (isMultiSelection()) {
       if (reconcile && reconcile->state() != MyMoneySplit::Unknown)
         break;
 
       if (cashflow && cashflow->direction() != KMyMoneyRegister::Unknown)
+        break;
+
+      if (postDate->date().isValid() && (postDate->date() >= m_account.openingDate()))
         break;
     }
   }
