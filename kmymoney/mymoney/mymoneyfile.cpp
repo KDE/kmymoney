@@ -1812,7 +1812,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         child = account(*it_c);
         if (child.parentAccountId() != (*it_a).id()) {
           throw new MYMONEYEXCEPTION("Child account has a different parent");
-        }          
+        }
       } catch (MyMoneyException *e) {
         problemCount++;
         if (problemAccount != (*it_a).name()) {

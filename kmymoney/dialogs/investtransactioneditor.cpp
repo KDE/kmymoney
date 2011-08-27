@@ -210,7 +210,7 @@ void InvestTransactionEditor::createEditWidgets(void)
   m_editWidgets["security"] = security;
   connect(security, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateSecurity(QString)));
   connect(security, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
-  connect(security, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateSecurity(QString,QString&)));
+  connect(security, SIGNAL(createItem(QString, QString&)), this, SLOT(slotCreateSecurity(QString, QString&)));
   connect(security, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   KMyMoneyCategory* asset = new KMyMoneyCategory(0, false);
@@ -225,7 +225,7 @@ void InvestTransactionEditor::createEditWidgets(void)
   connect(fees, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateFeeCategory(QString)));
   connect(fees, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
   connect(fees, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateFeeVisibility(QString)));
-  connect(fees, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateFeeCategory(QString,QString&)));
+  connect(fees, SIGNAL(createItem(QString, QString&)), this, SLOT(slotCreateFeeCategory(QString, QString&)));
   connect(fees, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(fees->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditFeeSplits()));
 
@@ -235,7 +235,7 @@ void InvestTransactionEditor::createEditWidgets(void)
   connect(interest, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateInterestCategory(QString)));
   connect(interest, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
   connect(interest, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateInterestVisibility(QString)));
-  connect(interest, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateInterestCategory(QString,QString&)));
+  connect(interest, SIGNAL(createItem(QString, QString&)), this, SLOT(slotCreateInterestCategory(QString, QString&)));
   connect(interest, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(interest->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditInterestSplits()));
 

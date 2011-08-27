@@ -512,7 +512,7 @@ void KFindTransactionDlg::setupPayeesPage(void)
   connect(m_ui->m_allPayeesButton, SIGNAL(clicked()), this, SLOT(slotSelectAllPayees()));
   connect(m_ui->m_clearPayeesButton, SIGNAL(clicked()), this, SLOT(slotDeselectAllPayees()));
   connect(m_ui->m_emptyPayeesButton, SIGNAL(stateChanged(int)), this, SLOT(slotUpdateSelections()));
-  connect(m_ui->m_payeesView, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateSelections()));
+  connect(m_ui->m_payeesView, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(slotUpdateSelections()));
 }
 
 void KFindTransactionDlg::loadPayees(void)

@@ -39,8 +39,8 @@ KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyApp* app, KMyMoneyVie
 {
   connect(app, SIGNAL(accountSelected(MyMoneyAccount)), this, SIGNAL(accountSelected(MyMoneyAccount)));
   connect(app, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)), this, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)));
-  connect(app, SIGNAL(accountReconciled(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)),
-          this, SIGNAL(accountReconciled(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)));
+  connect(app, SIGNAL(accountReconciled(MyMoneyAccount, QDate, MyMoneyMoney, MyMoneyMoney, QList<QPair<MyMoneyTransaction, MyMoneySplit> >)),
+          this, SIGNAL(accountReconciled(MyMoneyAccount, QDate, MyMoneyMoney, MyMoneyMoney, QList<QPair<MyMoneyTransaction, MyMoneySplit> >)));
 
 
   connect(app, SIGNAL(institutionSelected(MyMoneyInstitution)), this, SIGNAL(institutionSelected(MyMoneyInstitution)));

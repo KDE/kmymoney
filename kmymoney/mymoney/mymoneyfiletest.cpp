@@ -70,9 +70,9 @@ void MyMoneyFileTest::initTestCase()
 {
   m = MyMoneyFile::instance();
 
-  connect(m, SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)), this, SLOT(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(m, SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)), this, SLOT(objectRemoved(MyMoneyFile::notificationObjectT,QString)));
-  connect(m, SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)), this, SLOT(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
+  connect(m, SIGNAL(objectAdded(MyMoneyFile::notificationObjectT, MyMoneyObject*const)), this, SLOT(objectAdded(MyMoneyFile::notificationObjectT, MyMoneyObject*const)));
+  connect(m, SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT, QString)), this, SLOT(objectRemoved(MyMoneyFile::notificationObjectT, QString)));
+  connect(m, SIGNAL(objectModified(MyMoneyFile::notificationObjectT, MyMoneyObject*const)), this, SLOT(objectModified(MyMoneyFile::notificationObjectT, MyMoneyObject*const)));
   connect(m, SIGNAL(balanceChanged(MyMoneyAccount)), this, SLOT(balanceChanged(MyMoneyAccount)));
   connect(m, SIGNAL(valueChanged(MyMoneyAccount)), this, SLOT(valueChanged(MyMoneyAccount)));
 }

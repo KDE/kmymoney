@@ -744,7 +744,7 @@ void StdTransactionEditor::createEditWidgets(void)
   payee->setObjectName(QLatin1String("Payee"));
   m_editWidgets["payee"] = payee;
   connect(payee, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
-  connect(payee, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createPayee(QString,QString&)));
+  connect(payee, SIGNAL(createItem(QString, QString&)), this, SIGNAL(createPayee(QString, QString&)));
   connect(payee, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(payee, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdatePayee(QString)));
 
@@ -754,7 +754,7 @@ void StdTransactionEditor::createEditWidgets(void)
   m_editWidgets["category"] = category;
   connect(category, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateCategory(QString)));
   connect(category, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
-  connect(category, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateCategory(QString,QString&)));
+  connect(category, SIGNAL(createItem(QString, QString&)), this, SLOT(slotCreateCategory(QString, QString&)));
   connect(category, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(category->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditSplits()));
   // initially disable the split button since we don't have an account set
@@ -1891,7 +1891,7 @@ int StdTransactionEditor::slotEditSplits(void)
                                  m_priceInfo,
                                  m_regForm);
       connect(dlg, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
-      connect(dlg, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)), this, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)));
+      connect(dlg, SIGNAL(createCategory(MyMoneyAccount&, MyMoneyAccount)), this, SIGNAL(createCategory(MyMoneyAccount&, MyMoneyAccount)));
 
       if ((rc = dlg->exec()) == KDialog::Accepted) {
         m_transaction = dlg->transaction();

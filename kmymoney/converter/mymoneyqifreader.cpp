@@ -253,7 +253,7 @@ MyMoneyQifReader::MyMoneyQifReader() :
 
   connect(&m_filter, SIGNAL(bytesWritten(qint64)), this, SLOT(slotSendDataToFilter()));
   connect(&m_filter, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedDataFromFilter()));
-  connect(&m_filter, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotImportFinished()));
+  connect(&m_filter, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(slotImportFinished()));
   connect(&m_filter, SIGNAL(readyReadStandardError()), this, SLOT(slotReceivedErrorFromFilter()));
 }
 

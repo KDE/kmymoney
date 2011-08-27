@@ -418,8 +418,8 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 
   connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
   connect(createButton, SIGNAL(clicked()), this, SLOT(okClicked()));
-  connect(m_parentAccounts->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-          this, SLOT(slotSelectionChanged(QItemSelection,QItemSelection)));
+  connect(m_parentAccounts->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)),
+          this, SLOT(slotSelectionChanged(QItemSelection, QItemSelection)));
   connect(m_qbuttonNew, SIGNAL(clicked()), this, SLOT(slotNewClicked()));
   connect(typeCombo, SIGNAL(activated(QString)),
           this, SLOT(slotAccountTypeChanged(QString)));

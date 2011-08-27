@@ -271,7 +271,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   connect(m_register, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)), this, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)));
   connect(m_register, SIGNAL(editTransaction()), this, SIGNAL(startEdit()));
   connect(m_register, SIGNAL(emptyItemSelected()), this, SLOT(slotNewTransaction()));
-  connect(m_register, SIGNAL(aboutToSelectItem(KMyMoneyRegister::RegisterItem*,bool&)), this, SLOT(slotAboutToSelectItem(KMyMoneyRegister::RegisterItem*,bool&)));
+  connect(m_register, SIGNAL(aboutToSelectItem(KMyMoneyRegister::RegisterItem*, bool&)), this, SLOT(slotAboutToSelectItem(KMyMoneyRegister::RegisterItem*, bool&)));
   connect(d->m_mousePressFilter, SIGNAL(mousePressedOnExternalWidget(bool&)), this, SIGNAL(cancelOrEndEdit(bool&)));
 
   connect(m_form, SIGNAL(newTransaction(KMyMoneyRegister::Action)), this, SLOT(slotNewTransaction(KMyMoneyRegister::Action)));
@@ -1222,9 +1222,9 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       connect(editor, SIGNAL(finishEdit(KMyMoneyRegister::SelectedTransactions)), this, SLOT(slotLeaveEditMode(KMyMoneyRegister::SelectedTransactions)));
 
       connect(editor, SIGNAL(objectCreation(bool)), d->m_mousePressFilter, SLOT(setFilterDeactive(bool)));
-      connect(editor, SIGNAL(createPayee(QString,QString&)), kmymoney, SLOT(slotPayeeNew(QString,QString&)));
-      connect(editor, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)), kmymoney, SLOT(slotCategoryNew(MyMoneyAccount&,MyMoneyAccount)));
-      connect(editor, SIGNAL(createSecurity(MyMoneyAccount&,MyMoneyAccount)), kmymoney, SLOT(slotInvestmentNew(MyMoneyAccount&,MyMoneyAccount)));
+      connect(editor, SIGNAL(createPayee(QString, QString&)), kmymoney, SLOT(slotPayeeNew(QString, QString&)));
+      connect(editor, SIGNAL(createCategory(MyMoneyAccount&, MyMoneyAccount)), kmymoney, SLOT(slotCategoryNew(MyMoneyAccount&, MyMoneyAccount)));
+      connect(editor, SIGNAL(createSecurity(MyMoneyAccount&, MyMoneyAccount)), kmymoney, SLOT(slotInvestmentNew(MyMoneyAccount&, MyMoneyAccount)));
       connect(editor, SIGNAL(assignNumber()), kmymoney, SLOT(slotTransactionAssignNumber()));
       connect(editor, SIGNAL(lastPostDateUsed(QDate)), this, SLOT(slotKeepPostDate(QDate)));
 

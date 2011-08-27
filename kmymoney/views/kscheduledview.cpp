@@ -92,15 +92,15 @@ KScheduledView::KScheduledView(QWidget *parent) :
   connect(m_scheduleTree, SIGNAL(itemSelectionChanged()),
           this, SLOT(slotSetSelectedItem()));
 
-  connect(m_scheduleTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
-          this, SLOT(slotListItemExecuted(QTreeWidgetItem*,int)));
+  connect(m_scheduleTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
+          this, SLOT(slotListItemExecuted(QTreeWidgetItem*, int)));
   connect(m_scheduleTree, SIGNAL(itemExpanded(QTreeWidgetItem*)),
           this, SLOT(slotListViewExpanded(QTreeWidgetItem*)));
   connect(m_scheduleTree, SIGNAL(itemCollapsed(QTreeWidgetItem*)),
           this, SLOT(slotListViewCollapsed(QTreeWidgetItem*)));
 
-  connect(m_calendar, SIGNAL(enterClicked(MyMoneySchedule,QDate)), this, SLOT(slotBriefEnterClicked(MyMoneySchedule,QDate)));
-  connect(m_calendar, SIGNAL(skipClicked(MyMoneySchedule,QDate)), this, SLOT(slotBriefSkipClicked(MyMoneySchedule,QDate)));
+  connect(m_calendar, SIGNAL(enterClicked(MyMoneySchedule, QDate)), this, SLOT(slotBriefEnterClicked(MyMoneySchedule, QDate)));
+  connect(m_calendar, SIGNAL(skipClicked(MyMoneySchedule, QDate)), this, SLOT(slotBriefSkipClicked(MyMoneySchedule, QDate)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotReloadView()));
 }

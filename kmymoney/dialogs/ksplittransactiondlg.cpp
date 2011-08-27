@@ -102,7 +102,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   // connect signals with slots
   connect(transactionsTable, SIGNAL(transactionChanged(MyMoneyTransaction)),
           this, SLOT(slotSetTransaction(MyMoneyTransaction)));
-  connect(transactionsTable, SIGNAL(createCategory(QString,QString&)), this, SLOT(slotCreateCategory(QString,QString&)));
+  connect(transactionsTable, SIGNAL(createCategory(QString, QString&)), this, SLOT(slotCreateCategory(QString, QString&)));
   connect(transactionsTable, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   connect(transactionsTable, SIGNAL(returnPressed()), this, SLOT(accept()));

@@ -137,7 +137,7 @@ void InvestProcessing::init()
   m_convertDat->setDateFormatIndex(m_dateFormatIndex);
   m_dateFormat = m_dateFormats[m_dateFormatIndex];
   m_csvDialog->button_import->setEnabled(false);
-  
+
   //  The following string list strings are descriptions of possible investment
   //  activity types.  Each of the lists may also contain alternative descriptions,
   //  added by the user to the resource file, to suit his needs.
@@ -149,7 +149,7 @@ void InvestProcessing::init()
   m_shrsinList += i18nc("verb", "add");
   m_removeList += i18nc("verb, to delete", "remove");
   m_brokerageList << i18nc("noun, cheque, check", "check") << i18nc("noun", "payment");
-  
+
   findCodecs();//                             returns m_codecs = codecMap.values();
 }
 

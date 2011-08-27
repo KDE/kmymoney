@@ -140,14 +140,14 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(kmymoney, SIGNAL(fileLoaded(KUrl)), this, SLOT(slotRefreshViews()));
 
   // let the accounts model know which account is being currently reconciled
-  connect(this, SIGNAL(reconciliationStarts(MyMoneyAccount,QDate,MyMoneyMoney)), Models::instance()->accountsModel(), SLOT(slotReconcileAccount(MyMoneyAccount,QDate,MyMoneyMoney)));
+  connect(this, SIGNAL(reconciliationStarts(MyMoneyAccount, QDate, MyMoneyMoney)), Models::instance()->accountsModel(), SLOT(slotReconcileAccount(MyMoneyAccount, QDate, MyMoneyMoney)));
 
   // Page 0
   m_homeView = new KHomeView();
   m_homeViewFrame = m_model->addPage(m_homeView, i18n("Home"));
   m_homeViewFrame->setIcon(KIcon("go-home"));
-  connect(m_homeView, SIGNAL(ledgerSelected(QString,QString)),
-          this, SLOT(slotLedgerSelected(QString,QString)));
+  connect(m_homeView, SIGNAL(ledgerSelected(QString, QString)),
+          this, SLOT(slotLedgerSelected(QString, QString)));
   connect(m_homeView, SIGNAL(scheduleSelected(QString)),
           this, SLOT(slotScheduleSelected(QString)));
   connect(m_homeView, SIGNAL(reportSelected(QString)),
@@ -175,7 +175,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_accountsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInvestment(MyMoneyObject)));
   connect(m_accountsView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowAccountContextMenu(MyMoneyObject)));
   connect(m_accountsView, SIGNAL(openObject(MyMoneyObject)), kmymoney, SLOT(slotAccountOpen(MyMoneyObject)));
-  connect(this, SIGNAL(reconciliationStarts(MyMoneyAccount,QDate,MyMoneyMoney)), m_accountsView, SLOT(slotReconcileAccount(MyMoneyAccount,QDate,MyMoneyMoney)));
+  connect(this, SIGNAL(reconciliationStarts(MyMoneyAccount, QDate, MyMoneyMoney)), m_accountsView, SLOT(slotReconcileAccount(MyMoneyAccount, QDate, MyMoneyMoney)));
 
   // Page 3
   m_scheduledView = new KScheduledView();
@@ -202,7 +202,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_categoriesView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
   connect(m_categoriesView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowAccountContextMenu(MyMoneyObject)));
   connect(m_categoriesView, SIGNAL(openObject(MyMoneyObject)), kmymoney, SLOT(slotAccountOpen(MyMoneyObject)));
-  connect(m_categoriesView, SIGNAL(reparent(MyMoneyAccount,MyMoneyAccount)), kmymoney, SLOT(slotReparentAccount(MyMoneyAccount,MyMoneyAccount)));
+  connect(m_categoriesView, SIGNAL(reparent(MyMoneyAccount, MyMoneyAccount)), kmymoney, SLOT(slotReparentAccount(MyMoneyAccount, MyMoneyAccount)));
 
   // Page 5
   m_payeesView = new KPayeesView();
@@ -213,8 +213,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(kmymoney, SIGNAL(payeeRename()), m_payeesView, SLOT(slotRenameButtonCliked()));
   connect(m_payeesView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowPayeeContextMenu()));
   connect(m_payeesView, SIGNAL(selectObjects(QList<MyMoneyPayee>)), kmymoney, SLOT(slotSelectPayees(QList<MyMoneyPayee>)));
-  connect(m_payeesView, SIGNAL(transactionSelected(QString,QString)),
-          this, SLOT(slotLedgerSelected(QString,QString)));
+  connect(m_payeesView, SIGNAL(transactionSelected(QString, QString)),
+          this, SLOT(slotLedgerSelected(QString, QString)));
   // Page 6
   m_ledgerView = new KGlobalLedgerView();
   m_ledgerViewFrame = m_model->addPage(m_ledgerView, i18n("Ledgers"));
@@ -228,7 +228,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_ledgerView, SIGNAL(startEdit()), kmymoney, SLOT(slotTransactionsEdit()));
   connect(m_ledgerView, SIGNAL(endEdit()), kmymoney, SLOT(slotTransactionsEnter()));
   connect(m_ledgerView, SIGNAL(toggleReconciliationFlag()), kmymoney, SLOT(slotToggleReconciliationFlag()));
-  connect(this, SIGNAL(reconciliationStarts(MyMoneyAccount,QDate,MyMoneyMoney)), m_ledgerView, SLOT(slotSetReconcileAccount(MyMoneyAccount,QDate,MyMoneyMoney)));
+  connect(this, SIGNAL(reconciliationStarts(MyMoneyAccount, QDate, MyMoneyMoney)), m_ledgerView, SLOT(slotSetReconcileAccount(MyMoneyAccount, QDate, MyMoneyMoney)));
   connect(kmymoney, SIGNAL(selectAllTransactions()), m_ledgerView, SLOT(slotSelectAllTransactions()));
 
 
@@ -237,8 +237,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_investmentViewFrame = m_model->addPage(m_investmentView, i18n("Investments"));
   m_investmentViewFrame->setIcon(KIcon("investment"));
 
-  connect(m_investmentView, SIGNAL(accountSelected(QString,QString)),
-          this, SLOT(slotLedgerSelected(QString,QString)));
+  connect(m_investmentView, SIGNAL(accountSelected(QString, QString)),
+          this, SLOT(slotLedgerSelected(QString, QString)));
   connect(m_investmentView, SIGNAL(accountSelected(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
   connect(m_investmentView, SIGNAL(investmentRightMouseClick()), kmymoney, SLOT(slotShowInvestmentContextMenu()));
 
@@ -246,8 +246,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_reportsView = new KReportsView();
   m_reportsViewFrame = m_model->addPage(m_reportsView, i18n("Reports"));
   m_reportsViewFrame->setIcon(KIcon("office-chart-tall-pie"));
-  connect(m_reportsView, SIGNAL(ledgerSelected(QString,QString)),
-          this, SLOT(slotLedgerSelected(QString,QString)));
+  connect(m_reportsView, SIGNAL(ledgerSelected(QString, QString)),
+          this, SLOT(slotLedgerSelected(QString, QString)));
 
   // Page 9
   m_budgetView = new KBudgetView();
@@ -267,7 +267,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   setModel(m_model);
 
   setCurrentPage(m_homeViewFrame);
-  connect(this, SIGNAL(currentPageChanged(QModelIndex,QModelIndex)), this, SLOT(slotCurrentPageChanged(QModelIndex,QModelIndex)));
+  connect(this, SIGNAL(currentPageChanged(QModelIndex, QModelIndex)), this, SLOT(slotCurrentPageChanged(QModelIndex, QModelIndex)));
 
   updateViewType();
 
@@ -560,23 +560,23 @@ void KMyMoneyView::closeFile(void)
     m_reportsView->slotCloseAll();
 
   // disconnect the signals
-  disconnect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-             Models::instance()->accountsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  disconnect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-             Models::instance()->accountsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  disconnect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)),
-             Models::instance()->accountsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT,QString)));
+  disconnect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT, MyMoneyObject*const)),
+             Models::instance()->accountsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT, MyMoneyObject*const)));
+  disconnect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT, MyMoneyObject*const)),
+             Models::instance()->accountsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT, MyMoneyObject*const)));
+  disconnect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT, QString)),
+             Models::instance()->accountsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT, QString)));
   disconnect(MyMoneyFile::instance(), SIGNAL(balanceChanged(MyMoneyAccount)),
              Models::instance()->accountsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
   disconnect(MyMoneyFile::instance(), SIGNAL(valueChanged(MyMoneyAccount)),
              Models::instance()->accountsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
 
-  disconnect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-             Models::instance()->institutionsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  disconnect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-             Models::instance()->institutionsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  disconnect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)),
-             Models::instance()->institutionsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT,QString)));
+  disconnect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT, MyMoneyObject*const)),
+             Models::instance()->institutionsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT, MyMoneyObject*const)));
+  disconnect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT, MyMoneyObject*const)),
+             Models::instance()->institutionsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT, MyMoneyObject*const)));
+  disconnect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT, QString)),
+             Models::instance()->institutionsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT, QString)));
   disconnect(MyMoneyFile::instance(), SIGNAL(balanceChanged(MyMoneyAccount)),
              Models::instance()->institutionsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
   disconnect(MyMoneyFile::instance(), SIGNAL(valueChanged(MyMoneyAccount)),
@@ -1049,23 +1049,23 @@ bool KMyMoneyView::initializeStorage()
   Models::instance()->fileOpened();
 
   // connect the needed signals
-  connect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-          Models::instance()->accountsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-          Models::instance()->accountsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)),
-          Models::instance()->accountsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT,QString)));
+  connect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT, MyMoneyObject*const)),
+          Models::instance()->accountsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT, MyMoneyObject*const)));
+  connect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT, MyMoneyObject*const)),
+          Models::instance()->accountsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT, MyMoneyObject*const)));
+  connect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT, QString)),
+          Models::instance()->accountsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT, QString)));
   connect(MyMoneyFile::instance(), SIGNAL(balanceChanged(MyMoneyAccount)),
           Models::instance()->accountsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
   connect(MyMoneyFile::instance(), SIGNAL(valueChanged(MyMoneyAccount)),
           Models::instance()->accountsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
 
-  connect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-          Models::instance()->institutionsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-          Models::instance()->institutionsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)),
-          Models::instance()->institutionsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT,QString)));
+  connect(MyMoneyFile::instance(), SIGNAL(objectAdded(MyMoneyFile::notificationObjectT, MyMoneyObject*const)),
+          Models::instance()->institutionsModel(), SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT, MyMoneyObject*const)));
+  connect(MyMoneyFile::instance(), SIGNAL(objectModified(MyMoneyFile::notificationObjectT, MyMoneyObject*const)),
+          Models::instance()->institutionsModel(), SLOT(slotObjectModified(MyMoneyFile::notificationObjectT, MyMoneyObject*const)));
+  connect(MyMoneyFile::instance(), SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT, QString)),
+          Models::instance()->institutionsModel(), SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT, QString)));
   connect(MyMoneyFile::instance(), SIGNAL(balanceChanged(MyMoneyAccount)),
           Models::instance()->institutionsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
   connect(MyMoneyFile::instance(), SIGNAL(valueChanged(MyMoneyAccount)),

@@ -326,8 +326,8 @@ KReportsView::KReportsView(QWidget *parent, const char *name) :
   connect(m_reportTabWidget, SIGNAL(closeRequest(QWidget*)),
           this, SLOT(slotClose(QWidget*)));
 
-  connect(m_tocTreeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
-          this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
+  connect(m_tocTreeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
+          this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*, int)));
 
   connect(m_tocTreeWidget, SIGNAL(customContextMenuRequested(QPoint)),
           this, SLOT(slotListContextMenu(QPoint)));
@@ -1065,7 +1065,7 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
 
   connect(tab->browserExtenstion(), SIGNAL(openUrlRequest(const KUrl &,
           const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
-          this, SLOT(slotOpenUrl(KUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
+          this, SLOT(slotOpenUrl(KUrl, KParts::OpenUrlArguments, KParts::BrowserArguments)));
 
   // if this is a default report, then you can't delete it!
   if (report.id().isEmpty())

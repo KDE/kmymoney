@@ -126,9 +126,9 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
   // connect the signals with the slots
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotReloadEditWidgets()));
   connect(m_statementInfoPageCheckings->m_statementDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotUpdateBalances()));
-  connect(m_interestChargeCheckings->m_interestCategoryEdit, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateInterestCategory(QString,QString&)));
-  connect(m_interestChargeCheckings->m_chargesCategoryEdit, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateChargesCategory(QString,QString&)));
-  connect(m_interestChargeCheckings->m_payeeEdit, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createPayee(QString,QString&)));
+  connect(m_interestChargeCheckings->m_interestCategoryEdit, SIGNAL(createItem(QString, QString&)), this, SLOT(slotCreateInterestCategory(QString, QString&)));
+  connect(m_interestChargeCheckings->m_chargesCategoryEdit, SIGNAL(createItem(QString, QString&)), this, SLOT(slotCreateChargesCategory(QString, QString&)));
+  connect(m_interestChargeCheckings->m_payeeEdit, SIGNAL(createItem(QString, QString&)), this, SIGNAL(createPayee(QString, QString&)));
 
   KMyMoneyGlobalSettings::setSubstringSearch(m_interestChargeCheckings);
 
