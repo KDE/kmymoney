@@ -747,7 +747,7 @@
   &kappname; uses when it establishes an OFX connection with the
   institution.  This should only be necessary if you get certain
   errors when you first set up the online account, or perhaps if your
-  institution changes is OFX server software.
+  institution changes its OFX server software.
 </para>
 </listitem>
 
