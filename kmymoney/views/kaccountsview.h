@@ -138,6 +138,11 @@ signals:
     */
   void openObject(const MyMoneyObject& obj);
 
+  /**
+    * This signal is emitted whenever the view is about to be shown.
+    */
+  void aboutToShow();
+
 private:
   MyMoneyAccount                      m_reconciliationAccount;
 

@@ -81,6 +81,11 @@ signals:
   void enterSchedule(void);
   void editSchedule(void);
 
+  /**
+    * This signal is emitted whenever the view is about to be shown.
+    */
+  void aboutToShow();
+
 protected slots:
   /**
     * Shows the context menu when the user right clicks or presses

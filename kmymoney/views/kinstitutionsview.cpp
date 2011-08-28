@@ -97,6 +97,8 @@ KInstitutionsView::~KInstitutionsView()
 
 void KInstitutionsView::showEvent(QShowEvent * event)
 {
+  emit aboutToShow();
+
   if (m_needReload) {
     loadAccounts();
     m_needReload = false;

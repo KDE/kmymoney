@@ -187,6 +187,11 @@ signals:
   void openContextMenu(const MyMoneyObject& obj);
   void selectObjects(const QList<MyMoneyBudget>& budget);
 
+  /**
+    * This signal is emitted whenever the view is about to be shown.
+    */
+  void aboutToShow();
+
 private:
   typedef enum {
     eNone = -1,

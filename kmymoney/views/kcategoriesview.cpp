@@ -118,6 +118,8 @@ void KCategoriesView::slotExpandCollapse(void)
 
 void KCategoriesView::showEvent(QShowEvent * event)
 {
+  emit aboutToShow();
+
   if (m_needReload) {
     loadAccounts();
     m_needReload = false;

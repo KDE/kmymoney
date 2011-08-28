@@ -436,10 +436,12 @@ void KScheduledView::slotReloadView(void)
 
 void KScheduledView::showEvent(QShowEvent* event)
 {
-  QWidget::showEvent(event);
+  emit aboutToShow();
 
   if (m_needReload)
     slotReloadView();
+
+  QWidget::showEvent(event);
 }
 
 void KScheduledView::slotRearrange(void)

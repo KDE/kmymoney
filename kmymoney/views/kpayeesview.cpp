@@ -629,6 +629,8 @@ void KPayeesView::slotUpdatePayee(void)
 
 void KPayeesView::showEvent(QShowEvent* event)
 {
+  emit aboutToShow();
+
   if (m_needReload) {
     loadPayees();
     m_needReload = false;

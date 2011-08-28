@@ -152,6 +152,11 @@ signals:
 
   void investmentRightMouseClick(void);
 
+  /**
+    * This signal is emitted whenever the view is about to be shown.
+    */
+  void aboutToShow();
+
 private:
   /// \internal d-pointer class.
   class Private;

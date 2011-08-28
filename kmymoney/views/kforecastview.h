@@ -130,6 +130,12 @@ private slots:
   void itemExpanded(QTreeWidgetItem *item);
   void itemCollapsed(QTreeWidgetItem *item);
 
+signals:
+  /**
+    * This signal is emitted whenever the view is about to be shown.
+    */
+  void aboutToShow();
+
 private:
   void addAssetLiabilityRows(const MyMoneyForecast& forecast);
   void addIncomeExpenseRows(const MyMoneyForecast& forecast);

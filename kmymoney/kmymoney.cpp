@@ -377,6 +377,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   ::timetrace("create view");
   d->m_myMoneyView = new KMyMoneyView(frame);
   layout->addWidget(d->m_myMoneyView, 10);
+  connect(d->m_myMoneyView, SIGNAL(aboutToChangeView()), this, SLOT(slotResetSelections()));
   connect(d->m_myMoneyView, SIGNAL(currentPageChanged(KPageWidgetItem*, KPageWidgetItem*)),
           this, SLOT(slotUpdateActions()));
 
