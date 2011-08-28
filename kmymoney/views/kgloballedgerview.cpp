@@ -1343,6 +1343,8 @@ bool KGlobalLedgerView::focusNextPrevChild(bool next)
 
 void KGlobalLedgerView::showEvent(QShowEvent* event)
 {
+  emit aboutToShow();
+
   if (m_needReload) {
     if (!m_inEditMode) {
       setUpdatesEnabled(false);

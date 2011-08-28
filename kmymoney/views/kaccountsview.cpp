@@ -221,8 +221,11 @@ void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
 
 void KAccountsView::showEvent(QShowEvent * event)
 {
-  QWidget::showEvent(event);
+  emit aboutToShow();
+
   slotTabCurrentChanged(m_tab->currentWidget());
+
+  QWidget::showEvent(event);
 }
 
 void KAccountsView::loadAccounts(AccountsViewTab tab)

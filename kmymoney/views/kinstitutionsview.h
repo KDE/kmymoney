@@ -90,6 +90,11 @@ signals:
     */
   void openObject(const MyMoneyObject& obj);
 
+  /**
+    * This signal is emitted whenever the view is about to be shown.
+    */
+  void aboutToShow();
+
 private:
   /// set if a view needs to be reloaded during show()
   bool                                m_needReload;

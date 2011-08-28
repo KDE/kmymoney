@@ -120,6 +120,11 @@ signals:
     */
   void reparent(const MyMoneyAccount& acc, const MyMoneyAccount& parent);
 
+  /**
+    * This signal is emitted whenever the view is about to be shown.
+    */
+  void aboutToShow();
+
 private:
   /// set if a view needs to be reloaded during showEvent()
   bool                         m_needReload;

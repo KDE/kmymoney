@@ -153,6 +153,11 @@ signals:
   void openContextMenu(const MyMoneyObject& obj);
   void selectObjects(const QList<MyMoneyPayee>& payees);
 
+  /**
+    * This signal is emitted whenever the view is about to be shown.
+    */
+  void aboutToShow();
+
 private:
   MyMoneyPayee m_payee;
   QString      m_newName;

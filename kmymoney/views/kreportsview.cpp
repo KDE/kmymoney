@@ -342,6 +342,8 @@ KReportsView::~KReportsView()
 
 void KReportsView::showEvent(QShowEvent * event)
 {
+  emit aboutToShow();
+
   if (m_needReload) {
     loadView();
     m_needReload = false;

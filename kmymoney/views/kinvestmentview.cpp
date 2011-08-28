@@ -414,6 +414,8 @@ void KInvestmentView::loadInvestmentItem(const MyMoneyAccount& account)
 
 void KInvestmentView::showEvent(QShowEvent* event)
 {
+  emit aboutToShow();
+
   /*if (d->m_needReload) {
     loadInvestmentTab();
     d->m_needReload = false;
@@ -423,9 +425,10 @@ void KInvestmentView::showEvent(QShowEvent* event)
     emit accountSelected(d->m_account);
   }*/
 
+  slotTabCurrentChanged(m_tab->currentWidget());
+
   // don't forget base class implementation
   QWidget::showEvent(event);
-  slotTabCurrentChanged(m_tab->currentWidget());
 }
 
 void KInvestmentView::loadSecuritiesList(void)

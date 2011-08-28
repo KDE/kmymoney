@@ -420,6 +420,8 @@ KBudgetView::~KBudgetView()
 
 void KBudgetView::showEvent(QShowEvent * event)
 {
+  emit aboutToShow();
+
   QTimer::singleShot(50, this, SLOT(slotRearrange()));
   if (m_needReload) {
     slotRefreshView();

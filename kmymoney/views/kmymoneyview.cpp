@@ -152,6 +152,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
           this, SLOT(slotScheduleSelected(const QString&)));
   connect(m_homeView, SIGNAL(reportSelected(const QString&)),
           this, SLOT(slotShowReport(const QString&)));
+  connect(m_homeView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 1
   m_institutionsView = new KInstitutionsView();
@@ -164,6 +165,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_institutionsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowInstitutionContextMenu(const MyMoneyObject&)));
   connect(m_institutionsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney, SLOT(slotInstitutionEdit(const MyMoneyObject&)));
   connect(m_institutionsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney, SLOT(slotAccountOpen(const MyMoneyObject&)));
+  connect(m_institutionsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 2
   m_accountsView = new KAccountsView();
@@ -176,6 +178,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_accountsView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
   connect(m_accountsView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney, SLOT(slotAccountOpen(const MyMoneyObject&)));
   connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_accountsView, SLOT(slotReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
+  connect(m_accountsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 3
   m_scheduledView = new KScheduledView();
@@ -192,6 +195,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_scheduledView, SIGNAL(enterSchedule()), kmymoney, SLOT(slotScheduleEnter()));
   connect(m_scheduledView, SIGNAL(skipSchedule()), kmymoney, SLOT(slotScheduleSkip()));
   connect(m_scheduledView, SIGNAL(editSchedule()), kmymoney, SLOT(slotScheduleEdit()));
+  connect(m_scheduledView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 4
   m_categoriesView = new KCategoriesView();
@@ -203,6 +207,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_categoriesView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowAccountContextMenu(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(openObject(const MyMoneyObject&)), kmymoney, SLOT(slotAccountOpen(const MyMoneyObject&)));
   connect(m_categoriesView, SIGNAL(reparent(const MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotReparentAccount(const MyMoneyAccount&, const MyMoneyAccount&)));
+  connect(m_categoriesView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 5
   m_payeesView = new KPayeesView();
@@ -215,6 +220,8 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_payeesView, SIGNAL(selectObjects(const QList<MyMoneyPayee>&)), kmymoney, SLOT(slotSelectPayees(const QList<MyMoneyPayee>&)));
   connect(m_payeesView, SIGNAL(transactionSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
+  connect(m_payeesView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
+
   // Page 6
   m_ledgerView = new KGlobalLedgerView();
   m_ledgerViewFrame = m_model->addPage(m_ledgerView, i18n("Ledgers"));
@@ -230,6 +237,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_ledgerView, SIGNAL(toggleReconciliationFlag()), kmymoney, SLOT(slotToggleReconciliationFlag()));
   connect(this, SIGNAL(reconciliationStarts(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)), m_ledgerView, SLOT(slotSetReconcileAccount(const MyMoneyAccount&, const QDate&, const MyMoneyMoney&)));
   connect(kmymoney, SIGNAL(selectAllTransactions()), m_ledgerView, SLOT(slotSelectAllTransactions()));
+  connect(m_ledgerView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
 
   // Page 7
@@ -241,6 +249,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
   connect(m_investmentView, SIGNAL(accountSelected(const MyMoneyObject&)), kmymoney, SLOT(slotSelectAccount(const MyMoneyObject&)));
   connect(m_investmentView, SIGNAL(investmentRightMouseClick()), kmymoney, SLOT(slotShowInvestmentContextMenu()));
+  connect(m_investmentView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 8
   m_reportsView = new KReportsView();
@@ -248,6 +257,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_reportsViewFrame->setIcon(KIcon("office-chart-tall-pie"));
   connect(m_reportsView, SIGNAL(ledgerSelected(const QString&, const QString&)),
           this, SLOT(slotLedgerSelected(const QString&, const QString&)));
+  connect(m_reportsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 9
   m_budgetView = new KBudgetView();
@@ -257,11 +267,13 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_budgetView, SIGNAL(openContextMenu(const MyMoneyObject&)), kmymoney, SLOT(slotShowBudgetContextMenu()));
   connect(m_budgetView, SIGNAL(selectObjects(const QList<MyMoneyBudget>&)), kmymoney, SLOT(slotSelectBudget(const QList<MyMoneyBudget>&)));
   connect(kmymoney, SIGNAL(budgetRename()), m_budgetView, SLOT(slotStartRename()));
+  connect(m_budgetView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 10
   m_forecastView = new KForecastView();
   m_forecastViewFrame = m_model->addPage(m_forecastView, i18n("Forecast"));
   m_forecastViewFrame->setIcon(KIcon("forecast"));
+  connect(m_forecastView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   //set the model
   setModel(m_model);
@@ -2312,6 +2324,8 @@ void KMyMoneyView::slotPrintView(void)
 KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString& icon)
 {
   KMyMoneyViewBase* viewBase = new KMyMoneyViewBase(this, title, title);
+
+  connect(viewBase, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   KPageWidgetItem* frm = m_model->addPage(viewBase, title);
   frm->setIcon(KIcon(icon));

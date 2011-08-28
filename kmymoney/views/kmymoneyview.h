@@ -589,6 +589,11 @@ signals:
     */
   void viewActivated(int view);
 
+  /**
+    * This signal is emitted whenever a new view is about to be selected.
+    */
+  void aboutToChangeView();
+
   void accountSelectedForContextMenu(const MyMoneyAccount& acc);
 
   void viewStateChanged(bool enabled);
@@ -638,6 +643,13 @@ public:
   bool editTransactions(const QList<MyMoneyTransaction>& transactions) const {
     Q_UNUSED(transactions)  return false;
   }
+
+signals:
+  /**
+    * This signal is emitted whenever the view is about to be shown.
+    */
+  void aboutToShow();
+
 private:
   /// \internal d-pointer class.
   class Private;

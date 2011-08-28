@@ -175,6 +175,8 @@ void KHomeView::slotLoadView(void)
 
 void KHomeView::showEvent(QShowEvent* event)
 {
+  emit aboutToShow();
+
   if (d->m_needReload) {
     loadView();
     d->m_needReload = false;
