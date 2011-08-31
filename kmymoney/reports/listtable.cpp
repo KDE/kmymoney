@@ -631,21 +631,80 @@ void ListTable::includeInvestmentSubAccounts()
   // if we're not in expert mode, we need to make sure
   // that all stock accounts for the selected investment
   // account are also selected
-  QStringList accountList;
-  if (m_config.accounts(accountList)) {
-    if (!KMyMoneyGlobalSettings::expertMode()) {
-      QStringList::const_iterator it_a, it_b;
-      for (it_a = accountList.constBegin(); it_a != accountList.constEnd(); ++it_a) {
-        MyMoneyAccount acc = MyMoneyFile::instance()->account(*it_a);
-        if (acc.accountType() == MyMoneyAccount::Investment) {
-          for (it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
-            if (!accountList.contains(*it_b)) {
-              m_config.addAccount(*it_b);
-            }
-          }
-        }
+  if (KMyMoneyGlobalSettings::expertMode()) {
+    return;
+  }
+
+  // get all investment subAccountsList but do not include those with zero balance
+  // or those which had no transactions during the timeframe of the report
+  QStringList accountIdList;
+  QStringList subAccountsList;
+  MyMoneyFile* file = MyMoneyFile::instance();
+
+  // get the report account filter
+  if (!m_config.accounts(accountIdList)
+    && m_config.isInvestmentsOnly()) {
+    // this will only execute if this is an investment-only report
+    QList<MyMoneyAccount> accountList;
+    file->accountList(accountList);
+    QList<MyMoneyAccount>::const_iterator it_ma;
+    for (it_ma = accountList.constBegin(); it_ma != accountList.constEnd(); ++it_ma) {
+      if ((*it_ma).accountType() == MyMoneyAccount::Investment) {
+	accountIdList.append((*it_ma).id());
       }
     }
+  }
+
+  QStringList::const_iterator it_a;
+  for (it_a = accountIdList.constBegin(); it_a != accountIdList.constEnd(); ++it_a) {
+    MyMoneyAccount acc = file->account(*it_a);
+    if (acc.accountType() == MyMoneyAccount::Investment) {
+      QStringList::const_iterator it_b;
+      for (it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
+	if (!accountIdList.contains(*it_b)) {
+	  subAccountsList.append(*it_b);
+	}
+      }
+    }
+  }
+  
+  if (m_config.isInvestmentsOnly()
+    && !m_config.isIncludingUnusedAccounts()) {
+    // if the balance is not zero at the end, include the subaccount
+    QStringList::const_iterator it_balance;
+    for (it_balance = subAccountsList.constBegin(); it_balance != subAccountsList.constEnd(); ++it_balance) {
+      if (!file->balance((*it_balance), m_config.toDate()).isZero()) {
+	m_config.addAccount((*it_balance));
+	subAccountsList.removeOne((*it_balance));
+      }
+    }
+
+    // if there are transactions for that subaccount, include it
+    MyMoneyTransactionFilter filter;
+    filter.setDateFilter(m_config.fromDate(), m_config.toDate());
+    filter.addAccount(subAccountsList);
+    filter.setReportAllSplits(false);
+
+    QList<MyMoneyTransaction> transactions = file->transactionList(filter);
+    QList<MyMoneyTransaction>::const_iterator it_t = transactions.constBegin();
+
+    //Check each split for a matching account
+    for (; it_t != transactions.constEnd(); ++it_t) {
+      const QList<MyMoneySplit>& splits = (*it_t).splits();
+      QList<MyMoneySplit>::const_iterator it_s = splits.begin();
+      for (; it_s != splits.end(); ++it_s) {
+	QString accountId = (*it_s).accountId();
+	if (!(*it_s).shares().isZero()
+	    && subAccountsList.contains(accountId)) {
+	  subAccountsList.removeOne(accountId);
+	  m_config.addAccount(accountId);
+	}
+      }
+    }
+  } else {
+    // if not an investment-only report or explicitely including unused accounts
+    // add all investment subaccounts
+    m_config.addAccount(subAccountsList);
   }
 }
 

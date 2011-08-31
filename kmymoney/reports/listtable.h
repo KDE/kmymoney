@@ -92,7 +92,9 @@ protected:
 
   /**
    * If not in expert mode, include all subaccounts for each selected
-   * investment account
+   * investment account.
+   * For investment-only reports, it will also exclude the subaccounts
+   * that have a zero balance
    */
   void includeInvestmentSubAccounts(void);
 
