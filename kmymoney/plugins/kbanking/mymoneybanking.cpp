@@ -777,7 +777,7 @@ bool KMyMoneyBanking::askMapAccount(const MyMoneyAccount& acc)
                AB_Account_GetBankCode(a),
                AB_Account_GetAccountNumber(a));
 
-    // TODO remove the following line once we don't need backward compatability
+    // TODO remove the following line once we don't need backward compatibility
     setAccountAlias(a, acc.id().toUtf8().constData());
     qDebug("Setup mapping to '%s'", acc.id().toUtf8().constData());
 
