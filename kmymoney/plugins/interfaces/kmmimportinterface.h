@@ -42,7 +42,7 @@ namespace KMyMoneyPlugin
 
 /**
   * This class represents the implementation of the
-  * ViewInterface.
+  * ImportInterface.
   */
 class KMMImportInterface : public ImportInterface
 {
