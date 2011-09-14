@@ -257,8 +257,8 @@ void ObjectInfoTable::constructAccountTable(void)
       accountRow["maxbalancelimit"] = account.value("minBalanceAbsolute");
       accountRow["creditwarning"] = account.value("maxCreditEarly");
       accountRow["maxcreditlimit"] = account.value("maxCreditAbsolute");
-      accountRow["tax"] = account.value("Tax");
-      accountRow["favorite"] = account.value("PreferredAccount");
+      accountRow["tax"] = account.value("Tax") == QLatin1String("Yes") ? i18nc("Is this a tax account?", "Yes") : QString();
+      accountRow["favorite"] = account.value("PreferredAccount") == QLatin1String("Yes") ? i18nc("Is this a favorite account?", "Yes") : QString();
 
       //investment accounts show the balances of all its subaccounts
       if (account.accountType() == MyMoneyAccount::Investment) {
@@ -315,7 +315,7 @@ void ObjectInfoTable::constructAccountLoanTable(void)
       accountRow["nextinterestchange"] = loan.nextInterestChange().toString(Qt::ISODate);
       accountRow["periodicpayment"] = (loan.periodicPayment() * xr).toString();
       accountRow["finalpayment"] = (loan.finalPayment() * xr).toString();
-      accountRow["favorite"] = account.value("PreferredAccount");
+      accountRow["favorite"] = account.value("PreferredAccount") == QLatin1String("Yes") ? i18nc("Is this a favorite account?", "Yes") : QString();
 
       MyMoneyMoney value = file->balance(account.id());
       value = value * xr;
