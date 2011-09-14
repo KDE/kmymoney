@@ -434,7 +434,7 @@ void KReportsView::loadView(void)
   int chartGroupNo = defaultreports.size() + 1;
 
   // group for diagrams
-  QString groupName = "Charts";
+  QString groupName = I18N_NOOP("Charts");
 
   TocItemGroup* chartTocItemGroup =
     new TocItemGroup(m_tocTreeWidget, chartGroupNo,
@@ -481,7 +481,7 @@ void KReportsView::loadView(void)
   // group for custom (favorite) reports
   int favoriteGroupNo = chartGroupNo + 1;
 
-  groupName = "Favorite Reports";
+  groupName = I18N_NOOP("Favorite Reports");
 
   TocItemGroup* favoriteTocItemGroup =
     new TocItemGroup(m_tocTreeWidget, favoriteGroupNo,
@@ -512,7 +512,7 @@ void KReportsView::loadView(void)
         // group for orphaned reports
         int orphanGroupNo = favoriteGroupNo + 1;
 
-        QString groupName = "Old Customized Reports";
+        QString groupName = I18N_NOOP("Old Customized Reports");
 
         orphanTocItemGroup =
           new TocItemGroup(m_tocTreeWidget, orphanGroupNo,
