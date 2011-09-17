@@ -312,7 +312,7 @@ void InvestTransactionEditor::createEditWidgets(void)
   m_editWidgets["interest-label"] = label = new QLabel(i18n("Interest"));
   label->setAlignment(Qt::AlignVCenter);
 
-  m_editWidgets["interest-amount-label"] = label = new QLabel(i18n("Amount"));
+  m_editWidgets["interest-amount-label"] = label = new QLabel(i18n("Interest"));
   label->setAlignment(Qt::AlignVCenter);
 
   m_editWidgets["memo-label"] = label = new QLabel(i18n("Memo"));
@@ -482,10 +482,19 @@ void InvestTransactionEditor::slotUpdateFeeCategory(const QString& id)
 
 void InvestTransactionEditor::slotUpdateFeeVisibility(const QString& txt)
 {
-  haveWidget("fee-amount")->setHidden(txt.isEmpty());
-  QWidget* w = haveWidget("fee-amount-label");
-  if (w)
-    w->setVisible(haveWidget("fee-amount")->isVisible());
+  kMyMoneyEdit* feeAmount = dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount"));
+  feeAmount->setHidden(txt.isEmpty());
+
+  QLabel* l = dynamic_cast<QLabel*>(haveWidget("fee-amount-label"));
+  if (l) {
+    if (!txt.isEmpty()) {
+      l->setText(i18n("Fee Amount"));
+      QTimer::singleShot(1, feeAmount, SLOT(show()));
+    } else {
+      l->setText("");
+      QTimer::singleShot(1, feeAmount, SLOT(hide()));
+    }
+  }
 }
 
 void InvestTransactionEditor::slotUpdateInterestCategory(const QString& id)
@@ -495,23 +504,25 @@ void InvestTransactionEditor::slotUpdateInterestCategory(const QString& id)
 
 void InvestTransactionEditor::slotUpdateInterestVisibility(const QString& txt)
 {
-  KMyMoneyCategory* interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
-  QWidget* w = haveWidget("interest-amount-label");
+  QWidget* w = haveWidget("interest-amount");
+  w->setHidden(txt.isEmpty());
+  QLabel* l = dynamic_cast<QLabel*>(haveWidget("interest-amount-label"));
 
-  if (dynamic_cast<Reinvest*>(d->m_activity)) {
-    interest->splitButton()->hide();
-    haveWidget("interest-amount")->setHidden(true);
+  if ((d->m_activity->type() != MyMoneySplit::Dividend) &&
+      (d->m_activity->type() != MyMoneySplit::InterestIncome)) {
+    QTimer::singleShot(1, w, SLOT(hide()));
+    if (l) {
+      l->setText(i18n(""));
+    }
+  } else {//  is Div or IntInc
+    w->show();
+    if (l)
+      l->setText(i18n("Interest"));
     // for the reinvest case, we don't ever hide the label do avoid a shine through
     // of the underlying transaction data.
-    w = 0;
-  } else {
-    haveWidget("interest-amount")->setHidden(txt.isEmpty());
-    // FIXME once we can handle split interest, we need to uncomment the next line
-    // interest->splitButton()->show();
+    // FIXME (FIXED?)once we can handle split interest, we need to uncomment the next line
+    // interest->splitButton()->show();//  Already shows
   }
-
-  if (w)
-    w->setVisible(haveWidget("interest-amount")->isVisible());
 }
 
 void InvestTransactionEditor::slotCreateInterestCategory(const QString& name, QString& id)
@@ -815,8 +826,13 @@ void InvestTransactionEditor::slotUpdateActivity(MyMoneySplit::investTransaction
 
   // hide all dynamic widgets (make sure to use the parentWidget for the
   // category widgets)
-  haveWidget("interest-account")->parentWidget()->hide();
-  haveWidget("fee-account")->parentWidget()->hide();
+  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
+  cat->hide();
+  cat->splitButton()->hide();
+
+  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
+  cat->hide();
+  cat->splitButton()->hide();
 
   QStringList dynwidgets;
   dynwidgets << "total-label" << "asset-label" << "fee-label" << "fee-amount-label" << "interest-label" << "interest-amount-label" << "price-label" << "shares-label";
@@ -836,21 +852,22 @@ void InvestTransactionEditor::slotUpdateActivity(MyMoneySplit::investTransaction
 
   for (it_s = dynwidgets.constBegin(); it_s != dynwidgets.constEnd(); ++it_s) {
     QWidget* w = haveWidget(*it_s);
-    if (w)
-      w->hide();
+    if (w) w->hide();
   }
-
   d->m_activity->showWidgets();
-
   d->m_activity->preloadAssetAccount();
 
   cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
   if (cat->parentWidget()->isVisible())
     slotUpdateInterestVisibility(cat->currentText());
+  else
+    cat->splitButton()->hide();
 
   cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
   if (cat->parentWidget()->isVisible())
     slotUpdateFeeVisibility(cat->currentText());
+  else
+    cat->splitButton()->hide();
 }
 
 InvestTransactionEditor::priceModeE InvestTransactionEditor::priceMode(void) const
@@ -885,6 +902,9 @@ bool InvestTransactionEditor::setupPrice(const MyMoneyTransaction& t, MyMoneySpl
   int fract = acc.fraction();
 
   if (acc.currencyId() != t.commodity()) {
+    if (acc.currencyId().isEmpty())
+      acc.setCurrencyId(t.commodity());
+
     QMap<QString, MyMoneyMoney>::Iterator it_p;
     QString key = t.commodity() + '-' + acc.currencyId();
     it_p = m_priceInfo.find(key);
@@ -961,6 +981,8 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
       if ((*it_s).id() != sorig.id()) {
         MyMoneyAccount cat = file->account((*it_s).accountId());
         if (cat.currencyId() != m_account.currencyId()) {
+          if (cat.currencyId().isEmpty())
+            cat.setCurrencyId(m_account.currencyId());
           if (!(*it_s).shares().isZero() && !(*it_s).value().isZero()) {
             m_priceInfo[cat.currencyId()] = ((*it_s).shares() / (*it_s).value()).reduce();
           }
@@ -1045,8 +1067,6 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
       t.addSplit(assetAccountSplit);
     }
 
-    t.addSplit(s0);
-
     QList<MyMoneySplit>::iterator it_s;
     for (it_s = feeSplits.begin(); it_s != feeSplits.end(); ++it_s) {
       (*it_s).clearId();
@@ -1057,6 +1077,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
       (*it_s).clearId();
       t.addSplit(*it_s);
     }
+    t.addSplit(s0);
   }
 
   // adjust the value to the smallestAccountFraction found
