@@ -458,7 +458,7 @@ void Reinvest::showWidgets(void) const
 
   kMyMoneyEdit* intAmount = dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount"));
   QTimer::singleShot(1, intAmount, SLOT(hide()));
-  setLabelText("interest-amount-label", i18n(""));
+  setLabelText("interest-amount-label", QString());
   intAmount->setValue(MyMoneyMoney());
 
   setLabelText("fee-label", i18n("Fees"));
