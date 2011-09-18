@@ -512,7 +512,7 @@ void InvestTransactionEditor::slotUpdateInterestVisibility(const QString& txt)
       (d->m_activity->type() != MyMoneySplit::InterestIncome)) {
     QTimer::singleShot(1, w, SLOT(hide()));
     if (l) {
-      l->setText(i18n(""));
+      l->setText(QString());
     }
   } else {//  is Div or IntInc
     w->show();
