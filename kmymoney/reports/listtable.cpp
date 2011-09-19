@@ -643,14 +643,14 @@ void ListTable::includeInvestmentSubAccounts()
 
   // get the report account filter
   if (!m_config.accounts(accountIdList)
-    && m_config.isInvestmentsOnly()) {
+      && m_config.isInvestmentsOnly()) {
     // this will only execute if this is an investment-only report
     QList<MyMoneyAccount> accountList;
     file->accountList(accountList);
     QList<MyMoneyAccount>::const_iterator it_ma;
     for (it_ma = accountList.constBegin(); it_ma != accountList.constEnd(); ++it_ma) {
       if ((*it_ma).accountType() == MyMoneyAccount::Investment) {
-	accountIdList.append((*it_ma).id());
+        accountIdList.append((*it_ma).id());
       }
     }
   }
@@ -661,21 +661,21 @@ void ListTable::includeInvestmentSubAccounts()
     if (acc.accountType() == MyMoneyAccount::Investment) {
       QStringList::const_iterator it_b;
       for (it_b = acc.accountList().constBegin(); it_b != acc.accountList().constEnd(); ++it_b) {
-	if (!accountIdList.contains(*it_b)) {
-	  subAccountsList.append(*it_b);
-	}
+        if (!accountIdList.contains(*it_b)) {
+          subAccountsList.append(*it_b);
+        }
       }
     }
   }
-  
+
   if (m_config.isInvestmentsOnly()
-    && !m_config.isIncludingUnusedAccounts()) {
+      && !m_config.isIncludingUnusedAccounts()) {
     // if the balance is not zero at the end, include the subaccount
     QStringList::const_iterator it_balance;
     for (it_balance = subAccountsList.constBegin(); it_balance != subAccountsList.constEnd(); ++it_balance) {
       if (!file->balance((*it_balance), m_config.toDate()).isZero()) {
-	m_config.addAccount((*it_balance));
-	subAccountsList.removeOne((*it_balance));
+        m_config.addAccount((*it_balance));
+        subAccountsList.removeOne((*it_balance));
       }
     }
 
@@ -693,12 +693,12 @@ void ListTable::includeInvestmentSubAccounts()
       const QList<MyMoneySplit>& splits = (*it_t).splits();
       QList<MyMoneySplit>::const_iterator it_s = splits.begin();
       for (; it_s != splits.end(); ++it_s) {
-	QString accountId = (*it_s).accountId();
-	if (!(*it_s).shares().isZero()
-	    && subAccountsList.contains(accountId)) {
-	  subAccountsList.removeOne(accountId);
-	  m_config.addAccount(accountId);
-	}
+        QString accountId = (*it_s).accountId();
+        if (!(*it_s).shares().isZero()
+            && subAccountsList.contains(accountId)) {
+          subAccountsList.removeOne(accountId);
+          m_config.addAccount(accountId);
+        }
       }
     }
   } else {
