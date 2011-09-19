@@ -623,7 +623,7 @@ void WebPriceQuoteSource::remove(void) const
 WebPriceQuoteProcess::WebPriceQuoteProcess(void)
 {
   connect(this, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedDataFromFilter()));
-  connect(this, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(slotProcessExited(int, QProcess::ExitStatus)));
+  connect(this, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotProcessExited(int,QProcess::ExitStatus)));
 }
 
 void WebPriceQuoteProcess::slotReceivedDataFromFilter()
@@ -702,7 +702,7 @@ FinanceQuoteProcess::FinanceQuoteProcess(void)
   m_fqNames["yahoo_nz"] = "Yahoo New Zealand";
   m_fqNames["zifunds"] = "Zuerich Investments";
   connect(this, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedDataFromFilter()));
-  connect(this, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(slotProcessExited(int, QProcess::ExitStatus)));
+  connect(this, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotProcessExited(int,QProcess::ExitStatus)));
 }
 
 void FinanceQuoteProcess::slotReceivedDataFromFilter()
@@ -901,8 +901,8 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
 convertertest::QuoteReceiver::QuoteReceiver(WebPriceQuote* q, QObject* parent) :
     QObject(parent)
 {
-  connect(q, SIGNAL(quote(QString, QString, QDate, double)),
-          this, SLOT(slotGetQuote(QString, QString, QDate, double)));
+  connect(q, SIGNAL(quote(QString,QString,QDate,double)),
+          this, SLOT(slotGetQuote(QString,QString,QDate,double)));
   connect(q, SIGNAL(status(QString)),
           this, SLOT(slotStatus(QString)));
   connect(q, SIGNAL(error(QString)),

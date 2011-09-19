@@ -801,7 +801,7 @@ KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
   m_editCategory = new KMyMoneyCategory();
   m_editCategory->setClickMessage(i18n("Category"));
   m_editCategory->setFont(cellFont);
-  connect(m_editCategory, SIGNAL(createItem(QString, QString&)), this, SIGNAL(createCategory(QString, QString&)));
+  connect(m_editCategory, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createCategory(QString,QString&)));
   connect(m_editCategory, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   m_editMemo = new kMyMoneyLineEdit(0, false, Qt::AlignLeft | Qt::AlignVCenter);

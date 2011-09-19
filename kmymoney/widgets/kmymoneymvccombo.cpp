@@ -190,14 +190,14 @@ void KMyMoneyMVCCombo::editTextChanged(const QString &text)
 
 void KMyMoneyMVCCombo::connectNotify(const char* signal)
 {
-  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(QString, QString&))))) {
+  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(QString,QString&))))) {
     d->m_canCreateObjects = true;
   }
 }
 
 void KMyMoneyMVCCombo::disconnectNotify(const char* signal)
 {
-  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(QString, QString&))))) {
+  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(QString,QString&))))) {
     d->m_canCreateObjects = false;
   }
 }

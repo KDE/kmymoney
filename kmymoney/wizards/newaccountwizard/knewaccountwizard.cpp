@@ -687,7 +687,7 @@ CreditCardSchedulePage::CreditCardSchedulePage(Wizard* wizard) :
   connect(m_payee, SIGNAL(itemSelected(QString)), object(), SIGNAL(completeStateChanged()));
   connect(m_date, SIGNAL(dateChanged(QDate)), object(), SIGNAL(completeStateChanged()));
 
-  connect(m_payee, SIGNAL(createItem(QString, QString&)), wizard, SIGNAL(createPayee(QString, QString&)));
+  connect(m_payee, SIGNAL(createItem(QString,QString&)), wizard, SIGNAL(createPayee(QString,QString&)));
 
   m_reminderCheckBox->setChecked(true);
   connect(m_reminderCheckBox, SIGNAL(toggled(bool)), object(), SIGNAL(completeStateChanged()));
@@ -777,7 +777,7 @@ GeneralLoanInfoPage::GeneralLoanInfoPage(Wizard* wizard) :
 
   slotLoadWidgets();
 
-  connect(m_payee, SIGNAL(createItem(QString, QString&)), wizard, SIGNAL(createPayee(QString, QString&)));
+  connect(m_payee, SIGNAL(createItem(QString,QString&)), wizard, SIGNAL(createPayee(QString,QString&)));
   connect(m_anyPayments, SIGNAL(activated(int)), object(),  SIGNAL(completeStateChanged()));
   connect(m_recordings, SIGNAL(activated(int)), object(), SIGNAL(completeStateChanged()));
 
@@ -1322,7 +1322,7 @@ LoanSchedulePage::LoanSchedulePage(Wizard* wizard) :
 {
   m_mandatoryGroup->add(m_interestCategory->lineEdit());
   m_mandatoryGroup->add(m_paymentAccount->lineEdit());
-  connect(m_interestCategory, SIGNAL(createItem(QString, QString&)), this, SLOT(slotCreateCategory(QString, QString&)));
+  connect(m_interestCategory, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateCategory(QString,QString&)));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
 }
 
@@ -1515,7 +1515,7 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
   m_parentAccounts->setModel(m_filterProxyModel);
   m_parentAccounts->sortByColumn(0, Qt::AscendingOrder);
 
-  connect(m_parentAccounts->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(parentAccountChanged()));
+  connect(m_parentAccounts->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(parentAccountChanged()));
 }
 
 void HierarchyPage::enterPage(void)

@@ -132,10 +132,10 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   connect(btnUpdateSelected, SIGNAL(clicked()), this, SLOT(slotUpdateSelectedClicked()));
   connect(btnUpdateAll, SIGNAL(clicked()), this, SLOT(slotUpdateAllClicked()));
 
-  connect(&m_webQuote, SIGNAL(quote(QString, QString, QDate, double)),
-          this, SLOT(slotReceivedQuote(QString, QString, QDate, double)));
-  connect(&m_webQuote, SIGNAL(failed(QString, QString)),
-          this, SLOT(slotQuoteFailed(QString, QString)));
+  connect(&m_webQuote, SIGNAL(quote(QString,QString,QDate,double)),
+          this, SLOT(slotReceivedQuote(QString,QString,QDate,double)));
+  connect(&m_webQuote, SIGNAL(failed(QString,QString)),
+          this, SLOT(slotQuoteFailed(QString,QString)));
   connect(&m_webQuote, SIGNAL(status(QString)),
           this, SLOT(logStatusMessage(QString)));
   connect(&m_webQuote, SIGNAL(error(QString)),

@@ -64,10 +64,10 @@ kMyMoneyScheduledCalendar::kMyMoneyScheduledCalendar(QWidget *parent)
 
   init(QDate::currentDate());
 
-  connect(m_scheduledDateTable, SIGNAL(enterClicked(MyMoneySchedule, QDate)),
-          this, SIGNAL(enterClicked(MyMoneySchedule, QDate)));
-  connect(m_scheduledDateTable, SIGNAL(skipClicked(MyMoneySchedule, QDate)),
-          this, SIGNAL(skipClicked(MyMoneySchedule, QDate)));
+  connect(m_scheduledDateTable, SIGNAL(enterClicked(MyMoneySchedule,QDate)),
+          this, SIGNAL(enterClicked(MyMoneySchedule,QDate)));
+  connect(m_scheduledDateTable, SIGNAL(skipClicked(MyMoneySchedule,QDate)),
+          this, SIGNAL(skipClicked(MyMoneySchedule,QDate)));
 }
 
 kMyMoneyScheduledCalendar::~kMyMoneyScheduledCalendar()

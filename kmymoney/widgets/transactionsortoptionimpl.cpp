@@ -50,8 +50,8 @@ void TransactionSortOption::init()
   setSettings(QString());
 
   // update UI when focus changes
-  connect(qApp, SIGNAL(focusChanged(QWidget*, QWidget*)),
-          this, SLOT(slotFocusChanged(QWidget*, QWidget*)));
+  connect(qApp, SIGNAL(focusChanged(QWidget*,QWidget*)),
+          this, SLOT(slotFocusChanged(QWidget*,QWidget*)));
 }
 
 /**

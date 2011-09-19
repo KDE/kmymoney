@@ -378,7 +378,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   d->m_myMoneyView = new KMyMoneyView(frame);
   layout->addWidget(d->m_myMoneyView, 10);
   connect(d->m_myMoneyView, SIGNAL(aboutToChangeView()), this, SLOT(slotResetSelections()));
-  connect(d->m_myMoneyView, SIGNAL(currentPageChanged(KPageWidgetItem*, KPageWidgetItem*)),
+  connect(d->m_myMoneyView, SIGNAL(currentPageChanged(KPageWidgetItem*,KPageWidgetItem*)),
           this, SLOT(slotUpdateActions()));
 
   ///////////////////////////////////////////////////////////////////
@@ -395,7 +395,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   ::timetrace("done");
 
-  connect(&d->m_proc, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(slotProcessExited()));
+  connect(&d->m_proc, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotProcessExited()));
 
   // force to show the home page if the file is closed
   connect(action("view_show_transaction_detail"), SIGNAL(toggled(bool)), d->m_myMoneyView, SLOT(slotShowTransactionDetail(bool)));
@@ -2333,7 +2333,7 @@ void KMyMoneyApp::slotQifExport(void)
   if (dlg->exec()) {
     if (okToWriteFile(dlg->filename())) {
       MyMoneyQifWriter writer;
-      connect(&writer, SIGNAL(signalProgress(int, int)), this, SLOT(slotStatusProgressBar(int, int)));
+      connect(&writer, SIGNAL(signalProgress(int,int)), this, SLOT(slotStatusProgressBar(int,int)));
 
       writer.write(dlg->filename(), dlg->profile(), dlg->accountId(),
                    dlg->accountSelected(), dlg->categorySelected(),
@@ -2681,8 +2681,8 @@ void KMyMoneyApp::slotFindTransaction(void)
   if (d->m_searchDlg == 0) {
     d->m_searchDlg = new KFindTransactionDlg();
     connect(d->m_searchDlg, SIGNAL(destroyed()), this, SLOT(slotCloseSearchDialog()));
-    connect(d->m_searchDlg, SIGNAL(transactionSelected(QString, QString)),
-            d->m_myMoneyView, SLOT(slotLedgerSelected(QString, QString)));
+    connect(d->m_searchDlg, SIGNAL(transactionSelected(QString,QString)),
+            d->m_myMoneyView, SLOT(slotLedgerSelected(QString,QString)));
   }
   d->m_searchDlg->show();
   d->m_searchDlg->raise();
@@ -3025,8 +3025,8 @@ void KMyMoneyApp::slotAccountNew(MyMoneyAccount& account)
   NewAccountWizard::Wizard* wizard = new NewAccountWizard::Wizard();
   connect(wizard, SIGNAL(createInstitution(MyMoneyInstitution&)), this, SLOT(slotInstitutionNew(MyMoneyInstitution&)));
   connect(wizard, SIGNAL(createAccount(MyMoneyAccount&)), this, SLOT(slotAccountNew(MyMoneyAccount&)));
-  connect(wizard, SIGNAL(createPayee(QString, QString&)), this, SLOT(slotPayeeNew(QString, QString&)));
-  connect(wizard, SIGNAL(createCategory(MyMoneyAccount&, MyMoneyAccount)), this, SLOT(slotCategoryNew(MyMoneyAccount&, MyMoneyAccount)));
+  connect(wizard, SIGNAL(createPayee(QString,QString&)), this, SLOT(slotPayeeNew(QString,QString&)));
+  connect(wizard, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)), this, SLOT(slotCategoryNew(MyMoneyAccount&,MyMoneyAccount)));
 
   wizard->setAccount(account);
 
@@ -3566,7 +3566,7 @@ void KMyMoneyApp::slotAccountEdit(void)
       } else {
         QPointer<KEditLoanWizard> wizard = new KEditLoanWizard(d->m_selectedAccount);
         connect(wizard, SIGNAL(newCategory(MyMoneyAccount&)), this, SLOT(slotCategoryNew(MyMoneyAccount&)));
-        connect(wizard, SIGNAL(createPayee(QString, QString&)), this, SLOT(slotPayeeNew(QString, QString&)));
+        connect(wizard, SIGNAL(createPayee(QString,QString&)), this, SLOT(slotPayeeNew(QString,QString&)));
         if (wizard->exec() == QDialog::Accepted) {
           MyMoneySchedule sch = file->schedule(d->m_selectedAccount.value("schedule").toLatin1());
           if (!(d->m_selectedAccount == wizard->account())
@@ -3758,8 +3758,8 @@ void KMyMoneyApp::slotAccountReconcileStart(void)
       delete d->m_endingBalanceDlg;
       d->m_endingBalanceDlg = new KEndingBalanceDlg(account, this);
       if (account.isAssetLiability()) {
-        connect(d->m_endingBalanceDlg, SIGNAL(createPayee(QString, QString&)), this, SLOT(slotPayeeNew(QString, QString&)));
-        connect(d->m_endingBalanceDlg, SIGNAL(createCategory(MyMoneyAccount&, MyMoneyAccount)), this, SLOT(slotCategoryNew(MyMoneyAccount&, MyMoneyAccount)));
+        connect(d->m_endingBalanceDlg, SIGNAL(createPayee(QString,QString&)), this, SLOT(slotPayeeNew(QString,QString&)));
+        connect(d->m_endingBalanceDlg, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)), this, SLOT(slotCategoryNew(MyMoneyAccount&,MyMoneyAccount)));
 
         if (d->m_endingBalanceDlg->exec() == QDialog::Accepted) {
           if (KMyMoneyGlobalSettings::autoReconciliation()) {
@@ -4224,7 +4224,7 @@ void KMyMoneyApp::slotScheduleEdit(void)
         case MyMoneySchedule::TYPE_LOANPAYMENT:
           loan_wiz = new KEditLoanWizard(schedule.account(2));
           connect(loan_wiz, SIGNAL(newCategory(MyMoneyAccount&)), this, SLOT(slotCategoryNew(MyMoneyAccount&)));
-          connect(loan_wiz, SIGNAL(createPayee(QString, QString&)), this, SLOT(slotPayeeNew(QString, QString&)));
+          connect(loan_wiz, SIGNAL(createPayee(QString,QString&)), this, SLOT(slotPayeeNew(QString,QString&)));
           if (loan_wiz->exec() == QDialog::Accepted) {
             MyMoneyFileTransaction ft;
             try {
@@ -4436,7 +4436,7 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
             }
 
             QString newId;
-            connect(d->m_transactionEditor, SIGNAL(balanceWarning(QWidget*, MyMoneyAccount, QString)), d->m_balanceWarning, SLOT(slotShowMessage(QWidget*, MyMoneyAccount, QString)));
+            connect(d->m_transactionEditor, SIGNAL(balanceWarning(QWidget*,MyMoneyAccount,QString)), d->m_balanceWarning, SLOT(slotShowMessage(QWidget*,MyMoneyAccount,QString)));
             if (d->m_transactionEditor->enterTransactions(newId, false)) {
               if (!newId.isEmpty()) {
                 MyMoneyTransaction t = MyMoneyFile::instance()->transaction(newId);
@@ -5115,9 +5115,9 @@ void KMyMoneyApp::slotTransactionsNew(void)
           payeeEdit->lineEdit()->selectAll();
         }
         if (d->m_transactionEditor) {
-          connect(d->m_transactionEditor, SIGNAL(statusProgress(int, int)), this, SLOT(slotStatusProgressBar(int, int)));
+          connect(d->m_transactionEditor, SIGNAL(statusProgress(int,int)), this, SLOT(slotStatusProgressBar(int,int)));
           connect(d->m_transactionEditor, SIGNAL(statusMsg(QString)), this, SLOT(slotStatusMsg(QString)));
-          connect(d->m_transactionEditor, SIGNAL(scheduleTransaction(MyMoneyTransaction, MyMoneySchedule::occurrenceE)), this, SLOT(slotScheduleNew(MyMoneyTransaction, MyMoneySchedule::occurrenceE)));
+          connect(d->m_transactionEditor, SIGNAL(scheduleTransaction(MyMoneyTransaction,MyMoneySchedule::occurrenceE)), this, SLOT(slotScheduleNew(MyMoneyTransaction,MyMoneySchedule::occurrenceE)));
         }
         slotUpdateActions();
       }
@@ -5164,7 +5164,7 @@ void KMyMoneyApp::slotTransactionsEditSplits(void)
         MyMoneyFileTransaction ft;
         try {
           QString id;
-          connect(d->m_transactionEditor, SIGNAL(balanceWarning(QWidget*, MyMoneyAccount, QString)), d->m_balanceWarning, SLOT(slotShowMessage(QWidget*, MyMoneyAccount, QString)));
+          connect(d->m_transactionEditor, SIGNAL(balanceWarning(QWidget*,MyMoneyAccount,QString)), d->m_balanceWarning, SLOT(slotShowMessage(QWidget*,MyMoneyAccount,QString)));
           d->m_transactionEditor->enterTransactions(id);
           ft.commit();
         } catch (MyMoneyException* e) {
@@ -5203,7 +5203,7 @@ void KMyMoneyApp::slotTransactionsEnter(void)
     if (d->m_transactionEditor) {
       QString accountId = d->m_selectedAccount.id();
       QString newId;
-      connect(d->m_transactionEditor, SIGNAL(balanceWarning(QWidget*, MyMoneyAccount, QString)), d->m_balanceWarning, SLOT(slotShowMessage(QWidget*, MyMoneyAccount, QString)));
+      connect(d->m_transactionEditor, SIGNAL(balanceWarning(QWidget*,MyMoneyAccount,QString)), d->m_balanceWarning, SLOT(slotShowMessage(QWidget*,MyMoneyAccount,QString)));
       if (d->m_transactionEditor->enterTransactions(newId)) {
         KMyMoneyPayeeCombo* payeeEdit = dynamic_cast<KMyMoneyPayeeCombo*>(d->m_transactionEditor->haveWidget("payee"));
         if (payeeEdit && !newId.isEmpty()) {
@@ -6089,7 +6089,7 @@ void KMyMoneyApp::slotUpdateActions(void)
               action("account_reconcile")->setToolTip(i18n("Reconcile"));
             } else {
               QString tip;
-              tip = i18n("Reconcile - disabled because you are currently reconciling <b>%1</b>").arg(d->m_reconciliationAccount.name()); 
+              tip = i18n("Reconcile - disabled because you are currently reconciling <b>%1</b>").arg(d->m_reconciliationAccount.name());
               action("account_reconcile")->setToolTip(tip);
               if (!d->m_transactionEditor) {
                 action("account_reconcile_finish")->setEnabled(d->m_selectedAccount.id() == d->m_reconciliationAccount.id());
@@ -6401,7 +6401,7 @@ void KMyMoneyApp::slotCurrencyDialog(void)
   connect(dlg, SIGNAL(selectObject(MyMoneySecurity)), this, SLOT(slotSelectCurrency(MyMoneySecurity)));
   connect(dlg, SIGNAL(openContextMenu(MyMoneySecurity)), this, SLOT(slotShowCurrencyContextMenu()));
   connect(this, SIGNAL(currencyRename()), dlg, SLOT(slotStartRename()));
-  connect(dlg, SIGNAL(renameCurrency(QString, QString)), this, SLOT(slotCurrencyRename(QString, QString)));
+  connect(dlg, SIGNAL(renameCurrency(QString,QString)), this, SLOT(slotCurrencyRename(QString,QString)));
   connect(this, SIGNAL(currencyCreated(QString)), dlg, SLOT(slotSelectCurrency(QString)));
   connect(dlg, SIGNAL(selectBaseCurrency(MyMoneySecurity)), this, SLOT(slotCurrencySetBase()));
 
