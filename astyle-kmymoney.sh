@@ -10,6 +10,21 @@
 ASTYLE_VERSION=1.23
 
 IFS=:
+
+# make sure, we have normalize available to normalize the signal/slot
+# signatures
+NORMALIZE=
+for path in $PATH; do
+  if test -x $path/normalize; then
+    NORMALIZE=$path/normalize
+  fi
+done
+
+if test -z "$NORMALIZE"; then
+  echo "You don't have the Qt normalize utility in your search path."
+  exit
+fi
+
 for path in $PATH; do
   if test -x $path/astyle; then
     # determine version of AStyle
@@ -41,6 +56,7 @@ for path in $PATH; do
       fi
     done
 
+    $NORMALIZE --modify kmymoney
     exit $?
   fi
 done
