@@ -44,8 +44,6 @@ public:
   virtual ~KBAccountListViewItem();
 
   AB_ACCOUNT *getAccount();
-
-  QString key(int column, bool ascending) const;
 };
 
 
