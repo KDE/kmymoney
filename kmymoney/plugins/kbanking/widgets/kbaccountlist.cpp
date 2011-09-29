@@ -120,7 +120,7 @@ KBAccountListView::KBAccountListView(QWidget *parent)
   QStringList header;
   header << i18nc("Header for AqBanking account list", "Id");
   header << i18nc("Header for AqBanking account list", "Institution Code");
-  header << i18nc("Header for AqBanking account list", "Instituton Name");
+  header << i18nc("Header for AqBanking account list", "Institution Name");
   header << i18nc("Header for AqBanking account list", "Account Number");
   header << i18nc("Header for AqBanking account list", "Account Name");
   header << i18nc("Header for AqBanking account list", "Owner");
