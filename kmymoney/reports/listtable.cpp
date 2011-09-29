@@ -702,7 +702,7 @@ void ListTable::includeInvestmentSubAccounts()
       }
     }
   } else {
-    // if not an investment-only report or explicitely including unused accounts
+    // if not an investment-only report or explicitly including unused accounts
     // add all investment subaccounts
     m_config.addAccount(subAccountsList);
   }
