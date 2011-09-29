@@ -6093,7 +6093,7 @@ void KMyMoneyApp::slotUpdateActions(void)
               action("account_reconcile")->setToolTip(i18n("Reconcile"));
             } else {
               QString tip;
-              tip = i18n("Reconcile - disabled because you are currently reconciling <b>%1</b>").arg(d->m_reconciliationAccount.name());
+              tip = i18n("Reconcile - disabled because you are currently reconciling <b>%1</b>", d->m_reconciliationAccount.name());
               action("account_reconcile")->setToolTip(tip);
               if (!d->m_transactionEditor) {
                 action("account_reconcile_finish")->setEnabled(d->m_selectedAccount.id() == d->m_reconciliationAccount.id());
