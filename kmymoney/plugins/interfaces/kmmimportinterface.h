@@ -52,7 +52,7 @@ public:
   KMMImportInterface(KMyMoneyApp* app, QObject* parent, const char* name = 0);
   ~KMMImportInterface() {}
 
-  KUrl selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode) const;
+  KUrl selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode, QWidget *widget) const;
 
 private:
   KMyMoneyApp*    m_app;

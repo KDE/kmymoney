@@ -1390,7 +1390,7 @@ void KMyMoneyApp::slotFileNew(void)
   }
 }
 
-KUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, const QString& mask, KFile::Mode mode)
+KUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, const QString& mask, KFile::Mode mode, QWidget* widget)
 {
   KUrl url;
   QString path(_path);
@@ -1400,12 +1400,20 @@ KUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, con
   if (path.isEmpty())
     path = "kfiledialog:///kmymoney-import";
 
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl(path), mask, this);
+  QPointer<KFileDialog> dialog = new KFileDialog(KUrl(path), mask, this, widget);
   dialog->setMode(mode);
 
   if (dialog->exec() == QDialog::Accepted) {
     url = dialog->selectedUrl();
   }
+
+  // in case we have an additional widget, we remove it from the
+  // dialog, so that the caller can still access it. Therefore, it is
+  // the callers responsibility to delete the object
+
+  if (widget)
+    widget->setParent(0);
+
   delete dialog;
 
   return url;

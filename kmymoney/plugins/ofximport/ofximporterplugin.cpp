@@ -44,6 +44,7 @@
 #include "konlinebankingstatus.h"
 #include "konlinebankingsetupwizard.h"
 #include "kofxdirectconnectdlg.h"
+#include "ui_importoption.h"
 
 K_PLUGIN_FACTORY(OfxImportFactory, registerPlugin<OfxImporterPlugin>();)
 K_EXPORT_PLUGIN(OfxImportFactory("kmm_ofximport"))
@@ -107,10 +108,18 @@ void OfxImporterPlugin::createActions(void)
 
 void OfxImporterPlugin::slotImportFile(void)
 {
+  QWidget * widget = new QWidget;
+  Ui_ImportOption* option = new Ui_ImportOption;
+  option->setupUi(widget);
+
   KUrl url = importInterface()->selectFile(i18n("OFX import file selection"),
              "",
              "*.ofx *.qfx *.ofc|OFX files (*.ofx, *.qfx, *.ofc)\n*|All files",
-             static_cast<KFile::Mode>((int)(KFile::File | KFile::ExistingOnly)));
+             static_cast<KFile::Mode>((int)(KFile::File | KFile::ExistingOnly)),
+             widget);
+
+  d->m_preferName = static_cast<OfxImporterPlugin::Private::NamePreference>(option->m_preferName->currentIndex());
+
   if (url.isValid()) {
     if (isMyFormat(url.path())) {
       slotImportFile(url.path());
@@ -119,6 +128,7 @@ void OfxImporterPlugin::slotImportFile(void)
     }
 
   }
+  delete widget;
 }
 
 QString OfxImporterPlugin::formatName(void) const

@@ -54,7 +54,20 @@ public:
   explicit ImportInterface(QObject* parent, const char* name = 0);
   ~ImportInterface() {}
 
-  virtual KUrl selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode) const = 0;
+  /**
+   * This method is provided by KMyMoney to select a file to
+   * be imported. A caption for the dialog can be provided via
+   * @a title, a specific directory to be started with as @a path.
+   * Which files are selectable is controlled via the contents
+   * of @a mask. @a mode controls the behavior of the dialog. In case
+   * the importer requires additional information, it can provide
+   * a widget to ask for them. If none are required, pass 0.
+   *
+   * @note In case you create a widget and pass it to selectFile()
+   * you are responsible to delete the widget. It will not be deleted
+   * automatically during the destruction of the dialog.
+   */
+  virtual KUrl selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode, QWidget *widget) const = 0;
 
 signals:
 };

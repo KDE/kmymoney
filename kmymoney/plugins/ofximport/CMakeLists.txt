@@ -9,6 +9,10 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/dialogs
 
 SET(kmm_ofximport_PART_SRCS ofximporterplugin.cpp ofxpartner.cpp)
 
+SET(kmm_ofximport_PART_UI importoption.ui)
+
+KDE4_ADD_UI_FILES(kmm_ofximport_PART_SRCS ${kmm_ofximport_PART_UI})
+
 KDE4_ADD_PLUGIN(kmm_ofximport ${kmm_ofximport_PART_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_ofximport

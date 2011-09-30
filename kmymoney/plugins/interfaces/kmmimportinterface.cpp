@@ -34,9 +34,9 @@ KMyMoneyPlugin::KMMImportInterface::KMMImportInterface(KMyMoneyApp* app, QObject
 {
 }
 
-KUrl KMyMoneyPlugin::KMMImportInterface::selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode) const
+KUrl KMyMoneyPlugin::KMMImportInterface::selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode, QWidget *widget) const
 {
-  return m_app->selectFile(title, path, mask, mode);
+  return m_app->selectFile(title, path, mask, mode, widget);
 }
 
 #include "kmmimportinterface.moc"
