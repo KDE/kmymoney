@@ -92,8 +92,9 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   // for consistency reasons, this accepts the same delimiters as WebPriceQuote::launch()
   QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
   MyMoneySecurityPair currencyIds;
-  if (splitrx.indexIn(securityId) != -1)
+  if (splitrx.indexIn(securityId) != -1) {
     currencyIds = MyMoneySecurityPair(splitrx.cap(1).toUtf8(), splitrx.cap(2).toUtf8());
+  }
 
   MyMoneyPriceList prices = file->priceList();
   for (MyMoneyPriceList::ConstIterator it_price = prices.constBegin(); it_price != prices.constEnd(); ++it_price) {
@@ -123,7 +124,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   }
 
   // if list is empty, add the request price pair
-  if (lvEquityList->children().empty()) {
+  if (lvEquityList->invisibleRootItem()->childCount() == 0) {
     addPricePair(currencyIds, true);
   }
 
