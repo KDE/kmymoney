@@ -2734,6 +2734,10 @@ void KMyMoneyApp::slotInstitutionEdit(const MyMoneyObject& obj)
   if (typeid(obj) != typeid(MyMoneyInstitution))
     return;
 
+  // make sure the selected object has an id
+  if (d->m_selectedInstitution.id().isEmpty())
+    return;
+
   try {
     MyMoneyFile* file = MyMoneyFile::instance();
 
