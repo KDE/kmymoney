@@ -193,7 +193,7 @@
    where you want to install KMyMoney; it should be the same location where
    &kde; is installed. In many distributions, cmake will find this location on
    its own, but if it can't, you can use the command line tool
-   <command>kde-config --prefix</command> to read out what the prefix should
+   <command>kde4-config --prefix</command> to read out what the prefix should
    be. For &RedHat;-based distributions, including Mandriva and Fedora, &kde; is
    installed in <filename role="directory">/usr</filename>.</para>
    <para>Another useful option is -DCMAKE_BUILD_TYPE.  Normally this is not set,
