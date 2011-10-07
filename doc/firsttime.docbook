@@ -302,7 +302,7 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Used by the online banking module to provide feedback on running
+      Outbox: Used by the online banking module to provide feedback on running
       processes.  This is a view provided by the KBanking plugin and may not be
       present on your system.
     </para>
