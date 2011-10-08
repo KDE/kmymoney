@@ -37,7 +37,7 @@ on a yellow triangle in the register?
 <tip category="KMyMoney|Ledger">
 <html>
 <p>...that you can show all details of the transactions in the register
-by typing &lt;Ctrl-T&gt; or selecting the 'Settings/Show Transaction Detail'
+by typing &lt;Ctrl-T&gt; or selecting the 'View -> Show Transaction Detail'
 menu entry? You can turn this feature off the same way.
 </html>
 
@@ -82,14 +82,14 @@ or in the transaction menu?
 <tip category="KMyMoney|General">
 <html>
 <p>...that you can modify the colors and fonts used for the ledgers
-via <i>Configure/Register/...</i>?
+via <i>Configure/Colors and Fonts</i>?
 </html>
 </tip>
 
 <tip category="KMyMoney|General">
 <html>
 <p>...that you can hide transactions prior to a specific date?
-The date can be modified via <i>Configure/Register/Filter</i>.
+The date can be modified via <i>Configure/General/Filter</i>.
 </html>
 </tip>
 
