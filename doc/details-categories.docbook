@@ -73,9 +73,15 @@
 </para>
 
 <para>
-  The Hierarchy tab allows you to change the parent category.  You can also
+  The Hierarchy tab allows you to change the parent category.
+<!-- not ported to kde4 yet, uncomment if that is done,
+     see https://bugs.kde.org/show_bug.cgi?id=272737
+  You can also
   change the parent category from the main category page by dragging the
   category to a different parent.
+-->
+  You can change the parent category by clicking on another category in this
+  view of the category hierarchy.
 </para>
 
 <para>
