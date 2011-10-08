@@ -702,10 +702,15 @@
 
 <formalpara><title>Hierarchy</title>
 <para>
+<!-- not ported to kde4 yet, uncomment if that is done,
+     see https://bugs.kde.org/show_bug.cgi?id=272737
   You can change the parent account by dragging the account in this
   view of the account hierarchy.  Changing the parent account is also
   possible in the main Accounts screen, by dragging the account and
   dropping it on a different parent account.
+-->
+  You can change the parent account by clicking on another parent account in
+  this view of the account hierarchy.
 </para>
 </formalpara>
 
