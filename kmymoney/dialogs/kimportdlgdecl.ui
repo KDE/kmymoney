@@ -122,7 +122,7 @@
       <item row="1" column="1">
        <widget class="KComboBox" name="m_typeComboBox">
         <property name="whatsThis">
-         <string>Select &lt;b&gt;Bank statement&lt;/b&gt; turns on automatic category matching which is turned off in case of &lt;b&gt;Historic data&lt;/b&gt;. Use the latter if you import files from other Personal Finance Management software.</string>
+         <string>Select &lt;b&gt;Bank statement&lt;/b&gt; turns on automatic category matching which is turned off in case of &lt;b&gt;Other application&lt;/b&gt;. Use the latter if you import files from other Personal Finance Management software.</string>
         </property>
         <item>
          <property name="text">
