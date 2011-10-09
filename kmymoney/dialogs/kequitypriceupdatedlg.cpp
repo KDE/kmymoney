@@ -73,7 +73,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
 
   // This is a "get it up and running" hack.  Will replace this in the future.
   headerList << i18nc("Internal identifier", "ID")
-             << i18nc("Online quote source", "Source");
+  << i18nc("Online quote source", "Source");
   lvEquityList->setColumnWidth(ID_COL, 0);
 
   lvEquityList->setHeaderLabels(headerList);
@@ -82,6 +82,9 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   lvEquityList->setAllColumnsShowFocus(true);
 
   btnUpdateAll->setEnabled(false);
+
+  btnOK->setGuiItem(KStandardGuiItem::ok());
+  btnCancel->setGuiItem(KStandardGuiItem::cancel());
 
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -392,8 +395,10 @@ void KEquityPriceUpdateDlg::slotUpdateSelectedClicked(void)
     prgOnlineProgress->setMaximum(1 + lvEquityList->invisibleRootItem()->childCount());
     prgOnlineProgress->setValue(skipCnt);
     m_webQuote.launch(item->text(SYMBOL_COL), item->text(ID_COL), item->text(SOURCE_COL));
-  } else
+  } else {
+
     logErrorMessage("No security selected.");
+  }
 }
 
 void KEquityPriceUpdateDlg::slotUpdateAllClicked(void)
@@ -407,8 +412,10 @@ void KEquityPriceUpdateDlg::slotUpdateAllClicked(void)
     prgOnlineProgress->setValue(1);
     m_fUpdateAll = true;
     m_webQuote.launch(item->text(SYMBOL_COL), item->text(ID_COL), item->text(SOURCE_COL));
-  } else
+
+  } else {
     logErrorMessage("Security list is empty.");
+  }
 }
 
 void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _symbol)

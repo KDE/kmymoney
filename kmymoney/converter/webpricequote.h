@@ -184,12 +184,12 @@ private:
   static const QStringList quoteSourcesNative();
   static const QStringList quoteSourcesFinanceQuote();
 
-  WebPriceQuoteProcess m_filter;
-  QString m_symbol;
-  QString m_id;
-  QDate m_date;
-  double m_price;
-  WebPriceQuoteSource m_source;
+private:
+  /// \internal d-pointer class.
+  class Private;
+  /// \internal d-pointer instance.
+  Private* const d;
+
   static QString m_financeQuoteScriptPath;
   static QStringList m_financeQuoteSources;
 
