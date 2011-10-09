@@ -72,7 +72,8 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   lvEquityList->setColumnWidth(NAME_COL, 125);
 
   // This is a "get it up and running" hack.  Will replace this in the future.
-  headerList << "ID" << "Source";
+  headerList << i18nc("Internal identifier", "ID")
+             << i18nc("Online quote source", "Source");
   lvEquityList->setColumnWidth(ID_COL, 0);
 
   lvEquityList->setHeaderLabels(headerList);
