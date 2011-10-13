@@ -1821,6 +1821,8 @@ void Register::scrollPage(int key, Qt::KeyboardModifiers modifiers)
           if (item->isVisible())
             height += item->rowHeightHint();
         } while ((!item->isSelectable() || !item->isVisible()) && item->prevItem());
+        while ((!item->isSelectable() || !item->isVisible()) && item->nextItem())
+          item = item->nextItem();
       }
       break;
     case Qt::Key_PageDown:
@@ -1830,6 +1832,8 @@ void Register::scrollPage(int key, Qt::KeyboardModifiers modifiers)
             height += item->rowHeightHint();
           item = item->nextItem();
         } while ((!item->isSelectable() || !item->isVisible()) && item->nextItem());
+        while ((!item->isSelectable() || !item->isVisible()) && item->prevItem())
+          item = item->prevItem();
       }
       break;
 
