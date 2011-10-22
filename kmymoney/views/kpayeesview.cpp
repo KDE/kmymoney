@@ -63,10 +63,11 @@
 #include "kmymoneyglobalsettings.h"
 #include "kmymoney.h"
 #include "models.h"
+#include "mymoneysecurity.h"
 
-/* -------------------------------------------------------------------------------*/
-/*                               KTransactionPtrVector                            */
-/* -------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------*/
+/*                         KTransactionPtrVector                            */
+/* -------------------------------------------------------------------------*/
 
 // *** KPayeeListItem Implementation ***
 
@@ -468,6 +469,8 @@ void KPayeesView::clearItemData(void)
 void KPayeesView::showTransactions(void)
 {
   MyMoneyMoney balance;
+  MyMoneyFile *file = MyMoneyFile::instance();
+  MyMoneySecurity base = file->baseCurrency();
 
   // setup sort order
   m_register->setSortOrder(KMyMoneyGlobalSettings::sortSearchView());
@@ -476,7 +479,7 @@ void KPayeesView::showTransactions(void)
   m_register->clear();
 
   if (m_payee.id().isEmpty() || !m_tabWidget->isEnabled()) {
-    m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
+    m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
     return;
   }
 
@@ -486,7 +489,7 @@ void KPayeesView::showTransactions(void)
   filter.setDateFilter(KMyMoneyGlobalSettings::startDate().date(), QDate());
 
   // retrieve the list from the engine
-  MyMoneyFile::instance()->transactionList(m_transactionList, filter);
+  file->transactionList(m_transactionList, filter);
 
   // create the elements for the register
   QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
@@ -494,17 +497,32 @@ void KPayeesView::showTransactions(void)
   MyMoneyMoney deposit, payment;
 
   int splitCount = 0;
+  bool balanceAccurate = true;
   for (it = m_transactionList.constBegin(); it != m_transactionList.constEnd(); ++it) {
     const MyMoneySplit& split = (*it).second;
-    MyMoneyAccount acc = MyMoneyFile::instance()->account(split.accountId());
+    MyMoneyAccount acc = file->account(split.accountId());
     ++splitCount;
     uniqueMap[(*it).first.id()]++;
 
     KMyMoneyRegister::Register::transactionFactory(m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
+
+    // take care of foreign currencies
+    MyMoneyMoney val = split.shares().abs();
+    if (acc.currencyId() != base.id()) {
+      MyMoneyPrice price = file->price(acc.currencyId(), base.id());
+      // in case the price is valid, we use it. Otherwise, we keep
+      // a flag that tells us that the balance is somewhat inaccurate
+      if (price.isValid()) {
+        val *= price.rate(base.id());
+      } else {
+        balanceAccurate = false;
+      }
+    }
+
     if (split.shares().isNegative()) {
-      payment += split.shares().abs();
+      payment += val;
     } else {
-      deposit += split.shares().abs();
+      deposit += val;
     }
   }
   balance = deposit - payment;
@@ -520,10 +538,12 @@ void KPayeesView::showTransactions(void)
 
   m_register->updateRegister(true);
 
-  // we might end up here with updates disabled on the register so make sure that we enable updates here
+  // we might end up here with updates disabled on the register so
+  // make sure that we enable updates here
   m_register->setUpdatesEnabled(true);
-
-  m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction())));
+  m_balanceLabel->setText(i18n("Balance: %1%2",
+                               balanceAccurate ? "" : "~",
+                               balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
 }
 
 void KPayeesView::slotKeyListChanged(void)
@@ -531,8 +551,7 @@ void KPayeesView::slotKeyListChanged(void)
   bool rc = false;
   bool ignorecase = false;
   QStringList keys;
-  // J.Rodehueser: delete unused variable 'type'
-  // orig:  MyMoneyPayee::payeeMatchType type = m_payee.matchData(ignorecase, keys);
+
   m_payee.matchData(ignorecase, keys);
   if (m_matchType->checkedId() == MyMoneyPayee::matchKey) {
     rc |= (keys != matchKeyEditList->items());
