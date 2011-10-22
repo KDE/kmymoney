@@ -347,7 +347,7 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources(void
   result["boerseonline"] = WebPriceQuoteSource("boerseonline",
                            "http://www.boerse-online.de/tools/boerse/einzelkurs_kurse.htm?&s=%1",
                            QString(),  // symbolregexp
-                           "Akt\\. Kurs.(\\d+,\\d\\d)", // priceregexp
+                           "Akt\\. Kurs.([\\d\\.]+,\\d\\d)", // priceregexp
                            "Datum.(\\d+\\.\\d+\\.\\d+)", // dateregexp (doesn't work; date in chart
                            "%d.%m.%y" // dateformat
                                               );
