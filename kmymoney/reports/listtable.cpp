@@ -630,8 +630,9 @@ void ListTable::includeInvestmentSubAccounts()
 {
   // if we're not in expert mode, we need to make sure
   // that all stock accounts for the selected investment
-  // account are also selected
-  if (KMyMoneyGlobalSettings::expertMode()) {
+  // account are also selected.
+  // In case we get called for a non investment only report we quit
+  if (KMyMoneyGlobalSettings::expertMode() || !m_config.isInvestmentsOnly()) {
     return;
   }
 
