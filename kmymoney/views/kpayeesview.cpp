@@ -170,9 +170,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_register->setDetailsColumnType(KMyMoneyRegister::AccountFirst);
   m_balanceLabel->hide();
 
-  connect(m_payeesList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotSelectPayee()));
-  connect(m_payeesList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(slotSelectPayee()));
-  connect(m_payeesList, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(slotSelectPayee()));
+  connect(m_payeesList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(slotSelectPayee(QListWidgetItem*,QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotRenamePayee(QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotOpenContextMenu(const QPoint&)));
@@ -365,13 +363,13 @@ void KPayeesView::selectedPayees(QList<MyMoneyPayee>& payeesList) const
   }
 }
 
-void KPayeesView::slotSelectPayee(void)
+void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
 {
   m_allowEditing = false;
 
   // check if the content of a currently selected payee was modified
   // and ask to store the data
-  if (m_updateButton->isEnabled()) {
+  if (m_updateButton->isEnabled() && prev) {
     if (KMessageBox::questionYesNo(this, QString("<qt>%1</qt>").arg(
                                      i18n("Do you want to save the changes for <b>%1</b>?", m_newName)),
                                    i18n("Save changes")) == KMessageBox::Yes) {
@@ -382,13 +380,13 @@ void KPayeesView::slotSelectPayee(void)
   }
 
   // loop over all payees and count the number of payees, also
-  // optain last selected payee
+  // obtain last selected payee
   QList<MyMoneyPayee> payeesList;
   selectedPayees(payeesList);
 
   emit selectObjects(payeesList);
 
-  if (payeesList.isEmpty()) {
+  if (payeesList.isEmpty() && !cur) {
     m_tabWidget->setEnabled(false); // disable tab widget
     m_balanceLabel->hide();
     clearItemData();
@@ -410,7 +408,16 @@ void KPayeesView::slotSelectPayee(void)
   // selection mode of the QListView has been changed to Extended, this
   // will also be the only selection and behave exactly as before - Andreas
   try {
-    m_payee = payeesList[0];
+    if (payeesList.count() > 0)
+      m_payee = payeesList[0];
+
+    if (cur) {
+      KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(cur);
+      if (item) {
+        m_payee = item->payee();
+      }
+    }
+
     m_newName = m_payee.name();
 
     addressEdit->setEnabled(true);
