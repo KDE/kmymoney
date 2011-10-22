@@ -416,6 +416,7 @@ KBudgetView::~KBudgetView()
   // remember the splitter settings for startup
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
   grp.writeEntry("KBudgetViewSplitterSize", m_splitter->sizes());
+  grp.sync();
 }
 
 void KBudgetView::showEvent(QShowEvent * event)
