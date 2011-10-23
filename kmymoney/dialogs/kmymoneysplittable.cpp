@@ -402,7 +402,7 @@ void kMyMoneySplitTable::mouseDoubleClickEvent(QMouseEvent *e)
   slotSetFocus(model()->index(rowAt(e->pos().y()), col), e->button());
   createEditWidgets(false);
 
-  QLineEdit* editWidget = 0;
+  QLineEdit* editWidget = 0;    //krazy:exclude=qmethods
   switch (col) {
     case 0:
       editWidget = m_editCategory->lineEdit();
