@@ -672,15 +672,18 @@ void ListTable::includeInvestmentSubAccounts()
   if (m_config.isInvestmentsOnly()
       && !m_config.isIncludingUnusedAccounts()) {
     // if the balance is not zero at the end, include the subaccount
-    QStringList::const_iterator it_balance;
-    for (it_balance = subAccountsList.constBegin(); it_balance != subAccountsList.constEnd(); ++it_balance) {
+    QStringList::iterator it_balance;
+    for (it_balance = subAccountsList.begin(); it_balance != subAccountsList.end(); ) {
       if (!file->balance((*it_balance), m_config.toDate()).isZero()) {
         m_config.addAccount((*it_balance));
-        subAccountsList.removeOne((*it_balance));
+        it_balance = subAccountsList.erase((it_balance));
+
+      } else {
+        ++it_balance;
       }
     }
 
-    // if there are transactions for that subaccount, include it
+    // if there are transactions for that subaccount, include them
     MyMoneyTransactionFilter filter;
     filter.setDateFilter(m_config.fromDate(), m_config.toDate());
     filter.addAccount(subAccountsList);
@@ -694,7 +697,7 @@ void ListTable::includeInvestmentSubAccounts()
       const QList<MyMoneySplit>& splits = (*it_t).splits();
       QList<MyMoneySplit>::const_iterator it_s = splits.begin();
       for (; it_s != splits.end(); ++it_s) {
-        QString accountId = (*it_s).accountId();
+        const QString& accountId = (*it_s).accountId();
         if (!(*it_s).shares().isZero()
             && subAccountsList.contains(accountId)) {
           subAccountsList.removeOne(accountId);
