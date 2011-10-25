@@ -557,7 +557,7 @@ transactions this is currently empty.</para>
   Creating a new account by either method opens the <emphasis>New Account
   Wizard</emphasis>.  This wizard will take you step by step through the process
   of creating an account, gathering the required information at each step.  To
-  navigate through the pages click on the <guibutton>Previous</guibutton> and
+  navigate through the pages click on the <guibutton>Back</guibutton> and
   <guibutton>Next</guibutton> buttons.
 </para>
 
