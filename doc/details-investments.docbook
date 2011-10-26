@@ -96,7 +96,7 @@
 <para>
   Right-click the mouse in the empty space in the view.  This brings up
   the <guimenu>Investment Options</guimenu> context menu. Choose
-  <guimenuitem>New...</guimenuitem> from this menu.  This launches the
+  <guimenuitem>New investment...</guimenuitem> from this menu.  This launches the
   <guilabel>New Investment Wizard</guilabel> which you use to create your new
   Investment.
 </para>
