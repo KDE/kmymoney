@@ -29,15 +29,15 @@ IF(NOT WIN32)
   set( mymoneydatabasemgrtest_SRCS mymoneydatabasemgrtest.cpp ../mymoneytestutils.cpp )
 
   set(target_link_libraries_test 
-	  ${QT_QTGUI_LIBRARY}
-	  ${QT_QTXML_LIBRARY}
-	  ${QT_QTCORE_LIBRARY}
-	  ${QT_QTTEST_LIBRARY}
-	  ${QT_QTSQL_LIBRARIES}
+	  ${LIBALKIMIA_LIBRARY}
 	  ${KDE4_KDECORE_LIBS}
 	  ${KDE4_KIO_LIBS}
-	  ${GMP_LIBRARIES}
-	  ${LIBALKIMIA_LIBRARY})
+	  ${QT_QTGUI_LIBRARY}
+	  ${QT_QTXML_LIBRARY}
+	  ${QT_QTTEST_LIBRARY}
+	  ${QT_QTSQL_LIBRARY}
+	  ${QT_QTCORE_LIBRARY}
+	  ${GMP_LIBRARIES} )
 
 
   kde4_add_unit_test( mymoneydatabasemgrtest TESTNAME kmymoney-mymoneydatabasemgrtest ${mymoneydatabasemgrtest_SRCS} )
