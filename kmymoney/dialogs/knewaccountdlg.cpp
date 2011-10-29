@@ -418,27 +418,27 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 
   connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
   connect(createButton, SIGNAL(clicked()), this, SLOT(okClicked()));
-  connect(m_parentAccounts->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)),
-          this, SLOT(slotSelectionChanged(QItemSelection, QItemSelection)));
+  connect(m_parentAccounts->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+          this, SLOT(slotSelectionChanged(QItemSelection,QItemSelection)));
   connect(m_qbuttonNew, SIGNAL(clicked()), this, SLOT(slotNewClicked()));
-  connect(typeCombo, SIGNAL(activated(const QString&)),
-          this, SLOT(slotAccountTypeChanged(const QString&)));
+  connect(typeCombo, SIGNAL(activated(QString)),
+          this, SLOT(slotAccountTypeChanged(QString)));
 
-  connect(accountNameEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotCheckFinished()));
+  connect(accountNameEdit, SIGNAL(textChanged(QString)), this, SLOT(slotCheckFinished()));
 
   connect(m_vatCategory, SIGNAL(toggled(bool)), this, SLOT(slotVatChanged(bool)));
   connect(m_vatAssignment, SIGNAL(toggled(bool)), this, SLOT(slotVatAssignmentChanged(bool)));
   connect(m_vatCategory, SIGNAL(toggled(bool)), this, SLOT(slotCheckFinished()));
   connect(m_vatAssignment, SIGNAL(toggled(bool)), this, SLOT(slotCheckFinished()));
-  connect(m_vatRate, SIGNAL(textChanged(const QString&)), this, SLOT(slotCheckFinished()));
+  connect(m_vatRate, SIGNAL(textChanged(QString)), this, SLOT(slotCheckFinished()));
   connect(m_vatAccount, SIGNAL(stateChanged()), this, SLOT(slotCheckFinished()));
 
-  connect(m_minBalanceEarlyEdit, SIGNAL(valueChanged(const QString&)), this, SLOT(slotAdjustMinBalanceAbsoluteEdit(const QString&)));
-  connect(m_minBalanceAbsoluteEdit, SIGNAL(valueChanged(const QString&)), this, SLOT(slotAdjustMinBalanceEarlyEdit(const QString&)));
-  connect(m_maxCreditEarlyEdit, SIGNAL(valueChanged(const QString&)), this, SLOT(slotAdjustMaxCreditAbsoluteEdit(const QString&)));
-  connect(m_maxCreditAbsoluteEdit, SIGNAL(valueChanged(const QString&)), this, SLOT(slotAdjustMaxCreditEarlyEdit(const QString&)));
+  connect(m_minBalanceEarlyEdit, SIGNAL(valueChanged(QString)), this, SLOT(slotAdjustMinBalanceAbsoluteEdit(QString)));
+  connect(m_minBalanceAbsoluteEdit, SIGNAL(valueChanged(QString)), this, SLOT(slotAdjustMinBalanceEarlyEdit(QString)));
+  connect(m_maxCreditEarlyEdit, SIGNAL(valueChanged(QString)), this, SLOT(slotAdjustMaxCreditAbsoluteEdit(QString)));
+  connect(m_maxCreditAbsoluteEdit, SIGNAL(valueChanged(QString)), this, SLOT(slotAdjustMaxCreditEarlyEdit(QString)));
 
-  connect(m_qcomboboxInstitutions, SIGNAL(activated(const QString&)), this, SLOT(slotLoadInstitutions(const QString&)));
+  connect(m_qcomboboxInstitutions, SIGNAL(activated(QString)), this, SLOT(slotLoadInstitutions(QString)));
 
   QModelIndex parentIndex = m_filterProxyModel->getSelectedParentAccountIndex();
   m_parentAccounts->expand(parentIndex);

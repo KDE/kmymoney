@@ -40,10 +40,10 @@ KSettingsSchedules::KSettingsSchedules(QWidget* parent) :
   loadList();
 
   // setup connections so that region gets selected once field is filled
-  connect(kcfg_HolidayRegion, SIGNAL(textChanged(const QString&)), this, SLOT(slotLoadRegion(const QString&)));
+  connect(kcfg_HolidayRegion, SIGNAL(textChanged(QString)), this, SLOT(slotLoadRegion(QString)));
 
   // setup connections so that changes are forwarded to the field
-  connect(m_holidayRegion, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(slotSetRegion(const QString&)));
+  connect(m_holidayRegion, SIGNAL(currentIndexChanged(QString)), this, SLOT(slotSetRegion(QString)));
 }
 
 void KSettingsSchedules::loadList(void)
@@ -80,7 +80,7 @@ void KSettingsSchedules::slotSetRegion(const QString &region)
 void KSettingsSchedules::slotLoadRegion(const QString &region)
 {
   // only need this once
-  disconnect(kcfg_HolidayRegion, SIGNAL(textChanged(const QString&)), this, SLOT(slotLoadRegion(const QString&)));
+  disconnect(kcfg_HolidayRegion, SIGNAL(textChanged(QString)), this, SLOT(slotLoadRegion(QString)));
   int i = 0;
   if (!region.isEmpty())
     i = m_holidayRegion->findText(m_regionMap.key(region));

@@ -34,8 +34,8 @@ InterestEditWizardPage::InterestEditWizardPage(QWidget *parent)
 {
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("newInterestRateEdit", m_newInterestRateEdit, "value", SIGNAL(textChanged(const QString&)));
-  connect(m_newInterestRateEdit, SIGNAL(textChanged(const QString&)), this, SIGNAL(completeChanged()));
+  registerField("newInterestRateEdit", m_newInterestRateEdit, "value", SIGNAL(textChanged(QString)));
+  connect(m_newInterestRateEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
 }
 
 /**

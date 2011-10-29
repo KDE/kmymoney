@@ -207,7 +207,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   registerFrameLayout->addWidget(m_register);
   m_register->installEventFilter(this);
   connect(m_register, SIGNAL(openContextMenu()), this, SIGNAL(openContextMenu()));
-  connect(m_register, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), this, SLOT(slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTransactions&)));
+  connect(m_register, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)), this, SLOT(slotUpdateSummaryLine(KMyMoneyRegister::SelectedTransactions)));
   connect(m_register->horizontalHeader(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotSortOptions()));
   connect(m_register, SIGNAL(reconcileStateColumnClicked(KMyMoneyRegister::Transaction*)), this, SLOT(slotToggleTransactionMark(KMyMoneyRegister::Transaction*)));
   connect(&d->m_viewPosTimer, SIGNAL(timeout()), this, SLOT(slotUpdateViewPos()));
@@ -267,11 +267,11 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
   connect(m_register, SIGNAL(focusChanged(KMyMoneyRegister::Transaction*)), m_form, SLOT(slotSetTransaction(KMyMoneyRegister::Transaction*)));
   connect(m_register, SIGNAL(focusChanged()), kmymoney, SLOT(slotUpdateActions()));
-  connect(d->m_accountComboBox, SIGNAL(accountSelected(const QString&)), this, SLOT(slotSelectAccount(const QString&)));
-  connect(m_register, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)), this, SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)));
+  connect(d->m_accountComboBox, SIGNAL(accountSelected(QString)), this, SLOT(slotSelectAccount(QString)));
+  connect(m_register, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)), this, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)));
   connect(m_register, SIGNAL(editTransaction()), this, SIGNAL(startEdit()));
   connect(m_register, SIGNAL(emptyItemSelected()), this, SLOT(slotNewTransaction()));
-  connect(m_register, SIGNAL(aboutToSelectItem(KMyMoneyRegister::RegisterItem*, bool&)), this, SLOT(slotAboutToSelectItem(KMyMoneyRegister::RegisterItem*, bool&)));
+  connect(m_register, SIGNAL(aboutToSelectItem(KMyMoneyRegister::RegisterItem*,bool&)), this, SLOT(slotAboutToSelectItem(KMyMoneyRegister::RegisterItem*,bool&)));
   connect(d->m_mousePressFilter, SIGNAL(mousePressedOnExternalWidget(bool&)), this, SIGNAL(cancelOrEndEdit(bool&)));
 
   connect(m_form, SIGNAL(newTransaction(KMyMoneyRegister::Action)), this, SLOT(slotNewTransaction(KMyMoneyRegister::Action)));
@@ -1219,14 +1219,14 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       connect(editor, SIGNAL(escapePressed()), kmymoney->action("transaction_cancel"), SLOT(trigger()));
 
       connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), editor, SLOT(slotReloadEditWidgets()));
-      connect(editor, SIGNAL(finishEdit(const KMyMoneyRegister::SelectedTransactions&)), this, SLOT(slotLeaveEditMode(const KMyMoneyRegister::SelectedTransactions&)));
+      connect(editor, SIGNAL(finishEdit(KMyMoneyRegister::SelectedTransactions)), this, SLOT(slotLeaveEditMode(KMyMoneyRegister::SelectedTransactions)));
 
       connect(editor, SIGNAL(objectCreation(bool)), d->m_mousePressFilter, SLOT(setFilterDeactive(bool)));
-      connect(editor, SIGNAL(createPayee(const QString&, QString&)), kmymoney, SLOT(slotPayeeNew(const QString&, QString&)));
-      connect(editor, SIGNAL(createCategory(MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotCategoryNew(MyMoneyAccount&, const MyMoneyAccount&)));
-      connect(editor, SIGNAL(createSecurity(MyMoneyAccount&, const MyMoneyAccount&)), kmymoney, SLOT(slotInvestmentNew(MyMoneyAccount&, const MyMoneyAccount&)));
-      connect(editor, SIGNAL(assignNumber(void)), kmymoney, SLOT(slotTransactionAssignNumber()));
-      connect(editor, SIGNAL(lastPostDateUsed(const QDate&)), this, SLOT(slotKeepPostDate(const QDate&)));
+      connect(editor, SIGNAL(createPayee(QString,QString&)), kmymoney, SLOT(slotPayeeNew(QString,QString&)));
+      connect(editor, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)), kmymoney, SLOT(slotCategoryNew(MyMoneyAccount&,MyMoneyAccount)));
+      connect(editor, SIGNAL(createSecurity(MyMoneyAccount&,MyMoneyAccount)), kmymoney, SLOT(slotInvestmentNew(MyMoneyAccount&,MyMoneyAccount)));
+      connect(editor, SIGNAL(assignNumber()), kmymoney, SLOT(slotTransactionAssignNumber()));
+      connect(editor, SIGNAL(lastPostDateUsed(QDate)), this, SLOT(slotKeepPostDate(QDate)));
 
       // create the widgets, place them in the parent and load them with data
       // setup tab order

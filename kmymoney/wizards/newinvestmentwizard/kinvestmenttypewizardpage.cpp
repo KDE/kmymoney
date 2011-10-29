@@ -40,7 +40,7 @@ KInvestmentTypeWizardPage::KInvestmentTypeWizardPage(QWidget *parent)
   m_securityType->setModel(model);
 
   // Register the fields with the QWizard
-  registerField("securityType", m_securityType, "currentText", SIGNAL(currentIndexChanged(const QString&)));
+  registerField("securityType", m_securityType, "currentText", SIGNAL(currentIndexChanged(QString)));
 }
 
 void KInvestmentTypeWizardPage::init2(const MyMoneySecurity& security)

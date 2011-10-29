@@ -72,11 +72,11 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
   connect(m_quoteSourceList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotEntryRenamed(QListWidgetItem*)));
   connect(m_quoteSourceList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
 
-  connect(m_editURL, SIGNAL(textChanged(const QString&)), this, SLOT(slotEntryChanged()));
-  connect(m_editSymbol, SIGNAL(textChanged(const QString&)), this, SLOT(slotEntryChanged()));
-  connect(m_editDate, SIGNAL(textChanged(const QString&)), this, SLOT(slotEntryChanged()));
-  connect(m_editDateFormat, SIGNAL(textChanged(const QString&)), this, SLOT(slotEntryChanged()));
-  connect(m_editPrice, SIGNAL(textChanged(const QString&)), this, SLOT(slotEntryChanged()));
+  connect(m_editURL, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
+  connect(m_editSymbol, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
+  connect(m_editDate, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
+  connect(m_editDateFormat, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
+  connect(m_editPrice, SIGNAL(textChanged(QString)), this, SLOT(slotEntryChanged()));
   connect(m_skipStripping, SIGNAL(toggled(bool)), this, SLOT(slotEntryChanged()));
 
   // FIXME deleting a source is not yet implemented

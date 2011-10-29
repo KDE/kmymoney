@@ -683,8 +683,8 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
       d->m_preferName = static_cast<OfxImporterPlugin::Private::NamePreference>(acc.onlineBankingSettings().value("kmmofx-preferName").toInt());
       QPointer<KOfxDirectConnectDlg> dlg = new KOfxDirectConnectDlg(acc);
 
-      connect(dlg, SIGNAL(statementReady(const QString&)),
-              this, SLOT(slotImportFile(const QString&)));
+      connect(dlg, SIGNAL(statementReady(QString)),
+              this, SLOT(slotImportFile(QString)));
 
       if (dlg->init())
         dlg->exec();

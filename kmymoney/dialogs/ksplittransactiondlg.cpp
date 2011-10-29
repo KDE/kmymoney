@@ -100,9 +100,9 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   button(KDialog::User1)->setFocusPolicy(Qt::NoFocus);
 
   // connect signals with slots
-  connect(transactionsTable, SIGNAL(transactionChanged(const MyMoneyTransaction&)),
-          this, SLOT(slotSetTransaction(const MyMoneyTransaction&)));
-  connect(transactionsTable, SIGNAL(createCategory(const QString&, QString&)), this, SLOT(slotCreateCategory(const QString&, QString&)));
+  connect(transactionsTable, SIGNAL(transactionChanged(MyMoneyTransaction)),
+          this, SLOT(slotSetTransaction(MyMoneyTransaction)));
+  connect(transactionsTable, SIGNAL(createCategory(QString,QString&)), this, SLOT(slotCreateCategory(QString,QString&)));
   connect(transactionsTable, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   connect(transactionsTable, SIGNAL(returnPressed()), this, SLOT(accept()));

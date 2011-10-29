@@ -174,16 +174,16 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(m_payeesList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(slotSelectPayee(QListWidgetItem*,QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotRenamePayee(QListWidgetItem*)));
-  connect(m_payeesList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotOpenContextMenu(const QPoint&)));
+  connect(m_payeesList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotOpenContextMenu(QPoint)));
 
   connect(m_renameButton, SIGNAL(clicked()), this, SLOT(slotRenameButtonCliked()));
   connect(m_deleteButton, SIGNAL(clicked()), kmymoney->action("payee_delete"), SLOT(trigger()));
   connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotPayeeNew()));
 
   connect(addressEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
-  connect(postcodeEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotPayeeDataChanged()));
-  connect(telephoneEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotPayeeDataChanged()));
-  connect(emailEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotPayeeDataChanged()));
+  connect(postcodeEdit, SIGNAL(textChanged(QString)), this, SLOT(slotPayeeDataChanged()));
+  connect(telephoneEdit, SIGNAL(textChanged(QString)), this, SLOT(slotPayeeDataChanged()));
+  connect(emailEdit, SIGNAL(textChanged(QString)), this, SLOT(slotPayeeDataChanged()));
   connect(notesEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
   connect(matchKeyEditList, SIGNAL(changed()), this, SLOT(slotKeyListChanged()));
 
@@ -193,7 +193,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(checkMatchIgnoreCase, SIGNAL(toggled(bool)), this, SLOT(slotPayeeDataChanged()));
 
   connect(checkEnableDefaultAccount, SIGNAL(toggled(bool)), this, SLOT(slotPayeeDataChanged()));
-  connect(comboDefaultAccount, SIGNAL(accountSelected(const QString&)), this, SLOT(slotPayeeDataChanged()));
+  connect(comboDefaultAccount, SIGNAL(accountSelected(QString)), this, SLOT(slotPayeeDataChanged()));
   connect(buttonSelectMyAccount, SIGNAL(clicked()), this, SLOT(slotChooseDefaultAccount()));
 
   connect(m_updateButton, SIGNAL(clicked()), this, SLOT(slotUpdatePayee()));

@@ -67,7 +67,7 @@ RedefineDlg::RedefineDlg()
   this->enableButtonOk(false);
   m_widget->kcombobox_Actions->setCurrentIndex(-1);
 
-  connect(m_widget->kcombobox_Actions, SIGNAL(activated(const int&)), this, SLOT(slotNewActionSelected(const int&)));
+  connect(m_widget->kcombobox_Actions, SIGNAL(activated(int)), this, SLOT(slotNewActionSelected(int)));
   connect(this, SIGNAL(okClicked()), this, SLOT(slotAccepted()));
   connect(this, SIGNAL(cancelClicked()), this, SLOT(slotRejected()));
 }

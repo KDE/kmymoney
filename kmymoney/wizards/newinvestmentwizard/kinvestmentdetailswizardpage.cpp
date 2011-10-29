@@ -62,10 +62,10 @@ KInvestmentDetailsWizardPage::KInvestmentDetailsWizardPage(QWidget *parent)
 
   registerField("tradingCurrencyEdit", m_tradingCurrencyEdit, "security");
 
-  registerField("tradingMarket", m_tradingMarket, "currentText", SIGNAL(currentIndexChanged(const QString&)));
+  registerField("tradingMarket", m_tradingMarket, "currentText", SIGNAL(currentIndexChanged(QString)));
 
   registerField("fraction", m_fraction, "value", SIGNAL(textChanged()));
-  connect(m_fraction, SIGNAL(textChanged(const QString&)),
+  connect(m_fraction, SIGNAL(textChanged(QString)),
           this, SIGNAL(completeChanged()));
 }
 
@@ -121,7 +121,7 @@ void KInvestmentDetailsWizardPage::setPriceModeEnabled(bool enabled)
 void KInvestmentDetailsWizardPage::setupInvestmentSymbol()
 {
   m_investmentSymbol->setFocus();
-  connect(m_investmentSymbol, SIGNAL(lineChanged(const QString&)), this, SIGNAL(checkForExistingSymbol(const QString&)));
+  connect(m_investmentSymbol, SIGNAL(lineChanged(QString)), this, SIGNAL(checkForExistingSymbol(QString)));
 }
 
 #include "kinvestmentdetailswizardpage.moc"

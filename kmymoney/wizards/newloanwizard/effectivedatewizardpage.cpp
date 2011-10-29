@@ -35,8 +35,8 @@ EffectiveDateWizardPage::EffectiveDateWizardPage(QWidget *parent)
 {
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("effectiveChangeDateEdit", m_effectiveChangeDateEdit, "date", SIGNAL(dateChanged(const QDate&)));
-  connect(m_effectiveChangeDateEdit, SIGNAL(dateChanged(const QDate&)), this, SIGNAL(completeChanged()));
+  registerField("effectiveChangeDateEdit", m_effectiveChangeDateEdit, "date", SIGNAL(dateChanged(QDate)));
+  connect(m_effectiveChangeDateEdit, SIGNAL(dateChanged(QDate)), this, SIGNAL(completeChanged()));
 }
 
 void EffectiveDateWizardPage::initializePage()

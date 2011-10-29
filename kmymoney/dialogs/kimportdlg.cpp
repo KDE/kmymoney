@@ -86,8 +86,8 @@ KImportDlg::KImportDlg(QWidget *parent)
   connect(m_profileEditorButton, SIGNAL(clicked()), this, SLOT(slotNewProfile()));
 
   // connect the change signals to the check slot and perform initial check
-  connect(m_qlineeditFile, SIGNAL(textChanged(const QString&)), this,
-          SLOT(slotFileTextChanged(const QString&)));
+  connect(m_qlineeditFile, SIGNAL(textChanged(QString)), this,
+          SLOT(slotFileTextChanged(QString)));
 
   // setup button enable status
   slotFileTextChanged(m_qlineeditFile->text());

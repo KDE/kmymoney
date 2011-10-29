@@ -186,8 +186,8 @@ void KMMPrintCheckPlugin::slotTransactionsSelected(const KMyMoneyRegister::Selec
 void KMMPrintCheckPlugin::slotPlug(KPluginInfo *info)
 {
   if (info->name() == objectName()) {
-    connect(viewInterface(), SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)),
-            this, SLOT(slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions&)));
+    connect(viewInterface(), SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)),
+            this, SLOT(slotTransactionsSelected(KMyMoneyRegister::SelectedTransactions)));
   }
 }
 
@@ -195,8 +195,8 @@ void KMMPrintCheckPlugin::slotPlug(KPluginInfo *info)
 void KMMPrintCheckPlugin::slotUnplug(KPluginInfo *info)
 {
   if (info->name() == objectName()) {
-    disconnect(viewInterface(), SIGNAL(transactionsSelected(const KMyMoneyRegister::SelectedTransactions&)),
-               this, SLOT(slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions&)));
+    disconnect(viewInterface(), SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)),
+               this, SLOT(slotTransactionsSelected(KMyMoneyRegister::SelectedTransactions)));
   }
 }
 

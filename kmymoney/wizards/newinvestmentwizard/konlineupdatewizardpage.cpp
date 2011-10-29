@@ -43,12 +43,12 @@ KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent)
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
   registerField("onlineFactor", m_onlineFactor, "value");
-  registerField("onlineSourceCombo", m_onlineSourceCombo, "currentText", SIGNAL(currentIndexChanged(const QString&)));
+  registerField("onlineSourceCombo", m_onlineSourceCombo, "currentText", SIGNAL(currentIndexChanged(QString)));
   registerField("useFinanceQuote", m_useFinanceQuote);
-  connect(m_onlineFactor, SIGNAL(textChanged(const QString&)),
+  connect(m_onlineFactor, SIGNAL(textChanged(QString)),
           this, SIGNAL(completeChanged()));
 
-  connect(m_onlineSourceCombo, SIGNAL(activated(const QString&)),
+  connect(m_onlineSourceCombo, SIGNAL(activated(QString)),
           this, SIGNAL(completeChanged()));
 
   connect(m_useFinanceQuote, SIGNAL(toggled(bool)),

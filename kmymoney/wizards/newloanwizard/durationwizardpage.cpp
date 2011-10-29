@@ -41,7 +41,7 @@ DurationWizardPage::DurationWizardPage(QWidget *parent)
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
   registerField("durationValueEdit", m_durationValueEdit, "value");
-  registerField("durationUnitEdit", m_durationUnitEdit, "currentText", SIGNAL(currentIndexChanged(const QString&)));
+  registerField("durationUnitEdit", m_durationUnitEdit, "currentText", SIGNAL(currentIndexChanged(QString)));
 
   registerField("loanAmount3", m_loanAmount3, "text");
   registerField("interestRate3", m_interestRate3, "text");

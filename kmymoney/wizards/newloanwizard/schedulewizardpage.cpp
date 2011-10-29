@@ -34,10 +34,10 @@ ScheduleWizardPage::ScheduleWizardPage(QWidget *parent)
 {
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("nextDueDateEdit", m_nextDueDateEdit, "date", SIGNAL(dateChanged(const QDate&)));
+  registerField("nextDueDateEdit", m_nextDueDateEdit, "date", SIGNAL(dateChanged(QDate)));
   registerField("paymentAccountEdit", m_paymentAccountEdit, "selectedItems");
 
-  connect(m_nextDueDateEdit, SIGNAL(dateChanged(const QDate&)), this, SIGNAL(completeChanged()));
+  connect(m_nextDueDateEdit, SIGNAL(dateChanged(QDate)), this, SIGNAL(completeChanged()));
   connect(m_paymentAccountEdit,  SIGNAL(stateChanged()), this, SIGNAL(completeChanged()));
 
   m_paymentAccountEdit->removeButtons();

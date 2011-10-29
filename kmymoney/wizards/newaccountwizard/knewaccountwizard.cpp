@@ -486,8 +486,8 @@ AccountTypePage::AccountTypePage(Wizard* wizard) :
   connect(m_typeSelection, SIGNAL(itemSelected(int)), this, SLOT(slotUpdateType(int)));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
   connect(m_currencyComboBox, SIGNAL(activated(int)), this, SLOT(slotUpdateCurrency()));
-  connect(m_conversionRate, SIGNAL(textChanged(const QString&)), this, SLOT(slotUpdateConversionRate(const QString&)));
-  connect(m_conversionRate, SIGNAL(valueChanged(const QString&)), this, SLOT(slotPriceWarning()));
+  connect(m_conversionRate, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateConversionRate(QString)));
+  connect(m_conversionRate, SIGNAL(valueChanged(QString)), this, SLOT(slotPriceWarning()));
   connect(m_onlineQuote, SIGNAL(clicked()), this, SLOT(slotGetOnlineQuote()));
 }
 
@@ -683,11 +683,11 @@ CreditCardSchedulePage::CreditCardSchedulePage(Wizard* wizard) :
   m_mandatoryGroup->add(m_payee);
   m_mandatoryGroup->add(m_amount->lineedit());
   m_mandatoryGroup->add(m_paymentAccount);
-  connect(m_paymentAccount, SIGNAL(itemSelected(const QString&)), object(), SIGNAL(completeStateChanged()));
-  connect(m_payee, SIGNAL(itemSelected(const QString&)), object(), SIGNAL(completeStateChanged()));
-  connect(m_date, SIGNAL(dateChanged(const QDate&)), object(), SIGNAL(completeStateChanged()));
+  connect(m_paymentAccount, SIGNAL(itemSelected(QString)), object(), SIGNAL(completeStateChanged()));
+  connect(m_payee, SIGNAL(itemSelected(QString)), object(), SIGNAL(completeStateChanged()));
+  connect(m_date, SIGNAL(dateChanged(QDate)), object(), SIGNAL(completeStateChanged()));
 
-  connect(m_payee, SIGNAL(createItem(const QString&, QString&)), wizard, SIGNAL(createPayee(const QString&, QString&)));
+  connect(m_payee, SIGNAL(createItem(QString,QString&)), wizard, SIGNAL(createPayee(QString,QString&)));
 
   m_reminderCheckBox->setChecked(true);
   connect(m_reminderCheckBox, SIGNAL(toggled(bool)), object(), SIGNAL(completeStateChanged()));
@@ -777,13 +777,13 @@ GeneralLoanInfoPage::GeneralLoanInfoPage(Wizard* wizard) :
 
   slotLoadWidgets();
 
-  connect(m_payee, SIGNAL(createItem(const QString&, QString&)), wizard, SIGNAL(createPayee(const QString&, QString&)));
+  connect(m_payee, SIGNAL(createItem(QString,QString&)), wizard, SIGNAL(createPayee(QString,QString&)));
   connect(m_anyPayments, SIGNAL(activated(int)), object(),  SIGNAL(completeStateChanged()));
   connect(m_recordings, SIGNAL(activated(int)), object(), SIGNAL(completeStateChanged()));
 
   connect(m_interestType, SIGNAL(activated(int)), object(),  SIGNAL(completeStateChanged()));
-  connect(m_interestChangeDateEdit, SIGNAL(dateChanged(const QDate&)), object(),  SIGNAL(completeStateChanged()));
-  connect(m_openingBalance, SIGNAL(textChanged(const QString&)), object(),  SIGNAL(completeStateChanged()));
+  connect(m_interestChangeDateEdit, SIGNAL(dateChanged(QDate)), object(),  SIGNAL(completeStateChanged()));
+  connect(m_openingBalance, SIGNAL(textChanged(QString)), object(),  SIGNAL(completeStateChanged()));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
 }
@@ -871,10 +871,10 @@ LoanDetailsPage::LoanDetailsPage(Wizard* wizard) :
 
   connect(m_termAmount, SIGNAL(valueChanged(int)), this, SLOT(slotValuesChanged()));
   connect(m_termUnit, SIGNAL(highlighted(int)), this, SLOT(slotValuesChanged()));
-  connect(m_loanAmount, SIGNAL(textChanged(const QString&)), this, SLOT(slotValuesChanged()));
-  connect(m_interestRate, SIGNAL(textChanged(const QString&)), this, SLOT(slotValuesChanged()));
-  connect(m_paymentAmount, SIGNAL(textChanged(const QString&)), this, SLOT(slotValuesChanged()));
-  connect(m_balloonAmount, SIGNAL(textChanged(const QString&)), this, SLOT(slotValuesChanged()));
+  connect(m_loanAmount, SIGNAL(textChanged(QString)), this, SLOT(slotValuesChanged()));
+  connect(m_interestRate, SIGNAL(textChanged(QString)), this, SLOT(slotValuesChanged()));
+  connect(m_paymentAmount, SIGNAL(textChanged(QString)), this, SLOT(slotValuesChanged()));
+  connect(m_balloonAmount, SIGNAL(textChanged(QString)), this, SLOT(slotValuesChanged()));
 
   connect(m_calculateButton, SIGNAL(clicked()), this, SLOT(slotCalculate()));
 }
@@ -1322,7 +1322,7 @@ LoanSchedulePage::LoanSchedulePage(Wizard* wizard) :
 {
   m_mandatoryGroup->add(m_interestCategory->lineEdit());
   m_mandatoryGroup->add(m_paymentAccount->lineEdit());
-  connect(m_interestCategory, SIGNAL(createItem(const QString&, QString&)), this, SLOT(slotCreateCategory(const QString&, QString&)));
+  connect(m_interestCategory, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateCategory(QString,QString&)));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
 }
 
@@ -1515,7 +1515,7 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
   m_parentAccounts->setModel(m_filterProxyModel);
   m_parentAccounts->sortByColumn(0, Qt::AscendingOrder);
 
-  connect(m_parentAccounts->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(parentAccountChanged()));
+  connect(m_parentAccounts->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(parentAccountChanged()));
 }
 
 void HierarchyPage::enterPage(void)

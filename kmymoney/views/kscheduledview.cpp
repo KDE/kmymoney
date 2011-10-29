@@ -88,19 +88,19 @@ KScheduledView::KScheduledView(QWidget *parent) :
   m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_listTab), KIcon("view-calendar-list"));
   m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_calendarTab), KIcon("view-calendar-timeline"));
 
-  connect(m_scheduleTree, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotListViewContextMenu(const QPoint&)));
+  connect(m_scheduleTree, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotListViewContextMenu(QPoint)));
   connect(m_scheduleTree, SIGNAL(itemSelectionChanged()),
           this, SLOT(slotSetSelectedItem()));
 
-  connect(m_scheduleTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
-          this, SLOT(slotListItemExecuted(QTreeWidgetItem*, int)));
+  connect(m_scheduleTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
+          this, SLOT(slotListItemExecuted(QTreeWidgetItem*,int)));
   connect(m_scheduleTree, SIGNAL(itemExpanded(QTreeWidgetItem*)),
           this, SLOT(slotListViewExpanded(QTreeWidgetItem*)));
   connect(m_scheduleTree, SIGNAL(itemCollapsed(QTreeWidgetItem*)),
           this, SLOT(slotListViewCollapsed(QTreeWidgetItem*)));
 
-  connect(m_calendar, SIGNAL(enterClicked(const MyMoneySchedule&, const QDate&)), this, SLOT(slotBriefEnterClicked(const MyMoneySchedule&, const QDate&)));
-  connect(m_calendar, SIGNAL(skipClicked(const MyMoneySchedule&, const QDate&)), this, SLOT(slotBriefSkipClicked(const MyMoneySchedule&, const QDate&)));
+  connect(m_calendar, SIGNAL(enterClicked(MyMoneySchedule,QDate)), this, SLOT(slotBriefEnterClicked(MyMoneySchedule,QDate)));
+  connect(m_calendar, SIGNAL(skipClicked(MyMoneySchedule,QDate)), this, SLOT(slotBriefSkipClicked(MyMoneySchedule,QDate)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotReloadView()));
 }

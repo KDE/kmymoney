@@ -217,14 +217,14 @@ void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)
 
 void KMyMoneyCombo::connectNotify(const char* signal)
 {
-  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&, QString&))))) {
+  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(QString,QString&))))) {
     m_canCreateObjects = true;
   }
 }
 
 void KMyMoneyCombo::disconnectNotify(const char* signal)
 {
-  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&, QString&))))) {
+  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(QString,QString&))))) {
     m_canCreateObjects = false;
   }
 }

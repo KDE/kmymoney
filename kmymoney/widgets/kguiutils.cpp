@@ -63,7 +63,7 @@ void kMandatoryFieldGroup::add(QWidget *widget)
       KComboBox* combo = qobject_cast<KComboBox*>(widget);
       KLineEdit* lineedit = qobject_cast<KLineEdit*>(combo->lineEdit());
       if (lineedit) {
-        connect(lineedit, SIGNAL(textChanged(const QString&)), this, SLOT(changed()));
+        connect(lineedit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
       } else {
         connect(combo, SIGNAL(highlighted(int)), this, SLOT(changed()));
       }
@@ -71,12 +71,12 @@ void kMandatoryFieldGroup::add(QWidget *widget)
 
     else if (qobject_cast<QLineEdit*>(widget))
       connect(qobject_cast<QLineEdit*>(widget),
-              SIGNAL(textChanged(const QString&)),
+              SIGNAL(textChanged(QString)),
               this, SLOT(changed()));
 
     else if (qobject_cast<QSpinBox*>(widget))
       connect(qobject_cast<QSpinBox*>(widget),
-              SIGNAL(valueChanged(const QString&)),
+              SIGNAL(valueChanged(QString)),
               this, SLOT(changed()));
 
     else if (qobject_cast<KListWidget*>(widget))
@@ -86,7 +86,7 @@ void kMandatoryFieldGroup::add(QWidget *widget)
 
     else if (qobject_cast<KUrlRequester*>(widget))
       connect(qobject_cast<KUrlRequester*>(widget),
-              SIGNAL(textChanged(const QString&)),
+              SIGNAL(textChanged(QString)),
               this, SLOT(changed()));
 
     else {

@@ -54,8 +54,8 @@ KSettingsGpg::KSettingsGpg(QWidget* parent) :
   connect(kcfg_WriteDataEncrypted, SIGNAL(toggled(bool)), this, SLOT(slotStatusChanged(bool)));
   connect(m_masterKeyCombo, SIGNAL(activated(int)), this, SLOT(slotIdChanged()));
   connect(kcfg_GpgRecipientList, SIGNAL(changed()), this, SLOT(slotIdChanged()));
-  connect(kcfg_GpgRecipientList, SIGNAL(added(const QString&)), this, SLOT(slotKeyListChanged()));
-  connect(kcfg_GpgRecipientList, SIGNAL(removed(const QString&)), this, SLOT(slotKeyListChanged()));
+  connect(kcfg_GpgRecipientList, SIGNAL(added(QString)), this, SLOT(slotKeyListChanged()));
+  connect(kcfg_GpgRecipientList, SIGNAL(removed(QString)), this, SLOT(slotKeyListChanged()));
 
   // Initial state setup
   slotStatusChanged(kcfg_WriteDataEncrypted->isChecked());

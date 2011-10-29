@@ -94,7 +94,7 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
                          i18n("Use this to create a new QIF import/export profile"));
   m_newButton->setGuiItem(newButtenItem);
 
-  connect(m_profileListBox, SIGNAL(currentTextChanged(const QString&)), this, SLOT(slotLoadProfileFromConfig(const QString&)));
+  connect(m_profileListBox, SIGNAL(currentTextChanged(QString)), this, SLOT(slotLoadProfileFromConfig(QString)));
   connect(m_resetButton, SIGNAL(clicked()), this, SLOT(slotReset()));
   connect(m_okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
   connect(m_renameButton, SIGNAL(clicked()), this, SLOT(slotRename()));
@@ -103,26 +103,26 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   connect(m_cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
   connect(m_helpButton, SIGNAL(clicked()), this, SLOT(slotHelp()));
 
-  connect(m_editDescription, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setProfileDescription(const QString&)));
-  connect(m_editType, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setProfileType(const QString&)));
-  connect(m_editOpeningBalance, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setOpeningBalanceText(const QString&)));
-  connect(m_editAccountDelimiter, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setAccountDelimiter(const QString&)));
-  connect(m_editVoidMark, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setVoidMark(const QString&)));
+  connect(m_editDescription, SIGNAL(textChanged(QString)), &m_profile, SLOT(setProfileDescription(QString)));
+  connect(m_editType, SIGNAL(textChanged(QString)), &m_profile, SLOT(setProfileType(QString)));
+  connect(m_editOpeningBalance, SIGNAL(textChanged(QString)), &m_profile, SLOT(setOpeningBalanceText(QString)));
+  connect(m_editAccountDelimiter, SIGNAL(textChanged(QString)), &m_profile, SLOT(setAccountDelimiter(QString)));
+  connect(m_editVoidMark, SIGNAL(textChanged(QString)), &m_profile, SLOT(setVoidMark(QString)));
 
-  connect(m_editDateFormat, SIGNAL(highlighted(const QString&)), &m_profile, SLOT(setOutputDateFormat(const QString&)));
-  connect(m_editApostrophe, SIGNAL(highlighted(const QString&)), &m_profile, SLOT(setApostropheFormat(const QString&)));
+  connect(m_editDateFormat, SIGNAL(highlighted(QString)), &m_profile, SLOT(setOutputDateFormat(QString)));
+  connect(m_editApostrophe, SIGNAL(highlighted(QString)), &m_profile, SLOT(setApostropheFormat(QString)));
 
   connect(m_editAmounts, SIGNAL(itemSelectionChanged()), this, SLOT(slotAmountTypeSelected()));
-  connect(m_decimalBox, SIGNAL(activated(const QString&)), this, SLOT(slotDecimalChanged(const QString&)));
-  connect(m_thousandsBox, SIGNAL(activated(const QString&)), this, SLOT(slotThousandsChanged(const QString&)));
+  connect(m_decimalBox, SIGNAL(activated(QString)), this, SLOT(slotDecimalChanged(QString)));
+  connect(m_thousandsBox, SIGNAL(activated(QString)), this, SLOT(slotThousandsChanged(QString)));
 
-  connect(m_editInputFilterLocation, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setFilterScriptImport(const QString&)));
-  connect(m_editInputFilterLocation, SIGNAL(urlSelected(const KUrl&)), m_editInputFilterLocation, SLOT(setUrl(const KUrl&)));
+  connect(m_editInputFilterLocation, SIGNAL(textChanged(QString)), &m_profile, SLOT(setFilterScriptImport(QString)));
+  connect(m_editInputFilterLocation, SIGNAL(urlSelected(KUrl)), m_editInputFilterLocation, SLOT(setUrl(KUrl)));
 
-  connect(m_editInputFilterFileType, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setFilterFileType(const QString&)));
+  connect(m_editInputFilterFileType, SIGNAL(textChanged(QString)), &m_profile, SLOT(setFilterFileType(QString)));
 
-  connect(m_editOutputFilterLocation, SIGNAL(textChanged(const QString&)), &m_profile, SLOT(setFilterScriptExport(const QString&)));
-  connect(m_editOutputFilterLocation, SIGNAL(urlSelected(const KUrl&)), m_editOutputFilterLocation, SLOT(setUrl(const KUrl&)));
+  connect(m_editOutputFilterLocation, SIGNAL(textChanged(QString)), &m_profile, SLOT(setFilterScriptExport(QString)));
+  connect(m_editOutputFilterLocation, SIGNAL(urlSelected(KUrl)), m_editOutputFilterLocation, SLOT(setUrl(KUrl)));
 
   connect(m_attemptMatch, SIGNAL(toggled(bool)), &m_profile, SLOT(setAttemptMatchDuplicates(bool)));
 }

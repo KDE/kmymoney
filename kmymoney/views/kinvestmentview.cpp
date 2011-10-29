@@ -89,12 +89,12 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
 
   connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabCurrentChanged(QWidget*)));
 
-  connect(m_investmentsList, SIGNAL(customContextMenuRequested(const QPoint&)),
-          this, SLOT(slotInvestmentContextMenu(const QPoint&)));
+  connect(m_investmentsList, SIGNAL(customContextMenuRequested(QPoint)),
+          this, SLOT(slotInvestmentContextMenu(QPoint)));
   connect(m_investmentsList, SIGNAL(itemSelectionChanged()), this, SLOT(slotInvestmentSelectionChanged()));
-  connect(m_accountComboBox, SIGNAL(accountSelected(const QString&)),
-          this, SLOT(slotSelectAccount(const QString&)));
-  connect(m_investmentsList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), kmymoney->action("investment_edit"), SLOT(trigger()));
+  connect(m_accountComboBox, SIGNAL(accountSelected(QString)),
+          this, SLOT(slotSelectAccount(QString)));
+  connect(m_investmentsList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), kmymoney->action("investment_edit"), SLOT(trigger()));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
 
   // create the searchline widget

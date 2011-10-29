@@ -76,8 +76,8 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
   topLayout->addLayout(ledBox);
 
   connect(m_listBox, SIGNAL(changed()), this, SLOT(slotIdChanged()));
-  connect(m_listBox, SIGNAL(added(const QString&)), this, SLOT(slotKeyListChanged()));
-  connect(m_listBox, SIGNAL(removed(const QString&)), this, SLOT(slotKeyListChanged()));
+  connect(m_listBox, SIGNAL(added(QString)), this, SLOT(slotKeyListChanged()));
+  connect(m_listBox, SIGNAL(removed(QString)), this, SLOT(slotKeyListChanged()));
 }
 
 void KGpgKeySelectionDlg::setKeys(const QStringList& list)

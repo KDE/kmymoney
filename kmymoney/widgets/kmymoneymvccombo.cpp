@@ -111,7 +111,7 @@ void KMyMoneyMVCCombo::setSubstringSearch(bool enabled)
       d->m_filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
       d->m_filterProxyModel->setSourceModel(model());
     }
-    connect(this, SIGNAL(editTextChanged(const QString &)), this, SLOT(editTextChanged(const QString &)));
+    connect(this, SIGNAL(editTextChanged(QString)), this, SLOT(editTextChanged(QString)));
     d->m_completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
     d->m_completer->setModel(d->m_filterProxyModel);
 
@@ -123,7 +123,7 @@ void KMyMoneyMVCCombo::setSubstringSearch(bool enabled)
     if (d->m_completer->model() != d->m_filterProxyModel)
       return;
 
-    disconnect(this, SIGNAL(editTextChanged(const QString &)), this, SLOT(editTextChanged(const QString &)));
+    disconnect(this, SIGNAL(editTextChanged(QString)), this, SLOT(editTextChanged(QString)));
     d->m_completer->setCompletionMode(QCompleter::PopupCompletion);
     d->m_completer->setModel(model());
   }
@@ -190,14 +190,14 @@ void KMyMoneyMVCCombo::editTextChanged(const QString &text)
 
 void KMyMoneyMVCCombo::connectNotify(const char* signal)
 {
-  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&, QString&))))) {
+  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(QString,QString&))))) {
     d->m_canCreateObjects = true;
   }
 }
 
 void KMyMoneyMVCCombo::disconnectNotify(const char* signal)
 {
-  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(const QString&, QString&))))) {
+  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(QString,QString&))))) {
     d->m_canCreateObjects = false;
   }
 }
@@ -326,7 +326,7 @@ KMyMoneyReconcileCombo::KMyMoneyReconcileCombo(QWidget* w) :
   addItem(i18n("Not reconciled"), QVariant(" "));
   addItem(" ", QVariant("U"));
 
-  connect(this, SIGNAL(itemSelected(const QString&)), this, SLOT(slotSetState(const QString&)));
+  connect(this, SIGNAL(itemSelected(QString)), this, SLOT(slotSetState(QString)));
 }
 
 void KMyMoneyReconcileCombo::slotSetState(const QString& state)
@@ -404,7 +404,7 @@ KMyMoneyCashFlowCombo::KMyMoneyCashFlowCombo(QWidget* w, MyMoneyAccount::account
     addItem(i18n("From"), QVariant(KMyMoneyRegister::Deposit));
   }
 
-  connect(this, SIGNAL(itemSelected(const QString&)), this, SLOT(slotSetDirection(const QString&)));
+  connect(this, SIGNAL(itemSelected(QString)), this, SLOT(slotSetDirection(QString)));
 }
 
 void KMyMoneyCashFlowCombo::setDirection(KMyMoneyRegister::CashFlowDirection dir)
@@ -448,7 +448,7 @@ KMyMoneyActivityCombo::KMyMoneyActivityCombo(QWidget* w) :
   addItem(i18n("Split shares"), QVariant(MyMoneySplit::SplitShares));
   addItem(i18n("Interest Income"), QVariant(MyMoneySplit::InterestIncome));
 
-  connect(this, SIGNAL(itemSelected(const QString&)), this, SLOT(slotSetActivity(const QString&)));
+  connect(this, SIGNAL(itemSelected(QString)), this, SLOT(slotSetActivity(QString)));
 }
 
 void KMyMoneyActivityCombo::setActivity(MyMoneySplit::investTransactionTypeE activity)

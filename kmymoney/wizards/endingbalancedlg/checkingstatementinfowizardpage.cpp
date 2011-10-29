@@ -36,7 +36,7 @@ CheckingStatementInfoWizardPage::CheckingStatementInfoWizardPage(QWidget *parent
 
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
-  registerField("statementDate", m_statementDate, "date", SIGNAL(dateChanged(const QDate&)));
+  registerField("statementDate", m_statementDate, "date", SIGNAL(dateChanged(QDate)));
 
   registerField("endingBalance", m_endingBalance, "value", SIGNAL(textChanged()));
   registerField("endingBalanceValid", m_endingBalance, "valid", SIGNAL(textChanged()));

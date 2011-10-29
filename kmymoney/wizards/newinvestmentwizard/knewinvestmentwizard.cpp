@@ -104,7 +104,7 @@ void KNewInvestmentWizard::init1(void)
 
   // enable the help button
   setOption(HaveHelpButton, true);
-  connect(this, SIGNAL(helpRequested()), this, SLOT(slotHelp(void)));
+  connect(this, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
 
   m_createAccount = true;
 

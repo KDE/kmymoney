@@ -42,7 +42,7 @@ KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
     : QTreeView(parent)
 {
   setContextMenuPolicy(Qt::CustomContextMenu);
-  connect(this, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(customContextMenuRequested(const QPoint &)));
+  connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(customContextMenuRequested(QPoint)));
   setAllColumnsShowFocus(true);
 }
 

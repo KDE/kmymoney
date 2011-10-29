@@ -120,8 +120,8 @@ int KSelectDatabaseDlg::exec()
     m_requiredFields->setOkButton(button(KDialog::Ok));
     m_requiredFields->add(m_widget->listDrivers);
     m_requiredFields->add(m_widget->textDbName);
-    connect(m_widget->listDrivers, SIGNAL(itemClicked(QListWidgetItem *)),
-            this, SLOT(slotDriverSelected(QListWidgetItem *)));
+    connect(m_widget->listDrivers, SIGNAL(itemClicked(QListWidgetItem*)),
+            this, SLOT(slotDriverSelected(QListWidgetItem*)));
     m_widget->checkPreLoad->setChecked(false);
     // ensure a driver gets selected; pre-select if only one
     if (m_widget->listDrivers->count() == 1) {

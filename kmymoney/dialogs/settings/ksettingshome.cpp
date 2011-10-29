@@ -59,11 +59,11 @@ KSettingsHome::KSettingsHome(QWidget* parent) :
   m_downButton->setEnabled(false);
 
   // connect this, so that the list gets loaded once the edit field is filled
-  connect(kcfg_ItemList, SIGNAL(textChanged(const QString&)), this, SLOT(slotLoadItems()));
+  connect(kcfg_ItemList, SIGNAL(textChanged(QString)), this, SLOT(slotLoadItems()));
 
   connect(m_homePageList, SIGNAL(itemSelectionChanged()),
           this, SLOT(slotSelectHomePageItem()));
-  connect(m_homePageList, SIGNAL(clicked(const QModelIndex &)), this, SLOT(slotUpdateItemList()));
+  connect(m_homePageList, SIGNAL(clicked(QModelIndex)), this, SLOT(slotUpdateItemList()));
 
   connect(m_upButton, SIGNAL(clicked()), this, SLOT(slotMoveUp()));
   connect(m_downButton, SIGNAL(clicked()), this, SLOT(slotMoveDown()));

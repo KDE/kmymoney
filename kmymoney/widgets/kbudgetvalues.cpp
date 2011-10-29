@@ -86,13 +86,13 @@ KBudgetValues::KBudgetValues(QWidget* parent) :
   slotChangePeriod(m_periodGroup->id(m_monthlyButton));
 
   // connect(m_budgetLevel, SIGNAL(currentChanged(QWidget*)), this, SIGNAL(valuesChanged()));
-  connect(m_amountMonthly, SIGNAL(valueChanged(const QString&)), this, SLOT(slotNeedUpdate()));
-  connect(m_amountYearly, SIGNAL(valueChanged(const QString&)), this, SLOT(slotNeedUpdate()));
+  connect(m_amountMonthly, SIGNAL(valueChanged(QString)), this, SLOT(slotNeedUpdate()));
+  connect(m_amountYearly, SIGNAL(valueChanged(QString)), this, SLOT(slotNeedUpdate()));
   m_amountMonthly->installEventFilter(this);
   m_amountYearly->installEventFilter(this);
 
   for (int i = 0; i < 12; ++i) {
-    connect(m_field[i], SIGNAL(valueChanged(const QString&)), this, SLOT(slotNeedUpdate()));
+    connect(m_field[i], SIGNAL(valueChanged(QString)), this, SLOT(slotNeedUpdate()));
     m_field[i]->installEventFilter(this);
   }
 

@@ -98,11 +98,11 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   connect(m_listFi, SIGNAL(itemSelectionChanged()), this, SLOT(checkNextButton()));
   connect(m_listAccount, SIGNAL(itemSelectionChanged()), this, SLOT(checkNextButton()));
   connect(m_selectionTab, SIGNAL(currentChanged(int)), this, SLOT(checkNextButton()));
-  connect(m_fid, SIGNAL(userTextChanged(const QString&)), this, SLOT(checkNextButton()));
-  connect(m_bankName, SIGNAL(userTextChanged(const QString&)), this, SLOT(checkNextButton()));
-  connect(m_url, SIGNAL(textChanged(const QString&)), this, SLOT(checkNextButton()));
-  connect(m_editUsername, SIGNAL(userTextChanged(const QString&)), this, SLOT(checkNextButton()));
-  connect(m_editPassword, SIGNAL(userTextChanged(const QString&)), this, SLOT(checkNextButton()));
+  connect(m_fid, SIGNAL(userTextChanged(QString)), this, SLOT(checkNextButton()));
+  connect(m_bankName, SIGNAL(userTextChanged(QString)), this, SLOT(checkNextButton()));
+  connect(m_url, SIGNAL(textChanged(QString)), this, SLOT(checkNextButton()));
+  connect(m_editUsername, SIGNAL(userTextChanged(QString)), this, SLOT(checkNextButton()));
+  connect(m_editPassword, SIGNAL(userTextChanged(QString)), this, SLOT(checkNextButton()));
 
   // setup text on buttons
   setButtonText(QWizard::NextButton, i18nc("Go to next page of the wizard", "&Next"));

@@ -258,7 +258,7 @@ void kMyMoneyCalendar::init(const QDate &dt)
   monthForward->setIcon(QIcon(BarIcon("arrow-right")));
   monthBackward->setIcon(QIcon(BarIcon("arrow-left")));
   setDate(dt); // set button texts
-  connect(table, SIGNAL(dateChanged(const QDate&)), SLOT(dateChangedSlot(const QDate&)));
+  connect(table, SIGNAL(dateChanged(QDate)), SLOT(dateChangedSlot(QDate)));
   connect(table, SIGNAL(tableClicked()), SLOT(tableClickedSlot()));
   connect(monthForward, SIGNAL(clicked()), SLOT(monthForwardClicked()));
   connect(monthBackward, SIGNAL(clicked()), SLOT(monthBackwardClicked()));

@@ -88,7 +88,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotNewPrice()));
   connect(m_priceList, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectPrice()));
   connect(m_onlineQuoteButton, SIGNAL(clicked()), this, SLOT(slotOnlinePriceUpdate()));
-  connect(m_priceList, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotOpenContextMenu(const QPoint&)));
+  connect(m_priceList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotOpenContextMenu(QPoint)));
 
   connect(m_showAllPrices, SIGNAL(toggled(bool)), this, SLOT(slotLoadWidgets()));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
