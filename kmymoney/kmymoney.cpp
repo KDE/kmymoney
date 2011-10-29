@@ -1676,12 +1676,12 @@ bool KMyMoneyApp::slotFileSaveAs(void)
                     QString("%1|%2\n").arg("*.anon.xml").arg(i18nc("Anonymous (Filefilter)", "Anonymous files")) +
                     QString("%1|%2\n").arg("*").arg(i18nc("All files (Filefilter)", "All files")),
                     this, vbox);
+  dlg->setOperationMode(KFileDialog::Saving);
   connect(dlg, SIGNAL(filterChanged(QString)), this, SLOT(slotFileSaveAsFilterChanged(QString)));
 
   if (!specialDir)
     dlg->setSelection(prevDir);   // may also be a filename
 
-  dlg->setOperationMode(KFileDialog::Saving);
   dlg->setCaption(i18n("Save As"));
 
   if (dlg->exec() == QDialog::Accepted) {
