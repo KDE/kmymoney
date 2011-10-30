@@ -5080,17 +5080,34 @@ void KMyMoneyApp::slotTransactionDuplicate(void)
 void KMyMoneyApp::doDeleteTransactions(void)
 {
   KMyMoneyRegister::SelectedTransactions list = d->m_selectedTransactions;
-  KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
+  KMyMoneyRegister::SelectedTransactions::iterator it_t;
   int cnt = list.count();
   int i = 0;
   slotStatusProgressBar(0, cnt);
   MyMoneyFileTransaction ft;
   MyMoneyFile* file = MyMoneyFile::instance();
   try {
-    for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
+    it_t = list.begin();
+    while (it_t != list.end()) {
       // only remove those transactions that do not reference a closed account
-      if (!file->referencesClosedAccount((*it_t).transaction()))
+      if (!file->referencesClosedAccount((*it_t).transaction())) {
         file->removeTransaction((*it_t).transaction());
+        // remove all those references in the list of selected transactions
+        // that refer to the same transaction we just removed so that we
+        // will not be caught by an exception later on (see bko #285310)
+        KMyMoneyRegister::SelectedTransactions::iterator it_td = it_t;
+        ++it_td;
+        while (it_td != list.end()) {
+          if ((*it_t).transaction().id() == (*it_td).transaction().id()) {
+            it_td = list.erase(it_td);
+            i++; // bump count of deleted transactions
+          } else {
+            ++it_td;
+          }
+        }
+      }
+      list.erase(it_t);
+      it_t = list.begin();
       slotStatusProgressBar(i++, 0);
     }
     ft.commit();
@@ -5972,7 +5989,7 @@ void KMyMoneyApp::slotUpdateActions(void)
     bool enable = false;
     KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
     for (it_t = d->m_selectedTransactions.constBegin(); (enable == false) && (it_t != d->m_selectedTransactions.constEnd()); ++it_t) {
-      enable = !file->referencesClosedAccount((*it_t).transaction());
+      enable = !(*it_t).transaction().id().isEmpty() && !file->referencesClosedAccount((*it_t).transaction());
     }
     action("transaction_delete")->setEnabled(enable);
 
