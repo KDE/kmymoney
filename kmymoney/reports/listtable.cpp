@@ -673,7 +673,7 @@ void ListTable::includeInvestmentSubAccounts()
       && !m_config.isIncludingUnusedAccounts()) {
     // if the balance is not zero at the end, include the subaccount
     QStringList::iterator it_balance;
-    for (it_balance = subAccountsList.begin(); it_balance != subAccountsList.end(); ) {
+    for (it_balance = subAccountsList.begin(); it_balance != subAccountsList.end();) {
       if (!file->balance((*it_balance), m_config.toDate()).isZero()) {
         m_config.addAccount((*it_balance));
         it_balance = subAccountsList.erase((it_balance));

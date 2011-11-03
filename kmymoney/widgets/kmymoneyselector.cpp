@@ -77,7 +77,7 @@ KMyMoneySelector::KMyMoneySelector(QWidget *parent, Qt::WFlags flags) :
 KMyMoneySelector::~KMyMoneySelector()
 {
 #ifdef Q_OS_WIN32                   //krazy:exclude=cpp
-  // reset the focused widget or else we'll have a crash later 
+  // reset the focused widget or else we'll have a crash later
   // caused by an already free'd focus widget in the input context
   if (qApp->inputContext()->focusWidget() == m_treeWidget)
     qApp->inputContext()->setFocusWidget(0);
