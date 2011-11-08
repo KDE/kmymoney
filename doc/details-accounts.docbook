@@ -324,7 +324,7 @@
   <screenshot>
             <mediaobject>
               <imageobject>
-                <imagedata fileref="accwiz8.1.png" format="PNG" />
+                <imagedata fileref="accwiz8_1.png" format="PNG" />
               </imageobject>
 
               <textobject>
@@ -382,7 +382,7 @@
   <screenshot>
             <mediaobject>
               <imageobject>
-                <imagedata fileref="accwiz8.2.png" format="PNG" />
+                <imagedata fileref="accwiz8_2.png" format="PNG" />
               </imageobject>
 
               <textobject>
@@ -483,7 +483,7 @@
   <screenshot>
             <mediaobject>
               <imageobject>
-                <imagedata fileref="accwiz8.3.png" format="PNG" />
+                <imagedata fileref="accwiz8_3.png" format="PNG" />
               </imageobject>
 
               <textobject>
@@ -509,7 +509,7 @@
   <screenshot>
             <mediaobject>
               <imageobject>
-                <imagedata fileref="accwiz8.4.png" format="PNG" />
+                <imagedata fileref="accwiz8_4.png" format="PNG" />
               </imageobject>
 
               <textobject>
@@ -539,7 +539,7 @@
   <screenshot>
             <mediaobject>
               <imageobject>
-                <imagedata fileref="accwiz8.5.png" format="PNG" />
+                <imagedata fileref="accwiz8_5.png" format="PNG" />
               </imageobject>
 
               <textobject>
