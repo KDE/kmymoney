@@ -40,6 +40,22 @@ IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
   SET(ENV{LANG} ${LANG})
 ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
 
+# Determine the GIT reference (if we're based on GIT)
+IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git)
+  # make sure we don't use translated messages here
+  SET(LANG $ENV{LANG})
+  SET(ENV{LANG} "C")
+  EXECUTE_PROCESS(COMMAND git log -1 COMMAND head -n 1 OUTPUT_VARIABLE BRANCH)
+  # extract branch name
+  STRING(REGEX MATCH "commit ([^$]+)" BRANCH "${BRANCH}")
+  SET(BRANCH ${CMAKE_MATCH_1})
+  # and use the first 10 chars of the commit id
+  STRING(SUBSTRING ${BRANCH} 0 10 BRANCH)
+  SET(VERSION_SUFFIX "-${BRANCH}")
+  # switch back to the original language setting
+  SET(ENV{LANG} ${LANG})
+ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git)
+
 ######################### General Requirements ##########################
 
 # setup default CMAKE_INSTALL_PREFIX before calling FIND_PACKAGE(KDE4)
