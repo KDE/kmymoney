@@ -116,6 +116,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
 
 KOnlineBankingStatus::~KOnlineBankingStatus()
 {
+  delete m_headerVersion;
   delete m_appId;
 }
 
