@@ -14,7 +14,7 @@ To do so, just type
 
 $ cmake --version
 
-on your command line. Version 2.4 is required, the most recent
+on your command line. Version 2.6.4 is required, the most recent
 stable version of cmake is preferred.
 
 -----------------------------------------------------
@@ -24,7 +24,7 @@ Quick-start 1: Build KMyMoney
 cmake is designed so that the build process can be done in a separate
 directory. This is highly recommended for users and required for packagers.
 
-Go to the top level of the cvs working directory.
+Go to the top level of the git working directory.
 To build KMyMoney in the subdirectory ./build/ type
 
 $ mkdir build
