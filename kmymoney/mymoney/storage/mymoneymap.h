@@ -43,9 +43,20 @@
 template <class Key, class T>
 class MyMoneyMap : protected QMap<Key, T>
 {
-public:
-  // typedef QMapConstIterator<Key, T> const_iterator;
+private:
+  // check if a key required (not already contained in the stack) or not
+  bool required(const Key& key) const {
+    if (m_stack.count() > 1) {
+      for (int i = 0; i < m_stack.count(); ++i) {
+        if (m_stack[i]->key() == key) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
+public:
   MyMoneyMap() : QMap<Key, T>() {}
   virtual ~MyMoneyMap() {}
 
@@ -84,6 +95,14 @@ public:
     if (m_stack.count() == 0)
       throw new MYMONEYEXCEPTION("No transaction started to insert new element into container");
 
+    // check if information about the object identified by 'key'
+    // is already present in the stack
+    if (!required(key)) {
+      QMap<Key, T> *container = this;
+      (*container)[key] = obj;
+      return;
+    }
+
     // store object in
     m_stack.push(new MyMoneyMapInsert(this, key, obj));
   }
@@ -98,6 +117,14 @@ public:
       throw new MYMONEYEXCEPTION("No key to update object");
 #endif
 
+    // check if information about the object identified by 'key'
+    // is already present in the stack
+    if (!required(key)) {
+      QMap<Key, T> *container = this;
+      (*container)[key] = obj;
+      return;
+    }
+
     m_stack.push(new MyMoneyMapModify(this, key, obj));
   }
 
@@ -110,6 +137,14 @@ public:
     if (key.isEmpty())
       throw new MYMONEYEXCEPTION("No key to remove object");
 #endif
+
+    // check if information about the object identified by 'key'
+    // is already present in the stack
+    if (!required(key)) {
+      QMap<Key, T> *container = this;
+      container->remove(key);
+      return;
+    }
 
     m_stack.push(new MyMoneyMapRemove(this, key));
   }
@@ -191,6 +226,7 @@ private:
 
     virtual ~MyMoneyMapAction() {}
     virtual void undo(void) = 0;
+    const Key& key(void) const { return m_key; }
 
   protected:
     QMap<Key, T>* m_container;
