@@ -58,6 +58,12 @@ public:
 
   void setBudget(const MyMoneyBudget& budget);
 
+signals:
+  /**
+    * Emit this signal when the balance of the budget is changed.
+    */
+  void balanceChanged(const MyMoneyMoney &);
+
 protected:
   bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
   bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;
@@ -66,7 +72,11 @@ protected:
   MyMoneyMoney computeTotalValue(const QModelIndex &source_index) const;
 
 private:
+  void checkBalance();
+
+private:
   MyMoneyBudget m_budget;
+  MyMoneyMoney m_lastBalance;
 };
 
 
@@ -166,6 +176,8 @@ protected slots:
   void slotNewBudget(void);
 
   void languageChange(void);
+
+  void slotBudgetBalanceChanged(const MyMoneyMoney &);
 
 private slots:
   void slotRearrange(void);

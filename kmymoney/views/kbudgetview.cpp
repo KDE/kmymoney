@@ -206,6 +206,7 @@ void BudgetAccountsProxyModel::setBudget(const MyMoneyBudget& budget)
 {
   m_budget = budget;
   invalidate();
+  checkBalance();
 }
 
 bool BudgetAccountsProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
@@ -284,6 +285,36 @@ MyMoneyMoney BudgetAccountsProxyModel::computeTotalValue(const QModelIndex &sour
   return totalValue;
 }
 
+void BudgetAccountsProxyModel::checkBalance()
+{
+  // compute the balance
+  QModelIndexList incomeList = match(index(0, 0),
+                                     AccountsModel::AccountIdRole,
+                                     MyMoneyFile::instance()->income().id(),
+                                     1,
+                                     Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+
+  QModelIndexList expenseList = match(index(0, 0),
+                                      AccountsModel::AccountIdRole,
+                                      MyMoneyFile::instance()->expense().id(),
+                                      1,
+                                      Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+
+  MyMoneyMoney balance;
+  if (!incomeList.isEmpty() && !expenseList.isEmpty()) {
+    QVariant incomeValue = data(incomeList.front(), AccountsModel::AccountTotalValueRole);
+    QVariant expenseValue = data(expenseList.front(), AccountsModel::AccountTotalValueRole);
+
+    if (incomeValue.isValid() && expenseValue.isValid()) {
+      balance = incomeValue.value<MyMoneyMoney>() - expenseValue.value<MyMoneyMoney>();
+    }
+  }
+  if (m_lastBalance != balance) {
+    m_lastBalance = balance;
+    emit balanceChanged(m_lastBalance);
+  }
+}
+
 KBudgetView::KBudgetView(QWidget *parent) :
     QWidget(parent),
     m_needReload(false),
@@ -348,6 +379,8 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_accountTree->setIconSize(QSize(22, 22));
   m_accountTree->setSortingEnabled(true);
   m_accountTree->setModel(m_filterProxyModel);
+
+  connect(m_filterProxyModel, SIGNAL(balanceChanged(MyMoneyMoney)), this, SLOT(slotBudgetBalanceChanged(MyMoneyMoney)));
 
   // let the model know if the item is expanded or collapsed
   connect(m_accountTree, SIGNAL(collapsed(QModelIndex)), m_filterProxyModel, SLOT(collapsed(QModelIndex)));
@@ -897,6 +930,25 @@ void KBudgetView::languageChange(void)
   m_deleteButton->setText(QString());
   m_updateButton->setText(QString());
   m_resetButton->setText(QString());
+}
+
+void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney &balance)
+{
+  QString s(i18nc("The balance of the selected budget", "Balance: "));
+
+  s.replace(QString(" "), QString("&nbsp;"));
+  if (balance.isNegative()) {
+    s += "<b><font color=\"red\">";
+  }
+  const MyMoneySecurity& sec = MyMoneyFile::instance()->baseCurrency();
+  QString v(MyMoneyUtils::formatMoney(balance, sec));
+  s += v.replace(QString(" "), QString("&nbsp;"));
+  if (balance.isNegative()) {
+    s += "</font></b>";
+  }
+
+  m_balanceLabel->setFont(KMyMoneyGlobalSettings::listCellFont());
+  m_balanceLabel->setText(s);
 }
 
 #include "kbudgetview.moc"
