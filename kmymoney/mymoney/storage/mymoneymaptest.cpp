@@ -42,7 +42,7 @@ void MyMoneyMapTest::testModifyKey()
   m->insert("a", "a");
   m->commitTransaction();
   QVERIFY((*m)["a"] == "a");
- 
+
   // commit
   m->startTransaction();
   m->modify("a", "b");

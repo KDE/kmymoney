@@ -226,7 +226,9 @@ private:
 
     virtual ~MyMoneyMapAction() {}
     virtual void undo(void) = 0;
-    const Key& key(void) const { return m_key; }
+    const Key& key(void) const {
+      return m_key;
+    }
 
   protected:
     QMap<Key, T>* m_container;
