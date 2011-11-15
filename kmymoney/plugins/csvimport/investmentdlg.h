@@ -25,6 +25,7 @@ email                 : agander93@gmail.com
 #include <QtCore/QDate>
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
+#include <QtGui/QCloseEvent>
 // ----------------------------------------------------------------------------
 // KDE Headers
 #include <KUrl>
@@ -32,15 +33,14 @@ email                 : agander93@gmail.com
 // Project Headers
 
 #include <mymoneystatement.h>
-#include "ui_csvimporterdlgdecl.h"
 
 #define invMAXCOL 25    //                 maximum no. of columns (arbitrary value)
 
+class CSVDialog;
 class ConvertDate;
-class CsvImporterDlg;
 class InvestProcessing;
 class MyMoneyStatement;
-class RedefineDlg;
+class SymbolTableDlg;
 
 class InvestmentDlg: public QObject
 {
@@ -50,9 +50,9 @@ public:
   InvestmentDlg();
   ~InvestmentDlg();
 
-  CsvImporterDlg*    m_csvDialog;
+  CSVDialog*         m_csvDialog;
   ConvertDate*       m_convertDat;
-  RedefineDlg*       m_redefine;
+  SymbolTableDlg*       m_redefine;
   InvestProcessing*  m_investProcessing;
 
   void               clearComboBoxText();
@@ -61,13 +61,7 @@ public:
 
 public slots:
 
-  void           fileDialog();
-
 private:
-  /**
-  * This method will receive close events, calling slotClose().
-  */
-  void           closeEvent(QCloseEvent *event);
 
   /**
   * This method will receive resize events, calling updateScreen().
@@ -75,12 +69,6 @@ private:
   void           resizeEvent(QResizeEvent * event);
 
 private slots:
-
-  /**
-  * This slot is called when 'Quit' is clicked.  The plugin settings will
-  * be saved and the plugin will be terminated.
-  */
-  void           slotClose();
 
   /**
   * This slot is called following the user selecting a new investment type

@@ -31,7 +31,7 @@
 
 #include "kmymoneyplugin.h"
 
-class CsvImporterDlg;
+class CSVDialog;
 
 class CsvImporterPlugin : public KMyMoneyPlugin::Plugin
 {
@@ -41,12 +41,14 @@ public:
   explicit CsvImporterPlugin(QObject* parent, const QVariantList&);
   ~CsvImporterPlugin();
 
-  CsvImporterDlg*  m_csvDlg;
+  CSVDialog*  m_csvImporter;
   KAction*         m_action;
+
+public slots:
+  bool slotGetStatement(MyMoneyStatement& s);
 
 protected slots:
   void slotImportFile(void);
-  bool slotGetStatement(MyMoneyStatement& s);
 
 protected:
   void createActions(void);

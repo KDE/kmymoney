@@ -24,7 +24,12 @@ email                : agander93@gmail.com
 #include <QtCore/QStringList>
 #include <QObject>
 
-class CsvImporterDlg;
+#include "investtransactioneditor.h"
+
+class CSVDialog;
+class MyMoneyAccount;
+class InvestTransactionEditor;
+class TransactionEditor;
 
 class Parse: public QObject
 {
@@ -34,7 +39,7 @@ public:
   Parse();
   ~Parse();
 
-  CsvImporterDlg*     m_csvDialog;
+  CSVDialog*     m_csvDialog;
 
   /**
    * This method is used to parse each line of data, splitting it into
@@ -105,4 +110,30 @@ private :
   bool             m_invalidConversion;
 }
 ;
+
+class CsvUtil: public QObject
+{
+  Q_OBJECT
+
+public:
+  CsvUtil();
+  ~CsvUtil();
+
+  InvestTransactionEditor*    m_investTransactionEditor;
+
+  const QString&     feeId(const MyMoneyAccount& invAcc);
+  const QString&     interestId(const MyMoneyAccount& invAcc);
+  QString            expenseId(const QString& name);
+  QString            interestId(const QString& name);
+  QString            feeId(const QString& name);
+  QString            nameToId(const QString& name, MyMoneyAccount& parent);
+  void               scanCategories(QString& id, const MyMoneyAccount& invAcc, const MyMoneyAccount& parentAccount, const QString& defaultName);
+  void               previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId);
+  void               dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType);
+
+private:
+  QString          m_feeId;
+  QString          m_interestId;
+  bool             m_scannedCategories;
+};
 #endif

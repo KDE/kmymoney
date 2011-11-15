@@ -42,13 +42,14 @@
 
 #include "mymoneystatementreader.h"
 #include "mymoneystatement.h"
-#include "csvimporterdlg.h"
+#include "csvdialog.h"
+#include "investprocessing.h"
 
 K_PLUGIN_FACTORY(CsvImporterFactory, registerPlugin<CsvImporterPlugin>();)
 K_EXPORT_PLUGIN(CsvImporterFactory("kmm_csvimport"))
 
 CsvImporterPlugin::CsvImporterPlugin(QObject *parent, const QVariantList&) :
-    KMyMoneyPlugin::Plugin(parent, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
+  KMyMoneyPlugin::Plugin(parent, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   setComponentData(CsvImporterFactory::componentData());
   setXMLFile("kmm_csvimport.rc");
@@ -70,15 +71,16 @@ void CsvImporterPlugin::createActions(void)
 
 void CsvImporterPlugin::slotImportFile(void)
 {
-  m_csvDlg = new CsvImporterDlg;
-  m_csvDlg->m_plugin = this;
+  m_csvImporter = new CSVDialog;
+  m_csvImporter->m_plugin = this;
+  m_csvImporter->init();
 
-  m_csvDlg->setWindowTitle(i18nc("CSV Importer dialog title", "CSV Importer"));
-  m_csvDlg->spinBox_skip->setEnabled(true);
+  m_csvImporter->setWindowTitle(i18nc("CSV Importer dialog title", "CSV Importer"));
 
   m_action->setEnabled(false);//            disable csv menuitem once plugin is loaded
-  connect(m_csvDlg, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
-  m_csvDlg->show();
+
+  connect(m_csvImporter, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
+  m_csvImporter->show();
 }
 
 bool CsvImporterPlugin::slotGetStatement(MyMoneyStatement& s)

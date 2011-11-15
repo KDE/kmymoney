@@ -9,19 +9,26 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
 ########### next target ###############
 
 SET(kmm_csvimport_PART_SRCS
+  csvdialog.cpp
   csvimporterplugin.cpp
-  csvimporterdlg.cpp
-  csvprocessing.cpp
   investmentdlg.cpp
   investprocessing.cpp
   redefinedlg.cpp
   convdate.cpp
   csvutil.cpp
+  symboltabledlg.cpp
 )
 
 KDE4_ADD_UI_FILES(kmm_csvimport_PART_SRCS
-  csvimporterdlgdecl.ui
+  csvdialog.ui
   redefinedlgdecl.ui
+  introwizardpage.ui
+  separatorwizardpage.ui
+  bankingwizardpage.ui
+  investmentwizardpage.ui
+  lines-datewizardpage.ui
+  completionwizardpage.ui
+  symboltabledlg.ui
 )
 
 KDE4_ADD_PLUGIN(kmm_csvimport

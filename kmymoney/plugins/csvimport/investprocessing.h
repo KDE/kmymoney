@@ -26,6 +26,7 @@ email                 : agander93@gmail.com
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
 #include <QtCore/QStringList>
+#include <QtCore/QList>
 #include <QtGui/QCompleter>
 
 // ----------------------------------------------------------------------------
@@ -41,10 +42,11 @@ email                 : agander93@gmail.com
 #define invMAXCOL 25    //                 maximum no. of columns (arbitrary value)
 
 class ConvertDate;
-class CsvImporterDlg;
+class CSVDialog;
 class InvestmentDlg;
 class RedefineDlg;
 class Parse;
+class CsvUtil;
 class MyMoneyStatement;
 class KAbstractFileWidget;
 class KHBox;
@@ -54,15 +56,23 @@ class InvestProcessing : public QObject
 {
   Q_OBJECT
 
+private:
+  struct csvSplit {
+    QString      m_strCategoryName;
+    QString      m_strMemo;
+    QString      m_amount;
+  } m_csvSplit;
+
 public:
   InvestProcessing();
   ~InvestProcessing();
 
-  CsvImporterDlg*   m_csvDialog;
+  CSVDialog*        m_csvDialog;
   InvestmentDlg*    m_investDlg;
   Parse*            m_parse;
   ConvertDate*      m_convertDat;
   RedefineDlg*      m_redefine;
+  CsvUtil*          m_csvUtil;
 
   KComboBox*        m_comboBoxEncode;
 
@@ -76,14 +86,23 @@ public:
   /**
   * This method is called on opening, to load settings from the resource file.
   */
+  void           readSettingsInit();
   void           readSettings();
-
+  void           readSettings(int index);
   void           clearColumnType(int column);
   void           setColumnType(int column, const QString& type);
 
   QString        previousType();
   void           clearPreviousType();
   void           setPreviousType(const QString& type);
+
+  /**
+    * This method is called initially after an input file has been selected.
+    * It will call other routines to display file content and to complete the
+    * statement import. It will also be called to reposition the file after row
+    * deletion, or to reread following encoding or delimiter change.
+    */
+  void           readFile(const QString& fname, int skipLines);
 
   /**
   * This method is called when the user clicks 'Clear selections', in order to
@@ -107,23 +126,59 @@ public:
   */
   void           clearComboBoxText();
 
+  void           reloadUI();
+
   void           setInFileName(const QString& val);
   void           updateScreen();
 
   QString        columnType(int column);
   QString        invPath();
   QString        inFileName();
+  QString        m_inFileName;
+  QString        m_buf;
 
   QStringList    securityList();
+
+  QStringList    m_symbolsList;
+  QStringList    m_namesList;
+
+  QMap<QString, QString> m_map;
+
+  QStringList    m_brokerList;
+  QStringList    m_shrsinList;
+  QStringList    m_divXList;
+  QStringList    m_intIncList;
+  QStringList    m_feeList;
+  QStringList    m_brokerageList;
+  QStringList    m_reinvdivList;
+  QStringList    m_buyList;
+  QStringList    m_sellList;
+  QStringList    m_removeList;
+  QStringList    m_dateFormats;
+  QStringList    m_columnList;
+  QStringList    m_securityList;
+  QStringList    m_lineList;
+
+  QList<MyMoneyStatement::Security> m_listSecurities;
 
   int            lastLine();
   int            amountColumn();
   int            priceColumn();
   int            quantityColumn();
+  int            detailColumn();
+  int            symbolColumn();
+  int            memoColumn();
 
   bool           importNow();
 
+  void           setSecurityName(QString name);
+
   int            m_endColumn;
+  int            m_endLine;
+  int            m_finalLine;
+  int            m_startLine;
+  int            m_row;
+  int            m_height;
 
   bool           m_screenUpdated;
 
@@ -141,7 +196,7 @@ public slots:
   * This method is called when the user clicks 'Open File', and opens
   * a file selector dialog.
   */
-  void           fileDialog();
+  void           slotFileDialogClicked();
 
   /**
   * This method is called when the Date column is activated.
@@ -194,26 +249,30 @@ public slots:
   void           amountColumnSelected(int);
 
   /**
+  * This method is called when the Symbol column is activated.
+  * It will validate the column selection.
+  */
+  void           symbolColumnSelected(int);
+
+  /**
+  * This method is called when the Detail column is activated.
+  * It will validate the column selection.
+  */
+  void           detailColumnSelected(int);
+
+  /**
   * This method is called when the user clicks Accept. It performs further
   * validity checks on the user's choices, then redraws the required rows.
   * Finally, it rereads the file, which this time will result in the import
   * actually taking place.
   */
-  void           importClicked();
+  void           slotImportClicked();
 
   /**
   * This method is called when the user clicks the Date button and selects
   * the date format for the input file.
   */
   void           dateFormatSelected(int dF);
-
-  /**
-  * This method is called initially after an input file has been selected.
-  * It will call other routines to display file content and to complete the
-  * statement import. It will also be called to reposition the file after row
-  * deletion, or to reread following encoding or delimiter change.
-  */
-  void           readFile(const QString& fname, int skipLines);
 
   /**
   * This method is called should the user click 'Save as QIF'. A File Selection
@@ -225,13 +284,15 @@ public slots:
   * This method is called when the user selects the start line.  The requested
   * start line  value is saved.
   */
+  void           startLineChanged(int);
   void           startLineChanged();
-
   /**
   * This method is called when the user selects the end line.  The requested
   * end line  value is saved, to be used on import.
   */
   void           endLineChanged();
+
+  void           endLineChanged(int val);
 
   /**
   * This method is called when the activity 'Type/Action' column is activated.
@@ -239,8 +300,17 @@ public slots:
   */
   void           typeColumnSelected(int);
 
-private:
+  /**
+  * This method is called when the user clicks 'Clear selections'.
+  * All column selections are cleared.
+  */
+  void           clearColumnsSelected();
 
+private:
+signals:
+  void           slotGetStatement();
+
+private:
   /**
   * This method is called during import, to convert the QString activity type
   * to a MyMoneyStatement::Transaction::EAction& convType, which is added to
@@ -290,7 +360,7 @@ private:
   * It will evaluate an input line and prepare it to be added to a statement,
   * and to a QIF file, if required.
   */
-  int            processInvestLine(const QString& iBuff);
+  int            processInvestLine(const QString& inBuffer, int line);
 
   /**
   * This method is called during input if a brokerage type activity is found.
@@ -311,6 +381,16 @@ private:
   */
   void           setCodecList(const QList<QTextCodec *> &list);
 
+  /**
+    * This method is used to get the account id of the split for
+    * a transaction from the text found in the QIF $ or L record.
+    * If an account with the name is not found, the user is asked
+    * if it should be created.
+  */
+  const QString checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2);
+
+  void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
+
   struct qifInvestData {
     QString      memo;
     MyMoneyMoney price;
@@ -324,6 +404,8 @@ private:
     QDate        date;
   }              m_trInvestData;
 
+  QList<csvSplit> m_csvSplitsList;
+
   bool           m_amountSelected;
   bool           m_brokerage;
   bool           m_brokerageItems;
@@ -334,6 +416,9 @@ private:
   bool           m_priceSelected;
   bool           m_quantitySelected;
   bool           m_typeSelected;
+  bool           m_symbolSelected;
+  bool           m_detailSelected;
+  bool           m_firstPass;
 
   int            m_dateFormatIndex;
   int            m_fieldDelimiterIndex;
@@ -347,12 +432,11 @@ private:
   int            m_priceColumn;
   int            m_previousColumn;
   int            m_quantityColumn;
+  int            m_symbolColumn;
+  int            m_detailColumn;
   int            m_textDelimiterIndex;
   int            m_typeColumn;
-  int            m_endLine;
-  int            m_startLine;
-  int            m_row;
-  int            m_height;
+  int            m_symblRow;
 
   QString        m_accountName;
   QString        m_brokerBuff;
@@ -362,7 +446,7 @@ private:
   QString        m_textDelimiterCharacter;
   QString        m_inBuffer;
   QString        m_invPath;
-  QString        m_inFileName;
+
   QString        m_outBuffer;
   QString        m_previousType;
   QString        m_securityName;
@@ -370,29 +454,12 @@ private:
 
   QList<QTextCodec *>   m_codecs;
 
-  QStringList    m_shrsinList;
-  QStringList    m_divXList;
-  QStringList    m_brokerageList;
-  QStringList    m_reinvdivList;
-  QStringList    m_buyList;
-  QStringList    m_sellList;
-  QStringList    m_removeList;
-  QStringList    m_dateFormats;
-  QStringList    m_columnList;
-  QStringList    m_securityList;
-
   KUrl           m_url;
   QFile*         m_inFile;
 
   QCompleter*     m_completer;
 
 private slots:
-
-  /**
-  * This method is called when the user clicks 'Clear selections'.
-  * All column selections are cleared.
-  */
-  void           clearColumnsSelected();
 
   /**
   * This method is called when it is detected that the user has selected the
