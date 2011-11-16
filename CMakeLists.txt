@@ -41,7 +41,7 @@ IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
 ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
 
 # Determine the GIT reference (if we're based on GIT)
-IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git)
+IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git AND CMAKE_SYSTEM_NAME MATCHES Linux)
   # make sure we don't use translated messages here
   SET(LANG $ENV{LANG})
   SET(ENV{LANG} "C")
@@ -54,7 +54,7 @@ IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git)
   SET(VERSION_SUFFIX "-${BRANCH}")
   # switch back to the original language setting
   SET(ENV{LANG} ${LANG})
-ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git)
+ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git AND CMAKE_SYSTEM_NAME MATCHES Linux)
 
 ######################### General Requirements ##########################
 
