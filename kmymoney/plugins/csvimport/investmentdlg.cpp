@@ -132,10 +132,6 @@ void InvestmentDlg::saveSettings()
   KConfigGroup profileGroup(config, "Profile");
   profileGroup.writeEntry("DateFormat", m_csvDialog->m_pageLinesDate->ui->comboBox_dateFormat->currentIndex());
   profileGroup.writeEntry("FieldDelimiter", m_csvDialog->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex());
-  str =  m_csvDialog->m_fileType;
-  if(str == "Invest") {
-    profileGroup.writeEntry("FileType", str);
-  }
   profileGroup.config()->sync();
 
   KConfigGroup securitiesGroup(config, "Securities");

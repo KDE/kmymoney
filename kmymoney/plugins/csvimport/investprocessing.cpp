@@ -1208,8 +1208,8 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
   // Process the securities
   //
 
-  QList<MyMoneyStatement::Security>::const_iterator it_s = m_listSecurities.begin();
-  while(it_s != m_listSecurities.end()) {
+  QList<MyMoneyStatement::Security>::const_iterator it_s = m_listSecurities.constBegin();
+  while(it_s != m_listSecurities.constEnd()) {
     st.m_listSecurities << (*it_s);
     ++it_s;
   }
@@ -1243,7 +1243,7 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
   tr.m_amount = m_trInvestData.amount;
   s1.m_amount = tr.m_amount;
   MyMoneyStatement::Split s2 = s1;
-  s2.m_amount = (-s1.m_amount);
+  s2.m_amount = MyMoneyMoney(-s1.m_amount);
   tr.m_strInterestCategory = m_csvSplit.m_strCategoryName;
   tr.m_strSecurity = m_trInvestData.security;
 
@@ -1466,13 +1466,14 @@ void InvestProcessing::readSettings()
   KConfigGroup profileGroup(config, "Profile");
 
   str = profileGroup.readEntry("FileType", QString());
-  if(str != "Invest") {
-  }
+
   m_dateFormatIndex = profileGroup.readEntry("DateFormat", QString()).toInt();
   m_csvDialog->m_pageLinesDate->ui->comboBox_dateFormat->setCurrentIndex(m_dateFormatIndex);
   m_encodeIndex = profileGroup.readEntry("Encoding", QString()).toInt();
   int fieldDelimiterIndx = profileGroup.readEntry("FieldDelimiter", QString()).toInt();
   m_csvDialog->m_pageSeparator->ui->comboBox_fieldDelimiter->setCurrentIndex(fieldDelimiterIndx);
+  m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
+  m_csvDialog->m_pageCompletion->ui->comboBox_thousandsDelimiter->setCurrentIndex(-1);
 
   KConfigGroup investmentGroup(config, "InvestmentSettings");
 
@@ -1492,12 +1493,9 @@ void InvestProcessing::readSettings()
   m_removeList = investmentGroup.readEntry("RemoveParam", QStringList());
   m_invPath  = investmentGroup.readEntry("InvDirectory", QString());
 
-  if(str == "Invest") {
-    tmp = investmentGroup.readEntry("StartLine", QString()).toInt();
-    m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(-1);//     force change of val
-    m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(tmp + 1);
-    m_csvDialog->m_fileType = str;
-  }
+  tmp = investmentGroup.readEntry("StartLine", QString()).toInt();
+  m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(-1);//     force change of val
+  m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(tmp + 1);
 
   KConfigGroup invcolumnsGroup(config, "InvColumns");
   if(invcolumnsGroup.exists()) {
@@ -1569,6 +1567,8 @@ void InvestProcessing::readSettings(int index)
   m_encodeIndex = profileGroup.readEntry("Encoding", QString()).toInt();
   int fieldDelimiterIndx = profileGroup.readEntry("FieldDelimiter", QString()).toInt();
   m_csvDialog->m_pageSeparator->ui->comboBox_fieldDelimiter->setCurrentIndex(fieldDelimiterIndx);
+  m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
+  m_csvDialog->m_pageCompletion->ui->comboBox_thousandsDelimiter->setCurrentIndex(-1);
 
   KConfigGroup securitiesGroup(config, "Securities");
   m_securityList.clear();
@@ -1598,12 +1598,9 @@ void InvestProcessing::readSettings(int index)
         m_removeList = investmentGroup.readEntry("RemoveParam", QStringList());
         m_invPath  = investmentGroup.readEntry("InvDirectory", QString());
 
-        if(str == "Invest") {
-          tmp = investmentGroup.readEntry("StartLine", QString()).toInt();
-          m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(-1);//     force change of val
-          m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(tmp + 1);
-          m_csvDialog->m_fileType = str;
-        }
+        tmp = investmentGroup.readEntry("StartLine", QString()).toInt();
+        m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(-1);//     force change of val
+        m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(tmp + 1);
 
         str = investmentGroup.readEntry("Filter", QString());
         if(str.endsWith('#')) { //  Terminates a trailing blank
@@ -1679,12 +1676,9 @@ void InvestProcessing::readSettings(int index)
       m_removeList = investmentGroup2.readEntry("RemoveParam", QStringList());
       m_invPath  = investmentGroup2.readEntry("InvDirectory", QString());
 
-      if(str == "Invest") {
-        tmp = investmentGroup2.readEntry("StartLine", QString()).toInt();
-        m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(-1);//     force change of val
-        m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(tmp + 1);
-        m_csvDialog->m_fileType = str;
-      }
+      tmp = investmentGroup2.readEntry("StartLine", QString()).toInt();
+      m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(-1);//     force change of val
+      m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(tmp + 1);
 
       str = investmentGroup2.readEntry("Filter", QString());
       if(str.endsWith('#')) { //  Terminates a trailing blank

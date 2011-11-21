@@ -169,6 +169,7 @@ void CSVDialog::init()
 
   m_pageBanking = new BankingPage;
   m_wizard->setPage(Page_Banking, m_pageBanking);
+  m_pageBanking->setParent(this);
 
   m_pageInvestment = new InvestmentPage;
   m_wizard->setPage(Page_Investment, m_pageInvestment);
@@ -314,9 +315,7 @@ void CSVDialog::readSettings()
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
 
   KConfigGroup profileGroup(config, "Profile");
-
-  txt = profileGroup.readEntry("FileType", QString());
-
+  
   m_dateFormatIndex = profileGroup.readEntry("DateFormat", QString()).toInt();
   m_pageLinesDate->ui->comboBox_dateFormat->setCurrentIndex(m_dateFormatIndex);
 
@@ -333,6 +332,9 @@ void CSVDialog::readSettings()
   m_csvPath = profileGroup.readEntry("CsvDirectory", QString());
 
   m_debitFlag = profileGroup.readEntry("DebitFlag", QString().toInt());
+  
+  tmp = profileGroup.readEntry("StartLine", QString().toInt()) + 1;
+  m_pageLinesDate->ui->spinBox_skip->setValue(tmp);
 
   KConfigGroup columnsGroup(config, "Columns");
 
@@ -796,8 +798,8 @@ void CSVDialog::csvImportTransaction(MyMoneyStatement& st)
         return ;
     }
   }
-  tr.m_amount = m_trData.amount;
-  tr.m_shares = m_trData.amount;
+  tr.m_amount = MyMoneyMoney(m_trData.amount);
+  tr.m_shares = MyMoneyMoney(m_trData.amount);
 
   tmp = m_trData.number;
   tr.m_strNumber = tmp;
@@ -847,7 +849,7 @@ void CSVDialog::slotImportClicked()
 
     QStringList vertHeaders;
     for(int i = skp; i < ui->tableWidget->rowCount() + skp; i++) {
-      QString hdr = (QString::number(i + 1));
+      QString hdr = (QString::number(i));
       vertHeaders += hdr;
     }
     //  verticalHeader()->width() varies with its content so....
@@ -1042,8 +1044,6 @@ void CSVDialog::saveSettings()
     return;
   }
 
-  QString str;
-
   if(!m_inFileName.isEmpty()) {  //  don't save column numbers if no file loaded
     KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
 
@@ -1058,11 +1058,7 @@ void CSVDialog::saveSettings()
     profileGroup.writeEntry("DateFormat", m_pageLinesDate->ui->comboBox_dateFormat->currentIndex());
     profileGroup.writeEntry("FieldDelimiter", m_fieldDelimiterIndex);
     profileGroup.writeEntry("TextDelimiter", m_textDelimiterIndex);
-
-    if(str == "Banking") {
-      profileGroup.writeEntry("FileType", str);
-      profileGroup.writeEntry("StartLine", m_pageLinesDate->ui->spinBox_skip->value() - 1);
-    }
+    profileGroup.writeEntry("StartLine", m_pageLinesDate->ui->spinBox_skip->value() - 1);
     profileGroup.config()->sync();
 
     KConfigGroup columnsGroup(config, "Columns");
@@ -1542,6 +1538,8 @@ void CSVDialog::decimalSymbolSelected(int index)
         updateDecimalSymbol("amount", m_investProcessing->amountColumn());
         updateDecimalSymbol("price", m_investProcessing->priceColumn());
         updateDecimalSymbol("quantity", m_investProcessing->quantityColumn());
+	QTableWidgetItem* item = ui->tableWidget->item(m_pageLinesDate->ui->spinBox_skip->value(), m_investProcessing->priceColumn());
+	ui->tableWidget->scrollToItem(item, QAbstractItemView::EnsureVisible);ui->tableWidget->update();
       }
     }
     m_decimalSymbolChanged = true;
@@ -1563,6 +1561,15 @@ void CSVDialog::delimiterChanged()
   if(m_fileType != "Banking") {
     return;
   }
+/*  
+    if(!m_inFileName.isEmpty()) {  //  don't save column numbers if no file loaded
+    KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+
+    KConfigGroup profileGroup(config, "Profile");
+
+    profileGroup.writeEntry("FieldDelimiter", m_fieldDelimiterIndex);
+    profileGroup.config()->sync();
+  }*/
   if(!m_inFileName.isEmpty())
     readFile(m_inFileName, 0);
 }
@@ -1573,15 +1580,6 @@ void CSVDialog::startLineChanged(int val)
     return;
   }
   m_startLine = val;
-}
-
-void CSVDialog::startLineChanged()
-{
-  int val = m_pageLinesDate->ui->spinBox_skip->value();
-  if(val < 1) {
-    return;
-  }
-  m_startLine = val - 1;
 }
 
 void CSVDialog::endLineChanged(int val)
@@ -1753,6 +1751,7 @@ void IntroPage::slotComboSourceClicked(int index)
   m_dlg->m_activityType = index;
 
   wizard()->button(QWizard::CustomButton1)->setEnabled(true);//  Enable fileSelect button
+  m_dlg->m_importIsValid = false;
   switch(index) {
     case 0:
       setField("source", index);
@@ -1768,8 +1767,6 @@ void IntroPage::slotComboSourceClicked(int index)
       setField("source", index);
       m_dlg->m_fileType = "Invest";
       m_dlg->m_activityType = index;
-      QString str = ui->combobox_source->currentText() + QString::number(index - 1);
-
       m_dlg->m_investProcessing->readSettings(index);
       break;
   }
@@ -1879,7 +1876,7 @@ void SeparatorPage::cleanupPage()
          <<  QWizard::CancelButton;
   wizard()->setButtonText(QWizard::CustomButton1, "Select File");
   wizard()->setOption(QWizard::HaveCustomButton1, true);
-  wizard()->button(QWizard::CustomButton1)->setEnabled(false);
+  wizard()->button(QWizard::CustomButton1)->setEnabled(true);
   wizard()->setButtonLayout(layout);
 }
 
@@ -1917,6 +1914,18 @@ BankingPage::BankingPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::Bank
 BankingPage::~BankingPage()
 {
   delete ui;
+}
+
+void BankingPage::setParent(CSVDialog* dlg)
+{
+  m_dlg = dlg;
+}
+
+void BankingPage::initializePage()
+{
+  int index = m_dlg->m_pageIntro->ui->combobox_source->currentIndex();
+  setField("source", index);
+  m_dlg->m_fileType = "Banking";
 }
 
 int BankingPage::nextId() const
@@ -1961,6 +1970,10 @@ InvestmentPage::~InvestmentPage()
 
 void InvestmentPage::initializePage()
 {
+  int index = m_dlg->m_pageIntro->ui->combobox_source->currentIndex();
+  setField("source", index);
+  m_dlg->m_fileType = "Invest";
+
   wizard()->button(QWizard::NextButton)->setEnabled(false);
   connect(ui->comboBoxInv_securityName, SIGNAL(currentIndexChanged(int)), this, SLOT(slotsecurityNameChanged(int)));
   connect(ui->buttonInv_hideSecurity, SIGNAL(clicked()), m_dlg->m_investProcessing, SLOT(hideSecurity()));
@@ -2143,7 +2156,6 @@ bool LinesDatePage::validatePage()
     m_dlg->m_symbolTableDlg->show();
   }
   connect(m_dlg->m_symbolTableDlg->m_widget->tableWidget,  SIGNAL(itemChanged(QTableWidgetItem*)), m_dlg->m_symbolTableDlg,  SLOT(slotItemChanged(QTableWidgetItem*)));
-
   return true;
 }
 
@@ -2168,17 +2180,26 @@ void CompletionPage::setParent(CSVDialog* dlg)
 
 void CompletionPage::initializePage()
 {
-  if((m_dlg->m_fileType == "Banking") || (field("symbolCol").toInt() == -1)) { //  Only show symbols dialog if that field is set, and not Banking.
-    return;
+  if (m_dlg->m_importIsValid) {
+    QList<QWizard::WizardButton> layout;
+    layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton2 << QWizard::CustomButton3
+           <<  QWizard::FinishButton <<  QWizard::CancelButton;
+    wizard()->setOption(QWizard::HaveCustomButton2, true);
+    wizard()->setButtonText(QWizard::CustomButton2, "Import CSV");
+    wizard()->setOption(QWizard::HaveCustomButton3, false);
+    wizard()->setButtonText(QWizard::CustomButton3, "Make QIF File");
+    wizard()->button(QWizard::CustomButton3)->setEnabled(false);
+    m_dlg->m_isTableTrimmed = true;
+
+    wizard()->setButtonLayout(layout);
   }
-  m_dlg->m_importIsValid = false;
 }
 
 void CompletionPage::slotImportValid()
 {
   QList<QWizard::WizardButton> layout;
 
-  layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton2 <<  QWizard::CancelButton;
+  layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton2 << QWizard::FinishButton << QWizard::CancelButton;
   wizard()->setOption(QWizard::HaveCustomButton2, true);
   wizard()->setButtonText(QWizard::CustomButton2, "Import CSV");
   wizard()->setButtonLayout(layout);
@@ -2192,7 +2213,7 @@ void CompletionPage::slotImportClicked()
          <<  QWizard::FinishButton <<  QWizard::CancelButton;
   wizard()->setOption(QWizard::HaveCustomButton2, true);
   wizard()->setButtonText(QWizard::CustomButton2, "Import CSV");
-  wizard()->setOption(QWizard::HaveCustomButton3, false);
+  wizard()->setOption(QWizard::HaveCustomButton3, true);
   wizard()->setButtonText(QWizard::CustomButton3, "Make QIF File");
   wizard()->button(QWizard::CustomButton3)->setEnabled(true);
   m_dlg->m_isTableTrimmed = true;

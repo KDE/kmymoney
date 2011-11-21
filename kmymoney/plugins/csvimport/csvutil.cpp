@@ -441,7 +441,7 @@ void CsvUtil::dissectTransaction(const MyMoneyTransaction& transaction, const My
   // the list of all incomes
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = transaction.splits().begin(); it_s != transaction.splits().end(); ++it_s) {
+  for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = file->account((*it_s).accountId());
     if((*it_s).id() == split.id()) {
       security = file->security(acc.currencyId());

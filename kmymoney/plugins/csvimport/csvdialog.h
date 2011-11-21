@@ -337,12 +337,6 @@ public slots:
   */
   void           slotSaveAsQIF();
 
-  /**
-  * This method is called when the user selects the start line.  The requested
-  * start line  value is saved.
-  */
-  void           startLineChanged();
-
 private:
   QString          m_columnType[MAXCOL];//  holds field types - date, payee, etc.
   QString          m_currentUI;
@@ -559,7 +553,6 @@ public:
   void                setParent(CSVDialog* dlg);
 
 signals:
-  void              initialiseIntroPage();
 
 private:
   void                cleanupPage();
@@ -582,12 +575,16 @@ public:
 
   Ui::BankingPage     *ui;
   QVBoxLayout         *m_pageLayout;
-
+  void                setParent(CSVDialog* dlg);
+  
 signals:
   void                clicked();
 
 private:
-  int nextId() const;
+  CSVDialog*          m_dlg;
+
+  void                initializePage();
+  int                 nextId() const;
 };
 
 namespace Ui
