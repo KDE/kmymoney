@@ -84,6 +84,7 @@ public:
     QString payee;
     QString amount;
     QString memo;
+    QString id;
   } m_trData;
 
   QList<MyMoneyStatement> statements;
@@ -113,6 +114,12 @@ public:
   QString        inFileName();
   QString        m_fileType;
   QString        m_detailFilter;
+
+  /**
+   * a list of already used hashes in this file
+   */
+  QMap<QString, bool> m_hashMap;
+
 
   bool           m_decimalSymbolChanged;
   bool           m_importNow;

@@ -543,6 +543,8 @@ void CSVDialog::readFile(const QString& fname, int skipLines)
     emit statementReady(st);//  via CsvImporterPlugin::slotGetStatement(MyMoneyStatement& s)
     m_screenUpdated = true;
     m_importNow = false;
+    // the life cycle of the contents of this map is one import process
+    m_hashMap.clear();
   }
   m_inFile.close();
 }
@@ -732,6 +734,23 @@ int CSVDialog::processQifLine(QString& iBuff)//   parse input line
     }//end of memo field
   }//end of col loop
   m_trData.memo = memo;
+
+  QString hashBase;
+  hashBase.sprintf("%s-%07lx", qPrintable(m_trData.date.toString(Qt::ISODate)), MyMoneyTransaction::hash(iBuff));
+  int idx = 1;
+  QString hash;
+  for (;;) {
+    hash = QString("%1-%2").arg(hashBase).arg(idx);
+    QMap<QString, bool>::const_iterator it;
+    it = m_hashMap.constFind(hash);
+    if (it == m_hashMap.constEnd()) {
+      m_hashMap[hash] = true;
+      break;
+    }
+    ++idx;
+  }
+  m_trData.id = hash;
+
   m_qifBuffer = m_qifBuffer + 'M' + memo + '\n' + "^\n";
   if(neededFieldsCount > 2) {
     return KMessageBox::Ok;
@@ -750,12 +769,7 @@ void CSVDialog::csvImportTransaction(MyMoneyStatement& st)
   QString payee = m_trData.payee;//                              extractLine('P')
 
   // Process transaction data
-
-  char result[100];
-
-  int rand = qrand();
-  sprintf(result, "%d", rand);
-  tr.m_strBankID = result;
+  tr.m_strBankID = m_trData.id;
   st.m_eType = MyMoneyStatement::etCheckings;
   tr.m_datePosted = m_trData.date;
   if(!tr.m_datePosted.isValid()) {
