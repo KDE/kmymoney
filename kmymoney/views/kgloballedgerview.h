@@ -295,12 +295,6 @@ protected slots:
   void slotNewTransaction(void);
   void slotNewTransaction(KMyMoneyRegister::Action);
 
-  /**
-    * Sets the contentsPos of the register to d->m_startPoint or makes
-    * the focus item visible if d->m_startPoint equals QPoint(-1, -1).
-    */
-  void slotUpdateViewPos(void);
-
   void slotSortOptions(void);
   void slotToggleTransactionMark(KMyMoneyRegister::Transaction* t);
 
