@@ -195,7 +195,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   //set up the axes for cartesian diagrams
   if (config.chartType() == MyMoneyReport::eChartLine ||
-      config.chartType() == MyMoneyReport::eChartBar) {
+      config.chartType() == MyMoneyReport::eChartBar ||
+      config.chartType() == MyMoneyReport::eChartStackedBar) {
     //set x axis
     CartesianAxis *xAxis = new CartesianAxis();
     xAxis->setPosition(CartesianAxis::Bottom);
@@ -252,7 +253,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       KDChart::LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(planeDiagram);
       lineDiagram->addAxis(xAxis);
       lineDiagram->addAxis(yAxis);
-    } else if (config.chartType() == MyMoneyReport::eChartBar) {
+    } else if (config.chartType() == MyMoneyReport::eChartBar ||
+               config.chartType() == MyMoneyReport::eChartStackedBar) {
       KDChart::BarDiagram* barDiagram = qobject_cast<BarDiagram*>(planeDiagram);
       barDiagram->addAxis(xAxis);
       barDiagram->addAxis(yAxis);
