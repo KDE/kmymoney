@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>CSV Import Wizard</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" rowstretch="80,30">
+  <layout class="QGridLayout" name="gridLayout" rowstretch="70,40">
    <item row="0" column="0">
     <widget class="QFrame" name="frame_main">
      <property name="frameShape">
