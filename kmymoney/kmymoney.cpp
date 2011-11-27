@@ -2328,7 +2328,8 @@ bool KMyMoneyApp::slotStatementImport(const MyMoneyStatement& s)
     KMessageBox::informationList(this, i18n("The statement has been processed with the following results:"), messages, i18n("Statement stats"));
   else if (transactionAdded)
     d->m_statementResults += messages;
-
+  
+  slotUpdateActions();//  Re-enable menu items after import via plugin.
   return result;
 }
 
