@@ -272,7 +272,6 @@ void CSVDialog::init()
   connect(m_pageSeparator->ui->comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(delimiterChanged()));
   connect(m_pageSeparator->ui->comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(fieldDelimiterChanged()));
   connect(m_pageSeparator->ui->comboBox_textDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(delimiterChanged()));
-  connect(m_pageSeparator, SIGNAL(initialiseIntroPage()), this, SLOT(setupIntroPage()));
 
   connect(m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
   connect(m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), m_investProcessing, SLOT(startLineChanged(int)));
@@ -473,29 +472,7 @@ void CSVDialog::slotFileDialogClicked()
   m_trData.number.clear();// this needs to be cleared or gets added to next transaction
   m_trData.memo.clear();//   this too, as neither might be overwritten by new data.
 
-  setupNextPage();
-}
-
-void CSVDialog::setupNextPage()
-{
-  m_wizard->setOption(QWizard::HaveCustomButton1, false);
-  QList<QWizard::WizardButton> layout;
-  layout << QWizard::Stretch << QWizard::BackButton << QWizard::NextButton
-         <<  QWizard::CancelButton;
-  m_wizard->setButtonText(QWizard::CustomButton1, i18n("Select File"));
-  m_wizard->setButtonLayout(layout);
   m_wizard->next();
-  m_wizard->nextId();
-}
-
-void CSVDialog::setupIntroPage()
-{
-  QList<QWizard::WizardButton> layout;
-  layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton1
-         <<  QWizard::CancelButton;
-  m_wizard->setButtonText(QWizard::CustomButton1, i18n("Select File"));
-  m_wizard->setOption(QWizard::HaveCustomButton1, true);
-  m_wizard->setButtonLayout(layout);
 }
 
 void CSVDialog::readFile(const QString& fname, int skipLines)
@@ -1869,14 +1846,19 @@ void SeparatorPage::setParent(CSVDialog* dlg)
   m_dlg = dlg;
 }
 
+void SeparatorPage::initializePage()
+{
+  QList<QWizard::WizardButton> layout;
+  layout << QWizard::Stretch << QWizard::BackButton << QWizard::NextButton
+         <<  QWizard::CancelButton;
+  wizard()->setButtonLayout(layout);
+}
+
 void SeparatorPage::cleanupPage()
 {
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton1
          <<  QWizard::CancelButton;
-  wizard()->setButtonText(QWizard::CustomButton1, i18n("Select File"));
-  wizard()->setOption(QWizard::HaveCustomButton1, true);
-  wizard()->button(QWizard::CustomButton1)->setEnabled(true);
   wizard()->setButtonLayout(layout);
 }
 

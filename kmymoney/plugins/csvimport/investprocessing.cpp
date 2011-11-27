@@ -250,7 +250,7 @@ void InvestProcessing::slotFileDialogClicked()
 #endif
   enableInputs();
 
-  m_csvDialog->setupNextPage();
+  m_csvDialog->m_wizard->next();
 }
 
 void InvestProcessing::enableInputs()

@@ -486,9 +486,6 @@ private slots:
   * has to reset the other column.
   */
   void           resetComboBox(const QString& comboBox, const int& col);
-
-  void           setupIntroPage();
-
 };
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -555,6 +552,7 @@ public:
 signals:
 
 private:
+  void                initializePage();
   void                cleanupPage();
 
   int                 nextId() const;
