@@ -482,7 +482,7 @@ void CSVDialog::setupNextPage()
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch << QWizard::BackButton << QWizard::NextButton
          <<  QWizard::CancelButton;
-  m_wizard->setButtonText(QWizard::CustomButton1, "Select File");
+  m_wizard->setButtonText(QWizard::CustomButton1, i18n("Select File"));
   m_wizard->setButtonLayout(layout);
   m_wizard->next();
   m_wizard->nextId();
@@ -493,7 +493,7 @@ void CSVDialog::setupIntroPage()
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton1
          <<  QWizard::CancelButton;
-  m_wizard->setButtonText(QWizard::CustomButton1, "Select Pile");
+  m_wizard->setButtonText(QWizard::CustomButton1, i18n("Select File"));
   m_wizard->setOption(QWizard::HaveCustomButton1, true);
   m_wizard->setButtonLayout(layout);
 }
@@ -1777,7 +1777,7 @@ void IntroPage::initializePage()
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton1
          <<  QWizard::CancelButton;
-  wizard()->setButtonText(QWizard::CustomButton1, "Select File");
+  wizard()->setButtonText(QWizard::CustomButton1, i18n("Select File"));
   wizard()->setOption(QWizard::HaveCustomButton1, true);
   wizard()->setButtonLayout(layout);
   wizard()->button(QWizard::CustomButton1)->setEnabled(false);
@@ -1874,7 +1874,7 @@ void SeparatorPage::cleanupPage()
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton1
          <<  QWizard::CancelButton;
-  wizard()->setButtonText(QWizard::CustomButton1, "Select File");
+  wizard()->setButtonText(QWizard::CustomButton1, i18n("Select File"));
   wizard()->setOption(QWizard::HaveCustomButton1, true);
   wizard()->button(QWizard::CustomButton1)->setEnabled(true);
   wizard()->setButtonLayout(layout);
@@ -2185,9 +2185,9 @@ void CompletionPage::initializePage()
     layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton2 << QWizard::CustomButton3
            <<  QWizard::FinishButton <<  QWizard::CancelButton;
     wizard()->setOption(QWizard::HaveCustomButton2, true);
-    wizard()->setButtonText(QWizard::CustomButton2, "Import CSV");
+    wizard()->setButtonText(QWizard::CustomButton2, i18n("Import CSV"));
     wizard()->setOption(QWizard::HaveCustomButton3, false);
-    wizard()->setButtonText(QWizard::CustomButton3, "Make QIF File");
+    wizard()->setButtonText(QWizard::CustomButton3, i18n("Make QIF File"));
     wizard()->button(QWizard::CustomButton3)->setEnabled(false);
     m_dlg->m_isTableTrimmed = true;
 
@@ -2201,7 +2201,7 @@ void CompletionPage::slotImportValid()
 
   layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton2 << QWizard::FinishButton << QWizard::CancelButton;
   wizard()->setOption(QWizard::HaveCustomButton2, true);
-  wizard()->setButtonText(QWizard::CustomButton2, "Import CSV");
+  wizard()->setButtonText(QWizard::CustomButton2, i18n("Import CSV"));
   wizard()->setButtonLayout(layout);
   m_dlg->m_importIsValid = true;
 }
@@ -2212,9 +2212,9 @@ void CompletionPage::slotImportClicked()
   layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton2 << QWizard::CustomButton3
          <<  QWizard::FinishButton <<  QWizard::CancelButton;
   wizard()->setOption(QWizard::HaveCustomButton2, true);
-  wizard()->setButtonText(QWizard::CustomButton2, "Import CSV");
+  wizard()->setButtonText(QWizard::CustomButton2, i18n("Import CSV"));
   wizard()->setOption(QWizard::HaveCustomButton3, true);
-  wizard()->setButtonText(QWizard::CustomButton3, "Make QIF File");
+  wizard()->setButtonText(QWizard::CustomButton3, i18n("Make QIF File"));
   wizard()->button(QWizard::CustomButton3)->setEnabled(true);
   m_dlg->m_isTableTrimmed = true;
 
