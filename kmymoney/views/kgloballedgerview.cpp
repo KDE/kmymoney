@@ -76,12 +76,9 @@ public:
   QDate                m_reconciliationDate;
   MyMoneyMoney         m_endingBalance;
   int                  m_precision;
-  int                  m_verticalScrollBarValue;
-  bool                 m_inLoading;
   bool                 m_recursion;
   bool                 m_showDetails;
   KMyMoneyRegister::Action m_action;
-  QTimer               m_viewPosTimer;
 
   // models
   AccountNamesFilterProxyModel *m_filterProxyModel;
@@ -156,7 +153,6 @@ bool MousePressFilter::eventFilter(QObject* o, QEvent* e)
 KGlobalLedgerView::Private::Private() :
     m_mousePressFilter(0),
     m_registerSearchLine(0),
-    m_inLoading(false),
     m_recursion(false),
     m_showDetails(false),
     m_filterProxyModel(0),
@@ -210,7 +206,6 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   connect(m_register, SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)), this, SLOT(slotUpdateSummaryLine(KMyMoneyRegister::SelectedTransactions)));
   connect(m_register->horizontalHeader(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotSortOptions()));
   connect(m_register, SIGNAL(reconcileStateColumnClicked(KMyMoneyRegister::Transaction*)), this, SLOT(slotToggleTransactionMark(KMyMoneyRegister::Transaction*)));
-  connect(&d->m_viewPosTimer, SIGNAL(timeout()), this, SLOT(slotUpdateViewPos()));
 
   // insert search line widget
 
@@ -356,9 +351,6 @@ void KGlobalLedgerView::loadView(void)
   QString focusItemId;
   QString anchorItemId;
 
-  if (!d->m_inLoading)
-    d->m_verticalScrollBarValue = -1;
-
   if (!m_newAccountLoaded) {
     // remember the current selected transactions
     KMyMoneyRegister::RegisterItem* item = m_register->firstItem();
@@ -373,15 +365,7 @@ void KGlobalLedgerView::loadView(void)
     // and the one that has the selection anchor
     if (m_register->anchorItem())
       anchorItemId = m_register->anchorItem()->id();
-
-    // remember the upper left corner of the viewport
-    if (!d->m_inLoading && d->m_showDetails == KMyMoneyGlobalSettings::showRegisterDetailed())
-      d->m_verticalScrollBarValue = m_register->verticalScrollBar()->value();
   } else {
-    if (d->m_viewPosTimer.isActive())
-      d->m_viewPosTimer.stop();
-    d->m_verticalScrollBarValue = -1;
-    d->m_inLoading = false;
     d->m_registerSearchLine->searchLine()->reset();
   }
 
@@ -732,20 +716,6 @@ void KGlobalLedgerView::loadView(void)
     clear();
   }
 
-  // (re-)position viewport
-  if (m_newAccountLoaded) {
-    if (focusItem) {
-      d->m_verticalScrollBarValue = -1;
-    } else {
-      d->m_verticalScrollBarValue = 0;
-    }
-  }
-  if (!d->m_inLoading) {
-    d->m_viewPosTimer.setSingleShot(true);
-    d->m_viewPosTimer.start(30);
-    d->m_inLoading = true;
-  }
-
   d->m_showDetails = KMyMoneyGlobalSettings::showRegisterDetailed();
 
   // and tell everyone what's selected
@@ -854,19 +824,6 @@ void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTr
     }
   }
 }
-
-void KGlobalLedgerView::slotUpdateViewPos(void)
-{
-  m_register->setUpdatesEnabled(true);
-
-  if (d->m_verticalScrollBarValue == -1) {
-    m_register->ensureItemVisible(m_register->focusItem());
-  } else {
-    m_register->verticalScrollBar()->setValue(d->m_verticalScrollBarValue);
-  }
-  d->m_inLoading = false;
-}
-
 
 void KGlobalLedgerView::resizeEvent(QResizeEvent* ev)
 {

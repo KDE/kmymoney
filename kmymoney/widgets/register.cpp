@@ -1632,8 +1632,9 @@ void Register::slotEnsureItemVisible(void)
   setUpdatesEnabled(false);
   updateRegister();
   setUpdatesEnabled(true);
-  scrollTo(model()->index(m_ensureVisibleItem->startRow(), DetailColumn));
+  // since the item will be made visible at the top of the viewport make the bottom index visible first to make the whole item visible
   scrollTo(model()->index(m_ensureVisibleItem->startRow() + m_ensureVisibleItem->numRowsRegister() - 1, DetailColumn));
+  scrollTo(model()->index(m_ensureVisibleItem->startRow(), DetailColumn));
 }
 
 TransactionSortField KMyMoneyRegister::textToSortOrder(const QString& text)
