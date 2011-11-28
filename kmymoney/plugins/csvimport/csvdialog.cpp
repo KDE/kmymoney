@@ -315,15 +315,15 @@ void CSVDialog::readSettings()
 
   KConfigGroup profileGroup(config, "Profile");
   
-  m_dateFormatIndex = profileGroup.readEntry("DateFormat", QString()).toInt();
+  m_dateFormatIndex = profileGroup.readEntry("DateFormat", -1);
   m_pageLinesDate->ui->comboBox_dateFormat->setCurrentIndex(m_dateFormatIndex);
 
-  m_encodeIndex = profileGroup.readEntry("Encoding", QString()).toInt();
+  m_encodeIndex = profileGroup.readEntry("Encoding", -1);
 
-  m_fieldDelimiterIndex = profileGroup.readEntry("FieldDelimiter", QString()).toInt();
+  m_fieldDelimiterIndex = profileGroup.readEntry("FieldDelimiter", -1);
   m_pageSeparator->ui->comboBox_fieldDelimiter->setCurrentIndex(m_fieldDelimiterIndex);
 
-  m_textDelimiterIndex = profileGroup.readEntry("TextDelimiter", QString()).toInt();
+  m_textDelimiterIndex = profileGroup.readEntry("TextDelimiter", -1);
   m_pageSeparator->ui->comboBox_textDelimiter->setCurrentIndex(m_textDelimiterIndex);
   m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
   m_pageCompletion->ui->comboBox_thousandsDelimiter->setCurrentIndex(-1);
@@ -335,18 +335,21 @@ void CSVDialog::readSettings()
   tmp = profileGroup.readEntry("StartLine", QString().toInt()) + 1;
   m_pageLinesDate->ui->spinBox_skip->setValue(tmp);
 
+  m_pageBanking->ui->comboBoxBnk_dateCol->setCurrentIndex(-1);
+  m_pageBanking->ui->comboBoxBnk_payeeCol->setCurrentIndex(-1);
+  m_pageBanking->ui->comboBoxBnk_amountCol->setCurrentIndex(-1);
+  m_pageBanking->ui->comboBoxBnk_debitCol->setCurrentIndex(-1);
+  m_pageBanking->ui->comboBoxBnk_numberCol->setCurrentIndex(-1);
+  m_pageBanking->ui->comboBoxBnk_numberCol->setCurrentIndex(-1);
+  m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(-1);
+
   KConfigGroup columnsGroup(config, "Columns");
-
   if(columnsGroup.exists()) {
-    tmp = columnsGroup.readEntry("DateCol", QString()).toInt();
-    m_pageBanking->ui->comboBoxBnk_dateCol->setCurrentIndex(-1);
-    m_pageBanking->ui->comboBoxBnk_dateCol->setCurrentIndex(tmp);
+    m_pageBanking->ui->comboBoxBnk_dateCol->setCurrentIndex(columnsGroup.readEntry("DateCol", -1));
+    m_pageBanking->ui->comboBoxBnk_payeeCol->setCurrentIndex(columnsGroup.readEntry("PayeeCol", -1));
+    m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(columnsGroup.readEntry("MemoCol", -1));
 
-    tmp = columnsGroup.readEntry("PayeeCol", QString()).toInt();
-    m_pageBanking->ui->comboBoxBnk_payeeCol->setCurrentIndex(-1);
-    m_pageBanking->ui->comboBoxBnk_payeeCol->setCurrentIndex(tmp);
-
-    tmp = columnsGroup.readEntry("AmountCol", QString()).toInt();
+    tmp = columnsGroup.readEntry("AmountCol", -1);
     if(tmp >= 0) {  //                            If amount previously selected, set check radio_amount
       m_pageBanking->ui->radioBnk_amount->setChecked(true);
       m_pageBanking->ui->labelBnk_amount->setEnabled(true);
@@ -358,30 +361,12 @@ void CSVDialog::readSettings()
       m_pageBanking->ui->labelBnk_debits->setEnabled(true);
       m_pageBanking->ui->labelBnk_amount->setEnabled(false);
     }
-    m_pageBanking->ui->comboBoxBnk_amountCol->setCurrentIndex(-1);
     m_pageBanking->ui->comboBoxBnk_amountCol->setCurrentIndex(tmp);
     m_amountColumn = tmp;
 
-    tmp = columnsGroup.readEntry("DebitCol", QString()).toInt();
-    m_pageBanking->ui->comboBoxBnk_debitCol->setCurrentIndex(-1);
-    m_pageBanking->ui->comboBoxBnk_debitCol->setCurrentIndex(tmp);
-
-    tmp = columnsGroup.readEntry("CreditCol", QString()).toInt();
-    m_pageBanking->ui->comboBoxBnk_creditCol->setCurrentIndex(-1);
-    m_pageBanking->ui->comboBoxBnk_creditCol->setCurrentIndex(tmp);
-
-    tmp = columnsGroup.readEntry("NumberCol", QString()).toInt();
-    m_pageBanking->ui->comboBoxBnk_numberCol->setCurrentIndex(-1);
-    m_pageBanking->ui->comboBoxBnk_numberCol->setCurrentIndex(tmp);
-    m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(-1);
-  } else {
-    m_pageBanking->ui->comboBoxBnk_dateCol->setCurrentIndex(-1);
-    m_pageBanking->ui->comboBoxBnk_payeeCol->setCurrentIndex(-1);
-    m_pageBanking->ui->comboBoxBnk_amountCol->setCurrentIndex(-1);
-    m_pageBanking->ui->comboBoxBnk_debitCol->setCurrentIndex(-1);
-    m_pageBanking->ui->comboBoxBnk_numberCol->setCurrentIndex(-1);
-    m_pageBanking->ui->comboBoxBnk_numberCol->setCurrentIndex(-1);
-    m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(-1);
+    m_pageBanking->ui->comboBoxBnk_debitCol->setCurrentIndex(columnsGroup.readEntry("DebitCol", -1));
+    m_pageBanking->ui->comboBoxBnk_creditCol->setCurrentIndex(columnsGroup.readEntry("CreditCol", -1));
+    m_pageBanking->ui->comboBoxBnk_numberCol->setCurrentIndex(columnsGroup.readEntry("NumberCol", -1));
   }
 }
 
@@ -645,8 +630,6 @@ int CSVDialog::processQifLine(QString& iBuff)//   parse input line
       txt = txt.remove(m_textDelimiterCharacter);//      "16/09/2009
       QDate dat = m_convertDate->convertDate(txt);//     Date column
       if(dat == QDate()) {
-        qDebug() << i18n("date ERROR");
-
         KMessageBox::sorry(this, i18n("<center>An invalid date has been detected during import.</center>"
                                       "<center><b>%1</b></center>"
                                       "Please check that you have set the correct date format."
@@ -817,11 +800,6 @@ void CSVDialog::slotImportClicked()
   if(m_fileType != "Banking") {
     return;
   }
-  // The following two fields are optional so must be cleared
-  // ...of any prior choices in UI
-
-  m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(-1);
-  m_pageBanking->ui->comboBoxBnk_numberCol->setCurrentIndex(-1);
 
   if((m_dateSelected) && (m_payeeSelected) &&
       ((m_amountSelected || (m_debitSelected && m_creditSelected)))) {
@@ -1055,6 +1033,7 @@ void CSVDialog::saveSettings()
     KConfigGroup columnsGroup(config, "Columns");
     columnsGroup.writeEntry("DateCol", m_pageBanking->ui->comboBoxBnk_dateCol->currentIndex());
     columnsGroup.writeEntry("PayeeCol", m_pageBanking->ui->comboBoxBnk_payeeCol->currentIndex());
+    columnsGroup.writeEntry("MemoCol", m_pageBanking->ui->comboBoxBnk_memoCol->currentIndex());
     columnsGroup.writeEntry("NumberCol", m_pageBanking->ui->comboBoxBnk_numberCol->currentIndex());
     columnsGroup.writeEntry("AmountCol", m_pageBanking->ui->comboBoxBnk_amountCol->currentIndex());
     columnsGroup.writeEntry("DebitCol", m_pageBanking->ui->comboBoxBnk_debitCol->currentIndex());
@@ -1358,7 +1337,6 @@ void CSVDialog::resetComboBox(const QString& comboBox, const int& col)
       m_payeeSelected = false;
       break;
     default:
-      qDebug() << i18n("ERROR. Field name not recognised.") << comboBox;
       KMessageBox::sorry(this, i18n("<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> Please re-enter your column selections."
                                     , comboBox), i18n("CSV import"));
   }
