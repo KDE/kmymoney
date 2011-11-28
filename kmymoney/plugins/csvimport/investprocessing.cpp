@@ -818,7 +818,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer, int line)
   m_brokerage = false;
   memo.clear();
 
-  for(int i = 0; i < m_endColumn; i++) {
+  for(int i = 0; i < m_columnList.count(); i++) {//  Use actual column count for this line instead of m_endColumn, which could be greater.
     if(m_columnType[i] == "date") {  //                    Date Col
       txt = m_columnList[i];
       txt = txt.remove('"');
