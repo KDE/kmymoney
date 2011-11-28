@@ -1705,7 +1705,7 @@ IntroPage::IntroPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::IntroPag
 {
   ui->setupUi(this);
   m_pageLayout = new QVBoxLayout;
-  ui->horizontalLayout->insertLayout(0, m_pageLayout, 1);
+  ui->horizontalLayout->insertLayout(0, m_pageLayout);
 
   registerField("source", ui->combobox_source, "currentIndex", SIGNAL(currentIndexChanged()));
 
@@ -1846,8 +1846,7 @@ SeparatorPage::SeparatorPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::
   ui->setupUi(this);
 
   m_pageLayout = new QVBoxLayout;
-
-  ui->horizontalLayout->insertLayout(0, m_pageLayout, 1);
+  ui->horizontalLayout->insertLayout(0, m_pageLayout);
 }
 
 SeparatorPage::~SeparatorPage()
@@ -1895,8 +1894,7 @@ BankingPage::BankingPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::Bank
   ui->setupUi(this);
 
   m_pageLayout = new QVBoxLayout;
-
-  ui->horizontalLayout->insertLayout(0, m_pageLayout, 1);
+  ui->horizontalLayout->insertLayout(0, m_pageLayout);
 
   ui->comboBoxBnk_numberCol->setMaxVisibleItems(12);
   ui->comboBoxBnk_dateCol->setMaxVisibleItems(12);
@@ -1934,8 +1932,7 @@ InvestmentPage::InvestmentPage(QWidget *parent) : QWizardPage(parent), ui(new Ui
   ui->setupUi(this);
   resize(638, 600);
   m_pageLayout = new QVBoxLayout;
-
-  ui->horizontalLayout->insertLayout(0, m_pageLayout, 1);
+  ui->horizontalLayout->insertLayout(0, m_pageLayout);
 
   registerField("dateCol", ui->comboBoxInv_dateCol, "currentIndex", SIGNAL(currentIndexChanged()));
   registerField("typeCol", ui->comboBoxInv_typeCol, "currentIndex", SIGNAL(currentIndexChanged()));
@@ -2064,8 +2061,7 @@ LinesDatePage::LinesDatePage(QWidget *parent) : QWizardPage(parent), ui(new Ui::
   ui->setupUi(this);
 
   m_pageLayout = new QVBoxLayout;
-
-  ui->horizontalLayout->insertLayout(0, m_pageLayout, 1);
+  ui->horizontalLayout->insertLayout(0, m_pageLayout);
 }
 
 LinesDatePage::~LinesDatePage()
@@ -2160,8 +2156,7 @@ CompletionPage::CompletionPage(QWidget* parent) : QWizardPage(parent), ui(new Ui
   ui->setupUi(this);
 
   m_pageLayout = new QVBoxLayout;
-
-  ui->horizontalLayout->insertLayout(0, m_pageLayout, 1);
+  ui->horizontalLayout->insertLayout(0, m_pageLayout);
 }
 
 CompletionPage::~CompletionPage()
