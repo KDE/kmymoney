@@ -74,7 +74,7 @@ QStringList Parse::parseLine(const QString& data)
         txt += m_fieldDelimiterCharacter + txt1;//       rejoin the string
       } else break;
     }
-    listOut += txt;
+    listOut += txt.remove(m_textDelimiterCharacter);
   }
   return listOut;
 }
