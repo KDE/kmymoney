@@ -116,7 +116,6 @@ public:
   void suspendUpdate(const bool suspend);
 
 public slots:
-  void slotReloadView(void);
   void slotRefreshView(void);
   void slotSelectBudget(void);
   void slotHideUnused(bool);
@@ -129,7 +128,6 @@ public slots:
   void cb_includesSubaccounts_clicked();
 
 protected:
-  void resizeEvent(QResizeEvent*);
   void loadAccounts(void);
 
   /**
@@ -180,8 +178,6 @@ protected slots:
   void slotBudgetBalanceChanged(const MyMoneyMoney &);
 
 private slots:
-  void slotRearrange(void);
-
   /**
     * This slot receives the signal from the listview control that an item was right-clicked,
     * If @p item points to a real budget item, emits openContextMenu().

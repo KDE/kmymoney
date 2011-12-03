@@ -207,21 +207,14 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   // use the size settings of the last run (if any)
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
-  QList<int> sizes = grp.readEntry("KPayeesViewSplitterSize", QList<int>());
-  if (sizes.size() == 2) {
-    if (!sizes[0] || !sizes[1]) {
-      sizes[0] = 1;
-      sizes[1] = 2;
-    }
-    m_splitter->setSizes(sizes);
-  }
+  m_splitter->restoreState(grp.readEntry("KPayeesViewSplitterSize", QByteArray()));
 }
 
 KPayeesView::~KPayeesView()
 {
   // remember the splitter settings for startup
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
-  grp.writeEntry("KPayeesViewSplitterSize", m_splitter->sizes());
+  grp.writeEntry("KPayeesViewSplitterSize", m_splitter->saveState());
   grp.sync();
 }
 
