@@ -108,8 +108,6 @@ KBudgetListItem::KBudgetListItem(QTreeWidget *parent, const MyMoneyBudget& budge
   setText(0, budget.name());
   setText(1, QString("%1").arg(budget.budgetStart().year()));
   setFlags(flags() | Qt::ItemIsEditable);
-  // allow in column rename
-  //setRenameEnabled(0, true);
 }
 
 KBudgetListItem::~KBudgetListItem()
@@ -401,21 +399,14 @@ KBudgetView::KBudgetView(QWidget *parent) :
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotRefreshView()));
 
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
-  QList<int> sizes = grp.readEntry("KBudgetViewSplitterSize", QList<int>());
-  if (sizes.size() == 2) {
-    if ((sizes[0] == 0) || (sizes[1] == 0)) {
-      sizes[0] = 1;
-      sizes[1] = 3;
-    }
-    m_splitter->setSizes(sizes);
-  }
+  m_splitter->restoreState(grp.readEntry("KBudgetViewSplitterSize", QByteArray()));
 }
 
 KBudgetView::~KBudgetView()
 {
   // remember the splitter settings for startup
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
-  grp.writeEntry("KBudgetViewSplitterSize", m_splitter->sizes());
+  grp.writeEntry("KBudgetViewSplitterSize", m_splitter->saveState());
   grp.sync();
 }
 
@@ -423,29 +414,10 @@ void KBudgetView::showEvent(QShowEvent * event)
 {
   emit aboutToShow();
 
-  QTimer::singleShot(50, this, SLOT(slotRearrange()));
   if (m_needReload) {
     slotRefreshView();
   }
   QWidget::showEvent(event);
-}
-
-void KBudgetView::slotRearrange(void)
-{
-  resizeEvent(0);
-}
-
-void KBudgetView::resizeEvent(QResizeEvent* ev)
-{
-  // resize the register
-  QWidget::resizeEvent(ev);
-}
-
-void KBudgetView::slotReloadView(void)
-{
-  ::timetrace("Start KBudgetView::slotReloadView");
-  slotRearrange();
-  ::timetrace("Done KBudgetView::slotReloadView");
 }
 
 void KBudgetView::loadBudgets(void)
