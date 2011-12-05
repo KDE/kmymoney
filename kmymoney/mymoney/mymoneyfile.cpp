@@ -2183,6 +2183,34 @@ const QStringList MyMoneyFile::consistencyCheck(void)
     }
   }
 
+  // Fix the budgets that somehow still reference invalid accounts
+  QString problemBudget;
+  QList<MyMoneyBudget> bList = budgetList();
+  for (QList<MyMoneyBudget>::const_iterator it_b = bList.constBegin(); it_b != bList.constEnd(); ++it_b) {
+    MyMoneyBudget b = *it_b;
+    QList<MyMoneyBudget::AccountGroup> baccounts = b.getaccounts();
+    bool bChanged = false;
+    for (QList<MyMoneyBudget::AccountGroup>::const_iterator it_bacc = baccounts.constBegin(); it_bacc != baccounts.constEnd(); ++it_bacc) {
+      try {
+        account((*it_bacc).id());
+      } catch (MyMoneyException *e) {
+        problemCount++;
+        if (problemBudget != b.name()) {
+          problemBudget = b.name();
+          rc << i18n("* Problem with budget '%1'", problemBudget);
+        }
+        rc << i18n("  * The account with id %1 referenced by the budget does not exist anymore.", (*it_bacc).id());
+        rc << i18n("    The account reference will be removed.");
+        // remove the reference to the account
+        b.removeReference((*it_bacc).id());
+        bChanged = true;
+      }
+    }
+    if (bChanged) {
+      d->m_storage->modifyBudget(b);
+    }
+  }
+
   // add more checks here
 
   if (problemCount == 0 && unfixedCount == 0) {
