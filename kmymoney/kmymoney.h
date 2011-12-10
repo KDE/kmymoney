@@ -639,6 +639,13 @@ protected:
   void markTransaction(MyMoneySplit::reconcileFlagE flag);
 
   /**
+    * This method allows to skip the next scheduled transaction of
+    * the given schedule @a s.
+    *
+    */
+  void skipSchedule(MyMoneySchedule& s);
+
+  /**
     * This method allows to enter the next scheduled transaction of
     * the given schedule @a s. In case @a extendedKeys is @a true,
     * the given schedule can also be skipped or ignored.

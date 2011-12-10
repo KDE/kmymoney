@@ -4314,6 +4314,19 @@ void KMyMoneyApp::slotScheduleSkip(void)
   if (!d->m_selectedSchedule.id().isEmpty()) {
     try {
       MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(d->m_selectedSchedule.id());
+      skipSchedule(schedule);
+    } catch (MyMoneyException *e) {
+      KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
+      delete e;
+    }
+  }
+}
+
+void KMyMoneyApp::skipSchedule(MyMoneySchedule& schedule)
+{
+  if (!schedule.id().isEmpty()) {
+    try {
+      schedule = MyMoneyFile::instance()->schedule(schedule.id());
       if (!schedule.isFinished()) {
         if (schedule.occurrence() != MyMoneySchedule::OCCUR_ONCE) {
           QDate next = schedule.nextDueDate();
@@ -4327,7 +4340,7 @@ void KMyMoneyApp::slotScheduleSkip(void)
         }
       }
     } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(this, QString("<qt>") + i18n("Unable to skip scheduled transaction <b>%1</b>.", d->m_selectedSchedule.name()) + QString("</qt>"), e->what());
+      KMessageBox::detailedSorry(this, QString("<qt>") + i18n("Unable to skip scheduled transaction <b>%1</b>.", schedule.name()) + QString("</qt>"), e->what());
       delete e;
     }
   }
@@ -4353,7 +4366,7 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
     try {
       schedule = MyMoneyFile::instance()->schedule(schedule.id());
     } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
+      KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e->what());
       delete e;
       return rc;
     }
@@ -4402,7 +4415,7 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
                 }
               } else if (rc == KMyMoneyUtils::Skip) {
                 slotTransactionsCancel();
-                slotScheduleSkip();
+                skipSchedule(schedule);
               } else {
                 slotTransactionsCancel();
               }
@@ -4468,14 +4481,14 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
               ft.commit();
             }
           } catch (MyMoneyException *e) {
-            KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
+            KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e->what());
             delete e;
           }
           deleteTransactionEditor();
         }
       }
     } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
+      KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e->what());
       delete e;
     }
     delete dlg;
