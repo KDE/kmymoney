@@ -283,7 +283,6 @@ public:
   MyMoneyStatementReader* m_smtReader;
   KFindTransactionDlg* m_searchDlg;
 
-  bool m_bCheckSchedules;
   QObject*              m_pluginInterface;
 
   MyMoneyAccount        m_selectedAccount;
@@ -1123,9 +1122,6 @@ void KMyMoneyApp::readOptions(void)
 
   // Startdialog is written in the settings dialog
   d->m_startDialog = grp.readEntry("StartDialog", true);
-
-  KConfigGroup schedGrp = d->m_config->group("Schedule Options");
-  d->m_bCheckSchedules = schedGrp.readEntry("CheckSchedules", true);
 }
 
 void KMyMoneyApp::resizeEvent(QResizeEvent* ev)
