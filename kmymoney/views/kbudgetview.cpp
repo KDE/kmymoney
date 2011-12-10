@@ -400,6 +400,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
 
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
   m_splitter->restoreState(grp.readEntry("KBudgetViewSplitterSize", QByteArray()));
+  m_splitter->setChildrenCollapsible(false);
 }
 
 KBudgetView::~KBudgetView()

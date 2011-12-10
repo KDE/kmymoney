@@ -21,6 +21,9 @@
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
+       <property name="childrenCollapsible">
+        <bool>false</bool>
+       </property>
        <widget class="QGroupBox" name="groupBox1">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -538,29 +541,14 @@ new transactions with this payee</string>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KMyMoneyAccountCombo</class>
-   <extends>KComboBox</extends>
-   <header>kmymoneyaccountcombo.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyRegister::Register</class>
-   <extends>QTableWidget</extends>
-   <header>register.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KListWidget</class>
-   <extends>QListWidget</extends>
-   <header>klistwidget.h</header>
-  </customwidget>
-  <customwidget>
    <class>KEditListBox</class>
    <extends>QGroupBox</extends>
    <header>keditlistbox.h</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
    <class>KLineEdit</class>
@@ -568,9 +556,19 @@ new transactions with this payee</string>
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>ktextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KListWidget</class>
+   <extends>QListWidget</extends>
+   <header>klistwidget.h</header>
   </customwidget>
   <customwidget>
    <class>KTabWidget</class>
@@ -579,9 +577,14 @@ new transactions with this payee</string>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>KTextEdit</class>
-   <extends>QTextEdit</extends>
-   <header>ktextedit.h</header>
+   <class>KMyMoneyAccountCombo</class>
+   <extends>KComboBox</extends>
+   <header>kmymoneyaccountcombo.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyRegister::Register</class>
+   <extends>QTableWidget</extends>
+   <header>register.h</header>
   </customwidget>
  </customwidgets>
  <includes>
