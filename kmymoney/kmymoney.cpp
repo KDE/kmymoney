@@ -6521,6 +6521,10 @@ void KMyMoneyApp::slotCheckSchedules(void)
           delete e;
         }
       }
+      if (rc == KMyMoneyUtils::Ignore) {
+        // if the current schedule was ignored then we must make sure that the user can still enter the next scheduled transaction
+        rc = KMyMoneyUtils::Enter;
+      }
     }
     updateCaption();
   }
