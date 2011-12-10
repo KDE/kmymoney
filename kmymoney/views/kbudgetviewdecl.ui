@@ -25,6 +25,9 @@
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
+     <property name="childrenCollapsible">
+      <bool>false</bool>
+     </property>
      <widget class="QGroupBox" name="groupBox1">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -212,7 +215,7 @@
               <property name="resetButtonVisibility" stdset="0">
                <bool>false</bool>
               </property>
-              <property name="readOnly">
+              <property name="readOnly" stdset="0">
                <bool>true</bool>
               </property>
              </widget>
@@ -261,16 +264,6 @@
  <layoutdefault spacing="6" margin="0"/>
  <customwidgets>
   <customwidget>
-   <class>KMyMoneyAccountTreeView</class>
-   <extends>QTreeView</extends>
-   <header>kmymoneyaccounttreeview.h</header>
-  </customwidget>
-  <customwidget>
-   <class>kMyMoneyEdit</class>
-   <extends>QFrame</extends>
-   <header>kmymoneyedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
@@ -279,6 +272,17 @@
    <class>KPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyAccountTreeView</class>
+   <extends>QTreeView</extends>
+   <header>kmymoneyaccounttreeview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>kMyMoneyEdit</class>
+   <extends>QFrame</extends>
+   <header>kmymoneyedit.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>KBudgetValues</class>
