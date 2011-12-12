@@ -1018,7 +1018,6 @@ void Register::focusInEvent(QFocusEvent* ev)
   QTableWidget::focusInEvent(ev);
   if (m_focusItem) {
     m_focusItem->setFocus(true, false);
-    repaintItems(m_focusItem);
   }
 }
 
@@ -1061,7 +1060,6 @@ void Register::focusOutEvent(QFocusEvent* ev)
 {
   if (m_focusItem) {
     m_focusItem->setFocus(false, false);
-    repaintItems(m_focusItem);
   }
   QTableWidget::focusOutEvent(ev);
 }
@@ -1267,25 +1265,10 @@ void Register::adjustColumn(int col)
 #endif
 }
 
-void Register::repaintItems(RegisterItem* first, RegisterItem* last)
-{
-  if (first == 0 && last == 0) {
-    first = firstItem();
-    last = lastItem();
-  }
-
-  if (first == 0)
-    return;
-
-  if (last == 0)
-    last = first;
-
-  // TODO: port the register - trigger a repaint
-}
-
 void Register::clearSelection(void)
 {
   unselectItems();
+  TransactionEditorContainer::clearSelection();
 }
 
 void Register::doSelectItems(int from, int to, bool selected)
@@ -1319,10 +1302,6 @@ void Register::doSelectItems(int from, int to, bool selected)
       }
     }
   }
-
-  // anything changed?
-  if (firstItem || lastItem)
-    repaintItems(firstItem, lastItem);
 }
 
 RegisterItem* Register::itemAtRow(int row) const
@@ -1466,9 +1445,6 @@ bool Register::setFocusItem(RegisterItem* focusItem)
   if (focusItem && focusItem->canHaveFocus()) {
     if (m_focusItem) {
       m_focusItem->setFocus(false);
-      // issue a repaint here only if we move the focus
-      if (m_focusItem != focusItem)
-        repaintItems(m_focusItem);
     }
     Transaction* item = dynamic_cast<Transaction*>(focusItem);
     if (m_focusItem != focusItem && item) {
@@ -1480,7 +1456,6 @@ bool Register::setFocusItem(RegisterItem* focusItem)
     if (m_listsDirty)
       updateRegister(KMyMoneyGlobalSettings::ledgerLens() | !KMyMoneyGlobalSettings::transactionForm());
     ensureItemVisible(m_focusItem);
-    repaintItems(m_focusItem);
     return true;
   } else
     return false;

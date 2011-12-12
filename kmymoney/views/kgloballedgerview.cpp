@@ -922,6 +922,7 @@ void KGlobalLedgerView::selectTransaction(const QString& id)
 
 void KGlobalLedgerView::slotSelectAllTransactions(void)
 {
+  m_register->clearSelection();
   KMyMoneyRegister::RegisterItem* p = m_register->firstItem();
   while (p) {
     KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
@@ -932,7 +933,8 @@ void KGlobalLedgerView::slotSelectAllTransactions(void)
     }
     p = p->nextItem();
   }
-  m_register->repaintItems();
+  // this is here only to re-paint the items without selecting anything because the data (including the selection) is not really held in the model right now
+  m_register->selectAll();
 
   // inform everyone else about the selected items
   KMyMoneyRegister::SelectedTransactions list(m_register);
