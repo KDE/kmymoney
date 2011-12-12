@@ -472,8 +472,6 @@ public:
     return m_account;
   }
 
-  void repaintItems(RegisterItem* first = 0, RegisterItem* last = 0);
-
   /**
     * This method creates group marker items and adds them to the register
     */
