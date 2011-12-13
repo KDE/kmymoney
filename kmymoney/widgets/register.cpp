@@ -1888,6 +1888,12 @@ void Register::keyPressEvent(QKeyEvent* ev)
     case Qt::Key_Up:
       scrollPage(ev->key(), ev->modifiers());
       break;
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
+      // don't emit the signal right away but wait until
+      // we come back to the Qt main loop
+      QTimer::singleShot(0, this, SIGNAL(editTransaction()));
+      break;
 
     default:
       QTableWidget::keyPressEvent(ev);
