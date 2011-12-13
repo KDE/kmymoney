@@ -72,9 +72,24 @@ void KMyMoneyAccountTreeView::setConfigGroupName(const QString& group)
 
 void KMyMoneyAccountTreeView::mouseDoubleClickEvent(QMouseEvent *event)
 {
-  QModelIndex index = currentIndex();
+  openIndex(currentIndex());
+  event->accept();
+}
+
+void KMyMoneyAccountTreeView::keyPressEvent(QKeyEvent *event)
+{
+  if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
+    openIndex(currentIndex());
+    event->accept();    
+  } else {
+    QTreeView::keyPressEvent(event);
+  }
+}
+
+void KMyMoneyAccountTreeView::openIndex(const QModelIndex &index)
+{
   if (index.isValid()) {
-    QVariant data = model()->data(currentIndex(), AccountsModel::AccountRole);
+    QVariant data = model()->data(index, AccountsModel::AccountRole);
     if (data.isValid()) {
       if (data.canConvert<MyMoneyAccount>()) {
         emit openObject(data.value<MyMoneyAccount>());
@@ -84,7 +99,6 @@ void KMyMoneyAccountTreeView::mouseDoubleClickEvent(QMouseEvent *event)
       }
     }
   }
-  event->accept();
 }
 
 void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint &pos)

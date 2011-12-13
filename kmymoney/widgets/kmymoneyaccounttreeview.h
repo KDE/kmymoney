@@ -60,6 +60,7 @@ public slots:
 
 protected:
   void mouseDoubleClickEvent(QMouseEvent *event);
+  void keyPressEvent(QKeyEvent *event);
 
 protected slots:
   void customContextMenuRequested(const QPoint &pos);
@@ -97,6 +98,9 @@ signals:
     */
   void collapsedAll(void);
   void expandedAll(void);
+
+private:
+  void openIndex(const QModelIndex &index);
 
 private:
   QString m_groupName;
