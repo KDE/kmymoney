@@ -1385,6 +1385,17 @@ public:
 
   void preloadCache(void);
 
+  /**
+    * This returns @p true if file and online balance of a specific
+    * @p account are matching. Returns false if there is no online balance.
+    *
+    * @param account @p account to be checked
+    * @retval false if @p account has balance mismatch or if there is no online balance.
+    * @retval true if @p account has matching balances
+    */
+  bool hasMatchingOnlineBalance(const MyMoneyAccount& account) const;
+
+
 protected:
   /**
     * This is the constructor for a new empty file description

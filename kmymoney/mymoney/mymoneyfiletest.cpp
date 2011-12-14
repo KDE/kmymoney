@@ -2032,5 +2032,48 @@ void MyMoneyFileTest::testStorageId()
   }
 }
 
+void MyMoneyFileTest::testHasMatchingOnlineBalance()
+{
+  testAddAccounts();
+
+  MyMoneyAccount a = m->account("A000001");
+
+  // Testcase (1) - This is for an account w/o an imported transaction:
+  QVERIFY(m->hasMatchingOnlineBalance(a) == false);
+
+
+  // Testcase (2) - This is for an account with an imported transaction
+  //                [ i.e. !account.value("lastImportedTransactionDate").isEmpty() ],
+  //                but without balance difference:
+  a.setValue("lastImportedTransactionDate",QDate(2011, 12, 1).toString(Qt::ISODate));
+  a.setValue("lastStatementBalance", MyMoneyMoney(0,1).toString());
+
+  MyMoneyFileTransaction ft;
+  try {
+    m->modifyAccount(a);
+    ft.commit();
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception!");
+  }
+
+  QVERIFY(m->hasMatchingOnlineBalance(a) == true);
+
+  // Testcase (3) - This is for an account with an imported transaction
+  //                [ i.e. !account.value("lastImportedTransactionDate").isEmpty() ],
+  //                but with a balance difference:
+  ft.restart();
+  a.setValue("lastStatementBalance", MyMoneyMoney(1,1).toString());
+  try {
+    m->modifyAccount(a);
+    ft.commit();
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception!");
+  }
+
+  QVERIFY(m->hasMatchingOnlineBalance(a) == false);
+}
+
 #include "mymoneyfiletest.moc"
 

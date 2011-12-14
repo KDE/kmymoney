@@ -82,6 +82,7 @@ private slots:
   void testRemoveTransactionFromClosedAccount();
   void testModifyTransactionInClosedAccount();
   void testStorageId();
+  void testHasMatchingOnlineBalance();
 
 private slots:
   void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);
