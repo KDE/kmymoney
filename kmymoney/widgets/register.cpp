@@ -58,6 +58,7 @@
 #include "stdtransactionmatched.h"
 #include "scheduledtransaction.h"
 #include "kmymoneyglobalsettings.h"
+#include "mymoneyfile.h"
 
 const int LinesPerMemo = 3;
 
@@ -234,7 +235,8 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
 GroupMarker::GroupMarker(Register *parent, const QString& txt) :
     RegisterItem(parent),
     m_txt(txt),
-    m_showDate(false)
+    m_showDate(false),
+    m_erroneous(false)
 {
   int h;
   if (m_parent) {
@@ -284,7 +286,7 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
   cellRect.setWidth(m_parent->viewport()->width());
   cellRect.setHeight(m_parent->rowHeight(index.row()));
 
-  option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::groupMarkerColor());
+  option.palette.setColor(QPalette::Base, isErronous() ? KMyMoneyGlobalSettings::listErronousTransactionColor() : KMyMoneyGlobalSettings::groupMarkerColor());
 
   QBrush backgroundBrush(option.palette.color(QPalette::Base));
   painter->fillRect(cellRect, backgroundBrush);
@@ -292,7 +294,7 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
   painter->drawLine(cellRect.x(), cellRect.height() - 1, cellRect.width(), cellRect.height() - 1);
 
   // now write the text
-  painter->setPen(option.palette.color(QPalette::Text));
+  painter->setPen(option.palette.color( isErronous() ? QPalette::HighlightedText : QPalette::Text ));
   QFont font = painter->font();
   font.setBold(true);
   painter->setFont(font);
@@ -1995,7 +1997,10 @@ void Register::addGroupMarkers(void)
           if (m_account.accountGroup() == MyMoneyAccount::Liability)
             balance = -balance;
           QString txt = i18n("Online Statement Balance: %1", balance.formatMoney(m_account.fraction()));
-          new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, QDate::fromString(m_account.value("lastImportedTransactionDate"), Qt::ISODate), txt);
+
+          KMyMoneyRegister::StatementGroupMarker *p=new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, QDate::fromString(m_account.value("lastImportedTransactionDate"), Qt::ISODate), txt);
+
+          p->setErroneous(!MyMoneyFile::instance()->hasMatchingOnlineBalance(m_account));
         }
 
         new KMyMoneyRegister::FancyDateGroupMarker(this, thisYear, i18n("This year"));

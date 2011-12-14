@@ -140,8 +140,10 @@ public:
     return "GroupMarker";
   }
 
+// TODO: Correct spelling also in other classes!
+//  bool isErroneous(void) const {
   bool isErronous(void) const {
-    return false;
+    return m_erroneous;
   }
 
   void paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
@@ -156,12 +158,18 @@ public:
     return 0;
   }
 
+  void setErroneous(bool condition=true) {
+    m_erroneous = condition;
+  }
+
 protected:
   QString                  m_txt;
   bool                     m_showDate;
 
   static QPixmap*          m_bg;
   static int               m_bgRefCnt;
+
+  bool                     m_erroneous;
 };
 
 

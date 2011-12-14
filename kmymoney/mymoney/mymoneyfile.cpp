@@ -2786,6 +2786,23 @@ QString MyMoneyFile::storageId(void)
   return id;
 }
 
+bool MyMoneyFile::hasMatchingOnlineBalance(const MyMoneyAccount& _acc) const
+{
+  // get current values
+  MyMoneyAccount acc = account(_acc.id());
+
+  // if there's no last transaction import data we are done
+  if( acc.value("lastImportedTransactionDate").isEmpty()
+      || acc.value("lastStatementBalance").isEmpty())
+    return false;
+
+  // otherwise, we compare the balances
+  MyMoneyMoney balance(acc.value("lastStatementBalance"));
+  MyMoneyMoney accBalance = this->balance(acc.id(), QDate::fromString(acc.value("lastImportedTransactionDate"), Qt::ISODate));
+
+  return balance == accBalance;
+}
+
 MyMoneyFileTransaction::MyMoneyFileTransaction() :
     m_isNested(MyMoneyFile::instance()->hasTransaction()),
     m_needRollback(!m_isNested)
