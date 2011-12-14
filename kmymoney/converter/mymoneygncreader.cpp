@@ -1256,7 +1256,6 @@ MyMoneyGncReader::~MyMoneyGncReader() {}
 #ifndef _GNCFILEANON
 void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
 {
-
   Q_CHECK_PTR(pDevice);
   Q_CHECK_PTR(storage);
 
@@ -1270,6 +1269,8 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
   MyMoneyFile::instance()->attachStorage(m_storage);
   MyMoneyFileTransaction ft;
   m_xr = new XmlReader(this);
+  bool blocked = MyMoneyFile::instance()->signalsBlocked();
+  MyMoneyFile::instance()->blockSignals(true);
   try {
     m_xr->processFile(pDevice);
     terminate();  // do all the wind-up things
@@ -1278,11 +1279,11 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
     KMessageBox::error(0, i18n("Import failed:\n\n%1", e->what()), PACKAGE);
     qWarning("%s", qPrintable(e->what()));
   } // end catch
+  MyMoneyFile::instance()->blockSignals(blocked);
   MyMoneyFile::instance()->detachStorage(m_storage);
   signalProgress(0, 1, i18n("Import complete"));  // switch off progress bar
   delete m_xr;
   qDebug("Exiting gnucash importer");
-  return;
 }
 #else
 // Control code for the file anonymizer
