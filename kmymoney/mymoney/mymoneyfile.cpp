@@ -773,11 +773,9 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
 
   // upon entry, we check that we could proceed with the operation
   if (!level) {
-    if (!hasOnlyUnusedAccounts(account_list, 0))
+    if (!hasOnlyUnusedAccounts(account_list, 0)) {
       throw new MYMONEYEXCEPTION("One or more accounts cannot be removed");
-
-    // NOTE: We don't use a MyMoneyNotifier here, but rather clear the whole cache
-    d->m_cache.clear();
+    }
   }
 
   // process all accounts in the list and test if they have transactions assigned
@@ -794,6 +792,9 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
       // the MyMoneyAccount object. Easiest way is to get a fresh copy.
       a = d->m_storage->account(*it);
     }
+
+    // make sure to remove the item from the cache
+    d->m_cache.clear(a.id());
     removeAccount(a);
   }
 }
