@@ -107,9 +107,15 @@ protected slots:
 
   /**
     * This slot is called whenever the selection in m_payeesList
+    * is about to change.
+    */
+  void slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev);
+
+  /**
+    * This slot is called whenever the selection in m_payeesList
     * has been changed.
     */
-  void slotSelectPayee(QListWidgetItem* cur = 0, QListWidgetItem* prev = 0);
+  void slotSelectPayee(void);
 
   /**
     * This slot marks the current selected payee as modified (dirty).

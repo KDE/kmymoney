@@ -172,6 +172,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_balanceLabel->hide();
 
   connect(m_payeesList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(slotSelectPayee(QListWidgetItem*,QListWidgetItem*)));
+  connect(m_payeesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectPayee()));
   connect(m_payeesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotStartRename(QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotRenamePayee(QListWidgetItem*)));
   connect(m_payeesList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotOpenContextMenu(QPoint)));
@@ -360,6 +361,8 @@ void KPayeesView::selectedPayees(QList<MyMoneyPayee>& payeesList) const
 
 void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
 {
+  Q_UNUSED(cur);
+
   m_allowEditing = false;
 
   // check if the content of a currently selected payee was modified
@@ -373,7 +376,10 @@ void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
       m_inSelection = false;
     }
   }
+}
 
+void KPayeesView::slotSelectPayee(void)
+{
   // loop over all payees and count the number of payees, also
   // obtain last selected payee
   QList<MyMoneyPayee> payeesList;
@@ -381,7 +387,7 @@ void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
 
   emit selectObjects(payeesList);
 
-  if (payeesList.isEmpty() && !cur) {
+  if (payeesList.isEmpty()) {
     m_tabWidget->setEnabled(false); // disable tab widget
     m_balanceLabel->hide();
     clearItemData();
@@ -395,6 +401,7 @@ void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
     m_balanceLabel->hide();
     clearItemData();
   }
+
   // otherwise we have just one selected, enable payee information widget
   m_tabWidget->setEnabled(true);
   m_balanceLabel->show();
@@ -403,15 +410,7 @@ void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
   // selection mode of the QListView has been changed to Extended, this
   // will also be the only selection and behave exactly as before - Andreas
   try {
-    if (payeesList.count() > 0)
-      m_payee = payeesList[0];
-
-    if (cur) {
-      KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(cur);
-      if (item) {
-        m_payee = item->payee();
-      }
-    }
+    m_payee = payeesList[0];
 
     m_newName = m_payee.name();
 
@@ -735,7 +734,7 @@ void KPayeesView::loadPayees(void)
   m_filterProxyModel->invalidate();
   comboDefaultAccount->expandAll();
 
-  slotSelectPayee();
+  slotSelectPayee(0, 0);
   m_allowEditing = true;
 
   ::timetrace("End KPayeesView::loadPayees");
