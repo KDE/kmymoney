@@ -2045,8 +2045,8 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance()
   // Testcase (2) - This is for an account with an imported transaction
   //                [ i.e. !account.value("lastImportedTransactionDate").isEmpty() ],
   //                but without balance difference:
-  a.setValue("lastImportedTransactionDate",QDate(2011, 12, 1).toString(Qt::ISODate));
-  a.setValue("lastStatementBalance", MyMoneyMoney(0,1).toString());
+  a.setValue("lastImportedTransactionDate", QDate(2011, 12, 1).toString(Qt::ISODate));
+  a.setValue("lastStatementBalance", MyMoneyMoney(0, 1).toString());
 
   MyMoneyFileTransaction ft;
   try {
@@ -2063,7 +2063,7 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance()
   //                [ i.e. !account.value("lastImportedTransactionDate").isEmpty() ],
   //                but with a balance difference:
   ft.restart();
-  a.setValue("lastStatementBalance", MyMoneyMoney(1,1).toString());
+  a.setValue("lastStatementBalance", MyMoneyMoney(1, 1).toString());
   try {
     m->modifyAccount(a);
     ft.commit();

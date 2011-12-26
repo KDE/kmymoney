@@ -52,7 +52,7 @@ QStringList Parse::parseLine(const QString& data)
   QString txt1;
 
   m_inBuffer = data;
-  if(m_inBuffer.endsWith(',')) {
+  if (m_inBuffer.endsWith(',')) {
     m_inBuffer.chop(1);
   }
 
@@ -60,16 +60,16 @@ QStringList Parse::parseLine(const QString& data)
   listIn = m_inBuffer.split(m_fieldDelimiterCharacter);// firstly, split on m_fieldDelimiterCharacter
 
   QStringList::const_iterator constIterator;
-  
-  for(constIterator = listIn.constBegin(); constIterator < listIn.constEnd(); ++constIterator) {
+
+  for (constIterator = listIn.constBegin(); constIterator < listIn.constEnd(); ++constIterator) {
     txt = (*constIterator);
-    
+
     // detect where a "quoted" string has been erroneously split, because of a comma,
     // or in a value, a 'thousand separator' being mistaken for a field delimiter.
     //Also, where a 'field seperator' is within quotes and the quotes don't include the whole of the field.
 
-    while((txt.startsWith(m_textDelimiterCharacter)) && (!txt.mid(1,-1).contains(m_textDelimiterCharacter)))  {
-      if(++constIterator < listIn.constEnd())  {
+    while ((txt.startsWith(m_textDelimiterCharacter)) && (!txt.mid(1, -1).contains(m_textDelimiterCharacter)))  {
+      if (++constIterator < listIn.constEnd())  {
         txt1 = (*constIterator);//                       second part of the split string
         txt += m_fieldDelimiterCharacter + txt1;//       rejoin the string
       } else break;
@@ -91,31 +91,31 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
   int charCount = buf.count();
   QString::const_iterator constIterator;
 
-  for(constIterator = buf.constBegin(); constIterator != buf.constEnd();
-      ++constIterator) {
+  for (constIterator = buf.constBegin(); constIterator != buf.constEnd();
+       ++constIterator) {
     QString chr = (*constIterator);
     charCount -= 1;
-    if(chr == m_textDelimiterCharacter) {
+    if (chr == m_textDelimiterCharacter) {
       tmpBuffer += chr;
-      if(inQuotes == true) {  //               if already in quoted field..
+      if (inQuotes == true) { //               if already in quoted field..
         inQuotes = false;//                    ..end it
       } else {//                               if not..
         inQuotes = true;//                     ..start it
       }
       continue;
-    } else if(chr == "\n") {
-      if(inQuotes == true) {  //               embedded '\n' in quoted field
+    } else if (chr == "\n") {
+      if (inQuotes == true) { //               embedded '\n' in quoted field
         chr = '~';//                           replace it with ~ for now
         tmpBuffer += chr;
-        if(charCount > 0)  //                      more chars yet
+        if (charCount > 0) //                      more chars yet
           continue;//                          more chars yet
       }
       //                                       true EOL (not in quotes)
-      if(tmpBuffer.isEmpty()) {
+      if (tmpBuffer.isEmpty()) {
         continue;
       }
       lineCount ++;
-      if(lineCount < strt) {  //   startLine      not yet reached first wanted line
+      if (lineCount < strt) { //   startLine      not yet reached first wanted line
         tmpBuffer.clear();
         continue;
       }
@@ -124,18 +124,18 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
 
       //                                       look for start of wanted data
       //  if first pass or if not at last line, proceed
-      if((!end == 0) && (lineCount >= end)) {  //  m_endLine is set from UI after first pass
+      if ((!end == 0) && (lineCount >= end)) { //  m_endLine is set from UI after first pass
         m_lastLine = lineCount;
         break;
       }
     }//                                        end of 'EOL detected' loop
     else {//                                   must be data char
       tmpBuffer += chr;
-      if(charCount > 0) {  //                      more chars yet
+      if (charCount > 0) { //                      more chars yet
         continue;
       }//                                      else eoFile = true;
     }
-    if(!tmpBuffer.isEmpty()) {
+    if (!tmpBuffer.isEmpty()) {
       outBuffer << tmpBuffer;
     }
   }
@@ -175,7 +175,7 @@ void Parse::setTextDelimiterIndex(int index)
 
 void Parse::decimalSymbolSelected(int val)
 {
-  if(val < 0) {
+  if (val < 0) {
     return;
   }
 
@@ -203,7 +203,7 @@ void Parse::thousandsSeparatorChanged(int val)
 {
   m_thousandsSeparatorIndex = val;
   m_thousandsSeparator = m_thousandsSeparatorList[val];
-  if(m_thousandsSeparator == KGlobal::locale()->thousandsSeparator()) {
+  if (m_thousandsSeparator == KGlobal::locale()->thousandsSeparator()) {
     return;
   }
 }
@@ -243,9 +243,9 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
   m_symbolFound = false;
   m_invalidConversion = false;
 
-  if(str.isEmpty()) return str;
+  if (str.isEmpty()) return str;
   QString txt = str.trimmed();//                 don't want trailing blanks
-  if(txt.contains('(')) { //              "(" or "Af" = debit
+  if (txt.contains('(')) { //              "(" or "Af" = debit
     txt = txt.remove(QRegExp("[()]"));
     txt = '-' + txt;
   }
@@ -255,9 +255,9 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
 
   //  Check if this col/cell contains decimal symbol
 
-  if(decimalIndex == -1) { //                     there is no decimal
+  if (decimalIndex == -1) { //                     there is no decimal
     m_symbolFound = false;
-    if((thouIndex == -1) || (thouIndex == length - 4))  {  //no separator || correct format
+    if ((thouIndex == -1) || (thouIndex == length - 4))  { //no separator || correct format
       txt.remove(m_thousandsSeparator);
       QString tmp = txt + KGlobal::locale()->decimalSymbol() + "00";
       return tmp;
@@ -271,11 +271,11 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
 
   m_symbolFound = true;//                        found genuine decimal
 
-  if(thouIndex >= 0) {  //                        there was a separator
-    if(decimalIndex < thouIndex) {  //            invalid conversion
+  if (thouIndex >= 0) { //                        there was a separator
+    if (decimalIndex < thouIndex) { //            invalid conversion
       m_invalidConversion = true;
     }
-    if(decimalIndex == length - 1) {  //          ...decimal point with no decimal part (strange?)
+    if (decimalIndex == length - 1) { //          ...decimal point with no decimal part (strange?)
       txt += m_decimalSymbol + "00";
     }
   }//  thouIndex = -1                            no thousands separator
@@ -321,17 +321,17 @@ QString CsvUtil::nameToId(const QString& name, MyMoneyAccount& parent)
 
   QString id = file->categoryToAccount(name, MyMoneyAccount::UnknownAccountType);
   // if it does not exist, we have to create it
-  if(id.isEmpty()) {
+  if (id.isEmpty()) {
     MyMoneyAccount newAccount;
     MyMoneyAccount parentAccount = parent;
     newAccount.setName(name) ;
     int pos;
     // check for ':' in the name and use it as separator for a hierarchy
-    while((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
+    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
       QString part = newAccount.name().left(pos);
       QString remainder = newAccount.name().mid(pos + 1);
       const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
-      if(existingAccount.id().isEmpty()) {
+      if (existingAccount.id().isEmpty()) {
         newAccount.setName(part);
         newAccount.setAccountType(parentAccount.accountType());
         file->addAccount(newAccount, parentAccount);
@@ -347,7 +347,7 @@ QString CsvUtil::nameToId(const QString& name, MyMoneyAccount& parent)
     newAccount.setAccountType(parentAccount.accountType());
 
     // make sure we have a currency. If none is assigned, we assume base currency
-    if(newAccount.currencyId().isEmpty())
+    if (newAccount.currencyId().isEmpty())
       newAccount.setCurrencyId(file->baseCurrency().id());
 
     file->addAccount(newAccount, parentAccount);
@@ -377,16 +377,16 @@ QString CsvUtil::feeId(const QString& name)
 
 void CsvUtil::scanCategories(QString& id, const MyMoneyAccount& invAcc, const MyMoneyAccount& parentAccount, const QString& defaultName)
 {
-  if(!m_scannedCategories) {
+  if (!m_scannedCategories) {
     previouslyUsedCategories(invAcc.id(), m_feeId, m_interestId);
     m_scannedCategories = true;
   }
 
-  if(id.isEmpty()) {
+  if (id.isEmpty()) {
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneyAccount acc = file->accountByName(defaultName);
     // if it does not exist, we have to create it
-    if(acc.id().isEmpty()) {
+    if (acc.id().isEmpty()) {
       MyMoneyAccount parent = parentAccount;
       acc.setName(defaultName);
       acc.setAccountType(parent.accountType());
@@ -411,7 +411,7 @@ void CsvUtil::previouslyUsedCategories(const QString& investmentAccount, QString
     QList< QPair<MyMoneyTransaction, MyMoneySplit> > list;
     file->transactionList(list, filter);
     QList< QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it_t;
-    for(it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
+    for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
       const MyMoneyTransaction& t = (*it_t).first;
       const MyMoneySplit&s = (*it_t).second;
       MyMoneySplit assetAccountSplit;
@@ -421,14 +421,14 @@ void CsvUtil::previouslyUsedCategories(const QString& investmentAccount, QString
       MyMoneySecurity currency;
       MyMoneySplit::investTransactionTypeE transactionType;
       dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
-      if(feeSplits.count() == 1) {
+      if (feeSplits.count() == 1) {
         feesId = feeSplits.first().accountId();
       }
-      if(interestSplits.count() == 1) {
+      if (interestSplits.count() == 1) {
         interestId = interestSplits.first().accountId();
       }
     }
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
   }
 }
@@ -442,13 +442,13 @@ void CsvUtil::dissectTransaction(const MyMoneyTransaction& transaction, const My
   // the list of all incomes
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneySplit>::ConstIterator it_s;
-  for(it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
+  for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     MyMoneyAccount acc = file->account((*it_s).accountId());
-    if((*it_s).id() == split.id()) {
+    if ((*it_s).id() == split.id()) {
       security = file->security(acc.currencyId());
-    } else if(acc.accountGroup() == MyMoneyAccount::Expense) {
+    } else if (acc.accountGroup() == MyMoneyAccount::Expense) {
       feeSplits.append(*it_s);
-    } else if(acc.accountGroup() == MyMoneyAccount::Income) {
+    } else if (acc.accountGroup() == MyMoneyAccount::Income) {
       interestSplits.append(*it_s);
     } else {
       assetAccountSplit = *it_s;
@@ -456,19 +456,19 @@ void CsvUtil::dissectTransaction(const MyMoneyTransaction& transaction, const My
   }
 
   // determine transaction type
-  if(split.action() == MyMoneySplit::ActionAddShares) {
+  if (split.action() == MyMoneySplit::ActionAddShares) {
     transactionType = (!split.shares().isNegative()) ? MyMoneySplit::AddShares : MyMoneySplit::RemoveShares;
-  } else if(split.action() == MyMoneySplit::ActionBuyShares) {
+  } else if (split.action() == MyMoneySplit::ActionBuyShares) {
     transactionType = (!split.value().isNegative()) ? MyMoneySplit::BuyShares : MyMoneySplit::SellShares;
-  } else if(split.action() == MyMoneySplit::ActionDividend) {
+  } else if (split.action() == MyMoneySplit::ActionDividend) {
     transactionType = MyMoneySplit::Dividend;
-  } else if(split.action() == MyMoneySplit::ActionReinvestDividend) {
+  } else if (split.action() == MyMoneySplit::ActionReinvestDividend) {
     transactionType = MyMoneySplit::ReinvestDividend;
-  } else if(split.action() == MyMoneySplit::ActionYield) {
+  } else if (split.action() == MyMoneySplit::ActionYield) {
     transactionType = MyMoneySplit::Yield;
-  } else if(split.action() == MyMoneySplit::ActionSplitShares) {
+  } else if (split.action() == MyMoneySplit::ActionSplitShares) {
     transactionType = MyMoneySplit::SplitShares;
-  } else if(split.action() == MyMoneySplit::ActionInterestIncome) {
+  } else if (split.action() == MyMoneySplit::ActionInterestIncome) {
     transactionType = MyMoneySplit::InterestIncome;
   } else
     transactionType = MyMoneySplit::BuyShares;
@@ -476,7 +476,7 @@ void CsvUtil::dissectTransaction(const MyMoneyTransaction& transaction, const My
   currency.setTradingSymbol("???");
   try {
     currency = file->security(transaction.commodity());
-  } catch(MyMoneyException *e) {
+  } catch (MyMoneyException *e) {
     delete e;
   }
 }

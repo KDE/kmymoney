@@ -80,7 +80,7 @@ void KMyMoneyAccountTreeView::keyPressEvent(QKeyEvent *event)
 {
   if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
     openIndex(currentIndex());
-    event->accept();    
+    event->accept();
   } else {
     QTreeView::keyPressEvent(event);
   }

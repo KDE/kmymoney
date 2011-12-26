@@ -581,7 +581,7 @@ public:
   Ui::BankingPage     *ui;
   QVBoxLayout         *m_pageLayout;
   void                setParent(CSVDialog* dlg);
-  
+
 signals:
   void                clicked();
 

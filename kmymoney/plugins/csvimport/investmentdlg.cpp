@@ -78,7 +78,7 @@ void InvestmentDlg::init()
   m_csvDialog->ui->tableWidget->setWordWrap(false);
   m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
 
-  for(int i = 0; i < MAXCOL; i++) {
+  for (int i = 0; i < MAXCOL; i++) {
     QString t;
     t.setNum(i + 1);
     m_csvDialog->m_pageInvestment->ui->comboBoxInv_amountCol->addItem(t);
@@ -109,7 +109,7 @@ void InvestmentDlg::init()
 
 void InvestmentDlg::changedType(const QString& newType)
 {
-  if((newType == "buy") || (newType == "sell") || (newType == "divx") ||
+  if ((newType == "buy") || (newType == "sell") || (newType == "divx") ||
       (newType == "reinvdiv") || (newType == "shrsin") || (newType == "shrsout")) {
     m_investProcessing->setTrInvestDataType(newType);
   }
@@ -117,7 +117,7 @@ void InvestmentDlg::changedType(const QString& newType)
 
 void InvestmentDlg::saveSettings()
 {
-  if(m_investProcessing->inFileName().isEmpty()) {  //          don't save column numbers if no file loaded
+  if (m_investProcessing->inFileName().isEmpty()) { //          don't save column numbers if no file loaded
     return;
   }
   QString str;
@@ -140,13 +140,13 @@ void InvestmentDlg::saveSettings()
 
   m_investProcessing->inFileName().clear();
 
-  switch(m_csvDialog->m_activityType) {
+  switch (m_csvDialog->m_activityType) {
     case 0://  Banking
       return;
       break;
     case 1:  {//  Investment
         KConfigGroup investmentGroup(config, "InvestmentSettings");
-        if(str == "Invest") {
+        if (str == "Invest") {
           investmentGroup.writeEntry("StartLine", m_csvDialog->m_pageLinesDate->ui->spinBox_skip->value() - 1);
         }
 
@@ -183,7 +183,7 @@ void InvestmentDlg::saveSettings()
       }
     case 2: { //  Broker1
         KConfigGroup BrokerageSettingsGroup1(config, "BrokerageSettings1");
-        if(str == "Invest") {
+        if (str == "Invest") {
           BrokerageSettingsGroup1.writeEntry("StartLine", m_csvDialog->m_pageLinesDate->ui->spinBox_skip->value() - 1);
         }
 
@@ -200,7 +200,7 @@ void InvestmentDlg::saveSettings()
         BrokerageSettingsGroup1.writeEntry("RemoveParam", m_investProcessing->m_removeList);
 
         str = m_csvDialog->m_pageInvestment->ui->lineEdit_filter->text();
-        if(str.endsWith(' ')) {
+        if (str.endsWith(' ')) {
           str.append('#');//  Terminate trailing blank
         }
         BrokerageSettingsGroup1.writeEntry("Filter", str);
@@ -226,7 +226,7 @@ void InvestmentDlg::saveSettings()
       }
     case 3: { //  Broker2
         KConfigGroup BrokerageSettingsGroup2(config, "BrokerageSettings2");
-        if(str == "Invest") {
+        if (str == "Invest") {
           BrokerageSettingsGroup2.writeEntry("StartLine", m_csvDialog->m_pageLinesDate->ui->spinBox_skip->value() - 1);
         }
         //    The strings in these resource file lists may be edited,
@@ -242,7 +242,7 @@ void InvestmentDlg::saveSettings()
         BrokerageSettingsGroup2.writeEntry("RemoveParam", m_investProcessing->m_removeList);
 
         str = m_csvDialog->m_pageInvestment->ui->lineEdit_filter->text();
-        if(str.endsWith(' ')) {
+        if (str.endsWith(' ')) {
           str.append('#');//  Terminate trailing blank
         }
         BrokerageSettingsGroup2.writeEntry("Filter", str);
@@ -273,6 +273,6 @@ void InvestmentDlg::saveSettings()
 void InvestmentDlg::resizeEvent(QResizeEvent * event)
 {
   event->accept();
-  if(!m_investProcessing->inFileName().isEmpty())
+  if (!m_investProcessing->inFileName().isEmpty())
     m_investProcessing->updateScreen();
 }

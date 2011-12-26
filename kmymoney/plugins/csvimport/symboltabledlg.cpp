@@ -64,7 +64,7 @@ void SymbolTableDlg::displayLine(int& row, QString& symbol, const QString& name,
   item->setText(symbol);
   QTableWidgetItem* item1 = new QTableWidgetItem;        //exist flag for UI
   item1->setSizeHint(QSize(60, 30));
-  if(exists) {
+  if (exists) {
     item1->setText(i18nc("Confirm", "Yes"));
   } else {
     item1->setText(QString());
@@ -95,21 +95,21 @@ void SymbolTableDlg::slotRejected()
 
 void SymbolTableDlg::slotItemChanged(QTableWidgetItem* item)
 {
-  if(item->column() < 2) { //  Only edit names.
+  if (item->column() < 2) { //  Only edit names.
     return;
   }
   QString name = item->text();
   m_selectedItems = m_widget->tableWidget->selectedItems();
 
-  if(m_selectedItems.count() > 1) {
+  if (m_selectedItems.count() > 1) {
     foreach (QTableWidgetItem *  selectItem, m_selectedItems) {
       selectItem->setText(item->text());
     }
   }
-  if(m_selectedItems.count() == 1) {
+  if (m_selectedItems.count() == 1) {
     QString symbol = m_widget->tableWidget->item(item->row(), 0)->text();
-    for(int i = 0; i < m_widget->tableWidget->rowCount(); i ++) {
-      if(m_widget->tableWidget->item(i, 0)->text() == symbol) {
+    for (int i = 0; i < m_widget->tableWidget->rowCount(); i ++) {
+      if (m_widget->tableWidget->item(i, 0)->text() == symbol) {
         //      ...and edit their names too.
         m_widget->tableWidget->item(i, 2)->setText(name);
       }
@@ -121,7 +121,7 @@ void SymbolTableDlg::slotEditSecurityClicked()
 {
   MyMoneyStatement::Security security;
 
-  for(int i = 0; i < m_widget->tableWidget->rowCount(); i++) {
+  for (int i = 0; i < m_widget->tableWidget->rowCount(); i++) {
     QString name = m_widget->tableWidget->item(i, 2)->text();
 
     security.m_strName = name;

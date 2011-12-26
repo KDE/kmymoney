@@ -158,7 +158,7 @@ public:
     return 0;
   }
 
-  void setErroneous(bool condition=true) {
+  void setErroneous(bool condition = true) {
     m_erroneous = condition;
   }
 

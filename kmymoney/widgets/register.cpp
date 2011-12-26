@@ -294,7 +294,7 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
   painter->drawLine(cellRect.x(), cellRect.height() - 1, cellRect.width(), cellRect.height() - 1);
 
   // now write the text
-  painter->setPen(option.palette.color( isErronous() ? QPalette::HighlightedText : QPalette::Text ));
+  painter->setPen(option.palette.color(isErronous() ? QPalette::HighlightedText : QPalette::Text));
   QFont font = painter->font();
   font.setBold(true);
   painter->setFont(font);
@@ -1998,7 +1998,7 @@ void Register::addGroupMarkers(void)
             balance = -balance;
           QString txt = i18n("Online Statement Balance: %1", balance.formatMoney(m_account.fraction()));
 
-          KMyMoneyRegister::StatementGroupMarker *p=new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, QDate::fromString(m_account.value("lastImportedTransactionDate"), Qt::ISODate), txt);
+          KMyMoneyRegister::StatementGroupMarker *p = new KMyMoneyRegister::StatementGroupMarker(this, KMyMoneyRegister::Deposit, QDate::fromString(m_account.value("lastImportedTransactionDate"), Qt::ISODate), txt);
 
           p->setErroneous(!MyMoneyFile::instance()->hasMatchingOnlineBalance(m_account));
         }

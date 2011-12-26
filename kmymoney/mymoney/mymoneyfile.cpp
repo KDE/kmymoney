@@ -2793,7 +2793,7 @@ bool MyMoneyFile::hasMatchingOnlineBalance(const MyMoneyAccount& _acc) const
   MyMoneyAccount acc = account(_acc.id());
 
   // if there's no last transaction import data we are done
-  if( acc.value("lastImportedTransactionDate").isEmpty()
+  if (acc.value("lastImportedTransactionDate").isEmpty()
       || acc.value("lastStatementBalance").isEmpty())
     return false;
 
