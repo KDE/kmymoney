@@ -4446,7 +4446,9 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
                 break;
 
               case KConfirmManualEnterDlg::ModifyAlways:
-                schedule.setTransaction(taccepted);
+                torig = taccepted;
+                torig.setPostDate(origDueDate);
+                schedule.setTransaction(torig);
                 break;
 
               case KConfirmManualEnterDlg::ModifyOnce:
