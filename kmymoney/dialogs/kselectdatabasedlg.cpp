@@ -198,7 +198,7 @@ void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
     if (m_mode == QIODevice::WriteOnly)
       m_widget->urlSqlite->setMode(KFile::Modes(KFile::Files));
     else
-      m_widget->urlSqlite->setMode(KFile::Modes(KFile::Files || KFile::ExistingOnly));
+      m_widget->urlSqlite->setMode(KFile::Modes(KFile::Files | KFile::ExistingOnly));
 
     m_requiredFields->remove(m_widget->textDbName);
     m_requiredFields->add(m_widget->urlSqlite);
