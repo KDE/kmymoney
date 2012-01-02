@@ -91,9 +91,7 @@ protected slots:
     * Shows the context menu when the user right clicks or presses
     * a 'windows' key when an item is selected.
     *
-    * @param view a pointer to the view
-    * @param item a pointer to the current selected listview item
-    * @param pos The position to popup
+    * @param pos The position where to popup
     * @return none
   **/
   void slotListViewContextMenu(const QPoint& pos);

@@ -108,7 +108,6 @@ public:
     * @param categoryEditor If @p false, rules for asset/liability accounts apply.
     *                       If @p true, rules for income/expense account apply.
     * @param parent Pointer to parent object (passed to QDialog). Default is 0.
-    * @param name Name of the object (passed to QDialog). Default is 0.
     * @param title Caption of the object (passed to QDialog). Default is empty string.
     */
   KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bool categoryEditor, QWidget *parent = 0, const QString& title = QString());

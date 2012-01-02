@@ -109,6 +109,9 @@ public:
     *   - The base currency: The base currency of the user's overall file
     *
     * @param date The date in question
+    * @param exactDate if @a true, the @a date must be exact, otherwise
+    *                  the last known price prior to this date can also be used
+    *                  @a false is the default
     * @return MyMoneyMoney The value of the account's currency on that date
     */
   MyMoneyMoney deepCurrencyPrice(const QDate& date, bool exactDate = false) const;
@@ -118,6 +121,9 @@ public:
     * translated into the base currency
     *
     * @param date The date in question
+    * @param exactDate if @a true, the @a date must be exact, otherwise
+    *                  the last known price prior to this date can also be used
+    *                  @a false is the default
     * @return MyMoneyMoney The value of the account's currency on that date
     */
   MyMoneyMoney baseCurrencyPrice(const QDate& date, bool exactDate = false) const;
@@ -128,9 +134,13 @@ public:
    *
    * @param foreignCurrency The currency on which the price will be returned
    * @param date The date in question
+   * @param exactDate if @a true, the @a date must be exact, otherwise
+   *                  the last known price prior to this date can also be used
+   *                  @a false is the default
    * @return MyMoneyMoney The value of the account's currency on that date
    */
   MyMoneyMoney foreignCurrencyPrice(const QString foreignCurrency, const QDate& date, bool exactDate = false) const;
+
   /**
     * Fetch the trading symbol of this account's deep currency
     *

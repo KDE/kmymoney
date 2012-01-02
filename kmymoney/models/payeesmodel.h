@@ -126,8 +126,6 @@ private:
   *   widget->setModel(filterModel);
   * @endcode
   *
-  * @endcode
-  *
   * @see PayeesModel
   *
   * @author Alvaro Soliverez 2010

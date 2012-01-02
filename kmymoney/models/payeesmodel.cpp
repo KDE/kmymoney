@@ -74,10 +74,10 @@ public:
   }
 
   /**
-    * Function to get the item from an account id.
+    * Function to get the item from a payee id.
     *
     * @param parent The parent to localize the seach in the child items of this parameter.
-    * @param accountId Search based on this parameter.
+    * @param objectId Search will be based on this parameter.
     *
     * @return The item corresponding to the given account id, NULL if the account was not found.
     */

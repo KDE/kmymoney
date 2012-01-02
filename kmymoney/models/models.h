@@ -48,7 +48,7 @@ class InstitutionsModel;
   *
   * In order for the data synchronization between the @ref MyMoneyFile and the
   * models managed by this object to work, the @ref MyMoneyFile::dataChanged
-  * signal must be connected to this object's @ref dataChanged slot.
+  * signal must be connected to this object's @ref fileClosed slot.
   *
   * @author Cristian Onet 2010
   *

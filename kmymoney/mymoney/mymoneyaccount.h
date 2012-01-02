@@ -558,6 +558,8 @@ public:
   QString brokerageName(void) const;
 
   /**
+   * @param reconcileFlag if set to @a true a reconcile overlay will be
+   *                      added to the pixmap returned
    * @param size is a hint for the size of the icon
    * @return a pixmap using DesktopIcon for the account type
    */

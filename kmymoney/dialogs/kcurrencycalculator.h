@@ -61,7 +61,6 @@ public:
     * @param date the date when the conversion took place
     * @param resultFraction the smallest fraction of the result (default 100)
     * @param parent see QWidget constructor
-    * @param name see QWidget constructor
     *
     * @note @p value must not be 0!
     */

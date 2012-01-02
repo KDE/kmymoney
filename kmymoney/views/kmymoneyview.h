@@ -450,11 +450,12 @@ protected:
 
 public slots:
   /**
-    * This slot writes information about the page passed as argument @current
-    * in the kmymoney.rc file so that in can be selected automatically when
+    * This slot writes information about the page passed as argument @a current
+    * in the kmymoney.rc file so that it can be selected automatically when
     * the application is started again.
     *
-    * @param widget pointer to page widget
+    * @param current QModelIndex of the current page item
+    * @param previous QModelIndex of the previous page item
     */
   void slotCurrentPageChanged(const QModelIndex current, const QModelIndex previous);
 
