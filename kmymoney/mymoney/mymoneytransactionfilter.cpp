@@ -774,6 +774,10 @@ bool MyMoneyTransactionFilter::translateDateRange(dateOptionE id, QDate& start, 
       start = QDate::currentDate();
       end = QDate::currentDate().addMonths(12);
       break;
+    case MyMoneyTransactionFilter::next18Months:
+      start = QDate::currentDate();
+      end = QDate::currentDate().addMonths(18);
+      break;
     case MyMoneyTransactionFilter::userDefined:
       start = QDate();
       end = QDate();

@@ -541,6 +541,7 @@ KMyMoneyPeriodCombo::KMyMoneyPeriodCombo(QWidget* parent) :
   insertItem(i18n("Next quarter"), MyMoneyTransactionFilter::nextQuarter);
   insertItem(i18n("Next 6 months"), MyMoneyTransactionFilter::next6Months);
   insertItem(i18n("Next 12 months"), MyMoneyTransactionFilter::next12Months);
+  insertItem(i18n("Next 18 months"), MyMoneyTransactionFilter::next18Months);
   insertItem(i18n("Last 3 months to next 3 months"), MyMoneyTransactionFilter::last3ToNext3Months);
   insertItem(i18n("User defined"), MyMoneyTransactionFilter::userDefined);
 }

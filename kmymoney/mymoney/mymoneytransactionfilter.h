@@ -116,6 +116,7 @@ public:
     currentFiscalYear,
     lastFiscalYear,
     today,
+    next18Months,
     // insert new constants above of this line
     dateOptionCount
   };
