@@ -296,6 +296,8 @@ private:
     *
     * @param mode Is either Create or Select depending on the above table
     * @param account Reference to MyMoneyAccount object
+    * @param openingBalance the opening balance of the account to be created
+    *                       defaults to zero
     */
 
   void selectOrCreateAccount(const SelectCreateMode mode, MyMoneyAccount& account, const MyMoneyMoney& openingBalance = MyMoneyMoney());

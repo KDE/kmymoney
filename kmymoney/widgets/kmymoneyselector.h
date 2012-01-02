@@ -355,10 +355,10 @@ protected slots:
   /**
     * This slot processes the right mouse button press on a list view item.
     *
-    * @param it_v pointer to list view item that was pressed
-    * @param p    the position where the mouse was pressed
+    * @param item pointer to the item where the mouse was pressed
+    * @param col  the column of the tree (unused here)
     */
-  void slotItemPressed(QTreeWidgetItem*, int);
+  void slotItemPressed(QTreeWidgetItem* item, int col);
 
 protected:
   QTreeWidget*               m_treeWidget;

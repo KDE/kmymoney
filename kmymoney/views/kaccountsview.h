@@ -59,10 +59,17 @@ public slots:
     * update the account objects if their icon position has changed since
     * the last time.
     *
-    * @param action must be KMyMoneyView::preSave, otherwise this slot is a NOP.
+    * @ param action must be KMyMoneyView::preSave, otherwise this slot is a NOP.
     */
   //void slotUpdateIconPos(unsigned int action);
 
+  /**
+    * Reconcile an account
+    *
+    * @param acc reference to the account that is to be reconciled
+    * @param reconciliationDate the date of the statement
+    * @param endingBalance the ending balance noted on the statement
+    */
   void slotReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
 
 protected:

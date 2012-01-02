@@ -105,7 +105,7 @@ public:
     * @param account The account for which the value is being computed.
     * @param balance The balance which should be used.
     *
-    * @TODO Make this a static or a global function since the object's state has nothing to do with this computation
+    * @todo Make this a static or a global function since the object's state has nothing to do with this computation
     */
   MyMoneyMoney accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance);
 
@@ -212,8 +212,6 @@ private:
   *   filterModel->sort(0);
   *
   *   widget->setModel(filterModel);
-  * @endcode
-  *
   * @endcode
   *
   * @see AccountsModel

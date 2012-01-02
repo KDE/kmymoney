@@ -56,7 +56,7 @@ KMyMoneyAccountTreeView::~KMyMoneyAccountTreeView()
 }
 
 /**
-  * Set the name of the configuration group where the view's persistent data is saved to @param group.
+  * Set the name of the configuration group where the view's persistent data is saved to @param group .
   */
 void KMyMoneyAccountTreeView::setConfigGroupName(const QString& group)
 {
