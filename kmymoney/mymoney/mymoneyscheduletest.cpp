@@ -1633,6 +1633,16 @@ void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
   // and since it is on a Saturday, the adjusted one must be on the
   // following Monday
   QVERIFY(s.adjustedNextPayment(refDate) == endDate.addDays(2));
+
+  // reference for Sunday is still OK
+  QVERIFY(s.adjustedNextPayment(QDate(2011,8,14)) == endDate.addDays(2));
+
+  // but it is finished on Monday (as reference date)
+  QVERIFY(!s.adjustedNextPayment(QDate(2011,8,15)).isValid());
+
+  // check the # of remaining transactions
+  s.setNextDueDate(endDate.addMonths(-1)); 
+  QVERIFY(s.transactionsRemaining() == 2);
 }
 
 #include "mymoneyscheduletest.moc"
