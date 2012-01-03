@@ -88,7 +88,7 @@
               <item row="1" column="1">
                 <widget class="KPushButton" name="m_additionalFeesButton">
                   <property name="text">
-                    <string>Additional fees</string>
+                    <string>Additional Fees</string>
                   </property>
                 </widget>
               </item>

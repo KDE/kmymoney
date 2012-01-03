@@ -1542,7 +1542,7 @@ bool InvestTransaction::formCellText(QString& txt, int& align, int row, int col,
         case LabelColumn2:
           align |= Qt::AlignLeft;
           if (haveFees() && !m_feeCategory.isEmpty())
-            txt = i18n("Fee amount");
+            txt = i18n("Fee Amount");
           break;
 
         case ValueColumn2:

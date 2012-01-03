@@ -380,16 +380,16 @@ QString KMyMoneyUtils::reconcileStateToString(MyMoneySplit::reconcileFlagE flag,
   if (text) {
     switch (flag) {
       case MyMoneySplit::NotReconciled:
-        txt = i18nc("Reconcile state 'Not reconciled'", "Not reconciled");
+        txt = i18nc("Reconciliation state 'Not reconciled'", "Not reconciled");
         break;
       case MyMoneySplit::Cleared:
-        txt = i18nc("Reconcile state 'Cleared'", "Cleared");
+        txt = i18nc("Reconciliation state 'Cleared'", "Cleared");
         break;
       case MyMoneySplit::Reconciled:
-        txt = i18nc("Reconcile state 'Reconciled'", "Reconciled");
+        txt = i18nc("Reconciliation state 'Reconciled'", "Reconciled");
         break;
       case MyMoneySplit::Frozen:
-        txt = i18nc("Reconcile state 'Frozen'", "Frozen");
+        txt = i18nc("Reconciliation state 'Frozen'", "Frozen");
         break;
       default:
         txt = i18nc("Unknown reconciliation state", "Unknown");
@@ -400,13 +400,13 @@ QString KMyMoneyUtils::reconcileStateToString(MyMoneySplit::reconcileFlagE flag,
       case MyMoneySplit::NotReconciled:
         break;
       case MyMoneySplit::Cleared:
-        txt = i18nc("Reconcile flag C", "C");
+        txt = i18nc("Reconciliation flag C", "C");
         break;
       case MyMoneySplit::Reconciled:
-        txt = i18nc("Reconcile flag R", "R");
+        txt = i18nc("Reconciliation flag R", "R");
         break;
       case MyMoneySplit::Frozen:
-        txt = i18nc("Reconcile flag F", "F");
+        txt = i18nc("Reconciliation flag F", "F");
         break;
       default:
         txt = i18nc("Flag for unknown reconciliation state", "?");

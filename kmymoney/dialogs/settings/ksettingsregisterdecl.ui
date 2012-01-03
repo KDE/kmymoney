@@ -258,7 +258,7 @@
                       </item>
                       <item>
                         <property name="text">
-                          <string comment="@item reconciliation cleared status">Cleared</string>
+                          <string comment="@item reconciliation status">Cleared</string>
                         </property>
                       </item>
                       <item>

@@ -73,7 +73,7 @@ KMyMoney has calculated the loan as shown below. If you want to accept these val
           <item row="1" column="0">
             <widget class="QLabel" name="TextLabel8_3_2_2_2_2_2">
               <property name="text">
-                <string>Additional fees:</string>
+                <string>Additional Fees:</string>
               </property>
               <property name="alignment">
                 <set>Qt::AlignVCenter|Qt::AlignRight</set>
