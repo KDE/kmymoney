@@ -409,9 +409,11 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate)
   weekendOptionE option(adjust ? weekendOption() :
                         MyMoneySchedule::MoveNothing);
 
+  QDate adjEndDate(adjustedDate(m_endDate, option));
+
   // if the enddate is valid and it is before the reference date,
   // then there will be no more payments.
-  if (m_endDate.isValid() && m_endDate < refDate) {
+  if (adjEndDate.isValid() && adjEndDate < refDate) {
     return QDate();
   }
 
@@ -485,7 +487,7 @@ QDate MyMoneySchedule::nextPaymentDate(const bool& adjust, const QDate& refDate)
         break;
     }
   }
-  if (paymentDate.isValid() && m_endDate.isValid() && paymentDate > m_endDate)
+  if (paymentDate.isValid() && adjEndDate.isValid() && paymentDate > adjEndDate)
     paymentDate = QDate();
 
   return paymentDate;
@@ -601,7 +603,7 @@ bool MyMoneySchedule::operator ==(const MyMoneySchedule& right) const
 
 int MyMoneySchedule::transactionsRemaining(void) const
 {
-  return transactionsRemainingUntil(m_endDate);
+  return transactionsRemainingUntil(adjustedDate(m_endDate, weekendOption()));
 }
 
 int MyMoneySchedule::transactionsRemainingUntil(const QDate& endDate) const
