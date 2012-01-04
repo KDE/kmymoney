@@ -439,8 +439,17 @@ bool MyMoneyQifReader::startImport(void)
     // start filter process, use 'cat -' as the default filter
     m_filter.clearProgram();
     if (m_qifProfile.filterScriptImport().isEmpty()) {
+#ifdef Q_OS_WIN32                   //krazy:exclude=cpp
+      // this is the Windows equivalent of 'cat -' but since 'type' does not work with stdin
+      // we pass the filename converted to native separators as a parameter
+      m_filter << "cmd.exe";
+      m_filter << "/c";
+      m_filter << "type";
+      m_filter << QDir::toNativeSeparators(m_filename);
+#else
       m_filter << "cat";
       m_filter << "-";
+#endif
     } else {
       m_filter << m_qifProfile.filterScriptImport().split(' ', QString::KeepEmptyParts);
     }
