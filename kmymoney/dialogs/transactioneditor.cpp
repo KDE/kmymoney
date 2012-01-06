@@ -764,6 +764,7 @@ void StdTransactionEditor::createEditWidgets(void)
   KTextEdit* memo = new KTextEdit;
   memo->setObjectName(QLatin1String("Memo"));
   memo->setTabChangesFocus(true);
+  connect(memo, SIGNAL(textChanged()), this, SLOT(slotUpdateButtonState()));
   m_editWidgets["memo"] = memo;
 
   bool showNumberField = true;
@@ -1770,6 +1771,7 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     kMyMoneyEdit* amount = dynamic_cast<kMyMoneyEdit*>(*it_w);
     KMyMoneyReconcileCombo* reconcile = dynamic_cast<KMyMoneyReconcileCombo*>(*it_w);
     KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(*it_w);
+    KTextEdit* memo = dynamic_cast<KTextEdit*>(*it_w);
 
     if (payee && !(payee->currentText().isEmpty()))
       break;
@@ -1789,6 +1791,9 @@ bool StdTransactionEditor::isComplete(QString& reason) const
         break;
 
       if (postDate->date().isValid() && (postDate->date() >= m_account.openingDate()))
+        break;
+
+      if (memo && !memo->toPlainText().isEmpty())
         break;
     }
   }
