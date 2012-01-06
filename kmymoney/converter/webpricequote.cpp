@@ -571,6 +571,12 @@ const QStringList WebPriceQuote::quoteSourcesNative()
 const QStringList WebPriceQuote::quoteSourcesFinanceQuote()
 {
   if (m_financeQuoteSources.empty()) { // run the process one time only
+    // since this is a static function it can be called without constructing an object
+    // so we need to make sure that m_financeQuoteScriptPath is properly initialized
+    if (m_financeQuoteScriptPath.isEmpty()) {
+      m_financeQuoteScriptPath = KGlobal::dirs()->findResource("appdata",
+                                 QString("misc/financequote.pl"));
+    }
     FinanceQuoteProcess getList;
     getList.launch(m_financeQuoteScriptPath);
     while (!getList.isFinished()) {
@@ -722,7 +728,8 @@ FinanceQuoteProcess::FinanceQuoteProcess(void)
   m_fqNames["yahoo_nz"] = "Yahoo New Zealand";
   m_fqNames["zifunds"] = "Zuerich Investments";
   connect(this, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedDataFromFilter()));
-  connect(this, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotProcessExited(int,QProcess::ExitStatus)));
+  connect(this, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotProcessExited()));
+  connect(this, SIGNAL(error(QProcess::ProcessError)), this, SLOT(slotProcessExited()));
 }
 
 void FinanceQuoteProcess::slotReceivedDataFromFilter()
@@ -733,7 +740,7 @@ void FinanceQuoteProcess::slotReceivedDataFromFilter()
   m_string += QString(data);
 }
 
-void FinanceQuoteProcess::slotProcessExited(int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/)
+void FinanceQuoteProcess::slotProcessExited()
 {
 //   kDebug(2) << "WebPriceQuoteProcess::slotProcessExited()";
   m_isDone = true;

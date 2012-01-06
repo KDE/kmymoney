@@ -88,7 +88,7 @@ public:
 
 public slots:
   void slotReceivedDataFromFilter();
-  void slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus);
+  void slotProcessExited();
 
 private:
   bool m_isDone;
