@@ -57,6 +57,7 @@ void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
   QFile qifFile(filename);
   if (qifFile.open(QIODevice::WriteOnly)) {
     QTextStream s(&qifFile);
+    s.setCodec("UTF-8");
 
     try {
       if (categoryData) {
