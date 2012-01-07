@@ -90,7 +90,7 @@ public:
   }
 
   virtual void setFocus(bool /*focus*/, bool updateLens = true) {
-    updateLens = false;
+    Q_UNUSED(updateLens);
   }
 
   virtual bool isErronous(void) const = 0;
