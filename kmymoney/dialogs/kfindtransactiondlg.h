@@ -95,6 +95,7 @@ public:
     userDefined,
     last3ToNext3Months,
     last11Months,
+    next18Months,
     // insert new constants above of this line
     dateOptionCount
   };
