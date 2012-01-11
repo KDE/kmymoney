@@ -83,7 +83,7 @@ void ReportAccount::calculateAccountHierarchy(void)
 #else
   m_nameHierarchy.prepend(file->account(resultid).name());
 #endif
-  while (!file->isStandardAccount(parentid)) {
+  while (!parentid.isEmpty() && !file->isStandardAccount(parentid)) {
     // take on the identity of our parent
     resultid = parentid;
 
@@ -307,7 +307,7 @@ ReportAccount ReportAccount::topParent(void) const
   QString resultid = id();
   QString parentid = parentAccountId();
 
-  while (!file->isStandardAccount(parentid)) {
+  while (!parentid.isEmpty() && !file->isStandardAccount(parentid)) {
     // take on the identity of our parent
     resultid = parentid;
 
