@@ -4288,6 +4288,9 @@ void KMyMoneyApp::slotScheduleDuplicate(void)
     sch.clearId();
     sch.setLastPayment(QDate());
     sch.setName(i18nc("Copy of scheduled transaction name", "Copy of %1", sch.name()));
+    // make sure that we set a valid next due date if the original next due date is invalid
+    if (!sch.nextDueDate().isValid())
+      sch.setNextDueDate(QDate::currentDate());
 
     MyMoneyFileTransaction ft;
     try {
@@ -4299,7 +4302,7 @@ void KMyMoneyApp::slotScheduleDuplicate(void)
         d->m_myMoneyView->slotScheduleSelected(sch.id());
 
     } catch (MyMoneyException* e) {
-      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to duplicate transaction(s): %1, thrown in %2:%3", e->what(), e->file(), e->line()));
+      KMessageBox::detailedSorry(0, i18n("Unable to duplicate scheduled transaction: '%1'", d->m_selectedSchedule.name()), e->what());
       delete e;
     }
   }
