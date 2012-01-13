@@ -619,9 +619,9 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
               KGlobal::locale()->formatDate(sched.adjustedNextDueDate(), KLocale::ShortDate) +
               "</td><td>";
         if (pathEnter.length() > 0)
-          tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"file://%1\" border=\"0\"></a>").arg(pathEnter) + linkend();
+          tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathEnter) + linkend();
         if (pathSkip.length() > 0)
-          tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"file://%1\" border=\"0\"></a>").arg(pathSkip) + linkend();
+          tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathSkip) + linkend();
 
         tmp += QString("&nbsp;");
         tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=edit").arg(sched.id()), i18n("Edit schedule")) + sched.name() + linkend();
