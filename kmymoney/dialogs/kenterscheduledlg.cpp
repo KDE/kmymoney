@@ -110,9 +110,6 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
   connect(buttonHelp, SIGNAL(clicked()), this, SLOT(slotShowHelp()));
   connect(buttonIgnore, SIGNAL(clicked()), this, SLOT(slotIgnore()));
   connect(buttonSkip, SIGNAL(clicked()), this, SLOT(slotSkip()));
-
-  // force the initial height to be as small as possible
-  QTimer::singleShot(0, this, SLOT(slotSetupSize()));
 }
 
 KEnterScheduleDlg::~KEnterScheduleDlg()
@@ -188,6 +185,9 @@ int KEnterScheduleDlg::exec(void)
     d->m_showWarningOnce = false;
     KMessageBox::information(this, QString("<qt>") + i18n("<p>Please check that all the details in the following dialog are correct and press OK.</p><p>Editable data can be changed and can either be applied to just this occurrence or for all subsequent occurrences for this schedule.  (You will be asked what you intend after pressing OK in the following dialog)</p>") + QString("</qt>"), i18n("Enter scheduled transaction"), "EnterScheduleDlgInfo");
   }
+
+  // force the initial height to be as small as possible
+  QTimer::singleShot(0, this, SLOT(slotSetupSize()));
 
   return KEnterScheduleDlgDecl::exec();
 }
