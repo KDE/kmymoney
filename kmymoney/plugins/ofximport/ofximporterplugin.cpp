@@ -236,13 +236,13 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
   }
 
   if (data.check_number_valid == true) {
-    t.m_strNumber = data.check_number;
+    t.m_strNumber = QString::fromUtf8(data.check_number);
   }
 
   if (data.fi_id_valid == true) {
-    t.m_strBankID = QString("ID ") + QString(data.fi_id);
+    t.m_strBankID = QString("ID ") + QString::fromUtf8(data.fi_id);
   } else if (data.reference_number_valid == true) {
-    t.m_strBankID = QString("REF ") + QString(data.reference_number);
+    t.m_strBankID = QString("REF ") + QString::fromUtf8(data.reference_number);
   }
 
   // Decide whether to use NAME, PAYEEID or MEMO to construct the payee
@@ -254,27 +254,27 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
       validity[0] = data.payee_id_valid;
       validity[1] = data.name_valid;
       validity[2] = data.memo_valid;
-      values += data.payee_id;
-      values += data.name;
-      values += data.memo;
+      values += QString::fromUtf8(data.payee_id);
+      values += QString::fromUtf8(data.name);
+      values += QString::fromUtf8(data.memo);
       break;
 
     case OfxImporterPlugin::Private::PreferName:  // NAME
       validity[0] = data.name_valid;
       validity[1] = data.payee_id_valid;
       validity[2] = data.memo_valid;
-      values += data.name;
-      values += data.payee_id;
-      values += data.memo;
+      values += QString::fromUtf8(data.name);
+      values += QString::fromUtf8(data.payee_id);
+      values += QString::fromUtf8(data.memo);
       break;
 
     case OfxImporterPlugin::Private::PreferMemo:  // MEMO
       validity[0] = data.memo_valid;
       validity[1] = data.payee_id_valid;
       validity[2] = data.name_valid;
-      values += data.memo;
-      values += data.payee_id;
-      values += data.name;
+      values += QString::fromUtf8(data.memo);
+      values += QString::fromUtf8(data.payee_id);
+      values += QString::fromUtf8(data.name);
       break;
   }
 
@@ -288,7 +288,7 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
   // extract memo field if we haven't used it as payee
   if ((data.memo_valid == true)
       && (pofx->d->m_preferName != OfxImporterPlugin::Private::PreferMemo)) {
-    t.m_strMemo = data.memo;
+    t.m_strMemo = QString::fromUtf8(data.memo);
   }
 
   // If the payee or memo fields are blank, set them to
@@ -306,11 +306,11 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
     struct OfxSecurityData* secdata = data.security_data_ptr;
 
     if (secdata->ticker_valid == true) {
-      t.m_strSymbol = secdata->ticker;
+      t.m_strSymbol = QString::fromUtf8(secdata->ticker);
     }
 
     if (secdata->secname_valid == true) {
-      t.m_strSecurity = secdata->secname;
+      t.m_strSecurity = QString::fromUtf8(secdata->secname);
     }
   }
 
@@ -440,10 +440,10 @@ int OfxImporterPlugin::ofxStatementCallback(struct OfxStatementData data, void* 
   pofx->setValid();
 
   if (data.currency_valid == true) {
-    s.m_strCurrency = data.currency;
+    s.m_strCurrency = QString::fromUtf8(data.currency);
   }
   if (data.account_id_valid == true) {
-    s.m_strAccountNumber = data.account_id;
+    s.m_strAccountNumber = QString::fromUtf8(data.account_id);
   }
 
   if (data.date_start_valid == true) {
@@ -479,17 +479,17 @@ int OfxImporterPlugin::ofxAccountCallback(struct OfxAccountData data, void * pv)
   pofx->d->m_valid = true;
 
   if (data.account_id_valid == true) {
-    s.m_strAccountName = data.account_name;
-    s.m_strAccountNumber = data.account_id;
+    s.m_strAccountName = QString::fromUtf8(data.account_name);
+    s.m_strAccountNumber = QString::fromUtf8(data.account_id);
   }
   if (data.bank_id_valid == true) {
-    s.m_strRoutingNumber = data.bank_id;
+    s.m_strRoutingNumber = QString::fromUtf8(data.bank_id);
   }
   if (data.broker_id_valid == true) {
-    s.m_strRoutingNumber = data.broker_id;
+    s.m_strRoutingNumber = QString::fromUtf8(data.broker_id);
   }
   if (data.currency_valid == true) {
-    s.m_strCurrency = data.currency;
+    s.m_strCurrency = QString::fromUtf8(data.currency);
   }
 
   if (data.account_type_valid == true) {
@@ -530,13 +530,13 @@ int OfxImporterPlugin::ofxSecurityCallback(struct OfxSecurityData data, void* pv
   MyMoneyStatement::Security sec;
 
   if (data.unique_id_valid == true) {
-    sec.m_strId = data.unique_id;
+    sec.m_strId = QString::fromUtf8(data.unique_id);
   }
   if (data.secname_valid == true) {
-    sec.m_strName = data.secname;
+    sec.m_strName = QString::fromUtf8(data.secname);
   }
   if (data.ticker_valid == true) {
-    sec.m_strSymbol = data.ticker;
+    sec.m_strSymbol = QString::fromUtf8(data.ticker);
   }
 
   pofx->d->m_securitylist += sec;
@@ -557,13 +557,13 @@ int OfxImporterPlugin::ofxStatusCallback(struct OfxStatusData data, void * pv)
   pofx->d->m_fatalerror = i18n("No accounts found.");
 
   if (data.ofx_element_name_valid == true)
-    message.prepend(QString("%1: ").arg(data.ofx_element_name));
+    message.prepend(QString("%1: ").arg(QString::fromUtf8(data.ofx_element_name)));
 
   if (data.code_valid == true)
-    message += QString("%1 (Code %2): %3").arg(data.name).arg(data.code).arg(data.description);
+    message += QString("%1 (Code %2): %3").arg(QString::fromUtf8(data.name)).arg(data.code).arg(QString::fromUtf8(data.description));
 
   if (data.server_message_valid == true)
-    message += QString(" (%1)").arg(data.server_message);
+    message += QString(" (%1)").arg(QString::fromUtf8(data.server_message));
 
   if (data.severity_valid == true) {
     switch (data.severity) {
