@@ -236,6 +236,10 @@ void MyMoneyMoneyTest::testStringConstructor()
   QVERIFY(m1->valueRef().get_den() == 8);
   delete m1;
 
+  m1 = new MyMoneyMoney("09");
+  QVERIFY(m1->valueRef().get_num() == (9));
+  QVERIFY(m1->valueRef().get_den() == 1);
+  delete m1;
 }
 
 void MyMoneyMoneyTest::testConvert()
