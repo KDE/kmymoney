@@ -111,8 +111,14 @@ void MyMoneyMoney::setFileVersion(fileVersionE version)
 
 
 MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
-    : AlkValue(pszAmount, _decimalSeparator)
+    : AlkValue(QLatin1String("0"), _decimalSeparator)
 {
+  try {
+    AlkValue safeValue(pszAmount, _decimalSeparator);
+    *this = safeValue;
+  } catch (const std::invalid_argument &) {
+    qWarning("Invalid argument passed to AlkValue() in MyMoneyMoney. Arguments to ctor: '%s', '%c'", qPrintable(pszAmount), _decimalSeparator.toLatin1());
+  }
 }
 
 QString MyMoneyMoney::formatMoney(int denom, bool showThousandSeparator) const
