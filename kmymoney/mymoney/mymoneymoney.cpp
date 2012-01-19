@@ -111,7 +111,7 @@ void MyMoneyMoney::setFileVersion(fileVersionE version)
 
 
 MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
-    : AlkValue(QLatin1String("0"), _decimalSeparator)
+    : AlkValue()
 {
   try {
     AlkValue safeValue(pszAmount, _decimalSeparator);
