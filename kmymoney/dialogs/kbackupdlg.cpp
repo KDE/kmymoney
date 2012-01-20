@@ -33,11 +33,11 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kconfig.h>
-#include <kdirselectdialog.h>
 #include <kglobalsettings.h>
 #include <kpushbutton.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
+#include <kfiledialog.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -69,7 +69,7 @@ KBackupDlg::~KBackupDlg()
 
 void KBackupDlg::chooseButtonClicked()
 {
-  KUrl newDir = KDirSelectDialog::selectDirectory(KGlobalSettings::documentPath());
+  KUrl newDir = KFileDialog::getExistingDirectoryUrl(KUrl::fromPath(KGlobalSettings::documentPath()));
   if (newDir.hasPath())
     txtMountPoint->setText(newDir.path());
 }
