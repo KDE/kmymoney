@@ -1130,9 +1130,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       MyMoneySplit s2;
       s2.setAccountId((*it_s).m_accountId);
       MyMoneyAccount acc = file->account(s2.accountId());
-      if (acc.isAssetLiability()) {
-        s2.setPayeeId(s1.payeeId());
-      }
+      s2.setPayeeId(s1.payeeId());
       s2.setMemo((*it_s).m_strMemo);
       s2.setShares((*it_s).m_amount);
       s2.setValue((*it_s).m_amount);
