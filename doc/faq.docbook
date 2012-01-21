@@ -205,7 +205,7 @@
 
 <qandaentry>
  <question>
-   <para>The SVN version is broken! What do I do now?</para>
+   <para>The Git version is broken! What do I do now?</para>
  </question>
  <answer>
    <para>Usually the reason for this is that one of the developers made a change

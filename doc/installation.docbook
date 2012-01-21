@@ -65,7 +65,7 @@
   installation issues will be available on the <ulink
   url="http://www.kmymoney.org">&kappname; home page</ulink>.  That page will
   also have links to tarballs of recent versions as well as instructions for
-  obtaining the source from KDE SVN, in case you want to compile the latest,
+  obtaining the source from &kde; Git, in case you want to compile the latest,
   development version.
 </para>
 
@@ -81,14 +81,14 @@
   On the other hand, if you want to see the current state of development, to
   check out a recent bug fix or new feature, you can download a tarball which is
   a snapshot of the development repository.  You can also check the source
-  directly out of the repository.  The version 4.x source is in &kde; svn.  (The
+  directly out of the repository.  The version 4.x source is in &kde; Git.  (The
   version 1.0.x source is in SourceForge cvs, but it is no longer being
   developed.)  Instructions for access are on the project home page.
 </para>
 
 <warning>
  <para>
-   The code in the svn repository and in development snapshots is under active
+   The code in the Git repository and in development snapshots is under active
    development: it may have bugs, it may crash, and it may mess up or lose data.
    If you use it, be absolutely sure to make adequate backups.  Unless you have
    a good reason to use this, stick to a stable released version.
@@ -148,13 +148,13 @@
 </para></important>
 
 <para>
-  If you have compiled the source from svn, and want to update to the latest
+  If you have compiled the source from git, and want to update to the latest
   revision, most of the time you can do the following:
 </para>
 
 <simplelist>
 <member><command>$ cd &lt;path to root of source&gt;</command></member>
-<member><command>$ svn update</command></member>
+<member><command>$ git pull --rebase</command></member>
 <member><command>$ cd build</command></member>
 <member><command>$ make</command></member>
 <member><command>$ sudo make install/fast</command></member>
@@ -168,7 +168,7 @@
 
 <simplelist>
 <member><command>$ cd &lt;path to root of source&gt;</command></member>
-<member><command>$ svn update</command></member>
+<member><command>$ git pull --rebase</command></member>
 <member><command>$ rm -r build</command></member>
 <member><command>$ mkdir build</command></member>
 <member><command>$ cd build</command></member>
