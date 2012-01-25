@@ -24,10 +24,6 @@ INSTALL(FILES ${storage_HEADERS}
 ############## tests ####################
 IF( KDE4_BUILD_TESTS )
 
-IF(NOT WIN32)
-  # MyMoneyDatabaseMgr
-  set( mymoneydatabasemgrtest_SRCS mymoneydatabasemgrtest.cpp ../mymoneytestutils.cpp )
-
   set(target_link_libraries_test 
 	  ${LIBALKIMIA_LIBRARY}
 	  ${KDE4_KDECORE_LIBS}
@@ -39,6 +35,9 @@ IF(NOT WIN32)
 	  ${QT_QTCORE_LIBRARY}
 	  ${GMP_LIBRARIES} )
 
+IF(NOT WIN32)
+  # MyMoneyDatabaseMgr
+  set( mymoneydatabasemgrtest_SRCS mymoneydatabasemgrtest.cpp ../mymoneytestutils.cpp )
 
   kde4_add_unit_test( mymoneydatabasemgrtest TESTNAME kmymoney-mymoneydatabasemgrtest ${mymoneydatabasemgrtest_SRCS} )
   ADD_DEPENDENCIES( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage )
