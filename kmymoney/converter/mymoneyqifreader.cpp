@@ -447,8 +447,8 @@ bool MyMoneyQifReader::startImport(void)
       m_filter << "type";
       m_filter << QDir::toNativeSeparators(m_filename);
 #else
-      m_filter << "cat";
-      m_filter << "-";
+    m_filter << "cat";
+    m_filter << "-";
 #endif
     } else {
       m_filter << m_qifProfile.filterScriptImport().split(' ', QString::KeepEmptyParts);

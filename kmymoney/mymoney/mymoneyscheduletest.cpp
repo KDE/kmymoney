@@ -1612,8 +1612,8 @@ void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
 {
   MyMoneySchedule s;
 
-  QDate endDate(2011, 8, 13); // this is a nonprocessing day because 
-                              // it's a Saturday
+  QDate endDate(2011, 8, 13); // this is a nonprocessing day because
+  // it's a Saturday
   QDate refDate(2011, 8, 10); // just some ref date before the last payment
 
   s.setStartDate(endDate.addMonths(-1));
@@ -1622,7 +1622,7 @@ void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
   // the next due date is on this day but the policy is to move the
   // schedule to the next processing day (Monday)
   s.setWeekendOption(MyMoneySchedule::MoveAfter);
-  s.setNextDueDate(endDate); 
+  s.setNextDueDate(endDate);
 
   // the payment should be found between the respective date and one month after
   QVERIFY(s.paymentDates(endDate, endDate.addMonths(1)).count() == 1);
@@ -1635,13 +1635,13 @@ void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
   QVERIFY(s.adjustedNextPayment(refDate) == endDate.addDays(2));
 
   // reference for Sunday is still OK
-  QVERIFY(s.adjustedNextPayment(QDate(2011,8,14)) == endDate.addDays(2));
+  QVERIFY(s.adjustedNextPayment(QDate(2011, 8, 14)) == endDate.addDays(2));
 
   // but it is finished on Monday (as reference date)
-  QVERIFY(!s.adjustedNextPayment(QDate(2011,8,15)).isValid());
+  QVERIFY(!s.adjustedNextPayment(QDate(2011, 8, 15)).isValid());
 
   // check the # of remaining transactions
-  s.setNextDueDate(endDate.addMonths(-1)); 
+  s.setNextDueDate(endDate.addMonths(-1));
   QVERIFY(s.transactionsRemaining() == 2);
 }
 
