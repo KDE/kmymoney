@@ -352,11 +352,23 @@ void KMyMoneyUtils::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTr
 
 QString KMyMoneyUtils::nextCheckNumber(const MyMoneyAccount& acc)
 {
-  // determine next check number
   QString number;
-  QRegExp exp(QString("(.*\\D)?(\\d+)(\\D.*)?"));
+  //                   +-#1--+ +#2++-#3-++-#4--+
+  QRegExp exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
   if (exp.indexIn(acc.value("lastNumberUsed")) != -1) {
-    number = QString("%1%2%3").arg(exp.cap(1)).arg(exp.cap(2).toULongLong() + 1).arg(exp.cap(3));
+    QString arg1 = exp.cap(1);
+    QString arg2 = exp.cap(2);
+    QString arg3 = QString::number(exp.cap(3).toULong() + 1);
+    QString arg4 = exp.cap(4);
+    number = QString("%1%2%3%4").arg(arg1).arg(arg2).arg(arg3).arg(arg4);
+
+    // if new number is longer than previous one and we identified
+    // preceeding 0s, then remove one of the preceeding zeros
+    if (arg2.length() > 0 && (number.length() != acc.value("lastNumberUsed").length()))
+    {
+      arg2 = arg2.mid(1);
+      number = QString("%1%2%3%4").arg(arg1).arg(arg2).arg(arg3).arg(arg4);
+    }
   } else {
     number = '1';
   }
