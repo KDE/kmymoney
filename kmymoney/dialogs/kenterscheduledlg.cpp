@@ -49,6 +49,7 @@
 #include <kmymoneyaccountselector.h>
 #include <kmymoneydateinput.h>
 #include <ktoolinvocation.h>
+#include <kmymoneyglobalsettings.h>
 
 #include "kmymoney.h"
 
@@ -71,7 +72,7 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
 {
   d->m_schedule = schedule;
   d->m_extendedReturnCode = KMyMoneyUtils::Enter;
-  buttonOk->setIcon(KIcon("go-jump-locationbar"));
+  buttonOk->setIcon(KIcon(KMyMoneyGlobalSettings::enterScheduleIcon()));
   buttonSkip->setIcon(KIcon("media-seek-forward"));
   buttonCancel->setGuiItem(KStandardGuiItem::cancel());
   buttonHelp->setGuiItem(KStandardGuiItem::help());

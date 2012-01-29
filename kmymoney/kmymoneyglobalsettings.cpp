@@ -26,6 +26,7 @@
 
 #include <KGlobalSettings>
 #include <KColorScheme>
+#include <kdeversion.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -138,4 +139,13 @@ MyMoneyForecast KMyMoneyGlobalSettings::forecast(void)
   forecast.setIncludeScheduledTransactions(KMyMoneyGlobalSettings::includeScheduledTransactions());
 
   return forecast;
+}
+
+QString KMyMoneyGlobalSettings::enterScheduleIcon(void)
+{
+  if (KDE::version() >= 0x040800) {
+    return QLatin1String("key-enter");
+  }
+
+  return QLatin1String("go-jump-locationbar");
 }

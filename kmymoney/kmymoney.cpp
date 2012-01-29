@@ -922,7 +922,7 @@ void KMyMoneyApp::initActions(void)
 
   KAction *schedule_enter = actionCollection()->addAction("schedule_enter");
   schedule_enter->setText(i18n("Enter next transaction..."));
-  schedule_enter->setIcon(KIcon("go-jump-locationbar"));
+  schedule_enter->setIcon(KIcon(KMyMoneyGlobalSettings::enterScheduleIcon()));
   connect(schedule_enter, SIGNAL(triggered()), this, SLOT(slotScheduleEnter()));
 
   KAction *schedule_skip = actionCollection()->addAction("schedule_skip");
