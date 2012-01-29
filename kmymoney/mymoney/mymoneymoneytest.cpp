@@ -237,7 +237,11 @@ void MyMoneyMoneyTest::testStringConstructor()
   delete m1;
 
   m1 = new MyMoneyMoney("09");
-  QVERIFY(m1->valueRef().get_num() == 0);
+  // this is tricky: using libalkimia 4.3.1 returns 0 here
+  // and newer version return 0. Since we cannot determine
+  // the version of the library used here, we check against
+  // both values
+  QVERIFY((m1->valueRef().get_num() == 0) || (m1->valueRef().get_num() == 9));
   QVERIFY(m1->valueRef().get_den() == 1);
   delete m1;
 }
