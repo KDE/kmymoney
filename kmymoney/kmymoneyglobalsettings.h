@@ -70,5 +70,11 @@ public:
     * their KMyMoneyMVCCombo::setSubstringSearch() method
     */
   static void setSubstringSearch(QWidget* w);
+
+  /**
+    * Returns the name of the icon to be used for the 'enter schedule'
+    * action depending on the underlying KDE version
+    */
+  static QString enterScheduleIcon(void);
 };
 #endif

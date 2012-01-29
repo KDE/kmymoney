@@ -36,6 +36,7 @@
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kpushbutton.h>
+#include <kdeversion.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -61,8 +62,14 @@ KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
                        i18n("Use this button to skip this transaction"));
   m_skipButton->setGuiItem(skipGuiItem);
 
+  // as of KDE 4.8 the icon we use here move to a different location
+  QString iconName("go-jump-locationbar");;
+  if (KDE::version() >= 0x040800) {
+    iconName = QLatin1String("key-enter");
+  }
+
   KGuiItem enterGuiItem(i18n("&Enter"),
-                        KIcon("go-jump-locationbar"),
+                        KIcon(iconName),
                         i18n("Record this transaction into the register"),
                         i18n("Use this button to record this transaction"));
   m_buttonEnter->setGuiItem(enterGuiItem);
