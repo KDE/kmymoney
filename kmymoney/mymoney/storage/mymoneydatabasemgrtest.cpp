@@ -81,44 +81,47 @@ void MyMoneyDatabaseMgrTest::testEmptyConstructor()
 
 void MyMoneyDatabaseMgrTest::testCreateDb()
 {
+  try {
+    // Fetch the list of available drivers
+    QStringList list = QSqlDatabase::drivers();
+    QStringList::Iterator it = list.begin();
 
-  // Fetch the list of available drivers
-  QStringList list = QSqlDatabase::drivers();
-  QStringList::Iterator it = list.begin();
-
-  if (it == list.end()) {
-    m_canOpen = false;
-  } else {
-    struct passwd * pwd = getpwuid(geteuid());
-    QString userName;
-    if (pwd != 0) {
-      userName = QString(pwd->pw_name);
-    }
-
-    QString dir(qgetenv("TMPDIR"));
-    if (!dir.isEmpty() && !dir.endsWith('/')) {
-      dir += '/';
-    }
-
-    QString mode =
-      //"QPSQL&mode=single";
-      //"QMYSQL&mode=single";
-      "QSQLITE&mode=single";
-
-    m_url = QString("sql://%1@localhost/%2kmm_test_driver?driver=%3")
-            .arg(userName, dir, mode);
-
-    KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
-    QVERIFY(0 != sql);
-    //qDebug("Database driver is %s", qPrintable(sql->driverName()));
-    // Clear the database, so there is a fresh start on each run.
-    if (0 == sql->open(m_url, QIODevice::WriteOnly, true)) {
-      MyMoneyFile::instance()->attachStorage(m);
-      QVERIFY(sql->writeFile());
-      QVERIFY(0 == sql->upgradeDb());
-    } else {
+    if (it == list.end()) {
       m_canOpen = false;
+    } else {
+      struct passwd * pwd = getpwuid(geteuid());
+      QString userName;
+      if (pwd != 0) {
+        userName = QString(pwd->pw_name);
+      }
+
+      QString dir(qgetenv("TMPDIR"));
+      if (!dir.isEmpty() && !dir.endsWith('/')) {
+        dir += '/';
+      }
+
+      QString mode =
+        //"QPSQL&mode=single";
+        //"QMYSQL&mode=single";
+        "QSQLITE&mode=single";
+
+      m_url = QString("sql://%1@localhost/%2kmm_test_driver?driver=%3")
+              .arg(userName, dir, mode);
+
+      KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
+      QVERIFY(0 != sql);
+      //qDebug("Database driver is %s", qPrintable(sql->driverName()));
+      // Clear the database, so there is a fresh start on each run.
+      if (0 == sql->open(m_url, QIODevice::WriteOnly, true)) {
+        MyMoneyFile::instance()->attachStorage(m);
+        QVERIFY(sql->writeFile());
+        QVERIFY(0 == sql->upgradeDb());
+      } else {
+        m_canOpen = false;
+      }
     }
+  } catch (MyMoneyException* e) {
+    unexpectedException(e);
   }
 }
 

@@ -3343,7 +3343,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
       queryString += QString(" id = :id%1 OR").arg(i);
     queryString = queryString.left(queryString.length() - 2);
   }
-  queryString += " ORDER BY id;";
+  queryString += " ORDER BY id";
 
   if (forUpdate)
     queryString += m_driver->forUpdateString();
