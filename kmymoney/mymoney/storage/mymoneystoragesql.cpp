@@ -3122,13 +3122,11 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
   if (!canImplementFilter) {
     QMap<QString, MyMoneyTransaction> transactionList =  fetchTransactions();
     QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
-    QMap<QString, MyMoneyTransaction>::ConstIterator txListEnd = transactionList.constEnd();
 
     std::remove_if(transactionList.begin(), transactionList.end(), FilterFail(filter, m_storagePtr));
     return transactionList;
   }
 
-  bool accountsOnlyFilter = true;
   bool splitFilterActive = false; // the split filter is active if we are selecting on fields in the split table
   // get start and end dates
   QDate start = filter.fromDate();
@@ -3137,15 +3135,12 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
   // it only causes us to read a few more transactions that strictly necessary (I think...)
   if (start == m_startDate) start = QDate();
   bool txFilterActive = ((start != QDate()) || (end != QDate())); // and this for fields in the transaction table
-  if (txFilterActive) accountsOnlyFilter = false;
 
   QString whereClause = "";
   QString subClauseconnector = " where txType = 'N' and ";
   // payees
   QStringList payees;
-  //filter.payees(payees);
   if (filter.payees(payees)) {
-    accountsOnlyFilter = false;
     QString itemConnector = "payeeId in (";
     QString payeesClause = "";
     foreach (const QString& it, payees) {
@@ -3166,12 +3161,9 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
     QString itemConnector = "accountId in (";
     QString accountsClause = "";
     foreach (const QString& it, accounts) {
-//      if (m_accountsLoaded.find(*it) == m_accountsLoaded.end()) {
       accountsClause.append(QString("%1 '%2'")
                             .arg(itemConnector).arg(it));
       itemConnector = ", ";
-      //if (accountsOnlyFilter) m_accountsLoaded.append(*it); // a bit premature...
-//      }
     }
     if (!accountsClause.isEmpty()) {
       whereClause += subClauseconnector + accountsClause + ')';
