@@ -3554,6 +3554,7 @@ void KMyMoneyApp::slotAccountEdit(void)
               s1.setShares(-bal);
               s1.setValue(-bal);
               t.modifySplit(s1);
+              t.setPostDate(account.openingDate());
               file->modifyTransaction(t);
 
             } else if (tid.isEmpty() && !dlg->openingBalance().isZero()) {
