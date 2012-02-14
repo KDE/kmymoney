@@ -64,11 +64,11 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
   m_filterProxyModel->setSourceModel(Models::instance()->institutionsModel());
   m_filterProxyModel->setFilterKeyColumn(-1);
 
+  m_accountTree->setModel(m_filterProxyModel);
   m_accountTree->setConfigGroupName("KInstitutionsView");
   m_accountTree->setAlternatingRowColors(true);
   m_accountTree->setIconSize(QSize(22, 22));
   m_accountTree->setSortingEnabled(true);
-  m_accountTree->setModel(m_filterProxyModel);
 
   // let the model know if the item is expanded or collapsed
   connect(m_accountTree, SIGNAL(collapsed(QModelIndex)), m_filterProxyModel, SLOT(collapsed(QModelIndex)));
