@@ -372,11 +372,12 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_filterProxyModel = new BudgetAccountsProxyModel(this);
   m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
   m_filterProxyModel->setFilterKeyColumn(-1);
+
+  m_accountTree->setModel(m_filterProxyModel);
   m_accountTree->setConfigGroupName("KBudgetsView");
   m_accountTree->setAlternatingRowColors(true);
   m_accountTree->setIconSize(QSize(22, 22));
   m_accountTree->setSortingEnabled(true);
-  m_accountTree->setModel(m_filterProxyModel);
 
   connect(m_filterProxyModel, SIGNAL(balanceChanged(MyMoneyMoney)), this, SLOT(slotBudgetBalanceChanged(MyMoneyMoney)));
 

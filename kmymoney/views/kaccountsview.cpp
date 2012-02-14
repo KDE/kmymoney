@@ -90,11 +90,11 @@ KAccountsView::KAccountsView(QWidget *parent) :
 
   connect(m_filterProxyModel, SIGNAL(unusedIncomeExpenseAccountHidden()), this, SLOT(slotUnusedIncomeExpenseAccountHidden()));
 
+  m_accountTree->setModel(m_filterProxyModel);
   m_accountTree->setConfigGroupName("KAccountsView");
   m_accountTree->setAlternatingRowColors(true);
   m_accountTree->setIconSize(QSize(22, 22));
   m_accountTree->setSortingEnabled(true);
-  m_accountTree->setModel(m_filterProxyModel);
 
   m_assetsGroup->setLayout(m_assetsListLayout);
   m_liabilitiesGroup->setLayout(m_liabilitiesListLayout);
