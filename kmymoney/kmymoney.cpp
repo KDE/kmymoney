@@ -851,12 +851,12 @@ void KMyMoneyApp::initActions(void)
   connect(transaction_select_all, SIGNAL(triggered()), this, SIGNAL(selectAllTransactions()));
 
   KAction *transaction_goto_account = actionCollection()->addAction("transaction_goto_account");
-  transaction_goto_account->setText(i18n("Goto account"));
+  transaction_goto_account->setText(i18n("Go to account"));
   transaction_goto_account->setIcon(KIcon("go-jump"));
   connect(transaction_goto_account, SIGNAL(triggered()), this, SLOT(slotTransactionGotoAccount()));
 
   KAction *transaction_goto_payee = actionCollection()->addAction("transaction_goto_payee");
-  transaction_goto_payee->setText(i18n("Goto payee"));
+  transaction_goto_payee->setText(i18n("Go to payee"));
   transaction_goto_payee->setIcon(KIcon("go-jump"));
   connect(transaction_goto_payee, SIGNAL(triggered()), this, SLOT(slotTransactionGotoPayee()));
 
@@ -6331,7 +6331,7 @@ void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransac
             d->m_payeeGoto = payee.id();
             QString name = payee.name();
             name.replace(QRegExp("&(?!&)"), "&&");
-            action("transaction_goto_payee")->setText(i18n("Goto '%1'", name));
+            action("transaction_goto_payee")->setText(i18n("Go to '%1'", name));
           }
         } catch (MyMoneyException *e) {
           delete e;
@@ -6353,7 +6353,7 @@ void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransac
               d->m_accountGoto = acc.id();
               QString name = acc.name();
               name.replace(QRegExp("&(?!&)"), "&&");
-              action("transaction_goto_account")->setText(i18n("Goto '%1'", name));
+              action("transaction_goto_account")->setText(i18n("Go to '%1'", name));
               break;
             }
           }
@@ -6375,9 +6375,9 @@ void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransac
 
   // make sure, we show some neutral menu entry if we don't have an object
   if (d->m_payeeGoto.isEmpty())
-    action("transaction_goto_payee")->setText(i18n("Goto payee"));
+    action("transaction_goto_payee")->setText(i18n("Go to payee"));
   if (d->m_accountGoto.isEmpty())
-    action("transaction_goto_account")->setText(i18n("Goto account"));
+    action("transaction_goto_account")->setText(i18n("Go to account"));
 }
 
 void KMyMoneyApp::slotSelectInstitution(const MyMoneyObject& institution)
