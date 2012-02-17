@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -91,7 +91,6 @@ void PercentLyingBarDiagram::paint( PaintContext* ctx )
     double barWidth = 0;
     double maxDepth = 0;
     double width = boundLeft.y() - boundRight.y();
-    QPointF testVector = boundRight - boundLeft;
     double groupWidth = width/ (rowCount + 2);
     double spaceBetweenBars = 0;
     double spaceBetweenGroups = 0;

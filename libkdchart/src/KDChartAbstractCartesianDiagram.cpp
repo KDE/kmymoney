@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -84,6 +84,12 @@ void AbstractCartesianDiagram::init()
     d->compressor.setModel( attributesModel() );
     connect( this, SIGNAL( layoutChanged( AbstractDiagram* ) ),
              &( d->compressor ), SLOT( slotDiagramLayoutChanged( AbstractDiagram* ) ) );
+    if ( d->plane )
+    {
+        const bool res = connect( d->plane, SIGNAL( viewportCoordinateSystemChanged() ), this, SIGNAL( viewportCoordinateSystemChanged() ) );
+        Q_UNUSED( res )
+        Q_ASSERT( res );
+    }
 }
 
 void AbstractCartesianDiagram::addAxis( CartesianAxis *axis )
@@ -145,6 +151,12 @@ void KDChart::AbstractCartesianDiagram::setCoordinatePlane( AbstractCoordinatePl
                  plane, SLOT( relayout() ), Qt::QueuedConnection );
         connect( attributesModel(), SIGNAL( columnsInserted( const QModelIndex&, int, int ) ),
                  plane, SLOT( relayout() ), Qt::QueuedConnection );
+        Q_ASSERT( plane );
+        bool con = connect( plane, SIGNAL( viewportCoordinateSystemChanged() ), this, SIGNAL( viewportCoordinateSystemChanged() ) );
+        Q_UNUSED( con ) //not read in release builds
+        Q_ASSERT( con );
+        con = connect( plane, SIGNAL( viewportCoordinateSystemChanged() ), this, SLOT( update() ) );
+        Q_ASSERT( con );
     }
     // show the axes, after all have been layoutPlanes
     // (because they might depend on each other)

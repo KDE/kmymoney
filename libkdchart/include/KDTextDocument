@@ -1,1 +1,1 @@
-#include "../src/KDTextDocument.h"
+#include "KDTextDocument.h"

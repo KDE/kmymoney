@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -36,6 +36,7 @@
 #include "KDChartPaintContext.h"
 #include "KDChartPainterSaver_p.h"
 #include "KDChartBarDiagram.h"
+#include "KDChartStockDiagram.h"
 
 #include <KDABLibFakes>
 
@@ -279,6 +280,7 @@ DataDimensionsList CartesianCoordinatePlane::getDataDimensionsList() const
     if( dgr && dgr->referenceDiagram() )
     	dgr = dgr->referenceDiagram();
 	const BarDiagram *barDiagram = qobject_cast< const BarDiagram* >( dgr );
+        const StockDiagram *stockDiagram = qobject_cast< const StockDiagram* >( dgr );
 
 	// note:
 	// It does make sense to retrieve the orientation from the first diagram. This is because
@@ -301,7 +303,7 @@ DataDimensionsList CartesianCoordinatePlane::getDataDimensionsList() const
         l.append(
             DataDimension(
                 r.left(), r.right(),
-                diagramIsVertical ? ( dgr->datasetDimension() > 1 ) : true,
+                diagramIsVertical ? ( !stockDiagram && dgr->datasetDimension() > 1 ) : true,
                 axesCalcModeX(),
                 gaH.gridGranularitySequence(),
                 gaH.gridStepWidth(),
@@ -412,19 +414,41 @@ void CartesianCoordinatePlane::layoutDiagrams()
                               qAbs ( diagramYUnitInCoordinatePlane ) );
 
         scaleX = qAbs( scale / diagramXUnitInCoordinatePlane );
-        scaleY = qAbs( scale / diagramYUnitInCoordinatePlane );
+        scaleY = qAbs( scale / diagramYUnitInCoordinatePlane );        
     } else {
         scaleX = 1.0;
         scaleY = 1.0;
     }
 
     const QPointF logicalTopLeft = logArea.topLeft();
-    // calculate diagram origin in plane coordinates:
-    QPointF coordinateOrigin = QPointF ( logicalTopLeft.x() * -diagramXUnitInCoordinatePlane,
-                                         logicalTopLeft.y() * -diagramYUnitInCoordinatePlane );
-    coordinateOrigin += physicalArea.topLeft();
+    if ( d->isometricScaling )
+    {
+        QRectF physicalArea( drawingArea() );
+        QSizeF size = physicalArea.size();
+        size.rheight() *= scaleY;
+        size.rwidth() *= scaleX;
+        physicalArea.setSize( size );
 
-    d->coordinateTransformation.originTranslation = coordinateOrigin;
+        d->coordinateTransformation.unitVectorX = logArea.width()  != 0 ? physicalArea.width()  / logArea.width()  : 1.0;
+        d->coordinateTransformation.unitVectorY = logArea.height() != 0 ? physicalArea.height() / logArea.height() : 1.0;
+
+        // calculate diagram origin in plane coordinates:
+        QPointF coordinateOrigin = QPointF ( logicalTopLeft.x() * -d->coordinateTransformation.unitVectorX,
+                                             logicalTopLeft.y() * -d->coordinateTransformation.unitVectorY );
+        coordinateOrigin += physicalArea.topLeft();
+
+        d->coordinateTransformation.originTranslation = coordinateOrigin;
+    }
+    else
+    {
+        // calculate diagram origin in plane coordinates:
+        QPointF coordinateOrigin = QPointF ( logicalTopLeft.x() * -diagramXUnitInCoordinatePlane,
+                                             logicalTopLeft.y() * -diagramYUnitInCoordinatePlane );
+        coordinateOrigin += physicalArea.topLeft();
+
+        d->coordinateTransformation.originTranslation = coordinateOrigin;
+    }
+
 
     // As in the first quadrant of the coordinate system, the origin is the bottom left, not top left.
     // This origin is then the top left point of the resulting diagramRect for our coordinateTransformation.
@@ -569,9 +593,18 @@ bool CartesianCoordinatePlane::doneSetZoomFactorY( double factor )
 
 bool CartesianCoordinatePlane::doneSetZoomCenter( const QPointF& point )
 {
-    const bool done = ( d->coordinateTransformation.zoom.center() != point );
+    QPointF p ( point );
+    if ( d->reverseHorizontalPlane )
+    {
+        p.rx() = 1.0 - p.x();
+    }
+    if ( d->reverseVerticalPlane )
+    {
+        p.ry() = 1.0 - p.y();
+    }
+    const bool done = ( d->coordinateTransformation.zoom.center() != p );
     if( done ){
-        d->coordinateTransformation.zoom.setCenter( point );
+        d->coordinateTransformation.zoom.setCenter( p );
         if( d->autoAdjustGridToZoom )
             d->grid->setNeedRecalculate();
     }
@@ -608,7 +641,16 @@ void CartesianCoordinatePlane::setZoomCenter( const QPointF& point )
 
 QPointF CartesianCoordinatePlane::zoomCenter() const
 {
-    return d->coordinateTransformation.zoom.center();
+    QPointF center = d->coordinateTransformation.zoom.center();
+    if ( d->reverseHorizontalPlane )
+    {
+        center.rx() = 1.0 - center.x();
+    }
+    if ( d->reverseVerticalPlane )
+    {
+        center.ry() = 1.0 - center.y();
+    }
+    return center;
 }
 
 double CartesianCoordinatePlane::zoomFactorX() const
@@ -639,6 +681,9 @@ void CartesianCoordinatePlane::setAxesCalcModes( AxesCalcMode mode )
         d->coordinateTransformation.axesCalcModeY = mode;
         d->coordinateTransformation.axesCalcModeX = mode;
         emit propertiesChanged();
+        emit viewportCoordinateSystemChanged();
+        Q_FOREACH( AbstractDiagram* diag, diagrams() )
+        slotLayoutChanged( diag );
     }
 }
 
@@ -647,6 +692,8 @@ void CartesianCoordinatePlane::setAxesCalcModeY( AxesCalcMode mode )
     if( d->coordinateTransformation.axesCalcModeY != mode ){
         d->coordinateTransformation.axesCalcModeY = mode;
         emit propertiesChanged();
+        setGridNeedsRecalculate();
+        emit viewportCoordinateSystemChanged();
     }
 }
 
@@ -655,6 +702,7 @@ void CartesianCoordinatePlane::setAxesCalcModeX( AxesCalcMode mode )
     if( d->coordinateTransformation.axesCalcModeX != mode ){
         d->coordinateTransformation.axesCalcModeX = mode;
         emit propertiesChanged();
+        emit viewportCoordinateSystemChanged();
     }
 }
 

@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -651,14 +651,16 @@ void KDChart::TextLayoutItem::paint( QPainter* painter )
     //painter->drawRect( QRect(QPoint((rect.topRight().toPoint() + rect.bottomRight().toPoint()) / 2 - QPoint(2,2)), QSize(3,3)) );
 #endif
     painter->setPen( PrintingParameters::scalePen( mAttributes.pen() ) );
-    QFontMetrics fontMetrics( f );
-    const int AHight = fontMetrics.boundingRect( QChar::fromAscii( 'A' ) ).height();
-    const qreal AVCenter = fontMetrics.ascent() - AHight / 2.0;
-    // Make sure that capital letters are vertically centered. This looks much
-    // better than just centering the text's bounding rect.
-    rect.translate( 0.0, rect.height() / 2.0 - AVCenter );
-    //painter->drawText( rect, Qt::AlignHCenter | Qt::AlignTop, mText );
-    painter->drawText( rect, mTextAlignment, mText );
+//    QTextDocument* document = mAttributes.textDocument();
+//    if ( document ) {
+//        document->setPageSize(QSize(rect.width(), rect.height()));
+//        document->setHtml(mText);
+//        QAbstractTextDocumentLayout::PaintContext paintcontext;
+//        paintcontext.clip = rect;
+//        document->documentLayout()->draw(painter, paintcontext);
+//    } else {
+        painter->drawText( rect, mTextAlignment, mText );
+//    }
 
 //    if (  calcSizeHint( realFont() ).width() > rect.width() )
 //        qDebug() << "rect.width()" << rect.width() << "text.width()" << calcSizeHint( realFont() ).width();

@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -950,9 +950,22 @@ void Legend::buildLegend()
             ? KDChartEnums::MeasureOrientationMinimum
             : KDChartEnums::MeasureOrientationHorizontal;
     const TextAttributes labelAttrs( textAttributes() );
-    const qreal fontHeight = labelAttrs.calculatedFontSize( referenceArea(), orient );
+    /*const*/ qreal fontHeight = labelAttrs.calculatedFontSize( referenceArea(), orient );
     const LegendStyle style = legendStyle();
-    //qDebug() << "fontHeight:" << fontHeight;
+    QFont tmpFont = labelAttrs.font();
+    tmpFont.setPointSizeF( fontHeight );
+
+    if ( GlobalMeasureScaling::paintDevice() )
+    {
+        QFontMetricsF metr( tmpFont, GlobalMeasureScaling::paintDevice() );
+        fontHeight = metr.height();
+    }
+    else
+    {
+        QFontMetricsF metr( tmpFont );
+        fontHeight = metr.height();
+    }
+
 
     const bool bShowMarkers = (style != LinesOnly);
 

@@ -1,1 +1,1 @@
-#include "../src/KDChartAbstractProxyModel.h"
+#include "KDChartAbstractProxyModel.h"

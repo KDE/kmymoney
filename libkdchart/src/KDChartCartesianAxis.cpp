@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -74,6 +74,7 @@ void CartesianAxis::init ()
 {
     d->position = Bottom;
     setCachedSizeDirty();
+    connect( this, SIGNAL( coordinateSystemChanged() ), SLOT( coordinateSystemChanged() ) );
 }
 
 
@@ -93,6 +94,11 @@ bool CartesianAxis::compare( const CartesianAxis* other )const
             ( position()            == other->position() ) &&
             ( titleText()           == other->titleText() ) &&
             ( titleTextAttributes() == other->titleTextAttributes() );
+}
+
+void CartesianAxis::coordinateSystemChanged()
+{
+    layoutPlanes();
 }
 
 
@@ -335,7 +341,7 @@ void CartesianAxis::Private::drawSubUnitRulers( QPainter* painter, CartesianCoor
                 }
         }
         if ( isLogarithmic ){
-            if( logSubstep == 9 ){
+            if( logSubstep == 9 ){                
                 fLogSubstep *= ( fLogSubstep > 0.0 ) ? 10.0 : 0.1;
                 if( fLogSubstep == 0 )
                     fLogSubstep = 0.01;

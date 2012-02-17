@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -357,7 +357,7 @@ void PieDiagram::paintInternal(PaintContext* ctx, QRectF& textBoundingRect)
 
     d->clearListOfAlreadyDrawnDataValueTexts();
 
-    drawOnePie( ctx->painter(), &list, 0, backmostpie, granularity(), sizeFor3DEffect );
+    drawOnePie( ctx->painter(), &list, 0, backmostpie, granularity(), sizeFor3DEffect, sum );
 
     if( backmostpie == frontmostpie )
     {
@@ -369,20 +369,20 @@ void PieDiagram::paintInternal(PaintContext* ctx, QRectF& textBoundingRect)
     while( currentLeftPie != frontmostpie )
     {
         if( currentLeftPie != backmostpie )
-            drawOnePie( ctx->painter(), &list, 0, currentLeftPie, granularity(), sizeFor3DEffect );
+            drawOnePie( ctx->painter(), &list, 0, currentLeftPie, granularity(), sizeFor3DEffect, sum );
         currentLeftPie = findLeftPie( currentLeftPie, colCount );
     }
     while( currentRightPie != frontmostpie )
     {
         if( currentRightPie != backmostpie )
-            drawOnePie( ctx->painter(), &list, 0, currentRightPie, granularity(), sizeFor3DEffect );
+            drawOnePie( ctx->painter(), &list, 0, currentRightPie, granularity(), sizeFor3DEffect, sum );
         currentRightPie = findRightPie( currentRightPie, colCount );
     }
 
     // if the backmost pie is not the frontmost pie, we draw the frontmost at last
     if( backmostpie != frontmostpie || ! threeDPieAttributes().isEnabled() )
     {
-        drawOnePie( ctx->painter(), &list, 0, frontmostpie, granularity(), sizeFor3DEffect );
+        drawOnePie( ctx->painter(), &list, 0, frontmostpie, granularity(), sizeFor3DEffect, sum );
     // otherwise, this gets a bit more complicated...
 /*    } else if( threeDPieAttributes().isEnabled() ) {
         //drawPieSurface( ctx->painter(), 0, frontmostpie, granularity() );
@@ -446,7 +446,7 @@ void PieDiagram::drawOnePie( QPainter* painter,
         DataValueTextInfoList* list,
         uint dataset, uint pie,
         qreal granularity,
-        qreal threeDPieHeight )
+        qreal threeDPieHeight, qreal totalValue )
 {
     Q_UNUSED( threeDPieHeight );
     // Is there anything to draw at all?
@@ -464,7 +464,7 @@ void PieDiagram::drawOnePie( QPainter* painter,
             threeDAttrs,
             attrs.explode() );
 
-        drawPieSurface( painter, list, dataset, pie, granularity );
+        drawPieSurface( painter, list, dataset, pie, granularity, totalValue );
     }
 }
 
@@ -478,7 +478,7 @@ void PieDiagram::drawOnePie( QPainter* painter,
 void PieDiagram::drawPieSurface( QPainter* painter,
         DataValueTextInfoList* list,
         uint dataset, uint pie,
-        qreal granularity )
+        qreal granularity, qreal totalValue )
 {
     // Is there anything to draw at all?
     qreal angleLen = d->angleLens[ pie ];
@@ -540,7 +540,7 @@ void PieDiagram::drawPieSurface( QPainter* painter,
         // all is calculated as if the slice were 'standing' on it's tip and the border
         // were on top, so North is the middle of the curved outside line and South is the tip
         //
-        const qreal sum = valueTotals();
+        const qreal sum = totalValue;
         const QPointF south = drawPosition.center();
         const QPointF southEast = south;
         const QPointF southWest = south;
@@ -1098,7 +1098,6 @@ double PieDiagram::valueTotals() const
     double total = 0.0;
     for ( int j = 0; j < colCount; ++j ) {
       total += qAbs(model()->data( model()->index( 0, j, rootIndex() ) ).toDouble());
-      //qDebug() << model()->data( model()->index( 0, j, rootIndex() ) ).toDouble();
     }
     return total;
 }

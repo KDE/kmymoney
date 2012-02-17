@@ -1,1 +1,1 @@
-#include "../src/KDChartRingDiagram.h"
+#include "KDChartRingDiagram.h"

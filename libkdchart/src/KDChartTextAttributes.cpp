@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -21,13 +21,15 @@
 **********************************************************************/
 
 #include "KDChartTextAttributes.h"
+
+#include <KDChartCartesianCoordinatePlane.h>
+
 #include <QFont>
 #include <QPen>
 #include <qglobal.h>
 #include <QApplication>
 
 #include <KDABLibFakes>
-#include <KDChartCartesianCoordinatePlane>
 
 #define d d_func()
 

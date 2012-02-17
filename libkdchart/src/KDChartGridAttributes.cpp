@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -46,6 +46,7 @@ private:
     QPen pen;
     bool subVisible;
     QPen subPen;
+    bool outerVisible;
     QPen zeroPen;
 };
 
@@ -59,6 +60,7 @@ GridAttributes::Private::Private()
       pen( QColor(0xa0, 0xa0, 0xa0 ) ),
       subVisible( true ),
       subPen( QColor(0xd0, 0xd0, 0xd0 ) ),
+      outerVisible( true ),
       zeroPen( QColor( 0x00, 0x00, 0x80 ) )
 {
     pen.setCapStyle(     Qt::FlatCap );
@@ -103,6 +105,7 @@ bool GridAttributes::operator==( const GridAttributes& r ) const
             gridPen() == r.gridPen() &&
             isSubGridVisible() == r.isSubGridVisible() &&
             subGridPen() == r.subGridPen() &&
+            isOuterLinesVisible() == r.isOuterLinesVisible() &&
             zeroLinePen() == r.zeroLinePen();
 }
 
@@ -259,6 +262,16 @@ void GridAttributes::setSubGridPen( const QPen & pen )
 QPen GridAttributes::subGridPen() const
 {
     return d->subPen;
+}
+
+void GridAttributes::setOuterLinesVisible( bool visible )
+{
+    d->outerVisible = visible;
+}
+
+bool GridAttributes::isOuterLinesVisible() const
+{
+    return d->outerVisible;
 }
 
 void GridAttributes::setZeroLinePen( const QPen & pen )

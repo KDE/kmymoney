@@ -1,1 +1,1 @@
-#include "../src/LeveyJennings/KDChartLeveyJenningsGrid.h"
+#include "KDChartLeveyJenningsGrid.h"

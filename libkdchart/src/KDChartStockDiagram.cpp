@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -55,6 +55,8 @@ void StockDiagram::init()
     d->downTrendCandlestickPen = QPen( Qt::black );
 
     d->lowHighLinePen = QPen( Qt::black );
+    setDatasetDimensionInternal( 3 );
+    //setDatasetDimension( 3 );
 
     setPen( QPen( Qt::black ) );
 }
@@ -290,42 +292,49 @@ void StockDiagram::paint( PaintContext *context )
     d->reverseMapper.clear();
 
     PainterSaver painterSaver( context->painter() );
-    int rowCount = attributesModel()->rowCount( attributesModelRootIndex() );
-    for ( int row = 0; row < rowCount; row++ ) {
-        CartesianDiagramDataCompressor::DataPoint low;
-        CartesianDiagramDataCompressor::DataPoint high;
-        CartesianDiagramDataCompressor::DataPoint open;
-        CartesianDiagramDataCompressor::DataPoint close;
-        CartesianDiagramDataCompressor::DataPoint volume;
+    const int rowCount = attributesModel()->rowCount( attributesModelRootIndex() );
+    const int divisor = ( d->type == OpenHighLowClose || d->type == Candlestick ) ? 4 : 3;
+    const int colCount = attributesModel()->columnCount( attributesModelRootIndex() ) / divisor;
+    for ( int col = 0; col < colCount; ++col )
+    {
+        for ( int row = 0; row < rowCount; row++ ) {
+            CartesianDiagramDataCompressor::DataPoint low;
+            CartesianDiagramDataCompressor::DataPoint high;
+            CartesianDiagramDataCompressor::DataPoint open;
+            CartesianDiagramDataCompressor::DataPoint close;
+            CartesianDiagramDataCompressor::DataPoint volume;
 
-        if ( d->type == HighLowClose ) {
-            const CartesianDiagramDataCompressor::CachePosition highPos( row, 0 );
-            const CartesianDiagramDataCompressor::CachePosition lowPos( row, 1 );
-            const CartesianDiagramDataCompressor::CachePosition closePos( row, 2 );
-            low = d->compressor.data( lowPos );
-            high = d->compressor.data( highPos );
-            close = d->compressor.data( closePos );
-        } else if ( d->type == OpenHighLowClose || d->type == Candlestick ) {
-            const CartesianDiagramDataCompressor::CachePosition openPos( row, 0 );
-            const CartesianDiagramDataCompressor::CachePosition highPos( row, 1 );
-            const CartesianDiagramDataCompressor::CachePosition lowPos( row, 2 );
-            const CartesianDiagramDataCompressor::CachePosition closePos( row, 3 );
-            open = d->compressor.data( openPos );
-            low = d->compressor.data( lowPos );
-            high = d->compressor.data( highPos );
-            close = d->compressor.data( closePos );
-        }
+            if ( d->type == HighLowClose ) {
+                const CartesianDiagramDataCompressor::CachePosition highPos( row, col * divisor );
+                const CartesianDiagramDataCompressor::CachePosition lowPos( row, col * divisor + 1 );
+                const CartesianDiagramDataCompressor::CachePosition closePos( row, col * divisor + 2 );
+                low = d->compressor.data( lowPos );
+                high = d->compressor.data( highPos );
+                close = d->compressor.data( closePos );
+            } else if ( d->type == OpenHighLowClose || d->type == Candlestick ) {
+                const CartesianDiagramDataCompressor::CachePosition openPos( row, col * divisor );
+                const CartesianDiagramDataCompressor::CachePosition highPos( row, col * divisor + 1 );
+                const CartesianDiagramDataCompressor::CachePosition lowPos( row, col * divisor + 2 );
+                const CartesianDiagramDataCompressor::CachePosition closePos( row, col * divisor + 3 );
+                open = d->compressor.data( openPos );
+                low = d->compressor.data( lowPos );
+                high = d->compressor.data( highPos );
+                close = d->compressor.data( closePos );
+            }
 
-        switch( d->type ) {
-        case HighLowClose:
-            open.hidden = true;
-            // Fall-through intended!
-        case OpenHighLowClose:
-            d->drawOHLCBar( open, high, low, close, context );
-            break;
-        case Candlestick:
-            d->drawCandlestick( open, high, low, close, context );
-            break;
+
+            switch( d->type ) {
+            case HighLowClose:
+                open.hidden = true;
+                // Fall-through intended!
+            case OpenHighLowClose:
+                if ( close.index.isValid() && low.index.isValid() && high.index.isValid() )
+                d->drawOHLCBar( col, open, high, low, close, context );
+                break;
+            case Candlestick:
+                d->drawCandlestick( col, open, high, low, close, context );
+                break;
+            }
         }
     }
 }

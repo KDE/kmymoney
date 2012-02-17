@@ -1,1 +1,1 @@
-#include "../src/KDChartPolarDiagram.h"
+#include "KDChartPolarDiagram.h"

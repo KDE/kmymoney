@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -53,7 +53,6 @@ void BarDiagram::BarDiagramType::paintBars( PaintContext* ctx, const QModelIndex
         bool paintTop = true;
         if ( maxDepth )
             threeDAttrs.setDepth( -maxDepth );
-        QPointF boundRight =  ctx->coordinatePlane()->translate( diagram()->dataBoundaries().second );
         //fixme adjust the painting to reasonable depth value
         switch ( type() )
         {

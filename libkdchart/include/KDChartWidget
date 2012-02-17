@@ -1,1 +1,1 @@
-#include "../src/KDChartWidget.h"
+#include "KDChartWidget.h"

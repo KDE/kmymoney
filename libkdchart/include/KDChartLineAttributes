@@ -1,1 +1,1 @@
-#include "../src/KDChartLineAttributes.h"
+#include "KDChartLineAttributes.h"

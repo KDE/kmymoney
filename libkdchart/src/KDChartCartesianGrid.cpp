@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -273,6 +273,11 @@ void CartesianGrid::drawGrid( PaintContext* context )
     const bool drawZeroLineY
         = gridAttrsY.zeroLinePen().style() != Qt::NoPen;
 
+    const bool drawOuterX = gridAttrsX.isOuterLinesVisible();
+    const bool drawOuterY = gridAttrsY.isOuterLinesVisible();
+
+    const QPointF bottomRightPoint = plane->translate( QPointF( maxValueX, minValueY ) );
+
     if ( drawUnitLinesX || drawXZeroLineX ) {
         //qDebug() << "E";
         if ( drawUnitLinesX )
@@ -280,7 +285,7 @@ void CartesianGrid::drawGrid( PaintContext* context )
 //        const qreal minX = dimX.start;
 
         qreal f = minValueX;
-
+        
         while ( f <= maxValueX ) {
             // PENDING(khz) FIXME: make draving/not drawing of Zero line more sophisticated?:
             const bool zeroLineHere = drawXZeroLineX && (f == 0.0);
@@ -290,9 +295,12 @@ void CartesianGrid::drawGrid( PaintContext* context )
                 QPointF bottomPoint( f, minValueY );
                 topPoint = plane->translate( topPoint );
                 bottomPoint = plane->translate( bottomPoint );
+
+                const qreal penWidth = context->painter()->pen().widthF();
                 if ( zeroLineHere )
                     context->painter()->setPen( PrintingParameters::scalePen( gridAttrsX.zeroLinePen() ) );
-                context->painter()->drawLine( topPoint, bottomPoint );
+                if ( drawOuterX || (topPoint.x()> 2 * penWidth && topPoint.x()<bottomRightPoint.x()-2.0 * penWidth) )
+                    context->painter()->drawLine( topPoint, bottomPoint );
                 if ( zeroLineHere )
                     context->painter()->setPen( PrintingParameters::scalePen( gridAttrsX.gridPen() ) );
             }
@@ -310,7 +318,7 @@ void CartesianGrid::drawGrid( PaintContext* context )
         // draw the last line if not logarithmic calculation
         // we need the in order to get the right grid line painted
         // when f + dimX.stepWidth jump over maxValueX
-        if (  ! isLogarithmicX )
+        if (  ! isLogarithmicX && drawOuterX )
         context->painter()->drawLine( plane->translate( QPointF(  maxValueX, maxValueY ) ),
                                       plane->translate( QPointF( maxValueX, minValueY ) ) );
 
@@ -332,9 +340,11 @@ void CartesianGrid::drawGrid( PaintContext* context )
                 QPointF rightPoint( maxValueX, f );
                 leftPoint  = plane->translate( leftPoint );
                 rightPoint = plane->translate( rightPoint );
+
                 if ( zeroLineHere )
                     context->painter()->setPen( PrintingParameters::scalePen( gridAttrsY.zeroLinePen() ) );
-                context->painter()->drawLine( leftPoint, rightPoint );
+                if ( drawOuterY || (leftPoint.y()>2.0 && leftPoint.y()<bottomRightPoint.y()-2.0) )
+                    context->painter()->drawLine( leftPoint, rightPoint );
                 if ( zeroLineHere )
                     context->painter()->setPen( PrintingParameters::scalePen( gridAttrsY.gridPen() ) );
             }
@@ -592,7 +602,7 @@ static void calculateSteps(
 {
     //qDebug("-----------------------------------\nstart: %f   end: %f   power-of-ten: %i", start_, end_, power);
 
-    qreal distance;
+    qreal distance = 0.0;
     steps = 0.0;
 
     const int lastIdx = list.count()-1;

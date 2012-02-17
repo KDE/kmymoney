@@ -1,1 +1,1 @@
-#include "../src/KDChartDiagramObserver.h"
+#include "KDChartDiagramObserver.h"

@@ -1,1 +1,1 @@
-#include "../src/LeveyJennings/KDChartLeveyJenningsCoordinatePlane.h"
+#include "KDChartLeveyJenningsCoordinatePlane.h"

@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -390,10 +390,16 @@ void BarDiagram::paint( PaintContext* ctx )
     AbstractCoordinatePlane* const plane = ctx->coordinatePlane();
     ctx->setCoordinatePlane( plane->sharedAxisMasterPlane( ctx->painter() ) );
 
-    // Only paint elements that are in the paint context's rectangle
-    // (in this case boundaries of the diagram, see paintEvent())
-    ctx->painter()->setClipping( true );
-    ctx->painter()->setClipRect( ctx->rectangle() );
+    // This was intended as a fix for KDCH-515, however it caused KDCH-816
+    // and the original problem in KDCH-515 had by then been fixed in another way.
+    // Bottom line is, this code is wrong because the above call to
+    // plane->sharedAxisMasterPlane() performs a translation of the painter, which
+    // also translates the clip rect, so if we set the old clip rect again afterwards,
+    // we get a wrong clipping.
+    // Also, this code is unnecessary because CartesianCoordinatePlane::paint()
+    // already sets the clipping properly before calling this method.
+    // ctx->painter()->setClipping( true );
+    // ctx->painter()->setClipRect( ctx->rectangle() );
 
     // paint different bar types Normal - Stacked - Percent - Default Normal
     d->implementor->paint( ctx );
@@ -403,6 +409,7 @@ void BarDiagram::paint( PaintContext* ctx )
 
 void BarDiagram::resize( const QSizeF& size )
 {
+    QWidget::resize( size.toSize() );
     d->compressor.setResolution( static_cast< int >( size.width() * coordinatePlane()->zoomFactorX() ),
                                  static_cast< int >( size.height() * coordinatePlane()->zoomFactorY() ) );
     setDataBoundariesDirty();

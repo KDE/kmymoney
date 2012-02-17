@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -43,7 +43,7 @@
 #include "KDChartLegend.h"
 #include "KDChartLayoutItems.h"
 #include <KDChartTextAttributes.h>
-#include <KDChartMarkerAttributes>
+#include <KDChartMarkerAttributes.h>
 #include "KDChartPainterSaver_p.h"
 #include "KDChartPrintingParameters.h"
 
@@ -237,7 +237,8 @@ void Chart::Private::layoutLegends()
         legend->needSizeHint(); // we'll lay it out soon
 
         bool bOK = true;
-        int row, column;
+        int row = 0;
+        int column = 0;
         //qDebug() << legend->position().name();
         switch( legend->position().value() ) {
             case KDChartEnums::PositionNorthWest:  row = 0;  column = 0;
@@ -478,6 +479,11 @@ void Chart::Private::slotLayoutPlanes()
     KDAB_FOREACH( KDChart::AbstractLayoutItem* plane, planeLayoutItems ) {
         plane->removeFromParentLayout();
     }
+    //TODO they should get a correct parent, but for now it works
+    KDAB_FOREACH( KDChart::AbstractLayoutItem* plane, planeLayoutItems ) {
+        if ( dynamic_cast< KDChart::AutoSpacerLayoutItem* >( plane ) )
+            delete plane;
+    }
     planeLayoutItems.clear();
     delete planesLayout;
     //hint: The direction is configurable by the user now, as
@@ -531,7 +537,6 @@ void Chart::Private::slotLayoutPlanes()
         //qDebug() << "Chart slotLayoutPlanes() calls planeLayout->addItem("<< row << column << ")";
         planeLayout->setRowStretch(    row,    2 );
         planeLayout->setColumnStretch( column, 2 );
-
         KDAB_FOREACH( AbstractDiagram* abstractDiagram, plane->diagrams() )
         {
             AbstractCartesianDiagram* diagram =
@@ -591,7 +596,6 @@ void Chart::Private::slotLayoutPlanes()
             }
  
             //pi.leftAxesLayout->setSizeConstraint( QLayout::SetFixedSize );
-
             KDAB_FOREACH( CartesianAxis* axis, diagram->axes() ) {
                 if ( axisInfos.contains( axis ) ) continue; // already laid this one out
                 Q_ASSERT ( axis );

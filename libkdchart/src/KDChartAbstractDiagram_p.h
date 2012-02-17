@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -37,7 +37,7 @@
 #include "KDChartAbstractDiagram.h"
 #include "KDChartAbstractCoordinatePlane.h"
 #include "KDChartDataValueAttributes.h"
-#include "KDChartBackgroundAttributes"
+#include "KDChartBackgroundAttributes.h"
 #include "KDChartRelativePosition.h"
 #include "KDChartPosition.h"
 #include "KDChartPainterSaver_p.h"
@@ -45,7 +45,7 @@
 #include "KDChartPrintingParameters.h"
 #include "KDChartChart.h"
 #include <KDChartCartesianDiagramDataCompressor_p.h>
-#include "Scenery/ReverseMapper.h"
+#include "ReverseMapper.h"
 
 #include <QMap>
 #include <QPoint>
@@ -315,13 +315,13 @@ namespace KDChart {
                     doc.setPlainText( text );
 
                 const RelativePosition relPos( attrs.position( valueIsPositive ) );
-                const Qt::Alignment alignBottomLeft = Qt::AlignBottom | Qt::AlignLeft;
+                //const Qt::Alignment alignBottomLeft = Qt::AlignBottom | Qt::AlignLeft;
                 const QFont calculatedFont( ta.calculatedFont( plane, KDChartEnums::MeasureOrientationMinimum ) );
 
                 // note: We can not use boundingRect() to retrieve the width, as that returnes a too small value
-                const QSizeF plainSize(
-                        cachedFontMetrics( calculatedFont, painter->device() )->width( doc.toPlainText() ),
-                cachedFontMetrics( calculatedFont, painter->device() )->boundingRect( doc.toPlainText() ).height() );
+//                const QSizeF plainSize(
+//                        cachedFontMetrics( calculatedFont, painter->device() )->width( doc.toPlainText() ),
+//                cachedFontMetrics( calculatedFont, painter->device() )->boundingRect( doc.toPlainText() ).height() );
 
                 // FIXME draw the non-text bits, background, etc
 
@@ -354,23 +354,25 @@ namespace KDChart {
                     }
 
                     QAbstractTextDocumentLayout* const layout = doc.documentLayout();
+                    layout->setPaintDevice( painter->device() );
+                    const QRectF plainRect = layout->frameBoundingRect( doc.rootFrame() );
+                    const QSizeF plainSize = layout->frameBoundingRect( doc.rootFrame() ).size();
+
 
                     painter->translate( pos );
-                    painter->rotate( ta.rotation() );
-                    qreal dx = 0.0;
-                    qreal dy = 0.0;
-                    const Qt::Alignment alignTopLeft = (Qt::AlignLeft | Qt::AlignTop);
-                    if(     (relPos.alignment() & alignTopLeft) != alignTopLeft ){
-                        if( relPos.alignment() & Qt::AlignRight )
-                            dx = - plainSize.width();
-                        else if( relPos.alignment() & Qt::AlignHCenter )
-                            dx = - 0.5 * plainSize.width();
+                    //painter->rotate( ta.rotation() );
+                    qreal dx =  - 0.5 * plainSize.width();
+                    qreal dy =  - 0.5 * plainSize.height();
 
-                        if( relPos.alignment() & Qt::AlignBottom )
-                            dy = - plainSize.height();
-                        else if( relPos.alignment() & Qt::AlignVCenter )
-                            dy = - 0.5 * plainSize.height();
-                    }
+                    if(relPos.alignment() & Qt::AlignLeft)
+                        dx += - 0.5 * plainSize.width();
+                    else if(relPos.alignment() & Qt::AlignRight)
+                        dx += 0.5 * plainSize.width();
+
+                    if(relPos.alignment() & Qt::AlignTop)
+                        dy += - 0.5 * plainSize.height();
+                    else if(relPos.alignment() & Qt::AlignBottom)
+                        dy += 0.5 * plainSize.height();
 
                     bool drawIt = true;
                     // note: This flag can be set differently for every label text!
@@ -411,6 +413,9 @@ namespace KDChart {
                             (*cumulatedBoundingRect) |= rect;
                         }else{
                             painter->translate( QPointF( dx, dy ) );
+                            painter->translate( plainRect.center() );
+                            painter->rotate( ta.rotation() );
+                            painter->translate( -plainRect.center() );
                             layout->draw( painter, context );
 
                             // Return the cumulatedBoundingRect if asked for

@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -179,6 +179,8 @@ void RingDiagram::paint( PaintContext* ctx )
     if ( !checkInvariants(true) )
         return;
 
+    d->reverseMapper.clear();
+
     const PieAttributes attrs( pieAttributes() );
 
 	const int rCount = rowCount();
@@ -231,7 +233,6 @@ void RingDiagram::paint( PaintContext* ctx )
 
     const PolarCoordinatePlane * plane = polarCoordinatePlane();
 
-    bool atLeastOneValue = false; // guard against completely empty tables
     QVariant vValY;
 
     d->clearListOfAlreadyDrawnDataValueTexts();
@@ -251,7 +252,6 @@ void RingDiagram::paint( PaintContext* ctx )
     	        if( bOK ){
     	            d->startAngles[ iRow ][ iColumn ] = currentValue;
     	            d->angleLens[ iRow ][ iColumn ] = cellValue * sectorsPerValue;
-    	            atLeastOneValue = true;
     	        } else { // mark as non-existent
     	            d->angleLens[ iRow ][ iColumn ] = 0.0;
     	            if ( iColumn > 0.0 )
@@ -422,6 +422,8 @@ void RingDiagram::drawPieSurface( QPainter* painter,
             //fix value position
             const qreal sum = valueTotals( dataset );
             painter->drawPolygon( poly );
+
+            d->reverseMapper.addPolygon( index.row(), index.column(), poly );
 
             const QPointF centerPoint = (innerCenterPoint + outerCenterPoint) / 2.0;
 

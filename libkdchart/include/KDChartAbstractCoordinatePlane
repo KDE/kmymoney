@@ -1,1 +1,1 @@
-#include "../src/KDChartAbstractCoordinatePlane.h"
+#include "KDChartAbstractCoordinatePlane.h"

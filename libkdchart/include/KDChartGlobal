@@ -1,1 +1,1 @@
-#include "../src/KDChartGlobal.h"
+#include "KDChartGlobal.h"

@@ -11,9 +11,10 @@ ADD_DEFINITIONS(-DKDCHART_BUILD_KDCHART_LIB)
 
 ########### next target ###############
 
-set(kdchart_LIB_SRCS 
-    KDChartAbstractArea.cpp
+set(kdchart_LIB_SRCS
+    ChartGraphicsItem.cpp
     KDChartAbstractAreaBase.cpp
+    KDChartAbstractArea.cpp
     KDChartAbstractAreaWidget.cpp
     KDChartAbstractAxis.cpp
     KDChartAbstractCartesianDiagram.cpp
@@ -23,6 +24,7 @@ set(kdchart_LIB_SRCS
     KDChartAbstractPieDiagram.cpp
     KDChartAbstractPolarDiagram.cpp
     KDChartAbstractProxyModel.cpp
+    KDChartAbstractTernaryDiagram.cpp
     KDChartAbstractThreeDAttributes.cpp
     KDChartAttributesModel.cpp
     KDChartBackgroundAttributes.cpp
@@ -43,6 +45,12 @@ set(kdchart_LIB_SRCS
     KDChartHeaderFooter.cpp
     KDChartLayoutItems.cpp
     KDChartLegend.cpp
+    KDChartLeveyJenningsAxis.cpp
+    KDChartLeveyJenningsCoordinatePlane.cpp
+    KDChartLeveyJenningsDiagram.cpp
+    KDChartLeveyJenningsDiagram_p.cpp
+    KDChartLeveyJenningsGridAttributes.cpp
+    KDChartLeveyJenningsGrid.cpp
     KDChartLineAttributes.cpp
     KDChartLineDiagram.cpp
     KDChartLineDiagram_p.cpp
@@ -78,31 +86,23 @@ set(kdchart_LIB_SRCS
     KDChartStockBarAttributes.cpp
     KDChartStockDiagram.cpp
     KDChartStockDiagram_p.cpp
+    KDChartTernaryAxis.cpp
+    KDChartTernaryCoordinatePlane.cpp
+    KDChartTernaryGrid.cpp
+    KDChartTernaryLineDiagram.cpp
+    KDChartTernaryPointDiagram.cpp
     KDChartTextArea.cpp
     KDChartTextAttributes.cpp
+    KDChartTextLabelCache.cpp
     KDChartThreeDBarAttributes.cpp
     KDChartThreeDLineAttributes.cpp
     KDChartThreeDPieAttributes.cpp
     KDChartValueTrackerAttributes.cpp
     KDChartWidget.cpp
     KDTextDocument.cpp
-    LeveyJennings/KDChartLeveyJenningsAxis.cpp
-    LeveyJennings/KDChartLeveyJenningsCoordinatePlane.cpp
-    LeveyJennings/KDChartLeveyJenningsDiagram.cpp
-    LeveyJennings/KDChartLeveyJenningsDiagram_p.cpp
-    LeveyJennings/KDChartLeveyJenningsGrid.cpp
-    LeveyJennings/KDChartLeveyJenningsGridAttributes.cpp
-    PrerenderedElements/KDChartTextLabelCache.cpp
-    Scenery/ChartGraphicsItem.cpp
-    Scenery/ReverseMapper.cpp
-    Ternary/KDChartAbstractTernaryDiagram.cpp
-    Ternary/KDChartTernaryAxis.cpp
-    Ternary/KDChartTernaryCoordinatePlane.cpp
-    Ternary/KDChartTernaryGrid.cpp
-    Ternary/KDChartTernaryLineDiagram.cpp
-    Ternary/KDChartTernaryPointDiagram.cpp
-    Ternary/TernaryConstants.cpp
-    Ternary/TernaryPoint.cpp
+    ReverseMapper.cpp
+    TernaryConstants.cpp
+    TernaryPoint.cpp
 )
 
 qt4_wrap_ui(kdchart_LIB_SRCS

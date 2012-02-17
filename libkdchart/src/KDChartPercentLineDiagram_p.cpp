@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -60,10 +60,6 @@ const QPair<QPointF, QPointF> PercentLineDiagram::calculateDataBoundaries() cons
 void PercentLineDiagram::paint(  PaintContext* ctx )
 {
     reverseMapper().clear();
-
-    const QPair<QPointF, QPointF> boundaries = diagram()->dataBoundaries();
-    const QPointF bottomLeft = boundaries.first;
-    const QPointF topRight = boundaries.second;
 
     const int columnCount = compressor().modelDataColumns();
     const int rowCount = compressor().modelDataRows();

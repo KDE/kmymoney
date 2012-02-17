@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -92,7 +92,7 @@ void NormalLineDiagram::paint( PaintContext* ctx )
 
 // FIXME integrate column index retrieval to compressor:
 // the compressor should only pass through visiblel columns
-    int maxFound = 0;
+//    int maxFound = 0;
 //     {   // find the last column number that is not hidden
 //         for( int column =  datasetDimension() - 1;
 //              column <  columnCount;
@@ -100,7 +100,7 @@ void NormalLineDiagram::paint( PaintContext* ctx )
 //             if( ! diagram()->isHidden( column ) )
 //                 maxFound = column;
 //     }
-    maxFound = columnCount;
+//    maxFound = columnCount;
     // ^^^ temp
 
     // Reverse order of data sets?

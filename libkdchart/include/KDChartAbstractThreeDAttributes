@@ -1,1 +1,1 @@
-#include "../src/KDChartAbstractThreeDAttributes.h"
+#include "KDChartAbstractThreeDAttributes.h"

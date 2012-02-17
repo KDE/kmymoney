@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -26,6 +26,7 @@
 #include <QGridLayout>
 #include <QRubberBand>
 #include <QMouseEvent>
+#include <QtCore/qmath.h>
 
 #include "KDChartChart.h"
 #include "KDChartGridAttributes.h"
@@ -366,16 +367,19 @@ void KDChart::AbstractCoordinatePlane::mouseReleaseEvent( QMouseEvent* event )
         if( rubberWidth > 0.0 && rubberHeight > 0.0 )
         {
             // this is the center of the rubber band in pixel space
-            const double rubberCenterX = static_cast< double >( d->rubberBand->geometry().center().x() - geometry().x() );
-            const double rubberCenterY = static_cast< double >( d->rubberBand->geometry().center().y() - geometry().y() );
+            const qreal centerX = qFloor( d->rubberBand->geometry().width() / 2.0 + d->rubberBand->geometry().x() );
+            const qreal centerY = qCeil( d->rubberBand->geometry().height() / 2.0 + d->rubberBand->geometry().y() );
+
+            const qreal rubberCenterX = static_cast< qreal >( centerX - geometry().x() );
+            const qreal rubberCenterY = static_cast< qreal >( centerY - geometry().y() );
 
             // this is the height/width of the plane in pixel space
             const double myWidth = static_cast< double >( geometry().width() );
             const double myHeight = static_cast< double >( geometry().height() );
 
             // this describes the new center of zooming, relative to the plane pixel space
-            const double newCenterX = rubberCenterX / myWidth / zoomFactorX() + zoomCenter().x() - 0.5 / zoomFactorX();
-            const double newCenterY = rubberCenterY / myHeight / zoomFactorY() + zoomCenter().y() - 0.5 / zoomFactorY();
+            const double newCenterX = rubberCenterX / zoomFactorX() / myWidth + zoomCenter().x() - 0.5 / zoomFactorX();
+            const double newCenterY = rubberCenterY / zoomFactorY() / myHeight + zoomCenter().y() - 0.5 / zoomFactorY();
 
             // this will be the new zoom factor
             const double newZoomFactorX = zoomFactorX() * myWidth / rubberWidth;

@@ -1,1 +1,1 @@
-#include "../src/KDChartStockBarAttributes.h"
+#include "KDChartStockBarAttributes.h"

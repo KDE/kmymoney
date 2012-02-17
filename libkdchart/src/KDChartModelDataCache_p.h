@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -241,6 +241,8 @@ namespace KDChart
 
         void dataChanged( const QModelIndex& topLeft, const QModelIndex& bottomRight )
         {
+            if ( !m_model )
+                return;
             Q_ASSERT( m_model != 0 );
             Q_ASSERT( topLeft.parent() == bottomRight.parent() );
             Q_ASSERT( topLeft.model() == m_model && bottomRight.model() == m_model );

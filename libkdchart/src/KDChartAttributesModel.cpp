@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -28,21 +28,21 @@
 #include <QPen>
 #include <QPointer>
 
-#include <KDChartTextAttributes>
-#include <KDChartFrameAttributes>
-#include <KDChartBackgroundAttributes>
-#include <KDChartDataValueAttributes>
-#include <KDChartMarkerAttributes>
-#include <KDChartBarAttributes>
-#include <KDChartStockBarAttributes>
-#include <KDChartLineAttributes>
-#include <KDChartPieAttributes>
-#include <KDChartAbstractThreeDAttributes>
-#include <KDChartThreeDBarAttributes>
-#include <KDChartThreeDLineAttributes>
-#include <KDChartThreeDPieAttributes>
-#include <KDChartGridAttributes>
-#include <KDChartValueTrackerAttributes>
+#include <KDChartTextAttributes.h>
+#include <KDChartFrameAttributes.h>
+#include <KDChartBackgroundAttributes.h>
+#include <KDChartDataValueAttributes.h>
+#include <KDChartMarkerAttributes.h>
+#include <KDChartBarAttributes.h>
+#include <KDChartStockBarAttributes.h>
+#include <KDChartLineAttributes.h>
+#include <KDChartPieAttributes.h>
+#include <KDChartAbstractThreeDAttributes.h>
+#include <KDChartThreeDBarAttributes.h>
+#include <KDChartThreeDLineAttributes.h>
+#include <KDChartThreeDPieAttributes.h>
+#include <KDChartGridAttributes.h>
+#include <KDChartValueTrackerAttributes.h>
 
 #include <KDABLibFakes>
 
@@ -326,7 +326,7 @@ QVariant AttributesModel::defaultHeaderData ( int section, Qt::Orientation orien
   switch ( role ) {
   case Qt::DisplayRole:
       //TODO for KDChart 3.0: Change to "return QString::number( section+1 );"
-      return QString(QLatin1String( orientation == Qt::Vertical ?  "Series " : "Item " ) + QString::number( section ) );
+      return QString(QLatin1String( orientation == Qt::Vertical ?  "Series " : "Item " ) + QString::number( section )) ;
 
   case KDChart::DatasetBrushRole: {
       if ( paletteType() == PaletteTypeSubdued )
@@ -652,11 +652,77 @@ void AttributesModel::slotRowsRemoved( const QModelIndex& parent, int start, int
     endRemoveRows();
 }
 
+void AttributesModel::removeEntriesFromDataMap( int start, int end )
+{
+    QMap<int, QMap<int, QMap<int, QVariant> > >::iterator it = mDataMap.find( end );
+    // check that the element was found
+    if ( it != mDataMap.end() )
+    {
+        ++it;
+        QVector< int > indexesToDel;
+        for ( int i = start; i < end && it != mDataMap.end(); ++i )
+        {
+            mDataMap[ i ] = it.value();
+            indexesToDel << it.key();
+            ++it;
+        }
+        if ( indexesToDel.isEmpty() )
+        {
+            for ( int i = start; i < end; ++i )
+            {
+                indexesToDel << i;
+            }
+        }
+        for ( int i  = 0; i < indexesToDel.count(); ++i )
+        {
+            mDataMap.remove( indexesToDel[ i ] );
+        }
+    }
+}
+
+void AttributesModel::removeEntriesFromDirectionDataMaps( Qt::Orientation dir, int start, int end )
+{
+    QMap<int,  QMap<int, QVariant> > &sectionDataMap
+        = dir == Qt::Horizontal ? mHorizontalHeaderDataMap : mVerticalHeaderDataMap;
+    QMap<int, QMap<int, QVariant> >::iterator it = sectionDataMap.upperBound( end );
+    // check that the element was found
+    if ( it != sectionDataMap.end() )
+    {
+        QVector< int > indexesToDel;
+        for ( int i = start; i < end && it != sectionDataMap.end(); ++i )
+        {
+            sectionDataMap[ i ] = it.value();
+            indexesToDel << it.key();
+            ++it;
+        }
+        if ( indexesToDel.isEmpty() )
+        {
+            for ( int i = start; i < end; ++i )
+            {
+                indexesToDel << i;
+            }
+        }
+        for ( int i  = 0; i < indexesToDel.count(); ++i )
+        {
+            sectionDataMap.remove( indexesToDel[ i ] );
+        }
+    }
+}
+
 void AttributesModel::slotColumnsRemoved( const QModelIndex& parent, int start, int end )
 {
     Q_UNUSED( parent );
     Q_UNUSED( start );
     Q_UNUSED( end );
+    Q_ASSERT_X( sourceModel(), "removeColumn", "This should only be triggered if a valid source Model exists! " );
+    for ( int i = start; i <= end; ++i )
+    {
+        mVerticalHeaderDataMap.remove( start );
+    }
+    removeEntriesFromDataMap( start, end );
+    removeEntriesFromDirectionDataMaps( Qt::Horizontal, start, end );
+    removeEntriesFromDirectionDataMaps( Qt::Vertical, start, end );
+
     endRemoveColumns();
 }
 

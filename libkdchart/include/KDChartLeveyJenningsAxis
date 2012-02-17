@@ -1,1 +1,1 @@
-#include "../src/LeveyJennings/KDChartLeveyJenningsAxis.h"
+#include "KDChartLeveyJenningsAxis.h"

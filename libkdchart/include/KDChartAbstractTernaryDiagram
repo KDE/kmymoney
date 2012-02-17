@@ -1,1 +1,1 @@
-#include "../src/KDChartAbstractTernaryDiagram.h"
+#include "KDChartAbstractTernaryDiagram.h"

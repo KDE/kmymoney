@@ -1,1 +1,1 @@
-#include "../src/KDChartAbstractPieDiagram.h"
+#include "KDChartAbstractPieDiagram.h"

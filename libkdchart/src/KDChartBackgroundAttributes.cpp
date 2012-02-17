@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -22,7 +22,6 @@
 
 #include "KDChartBackgroundAttributes.h"
 #include <QPixmap>
-#include <QVariant>
 
 #include <KDABLibFakes>
 
@@ -151,7 +150,7 @@ QDebug operator<<(QDebug dbg, const KDChart::BackgroundAttributes& ba)
 	<< "visible="<<ba.isVisible()
 	<< "brush="<<ba.brush()
 	<< "pixmapmode="<<ba.pixmapMode()
-	<< "pixmap="<<QVariant(ba.pixmap())
+	<< "pixmap="<<ba.pixmap().cacheKey()
 	<< ")";
     return dbg;
 }

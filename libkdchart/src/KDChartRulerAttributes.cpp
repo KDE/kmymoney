@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -48,9 +48,9 @@ private:
 
     bool showMajorTickMarks;
     bool showMinorTickMarks;
-    
-    bool showRulerLine;
 
+    bool showRulerLine;
+    
     int labelMargin;
     
     RulerAttributes::TickMarkerPensMap customTickMarkPens;
@@ -243,7 +243,6 @@ bool RulerAttributes::showRulerLine() const
 {
     return d->showRulerLine;
 }
-
 
 #if !defined( QT_NO_DEBUG_STREAM )
 QDebug operator << ( QDebug dbg, const KDChart::RulerAttributes& a )

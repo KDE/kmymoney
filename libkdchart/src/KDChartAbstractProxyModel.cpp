@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2001-2011 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2001-2012 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Chart library.
 **
@@ -26,6 +26,13 @@
 
 #include <KDABLibFakes>
 
+#ifdef __GNUC__
+#if __GNUC__ > 3
+#define ATTRIBUTE __attribute__((__may_alias__))
+#endif
+#else
+#define ATTRIBUTE
+#endif
 
 namespace KDChart {
 
@@ -35,12 +42,12 @@ AbstractProxyModel::AbstractProxyModel(QObject* parent)
   : QAbstractProxyModel(parent) {}
 
 // Think this is ugly? Well, it's not from me, it comes from QProxyModel
-struct KDPrivateModelIndex
+struct ATTRIBUTE KDPrivateModelIndex
 {
   int r, c;
   void *p;
   const QAbstractItemModel *m;
-};
+} ;
 
 QModelIndex AbstractProxyModel::mapFromSource( const QModelIndex & sourceIndex ) const
 {
