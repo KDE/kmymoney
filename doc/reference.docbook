@@ -205,7 +205,7 @@
       <shortcut>
         <keycombo>&Ctrl;<keycap>F</keycap></keycombo>
       </shortcut>
-      <guimenu>Edit</guimenu><guimenuitem>Find transactions...</guimenuitem>
+      <guimenu>Edit</guimenu><guimenuitem>Find transaction...</guimenuitem>
     </menuchoice></term>
     <listitem>
       <para><action>Search transactions.</action></para>
@@ -291,7 +291,7 @@
   <varlistentry>
     <term><menuchoice>
       <guimenu>Institution</guimenu>
-        <guimenuitem>Add new institution...</guimenuitem>
+        <guimenuitem>New institution...</guimenuitem>
     </menuchoice></term>
     <listitem>
       <para><action>Add a new institution.</action></para>
@@ -691,16 +691,6 @@
 
   <varlistentry>
     <term><menuchoice>
-      <guimenu>Tools</guimenu><guimenuitem>Securities...</guimenuitem>
-    </menuchoice></term>
-    <listitem>
-      <para><action>Lists all the current securities, with the ability to edit
-        each one.</action></para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><menuchoice>
       <guimenu>Tools</guimenu><guimenuitem>Currencies...</guimenuitem>
     </menuchoice></term>
     <listitem>
@@ -720,7 +710,7 @@
   <varlistentry>
     <term><menuchoice>
     <guimenu>Tools</guimenu>
-      <guimenuitem>Update Stock and Currency prices...</guimenuitem>
+      <guimenuitem>Update Stock and Currency Prices...</guimenuitem>
     </menuchoice></term>
     <listitem>
       <para><action>Updates stock and currency prices from online sources using
