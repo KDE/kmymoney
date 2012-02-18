@@ -163,13 +163,13 @@ INSTALL(FILES lo32-app-kmymoney.png
 ############## tests ####################
 IF( KDE4_BUILD_TESTS )
 
-  set(target_link_libraries_test 
-          ${QT_QTGUI_LIBRARY}
-          ${QT_QTXML_LIBRARY}
-          ${QT_QTCORE_LIBRARY}
-          ${QT_QTTEST_LIBRARY}
-          ${GMP_LIBRARIES}
-          ${LIBALKIMIA_LIBRARY})
+  set(target_link_libraries_test
+        ${QT_QTGUI_LIBRARY}
+        ${QT_QTXML_LIBRARY}
+        ${QT_QTCORE_LIBRARY}
+        ${QT_QTTEST_LIBRARY}
+        ${GMP_LIBRARIES}
+        ${LIBALKIMIA_LIBRARY})
 
   # KMyMoneyUtils
   set( kmymoneyutilstest_SRCS kmymoneyutilstest.cpp )
@@ -177,7 +177,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( kmymoneyutilstest TESTNAME kmymoney-utilstest ${kmymoneyutilstest_SRCS} )
   ADD_DEPENDENCIES( kmymoneyutilstest kmymoney_common kmm_mymoney )
 
-  target_link_libraries( kmymoneyutilstest kmymoney_common kmm_config ${kmymoney_common_LIBS} kmm_mymoney ${target_link_libraries_test})
+  target_link_libraries( kmymoneyutilstest ${kmymoney_common_LIBS} ${target_link_libraries_test})
 
 ENDIF( KDE4_BUILD_TESTS )
 

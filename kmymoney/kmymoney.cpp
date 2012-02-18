@@ -21,7 +21,7 @@
 #include "kmymoney.h"
 
 // for _getpid
-#ifdef _MSC_VER
+#ifdef Q_OS_WIN32                   //krazy:exclude=cpp
 #include <process.h>
 #else
 #if HAVE_SYS_TYPES_H
