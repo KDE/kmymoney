@@ -263,7 +263,7 @@ private:
    * according to the length of the given @a term.
    * The term is also converted into a string and returned.
    */
-  QString updateTermWidgets(const long double term);
+  QString updateTermWidgets(const double term);
 
 private:
   bool                m_needCalculate;

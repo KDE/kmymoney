@@ -22,8 +22,6 @@
 
 #include "knewloanwizard.h"
 
-#include <math.h>
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -32,6 +30,7 @@
 #include <QCheckBox>
 #include <QLabel>
 #include <QList>
+#include <qmath.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -353,7 +352,7 @@ bool KNewLoanWizard::validateCurrentPage()
 int KNewLoanWizard::calculateLoan(void)
 {
   MyMoneyFinancialCalculator calc;
-  long double val;
+  double val;
   int PF;
   QString result;
 
@@ -371,33 +370,33 @@ int KNewLoanWizard::calculateLoan(void)
   calc.setCF(PF);
 
   if (field("loanAmountEditValid").toBool()) {
-    val = static_cast<long double>(field("loanAmountEdit").value<MyMoneyMoney>().abs().toDouble());
+    val = field("loanAmountEdit").value<MyMoneyMoney>().abs().toDouble();
     if (field("borrowButton").toBool())
       val = -val;
     calc.setPv(val);
   }
 
   if (field("interestRateEditValid").toBool()) {
-    val = static_cast<long double>(field("interestRateEdit").value<MyMoneyMoney>().abs().toDouble());
+    val = field("interestRateEdit").value<MyMoneyMoney>().abs().toDouble();
     calc.setIr(val);
   }
 
   if (field("paymentEditValid").toBool()) {
-    val = static_cast<long double>(field("paymentEdit").value<MyMoneyMoney>().abs().toDouble());
+    val = field("paymentEdit").value<MyMoneyMoney>().abs().toDouble();
     if (field("lendButton").toBool())
       val = -val;
     calc.setPmt(val);
   }
 
   if (field("finalPaymentEditValid").toBool()) {
-    val = static_cast<long double>(field("finalPaymentEditValid").value<MyMoneyMoney>().abs().toDouble());
+    val = field("finalPaymentEditValid").value<MyMoneyMoney>().abs().toDouble();
     if (field("lendButton").toBool())
       val = -val;
     calc.setFv(val);
   }
 
   if (field("durationValueEdit").toInt() != 0) {
-    calc.setNpp(static_cast<long double>(m_durationPage->term()));
+    calc.setNpp(m_durationPage->term());
   }
 
   int fraction = m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()));
@@ -422,7 +421,7 @@ int KNewLoanWizard::calculateLoan(void)
       val = calc.payment();
       setField("paymentEdit", QVariant::fromValue<MyMoneyMoney>(MyMoneyMoney(val).abs()));
       // reset payment as it might have changed due to rounding
-      val = static_cast<long double>(field("paymentEdit").value<MyMoneyMoney>().abs().toDouble());
+      val = field("paymentEdit").value<MyMoneyMoney>().abs().toDouble();
       if (field("lendButton").toBool())
         val = -val;
       calc.setPmt(val);
@@ -430,18 +429,17 @@ int KNewLoanWizard::calculateLoan(void)
       result = i18n("KMyMoney has calculated a periodic payment of %1 to cover principal and interest.", m_paymentPage->m_paymentEdit->lineedit()->text());
 
       val = calc.futureValue();
-      if ((field("borrowButton").toBool() && val < 0 && fabsl(val) >= fabsl(calc.payment()))
-          || (field("lendButton").toBool() && val > 0 && fabs(val) >= fabs(calc.payment()))) {
+      if ((field("borrowButton").toBool() && val < 0 && qAbs(val) >= qAbs(calc.payment()))
+          || (field("lendButton").toBool() && val > 0 && qAbs(val) >= qAbs(calc.payment()))) {
         calc.setNpp(calc.npp() - 1);
         m_durationPage->updateTermWidgets(calc.npp());
         val = calc.futureValue();
         MyMoneyMoney refVal(static_cast<double>(val));
-        //FIXME: port
         m_finalPaymentPage->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
         result += QString(" ");
         result += i18n("The number of payments has been decremented and the final payment has been modified to %1.", m_finalPaymentPage->m_finalPaymentEdit->lineedit()->text());
-      } else if ((field("borrowButton").toBool() && val < 0 && fabsl(val) < fabsl(calc.payment()))
-                 || (field("lendButton").toBool() && val > 0 && fabs(val) < fabs(calc.payment()))) {
+      } else if ((field("borrowButton").toBool() && val < 0 && qAbs(val) < qAbs(calc.payment()))
+                 || (field("lendButton").toBool() && val > 0 && qAbs(val) < qAbs(calc.payment()))) {
         m_finalPaymentPage->m_finalPaymentEdit->loadText(MyMoneyMoney(0, 1).formatMoney(fraction));
       } else {
         MyMoneyMoney refVal(static_cast<double>(val));
@@ -457,13 +455,12 @@ int KNewLoanWizard::calculateLoan(void)
 
       // if the number of payments has a fractional part, then we
       // round it to the smallest integer and calculate the balloon payment
-      result = i18n("KMyMoney has calculated the term of your loan as %1. ", m_durationPage->updateTermWidgets(floorl(val)));
+      result = i18n("KMyMoney has calculated the term of your loan as %1. ", m_durationPage->updateTermWidgets(qFloor(val)));
 
-      if (val != floorl(val)) {
-        calc.setNpp(floorl(val));
+      if (val != qFloor(val)) {
+        calc.setNpp(qFloor(val));
         val = calc.futureValue();
         MyMoneyMoney refVal(static_cast<double>(val));
-        //FIXME: port
         m_finalPaymentPage->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
         result += i18n("The final payment has been modified to %1.", m_finalPaymentPage->m_finalPaymentEdit->lineedit()->text());
       }
@@ -483,14 +480,14 @@ int KNewLoanWizard::calculateLoan(void)
       //    future value is to be treated as  (fully payed back)
       // c) the loan is not payed back yet
 
-      if ((field("borrowButton").toBool() && val < 0 && fabsl(val) > fabsl(calc.payment()))
-          || (field("lendButton").toBool() && val > 0 && fabs(val) > fabs(calc.payment()))) {
+      if ((field("borrowButton").toBool() && val < 0 && qAbs(val) > qAbs(calc.payment()))
+          || (field("lendButton").toBool() && val > 0 && qAbs(val) > qAbs(calc.payment()))) {
         // case a)
-        qDebug("Future Value is %Lf", val);
+        qDebug("Future Value is %f", val);
         throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
 
-      } else if ((field("borrowButton").toBool() && val < 0 && fabsl(val) <= fabsl(calc.payment()))
-                 || (field("lendButton").toBool() && val > 0 && fabs(val) <= fabs(calc.payment()))) {
+      } else if ((field("borrowButton").toBool() && val < 0 && qAbs(val) <= qAbs(calc.payment()))
+                 || (field("lendButton").toBool() && val > 0 && qAbs(val) <= qAbs(calc.payment()))) {
         // case b)
         val = 0;
       }

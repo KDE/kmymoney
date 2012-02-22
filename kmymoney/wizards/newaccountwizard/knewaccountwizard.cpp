@@ -25,6 +25,7 @@
 #include <QToolTip>
 #include <QLabel>
 #include <QList>
+#include <qmath.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -918,7 +919,7 @@ void LoanDetailsPage::slotValuesChanged(void)
 void LoanDetailsPage::slotCalculate(void)
 {
   MyMoneyFinancialCalculator calc;
-  long double val;
+  double val;
   int PF, CF;
   QString result;
   bool moneyBorrowed = m_wizard->moneyBorrowed();
@@ -940,33 +941,33 @@ void LoanDetailsPage::slotCalculate(void)
 
 
   if (!m_loanAmount->lineedit()->text().isEmpty()) {
-    val = static_cast<long double>(m_loanAmount->value().abs().toDouble());
+    val = m_loanAmount->value().abs().toDouble();
     if (moneyBorrowed)
       val = -val;
     calc.setPv(val);
   }
 
   if (!m_interestRate->lineedit()->text().isEmpty()) {
-    val = static_cast<long double>(m_interestRate->value().abs().toDouble());
+    val = m_interestRate->value().abs().toDouble();
     calc.setIr(val);
   }
 
   if (!m_paymentAmount->lineedit()->text().isEmpty()) {
-    val = static_cast<long double>(m_paymentAmount->value().abs().toDouble());
+    val = m_paymentAmount->value().abs().toDouble();
     if (moneyLend)
       val = -val;
     calc.setPmt(val);
   }
 
   if (!m_balloonAmount->lineedit()->text().isEmpty()) {
-    val = static_cast<long double>(m_balloonAmount->value().abs().toDouble());
+    val = m_balloonAmount->value().abs().toDouble();
     if (moneyLend)
       val = -val;
     calc.setFv(val);
   }
 
   if (m_termAmount->value() != 0) {
-    calc.setNpp(static_cast<long double>(term()));
+    calc.setNpp(term());
   }
 
   // setup of parameters is done, now do the calculation
@@ -989,7 +990,7 @@ void LoanDetailsPage::slotCalculate(void)
       val = calc.payment();
       m_paymentAmount->setValue(MyMoneyMoney(static_cast<double>(val)).abs());
       // reset payment as it might have changed due to rounding
-      val = static_cast<long double>(m_paymentAmount->value().abs().toDouble());
+      val = m_paymentAmount->value().abs().toDouble();
       if (moneyLend)
         val = -val;
       calc.setPmt(val);
@@ -997,8 +998,8 @@ void LoanDetailsPage::slotCalculate(void)
       result = i18n("KMyMoney has calculated a periodic payment of %1 to cover principal and interest.", m_paymentAmount->lineedit()->text());
 
       val = calc.futureValue();
-      if ((moneyBorrowed && val < 0 && fabsl(val) >= fabsl(calc.payment()))
-          || (moneyLend && val > 0 && fabs(val) >= fabs(calc.payment()))) {
+      if ((moneyBorrowed && val < 0 && qAbs(val) >= qAbs(calc.payment()))
+          || (moneyLend && val > 0 && qAbs(val) >= qAbs(calc.payment()))) {
         calc.setNpp(calc.npp() - 1);
         // updateTermWidgets(calc.npp());
         val = calc.futureValue();
@@ -1006,8 +1007,8 @@ void LoanDetailsPage::slotCalculate(void)
         m_balloonAmount->loadText(refVal.abs().formatMoney("", m_wizard->precision()));
         result += QString(" ");
         result += i18n("The number of payments has been decremented and the balloon payment has been modified to %1.", m_balloonAmount->lineedit()->text());
-      } else if ((moneyBorrowed && val < 0 && fabsl(val) < fabsl(calc.payment()))
-                 || (moneyLend && val > 0 && fabs(val) < fabs(calc.payment()))) {
+      } else if ((moneyBorrowed && val < 0 && qAbs(val) < qAbs(calc.payment()))
+                 || (moneyLend && val > 0 && qAbs(val) < qAbs(calc.payment()))) {
         m_balloonAmount->loadText(MyMoneyMoney(0, 1).formatMoney("", m_wizard->precision()));
       } else {
         MyMoneyMoney refVal(static_cast<double>(val));
@@ -1023,10 +1024,10 @@ void LoanDetailsPage::slotCalculate(void)
 
       // if the number of payments has a fractional part, then we
       // round it to the smallest integer and calculate the balloon payment
-      result = i18n("KMyMoney has calculated the term of your loan as %1. ", updateTermWidgets(floorl(val)));
+      result = i18n("KMyMoney has calculated the term of your loan as %1. ", updateTermWidgets(qFloor(val)));
 
-      if (val != floorl(val)) {
-        calc.setNpp(floorl(val));
+      if (val != qFloor(val)) {
+        calc.setNpp(qFloor(val));
         val = calc.futureValue();
         MyMoneyMoney refVal(static_cast<double>(val));
         m_balloonAmount->loadText(refVal.abs().formatMoney("", m_wizard->precision()));
@@ -1047,14 +1048,14 @@ void LoanDetailsPage::slotCalculate(void)
       //    less in value than regular payments. That means, that the
       //    future value is to be treated as  (fully payed back)
       // c) the loan is not payed back yet
-      if ((moneyBorrowed && val < 0 && fabsl(val) > fabsl(calc.payment()))
-          || (moneyLend && val > 0 && fabs(val) > fabs(calc.payment()))) {
+      if ((moneyBorrowed && val < 0 && qAbs(val) > qAbs(calc.payment()))
+          || (moneyLend && val > 0 && qAbs(val) > qAbs(calc.payment()))) {
         // case a)
-        qDebug("Future Value is %Lf", val);
+        qDebug("Future Value is %f", val);
         throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
 
-      } else if ((moneyBorrowed && val < 0 && fabsl(val) <= fabsl(calc.payment()))
-                 || (moneyLend && val > 0 && fabs(val) <= fabs(calc.payment()))) {
+      } else if ((moneyBorrowed && val < 0 && qAbs(val) <= qAbs(calc.payment()))
+                 || (moneyLend && val > 0 && qAbs(val) <= qAbs(calc.payment()))) {
         // case b)
         val = 0;
       }
@@ -1121,9 +1122,9 @@ int LoanDetailsPage::term(void) const
   return factor;
 }
 
-QString LoanDetailsPage::updateTermWidgets(const long double val)
+QString LoanDetailsPage::updateTermWidgets(const double val)
 {
-  long long vl = static_cast<long long>(floorl(val));
+  long vl = qFloor(val);
 
   QString valString;
   MyMoneySchedule::occurrenceE unit = m_termUnit->currentItem();

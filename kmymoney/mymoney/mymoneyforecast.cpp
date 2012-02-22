@@ -1265,7 +1265,7 @@ void MyMoneyForecast::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoney
       calc.setCF(MyMoneySchedule::eventsPerYear(compoundingOccurrence));
 
       calc.setPv(balance.toDouble());
-      calc.setIr(static_cast<FCALC_DOUBLE>(acc.interestRate(dueDate).abs().toDouble()));
+      calc.setIr(acc.interestRate(dueDate).abs().toDouble());
       calc.setPmt(acc.periodicPayment().toDouble());
 
       MyMoneyMoney interest(calc.interestDue(), 100), amortization;

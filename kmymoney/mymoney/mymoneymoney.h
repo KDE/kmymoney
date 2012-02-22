@@ -97,9 +97,6 @@ public:
   explicit MyMoneyMoney(const QString& pszAmount);
   explicit MyMoneyMoney(const signed64 Amount, const signed64 denom);
   explicit MyMoneyMoney(const double dAmount, const signed64 denom = 100);
-#ifdef SIZEOF_LONG_DOUBLE
-  explicit MyMoneyMoney(const long double dAmount, const signed64 denom = 100);
-#endif
 
   // copy constructor
   MyMoneyMoney(const MyMoneyMoney& Amount);
@@ -266,30 +263,6 @@ inline MyMoneyMoney::MyMoneyMoney(const double dAmount, const signed64 denom) :
     AlkValue(dAmount, denom)
 {
 }
-
-#ifdef SIZEOF_LONG_DOUBLE
-////////////////////////////////////////////////////////////////////////////////
-//      Name: MyMoneyMoney
-//   Purpose: Constructor - constructs object from an amount in a long double value
-//   Returns: None
-//    Throws: Nothing.
-// Arguments: dAmount - long double object containing amount
-//            denom   - denominator of the object
-//
-////////////////////////////////////////////////////////////////////////////////
-inline MyMoneyMoney::MyMoneyMoney(const long double dAmount, const signed64 denom)
-{
-  std::stringstream ss;
-  ss << dAmount;
-  QString num = QString(ss.str().c_str());
-  // now convert the string but don't forget to replace the dot with
-  // the current active decimalSeparator
-  *this = MyMoneyMoney(num.replace(QLatin1Char('.'), _decimalSeparator));
-  if (denom != 0) {
-    *this = convert(denom);
-  }
-}
-#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 //      Name: MyMoneyMoney

@@ -9,9 +9,6 @@
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "KMyMoney"
 
-/* define if you have round */
-#cmakedefine HAVE_ROUND 1
-
 /* Define to 1 if you have the <stdint.h> header file. */
 #cmakedefine HAVE_STDINT_H 1
 
@@ -38,9 +35,6 @@
 
 /* The size of `unsigned long', as computed by sizeof. */
 #cmakedefine SIZEOF_UNSIGNED_LONG @SIZEOF_UNSIGNED_LONG@
-
-/* The size of `long double', as computed by sizeof. */
-#cmakedefine SIZEOF_LONG_DOUBLE @SIZEOF_LONG_DOUBLE@
 
 #cmakedefine KMM_DEBUG 1
 

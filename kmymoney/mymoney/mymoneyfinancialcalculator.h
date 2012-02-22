@@ -27,7 +27,6 @@
 #include <config-kmymoney.h>
 #endif
 
-#include <cmath>
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -38,20 +37,6 @@
 // Project Includes
 
 #include <kmm_mymoney_export.h>
-
-
-#ifdef SIZEOF_LONG_DOUBLE
-#define FCALC_DOUBLE  long double
-#else
-#define FCALC_DOUBLE  double
-#define modfl(a,b)    modf(a,b)
-#define roundl(a)     round(a)
-#define powl(a,b)     pow(a,b)
-#define expl(a)       exp(a)
-#define logl(a)       log(a)
-#define floorl(a)     floor(a)
-#define fabsl(a)      fabs(a)
-#endif
 
 /**
   * @author Thomas Baumgart
@@ -80,7 +65,7 @@ public:
     * @exception If one of the required values is not set, a MyMoneyException
     *             will be thrown
     */
-  FCALC_DOUBLE numPayments();
+  double numPayments();
 
   /**
     * This method calculates the amount of the payment (amortization and interest)
@@ -92,7 +77,7 @@ public:
     * @exception If one of the required values is not set, a MyMoneyException
     *             will be thrown
     */
-  FCALC_DOUBLE payment();
+  double payment();
 
   /**
     * This method calculates the present value
@@ -104,7 +89,7 @@ public:
     * @exception If one of the required values is not set, a MyMoneyException
     *             will be thrown
     */
-  FCALC_DOUBLE presentValue();
+  double presentValue();
 
   /**
     * This method calculates the future value
@@ -116,7 +101,7 @@ public:
     * @exception If one of the required values is not set, a MyMoneyException
     *             will be thrown
     */
-  FCALC_DOUBLE futureValue();
+  double futureValue();
 
   /**
     * This method calculates the nominal interest rate
@@ -128,7 +113,7 @@ public:
     * @exception If one of the required values is not set, a MyMoneyException
     *             will be thrown
     */
-  FCALC_DOUBLE interestRate();
+  double interestRate();
 
   /**
     * This method calculates the interest due for the next payment according
@@ -154,7 +139,7 @@ public:
     *
     * @return the interest amount
     */
-  FCALC_DOUBLE interestDue(void) const;
+  double interestDue(void) const;
 
   /**
     * This method sets the rounding precision to @p prec fractional
@@ -172,9 +157,9 @@ public:
     *
     * @param npp number of payment periods
     */
-  void setNpp(const FCALC_DOUBLE npp);
+  void setNpp(const double npp);
 
-  FCALC_DOUBLE npp(void) const {
+  double npp(void) const {
     return m_npp;
   };
 
@@ -242,9 +227,9 @@ public:
     *
     * @param ir nominal interest rate
     */
-  void setIr(const FCALC_DOUBLE ir);
+  void setIr(const double ir);
 
-  FCALC_DOUBLE ir(void) const {
+  double ir(void) const {
     return m_ir;
   };
 
@@ -254,9 +239,9 @@ public:
     *
     * @param pv present value
     */
-  void setPv(const FCALC_DOUBLE pv);
+  void setPv(const double pv);
 
-  FCALC_DOUBLE pv(void) const {
+  double pv(void) const {
     return m_pv;
   };
 
@@ -266,9 +251,9 @@ public:
     *
     * @param pmt payment amount
     */
-  void setPmt(const FCALC_DOUBLE pmt);
+  void setPmt(const double pmt);
 
-  FCALC_DOUBLE pmt(void) const {
+  double pmt(void) const {
     return m_pmt;
   };
 
@@ -278,40 +263,40 @@ public:
     *
     * @param fv future value
     */
-  void setFv(const FCALC_DOUBLE fv);
+  void setFv(const double fv);
 
-  FCALC_DOUBLE fv(void) const {
+  double fv(void) const {
     return m_fv;
   };
 
 private:
-  FCALC_DOUBLE eff_int(void) const;
-  FCALC_DOUBLE nom_int(const FCALC_DOUBLE eint) const;
-  FCALC_DOUBLE rnd(const FCALC_DOUBLE x) const;
+  double eff_int(void) const;
+  double nom_int(const double eint) const;
+  double rnd(const double x) const;
 
-  FCALC_DOUBLE _Ax(const FCALC_DOUBLE eint) const;
-  FCALC_DOUBLE _Bx(const FCALC_DOUBLE eint) const;
-  FCALC_DOUBLE _Cx(const FCALC_DOUBLE eint) const;
-  FCALC_DOUBLE _fi(const FCALC_DOUBLE eint) const;
-  FCALC_DOUBLE _fip(const FCALC_DOUBLE eint) const;
+  double _Ax(const double eint) const;
+  double _Bx(const double eint) const;
+  double _Cx(const double eint) const;
+  double _fi(const double eint) const;
+  double _fip(const double eint) const;
 
 private:
-  FCALC_DOUBLE          m_ir;   // nominal interest rate
-  FCALC_DOUBLE          m_pv;   // present value
-  FCALC_DOUBLE          m_pmt;  // periodic payment
-  FCALC_DOUBLE          m_fv;   // future value
-  FCALC_DOUBLE          m_npp;  // number of payment periods
+  double          m_ir;   // nominal interest rate
+  double          m_pv;   // present value
+  double          m_pmt;  // periodic payment
+  double          m_fv;   // future value
+  double          m_npp;  // number of payment periods
 
-  unsigned short        m_CF;   // compounding frequency
-  unsigned short        m_PF;   // payment frequency
+  unsigned short  m_CF;   // compounding frequency
+  unsigned short  m_PF;   // payment frequency
 
-  unsigned short        m_prec; // precision for roundoff for pv, pmt and fv
-  // i is not rounded, n is integer
+  unsigned short  m_prec; // precision for roundoff for pv, pmt and fv
+                          // i is not rounded, n is integer
 
-  bool                  m_bep;  // beginning/end of period payment flag
-  bool                  m_disc; // discrete/continuous compounding flag
+  bool            m_bep;  // beginning/end of period payment flag
+  bool            m_disc; // discrete/continuous compounding flag
 
-  unsigned short        m_mask; // available value mask
+  unsigned short m_mask; // available value mask
 #define PV_SET        0x0001
 #define IR_SET        0x0002
 #define PMT_SET       0x0004

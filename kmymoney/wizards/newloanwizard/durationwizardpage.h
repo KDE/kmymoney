@@ -49,7 +49,7 @@ class DurationWizardPage : public DurationWizardPageDecl
 public:
   explicit DurationWizardPage(QWidget *parent = 0);
 
-  QString updateTermWidgets(const long double val);
+  QString updateTermWidgets(const double val);
   int term(void) const;
 
 public slots:

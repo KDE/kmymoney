@@ -17,11 +17,10 @@
 
 #include "durationwizardpage.h"
 
-#include <cmath>
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <qmath.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -86,9 +85,9 @@ int DurationWizardPage::term(void) const
   return factor;
 }
 
-QString DurationWizardPage::updateTermWidgets(const long double val)
+QString DurationWizardPage::updateTermWidgets(const double val)
 {
-  long long vl = static_cast<long long>(floorl(val));
+  long vl = qFloor(val);
 
   QString valString;
   MyMoneySchedule::occurrenceE unit;
