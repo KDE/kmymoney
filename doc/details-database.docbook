@@ -255,9 +255,6 @@
 
 <informaltable>
   <tgroup cols="3">
-    <colspec colname="c1" colwidth="4.5cm"/>
-    <colspec colname="c2" colwidth="6.2cm"/>
-    <colspec colname="c3" colwidth="6.3cm"/>
     <thead>
       <row>
         <entry valign="top">
