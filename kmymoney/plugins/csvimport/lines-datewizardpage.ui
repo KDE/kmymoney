@@ -45,7 +45,7 @@
       </spacer>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="40,3,40,40">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="40,3,0,40,40,0">
        <item>
         <widget class="QLabel" name="label">
          <property name="maximumSize">
@@ -71,6 +71,19 @@ p, li { white-space: pre-wrap; }
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_low" stretch="5,10,10,10,0,5">
@@ -128,6 +141,9 @@ p, li { white-space: pre-wrap; }
              <height>27</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>Enter the number of the first transaction line.</string>
+           </property>
            <property name="minimum">
             <number>1</number>
            </property>
@@ -170,6 +186,9 @@ p, li { white-space: pre-wrap; }
              <width>100</width>
              <height>27</height>
             </size>
+           </property>
+           <property name="toolTip">
+            <string>Enter the number of the last transaction line.</string>
            </property>
            <property name="minimum">
             <number>1</number>
@@ -238,17 +257,17 @@ p, li { white-space: pre-wrap; }
            </property>
            <item>
             <property name="text">
-             <string>y m d</string>
+             <string comment="abbreviation of 'year', 'month', 'day'.">y m d</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>m d y</string>
+             <string comment="abbreviation of 'month', 'day', 'year',">m d y</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>d m y</string>
+             <string comment="abbreviation of  'day', 'month', 'year',">d m y</string>
             </property>
            </item>
           </widget>
@@ -267,6 +286,19 @@ p, li { white-space: pre-wrap; }
           </spacer>
          </item>
         </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </item>

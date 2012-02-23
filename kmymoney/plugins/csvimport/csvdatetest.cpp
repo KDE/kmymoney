@@ -52,22 +52,22 @@ void CsvDateTest::testDateConvert()
 {
   QString format = "dd/MM/yyyy";
 
-  m_convert->setDateFormatIndex(2);//             UK/EU date format;
+  m_convert->setDateFormatIndex(2);  //             UK/EU date format;
 
   QVERIFY(m_convert->convertDate("13/09/81") ==
-          QDate::fromString("13/09/1981", format));//a = "13/09/81"
+          QDate::fromString("13/09/1981", format));  //a = "13/09/81"
 
   QVERIFY(m_convert->convertDate("13/09/01") ==
-          QDate::fromString("13/09/2001", format));//b = "13/09/01"
+          QDate::fromString("13/09/2001", format));  //b = "13/09/01"
 
   QVERIFY(m_convert->convertDate("13-09-81") ==
-          QDate::fromString("13/09/1981", format));//c = "13-09-81"
+          QDate::fromString("13/09/1981", format));  //c = "13-09-81"
 
   QVERIFY(m_convert->convertDate("13-09-01") ==
-          QDate::fromString("13/09/2001", format));//d = "13-09-01"
+          QDate::fromString("13/09/2001", format));  //d = "13-09-01"
 
   QVERIFY(m_convert->convertDate(QString("25-" + QDate::longMonthName(12) + "-2000")) ==
-          QDate::fromString("25/12/2000", format));//e = "25-December-2000"
+          QDate::fromString("25/12/2000", format));  //e = "25-December-2000"
 
   // TODO: change or fix this test since it's based on localization
   //which makes it fail depending on the translation
@@ -78,7 +78,7 @@ void CsvDateTest::testDateConvert()
   //QDate::fromString("5/11/1999", format));//f = "5-Nov-1999"
 
   QVERIFY(m_convert->convertDate("13.09.81") ==
-          QDate::fromString("13/09/1981", format));//g = "13.09.81"
+          QDate::fromString("13/09/1981", format));  //g = "13.09.81"
 
   QVERIFY(m_convert->convertDate("32/01/2000") ==
           QDate());//                             h ="32/01/2000" invalid day
@@ -97,7 +97,7 @@ void CsvDateTest::testDateConvert()
 
   format = "ddMMyyyy";
   QVERIFY(m_convert->convertDate("31-1-2010") ==
-          QDate::fromString("31012010", format));//m = "31-1-2010" single digit month
+          QDate::fromString("31012010", format));  //m = "31-1-2010" single digit month
 
 // Now with no separators
 
@@ -110,11 +110,11 @@ void CsvDateTest::testDateConvertFormats()
   QString aDate = "2001-11-30";
   QString format = "yyyy/MM/dd";
 
-  m_convert->setDateFormatIndex(0);//           ISO date format
+  m_convert->setDateFormatIndex(0);  //           ISO date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate::fromString("2001/11/30", format));
 
-  m_convert->setDateFormatIndex(1);//           US date format
+  m_convert->setDateFormatIndex(1);  //           US date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate());
 
@@ -122,22 +122,22 @@ void CsvDateTest::testDateConvertFormats()
 
   aDate = "20011130";
 
-  m_convert->setDateFormatIndex(0);//           ISO date format
+  m_convert->setDateFormatIndex(0);  //           ISO date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate(2001, 11, 30));
 
-  m_convert->setDateFormatIndex(1);//           US date format
+  m_convert->setDateFormatIndex(1);  //           US date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate());
 
   aDate = "11-30-2001";
   format = "MM/dd/yyyy";
 
-  m_convert->setDateFormatIndex(0);//             ISO date format
+  m_convert->setDateFormatIndex(0);  //             ISO date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate());
 
-  m_convert->setDateFormatIndex(1);//           US date format
+  m_convert->setDateFormatIndex(1);  //           US date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate::fromString("11/30/2001", format));
 
@@ -145,11 +145,11 @@ void CsvDateTest::testDateConvertFormats()
 
   aDate = "11302001";
 
-  m_convert->setDateFormatIndex(0);//             ISO date format
+  m_convert->setDateFormatIndex(0);  //             ISO date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate());
 
-  m_convert->setDateFormatIndex(1);//           US date format
+  m_convert->setDateFormatIndex(1);  //           US date format
 
   QVERIFY(m_convert->convertDate(aDate) == QDate(2001, 11, 30));
 }

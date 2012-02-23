@@ -41,8 +41,8 @@ public:
   explicit CsvImporterPlugin(QObject* parent, const QVariantList&);
   ~CsvImporterPlugin();
 
-  CSVDialog*  m_csvImporter;
-  KAction*         m_action;
+  CSVDialog*        m_csvImporter;
+  KAction*          m_action;
 
 public slots:
   bool slotGetStatement(MyMoneyStatement& s);

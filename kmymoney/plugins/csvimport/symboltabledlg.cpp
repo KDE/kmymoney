@@ -95,7 +95,7 @@ void SymbolTableDlg::slotRejected()
 
 void SymbolTableDlg::slotItemChanged(QTableWidgetItem* item)
 {
-  if (item->column() < 2) { //  Only edit names.
+  if (item->column() < 2) {     //  Only edit names.
     return;
   }
   QString name = item->text();

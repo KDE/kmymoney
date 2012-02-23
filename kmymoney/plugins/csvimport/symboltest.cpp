@@ -48,7 +48,7 @@ void SymbolTest::testDecimalSymbolDot()
 {
   //  Detect '.' as decimal and replace from locale
 
-  m_parse->setDecimalSymbol(0);/// "."
+  m_parse->setDecimalSymbol(0);  //  "."
   m_parse->setThousandsSeparator(0);
 
   QFETCH(QString, input);
@@ -61,7 +61,7 @@ void SymbolTest::testDecimalSymbolComma()
 {
   //  Detect ',' as decimal and replace from locale
 
-  m_parse->setDecimalSymbol(1);/// ","
+  m_parse->setDecimalSymbol(1);  //   ","
   m_parse->setThousandsSeparator(1);
 
   QFETCH(QString, input);
@@ -74,7 +74,7 @@ void SymbolTest::testDecimalSymbolInvalid()
 {
   //  Check for ',' as decimal, and none present
 
-  m_parse->setDecimalSymbol(1);/// ","
+  m_parse->setDecimalSymbol(1);  //   ","
   m_parse->setThousandsSeparator(1);
   m_testDecimal = m_parse->decimalSymbol(1);
 
@@ -87,8 +87,8 @@ void SymbolTest::testDecimalSymbolInvalid()
 
 void SymbolTest::testDecimalSymbolDot_data()
 {
-  QTest::addColumn<QString>("input");
-  QTest::addColumn<QString>("result");
+  QTest::addColumn<QString> ("input");
+  QTest::addColumn<QString> ("result");
 
   //  Detect '.' as decimal and replace from locale
   QTest::newRow("test 1") << "1234.56" << QString("1234" + m_localeDecimal + "56");
@@ -111,8 +111,8 @@ void SymbolTest::testDecimalSymbolDot_data()
 
 void SymbolTest::testDecimalSymbolComma_data()
 {
-  QTest::addColumn<QString>("input");
-  QTest::addColumn<QString>("result");
+  QTest::addColumn<QString> ("input");
+  QTest::addColumn<QString> ("result");
 
   //  Detect ',' as decimal and replace from locale
 
@@ -131,8 +131,8 @@ void SymbolTest::testDecimalSymbolComma_data()
 
 void SymbolTest::testDecimalSymbolInvalid_data()
 {
-  QTest::addColumn<QString>("input");
-  QTest::addColumn<QString>("result");
+  QTest::addColumn<QString> ("input");
+  QTest::addColumn<QString> ("result");
 
   //  Check for ',' as decimal, and none present
   QTest::newRow("test 1") << "1234.56" << "invalid";

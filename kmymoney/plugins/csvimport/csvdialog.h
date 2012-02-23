@@ -61,7 +61,7 @@ public:
 
   QWizard*            m_wizard;
   CsvImporterPlugin*  m_plugin;
-  CSVDialog*        m_csvDlg;
+  CSVDialog*          m_csvDlg;
   InvestmentDlg*      m_investmentDlg;
   InvestProcessing*   m_investProcessing;
   ConvertDate*        m_convertDate;
@@ -100,19 +100,22 @@ public:
   QStringList    m_dateFormats;
   QStringList    m_columnList;
   QStringList    m_securityList;
+  QStringList    m_typeOfFile;
+  QStringList    m_profileList;
 
   QString        m_csvPath;
+  QString        m_profileName;
   QString        m_date;
   QString        m_fieldDelimiterCharacter;
-  QString        m_filename;
   QString        m_inBuffer;
   QString        m_inFileName;
   QString        m_outBuffer;
   QString        m_qifBuffer;
   QString        m_textDelimiterCharacter;
-  QString        csvPath();
   QString        inFileName();
   QString        m_fileType;
+  QString        m_priorCsvProfile;
+  QString        m_priorInvProfile;
   QString        m_detailFilter;
 
   /**
@@ -120,8 +123,6 @@ public:
    */
   QMap<QString, bool> m_hashMap;
 
-
-  bool           m_decimalSymbolChanged;
   bool           m_importNow;
   bool           m_showEmptyCheckBox;
   bool           m_accept;
@@ -129,6 +130,8 @@ public:
   bool           m_goBack;
   bool           m_importIsValid;
   bool           m_isTableTrimmed;
+  bool           m_importError;
+  bool           m_profileExists;
 
   int            m_dateFormatIndex;
   int            m_debitFlag;
@@ -149,6 +152,7 @@ public:
 
   QString          columnType(int column);
   QString          decimalSymbol();
+  void             setDecimalSymbol(int val);
   QString          currentUI();
 
   void             clearColumnType(int column);
@@ -165,19 +169,18 @@ public:
   void             setPayeeSelected(bool val);
   void             setMemoSelected(bool val);
   void             setNumberSelected(bool val);
-  int              amountColumn();
-  void             setAmountColumn(int column);
-  int              creditColumn();
-  void             setCreditColumn(int column);
-
   void             setCurrentUI(QString val);
 
-  int              debitColumn();
-  void             setDebitColumn(int val);
   int              maxColumnCount();
   void             setMaxColumnCount(int val);
 
-  void             setupNextPage();
+  int              amountColumn();
+  int              debitColumn();
+  int              creditColumn();
+  int              dateColumn();
+  int              payeeColumn();
+  int              numberColumn();
+  int              memoColumn();
 
   /**
   * This method is called when the user clicks 'Clear selections', in order to
@@ -201,6 +204,10 @@ public:
   */
   void           clearComboBoxText();
 
+  /**
+   * This method is called when an input file has been selected, to clear
+   * previous column selections.
+   */
   void           clearColumnTypes();
 
   int            columnNumber(const QString& msg);
@@ -270,14 +277,30 @@ public:
   void           init();
 
   /**
-  * This method is called on opening, to load settings from the resource file.
+  * This method is called during file selection, to load settings from the resource file.
   */
   void           readSettings();
 
   /**
-  * This method is called to redraw the window according to the number of
-  * columns and rows to be displayed.
+  * This method is called when one of the radiobuttons is checked, to populate 
+  * the sourceNames combobox from the resource file.
   */
+  void           readSettingsInit();
+
+  /**
+  * Immediately after installation, there is no local config file.
+  * This method is called to copy the default version into the user's
+  * local folder.
+  */
+  void           readSettingsProfiles();
+
+  /**
+  * This method is called when the user chooses to add a new profile, It achieves this by copying
+  * the necessary basic parameters from an existing profile called "Profiles-New Profile###"
+  * in the resource file,
+  */
+  void           createProfile(QString newName);
+
   void           updateScreen();
   void           showStage();
 
@@ -344,6 +367,12 @@ public slots:
   */
   void           slotSaveAsQIF();
 
+  /**
+  * This method is called when the user selects a new decimal symbol.  The
+  * UI is updated using the new symbol.
+  */
+  void           decimalSymbolSelected(int val);
+
 private:
   QString          m_columnType[MAXCOL];//  holds field types - date, payee, etc.
   QString          m_currentUI;
@@ -359,6 +388,7 @@ private:
   bool             m_memoSelected;
   bool             m_numberSelected;
   bool             m_payeeSelected;
+  bool             m_firstPass;
 
   int              m_amountColumn;
   int              m_creditColumn;
@@ -371,6 +401,7 @@ private:
   int              m_maxColumnCount;
   int              m_decimalSymbolIndex;
   int              m_endLine;
+  int              m_fileEndLine;
   int              m_startLine;
   int              m_curId;
   int              m_lastId;
@@ -385,6 +416,7 @@ private:
   QList<QLabel*>   m_stageLabels;
 
   int              nextId() const;
+  void             updateRowHeaders(int skp);
 
   void             closeEvent(QCloseEvent *event);
   void             resizeEvent(QResizeEvent * event);
@@ -441,12 +473,6 @@ private slots:
   void           debitColumnSelected(int);
 
   /**
-  * This method is called when the user selects a new decimal symbol.  The
-  * UI is updated using the new symbol.
-  */
-  void           decimalSymbolSelected(int val);
-
-  /**
   * This method is called when the user edits the lastLine setting.
   */
   void           endLineChanged(int val);
@@ -475,6 +501,12 @@ private slots:
   */
   void           payeeColumnSelected(int);
 
+  /**
+  * This method is called when 'Cancel' is clicked.  No settings will
+  * be saved, and the plugin will be terminated.
+  */
+  void           slotCancel();
+  
   /**
   * This method is called when 'Quit' is clicked.  The plugin settings will
   * be saved and the plugin will be terminated.
@@ -510,6 +542,9 @@ public:
   IntroPage(QWidget *parent = 0);
   ~IntroPage();
 
+  void                initializePage();
+  void                setParent(CSVDialog* dlg);
+  
   QVBoxLayout*        m_pageLayout;
 
   QString             m_activity;
@@ -518,9 +553,13 @@ public:
   CSVDialog           *m_dlg;
   QStringList         m_sourceList;
 
-  void                setParent(CSVDialog* dlg);
-
   bool                m_set;
+
+  int                 addItem(QString txt);
+
+  QMap<QString, int>  m_map;
+  QMap<QString, QString>  m_mapFileType;
+  int                 m_index;
 
 signals:
   void             signalBankClicked(bool);
@@ -529,12 +568,31 @@ signals:
   bool             isSet();
 
 private:
-  void             initializePage();
   bool             validatePage();
+  bool             m_messageBoxJustCancelled;
+  bool             m_firstEdit;
+  bool             m_editAccepted;
+  bool             m_addRequested;
+  bool             m_firstLineEdit;
+  
+  int              m_priorIndex;
+  int              editProfileName(QString& fromName, QString& toName);
+  
+  QString          m_name;
+  QString          m_priorName;
+  QString          m_action;
+  QString          m_newProfileCreated;
+  QString          m_lastRadioButton;
+    
+  void             addProfileName();
 
 private slots:
-  void             slotComboSourceClicked(int);
-  void             slotSourceNameEdited();
+  void             slotComboEditTextChanged(QString txt);
+  void             slotComboSourceClicked(int index);
+  void             slotLineEditingFinished();
+  void             slotRadioButton_bankClicked();
+  void             slotRadioButton_investClicked();
+    
 };
 
 
@@ -555,11 +613,11 @@ public:
   Ui::SeparatorPage   *ui;
   CSVDialog*          m_dlg;
   void                setParent(CSVDialog* dlg);
+  void                initializePage();
 
 signals:
 
 private:
-  void                initializePage();
   void                cleanupPage();
 
   int                 nextId() const;
@@ -590,6 +648,16 @@ private:
 
   void                initializePage();
   int                 nextId() const;
+  bool                isComplete() const;
+  void                cleanupPage();
+  bool                m_reloadNeeded;
+
+private slots:
+  void                slotDateColChanged(int col);
+  void                slotPayeeColChanged(int col);
+  void                slotDebitColChanged(int col);
+  void                slotCreditColChanged(int col);
+  void                slotAmountColChanged(int col);
 };
 
 namespace Ui
@@ -611,11 +679,16 @@ public:
 
 signals:
 
+public slots:
+  void                slotsecurityNameChanged(int index);
 private:
   CSVDialog*          m_dlg;
 
+  bool                m_reloadNeeded;
+
   bool                isComplete() const;
   void                initializePage();
+  void                cleanupPage();
 
 private slots:
   void                slotDateColChanged(int col);
@@ -625,7 +698,6 @@ private slots:
   void                slotAmountColChanged(int col);
   void                slotSymbolColChanged(int col);
   void                slotDetailColChanged(int col);
-  void                slotsecurityNameChanged(int index);
   void                slotFilterEditingFinished();
 };
 
@@ -648,10 +720,17 @@ public:
 
   void                initializePage();
   void                setParent(CSVDialog* dlg);
+  bool                validatePage();
+  int                 nextId() const;
+  bool                m_isColumnSelectionComplete;
 
+  int                 m_trailerLines;
+
+signals:
+  bool                isImportable();
 private:
   CSVDialog           *m_dlg;
-  bool                validatePage();
+
 };
 
 namespace Ui
@@ -670,6 +749,7 @@ public:
   QVBoxLayout*        m_pageLayout;
   Ui::CompletionPage  *ui;
   void                setParent(CSVDialog* dlg);
+  void                initializePage();
 
 signals:
   void                completeChanged();
@@ -681,7 +761,7 @@ public slots:
   void                slotImportValid();
 
 private:
-  void                initializePage();
+
   void                cleanupPage();
 
   bool                validatePage();

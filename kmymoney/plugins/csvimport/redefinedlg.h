@@ -97,6 +97,7 @@ private:
 
   int              m_amountColumn;
   int              m_columnTotalWidth;
+  int              m_maxWidth;
   int              m_mainHeight;
   int              m_mainWidth;
   int              m_maxCol;

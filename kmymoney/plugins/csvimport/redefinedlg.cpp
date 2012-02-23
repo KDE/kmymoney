@@ -39,6 +39,7 @@ RedefineDlg::RedefineDlg()
   m_accountName.clear();
   m_amountColumn = 0;
   m_columnTotalWidth = 0;
+  m_maxWidth = 0;
   m_mainHeight = 0;
   m_mainWidth = 0;
   m_priceColumn = 0;
@@ -94,6 +95,7 @@ void RedefineDlg::displayLine(const QString& info)
   brush.setStyle(Qt::SolidPattern);
   int row;
   m_columnTotalWidth = 0;
+  m_maxWidth = 0;
   m_widget->tableWidget->setRowCount(2);
   for (int col = 0; col < m_maxCol; col++) {
     row = 1;
@@ -102,17 +104,14 @@ void RedefineDlg::displayLine(const QString& info)
 
     QTableWidgetItem *item = new QTableWidgetItem;//  add items to UI
     item->setText(txt);
-    m_widget->tableWidget->setItem(row, col, item);// add items to UI here
+    m_widget->tableWidget->setItem(row, col, item);  // add items to UI here
     if (m_typeColumn == col) {
       item->setBackground(brush);
     }
-    m_columnTotalWidth += m_widget->tableWidget->columnWidth(col);
-
     row = 0;
     if (col == m_quantityColumn) {
       QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
       item->setText(i18n("Quantity"));
-      m_widget->tableWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter);
       m_widget->tableWidget->setItem(row, col, item);
     } else if (col == m_priceColumn) {
       QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
@@ -126,7 +125,18 @@ void RedefineDlg::displayLine(const QString& info)
       QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
       item->setText(i18n("Type"));
       m_widget->tableWidget->setItem(row, col, item);
+    } else if (col == m_detailColumn) {
+      QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
+      item->setText(i18n("Detail"));
+      m_widget->tableWidget->setItem(row, col, item);
     }
+  }
+  m_widget->tableWidget->resizeColumnsToContents();
+  for (int col = 0; col < m_maxCol; col++) {
+    m_columnTotalWidth += m_widget->tableWidget->columnWidth(col);
+  }
+  if (m_columnTotalWidth > m_maxWidth) {
+    m_maxWidth = m_columnTotalWidth;
   }
   updateWindow();
 }
@@ -222,7 +232,7 @@ int RedefineDlg::suspectType(const QString& info)
 {
   displayLine(info);
   buildOkTypeList();
-  for (int i = 0; i < m_typesList.count() ; i++) { //m_okTypeList.count()
+  for (int i = 0; i < m_typesList.count() ; i++) {    //m_okTypeList.count()
     if (m_okTypeList.contains(m_typesList[i])) {
       m_widget->kcombobox_Actions->setItemIcon(i, m_iconYes);
     } else {
@@ -271,33 +281,29 @@ void RedefineDlg::resizeEvent(QResizeEvent * event)
 {
   event->accept();
 
-  m_mainWidth = m_widget->verticalLayout->geometry().size().width() - 10;
-  m_mainHeight = m_widget->tableWidget->geometry().size().height();
   updateWindow();
 }
 
 void RedefineDlg::updateWindow()
 {
-  int w = m_widget->tableWidget->width();
-  int hght = 4 + (m_widget->tableWidget->rowHeight(0) * 2);
-  hght += m_widget->tableWidget->horizontalHeader()->height() + 2;//  frig factor for vert. headers?
+  int hght = 6 + (m_widget->tableWidget->rowHeight(0) * 2);
+  hght += m_widget->tableWidget->horizontalHeader()->height();//  frig factor for horiz. headers?
 
-  if (m_columnTotalWidth > (m_mainWidth - 12))
-    hght += m_widget->tableWidget->horizontalScrollBar()->height() + 1;//  ....and for hor. scroll bar
-
+  if (m_maxWidth > (m_mainWidth - 12)) {
+    hght += m_widget->tableWidget->horizontalScrollBar()->height() - 2;//  ....and for hor. scroll bar
+  }
   m_widget->tableWidget->setFixedHeight(hght);
-  w = m_widget->tableWidget->width();
 }
 
 void RedefineDlg::convertValues()
 {
   QString txt;
   QString txt1;
-  if (m_priceColumn < m_columnList.count()) //  Ensure this is valid column
+  if (m_priceColumn < m_columnList.count())     //         Ensure this is valid column
     m_price = m_columnList[m_priceColumn].remove('"');
-  if (m_quantityColumn <  m_columnList.count()) //  Ensure this is valid column
+  if (m_quantityColumn <  m_columnList.count())     //     Ensure this is valid column
     m_quantity = m_columnList[m_quantityColumn].remove('"');
-  if (m_amountColumn <  m_columnList.count()) //  Ensure this is valid column
+  if (m_amountColumn <  m_columnList.count())     //       Ensure this is valid column
     txt = m_columnList[m_amountColumn];
   if ((txt.startsWith('"')) && (!txt.endsWith('"')))  {
     txt1 = m_columnList[m_amountColumn + 1];
@@ -305,7 +311,7 @@ void RedefineDlg::convertValues()
   }
   txt = txt.remove('"');
 
-  if (txt.contains(')')) {  //          replace negative ( ) with '-'
+  if (txt.contains(')')) {       //          replace negative ( ) with '-'
     txt = '-' + txt.remove(QRegExp("[(),]"));
   }
   m_amount = txt;

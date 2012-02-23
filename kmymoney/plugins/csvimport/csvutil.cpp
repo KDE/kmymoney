@@ -29,7 +29,7 @@
 #include "mymoneyaccount.h"
 
 
-Parse::Parse(): m_fieldDelimiterIndex(0), m_textDelimiterIndex(0)
+Parse::Parse() : m_fieldDelimiterIndex(0), m_textDelimiterIndex(0)
 {
   m_fieldDelimiterCharList << "," << ";" << ":" << "\t";
   m_fieldDelimiterCharacter = m_fieldDelimiterCharList[m_fieldDelimiterIndex];
@@ -57,7 +57,7 @@ QStringList Parse::parseLine(const QString& data)
   }
 
   m_fieldDelimiterCharacter = m_fieldDelimiterCharList[m_fieldDelimiterIndex];
-  listIn = m_inBuffer.split(m_fieldDelimiterCharacter);// firstly, split on m_fieldDelimiterCharacter
+  listIn = m_inBuffer.split(m_fieldDelimiterCharacter);  // firstly, split on m_fieldDelimiterCharacter
 
   QStringList::const_iterator constIterator;
 
@@ -97,17 +97,17 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
     charCount -= 1;
     if (chr == m_textDelimiterCharacter) {
       tmpBuffer += chr;
-      if (inQuotes == true) { //               if already in quoted field..
+      if (inQuotes == true) {      //               if already in quoted field..
         inQuotes = false;//                    ..end it
       } else {//                               if not..
         inQuotes = true;//                     ..start it
       }
       continue;
     } else if (chr == "\n") {
-      if (inQuotes == true) { //               embedded '\n' in quoted field
+      if (inQuotes == true) {      //               embedded '\n' in quoted field
         chr = '~';//                           replace it with ~ for now
         tmpBuffer += chr;
-        if (charCount > 0) //                      more chars yet
+        if (charCount > 0)      //                      more chars yet
           continue;//                          more chars yet
       }
       //                                       true EOL (not in quotes)
@@ -115,7 +115,7 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
         continue;
       }
       lineCount ++;
-      if (lineCount < strt) { //   startLine      not yet reached first wanted line
+      if (lineCount < strt) {      //   startLine      not yet reached first wanted line
         tmpBuffer.clear();
         continue;
       }
@@ -124,14 +124,14 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
 
       //                                       look for start of wanted data
       //  if first pass or if not at last line, proceed
-      if ((!end == 0) && (lineCount >= end)) { //  m_endLine is set from UI after first pass
+      if ((!end == 0) && (lineCount >= end)) {      //  m_endLine is set from UI after first pass
         m_lastLine = lineCount;
         break;
       }
     }//                                        end of 'EOL detected' loop
     else {//                                   must be data char
       tmpBuffer += chr;
-      if (charCount > 0) { //                      more chars yet
+      if (charCount > 0) {      //                      more chars yet
         continue;
       }//                                      else eoFile = true;
     }
@@ -245,7 +245,7 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
 
   if (str.isEmpty()) return str;
   QString txt = str.trimmed();//                 don't want trailing blanks
-  if (txt.contains('(')) { //              "(" or "Af" = debit
+  if (txt.contains('(')) {     //              "(" or "Af" = debit
     txt = txt.remove(QRegExp("[()]"));
     txt = '-' + txt;
   }
@@ -255,9 +255,9 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
 
   //  Check if this col/cell contains decimal symbol
 
-  if (decimalIndex == -1) { //                     there is no decimal
+  if (decimalIndex == -1) {     //                     there is no decimal
     m_symbolFound = false;
-    if ((thouIndex == -1) || (thouIndex == length - 4))  { //no separator || correct format
+    if ((thouIndex == -1) || (thouIndex == length - 4))  {      //no separator || correct format
       txt.remove(m_thousandsSeparator);
       QString tmp = txt + KGlobal::locale()->decimalSymbol() + "00";
       return tmp;
@@ -266,23 +266,22 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
     return txt;
   }
 
-  txt.remove(m_thousandsSeparator);//    remove unwanted old thousands separator
+  txt.remove(m_thousandsSeparator);  //    remove unwanted old thousands separator
   //  Found decimal
 
   m_symbolFound = true;//                        found genuine decimal
 
-  if (thouIndex >= 0) { //                        there was a separator
-    if (decimalIndex < thouIndex) { //            invalid conversion
+  if (thouIndex >= 0) {      //                        there was a separator
+    if (decimalIndex < thouIndex) {      //            invalid conversion
       m_invalidConversion = true;
     }
-    if (decimalIndex == length - 1) { //          ...decimal point with no decimal part (strange?)
+    if (decimalIndex == length - 1) {      //          ...decimal point with no decimal part (strange?)
       txt += m_decimalSymbol + "00";
     }
   }//  thouIndex = -1                            no thousands separator
 
   //  m_symbolFound = true                      found genuine decimal
-
-  txt.replace(m_decimalSymbol, KGlobal::locale()->decimalSymbol());// so swap it
+  txt.replace(m_decimalSymbol, KGlobal::locale()->decimalSymbol());  // so swap it
   return txt;
 }
 

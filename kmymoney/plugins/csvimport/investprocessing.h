@@ -86,9 +86,8 @@ public:
   /**
   * This method is called on opening, to load settings from the resource file.
   */
-  void           readSettingsInit();
+
   void           readSettings();
-  void           readSettings(int index);
   void           clearColumnType(int column);
   void           setColumnType(int column, const QString& type);
 
@@ -117,6 +116,12 @@ public:
   void           clearColumnNumbers();
 
   /**
+  * This method is called when an input file has been selected, to clear
+  * previous column selections.
+  */
+  void           clearColumnTypes();
+
+  /**
   * Because the memo field allows multiple selections, it helps to be able
   * to see which columns are selected already, particularly if a column
   * selection gets deleted. This is achieved by adding a '*' character
@@ -126,8 +131,6 @@ public:
   */
   void           clearComboBoxText();
 
-  void           reloadUI();
-
   void           setInFileName(const QString& val);
   void           updateScreen();
 
@@ -136,15 +139,15 @@ public:
   QString        inFileName();
   QString        m_inFileName;
   QString        m_buf;
+  QString        m_invPath;
 
   QStringList    securityList();
-
   QStringList    m_symbolsList;
   QStringList    m_namesList;
 
   QMap<QString, QString> m_map;
 
-  QStringList    m_brokerList;
+  QStringList    m_investList;
   QStringList    m_shrsinList;
   QStringList    m_divXList;
   QStringList    m_intIncList;
@@ -165,8 +168,11 @@ public:
   int            amountColumn();
   int            priceColumn();
   int            quantityColumn();
+  int            dateColumn();
   int            detailColumn();
+  int            feeColumn();
   int            symbolColumn();
+  int            typeColumn();
   int            memoColumn();
 
   bool           importNow();
@@ -175,7 +181,7 @@ public:
 
   int            m_endColumn;
   int            m_endLine;
-  int            m_finalLine;
+  int            m_fileEndLine;
   int            m_startLine;
   int            m_row;
   int            m_height;
@@ -290,8 +296,6 @@ public slots:
   * This method is called when the user selects the end line.  The requested
   * end line  value is saved, to be used on import.
   */
-  void           endLineChanged();
-
   void           endLineChanged(int val);
 
   /**
@@ -390,6 +394,11 @@ private:
   const QString checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2);
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
+  
+  /**
+   * Called after rows have been dropped, to produce the (revised) vertical (row) headers.
+   */
+  void updateRowHeaders(int skp);
 
   struct qifInvestData {
     QString      memo;
@@ -412,13 +421,13 @@ private:
   bool           m_importNow;
   bool           m_dateSelected;
   bool           m_feeSelected;
+  bool           m_firstPass;
   bool           m_memoSelected;
   bool           m_priceSelected;
   bool           m_quantitySelected;
   bool           m_typeSelected;
   bool           m_symbolSelected;
   bool           m_detailSelected;
-  bool           m_firstPass;
 
   int            m_dateFormatIndex;
   int            m_fieldDelimiterIndex;
@@ -445,7 +454,6 @@ private:
   QString        m_fieldDelimiterCharacter;
   QString        m_textDelimiterCharacter;
   QString        m_inBuffer;
-  QString        m_invPath;
 
   QString        m_outBuffer;
   QString        m_previousType;

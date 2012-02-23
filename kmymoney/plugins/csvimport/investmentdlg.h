@@ -52,7 +52,7 @@ public:
 
   CSVDialog*         m_csvDialog;
   ConvertDate*       m_convertDat;
-  SymbolTableDlg*       m_redefine;
+  SymbolTableDlg*    m_redefine;
   InvestProcessing*  m_investProcessing;
 
   void               clearComboBoxText();

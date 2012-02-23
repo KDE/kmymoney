@@ -1,104 +1,97 @@
-[BrokerageColumns1]
-AmountCol=8
-DateCol=1
-DetailCol=4
-FeeCol=-1
-MemoCol=-1
-PayeeCol=3
-PriceCol=7
-QuantityCol=6
-SymbolCol=5
-
-[BrokerageColumns2]
-AmountCol=6
-DateCol=0
-DetailCol=4
-FeeCol=-1
-MemoCol=-1
-PayeeCol=1
-PriceCol=5
-QuantityCol=2
-SymbolCol=3
-
-[BrokerageSettings1]
-BrokerageParam=Bill Payment,Check,dividend,stock dividend,qualified div,foreign tax paid,adr mgmt fee,tax,interest
-BuyParam=Buy,New Inv,Switch In
-DivXParam=Dividend,dividend,qualified div
-FeeParam=
-Filter=
-IntIncParam=Interest,Income
-InvDirectory=$HOME/Documents/KMM/csv/
-ReinvdivParam=Reinv,Re-inv,ReInv
-RemoveParam=Remove
-SellParam=Sell,Repurchase
-ShrsinParam=Add,Divd Reinv,Transfer In,Re-Registration In,Journal Entry
-StartLine=5
-
-[BrokerageSettings2]
-BrokerName=schwab
-BrokerageParam=Bill Payment,Check,dividend,stock dividend,qualified div,foreign tax paid,adr mgmt fee,tax,interest
-BuyParam=Buy,New Inv,Switch In
-DivXParam=Dividend,dividend,qualified div
-FeeParam=
-Filter=type: #
-IntIncParam=Interest,Income
-InvDirectory=$HOME/Documents/KMM/csv/
-ReinvdivParam=Reinv,Re-inv,ReInv
-RemoveParam=Remove
-SellParam=Sell,Repurchase
-ShrsinParam=Add,Divd Reinv,Transfer In,Re-Registration In,Journal Entry
-StartLine=2
-
-[Brokers]
-BrokerName=Merril Lynch,Schwab
-
-[Columns]
-AmountCol=2
-CreditCol=-1
-DateCol=0
-DebitCol=-1
-MemoCol=0
-NumberCol=-1
-PayeeCol=1
-
-[InvColumns]
-AmountCol=-1
-DateCol=-1
-DetailCol=-1
-FeeCol=-1
-MemoCol=-1
-PayeeCol=-1
-PriceCol=-1
-QuantityCol=-1
-SymbolCol=-1
-
-[InvestmentSettings]
-BrokerageParam=Bill Payment,Check,dividend,stock dividend,qualified div,foreign tax paid,adr mgmt fee,tax,interest
-BuyParam=Buy,New Inv,Switch In
-DivXParam=Dividend,dividend,qualified div
-FeeParam=
-Filter=
-IntIncParam=Interest,Income
-InvDirectory=$HOME/Documents/Fidelity/CSV/ArtemisHigh/
-ReinvdivParam=Reinv,Re-inv,ReInv
-RemoveParam=Remove
-SellParam=Sell,Repurchase
-ShrsinParam=Add,Divd Reinv,Transfer In,Re-Registration In,Journal Entry
-StartLine=6
+[BankProfiles]
+BankNames=Merril Lynch,Schwab
 
 [MainWindow]
 Height=600
 
-[Profile]
-CsvDirectory=$HOME/Documents/FD/
-CurrentUI=
-DateFormat=2
-DebitFlag=-1
-Encoding=4
+[Profiles-New Profile###]
+AAProfileComment=Do not delete 'Profiles-New Profile###' profile template
+AmountCol=-1
+BrokerageParam=Bill Payment,Check,dividend,interest,qualified div,foreign tax paid,adr mgmt fee
+BuyParam=buy
+DateCol=-1
+DateFormat=1
+DecimalSymbol=0
+DetailCol=-1
+DivXParam=Dividend
+FeeCol=-1
+FieldDelimiter=0
+FileType=
+Filter=
+IntIncParam=Interest,Income
+InvDirectory=~/Documents/
+MemoCol=-1
+PayeeCol=-1
+PriceCol=-1
+PriceFraction=2
+ProfileName=New Profile###
+QuantityCol=-1
+ReinvdivParam=reinvest,Reinv,Re-inv,ReInv
+RemoveParam=Remove
+SellParam=Sell,Repurchase
+ShrsinParam=Add,Stock Dividend,Divd Reinv,Transfer In,Re-Registration In,Journal Entry
+StartLine=1
+SymbolCol=-1
+TrailerLines=
+
+[Profiles-Merril Lynch]
+AmountCol=8
+BrokerageParam=Bill Payment,Check,dividend,interest,qualified div,foreign tax paid,adr mgmt fee
+BuyParam=buy
+DateCol=1
+DateFormat=1
+DecimalSymbol=0
+DetailCol=4
+DivXParam=Dividend
+FeeCol=-1
 FieldDelimiter=0
 FileType=Invest
-StartLine=0
-TextDelimiter=0
+Filter=
+IntIncParam=Interest,Income
+InvDirectory=~/Documents/
+MemoCol=-1
+PayeeCol=3
+PriceCol=7
+PriceFraction=2
+ProfileName=Merril Lynch
+QuantityCol=6
+ReinvdivParam=reinvest,Reinv,Re-inv,ReInv
+RemoveParam=Remove
+SellParam=Sell,Repurchase
+ShrsinParam=Add,Stock Dividend,Divd Reinv,Transfer In,Re-Registration In,Journal Entry
+StartLine=5
+SymbolCol=5
+TrailerLines=1
+
+[Profiles-Schwab]
+AmountCol=6
+BrokerageParam=Bill Payment,Check,dividend,interest,qualified div,foreign tax paid,adr mgmt fee
+BuyParam=buy
+DateCol=0
+DateFormat=1
+DecimalSymbol=0
+DetailCol=4
+DivXParam=Dividend
+FeeCol=7
+FieldDelimiter=0
+FileType=Invest
+Filter=type: #
+FilterComment=The '#' acts as end of string to avoid trailing blank being dropped.
+IntIncParam=Interest,Income
+InvDirectory=~/Documents/
+MemoCol=-1
+PayeeCol=1
+PriceCol=5
+PriceFraction=2
+ProfileName=Schwab
+QuantityCol=2
+ReinvdivParam=reinvest,Reinv,Re-inv,ReInv
+RemoveParam=Remove
+SellParam=Sell,Repurchase
+ShrsinParam=Add,Stock Dividend,Divd Reinv,Transfer In,Re-Registration In,Journal Entry
+StartLine=2
+SymbolCol=3
+TrailerLines=
 
 [Securities]
-SecurityNameList=Artemis High Income,Artemis Income Fund Inc,wells fargo & co,loomis sayles strategic income fund class c,schwab1,schwab,loomis sayles strategic income fund class cr
+SecurityNameList=securityA

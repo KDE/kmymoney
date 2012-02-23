@@ -39,18 +39,18 @@ void ParseDataTest::cleanup()
 
 void ParseDataTest::parseSplitString()
 {
-  for (int i = 0; i <= 3; i++)  { //        All four delimiters should produce same result
+  for (int i = 0; i <= 3; i++)  {     //        All four delimiters should produce same result
     m_parse->setFieldDelimiterIndex(i);
     m_parse->setFieldDelimiterCharacter(i);
 
     QString input = "abc,defgh,";//  When this string is QString::split(), two strings
     //  ....will result if ',' is the field delimiter.
     //      This is not good.
-    input.prepend('"');//            make input string quoted
+    input.prepend('"');  //            make input string quoted
     input.append('"');
     QStringList expected;
     expected << "abc,defgh,";
-    QVERIFY(m_parse->parseLine(input) == expected);// if parseLine() detects the condition,
+    QVERIFY(m_parse->parseLine(input) == expected);   // if parseLine() detects the condition,
   }                                                   // ...it rebuilds the string
 }
 

@@ -104,6 +104,8 @@ void InvestmentDlg::init()
   connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_symbolCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(symbolColumnSelected(int)));
   connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(detailColumnSelected(int)));
 
+  connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_securityName, SIGNAL(currentIndexChanged(int)), m_csvDialog->m_pageInvestment, SLOT(slotsecurityNameChanged(int)));
+
   connect(m_investProcessing, SIGNAL(statementReady(MyMoneyStatement&)), this, SIGNAL(statementReady(MyMoneyStatement&)));
 }
 
@@ -117,155 +119,76 @@ void InvestmentDlg::changedType(const QString& newType)
 
 void InvestmentDlg::saveSettings()
 {
-  if (m_investProcessing->inFileName().isEmpty()) { //          don't save column numbers if no file loaded
+  if ((m_csvDialog->m_fileType != "Invest") || (m_investProcessing->inFileName().isEmpty())) {  // don't save if no file loaded
     return;
   }
   QString str;
-
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
 
-  KConfigGroup brokerGroup(config, "Brokers");
+  KConfigGroup bankProfilesGroup(config, "BankProfiles");
 
-  brokerGroup.writeEntry("BrokerName", m_csvDialog->m_investProcessing->m_brokerList);
-  brokerGroup.config()->sync();
+  bankProfilesGroup.writeEntry("BankNames", m_csvDialog->m_profileList);
+  int indx = m_csvDialog->m_pageIntro->ui->combobox_source->findText(m_csvDialog->m_priorInvProfile, Qt::MatchExactly);
+  if (indx > 0) {
+    str = m_csvDialog->m_priorInvProfile;
+  }
+  bankProfilesGroup.writeEntry("PriorInvProfile", str);
+  bankProfilesGroup.config()->sync();
 
-  KConfigGroup profileGroup(config, "Profile");
-  profileGroup.writeEntry("DateFormat", m_csvDialog->m_pageLinesDate->ui->comboBox_dateFormat->currentIndex());
-  profileGroup.writeEntry("FieldDelimiter", m_csvDialog->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex());
-  profileGroup.config()->sync();
+  for (int i = 0; i < m_csvDialog->m_profileList.count(); i++) {
+    if (m_csvDialog->m_profileList[i] != m_csvDialog->m_profileName) {
+      continue;
+    }
 
-  KConfigGroup securitiesGroup(config, "Securities");
-  securitiesGroup.writeEntry("SecurityNameList", m_investProcessing->securityList());
-  securitiesGroup.config()->sync();
+    QString txt = "Profiles-" + m_csvDialog->m_profileList[i];
 
-  m_investProcessing->inFileName().clear();
+    KConfigGroup profilesGroup(config, txt);
+    profilesGroup.writeEntry("FileType", m_csvDialog->m_fileType);
+    profilesGroup.writeEntry("DateFormat", m_csvDialog->m_pageLinesDate->ui->comboBox_dateFormat->currentIndex());
+    profilesGroup.writeEntry("FieldDelimiter", m_csvDialog->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex());
+    profilesGroup.writeEntry("DecimalSymbol", m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->currentIndex());
+    profilesGroup.writeEntry("ProfileName", m_csvDialog->m_profileName);
+    profilesGroup.writeEntry("PriceFraction", m_csvDialog->m_pageInvestment->ui->comboBoxInv_priceFraction->currentIndex());
+    profilesGroup.writeEntry("StartLine", m_csvDialog->m_pageLinesDate->ui->spinBox_skip->value() - 1);
+    profilesGroup.writeEntry("SecurityName", m_csvDialog->m_pageInvestment->ui->comboBoxInv_securityName->currentIndex());
+    profilesGroup.writeEntry("TrailerLines", m_csvDialog->m_pageLinesDate->m_trailerLines);
 
-  switch (m_csvDialog->m_activityType) {
-    case 0://  Banking
-      return;
-      break;
-    case 1:  {//  Investment
-        KConfigGroup investmentGroup(config, "InvestmentSettings");
-        if (str == "Invest") {
-          investmentGroup.writeEntry("StartLine", m_csvDialog->m_pageLinesDate->ui->spinBox_skip->value() - 1);
-        }
+    m_investProcessing->inFileName().clear();
 
-        //    The strings in these resource file lists may be edited,
-        //    or expanded in the file by the user, to suit his needs.
+    //    The strings in these resource file lists may be edited,
+    //    or expanded in the file by the user, to suit his needs.
 
-        investmentGroup.writeEntry("ShrsinParam", m_investProcessing->m_shrsinList);
-        investmentGroup.writeEntry("DivXParam", m_investProcessing->m_divXList);
-        investmentGroup.writeEntry("IntIncParam", m_investProcessing->m_intIncList);
-        investmentGroup.writeEntry("BrokerageParam", m_investProcessing->m_brokerageList);
-        investmentGroup.writeEntry("ReinvdivParam", m_investProcessing->m_reinvdivList);
-        investmentGroup.writeEntry("BuyParam", m_investProcessing->m_buyList);
-        investmentGroup.writeEntry("SellParam", m_investProcessing->m_sellList);
-        investmentGroup.writeEntry("RemoveParam", m_investProcessing->m_removeList);
+    profilesGroup.writeEntry("ShrsinParam", m_investProcessing->m_shrsinList);
+    profilesGroup.writeEntry("DivXParam", m_investProcessing->m_divXList);
+    profilesGroup.writeEntry("IntIncParam", m_investProcessing->m_intIncList);
+    profilesGroup.writeEntry("BrokerageParam", m_investProcessing->m_brokerageList);
+    profilesGroup.writeEntry("ReinvdivParam", m_investProcessing->m_reinvdivList);
+    profilesGroup.writeEntry("BuyParam", m_investProcessing->m_buyList);
+    profilesGroup.writeEntry("SellParam", m_investProcessing->m_sellList);
+    profilesGroup.writeEntry("RemoveParam", m_investProcessing->m_removeList);
 
-        QString pth = "$HOME/" + m_investProcessing->invPath().section('/', 3);
-        investmentGroup.writeEntry("InvDirectory", pth);
+    str = m_csvDialog->m_pageInvestment->ui->lineEdit_filter->text();
+    if (str.endsWith(' ')) {
+      str.append('#');  //  Terminate trailing blank
+    }
+    profilesGroup.writeEntry("Filter", str);
 
-        investmentGroup.config()->sync();
+    QString pth = "~/" + m_investProcessing->invPath().section('/', 3);
+    profilesGroup.writeEntry("InvDirectory", pth);
+    profilesGroup.writeEntry("DateCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_dateCol->currentIndex());
+    profilesGroup.writeEntry("PayeeCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_typeCol->currentIndex());
+    profilesGroup.writeEntry("MemoCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->currentIndex());
+    profilesGroup.writeEntry("QuantityCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_quantityCol->currentIndex());
+    profilesGroup.writeEntry("AmountCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_amountCol->currentIndex());
+    profilesGroup.writeEntry("PriceCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_priceCol->currentIndex());
+    profilesGroup.writeEntry("FeeCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_feeCol->currentIndex());
+    profilesGroup.writeEntry("SymbolCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex());
+    profilesGroup.writeEntry("DetailCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol->currentIndex());
+    profilesGroup.config()->sync();
 
-
-        KConfigGroup invcolumnsGroup(config, "InvColumns");
-        invcolumnsGroup.writeEntry("DateCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_dateCol->currentIndex());
-        invcolumnsGroup.writeEntry("PayeeCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_typeCol->currentIndex());
-        invcolumnsGroup.writeEntry("MemoCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->currentIndex());
-        invcolumnsGroup.writeEntry("QuantityCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_quantityCol->currentIndex());
-        invcolumnsGroup.writeEntry("AmountCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_amountCol->currentIndex());
-        invcolumnsGroup.writeEntry("PriceCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_priceCol->currentIndex());
-        invcolumnsGroup.writeEntry("FeeCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_feeCol->currentIndex());
-        invcolumnsGroup.writeEntry("SymbolCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex());
-        invcolumnsGroup.writeEntry("DetailCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol->currentIndex());
-        invcolumnsGroup.config()->sync();
-        break;
-      }
-    case 2: { //  Broker1
-        KConfigGroup BrokerageSettingsGroup1(config, "BrokerageSettings1");
-        if (str == "Invest") {
-          BrokerageSettingsGroup1.writeEntry("StartLine", m_csvDialog->m_pageLinesDate->ui->spinBox_skip->value() - 1);
-        }
-
-        //    The strings in these resource file lists may be edited,
-        //    or expanded in the file by the user, to suit his needs.
-
-        BrokerageSettingsGroup1.writeEntry("ShrsinParam", m_investProcessing->m_shrsinList);
-        BrokerageSettingsGroup1.writeEntry("DivXParam", m_investProcessing->m_divXList);
-        BrokerageSettingsGroup1.writeEntry("IntIncParam", m_investProcessing->m_intIncList);
-        BrokerageSettingsGroup1.writeEntry("BrokerageParam", m_investProcessing->m_brokerageList);
-        BrokerageSettingsGroup1.writeEntry("ReinvdivParam", m_investProcessing->m_reinvdivList);
-        BrokerageSettingsGroup1.writeEntry("BuyParam", m_investProcessing->m_buyList);
-        BrokerageSettingsGroup1.writeEntry("SellParam", m_investProcessing->m_sellList);
-        BrokerageSettingsGroup1.writeEntry("RemoveParam", m_investProcessing->m_removeList);
-
-        str = m_csvDialog->m_pageInvestment->ui->lineEdit_filter->text();
-        if (str.endsWith(' ')) {
-          str.append('#');//  Terminate trailing blank
-        }
-        BrokerageSettingsGroup1.writeEntry("Filter", str);
-
-        QString pth = "$HOME/" + m_investProcessing->invPath().section('/', 3);
-        BrokerageSettingsGroup1.writeEntry("InvDirectory", pth);
-
-        BrokerageSettingsGroup1.config()->sync();
-
-
-        KConfigGroup BrokerageColumnsGroup1(config, "BrokerageColumns1");
-        BrokerageColumnsGroup1.writeEntry("DateCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_dateCol->currentIndex());
-        BrokerageColumnsGroup1.writeEntry("PayeeCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_typeCol->currentIndex());
-        BrokerageColumnsGroup1.writeEntry("MemoCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->currentIndex());
-        BrokerageColumnsGroup1.writeEntry("QuantityCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_quantityCol->currentIndex());
-        BrokerageColumnsGroup1.writeEntry("AmountCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_amountCol->currentIndex());
-        BrokerageColumnsGroup1.writeEntry("PriceCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_priceCol->currentIndex());
-        BrokerageColumnsGroup1.writeEntry("FeeCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_feeCol->currentIndex());
-        BrokerageColumnsGroup1.writeEntry("SymbolCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex());
-        BrokerageColumnsGroup1.writeEntry("DetailCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol->currentIndex());
-        BrokerageColumnsGroup1.config()->sync();
-        break;
-      }
-    case 3: { //  Broker2
-        KConfigGroup BrokerageSettingsGroup2(config, "BrokerageSettings2");
-        if (str == "Invest") {
-          BrokerageSettingsGroup2.writeEntry("StartLine", m_csvDialog->m_pageLinesDate->ui->spinBox_skip->value() - 1);
-        }
-        //    The strings in these resource file lists may be edited,
-        //    or expanded in the file by the user, to suit his needs.
-
-        BrokerageSettingsGroup2.writeEntry("ShrsinParam", m_investProcessing->m_shrsinList);
-        BrokerageSettingsGroup2.writeEntry("DivXParam", m_investProcessing->m_divXList);
-        BrokerageSettingsGroup2.writeEntry("IntIncParam", m_investProcessing->m_intIncList);
-        BrokerageSettingsGroup2.writeEntry("BrokerageParam", m_investProcessing->m_brokerageList);
-        BrokerageSettingsGroup2.writeEntry("ReinvdivParam", m_investProcessing->m_reinvdivList);
-        BrokerageSettingsGroup2.writeEntry("BuyParam", m_investProcessing->m_buyList);
-        BrokerageSettingsGroup2.writeEntry("SellParam", m_investProcessing->m_sellList);
-        BrokerageSettingsGroup2.writeEntry("RemoveParam", m_investProcessing->m_removeList);
-
-        str = m_csvDialog->m_pageInvestment->ui->lineEdit_filter->text();
-        if (str.endsWith(' ')) {
-          str.append('#');//  Terminate trailing blank
-        }
-        BrokerageSettingsGroup2.writeEntry("Filter", str);
-
-        QString pth = "$HOME/" + m_investProcessing->invPath().section('/', 3);
-        BrokerageSettingsGroup2.writeEntry("InvDirectory", pth);
-
-        BrokerageSettingsGroup2.config()->sync();
-
-
-        KConfigGroup BrokerageColumnsGroup2(config, "BrokerageColumns2");
-        BrokerageColumnsGroup2.writeEntry("DateCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_dateCol->currentIndex());
-        BrokerageColumnsGroup2.writeEntry("PayeeCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_typeCol->currentIndex());
-        BrokerageColumnsGroup2.writeEntry("MemoCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->currentIndex());
-        BrokerageColumnsGroup2.writeEntry("QuantityCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_quantityCol->currentIndex());
-        BrokerageColumnsGroup2.writeEntry("AmountCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_amountCol->currentIndex());
-        BrokerageColumnsGroup2.writeEntry("PriceCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_priceCol->currentIndex());
-        BrokerageColumnsGroup2.writeEntry("FeeCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_feeCol->currentIndex());
-        BrokerageColumnsGroup2.writeEntry("SymbolCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex());
-        BrokerageColumnsGroup2.writeEntry("DetailCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol->currentIndex());
-        BrokerageColumnsGroup2.config()->sync();
-        break;
-      }
+    KConfigGroup securitiesGroup(config, "Securities");
+    securitiesGroup.writeEntry("SecurityNameList", m_investProcessing->securityList());
+    securitiesGroup.config()->sync();
   }
   m_csvDialog->ui->tableWidget->clear();//     in case later reopening window, clear old contents now
 }

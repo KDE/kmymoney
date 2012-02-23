@@ -95,7 +95,7 @@ p, li { white-space: pre-wrap; }
            <property name="topMargin">
             <number>10</number>
            </property>
-           <item row="0" column="0">
+           <item row="2" column="0">
             <widget class="QLabel" name="labelSet_fieldDelim">
              <property name="enabled">
               <bool>true</bool>
@@ -123,7 +123,7 @@ p, li { white-space: pre-wrap; }
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
+           <item row="3" column="0">
             <widget class="QLabel" name="labelSet_textDelim">
              <property name="minimumSize">
               <size>
@@ -139,7 +139,7 @@ p, li { white-space: pre-wrap; }
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
+           <item row="2" column="1">
             <widget class="KComboBox" name="comboBox_fieldDelimiter">
              <property name="minimumSize">
               <size>
@@ -172,7 +172,7 @@ p, li { white-space: pre-wrap; }
              </item>
             </widget>
            </item>
-           <item row="1" column="1">
+           <item row="3" column="1">
             <widget class="KComboBox" name="comboBox_textDelimiter">
              <property name="minimumSize">
               <size>
@@ -191,6 +191,32 @@ p, li { white-space: pre-wrap; }
               </property>
              </item>
             </widget>
+           </item>
+           <item row="1" column="1">
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="4" column="1">
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
