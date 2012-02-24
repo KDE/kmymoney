@@ -2142,7 +2142,7 @@ void IntroPage::slotComboSourceClicked(int index)
 	    //  Add it perhaps.
 	    QString question = i18n("<center>The name you have entered does not exist,</center>"
 	                            "<center>but you have not elected to add a new profile</center>"
-                                    "<center>If you wish to add '%1'as a new profile,</center>"
+                                    "<center>If you wish to add '%1' as a new profile,</center>"
                                     "<center> click 'Yes'.  Otherwise, click 'No'</center>", txt);
             if (KMessageBox::questionYesNo(0, question, i18n("Adding profile name.")) == KMessageBox::Yes) {
 	      addProfileName();

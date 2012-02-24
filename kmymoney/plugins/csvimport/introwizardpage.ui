@@ -190,7 +190,7 @@ p, li { white-space: pre-wrap; }
            <property name="toolTip">
             <string>To add a new profile, enter its name then click Return.
 Or, select an existing profile.
-An existing name may be edited,which will produce a new profile.</string>
+An existing name may be edited, which will produce a new profile.</string>
            </property>
            <property name="editable">
             <bool>true</bool>
