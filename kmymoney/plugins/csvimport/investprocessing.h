@@ -394,7 +394,7 @@ private:
   const QString checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2);
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
-  
+
   /**
    * Called after rows have been dropped, to produce the (revised) vertical (row) headers.
    */

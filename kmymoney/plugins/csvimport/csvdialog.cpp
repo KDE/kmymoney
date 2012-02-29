@@ -86,6 +86,7 @@ CSVDialog::CSVDialog(QWidget *parent) : QWidget(parent), ui(new Ui::CSVDialog)
   m_importError = false;
   m_importIsValid = false;
   m_firstPass = true;
+  m_firstRead = true;
 
   m_amountColumn = -1;
   m_creditColumn = -1;
@@ -104,6 +105,7 @@ CSVDialog::CSVDialog(QWidget *parent) : QWidget(parent), ui(new Ui::CSVDialog)
   m_lastId = -1;
   m_fileEndLine = 0;
 
+  m_memoColList.clear();
   m_profileList.clear();
   m_priorCsvProfile.clear();
   m_decimalSymbol.clear();
@@ -438,7 +440,7 @@ void CSVDialog::readSettings()
     m_textDelimiterIndex = profilesGroup.readEntry("TextDelimiter", 0);
     m_pageSeparator->ui->comboBox_textDelimiter->setCurrentIndex(m_textDelimiterIndex);
 
-//    m_csvPath = profilesGroup.readEntry("CsvDirectory", QString());//  Read earlier in fileDialog()
+    //  m_csvPath = profilesGroup.readEntry("CsvDirectory", QString());//  Read earlier in fileDialog()
 
     m_debitFlag = profilesGroup.readEntry("DebitFlag", -1);
 
@@ -452,7 +454,20 @@ void CSVDialog::readSettings()
 
     m_pageBanking->ui->comboBoxBnk_dateCol->setCurrentIndex(profilesGroup.readEntry("DateCol", -1));
     m_pageBanking->ui->comboBoxBnk_payeeCol->setCurrentIndex(profilesGroup.readEntry("PayeeCol", -1));
-    m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(profilesGroup.readEntry("MemoCol", -1));
+    m_memoColList = profilesGroup.readEntry("MemoCol", QList<int>());
+    //
+    //  Set up all memo fields...
+    //
+    for (int i = 0; i < m_memoColList.count(); i++) {
+      tmp = m_memoColList[i];
+      m_pageBanking->ui->comboBoxBnk_memoCol->setItemText(tmp, QString().setNum(tmp + 1) + '*');
+      m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(tmp);
+      if (tmp == m_payeeColumn) {  //  ...unless also a payee field.
+        continue;
+      }
+      m_memoColumn = tmp;
+      columnType(i) = "memo";
+    }
 
     tmp = profilesGroup.readEntry("DebitCol", -1);
     if (tmp == -1) {      //                            If amount previously selected, set check radio_amount
@@ -484,18 +499,18 @@ void CSVDialog::readSettings()
 
 void CSVDialog::createProfile(QString newName)
 {
-KSharedConfigPtr  config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+  KSharedConfigPtr  config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
   KConfigGroup bankProfilesGroup(config, "BankProfiles");
-  
+
   bankProfilesGroup.writeEntry("BankNames", m_profileList);
   bankProfilesGroup.config()->sync();
-  
+
   KConfigGroup bankGroup(config, "BankProfiles");
 
   QString txt = "Profiles-" + newName;
-  
+
   KConfigGroup profilesGroup(config, "Profiles-New Profile###");
-  
+
   KSharedConfigPtr  configBackup = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
   KConfigGroup bkprofilesGroup(configBackup, "Profiles-New Profile###");
 
@@ -530,8 +545,12 @@ void CSVDialog::slotFileDialogClicked()
   }
   m_inFileName.clear();
   m_pageLinesDate->m_isColumnSelectionComplete = false;
-  m_firstPass = true;
+  m_firstPass = true;  //  Don't duplicate Payee col until visible.
+  m_firstRead = true;  //  Used on first read only, to get true line count.
   bool found = false;
+  m_memoColCopied = false;
+  m_payeeColCopied = false;
+  m_maxColumnCount = 0;//  Ensure this file starts clean.
 
   QString profileName;
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
@@ -609,7 +628,7 @@ void CSVDialog::slotFileDialogClicked()
   m_csvPath = m_inFileName;
   posn = m_csvPath.lastIndexOf("/");
   m_csvPath.truncate(posn + 1);   //   keep last "/"
-  
+
   readSettings();
   QString str = "~/" + m_csvPath.section('/', 3);
   KConfigGroup dirGroup(config, profileName);
@@ -646,7 +665,6 @@ void CSVDialog::readFile(const QString& fname, int skipLines)
   m_outBuffer.clear();
 
   m_qifBuffer = "!Type:Bank\n";
-  m_maxColumnCount = 0;
   m_row = 0;
 
   m_fieldDelimiterIndex = m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex();
@@ -666,12 +684,25 @@ void CSVDialog::readFile(const QString& fname, int skipLines)
   QString buf = inStream.readAll();
   disconnect(m_pageLinesDate->ui->spinBox_skip, 0, 0, 0);  //  Avoid disruption from start/endline changes.
   disconnect(m_pageLinesDate->ui->spinBox_skipToLast, 0, 0, 0);
-  
+
   //  Parse the buffer
 
   QStringList lineList = m_parse->parseFile(buf, skipLines, m_endLine);
-  if (m_firstPass) {
-    m_firstPass = false;
+  if (m_firstRead) {
+
+    //  Check all lines to find maximum column count.
+
+    for (int i = 0; i < lineList.count(); i++) {
+      QString data = lineList[i];
+      m_columnList = m_parse->parseLine(data);
+      int columnCount = m_columnList.count();
+      if (columnCount > m_maxColumnCount)     //             maxColumnCount
+        m_maxColumnCount = columnCount;
+      else
+        columnCount = m_maxColumnCount;
+    }
+    ui->tableWidget->setColumnCount(m_maxColumnCount + 1);
+    m_firstRead = false;
     m_fileEndLine= m_parse->lastLine();
     m_endLine = m_fileEndLine - m_pageLinesDate->m_trailerLines;
     m_pageLinesDate->ui->spinBox_skip->setMaximum(m_fileEndLine);
@@ -684,15 +715,15 @@ void CSVDialog::readFile(const QString& fname, int skipLines)
 
   connect(m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
   connect(m_pageLinesDate->ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), this, SLOT(endLineChanged(int)));
-  
+
   //  Display the buffer
 
   for (int i = 0; i < lineList.count(); i++) {
     m_inBuffer = lineList[i];
-
+    //
     displayLine(m_inBuffer);
-
-    if (m_importNow) {      //                        user now ready to continue
+    //
+    if (m_importNow) {   //                        user now ready to continue
       int ret = (processQifLine(m_inBuffer));  //  parse a line
       if (ret == KMessageBox::Ok) {
         csvImportTransaction(st);
@@ -703,7 +734,7 @@ void CSVDialog::readFile(const QString& fname, int skipLines)
 
   //  Adjust table size (drop header lines)
 
-  updateScreen();//
+  updateScreen();
   ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Interactive);
   m_pageLinesDate->ui->labelSet_skip->setEnabled(true);
   m_pageLinesDate->ui->spinBox_skip->setEnabled(true);
@@ -741,27 +772,34 @@ void CSVDialog::displayLine(const QString& data)
   m_fieldDelimiterCharacter = m_parse->fieldDelimiterCharacter(m_fieldDelimiterIndex);
   m_parse->setTextDelimiterIndex(m_pageSeparator->ui->comboBox_textDelimiter->currentIndex());
   m_textDelimiterCharacter = m_parse->textDelimiterCharacter(m_textDelimiterIndex);
-
-  m_columnList = m_parse->parseLine(data);  //                 split data into fields
-  int columnCount = m_columnList.count();
-  if (columnCount > m_maxColumnCount)     //             maxColumnCount()
-    m_maxColumnCount = columnCount;//               find maximum column count
-  else
-    columnCount = m_maxColumnCount;
-  ui->tableWidget->setColumnCount(columnCount);
-  m_pageBanking->ui->comboBoxBnk_dateCol->setMaxVisibleItems(m_maxColumnCount);
+  //
+  //                 split data into fields
+  //
+  m_columnList = m_parse->parseLine(data);
+  m_endColumn = m_maxColumnCount;
+  if ((!m_firstPass) && (m_payeeColumn <= m_columnList.count()) && (m_memoColumn <= m_columnList.count())) {
+    if (m_memoColCopied) {
+      m_columnList<<m_columnList[m_memoColumn];
+    } else {
+      m_columnList<<m_columnList[m_payeeColumn];
+      m_columnType[m_columnList.count() - 1] = "memo";
+      for (int i = 0; i < m_memoColList.count(); i++) {
+        if (m_memoColList[i] == m_payeeColumn) {
+          continue;
+        }
+        m_columnType[m_memoColList[i]] = "memo";
+      }
+    }
+  }
   m_inBuffer.clear();
   QStringList::const_iterator constIterator;
   QString txt;
-
-  for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
-       ++constIterator) {
+  for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd(); ++constIterator) {
     txt = (*constIterator);
-
-    QTableWidgetItem *item = new QTableWidgetItem;//             new item for UI
+    QTableWidgetItem *item = new QTableWidgetItem;  //         new item for UI
     item->setText(txt);
     ui->tableWidget->setRowCount(m_row + 1);
-    ui->tableWidget->setItem(m_row, col, item);  //       add items to UI here
+    ui->tableWidget->setItem(m_row, col, item);  //            add items to UI here
     ui->tableWidget->resizeColumnToContents(col);
     m_inBuffer += txt + m_fieldDelimiterCharacter;
     col ++;
@@ -779,7 +817,6 @@ void CSVDialog::displayLine(const QString& data)
 int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
 {
   QString newTxt;
-
   if (m_columnList.count() < m_endColumn) {
     if (!m_accept) {
       QString row = QString::number(m_row);
@@ -804,14 +841,12 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
   iBuff = iBuff.remove(m_textDelimiterCharacter);
   memo.clear();//                                     memo & number may not have been used
   m_trData.number.clear();//                          .. so need to clear prior contents
-  for (int i = 0; i < m_endColumn; i++) {    //            check each column
+  for (int i = 0; i <= m_endColumn; i++) {    //            check each column
     if (columnType(i) == "number") {
       txt = m_columnList[i];
       m_trData.number = txt;
       m_qifBuffer = m_qifBuffer + 'N' + txt + '\n';//     Number column
-    }
-
-    else if (columnType(i) == "date") {
+    } else if (columnType(i) == "date") {
       ++neededFieldsCount;
       txt = m_columnList[i];
       txt = txt.remove(m_textDelimiterCharacter);  //      "16/09/2009
@@ -827,13 +862,15 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
       QString qifDate = dat.toString(m_dateFormats[m_dateFormatIndex]);
       m_qifBuffer = m_qifBuffer + 'D' + qifDate + '\n';
       m_trData.date = dat;
-    }
-
-    else if (columnType(i) == "payee") {
+    } else if (columnType(i) == "payee") {
       ++neededFieldsCount;
       txt = m_columnList[i];
       txt.remove('~');  //                              replace NL which was substituted
       txt = txt.remove('\'');
+      if ((!m_firstPass) && (m_memoColCopied)) {
+         m_columnList[m_payeeColumn] = txt ;
+         columnType(m_memoColumn) = "memo";
+      }
       m_trData.payee = txt;
       m_qifBuffer = m_qifBuffer + 'P' + txt + '\n';// Detail column
     }
@@ -899,6 +936,10 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
     else if (columnType(i) == "memo") {      // could be more than one
       txt = m_columnList[i];
       txt.replace('~', "\n");  //                       replace NL which was substituted
+      if ((!m_firstPass) && (txt.isEmpty()) && (m_payeeColCopied)) {
+         txt = m_columnList[m_payeeColumn];
+         m_columnList[i] = txt;
+      }
       if (!memo.isEmpty())
         memo += '\n';//                               separator for multiple memos
       memo += txt;//                                  next memo
@@ -984,7 +1025,6 @@ void CSVDialog::csvImportTransaction(MyMoneyStatement& st)
   return;
 }
 
-
 void CSVDialog::slotImportClicked()
 {
   m_importError = false;
@@ -1005,7 +1045,7 @@ void CSVDialog::slotImportClicked()
     }
     m_parse->setSymbolFound(false);
     readFile(m_inFileName, skp);   //               skip all headers
-    
+
     updateRowHeaders(skp);         //--- create the (revised) vertical (row) headers ---
   } else {
     QString errMsg = i18n("<center>An Amount-type column, and Date and Payee columns are needed.</center>");
@@ -1082,6 +1122,7 @@ void CSVDialog::clearColumnsSelected()
     clearSelectedFlags();
     clearColumnNumbers();
     clearComboBoxText();
+    m_memoColList.clear();
   }
 }
 
@@ -1114,7 +1155,7 @@ void CSVDialog::clearColumnNumbers()
 
 void CSVDialog::clearComboBoxText()
 {
-  for (int i = 0; i < MAXCOL; i++) {
+  for (int i = 0; i < MAXCOL; i++) {  //  Clear all '*'.
     m_pageBanking->ui->comboBoxBnk_memoCol->setItemText(i, QString().setNum(i + 1));
   }
 }
@@ -1273,7 +1314,7 @@ void CSVDialog::saveSettings()
 
     profilesGroup.writeEntry("DateCol", m_pageBanking->ui->comboBoxBnk_dateCol->currentIndex());
     profilesGroup.writeEntry("PayeeCol", m_pageBanking->ui->comboBoxBnk_payeeCol->currentIndex());
-    profilesGroup.writeEntry("MemoCol", m_pageBanking->ui->comboBoxBnk_memoCol->currentIndex());
+    profilesGroup.writeEntry("MemoCol", m_memoColList);
     profilesGroup.writeEntry("NumberCol", m_pageBanking->ui->comboBoxBnk_numberCol->currentIndex());
     profilesGroup.writeEntry("AmountCol", m_pageBanking->ui->comboBoxBnk_amountCol->currentIndex());
     profilesGroup.writeEntry("DebitCol", m_pageBanking->ui->comboBoxBnk_debitCol->currentIndex());
@@ -1285,40 +1326,53 @@ void CSVDialog::saveSettings()
 }
 
 
-int CSVDialog::validateColumn(const int& col, const QString& type)
+int CSVDialog::validateColumn(const int& col, QString& type)
 {
   //  First check if selection is in range
   if ((col < 0) || (col >= m_endColumn)) {
     return KMessageBox::No;
-  }//                                               selection was in range
-
-  if ((!m_columnType[col].isEmpty())  && (m_columnType[col] != type)) {
-    //                                              BUT column is already in use
-
-    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>", m_columnType[col]));
-    m_previousColumn = -1;
-    resetComboBox(m_columnType[col], col);
-    resetComboBox(type, col);  //                    reset this combobox
-    m_previousType.clear();
-    m_columnType[col].clear();
-    return KMessageBox::Cancel;
   }
-  //                                               is this type already in use
-  for (int i = 0; i < m_endColumn; i++) {
-    //  check each column
-    if (m_columnType[i] == type) {      //               this type already in use
-      m_columnType[i].clear();//                   ...so clear it
-    }//  end this col
-
-  }// end all columns checked                      type not in use
-  m_columnType[col] = type;//                      accept new type
-  if (m_previousColumn != -1) {
-    m_previousColumn = col;
+  //                                                selection is in range
+  if (m_columnType[col] == type) {//                already selected
+    return KMessageBox::Ok;
   }
-  m_previousType = type;
-  return KMessageBox::Ok; //                       accept new type
+  if (m_columnType[col].isEmpty()) {  //            is this type already in use
+    for (int i = 0; i < m_endColumn; i++) {
+      //  check each column
+      if (m_columnType[i] == type) {  //            this type already in use
+        m_columnType[i].clear();//                  ...so clear it
+      }//  end this col
+    }// end all columns checked                     type not in use
+    m_columnType[col] = type;//                     accept new type
+    if (m_previousColumn != -1) {
+      m_previousColumn = col;
+    }
+    m_previousType = type;
+    return KMessageBox::Ok; //                       accept new type
+  }
+  if (m_columnType[col] == "memo") {
+    int rc = KMessageBox::questionYesNo(0, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
+                                                "<center>If you wish to copy the Memo data to the Payee field, click 'Yes'.</center>",
+                                                m_columnType[col]));
+    if (rc == KMessageBox::Yes) {
+      m_memoColCopied = true;
+      m_pageBanking->ui->comboBoxBnk_memoCol->setItemText(col, QString().setNum(col + 1) + '*');
+      m_payeeColumn = m_endColumn - 1;
+      type = "payee";
+      m_columnType[m_payeeColumn] = "payee";
+      m_payeeSelected = true;
+      return rc;
+    }
+  }
+  //                                               not memo but column is already in use
+  KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>", m_columnType[col]));
+  m_previousColumn = -1;
+  resetComboBox(m_columnType[col], col);
+  resetComboBox(type, col);  //                    reset this combobox
+  m_previousType.clear();
+  m_columnType[col].clear();
+  return KMessageBox::Cancel;
 }
-
 
 void CSVDialog::amountColumnSelected(int col)
 {
@@ -1443,21 +1497,45 @@ void CSVDialog::memoColumnSelected(int col)
 {
   QString type = "memo";
   m_memoColumn = col;
-  if ((col < 0) || (col >= m_endColumn)) {      // out of range so...
+  if ((col < 0) || (col >= m_endColumn)) {  //       out of range so...
     m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(-1);  // ..clear selection
     return;
   }
-  if (m_columnType[col].isEmpty()) {      //             accept new  entry
+  if (m_memoColList.contains(col)) {
+    //  Restore the '*' as column might have been cleared.
+    m_pageBanking->ui->comboBoxBnk_memoCol->setItemText(col, QString().setNum(col + 1) + '*');
+    return;;
+  }
+  if (m_columnType[col].isEmpty()) {  //             accept new  entry
     m_pageBanking->ui->comboBoxBnk_memoCol->setItemText(col, QString().setNum(col + 1) + '*');
     m_columnType[col] = type;
     m_memoColumn = col;
+    m_memoColList << col;
     m_memoSelected = true;
     return;
-  } else {//                                       clashes with prior selection
-    if (m_columnType[col] == type) {      //               nothing changed
+  }
+  if (m_columnType[col] == type) {      //           nothing changed
+    return;
+  }
+  if (m_columnType[col] == "payee") {  //            Make a copy?
+    if (m_memoColList.contains(col)) {
       return;
     }
+    int rc = KMessageBox::questionYesNo(0, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
+                                                "<center>If you wish to copy the Payee data to the memo field, click 'Yes'.</center>",
+                                                m_columnType[col]));
+    if (rc == KMessageBox::Yes) {
+      m_payeeColCopied = true;
+      m_pageBanking->ui->comboBoxBnk_memoCol->setItemText(col, QString().setNum(col + 1) + '*');
+      m_memoColumn = m_endColumn;
+      m_memoColList << col;
+      m_columnType[m_memoColumn] = "memo";
+      m_memoSelected = true;
+      return;
+    }
+  } else {//                                       clashes with prior selection
     m_memoSelected = false;//                      clear incorrect selection
+    m_payeeColCopied = false;
     KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>"
                                      , m_columnType[col]));
     m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(-1);
@@ -1501,7 +1579,7 @@ void CSVDialog::numberColumnSelected(int col)
   if (col < 0) {      //                              it is unset
     return;
   }
-// if a previous number field is detected, but in a different column...
+  // if a previous number field is detected, but in a different column...
   if ((m_numberColumn != -1) && (m_columnType[m_numberColumn] == type)  && (m_numberColumn != col)) {
     m_columnType[m_numberColumn].clear();
   }
@@ -1990,9 +2068,6 @@ IntroPage::IntroPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::IntroPag
   m_messageBoxJustCancelled = false;
   registerField("source", ui->combobox_source, "currentIndex", SIGNAL(currentIndexChanged()));
   disconnect(ui->combobox_source, 0, 0, 0);
-  
-  
-  
 
   m_index = 1;
 
@@ -2011,7 +2086,7 @@ void IntroPage::setParent(CSVDialog* dlg)
   m_set = true;
   registerField("csvdialog", m_dlg, "m_set", SIGNAL(isSet()));
   m_dlg->showStage();
-  
+
   wizard()->button(QWizard::CustomButton1)->setEnabled(false);
 }
 
@@ -2019,7 +2094,8 @@ void IntroPage::slotComboEditTextChanged(QString txt)
 {
   if ((ui->combobox_source->isHidden()) || (m_messageBoxJustCancelled) || (field("source").toInt() < 0)) {
     return;
-  }m_index = field("source").toInt();
+  }
+  m_index = field("source").toInt();
   m_messageBoxJustCancelled = false;
   if ((field("source").toInt() == 0) && (txt.isEmpty())) {
     ui->combobox_source->setCurrentIndex(-1);
@@ -2106,18 +2182,18 @@ void IntroPage::slotComboSourceClicked(int index)
     default:
       m_dlg->m_wizard->button(QWizard::CustomButton1)->setEnabled(true);
       if (m_action == "add") {
-        m_action.clear();          
+        m_action.clear();
         QString txt = ui->combobox_source->currentText();
         if ((txt.isEmpty())) {
           return;
         }
         if (addItem(txt) == -1) {    //  Name already known.
           m_dlg->m_profileName = ui->combobox_source->currentText();
-	  if (m_dlg->m_fileType == "Banking") {
-	    m_dlg->m_priorCsvProfile = m_dlg->m_profileName;
-	  } else {
-	    m_dlg->m_priorInvProfile = m_dlg->m_profileName;
-	  }
+          if (m_dlg->m_fileType == "Banking") {
+            m_dlg->m_priorCsvProfile = m_dlg->m_profileName;
+          } else {
+            m_dlg->m_priorInvProfile = m_dlg->m_profileName;
+          }
           m_priorName = m_dlg->m_profileName;
           return;
         }
@@ -2129,40 +2205,40 @@ void IntroPage::slotComboSourceClicked(int index)
         return;
       } else {
         //
-        //  Not adding so must be editing name, or selecting an existing profile.  
+        //  Not adding so must be editing name, or selecting an existing profile.
         //
         QString txt = ui->combobox_source->currentText();
-	m_priorName = m_dlg->m_profileName;
+        m_priorName = m_dlg->m_profileName;
         m_priorIndex = m_index;
         if (!m_dlg->m_profileList.contains(txt)) {
-	  //  But this profile name does not exist.
-	  int indx = ui->combobox_source->findText(txt);
-	  if (m_priorName.isEmpty()) {
-	    disconnect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-	    //  Add it perhaps.
-	    QString question = i18n("<center>The name you have entered does not exist,</center>"
-	                            "<center>but you have not elected to add a new profile</center>"
+        //  But this profile name does not exist.
+          int indx = ui->combobox_source->findText(txt);
+          if (m_priorName.isEmpty()) {
+            disconnect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
+            //  Add it perhaps.
+            QString question = i18n("<center>The name you have entered does not exist,</center>"
+                                    "<center>but you have not elected to add a new profile</center>"
                                     "<center>If you wish to add '%1' as a new profile,</center>"
                                     "<center> click 'Yes'.  Otherwise, click 'No'</center>", txt);
             if (KMessageBox::questionYesNo(0, question, i18n("Adding profile name.")) == KMessageBox::Yes) {
-	      addProfileName();
-	      m_index = indx;
-	      m_priorIndex = indx;
-	      connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-	    } else {
-	      ui->combobox_source->removeItem(indx);
-	      ui->combobox_source->setCurrentIndex(-1);
-	      connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-	      return;
-	    }
-	  }
-	  //  Otherwise maybe edit the present name.
+              addProfileName();
+              m_index = indx;
+              m_priorIndex = indx;
+              connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
+            } else {
+              ui->combobox_source->removeItem(indx);
+              ui->combobox_source->setCurrentIndex(-1);
+              connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
+              return;
+            }
+          }
+          //  Otherwise maybe edit the present name.
           int ret = editProfileName(m_priorName, txt);
           if (ret == KMessageBox::No) {
             txt = m_priorName;
           } else {
-	    //  Use new name.
-	  }
+            //  Use new name.
+          }
           int index = ui->combobox_source->findText(txt, Qt::MatchExactly);
           ui->combobox_source->setCurrentIndex(index);
           return;
@@ -2173,11 +2249,11 @@ void IntroPage::slotComboSourceClicked(int index)
         m_priorIndex = ui->combobox_source->currentIndex();
 
         m_dlg->m_profileName = ui->combobox_source->currentText();
-	if (m_dlg->m_fileType == "Banking") {
-	    m_dlg->m_priorCsvProfile = m_dlg->m_profileName;
-	} else {
-	  m_dlg->m_priorInvProfile = m_dlg->m_profileName;
-	}
+        if (m_dlg->m_fileType == "Banking") {
+          m_dlg->m_priorCsvProfile = m_dlg->m_profileName;
+        } else {
+          m_dlg->m_priorInvProfile = m_dlg->m_profileName;
+        }
         if (m_dlg->m_profileList.contains(m_dlg->m_profileName)) {
           return;
         }
@@ -2216,7 +2292,7 @@ int  IntroPage::editProfileName(QString& fromName, QString& toName)
     return  KMessageBox::Yes;
   }
   m_editAccepted = true;
-  
+
   disconnect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
   int fromIndx = ui->combobox_source->findText(from, Qt::MatchExactly);
   if (fromIndx != -1) {//  From name is in combobox.
@@ -2256,9 +2332,9 @@ int  IntroPage::editProfileName(QString& fromName, QString& toName)
       ui->combobox_source->removeItem(indx);
       m_dlg->m_profileList.removeOne(toName);
       if (m_dlg->m_fileType == "Banking") {
-	m_dlg->m_priorCsvProfile = from;
+        m_dlg->m_priorCsvProfile = from;
       } else {
-	m_dlg->m_priorInvProfile = from;
+        m_dlg->m_priorInvProfile = from;
       }
       m_dlg->m_profileName = from;
       ui->combobox_source->setCurrentItem(from);
@@ -2344,7 +2420,7 @@ int IntroPage::addItem(QString txt)
   int indx = ui->combobox_source->findText(txt);
 
   QString question1 = i18n("<center>The name you have entered does not exist,</center>"
-	                   "<center>but you have not elected to add a new profile.</center>");
+                           "<center>but you have not elected to add a new profile.</center>");
   QString question2= i18n("<center>If you wish to add '%1'as a new profile,</center>"
                           "<center> click 'Yes'.  Otherwise, click 'No'</center>", txt);
   if (indx == -1) {
@@ -2367,9 +2443,9 @@ int IntroPage::addItem(QString txt)
 
     if ((!m_addRequested) && (!m_editAccepted)) {
       if (KMessageBox::questionYesNo(0, question2, i18n("Adding profile name.")) == KMessageBox::No) {
-	int indx = ui->combobox_source->findText(txt);
-	ui->combobox_source->removeItem(indx);
-	return ret;
+        int indx = ui->combobox_source->findText(txt);
+        ui->combobox_source->removeItem(indx);
+        return ret;
       }
       m_index = indx;
     }
@@ -2394,7 +2470,7 @@ void IntroPage::initializePage()
   wizard()->setButtonLayout(layout);
   m_dlg->m_wizard->button(QWizard::CustomButton1)->setToolTip(i18n("A profile must be selected before selecting a file."));
   m_firstEdit = false;
-  m_editAccepted = false;     
+  m_editAccepted = false;
   m_newProfileCreated  = QString();
   connect(ui->combobox_source, SIGNAL(activated(int)), this, SLOT(slotComboSourceClicked(int)));
   connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
@@ -2402,11 +2478,12 @@ void IntroPage::initializePage()
 
 bool IntroPage::validatePage()
 {
+  m_dlg->m_firstPass = false;
   if (!m_newProfileCreated.isEmpty()) {
     m_dlg->createProfile(m_newProfileCreated);
   }
   ui->checkBoxSkipSetup->setEnabled(false);
-  
+
   return true;
 }
 
@@ -2446,7 +2523,7 @@ void IntroPage::slotLineEditingFinished()
   m_priorIndex = m_index;
   if ((m_messageBoxJustCancelled == false) && (m_firstEdit == true) && (m_editAccepted == true)) {
     m_firstEdit = true;
-    return; 
+    return;
   }
   m_firstEdit = true;
   int itmIndx = 0;
@@ -2475,7 +2552,7 @@ void IntroPage::slotLineEditingFinished()
   m_dlg->createProfile(m_dlg->m_profileName);
   m_newProfileCreated = m_dlg->m_profileName;
   m_priorName = m_dlg->m_profileName;
-  m_mapFileType.insert(m_dlg->m_profileName, m_dlg->m_fileType); 
+  m_mapFileType.insert(m_dlg->m_profileName, m_dlg->m_fileType);
   m_priorIndex = ui->combobox_source->findText(m_dlg->m_profileName);
   if (m_priorIndex == -1) {
     ui->combobox_source->addItem(m_dlg->m_profileName);
@@ -2514,6 +2591,7 @@ void SeparatorPage::initializePage()
 void SeparatorPage::cleanupPage()
 {
   m_dlg->m_pageIntro->initializePage();
+  m_dlg->m_pageIntro->ui->checkBoxSkipSetup->setEnabled(true);
   wizard()->button(QWizard::CustomButton1)->setToolTip(i18n("<center>It is not possible to select another file.</center><center>It is necessary to restart the plugin.</center>"));
 }
 
@@ -2923,6 +3001,7 @@ void CompletionPage::setParent(CSVDialog* dlg)
 
 void CompletionPage::initializePage()
 {
+  m_dlg->m_firstPass = false;  //  Needs to be here when skipping setup.
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton2 << QWizard::CustomButton3
          <<  QWizard::FinishButton <<  QWizard::CancelButton;

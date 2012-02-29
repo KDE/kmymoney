@@ -132,6 +132,8 @@ public:
   bool           m_isTableTrimmed;
   bool           m_importError;
   bool           m_profileExists;
+  bool           m_firstPass;
+  bool           m_firstRead;
 
   int            m_dateFormatIndex;
   int            m_debitFlag;
@@ -282,7 +284,7 @@ public:
   void           readSettings();
 
   /**
-  * This method is called when one of the radiobuttons is checked, to populate 
+  * This method is called when one of the radiobuttons is checked, to populate
   * the sourceNames combobox from the resource file.
   */
   void           readSettingsInit();
@@ -388,7 +390,8 @@ private:
   bool             m_memoSelected;
   bool             m_numberSelected;
   bool             m_payeeSelected;
-  bool             m_firstPass;
+  bool             m_memoColCopied;
+  bool             m_payeeColCopied;
 
   int              m_amountColumn;
   int              m_creditColumn;
@@ -414,14 +417,16 @@ private:
   QColor           m_errorColor;
 
   QList<QLabel*>   m_stageLabels;
+  QList<int>       m_memoColList;
+
 
   int              nextId() const;
   void             updateRowHeaders(int skp);
 
   void             closeEvent(QCloseEvent *event);
   void             resizeEvent(QResizeEvent * event);
-  void             restoreBackground(/*int lastRow, int lastCol*/);
-  int              validateColumn(const int& col, const QString& type);
+  void             restoreBackground();
+  int              validateColumn(const int& col, QString& type);
 
 private slots:
   /**
@@ -506,7 +511,7 @@ private slots:
   * be saved, and the plugin will be terminated.
   */
   void           slotCancel();
-  
+
   /**
   * This method is called when 'Quit' is clicked.  The plugin settings will
   * be saved and the plugin will be terminated.
@@ -544,7 +549,7 @@ public:
 
   void                initializePage();
   void                setParent(CSVDialog* dlg);
-  
+
   QVBoxLayout*        m_pageLayout;
 
   QString             m_activity;
@@ -574,16 +579,16 @@ private:
   bool             m_editAccepted;
   bool             m_addRequested;
   bool             m_firstLineEdit;
-  
+
   int              m_priorIndex;
   int              editProfileName(QString& fromName, QString& toName);
-  
+
   QString          m_name;
   QString          m_priorName;
   QString          m_action;
   QString          m_newProfileCreated;
   QString          m_lastRadioButton;
-    
+
   void             addProfileName();
 
 private slots:
@@ -592,7 +597,7 @@ private slots:
   void             slotLineEditingFinished();
   void             slotRadioButton_bankClicked();
   void             slotRadioButton_investClicked();
-    
+
 };
 
 

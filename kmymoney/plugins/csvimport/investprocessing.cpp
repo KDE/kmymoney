@@ -762,11 +762,11 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
   m_screenUpdated = false;
 
   //  Display the buffer
-  
+
   connect(m_csvDialog->m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), m_csvDialog, SLOT(startLineChanged(int)));
   connect(m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), m_csvDialog, SLOT(endLineChanged(int)));
   m_symblRow = 0;
-  
+
   for (int i = 0; i < m_lineList.count(); i++) {
     m_inBuffer = m_lineList[i];
 
@@ -1587,7 +1587,7 @@ void InvestProcessing::readSettings()
 
     int tmp = profilesGroup.readEntry("SecurityName", 0);
     m_csvDialog->m_pageInvestment->ui->comboBoxInv_securityName->setCurrentIndex(0);
-    
+
     m_startLine = profilesGroup.readEntry("StartLine", -1) + 1;
     m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(m_startLine);  //  Tidy up.
     str = profilesGroup.readEntry("Filter", QString());
@@ -1660,7 +1660,7 @@ void InvestProcessing::updateScreen()
     return;
   m_csvDialog->ui->tableWidget->setRowCount(m_row);
   m_csvDialog->ui->tableWidget->setFocus();
-  
+
   updateRowHeaders(m_startLine);
 }
 
