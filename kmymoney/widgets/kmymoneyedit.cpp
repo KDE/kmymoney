@@ -164,7 +164,7 @@ kMyMoneyEdit::kMyMoneyEdit(QWidget *parent, const int prec)
 {
   m_prec = prec;
   if (prec < -1 || prec > 20)
-    m_prec = KGlobal::locale()->fracDigits();
+    m_prec = KGlobal::locale()->monetaryDecimalPlaces();
   init();
 }
 

@@ -79,7 +79,7 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
   // hold three-digit groups
   QList<int> digitGroups;
 
-  int precision = KGlobal::locale()->fracDigits();
+  int precision = KGlobal::locale()->monetaryDecimalPlaces();
   int integer = static_cast<int>(money.toDouble()); // retain the integer part
   int fraction = qRound((money.toDouble() - integer) * MyMoneyMoney::precToDenom(precision));
 
