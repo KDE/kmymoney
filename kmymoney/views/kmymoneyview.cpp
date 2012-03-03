@@ -1596,7 +1596,7 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("MDL", i18n("Moldavian Leu")), create);
   loadDefaultCurrency(MyMoneySecurity("MNT", i18n("Mongolian Tugrik"),       QChar(0x20AE)), create);
   loadDefaultCurrency(MyMoneySecurity("MAD", i18n("Moroccan Dirham")), create);
-  loadDefaultCurrency(MyMoneySecurity("MZM", i18n("Mozambique Metical")), create);
+  loadDefaultCurrency(MyMoneySecurity("MZN", i18n("Mozambique Metical"),     "MT"), create);
   loadDefaultCurrency(MyMoneySecurity("MMK", i18n("Myanmar Kyat")), create);
   loadDefaultCurrency(MyMoneySecurity("NAD", i18n("Namibian Dollar"),        "$"), create);
   loadDefaultCurrency(MyMoneySecurity("NPR", i18n("Nepalese Rupee")), create);
@@ -1727,6 +1727,9 @@ void KMyMoneyView::loadAncientCurrencies(void)
 
   // Source: http://www.focus.de/finanzen/news/waehrungszone-slowakei-ist-neuer-euro-staat_aid_359025.html
   loadAncientCurrency("SKK", i18n("Slovak Koruna"), "SKK", QDate(2008, 12, 31), MyMoneyMoney(1000, 30126), "EUR");
+
+  // Source: http://en.wikipedia.org/wiki/Mozambican_metical
+  loadAncientCurrency("MZM", i18n("Mozambique Metical"), "MT", QDate(2006, 7, 1), MyMoneyMoney(1, 1000), "MZN");
 }
 
 void KMyMoneyView::viewUp(void)
