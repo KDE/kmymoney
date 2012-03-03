@@ -66,7 +66,10 @@ unsigned int MyMoneyDatabaseMgr::fileFixVersion(void) const
 void MyMoneyDatabaseMgr::setUser(const MyMoneyPayee& user)
 {
   m_user = user;
-  if (m_sql) m_sql->modifyUserInfo(user);
+  if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
+    m_sql->modifyUserInfo(user);
+  }
 }
 
 void MyMoneyDatabaseMgr::setFileFixVersion(const unsigned int v)
@@ -110,6 +113,8 @@ MyMoneyDatabaseMgr const * MyMoneyDatabaseMgr::duplicate(void)
 void MyMoneyDatabaseMgr::addAccount(MyMoneyAccount& account)
 {
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
+
     // create the account.
     MyMoneyAccount newAccount(nextAccountID(), account);
 
@@ -163,6 +168,7 @@ void MyMoneyDatabaseMgr::addAccount(MyMoneyAccount& parent, MyMoneyAccount& acco
 void MyMoneyDatabaseMgr::addPayee(MyMoneyPayee& payee)
 {
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     // create the payee
     MyMoneyPayee newPayee(nextPayeeID(), payee);
 
@@ -255,8 +261,10 @@ void MyMoneyDatabaseMgr::removePayee(const MyMoneyPayee& payee)
 
 const QList<MyMoneyPayee> MyMoneyDatabaseMgr::payeeList(void) const
 {
-  if (m_sql)
+  if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     return m_sql->fetchPayees().values();
+  }
   else
     return QList<MyMoneyPayee> ();
 }
@@ -268,6 +276,7 @@ const MyMoneyAccount MyMoneyDatabaseMgr::account(const QString& id) const
   }
 
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     QMap <QString, MyMoneyAccount> accountList = m_sql->fetchAccounts(QStringList(id));
     QMap <QString, MyMoneyAccount>::ConstIterator pos = accountList.constFind(id);
 
@@ -298,6 +307,7 @@ void MyMoneyDatabaseMgr::setAccountName(const QString& id, const QString& name)
     throw new MYMONEYEXCEPTION("Only standard accounts can be modified using setAccountName()");
 
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     startTransaction();
     MyMoneyAccount acc = m_sql->fetchAccounts(QStringList(id), true)[id];
     acc.setName(name);
@@ -309,6 +319,7 @@ void MyMoneyDatabaseMgr::setAccountName(const QString& id, const QString& name)
 void MyMoneyDatabaseMgr::addInstitution(MyMoneyInstitution& institution)
 {
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     MyMoneyInstitution newInstitution(nextInstitutionID(), institution);
 
     // mark file as changed
@@ -323,6 +334,7 @@ const QString MyMoneyDatabaseMgr::nextPayeeID(void)
 {
   QString id;
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     id.setNum(ulong(m_sql->incrementPayeeId()));
     id = 'P' + id.rightJustified(PAYEE_ID_SIZE, '0');
   }
@@ -333,6 +345,7 @@ const QString MyMoneyDatabaseMgr::nextInstitutionID(void)
 {
   QString id;
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     id.setNum(ulong(m_sql->incrementInstitutionId()));
     id = 'I' + id.rightJustified(INSTITUTION_ID_SIZE, '0');
   }
@@ -343,6 +356,7 @@ const QString MyMoneyDatabaseMgr::nextAccountID(void)
 {
   QString id;
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     id.setNum(ulong(m_sql->incrementAccountId()));
     id = 'A' + id.rightJustified(ACCOUNT_ID_SIZE, '0');
   }
@@ -353,6 +367,7 @@ const QString MyMoneyDatabaseMgr::nextBudgetID(void)
 {
   QString id;
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     id.setNum(ulong(m_sql->incrementBudgetId()));
     id = 'B' + id.rightJustified(BUDGET_ID_SIZE, '0');
   }
@@ -363,6 +378,7 @@ const QString MyMoneyDatabaseMgr::nextReportID(void)
 {
   QString id;
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     id.setNum(ulong(m_sql->incrementReportId()));
     id = 'R' + id.rightJustified(REPORT_ID_SIZE, '0');
   }
@@ -373,6 +389,7 @@ const QString MyMoneyDatabaseMgr::nextTransactionID(void)
 {
   QString id;
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     id.setNum(ulong(m_sql->incrementTransactionId()));
     id = 'T' + id.rightJustified(TRANSACTION_ID_SIZE, '0');
   }
@@ -383,6 +400,7 @@ const QString MyMoneyDatabaseMgr::nextScheduleID(void)
 {
   QString id;
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     id.setNum(ulong(m_sql->incrementScheduleId()));
     id = "SCH" + id.rightJustified(SCHEDULE_ID_SIZE, '0');
   }
@@ -393,6 +411,7 @@ const QString MyMoneyDatabaseMgr::nextSecurityID(void)
 {
   QString id;
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     id.setNum(ulong(m_sql->incrementSecurityId()));
     id = 'E' + id.rightJustified(SECURITY_ID_SIZE, '0');
   }
@@ -526,6 +545,7 @@ unsigned int MyMoneyDatabaseMgr::accountCount(void) const
 const QList<MyMoneyInstitution> MyMoneyDatabaseMgr::institutionList(void) const
 {
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     return m_sql->fetchInstitutions().values();
   } else {
     return QList<MyMoneyInstitution> ();
@@ -803,7 +823,10 @@ void MyMoneyDatabaseMgr::transactionList(QList<MyMoneyTransaction>& list, MyMone
   list.clear();
 
   TRY
-  if (m_sql) list = m_sql->fetchTransactions(filter).values();
+  if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
+    list = m_sql->fetchTransactions(filter).values();
+  }
   PASS
 }
 
@@ -812,7 +835,10 @@ void MyMoneyDatabaseMgr::transactionList(QList<QPair<MyMoneyTransaction, MyMoney
   list.clear();
   MyMoneyMap<QString, MyMoneyTransaction> transactionList;
   TRY
-  if (m_sql) transactionList = m_sql->fetchTransactions(filter);
+  if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
+    transactionList = m_sql->fetchTransactions(filter);
+  }
   PASS
 
   QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
@@ -1065,7 +1091,10 @@ unsigned int MyMoneyDatabaseMgr::institutionCount(void) const
 void MyMoneyDatabaseMgr::accountList(QList<MyMoneyAccount>& list) const
 {
   QMap <QString, MyMoneyAccount> accountList;
-  if (m_sql) accountList  = m_sql->fetchAccounts();
+  if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
+    accountList  = m_sql->fetchAccounts();
+  }
   QMap<QString, MyMoneyAccount>::ConstIterator it;
   QMap<QString, MyMoneyAccount>::ConstIterator accEnd = accountList.constEnd();
   for (it = accountList.constBegin(); it != accEnd; ++it) {
@@ -1204,6 +1233,7 @@ void MyMoneyDatabaseMgr::addSchedule(MyMoneySchedule& sched)
   sched.validate(false);
 
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     try {
       startTransaction();
       sched = MyMoneySchedule(nextScheduleID(), sched);
@@ -1271,7 +1301,10 @@ const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleList(const QString& acc
     const bool overdue) const
 {
   QMap<QString, MyMoneySchedule> scheduleList;
-  if (m_sql) scheduleList = m_sql->fetchSchedules();
+  if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
+    scheduleList = m_sql->fetchSchedules();
+  }
   QMap<QString, MyMoneySchedule>::ConstIterator pos;
   QList<MyMoneySchedule> list;
 
@@ -1396,6 +1429,7 @@ const QList<MyMoneySchedule> MyMoneyDatabaseMgr::scheduleListEx(int scheduleType
 void MyMoneyDatabaseMgr::addCurrency(const MyMoneySecurity& currency)
 {
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     QMap<QString, MyMoneySecurity> currencyList = m_sql->fetchCurrencies(QStringList(currency.id()));
     QMap<QString, MyMoneySecurity>::ConstIterator it;
 
@@ -1455,6 +1489,7 @@ const MyMoneySecurity MyMoneyDatabaseMgr::currency(const QString& id) const
 const QList<MyMoneySecurity> MyMoneyDatabaseMgr::currencyList(void) const
 {
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     return m_sql->fetchCurrencies().values();
   } else {
     return QList<MyMoneySecurity> ();
@@ -1464,6 +1499,7 @@ const QList<MyMoneySecurity> MyMoneyDatabaseMgr::currencyList(void) const
 const QList<MyMoneyReport> MyMoneyDatabaseMgr::reportList(void) const
 {
   if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     return m_sql->fetchReports().values();
   } else {
     return QList<MyMoneyReport> ();
@@ -1698,19 +1734,27 @@ void MyMoneyDatabaseMgr::close(void)
 
 void MyMoneyDatabaseMgr::startTransaction(void)
 {
-  if (m_sql) m_sql->startCommitUnit("databasetransaction");
+  if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
+    m_sql->startCommitUnit("databasetransaction");
+  }
 }
 
 bool MyMoneyDatabaseMgr::commitTransaction(void)
 {
-  if (m_sql)
+  if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     return m_sql->endCommitUnit("databasetransaction");
+  }
   return false;
 }
 
 void MyMoneyDatabaseMgr::rollbackTransaction(void)
 {
-  if (m_sql) m_sql->cancelCommitUnit("databasetransaction");
+  if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
+    m_sql->cancelCommitUnit("databasetransaction");
+  }
 }
 
 void MyMoneyDatabaseMgr::setCreationDate(const QDate& val)

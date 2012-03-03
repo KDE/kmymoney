@@ -42,6 +42,7 @@ private slots:
   void testEmptyConstructor();
   void testCreateDb();
   void testAttachDb();
+  void testDisconnection();
   void testSetFunctions();
   void testIsStandardAccount();
   void testNewAccount();

@@ -138,6 +138,22 @@ void MyMoneyDatabaseMgrTest::testAttachDb()
   }
 }
 
+void MyMoneyDatabaseMgrTest::testDisconnection()
+{
+  testAttachDb();
+  if (!m_canOpen) {
+    std::cout << "Database test skipped because no database could be opened." << std::endl;
+    return;
+  }
+  try {
+    ((QSqlDatabase*)(m->m_sql.data()))->close();
+    QList<MyMoneyAccount> accList;
+    m->accountList(accList);
+  } catch (MyMoneyException* e) {
+    unexpectedException(e);
+  }
+}
+
 void MyMoneyDatabaseMgrTest::testSetFunctions()
 {
   testAttachDb();
