@@ -3340,8 +3340,6 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
   if (forUpdate)
     queryString += m_driver->forUpdateString();
 
-  queryString += ';';
-
   q.prepare(queryString);
 
   if (! idList.empty()) {
