@@ -1504,7 +1504,7 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
   // the proxy filter model
   m_filterProxyModel = new HierarchyFilterProxyModel(this);
   m_filterProxyModel->setHideClosedAccounts(true);
-  m_filterProxyModel->setHideEquityAccounts(true);
+  m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
   m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());

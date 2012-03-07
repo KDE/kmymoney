@@ -181,7 +181,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   // the proxy filter model
   m_filterProxyModel = new HierarchyFilterProxyModel(this);
   m_filterProxyModel->setHideClosedAccounts(true);
-  m_filterProxyModel->setHideEquityAccounts(true);
+  m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
   m_filterProxyModel->addAccountGroup(filterAccountGroup);
   m_filterProxyModel->setCurrentAccountId(m_account.id());
   m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
