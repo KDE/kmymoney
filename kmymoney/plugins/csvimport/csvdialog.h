@@ -297,6 +297,12 @@ public:
   void           readSettingsProfiles();
 
   /**
+  * This method is called if the field delimiter is changed after file loading,
+  * in order to load column settings again.
+  */
+  void           readColumnSettings();
+
+  /**
   * This method is called when the user chooses to add a new profile, It achieves this by copying
   * the necessary basic parameters from an existing profile called "Profiles-New Profile###"
   * in the resource file,
@@ -408,6 +414,8 @@ private:
   int              m_startLine;
   int              m_curId;
   int              m_lastId;
+  int              m_lineNum;
+  int              m_memoColCopy;
 
   QBrush           m_clearBrush;
   QBrush           m_colorBrush;
@@ -418,9 +426,8 @@ private:
 
   QList<QLabel*>   m_stageLabels;
   QList<int>       m_memoColList;
+  QList<int>       m_columnCountList;
 
-
-  int              nextId() const;
   void             updateRowHeaders(int skp);
 
   void             closeEvent(QCloseEvent *event);
@@ -487,6 +494,7 @@ private slots:
   * This method is called when the user edits the startLine setting.
   */
   void           startLineChanged(int val);
+  void           startLineEdited();
 
   /**
   * This method is called when the Memo column is activated.
@@ -507,8 +515,8 @@ private slots:
   void           payeeColumnSelected(int);
 
   /**
-  * This method is called when 'Cancel' is clicked.  No settings will
-  * be saved, and the plugin will be terminated.
+  * This method is called when 'Cancel' is clicked.  Unless the user chooses
+  * to continue, no settings will be saved, and the plugin will be terminated.
   */
   void           slotCancel();
 
@@ -619,13 +627,19 @@ public:
   CSVDialog*          m_dlg;
   void                setParent(CSVDialog* dlg);
   void                initializePage();
-
-signals:
+  bool                isComplete() const;
 
 private:
   void                cleanupPage();
-
+  bool                validatePage();
   int                 nextId() const;
+
+private slots:
+  void                delimiterChanged();
+
+signals:
+  void                completeChanged();
+
 };
 
 namespace Ui
@@ -643,6 +657,8 @@ public:
 
   Ui::BankingPage     *ui;
   QVBoxLayout         *m_pageLayout;
+
+  bool                m_bankingPageInitialized;
   void                setParent(CSVDialog* dlg);
 
 signals:
