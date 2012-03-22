@@ -84,7 +84,7 @@ p, li { white-space: pre-wrap; }
             </size>
            </property>
            <property name="toolTip">
-            <string comment="verb, Select column containing number field.">Select column containing number field.</string>
+            <string>Select column containing number field.</string>
            </property>
            <property name="editable">
             <bool>false</bool>
@@ -108,7 +108,7 @@ p, li { white-space: pre-wrap; }
             </font>
            </property>
            <property name="toolTip">
-            <string comment="Select 'Amount' if only one value column, otherwise select 'Debit/credit'.">Select 'Amount' if only one value column, otherwise select 'Debit/credit'.</string>
+            <string>Select 'Amount' if only one value column, otherwise select 'Debit/credit'.</string>
            </property>
            <property name="whatsThis">
             <string extracomment="Select 'Amount' if only one value column, otherwise select "/>
@@ -212,7 +212,7 @@ p, li { white-space: pre-wrap; }
             </size>
            </property>
            <property name="toolTip">
-            <string comment="verb, Select column containing number field.">Select column containing date field.</string>
+            <string>Select column containing date field.</string>
            </property>
            <property name="maxVisibleItems">
             <number>12</number>
@@ -258,7 +258,7 @@ p, li { white-space: pre-wrap; }
             </size>
            </property>
            <property name="toolTip">
-            <string comment="verb, Select column containing payee or description field.">Select column containing payee or description field.</string>
+            <string>Select column containing payee or description field.</string>
            </property>
            <property name="maxVisibleItems">
             <number>12</number>
@@ -307,7 +307,7 @@ p, li { white-space: pre-wrap; }
             </size>
            </property>
            <property name="toolTip">
-            <string comment="verb, Select column containing debit field.">Select column containing debit field.</string>
+            <string>Select column containing debit field.</string>
            </property>
            <property name="maxVisibleItems">
             <number>12</number>
@@ -375,7 +375,7 @@ p, li { white-space: pre-wrap; }
             </size>
            </property>
            <property name="toolTip">
-            <string comment="Clear selected column entries">Clear selected column entries</string>
+            <string>Clear selected column entries</string>
            </property>
            <property name="text">
             <string>Clear selections</string>
@@ -396,7 +396,7 @@ p, li { white-space: pre-wrap; }
             </font>
            </property>
            <property name="toolTip">
-            <string comment="verb, Select 'Debit/credit' if both columns exist,, otherwise select 'Amount'.">Select 'Debit/credit' if both columns exist, otherwise select 'Amount'.</string>
+            <string>Select 'Debit/credit' if both columns exist, otherwise select 'Amount'.</string>
            </property>
            <property name="accessibleName">
             <string comment="presence of debit and credit column"/>
@@ -424,7 +424,7 @@ p, li { white-space: pre-wrap; }
             </size>
            </property>
            <property name="toolTip">
-            <string comment="verb, Select column containing memo field. More than one column may be entered successively.">Select column containing memo field.
+            <string>Select column containing memo field.
  More than one column may be entered successively.</string>
            </property>
            <property name="maxVisibleItems">
@@ -447,7 +447,7 @@ p, li { white-space: pre-wrap; }
             </size>
            </property>
            <property name="toolTip">
-            <string comment="verb, Select column containing credit field.">Select column containing credit field.</string>
+            <string>Select column containing credit field.</string>
            </property>
            <property name="maxVisibleItems">
             <number>12</number>

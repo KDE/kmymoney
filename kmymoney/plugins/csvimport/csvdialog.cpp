@@ -927,7 +927,8 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
   iBuff = iBuff.remove(m_textDelimiterCharacter);
   memo.clear();//                                     memo & number may not have been used
   m_trData.number.clear();//                          .. so need to clear prior contents
-  for (int i = 0; i <= m_endColumn; i++) {  //        check each column
+  for (int i = 0; i < m_columnList.count(); i++) {  //        check each column
+    //  Use actual column count for this line instead of m_endColumn, which could be greater.
     if (columnType(i) == "number") {
       txt = m_columnList[i];
       m_trData.number = txt;
