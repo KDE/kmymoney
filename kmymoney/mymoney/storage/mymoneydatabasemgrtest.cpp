@@ -16,6 +16,7 @@
 
 #include "mymoneydatabasemgrtest.h"
 #include <pwd.h>
+#include <unistd.h>
 #include <iostream>
 
 #include <QtTest/QtTest>
