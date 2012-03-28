@@ -109,6 +109,7 @@ public:
   QString        m_fieldDelimiterCharacter;
   QString        m_inBuffer;
   QString        m_inFileName;
+  QString        m_lastFileName;
   QString        m_outBuffer;
   QString        m_qifBuffer;
   QString        m_textDelimiterCharacter;
@@ -126,6 +127,7 @@ public:
   bool           m_importNow;
   bool           m_showEmptyCheckBox;
   bool           m_accept;
+  bool           m_acceptAllInvalid;
   bool           m_screenUpdated;
   bool           m_goBack;
   bool           m_importIsValid;
@@ -274,8 +276,8 @@ public:
   void           csvImportTransaction(MyMoneyStatement& st);
 
   /**
-    * This method is called after startup, to initialise some parameters.
-    */
+  * This method is called after startup, to initialise some parameters.
+  */
   void           init();
 
   /**
@@ -704,8 +706,6 @@ public slots:
   void                slotsecurityNameChanged(int index);
 private:
   CSVDialog*          m_dlg;
-
-  bool                m_reloadNeeded;
 
   bool                isComplete() const;
   void                initializePage();

@@ -111,6 +111,7 @@ CSVDialog::CSVDialog(QWidget *parent) : QWidget(parent), ui(new Ui::CSVDialog)
   m_decimalSymbol.clear();
   m_previousType.clear();
   m_thousandsSeparator = ',';
+  m_lastFileName.clear();
 
   m_iconBack = QPixmap(KIconLoader::global()->loadIcon("go-previous", KIconLoader::Small, KIconLoader::DefaultState));
   m_iconFinish = QPixmap(KIconLoader::global()->loadIcon("dialog-ok-apply", KIconLoader::Small, KIconLoader::DefaultState));
@@ -690,6 +691,7 @@ void CSVDialog::slotFileDialogClicked()
     return;
   }
   m_importNow = false;//                       Avoid attempting date formatting on headers
+  m_acceptAllInvalid = false;  //              Don't accept further invalid values.
   clearComboBoxText();//                       to clear any '*' in memo combo text
 
   //  set large table height to ensure resizing sees all lines in new file
@@ -2053,6 +2055,11 @@ void CSVDialog::endLineChanged()
   m_endLine = m_pageLinesDate->ui->spinBox_skipToLast->value();
 }
 
+int CSVDialog::lastLine()
+{
+  return m_endLine;
+}
+
 void CSVDialog::restoreBackground()
 {
   int lastRow;
@@ -2789,7 +2796,6 @@ int SeparatorPage::nextId() const
 BankingPage::BankingPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::BankingPage)
 {
   ui->setupUi(this);
-  m_reloadNeeded = false;
   m_pageLayout = new QVBoxLayout;
   ui->horizontalLayout->insertLayout(0, m_pageLayout);
 
@@ -2831,17 +2837,6 @@ void BankingPage::initializePage()
   setField("source", index);
   m_dlg->m_fileType = "Banking";
   m_bankingPageInitialized = true;
-
-  if (m_reloadNeeded) {
-    m_dlg->m_investProcessing->clearColumnTypes();
-    ui->comboBoxBnk_amountCol->setCurrentIndex(m_dlg->amountColumn());
-    ui->comboBoxBnk_debitCol->setCurrentIndex(m_dlg->debitColumn());
-    ui->comboBoxBnk_creditCol->setCurrentIndex(m_dlg->creditColumn());
-    ui->comboBoxBnk_dateCol->setCurrentIndex(m_dlg->dateColumn());
-    ui->comboBoxBnk_memoCol->setCurrentIndex(m_dlg->memoColumn());
-    ui->comboBoxBnk_payeeCol->setCurrentIndex(m_dlg->payeeColumn());
-    ui->comboBoxBnk_numberCol->setCurrentIndex(m_dlg->numberColumn());
-  }
 }
 
 int BankingPage::nextId() const
@@ -2857,7 +2852,6 @@ bool BankingPage::isComplete() const
 
 void BankingPage::cleanupPage()
 {
-  m_reloadNeeded = true;
 }
 
 void BankingPage::slotDateColChanged(int col)
@@ -2917,8 +2911,6 @@ InvestmentPage::InvestmentPage(QWidget *parent) : QWizardPage(parent), ui(new Ui
 
   connect(ui->lineEdit_filter, SIGNAL(returnPressed()), this, SLOT(slotFilterEditingFinished()));
   connect(ui->lineEdit_filter, SIGNAL(editingFinished()), this, SLOT(slotFilterEditingFinished()));
-
-  m_reloadNeeded = false;
 }
 
 InvestmentPage::~InvestmentPage()
@@ -2937,19 +2929,6 @@ void InvestmentPage::initializePage()
   connect(ui->buttonInv_hideSecurity, SIGNAL(clicked()), m_dlg->m_investProcessing, SLOT(hideSecurity()));
   m_dlg->m_isTableTrimmed = false;
   m_dlg->m_detailFilter = ui->lineEdit_filter->text();//    Load setting from config file.
-
-  if (m_reloadNeeded) {
-    m_dlg->m_investProcessing->clearColumnTypes();
-    ui->comboBoxInv_amountCol->setCurrentIndex(m_dlg->m_investProcessing->amountColumn());
-    ui->comboBoxInv_dateCol->setCurrentIndex(m_dlg->m_investProcessing->dateColumn());
-    ui->comboBoxInv_feeCol->setCurrentIndex(m_dlg->m_investProcessing->feeColumn());
-    ui->comboBoxInv_memoCol->setCurrentIndex(m_dlg->m_investProcessing->memoColumn());
-    ui->comboBoxInv_priceCol->setCurrentIndex(m_dlg->m_investProcessing->priceColumn());
-    ui->comboBoxInv_quantityCol->setCurrentIndex(m_dlg->m_investProcessing->quantityColumn());
-    ui->comboBoxInv_typeCol->setCurrentIndex(m_dlg->m_investProcessing->typeColumn());
-    ui->comboBoxInv_symbolCol->setCurrentIndex(m_dlg->m_investProcessing->symbolColumn());
-    ui->comboBoxInv_detailCol->setCurrentIndex(m_dlg->m_investProcessing->detailColumn());
-  }
 }
 
 void InvestmentPage::slotDateColChanged(int col)
@@ -3036,7 +3015,6 @@ bool InvestmentPage::isComplete() const
 
 void InvestmentPage::cleanupPage()
 {
-  m_reloadNeeded = true;
 }
 
 LinesDatePage::LinesDatePage(QWidget *parent) : QWizardPage(parent), ui(new Ui::LinesDatePage)
@@ -3079,6 +3057,83 @@ void LinesDatePage::setParent(CSVDialog* dlg)
 
 bool LinesDatePage::validatePage()
 {
+  bool ok;
+  QString value;
+  //
+  //  Ensure numeric columns do contain valid numeric values
+  //
+  if (m_dlg->m_fileType == "Banking") {
+    for (int row = 0; row < m_dlg->ui->tableWidget->rowCount(); row++) {
+      for (int col = 0; col < m_dlg->ui->tableWidget->columnCount(); col++) {
+        if ((m_dlg->columnType(col) == "amount") || (m_dlg->columnType(col) == "debit") || (m_dlg->columnType(col) == "credit")) {
+          QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(), ]";
+          value = m_dlg->ui->tableWidget->item(row, col)->text().remove(QRegExp(pattern));
+          if (value.isEmpty()) {  //  An empty cell is OK, probably.
+            continue;
+          }
+          value.toDouble(&ok); // Test validity.
+          if ((!ok) && (!m_dlg->m_acceptAllInvalid)) {
+            QString str = KGlobal::locale()->currencySymbol();
+            int rc = KMessageBox::questionYesNoCancel(this, i18n("<center>An invalid value has been detected in column %1 on row %2.</center>"
+                                                                 "Please check that you have selected the correct columns."
+                                                                 "<center>You may accept all similar items, or just this one, or cancel.</center>",
+                                                                 col + 1, row + m_dlg->m_investProcessing->m_startLine), i18n("CSV import"),
+                                                                 KGuiItem(i18n("Accept All")),
+                                                                 KGuiItem(i18n("Accept This")),
+                                                                 KGuiItem(i18n("Cancel")));
+            switch (rc) {
+            case KMessageBox::Yes:  //  = "Accept All"
+              m_dlg->m_acceptAllInvalid = true;
+              continue;
+
+            case KMessageBox::No:  //  "Accept This"
+              m_dlg->m_acceptAllInvalid = false;
+              continue;
+
+            case KMessageBox::Cancel:
+              return false;
+            }
+          }
+        }
+      }
+    }
+  } else {
+    for (int row = 0; row < m_dlg->ui->tableWidget->rowCount(); row++) {
+      for (int col = 0; col < m_dlg->ui->tableWidget->columnCount(); col++) {
+        if ((m_dlg->m_investProcessing->columnType(col) == "amount") || (m_dlg->m_investProcessing->columnType(col) == "quantity") || (m_dlg->m_investProcessing->columnType(col) == "price")) {
+          QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(), ]";
+          value = m_dlg->ui->tableWidget->item(row, col)->text().remove(QRegExp(pattern));
+          if (value.isEmpty()) {  //  An empty cell is OK, probably.
+            continue;
+          }
+          value.toDouble(&ok); // Test validity.
+          if ((!ok) && (!m_dlg->m_acceptAllInvalid)) {
+            QString str = KGlobal::locale()->currencySymbol();
+            int rc = KMessageBox::questionYesNoCancel(this, i18n("<center>An invalid value has been detected in column %1 on row %2.</center>"
+                                                                 "Please check that you have selected the correct columns."
+                                                                 "<center>You may accept all similar items, or just this one, or cancel.</center>",
+                                                                 col + 1, row + m_dlg->m_investProcessing->m_startLine), i18n("CSV import"),
+                                                                 KGuiItem(i18n("Accept All")),
+                                                                 KGuiItem(i18n("Accept This")),
+                                                                 KGuiItem(i18n("Cancel")));
+            switch (rc) {
+            case KMessageBox::Yes:  //  = "Accept All"
+              m_dlg->m_acceptAllInvalid = true;
+              continue;
+
+            case KMessageBox::No:  //  "Accept This"
+              m_dlg->m_acceptAllInvalid = false;
+              continue;
+
+            case KMessageBox::Cancel:
+              return false;
+            }
+          }
+        }
+      }
+    }
+  }
+
   int symTableRow = -1;
   if ((m_dlg->m_fileType == "Banking") || (field("symbolCol").toInt() == -1)) {  //  Only check symbols if that field is set, and not Banking.
     if ((m_dlg->m_pageIntro->ui->checkBoxSkipSetup->isChecked())) {

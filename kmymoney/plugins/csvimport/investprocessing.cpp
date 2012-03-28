@@ -239,8 +239,9 @@ void InvestProcessing::slotFileDialogClicked()
   }
   if (m_csvDialog->m_inFileName.isEmpty())
     return;
-  clearComboBoxText();//                    to clear any '*' in memo combo text
-  m_importNow = false;//                    Avoid attempting date formatting on headers
+  clearComboBoxText();//                        To clear any '*' in memo combo text
+  m_importNow = false;//                        Avoid attempting date formatting on headers
+  m_csvDialog->m_acceptAllInvalid = false;  //  Don't accept further invalid values.
 
   for (int i = 0; i < MAXCOL; i++)
     if (columnType(i) == "memo") {
@@ -763,8 +764,8 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
 
   //  Display the buffer
 
-  connect(m_csvDialog->m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), m_csvDialog, SLOT(startLineChanged(int)));
-  connect(m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), m_csvDialog, SLOT(endLineChanged(int)));
+  connect(m_csvDialog->m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
+  connect(m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), this, SLOT(endLineChanged(int)));
   m_symblRow = 0;
 
   for (int i = 0; i < m_lineList.count(); i++) {
@@ -1525,11 +1526,19 @@ void InvestProcessing::readSettings()
 {
   m_csvDialog->m_profileExists = false;
   bool found = false;
+  //
+  //  Only clearColumnTypes if new file is selected.
+  //
+  if (m_csvDialog->m_inFileName != m_csvDialog->m_lastFileName) {
+    clearColumnTypes();//  Needs to be here in case user selects new profile after cancelling prior one.
+    clearSelectedFlags();
+   } else {
+     return;
+  }
+  m_csvDialog->m_lastFileName = m_csvDialog->m_inFileName;
 
-  clearColumnTypes();//  Needs to be here in case user selects new profile after cancelling prior one.
   int tmp;
   QString str;
-  clearSelectedFlags();
 
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
 
