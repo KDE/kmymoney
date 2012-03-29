@@ -3067,6 +3067,9 @@ bool LinesDatePage::validatePage()
       for (int col = 0; col < m_dlg->ui->tableWidget->columnCount(); col++) {
         if ((m_dlg->columnType(col) == "amount") || (m_dlg->columnType(col) == "debit") || (m_dlg->columnType(col) == "credit")) {
           QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(), ]";
+          if (m_dlg->ui->tableWidget->item(row, col) == 0) {  //  Does cell exist?
+            continue;  //  No.
+          }
           value = m_dlg->ui->tableWidget->item(row, col)->text().remove(QRegExp(pattern));
           if (value.isEmpty()) {  //  An empty cell is OK, probably.
             continue;
@@ -3077,7 +3080,7 @@ bool LinesDatePage::validatePage()
             int rc = KMessageBox::questionYesNoCancel(this, i18n("<center>An invalid value has been detected in column %1 on row %2.</center>"
                                                                  "Please check that you have selected the correct columns."
                                                                  "<center>You may accept all similar items, or just this one, or cancel.</center>",
-                                                                 col + 1, row + m_dlg->m_investProcessing->m_startLine), i18n("CSV import"),
+                                                                 col + 1, row + m_dlg->startLine()), i18n("CSV import"),
                                                                  KGuiItem(i18n("Accept All")),
                                                                  KGuiItem(i18n("Accept This")),
                                                                  KGuiItem(i18n("Cancel")));
@@ -3102,6 +3105,9 @@ bool LinesDatePage::validatePage()
       for (int col = 0; col < m_dlg->ui->tableWidget->columnCount(); col++) {
         if ((m_dlg->m_investProcessing->columnType(col) == "amount") || (m_dlg->m_investProcessing->columnType(col) == "quantity") || (m_dlg->m_investProcessing->columnType(col) == "price")) {
           QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(), ]";
+          if (m_dlg->ui->tableWidget->item(row, col) == 0) {  //  Does cell exist?
+            continue;  //  No.
+          }
           value = m_dlg->ui->tableWidget->item(row, col)->text().remove(QRegExp(pattern));
           if (value.isEmpty()) {  //  An empty cell is OK, probably.
             continue;
