@@ -1001,7 +1001,7 @@
 <para>
   The easiest way to import an OFX file is to set up Web Connect.  Visit your
   bank's web site, and click on a link to download an OFX file.  Your browser
-  should ask you what program you would like to use to open the program.  Point
+  should ask you what program you would like to use to open the file.  Point
   your browser to &kappname;.  It will then import the downloaded OFX file into
   the &kappname; file you most recently had open.  You can also change the file
   associations of your desktop environment, and have &kappname; open the OFX
