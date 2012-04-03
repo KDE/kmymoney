@@ -1510,7 +1510,12 @@ void KMyMoneyApp::slotFileOpenRecent(const KUrl& url)
       // if we need to supply a password, then show the dialog
       // otherwise it isn't needed
       if ((newurl.queryItem("secure") == "yes") && newurl.pass().isEmpty()) {
-        if (dialog->exec() == QDialog::Accepted) newurl = dialog->selectedURL();
+        if (dialog->exec() == QDialog::Accepted)
+          newurl = dialog->selectedURL();
+        else {
+          delete dialog;
+          return;
+        }
       }
       delete dialog;
     }
