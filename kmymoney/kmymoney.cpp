@@ -666,7 +666,7 @@ void KMyMoneyApp::initActions(void)
   connect(account_chart, SIGNAL(triggered()), this, SLOT(slotAccountChart()));
 
   KAction *account_online_map = actionCollection()->addAction("account_online_map");
-  account_online_map->setText(i18n("Map to online account"));
+  account_online_map->setText(i18n("Map to online account..."));
   account_online_map->setIcon(KIcon("news-subscribe"));
   connect(account_online_map, SIGNAL(triggered()), this, SLOT(slotAccountMapOnline()));
 
