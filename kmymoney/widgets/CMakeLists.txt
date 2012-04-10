@@ -89,6 +89,8 @@ ADD_CUSTOM_TARGET(generate_base_ui_srcs DEPENDS
 # We can compile the uncritical sources without KMM_DESIGNER flags
 KDE4_ADD_LIBRARY(kmymoney_base STATIC ${_uncritial_common_sources})
 
+ADD_DEPENDENCIES(kmymoney_base kmm_config)
+
 ########### QtDesigner Widget Library (kmymoneywidgets) #################
 # we never link against this library,
 # but it is needed for uic and QtDesigner
