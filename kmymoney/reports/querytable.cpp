@@ -1238,6 +1238,13 @@ void QueryTable::constructSplitsTable(void)
       loan_special_case = splitAcc.isLoan();
     }
 
+    // There is a slight chance that at this point myBegin is still pointing to splits.end() if the
+    // transaction only has income and expense splits (which should not happen). In that case, point
+    // it to the first split
+    if (myBegin == splits.end()) {
+        myBegin = splits.begin();
+    }
+
     //the account of the beginning splits
     ReportAccount myBeginAcc = (*myBegin).accountId();
 
