@@ -877,8 +877,14 @@ void PivotTable::calculateBudgetMapping(void)
         MyMoneyMoney reverse((splitAccount.accountType() == MyMoneyAccount::Expense) ? -1 : 1, 1);
 
         const QMap<QDate, MyMoneyBudget::PeriodGroup>& periods = (*it_bacc).getPeriods();
+
+        // skip the account if it has no periods
+        if (periods.count() < 1) {
+            ++it_bacc;
+            continue;
+        }
+
         MyMoneyMoney value = (*periods.begin()).amount() * reverse;
-        MyMoneyMoney price = MyMoneyMoney(1, 1);
         int column = 1;
 
         // based on the kind of budget it is, deal accordingly
