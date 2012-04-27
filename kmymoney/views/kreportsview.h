@@ -245,6 +245,12 @@ signals:
     * This signal is emitted whenever a transaction is selected
     */
   void ledgerSelected(const QString&, const QString&);
+
+private:
+  /**
+    * Display a dialog to confirm report deletion
+    */
+  int deleteReportDialog(const QString&);
 };
 
 #endif
