@@ -881,10 +881,7 @@ void KReportsView::slotDelete(void)
 
   MyMoneyReport report = tab->report();
   if (! report.id().isEmpty()) {
-    if (KMessageBox::Continue ==
-        KMessageBox::warningContinueCancel(this, QString("<qt>") +
-                                           i18n("Are you sure you want to delete report <b>%1</b>?  There is no way to recover it.",
-                                                report.name()) + QString("</qt>"), i18n("Delete Report?"))) {
+    if (KMessageBox::Continue == deleteReportDialog(report.name())) {
       // close the tab and then remove the report so that it is not
       // generated again during the following loadView() call
       slotClose(tab);
@@ -899,6 +896,13 @@ void KReportsView::slotDelete(void)
                              i18n("<b>%1</b> is a default report, so it cannot be deleted.",
                                   report.name()) + QString("</qt>"), i18n("Delete Report?"));
   }
+}
+
+int KReportsView::deleteReportDialog(const QString &reportName)
+{
+    return KMessageBox::warningContinueCancel(this, QString("<qt>") +
+                                       i18n("Are you sure you want to delete report <b>%1</b>?  There is no way to recover it.",
+                                            reportName) + QString("</qt>"), i18n("Delete Report?"));
 }
 
 void KReportsView::slotOpenReport(const QString& id)
@@ -1102,8 +1106,13 @@ void KReportsView::slotListContextMenu(const QPoint & p)
   contextmenu->addAction(i18n("&New report"),
                          this, SLOT(slotNewFromList()));
 
-  contextmenu->addAction(i18n("&Delete"),
+  // Only add this option if it's a custom report. Default reports cannot be deleted
+  TocItemReport* reportTocItem = dynamic_cast<TocItemReport*>(tocItem);
+  MyMoneyReport& report = reportTocItem->getReport();
+  if (! report.id().isEmpty()) {
+    contextmenu->addAction(i18n("&Delete"),
                          this, SLOT(slotDeleteFromList()));
+  }
 
   contextmenu->popup(m_tocTreeWidget->mapToGlobal(p));
 }
@@ -1141,8 +1150,17 @@ void KReportsView::slotDeleteFromList(void)
   TocItem* tocItem = dynamic_cast<TocItem*>(m_tocTreeWidget->currentItem());
 
   if (tocItem) {
-    slotItemDoubleClicked(tocItem, 0);
-    slotDelete();
+    TocItemReport* reportTocItem = dynamic_cast<TocItemReport*>(tocItem);
+
+    MyMoneyReport& report = reportTocItem->getReport();
+
+    // If this report does not have an ID, it's a default report and cannot be deleted
+    if (! report.id().isEmpty() &&
+            KMessageBox::Continue == deleteReportDialog(report.name())) {
+        MyMoneyFileTransaction ft;
+        MyMoneyFile::instance()->removeReport(report);
+        ft.commit();
+    }
   }
 }
 
