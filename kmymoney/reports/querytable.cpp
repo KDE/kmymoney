@@ -1267,6 +1267,11 @@ void QueryTable::constructSplitsTable(void)
         xr = splitAcc.deepCurrencyPrice((*it_transaction).postDate()).reduce();
       }
 
+      // reverse the sign of incomes and expenses to keep consistency in the way it is displayed in other reports
+      if (splitAcc.isIncomeExpense()) {
+          xr = -xr;
+      }
+
       if (splitAcc.isInvest()) {
 
         // use the institution of the parent for stock accounts
