@@ -2584,11 +2584,35 @@ const MyMoneyPrice MyMoneyFile::price(const QString& fromId, const QString& toId
     return MyMoneyPrice(fromId, toId, date, MyMoneyMoney(1, 1), "KMyMoney");
   }
 
-  // search 'from-to' rate
-  MyMoneyPrice rc = d->m_storage->price(fromId, to, date, exactDate);
+  // if not asking for exact date, try to find the exact date match first,
+  // either the requested price or its reciprocal value. If unsuccesful, it will move
+  // on and look for prices of previous dates
+  MyMoneyPrice rc = d->m_storage->price(fromId, to, date, true);
   if (!rc.isValid()) {
-    // not found, search 'to-fron' rate and use reciprocal value
-    rc = d->m_storage->price(to, fromId, date, exactDate);
+    // not found, search 'to-from' rate and use reciprocal value
+    rc = d->m_storage->price(to, fromId, date, true);
+
+    // not found, search previous dates, if exact date is not needed
+    if (!exactDate && !rc.isValid()) {
+      // search 'from-to' and 'to-from', select the most recent one
+      MyMoneyPrice fromPrice = d->m_storage->price(fromId, to, date, exactDate);
+      MyMoneyPrice toPrice = d->m_storage->price(to, fromId, date, exactDate);
+
+      // check first whether both prices are valid
+      if (fromPrice.isValid() && toPrice.isValid()) {
+        if (fromPrice.date() >= toPrice.date()) {
+          // if 'from-to' is newer or the same date, prefer that one
+          rc = fromPrice;
+        } else {
+          // otherwise, use the reciprocal price
+          rc = toPrice;
+        }
+      } else if (fromPrice.isValid()) { // check if any of the prices is valid, return that one
+        rc = fromPrice;
+      } else if (toPrice.isValid()) {
+        rc = toPrice;
+      }
+    }
   }
   return rc;
 }
