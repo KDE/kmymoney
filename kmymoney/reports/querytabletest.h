@@ -39,6 +39,7 @@ private slots:
   void testAccountQuery();
   void testInvestment();
   void testBalanceColumn();
+  void testBalanceColumnWithMultipleCurrencies();
   void testTaxReport();
 };
 

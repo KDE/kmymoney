@@ -645,6 +645,85 @@ void QueryTableTest::testBalanceColumn()
 
 }
 
+void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
+{
+  try {
+
+    MyMoneyMoney moJpyOpening(0.0, 1);
+    MyMoneyMoney moJpyPrice(0.010, 100);
+    MyMoneyMoney moJpyPrice2(0.011, 100);
+    MyMoneyMoney moJpyPrice3(0.024, 100);
+    MyMoneyMoney moTransaction(100, 1);
+    MyMoneyMoney moJpyTransaction(100, 1);
+
+    QString acJpyChecking = makeAccount(QString("Japanese Checking"), MyMoneyAccount::Checkings, moJpyOpening, QDate(2003, 11, 15), acAsset, "JPY");
+
+    makePrice("JPY", QDate(2004, 1, 1), MyMoneyMoney(moJpyPrice));
+    makePrice("JPY", QDate(2004, 5, 1), MyMoneyMoney(moJpyPrice2));
+    makePrice("JPY", QDate(2004, 6, 30), MyMoneyMoney(moJpyPrice3));
+
+    TransactionHelper t1(QDate(2004, 2, 20), MyMoneySplit::ActionTransfer,   MyMoneyMoney(moJpyTransaction), acJpyChecking, acChecking, "JPY");
+    TransactionHelper t4(QDate(2004, 2, 20), MyMoneySplit::ActionDeposit,    MyMoneyMoney(moTransaction),    acCredit,      acChecking);
+    TransactionHelper t2(QDate(2004, 5, 20), MyMoneySplit::ActionTransfer,   MyMoneyMoney(moJpyTransaction), acJpyChecking, acChecking, "JPY");
+    TransactionHelper t5(QDate(2004, 5, 20), MyMoneySplit::ActionDeposit,    MyMoneyMoney(moTransaction),    acCredit,      acChecking);
+    TransactionHelper t3(QDate(2004, 7, 20), MyMoneySplit::ActionTransfer,   MyMoneyMoney(moJpyTransaction), acJpyChecking, acChecking, "JPY");
+    TransactionHelper t6(QDate(2004, 7, 20), MyMoneySplit::ActionDeposit,    MyMoneyMoney(moTransaction),    acCredit,      acChecking);
+
+    unsigned cols;
+
+    MyMoneyReport filter;
+
+    filter.setRowType(MyMoneyReport::eAccount);
+    filter.setName("Transactions by Account");
+    cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCbalance;
+    filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));
+    // don't convert values to the default currency
+    filter.setConvertCurrency(false);
+    XMLandback(filter);
+    QueryTable qtbl_3(filter);
+
+    writeTabletoHTML(qtbl_3, "Transactions by Account (multiple currencies).html");
+
+    QString html = qtbl_3.renderBody();
+
+    QList<ListTable::TableRow> rows = qtbl_3.rows();
+
+    QVERIFY(rows.count() == 18);
+
+    //this is to make sure that the dates of closing and opening balances and the balance numbers are ok
+    QString openingDate = KGlobal::locale()->formatDate(QDate(2004, 2, 20), KLocale::ShortDate);
+    QString closingDate = KGlobal::locale()->formatDate(QDate(2004, 7, 20), KLocale::ShortDate);
+    // check the opening and closing balances
+    QVERIFY(html.indexOf(openingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Opening Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;0.00</td></tr>") > 0);
+    QVERIFY(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;304.00</td></tr>") > 0);
+    QVERIFY(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-300.00</td></tr>") > 0);
+    QVERIFY(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>JPY&nbsp;-300.00</td></tr>") > 0);
+
+    // after a transfer of 100 JPY the balance should be 1.00 - price is 0.010 (precision of 2)
+    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000001>2004-02-20</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Japanese Checking</td><td class=\"value\">&nbsp;1.00</td><td>&nbsp;1.00</td></tr>") > 0);
+
+    // after a transfer of 100 the balance should be 101.00
+    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000002>2004-02-20</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Credit Card</td><td class=\"value\">&nbsp;100.00</td><td>&nbsp;101.00</td></tr>") > 0);
+
+    // after a transfer of 100 JPY the balance should be 102.00 - price is 0.011 (precision of 2)
+    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000003>2004-05-20</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Japanese Checking</td><td class=\"value\">&nbsp;1.00</td><td>&nbsp;102.00</td></tr>") > 0);
+
+    // after a transfer of 100 the balance should be 202.00
+    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000004>2004-05-20</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Credit Card</td><td class=\"value\">&nbsp;100.00</td><td>&nbsp;202.00</td></tr>") > 0);
+
+    // after a transfer of 100 JPY the balance should be 204.00 - price is 0.024 (precision of 2)
+    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000005>2004-07-20</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Japanese Checking</td><td class=\"value\">&nbsp;2.00</td><td>&nbsp;204.00</td></tr>") > 0);
+
+    // after a transfer of 100 the balance should be 304.00
+    QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000006>2004-07-20</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Credit Card</td><td class=\"value\">&nbsp;100.00</td><td>&nbsp;304.00</td></tr>") > 0);
+
+  } catch (MyMoneyException *e) {
+    QFAIL(qPrintable(e->what()));
+    delete e;
+  }
+
+}
+
 void QueryTableTest::testTaxReport()
 {
   try {

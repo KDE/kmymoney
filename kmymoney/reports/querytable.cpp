@@ -526,10 +526,6 @@ void QueryTable::constructTransactionTable(void)
         xr = (splitAcc.deepCurrencyPrice((*it_transaction).postDate()) * splitAcc.baseCurrencyPrice((*it_transaction).postDate())).reduce();
       } else {
         xr = (splitAcc.deepCurrencyPrice((*it_transaction).postDate())).reduce();
-        //if the currency of the split is different from the currency of the main split, then convert to the currency of the main split
-        if (splitAcc.currency().id() != myBeginCurrency) {
-          xr = (xr * splitAcc.foreignCurrencyPrice(myBeginCurrency, (*it_transaction).postDate())).reduce();
-        }
       }
 
       if (splitAcc.isInvest()) {
@@ -574,6 +570,8 @@ void QueryTable::constructTransactionTable(void)
         qA["number"] = (*it_split).number();
 
         qA["memo"] = a_memo;
+
+        qA["value"] = (((*it_split).shares()) * xr).convert(fraction).toString();
 
         qS["reconciledate"] = qA["reconciledate"];
         qS["reconcileflag"] = qA["reconcileflag"];
@@ -666,12 +664,26 @@ void QueryTable::constructTransactionTable(void)
 
               qA["split"] = "";
 
-              //multiply by currency and convert to lowest fraction
-              qA["value"] = ((-(*it_split).shares()) * xr).convert(fraction).toString();
+              // multiply by currency and convert to lowest fraction
+              // but only for income and expense
+              // transfers are dealt with somewhere else below
+              if (splitAcc.isIncomeExpense()) {
+                qA["value"] = ((-(*it_split).shares()) * xr).convert(fraction).toString();
+              }
               qA["rank"] = '0';
             }
 
             qA ["memo"] = (*it_split).memo();
+
+            // if different from base currency and not converting
+            // show the currency of the split
+            if (splitAcc.currencyId() != file->baseCurrency().id()) {
+              if (!report.isConvertCurrency()) {
+                qS["currency"] = splitAcc.currencyId();
+              }
+            } else {
+                qS["currency"] = "";
+            }
 
             if (! splitAcc.isIncomeExpense()) {
               qA["category"] = ((*it_split).shares().isNegative()) ?
@@ -704,7 +716,6 @@ void QueryTable::constructTransactionTable(void)
 
         if (m_config.includes(splitAcc) && use_transfers) {
           if (! splitAcc.isIncomeExpense()) {
-
             //multiply by currency and convert to lowest fraction
             qS["value"] = ((*it_split).shares() * xr).convert(fraction).toString();
 
@@ -1249,7 +1260,6 @@ void QueryTable::constructSplitsTable(void)
     ReportAccount myBeginAcc = (*myBegin).accountId();
 
     bool include_me = true;
-    bool transaction_text = false; //indicates whether a text should be considered as a match for the transaction or for a split only
     QString a_fullname = "";
     QString a_memo = "";
     int pass = 1;
@@ -1298,8 +1308,6 @@ void QueryTable::constructSplitsTable(void)
       include_me = m_config.includes(splitAcc);
       a_fullname = splitAcc.fullName();
       a_memo = (*it_split).memo();
-
-      transaction_text = m_config.match(&(*it_split));
 
       qA["price"] = xr.convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())).toString();
       qA["account"] = splitAcc.name();
