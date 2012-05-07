@@ -1563,7 +1563,7 @@
   If you find that your investment statements keep including activity types
   that are not recognized, just add them to the section in the resource
   file.  (See <link linkend="details.impexp.csv.config">below</link> for
-  more details on this file.  For instance, in the [InvestmentSettings]
+  more details on this file.)  For instance, in the [InvestmentSettings]
   section of the file, the BuyParam field includes entries for Purchase,
   Buy, New Inv, and Switch In.  If you find a different one, add it to the
   correct list and restart the plugin.  You may notice that there are
