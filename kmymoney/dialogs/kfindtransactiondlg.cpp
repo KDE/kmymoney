@@ -129,6 +129,8 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
 
   // 'cause we don't have a separate setupTextPage
   connect(m_ui->m_textEdit, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateSelections()));
+  // if return is pressed trigger a search (slotSearch checks if it's possible to perform the search)
+  connect(m_ui->m_textEdit, SIGNAL(returnPressed()), this, SLOT(slotSearch()));
 
   setupAccountsPage();
   setupCategoriesPage();
@@ -711,6 +713,10 @@ void KFindTransactionDlg::setupFilter(void)
 
 void KFindTransactionDlg::slotSearch(void)
 {
+  // perform the search only if the button is enabled
+  if (!isButtonEnabled(KDialog::Apply))
+    return;
+
   // setup the filter from the dialog widgets
   setupFilter();
 
