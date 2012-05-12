@@ -93,9 +93,8 @@ void kMyMoneyCompletion::adjustSize(const int count)
   if (m_parent && w < m_parent->width())
     w = m_parent->width();
 
-  QFontMetrics fm(font());
-  if (w < fm.maxWidth()*15)
-    w = fm.maxWidth() * 15;
+  const int minimumWidth = fontMetrics().width(QLatin1Char('W')) * 15;
+  w = qMax(w, minimumWidth);
 
   int h = 0;
   QTreeWidgetItemIterator it(m_lv, QTreeWidgetItemIterator::NotHidden);

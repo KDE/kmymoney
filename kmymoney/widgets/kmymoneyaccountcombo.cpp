@@ -85,17 +85,13 @@ KMyMoneyAccountCombo::KMyMoneyAccountCombo(AccountNamesFilterProxyModel *model, 
     : KComboBox(parent), d(new Private)
 {
   setModel(model);
-  // set the widget's size, just like the old widget
-  QFontMetrics fm(font());
-  setMinimumWidth(fm.maxWidth()*15);
+  setMinimumWidth(fontMetrics().width(QLatin1Char('W')) * 15);
 }
 
 KMyMoneyAccountCombo::KMyMoneyAccountCombo(QWidget *parent)
     : KComboBox(parent), d(new Private)
 {
-  // set the widget's size, just like the old widget
-  QFontMetrics fm(font());
-  setMinimumWidth(fm.maxWidth()*15);
+  setMinimumWidth(fontMetrics().width(QLatin1Char('W')) * 15);
 }
 
 KMyMoneyAccountCombo::~KMyMoneyAccountCombo()
