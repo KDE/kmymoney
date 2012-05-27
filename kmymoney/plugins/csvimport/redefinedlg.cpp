@@ -251,7 +251,6 @@ void RedefineDlg::buildOkTypeList()
   convertValues();
 
   m_okTypeList.clear();
-
   MyMoneyMoney zero = MyMoneyMoney();
   if ((m_quantity > zero) && (m_price > zero) && (m_amount != zero))
     m_okTypeList << "reinvdiv" << "buy" << "sell";
@@ -302,7 +301,7 @@ void RedefineDlg::convertValues()
   if (m_priceColumn < m_columnList.count())     //         Ensure this is valid column
     m_price = m_columnList[m_priceColumn].remove('"');
   if (m_quantityColumn <  m_columnList.count())     //     Ensure this is valid column
-    m_quantity = m_columnList[m_quantityColumn].remove('"');
+    m_quantity = m_columnList[m_quantityColumn].remove(QRegExp("[\"-]"));  //  Remove unwanted -ve sign in quantity.
   if (m_amountColumn <  m_columnList.count())     //       Ensure this is valid column
     txt = m_columnList[m_amountColumn];
   if ((txt.startsWith('"')) && (!txt.endsWith('"')))  {

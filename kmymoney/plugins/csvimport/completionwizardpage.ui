@@ -113,6 +113,10 @@ p, li { white-space: pre-wrap; }
              <height>27</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>Click to select the required decimal symbol, and to
+check that the selected symbol matches the data.</string>
+           </property>
            <item>
             <property name="text">
              <string>dot (.)</string>

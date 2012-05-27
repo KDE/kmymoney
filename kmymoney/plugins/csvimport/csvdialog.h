@@ -22,6 +22,7 @@
 #include <QWizard>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QScrollBar>
 
 #include <KComboBox>
 
@@ -70,6 +71,8 @@ public:
 
   Ui::CSVDialog*      ui;
   QVBoxLayout*        m_wizardLayout;
+  QScrollBar*         m_vScrollBar;
+  QScrollBar*         m_hScrollBar;
 
   IntroPage*       m_pageIntro;
   SeparatorPage*   m_pageSeparator;
@@ -136,6 +139,7 @@ public:
   bool           m_profileExists;
   bool           m_firstPass;
   bool           m_firstRead;
+  bool           m_columnsNotSet;
 
   int            m_dateFormatIndex;
   int            m_debitFlag;
@@ -260,7 +264,7 @@ public:
   * This method is called on opening the input file.
   * It will display a line in the UI table widget.
   */
-  void           displayLine(const QString& data);
+  void           displayLine(const QString& data, int row);
 
   /**
   * This method is called when the user clicks 'import'.
@@ -339,11 +343,14 @@ signals:
   void           statementReady(MyMoneyStatement&);
   bool           isImportable();
   void           namesEdited();
+  void           valueChanged(int);
 
 public slots:
   void           slotIdChanged(int id);
   void           slotNamesEdited();
   void           slotBackButtonClicked();
+  void           slotHorScrollBarValue(int/* val*/);
+  void           slotVertScrollBarValue(int/* val*/);
 
   /**
     * This method is called when the user clicks 'Open File', and opens
@@ -410,6 +417,8 @@ private:
   int              m_payeeColumn;
   int              m_previousColumn;
   int              m_maxColumnCount;
+  int              m_maxRowWidth;
+  int              m_rowWidth;
   int              m_decimalSymbolIndex;
   int              m_endLine;
   int              m_fileEndLine;
@@ -698,6 +707,8 @@ public:
 
   QVBoxLayout         *m_pageLayout;
   Ui::InvestmentPage  *ui;
+
+  bool                m_investPageInitialized;
   void                setParent(CSVDialog* dlg);
 
 signals:

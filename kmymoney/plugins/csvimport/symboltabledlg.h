@@ -61,7 +61,7 @@ signals:
 
 private:
   int              m_mainHeight;
-  int              m_mainWidth;
+  int              m_tableHeight;
 
   QList<QTableWidgetItem*>  m_selectedItems;
 
@@ -81,10 +81,10 @@ private slots:
   void             slotItemChanged(QTableWidgetItem* item);
 
   /**
-  * This method is called if the user wishes to edit a security name.  On exit,
-  * the names are available for return to csvDialog().
+  * This method is called to enable the user to edit the name of an imported security.
+  * On exit, the names are available for return to csvDialog().
   */
-  void             slotEditSecurityClicked();
+  void             slotEditSecurityCompleted();
 };
 
 #endif // SYMBOLTABLEDLG_H

@@ -42,14 +42,13 @@ SymbolTableDlg::SymbolTableDlg()
   setMainWidget(m_widget);
 
   m_widget->tableWidget->setToolTip(i18n("Symbols and Security Names present"));
-  m_mainWidth = m_widget->tableWidget->size().width();
 
   setButtons(KDialog::Cancel | KDialog::Ok);
   setButtonsOrientation(Qt::Horizontal);
   enableButtonOk(true);
 
   connect(this, SIGNAL(cancelClicked()), this, SLOT(slotRejected()));
-  connect(this, SIGNAL(okClicked()), this, SLOT(slotEditSecurityClicked()));
+  connect(this, SIGNAL(okClicked()), this, SLOT(slotEditSecurityCompleted()));
   connect(this->m_widget->tableWidget,  SIGNAL(itemChanged(QTableWidgetItem*)), this,  SLOT(slotItemChanged(QTableWidgetItem*)));
 }
 
@@ -117,7 +116,7 @@ void SymbolTableDlg::slotItemChanged(QTableWidgetItem* item)
   }
 }
 
-void SymbolTableDlg::slotEditSecurityClicked()
+void SymbolTableDlg::slotEditSecurityCompleted()
 {
   MyMoneyStatement::Security security;
 

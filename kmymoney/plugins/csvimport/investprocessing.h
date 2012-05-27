@@ -333,7 +333,7 @@ private:
   * This method is called on opening the input file.
   * It will display a line in the UI table widget.
   */
-  void           displayLine(const QString&);
+  void           displayLine(const QString&, int row);
 
   /**
   * This method is called when an input file has been selected.
@@ -446,6 +446,8 @@ private:
   int            m_textDelimiterIndex;
   int            m_typeColumn;
   int            m_symblRow;
+  int            m_maxRowWidth;
+  int            m_rowWidth;
 
   QString        m_accountName;
   QString        m_brokerBuff;
