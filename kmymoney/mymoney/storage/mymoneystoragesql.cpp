@@ -2869,12 +2869,16 @@ const QMap<QString, MyMoneyMoney> MyMoneyStorageSql::fetchBalance(const QStringL
   QMap<QString, MyMoneyMoney> returnValue;
   QSqlQuery q(*const_cast <MyMoneyStorageSql*>(this));
   QString queryString = "SELECT action, shares, accountId, postDate "
-                        "FROM kmmSplits WHERE txType = 'N' AND accountId in (";
+                        "FROM kmmSplits WHERE txType = 'N'";
 
-  for (int i = 0; i < idList.count(); ++i) {
-    queryString += QString(":id%1, ").arg(i);
+  if (idList.count() > 0) {
+    queryString += "AND accountId in (";
+
+    for (int i = 0; i < idList.count(); ++i) {
+      queryString += QString(":id%1, ").arg(i);
+    }
+    queryString = queryString.left(queryString.length() - 2) + ')';
   }
-  queryString = queryString.left(queryString.length() - 2) + ')';
 
   // SQLite stores dates as YYYY-MM-DDTHH:mm:ss with 0s for the time part. This makes
   // the <= operator misbehave when the date matches. To avoid this, add a day to the
