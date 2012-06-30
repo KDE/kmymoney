@@ -111,48 +111,49 @@ void InvestmentDlg::slotClose()
 
 void InvestmentDlg::saveSettings()
 {
-  if (!m_investProcessing->inFileName().isEmpty()) { //          don't save column numbers if no file loaded
-    KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
-
-    KConfigGroup investmentGroup(config, "InvestmentSettings");
-
-    QString str = "$HOME/" + m_investProcessing->invPath().section('/', 3);
-    investmentGroup.writeEntry("InvDirectory", str);
-    investmentGroup.writeEntry("StartLine", m_csvDialog->spinBox_skip->value() - 1);
-    investmentGroup.config()->sync();
-
-    KConfigGroup profileGroup(config, "Profile");
-    profileGroup.writeEntry("DateFormat", m_csvDialog->comboBox_dateFormat->currentIndex());
-    profileGroup.writeEntry("FieldDelimiter", m_csvDialog->comboBox_fieldDelimiter->currentIndex());
-    profileGroup.config()->sync();
-
-    KConfigGroup invcolumnsGroup(config, "InvColumns");
-    invcolumnsGroup.writeEntry("DateCol", m_csvDialog->comboBoxInv_dateCol->currentIndex());
-    invcolumnsGroup.writeEntry("PayeeCol", m_csvDialog->comboBoxInv_typeCol->currentIndex());
-    invcolumnsGroup.writeEntry("MemoCol", m_csvDialog->comboBoxInv_memoCol->currentIndex());
-    invcolumnsGroup.writeEntry("QuantityCol", m_csvDialog->comboBoxInv_quantityCol->currentIndex());
-    invcolumnsGroup.writeEntry("AmountCol", m_csvDialog->comboBoxInv_amountCol->currentIndex());
-    invcolumnsGroup.writeEntry("PriceCol", m_csvDialog->comboBoxInv_priceCol->currentIndex());
-    invcolumnsGroup.writeEntry("FeeCol", m_csvDialog->comboBoxInv_feeCol->currentIndex());
-    invcolumnsGroup.config()->sync();
-
-    KConfigGroup securitiesGroup(config, "Securities");
-    securitiesGroup.writeEntry("SecurityNameList", m_investProcessing->securityList());
-    securitiesGroup.config()->sync();
-
-    /*    These settings do not get altered so need not be saved.
-
-    investmentGroup.writeEntry( "ShrsinParam", invcsv->shrsinList);
-    investmentGroup.writeEntry( "DivXParam", invcsv->divXList);
-    investmentGroup.writeEntry( "BrokerageParam", invcsv->brokerageList);
-    investmentGroup.writeEntry( "ReinvdivParam", invcsv->reinvdivList);
-    investmentGroup.writeEntry( "BuyParam", invcsv->buyList);
-    investmentGroup.writeEntry( "SellParam", invcsv->sellList);
-    investmentGroup.writeEntry( "RemoveParam", invcsv->removeList);
-    investmentGroup.config()->sync();*/
-
-    m_investProcessing->inFileName().clear();
+  if ((m_csvDialog->m_fileType != "Invest") || (m_investProcessing->inFileName().isEmpty())) {  // don't save if no file loaded
+    return;
   }
+  KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+
+  KConfigGroup investmentGroup(config, "InvestmentSettings");
+
+  QString str = "~/" + m_investProcessing->invPath().section('/', 3);
+  investmentGroup.writeEntry("InvDirectory", str);
+  investmentGroup.writeEntry("StartLine", m_csvDialog->spinBox_skip->value() - 1);
+  investmentGroup.config()->sync();
+
+  KConfigGroup profileGroup(config, "Profile");
+  profileGroup.writeEntry("DateFormat", m_csvDialog->comboBox_dateFormat->currentIndex());
+  profileGroup.writeEntry("FieldDelimiter", m_csvDialog->comboBox_fieldDelimiter->currentIndex());
+  profileGroup.config()->sync();
+
+  KConfigGroup invcolumnsGroup(config, "InvColumns");
+  invcolumnsGroup.writeEntry("DateCol", m_csvDialog->comboBoxInv_dateCol->currentIndex());
+  invcolumnsGroup.writeEntry("PayeeCol", m_csvDialog->comboBoxInv_typeCol->currentIndex());
+  invcolumnsGroup.writeEntry("MemoCol", m_csvDialog->comboBoxInv_memoCol->currentIndex());
+  invcolumnsGroup.writeEntry("QuantityCol", m_csvDialog->comboBoxInv_quantityCol->currentIndex());
+  invcolumnsGroup.writeEntry("AmountCol", m_csvDialog->comboBoxInv_amountCol->currentIndex());
+  invcolumnsGroup.writeEntry("PriceCol", m_csvDialog->comboBoxInv_priceCol->currentIndex());
+  invcolumnsGroup.writeEntry("FeeCol", m_csvDialog->comboBoxInv_feeCol->currentIndex());
+  invcolumnsGroup.config()->sync();
+
+  KConfigGroup securitiesGroup(config, "Securities");
+  securitiesGroup.writeEntry("SecurityNameList", m_investProcessing->securityList());
+  securitiesGroup.config()->sync();
+
+  /*    These settings do not get altered so need not be saved.
+
+  investmentGroup.writeEntry( "ShrsinParam", invcsv->shrsinList);
+  investmentGroup.writeEntry( "DivXParam", invcsv->divXList);
+  investmentGroup.writeEntry( "BrokerageParam", invcsv->brokerageList);
+  investmentGroup.writeEntry( "ReinvdivParam", invcsv->reinvdivList);
+  investmentGroup.writeEntry( "BuyParam", invcsv->buyList);
+  investmentGroup.writeEntry( "SellParam", invcsv->sellList);
+  investmentGroup.writeEntry( "RemoveParam", invcsv->removeList);
+  investmentGroup.config()->sync();*/
+
+  m_investProcessing->inFileName().clear();
   m_csvDialog->tableWidget->clear();//     in case later reopening window, clear old contents now
 }
 
@@ -166,7 +167,7 @@ void InvestmentDlg::resizeEvent(QResizeEvent * event)
 {
   event->accept();
   if (!m_investProcessing->inFileName().isEmpty())
-    m_investProcessing->updateScreen();
+    m_investProcessing->updateScreen(m_investProcessing->m_startLine);///m_investProcessing->m_startLine
 }
 
 void InvestmentDlg::fileDialog()

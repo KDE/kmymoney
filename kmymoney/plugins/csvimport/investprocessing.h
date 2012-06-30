@@ -96,6 +96,7 @@ public:
   * clear incorrect column number entries.
   */
   void           clearColumnNumbers();
+  void           clearColumnTypes();
 
   /**
   * Because the memo field allows multiple selections, it helps to be able
@@ -108,7 +109,7 @@ public:
   void           clearComboBoxText();
 
   void           setInFileName(const QString& val);
-  void           updateScreen();
+  void           updateScreen(int start);
 
   QString        columnType(int column);
   QString        invPath();
@@ -120,12 +121,21 @@ public:
   int            amountColumn();
   int            priceColumn();
   int            quantityColumn();
+  int            dateColumn();
+  int            detailColumn();
+  int            feeColumn();
+  int            symbolColumn();
+  int            typeColumn();
+  int            memoColumn();
 
   bool           importNow();
 
   int            m_endColumn;
+  int            m_endLine;
+  int            m_startLine;
 
   bool           m_screenUpdated;
+  bool           m_columnsNotSet;
 
 public:
 signals:
@@ -225,7 +235,7 @@ public slots:
   * This method is called when the user selects the start line.  The requested
   * start line  value is saved.
   */
-  void           startLineChanged();
+  void           startLineChanged(int);
 
   /**
   * This method is called when the user selects the end line.  The requested
@@ -311,6 +321,11 @@ private:
   */
   void           setCodecList(const QList<QTextCodec *> &list);
 
+  /**
+   * Called after rows have been dropped, to produce the (revised) vertical (row) headers.
+   */
+  void updateRowHeaders(int skp);
+
   struct qifInvestData {
     QString      memo;
     MyMoneyMoney price;
@@ -349,8 +364,6 @@ private:
   int            m_quantityColumn;
   int            m_textDelimiterIndex;
   int            m_typeColumn;
-  int            m_endLine;
-  int            m_startLine;
   int            m_row;
   int            m_height;
 

@@ -39,6 +39,7 @@ RedefineDlg::RedefineDlg()
   m_accountName.clear();
   m_amountColumn = 0;
   m_columnTotalWidth = 0;
+  m_maxWidth = 0;
   m_mainHeight = 0;
   m_mainWidth = 0;
   m_priceColumn = 0;
@@ -46,9 +47,9 @@ RedefineDlg::RedefineDlg()
   m_ret = 0;
   m_typeColumn = 0;
 
-  m_price = 0;
-  m_quantity = 0;
-  m_amount = 0;
+  m_price = MyMoneyMoney();
+  m_quantity = MyMoneyMoney();
+  m_amount = MyMoneyMoney();
 
   m_typesList << "buy" << "sell" << "divx" << "reinvdiv" << "shrsin" << "shrsout";
 
@@ -94,6 +95,7 @@ void RedefineDlg::displayLine(const QString& info)
   brush.setStyle(Qt::SolidPattern);
   int row;
   m_columnTotalWidth = 0;
+  m_maxWidth = 0;
   m_widget->tableWidget->setRowCount(2);
   for (int col = 0; col < m_maxCol; col++) {
     row = 1;
@@ -106,8 +108,8 @@ void RedefineDlg::displayLine(const QString& info)
     if (m_typeColumn == col) {
       item->setBackground(brush);
     }
-    m_columnTotalWidth += m_widget->tableWidget->columnWidth(col);
-
+///    m_columnTotalWidth += m_widget->tableWidget->columnWidth(col);
+///
     row = 0;
     if (col == m_quantityColumn) {
       QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
@@ -126,7 +128,18 @@ void RedefineDlg::displayLine(const QString& info)
       QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
       item->setText(i18n("Type"));
       m_widget->tableWidget->setItem(row, col, item);
+      } else if (col == m_detailColumn) {
+      QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
+      item->setText(i18n("Detail"));
+      m_widget->tableWidget->setItem(row, col, item);
     }
+  }
+  m_widget->tableWidget->resizeColumnsToContents();
+  for (int col = 0; col < m_maxCol; col++) {
+    m_columnTotalWidth += m_widget->tableWidget->columnWidth(col);
+  }
+  if (m_columnTotalWidth > m_maxWidth) {
+    m_maxWidth = m_columnTotalWidth;
   }
   updateWindow();
 }
@@ -273,22 +286,21 @@ void RedefineDlg::resizeEvent(QResizeEvent * event)
 {
   event->accept();
 
-  m_mainWidth = m_widget->verticalLayout->geometry().size().width() - 10;
-  m_mainHeight = m_widget->tableWidget->geometry().size().height();
+///  m_mainWidth = m_widget->verticalLayout->geometry().size().width() - 10;
+///  m_mainHeight = m_widget->tableWidget->geometry().size().height();
   updateWindow();
 }
 
 void RedefineDlg::updateWindow()
 {
-  int w = m_widget->tableWidget->width();
-  int hght = 4 + (m_widget->tableWidget->rowHeight(0) * 2);
-  hght += m_widget->tableWidget->horizontalHeader()->height() + 2;//  frig factor for vert. headers?
+  int hght = 6 + (m_widget->tableWidget->rowHeight(0) * 2);
+  hght += m_widget->tableWidget->horizontalHeader()->height();//  frig factor for horiz. headers?
 
-  if (m_columnTotalWidth > (m_mainWidth - 12))
-    hght += m_widget->tableWidget->horizontalScrollBar()->height() + 1;//  ....and for hor. scroll bar
+  if (m_maxWidth > (m_mainWidth - 12)) {
+    hght += m_widget->tableWidget->horizontalScrollBar()->height() - 2;//  ....and for hor. scroll bar
+  }
 
   m_widget->tableWidget->setFixedHeight(hght);
-  w = m_widget->tableWidget->width();
 }
 
 void RedefineDlg::convertValues()
@@ -296,9 +308,9 @@ void RedefineDlg::convertValues()
   QString txt;
   QString txt1;
   if (m_priceColumn < m_columnList.count())//  Ensure this is valid column
-    m_price = m_columnList[m_priceColumn].remove('"');
+    m_price = MyMoneyMoney(m_columnList[m_priceColumn].remove('"'));
   if (m_quantityColumn <  m_columnList.count())//  Ensure this is valid column
-    m_quantity = m_columnList[m_quantityColumn].remove('"');
+    m_quantity = MyMoneyMoney(m_columnList[m_quantityColumn].remove('"'));
   if (m_amountColumn <  m_columnList.count())//  Ensure this is valid column
     txt = m_columnList[m_amountColumn];
   if ((txt.startsWith('"')) && (!txt.endsWith('"')))  {
@@ -310,7 +322,7 @@ void RedefineDlg::convertValues()
   if (txt.contains(')')) {  //          replace negative ( ) with '-'
     txt = '-' + txt.remove(QRegExp("[(),]"));
   }
-  m_amount = txt;
+  m_amount = MyMoneyMoney(txt);
 }
 
 void RedefineDlg::setAmountColumn(int col)

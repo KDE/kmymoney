@@ -68,6 +68,7 @@ InvestProcessing::InvestProcessing()
   m_priceSelected = false;
   m_quantitySelected = false;
   m_typeSelected = false;
+  m_columnsNotSet = true;
 
   m_dateFormatIndex = 0;
   m_fieldDelimiterIndex = 0;
@@ -93,7 +94,7 @@ InvestProcessing::InvestProcessing()
   m_parse = new Parse;
   m_redefine = new RedefineDlg;
 
-  connect(m_redefine, SIGNAL(changedType(QString)), this, SLOT(changedType(QString)));
+  connect(m_redefine, SIGNAL(changedType(const QString)), this, SLOT(changedType(const QString)));
 
 }
 
@@ -162,6 +163,7 @@ void InvestProcessing::fileDialog()
     return;
   }
   m_endLine = 0;
+  m_columnsNotSet = true;
   int position;
   if (m_invPath.isEmpty()) {
     m_invPath  = "~/";
@@ -170,7 +172,7 @@ void InvestProcessing::fileDialog()
   if (m_inFileName.isEmpty()) {
   }
 
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-csvinvest"),
+  QPointer<KFileDialog> dialog = new KFileDialog(KUrl(m_invPath),
       i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"), 0);
 
   //  Add encoding selection to FileDialog
@@ -198,12 +200,12 @@ void InvestProcessing::fileDialog()
   }
   if (m_inFileName.isEmpty())
     return;
-  clearComboBoxText();//                    to clear any '*' in memo combo text
-  m_importNow = false;//                    Avoid attempting date formatting on headers
-
+  clearComboBoxText();//                        to clear any '*' in memo combo text
+  m_importNow = false;//                        Avoid attempting date formatting on headers
+  m_csvDialog->m_acceptAllInvalid = false;  //  Don't accept further invalid values.
   for (int i = 0; i < MAXCOL; i++)
     if (columnType(i) == "memo") {
-      clearColumnType(i);   //    ensure no memo entries remain
+      clearColumnType(i);   //                  ensure no memo entries remain
     }
 
   //  set large field height to ensure resizing sees all lines in new file
@@ -211,7 +213,10 @@ void InvestProcessing::fileDialog()
   QRect rect = m_csvDialog->tableWidget->geometry();
   rect.setHeight(9999);
   m_csvDialog->tableWidget->setGeometry(rect);
-  readFile(m_inFileName , 0);
+  int tmp = m_startLine;
+  readFile(m_inFileName , 0);  //  Display all headers
+  m_startLine = tmp;
+  m_csvDialog->spinBox_skip->setValue(m_startLine);  //  Now set saved skip value
   m_invPath  = m_inFileName ;
   position = m_invPath .lastIndexOf("/");
   m_invPath .truncate(position + 1);
@@ -220,7 +225,7 @@ void InvestProcessing::fileDialog()
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
 
   KConfigGroup investmentGroup(config, "InvestmentSettings");
-  QString str = "$HOME/" + m_invPath.section('/', 3);
+  QString str = "~/" + m_invPath.section('/', 3);
   investmentGroup.writeEntry("InvDirectory", str);
   investmentGroup.config()->sync();//               save selected path
 #endif
@@ -279,6 +284,12 @@ void InvestProcessing::clearColumnNumbers()
   m_csvDialog->comboBoxInv_typeCol->setCurrentIndex(-1);
 }
 
+void InvestProcessing::clearColumnTypes()
+{
+  for (int i = 0; i < MAXCOL; i++) {
+    m_columnType[i].clear();
+  }
+}
 
 void InvestProcessing::clearComboBoxText()
 {
@@ -297,6 +308,7 @@ void InvestProcessing::encodingChanged(int index)
 void InvestProcessing::dateColumnSelected(int col)
 {
   QString type = "date";
+  m_dateColumn = col;
   if (col < 0) { //                              it is unset
     return;
   }
@@ -356,7 +368,10 @@ void InvestProcessing::findCodecs()
 
 int InvestProcessing::validateNewColumn(const int& col, const QString& type)
 {
-  //  First check if selection is in range
+  if (m_columnsNotSet) {  //                         Don't check columns until they've been selected.
+    return KMessageBox::Ok;
+  }
+  //  Now check if selection is in range
   if ((col < 0) || (col >= m_endColumn)) {
     return KMessageBox::No;
   }
@@ -393,6 +408,7 @@ int InvestProcessing::validateNewColumn(const int& col, const QString& type)
 void InvestProcessing::feeColumnSelected(int col)
 {
   QString type = "fee";
+  m_feeColumn = col;
   if (col < 0) { //                              it is unset
     return;
   }
@@ -422,6 +438,7 @@ void InvestProcessing::feeColumnSelected(int col)
 void InvestProcessing::typeColumnSelected(int col)
 {
   QString type = "type";
+  m_typeColumn = col;
   if (col < 0) { //                              it is unset
     return;
   }
@@ -452,6 +469,7 @@ void InvestProcessing::typeColumnSelected(int col)
 void InvestProcessing::memoColumnSelected(int col)
 {
   QString type = "memo";
+  m_memoColumn = col;
   if ((col < 0) || (col >= m_endColumn)) { //      out of range so...
     m_csvDialog->comboBoxInv_memoCol->setCurrentIndex(-1);// ..clear selection
     return;
@@ -482,6 +500,7 @@ void InvestProcessing::memoColumnSelected(int col)
 void InvestProcessing::quantityColumnSelected(int col)
 {
   QString type = "quantity";
+  m_quantityColumn = col;
   if (col < 0) { //                              it is unset
     return;
   }
@@ -512,6 +531,7 @@ void InvestProcessing::quantityColumnSelected(int col)
 void InvestProcessing::priceColumnSelected(int col)
 {
   QString type = "price";
+  m_priceColumn = col;
   if (col < 0) { //                              it is unset
     return;
   }
@@ -543,6 +563,7 @@ void InvestProcessing::priceColumnSelected(int col)
 void InvestProcessing::amountColumnSelected(int col)
 {
   QString type = "amount";
+  m_amountColumn = col;
   if (col < 0) { //                              it is unset
     return;
   }
@@ -608,7 +629,6 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
 
   if (!fname.isEmpty())
     m_inFileName  = fname;
-  m_startLine = skipLines;
   QFile inFile(m_inFileName);
   inFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
@@ -620,7 +640,7 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
 
   //  Parse the buffer
 
-  QStringList lineList = m_parse->parseFile(buf, m_startLine, m_endLine);
+  QStringList lineList = m_parse->parseFile(buf, 0, m_endLine);
   m_endLine = m_parse->lastLine();
   m_csvDialog->spinBox_skipToLast->setValue(m_parse->lastLine());
 
@@ -633,9 +653,10 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
     m_inBuffer = lineList[i];
 
     displayLine(m_inBuffer);//                             display it
-    if (m_importNow) {
+    if ((m_importNow) && (i >= m_startLine) && (i <= m_csvDialog->spinBox_skipToLast->value() - 1)) {
       int ret = processInvestLine(m_inBuffer);  //         parse input line
       if (ret == KMessageBox::Ok) {
+        skipLines = 0;
         if (m_brokerage)
           investCsvImport(stBrokerage);//       add non-investment transaction to Brokerage statement
         else
@@ -647,7 +668,7 @@ void InvestProcessing::readFile(const QString& fname, int skipLines)
 
   //  Adjust table size (drop header lines)
 
-  updateScreen();
+  updateScreen(skipLines);
 
   m_csvDialog->labelSet_skip->setEnabled(true);
   m_csvDialog->spinBox_skip->setEnabled(true);
@@ -694,7 +715,6 @@ void InvestProcessing::displayLine(const QString& data)
       item->setTextAlignment(Qt::AlignRight);
     m_csvDialog->tableWidget->setRowCount(m_row + 1);
     m_csvDialog->tableWidget->setItem(m_row, col, item);     //add items to UI here
-    QRect rect = m_csvDialog->tableWidget->visualItemRect(item);
     m_csvDialog->tableWidget->resizeColumnToContents(col);
     col ++;
   }
@@ -704,12 +724,8 @@ void InvestProcessing::displayLine(const QString& data)
 int InvestProcessing::processInvestLine(const QString& inBuffer)
 {
   QString newTxt;
-  if ((m_priceColumn >= m_maxColumnCount) || (m_quantityColumn >= m_maxColumnCount) || (m_amountColumn >= m_maxColumnCount)) {
-    KMessageBox::sorry(0, (i18n("The price, quantity and/or amount column values appear to be invalid."
-                                "<center>Please correct the settings.</center>")),
-                       i18n("CSV import"));
-    return KMessageBox::Cancel;
-  }
+
+  int neededFieldsCount = 0;//            ensure essential fields are present
   //                                      validate all columns
   QString memo;
   QString payee;
@@ -730,9 +746,10 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
 
   m_brokerage = false;
   memo.clear();
-
-  for (int i = 0; i < m_endColumn; i++) {
+//BUG: 287786
+  for(int i = 0; i < m_columnList.count(); i++) {//  Use actual column count for this line instead of m_endColumn, which could be greater.
     if (m_columnType[i] == "date") { //                    Date Col
+      ++neededFieldsCount;
       txt = m_columnList[i];
       txt = txt.remove('"');
       QDate dat = m_convertDat->convertDate(txt);
@@ -754,6 +771,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
         return KMessageBox::Cancel;
       }
       m_trInvestData.type = txt;
+      ++neededFieldsCount;
       int ret = processActionType(m_trInvestData.type);
       if (ret == KMessageBox::Cancel) {
         return KMessageBox::Cancel;
@@ -780,6 +798,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     }//end of memo field
 
     else if (m_columnType[i] == "quantity") { //           Quantity Col
+      ++neededFieldsCount;
       txt = m_columnList[i];
       newTxt = m_parse->possiblyReplaceSymbol(txt);
       m_trInvestData.quantity = MyMoneyMoney(newTxt);
@@ -787,6 +806,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     }
 
     else if (m_columnType[i] == "price") { //              Price Col
+      ++neededFieldsCount;
       txt = m_csvDialog->comboBoxInv_priceFraction->currentText(); //fraction
       txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
       MyMoneyMoney fraction = MyMoneyMoney(txt);
@@ -801,6 +821,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     }
 
     else if (m_columnType[i] == "amount") { //             Amount Col
+      ++neededFieldsCount;
       txt = m_columnList[i];
       txt = txt.remove('"');
       if (txt.contains(')')) {
@@ -870,6 +891,13 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     }
     m_outBuffer += "^\n";
     m_outBuffer = m_outBuffer.remove('"');
+  }
+  if (neededFieldsCount > 3) {
+    return KMessageBox::Ok;
+  } else {
+    KMessageBox::sorry(0, i18n("<center>The columns selected are invalid.\n</center>"
+                               "There must an amount or quantity fields, symbol or security name, plus date and type field."), i18n("CSV import"));
+    return KMessageBox::Cancel;
   }
   return KMessageBox::Ok;
 }
@@ -1070,6 +1098,8 @@ void InvestProcessing::importClicked()
   if (!m_securityList.contains(m_securityName)) {
     m_securityList << m_securityName;
   }
+  m_dateSelected = (m_csvDialog->comboBoxInv_dateCol->currentIndex() >= 0);
+  m_typeSelected = (m_csvDialog->comboBoxInv_typeCol->currentIndex() >= 0);
   m_priceSelected = (m_csvDialog->comboBoxInv_priceCol->currentIndex() > 0);
   m_quantitySelected = (m_csvDialog->comboBoxInv_quantityCol->currentIndex() > 0);
   m_amountSelected = (m_csvDialog->comboBoxInv_amountCol->currentIndex() > 0);
@@ -1084,18 +1114,12 @@ void InvestProcessing::importClicked()
                                  "<center>Please correct your settings.</center>"), i18n("CSV import"));
       return;
     }
-
+    if (!m_csvDialog->validateAmounts()) {
+      //  Invalid numeric field found
+      return;
+    }
     readFile(m_inFileName, skp);//StartLines
     m_screenUpdated = true;
-    //--- create the vertical (row) headers ---
-    QStringList vertHeaders;
-    for (int i = skp; i < m_csvDialog->tableWidget->rowCount() + skp; i++) {
-      QString hdr = QString::number(i + 1);
-      vertHeaders += hdr;
-    }
-    m_csvDialog->tableWidget->setVerticalHeaderLabels(vertHeaders);
-    m_csvDialog->tableWidget->hide();//     to ensure....
-    m_csvDialog->tableWidget->show();//    ....vertical header width redraws
   } else {
     KMessageBox::information(0, i18n("The Security Name, and Date and Type columns are needed.<center>Also, the Price, Quantity and Amount columns.</center><center>Please try again.</center>"));
   }
@@ -1129,10 +1153,10 @@ void InvestProcessing::setCodecList(const QList<QTextCodec *> &list)
   m_comboBoxEncode->addItem(codec->name(), codec->mibEnum());
 }
 
-void InvestProcessing::startLineChanged()
+void InvestProcessing::startLineChanged(int val)
 {
-  int val = m_csvDialog->spinBox_skip->value();
-  if (val < 1) {
+  val = m_csvDialog->spinBox_skip->value();
+  if ((val < 1) || (m_csvDialog->m_fileType == "Banking")) {
     return;
   }
   m_startLine = val - 1;
@@ -1140,7 +1164,7 @@ void InvestProcessing::startLineChanged()
 
 void InvestProcessing::endLineChanged()
 {
-  m_endLine = m_csvDialog->spinBox_skipToLast->value() ;
+  m_endLine = m_csvDialog->spinBox_skipToLast->value();
 }
 
 void InvestProcessing::dateFormatSelected(int dF)
@@ -1174,6 +1198,8 @@ QString InvestProcessing::accountName(const QString& aName)
 
 void InvestProcessing::readSettings()
 {
+  clearColumnTypes();//  Needs to be here in case user selects new profile after cancelling prior one.
+  clearSelectedFlags();
   int tmp;
 
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
@@ -1205,11 +1231,11 @@ void InvestProcessing::readSettings()
 
   KConfigGroup invcolumnsGroup(config, "InvColumns");
   if (invcolumnsGroup.exists()) {
-    tmp = invcolumnsGroup.readEntry("DateCol", QString()).toInt();
+    tmp = invcolumnsGroup.readEntry("DateCol", -1);
     m_csvDialog->comboBoxInv_dateCol->setCurrentIndex(-1);
     m_csvDialog->comboBoxInv_dateCol->setCurrentIndex(tmp);
 
-    tmp = invcolumnsGroup.readEntry("PayeeCol", QString()).toInt();//use for type col.
+    tmp = invcolumnsGroup.readEntry("PayeeCol", -1);//use for type col.
     m_csvDialog->comboBoxInv_typeCol->setCurrentIndex(-1);
     m_csvDialog->comboBoxInv_typeCol->setCurrentIndex(tmp);
 
@@ -1248,12 +1274,29 @@ void InvestProcessing::readSettings()
   m_csvDialog->comboBoxInv_securityName->setCurrentIndex(-1);
 }
 
-void InvestProcessing::updateScreen()
+void InvestProcessing::updateScreen(int start)
 {
   if (m_row < 1)
     return;
   m_csvDialog->tableWidget->setRowCount(m_row);
   m_csvDialog->tableWidget->setFocus();
+  updateRowHeaders(start);
+}
+
+void InvestProcessing::updateRowHeaders(int skp)
+{
+ //--- create the (revised) vertical (row) headers ---
+
+  QStringList vertHeaders;
+  for (int i = skp; i < m_csvDialog->tableWidget->rowCount() + skp; i++) {
+    QString hdr = (QString::number(i + 1));
+    vertHeaders += hdr;
+  }
+  //  verticalHeader()->width() varies with its content so....
+
+  m_csvDialog->tableWidget->setVerticalHeaderLabels(vertHeaders);
+  m_csvDialog->tableWidget->hide();//             to ensure....
+  m_csvDialog->tableWidget->show();//             ..vertical header width redraws
 }
 
 void InvestProcessing::clearColumnType(int column)
@@ -1354,6 +1397,16 @@ int InvestProcessing::amountColumn()
   return m_amountColumn;
 }
 
+int InvestProcessing::dateColumn()
+{
+  return m_dateColumn;
+}
+
+int InvestProcessing::feeColumn()
+{
+  return m_feeColumn;
+}
+
 int InvestProcessing::quantityColumn()
 {
   return m_quantityColumn;
@@ -1362,6 +1415,11 @@ int InvestProcessing::quantityColumn()
 int InvestProcessing::priceColumn()
 {
   return m_priceColumn;
+}
+
+int InvestProcessing::memoColumn()
+{
+  return m_memoColumn;
 }
 
 bool InvestProcessing::importNow()
@@ -1397,7 +1455,7 @@ void InvestProcessing::securityNameEdited()
            "<center>Otherwise, click \'Cancel\'.</center>",
            name), i18n("Add Security Name"));
   if (rc == KMessageBox::Cancel) {
-    m_csvDialog->comboBoxInv_securityName->clearEditText();///
+    m_csvDialog->comboBoxInv_securityName->clearEditText();
     m_csvDialog->comboBoxInv_securityName->setCurrentIndex(-1);
   } else {
     m_securityName = name;

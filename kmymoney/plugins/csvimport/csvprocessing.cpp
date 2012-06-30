@@ -62,6 +62,7 @@ CsvProcessing::CsvProcessing()
 {
   m_importNow = false;
   m_showEmptyCheckBox = true;
+  m_columnsNotSet = true;
 
   m_dateFormatIndex = 0;
   m_endLine = 0;
@@ -114,6 +115,8 @@ void CsvProcessing::fileDialog()
 
   m_endLine = 0;
   m_flagCol = -1;
+  m_debitFlag = -1;
+  m_columnsNotSet = true;
   m_accept = false;
   m_csvDialog->m_decimalSymbolChanged = false;
   int posn;
@@ -121,8 +124,7 @@ void CsvProcessing::fileDialog()
     m_csvPath = "~/";
   }
 
-  QPointer<KFileDialog> dialog =
-    new KFileDialog(KUrl("kfiledialog:///kmymoney-csvbank"),
+  QPointer<KFileDialog> dialog = new KFileDialog(KUrl(m_csvPath),
                     i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"),
                     0);
 //  Add encoding selection to FileDialog
@@ -155,6 +157,7 @@ void CsvProcessing::fileDialog()
     return;
   }
   m_importNow = false;//                       Avoid attempting date formatting on headers
+  m_csvDialog->m_acceptAllInvalid = false;  //              Don't accept further invalid values.
   clearComboBoxText();//                       to clear any '*' in memo combo text
 
   for (int i = 0; i < MAXCOL; i++)
@@ -168,13 +171,13 @@ void CsvProcessing::fileDialog()
   rect.setHeight(9999);
   m_csvDialog->tableWidget->setGeometry(rect);
   m_parse->setSymbolFound(false);
+  readFile(m_inFileName);
 
-  readFile(m_inFileName, 0);
   m_csvPath = m_inFileName;
   posn = m_csvPath.lastIndexOf("/");
   m_csvPath.truncate(posn + 1);   //   keep last "/"
 
-  QString str = "$HOME/" + m_csvPath.section('/', 3);
+  QString str = "~/" + m_csvPath.section('/', 3);
   profileGroup.writeEntry("CsvDirectory", str);//          save selected path
   profileGroup.writeEntry("Encoding", m_encodeIndex);//    ..and encoding
   profileGroup.config()->sync();
@@ -183,6 +186,7 @@ void CsvProcessing::fileDialog()
   //The following two items do not *Require* an entry so old values must be cleared.
   m_trData.number.clear();// this needs to be cleared or gets added to next transaction
   m_trData.memo.clear();//   this too, as neither might be overwritten by new data
+  m_columnsNotSet = false;
 }
 
 void CsvProcessing::enableInputs()
@@ -268,7 +272,7 @@ void CsvProcessing::encodingChanged(int index)
 {
   m_encodeIndex = index;
   if (!m_inFileName.isEmpty())
-    readFile(m_inFileName, 0);
+    readFile(m_inFileName);
 }
 
 void CsvProcessing::findCodecs()
@@ -307,16 +311,16 @@ void CsvProcessing::delimiterChanged()
     return;
   }
   if (!m_inFileName.isEmpty())
-    readFile(m_inFileName, 0);
+    readFile(m_inFileName);
 }
 
-void CsvProcessing::readFile(const QString& fname, int skipLines)
+void CsvProcessing::readFile(const QString& fname)
 {
   MyMoneyStatement st = MyMoneyStatement();
   if (!fname.isEmpty()) {
     m_inFileName = fname;
   }
-  m_startLine = skipLines;
+
   m_csvDialog->tableWidget->clear();//         including vert headers
   m_inBuffer.clear();
   m_outBuffer.clear();
@@ -343,7 +347,7 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
 
   //  Parse the buffer
 
-  QStringList lineList = m_parse->parseFile(buf, m_startLine, m_endLine);
+  QStringList lineList = m_parse->parseFile(buf, 0, m_endLine);  //  Show whole of file
   m_csvDialog->spinBox_skipToLast->setValue(m_parse->lastLine());
   m_csvDialog->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Interactive);
   m_screenUpdated = false;
@@ -355,7 +359,7 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
 
     displayLine(m_inBuffer);
 
-    if (m_importNow) { //                        user now ready to continue
+    if ((m_importNow) && (i >= m_startLine) && (i <= m_csvDialog->spinBox_skipToLast->value() - 1)) { //   user now ready to continue
       int ret = (processQifLine(m_inBuffer));// parse a line
       if (ret == KMessageBox::Ok) {
         csvImportTransaction(st);
@@ -366,7 +370,7 @@ void CsvProcessing::readFile(const QString& fname, int skipLines)
 
   //  Adjust table size (drop header lines)
 
-  updateScreen();//
+  updateScreen();
   m_csvDialog->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Interactive);
   m_csvDialog->labelSet_skip->setEnabled(true);
   m_csvDialog->spinBox_skip->setEnabled(true);
@@ -466,8 +470,8 @@ void CsvProcessing::csvImportTransaction(MyMoneyStatement& st)
         return ;
     }
   }
-  tr.m_amount = m_trData.amount;
-  tr.m_shares = m_trData.amount;
+  tr.m_amount = MyMoneyMoney(m_trData.amount);
+  tr.m_shares = MyMoneyMoney(m_trData.amount);
 
   tmp = m_trData.number;
   tr.m_strNumber = tmp;
@@ -491,6 +495,8 @@ void CsvProcessing::csvImportTransaction(MyMoneyStatement& st)
 int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
 {
   QString newTxt;
+  bool firstField = true;
+  QString firstValue = QString();
 
   if (m_columnList.count() < m_endColumn) {
     if (!m_accept) {
@@ -516,7 +522,9 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
   iBuff = iBuff.remove(m_textDelimiterCharacter);
   memo.clear();//                                     memo & number may not have been used
   m_trData.number.clear();//                          .. so need to clear prior contents
-  for (int i = 0; i < m_endColumn; i++) {//            check each column
+
+  for (int i = 0; i < m_columnList.count(); i++) {  //        check each column
+    //  Use actual column count for this line instead of m_endColumn, (crash if last field missing).
     if (m_csvDialog->columnType(i) == "number") {
       txt = m_columnList[i];
       m_trData.number = txt;
@@ -598,15 +606,28 @@ int CsvProcessing::processQifLine(QString& iBuff)//   parse input line
     else if ((m_csvDialog->columnType(i) == "debit") || (m_csvDialog->columnType(i) == "credit")) { //  Credit or debit?
       ++neededFieldsCount;
       txt = m_columnList[i];
-      if (!txt.isEmpty()) {
-        if (m_csvDialog->debitColumn() == i)
-          txt = '-' + txt;//                          Mark as -ve
-        if ((m_csvDialog->debitColumn() == i) || (m_csvDialog->creditColumn() == i)) {
-          newTxt = m_parse->possiblyReplaceSymbol(txt);
-          m_trData.amount = newTxt;
-          m_qifBuffer = m_qifBuffer + 'T' + newTxt + '\n';
+      if ((!txt.isEmpty()) && ((i == m_csvDialog->debitColumn()))) {
+        txt = '-' + txt;//                                     Mark as -ve
+      }
+      //
+      //  Fix problem where both fields are empty (previous value was being re-used)
+      //
+      if (firstField) {  //                                    Debit or credit, whichever comes first.
+        firstValue = txt;  //                                  Save field until second arrives.
+      } else {  //                                             Second field.
+        if (txt.isEmpty()) {  //                               If second field empty,...
+          txt = firstValue;  //                                ...use first (which could also be empty..)
         }
       }
+      if (txt.isEmpty()) {
+        txt = '0';
+      }
+      if (!firstField) {  //                                   Process outcome.
+        newTxt = m_parse->possiblyReplaceSymbol(txt);
+        m_trData.amount = newTxt;
+        m_qifBuffer = m_qifBuffer + 'T' + newTxt + '\n';
+      }
+      firstField = !firstField;
     }
 
     else if (m_csvDialog->columnType(i) == "memo") { // could be more than one
@@ -649,14 +670,18 @@ void CsvProcessing::importClicked()
                                  "<center>Please correct your settings.</center>"), i18n("CSV import"));
       return;
     }
+    if (!m_csvDialog->validateAmounts()) {
+      //  Invalid numeric field found
+      return;
+    }
 
     m_parse->setSymbolFound(false);
-    readFile(m_inFileName, skp);   //               skip all headers
+    readFile(m_inFileName);   //               skip all headers
 
     //--- create the (revised) vertical (row) headers ---
 
     QStringList vertHeaders;
-    for (int i = skp; i < m_csvDialog->tableWidget->rowCount() + skp; i++) {
+    for (int i = 0; i < m_csvDialog->tableWidget->rowCount() + skp; i++) {
       QString hdr = (QString::number(i + 1));
       vertHeaders += hdr;
     }
@@ -674,7 +699,7 @@ void CsvProcessing::readSettings()
 {
   int tmp;
   QString txt;
-  KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+  KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
 
   KConfigGroup profileGroup(config, "Profile");
   m_dateFormatIndex = profileGroup.readEntry("DateFormat", QString()).toInt();
@@ -696,7 +721,7 @@ void CsvProcessing::readSettings()
 
   m_csvPath = profileGroup.readEntry("CsvDirectory", QString());
 
-  m_debitFlag = profileGroup.readEntry("DebitFlag", QString().toInt());
+  m_debitFlag = profileGroup.readEntry("DebitFlag", -1);
 
   KConfigGroup columnsGroup(config, "Columns");
 
@@ -780,9 +805,9 @@ int CsvProcessing::startLine()
   return m_startLine;
 }
 
-void CsvProcessing::startLineChanged()
+void CsvProcessing::startLineChanged(int val)
 {
-  int val = m_csvDialog->spinBox_skip->value();
+  val = m_csvDialog->spinBox_skip->value();
   if (val < 1) {
     return;
   }

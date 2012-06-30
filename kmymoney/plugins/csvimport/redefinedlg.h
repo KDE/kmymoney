@@ -1,6 +1,6 @@
 /***************************************************************************
-redefine.h
--------------------
+                          redefine.h
+                      -------------------
 begin                 : Sat Jan 01 2010
 copyright             : (C) 2010 by Allan Anderson
 email                 : agander93@gmail.com
@@ -95,6 +95,7 @@ private:
 
   int              m_amountColumn;
   int              m_columnTotalWidth;
+  int              m_maxWidth;
   int              m_mainHeight;
   int              m_mainWidth;
   int              m_maxCol;
@@ -102,6 +103,7 @@ private:
   int              m_quantityColumn;
   int              m_ret;
   int              m_typeColumn;
+  int              m_detailColumn;
 
   MyMoneyMoney     m_price;
   MyMoneyMoney     m_quantity;

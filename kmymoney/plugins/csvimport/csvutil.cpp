@@ -45,12 +45,12 @@ QStringList Parse::parseLine(const QString& data)
   QString txt;
   QString txt1;
 
+  m_fieldDelimiterCharacter = m_fieldDelimiterCharList[m_fieldDelimiterIndex];
   m_inBuffer = data;
-  if (m_inBuffer.endsWith(',')) {
+  if (m_inBuffer.endsWith(m_fieldDelimiterCharacter)) {
     m_inBuffer.chop(1);
   }
 
-  m_fieldDelimiterCharacter = m_fieldDelimiterCharList[m_fieldDelimiterIndex];
   listIn = m_inBuffer.split(m_fieldDelimiterCharacter);// firstly, split on m_fieldDelimiterCharacter
 
   QStringList::const_iterator constIterator;
@@ -60,8 +60,8 @@ QStringList Parse::parseLine(const QString& data)
     txt = (*constIterator);
     // detect where a "quoted" string has been erroneously split, because of a comma,
     // or in a value, a 'thousand separator' being mistaken for a field delimitor.
-
-    while ((txt.startsWith(m_textDelimiterCharacter)) && (!txt.endsWith(m_textDelimiterCharacter)))  {
+    // Also, where a 'field seperator' is within quotes and the quotes don't include the whole of the field.
+    while((txt.startsWith(m_textDelimiterCharacter)) && (!txt.mid(1,-1).contains(m_textDelimiterCharacter))) {
       if (++constIterator < listIn.constEnd())  {
         txt1 = (*constIterator);//                       second part of the split string
         txt += m_fieldDelimiterCharacter + txt1;//       rejoin the string

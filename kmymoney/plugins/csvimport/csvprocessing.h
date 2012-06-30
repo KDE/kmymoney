@@ -54,6 +54,7 @@ public:
   KComboBox*        m_comboBoxEncode;
 
   bool              m_screenUpdated;
+  bool              m_columnsNotSet;
 
   /**
   * This method is called after startup, to initialise some parameters.
@@ -124,7 +125,7 @@ public slots:
   * statement import. It will also be called to reposition the file after row
   * deletion, or to reread following encoding or delimiter change.
   */
-  void           readFile(const QString& fname, int skipLines);
+  void           readFile(const QString& fname);
 
   /**
   * This method is called when the user clicks 'Save as QIF'. A file selector
@@ -136,7 +137,7 @@ public slots:
   * This method is called when the user selects the start line.  The requested
   * start line  value is saved.
   */
-  void           startLineChanged();
+  void           startLineChanged(int);
 
   /**
   * This method is called when the user selects the end line.  The requested

@@ -178,7 +178,8 @@ CsvImporterDlg::CsvImporterDlg(QWidget* parent) :
   connect(comboBoxInv_securityName, SIGNAL(activated(QString)), m_investProcessing, SLOT(securityNameSelected(QString)));
 
   connect(spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
-  connect(spinBox_skip, SIGNAL(valueChanged(int)), m_csvprocessing, SLOT(startLineChanged()));
+  connect(spinBox_skip, SIGNAL(valueChanged(int)), m_csvprocessing, SLOT(startLineChanged(int)));
+  connect(spinBox_skip, SIGNAL(valueChanged(int)), m_investProcessing, SLOT(startLineChanged(int)));
   connect(spinBox_skipToLast, SIGNAL(valueChanged(int)), this, SLOT(endLineChanged(int)));
   connect(spinBox_skipToLast, SIGNAL(editingFinished()), m_csvprocessing, SLOT(endLineChanged()));
   connect(spinBox_skipToLast, SIGNAL(editingFinished()), m_investProcessing, SLOT(endLineChanged()));
@@ -230,16 +231,21 @@ void CsvImporterDlg::endLineChanged(int val)
 
 void CsvImporterDlg::startLineChanged(int val)
 {
+  if (m_fileType != "Banking") {
+    return;
+  }
   m_startLine = val;
 }
 
 int CsvImporterDlg::validateColumn(const int& col, const QString& type)
 {
-  //  First check if selection is in range
+  if (m_csvprocessing->m_columnsNotSet) {  //       Don't check columns until they've been selected.
+    return KMessageBox::Ok;
+  }
+  //  Now check if selection is in range
   if ((col < 0) || (col >= m_csvprocessing->endColumn())) {
     return KMessageBox::No;
   }//                                               selection was in range
-
 
   if ((!m_columnType[col].isEmpty())  && (m_columnType[col] != type)) {
     //                                              BUT column is already in use
@@ -249,7 +255,7 @@ int CsvImporterDlg::validateColumn(const int& col, const QString& type)
 
     m_previousColumn = -1;
     resetComboBox(m_columnType[col], col);
-    resetComboBox(type, col);//                    reset this combobox
+    resetComboBox(type, col);//                     reset this combobox
     m_previousType.clear();
     m_columnType[col].clear();
     return KMessageBox::Cancel;
@@ -481,7 +487,7 @@ void CsvImporterDlg::saveSettings()
 
     KConfigGroup profileGroup(config, "Profile");
     profileGroup.writeEntry("CurrentUI", m_currentUI);
-    QString str = "$HOME/" + m_csvprocessing->csvPath().section('/', 3);
+    QString str = "~/" + m_csvprocessing->csvPath().section('/', 3);
     profileGroup.writeEntry("CsvDirectory", str);
     profileGroup.writeEntry("DateFormat", comboBox_dateFormat->currentIndex());
     profileGroup.writeEntry("FieldDelimiter", m_csvprocessing->fieldDelimiterIndex());
@@ -691,7 +697,9 @@ void CsvImporterDlg::tabSelected(int index)
         }
       }
       if ((m_csvprocessing->inFileName().isEmpty()) || (m_currentUI == "Invest")) {
-        m_investmentDlg->saveSettings();//            leaving "Invest" so save settings
+        if (m_investProcessing->m_columnsNotSet == false) {
+          m_investmentDlg->saveSettings();//            leaving "Invest" so save settings
+        }
         m_csvprocessing->readSettings();//            ...and load "Banking"
         tableWidget->reset();
         tabWidget_Main->setTabText(0, i18n("Banking") + '*');
@@ -699,6 +707,7 @@ void CsvImporterDlg::tabSelected(int index)
       }
       m_fileType = "Banking";
       m_currentUI = "Banking";
+      m_csvprocessing->m_columnsNotSet = false;
       break;
     case 1 ://  "Invest" selected
       if ((!m_csvprocessing->inFileName().isEmpty())  && (m_currentUI == "Banking")) {
@@ -711,7 +720,9 @@ void CsvImporterDlg::tabSelected(int index)
         }
       }
       if ((m_investProcessing->inFileName().isEmpty()) || (m_currentUI == "Banking")) {
-        saveSettings();//                             leaving "Banking" so save settings
+        if (m_csvprocessing->m_columnsNotSet == false) {
+          saveSettings();//                             leaving "Banking" so save settings
+        }
         m_investProcessing->readSettings();//         ...and load "Invest"
         tableWidget->reset();
         tabWidget_Main->setTabText(0, i18n("Banking"));
@@ -719,6 +730,7 @@ void CsvImporterDlg::tabSelected(int index)
       }
       m_fileType = "Invest";
       m_currentUI = "Invest";
+      m_investProcessing->m_columnsNotSet = false;
       break;
   }
 }
@@ -728,7 +740,16 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
   QString txt;
   bool symbolFound = false;
   bool invalidResult = false;
+  int startLine;
+  int endLine;
 
+  if (m_fileType == "Banking") {
+    startLine = m_csvprocessing->startLine();
+    endLine = m_endLine;
+  } else {
+    startLine = m_investProcessing->m_startLine;
+    endLine = m_investProcessing->m_endLine;
+  }
   //  Clear background
 
   for (int row = 0; row < m_endLine; row++) {
@@ -741,17 +762,17 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
 
     //  Set first and last rows
 
-    int first = m_startLine;
-    int last = m_endLine;
     m_parse->setSymbolFound(false);
 
     QString newTxt;
     int errorRow = 0;
     QTableWidgetItem* errorItem(0);
     //  Check if this col contains empty cells
-    int row = 0;
-    for (row = first - 1; row < last; row++) {
-      if (tableWidget->item(row, col) == 0) { //       empty cell
+    for (int row = startLine; row < tableWidget->rowCount(); row++) {
+      if (row > endLine - 1) {
+          break;
+        }
+      if (tableWidget->item(row, col) == 0) {  //       empty cell
         if (((m_fileType == "Banking") && (m_csvprocessing->importNow())) ||
             ((m_fileType == "Invest") && (m_investProcessing->importNow()))) {
           //                                     if importing, this is error
@@ -768,13 +789,10 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
         if (ret == KMessageBox::Continue) {
           continue;
         }
-        return;//                                     empty cell
+        return;//                                        empty cell
       } else {
-
         //  Check if this col contains decimal symbol
-
-        txt = tableWidget->item(row, col)->text();//  get data
-
+        txt = tableWidget->item(row, col)->text();//     get data
         newTxt = m_parse->possiblyReplaceSymbol(txt);//  update data
         tableWidget->item(row, col)->setText(newTxt);//  highlight selection
         tableWidget->item(row, col)->setBackground(m_colorBrush);
@@ -790,7 +808,7 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
         if (m_parse->symbolFound()) {
           symbolFound = true;
         }
-        if (newTxt == txt) { //                        no matching symbol found
+        if (newTxt == txt) { //                          no matching symbol found
           continue;
         }
       }
@@ -815,11 +833,7 @@ void CsvImporterDlg::updateDecimalSymbol(const QString& type, int col)
       KMessageBox::sorry(0, i18n("<center>The selected decimal symbol/thousands separator</center>"
                                  "<center>have produced invalid results in row %1, and possibly more.</center>"
                                  "<center>Please try again.</center>", errorRow + 1), i18n("Invalid Conversion"));
-      if (m_fileType == "Banking") {
-        m_csvprocessing->readFile("", 0);
-      } else {
-        m_investProcessing->readFile("", 0);
-      }
+      return;
     }
   }
 }
@@ -832,7 +846,7 @@ void CsvImporterDlg::decimalSymbolSelected(int index)
     return;
   }
 
-  if (m_startLine > m_endLine) {
+  if (((m_fileType == "Banking") && (m_startLine > m_endLine)) || ((m_fileType == "Invest") && (m_investProcessing->m_startLine > m_investProcessing->m_endLine))) {
     KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
                                "<center>Please correct your settings.</center>"), i18n("CSV import"));
     return;
@@ -840,12 +854,11 @@ void CsvImporterDlg::decimalSymbolSelected(int index)
 
   if (m_decimalSymbolChanged) {
     if (m_fileType == "Banking") {
-      m_csvprocessing->readFile("", 0);
+      m_csvprocessing->readFile("");
     } else {
       m_investProcessing->readFile("", 0);
     }
   }
-
   //  Save new decimal symbol and thousands separator
 
   m_decimalSymbolIndex = index;
@@ -905,4 +918,88 @@ QString CsvImporterDlg::currentUI()
 void CsvImporterDlg::setCurrentUI(QString val)
 {
   m_currentUI = val;
+}
+
+bool CsvImporterDlg::validateAmounts()
+{
+  bool ok;
+  QString value;
+  QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(), ]";
+  //
+  //  Ensure numeric columns do contain valid numeric values
+  //
+  if (m_fileType == "Banking") {
+    for (int row = m_csvprocessing->startLine(); row < tableWidget->rowCount(); row++) {
+      for (int col = 0; col < tableWidget->columnCount(); col++) {
+        if ((columnType(col) == "amount") || (columnType(col) == "debit") || (columnType(col) == "credit")) {
+          if (tableWidget->item(row, col) == 0) {  //  Does cell exist?
+            continue;  //                              No
+          }
+          value = tableWidget->item(row, col)->text().remove(QRegExp(pattern));
+          if (value.isEmpty()) {  //                   An empty cell is OK, probably.
+            continue;
+          }
+          value.toDouble(&ok); //                      Test validity.
+          if ((!ok) && (!m_acceptAllInvalid)) {
+            QString str = KGlobal::locale()->currencySymbol();
+            int rc = KMessageBox::questionYesNoCancel(this, i18n("<center>An invalid value has been detected in column %1 on row %2.</center>"
+                                                                 "Please check that you have selected the correct columns."
+                                                                 "<center>You may accept all similar items, or just this one, or cancel.</center>",
+                                                                 col + 1, row + m_csvprocessing->startLine()), i18n("CSV import"),
+                                                                 KGuiItem(i18n("Accept All")),
+                                                                 KGuiItem(i18n("Accept This")),
+                                                                 KGuiItem(i18n("Cancel")));
+            switch (rc) {
+            case KMessageBox::Yes:  //  = "Accept All"
+              m_acceptAllInvalid = true;
+              continue;
+
+            case KMessageBox::No:  //   = "Accept This"
+              m_acceptAllInvalid = false;
+              continue;
+
+            case KMessageBox::Cancel:
+              return false;
+            }
+          }
+        }
+      }
+    }
+  } else {
+    for (int row = m_investProcessing->m_startLine; row < m_investProcessing->m_endLine; row++) {
+      for (int col = 0; col < tableWidget->columnCount(); col++) {
+        if ((m_investProcessing->columnType(col) == "amount") || (m_investProcessing->columnType(col) == "quantity") || (m_investProcessing->columnType(col) == "price")) {
+          if (tableWidget->item(row, col) == 0) {  //  Does cell exist...
+            continue;  //                              No
+          }
+          value = tableWidget->item(row, col)->text().remove(QRegExp(pattern));
+          if (value.isEmpty()) {  //                   An empty cell is OK, probably.
+            continue;
+          }
+          value.toDouble(&ok); //                      Test validity.
+          if ((!ok) && (!m_acceptAllInvalid)) {
+            QString str = KGlobal::locale()->currencySymbol();
+            int rc = KMessageBox::questionYesNoCancel(this, i18n("<center>An invalid value has been detected in column %1 on row %2.</center>"
+                                                                 "Please check that you have selected the correct columns."
+                                                                 "<center>You may accept all similar items, or just this one, or cancel.</center>",
+                                                                 col + 1, row + 1), i18n("CSV import"),
+                                                                 KGuiItem(i18n("Accept All")),
+                                                                 KGuiItem(i18n("Accept This")),
+                                                                 KGuiItem(i18n("Cancel")));
+            switch (rc) {
+              case KMessageBox::Yes:  //  = "Accept All"
+                m_acceptAllInvalid = true;
+                continue;
+              case KMessageBox::No:  //   = "Accept This"
+                m_acceptAllInvalid = false;
+               continue;
+            case KMessageBox::Cancel:
+              return false;
+            }
+          }
+        }
+      }
+    }
+  }
+  return true;
 }

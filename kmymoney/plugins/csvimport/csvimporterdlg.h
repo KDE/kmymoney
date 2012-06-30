@@ -66,6 +66,7 @@ public:
   Parse*              m_parse;
 
   bool             m_decimalSymbolChanged;
+  bool             m_acceptAllInvalid;
 
   void             saveSettings();
 
@@ -75,6 +76,7 @@ public:
   void             clearColumnType(int column);
   void             clearPreviousColumn();
   bool             amountSelected();
+  bool             validateAmounts();
   void             setAmountSelected(bool val);
   bool             creditSelected();
   void             setCreditSelected(bool val);
