@@ -2562,7 +2562,7 @@ void IntroPage::slotRadioButton_bankClicked()
   m_lastRadioButton = "Bank";
   //
   //  This below looks strange, but is necessary (I think, anyway), because if the alternate radio button
-  //  is checked, mutiple connects occur.  So, disconnect any existing connection then re-enable.
+  //  is checked, multiple connects occur.  So, disconnect any existing connection then re-enable.
   //
   disconnect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
   connect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
@@ -2593,7 +2593,7 @@ void IntroPage::slotRadioButton_investClicked()
   m_lastRadioButton = "Invest";
   //
   //  This below looks strange, but is necessary (I think, anyway), because if the alternate radio button
-  //  is checked, mutiple connects occur.  So, disconnect any existing connection then re-enable.
+  //  is checked, multiple connects occur.  So, disconnect any existing connection then re-enable.
   //
   disconnect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
   connect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));

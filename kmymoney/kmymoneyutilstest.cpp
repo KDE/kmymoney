@@ -47,7 +47,7 @@ void KMyMoneyUtilsTest::testNextCheckNumber()
   acc.setValue("lastNumberUsed", QLatin1String("123"));
   QVERIFY(KMyMoneyUtils::nextCheckNumber(acc) == QLatin1String("124"));
 
-  // a number preceeded by text
+  // a number preceded by text
   acc.setValue("lastNumberUsed", QLatin1String("No 123"));
   QVERIFY(KMyMoneyUtils::nextCheckNumber(acc) == QLatin1String("No 124"));
 
