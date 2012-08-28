@@ -28,8 +28,6 @@
 
 #include "csvimporterplugin.h"
 
-#define MAXCOL 25    //                 maximum no. of columns (arbitrary value)
-
 class ConvertDate;
 class Parse;
 class BankingPage;
@@ -391,7 +389,8 @@ public slots:
   void           decimalSymbolSelected(int val);
 
 private:
-  QString          m_columnType[MAXCOL];//  holds field types - date, payee, etc.
+  QStringList      m_columnTypeList;  //  holds field types - date, payee, etc.
+
   QString          m_currentUI;
   QString          m_decimalSymbol;
   QString          m_previousType;

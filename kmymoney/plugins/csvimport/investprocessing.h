@@ -39,8 +39,6 @@ email                 : agander93@gmail.com
 
 #include <mymoneystatement.h>
 
-#define invMAXCOL 25    //                 maximum no. of columns (arbitrary value)
-
 class ConvertDate;
 class CSVDialog;
 class InvestmentDlg;
@@ -414,6 +412,7 @@ private:
   }              m_trInvestData;
 
   QList<csvSplit> m_csvSplitsList;
+  QList<QTextCodec *>   m_codecs;
 
   bool           m_amountSelected;
   bool           m_brokerage;
@@ -451,7 +450,6 @@ private:
 
   QString        m_accountName;
   QString        m_brokerBuff;
-  QString        m_columnType[invMAXCOL];
   QString        m_dateFormat;
   QString        m_fieldDelimiterCharacter;
   QString        m_textDelimiterCharacter;
@@ -462,7 +460,7 @@ private:
   QString        m_securityName;
   QString        m_tempBuffer;
 
-  QList<QTextCodec *>   m_codecs;
+  QStringList    m_columnTypeList;  //  holds field types - date, payee, etc.
 
   KUrl           m_url;
   QFile*         m_inFile;

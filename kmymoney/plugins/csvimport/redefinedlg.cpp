@@ -59,7 +59,6 @@ RedefineDlg::RedefineDlg()
   m_widget = new RedefineDlgDecl();
   setMainWidget(m_widget);
 
-  m_widget->tableWidget->setColumnCount(defMAXCOL);
   m_widget->tableWidget->setToolTip(i18n("Results table"));
   m_widget->tableWidget->setRowCount(2);
   m_mainWidth = m_widget->tableWidget->size().width();

@@ -23,8 +23,6 @@ email                 : agander93@gmail.com
 #include "mymoneymoney.h"
 #include "ui_redefinedlgdecl.h"
 
-#define defMAXCOL 25
-
 class InvestmentDlg;
 class MyMoneyMoney;
 

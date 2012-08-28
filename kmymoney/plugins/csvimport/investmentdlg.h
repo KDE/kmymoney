@@ -34,8 +34,6 @@ email                 : agander93@gmail.com
 
 #include <mymoneystatement.h>
 
-#define invMAXCOL 25    //                 maximum no. of columns (arbitrary value)
-
 class CSVDialog;
 class ConvertDate;
 class InvestProcessing;
@@ -55,7 +53,6 @@ public:
   SymbolTableDlg*    m_redefine;
   InvestProcessing*  m_investProcessing;
 
-  void               clearComboBoxText();
   void               init();
   void               saveSettings();
 
@@ -69,12 +66,6 @@ private:
   void           resizeEvent(QResizeEvent * event);
 
 private slots:
-
-  /**
-  * This slot is called following the user selecting a new investment type
-  * in the RedefineDlg window.  The new value is saved.
-  */
-  void           changedType(const QString&);
 
 signals:
   /**

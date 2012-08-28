@@ -78,43 +78,11 @@ void InvestmentDlg::init()
   m_csvDialog->ui->tableWidget->setWordWrap(false);
   m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
 
-  for (int i = 0; i < MAXCOL; i++) {
-    QString t;
-    t.setNum(i + 1);
-    m_csvDialog->m_pageInvestment->ui->comboBoxInv_amountCol->addItem(t);
-    m_csvDialog->m_pageInvestment->ui->comboBoxInv_dateCol->addItem(t);
-    m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->addItem(t);
-    m_csvDialog->m_pageInvestment->ui->comboBoxInv_priceCol->addItem(t);
-    m_csvDialog->m_pageInvestment->ui->comboBoxInv_quantityCol->addItem(t);
-    m_csvDialog->m_pageInvestment->ui->comboBoxInv_typeCol->addItem(t);
-    m_csvDialog->m_pageInvestment->ui->comboBoxInv_feeCol->addItem(t);
-    m_csvDialog->m_pageInvestment->ui->comboBoxInv_symbolCol->addItem(t);
-    m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol->addItem(t);
-  }
-
   connect(m_csvDialog->m_wizard->button(QWizard::CustomButton1), SIGNAL(clicked()), m_investProcessing, SLOT(slotFileDialogClicked()));
-
-  connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(memoColumnSelected(int)));
-  connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_typeCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(typeColumnSelected(int)));
-  connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_dateCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(dateColumnSelected(int)));
-  connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_quantityCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(quantityColumnSelected(int)));
-  connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_priceCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(priceColumnSelected(int)));
-  connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_amountCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(amountColumnSelected(int)));
-  connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_feeCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(feeColumnSelected(int)));
-  connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_symbolCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(symbolColumnSelected(int)));
-  connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(detailColumnSelected(int)));
 
   connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_securityName, SIGNAL(currentIndexChanged(int)), m_csvDialog->m_pageInvestment, SLOT(slotsecurityNameChanged(int)));
 
   connect(m_investProcessing, SIGNAL(statementReady(MyMoneyStatement&)), this, SIGNAL(statementReady(MyMoneyStatement&)));
-}
-
-void InvestmentDlg::changedType(const QString& newType)
-{
-  if ((newType == "buy") || (newType == "sell") || (newType == "divx") ||
-      (newType == "reinvdiv") || (newType == "shrsin") || (newType == "shrsout")) {
-    m_investProcessing->setTrInvestDataType(newType);
-  }
 }
 
 void InvestmentDlg::saveSettings()
