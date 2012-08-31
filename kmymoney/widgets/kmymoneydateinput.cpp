@@ -326,11 +326,13 @@ void kMyMoneyDateInput::slotDateChosenRef(const QDate& date)
     emit dateChanged(date);
     d->m_date = date;
 
+#ifndef Q_OS_MAC
     QLabel *lbl = static_cast<QLabel*>(d->m_datePopup->view());
     lbl->setText(KGlobal::locale()->formatDate(date));
     lbl->adjustSize();
     if (d->m_datePopup->isVisible() || hasFocus())
       d->m_datePopup->show(mapToGlobal(QPoint(0, height()))); // Repaint
+#endif
   }
 }
 
