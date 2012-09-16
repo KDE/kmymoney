@@ -312,7 +312,7 @@ void KFindTransactionDlg::slotUpdateSelections(void)
   if (txt.isEmpty()) {
     txt = i18nc("No selection", "(None)");
   }
-  m_ui->m_selectedCriteria->setText(i18n("Current selections: ") + txt);
+  m_ui->m_selectedCriteria->setText(i18n("Current selections: %1", txt));
 }
 
 bool KFindTransactionDlg::allItemsSelected(const QTreeWidgetItem *item) const

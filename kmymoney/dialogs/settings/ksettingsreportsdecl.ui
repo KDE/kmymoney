@@ -141,8 +141,8 @@
          <string>default style sheet</string>
         </property>
         <property name="filter">
-         <string>*.css|css files
-            *|all files</string>
+         <string>*.css|CSS files
+*|All files</string>
         </property>
         <property name="kcfg_property" stdset="0">
          <cstring>text</cstring>

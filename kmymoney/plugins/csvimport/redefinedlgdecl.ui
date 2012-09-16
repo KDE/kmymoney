@@ -39,8 +39,8 @@
    <item>
     <widget class="QLabel" name="label_info">
      <property name="text">
-      <string> The transaction below has an unrecognised type/action.
- Please select an appropriate entry.</string>
+      <string>The transaction below has an unrecognised type/action.
+Please select an appropriate entry.</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

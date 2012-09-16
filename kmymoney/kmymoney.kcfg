@@ -408,7 +408,7 @@
    <max>2</max>
   </entry>
   <entry name="CssFileDefault" type="String">
-   <label>name of default css file</label>
+   <label>Name of default CSS file</label>
    <default></default>
   </entry>
  </group>

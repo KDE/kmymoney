@@ -754,7 +754,7 @@ void KReportsView::slotConfigure(void)
   MyMoneyReport report = tab->report();
   if (report.comment() == i18n("Default Report") || report.comment() == i18n("Generated Report")) {
     report.setComment(i18n("Custom Report"));
-    report.setName(report.name() + i18n(" (Customized)"));
+    report.setName(i18n("%1 (Customized)", report.name()));
   }
 
   QPointer<KReportConfigurationFilterDlg> dlg = new KReportConfigurationFilterDlg(report);

@@ -634,7 +634,7 @@ void CSVDialog::slotFileDialogClicked()
     m_csvPath = "~/";
   }
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl(m_csvPath),
-                    i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"), 0);
+                    i18n("*.csv *.PRN *.txt|CSV Files\n*|All files"), 0);
 
   //  Add encoding selection to FileDialog
   KHBox* encodeBox = new KHBox();

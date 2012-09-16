@@ -372,7 +372,7 @@ void MyMoneyQifReader::slotProcessData(void)
     m_userAbort = true;
   }
 
-  signalProgress(0, m_qifLines.count(), i18n("Importing QIF ..."));
+  signalProgress(0, m_qifLines.count(), i18n("Importing QIF..."));
   QStringList::iterator it;
   for (it = m_qifLines.begin(); m_userAbort == false && it != m_qifLines.end(); ++it) {
     ++m_linenumber;
@@ -458,7 +458,7 @@ bool MyMoneyQifReader::startImport(void)
     m_filter.setOutputChannelMode(KProcess::MergedChannels);
     m_filter.start();
     if (m_filter.waitForStarted()) {
-      signalProgress(0, m_file->size(), i18n("Reading QIF ..."));
+      signalProgress(0, m_file->size(), i18n("Reading QIF..."));
       slotSendDataToFilter();
       rc = true;
     } else {
@@ -2100,8 +2100,7 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
       return;
 
     } catch (MyMoneyException *e) {
-      QString message(i18n("Account \"%1\" disappeared: ", account.name()));
-      message += e->what();
+      const QString message(i18n("Account \"%1\" disappeared: %2", account.name(), e->what()));
       KMessageBox::error(0, message);
       delete e;
     }

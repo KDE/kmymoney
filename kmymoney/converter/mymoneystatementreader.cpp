@@ -426,12 +426,12 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     messages += i18n("  Statement balance on %1 is reported to be %2", s.m_dateEnd.toString(Qt::ISODate), s.m_closingBalance.formatMoney("", 2));
   }
   messages += i18n("  Transactions");
-  messages += i18n("    %1 processed", d->transactionsCount);
-  messages += i18nc("x transactions have been added", "    %1 added", d->transactionsAdded);
-  messages += i18n("    %1 matched", d->transactionsMatched);
-  messages += i18n("    %1 duplicates", d->transactionsDuplicate);
+  messages += i18np("    %1 processed", "    %1 processed", d->transactionsCount);
+  messages += i18ncp("x transactions have been added", "    %1 added", "    %1 added", d->transactionsAdded);
+  messages += i18np("    %1 matched", "    %1 matched", d->transactionsMatched);
+  messages += i18np("    %1 duplicates", "    %1 duplicates", d->transactionsDuplicate);
   messages += i18n("  Payees");
-  messages += i18nc("x transactions have been created", "    %1 created", payeeCount);
+  messages += i18ncp("x transactions have been created", "    %1 created", "    %1 created", payeeCount);
   messages += QString();
 
   // remove the Don't ask again entries
@@ -827,7 +827,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     }
     if (!t_in.m_fees.isZero()) {
       MyMoneySplit s;
-      s.setMemo(i18n("(Fees) ") + t_in.m_strMemo);
+      s.setMemo(i18n("(Fees) %1", t_in.m_strMemo));
       s.setValue(t_in.m_fees);
       s.setShares(t_in.m_fees);
       s.setAccountId(d->feeId(thisaccount));
@@ -908,7 +908,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         msg += i18n("Selecting \"Yes\" will create the payee, \"No\" will skip "
                     "creation of a payee record and remove the payee information "
                     "from this transaction. Selecting \"Cancel\" aborts the import "
-                    "operation.\n\nIf you select \"No\" here and mark the \"Don't ask "
+                    "operation.\n\nIf you select \"No\" here and mark the \"Do not ask "
                     "again\" checkbox, the payee information for all following transactions "
                     "referencing \"%1\" will be removed.", payeename);
 

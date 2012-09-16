@@ -31,7 +31,7 @@ If this loan is a 'consumer loan' (money to use however you want), you can use a
       <item>
         <widget class="QCheckBox" name="m_noPayoutTransaction">
           <property name="text">
-            <string>Don't create payout transaction</string>
+            <string>Do not create payout transaction</string>
           </property>
         </widget>
       </item>

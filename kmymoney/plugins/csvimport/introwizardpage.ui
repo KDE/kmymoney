@@ -207,7 +207,7 @@ An existing name may be edited, which will produce a new profile.</string>
            </property>
            <property name="toolTip">
             <string>Select to bypass profile setup.
- Only useful if a profile has already been setup.</string>
+Only useful if a profile has already been setup.</string>
            </property>
            <property name="text">
             <string>Skip setup</string>

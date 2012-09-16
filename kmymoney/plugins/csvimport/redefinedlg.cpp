@@ -177,8 +177,8 @@ int RedefineDlg::checkValid(const QString& type, QString info)
   if ((m_priceColumn < 1) || (m_priceColumn >= m_maxCol) ||
       (m_quantityColumn < 1) || (m_quantityColumn >= m_maxCol) ||
       (m_amountColumn < 1) || (m_amountColumn >= m_maxCol)) {
-    info = i18n("There is a problem with the columns selected\n for 'Price', 'Quantity and 'Amount'.\n \
-    You will need to reselect those columns.");
+    info = i18n("There is a problem with the columns selected\n for 'Price', 'Quantity and 'Amount'.\n\
+You will need to reselect those columns.");
     int ret = suspectType(info);
     return ret;
   }
@@ -187,7 +187,7 @@ int RedefineDlg::checkValid(const QString& type, QString info)
     if ((m_quantity.isPositive()) && (m_price.isPositive()) && (!m_amount.isZero())) {
       m_okTypeList << "reinvdiv" << "buy" << "sell";
       if ((m_accountName.isEmpty()) && (type != "reinvdiv")) {
-        m_accountName =  inputParameter(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds : "));
+        m_accountName =  inputParameter(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:"));
         if (m_accountName.isEmpty())
           return KMessageBox::Cancel;
       }
@@ -202,7 +202,7 @@ int RedefineDlg::checkValid(const QString& type, QString info)
     if ((m_quantity.isZero()) && (m_price.isZero()) && (!m_amount.isZero())) {
       m_okTypeList << "divx" << "intinc";
       if (m_accountName.isEmpty())
-        m_accountName =  inputParameter(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds : "));
+        m_accountName =  inputParameter(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:"));
       if (m_accountName.isEmpty())
         return KMessageBox::Cancel;
       m_newType = type;
@@ -259,7 +259,7 @@ void RedefineDlg::buildOkTypeList()
     m_okTypeList << "shrsin" << "shrsout";
   } else {
     m_okTypeList.clear();
-    KMessageBox::sorry(this, i18n(" The values in the columns you have selected\n do not match any expected investment type.\n Please check the fields in the current transaction,\n and also your selections.")
+    KMessageBox::sorry(this, i18n("The values in the columns you have selected\ndo not match any expected investment type.\nPlease check the fields in the current transaction,\nand also your selections.")
                        , i18n("CSV import"));
   }
 }

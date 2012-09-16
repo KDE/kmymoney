@@ -425,7 +425,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="toolTip">
             <string>Select column containing memo field.
- More than one column may be entered successively.</string>
+More than one column may be entered successively.</string>
            </property>
            <property name="maxVisibleItems">
             <number>12</number>

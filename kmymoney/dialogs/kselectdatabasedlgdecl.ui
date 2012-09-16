@@ -203,7 +203,7 @@ As always, please make sure you have adequate backups of your data.</string>
     <item>
      <widget class="QGroupBox" name="groupBox">
       <property name="title">
-       <string>File (Sqlite only)</string>
+       <string>File (SQLite only)</string>
       </property>
       <widget class="KUrlRequester" name="urlSqlite">
        <property name="geometry">

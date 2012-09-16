@@ -9,7 +9,7 @@
     <item>
       <widget class="QLabel" name="textLabel6">
         <property name="text">
-          <string>Select an online source and click &lt;b&gt;Finish&lt;/b&gt; to store the investment data. If you don't want to use online updates, just leave the data as is.</string>
+          <string>Select an online source and click &lt;b&gt;Finish&lt;/b&gt; to store the investment data. If you do not want to use online updates, just leave the data as is.</string>
         </property>
         <property name="alignment">
           <set>Qt::AlignTop</set>

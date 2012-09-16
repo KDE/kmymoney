@@ -2093,7 +2093,7 @@ void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
       }
       ft.commit();
     } catch (MyMoneyException *e) {
-      KMessageBox::information(this, i18n("Unable to add schedule: "), e->what());
+      KMessageBox::information(this, i18n("Unable to add schedule: %1", e->what()));
       delete e;
     }
   }

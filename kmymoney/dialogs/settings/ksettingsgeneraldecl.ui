@@ -445,7 +445,7 @@ Set it to 0 to turn the feature off.</string>
              <string>This option hides all categories in the categories view that are not used in at least a single transaction. They are still shown in the category selection lists.</string>
             </property>
             <property name="text">
-             <string>Don't show unused categories</string>
+             <string>Do not show unused categories</string>
             </property>
            </widget>
           </item>

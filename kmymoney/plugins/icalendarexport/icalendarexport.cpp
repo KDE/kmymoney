@@ -62,7 +62,7 @@ KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QVaria
   qDebug("KMyMoney iCalendar plugin loaded");
 
   // Create the actions of this plugin
-  QString actionName = i18n("Schedules to icalendar");
+  QString actionName = i18n("Schedules to iCalendar");
   QString icalFilePath;
   // Note the below code only exists to move existing settings to the new plugin specific config
   KConfigGroup config = KGlobal::config()->group(d->m_profileName);
@@ -82,7 +82,7 @@ KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QVaria
   }
 
   if (!icalFilePath.isEmpty())
-    actionName = i18n("Schedules to icalendar [%1]", icalFilePath);
+    actionName = i18n("Schedules to iCalendar [%1]", icalFilePath);
 
   d->m_action = actionCollection()->addAction("file_export_icalendar");
   d->m_action->setText(actionName);

@@ -101,7 +101,7 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
     }
     file.close();
   } else {
-    KMessageBox::sorry(KMyMoneyUtils::mainWindow(), i18n("File '%1' not found!", filename));
+    KMessageBox::sorry(KMyMoneyUtils::mainWindow(), i18n("File '%1' not found.", filename));
     rc = false;
   }
 

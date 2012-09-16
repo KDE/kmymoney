@@ -237,7 +237,7 @@ bool MyMoneyStorageSql::fileExists(const QString& dbName)
 {
   QFile f(dbName);
   if (!f.exists()) {
-    m_error = i18n("Sqlite file %1 does not exist", dbName);
+    m_error = i18n("SQLite file %1 does not exist", dbName);
     return (false);
   }
   return (true);

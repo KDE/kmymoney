@@ -178,7 +178,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter* painter, const QStyleO
                                              m_filterAccounts);
 
         if (billSchedules.count() >= 1) {
-          text += i18n("%1 Bills.", billSchedules.count());
+          text += i18np("%1 Bill.", "%1 Bills.", billSchedules.count());
         }
       }
 
@@ -192,7 +192,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter* painter, const QStyleO
         if (depositSchedules.count() >= 1) {
           if (!text.isEmpty())
             text += "  ";
-          text += i18n("%1 Deposits.", depositSchedules.count());
+          text += i18np("%1 Deposit.", "%1 Deposits.", depositSchedules.count());
         }
       }
 
@@ -206,7 +206,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter* painter, const QStyleO
         if (transferSchedules.count() >= 1) {
           if (!text.isEmpty())
             text += "  ";
-          text += i18n("%1 Transfers.", transferSchedules.count());
+          text += i18np("%1 Transfer.", "%1 Transfers.", transferSchedules.count());
         }
       }
     } catch (MyMoneyException* e) {

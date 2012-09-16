@@ -518,7 +518,7 @@ void KMyMoneyApp::initActions(void)
   connect(file_import_qif, SIGNAL(triggered()), this, SLOT(slotQifImport()));
 
   KAction *file_import_gnc = actionCollection()->addAction("file_import_gnc");
-  file_import_gnc->setText(i18n("Gnucash..."));
+  file_import_gnc->setText(i18n("GnuCash..."));
   connect(file_import_gnc, SIGNAL(triggered()), this, SLOT(slotGncImport()));
 
   KAction *file_import_statement = actionCollection()->addAction("file_import_statement");
@@ -2187,10 +2187,10 @@ void KMyMoneyApp::slotGncImport(void)
     }
   }
 
-  KMSTATUS(i18n("Importing a Gnucash file."));
+  KMSTATUS(i18n("Importing a GnuCash file."));
 
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-import"),
-      i18n("*|Gnucash files\n*|All files"),
+      i18n("*|GnuCash files\n*|All files"),
       this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
 
@@ -2472,7 +2472,7 @@ void KMyMoneyApp::slotFileBackup(void)
 
   if (!d->m_fileName.isLocalFile()) {
     KMessageBox::sorry(this,
-                       i18n("The current implementation of the backup functionality only supports local files as source files! Your current source file is '%1'.", d->m_fileName.url()),
+                       i18n("The current implementation of the backup functionality only supports local files as source files. Your current source file is '%1'.", d->m_fileName.url()),
 
                        i18n("Local files only"));
     return;
@@ -3218,11 +3218,11 @@ void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& ne
         }
         ft.commit();
       } catch (MyMoneyException *e) {
-        KMessageBox::information(this, i18n("Unable to add scheduled transaction: "), e->what());
+        KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", e->what()));
         delete e;
       }
     } catch (MyMoneyException *e) {
-      KMessageBox::information(this, i18n("Unable to add scheduled transaction: "), e->what());
+      KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", e->what()));
       delete e;
     }
   }
@@ -6840,7 +6840,7 @@ void KMyMoneyApp::setAccountOnlineParameters(const MyMoneyAccount& _acc, const M
     ft.commit();
 
   } catch (MyMoneyException *e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to setup online parameters for account ''%1'", _acc.name()), e->what());
+    KMessageBox::detailedSorry(0, i18n("Unable to setup online parameters for account '%1'", _acc.name()), e->what());
     delete e;
   }
 }

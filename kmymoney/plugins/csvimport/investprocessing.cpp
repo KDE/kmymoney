@@ -215,7 +215,7 @@ void InvestProcessing::slotFileDialogClicked()
   }
 
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl(m_invPath),
-      i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"), 0);
+      i18n("*.csv *.PRN *.txt|CSV Files\n*|All files"), 0);
 
   //  Add encoding selection to FileDialog
   KHBox* encodeBox = new KHBox();
@@ -1169,7 +1169,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer, int line)
   }   //end of col loop
   m_redefine->setInBuffer(inBuffer);
   if (m_trInvestData.type != "0") {       //                       Don't need to do this check on checking items.
-    int ret = (m_redefine->checkValid(m_trInvestData.type, i18n("The quantity, price and amount parameters in the\n current transaction don't match with the action type.\n Please select another action type\n")));
+    int ret = (m_redefine->checkValid(m_trInvestData.type, i18n("The quantity, price and amount parameters in the\ncurrent transaction do not match with the action type.\nPlease select another action type\n")));
     if (ret == KMessageBox::Cancel) {
       return ret;
     }
@@ -1189,7 +1189,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer, int line)
     if (m_brokerBuff.isEmpty()) {      //                          start building data
 
       if (m_redefine->accountName().isEmpty()) {
-        m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds : ")));
+        m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:")));
       }
       m_brokerBuff = "!Account\n";
       m_brokerBuff += 'N' + m_redefine->accountName() + '\n';
@@ -1258,12 +1258,12 @@ int InvestProcessing::processActionType(QString& type)
   if ((brokerFound) || (type.isEmpty()))  {      //                No investment type, but may still be...
     m_brokerage = true;//                                     ...but assume these are non-investment items, until later.
     if (m_redefine->accountName().isEmpty())
-      m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds : ")));
+      m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:")));
     m_tempBuffer +=  "L[" + m_redefine->accountName() + ']' + '\n';
 
     if (m_payeeColumn < 0) {
       m_payeeColumn = columnNumber(i18n("<center>For a brokerage item, enter the column</center>"
-                                        "<center>containing the Payee or Detail :</center>")) - 1;//payee column
+                                        "<center>containing the Payee or Detail:</center>")) - 1;//payee column
     }
     if (m_payeeColumn == 0) {
       KMessageBox::sorry(0, i18n("An invalid column was entered.\n"
@@ -1344,7 +1344,7 @@ int InvestProcessing::processActionType(QString& type)
   }
   //   no valid type found
   m_redefine->setInBuffer(m_inBuffer);  //                      Ask user to choose valid type.
-  int ret = m_redefine->suspectType(i18n(" The transaction below has an unrecognised type/action. \nPlease select an appropriate entry."));
+  int ret = m_redefine->suspectType(i18n(" The transaction below has an unrecognised type/action.\nPlease select an appropriate entry."));
   return ret;
 }//   end of Type Col
 

@@ -1957,7 +1957,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
       if (static_cast<const GncTemplateSplit *>((*itt)->getSplit(0))->acct() == gsc->templId()) break;
     }
     if (itt == m_templateList.constEnd()) {
-      throw new MYMONEYEXCEPTION(i18n("Can't find template transaction for schedule %1", sc.name()));
+      throw new MYMONEYEXCEPTION(i18n("Cannot find template transaction for schedule %1", sc.name()));
     } else {
       tx = convertTemplateTransaction(sc.name(), *itt);
     }
@@ -2264,26 +2264,26 @@ QString MyMoneyGncReader::buildReportSection(const QString& source)
     bool more = false;
     if (source == "MN") {
       s.append(i18n("Found:\n\n"));
-      s.append(QString::number(m_commodityCount) + i18n(" commodities (equities)\n"));
-      s.append(QString::number(m_priceCount) + i18n(" prices\n"));
-      s.append(QString::number(m_accountCount) + i18n(" accounts\n"));
-      s.append(QString::number(m_transactionCount) + i18n(" transactions\n"));
-      s.append(QString::number(m_scheduleCount) + i18n(" schedules\n"));
+      s.append(i18np("%1 commodity (equity)\n", "%1 commodities (equities)\n", m_commodityCount));
+      s.append(i18np("%1 price\n", "%1 prices\n", m_priceCount));
+      s.append(i18np("%1 account\n", "%1 accounts\n", m_accountCount));
+      s.append(i18np("%1 transaction\n", "%1 transactions\n", m_transactionCount));
+      s.append(i18np("%1 schedule\n", "%1 schedules\n", m_scheduleCount));
       s.append("\n\n");
       if (m_ccCount == 0) {
         s.append(i18n("No inconsistencies were detected\n"));
       } else {
-        s.append(QString::number(m_ccCount) + i18n(" inconsistencies were detected and corrected\n"));
+        s.append(i18np("%1 inconsistency was detected and corrected\n", "%1 inconsistencies were detected and corrected\n", m_ccCount));
         more = true;
       }
       if (m_orCount > 0) {
         s.append("\n\n");
-        s.append(QString::number(m_orCount) + i18n(" orphan accounts were created\n"));
+        s.append(i18np("%1 orphan account was created\n", "%1 orphan accounts were created\n", m_orCount));
         more = true;
       }
       if (m_scCount > 0) {
         s.append("\n\n");
-        s.append(QString::number(m_scCount) + i18n(" possible schedule problems were noted\n"));
+        s.append(i18np("%1 possible schedule problem was noted\n", "%1 possible schedule problems were noted\n", m_scCount));
         more = true;
       }
       QString unsupported("");
@@ -2348,7 +2348,7 @@ QString MyMoneyGncReader::createOrphanAccount(const QString& gncName)
   MyMoneyAccount acc;
 
   acc.setName("orphan_" + gncName);
-  acc.setDescription(i18n("Orphan created from unknown gnucash account"));
+  acc.setDescription(i18n("Orphan created from unknown GnuCash account"));
 
   QDate today = QDate::currentDate();
 

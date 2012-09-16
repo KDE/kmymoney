@@ -115,7 +115,7 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
   m_contextMenu->addAction(KIcon("document-edit"), i18n("Edit..."), this, SLOT(slotStartEdit()));
   m_contextMenuDuplicate = m_contextMenu->addAction(KIcon("edit-copy"), i18nc("To duplicate a split", "Duplicate"), this, SLOT(slotDuplicateSplit()));
   m_contextMenuDelete = m_contextMenu->addAction(KIcon("edit-delete"),
-                        i18n("Delete ..."),
+                        i18n("Delete..."),
                         this, SLOT(slotDeleteSplit()));
 
   connect(this, SIGNAL(clicked(QModelIndex)),
