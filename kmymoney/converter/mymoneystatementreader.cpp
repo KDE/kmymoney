@@ -429,7 +429,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   messages += i18np("    %1 processed", "    %1 processed", d->transactionsCount);
   messages += i18ncp("x transactions have been added", "    %1 added", "    %1 added", d->transactionsAdded);
   messages += i18np("    %1 matched", "    %1 matched", d->transactionsMatched);
-  messages += i18np("    %1 duplicates", "    %1 duplicates", d->transactionsDuplicate);
+  messages += i18np("    %1 duplicate", "    %1 duplicates", d->transactionsDuplicate);
   messages += i18n("  Payees");
   messages += i18ncp("x transactions have been created", "    %1 created", "    %1 created", payeeCount);
   messages += QString();

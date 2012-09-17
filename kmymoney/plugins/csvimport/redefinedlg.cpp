@@ -177,7 +177,7 @@ int RedefineDlg::checkValid(const QString& type, QString info)
   if ((m_priceColumn < 1) || (m_priceColumn >= m_maxCol) ||
       (m_quantityColumn < 1) || (m_quantityColumn >= m_maxCol) ||
       (m_amountColumn < 1) || (m_amountColumn >= m_maxCol)) {
-    info = i18n("There is a problem with the columns selected\n for 'Price', 'Quantity and 'Amount'.\n\
+    info = i18n("There is a problem with the columns selected\nfor 'Price', 'Quantity and 'Amount'.\n\
 You will need to reselect those columns.");
     int ret = suspectType(info);
     return ret;

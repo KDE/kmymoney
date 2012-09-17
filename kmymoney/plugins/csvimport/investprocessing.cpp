@@ -1344,7 +1344,7 @@ int InvestProcessing::processActionType(QString& type)
   }
   //   no valid type found
   m_redefine->setInBuffer(m_inBuffer);  //                      Ask user to choose valid type.
-  int ret = m_redefine->suspectType(i18n(" The transaction below has an unrecognised type/action.\nPlease select an appropriate entry."));
+  int ret = m_redefine->suspectType(i18n("The transaction below has an unrecognised type/action.\nPlease select an appropriate entry."));
   return ret;
 }//   end of Type Col
 
