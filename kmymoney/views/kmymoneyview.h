@@ -50,6 +50,12 @@
 #include <mymoneysecurity.h>
 #include <selectedtransaction.h>
 
+#ifdef KActivities_FOUND
+namespace KActivities {
+    class ResourceInstance;
+}
+#endif
+
 class KHomeView;
 class KAccountsView;
 class KCategoriesView;
@@ -164,6 +170,11 @@ private:
     GncXML         // Gnucash XML
   } fileTypeE;
   fileTypeE m_fileType;
+
+#ifdef KActivities_FOUND
+private:
+    KActivities::ResourceInstance * m_activityResourceInstance;
+#endif
 
 private:
   void ungetString(QIODevice *qfile, char * buf, int len);

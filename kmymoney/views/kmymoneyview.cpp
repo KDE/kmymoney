@@ -56,6 +56,10 @@
 #include <kdeversion.h>
 #include <ktitlewidget.h>
 
+#ifdef KActivities_FOUND
+#include <KActivities/ResourceInstance>
+#endif
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -108,6 +112,9 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
     m_fileOpen(false),
     m_fmode(0600),
     m_lastViewSelected(0)
+#ifdef KActivities_FOUND
+    , m_activityResourceInstance(0)
+#endif
 {
   // this is a workaround for the bug in KPageWidget that causes the header to be shown
   // for a short while during page switch which causes a kind of bouncing of the page's
@@ -284,6 +291,14 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   updateViewType();
 
   m_inConstructor = false;
+
+  // Initialize kactivities resource instance
+
+  #ifdef KActivities_FOUND
+  m_activityResourceInstance = new KActivities::ResourceInstance(window()->winId());
+  m_activityResourceInstance->setParent(this);
+  connect(kmymoney, SIGNAL(fileLoaded(KUrl)), m_activityResourceInstance, SLOT(setUri(KUrl)));
+  #endif
 }
 
 KMyMoneyView::~KMyMoneyView()
