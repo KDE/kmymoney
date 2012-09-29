@@ -212,6 +212,9 @@ IF(ENABLE_LIBICAL)
   ENDIF(NOT LIBICAL_FOUND)
 ENDIF(ENABLE_LIBICAL)
 
+# check for optional KDE Activities support
+FIND_PACKAGE(KActivities)
+
 # do we build the tests?
 IF( KDE4_BUILD_TESTS )
   # INCLUDE(CTest) # (makes sense only with a ctest online dashboard)
