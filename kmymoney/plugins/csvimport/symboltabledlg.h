@@ -62,6 +62,7 @@ signals:
 private:
   int              m_mainHeight;
   int              m_tableHeight;
+  bool             m_firstPass;
 
   QList<QTableWidgetItem*>  m_selectedItems;
 

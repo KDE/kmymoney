@@ -40,8 +40,8 @@ SymbolTableDlg::SymbolTableDlg()
 {
   m_widget = new SymbolTableDlgDecl;
   setMainWidget(m_widget);
-
   m_widget->tableWidget->setToolTip(i18n("Symbols and Security Names present"));
+  m_firstPass = true;
 
   setButtons(KDialog::Cancel | KDialog::Ok);
   setButtonsOrientation(Qt::Horizontal);
@@ -59,21 +59,27 @@ SymbolTableDlg::~SymbolTableDlg()
 
 void SymbolTableDlg::displayLine(int& row, QString& symbol, const QString& name, bool& exists)
 {
-  QTableWidgetItem* item = new QTableWidgetItem;         //symbol for UI
+  int count = row;
+  if (count > 9) {
+    count = 9;
+  }
+  (count += 1) *= m_widget->tableWidget->rowHeight(0);
+  this->resize(width(), count + 150);  //               + labels + footer
+  QTableWidgetItem* item = new QTableWidgetItem;  //    symbol for UI
   item->setText(symbol);
-  QTableWidgetItem* item1 = new QTableWidgetItem;        //exist flag for UI
+  QTableWidgetItem* item1 = new QTableWidgetItem;  //   exists flag for UI
   item1->setSizeHint(QSize(60, 30));
   if (exists) {
     item1->setText(i18nc("Confirm", "Yes"));
   } else {
     item1->setText(QString());
   }
-  QTableWidgetItem* item2 = new QTableWidgetItem;        //security name for UI
+  QTableWidgetItem* item2 = new QTableWidgetItem;  //   security name for UI
   item2->setText(name);
   item->setTextAlignment(Qt::AlignLeft);
   item1->setTextAlignment(Qt::AlignLeft);
   m_widget->tableWidget->setRowCount(row + 1);
-  m_widget->tableWidget->setItem(row, 0, item);          //add items to UI here
+  m_widget->tableWidget->setItem(row, 0, item);  //     add items to UI here
   m_widget->tableWidget->setItem(row, 1, item1);
   m_widget->tableWidget->setItem(row, 2, item2);
   m_widget->tableWidget->resizeColumnsToContents();
@@ -81,10 +87,10 @@ void SymbolTableDlg::displayLine(int& row, QString& symbol, const QString& name,
 
 void SymbolTableDlg::slotAccepted()
 {
+  accept();
   connect(this, SIGNAL(namesEdited()), m_csvDialog, SLOT(slotNamesEdited()));
 
   emit namesEdited();
-  accept();
 }
 
 void SymbolTableDlg::slotRejected()

@@ -73,7 +73,6 @@ void InvestmentDlg::init()
 {
   m_csvDialog->m_investProcessing->init();
   m_csvDialog->m_investProcessing->m_investDlg = this;
-
   m_csvDialog->ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
   m_csvDialog->ui->tableWidget->setWordWrap(false);
   m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
@@ -145,7 +144,13 @@ void InvestmentDlg::saveSettings()
     profilesGroup.writeEntry("InvDirectory", pth);
     profilesGroup.writeEntry("DateCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_dateCol->currentIndex());
     profilesGroup.writeEntry("PayeeCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_typeCol->currentIndex());
-    profilesGroup.writeEntry("MemoCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->currentIndex());
+
+    QList<int> list = m_investProcessing->m_memoColList;
+    int posn = 0;
+    if ((posn = list.indexOf(-1)) > -1) {
+      list.removeOne(-1);
+    }
+    profilesGroup.writeEntry("MemoCol", list);
     profilesGroup.writeEntry("QuantityCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_quantityCol->currentIndex());
     profilesGroup.writeEntry("AmountCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_amountCol->currentIndex());
     profilesGroup.writeEntry("PriceCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_priceCol->currentIndex());
@@ -161,9 +166,3 @@ void InvestmentDlg::saveSettings()
   m_csvDialog->ui->tableWidget->clear();//     in case later reopening window, clear old contents now
 }
 
-void InvestmentDlg::resizeEvent(QResizeEvent * event)
-{
-  event->accept();
-  if (!m_investProcessing->inFileName().isEmpty())
-    m_investProcessing->updateScreen();
-}

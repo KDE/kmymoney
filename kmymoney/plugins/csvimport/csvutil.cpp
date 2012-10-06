@@ -143,6 +143,9 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
 
 QString Parse::fieldDelimiterCharacter(int index)
 {
+  if (index == -1) {
+    return 0;
+  }
   return m_fieldDelimiterCharList[index];
 }
 
@@ -253,7 +256,7 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
 
   //  Check if this col/cell contains decimal symbol
 
-  if (decimalIndex == -1) {     //                     there is no decimal
+  if (decimalIndex == -1) {     //                     selected decimal not found
     m_symbolFound = false;
     if ((thouIndex == -1) || (thouIndex == length - 4))  {      //no separator || correct format
       txt.remove(m_thousandsSeparator);
@@ -267,13 +270,13 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
   txt.remove(m_thousandsSeparator);  //    remove unwanted old thousands separator
   //  Found decimal
 
-  m_symbolFound = true;//                        found genuine decimal
+  m_symbolFound = true;  //                            found genuine decimal
 
   if (thouIndex >= 0) {      //                        there was a separator
     if (decimalIndex < thouIndex) {      //            invalid conversion
       m_invalidConversion = true;
     }
-    if (decimalIndex == length - 1) {      //          ...decimal point with no decimal part (strange?)
+    if (decimalIndex == length - 1) {   //             ...decimal point with no decimal part (strange?)
       txt += m_decimalSymbol + "00";
     }
   }//  thouIndex = -1                            no thousands separator

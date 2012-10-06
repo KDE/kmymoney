@@ -86,6 +86,12 @@ public:
   */
 
   void           readSettings();
+
+  /**
+  * This method is called to reload column settings from the UI.
+  */
+  void           reloadUISettings();
+
   void           clearColumnType(int column);
   void           setColumnType(int column, const QString& type);
 
@@ -97,9 +103,9 @@ public:
     * This method is called initially after an input file has been selected.
     * It will call other routines to display file content and to complete the
     * statement import. It will also be called to reposition the file after row
-    * deletion, or to reread following encoding or delimiter change.
+    * selection, or to reread following encoding or delimiter change.
     */
-  void           readFile(const QString& fname, int skipLines);
+  void           readFile(const QString& fname);
 
   /**
   * This method is called when the user clicks 'Clear selections', in order to
@@ -130,7 +136,13 @@ public:
   void           clearComboBoxText();
 
   void           setInFileName(const QString& val);
-  void           updateScreen();
+
+  /**
+  * This method ensures the rows and columns are correctly aligned
+  * when a diffent set of lines is displayed, as, among other things,
+  * the horizontal scroll-bar needs to be taken into account.
+  */
+  void           redrawWindow(int startLine);
 
   QString        columnType(int column);
   QString        invPath();
@@ -161,6 +173,7 @@ public:
   QStringList    m_lineList;
 
   QList<MyMoneyStatement::Security> m_listSecurities;
+  QList< int >   m_memoColList;
 
   int            lastLine();
   int            amountColumn();
@@ -174,6 +187,8 @@ public:
   int            memoColumn();
 
   bool           importNow();
+  bool           m_symbolTableScanned;
+  bool           m_firstRead;
 
   void           setSecurityName(QString name);
 
@@ -181,10 +196,13 @@ public:
   int            m_endLine;
   int            m_fileEndLine;
   int            m_startLine;
+  int            m_topLine;
   int            m_row;
-  int            m_height;
+  int            m_fieldDelimiterIndex;
 
   bool           m_screenUpdated;
+  bool           m_moreCommas;
+  bool           m_importCompleted;
 
 public:
 signals:
@@ -331,7 +349,7 @@ private:
   * This method is called on opening the input file.
   * It will display a line in the UI table widget.
   */
-  void           displayLine(const QString&, int row);
+  void           displayLine(const QString&);
 
   /**
   * This method is called when an input file has been selected.
@@ -393,11 +411,6 @@ private:
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
-  /**
-   * Called after rows have been dropped, to produce the (revised) vertical (row) headers.
-   */
-  void updateRowHeaders(int skp);
-
   struct qifInvestData {
     QString      memo;
     MyMoneyMoney price;
@@ -427,9 +440,9 @@ private:
   bool           m_typeSelected;
   bool           m_symbolSelected;
   bool           m_detailSelected;
+  bool           m_needFieldDelimiter;
 
   int            m_dateFormatIndex;
-  int            m_fieldDelimiterIndex;
   int            m_maxColumnCount;
   int            m_encodeIndex;
   int            m_payeeColumn;
@@ -486,6 +499,7 @@ private slots:
 
   void           securityNameSelected(const QString& name);
   void           securityNameEdited();
+  void           slotVertScrollBarAction(int val);
 
   int            validateNewColumn(const int& col, const QString& type);
 

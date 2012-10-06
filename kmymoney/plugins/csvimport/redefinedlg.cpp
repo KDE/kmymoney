@@ -170,6 +170,7 @@ void RedefineDlg::slotRejected()
 
 int RedefineDlg::checkValid(const QString& type, QString info)
 {
+  int ret = -1;
   m_okTypeList.clear();
   m_maxCol = m_columnList.count();
   this->enableButtonOk(false);
@@ -179,7 +180,7 @@ int RedefineDlg::checkValid(const QString& type, QString info)
       (m_amountColumn < 1) || (m_amountColumn >= m_maxCol)) {
     info = i18n("There is a problem with the columns selected\nfor 'Price', 'Quantity and 'Amount'.\n\
 You will need to reselect those columns.");
-    int ret = suspectType(info);
+    ret = suspectType(info);
     return ret;
   }
   if ((type == "reinvdiv") || (type == "buy") || (type == "sell")) {
@@ -195,7 +196,7 @@ You will need to reselect those columns.");
       this->enableButtonOk(true);
       return KMessageBox::Ok;
     }
-    int ret = suspectType(info);
+    ret = suspectType(info);
     return ret;
   } else if ((type.toLower() == "divx") || (type.toLower() == "intinc")) {
     m_widget->label_info->setText("OK");
@@ -210,7 +211,7 @@ You will need to reselect those columns.");
       return KMessageBox::Ok;
     }
     //                    validity suspect
-    int ret = suspectType(info);
+    ret = suspectType(info);
     return ret;
   } else if ((type == "shrsin") || (type == "shrsout")) {
     m_widget->label_info->setText("OK");
@@ -221,7 +222,7 @@ You will need to reselect those columns.");
       return KMessageBox::Ok;
     }
     m_okTypeList.clear();
-    int ret = suspectType(info);
+    ret = suspectType(info);
     return ret;
   }
   return KMessageBox::Cancel;
@@ -231,7 +232,7 @@ int RedefineDlg::suspectType(const QString& info)
 {
   displayLine(info);
   buildOkTypeList();
-  for (int i = 0; i < m_typesList.count() ; i++) {    //m_okTypeList.count()
+  for (int i = 0; i < m_typesList.count() ; i++) {  //  m_okTypeList.count()
     if (m_okTypeList.contains(m_typesList[i])) {
       m_widget->kcombobox_Actions->setItemIcon(i, m_iconYes);
     } else {
@@ -286,9 +287,8 @@ void RedefineDlg::updateWindow()
 {
   int hght = 6 + (m_widget->tableWidget->rowHeight(0) * 2);
   hght += m_widget->tableWidget->horizontalHeader()->height();//  frig factor for horiz. headers?
-
   if (m_maxWidth > (m_mainWidth - 12)) {
-    hght += m_widget->tableWidget->horizontalScrollBar()->height() - 2;//  ....and for hor. scroll bar
+    hght += 15;//  ....and for hor. scroll bar
   }
   m_widget->tableWidget->setFixedHeight(hght);
 }

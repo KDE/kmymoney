@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>828</width>
-    <height>283</height>
+    <height>240</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -65,15 +65,20 @@ Please select an appropriate entry.</string>
      <property name="minimumSize">
       <size>
        <width>640</width>
-       <height>64</height>
+       <height>67</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>16777215</height>
+       <height>67</height>
       </size>
      </property>
+     <property name="rowCount">
+      <number>2</number>
+     </property>
+     <row/>
+     <row/>
     </widget>
    </item>
    <item>

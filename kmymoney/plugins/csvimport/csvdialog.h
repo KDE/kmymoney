@@ -18,11 +18,11 @@
 #ifndef CSVDIALOG_H
 #define CSVDIALOG_H
 
-#include <QWidget>
-#include <QWizard>
-#include <QLabel>
-#include <QVBoxLayout>
-#include <QScrollBar>
+#include <QtGui/QWidget>
+#include <QtGui/QWizard>
+#include <QtGui/QLabel>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QScrollBar>
 
 #include <KComboBox>
 
@@ -70,7 +70,6 @@ public:
   Ui::CSVDialog*      ui;
   QVBoxLayout*        m_wizardLayout;
   QScrollBar*         m_vScrollBar;
-  QScrollBar*         m_hScrollBar;
 
   IntroPage*       m_pageIntro;
   SeparatorPage*   m_pageSeparator;
@@ -90,6 +89,7 @@ public:
 
   QList<MyMoneyStatement> statements;
   QList<QTextCodec *>     m_codecs;
+  QList<int>     m_columnCountList;
 
   QStringList    m_shrsinList;
   QStringList    m_divXList;
@@ -138,6 +138,10 @@ public:
   bool           m_firstPass;
   bool           m_firstRead;
   bool           m_columnsNotSet;
+  bool           m_heightWasIncreased;
+  bool           m_separatorPageVisible;
+  bool           m_delimiterError;
+  bool           m_needFieldDelimiter;
 
   int            m_dateFormatIndex;
   int            m_debitFlag;
@@ -147,7 +151,18 @@ public:
   int            m_endColumn;
   int            m_flagCol;
   int            m_row;
+  int            m_tableRows;
+  int            m_rowHght;
+  int            m_tableHeight;
   int            m_activityType;
+  int            m_initHeight;
+  int            m_startHeight;
+  int            m_hScrollBarHeight;
+  int            m_header;
+  int            m_borders;
+  int            m_possibleDelimiter;
+  int            m_lastDelimiterIndex;
+  int            m_errorColumn;
 
   KUrl           m_url;
   KComboBox*     m_comboBoxEncode;
@@ -160,8 +175,8 @@ public:
   QString          decimalSymbol();
   void             setDecimalSymbol(int val);
   QString          currentUI();
+  QStringList      columnTypeList();
 
-  void             clearColumnType(int column);
   void             clearPreviousColumn();
   bool             amountSelected();
   void             setAmountSelected(bool val);
@@ -214,7 +229,7 @@ public:
    * This method is called when an input file has been selected, to clear
    * previous column selections.
    */
-  void           clearColumnTypes();
+  void           clearColumnTypesList();
 
   int            columnNumber(const QString& msg);
 
@@ -224,7 +239,7 @@ public:
     * statement import. It will also be called to reposition the file after row
     * deletion, or to reread following encoding or delimiter change.
     */
-  void           readFile(const QString& fname, int skipLines);
+  void           readFile(const QString& fname);
 
   /**
   * This method is called on opening the plugin.
@@ -262,7 +277,7 @@ public:
   * This method is called on opening the input file.
   * It will display a line in the UI table widget.
   */
-  void           displayLine(const QString& data, int row);
+  void           displayLine(const QString& data);
 
   /**
   * This method is called when the user clicks 'import'.
@@ -288,6 +303,11 @@ public:
   void           readSettings();
 
   /**
+  * This method is called to reload column settings from the UI.
+  */
+  void           reloadUISettings();
+
+  /**
   * This method is called when one of the radiobuttons is checked, to populate
   * the sourceNames combobox from the resource file.
   */
@@ -301,26 +321,28 @@ public:
   void           readSettingsProfiles();
 
   /**
-  * This method is called if the field delimiter is changed after file loading,
-  * in order to load column settings again.
-  */
-  void           readColumnSettings();
-
-  /**
   * This method is called when the user chooses to add a new profile, It achieves this by copying
   * the necessary basic parameters from an existing profile called "Profiles-New Profile###"
   * in the resource file,
   */
   void           createProfile(QString newName);
 
-  void           updateScreen();
+  void           redrawWindow(int startLine);
   void           showStage();
+
+  /**
+   *  Clear cells background.
+   */
+  void           clearCellsBackground();
+  void           clearColumnTypeList();
+  void           resizeEvent(QResizeEvent * event);
+  void           setMemoColSelections();
 
   int            endColumn();
   int            fieldDelimiterIndex();
   int            lastLine();
   int            startLine();
-  int            textDelimiterIndex();
+  void           setStartLine(int);
 
   bool           importNow();
 
@@ -347,8 +369,7 @@ public slots:
   void           slotIdChanged(int id);
   void           slotNamesEdited();
   void           slotBackButtonClicked();
-  void           slotHorScrollBarValue(int/* val*/);
-  void           slotVertScrollBarValue(int/* val*/);
+  void           slotVertScrollBarAction(int val);
 
   /**
     * This method is called when the user clicks 'Open File', and opens
@@ -388,6 +409,8 @@ public slots:
   */
   void           decimalSymbolSelected(int val);
 
+  void           markUnwantedRows();
+
 private:
   QStringList      m_columnTypeList;  //  holds field types - date, payee, etc.
 
@@ -395,6 +418,7 @@ private:
   QString          m_decimalSymbol;
   QString          m_previousType;
   QString          m_thousandsSeparator;
+  QStringList      m_lineList;
 
   bool             m_amountSelected;
   bool             m_creditSelected;
@@ -422,10 +446,16 @@ private:
   int              m_endLine;
   int              m_fileEndLine;
   int              m_startLine;
+  int              m_topLine;
   int              m_curId;
   int              m_lastId;
   int              m_lineNum;
   int              m_memoColCopy;
+  int              m_lastHeight;
+  int              m_round;
+  int              m_minimumHeight;
+  int              m_windoWidth;
+  int              m_initialHeight;
 
   QBrush           m_clearBrush;
   QBrush           m_colorBrush;
@@ -436,12 +466,8 @@ private:
 
   QList<QLabel*>   m_stageLabels;
   QList<int>       m_memoColList;
-  QList<int>       m_columnCountList;
-
-  void             updateRowHeaders(int skp);
 
   void             closeEvent(QCloseEvent *event);
-  void             resizeEvent(QResizeEvent * event);
   void             restoreBackground();
   int              validateColumn(const int& col, QString& type);
 
@@ -504,7 +530,6 @@ private slots:
   * This method is called when the user edits the startLine setting.
   */
   void           startLineChanged(int val);
-  void           startLineEdited();
 
   /**
   * This method is called when the Memo column is activated.
@@ -579,10 +604,10 @@ public:
   bool                m_set;
 
   int                 addItem(QString txt);
+  int                 m_index;
 
   QMap<QString, int>  m_map;
   QMap<QString, QString>  m_mapFileType;
-  int                 m_index;
 
 signals:
   void             signalBankClicked(bool);
@@ -615,7 +640,6 @@ private slots:
   void             slotLineEditingFinished();
   void             slotRadioButton_bankClicked();
   void             slotRadioButton_investClicked();
-
 };
 
 
@@ -639,17 +663,20 @@ public:
   void                initializePage();
   bool                isComplete() const;
 
+public slots:
+  void                delimiterActivated(int /*index*/);
+
+signals:
+  void                completeChanged();
+
 private:
   void                cleanupPage();
   bool                validatePage();
   int                 nextId() const;
 
 private slots:
-  void                delimiterChanged();
 
 signals:
-  void                completeChanged();
-
 };
 
 namespace Ui
@@ -678,9 +705,9 @@ private:
   CSVDialog*          m_dlg;
 
   void                initializePage();
+  void                cleanupPage();
   int                 nextId() const;
   bool                isComplete() const;
-  void                cleanupPage();
   bool                m_reloadNeeded;
 
 private slots:
@@ -788,6 +815,9 @@ signals:
   void                importInvestment();
 
 public slots:
+  /**
+  * This method is called when the user clicks the 'Import CSV' button.
+  */
   void                slotImportClicked();
   void                slotImportValid();
 

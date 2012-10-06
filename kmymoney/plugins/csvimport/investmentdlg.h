@@ -53,17 +53,15 @@ public:
   SymbolTableDlg*    m_redefine;
   InvestProcessing*  m_investProcessing;
 
+  int                m_round;
+  int                m_lastHeight;
+
   void               init();
   void               saveSettings();
 
 public slots:
 
 private:
-
-  /**
-  * This method will receive resize events, calling updateScreen().
-  */
-  void           resizeEvent(QResizeEvent * event);
 
 private slots:
 

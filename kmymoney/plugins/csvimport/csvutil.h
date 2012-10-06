@@ -50,6 +50,7 @@ public:
    */
   QStringList      parseLine(const QString& data);
   QStringList      parseFile(const QString& buf, int strt, int end);
+  QStringList      m_fieldDelimiterCharList;
 
   QString          fieldDelimiterCharacter(int index);
   QString          decimalSymbol(int index);
@@ -90,7 +91,6 @@ public slots:
 private :
 
   QStringList      m_decimalSymbolList;
-  QStringList      m_fieldDelimiterCharList;
   QStringList      m_textDelimiterCharList;
   QStringList      m_thousandsSeparatorList;
 
@@ -136,4 +136,5 @@ private:
   QString          m_interestId;
   bool             m_scannedCategories;
 };
+
 #endif
