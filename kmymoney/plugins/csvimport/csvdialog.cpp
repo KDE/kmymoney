@@ -1179,7 +1179,7 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
     QString errMsg = i18n("<center>The columns selected are invalid.</center>"
                           "There must an amount or debit and credit fields, plus date and payee fields.");
     if (m_pageIntro->ui->checkBoxSkipSetup->isEnabled()) {
-      errMsg += i18n("<center>You probably need to reset 'Skip setup'<.</center>");
+      errMsg += i18n("<center>You probably need to reset 'Skip setup'.</center>");
     }
     KMessageBox::information(0, errMsg);
     m_importError = true;
