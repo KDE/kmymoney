@@ -34,8 +34,8 @@
   <!ENTITY fdl-licence SYSTEM "fdl-licence">
 ]>
 
-<book lang="&language;">
-<bookinfo>
+<book id="phb" lang="&language;">
+<book id="phb"info>
 <title>&kappname; Project Handbook</title>
 <subtitle>Version &version;</subtitle>
 

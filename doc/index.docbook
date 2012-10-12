@@ -118,9 +118,9 @@
   <!ENTITY installation SYSTEM "installation.docbook">
 ]>
 
-<book lang="&language;">
+<book id="kmymoney" lang="&language;">
 
-<bookinfo>
+<book id="kmymoney"info>
 <title>The &kappname; Handbook</title>
 <subtitle>for &kappname; version 4.6</subtitle>
 
