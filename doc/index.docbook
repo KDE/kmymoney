@@ -120,7 +120,7 @@
 
 <book id="kmymoney" lang="&language;">
 
-<book id="kmymoney"info>
+<bookinfo>
 <title>The &kappname; Handbook</title>
 <subtitle>for &kappname; version 4.6</subtitle>
 

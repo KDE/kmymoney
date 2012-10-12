@@ -35,7 +35,7 @@
 ]>
 
 <book id="phb" lang="&language;">
-<book id="phb"info>
+<bookinfo>
 <title>&kappname; Project Handbook</title>
 <subtitle>Version &version;</subtitle>
 
