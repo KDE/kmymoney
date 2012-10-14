@@ -730,27 +730,44 @@ const QString MyMoneyQifReader::extractLine(const QChar& id, int cnt)
   return QString();
 }
 
-void MyMoneyQifReader::extractSplits(QList<qSplit>& listqSplits) const
+bool MyMoneyQifReader::extractSplits(QList<qSplit>& listqSplits) const
 {
 //     *** With apologies to QString MyMoneyQifReader::extractLine ***
 
   QStringList::ConstIterator it;
+  bool ret = false;
+  bool memoPresent = false;
+  int neededCount = 0;
+  qSplit q;
 
   for (it = m_qifEntry.constBegin(); it != m_qifEntry.constEnd(); ++it) {
-    if ((*it)[0] == 'S') {
-      qSplit q;
-      q.m_strCategoryName = (*it++).mid(1);       //   'S'
+    if (((*it)[0] == 'S') || ((*it)[0] == '$') || ((*it)[0] == 'E')) {
+      memoPresent = false;  //                      in case no memo line in this split
       if ((*it)[0] == 'E') {
-        q.m_strMemo = (*it++).mid(1); //           'E'
+        q.m_strMemo = (*it).mid(1);  //             'E' = Memo
         d->fixMultiLineMemo(q.m_strMemo);
+        memoPresent = true;  //                     This transaction contains memo
+      } else if ((*it)[0] == 'S') {
+          q.m_strCategoryName = (*it).mid(1);  //   'S' = CategoryName
+          neededCount ++;
+      } else if ((*it)[0] == '$') {
+          q.m_amount = (*it).mid(1);  //            '$' = Amount
+          neededCount ++;
       }
-      if ((*it)[0] == '$') {
-        q.m_amount = (*it).mid(1); //              '$'
+      if (neededCount > 1) {  //                         CategoryName & Amount essential
+        listqSplits += q;  //                       Add valid split
+        if (!memoPresent) {  //                     If no memo, clear previous
+          q.m_strMemo.clear();
+        }
+        qSplit q;  //                               Start new split
+        neededCount = 0;
+        ret = true;
       }
-      listqSplits += q;
     }
   }
+  return ret;
 }
+
 #if 0
 void MyMoneyQifReader::processMSAccountEntry(const MyMoneyAccount::accountTypeE accountType)
 {
@@ -1131,7 +1148,11 @@ void MyMoneyQifReader::processTransactionEntry(void)
   s1.m_strMemo = tr.m_strMemo;
   // tr.m_listSplits.append(s1);
 
-  if (extractLine('$').isEmpty()) {
+  //             split transaction
+  //      ****** ensure each field is ******
+  //      *   attached to correct split    *
+  QList<qSplit> listqSplits;
+  if (! extractSplits(listqSplits)) {
     MyMoneyAccount account;
     // use the same values for the second split, but clear the ID and reverse the value
     MyMoneyStatement::Split s2 = s1;
@@ -1184,14 +1205,8 @@ void MyMoneyQifReader::processTransactionEntry(void)
     }
 
   } else {
-    // split transaction
-    QList<qSplit> listqSplits;
-
-    extractSplits(listqSplits);   //      ****** ensure each field is ******
-    //      *   attached to correct split    *
     int   count;
-
-    for (count = 1; !extractLine('$', count).isEmpty(); ++count) {
+    for (count = 1; count <= listqSplits.count(); ++count) {                     // Use true splits count
       MyMoneyStatement::Split s2 = s1;
       s2.m_amount = (-m_qifProfile.value('$', listqSplits[count-1].m_amount));   // Amount of split
       s2.m_strMemo = listqSplits[count-1].m_strMemo;                             // Memo in split
@@ -1203,7 +1218,6 @@ void MyMoneyQifReader::processTransactionEntry(void)
       } else {
         pos = tmp.lastIndexOf("--");
         if (pos != -1) {
-///          t.setValue("Dialog", tmp.mid(pos+2));
           tmp = tmp.left(pos);
         }
         tmp = tmp.trimmed();

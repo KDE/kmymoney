@@ -77,7 +77,6 @@ private:
     QString      m_amount;
   };
 
-
 public:
   MyMoneyQifReader();
   ~MyMoneyQifReader();
@@ -256,7 +255,7 @@ private:
     * searching for split entries, which it extracts into a struct qSplit and
     * stores all splits found in @p listqSplits .
     */
-  void extractSplits(QList<qSplit>& listqSplits) const;
+  bool extractSplits(QList<qSplit>& listqSplits) const;
 
   enum SelectCreateMode {
     Create = 0,
