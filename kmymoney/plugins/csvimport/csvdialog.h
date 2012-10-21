@@ -341,6 +341,7 @@ public:
   int            endColumn();
   int            fieldDelimiterIndex();
   int            lastLine();
+  int            fileLastLine();
   int            startLine();
   void           setStartLine(int);
 
@@ -524,7 +525,6 @@ private slots:
   * This method is called when the user edits the lastLine setting.
   */
   void           endLineChanged(int val);
-  void           endLineChanged();
 
   /**
   * This method is called when the user edits the startLine setting.

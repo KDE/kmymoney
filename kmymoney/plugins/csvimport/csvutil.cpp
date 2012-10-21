@@ -119,7 +119,6 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
       }
       outBuffer << tmpBuffer;
       tmpBuffer.clear();
-
       //                                       look for start of wanted data
       //  if first pass or if not at last line, proceed
       if ((!end == 0) && (lineCount >= end)) {      //  m_endLine is set from UI after first pass

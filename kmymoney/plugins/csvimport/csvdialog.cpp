@@ -236,6 +236,8 @@ void CSVDialog::init()
   m_pageBanking->ui->comboBoxBnk_debitCol->setMaxVisibleItems(12);
 
   m_vScrollBar = ui->tableWidget->verticalScrollBar();
+  m_vScrollBar->setPageStep(10);
+  m_vScrollBar->setTracking(false);
 
   int screenWidth = QApplication::desktop()->width();
   int screenHeight = QApplication::desktop()->height();
@@ -280,9 +282,7 @@ void CSVDialog::init()
 
   connect(m_pageInvestment->ui->comboBoxInv_securityName, SIGNAL(activated(int)), m_pageInvestment, SLOT(slotsecurityNameChanged(int)));
 
-  connect(m_pageLinesDate->ui->spinBox_skip, SIGNAL(editingFinished()), m_investProcessing, SLOT(startLineChanged()));
   connect(m_pageLinesDate->ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), this, SLOT(endLineChanged(int)));
-  connect(m_pageLinesDate->ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), m_investProcessing, SLOT(endLineChanged(int)));
   connect(m_pageLinesDate->ui->comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), this, SLOT(dateFormatSelected(int)));
   connect(m_pageLinesDate->ui->comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), m_convertDate, SLOT(dateFormatSelected(int)));
 
@@ -301,7 +301,6 @@ void CSVDialog::init()
   connect(m_wizard, SIGNAL(currentIdChanged(int)), this, SLOT(slotIdChanged(int)));
 
   connect(this, SIGNAL(isImportable()), m_pageCompletion, SLOT(slotImportValid()));
-  connect(this, SIGNAL(namesEdited()), this, SLOT(slotNamesEdited()));
 
   m_investmentDlg->init();
 }//  CSVDialog
@@ -417,8 +416,9 @@ void CSVDialog::readSettings()
 
     //    m_encodeIndex = profilesGroup.readEntry("Encoding", 0);//  Read earlier in fileDialog()
 
-    m_startLine = profilesGroup.readEntry("StartLine", -1) + 1;
-    m_pageLinesDate->ui->spinBox_skip->setValue(m_startLine);
+    //    m_startLine = profilesGroup.readEntry("StartLine", -1) + 1;//  Read earlier in fileDialog()
+    //    ...otherwises causes problem when may have been edited earlier in readFile()
+    //    ...if start line was > end line.
     //  Keep present delimiter if 'Keep' chosen
     //  otherwise....
     if (m_needFieldDelimiter) {  //  no columnCount error
@@ -992,17 +992,19 @@ void CSVDialog::markUnwantedRows()
   }
   int first = m_pageLinesDate->ui->spinBox_skip->value()- 1;
   int last = m_pageLinesDate->ui->spinBox_skipToLast->value() - 1;
-
-  clearCellsBackground();
   //
   //  highlight unwanted lines instead of not showing them.
   //
+  QBrush brush;
   for (int row = 0; row < ui->tableWidget->rowCount(); row++) {
     if ((row < first) || (row >last)) {
-      for (int col = 0; col < ui->tableWidget->columnCount(); col ++) {
-        if (ui->tableWidget->item(row, col) != 0) {
-          ui->tableWidget->item(row, col)->setBackground(m_errorBrush);
-        }
+      brush = m_errorBrush;
+    } else {
+      brush = m_clearBrush;
+    }
+    for (int col = 0; col < ui->tableWidget->columnCount(); col ++) {
+      if (ui->tableWidget->item(row, col) != 0) {
+        ui->tableWidget->item(row, col)->setBackground(brush);
       }
     }
   }
@@ -1264,7 +1266,7 @@ void CSVDialog::slotImportClicked()
     m_screenUpdated = true;
   } else {
     QString errMsg = i18n("<center>There must an amount or debit and credit fields, plus date and payee fields.</center>");
-    if (m_pageIntro->ui->checkBoxSkipSetup->isEnabled()) {
+    if (m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
       errMsg += i18n("<center>As you had skipped Setup, the wizard will now return you to the setups.</center>");
     }
     KMessageBox::information(0, errMsg);
@@ -1450,7 +1452,7 @@ void CSVDialog::redrawWindow(int startLine)
       m_topLine = 0;
     }
   }
-  m_vScrollBar->setMaximum(m_fileEndLine);
+  m_vScrollBar->setMaximum(m_fileEndLine - m_vScrollBar->pageStep());
   m_vScrollBar->setValue(m_topLine);  // set screen to correspond to startline on import or widths may shrink
   m_maxRowWidth = 0;
   m_rowWidth = 0;
@@ -1693,6 +1695,7 @@ int CSVDialog::validateColumn(const int& col, QString& type)
 void CSVDialog::amountColumnSelected(int col)
 {
   if (col < 0) {      //                                 it is unset
+    m_wizard->button(QWizard::NextButton)->setEnabled(false);
     return;
   }
   QString type = "amount";
@@ -1737,6 +1740,7 @@ void CSVDialog::debitCreditRadioClicked(bool checked)
 void CSVDialog::creditColumnSelected(int col)
 {
   if (col < 0) {      //                                                   it is unset
+    m_wizard->button(QWizard::NextButton)->setEnabled(false);
     return;
   }
   QString type = "credit";
@@ -1763,6 +1767,7 @@ void CSVDialog::creditColumnSelected(int col)
 void CSVDialog::debitColumnSelected(int col)
 {
   if (col < 0) {      //                                    it is unset
+    m_wizard->button(QWizard::NextButton)->setEnabled(false);
     return;
   }
   QString type = "debit";
@@ -1789,6 +1794,7 @@ void CSVDialog::debitColumnSelected(int col)
 void CSVDialog::dateColumnSelected(int col)
 {
   if (col < 0) {      //                                                   it is unset
+    m_wizard->button(QWizard::NextButton)->setEnabled(false);
     return;
   }
   QString type = "date";
@@ -1880,6 +1886,7 @@ void CSVDialog::memoColumnSelected(int col)
 void CSVDialog::payeeColumnSelected(int col)
 {
   if (col < 0) {      //                              it is unset
+    m_wizard->button(QWizard::NextButton)->setEnabled(false);
     return;
   }
   QString type = "payee";
@@ -2009,6 +2016,7 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
       ui->tableWidget->item(row, col)->setBackground(m_clearBrush);
     }
   }
+
   int errorRow = 0;
   if (type == "amount" || type == "credit" || type == "debit" || type == "price" || type == "quantity") {
 
@@ -2263,6 +2271,7 @@ void CSVDialog::startLineChanged(int val)
     return;
   }
   m_startLine = val;
+  m_pageLinesDate->ui->spinBox_skipToLast->setMinimum(m_startLine);//  need to update UI
   if (!m_inFileName.isEmpty()) {
     m_vScrollBar->setValue(m_startLine - 1);
       markUnwantedRows();
@@ -2285,12 +2294,12 @@ void CSVDialog::endLineChanged(int val)
   if (m_fileType != "Banking") {
     return;
   }
-  if (val > m_fileEndLine) {
-    m_pageLinesDate->ui->spinBox_skipToLast->setValue(val);
+  int tmp = m_pageLinesDate->ui->spinBox_skipToLast->value();
+  if (tmp > m_fileEndLine) {
+    m_pageLinesDate->ui->spinBox_skipToLast->setValue(m_fileEndLine);
     return;
   }
-  if (val < m_startLine) {
-    m_pageLinesDate->ui->spinBox_skipToLast->setValue(m_startLine);
+  if (tmp < m_startLine) {
     return;
   }
   ui->tableWidget->resizeColumnsToContents();
@@ -2299,21 +2308,22 @@ void CSVDialog::endLineChanged(int val)
   m_endLine = val;
   if (!m_inFileName.isEmpty()) {
     markUnwantedRows();
-    redrawWindow(val - 9);
+    int strt = val - 9;
+    if (strt < 0) {  //  start line too low
+      strt = 0;
+    }
+    redrawWindow(strt);
   }
-}
-
-void CSVDialog::endLineChanged()
-{
-  if (m_fileType != "Banking") {
-    return;
-  }
-  m_endLine = m_pageLinesDate->ui->spinBox_skipToLast->value();
 }
 
 int CSVDialog::lastLine()
 {
   return m_endLine;
+}
+
+int CSVDialog::fileLastLine()
+{
+  return m_fileEndLine;
 }
 
 void CSVDialog::setMaxColumnCount(int val)
@@ -2411,7 +2421,7 @@ void CSVDialog::slotNamesEdited()
   int row = 0;
   int symTableRow = 0;
 
-  for (row = m_investProcessing->m_startLine - 1; row < ui->tableWidget->rowCount(); row ++) {
+  for (row = m_investProcessing->m_startLine - 1; row < m_investProcessing->m_endLine; row ++) {
     if (ui->tableWidget->item(row, m_investProcessing->symbolColumn()) == 0) {
       continue;
     }
@@ -2520,7 +2530,8 @@ void CSVDialog::slotVertScrollBarAction(int val)
     case QAbstractSlider::SliderToMaximum://6
       break;
     case QAbstractSlider::SliderMove:     //7
-      return;
+      m_topLine = m_vScrollBar->sliderPosition();
+      break;
     case QAbstractSlider::SliderNoAction: //0
       break;
   }
@@ -3239,6 +3250,7 @@ void BankingPage::initializePage()
   setField("source", index);
   m_dlg->m_fileType = "Banking";
   m_bankingPageInitialized = true;  //            Allow checking of columns now.
+  m_dlg->m_pageLinesDate->ui->spinBox_skipToLast->setMaximum(m_dlg->fileLastLine());
 }
 
 int BankingPage::nextId() const
@@ -3266,9 +3278,7 @@ void BankingPage::slotDateColChanged(int col)
 void BankingPage::slotPayeeColChanged(int col)
 {
   setField("payeeColumn", col);
-  if (col != m_dlg->m_pageBanking->ui->comboBoxBnk_payeeCol->currentIndex()) {
-    emit completeChanged();
-  }
+  emit completeChanged();
 }
 
 void BankingPage::slotDebitColChanged(int col)
@@ -3453,14 +3463,14 @@ void LinesDatePage::initializePage()
   layout << QWizard::Stretch << QWizard::BackButton <<  QWizard::NextButton <<  QWizard::CancelButton;
   wizard()->setButtonLayout(layout);
   m_isColumnSelectionComplete = true;
+
   if (m_dlg->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
     validatePage();
   }
   if (m_dlg->m_fileType == "Banking") {
-    m_dlg->redrawWindow(0);
+    m_dlg->m_pageLinesDate->ui->spinBox_skipToLast->setMinimum(m_dlg->startLine());
   } else if (m_dlg->m_fileType == "Invest") {
-    //
-    //  Allow editing of security names.
+    m_dlg->m_pageLinesDate->ui->spinBox_skipToLast->setMinimum(m_dlg->m_investProcessing->m_startLine);
   }
 }
 
@@ -3582,6 +3592,9 @@ bool LinesDatePage::validatePage()
     QString symbl;
     QString securityName;
     for (int row = m_dlg->m_investProcessing->m_startLine -1; row < m_dlg->ui->tableWidget->rowCount(); row++) {
+      if (row >= m_dlg->m_investProcessing->m_endLine) {  //  No need to scan further lines
+        break;
+      }
       int col = m_dlg->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex();
       if (m_dlg->ui->tableWidget->item(row, col) == 0) {
         continue;
@@ -3593,7 +3606,6 @@ bool LinesDatePage::validatePage()
       }
       int detail = m_dlg->m_pageInvestment->ui->comboBoxInv_detailCol->currentIndex();
       securityName = m_dlg->ui->tableWidget->item(row, detail)->text().toLower();
-      bool done = false;
       // Check if we already have the security on file.
       // Just use the symbol for matching, because the security name
       // field is unstandardised and very variable.
@@ -3623,9 +3635,6 @@ bool LinesDatePage::validatePage()
       m_dlg->m_symbolTableDlg->displayLine(symTableRow, symbl, name, exists);
       m_dlg->m_investProcessing->m_symbolsList << symbl;
       m_dlg->m_investProcessing->m_map.insert(symbl, name);
-      if (done) {
-        break;
-      }
     }
     if (symTableRow > -1) {
       m_dlg->m_investProcessing->m_symbolTableScanned = true;

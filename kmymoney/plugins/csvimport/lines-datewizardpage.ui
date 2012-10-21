@@ -161,7 +161,8 @@ p, li { white-space: pre-wrap; }
             </size>
            </property>
            <property name="toolTip">
-            <string>Enter the number of the first transaction line.</string>
+            <string>Enter the number of the first transaction line.
+Will not accept value greater than the End Line value.</string>
            </property>
            <property name="minimum">
             <number>1</number>

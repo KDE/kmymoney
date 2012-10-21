@@ -836,6 +836,7 @@ void InvestProcessing::readFile(const QString& fname)
   //  Start parsing the buffer
   //
   m_lineList = m_parse->parseFile(m_buf, 1, 0);  //                               Changed to display whole file.
+  disconnect(m_csvDialog->m_pageLinesDate->ui->spinBox_skip, 0, 0, 0);  //  Avoid disruption from start/endline changes.
   disconnect(m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast, 0, 0, 0);  //  Avoid disruption from start/endline changes.
 
   if (m_firstRead) {
@@ -943,7 +944,9 @@ void InvestProcessing::readFile(const QString& fname)
   }
 
   m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast->setValue(m_endLine);
+  connect(m_csvDialog->m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
   connect(m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), this, SLOT(endLineChanged(int)));
+
   m_csvDialog->ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Fixed);
   //  Display the buffer
   for (int line = 0; line < m_lineList.count(); line++) {
@@ -958,13 +961,13 @@ void InvestProcessing::readFile(const QString& fname)
     //  user now ready to continue && line is in wanted range
     //
     if ((m_importNow) && (line >= m_startLine - 1) && (line <= m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast->value() - 1)) {
-      reloadUISettings();  //           Need to reload column settings
+      reloadUISettings();  //                            Need to reload column settings
       int ret = processInvestLine(m_inBuffer, line);  // parse input line
       if (ret == KMessageBox::Ok) {
         if (m_brokerage) {
-          investCsvImport(stBrokerage);  //           add non-investment transaction to Brokerage statement
+          investCsvImport(stBrokerage);  //              add non-investment transaction to Brokerage statement
         } else {
-          investCsvImport(st);  //                    add investment transaction to statement
+          investCsvImport(st);  //                       add investment transaction to statement
         }
       } else {
         m_importNow = false;
@@ -977,6 +980,7 @@ void InvestProcessing::readFile(const QString& fname)
   m_csvDialog->m_header = m_csvDialog->ui->tableWidget->horizontalHeader()->height() + 6;
   m_csvDialog->m_tableHeight = m_csvDialog->m_header + m_csvDialog->m_rowHght * m_csvDialog->m_tableRows + m_csvDialog->m_borders;
   m_csvDialog->ui->tableWidget->resizeColumnsToContents();
+
   redrawWindow(m_startLine - 1);
 
   if ((m_importNow) && (m_csvDialog->m_fileType == "Invest")) {
@@ -1671,11 +1675,13 @@ void InvestProcessing::startLineChanged(int val)
     return;
   }
   m_startLine = val;
+  m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast->setMinimum(m_csvDialog->m_investProcessing->m_startLine);  //  need to update UI
+
   if (!m_inFileName.isEmpty()) {
     m_csvDialog->m_vScrollBar->setValue(m_startLine - 1);
     m_csvDialog->markUnwantedRows();
+    redrawWindow(m_startLine - 1);
   }
-  redrawWindow(m_startLine - 1);
 }
 
 void InvestProcessing::startLineChanged()
@@ -1688,12 +1694,12 @@ void InvestProcessing::endLineChanged(int val)
   if (m_csvDialog->m_fileType != "Invest") {
     return;
   }
-  if (val > m_fileEndLine) {
-    m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast->setValue(val);
+  int tmp = m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast->value();
+  if (tmp > m_fileEndLine) {
+    m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast->setValue(m_fileEndLine);
     return;
   }
-  if (val < m_startLine) {
-    m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast->setValue(m_startLine);
+  if (tmp < m_startLine) {
     return;
   }
   m_csvDialog->m_pageLinesDate->m_trailerLines = m_fileEndLine - val;
@@ -1701,7 +1707,11 @@ void InvestProcessing::endLineChanged(int val)
   m_csvDialog->ui->tableWidget->verticalScrollBar()->setValue(val);
   if (!m_inFileName.isEmpty()) {
     m_csvDialog->markUnwantedRows();
-    redrawWindow(val - 9);
+    int strt = val - 9;
+    if (strt < 0) {  //  start line too low
+      strt = 0;
+    }
+    redrawWindow(strt);
   }
 }
 
@@ -1893,7 +1903,6 @@ void InvestProcessing::readSettings()
     m_previousColumn = -1;
     m_previousType = -1;
   }
-  connect(m_csvDialog->m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
 }
 
 void InvestProcessing::reloadUISettings()
@@ -1931,7 +1940,7 @@ void InvestProcessing::redrawWindow(int startLine)
     m_topLine = 0;
   }
 
-  m_csvDialog->m_vScrollBar->setMaximum(m_fileEndLine);
+  m_csvDialog->m_vScrollBar->setMaximum(m_fileEndLine - m_csvDialog->m_vScrollBar->pageStep());
   m_csvDialog->m_vScrollBar->setValue(m_topLine);
   m_maxRowWidth = 0;
   m_rowWidth = 0;
@@ -2061,12 +2070,12 @@ void InvestProcessing::slotVertScrollBarAction(int val)
       break;
     case QAbstractSlider::SliderToMaximum://6
       break;
-    case QAbstractSlider::SliderMove://7
-      return;
-    case QAbstractSlider::SliderNoAction://0
+    case QAbstractSlider::SliderMove:     //7
+      m_topLine = m_csvDialog->m_vScrollBar->sliderPosition();
+      break;
+    case QAbstractSlider::SliderNoAction: //0
       break;
   }
-  m_csvDialog->ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
   redrawWindow(m_topLine);
 }
 
@@ -2159,7 +2168,6 @@ void InvestProcessing::resetComboBox(const QString& comboBox, const int& col)
       m_detailSelected = false;
       break;
     default:
-//      qDebug() << i18n("ERROR. Field name not recognised.") << comboBox;
       KMessageBox::sorry(0, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", comboBox), i18n("CSV import"));
   }
   m_columnTypeList[col].clear();
