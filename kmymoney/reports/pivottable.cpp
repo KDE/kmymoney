@@ -1213,6 +1213,8 @@ void PivotTable::assignCell(const QString& outergroup, const ReportAccount& _row
     throw new MYMONEYEXCEPTION(QString("Column %1 out of m_numColumns range (%2) in PivotTable::assignCell").arg(column).arg(m_numColumns));
   if (m_grid[outergroup][innergroup][row][eActual].count() <= column)
     throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::assignCell").arg(column).arg(m_grid[outergroup][innergroup][row][eActual].count()));
+  if (m_grid[outergroup][innergroup][row][eBudget].count() <= column)
+    throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::assignCell").arg(column).arg(m_grid[outergroup][innergroup][row][eBudget].count()));
 
   if (!stockSplit) {
     // Determine whether the value should be inverted before being placed in the row
