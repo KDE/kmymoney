@@ -286,9 +286,9 @@ void RedefineDlg::resizeEvent(QResizeEvent * event)
 void RedefineDlg::updateWindow()
 {
   int hght = 6 + (m_widget->tableWidget->rowHeight(0) * 2);
-  hght += m_widget->tableWidget->horizontalHeader()->height();//  frig factor for horiz. headers?
-  if (m_maxWidth > (m_mainWidth - 12)) {
-    hght += 15;//  ....and for hor. scroll bar
+  hght += m_widget->tableWidget->horizontalHeader()->height();  //      frig factor for horiz. headers?
+  if (m_maxWidth > (m_mainWidth - 22)) {  //                            exclude borders
+    hght += 15;  //                                                     allow for hor. scroll bar
   }
   m_widget->tableWidget->setFixedHeight(hght);
 }

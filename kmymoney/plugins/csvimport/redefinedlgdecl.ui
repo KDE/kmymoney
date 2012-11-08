@@ -53,7 +53,7 @@ Please select an appropriate entry.</string>
       <string notr="true"/>
      </property>
      <property name="text">
-      <string comment="the number of the column containing error">Type/action column </string>
+      <string comment="the number of the column containing error">Type/action column</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

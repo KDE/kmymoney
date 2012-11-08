@@ -198,6 +198,9 @@ void InvestProcessing::slotFileDialogClicked()
   m_csvDialog->m_pageLinesDate->m_isColumnSelectionComplete = false;
   m_firstPass = true;
   m_firstRead = true;
+  m_memoColCopied = false;
+  m_typeColCopied = false;
+  m_detailColCopied = false;
   m_csvDialog->m_pageInvestment->m_investPageInitialized = false;
   m_csvDialog->m_columnsNotSet = true;  //  Don't check columns until they've been selected.
   m_csvDialog->m_separatorPageVisible = false;
@@ -334,6 +337,11 @@ void InvestProcessing::clearColumnsSelected()
   clearSelectedFlags();
   clearColumnNumbers();
   clearComboBoxText();
+
+  m_memoColCopied = false;
+  m_typeColCopied = false;
+  m_detailColCopied = false;
+  m_memoColList.clear();
 }
 
 void InvestProcessing::clearSelectedFlags()
@@ -449,9 +457,8 @@ int InvestProcessing::validateNewColumn(const int& col, const QString& type)
   }
   //  selection was in range
   //  ...but does it clash?
-  if ((!m_columnTypeList[col].isEmpty())  && (m_columnTypeList[col] != type)) {  // column is already in use
+  if ((!m_columnTypeList[col].isEmpty())  && (m_columnTypeList[col] != type) && (m_csvDialog->m_pageInvestment->m_investPageInitialized)) {  // column is already in use
     KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>", m_columnTypeList[col]));
-
     m_previousColumn = -1;
     resetComboBox(m_columnTypeList[col], col);  //      clash,  so reset ..
     resetComboBox(type, col);  //                   ... both comboboxes
@@ -559,9 +566,36 @@ void InvestProcessing::memoColumnSelected(int col)
     return;
   } else if (m_columnTypeList[col] == type) {  //     nothing changed
     return;
-  } else {
+  }
+  if ((m_columnTypeList[col] == "type") || (m_columnTypeList[col] == "detail")) {
+    if (m_memoColList.contains(col)) {
+      m_memoColList.removeOne(col);
+    }
+    int rc = KMessageBox::Yes;
+    if (m_csvDialog->m_pageInvestment->isVisible()) {
+      rc = KMessageBox::questionYesNo(0, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
+                                                  "<center>If you wish to copy that data to the memo field, click 'Yes'.</center>",
+                                                  m_columnTypeList[col]));
+    }
+    if (rc == KMessageBox::Yes) {
+      if (m_columnTypeList[col] == "type") {
+        m_typeColCopied = true;
+      } else if (m_columnTypeList[col] == "detail") {
+        m_detailColCopied = true;
+      }
+      m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->setItemText(col, QString().setNum(col + 1) + '*');
+      m_endColumn += 1;
+      m_memoColumn = m_endColumn - 1;
+      m_memoColList << col;
+      m_columnTypeList << "memo";  //  need one extra for type/detail column copy
+      m_memoSelected = true;
+      return;
+    }
+  } else {  //  m_columnTypeList[col] != "type"or "detail"
     //                                           clashes with prior selection
     m_memoSelected = false;//                    clear incorrect selection
+    m_typeColCopied = false;
+    m_detailColCopied = false;
     KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>", m_columnTypeList[col]));
     m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->setCurrentIndex(-1);
     m_previousColumn = -1;
@@ -762,7 +796,7 @@ void InvestProcessing::fieldDelimiterChanged()
         disconnect(m_csvDialog->m_pageSeparator->ui->comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(delimiterChanged()));
         m_csvDialog->m_pageSeparator->ui->comboBox_fieldDelimiter->setCurrentIndex(m_csvDialog->m_possibleDelimiter);
         m_csvDialog->m_lastDelimiterIndex = newIndex;
-        m_csvDialog->m_pageSeparator->delimiterActivated(m_fieldDelimiterIndex);
+        m_csvDialog->m_pageSeparator->delimiterActivated();
         break;
       }
     m_csvDialog->m_importNow = false;
@@ -835,24 +869,29 @@ void InvestProcessing::readFile(const QString& fname)
   //
   //  Start parsing the buffer
   //
+  m_columnCountList.clear();
   m_lineList = m_parse->parseFile(m_buf, 1, 0);  //                               Changed to display whole file.
+  //  Check all lines to find maximum column count.
+  //  Also disable column combobox connects till later
+  for (int i = 0; i < m_lineList.count(); i++) {
+    QString data = m_lineList[i];
+    if (m_firstRead) {
+      m_columnList = m_parse->parseLine(data);
+    }
+    columnCount = m_columnList.count();
+
+    if (columnCount > m_maxColumnCount) {
+      m_maxColumnCount = columnCount;
+    }
+    else {
+      columnCount = m_maxColumnCount;
+    }
+  }
+  m_csvDialog->ui->tableWidget->setColumnCount(m_maxColumnCount);
   disconnect(m_csvDialog->m_pageLinesDate->ui->spinBox_skip, 0, 0, 0);  //  Avoid disruption from start/endline changes.
   disconnect(m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast, 0, 0, 0);  //  Avoid disruption from start/endline changes.
 
   if (m_firstRead) {
-    //  Check all lines to find maximum column count.
-    //  Also disable column combobox connects till later
-    for (int i = 0; i < m_lineList.count(); i++) {
-      QString data = m_lineList[i];
-      m_columnList = m_parse->parseLine(data);
-      columnCount = m_columnList.count();
-
-      if (columnCount > m_maxColumnCount)
-        m_maxColumnCount = columnCount;
-      else
-        columnCount = m_maxColumnCount;
-    }
-    m_csvDialog->ui->tableWidget->setColumnCount(m_maxColumnCount);
     m_csvDialog->m_pageInvestment->ui->comboBoxInv_amountCol->clear();  //  clear all existing items before adding new ones
     m_csvDialog->m_pageInvestment->ui->comboBoxInv_dateCol->clear();
     m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->clear();
@@ -889,7 +928,6 @@ void InvestProcessing::readFile(const QString& fname)
       m_csvDialog->m_pageInvestment->ui->comboBoxInv_symbolCol->addItem(t);
       m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol->addItem(t);
     }
-    m_columnTypeList<<QString();  //  need one extra for payee column copy
 
     m_firstPass = false;
     m_screenUpdated = false;
@@ -905,9 +943,10 @@ void InvestProcessing::readFile(const QString& fname)
     connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol, SIGNAL(currentIndexChanged(int)), this, SLOT(detailColumnSelected(int)));
 
     //  Display the buffer
-    int delimiterCount[4] = {0};
+
+    int totalDelimiterCount[4] = {0};
     m_csvDialog->m_possibleDelimiter = 0;
-    m_symblRow = 0;
+    m_symbolRow = 0;
 
     //  Check all lines to find maximum column count.
     //  Also check field delimiter
@@ -916,8 +955,9 @@ void InvestProcessing::readFile(const QString& fname)
       QString data = m_lineList[i];
       for (int count = 0; count < 4; count++) {  //  Four possible delimiters
         //  Count each delimiter to find most likely one to use .
-        delimiterCount[count] = data.count(m_parse->m_fieldDelimiterCharList[count]);
-        if (delimiterCount[count] > delimiterCount[m_csvDialog->m_possibleDelimiter]) {
+        //  Changed to sum total file, not just individual lines.
+        totalDelimiterCount[count] += data.count(m_parse->m_fieldDelimiterCharList[count]);
+        if (totalDelimiterCount[count] > totalDelimiterCount[m_csvDialog->m_possibleDelimiter]) {
           m_csvDialog->m_possibleDelimiter = count;
         }
       }
@@ -957,12 +997,12 @@ void InvestProcessing::readFile(const QString& fname)
     }
     if (m_importNow) {
       m_csvDialog->clearCellsBackground();
-      }
+    }
     //  user now ready to continue && line is in wanted range
     //
     if ((m_importNow) && (line >= m_startLine - 1) && (line <= m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast->value() - 1)) {
       reloadUISettings();  //                            Need to reload column settings
-      int ret = processInvestLine(m_inBuffer, line);  // parse input line
+      int ret = processInvestLine(m_inBuffer);  //       parse input line
       if (ret == KMessageBox::Ok) {
         if (m_brokerage) {
           investCsvImport(stBrokerage);  //              add non-investment transaction to Brokerage statement
@@ -1023,12 +1063,39 @@ void InvestProcessing::displayLine(const QString& data)
   m_fieldDelimiterIndex = m_csvDialog->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex();
   m_parse->setFieldDelimiterIndex(m_fieldDelimiterIndex);
   m_fieldDelimiterCharacter = m_parse->fieldDelimiterCharacter(m_fieldDelimiterIndex);
+  //
+  //                 split data into fields
+  //
   m_columnList = m_parse->parseLine(data);
   m_redefine->setColumnList(m_columnList);
   int col = 0;
 
+  //  If making copy of detailcol or typecol, check the columns actually exist...
+  if ((!m_firstPass) && (m_typeColumn <= m_columnTypeList.count()) &&
+     (m_detailColumn <= m_columnTypeList.count()) && (m_memoColumn <= m_columnTypeList.count())) {
+    if ((m_typeColCopied) && (m_typeColumn < m_columnList.count()) && (m_typeColumn >= 0)) {  //        ...then make the copy here
+      m_columnList<<m_columnList[m_typeColumn];
+      m_columnTypeList[m_memoColumn] = "memo";
+      for (int i = 0; i < m_memoColList.count(); i++) {
+        if (m_memoColList[i] == m_typeColumn) {
+          continue;
+        }
+        m_columnTypeList[m_memoColList[i]] = "memo";
+      }
+    } else if ((m_detailColCopied) && (m_detailColumn < m_columnList.count()) && (m_detailColumn >= 0)) {  //   ...or here
+      m_columnList<<m_columnList[m_detailColumn];
+      m_columnTypeList[m_memoColumn] = "memo";
+      for (int i = 0; i < m_memoColList.count(); i++) {
+        if (m_memoColList[i] == m_detailColumn) {
+          continue;
+        }
+        m_columnTypeList[m_memoColList[i]] = "memo";
+      }
+    }
+  }
+
   QStringList::const_iterator constIterator;
-  QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(), $]";
+  QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(),$]";
   for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
        ++constIterator) {
     QString txt = (*constIterator);
@@ -1049,11 +1116,12 @@ void InvestProcessing::displayLine(const QString& data)
   ++m_row;
 }
 
-int InvestProcessing::processInvestLine(const QString& inBuffer, int line)
+int InvestProcessing::processInvestLine(const QString& inBuffer)
 {
   QString newTxt;
   //                                      validate all columns
   int neededFieldsCount = 0;//            ensure essential fields are present
+
   QString memo;
   QString payee;
   QString txt;
@@ -1097,19 +1165,19 @@ int InvestProcessing::processInvestLine(const QString& inBuffer, int line)
       m_redefine->setTypeColumn(i);
       QString str = m_columnList[i].trimmed();
       if (str.isEmpty()) {     //                                No Type specified...
-        QString txt = m_csvDialog->m_detailFilter;//        ...but may be one buried in 'detail' col. See if there is a filter
+        QString txt = m_csvDialog->m_detailFilter;//             ...but may be one buried in 'detail' col. See if there is a filter
         if (!txt.isEmpty()) {     //                             Filter present
           int lngth = m_columnList[m_detailColumn].indexOf(txt);
           if (lngth > -1) {     //                               Position of filter.
-            lngth = lngth + txt.length();//                 Length of detail.
+            lngth = lngth + txt.length();//                      Length of detail.
             QString tmp = m_columnList[m_detailColumn].remove('"');
-            tmp = tmp.remove(0, lngth).toLower();  //         Remove all but new type.
+            tmp = tmp.remove(0, lngth).toLower();  //            Remove all but new type.
             type = tmp;
             m_columnList[i] = type;
           }
         }
       } else {
-        m_trInvestData.type = str.remove('"');  //            There is a type.
+        m_trInvestData.type = str.remove('"');  //               There is a type.
       }
       ++neededFieldsCount;
       int ret = processActionType(type);
@@ -1166,12 +1234,17 @@ int InvestProcessing::processInvestLine(const QString& inBuffer, int line)
 
     else if (m_columnTypeList[i] == "memo") {      //               Memo Col
       txt = m_columnList[i];
+      if ((!m_firstPass) && (txt.isEmpty()) && (m_typeColCopied)) {
+         txt = m_columnList[m_typeColumn];
+         m_columnList[i] = txt;
+      }
       if (memo.isEmpty()) {
         if (m_brokerage) {
           m_trInvestData.payee = txt;
         }
-      } else
+      } else {
         memo += " : ";//        separate multiple memos
+      }
       memo += txt;//            next memo
     }//end of memo field
 
@@ -1252,8 +1325,8 @@ int InvestProcessing::processInvestLine(const QString& inBuffer, int line)
         name = m_columnList[m_detailColumn].toLower();
       }
       txt = m_columnList[i];
-      if (m_csvDialog->m_symbolTableDlg->m_widget->tableWidget->item(line, 2) != 0) {    //  If this item exists...
-        m_trInvestData.security = m_csvDialog->m_symbolTableDlg->m_widget->tableWidget->item(line, 2)->text() ;  //  Get 'edited' name.
+      if (m_csvDialog->m_symbolTableDlg->m_widget->tableWidget->item(m_symbolRow, 2) != 0) {   //  If this item exists...
+        m_trInvestData.security = m_csvDialog->m_symbolTableDlg->m_widget->tableWidget->item(m_symbolRow++, 2)->text() ;  //  Get 'edited' name.
       }
       QStringList list;
       if (!m_csvDialog->m_detailFilter.isEmpty()) {    //          If filter exists...
@@ -1265,7 +1338,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer, int line)
       if (list.count() > 1) {
         m_columnList[m_typeColumn] = list[1];//               This is the 'type' we found.
         if ((!m_columnList[m_symbolColumn].trimmed().isEmpty()) && (!m_brokerage)) {    //  If there is a symbol & not brokerage...
-          if (m_trInvestData.type.isEmpty()) {     //              If no investment type already...
+          if (m_trInvestData.type.isEmpty()) {  //            If no investment type already...
             m_trInvestData.type = list[1];//                  ...this is investment type.
           }
         } else {
@@ -1722,6 +1795,10 @@ void InvestProcessing::dateFormatSelected(int dF)
   }
   m_dateFormatIndex = dF;
   m_dateFormat = m_dateFormats[m_dateFormatIndex];
+  if (m_csvDialog->m_importError) {
+    readFile(m_inFileName);
+    m_csvDialog->markUnwantedRows();
+  }
 }
 
 int InvestProcessing::columnNumber(const QString& column)
@@ -1815,9 +1892,15 @@ void InvestProcessing::readSettings()
     //    m_invPath  = profilesGroup.readEntry("InvDirectory", QString());  //  Read earlier in fileDialog()
 
     int tmp = profilesGroup.readEntry("SecurityName", 0);
-    m_csvDialog->m_pageInvestment->ui->comboBoxInv_securityName->setCurrentIndex(0);
+    m_csvDialog->m_pageInvestment->ui->comboBoxInv_securityName->setCurrentIndex(tmp);
+
+    tmp = m_startLine;
     m_startLine = profilesGroup.readEntry("StartLine", -1) + 1;
+    if (m_startLine > m_endLine) {
+      m_startLine = tmp;
+    }
     m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setValue(m_startLine);
+
     str = profilesGroup.readEntry("Filter", QString());
     if (str.endsWith('#')) {     //  Terminates a trailing blank
       str.chop(1);
@@ -1852,6 +1935,9 @@ void InvestProcessing::readSettings()
       tmp = profilesGroup.readEntry("AmountCol", -1);
       m_csvDialog->m_pageInvestment->ui->comboBoxInv_amountCol->setCurrentIndex(tmp);
 
+      tmp = profilesGroup.readEntry("DetailCol", -1);
+      m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol->setCurrentIndex(tmp);
+
       QList<int> list = profilesGroup.readEntry("MemoCol", QList<int>());
       int posn = 0;
       if ((posn = list.indexOf(-1)) > -1) {  //  Look for -1, meaning no memo col
@@ -1864,9 +1950,16 @@ void InvestProcessing::readSettings()
       for (int i = 0; i < m_memoColList.count(); i++) {
         tmp = m_memoColList[i];
         if (tmp < m_columnTypeList.count()) {
-          m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->setItemText(tmp, QString().setNum(tmp + 1) + '*');
           m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->setCurrentIndex(tmp);
-       }
+          m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->setItemText(tmp, QString().setNum(tmp + 1) + '*');
+          if (tmp == m_typeColumn) {  //  ...unless also a type field.
+            m_typeColCopied = true;
+            continue;
+          } else if (tmp == m_detailColumn) {  //  ...unless also a type field.
+            m_detailColCopied = true;
+            continue;
+          }
+        }
         if (m_columnTypeList.count() > tmp) {
           m_columnTypeList[tmp] = "memo";
           m_memoColumn = tmp;
@@ -1877,11 +1970,8 @@ void InvestProcessing::readSettings()
 
       tmp = profilesGroup.readEntry("SymbolCol", -1);
       m_csvDialog->m_pageInvestment->ui->comboBoxInv_symbolCol->setCurrentIndex(tmp);
-
-      tmp = profilesGroup.readEntry("DetailCol", -1);
-      m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol->setCurrentIndex(tmp);
-
       m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
+
       tmp = profilesGroup.readEntry("DecimalSymbol", 0);
       m_csvDialog->setDecimalSymbol(tmp);
       m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(tmp);
@@ -2144,7 +2234,8 @@ void InvestProcessing::resetComboBox(const QString& comboBox, const int& col)
       break;
     case 3://  memo
       m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->setCurrentIndex(-1);
-      m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->setItemText(col, QString().setNum(col + 1));
+      m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->setItemText(col, QString().setNum(col + 1));   //  reset the '*'
+      m_memoColList.removeOne(col);  //  We're clearing this memo col.
       m_memoSelected = false;
       break;
     case 4://  price

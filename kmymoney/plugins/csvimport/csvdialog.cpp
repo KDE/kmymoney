@@ -276,7 +276,7 @@ void CSVDialog::init()
 
   connect(m_pageSeparator->ui->comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(fieldDelimiterChanged()));
   connect(m_pageSeparator->ui->comboBox_fieldDelimiter, SIGNAL(activated(int)), m_investProcessing, SLOT(fieldDelimiterChanged()));
-  connect(m_pageSeparator->ui->comboBox_fieldDelimiter, SIGNAL(activated(int)), m_pageSeparator, SLOT(delimiterActivated(int)));
+  connect(m_pageSeparator->ui->comboBox_fieldDelimiter, SIGNAL(activated(int)), m_pageSeparator, SLOT(delimiterActivated()));
   connect(m_pageSeparator->ui->comboBox_fieldDelimiter, SIGNAL(activated(int)), this, SLOT(delimiterChanged()));
   connect(m_pageSeparator->ui->comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(delimiterChanged()));
 
@@ -404,6 +404,9 @@ void CSVDialog::readSettings()
     if (!found) {
       return;
     }
+    //  Allow payee col to be set here.
+    connect(m_pageBanking->ui->comboBoxBnk_payeeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(payeeColumnSelected(int)));
+
     disconnect(m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
     m_profileExists = true;
     QString txt = "Profiles-" + m_profileList[i];
@@ -486,6 +489,8 @@ void CSVDialog::readSettings()
     break;
   }
   connect(m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
+  //  Index change after an activate, when payeeColumnCopy(), causes a second connect with confusing msg. so...
+  disconnect(m_pageBanking->ui->comboBoxBnk_payeeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(payeeColumnSelected(int)));
 }
 
 void CSVDialog::reloadUISettings()
@@ -712,6 +717,7 @@ void CSVDialog::readFile(const QString& fname)
   }
 
   m_importError = false;
+  m_payeeColAdded = false;
   int columnCount = 0;
   MyMoneyStatement st = MyMoneyStatement();
   if (!fname.isEmpty()) {
@@ -776,7 +782,8 @@ void CSVDialog::readFile(const QString& fname)
   }
   ui->tableWidget->setColumnCount(m_maxColumnCount + 1);
   m_lineNum = 0;
-  int delimiterCount[4] = {0};
+
+  int totalDelimiterCount[4] = {0};
   m_possibleDelimiter = 0;
   if (m_firstRead) {
     m_importIsValid = false;
@@ -785,9 +792,10 @@ void CSVDialog::readFile(const QString& fname)
     for (int i = 0; i < m_lineList.count(); i++) {
       QString data = m_lineList[i];
       for (int count = 0; count < 4; count++) {  //  Four possible delimiters
-        //  Count delimiters to find most likely one to use .
-        delimiterCount[count] = data.count(m_parse->m_fieldDelimiterCharList[count]);
-        if (delimiterCount[count] > delimiterCount[m_possibleDelimiter]) {
+        //  Count delimiters to find most likely one to use.
+        //  Changed to sum total file, not just individual lines.
+        totalDelimiterCount[count] += data.count(m_parse->m_fieldDelimiterCharList[count]);
+        if (totalDelimiterCount[count] > totalDelimiterCount[m_possibleDelimiter]) {
           m_possibleDelimiter = count;
         }
       }
@@ -820,7 +828,6 @@ void CSVDialog::readFile(const QString& fname)
       m_pageBanking->ui->comboBoxBnk_debitCol->addItem(t);
       //  Will have to reload comboboxes after exit.
     }
-    m_columnTypeList<<QString();  //                         need one extra for payee column copy
     m_firstRead = false;
   }
   if (m_fileEndLine == 0) {
@@ -829,7 +836,7 @@ void CSVDialog::readFile(const QString& fname)
   if (m_fileEndLine > m_pageLinesDate->m_trailerLines) {
     m_endLine = m_fileEndLine - m_pageLinesDate->m_trailerLines;
   } else {
-    m_endLine = m_fileEndLine;  //                                                     Ignore m_trailerLines as > file length.
+    m_endLine = m_fileEndLine;  //                           Ignore m_trailerLines as > file length.
   }
   m_pageLinesDate->ui->spinBox_skip->setMaximum(m_fileEndLine);
   m_pageLinesDate->ui->spinBox_skipToLast->setMaximum(m_fileEndLine);
@@ -846,7 +853,6 @@ void CSVDialog::readFile(const QString& fname)
   connect(m_pageBanking->ui->comboBoxBnk_numberCol, SIGNAL(activated(int)), this, SLOT(numberColumnSelected(int)));
   connect(m_pageBanking->ui->comboBoxBnk_dateCol, SIGNAL(currentIndexChanged(int)), this, SLOT(dateColumnSelected(int)));
   connect(m_pageBanking->ui->comboBoxBnk_dateCol, SIGNAL(activated(int)), this, SLOT(dateColumnSelected(int)));
-  connect(m_pageBanking->ui->comboBoxBnk_payeeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(payeeColumnSelected(int)));
   connect(m_pageBanking->ui->comboBoxBnk_payeeCol, SIGNAL(activated(int)), this, SLOT(payeeColumnSelected(int)));
 
   m_pageLinesDate->ui->spinBox_skipToLast->setValue(m_endLine);
@@ -870,8 +876,8 @@ void CSVDialog::readFile(const QString& fname)
     //  user now ready to continue && line is in wanted range
     //
     if ((m_importNow) && (line >= m_startLine - 1) && (line <= m_pageLinesDate->ui->spinBox_skipToLast->value() - 1)) {
-      reloadUISettings();  //                                        Need to reload column settings
-      int ret = (processQifLine(m_inBuffer));  //                    parse a line
+      reloadUISettings();  //                          Need to reload column settings
+      int ret = processQifLine(m_inBuffer);  //        parse a line
       if (ret == KMessageBox::Ok) {
         csvImportTransaction(st);
       } else
@@ -938,21 +944,22 @@ void CSVDialog::displayLine(const QString& data)
   //                 split data into fields
   //
   m_columnList = m_parse->parseLine(data);
-  m_endColumn = m_maxColumnCount;
-  if ((!m_firstPass) && (m_payeeColumn <= m_columnCountList[m_lineNum]) && (m_memoColumn <= m_columnCountList[m_lineNum])) {
-    if ((m_memoColCopied) && (m_memoColCopy < m_columnList.count())) {  //           but exclude short header lines
-      m_columnList<<m_columnList[m_memoColCopy];
-    } else if ((m_payeeColCopied) && (m_payeeColumn < m_columnList.count())) {  //   but exclude short header lines
-      m_columnList<<m_columnList[m_payeeColumn];
-      m_columnTypeList[m_columnList.count() - 1] = "memo";
-      for (int i = 0; i < m_memoColList.count(); i++) {
-        if (m_memoColList[i] == m_payeeColumn) {
-          continue;
-        }
-        m_columnTypeList[m_memoColList[i]] = "memo";
-      }
+  if ((m_memoColCopied) || (m_payeeColCopied))  {
+    while (m_columnList.count() < m_maxColumnCount) {
+      m_columnList << "";  //  Get m_columnList to correct size
     }
   }
+  //  If making copy of memocol or payeecol, check the columns actually exist...
+  if ((!m_firstPass) && (m_payeeColumn <= m_columnCountList[m_lineNum]) && (m_memoColumn <= m_columnCountList[m_lineNum])) {
+    if ((m_memoColCopied) && (m_memoColCopy < m_columnList.count())) {  //           ...then make the copy here
+      m_columnList[m_endColumn - 1] = m_columnList[m_payeeColumn];
+      m_columnTypeList[m_columnTypeList.count() - 1] = "memo";
+    } else if ((m_payeeColCopied) && (m_payeeColumn < m_columnList.count())) {  //   ...or here
+      m_columnList[m_endColumn - 1] = m_columnList[m_payeeColumn];
+      m_columnTypeList[m_columnTypeList.count() - 1] = "memo";
+    }
+  }
+
   m_inBuffer.clear();
   QStringList::const_iterator constIterator;
   QString txt;
@@ -1040,7 +1047,7 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
   iBuff = iBuff.remove(m_textDelimiterCharacter);
   memo.clear();//                                       memo & number may not have been used
   m_trData.number.clear();//                            .. so need to clear prior contents
-  for (int i = 0; i < m_columnList.count(); i++) {  //  check each column
+  for (int i = 0; i < m_columnList.count(); i++) {
     //  Use actual column count for this line instead of m_endColumn, which could be greater.
     if (m_columnTypeList[i] == "number") {
       txt = m_columnList[i];
@@ -1069,7 +1076,6 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
       txt = txt.remove('\'');
       if ((!m_firstPass) && (m_memoColCopied)) {
          m_columnList[m_payeeColumn] = txt ;
-         columnType(m_memoColumn) = "memo";
       }
       m_trData.payee = txt;
       m_qifBuffer = m_qifBuffer + 'P' + txt + '\n';  //  Detail column
@@ -1151,8 +1157,9 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
          txt = m_columnList[m_payeeColumn];
          m_columnList[i] = txt;
       }
-      if (!memo.isEmpty())
+      if (!memo.isEmpty()) {
         memo += '\n';//                                 separator for multiple memos
+      }
       memo += txt;//                                    next memo
     }//end of memo field
   }//end of col loop
@@ -1248,7 +1255,7 @@ void CSVDialog::slotImportClicked()
   }
   if ((m_dateSelected) && (m_payeeSelected) &&
       ((m_amountSelected || (m_debitSelected && m_creditSelected)))) {
-    m_importNow = true; //                          all necessary data is present
+    m_importNow = true; //                  all necessary data is present
 
     int skp = m_pageLinesDate->ui->spinBox_skip->value() - 1;
     if (skp > m_endLine) {
@@ -1257,7 +1264,7 @@ void CSVDialog::slotImportClicked()
       m_importError = true;
       return;
     }
-    if (m_importError) {  //  possibly from wrong decimal symbol
+    if (m_importError) {  //                possibly from wrong decimal symbol or date format
       return;
     }
     m_parse->setSymbolFound(false);
@@ -1318,6 +1325,7 @@ int CSVDialog::columnNumber(const QString& msg)
 
 void CSVDialog::clearColumnsSelected()
 {
+  //  User has clicked clear button
   if (m_fileType == "Banking") {
     clearPreviousColumn();
     clearSelectedFlags();
@@ -1332,7 +1340,11 @@ void CSVDialog::clearColumnsSelected()
 void CSVDialog::clearSelectedFlags()
 {
   for (int i = 0; i < m_maxColumnCount; i++) {
-    m_columnTypeList[i].clear();   //   set to all empty
+    m_columnTypeList[i].clear();   //           set to all empty but keep size
+  }
+  if (m_columnTypeList.contains("memo")) {  //  need to remove a payee copy item
+    int pos = m_columnTypeList.indexOf("memo");
+    m_columnTypeList.takeAt(pos);
   }
 
   m_dateSelected = false;
@@ -1627,14 +1639,14 @@ int CSVDialog::validateColumn(const int& col, QString& type)
   if ((!m_pageBanking->m_bankingPageInitialized) || (m_fileType != "Banking")) {
     return KMessageBox::Ok;
   }
-  if (m_columnsNotSet) {  //                         Don't check columns until they've been selected.
+  if (m_columnsNotSet) {  //                             Don't check columns until they've been selected.
     return KMessageBox::Ok;
   }
   //  First check if selection is in range
   if ((col < 0) || (col >= m_endColumn)) {
     return KMessageBox::No;
   }
-  //                                                 selection is in range
+  //  selection is in range
   if (m_columnTypeList[col] == type) {//                 already selected
     return KMessageBox::Ok;
   }
@@ -1660,9 +1672,16 @@ int CSVDialog::validateColumn(const int& col, QString& type)
       m_memoColCopied = true;
       m_memoColCopy = col;
       m_pageBanking->ui->comboBoxBnk_memoCol->setItemText(col, QString().setNum(col + 1) + '*');
-      m_payeeColumn = m_endColumn;
-      type = "payee";
-      m_columnTypeList[m_payeeColumn] = "payee";
+      m_payeeColumn = col;
+      m_columnTypeList[col] = type;
+      m_columnTypeList << "memo";  //  the payeecolumn copy goes here
+
+      if (m_columnList.count() < m_columnTypeList.count()) {
+        m_columnList << "";
+        m_maxColumnCount ++;
+        m_endColumn ++;
+      }
+      m_memoColumn = m_endColumn;
       m_payeeSelected = true;
       m_columnCountList << m_maxColumnCount + 1;
       return rc;
@@ -1807,7 +1826,7 @@ void CSVDialog::dateColumnSelected(int col)
   int ret = validateColumn(col, type);
 
   if (ret == KMessageBox::Ok) {
-    m_pageBanking->ui->comboBoxBnk_dateCol->setCurrentIndex(col);  //      accept new column
+    m_pageBanking->ui->comboBoxBnk_dateCol->setCurrentIndex(col);  // accept new column
     m_dateSelected = true;
     m_dateColumn = col;
     m_columnTypeList[m_dateColumn] = type;
@@ -1820,13 +1839,11 @@ void CSVDialog::dateColumnSelected(int col)
 
 void CSVDialog::memoColumnSelected(int col)
 {
-  if (!m_pageBanking->m_bankingPageInitialized) {
-    return;
-  }
-  if ((col < 0) || (col >= m_endColumn)) {  //                       out of range so...
-    m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(-1);  // ..clear selection
-    return;
-  }
+  //  Prevent check of column settings until user sees them.
+  if ((col < 0) || (col >= m_endColumn) || (m_columnsNotSet)) {   //  out of range so...
+    m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(-1);  //  ..clear selection
+     return;
+   }
   QString type = "memo";
   m_memoColumn = col;
 
@@ -1847,24 +1864,34 @@ void CSVDialog::memoColumnSelected(int col)
     return;
   }
   if (m_columnTypeList[col] == "payee") {
-    if (m_memoColList.contains(col)) {
-      return;
+    if ((m_memoColList.contains(col)) && (m_payeeColAdded)) {
+      return;  //                          This copypayee column has been added already, probably from resource file
     }
-    if (m_pageBanking->isVisible()) {
-      int rc = KMessageBox::questionYesNo(0, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
+    int rc = KMessageBox::Yes;
+    if (m_pageBanking->isVisible()) {  //  Don't show msg. if we got here from resource file load
+      rc = KMessageBox::questionYesNo(0, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
                                                   "<center>If you wish to copy the Payee data to the memo field, click 'Yes'.</center>",
                                                   m_columnTypeList[col]));
+    }
       if (rc == KMessageBox::Yes) {
         m_payeeColCopied = true;
+        m_payeeColAdded = true;  //        Indicate that extra col has been added alread
         m_pageBanking->ui->comboBoxBnk_memoCol->setItemText(col, QString().setNum(col + 1) + '*');
+
+        if (!m_memoColList.contains(col)) {
+          m_memoColList << col;
+        }
+        m_columnTypeList << "memo";
+        if (m_columnList.count() < m_columnTypeList.count()) {
+          m_columnList << "";
+          m_maxColumnCount ++;
+          m_endColumn ++;
+        }
         m_memoColumn = m_endColumn;
-        m_memoColList << col;
-        m_columnTypeList[m_memoColumn] = "memo";
         m_memoSelected = true;
         m_columnCountList << m_maxColumnCount + 1;
         return;
       }
-    }
   } else {
     //                                             clashes with prior selection
     m_memoSelected = false;//                      clear incorrect selection
@@ -1885,7 +1912,7 @@ void CSVDialog::memoColumnSelected(int col)
 
 void CSVDialog::payeeColumnSelected(int col)
 {
-  if (col < 0) {      //                              it is unset
+  if (col < 0) {  //                              it is unset
     m_wizard->button(QWizard::NextButton)->setEnabled(false);
     return;
   }
@@ -2114,6 +2141,10 @@ void CSVDialog::dateFormatSelected(int dF)
   }
   m_dateFormatIndex = dF;
   m_date = m_dateFormats[m_dateFormatIndex];
+  if (m_importError) {
+    readFile(m_inFileName);
+    markUnwantedRows();
+  }
 }
 
 void CSVDialog::decimalSymbolSelected(int index)
@@ -2236,7 +2267,7 @@ void CSVDialog::delimiterChanged()
         disconnect(m_pageSeparator->ui->comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(delimiterChanged()));
         m_pageSeparator->ui->comboBox_fieldDelimiter->setCurrentIndex(m_possibleDelimiter);
         m_lastDelimiterIndex = newIndex;
-        m_pageSeparator->delimiterActivated(m_fieldDelimiterIndex);
+        m_pageSeparator->delimiterActivated();
         break;
     }
     m_importNow = false;
@@ -2431,7 +2462,6 @@ void CSVDialog::slotNamesEdited()
     }
     //  Replace detail with edited security name.
     str = m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 2)->text();
-
     ui->tableWidget->item(row, m_investProcessing->detailColumn())->setText(str);
     m_investProcessing->m_map.insert(m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 0)->text(), m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 2)->text());
     symTableRow ++;
@@ -3142,7 +3172,7 @@ void SeparatorPage::initializePage()
   }
 }
 
-void SeparatorPage::delimiterActivated(int /*index*/)
+void SeparatorPage::delimiterActivated()
 {
   emit completeChanged();
   if ((m_dlg->m_delimiterError) && (m_dlg->m_fileType == "Invest")) {
@@ -3471,6 +3501,7 @@ void LinesDatePage::initializePage()
     m_dlg->m_pageLinesDate->ui->spinBox_skipToLast->setMinimum(m_dlg->startLine());
   } else if (m_dlg->m_fileType == "Invest") {
     m_dlg->m_pageLinesDate->ui->spinBox_skipToLast->setMinimum(m_dlg->m_investProcessing->m_startLine);
+    m_dlg->m_pageLinesDate->ui->spinBox_skipToLast->setValue(m_dlg->m_investProcessing->m_endLine);
   }
 }
 
@@ -3491,10 +3522,10 @@ bool LinesDatePage::validatePage()
   if (m_dlg->m_fileType == "Banking") {
     for (int row = m_dlg->startLine() - 1; row < m_dlg->lastLine(); row++) {
       for (int col = 0; col < m_dlg->ui->tableWidget->columnCount(); col++) {
-        if ((m_dlg->columnType(col) == "amount") || (m_dlg->columnType(col) == "debit") || (m_dlg->columnType(col) == "credit")) {
-          if (m_dlg->ui->tableWidget->item(row, col) == 0) {  //  Does cell exist?
+        if (m_dlg->ui->tableWidget->item(row, col) == 0) {  //  Does cell exist?
             break;  //  No.
           }
+        if ((m_dlg->columnType(col) == "amount") || (m_dlg->columnType(col) == "debit") || (m_dlg->columnType(col) == "credit")) {
           value = m_dlg->ui->tableWidget->item(row, col)->text().remove(QRegExp(pattern));
           if (value.isEmpty()) {  //  An empty cell is OK, probably.
             continue;

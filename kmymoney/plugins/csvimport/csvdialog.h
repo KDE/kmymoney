@@ -431,6 +431,7 @@ private:
   bool             m_payeeSelected;
   bool             m_memoColCopied;
   bool             m_payeeColCopied;
+  bool             m_payeeColAdded;
 
   int              m_amountColumn;
   int              m_creditColumn;
@@ -664,7 +665,7 @@ public:
   bool                isComplete() const;
 
 public slots:
-  void                delimiterActivated(int /*index*/);
+  void                delimiterActivated();
 
 signals:
   void                completeChanged();

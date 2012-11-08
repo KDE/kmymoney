@@ -173,7 +173,8 @@ public:
   QStringList    m_lineList;
 
   QList<MyMoneyStatement::Security> m_listSecurities;
-  QList< int >   m_memoColList;
+  QList<int>     m_memoColList;
+  QList<int>     m_columnCountList;
 
   int            lastLine();
   int            amountColumn();
@@ -380,7 +381,7 @@ private:
   * It will evaluate an input line and prepare it to be added to a statement,
   * and to a QIF file, if required.
   */
-  int            processInvestLine(const QString& inBuffer, int line);
+  int            processInvestLine(const QString& inBuffer);
 
   /**
   * This method is called during input if a brokerage type activity is found.
@@ -438,6 +439,9 @@ private:
   bool           m_priceSelected;
   bool           m_quantitySelected;
   bool           m_typeSelected;
+  bool           m_memoColCopied;
+  bool           m_typeColCopied;
+  bool           m_detailColCopied;
   bool           m_symbolSelected;
   bool           m_detailSelected;
   bool           m_needFieldDelimiter;
@@ -457,7 +461,7 @@ private:
   int            m_detailColumn;
   int            m_textDelimiterIndex;
   int            m_typeColumn;
-  int            m_symblRow;
+  int            m_symbolRow;
   int            m_maxRowWidth;
   int            m_rowWidth;
 
