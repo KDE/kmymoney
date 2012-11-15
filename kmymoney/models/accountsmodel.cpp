@@ -759,7 +759,10 @@ public:
     }
     QStandardItem *institutionItem = institutionItemFromId(model, institutionId);
     QStandardItem *item = itemFromAccountId(institutionItem, account.id());
-    QStandardItem *parentAccounItem = itemFromAccountId(institutionItem, account.parentAccountId());
+    // only investment accounts are added to their parent in the institutions view
+    // this makes hierarchy maintenance a lot easier since the investment accounts
+    // are the only ones that always have the same institution as their parent
+    QStandardItem *parentAccounItem = account.isInvest() ? itemFromAccountId(institutionItem, account.parentAccountId()) : 0;
     if (!item) {
       item = new QStandardItem(account.name());
       if (parentAccounItem) {
@@ -876,7 +879,18 @@ void InstitutionsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType
   if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense())
     return;
 
+  // load the account into the institution
   static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, *account);
+
+  // load the investment sub-accounts if there are any - there could be sub-accounts if this is an add operation
+  // that was triggered in slotObjectModified on an already existing account which went trough a hierarchy change
+  QList<MyMoneyAccount> subAccounts;
+  d->m_file->accountList(subAccounts, account->accountList(), true);
+  for (QList<MyMoneyAccount>::ConstIterator it_a = subAccounts.constBegin(); it_a != subAccounts.constEnd(); ++it_a) {
+    if ((*it_a).isInvest()) {
+      static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, *it_a);
+    }
+  }
 }
 
 /**
