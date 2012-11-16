@@ -884,11 +884,13 @@ void InstitutionsModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType
 
   // load the investment sub-accounts if there are any - there could be sub-accounts if this is an add operation
   // that was triggered in slotObjectModified on an already existing account which went trough a hierarchy change
-  QList<MyMoneyAccount> subAccounts;
-  d->m_file->accountList(subAccounts, account->accountList(), true);
-  for (QList<MyMoneyAccount>::ConstIterator it_a = subAccounts.constBegin(); it_a != subAccounts.constEnd(); ++it_a) {
-    if ((*it_a).isInvest()) {
-      static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, *it_a);
+  if (!account->accountList().isEmpty()) {
+    QList<MyMoneyAccount> subAccounts;
+    d->m_file->accountList(subAccounts, account->accountList());
+    for (QList<MyMoneyAccount>::ConstIterator it_a = subAccounts.constBegin(); it_a != subAccounts.constEnd(); ++it_a) {
+      if ((*it_a).isInvest()) {
+        static_cast<InstitutionsPrivate *>(d)->loadInstitution(this, *it_a);
+      }
     }
   }
 }
