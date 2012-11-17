@@ -36,6 +36,7 @@
 #include <mymoneyaccount.h>
 #include <mymoneyinstitution.h>
 #include <mymoneypayee.h>
+#include <mymoneytag.h>
 #include <mymoneyobject.h>
 #include <mymoneysecurity.h>
 #include <imymoneystorage.h>
@@ -56,16 +57,19 @@ public:
 
   const MyMoneyAccount& account(const QString& id);
   const MyMoneyPayee& payee(const QString& id);
+  const MyMoneyTag& tag(const QString& id);
   const MyMoneySecurity& security(const QString& id);
   const MyMoneyInstitution& institution(const QString& id);
   const MyMoneySchedule& schedule(const QString& id);
 
   void account(QList<MyMoneyAccount>& list);
   void payee(QList<MyMoneyPayee>& list);
+  void tag(QList<MyMoneyTag>& list);
   void institution(QList<MyMoneyInstitution>& list);
 
   void preloadAccount(const QList<MyMoneyAccount>& list);
   void preloadPayee(const QList<MyMoneyPayee>& list);
+  void preloadTag(const QList<MyMoneyTag>& list);
   void preloadInstitution(const QList<MyMoneyInstitution>& list);
   void preloadSecurity(const QList<MyMoneySecurity>& list);
   void preloadSchedule(const QList<MyMoneySchedule>& list);
@@ -73,6 +77,7 @@ public:
   void preloadAccount(const MyMoneyAccount& account);
   void preloadSecurity(const MyMoneySecurity& security);
   void preloadPayee(const MyMoneyPayee& payee);
+  void preloadTag(const MyMoneyTag& tag);
   void preloadInstitution(const MyMoneyInstitution& institution);
   void preloadSchedule(const MyMoneySchedule& schedule);
 

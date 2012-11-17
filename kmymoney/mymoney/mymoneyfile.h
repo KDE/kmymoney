@@ -39,6 +39,7 @@
 #include <mymoneyaccount.h>
 #include <mymoneytransaction.h>
 #include <mymoneypayee.h>
+#include <mymoneytag.h>
 #include <mymoneykeyvaluecontainer.h>
 #include <mymoneysecurity.h>
 #include <mymoneyprice.h>
@@ -98,9 +99,14 @@ class MyMoneyTransactionFilter;
   * QList of MyMoneyInstitution objects.
   *
   * The methods addPayee(), modifyPayee() and removePayee()
-  * implement the general institution maintenance functions.
+  * implement the general payee maintenance functions.
   * payee() and payeeList() are used to retrieve a single instance or a
   * QList of MyMoneyPayee objects.
+  *
+  * The methods addTag(), modifyTag() and removeTag()
+  * implement the general tag maintenance functions.
+  * tag() and tagList() are used to retrieve a single instance or a
+  * QList of MyMoneyTag objects.
   *
   * The methods addTransaction(), modifyTransaction() and removeTransaction()
   * implement the general transaction maintenance functions.
@@ -148,6 +154,7 @@ public:
     notifyAccount = 1,
     notifyInstitution,
     notifyPayee,
+    notifyTag,
     notifySchedule,
     notifySecurity
   } notificationObjectT;
@@ -852,6 +859,64 @@ public:
     * @return QList<MyMoneyPayee> containing the payee information
     */
   const QList<MyMoneyPayee> payeeList(void) const;
+
+  /**
+    * This method is used to create a new tag
+    *
+    * An exception will be thrown upon error conditions
+    *
+    * @param tag MyMoneyTag reference to tag information
+    */
+  void addTag(MyMoneyTag& tag);
+
+  /**
+    * This method is used to retrieve information about a tag
+    * An exception will be thrown upon error conditions.
+    *
+    * @param id QString reference to id of tag
+    *
+    * @return MyMoneyTag object of tag
+    */
+  const MyMoneyTag& tag(const QString& id) const;
+
+  /**
+    * This method is used to retrieve the id to a corresponding
+    * name of a tag.
+    * An exception will be thrown upon error conditions.
+    *
+    * @param tag QString reference to name of tag
+    *
+    * @return MyMoneyTag object of tag
+    */
+  const MyMoneyTag& tagByName(const QString& tag) const;
+
+  /**
+    * This method is used to modify an existing tag
+    *
+    * An exception will be thrown upon error conditions
+    *
+    * @param tag MyMoneyTag reference to tag information
+    */
+  void modifyTag(const MyMoneyTag& tag);
+
+  /**
+    * This method is used to remove an existing tag.
+    * An error condition occurs, if the tag is still referenced
+    * by a split.
+    *
+    * An exception will be thrown upon error conditions
+    *
+    * @param tag MyMoneyTag reference to tag information
+    */
+  void removeTag(const MyMoneyTag& tag);
+
+  /**
+    * This method returns a list of the tags
+    * inside a MyMoneyStorage object
+    *
+    * @return QList<MyMoneyTag> containing the tag information
+    */
+  const QList<MyMoneyTag> tagList(void) const;
 
   /**
     * This method is used to extract a value from the storage's

@@ -20,6 +20,7 @@ SET(libviews_a_SOURCES
   tocitemgroup.cpp
   tocitemreport.cpp
   kscheduletreeitem.cpp
+  ktagsview.cpp
   )
 
 SET(libviews_a_HEADER kmymoneyview.h)
@@ -33,6 +34,7 @@ SET(libviews_a_UI
   kinvestmentviewdecl.ui
   kpayeesviewdecl.ui
   kscheduledviewdecl.ui
+  ktagsviewdecl.ui
   )
 
 # The handling of these ui files depends

@@ -75,6 +75,7 @@ void MyMoneyDatabaseMgrTest::testEmptyConstructor()
   QVERIFY(m->transactionList(f).count() == 0);
 
   QVERIFY(m->payeeList().count() == 0);
+  QVERIFY(m->tagList().count() == 0);
   QVERIFY(m->scheduleList().count() == 0);
 
   QVERIFY(m->m_creationDate == QDate::currentDate());
@@ -212,6 +213,7 @@ void MyMoneyDatabaseMgrTest::testSupportFunctions()
     QVERIFY(m->nextAccountID() == "A000001");
     QVERIFY(m->nextTransactionID() == "T000000000000000001");
     QVERIFY(m->nextPayeeID() == "P000001");
+    QVERIFY(m->nextTagID() == "G000001");
     QVERIFY(m->nextScheduleID() == "SCH000001");
     QVERIFY(m->nextReportID() == "R000001");
 
@@ -1437,6 +1439,126 @@ void MyMoneyDatabaseMgrTest::testRemovePayee()
   QVERIFY(m->payeeList().count() == 1);
 }
 
+void MyMoneyDatabaseMgrTest::testAddTag()
+{
+  testAttachDb();
+
+  if (!m_canOpen) {
+    std::cout << "Database test skipped because no database could be opened." << std::endl;
+    return;
+  }
+
+  MyMoneyTag ta;
+
+  ta.setName("THB");
+  m->setDirty();
+  try {
+    QVERIFY(m->tagId() == 0);
+    m->addTag(ta);
+    QVERIFY(m->tagId() == 1);
+    MyMoneyTag ta1 = m->tagByName("THB");
+    QVERIFY(ta.id() == ta1.id());
+    QVERIFY(ta.name() == ta1.name());
+    QVERIFY(ta.isClosed() == ta1.isClosed());
+    QVERIFY(ta.tagColor().name() == ta1.tagColor().name());
+    QVERIFY(ta.notes() == ta1.notes());
+    QVERIFY(ta == ta1);
+  } catch (MyMoneyException *e) {
+    unexpectedException(e);
+  }
+
+}
+
+void MyMoneyDatabaseMgrTest::testModifyTag()
+{
+  testAttachDb();
+
+  if (!m_canOpen) {
+    std::cout << "Database test skipped because no database could be opened." << std::endl;
+    return;
+  }
+
+  MyMoneyTag ta;
+
+  testAddTag();
+
+  ta = m->tag("G000001");
+  ta.setName("New name");
+  m->setDirty();
+  try {
+    m->modifyTag(ta);
+    ta = m->tag("G000001");
+    QVERIFY(ta.name() == "New name");
+  } catch (MyMoneyException *e) {
+    unexpectedException(e);
+  }
+}
+
+void MyMoneyDatabaseMgrTest::testRemoveTag()
+{
+  testAttachDb();
+
+  if (!m_canOpen) {
+    std::cout << "Database test skipped because no database could be opened." << std::endl;
+    return;
+  }
+
+  testAddTag();
+  m->setDirty();
+
+  // check that we can remove an unreferenced tag
+  MyMoneyTag ta = m->tag("G000001");
+  try {
+    QVERIFY(m->tagList().count() == 1);
+    m->removeTag(ta);
+    QVERIFY(m->tagList().count() == 0);
+  } catch (MyMoneyException *e) {
+    unexpectedException(e);
+  }
+
+  // add transaction
+  testAddTransactions();
+
+  MyMoneyTransaction tr = m->transaction("T000000000000000001");
+  MyMoneySplit sp;
+  sp = tr.splits()[0];
+  QList<QString> tagIdList;
+  tagIdList << "G000001";
+  sp.setTagIdList(tagIdList);
+  tr.modifySplit(sp);
+
+  // check that we cannot add a transaction referencing
+  // an unknown tag
+  try {
+    m->modifyTransaction(tr);
+    QFAIL("Expected exception");
+  } catch (MyMoneyException *e) {
+    delete e;
+  }
+
+  // reset here, so that the
+  // testAddTag will not fail
+  m->loadTagId(0);
+  testAddTag();
+
+  // check that it works when the tag exists
+  try {
+    m->modifyTransaction(tr);
+  } catch (MyMoneyException *e) {
+    unexpectedException(e);
+  }
+
+  m->setDirty();
+
+  // now check, that we cannot remove the tag
+  try {
+    m->removeTag(ta);
+    QFAIL("Expected exception");
+  } catch (MyMoneyException *e) {
+    delete e;
+  }
+  QVERIFY(m->tagList().count() == 1);
+}
 
 void MyMoneyDatabaseMgrTest::testRemoveAccountFromTree()
 {
@@ -1525,6 +1647,39 @@ void MyMoneyDatabaseMgrTest::testPayeeName()
   }
 }
 
+void MyMoneyDatabaseMgrTest::testTagName()
+{
+  testAttachDb();
+
+  if (!m_canOpen) {
+    std::cout << "Database test skipped because no database could be opened." << std::endl;
+    return;
+  }
+
+  testAddTag();
+
+  MyMoneyTag ta;
+  QString name("THB");
+
+  // OK case
+  try {
+    ta = m->tagByName(name);
+    QVERIFY(ta.name() == "THB");
+    QVERIFY(ta.id() == "G000001");
+  } catch (MyMoneyException *e) {
+    unexpectedException(e);
+  }
+
+  // Not OK case
+  name = "Thb";
+  try {
+    ta = m->tagByName(name);
+    QFAIL("Exception expected");
+  } catch (MyMoneyException *e) {
+    delete e;
+  }
+}
+
 void MyMoneyDatabaseMgrTest::testAssignment()
 {
   testAttachDb();
@@ -1576,6 +1731,7 @@ void MyMoneyDatabaseMgrTest::testEquality(const MyMoneyDatabaseMgr *t)
   //QVERIFY(m->payeeList().keys() == t->payeeList().keys());
   //QVERIFY(m->payeeList().values() == t->payeeList().values());
   QVERIFY(m->payeeList() == t->payeeList());
+  QVERIFY(m->tagList() == t->tagList());
   //QVERIFY(m->m_transactionKeys.keys() == t->m_transactionKeys.keys());
   //QVERIFY(m->m_transactionKeys.values() == t->m_transactionKeys.values());
   //QVERIFY(m->institutionList().keys() == t->institutionList().keys());

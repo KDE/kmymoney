@@ -40,6 +40,7 @@
 #include <mymoneyscheduled.h>
 #include <mymoneyinstitution.h>
 #include <mymoneypayee.h>
+#include <mymoneytag.h>
 #include <mymoneybudget.h>
 #include <kmymoneyplugin.h>
 #include <register.h>
@@ -284,6 +285,15 @@ protected slots:
   /**
     */
   void slotPayeeDelete(void);
+
+  /**
+    */
+  void slotTagNew(const QString& newnameBase, QString& id);
+  void slotTagNew(void);
+
+  /**
+    */
+  void slotTagDelete(void);
 
   /**
     */
@@ -627,6 +637,17 @@ protected:
   bool payeeInList(const QList<MyMoneyPayee>& list, const QString& id) const;
 
   /**
+    * Check if a list contains a tag with a given id
+    *
+    * @param list const reference to value list
+    * @param id const reference to id
+    *
+    * @retval true object has been found
+    * @retval false object is not in list
+    */
+  bool tagInList(const QList<MyMoneyTag>& list, const QString& id) const;
+
+  /**
     * Mark the selected transactions as provided by @a flag. If
     * flag is @a MyMoneySplit::Unknown, the future state depends
     * on the current stat of the split's flag accoring to the
@@ -908,6 +929,12 @@ public slots:
   void slotShowPayeeContextMenu(void);
 
   /**
+    * This slot opens the tag options menu at the current cursor
+    * position.
+    */
+  void slotShowTagContextMenu(void);
+
+  /**
     * This slot opens the budget options menu at the current cursor
     * position.
     */
@@ -976,6 +1003,8 @@ public slots:
   void slotSelectSchedule(const MyMoneySchedule& schedule = MyMoneySchedule());
 
   void slotSelectPayees(const QList<MyMoneyPayee>& list);
+
+  void slotSelectTags(const QList<MyMoneyTag>& list);
 
   void slotSelectBudget(const QList<MyMoneyBudget>& list);
 
@@ -1106,6 +1135,14 @@ signals:
   void payeesSelected(const QList<MyMoneyPayee>& payees);
 
   /**
+    * This signal is emitted when a tag/list of tags has been selected by
+    * the GUI. If no tag is selected or the selection is removed,
+    * @p tags is identical to an empty QList. This signal is used
+    * by plugins to get information about changes.
+    */
+  void tagsSelected(const QList<MyMoneyTag>& tags);
+
+  /**
     * This signal is emitted when a transaction/list of transactions has been selected by
     * the GUI. If no transaction is selected or the selection is removed,
     * @p transactions is identical to an empty QList. This signal is used
@@ -1170,6 +1207,9 @@ signals:
 
   void payeeRename(void);
   void payeeCreated(const QString& id);
+
+  void tagRename(void);
+  void tagCreated(const QString& id);
 
   void currencyRename(void);
   void currencyCreated(const QString& id);

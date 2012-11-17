@@ -215,6 +215,7 @@ void ListTable::render(QString& result, QString& csv) const
   i18nHeaders["value"] = i18n("Amount");
   i18nHeaders["number"] = i18n("Num");
   i18nHeaders["payee"] = i18n("Payee");
+  i18nHeaders["tag"] = i18n("Tags");
   i18nHeaders["category"] = i18n("Category");
   i18nHeaders["account"] = i18n("Account");
   i18nHeaders["memo"] = i18n("Memo");
@@ -436,6 +437,7 @@ void ListTable::render(QString& result, QString& csv) const
         else if (*it_column == "postdate"
                  || *it_column == "number"
                  || *it_column == "payee"
+                 || *it_column == "tag"
                  || *it_column == "action"
                  || *it_column == "shares"
                  || *it_column == "price"
@@ -590,12 +592,15 @@ void ListTable::render(QString& result, QString& csv) const
     QString grandtotal_html = grandtotal.formatMoney(fraction);
     QString grandtotal_csv = grandtotal.formatMoney(fraction, false);
 
-    result += "<tr class=\"sectionfooter\">"
+    //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
+    if(m_config.rowType()!=MyMoneyReport::eTag) {
+      result += "<tr class=\"sectionfooter\">"
               "<td class=\"left0\" "
               "colspan=\"" + QString::number(columns.count() - 1 - postcolumns.count()) + "\">" +
               i18n("Grand Total") + "</td>"
               "<td>" + grandtotal_html + "</td></tr>\n";
-    csv += "\"" + i18n("Grand Total") + "\",\"" + grandtotal_csv + "\"\n";
+      csv += "\"" + i18n("Grand Total") + "\",\"" + grandtotal_csv + "\"\n";
+    }
   }
   result += "</table>\n";
 }

@@ -28,6 +28,7 @@
 #include <QBoxLayout>
 #include <QHeaderView>
 #include <QApplication>
+#include <QTextDocument>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -45,6 +46,7 @@
 #include <mymoneysplit.h>
 #include <mymoneyfile.h>
 #include <mymoneypayee.h>
+#include <mymoneytag.h>
 #include <register.h>
 #include <kmymoneycategory.h>
 #include <kmymoneydateinput.h>
@@ -172,6 +174,15 @@ Transaction::Transaction(Register *parent, const MyMoneyTransaction& transaction
     m_payeeHeader = m_split.shares().isNegative() ? i18n("From") : i18n("Pay to");
   } else {
     m_payeeHeader = m_split.shares().isNegative() ? i18n("Pay to") : i18n("From");
+  }
+
+  // load the tag
+  if (!m_split.tagIdList().isEmpty()) {
+    const QList<QString> t=m_split.tagIdList();
+    for(int i=0; i<t.count();i++) {
+      m_tagList << file->tag(t[i]).name();
+      m_tagColorList << file->tag(t[i]).tagColor();
+    }
   }
 
   // load the currency
@@ -316,7 +327,14 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
       registerCellText(txt, align, index.row() - startRow(), index.column(), painter);
     }
     // adjust the text rectangle to obtain a reasonable spacing between the text and the grid
-    style->drawItemText(painter, option.rect.adjusted(2, 0, -2, 0), align, option.palette, true, txt, m_selected ? QPalette::HighlightedText : QPalette::Text);
+
+     QTextDocument document;
+     document.setHtml(txt);
+     painter->translate(option.rect.adjusted(2, 0, -2, 0).topLeft());
+     document.drawContents(painter);
+     painter->translate(-option.rect.adjusted(2, 0, -2, 0).topLeft());
+
+    //style->drawItemText(painter, option.rect.adjusted(2, 0, -2, 0), align, option.palette, true, txt, m_selected ? QPalette::HighlightedText : QPalette::Text);
 
     // draw the grid if it's needed
     if (KMyMoneySettings::showGrid()) {
@@ -606,7 +624,7 @@ bool Transaction::matches(const QString& txt) const
   QList<MyMoneySplit>::const_iterator it_s;
   for (it_s = list.begin(); it_s != list.end(); ++it_s) {
     // check if the text is contained in one of the fields
-    // memo, number, payee, account
+    // memo, number, payee, tag, account
     if ((*it_s).memo().contains(txt, Qt::CaseInsensitive)
         || (*it_s).number().contains(txt, Qt::CaseInsensitive))
       return true;
@@ -615,6 +633,13 @@ bool Transaction::matches(const QString& txt) const
       const MyMoneyPayee& payee = file->payee((*it_s).payeeId());
       if (payee.name().contains(txt, Qt::CaseInsensitive))
         return true;
+    }
+    if (!(*it_s).tagIdList().isEmpty()) {
+      const QList<QString>& t = (*it_s).tagIdList();
+      for(int i=0; i<t.count();i++) {
+        if ((file->tag(t[i])).name().contains(txt, Qt::CaseInsensitive))
+	  return true;
+      }
     }
     const MyMoneyAccount& acc = file->account((*it_s).accountId());
     if (acc.name().contains(txt, Qt::CaseInsensitive))
@@ -805,7 +830,7 @@ void StdTransaction::loadTab(TransactionForm* form)
 void StdTransaction::setupForm(TransactionForm* form)
 {
   Transaction::setupForm(form);
-  form->setSpan(3, ValueColumn1, 3, 1);
+  form->setSpan(4, ValueColumn1, 3, 1);
 }
 
 bool StdTransaction::showRowInForm(int row) const
@@ -891,15 +916,18 @@ bool StdTransaction::formCellText(QString& txt, int& align, int row, int col, QP
       switch (col) {
         case LabelColumn1:
           align |= Qt::AlignLeft;
-          txt = i18n("Memo");
+          txt = i18n("Tags");
           break;
 
         case ValueColumn1:
-          align &= ~Qt::AlignVCenter;
-          align |= Qt::AlignTop;
-          align |= Qt::AlignLeft;
-          if (m_transaction != MyMoneyTransaction())
-            txt = m_split.memo().section('\n', 0, 2);
+	  align |= Qt::AlignLeft;
+	  if(!m_tagList.isEmpty()) {
+	    for(int i=0; i<m_tagList.size()-1;i++)
+              txt += m_tagList[i]+", ";
+            txt += m_tagList.last();
+	  }
+          //if (m_transaction != MyMoneyTransaction())
+          //  txt = m_split.tagId();
           break;
 
         case LabelColumn2:
@@ -912,6 +940,23 @@ bool StdTransaction::formCellText(QString& txt, int& align, int row, int col, QP
           if (m_transaction != MyMoneyTransaction()) {
             txt = (m_split.value(m_transaction.commodity(), m_splitCurrencyId).abs()).formatMoney(m_account.fraction());
           }
+          break;
+      }
+      break;
+
+    case 4:
+      switch (col) {
+        case LabelColumn1:
+          align |= Qt::AlignLeft;
+          txt = i18n("Memo");
+          break;
+
+        case ValueColumn1:
+          align &= ~Qt::AlignVCenter;
+          align |= Qt::AlignTop;
+          align |= Qt::AlignLeft;
+          if (m_transaction != MyMoneyTransaction())
+            txt = m_split.memo().section('\n', 0, 2);
           break;
       }
       break;
@@ -934,7 +979,7 @@ bool StdTransaction::formCellText(QString& txt, int& align, int row, int col, QP
   if (col == ValueColumn2 && row == 1) {
     return haveNumberField();
   }
-  return (col == ValueColumn1 && row < 4) || (col == ValueColumn2 && row > 0 && row != 4);
+  return (col == ValueColumn1 && row < 5) || (col == ValueColumn2 && row > 0 && row != 4);
 }
 
 void StdTransaction::registerCellText(QString& txt, int& align, int row, int col, QPainter* painter)
@@ -960,6 +1005,14 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
               break;
             case AccountFirst:
               txt = m_category;
+	      if(!m_tagList.isEmpty()) {
+	        txt += " ( ";
+	        for(int i=0; i<m_tagList.size()-1;i++)
+		{
+                  txt += "<span style='color: "+m_tagColorList[i].name()+"'>&#x25CF;</span> "+m_tagList[i]+", ";
+                }
+                txt += "<span style='color: "+m_tagColorList.last().name()+"'>&#x25CF;</span> "+m_tagList.last()+" )";
+	      }
               break;
           }
           align |= Qt::AlignLeft;
@@ -1022,6 +1075,14 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
           switch (m_parent->getDetailsColumnType()) {
             case PayeeFirst:
               txt = m_category;
+	      if(!m_tagList.isEmpty()) {
+	        txt += " ( ";
+	        for(int i=0; i<m_tagList.size()-1;i++)
+		{
+                  txt += "<span style='color: "+m_tagColorList[i].name()+"'>&#x25CF;</span> "+m_tagList[i]+", ";
+                }
+                txt += "<span style='color: "+m_tagColorList.last().name()+"'>&#x25CF;</span> "+m_tagList.last()+" )";
+	      }
               break;
             case AccountFirst:
               txt = m_payee;
@@ -1083,8 +1144,10 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
   arrangeWidget(m_form, 1, ValueColumn1, editWidgets["payee"]);
   arrangeWidget(m_form, 2, LabelColumn1, editWidgets["category-label"]);
   arrangeWidget(m_form, 2, ValueColumn1, editWidgets["category"]->parentWidget());
-  arrangeWidget(m_form, 3, LabelColumn1, editWidgets["memo-label"]);
-  arrangeWidget(m_form, 3, ValueColumn1, editWidgets["memo"]);
+  arrangeWidget(m_form, 3, LabelColumn1, editWidgets["tag-label"]);
+  arrangeWidget(m_form, 3, ValueColumn1, editWidgets["tag"]);
+  arrangeWidget(m_form, 4, LabelColumn1, editWidgets["memo-label"]);
+  arrangeWidget(m_form, 4, ValueColumn1, editWidgets["memo"]);
   if (haveNumberField()) {
     arrangeWidget(m_form, 1, LabelColumn2, editWidgets["number-label"]);
     arrangeWidget(m_form, 1, ValueColumn2, editWidgets["number"]);
@@ -1102,12 +1165,15 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
     KMyMoneyCombo* combo = dynamic_cast<KMyMoneyCombo*>(*it);
     kMyMoneyLineEdit* edit = dynamic_cast<kMyMoneyLineEdit*>(*it);
     KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it);
+    KTagContainer* tag = dynamic_cast<KTagContainer*>(*it);
     if (combo)
       combo->setClickMessage(QString());
     if (edit)
       edit->setClickMessage(QString());
     if (payee)
       payee->setClickMessage(QString());
+    if (tag)
+      tag->tagCombo()->setClickMessage(QString());
   }
 
   KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_form);
@@ -1141,8 +1207,10 @@ void StdTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
       w = w->findChild<KPushButton*>("splitButton");
       if (w)
         tabOrderWidgets.append(w);
-    } else if (*it_s == "memo") {
+    } else if (*it_s == "tag") {
       tabOrderWidgets.append(focusWidget(m_form->cellWidget(3, ValueColumn1)));
+    } else if (*it_s == "memo") {
+      tabOrderWidgets.append(focusWidget(m_form->cellWidget(4, ValueColumn1)));
     } else if (*it_s == "number") {
       if (haveNumberField()) {
         if ((w = focusWidget(m_form->cellWidget(1, ValueColumn2))))
@@ -1172,12 +1240,13 @@ void StdTransaction::arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidge
   arrangeWidget(m_parent, m_startRow + 1, DateColumn, editWidgets["status"]);
   arrangeWidget(m_parent, m_startRow + 0, DetailColumn, editWidgets["payee"]);
   arrangeWidget(m_parent, m_startRow + 1, DetailColumn, editWidgets["category"]->parentWidget());
-  arrangeWidget(m_parent, m_startRow + 2, DetailColumn, editWidgets["memo"]);
+  arrangeWidget(m_parent, m_startRow + 2, DetailColumn, editWidgets["tag"]);
+  arrangeWidget(m_parent, m_startRow + 3, DetailColumn, editWidgets["memo"]);
   arrangeWidget(m_parent, m_startRow + 0, PaymentColumn, editWidgets["payment"]);
   arrangeWidget(m_parent, m_startRow + 0, DepositColumn, editWidgets["deposit"]);
 
   // increase the height of the row containing the memo widget
-  m_parent->setRowHeight(m_startRow + 2, m_parent->rowHeightHint() * 3);
+  m_parent->setRowHeight(m_startRow + 3, m_parent->rowHeightHint() * 3);
 }
 
 void StdTransaction::tabOrderInRegister(QWidgetList& tabOrderWidgets) const
@@ -1205,8 +1274,10 @@ void StdTransaction::tabOrderInRegister(QWidgetList& tabOrderWidgets) const
       w = w->findChild<KPushButton*>("splitButton");
       if (w)
         tabOrderWidgets.append(w);
-    } else if (*it_s == "memo") {
+    } else if (*it_s == "tag") {
       tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 2, DetailColumn)));
+    } else if (*it_s == "memo") {
+      tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 3, DetailColumn)));
     } else if (*it_s == "payment") {
       tabOrderWidgets.append(focusWidget(m_parent->cellWidget(m_startRow + 0, PaymentColumn)));
     } else if (*it_s == "deposit") {
@@ -1222,8 +1293,10 @@ int StdTransaction::numRowsRegister(bool expanded) const
 {
   int numRows = 1;
   if (expanded) {
-    numRows = 3;
+    numRows = 4;
     if (!m_inEdit) {
+      //When not in edit Tags haven't a separate row;
+      numRows--;
       if (m_payee.isEmpty()) {
         numRows--;
       }

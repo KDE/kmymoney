@@ -32,7 +32,7 @@
 #include "mymoneyfile.h"
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
-unsigned int MyMoneyDbDef::m_currentVersion = 6;
+unsigned int MyMoneyDbDef::m_currentVersion = 7;
 
 // ************************* Build table descriptions ****************************
 MyMoneyDbDef::MyMoneyDbDef()
@@ -40,6 +40,8 @@ MyMoneyDbDef::MyMoneyDbDef()
   FileInfo();
   Institutions();
   Payees();
+  Tags();
+  TagSplits(); // a table to bind tags and splits
   Accounts();
   Transactions();
   Splits();
@@ -76,6 +78,7 @@ void MyMoneyDbDef::FileInfo(void)
   appendField(MyMoneyDbIntColumn("institutions", MyMoneyDbIntColumn::BIG, UNSIGNED));
   appendField(MyMoneyDbIntColumn("accounts", MyMoneyDbIntColumn::BIG, UNSIGNED));
   appendField(MyMoneyDbIntColumn("payees", MyMoneyDbIntColumn::BIG, UNSIGNED));
+  appendField(MyMoneyDbIntColumn("tags", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 7));
   appendField(MyMoneyDbIntColumn("transactions", MyMoneyDbIntColumn::BIG, UNSIGNED));
   appendField(MyMoneyDbIntColumn("splits", MyMoneyDbIntColumn::BIG, UNSIGNED));
   appendField(MyMoneyDbIntColumn("securities", MyMoneyDbIntColumn::BIG, UNSIGNED));
@@ -88,6 +91,7 @@ void MyMoneyDbDef::FileInfo(void)
   appendField(MyMoneyDbColumn("dateRangeEnd", "date"));
   appendField(MyMoneyDbIntColumn("hiInstitutionId", MyMoneyDbIntColumn::BIG, UNSIGNED));
   appendField(MyMoneyDbIntColumn("hiPayeeId", MyMoneyDbIntColumn::BIG, UNSIGNED));
+  appendField(MyMoneyDbIntColumn("hiTagId", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 7));
   appendField(MyMoneyDbIntColumn("hiAccountId", MyMoneyDbIntColumn::BIG, UNSIGNED));
   appendField(MyMoneyDbIntColumn("hiTransactionId", MyMoneyDbIntColumn::BIG, UNSIGNED));
   appendField(MyMoneyDbIntColumn("hiScheduleId", MyMoneyDbIntColumn::BIG, UNSIGNED));
@@ -140,6 +144,30 @@ void MyMoneyDbDef::Payees(void)
   appendField(MyMoneyDbColumn("matchIgnoreCase", "char(1)", false, false, 5));
   appendField(MyMoneyDbTextColumn("matchKeys", MyMoneyDbTextColumn::MEDIUM, false, false, 5));
   MyMoneyDbTable t("kmmPayees", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
+void MyMoneyDbDef::Tags(void)
+{
+  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  appendField(MyMoneyDbColumn("id", "varchar(32)",  PRIMARYKEY, NOTNULL));
+  appendField(MyMoneyDbTextColumn("name"));
+  appendField(MyMoneyDbColumn("closed", "char(1)", false, false, 5));
+  appendField(MyMoneyDbTextColumn("notes", MyMoneyDbTextColumn::LONG, false, false, 5));
+  appendField(MyMoneyDbTextColumn("tagColor"));
+  MyMoneyDbTable t("kmmTags", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
+void MyMoneyDbDef::TagSplits(void)
+{
+  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  appendField(MyMoneyDbColumn("transactionId", "varchar(32)",PRIMARYKEY, NOTNULL));
+  appendField(MyMoneyDbColumn("tagId", "varchar(32)",PRIMARYKEY, NOTNULL));
+  appendField(MyMoneyDbIntColumn("splitId", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL));
+  MyMoneyDbTable t("kmmTagSplits", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
 }

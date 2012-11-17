@@ -61,6 +61,7 @@ class KAccountsView;
 class KCategoriesView;
 class KInstitutionsView;
 class KPayeesView;
+class KTagsView;
 class KBudgetView;
 class KScheduledView;
 class KGlobalLedgerView;
@@ -130,6 +131,7 @@ private:
   KInstitutionsView *m_institutionsView;
   KCategoriesView *m_categoriesView;
   KPayeesView *m_payeesView;
+  KTagsView *m_tagsView;
   KBudgetView *m_budgetView;
   KScheduledView *m_scheduledView;
   KGlobalLedgerView *m_ledgerView;
@@ -142,6 +144,7 @@ private:
   KPageWidgetItem* m_institutionsViewFrame;
   KPageWidgetItem* m_categoriesViewFrame;
   KPageWidgetItem* m_payeesViewFrame;
+  KPageWidgetItem* m_tagsViewFrame;
   KPageWidgetItem* m_budgetViewFrame;
   KPageWidgetItem* m_scheduleViewFrame;
   KPageWidgetItem* m_ledgerViewFrame;
@@ -499,6 +502,16 @@ public slots:
     * @param transactionId The ID of the transaction to be selected
     */
   void slotPayeeSelected(const QString& payeeId, const QString& accountId, const QString& transactionId);
+
+  /**
+    * Called, whenever the tags view should pop up and a specific
+    * transaction in an account should be shown.
+    *
+    * @param tagId The ID of the tag to be shown
+    * @param accountId The ID of the account to be shown
+    * @param transactionId The ID of the transaction to be selected
+    */
+  void slotTagSelected(const QString& tagId, const QString& accountId, const QString& transactionId);
 
   /**
     * Called, whenever the schedule view should pop up and a specific

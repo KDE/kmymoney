@@ -226,6 +226,13 @@ signals:
   void createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent);
 
   /**
+    * This signal is sent out, when a new tag needs to be created
+    * @param txt The name of the tag to be created
+    * @param id A connected slot should store the id of the created object in this variable
+    */
+  void createTag(const QString& txt, QString& id);
+
+  /**
     * This signal is sent out, when a new security (e.g. stock )needs to be created
     * @a Parent should be the investment account under which the security account
     * will be created.
@@ -343,6 +350,7 @@ protected slots:
   void slotUpdateDeposit(const QString&);
   void slotUpdateCategory(const QString&);
   void slotUpdatePayee(const QString&);
+  //void slotUpdateTag(const QString&);
   void slotUpdateCashFlow(KMyMoneyRegister::CashFlowDirection);
   void slotCreateCategory(const QString&, QString&);
   void slotUpdateAction(int action);

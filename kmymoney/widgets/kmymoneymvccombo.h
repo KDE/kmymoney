@@ -24,6 +24,8 @@
 // QT Includes
 
 #include <QCompleter>
+/*#include <QToolButton>
+#include <QLabel>*/
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,6 +36,7 @@
 // Project Includes
 
 #include <mymoneypayee.h>
+#include <mymoneytag.h>
 #include <mymoneyscheduled.h>
 #include <mymoneysplit.h>
 #include <mymoneytransactionfilter.h>
@@ -136,6 +139,7 @@ signals:
   void itemSelected(const QString& id);
   void objectCreation(bool);
   void createItem(const QString&, QString&);
+  void lostFocus(void);
 
 private:
   /// \internal d-pointer class.
@@ -174,6 +178,83 @@ public:
   KMyMoneyPayeeCombo(QWidget* parent = 0);
 
   void loadPayees(const QList<MyMoneyPayee>& list);
+};
+
+/**
+  * This class implements a text based tag selector.
+  * The widget has the functionality of a KMyMoneyPayeeCombo object.
+  * Whenever a key is pressed, the set of loaded tags is searched for
+  * tags names which match the currently entered text.
+  *
+  * @author Alessandro Russo
+  */
+class KMyMoneyTagCombo : public KMyMoneyMVCCombo
+{
+  Q_OBJECT
+public:
+  KMyMoneyTagCombo(QWidget* parent = 0);
+
+  void loadTags(const QList<MyMoneyTag>& list);
+  /** ids in usedIdList are escluded from the internal list
+   * you should call loadTags before calling setUsedTagList because it doesn't readd
+   * tag removed in previous call*/
+  void setUsedTagList(QList<QString>& usedIdList);
+
+private:
+  QList<QString> m_usedIdList;
+};
+
+/**
+  * This class implements a tag label. It create a QFrame and inside it a QToolButton
+  * with a 'X' Icon and a QLabel with the name of the Tag
+  *
+  * @author Alessandro Russo
+  */
+class KTagLabel : public QFrame
+{
+  Q_OBJECT
+public:
+  KTagLabel(const QString& id, const QString& name, QWidget* parent = 0);
+
+signals:
+  void clicked(bool);
+
+private:
+  QString m_tagId;
+};
+
+/**
+  * This widget contain a KMyMoneyTagCombo widget and 0 or more KTagLabel widgets
+  * call KMyMoneyTagCombo.loadTags with the correct list whenever a new KTagLabel is created or
+  * deleted by removing or adding the relative tag
+  *
+  * @author Alessandro Russo
+  */
+class KTagContainer : public QWidget
+{
+  Q_OBJECT
+public:
+  KTagContainer(QWidget* parent = 0);
+
+  void loadTags(const QList<MyMoneyTag>& list);
+  KMyMoneyTagCombo* tagCombo()
+  {
+    return m_tagCombo;
+  }
+  const QList<QString> selectedTags(void);
+  void addTagWidget(const QString& id);
+  void RemoveAllTagWidgets(void);
+
+protected slots:
+  void slotRemoveTagWidget(void);
+  void slotAddTagWidget(void);
+
+private:
+  KMyMoneyTagCombo *m_tagCombo;
+  QList<KTagLabel*> m_tagLabelList;
+  QList<QString> m_tagIdList;
+  // A local cache of the list of all Tags, it's updated when loadTags is called
+  QList<MyMoneyTag> m_list;
 };
 
 /**

@@ -43,6 +43,7 @@
 #define VERSION_0_51  0x00000011    // use 8 bytes for MyMoneyMoney objects
 
 // add new definitions above and make sure to adapt MAX_FILE_VERSION below
+
 #define MIN_FILE_VERSION  VERSION_0_50
 #define MAX_FILE_VERSION  VERSION_0_51
 

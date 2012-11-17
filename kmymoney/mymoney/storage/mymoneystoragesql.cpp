@@ -53,7 +53,7 @@
 #define CATCH } catch (MyMoneyException *e) {
 #define PASS } catch (MyMoneyException *e) { throw; }
 #define ECATCH }
-#define DBG(a) // qDebug(a)
+#define DBG(a) //qDebug (a)
 //#define TRACE(a) qDebug(a)
 #define TRACE(a) ::timetrace(a)
 
@@ -365,6 +365,10 @@ int MyMoneyStorageSql::upgradeDb()
         ++m_dbVersion;
         break;
       case 6:
+        if ((rc = upgradeToV7()) != 0) return (1);
+        ++m_dbVersion;
+        break;
+      case 7:
         break;
       default:
         qWarning("Unknown version number in database - %d", m_dbVersion);
@@ -645,6 +649,22 @@ int MyMoneyStorageSql::upgradeToV6()
   return 0;
 }
 
+int MyMoneyStorageSql::upgradeToV7()
+{
+  DBG("*** Entering MyMoneyStorageSql::upgradeToV7");
+  MyMoneyDbTransaction dbtrans(*this, Q_FUNC_INFO);
+  QSqlQuery q(*this);
+
+  // add tags support
+  // kmmFileInfo - add tags and hiTagId
+  if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
+    return (1);
+  readFileInfo();
+  m_tags = getRecCount("kmmTags");
+  writeFileInfo();
+  return 0;
+}
+
 bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion)
 {
   DBG("*** Entering MyMoneyStorageSql::alterTable");
@@ -791,6 +811,8 @@ bool MyMoneyStorageSql::readFile(void)
       readPayees(user);
     }
     //TRACE("done payees");
+    readTags();
+    //TRACE("done tags");
     readCurrencies();
     //TRACE("done currencies");
     readSecurities();
@@ -831,15 +853,16 @@ bool MyMoneyStorageSql::writeFile(void)
 {
   DBG("*** Entering MyMoneyStorageSql::writeFile");
   // initialize record counts and hi ids
-  m_institutions = m_accounts = m_payees = m_transactions = m_splits
+  m_institutions = m_accounts = m_payees = m_tags = m_transactions = m_splits
                                 = m_securities = m_prices = m_currencies = m_schedules  = m_reports = m_kvps = m_budgets = 0;
-  m_hiIdInstitutions = m_hiIdPayees = m_hiIdAccounts = m_hiIdTransactions =
+  m_hiIdInstitutions = m_hiIdPayees = m_hiIdTags = m_hiIdAccounts = m_hiIdTransactions =
                                         m_hiIdSchedules = m_hiIdSecurities = m_hiIdReports = m_hiIdBudgets = 0;
   m_displayStatus = true;
   try {
     MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
     writeInstitutions();
     writePayees();
+    writeTags();
     writeAccounts();
     writeTransactions();
     writeSchedules();
@@ -1166,6 +1189,91 @@ void MyMoneyStorageSql::writePayee(const MyMoneyPayee& p, QSqlQuery& q, bool isU
   q.bindValue(":matchKeys", matchKeys);
   if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Payee"))); // krazy:exclude=crashy
   if (!isUserInfo) m_hiIdPayees = calcHighId(m_hiIdPayees, p.id());
+}
+
+// **** Tags ****
+void MyMoneyStorageSql::writeTags()
+{
+  DBG("*** Entering MyMoneyStorageSql::writeTags");
+  // first, get a list of what's on the database (see writeInstitutions)
+  QList<QString> dbList;
+  QSqlQuery q(*this);
+  q.prepare("SELECT id FROM kmmTags;");
+  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "building Tag list")); // krazy:exclude=crashy
+  while (q.next()) dbList.append(q.value(0).toString());
+
+  QList<MyMoneyTag> list = m_storage->tagList();
+  signalProgress(0, list.count(), "Writing Tags...");
+  QSqlQuery q2(*this);
+  q.prepare(m_db.m_tables["kmmTags"].updateString());
+  q2.prepare(m_db.m_tables["kmmTags"].insertString());
+  foreach (const MyMoneyTag& it, list) {
+    if (dbList.contains(it.id())) {
+      dbList.removeAll(it.id());
+      writeTag(it, q);
+    } else {
+      writeTag(it, q2);
+    }
+    signalProgress(++m_tags, 0);
+  }
+
+  if (!dbList.isEmpty()) {
+    QVariantList deleteList;
+    // qCopy segfaults here, so do it with a hand-rolled loop
+    foreach (const QString& it, dbList) {
+      deleteList << it;
+    }
+    q.prepare(m_db.m_tables["kmmTags"].deleteString());
+    q.bindValue(":id", deleteList);
+    if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Tag"));
+    m_tags -= q.numRowsAffected();
+  }
+}
+
+void MyMoneyStorageSql::addTag(const MyMoneyTag& tag)
+{
+  DBG("*** Entering MyMoneyStorageSql::addTag");
+  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
+  QSqlQuery q(*this);
+  q.prepare(m_db.m_tables["kmmTags"].insertString());
+  writeTag(tag, q);
+  ++m_tags;
+  writeFileInfo();
+}
+
+void MyMoneyStorageSql::modifyTag(const MyMoneyTag& tag)
+{
+  DBG("*** Entering MyMoneyStorageSql::modifyTag");
+  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
+  QSqlQuery q(*this);
+  q.prepare(m_db.m_tables["kmmTags"].updateString());
+  writeTag(tag, q);
+  writeFileInfo();
+}
+
+void MyMoneyStorageSql::removeTag(const MyMoneyTag& tag)
+{
+  DBG("*** Entering MyMoneyStorageSql::removeTag");
+  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
+  QSqlQuery q(*this);
+  q.prepare(m_db.m_tables["kmmTags"].deleteString());
+  q.bindValue(":id", tag.id());
+  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("deleting  Tag"))); // krazy:exclude=crashy
+  --m_tags;
+  writeFileInfo();
+}
+
+void MyMoneyStorageSql::writeTag(const MyMoneyTag& ta, QSqlQuery& q)
+{
+  DBG("*** Entering MyMoneyStorageSql::writeTag");
+  q.bindValue(":id", ta.id());
+  q.bindValue(":name", ta.name());
+  q.bindValue(":tagColor", ta.tagColor().name());
+  if (ta.isClosed()) q.bindValue(":closed", "Y");
+  else q.bindValue(":closed", "N");
+  q.bindValue(":notes", ta.notes());
+  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Tag"))); // krazy:exclude=crashy
+  m_hiIdTags = calcHighId(m_hiIdTags, ta.id());
 }
 
 // **** Accounts ****
@@ -1620,10 +1728,13 @@ void MyMoneyStorageSql::writeSplits(const QString& txId, const QString& type, co
 
   if (!insertList.isEmpty()) {
     writeSplitList(txId, insertList, type, insertIdList, q2);
+    writeTagSplitsList(txId, insertList, insertIdList);
   }
 
   if (!updateList.isEmpty()) {
     writeSplitList(txId, updateList, type, updateIdList, q);
+    deleteTagSplitsList(txId, updateIdList);
+    writeTagSplitsList(txId, updateList, updateIdList);
   }
 
   if (!dbList.isEmpty()) {
@@ -1638,6 +1749,54 @@ void MyMoneyStorageSql::writeSplits(const QString& txId, const QString& type, co
     q.bindValue(":splitId", splitIdList);
     if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Splits"));
   }
+}
+
+void MyMoneyStorageSql::deleteTagSplitsList(const QString& txId, const QList<int>& splitIdList)
+{
+  DBG("*** Entering MyMoneyStorageSql::deleteTagSplitsList");
+  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
+  QVariantList iList;
+  QVariantList transactionIdList;
+
+  // qCopy segfaults here, so do it with a hand-rolled loop
+  foreach (int it_s, splitIdList) {
+    iList << it_s;
+    transactionIdList << txId;
+  }
+  QSqlQuery q(*this);
+  q.prepare("DELETE FROM kmmTagSplits WHERE transactionId = :transactionId AND splitId = :splitId");
+  q.bindValue(":splitId", iList);
+  q.bindValue(":transactionId", transactionIdList);
+  if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("deleting tagSplits")));
+}
+
+void MyMoneyStorageSql::writeTagSplitsList
+(const QString& txId,
+ const QList<MyMoneySplit>& splitList,
+ const QList<int>& splitIdList)
+{
+  DBG("*** Entering MyMoneyStorageSql::writeTagSplitsList");
+  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
+  QVariantList tagIdList;
+  QVariantList txIdList;
+  QVariantList splitIdList_TagSplits;
+  QVariantList tagSplitsIdList;
+
+  int i = 0, l = 0;
+  foreach (const MyMoneySplit& s, splitList) {
+    for(l=0; l<s.tagIdList().size(); l++) {
+      tagIdList << s.tagIdList()[l];
+      splitIdList_TagSplits << splitIdList[i];
+      txIdList << txId;
+    }
+    i++;
+  }
+  QSqlQuery q(*this);
+  q.prepare(m_db.m_tables["kmmTagSplits"].insertString());
+  q.bindValue(":tagId", tagIdList);
+  q.bindValue(":splitId", splitIdList_TagSplits);
+  q.bindValue(":transactionId", txIdList);
+  if (!q.execBatch()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing tagSplits")));
 }
 
 void MyMoneyStorageSql::writeSplitList
@@ -2375,6 +2534,7 @@ void MyMoneyStorageSql::writeFileInfo()
   q.bindValue(":institutions", (unsigned long long) m_institutions);
   q.bindValue(":accounts", (unsigned long long) m_accounts);
   q.bindValue(":payees", (unsigned long long) m_payees);
+  q.bindValue(":tags", (unsigned long long) m_tags);
   q.bindValue(":transactions", (unsigned long long) m_transactions);
   q.bindValue(":splits", (unsigned long long) m_splits);
   q.bindValue(":securities", (unsigned long long) m_securities);
@@ -2401,6 +2561,7 @@ void MyMoneyStorageSql::writeFileInfo()
 
   q.bindValue(":hiInstitutionId", (unsigned long long) m_hiIdInstitutions);
   q.bindValue(":hiPayeeId", (unsigned long long) m_hiIdPayees);
+  q.bindValue(":hiTagId", (unsigned long long) m_hiIdTags);
   q.bindValue(":hiAccountId", (unsigned long long) m_hiIdAccounts);
   q.bindValue(":hiTransactionId", (unsigned long long) m_hiIdTransactions);
   q.bindValue(":hiScheduleId", (unsigned long long) m_hiIdSchedules);
@@ -2495,6 +2656,7 @@ void MyMoneyStorageSql::readFileInfo(void)
   m_storage->setLastModificationDate(GETDATE(t.fieldNumber("lastModified")));
   m_hiIdInstitutions = (unsigned long) GETULL(t.fieldNumber("hiInstitutionId"));
   m_hiIdPayees = (unsigned long) GETULL(t.fieldNumber("hiPayeeId"));
+  m_hiIdTags = (unsigned long) GETULL(t.fieldNumber("hiTagId"));
   m_hiIdAccounts = (unsigned long) GETULL(t.fieldNumber("hiAccountId"));
   m_hiIdTransactions = (unsigned long) GETULL(t.fieldNumber("hiTransactionId"));
   m_hiIdSchedules = (unsigned long) GETULL(t.fieldNumber("hiScheduleId"));
@@ -2504,6 +2666,7 @@ void MyMoneyStorageSql::readFileInfo(void)
   m_institutions = (unsigned long) GETULL(t.fieldNumber("institutions"));
   m_accounts = (unsigned long) GETULL(t.fieldNumber("accounts"));
   m_payees = (unsigned long) GETULL(t.fieldNumber("payees"));
+  m_tags = (unsigned long) GETULL(t.fieldNumber("tags"));
   m_transactions = (unsigned long) GETULL(t.fieldNumber("transactions"));
   m_splits = (unsigned long) GETULL(t.fieldNumber("splits"));
   m_securities = (unsigned long) GETULL(t.fieldNumber("securities"));
@@ -2717,6 +2880,76 @@ const QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringLi
   return pList;
 }
 
+void MyMoneyStorageSql::readTags(const QString& id)
+{
+  DBG("*** Entering MyMoneyStorageSql::readTags(single id)");
+  QList<QString> list;
+  list.append(id);
+  readTags(list);
+}
+
+void MyMoneyStorageSql::readTags(const QList<QString>& pid)
+{
+  DBG("*** Entering MyMoneyStorageSql::readTags(list)");
+  TRY
+  m_storage->loadTags(fetchTags(pid));
+  readFileInfo();
+  m_storage->loadTagId(m_hiIdTags);
+  CATCH
+  delete e; // ignore duplicates
+  ECATCH
+//  if (pid.isEmpty()) m_tagListRead = true;
+}
+
+const QMap<QString, MyMoneyTag> MyMoneyStorageSql::fetchTags(const QStringList& idList, bool /*forUpdate*/) const
+{
+  DBG("*** Entering MyMoneyStorageSql::fetchTags");
+  MyMoneyDbTransaction trans(const_cast <MyMoneyStorageSql&>(*this), Q_FUNC_INFO);
+  if (m_displayStatus) {
+    int tagsNb = (idList.isEmpty() ? m_tags : idList.size());
+    signalProgress(0, tagsNb, QObject::tr("Loading tags..."));
+  } else {
+//    if (m_tagListRead) return;
+  }
+  int progress = 0;
+  QMap<QString, MyMoneyTag> taList;
+  //unsigned long lastId;
+  const MyMoneyDbTable& t = m_db.m_tables["kmmTags"];
+  QSqlQuery q(*const_cast <MyMoneyStorageSql*>(this));
+  if (idList.isEmpty()) {
+    q.prepare(t.selectAllString());
+  } else {
+    QString whereClause = " where (";
+    QString itemConnector = "";
+    foreach (const QString& it, idList) {
+      whereClause.append(QString("%1id = '%2'").arg(itemConnector).arg(it));
+      itemConnector = " or ";
+    }
+    whereClause += ')';
+    q.prepare(t.selectAllString(false) + whereClause);
+  }
+  if (!q.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("reading Tag"))); // krazy:exclude=crashy
+  int idCol = t.fieldNumber("id");
+  int nameCol = t.fieldNumber("name");
+  int notesCol = t.fieldNumber("notes");
+  int tagColorCol = t.fieldNumber("tagColor");
+  int closedCol = t.fieldNumber("closed");
+
+  while (q.next()) {
+    QString pid;
+    QString boolChar;
+    MyMoneyTag tag;
+    pid = GETSTRING(idCol);
+    tag.setName(GETSTRING(nameCol));
+    tag.setNotes(GETSTRING(notesCol));
+    tag.setClosed((GETSTRING(closedCol) == "Y"));
+    tag.setTagColor(QColor(GETSTRING(tagColorCol)));
+    taList[pid] = MyMoneyTag(pid, tag);
+    if (m_displayStatus) signalProgress(++progress, 0);
+  }
+  return taList;
+}
+
 const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStringList& idList, bool forUpdate) const
 {
   DBG("*** Entering MyMoneyStorageSql::fetchAccounts");
@@ -2887,7 +3120,7 @@ const QMap<QString, MyMoneyMoney> MyMoneyStorageSql::fetchBalance(const QStringL
     queryString += QString(" AND postDate < '%1'").arg(date.addDays(1).toString(Qt::ISODate));
 
   queryString += " ORDER BY accountId, postDate;";
-  DBG(queryString);
+  //DBG(queryString);
   q.prepare(queryString);
 
   int i = 0;
@@ -3159,6 +3392,23 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
     splitFilterActive = true;
   }
 
+  //tags
+  QStringList tags;
+  if (filter.tags(tags)) {
+    QString itemConnector = "splitId in ( SELECT splitId from kmmTagSplits where kmmTagSplits.transactionId = kmmSplits.transactionId and tagId in (";
+    QString tagsClause = "";
+    foreach (const QString& it, tags) {
+      tagsClause.append(QString("%1'%2'")
+                          .arg(itemConnector).arg(it));
+      itemConnector = ", ";
+    }
+    if (!tagsClause.isEmpty()) {
+      whereClause += subClauseconnector + tagsClause + ')';
+      subClauseconnector = " and ";
+    }
+    splitFilterActive = true;
+  }
+
   // accounts and categories
   if (!accounts.isEmpty()) {
     splitFilterActive = true;
@@ -3256,6 +3506,8 @@ void MyMoneyStorageSql::readSplit(MyMoneySplit& s, const QSqlQuery& q) const
   // Set these up as statics, since the field numbers should not change
   // during execution.
   static const MyMoneyDbTable& t = m_db.m_tables["kmmSplits"];
+  static const int splitIdCol = t.fieldNumber("splitId");
+  static const int transactionIdCol = t.fieldNumber("transactionId");
   static const int payeeIdCol = t.fieldNumber("payeeId");
   static const int reconcileDateCol = t.fieldNumber("reconcileDate");
   static const int actionCol = t.fieldNumber("action");
@@ -3271,6 +3523,16 @@ void MyMoneyStorageSql::readSplit(MyMoneySplit& s, const QSqlQuery& q) const
 
   s.clearId();
 
+  QList<QString> tagIdList;
+  QSqlQuery q1(*const_cast <MyMoneyStorageSql*>(this));
+  q1.prepare("SELECT tagId from kmmTagSplits where splitId = :id and transactionId = :transactionId");
+  q1.bindValue(":id", GETSTRING(splitIdCol));
+  q1.bindValue(":transactionId", GETSTRING(transactionIdCol));
+  if (!q1.exec()) throw new MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("reading tagId in Split"))); // krazy:exclude=crashy
+  while (q1.next())
+    tagIdList << q1.value(0).toString();
+
+  s.setTagIdList(tagIdList);
   s.setPayeeId(GETSTRING(payeeIdCol));
   s.setReconcileDate(GETDATE(reconcileDateCol));
   s.setAction(GETSTRING(actionCol));
@@ -3289,6 +3551,7 @@ void MyMoneyStorageSql::readSplit(MyMoneySplit& s, const QSqlQuery& q) const
 
 bool MyMoneyStorageSql::isReferencedByTransaction(const QString& id) const
 {
+  //FIXME-ALEX should I add sub query for kmmTagSplits here?
   DBG("*** Entering MyMoneyStorageSql::isReferencedByTransaction");
   QSqlQuery q(*const_cast <MyMoneyStorageSql*>(this));
   q.prepare("SELECT COUNT(*) FROM kmmTransactions "
@@ -3880,6 +4143,12 @@ long unsigned MyMoneyStorageSql::getNextPayeeId() const
   return m_hiIdPayees;
 }
 
+long unsigned MyMoneyStorageSql::getNextTagId() const
+{
+  const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
+  return m_hiIdTags;
+}
+
 long unsigned MyMoneyStorageSql::getNextReportId() const
 {
   const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
@@ -3968,6 +4237,22 @@ long unsigned MyMoneyStorageSql::incrementPayeeId()
   return returnValue;
 }
 
+long unsigned MyMoneyStorageSql::incrementTagId()
+{
+  QSqlQuery q(*this);
+
+  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
+  q.prepare("SELECT hiTagId FROM kmmFileInfo " + m_driver->forUpdateString());
+  q.exec(); // krazy:exclude=crashy
+  q.next();
+  long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
+  ++returnValue;
+  q.prepare(QString("UPDATE kmmFileInfo SET hiTagId = %1").arg(returnValue));
+  q.exec(); // krazy:exclude=crashy
+  m_hiIdTags = returnValue;
+  return returnValue;
+}
+
 long unsigned MyMoneyStorageSql::incrementReportId()
 {
   QSqlQuery q(*this);
@@ -4047,6 +4332,12 @@ void MyMoneyStorageSql::loadTransactionId(const unsigned long& id)
 void MyMoneyStorageSql::loadPayeeId(const unsigned long& id)
 {
   m_hiIdPayees = id;
+  writeFileInfo();
+}
+
+void MyMoneyStorageSql::loadTagId(const unsigned long& id)
+{
+  m_hiIdTags = id;
   writeFileInfo();
 }
 

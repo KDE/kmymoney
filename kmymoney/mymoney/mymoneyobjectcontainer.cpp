@@ -179,6 +179,7 @@ void MyMoneyObjectContainer::refresh(const QString& id)
   if (it != m_map.constEnd()) {
     const MyMoneyAccount* account = dynamic_cast<const MyMoneyAccount *>(*it);
     const MyMoneyPayee* payee = dynamic_cast<const MyMoneyPayee *>(*it);
+    const MyMoneyTag* tag = dynamic_cast<const MyMoneyTag *>(*it);
     const MyMoneySecurity* security = dynamic_cast<const MyMoneySecurity *>(*it);
     const MyMoneyInstitution* institution = dynamic_cast<const MyMoneyInstitution *>(*it);
     const MyMoneySchedule* schedule = dynamic_cast<const MyMoneySchedule *>(*it);
@@ -197,6 +198,9 @@ void MyMoneyObjectContainer::refresh(const QString& id)
     } else if (payee) {
       const MyMoneyPayee& p = m_storage->payee(id);
       m_map[id] = new MyMoneyPayee(p);
+    } else if (tag) {
+      const MyMoneyTag& t = m_storage->tag(id);
+      m_map[id] = new MyMoneyTag(t);
     } else if (institution) {
       const MyMoneyInstitution& i = m_storage->institution(id);
       m_map[id] = new MyMoneyInstitution(i);
@@ -211,11 +215,13 @@ void MyMoneyObjectContainer::refresh(const QString& id)
 
 objectAccessMethod(schedule, MyMoneySchedule)
 objectAccessMethod(payee, MyMoneyPayee)
+objectAccessMethod(tag, MyMoneyTag)
 objectAccessMethod(security, MyMoneySecurity)
 objectAccessMethod(institution, MyMoneyInstitution)
 
 preloadListMethod(Account, MyMoneyAccount)
 preloadListMethod(Payee, MyMoneyPayee)
+preloadListMethod(Tag, MyMoneyTag)
 preloadListMethod(Institution, MyMoneyInstitution)
 preloadListMethod(Security, MyMoneySecurity)
 preloadListMethod(Schedule, MyMoneySchedule)
@@ -223,10 +229,12 @@ preloadListMethod(Schedule, MyMoneySchedule)
 preloadMethod(Account, MyMoneyAccount)
 preloadMethod(Security, MyMoneySecurity)
 preloadMethod(Payee, MyMoneyPayee)
+preloadMethod(Tag, MyMoneyTag)
 preloadMethod(Institution, MyMoneyInstitution)
 preloadMethod(Schedule, MyMoneySchedule)
 
 listMethod(payee, MyMoneyPayee)
+listMethod(tag, MyMoneyTag)
 listMethod(institution, MyMoneyInstitution)
 
 #include "mymoneyobjectcontainer.moc"

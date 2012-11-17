@@ -47,6 +47,7 @@ class QIODevice;
 #include "imymoneystorageformat.h"
 #include "../mymoneyinstitution.h"
 #include "../mymoneypayee.h"
+#include "../mymoneytag.h"
 #include "../mymoneyaccount.h"
 #include "../mymoneytransaction.h"
 #include "../mymoneysplit.h"
@@ -206,6 +207,9 @@ public:
   void addPayee(const MyMoneyPayee& payee);
   void modifyPayee(const MyMoneyPayee& payee);
   void removePayee(const MyMoneyPayee& payee);
+  void addTag(const MyMoneyTag& tag);
+  void modifyTag(const MyMoneyTag& tag);
+  void removeTag(const MyMoneyTag& tag);
   void addAccount(const MyMoneyAccount& acc);
   void modifyAccount(const MyMoneyAccount& acc);
   void removeAccount(const MyMoneyAccount& acc);
@@ -252,6 +256,7 @@ public:
   const QMap<QString, MyMoneySecurity> fetchCurrencies(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyInstitution> fetchInstitutions(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyPayee> fetchPayees(const QStringList& idList = QStringList(), bool forUpdate = false) const;
+  const QMap<QString, MyMoneyTag> fetchTags(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const MyMoneyPriceList fetchPrices(const QStringList& fromIdList = QStringList(), const QStringList& toIdList = QStringList(), bool forUpdate = false) const;
   const MyMoneyPrice fetchSinglePrice(const QString& fromIdList, const QString& toIdList, const QDate& date, bool exactDate, bool forUpdate = false) const;
   const QMap<QString, MyMoneyReport> fetchReports(const QStringList& idList = QStringList(), bool forUpdate = false) const;
@@ -263,6 +268,9 @@ public:
 
   void readPayees(const QString&);
   void readPayees(const QList<QString>& payeeList = QList<QString>());
+  void readTags(const QString&);
+  void readTags(const QList<QString>& tagList = QList<QString>());
+
   void readTransactions(const MyMoneyTransactionFilter& filter);
   void setProgressCallback(void(*callback)(int, int, const QString&));
 
@@ -282,6 +290,7 @@ public:
   long unsigned getNextAccountId() const;
   long unsigned getNextInstitutionId() const;
   long unsigned getNextPayeeId() const;
+  long unsigned getNextTagId() const;
   long unsigned getNextReportId() const;
   long unsigned getNextScheduleId() const;
   long unsigned getNextSecurityId() const;
@@ -291,6 +300,7 @@ public:
   long unsigned incrementAccountId();
   long unsigned incrementInstitutionId();
   long unsigned incrementPayeeId();
+  long unsigned incrementTagId();
   long unsigned incrementReportId();
   long unsigned incrementScheduleId();
   long unsigned incrementSecurityId();
@@ -299,6 +309,7 @@ public:
   void loadAccountId(const unsigned long& id);
   void loadTransactionId(const unsigned long& id);
   void loadPayeeId(const unsigned long& id);
+  void loadTagId(const unsigned long& id);
   void loadInstitutionId(const unsigned long& id);
   void loadScheduleId(const unsigned long& id);
   void loadSecurityId(const unsigned long& id);
@@ -328,6 +339,7 @@ private:
   void writeUserInformation(void);
   void writeInstitutions(void);
   void writePayees(void);
+  void writeTags(void);
   void writeAccounts(void);
   void writeTransactions(void);
   void writeSchedules(void);
@@ -340,9 +352,11 @@ private:
 
   void writeInstitutionList(const QList<MyMoneyInstitution>& iList, QSqlQuery& q);
   void writePayee(const MyMoneyPayee& p, QSqlQuery& q, bool isUserInfo = false);
+  void writeTag(const MyMoneyTag& p, QSqlQuery& q);
   void writeAccountList(const QList<MyMoneyAccount>& accList, QSqlQuery& q);
   void writeTransaction(const QString& txId, const MyMoneyTransaction& tx, QSqlQuery& q, const QString& type);
   void writeSplits(const QString& txId, const QString& type, const QList<MyMoneySplit>& splitList);
+  void writeTagSplitsList(const QString& txId, const QList<MyMoneySplit>& splitList, const QList<int>& splitIdList);
   void writeSplitList(const QString& txId, const QList<MyMoneySplit>& splitList, const QString& type, const QList<int>& splitIdList, QSqlQuery& q);
   void writeSchedule(const MyMoneySchedule& sch, QSqlQuery& q, bool insert);
   void writeSecurity(const MyMoneySecurity& security, QSqlQuery& q);
@@ -371,6 +385,7 @@ private:
   void readBudgets(void);
 
   void deleteTransaction(const QString& id);
+  void deleteTagSplitsList(const QString& txId, const QList<int>& splitIdList);
   void deleteSchedule(const QString& id);
   void deleteKeyValuePairs(const QString& kvpType, const QVariantList& kvpId);
   long unsigned calcHighId(const long unsigned&, const QString&);
@@ -411,6 +426,7 @@ private:
   int upgradeToV4();
   int upgradeToV5();
   int upgradeToV6();
+  int upgradeToV7();
 
   int createTables(int version = std::numeric_limits<int>::max());
   void createTable(const MyMoneyDbTable& t, int version = std::numeric_limits<int>::max());
@@ -438,6 +454,7 @@ private:
   long unsigned m_institutions;
   long unsigned m_accounts;
   long unsigned m_payees;
+  long unsigned m_tags;
   long unsigned m_transactions;
   long unsigned m_splits;
   long unsigned m_securities;
@@ -450,6 +467,7 @@ private:
   // next id to use (for future archive)
   long unsigned m_hiIdInstitutions;
   long unsigned m_hiIdPayees;
+  long unsigned m_hiIdTags;
   long unsigned m_hiIdAccounts;
   long unsigned m_hiIdTransactions;
   long unsigned m_hiIdSchedules;

@@ -1295,7 +1295,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
 
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eAccount,
-                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCbalance,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCtag | MyMoneyReport::eQCbalance,
                      MyMoneyTransactionFilter::yearToDate,
                      MyMoneyReport::eDetailAll,
                      i18n("Transactions by Account"),
@@ -1304,7 +1304,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
     //list.back().setConvertCurrency(false);
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eCategory,
-                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount | MyMoneyReport::eQCtag,
                      MyMoneyTransactionFilter::yearToDate,
                      MyMoneyReport::eDetailAll,
                      i18n("Transactions by Category"),
@@ -1312,15 +1312,23 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.push_back(MyMoneyReport(
                      MyMoneyReport::ePayee,
-                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCcategory,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCcategory | MyMoneyReport::eQCtag,
                      MyMoneyTransactionFilter::yearToDate,
                      MyMoneyReport::eDetailAll,
                      i18n("Transactions by Payee"),
                      i18n("Default Report")
                    ));
     list.push_back(MyMoneyReport(
+                     MyMoneyReport::eTag,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCcategory,
+                     MyMoneyTransactionFilter::yearToDate,
+                     MyMoneyReport::eDetailAll,
+                     i18n("Transactions by Tag"),
+                     i18n("Default Report")
+                   ));
+    list.push_back(MyMoneyReport(
                      MyMoneyReport::eMonth,
-                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCtag,
                      MyMoneyTransactionFilter::yearToDate,
                      MyMoneyReport::eDetailAll,
                      i18n("Transactions by Month"),
@@ -1328,7 +1336,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
                    ));
     list.push_back(MyMoneyReport(
                      MyMoneyReport::eWeek,
-                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory,
+                     MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCtag,
                      MyMoneyTransactionFilter::yearToDate,
                      MyMoneyReport::eDetailAll,
                      i18n("Transactions by Week"),

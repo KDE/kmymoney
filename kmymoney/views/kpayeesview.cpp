@@ -210,6 +210,13 @@ KPayeesView::KPayeesView(QWidget *parent) :
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
   m_splitter->restoreState(grp.readEntry("KPayeesViewSplitterSize", QByteArray()));
   m_splitter->setChildrenCollapsible(false);
+
+  //At start we haven't any payee selected
+  m_tabWidget->setEnabled(false); // disable tab widget
+  m_deleteButton->setEnabled(false); //disable delete and rename button
+  m_renameButton->setEnabled(false);
+  m_payee = MyMoneyPayee(); // make sure we don't access an undefined payee
+  clearItemData();
 }
 
 KPayeesView::~KPayeesView()
@@ -364,10 +371,13 @@ void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
   Q_UNUSED(cur);
 
   m_allowEditing = false;
+}
 
+void KPayeesView::slotSelectPayee(void)
+{
   // check if the content of a currently selected payee was modified
   // and ask to store the data
-  if (m_updateButton->isEnabled() && prev) {
+  if (m_updateButton->isEnabled()) {
     if (KMessageBox::questionYesNo(this, QString("<qt>%1</qt>").arg(
                                      i18n("Do you want to save the changes for <b>%1</b>?", m_newName)),
                                    i18n("Save changes")) == KMessageBox::Yes) {
@@ -376,10 +386,6 @@ void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
       m_inSelection = false;
     }
   }
-}
-
-void KPayeesView::slotSelectPayee(void)
-{
   // loop over all payees and count the number of payees, also
   // obtain last selected payee
   QList<MyMoneyPayee> payeesList;
@@ -390,17 +396,22 @@ void KPayeesView::slotSelectPayee(void)
   if (payeesList.isEmpty()) {
     m_tabWidget->setEnabled(false); // disable tab widget
     m_balanceLabel->hide();
+    m_deleteButton->setEnabled(false); //disable delete and rename button
+    m_renameButton->setEnabled(false);
     clearItemData();
     m_payee = MyMoneyPayee();
     return; // make sure we don't access an undefined payee
   }
 
+  m_deleteButton->setEnabled(true); //re-enable delete button
+
   // if we have multiple payees selected, clear and disable the payee information
   if (payeesList.count() > 1) {
     m_tabWidget->setEnabled(false); // disable tab widget
+    m_renameButton->setEnabled(false); // disable also the rename button
     m_balanceLabel->hide();
     clearItemData();
-  }
+  } else m_renameButton->setEnabled(true);
 
   // otherwise we have just one selected, enable payee information widget
   m_tabWidget->setEnabled(true);

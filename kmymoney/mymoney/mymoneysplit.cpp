@@ -55,6 +55,11 @@ MyMoneySplit::MyMoneySplit(const QDomElement& node) :
   clearId();
 
   m_payee = QStringEmpty(node.attribute("payee"));
+
+  QDomNodeList nodeList = node.elementsByTagName("TAG");
+  for(int i=0; i<nodeList.count();i++)
+    m_tagList << QStringEmpty(nodeList.item(i).toElement().attribute("id"));
+
   m_reconcileDate = stringToDate(QStringEmpty(node.attribute("reconciledate")));
   m_action = QStringEmpty(node.attribute("action"));
   m_reconcileFlag = static_cast<MyMoneySplit::reconcileFlagE>(node.attribute("reconcileflag").toInt());
@@ -84,6 +89,7 @@ bool MyMoneySplit::operator == (const MyMoneySplit& right) const
          MyMoneyKeyValueContainer::operator==(right) &&
          m_account == right.m_account &&
          m_payee == right.m_payee &&
+         m_tagList == right.m_tagList &&
          m_memo == right.m_memo &&
          m_action == right.m_action &&
          m_reconcileDate == right.m_reconcileDate &&
@@ -136,6 +142,11 @@ void MyMoneySplit::setValue(const MyMoneyMoney& value, const QString& transactio
 void MyMoneySplit::setPayeeId(const QString& payee)
 {
   m_payee = payee;
+}
+
+void MyMoneySplit::setTagIdList(const QList<QString>& tagList)
+{
+  m_tagList = tagList;
 }
 
 void MyMoneySplit::setAction(investTransactionTypeE type)
@@ -205,6 +216,7 @@ void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const
   writeBaseXML(document, el);
 
   el.setAttribute("payee", m_payee);
+  //el.setAttribute("tag", m_tag);
   el.setAttribute("reconciledate", dateToString(m_reconcileDate));
   el.setAttribute("action", m_action);
   el.setAttribute("reconcileflag", m_reconcileFlag);
@@ -219,6 +231,12 @@ void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const
   el.setAttribute("number", m_number);
   el.setAttribute("bankid", m_bankID);
 
+  for(int i=0; i<m_tagList.count();i++) {
+    QDomElement sel = document.createElement("TAG");
+    sel.setAttribute("id",m_tagList[i]);
+    el.appendChild(sel);
+  }
+
   MyMoneyKeyValueContainer::writeXML(document, el);
 
   parent.appendChild(el);
@@ -230,6 +248,9 @@ bool MyMoneySplit::hasReferenceTo(const QString& id) const
   if (isMatched()) {
     rc = matchedTransaction().hasReferenceTo(id);
   }
+  for(int i=0; i<m_tagList.size(); i++)
+    if(id == m_tagList[i])
+      return true;
   return rc || (id == m_account) || (id == m_payee);
 }
 

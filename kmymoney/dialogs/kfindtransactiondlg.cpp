@@ -137,6 +137,7 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   setupDatePage();
   setupAmountPage();
   setupPayeesPage();
+  setupTagsPage();
   setupDetailsPage();
 
   // We don't need to add the default into the list (see ::slotShowHelp() why)
@@ -146,6 +147,7 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   m_helpAnchor[m_ui->m_amountTab] = QString("details.search.amount");
   m_helpAnchor[m_ui->m_categoryTab] = QString("details.search.category");
   m_helpAnchor[m_ui->m_payeeTab] = QString("details.search.payee");
+  m_helpAnchor[m_ui->m_tagTab] = QString("details.search.tag"); //FIXME-ALEX update Help
   m_helpAnchor[m_ui->m_detailsTab] = QString("details.search.details");
 
   // setup the register
@@ -209,6 +211,9 @@ void KFindTransactionDlg::slotReset(void)
 
   m_ui->m_emptyPayeesButton->setChecked(false);
   selectAllItems(m_ui->m_payeesView, true);
+
+  m_ui->m_emptyTagsButton->setChecked(false);
+  selectAllItems(m_ui->m_tagsView, true);
 
   m_ui->m_typeBox->setCurrentIndex(MyMoneyTransactionFilter::allTypes);
   m_ui->m_stateBox->setCurrentIndex(MyMoneyTransactionFilter::allStates);
@@ -277,6 +282,15 @@ void KFindTransactionDlg::slotUpdateSelections(void)
       txt += ", ";
     txt += i18n("Category");
   }
+
+  // Tags tab
+  if (!allItemsSelected(m_ui->m_tagsView)
+      || m_ui->m_emptyTagsButton->isChecked()) {
+    if (!txt.isEmpty())
+      txt += ", ";
+    txt += i18n("Tags");
+  }
+  m_ui->m_tagsView->setEnabled(!m_ui->m_emptyTagsButton->isChecked());
 
   // Payees tab
   if (!allItemsSelected(m_ui->m_payeesView)
@@ -542,6 +556,48 @@ void KFindTransactionDlg::slotDeselectAllPayees(void)
   selectAllItems(m_ui->m_payeesView, false);
 }
 
+void KFindTransactionDlg::setupTagsPage(void)
+{
+  m_ui->m_tagsView->setSelectionMode(QAbstractItemView::SingleSelection);
+  m_ui->m_tagsView->header()->hide();
+  m_ui->m_tagsView->setAlternatingRowColors(true);
+
+  loadTags();
+
+  m_ui->m_tagsView->sortItems(0, Qt::AscendingOrder);
+  m_ui->m_emptyTagsButton->setCheckState(Qt::Unchecked);
+
+  connect(m_ui->m_allTagsButton, SIGNAL(clicked()), this, SLOT(slotSelectAllTags()));
+  connect(m_ui->m_clearTagsButton, SIGNAL(clicked()), this, SLOT(slotDeselectAllTags()));
+  connect(m_ui->m_emptyTagsButton, SIGNAL(stateChanged(int)), this, SLOT(slotUpdateSelections()));
+  connect(m_ui->m_tagsView, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateSelections()));
+}
+
+void KFindTransactionDlg::loadTags(void)
+{
+  MyMoneyFile* file = MyMoneyFile::instance();
+  QList<MyMoneyTag> list;
+  QList<MyMoneyTag>::Iterator it_l;
+
+  list = file->tagList();
+  // load view
+  for (it_l = list.begin(); it_l != list.end(); ++it_l) {
+    QTreeWidgetItem* item = new QTreeWidgetItem(m_ui->m_tagsView);
+    item->setText(0, (*it_l).name());
+    item->setData(0, ItemIdRole, (*it_l).id());
+    item->setCheckState(0, Qt::Checked);
+  }
+}
+void KFindTransactionDlg::slotSelectAllTags(void)
+{
+  selectAllItems(m_ui->m_tagsView, true);
+}
+
+void KFindTransactionDlg::slotDeselectAllTags(void)
+{
+  selectAllItems(m_ui->m_tagsView, false);
+}
+
 void KFindTransactionDlg::setupDetailsPage(void)
 {
   connect(m_ui->m_typeBox, SIGNAL(activated(int)), this, SLOT(slotUpdateSelections()));
@@ -585,6 +641,9 @@ void KFindTransactionDlg::addItemToFilter(const opTypeE op, const QString& id)
       break;
     case addPayeeToFilter:
       m_filter.addPayee(id);
+      break;
+    case addTagToFilter:
+      m_filter.addTag(id);
       break;
   }
 }
@@ -682,6 +741,14 @@ void KFindTransactionDlg::setupFilter(void)
   // Categories tab
   if (!m_ui->m_categoriesView->allItemsSelected()) {
     m_filter.addCategory(m_ui->m_categoriesView->selectedItems());
+  }
+
+  // Tags tab
+  if (m_ui->m_emptyTagsButton->isChecked()) {
+    m_filter.addTag(QString());
+
+  } else if (!allItemsSelected(m_ui->m_tagsView)) {
+    scanCheckListItems(m_ui->m_tagsView, addTagToFilter);
   }
 
   // Payees tab

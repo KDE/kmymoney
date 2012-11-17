@@ -63,6 +63,7 @@ void MyMoneyTransactionFilter::clear(void)
   m_accounts.clear();
   m_categories.clear();
   m_payees.clear();
+  m_tags.clear();
   m_types.clear();
   m_states.clear();
   m_validity.clear();
@@ -156,6 +157,17 @@ void MyMoneyTransactionFilter::addPayee(const QString& id)
     m_payees.insert(id, "");
 }
 
+void MyMoneyTransactionFilter::addTag(const QString& id)
+{
+  if (!m_tags.isEmpty() && !id.isEmpty()) {
+    if (m_tags.find(id) != m_tags.end())
+      return;
+  }
+  m_filterSet.singleFilter.tagFilter = 1;
+  if (!id.isEmpty())
+    m_tags.insert(id, "");
+}
+
 void MyMoneyTransactionFilter::addType(const int type)
 {
   if (!m_types.isEmpty()) {
@@ -211,7 +223,7 @@ const QList<MyMoneySplit>& MyMoneyTransactionFilter::matchingSplits(void) const
 bool MyMoneyTransactionFilter::matchText(const MyMoneySplit * const sp) const
 {
   // check if the text is contained in one of the fields
-  // memo, value, number, payee, account, date
+  // memo, value, number, payee, tag, account, date
   if (m_filterSet.singleFilter.textFilter) {
     MyMoneyFile* file = MyMoneyFile::instance();
     const MyMoneyAccount& acc = file->account(sp->accountId());
@@ -230,6 +242,17 @@ bool MyMoneyTransactionFilter::matchText(const MyMoneySplit * const sp) const
       if (payee.name().contains(m_text))
         return !m_invertText;
     }
+
+    if (!sp->tagIdList().isEmpty()) {
+      QList<QString>::ConstIterator it_s;
+      QList<QString> t=sp->tagIdList();
+      for (it_s = t.constBegin(); it_s != t.constEnd(); ++it_s) {
+        const MyMoneyTag& tag = file->tag((*it_s));
+        if (tag.name().contains(m_text))
+          return !m_invertText;
+      }
+    }
+
     return m_invertText;
   }
   return true;
@@ -413,6 +436,22 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
             removeSplit = true;
         }
 
+        // check the tag list
+        if (!removeSplit && m_filterSet.singleFilter.tagFilter) {
+          if (m_tags.count() > 0) {
+            if (s->tagIdList().isEmpty())
+              removeSplit = true;
+	    else {
+	      bool found = false;
+	      for(int i=0; i<s->tagIdList().size(); i++)
+	        if(m_tags.end() != m_tags.find(s->tagIdList()[i]))
+		  found = true;
+		if(!found) removeSplit = true;
+	    }
+          } else if (!s->tagIdList().isEmpty())
+            removeSplit = true;
+        }
+
         // check the type list
         if (!removeSplit && m_filterSet.singleFilter.typeFilter) {
           if (m_types.count() > 0) {
@@ -440,6 +479,7 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
           }
         }
       } else if (m_filterSet.singleFilter.payeeFilter
+		 || m_filterSet.singleFilter.tagFilter
                  || m_filterSet.singleFilter.typeFilter
                  || m_filterSet.singleFilter.stateFilter
                  || m_filterSet.singleFilter.nrFilter)
@@ -545,6 +585,11 @@ bool MyMoneyTransactionFilter::includesPayee(const QString& pye) const
   return (! m_filterSet.singleFilter.payeeFilter) || m_payees.end() != m_payees.find(pye);
 }
 
+bool MyMoneyTransactionFilter::includesTag(const QString& tag) const
+{
+  return (! m_filterSet.singleFilter.tagFilter) || m_tags.end() != m_tags.find(tag);
+}
+
 bool MyMoneyTransactionFilter::dateFilter(QDate& from, QDate& to) const
 {
   from = m_fromDate;
@@ -575,6 +620,20 @@ bool MyMoneyTransactionFilter::payees(QStringList& list) const
     while (it_payee.hasNext()) {
       it_payee.next();
       list += it_payee.key();
+    }
+  }
+  return result;
+}
+
+bool MyMoneyTransactionFilter::tags(QStringList& list) const
+{
+  bool result = m_filterSet.singleFilter.tagFilter;
+
+  if (result) {
+    QHashIterator<QString, QString> it_tag(m_tags);
+    while (it_tag.hasNext()) {
+      it_tag.next();
+      list += it_tag.key();
     }
   }
   return result;
@@ -834,6 +893,9 @@ void MyMoneyTransactionFilter::removeReference(const QString& id)
   } else if (m_payees.end() != m_payees.find(id)) {
     qDebug("%s", qPrintable(QString("Remove payee '%1' from report").arg(id)));
     m_payees.remove(id);
+  } else if (m_tags.end() != m_tags.find(id)) {
+    qDebug("%s", qPrintable(QString("Remove tag '%1' from report").arg(id)));
+    m_tags.remove(id);
   }
 }
 

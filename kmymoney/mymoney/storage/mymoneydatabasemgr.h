@@ -152,6 +152,62 @@ public:
   virtual const QList<MyMoneyPayee> payeeList(void) const;
 
   /**
+    * This method is used to create a new tag
+    *
+    * An exception will be thrown upon error conditions
+    *
+    * @param tag MyMoneyTag reference to tag information
+    */
+  virtual void addTag(MyMoneyTag& tag);
+
+  /**
+    * This method is used to retrieve information about a tag
+    * An exception will be thrown upon error conditions.
+    *
+    * @param id QString reference to id of tag
+    *
+    * @return MyMoneyTag object of tag
+    */
+  virtual const MyMoneyTag tag(const QString& id) const;
+
+  /**
+    * This method is used to retrieve the id to a corresponding
+    * name of a tag.
+    * An exception will be thrown upon error conditions.
+    *
+    * @param tag QString reference to name of tag
+    *
+    * @return MyMoneyTag object of tag
+    */
+  virtual const MyMoneyTag tagByName(const QString& tag) const;
+
+  /**
+    * This method is used to modify an existing tag
+    *
+    * An exception will be thrown upon error conditions
+    *
+    * @param tag MyMoneyTag reference to tag information
+    */
+  virtual void modifyTag(const MyMoneyTag& tag);
+
+  /**
+    * This method is used to remove an existing tag
+    *
+    * An exception will be thrown upon error conditions
+    *
+    * @param tag MyMoneyTag reference to tag information
+    */
+  virtual void removeTag(const MyMoneyTag& tag);
+
+  /**
+    * This method returns a list of the tags
+    * inside a MyMoneyStorage object
+    *
+    * @return QList<MyMoneyTag> containing the tag information
+    */
+  virtual const QList<MyMoneyTag> tagList(void) const;
+
+  /**
     * Returns the account addressed by it's id.
     *
     * An exception will be thrown upon error conditions.
@@ -886,6 +942,7 @@ public:
   virtual void loadTransactions(const QMap<QString, MyMoneyTransaction>& map);
   virtual void loadInstitutions(const QMap<QString, MyMoneyInstitution>& map);
   virtual void loadPayees(const QMap<QString, MyMoneyPayee>& map);
+  virtual void loadTags(const QMap<QString, MyMoneyTag>& map);
   virtual void loadSchedules(const QMap<QString, MyMoneySchedule>& map);
   virtual void loadSecurities(const QMap<QString, MyMoneySecurity>& map);
   virtual void loadCurrencies(const QMap<QString, MyMoneySecurity>& map);
@@ -896,6 +953,7 @@ public:
   virtual unsigned long accountId(void) const;
   virtual unsigned long transactionId(void) const;
   virtual unsigned long payeeId(void) const;
+  virtual unsigned long tagId(void) const;
   virtual unsigned long institutionId(void) const;
   virtual unsigned long scheduleId(void) const;
   virtual unsigned long securityId(void) const;
@@ -905,6 +963,7 @@ public:
   virtual void loadAccountId(const unsigned long id);
   virtual void loadTransactionId(const unsigned long id);
   virtual void loadPayeeId(const unsigned long id);
+  virtual void loadTagId(const unsigned long id);
   virtual void loadInstitutionId(const unsigned long id);
   virtual void loadScheduleId(const unsigned long id);
   virtual void loadSecurityId(const unsigned long id);
@@ -1002,6 +1061,12 @@ private:
   const QString nextPayeeID(void);
 
   /**
+    * This method is used to get the next valid ID for a tag
+    * @return id for a tag
+    */
+  const QString nextTagID(void);
+
+  /**
     * This method is used to get the next valid ID for a scheduled transaction
     * @return id for a scheduled transaction
     */
@@ -1026,6 +1091,7 @@ private:
   static const int ACCOUNT_ID_SIZE = 6;
   static const int TRANSACTION_ID_SIZE = 18;
   static const int PAYEE_ID_SIZE = 6;
+  static const int TAG_ID_SIZE = 6;
   static const int SCHEDULE_ID_SIZE = 6;
   static const int SECURITY_ID_SIZE = 6;
   static const int REPORT_ID_SIZE = 6;

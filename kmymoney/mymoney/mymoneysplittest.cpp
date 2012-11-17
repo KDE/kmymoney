@@ -59,6 +59,9 @@ void MyMoneySplitTest::testSetFunctions()
   m->setValue(MyMoneyMoney(3456, 100));
   m->setId("MyID");
   m->setPayeeId("Payee");
+  QList<QString> tagIdList;
+  tagIdList << "Tag";
+  m->setTagIdList(tagIdList);
   m->setAction("Action");
   m->setTransactionId("TestTransaction");
   m->setValue("Key", "Value");
@@ -71,6 +74,7 @@ void MyMoneySplitTest::testSetFunctions()
   QVERIFY(m->value() == MyMoneyMoney(3456, 100));
   QVERIFY(m->id() == "MyID");
   QVERIFY(m->payeeId() == "Payee");
+  QVERIFY(m->tagIdList() == tagIdList);
   QVERIFY(m->action() == "Action");
   QVERIFY(m->transactionId() == "TestTransaction");
   QVERIFY(m->value("Key") == "Value");
@@ -91,6 +95,9 @@ void MyMoneySplitTest::testCopyConstructor()
   QVERIFY(n.value() == MyMoneyMoney(3456, 100));
   QVERIFY(n.id() == "MyID");
   QVERIFY(n.payeeId() == "Payee");
+  QList<QString> tagIdList;
+  tagIdList <<"Tag";
+  QVERIFY(m->tagIdList() == tagIdList);
   QVERIFY(n.action() == "Action");
   QVERIFY(n.transactionId() == "TestTransaction");
   QVERIFY(n.value("Key") == "Value");
@@ -112,6 +119,9 @@ void MyMoneySplitTest::testAssignmentConstructor()
   QVERIFY(n.value() == MyMoneyMoney(3456, 100));
   QVERIFY(n.id() == "MyID");
   QVERIFY(n.payeeId() == "Payee");
+  QList<QString> tagIdList;
+  tagIdList << "Tag";
+  QVERIFY(m->tagIdList() == tagIdList);
   QVERIFY(n.action() == "Action");
   QVERIFY(n.transactionId() == "TestTransaction");
   QVERIFY(n.value("Key") == "Value");
@@ -141,6 +151,12 @@ void MyMoneySplitTest::testInequality()
 
   n = *m;
   n.setPayeeId("No payee");
+  QVERIFY(!(n == *m));
+
+  n = *m;
+  QList<QString> tagIdList;
+  tagIdList << "No tag";
+  n.setTagIdList(tagIdList);
   QVERIFY(!(n == *m));
 
   n = *m;
@@ -253,6 +269,9 @@ void MyMoneySplitTest::testWriteXML()
   MyMoneySplit s;
 
   s.setPayeeId("P000001");
+  QList<QString> tagIdList;
+  tagIdList << "G000001";
+  s.setTagIdList(tagIdList);
   s.setShares(MyMoneyMoney(96379, 100));
   s.setValue(MyMoneyMoney(96379, 1000));
   s.setAccountId("A000076");
@@ -269,7 +288,9 @@ void MyMoneySplitTest::testWriteXML()
   QString ref = QString(
                   "<!DOCTYPE TEST>\n"
                   "<SPLIT-CONTAINER>\n"
-                  " <SPLIT payee=\"P000001\" reconcileflag=\"2\" shares=\"96379/100\" reconciledate=\"\" action=\"Deposit\" bankid=\"SPID\" account=\"A000076\" number=\"124\" value=\"96379/1000\" memo=\"\" id=\"\" />\n"
+                  " <SPLIT payee=\"P000001\" reconcileflag=\"2\" shares=\"96379/100\" reconciledate=\"\" action=\"Deposit\" bankid=\"SPID\" account=\"A000076\" number=\"124\" value=\"96379/1000\" memo=\"\" id=\"\">\n"
+                  "  <TAG id=\"G000001\"/>\n"
+                  " </SPLIT>\n"
                   "</SPLIT-CONTAINER>\n");
 
 #if QT_VERSION >= QT_VERSION_CHECK(4,6,0)
@@ -289,13 +310,16 @@ void MyMoneySplitTest::testReadXML()
   QString ref_ok = QString(
                      "<!DOCTYPE TEST>\n"
                      "<SPLIT-CONTAINER>\n"
-                     " <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"96379/100\" action=\"Deposit\" bankid=\"SPID\" number=\"124\" reconcileflag=\"2\" memo=\"MyMemo\" value=\"96379/1000\" account=\"A000076\" />\n"
+                     " <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"96379/100\" action=\"Deposit\" bankid=\"SPID\" number=\"124\" reconcileflag=\"2\" memo=\"MyMemo\" value=\"96379/1000\" account=\"A000076\">\n"
+                     "  <TAG id=\"G000001\"/>\n"
+                     " </SPLIT>\n"
                      "</SPLIT-CONTAINER>\n");
 
   QString ref_false = QString(
                         "<!DOCTYPE TEST>\n"
                         "<SPLIT-CONTAINER>\n"
                         " <SPLITS payee=\"P000001\" reconciledate=\"\" shares=\"96379/100\" action=\"Deposit\" bankid=\"SPID\" number=\"124\" reconcileflag=\"2\" memo=\"\" value=\"96379/1000\" account=\"A000076\" />\n"
+                        " <TAG id=\"G000001\"/>\n"
                         "</SPLIT-CONTAINER>\n");
 
   QDomDocument doc;
@@ -317,6 +341,9 @@ void MyMoneySplitTest::testReadXML()
     s = MyMoneySplit(node);
     QVERIFY(s.id().isEmpty());
     QVERIFY(s.payeeId() == "P000001");
+    QList<QString> tagIdList;
+    tagIdList << "G000001";
+    QVERIFY(s.tagIdList() == tagIdList);
     QVERIFY(s.reconcileDate() == QDate());
     QVERIFY(s.shares() == MyMoneyMoney(96379, 100));
     QVERIFY(s.value() == MyMoneyMoney(96379, 1000));

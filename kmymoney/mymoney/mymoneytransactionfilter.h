@@ -127,6 +127,7 @@ public:
       unsigned textFilter       : 1;
       unsigned accountFilter    : 1;
       unsigned payeeFilter      : 1;
+      unsigned tagFilter        : 1;
       unsigned categoryFilter   : 1;
       unsigned nrFilter         : 1;
       unsigned dateFilter       : 1;
@@ -181,6 +182,7 @@ public:
     *
     * - Memo
     * - Payee
+    * - Tag
     * - Category
     * - Shares / Value
     * - Number
@@ -252,6 +254,14 @@ public:
     * @param id internal id of the payee
     */
   void addPayee(const QString& id);
+
+  /**
+    * This method will add the tag with id @ta id to the list of matching tags.
+    * If the list is empty, any transaction will match.
+    *
+    * @param id internal id of the tag
+    */
+  void addTag(const QString& id);
 
   /**
     */
@@ -416,6 +426,17 @@ public:
 
   /**
     * This method is used to return information about the
+    * presence of a specific tag in the account filter.
+    * The tag in question is included in the filter set,
+    * if it has been set or no account filter is set.
+    *
+    * @param tag id of tag in question
+    * @return true if tag is in filter set, false otherwise
+    */
+  bool includesTag(const QString& tag) const;
+
+  /**
+    * This method is used to return information about the
     * presence of a date filter.
     *
     * @param from result value for the beginning of the date range
@@ -452,6 +473,15 @@ public:
     * @return return true if a payee filter has been set
     */
   bool payees(QStringList& list) const;
+
+  /**
+    * This method returns whether a tag filter has been set,
+    * and if so, it returns all the tags set in the filter.
+    *
+    * @param list list to append tags into
+    * @return return true if a tag filter has been set
+    */
+  bool tags(QStringList& list) const;
 
   /**
     * This method returns whether an account filter has been set,
@@ -573,6 +603,7 @@ protected:
   bool                m_invertText;
   QHash<QString, QString>    m_accounts;
   QHash<QString, QString>    m_payees;
+  QHash<QString, QString>    m_tags;
   QHash<QString, QString>    m_categories;
   QHash<int, QString>      m_states;
   QHash<int, QString>      m_types;

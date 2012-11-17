@@ -126,6 +126,15 @@ void MyMoneyStorageANON::writePayee(QDomElement& payee, const MyMoneyPayee& _p)
   MyMoneyStorageXML::writePayee(payee, p);
 }
 
+void MyMoneyStorageANON::writeTag(QDomElement& tag, const MyMoneyTag& _ta)
+{
+  MyMoneyTag ta(_ta);
+
+  ta.setName(ta.id());
+  ta.setNotes(hideString(ta.notes()));
+  MyMoneyStorageXML::writeTag(tag, ta);
+}
+
 void MyMoneyStorageANON::writeAccount(QDomElement& account, const MyMoneyAccount& _p)
 {
   MyMoneyAccount p(_p);

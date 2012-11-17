@@ -214,6 +214,62 @@ public:
   const QList<MyMoneyPayee> payeeList(void) const;
 
   /**
+    * This method is used to create a new tag
+    *
+    * An exception will be thrown upon error conditions
+    *
+    * @param tag MyMoneyTag reference to tag information
+    */
+  void addTag(MyMoneyTag& tag);
+
+  /**
+    * This method is used to retrieve information about a tag
+    * An exception will be thrown upon error conditions.
+    *
+    * @param id QString reference to id of tag
+    *
+    * @return MyMoneyTag object of tag
+    */
+  const MyMoneyTag tag(const QString& id) const;
+
+  /**
+    * This method is used to retrieve the id to a corresponding
+    * name of a tag.
+    * An exception will be thrown upon error conditions.
+    *
+    * @param tag QString reference to name of tag
+    *
+    * @return MyMoneyTag reference to object of tag
+    */
+  const MyMoneyTag tagByName(const QString& tag) const;
+
+  /**
+    * This method is used to modify an existing tag
+    *
+    * An exception will be thrown upon error conditions
+    *
+    * @param tag MyMoneyTag reference to tag information
+    */
+  void modifyTag(const MyMoneyTag& tag);
+
+  /**
+    * This method is used to remove an existing tag
+    *
+    * An exception will be thrown upon error conditions
+    *
+    * @param tag MyMoneyTag reference to tag information
+    */
+  void removeTag(const MyMoneyTag& tag);
+
+  /**
+    * This method returns a list of the tags
+    * inside a MyMoneyStorage object
+    *
+    * @return QList<MyMoneyTag> containing the tag information
+    */
+  const QList<MyMoneyTag> tagList(void) const;
+
+  /**
     * This method is used to add one account as sub-ordinate to another
     * (parent) account. The objects passed as arguments will be modified
     * accordingly.
@@ -221,6 +277,7 @@ public:
     * @param parent parent account the account should be added to
     * @param account the account to be added
     */
+
   void addAccount(MyMoneyAccount& parent, MyMoneyAccount& account);
 
   /**
@@ -544,6 +601,7 @@ public:
   virtual void loadTransactions(const QMap<QString, MyMoneyTransaction>& map);
   virtual void loadInstitutions(const QMap<QString, MyMoneyInstitution>& map);
   virtual void loadPayees(const QMap<QString, MyMoneyPayee>& map);
+  virtual void loadTags(const QMap<QString, MyMoneyTag>& map);
   virtual void loadSchedules(const QMap<QString, MyMoneySchedule>& map);
   virtual void loadSecurities(const QMap<QString, MyMoneySecurity>& map);
   virtual void loadCurrencies(const QMap<QString, MyMoneySecurity>& map);
@@ -552,6 +610,7 @@ public:
   virtual void loadAccountId(const unsigned long id);
   virtual void loadTransactionId(const unsigned long id);
   virtual void loadPayeeId(const unsigned long id);
+  virtual void loadTagId(const unsigned long id);
   virtual void loadInstitutionId(const unsigned long id);
   virtual void loadScheduleId(const unsigned long id);
   virtual void loadSecurityId(const unsigned long id);
@@ -566,6 +625,9 @@ public:
   };
   virtual unsigned long payeeId(void) const {
     return m_nextPayeeID;
+  };
+  virtual unsigned long tagId(void) const {
+    return m_nextTagID;
   };
   virtual unsigned long institutionId(void) const {
     return m_nextInstitutionID;
@@ -1021,6 +1083,7 @@ private:
   static const int ACCOUNT_ID_SIZE = 6;
   static const int TRANSACTION_ID_SIZE = 18;
   static const int PAYEE_ID_SIZE = 6;
+  static const int TAG_ID_SIZE = 6;
   static const int SCHEDULE_ID_SIZE = 6;
   static const int SECURITY_ID_SIZE = 6;
   static const int REPORT_ID_SIZE = 6;
@@ -1071,6 +1134,13 @@ private:
     * nextPayeeID()
     */
   unsigned long m_nextPayeeID;
+
+  /**
+    * The member variable m_nextTagID keeps the number that will be
+    * assigned to the next tag created. It is maintained by
+    * nextTagID()
+    */
+  unsigned long m_nextTagID;
 
   /**
     * The member variable m_nextScheduleID keeps the number that will be
@@ -1125,6 +1195,11 @@ private:
     * A list containing all the payees that have been used
     */
   MyMoneyMap<QString, MyMoneyPayee> m_payeeList;
+
+  /**
+    * A list containing all the tags that have been used
+    */
+  MyMoneyMap<QString, MyMoneyTag> m_tagList;
 
   /**
     * A list containing all the scheduled transactions
@@ -1205,6 +1280,12 @@ private:
     * @return id for a payee
     */
   QString nextPayeeID(void);
+
+  /**
+    * This method is used to get the next valid ID for a tag
+    * @return id for a tag
+    */
+  QString nextTagID(void);
 
   /**
     * This method is used to get the next valid ID for a scheduled transaction

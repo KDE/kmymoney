@@ -60,6 +60,10 @@ private slots:
   void testModifyPayee();
   void testPayeeName();
   void testRemovePayee();
+  void testAddTag();
+  void testModifyTag();
+  void testTagName();
+  void testRemoveTag();
   void testRemoveAccountFromTree();
   void testAssignment();
   void testEquality(const MyMoneySeqAccessMgr* t);

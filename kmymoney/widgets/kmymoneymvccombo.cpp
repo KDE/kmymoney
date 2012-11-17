@@ -25,13 +25,18 @@
 #include <QStandardItem>
 #include <QAbstractItemView>
 #include <QSortFilterProxyModel>
+#include <QHBoxLayout>
+#include <QFrame>
+#include <QLabel>
+#include <QToolButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
+#include <kapplication.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <klineedit.h>
+#include <KIconLoader>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -215,6 +220,21 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
     return;
   }
 
+  //check if the focus went to a widget in TransactionFrom or in the Register
+  if (e->reason() == Qt::MouseFocusReason) {
+    QObject *w = this->parent();
+    QObject *q = qApp->focusWidget()->parent();
+    // KMyMoneyTagCombo is inside KTagContainer, KMyMoneyPayeeCombo isn't it
+    if (w->inherits("KTagContainer"))
+      w = w->parent();
+    while ( q && q->objectName() != "qt_scrollarea_viewport")
+      q = q->parent();
+    if(q != w && qApp->focusWidget()->objectName()!="register") {
+      KComboBox::focusOutEvent(e);
+      return;
+    }
+  }
+
   d->m_inFocusOutEvent = true;
   if (isEditable() && !currentText().isEmpty() && e->reason() != Qt::ActiveWindowFocusReason) {
     if (d->m_canCreateObjects) {
@@ -269,6 +289,8 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
   }
 
   d->m_inFocusOutEvent = false;
+  // This is used only be KMyMoneyTagCombo at this time
+  emit lostFocus();
 }
 
 void KMyMoneyMVCCombo::setCurrentTextById(const QString& id)
@@ -315,6 +337,127 @@ void KMyMoneyPayeeCombo::loadPayees(const QList<MyMoneyPayee>& list)
   //set the text to empty and the index to the first item on the list
   setCurrentIndex(0);
   clearEditText();
+}
+
+KMyMoneyTagCombo::KMyMoneyTagCombo(QWidget* parent) :
+    KMyMoneyMVCCombo(true, parent)
+{
+}
+
+void KMyMoneyTagCombo::loadTags(const QList<MyMoneyTag>& list)
+{
+  clear();
+
+  //add a blank item, since the field is optional
+  addItem(QString(), QVariant(QString()));
+
+  //add all not closed tags
+  QList<MyMoneyTag>::const_iterator it;
+  for (it = list.constBegin(); it != list.constEnd(); ++it) {
+    if( !(*it).isClosed())
+      addItem((*it).name(), QVariant((*it).id()));
+  }
+
+  //sort the model, which will sort the list in the combo
+  model()->sort(Qt::DisplayRole, Qt::AscendingOrder);
+
+  //set the text to empty and the index to the first item on the list
+  setCurrentIndex(0);
+  clearEditText();
+}
+
+void KMyMoneyTagCombo::setUsedTagList(QList<QString>& usedIdList)
+{
+  m_usedIdList = usedIdList;
+  for (int i = 0; i < m_usedIdList.size(); ++i) {
+    int index = findData(QVariant(m_usedIdList.at(i)), Qt::UserRole, Qt::MatchExactly);
+    if (index !=-1) removeItem(index);
+  }
+}
+
+KTagLabel::KTagLabel(const QString& id, const QString& name, QWidget* parent) :
+    QFrame(parent)
+{
+  QToolButton *t = new QToolButton(this);
+  t->setIcon(QIcon(SmallIcon("dialog-close")));
+  t->setAutoRaise(true);
+  QLabel *l = new QLabel(name, this);
+  m_tagId = id;
+  QHBoxLayout *layout = new QHBoxLayout;
+  layout->setContentsMargins(0,0,0,0);
+  layout->setSpacing(0);
+  this->setLayout(layout);
+  layout->addWidget(t);
+  layout->addWidget(l);
+  connect(t, SIGNAL(clicked(bool)), this, SIGNAL(clicked(bool)));
+  //this->setFrameStyle(QFrame::Panel | QFrame::Plain);
+}
+
+KTagContainer::KTagContainer(QWidget* parent) :
+    QWidget(parent)
+{
+  m_tagCombo = new KMyMoneyTagCombo;
+  QHBoxLayout *layout = new QHBoxLayout;
+  layout->setContentsMargins(0,0,5,0);
+  layout->setSpacing(0);
+  layout->addWidget(m_tagCombo,100);
+  this->setLayout(layout);
+  this->setFocusProxy(m_tagCombo);
+  connect(m_tagCombo, SIGNAL(lostFocus()), this, SLOT(slotAddTagWidget()));
+}
+
+void KTagContainer::loadTags(const QList<MyMoneyTag>& list) {
+  m_list=list;
+  m_tagCombo->loadTags(list);
+}
+
+const QList<QString> KTagContainer::selectedTags(void )
+{
+  return m_tagIdList;
+}
+
+void KTagContainer::addTagWidget(const QString& id)
+{
+  if(id.isNull() || m_tagIdList.contains(id))
+    return;
+  const QString tagName = m_tagCombo->itemText(m_tagCombo->findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
+  KTagLabel *t = new KTagLabel(id, tagName, this);
+  connect(t, SIGNAL(clicked(bool)), this, SLOT(slotRemoveTagWidget()));
+  m_tagLabelList.append(t);
+  m_tagIdList.append(id);
+  this->layout()->addWidget(t);
+  m_tagCombo->loadTags(m_list);
+  m_tagCombo->setUsedTagList(m_tagIdList);
+  m_tagCombo->setCurrentIndex(0);
+  m_tagCombo->setFocus();
+}
+
+void KTagContainer::RemoveAllTagWidgets(void )
+{
+  m_tagIdList.clear();
+  while (!m_tagLabelList.isEmpty())
+     delete m_tagLabelList.takeLast();
+  m_tagCombo->loadTags(m_list);
+  m_tagCombo->setUsedTagList(m_tagIdList);
+  m_tagCombo->setCurrentIndex(0);
+}
+
+void KTagContainer::slotAddTagWidget(void)
+{
+  addTagWidget(m_tagCombo->selectedItem());
+}
+
+void KTagContainer::slotRemoveTagWidget(void)
+{
+  this->tagCombo()->setFocus();
+  KTagLabel *t = (KTagLabel *)sender();
+  int index = m_tagLabelList.indexOf(t);
+  m_tagLabelList.removeAt(index);
+  m_tagIdList.removeAt(index);
+  delete t;
+  m_tagCombo->loadTags(m_list);
+  m_tagCombo->setUsedTagList(m_tagIdList);
+  m_tagCombo->setCurrentIndex(0);
 }
 
 KMyMoneyReconcileCombo::KMyMoneyReconcileCombo(QWidget* w) :

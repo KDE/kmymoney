@@ -5,8 +5,8 @@ SET(storage_HEADERS
 SET(storage_a_SOURCES
   imymoneystorageformat.cpp mymoneystoragexml.cpp mymoneystoragedump.cpp
   mymoneyseqaccessmgr.cpp imymoneystorage.cpp imymoneyserialize.cpp
-  mymoneystorageanon.cpp 
-  mymoneystoragesql.cpp 
+  mymoneystorageanon.cpp
+  mymoneystoragesql.cpp
   mymoneydatabasemgr.cpp
   mymoneydbdef.cpp
   mymoneydbdriver.cpp

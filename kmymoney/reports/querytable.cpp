@@ -273,6 +273,7 @@ void QueryTable::init(void)
       break;
 
     case MyMoneyReport::ePayee:
+    case MyMoneyReport::eTag:
     case MyMoneyReport::eMonth:
     case MyMoneyReport::eWeek:
       constructTransactionTable();
@@ -311,6 +312,9 @@ void QueryTable::init(void)
       break;
     case MyMoneyReport::ePayee:
       m_group = "payee";
+      break;
+   case MyMoneyReport::eTag:
+      m_group = "tag";
       break;
     case MyMoneyReport::eMonth:
       m_group = "month";
@@ -354,6 +358,8 @@ void QueryTable::init(void)
     m_columns += ",number";
   if (qc & MyMoneyReport::eQCpayee)
     m_columns += ",payee";
+  if (qc & MyMoneyReport::eQCtag)
+    m_columns += ",tag";
   if (qc & MyMoneyReport::eQCcategory)
     m_columns += ",category";
   if (qc & MyMoneyReport::eQCaccount)
@@ -396,6 +402,7 @@ void QueryTable::constructTransactionTable(void)
   bool use_transfers;
   bool use_summary;
   bool hide_details;
+  bool tag_special_case = false;
 
   switch (m_config.rowType()) {
     case MyMoneyReport::eCategory:
@@ -408,6 +415,12 @@ void QueryTable::constructTransactionTable(void)
       use_summary = false;
       use_transfers = false;
       hide_details = (m_config.detailLevel() == MyMoneyReport::eDetailNone);
+      break;
+    case MyMoneyReport::eTag:
+      use_summary = false;
+      use_transfers = false;
+      hide_details = (m_config.detailLevel() == MyMoneyReport::eDetailNone);
+      tag_special_case = true;
       break;
     default:
       use_summary = true;
@@ -425,6 +438,7 @@ void QueryTable::constructTransactionTable(void)
 
     TableRow qA, qS;
     QDate pd;
+    QList<QString> tagIdListCache;
 
     qA["id"] = qS["id"] = (* it_transaction).id();
     qA["entrydate"] = qS["entrydate"] = (* it_transaction).entryDate().toString(Qt::ISODate);
@@ -521,6 +535,8 @@ void QueryTable::constructTransactionTable(void)
       QString institution = splitAcc.institutionId();
       QString payee = (*it_split).payeeId();
 
+      const QList<QString> tagIdList = (*it_split).tagIdList();
+
       //convert to base currency
       if (m_config.isConvertCurrency()) {
         xr = (splitAcc.deepCurrencyPrice((*it_transaction).postDate()) * splitAcc.baseCurrencyPrice((*it_transaction).postDate())).reduce();
@@ -565,6 +581,17 @@ void QueryTable::constructTransactionTable(void)
                       ? i18n("[Empty Payee]")
                       : file->payee(payee).name().simplified();
 
+        if(tag_special_case)
+        {
+          tagIdListCache = tagIdList;
+        } else {
+	  QString delimiter="";
+	  for(int i=0;i<tagIdList.size(); i++)
+	  {
+	    qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
+	    delimiter=", ";
+	  }
+        }
         qA["reconciledate"] = (*it_split).reconcileDate().toString(Qt::ISODate);
         qA["reconcileflag"] = KMyMoneyUtils::reconcileStateToString((*it_split).reconcileFlag(), true);
         qA["number"] = (*it_split).number();
@@ -708,7 +735,19 @@ void QueryTable::constructTransactionTable(void)
                   || (!m_config.isInvertingText()
                       && (transaction_text
                           || m_config.match(&(*it_split))))) {
-                m_rows += qA;
+                if(tag_special_case)
+                {
+                  if(!tagIdListCache.size())
+                    qA["tag"] = i18n("[No Tag]");
+                  else
+                    for(int i=0; i<tagIdListCache.size(); i++)
+                    {
+                      qA["tag"] = file->tag(tagIdListCache[i]).name().simplified();
+                      m_rows += qA;
+                    }
+                } else {
+                  m_rows += qA;
+                }
               }
             }
           }
@@ -736,6 +775,14 @@ void QueryTable::constructTransactionTable(void)
             qS["memo"] = (*it_split).memo().isEmpty()
                          ? a_memo
                          : (*it_split).memo();
+
+            //FIXME-ALEX When is used this? I can't find in which condition we arrive here... maybe this code is useless?
+	    QString delimiter="";
+	    for(int i=0;i<tagIdList.size(); i++)
+	    {
+	      qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
+	      delimiter="+";
+	    }
 
             qS["payee"] = payee.isEmpty()
                           ? qA["payee"]
@@ -776,7 +823,6 @@ void QueryTable::constructTransactionTable(void)
         break;
 
     } while (it_split != myBegin);
-
     if (loan_special_case) {
       m_rows += qA;
     }
@@ -1278,6 +1324,8 @@ void QueryTable::constructSplitsTable(void)
       QString institution = splitAcc.institutionId();
       QString payee = (*it_split).payeeId();
 
+      const QList<QString> tagIdList = (*it_split).tagIdList();
+
       if (m_config.isConvertCurrency()) {
         xr = (splitAcc.deepCurrencyPrice((*it_transaction).postDate()) * splitAcc.baseCurrencyPrice((*it_transaction).postDate())).reduce();
       } else {
@@ -1317,6 +1365,14 @@ void QueryTable::constructSplitsTable(void)
       qA["institution"] = institution.isEmpty()
                           ? i18n("No Institution")
                           : file->institution(institution).name();
+
+      //FIXME-ALEX Is this useless? Isn't constructSplitsTable called only for cashflow type report?
+      QString delimiter="";
+      for(int i=0;i<tagIdList.size(); i++)
+      {
+        qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
+        delimiter=",";
+      }
 
       qA["payee"] = payee.isEmpty()
                     ? i18n("[Empty Payee]")

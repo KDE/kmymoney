@@ -81,6 +81,10 @@ TransactionEditor::~TransactionEditor()
 {
   // Make sure the widgets do not send out signals to the editor anymore
   // After all, the editor is about to die
+
+  //disconnect first tagCombo:
+  dynamic_cast<KTagContainer*>(m_editWidgets["tag"])->tagCombo()->disconnect(this);
+
   QMap<QString, QWidget*>::iterator it_w;
   for (it_w = m_editWidgets.begin(); it_w != m_editWidgets.end(); ++it_w) {
     (*it_w)->disconnect(this);
@@ -761,6 +765,14 @@ void StdTransactionEditor::createEditWidgets(void)
   if (category->splitButton())
     category->splitButton()->setDisabled(m_account.id().isEmpty());
 
+  KTagContainer* tag = new KTagContainer;
+  tag->tagCombo()->setClickMessage(i18n("Tag"));
+  tag->tagCombo()->setObjectName(QLatin1String("Tag"));
+  m_editWidgets["tag"] = tag;
+  connect(tag->tagCombo(), SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(tag->tagCombo(), SIGNAL(createItem(QString,QString&)), this, SIGNAL(createTag(QString,QString&)));
+  connect(tag->tagCombo(), SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
+
   KTextEdit* memo = new KTextEdit;
   memo->setObjectName(QLatin1String("Memo"));
   memo->setTabChangesFocus(true);
@@ -853,6 +865,9 @@ void StdTransactionEditor::createEditWidgets(void)
   m_editWidgets["category-label"] = label = new QLabel(i18n("Category"));
   label->setAlignment(Qt::AlignVCenter);
 
+  m_editWidgets["tag-label"] = label = new QLabel(i18n("Tags"));
+  label->setAlignment(Qt::AlignVCenter);
+
   m_editWidgets["memo-label"] = label = new QLabel(i18n("Memo"));
   label->setAlignment(Qt::AlignVCenter);
 
@@ -931,6 +946,11 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
   KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(m_editWidgets["category"]);
   disconnect(category, SIGNAL(focusIn()), this, SLOT(slotEditSplits()));
 
+  // load the tag widget
+  //KMyMoneyTagCombo* tag = dynamic_cast<KMyMoneyTagCombo*>(m_editWidgets["tag"]);
+  KTagContainer* tag = dynamic_cast<KTagContainer*>(m_editWidgets["tag"]);
+  tag->loadTags(MyMoneyFile::instance()->tagList());
+
   // check if the current transaction has a reference to an equity account
   bool haveEquityAccount = false;
   QList<MyMoneySplit>::const_iterator it_s;
@@ -983,6 +1003,11 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
     QString payeeId = m_split.payeeId();
     if (!payeeId.isEmpty()) {
       payee->setSelectedItem(payeeId);
+    }
+    QList<QString> t = m_split.tagIdList();
+    if (!t.isEmpty()) {
+      for(int i=0; i<t.size(); i++)
+        tag->addTagWidget(t[i]);
     }
 
     m_splits.clear();
@@ -1141,6 +1166,17 @@ void StdTransactionEditor::slotReloadEditWidgets(void)
 
   if (!payeeId.isEmpty()) {
     payee->setSelectedItem(payeeId);
+  }
+
+  // reload tag widget
+  KTagContainer* tag = dynamic_cast<KTagContainer*>(m_editWidgets["tag"]);
+  QString tagId = tag->tagCombo()->selectedItem();
+
+  tag->loadTags(MyMoneyFile::instance()->tagList());
+
+  if (!tagId.isEmpty()) {
+    tag->RemoveAllTagWidgets();
+    tag->addTagWidget(tagId);
   }
 }
 
@@ -2029,6 +2065,12 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   if (!isMultiSelection() || (isMultiSelection() && !payee->currentText().isEmpty())) {
     payeeId = payee->selectedItem();
     s0.setPayeeId(payeeId);
+  }
+
+  //KMyMoneyTagCombo* tag = dynamic_cast<KMyMoneyTagCombo*>(m_editWidgets["tag"]);
+  KTagContainer* tag = dynamic_cast<KTagContainer*>(m_editWidgets["tag"]);
+  if (!isMultiSelection() || (isMultiSelection() && !tag->selectedTags().isEmpty())) {
+    s0.setTagIdList(tag->selectedTags());
   }
 
   bool updateValue;

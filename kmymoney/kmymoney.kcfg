@@ -151,11 +151,11 @@
   </entry>
   <entry name="stdTransactionFormTabOrder" type="String">
    <label>Tab order of edit widgets in transaction form</label>
-   <default>account,cashflow,payee,category,memo,number,date,amount,state</default>
+   <default>account,cashflow,payee,category,tag,memo,number,date,amount,state</default>
   </entry>
   <entry name="stdTransactionRegisterTabOrder" type="String">
    <label>Tab order of edit widgets in register</label>
-   <default>number,date,payee,category,memo,payment,deposit,state</default>
+   <default>number,date,payee,category,tag,memo,payment,deposit,state</default>
   </entry>
  </group>
  <group name="Homepage Options">

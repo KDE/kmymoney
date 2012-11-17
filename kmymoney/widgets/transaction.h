@@ -23,6 +23,7 @@
 
 #include <QPalette>
 #include <QList>
+#include <QColor>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -117,6 +118,9 @@ public:
   }
   virtual const QString sortPayee(void) const {
     return m_payee;
+  }
+  virtual const QList<QString> sortTagList(void) const {
+    return m_tagList;
   }
   virtual const MyMoneyMoney sortValue(void) const {
     return m_split.shares();
@@ -284,6 +288,8 @@ protected:
   QString                 m_category;
   QString                 m_payee;
   QString                 m_payeeHeader;
+  QList<QString>          m_tagList;
+  QList<QColor>           m_tagColorList;
   QString                 m_categoryHeader;
   QString                 m_splitCurrencyId;
   QString                 m_uniqueId;

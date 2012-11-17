@@ -33,6 +33,7 @@ MyMoneySeqAccessMgr::MyMoneySeqAccessMgr()
   m_nextInstitutionID = 0;
   m_nextTransactionID = 0;
   m_nextPayeeID = 0;
+  m_nextTagID = 0;
   m_nextScheduleID = 0;
   m_nextSecurityID = 0;
   m_nextReportID = 0;
@@ -234,6 +235,88 @@ const QList<MyMoneyPayee> MyMoneySeqAccessMgr::payeeList(void) const
   return m_payeeList.values();
 }
 
+void MyMoneySeqAccessMgr::addTag(MyMoneyTag& tag)
+{
+  // create the tag
+  MyMoneyTag newTag(nextTagID(), tag);
+  m_tagList.insert(newTag.id(), newTag);
+  tag = newTag;
+}
+
+const MyMoneyTag MyMoneySeqAccessMgr::tag(const QString& id) const
+{
+  QMap<QString, MyMoneyTag>::ConstIterator it;
+  it = m_tagList.find(id);
+  if (it == m_tagList.end())
+    throw new MYMONEYEXCEPTION("Unknown tag '" + id + '\'');
+
+  return *it;
+}
+
+const MyMoneyTag MyMoneySeqAccessMgr::tagByName(const QString& tag) const
+{
+  if (tag.isEmpty())
+    return MyMoneyTag::null;
+
+  QMap<QString, MyMoneyTag>::ConstIterator it_ta;
+
+  for (it_ta = m_tagList.begin(); it_ta != m_tagList.end(); ++it_ta) {
+    if ((*it_ta).name() == tag) {
+      return *it_ta;
+    }
+  }
+
+  throw new MYMONEYEXCEPTION("Unknown tag '" + tag + '\'');
+}
+
+void MyMoneySeqAccessMgr::modifyTag(const MyMoneyTag& tag)
+{
+  QMap<QString, MyMoneyTag>::ConstIterator it;
+
+  it = m_tagList.find(tag.id());
+  if (it == m_tagList.end()) {
+    QString msg = "Unknown tag '" + tag.id() + '\'';
+    throw new MYMONEYEXCEPTION(msg);
+  }
+  m_tagList.modify((*it).id(), tag);
+}
+
+void MyMoneySeqAccessMgr::removeTag(const MyMoneyTag& tag)
+{
+  QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
+  QMap<QString, MyMoneySchedule>::ConstIterator it_s;
+  QMap<QString, MyMoneyTag>::ConstIterator it_ta;
+
+  it_ta = m_tagList.find(tag.id());
+  if (it_ta == m_tagList.end()) {
+    QString msg = "Unknown tag '" + tag.id() + '\'';
+    throw new MYMONEYEXCEPTION(msg);
+  }
+
+  // scan all transactions to check if the tag is still referenced
+  for (it_t = m_transactionList.begin(); it_t != m_transactionList.end(); ++it_t) {
+    if ((*it_t).hasReferenceTo(tag.id())) {
+      throw new MYMONEYEXCEPTION(QString("Cannot remove tag that is still referenced to a %1").arg("transaction"));
+    }
+  }
+
+  // check referential integrity in schedules
+  for (it_s = m_scheduleList.begin(); it_s != m_scheduleList.end(); ++it_s) {
+    if ((*it_s).hasReferenceTo(tag.id())) {
+      throw new MYMONEYEXCEPTION(QString("Cannot remove tag that is still referenced to a %1").arg("schedule"));
+    }
+  }
+
+  // remove any reference to report and/or budget
+  removeReferences(tag.id());
+
+  m_tagList.remove((*it_ta).id());
+}
+
+const QList<MyMoneyTag> MyMoneySeqAccessMgr::tagList(void) const
+{
+  return m_tagList.values();
+}
 
 void MyMoneySeqAccessMgr::addAccount(MyMoneyAccount& parent, MyMoneyAccount& account)
 {
@@ -342,6 +425,14 @@ QString MyMoneySeqAccessMgr::nextPayeeID(void)
   QString id;
   id.setNum(++m_nextPayeeID);
   id = 'P' + id.rightJustified(PAYEE_ID_SIZE, '0');
+  return id;
+}
+
+QString MyMoneySeqAccessMgr::nextTagID(void)
+{
+  QString id;
+  id.setNum(++m_nextTagID);
+  id = 'G' + id.rightJustified(TAG_ID_SIZE, '0');
   return id;
 }
 
@@ -542,6 +633,10 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
     account((*it_s).accountId());
     if (!(*it_s).payeeId().isEmpty())
       payee((*it_s).payeeId());
+    foreach (const QString& tagId, (*it_s).tagIdList()) {
+      if (!tagId.isEmpty())
+       tag(tagId);
+    }
   }
 
   // new data seems to be ok. find old version of transaction
@@ -1006,6 +1101,27 @@ void MyMoneySeqAccessMgr::loadPayees(const QMap<QString, MyMoneyPayee>& map)
   }
 }
 
+void MyMoneySeqAccessMgr::loadTags(const QMap<QString, MyMoneyTag>& map)
+{
+  m_tagList = map;
+
+  // scan the map to identify the last used id
+  QMap<QString, MyMoneyTag>::const_iterator it_ta;
+  QString lastId("");
+  for (it_ta = map.begin(); it_ta != map.end(); ++it_ta) {
+    if ((*it_ta).id().length() <= TAG_ID_SIZE + 1) {
+      if ((*it_ta).id() > lastId)
+        lastId = (*it_ta).id();
+    } else {
+    }
+  }
+
+  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
+  if (pos != -1) {
+    m_nextTagID = lastId.mid(pos).toUInt();
+  }
+}
+
 void MyMoneySeqAccessMgr::loadSecurities(const QMap<QString, MyMoneySecurity>& map)
 {
   m_securitiesList = map;
@@ -1047,6 +1163,11 @@ void MyMoneySeqAccessMgr::loadTransactionId(const unsigned long id)
 void MyMoneySeqAccessMgr::loadPayeeId(const unsigned long id)
 {
   m_nextPayeeID = id;
+}
+
+void MyMoneySeqAccessMgr::loadTagId(const unsigned long id)
+{
+  m_nextTagID = id;
 }
 
 void MyMoneySeqAccessMgr::loadInstitutionId(const unsigned long id)
@@ -1715,6 +1836,7 @@ bool MyMoneySeqAccessMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFi
   QMap<QString, MyMoneyAccount>::const_iterator it_a;
   QMap<QString, MyMoneyInstitution>::const_iterator it_i;
   QMap<QString, MyMoneyPayee>::const_iterator it_p;
+  QMap<QString, MyMoneyTag>::const_iterator it_ta;
   QMap<QString, MyMoneyBudget>::const_iterator it_b;
   QMap<QString, MyMoneySchedule>::const_iterator it_sch;
   QMap<QString, MyMoneySecurity>::const_iterator it_sec;
@@ -1744,6 +1866,11 @@ bool MyMoneySeqAccessMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFi
   if (!skipCheck[RefCheckPayee]) {
     for (it_p = m_payeeList.begin(); !rc && it_p != m_payeeList.end(); ++it_p) {
       rc = (*it_p).hasReferenceTo(id);
+    }
+  }
+  if (!skipCheck[RefCheckTag]) {
+    for (it_ta = m_tagList.begin(); !rc && it_ta != m_tagList.end(); ++it_ta) {
+      rc = (*it_ta).hasReferenceTo(id);
     }
   }
 
@@ -1782,6 +1909,7 @@ bool MyMoneySeqAccessMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFi
 void MyMoneySeqAccessMgr::startTransaction(void)
 {
   m_payeeList.startTransaction(&m_nextPayeeID);
+  m_tagList.startTransaction(&m_nextTagID);
   m_institutionList.startTransaction(&m_nextInstitutionID);
   m_accountList.startTransaction(&m_nextPayeeID);
   m_transactionList.startTransaction(&m_nextTransactionID);
@@ -1798,6 +1926,7 @@ bool MyMoneySeqAccessMgr::commitTransaction(void)
 {
   bool rc = false;
   rc |= m_payeeList.commitTransaction();
+  rc |= m_tagList.commitTransaction();
   rc |= m_institutionList.commitTransaction();
   rc |= m_accountList.commitTransaction();
   rc |= m_transactionList.commitTransaction();
@@ -1819,6 +1948,7 @@ bool MyMoneySeqAccessMgr::commitTransaction(void)
 void MyMoneySeqAccessMgr::rollbackTransaction(void)
 {
   m_payeeList.rollbackTransaction();
+  m_tagList.rollbackTransaction();
   m_institutionList.rollbackTransaction();
   m_accountList.rollbackTransaction();
   m_transactionList.rollbackTransaction();

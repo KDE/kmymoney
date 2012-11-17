@@ -1,47 +1,48 @@
-ADD_SUBDIRECTORY( settings ) 
+ADD_SUBDIRECTORY( settings )
 
 ########### next target ###############
 
 SET(libdialogs_a_SOURCES
-  investactivities.cpp 
+  investactivities.cpp
   investtransactioneditor.cpp
-  kaccountselectdlg.cpp 
-  kbackupdlg.cpp 
+  kaccountselectdlg.cpp
+  kbackupdlg.cpp
   kbalancechartdlg.cpp
-  kbalancewarning.cpp 
+  kbalancewarning.cpp
   kcategoryreassigndlg.cpp
-  kchooseimportexportdlg.cpp 
+  kchooseimportexportdlg.cpp
   kconfirmmanualenterdlg.cpp
-  kcurrencycalculator.cpp 
+  kcurrencycalculator.cpp
   kcurrencyeditdlg.cpp
   keditscheduledlg.cpp
   kenterscheduledlg.cpp
-  kequitypriceupdatedlg.cpp 
-  kexportdlg.cpp 
-  kfindtransactiondlg.cpp 
+  kequitypriceupdatedlg.cpp
+  kexportdlg.cpp
+  kfindtransactiondlg.cpp
   kgeneratesqldlg.cpp
-  kgncimportoptionsdlg.cpp 
+  kgncimportoptionsdlg.cpp
   kgncpricesourcedlg.cpp
-  kgpgkeyselectiondlg.cpp 
+  kgpgkeyselectiondlg.cpp
   kimportdlg.cpp
   kloadtemplatedlg.cpp
-  kmergetransactionsdlg.cpp 
+  kmergetransactionsdlg.cpp
   kmymoneyfileinfodlg.cpp
-  kmymoneypricedlg.cpp 
-  kmymoneysplittable.cpp 
+  kmymoneypricedlg.cpp
+  kmymoneysplittable.cpp
   knewaccountdlg.cpp
-  knewbankdlg.cpp 
-  knewbudgetdlg.cpp 
+  knewbankdlg.cpp
+  knewbudgetdlg.cpp
   knewequityentrydlg.cpp
-  knewfiledlg.cpp 
-  kpayeereassigndlg.cpp 
+  knewfiledlg.cpp
+  kpayeereassigndlg.cpp
+  ktagreassigndlg.cpp
   kreportconfigurationfilterdlg.cpp
   kselectdatabasedlg.cpp
-  kselecttransactionsdlg.cpp 
-  ksplittransactiondlg.cpp 
-  kupdatestockpricedlg.cpp 
+  kselecttransactionsdlg.cpp
+  ksplittransactiondlg.cpp
+  kupdatestockpricedlg.cpp
   mymoneyqifprofileeditor.cpp
-  transactioneditor.cpp 
+  transactioneditor.cpp
   transactionmatcher.cpp
   )
 
@@ -62,6 +63,7 @@ SET(dialogs_UI
   kmymoneyfileinfodlgdecl.ui kmymoneypricedlgdecl.ui
   knewaccountdlgdecl.ui knewbankdlgdecl.ui knewbudgetdlgdecl.ui
   knewequityentrydecl.ui knewfiledlgdecl.ui kpayeereassigndlgdecl.ui
+  ktagreassigndlgdecl.ui
   kselectdatabasedlgdecl.ui kselecttransactionsdlgdecl.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlgdecl.ui
   kupdatestockpricedlgdecl.ui mymoneyqifprofileeditordecl.ui

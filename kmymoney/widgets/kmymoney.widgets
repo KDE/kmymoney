@@ -37,6 +37,10 @@ ToolTip=The KMyMoney widget that displays categories
 ToolTip=The KMyMoney widget that displays payyes
 IncludeFile=kmymoneymvccombo.h
 
+[KMyMoneyTagCombo]
+ToolTip=The KMyMoney widget that displays tags
+IncludeFile=kmymoneymvccombo.h
+
 [KMyMoneyPeriodCombo]
 ToolTip=The KMyMoney widget that displays time periods
 IncludeFile=kmymoneycombo.h

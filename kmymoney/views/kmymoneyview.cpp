@@ -91,6 +91,7 @@
 #include "kcategoriesview.h"
 #include "kinstitutionsview.h"
 #include "kpayeesview.h"
+#include "ktagsview.h"
 #include "kscheduledview.h"
 #include "kgloballedgerview.h"
 #include "kinvestmentview.h"
@@ -216,7 +217,20 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_categoriesView, SIGNAL(reparent(MyMoneyAccount,MyMoneyAccount)), kmymoney, SLOT(slotReparentAccount(MyMoneyAccount,MyMoneyAccount)));
   connect(m_categoriesView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
-  // Page 5
+// Page 5
+  m_tagsView = new KTagsView();
+  m_tagsViewFrame = m_model->addPage(m_tagsView, i18n("Tags"));
+  m_tagsViewFrame->setIcon(KIcon("mail-tagged"));
+
+  connect(kmymoney, SIGNAL(tagCreated(QString)), m_tagsView, SLOT(slotSelectTagAndTransaction(QString)));
+  connect(kmymoney, SIGNAL(tagRename()), m_tagsView, SLOT(slotRenameButtonCliked()));
+  connect(m_tagsView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowTagContextMenu()));
+  connect(m_tagsView, SIGNAL(selectObjects(QList<MyMoneyTag>)), kmymoney, SLOT(slotSelectTags(QList<MyMoneyTag>)));
+  connect(m_tagsView, SIGNAL(transactionSelected(QString,QString)),
+          this, SLOT(slotLedgerSelected(QString,QString)));
+  connect(m_tagsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
+
+  // Page 6
   m_payeesView = new KPayeesView();
   m_payeesViewFrame = m_model->addPage(m_payeesView, i18n("Payees"));
   m_payeesViewFrame->setIcon(KIcon("system-users"));
@@ -229,7 +243,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
           this, SLOT(slotLedgerSelected(QString,QString)));
   connect(m_payeesView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
-  // Page 6
+  // Page 7
   m_ledgerView = new KGlobalLedgerView();
   m_ledgerViewFrame = m_model->addPage(m_ledgerView, i18n("Ledgers"));
   m_ledgerViewFrame->setIcon(KIcon("ledger"));  //krazy:exclude=iconnames
@@ -247,7 +261,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_ledgerView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
 
-  // Page 7
+  // Page 8
   m_investmentView = new KInvestmentView();
   m_investmentViewFrame = m_model->addPage(m_investmentView, i18n("Investments"));
   m_investmentViewFrame->setIcon(KIcon("investment"));
@@ -258,7 +272,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_investmentView, SIGNAL(investmentRightMouseClick()), kmymoney, SLOT(slotShowInvestmentContextMenu()));
   connect(m_investmentView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
-  // Page 8
+  // Page 9
   m_reportsView = new KReportsView();
   m_reportsViewFrame = m_model->addPage(m_reportsView, i18n("Reports"));
   m_reportsViewFrame->setIcon(KIcon("office-chart-tall-pie"));
@@ -266,7 +280,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
           this, SLOT(slotLedgerSelected(QString,QString)));
   connect(m_reportsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
-  // Page 9
+  // Page 10
   m_budgetView = new KBudgetView();
   m_budgetViewFrame = m_model->addPage(m_budgetView, i18n("Budgets"));
   m_budgetViewFrame->setIcon(KIcon("budget"));
@@ -276,7 +290,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(kmymoney, SIGNAL(budgetRename()), m_budgetView, SLOT(slotStartRename()));
   connect(m_budgetView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
-  // Page 10
+  // Page 11
   m_forecastView = new KForecastView();
   m_forecastViewFrame = m_model->addPage(m_forecastView, i18n("Forecast"));
   m_forecastViewFrame->setIcon(KIcon("forecast"));
@@ -496,6 +510,8 @@ void KMyMoneyView::enableViews(int state)
     m_categoriesViewFrame->setEnabled(state);
   if (m_payeesViewFrame->isEnabled() != state)
     m_payeesViewFrame->setEnabled(state);
+  if (m_tagsViewFrame->isEnabled() != state)
+    m_tagsViewFrame->setEnabled(state);
   if (m_budgetViewFrame->isEnabled() != state)
     m_budgetViewFrame->setEnabled(state);
   if (m_ledgerViewFrame->isEnabled() != state)
@@ -556,6 +572,12 @@ void KMyMoneyView::slotPayeeSelected(const QString& payee, const QString& accoun
 {
   showPage(m_payeesViewFrame);
   m_payeesView->slotSelectPayeeAndTransaction(payee, account, transaction);
+}
+
+void KMyMoneyView::slotTagSelected(const QString& tag, const QString& account, const QString& transaction)
+{
+  showPage(m_tagsViewFrame);
+  m_tagsView->slotSelectTagAndTransaction(tag, account, transaction);
 }
 
 void KMyMoneyView::slotScheduleSelected(const QString& scheduleId)
@@ -1779,6 +1801,7 @@ void KMyMoneyView::slotRefreshViews()
   m_institutionsView->slotLoadAccounts();
   m_categoriesView->slotLoadAccounts();
   m_payeesView->slotLoadPayees();
+  m_tagsView->slotLoadTags();
   m_ledgerView->slotLoadView();
   m_budgetView->slotRefreshView();
   m_homeView->slotLoadView();

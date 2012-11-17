@@ -38,6 +38,7 @@
 #include <mymoneyaccount.h>
 #include <mymoneytransaction.h>
 #include <mymoneypayee.h>
+#include <mymoneytag.h>
 #include <mymoneyscheduled.h>
 #include <mymoneytransactionfilter.h>
 #include <mymoneysecurity.h>
@@ -92,6 +93,7 @@ public:
     RefCheckSecurity,
     RefCheckCurrency,
     RefCheckPrice,
+    RefCheckTag,
     // insert new entries above this line
     MaxRefCheckBits
   } ReferenceCheckBits;
@@ -205,6 +207,62 @@ public:
     * @return QList<MyMoneyPayee> containing the payee information
     */
   virtual const QList<MyMoneyPayee> payeeList(void) const = 0;
+
+  /**
+    * This method is used to create a new tag
+    *
+    * An exception will be thrown upon error conditions
+    *
+    * @param tag MyMoneyTag reference to tag information
+    */
+  virtual void addTag(MyMoneyTag& tag) = 0;
+
+  /**
+    * This method is used to retrieve information about a tag
+    * An exception will be thrown upon error conditions.
+    *
+    * @param id QString reference to id of tag
+    *
+    * @return MyMoneyTag object of tag
+    */
+  virtual const MyMoneyTag tag(const QString& id) const = 0;
+
+  /**
+    * This method is used to retrieve the id to a corresponding
+    * name of a tag.
+    * An exception will be thrown upon error conditions.
+    *
+    * @param tag QString reference to name of tag
+    *
+    * @return MyMoneyTag object of tag
+    */
+  virtual const MyMoneyTag tagByName(const QString& tag) const = 0;
+
+  /**
+    * This method is used to modify an existing tag
+    *
+    * An exception will be thrown upon error conditions
+    *
+    * @param tag MyMoneyTag reference to tag information
+    */
+  virtual void modifyTag(const MyMoneyTag& tag) = 0;
+
+  /**
+    * This method is used to remove an existing tag
+    *
+    * An exception will be thrown upon error conditions
+    *
+    * @param tag MyMoneyTag reference to tag information
+    */
+  virtual void removeTag(const MyMoneyTag& tag) = 0;
+
+  /**
+    * This method returns a list of the tags
+    * inside a MyMoneyStorage object
+    *
+    * @return QList<MyMoneyTag> containing the tag information
+    */
+  virtual const QList<MyMoneyTag> tagList(void) const = 0;
 
   /**
     * Returns the account addressed by it's id.

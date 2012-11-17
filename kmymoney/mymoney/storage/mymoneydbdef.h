@@ -413,6 +413,8 @@ private:
   TABLE(FileInfo)
   TABLE(Institutions)
   TABLE(Payees)
+  TABLE(Tags)
+  TABLE(TagSplits)
   TABLE(Accounts)
   TABLE(Transactions)
   TABLE(Splits)

@@ -70,6 +70,8 @@ protected:
 
   void writePayee(QDomElement& payees, const MyMoneyPayee& p);
 
+  void writeTag(QDomElement& tags, const MyMoneyTag& ta);
+
   void writeAccount(QDomElement& accounts, const MyMoneyAccount& p);
 
   void writeTransaction(QDomElement& transactions, const MyMoneyTransaction& tx);

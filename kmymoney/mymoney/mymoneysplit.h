@@ -164,6 +164,9 @@ public:
   const QString& payeeId(void) const {
     return m_payee;
   }
+  const QList<QString>& tagIdList(void) const {
+    return m_tagList;
+  }
   const QString& action(void) const {
     return m_action;
   }
@@ -210,6 +213,7 @@ public:
   void setReconcileFlag(const reconcileFlagE flag);
   void setReconcileDate(const QDate& date);
   void setPayeeId(const QString& payee);
+  void setTagIdList(const QList<QString>& tagList);
   void setAction(const QString& action);
   void setAction(investTransactionTypeE type);
   void setNumber(const QString& number);
@@ -281,6 +285,11 @@ private:
     * This member contains the ID of the payee
     */
   QString      m_payee;
+
+  /**
+    * This member contains a list of the IDs of the tags
+    */
+  QList<QString> m_tagList;
 
   /**
     * This member contains the ID of the account

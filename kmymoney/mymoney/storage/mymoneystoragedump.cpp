@@ -106,6 +106,7 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   }
 
   s << "payees = " << _storage->payeeList().count() << ", next id = " << _storage->payeeId() << "\n";
+  s << "tags = " << _storage->tagList().count() << ", next id = " << _storage->tagId() << "\n";
   s << "institutions = " << _storage->institutionList().count() << ", next id = " << _storage->institutionId() << "\n";
   s << "schedules = " << _storage->scheduleList().count() << ", next id = " << _storage->scheduleId() << "\n";
   s << "\n";
@@ -141,6 +142,20 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   }
   s << "\n";
 
+  s << "Tags" << "\n";
+  s << "------" << "\n";
+
+  QList<MyMoneyTag> list_ta = storage->tagList();
+  QList<MyMoneyTag>::ConstIterator it_ta;
+  for (it_ta = list_ta.constBegin(); it_ta != list_ta.constEnd(); ++it_ta) {
+    s << "  ID = " << (*it_ta).id() << "\n";
+    s << "  Name = " << (*it_ta).name() << "\n";
+    s << "  Closed = " << (*it_ta).isClosed() << "\n";
+    s << "  TagColor = " << (*it_ta).tagColor().name() << "\n";
+    s << "  Notes = " << (*it_ta).notes() << "\n";
+    s << "\n";
+  }
+  s << "\n";
 
   s << "Accounts" << "\n";
   s << "--------" << "\n";
@@ -389,6 +404,14 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, IMyMoneyStorage* storag
       s << " (" << p.name() << ")" << "\n";
     } else
       s << " ()\n";
+    for(int i=0; i< (*it_s).tagIdList().size(); i++) {
+      s << "    Tag = " << (*it_s).tagIdList()[i];
+      if (!(*it_s).tagIdList()[i].isEmpty()) {
+        MyMoneyTag ta = storage->tag((*it_s).tagIdList()[i]);
+        s << " (" << ta.name() << ")" << "\n";
+      } else
+        s << " ()\n";
+    }
     s << "    Account = " << (*it_s).accountId();
     MyMoneyAccount acc;
     try {

@@ -61,6 +61,7 @@ void MyMoneySeqAccessMgrTest::testEmptyConstructor()
   QVERIFY(m->m_transactionList.count() == 0);
   QVERIFY(m->m_transactionKeys.count() == 0);
   QVERIFY(m->m_payeeList.count() == 0);
+  QVERIFY(m->m_tagList.count() == 0);
   QVERIFY(m->m_scheduleList.count() == 0);
 
   QVERIFY(m->m_dirty == false);
@@ -152,6 +153,8 @@ void MyMoneySeqAccessMgrTest::testSupportFunctions()
   QVERIFY(m->m_nextTransactionID == 1);
   QVERIFY(m->nextPayeeID() == "P000001");
   QVERIFY(m->m_nextPayeeID == 1);
+  QVERIFY(m->nextTagID() == "G000001");
+  QVERIFY(m->m_nextTagID == 1);
   QVERIFY(m->nextScheduleID() == "SCH000001");
   QVERIFY(m->m_nextScheduleID == 1);
   QVERIFY(m->nextReportID() == "R000001");
@@ -1031,6 +1034,109 @@ void MyMoneySeqAccessMgrTest::testRemovePayee()
   QVERIFY(m->m_payeeList.count() == 1);
 }
 
+void MyMoneySeqAccessMgrTest::testAddTag()
+{
+  MyMoneyTag ta;
+
+  ta.setName("THB");
+  m->m_dirty = false;
+  try {
+    QVERIFY(m->m_nextTagID == 0);
+    m->addTag(ta);
+    m->commitTransaction();
+    m->startTransaction();
+    QVERIFY(m->dirty() == true);
+    QVERIFY(m->m_nextTagID == 1);
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception");
+  }
+}
+
+void MyMoneySeqAccessMgrTest::testModifyTag()
+{
+  MyMoneyTag ta;
+
+  testAddTag();
+
+  ta = m->tag("G000001");
+  ta.setName("New name");
+  m->m_dirty = false;
+  try {
+    m->modifyTag(ta);
+    m->commitTransaction();
+    m->startTransaction();
+    ta = m->tag("G000001");
+    QVERIFY(ta.name() == "New name");
+    QVERIFY(m->dirty() == true);
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception");
+  }
+}
+
+void MyMoneySeqAccessMgrTest::testRemoveTag()
+{
+  testAddTag();
+  m->m_dirty = false;
+
+  // check that we can remove an unreferenced tag
+  MyMoneyTag ta = m->tag("G000001");
+  try {
+    QVERIFY(m->m_tagList.count() == 1);
+    m->removeTag(ta);
+    m->commitTransaction();
+    m->startTransaction();
+    QVERIFY(m->m_tagList.count() == 0);
+    QVERIFY(m->dirty() == true);
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception");
+  }
+
+  // add transaction
+  testAddTransactions();
+
+  MyMoneyTransaction tr = m->transaction("T000000000000000001");
+  MyMoneySplit sp;
+  sp = tr.splits()[0];
+  QList<QString> tagIdList;
+  tagIdList << "G000001";
+  sp.setTagIdList(tagIdList);
+  tr.modifySplit(sp);
+
+  // check that we cannot add a transaction referencing
+  // an unknown tag
+  try {
+    m->modifyTransaction(tr);
+    QFAIL("Expected exception");
+  } catch (MyMoneyException *e) {
+    delete e;
+  }
+
+  m->m_nextTagID = 0;  // reset here, so that the
+  // testAddTag will not fail
+  testAddTag();
+
+  // check that it works when the tag exists
+  try {
+    m->modifyTransaction(tr);
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception");
+  }
+
+  m->m_dirty = false;
+
+  // now check, that we cannot remove the tag
+  try {
+    m->removeTag(ta);
+    QFAIL("Expected exception");
+  } catch (MyMoneyException *e) {
+    delete e;
+  }
+  QVERIFY(m->m_tagList.count() == 1);
+}
 
 void MyMoneySeqAccessMgrTest::testRemoveAccountFromTree()
 {
@@ -1105,6 +1211,32 @@ void MyMoneySeqAccessMgrTest::testPayeeName()
   }
 }
 
+void MyMoneySeqAccessMgrTest::testTagName()
+{
+  testAddTag();
+
+  MyMoneyTag ta;
+  QString name("THB");
+
+  // OK case
+  try {
+    ta = m->tagByName(name);
+    QVERIFY(ta.name() == "THB");
+    QVERIFY(ta.id() == "G000001");
+  } catch (MyMoneyException *e) {
+    unexpectedException(e);
+  }
+
+  // Not OK case
+  name = "Thb";
+  try {
+    ta = m->tagByName(name);
+    QFAIL("Exception expected");
+  } catch (MyMoneyException *e) {
+    delete e;
+  }
+}
+
 void MyMoneySeqAccessMgrTest::testAssignment()
 {
   testAddTransactions();
@@ -1130,6 +1262,7 @@ void MyMoneySeqAccessMgrTest::testEquality(const MyMoneySeqAccessMgr *t)
   QVERIFY(m->m_nextAccountID == t->m_nextAccountID);
   QVERIFY(m->m_nextTransactionID == t->m_nextTransactionID);
   QVERIFY(m->m_nextPayeeID == t->m_nextPayeeID);
+  QVERIFY(m->m_nextTagID == t->m_nextTagID);
   QVERIFY(m->m_nextScheduleID == t->m_nextScheduleID);
   QVERIFY(m->m_dirty == t->m_dirty);
   QVERIFY(m->m_creationDate == t->m_creationDate);
@@ -1141,6 +1274,8 @@ void MyMoneySeqAccessMgrTest::testEquality(const MyMoneySeqAccessMgr *t)
    */
   QVERIFY(m->m_payeeList.keys() == t->m_payeeList.keys());
   QVERIFY(m->m_payeeList.values() == t->m_payeeList.values());
+  QVERIFY(m->m_tagList.keys() == t->m_tagList.keys());
+  QVERIFY(m->m_tagList.values() == t->m_tagList.values());
   QVERIFY(m->m_transactionKeys.keys() == t->m_transactionKeys.keys());
   QVERIFY(m->m_transactionKeys.values() == t->m_transactionKeys.values());
   QVERIFY(m->m_institutionList.keys() == t->m_institutionList.keys());
@@ -1660,6 +1795,15 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
   QVERIFY(m->m_payeeList.values() == pmap.values());
   QVERIFY(m->m_payeeList.keys() == pmap.keys());
   QVERIFY(m->m_nextPayeeID == 1234);
+
+  // tag loader
+  QMap<QString, MyMoneyTag> tamap;
+  MyMoneyTag ta("G1234", MyMoneyTag());
+  tamap[ta.id()] = ta;
+  m->loadTags(tamap);
+  QVERIFY(m->m_tagList.values() == tamap.values());
+  QVERIFY(m->m_tagList.keys() == tamap.keys());
+  QVERIFY(m->m_nextTagID == 1234);
 
   // security loader
   QMap<QString, MyMoneySecurity> smap;

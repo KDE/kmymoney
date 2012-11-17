@@ -56,6 +56,7 @@ public:
   QMap<QString, MyMoneyAccount> aList;
   QMap<QString, MyMoneyTransaction> tList;
   QMap<QString, MyMoneyPayee> pList;
+  QMap<QString, MyMoneyTag> taList;
   QMap<QString, MyMoneySchedule> sList;
   QMap<QString, MyMoneySecurity> secList;
   QMap<QString, MyMoneyReport> rList;
@@ -154,6 +155,7 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
         || s == "account"
         || s == "price"
         || s == "payee"
+	|| s == "tag"
         || s == "currency"
         || s == "security"
         || s == "keyvaluepairs"
@@ -257,6 +259,10 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           MyMoneyPayee p(m_baseNode);
           if (!p.id().isEmpty())
             m_reader->d->pList[p.id()] = p;
+        } else if (s == "tag") {
+          MyMoneyTag ta(m_baseNode);
+          if (!ta.id().isEmpty())
+            m_reader->d->taList[ta.id()] = ta;
         } else if (s == "currency") {
           MyMoneySecurity s(m_baseNode);
           if (!s.id().isEmpty())
@@ -324,6 +330,10 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       // last payee read, now dump them into the engine
       m_reader->m_storage->loadPayees(m_reader->d->pList);
       m_reader->d->pList.clear();
+    } else if (s == "tags") {
+      // last tag read, now dump them into the engine
+      m_reader->m_storage->loadTags(m_reader->d->taList);
+      m_reader->d->taList.clear();
     } else if (s == "transactions") {
       // last transaction read, now dump them into the engine
       m_reader->m_storage->loadTransactions(m_reader->d->tList);
@@ -483,6 +493,10 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, IMyMoneySerialize* storage)
   QDomElement payees = m_doc->createElement("PAYEES");
   writePayees(payees);
   mainElement.appendChild(payees);
+
+  QDomElement tags = m_doc->createElement("TAGS");
+  writeTags(tags);
+  mainElement.appendChild(tags);
 
   QDomElement accounts = m_doc->createElement("ACCOUNTS");
   writeAccounts(accounts);
@@ -669,6 +683,21 @@ void MyMoneyStorageXML::writePayees(QDomElement& payees)
 void MyMoneyStorageXML::writePayee(QDomElement& payee, const MyMoneyPayee& p)
 {
   p.writeXML(*m_doc, payee);
+}
+
+void MyMoneyStorageXML::writeTags(QDomElement& tags)
+{
+  const QList<MyMoneyTag> list = m_storage->tagList();
+  QList<MyMoneyTag>::ConstIterator it;
+  tags.setAttribute("count", list.count());
+
+  for (it = list.begin(); it != list.end(); ++it)
+    writeTag(tags, *it);
+}
+
+void MyMoneyStorageXML::writeTag(QDomElement& tag, const MyMoneyTag& ta)
+{
+  ta.writeXML(*m_doc, tag);
 }
 
 void MyMoneyStorageXML::writeAccounts(QDomElement& accounts)

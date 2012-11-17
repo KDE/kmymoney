@@ -131,6 +131,9 @@ protected slots:
   virtual void slotSelectAllPayees(void);
   virtual void slotDeselectAllPayees(void);
 
+  virtual void slotSelectAllTags(void);
+  virtual void slotDeselectAllTags(void);
+
   virtual void slotNrSelected(void);
   virtual void slotNrRangeSelected(void);
 
@@ -161,7 +164,8 @@ protected:
   enum opTypeE {
     addAccountToFilter = 0,
     addCategoryToFilter,
-    addPayeeToFilter
+    addPayeeToFilter,
+    addTagToFilter
   };
 
   void setupCategoriesPage(void);
@@ -169,6 +173,7 @@ protected:
   void setupAccountsPage(void);
   void setupAmountPage(void);
   void setupPayeesPage(void);
+  void setupTagsPage(void);
   void setupDetailsPage(void);
 
   void setupFilter(void);
@@ -183,6 +188,12 @@ protected:
     * found in the engine.
     */
   void loadPayees(void);
+
+  /**
+    * This method loads the m_tagsView with the tags name
+    * found in the engine.
+    */
+  void loadTags(void);
 
   /**
     * This method loads the register with the matching transactions

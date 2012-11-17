@@ -89,6 +89,9 @@ protected:
   virtual void writePayees(QDomElement& payees);
   virtual void writePayee(QDomElement& payees, const MyMoneyPayee& p);
 
+  virtual void writeTags(QDomElement& tags);
+  virtual void writeTag(QDomElement& tags, const MyMoneyTag& ta);
+
   virtual void writeAccounts(QDomElement& accounts);
   virtual void writeAccount(QDomElement& accounts, const MyMoneyAccount& p);
 

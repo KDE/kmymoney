@@ -195,7 +195,7 @@ void KReportConfigurationFilterDlg::slotSearch(void)
       m_currentState.setMovingAverageDays(m_tab2->findChild<QSpinBox*>("m_movingAverageDays")->value());
     }
   } else if (m_tab3) {
-    MyMoneyReport::ERowType rtq[7] = { MyMoneyReport::eCategory, MyMoneyReport::eTopCategory, MyMoneyReport::ePayee, MyMoneyReport::eAccount, MyMoneyReport::eTopAccount, MyMoneyReport::eMonth, MyMoneyReport::eWeek };
+    MyMoneyReport::ERowType rtq[8] = { MyMoneyReport::eCategory, MyMoneyReport::eTopCategory, MyMoneyReport::eTag, MyMoneyReport::ePayee, MyMoneyReport::eAccount, MyMoneyReport::eTopAccount, MyMoneyReport::eMonth, MyMoneyReport::eWeek };
     m_currentState.setRowType(rtq[m_tab3->findChild<KComboBox*>("m_comboOrganizeBy")->currentIndex()]);
 
     unsigned qc = MyMoneyReport::eQCnone;
@@ -208,6 +208,8 @@ void KReportConfigurationFilterDlg::slotSearch(void)
       qc |= MyMoneyReport::eQCnumber;
     if (m_tab3->findChild<QCheckBox*>("m_checkPayee")->isChecked())
       qc |= MyMoneyReport::eQCpayee;
+    if (m_tab3->findChild<QCheckBox*>("m_checkTag")->isChecked())
+      qc |= MyMoneyReport::eQCtag;
     if (m_tab3->findChild<QCheckBox*>("m_checkCategory")->isChecked())
       qc |= MyMoneyReport::eQCcategory;
     if (m_tab3->findChild<QCheckBox*>("m_checkMemo")->isChecked())
@@ -384,6 +386,9 @@ void KReportConfigurationFilterDlg::slotReset(void)
       case MyMoneyReport::eTopCategory:
         combo->setCurrentItem(i18n("Top Categories"), false);
         break;
+      case MyMoneyReport::eTag:
+        combo->setCurrentItem(i18n("Tags"), false);
+        break;
       case MyMoneyReport::ePayee:
         combo->setCurrentItem(i18n("Payees"), false);
         break;
@@ -406,6 +411,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
     unsigned qc = m_initialState.queryColumns();
     m_tab3->findChild<QCheckBox*>("m_checkNumber")->setChecked(qc & MyMoneyReport::eQCnumber);
     m_tab3->findChild<QCheckBox*>("m_checkPayee")->setChecked(qc & MyMoneyReport::eQCpayee);
+    m_tab3->findChild<QCheckBox*>("m_checkTag")->setChecked(qc & MyMoneyReport::eQCtag);
     m_tab3->findChild<QCheckBox*>("m_checkCategory")->setChecked(qc & MyMoneyReport::eQCcategory);
     m_tab3->findChild<QCheckBox*>("m_checkMemo")->setChecked(qc & MyMoneyReport::eQCmemo);
     m_tab3->findChild<QCheckBox*>("m_checkAccount")->setChecked(qc & MyMoneyReport::eQCaccount);
@@ -555,6 +561,22 @@ void KReportConfigurationFilterDlg::slotReset(void)
     }
   } else {
     selectAllItems(m_ui->m_payeesView, true);
+  }
+
+  //
+  // Tags Filter
+  //
+
+  QStringList tags;
+  if (m_initialState.tags(tags)) {
+    if (tags.empty()) {
+      m_ui->m_emptyTagsButton->setChecked(true);
+    } else {
+      selectAllItems(m_ui->m_tagsView, false);
+      selectItems(m_ui->m_tagsView, tags, true);
+    }
+  } else {
+    selectAllItems(m_ui->m_tagsView, true);
   }
 
   //

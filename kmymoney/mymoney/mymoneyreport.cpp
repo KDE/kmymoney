@@ -33,14 +33,14 @@
 
 #include "mymoneyfile.h"
 
-const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
+const QStringList MyMoneyReport::kRowTypeText = QString("none,assetliability,expenseincome,category,topcategory,account,tag,payee,month,week,topaccount,topaccount-account,equitytype,accounttype,institution,budget,budgetactual,schedule,accountinfo,accountloaninfo,accountreconcile,cashflow").split(',');
 const QStringList MyMoneyReport::kColumnTypeText = QString("none,months,bimonths,quarters,4,5,6,weeks,8,9,10,11,years").split(',');
 
 // if you add names here, don't forget to update the bitmap for EQueryColumns
 // and shift the bit for eQCend one position to the left
-const QStringList MyMoneyReport::kQueryColumnsText = QString("none,number,payee,category,memo,account,reconcileflag,action,shares,price,performance,loan,balance").split(',');
+const QStringList MyMoneyReport::kQueryColumnsText = QString("none,number,payee,category,tag,memo,account,reconcileflag,action,shares,price,performance,loan,balance").split(',');
 
-const MyMoneyReport::EReportType MyMoneyReport::kTypeArray[] = { eNoReport, ePivotTable, ePivotTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, ePivotTable, ePivotTable, eInfoTable, eInfoTable, eInfoTable, eQueryTable, eQueryTable, eNoReport };
+const MyMoneyReport::EReportType MyMoneyReport::kTypeArray[] = { eNoReport, ePivotTable, ePivotTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, eQueryTable, ePivotTable, ePivotTable, eInfoTable, eInfoTable, eInfoTable, eQueryTable, eQueryTable, eNoReport };
 const QStringList MyMoneyReport::kDetailLevelText = QString("none,all,top,group,total,invalid").split(',');
 const QStringList MyMoneyReport::kChartTypeText = QString("none,line,bar,pie,ring,stackedbar,invalid").split(',');
 
@@ -471,6 +471,28 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   }
 
   //
+  // Tags Filter
+  //
+
+  QStringList taglist;
+  if (tags(taglist)) {
+    if (taglist.empty()) {
+      QDomElement p = doc->createElement("TAG");
+      e.appendChild(p);
+    } else {
+      // iterate over tags, and add each one
+      QStringList::const_iterator it_tag = taglist.constBegin();
+      while (it_tag != taglist.constEnd()) {
+        QDomElement p = doc->createElement("TAG");
+        p.setAttribute("id", *it_tag);
+        e.appendChild(p);
+
+        ++it_tag;
+      }
+    }
+  }
+
+  //
   // Account Groups Filter
   //
 
@@ -718,6 +740,9 @@ bool MyMoneyReport::read(const QDomElement& e)
       if ("PAYEE" == c.tagName()) {
         addPayee(c.attribute("id"));
       }
+      if ("TAG" == c.tagName()) {
+        addTag(c.attribute("id"));
+      }
       if ("CATEGORY" == c.tagName() && c.hasAttribute("id")) {
         addCategory(c.attribute("id"));
       }
@@ -750,6 +775,7 @@ bool MyMoneyReport::hasReferenceTo(const QString& id) const
   accounts(list);
   categories(list);
   payees(list);
+  tags(list);
 
   return (list.contains(id) > 0);
 }

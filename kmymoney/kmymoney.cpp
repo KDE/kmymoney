@@ -128,6 +128,7 @@
 #include "wizards/newloanwizard/knewloanwizard.h"
 #include "wizards/newloanwizard/keditloanwizard.h"
 #include "dialogs/kpayeereassigndlg.h"
+#include "dialogs/ktagreassigndlg.h"
 #include "dialogs/kcategoryreassigndlg.h"
 #include "dialogs/kmergetransactionsdlg.h"
 #include "wizards/endingbalancedlg/kendingbalancedlg.h"
@@ -293,6 +294,7 @@ public:
   MyMoneySecurity       m_selectedCurrency;
   MyMoneyPrice          m_selectedPrice;
   QList<MyMoneyPayee>   m_selectedPayees;
+  QList<MyMoneyTag>     m_selectedTags;
   QList<MyMoneyBudget>  m_selectedBudgets;
   KMyMoneyRegister::SelectedTransactions m_selectedTransactions;
 
@@ -945,6 +947,22 @@ void KMyMoneyApp::initActions(void)
   payee_delete->setText(i18n("Delete payee"));
   payee_delete->setIcon(KIcon("list-remove-user"));
   connect(payee_delete, SIGNAL(triggered()), this, SLOT(slotPayeeDelete()));
+
+  //Tags
+  KAction *tag_new = actionCollection()->addAction("tag_new");
+  tag_new->setText(i18n("New tag"));
+  tag_new->setIcon(KIcon("list-add-tag"));
+  connect(tag_new, SIGNAL(triggered()), this, SLOT(slotTagNew()));
+
+  KAction *tag_rename = actionCollection()->addAction("tag_rename");
+  tag_rename->setText(i18n("Rename tag"));
+  tag_rename->setIcon(KIcon("tag-rename"));
+  connect(tag_rename, SIGNAL(triggered()), this, SIGNAL(tagRename()));
+
+  KAction *tag_delete = actionCollection()->addAction("tag_delete");
+  tag_delete->setText(i18n("Delete tag"));
+  tag_delete->setIcon(KIcon("list-remove-tag"));
+  connect(tag_delete, SIGNAL(triggered()), this, SLOT(slotTagDelete()));
 
   //Budget
   KAction *budget_new = actionCollection()->addAction("budget_new");
@@ -3244,6 +3262,7 @@ void KMyMoneyApp::slotAccountDelete(void)
   skip.setBit(IMyMoneyStorage::RefCheckAccount);
   skip.setBit(IMyMoneyStorage::RefCheckInstitution);
   skip.setBit(IMyMoneyStorage::RefCheckPayee);
+  skip.setBit(IMyMoneyStorage::RefCheckTag);
   skip.setBit(IMyMoneyStorage::RefCheckSecurity);
   skip.setBit(IMyMoneyStorage::RefCheckCurrency);
   skip.setBit(IMyMoneyStorage::RefCheckPrice);
@@ -4785,6 +4804,238 @@ void KMyMoneyApp::slotPayeeDelete(void)
   }
 }
 
+void KMyMoneyApp::slotTagNew(const QString& newnameBase, QString& id)
+{
+  bool doit = true;
+
+  if (newnameBase != i18n("New Tag")) {
+    // Ask the user if that is what he intended to do?
+    QString msg = QString("<qt>") + i18n("Do you want to add <b>%1</b> as tag?", newnameBase) + QString("</qt>");
+
+    if (KMessageBox::questionYesNo(this, msg, i18n("New tag"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "NewTag") == KMessageBox::No) {
+      doit = false;
+      // we should not keep the 'no' setting because that can confuse people like
+      // I have seen in some usability tests. So we just delete it right away.
+      KSharedConfigPtr kconfig = KGlobal::config();
+      if (kconfig) {
+        kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("NewTag"));
+      }
+    }
+  }
+
+  if (doit) {
+    MyMoneyFileTransaction ft;
+    try {
+      QString newname(newnameBase);
+      // adjust name until a unique name has been created
+      int count = 0;
+      for (;;) {
+        try {
+          MyMoneyFile::instance()->tagByName(newname);
+          newname = QString("%1 [%2]").arg(newnameBase).arg(++count);
+        } catch (MyMoneyException* e) {
+          delete e;
+          break;
+        }
+      }
+
+      MyMoneyTag ta;
+      ta.setName(newname);
+      MyMoneyFile::instance()->addTag(ta);
+      id = ta.id();
+      ft.commit();
+    } catch (MyMoneyException *e) {
+      KMessageBox::detailedSorry(this, i18n("Unable to add tag"),
+                                 i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
+      delete e;
+    }
+  }
+}
+
+void KMyMoneyApp::slotTagNew(void)
+{
+  QString id;
+  slotTagNew(i18n("New Tag"), id);
+
+  // the callbacks should have made sure, that the tags view has been
+  // updated already. So we search for the id in the list of items
+  // and select it.
+  emit tagCreated(id);
+}
+
+bool KMyMoneyApp::tagInList(const QList<MyMoneyTag>& list, const QString& id) const
+{
+  bool rc = false;
+  QList<MyMoneyTag>::const_iterator it_p = list.begin();
+  while (it_p != list.end()) {
+    if ((*it_p).id() == id) {
+      rc = true;
+      break;
+    }
+    ++it_p;
+  }
+  return rc;
+}
+
+void KMyMoneyApp::slotTagDelete(void)
+{
+  if (d->m_selectedTags.isEmpty())
+    return; // shouldn't happen
+
+  MyMoneyFile * file = MyMoneyFile::instance();
+
+  // first create list with all non-selected tags
+  QList<MyMoneyTag> remainingTags = file->tagList();
+  QList<MyMoneyTag>::iterator it_ta;
+  for (it_ta = remainingTags.begin(); it_ta != remainingTags.end();) {
+    if (d->m_selectedTags.contains(*it_ta)) {
+      it_ta = remainingTags.erase(it_ta);
+    } else {
+      ++it_ta;
+    }
+  }
+
+  // get confirmation from user
+  QString prompt;
+  if (d->m_selectedTags.size() == 1)
+    prompt = i18n("<p>Do you really want to remove the tag <b>%1</b>?</p>", d->m_selectedTags.front().name());
+  else
+    prompt = i18n("Do you really want to remove all selected tags?");
+
+  if (KMessageBox::questionYesNo(this, prompt, i18n("Remove Tag")) == KMessageBox::No)
+    return;
+
+  MyMoneyFileTransaction ft;
+  try {
+    // create a transaction filter that contains all tags selected for removal
+    MyMoneyTransactionFilter f = MyMoneyTransactionFilter();
+    for (QList<MyMoneyTag>::const_iterator it = d->m_selectedTags.constBegin();
+         it != d->m_selectedTags.constEnd(); ++it) {
+      f.addTag((*it).id());
+    }
+    // request a list of all transactions that still use the tags in question
+    QList<MyMoneyTransaction> translist = file->transactionList(f);
+//     kDebug() << "[KTagsView::slotDeleteTag]  " << translist.count() << " transaction still assigned to tags";
+
+    // now get a list of all schedules that make use of one of the tags
+    QList<MyMoneySchedule> all_schedules = file->scheduleList();
+    QList<MyMoneySchedule> used_schedules;
+    for (QList<MyMoneySchedule>::ConstIterator it = all_schedules.constBegin();
+         it != all_schedules.constEnd(); ++it) {
+      // loop over all splits in the transaction of the schedule
+      for (QList<MyMoneySplit>::ConstIterator s_it = (*it).transaction().splits().constBegin();
+           s_it != (*it).transaction().splits().constEnd(); ++s_it) {
+	for(int i=0;i<(*s_it).tagIdList().size();i++) {
+	  // is the tag in the split to be deleted?
+	  if (tagInList(d->m_selectedTags, (*s_it).tagIdList()[i])) {
+	    used_schedules.push_back(*it); // remember this schedule
+	    break;
+	  }
+	}
+      }
+    }
+//     kDebug() << "[KTagsView::slotDeleteTag]  " << used_schedules.count() << " schedules use one of the selected tags";
+
+    MyMoneyTag newTag;
+    // if at least one tag is still referenced, we need to reassign its transactions first
+    if (!translist.isEmpty() || !used_schedules.isEmpty()) {
+      // show error message if no tags remain
+      //FIXME-ALEX Tags are optional so we can delete all of them and simply delete every tagId from every transaction
+      if (remainingTags.isEmpty()) {
+        KMessageBox::sorry(this, i18n("At least one transaction/scheduled transaction is still referenced by a tag. "
+                                      "Currently you have all tags selected. However, at least one tag must remain so "
+                                      "that the transaction/scheduled transaction can be reassigned."));
+        return;
+      }
+
+      // show transaction reassignment dialog
+      KTagReassignDlg * dlg = new KTagReassignDlg(this);
+      KMyMoneyGlobalSettings::setSubstringSearch(dlg);
+      QString tag_id = dlg->show(remainingTags);
+      delete dlg; // and kill the dialog
+      if (tag_id.isEmpty())  //FIXME-ALEX Let the user choose to not reassign a to-be deleted tag to another one.
+        return; // the user aborted the dialog, so let's abort as well
+
+      newTag = file->tag(tag_id);
+
+      // TODO : check if we have a report that explicitively uses one of our tags
+      //        and issue an appropriate warning
+      try {
+        QList<MyMoneySplit>::iterator s_it;
+        // now loop over all transactions and reassign tag
+        for (QList<MyMoneyTransaction>::iterator it = translist.begin(); it != translist.end(); ++it) {
+          // create a copy of the splits list in the transaction
+          QList<MyMoneySplit> splits = (*it).splits();
+          // loop over all splits
+          for (s_it = splits.begin(); s_it != splits.end(); ++s_it) {
+	    QList<QString> tagIdList = (*s_it).tagIdList();
+	    for(int i=0;i<tagIdList.size();i++) {
+              // if the split is assigned to one of the selected tags, we need to modify it
+              if (tagInList(d->m_selectedTags, tagIdList[i])) {
+		tagIdList.removeAt(i);
+		if(tagIdList.indexOf(tag_id) == -1)
+		  tagIdList.append(tag_id);
+		i=-1; // restart from the first element
+	      }
+	    }
+            (*s_it).setTagIdList(tagIdList); // first modify tag list in current split
+            // then modify the split in our local copy of the transaction list
+            (*it).modifySplit(*s_it); // this does not modify the list object 'splits'!
+          } // for - Splits
+          file->modifyTransaction(*it);  // modify the transaction in the MyMoney object
+        } // for - Transactions
+
+        // now loop over all schedules and reassign tags
+        for (QList<MyMoneySchedule>::iterator it = used_schedules.begin();
+             it != used_schedules.end(); ++it) {
+          // create copy of transaction in current schedule
+          MyMoneyTransaction trans = (*it).transaction();
+          // create copy of lists of splits
+          QList<MyMoneySplit> splits = trans.splits();
+          for (s_it = splits.begin(); s_it != splits.end(); ++s_it) {
+	    QList<QString> tagIdList = (*s_it).tagIdList();
+	    for(int i=0;i<tagIdList.size();i++) {
+              if (tagInList(d->m_selectedTags, tagIdList[i])) {
+		tagIdList.removeAt(i);
+		if(tagIdList.indexOf(tag_id) == -1)
+		  tagIdList.append(tag_id);
+		i=-1; // restart from the first element
+	      }
+	    }
+            (*s_it).setTagIdList(tagIdList);
+            trans.modifySplit(*s_it); // does not modify the list object 'splits'!
+          } // for - Splits
+          // store transaction in current schedule
+          (*it).setTransaction(trans);
+          file->modifySchedule(*it);  // modify the schedule in the MyMoney engine
+        } // for - Schedules
+
+      } catch (MyMoneyException *e) {
+        KMessageBox::detailedSorry(0, i18n("Unable to reassign tag of transaction/split"),
+                                   i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
+        delete e;
+      }
+    } // if !translist.isEmpty()
+
+    // now loop over all selected tags and remove them
+    for (QList<MyMoneyTag>::iterator it = d->m_selectedTags.begin();
+         it != d->m_selectedTags.end(); ++it) {
+      file->removeTag(*it);
+    }
+
+    ft.commit();
+
+    // If we just deleted the tags, they sure don't exist anymore
+    slotSelectTags(QList<MyMoneyTag>());
+
+  } catch (MyMoneyException *e) {
+    KMessageBox::detailedSorry(0, i18n("Unable to remove tag(s)"),
+                               i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
+    delete e;
+  }
+}
+
+
 void KMyMoneyApp::slotCurrencyNew(void)
 {
   QString sid = KInputDialog::getText(i18n("New currency"), i18n("Enter ISO 4217 code for the new currency"), QString(), 0, 0, 0, 0, ">AAA");
@@ -5821,6 +6072,11 @@ void KMyMoneyApp::slotShowPayeeContextMenu(void)
   showContextMenu("payee_context_menu");
 }
 
+void KMyMoneyApp::slotShowTagContextMenu(void)
+{
+  showContextMenu("tag_context_menu");
+}
+
 void KMyMoneyApp::slotShowBudgetContextMenu(void)
 {
   showContextMenu("budget_context_menu");
@@ -5946,6 +6202,9 @@ void KMyMoneyApp::slotUpdateActions(void)
 
   action("payee_delete")->setEnabled(false);
   action("payee_rename")->setEnabled(false);
+
+  action("tag_delete")->setEnabled(false);
+  action("tag_rename")->setEnabled(false);
 
   action("budget_delete")->setEnabled(false);
   action("budget_rename")->setEnabled(false);
@@ -6240,6 +6499,11 @@ void KMyMoneyApp::slotUpdateActions(void)
     action("payee_delete")->setEnabled(true);
   }
 
+  if (d->m_selectedTags.count() >= 1) {
+    action("tag_rename")->setEnabled(d->m_selectedTags.count() == 1);
+    action("tag_delete")->setEnabled(true);
+  }
+
   if (d->m_selectedBudgets.count() >= 1) {
     action("budget_delete")->setEnabled(true);
     if (d->m_selectedBudgets.count() == 1) {
@@ -6279,6 +6543,7 @@ void KMyMoneyApp::slotResetSelections(void)
   slotSelectCurrency();
   slotSelectPrice();
   slotSelectPayees(QList<MyMoneyPayee>());
+  slotSelectTags(QList<MyMoneyTag>());
   slotSelectBudget(QList<MyMoneyBudget>());
   slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());
   slotUpdateActions();
@@ -6310,6 +6575,13 @@ void KMyMoneyApp::slotSelectPayees(const QList<MyMoneyPayee>& list)
   d->m_selectedPayees = list;
   slotUpdateActions();
   emit payeesSelected(d->m_selectedPayees);
+}
+
+void KMyMoneyApp::slotSelectTags(const QList<MyMoneyTag>& list)
+{
+  d->m_selectedTags = list;
+  slotUpdateActions();
+  emit tagsSelected(d->m_selectedTags);
 }
 
 void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransactions& list)
@@ -7107,6 +7379,7 @@ void KMyMoneyApp::Private::closeFile(void)
   q->slotSelectCurrency();
   q->slotSelectBudget(QList<MyMoneyBudget>());
   q->slotSelectPayees(QList<MyMoneyPayee>());
+  q->slotSelectTags(QList<MyMoneyTag>());
   q->slotSelectTransactions(KMyMoneyRegister::SelectedTransactions());
 
   m_reconciliationAccount = MyMoneyAccount();

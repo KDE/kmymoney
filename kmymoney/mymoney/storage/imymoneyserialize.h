@@ -37,6 +37,7 @@
 #include <mymoneyaccount.h>
 #include <mymoneytransaction.h>
 #include <mymoneypayee.h>
+#include <mymoneytag.h>
 #include <mymoneyscheduled.h>
 #include <mymoneytransactionfilter.h>
 #include <mymoneysecurity.h>
@@ -133,6 +134,14 @@ public:
     * @return QList<MyMoneyPayee> containing the payee information
     */
   virtual const QList<MyMoneyPayee> payeeList(void) const = 0;
+
+  /**
+    * This method returns a list of the tags
+    * inside a MyMoneyStorage object
+    *
+    * @return QList<MyMoneyTag> containing the tag information
+    */
+  virtual const QList<MyMoneyTag> tagList(void) const = 0;
 
   /**
     * This method returns a list of the scheduled transactions
@@ -267,6 +276,7 @@ public:
   virtual void loadTransactions(const QMap<QString, MyMoneyTransaction>& map) = 0;
   virtual void loadInstitutions(const QMap<QString, MyMoneyInstitution>& map) = 0;
   virtual void loadPayees(const QMap<QString, MyMoneyPayee>& map) = 0;
+  virtual void loadTags(const QMap<QString, MyMoneyTag>& map) = 0;
   virtual void loadSchedules(const QMap<QString, MyMoneySchedule>& map) = 0;
   virtual void loadSecurities(const QMap<QString, MyMoneySecurity>& map) = 0;
   virtual void loadCurrencies(const QMap<QString, MyMoneySecurity>& map) = 0;
@@ -277,6 +287,7 @@ public:
   virtual unsigned long accountId(void) const = 0;
   virtual unsigned long transactionId(void) const = 0;
   virtual unsigned long payeeId(void) const = 0;
+  virtual unsigned long tagId(void) const = 0;
   virtual unsigned long institutionId(void) const = 0;
   virtual unsigned long scheduleId(void) const = 0;
   virtual unsigned long securityId(void) const = 0;
@@ -286,6 +297,7 @@ public:
   virtual void loadAccountId(const unsigned long id) = 0;
   virtual void loadTransactionId(const unsigned long id) = 0;
   virtual void loadPayeeId(const unsigned long id) = 0;
+  virtual void loadTagId(const unsigned long id) = 0;
   virtual void loadInstitutionId(const unsigned long id) = 0;
   virtual void loadScheduleId(const unsigned long id) = 0;
   virtual void loadSecurityId(const unsigned long id) = 0;

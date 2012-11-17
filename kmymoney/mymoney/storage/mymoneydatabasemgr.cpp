@@ -269,6 +269,110 @@ const QList<MyMoneyPayee> MyMoneyDatabaseMgr::payeeList(void) const
     return QList<MyMoneyPayee> ();
 }
 
+void MyMoneyDatabaseMgr::addTag(MyMoneyTag& tag)
+{
+  if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
+    // create the tag
+    MyMoneyTag newTag(nextTagID(), tag);
+
+    m_sql->addTag(newTag);
+    tag = newTag;
+  }
+}
+
+const MyMoneyTag MyMoneyDatabaseMgr::tag(const QString& id) const
+{
+  QMap<QString, MyMoneyTag>::ConstIterator it;
+  QMap<QString, MyMoneyTag> tagList = m_sql->fetchTags(QStringList(id));
+  it = tagList.constFind(id);
+  if (it == tagList.constEnd())
+    throw new MYMONEYEXCEPTION("Unknown tag '" + id + '\'');
+
+  return *it;
+}
+
+const MyMoneyTag MyMoneyDatabaseMgr::tagByName(const QString& tag) const
+{
+  if (tag.isEmpty())
+    return MyMoneyTag::null;
+
+  QMap<QString, MyMoneyTag> tagList;
+
+  TRY
+  tagList = m_sql->fetchTags();
+  PASS
+
+  QMap<QString, MyMoneyTag>::ConstIterator it_ta;
+
+  for (it_ta = tagList.constBegin(); it_ta != tagList.constEnd(); ++it_ta) {
+    if ((*it_ta).name() == tag) {
+      return *it_ta;
+    }
+  }
+
+  throw new MYMONEYEXCEPTION("Unknown tag '" + tag + '\'');
+}
+
+void MyMoneyDatabaseMgr::modifyTag(const MyMoneyTag& tag)
+{
+  QMap<QString, MyMoneyTag> tagList = m_sql->fetchTags(QStringList(tag.id()), true);
+  QMap<QString, MyMoneyTag>::ConstIterator it;
+
+  it = tagList.constFind(tag.id());
+  if (it == tagList.constEnd()) {
+    QString msg = "Unknown tag '" + tag.id() + '\'';
+    throw new MYMONEYEXCEPTION(msg);
+  }
+
+  m_sql->modifyTag(tag);
+}
+
+void MyMoneyDatabaseMgr::removeTag(const MyMoneyTag& tag)
+{
+  QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
+  QMap<QString, MyMoneySchedule>::ConstIterator it_s;
+  QMap<QString, MyMoneyTag> tagList = m_sql->fetchTags(QStringList(tag.id()));
+  QMap<QString, MyMoneyTag>::ConstIterator it_ta;
+
+  it_ta = tagList.constFind(tag.id());
+  if (it_ta == tagList.constEnd()) {
+    QString msg = "Unknown tag '" + tag.id() + '\'';
+    throw new MYMONEYEXCEPTION(msg);
+  }
+
+  // scan all transactions to check if the tag is still referenced
+
+  QMap<QString, MyMoneyTransaction> transactionList = m_sql->fetchTransactions(); // make sure they're all here
+  for (it_t = transactionList.constBegin(); it_t != transactionList.constEnd(); ++it_t) {
+    if ((*it_t).hasReferenceTo(tag.id())) {
+      throw new MYMONEYEXCEPTION(QString("Cannot remove tag that is still referenced to a %1").arg("transaction"));
+    }
+  }
+
+  // check referential integrity in schedules
+  QMap<QString, MyMoneySchedule> scheduleList = m_sql->fetchSchedules(); // make sure they're all here
+  for (it_s = scheduleList.constBegin(); it_s != scheduleList.constEnd(); ++it_s) {
+    if ((*it_s).hasReferenceTo(tag.id())) {
+      throw new MYMONEYEXCEPTION(QString("Cannot remove tag that is still referenced to a %1").arg("schedule"));
+    }
+  }
+  // remove any reference to report and/or budget
+  removeReferences(tag.id());
+
+  m_sql->removeTag(tag);
+}
+
+const QList<MyMoneyTag> MyMoneyDatabaseMgr::tagList(void) const
+{
+  if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
+    return m_sql->fetchTags().values();
+  }
+  else
+    return QList<MyMoneyTag> ();
+}
+
 const MyMoneyAccount MyMoneyDatabaseMgr::account(const QString& id) const
 {
   if (id.isEmpty()) {
@@ -337,6 +441,17 @@ const QString MyMoneyDatabaseMgr::nextPayeeID(void)
     if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
     id.setNum(ulong(m_sql->incrementPayeeId()));
     id = 'P' + id.rightJustified(PAYEE_ID_SIZE, '0');
+  }
+  return id;
+}
+
+const QString MyMoneyDatabaseMgr::nextTagID(void)
+{
+  QString id;
+  if (m_sql) {
+    if (! m_sql->isOpen()) ((QSqlDatabase*)(m_sql.data()))->open();
+    id.setNum(ulong(m_sql->incrementTagId()));
+    id = 'G' + id.rightJustified(TAG_ID_SIZE, '0');
   }
   return id;
 }
@@ -638,10 +753,14 @@ void MyMoneyDatabaseMgr::modifyTransaction(const MyMoneyTransaction& transaction
   // now check the splits
   foreach (const MyMoneySplit& it_s, transaction.splits()) {
     // the following lines will throw an exception if the
-    // account or payee do not exist
+    // account, payee or tags do not exist
     account(it_s.accountId());
     if (!it_s.payeeId().isEmpty())
       payee(it_s.payeeId());
+    foreach (const QString& tagId, it_s.tagIdList()) {
+      if (!tagId.isEmpty())
+       tag(tagId);
+    }
   }
 
   // new data seems to be ok. find old version of transaction
@@ -1691,6 +1810,10 @@ bool MyMoneyDatabaseMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFil
     QList<MyMoneyPayee> payeeList = MyMoneyFile::instance()->payeeList();
     rc = (payeeList.end() != std::find_if(payeeList.begin(), payeeList.end(),  isReferencedHelper(id)));
   }
+  if (!skipCheck[RefCheckTag] && !rc) {
+    QList<MyMoneyTag> tagList = MyMoneyFile::instance()->tagList();
+    rc = (tagList.end() != std::find_if(tagList.begin(), tagList.end(),  isReferencedHelper(id)));
+  }
   if (!skipCheck[RefCheckReport] && !rc) {
     QMap<QString, MyMoneyReport> reportList = m_sql->fetchReports();
     rc = (reportList.end() != std::find_if(reportList.begin(), reportList.end(),  isReferencedHelper(id)));
@@ -1830,6 +1953,11 @@ void MyMoneyDatabaseMgr::loadPayees(const QMap<QString, MyMoneyPayee>& /*map*/)
 //  m_payeeList = map;
 }
 
+void MyMoneyDatabaseMgr::loadTags(const QMap<QString, MyMoneyTag>& /*map*/)
+{
+//  m_tagList = map;
+}
+
 void MyMoneyDatabaseMgr::loadSchedules(const QMap<QString, MyMoneySchedule>& /*map*/)
 {
 //  m_scheduleList = map;
@@ -1896,6 +2024,11 @@ unsigned long MyMoneyDatabaseMgr::payeeId(void) const
   return m_sql->getNextPayeeId();
 }
 
+unsigned long MyMoneyDatabaseMgr::tagId(void) const
+{
+  return m_sql->getNextTagId();
+}
+
 unsigned long MyMoneyDatabaseMgr::institutionId(void) const
 {
   return m_sql->getNextInstitutionId();
@@ -1934,6 +2067,11 @@ void MyMoneyDatabaseMgr::loadTransactionId(const unsigned long id)
 void MyMoneyDatabaseMgr::loadPayeeId(const unsigned long id)
 {
   m_sql->loadPayeeId(id);
+}
+
+void MyMoneyDatabaseMgr::loadTagId(const unsigned long id)
+{
+  m_sql->loadTagId(id);
 }
 
 void MyMoneyDatabaseMgr::loadInstitutionId(const unsigned long id)

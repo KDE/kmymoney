@@ -3,18 +3,19 @@ ADD_SUBDIRECTORY( storage )
 ########### next target ###############
 
 SET(kmm_mymoney_LIB_SRCS
-  mymoneymoney.cpp mymoneyfinancialcalculator.cpp 
+  mymoneymoney.cpp mymoneyfinancialcalculator.cpp
   mymoneytransactionfilter.cpp
-  mymoneyobject.cpp mymoneykeyvaluecontainer.cpp 
+  mymoneyobject.cpp mymoneykeyvaluecontainer.cpp
   mymoneysplit.cpp mymoneyinstitution.cpp
   mymoneyexception.cpp mymoneyinvesttransaction.cpp mymoneyutils.cpp
   mymoneysecurity.cpp mymoneytransaction.cpp mymoneyscheduled.cpp
-  mymoneypayee.cpp 
-  mymoneyfile.cpp 
-  mymoneycategory.cpp 
+  mymoneypayee.cpp
+  mymoneytag.cpp
+  mymoneyfile.cpp
+  mymoneycategory.cpp
   mymoneyaccount.cpp
   mymoneyreport.cpp mymoneystatement.cpp mymoneyprice.cpp mymoneybudget.cpp
-  mymoneyobjectcontainer.cpp 
+  mymoneyobjectcontainer.cpp
   mymoneyforecast.cpp
   mymoneybalancecache.cpp
   )
@@ -24,7 +25,7 @@ SET(mymoney_HEADERS kmm_mymoney_export.h
   mymoneyobject.h mymoneyaccount.h mymoneycategory.h mymoneyexception.h
   mymoneyfile.h mymoneyfinancialcalculator.h mymoneyinstitution.h
   mymoneyinvesttransaction.h mymoneykeyvaluecontainer.h mymoneymoney.h
-  mymoneypayee.h mymoneyprice.h mymoneyreport.h
+  mymoneypayee.h mymoneytag.h mymoneyprice.h mymoneyreport.h
   mymoneyscheduled.h mymoneysecurity.h mymoneysplit.h mymoneystatement.h
   mymoneytransactionfilter.h mymoneytransaction.h
   mymoneyutils.h mymoneybudget.h mymoneyobjectcontainer.h mymoneyforecast.h
@@ -145,6 +146,14 @@ IF( KDE4_BUILD_TESTS )
   ADD_DEPENDENCIES( mymoneypayeetest kmm_mymoney )
 
   target_link_libraries( mymoneypayeetest kmm_mymoney ${target_link_libraries_test})
+
+  # MyMoneyTag
+  set( mymoneytagtest_SRCS mymoneytagtest.cpp )
+
+  kde4_add_unit_test( mymoneytagtest TESTNAME kmymoney-mymoneytagtest ${mymoneytagtest_SRCS} )
+  ADD_DEPENDENCIES( mymoneytagtest kmm_mymoney )
+
+  target_link_libraries( mymoneytagtest kmm_mymoney ${target_link_libraries_test})
 
   # MyMoneyPrice
   set( mymoneypricetest_SRCS mymoneypricetest.cpp )

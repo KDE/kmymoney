@@ -44,6 +44,7 @@
 #include "mymoneyprice.h"
 #include "mymoneyobjectcontainer.h"
 #include "mymoneypayee.h"
+//#include "mymoneytag.h"
 
 // include the following line to get a 'cout' for debug purposes
 // #include <iostream>
@@ -75,6 +76,12 @@ public:
       m_objType(MyMoneyFile::notifyPayee),
       m_notificationMode(mode),
       m_id(payee.id()) {
+  }
+
+  MyMoneyNotification(MyMoneyFile::notificationModeT mode, const MyMoneyTag& tag) :
+      m_objType(MyMoneyFile::notifyTag),
+      m_notificationMode(mode),
+      m_id(tag.id()) {
   }
 
   MyMoneyNotification(MyMoneyFile::notificationModeT mode, const MyMoneySchedule& schedule) :
@@ -525,6 +532,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   for (it_s = tr.splits().constBegin(); it_s != tr.splits().constEnd(); ++it_s) {
     d->addCacheNotification((*it_s).accountId(), tr.postDate());
     d->addCacheNotification((*it_s).payeeId());
+    //FIXME-ALEX Do I need to add d->addCacheNotification((*it_s).tagList()); ??
   }
 
   // perform modification
@@ -534,6 +542,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   for (it_s = t->splits().constBegin(); it_s != t->splits().constEnd(); ++it_s) {
     d->addCacheNotification((*it_s).accountId(), t->postDate());
     d->addCacheNotification((*it_s).payeeId());
+    //FIXME-ALEX Do I need to add d->addCacheNotification((*it_s).tagList()); ??
   }
 }
 
@@ -678,6 +687,7 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
       throw new MYMONEYEXCEPTION(i18n("Cannot remove transaction that references a closed account."));
     d->addCacheNotification((*it_s).accountId(), tr.postDate());
     d->addCacheNotification((*it_s).payeeId());
+    //FIXME-ALEX Do I need to add d->addCacheNotification((*it_s).tagList()); ??
   }
 
   d->m_storage->removeTransaction(transaction);
@@ -1163,6 +1173,7 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
   for (it_s = transaction.splits().constBegin(); it_s != transaction.splits().constEnd(); ++it_s) {
     d->addCacheNotification((*it_s).accountId(), transaction.postDate());
     d->addCacheNotification((*it_s).payeeId());
+    //FIXME-ALEX Do I need to add d->addCacheNotification((*it_s).tagList()); ??
   }
 }
 
@@ -1236,6 +1247,64 @@ void MyMoneyFile::removePayee(const MyMoneyPayee& payee)
   d->addCacheNotification(payee.id(), false);
 
   d->m_changeSet += MyMoneyNotification(notifyRemove, payee);
+}
+
+void MyMoneyFile::addTag(MyMoneyTag& tag)
+{
+  d->checkTransaction(Q_FUNC_INFO);
+
+  // clear all changed objects from cache
+  MyMoneyNotifier notifier(d);
+
+  d->m_storage->addTag(tag);
+
+  // The notifier mechanism only refreshes the cache but does not
+  // load new objects. So we simply force loading of the new one here
+  d->m_cache.preloadTag(tag);
+
+  d->m_changeSet += MyMoneyNotification(notifyAdd, tag);
+}
+
+const MyMoneyTag& MyMoneyFile::tag(const QString& id) const
+{
+  return d->m_cache.tag(id);
+}
+
+const MyMoneyTag& MyMoneyFile::tagByName(const QString& name) const
+{
+  d->checkStorage();
+
+  return d->m_cache.tag(d->m_storage->tagByName(name).id());
+}
+
+void MyMoneyFile::modifyTag(const MyMoneyTag& tag)
+{
+  d->checkTransaction(Q_FUNC_INFO);
+
+  // clear all changed objects from cache
+  MyMoneyNotifier notifier(d);
+
+  d->addCacheNotification(tag.id());
+
+  d->m_storage->modifyTag(tag);
+
+  d->m_changeSet += MyMoneyNotification(notifyModify, tag);
+}
+
+void MyMoneyFile::removeTag(const MyMoneyTag& tag)
+{
+  d->checkTransaction(Q_FUNC_INFO);
+
+  // FIXME we need to make sure, that the tag is not referenced anymore
+
+  // clear all changed objects from cache
+  MyMoneyNotifier notifier(d);
+
+  d->m_storage->removeTag(tag);
+
+  d->addCacheNotification(tag.id(), false);
+
+  d->m_changeSet += MyMoneyNotification(notifyRemove, tag);
 }
 
 void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& idlist, const bool recursive) const
@@ -1457,6 +1526,13 @@ const QList<MyMoneyPayee> MyMoneyFile::payeeList(void) const
 {
   QList<MyMoneyPayee> list;
   d->m_cache.payee(list);
+  return list;
+}
+
+const QList<MyMoneyTag> MyMoneyFile::tagList(void) const
+{
+  QList<MyMoneyTag> list;
+  d->m_cache.tag(list);
   return list;
 }
 
@@ -2723,6 +2799,7 @@ void MyMoneyFile::preloadCache(void)
   d->m_storage->accountList(a_list);
   d->m_cache.preloadAccount(a_list);
   d->m_cache.preloadPayee(d->m_storage->payeeList());
+  d->m_cache.preloadTag(d->m_storage->tagList());
   d->m_cache.preloadInstitution(d->m_storage->institutionList());
   d->m_cache.preloadSecurity(d->m_storage->securityList() +
                              d->m_storage->currencyList());
