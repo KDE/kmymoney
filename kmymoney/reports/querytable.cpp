@@ -313,7 +313,7 @@ void QueryTable::init(void)
     case MyMoneyReport::ePayee:
       m_group = "payee";
       break;
-   case MyMoneyReport::eTag:
+    case MyMoneyReport::eTag:
       m_group = "tag";
       break;
     case MyMoneyReport::eMonth:
@@ -581,16 +581,14 @@ void QueryTable::constructTransactionTable(void)
                       ? i18n("[Empty Payee]")
                       : file->payee(payee).name().simplified();
 
-        if(tag_special_case)
-        {
+        if (tag_special_case) {
           tagIdListCache = tagIdList;
         } else {
-	  QString delimiter="";
-	  for(int i=0;i<tagIdList.size(); i++)
-	  {
-	    qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
-	    delimiter=", ";
-	  }
+          QString delimiter = "";
+          for (int i = 0; i < tagIdList.size(); i++) {
+            qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
+            delimiter = ", ";
+          }
         }
         qA["reconciledate"] = (*it_split).reconcileDate().toString(Qt::ISODate);
         qA["reconcileflag"] = KMyMoneyUtils::reconcileStateToString((*it_split).reconcileFlag(), true);
@@ -709,7 +707,7 @@ void QueryTable::constructTransactionTable(void)
                 qS["currency"] = splitAcc.currencyId();
               }
             } else {
-                qS["currency"] = "";
+              qS["currency"] = "";
             }
 
             if (! splitAcc.isIncomeExpense()) {
@@ -735,13 +733,11 @@ void QueryTable::constructTransactionTable(void)
                   || (!m_config.isInvertingText()
                       && (transaction_text
                           || m_config.match(&(*it_split))))) {
-                if(tag_special_case)
-                {
-                  if(!tagIdListCache.size())
+                if (tag_special_case) {
+                  if (!tagIdListCache.size())
                     qA["tag"] = i18n("[No Tag]");
                   else
-                    for(int i=0; i<tagIdListCache.size(); i++)
-                    {
+                    for (int i = 0; i < tagIdListCache.size(); i++) {
                       qA["tag"] = file->tag(tagIdListCache[i]).name().simplified();
                       m_rows += qA;
                     }
@@ -777,12 +773,11 @@ void QueryTable::constructTransactionTable(void)
                          : (*it_split).memo();
 
             //FIXME-ALEX When is used this? I can't find in which condition we arrive here... maybe this code is useless?
-	    QString delimiter="";
-	    for(int i=0;i<tagIdList.size(); i++)
-	    {
-	      qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
-	      delimiter="+";
-	    }
+            QString delimiter = "";
+            for (int i = 0; i < tagIdList.size(); i++) {
+              qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
+              delimiter = "+";
+            }
 
             qS["payee"] = payee.isEmpty()
                           ? qA["payee"]
@@ -1299,7 +1294,7 @@ void QueryTable::constructSplitsTable(void)
     // transaction only has income and expense splits (which should not happen). In that case, point
     // it to the first split
     if (myBegin == splits.end()) {
-        myBegin = splits.begin();
+      myBegin = splits.begin();
     }
 
     //the account of the beginning splits
@@ -1334,7 +1329,7 @@ void QueryTable::constructSplitsTable(void)
 
       // reverse the sign of incomes and expenses to keep consistency in the way it is displayed in other reports
       if (splitAcc.isIncomeExpense()) {
-          xr = -xr;
+        xr = -xr;
       }
 
       if (splitAcc.isInvest()) {
@@ -1367,11 +1362,10 @@ void QueryTable::constructSplitsTable(void)
                           : file->institution(institution).name();
 
       //FIXME-ALEX Is this useless? Isn't constructSplitsTable called only for cashflow type report?
-      QString delimiter="";
-      for(int i=0;i<tagIdList.size(); i++)
-      {
+      QString delimiter = "";
+      for (int i = 0; i < tagIdList.size(); i++) {
         qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
-        delimiter=",";
+        delimiter = ",";
       }
 
       qA["payee"] = payee.isEmpty()

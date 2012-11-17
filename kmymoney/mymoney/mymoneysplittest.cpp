@@ -96,7 +96,7 @@ void MyMoneySplitTest::testCopyConstructor()
   QVERIFY(n.id() == "MyID");
   QVERIFY(n.payeeId() == "Payee");
   QList<QString> tagIdList;
-  tagIdList <<"Tag";
+  tagIdList << "Tag";
   QVERIFY(m->tagIdList() == tagIdList);
   QVERIFY(n.action() == "Action");
   QVERIFY(n.transactionId() == "TestTransaction");

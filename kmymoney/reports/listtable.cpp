@@ -593,12 +593,12 @@ void ListTable::render(QString& result, QString& csv) const
     QString grandtotal_csv = grandtotal.formatMoney(fraction, false);
 
     //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
-    if(m_config.rowType()!=MyMoneyReport::eTag) {
+    if (m_config.rowType() != MyMoneyReport::eTag) {
       result += "<tr class=\"sectionfooter\">"
-              "<td class=\"left0\" "
-              "colspan=\"" + QString::number(columns.count() - 1 - postcolumns.count()) + "\">" +
-              i18n("Grand Total") + "</td>"
-              "<td>" + grandtotal_html + "</td></tr>\n";
+                "<td class=\"left0\" "
+                "colspan=\"" + QString::number(columns.count() - 1 - postcolumns.count()) + "\">" +
+                i18n("Grand Total") + "</td>"
+                "<td>" + grandtotal_html + "</td></tr>\n";
       csv += "\"" + i18n("Grand Total") + "\",\"" + grandtotal_csv + "\"\n";
     }
   }

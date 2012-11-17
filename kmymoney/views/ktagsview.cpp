@@ -463,7 +463,7 @@ void KTagsView::slotTagDataChanged(void)
   if (m_tabWidget->isEnabled()) {
     rc |= ((m_tag.tagColor().isValid() != m_colorbutton->color().isValid())
            || (m_colorbutton->color().isValid() && m_tag.tagColor() != m_colorbutton->color()));
-    rc |= (m_closed->isChecked() != m_tag.isClosed() );
+    rc |= (m_closed->isChecked() != m_tag.isClosed());
     rc |= ((m_tag.notes().isEmpty() != m_notes->toPlainText().isEmpty())
            || (!m_notes->toPlainText().isEmpty() && m_tag.notes() != m_notes->toPlainText()));
   }

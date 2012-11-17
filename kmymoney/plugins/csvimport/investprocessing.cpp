@@ -117,7 +117,7 @@ InvestProcessing::InvestProcessing()
   m_redefine = new RedefineDlg;
   m_csvUtil = new CsvUtil;
 
-  connect(m_redefine, SIGNAL(changedType(const QString&)), this, SLOT(changedType(const QString&)));
+  connect(m_redefine, SIGNAL(changedType(QString)), this, SLOT(changedType(QString)));
 }
 
 InvestProcessing::~InvestProcessing()
@@ -178,7 +178,7 @@ void InvestProcessing::changedType(const QString& newType)
 
 void InvestProcessing::slotFileDialogClicked()
 {
-  if ((m_csvDialog->m_fileType != "Invest") || (m_csvDialog->m_profileName.isEmpty())){
+  if ((m_csvDialog->m_fileType != "Invest") || (m_csvDialog->m_profileName.isEmpty())) {
     return;
   }
   m_columnTypeList.clear();//  Needs to be here in case user selects new profile after cancelling prior one.clearColumnTypes()
@@ -547,8 +547,8 @@ void InvestProcessing::memoColumnSelected(int col)
   //  Prevent check of column settings until user sees them.
   if ((col < 0) || (col >= m_endColumn) || (m_csvDialog->m_columnsNotSet)) {      //  out of range so...
     m_csvDialog->m_pageInvestment->ui->comboBoxInv_memoCol->setCurrentIndex(-1);  //  ..clear selection
-     return;
-   }
+    return;
+  }
   QString type = "memo";
   m_memoColumn = col;
 
@@ -574,8 +574,8 @@ void InvestProcessing::memoColumnSelected(int col)
     int rc = KMessageBox::Yes;
     if (m_csvDialog->m_pageInvestment->isVisible()) {
       rc = KMessageBox::questionYesNo(0, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
-                                                  "<center>If you wish to copy that data to the memo field, click 'Yes'.</center>",
-                                                  m_columnTypeList[col]));
+                                              "<center>If you wish to copy that data to the memo field, click 'Yes'.</center>",
+                                              m_columnTypeList[col]));
     }
     if (rc == KMessageBox::Yes) {
       if (m_columnTypeList[col] == "type") {
@@ -784,11 +784,11 @@ void InvestProcessing::fieldDelimiterChanged()
     m_csvDialog->m_pageSeparator->ui->comboBox_fieldDelimiter->setCurrentIndex(newIndex);
   } else {
     int rc = KMessageBox::questionYesNo(0, i18n("<center>The current field delimiter ('%1') appears to give\n</center>"
-                                                   "<center>incorrect results.  If you wish to retain it,</center>"
-                                                   "<center> click 'Keep'. Otherwise, click 'Change'.</center>", m_fieldDelimiterCharacter),
-                                                   i18n("CSV import"),
-                                                   KGuiItem(i18n("Keep")),
-                                                   KGuiItem(i18n("Change")));
+                                        "<center>incorrect results.  If you wish to retain it,</center>"
+                                        "<center> click 'Keep'. Otherwise, click 'Change'.</center>", m_fieldDelimiterCharacter),
+                                        i18n("CSV import"),
+                                        KGuiItem(i18n("Keep")),
+                                        KGuiItem(i18n("Change")));
     switch (rc) {
       case KMessageBox::Yes:  //  = "Keep"
         return;
@@ -798,7 +798,7 @@ void InvestProcessing::fieldDelimiterChanged()
         m_csvDialog->m_lastDelimiterIndex = newIndex;
         m_csvDialog->m_pageSeparator->delimiterActivated();
         break;
-      }
+    }
     m_csvDialog->m_importNow = false;
   }
 
@@ -882,8 +882,7 @@ void InvestProcessing::readFile(const QString& fname)
 
     if (columnCount > m_maxColumnCount) {
       m_maxColumnCount = columnCount;
-    }
-    else {
+    } else {
       columnCount = m_maxColumnCount;
     }
   }
@@ -915,7 +914,7 @@ void InvestProcessing::readFile(const QString& fname)
     for (int i = 0; i < m_maxColumnCount; i++) {  //  populate comboboxes with col # values
       //  Start to build m_columnTypeList before comboBox stuff below
       //  because that causes connects which access m_columnTypeList
-      m_columnTypeList<<QString();  //                clear all column types
+      m_columnTypeList << QString();  //                clear all column types
       QString t;
       t.setNum(i + 1);
       m_csvDialog->m_pageInvestment->ui->comboBoxInv_amountCol->addItem(t);
@@ -1072,9 +1071,9 @@ void InvestProcessing::displayLine(const QString& data)
 
   //  If making copy of detailcol or typecol, check the columns actually exist...
   if ((!m_firstPass) && (m_typeColumn <= m_columnTypeList.count()) &&
-     (m_detailColumn <= m_columnTypeList.count()) && (m_memoColumn <= m_columnTypeList.count())) {
+      (m_detailColumn <= m_columnTypeList.count()) && (m_memoColumn <= m_columnTypeList.count())) {
     if ((m_typeColCopied) && (m_typeColumn < m_columnList.count()) && (m_typeColumn >= 0)) {  //        ...then make the copy here
-      m_columnList<<m_columnList[m_typeColumn];
+      m_columnList << m_columnList[m_typeColumn];
       m_columnTypeList[m_memoColumn] = "memo";
       for (int i = 0; i < m_memoColList.count(); i++) {
         if (m_memoColList[i] == m_typeColumn) {
@@ -1083,7 +1082,7 @@ void InvestProcessing::displayLine(const QString& data)
         m_columnTypeList[m_memoColList[i]] = "memo";
       }
     } else if ((m_detailColCopied) && (m_detailColumn < m_columnList.count()) && (m_detailColumn >= 0)) {  //   ...or here
-      m_columnList<<m_columnList[m_detailColumn];
+      m_columnList << m_columnList[m_detailColumn];
       m_columnTypeList[m_memoColumn] = "memo";
       for (int i = 0; i < m_memoColList.count(); i++) {
         if (m_memoColList[i] == m_detailColumn) {
@@ -1235,8 +1234,8 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     else if (m_columnTypeList[i] == "memo") {      //               Memo Col
       txt = m_columnList[i];
       if ((!m_firstPass) && (txt.isEmpty()) && (m_typeColCopied)) {
-         txt = m_columnList[m_typeColumn];
-         m_columnList[i] = txt;
+        txt = m_columnList[m_typeColumn];
+        m_columnList[i] = txt;
       }
       if (memo.isEmpty()) {
         if (m_brokerage) {
@@ -2038,8 +2037,8 @@ void InvestProcessing::redrawWindow(int startLine)
   //  If incorrect field delimiter is chosen, all fields can end up in one column.
   //  This prevents appearance of horizontal scrollbar.  So create a second column, in case...
   if (m_csvDialog->ui->tableWidget->columnCount() == 1) {
-      m_csvDialog->ui->tableWidget->setColumnCount(2);
-      m_csvDialog->ui->tableWidget->setColumnWidth(1, 1);
+    m_csvDialog->ui->tableWidget->setColumnCount(2);
+    m_csvDialog->ui->tableWidget->setColumnWidth(1, 1);
   }
   //
   //  Need to find max. column width in case a hor. scroll-bar increases table height.
@@ -2060,7 +2059,7 @@ void InvestProcessing::redrawWindow(int startLine)
       //
       int colWidth = m_csvDialog->ui->tableWidget->columnWidth(col);
       QLabel label;
-      label.setText(m_csvDialog->ui->tableWidget->item(row,col)->text());
+      label.setText(m_csvDialog->ui->tableWidget->item(row, col)->text());
       int wd = label.sizeHint().width() + 10;
       if (wd > colWidth) {
         colWidth = wd;
@@ -2084,7 +2083,7 @@ void InvestProcessing::redrawWindow(int startLine)
   rect.setHeight(tableHeight);
   m_csvDialog->ui->frame_main->setFrameRect(rect);
   if (m_maxRowWidth > m_csvDialog->ui->tableWidget->width() - m_csvDialog->ui->tableWidget->verticalScrollBar()->width() - m_csvDialog->ui->tableWidget->verticalHeader()->width()) {
-  //  Wide enough for scroll-bar to show
+    //  Wide enough for scroll-bar to show
     m_csvDialog->m_hScrollBarHeight = 17;
     tableHeight = m_csvDialog->m_tableHeight + m_csvDialog->m_hScrollBarHeight;
 
@@ -2099,13 +2098,13 @@ void InvestProcessing::redrawWindow(int startLine)
   for (int row = 0; row < m_csvDialog->ui->tableWidget->rowCount(); row++) {
     m_csvDialog->ui->tableWidget->setRowHeight(row, 30);
     for (int col = 0; col < m_csvDialog->ui->tableWidget->columnCount(); col ++) {
-      if (m_csvDialog->ui->tableWidget->item(row,col) != 0) {
-        QString txt = m_csvDialog->ui->tableWidget->item(row,col)->text();
+      if (m_csvDialog->ui->tableWidget->item(row, col) != 0) {
+        QString txt = m_csvDialog->ui->tableWidget->item(row, col)->text();
         txt.remove(QRegExp(pattern)).toDouble(&ok);  //  is this a true numeric?
         if (ok) {
-          m_csvDialog->ui->tableWidget->item(row,col)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+          m_csvDialog->ui->tableWidget->item(row, col)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
         } else {
-          m_csvDialog->ui->tableWidget->item(row,col)->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+          m_csvDialog->ui->tableWidget->item(row, col)->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         }
       }
     }
@@ -2171,7 +2170,7 @@ void InvestProcessing::slotVertScrollBarAction(int val)
 
 void InvestProcessing::clearColumnType(int column)
 {
- m_columnTypeList[column].clear();
+  m_columnTypeList[column].clear();
 }
 
 QString InvestProcessing::columnType(int column)

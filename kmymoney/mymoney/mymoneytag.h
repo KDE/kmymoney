@@ -53,8 +53,8 @@ public:
   MyMoneyTag();
   MyMoneyTag(const QString& id, const MyMoneyTag& tag);
   explicit MyMoneyTag(const QString& name,
-		      const QColor& tagColor = QColor()
-		     );
+                      const QColor& tagColor = QColor()
+                     );
   /**
     * This is the constructor for a tag that is described by a
     * QDomElement (e.g. from a file).

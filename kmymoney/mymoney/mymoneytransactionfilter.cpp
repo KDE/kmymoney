@@ -245,7 +245,7 @@ bool MyMoneyTransactionFilter::matchText(const MyMoneySplit * const sp) const
 
     if (!sp->tagIdList().isEmpty()) {
       QList<QString>::ConstIterator it_s;
-      QList<QString> t=sp->tagIdList();
+      QList<QString> t = sp->tagIdList();
       for (it_s = t.constBegin(); it_s != t.constEnd(); ++it_s) {
         const MyMoneyTag& tag = file->tag((*it_s));
         if (tag.name().contains(m_text))
@@ -441,13 +441,13 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
           if (m_tags.count() > 0) {
             if (s->tagIdList().isEmpty())
               removeSplit = true;
-	    else {
-	      bool found = false;
-	      for(int i=0; i<s->tagIdList().size(); i++)
-	        if(m_tags.end() != m_tags.find(s->tagIdList()[i]))
-		  found = true;
-		if(!found) removeSplit = true;
-	    }
+            else {
+              bool found = false;
+              for (int i = 0; i < s->tagIdList().size(); i++)
+                if (m_tags.end() != m_tags.find(s->tagIdList()[i]))
+                  found = true;
+              if (!found) removeSplit = true;
+            }
           } else if (!s->tagIdList().isEmpty())
             removeSplit = true;
         }
@@ -479,7 +479,7 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
           }
         }
       } else if (m_filterSet.singleFilter.payeeFilter
-		 || m_filterSet.singleFilter.tagFilter
+                 || m_filterSet.singleFilter.tagFilter
                  || m_filterSet.singleFilter.typeFilter
                  || m_filterSet.singleFilter.stateFilter
                  || m_filterSet.singleFilter.nrFilter)

@@ -4925,13 +4925,13 @@ void KMyMoneyApp::slotTagDelete(void)
       // loop over all splits in the transaction of the schedule
       for (QList<MyMoneySplit>::ConstIterator s_it = (*it).transaction().splits().constBegin();
            s_it != (*it).transaction().splits().constEnd(); ++s_it) {
-	for(int i=0;i<(*s_it).tagIdList().size();i++) {
-	  // is the tag in the split to be deleted?
-	  if (tagInList(d->m_selectedTags, (*s_it).tagIdList()[i])) {
-	    used_schedules.push_back(*it); // remember this schedule
-	    break;
-	  }
-	}
+        for (int i = 0; i < (*s_it).tagIdList().size(); i++) {
+          // is the tag in the split to be deleted?
+          if (tagInList(d->m_selectedTags, (*s_it).tagIdList()[i])) {
+            used_schedules.push_back(*it); // remember this schedule
+            break;
+          }
+        }
       }
     }
 //     kDebug() << "[KTagsView::slotDeleteTag]  " << used_schedules.count() << " schedules use one of the selected tags";
@@ -4968,16 +4968,16 @@ void KMyMoneyApp::slotTagDelete(void)
           QList<MyMoneySplit> splits = (*it).splits();
           // loop over all splits
           for (s_it = splits.begin(); s_it != splits.end(); ++s_it) {
-	    QList<QString> tagIdList = (*s_it).tagIdList();
-	    for(int i=0;i<tagIdList.size();i++) {
+            QList<QString> tagIdList = (*s_it).tagIdList();
+            for (int i = 0; i < tagIdList.size(); i++) {
               // if the split is assigned to one of the selected tags, we need to modify it
               if (tagInList(d->m_selectedTags, tagIdList[i])) {
-		tagIdList.removeAt(i);
-		if(tagIdList.indexOf(tag_id) == -1)
-		  tagIdList.append(tag_id);
-		i=-1; // restart from the first element
-	      }
-	    }
+                tagIdList.removeAt(i);
+                if (tagIdList.indexOf(tag_id) == -1)
+                  tagIdList.append(tag_id);
+                i = -1; // restart from the first element
+              }
+            }
             (*s_it).setTagIdList(tagIdList); // first modify tag list in current split
             // then modify the split in our local copy of the transaction list
             (*it).modifySplit(*s_it); // this does not modify the list object 'splits'!
@@ -4993,15 +4993,15 @@ void KMyMoneyApp::slotTagDelete(void)
           // create copy of lists of splits
           QList<MyMoneySplit> splits = trans.splits();
           for (s_it = splits.begin(); s_it != splits.end(); ++s_it) {
-	    QList<QString> tagIdList = (*s_it).tagIdList();
-	    for(int i=0;i<tagIdList.size();i++) {
+            QList<QString> tagIdList = (*s_it).tagIdList();
+            for (int i = 0; i < tagIdList.size(); i++) {
               if (tagInList(d->m_selectedTags, tagIdList[i])) {
-		tagIdList.removeAt(i);
-		if(tagIdList.indexOf(tag_id) == -1)
-		  tagIdList.append(tag_id);
-		i=-1; // restart from the first element
-	      }
-	    }
+                tagIdList.removeAt(i);
+                if (tagIdList.indexOf(tag_id) == -1)
+                  tagIdList.append(tag_id);
+                i = -1; // restart from the first element
+              }
+            }
             (*s_it).setTagIdList(tagIdList);
             trans.modifySplit(*s_it); // does not modify the list object 'splits'!
           } // for - Splits

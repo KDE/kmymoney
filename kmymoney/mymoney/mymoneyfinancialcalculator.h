@@ -291,7 +291,7 @@ private:
   unsigned short  m_PF;   // payment frequency
 
   unsigned short  m_prec; // precision for roundoff for pv, pmt and fv
-                          // i is not rounded, n is integer
+  // i is not rounded, n is integer
 
   bool            m_bep;  // beginning/end of period payment flag
   bool            m_disc; // discrete/continuous compounding flag

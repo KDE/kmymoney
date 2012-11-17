@@ -51,8 +51,9 @@
 #include <selectedtransaction.h>
 
 #ifdef KActivities_FOUND
-namespace KActivities {
-    class ResourceInstance;
+namespace KActivities
+{
+class ResourceInstance;
 }
 #endif
 
@@ -176,7 +177,7 @@ private:
 
 #ifdef KActivities_FOUND
 private:
-    KActivities::ResourceInstance * m_activityResourceInstance;
+  KActivities::ResourceInstance * m_activityResourceInstance;
 #endif
 
 private:

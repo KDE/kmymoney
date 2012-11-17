@@ -364,8 +364,7 @@ QString KMyMoneyUtils::nextCheckNumber(const MyMoneyAccount& acc)
 
     // if new number is longer than previous one and we identified
     // preceding 0s, then remove one of the preceding zeros
-    if (arg2.length() > 0 && (number.length() != acc.value("lastNumberUsed").length()))
-    {
+    if (arg2.length() > 0 && (number.length() != acc.value("lastNumberUsed").length())) {
       arg2 = arg2.mid(1);
       number = QString("%1%2%3%4").arg(arg1).arg(arg2).arg(arg3).arg(arg4);
     }

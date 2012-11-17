@@ -635,7 +635,7 @@ void MyMoneySeqAccessMgr::modifyTransaction(const MyMoneyTransaction& transactio
       payee((*it_s).payeeId());
     foreach (const QString& tagId, (*it_s).tagIdList()) {
       if (!tagId.isEmpty())
-       tag(tagId);
+        tag(tagId);
     }
   }
 

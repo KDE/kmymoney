@@ -164,8 +164,8 @@ void MyMoneyDbDef::Tags(void)
 void MyMoneyDbDef::TagSplits(void)
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
-  appendField(MyMoneyDbColumn("transactionId", "varchar(32)",PRIMARYKEY, NOTNULL));
-  appendField(MyMoneyDbColumn("tagId", "varchar(32)",PRIMARYKEY, NOTNULL));
+  appendField(MyMoneyDbColumn("transactionId", "varchar(32)", PRIMARYKEY, NOTNULL));
+  appendField(MyMoneyDbColumn("tagId", "varchar(32)", PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbIntColumn("splitId", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL));
   MyMoneyDbTable t("kmmTagSplits", fields);
   t.buildSQLStrings();

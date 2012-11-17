@@ -237,8 +237,7 @@ public:
   KTagContainer(QWidget* parent = 0);
 
   void loadTags(const QList<MyMoneyTag>& list);
-  KMyMoneyTagCombo* tagCombo()
-  {
+  KMyMoneyTagCombo* tagCombo() {
     return m_tagCombo;
   }
   const QList<QString> selectedTags(void);

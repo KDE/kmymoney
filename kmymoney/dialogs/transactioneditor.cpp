@@ -1006,7 +1006,7 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
     }
     QList<QString> t = m_split.tagIdList();
     if (!t.isEmpty()) {
-      for(int i=0; i<t.size(); i++)
+      for (int i = 0; i < t.size(); i++)
         tag->addTagWidget(t[i]);
     }
 

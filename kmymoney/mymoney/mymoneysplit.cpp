@@ -57,7 +57,7 @@ MyMoneySplit::MyMoneySplit(const QDomElement& node) :
   m_payee = QStringEmpty(node.attribute("payee"));
 
   QDomNodeList nodeList = node.elementsByTagName("TAG");
-  for(int i=0; i<nodeList.count();i++)
+  for (int i = 0; i < nodeList.count(); i++)
     m_tagList << QStringEmpty(nodeList.item(i).toElement().attribute("id"));
 
   m_reconcileDate = stringToDate(QStringEmpty(node.attribute("reconciledate")));
@@ -231,9 +231,9 @@ void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const
   el.setAttribute("number", m_number);
   el.setAttribute("bankid", m_bankID);
 
-  for(int i=0; i<m_tagList.count();i++) {
+  for (int i = 0; i < m_tagList.count(); i++) {
     QDomElement sel = document.createElement("TAG");
-    sel.setAttribute("id",m_tagList[i]);
+    sel.setAttribute("id", m_tagList[i]);
     el.appendChild(sel);
   }
 
@@ -248,8 +248,8 @@ bool MyMoneySplit::hasReferenceTo(const QString& id) const
   if (isMatched()) {
     rc = matchedTransaction().hasReferenceTo(id);
   }
-  for(int i=0; i<m_tagList.size(); i++)
-    if(id == m_tagList[i])
+  for (int i = 0; i < m_tagList.size(); i++)
+    if (id == m_tagList[i])
       return true;
   return rc || (id == m_account) || (id == m_payee);
 }

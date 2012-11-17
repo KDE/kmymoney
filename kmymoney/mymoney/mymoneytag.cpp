@@ -57,7 +57,7 @@ MyMoneyTag::MyMoneyTag(const QDomElement& node) :
   }
   m_name = node.attribute("name");
   if (node.hasAttribute("tagcolor")) {
-   m_tag_color.setNamedColor(node.attribute("tagcolor"));
+    m_tag_color.setNamedColor(node.attribute("tagcolor"));
   }
   if (node.hasAttribute("notes")) {
     m_notes = node.attribute("notes");
@@ -79,8 +79,8 @@ bool MyMoneyTag::operator == (const MyMoneyTag& right) const
 {
   return (MyMoneyObject::operator==(right) &&
           ((m_name.length() == 0 && right.m_name.length() == 0) || (m_name == right.m_name)) &&
-	  ((m_tag_color.isValid() == false && right.m_tag_color.isValid() == false) || (m_tag_color.name() == right.m_tag_color.name())) &&
-	  (m_closed == right.m_closed) );
+          ((m_tag_color.isValid() == false && right.m_tag_color.isValid() == false) || (m_tag_color.name() == right.m_tag_color.name())) &&
+          (m_closed == right.m_closed));
 }
 
 bool MyMoneyTag::operator < (const MyMoneyTag& right) const
@@ -96,7 +96,7 @@ void MyMoneyTag::writeXML(QDomDocument& document, QDomElement& parent) const
 
   el.setAttribute("name", m_name);
   el.setAttribute("closed", m_closed);
-  if(m_tag_color.isValid())
+  if (m_tag_color.isValid())
     el.setAttribute("tagcolor", m_tag_color.name());
   if (!m_notes.isEmpty())
     el.setAttribute("notes", m_notes);

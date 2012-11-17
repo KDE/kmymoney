@@ -764,7 +764,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     }
     d->m_html += "</tr>";
 
-    d->m_total=0;
+    d->m_total = 0;
     QMap<QString, MyMoneyAccount>::const_iterator it_m;
     for (it_m = nameIdx.constBegin(); it_m != nameIdx.constEnd(); ++it_m) {
       d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
@@ -773,7 +773,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     }
     d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
     QString amount = d->m_total.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-    d->m_html += QString("<td class=\"right\"><b>%1</b></td><td class=\"right\"><b>%2</b></td></tr>").arg(i18n("Total"),showColoredAmount(amount, d->m_total.isNegative()));
+    d->m_html += QString("<td class=\"right\"><b>%1</b></td><td class=\"right\"><b>%2</b></td></tr>").arg(i18n("Total"), showColoredAmount(amount, d->m_total.isNegative()));
     d->m_html += "</table></div></div>";
   }
 }
@@ -796,14 +796,14 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc)
     //get balance for normal accounts
     value = file->balance(acc.id(), QDate::currentDate());
     if (acc.currencyId() != file->baseCurrency().id()) {
-          ReportAccount repAcc = ReportAccount(acc.id());
-          MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
-          MyMoneyMoney baseValue = value * curPrice;
-          baseValue = baseValue.convert(file->baseCurrency().smallestAccountFraction());
-          d->m_total += baseValue;
-        } else {
-          d->m_total += value;
-        }
+      ReportAccount repAcc = ReportAccount(acc.id());
+      MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
+      MyMoneyMoney baseValue = value * curPrice;
+      baseValue = baseValue.convert(file->baseCurrency().smallestAccountFraction());
+      d->m_total += baseValue;
+    } else {
+      d->m_total += value;
+    }
     //if credit card or checkings account, show maximum credit
     if (acc.accountType() == MyMoneyAccount::CreditCard ||
         acc.accountType() == MyMoneyAccount::Checkings) {

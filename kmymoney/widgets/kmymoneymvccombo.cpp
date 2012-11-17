@@ -227,9 +227,9 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
     // KMyMoneyTagCombo is inside KTagContainer, KMyMoneyPayeeCombo isn't it
     if (w->inherits("KTagContainer"))
       w = w->parent();
-    while ( q && q->objectName() != "qt_scrollarea_viewport")
+    while (q && q->objectName() != "qt_scrollarea_viewport")
       q = q->parent();
-    if(q != w && qApp->focusWidget()->objectName()!="register") {
+    if (q != w && qApp->focusWidget()->objectName() != "register") {
       KComboBox::focusOutEvent(e);
       return;
     }
@@ -354,7 +354,7 @@ void KMyMoneyTagCombo::loadTags(const QList<MyMoneyTag>& list)
   //add all not closed tags
   QList<MyMoneyTag>::const_iterator it;
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    if( !(*it).isClosed())
+    if (!(*it).isClosed())
       addItem((*it).name(), QVariant((*it).id()));
   }
 
@@ -371,7 +371,7 @@ void KMyMoneyTagCombo::setUsedTagList(QList<QString>& usedIdList)
   m_usedIdList = usedIdList;
   for (int i = 0; i < m_usedIdList.size(); ++i) {
     int index = findData(QVariant(m_usedIdList.at(i)), Qt::UserRole, Qt::MatchExactly);
-    if (index !=-1) removeItem(index);
+    if (index != -1) removeItem(index);
   }
 }
 
@@ -384,7 +384,7 @@ KTagLabel::KTagLabel(const QString& id, const QString& name, QWidget* parent) :
   QLabel *l = new QLabel(name, this);
   m_tagId = id;
   QHBoxLayout *layout = new QHBoxLayout;
-  layout->setContentsMargins(0,0,0,0);
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
   this->setLayout(layout);
   layout->addWidget(t);
@@ -398,27 +398,28 @@ KTagContainer::KTagContainer(QWidget* parent) :
 {
   m_tagCombo = new KMyMoneyTagCombo;
   QHBoxLayout *layout = new QHBoxLayout;
-  layout->setContentsMargins(0,0,5,0);
+  layout->setContentsMargins(0, 0, 5, 0);
   layout->setSpacing(0);
-  layout->addWidget(m_tagCombo,100);
+  layout->addWidget(m_tagCombo, 100);
   this->setLayout(layout);
   this->setFocusProxy(m_tagCombo);
   connect(m_tagCombo, SIGNAL(lostFocus()), this, SLOT(slotAddTagWidget()));
 }
 
-void KTagContainer::loadTags(const QList<MyMoneyTag>& list) {
-  m_list=list;
+void KTagContainer::loadTags(const QList<MyMoneyTag>& list)
+{
+  m_list = list;
   m_tagCombo->loadTags(list);
 }
 
-const QList<QString> KTagContainer::selectedTags(void )
+const QList<QString> KTagContainer::selectedTags(void)
 {
   return m_tagIdList;
 }
 
 void KTagContainer::addTagWidget(const QString& id)
 {
-  if(id.isNull() || m_tagIdList.contains(id))
+  if (id.isNull() || m_tagIdList.contains(id))
     return;
   const QString tagName = m_tagCombo->itemText(m_tagCombo->findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
   KTagLabel *t = new KTagLabel(id, tagName, this);
@@ -432,11 +433,11 @@ void KTagContainer::addTagWidget(const QString& id)
   m_tagCombo->setFocus();
 }
 
-void KTagContainer::RemoveAllTagWidgets(void )
+void KTagContainer::RemoveAllTagWidgets(void)
 {
   m_tagIdList.clear();
   while (!m_tagLabelList.isEmpty())
-     delete m_tagLabelList.takeLast();
+    delete m_tagLabelList.takeLast();
   m_tagCombo->loadTags(m_list);
   m_tagCombo->setUsedTagList(m_tagIdList);
   m_tagCombo->setCurrentIndex(0);

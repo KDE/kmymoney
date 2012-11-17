@@ -1784,7 +1784,7 @@ void MyMoneyStorageSql::writeTagSplitsList
 
   int i = 0, l = 0;
   foreach (const MyMoneySplit& s, splitList) {
-    for(l=0; l<s.tagIdList().size(); l++) {
+    for (l = 0; l < s.tagIdList().size(); l++) {
       tagIdList << s.tagIdList()[l];
       splitIdList_TagSplits << splitIdList[i];
       txIdList << txId;
@@ -3399,7 +3399,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
     QString tagsClause = "";
     foreach (const QString& it, tags) {
       tagsClause.append(QString("%1'%2'")
-                          .arg(itemConnector).arg(it));
+                        .arg(itemConnector).arg(it));
       itemConnector = ", ";
     }
     if (!tagsClause.isEmpty()) {

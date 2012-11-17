@@ -404,7 +404,7 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, IMyMoneyStorage* storag
       s << " (" << p.name() << ")" << "\n";
     } else
       s << " ()\n";
-    for(int i=0; i< (*it_s).tagIdList().size(); i++) {
+    for (int i = 0; i < (*it_s).tagIdList().size(); i++) {
       s << "    Tag = " << (*it_s).tagIdList()[i];
       if (!(*it_s).tagIdList()[i].isEmpty()) {
         MyMoneyTag ta = storage->tag((*it_s).tagIdList()[i]);

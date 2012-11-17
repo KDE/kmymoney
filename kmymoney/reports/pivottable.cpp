@@ -880,8 +880,8 @@ void PivotTable::calculateBudgetMapping(void)
 
         // skip the account if it has no periods
         if (periods.count() < 1) {
-            ++it_bacc;
-            continue;
+          ++it_bacc;
+          continue;
         }
 
         MyMoneyMoney value = (*periods.begin()).amount() * reverse;

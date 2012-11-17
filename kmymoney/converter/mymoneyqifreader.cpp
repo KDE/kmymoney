@@ -748,11 +748,11 @@ bool MyMoneyQifReader::extractSplits(QList<qSplit>& listqSplits) const
         d->fixMultiLineMemo(q.m_strMemo);
         memoPresent = true;  //                     This transaction contains memo
       } else if ((*it)[0] == 'S') {
-          q.m_strCategoryName = (*it).mid(1);  //   'S' = CategoryName
-          neededCount ++;
+        q.m_strCategoryName = (*it).mid(1);  //   'S' = CategoryName
+        neededCount ++;
       } else if ((*it)[0] == '$') {
-          q.m_amount = (*it).mid(1);  //            '$' = Amount
-          neededCount ++;
+        q.m_amount = (*it).mid(1);  //            '$' = Amount
+        neededCount ++;
       }
       if (neededCount > 1) {  //                         CategoryName & Amount essential
         listqSplits += q;  //                       Add valid split

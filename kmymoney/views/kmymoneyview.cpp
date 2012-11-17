@@ -308,11 +308,11 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
 
   // Initialize kactivities resource instance
 
-  #ifdef KActivities_FOUND
+#ifdef KActivities_FOUND
   m_activityResourceInstance = new KActivities::ResourceInstance(window()->winId());
   m_activityResourceInstance->setParent(this);
   connect(kmymoney, SIGNAL(fileLoaded(KUrl)), m_activityResourceInstance, SLOT(setUri(KUrl)));
-  #endif
+#endif
 }
 
 KMyMoneyView::~KMyMoneyView()

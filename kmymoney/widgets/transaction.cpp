@@ -178,8 +178,8 @@ Transaction::Transaction(Register *parent, const MyMoneyTransaction& transaction
 
   // load the tag
   if (!m_split.tagIdList().isEmpty()) {
-    const QList<QString> t=m_split.tagIdList();
-    for(int i=0; i<t.count();i++) {
+    const QList<QString> t = m_split.tagIdList();
+    for (int i = 0; i < t.count(); i++) {
       m_tagList << file->tag(t[i]).name();
       m_tagColorList << file->tag(t[i]).tagColor();
     }
@@ -328,11 +328,11 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
     }
     // adjust the text rectangle to obtain a reasonable spacing between the text and the grid
 
-     QTextDocument document;
-     document.setHtml(txt);
-     painter->translate(option.rect.adjusted(2, 0, -2, 0).topLeft());
-     document.drawContents(painter);
-     painter->translate(-option.rect.adjusted(2, 0, -2, 0).topLeft());
+    QTextDocument document;
+    document.setHtml(txt);
+    painter->translate(option.rect.adjusted(2, 0, -2, 0).topLeft());
+    document.drawContents(painter);
+    painter->translate(-option.rect.adjusted(2, 0, -2, 0).topLeft());
 
     //style->drawItemText(painter, option.rect.adjusted(2, 0, -2, 0), align, option.palette, true, txt, m_selected ? QPalette::HighlightedText : QPalette::Text);
 
@@ -636,9 +636,9 @@ bool Transaction::matches(const QString& txt) const
     }
     if (!(*it_s).tagIdList().isEmpty()) {
       const QList<QString>& t = (*it_s).tagIdList();
-      for(int i=0; i<t.count();i++) {
+      for (int i = 0; i < t.count(); i++) {
         if ((file->tag(t[i])).name().contains(txt, Qt::CaseInsensitive))
-	  return true;
+          return true;
       }
     }
     const MyMoneyAccount& acc = file->account((*it_s).accountId());
@@ -920,12 +920,12 @@ bool StdTransaction::formCellText(QString& txt, int& align, int row, int col, QP
           break;
 
         case ValueColumn1:
-	  align |= Qt::AlignLeft;
-	  if(!m_tagList.isEmpty()) {
-	    for(int i=0; i<m_tagList.size()-1;i++)
-              txt += m_tagList[i]+", ";
+          align |= Qt::AlignLeft;
+          if (!m_tagList.isEmpty()) {
+            for (int i = 0; i < m_tagList.size() - 1; i++)
+              txt += m_tagList[i] + ", ";
             txt += m_tagList.last();
-	  }
+          }
           //if (m_transaction != MyMoneyTransaction())
           //  txt = m_split.tagId();
           break;
@@ -1005,14 +1005,13 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
               break;
             case AccountFirst:
               txt = m_category;
-	      if(!m_tagList.isEmpty()) {
-	        txt += " ( ";
-	        for(int i=0; i<m_tagList.size()-1;i++)
-		{
-                  txt += "<span style='color: "+m_tagColorList[i].name()+"'>&#x25CF;</span> "+m_tagList[i]+", ";
+              if (!m_tagList.isEmpty()) {
+                txt += " ( ";
+                for (int i = 0; i < m_tagList.size() - 1; i++) {
+                  txt += "<span style='color: " + m_tagColorList[i].name() + "'>&#x25CF;</span> " + m_tagList[i] + ", ";
                 }
-                txt += "<span style='color: "+m_tagColorList.last().name()+"'>&#x25CF;</span> "+m_tagList.last()+" )";
-	      }
+                txt += "<span style='color: " + m_tagColorList.last().name() + "'>&#x25CF;</span> " + m_tagList.last() + " )";
+              }
               break;
           }
           align |= Qt::AlignLeft;
@@ -1075,14 +1074,13 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
           switch (m_parent->getDetailsColumnType()) {
             case PayeeFirst:
               txt = m_category;
-	      if(!m_tagList.isEmpty()) {
-	        txt += " ( ";
-	        for(int i=0; i<m_tagList.size()-1;i++)
-		{
-                  txt += "<span style='color: "+m_tagColorList[i].name()+"'>&#x25CF;</span> "+m_tagList[i]+", ";
+              if (!m_tagList.isEmpty()) {
+                txt += " ( ";
+                for (int i = 0; i < m_tagList.size() - 1; i++) {
+                  txt += "<span style='color: " + m_tagColorList[i].name() + "'>&#x25CF;</span> " + m_tagList[i] + ", ";
                 }
-                txt += "<span style='color: "+m_tagColorList.last().name()+"'>&#x25CF;</span> "+m_tagList.last()+" )";
-	      }
+                txt += "<span style='color: " + m_tagColorList.last().name() + "'>&#x25CF;</span> " + m_tagList.last() + " )";
+              }
               break;
             case AccountFirst:
               txt = m_payee;

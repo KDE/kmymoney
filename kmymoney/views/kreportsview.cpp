@@ -900,9 +900,9 @@ void KReportsView::slotDelete(void)
 
 int KReportsView::deleteReportDialog(const QString &reportName)
 {
-    return KMessageBox::warningContinueCancel(this, QString("<qt>") +
-                                       i18n("Are you sure you want to delete report <b>%1</b>?  There is no way to recover it.",
-                                            reportName) + QString("</qt>"), i18n("Delete Report?"));
+  return KMessageBox::warningContinueCancel(this, QString("<qt>") +
+         i18n("Are you sure you want to delete report <b>%1</b>?  There is no way to recover it.",
+              reportName) + QString("</qt>"), i18n("Delete Report?"));
 }
 
 void KReportsView::slotOpenReport(const QString& id)
@@ -1111,7 +1111,7 @@ void KReportsView::slotListContextMenu(const QPoint & p)
   MyMoneyReport& report = reportTocItem->getReport();
   if (! report.id().isEmpty()) {
     contextmenu->addAction(i18n("&Delete"),
-                         this, SLOT(slotDeleteFromList()));
+                           this, SLOT(slotDeleteFromList()));
   }
 
   contextmenu->popup(m_tocTreeWidget->mapToGlobal(p));
@@ -1156,10 +1156,10 @@ void KReportsView::slotDeleteFromList(void)
 
     // If this report does not have an ID, it's a default report and cannot be deleted
     if (! report.id().isEmpty() &&
-            KMessageBox::Continue == deleteReportDialog(report.name())) {
-        MyMoneyFileTransaction ft;
-        MyMoneyFile::instance()->removeReport(report);
-        ft.commit();
+        KMessageBox::Continue == deleteReportDialog(report.name())) {
+      MyMoneyFileTransaction ft;
+      MyMoneyFile::instance()->removeReport(report);
+      ft.commit();
     }
   }
 }

@@ -155,7 +155,7 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
         || s == "account"
         || s == "price"
         || s == "payee"
-	|| s == "tag"
+        || s == "tag"
         || s == "currency"
         || s == "security"
         || s == "keyvaluepairs"

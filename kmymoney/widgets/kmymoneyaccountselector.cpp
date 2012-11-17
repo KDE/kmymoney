@@ -436,10 +436,10 @@ int AccountSet::loadSubAccounts(kMyMoneyAccountSelector* selector, QTreeWidgetIt
     if (acc.isInvest() && !KMyMoneyGlobalSettings::expertMode())
       continue;
 
-      //this will include an account if it matches the account type and
-      //if it is still open or it has been set to show closed accounts
-      if (includeAccount(acc)
-          && (!isHidingClosedAccounts() || !acc.isClosed())) {
+    //this will include an account if it matches the account type and
+    //if it is still open or it has been set to show closed accounts
+    if (includeAccount(acc)
+        && (!isHidingClosedAccounts() || !acc.isClosed())) {
       QString tmpKey;
       tmpKey = key + MyMoneyFile::AccountSeperator + acc.name();
       ++count;

@@ -220,8 +220,8 @@ void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransa
     if (acc.accountGroup() != MyMoneyAccount::Income
         && acc.accountGroup() != MyMoneyAccount::Expense) {
       s << "L" << m_qifProfile.accountDelimiter()[0]
-        << MyMoneyFile::instance()->accountToCategory(sp.accountId())
-        << m_qifProfile.accountDelimiter()[1] << endl;
+      << MyMoneyFile::instance()->accountToCategory(sp.accountId())
+      << m_qifProfile.accountDelimiter()[1] << endl;
     } else {
       s << "L" << file->accountToCategory(sp.accountId()) << endl;
     }
@@ -246,8 +246,8 @@ void MyMoneyQifWriter::writeSplitEntry(QTextStream& s, const MyMoneySplit& split
   if (acc.accountGroup() != MyMoneyAccount::Income
       && acc.accountGroup() != MyMoneyAccount::Expense) {
     s << m_qifProfile.accountDelimiter()[0]
-      << file->accountToCategory(split.accountId())
-      << m_qifProfile.accountDelimiter()[1];
+    << file->accountToCategory(split.accountId())
+    << m_qifProfile.accountDelimiter()[1];
   } else {
     s << file->accountToCategory(split.accountId());
   }
