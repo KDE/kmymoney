@@ -17,6 +17,7 @@ NORMALIZE=
 for path in $PATH; do
   if test -x $path/normalize; then
     NORMALIZE=$path/normalize
+    break
   fi
 done
 
