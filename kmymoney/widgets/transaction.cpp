@@ -328,13 +328,17 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
     }
     // adjust the text rectangle to obtain a reasonable spacing between the text and the grid
 
-    QTextDocument document;
-    document.setHtml(txt);
-    painter->translate(option.rect.adjusted(2, 0, -2, 0).topLeft());
-    document.drawContents(painter);
-    painter->translate(-option.rect.adjusted(2, 0, -2, 0).topLeft());
+    // use the QTextDocument based output for non-scheduled transactions only
+    if(option.palette.currentColorGroup() != QPalette::Disabled) {
+      QTextDocument document;
+      document.setHtml(txt);
+      painter->translate(option.rect.adjusted(2, 0, -2, 0).topLeft());
+      document.drawContents(painter);
+      painter->translate(-option.rect.adjusted(2, 0, -2, 0).topLeft());
 
-    //style->drawItemText(painter, option.rect.adjusted(2, 0, -2, 0), align, option.palette, true, txt, m_selected ? QPalette::HighlightedText : QPalette::Text);
+    } else {
+      style->drawItemText(painter, option.rect.adjusted(2, 0, -2, 0), align, option.palette, true, txt, m_selected ? QPalette::HighlightedText : QPalette::Text);
+    }
 
     // draw the grid if it's needed
     if (KMyMoneySettings::showGrid()) {
