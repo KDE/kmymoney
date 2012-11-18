@@ -161,7 +161,7 @@
         </widget>
         <widget class="QWidget" name="tab1">
          <attribute name="title">
-          <string comment="Street address">Details</string>
+          <string>Details</string>
          </attribute>
          <layout class="QVBoxLayout">
           <item>
@@ -204,7 +204,7 @@
                 </size>
                </property>
                <property name="text">
-                <string comment="Street address">Tag color:</string>
+                <string>Tag color:</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
