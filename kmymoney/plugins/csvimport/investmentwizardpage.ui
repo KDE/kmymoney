@@ -48,18 +48,18 @@
       </spacer>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,1">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="50,150,3">
        <item>
         <widget class="QLabel" name="label">
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>45</height>
+           <height>50</height>
           </size>
          </property>
          <property name="text">
-          <string>&lt;body style=&quot; font-family:''; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; &gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Please select the appropriate columns to use, corresponding to your data.&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&lt;br /&gt;If there is just a single security in the file, enter its name below.&lt;br /&gt;Otherwise, select the column for the symbol, and for the description or detail.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;</string>
+          <string>&lt;body style=&quot; font-family:'Sans Serif';font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; &gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Please select the appropriate columns to use, corresponding to your data.&lt;/span&gt;&lt;br /&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;If there is just a single security in the file, enter its name below.&lt;br /&gt;Otherwise, select the column for the symbol, and for the description or detail.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;</string>
          </property>
         </widget>
        </item>
@@ -420,9 +420,7 @@
             </size>
            </property>
            <property name="font">
-            <font>
-             <family>Sans Serif</family>
-            </font>
+            <font/>
            </property>
            <property name="toolTip">
             <string>&lt;p align=&quot;center&quot; &gt;If a descriptive column contains an activity type, select it here.&lt;br /&gt; See also Filter text field.&lt;/p&gt;</string>

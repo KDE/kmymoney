@@ -80,6 +80,7 @@ private slots:
   void             slotRejected();
 
   void             slotItemChanged(QTableWidgetItem* item);
+  void             slotItemClicked(QTableWidgetItem* item);
 
   /**
   * This method is called to enable the user to edit the name of an imported security.

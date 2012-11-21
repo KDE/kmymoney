@@ -2448,23 +2448,24 @@ void CSVDialog::slotIdChanged(int id)
 
 void CSVDialog::slotNamesEdited()
 {
-  QString str;
   int row = 0;
-  int symTableRow = 0;
+  int symTableRow = -1;
 
   for (row = m_investProcessing->m_startLine - 1; row < m_investProcessing->m_endLine; row ++) {
-    if (ui->tableWidget->item(row, m_investProcessing->symbolColumn()) == 0) {
+    if (ui->tableWidget->item(row, m_investProcessing->symbolColumn()) == 0) {  //  Item does not exist
       continue;
     }
-    str = ui->tableWidget->item(row, m_investProcessing->symbolColumn())->text().trimmed();
+    symTableRow++;
     if (ui->tableWidget->item(row, m_investProcessing->symbolColumn())->text().trimmed().isEmpty()) {
       continue;
     }
     //  Replace detail with edited security name.
-    str = m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 2)->text();
-    ui->tableWidget->item(row, m_investProcessing->detailColumn())->setText(str);
-    m_investProcessing->m_map.insert(m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 0)->text(), m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 2)->text());
-    symTableRow ++;
+    QString securityName = m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 2)->text();
+    ui->tableWidget->item(row, m_investProcessing->detailColumn())->setText(securityName);
+    //  Replace symbol with edited symbol.
+    QString securitySymbol = m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 0)->text();
+    ui->tableWidget->item(row, m_investProcessing->symbolColumn())->setText(securitySymbol);
+    m_investProcessing->m_map.insert(securitySymbol, securityName);
   }
   ui->tableWidget->resizeColumnsToContents();
   m_investProcessing->redrawWindow(m_investProcessing->m_startLine - 1);
@@ -3628,14 +3629,10 @@ bool LinesDatePage::validatePage()
         break;
       }
       int col = m_dlg->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex();
-      if (m_dlg->ui->tableWidget->item(row, col) == 0) {
+      if (m_dlg->ui->tableWidget->item(row, col) == 0) {  //  This cell does not exist
         continue;
       }
       symbl = m_dlg->ui->tableWidget->item(row, col)->text().toLower().trimmed();
-
-      if (symbl.trimmed().isEmpty()) {     //  no ticker
-        continue;
-      }
       int detail = m_dlg->m_pageInvestment->ui->comboBoxInv_detailCol->currentIndex();
       securityName = m_dlg->ui->tableWidget->item(row, detail)->text().toLower();
       // Check if we already have the security on file.
@@ -3659,9 +3656,6 @@ bool LinesDatePage::validatePage()
       }
       if (!exists) {
         name = securityName;
-      }
-      if (symbl.isEmpty()) {
-        break;
       }
       symTableRow ++;
       m_dlg->m_symbolTableDlg->displayLine(symTableRow, symbl, name, exists);

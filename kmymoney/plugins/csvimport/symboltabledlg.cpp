@@ -34,6 +34,7 @@
 #include <KMessageBox>
 #include <KGlobal>
 #include <KPushButton>
+#include <ui_csvdialog.h>
 
 
 SymbolTableDlg::SymbolTableDlg()
@@ -50,6 +51,7 @@ SymbolTableDlg::SymbolTableDlg()
   connect(this, SIGNAL(cancelClicked()), this, SLOT(slotRejected()));
   connect(this, SIGNAL(okClicked()), this, SLOT(slotEditSecurityCompleted()));
   connect(this->m_widget->tableWidget,  SIGNAL(itemChanged(QTableWidgetItem*)), this,  SLOT(slotItemChanged(QTableWidgetItem*)));
+  connect(this->m_widget->tableWidget,  SIGNAL(itemClicked(QTableWidgetItem*)), this,  SLOT(slotItemClicked(QTableWidgetItem*)));
 }
 
 SymbolTableDlg::~SymbolTableDlg()
@@ -59,29 +61,34 @@ SymbolTableDlg::~SymbolTableDlg()
 
 void SymbolTableDlg::displayLine(int& row, QString& symbol, const QString& name, bool& exists)
 {
-  int count = row;
-  if (count > 9) {
-    count = 9;
+  int thisRow = row;
+  int basicWindowHeight = 150;
+  int height = 0;
+  if (thisRow > 9) {
+    thisRow = 9;
   }
-  (count += 1) *= m_widget->tableWidget->rowHeight(0);
-  this->resize(width(), count + 150);  //               + labels + footer
+  height = (thisRow += 1) * m_widget->tableWidget->rowHeight(0);
+  this->resize(width(), height + basicWindowHeight); // + labels + footer
   QTableWidgetItem* item = new QTableWidgetItem;  //    symbol for UI
   item->setText(symbol);
   QTableWidgetItem* item1 = new QTableWidgetItem;  //   exists flag for UI
+  item1->setFlags(Qt::NoItemFlags);
   item1->setSizeHint(QSize(60, 30));
-  if (exists) {
+  QTableWidgetItem* item2 = new QTableWidgetItem;  //   security name for UI
+  item2->setText(name);
+  if (exists) {  //                                     already exists in KMM
     item1->setText(i18nc("Confirm", "Yes"));
+    item->setFlags(Qt::NoItemFlags);  //                ...so no editing allowed
+    item2->setFlags(Qt::NoItemFlags);
   } else {
     item1->setText(QString());
   }
-  QTableWidgetItem* item2 = new QTableWidgetItem;  //   security name for UI
-  item2->setText(name);
   item->setTextAlignment(Qt::AlignLeft);
   item1->setTextAlignment(Qt::AlignLeft);
   m_widget->tableWidget->setRowCount(row + 1);
-  m_widget->tableWidget->setItem(row, 0, item);  //     add items to UI here
-  m_widget->tableWidget->setItem(row, 1, item1);
-  m_widget->tableWidget->setItem(row, 2, item2);
+  m_widget->tableWidget->setItem(row, 0, item);  //     add symbol to UI here
+  m_widget->tableWidget->setItem(row, 1, item1);  //    add 'exists'
+  m_widget->tableWidget->setItem(row, 2, item2);  //    add security name
   m_widget->tableWidget->resizeColumnsToContents();
 }
 
@@ -100,24 +107,55 @@ void SymbolTableDlg::slotRejected()
 
 void SymbolTableDlg::slotItemChanged(QTableWidgetItem* item)
 {
-  if (item->column() < 2) {     //  Only edit names.
-    return;
-  }
-  QString name = item->text();
-  m_selectedItems = m_widget->tableWidget->selectedItems();
+  QString name;
+  QString symbol;
 
-  if (m_selectedItems.count() > 1) {
-    foreach (QTableWidgetItem *  selectItem, m_selectedItems) {
-      selectItem->setText(item->text());
+  switch (item->column()) {
+    case 0:
+      symbol = item->text();  //  Edit the ticker symbol
+      break;
+    case 1:
+      return;
+    case 2:
+      name = item->text();  //    Edit the security name
+      break;
+  }
+
+  m_selectedItems = m_widget->tableWidget->selectedItems();
+  if ((m_selectedItems.count() > 1) && (item->column() == 0)) {  //  Allow multiple selections only in symbol column
+    foreach (QTableWidgetItem *  selectItem, m_selectedItems) {  //  Each item clicked causes a pass through here
+      selectItem->setText(symbol);
     }
   }
-  if (m_selectedItems.count() == 1) {
+  if ((m_selectedItems.count() == 1)  && (!name.isEmpty())) {
     QString symbol = m_widget->tableWidget->item(item->row(), 0)->text();
     for (int i = 0; i < m_widget->tableWidget->rowCount(); i ++) {
-      if (m_widget->tableWidget->item(i, 0)->text() == symbol) {
-        //      ...and edit their names too.
+      //    Look for entry with same symbol as selected item
+      if ((!symbol.isEmpty()) && (m_widget->tableWidget->item(i, 0)->text()) == symbol) {
+        //  and apply the same security name
         m_widget->tableWidget->item(i, 2)->setText(name);
       }
+    }
+  }
+}
+
+void SymbolTableDlg::slotItemClicked(QTableWidgetItem* item)
+{
+  QString symbol;
+  if (item->column() != 0) {
+    //  Only allow single selection of names
+    m_widget->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+    return;
+  }
+  //  Allow several selections in symbol col
+  m_widget->tableWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
+  symbol = item->text();
+  //  Get multiple selections successively
+  m_selectedItems = m_widget->tableWidget->selectedItems();
+  if (m_selectedItems.count() > 1) {
+    //  Copy symbol to selected cells
+    foreach (QTableWidgetItem *  selectItem, m_selectedItems) {
+      selectItem->setText(symbol);
     }
   }
 }
@@ -125,14 +163,23 @@ void SymbolTableDlg::slotItemChanged(QTableWidgetItem* item)
 void SymbolTableDlg::slotEditSecurityCompleted()
 {
   MyMoneyStatement::Security security;
-
-  for (int i = 0; i < m_widget->tableWidget->rowCount(); i++) {
-    QString name = m_widget->tableWidget->item(i, 2)->text();
-
+  //  OK clicked
+  for (int row = 0; row < m_widget->tableWidget->rowCount(); row++) {
+    QString symbol = m_widget->tableWidget->item(row, 0)->text();
+    if (symbol.isEmpty()) {
+      continue;
+    }
+    //  Build list of securities
+    QString name = m_widget->tableWidget->item(row, 2)->text();
     security.m_strName = name;
     m_securityName = name;
-    security.m_strSymbol = m_widget->tableWidget->item(i, 0)->text();
+    security.m_strSymbol = symbol;
     m_csvDialog->m_investProcessing->m_listSecurities << security;
+    QTableWidgetItem *item = new QTableWidgetItem;
+    item->setText(symbol);
+    item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    //  Apply any added symbols to main UI
+    m_csvDialog->ui->tableWidget->setItem(m_csvDialog->m_investProcessing->m_startLine + row - 1, m_csvDialog->m_investProcessing->symbolColumn(), item);
   }
   slotAccepted();
   return;

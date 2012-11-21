@@ -18,7 +18,7 @@
   </property>
   <property name="font">
    <font>
-    <family>Sans Serif</family>
+    <family></family>
    </font>
   </property>
   <property name="windowTitle">
@@ -83,6 +83,11 @@
              </colorrole>
             </disabled>
            </palette>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>9</pointsize>
+           </font>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>

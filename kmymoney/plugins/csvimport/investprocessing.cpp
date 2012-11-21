@@ -1052,7 +1052,6 @@ void InvestProcessing::readFile(const QString& fname)
 
 void InvestProcessing::displayLine(const QString& data)
 {
-  bool ok = true;
   QBrush dropBrush;
   QColor dropColor;
   dropColor.setRgb(255, 0, 127, 100);
@@ -1100,15 +1099,9 @@ void InvestProcessing::displayLine(const QString& data)
     QString txt = (*constIterator);
     QTableWidgetItem *item = new QTableWidgetItem;  //             new item for UI
     item->setText(txt);
-    txt.remove(QRegExp(pattern)).toDouble(&ok);
-    if (ok) {
-      item->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    } else {
-      item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    }
+    m_csvDialog->ui->tableWidget->setItem(m_row, col, item);  //   add items to UI here
     m_csvDialog->ui->tableWidget->setRowCount(m_row + 1);
     m_csvDialog->ui->tableWidget->setRowHeight(m_row, 30);
-    m_csvDialog->ui->tableWidget->setItem(m_row, col, item);  //   add items to UI here
     m_rowWidth += m_csvDialog->ui->tableWidget->columnWidth(col);
     col ++;
   }
@@ -2095,11 +2088,18 @@ void InvestProcessing::redrawWindow(int startLine)
   //  Align numeric column values
   //
   QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(), $]";
+
   for (int row = 0; row < m_csvDialog->ui->tableWidget->rowCount(); row++) {
     m_csvDialog->ui->tableWidget->setRowHeight(row, 30);
     for (int col = 0; col < m_csvDialog->ui->tableWidget->columnCount(); col ++) {
-      if (m_csvDialog->ui->tableWidget->item(row, col) != 0) {
-        QString txt = m_csvDialog->ui->tableWidget->item(row, col)->text();
+      if (m_csvDialog->ui->tableWidget->item(row, col) == 0) {
+        continue;
+      }
+      QString txt = m_csvDialog->ui->tableWidget->item(row, col)->text();
+      if ((m_symbolColumn != -1) && (col == m_symbolColumn)) {
+      //  Symbols could be both alpha and numeric, need to align both same
+        m_csvDialog->ui->tableWidget->item(row, col)->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+      } else {
         txt.remove(QRegExp(pattern)).toDouble(&ok);  //  is this a true numeric?
         if (ok) {
           m_csvDialog->ui->tableWidget->item(row, col)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
