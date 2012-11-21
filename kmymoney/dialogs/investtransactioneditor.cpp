@@ -239,6 +239,14 @@ void InvestTransactionEditor::createEditWidgets(void)
   connect(interest, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(interest->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditInterestSplits()));
 
+  KTagContainer* tag = new KTagContainer;
+  tag->tagCombo()->setClickMessage(i18n("Tag"));
+  tag->tagCombo()->setObjectName(QLatin1String("Tag"));
+  m_editWidgets["tag"] = tag;
+  connect(tag->tagCombo(), SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(tag->tagCombo(), SIGNAL(createItem(QString,QString&)), this, SIGNAL(createTag(QString,QString&)));
+  connect(tag->tagCombo(), SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
+
   KTextEdit* memo = new KTextEdit;
   memo->setTabChangesFocus(true);
   m_editWidgets["memo"] = memo;

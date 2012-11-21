@@ -83,7 +83,10 @@ TransactionEditor::~TransactionEditor()
   // After all, the editor is about to die
 
   //disconnect first tagCombo:
-  dynamic_cast<KTagContainer*>(m_editWidgets["tag"])->tagCombo()->disconnect(this);
+  KTagContainer *w = dynamic_cast<KTagContainer*>(haveWidget("tag"));
+  if (w && w->tagCombo()) {
+    w->tagCombo()->disconnect(this);
+  }
 
   QMap<QString, QWidget*>::iterator it_w;
   for (it_w = m_editWidgets.begin(); it_w != m_editWidgets.end(); ++it_w) {
