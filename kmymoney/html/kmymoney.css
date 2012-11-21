@@ -103,11 +103,11 @@ body#summaryview { /* set body attributes that affect only the summary view (and
 
   .warningtitle { /*<tr> -set warning background color -overdue payments -items of this class also belong to the class called "itemtitle"*/
     color:red;/*set programatically, not by css*/
-    background-color: infobackground;
+    background-color: HighLight;
   }
 
   .warning { /*<tr> -set warning background color -items of this class also belong to the class called "item"*/
-    background-color: infobackground;
+    background-color: HighLight;
   }
 
   th.left, td.left {/*rule to align table header and table data cells*/
