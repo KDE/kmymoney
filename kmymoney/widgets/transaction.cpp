@@ -238,6 +238,12 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
     option.state &= ~QStyle::State_HasFocus;
   }
 
+  if (option.widget && option.widget->hasFocus()) {
+    option.palette.setCurrentColorGroup(QPalette::Active);
+  } else {
+    option.palette.setCurrentColorGroup(QPalette::Inactive);
+  }
+
   if (index.column() == 0) {
     option.viewItemPosition = QStyleOptionViewItemV4::Beginning;
   } else if (index.column() == MaxColumns - 1) {
