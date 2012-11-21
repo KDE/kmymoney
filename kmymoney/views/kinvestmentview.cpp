@@ -71,6 +71,18 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
 {
   setupUi(this);
 
+  // load the header state of the equities list
+  KConfigGroup grp = KGlobal::config()->group("KInvestmentView_Equities");
+  QByteArray columns;
+  columns = grp.readEntry("HeaderState", columns);
+  m_investmentsList->header()->restoreState(columns);
+
+  // load the header state of the securities list
+  grp = KGlobal::config()->group("KInvestmentView_Securities");
+  columns.clear();
+  columns = grp.readEntry("HeaderState", columns);
+  m_securitiesList->header()->restoreState(columns);
+
   //first set up everything for the equities tab
   d->m_filterProxyModel = new AccountNamesFilterProxyModel(this);
   d->m_filterProxyModel->addAccountType(MyMoneyAccount::Investment);
@@ -81,8 +93,6 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
 
   m_investmentsList->setContextMenuPolicy(Qt::CustomContextMenu);
   m_investmentsList->setSortingEnabled(true);
-  //KConfigGroup grp = KGlobal::config()->group("Investment Settings");
-  //m_table->restoreLayout(grp);
 
   for (int i = 0; i < MaxViewTabs; ++i)
     d->m_needReload[i] = false;
@@ -123,8 +133,16 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
 
 KInvestmentView::~KInvestmentView()
 {
-  KConfigGroup grp = KGlobal::config()->group("Investment Settings");
-  //m_table->saveLayout(grp);
+  // save the header state of the equities list
+  KConfigGroup grp = KGlobal::config()->group("KInvestmentView_Equities");
+  QByteArray columns = m_investmentsList->header()->saveState();
+  grp.writeEntry("HeaderState", columns);
+
+  // save the header state of the securities list
+  grp = KGlobal::config()->group("KInvestmentView_Securities");
+  columns = m_securitiesList->header()->saveState();
+  grp.writeEntry("HeaderState", columns);
+
   delete d;
 }
 
@@ -357,12 +375,6 @@ void KInvestmentView::loadInvestmentTab(void)
     delete e;
   }
 
-  //resize the column width
-  m_investmentsList->resizeColumnToContents(0);
-  m_investmentsList->resizeColumnToContents(1);
-  m_investmentsList->resizeColumnToContents(2);
-  m_investmentsList->resizeColumnToContents(3);
-
   // and tell everyone what's selected
   emit accountSelected(d->m_account);
 }
@@ -448,14 +460,6 @@ void KInvestmentView::loadSecuritiesList(void)
 
   }
   m_securitiesList->setSortingEnabled(true);
-
-  //resize column width
-  m_securitiesList->resizeColumnToContents(1);
-  m_securitiesList->resizeColumnToContents(2);
-  m_securitiesList->resizeColumnToContents(3);
-  m_securitiesList->resizeColumnToContents(4);
-  m_securitiesList->resizeColumnToContents(5);
-  m_securitiesList->resizeColumnToContents(6);
 
   slotUpdateSecuritiesButtons();
 }
