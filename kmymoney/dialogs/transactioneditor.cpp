@@ -1803,6 +1803,7 @@ bool StdTransactionEditor::isComplete(QString& reason) const
 
   for (it_w = m_editWidgets.begin(); it_w != m_editWidgets.end(); ++it_w) {
     KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it_w);
+    KTagContainer* tagContainer = dynamic_cast<KTagContainer*>(*it_w);
     KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(*it_w);
     kMyMoneyEdit* amount = dynamic_cast<kMyMoneyEdit*>(*it_w);
     KMyMoneyReconcileCombo* reconcile = dynamic_cast<KMyMoneyReconcileCombo*>(*it_w);
@@ -1810,6 +1811,9 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     KTextEdit* memo = dynamic_cast<KTextEdit*>(*it_w);
 
     if (payee && !(payee->currentText().isEmpty()))
+      break;
+
+    if (tagContainer && !(tagContainer->selectedTags().isEmpty()))
       break;
 
     if (category && !category->lineEdit()->text().isEmpty())
@@ -1944,8 +1948,8 @@ int StdTransactionEditor::slotEditSplits(void)
       delete dlg;
     }
 
-    // focus jumps into the memo field
-    if ((w = haveWidget("memo")) != 0) {
+    // focus jumps into the tag field
+    if ((w = haveWidget("tag")) != 0) {
       w->setFocus();
     }
 

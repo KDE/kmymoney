@@ -37,6 +37,7 @@
 #include <kdebug.h>
 #include <klineedit.h>
 #include <KIconLoader>
+#include <kmessagebox.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -249,21 +250,8 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
         }
       }
 
-      if (!contains(currentText())) {
-        QString id;
-        // annouce that we go into a possible dialog to create an object
-        // This can be used by upstream widgets to disable filters etc.
-        emit objectCreation(true);
-
-        emit createItem(currentText(), id);
-
-        // Announce that we return from object creation
-        emit objectCreation(false);
-
-        // update the field to a possibly created object
-        m_id = id;
-        setCurrentTextById(id);
-      }
+      //check if the current text is contained in the internal list, if not ask the user if want to create a new item.
+      checkCurrentText();
 
       // else if we cannot create objects, and the current text is not
       // in the list, then we clear the text and the selection.
@@ -291,6 +279,25 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
   d->m_inFocusOutEvent = false;
   // This is used only be KMyMoneyTagCombo at this time
   emit lostFocus();
+}
+
+void KMyMoneyMVCCombo::checkCurrentText(void)
+{
+  if (!contains(currentText())) {
+    QString id;
+    // annouce that we go into a possible dialog to create an object
+    // This can be used by upstream widgets to disable filters etc.
+    emit objectCreation(true);
+
+    emit createItem(currentText(), id);
+
+    // Announce that we return from object creation
+    emit objectCreation(false);
+
+    // update the field to a possibly created object
+    m_id = id;
+    setCurrentTextById(id);
+  }
 }
 
 void KMyMoneyMVCCombo::setCurrentTextById(const QString& id)
@@ -356,6 +363,10 @@ void KMyMoneyTagCombo::loadTags(const QList<MyMoneyTag>& list)
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
     if (!(*it).isClosed())
       addItem((*it).name(), QVariant((*it).id()));
+    else {
+      m_closedIdList.append((*it).id());
+      m_closedTagNameList.append((*it).name());
+    }
   }
 
   //sort the model, which will sort the list in the combo
@@ -366,12 +377,45 @@ void KMyMoneyTagCombo::loadTags(const QList<MyMoneyTag>& list)
   clearEditText();
 }
 
-void KMyMoneyTagCombo::setUsedTagList(QList<QString>& usedIdList)
+void KMyMoneyTagCombo::setUsedTagList(QList<QString>& usedIdList, QList<QString>& usedTagNameList)
 {
   m_usedIdList = usedIdList;
+  m_usedTagNameList = usedTagNameList;
   for (int i = 0; i < m_usedIdList.size(); ++i) {
     int index = findData(QVariant(m_usedIdList.at(i)), Qt::UserRole, Qt::MatchExactly);
     if (index != -1) removeItem(index);
+  }
+}
+
+void KMyMoneyTagCombo::checkCurrentText(void)
+{
+  if (!contains(currentText())) {
+    if (m_closedTagNameList.contains(currentText())) {
+      // Tell the user what's happened
+      QString msg = QString("<qt>") + i18n("Closed tags can't be used.") + QString("</qt>");
+      KMessageBox::information(this, msg, i18n("Closed tag"), "Closed tag");
+      setCurrentText();
+      return;
+    } else if (m_usedTagNameList.contains(currentText())) {
+      // Tell the user what's happened
+      QString msg = QString("<qt>") + i18n("The tag is already present.") + QString("</qt>");
+      KMessageBox::information(this, msg, i18n("Duplicate tag"), "Duplicate tag");
+      setCurrentText();
+      return;
+    }
+    QString id;
+    // annouce that we go into a possible dialog to create an object
+    // This can be used by upstream widgets to disable filters etc.
+    emit objectCreation(true);
+
+    emit createItem(currentText(), id);
+
+    // Announce that we return from object creation
+    emit objectCreation(false);
+
+    // update the field to a possibly created object
+    //m_id = id;
+    setCurrentTextById(id);
   }
 }
 
@@ -425,10 +469,11 @@ void KTagContainer::addTagWidget(const QString& id)
   KTagLabel *t = new KTagLabel(id, tagName, this);
   connect(t, SIGNAL(clicked(bool)), this, SLOT(slotRemoveTagWidget()));
   m_tagLabelList.append(t);
+  m_tagNameList.append(tagName);
   m_tagIdList.append(id);
   this->layout()->addWidget(t);
   m_tagCombo->loadTags(m_list);
-  m_tagCombo->setUsedTagList(m_tagIdList);
+  m_tagCombo->setUsedTagList(m_tagIdList, m_tagNameList);
   m_tagCombo->setCurrentIndex(0);
   m_tagCombo->setFocus();
 }
@@ -436,10 +481,11 @@ void KTagContainer::addTagWidget(const QString& id)
 void KTagContainer::RemoveAllTagWidgets(void)
 {
   m_tagIdList.clear();
+  m_tagNameList.clear();
   while (!m_tagLabelList.isEmpty())
     delete m_tagLabelList.takeLast();
   m_tagCombo->loadTags(m_list);
-  m_tagCombo->setUsedTagList(m_tagIdList);
+  m_tagCombo->setUsedTagList(m_tagIdList, m_tagNameList);
   m_tagCombo->setCurrentIndex(0);
 }
 
@@ -455,9 +501,10 @@ void KTagContainer::slotRemoveTagWidget(void)
   int index = m_tagLabelList.indexOf(t);
   m_tagLabelList.removeAt(index);
   m_tagIdList.removeAt(index);
+  m_tagNameList.removeAt(index);
   delete t;
   m_tagCombo->loadTags(m_list);
-  m_tagCombo->setUsedTagList(m_tagIdList);
+  m_tagCombo->setUsedTagList(m_tagIdList, m_tagNameList);
   m_tagCombo->setCurrentIndex(0);
 }
 

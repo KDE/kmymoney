@@ -29,6 +29,7 @@
 #include <QHeaderView>
 #include <QApplication>
 #include <QTextDocument>
+#include <QAbstractTextDocumentLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -332,15 +333,17 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
     if (m_transaction != MyMoneyTransaction() && !m_inRegisterEdit) {
       registerCellText(txt, align, index.row() - startRow(), index.column(), painter);
     }
-    // adjust the text rectangle to obtain a reasonable spacing between the text and the grid
 
-    // use the QTextDocument to draw the rich text contents
     QTextDocument document;
     document.setDocumentMargin(2);
-    txt = "<span style='color:" + option.palette.color(m_selected ? QPalette::HighlightedText : QPalette::Text).name() + "'>" + txt + "</span>";
     document.setHtml(txt);
     painter->translate(option.rect.topLeft());
-    document.drawContents(painter);
+    QAbstractTextDocumentLayout::PaintContext ctx;
+    ctx.palette = option.palette;
+    // Highlighting text if item is selected
+    if (m_selected)
+      ctx.palette.setColor(QPalette::Text, option.palette.color(QPalette::HighlightedText));
+    document.documentLayout()->draw(painter, ctx);
     painter->translate(-option.rect.topLeft());
 
     // draw the grid if it's needed

@@ -114,6 +114,11 @@ protected:
   void focusOutEvent(QFocusEvent*);
 
   /**
+   * check if the current text is contained in the internal list, if not ask the user if want to create a new item.
+   */
+  virtual void checkCurrentText(void);
+
+  /**
     * set the widgets text area based on the item with the given @a id.
     */
   virtual void setCurrentTextById(const QString& id);
@@ -196,12 +201,21 @@ public:
 
   void loadTags(const QList<MyMoneyTag>& list);
   /** ids in usedIdList are escluded from the internal list
-   * you should call loadTags before calling setUsedTagList because it doesn't readd
-   * tag removed in previous call*/
-  void setUsedTagList(QList<QString>& usedIdList);
+    * you should call loadTags before calling setUsedTagList because it doesn't readd
+    * tag removed in previous call*/
+  void setUsedTagList(QList<QString>& usedIdList, QList<QString>& usedTagNameList);
+
+protected:
+  /**
+    * check if the current text is contained in the internal list, if not ask the user if want to create a new item.
+    */
+  virtual void checkCurrentText(void);
 
 private:
   QList<QString> m_usedIdList;
+  QList<QString> m_usedTagNameList;
+  QList<QString> m_closedIdList;
+  QList<QString> m_closedTagNameList;
 };
 
 /**
@@ -252,6 +266,8 @@ private:
   KMyMoneyTagCombo *m_tagCombo;
   QList<KTagLabel*> m_tagLabelList;
   QList<QString> m_tagIdList;
+  QList<QString> m_tagNameList;
+
   // A local cache of the list of all Tags, it's updated when loadTags is called
   QList<MyMoneyTag> m_list;
 };
