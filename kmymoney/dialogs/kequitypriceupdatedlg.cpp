@@ -69,6 +69,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   headerList << i18n("Symbol") << i18nc("Equity name", "Name")
   << i18n("Price") << i18n("Date");
 
+  lvEquityList->header()->setSortIndicator(0, Qt::AscendingOrder);
   lvEquityList->setColumnWidth(NAME_COL, 125);
 
   // This is a "get it up and running" hack.  Will replace this in the future.

@@ -60,6 +60,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
   m_listLayout->insertWidget(0, m_searchWidget);
 
+  m_priceList->header()->setSortIndicator(0, Qt::AscendingOrder);
   m_priceList->header()->setStretchLastSection(true);
   m_priceList->setContextMenuPolicy(Qt::CustomContextMenu);
 
