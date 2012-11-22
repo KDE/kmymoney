@@ -219,7 +219,8 @@ void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
 
 void KOfxDirectConnectDlg::reject(void)
 {
-  m_job->kill();
+  if (m_job)
+    m_job->kill();
   if (m_tmpfile) {
     m_tmpfile->close();
     delete m_tmpfile;
