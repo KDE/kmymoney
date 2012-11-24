@@ -753,7 +753,16 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     d->m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
     d->m_html += "<tr class=\"item\"><td class=\"left\" width=\"35%\">";
     d->m_html += i18n("Account");
-    d->m_html += "</td><td width=\"25%\" class=\"right\">";
+    d->m_html += "</td>";
+
+    if(KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts())
+    {
+      QString pathStatusHeader;
+      KIconLoader::global()->loadIcon(QString("online-banking"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathStatusHeader);
+      d->m_html += QString("<td class=\"setcolor\"><img src=\"%1\" border=\"0\"></td>").arg(pathStatusHeader);
+    }
+
+    d->m_html += "<td width=\"25%\" class=\"right\">";
     d->m_html += i18n("Current Balance");
     d->m_html += "</td>";
     //only show limit info if user chose to do so
@@ -773,7 +782,9 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     }
     d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
     QString amount = d->m_total.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-    d->m_html += QString("<td class=\"right\"><b>%1</b></td><td class=\"right\"><b>%2</b></td></tr>").arg(i18n("Total"), showColoredAmount(amount, d->m_total.isNegative()));
+    d->m_html += QString("<td class=\"right\"><b>%1</b></td>").arg(i18n("Total"));
+    if (KMyMoneyGlobalSettings::showLimitInfo()) d->m_html += "<td></td>";
+    d->m_html += QString("<td class=\"right\"><b>%1</b></td></tr>").arg(showColoredAmount(amount, d->m_total.isNegative()));
     d->m_html += "</table></div></div>";
   }
 }
@@ -840,6 +851,24 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
 
   tmp = QString("<td>") +
         link(VIEW_LEDGER, QString("?id=%1").arg(acc.id())) + acc.name() + linkend() + "</td>";
+
+
+  QString tmp_os, pathOK, pathNotOK;
+  if(KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts())
+  {
+    //show account's online-status
+    KIconLoader::global()->loadIcon(QString("dialog-ok-apply"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathOK);
+    KIconLoader::global()->loadIcon(QString("dialog-cancel"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathNotOK);
+
+    if(acc.value("lastImportedTransactionDate").isEmpty()	|| acc.value("lastStatementBalance").isEmpty())
+      tmp_os="-";
+    else if(file->hasMatchingOnlineBalance(acc))
+      tmp_os=QString("<img src=\"%1\" border=\"0\">").arg(pathOK);
+    else
+      tmp_os=QString("<img src=\"%1\" border=\"0\">").arg(pathNotOK);
+
+    tmp += QString("<td class=\"center\">%1</td>").arg(tmp_os);
+  }
 
   //show account balance
   tmp += QString("<td class=\"right\">%1</td>").arg(showColoredAmount(amount, value.isNegative()));
@@ -1218,6 +1247,14 @@ void KHomeView::showAssetsLiabilities(void)
 
   //only do it if we have assets or liabilities account
   if (nameAssetsIdx.count() > 0 || nameLiabilitiesIdx.count() > 0) {
+    QString statusHeader;
+    if(KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts())
+    {
+      QString pathStatusHeader;
+      KIconLoader::global()->loadIcon(QString("online-banking"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathStatusHeader);
+      statusHeader=QString("<img src=\"%1\" border=\"0\">").arg(pathStatusHeader);
+    }
+
     //print header
     d->m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Assets and Liabilities Summary") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
     d->m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
@@ -1225,6 +1262,11 @@ void KHomeView::showAssetsLiabilities(void)
     d->m_html += "<tr class=\"item\"><td class=\"left\" width=\"30%\">";
     d->m_html += i18n("Asset Accounts");
     d->m_html += "</td>";
+    if(KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
+      d->m_html += "<td class=\"setcolor\">";
+      d->m_html += statusHeader;
+      d->m_html += "</td>";
+    }
     d->m_html += "<td width=\"15%\" class=\"right\">";
     d->m_html += i18n("Current Balance");
     d->m_html += "</td>";
@@ -1233,9 +1275,17 @@ void KHomeView::showAssetsLiabilities(void)
     d->m_html += "<td class=\"left\" width=\"30%\">";
     d->m_html += i18n("Liability Accounts");
     d->m_html += "</td>";
+    if(KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
+      d->m_html += "<td class=\"setcolor\">";
+      d->m_html += statusHeader;
+      d->m_html += "</td>";
+    }
     d->m_html += "<td width=\"15%\" class=\"right\">";
     d->m_html += i18n("Current Balance");
     d->m_html += "</td></tr>";
+
+    QString tmp_os;
+    if(KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) tmp_os="<td></td>";
 
     //get asset and liability accounts
     QMap<QString, MyMoneyAccount>::const_iterator asset_it = nameAssetsIdx.constBegin();
@@ -1267,7 +1317,7 @@ void KHomeView::showAssetsLiabilities(void)
         ++asset_it;
       } else {
         //write a white space if we don't
-        d->m_html += "<td></td><td></td>";
+        d->m_html += QString("<td></td>%1<td></td>").arg(tmp_os);
       }
 
       //leave the intermediate column empty
@@ -1292,7 +1342,7 @@ void KHomeView::showAssetsLiabilities(void)
         ++liabilities_it;
       } else {
         //leave the space empty if we run out of liabilities
-        d->m_html += "<td></td><td></td>";
+        d->m_html += QString("<td></td>%1<td></td>").arg(tmp_os);
       }
       d->m_html += "</tr>";
     }
@@ -1311,20 +1361,20 @@ void KHomeView::showAssetsLiabilities(void)
     d->m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
 
     //print total for assets
-    d->m_html += QString("<td class=\"left\">%1</td><td align=\"right\">%2</td>").arg(i18n("Total Assets")).arg(showColoredAmount(amountAssets, netAssets.isNegative()));
+    d->m_html += QString("<td class=\"left\">%1</td>%2<td align=\"right\">%3</td>").arg(i18n("Total Assets")).arg(tmp_os).arg(showColoredAmount(amountAssets, netAssets.isNegative()));
 
     //leave the intermediate column empty
     d->m_html += "<td class=\"setcolor\"></td>";
 
     //print total liabilities
-    d->m_html += QString("<td class=\"left\">%1</td><td align=\"right\">%2</td>").arg(i18n("Total Liabilities")).arg(showColoredAmount(amountLiabilities, netLiabilities.isNegative()));
+    d->m_html += QString("<td class=\"left\">%1</td>%2<td align=\"right\">%3</td>").arg(i18n("Total Liabilities")).arg(tmp_os).arg(showColoredAmount(amountLiabilities, netLiabilities.isNegative()));
     d->m_html += "</tr>";
 
     //print net worth
     d->m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
 
-    d->m_html += "<td></td><td></td><td class=\"setcolor\"></td>";
-    d->m_html += QString("<td class=\"left\">%1</td><td align=\"right\">%2</td>").arg(i18n("Net Worth")).arg(showColoredAmount(amountNetWorth, netWorth.isNegative()));
+    d->m_html += QString("<td></td><td></td>%1<td class=\"setcolor\"></td>").arg(tmp_os);
+    d->m_html += QString("<td class=\"left\">%1</td>%2<td align=\"right\">%3</td>").arg(i18n("Net Worth")).arg(tmp_os).arg(showColoredAmount(amountNetWorth, netWorth.isNegative()));
 
     d->m_html += "</tr>";
     d->m_html += "</table>";

@@ -175,6 +175,10 @@
    <label>Show account limit information on the Homepage</label>
    <default>true</default>
   </entry>
+  <entry name="ShowBalanceStatusOfOnlineAccounts" type="Bool">
+   <label>Show balance-status of mapped online accounts on the Homepage</label>
+   <default>false</default>
+  </entry>
  </group>
  <group name="List Options">
   <entry name="HideUnusedCategory" type="Bool">
