@@ -208,14 +208,9 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
   if (m_matchingEnabled) {
     m_usingMatchKey = (type == matchKey);
     if (m_usingMatchKey) {
-      m_matchKey = keys.join(";");
-      QRegExp exp("^;*([^;].*[^;]);*$");
-      if (exp.indexIn(m_matchKey) != -1) {
-        m_matchKey = exp.cap(1);
-      }
-      while (m_matchKey.contains(QLatin1String(";;"))) {
-        m_matchKey.replace(QLatin1String(";;"), QLatin1String(";"));
-      }
+      QRegExp validKeyRegExp("[^ ]");
+      QStringList filteredKeys = keys.filter(validKeyRegExp);
+      m_matchKey = filteredKeys.join(";");
     }
   }
 }

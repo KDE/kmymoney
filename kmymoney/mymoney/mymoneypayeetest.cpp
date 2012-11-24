@@ -143,5 +143,55 @@ void MyMoneyPayeeTest::testEmptyMatchKeyMix()
   QVERIFY(keys == QLatin1String("test1;test2"));
 }
 
+void MyMoneyPayeeTest::testMatchKeyDisallowSingleSpace()
+{
+  MyMoneyPayee payee;
+  QString keys;
+  bool ignoreCase;
+
+  payee.setMatchData(MyMoneyPayee::matchKey, false, " ");
+  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  QVERIFY(ignoreCase == false);
+  QVERIFY(keys == QLatin1String(""));
+}
+
+void MyMoneyPayeeTest::testMatchKeyDisallowMultipleSpace()
+{
+  MyMoneyPayee payee;
+  QString keys;
+  bool ignoreCase;
+
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "  ");
+  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  QVERIFY(ignoreCase == false);
+  QVERIFY(keys == QLatin1String(""));
+}
+
+void MyMoneyPayeeTest::testMatchKeyAllowSpaceAtStart()
+{
+  MyMoneyPayee payee;
+  QString keys;
+  bool ignoreCase;
+
+  payee.setMatchData(MyMoneyPayee::matchKey, false, " payee");
+  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  QVERIFY(ignoreCase == false);
+  QVERIFY(keys == QLatin1String(" payee"));
+}
+
+void MyMoneyPayeeTest::testMatchKeyAllowSpaceAtEnd()
+{
+  MyMoneyPayee payee;
+  QString keys;
+  bool ignoreCase;
+
+  payee.setMatchData(MyMoneyPayee::matchKey, false, "payee ");
+  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  QVERIFY(ignoreCase == false);
+  QVERIFY(keys == QLatin1String("payee "));
+}
+
+
+
 #include "mymoneypayeetest.moc"
 

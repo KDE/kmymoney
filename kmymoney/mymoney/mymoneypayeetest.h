@@ -26,6 +26,10 @@ private slots:
   void testEmptyMatchKeyEnd();
   void testEmptyMatchKeyMiddle();
   void testEmptyMatchKeyMix();
+  void testMatchKeyDisallowSingleSpace();
+  void testMatchKeyDisallowMultipleSpace();
+  void testMatchKeyAllowSpaceAtStart();
+  void testMatchKeyAllowSpaceAtEnd();
 };
 
 #endif
