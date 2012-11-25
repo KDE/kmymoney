@@ -205,10 +205,18 @@ void MyMoneyReport::validDateRange(QDate& _db, QDate& _de)
 
     if (!list.isEmpty()) {
       qSort(list);
+      // try to use the post dates
       tmpBegin = list.front().postDate();
       tmpEnd = list.back().postDate();
-    } else {
-      tmpBegin = QDate(QDate::currentDate().year(), 1, 1);    // the first date in the file
+      // if the post dates are not valid try the entry dates
+      if (!tmpBegin.isValid())
+        tmpBegin = list.front().entryDate();
+      if (!tmpEnd.isValid())
+        tmpEnd = list.back().entryDate();
+    }
+    // make sure that we leave this function with valid dates no mather what
+    if (!tmpBegin.isValid() || !tmpEnd.isValid() || tmpBegin > tmpEnd) {
+      tmpBegin = QDate(QDate::currentDate().year(), 1, 1);   // the first date in the file
       tmpEnd = QDate(QDate::currentDate().year(), 12, 31);   // the last date in the file
     }
     if (!_db.isValid())

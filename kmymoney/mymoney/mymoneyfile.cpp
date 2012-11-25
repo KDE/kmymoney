@@ -34,6 +34,7 @@
 
 #include <kdebug.h>
 #include <klocale.h>
+#include <kglobal.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -2001,6 +2002,16 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         t.modifySplit(s);
       }
     }
+
+    // make sure that the transaction's post date is valid
+    if (!t.postDate().isValid()) {
+      tChanged = true;
+      t.setPostDate(t.entryDate().isValid() ? t.entryDate() : QDate::currentDate());
+      rc << i18n("  * Transaction '%1' has an invalid post date.", t.id());
+      rc << i18n("    The post date was updated to '%1'.", KGlobal::locale()->formatDate(t.postDate(), KLocale::ShortDate));
+      ++problemCount;
+    }
+
     if (tChanged) {
       d->m_storage->modifyTransaction(t);
     }
