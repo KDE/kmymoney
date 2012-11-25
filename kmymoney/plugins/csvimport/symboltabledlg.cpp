@@ -123,7 +123,7 @@ void SymbolTableDlg::slotItemChanged(QTableWidgetItem* item)
 
   m_selectedItems = m_widget->tableWidget->selectedItems();
   if ((m_selectedItems.count() > 1) && (item->column() == 0)) {  //  Allow multiple selections only in symbol column
-    foreach (QTableWidgetItem *  selectItem, m_selectedItems) {  //  Each item clicked causes a pass through here
+    foreach (QTableWidgetItem *  selectItem, m_selectedItems) {   //  Each item clicked causes a pass through here
       selectItem->setText(symbol);
     }
   }

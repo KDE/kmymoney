@@ -755,8 +755,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     d->m_html += i18n("Account");
     d->m_html += "</td>";
 
-    if(KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts())
-    {
+    if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
       QString pathStatusHeader;
       KIconLoader::global()->loadIcon(QString("online-banking"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathStatusHeader);
       d->m_html += QString("<td class=\"setcolor\"><img src=\"%1\" border=\"0\"></td>").arg(pathStatusHeader);
@@ -854,18 +853,17 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
 
 
   QString tmp_os, pathOK, pathNotOK;
-  if(KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts())
-  {
+  if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
     //show account's online-status
     KIconLoader::global()->loadIcon(QString("dialog-ok-apply"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathOK);
     KIconLoader::global()->loadIcon(QString("dialog-cancel"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathNotOK);
 
-    if(acc.value("lastImportedTransactionDate").isEmpty()	|| acc.value("lastStatementBalance").isEmpty())
-      tmp_os="-";
-    else if(file->hasMatchingOnlineBalance(acc))
-      tmp_os=QString("<img src=\"%1\" border=\"0\">").arg(pathOK);
+    if (acc.value("lastImportedTransactionDate").isEmpty() || acc.value("lastStatementBalance").isEmpty())
+      tmp_os = "-";
+    else if (file->hasMatchingOnlineBalance(acc))
+      tmp_os = QString("<img src=\"%1\" border=\"0\">").arg(pathOK);
     else
-      tmp_os=QString("<img src=\"%1\" border=\"0\">").arg(pathNotOK);
+      tmp_os = QString("<img src=\"%1\" border=\"0\">").arg(pathNotOK);
 
     tmp += QString("<td class=\"center\">%1</td>").arg(tmp_os);
   }
@@ -1248,11 +1246,10 @@ void KHomeView::showAssetsLiabilities(void)
   //only do it if we have assets or liabilities account
   if (nameAssetsIdx.count() > 0 || nameLiabilitiesIdx.count() > 0) {
     QString statusHeader;
-    if(KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts())
-    {
+    if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
       QString pathStatusHeader;
       KIconLoader::global()->loadIcon(QString("online-banking"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathStatusHeader);
-      statusHeader=QString("<img src=\"%1\" border=\"0\">").arg(pathStatusHeader);
+      statusHeader = QString("<img src=\"%1\" border=\"0\">").arg(pathStatusHeader);
     }
 
     //print header
@@ -1262,7 +1259,7 @@ void KHomeView::showAssetsLiabilities(void)
     d->m_html += "<tr class=\"item\"><td class=\"left\" width=\"30%\">";
     d->m_html += i18n("Asset Accounts");
     d->m_html += "</td>";
-    if(KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
+    if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
       d->m_html += "<td class=\"setcolor\">";
       d->m_html += statusHeader;
       d->m_html += "</td>";
@@ -1275,7 +1272,7 @@ void KHomeView::showAssetsLiabilities(void)
     d->m_html += "<td class=\"left\" width=\"30%\">";
     d->m_html += i18n("Liability Accounts");
     d->m_html += "</td>";
-    if(KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
+    if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
       d->m_html += "<td class=\"setcolor\">";
       d->m_html += statusHeader;
       d->m_html += "</td>";
@@ -1285,7 +1282,7 @@ void KHomeView::showAssetsLiabilities(void)
     d->m_html += "</td></tr>";
 
     QString tmp_os;
-    if(KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) tmp_os="<td></td>";
+    if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) tmp_os = "<td></td>";
 
     //get asset and liability accounts
     QMap<QString, MyMoneyAccount>::const_iterator asset_it = nameAssetsIdx.constBegin();

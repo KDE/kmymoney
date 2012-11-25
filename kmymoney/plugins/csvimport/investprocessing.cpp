@@ -2097,7 +2097,7 @@ void InvestProcessing::redrawWindow(int startLine)
       }
       QString txt = m_csvDialog->ui->tableWidget->item(row, col)->text();
       if ((m_symbolColumn != -1) && (col == m_symbolColumn)) {
-      //  Symbols could be both alpha and numeric, need to align both same
+        //  Symbols could be both alpha and numeric, need to align both same
         m_csvDialog->ui->tableWidget->item(row, col)->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
       } else {
         txt.remove(QRegExp(pattern)).toDouble(&ok);  //  is this a true numeric?
