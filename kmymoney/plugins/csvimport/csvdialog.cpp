@@ -1127,7 +1127,7 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
 
     else if ((m_columnTypeList[i] == "debit") || (m_columnTypeList[i] == "credit")) {      //  Credit or debit?
       ++neededFieldsCount;
-      txt = m_columnList[i];
+      txt = m_columnList[i].trimmed();  //                     A field of blanks is not good...
 
       if ((!txt.isEmpty()) && ((i == m_debitColumn))) {
         txt = '-' + txt;  //                                   Mark as -ve

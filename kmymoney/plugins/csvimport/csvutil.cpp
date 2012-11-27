@@ -241,8 +241,10 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
   m_symbolFound = false;
   m_invalidConversion = false;
 
-  if (str.isEmpty()) return str;
-  QString txt = str.trimmed();//                 don't want trailing blanks
+  if (str.trimmed().isEmpty()) {
+    return str;  //                            don't want trailing or all blanks
+  }
+  QString txt = str;
   if (txt.contains('(')) {     //              "(" or "Af" = debit
     txt = txt.remove(QRegExp("[()]"));
     txt = '-' + txt;
@@ -253,7 +255,7 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
 
   //  Check if this col/cell contains decimal symbol
 
-  if (decimalIndex == -1) {     //                     selected decimal not found
+  if (decimalIndex == -1) {     //             selected decimal not found
     m_symbolFound = false;
     if ((thouIndex == -1) || (thouIndex == length - 4))  {      //no separator || correct format
       txt.remove(m_thousandsSeparator);
