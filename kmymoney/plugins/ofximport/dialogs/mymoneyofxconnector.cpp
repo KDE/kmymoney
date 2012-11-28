@@ -41,6 +41,7 @@
 #include <kcombobox.h>
 #include <kpassworddialog.h>
 #include <KWallet/Wallet>
+#include <KMainWindow>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -170,13 +171,8 @@ QString MyMoneyOfxConnector::password(void) const
   QString key = OFX_PASSWORD_KEY(m_fiSettings.value("url"), m_fiSettings.value("uniqueId"));
   QString pwd = m_fiSettings.value("password");
 
-  // make sure, we have a reference to an active window, otherwise use 0 as ID
-  WId winId = 0;
-  if (qApp->activeWindow())
-    winId = qApp->activeWindow()->winId();
-
   // now check for the wallet
-  Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), winId, Wallet::Synchronous);
+  Wallet *wallet = openSynchronousWallet();
   if (wallet
       && !Wallet::keyDoesNotExist(Wallet::NetworkWallet(), Wallet::PasswordFolder(), key)) {
     wallet->setFolder(Wallet::PasswordFolder());
@@ -763,3 +759,39 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentTransaction(const MyMone
   return Tag("ERROR").element("DETAILS", "This transaction contains an unsupported action type");
 }
 #endif
+
+KWallet::Wallet *openSynchronousWallet()
+{
+  using KWallet::Wallet;
+
+  // first handle the simple case in which we already use the wallet but need the object again in
+  // this case the wallet access permission dialog will no longer appear so we don't need to pass
+  // a valid window id or do anything special since the function call should return immediately
+  const bool alreadyUsingTheWallet = Wallet::users(Wallet::NetworkWallet()).contains("KMyMoney");
+  if (alreadyUsingTheWallet) {
+    return Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
+  }
+
+  // search for a suitable parent for the wallet than needs to be deactivated while the
+  // wallet access permission dialog is not dismissed with either accept or reject
+  KWallet::Wallet *wallet = 0;
+  QWidget *parentWidgetForWallet = 0;
+  if (qApp->activeModalWidget()) {
+    parentWidgetForWallet = qApp->activeModalWidget();
+  } else if (qApp->activeWindow()) {
+    parentWidgetForWallet = qApp->activeWindow();
+  } else {
+    QList<KMainWindow *> mainWindowList = KMainWindow::memberList();
+    if (!mainWindowList.isEmpty())
+      parentWidgetForWallet = mainWindowList.front();
+  }
+  // only open the wallet synchronously if we have a valid parent otherwise crashes could occur
+  if (parentWidgetForWallet) {
+    // while the wallet is being opened disable the widget to prevent input processing
+    const bool enabled = parentWidgetForWallet->isEnabled();
+    parentWidgetForWallet->setEnabled(false);
+    wallet = Wallet::openWallet(Wallet::NetworkWallet(), parentWidgetForWallet->winId(), Wallet::Synchronous);
+    parentWidgetForWallet->setEnabled(enabled);
+  }
+  return wallet;
+}

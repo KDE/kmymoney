@@ -70,7 +70,7 @@ public:
   QStringList m_warnings;
   QStringList m_errors;
   KOnlineBankingStatus* m_statusDlg;
-  Wallet  *m_wallet;
+  Wallet *m_wallet;
 };
 
 
@@ -632,7 +632,7 @@ MyMoneyKeyValueContainer OfxImporterPlugin::onlineBankingSettings(const MyMoneyK
     kvp.deletePair("kmmofx-headerVersion");
     kvp.deletePair("password");
 
-    d->m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), d->m_statusDlg->winId(), Wallet::Synchronous);
+    d->m_wallet = openSynchronousWallet();
     if (d->m_wallet && (d->m_wallet->hasFolder(KWallet::Wallet::PasswordFolder()) ||
                         d->m_wallet->createFolder(KWallet::Wallet::PasswordFolder())) &&
         d->m_wallet->setFolder(KWallet::Wallet::PasswordFolder())) {

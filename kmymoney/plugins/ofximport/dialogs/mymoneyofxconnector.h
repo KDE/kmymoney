@@ -121,4 +121,11 @@ private:
   MyMoneyKeyValueContainer m_fiSettings;
 };
 
+// open a synchronous wallet in a safe way (the function is here because the wallet is only used in the OFX plugin)
+namespace KWallet
+{
+  class Wallet;
+}
+KWallet::Wallet *openSynchronousWallet();
+
 #endif // OFXCONNECTOR_H

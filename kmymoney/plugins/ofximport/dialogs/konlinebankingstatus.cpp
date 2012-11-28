@@ -104,7 +104,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
   if (Wallet::keyDoesNotExist(Wallet::NetworkWallet(), Wallet::PasswordFolder(), key)) {
     pwd = settings.value("password");
   } else {
-    Wallet *wallet = Wallet::openWallet(Wallet::NetworkWallet(), qApp->activeWindow()->winId(), Wallet::Synchronous);
+    Wallet *wallet = openSynchronousWallet();
     if (wallet) {
       wallet->setFolder(Wallet::PasswordFolder());
       wallet->readPassword(key, pwd);
