@@ -3485,6 +3485,10 @@ void KMyMoneyApp::slotAccountEdit(void)
             category = true;
             break;
         }
+
+        // set a status message so that the application can't be closed until the editing is done
+        slotStatusMsg(caption);
+
         QString tid = file->openingBalanceTransaction(d->m_selectedAccount);
         MyMoneyTransaction t;
         MyMoneySplit s0, s1;
@@ -3574,6 +3578,7 @@ void KMyMoneyApp::slotAccountEdit(void)
         }
 
         delete dlg;
+        ready();
       } else {
         QPointer<KEditLoanWizard> wizard = new KEditLoanWizard(d->m_selectedAccount);
         connect(wizard, SIGNAL(newCategory(MyMoneyAccount&)), this, SLOT(slotCategoryNew(MyMoneyAccount&)));
