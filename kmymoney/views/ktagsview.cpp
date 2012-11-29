@@ -294,6 +294,7 @@ void KTagsView::selectedTags(QList<MyMoneyTag>& tagsList) const
 void KTagsView::slotSelectTag(QListWidgetItem* cur, QListWidgetItem* prev)
 {
   Q_UNUSED(cur);
+  Q_UNUSED(prev);
 
   m_allowEditing = false;
 }

@@ -369,6 +369,7 @@ void KPayeesView::selectedPayees(QList<MyMoneyPayee>& payeesList) const
 void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
 {
   Q_UNUSED(cur);
+  Q_UNUSED(prev);
 
   m_allowEditing = false;
 }
