@@ -98,7 +98,7 @@ IF( USE_QT_DESIGNER )
   SET(kmymoneywidgets_PART_SRCS
       ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp)
 
-  KDE4_ADD_WIDGET_FILES(${kmymoneywidgets_PART_SRCS} kmymoney.widgets)
+  KDE4_ADD_WIDGET_FILES(kmymoneywidgets_PART_SRCS kmymoney.widgets)
 
   SET(kmymoneywidgets_PART_SRCS
     ${_critial_common_sources}
