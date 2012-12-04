@@ -241,10 +241,10 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
   m_symbolFound = false;
   m_invalidConversion = false;
 
-  if (str.trimmed().isEmpty()) {
-    return str;  //                            don't want trailing or all blanks
+  QString txt = str.trimmed();
+  if (txt.isEmpty()) {
+    return txt;  //                            exit as no decimal symbol
   }
-  QString txt = str;
   if (txt.contains('(')) {     //              "(" or "Af" = debit
     txt = txt.remove(QRegExp("[()]"));
     txt = '-' + txt;
