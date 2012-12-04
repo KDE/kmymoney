@@ -475,8 +475,10 @@ void CSVDialog::readSettings()
         } else if (!m_payeeColCopied) {
           m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(tmp);
         }
-        m_memoColumn = tmp;
-        m_columnTypeList[tmp] = "memo";
+        if (tmp < m_endColumn) {  //                                          Ensure profile memo column is valid
+          m_memoColumn = tmp;
+          m_columnTypeList[tmp] = "memo";
+        }
       }
     }
     if (m_decimalSymbol.isEmpty()) {  //                                      Only use saved value at startup as may have been changed
