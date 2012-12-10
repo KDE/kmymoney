@@ -17,26 +17,13 @@
 
 #include "transactionmatcher.h"
 
-// ----------------------------------------------------------------------------
-// QT Includes
-
 #include <QList>
-
-// ----------------------------------------------------------------------------
-// KDE Includes
-
 #include <klocale.h>
 
-// ----------------------------------------------------------------------------
-// Project Includes
-
-#include <mymoneyfile.h>
-#include <mymoneyscheduled.h>
-#include <kmymoneyutils.h>
+#include "mymoneyfile.h"
 
 TransactionMatcher::TransactionMatcher(const MyMoneyAccount& acc) :
-    m_account(acc),
-    m_days(3)
+    m_account(acc)
 {
 }
 
@@ -201,114 +188,3 @@ void TransactionMatcher::accept(const MyMoneyTransaction& _t, const MyMoneySplit
     MyMoneyFile::instance()->modifyTransaction(tm);
   }
 }
-
-void TransactionMatcher::checkTransaction(const MyMoneyTransaction& tm, const MyMoneyTransaction& ti, const MyMoneySplit& si, QPair<MyMoneyTransaction, MyMoneySplit>& lastMatch, TransactionMatcher::autoMatchResultE& result, int variation) const
-{
-  Q_UNUSED(ti);
-
-
-  const QList<MyMoneySplit>& splits = tm.splits();
-  QList<MyMoneySplit>::const_iterator it_s;
-  for (it_s = splits.begin(); it_s != splits.end(); ++it_s) {
-    MyMoneyMoney upper((*it_s).shares());
-    MyMoneyMoney lower(upper);
-    if ((variation > 0) && (variation < 100)) {
-      lower = lower - (lower.abs() * MyMoneyMoney(variation, 100));
-      upper = upper + (upper.abs() * MyMoneyMoney(variation, 100));
-    }
-    // we only check for duplicates / matches if the sign
-    // of the amount for this split is identical
-    if ((si.shares() >= lower) && (si.shares() <= upper)) {
-      // check for duplicate (we can only do that, if we have a bankID)
-      if (!si.bankID().isEmpty()) {
-        if ((*it_s).bankID() == si.bankID()) {
-          lastMatch = QPair<MyMoneyTransaction, MyMoneySplit>(tm, *it_s);
-          result = matchedDuplicate;
-          break;
-        }
-        // in case the stored split already has a bankid
-        // assigned, it must be a different one and therefore
-        // will certainly not match
-        if (!(*it_s).bankID().isEmpty())
-          continue;
-      }
-      // check if this is the one that matches
-      if ((*it_s).accountId() == si.accountId()
-          && (si.shares() >= lower) && (si.shares() <= upper)
-          && !(*it_s).isMatched()) {
-        if (tm.postDate() == ti.postDate()) {
-          lastMatch = QPair<MyMoneyTransaction, MyMoneySplit>(tm, *it_s);
-          result = matchedExact;
-        } else if (result != matchedExact) {
-          lastMatch = QPair<MyMoneyTransaction, MyMoneySplit>(tm, *it_s);
-          result = matched;
-        }
-      }
-    }
-  }
-}
-
-MyMoneyObject const * TransactionMatcher::findMatch(const MyMoneyTransaction& ti, const MyMoneySplit& si, MyMoneySplit& sm, autoMatchResultE& result)
-{
-  result = notMatched;
-  sm = MyMoneySplit();
-
-  MyMoneyAccount acc = MyMoneyFile::instance()->account(si.accountId());
-  qDebug("findMatch in %s(%s) from %s to %s and amount %s",
-         qPrintable(acc.name()),
-         qPrintable(si.accountId()),
-         qPrintable(ti.postDate().addDays(-m_days).toString(Qt::ISODate)),
-         qPrintable(ti.postDate().addDays(m_days).toString(Qt::ISODate)),
-         qPrintable(si.shares().formatMoney("", 2)));
-  MyMoneyTransactionFilter filter(si.accountId());
-  filter.setReportAllSplits(false);
-  filter.setDateFilter(ti.postDate().addDays(-m_days), ti.postDate().addDays(m_days));
-  filter.setAmountFilter(si.shares(), si.shares());
-
-  QList<QPair<MyMoneyTransaction, MyMoneySplit> > list;
-  MyMoneyFile::instance()->transactionList(list, filter);
-
-  qDebug("Found %d transactions", list.count());
-  // parse list
-  QList<QPair<MyMoneyTransaction, MyMoneySplit> >::iterator it_l;
-  QPair<MyMoneyTransaction, MyMoneySplit> lastMatch;
-
-  for (it_l = list.begin(); (result != matchedDuplicate) && (it_l != list.end()); ++it_l) {
-    // just skip myself
-    if ((*it_l).first.id() == ti.id()) {
-      continue;
-    }
-
-    checkTransaction((*it_l).first, ti, si, lastMatch, result);
-  }
-
-  MyMoneyObject* rc = 0;
-  if (result != notMatched) {
-    sm = lastMatch.second;
-    rc = new MyMoneyTransaction(lastMatch.first);
-
-  } else {
-    // if we did not find anything, we need to scan for scheduled transactions
-    QList<MyMoneySchedule> list;
-    QList<MyMoneySchedule>::iterator it_sch;
-    // find all schedules that have a reference to the current account
-    list = MyMoneyFile::instance()->scheduleList(m_account.id());
-    for (it_sch = list.begin(); (result != matched && result != matchedExact) && (it_sch != list.end()); ++it_sch) {
-      // get the next due date adjusted by the weekend switch
-      QDate nextDueDate = (*it_sch).nextDueDate();
-      if ((*it_sch).isOverdue() ||
-          (nextDueDate >= ti.postDate().addDays(-m_days)
-           && nextDueDate <= ti.postDate().addDays(m_days))) {
-        MyMoneyTransaction st = KMyMoneyUtils::scheduledTransaction(*it_sch);
-        checkTransaction(st, ti, si, lastMatch, result, (*it_sch).variation());
-        if (result == matched || result == matchedExact) {
-          sm = lastMatch.second;
-          rc = new MyMoneySchedule(*it_sch);
-        }
-      }
-    }
-  }
-
-  return rc;
-}
-

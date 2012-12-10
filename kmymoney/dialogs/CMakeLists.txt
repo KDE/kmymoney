@@ -44,6 +44,9 @@ SET(libdialogs_a_SOURCES
   mymoneyqifprofileeditor.cpp
   transactioneditor.cpp
   transactionmatcher.cpp
+  transactionmatchfinder.cpp
+  existingtransactionmatchfinder.cpp
+  scheduledtransactionmatchfinder.cpp
   )
 
 SET(dialogs_HEADERS

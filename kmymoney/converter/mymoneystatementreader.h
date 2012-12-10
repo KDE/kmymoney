@@ -24,24 +24,17 @@
 #ifndef MYMONEYSTATEMENTREADER_H
 #define MYMONEYSTATEMENTREADER_H
 
-// ----------------------------------------------------------------------------
-// QT Headers
-
 #include <QObject>
 #include <QString>
 #include <QStringList>
 
-// ----------------------------------------------------------------------------
-// KDE Headers
-
 #include <ktemporaryfile.h>
-
-// ----------------------------------------------------------------------------
-// Project Headers
 
 #include "mymoneyqifprofile.h"
 #include "mymoneyaccount.h"
 #include "mymoneystatement.h"
+#include "transactionmatcher.h"
+#include "transactionmatchfinder.h"
 
 class MyMoneyFileTransaction;
 class QStringList;
@@ -141,6 +134,19 @@ private:
   MyMoneyFileTransaction* m_ft;
 
   void (*m_progressCallback)(int, int, const QString&);
+
+  void handleMatchingOfExistingTransaction(TransactionMatcher & matcher,
+      MyMoneyTransaction matchedTransaction,
+      MyMoneySplit matchedSplit,
+      MyMoneyTransaction & importedTransaction,
+      const MyMoneySplit & importedSplit,
+      const TransactionMatchFinder::MatchResult & matchResult);
+  void handleMatchingOfScheduledTransaction(TransactionMatcher & matcher,
+      MyMoneySchedule matchedSchedule,
+      MyMoneySplit matchedSplit,
+      const MyMoneyTransaction & importedTransaction,
+      const MyMoneySplit & importedSplit);
+  void addTransaction(MyMoneyTransaction & transaction);
 };
 
 #endif

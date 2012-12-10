@@ -18,31 +18,12 @@
 #ifndef TRANSACTIONMATCHER_H
 #define TRANSACTIONMATCHER_H
 
-// ----------------------------------------------------------------------------
-// QT Includes
-
-#include <QPair>
-
-// ----------------------------------------------------------------------------
-// KDE Includes
-
-// ----------------------------------------------------------------------------
-// Project Includes
-
-#include <mymoneytransaction.h>
-#include <mymoneyaccount.h>
-class MyMoneySchedule;
+#include "mymoneytransaction.h"
+#include "mymoneyaccount.h"
 
 class TransactionMatcher
 {
 public:
-  typedef enum {
-    notMatched = 0,          ///< no matching transaction found
-    matched,                 ///< matching transaction found
-    matchedExact,            ///< matching transaction found with exact same date
-    matchedDuplicate         ///< duplicate matching transaction found
-  } autoMatchResultE;
-
   TransactionMatcher(const MyMoneyAccount& acc);
 
   /**
@@ -111,38 +92,8 @@ public:
    */
   void accept(const MyMoneyTransaction& t, const MyMoneySplit& s);
 
-  /**
-   * This method is used to automatically find a matching transaction in the ledger or the schedules.
-   * It should also detect duplicate imports according to the splits bankid.
-   *
-   * To be designed
-   *
-   * @param ti the imported transaction we want to match
-   * @param si the split of that transaction referencing the account we import into
-   * @param sm the split of the object returned that matches the split @a si. In case
-   *           the returned pointer is not 0 this object contains the split. In other
-   *           cases it contains an empty MyMoneySplit.
-   * @param result reference to the result details
-   *
-   * @returns pointer to MyMoneyObject (either a MyMoneyTransaction or a MyMoneySchedule). The
-   *          caller of this method becomes the owner of the object pointed to and is responsible
-   *          to delete the object
-   */
-  MyMoneyObject const * findMatch(const MyMoneyTransaction& ti, const MyMoneySplit& si, MyMoneySplit& sm, autoMatchResultE& result);
-
-  /**
-   * Sets the number of @a days to look for matching transactions. The default after object creation is 3 days.
-   */
-  void setMatchWindow(int days) {
-    m_days = days;
-  }
-
-private:
-  void checkTransaction(const MyMoneyTransaction& tm, const MyMoneyTransaction& ti, const MyMoneySplit& si, QPair<MyMoneyTransaction, MyMoneySplit>& lastMatch, autoMatchResultE& result, int variation = 0) const;
-
 private:
   MyMoneyAccount            m_account;
-  int                       m_days;
 };
 
 

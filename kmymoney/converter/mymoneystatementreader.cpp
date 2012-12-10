@@ -61,6 +61,8 @@
 #include "kmymoney.h"
 #include "kmymoneyaccountcombo.h"
 #include "models.h"
+#include "existingtransactionmatchfinder.h"
+#include "scheduledtransactionmatchfinder.h"
 
 class MyMoneyStatementReader::Private
 {
@@ -1164,114 +1166,33 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
   }
 
   // Add the transaction
-  QPointer<TransactionEditor> editor;
   try {
-
     // check for matches already stored in the engine
-    MyMoneySplit matchedSplit;
-    TransactionMatcher::autoMatchResultE result;
+    TransactionMatchFinder::MatchResult result;
     TransactionMatcher matcher(thisaccount);
-    matcher.setMatchWindow(KMyMoneyGlobalSettings::matchInterval());
-    const MyMoneyObject *o = matcher.findMatch(t, s1, matchedSplit, result);
     d->transactionsCount++;
 
-    // if we did not already find this one, we need to process it
-    if (result != TransactionMatcher::matchedDuplicate) {
-      d->transactionsAdded++;
-      file->addTransaction(t);
+    ExistingTransactionMatchFinder existingTrMatchFinder(KMyMoneyGlobalSettings::matchInterval());
+    result = existingTrMatchFinder.findMatch(t, s1);
+    if (result != TransactionMatchFinder::MatchNotFound) {
+      MyMoneySplit matchedSplit = existingTrMatchFinder.getMatchedSplit();
+      MyMoneyTransaction matchedTransaction = existingTrMatchFinder.getMatchedTransaction();
 
-      if (o) {
-        if (typeid(*o) == typeid(MyMoneyTransaction)) {
-          // it matched a simple transaction. that's the easy case
-          MyMoneyTransaction tm(*(dynamic_cast<const MyMoneyTransaction*>(o)));
-          switch (result) {
-            case TransactionMatcher::notMatched:
-            case TransactionMatcher::matchedDuplicate:
-              // no need to do anything here
-              break;
-            case TransactionMatcher::matched:
-            case TransactionMatcher::matchedExact:
-              qDebug("Detected as match to transaction '%s'", qPrintable(tm.id()));
-              matcher.match(tm, matchedSplit, t, s1, true);
-              d->transactionsMatched++;
-              break;
-          }
-
-        } else if (typeid(*o) == typeid(MyMoneySchedule)) {
-          // a match has been found in a pending schedule. We'll ask the user if she wants
-          // to enter the schedule and match it agains the new transaction. Otherwise, we
-          // just leave the transaction as imported.
-          MyMoneySchedule schedule(*(dynamic_cast<const MyMoneySchedule*>(o)));
-          if (KMessageBox::questionYesNo(0, QString("<qt>%1</qt>").arg(i18n("KMyMoney has found a scheduled transaction named <b>%1</b> which matches an imported transaction. Do you want KMyMoney to enter this schedule now so that the transaction can be matched? ", schedule.name())), i18n("Schedule found")) == KMessageBox::Yes) {
-#ifdef Q_OS_WIN32                   //krazy:exclude=cpp
-            // reset the input context on Windows or else we'll have a crash here caused by an invalid focus widget in the input context
-            qApp->setInputContext(QInputContextFactory::create(qApp->inputContext()->identifierName(), qApp));
-#endif
-            KEnterScheduleDlg dlg(0, schedule);
-            editor = dlg.startEdit();
-            if (editor) {
-
-              MyMoneyTransaction torig;
-              try {
-                // in case the amounts of the scheduled transaction and the
-                // imported transaction differ, we need to update the amount
-                // using the transaction editor.
-                if (matchedSplit.shares() != s1.shares() && !schedule.isFixed()) {
-                  // for now this only works with regular transactions and not
-                  // for investment transactions. As of this, we don't have
-                  // scheduled investment transactions anyway.
-                  StdTransactionEditor* se = dynamic_cast<StdTransactionEditor*>(editor.data());
-                  if (se) {
-                    // the following call will update the amount field in the
-                    // editor and also adjust a possible VAT assignment. Make
-                    // sure to use only the absolute value of the amount, because
-                    // the editor keeps the sign in a different position (deposit,
-                    // withdrawal tab)
-                    kMyMoneyEdit* amount = dynamic_cast<kMyMoneyEdit*>(se->haveWidget("amount"));
-                    if (amount) {
-                      amount->setValue(s1.shares().abs());
-                      se->slotUpdateAmount(s1.shares().abs().toString());
-
-                      // we also need to update the matchedSplit variable to
-                      // have the modified share/value.
-                      matchedSplit.setShares(s1.shares());
-                      matchedSplit.setValue(s1.value());
-                    }
-                  }
-                }
-
-                editor->createTransaction(torig, dlg.transaction(), dlg.transaction().splits().isEmpty() ? MyMoneySplit() : dlg.transaction().splits().front(), true);
-                QString newId;
-                if (editor->enterTransactions(newId, false, true)) {
-                  if (!newId.isEmpty()) {
-                    torig = MyMoneyFile::instance()->transaction(newId);
-                    schedule.setLastPayment(torig.postDate());
-                  }
-                  schedule.setNextDueDate(schedule.nextPayment(schedule.nextDueDate()));
-                  MyMoneyFile::instance()->modifySchedule(schedule);
-                }
-
-                // now match the two transactions
-                matcher.match(torig, matchedSplit, t, s1);
-                d->transactionsMatched++;
-
-              } catch (MyMoneyException *e) {
-                // make sure we get rid of the editor before
-                // the KEnterScheduleDlg is destroyed
-                delete editor;
-                throw e; // rethrow
-              }
-            }
-            // delete the editor
-            delete editor;
-          }
-        }
-      }
-    } else {
-      d->transactionsDuplicate++;
-      qDebug("Detected as duplicate");
+      handleMatchingOfExistingTransaction(matcher, matchedTransaction, matchedSplit, t, s1, result);
+      return;
     }
-    delete o;
+
+    addTransaction(t);
+    ScheduledTransactionMatchFinder scheduledTrMatchFinder(thisaccount, KMyMoneyGlobalSettings::matchInterval());
+    result = scheduledTrMatchFinder.findMatch(t, s1);
+    if (result != TransactionMatchFinder::MatchNotFound) {
+      MyMoneySplit matchedSplit = scheduledTrMatchFinder.getMatchedSplit();
+      MyMoneySchedule matchedSchedule = scheduledTrMatchFinder.getMatchedSchedule();
+
+      handleMatchingOfScheduledTransaction(matcher, matchedSchedule, matchedSplit, t, s1);
+      return;
+    }
+
   } catch (MyMoneyException *e) {
     QString message(i18n("Problem adding or matching imported transaction with id '%1': %2", t_in.m_strBankID, e->what()));
     qDebug("%s", qPrintable(message));
@@ -1391,6 +1312,113 @@ void MyMoneyStatementReader::signalProgress(int current, int total, const QStrin
   if (m_progressCallback != 0)
     (*m_progressCallback)(current, total, msg);
 }
+
+void MyMoneyStatementReader::handleMatchingOfExistingTransaction(TransactionMatcher & matcher,
+    MyMoneyTransaction matchedTransaction,
+    MyMoneySplit matchedSplit,
+    MyMoneyTransaction & importedTransaction,
+    const MyMoneySplit & importedSplit,
+    const TransactionMatchFinder::MatchResult & matchResult)
+{
+  switch (matchResult) {
+    case TransactionMatchFinder::MatchNotFound:
+      break;
+    case TransactionMatchFinder::MatchDuplicate:
+      d->transactionsDuplicate++;
+      qDebug("Detected transaction duplicate");
+      break;
+    case TransactionMatchFinder::MatchImprecise:
+    case TransactionMatchFinder::MatchPrecise:
+      addTransaction(importedTransaction);
+      qDebug("Detected as match to transaction '%s'", qPrintable(matchedTransaction.id()));
+      matcher.match(matchedTransaction, matchedSplit, importedTransaction, importedSplit, true);
+      d->transactionsMatched++;
+      break;
+  }
+}
+
+void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMatcher & matcher,
+    MyMoneySchedule matchedSchedule,
+    MyMoneySplit matchedSplit,
+    const MyMoneyTransaction & importedTransaction,
+    const MyMoneySplit & importedSplit)
+{
+  QPointer<TransactionEditor> editor;
+
+  if (KMessageBox::questionYesNo(0, QString("<qt>%1</qt>").arg(i18n("KMyMoney has found a scheduled transaction named <b>%1</b> which matches an imported transaction. Do you want KMyMoney to enter this schedule now so that the transaction can be matched? ", matchedSchedule.name())), i18n("Schedule found")) == KMessageBox::Yes) {
+#ifdef Q_OS_WIN32                   //krazy:exclude=cpp
+    // reset the input context on Windows or else we'll have a crash here caused by an invalid focus widget in the input context
+    qApp->setInputContext(QInputContextFactory::create(qApp->inputContext()->identifierName(), qApp));
+#endif
+    KEnterScheduleDlg dlg(0, matchedSchedule);
+    editor = dlg.startEdit();
+    if (editor) {
+
+      MyMoneyTransaction torig;
+      try {
+        // in case the amounts of the scheduled transaction and the
+        // imported transaction differ, we need to update the amount
+        // using the transaction editor.
+        if (matchedSplit.shares() != importedSplit.shares() && !matchedSchedule.isFixed()) {
+          // for now this only works with regular transactions and not
+          // for investment transactions. As of this, we don't have
+          // scheduled investment transactions anyway.
+          StdTransactionEditor* se = dynamic_cast<StdTransactionEditor*>(editor.data());
+          if (se) {
+            // the following call will update the amount field in the
+            // editor and also adjust a possible VAT assignment. Make
+            // sure to use only the absolute value of the amount, because
+            // the editor keeps the sign in a different position (deposit,
+            // withdrawal tab)
+            kMyMoneyEdit* amount = dynamic_cast<kMyMoneyEdit*>(se->haveWidget("amount"));
+            if (amount) {
+              amount->setValue(importedSplit.shares().abs());
+              se->slotUpdateAmount(importedSplit.shares().abs().toString());
+
+              // we also need to update the matchedSplit variable to
+              // have the modified share/value.
+              matchedSplit.setShares(importedSplit.shares());
+              matchedSplit.setValue(importedSplit.value());
+            }
+          }
+        }
+
+        editor->createTransaction(torig, dlg.transaction(), dlg.transaction().splits().isEmpty() ? MyMoneySplit() : dlg.transaction().splits().front(), true);
+        QString newId;
+        if (editor->enterTransactions(newId, false, true)) {
+          if (!newId.isEmpty()) {
+            torig = MyMoneyFile::instance()->transaction(newId);
+            matchedSchedule.setLastPayment(torig.postDate());
+          }
+          matchedSchedule.setNextDueDate(matchedSchedule.nextPayment(matchedSchedule.nextDueDate()));
+          MyMoneyFile::instance()->modifySchedule(matchedSchedule);
+        }
+
+        // now match the two transactions
+        matcher.match(torig, matchedSplit, importedTransaction, importedSplit);
+        d->transactionsMatched++;
+
+      } catch (MyMoneyException *e) {
+        // make sure we get rid of the editor before
+        // the KEnterScheduleDlg is destroyed
+        delete editor;
+        throw e; // rethrow
+      }
+    }
+    // delete the editor
+    delete editor;
+  }
+}
+
+void MyMoneyStatementReader::addTransaction(MyMoneyTransaction& transaction)
+{
+  MyMoneyFile* file = MyMoneyFile::instance();
+
+  file->addTransaction(transaction);
+  d->transactionsAdded++;
+}
+
+
 
 #include "mymoneystatementreader.moc"
 // vim:cin:si:ai:et:ts=2:sw=2:
