@@ -71,7 +71,7 @@
         </widget>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout" rowstretch="4,0,0,0,0,0" columnstretch="8,5,5,5,8,12,9">
+        <layout class="QGridLayout" name="gridLayout" rowstretch="4,0,0,0,0,0" columnstretch="22,10,10,11,16,11,18">
          <item row="0" column="0">
           <widget class="QLabel" name="labelInv_date">
            <property name="minimumSize">
@@ -187,10 +187,10 @@
             </size>
            </property>
            <property name="accessibleName">
-            <string comment="noun, conversion factor to align pricing in the imported file with KMM's internal prices. "/>
+            <string comment="noun, conversion factor to align pricing in the imported file with KMM's internal prices."/>
            </property>
            <property name="text">
-            <string comment="noun, conversion fraction/multiplier to use to make compatible the csv pricing with KMM pricing.">Price Fraction  </string>
+            <string comment="noun, conversion fraction/multiplier to use to make compatible the csv pricing with KMM pricing.">Price Fraction</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -612,7 +612,7 @@ The names are retained and may be selected from the list here.&lt;/p&gt;</string
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="text">
-            <string comment="column containing fee field">Fee Column  </string>
+            <string comment="column containing fee field">Fee Column</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

@@ -750,7 +750,7 @@ void StdTransactionEditor::createEditWidgets(void)
   payee->setClickMessage(i18n("Payer/Receiver"));
   payee->setObjectName(QLatin1String("Payee"));
   m_editWidgets["payee"] = payee;
-  connect(payee, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+
   connect(payee, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createPayee(QString,QString&)));
   connect(payee, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(payee, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdatePayee(QString)));
@@ -823,7 +823,6 @@ void StdTransactionEditor::createEditWidgets(void)
   value->setObjectName(QLatin1String("Amount"));
   value->setResetButtonVisible(false);
   connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateAmount(QString)));
-  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
 
   value = new kMyMoneyEdit;
   m_editWidgets["payment"] = value;
