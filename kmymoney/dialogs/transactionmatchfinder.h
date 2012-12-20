@@ -149,6 +149,13 @@ protected:
    */
   bool splitsReferenceSameAccount(const MyMoneySplit & split1, const MyMoneySplit & split2) const;
 
+  /** Checks whether payees of both splits match each other or at least one of them is empty
+   * @param split1 the first split
+   * @param split2 the second split
+   * @return true, if splits reference the same payee or at least one payee is empty; false otherwise
+   */
+  bool splitsPayeesMatchOrEmpty(const MyMoneySplit & split1, const MyMoneySplit & split2) const;
+
   /** Searches for a split in the transaction which matches imported transaction's split
    * @param transaction the transaction to look for the split in
    * @param amountVariation the max number of percent the split amounts may differ and still be considered matching

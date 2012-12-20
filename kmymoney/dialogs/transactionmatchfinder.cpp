@@ -88,6 +88,7 @@ bool TransactionMatchFinder::splitsMatch(const MyMoneySplit& importedSplit, cons
   return (splitsBankIdsMatch(importedSplit, existingSplit) &&
           splitsReferenceSameAccount(importedSplit, existingSplit) &&
           splitsAmountsMatch(importedSplit, existingSplit, amountVariation) &&
+          splitsPayeesMatchOrEmpty(importedSplit, existingSplit) &&
           !existingSplit.isMatched());
 }
 
@@ -116,6 +117,13 @@ bool TransactionMatchFinder::splitsBankIdsMatch(const MyMoneySplit& importedSpli
 bool TransactionMatchFinder::splitsReferenceSameAccount(const MyMoneySplit& split1, const MyMoneySplit& split2) const
 {
   return (split1.accountId() == split2.accountId());
+}
+
+bool TransactionMatchFinder::splitsPayeesMatchOrEmpty(const MyMoneySplit& split1, const MyMoneySplit& split2) const
+{
+    bool payeesMatch = (split1.payeeId() == split2.payeeId());
+    bool atLeastOnePayeeIsNotSet = (split1.payeeId().isEmpty() || split2.payeeId().isEmpty());
+    return payeesMatch || atLeastOnePayeeIsNotSet;
 }
 
 void TransactionMatchFinder::findMatchingSplit(const MyMoneyTransaction& transaction, int amountVariation)
