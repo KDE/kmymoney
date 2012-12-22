@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=ServiceType
 Name=KMyMoney Plugin
+Name[bs]=KMyMoney dodatak
 Name[ca]=Endollable de KMyMoney
 Name[ca@valencia]=Endollable de KMyMoney
 Name[cs]=Modul KMyMoney
@@ -31,6 +32,7 @@ Name[zh_CN]=KMyMoney 插件
 Name[zh_TW]=KMyMoney 外掛程式
 X-KDE-ServiceType=KMyMoneyPlugin
 Comment=A KMyMoney plugin
+Comment[bs]=Dodatak za KMyMoney
 Comment[ca]=Un endollable de KMyMoney
 Comment[ca@valencia]=Un endollable de KMyMoney
 Comment[cs]=Modul KMyMoney
