@@ -147,6 +147,13 @@ private:
       const MyMoneyTransaction & importedTransaction,
       const MyMoneySplit & importedSplit);
   void addTransaction(MyMoneyTransaction & transaction);
+
+  /** Asks the user whether to enter a schedule transaction to match it with imported one
+   * @param matchedSchedule the schedule which matches the imported transaction
+   * @param importedSplit the split of the imported transaction which matches the split of the schedule
+   * @return true, if user confirmed to enter the schedule to match it with imported transaction; false otherwise
+   */
+  bool askUserToEnterScheduleForMatching(const MyMoneySchedule& matchedSchedule, const MyMoneySplit& importedSplit) const;
 };
 
 #endif

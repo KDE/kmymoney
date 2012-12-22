@@ -1345,7 +1345,7 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
 {
   QPointer<TransactionEditor> editor;
 
-  if (KMessageBox::questionYesNo(0, QString("<qt>%1</qt>").arg(i18n("KMyMoney has found a scheduled transaction named <b>%1</b> which matches an imported transaction. Do you want KMyMoney to enter this schedule now so that the transaction can be matched? ", matchedSchedule.name())), i18n("Schedule found")) == KMessageBox::Yes) {
+  if (askUserToEnterScheduleForMatching(matchedSchedule, importedSplit)) {
 #ifdef Q_OS_WIN32                   //krazy:exclude=cpp
     // reset the input context on Windows or else we'll have a crash here caused by an invalid focus widget in the input context
     qApp->setInputContext(QInputContextFactory::create(qApp->inputContext()->identifierName(), qApp));
@@ -1416,6 +1416,23 @@ void MyMoneyStatementReader::addTransaction(MyMoneyTransaction& transaction)
 
   file->addTransaction(transaction);
   d->transactionsAdded++;
+}
+
+bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySchedule& matchedSchedule, const MyMoneySplit& importedSplit) const
+{
+  QString scheduleName = matchedSchedule.name();
+  int currencyDenom = m_account.fraction(MyMoneyFile::instance()->currency(m_account.currencyId()));
+  QString splitValue = importedSplit.value().formatMoney(currencyDenom);
+  QString payeeName = MyMoneyFile::instance()->payee(importedSplit.payeeId()).name();
+
+  QString questionMsg = i18n("KMyMoney has found a scheduled transaction which matches an imported transaction.<br/>"
+                             "Schedule name: <b>%1</b><br/>"
+                             "Transaction: <i>%2 %3</i><br/>"
+                             "Do you want KMyMoney to enter this schedule now so that the transaction can be matched? ",
+                             scheduleName, splitValue, payeeName);
+  int userAnswer = KMessageBox::questionYesNo(0, QString("<qt>%1</qt>").arg(questionMsg), i18n("Schedule found"));
+
+  return (userAnswer == KMessageBox::Yes);
 }
 
 
