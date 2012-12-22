@@ -76,7 +76,13 @@ public:
   ~KTagsView();
   void showEvent(QShowEvent* event);
 
-  enum filterTypeE { eAllTags = 0, eReferencedTags = 1, eUnusedTags = 2 };
+  enum filterTypeE {
+    eAllTags = 0,
+    eReferencedTags, // used tags
+    eUnusedTags,     // unused tags
+    eOpenedTags,     // not closed tags
+    eClosedTags      // closed tags
+  };
 
 public slots:
   void slotSelectTagAndTransaction(const QString& tagId, const QString& accountId = QString(), const QString& transactionId = QString());

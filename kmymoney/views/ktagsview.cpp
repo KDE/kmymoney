@@ -110,6 +110,8 @@ KTagsView::KTagsView(QWidget *parent) :
   m_filterBox->addItem(i18nc("@item Show all tags", "All"));
   m_filterBox->addItem(i18nc("@item Show only used tags", "Used"));
   m_filterBox->addItem(i18nc("@item Show only unused tags", "Unused"));
+  m_filterBox->addItem(i18nc("@item Show only opened tags", "Opened"));
+  m_filterBox->addItem(i18nc("@item Show only closed tags", "Closed"));
   m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
   KGuiItem newButtonItem(QString(""),
@@ -563,7 +565,9 @@ void KTagsView::loadTags(void)
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
     if (m_tagFilterType == eAllTags ||
         (m_tagFilterType == eReferencedTags && file->isReferenced(*it)) ||
-        (m_tagFilterType == eUnusedTags && !file->isReferenced(*it))) {
+        (m_tagFilterType == eUnusedTags && !file->isReferenced(*it)) ||
+        (m_tagFilterType == eOpenedTags && !(*it).isClosed()) ||
+        (m_tagFilterType == eClosedTags && (*it).isClosed())) {
       KTagListItem* item = new KTagListItem(m_tagsList, *it);
       if (item->tag().id() == id)
         currentItem = item;
