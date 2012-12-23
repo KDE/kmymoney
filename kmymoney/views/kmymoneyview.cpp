@@ -1508,7 +1508,7 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("ARS", i18n("Argentine Peso"),         "$"), create);
   loadDefaultCurrency(MyMoneySecurity("AWG", i18n("Aruban Florin")), create);
   loadDefaultCurrency(MyMoneySecurity("AUD", i18n("Australian Dollar"),      "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("AZM", i18n("Azerbaijani Manat")), create);
+  loadDefaultCurrency(MyMoneySecurity("AZN", i18n("Azerbaijani Manat"),      "m."), create);
   loadDefaultCurrency(MyMoneySecurity("BSD", i18n("Bahamian Dollar"),        "$"), create);
   loadDefaultCurrency(MyMoneySecurity("BHD", i18n("Bahraini Dinar"),         "BHD", 1000, 1000), create);
   loadDefaultCurrency(MyMoneySecurity("BDT", i18n("Bangladeshi Taka")), create);
@@ -1730,6 +1730,9 @@ void KMyMoneyView::loadAncientCurrencies(void)
 
   // Source: http://en.wikipedia.org/wiki/Mozambican_metical
   loadAncientCurrency("MZM", i18n("Mozambique Metical"), "MT", QDate(2006, 7, 1), MyMoneyMoney(1, 1000), "MZN");
+
+  // Source https://en.wikipedia.org/wiki/Azerbaijani_manat
+  loadAncientCurrency("AZM", i18n("Azerbaijani Manat"), "m.", QDate(2006, 1, 1), MyMoneyMoney(1, 5000), "AZN");
 }
 
 void KMyMoneyView::viewUp(void)
