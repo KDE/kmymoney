@@ -1,7 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Print check
-Name[bs]=Provjera štampe
 Name[ca]=Imprimeix el xec
 Name[ca@valencia]=Imprimeix el xec
 Name[da]=Udskriv check
@@ -30,7 +29,6 @@ Name[x-test]=xxPrint checkxx
 Name[zh_CN]=打印支票
 Name[zh_TW]=列印支票
 Comment=Provides the capability to print checks
-Comment[bs]=Daje mogućnost štampanja čekova
 Comment[ca]=Aporta la capacitat d'imprimir xecs
 Comment[ca@valencia]=Aporta la capacitat d'imprimir xecs
 Comment[da]=Giver mulighed for at udskrive checks

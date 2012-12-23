@@ -1,7 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Reconciliation report
-Name[bs]=Izvještaj o usaglašavanju
 Name[ca]=Informe de conciliació
 Name[ca@valencia]=Informe de conciliació
 Name[da]=Afstemningsrapport
@@ -30,7 +29,6 @@ Name[x-test]=xxReconciliation reportxx
 Name[zh_CN]=对帐报告
 Name[zh_TW]=對帳報告
 Comment=Creates a report after each reconciliation containing data about the reconciliation process
-Comment[bs]=Kreira izvještaj nakon svakog usaglašavanja s podacima o procesu usaglašavanja
 Comment[ca]=Crea un informe després de cada conciliació amb les dades sobre el procés de conciliació
 Comment[ca@valencia]=Crea un informe després de cada conciliació amb les dades sobre el procés de conciliació
 Comment[da]=Opretter en rapport efter hver afstemning som indeholder data om afstemningsprocessen
