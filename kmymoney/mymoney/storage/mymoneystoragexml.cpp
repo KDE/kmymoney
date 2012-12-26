@@ -802,9 +802,14 @@ void MyMoneyStorageXML::writeReports(QDomElement& parent)
   signalProgress(0, list.count(), i18n("Saving reports..."));
   unsigned i = 0;
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    (*it).writeXML(*m_doc, parent);
+    writeReport(parent, (*it));
     signalProgress(++i, 0);
   }
+}
+
+void MyMoneyStorageXML::writeReport(QDomElement& report, const MyMoneyReport& r)
+{
+  r.writeXML(*m_doc, report);
 }
 
 void MyMoneyStorageXML::writeBudgets(QDomElement& parent)
