@@ -45,6 +45,7 @@ KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent)
   registerField("onlineFactor", m_onlineFactor, "value");
   registerField("onlineSourceCombo", m_onlineSourceCombo, "currentText", SIGNAL(currentIndexChanged(QString)));
   registerField("useFinanceQuote", m_useFinanceQuote);
+  connect(m_onlineSourceCombo, SIGNAL(currentIndexChanged(QString)), this, SLOT(slotCheckPage(QString)));
   connect(m_onlineFactor, SIGNAL(textChanged(QString)),
           this, SIGNAL(completeChanged()));
 
