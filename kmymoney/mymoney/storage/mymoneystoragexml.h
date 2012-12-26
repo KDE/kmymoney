@@ -99,6 +99,7 @@ protected:
   virtual void writeSchedule(QDomElement& scheduledTx, const MyMoneySchedule& tx);
 
   virtual void writeReports(QDomElement& e);
+  virtual void writeReport(QDomElement& report, const MyMoneyReport& r);
   virtual void writeBudgets(QDomElement& e);
   virtual void writeBudget(QDomElement& budget, const MyMoneyBudget& b);
 

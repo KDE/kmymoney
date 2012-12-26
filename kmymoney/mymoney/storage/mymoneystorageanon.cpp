@@ -253,7 +253,7 @@ void MyMoneyStorageANON::fakeBudget(MyMoneyBudget& bx)
 {
   MyMoneyBudget bn;
 
-  bn.setName(bx.name());
+  bn.setName(bx.id());
   bn.setBudgetStart(bx.budgetStart());
   bn = MyMoneyBudget(bx.id(), bn);
 
@@ -290,5 +290,14 @@ void MyMoneyStorageANON::writeBudget(QDomElement& budgets, const MyMoneyBudget& 
   MyMoneyStorageXML::writeBudget(budgets, bn);
 }
 
+void MyMoneyStorageANON::writeReport(QDomElement& reports, const MyMoneyReport& r)
+{
+  MyMoneyReport rn = r;
+
+  rn.setName(rn.id());
+  rn.setComment(hideString(rn.comment()));
+
+  MyMoneyStorageXML::writeReport(reports, rn);
+}
 
 // vim:cin:si:ai:et:ts=2:sw=2:

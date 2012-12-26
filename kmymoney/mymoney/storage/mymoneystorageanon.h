@@ -78,11 +78,14 @@ protected:
 
   void writeBudget(QDomElement& budgets, const MyMoneyBudget& b);
 
+  void writeReport(QDomElement& reports, const MyMoneyReport& r);
+
   void readFile(QIODevice* s, IMyMoneySerialize* storage);
 
   void writeSecurity(QDomElement& securityElement, const MyMoneySecurity& security);
 
   QDomElement findChildElement(const QString& name, const QDomElement& root);
+
 
 private:
   /**
