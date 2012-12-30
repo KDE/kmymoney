@@ -35,7 +35,7 @@ protected:
   typedef QPair<MyMoneyTransaction, MyMoneySplit> TransactionAndSplitPair;
   QList<TransactionAndSplitPair> listOfMatchCandidates;
 
-  /** Creates a list of transactions withing matchWindow range and with the same amount as the imported transaction we're trying to match
+  /** Creates a list of transactions within matchWindow range and with the same amount as the imported transaction we're trying to match
    */
   virtual void createListOfMatchCandidates();
 
