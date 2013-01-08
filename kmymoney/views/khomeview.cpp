@@ -852,16 +852,21 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
         link(VIEW_LEDGER, QString("?id=%1").arg(acc.id())) + acc.name() + linkend() + "</td>";
 
 
-  QString tmp_os, pathOK, pathNotOK;
+  QString tmp_os, pathOK, pathTODO, pathNotOK;
   if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
     //show account's online-status
     KIconLoader::global()->loadIcon(QString("dialog-ok-apply"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathOK);
+    KIconLoader::global()->loadIcon(QString("mail-receive"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathTODO);
     KIconLoader::global()->loadIcon(QString("dialog-cancel"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathNotOK);
 
     if (acc.value("lastImportedTransactionDate").isEmpty() || acc.value("lastStatementBalance").isEmpty())
       tmp_os = "-";
-    else if (file->hasMatchingOnlineBalance(acc))
-      tmp_os = QString("<img src=\"%1\" border=\"0\">").arg(pathOK);
+    else if (file->hasMatchingOnlineBalance(acc)) {
+      if (file->hasNewerTransaction(acc.id(), QDate::fromString(acc.value("lastImportedTransactionDate"), Qt::ISODate)))
+        tmp_os = QString("<img src=\"%1\" border=\"0\">").arg(pathTODO);
+      else
+        tmp_os = QString("<img src=\"%1\" border=\"0\">").arg(pathOK);
+    }
     else
       tmp_os = QString("<img src=\"%1\" border=\"0\">").arg(pathNotOK);
 

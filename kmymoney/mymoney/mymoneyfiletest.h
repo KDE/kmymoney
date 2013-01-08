@@ -83,6 +83,9 @@ private slots:
   void testModifyTransactionInClosedAccount();
   void testStorageId();
   void testHasMatchingOnlineBalance();
+  void testHasNewerTransaction_withoutAnyTransaction_afterLastImportedTransaction();
+  void testHasNewerTransaction_withoutNewerTransaction_afterLastImportedTransaction();
+  void testHasNewerTransaction_withNewerTransaction_afterLastImportedTransaction();
 
 private slots:
   void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);
@@ -95,6 +98,7 @@ private:
   void testRemoveStdAccount(const MyMoneyAccount& acc);
   void testReparentEquity(QList<MyMoneyAccount::accountTypeE>& list, MyMoneyAccount& parent);
   void clearObjectLists(void);
+  void AddOneAccount(void);
 
 private:
   QStringList m_objectsAdded;

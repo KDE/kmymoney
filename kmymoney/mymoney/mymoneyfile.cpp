@@ -2818,6 +2818,15 @@ QString MyMoneyFile::highestCheckNo(const QString& accId) const
   return no;
 }
 
+bool MyMoneyFile::hasNewerTransaction(const QString& accId, const QDate& date) const
+{
+  MyMoneyTransactionFilter filter;
+  filter.addAccount(accId);
+  filter.setDateFilter(date.addDays(+1), QDate());
+  QList<MyMoneyTransaction> transactions = transactionList(filter);
+  return transactions.count() > 0;
+}
+
 void MyMoneyFile::clearCache(void)
 {
   d->checkStorage();

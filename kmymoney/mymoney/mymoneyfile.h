@@ -1439,6 +1439,19 @@ public:
     */
   QString highestCheckNo(const QString& accId) const;
 
+
+  /**
+    * This method checks if there is a transaction
+    * after the date @p date for account @p accId.
+    *
+    * @param accId id of account to be scanned
+    * @param date date to compare with
+    * @retval false if there is no transaction after @p date
+    * @retval true if there is a transaction after @p date
+    */
+  bool hasNewerTransaction(const QString& accId, const QDate& date) const;
+
+
   /**
     * Clear all internal caches (used internally for performance measurements)
     */

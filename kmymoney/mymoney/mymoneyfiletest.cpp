@@ -2034,7 +2034,7 @@ void MyMoneyFileTest::testStorageId()
 
 void MyMoneyFileTest::testHasMatchingOnlineBalance()
 {
-  testAddAccounts();
+  AddOneAccount();
 
   MyMoneyAccount a = m->account("A000001");
 
@@ -2073,6 +2073,143 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance()
   }
 
   QVERIFY(m->hasMatchingOnlineBalance(a) == false);
+}
+
+void MyMoneyFileTest::testHasNewerTransaction_withoutAnyTransaction_afterLastImportedTransaction()
+{
+  AddOneAccount();
+
+  MyMoneyAccount a = m->account("A000001");
+
+  QDate dateOfLastTransactionImport(2011,12,1);
+
+  // There are no transactions at all:
+  QVERIFY(m->hasNewerTransaction(a.id(), dateOfLastTransactionImport) == false);
+}
+
+void MyMoneyFileTest::testHasNewerTransaction_withoutNewerTransaction_afterLastImportedTransaction()
+{
+
+  AddOneAccount();
+
+  MyMoneyAccount a = m->account("A000001");
+
+  QString accId(a.id());
+  QDate dateOfLastTransactionImport(2011,12,1);
+
+  MyMoneyFileTransaction ft;
+  MyMoneyTransaction t;
+
+  // construct a transaction at the day of the last transaction import and add it to the pool
+  t.setPostDate(dateOfLastTransactionImport);
+
+  MyMoneySplit split1;
+
+  split1.setAccountId(accId);
+  split1.setShares(MyMoneyMoney(-1000, 100));
+  split1.setValue(MyMoneyMoney(-1000, 100));
+  try {
+    t.addSplit(split1);
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception!");
+  }
+
+  storage->m_dirty = false;
+
+  ft.restart();
+  try {
+    m->addTransaction(t);
+    ft.commit();
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception!");
+  }
+
+  QVERIFY(m->hasNewerTransaction(accId, dateOfLastTransactionImport) == false);
+}
+
+void MyMoneyFileTest::testHasNewerTransaction_withNewerTransaction_afterLastImportedTransaction()
+{
+
+  AddOneAccount();
+
+  MyMoneyAccount a = m->account("A000001");
+
+  QString accId(a.id());
+  QDate dateOfLastTransactionImport(2011,12,1);
+  QDate dateOfDayAfterLastTransactionImport(dateOfLastTransactionImport.addDays(1));
+
+  MyMoneyFileTransaction ft;
+  MyMoneyTransaction t;
+
+  // construct a transaction a day after the last transaction import and add it to the pool
+  t.setPostDate(dateOfDayAfterLastTransactionImport);
+
+  MyMoneySplit split1;
+
+  split1.setAccountId(accId);
+  split1.setShares(MyMoneyMoney(-1000, 100));
+  split1.setValue(MyMoneyMoney(-1000, 100));
+  try {
+    t.addSplit(split1);
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception!");
+  }
+
+  storage->m_dirty = false;
+
+  ft.restart();
+  try {
+    m->addTransaction(t);
+    ft.commit();
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception!");
+  }
+
+  QVERIFY(m->hasNewerTransaction(accId, dateOfLastTransactionImport) == true);
+}
+
+void MyMoneyFileTest::AddOneAccount()
+{
+  MyMoneyAccount  a;
+  a.setAccountType(MyMoneyAccount::Checkings);
+
+  storage->m_dirty = false;
+
+  QVERIFY(m->accountCount() == 5);
+
+  a.setName("Account1");
+  a.setCurrencyId("EUR");
+
+  clearObjectLists();
+  MyMoneyFileTransaction ft;
+  try {
+    MyMoneyAccount parent = m->asset();
+    m->addAccount(a, parent);
+    ft.commit();
+    QVERIFY(m->accountCount() == 6);
+    QVERIFY(a.parentAccountId() == "AStd::Asset");
+    QVERIFY(a.id() == "A000001");
+    QVERIFY(a.currencyId() == "EUR");
+    QVERIFY(m->dirty() == true);
+    QVERIFY(m->asset().accountList().count() == 1);
+    QVERIFY(m->asset().accountList()[0] == "A000001");
+
+    QVERIFY(m_objectsRemoved.count() == 0);
+    QVERIFY(m_objectsAdded.count() == 1);
+    QVERIFY(m_objectsModified.count() == 1);
+    QVERIFY(m_balanceChanged.count() == 0);
+    QVERIFY(m_valueChanged.count() == 0);
+    QVERIFY(m_objectsAdded.contains(QLatin1String("A000001")));
+    QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Asset")));
+
+  } catch (MyMoneyException *e) {
+    delete e;
+    QFAIL("Unexpected exception!");
+  }
 }
 
 #include "mymoneyfiletest.moc"
