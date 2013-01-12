@@ -772,14 +772,12 @@ void StdTransactionEditor::createEditWidgets(void)
   tag->tagCombo()->setClickMessage(i18n("Tag"));
   tag->tagCombo()->setObjectName(QLatin1String("Tag"));
   m_editWidgets["tag"] = tag;
-  connect(tag->tagCombo(), SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
   connect(tag->tagCombo(), SIGNAL(createItem(QString,QString&)), this, SIGNAL(createTag(QString,QString&)));
   connect(tag->tagCombo(), SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   KTextEdit* memo = new KTextEdit;
   memo->setObjectName(QLatin1String("Memo"));
   memo->setTabChangesFocus(true);
-  connect(memo, SIGNAL(textChanged()), this, SLOT(slotUpdateButtonState()));
   m_editWidgets["memo"] = memo;
 
   bool showNumberField = true;
@@ -816,7 +814,6 @@ void StdTransactionEditor::createEditWidgets(void)
   m_editWidgets["postdate"] = postDate;
   postDate->setObjectName(QLatin1String("PostDate"));
   postDate->setDate(QDate());
-  connect(postDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotUpdateButtonState()));
 
   kMyMoneyEdit* value = new kMyMoneyEdit;
   m_editWidgets["amount"] = value;
@@ -829,25 +826,21 @@ void StdTransactionEditor::createEditWidgets(void)
   value->setObjectName(QLatin1String("Payment"));
   value->setResetButtonVisible(false);
   connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdatePayment(QString)));
-  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
 
   value = new kMyMoneyEdit;
   m_editWidgets["deposit"] = value;
   value->setObjectName(QLatin1String("Deposit"));
   value->setResetButtonVisible(false);
   connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateDeposit(QString)));
-  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyCashFlowCombo* cashflow = new KMyMoneyCashFlowCombo(0, m_account.accountGroup());
   m_editWidgets["cashflow"] = cashflow;
   cashflow->setObjectName(QLatin1String("Cashflow"));
   connect(cashflow, SIGNAL(directionSelected(KMyMoneyRegister::CashFlowDirection)), this, SLOT(slotUpdateCashFlow(KMyMoneyRegister::CashFlowDirection)));
-  connect(cashflow, SIGNAL(directionSelected(KMyMoneyRegister::CashFlowDirection)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyReconcileCombo* reconcile = new KMyMoneyReconcileCombo;
   m_editWidgets["status"] = reconcile;
   reconcile->setObjectName(QLatin1String("Reconcile"));
-  connect(reconcile, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyRegister::QWidgetContainer::iterator it_w;
   for (it_w = m_editWidgets.begin(); it_w != m_editWidgets.end(); ++it_w) {
