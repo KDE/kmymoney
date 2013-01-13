@@ -19,12 +19,7 @@
 #ifndef MYMONEYSTORAGESQL_H
 #define MYMONEYSTORAGESQL_H
 
-// ----------------------------------------------------------------------------
-// System Includes
 #include <limits>
-
-// ----------------------------------------------------------------------------
-// QT Includes
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -35,32 +30,27 @@
 #include <QtDebug>
 
 class QIODevice;
-// ----------------------------------------------------------------------------
-// KDE Includes
 
 #include <kurl.h>
 #include <ksharedptr.h>
 
-// ----------------------------------------------------------------------------
-// Project Includes
-
 #include "imymoneystorageformat.h"
-#include "../mymoneyinstitution.h"
-#include "../mymoneypayee.h"
-#include "../mymoneytag.h"
-#include "../mymoneyaccount.h"
-#include "../mymoneytransaction.h"
-#include "../mymoneysplit.h"
-#include "../mymoneyscheduled.h"
-#include "../mymoneysecurity.h"
-#include "../mymoneyprice.h"
-#include "../mymoneyreport.h"
-#include "../mymoneybudget.h"
-#include "../mymoneyfile.h"
-#include "../mymoneykeyvaluecontainer.h"
+#include "mymoneyinstitution.h"
+#include "mymoneypayee.h"
+#include "mymoneytag.h"
+#include "mymoneyaccount.h"
+#include "mymoneytransaction.h"
+#include "mymoneysplit.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
+#include "mymoneybudget.h"
+#include "mymoneyfile.h"
+#include "mymoneykeyvaluecontainer.h"
 #include "mymoneymap.h"
-#include "../mymoneymoney.h"
-#include "../mymoneytransactionfilter.h"
+#include "mymoneymoney.h"
+#include "mymoneytransactionfilter.h"
 #include "mymoneydbdef.h"
 #include "mymoneydbdriver.h"
 

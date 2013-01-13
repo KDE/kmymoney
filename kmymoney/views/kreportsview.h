@@ -46,7 +46,7 @@
 #include <mymoneyutils.h>
 #endif
 
-#include <mymoneyscheduled.h>
+#include "mymoneyschedule.h"
 #include <mymoneyaccount.h>
 #include <mymoneyreport.h>
 #include "pivottable.h"

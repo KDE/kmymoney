@@ -36,7 +36,7 @@
 
 #include "kmymoneydatetbl.h"
 #include "kmymoneybriefschedule.h"
-#include "mymoneyscheduled.h"
+#include "mymoneyschedule.h"
 
 /**
   * @author Michael Edwardes

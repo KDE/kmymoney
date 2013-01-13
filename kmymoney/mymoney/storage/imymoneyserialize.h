@@ -38,7 +38,7 @@
 #include <mymoneytransaction.h>
 #include <mymoneypayee.h>
 #include <mymoneytag.h>
-#include <mymoneyscheduled.h>
+#include "mymoneyschedule.h"
 #include <mymoneytransactionfilter.h>
 #include <mymoneysecurity.h>
 #include <mymoneyprice.h>

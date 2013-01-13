@@ -45,7 +45,7 @@
 #include <mymoneyprice.h>
 #include <mymoneyreport.h>
 #include <mymoneybudget.h>
-#include <mymoneyscheduled.h>
+#include "mymoneyschedule.h"
 #include <kmm_mymoney_export.h>
 
 /**

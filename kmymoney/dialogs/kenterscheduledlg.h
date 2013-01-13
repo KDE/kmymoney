@@ -32,7 +32,7 @@
 class TransactionEditor;
 
 #include "ui_kenterscheduledlgdecl.h"
-#include <mymoneyscheduled.h>
+#include "mymoneyschedule.h"
 #include <kmymoneyutils.h>
 
 /**

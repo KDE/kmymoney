@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyscheduled.h"
+#include "mymoneyschedule.h"
 
 PaymentFrequencyWizardPage::PaymentFrequencyWizardPage(QWidget *parent)
     : PaymentFrequencyWizardPageDecl(parent)

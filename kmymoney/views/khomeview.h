@@ -34,7 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyscheduled.h"
+#include "mymoneyschedule.h"
 #include "mymoneyaccount.h"
 #include "kmymoneyview.h"
 

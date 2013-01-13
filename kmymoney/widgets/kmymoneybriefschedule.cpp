@@ -41,7 +41,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyscheduled.h"
+#include "mymoneyschedule.h"
 #include "kmymoneyutils.h"
 
 KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)

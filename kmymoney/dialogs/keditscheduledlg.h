@@ -30,7 +30,7 @@
 // Project Includes
 
 #include <mymoneyfile.h>
-#include <mymoneyscheduled.h>
+#include "mymoneyschedule.h"
 #include "ui_keditscheduledlgdecl.h"
 
 class TransactionEditor;

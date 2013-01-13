@@ -22,7 +22,7 @@
 
 #include "mymoneyaccount.h"
 #include "mymoneytransaction.h"
-#include "mymoneyscheduled.h"
+#include "mymoneyschedule.h"
 
 /** The class provides an interface for finding a MyMoneyTransaction match with the one being imported
  */

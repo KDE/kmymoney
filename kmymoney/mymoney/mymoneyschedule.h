@@ -1,5 +1,5 @@
 /***************************************************************************
-                          mymoneyscheduled.h
+                          mymoneyschedule.h
                              -------------------
     copyright            : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
                            (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>

@@ -33,7 +33,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyscheduled.h>
+#include "mymoneyschedule.h"
 #include <transactioneditorcontainer.h>
 #include <register.h>
 

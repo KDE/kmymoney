@@ -37,7 +37,7 @@
 
 #include <imymoneyprocessingcalendar.h>
 #include <mymoneyaccount.h>
-#include <mymoneyscheduled.h>
+#include "mymoneyschedule.h"
 #include <mymoneyinstitution.h>
 #include <mymoneypayee.h>
 #include <mymoneytag.h>

@@ -27,7 +27,7 @@
 
 #include "mymoneysplit.h"
 #include "mymoneymoney.h"
-#include "mymoneyscheduled.h"
+#include "mymoneyschedule.h"
 #include "mymoneyfile.h"
 #include "storage/mymoneyseqaccessmgr.h"
 

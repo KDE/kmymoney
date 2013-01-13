@@ -8,7 +8,7 @@ SET(kmm_mymoney_LIB_SRCS
   mymoneyobject.cpp mymoneykeyvaluecontainer.cpp
   mymoneysplit.cpp mymoneyinstitution.cpp
   mymoneyexception.cpp mymoneyinvesttransaction.cpp mymoneyutils.cpp
-  mymoneysecurity.cpp mymoneytransaction.cpp mymoneyscheduled.cpp
+  mymoneysecurity.cpp mymoneytransaction.cpp mymoneyschedule.cpp
   mymoneypayee.cpp
   mymoneytag.cpp
   mymoneyfile.cpp
@@ -26,7 +26,7 @@ SET(mymoney_HEADERS kmm_mymoney_export.h
   mymoneyfile.h mymoneyfinancialcalculator.h mymoneyinstitution.h
   mymoneyinvesttransaction.h mymoneykeyvaluecontainer.h mymoneymoney.h
   mymoneypayee.h mymoneytag.h mymoneyprice.h mymoneyreport.h
-  mymoneyscheduled.h mymoneysecurity.h mymoneysplit.h mymoneystatement.h
+  mymoneyschedule.h mymoneysecurity.h mymoneysplit.h mymoneystatement.h
   mymoneytransactionfilter.h mymoneytransaction.h
   mymoneyutils.h mymoneybudget.h mymoneyobjectcontainer.h mymoneyforecast.h
   imymoneyprocessingcalendar.h

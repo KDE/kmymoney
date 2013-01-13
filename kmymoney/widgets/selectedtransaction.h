@@ -30,7 +30,7 @@
 // Project Includes
 
 #include <mymoneytransaction.h>
-#include <mymoneyscheduled.h>
+#include "mymoneyschedule.h"
 #include <mymoneysplit.h>
 
 namespace KMyMoneyRegister

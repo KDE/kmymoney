@@ -46,7 +46,7 @@
 #include <mymoneyaccount.h>
 #include <mymoneyinstitution.h>
 #include <mymoneytransaction.h>
-#include <mymoneyscheduled.h>
+#include "mymoneyschedule.h"
 #include <mymoneysecurity.h>
 #include <selectedtransaction.h>
 

@@ -48,7 +48,7 @@
 #include <kmymoneylineedit.h>
 #include <mymoneysplit.h>
 #include <registeritem.h>
-#include <mymoneyscheduled.h>
+#include "mymoneyschedule.h"
 #include "kmymoneyutils.h"
 
 KMyMoneyCombo::KMyMoneyCombo(QWidget *w) :

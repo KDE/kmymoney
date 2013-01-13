@@ -37,7 +37,7 @@
 // Project Includes
 
 #include "ui_knewloanwizarddecl.h"
-#include "mymoneyscheduled.h"
+#include "mymoneyschedule.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneydateinput.h"
 
