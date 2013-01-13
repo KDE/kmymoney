@@ -1,12 +1,15 @@
 SET (libconverter_a_SOURCES
-	mymoneygncreader.cpp
-	mymoneyqifprofile.cpp
-	mymoneyqifreader.cpp
-	mymoneyqifwriter.cpp
-	mymoneystatementreader.cpp
-	mymoneytemplate.cpp
-	webpricequote.cpp
-	)
+  mymoneygncreader.cpp
+  mymoneyqifprofile.cpp
+  mymoneyqifreader.cpp
+  mymoneyqifwriter.cpp
+  mymoneystatementreader.cpp
+  mymoneytemplate.cpp
+  webpricequote.cpp
+  transactionmatchfinder.cpp
+  existingtransactionmatchfinder.cpp
+  scheduledtransactionmatchfinder.cpp
+)
 
 KDE4_ADD_LIBRARY(converter STATIC ${libconverter_a_SOURCES})
 
