@@ -7089,11 +7089,14 @@ const MyMoneyAccount& KMyMoneyApp::account(const QString& key, const QString& va
   MyMoneyFile::instance()->accountList(list);
   QList<MyMoneyAccount> accList;
   for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
-    const QString& id = (*it_a).onlineBankingSettings().value(key);
-    if (id.contains(value)) {
+    // search in the account's kvp container
+    const QString& accountKvpValue = (*it_a).value(key);
+    // search in the account's online settings kvp container
+    const QString& onlineSettingsKvpValue = (*it_a).onlineBankingSettings().value(key);
+    if (accountKvpValue.contains(value) || onlineSettingsKvpValue.contains(value)) {
       accList << MyMoneyFile::instance()->account((*it_a).id());
     }
-    if (id == value) {
+    if (accountKvpValue == value || onlineSettingsKvpValue == value) {
       return MyMoneyFile::instance()->account((*it_a).id());
     }
   }

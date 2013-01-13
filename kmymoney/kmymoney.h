@@ -527,7 +527,8 @@ public:
   /**
    * This method returns the account for a given @a key - @a value pair.
    * If the account is not found in the list of accounts, MyMoneyAccount()
-   * is returned.
+   * is returned. The @a key - @a value pair can be in the account's kvp
+   * container or the account's online settings kvp container.
    */
   const MyMoneyAccount& account(const QString& key, const QString& value) const;
 
