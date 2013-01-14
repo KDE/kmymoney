@@ -299,7 +299,7 @@ void kMyMoneyDateTbl::mouseReleaseEvent(QMouseEvent *e)
   int dayoff = KGlobal::locale()->weekStartDay();
 
   // -----
-  int row, col, pos, temp;
+  int row, col, pos;
   QPoint mouseCoord;
 
   // -----
@@ -331,7 +331,6 @@ void kMyMoneyDateTbl::mouseReleaseEvent(QMouseEvent *e)
       setDate(date.addDays(pos - firstday - date.day() + dayoff % 7));
       return;
     }
-    temp = firstday + date.day() - dayoff % 7 - 1;
 
     setDate(QDate(date.year(), date.month(), pos - firstday + dayoff % 7));
   } else if (m_type == WEEKLY) {

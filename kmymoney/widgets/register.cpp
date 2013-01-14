@@ -2019,7 +2019,6 @@ void Register::addGroupMarkers(void)
       }
       if (KMyMoneyGlobalSettings::showFiscalMarker()) {
         QDate currentFiscalYear = KMyMoneyGlobalSettings::firstFiscalDate();
-        QDate previousFiscalYear = currentFiscalYear.addYears(-1);
         new KMyMoneyRegister::FiscalYearGroupMarker(this, currentFiscalYear, i18n("Current fiscal year"));
         new KMyMoneyRegister::FiscalYearGroupMarker(this, currentFiscalYear.addYears(-1), i18n("Previous fiscal year"));
         new KMyMoneyRegister::FiscalYearGroupMarker(this, currentFiscalYear.addYears(1), i18n("Next fiscal year"));

@@ -137,9 +137,7 @@ KBAccountListView::~KBAccountListView()
 
 void KBAccountListView::addAccount(AB_ACCOUNT *acc)
 {
-  KBAccountListViewItem *entry;
-
-  entry = new KBAccountListViewItem(this, acc);
+  new KBAccountListViewItem(this, acc);
 }
 
 void KBAccountListView::addAccounts(const std::list<AB_ACCOUNT*> &accs)
@@ -147,9 +145,7 @@ void KBAccountListView::addAccounts(const std::list<AB_ACCOUNT*> &accs)
   std::list<AB_ACCOUNT*>::const_iterator it;
 
   for (it = accs.begin(); it != accs.end(); ++it) {
-    KBAccountListViewItem *entry;
-
-    entry = new KBAccountListViewItem(this, *it);
+    new KBAccountListViewItem(this, *it);
   } /* for */
 }
 

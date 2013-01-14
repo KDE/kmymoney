@@ -3804,7 +3804,6 @@ void KMyMoneyApp::slotAccountReconcileStart(void)
           if (KMyMoneyGlobalSettings::autoReconciliation()) {
             MyMoneyMoney startBalance = d->m_endingBalanceDlg->previousBalance();
             MyMoneyMoney endBalance = d->m_endingBalanceDlg->endingBalance();
-            QDate starDate = account.lastReconciliationDate();
             QDate endDate = d->m_endingBalanceDlg->statementDate();
 
             QList<QPair<MyMoneyTransaction, MyMoneySplit> > transactionList;

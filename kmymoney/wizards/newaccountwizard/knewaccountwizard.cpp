@@ -431,8 +431,6 @@ void InstitutionPage::slotSelectInstitution(const int index)
 
 void InstitutionPage::selectExistingInstitution(const QString& id)
 {
-  QList<MyMoneyInstitution>::const_iterator it = d->m_list.constBegin();
-
   for (int i = 0; i < d->m_list.length(); ++i) {
     if (d->m_list[i].id() == id) {
       m_institutionComboBox->setCurrentIndex(i + 1);
@@ -1158,40 +1156,26 @@ bool LoanDetailsPage::isComplete(void) const
   // bool rc = KMyMoneyWizardPage::isComplete();
 
   int fieldCnt = 0;
-  QWidget* calculatedField = 0;
 
   if (m_loanAmount->lineedit()->text().length() > 0) {
     fieldCnt++;
-  } else {
-    calculatedField = m_loanAmount;
   }
 
   if (m_interestRate->lineedit()->text().length() > 0) {
     fieldCnt++;
-  } else {
-    calculatedField = m_interestRate;
   }
 
   if (m_termAmount->value() != 0) {
     fieldCnt++;
-  } else {
-    calculatedField = m_termAmount;
   }
 
   if (m_paymentAmount->lineedit()->text().length() > 0) {
     fieldCnt++;
-  } else {
-    calculatedField = m_paymentAmount;
   }
 
   if (m_balloonAmount->lineedit()->text().length() > 0) {
     fieldCnt++;
-  } else {
-    calculatedField = m_balloonAmount;
   }
-
-  if (fieldCnt == 5)
-    calculatedField = 0;
 
   m_calculateButton->setEnabled(fieldCnt == 4 || (fieldCnt == 5 && m_needCalculate));
 
