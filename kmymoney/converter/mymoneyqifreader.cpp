@@ -253,7 +253,7 @@ MyMoneyQifReader::MyMoneyQifReader() :
 
   connect(&m_filter, SIGNAL(bytesWritten(qint64)), this, SLOT(slotSendDataToFilter()));
   connect(&m_filter, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedDataFromFilter()));
-  connect(&m_filter, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotImportFinished()));
+  connect(&m_filter, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(slotImportFinished()));
   connect(&m_filter, SIGNAL(readyReadStandardError()), this, SLOT(slotReceivedErrorFromFilter()));
 }
 
@@ -1458,8 +1458,29 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
     xAction = true;
   }
 
+  tmp = extractLine('L');
+  // if the action ends in an X, the L-Record contains the asset account
+  // to which the dividend should be transferred. In the other cases, it
+  // may contain a category that identifies the income category for the
+  // dividend payment
+  if ((xAction == true)
+      || (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1)) == true)) {
+    tmp = tmp.remove(QRegExp("[\\[\\]]"));                 //  xAction != true so ignore any'[ and ]'
+    if (!tmp.isEmpty()) {                                  // use 'L' record name
+      tr.m_strBrokerageAccount = tmp;
+      transferAccount(tmp);                                // make sure the account exists
+    } else {
+      tr.m_strBrokerageAccount = m_account.brokerageName();// use brokerage account
+      transferAccount(m_account.brokerageName());          // make sure the account exists
+    }
+  } else {
+    tmp = tmp.remove(QRegExp("[\\[\\]]"));                 //  xAction != true so ignore any'[ and ]'
+    tr.m_strInterestCategory = tmp;
+    tr.m_strBrokerageAccount = m_account.brokerageName();
+  }
+
   // Whether to create a cash split for the other side of the value
-  QString accountname ;//= extractLine('L');
+  QString accountname; //= extractLine('L');
   if (action == "reinvdiv" || action == "reinvlg" || action == "reinvsh") {
     d->st.m_listPrices += price;
     tr.m_shares = quantity;
@@ -1472,21 +1493,6 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
     }
   } else if (action == "div" || action == "cgshort" || action == "cgmid" || action == "cglong" || action == "rtrncap") {
     tr.m_eAction = (MyMoneyStatement::Transaction::eaCashDividend);
-
-    QString tmp = extractLine('L');
-    // if the action ends in an X, the L-Record contains the asset account
-    // to which the dividend should be transferred. In the other cases, it
-    // may contain a category that identifies the income category for the
-    // dividend payment
-    if ((xAction == true)
-        && (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1)) == true)) {
-      tr.m_strBrokerageAccount = tmp;
-      transferAccount(tmp);           // make sure the account exists
-    } else {
-      tmp = tmp.remove(QRegExp("[\\[\\]]"));//  xAction != true so ignore any'[ and ]'
-      tr.m_strInterestCategory = tmp;
-      tr.m_strBrokerageAccount = m_account.brokerageName();
-    }
 
     // make sure, we have valid category. Either taken from the L-Record above,
     // or derived from the action code
@@ -1510,20 +1516,6 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
     if (action == "miscexp")
       tr.m_eAction = (MyMoneyStatement::Transaction::eaFees);
 
-    QString tmp = extractLine('L');
-    // if the action ends in an X, the L-Record contains the asset account
-    // to which the dividend should be transferred. In the other cases, it
-    // may contain a category that identifies the income category for the
-    // payment
-    if ((xAction == true)
-        && (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1)) == true)) {
-      tr.m_strBrokerageAccount = tmp;
-      transferAccount(tmp);           // make sure the account exists
-    } else {
-      tmp = tmp.remove(QRegExp("[\\[\\]]"));//  xAction != true so ignore any '[ and ]'
-      tr.m_strInterestCategory = tmp;
-      tr.m_strBrokerageAccount = m_account.brokerageName();
-    }
     // make sure, we have a valid category. Either taken from the L-Record above,
     // or derived from the action code
     if (tr.m_strInterestCategory.isEmpty()) {
@@ -1569,22 +1561,10 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
     s2.m_amount = -tr.m_amount;
     tr.m_listSplits.append(s2);
   } else if (action == "buy") {
-    QString tmp = extractLine('L');
-    if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1)) == true) {
-      tr.m_strBrokerageAccount = tmp;
-      transferAccount(tmp);           // make sure the account exists
-    }
-
     d->st.m_listPrices += price;
     tr.m_shares = quantity;
     tr.m_eAction = (MyMoneyStatement::Transaction::eaBuy);
   } else if (action == "sell") {
-    QString tmp = extractLine('L');
-    if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1)) == true) {
-      tr.m_strBrokerageAccount = tmp;
-      transferAccount(tmp);           // make sure the account exists
-    }
-
     d->st.m_listPrices += price;
     tr.m_shares = -quantity;
     tr.m_amount = -amount;
@@ -1611,7 +1591,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
     kDebug(0) << "Line " << m_linenumber << ": Unsupported transaction action (" << action << ")";
     return;
   }
-  d->st.m_strAccountName = accountname;
+  d->st.m_strAccountName = accountname;  //  accountname appears not to get set
   d->st.m_listTransactions += tr;
 
   /*************************************************************************
@@ -2049,8 +2029,9 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
 
     // investment accounts will receive a brokerage account, as KMyMoney
     // currently does not allow to store funds in the investment account directly
+    // but only create it (not here, but later) if it is needed
     if (account.accountType() == MyMoneyAccount::Investment) {
-      brokerage.setName(account.brokerageName());
+      brokerage.setName(QString());  //                           brokerage name empty so account not created yet
       brokerage.setAccountType(MyMoneyAccount::Checkings);
       brokerage.setCurrencyId(MyMoneyFile::instance()->baseCurrency().id());
     }
@@ -2065,7 +2046,7 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
     // possibly start a new statement
     d->finishStatement();
     m_account = acc;
-    d->st.m_accountId = m_account.id();
+    d->st.m_accountId = m_account.id();  //                      needed here for account selection
     d->transactionType = transactionType;
   }
   return acc.id();
