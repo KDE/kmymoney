@@ -393,6 +393,43 @@ void MatchFinderTest::testExistingTransactionMatch_sameTransactionId_noBankId()
 }
 
 
+void MatchFinderTest::testExistingTransactionMatch_multipleAccounts_withBankId()
+{
+  ledgerTransaction.splits().first().setAccountId(account->id());
+  ledgerTransaction.splits().first().setBankID("#1");
+  importTransaction.splits().first().setAccountId(otherAccount->id());
+  importTransaction.splits().first().setBankID("#1");
+
+  MyMoneySplit secondSplit = importTransaction.splits().first();
+  secondSplit.clearId();
+  secondSplit.setAccountId(account->id());
+  secondSplit.setBankID("#1");
+  importTransaction.addSplit(secondSplit);
+
+  addTransactionToLedger(ledgerTransaction);
+
+  expectMatchWithExistingTransaction(TransactionMatchFinder::MatchNotFound);
+}
+
+void MatchFinderTest::testExistingTransactionMatch_multipleAccounts_noBankId()
+{
+  ledgerTransaction.splits().first().setAccountId(account->id());
+  ledgerTransaction.splits().first().setBankID("");
+  importTransaction.splits().first().setAccountId(otherAccount->id());
+  importTransaction.splits().first().setBankID("");
+
+  MyMoneySplit secondSplit = importTransaction.splits().first();
+  secondSplit.clearId();
+  secondSplit.setAccountId(account->id());
+  secondSplit.setBankID("");
+  importTransaction.addSplit(secondSplit);
+
+  addTransactionToLedger(ledgerTransaction);
+
+  expectMatchWithExistingTransaction(TransactionMatchFinder::MatchNotFound);
+}
+
+
 void MatchFinderTest::testScheduleMatch_allMatch()
 {
   importTransaction.setPostDate(schedule.adjustedNextDueDate());

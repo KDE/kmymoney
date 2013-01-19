@@ -93,6 +93,8 @@ private slots:
 
   void testExistingTransactionMatch_sameTransactionId_withBankId();
   void testExistingTransactionMatch_sameTransactionId_noBankId();
+  void testExistingTransactionMatch_multipleAccounts_withBankId();
+  void testExistingTransactionMatch_multipleAccounts_noBankId();
 
   void testScheduleMatch_allMatch();
   void testScheduleMatch_dueDateWithinMatchWindow();

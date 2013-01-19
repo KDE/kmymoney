@@ -142,13 +142,6 @@ protected:
    */
   bool splitsBankIdsDuplicated(const MyMoneySplit & split1, const MyMoneySplit & split2) const;
 
-  /** Checks whether both splits reference the same account
-   * @param split1 the first split
-   * @param split2 the second split
-   * @return true, if account ids are the same for both splits; false otherwise
-   */
-  bool splitsReferenceSameAccount(const MyMoneySplit & split1, const MyMoneySplit & split2) const;
-
   /** Checks whether payees of both splits match each other or at least one of them is empty
    * @param split1 the first split
    * @param split2 the second split

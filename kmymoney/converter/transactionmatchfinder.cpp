@@ -86,7 +86,6 @@ bool TransactionMatchFinder::splitsAreDuplicates(const MyMoneySplit& split1, con
 bool TransactionMatchFinder::splitsMatch(const MyMoneySplit& importedSplit, const MyMoneySplit& existingSplit, int amountVariation) const
 {
   return (splitsBankIdsMatch(importedSplit, existingSplit) &&
-          splitsReferenceSameAccount(importedSplit, existingSplit) &&
           splitsAmountsMatch(importedSplit, existingSplit, amountVariation) &&
           splitsPayeesMatchOrEmpty(importedSplit, existingSplit) &&
           !existingSplit.isMatched());
@@ -112,11 +111,6 @@ bool TransactionMatchFinder::splitsBankIdsDuplicated(const MyMoneySplit& split1,
 bool TransactionMatchFinder::splitsBankIdsMatch(const MyMoneySplit& importedSplit, const MyMoneySplit& existingSplit) const
 {
   return (existingSplit.bankID().isEmpty() || existingSplit.bankID() == importedSplit.bankID());
-}
-
-bool TransactionMatchFinder::splitsReferenceSameAccount(const MyMoneySplit& split1, const MyMoneySplit& split2) const
-{
-  return (split1.accountId() == split2.accountId());
 }
 
 bool TransactionMatchFinder::splitsPayeesMatchOrEmpty(const MyMoneySplit& split1, const MyMoneySplit& split2) const
