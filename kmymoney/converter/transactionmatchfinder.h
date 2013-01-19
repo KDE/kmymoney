@@ -51,7 +51,7 @@ public:
    *      - @ref MatchNotFound means that the imported transaction does not match any other transaction
    *      - @ref MatchDuplicate means that the imported transaction is a duplicate of another transaction,
    *      - @ref MatchImprecise means that the imported transaction matches another transaction, but the match
-   *              is not precise (e.g. transaction dates are not equal, but withing matchWindow range)
+   *              is not precise (e.g. transaction dates are not equal, but within matchWindow range)
    *      - @ref MatchPrecise means that the imported transaction matches another transaction precisely
    */
   TransactionMatchFinder::MatchResult findMatch(const MyMoneyTransaction& transactionToMatch, const MyMoneySplit& splitToMatch);
