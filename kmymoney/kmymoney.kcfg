@@ -179,6 +179,18 @@
    <label>Show balance-status of mapped online accounts on the Homepage</label>
    <default>false</default>
   </entry>
+  <entry name="ShowCountOfUnmarkedTransactions" type="Bool">
+   <label>Show number of not marked transactions per account on the Homepage [!M]</label>
+   <default>false</default>
+  </entry>
+  <entry name="ShowCountOfClearedTransactions" type="Bool">
+   <label>Show number of cleared transactions per account on the Homepage [C]</label>
+   <default>false</default>
+  </entry>
+  <entry name="ShowCountOfNotReconciledTransactions" type="Bool">
+   <label>Show number of not reconciled (not marked + cleared) transactions per account on the Homepage [!R]</label>
+   <default>false</default>
+  </entry>
  </group>
  <group name="List Options">
   <entry name="HideUnusedCategory" type="Bool">

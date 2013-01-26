@@ -2925,6 +2925,14 @@ bool MyMoneyFile::hasMatchingOnlineBalance(const MyMoneyAccount& _acc) const
   return balance == accBalance;
 }
 
+int MyMoneyFile::countTransactionsWithSpecificReconciliationState(const QString& accId, enum MyMoneyTransactionFilter::stateOptionE state) const
+{
+  MyMoneyTransactionFilter filter;
+  filter.addAccount(accId);
+  filter.addState(state);
+  return transactionList(filter).count();
+}
+
 MyMoneyFileTransaction::MyMoneyFileTransaction() :
     m_isNested(MyMoneyFile::instance()->hasTransaction()),
     m_needRollback(!m_isNested)

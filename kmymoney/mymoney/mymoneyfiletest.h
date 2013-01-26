@@ -86,6 +86,7 @@ private slots:
   void testHasNewerTransaction_withoutAnyTransaction_afterLastImportedTransaction();
   void testHasNewerTransaction_withoutNewerTransaction_afterLastImportedTransaction();
   void testHasNewerTransaction_withNewerTransaction_afterLastImportedTransaction();
+  void testCountTransactionsWithSpecificReconciliationState();
 
 private slots:
   void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);
