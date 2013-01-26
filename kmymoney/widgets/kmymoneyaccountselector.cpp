@@ -111,7 +111,7 @@ void kMyMoneyAccountSelector::selectCategories(const bool income, const bool exp
   for (; *it_v != 0; ++it_v) {
     if ((*it_v)->text(0) == i18n("Income categories"))
       selectAllSubItems(*it_v, income);
-    else
+    else if ((*it_v)->text(0) == i18n("Expense categories"))
       selectAllSubItems(*it_v, expense);
   }
   emit stateChanged();
