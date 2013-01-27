@@ -82,7 +82,9 @@ private slots:
   void testRemoveTransactionFromClosedAccount();
   void testModifyTransactionInClosedAccount();
   void testStorageId();
-  void testHasMatchingOnlineBalance();
+  void testHasMatchingOnlineBalance_emptyAccountWithoutImportedBalance();
+  void testHasMatchingOnlineBalance_emptyAccountWithEqualImportedBalance();
+  void testHasMatchingOnlineBalance_emptyAccountWithUnequalImportedBalance();
   void testHasNewerTransaction_withoutAnyTransaction_afterLastImportedTransaction();
   void testHasNewerTransaction_withoutNewerTransaction_afterLastImportedTransaction();
   void testHasNewerTransaction_withNewerTransaction_afterLastImportedTransaction();

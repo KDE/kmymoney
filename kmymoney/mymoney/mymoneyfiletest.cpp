@@ -2032,45 +2032,43 @@ void MyMoneyFileTest::testStorageId()
   }
 }
 
-void MyMoneyFileTest::testHasMatchingOnlineBalance()
+void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithoutImportedBalance()
 {
   AddOneAccount();
 
   MyMoneyAccount a = m->account("A000001");
 
-  // Testcase (1) - This is for an account w/o an imported transaction:
   QVERIFY(m->hasMatchingOnlineBalance(a) == false);
+}
 
+void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithEqualImportedBalance()
+{
+  AddOneAccount();
 
-  // Testcase (2) - This is for an account with an imported transaction
-  //                [ i.e. !account.value("lastImportedTransactionDate").isEmpty() ],
-  //                but without balance difference:
+  MyMoneyAccount a = m->account("A000001");
+
   a.setValue("lastImportedTransactionDate", QDate(2011, 12, 1).toString(Qt::ISODate));
   a.setValue("lastStatementBalance", MyMoneyMoney(0, 1).toString());
 
   MyMoneyFileTransaction ft;
-  try {
-    m->modifyAccount(a);
-    ft.commit();
-  } catch (MyMoneyException *e) {
-    delete e;
-    QFAIL("Unexpected exception!");
-  }
+  m->modifyAccount(a);
+  ft.commit();
 
   QVERIFY(m->hasMatchingOnlineBalance(a) == true);
+}
 
-  // Testcase (3) - This is for an account with an imported transaction
-  //                [ i.e. !account.value("lastImportedTransactionDate").isEmpty() ],
-  //                but with a balance difference:
-  ft.restart();
+void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithUnequalImportedBalance()
+{
+  AddOneAccount();
+
+  MyMoneyAccount a = m->account("A000001");
+
+  a.setValue("lastImportedTransactionDate", QDate(2011, 12, 1).toString(Qt::ISODate));
   a.setValue("lastStatementBalance", MyMoneyMoney(1, 1).toString());
-  try {
-    m->modifyAccount(a);
-    ft.commit();
-  } catch (MyMoneyException *e) {
-    delete e;
-    QFAIL("Unexpected exception!");
-  }
+
+  MyMoneyFileTransaction ft;
+  m->modifyAccount(a);
+  ft.commit();
 
   QVERIFY(m->hasMatchingOnlineBalance(a) == false);
 }
