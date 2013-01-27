@@ -2174,6 +2174,7 @@ void MyMoneyFileTest::testHasNewerTransaction_withNewerTransaction_afterLastImpo
 
 void MyMoneyFileTest::AddOneAccount()
 {
+  QString accountId = "A000001";
   MyMoneyAccount  a;
   a.setAccountType(MyMoneyAccount::Checkings);
 
@@ -2192,18 +2193,18 @@ void MyMoneyFileTest::AddOneAccount()
     ft.commit();
     QVERIFY(m->accountCount() == 6);
     QVERIFY(a.parentAccountId() == "AStd::Asset");
-    QVERIFY(a.id() == "A000001");
+    QVERIFY(a.id() == accountId);
     QVERIFY(a.currencyId() == "EUR");
     QVERIFY(m->dirty() == true);
     QVERIFY(m->asset().accountList().count() == 1);
-    QVERIFY(m->asset().accountList()[0] == "A000001");
+    QVERIFY(m->asset().accountList()[0] == accountId);
 
     QVERIFY(m_objectsRemoved.count() == 0);
     QVERIFY(m_objectsAdded.count() == 1);
     QVERIFY(m_objectsModified.count() == 1);
     QVERIFY(m_balanceChanged.count() == 0);
     QVERIFY(m_valueChanged.count() == 0);
-    QVERIFY(m_objectsAdded.contains(QLatin1String("A000001")));
+    QVERIFY(m_objectsAdded.contains(accountId.toLatin1()));
     QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Asset")));
 
   } catch (MyMoneyException *e) {
@@ -2212,70 +2213,59 @@ void MyMoneyFileTest::AddOneAccount()
   }
 }
 
-void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState()
+void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_noTransactions()
 {
   AddOneAccount();
+  QString accountId = "A000001";
 
-  MyMoneyAccount a = m->account("A000001");
+  QVERIFY(m->countTransactionsWithSpecificReconciliationState(accountId, MyMoneyTransactionFilter::notReconciled) == 0);
+}
 
-  QString accId(a.id());
-  QDate dateOfTransaction(2013,1,1);
+void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_transactionWithWantedReconcileState()
+{
+  AddOneAccount();
+  QString accountId = "A000001";
+
+  // construct split & transaction
+  MyMoneySplit split;
+  split.setAccountId(accountId);
+  split.setShares(MyMoneyMoney(-1000, 100));
+  split.setValue(MyMoneyMoney(-1000, 100));
+
+  MyMoneyTransaction transaction;
+  transaction.setPostDate(QDate(2013,1,1));
+  transaction.addSplit(split);
+
+  // add transaction
   MyMoneyFileTransaction ft;
-  MyMoneyTransaction t;
+  m->addTransaction(transaction);
+  ft.commit();
 
-  t.setPostDate(dateOfTransaction);
+  QVERIFY(m->countTransactionsWithSpecificReconciliationState(accountId, MyMoneyTransactionFilter::notReconciled) == 1);
+}
 
-  // We'll perform the following tests only with one representative reconcile state:
-  //
-  // Case 1: account is empty
-  QVERIFY(m->countTransactionsWithSpecificReconciliationState(accId, MyMoneyTransactionFilter::notReconciled) == 0);
+void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_transactionWithUnwantedReconcileState()
+{
+  AddOneAccount();
+  QString accountId = "A000001";
 
-  MyMoneySplit split1;
+  // construct split & transaction
+  MyMoneySplit split;
+  split.setAccountId(accountId);
+  split.setShares(MyMoneyMoney(-1000, 100));
+  split.setValue(MyMoneyMoney(-1000, 100));
+  split.setReconcileFlag(MyMoneySplit::Reconciled);
 
-  // Construct a transaction:
-  split1.setAccountId(accId);
-  split1.setShares(MyMoneyMoney(-1000, 100));
-  split1.setValue(MyMoneyMoney(-1000, 100));
-  try {
-    t.addSplit(split1);
-  } catch (MyMoneyException *e) {
-    delete e;
-    QFAIL("Unexpected exception @ addSplit() !");
-  }
+  MyMoneyTransaction transaction;
+  transaction.setPostDate(QDate(2013,1,1));
+  transaction.addSplit(split);
 
-  storage->m_dirty = false;
-  ft.restart();
-  try {
-    m->addTransaction(t);
-    ft.commit();
-  } catch (MyMoneyException *e) {
-    delete e;
-    QFAIL("Unexpected exception @ addTransaction() !");
-  }
+  // add transaction
+  MyMoneyFileTransaction ft;
+  m->addTransaction(transaction);
+  ft.commit();
 
-  // Case 2: Account should have one not reconciled transaction
-  QVERIFY(m->countTransactionsWithSpecificReconciliationState(accId, MyMoneyTransactionFilter::notReconciled) == 1);
-
-  split1.setReconcileFlag(MyMoneySplit::Reconciled);
-  try {
-    t.modifySplit(split1);
-  } catch (MyMoneyException *e) {
-    delete e;
-    QFAIL("Unexpected exception @ modifySplit() !");
-  }
-
-  storage->m_dirty = false;
-  ft.restart();
-  try {
-    m->modifyTransaction(t);
-    ft.commit();
-  } catch (MyMoneyException *e) {
-    delete e;
-    QFAIL("Unexpected exception @ modifyTransaction() !");
-  }
-
-  // Case 3: Now cleared transaction isn't anymore "not reconciled"
-  QVERIFY(m->countTransactionsWithSpecificReconciliationState(accId, MyMoneyTransactionFilter::notReconciled) == 0);
+  QVERIFY(m->countTransactionsWithSpecificReconciliationState(accountId, MyMoneyTransactionFilter::notReconciled) == 0);
 }
 
 #include "mymoneyfiletest.moc"
