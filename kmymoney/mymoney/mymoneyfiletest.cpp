@@ -2090,9 +2090,7 @@ void MyMoneyFileTest::testHasNewerTransaction_withoutNewerTransaction_afterLastI
 
   AddOneAccount();
 
-  MyMoneyAccount a = m->account("A000001");
-
-  QString accId(a.id());
+  QString accId("A000001");
   QDate dateOfLastTransactionImport(2011,12,1);
 
   MyMoneyFileTransaction ft;
@@ -2106,23 +2104,11 @@ void MyMoneyFileTest::testHasNewerTransaction_withoutNewerTransaction_afterLastI
   split1.setAccountId(accId);
   split1.setShares(MyMoneyMoney(-1000, 100));
   split1.setValue(MyMoneyMoney(-1000, 100));
-  try {
-    t.addSplit(split1);
-  } catch (MyMoneyException *e) {
-    delete e;
-    QFAIL("Unexpected exception!");
-  }
-
-  storage->m_dirty = false;
+  t.addSplit(split1);
 
   ft.restart();
-  try {
-    m->addTransaction(t);
-    ft.commit();
-  } catch (MyMoneyException *e) {
-    delete e;
-    QFAIL("Unexpected exception!");
-  }
+  m->addTransaction(t);
+  ft.commit();
 
   QVERIFY(m->hasNewerTransaction(accId, dateOfLastTransactionImport) == false);
 }
@@ -2132,9 +2118,7 @@ void MyMoneyFileTest::testHasNewerTransaction_withNewerTransaction_afterLastImpo
 
   AddOneAccount();
 
-  MyMoneyAccount a = m->account("A000001");
-
-  QString accId(a.id());
+  QString accId("A000001");
   QDate dateOfLastTransactionImport(2011,12,1);
   QDate dateOfDayAfterLastTransactionImport(dateOfLastTransactionImport.addDays(1));
 
@@ -2149,23 +2133,11 @@ void MyMoneyFileTest::testHasNewerTransaction_withNewerTransaction_afterLastImpo
   split1.setAccountId(accId);
   split1.setShares(MyMoneyMoney(-1000, 100));
   split1.setValue(MyMoneyMoney(-1000, 100));
-  try {
-    t.addSplit(split1);
-  } catch (MyMoneyException *e) {
-    delete e;
-    QFAIL("Unexpected exception!");
-  }
-
-  storage->m_dirty = false;
+  t.addSplit(split1);
 
   ft.restart();
-  try {
-    m->addTransaction(t);
-    ft.commit();
-  } catch (MyMoneyException *e) {
-    delete e;
-    QFAIL("Unexpected exception!");
-  }
+  m->addTransaction(t);
+  ft.commit();
 
   QVERIFY(m->hasNewerTransaction(accId, dateOfLastTransactionImport) == true);
 }
