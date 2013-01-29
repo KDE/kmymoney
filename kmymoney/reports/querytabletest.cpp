@@ -662,9 +662,9 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
     makePrice("JPY", QDate(2004, 5, 1), MyMoneyMoney(moJpyPrice2));
     makePrice("JPY", QDate(2004, 6, 30), MyMoneyMoney(moJpyPrice3));
 
-    QDate openingDate(      2004, 2, 20);
-    QDate intermediateDate( 2004, 5, 20);
-    QDate closingDate(      2004, 7, 20);
+    QDate openingDate(2004, 2, 20);
+    QDate intermediateDate(2004, 5, 20);
+    QDate closingDate(2004, 7, 20);
 
     TransactionHelper t1(openingDate,      MyMoneySplit::ActionTransfer,   MyMoneyMoney(moJpyTransaction), acJpyChecking, acChecking, "JPY");
     TransactionHelper t4(openingDate,      MyMoneySplit::ActionDeposit,    MyMoneyMoney(moTransaction),    acCredit,      acChecking);

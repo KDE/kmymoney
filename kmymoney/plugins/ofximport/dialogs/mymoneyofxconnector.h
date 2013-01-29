@@ -124,7 +124,7 @@ private:
 // open a synchronous wallet in a safe way (the function is here because the wallet is only used in the OFX plugin)
 namespace KWallet
 {
-  class Wallet;
+class Wallet;
 }
 KWallet::Wallet *openSynchronousWallet();
 

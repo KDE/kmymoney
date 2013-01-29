@@ -121,9 +121,9 @@ bool TransactionMatchFinder::splitsReferenceSameAccount(const MyMoneySplit& spli
 
 bool TransactionMatchFinder::splitsPayeesMatchOrEmpty(const MyMoneySplit& split1, const MyMoneySplit& split2) const
 {
-    bool payeesMatch = (split1.payeeId() == split2.payeeId());
-    bool atLeastOnePayeeIsNotSet = (split1.payeeId().isEmpty() || split2.payeeId().isEmpty());
-    return payeesMatch || atLeastOnePayeeIsNotSet;
+  bool payeesMatch = (split1.payeeId() == split2.payeeId());
+  bool atLeastOnePayeeIsNotSet = (split1.payeeId().isEmpty() || split2.payeeId().isEmpty());
+  return payeesMatch || atLeastOnePayeeIsNotSet;
 }
 
 void TransactionMatchFinder::findMatchingSplit(const MyMoneyTransaction& transaction, int amountVariation)

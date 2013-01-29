@@ -878,8 +878,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
         cellStatus = QString("<img src=\"%1\" border=\"0\">").arg(pathTODO);
       else
         cellStatus = QString("<img src=\"%1\" border=\"0\">").arg(pathOK);
-    }
-    else
+    } else
       cellStatus = QString("<img src=\"%1\" border=\"0\">").arg(pathNotOK);
 
     tmp = QString("<td class=\"center\">%1</td>").arg(cellStatus);
@@ -888,7 +887,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
   tmp += QString("<td>") +
          link(VIEW_LEDGER, QString("?id=%1").arg(acc.id())) + acc.name() + linkend() + "</td>";
 
-  int countNotMarked=0, countCleared=0, countNotReconciled=0;
+  int countNotMarked = 0, countCleared = 0, countNotReconciled = 0;
   QString countStr;
 
   if (KMyMoneyGlobalSettings::showCountOfUnmarkedTransactions() || KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
@@ -904,7 +903,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
     if (countNotMarked)
       countStr = QString("%1").arg(countNotMarked);
     else
-	  countStr = "-";
+      countStr = "-";
     tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
   }
 
@@ -912,7 +911,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
     if (countCleared)
       countStr = QString("%1").arg(countCleared);
     else
-	  countStr = "-";
+      countStr = "-";
     tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
   }
 
@@ -920,7 +919,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
     if (countNotReconciled)
       countStr = QString("%1").arg(countNotReconciled);
     else
-	  countStr = "-";
+      countStr = "-";
     tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
   }
 
@@ -1329,10 +1328,10 @@ void KHomeView::showAssetsLiabilities(void)
     if (KMyMoneyGlobalSettings::showCountOfUnmarkedTransactions())
       d->m_html += "<td class=\"setcolor\">!M</td>";
 
-	if (KMyMoneyGlobalSettings::showCountOfClearedTransactions())
+    if (KMyMoneyGlobalSettings::showCountOfClearedTransactions())
       d->m_html += "<td class=\"setcolor\">C</td>";
 
-	if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
+    if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
       d->m_html += "<td class=\"setcolor\">!R</td>";
 
     d->m_html += "<td width=\"15%\" class=\"right\">";
@@ -1355,10 +1354,10 @@ void KHomeView::showAssetsLiabilities(void)
     if (KMyMoneyGlobalSettings::showCountOfUnmarkedTransactions())
       d->m_html += "<td class=\"setcolor\">!M</td>";
 
-	if (KMyMoneyGlobalSettings::showCountOfClearedTransactions())
+    if (KMyMoneyGlobalSettings::showCountOfClearedTransactions())
       d->m_html += "<td class=\"setcolor\">C</td>";
 
-	if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
+    if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions())
       d->m_html += "<td class=\"setcolor\">!R</td>";
 
     d->m_html += "<td width=\"15%\" class=\"right\">";

@@ -2079,7 +2079,7 @@ void MyMoneyFileTest::testHasNewerTransaction_withoutAnyTransaction_afterLastImp
 
   MyMoneyAccount a = m->account("A000001");
 
-  QDate dateOfLastTransactionImport(2011,12,1);
+  QDate dateOfLastTransactionImport(2011, 12, 1);
 
   // There are no transactions at all:
   QVERIFY(m->hasNewerTransaction(a.id(), dateOfLastTransactionImport) == false);
@@ -2091,7 +2091,7 @@ void MyMoneyFileTest::testHasNewerTransaction_withoutNewerTransaction_afterLastI
   AddOneAccount();
 
   QString accId("A000001");
-  QDate dateOfLastTransactionImport(2011,12,1);
+  QDate dateOfLastTransactionImport(2011, 12, 1);
 
   MyMoneyFileTransaction ft;
   MyMoneyTransaction t;
@@ -2119,7 +2119,7 @@ void MyMoneyFileTest::testHasNewerTransaction_withNewerTransaction_afterLastImpo
   AddOneAccount();
 
   QString accId("A000001");
-  QDate dateOfLastTransactionImport(2011,12,1);
+  QDate dateOfLastTransactionImport(2011, 12, 1);
   QDate dateOfDayAfterLastTransactionImport(dateOfLastTransactionImport.addDays(1));
 
   MyMoneyFileTransaction ft;
@@ -2203,7 +2203,7 @@ void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_trans
   split.setValue(MyMoneyMoney(-1000, 100));
 
   MyMoneyTransaction transaction;
-  transaction.setPostDate(QDate(2013,1,1));
+  transaction.setPostDate(QDate(2013, 1, 1));
   transaction.addSplit(split);
 
   // add transaction
@@ -2227,7 +2227,7 @@ void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_trans
   split.setReconcileFlag(MyMoneySplit::Reconciled);
 
   MyMoneyTransaction transaction;
-  transaction.setPostDate(QDate(2013,1,1));
+  transaction.setPostDate(QDate(2013, 1, 1));
   transaction.addSplit(split);
 
   // add transaction
