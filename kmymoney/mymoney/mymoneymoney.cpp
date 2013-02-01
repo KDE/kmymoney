@@ -158,7 +158,7 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   // be much better than using KGlobal::locale()->formatMoney.
   bool bNegative = false;
   mpz_class left = value / static_cast<MyMoneyMoney>(convertDenominator(d)).valueRef().get_den();
-  mpz_class right = (valueRef() - mpq_class(left)) * denom;
+  mpz_class right = mpz_class((valueRef() - mpq_class(left)) * denom);
 
   if (right < 0) {
     right = -right;
