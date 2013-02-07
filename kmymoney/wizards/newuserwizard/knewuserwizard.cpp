@@ -43,8 +43,12 @@
 #include <kurlrequester.h>
 #include <kio/netaccess.h>
 #include <kurl.h>
-#include <kabc/addressee.h>
-#include <kabc/stdaddressbook.h>
+#include <KPIMIdentities/IdentityManager>
+#include <KPIMIdentities/Identity>
+#include <Akonadi/RecursiveItemFetchJob>
+#include <Akonadi/ItemFetchScope>
+#include <Akonadi/Collection>
+#include <KABC/Addressee>
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 
@@ -178,47 +182,57 @@ GeneralPage::GeneralPage(Wizard* wizard) :
     WizardPage<Wizard>(stepCount++, this, wizard)
 {
   m_userNameEdit->setFocus();
-  KABC::StdAddressBook *ab = KABC::StdAddressBook::self(true);
-  connect(ab, SIGNAL(addressBookChanged(AddressBook*)), this, SLOT(slotAddressBookLoaded()));
-  connect(m_loadAddressButton, SIGNAL(clicked()), this, SLOT(slotLoadFromKABC()));
-  m_loadAddressButton->setEnabled(false);
+
+  KPIMIdentities::IdentityManager im;
+  KPIMIdentities::Identity id = im.defaultIdentity();
+  m_loadAddressButton->setEnabled(!id.isNull());
+  connect(m_loadAddressButton, SIGNAL(clicked()), this, SLOT(slotLoadFromAddressBook()));
 }
 
-void GeneralPage::slotAddressBookLoaded(void)
+void GeneralPage::slotLoadFromAddressBook(void)
 {
-  KABC::StdAddressBook *ab = KABC::StdAddressBook::self();
-  if (!ab)
-    return;
-
-  m_loadAddressButton->setEnabled(!ab->whoAmI().isEmpty());
-}
-
-void GeneralPage::slotLoadFromKABC(void)
-{
-  KABC::StdAddressBook *ab = KABC::StdAddressBook::self();
-  if (!ab)
-    return;
-
-  KABC::Addressee addr = ab->whoAmI();
-  if (addr.isEmpty()) {
+  KPIMIdentities::IdentityManager im;
+  KPIMIdentities::Identity id = im.defaultIdentity();
+  if (id.isNull() || id.primaryEmailAddress().isEmpty()) {
     KMessageBox::sorry(this, i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."), i18n("Address book import"));
     return;
   }
+  // Search all contacts for the matching email address
+  m_loadAddressButton->setEnabled(false);
+  Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList() << KABC::Addressee::mimeType());
+  job->fetchScope().fetchFullPayload();
+  job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(searchContactResult(KJob*)));
+  job->start();
 
-  m_userNameEdit->setText(addr.formattedName());
-  m_emailEdit->setText(addr.preferredEmail());
+  m_userNameEdit->setText(id.fullName());
+  m_emailEdit->setText(id.primaryEmailAddress());
+}
 
-  KABC::PhoneNumber phone = addr.phoneNumber(KABC::PhoneNumber::Home);
-  m_telephoneEdit->setText(phone.number());
+void GeneralPage::searchContactResult(KJob *job)
+{
+  const Akonadi::RecursiveItemFetchJob *contactJob = qobject_cast<Akonadi::RecursiveItemFetchJob*>(job);
+  Akonadi::Item::List items;
+  if (contactJob)
+    items = contactJob->items();
+  foreach (const Akonadi::Item &item, items) {
+    const KABC::Addressee &contact = item.payload<KABC::Addressee>();
+    if (contact.emails().contains(m_emailEdit->text())) {
+      KABC::PhoneNumber phone = contact.phoneNumber(KABC::PhoneNumber::Home);
+      m_telephoneEdit->setText(phone.number());
 
-  KABC::Address a = addr.address(KABC::Address::Home);
-  QString sep;
-  if (!a.country().isEmpty() && !a.region().isEmpty())
-    sep = " / ";
-  m_countyEdit->setText(QString("%1%2%3").arg(a.country(), sep, a.region()));
-  m_postcodeEdit->setText(a.postalCode());
-  m_townEdit->setText(a.locality());
-  m_streetEdit->setText(a.street());
+      const KABC::Address &address = contact.address(KABC::Address::Home);
+      QString sep;
+      if (!address.country().isEmpty() && !address.region().isEmpty())
+        sep = " / ";
+      m_countyEdit->setText(QString("%1%2%3").arg(address.country(), sep, address.region()));
+      m_postcodeEdit->setText(address.postalCode());
+      m_townEdit->setText(address.locality());
+      m_streetEdit->setText(address.street());
+      break;
+    }
+  }
+  m_loadAddressButton->setEnabled(true);
 }
 
 KMyMoneyWizardPage* GeneralPage::nextPage(void) const

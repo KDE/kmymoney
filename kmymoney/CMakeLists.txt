@@ -67,7 +67,7 @@ SET( kmymoney_common_LIBS
   dialogs widgets settings converter models kmm_config
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
   ${QT_AND_KDECORE_LIBS} ${QT_QTSQL_LIBRARY}
-  ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KABC_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KUTILS_LIBRARY})
+  ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDEPIMLIBS_KPIMIDENTITIES_LIBS} ${KDEPIMLIBS_AKONADI_CONTACT_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KUTILS_LIBRARY})
 
 ########### kmymoney executable ###############
 
@@ -126,7 +126,6 @@ IF( KDE4_BUILD_TESTS )
 	kmm_config
 	${KDE4_KHTML_LIBS}
 	${KDE4_KDEUI_LIBS}
-	${KDE4_KABC_LIBS}
 	${KDE4_KFILE_LIBS}
 	${KDE4_KUTILS_LIBRARY}
         ${QT_QTGUI_LIBRARY}

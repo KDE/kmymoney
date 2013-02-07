@@ -66,7 +66,7 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     "KMyMoney install prefix defaults to the KDE4 install prefix: ${KDE4_INSTALL_PREFIX}" FORCE)
 endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
-FIND_PACKAGE(KDE4 4.4.0 REQUIRED)
+FIND_PACKAGE(KDE4 4.6.0 REQUIRED)
 
 include( KDE4Defaults )
 include( MacroLibrary )

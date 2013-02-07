@@ -29,6 +29,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class KJob;
+
 // This dialog lets the user create/edit a file.
 // Use the second constructor to edit a file.
 class KNewFileDlg : public QDialog
@@ -58,7 +60,9 @@ protected:
 
 protected slots:
   void okClicked();
-  void loadFromKABC(void);
+  void loadFromAddressBook(void);
+  /** Gets the result of searching for the contact details of the current user */
+  void searchContactResult(KJob *job);
 
 private:
   /// \internal d-pointer class.

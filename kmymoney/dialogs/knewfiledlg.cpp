@@ -31,9 +31,12 @@
 #include <kstdguiitem.h>
 #include <kpushbutton.h>
 #include <kmessagebox.h>
-
-#include <kabc/addressee.h>
-#include <kabc/stdaddressbook.h>
+#include <KPIMIdentities/IdentityManager>
+#include <KPIMIdentities/Identity>
+#include <Akonadi/RecursiveItemFetchJob>
+#include <Akonadi/ItemFetchScope>
+#include <Akonadi/Collection>
+#include <KABC/Addressee>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -79,9 +82,9 @@ void KNewFileDlg::init(const QString& title)
   if (!title.isEmpty())
     setWindowTitle(title);
 
-  KABC::StdAddressBook *ab = static_cast<KABC::StdAddressBook*>
-                             (KABC::StdAddressBook::self());
-  if (ab && !ab->whoAmI().isEmpty())
+  KPIMIdentities::IdentityManager im;
+  KPIMIdentities::Identity id = im.defaultIdentity();
+  if (!id.isNull())
     showLoadButton = true;
 
   if (!showLoadButton)
@@ -91,7 +94,7 @@ void KNewFileDlg::init(const QString& title)
 
   connect(d->ui.cancelBtn, SIGNAL(clicked()), this, SLOT(reject()));
   connect(d->ui.okBtn, SIGNAL(clicked()), this, SLOT(okClicked()));
-  connect(d->ui.kabcBtn, SIGNAL(clicked()), this, SLOT(loadFromKABC()));
+  connect(d->ui.kabcBtn, SIGNAL(clicked()), this, SLOT(loadFromAddressBook()));
 }
 
 KNewFileDlg::~KNewFileDlg()
@@ -112,30 +115,48 @@ void KNewFileDlg::okClicked()
   accept();
 }
 
-void KNewFileDlg::loadFromKABC(void)
+void KNewFileDlg::loadFromAddressBook(void)
 {
-  KABC::StdAddressBook *ab = static_cast<KABC::StdAddressBook*>
-                             (KABC::StdAddressBook::self());
-  if (!ab)
-    return;
-
-  KABC::Addressee addr = ab->whoAmI();
-  if (addr.isEmpty()) {
+  KPIMIdentities::IdentityManager im;
+  KPIMIdentities::Identity id = im.defaultIdentity();
+  if (id.isNull() || id.primaryEmailAddress().isEmpty()) {
     KMessageBox::sorry(this, i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."), i18n("Address book import"));
     return;
   }
 
-  d->ui.userNameEdit->setText(addr.formattedName());
-  d->ui.emailEdit->setText(addr.preferredEmail());
+  // Search all contacts for the matching email address
+  d->ui.kabcBtn->setEnabled(false);
+  Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList() << KABC::Addressee::mimeType());
+  job->fetchScope().fetchFullPayload();
+  job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(searchContactResult(KJob*)));
+  job->start();
 
-  KABC::PhoneNumber phone = addr.phoneNumber(KABC::PhoneNumber::Home);
-  d->ui.telephoneEdit->setText(phone.number());
+  d->ui.userNameEdit->setText(id.fullName());
+  d->ui.emailEdit->setText(id.primaryEmailAddress());
+}
 
-  KABC::Address a = addr.address(KABC::Address::Home);
-  d->ui.countyEdit->setText(a.country() + " / " + a.region());
-  d->ui.postcodeEdit->setText(a.postalCode());
-  d->ui.townEdit->setText(a.locality());
-  d->ui.streetEdit->setText(a.street());
+void KNewFileDlg::searchContactResult(KJob *job)
+{
+  const Akonadi::RecursiveItemFetchJob *contactJob = qobject_cast<Akonadi::RecursiveItemFetchJob*>(job);
+  Akonadi::Item::List items;
+  if (contactJob)
+    items = contactJob->items();
+  foreach (const Akonadi::Item &item, items) {
+    const KABC::Addressee &contact = item.payload<KABC::Addressee>();
+    if (contact.emails().contains(d->ui.emailEdit->text())) {
+      KABC::PhoneNumber phone = contact.phoneNumber(KABC::PhoneNumber::Home);
+      d->ui.telephoneEdit->setText(phone.number());
+
+      const KABC::Address &address = contact.address(KABC::Address::Home);
+      d->ui.countyEdit->setText(address.country() + " / " + address.region());
+      d->ui.postcodeEdit->setText(address.postalCode());
+      d->ui.townEdit->setText(address.locality());
+      d->ui.streetEdit->setText(address.street());
+      break;
+    }
+  }
+  d->ui.kabcBtn->setEnabled(true);
 }
 
 KPushButton* KNewFileDlg::cancelButton(void)

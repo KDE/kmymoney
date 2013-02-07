@@ -39,6 +39,7 @@
 #include <QList>
 
 class Wizard;
+class KJob;
 
 namespace NewUserWizard
 {
@@ -72,9 +73,9 @@ public:
   KMyMoneyWizardPage* nextPage(void) const;
 
 protected slots:
-  void slotLoadFromKABC(void);
-  void slotAddressBookLoaded(void);
-
+  void slotLoadFromAddressBook(void);
+  /** Gets the result of searching for the contact details of the current user */
+  void searchContactResult(KJob *job);
 };
 
 /**
