@@ -92,11 +92,12 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
   m_appMap[i18n("Quicken Windows 2006")] = "QWIN:1500";
   m_appMap[i18n("Quicken Windows 2007")] = "QWIN:1600";
   m_appMap[i18n("Quicken Windows 2008")] = "QWIN:1700";
-  // the following three added as provided by a post on the mailing list
-  // see http://sourceforge.net/mailarchive/forum.php?thread_name=4DBF817C.7030000%40nicklay.com&forum_name=kmymoney2-developer for details
-  m_appMap[i18n("Quicken Windows 2009")] = "QWIN:1800";
-  m_appMap[i18n("Quicken Windows 2010")] = "QWIN:1900";
-  m_appMap[i18n("Quicken Windows 2011")] = "QWIN:2000";
+  // the following three added as found on
+  // https://microsoftmoneyoffline.wordpress.com/appid-appver/ on 2013-02-28
+  m_appMap[i18n("Quicken Windows 2010")] = "QWIN:1800";
+  m_appMap[i18n("Quicken Windows 2011")] = "QWIN:1900";
+  m_appMap[i18n("Quicken Windows 2012")] = "QWIN:2100";
+  m_appMap[i18n("Quicken Windows 2013")] = "QWIN:2200";
 
   // MS-Money
   m_appMap[i18n("MS-Money 2003")] = "Money:1100";
