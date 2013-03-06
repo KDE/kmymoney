@@ -427,6 +427,9 @@ bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   s0.setValue(shares);
   s0.setPrice(MyMoneyMoney(1, 1));
 
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney(1, 1), feeSplits, m_feeSplits))
+    return false;
+
   if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney(-1, 1), interestSplits, m_interestSplits))
     return false;
 

@@ -754,6 +754,7 @@ void StdTransactionEditor::createEditWidgets(void)
   connect(payee, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createPayee(QString,QString&)));
   connect(payee, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(payee, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdatePayee(QString)));
+  connect(payee, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyCategory* category = new KMyMoneyCategory(0, true);
   category->setClickMessage(i18n("Category/Account"));
@@ -820,18 +821,21 @@ void StdTransactionEditor::createEditWidgets(void)
   value->setObjectName(QLatin1String("Amount"));
   value->setResetButtonVisible(false);
   connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateAmount(QString)));
+  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
 
   value = new kMyMoneyEdit;
   m_editWidgets["payment"] = value;
   value->setObjectName(QLatin1String("Payment"));
   value->setResetButtonVisible(false);
   connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdatePayment(QString)));
+  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
 
   value = new kMyMoneyEdit;
   m_editWidgets["deposit"] = value;
   value->setObjectName(QLatin1String("Deposit"));
   value->setResetButtonVisible(false);
   connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateDeposit(QString)));
+  connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyCashFlowCombo* cashflow = new KMyMoneyCashFlowCombo(0, m_account.accountGroup());
   m_editWidgets["cashflow"] = cashflow;
@@ -1592,6 +1596,17 @@ void StdTransactionEditor::updateAmount(const MyMoneyMoney& val)
         slotUpdateCashFlow(cashflow->direction());
       }
       dynamic_cast<kMyMoneyEdit*>(m_editWidgets["amount"])->setValue(val.abs());
+    } else {
+      if (categoryLabel->text() != i18n("Category")) {
+        if (categoryLabel->text() == i18n("Transfer to")) {
+          categoryLabel->setText(i18n("Transfer from"));
+          cashflow->setDirection(KMyMoneyRegister::Payment);
+        } else {
+          categoryLabel->setText(i18n("Transfer to"));
+          cashflow->setDirection(KMyMoneyRegister::Deposit);
+        }
+      }
+      dynamic_cast<kMyMoneyEdit*>(m_editWidgets["amount"])->setValue(val.abs());
     }
   }
 }
@@ -1795,6 +1810,9 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     postDate->markAsBadDate();
     postDate->setToolTip("");
   }
+  bool payeeIsPresent = false;
+  bool categoryIsPresent = false;
+  bool amountIsPresent = false;
 
   for (it_w = m_editWidgets.begin(); it_w != m_editWidgets.end(); ++it_w) {
     KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it_w);
@@ -1805,20 +1823,29 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(*it_w);
     KTextEdit* memo = dynamic_cast<KTextEdit*>(*it_w);
 
-    if (payee && !(payee->currentText().isEmpty()))
-      break;
+    //  Mandatory fields
 
-    if (tagContainer && !(tagContainer->selectedTags().isEmpty()))
-      break;
+    if (payee && !(payee->currentText().isEmpty())) {
+      payeeIsPresent = true;
+    }
 
-    if (category && !category->lineEdit()->text().isEmpty())
-      break;
+//    if (tagContainer && !(tagContainer->selectedTags().isEmpty()))  //  Tag is not a mandatory field
+//      break;
 
-    if (amount && !(amount->value().isZero()))
-      break;
+    if (category && !category->lineEdit()->text().isEmpty()) {
+      categoryIsPresent = true;
+    }
+
+    if (amount && !(amount->value().isZero())) {
+      amountIsPresent = true;
+    }
 
     // the following widgets are only checked if we are editing multiple transactions
     if (isMultiSelection()) {
+      TabBar* tabbar = dynamic_cast<TabBar*>(haveWidget("tabbar"));
+      if (tabbar) {
+        tabbar->setEnabled(true);
+      }
       if (reconcile && reconcile->state() != MyMoneySplit::Unknown)
         break;
 
@@ -1828,11 +1855,18 @@ bool StdTransactionEditor::isComplete(QString& reason) const
       if (postDate->date().isValid() && (postDate->date() >= m_account.openingDate()))
         break;
 
-      if (memo && !memo->toPlainText().isEmpty())
+      if (memo && !memo->toPlainText().isEmpty()) {
+        break;
+      }
+
+      if (tagContainer && !(tagContainer->selectedTags().isEmpty()))  //  Tag is optional field
         break;
     }
   }
-  return it_w != m_editWidgets.end();
+  bool rc = (payeeIsPresent && categoryIsPresent && amountIsPresent);  //   usual mandatory fields
+  bool rc1 = (payeeIsPresent || categoryIsPresent || amountIsPresent);  //  if isMultiSelection(), they are optional
+
+  return (rc || (isMultiSelection() && (it_w != m_editWidgets.end() || rc1)));
 }
 
 void StdTransactionEditor::slotCreateCategory(const QString& name, QString& id)

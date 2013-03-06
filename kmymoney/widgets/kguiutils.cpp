@@ -34,7 +34,8 @@
 #include <kcombobox.h>
 #include <klineedit.h>
 #include <kurlrequester.h>
-
+#include <kmymoneyedit.h>
+#include "kmymoneymvccombo.h"
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -49,6 +50,7 @@
  * Enhanced by Thomas Baumgart to support the lineedit field of a         *
  * a KComboBox.                                                           *
  *                                                                        *
+ * With further widgets added by Allan Anderson for missing fields.       *
  **************************************************************************/
 
 void kMandatoryFieldGroup::add(QWidget *widget)
@@ -69,10 +71,31 @@ void kMandatoryFieldGroup::add(QWidget *widget)
       }
     }
 
-    else if (qobject_cast<QLineEdit*>(widget))
+    else if (qobject_cast<kMyMoneyEdit*>(widget)) {
+      kMyMoneyEdit* amount = qobject_cast<kMyMoneyEdit*>(widget);
+      KLineEdit* lineedit = qobject_cast<KLineEdit*>(amount->lineedit());
+      if (lineedit) {
+        connect(lineedit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
+      } else {
+        connect(amount, SIGNAL(highlighted(int)), this, SLOT(changed()));
+      }
+    }
+
+    else if (qobject_cast<KMyMoneyPayeeCombo*>(widget)) {
+      KMyMoneyPayeeCombo* payee = qobject_cast<KMyMoneyPayeeCombo*>(widget);
+      KLineEdit* lineedit = qobject_cast<KLineEdit*>(payee->lineEdit());
+      if (lineedit) {
+        connect(lineedit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
+      } else {
+        connect(payee, SIGNAL(highlighted(int)), this, SLOT(changed()));
+      }
+    }
+
+    else if (qobject_cast<QLineEdit*>(widget)) {
       connect(qobject_cast<QLineEdit*>(widget),
               SIGNAL(textChanged(QString)),
               this, SLOT(changed()));
+    }
 
     else if (qobject_cast<QSpinBox*>(widget))
       connect(qobject_cast<QSpinBox*>(widget),
@@ -102,14 +125,12 @@ void kMandatoryFieldGroup::add(QWidget *widget)
   }
 }
 
-
 void kMandatoryFieldGroup::remove(QWidget *widget)
 {
   widget->setPalette(QApplication::palette());
   m_widgets.removeOne(widget);
   changed();
 }
-
 
 void kMandatoryFieldGroup::setOkButton(QPushButton *button)
 {
@@ -118,7 +139,6 @@ void kMandatoryFieldGroup::setOkButton(QPushButton *button)
   m_okButton = button;
   changed();
 }
-
 
 void kMandatoryFieldGroup::changed(void)
 {
@@ -129,6 +149,13 @@ void kMandatoryFieldGroup::changed(void)
     // disabled widgets don't count
     if (!(widget->isEnabled())) {
       continue;
+    }
+    if (qobject_cast<KMyMoneyPayeeCombo*>(widget)) {
+      if ((dynamic_cast<KMyMoneyPayeeCombo*>(widget))->lineEdit()->text().isEmpty()) {
+        enable = false;
+        break;
+      } else
+        continue;
     }
     if (qobject_cast<QCheckBox*>(widget)) {
       if ((qobject_cast<QCheckBox*>(widget))->checkState() == Qt::PartiallyChecked) {
@@ -165,6 +192,13 @@ void kMandatoryFieldGroup::changed(void)
       } else
         continue;
     }
+    if ((qobject_cast<kMyMoneyEdit*>(widget))) {
+      if ((qobject_cast<kMyMoneyEdit*>(widget))->text() == "0/1" ) {
+        enable = false;
+        break;
+      } else
+        continue;
+    }
   }
 
   if (m_okButton)
@@ -174,7 +208,6 @@ void kMandatoryFieldGroup::changed(void)
   emit stateChanged();
   emit stateChanged(enable);
 }
-
 
 void kMandatoryFieldGroup::clear(void)
 {
@@ -188,7 +221,6 @@ void kMandatoryFieldGroup::clear(void)
     m_enabled = true;
   }
 }
-
 
 #include "kguiutils.moc"
 

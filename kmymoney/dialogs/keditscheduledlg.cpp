@@ -309,7 +309,8 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
     d->m_requiredFields->add(m_nameEdit);
     d->m_requiredFields->add(editor->haveWidget("account"));
     d->m_requiredFields->add(editor->haveWidget("category"));
-
+    d->m_requiredFields->add(editor->haveWidget("amount"));
+    d->m_requiredFields->add(editor->haveWidget("payee"));
     // fix labels
     QLabel* label = dynamic_cast<QLabel*>(editor->haveWidget("date-label"));
     if (label) {

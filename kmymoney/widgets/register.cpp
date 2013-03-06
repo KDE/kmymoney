@@ -1417,9 +1417,10 @@ void Register::selectItem(int row, int col)
 
     // don't support selecting when the item has an editor
     // or the item itself is not selectable
-    if (item->hasEditorOpen() || !item->isSelectable())
+    if (item->hasEditorOpen() || !item->isSelectable()) {
+      m_mouseButton = Qt::NoButton;
       return;
-
+    }
     QString id = item->id();
     selectItem(item);
     // selectItem() might have changed the pointers, so we
