@@ -90,7 +90,7 @@ bool Activity::haveCategoryAndAmount(const QString& category, const QString& amo
 bool Activity::haveShares(void) const
 {
   kMyMoneyEdit* amount = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
-  if (isMultiSelection() && amount->text().isEmpty())
+  if (isMultiSelection() && amount->value().isZero())
     return true;
 
   return !amount->value().isZero();
@@ -99,7 +99,7 @@ bool Activity::haveShares(void) const
 bool Activity::havePrice(void) const
 {
   kMyMoneyEdit* amount = dynamic_cast<kMyMoneyEdit*>(haveWidget("price"));
-  if (isMultiSelection() && amount->text().isEmpty())
+  if (isMultiSelection() && amount->value().isZero())
     return true;
 
   return !amount->value().isZero();
@@ -239,13 +239,13 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   if (!s0.shares().isZero())
     price = (s0.value() / s0.shares()).reduce();
 
-  if (!isMultiSelection() || (isMultiSelection() && !sharesEdit->text().isEmpty())) {
+  if (!isMultiSelection() || (isMultiSelection() && !sharesEdit->value().isZero())) {
     shares = sharesEdit->value().abs();
     s0.setShares(shares);
     s0.setValue((shares * price).reduce());
     s0.setPrice(price);
   }
-  if (!isMultiSelection() || (isMultiSelection() && !priceEdit->text().isEmpty())) {
+  if (!isMultiSelection() || (isMultiSelection() && !priceEdit->value().isZero())) {
     price = priceEdit->value().abs();
     if (priceMode() == InvestTransactionEditor::PricePerTransaction) {
       s0.setValue(price.reduce());
@@ -331,13 +331,13 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
   if (!s0.shares().isZero())
     price = (s0.value() / s0.shares()).reduce();
 
-  if (!isMultiSelection() || (isMultiSelection() && !sharesEdit->text().isEmpty())) {
+  if (!isMultiSelection() || (isMultiSelection() && !sharesEdit->value().isZero())) {
     shares = -sharesEdit->value().abs();
     s0.setShares(shares);
     s0.setValue((shares * price).reduce());
     s0.setPrice(price);
   }
-  if (!isMultiSelection() || (isMultiSelection() && !priceEdit->text().isEmpty())) {
+  if (!isMultiSelection() || (isMultiSelection() && !priceEdit->value().isZero())) {
     price = priceEdit->value().abs();
     if (priceMode() == InvestTransactionEditor::PricePerTransaction) {
       price = -price;
@@ -498,13 +498,13 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
   if (!s0.shares().isZero())
     price = (s0.value() / s0.shares()).reduce();
 
-  if (!isMultiSelection() || (isMultiSelection() && !sharesEdit->text().isEmpty())) {
+  if (!isMultiSelection() || (isMultiSelection() && !sharesEdit->value().isZero())) {
     shares = sharesEdit->value().abs();
     s0.setShares(shares);
     s0.setValue((shares * price).reduce());
     s0.setPrice(price);
   }
-  if (!isMultiSelection() || (isMultiSelection() && !priceEdit->text().isEmpty())) {
+  if (!isMultiSelection() || (isMultiSelection() && !priceEdit->value().isZero())) {
     price = priceEdit->value().abs();
     if (priceMode() == InvestTransactionEditor::PricePerTransaction) {
       s0.setValue(price.reduce());
