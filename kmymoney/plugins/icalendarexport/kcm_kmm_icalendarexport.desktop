@@ -36,6 +36,7 @@ Exec=kcmshell4 kmm_icalendarexport
 Categories=Qt;KDE;kmymoney;
 Keywords=icalendar;kmymoney;
 Keywords[cs]=icalendar;kmymoney;
+Keywords[da]=icalendar;kmymoney;
 Keywords[de]=icalendar;kmymoney;
 Keywords[es]=icalendar;kmymoney;
 Keywords[hu]=icalendar;kmymoney;
