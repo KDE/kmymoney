@@ -77,7 +77,7 @@
   Looking after databases is a little more complex than dealing with regular
   files. Each system has different methods for performing those necessary
   administrative tasks such as creating databases, assigning permissions to
-  various users, producing backups, &etc;. Describing these tasks is outside the
+  various users, producing backups, &etc; Describing these tasks is outside the
   scope of this manual, but all of the supported products provide comprehensive
   reference documentation, and a quick search of the web will point you at many
   tutorials on the subject.

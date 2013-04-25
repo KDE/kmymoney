@@ -87,7 +87,7 @@
   For both products, the highest level of structure in the file is the
   account. &kappname; supports 5 main types of account: Asset, Liability,
   Income, Expense and Equity, each of which may have various subtypes, &eg;,
-  Checking, Credit Card, &etc;.  &kappname; includes a 'standard' account for
+  Checking, Credit Card, &etc;  &kappname; includes a 'standard' account for
   each of these five types, and all other accounts are held subordinate to one
   of these. &kappname; enforces more consistency (or less flexibility, depending
   on your point of view) between account types than does GnuCash, and the
