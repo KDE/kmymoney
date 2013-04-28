@@ -2401,6 +2401,7 @@ void KMyMoneyApp::slotSettings(void)
   dlg->addPage(fontsPage, i18n("Fonts"), "preferences-desktop-font");
   dlg->addPage(pluginsPage, i18n("Plugins"), "network-disconnect");
 
+  dlg->setHelp("details.settings", "kmymoney");
 
   connect(dlg, SIGNAL(settingsChanged(QString)), this, SLOT(slotUpdateConfiguration()));
   connect(dlg, SIGNAL(cancelClicked()), schedulesPage, SLOT(slotResetRegion()));
