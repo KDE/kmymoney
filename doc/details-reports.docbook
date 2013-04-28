@@ -137,7 +137,7 @@
 </sect2>
 
 <sect2>
-<title>General Information</title>
+<title>Information</title>
 <para>
   These reports display non-transaction information about schedules, accounts,
   and loans.
@@ -155,7 +155,7 @@
 </sect2>
 
 <sect2>
-<title>Favorites</title>
+<title>Favorite Reports</title>
 <para>
   This section lists all the reports you have marked as a favorite in the report
   configuration dialog.  They are still listed in one of the other sections, but
@@ -214,7 +214,7 @@
   You can configure the default reports or create your own from them by
   selecting 'New' and then configuring the new report. When you select
   'Configure' you will be presented with the Report Tab. Initially, it is named
-  the same as the old report with <quote>Custom</quote> added to the end. You
+  the same as the old report with <quote>(Customized)</quote> added to the end. You
   can change the name to whatever you want.  You can even name your custom
   reports the same as a default report, or the same as another custom
   report. Also, you can always use the Comment field to further distinguish
