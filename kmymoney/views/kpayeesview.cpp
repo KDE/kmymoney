@@ -822,7 +822,7 @@ void KPayeesView::slotPayeeNew(void)
 
 void KPayeesView::slotHelp(void)
 {
-  KToolInvocation::invokeHelp("details.payees.personalinformation");
+  KToolInvocation::invokeHelp("details.payees");
 }
 
 void KPayeesView::slotChangeFilter(int index)
