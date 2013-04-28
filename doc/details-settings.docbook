@@ -25,18 +25,6 @@
 
 <variablelist>
   <varlistentry>
-    <term><guilabel>Startup</guilabel></term>
-    <listitem>
-      <para>Choose the initial view upon startup.</para>
-      <itemizedlist>
-        <listitem><para>Start with <link linkend="firsttime.mainwindow">home
-          page</link></para></listitem>
-        <listitem><para>Start with last selected page</para></listitem>
-      </itemizedlist>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
     <term><guilabel>Price Precision</guilabel></term>
     <listitem>
       <para>Enter how many digits of precision your prices will have after the
@@ -60,6 +48,7 @@
       <para>Enter the starting day and month of your fiscal year</para>
     </listitem>
   </varlistentry>
+  <!-- FIXME missing Calculator -->
 </variablelist>
 </sect2>
 
@@ -67,6 +56,26 @@
 <title>Views options</title>
 
 <variablelist>
+  <varlistentry>
+    <term><guilabel>Startup</guilabel></term>
+    <listitem>
+      <para>Choose the initial view upon startup.</para>
+      <itemizedlist>
+        <listitem><para>Start with <link linkend="firsttime.mainwindow">home
+          page</link></para></listitem>
+        <listitem><para>Start with last selected page</para></listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <!-- FIXME missing Type of KMyMoney view -->
+  <varlistentry>
+    <term><guilabel>Show titlebar on each page</guilabel></term>
+    <listitem>
+      <para>Whether the title of the current view should be displayed on each
+      page.</para>
+    </listitem>
+  </varlistentry>
+
   <varlistentry>
     <term><guilabel>Synchronize account selection of ledger and investment
       view</guilabel></term>
@@ -76,21 +85,14 @@
         viceversa.</para>
     </listitem>
   </varlistentry>
-
+<!-- FIXME not in master
   <varlistentry>
     <term><guilabel>Icon size of navigation bar</guilabel></term>
     <listitem>
       <para>Select the size of the icons of the left-side navigation bar.</para>
     </listitem>
   </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Show titlebar on each page</guilabel></term>
-    <listitem>
-      <para>Whether the title of the current view should be displayed on each
-      page.</para>
-    </listitem>
-  </varlistentry>
+  -->
 </variablelist>
 </sect2>
 
@@ -99,14 +101,14 @@
 
 <variablelist>
   <varlistentry>
-    <term><guilabel>Don't show unused categories</guilabel></term>
+    <term><guilabel>Do not show unused categories</guilabel></term>
     <listitem>
       <para>Hide unused categories.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Don't show closed accounts</guilabel></term>
+    <term><guilabel>Do not show closed accounts</guilabel></term>
     <listitem>
       <para>Hide closed accounts.</para>
     </listitem>
@@ -119,16 +121,16 @@
         them.</para>
     </listitem>
   </varlistentry>
-
+  <!--FIXME missing Show in categories account list view-->
   <varlistentry>
-    <term><guilabel>Don't show finished schedules</guilabel></term>
+    <term><guilabel>Do not show finished schedules</guilabel></term>
     <listitem>
       <para>Hide finished schedules.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Don't show transaction prior to</guilabel></term>
+    <term><guilabel>Do not show transaction prior to</guilabel></term>
     <listitem>
       <para>Hide transactions prior to the selected date.</para>
       <para>Setting this option to January 1, 1900 is a good way to debug
@@ -137,7 +139,7 @@
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Don't show reconciled transactions</guilabel></term>
+    <term><guilabel>Do not show reconciled transactions</guilabel></term>
     <listitem>
       <para>Filter transactions by reconciliation state.  Transactions that are
         marked as <emphasis>Reconciled</emphasis> will not be shown.</para>
@@ -145,6 +147,122 @@
   </varlistentry>
 </variablelist>
 </sect2>
+</sect1>
+
+<sect1 id="details.settings.home">
+<title id="details.settings.home.title">Home</title>
+
+<para>
+  These options allow you to customize the appearance of the Home page by
+  choosing which entries to show on the Home page and the order in which they
+  appear.
+</para>
+
+<variablelist>
+  <varlistentry>
+    <term><guilabel>Assets and Liabilities</guilabel></term>
+    <listitem>
+      <para>It shows the balance of all your assets and liabilities</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Payments</guilabel></term>
+    <listitem>
+      <para>It shows the first 5 occurrences of your scheduled
+        transactions</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Preferred accounts</guilabel></term>
+    <listitem>
+      <para>It shows the balance and credit of your favorite accounts</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Payment accounts</guilabel></term>
+    <listitem>
+      <para>It shows the balance of your asset and liability accounts, except
+        for the investment accounts</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Favorite Reports</guilabel></term>
+    <listitem>
+      <para>It shows a list of your favorite reports</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Forecast (schedule)</guilabel></term>
+    <listitem>
+      <para>It shows a forecast for your asset and liability Accounts</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Net worth forecast</guilabel></term>
+    <listitem>
+      <para>It shows a chart of your forecast net worth for the next 90
+        days</para>
+    </listitem>
+  </varlistentry>
+<!--FIXME
+  <varlistentry>
+    <term><guilabel>Forecast (history)</guilabel></term>
+    <listitem>
+      <para>???</para>
+    </listitem>
+  </varlistentry>
+-->
+  <varlistentry>
+    <term><guilabel>Budget</guilabel></term>
+    <listitem>
+      <para>It shows the budget items for the current month which have a
+      negative difference compared to the actual income or expense</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>CashFlow</guilabel></term>
+    <listitem>
+      <para>It shows an analysis of your cash flow for the current month</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Percentage of default font size</guilabel></term>
+    <listitem>
+      <para>Select the size of the font on the Home page</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Remember font size when leaving the program if manually
+      changed with mouse-wheel</guilabel></term>
+    <listitem>
+      <para>Selecting this will save your font size preference if you have
+        changed it from the Home page by using the mouse-wheel</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Show account limit information</guilabel></term>
+    <listitem>
+      <para>Shows the limit of the accounts on the Payment Accounts and
+      Preferred Accounts sections of the Home page</para>
+    </listitem>
+  </varlistentry>
+<!--FIXME missing:
+Show balance-status of mapped online accounts
+Show number of not marked transactions per account [!M]
+Show number of cleared transactions per account [C]
+Show number of not reconciled (not marked + cleared) transactions per account [!R]
+-->
+</variablelist>
 </sect1>
 
 <sect1 id="details.settings.register">
@@ -163,7 +281,7 @@
       <para>Show grid lines in the transaction register.</para>
     </listitem>
   </varlistentry>
-
+  <!--FIXME missing Show all register entries in full detail-->
   <varlistentry id="details.settings.register.lens">
     <term><guilabel>Use the ledger lens</guilabel></term>
     <listitem>
@@ -282,7 +400,7 @@
         from the start. If unset, any substring is matched</para>
     </listitem>
   </varlistentry>
-
+  <!--FIXME missing Automatic reconciliation-->
   <varlistentry>
     <term><guilabel>Default reconciliation state</guilabel></term>
     <listitem>
@@ -292,7 +410,7 @@
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Auto fill with previous transaction data</guilabel></term>
+    <term><guilabel>Autofill</guilabel></term>
     <listitem>
       <para>Select the desired behavior for autofill or deactivate it</para>
       <itemizedlist>
@@ -346,109 +464,6 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.home">
-<title id="details.settings.home.title">Home</title>
-
-<para>
-  These options allow you to customize the appearance of the Home page by
-  choosing which entries to show on the Home page and the order in which they
-  appear.
-</para>
-
-<variablelist>
-  <varlistentry>
-    <term><guilabel>Payments</guilabel></term>
-    <listitem>
-      <para>It shows the first 5 occurrences of your scheduled
-        transactions</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Preferred accounts</guilabel></term>
-    <listitem>
-      <para>It shows the balance and credit of your favorite accounts</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Payment accounts</guilabel></term>
-    <listitem>
-      <para>It shows the balance of your asset and liability accounts, except
-        for the investment accounts</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Favorite Reports</guilabel></term>
-    <listitem>
-      <para>It shows a list of your favorite reports</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Forecast</guilabel></term>
-    <listitem>
-      <para>It shows a forecast for your asset and liability Accounts</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Networth forecast</guilabel></term>
-    <listitem>
-      <para>It shows a chart of your forecast net worth for the next 90
-        days</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Assets and Liabilities</guilabel></term>
-    <listitem>
-      <para>It shows the balance of all your assets and liabilities</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Budget</guilabel></term>
-    <listitem>
-      <para>It shows the budget items for the current month which have a
-      negative difference compared to the actual income or expense</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>CashFlow</guilabel></term>
-    <listitem>
-      <para>It shows an analysis of your cash flow for the current month</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Percentage of default font size</guilabel></term>
-    <listitem>
-      <para>Select the size of the font on the Home page</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Remember font size when leaving the program if manually
-      changed with mouse-wheel</guilabel></term>
-    <listitem>
-      <para>Selecting this will save your font size preference if you have
-        changed it from the Home page by using the mouse-wheel</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Show account limit information</guilabel></term>
-    <listitem>
-      <para>Shows the limit of the accounts on the Payment Accounts and
-      Preferred Accounts sections of the Home page</para>
-    </listitem>
-  </varlistentry>
-</variablelist>
-</sect1>
-
 <sect1 id="details.settings.schedules">
 <title id="details.settings.schedules.title">Scheduled Transactions</title>
 
@@ -475,7 +490,7 @@
       transactions be entered.</para>
     </listitem>
   </varlistentry>
-
+  <!--FIXME missing Processing Days-->
   <varlistentry>
     <term><guilabel>Number of days to preview schedules in ledger</guilabel></term>
     <listitem>
@@ -488,6 +503,97 @@
   </varlistentry>
 </variablelist>
 </sect2>
+</sect1>
+
+<sect1 id="details.settings.onlinequote">
+<title id="details.settings.onlinequote.title">Online Quotes</title>
+
+<para>
+  These settings modify how online quotes are retrieved from different online
+  sources.
+</para>
+
+<para>
+  This tab allows you to change the online quote sources for &kappname;.
+  Generally speaking, this is an advanced feature, and should only be attempted
+  by the most technically adept users.
+</para>
+
+<para>
+  For more details, please refer to the <link linkend="details.investments.onlinequotes">Online Price
+  Quotes</link> section.
+</para>
+</sect1>
+
+ <!-- FIXME Reports page missing-->
+
+<sect1 id="details.settings.forecast">
+<title id="details.settings.forecast.title">Forecast</title>
+
+<para>
+  These options allow you to modify how the forecast is calculated.
+</para>
+
+<variablelist>
+  <varlistentry>
+    <term><guilabel>Number of days to forecast</guilabel></term>
+    <listitem>
+      <para>Select how many days you want to forecast. The default is 90
+        days</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Number of days of account cycle</guilabel></term>
+    <listitem>
+      <para>The normal number of days that your commonly-used accounts go
+        through an income-expense cycle. For example, if you receive your salary
+        on a monthly basis, you should select 30 days here.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Day of month to start forecast</guilabel></term>
+    <listitem>
+      <para>Select the day of the month when you want to start the
+        forecast. This would usually be the day when you receive your salary or
+        other income.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Forecast Method</guilabel></term>
+    <listitem>
+      <para>The forecast method to be used.</para>
+      <para>Scheduled and future transaction forecasts your balance based on the
+        information of your scheduled and future transactions.</para>
+      <para>History-based uses your past transactions to extrapolate a
+        forecast.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Number of cycles to use in forecast</guilabel></term>
+    <listitem>
+      <para>If using a history-based method, how many previous account cycles
+        should &kappname; use to calculate the forecast.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>History forecast method</guilabel></term>
+    <listitem>
+      <para>Select the method to use when calculating a forecast based on
+        historic information</para>
+      <para>Simple moving average averages your past transactions to calculate a
+        forecast.</para>
+      <para>Weighted moving average averages your past transactions, but it will
+        give more importance to the most recent transactions.</para>
+      <para>Linear regression uses a linear-regression formula based on your
+        past transactions to calculate the forecast</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
 </sect1>
 
 <sect1 id="details.settings.encryption">
@@ -592,95 +698,6 @@
     <term><guilabel>Header font</guilabel></term>
     <listitem>
       <para>Specify the custom font to use for the headers of each view.</para>
-    </listitem>
-  </varlistentry>
-</variablelist>
-</sect1>
-
-<sect1 id="details.settings.onlinequote">
-<title id="details.settings.onlinequote.title">Online Quotes</title>
-
-<para>
-  These settings modify how online quotes are retrieved from different online
-  sources.
-</para>
-
-<para>
-  This tab allows you to change the online quote sources for &kappname;.
-  Generally speaking, this is an advanced feature, and should only be attempted
-  by the most technically adept users.
-</para>
-
-<para>
-  For more details, please refer to the <link linkend="details.investments.onlinequotes">Online Price
-  Quotes</link> section.
-</para>
-</sect1>
-
-<sect1 id="details.settings.forecast">
-<title id="details.settings.forecast.title">Forecast</title>
-
-<para>
-  These options allow you to modify how the forecast is calculated.
-</para>
-
-<variablelist>
-  <varlistentry>
-    <term><guilabel>Number of days to forecast</guilabel></term>
-    <listitem>
-      <para>Select how many days you want to forecast. The default is 90
-        days</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Number of days of account cycle</guilabel></term>
-    <listitem>
-      <para>The normal number of days that your commonly-used accounts go
-        through an income-expense cycle. For example, if you receive your salary
-        on a monthly basis, you should select 30 days here.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Day of month to start forecast</guilabel></term>
-    <listitem>
-      <para>Select the day of the month when you want to start the
-        forecast. This would usually be the day when you receive your salary or
-        other income.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Forecast Method</guilabel></term>
-    <listitem>
-      <para>The forecast method to be used.</para>
-      <para>Scheduled and future transaction forecasts your balance based on the
-        information of your scheduled and future transactions.</para>
-      <para>History-based uses your past transactions to extrapolate a
-        forecast.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Number of cycles to use in forecast</guilabel></term>
-    <listitem>
-      <para>If using a history-based method, how many previous account cycles
-        should &kappname; use to calculate the forecast.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>History forecast method</guilabel></term>
-    <listitem>
-      <para>Select the method to use when calculating a forecast based on
-        historic information</para>
-      <para>Simple moving average averages your past transactions to calculate a
-        forecast.</para>
-      <para>Weighted moving average averages your past transactions, but it will
-        give more importance to the most recent transactions.</para>
-      <para>Linear regression uses a linear-regression formula based on your
-        past transactions to calculate the forecast</para>
     </listitem>
   </varlistentry>
 </variablelist>
