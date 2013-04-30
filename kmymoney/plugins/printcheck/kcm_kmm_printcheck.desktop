@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Configure the print check plugin
 Name[bs]=Konfiguriši dodatak za provjeru štampe
-Name[ca]=Configura l'endollable d'impressió de xecs
+Name[ca]=Configura el connector d'impressió de xecs
 Name[ca@valencia]=Configura l'endollable d'impressió de xecs
 Name[da]=Indstil plugin til udskrift af checks
 Name[de]=Das Modul zum Drucken von Schecks konfigurieren
@@ -35,6 +35,7 @@ ServiceTypes=KCModule
 Exec=kcmshell4 kmm_printcheck
 Categories=Qt;KDE;kmymoney;
 Keywords=printcheck;kmymoney;
+Keywords[ca]=impressió de xec;kmymoney;
 Keywords[cs]=printcheck;kmymoney;
 Keywords[da]=printcheck;kmymoney;
 Keywords[de]=printcheck;kmymoney;
@@ -57,7 +58,7 @@ X-KDE-ParentApp=Print check
 X-KDE-ParentComponents=Print check
 Comment=Permits the configuration of the print check plugin's options
 Comment[bs]=Dopušta konfiguraciju opcija dodatka za štampanje čekva
-Comment[ca]=Permet la configuració de les opcions de l'endollable d'impressió de xecs
+Comment[ca]=Permet la configuració de les opcions del connector d'impressió de xecs
 Comment[ca@valencia]=Permet la configuració de les opcions de l'endollable d'impressió de xecs
 Comment[da]=Muliggør konfiguration af indstillingerne til pluginet til udskrift af checks
 Comment[de]=Erlaubt die Konfiguration des Moduls zum Drucken von Schecks
