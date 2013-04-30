@@ -256,12 +256,52 @@
       Preferred Accounts sections of the Home page</para>
     </listitem>
   </varlistentry>
-<!--FIXME missing:
-Show balance-status of mapped online accounts
-Show number of not marked transactions per account [!M]
-Show number of cleared transactions per account [C]
-Show number of not reconciled (not marked + cleared) transactions per account [!R]
--->
+
+  <varlistentry>
+    <term><guilabel>Show balance-status of mapped online accounts</guilabel></term>
+    <listitem>
+      <para>Shows the balance-status of mapped accounts on the Assets and Liabilities
+      Summary, the Payment Accounts and the Preferred Accounts sections of the Home
+      page. The balance-status is symbolized by an icon in the columns preceding
+      the account names. A green checkmark is displayed when online-balance and local
+      file balance are in sync. If the local file has transactions newer than the
+      previously online-updated ones a mailbox with a green arrow gets shown. This alerts
+      the user to start an online-update. Mismatching local file and online-balances are
+      highlighted by a red warning sign. 
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Show number of not marked transactions per account [!M]</guilabel></term>
+    <listitem>
+      <para>Insert an additional column between account name and current balance showing
+      the number of not marked transactions for the accounts on the Assets and Liabilities
+      Summary, the Payment Accounts and Preferred Accounts sections of the Home page
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Show number of cleared transactions per account [C]</guilabel></term>
+    <listitem>
+      <para>Insert an additional column between account name and current balance showing
+      the number of cleared transactions for the accounts on the Assets and Liabilities
+      Summary, the Payment Accounts and Preferred Accounts sections of the Home page
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><guilabel>Show number of not reconciled (not marked + cleared) transactions per account [!R]</guilabel></term>
+    <listitem>
+      <para>Insert an additional column between account name and current balance showing
+      the number of not reconciled transactions (i.e. the sum of all not marked and
+      cleared transactions) for the accounts on the Assets and Liabilities Summary, the
+      Payment Accounts and Preferred Accounts sections of the Home page</para>
+    </listitem>
+  </varlistentry>
+
 </variablelist>
 </sect1>
 
