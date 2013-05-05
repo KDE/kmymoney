@@ -8,13 +8,15 @@
     <text>&amp;Import</text>
     <Action name="file_import_qif" />
     <Action name="file_import_gnc" />
+    <Merge/>
     <MergeLocal name="import_merge"/>
     <Separator/>
     <Action name="file_import_template" />
    </Menu>
    <Menu icon="document-export" append="save_merge" name="export" >
-    <text>E&amp;xport</text>
+    <text>&amp;Export</text>
     <Action name="file_export_qif" />
+    <Merge/>
     <Separator/>
     <Action name="file_export_template" />
    </Menu>

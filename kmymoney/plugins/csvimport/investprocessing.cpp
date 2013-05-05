@@ -1011,7 +1011,7 @@ void InvestProcessing::readFile(const QString& fname)
       } else {
         m_importNow = false;
       }
-    }  //                                             finished parsing
+    }  //                                                finished parsing
     m_csvDialog->m_pageLinesDate->ui->labelSet_skip->setEnabled(true);
     m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setEnabled(true);
     m_endColumn = m_maxColumnCount;
@@ -1099,8 +1099,8 @@ void InvestProcessing::displayLine(const QString& data)
     QString txt = (*constIterator);
     QTableWidgetItem *item = new QTableWidgetItem;  //             new item for UI
     item->setText(txt);
-    m_csvDialog->ui->tableWidget->setItem(m_row, col, item);  //   add items to UI here
     m_csvDialog->ui->tableWidget->setRowCount(m_row + 1);
+    m_csvDialog->ui->tableWidget->setItem(m_row, col, item);  //   add items to UI here
     m_csvDialog->ui->tableWidget->setRowHeight(m_row, 30);
     m_rowWidth += m_csvDialog->ui->tableWidget->columnWidth(col);
     col ++;

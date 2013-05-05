@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=csvexport
+Name[en_GB]=csvexport
+Comment=Add CSV exporting to KMyMoney
+Comment[en_GB]=Add CSV exporting to KMyMoney
+ServiceTypes=KMyMoneyPlugin
+Type=Service
+Icon=document-export
+X-KDE-Library=kmm_csvexport
+X-KDE-PluginInfo-Name=csvexport
+X-KDE-PluginInfo-Author=Allan Anderson
+X-KDE-PluginInfo-Email=aganders93@gmail.com
+X-KDE-PluginInfo-Version=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX}
+X-KDE-PluginInfo-Website=http://kmymoney.org/plugins.html
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

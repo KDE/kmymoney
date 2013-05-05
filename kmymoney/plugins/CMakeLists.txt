@@ -2,8 +2,10 @@ ADD_SUBDIRECTORY( interfaces )
 
 ADD_SUBDIRECTORY( csvimport )
 
+ADD_SUBDIRECTORY( csvexport )
+
 if(LIBOFX_FOUND)
-	ADD_SUBDIRECTORY( ofximport )
+  ADD_SUBDIRECTORY( ofximport )
 endif(LIBOFX_FOUND)
 
 IF (LIBICAL_FOUND)
@@ -37,10 +39,10 @@ SET_TARGET_PROPERTIES(kmm_plugin PROPERTIES VERSION ${GENERIC_LIB_VERSION}  SOVE
 ########### install files ###############
 
 INSTALL(TARGETS kmm_plugin 
-	${INSTALL_TARGETS_DEFAULT_ARGS} )
+  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 INSTALL(FILES ${plugins_HEADERS}
-	DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney  COMPONENT Devel)
+  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney  COMPONENT Devel)
 
 INSTALL(FILES kmymoneyplugin.desktop kmymoneyimporterplugin.desktop
   DESTINATION ${SERVICETYPES_INSTALL_DIR})

@@ -1,0 +1,10 @@
+<!DOCTYPE kpartgui>
+<kpartgui name="kmymoneyplugin-csvexporter" version="0">
+  <MenuBar>
+    <Menu name="file">
+      <Menu name="export" append="file_export_qif">
+        <Action name="file_export_csv" />
+      </Menu>
+    </Menu>
+  </MenuBar>
+</kpartgui>
