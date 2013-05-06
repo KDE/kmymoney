@@ -1,8 +1,6 @@
 [Desktop Entry]
 Name=csvexport
-Name[en_GB]=csvexport
 Comment=Add CSV exporting to KMyMoney
-Comment[en_GB]=Add CSV exporting to KMyMoney
 ServiceTypes=KMyMoneyPlugin
 Type=Service
 Icon=document-export
