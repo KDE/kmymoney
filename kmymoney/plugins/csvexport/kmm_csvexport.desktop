@@ -1,7 +1,9 @@
 [Desktop Entry]
 Name=csvexport
 Name[de]=CSV-Export
+Name[es]=csvexport
 Name[fi]=csvexport
+Name[it]=csvexport
 Name[nl]=csvexport
 Name[pt]=csvexport
 Name[pt_BR]=csvexport
@@ -11,7 +13,9 @@ Name[uk]=csvexport
 Name[x-test]=xxcsvexportxx
 Comment=Add CSV exporting to KMyMoney
 Comment[de]=Fügt CSV-Export zu KMyMoney hinzu
+Comment[es]=Añade la exportación a CSV a KMyMoney
 Comment[fi]=Lisää CSV-vienti KMyMoney-ohjelmaan
+Comment[it]=Aggiungi l'esportazione CSV a KMyMoney
 Comment[nl]=Voeg CSV exporteren toe aan KMyMoney
 Comment[pt]=Adição da exportação de CSV ao KMyMoney
 Comment[pt_BR]=Adiciona a exportação de CSV ao KMyMoney
