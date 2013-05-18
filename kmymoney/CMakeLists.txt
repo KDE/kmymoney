@@ -102,6 +102,11 @@ INSTALL(FILES x-kmymoney.xml
 UPDATE_XDG_MIMETYPES(${XDG_MIME_INSTALL_DIR})
 
 ########## Application Icons #############
+INSTALL(DIRECTORY icons/hicolor
+  DESTINATION ${DATA_INSTALL_DIR}/kmymoney/icons
+  PATTERN "*Make*" EXCLUDE
+  PATTERN ".svn" EXCLUDE
+  )
 INSTALL(DIRECTORY icons/oxygen
   DESTINATION ${DATA_INSTALL_DIR}/kmymoney/icons
   PATTERN "*Make*" EXCLUDE
