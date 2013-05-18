@@ -107,58 +107,7 @@ INSTALL(DIRECTORY icons/oxygen
   PATTERN "*Make*" EXCLUDE
   PATTERN ".svn" EXCLUDE
   )
-INSTALL(FILES hi16-app-kmymoney.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/16x16/apps
-  RENAME kmymoney.png
-  )
-INSTALL(FILES mimetype_kmy_16x16.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/16x16/mimetypes
-  RENAME kmy.png
-  )
-INSTALL(FILES hi32-app-kmymoney.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/32x32/apps
-  RENAME kmymoney.png
-  )
-INSTALL(FILES mimetype_kmy_22x22.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/22x22/mimetypes
-  RENAME kmy.png
-  )
-INSTALL(FILES mimetype_kmy_32x32.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/32x32/mimetypes
-  RENAME kmy.png
-  )
-INSTALL(FILES hi48-app-kmymoney.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/48x48/apps
-  RENAME kmymoney.png
-  )
-INSTALL(FILES mimetype_kmy_48x48.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/48x48/mimetypes
-  RENAME kmy.png
-  )
-INSTALL(FILES hi64-app-kmymoney.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/64x64/apps
-  RENAME kmymoney.png
-  )
-INSTALL(FILES mimetype_kmy_64x64.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/64x64/mimetypes
-  RENAME kmy.png
-  )
-INSTALL(FILES hi128-app-kmymoney.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/128x128/apps
-  RENAME kmymoney.png
-  )
-INSTALL(FILES mimetype_kmy_128x128.png
-  DESTINATION ${ICON_INSTALL_DIR}/hicolor/128x128/mimetypes
-  RENAME kmy.png
-  )
-INSTALL(FILES lo16-app-kmymoney.png
-  DESTINATION ${ICON_INSTALL_DIR}/locolor/16x16/apps
-  RENAME kmymoney.png
-  )
-INSTALL(FILES lo32-app-kmymoney.png
-  DESTINATION ${ICON_INSTALL_DIR}/locolor/32x32/apps
-  RENAME kmymoney.png
-  )
+KDE4_INSTALL_ICONS(${ICON_INSTALL_DIR})
 
 ############## tests ####################
 IF( KDE4_BUILD_TESTS )
