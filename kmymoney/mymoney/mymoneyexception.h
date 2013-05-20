@@ -23,10 +23,6 @@
 #ifndef MYMONEYEXCEPTION_H
 #define MYMONEYEXCEPTION_H
 
-#ifdef HAVE_CONFIG_H
-#include <config-kmymoney.h>
-#endif
-
 // ----------------------------------------------------------------------------
 // QT Includes
 

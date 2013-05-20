@@ -17,8 +17,6 @@
 
 #include "convertertest.h"
 
-#include <config-kmymoney.h>
-
 #include <QtTest/QtTest>
 #include <QFile>
 

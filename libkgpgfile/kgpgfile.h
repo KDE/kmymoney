@@ -45,10 +45,6 @@ class EncryptionResult;
 // Project Includes
 
 
-#ifdef HAVE_CONFIG_H
-#include <config-kmymoney.h>
-#endif
-
 namespace GpgME
 {
 class Error;

@@ -23,6 +23,8 @@
 
 #include <QtTest/QtTest>
 
+#include <config-kmymoney.h>
+
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyMoneyTest;
 
 // Check for standard definitions

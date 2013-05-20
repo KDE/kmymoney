@@ -20,8 +20,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config-kmymoney.h>
-
 #include "mymoneyfinancialcalculator.h"
 
 #include <stdio.h>

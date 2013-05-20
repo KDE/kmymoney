@@ -47,7 +47,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <config-kmymoney.h>
 #include <mymoneyfile.h>
 #include <mymoneyreport.h>
 #include <kmymoneyglobalsettings.h>
