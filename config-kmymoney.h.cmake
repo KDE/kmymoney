@@ -24,9 +24,3 @@
 #cmakedefine KMM_DEBUG 1
 
 #cmakedefine KMM_DESIGNER 1
-
-#ifdef __GNUC__
-#  define KMM_PRINTF_FORMAT(x, y) __attribute__((format(__printf__, x, y)))
-#else
-#  define KMM_PRINTF_FORMAT(x, y) /*NOTHING*/
-#endif

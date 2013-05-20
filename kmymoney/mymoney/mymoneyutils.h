@@ -23,10 +23,6 @@
 #ifndef MYMONEYUTILS_H
 #define MYMONEYUTILS_H
 
-#ifdef HAVE_CONFIG_H
-#include <config-kmymoney.h>
-#endif
-
 #include <QString>
 #include <QDateTime>
 #include <kmm_mymoney_export.h>
@@ -52,6 +48,12 @@ typedef long long DLONG;
 
 typedef QString String;
 #endif // 0
+
+#ifdef __GNUC__
+#  define KMM_PRINTF_FORMAT(x, y) __attribute__((format(__printf__, x, y)))
+#else
+#  define KMM_PRINTF_FORMAT(x, y) /*NOTHING*/
+#endif
 
 class MyMoneyMoney;
 class MyMoneySecurity;
