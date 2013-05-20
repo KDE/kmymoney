@@ -120,7 +120,6 @@ pkg_check_modules (PKGS libxml-2.0 libxml++-2.6 glib-2.0 glibmm-2.4)
 
 # check some functions
 INCLUDE (CheckFunctionExists) 
-CHECK_FUNCTION_EXISTS(atoll HAVE_ATOLL)
 
 IF(NOT WIN32)
     SET(CMAKE_REQUIRED_FLAGS "-std=c99")
