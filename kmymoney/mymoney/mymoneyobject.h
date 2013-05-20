@@ -118,7 +118,7 @@ protected:
    */
   MyMoneyObject(const QDomElement& node, const bool forceId = true);
 
-  void setId(const QString& id) /* __attribute__ ((deprecated)) */;
+  /* KDE_DEPRECATED */ void setId(const QString& id);
 
   /**
    * This method writes out the members contained in this object.

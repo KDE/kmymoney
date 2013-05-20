@@ -503,7 +503,7 @@ public:
     *
     * @deprecated use isIncomeExpense() instead
     */
-  bool isCategory(void) const __attribute__((deprecated));
+  KDE_DEPRECATED bool isCategory(void) const;
 
   /**
     * This method returns @a true if the account type is

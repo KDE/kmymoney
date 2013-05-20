@@ -88,7 +88,7 @@ public:
   const QString& commodity(void) const {
     return m_commodity;
   };
-  const QString& bankID(void) const { /*__attribute__ ((deprecated))*/
+  /* KDE_DEPRECATED */ const QString& bankID(void) const {
     return m_bankID;
   };
 
@@ -99,7 +99,7 @@ public:
   void setCommodity(const QString& commodityId) {
     m_commodity = commodityId;
   };
-  void setBankID(const QString& bankID) { /*__attribute__ ((deprecated))*/
+  /* KDE_DEPRECATED */ void setBankID(const QString& bankID) {
     m_bankID = bankID;
   };
 
