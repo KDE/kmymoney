@@ -44,3 +44,9 @@
 #ifndef __GNUC__
 #  define  __attribute__(x)  /*NOTHING*/
 #endif
+
+#ifdef __GNUC__
+#  define KMM_PRINTF_FORMAT(x, y) __attribute__((format(__printf__, x, y)))
+#else
+#  define KMM_PRINTF_FORMAT(x, y) /*NOTHING*/
+#endif
