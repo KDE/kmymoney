@@ -6290,6 +6290,7 @@ void KMyMoneyApp::slotUpdateActions(void)
       tooltip = i18n("Duplicate the current selected transactions");
       action("transaction_duplicate")->setEnabled(d->m_myMoneyView->canDuplicateTransactions(d->m_selectedTransactions, tooltip) && !d->m_selectedTransactions[0].transaction().id().isEmpty());
       action("transaction_duplicate")->setToolTip(tooltip);
+
       if (d->m_myMoneyView->canEditTransactions(d->m_selectedTransactions, tooltip)) {
         action("transaction_edit")->setEnabled(true);
         // editing splits is allowed only if we have one transaction selected
@@ -6363,6 +6364,7 @@ void KMyMoneyApp::slotUpdateActions(void)
       //FIXME: Port to KDE4
       // the next line somehow worked in KDE3 but does not have
       // any influence under KDE4
+      ///  Works for me when 'reason' is set. Allan
       action("transaction_enter")->setToolTip(reason);
       action("transaction_cancel")->setEnabled(true);
     }

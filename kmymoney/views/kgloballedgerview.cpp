@@ -34,6 +34,7 @@
 #include <QVBoxLayout>
 #include <QHeaderView>
 #include <QApplication>
+#include <QToolTip>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -276,6 +277,8 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   d->m_mousePressFilter->addWidget(m_buttonFrame);
   d->m_mousePressFilter->addWidget(m_summaryFrame);
   d->m_mousePressFilter->addWidget(m_registerFrame);
+
+  m_tooltipPosn = QPoint();
 }
 
 KGlobalLedgerView::~KGlobalLedgerView()
@@ -1327,6 +1330,16 @@ void KGlobalLedgerView::showEvent(QShowEvent* event)
 bool KGlobalLedgerView::eventFilter(QObject* o, QEvent* e)
 {
   bool rc = false;
+  //  Need to capture mouse position here as QEvent::ToolTip is too slow
+  m_tooltipPosn = QCursor::pos();
+
+  if (e->type() == QEvent::ToolTip) {
+    QHelpEvent *helpEvent = static_cast<QHelpEvent *>(e);
+    m_tooltipPosn = helpEvent->globalPos();
+    QString txt;
+    showTooltip(txt);
+    rc = true;
+  }
 
   if (e->type() == QEvent::KeyPress) {
     if (m_inEditMode) {
@@ -1343,6 +1356,11 @@ bool KGlobalLedgerView::eventFilter(QObject* o, QEvent* e)
     rc = KMyMoneyViewBase::eventFilter(o, e);
 
   return rc;
+}
+
+void KGlobalLedgerView::showTooltip(const QString msg) const
+{
+  QToolTip::showText(m_tooltipPosn, msg);
 }
 
 void KGlobalLedgerView::slotSortOptions(void)
@@ -1410,10 +1428,12 @@ bool KGlobalLedgerView::canCreateTransactions(QString& tooltip) const
   if (m_account.accountGroup() == MyMoneyAccount::Income
       || m_account.accountGroup() == MyMoneyAccount::Expense) {
     tooltip = i18n("Cannot create transactions in the context of a category.");
+    showTooltip(tooltip);
     rc = false;
   }
   if (m_account.isClosed()) {
     tooltip = i18n("Cannot create transactions in a closed account.");
+    showTooltip(tooltip);
     rc = false;
   }
   return rc;
@@ -1421,13 +1441,36 @@ bool KGlobalLedgerView::canCreateTransactions(QString& tooltip) const
 
 bool KGlobalLedgerView::canProcessTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
 {
+  MyMoneyAccount acc;
+  QString closedAccount;
   if (m_register->focusItem() == 0)
     return false;
 
-  if (!m_register->focusItem()->isSelected()) {
-    tooltip = i18n("Cannot process transaction with focus if it is not selected.");
+  bool rc = true;
+  if (list.warnLevel() == 3) {  //Closed account somewhere
+    KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
+    for (it_t = list.begin(); rc && it_t != list.end(); ++it_t) {
+      QList<MyMoneySplit> splitList = (*it_t).transaction().splits();
+      QString id = splitList.first().accountId();
+      acc = MyMoneyFile::instance()->account(id);
+      if (!acc.isClosed()) {  //wrong split, try other
+        id = splitList.last().accountId();
+        acc = MyMoneyFile::instance()->account(id);
+      }
+      closedAccount = acc.name();
+      break;
+    }
+    tooltip = i18n("Cannot process transactions in account %1, which is closed.", closedAccount);
+    showTooltip(tooltip);
     return false;
   }
+
+  if (!m_register->focusItem()->isSelected()) {
+    tooltip = i18n("Cannot process transaction with focus if it is not selected.");
+    showTooltip(tooltip);
+    return false;
+  }
+  tooltip.clear();
   return !list.isEmpty();
 }
 
@@ -1456,9 +1499,9 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
   // check for c)
   if (list.warnLevel() == 2) {
     tooltip = i18n("Cannot edit transactions with frozen splits.");
+    showTooltip(tooltip);
     return false;
   }
-
 
   bool rc = true;
   int investmentTransactions = 0;
@@ -1467,15 +1510,38 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
   if (m_account.accountGroup() == MyMoneyAccount::Income
       || m_account.accountGroup() == MyMoneyAccount::Expense) {
     tooltip = i18n("Cannot edit transactions in the context of a category.");
+    showTooltip(tooltip);
+    rc = false;
+  }
+
+  if (m_account.isClosed()) {
+    tooltip = i18n("Cannot create or edit any transactions in Account %1 as it is closed", m_account.name());
+    showTooltip(tooltip);
     rc = false;
   }
 
   KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
+  QString action;
   for (it_t = list.begin(); rc && it_t != list.end(); ++it_t) {
     if ((*it_t).transaction().id().isEmpty()) {
       tooltip.clear();
       rc = false;
       continue;
+    }
+
+    if (KMyMoneyUtils::transactionType((*it_t).transaction()) == KMyMoneyUtils::InvestmentTransaction) {
+      if (action.isEmpty()) {
+        action = (*it_t).split().action();
+        continue;
+      }
+      if (action == (*it_t).split().action()) {
+        continue;
+      } else {
+        tooltip = (i18n("Cannot edit mixed investment action/type transactions together."));
+        showTooltip(tooltip);
+        rc = false;
+        break;
+      }
     }
 
     if (KMyMoneyUtils::transactionType((*it_t).transaction()) == KMyMoneyUtils::InvestmentTransaction)
@@ -1486,6 +1552,7 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
     // check for a)
     if (investmentTransactions != 0 && normalTransactions != 0) {
       tooltip = i18n("Cannot edit investment transactions and non-investment transactions together.");
+      showTooltip(tooltip);
       rc = false;
       break;
     }
@@ -1494,6 +1561,7 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
     if ((*it_t).transaction().splitCount() > 2 && normalTransactions != 0) {
       if (list.count() > 1) {
         tooltip = i18n("Cannot edit multiple split transactions at once.");
+        showTooltip(tooltip);
         rc = false;
         break;
       }
@@ -1503,9 +1571,9 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
   // check for multiple transactions being selected in an investment account
   // we do not allow editing in this case: https://bugs.kde.org/show_bug.cgi?id=240816
   // later on, we might allow to edit investment transactions of the same type
-  ///  Can now disable this check.
+  ///  Can now disable the following check.
 
-/**  if (rc == true && investmentTransactions > 1) {
+/*  if (rc == true && investmentTransactions > 1) {
     tooltip = i18n("Cannot edit multiple investment transactions at once");
     rc = false;
   }*/

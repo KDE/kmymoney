@@ -231,6 +231,9 @@ public slots:
     */
   void slotSelectAllTransactions(void);
 
+private:
+  void showTooltip(const QString msg) const;
+
 protected:
   /**
     * This method reloads the account selection combo box of the
@@ -351,6 +354,7 @@ private:
   bool                            m_inEditMode;
 
   QWidgetList                     m_tabOrderWidgets;
+  QPoint                          m_tooltipPosn;
 
 signals:
   void accountSelected(const MyMoneyObject&);
