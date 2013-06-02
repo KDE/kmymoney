@@ -268,6 +268,7 @@ void KPayeesView::slotChooseDefaultAccount(void)
   if (most_frequent != account_count.end()) {
     checkEnableDefaultCategory->setChecked(true);
     comboDefaultCategory->setSelected(most_frequent.key());
+    setDirty();
   }
 }
 
@@ -378,10 +379,9 @@ void KPayeesView::slotSelectPayee(void)
 {
   // check if the content of a currently selected payee was modified
   // and ask to store the data
-  if (m_updateButton->isEnabled()) {
-    if (KMessageBox::questionYesNo(this, QString("<qt>%1</qt>").arg(
-                                     i18n("Do you want to save the changes for <b>%1</b>?", m_newName)),
-                                   i18n("Save changes")) == KMessageBox::Yes) {
+  if (isDirty()) {
+    QString question = QString("<qt>%1</qt>").arg(i18n("Do you want to save the changes for <b>%1</b>?", m_newName));
+    if (KMessageBox::questionYesNo(this, question, i18n("Save changes")) == KMessageBox::Yes) {
       m_inSelection = true;
       slotUpdatePayee();
       m_inSelection = false;
@@ -561,7 +561,7 @@ void KPayeesView::slotKeyListChanged(void)
   if (m_matchType->checkedId() == MyMoneyPayee::matchKey) {
     rc |= (keys != matchKeyEditList->items());
   }
-  m_updateButton->setEnabled(rc);
+  setDirty(rc);
 }
 
 void KPayeesView::slotPayeeDataChanged(void)
@@ -621,14 +621,14 @@ void KPayeesView::slotPayeeDataChanged(void)
       labelDefaultCategory->setEnabled(false);
     }
   }
-  m_updateButton->setEnabled(rc);
+  setDirty(rc);
 }
 
 void KPayeesView::slotUpdatePayee(void)
 {
-  if (m_updateButton->isEnabled()) {
+  if (isDirty()) {
     MyMoneyFileTransaction ft;
-    m_updateButton->setEnabled(false);
+    setDirty(false);
     try {
       m_payee.setName(m_newName);
       m_payee.setAddress(addressEdit->toPlainText());
@@ -842,6 +842,16 @@ void KPayeesView::slotChangeFilter(int index)
   //update the filter type then reload the payees list
   m_payeeFilterType = index;
   loadPayees();
+}
+
+bool KPayeesView::isDirty() const
+{
+  return m_updateButton->isEnabled();
+}
+
+void KPayeesView::setDirty(bool dirty)
+{
+    m_updateButton->setEnabled(dirty);
 }
 
 #include "kpayeesview.moc"

@@ -207,6 +207,16 @@ private:
   int m_payeeFilterType;
 
   AccountNamesFilterProxyModel *m_filterProxyModel;
+
+  /** Checks whether the currently selected payee is "dirty"
+   * @return true, if payee is modified (is "dirty"); false otherwise
+   */
+  bool isDirty() const;
+
+  /** Sets the payee's "dirty" (modified) status
+   * @param dirty if true (default), payee will be set to dirty
+   */
+  void setDirty(bool dirty = true);
 };
 
 #endif
