@@ -15,6 +15,7 @@
  ***************************************************************************/
 
 #include "mymoneydatabasemgrtest.h"
+#include <unistd.h>
 #include <pwd.h>
 #include <iostream>
 
