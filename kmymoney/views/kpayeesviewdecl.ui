@@ -436,9 +436,9 @@
          </attribute>
          <layout class="QVBoxLayout">
           <item>
-           <widget class="QCheckBox" name="checkEnableDefaultAccount">
+           <widget class="QCheckBox" name="checkEnableDefaultCategory">
             <property name="text">
-             <string>Use the default account for
+             <string>Use the default category for
 new transactions with this payee</string>
             </property>
            </widget>
@@ -446,7 +446,7 @@ new transactions with this payee</string>
           <item>
            <layout class="QGridLayout">
             <item row="0" column="0">
-             <widget class="QLabel" name="labelDefaultAccount">
+             <widget class="QLabel" name="labelDefaultCategory">
               <property name="text">
                <string>Default category:</string>
               </property>
@@ -456,10 +456,10 @@ new transactions with this payee</string>
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="KMyMoneyAccountCombo" name="comboDefaultAccount"/>
+             <widget class="KMyMoneyAccountCombo" name="comboDefaultCategory"/>
             </item>
             <item row="1" column="1">
-             <widget class="KPushButton" name="buttonSelectMyAccount">
+             <widget class="KPushButton" name="buttonSuggestACategory">
               <property name="text">
                <string>Suggest a category</string>
               </property>

@@ -104,7 +104,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_filterProxyModel->addAccountGroup(MyMoneyAccount::Expense);
   m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
   m_filterProxyModel->sort(0);
-  comboDefaultAccount->setModel(m_filterProxyModel);
+  comboDefaultCategory->setModel(m_filterProxyModel);
 
   m_matchType->setId(radioNoMatch, 0);
   m_matchType->setId(radioNameMatch, 1);
@@ -155,9 +155,9 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   checkMatchIgnoreCase->setEnabled(false);
 
-  checkEnableDefaultAccount->setChecked(false);
-  labelDefaultAccount->setEnabled(false);
-  comboDefaultAccount->setEnabled(false);
+  checkEnableDefaultCategory->setChecked(false);
+  labelDefaultCategory->setEnabled(false);
+  comboDefaultCategory->setEnabled(false);
 
   QList<KMyMoneyRegister::Column> cols;
   cols << KMyMoneyRegister::DateColumn;
@@ -193,9 +193,9 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(radioKeyMatch, SIGNAL(toggled(bool)), this, SLOT(slotPayeeDataChanged()));
   connect(checkMatchIgnoreCase, SIGNAL(toggled(bool)), this, SLOT(slotPayeeDataChanged()));
 
-  connect(checkEnableDefaultAccount, SIGNAL(toggled(bool)), this, SLOT(slotPayeeDataChanged()));
-  connect(comboDefaultAccount, SIGNAL(accountSelected(QString)), this, SLOT(slotPayeeDataChanged()));
-  connect(buttonSelectMyAccount, SIGNAL(clicked()), this, SLOT(slotChooseDefaultAccount()));
+  connect(checkEnableDefaultCategory, SIGNAL(toggled(bool)), this, SLOT(slotPayeeDataChanged()));
+  connect(comboDefaultCategory, SIGNAL(accountSelected(QString)), this, SLOT(slotPayeeDataChanged()));
+  connect(buttonSuggestACategory, SIGNAL(clicked()), this, SLOT(slotChooseDefaultAccount()));
 
   connect(m_updateButton, SIGNAL(clicked()), this, SLOT(slotUpdatePayee()));
   connect(m_helpButton, SIGNAL(clicked()), this, SLOT(slotHelp()));
@@ -266,8 +266,8 @@ void KPayeesView::slotChooseDefaultAccount(void)
   }
 
   if (most_frequent != account_count.end()) {
-    checkEnableDefaultAccount->setChecked(true);
-    comboDefaultAccount->setSelected(most_frequent.key());
+    checkEnableDefaultCategory->setChecked(true);
+    comboDefaultCategory->setSelected(most_frequent.key());
   }
 }
 
@@ -445,8 +445,8 @@ void KPayeesView::slotSelectPayee(void)
     matchKeyEditList->insertStringList(keys);
     checkMatchIgnoreCase->setChecked(ignorecase);
 
-    checkEnableDefaultAccount->setChecked(m_payee.defaultAccountEnabled());
-    comboDefaultAccount->setSelected(m_payee.defaultAccountId());
+    checkEnableDefaultCategory->setChecked(m_payee.defaultAccountEnabled());
+    comboDefaultCategory->setSelected(m_payee.defaultAccountId());
 
     slotPayeeDataChanged();
 
@@ -604,21 +604,21 @@ void KPayeesView::slotPayeeDataChanged(void)
       }
     }
 
-    rc |= (checkEnableDefaultAccount->isChecked() != m_payee.defaultAccountEnabled());
-    if (checkEnableDefaultAccount->isChecked()) {
-      comboDefaultAccount->setEnabled(true);
-      labelDefaultAccount->setEnabled(true);
+    rc |= (checkEnableDefaultCategory->isChecked() != m_payee.defaultAccountEnabled());
+    if (checkEnableDefaultCategory->isChecked()) {
+      comboDefaultCategory->setEnabled(true);
+      labelDefaultCategory->setEnabled(true);
       // this is only going to understand the first in the list of selected accounts
-      if (comboDefaultAccount->getSelected().isEmpty()) {
+      if (comboDefaultCategory->getSelected().isEmpty()) {
         rc |= !m_payee.defaultAccountId().isEmpty();
       } else {
-        QString temp = comboDefaultAccount->getSelected();
+        QString temp = comboDefaultCategory->getSelected();
         rc |= (temp.isEmpty() != m_payee.defaultAccountId().isEmpty())
               || (!m_payee.defaultAccountId().isEmpty() && temp != m_payee.defaultAccountId());
       }
     } else {
-      comboDefaultAccount->setEnabled(false);
-      labelDefaultAccount->setEnabled(false);
+      comboDefaultCategory->setEnabled(false);
+      labelDefaultCategory->setEnabled(false);
     }
   }
   m_updateButton->setEnabled(rc);
@@ -639,10 +639,10 @@ void KPayeesView::slotUpdatePayee(void)
       m_payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(m_matchType->checkedId()), checkMatchIgnoreCase->isChecked(), matchKeyEditList->items());
       m_payee.setDefaultAccountId();
 
-      if (checkEnableDefaultAccount->isChecked()) {
+      if (checkEnableDefaultCategory->isChecked()) {
         QString temp;
-        if (!comboDefaultAccount->getSelected().isEmpty()) {
-          temp = comboDefaultAccount->getSelected();
+        if (!comboDefaultCategory->getSelected().isEmpty()) {
+          temp = comboDefaultCategory->getSelected();
           m_payee.setDefaultAccountId(temp);
         }
       }
@@ -744,7 +744,7 @@ void KPayeesView::loadPayees(void)
   }
 
   m_filterProxyModel->invalidate();
-  comboDefaultAccount->expandAll();
+  comboDefaultCategory->expandAll();
 
   slotSelectPayee(0, 0);
   m_allowEditing = true;
