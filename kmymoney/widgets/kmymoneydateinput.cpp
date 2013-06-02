@@ -139,20 +139,30 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
 
   QString dateFormat = KGlobal::locale()->dateFormatShort().toLower();
   QString order, separator;
+  bool lastWasPercent = false;
   for (int i = 0; i < dateFormat.length(); ++i) {
     // DD.MM.YYYY is %d.%m.%y
     // dD.mM.YYYY is %e.%n.%y
     // SHORTWEEKDAY, dD SHORTMONTH YYYY is %a, %e %b %Y
-    if (dateFormat[i] == 'y' || dateFormat[i] == 'm' || dateFormat[i] == 'n' || dateFormat[i] == 'd' || dateFormat[i] == 'e') {
-      if (dateFormat[i] == 'n')
-        dateFormat[i] = 'm';
-      if (dateFormat[i] == 'e')
-        dateFormat[i] = 'd';
-      order += dateFormat[i];
-    } else if (dateFormat[i] != '%' && separator.isEmpty())
+    if(lastWasPercent == true) {
+      if (dateFormat[i] == 'y' || dateFormat[i] == 'm' || dateFormat[i] == 'n' || dateFormat[i] == 'd' || dateFormat[i] == 'e') {
+        if (dateFormat[i] == 'n')
+          dateFormat[i] = 'm';
+        if (dateFormat[i] == 'e')
+          dateFormat[i] = 'd';
+        order += dateFormat[i];
+      }
+
+    } else if(dateFormat[i] == '%') {
+      lastWasPercent = true;
+      continue;
+
+    } else if (separator.isEmpty() && !order.isEmpty())
       separator = dateFormat[i];
+
     if (order.length() == 3)
       break;
+    lastWasPercent = false;
   }
 
   // see if we find a known format. If it's unknown, then we use YMD (international)
