@@ -22,6 +22,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <kdeversion.h>
 #include <KStandardDirs>
 #include <KHolidays/Holidays>
 using namespace KHolidays;
@@ -48,8 +49,24 @@ KSettingsSchedules::KSettingsSchedules(QWidget* parent) :
 
 void KSettingsSchedules::loadList(void)
 {
-  QStringList countries = HolidayRegion::locations();
   QStringList regions;
+#if KDE_IS_VERSION(4,5,0)
+  QStringList regionCodes = HolidayRegion::regionCodes();
+
+  foreach (const QString &regionCode, regionCodes) {
+    QString regionName = HolidayRegion::name(regionCode);
+    QString languageName = KGlobal::locale()->languageCodeToName(HolidayRegion::languageCode(regionCode));
+    QString region;
+    if (languageName.isEmpty())
+      region = regionName;
+    else
+      region = i18nc("Holiday region (region language)", "%1 (%2)", regionName, languageName);
+
+    m_regionMap[region] = regionCode;
+    regions << region;
+  }
+#else
+  QStringList countries = HolidayRegion::locations();
 
   foreach (const QString &country, countries) {
     QString file = KStandardDirs::locate("locale",
@@ -66,6 +83,7 @@ void KSettingsSchedules::loadList(void)
     m_regionMap[region] = country;
     regions << region;
   }
+#endif
   regions.sort();
 
   m_regionMap[m_holidayRegion->itemText(0)] = "";
