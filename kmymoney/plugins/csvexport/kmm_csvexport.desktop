@@ -2,6 +2,7 @@
 Name=csvexport
 Name[da]=csvexport
 Name[de]=CSV-Export
+Name[el]=Εξαγωγή csv
 Name[es]=csvexport
 Name[fi]=csvexport
 Name[it]=csvexport
@@ -15,6 +16,7 @@ Name[x-test]=xxcsvexportxx
 Comment=Add CSV exporting to KMyMoney
 Comment[da]=Føj CSV-eksport til KMyMoney
 Comment[de]=Fügt CSV-Export zu KMyMoney hinzu
+Comment[el]=Προσθήκη της εξαγωγής CSV στο KMyMoney
 Comment[es]=Añade la exportación a CSV a KMyMoney
 Comment[fi]=Lisää CSV-vienti KMyMoney-ohjelmaan
 Comment[it]=Aggiungi l'esportazione CSV a KMyMoney
