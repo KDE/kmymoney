@@ -345,8 +345,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   QDBusConnection::sessionBus().interface()->registerService(
     "org.kde.kmymoney", QDBusConnectionInterface::DontQueueService);
 
-  ::timetrace("start kmymoneyapp constructor");
-
   // Register the main engine types used as meta-objects
   qRegisterMetaType<MyMoneyMoney>("MyMoneyMoney");
   qRegisterMetaType<MyMoneySecurity>("MyMoneySecurity");
@@ -368,14 +366,11 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->setContentsMargins(2, 2, 2, 2);
   layout->setSpacing(6);
 
-  ::timetrace("init statusbar");
   initStatusBar();
-  ::timetrace("init actions");
   initActions();
 
   initDynamicMenus();
 
-  ::timetrace("create view");
   d->m_myMoneyView = new KMyMoneyView(frame);
   layout->addWidget(d->m_myMoneyView, 10);
   connect(d->m_myMoneyView, SIGNAL(aboutToChangeView()), this, SLOT(slotResetSelections()));
@@ -384,17 +379,13 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   ///////////////////////////////////////////////////////////////////
   // call inits to invoke all other construction parts
-  ::timetrace("init options");
   readOptions();
 
   // now initialize the plugin structure
-  ::timetrace("load plugins");
   createInterfaces();
   loadPlugins();
 
   setCentralWidget(frame);
-
-  ::timetrace("done");
 
   connect(&d->m_proc, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotProcessExited()));
 
@@ -1553,15 +1544,11 @@ void KMyMoneyApp::slotFileOpenRecent(const KUrl& url)
           } else {
             d->m_fileName = KUrl(); // imported files have no filename
           }
-          ::timetrace("Start checking schedules");
           // Check the schedules
           slotCheckSchedules();
-          ::timetrace("Done checking schedules");
         }
         updateCaption();
-        ::timetrace("Announcing new filename");
         emit fileLoaded(d->m_fileName);
-        ::timetrace("Announcing new filename done");
       } else {
         /*fileOpen failed - should we do something
          or maybe fileOpen puts out the message... - it does for database*/
@@ -7408,4 +7395,3 @@ void KMyMoneyApp::Private::closeFile(void)
 
 #include "kmymoney.moc"
 // vim:cin:si:ai:et:ts=2:sw=2:
-

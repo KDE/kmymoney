@@ -205,7 +205,6 @@ void KHomeView::loadView(void)
 {
   d->m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
-  ::timetrace("Start KHomeView::loadView");
   QList<MyMoneyAccount> list;
   MyMoneyFile::instance()->accountList(list);
   if (list.count() == 0) {
@@ -234,19 +233,16 @@ void KHomeView::loadView(void)
 
     QStringList::ConstIterator it;
 
-    ::timetrace("Done preparation");
     for (it = settings.constBegin(); it != settings.constEnd(); ++it) {
       int option = (*it).toInt();
       if (option > 0) {
         switch (option) {
           case 1:         // payments
             showPayments();
-            ::timetrace("Done KHomeView::showPayments");
             break;
 
           case 2:         // preferred accounts
             showAccounts(Preferred, i18n("Preferred Accounts"));
-            ::timetrace("Done KHomeView::showPreferredAccounts");
             break;
 
           case 3:         // payment accounts
@@ -257,31 +253,24 @@ void KHomeView::loadView(void)
             } else {
               showAccounts(Payment, i18n("Payment Accounts"));
             }
-            ::timetrace("Done KHomeView::showPaymentAccounts");
             break;
           case 4:         // favorite reports
             showFavoriteReports();
-            ::timetrace("Done KHomeView::showFavoriteReports");
             break;
           case 5:         // forecast
             showForecast();
-            ::timetrace("Done KHomeView::showForecast");
             break;
           case 6:         // net worth graph over all accounts
             showNetWorthGraph();
-            ::timetrace("Done KHomeView::showNetWorthGraph");
             break;
           case 8:         // assets and liabilities
             showAssetsLiabilities();
-            ::timetrace("Done KHomeView::showAssetsLiabilities");
             break;
           case 9:         // budget
             showBudget();
-            ::timetrace("Done KHomeView::showBudget");
             break;
           case 10:         // cash flow summary
             showCashFlowSummary();
-            ::timetrace("Done KHomeView::showCashFlowSummary");
             break;
 
 
@@ -300,7 +289,6 @@ void KHomeView::loadView(void)
     d->m_part->write(d->m_html);
     d->m_part->end();
   }
-  ::timetrace("Done KHomeView::loadView");
 }
 
 void KHomeView::showNetWorthGraph(void)

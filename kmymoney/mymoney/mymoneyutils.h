@@ -59,7 +59,6 @@ class MyMoneyMoney;
 class MyMoneySecurity;
 class MyMoneyAccount;
 
-void timetrace(const char *);
 void timestamp(const char *);
 
 //class that has utility functions to use throughout the application.

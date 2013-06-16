@@ -533,8 +533,6 @@ void KTagsView::loadTags(void)
   QString id;
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  ::timetrace("Start KTagsView::loadTags");
-
   // remember which items are selected in the list
   QList<QListWidgetItem *> selectedItems = m_tagsList->selectedItems();
   QList<QListWidgetItem *>::const_iterator tagsIt = selectedItems.constBegin();
@@ -586,8 +584,6 @@ void KTagsView::loadTags(void)
 
   slotSelectTag(0, 0);
   m_allowEditing = true;
-
-  ::timetrace("End KTagsView::loadTags");
 }
 
 void KTagsView::slotSelectTransaction(void)

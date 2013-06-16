@@ -140,8 +140,6 @@ void KCategoriesView::slotLoadAccounts(void)
 
 void KCategoriesView::loadAccounts(void)
 {
-  ::timetrace("start load categories view");
-
   m_filterProxyModel->invalidate();
   m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
 
@@ -154,8 +152,6 @@ void KCategoriesView::loadAccounts(void)
   if (KMyMoneyGlobalSettings::showAccountsExpanded()) {
     m_accountTree->expandAll();
   }
-
-  ::timetrace("done load categories view");
 }
 
 /**

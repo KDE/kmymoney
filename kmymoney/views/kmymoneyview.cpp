@@ -721,7 +721,6 @@ bool KMyMoneyView::readFile(const KUrl& url)
   bool haveAt = true;
 
   emit kmmFilePlugin(preOpen);
-  ::timetrace("start reading file");
   if (file.open(QIODevice::ReadOnly)) {
     QByteArray hdr(2, '\0');
     int cnt;
@@ -730,14 +729,11 @@ bool KMyMoneyView::readFile(const KUrl& url)
 
     if (cnt == 2) {
       if (QString(hdr) == QString("\037\213")) {        // gzipped?
-        ::timetrace("detected GZIP");
         qfile = KFilterDev::deviceForFile(filename, COMPRESSION_MIME_TYPE);
       } else if (QString(hdr) == QString("--")          // PGP ASCII armored?
                  || QString(hdr) == QString("\205\001")     // PGP binary?
                  || QString(hdr) == QString("\205\002")) {  // PGP binary?
-        ::timetrace("detected GPG");
         if (KGPGFile::GPGAvailable()) {
-          ::timetrace("have GPG");
           qfile = new KGPGFile(filename);
           haveAt = false;
           isEncrypted = true;
@@ -750,7 +746,6 @@ bool KMyMoneyView::readFile(const KUrl& url)
         qfile = new QFile(file.fileName());
       }
 
-      ::timetrace("open file");
       if (qfile->open(QIODevice::ReadOnly)) {
         try {
           hdr.resize(8);
@@ -784,7 +779,6 @@ bool KMyMoneyView::readFile(const KUrl& url)
               pReader = 0;
               m_fileType = KmmBinary;
             } else {
-              ::timetrace("is not binary format");
               // Scan the first 70 bytes to see if we find something
               // we know. For now, we support our own XML format and
               // GNUCash XML format. If the file is smaller, then it
@@ -799,11 +793,9 @@ bool KMyMoneyView::readFile(const KUrl& url)
                 QRegExp gncexp("<gnc-v(\\d+)");
                 QByteArray txt(hdr, 70);
                 if (kmyexp.indexIn(txt) != -1) {
-                  ::timetrace("is XML format");
                   pReader = new MyMoneyStorageXML;
                   m_fileType = KmmXML;
                 } else if (gncexp.indexIn(txt) != -1) {
-                  ::timetrace("is GNC format");
                   MyMoneyFile::instance()->attachStorage(storage);
                   MyMoneyFileTransaction ft;
                   loadDefaultCurrencies(); // currency list required for gnc
@@ -818,9 +810,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
             }
             if (pReader) {
               pReader->setProgressCallback(&KMyMoneyView::progressCallback);
-              ::timetrace("read data to memory");
               pReader->readFile(qfile, dynamic_cast<IMyMoneySerialize*>(storage));
-              ::timetrace("done reading to memory");
             } else {
               if (m_fileType == KmmBinary) {
                 KMessageBox::sorry(this, QString("<qt>%1</qt>"). arg(i18n("File <b>%1</b> contains the old binary format used by KMyMoney. Please use an older version of KMyMoney (0.8.x) that still supports this format to convert it to the new XML based format.", filename)));
@@ -864,7 +854,6 @@ bool KMyMoneyView::readFile(const KUrl& url)
   // objects that are cached
   MyMoneyFile::instance()->attachStorage(storage);
 
-  ::timetrace("done reading file");
   if (rc == false)
     return rc;
 
@@ -908,7 +897,6 @@ void KMyMoneyView::checkAccountName(const MyMoneyAccount& _acc, const QString& n
 
 bool KMyMoneyView::openDatabase(const KUrl& url)
 {
-  ::timetrace("start opening database");
   m_fileOpen = false;
 
   // open the database
@@ -966,7 +954,6 @@ bool KMyMoneyView::openDatabase(const KUrl& url)
   }
   m_fileOpen = true;
   reader->setProgressCallback(0);
-  ::timetrace("done opening database");
   return initializeStorage();
 }
 
@@ -1035,7 +1022,6 @@ bool KMyMoneyView::initializeStorage()
   } else {
     page = m_homeViewFrame;
   }
-  ::timetrace("start fixing file");
 
   // For debugging purposes, we can turn off the automatic fix manually
   // by setting the entry in kmymoneyrc to true
@@ -1091,7 +1077,6 @@ bool KMyMoneyView::initializeStorage()
   // new account wizard
   // kmymoney->createInitialAccount();
 
-  ::timetrace("file open");
   m_fileOpen = true;
   emit kmmFilePlugin(postOpen);
 
@@ -1972,17 +1957,14 @@ void KMyMoneyView::fixFile_0(void)
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneyAccount> accountList;
   file->accountList(accountList);
-  ::timetrace("Have account list");
   QList<MyMoneyAccount>::Iterator it_a;
   QList<MyMoneySchedule> scheduleList = file->scheduleList();
-  ::timetrace("Have schedule list");
   QList<MyMoneySchedule>::Iterator it_s;
 
   MyMoneyAccount equity = file->equity();
   MyMoneyAccount asset = file->asset();
   bool equityListEmpty = equity.accountList().count() == 0;
 
-  ::timetrace("Fix accounts start");
   for (it_a = accountList.begin(); it_a != accountList.end(); ++it_a) {
     if ((*it_a).accountType() == MyMoneyAccount::Loan
         || (*it_a).accountType() == MyMoneyAccount::AssetLoan) {
@@ -2005,14 +1987,11 @@ void KMyMoneyView::fixFile_0(void)
     }
   }
 
-  ::timetrace("Fix schedules start");
   for (it_s = scheduleList.begin(); it_s != scheduleList.end(); ++it_s) {
     fixSchedule_0(*it_s);
   }
 
-  ::timetrace("Fix transactions start");
   fixTransactions_0();
-  ::timetrace("Fix transactions done");
 }
 
 void KMyMoneyView::fixSchedule_0(MyMoneySchedule sched)
@@ -2144,21 +2123,11 @@ void KMyMoneyView::fixTransactions_0(void)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-#if 0
-  ::timetrace("Start alloc memory");
-  int * p = new int [10000];
-  delete p;
-  ::timetrace("Done alloc memory");
-#endif
-
-  ::timetrace("fixTransactions: get schedule list");
   QList<MyMoneySchedule> scheduleList = file->scheduleList();
-  ::timetrace("fixTransactions: get transaction list");
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
   QList<MyMoneyTransaction> transactionList;
   file->transactionList(transactionList, filter);
-  ::timetrace("fixTransactions: have list");
 
   QList<MyMoneySchedule>::Iterator it_x;
   QStringList interestAccounts;
@@ -2196,7 +2165,6 @@ void KMyMoneyView::fixTransactions_0(void)
       kmymoney->slotStatusProgressBar(cnt);
   }
 
-  ::timetrace("fixTransactions: start loop");
   // scan the transactions and modify loan transactions
   QList<MyMoneyTransaction>::Iterator it_t;
   for (it_t = transactionList.begin(); it_t != transactionList.end(); ++it_t) {

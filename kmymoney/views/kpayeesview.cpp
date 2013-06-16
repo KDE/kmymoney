@@ -696,8 +696,6 @@ void KPayeesView::loadPayees(void)
   QString id;
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  ::timetrace("Start KPayeesView::loadPayees");
-
   // remember which items are selected in the list
   QList<QListWidgetItem *> selectedItems = m_payeesList->selectedItems();
   QList<QListWidgetItem *>::const_iterator payeesIt = selectedItems.constBegin();
@@ -748,8 +746,6 @@ void KPayeesView::loadPayees(void)
 
   slotSelectPayee(0, 0);
   m_allowEditing = true;
-
-  ::timetrace("End KPayeesView::loadPayees");
 }
 
 void KPayeesView::slotSelectTransaction(void)

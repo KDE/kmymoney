@@ -293,12 +293,4 @@ void timestamp(char *txt)
   }
 }
 
-void timetrace(const char *txt)
-{
-  if (timersOn) {
-    qDebug("Timer(%s): %d elapsed", txt, timer.elapsed());
-    timer.restart();
-  }
-}
-
 // vim:cin:si:ai:et:ts=2:sw=2:

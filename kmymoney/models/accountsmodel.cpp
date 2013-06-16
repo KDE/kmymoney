@@ -420,7 +420,6 @@ void AccountsModel::init()
   */
 void AccountsModel::load()
 {
-  //::timetrace("Start AccountsModel::load");
   QStandardItem *rootItem = invisibleRootItem();
   d->m_addedCategoriesList.clear();
 
@@ -512,7 +511,6 @@ void AccountsModel::load()
 
   checkNetWorth();
   checkProfit();
-  //::timetrace("Done AccountsModel::load");
 }
 
 /**

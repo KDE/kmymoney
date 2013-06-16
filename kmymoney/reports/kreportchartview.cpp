@@ -79,7 +79,6 @@ KReportChartView::KReportChartView(QWidget* parent) :
 
 void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport &config, int numberColumns, const QStringList& columnHeadings, const QList<ERowType>& rowTypeList, const QStringList& columnTypeHeaderList)
 {
-  ::timetrace("start drawing chart");
   //set the number of columns
   setNumColumns(numberColumns);
 
@@ -261,7 +260,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     }
   }
 
-  ::timetrace("loading rows");
   switch (config.detailLevel()) {
     case MyMoneyReport::eDetailNone:
     case MyMoneyReport::eDetailEnd:
@@ -442,7 +440,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       }
       break;
   }
-  ::timetrace("rows loaded");
 
   //assign model to the diagram
   planeDiagram->setModel(&m_model);
@@ -476,7 +473,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   //this sets the line width only for line diagrams
   setLineWidth(config.chartLineWidth());
-  ::timetrace("finished drawing chart");
 
   //set data value attributes
   //make sure to show only the required number of fractional digits on the labels of the graph

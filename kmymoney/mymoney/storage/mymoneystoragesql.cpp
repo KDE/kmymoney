@@ -54,8 +54,6 @@
 #define PASS } catch (MyMoneyException *e) { throw; }
 #define ECATCH }
 #define DBG(a) //qDebug (a)
-//#define TRACE(a) qDebug(a)
-#define TRACE(a) ::timetrace(a)
 
 
 
@@ -71,22 +69,19 @@ MyMoneySqlQuery::~MyMoneySqlQuery()
 
 bool MyMoneySqlQuery::exec()
 {
-  TRACE(QString("start sql - %1").arg(lastQuery()).toLatin1());
+  qDebug() << "start sql:" << lastQuery();
   bool rc = QSqlQuery::exec();
-  TRACE(QString("end sql\n%1\n***Query returned %2, row count %3")
-        .arg(QSqlQuery::executedQuery())
-        .arg(rc)
-        .arg(numRowsAffected()).toLatin1());
+  qDebug() << "end sql:" << QSqlQuery::executedQuery();
+  qDebug() << "***Query returned:" << rc << ", row count:" << numRowsAffected();
   return (rc);
 }
 
 bool MyMoneySqlQuery::exec(const QString & query)
 {
-  TRACE(QString("start sql - %1").arg(query).toLatin1());
+  qDebug() << "start sql:" << query;
   bool rc = QSqlQuery::exec(query);
-  QString msg("end sql\n%1\n***Query returned %2, row count %3");
-  TRACE(msg.arg(QSqlQuery::executedQuery()).arg(rc).arg(numRowsAffected()).toLatin1());
-  //DBG (QString("%1\n***Query returned %2, row count %3").arg(QSqlQuery::executedQuery()).arg(rc).arg(size()));
+  qDebug() << "end sql:" << QSqlQuery::executedQuery();
+  qDebug() << "***Query returned:" << rc << ", row count:" << numRowsAffected();
   return rc;
 }
 
@@ -810,28 +805,19 @@ bool MyMoneyStorageSql::readFile(void)
       user.append(QString("USER"));
       readPayees(user);
     }
-    //TRACE("done payees");
     readTags();
-    //TRACE("done tags");
     readCurrencies();
-    //TRACE("done currencies");
     readSecurities();
-    //TRACE("done securities");
     readAccounts();
     if (m_loadAll) {
       readTransactions();
     } else {
       if (m_preferred.filterSet().singleFilter.accountFilter) readTransactions(m_preferred);
     }
-    //TRACE("done accounts");
     readSchedules();
-    //TRACE("done schedules");
     readPrices();
-    //TRACE("done prices");
     readReports();
-    //TRACE("done reports");
     readBudgets();
-    //TRACE("done budgets");
     //FIXME - ?? if (m_mode == 0)
     //m_storage->rebuildAccountBalances();
     // this seems to be nonsense, but it clears the dirty flag

@@ -26,13 +26,6 @@ QTEST_KDEMAIN_CORE_WITH_COMPONENTNAME(MatchFinderTest, "kmymoney")
 
 
 
-///@TODO a quick-fix for linking errors - according to kmymoney/kmymoneyutilstest.cpp this needs to be removed in the register
-void timetrace(char const *)
-{
-}
-
-
-
 void MatchFinderTest::init()
 {
   file = MyMoneyFile::instance();

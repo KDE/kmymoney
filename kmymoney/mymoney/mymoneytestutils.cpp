@@ -19,13 +19,6 @@
 
 #include "mymoneyexception.h"
 
-// There is a real implementation for the actual executable, this is
-// designed to be used in testcases, to avoid a linker error.
-void timetrace(const char *txt)
-{
-  Q_UNUSED(txt);
-}
-
 void unexpectedException(MyMoneyException *e)
 {
   QString msg = QString("Unexpected exception: %1 thrown in %2:%3")

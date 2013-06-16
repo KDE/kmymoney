@@ -68,9 +68,3 @@ void KMyMoneyUtilsTest::testNextCheckNumber()
   QVERIFY(KMyMoneyUtils::nextCheckNumber(acc) == QLatin1String("2012.002"));
 
 }
-
-// required for link phase. we need to cleanup the register code which
-// still references it
-void timetrace(char const *)
-{
-}

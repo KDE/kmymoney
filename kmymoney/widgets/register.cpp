@@ -939,9 +939,6 @@ void Register::suppressAdjacentMarkers(void)
 
 void Register::updateRegister(bool forceUpdateRowHeight)
 {
-#ifndef KMM_DESIGNER
-  ::timetrace("Update register");
-#endif
   if (m_listsDirty || forceUpdateRowHeight) {
     // don't get in here recursively
     m_listsDirty = false;
@@ -1002,9 +999,6 @@ void Register::updateRegister(bool forceUpdateRowHeight)
         QTimer::singleShot(0, this, SLOT(resize()));
     }
   }
-#ifndef KMM_DESIGNER
-  ::timetrace("Done updateing register");
-#endif
 }
 
 int Register::rowHeightHint(void) const
@@ -1209,7 +1203,6 @@ void Register::adjustColumn(int col)
   Q_UNUSED(col)
 #else
   QString msg = "%1 adjusting column %2";
-  ::timetrace(qPrintable(msg.arg("Start").arg(col)));
   QHeaderView *topHeader = horizontalHeader();
   QFontMetrics cellFontMetrics(KMyMoneyGlobalSettings::listCellFont());
 

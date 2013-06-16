@@ -369,8 +369,6 @@ void KReportsView::slotLoadView(void)
 
 void KReportsView::loadView(void)
 {
-  ::timetrace("Start KReportsView::loadView");
-
   // remember the id of the current selected item
   QTreeWidgetItem* item = m_tocTreeWidget->currentItem();
   QString selectedItem = (item) ? item->text(0) : QString();
@@ -621,8 +619,6 @@ void KReportsView::loadView(void)
   setColumnsAlreadyAdjusted(true);
 
   m_tocTreeWidget->setUpdatesEnabled(true);
-
-  ::timetrace("Done KReportsView::loadView");
 }
 
 void KReportsView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)

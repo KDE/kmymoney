@@ -457,8 +457,6 @@ void KBudgetView::showEvent(QShowEvent * event)
 
 void KBudgetView::loadBudgets(void)
 {
-  ::timetrace("Start KBudgetView::loadBudgets");
-
   m_filterProxyModel->invalidate();
 
   // remember which item is currently selected
@@ -507,9 +505,6 @@ void KBudgetView::loadBudgets(void)
 
   // make sure the world around us knows what we have selected
   slotSelectBudget();
-
-
-  ::timetrace("End KBudgetView::loadBudgets");
 }
 
 void KBudgetView::ensureBudgetVisible(const QString& id)
@@ -540,15 +535,12 @@ void KBudgetView::slotRefreshView(void)
 
 void KBudgetView::loadAccounts(void)
 {
-  ::timetrace("start load budget account view");
-
   // if no budgets are selected, don't load the accounts
   // and clear out the previously shown list
   if (m_budget.id().isEmpty()) {
     m_budgetValue->clear();
     m_updateButton->setEnabled(false);
     m_resetButton->setEnabled(false);
-    ::timetrace("done load budgets view");
     return;
   }
   m_updateButton->setEnabled(!(selectedBudget() == m_budget));
@@ -561,7 +553,6 @@ void KBudgetView::loadAccounts(void)
     m_accountTree->expandAll();
   }
 
-  ::timetrace("done load budgets view");
 }
 
 void KBudgetView::askSave(void)

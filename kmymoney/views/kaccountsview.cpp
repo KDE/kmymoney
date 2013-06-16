@@ -269,7 +269,6 @@ void KAccountsView::loadListView(void)
     m_filterProxyModel->expandAll();
     m_accountTree->expandAll();
   }
-  ::timetrace("done load accounts icon view");
 }
 
 //FIXME: This will be deprecated once the lists use the accounts model
@@ -417,7 +416,6 @@ void KAccountsView::slotOpenObject(QListWidgetItem* item)
 
 void KAccountsView::loadIconGroups()
 {
-  ::timetrace("start load accounts icon view");
   MyMoneyFile* file = MyMoneyFile::instance();
 
   //load list of asset accounts
@@ -438,7 +436,6 @@ void KAccountsView::loadIconGroups()
   } else {
     m_equitiesGroup->hide();
   }
-  ::timetrace("done load accounts icon view");
 }
 
 void KAccountsView::loadAccountIconsIntoList(const MyMoneyAccount& parentAccount, KListWidget* listWidget)
