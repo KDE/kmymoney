@@ -26,28 +26,6 @@
 #include <QString>
 #include <QDateTime>
 #include <kmm_mymoney_export.h>
-#if 0
-
-//Includes for STL support below
-#include <vector>
-#include <map>
-#include <list>
-#include <string>
-using namespace std;
-
-#ifdef _UNICODE
-typedef std::wstring String;
-#else
-typedef std::string String;
-#endif
-
-#else
-
-//typedef for data type to store currency with.
-typedef long long DLONG;
-
-typedef QString String;
-#endif // 0
 
 #ifdef __GNUC__
 #  define KMM_PRINTF_FORMAT(x, y) __attribute__((format(__printf__, x, y)))

@@ -313,7 +313,7 @@ void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
       MyMoneyPrice price = item->data(0, Qt::UserRole).value<MyMoneyPrice>();
       MyMoneySecurity security = MyMoneyFile::instance()->security(price.from());
 
-      //if it is not a currency, send a null String, which will trigger the update for all prices
+      //if it is not a currency, send a null string, which will trigger the update for all prices
       QString stringId;
       if (security.isCurrency()) {
         stringId = QString(item->text(KPriceTreeItem::ePriceCommodity) + ' ' + item->text(KPriceTreeItem::ePriceCurrency)).toUtf8();

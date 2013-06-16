@@ -210,7 +210,7 @@ public:
     *
     * @param parent pointer to parent item
     * @param name the displayed name
-    * @param key String to be used for completion. If empty defaults to @a name
+    * @param key string to be used for completion. If empty defaults to @a name
     * @param id the id used to identify the objects
     *
     * @return pointer to newly created object
@@ -226,7 +226,7 @@ public:
     * @note The new item will be the first one in the selection
     *
     * @param name the displayed name
-    * @param key String to be used for completion. If empty defaults to @a name
+    * @param key string to be used for completion. If empty defaults to @a name
     * @param id the id used to identify the objects
     *
     * @return pointer to newly created object

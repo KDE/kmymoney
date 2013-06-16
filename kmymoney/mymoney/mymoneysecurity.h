@@ -87,14 +87,14 @@ public:
   const QString& name() const                 {
     return m_name;
   }
-  void           setName(const String& str)   {
+  void           setName(const QString& str)   {
     m_name = str;
   }
 
   const QString&  tradingSymbol() const               {
     return m_tradingSymbol;
   }
-  void            setTradingSymbol(const String& str) {
+  void            setTradingSymbol(const QString& str) {
     m_tradingSymbol = str;
   }
 
