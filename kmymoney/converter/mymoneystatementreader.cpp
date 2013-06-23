@@ -526,32 +526,32 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
   }
 }
 
-void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Transaction& t_in)
+void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Transaction& statementTransactionUnderImport)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  MyMoneyTransaction t;
+  MyMoneyTransaction transactionUnderImport;
 
   QString dbgMsg;
-  dbgMsg = QString("Process %1, '%3', %2").arg(t_in.m_datePosted.toString(Qt::ISODate)).arg(t_in.m_amount.formatMoney("", 2)).arg(t_in.m_strBankID);
+  dbgMsg = QString("Process %1, '%3', %2").arg(statementTransactionUnderImport.m_datePosted.toString(Qt::ISODate)).arg(statementTransactionUnderImport.m_amount.formatMoney("", 2)).arg(statementTransactionUnderImport.m_strBankID);
   qDebug("%s", qPrintable(dbgMsg));
 
   // mark it imported for the view
-  t.setImported();
+  transactionUnderImport.setImported();
 
   // TODO (Ace) We can get the commodity from the statement!!
   // Although then we would need UI to verify
-  t.setCommodity(m_account.currencyId());
+  transactionUnderImport.setCommodity(m_account.currencyId());
 
-  t.setPostDate(t_in.m_datePosted);
-  t.setMemo(t_in.m_strMemo);
+  transactionUnderImport.setPostDate(statementTransactionUnderImport.m_datePosted);
+  transactionUnderImport.setMemo(statementTransactionUnderImport.m_strMemo);
 
   MyMoneySplit s1;
 
-  s1.setMemo(t_in.m_strMemo);
-  s1.setValue(t_in.m_amount - t_in.m_fees);
+  s1.setMemo(statementTransactionUnderImport.m_strMemo);
+  s1.setValue(statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
   s1.setShares(s1.value());
-  s1.setNumber(t_in.m_strNumber);
+  s1.setNumber(statementTransactionUnderImport.m_strNumber);
 
   // set these values if a transfer split is needed at the very end.
   MyMoneyMoney transfervalue;
@@ -564,18 +564,18 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     // determine the brokerage account
     brokerageactid = m_account.value("kmm-brokerage-account").toUtf8();
     if (brokerageactid.isEmpty()) {
-      brokerageactid = file->accountByName(t_in.m_strBrokerageAccount).id();
+      brokerageactid = file->accountByName(statementTransactionUnderImport.m_strBrokerageAccount).id();
     }
     if (brokerageactid.isEmpty()) {
-      brokerageactid = file->nameToAccount(t_in.m_strBrokerageAccount);
+      brokerageactid = file->nameToAccount(statementTransactionUnderImport.m_strBrokerageAccount);
     }
 
     // find the security transacted, UNLESS this transaction didn't
     // involve any security.
-    if ((t_in.m_eAction != MyMoneyStatement::Transaction::eaNone)
+    if ((statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaNone)
         //  eaInterest transactions MAY have a security.
         //  && (t_in.m_eAction != MyMoneyStatement::Transaction::eaInterest)
-        && (t_in.m_eAction != MyMoneyStatement::Transaction::eaFees)) {
+        && (statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaFees)) {
       // the correct account is the stock account which matches two criteria:
       // (1) it is a sub-account of the selected investment account, and
       // (2a) the symbol of the underlying security matches the security of the
@@ -589,27 +589,27 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       while (!found && it_account != accounts.constEnd()) {
         QString currencyid = file->account(*it_account).currencyId();
         MyMoneySecurity security = file->security(currencyid);
-        if ((t_in.m_strSymbol.toLower() == security.tradingSymbol().toLower())
-            || (t_in.m_strSecurity.toLower() == security.name().toLower())) {
+        if ((statementTransactionUnderImport.m_strSymbol.toLower() == security.tradingSymbol().toLower())
+            || (statementTransactionUnderImport.m_strSecurity.toLower() == security.name().toLower())) {
           thisaccount = file->account(*it_account);
           found = true;
 
           // Don't update price if there is no price information contained in the transaction
-          if (t_in.m_eAction != MyMoneyStatement::Transaction::eaCashDividend
-              && t_in.m_eAction != MyMoneyStatement::Transaction::eaShrsin
-              && t_in.m_eAction != MyMoneyStatement::Transaction::eaShrsout) {
+          if (statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaCashDividend
+              && statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaShrsin
+              && statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaShrsout) {
             // update the price, while we're here.  in the future, this should be
             // an option
             QString basecurrencyid = file->baseCurrency().id();
-            MyMoneyPrice price = file->price(currencyid, basecurrencyid, t_in.m_datePosted, true);
-            if (!price.isValid()  && ((!t_in.m_amount.isZero() && !t_in.m_shares.isZero()) || !t_in.m_price.isZero())) {
+            MyMoneyPrice price = file->price(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted, true);
+            if (!price.isValid()  && ((!statementTransactionUnderImport.m_amount.isZero() && !statementTransactionUnderImport.m_shares.isZero()) || !statementTransactionUnderImport.m_price.isZero())) {
               MyMoneyPrice newprice;
-              if (!t_in.m_price.isZero()) {
-                newprice = MyMoneyPrice(currencyid, basecurrencyid, t_in.m_datePosted,
-                                        t_in.m_price.abs(), i18n("Statement Importer"));
+              if (!statementTransactionUnderImport.m_price.isZero()) {
+                newprice = MyMoneyPrice(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted,
+                                        statementTransactionUnderImport.m_price.abs(), i18n("Statement Importer"));
               } else {
-                newprice = MyMoneyPrice(currencyid, basecurrencyid, t_in.m_datePosted,
-                                        (t_in.m_amount / t_in.m_shares).abs(), i18n("Statement Importer"));
+                newprice = MyMoneyPrice(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted,
+                                        (statementTransactionUnderImport.m_amount / statementTransactionUnderImport.m_shares).abs(), i18n("Statement Importer"));
               }
               file->addPrice(newprice);
             }
@@ -626,7 +626,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         // should separately list all the securities referred to in the file,
         // and when we found a security, we added it to the file.
 
-        if (t_in.m_strSecurity.isEmpty()) {
+        if (statementTransactionUnderImport.m_strSecurity.isEmpty()) {
           KMessageBox::information(0, i18n("This imported statement contains investment transactions with no security.  These transactions will be ignored."), i18n("Security not found"), QString("BlankSecurity"));
           return;
         } else {
@@ -634,8 +634,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
           QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
           while (it != list.constEnd() && security.id().isEmpty()) {
-            if (t_in.m_strSecurity.toLower() == (*it).tradingSymbol().toLower()
-                || t_in.m_strSecurity.toLower() == (*it).name().toLower()) {
+            if (statementTransactionUnderImport.m_strSecurity.toLower() == (*it).tradingSymbol().toLower()
+                || statementTransactionUnderImport.m_strSecurity.toLower() == (*it).name().toLower()) {
               security = *it;
             }
             ++it;
@@ -647,48 +647,48 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             thisaccount.setCurrencyId(security.id());
 
             file->addAccount(thisaccount, m_account);
-            kDebug(0) << Q_FUNC_INFO << ": created account " << thisaccount.id() << " for security " << t_in.m_strSecurity << " under account " << m_account.id();
+            kDebug(0) << Q_FUNC_INFO << ": created account " << thisaccount.id() << " for security " << statementTransactionUnderImport.m_strSecurity << " under account " << m_account.id();
           }
           // this security does not exist in the file.
           else {
             // This should be rare.  A statement should have a security entry for any
             // of the securities referred to in the transactions.  The only way to get
             // here is if that's NOT the case.
-            KMessageBox::information(0, i18n("This investment account does not contain the \"%1\" security.  Transactions involving this security will be ignored.", t_in.m_strSecurity), i18n("Security not found"), QString("MissingSecurity%1").arg(t_in.m_strSecurity.trimmed()));
+            KMessageBox::information(0, i18n("This investment account does not contain the \"%1\" security.  Transactions involving this security will be ignored.", statementTransactionUnderImport.m_strSecurity), i18n("Security not found"), QString("MissingSecurity%1").arg(statementTransactionUnderImport.m_strSecurity.trimmed()));
             return;
           }
         }
       }
     }
     s1.setAccountId(thisaccount.id());
-    d->assignUniqueBankID(s1, t_in);
+    d->assignUniqueBankID(s1, statementTransactionUnderImport);
 
-    if (t_in.m_eAction == MyMoneyStatement::Transaction::eaReinvestDividend) {
+    if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaReinvestDividend) {
       s1.setAction(MyMoneySplit::ActionReinvestDividend);
-      s1.setShares(t_in.m_shares);
+      s1.setShares(statementTransactionUnderImport.m_shares);
 
-      if (!t_in.m_price.isZero()) {
-        s1.setPrice(t_in.m_price);
+      if (!statementTransactionUnderImport.m_price.isZero()) {
+        s1.setPrice(statementTransactionUnderImport.m_price);
       } else {
-        if (t_in.m_shares.isZero()) {
+        if (statementTransactionUnderImport.m_shares.isZero()) {
           KMessageBox::information(0, i18n("This imported statement contains investment transactions with no share amount.  These transactions will be ignored."), i18n("No share amount provided"), QString("BlankAmount"));
           return;
         }
-        s1.setPrice(((t_in.m_amount - t_in.m_fees) / t_in.m_shares).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
+        s1.setPrice(((statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees) / statementTransactionUnderImport.m_shares).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
       }
 
 
       MyMoneySplit s2;
-      s2.setMemo(t_in.m_strMemo);
-      if (t_in.m_strInterestCategory.isEmpty())
+      s2.setMemo(statementTransactionUnderImport.m_strMemo);
+      if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
         s2.setAccountId(d->interestId(thisaccount));
       else
-        s2.setAccountId(d->interestId(t_in.m_strInterestCategory));
+        s2.setAccountId(d->interestId(statementTransactionUnderImport.m_strInterestCategory));
 
-      s2.setShares(-t_in.m_amount - t_in.m_fees);
+      s2.setShares(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
       s2.setValue(s2.shares());
-      t.addSplit(s2);
-    } else if (t_in.m_eAction == MyMoneyStatement::Transaction::eaCashDividend) {
+      transactionUnderImport.addSplit(s2);
+    } else if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaCashDividend) {
       // Cash dividends require setting 2 splits to get all of the information
       // in.  Split #1 will be the income split, and we'll set it to the first
       // income account.  This is a hack, but it's needed in order to get the
@@ -710,89 +710,89 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // This should probably change.  It would be more consistent to ALWAYS
       // interpret the 'amount' as the cash account part.
 
-      if (t_in.m_strInterestCategory.isEmpty())
+      if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
         s1.setAccountId(d->interestId(thisaccount));
       else {//  Ensure category sub-accounts are dealt with properly
-        s1.setAccountId(d->interestId(t_in.m_strInterestCategory));
+        s1.setAccountId(d->interestId(statementTransactionUnderImport.m_strInterestCategory));
       }
-      s1.setShares(t_in.m_amount);
-      s1.setValue(t_in.m_amount);
+      s1.setShares(statementTransactionUnderImport.m_amount);
+      s1.setValue(statementTransactionUnderImport.m_amount);
 
       // Split 2 will be the zero-amount investment split that serves to
       // mark this transaction as a cash dividend and note which stock account
       // it belongs to.
       MyMoneySplit s2;
-      s2.setMemo(t_in.m_strMemo);
+      s2.setMemo(statementTransactionUnderImport.m_strMemo);
       s2.setAction(MyMoneySplit::ActionDividend);
       s2.setAccountId(thisaccount.id());
-      t.addSplit(s2);
+      transactionUnderImport.addSplit(s2);
 
-      transfervalue = -t_in.m_amount - t_in.m_fees;
-    } else if (t_in.m_eAction == MyMoneyStatement::Transaction::eaInterest) {
-      if (t_in.m_strInterestCategory.isEmpty())
+      transfervalue = -statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
+    } else if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaInterest) {
+      if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
         s1.setAccountId(d->interestId(thisaccount));
       else {//  Ensure category sub-accounts are dealt with properly
-        if (t_in.m_amount.isPositive())
-          s1.setAccountId(d->expenseId(t_in.m_strInterestCategory));
+        if (statementTransactionUnderImport.m_amount.isPositive())
+          s1.setAccountId(d->expenseId(statementTransactionUnderImport.m_strInterestCategory));
         else
-          s1.setAccountId(d->interestId(t_in.m_strInterestCategory));
+          s1.setAccountId(d->interestId(statementTransactionUnderImport.m_strInterestCategory));
       }
-      s1.setShares(t_in.m_amount);
-      s1.setValue(t_in.m_amount);
+      s1.setShares(statementTransactionUnderImport.m_amount);
+      s1.setValue(statementTransactionUnderImport.m_amount);
 
 /// ***********   Add split as per Div       **********
       // Split 2 will be the zero-amount investment split that serves to
       // mark this transaction as a cash dividend and note which stock account
       // it belongs to.
       MyMoneySplit s2;
-      s2.setMemo(t_in.m_strMemo);
+      s2.setMemo(statementTransactionUnderImport.m_strMemo);
       s2.setAction(MyMoneySplit::ActionInterestIncome);
       s2.setAccountId(thisaccount.id());
-      t.addSplit(s2);
+      transactionUnderImport.addSplit(s2);
 
 
-      transfervalue = -t_in.m_amount;
+      transfervalue = -statementTransactionUnderImport.m_amount;
 
-    } else if (t_in.m_eAction == MyMoneyStatement::Transaction::eaFees) {
-      if (t_in.m_strInterestCategory.isEmpty())
+    } else if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaFees) {
+      if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
         s1.setAccountId(d->feeId(thisaccount));
       else//  Ensure category sub-accounts are dealt with properly
-        s1.setAccountId(d->feeId(t_in.m_strInterestCategory));
-      s1.setShares(t_in.m_amount);
-      s1.setValue(t_in.m_amount);
+        s1.setAccountId(d->feeId(statementTransactionUnderImport.m_strInterestCategory));
+      s1.setShares(statementTransactionUnderImport.m_amount);
+      s1.setValue(statementTransactionUnderImport.m_amount);
 
-      transfervalue = -t_in.m_amount;
+      transfervalue = -statementTransactionUnderImport.m_amount;
 
-    } else if ((t_in.m_eAction == MyMoneyStatement::Transaction::eaBuy) ||
-               (t_in.m_eAction == MyMoneyStatement::Transaction::eaSell)) {
-      if (!t_in.m_price.isZero()) {
-        s1.setPrice(t_in.m_price.abs());
+    } else if ((statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaBuy) ||
+               (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaSell)) {
+      if (!statementTransactionUnderImport.m_price.isZero()) {
+        s1.setPrice(statementTransactionUnderImport.m_price.abs());
       } else {
         MyMoneyMoney total;
-        total = t_in.m_amount - t_in.m_fees;
-        if (!t_in.m_shares.isZero())
-          s1.setPrice((total / t_in.m_shares).abs().convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
+        total = statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
+        if (!statementTransactionUnderImport.m_shares.isZero())
+          s1.setPrice((total / statementTransactionUnderImport.m_shares).abs().convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
       }
 
       s1.setAction(MyMoneySplit::ActionBuyShares);
 
       // Make sure to setup the sign correctly
-      if (t_in.m_eAction == MyMoneyStatement::Transaction::eaBuy) {
-        s1.setShares(t_in.m_shares.abs());
+      if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaBuy) {
+        s1.setShares(statementTransactionUnderImport.m_shares.abs());
         s1.setValue(s1.value().abs());
-        transfervalue = -(t_in.m_amount.abs());
+        transfervalue = -(statementTransactionUnderImport.m_amount.abs());
       } else {
-        s1.setShares(-(t_in.m_shares.abs()));
+        s1.setShares(-(statementTransactionUnderImport.m_shares.abs()));
         s1.setValue(-(s1.value().abs()));
-        transfervalue = t_in.m_amount.abs();
+        transfervalue = statementTransactionUnderImport.m_amount.abs();
       }
 
-    } else if ((t_in.m_eAction == MyMoneyStatement::Transaction::eaShrsin) ||
-               (t_in.m_eAction == MyMoneyStatement::Transaction::eaShrsout)) {
+    } else if ((statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaShrsin) ||
+               (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaShrsout)) {
       s1.setValue(MyMoneyMoney());
-      s1.setShares(t_in.m_shares);
+      s1.setShares(statementTransactionUnderImport.m_shares);
       s1.setAction(MyMoneySplit::ActionAddShares);
-    } else if (t_in.m_eAction == MyMoneyStatement::Transaction::eaNone) {
+    } else if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaNone) {
       // User is attempting to import a non-investment transaction into this
       // investment account.  This is not supportable the way KMyMoney is
       // written.  However, if a user has an associated brokerage account,
@@ -804,7 +804,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       }
       if (! brokerageactid.isEmpty()) {
         s1.setAccountId(brokerageactid);
-        d->assignUniqueBankID(s1, t_in);
+        d->assignUniqueBankID(s1, statementTransactionUnderImport);
 
         // Needed to satisfy the bankid check below.
         thisaccount = file->account(brokerageactid);
@@ -812,13 +812,13 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         // Warning!! Your transaction is being thrown away.
       }
     }
-    if (!t_in.m_fees.isZero()) {
+    if (!statementTransactionUnderImport.m_fees.isZero()) {
       MyMoneySplit s;
-      s.setMemo(i18n("(Fees) %1", t_in.m_strMemo));
-      s.setValue(t_in.m_fees);
-      s.setShares(t_in.m_fees);
+      s.setMemo(i18n("(Fees) %1", statementTransactionUnderImport.m_strMemo));
+      s.setValue(statementTransactionUnderImport.m_fees);
+      s.setShares(statementTransactionUnderImport.m_fees);
       s.setAccountId(d->feeId(thisaccount));
-      t.addSplit(s);
+      transactionUnderImport.addSplit(s);
     }
   } else {
     // For non-investment accounts, just use the selected account
@@ -826,11 +826,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     // if you really want.  The investment-specific information, such as number of shares and action will
     // be discarded in that case.
     s1.setAccountId(m_account.id());
-    d->assignUniqueBankID(s1, t_in);
+    d->assignUniqueBankID(s1, statementTransactionUnderImport);
   }
 
 
-  QString payeename = t_in.m_strPayee;
+  QString payeename = statementTransactionUnderImport.m_strPayee;
   if (!payeename.isEmpty()) {
     qDebug("Start matching payee");
     QString payeeid;
@@ -1006,7 +1006,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // handle it.
       //
       const MyMoneyPayee& payeeObj = MyMoneyFile::instance()->payee(payeeid);
-      if (t_in.m_listSplits.isEmpty() && payeeObj.defaultAccountEnabled()) {
+      if (statementTransactionUnderImport.m_listSplits.isEmpty() && payeeObj.defaultAccountEnabled()) {
         MyMoneySplit s;
         s.setReconcileFlag(MyMoneySplit::Cleared);
         s.clearId();
@@ -1014,8 +1014,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s.setShares(-s1.shares());
         s.setValue(-s1.value());
         s.setAccountId(payeeObj.defaultAccountId());
-        t.addSplit(s);
-      } else if (t_in.m_listSplits.isEmpty() && !d->m_skipCategoryMatching) {
+        transactionUnderImport.addSplit(s);
+      } else if (statementTransactionUnderImport.m_listSplits.isEmpty() && !d->m_skipCategoryMatching) {
         MyMoneyTransactionFilter filter(thisaccount.id());
         filter.addPayee(payeeid);
         QList<MyMoneyTransaction> list = file->transactionList(filter);
@@ -1072,7 +1072,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 qDebug("Adding second split to %s(%s)",
                        qPrintable(acc.name()),
                        qPrintable(s.accountId()));
-                t.addSplit(s);
+                transactionUnderImport.addSplit(s);
               }
             }
           }
@@ -1081,39 +1081,39 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     }
   }
 
-  s1.setReconcileFlag(t_in.m_reconcile);
-  t.addSplit(s1);
+  s1.setReconcileFlag(statementTransactionUnderImport.m_reconcile);
+  transactionUnderImport.addSplit(s1);
 
   // Add the 'account' split if it's needed
   if (! transfervalue.isZero()) {
     // in case the transaction has a reference to the brokerage account, we use it
-    if (!t_in.m_strBrokerageAccount.isEmpty()) {
-      brokerageactid = file->nameToAccount(t_in.m_strBrokerageAccount);
+    if (!statementTransactionUnderImport.m_strBrokerageAccount.isEmpty()) {
+      brokerageactid = file->nameToAccount(statementTransactionUnderImport.m_strBrokerageAccount);
     }
     if (brokerageactid.isEmpty()) {
-      brokerageactid = file->accountByName(t_in.m_strBrokerageAccount).id();
+      brokerageactid = file->accountByName(statementTransactionUnderImport.m_strBrokerageAccount).id();
     }
 //  There is no BrokerageAccount so have to nowhere to put this split.
     if (!brokerageactid.isEmpty()) {
       // FIXME This may not deal with foreign currencies properly
       MyMoneySplit s;
-      s.setMemo(t_in.m_strMemo);
+      s.setMemo(statementTransactionUnderImport.m_strMemo);
       s.setValue(transfervalue);
       s.setShares(transfervalue);
       s.setAccountId(brokerageactid);
-      s.setReconcileFlag(t_in.m_reconcile);
-      t.addSplit(s);
+      s.setReconcileFlag(statementTransactionUnderImport.m_reconcile);
+      transactionUnderImport.addSplit(s);
     }
   }
 
-  if ((t_in.m_eAction != MyMoneyStatement::Transaction::eaReinvestDividend) && (t_in.m_eAction != MyMoneyStatement::Transaction::eaCashDividend) && (t_in.m_eAction != MyMoneyStatement::Transaction::eaInterest)
+  if ((statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaReinvestDividend) && (statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaCashDividend) && (statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaInterest)
      ) {
     //******************************************
     //                   process splits
     //******************************************
 
     QList<MyMoneyStatement::Split>::const_iterator it_s;
-    for (it_s = t_in.m_listSplits.begin(); it_s != t_in.m_listSplits.end(); ++it_s) {
+    for (it_s = statementTransactionUnderImport.m_listSplits.begin(); it_s != statementTransactionUnderImport.m_listSplits.end(); ++it_s) {
       MyMoneySplit s2;
       s2.setAccountId((*it_s).m_accountId);
       MyMoneyAccount acc = file->account(s2.accountId());
@@ -1122,7 +1122,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       s2.setShares((*it_s).m_amount);
       s2.setValue((*it_s).m_amount);
       s2.setReconcileFlag((*it_s).m_reconcile);
-      t.addSplit(s2);
+      transactionUnderImport.addSplit(s2);
     }
   }
 
@@ -1134,28 +1134,28 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     d->transactionsCount++;
 
     ExistingTransactionMatchFinder existingTrMatchFinder(KMyMoneyGlobalSettings::matchInterval());
-    result = existingTrMatchFinder.findMatch(t, s1);
+    result = existingTrMatchFinder.findMatch(transactionUnderImport, s1);
     if (result != TransactionMatchFinder::MatchNotFound) {
       MyMoneySplit matchedSplit = existingTrMatchFinder.getMatchedSplit();
       MyMoneyTransaction matchedTransaction = existingTrMatchFinder.getMatchedTransaction();
 
-      handleMatchingOfExistingTransaction(matcher, matchedTransaction, matchedSplit, t, s1, result);
+      handleMatchingOfExistingTransaction(matcher, matchedTransaction, matchedSplit, transactionUnderImport, s1, result);
       return;
     }
 
-    addTransaction(t);
+    addTransaction(transactionUnderImport);
     ScheduledTransactionMatchFinder scheduledTrMatchFinder(thisaccount, KMyMoneyGlobalSettings::matchInterval());
-    result = scheduledTrMatchFinder.findMatch(t, s1);
+    result = scheduledTrMatchFinder.findMatch(transactionUnderImport, s1);
     if (result != TransactionMatchFinder::MatchNotFound) {
       MyMoneySplit matchedSplit = scheduledTrMatchFinder.getMatchedSplit();
       MyMoneySchedule matchedSchedule = scheduledTrMatchFinder.getMatchedSchedule();
 
-      handleMatchingOfScheduledTransaction(matcher, matchedSchedule, matchedSplit, t, s1);
+      handleMatchingOfScheduledTransaction(matcher, matchedSchedule, matchedSplit, transactionUnderImport, s1);
       return;
     }
 
   } catch (MyMoneyException *e) {
-    QString message(i18n("Problem adding or matching imported transaction with id '%1': %2", t_in.m_strBankID, e->what()));
+    QString message(i18n("Problem adding or matching imported transaction with id '%1': %2", statementTransactionUnderImport.m_strBankID, e->what()));
     qDebug("%s", qPrintable(message));
     delete e;
 
