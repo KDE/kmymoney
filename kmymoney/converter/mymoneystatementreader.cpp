@@ -532,7 +532,6 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
   MyMoneyTransaction t;
 
-
   QString dbgMsg;
   dbgMsg = QString("Process %1, '%3', %2").arg(t_in.m_datePosted.toString(Qt::ISODate)).arg(t_in.m_amount.formatMoney("", 2)).arg(t_in.m_strBankID);
   qDebug("%s", qPrintable(dbgMsg));
@@ -546,20 +545,6 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
   t.setPostDate(t_in.m_datePosted);
   t.setMemo(t_in.m_strMemo);
-
-#if 0
-  // (acejones) removing this code.  keeping it around for reference.
-  //
-  // this is the OLD way of handling bank ID's, which unfortunately was wrong.
-  // bank ID's actually need to go on the split which corresponds with the
-  // account we're importing into.
-  //
-  // thus anywhere "this account" is put into a split is also where we need
-  // to put the bank ID in.
-  //
-  if (! t_in.m_strBankID.isEmpty())
-    t.setBankID(t_in.m_strBankID);
-#endif
 
   MyMoneySplit s1;
 
@@ -1139,30 +1124,6 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       s2.setReconcileFlag((*it_s).m_reconcile);
       t.addSplit(s2);
     }
-
-#if 0
-    QString accountId;
-    int   count;
-    int cnt = 0;
-    count = t_in.m_listSplits.count();
-
-    for (cnt = 0; cnt < count; ++cnt) {
-      MyMoneySplit s2 = s1;
-      s2.setMemo(t_in.m_listSplits[cnt].m_strMemo);
-      s2.clearId();
-      s2.setValue(t_in.m_listSplits[cnt].m_amount);
-      s2.setShares(t_in.m_listSplits[cnt].m_amount);
-      s2.setAccountId(QString(t_in.m_listSplits[cnt].m_accountId));
-#if 0
-      accountId = file->nameToAccount(t_in.m_listSplits[cnt].m_strCategoryName);
-      if (accountId.isEmpty())
-        accountId = checkCategory(t_in.m_listSplits[cnt].m_strCategoryName, t_in.m_listSplits[0].m_amount, t_in.m_listSplits[cnt].m_amount);
-
-      s2.setAccountId(accountId);
-#endif
-      t.addSplit(s2);
-    }
-#endif
   }
 
   // Add the transaction
