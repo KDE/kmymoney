@@ -200,29 +200,6 @@ void MyMoneyAccount::removeAccountId(const QString& account)
     m_accountList.removeAt(pos);
 }
 
-MyMoneyAccount::accountTypeE MyMoneyAccount::accountGroup(MyMoneyAccount::accountTypeE type)
-{
-  switch (type) {
-    case MyMoneyAccount::Checkings:
-    case MyMoneyAccount::Savings:
-    case MyMoneyAccount::Cash:
-    case MyMoneyAccount::Currency:
-    case MyMoneyAccount::Investment:
-    case MyMoneyAccount::MoneyMarket:
-    case MyMoneyAccount::CertificateDep:
-    case MyMoneyAccount::AssetLoan:
-    case MyMoneyAccount::Stock:
-      return MyMoneyAccount::Asset;
-
-    case MyMoneyAccount::CreditCard:
-    case MyMoneyAccount::Loan:
-      return MyMoneyAccount::Liability;
-
-    default:
-      return type;
-  }
-}
-
 bool MyMoneyAccount::operator == (const MyMoneyAccount& right) const
 {
   return (MyMoneyKeyValueContainer::operator==(right) &&
@@ -240,9 +217,27 @@ bool MyMoneyAccount::operator == (const MyMoneyAccount& right) const
           (m_institution == right.m_institution));
 }
 
-MyMoneyAccount::accountTypeE MyMoneyAccount::accountGroup(void) const
+MyMoneyAccount::accountTypeE MyMoneyAccount::accountGroup() const
 {
-  return accountGroup(m_accountType);
+  switch (m_accountType) {
+    case MyMoneyAccount::Checkings:
+    case MyMoneyAccount::Savings:
+    case MyMoneyAccount::Cash:
+    case MyMoneyAccount::Currency:
+    case MyMoneyAccount::Investment:
+    case MyMoneyAccount::MoneyMarket:
+    case MyMoneyAccount::CertificateDep:
+    case MyMoneyAccount::AssetLoan:
+    case MyMoneyAccount::Stock:
+      return MyMoneyAccount::Asset;
+
+    case MyMoneyAccount::CreditCard:
+    case MyMoneyAccount::Loan:
+      return MyMoneyAccount::Liability;
+
+    default:
+      return m_accountType;
+  }
 }
 
 void MyMoneyAccount::setCurrencyId(const QString& id)

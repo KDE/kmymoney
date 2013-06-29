@@ -170,12 +170,9 @@ public:
     * - Expense
     *   - Expense
     *
-    * @param type actual account type
     * @return accountTypeE of major account type
     */
-  static MyMoneyAccount::accountTypeE accountGroup(MyMoneyAccount::accountTypeE type);
-
-  MyMoneyAccount::accountTypeE accountGroup(void) const;
+  MyMoneyAccount::accountTypeE accountGroup() const;
 
   /**
     * This method returns the id of the MyMoneyInstitution object this account
