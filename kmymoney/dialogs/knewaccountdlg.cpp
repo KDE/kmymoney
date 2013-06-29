@@ -786,30 +786,11 @@ void KNewAccountDlg::slotAccountTypeChanged(const QString& typeStr)
 {
   MyMoneyAccount::accountTypeE type;
   MyMoneyAccount::accountTypeE oldType;
-  MyMoneyFile* file = MyMoneyFile::instance();
 
   type = KMyMoneyUtils::stringToAccountType(typeStr);
   try {
     oldType = m_account.accountType();
     if (oldType != type) {
-      QString parentId;
-      switch (MyMoneyAccount::accountGroup(type)) {
-        case MyMoneyAccount::Asset:
-          parentId = file->asset().id();
-          break;
-        case MyMoneyAccount::Liability:
-          parentId = file->liability().id();
-          break;
-        case MyMoneyAccount::Expense:
-          parentId = file->expense().id();
-          break;
-        case MyMoneyAccount::Income:
-          parentId = file->income().id();
-          break;
-        default:
-          qWarning("Unknown account group in KNewAccountDlg::slotAccountTypeChanged()");
-          break;
-      }
       m_account.setAccountType(type);
       // update the account group displayed in the accounts hierarchy
       m_filterProxyModel->clear();
