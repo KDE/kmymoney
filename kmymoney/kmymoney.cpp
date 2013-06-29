@@ -3485,7 +3485,7 @@ void KMyMoneyApp::slotAccountEdit(void)
           && d->m_selectedAccount.accountType() != MyMoneyAccount::AssetLoan) {
         QString caption;
         bool category = false;
-        switch (MyMoneyAccount::accountGroup(d->m_selectedAccount.accountType())) {
+        switch (d->m_selectedAccount.accountGroup()) {
           default:
             caption = i18n("Edit account '%1'", d->m_selectedAccount.name());
             break;

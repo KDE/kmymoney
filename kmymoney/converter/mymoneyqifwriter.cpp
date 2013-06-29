@@ -165,7 +165,7 @@ void MyMoneyQifWriter::writeCategoryEntry(QTextStream &s, const QString& account
   QString name = acc.name();
 
   s << "N" << leadIn << name << endl;
-  s << (MyMoneyAccount::accountGroup(acc.accountType()) == MyMoneyAccount::Expense ? "E" : "I") << endl;
+  s << (acc.accountGroup() == MyMoneyAccount::Expense ? "E" : "I") << endl;
   s << "^" << endl;
 
   QStringList list = acc.accountList();

@@ -155,7 +155,7 @@ void CsvWriter::writeCategoryEntry(QTextStream &s, const QString& accountId, con
   QString name = acc.name();
 
   s << leadIn << name << ',';
-  s << (MyMoneyAccount::accountGroup(acc.accountType()) == MyMoneyAccount::Expense ? QLatin1Char('E') : QLatin1Char('I'));
+  s << (acc.accountGroup() == MyMoneyAccount::Expense ? QLatin1Char('E') : QLatin1Char('I'));
   s << endl;
 
   QStringList list = acc.accountList();
