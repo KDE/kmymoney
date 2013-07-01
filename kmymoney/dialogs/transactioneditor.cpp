@@ -132,8 +132,13 @@ void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount
   m_regForm->arrangeEditWidgets(m_editWidgets, m_item);
   m_regForm->tabOrder(tabOrderWidgets, m_item);
   QWidget* w = haveWidget("tabbar");
-  if (w)
+  if (w) {
     tabOrderWidgets.append(w);
+    TabBar* tabbar = dynamic_cast<TabBar*>(w);
+    if ((tabbar) && (action == KMyMoneyRegister::ActionNone)) {
+        action = static_cast<KMyMoneyRegister::Action>(tabbar->currentIndex());
+    }
+  }
   loadEditWidgets(action);
 
   // remove all unused widgets and don't forget to remove them
@@ -1025,7 +1030,7 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
 
     if ((w = haveWidget("cashflow")) != 0) {
       KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(w);
-      cashflow->setDirection(m_split.value().isNegative() ? KMyMoneyRegister::Payment : KMyMoneyRegister::Deposit);
+      cashflow->setDirection(!m_split.value().isPositive() ? KMyMoneyRegister::Payment : KMyMoneyRegister::Deposit);  //  include isZero case
     }
 
     if ((w = haveWidget("category-label")) != 0) {
@@ -1095,7 +1100,7 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
       }
     }
 
-  } else {
+  } else {  //  isMultiSelection()
     dynamic_cast<kMyMoneyDateInput*>(m_editWidgets["postdate"])->loadDate(QDate());
     dynamic_cast<KMyMoneyReconcileCombo*>(m_editWidgets["status"])->setState(MyMoneySplit::Unknown);
     if (haveWidget("deposit")) {
@@ -1109,10 +1114,8 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
       dynamic_cast<kMyMoneyEdit*>(w)->setAllowEmpty();
     }
 
-    if ((w = haveWidget("cashflow")) != 0) {
-      KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(w);
-      cashflow->setDirection(KMyMoneyRegister::Unknown);
-    }
+    slotUpdateAction(action);
+
     if ((w = haveWidget("tabbar")) != 0) {
       w->setEnabled(false);
     }
@@ -1442,7 +1445,14 @@ void StdTransactionEditor::slotUpdateAction(int action)
         cashflow->setDirection(KMyMoneyRegister::Deposit);
         break;
       case KMyMoneyRegister::ActionTransfer:
-        categoryLabel->setText(i18n("Transfer from"));
+        if (m_split.shares().isNegative()) {
+          cashflow->setDirection(KMyMoneyRegister::Payment);
+          categoryLabel->setText(i18n("Transfer to"));
+        } else {
+          cashflow->setDirection(KMyMoneyRegister::Deposit);
+          categoryLabel->setText(i18n("Transfer from"));
+        }
+        tabbar->setCurrentIndex(KMyMoneyRegister::ActionTransfer);
         slotUpdateCashFlow(cashflow->direction());
         break;
       case KMyMoneyRegister::ActionWithdrawal:
@@ -1457,10 +1467,12 @@ void StdTransactionEditor::slotUpdateAction(int action)
 void StdTransactionEditor::slotUpdateCashFlow(KMyMoneyRegister::CashFlowDirection dir)
 {
   QLabel* categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
-
+  KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(haveWidget("cashflow"));
+  cashflow->setDirection(dir);
   // qDebug("Update cashflow to %d", dir);
   if (categoryLabel) {
     TabBar* tabbar = dynamic_cast<TabBar*>(haveWidget("tabbar"));
+    if (!tabbar) return;  //  no transaction form
     if (categoryLabel->text() != i18n("Category")) {
       tabbar->setCurrentIndex(KMyMoneyRegister::ActionTransfer);
       if (dir == KMyMoneyRegister::Deposit) {
@@ -1509,15 +1521,17 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
           tabbar->setTabEnabled(KMyMoneyRegister::ActionDeposit, false);
           tabbar->setTabEnabled(KMyMoneyRegister::ActionWithdrawal, false);
         }
+        KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(m_editWidgets["cashflow"]);
         if (val.isZero()) {
-          KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(m_editWidgets["cashflow"]);
           if (cashflow && (cashflow->direction() == KMyMoneyRegister::Deposit)) {
             categoryLabel->setText(i18n("Transfer from"));
           } else {
             categoryLabel->setText(i18n("Transfer to"));
           }
-        } else if (val.isNegative())
+        } else if (val.isNegative()) {
           categoryLabel->setText(i18n("Transfer from"));
+          cashflow->setDirection(KMyMoneyRegister::Deposit);
+        }
         else
           categoryLabel->setText(i18n("Transfer to"));
       } else {
@@ -1525,8 +1539,8 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
           tabbar->setTabEnabled(KMyMoneyRegister::ActionTransfer, false);
         categoryLabel->setText(i18n("Category"));
       }
-      updateAmount(val.abs());
-    } else {
+      updateAmount(val);
+    } else {  //id.isEmpty()
       KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(m_editWidgets["category"]);
       if (!category->currentText().isEmpty() && tabbar)
         tabbar->setTabEnabled(KMyMoneyRegister::ActionTransfer, false);
@@ -1579,31 +1593,22 @@ void StdTransactionEditor::updateAmount(const MyMoneyMoney& val)
   if (categoryLabel) {
     KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(m_editWidgets["cashflow"]);
 
-    if (val.isNegative()) {
+    if (!val.isPositive())  {  //   fixes BUG321317
       if (categoryLabel->text() != i18n("Category")) {
-        if (categoryLabel->text() == i18n("Transfer from")) {
+        if (cashflow->direction() == KMyMoneyRegister::Payment) {
           categoryLabel->setText(i18n("Transfer to"));
-          cashflow->setDirection(KMyMoneyRegister::Payment);
-        } else {
-          categoryLabel->setText(i18n("Transfer from"));
-          cashflow->setDirection(KMyMoneyRegister::Deposit);
         }
       } else {
-        if (cashflow->direction() == KMyMoneyRegister::Deposit)
-          cashflow->setDirection(KMyMoneyRegister::Payment);
-        else
-          cashflow->setDirection(KMyMoneyRegister::Deposit);
         slotUpdateCashFlow(cashflow->direction());
       }
       dynamic_cast<kMyMoneyEdit*>(m_editWidgets["amount"])->setValue(val.abs());
     } else {
       if (categoryLabel->text() != i18n("Category")) {
-        if (categoryLabel->text() == i18n("Transfer to")) {
-          categoryLabel->setText(i18n("Transfer from"));
-          cashflow->setDirection(KMyMoneyRegister::Payment);
-        } else {
+        if (cashflow->direction() == KMyMoneyRegister::Payment) {
           categoryLabel->setText(i18n("Transfer to"));
-          cashflow->setDirection(KMyMoneyRegister::Deposit);
+        } else {
+          categoryLabel->setText(i18n("Transfer from"));
+          cashflow->setDirection(KMyMoneyRegister::Deposit);  //  editing with +ve shows 'from' not 'pay to'
         }
       }
       dynamic_cast<kMyMoneyEdit*>(m_editWidgets["amount"])->setValue(val.abs());
@@ -1823,14 +1828,14 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(*it_w);
     KTextEdit* memo = dynamic_cast<KTextEdit*>(*it_w);
 
-    //  Mandatory fields
-
     if (payee && !(payee->currentText().isEmpty())) {
       payeeIsPresent = true;
     }
 
 //    if (tagContainer && !(tagContainer->selectedTags().isEmpty()))  //  Tag is not a mandatory field
 //      break;
+
+    //  Mandatory fields
 
     if (category && !category->lineEdit()->text().isEmpty()) {
       categoryIsPresent = true;
@@ -1863,7 +1868,7 @@ bool StdTransactionEditor::isComplete(QString& reason) const
         break;
     }
   }
-  bool rc = (payeeIsPresent && categoryIsPresent && amountIsPresent);  //   usual mandatory fields
+  bool rc = (categoryIsPresent && amountIsPresent);  //   usual mandatory fields
   bool rc1 = (payeeIsPresent || categoryIsPresent || amountIsPresent);  //  if isMultiSelection(), they are optional
 
   return (rc || (isMultiSelection() && (it_w != m_editWidgets.end() || rc1)));

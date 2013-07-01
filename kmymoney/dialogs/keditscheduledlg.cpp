@@ -302,7 +302,6 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
     if (dateEdit)
       connect(dateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(slotPostDateChanged(QDate)));
 
-
     m_nameEdit->setFocus();
 
     // add the required fields to the mandatory group
@@ -310,7 +309,7 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
     d->m_requiredFields->add(editor->haveWidget("account"));
     d->m_requiredFields->add(editor->haveWidget("category"));
     d->m_requiredFields->add(editor->haveWidget("amount"));
-    d->m_requiredFields->add(editor->haveWidget("payee"));
+
     // fix labels
     QLabel* label = dynamic_cast<QLabel*>(editor->haveWidget("date-label"));
     if (label) {

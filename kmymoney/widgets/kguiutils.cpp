@@ -81,16 +81,6 @@ void kMandatoryFieldGroup::add(QWidget *widget)
       }
     }
 
-    else if (qobject_cast<KMyMoneyPayeeCombo*>(widget)) {
-      KMyMoneyPayeeCombo* payee = qobject_cast<KMyMoneyPayeeCombo*>(widget);
-      KLineEdit* lineedit = qobject_cast<KLineEdit*>(payee->lineEdit());
-      if (lineedit) {
-        connect(lineedit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
-      } else {
-        connect(payee, SIGNAL(highlighted(int)), this, SLOT(changed()));
-      }
-    }
-
     else if (qobject_cast<QLineEdit*>(widget)) {
       connect(qobject_cast<QLineEdit*>(widget),
               SIGNAL(textChanged(QString)),
