@@ -2585,7 +2585,7 @@ const MyMoneyPrice MyMoneyFile::price(const QString& fromId, const QString& toId
   }
 
   // if not asking for exact date, try to find the exact date match first,
-  // either the requested price or its reciprocal value. If unsuccesful, it will move
+  // either the requested price or its reciprocal value. If unsuccessful, it will move
   // on and look for prices of previous dates
   MyMoneyPrice rc = d->m_storage->price(fromId, to, date, true);
   if (!rc.isValid()) {

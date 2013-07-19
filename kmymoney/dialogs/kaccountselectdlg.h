@@ -107,7 +107,7 @@ public:
 
   /**
     * This method allows to control the visibilty of the abort button
-    * in this dialog according to the the parameter @p visible.
+    * in this dialog according to the parameter @p visible.
     *
     * @param visible @p true shows the abort button, @p false hides it.
     */

@@ -124,7 +124,7 @@ protected:
    */
   bool splitsAmountsMatch(const MyMoneySplit & split1, const MyMoneySplit & split2, int amountVariation = 0) const;
 
-  /** Checks wheter the splits' bankId-s match
+  /** Checks whether the splits' bankId-s match
    * @param importedSplit the imported split
    * @param existingSplit the existing split
    * @return true, if bank ids match; false otherwise
