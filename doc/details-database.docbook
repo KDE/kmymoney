@@ -55,7 +55,7 @@
   In addition to the database software itself, you must also install the
   corresponding &Qt; driver module. Most distributions will include driver
   modules for the more popular databases. Otherwise, check with the <ulink
-  url="http://qt.nokia.com">&Qt; software web site</ulink> and search for
+  url="http://qt-project.org">&Qt; software web site</ulink> and search for
   'SQL drivers'
 </para>
 
@@ -160,7 +160,7 @@
   This box lists all &Qt; SQL drivers installed on your system. Select the
   driver for your database type. If the one you want is not in the list, you
   need to install the appropriate driver. See your distribution documentation,
-  or visit the <ulink url="http://qt.nokia.com/" type="">&Qt; software web
+  or visit the <ulink url="http://qt-project.org/" type="">&Qt; software web
   site</ulink> and search for 'SQL drivers'.
 </para>
 </sect3>

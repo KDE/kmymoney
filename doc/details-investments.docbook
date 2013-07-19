@@ -607,8 +607,8 @@
   The page parser looks for a symbol, a date, and a price.  Regular expressions
   tell it how to extract those items from the page.  Please review the
   documentation for the <ulink
-  url="http://qt.nokia.com/doc/4.5/qregexp.html#1">QRegExp class</ulink> at
-  http://qt.nokia.com/doc/4.5/qregexp.html#1 for the exact makeup of the
+  url="http://qt-project.org/doc/qt-4.8/qregexp.html#1">QRegExp class</ulink>
+  for the exact makeup of the
   regular expressions.  There should be exactly one capture expression,
   surrounded by parentheses, in each regexp.  The date format further tells the
   date parser the order of year, month, and day.  This date format should always
