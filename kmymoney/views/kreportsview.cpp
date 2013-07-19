@@ -178,10 +178,13 @@ void KReportsView::KReportTab::updateReport(void)
 
   if (m_report.reportType() == MyMoneyReport::ePivotTable) {
     m_table = new PivotTable(m_report);
+    m_chartEnabled = true;
   } else if (m_report.reportType() == MyMoneyReport::eQueryTable) {
     m_table = new QueryTable(m_report);
+    m_chartEnabled = false;
   } else if (m_report.reportType() == MyMoneyReport::eInfoTable) {
     m_table = new ObjectInfoTable(m_report);
+    m_chartEnabled = false;
   }
 
   m_part->begin();
@@ -190,6 +193,7 @@ void KReportsView::KReportTab::updateReport(void)
   m_part->end();
 
   m_table->drawChart(*m_chartView);
+  m_control->buttonChart->setEnabled(m_chartEnabled);
 
   if (m_report.isChartByDefault() && !m_showingChart)
     toggleChart();

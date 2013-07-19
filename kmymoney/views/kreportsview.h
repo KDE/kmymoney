@@ -90,6 +90,7 @@ public:
     QVBoxLayout* m_layout;
     MyMoneyReport m_report;
     bool m_deleteMe;
+    bool m_chartEnabled;
     bool m_showingChart;
     bool m_needReload;
     reports::ReportTable* m_table;
