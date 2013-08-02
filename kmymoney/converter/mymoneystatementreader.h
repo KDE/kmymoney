@@ -127,7 +127,6 @@ private:
   Private* const d;
   MyMoneyAccount          m_account;
   QStringList             m_dontAskAgain;
-  bool                    m_skipAccount;
   bool                    m_userAbort;
   bool                    m_autoCreatePayee;
   bool                    m_askPayeeCategory;

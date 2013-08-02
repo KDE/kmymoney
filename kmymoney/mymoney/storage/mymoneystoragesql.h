@@ -107,8 +107,6 @@ public:
   bool exec();
   bool exec(const QString & query);
   bool prepare(const QString & query);
-private:
-  const MyMoneyStorageSql* m_db;
 };
 
 class IMyMoneySerialize;

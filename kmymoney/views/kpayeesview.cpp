@@ -89,8 +89,6 @@ KPayeeListItem::~KPayeeListItem()
 KPayeesView::KPayeesView(QWidget *parent) :
     QWidget(parent),
     m_needReload(false),
-    m_needConnection(true),
-    m_updatesQueued(0),
     m_inSelection(false),
     m_allowEditing(true),
     m_payeeFilterType(0)

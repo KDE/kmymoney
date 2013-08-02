@@ -59,7 +59,7 @@
 
 // subclass QSqlQuery for performance tracing
 MyMoneySqlQuery::MyMoneySqlQuery(MyMoneyStorageSql*  db)
-    : QSqlQuery(*db), m_db(db)
+    : QSqlQuery(*db)
 {
 }
 

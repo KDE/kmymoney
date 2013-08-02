@@ -181,12 +181,6 @@ private:
     * Search widget for the list
     */
   KListWidgetSearchLine*  m_searchWidget;
-  bool m_needConnection;
-
-  /**
-    * Counting semaphore to collect updates
-    */
-  int m_updatesQueued;
 
   /**
    * Semaphore to suppress loading during selection

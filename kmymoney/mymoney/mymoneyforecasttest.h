@@ -59,8 +59,6 @@ protected:
   MyMoneyForecast *m;
 
 private:
-  MyMoneyAccount  *account;
-
   MyMoneySeqAccessMgr* storage;
   MyMoneyFile* file;
 

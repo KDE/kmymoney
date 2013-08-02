@@ -83,8 +83,6 @@ KTagListItem::~KTagListItem()
 KTagsView::KTagsView(QWidget *parent) :
     QWidget(parent),
     m_needReload(false),
-    m_needConnection(true),
-    m_updatesQueued(0),
     m_inSelection(false),
     m_allowEditing(true),
     m_tagFilterType(0)

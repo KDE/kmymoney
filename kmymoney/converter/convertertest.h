@@ -28,8 +28,6 @@ class ConverterTest : public QObject
   Q_OBJECT
 
 private:
-  MyMoneyAccount  *m;
-
   MyMoneySeqAccessMgr* storage;
   MyMoneyFile* file;
 

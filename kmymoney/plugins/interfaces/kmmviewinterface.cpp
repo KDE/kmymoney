@@ -34,7 +34,6 @@
 
 KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyApp* app, KMyMoneyView* view, QObject* parent, const char* name) :
     ViewInterface(parent, name),
-    m_app(app),
     m_view(view)
 {
   connect(app, SIGNAL(accountSelected(MyMoneyAccount)), this, SIGNAL(accountSelected(MyMoneyAccount)));
