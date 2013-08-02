@@ -112,7 +112,7 @@ protected:
 
 private:
   /// \internal d-pointer class.
-  struct Private;
+  class Private;
   /// \internal d-pointer instance.
   Private* const d;
 };

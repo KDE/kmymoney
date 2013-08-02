@@ -150,13 +150,10 @@ void KMyMoneySecuritySelector::setDisplayOnly(const bool disp)
   if (disp == m_displayOnly)
     return;
 
-  switch (disp) {
-    case true:
-      connect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
-      break;
-    case false:
-      disconnect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
-      break;
+  if (disp) {
+    connect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
+  } else {
+    disconnect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
   }
   m_displayOnly = disp;
 }
