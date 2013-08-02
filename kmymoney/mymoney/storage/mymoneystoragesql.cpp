@@ -3346,7 +3346,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
     QMap<QString, MyMoneyTransaction> transactionList =  fetchTransactions();
     QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
 
-    std::remove_if(transactionList.begin(), transactionList.end(), FilterFail(filter, m_storagePtr));
+    std::remove_if(transactionList.begin(), transactionList.end(), FilterFail(filter));
     return transactionList;
   }
 

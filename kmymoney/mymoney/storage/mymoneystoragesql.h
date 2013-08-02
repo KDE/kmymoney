@@ -62,10 +62,7 @@ class MyMoneyDbDriver;
 class FilterFail
 {
 public:
-  FilterFail(const MyMoneyTransactionFilter& filter,
-             IMyMoneyStorage* storage)
-      : m_filter(filter),
-      m_storage(storage) {}
+  FilterFail(const MyMoneyTransactionFilter& filter) : m_filter(filter) {}
 
   inline bool operator()(const QPair<QString, MyMoneyTransaction>& transactionPair) {
     return (*this)(transactionPair.second);
@@ -77,7 +74,6 @@ public:
 
 private:
   MyMoneyTransactionFilter m_filter;
-  IMyMoneyStorage *m_storage;
 };
 
 class MyMoneyStorageSql;
