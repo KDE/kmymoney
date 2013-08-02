@@ -1085,7 +1085,6 @@ void CartesianAxis::paintCtx( PaintContext* context )
                             const QSize size(
                                     labelItem->sizeHintAndRotatedCorners(
                                             topLeft, topRight, bottomRight, bottomLeft) );
-                            const QSize sizeUnrotated( labelItem->sizeHintUnrotated() );
                             const int rotation = labelTA.rotation();
                             const bool rotPositive = (rotation > 0 && rotation < 180);
                             QPoint midOfSide(0,0);
@@ -1102,25 +1101,6 @@ void CartesianAxis::paintCtx( PaintContext* context )
                                     dY = midOfSide.y() - topRight.y();
                                 }
                             }
-                            /*
-                            if( i == 2 ){
-                                qDebug()<<"------"<<size<<topPoint<<topLeft<<topRight<<bottomRight<<bottomLeft<<"   m:"<<midOfSide<<" dx"<<dX<<" dy"<<dY;
-                                ptr->setPen( Qt::black );
-                                QRectF rect(topPoint, QSizeF(sizeUnrotated));
-                                ptr->drawRect( rect );
-                                ptr->drawRect( QRectF(topPoint, QSizeF(2,2)) );
-                                ptr->drawRect( QRectF(topPoint+topLeft, QSizeF(2,2)) );
-                                ptr->drawRect( QRectF(topPoint+bottomLeft, QSizeF(2,2)) );
-                                ptr->drawRect( QRectF(topPoint+bottomRight, QSizeF(2,2)) );
-                                ptr->drawRect( QRectF(topPoint+topRight, QSizeF(2,2)) );
-                                ptr->drawRect( QRectF(topPoint+midOfSide, QSizeF(2,2)) );
-                                ptr->setPen( Qt::green );
-                                rect = QRectF(topPoint, QSizeF(size));
-                                ptr->drawRect( rect );
-                                ptr->drawRect( QRectF(QPointF((rect.topLeft()  + rect.bottomLeft())  / 2.0 - QPointF(2.0,2.0)), QSizeF(3.0,3.0)) );
-                                //ptr->drawRect( QRectF(QPointF((rect.topRight() + rect.bottomRight()) / 2.0 - QPointF(2.0,2.0)), QSizeF(3.0,3.0)) );
-                            }
-                            */
                             QPoint topLeftPt;
                             if( diagramIsVertical ){
                                 if( rotation ){
