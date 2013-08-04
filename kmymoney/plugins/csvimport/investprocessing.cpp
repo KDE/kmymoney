@@ -859,8 +859,7 @@ void InvestProcessing::readFile(const QString& fname)
     m_inFileName  = fname;
 
   QFile inFile(m_inFileName);
-  inFile.open(QIODevice::ReadOnly | QIODevice::Text);
-
+  inFile.open(QIODevice::ReadOnly);  // allow a Carriage return -// QIODevice::Text
   QTextStream inStream(&inFile);
   QTextCodec *codec = QTextCodec::codecForMib(m_encodeIndex);
   inStream.setCodec(codec);

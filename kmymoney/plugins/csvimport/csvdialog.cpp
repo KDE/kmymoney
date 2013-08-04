@@ -744,8 +744,7 @@ void CSVDialog::readFile(const QString& fname)
   m_textDelimiterCharacter = m_parse->textDelimiterCharacter(m_textDelimiterIndex);
 
   QFile  m_inFile(m_inFileName);
-  m_inFile.open(QIODevice::ReadOnly | QIODevice::Text);
-
+  m_inFile.open(QIODevice::ReadOnly);  // allow a Carriage return -// QIODevice::Text
   QTextStream inStream(&m_inFile);
   QTextCodec* codec = QTextCodec::codecForMib(m_encodeIndex);
   inStream.setCodec(codec);

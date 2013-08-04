@@ -99,8 +99,11 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
         inQuotes = true;//                     ..start it
       }
       continue;
-    } else if (chr == "\n") {
-      if (inQuotes == true) {      //               embedded '\n' in quoted field
+
+    //  find carriage return and line feed chars
+
+    } else if ((chr == "\r") || (chr == "\n")) {
+      if (inQuotes == true) {      //               embedded '\n'  or '\r' in quoted field
         chr = '~';//                           replace it with ~ for now
         tmpBuffer += chr;
         if (charCount > 0)      //                      more chars yet
@@ -123,7 +126,10 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
         m_lastLine = lineCount;
         break;
       }
-    }//                                        end of 'EOL detected' loop
+    }
+
+    //  end of 'EOL detected' loop
+
     else {//                                   must be data char
       tmpBuffer += chr;
       if (charCount > 0) {      //                      more chars yet
