@@ -1290,7 +1290,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
           throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
         }
       }
-      chown(filename.toLatin1(), static_cast<uid_t>(-1), gid);
+      chown(QFile::encodeName(filename), static_cast<uid_t>(-1), gid);
     } else {
       KTemporaryFile tmpfile;
       tmpfile.open(); // to obtain the name
