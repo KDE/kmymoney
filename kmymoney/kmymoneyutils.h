@@ -98,14 +98,14 @@ public:
 
     /**
       * This transaction denotes a specific transaction where
-      * a loan account is involved. Ususally, a special dialog
+      * a loan account is involved. Usually, a special dialog
       * is used to modify this transaction.
       */
     LoanPayment,
 
     /**
       * This transaction denotes a specific transaction where
-      * an investment is involved. Ususally, a special dialog
+      * an investment is involved. Usually, a special dialog
       * is used to modify this transaction.
       */
     InvestmentTransaction
