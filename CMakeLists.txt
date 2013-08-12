@@ -27,19 +27,6 @@ SET(VERSION_MAJOR "4")
 SET(VERSION_MINOR "6")
 SET(VERSION_PATCH "90")
 
-# Determine the SVN revision number (if we're based on SVN)
-IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
-  # make sure we don't use translated messages here
-  SET(LANG $ENV{LANG})
-  SET(ENV{LANG} "C")
-  EXECUTE_PROCESS(COMMAND svn info ${CMAKE_CURRENT_SOURCE_DIR} OUTPUT_VARIABLE VERSION_SUFFIX)
-  STRING(REGEX MATCH "Revision: ([0-9]+)" VERSION_SUFFIX "${VERSION_SUFFIX}") 
-  STRING(REPLACE "Revision: " "" VERSION_SUFFIX "${VERSION_SUFFIX}")
-  SET(VERSION_SUFFIX "-svn${VERSION_SUFFIX}")
-  # switch back to the original language setting
-  SET(ENV{LANG} ${LANG})
-ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.svn)
-
 # Determine the GIT reference (if we're based on GIT)
 IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git AND CMAKE_SYSTEM_NAME MATCHES Linux)
   # make sure we don't use translated messages here
