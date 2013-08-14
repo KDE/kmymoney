@@ -1296,7 +1296,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
       tmpfile.open(); // to obtain the name
       saveToLocalFile(tmpfile.fileName(), pWriter, plaintext, keyList);
       if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))
-        throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
+        throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.prettyUrl()));
       tmpfile.close();
     }
     m_fileType = KmmXML;
