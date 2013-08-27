@@ -33,11 +33,7 @@
 #include <QLabel>
 #include <QList>
 #include <QVBoxLayout>
-// these are needed for a Windows only fix
-#ifdef Q_OS_WIN32                 // krazy:exclude=cpp
-#include <QInputContext>
-#include <QInputContextFactory>
-#endif
+
 // ----------------------------------------------------------------------------
 // KDE Headers
 
@@ -1307,10 +1303,6 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
   QPointer<TransactionEditor> editor;
 
   if (askUserToEnterScheduleForMatching(matchedSchedule, importedSplit)) {
-#ifdef Q_OS_WIN32                   //krazy:exclude=cpp
-    // reset the input context on Windows or else we'll have a crash here caused by an invalid focus widget in the input context
-    qApp->setInputContext(QInputContextFactory::create(qApp->inputContext()->identifierName(), qApp));
-#endif
     KEnterScheduleDlg dlg(0, matchedSchedule);
     editor = dlg.startEdit();
     if (editor) {
