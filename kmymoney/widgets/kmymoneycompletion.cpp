@@ -32,7 +32,6 @@
 #include <QDesktopWidget>
 #include <QLineEdit>
 #include <QInputContext>
-#include <QInputContextFactory>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -155,11 +154,10 @@ void kMyMoneyCompletion::show(bool presetSelected)
     }
   }
   KVBox::show();
-  // after the popup is shown for the first time the input context of the combobox gets messed up
-  // so replace it whit a new input context of the same type to handle input methods correctly
-  if (m_parent) {
-    m_parent->setInputContext(QInputContextFactory::create(m_parent->inputContext()->identifierName(), m_parent));
-  }
+
+  // make sure that the parent is the input context's focus widget instead of the selector's list
+  if (qApp->inputContext()->focusWidget() == m_selector->listView())
+    qApp->inputContext()->setFocusWidget(m_parent);
 }
 
 void kMyMoneyCompletion::hide(void)

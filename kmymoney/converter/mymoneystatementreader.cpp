@@ -33,11 +33,7 @@
 #include <QLabel>
 #include <QList>
 #include <QVBoxLayout>
-// these are needed for a Windows only fix
-#ifdef Q_OS_WIN32                 // krazy:exclude=cpp
-#include <QInputContext>
-#include <QInputContextFactory>
-#endif
+
 // ----------------------------------------------------------------------------
 // KDE Headers
 
@@ -1203,10 +1199,6 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           // just leave the transaction as imported.
           MyMoneySchedule schedule(*(dynamic_cast<const MyMoneySchedule*>(o)));
           if (KMessageBox::questionYesNo(0, QString("<qt>%1</qt>").arg(i18n("KMyMoney has found a scheduled transaction named <b>%1</b> which matches an imported transaction. Do you want KMyMoney to enter this schedule now so that the transaction can be matched? ", schedule.name())), i18n("Schedule found")) == KMessageBox::Yes) {
-#ifdef Q_OS_WIN32                   //krazy:exclude=cpp
-            // reset the input context on Windows or else we'll have a crash here caused by an invalid focus widget in the input context
-            qApp->setInputContext(QInputContextFactory::create(qApp->inputContext()->identifierName(), qApp));
-#endif
             KEnterScheduleDlg dlg(0, schedule);
             editor = dlg.startEdit();
             if (editor) {
