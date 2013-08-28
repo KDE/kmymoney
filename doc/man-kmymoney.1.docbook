@@ -172,7 +172,7 @@ Do not globally catch uncaught exceptions
 <term><option>--trace</option></term>
 <listitem>
 <para>
-Turn on program traces. This option is only available when &kmynoney; is compiled in debug mode.
+Turn on program traces. This option is only available when &kmymoney; is compiled in debug mode.
 </para>
 </listitem>
 </varlistentry>
