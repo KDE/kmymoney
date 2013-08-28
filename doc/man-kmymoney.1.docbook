@@ -151,6 +151,42 @@ Start without opening a file
 </varlistentry>
 
 <varlistentry>
+<term><option>--timers</option></term>
+<listitem>
+<para>
+Enable performance timers
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--nocatch</option></term>
+<listitem>
+<para>
+Do not globally catch uncaught exceptions
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--trace</option></term>
+<listitem>
+<para>
+Turn on program traces. This option is only available when &kmynoney; is compiled in debug mode.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--dump-actions</option></term>
+<listitem>
+<para>
+Dump the names of all defined KAction objects to stdout and quit. This option is only available when &kmymoney; is compiled in debug mode.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
 <term><option>--help</option></term>
 <listitem>
 <para>
