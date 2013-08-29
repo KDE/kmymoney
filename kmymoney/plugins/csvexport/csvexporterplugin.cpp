@@ -78,7 +78,7 @@ void CsvExporterPlugin::slotCsvExport(void)
       m_dlg->setWindowTitle(i18nc("CSV Exporter dialog title", "CSV Exporter"));
       CsvWriter* writer = new CsvWriter;
       writer->m_plugin = this;
-      connect(writer, SIGNAL(signalProgress(int, int)), m_dlg, SLOT(slotStatusProgressBar(int, int)));
+      connect(writer, SIGNAL(signalProgress(int,int)), m_dlg, SLOT(slotStatusProgressBar(int,int)));
 
       writer->write(m_dlg->filename(), m_dlg->accountId(),
                     m_dlg->accountSelected(), m_dlg->categorySelected(),

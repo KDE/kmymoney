@@ -105,10 +105,9 @@ public:
   /**
     * This method returns the accountId of the selected file
     */
-  const QString accountId() const
-{
-  return m_accountId;
-};
+  const QString accountId() const {
+    return m_accountId;
+  };
 
 protected slots:
   /**

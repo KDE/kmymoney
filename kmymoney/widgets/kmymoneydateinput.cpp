@@ -144,7 +144,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
     // DD.MM.YYYY is %d.%m.%y
     // dD.mM.YYYY is %e.%n.%y
     // SHORTWEEKDAY, dD SHORTMONTH YYYY is %a, %e %b %Y
-    if(lastWasPercent == true) {
+    if (lastWasPercent == true) {
       if (dateFormat[i] == 'y' || dateFormat[i] == 'm' || dateFormat[i] == 'n' || dateFormat[i] == 'd' || dateFormat[i] == 'e') {
         if (dateFormat[i] == 'n')
           dateFormat[i] = 'm';
@@ -153,7 +153,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
         order += dateFormat[i];
       }
 
-    } else if(dateFormat[i] == '%') {
+    } else if (dateFormat[i] == '%') {
       lastWasPercent = true;
       continue;
 

@@ -371,7 +371,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
         if ((map.value(MyMoneyAccount::Checkings).isEmpty()) && (map.value(MyMoneyAccount::Cash).isEmpty())) {
           KMessageBox::sorry(0, i18n("Transaction number '%1' is missing an account assignment.\n"
                                      "Date '%2', Amount '%3'.\nTransaction dropped.\n", count, t.postDate().toString(Qt::ISODate), strAmount),
-                                     i18n("Invalid transaction"));
+                             i18n("Invalid transaction"));
           return;
         }
       } else if ((*itSplit).action() == QLatin1String("Buy")) {

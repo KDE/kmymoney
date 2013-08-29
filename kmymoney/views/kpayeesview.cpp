@@ -845,7 +845,7 @@ bool KPayeesView::isDirty() const
 
 void KPayeesView::setDirty(bool dirty)
 {
-    m_updateButton->setEnabled(dirty);
+  m_updateButton->setEnabled(dirty);
 }
 
 #include "kpayeesview.moc"

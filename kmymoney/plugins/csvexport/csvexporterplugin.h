@@ -44,8 +44,7 @@ public:
 
   KAction*          m_action;
   bool              okToWriteFile(const KUrl& url);
-  CsvExportDlg*     exporterDialog()
-  {
+  CsvExportDlg*     exporterDialog() {
     return m_dlg;
   }
 

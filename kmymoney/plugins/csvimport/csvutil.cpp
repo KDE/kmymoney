@@ -100,7 +100,7 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
       }
       continue;
 
-    //  find carriage return and line feed chars
+      //  find carriage return and line feed chars
 
     } else if ((chr == "\r") || (chr == "\n")) {
       if (inQuotes == true) {      //               embedded '\n'  or '\r' in quoted field

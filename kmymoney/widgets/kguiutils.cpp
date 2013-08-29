@@ -183,7 +183,7 @@ void kMandatoryFieldGroup::changed(void)
         continue;
     }
     if ((qobject_cast<kMyMoneyEdit*>(widget))) {
-      if ((qobject_cast<kMyMoneyEdit*>(widget))->text() == "0/1" ) {
+      if ((qobject_cast<kMyMoneyEdit*>(widget))->text() == "0/1") {
         enable = false;
         break;
       } else

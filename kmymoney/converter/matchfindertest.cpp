@@ -45,7 +45,7 @@ void MatchFinderTest::init()
 
 void MatchFinderTest::cleanup()
 {
-    file->detachStorage(storage.data());
+  file->detachStorage(storage.data());
 }
 
 void MatchFinderTest::setupStorage()
@@ -240,7 +240,7 @@ void MatchFinderTest::testImpreciseMatch_matchWindowLowerBound()
 
   ledgerTransaction.splits().first().setBankID("");
   importTransaction.splits().first().setBankID("");
-  importTransaction.setPostDate( importTransaction.postDate().addDays(-MATCH_WINDOW) );
+  importTransaction.setPostDate(importTransaction.postDate().addDays(-MATCH_WINDOW));
   addTransactionToLedger(ledgerTransaction);
 
   expectMatchWithExistingTransaction(TransactionMatchFinder::MatchImprecise);
@@ -250,7 +250,7 @@ void MatchFinderTest::testImpreciseMatch_matchWindowUpperBound()
 {
   ledgerTransaction.splits().first().setBankID("");
   importTransaction.splits().first().setBankID("");
-  importTransaction.setPostDate( importTransaction.postDate().addDays(MATCH_WINDOW) );
+  importTransaction.setPostDate(importTransaction.postDate().addDays(MATCH_WINDOW));
   addTransactionToLedger(ledgerTransaction);
 
   expectMatchWithExistingTransaction(TransactionMatchFinder::MatchImprecise);
@@ -261,7 +261,7 @@ void MatchFinderTest::testImpreciseMatch_payeeEmpty()
   ledgerTransaction.splits().first().setBankID("");
   importTransaction.splits().first().setBankID("");
   importTransaction.splits().first().setPayeeId("");
-  importTransaction.setPostDate( importTransaction.postDate().addDays(1) );
+  importTransaction.setPostDate(importTransaction.postDate().addDays(1));
   addTransactionToLedger(ledgerTransaction);
 
   expectMatchWithExistingTransaction(TransactionMatchFinder::MatchImprecise);
@@ -350,7 +350,7 @@ void MatchFinderTest::testNoMatch_splitIsMarkedAsMatched()
 
 void MatchFinderTest::testNoMatch_postDateMismatch_withBankId()
 {
-  importTransaction.setPostDate( importTransaction.postDate().addDays(MATCH_WINDOW + 1) );
+  importTransaction.setPostDate(importTransaction.postDate().addDays(MATCH_WINDOW + 1));
   addTransactionToLedger(ledgerTransaction);
 
   expectMatchWithExistingTransaction(TransactionMatchFinder::MatchNotFound);
@@ -360,7 +360,7 @@ void MatchFinderTest::testNoMatch_postDateMismatch_noBankId()
 {
   ledgerTransaction.splits().first().setBankID("");
   importTransaction.splits().first().setBankID("");
-  importTransaction.setPostDate( importTransaction.postDate().addDays(MATCH_WINDOW + 1) );
+  importTransaction.setPostDate(importTransaction.postDate().addDays(MATCH_WINDOW + 1));
   addTransactionToLedger(ledgerTransaction);
 
   expectMatchWithExistingTransaction(TransactionMatchFinder::MatchNotFound);

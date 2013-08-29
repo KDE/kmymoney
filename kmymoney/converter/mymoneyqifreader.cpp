@@ -463,8 +463,8 @@ bool MyMoneyQifReader::startImport(void)
       rc = true;
     } else {
       KMessageBox::detailedError(0, i18n("Error while running the filter '%1'.", m_filter.program().join(QLatin1String(" "))),
-                                    m_filter.errorString(),
-                                    i18n("Filter error"));
+                                 m_filter.errorString(),
+                                 i18n("Filter error"));
     }
 #endif
   }

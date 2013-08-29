@@ -1573,10 +1573,10 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
   // later on, we might allow to edit investment transactions of the same type
   ///  Can now disable the following check.
 
-/*  if (rc == true && investmentTransactions > 1) {
-    tooltip = i18n("Cannot edit multiple investment transactions at once");
-    rc = false;
-  }*/
+  /*  if (rc == true && investmentTransactions > 1) {
+      tooltip = i18n("Cannot edit multiple investment transactions at once");
+      rc = false;
+    }*/
 
   // now check that we have the correct account type for investment transactions
   if (rc == true && investmentTransactions != 0) {

@@ -162,7 +162,7 @@ void CsvExportDlg::checkData(const QString& accountName)
           if (listTrans[0].postDate() < earliestDate) {
             earliestDate = listTrans[0].postDate();
           }
-        latestDate = listTrans[listTrans.count() - 1].postDate();
+          latestDate = listTrans[listTrans.count() - 1].postDate();
         }
       }
     } else {  //Checking, etc.
@@ -170,7 +170,7 @@ void CsvExportDlg::checkData(const QString& accountName)
       listTrans = file->transactionList(filter);
       if (listTrans.isEmpty()) {
         KMessageBox::sorry(0, i18n("There are no entries in this account.\n"),
-                                   i18n("Invalid account"));
+                           i18n("Invalid account"));
         return;
       }
       earliestDate = listTrans[0].postDate();
@@ -240,6 +240,6 @@ void CsvExportDlg::slotStatusProgressBar(int current, int total)
 }
 
 bool caseInsensitiveLessThan(const QString &s1, const QString &s2)
- {
-     return s1.toLower() < s2.toLower();
- }
+{
+  return s1.toLower() < s2.toLower();
+}

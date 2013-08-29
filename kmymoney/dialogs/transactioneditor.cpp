@@ -136,7 +136,7 @@ void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount
     tabOrderWidgets.append(w);
     TabBar* tabbar = dynamic_cast<TabBar*>(w);
     if ((tabbar) && (action == KMyMoneyRegister::ActionNone)) {
-        action = static_cast<KMyMoneyRegister::Action>(tabbar->currentIndex());
+      action = static_cast<KMyMoneyRegister::Action>(tabbar->currentIndex());
     }
   }
   loadEditWidgets(action);
@@ -1531,8 +1531,7 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
         } else if (val.isNegative()) {
           categoryLabel->setText(i18n("Transfer from"));
           cashflow->setDirection(KMyMoneyRegister::Deposit);
-        }
-        else
+        } else
           categoryLabel->setText(i18n("Transfer to"));
       } else {
         if (tabbar)
