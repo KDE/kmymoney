@@ -4805,25 +4805,26 @@ void KMyMoneyApp::slotCurrencyNew(void)
   }
 }
 
-void KMyMoneyApp::slotCurrencyRename(const QString &currencyId, const QString& currencyName)
+void KMyMoneyApp::slotCurrencyUpdate(const QString &currencyId, const QString& currencyName, const QString& currencyTradingSymbol)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   try {
-    if (currencyName != d->m_selectedCurrency.name()) {
+    if (currencyName != d->m_selectedCurrency.name() || currencyTradingSymbol != d->m_selectedCurrency.tradingSymbol()) {
       MyMoneySecurity currency = file->currency(currencyId);
       currency.setName(currencyName);
+      currency.setTradingSymbol(currencyTradingSymbol);
       MyMoneyFileTransaction ft;
       try {
         file->modifyCurrency(currency);
         d->m_selectedCurrency = currency;
         ft.commit();
       } catch (MyMoneyException* e) {
-        KMessageBox::sorry(this, i18n("Cannot rename currency. %1", e->what()), i18n("Rename currency"));
+        KMessageBox::sorry(this, i18n("Cannot update currency. %1", e->what()), i18n("Update currency"));
         delete e;
       }
     }
   } catch (MyMoneyException *e) {
-    KMessageBox::sorry(this, i18n("Cannot rename currency. %1", e->what()), i18n("Rename currency"));
+    KMessageBox::sorry(this, i18n("Cannot update currency. %1", e->what()), i18n("Update currency"));
     delete e;
   }
 }
@@ -6449,7 +6450,7 @@ void KMyMoneyApp::slotCurrencyDialog(void)
   connect(dlg, SIGNAL(selectObject(MyMoneySecurity)), this, SLOT(slotSelectCurrency(MyMoneySecurity)));
   connect(dlg, SIGNAL(openContextMenu(MyMoneySecurity)), this, SLOT(slotShowCurrencyContextMenu()));
   connect(this, SIGNAL(currencyRename()), dlg, SLOT(slotStartRename()));
-  connect(dlg, SIGNAL(renameCurrency(QString,QString)), this, SLOT(slotCurrencyRename(QString,QString)));
+  connect(dlg, SIGNAL(updateCurrency(QString,QString,QString)), this, SLOT(slotCurrencyUpdate(QString,QString,QString)));
   connect(this, SIGNAL(currencyCreated(QString)), dlg, SLOT(slotSelectCurrency(QString)));
   connect(dlg, SIGNAL(selectBaseCurrency(MyMoneySecurity)), this, SLOT(slotCurrencySetBase()));
 

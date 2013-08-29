@@ -311,7 +311,7 @@ protected slots:
 
   /**
     */
-  void slotCurrencyRename(const QString &currencyId, const QString& currencyName);
+  void slotCurrencyUpdate(const QString &currencyId, const QString& currencyName, const QString& currencyTradingSymbol);
 
   /**
     */
