@@ -68,9 +68,7 @@ protected:
 protected slots:
   void slotSelectCurrency(QTreeWidgetItem *);
   void slotStartRename(void);
-  void slotStartEditId(void);
   void slotOpenContextMenu(const QPoint& p);
-  void slotRenameCurrency(QTreeWidgetItem* item);
   void slotLoadCurrencies(void);
   void slotUpdateCurrency(QTreeWidgetItem *item);
 
@@ -81,12 +79,11 @@ private slots:
 signals:
   void selectObject(const MyMoneySecurity& currency);
   void openContextMenu(const MyMoneySecurity& currency);
-  void renameCurrency(const QString &currencyId, const QString& currencyName);
+  void updateCurrency(const QString &currencyId, const QString& currencyName, const QString& currencyTradingSymbol);
   void selectBaseCurrency(const MyMoneySecurity& currency);
 
 private:
   MyMoneySecurity               m_currency;
-  bool                          m_currencyInEditing;
   /**
     * Search widget for the list
     */
