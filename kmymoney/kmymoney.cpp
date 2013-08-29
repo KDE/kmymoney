@@ -194,6 +194,7 @@ public:
       m_progressBar(0),
       m_qifReader(0),
       m_smtReader(0),
+      m_importRunning(false),
       m_searchDlg(0),
       m_autoSaveTimer(0),
       m_progressTimer(0),
@@ -282,6 +283,9 @@ public:
 
   MyMoneyQifReader* m_qifReader;
   MyMoneyStatementReader* m_smtReader;
+  // allows multiple imports to be launched trough web connect and to be executed sequentially
+  QQueue<QString> m_importUrlsQueue;
+  bool m_importRunning;
   KFindTransactionDlg* m_searchDlg;
 
   QObject*              m_pluginInterface;
@@ -6932,6 +6936,15 @@ void KMyMoneyApp::webConnect(const QString& url, const QByteArray& asn_id)
   // plugin
   //
 
+  // if an import is already running enqueue this url to be processed later
+  if (d->m_importRunning) {
+    d->m_importUrlsQueue.enqueue(url);
+    return;
+  }
+
+  // mark the start of the import process
+  d->m_importRunning = true;
+
   // Bring this window to the forefront.  This method was suggested by
   // Lubos Lunak <l.lunak@suse.cz> of the KDE core development team.
   KStartupInfo::setNewStartupId(this, asn_id);
@@ -6969,6 +6982,13 @@ void KMyMoneyApp::webConnect(const QString& url, const QByteArray& asn_id)
         slotStatementImport(url);
 
   }
+
+  // mark the end of the import process
+  d->m_importRunning = false;
+
+  // if there are urls in the import queue continue their processing
+  if (!d->m_importUrlsQueue.isEmpty())
+    webConnect(d->m_importUrlsQueue.dequeue(), asn_id);
 }
 
 void KMyMoneyApp::slotEnableMessages(void)
