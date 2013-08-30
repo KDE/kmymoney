@@ -1254,6 +1254,21 @@ void MyMoneyDatabaseMgrTest::testTransactionList()
   QVERIFY(list.count() == 2);
   QVERIFY(list.at(0).id() == "T000000000000000002");
   QVERIFY(list.at(1).id() == "T000000000000000001");
+
+  // test the date filtering while split filtering is active but with an empty filter
+  filter.clear();
+  filter.addPayee(QString());
+  filter.setDateFilter(QDate(2002, 5, 10), QDate(2002, 5, 10));
+  list = m->transactionList(filter);
+  QVERIFY(list.count() == 1);
+  QVERIFY(list.at(0).id() == "T000000000000000001");
+
+  filter.clear();
+  filter.addAccount(QString());
+  filter.setDateFilter(QDate(2002, 5, 9), QDate(2002, 5, 9));
+  list = m->transactionList(filter);
+  QVERIFY(list.count() == 1);
+  QVERIFY(list.at(0).id() == "T000000000000000002");
 }
 
 void MyMoneyDatabaseMgrTest::testAddPayee()

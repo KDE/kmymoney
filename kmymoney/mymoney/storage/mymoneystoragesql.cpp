@@ -3438,10 +3438,10 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
     whereClause.append(')');
     cbc++;
   }
-  // if the split filter is active, but the where clause is empty
+  // if the split filter is active, but the where clause and the date filter is empty
   // it means we already have all the transactions for the specified filter
   // in memory, so just exit
-  if ((splitFilterActive) && (whereClause.isEmpty())) {
+  if ((splitFilterActive) && (whereClause.isEmpty()) && (!txFilterActive)) {
     qDebug("all transactions already in storage");
     return fetchTransactions();
   }
