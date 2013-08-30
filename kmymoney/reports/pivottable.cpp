@@ -244,10 +244,14 @@ void PivotTable::init(void)
   QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin();
   int colofs = columnValue(m_beginDate) - 1;
   while (it_transaction != transactions.constEnd()) {
-    QDate postdate = (*it_transaction).postDate();
-    int column = columnValue(postdate) - colofs;
-
     MyMoneyTransaction tx = (*it_transaction);
+    QDate postdate = tx.postDate();
+    if (postdate < m_beginDate) {
+      qDebug("MyMoneyFile::transactionList returned a transaction that is outside the date filter, skipping it");
+      ++it_transaction;
+      continue;
+    }
+    int column = columnValue(postdate) - colofs;
 
     // check if we need to call the autocalculation routine
     if (tx.isLoanPayment() && tx.hasAutoCalcSplit() && (tx.value("kmm-schedule-id").length() > 0)) {
