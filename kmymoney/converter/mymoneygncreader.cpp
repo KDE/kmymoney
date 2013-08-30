@@ -1662,8 +1662,6 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
   // 2. liabilities
   // 3. others (categories)
   // but keeping each in same order as gnucash
-  MyMoneySecurity e;
-  MyMoneyMoney price, newPrice;
 
   switch (splitAccount.accountGroup()) {
     case MyMoneyAccount::Asset:
@@ -1673,21 +1671,22 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
         split.setAction(MyMoneySplit::ActionBuyShares);
         m_potentialTransfer = false; // ?
         // add a price history entry
-        e = m_storage->security(splitAccount.currencyId());
-        // newPrice fix supplied by Phil Longstaff
-        price = split.value() / split.shares();
-#define NEW_DENOM 10000
-        if (!split.shares().isZero())  // patch to fix divide by zero?
-          newPrice = MyMoneyMoney(price.toDouble(), (signed64)NEW_DENOM);
-        if (!newPrice.isZero()) {
+        MyMoneySecurity e = m_storage->security(splitAccount.currencyId());
+        MyMoneyMoney price;
+        if (!split.shares().isZero()) {
+          static const signed64 NEW_DENOM = 10000;
+          price = split.value() / split.shares();
+          price = MyMoneyMoney(price.toDouble(), NEW_DENOM);
+        }
+        if (!price.isZero()) {
           TRY {
             // we can't use m_storage->security coz security list is not built yet
             m_storage->currency(m_txCommodity);   // will throw exception if not currency
             e.setTradingCurrency(m_txCommodity);
             if (gncdebug) qDebug() << "added price for" << e.name()
-              << newPrice.toString() << "date" << m_txDatePosted.toString(Qt::ISODate);
+              << price.toString() << "date" << m_txDatePosted.toString(Qt::ISODate);
             m_storage->modifySecurity(e);
-            MyMoneyPrice dealPrice(e.id(), m_txCommodity, m_txDatePosted, newPrice, i18n("Imported Transaction"));
+            MyMoneyPrice dealPrice(e.id(), m_txCommodity, m_txDatePosted, price, i18n("Imported Transaction"));
             m_storage->addPrice(dealPrice);
           } CATCH {
             // stock transfer; treat like free shares?
