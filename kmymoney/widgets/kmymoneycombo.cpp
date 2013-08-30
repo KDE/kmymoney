@@ -233,7 +233,8 @@ void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
 {
   // don't do anything if the focus is lost due to window activation, this way switching
   // windows while typing a category will not popup the category creation dialog
-  if (e->reason() == Qt::ActiveWindowFocusReason)
+  // also ignore the fact that the focus is lost because of Qt::PopupFocusReason (context menu)
+  if (e->reason() == Qt::ActiveWindowFocusReason || e->reason() == Qt::PopupFocusReason)
     return;
 
   if (m_inFocusOutEvent) {
