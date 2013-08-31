@@ -544,7 +544,7 @@ public:
   // otherwise the kidl compiler produces uncompilable results.
   const QString filename() const;
 
-  void webConnect(const QString&, const QByteArray& asn_id);
+  void webConnect(const QString& sourceUrl, const QByteArray& asn_id);
 
   /**
     * Checks if the file with the @a url already exists. If so,
