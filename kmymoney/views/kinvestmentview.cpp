@@ -234,7 +234,7 @@ void KInvestmentView::loadAccounts(void)
     for (QModelIndexList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it) {
       if (!it->parent().isValid())
         continue; // skip the top level accounts
-      QVariant accountId = d->m_filterProxyModel->data(*it, AccountsModel::AccountIdRole);
+      QVariant accountId = (*it).data(AccountsModel::AccountIdRole);
       if (accountId.isValid()) {
         MyMoneyAccount a = file->account(accountId.toString());
         if (a.value("PreferredAccount") == "Yes") {

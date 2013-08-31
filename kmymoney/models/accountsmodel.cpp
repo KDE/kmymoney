@@ -330,7 +330,7 @@ public:
     QModelIndexList list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, QVariant(accountId), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
     foreach (const QModelIndex &index, list) {
       // always return the account which is not the child of the favorite accounts item
-      if (model->data(index.parent(), AccountsModel::AccountIdRole).toString() != AccountsModel::favoritesAccountId) {
+      if (index.parent().data(AccountsModel::AccountIdRole).toString() != AccountsModel::favoritesAccountId) {
         return model->itemFromIndex(index);
       }
     }

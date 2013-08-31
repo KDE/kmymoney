@@ -177,7 +177,7 @@ public:
   void markAllExpanded(QAbstractItemModel *model) {
     QModelIndexList list = model->match(model->index(0, 0), AccountsModel::AccountIdRole, "*", -1, Qt::MatchFlags(Qt::MatchWildcard | Qt::MatchRecursive));
     foreach (const QModelIndex &index, list) {
-      markAccountExpanded(model->data(index, AccountsModel::AccountIdRole).toString());
+      markAccountExpanded(index.data(AccountsModel::AccountIdRole).toString());
     }
   }
 
@@ -212,7 +212,7 @@ QVariant AccountsViewFilterProxyModel::data(const QModelIndex &index, int role) 
   if (index.isValid() && role == Qt::DisplayRole) {
     int sourceColumn = mapToSource(index).column();
     if (sourceColumn == AccountsModel::TotalValue) {
-      QVariant accountId = sourceModel()->data(mapToSource(AccountsViewFilterProxyModel::index(index.row(), 0, index.parent())), AccountsModel::AccountIdRole);
+      QVariant accountId = mapToSource(AccountsViewFilterProxyModel::index(index.row(), 0, index.parent())).data(AccountsModel::AccountIdRole);
       if (d->isAccountExpanded(accountId.toString()) && index.parent().isValid()) {
         // if an account is not a top-level account and it is expanded display it's value
         return data(index, AccountsModel::AccountValueDisplayRole);
@@ -234,7 +234,7 @@ QVariant AccountsViewFilterProxyModel::data(const QModelIndex &index, int role) 
 bool AccountsViewFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
   if (!source_parent.isValid()) {
-    QVariant data = sourceModel()->data(sourceModel()->index(source_row, 0, source_parent), AccountsModel::AccountIdRole);
+    QVariant data = sourceModel()->index(source_row, 0, source_parent).data(AccountsModel::AccountIdRole);
     if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
       return false;
   }
@@ -247,7 +247,7 @@ bool AccountsViewFilterProxyModel::filterAcceptsRow(int source_row, const QModel
   */
 void AccountsViewFilterProxyModel::collapsed(const QModelIndex &index)
 {
-  QVariant accountId = sourceModel()->data(mapToSource(index), AccountsModel::AccountIdRole);
+  QVariant accountId = mapToSource(index).data(AccountsModel::AccountIdRole);
   if (accountId.isValid()) {
     d->markAccountCollapsed(accountId.toString());
   }
@@ -259,7 +259,7 @@ void AccountsViewFilterProxyModel::collapsed(const QModelIndex &index)
   */
 void AccountsViewFilterProxyModel::expanded(const QModelIndex &index)
 {
-  QVariant accountId = sourceModel()->data(mapToSource(index), AccountsModel::AccountIdRole);
+  QVariant accountId = mapToSource(index).data(AccountsModel::AccountIdRole);
   if (accountId.isValid()) {
     d->markAccountExpanded(accountId.toString());
   }

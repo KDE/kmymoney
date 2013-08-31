@@ -865,7 +865,7 @@ void KGlobalLedgerView::loadAccounts(void)
                            1,
                            Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
     if (list.count() > 0) {
-      QVariant accountId = Models::instance()->accountsModel()->data(list.front(), AccountsModel::AccountIdRole);
+      QVariant accountId = list.front().data(AccountsModel::AccountIdRole);
       if (accountId.isValid()) {
         m_account = file->account(accountId.toString());
       }
@@ -881,7 +881,7 @@ void KGlobalLedgerView::loadAccounts(void)
       for (QModelIndexList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it) {
         if (!it->parent().isValid())
           continue; // skip the top level accounts
-        QVariant accountId = Models::instance()->accountsModel()->data(*it, AccountsModel::AccountIdRole);
+        QVariant accountId = (*it).data(AccountsModel::AccountIdRole);
         if (accountId.isValid()) {
           MyMoneyAccount a = file->account(accountId.toString());
           if (!a.isInvest()) {

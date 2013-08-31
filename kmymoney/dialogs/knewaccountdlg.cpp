@@ -116,7 +116,7 @@ QModelIndex HierarchyFilterProxyModel::getSelectedParentAccountIndex() const
 bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
   if (!source_parent.isValid()) {
-    QVariant data = sourceModel()->data(sourceModel()->index(source_row, 0, source_parent), AccountsModel::AccountIdRole);
+    QVariant data = sourceModel()->index(source_row, 0, source_parent).data(AccountsModel::AccountIdRole);
     if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
       return false;
   }

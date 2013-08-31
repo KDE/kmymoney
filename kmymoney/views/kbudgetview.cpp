@@ -748,7 +748,7 @@ void KBudgetView::slotBudgetedAmountChanged(void)
   QModelIndexList indexes = m_accountTree->selectionModel()->selectedIndexes();
   if (indexes.empty())
     return;
-  QString accountID = m_accountTree->model()->data(indexes.front(), AccountsModel::AccountIdRole).toString();
+  QString accountID = indexes.front().data(AccountsModel::AccountIdRole).toString();
 
   MyMoneyBudget::AccountGroup accountGroup = m_budget.account(accountID);
   accountGroup.setId(accountID);
@@ -775,7 +775,7 @@ void KBudgetView::cb_includesSubaccounts_clicked()
 
   QModelIndexList indexes = m_accountTree->selectionModel()->selectedIndexes();
   if (!indexes.empty()) {
-    QString accountID = m_accountTree->model()->data(indexes.front(), AccountsModel::AccountIdRole).toString();
+    QString accountID = indexes.front().data(AccountsModel::AccountIdRole).toString();
     // now, we get a reference to the accountgroup, to modify its attribute,
     // and then put the resulting account group instead of the original
     MyMoneyBudget::AccountGroup auxAccount = m_budget.account(accountID);
@@ -818,7 +818,7 @@ void KBudgetView::clearSubBudgets(const QModelIndex &index)
 
   for (int i = 0; i < children; ++i) {
     QModelIndex childIdx = index.child(i, 0);
-    QString accountID = m_accountTree->model()->data(childIdx, AccountsModel::AccountIdRole).toString();
+    QString accountID = childIdx.data(AccountsModel::AccountIdRole).toString();
     m_budget.removeReference(accountID);
     clearSubBudgets(childIdx);
   }
@@ -831,7 +831,7 @@ bool KBudgetView::collectSubBudgets(MyMoneyBudget::AccountGroup &destination, co
 
   for (int i = 0; i < children; ++i) {
     QModelIndex childIdx = index.child(i, 0);
-    QString accountID = m_accountTree->model()->data(childIdx, AccountsModel::AccountIdRole).toString();
+    QString accountID = childIdx.data(AccountsModel::AccountIdRole).toString();
     MyMoneyBudget::AccountGroup auxAccount = m_budget.account(accountID);
     if (auxAccount.budgetLevel() != MyMoneyBudget::AccountGroup::eNone
         && !auxAccount.isZero()) {

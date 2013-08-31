@@ -114,7 +114,7 @@ void KMyMoneyAccountCombo::expandAll()
 void KMyMoneyAccountCombo::activated()
 {
   // emit the account selected signal, just like the old widget
-  QVariant data = model()->data(view()->currentIndex(), AccountsModel::AccountIdRole);
+  QVariant data = view()->currentIndex().data(AccountsModel::AccountIdRole);
   if (data.isValid()) {
     d->m_lastSelectedAccount = data.toString();
     emit accountSelected(data.toString());
