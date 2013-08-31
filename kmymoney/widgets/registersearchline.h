@@ -57,13 +57,6 @@ public:
   explicit RegisterSearchLine(QWidget* parent = 0, Register* reg = 0);
 
   /**
-    * Constructs a RegisterSearchLine
-    *
-    * The widget will be disabled until a register is set with setRegister().
-    */
-  RegisterSearchLine(QWidget* parent = 0);
-
-  /**
     * Destroys the object
     */
   ~RegisterSearchLine();
