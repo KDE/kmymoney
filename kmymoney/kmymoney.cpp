@@ -6938,7 +6938,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
 
   // only start processing if this is the only import so far
   if (d->m_importUrlsQueue.count() == 1) {
-    do {
+    while (!d->m_importUrlsQueue.isEmpty()) {
       // get the value of the next item from the queue
       // but leave it on the queue for now
       QString url = d->m_importUrlsQueue.head();
@@ -6982,7 +6982,7 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
       }
       // remove the current processed item from the queue
       d->m_importUrlsQueue.dequeue();
-    } while (!d->m_importUrlsQueue.isEmpty());
+    }
   }
 }
 
