@@ -33,7 +33,7 @@
 #include <kmessagebox.h>
 #include <KPIMIdentities/IdentityManager>
 #include <KPIMIdentities/Identity>
-#include <Akonadi/RecursiveItemFetchJob>
+#include <akonadi/recursiveitemfetchjob.h>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/Collection>
 #include <KABC/Addressee>
