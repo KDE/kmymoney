@@ -100,6 +100,7 @@ protected:
   void resizeEvent(QResizeEvent*);
   KMyMoneyCategory* createEditWidgets(bool setFocus);
   void destroyEditWidgets(void);
+  void destroyEditWidget(int r, int c);
 
   /**
     * This method handles the focus of the keyboard. When in edit mode
