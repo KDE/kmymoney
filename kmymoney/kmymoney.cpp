@@ -7250,6 +7250,10 @@ void KMyMoneyApp::slotAccountUpdateOnlineAll(void)
       ++it_a;
   }
 
+  action("account_online_update")->setEnabled(false);
+  action("account_online_update_menu")->setEnabled(false);
+  action("account_online_update_all")->setEnabled(false);
+
   // now work on the remaining list of accounts
   int cnt = accList.count() - 1;
   for (it_a = accList.begin(); it_a != accList.end(); ++it_a) {
@@ -7261,6 +7265,9 @@ void KMyMoneyApp::slotAccountUpdateOnlineAll(void)
   d->m_collectingStatements = false;
   if (!d->m_statementResults.isEmpty())
     KMessageBox::informationList(this, i18n("The statements have been processed with the following results:"), d->m_statementResults, i18n("Statement stats"));
+
+  // re-enable the disabled actions
+  slotUpdateActions();
 }
 
 void KMyMoneyApp::slotAccountUpdateOnline(void)
@@ -7272,6 +7279,10 @@ void KMyMoneyApp::slotAccountUpdateOnline(void)
   // no online account mapped
   if (d->m_selectedAccount.onlineBankingSettings().value("provider").isEmpty())
     return;
+
+  action("account_online_update")->setEnabled(false);
+  action("account_online_update_menu")->setEnabled(false);
+  action("account_online_update_all")->setEnabled(false);
 
   // find the provider
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
@@ -7285,6 +7296,9 @@ void KMyMoneyApp::slotAccountUpdateOnline(void)
     if (!d->m_statementResults.isEmpty())
       KMessageBox::informationList(this, i18n("The statements have been processed with the following results:"), d->m_statementResults, i18n("Statement stats"));
   }
+
+  // re-enable the disabled actions
+  slotUpdateActions();
 }
 
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
