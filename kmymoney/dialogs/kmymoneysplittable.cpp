@@ -352,13 +352,14 @@ void kMyMoneySplitTable::slotSetFocus(const QModelIndex& index, int button)
   // make sure the row will be on the screen
   scrollTo(model()->index(row, 0));
 
+  if (isEditMode()) {                   // in edit mode?
+    if (KMyMoneyGlobalSettings::focusChangeIsEnter())
+      slotEndEdit();
+    else
+      slotCancelEdit();
+  }
+
   if (button == Qt::LeftButton) {         // left mouse button
-    if (isEditMode()) {                   // in edit mode?
-      if (KMyMoneyGlobalSettings::focusChangeIsEnter())
-        slotEndEdit();
-      else
-        slotCancelEdit();
-    }
     if (row != currentRow()) {
       // setup new current row and update visible selection
       selectRow(row);
