@@ -778,12 +778,19 @@ void kMyMoneySplitTable::destroyEditWidgets(void)
 
   disconnect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadEditWidgets()));
 
-  removeCellWidget(m_currentRow, 0);
-  removeCellWidget(m_currentRow, 1);
-  removeCellWidget(m_currentRow, 2);
-  removeCellWidget(m_currentRow + 1, 0);
+  destroyEditWidget(m_currentRow, 0);
+  destroyEditWidget(m_currentRow, 1);
+  destroyEditWidget(m_currentRow, 2);
+  destroyEditWidget(m_currentRow + 1, 0);
   setState(QAbstractItemView::NoState);
   QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents, 100);
+}
+
+void kMyMoneySplitTable::destroyEditWidget(int r, int c)
+{
+  if (QWidget* cw = cellWidget(r, c))
+    cw->hide();
+  removeCellWidget(r, c);
 }
 
 KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
