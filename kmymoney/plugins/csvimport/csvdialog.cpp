@@ -284,6 +284,7 @@ void CSVDialog::init()
 
   connect(m_pageLinesDate->ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), this, SLOT(endLineChanged(int)));
   connect(m_pageLinesDate->ui->comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), this, SLOT(dateFormatSelected(int)));
+  connect(m_pageLinesDate->ui->comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), m_investProcessing, SLOT(dateFormatSelected(int)));
   connect(m_pageLinesDate->ui->comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), m_convertDate, SLOT(dateFormatSelected(int)));
 
   connect(m_pageCompletion->ui->comboBox_decimalSymbol, SIGNAL(currentIndexChanged(int)), m_parse, SLOT(decimalSymbolSelected(int)));
@@ -585,6 +586,7 @@ void CSVDialog::slotFileDialogClicked()
   m_hScrollBarHeight = 0;
   m_lastDelimiterIndex = 0;
   m_errorColumn = -1;
+  m_accept = false;
 
   QString profileName;
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
@@ -881,8 +883,10 @@ void CSVDialog::readFile(const QString& fname)
       int ret = processQifLine(m_inBuffer);  //        parse a line
       if (ret == KMessageBox::Ok) {
         csvImportTransaction(st);
-      } else
+      } else {
         m_importNow = false;
+        m_wizard->back();  //                          Have another try at the import
+      }
     }
   }  //  reached end of buffer
 
@@ -1061,8 +1065,9 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
       QDate dat = m_convertDate->convertDate(txt);  //  Date column
       if (dat == QDate()) {
         KMessageBox::sorry(this, i18n("<center>An invalid date has been detected during import.</center>"
-                                      "<center><b>%1</b></center>"
-                                      "Please check that you have set the correct date format."
+                                      "<center><b>'%1'</b></center>"
+                                      "Please check that you have set the correct date format,\n"
+                                      "<center>and start and end lines.</center>"
                                       , txt), i18n("CSV import"));
         m_importError = true;
         return KMessageBox::Cancel;
@@ -1189,7 +1194,7 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
     QString errMsg = i18n("<center>The columns selected are invalid.</center>"
                           "There must an amount or debit and credit fields, plus date and payee fields.");
     if (m_pageIntro->ui->checkBoxSkipSetup->isEnabled()) {
-      errMsg += i18n("<center>You probably need to reset 'Skip setup'.</center>");
+      errMsg += i18n("<center>You possibly need to check the start and end line settings, or reset 'Skip setup'.</center>");
     }
     KMessageBox::information(0, errMsg);
     m_importError = true;
@@ -2137,7 +2142,7 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
 
 void CSVDialog::dateFormatSelected(int dF)
 {
-  if (dF == -1) {
+  if (dF == -1 || m_fileType == "Invest") {
     return;
   }
   m_dateFormatIndex = dF;
@@ -3680,6 +3685,8 @@ bool LinesDatePage::validatePage()
 
 int LinesDatePage::nextId() const
 {
+  m_dlg->m_importError = false;
+  m_dlg->m_accept = false;
   return CSVDialog::Page_Completion;
 }
 
@@ -3705,7 +3712,13 @@ void CompletionPage::initializePage()
 {
   m_dlg->m_firstPass = false;  //  Needs to be here when skipping setup.
   QList<QWizard::WizardButton> layout;
+  if (m_dlg->m_importError) {
+    layout << QWizard::Stretch << QWizard::BackButton << QWizard::CancelButton;
+    wizard()->setButtonLayout(layout);
+    return;
+  }
   if (!m_dlg->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
+    layout.clear();
     layout << QWizard::Stretch << QWizard::CustomButton3 << QWizard::CustomButton2 << QWizard::BackButton
     <<  QWizard::FinishButton <<  QWizard::CancelButton;
     wizard()->setOption(QWizard::HaveCustomButton2, true);
@@ -3725,16 +3738,6 @@ void CompletionPage::initializePage()
         slotImportClicked();
       }
     }
-  }
-  if (m_dlg->m_importError) {
-    layout.clear();
-    layout << QWizard::Stretch << QWizard::BackButton << QWizard::NextButton << QWizard::CancelButton;
-    wizard()->setButtonLayout(layout);
-    wizard()->button(QWizard::NextButton)->setDisabled(true);
-    wizard()->button(QWizard::NextButton)->setToolTip(i18n("To correct any error, you will need to uncheck the 'Skip setup' box"));
-  } else {
-    wizard()->button(QWizard::NextButton)->setDisabled(false);
-    wizard()->button(QWizard::NextButton)->setToolTip(QString());
   }
 }
 

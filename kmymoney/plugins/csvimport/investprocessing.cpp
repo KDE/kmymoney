@@ -39,6 +39,7 @@
 #include <KInputDialog>
 #include <KSharedConfig>
 #include <kmessagebox.h>
+#include <kstdguiitem.h>
 #include <KStandardDirs>
 #include <KLocale>
 #include <KIO/NetAccess>
@@ -208,6 +209,7 @@ void InvestProcessing::slotFileDialogClicked()
   m_listSecurities.clear();
   m_csvDialog->m_delimiterError = false;
   m_importCompleted = false;
+  m_csvDialog->m_accept = false;
 
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
   bool found = false;
@@ -1009,6 +1011,7 @@ void InvestProcessing::readFile(const QString& fname)
         }
       } else {
         m_importNow = false;
+        m_csvDialog->m_wizard->back();  //               have another try at the import
       }
     }  //                                                finished parsing
     m_csvDialog->m_pageLinesDate->ui->labelSet_skip->setEnabled(true);
@@ -1134,6 +1137,25 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
   m_brokerage = false;
   memo.clear();
 
+  if (m_columnList.count() < m_endColumn) {
+    if (!m_csvDialog->m_accept) {
+      QString row = QString::number(m_row);
+      int ret = KMessageBox::questionYesNoCancel(0, i18n("<center>Row number %1 does not have the expected number of columns.</center>"
+                "<center>This might not be a problem, but it may be a header line.</center>"
+                "<center>You may accept all similar items, or just this one, or cancel.</center>",
+                row), i18n("CSV import"),
+                KGuiItem(i18n("Accept All")),
+                KGuiItem(i18n("Accept This")),
+                KGuiItem(i18n("Cancel")));
+      if (ret == KMessageBox::Cancel) {
+        return ret;
+      }
+      if (ret == KMessageBox::Yes) {
+        m_csvDialog->m_accept = true;
+      }
+    }
+  }
+
   for (int i = 0; i < m_columnList.count(); i++) {
     //  Use actual column count for this line instead of m_endColumn, which could be greater.
     if (m_columnTypeList[i] == "date") {      //                    Date Col
@@ -1142,7 +1164,11 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       txt = txt.remove('"');
       QDate dat = m_convertDat->convertDate(txt);
       if (dat == QDate()) {
-        KMessageBox::sorry(0, i18n("<center>An invalid date has been detected during import.</center> <center><b>%1</b></center> Please check that you have set the correct date format.", txt), i18n("CSV import"));
+        KMessageBox::sorry(0, i18n("<center>An invalid date has been detected during import.</center>"
+                                   "<center><b>'%1'</b></center>"
+                                   "Please check that you have set the correct date format,\n"
+                                   "<center>and start and end lines.</center>"
+                                   , txt), i18n("CSV import"));
         m_csvDialog->m_importError = true;
         return KMessageBox::Cancel;
       }
@@ -1402,7 +1428,9 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     return KMessageBox::Ok;
   } else {
     KMessageBox::sorry(0, i18n("<center>The columns selected are invalid.\n</center>"
-                               "There must an amount or quantity fields, symbol or security name, plus date and type field."), i18n("CSV import"));
+                               "There must an amount or quantity fields, symbol or security name, plus date and type field."
+                               "<center>You possibly need to check the start and end line settings, or reset 'Skip setup'.</center>",
+                          i18n("CSV import")));
     return KMessageBox::Cancel;
   }
   return KMessageBox::Ok;
@@ -1781,7 +1809,7 @@ void InvestProcessing::endLineChanged(int val)
 
 void InvestProcessing::dateFormatSelected(int dF)
 {
-  if (dF == -1) {
+  if (dF == -1 || m_csvDialog->m_fileType != "Invest") {
     return;
   }
   m_dateFormatIndex = dF;
