@@ -209,6 +209,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   d->m_filterProxyModel = new AccountNamesFilterProxyModel(this);
   d->m_filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
   d->m_filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
+  d->m_filterProxyModel->addAccountGroup(MyMoneyAccount::Equity);
   d->m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
   d->m_filterProxyModel->sort(0);
 

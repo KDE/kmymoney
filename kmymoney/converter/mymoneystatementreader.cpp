@@ -994,8 +994,10 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           topcontents->addWidget(label1);
 
           AccountNamesFilterProxyModel *filterProxyModel = new AccountNamesFilterProxyModel(this);
+          filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
           filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);
           filterProxyModel->addAccountGroup(MyMoneyAccount::Liability);
+          filterProxyModel->addAccountGroup(MyMoneyAccount::Equity);
           filterProxyModel->addAccountGroup(MyMoneyAccount::Income);
           filterProxyModel->addAccountGroup(MyMoneyAccount::Expense);
           filterProxyModel->setSourceModel(Models::instance()->accountsModel());
