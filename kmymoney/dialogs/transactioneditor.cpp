@@ -1691,63 +1691,10 @@ bool StdTransactionEditor::addVatSplit(MyMoneyTransaction& tr, const MyMoneyMone
   if (tr.splitCount() != 2)
     return false;
 
-  bool rc = false;
   MyMoneyFile* file = MyMoneyFile::instance();
-
-  try {
-    MyMoneySplit cat;  // category
-    MyMoneySplit tax;  // tax
-
-    // extract the category split from the transaction
-    MyMoneyAccount category = file->account(tr.splitByAccount(m_account.id(), false).accountId());
-    if (category.value("VatAccount").isEmpty())
-      return false;
-    MyMoneyAccount vatAcc = file->account(category.value("VatAccount").toLatin1());
-    const MyMoneySecurity& asec = file->security(m_account.currencyId());
-    const MyMoneySecurity& csec = file->security(category.currencyId());
-    const MyMoneySecurity& vsec = file->security(vatAcc.currencyId());
-    if (asec.id() != csec.id() || asec.id() != vsec.id()) {
-      qDebug("Auto VAT assignment only works if all three accounts use the same currency.");
-      return false;
-    }
-
-    MyMoneyMoney vatRate(vatAcc.value("VatRate"));
-    MyMoneyMoney gv, nv;    // gross value, net value
-    int fract = m_account.fraction();
-
-    if (!vatRate.isZero()) {
-
-      tax.setAccountId(vatAcc.id());
-
-      // qDebug("vat amount is '%s'", category.value("VatAmount").toLatin1());
-      if (category.value("VatAmount").toLower() != QString("net")) {
-        // split value is the gross value
-        gv = amount;
-        nv = gv / (MyMoneyMoney(1, 1) + vatRate);
-        MyMoneySplit catSplit = tr.splitByAccount(m_account.id(), false);
-        catSplit.setShares(-nv.convert(fract));
-        catSplit.setValue(catSplit.shares());
-        tr.modifySplit(catSplit);
-
-      } else {
-        // split value is the net value
-        nv = amount;
-        gv = nv * (MyMoneyMoney(1, 1) + vatRate);
-        MyMoneySplit accSplit = tr.splitByAccount(m_account.id());
-        accSplit.setValue(gv.convert(fract));
-        accSplit.setShares(accSplit.value());
-        tr.modifySplit(accSplit);
-      }
-
-      tax.setValue(-(gv - nv).convert(fract));
-      tax.setShares(tax.value());
-      tr.addSplit(tax);
-      rc = true;
-    }
-  } catch (MyMoneyException *e) {
-    delete e;
-  }
-  return rc;
+  // extract the category split from the transaction
+  MyMoneyAccount category = file->account(tr.splitByAccount(m_account.id(), false).accountId());
+  return file->addVATSplit(tr, m_account, category, amount);
 }
 
 MyMoneyMoney StdTransactionEditor::removeVatSplit(void)

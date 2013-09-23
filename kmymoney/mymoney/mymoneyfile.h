@@ -1389,6 +1389,17 @@ public:
     */
   void removeBudget(const MyMoneyBudget& budget);
 
+  /**
+    * This method is used to add a VAT split to a transaction.
+    *
+    * @param transaction reference to the transaction
+    * @param account reference to the account
+    * @param category reference to the category
+    * @param amount reference to the amount of the VAT split
+    *
+    * @return true if a VAT split has been added
+    */
+  bool addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAccount& account, const MyMoneyAccount& category, const MyMoneyMoney& amount);
 
   /**
     * This method checks, if the given @p object is referenced

@@ -39,6 +39,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "storage/mymoneyseqaccessmgr.h"
+#include "mymoneyaccount.h"
 #include "mymoneyreport.h"
 #include "mymoneybalancecache.h"
 #include "mymoneybudget.h"
@@ -2754,7 +2755,63 @@ void MyMoneyFile::removeBudget(const MyMoneyBudget& budget)
   d->addCacheNotification(budget.id(), false);
 }
 
+bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAccount& account, const MyMoneyAccount& category, const MyMoneyMoney& amount)
+{
+    bool rc = false;
 
+    try {
+      MyMoneySplit cat;  // category
+      MyMoneySplit tax;  // tax
+
+      if (category.value("VatAccount").isEmpty())
+        return false;
+      MyMoneyAccount vatAcc = this->account(category.value("VatAccount").toLatin1());
+      const MyMoneySecurity& asec = security(account.currencyId());
+      const MyMoneySecurity& csec = security(category.currencyId());
+      const MyMoneySecurity& vsec = security(vatAcc.currencyId());
+      if (asec.id() != csec.id() || asec.id() != vsec.id()) {
+        qDebug("Auto VAT assignment only works if all three accounts use the same currency.");
+        return false;
+      }
+
+      MyMoneyMoney vatRate(vatAcc.value("VatRate"));
+      MyMoneyMoney gv, nv;    // gross value, net value
+      int fract = account.fraction();
+
+      if (!vatRate.isZero()) {
+
+        tax.setAccountId(vatAcc.id());
+
+        // qDebug("vat amount is '%s'", category.value("VatAmount").toLatin1());
+        if (category.value("VatAmount").toLower() != QString("net")) {
+          // split value is the gross value
+          gv = amount;
+          nv = gv / (MyMoneyMoney(1, 1) + vatRate);
+          MyMoneySplit catSplit = transaction.splitByAccount(account.id(), false);
+          catSplit.setShares(-nv.convert(fract));
+          catSplit.setValue(catSplit.shares());
+          transaction.modifySplit(catSplit);
+
+        } else {
+          // split value is the net value
+          nv = amount;
+          gv = nv * (MyMoneyMoney(1, 1) + vatRate);
+          MyMoneySplit accSplit = transaction.splitByAccount(account.id());
+          accSplit.setValue(gv.convert(fract));
+          accSplit.setShares(accSplit.value());
+          transaction.modifySplit(accSplit);
+        }
+
+        tax.setValue(-(gv - nv).convert(fract));
+        tax.setShares(tax.value());
+        transaction.addSplit(tax);
+        rc = true;
+      }
+    } catch (MyMoneyException *e) {
+      delete e;
+    }
+    return rc;
+}
 
 bool MyMoneyFile::isReferenced(const MyMoneyObject& obj, const MyMoneyFileBitArray& skipChecks) const
 {
