@@ -357,6 +357,19 @@ Selecting 0% will list all transactions.</string>
                         </property>
                       </widget>
                     </item>
+                    <item>
+                      <widget class="QCheckBox" name="kcfg_AutoFillUseMemos">
+                        <property name="text">
+                          <string>Use memos from previous transaction</string>
+                        </property>
+                        <property name="shortcut">
+                          <string/>
+                        </property>
+                        <property name="whatsThis" stdset="0">
+                          <string>If this option is checked the memos from the previous transaction will be used otherwise the memos will not be considered when the transaction is autofilled.</string>
+                        </property>
+                      </widget>
+                    </item>
                   </layout>
                 </widget>
               </item>

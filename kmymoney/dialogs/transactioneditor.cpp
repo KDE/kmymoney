@@ -1393,12 +1393,13 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
           s.setNumber(KMyMoneyUtils::nextCheckNumber(m_account));
         }
 
+        // if the memos should not be used with autofill or
         // if the transaction has exactly two splits, remove
         // the memo text of the split that does not reference
         // the current account. This allows the user to change
         // the autofilled memo text which will then also be used
         // in this split. See createTransaction() for this logic.
-        if (s.accountId() != m_account.id() && t.splitCount() == 2)
+        if ((s.accountId() != m_account.id() && t.splitCount() == 2) || !KMyMoneyGlobalSettings::autoFillUseMemos())
           s.setMemo(QString());
 
         m_transaction.addSplit(s);

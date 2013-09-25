@@ -17,6 +17,10 @@
     <label>Treat two transactions as identical, if amount differs by less than</label>
     <default>10</default>
   </entry>
+  <entry name="AutoFillUseMemos" type="Bool">
+    <label>When auto fill with previous transaction data use the memos</label>
+    <default>true</default>
+  </entry>
   <entry name="AutoIncCheckNumber" type="Bool">
    <label>Auto increment check number</label>
    <default>true</default>
