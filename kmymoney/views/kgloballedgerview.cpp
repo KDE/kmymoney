@@ -200,6 +200,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   layout()->addWidget(m_registerFrame);
   layout()->setStretchFactor(m_registerFrame, 2);
   m_register = new KMyMoneyRegister::Register(m_registerFrame);
+  m_register->setUsedWithEditor(true);
   registerFrameLayout->addWidget(m_register);
   m_register->installEventFilter(this);
   connect(m_register, SIGNAL(openContextMenu()), this, SIGNAL(openContextMenu()));

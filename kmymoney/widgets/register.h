@@ -504,6 +504,16 @@ public:
     m_selectionMode = mode;
   }
 
+  /**
+    * This method sets a hint that the register instance will be used
+    * with a transaction editor. This information is used while the column
+    * sizes are being auto adjusted. If a transaction editor is used then
+    * it's possible that it will need some extra space.
+    */
+  void setUsedWithEditor(bool value) {
+    m_usedWithEditor = value;
+  }
+
   DetailsColumnType getDetailsColumnType() const;
   void setDetailsColumnType(DetailsColumnType detailsColumnType);
 
@@ -639,6 +649,7 @@ private:
   bool                         m_listsDirty;
   bool                         m_ignoreNextButtonRelease;
   bool                         m_needInitialColumnResize;
+  bool                         m_usedWithEditor;
   Qt::MouseButtons             m_mouseButton;
   Qt::KeyboardModifiers        m_modifiers;
   Column                       m_lastCol;

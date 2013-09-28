@@ -473,6 +473,7 @@ Register::Register(QWidget *parent) :
     m_listsDirty(false),
     m_ignoreNextButtonRelease(false),
     m_needInitialColumnResize(false),
+    m_usedWithEditor(false),
     m_mouseButton(Qt::MouseButtons(Qt::NoButton)),
     m_modifiers(Qt::KeyboardModifiers(Qt::NoModifier)),
     m_detailsColumnType(PayeeFirst)
@@ -1143,9 +1144,9 @@ void Register::resize(int col, bool force)
 
 #ifndef KMM_DESIGNER
     // Resize the date and money fields to either
-    // a) the size required by the input widget if no transaction form is shown
-    // b) the adjusted value for the input widget if the transaction form is visible
-    if (!KMyMoneyGlobalSettings::transactionForm()) {
+    // a) the size required by the input widget if no transaction form is shown and the register is used with an editor
+    // b) the adjusted value for the input widget if the transaction form is visible or an editor is not used
+    if (m_usedWithEditor && !KMyMoneyGlobalSettings::transactionForm()) {
       kMyMoneyDateInput* dateField = new kMyMoneyDateInput;
       kMyMoneyEdit* valField = new kMyMoneyEdit;
 
