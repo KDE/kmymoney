@@ -36,6 +36,7 @@
 #include <kglobal.h>
 #include <kdebug.h>
 #include <kcombobox.h>
+#include <KPushButton>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -397,12 +398,18 @@ void TransactionForm::adjustColumn(Column col)
     // scan through the rows
     for (int i = rowCount() - 1; i >= 0; --i) {
       int align;
+      int spacing = 10;
       m_transaction->formCellText(txt, align, i, static_cast<int>(col), 0);
       QWidget* cw = cellWidget(i, col);
       if (cw) {
-        w = qMax(w, cw->sizeHint().width() + 10);
+        w = qMax(w, cw->sizeHint().width() + spacing);
+        // if the cell widget contains a push button increase the spacing used
+        // for the cell text value to consider the size of the push button
+        if (KPushButton *pushButton = cw->findChild<KPushButton *>()) {
+          spacing += pushButton->sizeHint().width() + 5;
+        }
       }
-      w = qMax(w, fontMetrics.width(txt) + 10);
+      w = qMax(w, fontMetrics.width(txt) + spacing);
     }
   }
 

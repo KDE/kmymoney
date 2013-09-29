@@ -226,8 +226,6 @@ void kMyMoneyDateInput::fixSize(void)
   // display of the month button. I decided, (22,14) is good
   // enough and save some space on the screen (ipwizard)
   d->m_dateFrame->setFixedSize(d->m_datePicker->sizeHint() + QSize(22, 14));
-
-  d->m_dateEdit->setMinimumWidth(d->m_dateEdit->minimumSizeHint().width() + 6);
 }
 
 kMyMoneyDateInput::~kMyMoneyDateInput()

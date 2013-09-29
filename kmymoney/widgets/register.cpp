@@ -47,6 +47,7 @@
 #include <klocale.h>
 #include <kglobal.h>
 #include <kdebug.h>
+#include <KPushButton>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -1107,6 +1108,8 @@ void Register::resize(int col, bool force)
       adjustColumn(PaymentColumn);
     if (columnWidth(DepositColumn))
       adjustColumn(DepositColumn);
+    if (columnWidth(QuantityColumn))
+      adjustColumn(QuantityColumn);
     if (columnWidth(BalanceColumn))
       adjustColumn(BalanceColumn);
     if (columnWidth(PriceColumn))
@@ -1123,39 +1126,37 @@ void Register::resize(int col, bool force)
       ewidth = columnWidth(PaymentColumn);
     if (ewidth < columnWidth(DepositColumn))
       ewidth = columnWidth(DepositColumn);
+    if (ewidth < columnWidth(QuantityColumn))
+      ewidth = columnWidth(QuantityColumn);
     if (dwidth < columnWidth(BalanceColumn))
       dwidth = columnWidth(BalanceColumn);
     if (ewidth < columnWidth(PriceColumn))
       ewidth = columnWidth(PriceColumn);
     if (dwidth < columnWidth(ValueColumn))
       dwidth = columnWidth(ValueColumn);
-
     int swidth = columnWidth(SecurityColumn);
     if (swidth > 0) {
       adjustColumn(SecurityColumn);
       swidth = columnWidth(SecurityColumn);
     }
 
+    adjustColumn(DateColumn);
+
 #ifndef KMM_DESIGNER
     // Resize the date and money fields to either
     // a) the size required by the input widget if no transaction form is shown and the register is used with an editor
     // b) the adjusted value for the input widget if the transaction form is visible or an editor is not used
     if (m_usedWithEditor && !KMyMoneyGlobalSettings::transactionForm()) {
-      kMyMoneyDateInput* dateField = new kMyMoneyDateInput;
-      kMyMoneyEdit* valField = new kMyMoneyEdit;
-
-      dateField->setFont(KMyMoneyGlobalSettings::listCellFont());
-      setColumnWidth(DateColumn, dateField->minimumSizeHint().width());
-      valField->setMinimumWidth(ewidth);
-      ewidth = valField->minimumSizeHint().width();
+      KPushButton *pushButton = new KPushButton;
+      const int pushButtonSpacing = pushButton->sizeHint().width() + 5;
+      setColumnWidth(DateColumn, columnWidth(DateColumn) + pushButtonSpacing + 4/* space for the spinbox arrows */);
+      ewidth += pushButtonSpacing;
 
       if (swidth > 0) {
+        // extend the security width to make space for the selector arrow
         swidth = columnWidth(SecurityColumn) + 40;
       }
-      delete valField;
-      delete dateField;
-    } else {
-      adjustColumn(DateColumn);
+      delete pushButton;
     }
 #endif
 
@@ -1163,6 +1164,8 @@ void Register::resize(int col, bool force)
       setColumnWidth(PaymentColumn, ewidth);
     if (columnWidth(DepositColumn))
       setColumnWidth(DepositColumn, ewidth);
+    if (columnWidth(QuantityColumn))
+      setColumnWidth(QuantityColumn, ewidth);
     if (columnWidth(BalanceColumn))
       setColumnWidth(BalanceColumn, dwidth);
     if (columnWidth(PriceColumn))
@@ -1194,28 +1197,21 @@ void Register::resize(int col, bool force)
 
     w -= columnWidth(i);
   }
-  setColumnWidth(col, w);
+  setColumnWidth(col, qMax(w, minimumColumnWidth(col)));
 }
 
-
-void Register::adjustColumn(int col)
+int Register::minimumColumnWidth(int col)
 {
-#ifdef KMM_DESIGNER
-  Q_UNUSED(col)
-#else
-  QString msg = "%1 adjusting column %2";
   QHeaderView *topHeader = horizontalHeader();
-  QFontMetrics cellFontMetrics(KMyMoneyGlobalSettings::listCellFont());
-
   int w = topHeader->fontMetrics().width(horizontalHeaderItem(col) ? horizontalHeaderItem(col)->text() : QString()) + 10;
   w = qMax(w, 20);
-
+#ifdef KMM_DESIGNER
+  return w;
+#else
   int maxWidth = 0;
   int minWidth = 0;
+  QFontMetrics cellFontMetrics(KMyMoneyGlobalSettings::listCellFont());
   switch (col) {
-    case NumberColumn:
-      maxWidth = cellFontMetrics.width("0123456789");
-      break;
     case DateColumn:
       minWidth = cellFontMetrics.width(KGlobal::locale()->formatDate(QDate(6999, 12, 29), KLocale::ShortDate) + "  ");
       break;
@@ -1257,8 +1253,13 @@ void Register::adjustColumn(int col)
     }
   }
 
-  setColumnWidth(col, w);
+  return w;
 #endif
+}
+
+void Register::adjustColumn(int col)
+{
+  setColumnWidth(col, minimumColumnWidth(col));
 }
 
 void Register::clearSelection(void)

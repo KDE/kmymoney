@@ -572,6 +572,11 @@ protected:
 
   void selectRange(RegisterItem* from, RegisterItem* to, bool invert, bool includeFirst, bool clearSel);
 
+  /**
+    * Returns the minimum column width based on the data in the header and the transactions.
+    */
+  int minimumColumnWidth(int col);
+
 protected slots:
   void resize(void);
 
