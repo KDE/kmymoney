@@ -461,7 +461,7 @@ void TransactionEditor::setupCategoryWidget(KMyMoneyCategory* category, const QL
     case 0:
       categoryId.clear();
       if (!category->currentText().isEmpty()) {
-        category->clearEditText();
+        //   category->clearEditText();  //  don't clear as could be from another widget - Bug 322768
         // make sure, we don't see the selector
         category->completion()->hide();
       }

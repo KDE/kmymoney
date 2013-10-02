@@ -99,6 +99,9 @@ InvestTransactionEditor::InvestTransactionEditor(TransactionEditorContainer* reg
     TransactionEditor(regForm, item, list, lastPostDate),
     d(new Private(this))
 {
+  // after the gometries of the container are updated hide the widgets which are not needed by the current activity
+  connect(m_regForm, SIGNAL(geometriesUpdated()), this, SLOT(slotTransactionContainerGeometriesUpdated()));
+
   // dissect the transaction into its type, splits, currency, security etc.
   dissectTransaction(m_transaction, m_split,
                      m_assetAccountSplit,
@@ -492,16 +495,22 @@ void InvestTransactionEditor::slotUpdateFeeVisibility(const QString& txt)
 {
   kMyMoneyEdit* feeAmount = dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount"));
   feeAmount->setHidden(txt.isEmpty());
-
   QLabel* l = dynamic_cast<QLabel*>(haveWidget("fee-amount-label"));
-  if (l) {
-    if (!txt.isEmpty()) {
-      l->setText(i18n("Fee Amount"));
-      QTimer::singleShot(1, feeAmount, SLOT(show()));
-    } else {
+
+  const bool hideFee = txt.isEmpty() || d->m_activity->type() == MyMoneySplit::AddShares ||
+    d->m_activity->type() == MyMoneySplit::RemoveShares ||
+    d->m_activity->type() == MyMoneySplit::SplitShares;
+  //  no fee expected so hide
+  if (hideFee) {
+    if (l) {
       l->setText("");
-      QTimer::singleShot(1, feeAmount, SLOT(hide()));
     }
+    feeAmount->hide();
+  } else {
+    if (l) {
+      l->setText(i18n("Fee Amount"));
+    }
+    feeAmount->show();
   }
 }
 
@@ -516,20 +525,20 @@ void InvestTransactionEditor::slotUpdateInterestVisibility(const QString& txt)
   w->setHidden(txt.isEmpty());
   QLabel* l = dynamic_cast<QLabel*>(haveWidget("interest-amount-label"));
 
-  if ((d->m_activity->type() != MyMoneySplit::Dividend) &&
-      (d->m_activity->type() != MyMoneySplit::InterestIncome)) {
-    QTimer::singleShot(1, w, SLOT(hide()));
-    if (l) {
-      l->setText(QString());
-    }
-  } else {//  is Div or IntInc
+  const bool showInterest = !txt.isEmpty() && (d->m_activity->type() == MyMoneySplit::Dividend ||
+    d->m_activity->type() == MyMoneySplit::InterestIncome || d->m_activity->type() == MyMoneySplit::Yield);
+  if (showInterest) {
     w->show();
     if (l)
       l->setText(i18n("Interest"));
-    // for the reinvest case, we don't ever hide the label do avoid a shine through
-    // of the underlying transaction data.
-    // FIXME (FIXED?)once we can handle split interest, we need to uncomment the next line
-    // interest->splitButton()->show();//  Already shows
+  } else {
+    // for the following activity->types -
+    //  ReinvestDividend, BuyShares, SellShares, AddShares, RemoveShares and SplitShares
+    KMyMoneyCategory* interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
+    if (interest) {
+      interest->splitButton()->hide();  //no interest-amount so no splits
+      w->hide();
+    }
   }
 }
 
@@ -825,6 +834,15 @@ void InvestTransactionEditor::slotUpdateTotalAmount(void)
   }
 }
 
+void InvestTransactionEditor::slotTransactionContainerGeometriesUpdated()
+{
+  // when the geometries of the transaction container are updated some edit widgets that were
+  // previously hidden are being shown (see QAbstractItemView::updateEditorGeometries) so we
+  // need to update the activity with the current activity in order to show only the widgets
+  // which are needed by the current activity
+  slotUpdateActivity(d->m_activity->type());
+}
+
 void InvestTransactionEditor::slotUpdateActivity(MyMoneySplit::investTransactionTypeE activity)
 {
   // create new activity object if required
@@ -860,7 +878,8 @@ void InvestTransactionEditor::slotUpdateActivity(MyMoneySplit::investTransaction
 
   for (it_s = dynwidgets.constBegin(); it_s != dynwidgets.constEnd(); ++it_s) {
     QWidget* w = haveWidget(*it_s);
-    if (w) w->hide();
+    if (w)
+      w->hide();
   }
   d->m_activity->showWidgets();
   d->m_activity->preloadAssetAccount();

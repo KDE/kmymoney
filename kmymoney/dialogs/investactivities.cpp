@@ -198,7 +198,8 @@ void Buy::showWidgets(void) const
   QStringList::const_iterator it_w;
   for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
     QWidget* w = haveWidget(*it_w);
-    if (w) w->show();
+    if (w)
+      w->show();
   }
 
   setLabelText("fee-label", i18n("Fees"));
@@ -383,7 +384,8 @@ void Div::showWidgets(void) const
   QStringList::const_iterator it_w;
   for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
     QWidget* w = haveWidget(*it_w);
-    if (w) w->show();
+    if (w)
+      w->show();
   }
 
   widgets.clear();
@@ -391,7 +393,7 @@ void Div::showWidgets(void) const
   for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
     QWidget* w = haveWidget(*it_w);
     if (w)
-      QTimer::singleShot(1, w, SLOT(hide()));
+      w->hide();
   }
   setLabelText("interest-amount-label", i18n("Interest"));
   setLabelText("interest-label", i18n("Interest"));
@@ -446,21 +448,22 @@ void Reinvest::showWidgets(void) const
   KMyMoneyCategory* cat;
   cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
   cat->show();
-  cat->splitButton()->show();
+  cat->splitButton()->hide();  //  don't need it as no interest-amount
 
   cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
   cat->show();
   cat->splitButton()->show();
 
   kMyMoneyEdit* shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
-  QTimer::singleShot(1, shareEdit, SLOT(show()));
+  shareEdit->show();
   shareEdit->setPrecision(MyMoneyMoney::denomToPrec(m_parent->security().smallestAccountFraction()));
 
   QWidget* w = haveWidget("price");
-  if (w) w->show();
+  if (w)
+    w->show();
 
   kMyMoneyEdit* intAmount = dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount"));
-  QTimer::singleShot(1, intAmount, SLOT(hide()));
+  intAmount->hide();
   setLabelText("interest-amount-label", QString());
   intAmount->setValue(MyMoneyMoney());
 
@@ -545,7 +548,7 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
 void Add::showWidgets(void) const
 {
   kMyMoneyEdit* shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
-  QTimer::singleShot(1, shareEdit, SLOT(show()));
+  shareEdit->show();
   shareEdit->setPrecision(MyMoneyMoney::denomToPrec(m_parent->security().smallestAccountFraction()));
 
   setLabelText("shares-label", i18n("Shares"));
@@ -589,7 +592,7 @@ bool Add::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
 void Remove::showWidgets(void) const
 {
   kMyMoneyEdit* shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
-  QTimer::singleShot(1, shareEdit, SLOT(show()));
+  shareEdit->show();
   shareEdit->setPrecision(MyMoneyMoney::denomToPrec(m_parent->security().smallestAccountFraction()));
   setLabelText("shares-label", i18n("Shares"));
 }
@@ -634,7 +637,7 @@ void Split::showWidgets(void) const
   // TODO do we need a special split ratio widget?
   // TODO maybe yes, currently the precision is the one of the fraction and might differ from it
   kMyMoneyEdit* shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
-  QTimer::singleShot(1, shareEdit, SLOT(show()));
+  shareEdit->show();
   shareEdit->setPrecision(-1);
   setLabelText("shares-label", i18n("Ratio 1/"));
 }
@@ -691,7 +694,8 @@ void IntInc::showWidgets(void) const
   QStringList::const_iterator it_w;
   for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
     QWidget* w = haveWidget(*it_w);
-    if (w) w->show();
+    if (w)
+      w->show();
   }
 
   widgets.clear();
@@ -699,7 +703,7 @@ void IntInc::showWidgets(void) const
   for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
     QWidget* w = haveWidget(*it_w);
     if (w)
-      QTimer::singleShot(1, w, SLOT(hide()));
+      w->hide();
   }
 
 
