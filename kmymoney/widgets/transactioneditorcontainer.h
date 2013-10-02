@@ -47,6 +47,7 @@ typedef enum {
 
 class TransactionEditorContainer : public QTableWidget
 {
+  Q_OBJECT
 public:
   TransactionEditorContainer(QWidget* parent) : QTableWidget(parent) {}
 
@@ -56,6 +57,16 @@ public:
   // FIXME remove tabbar
   // virtual int action(QMap<QString, QWidget*>& editWidgets) const = 0;
   // virtual void setProtectedAction(QMap<QString, QWidget*>& editWidgets, ProtectedAction action) = 0;
+
+signals:
+  void geometriesUpdated();
+
+protected slots:
+  void updateGeometries()
+  {
+    QTableWidget::updateGeometries();
+    emit geometriesUpdated();
+  }
 };
 
 #endif

@@ -37,6 +37,7 @@ class InvestTransactionEditor : public TransactionEditor
   friend class InvestTransactionEditorPrivate;
 
   Q_OBJECT
+
 public:
   typedef enum {
     PricePerShare = 1,
@@ -119,6 +120,7 @@ protected slots:
   void slotUpdateFeeCategory(const QString& id);
   void slotUpdateFeeVisibility(const QString&);
   void slotUpdateTotalAmount(void);
+  void slotTransactionContainerGeometriesUpdated();
 
 protected:
   /**
