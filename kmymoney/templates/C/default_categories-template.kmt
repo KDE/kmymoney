@@ -54,7 +54,7 @@
      <account type="13" name="Interest" />
      <account type="13" name="Principal" />
     </account>
-    <account type="13" name="Cable / Satelite TV" />
+    <account type="13" name="Cable / Satellite TV" />
     <account type="13" name="Internet" />
    </account>
    <account type="13" name="Bank Charges" >
