@@ -112,9 +112,18 @@ protected:
    * Splits are considered a match if both of them:
    * - reference the same account
    * - have matching bankID-s
+   * - have matching ammounts
+   * - have empty or matching payees
    * - are not marked as matched already
    */
   bool splitsMatch(const MyMoneySplit & importedSplit, const MyMoneySplit & existingSplit, int amountVariation = 0) const;
+
+  /** Checks whether splits reference the same account
+   * @param split1 the first split
+   * @param split2 the second split
+   * @return true, if the same account is referenced by the splits; false otherwise
+   */
+  bool splitsAccountsMatch(const MyMoneySplit & split1, const MyMoneySplit & split2) const;
 
   /** Checks whether splits amounts match
    * @param split1 the first split
