@@ -525,16 +525,17 @@ void InvestTransactionEditor::slotUpdateInterestVisibility(const QString& txt)
   w->setHidden(txt.isEmpty());
   QLabel* l = dynamic_cast<QLabel*>(haveWidget("interest-amount-label"));
 
+  KMyMoneyCategory* interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
   const bool showInterest = !txt.isEmpty() && (d->m_activity->type() == MyMoneySplit::Dividend ||
     d->m_activity->type() == MyMoneySplit::InterestIncome || d->m_activity->type() == MyMoneySplit::Yield);
-  if (showInterest) {
+  if (interest && showInterest) {
+    interest->splitButton()->show();
     w->show();
     if (l)
       l->setText(i18n("Interest"));
   } else {
     // for the following activity->types -
     //  ReinvestDividend, BuyShares, SellShares, AddShares, RemoveShares and SplitShares
-    KMyMoneyCategory* interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
     if (interest) {
       interest->splitButton()->hide();  //no interest-amount so no splits
       w->hide();
