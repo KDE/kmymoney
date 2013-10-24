@@ -272,6 +272,14 @@ void TransactionEditor::slotNumberChanged(const QString& txt)
   }
 }
 
+void TransactionEditor::slotUpdateMemoState(void)
+{
+  KTextEdit* memo = dynamic_cast<KTextEdit*>(m_editWidgets["memo"]);
+  if (memo) {
+    m_memoChanged = (memo->toPlainText() != m_memoText);
+  }
+}
+
 void TransactionEditor::slotUpdateButtonState(void)
 {
   QString reason;
@@ -784,7 +792,11 @@ void StdTransactionEditor::createEditWidgets(void)
   KTextEdit* memo = new KTextEdit;
   memo->setObjectName(QLatin1String("Memo"));
   memo->setTabChangesFocus(true);
+  connect(memo, SIGNAL(textChanged()), this, SLOT(slotUpdateMemoState()));
+  connect(memo, SIGNAL(textChanged()), this, SLOT(slotUpdateButtonState()));
   m_editWidgets["memo"] = memo;
+  m_memoText.clear();
+  m_memoChanged = false;
 
   bool showNumberField = true;
   switch (m_account.accountType()) {
@@ -819,6 +831,7 @@ void StdTransactionEditor::createEditWidgets(void)
   kMyMoneyDateInput* postDate = new kMyMoneyDateInput;
   m_editWidgets["postdate"] = postDate;
   postDate->setObjectName(QLatin1String("PostDate"));
+  connect(postDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotUpdateButtonState()));
   postDate->setDate(QDate());
 
   kMyMoneyEdit* value = new kMyMoneyEdit;
@@ -983,8 +996,13 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
   if (!m_account.id().isEmpty())
     category->selector()->removeItem(m_account.id());
 
+  //  also show memo text if isMultiSelection()
+  dynamic_cast<KTextEdit*>(m_editWidgets["memo"])->setText(m_split.memo());
+  // need to know if it changed
+  m_memoText = m_split.memo();
+  m_memoChanged = false;
+
   if (!isMultiSelection()) {
-    dynamic_cast<KTextEdit*>(m_editWidgets["memo"])->setText(m_split.memo());
     if (m_transaction.postDate().isValid())
       dynamic_cast<kMyMoneyDateInput*>(m_editWidgets["postdate"])->setDate(m_transaction.postDate());
     else if (m_lastPostDate.isValid())
@@ -1765,6 +1783,8 @@ bool StdTransactionEditor::isComplete(QString& reason) const
   bool payeeIsPresent = false;
   bool categoryIsPresent = false;
   bool amountIsPresent = false;
+  bool memoIsPresent = false;
+  bool dateIsPresent = false;
 
   for (it_w = m_editWidgets.begin(); it_w != m_editWidgets.end(); ++it_w) {
     KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it_w);
@@ -1804,10 +1824,13 @@ bool StdTransactionEditor::isComplete(QString& reason) const
       if (cashflow && cashflow->direction() != KMyMoneyRegister::Unknown)
         break;
 
-      if (postDate->date().isValid() && (postDate->date() >= m_account.openingDate()))
+      if (postDate->date().isValid() && (postDate->date() >= m_account.openingDate())) {
+        dateIsPresent = true;
         break;
+      }
 
-      if (memo && !memo->toPlainText().isEmpty()) {
+      if (memo && m_memoChanged) {
+        memoIsPresent = true;
         break;
       }
 
@@ -1816,7 +1839,7 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     }
   }
   bool rc = (categoryIsPresent && amountIsPresent);  //   usual mandatory fields
-  bool rc1 = (payeeIsPresent || categoryIsPresent || amountIsPresent);  //  if isMultiSelection(), they are optional
+  bool rc1 = (payeeIsPresent || categoryIsPresent || amountIsPresent || memoIsPresent) || dateIsPresent;  //  if isMultiSelection(), these are optional
 
   return (rc || (isMultiSelection() && (it_w != m_editWidgets.end() || rc1)));
 }
@@ -2035,7 +2058,7 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   //       by the user
   KTextEdit* memo = dynamic_cast<KTextEdit*>(m_editWidgets["memo"]);
   if (memo) {
-    if (!isMultiSelection() || (isMultiSelection() && !memo->toPlainText().isEmpty()))
+    if (!isMultiSelection() || (isMultiSelection() && m_memoChanged))
       s0.setMemo(memo->toPlainText());
   }
 

@@ -121,6 +121,7 @@ protected slots:
   void slotUpdateFeeVisibility(const QString&);
   void slotUpdateTotalAmount(void);
   void slotTransactionContainerGeometriesUpdated();
+  void slotUpdateInvestMemoState(void);
 
 protected:
   /**
@@ -167,8 +168,8 @@ protected:
 
 private:
   MyMoneySplit                              m_assetAccountSplit;
-  QList<MyMoneySplit>                  m_interestSplits;
-  QList<MyMoneySplit>                  m_feeSplits;
+  QList<MyMoneySplit>                       m_interestSplits;
+  QList<MyMoneySplit>                       m_feeSplits;
   MyMoneySecurity                           m_security;
   MyMoneySecurity                           m_currency;
   MyMoneySplit::investTransactionTypeE      m_transactionType;

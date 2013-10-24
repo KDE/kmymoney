@@ -253,6 +253,11 @@ void InvestTransactionEditor::createEditWidgets(void)
   KTextEdit* memo = new KTextEdit;
   memo->setTabChangesFocus(true);
   m_editWidgets["memo"] = memo;
+  connect(memo, SIGNAL(textChanged()), this, SLOT(slotUpdateInvestMemoState()));
+  connect(memo, SIGNAL(textChanged()), this, SLOT(slotUpdateButtonState()));
+
+  d->m_activity->m_memoText.clear();
+  d->m_activity->m_memoChanged = false;
 
   kMyMoneyEdit* value = new kMyMoneyEdit;
   value->setClickMessage(i18n("Shares"));
@@ -622,6 +627,11 @@ void InvestTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action /* action
   aSet.clear();
   aSet.load(security->selector(), i18n("Security"), m_account.accountList(), true);
 
+  // memo
+  memo->setText(m_split.memo());
+  d->m_activity->m_memoText = m_split.memo();
+  d->m_activity->m_memoChanged = false;
+
   if (!isMultiSelection()) {
     // date
     if (m_transaction.postDate().isValid())
@@ -658,9 +668,6 @@ void InvestTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action /* action
     setupCategoryWidget(fees, m_feeSplits, id, SLOT(slotEditFeeSplits()));
     slotUpdateFeeVisibility(fees->currentText());
 
-    // memo
-    memo->setText(m_split.memo());
-
     // shares
     // don't set the value if the number of shares is zero so that
     // we can see the hint
@@ -695,7 +702,6 @@ void InvestTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action /* action
   } else {
     postDate->loadDate(QDate());
     reconcile->setState(MyMoneySplit::Unknown);
-    memo->setText(QString());
 
     // We don't allow to change the activity
     activity->setActivity(d->m_activity->type());
@@ -1035,7 +1041,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   //       by the user
   KTextEdit* memo = dynamic_cast<KTextEdit*>(m_editWidgets["memo"]);
   if (memo) {
-    if (!isMultiSelection() || (isMultiSelection() && !memo->toPlainText().isEmpty()))
+    if (!isMultiSelection() || (isMultiSelection() && d->m_activity->m_memoChanged))
       s0.setMemo(memo->toPlainText());
   }
 
@@ -1154,6 +1160,14 @@ void InvestTransactionEditor::updatePriceMode(const MyMoneySplit& split)
 void InvestTransactionEditor::setupFinalWidgets(void)
 {
   addFinalWidget(haveWidget("memo"));
+}
+
+void InvestTransactionEditor::slotUpdateInvestMemoState(void)
+{
+  KTextEdit* memo = dynamic_cast<KTextEdit*>(m_editWidgets["memo"]);
+  if(memo) {
+    d->m_activity->m_memoChanged = (memo->toPlainText() != d->m_activity->m_memoText);
+  }
 }
 
 #include "investtransactioneditor.moc"

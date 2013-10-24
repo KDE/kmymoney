@@ -49,7 +49,7 @@ bool Activity::isComplete(QString& reason) const
   bool rc = false;
   KMyMoneySecurity* security = dynamic_cast<KMyMoneySecurity*>(haveWidget("security"));
   if (!security->currentText().isEmpty()) {
-    rc = security->selector()->contains(security->currentText());
+    rc = (security->selector()->contains(security->currentText()) || (isMultiSelection() && m_memoChanged));
   }
   return rc;
 }
