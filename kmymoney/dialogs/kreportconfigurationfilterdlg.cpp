@@ -279,7 +279,12 @@ void KReportConfigurationFilterDlg::slotReset(void)
   m_tab1->findChild<KLineEdit*>("m_editComment")->setText(m_initialState.comment());
   m_tab1->findChild<QCheckBox*>("m_checkCurrency")->setChecked(m_initialState.isConvertCurrency());
   m_tab1->findChild<QCheckBox*>("m_checkFavorite")->setChecked(m_initialState.isFavorite());
-  m_tab1->findChild<QCheckBox*>("m_skipZero")->setChecked(m_initialState.isSkippingZero());
+
+  if (m_initialState.isIncludingPrice() || m_initialState.isSkippingZero()) {
+    m_tab1->findChild<QCheckBox*>("m_skipZero")->setChecked(m_initialState.isSkippingZero());
+  } else {
+    m_tab1->findChild<QCheckBox*>("m_skipZero")->setEnabled(false);
+  }
 
   if (m_tab2) {
     KComboBox *combo = m_tab2->findChild<KComboBox*>("m_comboDetail");
