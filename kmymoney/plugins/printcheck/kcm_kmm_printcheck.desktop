@@ -35,6 +35,7 @@ ServiceTypes=KCModule
 Exec=kcmshell4 kmm_printcheck
 Categories=Qt;KDE;kmymoney;
 Keywords=printcheck;kmymoney;
+Keywords[bs]=printcheck;kmymoney
 Keywords[ca]=impressió de xec;kmymoney;
 Keywords[ca@valencia]=impressió de xec;kmymoney;
 Keywords[cs]=printcheck;kmymoney;
