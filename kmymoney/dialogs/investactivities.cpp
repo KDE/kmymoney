@@ -279,6 +279,10 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
 void Sell::showWidgets(void) const
 {
   KMyMoneyCategory* cat;
+  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
+  cat->show();
+  cat->splitButton()->show();
+
   cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
   cat->show();
   cat->splitButton()->show();
@@ -287,14 +291,15 @@ void Sell::showWidgets(void) const
   shareEdit->setPrecision(MyMoneyMoney::denomToPrec(m_parent->security().smallestAccountFraction()));
 
   QStringList widgets;
-  widgets << "asset-account" << "shares" << "price" << "total";
+  widgets << "asset-account" << "interest-amount" << "shares" << "price" << "total";
   QStringList::const_iterator it_w;
   for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
     QWidget* w = haveWidget(*it_w);
     if (w)
       w->show();
   }
-
+  setLabelText("interest-amount-label", i18n("Interest"));
+  setLabelText("interest-label", i18n("Interest"));
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
   setLabelText("shares-label", i18n("Shares"));
@@ -307,6 +312,7 @@ bool Sell::isComplete(QString& reason) const
   bool rc = Activity::isComplete(reason);
   rc &= haveAssetAccount();
   rc &= haveFees(true);
+  rc &= haveInterest(true);
   rc &= haveShares();
   rc &= havePrice();
   return rc;
@@ -354,11 +360,12 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
   if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney(1, 1), feeSplits, m_feeSplits))
     return false;
 
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney(-1, 1), interestSplits, m_interestSplits))
+    return false;
+
   createAssetAccountSplit(assetAccountSplit, s0);
 
-  interestSplits.clear();
-
-  MyMoneyMoney total = sumSplits(s0, feeSplits, QList<MyMoneySplit>());
+  MyMoneyMoney total = sumSplits(s0, feeSplits, interestSplits);
   assetAccountSplit.setValue(-total);
 
   if (!m_parent->setupPrice(t, assetAccountSplit))
