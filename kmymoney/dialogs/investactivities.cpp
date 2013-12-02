@@ -413,7 +413,9 @@ bool Div::isComplete(QString& reason) const
 {
   Q_UNUSED(reason)
 
-  bool rc = haveAssetAccount();
+  bool rc = Activity::isComplete(reason);
+  rc &= haveAssetAccount();
+  rc &= haveCategoryAndAmount("interest-account", QString(), false);
   rc &= haveInterest(false);
   return rc;
 }
@@ -725,7 +727,9 @@ bool IntInc::isComplete(QString& reason) const
 {
   Q_UNUSED(reason)
 
-  bool rc = haveAssetAccount();
+  bool rc = Activity::isComplete(reason);
+  rc &= haveAssetAccount();
+  rc &= haveCategoryAndAmount("interest-account", QString(), false);
   rc &= haveInterest(false);
   return rc;
 }
