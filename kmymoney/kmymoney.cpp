@@ -1537,17 +1537,22 @@ void KMyMoneyApp::slotFileOpenRecent(const KUrl& url)
     if ((newurl.protocol() == "sql") || (newurl.isValid() && KIO::NetAccess::exists(newurl, KIO::NetAccess::SourceSide, this))) {
       slotFileClose();
       if (!d->m_myMoneyView->fileOpen()) {
-        if (d->m_myMoneyView->readFile(newurl)) {
-          if ((d->m_myMoneyView->isNativeFile())) {
-            d->m_fileName = newurl;
-            updateCaption();
-            d->m_recentFiles->addUrl(newurl.pathOrUrl());
-            writeLastUsedFile(newurl.pathOrUrl());
-          } else {
-            d->m_fileName = KUrl(); // imported files have no filename
+        try {
+          if (d->m_myMoneyView->readFile(newurl)) {
+            if ((d->m_myMoneyView->isNativeFile())) {
+              d->m_fileName = newurl;
+              updateCaption();
+              d->m_recentFiles->addUrl(newurl.pathOrUrl());
+              writeLastUsedFile(newurl.pathOrUrl());
+            } else {
+              d->m_fileName = KUrl(); // imported files have no filename
+            }
+            // Check the schedules
+            slotCheckSchedules();
           }
-          // Check the schedules
-          slotCheckSchedules();
+        } catch (MyMoneyException* e) {
+          KMessageBox::sorry(this, i18n("Cannot open file as requested. Error was: %1", e->what()));
+          delete e;
         }
         updateCaption();
         emit fileLoaded(d->m_fileName);

@@ -81,6 +81,30 @@ void MyMoneyDatabaseMgrTest::testEmptyConstructor()
   QVERIFY(m->m_creationDate == QDate::currentDate());
 }
 
+void MyMoneyDatabaseMgrTest::testBadConnections()
+{
+  // Check a connection that exists but has empty tables
+  struct passwd * pwd = getpwuid(geteuid());
+  QString userName;
+  if (pwd != 0) {
+    userName = QString(pwd->pw_name);
+  }
+
+  QString dir(qgetenv("TMPDIR"));
+  if (!dir.isEmpty() && !dir.endsWith('/')) {
+    dir += '/';
+  }
+
+  QString mode = "QSQLITE&mode=single";
+  m_url = QString("sql://%1@localhost/%2kmm_test_driver?driver=%3")
+          .arg(userName, dir, mode);
+
+  KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
+  QVERIFY(sql);
+  int openStatus = sql->open(m_url, QIODevice::ReadWrite);
+  QVERIFY(0 != openStatus);
+}
+
 void MyMoneyDatabaseMgrTest::testCreateDb()
 {
   try {

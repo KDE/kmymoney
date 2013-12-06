@@ -40,6 +40,7 @@ private slots:
   void init();
   void cleanup();
   void testEmptyConstructor();
+  void testBadConnections();
   void testCreateDb();
   void testAttachDb();
   void testDisconnection();
