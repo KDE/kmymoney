@@ -38,6 +38,7 @@ MyMoneySeqAccessMgr::MyMoneySeqAccessMgr()
   m_nextSecurityID = 0;
   m_nextReportID = 0;
   m_nextBudgetID = 0;
+  m_nextOnlineJobID = 0;
   m_user = MyMoneyPayee();
   m_dirty = false;
   m_creationDate = QDate::currentDate();
@@ -86,6 +87,11 @@ MyMoneySeqAccessMgr::MyMoneySeqAccessMgr()
 
 MyMoneySeqAccessMgr::~MyMoneySeqAccessMgr()
 {
+  /* onlineJobs are stored as pointers */
+  //foreach( onlineJob* job, m_onlineJobList) {
+  //    delete job;
+  //}
+    //! @todo make lines above alive
 }
 
 MyMoneySeqAccessMgr const * MyMoneySeqAccessMgr::duplicate(void)
@@ -158,6 +164,44 @@ void MyMoneySeqAccessMgr::addPayee(MyMoneyPayee& payee)
   MyMoneyPayee newPayee(nextPayeeID(), payee);
   m_payeeList.insert(newPayee.id(), newPayee);
   payee = newPayee;
+}
+
+/**
+ * @brief Add onlineJob to storage
+ * @param job caller stays owner of the object, but id will be set
+ */
+void MyMoneySeqAccessMgr::addOnlineJob(onlineJob &job)
+{
+  onlineJob newJob = onlineJob( nextOnlineJobID(), job );
+  m_onlineJobList.insert(newJob.id(), newJob);
+  job = newJob;
+}
+
+void MyMoneySeqAccessMgr::removeOnlineJob(const onlineJob& job)
+{
+  if ( !m_onlineJobList.contains( job.id() ) ) {
+    throw new MYMONEYEXCEPTION("Unknown onlineJob '"+ job.id() + "' should be removed.");
+  }
+  m_onlineJobList.remove(job.id());
+}
+
+void MyMoneySeqAccessMgr::modifyOnlineJob(const onlineJob &job)
+{
+  QMap<QString, onlineJob>::ConstIterator iter = m_onlineJobList.find(job.id());
+  if (iter == m_onlineJobList.end()) {
+    throw new MYMONEYEXCEPTION("Got unknown onlineJob '"+job.id()+"' for modifying");
+  }
+  onlineJob oldJob = iter.value();
+  m_onlineJobList.modify((*iter).id(), job);
+}
+
+const onlineJob MyMoneySeqAccessMgr::getOnlineJob(const QString &id) const
+{
+  if (m_onlineJobList.contains( id )) {
+    Q_ASSERT( !m_onlineJobList[id].isNull() );
+    return m_onlineJobList[id];
+  }
+  throw new MYMONEYEXCEPTION("Unkown online Job '" + id + "'");
 }
 
 const MyMoneyPayee MyMoneySeqAccessMgr::payee(const QString& id) const
@@ -473,6 +517,14 @@ QString MyMoneySeqAccessMgr::nextSecurityID(void)
   QString id;
   id.setNum(++m_nextSecurityID);
   id = 'E' + id.rightJustified(SECURITY_ID_SIZE, '0');
+  return id;
+}
+
+QString MyMoneySeqAccessMgr::nextOnlineJobID(void)
+{
+  QString id;
+  id.setNum(++m_nextOnlineJobID);
+  id = 'O' + id.rightJustified(ONLINE_JOB_ID_SIZE, '0');
   return id;
 }
 
@@ -904,6 +956,11 @@ const QList<MyMoneyTransaction> MyMoneySeqAccessMgr::transactionList(MyMoneyTran
   QList<MyMoneyTransaction> list;
   transactionList(list, filter);
   return list;
+}
+
+const QList<onlineJob> MyMoneySeqAccessMgr::onlineJobList() const
+{
+  return m_onlineJobList.values();
 }
 
 const MyMoneyTransaction MyMoneySeqAccessMgr::transaction(const QString& id) const
@@ -1920,6 +1977,7 @@ void MyMoneySeqAccessMgr::startTransaction(void)
   m_reportList.startTransaction(&m_nextReportID);
   m_budgetList.startTransaction(&m_nextBudgetID);
   m_priceList.startTransaction();
+  m_onlineJobList.startTransaction();
 }
 
 bool MyMoneySeqAccessMgr::commitTransaction(void)
@@ -1937,6 +1995,7 @@ bool MyMoneySeqAccessMgr::commitTransaction(void)
   rc |= m_reportList.commitTransaction();
   rc |= m_budgetList.commitTransaction();
   rc |= m_priceList.commitTransaction();
+  rc |= m_onlineJobList.commitTransaction();
 
   // if there was a change, touch the whole storage object
   if (rc)
@@ -1959,6 +2018,7 @@ void MyMoneySeqAccessMgr::rollbackTransaction(void)
   m_reportList.rollbackTransaction();
   m_budgetList.rollbackTransaction();
   m_priceList.rollbackTransaction();
+  m_onlineJobList.rollbackTransaction();
 }
 
 void MyMoneySeqAccessMgr::removeReferences(const QString& id)

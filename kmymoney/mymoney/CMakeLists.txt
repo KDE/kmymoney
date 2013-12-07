@@ -1,35 +1,63 @@
 ADD_SUBDIRECTORY( storage )
 
+# Todo move this to a findKtoblzcheck.cmake and use find_package() instead
+find_library( KTOBLZCHECK_LIBRARY NAMES libktoblzcheck ktoblzcheck
+    DOC "German account number and bank code check http://ktoblzcheck.sourceforge.net/")
+message(STATUS "Found ktoblzcheck at " ${KTOBLZCHECK_LIBRARY})
+
+
 ########### next target ###############
 
 SET(kmm_mymoney_LIB_SRCS
   mymoneymoney.cpp mymoneyfinancialcalculator.cpp
   mymoneytransactionfilter.cpp
-  mymoneyobject.cpp mymoneykeyvaluecontainer.cpp
+  mymoneyfile.cpp mymoneykeyvaluecontainer.cpp
+  mymoneyobject.cpp
   mymoneysplit.cpp mymoneyinstitution.cpp
   mymoneyexception.cpp mymoneyinvesttransaction.cpp mymoneyutils.cpp
   mymoneysecurity.cpp mymoneytransaction.cpp mymoneyschedule.cpp
   mymoneypayee.cpp
   mymoneytag.cpp
-  mymoneyfile.cpp
   mymoneycategory.cpp
   mymoneyaccount.cpp
   mymoneyreport.cpp mymoneystatement.cpp mymoneyprice.cpp mymoneybudget.cpp
   mymoneyobjectcontainer.cpp
   mymoneyforecast.cpp
   mymoneybalancecache.cpp
+  bankaccountidentifier.cpp
+  germanaccountidentifier.cpp
+  swiftaccountidentifier.cpp
+  onlinejob.cpp
+  onlinetask.cpp
+  onlinetransfer.cpp
+  onlinejobadministration.cpp
+  onlinejobmessage.cpp
+  onlinejobfolder.cpp
+  germanonlinetransfer.cpp
+  sepaonlinetransfer.cpp
   )
 
 
 SET(mymoney_HEADERS kmm_mymoney_export.h
-  mymoneyobject.h mymoneyaccount.h mymoneycategory.h mymoneyexception.h
-  mymoneyfile.h mymoneyfinancialcalculator.h mymoneyinstitution.h
+  mymoneyobject.h
+  mymoneyaccount.h mymoneycategory.h mymoneyexception.h
+  mymoneyfinancialcalculator.h mymoneyinstitution.h
   mymoneyinvesttransaction.h mymoneykeyvaluecontainer.h mymoneymoney.h
   mymoneypayee.h mymoneytag.h mymoneyprice.h mymoneyreport.h
   mymoneyschedule.h mymoneysecurity.h mymoneysplit.h mymoneystatement.h
   mymoneytransactionfilter.h mymoneytransaction.h
   mymoneyutils.h mymoneybudget.h mymoneyobjectcontainer.h mymoneyforecast.h
   imymoneyprocessingcalendar.h
+  mymoneyfile.h
+  onlinejob.h
+  accountidentifier.h
+  bankaccountidentifier.h
+  swiftaccountidentifier.h
+  onlinetransfer.h
+  onlinejob.h
+  onlinejobknowntask.h
+  onlinejobmessage.h
+  onlinejobfolder.h
   )
 
 KDE4_ADD_LIBRARY(kmm_mymoney SHARED 
@@ -44,7 +72,9 @@ TARGET_LINK_LIBRARIES(kmm_mymoney
                       ${KDE4_KIO_LIBS}
                       ${GMP_LIBRARIES}
                       ${LIBALKIMIA_LIBRARY}
-                      kmm_storage)
+                      ${KTOBLZCHECK_LIBRARY}
+                      kmm_storage
+)
 
 SET_TARGET_PROPERTIES(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 
@@ -65,7 +95,8 @@ IF( KDE4_BUILD_TESTS )
  	  ${QT_QTCORE_LIBRARY}
 	  ${QT_QTTEST_LIBRARY}
 	  ${GMP_LIBRARIES}
-	  ${LIBALKIMIA_LIBRARY})
+          ${LIBALKIMIA_LIBRARY}
+)
 
   # MyMoneyAccount
   set( mymoneyaccounttest_SRCS mymoneyaccounttest.cpp )
@@ -89,7 +120,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyfiletest TESTNAME kmymoney-mymoneyfiletest ${mymoneyfiletest_SRCS} )
   ADD_DEPENDENCIES( mymoneyfiletest kmm_mymoney kmm_storage )
 
-  target_link_libraries( mymoneyfiletest kmm_storage kmm_mymoney ${target_link_libraries_test})
+  target_link_libraries( mymoneyfiletest kmm_storage kmm_mymoney ${target_link_libraries_test} )
 
   # MyMoneyFinancialCalculatorTest
   set( mymoneyfinancialcalculatortest_SRCS mymoneyfinancialcalculatortest.cpp mymoneytestutils.cpp )
@@ -138,6 +169,14 @@ IF( KDE4_BUILD_TESTS )
   ADD_DEPENDENCIES( mymoneyobjecttest kmm_mymoney )
 
   target_link_libraries( mymoneyobjecttest kmm_mymoney ${target_link_libraries_test})
+
+  # onlineJob
+  set( onlinejobtest_SRCS onlinejobtest.cpp )
+
+  kde4_add_unit_test( onlinejobtest TESTNAME kmymoney-onlinejobtest ${onlinejobtest_SRCS} )
+  ADD_DEPENDENCIES( onlinejobtest kmm_mymoney )
+
+  target_link_libraries( onlinejobtest kmm_mymoney ${target_link_libraries_test})
 
   # MyMoneyPayee
   set( mymoneypayeetest_SRCS mymoneypayeetest.cpp )
@@ -211,4 +250,22 @@ IF( KDE4_BUILD_TESTS )
 
   target_link_libraries( mymoneybalancecachetest kmm_mymoney ${target_link_libraries_test})
 
+  # OnlineJobAdministration
+  set( onlinejobtestadministration_SRCS onlinejobadministrationtest.cpp )
+
+  kde4_add_unit_test( onlinejobadministrationtest TESTNAME kmymoney-onlinejobadministrationtest ${onlinejobtestadministration_SRCS} )
+  ADD_DEPENDENCIES( onlinejobadministrationtest kmm_mymoney )
+
+  target_link_libraries( onlinejobadministrationtest kmm_mymoney kmm_storage ${target_link_libraries_test})
+
+  # onlineJobKnownTask
+  set( onlinejobknowntasktest_SRCS onlinejobknowntasktest.cpp )
+
+  kde4_add_unit_test( onlinejobknowntasktest TESTNAME kmymoney-onlinejobknowntasktest ${onlinejobknowntasktest_SRCS} )
+  #ADD_DEPENDENCIES( onlinejobknowntasktest  )
+
+  target_link_libraries( onlinejobknowntasktest kmm_mymoney ${target_link_libraries_test})
+
+
 ENDIF( KDE4_BUILD_TESTS )
+

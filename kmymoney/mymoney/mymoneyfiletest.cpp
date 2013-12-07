@@ -26,6 +26,8 @@
 
 #include "autotest.h"
 
+#include "mymoney/germanonlinetransfer.h"
+
 QTEST_MAIN(MyMoneyFileTest)
 
 void MyMoneyFileTest::objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj)
@@ -2236,6 +2238,160 @@ void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_trans
   ft.commit();
 
   QVERIFY(m->countTransactionsWithSpecificReconciliationState(accountId, MyMoneyTransactionFilter::notReconciled) == 0);
+}
+
+void MyMoneyFileTest::testAddOnlineJob()
+{
+  // Add a onlineJob
+  onlineJob job(new germanOnlineTransfer());
+
+  MyMoneyFileTransaction ft;
+  m->addOnlineJob( job );
+  QCOMPARE( job.id(), QString("O000001"));
+  ft.commit();
+
+  QVERIFY(m_objectsRemoved.count() == 0);
+  QVERIFY(m_objectsAdded.count() == 1);
+  QVERIFY(m_objectsModified.count() == 0);
+  QVERIFY(m_balanceChanged.count() == 0);
+  QVERIFY(m_valueChanged.count() == 0);
+}
+
+void MyMoneyFileTest::testGetOnlineJob()
+{
+  testAddOnlineJob();
+
+  const onlineJob requestedJob = m->getOnlineJob( "O000001" );
+  QVERIFY( !requestedJob.isNull() );
+  QCOMPARE( requestedJob.id(), QString("O000001") );
+}
+
+void MyMoneyFileTest::testRemoveOnlineJob()
+{
+  // Add a onlineJob
+  onlineJob job(new germanOnlineTransfer());
+  onlineJob job2(new germanOnlineTransfer());
+  onlineJob job3(new germanOnlineTransfer());
+
+  
+  MyMoneyFileTransaction ft;
+  m->addOnlineJob( job );
+  m->addOnlineJob( job2 );
+  m->addOnlineJob( job3 );
+  ft.commit();
+
+  clearObjectLists();
+
+  ft.restart();
+  m->removeOnlineJob( job );
+  m->removeOnlineJob( job2 );
+  ft.commit();
+
+  QCOMPARE(m_objectsRemoved.count(), 2);
+  QCOMPARE(m_objectsAdded.count(), 0);
+  QCOMPARE(m_objectsModified.count(), 0);
+  QCOMPARE(m_balanceChanged.count(), 0);
+  QCOMPARE(m_valueChanged.count(), 0);
+}
+
+void MyMoneyFileTest::testRemoveOnlineJobs()
+{
+  // Add a onlineJob
+  onlineJob job(new germanOnlineTransfer());
+  onlineJob job2(new germanOnlineTransfer());
+ 
+  MyMoneyFileTransaction ft;
+  m->addOnlineJob( job );
+  m->addOnlineJob( job2 );
+  ft.commit();
+  QCOMPARE(m_objectsAdded.count(), 2);
+  
+  QStringList jobIds = QStringList(job2.id());
+  
+  QCOMPARE(jobIds.length(), 1);
+  
+  clearObjectLists();
+
+  MyMoneyFileTransaction fileTransaction;
+  MyMoneyFile::instance()->removeOnlineJob(jobIds);
+  fileTransaction.commit();
+
+  QCOMPARE(m_objectsRemoved.count(), 1);
+  QCOMPARE(m_objectsAdded.count(), 0);
+  QCOMPARE(m_objectsModified.count(), 0);
+  QCOMPARE(m_balanceChanged.count(), 0);
+  QCOMPARE(m_valueChanged.count(), 0);
+}
+
+void MyMoneyFileTest::testOnlineJobRollback()
+{
+  // Add a onlineJob
+  onlineJob job(new germanOnlineTransfer());
+  onlineJob job2(new germanOnlineTransfer());
+  onlineJob job3(new germanOnlineTransfer());
+
+  MyMoneyFileTransaction ft;
+  m->addOnlineJob( job );
+  m->addOnlineJob( job2 );
+  m->addOnlineJob( job3 );
+  ft.rollback();
+
+  QCOMPARE(m_objectsRemoved.count(), 0);
+  QCOMPARE(m_objectsAdded.count(), 0);
+  QCOMPARE(m_objectsModified.count(), 0);
+  QCOMPARE(m_balanceChanged.count(), 0);
+  QCOMPARE(m_valueChanged.count(), 0);
+}
+
+void MyMoneyFileTest::testRemoveLockedOnlineJob()
+{
+  // Add a onlineJob
+  onlineJob job(new germanOnlineTransfer());
+  job.setLock(true);
+  QVERIFY( job.isLocked() );
+
+  MyMoneyFileTransaction ft;
+  m->addOnlineJob( job );
+  ft.commit();
+
+  clearObjectLists();
+
+  // Try removing locked transfer
+  ft.restart();
+  m->removeOnlineJob( job );
+  ft.commit();
+  QVERIFY2(m_objectsRemoved.count() == 0, "Online Job was locked, removing is not allowed");
+  QVERIFY(m_objectsAdded.count() == 0);
+  QVERIFY(m_objectsModified.count() == 0);
+  QVERIFY(m_balanceChanged.count() == 0);
+  QVERIFY(m_valueChanged.count() == 0);
+}
+
+/** @todo */
+void MyMoneyFileTest::testModifyOnlineJob()
+{
+  // Add a onlineJob
+  onlineJob job(new germanOnlineTransfer());
+  MyMoneyFileTransaction ft;
+  m->addOnlineJob( job );
+  ft.commit();
+
+  clearObjectLists();
+
+  // Modify online job
+  job.setJobSend();
+  ft.restart();
+  m->modifyOnlineJob(job);
+  ft.commit();
+
+  QCOMPARE(m_objectsRemoved.count(), 0);
+  QCOMPARE(m_objectsAdded.count(), 0);
+  QCOMPARE(m_objectsModified.count(), 1);
+  QCOMPARE(m_balanceChanged.count(), 0);
+  QCOMPARE(m_valueChanged.count(), 0);
+
+  //onlineJob modifiedJob = m->getOnlineJob( job.id() );
+  //QCOMPARE(modifiedJob.responsibleAccount(), QString("Std::Assert"));
 }
 
 #include "mymoneyfiletest.moc"

@@ -91,6 +91,13 @@ private slots:
   void testCountTransactionsWithSpecificReconciliationState_noTransactions();
   void testCountTransactionsWithSpecificReconciliationState_transactionWithWantedReconcileState();
   void testCountTransactionsWithSpecificReconciliationState_transactionWithUnwantedReconcileState();
+  void testAddOnlineJob();
+  void testGetOnlineJob();
+  void testRemoveOnlineJob();
+  void testRemoveOnlineJobs();
+  void testRemoveLockedOnlineJob();
+  void testOnlineJobRollback();
+  void testModifyOnlineJob();
 
 private slots:
   void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);

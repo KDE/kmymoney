@@ -21,6 +21,8 @@
 
 #include "autotest.h"
 
+#include "germanonlinetransfer.h"
+
 QTEST_MAIN(MyMoneySeqAccessMgrTest)
 
 void MyMoneySeqAccessMgrTest::init()
@@ -159,6 +161,8 @@ void MyMoneySeqAccessMgrTest::testSupportFunctions()
   QVERIFY(m->m_nextScheduleID == 1);
   QVERIFY(m->nextReportID() == "R000001");
   QVERIFY(m->m_nextReportID == 1);
+  QVERIFY(m->nextOnlineJobID() == "O000001");
+  QVERIFY(m->m_nextOnlineJobID == 1);
 }
 
 void MyMoneySeqAccessMgrTest::testIsStandardAccount()
@@ -1845,5 +1849,22 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
   m->startTransaction();
 }
 
+void MyMoneySeqAccessMgrTest::testAddOnlineJob()
+{
+  // Add a onlineJob
+  onlineJob job(new germanOnlineTransfer());
+
+  m->addOnlineJob( job );
+  QCOMPARE( job.id(), QString("O000001"));
+
+  m->commitTransaction();
+  m->startTransaction();
+
+  QVERIFY(m->m_nextOnlineJobID == 1);
+  QVERIFY(m->dirty() == true);
+  QVERIFY(m->m_onlineJobList.count() == 1);
+  QVERIFY(! m->m_onlineJobList["O000001"].isNull());
+
+}
 
 #include "mymoneyseqaccessmgrtest.moc"

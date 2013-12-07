@@ -57,14 +57,19 @@ class KBAccountSettings;
 // Project Includes
 
 #include "kmymoneyplugin.h"
+#include "onlinepluginextended.h"
 #include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
+
+#include "onlinejobknowntask.h"
+#include "sepaonlinetransfer.h"
+#include "germanonlinetransfer.h"
 
 /**
   * This class represents the KBanking plugin towards KMymoney.
   * All GUI related issues are handled in this object.
   */
-class KBankingPlugin : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::OnlinePlugin
+class KBankingPlugin : public KMyMoneyPlugin::OnlinePluginExtended
 {
   friend class KMyMoneyBanking;
 
@@ -80,6 +85,12 @@ public:
   void setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps) const;
 
   void protocols(QStringList& protocolList) const;
+  
+  QStringList availableJobs(QString accountId);
+  QSharedPointer<const onlineTask::settings> settings(QString accountId, QString taskName);
+
+public slots:
+  QList<onlineJob> sendOnlineJob(QList<onlineJob> jobs);
 
 private:
   /**
@@ -154,6 +165,11 @@ private:
   AB_ACCOUNT* aqbAccount(const MyMoneyAccount& acc) const;
 
   /**
+   * This is a convenient method for aqbAccount if you have KMyMoney's account id only.
+   */
+  AB_ACCOUNT* aqbAccount(const QString& accountId) const;
+
+  /**
     * Called by the application framework to update the
     * KMyMoney account @a acc with data from the online source.
     * Store the jobs in the outbox in case @a moreAccounts is true
@@ -167,16 +183,21 @@ private:
     * @deprecated
     */
   bool updateAccount(const MyMoneyAccount& acc);
-
+  
   /**
     * Trigger the password cache timer
     */
   void startPasswordTimer(void);
 
+  onlineJobKnownTask<germanOnlineTransfer> enqueTransaction(onlineJobKnownTask<germanOnlineTransfer> job);
+  onlineJobKnownTask<sepaOnlineTransfer> enqueTransaction(onlineJobKnownTask<sepaOnlineTransfer> job);
+
+
 protected slots:
   void slotSettings(void);
   void slotImport(void);
   void slotClearPasswordCache(void);
+  void executeQueue(void);
 
 signals:
   void queueChanged(void);
@@ -189,6 +210,12 @@ private:
   KMyMoneyBanking*      m_kbanking;
   QMap<QString, QString> m_protocolConversionMap;
   KBAccountSettings* m_accountSettings;
+
+  /**
+   * @brief @ref onlineJob "onlineJobs" which are executed right
+   * Key is onlineJob->id()
+   */
+  QMap<QString, onlineJob> m_onlineJobQueue;
 };
 
 /**
@@ -208,16 +235,16 @@ public:
   int enqueueJob(AB_JOB *j);
   int dequeueJob(AB_JOB *j);
   std::list<AB_JOB*> getEnqueuedJobs();
-
-
+  void transfer();
+  
   virtual bool interactiveImport();
-
+  
 protected:
   int init();
   int fini();
 
   bool askMapAccount(const MyMoneyAccount& acc);
-  QString mappingId(const MyMoneyAccount& acc) const;
+  QString mappingId(const MyMoneyObject& object) const;
 
   bool importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags);
   const AB_ACCOUNT_STATUS* _getAccountStatus(AB_IMEXPORTER_ACCOUNTINFO *ai);

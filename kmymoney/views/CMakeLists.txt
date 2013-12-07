@@ -21,6 +21,7 @@ SET(libviews_a_SOURCES
   tocitemreport.cpp
   kscheduletreeitem.cpp
   ktagsview.cpp
+  konlinejoboutbox.cpp
   )
 
 SET(libviews_a_HEADER kmymoneyview.h)
@@ -35,6 +36,7 @@ SET(libviews_a_UI
   kpayeesviewdecl.ui
   kscheduledviewdecl.ui
   ktagsviewdecl.ui
+  konlinejoboutbox.ui
   )
 
 # The handling of these ui files depends

@@ -25,14 +25,25 @@ SET(kmm_plugin_LIB_SRCS
   importinterface.cpp 
   kmymoneyplugin.cpp 
   pluginloader.cpp
-  statementinterface.cpp viewinterface.cpp)
+  statementinterface.cpp
+  viewinterface.cpp
+  onlinepluginextended.cpp
+)
 
 SET(plugins_HEADERS
   importinterface.h kmymoneyplugin.h pluginloader.h
-  statementinterface.h viewinterface.h kmm_plugin_export.h)
+  statementinterface.h viewinterface.h kmm_plugin_export.h onlinepluginextended.h)
 
-KDE4_ADD_LIBRARY(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
-TARGET_LINK_LIBRARIES(kmm_plugin ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KUTILS_LIBS} ${GMP_LIBRARIES} ${LIBALKIMIA_LIBRARY})
+KDE4_ADD_LIBRARY(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS} ${plugins_HEADERS})
+TARGET_LINK_LIBRARIES(kmm_plugin
+    ${QT_AND_KDECORE_LIBS}
+    ${KDE4_KDEUI_LIBS}
+    ${KDE4_KIO_LIBS}
+    ${KDE4_KUTILS_LIBS}
+    ${GMP_LIBRARIES}
+    ${LIBALKIMIA_LIBRARY}
+    kmymoney_common
+)
 
 SET_TARGET_PROPERTIES(kmm_plugin PROPERTIES VERSION ${GENERIC_LIB_VERSION}  SOVERSION ${GENERIC_LIB_SOVERSION} )
 

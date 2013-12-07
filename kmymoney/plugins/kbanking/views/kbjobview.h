@@ -26,6 +26,7 @@
 #include <QWidget>
 
 class KBJobView;
+class KBankingPlugin;
 
 #include "kbjoblist.h"
 #include "mymoneybanking.h"
@@ -35,7 +36,8 @@ class KBJobView: public QWidget
 {
   Q_OBJECT
 public:
-  explicit KBJobView(KMyMoneyBanking *kb,
+  /** @todo if transfer can detect plugin by itself, remove KBankingPlugin param */
+  explicit KBJobView(KMyMoneyBanking *kb, KBankingPlugin *kbp,
                      QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   ~KBJobView();
 
@@ -49,6 +51,7 @@ private:
   Private* const d;
 
   KMyMoneyBanking *m_app;
+  KBankingPlugin *m_plugin;
   KBJobListView *m_jobList;
 
 protected slots:

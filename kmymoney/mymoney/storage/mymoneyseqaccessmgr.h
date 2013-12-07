@@ -167,6 +167,12 @@ public:
   void addPayee(MyMoneyPayee& payee);
 
   /**
+   * @todo A reference-to-pointer (onlineJob &job) would simulate an similar behaviour to the other add* functions. Use that?
+   *  But then we should use garded pointer to avoid memory leackage (which will come due to the unclear system then)
+   */
+  void addOnlineJob(onlineJob& job);
+
+  /**
     * This method is used to retrieve information about a payee
     * An exception will be thrown upon error conditions.
     *
@@ -338,6 +344,9 @@ public:
     */
   void modifyTransaction(const MyMoneyTransaction& transaction);
 
+  /** @todo implement */
+  void modifyOnlineJob(const onlineJob& job);
+
   /**
     * This method re-parents an existing account
     *
@@ -375,6 +384,14 @@ public:
     * @param institution institution to be deleted.
     */
   void removeInstitution(const MyMoneyInstitution& institution);
+
+  const onlineJob getOnlineJob(const QString &id) const;
+  /** @todo implement */
+  long unsigned int onlineJobId() const { return 1; }
+  /** @todo implement */
+  void loadOnlineJobId(const unsigned long id) { Q_UNUSED(id); };
+
+  void removeOnlineJob(const onlineJob & );
 
   /**
     * This method is used to extract a transaction from the file global
@@ -517,6 +534,11 @@ public:
     * Compatibility interface for the previous method.
     */
   const QList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
+
+  /**
+   * @brief Return all onlineJobs
+   */
+  const QList<onlineJob> onlineJobList() const;
 
   /**
     * This method returns whether a given transaction is already in memory, to avoid
@@ -1088,6 +1110,7 @@ private:
   static const int SECURITY_ID_SIZE = 6;
   static const int REPORT_ID_SIZE = 6;
   static const int BUDGET_ID_SIZE = 6;
+  static const int ONLINE_JOB_ID_SIZE = 6;
 
   /**
     * This method is used to set the dirty flag and update the
@@ -1166,6 +1189,12 @@ private:
   unsigned long m_nextBudgetID;
 
   /**
+    * This member variable keeps the number that will be assigned to the
+    * next onlineJob object created. It is maintained by nextOnlineJobID()
+    */
+  unsigned long m_nextOnlineJobID;
+
+  /**
     * The member variable m_institutionList is the container for the
     * institutions known within this file.
     */
@@ -1228,6 +1257,11 @@ private:
   MyMoneyMap<QString, MyMoneyBudget> m_budgetList;
 
   MyMoneyMap<MyMoneySecurityPair, MyMoneyPriceEntries> m_priceList;
+
+  /**
+    * A list containing all the onlineJobs information objects.
+    */
+  MyMoneyMap<QString, onlineJob> m_onlineJobList;
 
   /**
     * This member signals if the file has been modified or not
@@ -1307,6 +1341,10 @@ private:
     */
   QString nextBudgetID(void);
 
+  /**
+    * This method is used to get the next valid ID for an onlineJob object.
+    */
+  QString nextOnlineJobID(void);
 
   /**
     * This method re-parents an existing account

@@ -4,3 +4,6 @@ build*/
 *.rej
 *~
 *.kdev4
+ui_*.h
+moc_*.cpp
+*.moc

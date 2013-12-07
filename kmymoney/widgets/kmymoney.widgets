@@ -66,6 +66,10 @@ IncludeFile=kmymoneymvccombo.h
 [KMyMoneyAccountTreeView]
 ToolTip=The KMyMoney model/view based widget that displays accounts
 
+[sepaBankIdentifierEdit]
+ToolTip=Edit field for bank accounts identified by iban and bic
+IncludeFile=sepabankidentifieredit.h
+
 # deprecated will be removed at some point in time
 
 [KMyMoneyAccountCombo]

@@ -30,6 +30,7 @@
 #include <QLayout>
 #include <QToolTip>
 #include <QHBoxLayout>
+#include <QDebug>
 
 #include <KPushButton>
 #include <KGuiItem>
@@ -50,12 +51,14 @@ struct KBJobView::Private {
 };
 
 KBJobView::KBJobView(KMyMoneyBanking *kb,
+                     KBankingPlugin *kbp,
                      QWidget* parent,
                      const char* name,
                      Qt::WFlags fl) :
     QWidget(parent, fl),
     d(new Private),
-    m_app(kb)
+    m_app(kb),
+    m_plugin(kbp)
 {
   assert(kb);
   setObjectName(name);
@@ -159,7 +162,6 @@ void KBJobView::slotExecute()
   }
   AB_ImExporterContext_free(ctx);
 }
-
 
 
 void KBJobView::slotDequeue()

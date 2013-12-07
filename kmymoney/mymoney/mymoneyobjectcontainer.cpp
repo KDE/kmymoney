@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoney/onlinejob.h"
+
 #include <mymoneyobjectcontainer.h>
 
 MyMoneyObjectContainer::MyMoneyObjectContainer()
@@ -183,6 +185,7 @@ void MyMoneyObjectContainer::refresh(const QString& id)
     const MyMoneySecurity* security = dynamic_cast<const MyMoneySecurity *>(*it);
     const MyMoneyInstitution* institution = dynamic_cast<const MyMoneyInstitution *>(*it);
     const MyMoneySchedule* schedule = dynamic_cast<const MyMoneySchedule *>(*it);
+    const onlineJob* job = dynamic_cast<const onlineJob *>(*it);
     delete *it;
     if (account) {
       const MyMoneyAccount& a = m_storage->account(id);
@@ -207,6 +210,9 @@ void MyMoneyObjectContainer::refresh(const QString& id)
     } else if (schedule) {
       const MyMoneySchedule& s = m_storage->schedule(id);
       m_map[id] = new MyMoneySchedule(s);
+    } else if (job) {
+      const onlineJob& j = m_storage->getOnlineJob(id);
+      m_map[id] = new onlineJob(j);
     } else {
       qWarning("Ooops, should preload an unknown object with id '%s'", qPrintable(id));
     }
@@ -225,6 +231,7 @@ preloadListMethod(Tag, MyMoneyTag)
 preloadListMethod(Institution, MyMoneyInstitution)
 preloadListMethod(Security, MyMoneySecurity)
 preloadListMethod(Schedule, MyMoneySchedule)
+preloadListMethod(OnlineJob, onlineJob)
 
 preloadMethod(Account, MyMoneyAccount)
 preloadMethod(Security, MyMoneySecurity)
@@ -232,6 +239,7 @@ preloadMethod(Payee, MyMoneyPayee)
 preloadMethod(Tag, MyMoneyTag)
 preloadMethod(Institution, MyMoneyInstitution)
 preloadMethod(Schedule, MyMoneySchedule)
+preloadMethod(OnlineJob, onlineJob)
 
 listMethod(payee, MyMoneyPayee)
 listMethod(tag, MyMoneyTag)

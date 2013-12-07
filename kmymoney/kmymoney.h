@@ -43,6 +43,10 @@
 #include <kmymoneyutils.h>
 #include <mymoneyprice.h>
 
+#include "mymoney/onlinejob.h"
+#include "mymoney/onlinejobknowntask.h"
+#include "mymoney/onlinetransfer.h"
+
 class QResizeEvent;
 class QTreeWidgetItem;
 class KPluginInfo;
@@ -438,6 +442,42 @@ protected slots:
   void slotAccountUnmapOnline(void);
   void slotAccountUpdateOnline(void);
   void slotAccountUpdateOnlineAll(void);
+  
+  /**
+   * @brief Start dialog for an online banking transfer
+   */
+  void slotNewOnlineTransfer(void);
+
+  /**
+   * @brief Start dialog to edit onlineJob if possible
+   * @param onlineJob id to edit
+   */
+  void slotEditOnlineJob( const QString );
+
+  /**
+   * @brief Start dialog to edit onlineJob if possible
+   */
+  void slotEditOnlineJob( const onlineJob );
+
+  /**
+   * @brief Start dialog to edit onlineJob if possible
+   */
+  void slotEditOnlineJob( const onlineJobKnownTask<onlineTransfer> );
+
+  /**
+   * @brief Saves an online banking job
+   */
+  void slotSaveOnlineJob(onlineJob job);
+
+  /**
+   * @brief Queue an online banking job
+   */
+  void slotOnlineJobEnqueue(onlineJob job);
+
+  /**
+   * @brief Send a list of onlineJobs
+   */
+  void slotOnlineJobSend(QList<onlineJob> jobs );
 
   void slotManageGpgKeys(void);
   void slotKeySelected(int idx);

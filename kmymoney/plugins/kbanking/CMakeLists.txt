@@ -20,7 +20,14 @@ ADD_SUBDIRECTORY( widgets )
 SET(kmm_kbanking_PART_SRCS 
     mymoneybanking.cpp
     banking.cpp
+    aqbankingkmmoperators.cpp
+    gwenhywfarqtoperators.cpp
     )
+
+SET(kmm_kbanking_HEADERS
+    aqbankingqtoperators.h
+    gwenhywfarqtoperators.h
+)
 
 KDE4_ADD_PLUGIN(kmm_kbanking ${kmm_kbanking_PART_SRCS})
 
@@ -38,6 +45,7 @@ TARGET_LINK_LIBRARIES(kmm_kbanking
                       ${LIBALKIMIA_LIBRARY}
                       )
 
+
 ########### install files ###############
 
 INSTALL(FILES kmm_kbanking.rc
@@ -48,3 +56,4 @@ INSTALL(TARGETS kmm_kbanking
 
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
+

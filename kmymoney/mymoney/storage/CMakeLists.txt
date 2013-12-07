@@ -33,7 +33,8 @@ IF( KDE4_BUILD_TESTS )
 	  ${QT_QTTEST_LIBRARY}
 	  ${QT_QTSQL_LIBRARY}
 	  ${QT_QTCORE_LIBRARY}
-	  ${GMP_LIBRARIES} )
+          ${GMP_LIBRARIES}
+)
 
 IF(NOT WIN32)
   # MyMoneyDatabaseMgr

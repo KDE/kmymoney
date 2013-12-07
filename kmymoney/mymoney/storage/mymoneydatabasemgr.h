@@ -207,6 +207,16 @@ public:
     */
   virtual const QList<MyMoneyTag> tagList(void) const;
 
+  /** @todo implement all onlineJob related functions @{ */
+  void modifyOnlineJob(const onlineJob& job) { Q_UNUSED(job); }
+  void addOnlineJob( onlineJob& job ) { Q_UNUSED(job); }
+  const onlineJob getOnlineJob(const QString &jobId) const { Q_UNUSED(jobId); return onlineJob(); }
+  long unsigned int onlineJobId() const { return 0; }
+  void loadOnlineJobId(const unsigned long id) { Q_UNUSED(id); }
+  const QList<onlineJob> onlineJobList() const { return QList<onlineJob>(); }
+  void removeOnlineJob( const onlineJob& ) { }
+  /** @} */
+
   /**
     * Returns the account addressed by it's id.
     *
