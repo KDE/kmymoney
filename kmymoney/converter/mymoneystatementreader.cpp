@@ -356,7 +356,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
       signalProgress(0, s.m_listTransactions.count(), "Importing Statement ...");
       int progress = 0;
       QList<MyMoneyStatement::Transaction>::const_iterator it_t = s.m_listTransactions.begin();
-      while (it_t != s.m_listTransactions.end()) {
+      while (it_t != s.m_listTransactions.end() && !m_userAbort) {
         processTransactionEntry(*it_t);
         signalProgress(++progress, 0);
         ++it_t;
@@ -494,7 +494,7 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
     if (sec_in.m_strSymbol.isEmpty()) {
       if ((*it).name() == sec_in.m_strName)
         security = *it;
-    } else if ((*it).tradingSymbol() == sec_in.m_strSymbol)
+    } else if ((*it).tradingSymbol().toLower() == sec_in.m_strSymbol.toLower())
       security = *it;
     ++it;
   }
@@ -650,7 +650,12 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // This should be rare.  A statement should have a security entry for any
             // of the securities referred to in the transactions.  The only way to get
             // here is if that's NOT the case.
-            KMessageBox::information(0, i18n("This investment account does not contain the \"%1\" security.  Transactions involving this security will be ignored.", statementTransactionUnderImport.m_strSecurity), i18n("Security not found"), QString("MissingSecurity%1").arg(statementTransactionUnderImport.m_strSecurity.trimmed()));
+            int ret = KMessageBox::warningContinueCancel(0, i18n("<center>This investment account does not contain the \"%1\" security.</center>"
+                                                                 "<center>Transactions involving this security will be ignored.</center>", statementTransactionUnderImport.m_strSecurity),
+                                                            i18n("Security not found"), KStandardGuiItem::cont(), KStandardGuiItem::cancel());
+            if (ret == KMessageBox::Cancel) {
+              m_userAbort = true;
+            }
             return;
           }
         }

@@ -1574,6 +1574,7 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
   QList<MyMoneyStatement::Security>::const_iterator it_s = m_listSecurities.constBegin();
   while (it_s != m_listSecurities.constEnd()) {
     st.m_listSecurities << (*it_s);
+    tr.m_strSymbol = (*it_s).m_strSymbol;
     ++it_s;
   }
 
