@@ -7331,10 +7331,10 @@ void KMyMoneyApp::slotNewOnlineTransfer(void)
   if (!d->m_selectedAccount.id().isEmpty()) {
     transferForm->setCurrentAccount(d->m_selectedAccount.id());
   }
-  connect( transferForm, SIGNAL( rejected()), transferForm, SLOT(deleteLater()));
-  connect( transferForm, SIGNAL( acceptedForQueue( onlineJob ) ), this, SLOT( slotOnlineJobEnqueue( onlineJob ) ));
-  connect( transferForm, SIGNAL( acceptedForDraft( onlineJob ) ), this, SLOT( slotSaveOnlineJob( onlineJob ) ));
-  connect( transferForm, SIGNAL( accepted() ), transferForm, SLOT( deleteLater() ));
+  connect( transferForm, SIGNAL(rejected()), transferForm, SLOT(deleteLater()));
+  connect( transferForm, SIGNAL(acceptedForSave(onlineJob)), this, SLOT(slotOnlineJobSave(onlineJob)));
+  connect( transferForm, SIGNAL(acceptedForSend(onlineJob)), this, SLOT(slotOnlineJobSend(onlineJob)));
+  connect( transferForm, SIGNAL(accepted()), transferForm, SLOT(deleteLater()));
   transferForm->show();
 }
 
@@ -7357,27 +7357,36 @@ void KMyMoneyApp::slotEditOnlineJob(const onlineJobKnownTask<onlineTransfer> job
 {
   kOnlineTransferForm *transferForm = new kOnlineTransferForm(this);
   transferForm->setOnlineJob( job );
-  connect( transferForm, SIGNAL( rejected()), transferForm, SLOT(deleteLater()));
-  connect( transferForm, SIGNAL( acceptedForQueue( onlineJob ) ), this, SLOT( slotOnlineJobEnqueue( onlineJob ) ));
-  connect( transferForm, SIGNAL( acceptedForDraft( onlineJob ) ), this, SLOT( slotSaveOnlineJob( onlineJob ) ));
-  connect( transferForm, SIGNAL( accepted() ), transferForm, SLOT( deleteLater() ));
+  connect( transferForm, SIGNAL(rejected()), transferForm, SLOT(deleteLater()));
+  connect( transferForm, SIGNAL(acceptedForSave(onlineJob)), this, SLOT(slotOnlineJobSave(onlineJob)));
+  connect( transferForm, SIGNAL(acceptedForSend(onlineJob)), this, SLOT(slotOnlineJobSend(onlineJob)));
+  connect( transferForm, SIGNAL(accepted()), transferForm, SLOT(deleteLater()));
   transferForm->show();
 }
 
-void KMyMoneyApp::slotSaveOnlineJob(onlineJob job)
+void KMyMoneyApp::slotOnlineJobSave(onlineJob job)
 {
   MyMoneyFileTransaction fileTransaction;
-  if ( !job.id().isEmpty() )
-    MyMoneyFile::instance()->modifyOnlineJob( job );
+  if ( job.id() == MyMoneyObject::emptyId() )
+      MyMoneyFile::instance()->addOnlineJob( job );
   else
-    MyMoneyFile::instance()->addOnlineJob( job );
+    MyMoneyFile::instance()->modifyOnlineJob( job );
   fileTransaction.commit();
 }
 
 /** @todo when onlineJob queue is used, continue here */
-void KMyMoneyApp::slotOnlineJobEnqueue( onlineJob job )
+void KMyMoneyApp::slotOnlineJobSend( onlineJob job )
 {
-  slotSaveOnlineJob(job);
+    MyMoneyFileTransaction fileTransaction;
+    if ( job.id() == MyMoneyObject::emptyId() )
+        MyMoneyFile::instance()->addOnlineJob( job );
+    else
+        MyMoneyFile::instance()->modifyOnlineJob( job );
+    fileTransaction.commit();
+
+    QList<onlineJob> jobList;
+    jobList.append(job);
+    slotOnlineJobSend( jobList );
 }
 
 /** @todo check if it works with new onlineJob system */
@@ -7388,6 +7397,7 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
 
   // Sort jobs by online plugin & lock them
   foreach(onlineJob job, jobs) {
+    Q_ASSERT(job.id() != MyMoneyObject::emptyId());
     // find the provider
     const MyMoneyAccount originAcc = job.responsibleMyMoneyAccount();
     job.setLock();
@@ -7416,15 +7426,15 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
       // Save possible changes of the online job
       MyMoneyFileTransaction fileTransaction;
       foreach( onlineJob job, executedJobs ) {
-	fileTransaction.restart();
-	job.setLock( false );
+    fileTransaction.restart();
+    job.setLock( false );
         kmmFile->modifyOnlineJob( job );
-	fileTransaction.commit();
+    fileTransaction.commit();
       }
 
       if (  Q_UNLIKELY( executedJobs.size() != jobsToExecute.size() ) ) {
-	// OnlinePlugin did not return all jobs
-	throw new MYMONEYEXCEPTION("Error saving send online trasks. After restart you should see at minimum all succesfully executed jobs marked send. Please inform the KMyMoney developers");
+    // OnlinePlugin did not return all jobs
+    throw new MYMONEYEXCEPTION("Error saving send online trasks. After restart you should see at minimum all succesfully executed jobs marked send. Please inform the KMyMoney developers");
       }
 
     } else {

@@ -28,7 +28,10 @@
 class QValidator;
 
 /**
- * @brief Describes an online credit-transfer
+ * @brief Describes an online credit-transfer (or similar)
+ * 
+ * This class is used by KMyMoney to create a MyMoneySchedule
+ * after a task was send to the bank.
  */
 class KMM_MYMONEY_EXPORT onlineTransfer : public onlineTask
 {
@@ -42,9 +45,6 @@ public:
   virtual MyMoneySecurity currency() const = 0;
 
   virtual QString purpose() const = 0;
-//  virtual QValidator* purposeValidator( QObject *parent = 0) const = 0;
-
-  virtual bool isValid() const = 0;
   
   virtual QString responsibleAccount() const = 0;
 

@@ -14,7 +14,7 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="3" column="1">
+   <item row="4" column="1">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -27,7 +27,7 @@
      </property>
     </spacer>
    </item>
-   <item row="0" column="0" rowspan="4">
+   <item row="0" column="0" rowspan="5">
     <widget class="QTreeView" name="m_onlineJobView">
      <property name="selectionMode">
       <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -52,7 +52,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
+   <item row="3" column="1">
     <widget class="KPushButton" name="m_buttonRemove">
      <property name="text">
       <string>Remove</string>
@@ -64,7 +64,7 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
+   <item row="2" column="1">
     <widget class="KPushButton" name="m_buttonEdit">
      <property name="text">
       <string>Edit</string>
@@ -73,6 +73,16 @@
       <iconset theme="document-edit">
        <normaloff/>
       </iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="KPushButton" name="m_buttonNewCreditTransfer">
+     <property name="text">
+      <string>New credit transfer</string>
+     </property>
+     <property name="icon">
+      <iconset theme="document-new"/>
      </property>
     </widget>
    </item>
@@ -85,6 +95,13 @@
    <header>kpushbutton.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>m_onlineJobView</tabstop>
+  <tabstop>m_buttonSend</tabstop>
+  <tabstop>m_buttonNewCreditTransfer</tabstop>
+  <tabstop>m_buttonEdit</tabstop>
+  <tabstop>m_buttonRemove</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
  <slots>

@@ -24,11 +24,9 @@
 
 #include <QtCore/QSharedPointer>
 
-#include "germanaccountidentifier.h"
-
 #include "kmm_mymoney_export.h"
-
-class QRegExpValidator;
+#include "germanaccountidentifier.h"
+#include "credittransfersettingsbase.h"
 
 /**
  * @brief Online Banking national transfer
@@ -73,61 +71,28 @@ public:
   unsigned short int textKey() const { return _textKey; }
   unsigned short int subTextKey() const { return _subTextKey; }
 
-  class settings : public onlineTask::settings
+  class settings : public creditTransferSettingsBase
   {
   public:
-    settings()
-      : _purposeMaxLines(0),
-        _purposeLineLength(0),
-        _recipientNameMaxLines(0),
-        _recipientNameLength(0),
-        _payeeNameMaxLines(0),
-        _payeeNameLength(0)
-    {}
-
-    // Limits getter
-    int purposeMaxLines() const { return _purposeMaxLines; }
-    int purposeLineLength() const { return _purposeLineLength; }
-    int recipientNameLineLength() const { return _recipientNameLength; }
-    int payeeNameLineLength() const { return _payeeNameLength; }
-
-    QValidator* purposeValidator( QObject *parent = 0 ) const;
-    QValidator* recipientNameValidator( QObject *parent = 0 ) const;
-    QValidator* payeeNameValidator( QObject *parent = 0 ) const;
-
-    // Limits setter
-    void setPurposeLimits( const int& lines, const int& lineLength )
+    lengthStatus checkRecipientAccountNumber( const QString& accountNumber ) const
     {
-      _purposeMaxLines = lines;
-      _purposeLineLength = lineLength;
+      const int length = accountNumber.length();
+      if (length == 0)
+        return tooShort;
+      else if ( length > 10 )
+        return tooLong;
+      return ok;
     }
 
-    void setRecipientNameLimits( const int& lines, const int& lineLength )
+    lengthStatus checkRecipientBankCode( const QString& bankCode ) const
     {
-      _recipientNameMaxLines = lines;
-      _recipientNameLength = lineLength;
+      const int length = bankCode.length();
+      if (length < 8)
+        return tooShort;
+      else if ( length > 8 )
+        return tooLong;
+      return ok;
     }
-
-    void setPayeeNameLimits( const int& lines, const int& lineLength )
-    {
-      _payeeNameMaxLines = lines;
-      _payeeNameLength = lineLength;
-    }
-
-  private:
-
-    /** @brief number of lines allowed in purpose */
-    int _purposeMaxLines;
-    /** @brief number of chars allowed in each purpose line */
-    int _purposeLineLength;
-    /** @brief number of lines allowed for recipient name */
-    int _recipientNameMaxLines;
-    /** @brief number of chars allowed in each recipient line */
-    int _recipientNameLength;
-    /** @brief number of lines allowed for payee name */
-    int _payeeNameMaxLines;
-    /** @brief number of chars allowed in each payee line */
-    int _payeeNameLength;
   };
 
   QSharedPointer<const settings> getSettings() const;

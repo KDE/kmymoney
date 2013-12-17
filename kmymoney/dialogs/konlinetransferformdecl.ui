@@ -106,6 +106,9 @@
           <height>100</height>
          </size>
         </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
         <widget class="QWidget" name="accountUnsupported">
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
@@ -212,11 +215,60 @@
     </widget>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="KPushButton" name="buttonEnque">
+       <property name="text">
+        <string>Enque</string>
+       </property>
+       <property name="icon">
+        <iconset theme="document-save">
+         <normaloff/>
+        </iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KPushButton" name="buttonSend">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Send</string>
+       </property>
+       <property name="icon">
+        <iconset theme="mail-send">
+         <normaloff/>
+        </iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KPushButton" name="buttonAbort">
+       <property name="text">
+        <string>Abort</string>
+       </property>
+       <property name="icon">
+        <iconset theme="dialog-cancel">
+         <normaloff/>
+        </iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
@@ -233,6 +285,11 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
+  <customwidget>
    <class>sepaCreditTransferEdit</class>
    <extends>QWidget</extends>
    <header>onlinejobedit/sepacredittransferedit.h</header>
@@ -247,7 +304,12 @@
  </customwidgets>
  <tabstops>
   <tabstop>orderAccount</tabstop>
-  <tabstop>buttonBox</tabstop>
+  <tabstop>radioTransferNational</tabstop>
+  <tabstop>radioTransferSepa</tabstop>
+  <tabstop>graphicsView</tabstop>
+  <tabstop>buttonSend</tabstop>
+  <tabstop>buttonEnque</tabstop>
+  <tabstop>buttonAbort</tabstop>
  </tabstops>
  <resources/>
  <connections/>

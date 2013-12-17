@@ -53,6 +53,7 @@ SET(_uncritial_common_sources
   kmymoneydatetbl.cpp
   kmymoneyedit.cpp
   kmymoneylineedit.cpp
+  kmymoneytextedit.cpp 
   kmymoneymvccombo.cpp
   kmymoneyselector.cpp
   kmymoneytitlelabel.cpp

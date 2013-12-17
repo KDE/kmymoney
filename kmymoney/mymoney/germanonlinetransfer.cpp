@@ -61,7 +61,20 @@ germanOnlineTransfer *germanOnlineTransfer::clone() const
 
 bool germanOnlineTransfer::isValid() const
 {
-  return true;
+  QSharedPointer<const germanOnlineTransfer::settings> settings = getSettings();
+  if ( settings->checkPurposeLength( _purpose ) == creditTransferSettingsBase::ok
+    && settings->checkPurposeMaxLines( _purpose )
+    && settings->checkPurposeLineLength( _purpose )
+    && settings->checkPurposeCharset( _purpose )
+    && settings->checkRecipientCharset( _remoteAccount.ownerName() )
+    //&& settings->checkNameLength( .ownerName() )
+    && settings->checkRecipientLength( _remoteAccount.ownerName()) == creditTransferSettingsBase::ok
+    && settings->checkRecipientAccountNumber( _remoteAccount.accountNumber() )
+    && settings->checkRecipientBankCode( _remoteAccount.bankCode() )
+    && value().isPositive()
+  )
+    return true;
+  return false;
 }
 
 /** @todo make alive */
@@ -113,35 +126,14 @@ void germanOnlineTransfer::convert(const onlineTask &task, QString& messageStrin
     payeeChanged = true;
     setValue( sepaTask.value() );
     _purpose = QString("");
-    if ( !sepaTask.reference().isEmpty() ) {
+    if ( !sepaTask.endToEndReference().isEmpty() ) {
       messageString = i18n("National credit transfer has no field for SEPA reference. It was added to the purpose instead.");
-      _purpose = sepaTask.reference() + QChar('\n');
+      _purpose = sepaTask.endToEndReference() + QChar('\n');
     }
     _purpose.append( sepaTask.purpose() );
     return;
   }
   throw new onlineTask::badConvert;
-}
-
-QValidator* germanOnlineTransfer::settings::purposeValidator(QObject *parent) const
-{
-  return new QRegExpValidator(QRegExp( QString("([A-Za-z0-9 \\.,&-/+*$%äöüß]{0,%1}\n){0,%2}([A-Z0-9 \\.,&-/+*$%äöüß]{0,%1})$")
-                                       .arg(purposeLineLength(), purposeMaxLines()-1) ),
-                              parent);
-}
-
-QValidator* germanOnlineTransfer::settings::payeeNameValidator(QObject *parent) const
-{
-  return new QRegExpValidator(QRegExp( QString("[A-Za-z0-9 \\.,&-/+*$%äöüß]{0,%1}$")
-                                       .arg(payeeNameLineLength())),
-                              parent);
-}
-
-QValidator* germanOnlineTransfer::settings::recipientNameValidator(QObject *parent) const
-{
-  return new QRegExpValidator(QRegExp( QString("[A-Za-z0-9 \\.,&-/+*$%äöüß]{0,%1}$")
-                                       .arg(recipientNameLineLength())),
-                              parent);
 }
 
 QSharedPointer<const germanOnlineTransfer::settings> germanOnlineTransfer::getSettings() const

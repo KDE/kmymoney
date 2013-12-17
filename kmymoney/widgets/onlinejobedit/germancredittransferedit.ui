@@ -14,6 +14,33 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Beneficiary Name</string>
+     </property>
+     <property name="buddy">
+      <cstring>beneficiaryName</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="3">
+    <widget class="KLineEdit" name="beneficiaryName"/>
+   </item>
+   <item row="1" column="3">
+    <widget class="KLed" name="statusBeneficiaryName">
+     <property name="state">
+      <enum>KLed::On</enum>
+     </property>
+     <property name="color">
+      <color>
+       <red>160</red>
+       <green>160</green>
+       <blue>160</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
@@ -24,7 +51,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
+   <item row="2" column="2">
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>Bank Identifier</string>
@@ -38,9 +65,37 @@
     <widget class="KLineEdit" name="beneficiaryAccNum"/>
    </item>
    <item row="3" column="1">
+    <widget class="KLed" name="statusAccountNumber">
+     <property name="state">
+      <enum>KLed::On</enum>
+     </property>
+     <property name="color">
+      <color>
+       <red>160</red>
+       <green>160</green>
+       <blue>160</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
     <widget class="KLineEdit" name="beneficiaryBankCode"/>
    </item>
-   <item row="4" column="0" colspan="2">
+   <item row="3" column="3">
+    <widget class="KLed" name="statusBankIdentifier">
+     <property name="state">
+      <enum>KLed::On</enum>
+     </property>
+     <property name="color">
+      <color>
+       <red>160</red>
+       <green>160</green>
+       <blue>160</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
     <widget class="QLabel" name="label_5">
      <property name="text">
       <string>Bank Name</string>
@@ -50,7 +105,7 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="0" colspan="2">
+   <item row="5" column="0" colspan="3">
     <widget class="KLineEdit" name="beneficiaryBankName">
      <property name="focusPolicy">
       <enum>Qt::ClickFocus</enum>
@@ -58,9 +113,26 @@
      <property name="readOnly">
       <bool>true</bool>
      </property>
+     <property name="clickMessage">
+      <string>Will be filled in automatically</string>
+     </property>
     </widget>
    </item>
-   <item row="6" column="0" colspan="2">
+   <item row="5" column="3">
+    <widget class="KLed" name="statusBankName">
+     <property name="state">
+      <enum>KLed::On</enum>
+     </property>
+     <property name="color">
+      <color>
+       <red>160</red>
+       <green>160</green>
+       <blue>160</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="3">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="label_7">
@@ -91,6 +163,20 @@
      </item>
     </layout>
    </item>
+   <item row="6" column="3">
+    <widget class="KLed" name="statusAmount">
+     <property name="state">
+      <enum>KLed::On</enum>
+     </property>
+     <property name="color">
+      <color>
+       <red>160</red>
+       <green>160</green>
+       <blue>160</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
    <item row="7" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
@@ -101,8 +187,22 @@
      </property>
     </widget>
    </item>
-   <item row="8" column="0" colspan="2">
-    <widget class="KTextEdit" name="transferPurpose">
+   <item row="7" column="3">
+    <widget class="KLed" name="statusPurpose">
+     <property name="state">
+      <enum>KLed::On</enum>
+     </property>
+     <property name="color">
+      <color>
+       <red>160</red>
+       <green>160</green>
+       <blue>160</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0" colspan="4">
+    <widget class="KMyMoneyTextEdit" name="transferPurpose">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -127,22 +227,6 @@
      <property name="acceptRichText">
       <bool>false</bool>
      </property>
-     <property name="checkSpellingEnabled">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="KLineEdit" name="beneficiaryName"/>
-   </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Beneficiary Name</string>
-     </property>
-     <property name="buddy">
-      <cstring>beneficiaryName</cstring>
-     </property>
     </widget>
    </item>
   </layout>
@@ -160,9 +244,14 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KTextEdit</class>
+   <class>KLed</class>
+   <extends>QWidget</extends>
+   <header>kled.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyTextEdit</class>
    <extends>QTextEdit</extends>
-   <header>ktextedit.h</header>
+   <header>kmymoneytextedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

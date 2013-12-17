@@ -51,11 +51,11 @@ public:
     
 
 signals:
-  /** @brief The user wants this job to be queued */
-  void acceptedForQueue( onlineJob );
+  /** @brief The user wants this job to be saved */
+  void acceptedForSave( onlineJob );
 
-  /** @brief User want to save onlineJob in drafts */
-  void acceptedForDraft( onlineJob );
+  /** @brief User wants to send the onlineJob directly */
+  void acceptedForSend( onlineJob );
   
 public slots:
   /** @brief Show form for sepa credit-transfer */
@@ -91,10 +91,16 @@ public slots:
    * @return true if setting was possible (here it is always true)
    */
   virtual bool setOnlineJob( const onlineJobKnownTask<sepaOnlineTransfer> );
-    
+
 private slots:
   /** @brief Slot for account selection box */
   void accountChanged();
+
+  /** @brief Slot for send button */
+  void sendJob();
+
+  /** @brief Called when the onlineJob of an sub-widged was changed */
+  void jobChanged();
 
 private:
   size_t m_activeTransferType;

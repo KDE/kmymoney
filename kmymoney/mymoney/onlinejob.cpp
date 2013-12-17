@@ -172,3 +172,10 @@ void onlineJob::writeXML(QDomDocument &document, QDomElement &parent) const
   Q_UNUSED(parent);
 }
 
+bool onlineJob::isValid() const
+{
+    if ( m_task != 0 )
+        return m_task->isValid();
+    return false;
+}
+

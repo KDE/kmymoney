@@ -56,10 +56,13 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   connect(ui->radioTransferNational, SIGNAL(toggled(bool)), this, SLOT(activateGermanTransfer(bool)));
   connect(ui->radioTransferSepa, SIGNAL(toggled(bool)), this, SLOT(activateSepaTransfer(bool)));
 
-  connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-
+  connect(ui->buttonAbort, SIGNAL(clicked(bool)), this, SLOT(reject()));
+  connect(ui->buttonSend, SIGNAL(clicked(bool)), this, SLOT(sendJob()));
+  connect(ui->buttonEnque, SIGNAL(clicked(bool)), this, SLOT(accept()));
+  
   connect(ui->orderAccount, SIGNAL(currentIndexChanged(int)), this, SLOT(accountChanged()));
+  
+  connect(ui->sepaPage, SIGNAL(onlineJobChanged()), this, SLOT(jobChanged()));
 }
 
 onlineJobKnownTask<onlineTransfer> kOnlineTransferForm::activeOnlineJob() const
@@ -107,9 +110,16 @@ void kOnlineTransferForm::activateGermanTransfer( bool active )
 
 void kOnlineTransferForm::accept()
 {
-  emit acceptedForQueue( activeOnlineJob() );
+  emit acceptedForSave( activeOnlineJob() );
   QDialog::accept();
 }
+
+void kOnlineTransferForm::sendJob()
+{
+    emit acceptedForSend( activeOnlineJob() );
+    QDialog::accept();
+}
+
 
 void kOnlineTransferForm::reject()
 {
@@ -195,4 +205,12 @@ void kOnlineTransferForm::setTransferWidget(const size_t& onlineTaskHash)
 kOnlineTransferForm::~kOnlineTransferForm()
 {
   delete ui;
+}
+
+void kOnlineTransferForm::jobChanged()
+{
+    if (activeOnlineJob().isValid())
+        ui->buttonSend->setEnabled( true );
+    else
+        ui->buttonSend->setEnabled( false );
 }

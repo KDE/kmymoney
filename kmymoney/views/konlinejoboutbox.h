@@ -21,6 +21,7 @@ public:
 signals:
   void sendJobs( QList<onlineJob> );
   void editJob( QString );
+  void newCreditTransfer();
     
 private:
   Ui::KOnlineJobOutbox *ui;

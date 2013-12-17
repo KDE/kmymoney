@@ -35,6 +35,7 @@ SET(kmm_mymoney_LIB_SRCS
   onlinejobfolder.cpp
   germanonlinetransfer.cpp
   sepaonlinetransfer.cpp
+  credittransfersettingsbase.cpp
   )
 
 

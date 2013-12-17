@@ -33,10 +33,13 @@ private:
     onlineJobKnownTask<germanOnlineTransfer> m_germanCreditTransfer;
 
 private slots:
-    void beneficiaryNameChanged( QString );
+    void beneficiaryNameChanged( const QString& );
+    void beneficiaryAccountChanged( const QString& );
     void beneficiaryBankCodeChanged( QString );
-    void valueChanged( MyMoneyMoney );
-    void purposeChanged( QString );
+    void valueChanged();
+    void purposeChanged();
+    
+    void updateEveryStatus();
     void updateTaskSettings();
 };
 

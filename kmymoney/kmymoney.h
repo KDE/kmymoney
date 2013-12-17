@@ -467,12 +467,12 @@ protected slots:
   /**
    * @brief Saves an online banking job
    */
-  void slotSaveOnlineJob(onlineJob job);
+  void slotOnlineJobSave(onlineJob job);
 
   /**
    * @brief Queue an online banking job
    */
-  void slotOnlineJobEnqueue(onlineJob job);
+  void slotOnlineJobSend(onlineJob job);
 
   /**
    * @brief Send a list of onlineJobs

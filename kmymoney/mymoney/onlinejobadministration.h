@@ -20,15 +20,15 @@ namespace KMyMoneyPlugin {
 }
 
 /**
- * @brief Getter for onlineJobs
+ * @brief Connection between KMyMoney and the plugins
  *
  * It's main task is the communication with plugins
- * and chaching of thier information during run-time.
+ * and caching thier information during run-time. During
+ * sending this class selects the correct plugin for each
+ * onlineJob.
  *
  * This class keeps an overview which account can handle which jobs and
  * offers methods to access these information.
- *
- * It does not handle onlineJobs which where edited by the user.
  *
  * onlineJobAdministration is created with singleton pattern. Get the
  * instance with @ref onlineJobAdministration::instance() .
@@ -59,7 +59,7 @@ public:
    * @brief Request onlineTask::settings from plugin
    *
    * @return QSharedPointer to settings from plugin or settings with default values if error occours
-   * (never QSharedPointer::isNull() == true)
+   * (so you never get QSharedPointer::isNull() == true)
    */
   template<class T>
   QSharedPointer<const T> taskSettings( const QString& taskName, const QString& accountId ) const;

@@ -91,7 +91,11 @@ friend class onlineJobAdministration
 /**
  * @brief The onlineTask class
  *
+ * Everything an onlinePlugin can do is represented as a task. An onlineTask should not be alone but be
+ * assigned to an onlineJob instead.
+ * 
  * @important Do not delete onlineTasks or use pointers to onlineTasks directly. Use onlineJob instead!
+ * This prevents common C++ pitfalls.
  * 
  * If you inherit onlineTask, take care of clone() and \ref onlineTaskMeta.
  * Maybe you want to look at @ref onlineTask::settings as well.
@@ -104,6 +108,9 @@ public:
   onlineTask();
   virtual ~onlineTask() {}
 
+  /**
+   * @brief Checks if the task is ready for sending
+   */
   virtual bool isValid() const = 0;
 
   /**
@@ -112,7 +119,9 @@ public:
   virtual QString jobTypeName() const = 0;
 
   /**
-   * @brief
+   * @brief Type of convertion
+   * 
+   * Used by canConvert().
    */
   enum convertType {
     convertImpossible = 0, /**< Convert operation is not possible */
@@ -125,7 +134,7 @@ public:
    *
    * Many onlineTasks settings vary due to multiple reasons. E.g.
    * a credit transfer could have a maximum amount it can transfer at
-   * once. But this amount could depends on the account and the users
+   * once. But this amount could depend on the account and the users
    * contract with the bank.
    *
    * Therefor onlineTasks can offer thier own set of configurations. There
@@ -166,7 +175,9 @@ protected:
    */
   virtual onlineTask* clone() const = 0;
 
+  /** @see MyMoneyObject::hasReferenceTo() */
   virtual bool hasReferenceTo(const QString &id) const = 0;
+  /** @see MyMoneyObject::writeXML() */
   virtual void writeXML(QDomDocument &document, QDomElement &parent) const = 0;
   
   /**
@@ -183,16 +194,16 @@ protected:
   virtual QString responsibleAccount() const = 0;
 
   /**
-   * @brief Checks if this onlineTask can be converted into
+   * @brief Checks if this onlineTask can be converted into onlineTaskName
+   * 
    * @param onlineTaskName onlineTask::name() to convert into
-   * @return
    */
   virtual convertType canConvertInto( const QString& onlineTaskName ) const = 0;
 
   /**
    * @brief Checks if another onlineTask can be copied into this one
+   * 
    * @param onlineTaskName onlineTask::name() of source
-   * @return
    */
   virtual convertType canConvert( const QString& onlineTaskName ) const = 0;
 
@@ -200,7 +211,8 @@ protected:
    * @brief Creates another onlineTask based on it's own data
    *
    * @param onlineTaskName onlineTask::name() to convert into
-   * @param messageString OUT a translated string with description which data was lost during convertion (not needed if only payeeChanged applies)
+   * @param messageString OUT a translated string with description which data was lost during convertion (not needed if only payeeChanged applies).
+   * This string is shown by the ui to the user.
    * @param payeeChanged OUT true if the address book was used to change any beneficiary data
    * @return newly created onlineTask, caller gains ownership of this task
    *
@@ -211,10 +223,11 @@ protected:
   /**
    * @brief Replaces it's own data with the data of another task
    *
-   * This is similar to operatior= ( other type )
+   * This is similar to operatior= ( other type ). But can be lossy.
    *
    * @param task to convert (do not modify pointer!)
-   * @param messageString OUT a translated string with description which data was lost during convertion (not needed if only payeeChanged applies)
+   * @param messageString OUT a translated string with description which data was lost during convertion (not needed if only payeeChanged applies).
+   * This string is shown by the ui to the user.
    * @param payeeChanged OUT true if the address book was used to change any beneficiary data
    *
    * @throws badConvert if convert is not possible

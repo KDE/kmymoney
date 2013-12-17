@@ -794,11 +794,34 @@ onlineJobKnownTask<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJo
 
   // Recipient
   sepaAccountIdentifier beneficiaryAcc = job.constTask()->getRecipient();
-  AB_Transaction_SetRemoteAccount(AbTransaction, beneficiaryAcc);
+  AB_Transaction_SetRemoteName( AbTransaction, GWEN_StringList_fromQString(beneficiaryAcc.ownerName()) );
+  AB_Transaction_SetRemoteIban( AbTransaction, beneficiaryAcc.accountNumber().toUtf8().constData() );
+  AB_Transaction_SetRemoteBic(  AbTransaction, beneficiaryAcc.bankCode().toUtf8().constData() );
 
   // Origin Account
-  //sepaAccountIdentifier *localAcc = transaction->originAccountIdentifier();
-  //AB_Transaction_SetLocalAccount(AbTransaction, localACC);
+  sepaAccountIdentifier localAcc;
+  MyMoneyAccount account = job.responsibleMyMoneyAccount();
+  QString accountNumber = account.number();
+  localAcc.setAccountNumber( accountNumber.remove(QRegExp("\\s")) );
+  QString sortCode = MyMoneyFile::instance()->institution( account.institutionId() ).sortcode();
+  localAcc.setBankCode( sortCode.remove(QRegExp("\\s")) );
+  localAcc.setOwnerName( MyMoneyFile::instance()->user().name() );
+  
+  QString iban = account.value("iban");
+  QString bic = MyMoneyFile::instance()->institution( account.institutionId() ).value("bic");
+  AB_Transaction_SetLocalIban( AbTransaction, iban.remove(QRegExp("\\s")).toUtf8().constData() );
+  AB_Transaction_SetLocalBic( AbTransaction, bic.remove(QRegExp("\\s")).toUtf8().constData() );
+  
+  qDebug() << "Set origin account to" << accountNumber.remove(QRegExp("\\s")) << "at" << sortCode.remove(QRegExp("\\s"));
+  
+  if (!localAcc.isValid()) {
+    job.addJobMessage(onlineJobMessage(onlineJobMessage::error, "KBanking",
+                                       QString("Sepa account information for \"%1\" are not valid.").arg(MyMoneyFile::instance()->account(accId).name(), rv)
+                                       )
+                     );
+    return job;
+  }
+  AB_Transaction_SetLocalAccount(AbTransaction, localAcc);
 
   // Purpose
   QStringList qPurpose = job.constTask()->purpose().split('\n');

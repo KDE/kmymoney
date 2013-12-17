@@ -1,11 +1,32 @@
+/*
+  This file is part of KMyMoney, A Personal Finance Manager for KDE
+  Copyright (C) 2013 Christian Dávid <christian-david@web.de>
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #ifndef SEPAONLINETRANSFER_H
 #define SEPAONLINETRANSFER_H
 
 #include "onlinetransfer.h"
 
+#include <algorithm>
+
 #include <klocalizedstring.h>
 
 #include "swiftaccountidentifier.h"
+#include "credittransfersettingsbase.h"
 
 /**
  * @brief SEPA Credit Transfer
@@ -29,8 +50,8 @@ public:
   virtual void setPurpose( const QString purpose ) { _purpose = purpose; }
   QString purpose() const { return _purpose; }
 
-  virtual void setReference( const QString& reference ) { _reference = reference; }
-  QString reference() const { return _reference; }
+  virtual void setEndToEndReference( const QString& reference ) { _endToEndReference = reference; }
+  QString endToEndReference() const { return _endToEndReference; }
 
   /**
    * @brief Returns the origin account identifier
@@ -50,23 +71,34 @@ public:
   unsigned short int textKey() const { return _textKey; }
   unsigned short int subTextKey() const { return _subTextKey; }
 
-  class settings : public onlineTask::settings
+  class settings : public creditTransferSettingsBase
   {
   public:
-    /** @brief number of lines allowed in purpose */
-    int purposeMaxLines;
-    /** @brief number of chars allowed in each purpose line */
-    int purposeLineLength;
-    /** @brief number of lines allowed for recipient name */
-    int recipientNameMaxLines;
-    /** @brief number of chars allowed in each recipient line */
-    int recipientNameLength;
-    /** @brief number of lines allowed for payee name */
-    int payeeNameMaxLines;
-    /** @brief number of chars allowed in each payee line */
-    int payeeNameLength;
+    int endToEndReferenceLength() const { return m_endToEndReferenceLength; }
+    void setEndToEndReferenceLength(const int& length) { m_endToEndReferenceLength = length; }
+    lengthStatus checkEndToEndReferenceLength(const QString& reference) const;
+    static bool isIbanValid( const QString& iban );
+    
+    bool checkRecipientBic( const QString& bic ) const
+    {
+      const int length = bic.length();
+      for (int i = 0; i < std::min(length, 6); ++i) {
+        if ( !bic.at(i).isLetter() )
+          return false;
+      }
+      for (int i = 6; i < length; ++i) {
+        if ( !bic.at(i).isLetterOrNumber() )
+          return false;
+      }
+   
+      if (length == 11 || length == 8)
+        return true;
+      return false;
+    }
+    
+  private:
     /** @brief Number of chars allowed for sepa reference */
-    int referenceLength;
+    int m_endToEndReferenceLength;
   };
 
   QSharedPointer<const settings> getSettings() const;
@@ -85,7 +117,7 @@ private:
   QString _originAccount;
   MyMoneyMoney _value;
   QString _purpose;
-  QString _reference;
+  QString _endToEndReference;
 
   sepaAccountIdentifier _remoteAccount;
 

@@ -19,6 +19,9 @@ public:
   ~sepaCreditTransferEdit();
   onlineJobKnownTask<sepaOnlineTransfer> getOnlineJob() const;
 
+signals:
+  void onlineJobChanged();
+  
 public slots:
   void setOnlineJob( const onlineJobKnownTask<sepaOnlineTransfer> &job );
   void setOnlineJob( const onlineJob& job );
@@ -26,6 +29,19 @@ public slots:
 
 private slots:
   void updateSettings();
+  void updateEveryStatus();
+  
+  /** @{
+   * These slots are called when the corosponding field is changed
+   * to start the validation
+   */
+  void purposeChanged();
+  void beneficiaryIbanChanged( const QString& iban );
+  void beneficiaryNameChanged( const QString& name );
+  void beneficiaryBicChanged( const QString& bic );
+  void valueChanged();
+  void endToEndReferenceChanged( const QString& reference );
+  /** @} */
 
 private:
   Ui::sepaCreditTransferEdit *ui;

@@ -303,6 +303,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_onlineJobOutboxViewFrame->setIcon(KIcon("online-banking"));
   connect( m_onlineJobOutboxView, SIGNAL(sendJobs(QList<onlineJob>)), kmymoney, SLOT( slotOnlineJobSend( QList< onlineJob > ) ));
   connect( m_onlineJobOutboxView, SIGNAL(editJob(QString)), kmymoney, SLOT(slotEditOnlineJob(QString)) );
+  connect( m_onlineJobOutboxView, SIGNAL(newCreditTransfer()), kmymoney, SLOT(slotNewOnlineTransfer()) );
   /** @todo do I need aboutToShow()? in kmymoneyview */
 
   //set the model

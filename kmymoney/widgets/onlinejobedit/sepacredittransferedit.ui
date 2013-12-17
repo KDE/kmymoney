@@ -14,44 +14,22 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" colspan="2">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Beneficiary Name</string>
+   <item row="3" column="2">
+    <widget class="KLed" name="statusIban">
+     <property name="state">
+      <enum>KLed::On</enum>
      </property>
-     <property name="buddy">
-      <cstring>beneficiaryName</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="KLineEdit" name="beneficiaryName"/>
-   </item>
-   <item row="2" column="0" colspan="2">
-    <widget class="QLabel" name="label_iban">
-     <property name="text">
-      <string>IBAN</string>
-     </property>
-     <property name="buddy">
-      <cstring>beneficiaryAccNum</cstring>
+     <property name="color">
+      <color>
+       <red>255</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
      </property>
     </widget>
    </item>
    <item row="3" column="0" colspan="2">
     <widget class="KLineEdit" name="beneficiaryAccNum"/>
-   </item>
-   <item row="4" column="0" colspan="2">
-    <widget class="QLabel" name="label_bic">
-     <property name="text">
-      <string>BIC</string>
-     </property>
-     <property name="buddy">
-      <cstring>beneficiaryBankCode</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="2">
-    <widget class="KLineEdit" name="beneficiaryBankCode"/>
    </item>
    <item row="6" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -84,18 +62,22 @@
      </item>
     </layout>
    </item>
-   <item row="7" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Reference</string>
-     </property>
-     <property name="buddy">
-      <cstring>sepaReference</cstring>
-     </property>
-    </widget>
-   </item>
    <item row="7" column="1">
     <widget class="KLineEdit" name="sepaReference"/>
+   </item>
+   <item row="7" column="2">
+    <widget class="KLed" name="statusReference">
+     <property name="state">
+      <enum>KLed::On</enum>
+     </property>
+     <property name="color">
+      <color>
+       <red>255</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
    </item>
    <item row="8" column="0">
     <widget class="QLabel" name="label_4">
@@ -107,8 +89,73 @@
      </property>
     </widget>
    </item>
-   <item row="9" column="0" colspan="2">
-    <widget class="KTextEdit" name="purpose">
+   <item row="6" column="2">
+    <widget class="KLed" name="statusAmount">
+     <property name="state">
+      <enum>KLed::On</enum>
+     </property>
+     <property name="color">
+      <color>
+       <red>255</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_iban">
+     <property name="text">
+      <string>IBAN</string>
+     </property>
+     <property name="buddy">
+      <cstring>beneficiaryAccNum</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="KLed" name="statusBic">
+     <property name="state">
+      <enum>KLed::On</enum>
+     </property>
+     <property name="color">
+      <color>
+       <red>255</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="KLineEdit" name="beneficiaryBankCode"/>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Reference</string>
+     </property>
+     <property name="buddy">
+      <cstring>sepaReference</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="2">
+    <widget class="KLed" name="statusPurpose">
+     <property name="state">
+      <enum>KLed::On</enum>
+     </property>
+     <property name="color">
+      <color>
+       <red>255</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0" colspan="3">
+    <widget class="KMyMoneyTextEdit" name="purpose">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -133,8 +180,42 @@
      <property name="acceptRichText">
       <bool>false</bool>
      </property>
-     <property name="checkSpellingEnabled">
-      <bool>true</bool>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="KLineEdit" name="beneficiaryName"/>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Beneficiary Name</string>
+     </property>
+     <property name="buddy">
+      <cstring>beneficiaryName</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="KLed" name="statusBeneficiaryName">
+     <property name="state">
+      <enum>KLed::On</enum>
+     </property>
+     <property name="color">
+      <color>
+       <red>255</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_bic">
+     <property name="text">
+      <string>BIC</string>
+     </property>
+     <property name="buddy">
+      <cstring>beneficiaryBankCode</cstring>
      </property>
     </widget>
    </item>
@@ -149,6 +230,12 @@
   <zorder>label_bic</zorder>
   <zorder>label_iban</zorder>
   <zorder>beneficiaryBankCode</zorder>
+  <zorder>statusPurpose</zorder>
+  <zorder>statusReference</zorder>
+  <zorder>statusAmount</zorder>
+  <zorder>statusBic</zorder>
+  <zorder>statusIban</zorder>
+  <zorder>statusBeneficiaryName</zorder>
  </widget>
  <customwidgets>
   <customwidget>
@@ -163,11 +250,23 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KTextEdit</class>
+   <class>KLed</class>
+   <extends>QWidget</extends>
+   <header>kled.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyTextEdit</class>
    <extends>QTextEdit</extends>
-   <header>ktextedit.h</header>
+   <header>kmymoneytextedit.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>beneficiaryName</tabstop>
+  <tabstop>beneficiaryAccNum</tabstop>
+  <tabstop>beneficiaryBankCode</tabstop>
+  <tabstop>sepaReference</tabstop>
+  <tabstop>purpose</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -22,6 +22,7 @@ KOnlineJobOutbox::KOnlineJobOutbox(QWidget *parent) :
     connect(ui->m_buttonRemove, SIGNAL(clicked()), this, SLOT( slotRemoveJob() ));
     connect(ui->m_buttonEdit, SIGNAL(clicked()), this, SLOT( slotEditJob() ));
     connect(ui->m_onlineJobView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotEditJob(QModelIndex)));
+    connect(ui->m_buttonNewCreditTransfer, SIGNAL(clicked()), this, SIGNAL(newCreditTransfer()));
 }
 
 KOnlineJobOutbox::~KOnlineJobOutbox()
@@ -37,9 +38,13 @@ KOnlineJobOutbox::~KOnlineJobOutbox()
  */
 void KOnlineJobOutbox::slotRemoveJob()
 {
+  QModelIndexList indexes = ui->m_onlineJobView->selectionModel()->selectedIndexes();
+
+  if (indexes.isEmpty())
+    return;
+
   QStringList jobIds;
   QAbstractItemModel* model = ui->m_onlineJobView->model();
-  QModelIndexList indexes = ui->m_onlineJobView->selectionModel()->selectedIndexes();
 
   foreach(QModelIndex index, indexes) {
     QString jobId = model->data(index, onlineJobModel::OnlineJobId).toString();
@@ -56,20 +61,18 @@ void KOnlineJobOutbox::slotRemoveJob()
 
 void KOnlineJobOutbox::slotSendJobs()
 {
-  QList<onlineJob> list;
-  foreach (const onlineJob job, MyMoneyFile::instance()->onlineJobList())
-    list.append(job);
-
-  qDebug() << "I shall send " << list.count() << " onlineJobs";
-  emit sendJobs( list );
+  qDebug() << "I shall send " << MyMoneyFile::instance()->onlineJobList().count() << " onlineJobs";
+  emit sendJobs( MyMoneyFile::instance()->onlineJobList() );
 }
 
 void KOnlineJobOutbox::slotEditJob()
 {
   QModelIndexList indexes = ui->m_onlineJobView->selectionModel()->selectedIndexes();
-  QString jobId = ui->m_onlineJobView->model()->data(indexes.first(), onlineJobModel::OnlineJobId).toString();
-  Q_ASSERT( !jobId.isEmpty() );
-  emit editJob(jobId);
+  if (!indexes.isEmpty()) {
+    QString jobId = ui->m_onlineJobView->model()->data(indexes.first(), onlineJobModel::OnlineJobId).toString();
+    Q_ASSERT( !jobId.isEmpty() );
+    emit editJob(jobId);
+  }
 }
 
 void KOnlineJobOutbox::slotEditJob(const QModelIndex &index)
