@@ -37,9 +37,6 @@ namespace Ui {
 
 /**
  * @brief The kOnlineTransferForm class
- *
- * @bug limit max number of lines in purpose
- * @todo LOW add an mecanism for messages from plugin (eg. warnings or errors which are hard to handle)
  */
 class kOnlineTransferForm : public QDialog
 {

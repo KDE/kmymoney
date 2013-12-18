@@ -126,13 +126,6 @@ bool onlineJobModel::removeRow(int row, const QModelIndex& parent)
   return true;
 }
 
-/**
- * @bug Reroduce: create two onlineJobs, select one in outbox, click remove. => exeption is thrown due to rollback.
- * My debugger says ft.commit() calls MyMoneyFileTransaction::rollback() after a successfull commit (confusing, I guess the debbuger is not
- * trustworsthy).
- * Strange: on my system an exeption is thrown. But in main.cpp:184 KMyMoney crashes anyway (-> exeption pointer drangling???)
- * If I prevent data() to 
- */
 bool onlineJobModel::removeRows( int row, int count, const QModelIndex & parent )
 { 
   if (parent.isValid())
