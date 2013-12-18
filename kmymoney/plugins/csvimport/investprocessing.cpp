@@ -1329,6 +1329,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
         name = m_columnList[m_detailColumn].toLower();
       }
 
+      m_trInvestData.symbol = symbol;
       m_trInvestData.security = name;
     }
 
@@ -1384,11 +1385,15 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
   //
   //  A brokerage type could have been changed in m_redefine->checkValid() above, so no longer brokerage.
   //
-  if ((m_trInvestData.type == "buy") || (m_trInvestData.type == "sell") || (m_trInvestData.type == "reinvdiv") ||
-      (m_trInvestData.type == "divx") || (m_trInvestData.type == "intinc") ||
-      (m_trInvestData.type == "shrsin") || (m_trInvestData.type == "shrsout")) {
+  if ((m_trInvestData.type == "buy") || (m_trInvestData.type == "sell") ||
+      (m_trInvestData.type == "divx") || (m_trInvestData.type == "intinc")) {
+    if (m_redefine->accountName().isEmpty()) {
+        m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:")));
+    }
     m_trInvestData.brokerageAccnt = m_redefine->accountName();
     m_tempBuffer +=  "L[" + m_redefine->accountName() + ']' + '\n';
+    m_brokerage = false;
+  } else if ((m_trInvestData.type == "reinvdiv") || (m_trInvestData.type == "shrsin") || (m_trInvestData.type == "shrsout")) {
     m_brokerage = false;
   }
 
@@ -1574,7 +1579,6 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
   QList<MyMoneyStatement::Security>::const_iterator it_s = m_listSecurities.constBegin();
   while (it_s != m_listSecurities.constEnd()) {
     st.m_listSecurities << (*it_s);
-    tr.m_strSymbol = (*it_s).m_strSymbol;
     ++it_s;
   }
 
@@ -1610,6 +1614,7 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
   s2.m_amount = MyMoneyMoney(-s1.m_amount);
   tr.m_strInterestCategory = m_csvSplit.m_strCategoryName;
   tr.m_strSecurity = m_trInvestData.security;
+  tr.m_strSymbol = m_trInvestData.symbol;
 
   s2.m_accountId = checkCategory(m_csvSplit.m_strCategoryName, s1.m_amount, s2.m_amount);
   if ((tr.m_eAction == (MyMoneyStatement::Transaction::eaCashDividend)) ||

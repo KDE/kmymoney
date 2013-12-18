@@ -565,6 +565,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     if (brokerageactid.isEmpty()) {
       brokerageactid = file->nameToAccount(statementTransactionUnderImport.m_strBrokerageAccount);
     }
+    if (brokerageactid.isEmpty()) {
+       brokerageactid = file->nameToAccount(thisaccount.brokerageName());
+     }
 
     // find the security transacted, UNLESS this transaction didn't
     // involve any security.
@@ -630,7 +633,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
           QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
           while (it != list.constEnd() && security.id().isEmpty()) {
-            if (statementTransactionUnderImport.m_strSecurity.toLower() == (*it).tradingSymbol().toLower()
+            if (statementTransactionUnderImport.m_strSymbol.toLower() == (*it).tradingSymbol().toLower()
                 || statementTransactionUnderImport.m_strSecurity.toLower() == (*it).name().toLower()) {
               security = *it;
             }
@@ -1016,9 +1019,6 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s.setValue(-s1.value());
         s.setAccountId(payeeObj.defaultAccountId());
         transactionUnderImport.addSplit(s);
-        MyMoneyFile* file = MyMoneyFile::instance();
-        MyMoneyAccount category = file->account(payeeObj.defaultAccountId());
-        file->addVATSplit(transactionUnderImport, m_account, category, statementTransactionUnderImport.m_amount);
       } else if (statementTransactionUnderImport.m_listSplits.isEmpty() && !d->m_skipCategoryMatching) {
         MyMoneyTransactionFilter filter(thisaccount.id());
         filter.addPayee(payeeid);
@@ -1091,7 +1091,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
   // Add the 'account' split if it's needed
   if (! transfervalue.isZero()) {
     // in case the transaction has a reference to the brokerage account, we use it
-    if (!statementTransactionUnderImport.m_strBrokerageAccount.isEmpty()) {
+    // but if brokerageactid has already been set, keep that.
+    if (!statementTransactionUnderImport.m_strBrokerageAccount.isEmpty() && brokerageactid.isEmpty()) {
       brokerageactid = file->nameToAccount(statementTransactionUnderImport.m_strBrokerageAccount);
     }
     if (brokerageactid.isEmpty()) {
