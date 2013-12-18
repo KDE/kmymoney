@@ -30,32 +30,17 @@ KOnlineJobOutbox::~KOnlineJobOutbox()
     delete ui;
 }
 
-/**
- * @bug Reroduce: create two onlineJobs, select one in outbox, click remove. => exeption is thrown due to roleback.
- * My debugger says ft.commit() calls MyMoneyFileTransaction::roleback() after a successfull commit (confusing, I guess the debbuger is not
- * trustworsthy).
- * Strange: it my system an exeption is thrown. But in main.cpp:184 KMyMoney crashes anyway (-> exeption pointer drangling???)
- */
 void KOnlineJobOutbox::slotRemoveJob()
 {
-  QModelIndexList indexes = ui->m_onlineJobView->selectionModel()->selectedIndexes();
+  QModelIndexList indexes = ui->m_onlineJobView->selectionModel()->selectedRows();
 
   if (indexes.isEmpty())
     return;
 
-  QStringList jobIds;
   QAbstractItemModel* model = ui->m_onlineJobView->model();
-
-  foreach(QModelIndex index, indexes) {
-    QString jobId = model->data(index, onlineJobModel::OnlineJobId).toString();
-    if ( !jobIds.contains(jobId) )
-      jobIds.append( jobId );
-  }
-
-  if (!jobIds.empty()) {
-    MyMoneyFileTransaction ft;
-    MyMoneyFile::instance()->removeOnlineJob(jobIds);
-    ft.commit();
+  const int count = indexes.count();
+  for ( int i = count-1; i >= 0; --i ) {
+    model->removeRow( indexes.at(i).row() );
   }
 }
 

@@ -241,6 +241,13 @@ public:
 
   bool                   m_inTransaction;
   MyMoneySecurity        m_baseCurrency;
+  
+  /**
+   * @brief Cache for MyMoneyObjects
+   * 
+   * It is also used to emit the objectAdded() and objectModified() signals.
+   * => If one of these signals is used, you must use this cache.
+   */
   MyMoneyObjectContainer m_cache;
   MyMoneyPriceList       m_priceCache;
   MyMoneyBalanceCache    m_balanceCache;
@@ -2778,7 +2785,7 @@ void MyMoneyFile::modifyOnlineJob( const onlineJob job )
   d->checkTransaction(Q_FUNC_INFO);
   d->m_storage->modifyOnlineJob( job );
   d->m_changeSet += MyMoneyNotification(notifyModify, job);
-  d->addCacheNotification(job.id(), true);
+  d->addCacheNotification(job.id());
 }
 
 const onlineJob MyMoneyFile::getOnlineJob( const QString &jobId ) const
@@ -2813,6 +2820,7 @@ void MyMoneyFile::removeOnlineJob(const onlineJob& job)
     return;
   }
   d->addCacheNotification(job.id(), false);
+  d->m_cache.clear(job.id());
   d->m_changeSet += MyMoneyNotification(notifyRemove, job);
   d->m_storage->removeOnlineJob( job );
 }

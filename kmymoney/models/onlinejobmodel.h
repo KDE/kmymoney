@@ -11,7 +11,7 @@ class onlineJobModel : public QAbstractTableModel
     Q_OBJECT
 public:
   explicit onlineJobModel(QObject *parent = 0);
-
+  
   /**
    * @brief Item Data roles for onlineJobs
    * In addition to Qt::ItemDataRole
@@ -31,7 +31,9 @@ public:
   int columnCount(const QModelIndex & parent = QModelIndex()) const;
   QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
   QVariant headerData(int section, Qt::Orientation orientation , int role = Qt::DisplayRole) const;
-
+  bool removeRow( int row, const QModelIndex & parent = QModelIndex() );
+  bool removeRows ( int row, int count, const QModelIndex & parent = QModelIndex() );
+  
 signals:
     
 public slots:

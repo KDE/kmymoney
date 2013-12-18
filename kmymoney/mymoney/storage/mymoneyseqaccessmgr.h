@@ -1259,7 +1259,7 @@ private:
   MyMoneyMap<MyMoneySecurityPair, MyMoneyPriceEntries> m_priceList;
 
   /**
-    * A list containing all the onlineJobs information objects.
+    * A list containing all the onlineJob information objects.
     */
   MyMoneyMap<QString, onlineJob> m_onlineJobList;
 
