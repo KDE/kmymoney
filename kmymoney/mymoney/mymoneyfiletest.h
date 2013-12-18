@@ -94,7 +94,6 @@ private slots:
   void testAddOnlineJob();
   void testGetOnlineJob();
   void testRemoveOnlineJob();
-  void testRemoveOnlineJobs();
   void testRemoveLockedOnlineJob();
   void testOnlineJobRollback();
   void testModifyOnlineJob();

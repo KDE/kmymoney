@@ -2294,35 +2294,6 @@ void MyMoneyFileTest::testRemoveOnlineJob()
   QCOMPARE(m_valueChanged.count(), 0);
 }
 
-void MyMoneyFileTest::testRemoveOnlineJobs()
-{
-  // Add a onlineJob
-  onlineJob job(new germanOnlineTransfer());
-  onlineJob job2(new germanOnlineTransfer());
- 
-  MyMoneyFileTransaction ft;
-  m->addOnlineJob( job );
-  m->addOnlineJob( job2 );
-  ft.commit();
-  QCOMPARE(m_objectsAdded.count(), 2);
-  
-  QStringList jobIds = QStringList(job2.id());
-  
-  QCOMPARE(jobIds.length(), 1);
-  
-  clearObjectLists();
-
-  MyMoneyFileTransaction fileTransaction;
-  MyMoneyFile::instance()->removeOnlineJob(jobIds);
-  fileTransaction.commit();
-
-  QCOMPARE(m_objectsRemoved.count(), 1);
-  QCOMPARE(m_objectsAdded.count(), 0);
-  QCOMPARE(m_objectsModified.count(), 0);
-  QCOMPARE(m_balanceChanged.count(), 0);
-  QCOMPARE(m_valueChanged.count(), 0);
-}
-
 void MyMoneyFileTest::testOnlineJobRollback()
 {
   // Add a onlineJob

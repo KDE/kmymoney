@@ -12,7 +12,8 @@
 
 
 onlineJobModel::onlineJobModel(QObject *parent) :
-    QAbstractTableModel(parent)
+    QAbstractTableModel(parent),
+    m_jobIdList( QStringList() )
 {
   MyMoneyFile *file = MyMoneyFile::instance();
   connect(file, SIGNAL( objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const) ),
@@ -65,7 +66,15 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
   if (index.parent().isValid())
     return QVariant();
 
-  const onlineJob job = MyMoneyFile::instance()->getOnlineJob( m_jobIdList[index.row()] );
+  Q_ASSERT( m_jobIdList.length() > index.row() );
+  onlineJob job;
+  
+  try {
+    job = MyMoneyFile::instance()->getOnlineJob( m_jobIdList[index.row()] );
+  } catch (MyMoneyException* e) {
+    return QVariant();
+  }
+  
   Q_ASSERT( !job.isNull() );
 
   const onlineTransfer *transfer = dynamic_cast<const onlineTransfer*>(job.task());
@@ -103,6 +112,44 @@ void onlineJobModel::reloadAll()
   emit dataChanged(index(rowCount()-1, 0), index(rowCount()-1, columnCount()-1));
 }
 
+bool onlineJobModel::removeRow(int row, const QModelIndex& parent)
+{
+  if (parent.isValid())
+    return false;
+
+  Q_ASSERT( m_jobIdList.count() < row );  
+  MyMoneyFile* file = MyMoneyFile::instance();
+  MyMoneyFileTransaction transaction;
+  const onlineJob job = file->getOnlineJob( m_jobIdList[row] );
+  file->removeOnlineJob(job);
+  transaction.commit();
+  return true;
+}
+
+/**
+ * @bug Reroduce: create two onlineJobs, select one in outbox, click remove. => exeption is thrown due to rollback.
+ * My debugger says ft.commit() calls MyMoneyFileTransaction::rollback() after a successfull commit (confusing, I guess the debbuger is not
+ * trustworsthy).
+ * Strange: on my system an exeption is thrown. But in main.cpp:184 KMyMoney crashes anyway (-> exeption pointer drangling???)
+ * If I prevent data() to 
+ */
+bool onlineJobModel::removeRows( int row, int count, const QModelIndex & parent )
+{ 
+  if (parent.isValid())
+    return false;
+
+  Q_ASSERT( m_jobIdList.count() > row );
+  Q_ASSERT( m_jobIdList.count() >= (row+count) );
+  
+  MyMoneyFile* file = MyMoneyFile::instance();
+  MyMoneyFileTransaction transaction;
+  for( int i=0; i < count; ++i ) {
+    const onlineJob job = file->getOnlineJob( m_jobIdList[row+i] );
+    file->removeOnlineJob(job);
+  }
+  transaction.commit();
+  return true;
+}
 
 void onlineJobModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
 {
@@ -131,8 +178,8 @@ void onlineJobModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objType,
 
   int row = m_jobIdList.indexOf(id);
   if (row != -1) {
-    beginRemoveRows(QModelIndex(), row, row);
     m_jobIdList.removeAll(id);
+    beginRemoveRows(QModelIndex(), row, row);
     endRemoveRows();
     emit dataChanged(index(row, 0), index(row, columnCount()-1));
   }

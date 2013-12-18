@@ -35,9 +35,8 @@
 #include <mymoneytag.h>
 #include <mymoneyobject.h>
 #include <mymoneysecurity.h>
+#include <onlinejob.h>
 #include <imymoneystorage.h>
-
-class onlineJob;
 
 /**
   * @author Thomas Baumgart

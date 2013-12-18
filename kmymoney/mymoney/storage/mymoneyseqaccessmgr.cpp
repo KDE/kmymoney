@@ -87,11 +87,6 @@ MyMoneySeqAccessMgr::MyMoneySeqAccessMgr()
 
 MyMoneySeqAccessMgr::~MyMoneySeqAccessMgr()
 {
-  /* onlineJobs are stored as pointers */
-  //foreach( onlineJob* job, m_onlineJobList) {
-  //    delete job;
-  //}
-    //! @todo make lines above alive
 }
 
 MyMoneySeqAccessMgr const * MyMoneySeqAccessMgr::duplicate(void)
@@ -1977,7 +1972,7 @@ void MyMoneySeqAccessMgr::startTransaction(void)
   m_reportList.startTransaction(&m_nextReportID);
   m_budgetList.startTransaction(&m_nextBudgetID);
   m_priceList.startTransaction();
-  m_onlineJobList.startTransaction();
+  m_onlineJobList.startTransaction(&m_nextOnlineJobID);
 }
 
 bool MyMoneySeqAccessMgr::commitTransaction(void)
