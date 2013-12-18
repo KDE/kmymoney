@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "mymoney/onlinejobknowntask.h"
+#include "mymoney/onlinejobtyped.h"
 #include "mymoney/sepaonlinetransfer.h"
 
 namespace Ui {
@@ -17,13 +17,13 @@ class sepaCreditTransferEdit : public QWidget
 public:
   explicit sepaCreditTransferEdit(QWidget *parent = 0);
   ~sepaCreditTransferEdit();
-  onlineJobKnownTask<sepaOnlineTransfer> getOnlineJob() const;
+  onlineJobTyped<sepaOnlineTransfer> getOnlineJob() const;
 
 signals:
   void onlineJobChanged();
   
 public slots:
-  void setOnlineJob( const onlineJobKnownTask<sepaOnlineTransfer> &job );
+  void setOnlineJob( const onlineJobTyped<sepaOnlineTransfer> &job );
   void setOnlineJob( const onlineJob& job );
   void setOriginAccount(const QString& accountId );
 
@@ -45,7 +45,7 @@ private slots:
 
 private:
   Ui::sepaCreditTransferEdit *ui;
-  onlineJobKnownTask<sepaOnlineTransfer> m_onlineJob;
+  onlineJobTyped<sepaOnlineTransfer> m_onlineJob;
 };
 
 #endif // SEPACREDITTRANSFEREDIT_H

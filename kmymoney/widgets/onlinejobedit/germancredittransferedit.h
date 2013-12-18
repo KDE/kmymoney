@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "mymoney/onlinejobknowntask.h"
+#include "mymoney/onlinejobtyped.h"
 #include "mymoney/germanonlinetransfer.h"
 #include "mymoney/swiftaccountidentifier.h"
 
@@ -20,17 +20,17 @@ public:
   ~germanCreditTransferEdit();
 
   /** @brief Reads interface and creates an onlineJob */
-  onlineJobKnownTask<germanOnlineTransfer> getOnlineJob() const;
+  onlineJobTyped<germanOnlineTransfer> getOnlineJob() const;
 
 public slots:
     bool setOnlineJob( const onlineJob );
-    bool setOnlineJob( const onlineJobKnownTask<germanOnlineTransfer> );
+    bool setOnlineJob( const onlineJobTyped<germanOnlineTransfer> );
     void setOriginAccount( const QString& );
 
 private:
     QString m_originAccount;
     Ui::germanCreditTransferEdit *ui;
-    onlineJobKnownTask<germanOnlineTransfer> m_germanCreditTransfer;
+    onlineJobTyped<germanOnlineTransfer> m_germanCreditTransfer;
 
 private slots:
     void beneficiaryNameChanged( const QString& );

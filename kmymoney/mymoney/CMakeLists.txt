@@ -56,7 +56,7 @@ SET(mymoney_HEADERS kmm_mymoney_export.h
   swiftaccountidentifier.h
   onlinetransfer.h
   onlinejob.h
-  onlinejobknowntask.h
+  onlinejobtyped.h
   onlinejobmessage.h
   onlinejobfolder.h
   )
@@ -260,12 +260,12 @@ IF( KDE4_BUILD_TESTS )
   target_link_libraries( onlinejobadministrationtest kmm_mymoney kmm_storage ${target_link_libraries_test})
 
   # onlineJobKnownTask
-  set( onlinejobknowntasktest_SRCS onlinejobknowntasktest.cpp )
+  set( onlinejobtypedtest_SRCS onlinejobtypedtest.cpp )
 
-  kde4_add_unit_test( onlinejobknowntasktest TESTNAME kmymoney-onlinejobknowntasktest ${onlinejobknowntasktest_SRCS} )
+  kde4_add_unit_test( onlinejobtypedtest TESTNAME kmymoney-onlinejobtypedtest ${onlinejobtypedtest_SRCS} )
   #ADD_DEPENDENCIES( onlinejobknowntasktest  )
 
-  target_link_libraries( onlinejobknowntasktest kmm_mymoney ${target_link_libraries_test})
+  target_link_libraries( onlinejobtypedtest kmm_mymoney ${target_link_libraries_test})
 
 
 ENDIF( KDE4_BUILD_TESTS )

@@ -617,9 +617,9 @@ QList<onlineJob> KBankingPlugin::sendOnlineJob(QList<onlineJob> jobs)
   if (jobs.size()) {
     foreach (onlineJob job, jobs) {
       if ( germanOnlineTransfer::hash == job.task()->taskHash() ) {
-        job = enqueTransaction( onlineJobKnownTask<germanOnlineTransfer>(job) );
+        job = enqueTransaction( onlineJobTyped<germanOnlineTransfer>(job) );
       } else if ( sepaOnlineTransfer::hash == job.task()->taskHash() ) {
-        job = enqueTransaction( onlineJobKnownTask<sepaOnlineTransfer>(job) );
+        job = enqueTransaction( onlineJobTyped<sepaOnlineTransfer>(job) );
       } else {
         job.addJobMessage( onlineJobMessage(onlineJobMessage::error, "KBanking", "Cannot handle this request" ) );
         return jobs;
@@ -707,7 +707,7 @@ QSharedPointer<const onlineTask::settings> KBankingPlugin::settings(QString acco
 }
 
 /** @todo make alive */
-onlineJobKnownTask<germanOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobKnownTask<germanOnlineTransfer> job)
+onlineJobTyped<germanOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyped<germanOnlineTransfer> job)
 {
   /* get AqBanking account */
   QString accId = job.task()->responsibleAccount();
@@ -763,7 +763,7 @@ onlineJobKnownTask<germanOnlineTransfer> KBankingPlugin::enqueTransaction(online
   return job;
 }
 
-onlineJobKnownTask<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobKnownTask<sepaOnlineTransfer> job)
+onlineJobTyped<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer> job)
 {
   /* get AqBanking account */
   const QString accId = job.constTask()->responsibleAccount();

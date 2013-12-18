@@ -8,7 +8,7 @@
 
 #include "mymoneyutils.h"
 #include "mymoney/onlinetransfer.h"
-#include "mymoney/onlinejobknowntask.h"
+#include "mymoney/onlinejobtyped.h"
 
 
 onlineJobModel::onlineJobModel(QObject *parent) :

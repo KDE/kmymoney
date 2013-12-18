@@ -65,7 +65,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   connect(ui->sepaPage, SIGNAL(onlineJobChanged()), this, SLOT(jobChanged()));
 }
 
-onlineJobKnownTask<onlineTransfer> kOnlineTransferForm::activeOnlineJob() const
+onlineJobTyped<onlineTransfer> kOnlineTransferForm::activeOnlineJob() const
 {
   if (m_activeTransferType == sepaOnlineTransfer::hash)
     return ui->sepaPage->getOnlineJob();
@@ -126,17 +126,17 @@ void kOnlineTransferForm::reject()
   QDialog::reject();
 }
 
-bool kOnlineTransferForm::setOnlineJob(const onlineJobKnownTask<onlineTransfer> transfer)
+bool kOnlineTransferForm::setOnlineJob(const onlineJobTyped<onlineTransfer> transfer)
 {
   if (transfer.task()->taskHash() == sepaOnlineTransfer::hash) {
-    return setOnlineJob( onlineJobKnownTask<sepaOnlineTransfer>( transfer ) );
+    return setOnlineJob( onlineJobTyped<sepaOnlineTransfer>( transfer ) );
   } else if ( transfer.task()->taskHash() == germanOnlineTransfer::hash ) {
-    return setOnlineJob( onlineJobKnownTask<germanOnlineTransfer>( transfer ));
+    return setOnlineJob( onlineJobTyped<germanOnlineTransfer>( transfer ));
   }
   return false;
 }
 
-bool kOnlineTransferForm::setOnlineJob(const onlineJobKnownTask<sepaOnlineTransfer> job)
+bool kOnlineTransferForm::setOnlineJob(const onlineJobTyped<sepaOnlineTransfer> job)
 {
   setCurrentAccount( job.responsibleAccount() );
   ui->sepaPage->setOnlineJob( job );
@@ -146,7 +146,7 @@ bool kOnlineTransferForm::setOnlineJob(const onlineJobKnownTask<sepaOnlineTransf
   return true;
 }
 
-bool kOnlineTransferForm::setOnlineJob(const onlineJobKnownTask<germanOnlineTransfer> job)
+bool kOnlineTransferForm::setOnlineJob(const onlineJobTyped<germanOnlineTransfer> job)
 {
   setCurrentAccount( job.responsibleAccount() );
   ui->germanPage->setOnlineJob( job );

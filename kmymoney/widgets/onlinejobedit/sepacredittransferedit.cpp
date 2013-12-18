@@ -25,7 +25,7 @@
 sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::sepaCreditTransferEdit),
-    m_onlineJob( onlineJobKnownTask<sepaOnlineTransfer>( new sepaOnlineTransfer ) )
+    m_onlineJob( onlineJobTyped<sepaOnlineTransfer>( new sepaOnlineTransfer ) )
 {
     ui->setupUi(this);
     
@@ -59,9 +59,9 @@ sepaCreditTransferEdit::~sepaCreditTransferEdit()
     delete ui;
 }
 
-onlineJobKnownTask<sepaOnlineTransfer> sepaCreditTransferEdit::getOnlineJob() const
+onlineJobTyped<sepaOnlineTransfer> sepaCreditTransferEdit::getOnlineJob() const
 {
-  onlineJobKnownTask<sepaOnlineTransfer> sepaJob( m_onlineJob );
+  onlineJobTyped<sepaOnlineTransfer> sepaJob( m_onlineJob );
 
   sepaJob.task()->setValue( ui->value->value() );
   sepaJob.task()->setPurpose( ui->purpose->toPlainText() );
@@ -76,7 +76,7 @@ onlineJobKnownTask<sepaOnlineTransfer> sepaCreditTransferEdit::getOnlineJob() co
   return sepaJob;
 }
 
-void sepaCreditTransferEdit::setOnlineJob(const onlineJobKnownTask<sepaOnlineTransfer>& job )
+void sepaCreditTransferEdit::setOnlineJob(const onlineJobTyped<sepaOnlineTransfer>& job )
 {
   m_onlineJob = job;
   ui->purpose->setText( job.task()->purpose() );
@@ -91,7 +91,7 @@ void sepaCreditTransferEdit::setOnlineJob(const onlineJobKnownTask<sepaOnlineTra
 void sepaCreditTransferEdit::setOnlineJob( const onlineJob& job )
 {
   if( !job.isNull() && job.task()->taskHash() == sepaOnlineTransfer::hash ) {
-    setOnlineJob( onlineJobKnownTask<sepaOnlineTransfer>(job) );
+    setOnlineJob( onlineJobTyped<sepaOnlineTransfer>(job) );
   }
 }
 

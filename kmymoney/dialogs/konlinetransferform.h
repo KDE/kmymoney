@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoney/onlinejobknowntask.h"
+#include "mymoney/onlinejobtyped.h"
 #include "mymoney/germanonlinetransfer.h"
 #include "mymoney/sepaonlinetransfer.h"
 
@@ -75,19 +75,19 @@ public slots:
    * If possible you should use one of the other setOnlineJob()s.
    * @return true if setting was possible
    */
-  virtual bool setOnlineJob(const onlineJobKnownTask<onlineTransfer> );
+  virtual bool setOnlineJob(const onlineJobTyped<onlineTransfer> );
 
   /**
    * @brief Sets an germanOnlineTransfer to edit
    * @return true if setting was possible (here it is always true)
    */
-  virtual bool setOnlineJob(const onlineJobKnownTask<germanOnlineTransfer>);
+  virtual bool setOnlineJob(const onlineJobTyped<germanOnlineTransfer>);
 
   /**
    * @brief Sets an germanOnlineTransfer to edit
    * @return true if setting was possible (here it is always true)
    */
-  virtual bool setOnlineJob( const onlineJobKnownTask<sepaOnlineTransfer> );
+  virtual bool setOnlineJob( const onlineJobTyped<sepaOnlineTransfer> );
 
 private slots:
   /** @brief Slot for account selection box */
@@ -103,7 +103,7 @@ private:
   size_t m_activeTransferType;
 
   /** @brief returns the active onlineJob */
-  onlineJobKnownTask<onlineTransfer> activeOnlineJob() const;
+  onlineJobTyped<onlineTransfer> activeOnlineJob() const;
 
   Ui::kOnlineTransferFormDecl* ui;
 

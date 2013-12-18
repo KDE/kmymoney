@@ -1,5 +1,5 @@
-#ifndef ONLINEJOBKNOWNTASK_H
-#define ONLINEJOBKNOWNTASK_H
+#ifndef ONLINEJOBTYPED_H
+#define ONLINEJOBTYPED_H
 
 #include "onlinejob.h"
 
@@ -9,32 +9,32 @@
  * To prevent using onlineJob.task<T>() repeatingly you can use this class
  * where task() has a defined return type.
  *
- * It is not possible to create invalid onlineJobs. All constructors will throw
- * onlineJobKnownTask::badCast if they fail.
+ * onlineJobTyped::isNull() is always false. All constructors will throw
+ * onlineJobTyped::badCast if they fail.
  */
 template<class T>
-class KMM_MYMONEY_EXPORT onlineJobKnownTask : public onlineJob
+class KMM_MYMONEY_EXPORT onlineJobTyped : public onlineJob
 {
     KMM_MYMONEY_UNIT_TESTABLE
 public:
-    explicit onlineJobKnownTask();
+    explicit onlineJobTyped();
 
-    onlineJobKnownTask( T* task, const QString& id = MyMoneyObject::m_emptyId );
+    onlineJobTyped( T* task, const QString& id = MyMoneyObject::m_emptyId );
 
     /** @brief Copy constructor */
-    onlineJobKnownTask( onlineJobKnownTask<T> const& other );
+    onlineJobTyped( onlineJobTyped<T> const& other );
 
     /** @brief Copy from onlineJob */
-    onlineJobKnownTask(const onlineJob &other);
+    onlineJobTyped(const onlineJob &other);
 
     /** @brief Copy constructor with new id */
-    onlineJobKnownTask( const QString &id, const onlineJobKnownTask<T>& other );
+    onlineJobTyped( const QString &id, const onlineJobTyped<T>& other );
 
     inline T* task();
     inline const T* task() const;
     inline const T* constTask() const { return task(); }
 
-    onlineJobKnownTask<T> operator =( onlineJobKnownTask<T> const& other );
+    onlineJobTyped<T> operator =( onlineJobTyped<T> const& other );
 
 private:
     T* m_taskSubType;
@@ -47,7 +47,7 @@ private:
 };
 
 template<class T>
-onlineJobKnownTask<T>::onlineJobKnownTask( )
+onlineJobTyped<T>::onlineJobTyped( )
     : onlineJob( new T() ),
       m_taskSubType( 0 )
 {
@@ -55,7 +55,7 @@ onlineJobKnownTask<T>::onlineJobKnownTask( )
 }
 
 template<class T>
-onlineJobKnownTask<T>::onlineJobKnownTask( T* task, const QString& id )
+onlineJobTyped<T>::onlineJobTyped( T* task, const QString& id )
     : onlineJob(task, id),
       m_taskSubType(task)
 {
@@ -63,7 +63,7 @@ onlineJobKnownTask<T>::onlineJobKnownTask( T* task, const QString& id )
 }
 
 template<class T>
-onlineJobKnownTask<T>::onlineJobKnownTask( onlineJobKnownTask<T> const& other )
+onlineJobTyped<T>::onlineJobTyped( onlineJobTyped<T> const& other )
     : onlineJob(other),
       m_taskSubType( 0 )
 {
@@ -72,7 +72,7 @@ onlineJobKnownTask<T>::onlineJobKnownTask( onlineJobKnownTask<T> const& other )
 }
 
 template<class T>
-onlineJobKnownTask<T> onlineJobKnownTask<T>::operator =( onlineJobKnownTask<T> const& other )
+onlineJobTyped<T> onlineJobTyped<T>::operator =( onlineJobTyped<T> const& other )
 {
     onlineJob::operator =(other);
     m_taskSubType = dynamic_cast<T*>(onlineJob::task());
@@ -81,7 +81,7 @@ onlineJobKnownTask<T> onlineJobKnownTask<T>::operator =( onlineJobKnownTask<T> c
 }
 
 template<class T>
-onlineJobKnownTask<T>::onlineJobKnownTask(const onlineJob &other)
+onlineJobTyped<T>::onlineJobTyped(const onlineJob &other)
     : onlineJob( other )
 {
     m_taskSubType = dynamic_cast<T*>(onlineJob::task());
@@ -90,24 +90,24 @@ onlineJobKnownTask<T>::onlineJobKnownTask(const onlineJob &other)
 }
 
 template<class T>
-T* onlineJobKnownTask<T>::task()
+T* onlineJobTyped<T>::task()
 {
     Q_ASSERT(m_taskSubType != 0);
     return m_taskSubType;
 }
 
 template<class T>
-const T* onlineJobKnownTask<T>::task() const
+const T* onlineJobTyped<T>::task() const
 {
     Q_ASSERT(m_taskSubType != 0);
     return m_taskSubType;
 }
 
 template<class T>
-void onlineJobKnownTask<T>::testForValidTask() const
+void onlineJobTyped<T>::testForValidTask() const
 {
     if (m_taskSubType == 0)
         throw new badTaskCast;
 }
 
-#endif // ONLINEJOBKNOWNTASK_H
+#endif // ONLINEJOBTYPED_H

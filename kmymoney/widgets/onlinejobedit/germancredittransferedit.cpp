@@ -7,7 +7,7 @@
 germanCreditTransferEdit::germanCreditTransferEdit(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::germanCreditTransferEdit),
-    m_germanCreditTransfer( onlineJobKnownTask<germanOnlineTransfer>(new germanOnlineTransfer) )
+    m_germanCreditTransfer( onlineJobTyped<germanOnlineTransfer>(new germanOnlineTransfer) )
 {
     ui->setupUi(this);
     updateTaskSettings();
@@ -32,12 +32,12 @@ germanCreditTransferEdit::~germanCreditTransferEdit()
 bool germanCreditTransferEdit::setOnlineJob(const onlineJob job)
 {
     if (!job.isNull() && job.task()->taskHash() == germanOnlineTransfer::hash) {
-        return setOnlineJob( onlineJobKnownTask<germanOnlineTransfer>(job) );
+      return setOnlineJob( onlineJobTyped<germanOnlineTransfer>(job) );
     }
     return false;
 }
 
-bool germanCreditTransferEdit::setOnlineJob(const onlineJobKnownTask<germanOnlineTransfer> job)
+bool germanCreditTransferEdit::setOnlineJob(const onlineJobTyped<germanOnlineTransfer> job)
 {
     m_germanCreditTransfer = job;
     setOriginAccount( job.task()->responsibleAccount() );
@@ -148,9 +148,9 @@ void germanCreditTransferEdit::purposeChanged()
         ui->statusPurpose->setColor( Qt::red );
 }
 
-onlineJobKnownTask<germanOnlineTransfer> germanCreditTransferEdit::getOnlineJob() const
+onlineJobTyped<germanOnlineTransfer> germanCreditTransferEdit::getOnlineJob() const
 {
-  onlineJobKnownTask<germanOnlineTransfer> job( m_germanCreditTransfer );
+  onlineJobTyped<germanOnlineTransfer> job( m_germanCreditTransfer );
   germanAccountIdentifier accountIdent;
   accountIdent.setOwnerName( ui->beneficiaryName->text() );
   accountIdent.setAccountNumber( ui->beneficiaryAccNum->text() );

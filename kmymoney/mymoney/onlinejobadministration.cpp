@@ -141,10 +141,10 @@ onlineTask::convertType onlineJobAdministration::canConvert( const onlineJob& or
 }
 
 template<class T>
-onlineJobKnownTask<T> onlineJobAdministration::convert(const onlineJob& original, const QString& destinationName, const QString& id ) const
+onlineJobTyped<T> onlineJobAdministration::convert(const onlineJob& original, const QString& destinationName, const QString& id ) const
 {
   onlineJob job = convert(original, destinationName, id);
-  return onlineJobKnownTask<T>(job);
+  return onlineJobTyped<T>(job);
 }
 
 onlineJob onlineJobAdministration::convert( const onlineJob& original, const QString& destinationName, const QString& id ) const

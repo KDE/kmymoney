@@ -12,7 +12,7 @@
 // Project Includes
 
 #include "onlinejob.h"
-#include "onlinejobknowntask.h"
+#include "onlinejobtyped.h"
 #include "onlinetask.h"
 
 namespace KMyMoneyPlugin {
@@ -51,7 +51,7 @@ public:
   onlineTask::convertType canConvert(const onlineJob& original, const QString& destinationName ) const;
 
   template<class T>
-  onlineJobKnownTask<T> convert( const onlineJob& original, const QString& destinationName, const QString& id = MyMoneyObject::emptyId() ) const;
+  onlineJobTyped<T> convert( const onlineJob& original, const QString& destinationName, const QString& id = MyMoneyObject::emptyId() ) const;
 
   onlineJob convert( const onlineJob& original, const QString& destinationName, const QString& id = MyMoneyObject::emptyId() ) const;
 

@@ -44,7 +44,7 @@
 #include <mymoneyprice.h>
 
 #include "mymoney/onlinejob.h"
-#include "mymoney/onlinejobknowntask.h"
+#include "mymoney/onlinejobtyped.h"
 #include "mymoney/onlinetransfer.h"
 
 class QResizeEvent;
@@ -462,7 +462,7 @@ protected slots:
   /**
    * @brief Start dialog to edit onlineJob if possible
    */
-  void slotEditOnlineJob( const onlineJobKnownTask<onlineTransfer> );
+  void slotEditOnlineJob( const onlineJobTyped<onlineTransfer> );
 
   /**
    * @brief Saves an online banking job

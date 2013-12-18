@@ -61,7 +61,7 @@ class KBAccountSettings;
 #include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
 
-#include "onlinejobknowntask.h"
+#include "onlinejobtyped.h"
 #include "sepaonlinetransfer.h"
 #include "germanonlinetransfer.h"
 
@@ -189,8 +189,8 @@ private:
     */
   void startPasswordTimer(void);
 
-  onlineJobKnownTask<germanOnlineTransfer> enqueTransaction(onlineJobKnownTask<germanOnlineTransfer> job);
-  onlineJobKnownTask<sepaOnlineTransfer> enqueTransaction(onlineJobKnownTask<sepaOnlineTransfer> job);
+  onlineJobTyped<germanOnlineTransfer> enqueTransaction(onlineJobTyped<germanOnlineTransfer> job);
+  onlineJobTyped<sepaOnlineTransfer> enqueTransaction(onlineJobTyped<sepaOnlineTransfer> job);
 
 
 protected slots:
