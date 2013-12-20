@@ -945,7 +945,7 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
       GWEN_DB_NODE* gwenNode = AB_Job_GetAppData(abJob);
       if (gwenNode == 0) {
         qWarning("Executed AB_Job without KMyMoney id");
-	abJob = AB_Job_List2Iterator_Next(jobIter);
+        abJob = AB_Job_List2Iterator_Next(jobIter);
         break;
       }
       QString jobIdent = QString::fromUtf8(GWEN_DB_GetCharValue(gwenNode, "kmmOnlineJobId", 0, ""));
@@ -956,8 +956,8 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
         // It should not be possiblie that this will happen (only if AqBanking faìls heavily).
         //! @todo correct exception text
         qWarning("Executed a job which was not in queue. Please inform the KMyMoney developers.");
-	abJob = AB_Job_List2Iterator_Next(jobIter);
-	break;
+        abJob = AB_Job_List2Iterator_Next(jobIter);
+        break;
       }
 
       AB_JOB_STATUS abStatus = AB_Job_GetStatus(abJob);
@@ -971,7 +971,7 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
 
       switch(abStatus) {
       case AB_Job_StatusFinished:
-	job.setBankAnswer( onlineJob::acceptedByBank );
+        job.setBankAnswer( onlineJob::acceptedByBank );
         break;
       case AB_Job_StatusError:
       case AB_Job_StatusUnknown:

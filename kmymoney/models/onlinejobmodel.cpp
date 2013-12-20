@@ -94,12 +94,14 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
     switch (job.bankAnswerState()) {
     case onlineJob::acceptedByBank: return KIcon("task-complete");
     case onlineJob::sendingError:
-    case onlineJob::abortedByUser: return KIcon("task-reject");
-    case onlineJob::rejectedByBank: return KIcon("task-attention");
+    case onlineJob::abortedByUser: 
+    case onlineJob::rejectedByBank: return KIcon("task-reject");
     case onlineJob::noBankAnswer: break;
     }
     if (job.sendDate().isValid()) {
       return KIcon("task-accepted");
+    } else if ( !job.isValid() ) {
+      return KIcon("task-attention");
     }
   } else if (role == OnlineJobId || role == Qt::ToolTipRole) {
     return job.id();

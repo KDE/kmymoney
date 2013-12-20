@@ -46,8 +46,14 @@ void KOnlineJobOutbox::slotRemoveJob()
 
 void KOnlineJobOutbox::slotSendJobs()
 {
-  qDebug() << "I shall send " << MyMoneyFile::instance()->onlineJobList().count() << " onlineJobs";
-  emit sendJobs( MyMoneyFile::instance()->onlineJobList() );
+  QList<onlineJob> validJobs;
+  foreach( onlineJob job, MyMoneyFile::instance()->onlineJobList()) {
+    if (job.isValid())
+      validJobs.append(job);
+  }
+  qDebug() << "I shall send " << validJobs.count() << "/" << MyMoneyFile::instance()->onlineJobList().count() << " onlineJobs";
+  if ( !validJobs.isEmpty() )
+    emit sendJobs( validJobs );
 }
 
 void KOnlineJobOutbox::slotEditJob()
