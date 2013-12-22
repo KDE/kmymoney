@@ -782,6 +782,7 @@ void InvestTransactionEditor::slotUpdateSecurity(const QString& stockId)
   haveWidget("interest-amount")->setEnabled(currencyKnown);
 
   slotUpdateTotalAmount();
+  slotUpdateButtonState();
 }
 
 void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
