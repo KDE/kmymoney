@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>698</width>
+    <width>675</width>
     <height>240</height>
    </rect>
   </property>
@@ -27,7 +27,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="5,100,5">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="4,100,4">
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -42,7 +42,7 @@
       </spacer>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="20,0,0,0,100">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="20,5,3,5,70,0">
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
@@ -56,42 +56,54 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer">
+        <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>20</width>
-           <height>40</height>
+           <width>654</width>
+           <height>13</height>
           </size>
          </property>
         </spacer>
        </item>
        <item>
-        <widget class="Line" name="line_2">
+        <widget class="Line" name="line_4">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer_2">
+        <spacer name="verticalSpacer_4">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>20</width>
-           <height>40</height>
+           <width>648</width>
+           <height>13</height>
           </size>
          </property>
         </spacer>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout" rowstretch="18,18,18,18,3,19" columnstretch="30,20,25,20,20">
+        <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0">
           <widget class="QLabel" name="labelBnk_number">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <underline>false</underline>
@@ -101,7 +113,7 @@ p, li { white-space: pre-wrap; }
             <string comment="column containing number field"/>
            </property>
            <property name="text">
-            <string comment="column containing number field">Number</string>
+            <string comment="column containing number field">Number column</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -118,14 +130,14 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="minimumSize">
             <size>
-             <width>80</width>
-             <height>0</height>
+             <width>45</width>
+             <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
-             <height>32</height>
+             <width>60</width>
+             <height>40</height>
             </size>
            </property>
            <property name="toolTip">
@@ -147,6 +159,18 @@ p, li { white-space: pre-wrap; }
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <underline>false</underline>
@@ -162,7 +186,7 @@ p, li { white-space: pre-wrap; }
             <string comment="presence of amount column"/>
            </property>
            <property name="text">
-            <string comment="presence of amount column">Amount column</string>
+            <string comment="presence of amount column">Amount col</string>
            </property>
            <property name="checked">
             <bool>false</bool>
@@ -174,6 +198,18 @@ p, li { white-space: pre-wrap; }
            <property name="enabled">
             <bool>true</bool>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <underline>false</underline>
@@ -183,7 +219,7 @@ p, li { white-space: pre-wrap; }
             <string comment="presence of amount column"/>
            </property>
            <property name="text">
-            <string comment="location of amount column">Amount</string>
+            <string comment="location of amount column">Amount column</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -200,14 +236,14 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="minimumSize">
             <size>
-             <width>80</width>
-             <height>0</height>
+             <width>65</width>
+             <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
-             <height>32</height>
+             <width>60</width>
+             <height>40</height>
             </size>
            </property>
            <property name="toolTip">
@@ -218,8 +254,78 @@ p, li { white-space: pre-wrap; }
            </property>
           </widget>
          </item>
+         <item row="0" column="5">
+          <widget class="QLabel" name="labelBnk_category">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="accessibleName">
+            <string comment="column containing number field"/>
+           </property>
+           <property name="text">
+            <string comment="column containing number field">Category Column</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="6">
+          <widget class="KComboBox" name="comboBoxBnk_categoryCol">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>65</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>60</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Select column containing category field.</string>
+           </property>
+           <property name="maxVisibleItems">
+            <number>12</number>
+           </property>
+          </widget>
+         </item>
          <item row="1" column="0">
           <widget class="QLabel" name="labelBnk_date">
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <underline>false</underline>
@@ -246,14 +352,14 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="minimumSize">
             <size>
-             <width>80</width>
-             <height>0</height>
+             <width>45</width>
+             <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
-             <height>32</height>
+             <width>60</width>
+             <height>40</height>
             </size>
            </property>
            <property name="toolTip">
@@ -264,8 +370,120 @@ p, li { white-space: pre-wrap; }
            </property>
           </widget>
          </item>
+         <item row="1" column="2" rowspan="2">
+          <widget class="QRadioButton" name="radioBnk_debCred">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Select 'Debit/credit' if both columns exist, otherwise select 'Amount'.</string>
+           </property>
+           <property name="accessibleName">
+            <string comment="presence of debit and credit column"/>
+           </property>
+           <property name="text">
+            <string comment="presence of debit/credit columns">Debit / credit col</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QLabel" name="labelBnk_debits">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="accessibleName">
+            <string comment="column containing debits field"/>
+           </property>
+           <property name="text">
+            <string comment="location of debit column">Debit column</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="KComboBox" name="comboBoxBnk_debitCol">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>65</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>60</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Select column containing debit field.</string>
+           </property>
+           <property name="maxVisibleItems">
+            <number>12</number>
+           </property>
+          </widget>
+         </item>
          <item row="2" column="0">
-          <widget class="QLabel" name="labelBnk_payee_2">
+          <widget class="QLabel" name="labelBnk_payee">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <underline>false</underline>
@@ -292,14 +510,14 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="minimumSize">
             <size>
-             <width>80</width>
-             <height>0</height>
+             <width>45</width>
+             <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
-             <height>32</height>
+             <width>60</width>
+             <height>40</height>
             </size>
            </property>
            <property name="toolTip">
@@ -311,76 +529,21 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item row="2" column="3">
-          <widget class="QLabel" name="labelBnk_debits">
+          <widget class="QLabel" name="labelBnk_credits">
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing debits field"/>
-           </property>
-           <property name="text">
-            <string comment="location of debit column">Debits</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="4">
-          <widget class="KComboBox" name="comboBoxBnk_debitCol">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
            <property name="minimumSize">
             <size>
-             <width>80</width>
-             <height>0</height>
+             <width>0</width>
+             <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>32</height>
+             <height>40</height>
             </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing debit field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="labelBnk_memo">
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing memo field"/>
-           </property>
-           <property name="text">
-            <string>Memo</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="3">
-          <widget class="QLabel" name="labelBnk_credits">
-           <property name="enabled">
-            <bool>false</bool>
            </property>
            <property name="font">
             <font>
@@ -391,104 +554,31 @@ p, li { white-space: pre-wrap; }
             <string comment="column containing credits field"/>
            </property>
            <property name="text">
-            <string comment="location of credit column">Credits</string>
+            <string comment="location of credit column">Credit column</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
-         <item row="4" column="1" colspan="3">
-          <widget class="Line" name="line">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="2">
-          <widget class="QPushButton" name="button_clear">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Clear selected column entries</string>
-           </property>
-           <property name="text">
-            <string>Clear selections</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2" rowspan="2">
-          <widget class="QRadioButton" name="radioBnk_debCred">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="toolTip">
-            <string>Select 'Debit/credit' if both columns exist, otherwise select 'Amount'.</string>
-           </property>
-           <property name="accessibleName">
-            <string comment="presence of debit and credit column"/>
-           </property>
-           <property name="text">
-            <string comment="presence of debit/credit columns">Debit / credit columns</string>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="KComboBox" name="comboBoxBnk_memoCol">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing memo field.
-More than one column may be entered successively.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="4">
+         <item row="2" column="4">
           <widget class="KComboBox" name="comboBoxBnk_creditCol">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
-             <width>80</width>
-             <height>0</height>
+             <width>65</width>
+             <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
-             <height>32</height>
+             <width>60</width>
+             <height>40</height>
             </size>
            </property>
            <property name="toolTip">
@@ -498,6 +588,152 @@ More than one column may be entered successively.</string>
             <number>12</number>
            </property>
           </widget>
+         </item>
+         <item row="2" column="5">
+          <widget class="QLabel" name="labelBnk_memo">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="accessibleName">
+            <string comment="column containing date field"/>
+           </property>
+           <property name="text">
+            <string>Memo Column</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="6">
+          <widget class="KComboBox" name="comboBoxBnk_memoCol">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>65</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>60</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Select column containing memo field.</string>
+           </property>
+           <property name="maxVisibleItems">
+            <number>12</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout" stretch="1,20,1">
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>13</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="button_clear">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>32</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string>Clear selected column entries</string>
+             </property>
+             <property name="text">
+              <string>Clear selections</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>13</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>

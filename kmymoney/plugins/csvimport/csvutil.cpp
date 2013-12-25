@@ -22,6 +22,7 @@
 
 #include <KGlobal>
 #include <KLocale>
+#include <KMessageBox>
 #include <mymoneyfile.h>
 #include "kmymoneyutils.h"
 #include "investtransactioneditor.h"
@@ -77,7 +78,7 @@ QStringList Parse::parseLine(const QString& data)
 
 
 QStringList Parse::parseFile(const QString& buf, int strt, int end)
-{
+{qDebug()<<"81 parse START";
   QStringList outBuffer;
   outBuffer.clear();
   int lineCount = 0;
@@ -132,9 +133,16 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
 
     else {//                                   must be data char
       tmpBuffer += chr;
-      if (charCount > 0) {      //                      more chars yet
+
+      if (charCount > 0) {    //                      more chars yet
         continue;
-      }//                                      else eoFile = true;
+      } else {//                                      else eoFile = true;
+        //  last char in file is data char
+        //  meaning no return on last line
+        //  so bump line count
+        qDebug()<<"139 parse eoFile = true"<<charCount<<chr;
+        lineCount ++;
+      }
     }
     if (!tmpBuffer.isEmpty()) {
       outBuffer << tmpBuffer;
@@ -485,3 +493,138 @@ void CsvUtil::dissectTransaction(const MyMoneyTransaction& transaction, const My
     delete e;
   }
 }
+
+
+const QString CsvUtil::checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2)
+{
+  //  Borrowed from MyMoneyQifReader::checkCategory()
+  QString accountId;
+  MyMoneyFile *file = MyMoneyFile::instance();
+  MyMoneyAccount account;
+  bool found = true;
+
+  if (!name.isEmpty()) {
+    // The category might be constructed with an arbitraty depth (number of
+    // colon delimited fields). We try to find a parent account within this
+    // hierarchy by searching the following sequence:
+    //
+    //    aaaa:bbbb:cccc:ddddd
+    //
+    // 1. search aaaa:bbbb:cccc:dddd, create nothing
+    // 2. search aaaa:bbbb:cccc     , create dddd
+    // 3. search aaaa:bbbb          , create cccc:dddd
+    // 4. search aaaa               , create bbbb:cccc:dddd
+    // 5. don't search              , create aaaa:bbbb:cccc:dddd
+
+    account.setName(name);
+    QString accName;      // part to be created (right side in above list)
+    QString parent(name);    // a possible parent part (left side in above list)
+    do {
+      accountId = file->categoryToAccount(parent);
+      if (accountId.isEmpty()) {
+        found = false;
+        // prepare next step
+        if (!accName.isEmpty())
+          accName.prepend(':');
+        accName.prepend(parent.section(':', -1));
+        account.setName(accName);
+        parent = parent.section(':', 0, -2);
+      } else if (!accName.isEmpty()) {
+        account.setParentAccountId(accountId);
+      }
+    } while (!parent.isEmpty() && accountId.isEmpty());
+
+    // if we did not find the category, we create it
+    if (!found) {
+      MyMoneyAccount parent;
+      if (account.parentAccountId().isEmpty()) {
+        if (!value.isNegative() && value2.isNegative())
+          parent = file->income();
+        else
+          parent = file->expense();
+      } else {
+        parent = file->account(account.parentAccountId());
+      }
+      account.setAccountType((!value.isNegative() && value2.isNegative()) ? MyMoneyAccount::Income : MyMoneyAccount::Expense);
+      MyMoneyAccount brokerage;
+      // clear out the parent id, because createAccount() does not like that
+      account.setParentAccountId(QString());
+      createAccount(account, parent, brokerage, MyMoneyMoney());
+      accountId = account.id();
+    }
+  }
+
+  return accountId;
+}
+
+
+void CsvUtil::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
+{
+  MyMoneyFile* file = MyMoneyFile::instance();
+
+  // make sure we have a currency. If none is assigned, we assume base currency
+  if (newAccount.currencyId().isEmpty())
+    newAccount.setCurrencyId(file->baseCurrency().id());
+
+  MyMoneyFileTransaction ft;
+  try {
+    int pos;
+    // check for ':' in the name and use it as separator for a hierarchy
+    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
+      QString part = newAccount.name().left(pos);
+      QString remainder = newAccount.name().mid(pos + 1);
+      const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
+      if (existingAccount.id().isEmpty()) {
+        newAccount.setName(part);
+
+        file->addAccount(newAccount, parentAccount);
+        parentAccount = newAccount;
+      } else {
+        parentAccount = existingAccount;
+      }
+      newAccount.setParentAccountId(QString());  // make sure, there's no parent
+      newAccount.clearId();                       // and no id set for adding
+      newAccount.removeAccountIds();              // and no sub-account ids
+      newAccount.setName(remainder);
+    }
+
+    const MyMoneySecurity& sec = file->security(newAccount.currencyId());
+    // Check the opening balance
+    if (openingBal.isPositive() && newAccount.accountGroup() == MyMoneyAccount::Liability) {
+      QString message = i18n("This account is a liability and if the "
+                             "opening balance represents money owed, then it should be negative.  "
+                             "Negate the amount?\n\n"
+                             "Please click Yes to change the opening balance to %1,\n"
+                             "Please click No to leave the amount as %2,\n"
+                             "Please click Cancel to abort the account creation."
+                             , MyMoneyUtils::formatMoney(-openingBal, newAccount, sec)
+                             , MyMoneyUtils::formatMoney(openingBal, newAccount, sec));
+
+      int ans = KMessageBox::questionYesNoCancel(0, message);
+      if (ans == KMessageBox::Yes) {
+        openingBal = -openingBal;
+
+      } else if (ans == KMessageBox::Cancel)
+        return;
+    }
+
+    file->addAccount(newAccount, parentAccount);
+
+    if (newAccount.accountType() == MyMoneyAccount::Investment
+        && !brokerageAccount.name().isEmpty()) {
+      file->addAccount(brokerageAccount, parentAccount);
+
+      // set a link from the investment account to the brokerage account
+      file->modifyAccount(newAccount);
+      file->createOpeningBalanceTransaction(brokerageAccount, openingBal);
+
+    } else
+      file->createOpeningBalanceTransaction(newAccount, openingBal);
+
+    ft.commit();
+  } catch (MyMoneyException *e) {
+    KMessageBox::information(0, i18n("Unable to add account: %1", e->what()));
+    delete e;
+  }
+}
+

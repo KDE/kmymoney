@@ -30,6 +30,7 @@
 
 class ConvertDate;
 class Parse;
+class CsvUtil;
 class BankingPage;
 class InvestmentPage;
 class LinesDatePage;
@@ -50,6 +51,13 @@ class CSVDialog : public QWidget
 {
   Q_OBJECT
 
+private:
+  struct csvSplit {
+    QString      m_strCategoryName;
+    QString      m_strMemo;
+    QString      m_amount;
+  } m_csvSplit;
+
 public:
   explicit CSVDialog(QWidget *parent = 0);
   ~CSVDialog();
@@ -66,6 +74,7 @@ public:
   ConvertDate*        m_convertDate;
   Parse*              m_parse;
   SymbolTableDlg*     m_symbolTableDlg;
+  CsvUtil*            m_csvUtil;
 
   Ui::CSVDialog*      ui;
   QVBoxLayout*        m_wizardLayout;
@@ -84,6 +93,7 @@ public:
     QString payee;
     QString amount;
     QString memo;
+    QString category;
     QString id;
   } m_trData;
 
@@ -202,6 +212,7 @@ public:
   int              payeeColumn();
   int              numberColumn();
   int              memoColumn();
+  int              categoryColumn();
 
   /**
   * This method is called when the user clicks 'Clear selections', in order to
@@ -431,6 +442,7 @@ private:
   bool             m_memoColCopied;
   bool             m_payeeColCopied;
   bool             m_payeeColAdded;
+  bool             m_categorySelected;
 
   int              m_amountColumn;
   int              m_creditColumn;
@@ -439,6 +451,7 @@ private:
   int              m_memoColumn;
   int              m_numberColumn;
   int              m_payeeColumn;
+  int              m_categoryColumn;
   int              m_previousColumn;
   int              m_maxColumnCount;
   int              m_maxRowWidth;
@@ -548,6 +561,12 @@ private slots:
   * It will validate the column selection.
   */
   void           payeeColumnSelected(int);
+
+  /**
+  * This method is called when the Category column is activated.
+  * It will validate the column selection.
+  */
+  void           categoryColumnSelected(int);
 
   /**
   * This method is called when 'Cancel' is clicked.  Unless the user chooses
@@ -716,6 +735,7 @@ private slots:
   void                slotDebitColChanged(int col);
   void                slotCreditColChanged(int col);
   void                slotAmountColChanged(int col);
+  void                slotCategoryColChanged(int col);
 };
 
 namespace Ui
