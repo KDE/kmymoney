@@ -306,16 +306,15 @@ void KCurrencyCalculator::accept(void)
   KCurrencyCalculatorDecl::accept();
 }
 
-const MyMoneyMoney KCurrencyCalculator::price(void) const
+MyMoneyMoney KCurrencyCalculator::price(void) const
 {
-  // This should fix https://bugs.kde.org/show_bug.cgi?id=205254 but
-  // I am not sure about any side effects when dealing with multi-
-  // currency transactions.
-  //
-  // The following line is the original version of this code
-  // which causes some rounding issues (see the above bug entry)
-  // return m_result / m_value;
-  return m_conversionRate->value();
+  // This should fix https://bugs.kde.org/show_bug.cgi?id=205254 and
+  // https://bugs.kde.org/show_bug.cgi?id=325953 as well as
+  // https://bugs.kde.org/show_bug.cgi?id=300965
+  if(m_amountButton->isChecked())
+    return m_toAmount->value().abs() / m_value.abs();
+  else
+    return m_conversionRate->value();
 }
 
 #include "kcurrencycalculator.moc"
