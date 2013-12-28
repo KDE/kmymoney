@@ -335,7 +335,6 @@ public:
    */
   void           clearCellsBackground();
   void           clearColumnTypeList();
-  void           resizeEvent(QResizeEvent * event);
   void           setMemoColSelections();
 
   int            endColumn();

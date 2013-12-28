@@ -2594,35 +2594,6 @@ void CSVDialog::clearColumnTypeList()
   m_columnTypeList.clear();
 }
 
-void CSVDialog::resizeEvent(QResizeEvent * event)
-{
-  int height = event->size().height();
-  if (m_inFileName.isEmpty()) {
-    return;
-  }
-  if ((height < m_lastHeight + 25) && (height > m_lastHeight - 25)) {  //  25 = near row height
-    return;
-  }
-  if (height < m_lastHeight) {
-    m_round = -5;
-  } else {
-    m_round = 5;
-  }
-
-  m_lastHeight = event->size().height();
-  height = ui->tableWidget->height() - m_header - m_hScrollBarHeight  + m_round;
-  m_tableRows = height / m_rowHght;
-  int rem = (ui->tableWidget->height() - m_header - m_hScrollBarHeight) % m_rowHght ;
-  if (rem < 2) {
-    m_tableRows += rem;
-  }
-  int tableHeight = m_tableRows * m_rowHght + m_header + m_hScrollBarHeight;
-  QRect rect = ui->frame_main->frameRect();
-  rect.setHeight(tableHeight + m_borders);
-  ui->frame_main->setFrameRect(rect);
-  event->accept();
-}
-
 void CSVDialog::setMemoColSelections()
 {
   //  Saved column selections need to be added to UI.
