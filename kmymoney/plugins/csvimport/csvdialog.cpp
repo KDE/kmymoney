@@ -1752,8 +1752,8 @@ void CSVDialog::debitCreditRadioClicked(bool checked)
     m_pageBanking->ui->labelBnk_credits->setEnabled(true);
     //   the 'm_amountColumn' could just have been reassigned, so ensure
     //   ...m_columnTypeList[m_amountColumn] == "amount" before clearing it
-    if ((m_amountColumn >= 0) && (m_columnTypeList[m_amountColumn] == "amount")) {
-      m_columnTypeList[m_amountColumn].clear();//          ...drop any amount choice
+    if ((m_amountColumn >= 0) && (m_columnTypeList.indexOf("amount") != -1)) {
+      m_columnTypeList.replace(m_columnTypeList.indexOf("amount"), QString());// ...drop any amount choice
       m_amountColumn = -1;
     }
     m_pageBanking->ui->comboBoxBnk_amountCol->setEnabled(false);  //       disable 'amount' ui choices
@@ -2399,11 +2399,11 @@ void CSVDialog::amountRadioClicked(bool checked)
 
     //   the 'm_creditColumn/m_debitColumn' could just have been reassigned, so ensure
     //   ...they == "credit or debit" before clearing them
-    if ((m_creditColumn >= 0) && (m_columnTypeList[m_creditColumn] == "credit")) {
-      m_columnTypeList[m_creditColumn].clear();//       because amount col chosen...
+    if ((m_creditColumn >= 0) && (m_columnTypeList.indexOf("credit") != -1)) {
+      m_columnTypeList.replace(m_columnTypeList.indexOf("credit"), QString());//       because amount col chosen...
     }
-    if ((m_debitColumn >= 0) && (m_columnTypeList[m_debitColumn] == "debit")) {
-      m_columnTypeList[m_debitColumn].clear();//        ...drop any credit & debit
+    if ((m_debitColumn >= 0) && (m_columnTypeList.indexOf("debit") != -1)) {
+      m_columnTypeList.replace(m_columnTypeList.indexOf("debit"), QString());//        ...drop any credit & debit
     }
     m_debitColumn = -1;
     m_creditColumn = -1;
