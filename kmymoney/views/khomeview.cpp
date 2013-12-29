@@ -860,7 +860,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
     KIconLoader::global()->loadIcon(QString("dialog-cancel"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathNotOK);
 
     if (acc.value("lastImportedTransactionDate").isEmpty() || acc.value("lastStatementBalance").isEmpty())
-      cellStatus = "-";
+      cellStatus = '-';
     else if (file->hasMatchingOnlineBalance(acc)) {
       if (file->hasNewerTransaction(acc.id(), QDate::fromString(acc.value("lastImportedTransactionDate"), Qt::ISODate)))
         cellStatus = QString("<img src=\"%1\" border=\"0\">").arg(pathTODO);
@@ -891,7 +891,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
     if (countNotMarked)
       countStr = QString("%1").arg(countNotMarked);
     else
-      countStr = "-";
+      countStr = '-';
     tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
   }
 
@@ -899,7 +899,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
     if (countCleared)
       countStr = QString("%1").arg(countCleared);
     else
-      countStr = "-";
+      countStr = '-';
     tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
   }
 
@@ -907,7 +907,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
     if (countNotReconciled)
       countStr = QString("%1").arg(countNotReconciled);
     else
-      countStr = "-";
+      countStr = '-';
     tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
   }
 

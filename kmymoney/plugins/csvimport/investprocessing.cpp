@@ -1095,7 +1095,7 @@ void InvestProcessing::displayLine(const QString& data)
   }
 
   QStringList::const_iterator constIterator;
-  QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(),$]";
+  QString pattern = QString("[%1(),$]").arg(KGlobal::locale()->currencySymbol());
   for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
        ++constIterator) {
     QString txt = (*constIterator);
@@ -2120,7 +2120,7 @@ void InvestProcessing::redrawWindow(int startLine)
   //
   //  Align numeric column values
   //
-  QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(), $]";
+  QString pattern = QString("[%1(), $]").arg(KGlobal::locale()->currencySymbol());
 
   for (int row = 0; row < m_csvDialog->ui->tableWidget->rowCount(); row++) {
     m_csvDialog->ui->tableWidget->setRowHeight(row, 30);

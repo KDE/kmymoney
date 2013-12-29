@@ -1535,7 +1535,7 @@ void CSVDialog::redrawWindow(int startLine)
   //
   //  Align numeric column values
   //
-  QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(), $]";
+  QString pattern = QString("[%1(), $]").arg(KGlobal::locale()->currencySymbol());
   for (int row = 0; row < ui->tableWidget->rowCount(); row++) {
     ui->tableWidget->setRowHeight(row, 30);
     for (int col = 0; col < ui->tableWidget->columnCount(); col ++) {
@@ -3494,7 +3494,7 @@ bool LinesDatePage::validatePage()
 {
   bool ok;
   QString value;
-  QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(), $]";
+  QString pattern = QString("[%1(), $]").arg(KGlobal::locale()->currencySymbol());
   //
   //  Ensure numeric columns do contain valid numeric values
   //
@@ -3520,11 +3520,11 @@ bool LinesDatePage::validatePage()
                      KGuiItem(i18n("Accept This")),
                      KGuiItem(i18n("Cancel")));
             switch (rc) {
-              case KMessageBox::Yes:  //  = "Accept All"
+              case KMessageBox::Yes:  // Accept All
                 m_dlg->m_acceptAllInvalid = true;
                 continue;
 
-              case KMessageBox::No:  //  "Accept This"
+              case KMessageBox::No:  // Accept This
                 m_dlg->m_acceptAllInvalid = false;
                 continue;
 
