@@ -311,8 +311,9 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   // end of the table
   detailsReport += "</table>\n";
 
-  KReportDlg dlg(0, header + report + footer, header + detailsReport + footer);
-  dlg.exec();
+  QPointer<KReportDlg> dlg = new KReportDlg(0, header + report + footer, header + detailsReport + footer);
+  dlg->exec();
+  delete dlg;
 }
 
 void KMMReconciliationReportPlugin::slotPlug(KPluginInfo* info)

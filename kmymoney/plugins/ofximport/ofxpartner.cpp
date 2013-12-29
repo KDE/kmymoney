@@ -376,11 +376,12 @@ public:
 
 OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo) :
     d(new Private),
-    m_dst(dst),
-    m_eventLoop(qApp->activeWindow())
+    m_dst(dst)
 {
   Q_UNUSED(type);
   Q_UNUSED(metaData);
+
+  m_eventLoop = new QEventLoop(qApp->activeWindow());
 
   QDir homeDir(QDir::home());
   if (homeDir.exists("ofxlog.txt")) {
@@ -406,12 +407,15 @@ OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QBy
   connect(m_job, SIGNAL(connected(KIO::Job*)), this, SLOT(slotOfxConnected(KIO::Job*)));
 
   qDebug("Starting eventloop");
-  m_eventLoop.exec();
+  if(m_eventLoop)
+    m_eventLoop->exec();
   qDebug("Ending eventloop");
 }
 
 OfxHttpsRequest::~OfxHttpsRequest()
 {
+  delete m_eventLoop;
+
   if (d->m_fpTrace.isOpen()) {
     d->m_fpTrace.close();
   }
@@ -469,16 +473,17 @@ void OfxHttpsRequest::slotOfxFinished(KJob* /* e */)
   }
 
   qDebug("Finishing eventloop");
-  m_eventLoop.exit();
+  if(m_eventLoop)
+    m_eventLoop->exit();
 }
 
 
 
-OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo) :
-    m_eventLoop(qApp->activeWindow())
+OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo)
 {
   Q_UNUSED(showProgressInfo);
 
+  m_eventLoop = new QEventLoop(qApp->activeWindow());
   QFile f(dst.path());
   m_error = QHttp::NoError;
   QString errorMsg;
@@ -497,7 +502,7 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
             this, SLOT(slotOfxFinished(int,bool)));
 
     qDebug("Starting eventloop");
-    m_eventLoop.exec();  // krazy:exclude=crashy
+    m_eventLoop->exec();  // krazy:exclude=crashy
     qDebug("Ending eventloop");
 
     if (m_error != QHttp::NoError)
@@ -516,13 +521,19 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
   }
 }
 
+OfxHttpRequest::~OfxHttpRequest()
+{
+  delete m_eventLoop;
+}
+
 void OfxHttpRequest::slotOfxFinished(int, bool rc)
 {
   if (rc) {
     m_error = m_job->error();
   }
   qDebug("Finishing eventloop");
-  m_eventLoop.exit();
+  if(m_eventLoop)
+    m_eventLoop->exit();
 }
 
 #include "ofxpartner.moc"

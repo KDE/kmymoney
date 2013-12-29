@@ -1366,7 +1366,7 @@ void KGlobalLedgerView::showTooltip(const QString msg) const
 
 void KGlobalLedgerView::slotSortOptions(void)
 {
-  KSortOptionDlg* dlg = new KSortOptionDlg(this);
+  QPointer<KSortOptionDlg> dlg = new KSortOptionDlg(this);
 
   QString key;
   QString sortOrder, def;
@@ -1387,20 +1387,22 @@ void KGlobalLedgerView::slotSortOptions(void)
   dlg->setSortOption(sortOrder, def);
 
   if (dlg->exec() == QDialog::Accepted) {
-    sortOrder = dlg->sortOption();
-    if (sortOrder != oldOrder) {
-      if (sortOrder.isEmpty()) {
-        m_account.deletePair(key);
-      } else {
-        m_account.setValue(key, sortOrder);
-      }
-      MyMoneyFileTransaction ft;
-      try {
-        MyMoneyFile::instance()->modifyAccount(m_account);
-        ft.commit();
-      } catch (MyMoneyException* e) {
-        qDebug("Unable to update sort order for account '%s': %s", qPrintable(m_account.name()), qPrintable(e->what()));
-        delete e;
+    if(dlg != 0) {
+      sortOrder = dlg->sortOption();
+      if (sortOrder != oldOrder) {
+        if (sortOrder.isEmpty()) {
+          m_account.deletePair(key);
+        } else {
+          m_account.setValue(key, sortOrder);
+        }
+        MyMoneyFileTransaction ft;
+        try {
+          MyMoneyFile::instance()->modifyAccount(m_account);
+          ft.commit();
+        } catch (MyMoneyException* e) {
+          qDebug("Unable to update sort order for account '%s': %s", qPrintable(m_account.name()), qPrintable(e->what()));
+          delete e;
+        }
       }
     }
   }
