@@ -1770,7 +1770,7 @@ void MyMoneyStorageSql::writeTagSplitsList
 
   int i = 0, l = 0;
   foreach (const MyMoneySplit& s, splitList) {
-    for (l = 0; l < s.tagIdList().size(); l++) {
+    for (l = 0; l < s.tagIdList().size(); ++l) {
       tagIdList << s.tagIdList()[l];
       splitIdList_TagSplits << splitIdList[i];
       txIdList << txId;
