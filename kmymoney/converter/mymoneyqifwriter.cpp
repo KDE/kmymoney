@@ -286,7 +286,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
   QString s;
   QString memo;
   MyMoneyFile* file = MyMoneyFile::instance();
-  QString chkAccnt = QString();
+  QString chkAccnt;
   bool isXfer = false;
   bool noError = true;
   QList<MyMoneySplit> lst = t.splits();

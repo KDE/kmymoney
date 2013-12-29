@@ -1026,7 +1026,7 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
 {
   QString newTxt;
   bool firstField = true;
-  QString firstValue = QString();
+  QString firstValue;
 
   if (m_columnList.count() < m_endColumn) {
     if (!m_accept) {
