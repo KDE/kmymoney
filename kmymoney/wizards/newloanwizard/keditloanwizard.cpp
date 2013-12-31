@@ -115,6 +115,9 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
     m_interestTypePage->m_variableInterestButton->animateClick();
   }
 
+  QString institutionName = file->institution(m_account.institutionId()).name();
+  m_loanAttributesPage->setInstitution(institutionName);
+
   MyMoneyMoney ir;
   if (m_schedule.startDate() > QDate::currentDate()) {
     ir = m_account.interestRate(m_schedule.startDate());
@@ -277,6 +280,9 @@ bool KEditLoanWizard::validateCurrentPage()
       m_pages.clearBit(Page_Schedule);
       m_pages.setBit(Page_Summary);
 
+      // Attributes
+      m_pages.clearBit(Page_LoanAttributes);
+
       m_pages.setBit(Page_EffectiveDate);
 
       if (page(Page_Summary) != 0) {
@@ -315,6 +321,9 @@ bool KEditLoanWizard::validateCurrentPage()
         setPage(Page_Summary, m_summaryPage);
         m_pages.setBit(Page_Summary);
 
+      } else if (field("editAttributesButton").toBool()) {
+        m_pages.setBit(Page_LoanAttributes);
+        m_pages.clearBit(Page_EffectiveDate);
       } else {
         qWarning("%s,%d: This should never happen", __FILE__, __LINE__);
       }
@@ -457,6 +466,22 @@ const MyMoneyAccount KEditLoanWizard::account(void) const
     acc.setInterestCalculation(MyMoneyAccountLoan::paymentReceived);
   else
     acc.setInterestCalculation(MyMoneyAccountLoan::paymentDue);
+
+  MyMoneyFile *file = MyMoneyFile::instance();
+
+  QString institution = m_loanAttributesPage->m_qcomboboxInstitutions->currentText();
+  if (institution != i18n("(No Institution)")) {
+    QList<MyMoneyInstitution> list;
+    file->institutionList(list);
+    Q_FOREACH (const MyMoneyInstitution& testInstitution, list) {
+      if (testInstitution.name() == institution) {
+        acc.setInstitutionId(testInstitution.id());
+        break;
+      }
+    }
+  } else {
+    acc.setInstitutionId(QString());
+  }
 
   acc.setFixedInterestRate(field("fixedInterestButton").toBool());
   acc.setFinalPayment(field("finalPaymentEdit").value<MyMoneyMoney>());

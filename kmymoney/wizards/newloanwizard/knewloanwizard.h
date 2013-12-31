@@ -69,7 +69,8 @@ class KNewLoanWizard : public KNewLoanWizardDecl
   //TODO: find a way to make this not a friend class
   friend class AdditionalFeesWizardPage;
 public:
-  enum { Page_Intro, Page_EditIntro, Page_NewGeneralInfo, Page_EditSelection,
+  enum { Page_Intro, Page_EditIntro, Page_NewGeneralInfo,
+         Page_EditSelection, Page_LoanAttributes,
          Page_EffectiveDate, Page_LendBorrow, Page_Name, Page_InterestType,
          Page_PreviousPayments, Page_RecordPayment, Page_VariableInterestDate,
          Page_PaymentEdit, Page_InterestEdit, Page_FirstPayment,

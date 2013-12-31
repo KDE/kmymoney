@@ -33,6 +33,8 @@
     </widget>
     <widget class="EditSelectionWizardPage" name="m_editSelectionPage">
     </widget>
+    <widget class="LoanAttributesWizardPage" name="m_loanAttributesPage">
+    </widget>
     <widget class="EffectiveDateWizardPage" name="m_effectiveDatePage">
     </widget>
     <widget class="LendBorrowWizardPage" name="m_lendBorrowPage">
