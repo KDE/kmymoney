@@ -413,9 +413,13 @@ const QString MyMoneyDbDef::generateSQL(const KSharedPtr<MyMoneyDbDriver>& drive
       replace =  QString::number
                  (MyMoneyFile::instance()->storage()->currentFixVersion());
     if ((*fit)->name() == "created")
-      replace = QDate::currentDate().toString(Qt::ISODate);
+      replace = QLatin1Char('\'')
+              + QDate::currentDate().toString(Qt::ISODate)
+              + QLatin1Char('\'');
     if ((*fit)->name() == "lastModified")
-      replace = QDate::currentDate().toString(Qt::ISODate);
+      replace = QLatin1Char('\'')
+              + QDate::currentDate().toString(Qt::ISODate)
+              + QLatin1Char('\'');
     if ((*fit)->name() == "updateInProgress")
       replace = enclose("N");
     qs.replace(toReplace, replace);
