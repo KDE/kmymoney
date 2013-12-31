@@ -107,8 +107,8 @@ CSVDialog::CSVDialog(QWidget *parent) : QWidget(parent), ui(new Ui::CSVDialog)
   m_borders = 14;
   m_tableHeight = m_header + m_rowHght * m_tableRows + m_borders;
   m_minimumHeight = 595;
-  m_windoWidth = 812;
-  m_initialHeight = 700;
+  m_windowWidth = geometry().width();
+  m_initialHeight = geometry().height();
 
   m_curId = -1;
   m_lastId = -1;
@@ -140,9 +140,9 @@ void CSVDialog::init()
 
   m_wizard = new QWizard;
   ui->horizontalLayout->insertWidget(2, m_wizard, 0);
-  ui->horizontalLayout->setStretch(0, 150);
+  ui->horizontalLayout->setStretch(0, 10);//180
   ui->horizontalLayout->setStretch(1, 1);
-  ui->horizontalLayout->setStretch(2, 350);
+  ui->horizontalLayout->setStretch(2, 50);//350
   ui->horizontalLayout->setStretch(3, 1);
 
   this->setAutoFillBackground(true);
@@ -247,7 +247,7 @@ void CSVDialog::init()
   this->move(x, y);
   setMinimumHeight(m_minimumHeight);
   m_lastHeight = m_initialHeight;
-  resize(m_windoWidth, m_lastHeight);
+  resize(m_windowWidth, m_lastHeight);
 
   m_dateFormats << "yyyy/MM/dd" << "MM/dd/yyyy" << "dd/MM/yyyy";
 
@@ -1252,7 +1252,6 @@ void CSVDialog::csvImportTransaction(MyMoneyStatement& st)
   // Now to import the statements
   return;
 }
-
 
 void CSVDialog::slotImportClicked()
 {

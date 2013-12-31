@@ -2044,7 +2044,8 @@ void InvestProcessing::redrawWindow(int startLine)
   rect.setHeight(m_csvDialog->m_tableHeight);
   m_csvDialog->ui->frame_main->setFrameRect(rect);
   m_topLine = startLine;
-
+  //  ensure columnwidth reflects data width
+  m_csvDialog->ui->tableWidget->setColumnWidth(0, 100);
   int end = m_topLine + m_csvDialog->m_tableRows;
   if (end > m_fileEndLine) {
     end = m_fileEndLine;

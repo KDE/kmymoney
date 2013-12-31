@@ -560,7 +560,7 @@ The names are retained and may be selected from the list here.&lt;/p&gt;</string
            </property>
            <property name="minimumSize">
             <size>
-             <width>110</width>
+             <width>115</width>
              <height>0</height>
             </size>
            </property>

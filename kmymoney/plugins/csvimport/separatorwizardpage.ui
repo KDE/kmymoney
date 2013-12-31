@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>697</width>
+    <width>675</width>
     <height>240</height>
    </rect>
   </property>
@@ -189,7 +189,7 @@ p, li { white-space: pre-wrap; }
             <widget class="KComboBox" name="comboBox_fieldDelimiter">
              <property name="minimumSize">
               <size>
-               <width>100</width>
+               <width>124</width>
                <height>27</height>
               </size>
              </property>
