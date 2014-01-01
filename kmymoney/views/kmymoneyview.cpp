@@ -1535,7 +1535,8 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("BHD", i18n("Bahraini Dinar"),         "BHD", 1000, 1000), create);
   loadDefaultCurrency(MyMoneySecurity("BDT", i18n("Bangladeshi Taka")), create);
   loadDefaultCurrency(MyMoneySecurity("BBD", i18n("Barbados Dollar"),        "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("BYR", i18n("Belarusian Ruble"),      "BYR", 1, 1), create);
+  loadDefaultCurrency(MyMoneySecurity("BTC", i18n("Bitcoin"),                "BTC"), create);
+  loadDefaultCurrency(MyMoneySecurity("BYR", i18n("Belarusian Ruble"),       "BYR", 1, 1), create);
   loadDefaultCurrency(MyMoneySecurity("BZD", i18n("Belize Dollar"),          "$"), create);
   loadDefaultCurrency(MyMoneySecurity("BMD", i18n("Bermudian Dollar"),       "$"), create);
   loadDefaultCurrency(MyMoneySecurity("BTN", i18n("Bhutan Ngultrum")), create);
