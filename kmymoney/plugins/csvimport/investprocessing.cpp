@@ -1030,7 +1030,7 @@ void InvestProcessing::readFile(const QString& fname)
       m_csvDialog->updateDecimalSymbol("price", m_priceColumn);
       m_csvDialog->updateDecimalSymbol("quantity", m_quantityColumn);
     } else {
-      KMessageBox::sorry(0, i18n("<center>An amount, price, and/or quantity column is missing.</center> <center><b>%1</b></center>Please check your selections."), i18n("CSV import"));
+      KMessageBox::sorry(0, i18n("<center>An amount, price, and/or quantity column is missing.</center>Please check your selections."), i18n("CSV import"));
     }
 
     emit statementReady(st);  //              investment statement ready
@@ -1095,7 +1095,6 @@ void InvestProcessing::displayLine(const QString& data)
   }
 
   QStringList::const_iterator constIterator;
-  QString pattern = QString("[%1(),$]").arg(KGlobal::locale()->currencySymbol());
   for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
        ++constIterator) {
     QString txt = (*constIterator);
@@ -1434,8 +1433,8 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
   } else {
     KMessageBox::sorry(0, i18n("<center>The columns selected are invalid.\n</center>"
                                "There must an amount or quantity fields, symbol or security name, plus date and type field."
-                               "<center>You possibly need to check the start and end line settings, or reset 'Skip setup'.</center>",
-                          i18n("CSV import")));
+                               "<center>You possibly need to check the start and end line settings, or reset 'Skip setup'.</center>"),
+                          i18n("CSV import"));
     return KMessageBox::Cancel;
   }
   return KMessageBox::Ok;

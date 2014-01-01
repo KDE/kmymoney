@@ -587,7 +587,7 @@ class IntroPage : public QWizardPage
   Q_OBJECT
 
 public:
-  IntroPage(QWidget *parent = 0);
+explicit IntroPage(QWidget *parent = 0);
   ~IntroPage();
 
   void                initializePage();
@@ -653,7 +653,7 @@ class SeparatorPage : public QWizardPage
   Q_OBJECT
 
 public:
-  SeparatorPage(QWidget *parent = 0);
+explicit SeparatorPage(QWidget *parent = 0);
   ~SeparatorPage();
 
   QVBoxLayout         *m_pageLayout;
@@ -689,7 +689,7 @@ class BankingPage : public QWizardPage
   Q_OBJECT
 
 public:
-  BankingPage(QWidget *parent = 0);
+explicit BankingPage(QWidget *parent = 0);
   ~BankingPage();
 
   Ui::BankingPage     *ui;
@@ -728,7 +728,7 @@ class InvestmentPage : public QWizardPage
   Q_OBJECT
 
 public:
-  InvestmentPage(QWidget *parent = 0);
+explicit InvestmentPage(QWidget *parent = 0);
   ~InvestmentPage();
 
   QVBoxLayout         *m_pageLayout;
@@ -769,7 +769,7 @@ class LinesDatePage : public QWizardPage
   Q_OBJECT
 
 public:
-  LinesDatePage(QWidget *parent = 0);
+explicit LinesDatePage(QWidget *parent = 0);
   ~LinesDatePage();
 
   QVBoxLayout         *m_pageLayout;
@@ -801,7 +801,7 @@ class CompletionPage : public QWizardPage
   Q_OBJECT
 
 public:
-  CompletionPage(QWidget *parent = 0);
+explicit CompletionPage(QWidget *parent = 0);
   ~CompletionPage();
 
   QVBoxLayout*        m_pageLayout;

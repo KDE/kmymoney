@@ -1553,9 +1553,12 @@ void CSVDialog::redrawWindow(int startLine)
 
 void CSVDialog::slotCancel()
 {
-  int ret = KMessageBox::warningContinueCancel(this, i18n("<center>Are you sure you wish to exit?</center>"
-            "<center>Restart or Quit?</center>"), i18n("Cancel clicked"), KGuiItem(i18n("Restart")),
-            KStandardGuiItem::quit());
+  int ret = KMessageBox::warningContinueCancel(this, i18nc("Click 'Quit' if you do wish to exit.",
+                                                           "<center>Are you sure you wish to exit?</center>"
+                                                           "<center>Restart or Quit?</center>"),
+                                                     i18nc("Cancel button was clicked.", "Cancel clicked"),
+                                                     KGuiItem(i18nc("Click 'Restart' to begin again.","Restart")),
+                                                     KStandardGuiItem::quit());
   if (ret == KMessageBox::Continue) {
     if (m_fileType == "Banking") {
       saveSettings();
