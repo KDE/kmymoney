@@ -1019,6 +1019,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s.setValue(-s1.value());
         s.setAccountId(payeeObj.defaultAccountId());
         transactionUnderImport.addSplit(s);
+        MyMoneyFile* file = MyMoneyFile::instance();
+        MyMoneyAccount category = file->account(payeeObj.defaultAccountId());
+        file->addVATSplit(transactionUnderImport, m_account, category, statementTransactionUnderImport.m_amount);
       } else if (statementTransactionUnderImport.m_listSplits.isEmpty() && !d->m_skipCategoryMatching) {
         MyMoneyTransactionFilter filter(thisaccount.id());
         filter.addPayee(payeeid);
