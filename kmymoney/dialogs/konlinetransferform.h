@@ -103,7 +103,7 @@ private:
   size_t m_activeTransferType;
 
   /** @brief returns the active onlineJob */
-  onlineJobTyped<onlineTransfer> activeOnlineJob() const;
+  onlineJob activeOnlineJob() const;
 
   Ui::kOnlineTransferFormDecl* ui;
 

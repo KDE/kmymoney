@@ -37,16 +37,26 @@ class KMM_MYMONEY_EXPORT onlineJobTyped : public onlineJob
 public:
     explicit onlineJobTyped();
 
-    onlineJobTyped( T* task, const QString& id = MyMoneyObject::m_emptyId );
+    /**
+     * @brief Create typed onlineJob
+     * 
+     * @throws emptyTask if task == 0
+     */
+    explicit onlineJobTyped( T* task, const QString& id = MyMoneyObject::m_emptyId );
 
     /** @brief Copy constructor */
     onlineJobTyped( onlineJobTyped<T> const& other );
 
-    /** @brief Copy from onlineJob */
-    onlineJobTyped(const onlineJob &other);
+    /**
+     * @brief Copy from onlineJob
+     * 
+     * @throws badTaskCast if task in other does not fit T
+     * @throws emptyTask if other has no task
+     */
+    explicit onlineJobTyped(const onlineJob &other);
 
     /** @brief Copy constructor with new id */
-    onlineJobTyped( const QString &id, const onlineJobTyped<T>& other );
+    explicit onlineJobTyped( const QString &id, const onlineJobTyped<T>& other );
 
     inline T* task();
     inline const T* task() const;
@@ -59,7 +69,7 @@ private:
 
     /**
      * @brief Test if m_taskSubType != 0 and throws an exception if needed
-     * @throws MyMoneyException if m_taskSubType == 0
+     * @throws emptyTask if m_taskSubType == 0
      */
     void testForValidTask() const;
 };
@@ -77,7 +87,8 @@ onlineJobTyped<T>::onlineJobTyped( T* task, const QString& id )
     : onlineJob(task, id),
       m_taskSubType(task)
 {
-    testForValidTask();
+  if (task == 0)
+    throw new emptyTask;
 }
 
 template<class T>
@@ -102,7 +113,7 @@ template<class T>
 onlineJobTyped<T>::onlineJobTyped(const onlineJob &other)
     : onlineJob( other )
 {
-    m_taskSubType = dynamic_cast<T*>(onlineJob::task());
+    m_taskSubType = dynamic_cast<T*>(onlineJob::task()); // this can throw emptyTask
     if (m_taskSubType == 0)
         throw new badTaskCast;
 }
@@ -125,7 +136,7 @@ template<class T>
 void onlineJobTyped<T>::testForValidTask() const
 {
     if (m_taskSubType == 0)
-        throw new badTaskCast;
+        throw new emptyTask;
 }
 
 #endif // ONLINEJOBTYPED_H

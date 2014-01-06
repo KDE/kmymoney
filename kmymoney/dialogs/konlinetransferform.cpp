@@ -65,7 +65,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   connect(ui->sepaPage, SIGNAL(onlineJobChanged()), this, SLOT(jobChanged()));
 }
 
-onlineJobTyped<onlineTransfer> kOnlineTransferForm::activeOnlineJob() const
+onlineJob kOnlineTransferForm::activeOnlineJob() const
 {
   if (m_activeTransferType == sepaOnlineTransfer::hash)
     return ui->sepaPage->getOnlineJob();
