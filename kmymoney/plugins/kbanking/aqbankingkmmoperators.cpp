@@ -25,7 +25,7 @@ static const QString dtausChars = QString::fromUtf8("0123456789ABCDEFGHIJKLMNOPQ
  * Additional lower case letters were added, or should the input mask replaced them mit the uppercase version? The bank should do that
  * anyway.
  */
-static const QString sepaChars = QString("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':?,- (+)/");
+static const QString sepaChars = QString("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':?.,- (+)/");
 
 QSharedPointer<onlineTask::settings> AB_TransactionLimits_toGermanOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits )
 {
