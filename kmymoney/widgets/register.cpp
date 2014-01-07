@@ -1197,7 +1197,7 @@ void Register::resize(int col, bool force)
 
     w -= columnWidth(i);
   }
-  setColumnWidth(col, qMax(w, minimumColumnWidth(col)));
+  setColumnWidth(col, w);
 }
 
 int Register::minimumColumnWidth(int col)
