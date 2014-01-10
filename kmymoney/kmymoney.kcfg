@@ -273,7 +273,7 @@
    <label>Background color for matched transactions</label>
    <default>152,251,152</default>
   </entry>
-  <entry name="listErronousTransactionColor" type="Color">
+  <entry name="listErroneousTransactionColor" type="Color">
    <label>List color for erroneous transactions</label>
    <default>255,0,0</default>
   </entry>

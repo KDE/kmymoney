@@ -103,8 +103,8 @@ public:
 
   void setFocus(bool focus, bool updateLens = true);
 
-  bool isErronous(void) const {
-    return m_erronous;
+  bool isErroneous(void) const {
+    return m_erroneous;
   }
 
   virtual const QDate sortPostDate(void) const {
@@ -296,7 +296,7 @@ protected:
   int                     m_formRowHeight;
   bool                    m_selected;
   bool                    m_focus;
-  bool                    m_erronous;
+  bool                    m_erroneous;
   bool                    m_inEdit;
   bool                    m_inRegisterEdit;
   bool                    m_showBalance;

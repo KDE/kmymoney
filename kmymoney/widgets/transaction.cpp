@@ -155,7 +155,7 @@ Transaction::Transaction(Register *parent, const MyMoneyTransaction& transaction
     m_formRowHeight(-1),
     m_selected(false),
     m_focus(false),
-    m_erronous(false),
+    m_erroneous(false),
     m_inEdit(false),
     m_inRegisterEdit(false),
     m_showBalance(true),
@@ -190,8 +190,8 @@ Transaction::Transaction(Register *parent, const MyMoneyTransaction& transaction
   if (!m_transaction.id().isEmpty())
     m_splitCurrencyId = m_account.currencyId();
 
-  // check if transaction is errnous or not
-  m_erronous = !m_transaction.splitSum().isZero();
+  // check if transaction is erroneous or not
+  m_erroneous = !m_transaction.splitSum().isZero();
 
   if (!m_uniqueId.isEmpty()) {
     m_uniqueId += '-';
@@ -254,8 +254,8 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
   }
 
   // do we need to switch to the error color?
-  if (m_erronous) {
-    option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::listErronousTransactionColor());
+  if (m_erroneous) {
+    option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::listErroneousTransactionColor());
   }
 
   // do we need to switch to the negative balance color?
@@ -264,7 +264,7 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
     if (m_account.accountGroup() == MyMoneyAccount::Liability && !m_balance.isZero())
       showNegative = !showNegative;
     if (showNegative)
-      option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::listErronousTransactionColor());
+      option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::listErroneousTransactionColor());
   }
   return true;
 }
@@ -282,7 +282,7 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
     const QStyle *style = option.widget ? option.widget->style() : QApplication::style();
     const QWidget* widget = option.widget;
 
-    // clear the mouse ove state before painting the background
+    // clear the mouse over state before painting the background
     option.state &= ~QStyle::State_MouseOver;
     // the background
     if (option.state & QStyle::State_Selected || option.state & QStyle::State_HasFocus) {
@@ -360,7 +360,7 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
 
     // possible icons
     if (index.row() == startRow() && index.column() == DetailColumn) {
-      if (m_erronous) {
+      if (m_erroneous) {
         QPixmap attention;
         attention.loadFromData(attentionSign, sizeof(attentionSign), 0, 0);
         style->drawItemPixmap(painter, option.rect, Qt::AlignRight | Qt::AlignVCenter, attention);
@@ -520,7 +520,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
   if (col != DetailColumn)
     return false;
 
-  if (!m_erronous && m_transaction.splitCount() < 3)
+  if (!m_erroneous && m_transaction.splitCount() < 3)
     return false;
 
   // check for detail column in row 0 of the transaction for a possible
@@ -528,7 +528,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
   // the modelindex is based 1, so we need to add one here
   r = m_parent->visualRect(m_parent->model()->index(m_startRow + 1, col));
   r.setBottom(r.bottom() + (numRowsRegister() - 1)*r.height());
-  if (r.contains(cpos) && m_erronous) {
+  if (r.contains(cpos) && m_erroneous) {
     if (m_transaction.splits().count() < 2) {
       msg = QString("<qt>%1</qt>").arg(i18n("Transaction is missing a category assignment."));
     } else {
@@ -1035,7 +1035,7 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
               if (txt.isEmpty() && !m_split.value().isZero()) {
                 txt = i18n("*** UNASSIGNED ***");
                 if (painter)
-                  painter->setPen(KMyMoneyGlobalSettings::listErronousTransactionColor());
+                  painter->setPen(KMyMoneyGlobalSettings::listErroneousTransactionColor());
               }
             }
           }
@@ -1100,7 +1100,7 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
           if (txt.isEmpty() && !m_split.value().isZero()) {
             txt = i18n("*** UNASSIGNED ***");
             if (painter)
-              painter->setPen(KMyMoneyGlobalSettings::listErronousTransactionColor());
+              painter->setPen(KMyMoneyGlobalSettings::listErroneousTransactionColor());
           }
           break;
 

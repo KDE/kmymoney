@@ -140,9 +140,7 @@ public:
     return "GroupMarker";
   }
 
-// TODO: Correct spelling also in other classes!
-//  bool isErroneous(void) const {
-  bool isErronous(void) const {
+  bool isErroneous(void) const {
     return m_erroneous;
   }
 
@@ -638,10 +636,10 @@ protected:
   RegisterItem*                m_ensureVisibleItem;
   RegisterItem*                m_firstItem;
   RegisterItem*                m_lastItem;
-  RegisterItem*                m_firstErronous;
-  RegisterItem*                m_lastErronous;
+  RegisterItem*                m_firstErroneous;
+  RegisterItem*                m_lastErroneous;
 
-  int                          m_markErronousTransactions;
+  int                          m_markErroneousTransactions;
   int                          m_rowHeightHint;
 
   MyMoneyAccount               m_account;

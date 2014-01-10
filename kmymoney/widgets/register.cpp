@@ -287,7 +287,7 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
   cellRect.setWidth(m_parent->viewport()->width());
   cellRect.setHeight(m_parent->rowHeight(index.row()));
 
-  option.palette.setColor(QPalette::Base, isErronous() ? KMyMoneyGlobalSettings::listErronousTransactionColor() : KMyMoneyGlobalSettings::groupMarkerColor());
+  option.palette.setColor(QPalette::Base, isErroneous() ? KMyMoneyGlobalSettings::listErroneousTransactionColor() : KMyMoneyGlobalSettings::groupMarkerColor());
 
   QBrush backgroundBrush(option.palette.color(QPalette::Base));
   painter->fillRect(cellRect, backgroundBrush);
@@ -295,7 +295,7 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
   painter->drawLine(cellRect.x(), cellRect.height() - 1, cellRect.width(), cellRect.height() - 1);
 
   // now write the text
-  painter->setPen(option.palette.color(isErronous() ? QPalette::HighlightedText : QPalette::Text));
+  painter->setPen(option.palette.color(isErroneous() ? QPalette::HighlightedText : QPalette::Text));
   QFont font = painter->font();
   font.setBold(true);
   painter->setFont(font);
@@ -465,8 +465,8 @@ Register::Register(QWidget *parent) :
     m_focusItem(0),
     m_firstItem(0),
     m_lastItem(0),
-    m_firstErronous(0),
-    m_lastErronous(0),
+    m_firstErroneous(0),
+    m_lastErroneous(0),
     m_rowHeightHint(0),
     m_ledgerLensForced(false),
     m_selectionMode(QTableWidget::MultiSelection),
@@ -756,7 +756,7 @@ TransactionSortField Register::primarySortKey(void) const
 
 void Register::clear(void)
 {
-  m_firstErronous = m_lastErronous = 0;
+  m_firstErroneous = m_lastErroneous = 0;
   m_ensureVisibleItem = 0;
 
   RegisterItem* p;
@@ -947,7 +947,7 @@ void Register::updateRegister(bool forceUpdateRowHeight)
 
     int rowCount = 0;
     // determine the number of rows we need to display all items
-    // while going through the list, check for erronous transactions
+    // while going through the list, check for erroneous transactions
     for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
       RegisterItem* item = m_items[i];
       if (!item)
@@ -956,10 +956,10 @@ void Register::updateRegister(bool forceUpdateRowHeight)
       item->setNeedResize();
       rowCount += item->numRowsRegister();
 
-      if (item->isErronous()) {
-        if (!m_firstErronous)
-          m_firstErronous = item;
-        m_lastErronous = item;
+      if (item->isErroneous()) {
+        if (!m_firstErroneous)
+          m_firstErroneous = item;
+        m_lastErroneous = item;
       }
     }
 

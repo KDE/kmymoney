@@ -93,7 +93,7 @@ public:
     Q_UNUSED(updateLens);
   }
 
-  virtual bool isErronous(void) const = 0;
+  virtual bool isErroneous(void) const = 0;
 
   // helper functions used for sorting
   virtual const QDate sortPostDate(void) const {
