@@ -72,7 +72,6 @@ bool sepaOnlineTransfer::isValid() const
     && settings->checkPurposeCharset( _purpose )
     && settings->checkEndToEndReferenceLength( _endToEndReference ) == creditTransferSettingsBase::ok
     && settings->checkRecipientCharset( _remoteAccount.ownerName() )
-    //&& settings->checkNameLength( .ownerName() )
     && settings->checkRecipientLength( _remoteAccount.ownerName()) == creditTransferSettingsBase::ok
     && settings->isIbanValid( _remoteAccount.accountNumber() )
     && settings->checkRecipientBic( _remoteAccount.bankCode() )

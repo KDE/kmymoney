@@ -29,7 +29,7 @@ ONLINETASK_META_INIT(germanOnlineTransfer);
 
 germanOnlineTransfer::germanOnlineTransfer()
   : onlineTransfer(),
-    _settings( QSharedPointer<const settings>( new settings() ) ),
+    _settings( QSharedPointer<const settings>() ),
     _value(0),
     _purpose(QString()),
     _originAccount( QString() ),
@@ -62,15 +62,15 @@ germanOnlineTransfer *germanOnlineTransfer::clone() const
 bool germanOnlineTransfer::isValid() const
 {
   QSharedPointer<const germanOnlineTransfer::settings> settings = getSettings();
+
   if ( settings->checkPurposeLength( _purpose ) == creditTransferSettingsBase::ok
     && settings->checkPurposeMaxLines( _purpose )
     && settings->checkPurposeLineLength( _purpose )
     && settings->checkPurposeCharset( _purpose )
     && settings->checkRecipientCharset( _remoteAccount.ownerName() )
-    //&& settings->checkNameLength( .ownerName() )
-    && settings->checkRecipientLength( _remoteAccount.ownerName()) == creditTransferSettingsBase::ok
-    && settings->checkRecipientAccountNumber( _remoteAccount.accountNumber() )
-    && settings->checkRecipientBankCode( _remoteAccount.bankCode() )
+    && settings->checkRecipientLength( _remoteAccount.ownerName() ) == creditTransferSettingsBase::ok
+    && settings->checkRecipientAccountNumber( _remoteAccount.accountNumber() ) == creditTransferSettingsBase::ok
+    && settings->checkRecipientBankCode( _remoteAccount.bankCode() ) == creditTransferSettingsBase::ok
     && value().isPositive()
   )
     return true;
@@ -148,6 +148,6 @@ void germanOnlineTransfer::setOriginAccount( const QString& accountId )
 {
   if (accountId != _originAccount) {
     _originAccount = accountId;
-    _settings = onlineJobAdministration::instance()->taskSettings<germanOnlineTransfer::settings>(name(), accountId);
+    _settings = QSharedPointer<const settings>();
   }
 }
