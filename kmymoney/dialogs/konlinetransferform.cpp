@@ -24,16 +24,18 @@
 #include <QtCore/QSharedPointer>
 #include <QDebug>
 
-#include "mymoneyaccount.h"
+#include "kguiutils.h"
 #include "kmymoneylineedit.h"
-#include "mymoneyfile.h"
 
+#include "mymoney/mymoneyfile.h"
+#include "mymoney/mymoneyaccount.h"
 #include "mymoney/accountidentifier.h"
 #include "mymoney/onlinejobadministration.h"
 
 kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   : QDialog(parent),
     m_activeTransferType( 0 ),
+    m_requiredFields( new kMandatoryFieldGroup(this) ),
     ui(new Ui::kOnlineTransferFormDecl)
 {
   ui->setupUi(this);
@@ -62,7 +64,10 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   
   connect(ui->orderAccount, SIGNAL(currentIndexChanged(int)), this, SLOT(accountChanged()));
   
-  connect(ui->sepaPage, SIGNAL(onlineJobChanged()), this, SLOT(jobChanged()));
+  m_requiredFields->add(ui->germanPage);
+  m_requiredFields->add(ui->sepaPage);
+  
+  m_requiredFields->setOkButton(ui->buttonSend);  
 }
 
 onlineJob kOnlineTransferForm::activeOnlineJob() const
@@ -87,7 +92,7 @@ void kOnlineTransferForm::activateSepaTransfer(bool active )
   
   m_activeTransferType = sepaOnlineTransfer::hash;
   ui->sepaPage->setOriginAccount( originAccount() );
-  
+
   setTransferWidget( sepaOnlineTransfer::hash );
 }
 
@@ -104,7 +109,7 @@ void kOnlineTransferForm::activateGermanTransfer( bool active )
 
   m_activeTransferType = germanOnlineTransfer::hash;
   ui->germanPage->setOriginAccount( originAccount() );
-  
+
   setTransferWidget( germanOnlineTransfer::hash );
 }
 
@@ -119,7 +124,6 @@ void kOnlineTransferForm::sendJob()
     emit acceptedForSend( activeOnlineJob() );
     QDialog::accept();
 }
-
 
 void kOnlineTransferForm::reject()
 {
@@ -191,26 +195,24 @@ void kOnlineTransferForm::setTransferWidget(const size_t& onlineTaskHash)
     ui->radioTransferNational->setChecked(true);
   else if ( sepaOnlineTransfer::hash == onlineTaskHash )
     ui->radioTransferSepa->setChecked(true);
-  
-  if (!onlineJobAdministration::instance()->isJobSupported( originAccount(), onlineTaskHash))
+ 
+  if (!onlineJobAdministration::instance()->isJobSupported( originAccount(), onlineTaskHash)) {
     ui->creditTransferEdits->setCurrentIndex( pageUnsupportedByAccount );
-  else if ( germanOnlineTransfer::hash == onlineTaskHash )
+  } else if ( germanOnlineTransfer::hash == onlineTaskHash ) {
     ui->creditTransferEdits->setCurrentIndex( pageGermanCreditTransfer );
-  else if ( sepaOnlineTransfer::hash == onlineTaskHash )
+    // Enable and disable to inform kMandatoryFieldGroup if the field is mandatory
+    ui->sepaPage->setEnabled(false);
+    ui->germanPage->setEnabled(true);
+  } else if ( sepaOnlineTransfer::hash == onlineTaskHash ) {
     ui->creditTransferEdits->setCurrentIndex( pageSepaCreditTransfer );
-  else
+    ui->sepaPage->setEnabled(true);
+    ui->germanPage->setEnabled(false);
+  } else {
     ui->creditTransferEdits->setCurrentIndex( pageUnsupportedByAccount );
+  }
 }
 
 kOnlineTransferForm::~kOnlineTransferForm()
 {
   delete ui;
-}
-
-void kOnlineTransferForm::jobChanged()
-{
-    if (activeOnlineJob().isValid())
-        ui->buttonSend->setEnabled( true );
-    else
-        ui->buttonSend->setEnabled( false );
 }

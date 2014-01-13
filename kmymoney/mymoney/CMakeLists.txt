@@ -179,6 +179,14 @@ IF( KDE4_BUILD_TESTS )
 
   target_link_libraries( onlinejobtest kmm_mymoney ${target_link_libraries_test})
 
+  # germanOnlineTransfer
+  set( germanonlinetransfertest_SRCS germanonlinetransfertest.cpp )
+
+  kde4_add_unit_test( germanonlinetransfertest TESTNAME kmymoney-germanOnlineTransferTest ${germanonlinetransfertest_SRCS} )
+  ADD_DEPENDENCIES( germanonlinetransfertest kmm_mymoney )
+
+  target_link_libraries( germanonlinetransfertest kmm_mymoney ${target_link_libraries_test})
+  
   # MyMoneyPayee
   set( mymoneypayeetest_SRCS mymoneypayeetest.cpp )
 

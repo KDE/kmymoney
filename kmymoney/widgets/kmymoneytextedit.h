@@ -60,6 +60,7 @@ public:
   int maxLineLength() const;
   int maxLines() const;
   QString allowedChars() const;
+  bool isValid() const;
 
 public Q_SLOTS:
   void setMaxLength(const int& maxLength);

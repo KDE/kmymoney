@@ -96,6 +96,14 @@ public:
       return false;
     }
     
+    /**
+     * @brief Checks if the bic is mandatory for the given iban
+     * 
+     * For the check usually only the first two chars are needed. So you do not
+     * need to validate the IBAN.
+     */
+    virtual bool isBicMandatory( const QString& iban ) const { return true; }
+    
   private:
     /** @brief Number of chars allowed for sepa reference */
     int m_endToEndReferenceLength;

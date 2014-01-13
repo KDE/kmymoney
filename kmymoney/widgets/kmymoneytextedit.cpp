@@ -137,6 +137,33 @@ bool KMyMoneyTextEdit::isEventAllowed(QKeyEvent* e) const
   return true;
 }
 
+bool KMyMoneyTextEdit::isValid() const
+{
+  const QString text = toPlainText();
+  
+  if ( m_maxLength != -1 && text.length() >= m_maxLength )
+    return false;
+  
+  const QStringList lines = text.split('\n');
+  
+  if ( m_maxLines != -1 && lines.count() >= m_maxLines ) {
+    return false;
+  }
+  
+  if ( m_maxLineLength != -1 ) {    
+    foreach (QString line, lines) {
+      if (line.length() > m_maxLineLength)
+        return false;
+    }
+  }
+  
+  const int length = text.length();
+  for (int i = 0; i < length; ++i) {
+    if (!m_allowedChars.contains(text.at(i)))
+      return false;
+  }
+  return true;
+}
 
 void KMyMoneyTextEdit::keyReleaseEvent(QKeyEvent* e)
 {

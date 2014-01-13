@@ -91,8 +91,14 @@ friend class onlineJobAdministration
 /**
  * @brief The onlineTask class
  *
- * Everything an onlinePlugin can do is represented as a task. An onlineTask should not be alone but be
- * assigned to an onlineJob instead.
+ * @notice This docu describes the inteded way of the onlineTask/Job system. The loading during runtime or plugin
+ * infrastructure is not realized yet (and needs further changes at the storage). The docu is just forward compatible.
+ * 
+ * Everything an onlinePlugin can do is represented as a task. Due to the huge amount of possible onlineTasks
+ * they are loaded during runtime. Which also allows a third party online plugin to introduce it's own
+ * tasks. However tasks are seperated from the onlinePlugins to allow more than one plugin to use the same task.
+ * 
+ * The widgets to edit an onlineTask are created by subclassing IonlineJobEdit.
  * 
  * @important Do not delete onlineTasks or use pointers to onlineTasks directly. Use onlineJob instead!
  * This prevents common C++ pitfalls.

@@ -19,13 +19,15 @@
 #include "sepacredittransferedit.h"
 #include "sepacredittransferedit_p.h"
 #include "ui_sepacredittransferedit.h"
+#include "kguiutils.h"
 
 #include "mymoney/swiftaccountidentifier.h"
 
 sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent) :
-    QWidget(parent),
+    IonlineJobEdit(parent),
     ui(new Ui::sepaCreditTransferEdit),
-    m_onlineJob( onlineJobTyped<sepaOnlineTransfer>( new sepaOnlineTransfer ) )
+    m_onlineJob( onlineJobTyped<sepaOnlineTransfer>( new sepaOnlineTransfer ) ),
+    m_requiredFields( new kMandatoryFieldGroup(this) )
 {
     ui->setupUi(this);
     
@@ -38,7 +40,13 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent) :
     ui->statusAmount->setVisible(false);
     ui->statusPurpose->setVisible(false);
     ui->statusReference->setVisible(false);
-
+    
+    m_requiredFields->add(ui->beneficiaryAccNum);
+    m_requiredFields->add(ui->value);
+    // Other required fields are set in updateSettings()
+    
+    connect(m_requiredFields, SIGNAL(stateChanged(bool)), this, SLOT(requiredFieldsCompleted(bool)));
+    
     connect(ui->beneficiaryName, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryNameChanged(QString)));
     connect(ui->beneficiaryAccNum, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryIbanChanged(QString)));
     connect(ui->beneficiaryBankCode, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryBicChanged(QString)));
@@ -59,7 +67,7 @@ sepaCreditTransferEdit::~sepaCreditTransferEdit()
     delete ui;
 }
 
-onlineJobTyped<sepaOnlineTransfer> sepaCreditTransferEdit::getOnlineJob() const
+onlineJobTyped<sepaOnlineTransfer> sepaCreditTransferEdit::getOnlineJobTyped() const
 {
   onlineJobTyped<sepaOnlineTransfer> sepaJob( m_onlineJob );
 
@@ -88,11 +96,13 @@ void sepaCreditTransferEdit::setOnlineJob(const onlineJobTyped<sepaOnlineTransfe
   updateSettings();
 }
 
-void sepaCreditTransferEdit::setOnlineJob( const onlineJob& job )
+bool sepaCreditTransferEdit::setOnlineJob( const onlineJob& job )
 {
   if( !job.isNull() && job.task()->taskHash() == sepaOnlineTransfer::hash ) {
     setOnlineJob( onlineJobTyped<sepaOnlineTransfer>(job) );
+    return true;
   }
+  return false;
 }
 
 void sepaCreditTransferEdit::setOriginAccount(const QString& accountId)
@@ -113,43 +123,64 @@ void sepaCreditTransferEdit::updateEveryStatus()
 
 void sepaCreditTransferEdit::updateSettings()
 {
-  QSharedPointer<const sepaOnlineTransfer::settings> settings = getOnlineJob().task()->getSettings();
+  QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
+  // Reference
   ui->sepaReference->setMaxLength( settings->endToEndReferenceLength() );
   if (settings->endToEndReferenceLength() == 0)
     ui->sepaReference->setEnabled( false );
   else
     ui->sepaReference->setEnabled( true );
-  
+
+  // Purpose
   ui->purpose->setAllowedChars( settings->allowedChars() );
   ui->purpose->setMaxLineLength( settings->purposeLineLength() );
   ui->purpose->setMaxLines( settings->purposeMaxLines() );
+  if (settings->purposeMinLength())
+    m_requiredFields->add(ui->purpose);
+  else
+    m_requiredFields->remove(ui->purpose);
   
+  // Beneficiary Name
   ui->beneficiaryName->setValidator( new QRegExpValidator(QRegExp( QString("[%1]*").arg(settings->allowedChars()) ), ui->beneficiaryName) );
   ui->beneficiaryName->setMaxLength( settings->recipientNameLineLength() );
+  
+  if (settings->recipientNameMinLength() != 0)
+    m_requiredFields->add(ui->beneficiaryName);
+  else
+    m_requiredFields->remove(ui->beneficiaryName);
   
   updateEveryStatus();
 }
 
 void sepaCreditTransferEdit::beneficiaryIbanChanged(const QString& iban)
 {
-    if ( getOnlineJob().task()->getSettings()->isIbanValid( iban ) ) {
-        ui->statusIban->setToolTip(QString());
-        ui->statusIban->setVisible(false);
-    } else {
-        ui->statusIban->setToolTip( i18n("The checksum for this IBAN is invalid.") );
-        ui->statusIban->setVisible(true);
-    }
+  QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
+  if ( settings->isIbanValid( iban ) ) {
+    ui->statusIban->setToolTip(QString());
+    ui->statusIban->setVisible(false);
+  } else {
+    ui->statusIban->setToolTip( i18n("The checksum for this IBAN is invalid.") );
+    ui->statusIban->setVisible(true);
+  }
+  
+  if (settings->isBicMandatory( iban ))
+    m_requiredFields->add( ui->beneficiaryBankCode );
+  else
+    m_requiredFields->remove( ui->beneficiaryBankCode );
 }
 
 void sepaCreditTransferEdit::beneficiaryNameChanged( const QString& name )
 {
-    if (name.isEmpty()) {
-        ui->statusBeneficiaryName->setToolTip( i18n("A beneficiary name is needed.") );
-        ui->statusBeneficiaryName->setVisible( true );
-    } else {
-        ui->statusBeneficiaryName->setToolTip( QString() );
-        ui->statusBeneficiaryName->setVisible( false );
-    }
+  QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
+  if ( name.length() < settings->recipientNameMinLength() ) {
+      ui->statusBeneficiaryName->setToolTip( i18np("A beneficiary name is needed.", "The beneficiary name must be at least %i characters long",
+        settings->recipientNameMinLength()
+      ) );
+      ui->statusBeneficiaryName->setVisible( true );
+  } else {
+      ui->statusBeneficiaryName->setToolTip( QString() );
+      ui->statusBeneficiaryName->setVisible( false );
+  }
 }
 
 void sepaCreditTransferEdit::beneficiaryBicChanged( const QString& bic )
@@ -191,7 +222,7 @@ void sepaCreditTransferEdit::valueChanged()
 
 void sepaCreditTransferEdit::endToEndReferenceChanged( const QString& reference )
 {
-    QSharedPointer<const sepaOnlineTransfer::settings> settings = getOnlineJob().task()->getSettings();
+  QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
     if ( settings->checkEndToEndReferenceLength( reference ) == sepaOnlineTransfer::settings::tooLong) {
         ui->statusReference->setToolTip( i18np("The end-to-end refence cannot contain more than one character.",
                                                "The end-to-end refence cannot contain more than %1 characters.",
@@ -206,7 +237,7 @@ void sepaCreditTransferEdit::endToEndReferenceChanged( const QString& reference 
 void sepaCreditTransferEdit::purposeChanged()
 {
     const QString purpose = ui->purpose->toPlainText();
-    QSharedPointer<const sepaOnlineTransfer::settings> settings = getOnlineJob().task()->getSettings();
+    QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
 
     QString tooltip = QString("");
     if (!settings->checkPurposeLineLength( purpose ))
@@ -231,6 +262,11 @@ void sepaCreditTransferEdit::purposeChanged()
         ui->statusPurpose->setVisible( false );
     else
         ui->statusPurpose->setVisible( true );
+}
+
+QSharedPointer< const sepaOnlineTransfer::settings > sepaCreditTransferEdit::taskSettings()
+{
+  return getOnlineJobTyped().task()->getSettings();
 }
 
 QValidator::State ibanValidator::validate(QString& string, int&) const

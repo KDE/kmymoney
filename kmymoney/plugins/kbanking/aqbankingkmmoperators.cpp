@@ -31,17 +31,28 @@ QSharedPointer<onlineTask::settings> AB_TransactionLimits_toGermanOnlineTaskSett
 {
   QSharedPointer<germanOnlineTransfer::settings> settings( new germanOnlineTransfer::settings );
 
+  // AqBanking returns 0 as min length even if it requires one
+  int minLength = AB_TransactionLimits_GetMinLenPurpose( aqlimits );
+  if (minLength == 0)
+    minLength = 1;
   settings->setPurposeLimits(AB_TransactionLimits_GetMaxLinesPurpose(aqlimits),
                              AB_TransactionLimits_GetMaxLenPurpose(aqlimits),
-                             AB_TransactionLimits_GetMinLenPurpose(aqlimits)
+                             minLength
                             );
+  
+  // AqBanking returns 0 as min length even if it requires one
+  minLength = AB_TransactionLimits_GetMinLenRemoteName( aqlimits );
+  if (minLength == 0)
+    minLength = 1;
   settings->setRecipientNameLimits(AB_TransactionLimits_GetMaxLinesRemoteName(aqlimits),
-                               AB_TransactionLimits_GetMaxLenRemoteName(aqlimits),
-                               AB_TransactionLimits_GetMinLenRemoteName( aqlimits )
+                                   AB_TransactionLimits_GetMaxLenRemoteName(aqlimits),
+                                   minLength
                                   );
-  settings->setPayeeNameLimits( 1, AB_TransactionLimits_GetMaxLenLocalName( aqlimits ),
-                                   AB_TransactionLimits_GetMinLenLocalName( aqlimits )
-  );
+  
+  minLength = AB_TransactionLimits_GetMinLenLocalName( aqlimits );
+  if (minLength == 0)
+    minLength = 1;
+  settings->setPayeeNameLimits( 1, AB_TransactionLimits_GetMaxLenLocalName( aqlimits ), minLength);
   
   settings->setAllowedChars( dtausChars );
 
@@ -57,13 +68,21 @@ QSharedPointer<onlineTask::settings> AB_TransactionLimits_toSepaOnlineTaskSettin
                              AB_TransactionLimits_GetMaxLenPurpose(aqlimits),
                              AB_TransactionLimits_GetMinLenPurpose(aqlimits)
   );
+  
+  // AqBanking returns 0 as min length even if it requires one
+  int minLength = AB_TransactionLimits_GetMinLenRemoteName( aqlimits );
+  if (minLength == 0)
+    minLength = 1;
   settings->setRecipientNameLimits(AB_TransactionLimits_GetMaxLinesRemoteName(aqlimits),
                                    AB_TransactionLimits_GetMaxLenRemoteName(aqlimits),
-                                   AB_TransactionLimits_GetMinLenRemoteName( aqlimits )
+                                   minLength
   );
-  settings->setPayeeNameLimits( 1, AB_TransactionLimits_GetMaxLenLocalName( aqlimits ),
-                                AB_TransactionLimits_GetMinLenLocalName( aqlimits )
-  );
+  
+  // AqBanking returns 0 as min length even if it requires one
+  minLength = AB_TransactionLimits_GetMinLenLocalName( aqlimits );
+  if (minLength == 0)
+    minLength = 1;
+  settings->setPayeeNameLimits( 1, AB_TransactionLimits_GetMaxLenLocalName( aqlimits ), minLength);
   
   //settings->referenceLength = AB_TransactionLimits_GetMax( aqlimits );
   settings->setEndToEndReferenceLength( 32 );

@@ -35,6 +35,7 @@
  */
 class KMM_MYMONEY_EXPORT germanOnlineTransfer : public onlineTransfer
 {
+  KMM_MYMONEY_UNIT_TESTABLE
 public:
   ONLINETASK_META(germanOnlineTransfer, "org.kmymoney.creditTransfer.germany");
 

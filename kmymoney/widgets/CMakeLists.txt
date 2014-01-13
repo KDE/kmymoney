@@ -21,6 +21,7 @@ SET(kmymoney_STAT_HEADERS
   transactionform.h transaction.h transactionsortoptionimpl.h
   kmymoneyreportconfigtabimpl.h kmymoneyreportcontrolimpl.h
   kmymoney_export.h
+  onlinejobedit/ionlinejobedit.h
   onlinejobedit/sepacredittransferedit.h
   onlinejobedit/germancredittransferedit.h
   )
@@ -68,8 +69,9 @@ SET(_uncritial_common_sources
   transactionform.cpp
   transactionsortoptionimpl.cpp
   onlinejobedit/sepacredittransferedit.cpp
-  onlinejobedit/sepacredittransferedit_p.h # without this line my IDE is confused
+  onlinejobedit/sepacredittransferedit_p.h # without this line QCreator does not show the file as part of the project
   onlinejobedit/germancredittransferedit.cpp
+  onlinejobedit/ionlinejobedit.cpp
   )
 
 # sources that contain the KMM_DESIGNER flag

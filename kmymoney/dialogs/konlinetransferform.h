@@ -31,6 +31,8 @@
 #include "mymoney/germanonlinetransfer.h"
 #include "mymoney/sepaonlinetransfer.h"
 
+class kMandatoryFieldGroup;
+
 namespace Ui {
   class kOnlineTransferFormDecl;
 }
@@ -44,8 +46,7 @@ class kOnlineTransferForm : public QDialog
 
 public:
   kOnlineTransferForm(QWidget *parent = 0);
-  virtual ~kOnlineTransferForm();
-    
+  virtual ~kOnlineTransferForm();  
 
 signals:
   /** @brief The user wants this job to be saved */
@@ -95,12 +96,10 @@ private slots:
 
   /** @brief Slot for send button */
   void sendJob();
-
-  /** @brief Called when the onlineJob of an sub-widged was changed */
-  void jobChanged();
-
+  
 private:
   size_t m_activeTransferType;
+  kMandatoryFieldGroup* m_requiredFields;
 
   /** @brief returns the active onlineJob */
   onlineJob activeOnlineJob() const;

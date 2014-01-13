@@ -3,11 +3,13 @@
 #include "ui_germancredittransferedit.h"
 
 #include <QDebug>
+#include "kguiutils.h"
 
 germanCreditTransferEdit::germanCreditTransferEdit(QWidget *parent) :
-    QWidget(parent),
+    IonlineJobEdit(parent),
     ui(new Ui::germanCreditTransferEdit),
-    m_germanCreditTransfer( onlineJobTyped<germanOnlineTransfer>(new germanOnlineTransfer) )
+    m_germanCreditTransfer( onlineJobTyped<germanOnlineTransfer>(new germanOnlineTransfer) ),
+    m_requiredFields( new kMandatoryFieldGroup(this) )
 {
     ui->setupUi(this);
     updateTaskSettings();
@@ -22,6 +24,14 @@ germanCreditTransferEdit::germanCreditTransferEdit(QWidget *parent) :
     connect(ui->beneficiaryBankCode, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryBankCodeChanged(QString)));
     connect(ui->transferValue, SIGNAL(textChanged(QString)), this, SLOT(valueChanged()));
     connect(ui->transferPurpose, SIGNAL(textChanged()), this, SLOT(purposeChanged()));
+    
+    m_requiredFields->add(ui->beneficiaryName);
+    m_requiredFields->add(ui->beneficiaryAccNum);
+    m_requiredFields->add(ui->beneficiaryBankCode);
+    m_requiredFields->add(ui->transferPurpose);
+    m_requiredFields->add(ui->transferValue);
+    
+    connect(m_requiredFields, SIGNAL(stateChanged(bool)), this, SLOT(requiredFieldsCompleted(bool)));
 }
 
 germanCreditTransferEdit::~germanCreditTransferEdit()
@@ -29,7 +39,7 @@ germanCreditTransferEdit::~germanCreditTransferEdit()
     delete ui;
 }
 
-bool germanCreditTransferEdit::setOnlineJob(const onlineJob job)
+bool germanCreditTransferEdit::setOnlineJob(const onlineJob& job)
 {
     if (!job.isNull() && job.task()->taskHash() == germanOnlineTransfer::hash) {
       return setOnlineJob( onlineJobTyped<germanOnlineTransfer>(job) );
@@ -37,7 +47,7 @@ bool germanCreditTransferEdit::setOnlineJob(const onlineJob job)
     return false;
 }
 
-bool germanCreditTransferEdit::setOnlineJob(const onlineJobTyped<germanOnlineTransfer> job)
+bool germanCreditTransferEdit::setOnlineJob(const onlineJobTyped<germanOnlineTransfer>& job)
 {
     m_germanCreditTransfer = job;
     setOriginAccount( job.task()->responsibleAccount() );
@@ -58,7 +68,7 @@ void germanCreditTransferEdit::setOriginAccount( const QString& accountId )
 
 void germanCreditTransferEdit::beneficiaryNameChanged( const QString& name )
 {
-    const creditTransferSettingsBase::lengthStatus status = getOnlineJob().task()->getSettings()->checkRecipientLength(name);
+    const creditTransferSettingsBase::lengthStatus status = getOnlineJobTyped().task()->getSettings()->checkRecipientLength(name);
     if ( status == creditTransferSettingsBase::tooShort ) {
         ui->statusBeneficiaryName->setColor(Qt::red);
         ui->statusBeneficiaryName->setToolTip( i18n("A beneficiary name is needed.") );
@@ -106,7 +116,7 @@ void germanCreditTransferEdit::valueChanged()
         return;
     }
     
-    const MyMoneyAccount account = getOnlineJob().responsibleMyMoneyAccount();
+    const MyMoneyAccount account = getOnlineJobTyped().responsibleMyMoneyAccount();
     const MyMoneyMoney expectedBalance = account.balance() - ui->transferValue->value();
     
     if ( expectedBalance < MyMoneyMoney(  account.value("maxCreditAbsolute") ) ) {
@@ -124,7 +134,7 @@ void germanCreditTransferEdit::valueChanged()
 void germanCreditTransferEdit::purposeChanged()
 {
     const QString purpose = ui->transferPurpose->toPlainText();
-    QSharedPointer<const germanOnlineTransfer::settings> settings = getOnlineJob().task()->getSettings();
+    QSharedPointer<const germanOnlineTransfer::settings> settings = getOnlineJobTyped().task()->getSettings();
     
     QString tooltip = QString("");
     if (!settings->checkPurposeLineLength( purpose ))
@@ -148,7 +158,7 @@ void germanCreditTransferEdit::purposeChanged()
         ui->statusPurpose->setColor( Qt::red );
 }
 
-onlineJobTyped<germanOnlineTransfer> germanCreditTransferEdit::getOnlineJob() const
+onlineJobTyped<germanOnlineTransfer> germanCreditTransferEdit::getOnlineJobTyped() const
 {
   onlineJobTyped<germanOnlineTransfer> job( m_germanCreditTransfer );
   germanAccountIdentifier accountIdent;
@@ -171,7 +181,7 @@ void germanCreditTransferEdit::updateEveryStatus()
 
 void germanCreditTransferEdit::updateTaskSettings()
 {
-  QSharedPointer<const germanOnlineTransfer::settings> settings = getOnlineJob().task()->getSettings();
+  QSharedPointer<const germanOnlineTransfer::settings> settings = getOnlineJobTyped().task()->getSettings();
   ui->transferPurpose->setAllowedChars( settings->allowedChars() );
   ui->transferPurpose->setMaxLineLength( settings->purposeLineLength() );
   ui->transferPurpose->setMaxLines( settings->purposeMaxLines() );
