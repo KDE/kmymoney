@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>330</width>
+    <height>302</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -156,6 +156,12 @@
      </item>
      <item>
       <widget class="kMyMoneyEdit" name="transferValue">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="resetButtonVisibility" stdset="0">
         <bool>false</bool>
        </property>
@@ -211,8 +217,8 @@
      </property>
      <property name="minimumSize">
       <size>
-       <width>0</width>
-       <height>2</height>
+       <width>70</width>
+       <height>30</height>
       </size>
      </property>
      <property name="tabChangesFocus">
