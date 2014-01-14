@@ -75,7 +75,7 @@ bool onlineJobAdministration::isJobSupported(const QString& accountId, const siz
   return isJobSupported(accountId, name);
 }
 
-onlineJob onlineJobAdministration::createOnlineJobByName( const QString& name ) const
+onlineJob onlineJobAdministration::createOnlineJobByName( const QString& name, const QString& id ) const
 {
   onlineTask* task = 0;
   if ( germanOnlineTransfer::name() == name )
@@ -83,7 +83,7 @@ onlineJob onlineJobAdministration::createOnlineJobByName( const QString& name ) 
   else if ( sepaOnlineTransfer::name() == name )
     task = new sepaOnlineTransfer;
 
-  return onlineJob( task );
+  return onlineJob( task, id );
 }
 
 onlineTask::convertType onlineJobAdministration::canConvertFrom(const QString& originalName, const QString& destinationName) const
@@ -177,7 +177,7 @@ onlineJob onlineJobAdministration::convert( const onlineJob& original, const QSt
 
   if ( canConvertFrom(originalName, destinationName) != onlineTask::convertImpossible ) {
     // Use onlineTask::convert()
-    onlineJob job = createOnlineJobByName(destinationName);
+    onlineJob job = createOnlineJobByName(destinationName, id);
     if ( job.isNull() )
       throw new onlineTask::badConvert(__FILE__, __LINE__);
     job.task()->convert( *original.constTask(), messageString, payeeChanged );

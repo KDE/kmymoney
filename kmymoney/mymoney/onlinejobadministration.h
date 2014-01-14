@@ -136,7 +136,7 @@ private:
   onlineTask::convertType canConvertInto( const QString& originalName, const QString& destinationName ) const;
 
   /** @brief Use onlineTask::name() to create a corresponding onlineJob */
-  onlineJob createOnlineJobByName( const QString& name ) const;
+  onlineJob createOnlineJobByName( const QString& name, const QString& id = MyMoneyObject::emptyId() ) const;
   
   /**
    * @brief Converts onlineTask::hash into onlineTask::name()
