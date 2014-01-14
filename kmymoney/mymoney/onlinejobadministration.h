@@ -46,15 +46,41 @@ public:
   static onlineJobAdministration* instance() { return &m_instance; }
 
   bool isJobSupported(const QString& accountId, const QString& name) const;
+  bool isJobSupported(const QString& accountId, const QStringList& names) const;
   bool isJobSupported(const QString& accountId, const size_t& hash) const;
   onlineTask::convertType canConvert( const QString& originalName, const QString& destinationName ) const;
-  onlineTask::convertType canConvert(const onlineJob& original, const QString& destinationName ) const;
+  onlineTask::convertType canConvert( const onlineJob& original, const QString& destinationName ) const;
+  onlineTask::convertType canConvert( const onlineJob& original, const QStringList& destinationNames) const;
 
   template<class T>
   onlineJobTyped<T> convert( const onlineJob& original, const QString& destinationName, const QString& id = MyMoneyObject::emptyId() ) const;
 
-  onlineJob convert( const onlineJob& original, const QString& destinationName, const QString& id = MyMoneyObject::emptyId() ) const;
+  onlineJob convert( const onlineJob& original, const QString& destinationName, const QString& id ) const;
+  onlineJob convert( const onlineJob& original, const QString& destinationName ) const
+  {
+    return convert( original, destinationName, original.id() );
+  }
 
+  /**
+   * @brief Converts a onlineTask to best fitting type of a set of onlineTasks
+   * 
+   * Will look for best conversion possible from original to any of destinationNames.
+   * 
+   * @param id id for new onlineJob
+   * @throws onlineTask::badConvert* if no conversion is possible
+   */
+  onlineJob convertBest( const onlineJob& original, const QStringList& destinationNames, const QString& id ) const;
+
+  /**
+   * @brief Converts a onlineTask to best fitting type of a set of onlineTasks
+   * 
+   * Convienient method for convertBest( const onlineJob& original, const QStringList& destinationNames, const QString& id )
+   * @throws onlineTask::badConvert* if no conversion is possible
+   */
+  onlineJob convertBest( const onlineJob& original, const QStringList& destinationNames ) const
+  {
+    return convertBest( original, destinationNames, original.id() );
+  }
   /**
    * @brief Request onlineTask::settings from plugin
    *
@@ -129,6 +155,13 @@ QSharedPointer<const T> onlineJobAdministration::taskSettings( const QString& ta
       return settingsFinal;
   }
   return QSharedPointer<const T>( new T() );
+}
+
+template<class T>
+onlineJobTyped<T> onlineJobAdministration::convert(const onlineJob& original, const QString& destinationName, const QString& id ) const
+{
+  onlineJob job = convert(original, destinationName, id);
+  return onlineJobTyped<T>(job);
 }
 
 #endif // ONLINEJOBADMINISTRATION_H

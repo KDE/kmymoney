@@ -26,7 +26,7 @@
 sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent) :
     IonlineJobEdit(parent),
     ui(new Ui::sepaCreditTransferEdit),
-    m_onlineJob( onlineJobTyped<sepaOnlineTransfer>( new sepaOnlineTransfer ) ),
+    m_onlineJob( onlineJobTyped<sepaOnlineTransfer>() ),
     m_requiredFields( new kMandatoryFieldGroup(this) )
 {
     ui->setupUi(this);
@@ -245,7 +245,7 @@ void sepaCreditTransferEdit::purposeChanged()
                         settings->purposeLineLength())
         .append('\n');
     if (!settings->checkPurposeCharset( purpose ))
-        tooltip.append( i18n("The purpose can only contain the letters A-Z, spaces and ':?,-()+ and /") ).append('\n');
+        tooltip.append( i18n("The purpose can only contain the letters A-Z, spaces and ':?.,-()+ and /") ).append('\n');
     if ( !settings->checkPurposeMaxLines(purpose) ) {
         tooltip.append( i18np("In the purpose only a single line is allowed.", "The purpose cannot contain more than %1 lines.",
                               settings->purposeMaxLines()) )
@@ -266,7 +266,7 @@ void sepaCreditTransferEdit::purposeChanged()
 
 QSharedPointer< const sepaOnlineTransfer::settings > sepaCreditTransferEdit::taskSettings()
 {
-  return getOnlineJobTyped().task()->getSettings();
+  return getOnlineJobTyped().constTask()->getSettings();
 }
 
 QValidator::State ibanValidator::validate(QString& string, int&) const

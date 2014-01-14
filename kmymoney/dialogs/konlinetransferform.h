@@ -27,10 +27,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoney/onlinejobtyped.h"
-#include "mymoney/germanonlinetransfer.h"
-#include "mymoney/sepaonlinetransfer.h"
+#include "mymoney/onlinejob.h"
 
+class IonlineJobEdit;
 class kMandatoryFieldGroup;
 
 namespace Ui {
@@ -39,6 +38,8 @@ namespace Ui {
 
 /**
  * @brief The kOnlineTransferForm class
+ * 
+ * @todo Disable Send/Enque button if no task is shown.
  */
 class kOnlineTransferForm : public QDialog
 {
@@ -55,12 +56,7 @@ signals:
   /** @brief User wants to send the onlineJob directly */
   void acceptedForSend( onlineJob );
   
-public slots:
-  /** @brief Show form for sepa credit-transfer */
-  virtual void activateSepaTransfer( bool active = true );
-  /** @brief Show form for german credit-transfer */
-  virtual void activateGermanTransfer(bool active = true );
-
+public slots:  
   virtual void accept();
   virtual void reject();
     
@@ -76,47 +72,72 @@ public slots:
    * If possible you should use one of the other setOnlineJob()s.
    * @return true if setting was possible
    */
-  virtual bool setOnlineJob(const onlineJobTyped<onlineTransfer> );
-
-  /**
-   * @brief Sets an germanOnlineTransfer to edit
-   * @return true if setting was possible (here it is always true)
-   */
-  virtual bool setOnlineJob(const onlineJobTyped<germanOnlineTransfer>);
-
-  /**
-   * @brief Sets an germanOnlineTransfer to edit
-   * @return true if setting was possible (here it is always true)
-   */
-  virtual bool setOnlineJob( const onlineJobTyped<sepaOnlineTransfer> );
+  virtual bool setOnlineJob( const onlineJob );
 
 private slots:
   /** @brief Slot for account selection box */
   void accountChanged();
 
+  /**
+   * @brief Slot for changes of transfer type
+   * @param index of KComboBox
+   */
+  void convertCurrentJob( const int& index );
+
   /** @brief Slot for send button */
   void sendJob();
-  
+
+  /**
+   * @brief add a widget
+   * 
+   * Caller gives away ownership.
+   */
+  void addOnlineJobEditWidget( IonlineJobEdit* widget );
+
+  /** @{ */
+  /**
+   * @brief Activates the onlineJobEdit widget
+   */
+  void showEditWidget( const QString& onlineTaskName );
+  void showEditWidget( IonlineJobEdit* widget );
+
+  /** @} */
+
+  /**
+   * @param index index of widget in m_onlineJobEditWidgets
+   * @warning the selection box is not updated!
+   */
+  void showEditWidget( const int& index );
+   
+  /**
+   * @brief Shows warning if checkEditWidget() == false
+   */
+  void checkNotSupportedWidget();
+
 private:
-  size_t m_activeTransferType;
   kMandatoryFieldGroup* m_requiredFields;
 
-  /** @brief returns the active onlineJob */
+  /**
+   * @brief returns the currently edited onlineJob
+   * Can be a null job
+   */
   onlineJob activeOnlineJob() const;
 
   Ui::kOnlineTransferFormDecl* ui;
 
-  inline QString originAccount() const;
-  inline void setTransferWidget(const size_t &onlineTaskHash );
+  QList<IonlineJobEdit*> m_onlineJobEditWidgets;
   
   /**
-   * @brief Used to address widgets in QStackedWidgets
+   * @brief Checks if widget can edit any task the selected account supports
    */
-  enum widgetPage {
-    pageUnsupportedByAccount = 0,
-    pageSepaCreditTransfer = 1,
-    pageGermanCreditTransfer = 2
-  };
+  bool checkEditWidget( IonlineJobEdit* widget );
+  /**
+   * @brief Checks current widget
+   * @see checkEditWidget( IonlineJobEdit* widget )
+   */
+  bool checkEditWidget();
+  
+  void editWidgetChanged();
 };
 
 #endif // KBTRANSFERFORM_H

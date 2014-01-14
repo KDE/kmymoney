@@ -1,6 +1,8 @@
 #ifndef GERMANCREDITTRANSFEREDIT_H
 #define GERMANCREDITTRANSFEREDIT_H
 
+#include <KLocale>
+
 #include "ionlinejobedit.h"
 #include "mymoney/onlinejobtyped.h"
 #include "mymoney/germanonlinetransfer.h"
@@ -24,6 +26,9 @@ public:
   onlineJobTyped<germanOnlineTransfer> getOnlineJobTyped() const;
   onlineJob getOnlineJob() const { return getOnlineJobTyped(); }
 
+  QStringList supportedOnlineTasks() const { return QStringList(germanOnlineTransfer::name()); }
+  QString label() const { return i18n("German Credit Transfer"); }
+  
 public slots:
     bool setOnlineJob( const onlineJob& );
     bool setOnlineJob( const onlineJobTyped<germanOnlineTransfer>& );

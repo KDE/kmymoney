@@ -124,6 +124,7 @@ void germanOnlineTransfer::convert(const onlineTask &task, QString& messageStrin
   if( task.taskHash() == sepaOnlineTransfer::hash ) {
     const sepaOnlineTransfer& sepaTask = static_cast<const sepaOnlineTransfer&>(task);
     payeeChanged = true;
+    setOriginAccount( sepaTask.responsibleAccount() );
     setValue( sepaTask.value() );
     _purpose = QString("");
     if ( !sepaTask.endToEndReference().isEmpty() ) {

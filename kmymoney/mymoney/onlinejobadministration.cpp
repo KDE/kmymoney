@@ -58,6 +58,15 @@ bool onlineJobAdministration::isJobSupported(const QString& accountId, const QSt
   return false;
 }
 
+bool onlineJobAdministration::isJobSupported(const QString& accountId, const QStringList& names) const
+{
+  foreach ( QString name, names ) {
+    if ( isJobSupported(accountId, name) )
+      return true;
+  }
+  return false;
+}
+
 bool onlineJobAdministration::isJobSupported(const QString& accountId, const size_t& hash) const
 {
   const QString name = getTaskNameByHash( hash );
@@ -137,14 +146,24 @@ onlineTask::convertType onlineJobAdministration::canConvert(const QString& origi
 
 onlineTask::convertType onlineJobAdministration::canConvert( const onlineJob& original, const QString& destinationName ) const
 {
-  return canConvert(original.task()->taskName(), destinationName);
+  try {
+    return canConvert(original.task()->taskName(), destinationName);
+  } catch ( onlineJob::emptyTask* ) {
+  }
+  return onlineTask::convertImpossible;
 }
 
-template<class T>
-onlineJobTyped<T> onlineJobAdministration::convert(const onlineJob& original, const QString& destinationName, const QString& id ) const
+onlineTask::convertType onlineJobAdministration::canConvert( const onlineJob& original, const QStringList& destinationNames) const
 {
-  onlineJob job = convert(original, destinationName, id);
-  return onlineJobTyped<T>(job);
+  onlineTask::convertType bestConvertType = onlineTask::convertImpossible;
+  foreach (QString destinationName, destinationNames) {
+    onlineTask::convertType type = canConvert( original, destinationName );
+    if ( type == onlineTask::convertionLossy )
+      bestConvertType = onlineTask::convertionLossy;
+    else if ( type == onlineTask::convertionLoseless )
+      return onlineTask::convertionLoseless;
+  }
+  return bestConvertType;
 }
 
 onlineJob onlineJobAdministration::convert( const onlineJob& original, const QString& destinationName, const QString& id ) const
@@ -169,6 +188,29 @@ onlineJob onlineJobAdministration::convert( const onlineJob& original, const QSt
     onlineJob newJob = onlineJob(task, id);
     return newJob;
   }
+
+  throw new onlineTask::badConvert(__FILE__, __LINE__);
+}
+
+onlineJob onlineJobAdministration::convertBest( const onlineJob& original, const QStringList& destinationNames, const QString& id ) const
+{
+  onlineTask::convertType bestConvertType = onlineTask::convertImpossible;
+  QString bestDestination = QString();
+  
+  foreach (QString destinationName, destinationNames) {
+    onlineTask::convertType type = canConvert( original, destinationName );
+    if ( type == onlineTask::convertionLossy ) {
+      bestConvertType = onlineTask::convertionLossy;
+      bestDestination = destinationName;
+    } else if ( type == onlineTask::convertionLoseless ) {
+      bestConvertType = onlineTask::convertionLossy;
+      bestDestination = destinationName;
+      break;
+    }
+  }
+
+  if ( !bestDestination.isNull() )
+    return convert( original, bestDestination, id );
 
   throw new onlineTask::badConvert(__FILE__, __LINE__);
 }

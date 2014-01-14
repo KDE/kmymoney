@@ -174,7 +174,7 @@ onlineJobTyped<germanOnlineTransfer> germanCreditTransferEdit::getOnlineJobTyped
 
 void germanCreditTransferEdit::updateEveryStatus()
 {
-    beneficiaryBankCodeChanged(QString());
+    beneficiaryBankCodeChanged(ui->beneficiaryBankCode->text());
     valueChanged();
     purposeChanged();
 }

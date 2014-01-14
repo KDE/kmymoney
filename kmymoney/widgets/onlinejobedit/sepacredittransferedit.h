@@ -1,6 +1,8 @@
 #ifndef SEPACREDITTRANSFEREDIT_H
 #define SEPACREDITTRANSFEREDIT_H
 
+#include <KLocale>
+
 #include "mymoney/onlinejobtyped.h"
 #include "mymoney/sepaonlinetransfer.h"
 #include "ionlinejobedit.h"
@@ -21,6 +23,8 @@ public:
   onlineJobTyped<sepaOnlineTransfer> getOnlineJobTyped() const;
   onlineJob getOnlineJob() const { return getOnlineJobTyped(); }
 
+  QStringList supportedOnlineTasks() const { return QStringList( sepaOnlineTransfer::name() ); }
+  QString label() const { return i18n("SEPA Credit Transfer"); };
 signals:
   void onlineJobChanged();
   

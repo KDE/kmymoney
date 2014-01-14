@@ -54,6 +54,19 @@ public:
    */
   virtual bool isValid() const { return getOnlineJob().isValid(); }
   
+  /**
+   * @brief List of supported onlineTasks
+   * 
+   * Returns a list of all onlineTask::name()s which can be edited with this
+   * widget.
+   */
+  virtual QStringList supportedOnlineTasks() const = 0;
+  
+  /**
+   * @brief a localized string presented to select this widget
+   */
+  virtual QString label() const = 0;
+  
 public slots:
   /**
    * @brief Set an onlineJob to edit

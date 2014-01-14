@@ -26,91 +26,74 @@
 
 #include "kguiutils.h"
 #include "kmymoneylineedit.h"
+#include "onlinejobedit/ionlinejobedit.h"
 
 #include "mymoney/mymoneyfile.h"
 #include "mymoney/mymoneyaccount.h"
 #include "mymoney/accountidentifier.h"
 #include "mymoney/onlinejobadministration.h"
 
+#include "onlinejobedit/germancredittransferedit.h"
+#include "onlinejobedit/sepacredittransferedit.h"
+
+#include "models/models.h"
+
 kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   : QDialog(parent),
-    m_activeTransferType( 0 ),
     m_requiredFields( new kMandatoryFieldGroup(this) ),
+    m_onlineJobEditWidgets( QList<IonlineJobEdit*>() ),
     ui(new Ui::kOnlineTransferFormDecl)
 {
   ui->setupUi(this);
+
+  AccountNamesFilterProxyModel* accountsModel = new AccountNamesFilterProxyModel(this);
+  accountsModel->addAccountGroup(MyMoneyAccount::Asset);
+  accountsModel->addAccountGroup(MyMoneyAccount::Savings);
+  accountsModel->setSourceModel( Models::instance()->accountsModel() );
+  ui->originAccount->setModel( accountsModel );
   
-  //! @todo replace with kMyMoneyAccountCombo or so
-  QList<MyMoneyAccount> list;
-  MyMoneyFile::instance()->accountList(list);
-  MyMoneyAccount acc;
-  foreach( acc, list ) {
-    if ( onlineJobAdministration::instance()->isJobSupported( acc.id(), germanOnlineTransfer::name() ) != 0 ) {
-      ui->orderAccount->addItem(acc.name() + " (" + acc.number() + ')', acc.id());
-    }
-  }
-
-  if (ui->orderAccount->count() != 0)
-    activateSepaTransfer();
-  else
-    ui->creditTransferEdits->setCurrentIndex(pageUnsupportedByAccount);
-
-  connect(ui->radioTransferNational, SIGNAL(toggled(bool)), this, SLOT(activateGermanTransfer(bool)));
-  connect(ui->radioTransferSepa, SIGNAL(toggled(bool)), this, SLOT(activateSepaTransfer(bool)));
+  connect(ui->transferTypeSelection, SIGNAL(currentIndexChanged(int)), this, SLOT(convertCurrentJob(int)));
 
   connect(ui->buttonAbort, SIGNAL(clicked(bool)), this, SLOT(reject()));
   connect(ui->buttonSend, SIGNAL(clicked(bool)), this, SLOT(sendJob()));
   connect(ui->buttonEnque, SIGNAL(clicked(bool)), this, SLOT(accept()));
   
-  connect(ui->orderAccount, SIGNAL(currentIndexChanged(int)), this, SLOT(accountChanged()));
+  connect(ui->originAccount, SIGNAL(accountSelected(QString)), this, SLOT(accountChanged()));
   
-  m_requiredFields->add(ui->germanPage);
-  m_requiredFields->add(ui->sepaPage);
+  addOnlineJobEditWidget( new sepaCreditTransferEdit() );
+  addOnlineJobEditWidget( new germanCreditTransferEdit() );
   
-  m_requiredFields->setOkButton(ui->buttonSend);  
+  accountChanged();
+  m_requiredFields->setOkButton(ui->buttonSend);
 }
 
-onlineJob kOnlineTransferForm::activeOnlineJob() const
+/**
+ * @internal Only add IonlineJobEdit* to ui->creditTransferEdits, static_casts are used!
+ */
+void kOnlineTransferForm::addOnlineJobEditWidget(IonlineJobEdit* widget)
 {
-  if (m_activeTransferType == sepaOnlineTransfer::hash)
-    return ui->sepaPage->getOnlineJob();
-  else if (m_activeTransferType == germanOnlineTransfer::hash)
-    return ui->germanPage->getOnlineJob();
-  return onlineJob();
+  if (!m_onlineJobEditWidgets.isEmpty())
+    widget->setEnabled(false);
+
+  m_onlineJobEditWidgets.append( widget );
+  ui->creditTransferEdits->addWidget(widget); // this also pases ownership to QStackedWidget
+  ui->transferTypeSelection->addItem(widget->label());
+  m_requiredFields->add(widget);
 }
 
-void kOnlineTransferForm::activateSepaTransfer(bool active )
+void kOnlineTransferForm::convertCurrentJob( const int& index )
 {
-  if (!active)
-    return;
+  Q_ASSERT( index < m_onlineJobEditWidgets.count() );
 
-  // Convert german credit transfer if possible
-  if( m_activeTransferType == germanOnlineTransfer::hash ) {
-    const onlineJob convert = onlineJobAdministration::instance()->convert(ui->germanPage->getOnlineJob(), sepaOnlineTransfer::name(), ui->germanPage->getOnlineJob().id());
-    ui->sepaPage->setOnlineJob( convert );
-  }
-  
-  m_activeTransferType = sepaOnlineTransfer::hash;
-  ui->sepaPage->setOriginAccount( originAccount() );
-
-  setTransferWidget( sepaOnlineTransfer::hash );
-}
-
-void kOnlineTransferForm::activateGermanTransfer( bool active )
-{
-  if (!active)
-    return;
-
-  // Convert sepa credit transfer if possible
-  if( m_activeTransferType == sepaOnlineTransfer::hash ) {
-    const onlineJob convert = onlineJobAdministration::instance()->convert(ui->sepaPage->getOnlineJob(), germanOnlineTransfer::name(), ui->sepaPage->getOnlineJob().id());
-    ui->germanPage->setOnlineJob( convert );
+  const onlineJob job = activeOnlineJob();
+  try {
+    m_onlineJobEditWidgets.at(index)->setOnlineJob(
+      onlineJobAdministration::instance()->convertBest(job, m_onlineJobEditWidgets.at(index)->supportedOnlineTasks(), job.id() )
+    );
+  } catch ( onlineTask::badConvert* ) {
   }
 
-  m_activeTransferType = germanOnlineTransfer::hash;
-  ui->germanPage->setOriginAccount( originAccount() );
-
-  setTransferWidget( germanOnlineTransfer::hash );
+  showEditWidget(index);
 }
 
 void kOnlineTransferForm::accept()
@@ -130,86 +113,120 @@ void kOnlineTransferForm::reject()
   QDialog::reject();
 }
 
-bool kOnlineTransferForm::setOnlineJob(const onlineJobTyped<onlineTransfer> transfer)
+bool kOnlineTransferForm::setOnlineJob(const onlineJob job)
 {
-  if (transfer.task()->taskHash() == sepaOnlineTransfer::hash) {
-    return setOnlineJob( onlineJobTyped<sepaOnlineTransfer>( transfer ) );
-  } else if ( transfer.task()->taskHash() == germanOnlineTransfer::hash ) {
-    return setOnlineJob( onlineJobTyped<germanOnlineTransfer>( transfer ));
+  QString name;
+  try {
+    name = job.task()->taskName();
+  } catch ( onlineJob::emptyTask* ) {
+    return false;
+  }
+
+  foreach ( IonlineJobEdit* widget, m_onlineJobEditWidgets ) {
+    if ( widget->supportedOnlineTasks().contains( name ) ) {
+      widget->setOnlineJob(job);
+      showEditWidget(widget);
+      return true;
+    }
   }
   return false;
 }
 
-bool kOnlineTransferForm::setOnlineJob(const onlineJobTyped<sepaOnlineTransfer> job)
-{
-  setCurrentAccount( job.responsibleAccount() );
-  ui->sepaPage->setOnlineJob( job );
-  if ( m_activeTransferType != sepaOnlineTransfer::hash ) {
-    activateSepaTransfer( true );
-  }
-  return true;
-}
-
-bool kOnlineTransferForm::setOnlineJob(const onlineJobTyped<germanOnlineTransfer> job)
-{
-  setCurrentAccount( job.responsibleAccount() );
-  ui->germanPage->setOnlineJob( job );
-  if ( m_activeTransferType != germanOnlineTransfer::hash ) {
-    activateGermanTransfer( true );
-  }
-  return true;
-}
-
 void kOnlineTransferForm::accountChanged()
 {
-  const QString accountId = originAccount();
-  ui->orderAccountBalance->setValue(MyMoneyFile::instance()->balance( accountId ));
+  const QString accountId = ui->originAccount->getSelected();
+  try {
+    ui->orderAccountBalance->setValue(MyMoneyFile::instance()->balance( accountId ));
+  } catch ( MyMoneyException* e ) {
+    // @todo this can happen until the selection allows to select correct accounts only
+    delete e;
+    ui->orderAccountBalance->setText("");
+  }
 
-  ui->sepaPage->setOriginAccount( accountId );
-  ui->germanPage->setOriginAccount( accountId );
+  foreach (IonlineJobEdit* widget, m_onlineJobEditWidgets)
+    widget->setOriginAccount( accountId );
   
-  setTransferWidget( m_activeTransferType );
+  checkNotSupportedWidget();
+}
+
+bool kOnlineTransferForm::checkEditWidget()
+{
+  return checkEditWidget( qobject_cast<IonlineJobEdit*>(ui->creditTransferEdits->currentWidget()) );
+}
+
+bool kOnlineTransferForm::checkEditWidget( IonlineJobEdit* widget )
+{
+  if ( widget == 0 ) {
+    return false;
+  }
+  
+  if (onlineJobAdministration::instance()->isJobSupported( ui->originAccount->getSelected(), widget->supportedOnlineTasks() )) {
+    return true;
+  }
+  return false;
+}
+
+/** @todo auto set another widget if a loseless convert is possible */
+void kOnlineTransferForm::checkNotSupportedWidget( )
+{
+  if ( !checkEditWidget() ) {
+    ui->displayStack->setCurrentIndex(0);
+  } else {
+    ui->displayStack->setCurrentIndex(1);
+  }
 }
 
 void kOnlineTransferForm::setCurrentAccount( const QString& accountId )
 {
-  for( int i = 0; i < ui->orderAccount->count(); ++i ) {
-    if (ui->orderAccount->itemData(i).toString() == accountId ) {
-      ui->orderAccount->setCurrentIndex(i);
-      accountChanged();
-      break;
+  ui->originAccount->setSelected( accountId );
+}
+
+onlineJob kOnlineTransferForm::activeOnlineJob() const
+{
+  IonlineJobEdit* widget = qobject_cast<IonlineJobEdit*>(ui->creditTransferEdits->currentWidget());
+  if ( widget == 0 )
+    return onlineJob();
+  
+  return widget->getOnlineJob();
+}
+
+void kOnlineTransferForm::showEditWidget(const QString& onlineTaskName)
+{
+  foreach (IonlineJobEdit* widget, m_onlineJobEditWidgets) {
+    if ( widget->supportedOnlineTasks().contains(onlineTaskName) ) {
+      const onlineJob convert = onlineJobAdministration::instance()->convert(activeOnlineJob(), onlineTaskName);
+      widget->setOnlineJob(convert);
+      showEditWidget( widget );
     }
   }
 }
 
-inline QString kOnlineTransferForm::originAccount() const
+/** @internal Changes in this method usually need changes in showEditWidget(const int& index) as well */
+void kOnlineTransferForm::showEditWidget( IonlineJobEdit* widget )
 {
-  if( ui->orderAccount->count() != 0 )
-    return ( ui->orderAccount->itemData(ui->orderAccount->currentIndex()).toString() );
-  return QString();
+  qDebug() << "Change to QStackedWidget index" << m_onlineJobEditWidgets.indexOf(widget);
+  ui->creditTransferEdits->currentWidget()->setEnabled(false);
+  widget->setEnabled(true);
+  ui->creditTransferEdits->setCurrentWidget(widget);
+  
+  const int index = m_onlineJobEditWidgets.indexOf(widget);
+  ui->transferTypeSelection->setCurrentIndex( index );
+  
+  checkNotSupportedWidget();
+  m_requiredFields->changed();
 }
 
-void kOnlineTransferForm::setTransferWidget(const size_t& onlineTaskHash)
+/** @internal Changes in this method usually need changes in showEditWidget( IonlineJobEdit* widget ) as well */
+void kOnlineTransferForm::showEditWidget(const int& index)
 {
-  if ( germanOnlineTransfer::hash == onlineTaskHash )
-    ui->radioTransferNational->setChecked(true);
-  else if ( sepaOnlineTransfer::hash == onlineTaskHash )
-    ui->radioTransferSepa->setChecked(true);
- 
-  if (!onlineJobAdministration::instance()->isJobSupported( originAccount(), onlineTaskHash)) {
-    ui->creditTransferEdits->setCurrentIndex( pageUnsupportedByAccount );
-  } else if ( germanOnlineTransfer::hash == onlineTaskHash ) {
-    ui->creditTransferEdits->setCurrentIndex( pageGermanCreditTransfer );
-    // Enable and disable to inform kMandatoryFieldGroup if the field is mandatory
-    ui->sepaPage->setEnabled(false);
-    ui->germanPage->setEnabled(true);
-  } else if ( sepaOnlineTransfer::hash == onlineTaskHash ) {
-    ui->creditTransferEdits->setCurrentIndex( pageSepaCreditTransfer );
-    ui->sepaPage->setEnabled(true);
-    ui->germanPage->setEnabled(false);
-  } else {
-    ui->creditTransferEdits->setCurrentIndex( pageUnsupportedByAccount );
-  }
+  qDebug() << "Change to QStackedWidget index" << index;
+  Q_ASSERT( m_onlineJobEditWidgets.count() > index );
+  ui->creditTransferEdits->currentWidget()->setEnabled(false);
+  ui->creditTransferEdits->setCurrentIndex( index );
+  ui->creditTransferEdits->currentWidget()->setEnabled(true);
+  
+  checkNotSupportedWidget();
+  m_requiredFields->changed();
 }
 
 kOnlineTransferForm::~kOnlineTransferForm()

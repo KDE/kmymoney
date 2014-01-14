@@ -23,12 +23,6 @@
       <string>Order Account</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
-      <property name="fieldGrowthPolicy">
-       <enum>QFormLayout::ExpandingFieldsGrow</enum>
-      </property>
-      <item row="0" column="0" colspan="2">
-       <widget class="KComboBox" name="orderAccount"/>
-      </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
@@ -52,6 +46,9 @@
         </property>
        </widget>
       </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="KMyMoneyAccountCombo" name="originAccount"/>
+      </item>
      </layout>
     </widget>
    </item>
@@ -62,38 +59,10 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QRadioButton" name="radioTransferNational">
-          <property name="text">
-           <string>National Credit Transfer</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioTransferSepa">
-          <property name="text">
-           <string>SEPA Credit Transfer</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
+       <widget class="KComboBox" name="transferTypeSelection"/>
       </item>
       <item>
-       <widget class="QStackedWidget" name="creditTransferEdits">
+       <widget class="QStackedWidget" name="displayStack">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -105,9 +74,6 @@
           <width>333</width>
           <height>250</height>
          </size>
-        </property>
-        <property name="currentIndex">
-         <number>0</number>
         </property>
         <widget class="QWidget" name="accountUnsupported">
          <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -205,13 +171,16 @@
           </item>
          </layout>
         </widget>
-        <widget class="sepaCreditTransferEdit" name="sepaPage"/>
-        <widget class="germanCreditTransferEdit" name="germanPage"/>
+        <widget class="QWidget" name="page">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QStackedWidget" name="creditTransferEdits"/>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
-     <zorder>creditTransferEdits</zorder>
-     <zorder></zorder>
     </widget>
    </item>
    <item>
@@ -280,6 +249,11 @@
    <container>1</container>
   </customwidget>
   <customwidget>
+   <class>KMyMoneyAccountCombo</class>
+   <extends>KComboBox</extends>
+   <header>kmymoneyaccountcombo.h</header>
+  </customwidget>
+  <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
@@ -289,23 +263,8 @@
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>
-  <customwidget>
-   <class>sepaCreditTransferEdit</class>
-   <extends>QWidget</extends>
-   <header>onlinejobedit/sepacredittransferedit.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>germanCreditTransferEdit</class>
-   <extends>QWidget</extends>
-   <header>onlinejobedit/germancredittransferedit.h</header>
-   <container>1</container>
-  </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>orderAccount</tabstop>
-  <tabstop>radioTransferNational</tabstop>
-  <tabstop>radioTransferSepa</tabstop>
   <tabstop>graphicsView</tabstop>
   <tabstop>buttonSend</tabstop>
   <tabstop>buttonEnque</tabstop>

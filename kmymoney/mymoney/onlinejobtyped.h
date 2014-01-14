@@ -79,7 +79,7 @@ onlineJobTyped<T>::onlineJobTyped( )
     : onlineJob( new T() ),
       m_taskSubType( 0 )
 {
-    m_taskSubType = static_cast<T>( onlineJob::task() );
+    m_taskSubType = static_cast<T*>( onlineJob::task() );
 }
 
 template<class T>
