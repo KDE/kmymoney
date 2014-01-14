@@ -87,13 +87,13 @@ onlineJobTyped<sepaOnlineTransfer> sepaCreditTransferEdit::getOnlineJobTyped() c
 void sepaCreditTransferEdit::setOnlineJob(const onlineJobTyped<sepaOnlineTransfer>& job )
 {
   m_onlineJob = job;
+  updateSettings();
   ui->purpose->setText( job.task()->purpose() );
   ui->sepaReference->setText( job.task()->endToEndReference() );
   ui->value->setValue( job.task()->value() );
   ui->beneficiaryName->setText( job.task()->getRecipient().ownerName() );
   ui->beneficiaryAccNum->setText( job.task()->getRecipient().accountNumber() );
   ui->beneficiaryBankCode->setText( job.task()->getRecipient().bankCode() );
-  updateSettings();
 }
 
 bool sepaCreditTransferEdit::setOnlineJob( const onlineJob& job )

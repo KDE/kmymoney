@@ -51,6 +51,9 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   accountsModel->addAccountGroup(MyMoneyAccount::Savings);
   accountsModel->setSourceModel( Models::instance()->accountsModel() );
   ui->originAccount->setModel( accountsModel );
+
+  addOnlineJobEditWidget( new sepaCreditTransferEdit() );
+  addOnlineJobEditWidget( new germanCreditTransferEdit() );
   
   connect(ui->transferTypeSelection, SIGNAL(currentIndexChanged(int)), this, SLOT(convertCurrentJob(int)));
 
@@ -59,9 +62,6 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   connect(ui->buttonEnque, SIGNAL(clicked(bool)), this, SLOT(accept()));
   
   connect(ui->originAccount, SIGNAL(accountSelected(QString)), this, SLOT(accountChanged()));
-  
-  addOnlineJobEditWidget( new sepaCreditTransferEdit() );
-  addOnlineJobEditWidget( new germanCreditTransferEdit() );
   
   accountChanged();
   m_requiredFields->setOkButton(ui->buttonSend);
