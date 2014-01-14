@@ -121,6 +121,8 @@ bool kOnlineTransferForm::setOnlineJob(const onlineJob job)
   } catch ( onlineJob::emptyTask* ) {
     return false;
   }
+  
+  setCurrentAccount( job.responsibleAccount() );
 
   foreach ( IonlineJobEdit* widget, m_onlineJobEditWidgets ) {
     if ( widget->supportedOnlineTasks().contains( name ) ) {
