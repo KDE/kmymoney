@@ -90,7 +90,8 @@ void kOnlineTransferForm::convertCurrentJob( const int& index )
     m_onlineJobEditWidgets.at(index)->setOnlineJob(
       onlineJobAdministration::instance()->convertBest(job, m_onlineJobEditWidgets.at(index)->supportedOnlineTasks(), job.id() )
     );
-  } catch ( onlineTask::badConvert* ) {
+  } catch ( onlineTask::badConvert* e ) {
+    delete e;
   }
 
   showEditWidget(index);
@@ -118,7 +119,8 @@ bool kOnlineTransferForm::setOnlineJob(const onlineJob job)
   QString name;
   try {
     name = job.task()->taskName();
-  } catch ( onlineJob::emptyTask* ) {
+  } catch ( onlineJob::emptyTask* e ) {
+    delete e;
     return false;
   }
   

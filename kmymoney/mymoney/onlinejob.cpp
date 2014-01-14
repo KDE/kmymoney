@@ -118,7 +118,8 @@ const onlineTask* onlineJob::task() const
 QString onlineJob::responsibleAccount() const {
     try {
       return task()->responsibleAccount();
-    } catch ( emptyTask* ) {
+    } catch ( emptyTask* e ) {
+      delete e;
     }
     return QString();
 }

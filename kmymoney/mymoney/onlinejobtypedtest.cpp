@@ -31,8 +31,8 @@ void onlineJobTypedTest::copyContructorFailure()
   try {
     onlineJobTyped<germanOnlineTransfer> job( new sepaOnlineTransfer );
     QFAIL("Missing expected exception");
-  } catch ( onlineJob::badTaskCast* ) {
-
+  } catch ( onlineJob::badTaskCast* e ) {
+    delete e;
   }
 }
 

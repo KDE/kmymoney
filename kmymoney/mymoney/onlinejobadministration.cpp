@@ -148,7 +148,8 @@ onlineTask::convertType onlineJobAdministration::canConvert( const onlineJob& or
 {
   try {
     return canConvert(original.task()->taskName(), destinationName);
-  } catch ( onlineJob::emptyTask* ) {
+  } catch ( onlineJob::emptyTask* e ) {
+    delete e;
   }
   return onlineTask::convertImpossible;
 }
