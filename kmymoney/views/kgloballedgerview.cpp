@@ -1334,14 +1334,6 @@ bool KGlobalLedgerView::eventFilter(QObject* o, QEvent* e)
   //  Need to capture mouse position here as QEvent::ToolTip is too slow
   m_tooltipPosn = QCursor::pos();
 
-  if (e->type() == QEvent::ToolTip) {
-    QHelpEvent *helpEvent = static_cast<QHelpEvent *>(e);
-    m_tooltipPosn = helpEvent->globalPos();
-    QString txt;
-    showTooltip(txt);
-    rc = true;
-  }
-
   if (e->type() == QEvent::KeyPress) {
     if (m_inEditMode) {
       // qDebug("object = %s, key = %d", o->className(), k->key());
