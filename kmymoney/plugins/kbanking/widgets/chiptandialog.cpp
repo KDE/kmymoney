@@ -98,6 +98,7 @@ QString chipTanDialog::hhdCode()
   QGraphicsObject* rootObject = ui->declarativeView->rootObject();
   if (rootObject)
     return rootObject->property("transferData").toString();
+  return QString();
 }
 
 QString chipTanDialog::tan()
