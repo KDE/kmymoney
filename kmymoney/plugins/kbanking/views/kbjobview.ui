@@ -22,7 +22,7 @@
     </widget>
    </item>
    <item>
-    <layout class="QVBoxLayout">
+    <layout class="QVBoxLayout" name="buttonLayout">
      <item>
       <widget class="KPushButton" name="dequeueButton">
        <property name="enabled">

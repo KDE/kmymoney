@@ -31,6 +31,8 @@ class KBankingPlugin;
 #include "kbjoblist.h"
 #include "mymoneybanking.h"
 
+/* For easier debugging and testing this makro adds a button to open the chiptan dialog */
+#define CHIPTAN_INPUT_TEST
 
 class KBJobView: public QWidget
 {
@@ -59,6 +61,9 @@ protected slots:
   void slotExecute();
   void slotDequeue();
   void slotSelectionChanged();
+#ifdef CHIPTAN_INPUT_TEST
+  void slotOpenChipTanInput();
+#endif
 };
 
 

@@ -14,14 +14,16 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
 ADD_SUBDIRECTORY( dialogs )
 ADD_SUBDIRECTORY( views )
 ADD_SUBDIRECTORY( widgets )
+ADD_SUBDIRECTORY( qml )
 
 ########### next target ###############
 
-SET(kmm_kbanking_PART_SRCS 
+SET(kmm_kbanking_PART_SRCS
     mymoneybanking.cpp
     banking.cpp
     aqbankingkmmoperators.cpp
     gwenhywfarqtoperators.cpp
+    gwenkdegui.cpp
     )
 
 SET(kmm_kbanking_HEADERS
@@ -39,6 +41,7 @@ TARGET_LINK_LIBRARIES(kmm_kbanking
                       kmm_widgets
                       kmm_plugin
                       ${KDE4_KDEUI_LIBS}
+                      ${QT_QTDECLARATIVE_LIBRARY}
                       ${GWENHYWFAR_LIBRARIES}
                       ${AQBANKING_LIBRARIES}
                       ${GMP_LIBRARIES}
@@ -56,4 +59,3 @@ INSTALL(TARGETS kmm_kbanking
 
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
-

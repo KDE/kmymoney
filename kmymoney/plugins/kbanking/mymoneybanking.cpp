@@ -70,7 +70,6 @@
 #include <aqbanking/transactionlimits.h>
 #include <gwenhywfar/logger.h>
 #include <gwenhywfar/debug.h>
-#include <gwen-gui-qt4/qt4_gui.hpp>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -87,6 +86,7 @@
 #include "kmymoneyview.h"
 #include "kbpickstartdate.h"
 
+#include "gwenkdegui.h"
 #include "gwenhywfarqtoperators.h"
 #include "aqbankingqtoperators.h"
 #include "aqbankingkmmoperators.h"
@@ -146,7 +146,7 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
   connect(d->passwordCacheTimer, SIGNAL(timeout()), this, SLOT(slotClearPasswordCache()));
 
   if (m_kbanking) {
-    QT4_Gui *gui;
+    gwenKdeGui *gui;
 
     if (AB_Banking_HasConf4(m_kbanking->getCInterface())) {
       qDebug("KBankingPlugin: No AqB4 config found.");
@@ -162,7 +162,7 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
       }
     }
 
-    gui = new QT4_Gui();
+    gui = new gwenKdeGui();
     GWEN_Gui_SetGui(gui->getCInterface());
     GWEN_Logger_SetLevel(0, GWEN_LoggerLevel_Info);
     GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Debug);

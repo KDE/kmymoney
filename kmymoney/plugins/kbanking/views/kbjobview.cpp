@@ -97,8 +97,25 @@ KBJobView::KBJobView(KMyMoneyBanking *kb,
 
   d->ui.dequeueButton->setEnabled(false);
   d->ui.executeButton->setEnabled(false);
+  
+#ifdef CHIPTAN_INPUT_TEST
+  KPushButton* chipTanButton = new KPushButton("Open ChipTan Input", this);
+  d->ui.buttonLayout->addWidget(chipTanButton);
+  connect(chipTanButton, SIGNAL(clicked()), this, SLOT(slotOpenChipTanInput()));
+#endif
 }
 
+#ifdef CHIPTAN_INPUT_TEST
+#include "chiptandialog.h"
+void KBJobView::slotOpenChipTanInput()
+{
+  chipTanDialog dialog;
+  dialog.setHhdCode("1042481200");
+  dialog.setInfoText("This function is for debug purposes only. You can enter a tan which is between three and six characters long.");
+  dialog.setTanLimits(3,6);
+  dialog.exec();
+}
+#endif
 
 
 KBJobView::~KBJobView()
