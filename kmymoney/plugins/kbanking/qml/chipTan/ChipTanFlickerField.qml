@@ -59,7 +59,8 @@ Rectangle {
 
     Row {
         id: flickerFields
-        height: 0.7*parent.height
+        // height is set so parent's borders never get overlapped
+        height: parent.height-Math.ceil(parent.border.width)-1
         anchors.centerIn: parent
 
         property int fieldWidth: 0.15*parent.width
@@ -70,17 +71,31 @@ Rectangle {
 
             Rectangle {
                 width: flickerFields.fieldWidth
-                property color colorOn: "white"
-                property color colorOff: "black"
-                property color colorStopped: colorOn
-
-                color: colorStopped
                 height: parent.height
-                anchors.verticalCenter: parent.verticalCenter
+                color: chipTanFlickerField.color
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: Logic.timerTriggered(flickerFields)
+                Image {
+                    visible: (index == 0 || index == 4)
+                    source: "positionmarker.svg"
+                    smooth: true
+                    width: height
+                    anchors {
+                        top: parent.top
+                        bottom: flickerBar.top
+                        horizontalCenter: flickerBar.horizontalCenter
+                    }
+                }
+
+                Rectangle {
+                    id: flickerBar
+                    width: flickerFields.fieldWidth
+                    property color colorOn: "white"
+                    property color colorOff: "black"
+                    property color colorStopped: colorOn
+
+                    color: colorStopped
+                    height: 0.7*parent.height
+                    anchors.verticalCenter: parent.verticalCenter
                 }
             }
         }
@@ -96,6 +111,7 @@ Rectangle {
     }
     
     onTransferDataChanged: {
+      // Restart timer to load new data to transfer into the script
       if ( timer.running == true )  {
         timer.stop()
         timer.start()
