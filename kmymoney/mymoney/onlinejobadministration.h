@@ -23,11 +23,11 @@ namespace KMyMoneyPlugin {
  * @brief Connection between KMyMoney and the plugins
  *
  * It's main task is the communication with plugins
- * and caching thier information during run-time. During
+ * and caching their information during run-time. During
  * sending this class selects the correct plugin for each
  * onlineJob.
  *
- * This class keeps an overview which account can handle which jobs and
+ * This class keeps an overview which account can handle which job and
  * offers methods to access these information.
  *
  * onlineJobAdministration is created with singleton pattern. Get the
@@ -48,6 +48,8 @@ public:
   bool isJobSupported(const QString& accountId, const QString& name) const;
   bool isJobSupported(const QString& accountId, const QStringList& names) const;
   bool isJobSupported(const QString& accountId, const size_t& hash) const;
+  bool isAnyJobSupported(const QString& accountId) const;
+  
   onlineTask::convertType canConvert( const QString& originalName, const QString& destinationName ) const;
   onlineTask::convertType canConvert( const onlineJob& original, const QString& destinationName ) const;
   onlineTask::convertType canConvert( const onlineJob& original, const QStringList& destinationNames) const;
@@ -84,7 +86,7 @@ public:
   /**
    * @brief Request onlineTask::settings from plugin
    *
-   * @return QSharedPointer to settings from plugin or settings with default values if error occours
+   * @return QSharedPointer to settings from plugin or settings with default values if error occurs
    * (so you never get QSharedPointer::isNull() == true)
    */
   template<class T>
@@ -97,7 +99,7 @@ public:
    *
    * @param taskName onlineTask::name()
    * @param accountId MyMoneyAccount.id()
-   * @return QSharedPointer to settings. QSharedPointer::isNull() is true if an error occours
+   * @return QSharedPointer to settings. QSharedPointer::isNull() is true if an error occurs
    * (e.g. plugin does not support the task).
    */
   QSharedPointer<const onlineTask::settings> taskSettings( const QString& taskName, const QString& accountId ) const;

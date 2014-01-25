@@ -637,7 +637,14 @@ QStringList KBankingPlugin::availableJobs( QString accountId )
 {
   QStringList list = QStringList();
 
-  MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
+  try {
+    MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
+  } catch (MyMoneyException* e) {
+    // Exception usually means account was not found
+    delete e;
+    return QStringList();
+  }
+  
   AB_ACCOUNT* abAccount = aqbAccount( accountId );
   
   if (!abAccount) {

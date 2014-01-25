@@ -46,9 +46,8 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
 {
   ui->setupUi(this);
 
-  AccountNamesFilterProxyModel* accountsModel = new AccountNamesFilterProxyModel(this);
-  accountsModel->addAccountGroup(MyMoneyAccount::Asset);
-  accountsModel->addAccountGroup(MyMoneyAccount::Savings);
+
+  OnlineBankingAccountNamesFilterProxyModel* accountsModel = new OnlineBankingAccountNamesFilterProxyModel(this);  
   accountsModel->setSourceModel( Models::instance()->accountsModel() );
   ui->originAccount->setModel( accountsModel );
 
@@ -60,10 +59,12 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   connect(ui->buttonAbort, SIGNAL(clicked(bool)), this, SLOT(reject()));
   connect(ui->buttonSend, SIGNAL(clicked(bool)), this, SLOT(sendJob()));
   connect(ui->buttonEnque, SIGNAL(clicked(bool)), this, SLOT(accept()));
+  connect(m_requiredFields, SIGNAL(stateChanged(bool)), ui->buttonEnque, SLOT(setEnabled(bool)));
   
   connect(ui->originAccount, SIGNAL(accountSelected(QString)), this, SLOT(accountChanged()));
   
   accountChanged();
+  m_requiredFields->add(ui->originAccount);
   m_requiredFields->setOkButton(ui->buttonSend);
 }
 

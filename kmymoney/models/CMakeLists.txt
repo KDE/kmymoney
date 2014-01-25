@@ -1,6 +1,7 @@
 SET(libmodels_a_SOURCES
     accountsmodel.cpp
     onlinejobmodel.cpp
+    onlinebankingaccountsfilterproxymodel.cpp
     models.cpp
    )
 

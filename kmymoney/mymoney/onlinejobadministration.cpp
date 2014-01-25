@@ -49,6 +49,9 @@ void onlineJobAdministration::addPlugin(const QString& pluginName, KMyMoneyPlugi
   m_onlinePlugins.insert(pluginName, plugin);
 }
 
+/**
+ * @internal The real work is done here.
+ */
 bool onlineJobAdministration::isJobSupported(const QString& accountId, const QString& name) const
 {
   foreach (KMyMoneyPlugin::OnlinePluginExtended* plugin, m_onlinePlugins) {
@@ -73,6 +76,18 @@ bool onlineJobAdministration::isJobSupported(const QString& accountId, const siz
   if ( name.isNull() )
     return false;
   return isJobSupported(accountId, name);
+}
+
+bool onlineJobAdministration::isAnyJobSupported(const QString& accountId) const
+{
+  if (accountId.isEmpty())
+    return false;
+
+  foreach (KMyMoneyPlugin::OnlinePluginExtended* plugin, m_onlinePlugins) {
+    if (!(plugin->availableJobs(accountId).isEmpty()))
+      return true;
+  }
+  return false;
 }
 
 onlineJob onlineJobAdministration::createOnlineJobByName( const QString& name, const QString& id ) const
