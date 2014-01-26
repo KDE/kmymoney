@@ -209,7 +209,6 @@ void kOnlineTransferForm::showEditWidget(const QString& onlineTaskName)
 /** @internal Changes in this method usually need changes in showEditWidget(const int& index) as well */
 void kOnlineTransferForm::showEditWidget( IonlineJobEdit* widget )
 {
-  qDebug() << "Change to QStackedWidget index" << m_onlineJobEditWidgets.indexOf(widget);
   ui->creditTransferEdits->currentWidget()->setEnabled(false);
   widget->setEnabled(true);
   ui->creditTransferEdits->setCurrentWidget(widget);
@@ -224,7 +223,6 @@ void kOnlineTransferForm::showEditWidget( IonlineJobEdit* widget )
 /** @internal Changes in this method usually need changes in showEditWidget( IonlineJobEdit* widget ) as well */
 void kOnlineTransferForm::showEditWidget(const int& index)
 {
-  qDebug() << "Change to QStackedWidget index" << index;
   Q_ASSERT( m_onlineJobEditWidgets.count() > index );
   ui->creditTransferEdits->currentWidget()->setEnabled(false);
   ui->creditTransferEdits->setCurrentIndex( index );
