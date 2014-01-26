@@ -605,14 +605,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
             t = (*it_ts);
 
             // if a new transaction has a valid number, keep it with the account
-            QString number;
-            if (!(*it_ts).splits().isEmpty())
-              number = (*it_ts).splits().front().number();
-            if (!number.isEmpty()) {
-              m_account.setValue("lastNumberUsed", number);
-              file->modifyAccount(m_account);
-            }
-
+            keepNewNumber((*it_ts));
           } else {
             // turn object creation on, so that moving the focus does
             // not screw up the dialog that might be popping up
@@ -627,6 +620,9 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           emit lastPostDateUsed((*it_ts).postDate());
         } else {
           // modify existing transaction
+          // its number might have been edited
+          // bearing in mind it could contain alpha characters
+          keepNewNumber((*it_ts));
           file->modifyTransaction(*it_ts);
         }
       }
@@ -720,6 +716,18 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
 
   }
   return storeTransactions;
+}
+
+void TransactionEditor::keepNewNumber(const MyMoneyTransaction& tr)
+{
+  MyMoneyFile* file = MyMoneyFile::instance();
+  if (!tr.splits().isEmpty()) {
+    const quint64 num64 = KMyMoneyUtils::numericPart(tr.splits().front().number());
+    if (num64 > 0) {
+      m_account.setValue("lastNumberUsed", tr.splits().front().number());
+      file->modifyAccount(m_account);
+    }
+  }
 }
 
 void TransactionEditor::resizeForm(void)

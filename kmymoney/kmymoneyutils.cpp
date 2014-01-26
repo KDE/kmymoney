@@ -374,6 +374,20 @@ QString KMyMoneyUtils::nextCheckNumber(const MyMoneyAccount& acc)
   return number;
 }
 
+quint64 KMyMoneyUtils::numericPart(const QString & num)
+{
+  quint64 num64 = 0;
+  QRegExp exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
+  if (exp.indexIn(num) != -1) {
+    QString arg1 = exp.cap(1);
+    QString arg2 = exp.cap(2);
+    QString arg3 = QString::number(exp.cap(3).toULongLong());
+    QString arg4 = exp.cap(4);
+    num64 = QString("%2%3").arg(arg2).arg(arg3).toULongLong();
+  }
+  return num64;
+}
+
 QString KMyMoneyUtils::reconcileStateToString(MyMoneySplit::reconcileFlagE flag, bool text)
 {
   QString txt;

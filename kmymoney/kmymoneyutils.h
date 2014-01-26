@@ -353,6 +353,12 @@ public:
   static QString nextCheckNumber(const MyMoneyAccount& acc);
 
   /**
+  * remove any non-numeric characters from check number
+  * to allow validity check
+  */
+  static quint64 numericPart(const QString & num);
+
+  /**
     * Returns the text representing the reconcile flag. If @a text is @p true
     * then the full text will be returned otherwise a short form (usually one character).
     */
