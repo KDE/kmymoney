@@ -35,16 +35,20 @@ void onlineJobAdministrationTest::cleanupTestCase()
     delete storage;
 }
 
-void onlineJobAdministrationTest::addOnlineJob()
+void onlineJobAdministrationTest::init()
 {
-#if 0
-    onlineJob job = new germanOnlineTransfer();
-    onlineJobAdministration::instance()->makeOnlineJobAvailable( accountId, germanOnlineTransfer::name() );
-//    Q_ASSERT( transfer != 0 );
-#endif
+  qDeleteAll(onlineJobAdministration::instance()->m_onlineTasks);
+  onlineJobAdministration::instance()->m_onlineTasks.clear();
 }
 
 void onlineJobAdministrationTest::getSettings()
 {
-  onlineJobAdministration::instance()->taskSettings<sepaOnlineTransfer::settings>( sepaOnlineTransfer::name(), "A000001" );
+}
+
+void onlineJobAdministrationTest::registerOnlineTask()
+{
+  sepaOnlineTransfer *task = new sepaOnlineTransfer;
+  onlineJobAdministration::instance()->registerOnlineTask(task);
+  QCOMPARE(onlineJobAdministration::instance()->m_onlineTasks.count(), 1);
+  QVERIFY(onlineJobAdministration::instance()->m_onlineTasks.value( task->taskName() ));
 }

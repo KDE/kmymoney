@@ -7,6 +7,8 @@
 class MyMoneyFile;
 class IMyMoneyStorage;
 
+#define KMM_MYMONEY_UNIT_TESTABLE friend class onlineJobAdministrationTest;
+
 class onlineJobAdministrationTest : public QObject
 {
     Q_OBJECT
@@ -17,8 +19,9 @@ class onlineJobAdministrationTest : public QObject
 private slots:
     void initTestCase();
     void cleanupTestCase();
-    void addOnlineJob();
+    void init();
     void getSettings();
+    void registerOnlineTask();
 };
 
 #endif // ONLINEJOBADMINISTRATIONTEST_H

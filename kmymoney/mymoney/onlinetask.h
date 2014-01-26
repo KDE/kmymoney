@@ -16,8 +16,7 @@ class onlineJob;
  * and name. Use ONLINETASK_META_INIT() in your .cpp file to init it (important!).
  *
  * @param onlineTaskSubClass the class type (e.g. onlineTask)
- * @param nameString A unique name for the task,
- * create it like "org.kmymoney.onlinetask" (use your own domain if it makes sense).
+ * @param nameString A unique name for the task, should be replaced by IID of Qt5 plugins
  *
  * \section onlineTaskMeta The onlineTask Meta System
  *
@@ -59,7 +58,7 @@ class onlineJob;
  * @internal I am not proud of this. But I had no better idea without using C++11. Sorry.
  */
 #define ONLINETASK_META(onlineTaskClass, nameString) \
-/** @brief Returns the hash of onlineTask type (part of @ref onlineTaskMeta) */ \
+/** @brief Returns the hash of onlineTask type (part of @ref onlineTaskMeta) @depreciated */ \
 virtual size_t taskHash() const \
 { \
   return ( onlineTaskClass::hash ); \
@@ -73,7 +72,7 @@ static const QString& name() { \
 virtual QString taskName() const { \
   return onlineTaskClass::name(); \
 } \
-/** @brief The hash of onlineTask type (part of @ref onlineTaskMeta) */ \
+/** @brief The hash of onlineTask type (part of @ref onlineTaskMeta) @depreciated */ \
 static const size_t hash; \
 friend class onlineJobAdministration
 

@@ -23,11 +23,15 @@ onlineJobAdministration onlineJobAdministration::m_instance;
 onlineJobAdministration::onlineJobAdministration(QObject *parent) :
     QObject(parent)
 {
+  registerOnlineTask( new germanOnlineTransfer );
+  registerOnlineTask( new sepaOnlineTransfer );
 }
 
 onlineJobAdministration::~onlineJobAdministration()
 {
-
+  qDeleteAll(m_onlinePlugins);
+  qDeleteAll(m_onlineTasks);
+  // no m_onlinePlugins.clear(), as this is done anyway
 }
 
 KMyMoneyPlugin::OnlinePluginExtended* onlineJobAdministration::getOnlinePlugin( const QString& accountId ) const
@@ -90,59 +94,38 @@ bool onlineJobAdministration::isAnyJobSupported(const QString& accountId) const
   return false;
 }
 
-onlineJob onlineJobAdministration::createOnlineJobByName( const QString& name, const QString& id ) const
+onlineJob onlineJobAdministration::createOnlineJob( const QString& name, const QString& id ) const
 {
-  onlineTask* task = 0;
-  if ( germanOnlineTransfer::name() == name )
-    task = new germanOnlineTransfer;
-  else if ( sepaOnlineTransfer::name() == name )
-    task = new sepaOnlineTransfer;
+  return ( onlineJob( createOnlineTask(name), id ) );
+}
 
-  return onlineJob( task, id );
+onlineTask* onlineJobAdministration::createOnlineTask(const QString& name) const
+{
+  const onlineTask* task = m_onlineTasks.value(name);
+  if (task != 0)
+    return task->clone();
+  return 0;
 }
 
 onlineTask::convertType onlineJobAdministration::canConvertFrom(const QString& originalName, const QString& destinationName) const
 {
-  Q_UNUSED(originalName); // it is used in the macro
-  Q_UNUSED(destinationName); // it is used in the macro
-
-#define CAN_CONVERT_REQUEST( TASKCLASS ) ( TASKCLASS::name() == originalName ) { \
-  QScopedPointer< TASKCLASS > task( new TASKCLASS() ); \
-  convertType = task->canConvert( destinationName ); \
-  if ( convertType != onlineTask::convertImpossible ) { return convertType; } \
+  const onlineTask* task = m_onlineTasks.value(destinationName);
+  if (task != 0) {
+    return task->canConvert(originalName);
   }
 
-  onlineTask::convertType convertType;
-  Q_UNUSED(convertType); // it is used in the macro
-
-  if CAN_CONVERT_REQUEST(sepaOnlineTransfer)
-  else if CAN_CONVERT_REQUEST(germanOnlineTransfer)
-
   return onlineTask::convertImpossible;
-
-#undef CAN_CONVERT_REQUEST
 }
 
 
 onlineTask::convertType onlineJobAdministration::canConvertInto(const QString& originalName, const QString& destinationName) const
 {
-  Q_UNUSED(originalName); // it is used in the macro
-  Q_UNUSED(destinationName); // it is used in the macro
-#define CAN_CONVERT_INTO_REQUEST( TASKCLASS ) ( TASKCLASS::name() == originalName ) { \
-  QScopedPointer< TASKCLASS > task( new TASKCLASS() ); \
-  convertType = task->canConvert( destinationName ); \
-  if ( convertType != onlineTask::convertImpossible ) { return convertType; } \
+  const onlineTask* task = m_onlineTasks.value(originalName);
+  if (task != 0) {
+    return task->canConvertInto(destinationName);
   }
 
-  onlineTask::convertType convertType;
-  Q_UNUSED(convertType); // it is used in the macro
-
-  if CAN_CONVERT_INTO_REQUEST(sepaOnlineTransfer)
-  else if CAN_CONVERT_INTO_REQUEST(germanOnlineTransfer)
-
   return onlineTask::convertImpossible;
-
-#undef CAN_CONVERT_INTO_REQUEST
 }
 
 onlineTask::convertType onlineJobAdministration::canConvert(const QString& originalName, const QString& destinationName ) const
@@ -193,7 +176,7 @@ onlineJob onlineJobAdministration::convert( const onlineJob& original, const QSt
 
   if ( canConvertFrom(originalName, destinationName) != onlineTask::convertImpossible ) {
     // Use onlineTask::convert()
-    onlineJob job = createOnlineJobByName(destinationName, id);
+    onlineJob job = createOnlineJob(destinationName, id);
     if ( job.isNull() )
       throw new onlineTask::badConvert(__FILE__, __LINE__);
     job.task()->convert( *original.constTask(), messageString, payeeChanged );
@@ -231,25 +214,13 @@ onlineJob onlineJobAdministration::convertBest( const onlineJob& original, const
   throw new onlineTask::badConvert(__FILE__, __LINE__);
 }
 
-void onlineJobAdministration::makeOnlineJobAvailable(const QString& accountId, const QString& jobType)
+void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
 {
-#if 0
-  // Remove job of same type first
-  if ( m_availableJobList.contains(accountId) ) {
-    onlineJob_t newJobIndex = jobType->getTypeIndex();
-    QList<onlineJob> jobList = m_availableJobList.values( accountId );
-    QList<onlineJob>::Iterator end = jobList.end();
-    for( QList<onlineJob>::Iterator iter = jobList.begin(); iter != end ; iter++) {
-      if ( (*iter)->getTypeIndex() == newJobIndex ) {
-        delete (*iter);
-        *iter = jobType;
-        break;
-      }
-    }
-  } else {
-    m_availableJobList.insert(accountId, jobType);
-  }
-#endif
+  if (Q_UNLIKELY( task == 0 ))
+    return;
+
+  m_onlineTasks.insert(task->taskName(), task);
+  qDebug() << "onlineTask available" << task->taskName();
 }
 
 QSharedPointer<const onlineTask::settings> onlineJobAdministration::taskSettings( const QString& taskName, const QString& accountId ) const

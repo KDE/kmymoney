@@ -36,7 +36,7 @@ namespace KMyMoneyPlugin {
 class KMM_MYMONEY_EXPORT onlineJobAdministration : public QObject
 {
   Q_OBJECT
-
+  KMM_MYMONEY_UNIT_TESTABLE
 public:
   explicit onlineJobAdministration(QObject *parent = 0);
   ~onlineJobAdministration();
@@ -45,6 +45,9 @@ public:
 
   static onlineJobAdministration* instance() { return &m_instance; }
 
+  /** @brief Use onlineTask::name() to create a corresponding onlineJob */
+  onlineJob createOnlineJob( const QString& name, const QString& id = MyMoneyObject::emptyId() ) const;
+  
   bool isJobSupported(const QString& accountId, const QString& name) const;
   bool isJobSupported(const QString& accountId, const QStringList& names) const;
   bool isJobSupported(const QString& accountId, const size_t& hash) const;
@@ -83,6 +86,7 @@ public:
   {
     return convertBest( original, destinationNames, original.id() );
   }
+  
   /**
    * @brief Request onlineTask::settings from plugin
    *
@@ -111,10 +115,9 @@ public slots:
 
   /**
    * @brief Slot for plugins to make an onlineJob available.
-   * @param accountId Account which supports this job
-   * @param jobType onlineTask::name() of the job
+   * @param task the task to register, I take ownership
    */
-  void makeOnlineJobAvailable(const QString& accountId, const QString& jobType );
+  void registerOnlineTask( onlineTask *const task );
     
 private:
   /**
@@ -129,6 +132,11 @@ private:
    */
   QMap<QString, KMyMoneyPlugin::OnlinePluginExtended *> m_onlinePlugins;
   
+  /**
+   * The key is the name of the task
+   */
+  QMap<QString, onlineTask*> m_onlineTasks;
+  
   static onlineJobAdministration m_instance;
 
   /** @brief Checks destinationName's canConvert() */
@@ -136,15 +144,18 @@ private:
 
   /** @brief Checks originalName's canConvertInto() */
   onlineTask::convertType canConvertInto( const QString& originalName, const QString& destinationName ) const;
-
-  /** @brief Use onlineTask::name() to create a corresponding onlineJob */
-  onlineJob createOnlineJobByName( const QString& name, const QString& id = MyMoneyObject::emptyId() ) const;
   
   /**
    * @brief Converts onlineTask::hash into onlineTask::name()
    * @return A onlineTask::name() or QString() if not found.
    */
   QString getTaskNameByHash( const size_t& hash ) const;
+  
+  /**
+   * @brief Creates onlineTask by names
+   * @return pointer to task, caller gains ownership
+   */
+  onlineTask* createOnlineTask( const QString& name ) const;
 };
 
 template<class T>
