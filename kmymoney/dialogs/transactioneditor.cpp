@@ -261,13 +261,16 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
 
 void TransactionEditor::slotNumberChanged(const QString& txt)
 {
+  QString next = txt;
   kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
 
-  if (number) {
-    if (MyMoneyFile::instance()->checkNoUsed(m_account.id(), txt)) {
-      if (KMessageBox::questionYesNo(m_regForm, QString("<qt>") + i18n("The number <b>%1</b> has already been used in account <b>%2</b>. Do you want to replace it with the next available number?", txt, m_account.name()) + QString("</qt>"), i18n("Duplicate number")) == KMessageBox::Yes) {
-        number->loadText(KMyMoneyUtils::nextCheckNumber(m_account));
-      }
+  while (MyMoneyFile::instance()->checkNoUsed(m_account.id(), next)) {
+    if (KMessageBox::questionYesNo(m_regForm, QString("<qt>") + i18n("The number <b>%1</b> has already been used in account <b>%2</b>.""<center>Do you want to replace it with the next available number?</center>", next, m_account.name()) + QString("</qt>"), i18n("Duplicate number")) == KMessageBox::Yes) {
+      assignNextNumber();
+      next = KMyMoneyUtils::nextCheckNumber(m_account);
+    } else {
+      number->setText(QString());
+      break;
     }
   }
 }
@@ -445,14 +448,32 @@ void TransactionEditor::assignNextNumber(void)
 {
   if (canAssignNumber()) {
     kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
-    number->loadText(KMyMoneyUtils::nextCheckNumber(m_account));
+    QString num = KMyMoneyUtils::nextCheckNumber(m_account);
+    bool showMessage = true;
+    int rc = KMessageBox::No;
+    while (MyMoneyFile::instance()->checkNoUsed(m_account.id(), num)) {
+      if (showMessage) {
+        rc = KMessageBox::questionYesNo(m_regForm, QString("<qt>") + i18n("The expected next check number <b>%1</b> has already been used in account <b>%2</b>." "<center>Do you want to replace it with the next available number?</center>", num, m_account.name()) + QString("</qt>"), i18n("Duplicate number"));
+        showMessage = false;
+      }
+      if (rc == KMessageBox::Yes) {
+        num = KMyMoneyUtils::nextCheckNumber(m_account);
+        KMyMoneyUtils::updateLastNumberUsed(m_account, num);
+        m_account.setValue("lastNumberUsed", num);
+        number->loadText(num);
+      } else {
+        num = QString();
+        break;
+      }
+    }
+    number->setText(num);
   }
 }
 
 bool TransactionEditor::canAssignNumber(void) const
 {
   kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
-  return (number != 0) && (number->text().isEmpty());
+  return (number != 0);
 }
 
 void TransactionEditor::setupCategoryWidget(KMyMoneyCategory* category, const QList<MyMoneySplit>& splits, QString& categoryId, const char* splitEditSlot, bool /* allowObjectCreation */)
@@ -720,12 +741,22 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
 
 void TransactionEditor::keepNewNumber(const MyMoneyTransaction& tr)
 {
+  // verify that new number, possibly containing alpha, is valid
+  MyMoneyTransaction txn = tr;
   MyMoneyFile* file = MyMoneyFile::instance();
-  if (!tr.splits().isEmpty()) {
-    const quint64 num64 = KMyMoneyUtils::numericPart(tr.splits().front().number());
-    if (num64 > 0) {
-      m_account.setValue("lastNumberUsed", tr.splits().front().number());
-      file->modifyAccount(m_account);
+  if (!txn.splits().isEmpty()) {
+    QString number = txn.splits().first().number();
+    if (KMyMoneyUtils::numericPart(number) > 0) {
+      // numeric is valid
+      kMyMoneyLineEdit* numberEdit = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
+      if (numberEdit) {
+        numberEdit->loadText(number);
+        MyMoneySplit split = txn.splits().first();
+        split.setNumber(number);
+        txn.modifySplit(split);
+        m_account.setValue("lastNumberUsed", number);
+        file->modifyAccount(m_account);
+      }
     }
   }
 }

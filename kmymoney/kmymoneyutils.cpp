@@ -356,6 +356,7 @@ QString KMyMoneyUtils::nextCheckNumber(const MyMoneyAccount& acc)
   //                   +-#1--+ +#2++-#3-++-#4--+
   QRegExp exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
   if (exp.indexIn(acc.value("lastNumberUsed")) != -1) {
+    setLastNumberUsed(acc.value("lastNumberUsed"));
     QString arg1 = exp.cap(1);
     QString arg2 = exp.cap(2);
     QString arg3 = QString::number(exp.cap(3).toULong() + 1);
@@ -372,6 +373,63 @@ QString KMyMoneyUtils::nextCheckNumber(const MyMoneyAccount& acc)
     number = '1';
   }
   return number;
+}
+
+void KMyMoneyUtils::updateLastNumberUsed(const MyMoneyAccount& acc, const QString& number)
+{
+  MyMoneyAccount accnt = acc;
+  QString num = number;
+  // now check if this number has been used already
+  MyMoneyFile* file = MyMoneyFile::instance();
+  if (file->checkNoUsed(accnt.id(), num)) {
+    // if a number has been entered which is immediately prior to
+    // an existing number, the next new number produced would clash
+    // so need to look ahead for free next number
+    bool free = false;
+    for (int i = 0; i < 10; i++) {
+      // find next unused number - 10 tries (arbitrary)
+      if (file->checkNoUsed(accnt.id(), num)) {
+        //  increment and try again
+        num = getAdjacentNumber(num);
+      } else {
+        //  found a free number
+        free = true;
+        break;
+      }
+    }
+    if (!free) {
+      qDebug()<<"No free number found - set to '1'";
+      num = '1';
+    }
+    setLastNumberUsed(getAdjacentNumber(num, - 1));
+  }
+}
+
+void KMyMoneyUtils::setLastNumberUsed(const QString& num)
+{
+   m_lastNumberUsed = num;
+}
+
+QString KMyMoneyUtils::lastNumberUsed()
+{
+  return m_lastNumberUsed;
+}
+
+QString KMyMoneyUtils::getAdjacentNumber(const QString& number, int offset)
+{
+  QString num = number;
+  //                   +-#1--+ +#2++-#3-++-#4--+
+  QRegExp exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
+  if (exp.indexIn(num) != -1) {
+    QString arg1 = exp.cap(1);
+    QString arg2 = exp.cap(2);
+    QString arg3 = QString::number(exp.cap(3).toULong() + offset);
+    QString arg4 = exp.cap(4);
+    num = QString("%1%2%3%4").arg(arg1).arg(arg2).arg(arg3).arg(arg4);
+  } else {
+    num = '1';
+  }  //  next free number
+  return num;
 }
 
 quint64 KMyMoneyUtils::numericPart(const QString & num)

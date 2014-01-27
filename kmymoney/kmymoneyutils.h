@@ -48,6 +48,7 @@
   * @author Thomas Baumgart
   */
 
+static QString m_lastNumberUsed;
 class QWizard;
 class KMyMoneyUtils
 {
@@ -351,6 +352,19 @@ public:
     * Return next check number for account @a acc.
     */
   static QString nextCheckNumber(const MyMoneyAccount& acc);
+
+  static void updateLastNumberUsed(const MyMoneyAccount& acc, const QString& number);
+
+  static void setLastNumberUsed(const QString& num);
+
+  static QString lastNumberUsed();
+
+  /**
+    * Returns previous number if offset is -1 or
+    * the following number if offset is 1.
+    */
+  static QString getAdjacentNumber(const QString& number, int offset = 1);
+
 
   /**
   * remove any non-numeric characters from check number

@@ -5385,6 +5385,16 @@ void KMyMoneyApp::doDeleteTransactions(void)
           }
         }
       }
+      // need to ensure "nextCheckNumber" is still correct
+      MyMoneyAccount acc = file->account((*it_t).split().accountId());
+      // the "lastNumberUsed" might have been the txn number deleted
+      // so adjust it
+      QString deletedNum = (*it_t).split().number();
+      // decrement deletedNum and set new "lastNumberUsed"
+      QString num = KMyMoneyUtils::getAdjacentNumber(deletedNum, -1);
+      acc.setValue("lastNumberUsed", num);
+
+      file->modifyAccount(acc);
       list.erase(it_t);
       it_t = list.begin();
       slotStatusProgressBar(i++, 0);
