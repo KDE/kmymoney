@@ -115,8 +115,6 @@ private slots:
   void checkNotSupportedWidget();
 
 private:
-  kMandatoryFieldGroup* m_requiredFields;
-
   /**
    * @brief returns the currently edited onlineJob
    * Can be a null job
@@ -124,8 +122,8 @@ private:
   onlineJob activeOnlineJob() const;
 
   Ui::kOnlineTransferFormDecl* ui;
-
   QList<IonlineJobEdit*> m_onlineJobEditWidgets;
+  kMandatoryFieldGroup* m_requiredFields;
   
   /**
    * @brief Checks if widget can edit any task the selected account supports

@@ -35,10 +35,10 @@ public slots:
     void setOriginAccount( const QString& );
 
 private:
+    Ui::germanCreditTransferEdit* ui;
     QString m_originAccount;
     onlineJobTyped<germanOnlineTransfer> m_germanCreditTransfer;
     kMandatoryFieldGroup* m_requiredFields;
-    Ui::germanCreditTransferEdit* ui;
     
 private slots:
     void beneficiaryNameChanged( const QString& );

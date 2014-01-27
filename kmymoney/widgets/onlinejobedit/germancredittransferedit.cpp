@@ -8,6 +8,7 @@
 germanCreditTransferEdit::germanCreditTransferEdit(QWidget *parent) :
     IonlineJobEdit(parent),
     ui(new Ui::germanCreditTransferEdit),
+    m_originAccount( QString() ),
     m_germanCreditTransfer( onlineJobTyped<germanOnlineTransfer>(new germanOnlineTransfer) ),
     m_requiredFields( new kMandatoryFieldGroup(this) )
 {

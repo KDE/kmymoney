@@ -25,7 +25,8 @@ void onlineJobAdministrationTest::initTestCase()
         accountId = account.id();
         transaction.commit();
     } catch (MyMoneyException* ex) {
-        qFatal( ex->what().toLatin1().constData() );
+        QFAIL( qPrintable("Unexpected exception " + ex->what()) );
+        delete ex;
     }
 }
 

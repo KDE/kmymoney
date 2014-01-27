@@ -40,9 +40,9 @@
 
 kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   : QDialog(parent),
-    m_requiredFields( new kMandatoryFieldGroup(this) ),
+    ui(new Ui::kOnlineTransferFormDecl),
     m_onlineJobEditWidgets( QList<IonlineJobEdit*>() ),
-    ui(new Ui::kOnlineTransferFormDecl)
+    m_requiredFields( new kMandatoryFieldGroup(this) )
 {
   ui->setupUi(this);
 

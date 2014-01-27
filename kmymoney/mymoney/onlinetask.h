@@ -139,7 +139,7 @@ public:
    *
    * Many onlineTasks settings vary due to multiple reasons. E.g.
    * a credit transfer could have a maximum amount it can transfer at
-   * once. But this amount could depend on the account and the users
+   * once. But this amount could depend on the account and the user's
    * contract with the bank.
    *
    * Therefor onlineTasks can offer thier own set of configurations. There

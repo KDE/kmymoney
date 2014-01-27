@@ -414,7 +414,7 @@ void AccountsModel::init()
 }
 
 /**
-  * Perform the initial liad of the model data
+  * Perform the initial load of the model data
   * from the @ref MyMoneyFile.
   *
   */

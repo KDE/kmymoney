@@ -36,10 +36,10 @@ static const unsigned short defaultSubTextKey = 0;
 sepaOnlineTransfer::sepaOnlineTransfer()
   : onlineTransfer(),
     _settings( QSharedPointer<const settings>() ),
+    _originAccount( QString() ),
     _value(0),
     _purpose(QString("")),
     _endToEndReference(QString("")),
-    _originAccount( QString() ),
     _remoteAccount( sepaAccountIdentifier() ),
     _textKey(defaultTextKey),
     _subTextKey(defaultSubTextKey)
@@ -50,10 +50,10 @@ sepaOnlineTransfer::sepaOnlineTransfer()
 sepaOnlineTransfer::sepaOnlineTransfer(const sepaOnlineTransfer& other)
   : onlineTransfer( other ),
     _settings( other._settings ),
+    _originAccount( other._originAccount ),
     _value( other._value ),
     _purpose( other._purpose ),
     _endToEndReference(other._endToEndReference),
-    _originAccount( other._originAccount ),
     _remoteAccount( other._remoteAccount ),
     _textKey( other._textKey ),
     _subTextKey( other._subTextKey )
@@ -180,6 +180,7 @@ bool sepaOnlineTransfer::settings::isIbanValid( const QString& iban )
 /** @todo save remote account */
 void sepaOnlineTransfer::writeXML(QDomDocument& document, QDomElement& parent) const
 {
+  Q_UNUSED(document);
   parent.setAttribute("originAccount", _originAccount);
   parent.setAttribute("value", _value.toString());
   parent.setAttribute("textKey", _textKey);

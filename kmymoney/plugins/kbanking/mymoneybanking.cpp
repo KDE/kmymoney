@@ -976,14 +976,11 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
           || abStatus == AB_Job_StatusUnknown )
         job.setJobSend();
 
-      switch(abStatus) {
-      case AB_Job_StatusFinished:
+      if (abStatus == AB_Job_StatusFinished)
         job.setBankAnswer( onlineJob::acceptedByBank );
-        break;
-      case AB_Job_StatusError:
-      case AB_Job_StatusUnknown:
+      else if ( abStatus == AB_Job_StatusError || abStatus == AB_Job_StatusUnknown)
         job.setBankAnswer( onlineJob::sendingError );
-      }
+      
       job.addJobMessage(onlineJobMessage(onlineJobMessage::debug, "KBanking", "Job was processed"));
       m_parent->m_onlineJobQueue.insert(jobIdent, job);
       abJob = AB_Job_List2Iterator_Next(jobIter);

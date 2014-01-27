@@ -208,16 +208,13 @@ onlineJob onlineJobAdministration::convert( const onlineJob& original, const QSt
 
 onlineJob onlineJobAdministration::convertBest( const onlineJob& original, const QStringList& destinationNames, const QString& id ) const
 {
-  onlineTask::convertType bestConvertType = onlineTask::convertImpossible;
   QString bestDestination = QString();
   
   foreach (QString destinationName, destinationNames) {
     onlineTask::convertType type = canConvert( original, destinationName );
     if ( type == onlineTask::convertionLossy ) {
-      bestConvertType = onlineTask::convertionLossy;
       bestDestination = destinationName;
     } else if ( type == onlineTask::convertionLoseless ) {
-      bestConvertType = onlineTask::convertionLossy;
       bestDestination = destinationName;
       break;
     }

@@ -103,6 +103,7 @@ MyMoneySecurity germanOnlineTransfer::currency() const
 
 onlineTask::convertType germanOnlineTransfer::canConvertInto( const QString& onlineTaskName ) const
 {
+  Q_UNUSED(onlineTaskName);
   return onlineTask::convertImpossible;
 }
 
@@ -159,6 +160,7 @@ void germanOnlineTransfer::setOriginAccount( const QString& accountId )
 /** @todo save remote account */
 void germanOnlineTransfer::writeXML(QDomDocument& document, QDomElement& parent) const
 {
+  Q_UNUSED(document);
   parent.setAttribute("originAccount", _originAccount);
   parent.setAttribute("value", _value.toString());
   parent.setAttribute("textKey", _textKey);

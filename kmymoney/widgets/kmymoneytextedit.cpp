@@ -102,8 +102,8 @@ void KMyMoneyTextEditHighlighter::highlightBlock(const QString& text)
 KMyMoneyTextEdit::KMyMoneyTextEdit(QWidget* parent)
   : KTextEdit(parent),
   m_maxLength(-1),
-  m_maxLines(-1),
   m_maxLineLength(-1),
+  m_maxLines(-1),
   m_allowedChars( QString("") ),
   m_highligther( 0 )
 {

@@ -103,8 +103,11 @@ public:
      * 
      * For the check usually only the first two chars are needed. So you do not
      * need to validate the IBAN.
+     * 
+     * @todo LOW: Implement, should be simple to test: if the country code in iban is the same as in origin iban and
+     * the iban belongs to a sepa country a bic is not necessary. Will change 1. Feb 2016.
      */
-    virtual bool isBicMandatory( const QString& iban ) const { return true; }
+    virtual bool isBicMandatory( const QString& iban ) const { Q_UNUSED(iban); return true; }
     
   private:
     /** @brief Number of chars allowed for sepa reference */
