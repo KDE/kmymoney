@@ -212,7 +212,6 @@ public:
   void addOnlineJob( onlineJob& job ) { Q_UNUSED(job); }
   const onlineJob getOnlineJob(const QString &jobId) const { Q_UNUSED(jobId); return onlineJob(); }
   long unsigned int onlineJobId() const { return 0; }
-  void loadOnlineJobId(const unsigned long id) { Q_UNUSED(id); }
   const QList<onlineJob> onlineJobList() const { return QList<onlineJob>(); }
   void removeOnlineJob( const onlineJob& ) { }
   /** @} */
@@ -959,6 +958,8 @@ public:
   virtual void loadReports(const QMap<QString, MyMoneyReport>& reports);
   virtual void loadBudgets(const QMap<QString, MyMoneyBudget>& budgets);
   virtual void loadPrices(const MyMoneyPriceList& list);
+  /** @todo implement */
+  virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs) {}
 
   virtual unsigned long accountId(void) const;
   virtual unsigned long transactionId(void) const;
@@ -979,6 +980,8 @@ public:
   virtual void loadSecurityId(const unsigned long id);
   virtual void loadReportId(const unsigned long id);
   virtual void loadBudgetId(const unsigned long id);
+  /** @todo implement */
+  virtual void loadOnlineJobId(const unsigned long id) {}
 
   /**
     * This method is used to retrieve the whole set of key/value pairs

@@ -18,6 +18,8 @@
 
 #include "sepaonlinetransfer.h"
 
+#include <QtCore/QString>
+
 // Ktoblz check
 #include <iban.h>
 
@@ -28,6 +30,9 @@
 
 ONLINETASK_META_INIT(sepaOnlineTransfer);
 
+static const unsigned short defaultTextKey = 51;
+static const unsigned short defaultSubTextKey = 0;
+
 sepaOnlineTransfer::sepaOnlineTransfer()
   : onlineTransfer(),
     _settings( QSharedPointer<const settings>() ),
@@ -36,8 +41,8 @@ sepaOnlineTransfer::sepaOnlineTransfer()
     _endToEndReference(QString("")),
     _originAccount( QString() ),
     _remoteAccount( sepaAccountIdentifier() ),
-    _textKey(51),
-    _subTextKey(0)
+    _textKey(defaultTextKey),
+    _subTextKey(defaultSubTextKey)
 {
 
 }
@@ -170,4 +175,39 @@ bool sepaOnlineTransfer::settings::isIbanValid( const QString& iban )
     case IbanCheck::WRONG_COUNTRY:
     default: return false;
     }
+}
+
+/** @todo save remote account */
+void sepaOnlineTransfer::writeXML(QDomDocument& document, QDomElement& parent) const
+{
+  parent.setAttribute("originAccount", _originAccount);
+  parent.setAttribute("value", _value.toString());
+  parent.setAttribute("textKey", _textKey);
+  parent.setAttribute("subTextKey", _subTextKey);
+  
+  if (!_purpose.isEmpty()) {
+    parent.setAttribute("purpose", _purpose);
+  }
+  
+  if (!_endToEndReference.isEmpty()) {
+    parent.setAttribute("endToEndReference", _endToEndReference);
+  }
+}
+
+/** @todo load remote account */
+sepaOnlineTransfer* sepaOnlineTransfer::createFromXml(const QDomElement& element) const
+{
+  sepaOnlineTransfer* task = new sepaOnlineTransfer();
+  task->setOriginAccount( element.attribute("originAccount", QString()) );
+  task->setValue( MyMoneyMoney( QStringEmpty(element.attribute("value", QString())) ) );
+  task->_textKey = element.attribute("textKey", QString().setNum(defaultTextKey)).toUShort();
+  task->_subTextKey = element.attribute("subTextKey", QString().setNum(defaultSubTextKey)).toUShort(); 
+  task->setPurpose( element.attribute("purpose", QString()) );
+  task->setEndToEndReference( element.attribute("endToEndReference", QString()) );
+  return task;
+}
+
+bool sepaOnlineTransfer::hasReferenceTo(const QString& id) const
+{
+  return (id == _originAccount);
 }

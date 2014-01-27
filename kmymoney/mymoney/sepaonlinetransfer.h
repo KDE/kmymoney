@@ -70,6 +70,8 @@ public:
 
   unsigned short int textKey() const { return _textKey; }
   unsigned short int subTextKey() const { return _subTextKey; }
+  
+  virtual bool hasReferenceTo(const QString& id) const;
 
   class settings : public creditTransferSettingsBase
   {
@@ -118,6 +120,9 @@ protected:
   virtual convertType canConvert( const QString& onlineTaskName ) const;
   virtual onlineTask* convertInto( const QString& onlineTaskName, QString& messageString, bool& payeeChanged ) const;
   virtual void convert( const onlineTask&, QString& messageString, bool& payeeChanged );
+  
+  virtual sepaOnlineTransfer* createFromXml(const QDomElement &element) const;
+  virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
 
 private:
   mutable QSharedPointer<const settings> _settings;

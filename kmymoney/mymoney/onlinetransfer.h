@@ -61,11 +61,6 @@ public:
    * @todo Move (logic) to a utils class?
    */
   virtual QString jobTypeName() const { return "Credit Transfer"; }
-
-  bool hasReferenceTo(const QString &id) const { return false; }
-  void writeXML(QDomDocument &document, QDomElement &parent) const {}
-private:
-
 };
 
 #endif // ONLINETRANSFER_H

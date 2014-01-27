@@ -98,6 +98,7 @@ void Models::fileOpened(void)
 {
   accountsModel()->load();
   institutionsModel()->load();
+  onlineJobsModel()->load();
 }
 
 void Models::fileClosed(void)
@@ -106,7 +107,5 @@ void Models::fileClosed(void)
   // to avoid any uncaught KMyMoneyExceptions while using the account objects from this model after the file has been closed
   accountsModel()->removeRows(0, accountsModel()->rowCount());
   institutionsModel()->removeRows(0, institutionsModel()->rowCount());
-
-  delete d->m_onlineJobModel;
-  d->m_onlineJobModel = 0;
+  onlineJobsModel()->unload();
 }

@@ -40,9 +40,27 @@ onlineJobModel::onlineJobModel(QObject *parent) :
           this, SLOT(slotObjectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
   connect(file, SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)),
           this, SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT,QString)));
+}
 
+void onlineJobModel::load()
+{ 
+  unload();
+  beginInsertRows(QModelIndex(), 0, 0);
   foreach(const onlineJob job, MyMoneyFile::instance()->onlineJobList()) {
     m_jobIdList.append(job.id());
+  }
+  endInsertRows();
+  emit dataChanged(index(0, 0, QModelIndex()), index(rowCount()-1, columnCount()-1, QModelIndex()));
+}
+
+void onlineJobModel::unload()
+{
+  if (rowCount() != 0) {
+    unsigned int oldRowCount = rowCount();
+    beginRemoveRows(QModelIndex(), 0, rowCount());
+    m_jobIdList.clear();
+    endRemoveRows();
+    emit dataChanged(index(0, 0, QModelIndex()), index(oldRowCount-1, columnCount()-1, QModelIndex()));
   }
 }
 
@@ -133,6 +151,9 @@ void onlineJobModel::reloadAll()
   emit dataChanged(index(rowCount()-1, 0), index(rowCount()-1, columnCount()-1));
 }
 
+/**
+ * This method removes the rows from MyMoneyFile.
+ */
 bool onlineJobModel::removeRow(int row, const QModelIndex& parent)
 {
   if (parent.isValid())
@@ -147,6 +168,9 @@ bool onlineJobModel::removeRow(int row, const QModelIndex& parent)
   return true;
 }
 
+/**
+ * This method removes the rows from MyMoneyFile.
+ */
 bool onlineJobModel::removeRows( int row, int count, const QModelIndex & parent )
 { 
   if (parent.isValid())

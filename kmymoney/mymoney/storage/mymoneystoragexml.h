@@ -106,6 +106,9 @@ protected:
   virtual void writeBudgets(QDomElement& e);
   virtual void writeBudget(QDomElement& budget, const MyMoneyBudget& b);
 
+  virtual void writeOnlineJobs(QDomElement& onlineJobs);
+  virtual void writeOnlineJob(QDomElement& onlineJobs, const onlineJob& job);
+  
   virtual void writeSecurities(QDomElement& securities);
   virtual void writeSecurity(QDomElement& securityElement, const MyMoneySecurity& security);
 

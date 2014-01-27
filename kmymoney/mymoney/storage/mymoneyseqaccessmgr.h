@@ -167,8 +167,7 @@ public:
   void addPayee(MyMoneyPayee& payee);
 
   /**
-   * @todo A reference-to-pointer (onlineJob &job) would simulate an similar behaviour to the other add* functions. Use that?
-   *  But then we should use garded pointer to avoid memory leackage (which will come due to the unclear system then)
+   * Create now onlineJob
    */
   void addOnlineJob(onlineJob& job);
 
@@ -388,8 +387,6 @@ public:
   const onlineJob getOnlineJob(const QString &id) const;
   /** @todo implement */
   long unsigned int onlineJobId() const { return 1; }
-  /** @todo implement */
-  void loadOnlineJobId(const unsigned long id) { Q_UNUSED(id); };
 
   void removeOnlineJob(const onlineJob & );
 
@@ -628,6 +625,7 @@ public:
   virtual void loadSecurities(const QMap<QString, MyMoneySecurity>& map);
   virtual void loadCurrencies(const QMap<QString, MyMoneySecurity>& map);
   virtual void loadPrices(const MyMoneyPriceList& list);
+  virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs);
 
   virtual void loadAccountId(const unsigned long id);
   virtual void loadTransactionId(const unsigned long id);
@@ -638,6 +636,7 @@ public:
   virtual void loadSecurityId(const unsigned long id);
   virtual void loadReportId(const unsigned long id);
   virtual void loadBudgetId(const unsigned long id);
+  virtual void loadOnlineJobId(const unsigned long id);
 
   virtual unsigned long accountId(void) const {
     return m_nextAccountID;

@@ -162,6 +162,11 @@ public:
    * knowledge of.
    */
   virtual const QList<MyMoneySecurity> securityList(void) const = 0;
+  
+  /**
+   * This method returns a list of onlineJobs the engine has 
+   */
+  virtual const QList<onlineJob> onlineJobList() const = 0;
 
   /**
     * This method is used to return the standard liability account
@@ -283,7 +288,7 @@ public:
   virtual void loadReports(const QMap<QString, MyMoneyReport>& reports) = 0;
   virtual void loadBudgets(const QMap<QString, MyMoneyBudget>& budgets) = 0;
   virtual void loadPrices(const MyMoneyPriceList& list) = 0;
-//  virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs) = 0;
+  virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs) = 0;
 
   virtual unsigned long accountId(void) const = 0;
   virtual unsigned long transactionId(void) const = 0;

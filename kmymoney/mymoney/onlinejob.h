@@ -65,6 +65,9 @@ public:
   /** @brief Copy constructor with new id */
   onlineJob( const QString &id, const onlineJob& other );
 
+  /** @brief Contruct from xml */
+  onlineJob( const QDomElement& );
+  
   virtual ~onlineJob();
 
   /**
@@ -101,9 +104,11 @@ public:
   template<class T> const T* constTask() const { return task<T>(); }
 
   template<class T> bool canTaskCast() const;
+  
+  QString taskIid() const;
 
   /** @todo implement */
-  virtual bool hasReferenceTo(const QString &id) const { return false; }
+  virtual bool hasReferenceTo(const QString &id) const;
   virtual void writeXML(QDomDocument &document, QDomElement &parent) const;
 
   /**

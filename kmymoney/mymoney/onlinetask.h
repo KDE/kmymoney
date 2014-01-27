@@ -182,8 +182,19 @@ protected:
 
   /** @see MyMoneyObject::hasReferenceTo() */
   virtual bool hasReferenceTo(const QString &id) const = 0;
+
   /** @see MyMoneyObject::writeXML() */
   virtual void writeXML(QDomDocument &document, QDomElement &parent) const = 0;
+  
+  /**
+   * @brief Create a new instance of this task with xml data
+   * 
+   * This method is used to load an onlineTask from a file.
+   * 
+   * This method is created const as it should create a *new* onlineTask.
+   * @return A pointer to a new instance, caller takes ownership
+   */
+  virtual onlineTask* createFromXml(const QDomElement &element) const = 0;
   
   /**
    * @brief Account this job is related to

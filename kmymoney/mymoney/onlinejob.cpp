@@ -22,6 +22,8 @@
 #include "mymoneyexception.h"
 #include "onlinetask.h"
 
+#include "onlinejobadministration.h"
+
 onlineJob::onlineJob()
   : MyMoneyObject(),
     m_task( 0 ),
@@ -66,6 +68,29 @@ onlineJob::onlineJob( const QString &id, const onlineJob& other )
     m_locked( other.m_locked )
 {
   copyPointerFromOtherJob(other);
+}
+
+onlineJob::onlineJob(const QDomElement& element)
+  : MyMoneyObject(element, true),
+    m_messageList( QList<onlineJobMessage>() ),
+    m_locked( false )
+{
+  m_jobSend = QDateTime::fromString(element.attribute("send", ""), Qt::ISODate);
+  m_jobBankAnswerDate = QDateTime::fromString(element.attribute("bankAnswerDate", ""), Qt::ISODate);
+  QString state = element.attribute("bankAnswerState", "");
+  if ( state == "abortedByUser")
+    m_jobBankAnswerState = abortedByUser;
+  else if ( state == "acceptedByBank")
+    m_jobBankAnswerState = acceptedByBank;
+  else if ( state == "rejectedByBank")
+    m_jobBankAnswerState = rejectedByBank;
+  else if ( state == "sendingError")
+    m_jobBankAnswerState = sendingError;
+  else
+    m_jobBankAnswerState = noBankAnswer;
+  
+  QDomElement taskElem = element.firstChildElement("onlineTask");
+  m_task = onlineJobAdministration::instance()->createOnlineTaskByXml(taskElem.attribute("iid", ""), taskElem);
 }
 
 void onlineJob::copyPointerFromOtherJob(const onlineJob &other)
@@ -113,6 +138,16 @@ const onlineTask* onlineJob::task() const
   if( m_task == 0 )
     throw new emptyTask(__FILE__, __LINE__);
   return m_task;
+}
+
+QString onlineJob::taskIid() const
+{
+  try {
+    return task()->taskName();
+  } catch ( emptyTask* e ) {
+    delete e;
+  }
+  return QString();
 }
 
 QString onlineJob::responsibleAccount() const {
@@ -169,8 +204,33 @@ QList<onlineJobMessage> onlineJob::jobMessageList() const
 /** @todo give life */
 void onlineJob::writeXML(QDomDocument &document, QDomElement &parent) const
 {
-  Q_UNUSED(document);
-  Q_UNUSED(parent);
+  QDomElement el = document.createElement("onlineJob");
+  writeBaseXML(document, el);
+  
+  if (!m_jobSend.isNull())
+    el.setAttribute("send", m_jobSend.toString(Qt::ISODate));
+  if (!m_jobBankAnswerDate.isNull())
+    el.setAttribute("bankAnswerDate", m_jobBankAnswerDate.toString(Qt::ISODate));
+  
+  switch (m_jobBankAnswerState) {
+    case abortedByUser: el.setAttribute("bankAnswerState", "abortedByUser"); break;
+    case acceptedByBank: el.setAttribute("bankAnswerState", "acceptedByBank"); break;
+    case rejectedByBank: el.setAttribute("bankAnswerState", "rejectedByBank"); break;
+    case sendingError: el.setAttribute("bankAnswerState", "sendingError"); break;
+    case noBankAnswer:
+    default: void();
+  }
+  
+  QDomElement taskEl = document.createElement("onlineTask");
+  taskEl.setAttribute("iid", taskIid());
+  try {
+    task()->writeXML(document, taskEl); // throws execption if there is no task
+    el.appendChild(taskEl); // only append child if there is something to append
+  } catch ( emptyTask* e ) {
+    delete e;
+  }
+  
+  parent.appendChild(el);
 }
 
 bool onlineJob::isValid() const
@@ -178,5 +238,12 @@ bool onlineJob::isValid() const
     if ( m_task != 0 )
         return m_task->isValid();
     return false;
+}
+
+bool onlineJob::hasReferenceTo(const QString& id) const
+{
+  if (m_task != 0)
+    return m_task->hasReferenceTo(id);
+  return false;
 }
 

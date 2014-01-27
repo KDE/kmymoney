@@ -27,6 +27,9 @@
 
 ONLINETASK_META_INIT(germanOnlineTransfer);
 
+static const unsigned short defaultTextKey = 51;
+static const unsigned short defaultSubTextKey = 0;
+
 germanOnlineTransfer::germanOnlineTransfer()
   : onlineTransfer(),
     _settings( QSharedPointer<const settings>() ),
@@ -34,8 +37,8 @@ germanOnlineTransfer::germanOnlineTransfer()
     _purpose(QString()),
     _originAccount( QString() ),
     _remoteAccount( germanAccountIdentifier() ),
-    _textKey(51),
-    _subTextKey(0)
+    _textKey(defaultTextKey),
+    _subTextKey(defaultSubTextKey)
 {
 
 }
@@ -151,4 +154,34 @@ void germanOnlineTransfer::setOriginAccount( const QString& accountId )
     _originAccount = accountId;
     _settings = QSharedPointer<const settings>();
   }
+}
+
+/** @todo save remote account */
+void germanOnlineTransfer::writeXML(QDomDocument& document, QDomElement& parent) const
+{
+  parent.setAttribute("originAccount", _originAccount);
+  parent.setAttribute("value", _value.toString());
+  parent.setAttribute("textKey", _textKey);
+  parent.setAttribute("subTextKey", _subTextKey);
+  
+  if (!_purpose.isEmpty()) {
+    parent.setAttribute("purpose", _purpose);
+  }
+}
+
+/** @todo load remote account */
+germanOnlineTransfer* germanOnlineTransfer::createFromXml(const QDomElement& element) const
+{
+  germanOnlineTransfer* task = new germanOnlineTransfer();
+  task->setOriginAccount( element.attribute("originAccount", QString()) );
+  task->setValue( MyMoneyMoney( QStringEmpty(element.attribute("value", QString())) ) );
+  task->_textKey = element.attribute("textKey", QString().setNum(defaultTextKey)).toUShort();
+  task->_subTextKey = element.attribute("subTextKey", QString().setNum(defaultSubTextKey)).toUShort(); 
+  task->setPurpose( element.attribute("purpose", QString()) );
+  return task;
+}
+
+bool germanOnlineTransfer::hasReferenceTo(const QString& id) const
+{
+  return (id == _originAccount);
 }

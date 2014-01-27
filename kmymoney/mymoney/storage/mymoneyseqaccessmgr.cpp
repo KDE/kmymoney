@@ -1202,6 +1202,11 @@ void MyMoneySeqAccessMgr::loadPrices(const MyMoneyPriceList& list)
   m_priceList = list;
 }
 
+void MyMoneySeqAccessMgr::loadOnlineJobs(const QMap< QString, onlineJob >& onlineJobs)
+{
+  m_onlineJobList = onlineJobs;
+}
+
 void MyMoneySeqAccessMgr::loadAccountId(const unsigned long id)
 {
   m_nextAccountID = id;
@@ -1240,6 +1245,11 @@ void MyMoneySeqAccessMgr::loadReportId(const unsigned long id)
 void MyMoneySeqAccessMgr::loadBudgetId(const unsigned long id)
 {
   m_nextBudgetID = id;
+}
+
+void MyMoneySeqAccessMgr::loadOnlineJobId(const long unsigned int id)
+{
+  m_nextOnlineJobID = id;
 }
 
 const QString MyMoneySeqAccessMgr::value(const QString& key) const

@@ -33,9 +33,8 @@ KOnlineJobOutbox::KOnlineJobOutbox(QWidget *parent) :
     ui(new Ui::KOnlineJobOutbox)
 {
     ui->setupUi(this);
-
-    onlineJobModel* model = new onlineJobModel(this);
-    ui->m_onlineJobView->setModel( model );
+    
+    ui->m_onlineJobView->setModel( Models::instance()->onlineJobsModel() );
     connect(ui->m_buttonSend, SIGNAL( clicked() ), this, SLOT( slotSendJobs() ));
     connect(ui->m_buttonRemove, SIGNAL(clicked()), this, SLOT( slotRemoveJob() ));
     connect(ui->m_buttonEdit, SIGNAL(clicked()), this, SLOT( slotEditJob() ));

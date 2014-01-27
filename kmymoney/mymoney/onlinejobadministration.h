@@ -152,10 +152,33 @@ private:
   QString getTaskNameByHash( const size_t& hash ) const;
   
   /**
-   * @brief Creates onlineTask by names
-   * @return pointer to task, caller gains ownership
+   * @brief Creates an onlineTask by names
+   * @return pointer to task, caller gains ownership. Can be 0.
    */
   onlineTask* createOnlineTask( const QString& name ) const;
+  
+  /**
+   * @brief Creates an onlineTask by its iid and xml data
+   * @return pointer to task, caller gains ownership. Can be 0.
+   */
+  onlineTask* createOnlineTaskByXml( const QString& iid, const QDomElement& element ) const;
+  
+  // Must be able to call createOnlineTaskByXml
+  friend class onlineJob;
+  
+  /**
+   * @brief Get root instance of an onlineTask
+   * 
+   * Returns a pointer from m_onlineTasks or tries to load/create
+   * a approiate root element.
+   * 
+   * Only createOnlineTask and createOnlineTaskByXml use it.
+   * 
+   * @return A pointer, you do *not* gain ownership! Can be 0 if something went wrong.
+   * 
+   * @internal Made to be forward compatible whan onlineTask are loaded as plugins.
+   */
+  inline onlineTask* rootOnlineTask( const QString& name ) const;
 };
 
 template<class T>

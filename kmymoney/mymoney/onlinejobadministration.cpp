@@ -29,7 +29,7 @@ onlineJobAdministration::onlineJobAdministration(QObject *parent) :
 
 onlineJobAdministration::~onlineJobAdministration()
 {
-  qDeleteAll(m_onlinePlugins);
+//  qDeleteAll(m_onlinePlugins);
   qDeleteAll(m_onlineTasks);
   // no m_onlinePlugins.clear(), as this is done anyway
 }
@@ -101,11 +101,26 @@ onlineJob onlineJobAdministration::createOnlineJob( const QString& name, const Q
 
 onlineTask* onlineJobAdministration::createOnlineTask(const QString& name) const
 {
-  const onlineTask* task = m_onlineTasks.value(name);
+  const onlineTask* task = rootOnlineTask(name);
   if (task != 0)
     return task->clone();
   return 0;
 }
+
+onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, const QDomElement& element) const
+{
+  onlineTask* task = rootOnlineTask(iid);
+  if (task != 0) {
+    return task->createFromXml(element);
+  }
+  return 0;
+}
+
+onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
+{
+  return m_onlineTasks.value(name);
+}
+
 
 onlineTask::convertType onlineJobAdministration::canConvertFrom(const QString& originalName, const QString& destinationName) const
 {
