@@ -78,7 +78,7 @@ QStringList Parse::parseLine(const QString& data)
 
 
 QStringList Parse::parseFile(const QString& buf, int strt, int end)
-{qDebug()<<"81 parse START";
+{
   QStringList outBuffer;
   outBuffer.clear();
   int lineCount = 0;
