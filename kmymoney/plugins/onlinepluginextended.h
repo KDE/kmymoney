@@ -42,14 +42,13 @@ public:
    */
   virtual QSharedPointer<const onlineTask::settings> settings( QString accountId, QString taskName ) = 0;
 
-public slots:
   /**
    * @brief Send onlineJobs to bank
    *
    * @param jobs Do not delete the onlineJob objects. You can edit them but expect them to be deleted after
    * you returned from this function.
    */
-  virtual QList<onlineJob> sendOnlineJob(QList<onlineJob> jobs) = 0;
+  virtual void sendOnlineJob(QList<onlineJob>& jobs) = 0;
 
 
 signals:

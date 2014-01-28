@@ -7389,12 +7389,11 @@ void KMyMoneyApp::slotOnlineJobSend( onlineJob job )
     slotOnlineJobSend( jobList );
 }
 
-/** @todo check if it works with new onlineJob system */
 void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
 {
   MyMoneyFile* kmmFile = MyMoneyFile::instance();
   QMultiMap<QString, onlineJob> jobsByPlugin;
-
+  
   // Sort jobs by online plugin & lock them
   foreach(onlineJob job, jobs) {
     Q_ASSERT(job.id() != MyMoneyObject::emptyId());
@@ -7407,38 +7406,40 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
     fileTransaction.commit();
     jobsByPlugin.insert(originAcc.onlineBankingSettings().value("provider"), job);
   }
-
+  
   // Send onlineJobs to plugins
   foreach(QString pluginKey, jobsByPlugin.keys()) {
     QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_onlinePlugins.constFind(pluginKey);
-
+    
     if (it_p != d->m_onlinePlugins.constEnd() ) {
       // plugin found, call it
       KMyMoneyPlugin::OnlinePluginExtended *pluginExt = dynamic_cast< KMyMoneyPlugin::OnlinePluginExtended* >(*it_p);
       if (pluginExt == 0) {
         qWarning("Job given for plugin which is not an extended plugin");
-        return;
+        continue;
       }
+      //! @fixme remove debug message
       qDebug() << "Sending " << jobsByPlugin.count(pluginKey) << " job(s) to online plugin " << pluginKey;
       QList<onlineJob> jobsToExecute = jobsByPlugin.values(pluginKey);
-      QList<onlineJob> executedJobs = pluginExt->sendOnlineJob(jobsToExecute);
-
-      // Save possible changes of the online job
+      QList<onlineJob> executedJobs = jobsToExecute;
+      pluginExt->sendOnlineJob(executedJobs);
+      
+      // Save possible changes of the online job and remove lock
       MyMoneyFileTransaction fileTransaction;
       foreach( onlineJob job, executedJobs ) {
-    fileTransaction.restart();
-    job.setLock( false );
+        fileTransaction.restart();
+        job.setLock( false );
         kmmFile->modifyOnlineJob( job );
-    fileTransaction.commit();
+        fileTransaction.commit();
       }
-
+      
       if (  Q_UNLIKELY( executedJobs.size() != jobsToExecute.size() ) ) {
-    // OnlinePlugin did not return all jobs
-    throw new MYMONEYEXCEPTION("Error saving send online trasks. After restart you should see at minimum all succesfully executed jobs marked send. Please inform the KMyMoney developers");
+        // OnlinePlugin did not return all jobs
+        qWarning() << "Error saving send online tasks. After restart you should see at minimum all succesfully executed jobs marked send. Imperfect plugin: " << pluginExt->objectName();
       }
-
+      
     } else {
-        qWarning() << "Error, got onlineJob for a account without online plugin.";
+      qWarning() << "Error, got onlineJob for a account without online plugin.";
       /** @FIXME can this actually happen? */
     }
   }

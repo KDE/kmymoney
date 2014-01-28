@@ -89,8 +89,7 @@ public:
   QStringList availableJobs(QString accountId);
   QSharedPointer<const onlineTask::settings> settings(QString accountId, QString taskName);
 
-public slots:
-  QList<onlineJob> sendOnlineJob(QList<onlineJob> jobs);
+  void sendOnlineJob(QList<onlineJob>& jobs);
 
 private:
   /**
@@ -213,7 +212,7 @@ private:
 
   /**
    * @brief @ref onlineJob "onlineJobs" which are executed right
-   * Key is onlineJob->id()
+   * Key is onlineJob->id(). This container is used during execution of jobs.
    */
   QMap<QString, onlineJob> m_onlineJobQueue;
 };

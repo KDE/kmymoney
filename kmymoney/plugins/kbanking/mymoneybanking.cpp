@@ -610,10 +610,11 @@ void KBankingPlugin::executeQueue(void) {
 /** @todo improve error handling, e.g. by adding a .isValid to nationalTransfer
  * @todo use new onlineJob system
  */
-QList<onlineJob> KBankingPlugin::sendOnlineJob(QList<onlineJob> jobs)
+void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
 {
   Q_ASSERT(m_kbanking != 0);
-
+  QList<onlineJob> unhandledJobs;
+  
   if (jobs.size()) {
     foreach (onlineJob job, jobs) {
       if ( germanOnlineTransfer::hash == job.task()->taskHash() ) {
@@ -622,7 +623,7 @@ QList<onlineJob> KBankingPlugin::sendOnlineJob(QList<onlineJob> jobs)
         job = enqueTransaction( onlineJobTyped<sepaOnlineTransfer>(job) );
       } else {
         job.addJobMessage( onlineJobMessage(onlineJobMessage::error, "KBanking", "Cannot handle this request" ) );
-        return jobs;
+        unhandledJobs.append(job);
       }
       m_onlineJobQueue.insert(m_kbanking->mappingId(job), job);
     }
@@ -630,7 +631,8 @@ QList<onlineJob> KBankingPlugin::sendOnlineJob(QList<onlineJob> jobs)
     //emit queueChanged();
     executeQueue();
   }
-  return m_onlineJobQueue.values();
+  jobs = m_onlineJobQueue.values() + unhandledJobs;
+  m_onlineJobQueue.clear();
 }
 
 QStringList KBankingPlugin::availableJobs( QString accountId )
@@ -956,11 +958,10 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
         break;
       }
       QString jobIdent = QString::fromUtf8(GWEN_DB_GetCharValue(gwenNode, "kmmOnlineJobId", 0, ""));
-      qDebug() << "jobId " << jobIdent;
 
       onlineJob job = m_parent->m_onlineJobQueue.value(jobIdent);
       if (job.isNull()) {
-        // It should not be possiblie that this will happen (only if AqBanking faìls heavily).
+        // It should not be possiblie that this will happen (only if AqBanking fails heavily).
         //! @todo correct exception text
         qWarning("Executed a job which was not in queue. Please inform the KMyMoney developers.");
         abJob = AB_Job_List2Iterator_Next(jobIter);
