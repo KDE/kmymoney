@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=csvexport
+Name[bs]=csvexport
 Name[ca]=csvexport
 Name[da]=csvexport
 Name[de]=CSV-Export
@@ -24,6 +25,7 @@ Name[uk]=csvexport
 Name[x-test]=xxcsvexportxx
 Name[zh_TW]=csvexport
 Comment=Add CSV exporting to KMyMoney
+Comment[bs]=Dodaje CSV izvoz KMyMoney
 Comment[ca]=Afegeix l'exportació CSV al KMyMoney
 Comment[da]=Føj CSV-eksport til KMyMoney
 Comment[de]=Fügt CSV-Export zu KMyMoney hinzu
