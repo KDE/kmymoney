@@ -756,6 +756,7 @@ onlineJobTyped<germanOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobT
   QStringList qPurpose = job.task()->purpose().split('\n', QString::SkipEmptyParts);
   GWEN_STRINGLIST *purpose = GWEN_StringList_fromQStringList(qPurpose);
   AB_Transaction_SetPurpose(ABtransaction, purpose);
+  GWEN_StringList_free(purpose);
 
   // Other
   AB_Transaction_SetTextKey(ABtransaction, job.task()->textKey());
@@ -836,9 +837,11 @@ onlineJobTyped<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyp
   QStringList qPurpose = job.constTask()->purpose().split('\n');
   GWEN_STRINGLIST *purpose = GWEN_StringList_fromQStringList(qPurpose);
   AB_Transaction_SetPurpose(AbTransaction, purpose);
+  GWEN_StringList_free(purpose);
   
   // Reference
-  /** @todo set customer reference */
+  // AqBanking duplicates the string. This should be safe.
+  AB_Transaction_SetEndToEndReference(AbTransaction, job.constTask()->endToEndReference().toUtf8().constData());
 
   // Other
   AB_Transaction_SetTextKey(AbTransaction, job.constTask()->textKey());
