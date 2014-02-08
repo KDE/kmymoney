@@ -1960,6 +1960,53 @@ void MyMoneyFileTest::testRemovePrice()
   QVERIFY(m_valueChanged.count("A000002") == 1);
 }
 
+void MyMoneyFileTest::testGetPrice()
+{
+  testAddPrice();
+  // the price for the current date is found
+  QVERIFY(m->price("EUR", "RON", QDate::currentDate()).isValid());
+  // the price for the current date is returned when asking for the next day with exact date set to false
+  {
+    const MyMoneyPrice &price = m->price("EUR", "RON", QDate::currentDate().addDays(1), false);
+    QVERIFY(price.isValid() && price.date() == QDate::currentDate());
+  }
+  // no price is returned while asking for the next day with exact date set to true
+  QVERIFY(!m->price("EUR", "RON", QDate::currentDate().addDays(1), true).isValid());
+
+  // no price is returned while asking for the previous day with exact date set to true/false because all prices are newer
+  QVERIFY(!m->price("EUR", "RON", QDate::currentDate().addDays(-1), false).isValid());
+  QVERIFY(!m->price("EUR", "RON", QDate::currentDate().addDays(-1), true).isValid());
+
+  // add two more prices
+  MyMoneyFileTransaction ft;
+  m->addPrice(MyMoneyPrice("EUR", "RON", QDate::currentDate().addDays(3), MyMoneyMoney(4.1), "Test source"));
+  m->addPrice(MyMoneyPrice("EUR", "RON", QDate::currentDate().addDays(5), MyMoneyMoney(4.1), "Test source"));
+  ft.commit();
+  clearObjectLists();
+
+  // extra tests for the exactDate=false behavior
+  {
+    const MyMoneyPrice &price = m->price("EUR", "RON", QDate::currentDate().addDays(2), false);
+    QVERIFY(price.isValid() && price.date() == QDate::currentDate());
+  }
+  {
+    const MyMoneyPrice &price = m->price("EUR", "RON", QDate::currentDate().addDays(3), false);
+    QVERIFY(price.isValid() && price.date() == QDate::currentDate().addDays(3));
+  }
+  {
+    const MyMoneyPrice &price = m->price("EUR", "RON", QDate::currentDate().addDays(4), false);
+    QVERIFY(price.isValid() && price.date() == QDate::currentDate().addDays(3));
+  }
+  {
+    const MyMoneyPrice &price = m->price("EUR", "RON", QDate::currentDate().addDays(5), false);
+    QVERIFY(price.isValid() && price.date() == QDate::currentDate().addDays(5));
+  }
+  {
+    const MyMoneyPrice &price = m->price("EUR", "RON", QDate::currentDate().addDays(6), false);
+    QVERIFY(price.isValid() && price.date() == QDate::currentDate().addDays(5));
+  }
+}
+
 void MyMoneyFileTest::testAddAccountMissingCurrency()
 {
   testAddTwoInstitutions();

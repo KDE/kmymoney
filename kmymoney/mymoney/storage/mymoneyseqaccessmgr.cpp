@@ -1760,37 +1760,29 @@ const MyMoneyPriceList MyMoneySeqAccessMgr::priceList(void) const
 
 const MyMoneyPrice MyMoneySeqAccessMgr::price(const QString& fromId, const QString& toId, const QDate& _date, const bool exactDate) const
 {
-  MyMoneyPrice rc;
-  MyMoneyPriceEntries::ConstIterator it;
-  QDate date(_date);
-  MyMoneySecurityPair pricePair(fromId, toId);
-
-  // If no valid date is passed, we use today's date.
-  if (!date.isValid())
-    date = QDate::currentDate();
-
-  // If the caller selected an exact entry, we can search for
-  // it using the date as the key
-  QMap<MyMoneySecurityPair, MyMoneyPriceEntries>::const_iterator itm;
-  itm = m_priceList.find(pricePair);
+  // if the caller selected an exact entry, we can search for it using the date as the key
+  QMap<MyMoneySecurityPair, MyMoneyPriceEntries>::const_iterator itm = m_priceList.find(qMakePair(fromId, toId));
   if (itm != m_priceList.end()) {
-    if (exactDate) {
-      it = itm.value().find(date);
-      if (it != itm.value().end())
-        rc = *it;
+    // if no valid date is passed, we use today's date.
+    const QDate &date = _date.isValid() ? _date : QDate::currentDate();
+    const MyMoneyPriceEntries &entries = itm.value();
+    // regardless of the exactDate flag if the exact date is present return it's value since it's the correct value
+    MyMoneyPriceEntries::const_iterator it = entries.find(date);
+    if (it != entries.end())
+      return it.value();
 
-    } else {
-      // otherwise, we must scan the map for the previous price entry
-      for (it = itm.value().begin(); it != itm.value().end(); ++it) {
-        if (date < it.key())
-          break;
-
-        if (date >= it.key())
-          rc = *it;
+    // the exact date was not found look for the latest date before the requested date if the flag allows it
+    if (!exactDate && !entries.empty()) {
+      // if there are entries get the lower bound of the date
+      it = entries.lowerBound(date);
+      // since lower bound returns the first item with a larger key (we already know that key is not present)
+      // if it's not the first item then we need to return the previous item (the map is not empty so there is one)
+      if (it != entries.begin()) {
+        return (--it).value();
       }
     }
   }
-  return rc;
+  return MyMoneyPrice();
 }
 
 void MyMoneySeqAccessMgr::rebuildAccountBalances(void)
