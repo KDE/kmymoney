@@ -140,7 +140,7 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
         //  last char in file is data char
         //  meaning no return on last line
         //  so bump line count
-        qDebug()<<"139 parse eoFile = true"<<charCount<<chr;
+        qDebug() << "139 parse eoFile = true" << charCount << chr;
         lineCount ++;
       }
     }

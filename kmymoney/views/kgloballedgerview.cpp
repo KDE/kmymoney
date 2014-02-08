@@ -1379,7 +1379,7 @@ void KGlobalLedgerView::slotSortOptions(void)
   dlg->setSortOption(sortOrder, def);
 
   if (dlg->exec() == QDialog::Accepted) {
-    if(dlg != 0) {
+    if (dlg != 0) {
       sortOrder = dlg->sortOption();
       if (sortOrder != oldOrder) {
         if (sortOrder.isEmpty()) {

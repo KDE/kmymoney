@@ -62,8 +62,7 @@ signals:
   void geometriesUpdated();
 
 protected slots:
-  void updateGeometries()
-  {
+  void updateGeometries() {
     QTableWidget::updateGeometries();
     emit geometriesUpdated();
   }

@@ -311,7 +311,7 @@ MyMoneyMoney KCurrencyCalculator::price(void) const
   // This should fix https://bugs.kde.org/show_bug.cgi?id=205254 and
   // https://bugs.kde.org/show_bug.cgi?id=325953 as well as
   // https://bugs.kde.org/show_bug.cgi?id=300965
-  if(m_amountButton->isChecked())
+  if (m_amountButton->isChecked())
     return m_toAmount->value().abs() / m_value.abs();
   else
     return m_conversionRate->value();

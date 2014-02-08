@@ -407,7 +407,7 @@ OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QBy
   connect(m_job, SIGNAL(connected(KIO::Job*)), this, SLOT(slotOfxConnected(KIO::Job*)));
 
   qDebug("Starting eventloop");
-  if(m_eventLoop)
+  if (m_eventLoop)
     m_eventLoop->exec();
   qDebug("Ending eventloop");
 }
@@ -473,7 +473,7 @@ void OfxHttpsRequest::slotOfxFinished(KJob* /* e */)
   }
 
   qDebug("Finishing eventloop");
-  if(m_eventLoop)
+  if (m_eventLoop)
     m_eventLoop->exit();
 }
 
@@ -532,7 +532,7 @@ void OfxHttpRequest::slotOfxFinished(int, bool rc)
     m_error = m_job->error();
   }
   qDebug("Finishing eventloop");
-  if(m_eventLoop)
+  if (m_eventLoop)
     m_eventLoop->exit();
 }
 

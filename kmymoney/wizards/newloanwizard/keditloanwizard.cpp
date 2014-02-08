@@ -473,7 +473,7 @@ const MyMoneyAccount KEditLoanWizard::account(void) const
   if (institution != i18n("(No Institution)")) {
     QList<MyMoneyInstitution> list;
     file->institutionList(list);
-    Q_FOREACH (const MyMoneyInstitution& testInstitution, list) {
+    Q_FOREACH(const MyMoneyInstitution& testInstitution, list) {
       if (testInstitution.name() == institution) {
         acc.setInstitutionId(testInstitution.id());
         break;

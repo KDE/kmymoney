@@ -1605,11 +1605,11 @@ void CSVDialog::redrawWindow(int startLine)
 void CSVDialog::slotCancel()
 {
   int ret = KMessageBox::warningContinueCancel(this, i18nc("Click 'Quit' if you do wish to exit.",
-                                                           "<center>Are you sure you wish to exit?</center>"
-                                                           "<center>Restart or Quit?</center>"),
-                                                     i18nc("Cancel button was clicked.", "Cancel clicked"),
-                                                     KGuiItem(i18nc("Click 'Restart' to begin again.","Restart")),
-                                                     KStandardGuiItem::quit());
+            "<center>Are you sure you wish to exit?</center>"
+            "<center>Restart or Quit?</center>"),
+            i18nc("Cancel button was clicked.", "Cancel clicked"),
+            KGuiItem(i18nc("Click 'Restart' to begin again.", "Restart")),
+            KStandardGuiItem::quit());
   if (ret == KMessageBox::Continue) {
     if (m_fileType == "Banking") {
       saveSettings();
@@ -2067,7 +2067,7 @@ void CSVDialog::clearPreviousColumn()
 void CSVDialog::resetComboBox(const QString& comboBox, const int& col)
 {
   QStringList fieldType;
-  fieldType << "amount" << "credit" << "date" << "debit" << "memo" << "number" << "payee"<< "category";
+  fieldType << "amount" << "credit" << "date" << "debit" << "memo" << "number" << "payee" << "category";
   int index = fieldType.indexOf(comboBox);
   switch (index) {
     case 0://  amount

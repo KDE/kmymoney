@@ -503,8 +503,8 @@ void InvestTransactionEditor::slotUpdateFeeVisibility(const QString& txt)
   QLabel* l = dynamic_cast<QLabel*>(haveWidget("fee-amount-label"));
 
   const bool hideFee = txt.isEmpty() || d->m_activity->type() == MyMoneySplit::AddShares ||
-    d->m_activity->type() == MyMoneySplit::RemoveShares ||
-    d->m_activity->type() == MyMoneySplit::SplitShares;
+                       d->m_activity->type() == MyMoneySplit::RemoveShares ||
+                       d->m_activity->type() == MyMoneySplit::SplitShares;
   //  no fee expected so hide
   if (hideFee) {
     if (l) {
@@ -532,7 +532,7 @@ void InvestTransactionEditor::slotUpdateInterestVisibility(const QString& txt)
 
   KMyMoneyCategory* interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
   const bool showInterest = !txt.isEmpty() && (d->m_activity->type() == MyMoneySplit::SellShares || d->m_activity->type() == MyMoneySplit::Dividend ||
-    d->m_activity->type() == MyMoneySplit::InterestIncome || d->m_activity->type() == MyMoneySplit::Yield);
+                            d->m_activity->type() == MyMoneySplit::InterestIncome || d->m_activity->type() == MyMoneySplit::Yield);
   if (interest && showInterest) {
     interest->splitButton()->show();
     w->show();
@@ -1165,7 +1165,7 @@ void InvestTransactionEditor::setupFinalWidgets(void)
 void InvestTransactionEditor::slotUpdateInvestMemoState(void)
 {
   KTextEdit* memo = dynamic_cast<KTextEdit*>(m_editWidgets["memo"]);
-  if(memo) {
+  if (memo) {
     d->m_activity->m_memoChanged = (memo->toPlainText() != d->m_activity->m_memoText);
   }
 }

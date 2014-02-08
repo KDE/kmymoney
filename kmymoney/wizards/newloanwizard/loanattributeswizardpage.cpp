@@ -33,7 +33,7 @@ email                : jpwhiting@kde.org
 #include "mymoneyfile.h"
 
 LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
-  : LoanAttributesWizardPageDecl(parent)
+    : LoanAttributesWizardPageDecl(parent)
 {
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
@@ -52,7 +52,7 @@ LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
     file->institutionList(list);
     qSort(list);
 
-    Q_FOREACH (const MyMoneyInstitution &institution, list) {
+    Q_FOREACH(const MyMoneyInstitution &institution, list) {
       m_qcomboboxInstitutions->addItem(institution.name());
     }
   } catch (MyMoneyException *e) {

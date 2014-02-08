@@ -4417,7 +4417,7 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
 
         KConfirmManualEnterDlg::Action action = KConfirmManualEnterDlg::ModifyOnce;
         if (!autoEnter || !schedule.isFixed()) {
-          for (;dlg != 0;) {
+          for (; dlg != 0;) {
             rc = KMyMoneyUtils::Cancel;
             if (dlg->exec() == QDialog::Accepted && dlg != 0) {
               rc = dlg->resultCode();

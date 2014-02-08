@@ -566,8 +566,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       brokerageactid = file->nameToAccount(statementTransactionUnderImport.m_strBrokerageAccount);
     }
     if (brokerageactid.isEmpty()) {
-       brokerageactid = file->nameToAccount(thisaccount.brokerageName());
-     }
+      brokerageactid = file->nameToAccount(thisaccount.brokerageName());
+    }
 
     // find the security transacted, UNLESS this transaction didn't
     // involve any security.
@@ -654,8 +654,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // of the securities referred to in the transactions.  The only way to get
             // here is if that's NOT the case.
             int ret = KMessageBox::warningContinueCancel(0, i18n("<center>This investment account does not contain the \"%1\" security.</center>"
-                                                                 "<center>Transactions involving this security will be ignored.</center>", statementTransactionUnderImport.m_strSecurity),
-                                                            i18n("Security not found"), KStandardGuiItem::cont(), KStandardGuiItem::cancel());
+                      "<center>Transactions involving this security will be ignored.</center>", statementTransactionUnderImport.m_strSecurity),
+                      i18n("Security not found"), KStandardGuiItem::cont(), KStandardGuiItem::cancel());
             if (ret == KMessageBox::Cancel) {
               m_userAbort = true;
             }

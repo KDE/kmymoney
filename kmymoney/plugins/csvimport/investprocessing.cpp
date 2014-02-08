@@ -1387,7 +1387,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
   if ((m_trInvestData.type == "buy") || (m_trInvestData.type == "sell") ||
       (m_trInvestData.type == "divx") || (m_trInvestData.type == "intinc")) {
     if (m_redefine->accountName().isEmpty()) {
-        m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:")));
+      m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:")));
     }
     m_trInvestData.brokerageAccnt = m_redefine->accountName();
     m_tempBuffer +=  "L[" + m_redefine->accountName() + ']' + '\n';
@@ -1434,7 +1434,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     KMessageBox::sorry(0, i18n("<center>The columns selected are invalid.\n</center>"
                                "There must an amount or quantity fields, symbol or security name, plus date and type field."
                                "<center>You possibly need to check the start and end line settings, or reset 'Skip setup'.</center>"),
-                          i18n("CSV import"));
+                       i18n("CSV import"));
     return KMessageBox::Cancel;
   }
   return KMessageBox::Ok;

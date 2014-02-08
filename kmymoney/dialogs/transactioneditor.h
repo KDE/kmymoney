@@ -311,7 +311,7 @@ protected:
   bool                                              m_openEditSplits;
   bool                                              m_memoChanged;
 
- private:
+private:
   /**
   *  If a new or an edited transaction has a valid number, keep it with the account
   */
