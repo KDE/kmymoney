@@ -978,30 +978,29 @@ const MyMoneyMoney MyMoneySeqAccessMgr::balance(const QString& id, const QDate& 
 
 MyMoneyMoney MyMoneySeqAccessMgr::calculateBalance(const QString& id, const QDate& date) const
 {
-  QMap<QString, MyMoneyMoney> balances;
-  QMap<QString, MyMoneyMoney>::ConstIterator it_b;
-
+  MyMoneyMoney balance;
   QList<MyMoneyTransaction> list;
-  QList<MyMoneyTransaction>::ConstIterator it_t;
-  QList<MyMoneySplit>::ConstIterator it_s;
 
   MyMoneyTransactionFilter filter;
   filter.setDateFilter(QDate(), date);
   filter.setReportAllSplits(false);
   transactionList(list, filter);
 
-  for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
-    for (it_s = (*it_t).splits().constBegin(); it_s != (*it_t).splits().constEnd(); ++it_s) {
-      const QString& aid = (*it_s).accountId();
-      if ((*it_s).action() == MyMoneySplit::ActionSplitShares) {
-        balances[aid] = balances[aid] * (*it_s).shares();
+  for (QList<MyMoneyTransaction>::const_iterator it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
+    const QList<MyMoneySplit>& splits = (*it_t).splits();
+    for (QList<MyMoneySplit>::const_iterator it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
+      const MyMoneySplit &split = (*it_s);
+      if (split.accountId() != id)
+        continue;
+      if (split.action() == MyMoneySplit::ActionSplitShares) {
+        balance = balance * split.shares();
       } else {
-        balances[aid] += (*it_s).shares();
+        balance += split.shares();
       }
     }
   }
 
-  return balances[id];
+  return balance;
 }
 
 const MyMoneyMoney MyMoneySeqAccessMgr::totalBalance(const QString& id, const QDate& date) const
