@@ -481,7 +481,7 @@ Register::Register(QWidget *parent) :
 {
   // used for custom coloring with the help of the application's stylesheet
   setObjectName(QLatin1String("register"));
-  m_itemDelegate = new RegisterItemDelegate(this);
+  setItemDelegate(new RegisterItemDelegate(this));
 
   setEditTriggers(QAbstractItemView::NoEditTriggers);
   setColumnCount(MaxColumns);
@@ -874,11 +874,6 @@ void Register::setupItemIndex(int rowCount)
   // setup index array
   m_itemIndex.clear();
   m_itemIndex.reserve(rowCount);
-
-  // setup the item delegate for all the rows
-  for (int i = 0; i < rowCount; ++i) {
-    setItemDelegateForRow(i, m_itemDelegate);
-  }
 
   // fill index array
   rowCount = 0;

@@ -658,7 +658,6 @@ private:
   Column                       m_lastCol;
   QList<TransactionSortField>  m_sortOrder;
   QRect                        m_lastRepaintRect;
-  RegisterItemDelegate        *m_itemDelegate;
   DetailsColumnType            m_detailsColumnType;
 };
 
