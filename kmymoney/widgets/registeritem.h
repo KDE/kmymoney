@@ -114,36 +114,36 @@ public:
   virtual bool isErroneous(void) const = 0;
 
   // helper functions used for sorting
-  virtual const QDate sortPostDate(void) const {
+  virtual const QDate& sortPostDate(void) const {
     return nullDate;
   }
   virtual int sortSamePostDate(void) const = 0;
-  virtual const QDate sortEntryDate(void) const {
+  virtual const QDate& sortEntryDate(void) const {
     return nullDate;
   }
-  virtual const QString sortPayee(void) const {
-    return QString();
+  virtual const QString& sortPayee(void) const {
+    return nullString;
   }
-  virtual const MyMoneyMoney sortValue(void) const {
+  virtual const MyMoneyMoney& sortValue(void) const {
     return nullValue;
   }
-  virtual const QString sortNumber(void) const {
-    return QString();
+  virtual const QString& sortNumber(void) const {
+    return nullString;
   }
-  virtual const QString sortEntryOrder(void) const {
-    return QString();
+  virtual const QString& sortEntryOrder(void) const {
+    return nullString;
   }
   virtual CashFlowDirection sortType(void) const {
     return Deposit;
   }
-  virtual const QString sortCategory(void) const {
-    return QString();
+  virtual const QString& sortCategory(void) const {
+    return nullString;
   }
   virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const {
     return MyMoneySplit::MaxReconcileState;
   }
-  virtual const QString sortSecurity(void) const {
-    return QString();
+  virtual const QString& sortSecurity(void) const {
+    return nullString;
   }
 
   /**
@@ -298,6 +298,7 @@ protected:
 
 private:
   static QDate             nullDate;
+  static QString           nullString;
   static MyMoneyMoney      nullValue;
 };
 

@@ -176,10 +176,10 @@ class FancyDateGroupMarker : public GroupMarker
 public:
   FancyDateGroupMarker(Register* parent, const QDate& date, const QString& txt);
 
-  virtual const QDate sortPostDate(void) const {
+  virtual const QDate& sortPostDate(void) const {
     return m_date;
   }
-  virtual const QDate sortEntryDate(void) const {
+  virtual const QDate& sortEntryDate(void) const {
     return m_date;
   }
   virtual const char* className(void) {
@@ -241,7 +241,7 @@ class PayeeGroupMarker : public GroupMarker
 {
 public:
   PayeeGroupMarker(Register* parent, const QString& name);
-  const QString sortPayee(void) const {
+  const QString& sortPayee(void) const {
     return m_txt;
   }
 };
@@ -250,10 +250,10 @@ class CategoryGroupMarker : public GroupMarker
 {
 public:
   CategoryGroupMarker(Register* parent, const QString& category);
-  const QString sortCategory(void) const {
+  const QString& sortCategory(void) const {
     return m_txt;
   }
-  const QString sortSecurity(void) const {
+  const QString& sortSecurity(void) const {
     return m_txt;
   }
 

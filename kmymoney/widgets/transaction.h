@@ -107,34 +107,34 @@ public:
     return m_erroneous;
   }
 
-  virtual const QDate sortPostDate(void) const {
+  virtual const QDate& sortPostDate(void) const {
     return m_transaction.postDate();
   }
   virtual int sortSamePostDate(void) const {
     return 2;
   }
-  virtual const QDate sortEntryDate(void) const {
+  virtual const QDate& sortEntryDate(void) const {
     return m_transaction.entryDate();
   }
-  virtual const QString sortPayee(void) const {
+  virtual const QString& sortPayee(void) const {
     return m_payee;
   }
-  virtual const QList<QString> sortTagList(void) const {
+  virtual const QList<QString>& sortTagList(void) const {
     return m_tagList;
   }
-  virtual const MyMoneyMoney sortValue(void) const {
+  virtual const MyMoneyMoney& sortValue(void) const {
     return m_split.shares();
   }
-  virtual const QString sortNumber(void) const {
+  virtual const QString& sortNumber(void) const {
     return m_split.number();
   }
-  virtual const QString sortEntryOrder(void) const {
+  virtual const QString& sortEntryOrder(void) const {
     return m_uniqueId;
   }
   virtual CashFlowDirection sortType(void) const {
     return m_split.shares().isNegative() ? Payment : Deposit;
   }
-  virtual const QString sortCategory(void) const {
+  virtual const QString& sortCategory(void) const {
     return m_category;
   }
   virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const {
@@ -366,7 +366,7 @@ public:
   InvestTransaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~InvestTransaction() {}
 
-  virtual const QString sortSecurity(void) const {
+  virtual const QString& sortSecurity(void) const {
     return m_security.name();
   }
   virtual const char* className(void) {
