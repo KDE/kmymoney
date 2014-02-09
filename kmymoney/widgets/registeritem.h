@@ -60,6 +60,24 @@ typedef enum {
   MaxAction
 } Action;
 
+/**
+  * Used to filter items from the register.
+  */
+struct RegisterFilter {
+  enum ItemState {
+    Any,
+    Imported,
+    Matched,
+    Erroneous,
+    NotMarked,
+    NotReconciled,
+    Cleared
+  };
+  RegisterFilter(const QString &t, ItemState s) : state(s), text(t) {
+  }
+  ItemState state;
+  QString text;
+};
 
 class Register;
 
@@ -246,7 +264,7 @@ public:
     return m_prev;
   }
 
-  virtual bool matches(const QString&) const = 0;
+  virtual bool matches(const RegisterFilter&) const = 0;
 
   /**
     * Checks if the mouse hovered over an area that has a tooltip associated with it.

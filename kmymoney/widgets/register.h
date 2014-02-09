@@ -149,7 +149,7 @@ public:
 
   int rowHeightHint(void) const;
 
-  bool matches(const QString&) const {
+  bool matches(const RegisterFilter&) const {
     return true;
   }
   virtual int sortSamePostDate(void) const {

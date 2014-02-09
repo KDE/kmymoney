@@ -621,40 +621,74 @@ int Transaction::rowHeightHint(void) const
 }
 
 
-bool Transaction::matches(const QString& txt) const
+bool Transaction::matches(const RegisterFilter& filter) const
 {
-  if (txt.isEmpty() || m_transaction.splitCount() == 0)
+  // check if the state matches
+  if (!transaction().id().isEmpty()) {
+    switch (filter.state) {
+      default:
+        break;
+      case RegisterFilter::Imported:
+        if (!transaction().isImported())
+          return false;
+        break;
+      case RegisterFilter::Matched:
+        if (!split().isMatched())
+          return false;
+        break;
+      case RegisterFilter::Erroneous:
+        if (transaction().splitSum().isZero())
+          return false;
+        break;
+      case RegisterFilter::NotMarked:
+        if (split().reconcileFlag() != MyMoneySplit::NotReconciled)
+          return false;
+        break;
+      case RegisterFilter::NotReconciled:
+        if (split().reconcileFlag() != MyMoneySplit::NotReconciled
+            && split().reconcileFlag() != MyMoneySplit::Cleared)
+          return false;
+        break;
+      case RegisterFilter::Cleared:
+        if (split().reconcileFlag() != MyMoneySplit::Cleared)
+          return false;
+        break;
+    }
+  }
+
+  // check if the text matches
+  if (filter.text.isEmpty() || m_transaction.splitCount() == 0)
     return true;
 
   MyMoneyFile* file = MyMoneyFile::instance();
-  QString s(txt);
-  s.replace(MyMoneyMoney::thousandSeparator(), QChar());
 
   const QList<MyMoneySplit>&list = m_transaction.splits();
   QList<MyMoneySplit>::const_iterator it_s;
   for (it_s = list.begin(); it_s != list.end(); ++it_s) {
     // check if the text is contained in one of the fields
     // memo, number, payee, tag, account
-    if ((*it_s).memo().contains(txt, Qt::CaseInsensitive)
-        || (*it_s).number().contains(txt, Qt::CaseInsensitive))
+    if ((*it_s).memo().contains(filter.text, Qt::CaseInsensitive)
+        || (*it_s).number().contains(filter.text, Qt::CaseInsensitive))
       return true;
 
     if (!(*it_s).payeeId().isEmpty()) {
       const MyMoneyPayee& payee = file->payee((*it_s).payeeId());
-      if (payee.name().contains(txt, Qt::CaseInsensitive))
+      if (payee.name().contains(filter.text, Qt::CaseInsensitive))
         return true;
     }
     if (!(*it_s).tagIdList().isEmpty()) {
       const QList<QString>& t = (*it_s).tagIdList();
       for (int i = 0; i < t.count(); i++) {
-        if ((file->tag(t[i])).name().contains(txt, Qt::CaseInsensitive))
+        if ((file->tag(t[i])).name().contains(filter.text, Qt::CaseInsensitive))
           return true;
       }
     }
     const MyMoneyAccount& acc = file->account((*it_s).accountId());
-    if (acc.name().contains(txt, Qt::CaseInsensitive))
+    if (acc.name().contains(filter.text, Qt::CaseInsensitive))
       return true;
 
+    QString s(filter.text);
+    s.replace(MyMoneyMoney::thousandSeparator(), QChar());
     if (!s.isEmpty()) {
       // check if any of the value field matches if a value has been entered
       QString r = (*it_s).value().formatMoney(m_account.fraction(), false);

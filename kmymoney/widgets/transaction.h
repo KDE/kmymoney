@@ -197,7 +197,7 @@ public:
 
   bool haveNumberField(void) const;
 
-  bool matches(const QString&) const;
+  bool matches(const RegisterFilter&) const;
 
   /**
     * Checks if the mouse hovered over an area that has a tooltip associated with it.
