@@ -759,11 +759,12 @@ void Register::clear(void)
   m_firstErroneous = m_lastErroneous = 0;
   m_ensureVisibleItem = 0;
 
+  m_items.clear();
+
   RegisterItem* p;
   while ((p = firstItem()) != 0) {
     delete p;
   }
-  m_items.clear();
 
   m_firstItem = m_lastItem = 0;
 
