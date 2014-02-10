@@ -143,8 +143,6 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
   bool ok1, ok2;
   qulonglong n1, n2;
 
-  MyMoneyMoney tmp;
-
   for (it = sortOrder.begin(); it != sortOrder.end(); ++it) {
     TransactionSortField sortField = static_cast<TransactionSortField>(abs(*it));
     switch (sortField) {
@@ -164,10 +162,9 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
         break;
 
       case ValueSort:
-        tmp = i1->sortValue() - i2->sortValue();
-        if (tmp.isZero())
+        if (i1->sortValue() == i2->sortValue())
           rc = 0;
-        else if (tmp.isNegative())
+        else if (i1->sortValue() < i2->sortValue())
           rc = -1;
         else
           rc = 1;
