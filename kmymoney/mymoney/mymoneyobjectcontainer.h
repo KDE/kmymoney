@@ -92,11 +92,8 @@ public:
   void refresh(const QString& id);
 
 private:
-  void assignFraction(MyMoneyAccount* acc);
-
-private:
-  QMap<QString, MyMoneyObject const *>   m_map;
-  IMyMoneyStorage*                       m_storage;
+  struct Private;
+  Private * const d;
 };
 
 #endif
