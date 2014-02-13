@@ -53,13 +53,21 @@ Rectangle {
     
     function accelerateTransmission()
     {
-      chipTanFlickerField.userTaktLength =  chipTanFlickerField.taktLengt - 20
+      chipTanFlickerField.userTaktLength =  chipTanFlickerField.taktLength - 20
     }
     
     function decelerateTransmission()
     {
-      chipTanFlickerField.userTaktLength =  chipTanFlickerField.taktLengt + 20
+      chipTanFlickerField.userTaktLength =  chipTanFlickerField.taktLength + 20
     }
+    
+    function setFlickerTakt( taktLength )
+    {
+      chipTanFlickerField.userTaktLength = taktLength;
+    }
+    
+    signal flickerFieldWidthChanged( int width );
+    signal flickerFieldTaktChanged( int taktLength );
     
     /*
     // Toolbar
@@ -104,7 +112,7 @@ Rectangle {
                 source: "/usr/share/icons/default.kde4/22x22/actions/media-playback-start.png"
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: chipTanFlickerField.userTaktLength =  chipTanFlickerField.taktLengt + 20
+                    onClicked: chipTanFlickerField.userTaktLength =  chipTanFlickerField.taktLength + 20
                 }
             }
 
@@ -112,7 +120,7 @@ Rectangle {
                 source: "/usr/share/icons/default.kde4/22x22/actions/media-seek-forward.png"
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: chipTanFlickerField.userTaktLength =  chipTanFlickerField.taktLengt - 20
+                    onClicked: chipTanFlickerField.userTaktLength =  chipTanFlickerField.taktLength - 20
                 }
             }
         }
@@ -129,9 +137,11 @@ Rectangle {
 
         property int userWidth: parent.width
         width: Math.max( userWidth, minimumWidth )
-
+        onWidthChanged: parent.flickerFieldWidthChanged(width);
+        
         property int userTaktLength: 100
-        taktLengt: Math.min(Math.max(10, userTaktLength), 2000)
+        taktLength: Math.min(Math.max(10, userTaktLength), 2000)
+        onTaktLengthChanged: parent.flickerFieldTaktChanged(taktLength);
 
         MouseArea {
             id: resizeMouseArea

@@ -24,7 +24,6 @@
 #define CHIPTANDIALOG_H
 
 #include <QtGui/QDialog>
-#include <QtGui/QDialog>
 
 namespace Ui
 {
@@ -53,14 +52,17 @@ public slots:
   void accept();
   void reject();
   
-  void setInfoText(QString);
-  void setHhdCode(QString);
+  void setInfoText(const QString&);
+  void setHhdCode(const QString&);
   
-  void setTanLimits(int minLength, int maxLength);
-  void setFlickerFieldWidth(int width);
+  void setTanLimits(const int& minLength, const int& maxLength);
+  void setFlickerFieldWidth(const int& width);
+  void setFlickerFieldTakt(const int& width);
 
 private slots:
   void tanInputChanged(const QString&);
+  void flickerFieldWidthChanged( const int& width );
+  void flickerFieldTaktChanged( const int& takt );
   
 private:
   Ui::chipTanDialog* ui;

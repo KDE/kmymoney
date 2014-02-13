@@ -31,6 +31,8 @@ SET(kmm_kbanking_HEADERS
     gwenhywfarqtoperators.h
 )
 
+kde4_add_kcfg_files(kmm_kbanking_PART_SRCS kbankingsettings.kcfgc)
+
 KDE4_ADD_PLUGIN(kmm_kbanking ${kmm_kbanking_PART_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_kbanking
@@ -59,3 +61,6 @@ INSTALL(TARGETS kmm_kbanking
 
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
+
+INSTALL(FILES kbanking.kcfg
+        DESTINATION ${KCFG_INSTALL_DIR})

@@ -33,7 +33,7 @@
 #include <KStandardDirs>
 
 // Prject Includes
-
+#include "kbankingsettings.h"
 
 chipTanDialog::chipTanDialog(QWidget* parent)
   : QDialog(parent),
@@ -49,10 +49,16 @@ chipTanDialog::chipTanDialog(QWidget* parent)
   
   ui->declarativeView->setSource(KGlobal::dirs()->findResource("data", QString("kmm_kbanking/qml/chipTan/ChipTan.qml")));
   
+  setFlickerFieldWidth( KBankingSettings::width() );
+  setFlickerFieldTakt( KBankingSettings::takt() );
+  
   connect(ui->decelerateButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(decelerateTransmission()));
   connect(ui->accelerateButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(accelerateTransmission()));
   connect(ui->enlargeButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(enlargeFlickerField()));
   connect(ui->reduceButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(reduceFlickerField()));
+  
+  connect(ui->declarativeView->rootObject(), SIGNAL(flickerFieldWidthChanged(int)), SLOT(flickerFieldWidthChanged(int)));
+  connect(ui->declarativeView->rootObject(), SIGNAL(flickerFieldTaktChanged(int)), SLOT(flickerFieldTaktChanged(int)));
   
   if (ui->declarativeView->status() == QDeclarativeView::Error)
     done(InternalError);
@@ -78,7 +84,7 @@ void chipTanDialog::reject()
   done(Rejected);
 }
 
-void chipTanDialog::setInfoText(QString text)
+void chipTanDialog::setInfoText(const QString& text)
 {
   ui->infoText->setText(text);
 }
@@ -88,7 +94,7 @@ QString chipTanDialog::infoText()
   return ui->infoText->toPlainText();
 }
 
-void chipTanDialog::setHhdCode(QString code)
+void chipTanDialog::setHhdCode(const QString& code)
 {
   setRootObjectProperty("transferData", code);
 }
@@ -106,12 +112,12 @@ QString chipTanDialog::tan()
   return m_tan;
 }
 
-void chipTanDialog::setTanLimits(int minLength, int maxLength)
+void chipTanDialog::setTanLimits(const int& minLength, const int& maxLength)
 {
   ui->tanInput->setValidator( new QRegExpValidator(QRegExp(QString("\\d{%1,%2}").arg(minLength).arg(maxLength)), ui->tanInput) );
 }
 
-void chipTanDialog::setFlickerFieldWidth(int width)
+void chipTanDialog::setFlickerFieldWidth(const int& width)
 {
   QGraphicsObject* rootObject = ui->declarativeView->rootObject();
   if (rootObject)
@@ -126,6 +132,25 @@ int chipTanDialog::flickerFieldWidth()
     QMetaObject::invokeMethod(rootObject, "flickerFieldWidth", Qt::DirectConnection, Q_RETURN_ARG(QVariant, width));
 
   return width.toInt();
+}
+
+void chipTanDialog::setFlickerFieldTakt(const int& width)
+{
+  QGraphicsObject* rootObject = ui->declarativeView->rootObject();
+  if (rootObject)
+    QMetaObject::invokeMethod(rootObject, "setFlickerTakt", Q_ARG(QVariant, QVariant(width)) );
+}
+
+void chipTanDialog::flickerFieldTaktChanged(const int& takt)
+{
+  KBankingSettings::setTakt( takt );
+  KBankingSettings::self()->writeConfig();
+}
+
+void chipTanDialog::flickerFieldWidthChanged(const int& width)
+{
+  KBankingSettings::setWidth(width);
+  KBankingSettings::self()->writeConfig();
 }
 
 void chipTanDialog::tanInputChanged(const QString& input)
