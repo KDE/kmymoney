@@ -1226,10 +1226,22 @@ void PivotTable::assignCell(const QString& outergroup, const ReportAccount& _row
       value = -value;
 
     // Add the value to the grid cell
-    if (budget)
+    if (budget) {
       m_grid[outergroup][innergroup][row][eBudget][column] += value;
-    else
-      m_grid[outergroup][innergroup][row][eActual][column] += value;
+    } else {
+      // If it is loading an actual value for a budget report
+      // check whether it is a subaccount of a budget account (include subaccounts)
+      // If so, check if is the same currency and convert otherwise
+      if (m_config_f.hasBudget() &&
+          row.id() != _row.id() &&
+          row.currencyId() != _row.currencyId()) {
+        ReportAccount origAcc = _row;
+        MyMoneyMoney rate = origAcc.foreignCurrencyPrice(row.currencyId(), columnDate(column), false);
+        m_grid[outergroup][innergroup][row][eActual][column] += (value * rate).reduce();
+      } else {
+        m_grid[outergroup][innergroup][row][eActual][column] += value;
+      }
+    }
   } else {
     m_grid[outergroup][innergroup][row][eActual][column] += PivotCell::stockSplit(value);
   }
