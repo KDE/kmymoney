@@ -31,7 +31,10 @@ SET(kmm_kbanking_HEADERS
     gwenhywfarqtoperators.h
 )
 
-kde4_add_kcfg_files(kmm_kbanking_PART_SRCS kbankingsettings.kcfgc)
+KDE4_ADD_KCFG_FILES(kmm_kbanking_settings_SRCS kbankingsettings.kcfgc)
+KDE4_ADD_LIBRARY(kmm_kbanking_settings STATIC ${kmm_kbanking_settings_SRCS})
+
+ADD_DEPENDENCIES(kmm_kbanking_widgets kmm_kbanking_settings)
 
 KDE4_ADD_PLUGIN(kmm_kbanking ${kmm_kbanking_PART_SRCS})
 
@@ -39,6 +42,7 @@ TARGET_LINK_LIBRARIES(kmm_kbanking
                       kmm_kbanking_dialogs
                       kmm_kbanking_views
                       kmm_kbanking_widgets
+                      kmm_kbanking_settings
                       kmm_mymoney
                       kmm_widgets
                       kmm_plugin
