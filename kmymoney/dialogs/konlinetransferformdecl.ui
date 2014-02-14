@@ -75,6 +75,9 @@
           <height>250</height>
          </size>
         </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
         <widget class="QWidget" name="accountUnsupported">
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
@@ -174,7 +177,30 @@
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QStackedWidget" name="creditTransferEdits"/>
+           <widget class="QScrollArea" name="creditTransferEdit">
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <widget class="QWidget" name="scrollAreaWidgetContents">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>443</width>
+               <height>295</height>
+              </rect>
+             </property>
+            </widget>
+           </widget>
           </item>
          </layout>
         </widget>

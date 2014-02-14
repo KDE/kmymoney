@@ -98,16 +98,10 @@ private slots:
   /**
    * @brief Activates the onlineJobEdit widget
    */
-  void showEditWidget( const QString& onlineTaskName );
+  bool showEditWidget( const QString& onlineTaskName );
   void showEditWidget( IonlineJobEdit* widget );
 
   /** @} */
-
-  /**
-   * @param index index of widget in m_onlineJobEditWidgets
-   * @warning the selection box is not updated!
-   */
-  void showEditWidget( const int& index );
    
   /**
    * @brief Shows warning if checkEditWidget() == false

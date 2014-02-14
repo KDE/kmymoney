@@ -19,7 +19,6 @@
 #include "konlinetransferform.h"
 #include "ui_konlinetransferformdecl.h"
 
-
 #include <QtCore/QList>
 #include <QtCore/QSharedPointer>
 #include <QDebug>
@@ -69,17 +68,25 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
 }
 
 /**
- * @internal Only add IonlineJobEdit* to ui->creditTransferEdits, static_casts are used!
+ * @internal Only add IonlineJobEdit* to ui->creditTransferEdit, static_casts are used!
  */
 void kOnlineTransferForm::addOnlineJobEditWidget(IonlineJobEdit* widget)
 {
-  if (!m_onlineJobEditWidgets.isEmpty())
-    widget->setEnabled(false);
+  Q_ASSERT( widget != 0 );
 
+  // directly load the first widget into QScrollArea
+  bool showWidget = true;
+  if (!m_onlineJobEditWidgets.isEmpty()) {
+    widget->setEnabled(false);
+    showWidget = false;
+  }
+  
   m_onlineJobEditWidgets.append( widget );
-  ui->creditTransferEdits->addWidget(widget); // this also pases ownership to QStackedWidget
   ui->transferTypeSelection->addItem(widget->label());
   m_requiredFields->add(widget);
+  
+  if (showWidget)
+    showEditWidget(widget);
 }
 
 void kOnlineTransferForm::convertCurrentJob( const int& index )
@@ -87,15 +94,16 @@ void kOnlineTransferForm::convertCurrentJob( const int& index )
   Q_ASSERT( index < m_onlineJobEditWidgets.count() );
 
   const onlineJob job = activeOnlineJob();
+  IonlineJobEdit* widget = m_onlineJobEditWidgets.at(index);
   try {
-    m_onlineJobEditWidgets.at(index)->setOnlineJob(
-      onlineJobAdministration::instance()->convertBest(job, m_onlineJobEditWidgets.at(index)->supportedOnlineTasks(), job.id() )
+    widget->setOnlineJob(
+      onlineJobAdministration::instance()->convertBest(job, widget->supportedOnlineTasks(), job.id() )
     );
   } catch ( onlineTask::badConvert* e ) {
     delete e;
   }
 
-  showEditWidget(index);
+  showEditWidget(widget);
 }
 
 void kOnlineTransferForm::accept()
@@ -126,12 +134,10 @@ bool kOnlineTransferForm::setOnlineJob(const onlineJob job)
   }
   
   setCurrentAccount( job.responsibleAccount() );
-
-  foreach ( IonlineJobEdit* widget, m_onlineJobEditWidgets ) {
-    if ( widget->supportedOnlineTasks().contains( name ) ) {
-      widget->setOnlineJob(job);
-      showEditWidget(widget);
-      return true;
+  if (showEditWidget( name )) {
+    IonlineJobEdit* widget = qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget());
+    if (widget != 0) { // This can happen if there are no widgets
+      return widget->setOnlineJob(job);
     }
   }
   return false;
@@ -156,16 +162,14 @@ void kOnlineTransferForm::accountChanged()
 
 bool kOnlineTransferForm::checkEditWidget()
 {
-  return checkEditWidget( qobject_cast<IonlineJobEdit*>(ui->creditTransferEdits->currentWidget()) );
+  qDebug() << "ui->creditTransferEdit->widget()" << ui->creditTransferEdit->widget();
+  qDebug() << "qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget())" << qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget());
+  return checkEditWidget( qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget()) );
 }
 
 bool kOnlineTransferForm::checkEditWidget( IonlineJobEdit* widget )
 {
-  if ( widget == 0 ) {
-    return false;
-  }
-  
-  if (onlineJobAdministration::instance()->isJobSupported( ui->originAccount->getSelected(), widget->supportedOnlineTasks() )) {
+  if (widget != 0 && onlineJobAdministration::instance()->isJobSupported( ui->originAccount->getSelected(), widget->supportedOnlineTasks() )) {
     return true;
   }
   return false;
@@ -188,45 +192,37 @@ void kOnlineTransferForm::setCurrentAccount( const QString& accountId )
 
 onlineJob kOnlineTransferForm::activeOnlineJob() const
 {
-  IonlineJobEdit* widget = qobject_cast<IonlineJobEdit*>(ui->creditTransferEdits->currentWidget());
+  IonlineJobEdit* widget = qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget());
   if ( widget == 0 )
     return onlineJob();
   
   return widget->getOnlineJob();
 }
 
-void kOnlineTransferForm::showEditWidget(const QString& onlineTaskName)
+bool kOnlineTransferForm::showEditWidget(const QString& onlineTaskName)
 {
   foreach (IonlineJobEdit* widget, m_onlineJobEditWidgets) {
     if ( widget->supportedOnlineTasks().contains(onlineTaskName) ) {
       const onlineJob convert = onlineJobAdministration::instance()->convert(activeOnlineJob(), onlineTaskName);
       widget->setOnlineJob(convert);
       showEditWidget( widget );
+      return true;
     }
   }
+  return false;
 }
 
-/** @internal Changes in this method usually need changes in showEditWidget(const int& index) as well */
 void kOnlineTransferForm::showEditWidget( IonlineJobEdit* widget )
 {
-  ui->creditTransferEdits->currentWidget()->setEnabled(false);
-  widget->setEnabled(true);
-  ui->creditTransferEdits->setCurrentWidget(widget);
-  
-  const int index = m_onlineJobEditWidgets.indexOf(widget);
-  ui->transferTypeSelection->setCurrentIndex( index );
-  
-  checkNotSupportedWidget();
-  m_requiredFields->changed();
-}
+  Q_ASSERT(widget != 0);
 
-/** @internal Changes in this method usually need changes in showEditWidget( IonlineJobEdit* widget ) as well */
-void kOnlineTransferForm::showEditWidget(const int& index)
-{
-  Q_ASSERT( m_onlineJobEditWidgets.count() > index );
-  ui->creditTransferEdits->currentWidget()->setEnabled(false);
-  ui->creditTransferEdits->setCurrentIndex( index );
-  ui->creditTransferEdits->currentWidget()->setEnabled(true);
+  QWidget* oldWidget = ui->creditTransferEdit->takeWidget();
+  if (oldWidget != 0) // This is not the case at the first call of showEditWidget() and if there are no widgets.
+    oldWidget->setEnabled(false);
+
+  widget->setEnabled(true);
+  ui->creditTransferEdit->setWidget(widget);
+  widget->show();
   
   checkNotSupportedWidget();
   m_requiredFields->changed();
@@ -234,5 +230,7 @@ void kOnlineTransferForm::showEditWidget(const int& index)
 
 kOnlineTransferForm::~kOnlineTransferForm()
 {
+  ui->creditTransferEdit->takeWidget();
+  qDeleteAll(m_onlineJobEditWidgets);
   delete ui;
 }
