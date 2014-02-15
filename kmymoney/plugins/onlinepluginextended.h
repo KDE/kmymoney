@@ -6,7 +6,7 @@
 #include <QtCore/QList>
 
 #include "mymoney/onlinejob.h"
-#include "mymoney/onlinetask.h"
+#include "onlinetasks/interfaces/tasks/onlinetask.h"
 
 namespace KMyMoneyPlugin
 {

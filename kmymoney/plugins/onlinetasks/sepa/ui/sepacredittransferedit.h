@@ -4,8 +4,8 @@
 #include <KLocale>
 
 #include "mymoney/onlinejobtyped.h"
-#include "mymoney/sepaonlinetransfer.h"
-#include "ionlinejobedit.h"
+#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/interfaces/ui/ionlinejobedit.h"
 
 class kMandatoryFieldGroup;
 

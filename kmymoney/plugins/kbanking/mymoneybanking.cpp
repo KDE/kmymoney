@@ -76,13 +76,12 @@
 
 #include "mymoney/accountidentifier.h"
 #include "mymoney/onlinejob.h"
-#include "mymoney/germanonlinetransfer.h"
-#include "mymoney/sepaonlinetransfer.h"
 
 #include "kbjobview.h"
 #include "kbaccountsettings.h"
 #include "kbmapaccount.h"
 #include "mymoneyfile.h"
+#include <onlinejobadministration.h>
 #include "kmymoneyview.h"
 #include "kbpickstartdate.h"
 
@@ -189,6 +188,10 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
       m_kbanking = 0;
     }
   }
+  
+  //! @FIXME: This should not be here. Just a temporarily solution until onlineTask can be loaded as plugins
+  onlineJobAdministration::instance()->registerOnlineTask( new sepaOnlineTransfer );
+  onlineJobAdministration::instance()->registerOnlineTask( new germanOnlineTransfer );
 }
 
 
@@ -617,9 +620,9 @@ void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
   
   if (jobs.size()) {
     foreach (onlineJob job, jobs) {
-      if ( germanOnlineTransfer::hash == job.task()->taskHash() ) {
+      if ( germanOnlineTransfer::name() == job.task()->taskName() ) {
         job = enqueTransaction( onlineJobTyped<germanOnlineTransfer>(job) );
-      } else if ( sepaOnlineTransfer::hash == job.task()->taskHash() ) {
+      } else if ( sepaOnlineTransfer::name() == job.task()->taskName() ) {
         job = enqueTransaction( onlineJobTyped<sepaOnlineTransfer>(job) );
       } else {
         job.addJobMessage( onlineJobMessage(onlineJobMessage::error, "KBanking", "Cannot handle this request" ) );

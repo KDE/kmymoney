@@ -19,7 +19,7 @@
 #ifndef CREDITTRANSFERSETTINGSBASE_H
 #define CREDITTRANSFERSETTINGSBASE_H
 
-#include <onlinetask.h>
+#include "onlinetasks/interfaces/tasks/onlinetask.h"
 
 class QValidator;
 

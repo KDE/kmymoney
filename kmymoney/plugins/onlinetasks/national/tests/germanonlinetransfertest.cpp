@@ -23,7 +23,7 @@
 #define KMM_MYMONEY_UNIT_TESTABLE friend class germanOnlineTransferTest;
 
 #include "germanonlinetransfertest.h"
-#include "germanonlinetransfer.h"
+#include "../tasks/germanonlinetransfer.h"
 
 
 QTEST_MAIN(germanOnlineTransferTest)

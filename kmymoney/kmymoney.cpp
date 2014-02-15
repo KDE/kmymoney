@@ -7347,13 +7347,13 @@ void KMyMoneyApp::slotEditOnlineJob(const QString jobId)
 void KMyMoneyApp::slotEditOnlineJob(onlineJob job)
 {
   Q_ASSERT(!job.isNull());
-  onlineTransfer* trans = dynamic_cast<onlineTransfer*>(job.task());
+  creditTransfer* trans = dynamic_cast<creditTransfer*>(job.task());
   if (trans) {
-    slotEditOnlineJob( onlineJobTyped<onlineTransfer>(job) );
+    slotEditOnlineJob( onlineJobTyped<creditTransfer>(job) );
   }
 }
 
-void KMyMoneyApp::slotEditOnlineJob(const onlineJobTyped<onlineTransfer> job )
+void KMyMoneyApp::slotEditOnlineJob(const onlineJobTyped<creditTransfer> job )
 {
   kOnlineTransferForm *transferForm = new kOnlineTransferForm(this);
   transferForm->setOnlineJob( job );

@@ -26,16 +26,20 @@
 
 #include "kmm_mymoney_export.h"
 #include "germanaccountidentifier.h"
-#include "credittransfersettingsbase.h"
+#include "onlinetasks/interfaces/tasks/onlinetask.h"
+#include "onlinetasks/interfaces/tasks/credittransfer.h"
+#include "../../sepa/credittransfersettingsbase.h"
 
 /**
  * @brief Online Banking national transfer
  *
  * Right now this is a mix of national transfer and national german transfer
  */
-class KMM_MYMONEY_EXPORT germanOnlineTransfer : public onlineTransfer
+class KMM_MYMONEY_EXPORT germanOnlineTransfer : public onlineTask, public creditTransfer
 {
   KMM_MYMONEY_UNIT_TESTABLE
+  Q_INTERFACES(creditTransfer);
+  
 public:
   ONLINETASK_META(germanOnlineTransfer, "org.kmymoney.creditTransfer.germany");
 
@@ -54,6 +58,8 @@ public:
   virtual void setPurpose( const QString purpose ) { _purpose = purpose; }
   QString purpose() const { return _purpose; }
 
+  virtual QString jobTypeName() const { return creditTransfer::jobTypeName(); }
+  
   /**
    * @brief Returns the origin account identifier
    * @return you are owner of the object

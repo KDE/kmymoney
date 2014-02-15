@@ -39,13 +39,14 @@
 #include <mymoneytag.h>
 #include <mymoneybudget.h>
 #include <kmymoneyplugin.h>
+
 #include <register.h>
 #include <kmymoneyutils.h>
 #include <mymoneyprice.h>
 
 #include "mymoney/onlinejob.h"
 #include "mymoney/onlinejobtyped.h"
-#include "mymoney/onlinetransfer.h"
+#include "onlinetasks/interfaces/tasks/credittransfer.h"
 
 class QResizeEvent;
 class QTreeWidgetItem;
@@ -462,7 +463,7 @@ protected slots:
   /**
    * @brief Start dialog to edit onlineJob if possible
    */
-  void slotEditOnlineJob( const onlineJobTyped<onlineTransfer> );
+  void slotEditOnlineJob( const onlineJobTyped<creditTransfer> );
 
   /**
    * @brief Saves an online banking job

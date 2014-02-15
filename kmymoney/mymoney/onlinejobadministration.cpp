@@ -15,16 +15,16 @@
 #include "mymoney/mymoneykeyvaluecontainer.h"
 #include "plugins/onlinepluginextended.h"
 
-#include "germanonlinetransfer.h"
-#include "sepaonlinetransfer.h"
+//#include "onlinetasks/national/tasks/germanonlinetransfer.h"
+//#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 
 onlineJobAdministration onlineJobAdministration::m_instance;
 
 onlineJobAdministration::onlineJobAdministration(QObject *parent) :
     QObject(parent)
 {
-  registerOnlineTask( new germanOnlineTransfer );
-  registerOnlineTask( new sepaOnlineTransfer );
+//  registerOnlineTask( new germanOnlineTransfer );
+//  registerOnlineTask( new sepaOnlineTransfer );
 }
 
 onlineJobAdministration::~onlineJobAdministration()
@@ -74,14 +74,6 @@ bool onlineJobAdministration::isJobSupported(const QString& accountId, const QSt
   return false;
 }
 
-bool onlineJobAdministration::isJobSupported(const QString& accountId, const size_t& hash) const
-{
-  const QString name = getTaskNameByHash( hash );
-  if ( name.isNull() )
-    return false;
-  return isJobSupported(accountId, name);
-}
-
 bool onlineJobAdministration::isAnyJobSupported(const QString& accountId) const
 {
   if (accountId.isEmpty())
@@ -107,12 +99,17 @@ onlineTask* onlineJobAdministration::createOnlineTask(const QString& name) const
   return 0;
 }
 
+/**
+ * @TODO Need a technique to handle task were the plugin was not loaded
+ * There could be a new dummy task which is linked staticaly. If task could not be loaded
+ */
 onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, const QDomElement& element) const
 {
   onlineTask* task = rootOnlineTask(iid);
   if (task != 0) {
     return task->createFromXml(element);
   }
+  qWarning("In the file is a onlineTask for which I could not find the plugin ('%s')", qPrintable(iid));
   return 0;
 }
 
@@ -243,12 +240,3 @@ QSharedPointer<const onlineTask::settings> onlineJobAdministration::taskSettings
   return QSharedPointer<const onlineTask::settings>();
 }
 
-QString onlineJobAdministration::getTaskNameByHash(const size_t& hash) const
-{
-  if ( germanOnlineTransfer::hash == hash )
-    return germanOnlineTransfer::name();
-  else if ( sepaOnlineTransfer::hash == hash )
-    return sepaOnlineTransfer::name();
-  
-  return QString();
-}

@@ -3,8 +3,8 @@
 #include <aqbanking/transactionlimits.h>
 #include <aqbanking/transaction.h>
 
-#include "mymoney/germanonlinetransfer.h"
-#include "mymoney/sepaonlinetransfer.h"
+#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/national/tasks/germanonlinetransfer.h"
 #include "gwenhywfarqtoperators.h"
 
 /**

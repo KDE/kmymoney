@@ -21,7 +21,7 @@
 
 #include "autotest.h"
 
-#include "germanonlinetransfer.h"
+#include "onlinetasks/dummy/tasks/dummytask.h"
 
 QTEST_MAIN(MyMoneySeqAccessMgrTest)
 
@@ -1852,7 +1852,7 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
 void MyMoneySeqAccessMgrTest::testAddOnlineJob()
 {
   // Add a onlineJob
-  onlineJob job(new germanOnlineTransfer());
+  onlineJob job(new dummyTask());
 
   m->addOnlineJob( job );
   QCOMPARE( job.id(), QString("O000001"));

@@ -193,7 +193,8 @@ void MyMoneySeqAccessMgr::modifyOnlineJob(const onlineJob &job)
 const onlineJob MyMoneySeqAccessMgr::getOnlineJob(const QString &id) const
 {
   if (m_onlineJobList.contains( id )) {
-    Q_ASSERT( !m_onlineJobList[id].isNull() );
+    //!TODO: reactivate when stored onlineTasks can be handled even if the plugin was not found.
+    //Q_ASSERT( !m_onlineJobList[id].isNull() );
     return m_onlineJobList[id];
   }
   throw new MYMONEYEXCEPTION("Unkown online Job '" + id + "'");

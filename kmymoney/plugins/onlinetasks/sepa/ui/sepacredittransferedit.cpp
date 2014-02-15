@@ -98,7 +98,7 @@ void sepaCreditTransferEdit::setOnlineJob(const onlineJobTyped<sepaOnlineTransfe
 
 bool sepaCreditTransferEdit::setOnlineJob( const onlineJob& job )
 {
-  if( !job.isNull() && job.task()->taskHash() == sepaOnlineTransfer::hash ) {
+  if( !job.isNull() && job.task()->taskName() == sepaOnlineTransfer::name() ) {
     setOnlineJob( onlineJobTyped<sepaOnlineTransfer>(job) );
     return true;
   }

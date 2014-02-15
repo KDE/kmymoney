@@ -1,9 +1,5 @@
 #include "onlinetask.h"
 
-#include "mymoneyfile.h"
-
-ONLINETASK_META_INIT(onlineTask);
-
 onlineTask::onlineTask()
 {}
 
@@ -20,7 +16,6 @@ onlineTask::onlineTask(const onlineTask &other)
 onlineTask::settings::~settings()
 {}
 
-/** @todo give life */
 void onlineTask::writeXML(QDomDocument &document, QDomElement &parent) const
 {
   Q_UNUSED(document);

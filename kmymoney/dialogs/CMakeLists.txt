@@ -82,7 +82,11 @@ ADD_CUSTOM_TARGET(generate_dialogs_ui_srcs DEPENDS ${dialogs_ui_srcs})
 KDE4_ADD_LIBRARY(dialogs STATIC ${libdialogs_a_SOURCES} ${dialogs_ui_srcs})
 
 # @TODO: need kmm_mymoney for online banking, is this ok?
-target_link_libraries(dialogs kmm_mymoney)
+target_link_libraries(dialogs
+  kmm_mymoney
+  konlinetasks_sepa # Remove when dynamic loading is possible
+  konlinetasks_national # Remove when dynamic loading is possible
+)
 
 # we rely on the widgets to be generated
 ADD_DEPENDENCIES(dialogs widgets)

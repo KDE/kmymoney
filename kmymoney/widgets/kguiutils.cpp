@@ -40,7 +40,7 @@
 // Project Includes
 
 #include "kmymoneyglobalsettings.h"
-#include "ionlinejobedit.h"
+#include "onlinetasks/interfaces/ui/ionlinejobedit.h"
 #include "kmymoneytextedit.h"
 
 /**************************************************************************

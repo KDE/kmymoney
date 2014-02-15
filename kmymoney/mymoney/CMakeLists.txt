@@ -1,6 +1,6 @@
 ADD_SUBDIRECTORY( storage )
 
-# Todo move this to a findKtoblzcheck.cmake and use find_package() instead
+# TODO move this to a findKtoblzcheck.cmake and use find_package() instead
 find_library( KTOBLZCHECK_LIBRARY NAMES libktoblzcheck ktoblzcheck
     DOC "German account number and bank code check http://ktoblzcheck.sourceforge.net/")
 message(STATUS "Found ktoblzcheck at " ${KTOBLZCHECK_LIBRARY})
@@ -28,14 +28,9 @@ SET(kmm_mymoney_LIB_SRCS
   germanaccountidentifier.cpp
   swiftaccountidentifier.cpp
   onlinejob.cpp
-  onlinetask.cpp
-  onlinetransfer.cpp
   onlinejobadministration.cpp
   onlinejobmessage.cpp
   onlinejobfolder.cpp
-  germanonlinetransfer.cpp
-  sepaonlinetransfer.cpp
-  credittransfersettingsbase.cpp
   )
 
 
@@ -54,7 +49,6 @@ SET(mymoney_HEADERS kmm_mymoney_export.h
   accountidentifier.h
   bankaccountidentifier.h
   swiftaccountidentifier.h
-  onlinetransfer.h
   onlinejob.h
   onlinejobtyped.h
   onlinejobmessage.h
@@ -177,15 +171,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( onlinejobtest TESTNAME kmymoney-onlinejobtest ${onlinejobtest_SRCS} )
   ADD_DEPENDENCIES( onlinejobtest kmm_mymoney )
 
-  target_link_libraries( onlinejobtest kmm_mymoney ${target_link_libraries_test})
-
-  # germanOnlineTransfer
-  set( germanonlinetransfertest_SRCS germanonlinetransfertest.cpp )
-
-  kde4_add_unit_test( germanonlinetransfertest TESTNAME kmymoney-germanOnlineTransferTest ${germanonlinetransfertest_SRCS} )
-  ADD_DEPENDENCIES( germanonlinetransfertest kmm_mymoney )
-
-  target_link_libraries( germanonlinetransfertest kmm_mymoney ${target_link_libraries_test})
+  target_link_libraries( onlinejobtest kmm_mymoney onlinetask_interfaces ${target_link_libraries_test})
   
   # MyMoneyPayee
   set( mymoneypayeetest_SRCS mymoneypayeetest.cpp )
@@ -265,15 +251,15 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( onlinejobadministrationtest TESTNAME kmymoney-onlinejobadministrationtest ${onlinejobtestadministration_SRCS} )
   ADD_DEPENDENCIES( onlinejobadministrationtest kmm_mymoney )
 
-  target_link_libraries( onlinejobadministrationtest kmm_mymoney kmm_storage ${target_link_libraries_test})
+  target_link_libraries( onlinejobadministrationtest kmm_mymoney kmm_storage onlinetask_interfaces ${target_link_libraries_test})
 
-  # onlineJobKnownTask
+  # onlineJobTyped
   set( onlinejobtypedtest_SRCS onlinejobtypedtest.cpp )
 
   kde4_add_unit_test( onlinejobtypedtest TESTNAME kmymoney-onlinejobtypedtest ${onlinejobtypedtest_SRCS} )
   #ADD_DEPENDENCIES( onlinejobknowntasktest  )
 
-  target_link_libraries( onlinejobtypedtest kmm_mymoney ${target_link_libraries_test})
+  target_link_libraries( onlinejobtypedtest kmm_mymoney onlinetask_interfaces ${target_link_libraries_test})
 
 
 ENDIF( KDE4_BUILD_TESTS )

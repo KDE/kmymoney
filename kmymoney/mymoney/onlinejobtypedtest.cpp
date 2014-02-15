@@ -3,8 +3,7 @@
 #include <QtTest/QTest>
 
 #include "onlinejobtyped.h"
-#include "germanonlinetransfer.h"
-#include "sepaonlinetransfer.h"
+#include "onlinetasks/dummy/tasks/dummytask.h"
 
 QTEST_MAIN(onlineJobTypedTest)
 
@@ -20,16 +19,17 @@ void onlineJobTypedTest::cleanupTestCase()
 
 void onlineJobTypedTest::copyContructor()
 {
-  sepaOnlineTransfer* task = new sepaOnlineTransfer;
-  onlineJobTyped<sepaOnlineTransfer> job( task );
+  dummyTask* task = new dummyTask;
+  onlineJobTyped<dummyTask> job( task );
   QVERIFY( !job.isNull() );
   QVERIFY( job.m_taskSubType == task );
 }
 
 void onlineJobTypedTest::copyContructorFailure()
 {
+  QSKIP("Need second dummy task for testing", SkipAll);
   try {
-    onlineJobTyped<germanOnlineTransfer> job( new sepaOnlineTransfer );
+    onlineJobTyped<dummyTask> job( new dummyTask );
     QFAIL("Missing expected exception");
   } catch ( onlineJob::badTaskCast* e ) {
     delete e;
@@ -38,12 +38,12 @@ void onlineJobTypedTest::copyContructorFailure()
 
 void onlineJobTypedTest::copyByAssignment()
 {
-  sepaOnlineTransfer* task = new sepaOnlineTransfer;
-  task->setPurpose( "Test string" );
-  onlineJobTyped<sepaOnlineTransfer> job( new sepaOnlineTransfer );
-  job = onlineJobTyped<sepaOnlineTransfer>( task );
+  dummyTask* task = new dummyTask;
+  task->setTestNumber( 8888 );
+  onlineJobTyped<dummyTask> job( new dummyTask );
+  job = onlineJobTyped<dummyTask>( task );
 
   QVERIFY( !job.isNull() );
-  QVERIFY( dynamic_cast<sepaOnlineTransfer*>(job.task()));
-  QVERIFY( job.task()->purpose() == "Test string" );
+  QVERIFY( dynamic_cast<dummyTask*>(job.task()));
+  QCOMPARE(job.task()->testNumber(), 8888 );
 }

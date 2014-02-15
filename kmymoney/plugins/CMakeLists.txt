@@ -1,3 +1,5 @@
+add_subdirectory( onlinetasks )
+
 ADD_SUBDIRECTORY( interfaces )
 
 ADD_SUBDIRECTORY( csvimport )

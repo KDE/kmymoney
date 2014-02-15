@@ -2,7 +2,8 @@
 
 #include <QtTest/QTest>
 #include "onlinejob.h"
-#include "sepaonlinetransfer.h"
+
+#include "onlinetasks/dummy/tasks/dummytask.h"
 
 QTEST_MAIN(onlineJobTest)
 
@@ -21,7 +22,7 @@ void onlineJobTest::testDefaultConstructor()
 
 void onlineJobTest::testCopyConstructor()
 {
-    onlineJob originalJob = onlineJob( new sepaOnlineTransfer(), "O000001" );
+    onlineJob originalJob = onlineJob( new dummyTask, "O000001" );
     QVERIFY( !originalJob.isNull() );
     QVERIFY( originalJob.task() );
 
@@ -34,7 +35,7 @@ void onlineJobTest::testCopyConstructor()
 
 void onlineJobTest::testCopyAssignment()
 {
-    onlineJob originalJob = onlineJob( new sepaOnlineTransfer(), "O000001" );
+    onlineJob originalJob = onlineJob( new dummyTask, "O000001" );
     QVERIFY( !originalJob.isNull() );
     QVERIFY( originalJob.task() );
 
@@ -47,7 +48,7 @@ void onlineJobTest::testCopyAssignment()
 
 void onlineJobTest::testCopyConstructorWithNewId()
 {
-    onlineJob originalJob = onlineJob( new sepaOnlineTransfer(), "O000001" );
+    onlineJob originalJob = onlineJob( new dummyTask, "O000001" );
     QVERIFY( !originalJob.isNull() );
 
     onlineJob jobCopy = onlineJob("O000002", originalJob);

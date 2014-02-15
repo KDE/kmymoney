@@ -2,10 +2,6 @@ PROJECT(widgets)
 
 ########### custom command #############
 
-# In future the edits for onlineJobs could be loaded when needed.
-# To prepare that they have thier own directory.
-include_directories("onlinejobedit")
-
 ########### create links ###############
 SET(kmymoney_STAT_HEADERS
   kaccounttemplateselector.h kbudgetvalues.h kguiutils.h
@@ -21,9 +17,6 @@ SET(kmymoney_STAT_HEADERS
   transactionform.h transaction.h transactionsortoptionimpl.h
   kmymoneyreportconfigtabimpl.h kmymoneyreportcontrolimpl.h
   kmymoney_export.h
-  onlinejobedit/ionlinejobedit.h
-  onlinejobedit/sepacredittransferedit.h
-  onlinejobedit/germancredittransferedit.h
   )
 
 ########### Shared widget library ###########
@@ -68,10 +61,6 @@ SET(_uncritial_common_sources
   transaction.cpp
   transactionform.cpp
   transactionsortoptionimpl.cpp
-  onlinejobedit/sepacredittransferedit.cpp
-  onlinejobedit/sepacredittransferedit_p.h # without this line QCreator does not show the file as part of the project
-  onlinejobedit/germancredittransferedit.cpp
-  onlinejobedit/ionlinejobedit.cpp
   )
 
 # sources that contain the KMM_DESIGNER flag
@@ -86,8 +75,6 @@ SET (_critial_common_sources
 
 SET (kmymoney_base_UI
   kbudgetvaluesdecl.ui transactionsortoptiondecl.ui kaccounttemplateselectordecl.ui
-  onlinejobedit/sepacredittransferedit.ui
-  onlinejobedit/germancredittransferedit.ui
   )
 
 KDE4_ADD_UI_FILES(kmymoney_base_ui_srcs ${kmymoney_base_UI})

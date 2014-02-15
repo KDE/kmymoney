@@ -13,7 +13,7 @@
 
 #include "onlinejob.h"
 #include "onlinejobtyped.h"
-#include "onlinetask.h"
+#include "onlinetasks/interfaces/tasks/onlinetask.h"
 
 namespace KMyMoneyPlugin {
   class OnlinePluginExtended;
@@ -50,7 +50,6 @@ public:
   
   bool isJobSupported(const QString& accountId, const QString& name) const;
   bool isJobSupported(const QString& accountId, const QStringList& names) const;
-  bool isJobSupported(const QString& accountId, const size_t& hash) const;
   bool isAnyJobSupported(const QString& accountId) const;
   
   onlineTask::convertType canConvert( const QString& originalName, const QString& destinationName ) const;
@@ -144,12 +143,6 @@ private:
 
   /** @brief Checks originalName's canConvertInto() */
   onlineTask::convertType canConvertInto( const QString& originalName, const QString& destinationName ) const;
-  
-  /**
-   * @brief Converts onlineTask::hash into onlineTask::name()
-   * @return A onlineTask::name() or QString() if not found.
-   */
-  QString getTaskNameByHash( const size_t& hash ) const;
   
   /**
    * @brief Creates an onlineTask by names

@@ -3,9 +3,9 @@
 
 #include <KLocale>
 
-#include "ionlinejobedit.h"
+#include "onlinetasks/interfaces/ui/ionlinejobedit.h"
 #include "mymoney/onlinejobtyped.h"
-#include "mymoney/germanonlinetransfer.h"
+#include "../tasks/germanonlinetransfer.h"
 #include "mymoney/swiftaccountidentifier.h"
 
 class kMandatoryFieldGroup;

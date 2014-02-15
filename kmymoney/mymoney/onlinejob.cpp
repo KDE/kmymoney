@@ -20,7 +20,7 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyexception.h"
-#include "onlinetask.h"
+#include "onlinetasks/interfaces/tasks/credittransfer.h"
 
 #include "onlinejobadministration.h"
 

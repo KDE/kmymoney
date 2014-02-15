@@ -25,7 +25,8 @@
 #include <KLocalizedString>
 
 #include "mymoneyutils.h"
-#include "mymoney/onlinetransfer.h"
+#include "onlinetasks/interfaces/tasks/onlinetask.h"
+#include "onlinetasks/interfaces/tasks/credittransfer.h"
 #include "mymoney/onlinejobtyped.h"
 
 
@@ -114,7 +115,7 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
   
   Q_ASSERT( !job.isNull() );
 
-  const onlineTransfer *transfer = dynamic_cast<const onlineTransfer*>(job.task());
+  const creditTransfer *transfer = dynamic_cast< creditTransfer* >(job.task());
 
   if (role == Qt::DisplayRole) {
     switch (index.column()) {

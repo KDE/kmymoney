@@ -60,6 +60,6 @@ ENDIF(NOT WIN32)
   kde4_add_unit_test( mymoneyseqaccessmgrtest TESTNAME kmymoney-mymoneyseqaccessmgrtest ${mymoneyseqaccessmgrtest_SRCS} )
   ADD_DEPENDENCIES( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage )
 
-  target_link_libraries( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage ${target_link_libraries_test} )
+  target_link_libraries( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage onlinetask_interfaces ${target_link_libraries_test} )
 
 ENDIF( KDE4_BUILD_TESTS )

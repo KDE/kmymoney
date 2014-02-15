@@ -5,7 +5,7 @@
 #include "onlinejobadministration.h"
 #include "mymoney/mymoneyfile.h"
 #include "mymoney/storage/mymoneyseqaccessmgr.h"
-#include "sepaonlinetransfer.h"
+#include "onlinetasks/dummy/tasks/dummytask.h"
 
 QTEST_MAIN(onlineJobAdministrationTest)
 
@@ -48,7 +48,7 @@ void onlineJobAdministrationTest::getSettings()
 
 void onlineJobAdministrationTest::registerOnlineTask()
 {
-  sepaOnlineTransfer *task = new sepaOnlineTransfer;
+  dummyTask *task = new dummyTask;
   onlineJobAdministration::instance()->registerOnlineTask(task);
   QCOMPARE(onlineJobAdministration::instance()->m_onlineTasks.count(), 1);
   QVERIFY(onlineJobAdministration::instance()->m_onlineTasks.value( task->taskName() ));

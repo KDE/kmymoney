@@ -58,11 +58,6 @@ class onlineJob;
  * @internal I am not proud of this. But I had no better idea without using C++11. Sorry.
  */
 #define ONLINETASK_META(onlineTaskClass, nameString) \
-/** @brief Returns the hash of onlineTask type (part of @ref onlineTaskMeta) @depreciated */ \
-virtual size_t taskHash() const \
-{ \
-  return ( onlineTaskClass::hash ); \
-} \
 /** @brief Returns the name of onlineTask type (part of @ref onlineTaskMeta) */ \
 static const QString& name() { \
   static const QString _name = nameString; \
@@ -72,20 +67,7 @@ static const QString& name() { \
 virtual QString taskName() const { \
   return onlineTaskClass::name(); \
 } \
-/** @brief The hash of onlineTask type (part of @ref onlineTaskMeta) @depreciated */ \
-static const size_t hash; \
 friend class onlineJobAdministration
-
-/**
- * @brief Init the onlineTask meta system
- * To be used with ONLINETASK_META().
- *
- * @param onlineTaskClass the class type (e.g. onlineTask)
- *
- * @internal C++11 should make this unnecessary.
- */
-#define ONLINETASK_META_INIT(onlineTaskClass) \
-  const size_t onlineTaskClass::hash = onlineTask::_internal_getNextMetaHash()
 
 /**
  * @brief The onlineTask class
@@ -250,20 +232,12 @@ protected:
    */
   virtual void convert( const onlineTask& task, QString& messageString, bool& payeeChanged ) = 0;
 
-  /**
-   * @brief Used by @ref onlineTaskMeta
-   * @internal
-   * @return a new id
-   */
-  static size_t _internal_getNextMetaHash() {
-    static size_t staticTypeIdCounter = 0;
-    return (++staticTypeIdCounter);
-  }
-
   friend class onlineJob;
 
 private:
 
 };
+
+Q_DECLARE_INTERFACE(onlineTask, "org.kmymoney.onlinetask");
 
 #endif // onlineJob_H

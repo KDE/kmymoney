@@ -19,20 +19,22 @@
 #ifndef SEPAONLINETRANSFER_H
 #define SEPAONLINETRANSFER_H
 
-#include "onlinetransfer.h"
-
 #include <algorithm>
 
 #include <klocalizedstring.h>
 
 #include "swiftaccountidentifier.h"
-#include "credittransfersettingsbase.h"
+#include "onlinetasks/interfaces/tasks/onlinetask.h"
+#include "onlinetasks/interfaces/tasks/credittransfer.h"
+#include "../credittransfersettingsbase.h"
 
 /**
  * @brief SEPA Credit Transfer
  */
-class KMM_MYMONEY_EXPORT sepaOnlineTransfer : public onlineTransfer
+class KMM_MYMONEY_EXPORT sepaOnlineTransfer : public onlineTask, public creditTransfer
 {
+  Q_INTERFACES(creditTransfer);
+  
 public:
   ONLINETASK_META(sepaOnlineTransfer, "org.kmymoney.creditTransfer.sepa");
   sepaOnlineTransfer();

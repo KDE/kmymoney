@@ -9,7 +9,7 @@
 
 #include <QtCore/QSharedPointer>
 
-#include "mymoney/onlinetask.h"
+#include "onlinetasks/interfaces/tasks/onlinetask.h"
 
 class AB_TRANSACTION_LIMITS;
 class AB_TRANSACTION;

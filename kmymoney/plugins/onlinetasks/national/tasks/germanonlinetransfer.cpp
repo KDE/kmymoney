@@ -22,16 +22,15 @@
 #include <QtGui/QRegExpValidator>
 
 #include "mymoney/mymoneyfile.h"
-#include "mymoney/sepaonlinetransfer.h"
+#include "../../sepa/tasks/sepaonlinetransfer.h"
 #include "onlinejobadministration.h"
-
-ONLINETASK_META_INIT(germanOnlineTransfer);
 
 static const unsigned short defaultTextKey = 51;
 static const unsigned short defaultSubTextKey = 0;
 
 germanOnlineTransfer::germanOnlineTransfer()
-  : onlineTransfer(),
+  : onlineTask(),
+    creditTransfer(),
     _settings( QSharedPointer<const settings>() ),
     _value(0),
     _purpose(QString()),
@@ -44,7 +43,8 @@ germanOnlineTransfer::germanOnlineTransfer()
 }
 
 germanOnlineTransfer::germanOnlineTransfer(const germanOnlineTransfer& other)
-  : onlineTransfer( other ),
+  : onlineTask( other ),
+    creditTransfer( other ),
     _settings( other._settings ),
     _value( other._value ),
     _purpose( other._purpose ),
@@ -125,7 +125,7 @@ onlineTask* germanOnlineTransfer::convertInto( const QString& onlineTaskName , Q
 
 void germanOnlineTransfer::convert(const onlineTask &task, QString& messageString, bool& payeeChanged )
 {
-  if( task.taskHash() == sepaOnlineTransfer::hash ) {
+  if( task.taskName() == sepaOnlineTransfer::name() ) {
     const sepaOnlineTransfer& sepaTask = static_cast<const sepaOnlineTransfer&>(task);
     payeeChanged = true;
     setOriginAccount( sepaTask.responsibleAccount() );

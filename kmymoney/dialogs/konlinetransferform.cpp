@@ -21,19 +21,18 @@
 
 #include <QtCore/QList>
 #include <QtCore/QSharedPointer>
-#include <QDebug>
 
 #include "kguiutils.h"
 #include "kmymoneylineedit.h"
-#include "onlinejobedit/ionlinejobedit.h"
+#include "onlinetasks/interfaces/ui/ionlinejobedit.h"
 
 #include "mymoney/mymoneyfile.h"
 #include "mymoney/mymoneyaccount.h"
 #include "mymoney/accountidentifier.h"
 #include "mymoney/onlinejobadministration.h"
 
-#include "onlinejobedit/germancredittransferedit.h"
-#include "onlinejobedit/sepacredittransferedit.h"
+#include "onlinetasks/national/ui/germancredittransferedit.h"
+#include "onlinetasks/sepa/ui/sepacredittransferedit.h"
 
 #include "models/models.h"
 
@@ -162,8 +161,6 @@ void kOnlineTransferForm::accountChanged()
 
 bool kOnlineTransferForm::checkEditWidget()
 {
-  qDebug() << "ui->creditTransferEdit->widget()" << ui->creditTransferEdit->widget();
-  qDebug() << "qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget())" << qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget());
   return checkEditWidget( qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget()) );
 }
 
