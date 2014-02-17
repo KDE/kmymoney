@@ -63,12 +63,10 @@ struct PluginLoader::Private {
   PluginsMap        m_loadedPlugins;
 };
 
-PluginLoader::PluginLoader(QObject* parent)
+PluginLoader::PluginLoader(QObject* parent) : d(new Private)
 {
   Q_ASSERT(s_instance == 0);
   s_instance = this;
-
-  d = new Private;
 
   d->m_parent = parent;
 
