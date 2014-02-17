@@ -398,7 +398,7 @@ void KMyMoneyUtils::updateLastNumberUsed(const MyMoneyAccount& acc, const QStrin
       }
     }
     if (!free) {
-      qDebug()<<"No free number found - set to '1'";
+      qDebug() << "No free number found - set to '1'";
       num = '1';
     }
     setLastNumberUsed(getAdjacentNumber(num, - 1));
@@ -407,7 +407,7 @@ void KMyMoneyUtils::updateLastNumberUsed(const MyMoneyAccount& acc, const QStrin
 
 void KMyMoneyUtils::setLastNumberUsed(const QString& num)
 {
-   m_lastNumberUsed = num;
+  m_lastNumberUsed = num;
 }
 
 QString KMyMoneyUtils::lastNumberUsed()
