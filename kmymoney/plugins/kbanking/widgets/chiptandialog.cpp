@@ -50,7 +50,7 @@ chipTanDialog::chipTanDialog(QWidget* parent)
   ui->declarativeView->setSource(KGlobal::dirs()->findResource("data", QString("kmm_kbanking/qml/chipTan/ChipTan.qml")));
   
   setFlickerFieldWidth( KBankingSettings::width() );
-  setFlickerFieldTakt( KBankingSettings::takt() );
+  setFlickerFieldClockSetting( KBankingSettings::clocksetting() );
   
   connect(ui->decelerateButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(decelerateTransmission()));
   connect(ui->accelerateButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(accelerateTransmission()));
@@ -58,7 +58,7 @@ chipTanDialog::chipTanDialog(QWidget* parent)
   connect(ui->reduceButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(reduceFlickerField()));
   
   connect(ui->declarativeView->rootObject(), SIGNAL(flickerFieldWidthChanged(int)), SLOT(flickerFieldWidthChanged(int)));
-  connect(ui->declarativeView->rootObject(), SIGNAL(flickerFieldTaktChanged(int)), SLOT(flickerFieldTaktChanged(int)));
+  connect(ui->declarativeView->rootObject(), SIGNAL(flickerFieldClockSettingChanged(int)), SLOT(flickerFieldClockSettingChanged(int)));
   
   if (ui->declarativeView->status() == QDeclarativeView::Error)
     done(InternalError);
@@ -134,16 +134,16 @@ int chipTanDialog::flickerFieldWidth()
   return width.toInt();
 }
 
-void chipTanDialog::setFlickerFieldTakt(const int& width)
+void chipTanDialog::setFlickerFieldClockSetting(const int& width)
 {
   QGraphicsObject* rootObject = ui->declarativeView->rootObject();
   if (rootObject)
-    QMetaObject::invokeMethod(rootObject, "setFlickerTakt", Q_ARG(QVariant, QVariant(width)) );
+    QMetaObject::invokeMethod(rootObject, "setFlickerClockSetting", Q_ARG(QVariant, QVariant(width)) );
 }
 
-void chipTanDialog::flickerFieldTaktChanged(const int& takt)
+void chipTanDialog::flickerFieldClockSettingChanged(const int& takt)
 {
-  KBankingSettings::setTakt( takt );
+  KBankingSettings::setClocksetting( takt );
   KBankingSettings::self()->writeConfig();
 }
 

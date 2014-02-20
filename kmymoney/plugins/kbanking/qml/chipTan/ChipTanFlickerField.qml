@@ -30,7 +30,7 @@ Rectangle {
     width: 260
 
     /** @brief Duration of each takt in ms */
-    property int taktLength: 50
+    property int clockSetting: 50
 
     /** @brief suggested minumum with of this component */
     property int minimumWidth: 100
@@ -103,7 +103,7 @@ Rectangle {
 
     Timer {
         id: timer
-        interval: parent.taktLength
+        interval: parent.clockSetting
         repeat: true
         running: true
         onTriggered: Logic.timerTriggered(flickerFields)

@@ -57,12 +57,12 @@ public slots:
   
   void setTanLimits(const int& minLength, const int& maxLength);
   void setFlickerFieldWidth(const int& width);
-  void setFlickerFieldTakt(const int& width);
+  void setFlickerFieldClockSetting(const int& width);
 
 private slots:
   void tanInputChanged(const QString&);
   void flickerFieldWidthChanged( const int& width );
-  void flickerFieldTaktChanged( const int& takt );
+  void flickerFieldClockSettingChanged( const int& takt );
   
 private:
   Ui::chipTanDialog* ui;

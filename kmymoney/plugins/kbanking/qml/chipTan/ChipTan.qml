@@ -53,21 +53,21 @@ Rectangle {
     
     function accelerateTransmission()
     {
-      chipTanFlickerField.userTaktLength =  chipTanFlickerField.taktLength - 20
+      chipTanFlickerField.userClockSetting =  chipTanFlickerField.clockSetting - 20
     }
     
     function decelerateTransmission()
     {
-      chipTanFlickerField.userTaktLength =  chipTanFlickerField.taktLength + 20
+      chipTanFlickerField.userClockSetting =  chipTanFlickerField.clockSetting + 20
     }
     
-    function setFlickerTakt( taktLength )
+    function setFlickerClockSetting( clockSetting )
     {
-      chipTanFlickerField.userTaktLength = taktLength;
+      chipTanFlickerField.userClockSetting = clockSetting;
     }
     
     signal flickerFieldWidthChanged( int width );
-    signal flickerFieldTaktChanged( int taktLength );
+    signal flickerFieldClockSettingChanged( int clockSetting );
     
     /*
     // Toolbar
@@ -139,9 +139,9 @@ Rectangle {
         width: Math.max( userWidth, minimumWidth )
         onWidthChanged: parent.flickerFieldWidthChanged(width);
         
-        property int userTaktLength: 100
-        taktLength: Math.min(Math.max(10, userTaktLength), 2000)
-        onTaktLengthChanged: parent.flickerFieldTaktChanged(taktLength);
+        property int userClockSetting: 100
+        clockSetting: Math.min(Math.max(10, userClockSetting), 2000)
+        onClockSettingChanged: parent.flickerFieldClockSettingChanged(clockSetting);
 
         MouseArea {
             id: resizeMouseArea
