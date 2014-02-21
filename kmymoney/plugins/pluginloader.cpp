@@ -28,14 +28,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kplugininfo.h>
-#include <ktrader.h>
-#include <kparts/componentfactory.h>
-#include <kdebug.h>
-#include <kdialog.h>
-#include <kconfig.h>
-#include <kpluginselector.h>
-#include <klocale.h>
+#include <KPluginInfo>
+#include <KPluginSelector>
 #include <KServiceTypeTrader>
 #include <KService>
 
