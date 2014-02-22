@@ -64,7 +64,7 @@ MyMoneyStorageANON::~MyMoneyStorageANON()
 
 void MyMoneyStorageANON::readFile(QIODevice* , IMyMoneySerialize*)
 {
-  throw new MYMONEYEXCEPTION("Cannot read a file through MyMoneyStorageANON!!");
+  throw MYMONEYEXCEPTION("Cannot read a file through MyMoneyStorageANON!!");
 }
 
 void MyMoneyStorageANON::writeUserInformation(QDomElement& userInfo)

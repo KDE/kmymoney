@@ -131,10 +131,9 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter* painter, const QStyleO
                                        schedulePaymentTypes,
                                        theDate,
                                        m_filterAccounts);
-    } catch (MyMoneyException* e) {
-      // SAfe to ignore here, cause no schedules might exist
+    } catch (const MyMoneyException &) {
+      // Safe to ignore here, cause no schedules might exist
       // for the selected account
-      delete e;
     }
 
     if (schedules.count() >= 1) {
@@ -208,10 +207,9 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter* painter, const QStyleO
           text += i18np("%1 Transfer.", "%1 Transfers.", transferSchedules.count());
         }
       }
-    } catch (MyMoneyException* e) {
-      // SAfe to ignore here, cause no schedules might exist
+    } catch (const MyMoneyException &) {
+      // Safe to ignore here, cause no schedules might exist
       // for the selected account
-      delete e;
     }
 
     bool anyOverdue = false;
@@ -364,10 +362,9 @@ void kMyMoneyScheduledDateTbl::mouseMoveEvent(QMouseEvent* e)
                                        MyMoneySchedule::STYPE_ANY,
                                        drawDate,
                                        m_filterAccounts);
-    } catch (MyMoneyException* e) {
-      // SAfe to ignore here, cause no schedules might exist
+    } catch (const MyMoneyException &) {
+      // Safe to ignore here, cause no schedules might exist
       // for the selected account
-      delete e;
     }
 
     if (schedules.count() >= 1) {

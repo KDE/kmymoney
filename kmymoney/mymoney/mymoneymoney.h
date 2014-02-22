@@ -245,7 +245,7 @@ inline MyMoneyMoney::MyMoneyMoney() :
 inline MyMoneyMoney::MyMoneyMoney(signed64 Amount, const signed64 denom)
 {
   if (!denom)
-    throw new MYMONEYEXCEPTION("Denominator 0 not allowed!");
+    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
 
   *this = AlkValue(QString("%1/%2").arg(Amount).arg(denom), _decimalSeparator);
 }
@@ -276,7 +276,7 @@ inline MyMoneyMoney::MyMoneyMoney(const double dAmount, const signed64 denom) :
 inline MyMoneyMoney::MyMoneyMoney(const int iAmount, const signed64 denom)
 {
   if (!denom)
-    throw new MYMONEYEXCEPTION("Denominator 0 not allowed!");
+    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
   *this = AlkValue(iAmount, denom);
 }
 
@@ -292,7 +292,7 @@ inline MyMoneyMoney::MyMoneyMoney(const int iAmount, const signed64 denom)
 inline MyMoneyMoney::MyMoneyMoney(const long int iAmount, const signed64 denom)
 {
   if (!denom)
-    throw new MYMONEYEXCEPTION("Denominator 0 not allowed!");
+    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
   *this = AlkValue(QString("%1/%2").arg(iAmount).arg(denom), _decimalSeparator);
 }
 

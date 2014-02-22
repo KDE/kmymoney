@@ -194,8 +194,7 @@ void InvestTransactionEditor::dissectTransaction(const MyMoneyTransaction& trans
   currency.setTradingSymbol("???");
   try {
     currency = file->security(transaction.commodity());
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 }
 
@@ -390,9 +389,8 @@ int InvestTransactionEditor::editSplits(const QString& categoryWidgetName, const
     try {
       d->m_phonyAccount.setCurrencyId(m_transaction.commodity());
       d->m_phonyAccount.fraction(MyMoneyFile::instance()->security(m_transaction.commodity()));
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &) {
       qDebug("Unable to setup precision");
-      delete e;
     }
 
     if (createPseudoTransaction(transaction, splits)) {

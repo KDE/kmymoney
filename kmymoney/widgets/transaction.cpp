@@ -780,9 +780,8 @@ StdTransaction::StdTransaction(Register *parent, const MyMoneyTransaction& trans
         setupFormHeader(m_transaction.splitByAccount(m_split.accountId(), false).accountId());
         break;
     }
-  } catch (MyMoneyException *e) {
-    kDebug(2) << "Problem determining the category for transaction '" << m_transaction.id() << "'. Reason: " << e->what()  << "\n";
-    delete e;
+  } catch (const MyMoneyException &e) {
+    kDebug(2) << "Problem determining the category for transaction '" << m_transaction.id() << "'. Reason: " << e.what()  << "\n";
   }
   m_rowsForm = 6;
 

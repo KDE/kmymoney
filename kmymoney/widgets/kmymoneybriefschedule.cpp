@@ -150,8 +150,7 @@ void KMyMoneyBriefSchedule::loadSchedule()
       if (m_index == (m_scheduleList.count() - 1))
         m_nextButton->setEnabled(false);
     }
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 }
 

@@ -66,7 +66,7 @@ void MyMoneyForecast::doForecast()
   if (fAccCycle < 1
       || fCycles < 1
       || fDays < 1) {
-    throw new MYMONEYEXCEPTION("Illegal settings when calling doForecast. Settings must be higher than 0");
+    throw MYMONEYEXCEPTION("Illegal settings when calling doForecast. Settings must be higher than 0");
   }
 
   //initialize global variables
@@ -323,7 +323,7 @@ MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, i
 
   //validate arguments
   if (trendDays < 1) {
-    throw new MYMONEYEXCEPTION("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0");
+    throw MYMONEYEXCEPTION("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0");
   }
 
   //If it is a new account, we don't take into account the first day
@@ -716,11 +716,10 @@ void MyMoneyForecast::addScheduledTransactions(void)
           }
           (*it).setLastPayment(date);
 
-        } catch (MyMoneyException* e) {
-          kDebug(2) << Q_FUNC_INFO << " Schedule " << (*it).id() << " (" << (*it).name() << "): " << e->what();
+        } catch (const MyMoneyException &e) {
+          kDebug(2) << Q_FUNC_INFO << " Schedule " << (*it).id() << " (" << (*it).name() << "): " << e.what();
 
           schedule.erase(it);
-          delete e;
         }
       } else {
         // remove schedule from list
@@ -985,7 +984,7 @@ void MyMoneyForecast::createBudget(MyMoneyBudget& budget, QDate historyStart, QD
   if (historyStart > historyEnd ||
       budgetStart > budgetEnd ||
       budgetStart <= historyEnd) {
-    throw new MYMONEYEXCEPTION("Illegal parameters when trying to create budget");
+    throw MYMONEYEXCEPTION("Illegal parameters when trying to create budget");
   }
 
   //get forecast method

@@ -69,12 +69,11 @@ void CsvWriter::write(const QString& filename,
       }
       emit signalProgress(-1, -1);
 
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &e) {
       QString errMsg = i18n("Unexpected exception '%1' thrown in %2, line %3 "
-                            "caught in MyMoneyCsvWriter::write()", e->what(), e->file(), e->line());
+                            "caught in MyMoneyCsvWriter::write()", e.what(), e.file(), e.line());
 
       KMessageBox::error(0, errMsg);
-      delete e;
     }
 
     csvFile.close();

@@ -55,9 +55,8 @@ LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
     Q_FOREACH(const MyMoneyInstitution &institution, list) {
       m_qcomboboxInstitutions->addItem(institution.name());
     }
-  } catch (MyMoneyException *e) {
-    qDebug("Exception in institution load: %s", qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    qDebug("Exception in institution load: %s", qPrintable(e.what()));
   }
 }
 
@@ -97,8 +96,7 @@ void LoanAttributesWizardPage::slotNewClicked()
       ft.commit();
       initializePage();
       m_qcomboboxInstitutions->setCurrentItem(institution.name(), false);
-    } catch (MyMoneyException *e) {
-      delete e;
+    } catch (const MyMoneyException &) {
       KMessageBox::information(this, i18n("Cannot add institution"));
     }
   }

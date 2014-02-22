@@ -441,8 +441,7 @@ void CsvUtil::previouslyUsedCategories(const QString& investmentAccount, QString
         interestId = interestSplits.first().accountId();
       }
     }
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 }
 
@@ -489,8 +488,7 @@ void CsvUtil::dissectTransaction(const MyMoneyTransaction& transaction, const My
   currency.setTradingSymbol("???");
   try {
     currency = file->security(transaction.commodity());
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 }
 
@@ -622,9 +620,8 @@ void CsvUtil::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAc
       file->createOpeningBalanceTransaction(newAccount, openingBal);
 
     ft.commit();
-  } catch (MyMoneyException *e) {
-    KMessageBox::information(0, i18n("Unable to add account: %1", e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::information(0, i18n("Unable to add account: %1", e.what()));
   }
 }
 

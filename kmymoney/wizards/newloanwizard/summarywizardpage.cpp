@@ -71,12 +71,11 @@ void SummaryWizardPage::initializePage()
   try {
     QStringList sel = field("interestAccountEdit").toStringList();
     if (sel.count() != 1)
-      throw new MYMONEYEXCEPTION("Need a single selected interest category");
+      throw MYMONEYEXCEPTION("Need a single selected interest category");
     MyMoneyAccount acc = MyMoneyFile::instance()->account(sel.first());
     m_summaryInterestCategory->setText(acc.name());
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &) {
     qWarning("Unable to determine interest category for loan account creation");
-    delete e;
   }
   m_summaryAdditionalFees->setText(field("additionalCost").toString());
   m_summaryTotalPeriodicPayment->setText(field("periodicPayment").toString());
@@ -85,12 +84,11 @@ void SummaryWizardPage::initializePage()
   try {
     QStringList sel = field("paymentAccountEdit").toStringList();
     if (sel.count() != 1)
-      throw new MYMONEYEXCEPTION("Need a single selected payment account");
+      throw MYMONEYEXCEPTION("Need a single selected payment account");
     MyMoneyAccount acc = MyMoneyFile::instance()->account(sel.first());
     m_summaryPaymentAccount->setText(acc.name());
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &) {
     qWarning("Unable to determine payment account for loan account creation");
-    delete e;
   }
 
 }

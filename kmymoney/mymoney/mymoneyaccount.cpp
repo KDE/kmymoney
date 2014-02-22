@@ -61,7 +61,7 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
     m_fraction(-1)
 {
   if ("ACCOUNT" != node.tagName())
-    throw new MYMONEYEXCEPTION("Node was not ACCOUNT");
+    throw MYMONEYEXCEPTION("Node was not ACCOUNT");
 
   setName(node.attribute("name"));
 
@@ -102,7 +102,7 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
   if (node.hasAttribute("openingbalance")) {
     if (!MyMoneyMoney(node.attribute("openingbalance")).isZero()) {
       QString msg = i18n("Account %1 contains an opening balance. Please use KMyMoney version 0.8 or later and earlier than version 0.9 to correct the problem.", m_name);
-      throw new MYMONEYEXCEPTION(msg);
+      throw MYMONEYEXCEPTION(msg);
     }
   }
   setDescription(node.attribute("description"));

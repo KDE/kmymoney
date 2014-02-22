@@ -294,9 +294,8 @@ void KMyMoneyPriceDlg::slotDeletePrice(void)
           MyMoneyFile::instance()->removePrice((*price_it)->data(0, Qt::UserRole).value<MyMoneyPrice>());
         }
         ft.commit();
-      } catch (MyMoneyException *e) {
+      } catch (const MyMoneyException &) {
         qDebug("Cannot delete price");
-        delete e;
       }
     }
   }

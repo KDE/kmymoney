@@ -177,8 +177,8 @@ void PivotTable::init(void)
   m_config_f.setConsiderCategory(true);
   try {
     transactions = file->transactionList(m_config_f);
-  } catch (MyMoneyException *e) {
-    qDebug("ERR: %s thrown in %s(%ld)", qPrintable(e->what()), qPrintable(e->file()), e->line());
+  } catch (const MyMoneyException &e) {
+    qDebug("ERR: %s thrown in %s(%ld)", qPrintable(e.what()), qPrintable(e.file()), e.line());
     throw e;
   }
   DEBUG_OUTPUT(QString("Found %1 matching transactions").arg(transactions.count()));
@@ -465,9 +465,9 @@ void PivotTable::accumulateColumn(int destcolumn, int sourcecolumn)
       PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
       while (it_row != (*it_innergroup).end()) {
         if ((*it_row)[eActual].count() <= sourcecolumn)
-          throw new MYMONEYEXCEPTION(QString("Sourcecolumn %1 out of grid range (%2) in PivotTable::accumulateColumn").arg(sourcecolumn).arg((*it_row)[eActual].count()));
+          throw MYMONEYEXCEPTION(QString("Sourcecolumn %1 out of grid range (%2) in PivotTable::accumulateColumn").arg(sourcecolumn).arg((*it_row)[eActual].count()));
         if ((*it_row)[eActual].count() <= destcolumn)
-          throw new MYMONEYEXCEPTION(QString("Destcolumn %1 out of grid range (%2) in PivotTable::accumulateColumn").arg(sourcecolumn).arg((*it_row)[eActual].count()));
+          throw MYMONEYEXCEPTION(QString("Destcolumn %1 out of grid range (%2) in PivotTable::accumulateColumn").arg(sourcecolumn).arg((*it_row)[eActual].count()));
 
         (*it_row)[eActual][destcolumn] += (*it_row)[eActual][sourcecolumn];
         ++it_row;
@@ -494,7 +494,7 @@ void PivotTable::clearColumn(int column)
       PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
       while (it_row != (*it_innergroup).end()) {
         if ((*it_row)[eActual].count() <= column)
-          throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::accumulateColumn").arg(column).arg((*it_row)[eActual].count()));
+          throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::accumulateColumn").arg(column).arg((*it_row)[eActual].count()));
 
         (*it_row++)[eActual][column] = PivotCell();
       }
@@ -678,7 +678,7 @@ void PivotTable::calculateRunningSums(PivotInnerGroup::iterator& it_row)
   int column = 1;
   while (column < m_numColumns) {
     if (it_row.value()[eActual].count() <= column)
-      throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateRunningSums").arg(column).arg(it_row.value()[eActual].count()));
+      throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateRunningSums").arg(column).arg(it_row.value()[eActual].count()));
 
     runningsum = it_row.value()[eActual][column].calculateRunningSum(runningsum);
 
@@ -703,7 +703,7 @@ void PivotTable::calculateRunningSums(void)
         int column = 1;
         while (column < m_numColumns) {
           if (it_row.value()[eActual].count() <= column)
-            throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateRunningSums").arg(column).arg(it_row.value()[eActual].count()));
+            throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateRunningSums").arg(column).arg(it_row.value()[eActual].count()));
 
           runningsum = (it_row.value()[eActual][column] += runningsum);
 
@@ -723,7 +723,7 @@ MyMoneyMoney PivotTable::cellBalance(const QString& outergroup, const ReportAcco
 {
   if (m_runningSumsCalculated) {
     qDebug("You must not call PivotTable::cellBalance() after calling PivotTable::calculateRunningSums()");
-    throw new MYMONEYEXCEPTION(QString("You must not call PivotTable::cellBalance() after calling PivotTable::calculateRunningSums()"));
+    throw MYMONEYEXCEPTION(QString("You must not call PivotTable::cellBalance() after calling PivotTable::calculateRunningSums()"));
   }
 
   // for budget reports, if this is the actual value, map it to the account which
@@ -747,9 +747,9 @@ MyMoneyMoney PivotTable::cellBalance(const QString& outergroup, const ReportAcco
   QString innergroup(row.topParentName());
 
   if (m_numColumns <= _column)
-    throw new MYMONEYEXCEPTION(QString("Column %1 out of m_numColumns range (%2) in PivotTable::cellBalance").arg(_column).arg(m_numColumns));
+    throw MYMONEYEXCEPTION(QString("Column %1 out of m_numColumns range (%2) in PivotTable::cellBalance").arg(_column).arg(m_numColumns));
   if (m_grid[outergroup][innergroup][row][eActual].count() <= _column)
-    throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::cellBalance").arg(_column).arg(m_grid[outergroup][innergroup][row][eActual].count()));
+    throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::cellBalance").arg(_column).arg(m_grid[outergroup][innergroup][row][eActual].count()));
 
   MyMoneyMoney balance;
   if (budget)
@@ -760,7 +760,7 @@ MyMoneyMoney PivotTable::cellBalance(const QString& outergroup, const ReportAcco
   int column = 1;
   while (column < _column) {
     if (m_grid[outergroup][innergroup][row][eActual].count() <= column)
-      throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::cellBalance").arg(column).arg(m_grid[outergroup][innergroup][row][eActual].count()));
+      throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::cellBalance").arg(column).arg(m_grid[outergroup][innergroup][row][eActual].count()));
 
     balance = m_grid[outergroup][innergroup][row][eActual][column].cellBalance(balance);
 
@@ -975,7 +975,7 @@ void PivotTable::convertToBaseCurrency(void)
         int column = 1;
         while (column < m_numColumns) {
           if (it_row.value()[eActual].count() <= column)
-            throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::convertToBaseCurrency").arg(column).arg(it_row.value()[eActual].count()));
+            throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::convertToBaseCurrency").arg(column).arg(it_row.value()[eActual].count()));
 
           QDate valuedate = columnDate(column);
 
@@ -1020,7 +1020,7 @@ void PivotTable::convertToDeepCurrency(void)
         int column = 1;
         while (column < m_numColumns) {
           if (it_row.value()[eActual].count() <= column)
-            throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::convertToDeepCurrency").arg(column).arg(it_row.value()[eActual].count()));
+            throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::convertToDeepCurrency").arg(column).arg(it_row.value()[eActual].count()));
 
           QDate valuedate = columnDate(column);
 
@@ -1105,9 +1105,9 @@ void PivotTable::calculateTotals(void)
         while (column < m_numColumns) {
           for (int i = 0; i < m_rowTypeList.size(); ++i) {
             if (it_row.value()[ m_rowTypeList[i] ].count() <= column)
-              throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, row columns").arg(column).arg(it_row.value()[ m_rowTypeList[i] ].count()));
+              throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, row columns").arg(column).arg(it_row.value()[ m_rowTypeList[i] ].count()));
             if ((*it_innergroup).m_total[ m_rowTypeList[i] ].count() <= column)
-              throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, inner group totals").arg(column).arg((*it_innergroup).m_total[ m_rowTypeList[i] ].count()));
+              throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, inner group totals").arg(column).arg((*it_innergroup).m_total[ m_rowTypeList[i] ].count()));
 
             //calculate total
             MyMoneyMoney value = it_row.value()[ m_rowTypeList[i] ][column];
@@ -1127,9 +1127,9 @@ void PivotTable::calculateTotals(void)
       while (column < m_numColumns) {
         for (int i = 0; i < m_rowTypeList.size(); ++i) {
           if ((*it_innergroup).m_total[ m_rowTypeList[i] ].count() <= column)
-            throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, inner group totals").arg(column).arg((*it_innergroup).m_total[ m_rowTypeList[i] ].count()));
+            throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, inner group totals").arg(column).arg((*it_innergroup).m_total[ m_rowTypeList[i] ].count()));
           if ((*it_outergroup).m_total[ m_rowTypeList[i] ].count() <= column)
-            throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, outer group totals").arg(column).arg((*it_innergroup).m_total[ m_rowTypeList[i] ].count()));
+            throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, outer group totals").arg(column).arg((*it_innergroup).m_total[ m_rowTypeList[i] ].count()));
 
           //calculate totals
           MyMoneyMoney value = (*it_innergroup).m_total[ m_rowTypeList[i] ][column];
@@ -1151,7 +1151,7 @@ void PivotTable::calculateTotals(void)
     while (column < m_numColumns) {
       for (int i = 0; i < m_rowTypeList.size(); ++i) {
         if (m_grid.m_total[ m_rowTypeList[i] ].count() <= column)
-          throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, grid totals").arg(column).arg((*it_innergroup).m_total[ m_rowTypeList[i] ].count()));
+          throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::calculateTotals, grid totals").arg(column).arg((*it_innergroup).m_total[ m_rowTypeList[i] ].count()));
 
         //calculate actual totals
         MyMoneyMoney value = (*it_outergroup).m_total[ m_rowTypeList[i] ][column];
@@ -1178,7 +1178,7 @@ void PivotTable::calculateTotals(void)
   while (totalcolumn < m_numColumns) {
     for (int i = 0; i < m_rowTypeList.size(); ++i) {
       if (m_grid.m_total[ m_rowTypeList[i] ].count() <= totalcolumn)
-        throw new MYMONEYEXCEPTION(QString("Total column %1 out of grid range (%2) in PivotTable::calculateTotals, grid totals").arg(totalcolumn).arg(m_grid.m_total[ m_rowTypeList[i] ].count()));
+        throw MYMONEYEXCEPTION(QString("Total column %1 out of grid range (%2) in PivotTable::calculateTotals, grid totals").arg(totalcolumn).arg(m_grid.m_total[ m_rowTypeList[i] ].count()));
 
       //calculate actual totals
       MyMoneyMoney value = m_grid.m_total[ m_rowTypeList[i] ][totalcolumn];
@@ -1214,11 +1214,11 @@ void PivotTable::assignCell(const QString& outergroup, const ReportAccount& _row
   QString innergroup(row.topParentName());
 
   if (m_numColumns <= column)
-    throw new MYMONEYEXCEPTION(QString("Column %1 out of m_numColumns range (%2) in PivotTable::assignCell").arg(column).arg(m_numColumns));
+    throw MYMONEYEXCEPTION(QString("Column %1 out of m_numColumns range (%2) in PivotTable::assignCell").arg(column).arg(m_numColumns));
   if (m_grid[outergroup][innergroup][row][eActual].count() <= column)
-    throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::assignCell").arg(column).arg(m_grid[outergroup][innergroup][row][eActual].count()));
+    throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::assignCell").arg(column).arg(m_grid[outergroup][innergroup][row][eActual].count()));
   if (m_grid[outergroup][innergroup][row][eBudget].count() <= column)
-    throw new MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::assignCell").arg(column).arg(m_grid[outergroup][innergroup][row][eBudget].count()));
+    throw MYMONEYEXCEPTION(QString("Column %1 out of grid range (%2) in PivotTable::assignCell").arg(column).arg(m_grid[outergroup][innergroup][row][eBudget].count()));
 
   if (!stockSplit) {
     // Determine whether the value should be inverted before being placed in the row

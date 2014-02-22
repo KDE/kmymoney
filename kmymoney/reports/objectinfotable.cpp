@@ -102,7 +102,7 @@ void ObjectInfoTable::init(void)
       m_subtotal = "currentbalance";
       break;
     default:
-      throw new MYMONEYEXCEPTION("ObjectInfoTable::ObjectInfoTable(): unhandled row type");
+      throw MYMONEYEXCEPTION("ObjectInfoTable::ObjectInfoTable(): unhandled row type");
   }
 
   QString sort = m_group + ',' + m_columns + ",id,rank";
@@ -346,9 +346,8 @@ MyMoneyMoney ObjectInfoTable::investmentBalance(const MyMoneyAccount& acc)
       val = val * file->price(security.tradingCurrency(), accountCurrency.id()).rate(accountCurrency.id());
       val = val.convert(acc.fraction());
       value += val;
-    } catch (MyMoneyException* e) {
-      qWarning("%s", qPrintable(QString("cannot convert stock balance of %1 to base currency: %2").arg(stock.name(), e->what())));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      qWarning("%s", qPrintable(QString("cannot convert stock balance of %1 to base currency: %2").arg(stock.name(), e.what())));
     }
   }
   return value;

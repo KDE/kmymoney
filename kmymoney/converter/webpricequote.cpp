@@ -281,11 +281,10 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
         gotdate = true;
         kDebug(Private::dbgArea()) << "Date" << datestr;
         emit status(i18n("Date found: %1", d->m_date.toString()));;
-      } catch (MyMoneyException* e) {
-        // emit error(i18n("Unable to parse date %1 using format %2: %3").arg(datestr,dateparse.format(),e->what()));
+      } catch (const MyMoneyException &) {
+        // emit error(i18n("Unable to parse date %1 using format %2: %3").arg(datestr,dateparse.format(),e.what()));
         d->m_date = QDate::currentDate();
         gotdate = true;
-        delete e;
       }
     }
 
@@ -806,7 +805,7 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
 
   QRegExp formatrex("%([mdy]+)(\\W+)%([mdy]+)(\\W+)%([mdy]+)", Qt::CaseInsensitive);
   if (formatrex.indexIn(m_format) == -1) {
-    throw new MYMONEYEXCEPTION("Invalid format string");
+    throw MYMONEYEXCEPTION("Invalid format string");
   }
 
   QStringList formatParts;
@@ -834,7 +833,7 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
     inputrex.setPattern("(\\w+)\\W+(\\w+)\\W+(\\w+)");
 
   if (inputrex.indexIn(_in) == -1) {
-    throw new MYMONEYEXCEPTION("Invalid input string");
+    throw MYMONEYEXCEPTION("Invalid input string");
   }
 
   QStringList scannedParts;
@@ -859,7 +858,7 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
         if (digitrex.indexIn(*it_scanned) != -1)
           day = digitrex.cap(1).toUInt(&ok);
         if (!ok || day > 31)
-          throw new MYMONEYEXCEPTION(QString("Invalid day entry: %1").arg(*it_scanned));
+          throw MYMONEYEXCEPTION(QString("Invalid day entry: %1").arg(*it_scanned));
         break;
       case 'm':
         month = (*it_scanned).toUInt(&ok);
@@ -875,18 +874,18 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
         }
 
         if (month < 1 || month > 12)
-          throw new MYMONEYEXCEPTION(QString("Invalid month entry: %1").arg(*it_scanned));
+          throw MYMONEYEXCEPTION(QString("Invalid month entry: %1").arg(*it_scanned));
 
         break;
       case 'y':
         if (_strict && (*it_scanned).length() != (*it_format).length())
-          throw new MYMONEYEXCEPTION(QString("Length of year (%1) does not match expected length (%2).")
+          throw MYMONEYEXCEPTION(QString("Length of year (%1) does not match expected length (%2).")
                                      .arg(*it_scanned, *it_format));
 
         year = (*it_scanned).toUInt(&ok);
 
         if (!ok)
-          throw new MYMONEYEXCEPTION(QString("Invalid year entry: %1").arg(*it_scanned));
+          throw MYMONEYEXCEPTION(QString("Invalid year entry: %1").arg(*it_scanned));
 
         //
         // 2-digit year case
@@ -904,11 +903,11 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
         }
 
         if (year < 1900)
-          throw new MYMONEYEXCEPTION(QString("Invalid year (%1)").arg(year));
+          throw MYMONEYEXCEPTION(QString("Invalid year (%1)").arg(year));
 
         break;
       default:
-        throw new MYMONEYEXCEPTION("Invalid format character");
+        throw MYMONEYEXCEPTION("Invalid format character");
     }
 
     ++it_scanned;
@@ -916,7 +915,7 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
   }
   QDate result(year, month, day);
   if (! result.isValid())
-    throw new MYMONEYEXCEPTION(QString("Invalid date (yr%1 mo%2 dy%3)").arg(year).arg(month).arg(day));
+    throw MYMONEYEXCEPTION(QString("Invalid date (yr%1 mo%2 dy%3)").arg(year).arg(month).arg(day));
 
   return result;
 }

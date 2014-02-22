@@ -448,7 +448,7 @@ void XMLandback(MyMoneyReport& filter)
   if (readRCFfromXMLDoc(list, doc) && !list.isEmpty())
     filter = list[0];
   else
-    throw new MYMONEYEXCEPTION("Failed to load report from XML");
+    throw MYMONEYEXCEPTION("Failed to load report from XML");
 
   delete doc;
 

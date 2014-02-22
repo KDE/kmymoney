@@ -146,7 +146,7 @@ void MyMoneyDatabaseMgrTest::testCreateDb()
         m_canOpen = false;
       }
     }
-  } catch (MyMoneyException* e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -178,7 +178,7 @@ void MyMoneyDatabaseMgrTest::testDisconnection()
     ((QSqlDatabase*)(m->m_sql.data()))->close();
     QList<MyMoneyAccount> accList;
     m->accountList(accList);
-  } catch (MyMoneyException* e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -247,7 +247,7 @@ void MyMoneyDatabaseMgrTest::testSupportFunctions()
     QVERIFY(m->income().name() == "Income");
     QVERIFY(m->equity().name() == "Equity");
     QVERIFY(m->dirty() == false);
-  } catch (MyMoneyException* e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -309,8 +309,7 @@ void MyMoneyDatabaseMgrTest::testAccount()
   try {
     a = m->account("Unknown ID");
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
   QVERIFY(m->dirty() == false);
 
@@ -319,7 +318,7 @@ void MyMoneyDatabaseMgrTest::testAccount()
     a = m->account("A000001");
     QVERIFY(a.name() == "AccountName");
     QVERIFY(a.id() == "A000001");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -349,8 +348,7 @@ void MyMoneyDatabaseMgrTest::testAddNewAccount()
     MyMoneyAccount c("UnknownID", b);
     m->addAccount(c, a);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   QVERIFY(m->dirty() == false);
@@ -363,7 +361,7 @@ void MyMoneyDatabaseMgrTest::testAddNewAccount()
     QVERIFY(acc.accountList()[0] == "A000001");
     QVERIFY(acc.accountList().count() == 1);
     QVERIFY(m->asset().accountList().count() == 0);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -404,8 +402,7 @@ void MyMoneyDatabaseMgrTest::testInstitution()
   try {
     i = m->institution("Unknown ID");
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   QVERIFY(m->dirty() == false);
@@ -415,7 +412,7 @@ void MyMoneyDatabaseMgrTest::testInstitution()
     i = m->institution("I000001");
     QVERIFY(i.name() == "Inst Name");
     QVERIFY(m->dirty() == false);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -438,7 +435,7 @@ void MyMoneyDatabaseMgrTest::testAccount2Institution()
   try {
     i = m->institution("I000001");
     a = m->account("A000001");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -450,8 +447,7 @@ void MyMoneyDatabaseMgrTest::testAccount2Institution()
   try {
     m->modifyAccount(a);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   QVERIFY(m->dirty() == false);
@@ -464,7 +460,7 @@ void MyMoneyDatabaseMgrTest::testAccount2Institution()
     b = m->account("A000001");
     QVERIFY(b.institutionId() == i.id());
     QVERIFY(i.accountList().count() == 0);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -492,7 +488,7 @@ void MyMoneyDatabaseMgrTest::testModifyAccount()
     QVERIFY(b.parentAccountId() == a.parentAccountId());
     QVERIFY(b.name() == "New account name");
     QVERIFY(b.value("Key") == "Value");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -502,8 +498,7 @@ void MyMoneyDatabaseMgrTest::testModifyAccount()
   try {
     m->modifyAccount(c);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   // use different account type
@@ -513,8 +508,7 @@ void MyMoneyDatabaseMgrTest::testModifyAccount()
   try {
     m->modifyAccount(f);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   // use different parent
@@ -522,8 +516,7 @@ void MyMoneyDatabaseMgrTest::testModifyAccount()
   try {
     m->modifyAccount(c);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 }
 
@@ -543,7 +536,7 @@ void MyMoneyDatabaseMgrTest::testModifyInstitution()
     m->modifyInstitution(i);
     i = m->institution("I000001");
     QVERIFY(i.name() == "New inst name");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -552,8 +545,7 @@ void MyMoneyDatabaseMgrTest::testModifyInstitution()
   try {
     m->modifyInstitution(f);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 }
 
@@ -631,7 +623,7 @@ void MyMoneyDatabaseMgrTest::testReparentAccount()
     QVERIFY(m->expense().accountCount() == 2);
     QVERIFY(m->account(ex1.id()).accountCount() == 2);
     QVERIFY(ex3.parentAccountId() == ex1.id());
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -667,7 +659,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions()
     t1.addSplit(s);
 
     t1.setPostDate(QDate(2002, 5, 10));
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -681,7 +673,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions()
     QVERIFY(m->transactionCount() == 1);
     ch = m->account("A000006");
     QVERIFY(ch.value("Key") == "Value");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -716,7 +708,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions()
     t2.addSplit(s);
 
     t2.setPostDate(QDate(2002, 5, 9));
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
   m->setDirty();
@@ -762,7 +754,7 @@ void MyMoneyDatabaseMgrTest::testAddTransactions()
     ++it;
     QVERIFY(it == list.constEnd());
 
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -882,8 +874,7 @@ void MyMoneyDatabaseMgrTest::testRemoveBudget()
     budget = m->budgetByName("TestBudget");
     // exception should be thrown if budget not found.
     QVERIFY(false);
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
     QVERIFY(true);
   }
 }
@@ -938,7 +929,7 @@ void MyMoneyDatabaseMgrTest::testBalance()
 
     //qDebug ("Balance of A000006 is 88400 = %s", m->balance("A000006", QDate(2002,5,10)).toString().ascii());
     QVERIFY(m->balance("A000006", QDate(2002, 5, 10)) == MyMoneyMoney(88400, 100));
-  } catch (MyMoneyException* e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -987,7 +978,7 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction()
     QVERIFY(m->balance("A000004", QDate()) == MyMoneyMoney(11000, 100));
     QVERIFY(m->balance("A000006", QDate()) == MyMoneyMoney(100000 - 12600, 100));
     QVERIFY(m->totalBalance("A000001", QDate()) == MyMoneyMoney(1600, 100));
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1034,7 +1025,7 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction()
     ++it;
     QVERIFY(it == list.constEnd());
 
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1056,7 +1047,7 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction()
     t1.addSplit(s);
 
     t1.setPostDate(QDate(2002, 5, 10));
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1112,37 +1103,32 @@ void MyMoneyDatabaseMgrTest::testRemoveUnusedAccount()
   try {
     m->removeAccount(m->liability());
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   try {
     m->removeAccount(m->asset());
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   try {
     m->removeAccount(m->expense());
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   try {
     m->removeAccount(m->income());
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   // try to remove the account still attached to the institution
   try {
     m->removeAccount(a);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   // now really remove an account
@@ -1161,7 +1147,7 @@ void MyMoneyDatabaseMgrTest::testRemoveUnusedAccount()
     QVERIFY(m->accountCount() == 6);
     i = m->institution("I000001");
     QVERIFY(i.accountCount() == 0);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -1182,8 +1168,7 @@ void MyMoneyDatabaseMgrTest::testRemoveUsedAccount()
   try {
     m->removeAccount(a);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 }
 
@@ -1209,7 +1194,7 @@ void MyMoneyDatabaseMgrTest::testRemoveInstitution()
     a.setInstitutionId(i.id());
     m->modifyAccount(a);
     QVERIFY(i.accountCount() == 0);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1222,7 +1207,7 @@ void MyMoneyDatabaseMgrTest::testRemoveInstitution()
     a = m->account("A000006");
     QVERIFY(a.institutionId().isEmpty());
     QVERIFY(m->institutionCount() == 0);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -1244,7 +1229,7 @@ void MyMoneyDatabaseMgrTest::testRemoveTransaction()
   try {
     m->removeTransaction(t);
     QVERIFY(m->transactionCount() == 1);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -1334,7 +1319,7 @@ void MyMoneyDatabaseMgrTest::testAddPayee()
     QVERIFY(p.defaultAccountId() == p1.defaultAccountId());
 
     QVERIFY(p == p1);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1351,22 +1336,22 @@ void MyMoneyDatabaseMgrTest::testSetAccountName()
 
   try {
     m->setAccountName(STD_ACC_LIABILITY, "Verbindlichkeiten");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
   try {
     m->setAccountName(STD_ACC_ASSET, "Verm�gen");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
   try {
     m->setAccountName(STD_ACC_EXPENSE, "Ausgaben");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
   try {
     m->setAccountName(STD_ACC_INCOME, "Einnahmen");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1377,15 +1362,14 @@ void MyMoneyDatabaseMgrTest::testSetAccountName()
     QVERIFY(m->asset().name() == "Verm�gen");
     QVERIFY(m->expense().name() == "Ausgaben");
     QVERIFY(m->income().name() == "Einnahmen");
-  } catch (MyMoneyException* e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
   try {
     m->setAccountName("A000001", "New account name");
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 }
 
@@ -1409,7 +1393,7 @@ void MyMoneyDatabaseMgrTest::testModifyPayee()
     m->modifyPayee(p);
     p = m->payee("P000001");
     QVERIFY(p.name() == "New name");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -1432,7 +1416,7 @@ void MyMoneyDatabaseMgrTest::testRemovePayee()
     QVERIFY(m->payeeList().count() == 1);
     m->removePayee(p);
     QVERIFY(m->payeeList().count() == 0);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1450,8 +1434,7 @@ void MyMoneyDatabaseMgrTest::testRemovePayee()
   try {
     m->modifyTransaction(tr);
     QFAIL("Expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   // reset here, so that the
@@ -1462,7 +1445,7 @@ void MyMoneyDatabaseMgrTest::testRemovePayee()
   // check that it works when the payee exists
   try {
     m->modifyTransaction(tr);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1472,8 +1455,7 @@ void MyMoneyDatabaseMgrTest::testRemovePayee()
   try {
     m->removePayee(p);
     QFAIL("Expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
   QVERIFY(m->payeeList().count() == 1);
 }
@@ -1502,7 +1484,7 @@ void MyMoneyDatabaseMgrTest::testAddTag()
     QVERIFY(ta.tagColor().name() == ta1.tagColor().name());
     QVERIFY(ta.notes() == ta1.notes());
     QVERIFY(ta == ta1);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1528,7 +1510,7 @@ void MyMoneyDatabaseMgrTest::testModifyTag()
     m->modifyTag(ta);
     ta = m->tag("G000001");
     QVERIFY(ta.name() == "New name");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -1551,7 +1533,7 @@ void MyMoneyDatabaseMgrTest::testRemoveTag()
     QVERIFY(m->tagList().count() == 1);
     m->removeTag(ta);
     QVERIFY(m->tagList().count() == 0);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1571,8 +1553,7 @@ void MyMoneyDatabaseMgrTest::testRemoveTag()
   try {
     m->modifyTransaction(tr);
     QFAIL("Expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   // reset here, so that the
@@ -1583,7 +1564,7 @@ void MyMoneyDatabaseMgrTest::testRemoveTag()
   // check that it works when the tag exists
   try {
     m->modifyTransaction(tr);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1593,8 +1574,7 @@ void MyMoneyDatabaseMgrTest::testRemoveTag()
   try {
     m->removeTag(ta);
     QFAIL("Expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
   QVERIFY(m->tagList().count() == 1);
 }
@@ -1640,15 +1620,14 @@ void MyMoneyDatabaseMgrTest::testRemoveAccountFromTree()
     try {
       b = m->account(b.id());
       QFAIL("Exception expected");
-    } catch (MyMoneyException *e) {
-      delete e;
+    } catch (const MyMoneyException &e) {
     }
     QVERIFY(a.accountList().count() == 1);
     QVERIFY(m->account(a.accountList()[0]).name() == "Acc C");
 
     QVERIFY(c.accountList().count() == 0);
 
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -1672,7 +1651,7 @@ void MyMoneyDatabaseMgrTest::testPayeeName()
     p = m->payeeByName(name);
     QVERIFY(p.name() == "THB");
     QVERIFY(p.id() == "P000001");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1681,8 +1660,7 @@ void MyMoneyDatabaseMgrTest::testPayeeName()
   try {
     p = m->payeeByName(name);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 }
 
@@ -1705,7 +1683,7 @@ void MyMoneyDatabaseMgrTest::testTagName()
     ta = m->tagByName(name);
     QVERIFY(ta.name() == "THB");
     QVERIFY(ta.id() == "G000001");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1714,8 +1692,7 @@ void MyMoneyDatabaseMgrTest::testTagName()
   try {
     ta = m->tagByName(name);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 }
 
@@ -1848,7 +1825,7 @@ void MyMoneyDatabaseMgrTest::testAddSchedule()
     QVERIFY(schedule.id() == "SCH000001");
     MyMoneyFile::instance()->clearCache();
     QVERIFY(m->schedule("SCH000001").id() == "SCH000001");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1863,8 +1840,7 @@ void MyMoneyDatabaseMgrTest::testAddSchedule()
                              false);
     m->addSchedule(schedule);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   QVERIFY(m->scheduleList().count() == 1);
@@ -1890,8 +1866,7 @@ void MyMoneyDatabaseMgrTest::testAddSchedule()
 
     m->addSchedule(schedule);
     QFAIL("Exception expected, but not thrown");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
     // Exception caught as expected.
   }
 
@@ -1917,8 +1892,7 @@ void MyMoneyDatabaseMgrTest::testSchedule()
   try {
     m->schedule("SCH000002");
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 }
 
@@ -1939,8 +1913,7 @@ void MyMoneyDatabaseMgrTest::testModifySchedule()
   try {
     m->modifySchedule(sched);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   sched = m->schedule("SCH000001");
@@ -1951,7 +1924,7 @@ void MyMoneyDatabaseMgrTest::testModifySchedule()
     QVERIFY((*(m->scheduleList().begin())).name() == "New Sched-Name");
     QVERIFY((*(m->scheduleList().begin())).id() == "SCH000001");
 
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -1974,8 +1947,7 @@ void MyMoneyDatabaseMgrTest::testRemoveSchedule()
   try {
     m->removeSchedule(sched);
     QFAIL("Exception expected");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &e) {
   }
 
   sched = m->schedule("SCH000001");
@@ -1983,7 +1955,7 @@ void MyMoneyDatabaseMgrTest::testRemoveSchedule()
     m->removeSchedule(sched);
     QVERIFY(m->scheduleList().count() == 0);
 
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }
@@ -2080,7 +2052,7 @@ void MyMoneyDatabaseMgrTest::testScheduleList()
     m->addSchedule(schedule2);
     m->addSchedule(schedule3);
     m->addSchedule(schedule4);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -2176,7 +2148,7 @@ void MyMoneyDatabaseMgrTest::testAddCurrency()
     QVERIFY(m->currencyList().count() == 1);
     QVERIFY((*(m->currencyList().begin())).name() == "Euro");
     QVERIFY((*(m->currencyList().begin())).id() == "EUR");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -2184,9 +2156,8 @@ void MyMoneyDatabaseMgrTest::testAddCurrency()
   try {
     m->addCurrency(curr);
     QFAIL("Expected exception missing");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     QVERIFY(m->dirty() == false);
-    delete e;
   }
 }
 
@@ -2208,7 +2179,7 @@ void MyMoneyDatabaseMgrTest::testModifyCurrency()
     QVERIFY(m->currencyList().count() == 1);
     QVERIFY((*(m->currencyList().begin())).name() == "EURO");
     QVERIFY((*(m->currencyList().begin())).id() == "EUR");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -2218,9 +2189,8 @@ void MyMoneyDatabaseMgrTest::testModifyCurrency()
   try {
     m->modifyCurrency(unknownCurr);
     QFAIL("Expected exception missing");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     QVERIFY(m->dirty() == false);
-    delete e;
   }
 }
 
@@ -2239,7 +2209,7 @@ void MyMoneyDatabaseMgrTest::testRemoveCurrency()
   try {
     m->removeCurrency(curr);
     QVERIFY(m->currencyList().count() == 0);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
@@ -2249,9 +2219,8 @@ void MyMoneyDatabaseMgrTest::testRemoveCurrency()
   try {
     m->removeCurrency(unknownCurr);
     QFAIL("Expected exception missing");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     QVERIFY(m->dirty() == false);
-    delete e;
   }
 }
 
@@ -2273,16 +2242,15 @@ void MyMoneyDatabaseMgrTest::testCurrency()
     QVERIFY(m->dirty() == false);
     QVERIFY(newCurr.id() == curr.id());
     QVERIFY(newCurr.name() == curr.name());
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 
   try {
     m->currency("DEM");
     QFAIL("Expected exception missing");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     QVERIFY(m->dirty() == false);
-    delete e;
   }
 }
 
@@ -2307,7 +2275,7 @@ void MyMoneyDatabaseMgrTest::testCurrencyList()
     QVERIFY(m->currencyList().count() == 2);
     QVERIFY(m->currencyList().count() == 2);
     QVERIFY(m->dirty() == false);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
 }

@@ -369,14 +369,12 @@ displayed.  The following example shows how the macro is used:
   try {
     a = a / b;
     QFAIL("Expected exception missing!");
-  } catch (exception *e) {
-    delete e;
+  } catch (const exception &amp;e) {
   }
 
   try {
     a = a / a;
-  } catch (exception *e) {
-    delete e;
+  } catch (const exception &amp;e) {
     QFAIL("Unexpected exception!");
   }
   

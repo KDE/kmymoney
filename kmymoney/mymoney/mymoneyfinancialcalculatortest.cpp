@@ -141,40 +141,35 @@ void MyMoneyFinancialCalculatorTest::testNumPayments()
   try {
     m->numPayments();
     QFAIL("Missing expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   try {
     m->setPv(-80000.0);
     m->numPayments();
     QFAIL("Missing expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   try {
     m->setIr(12.0);
     m->numPayments();
     QFAIL("Missing expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   try {
     m->setPmt(7108.0);
     m->numPayments();
     QFAIL("Missing expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   try {
     m->setFv(0.0);
     m->numPayments();
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
-    delete e;
   }
 
   QVERIFY(qRound(m->m_npp) == 12);

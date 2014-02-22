@@ -645,9 +645,8 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         d->m_html += tmp;
       }
     }
-  } catch (MyMoneyException* e) {
-    qDebug("Unable to display schedule entry: %s", qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    qDebug("Unable to display schedule entry: %s", qPrintable(e.what()));
   }
 }
 
@@ -948,9 +947,8 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
         val = val * file->price(security.tradingCurrency(), accountCurrency.id()).rate(accountCurrency.id());
         val = val.convert(acc.fraction());
         value += val;
-      } catch (MyMoneyException* e) {
-        qWarning("%s", qPrintable(QString("cannot convert stock balance of %1 to base currency: %2").arg(stock.name(), e->what())));
-        delete e;
+      } catch (const MyMoneyException &e) {
+        qWarning("%s", qPrintable(QString("cannot convert stock balance of %1 to base currency: %2").arg(stock.name(), e.what())));
       }
     }
   }

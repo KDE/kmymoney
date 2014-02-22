@@ -151,9 +151,8 @@ MyMoneyTransaction KEnterScheduleDlg::transaction(void)
     if (d->m_schedule.type() == MyMoneySchedule::TYPE_LOANPAYMENT) {
       KMyMoneyUtils::calculateAutoLoan(d->m_schedule, t, QMap<QString, MyMoneyMoney>());
     }
-  } catch (MyMoneyException* e) {
-    KMessageBox::detailedError(this, i18n("Unable to load schedule details"), e->what());
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedError(this, i18n("Unable to load schedule details"), e.what());
   }
 
   t.clearId();

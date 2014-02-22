@@ -237,9 +237,8 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
         file->modifyAccount(m_account);
     }
     ft.commit();
-  } catch (MyMoneyException* e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to create all objects for the investment"), QString("%1 caugt in %2:%3").arg(e->what()).arg(e->file()).arg(e->line()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(0, i18n("Unable to create all objects for the investment"), QString("%1 caugt in %2:%3").arg(e.what()).arg(e.file()).arg(e.line()));
   }
 }
 

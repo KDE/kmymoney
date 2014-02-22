@@ -163,7 +163,7 @@ KSharedPtr<MyMoneyDbDriver> MyMoneyDbDriver::create(const QString& type)
     return KSharedPtr<MyMoneyDbDriver> (new MyMoneySybaseDriver());
   else if (type == "QSQLITE")
     return KSharedPtr<MyMoneyDbDriver> (new MyMoneySqlite3Driver());
-  else throw new MYMONEYEXCEPTION(QString("Unknown database driver type").arg(type));
+  else throw MYMONEYEXCEPTION(QString("Unknown database driver type").arg(type));
 }
 
 MyMoneyDbDriver::MyMoneyDbDriver()
@@ -638,7 +638,7 @@ const QStringList MyMoneyMysqlDriver::tables(QSql::TableType tt, const QSqlDatab
     case QSql::AllTables:
       selectString = QString("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '%1'").arg(db.databaseName());
       if (!q.exec(selectString)) {
-        throw new MYMONEYEXCEPTION("select names failed in mymoneydbdriver.cpp");
+        throw MYMONEYEXCEPTION("select names failed in mymoneydbdriver.cpp");
       }
       while (q.next())
         tableList.append(q.value(0).toString());

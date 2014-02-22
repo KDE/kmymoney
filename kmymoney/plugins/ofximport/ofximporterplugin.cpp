@@ -700,9 +700,8 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
         dlg->exec();
       delete dlg;
     }
-  } catch (MyMoneyException *e) {
-    KMessageBox::information(0 , i18n("Error connecting to bank: %1", e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::information(0 , i18n("Error connecting to bank: %1", e.what()));
   }
 
   return false;

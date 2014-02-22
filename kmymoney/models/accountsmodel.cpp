@@ -248,9 +248,8 @@ public:
         prices += m_file->price(account.currencyId(), m_file->baseCurrency().id());
       }
 
-    } catch (MyMoneyException *e) {
-      kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << account.name() << "[" << account.id() << "]: " << e->what();
-      delete e;
+    } catch (const MyMoneyException &e) {
+      kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << account.name() << "[" << account.id() << "]: " << e.what();
     }
 
     MyMoneyMoney value = balance;

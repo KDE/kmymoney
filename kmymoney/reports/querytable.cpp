@@ -335,7 +335,7 @@ void QueryTable::init(void)
       m_group = "institution,topaccount";
       break;
     default:
-      throw new MYMONEYEXCEPTION("QueryTable::QueryTable(): unhandled row type");
+      throw MYMONEYEXCEPTION("QueryTable::QueryTable(): unhandled row type");
   }
 
   QString sort = m_group + ',' + m_columns + ",id,rank";

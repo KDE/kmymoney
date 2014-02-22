@@ -79,7 +79,7 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
     MyMoneyObject(node)
 {
   if ("SCHEDULED_TX" != node.tagName())
-    throw new MYMONEYEXCEPTION("Node was not SCHEDULED_TX");
+    throw MYMONEYEXCEPTION("Node was not SCHEDULED_TX");
 
   m_name = node.attribute("name");
   m_startDate = stringToDate(node.attribute("startDate"));
@@ -99,7 +99,7 @@ MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
   // read in the associated transaction
   QDomNodeList nodeList = node.elementsByTagName("TRANSACTION");
   if (nodeList.count() == 0)
-    throw new MYMONEYEXCEPTION("SCHEDULED_TX has no TRANSACTION node");
+    throw MYMONEYEXCEPTION("SCHEDULED_TX has no TRANSACTION node");
 
   setTransaction(MyMoneyTransaction(nodeList.item(0).toElement(), false), true);
 
@@ -351,37 +351,37 @@ void MyMoneySchedule::validate(bool id_check) const
    *   the transaction must contain at least one split (two is better ;-)  )
    */
   if (id_check && !m_id.isEmpty())
-    throw new MYMONEYEXCEPTION("ID for schedule not empty when required");
+    throw MYMONEYEXCEPTION("ID for schedule not empty when required");
 
   if (m_occurrence == OCCUR_ANY)
-    throw new MYMONEYEXCEPTION("Invalid occurrence type for schedule");
+    throw MYMONEYEXCEPTION("Invalid occurrence type for schedule");
 
   if (m_type == TYPE_ANY)
-    throw new MYMONEYEXCEPTION("Invalid type for schedule");
+    throw MYMONEYEXCEPTION("Invalid type for schedule");
 
   if (!nextDueDate().isValid())
-    throw new MYMONEYEXCEPTION("Invalid next due date for schedule");
+    throw MYMONEYEXCEPTION("Invalid next due date for schedule");
 
   if (m_paymentType == STYPE_ANY)
-    throw new MYMONEYEXCEPTION("Invalid payment type for schedule");
+    throw MYMONEYEXCEPTION("Invalid payment type for schedule");
 
   if (m_transaction.splitCount() == 0)
-    throw new MYMONEYEXCEPTION("Scheduled transaction does not contain splits");
+    throw MYMONEYEXCEPTION("Scheduled transaction does not contain splits");
 
   // Check the payment types
   switch (m_type) {
     case TYPE_BILL:
       if (m_paymentType == STYPE_DIRECTDEPOSIT || m_paymentType == STYPE_MANUALDEPOSIT)
-        throw new MYMONEYEXCEPTION("Invalid payment type for bills");
+        throw MYMONEYEXCEPTION("Invalid payment type for bills");
       break;
 
     case TYPE_DEPOSIT:
       if (m_paymentType == STYPE_DIRECTDEBIT || m_paymentType == STYPE_WRITECHEQUE)
-        throw new MYMONEYEXCEPTION("Invalid payment type for deposits");
+        throw MYMONEYEXCEPTION("Invalid payment type for deposits");
       break;
 
     case TYPE_ANY:
-      throw new MYMONEYEXCEPTION("Invalid type ANY");
+      throw MYMONEYEXCEPTION("Invalid type ANY");
       break;
 
     case TYPE_TRANSFER:
@@ -634,9 +634,8 @@ MyMoneyAccount MyMoneySchedule::account(int cnt) const
 
       if (!cnt)
         return acc;
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &) {
       qWarning("Schedule '%s' references unknown account '%s'", qPrintable(id()),   qPrintable((*it).accountId()));
-      delete e;
       return MyMoneyAccount();
     }
   }

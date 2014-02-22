@@ -169,8 +169,7 @@ void KReportsView::KReportTab::updateReport(void)
     // Don't try to reload default reports from the engine
     if (!m_report.id().isEmpty())
       m_report = MyMoneyFile::instance()->report(m_report.id());
-  } catch (MyMoneyException* e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   delete m_table;
@@ -717,9 +716,8 @@ void KReportsView::slotSaveView(void)
         try {
           tab->saveAs(newName, d->fSavProps->includeCssCheckBox->isEnabled()
                       && d->fSavProps->includeCssCheckBox->isChecked());
-        } catch (MyMoneyException* e) {
-          KMessageBox::error(this, i18n("Failed to save: %1", e->what()));
-          delete e;
+        } catch (const MyMoneyException &e) {
+          KMessageBox::error(this, i18n("Failed to save: %1", e.what()));
         }
       }
     }
@@ -799,9 +797,8 @@ void KReportsView::slotConfigure(void)
 
         addReportTab(newreport);
       }
-    } catch (MyMoneyException* e) {
-      KMessageBox::error(this, i18n("Failed to configure report: %1", e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::error(this, i18n("Failed to configure report: %1", e.what()));
     }
   }
   delete dlg;
@@ -855,16 +852,14 @@ void KReportsView::slotDuplicate(void)
       // this is done in loadView
 
       addReportTab(newReport);
-    } catch (MyMoneyException* e) {
-      QString error = i18n("Cannot add report, reason: \"%1\"", e->what());
+    } catch (const MyMoneyException &e) {
+      QString error = i18n("Cannot add report, reason: \"%1\"", e.what());
 
       // write to messagehandler
       qWarning() << cm << error;
 
       // also inform user
       KMessageBox::error(m_reportTabWidget, error, i18n("Critical Error"));
-
-      delete e;
     }
   }
   delete dlg;

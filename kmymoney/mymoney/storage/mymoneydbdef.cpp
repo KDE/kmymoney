@@ -591,7 +591,7 @@ int MyMoneyDbTable::fieldNumber(const QString& name) const
 {
   QHash<QString, int>::ConstIterator i = m_fieldOrder.find(name);
   if (m_fieldOrder.constEnd() == i) {
-    throw new MYMONEYEXCEPTION(QString("Unknown field %1 in table %2").arg(name).arg(m_name));
+    throw MYMONEYEXCEPTION(QString("Unknown field %1 in table %2").arg(name).arg(m_name));
   }
   return i.value();
 }

@@ -506,9 +506,8 @@ void kMyMoneySplitTable::slotUpdateData(const MyMoneyTransaction& t)
     if (!(*it).accountId().isEmpty()) {
       try {
         colText = MyMoneyFile::instance()->accountToCategory((*it).accountId());
-      } catch (MyMoneyException *e) {
+      } catch (const MyMoneyException &) {
         qDebug("Unexpected exception in kMyMoneySplitTable::slotUpdateData()");
-        delete e;
       }
     }
     QString amountTxt = value.formatMoney(m_account.fraction());
@@ -596,9 +595,8 @@ void kMyMoneySplitTable::slotDuplicateSplit(void)
     try {
       m_transaction.addSplit(split);
       emit transactionChanged(m_transaction);
-    } catch (MyMoneyException *e) {
-      qDebug("Cannot duplicate split: %s", qPrintable(e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      qDebug("Cannot duplicate split: %s", qPrintable(e.what()));
     }
   }
 }
@@ -622,9 +620,8 @@ void kMyMoneySplitTable::slotDeleteSplit(void)
         else
           selectRow(m_currentRow);
         emit transactionChanged(m_transaction);
-      } catch (MyMoneyException *e) {
-        qDebug("Cannot remove split: %s", qPrintable(e->what()));
-        delete e;
+      } catch (const MyMoneyException &e) {
+        qDebug("Cannot remove split: %s", qPrintable(e.what()));
       }
     }
   }
@@ -740,9 +737,8 @@ void kMyMoneySplitTable::endEdit(bool keyBoardDriven)
         m_transaction.modifySplit(m_split);
       }
       emit transactionChanged(m_transaction);
-    } catch (MyMoneyException *e) {
-      qDebug("Cannot add/modify split: %s", qPrintable(e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      qDebug("Cannot add/modify split: %s", qPrintable(e.what()));
     }
   }
   this->setFocus();

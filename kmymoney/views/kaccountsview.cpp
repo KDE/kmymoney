@@ -405,9 +405,8 @@ void KAccountsView::slotOpenObject(QListWidgetItem* item)
       a.setValue("kmm-iconpos", point(p->pos()));
       try {
         MyMoneyFile::instance()->modifyAccount(a);
-      } catch (MyMoneyException* e) {
-        kDebug(2) << "Unable to update icon pos: " << e->what();
-        delete e;
+      } catch (const MyMoneyException &e) {
+        kDebug(2) << "Unable to update icon pos: " << e.what();
       }
     }
   }

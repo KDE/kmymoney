@@ -547,10 +547,9 @@ bool MyMoneyQifReader::finishImport(void)
     }
     if (rc)
       ft.commit();
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     KMessageBox::detailedSorry(0, i18n("Unable to add transactions"),
-                               i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-    delete e;
+                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     rc = false;
   }
 #endif
@@ -705,13 +704,12 @@ void MyMoneyQifReader::processQifEntry(void)
         kDebug(2) << "Line " << m_linenumber << ": EntryType " << m_entryType << " not yet implemented!";
         break;
     }
-  } catch (MyMoneyException *e) {
-    if (e->what() != "USERABORT") {
-      kDebug(2) << "Line " << m_linenumber << ": Unhandled error: " << e->what();
+  } catch (const MyMoneyException &e) {
+    if (e.what() != "USERABORT") {
+      kDebug(2) << "Line " << m_linenumber << ": Unhandled error: " << e.what();
     } else {
       m_userAbort = true;
     }
-    delete e;
   }
 }
 
@@ -1008,12 +1006,11 @@ void MyMoneyQifReader::createOpeningBalance(MyMoneyAccount::_accountTypeE accTyp
 
     // remember which account we created
     d->st.m_accountId = m_account.id();
-  } catch (MyMoneyException* e) {
+  } catch (const MyMoneyException &e) {
     KMessageBox::detailedError(0,
                                i18n("Error while creating opening balance transaction"),
-                               QString("%1(%2):%3").arg(e->file()).arg(e->line()).arg(e->what()),
+                               QString("%1(%2):%3").arg(e.file()).arg(e.line()).arg(e.what()),
                                i18n("File access error"));
-    delete e;
   }
 }
 
@@ -1087,7 +1084,7 @@ void MyMoneyQifReader::processTransactionEntry(void)
         break;
 
       case KMessageBox::Cancel:
-        throw new MYMONEYEXCEPTION("USERABORT");
+        throw MYMONEYEXCEPTION("USERABORT");
         break;
     }
   }
@@ -1193,10 +1190,9 @@ void MyMoneyQifReader::processTransactionEntry(void)
           accountId.clear();
         }
 
-      } catch (MyMoneyException *e) {
+      } catch (const MyMoneyException &) {
         kDebug(0) << "Line " << m_linenumber << ": Account with id " << accountId.data() << " not found";
         accountId.clear();
-        delete e;
       }
     }
 
@@ -1241,10 +1237,9 @@ void MyMoneyQifReader::processTransactionEntry(void)
             accountId.clear();
           }
 
-        } catch (MyMoneyException *e) {
+        } catch (const MyMoneyException &) {
           kDebug(0) << "Line " << m_linenumber << ": Account with id " << accountId.data() << " not found";
           accountId.clear();
-          delete e;
         }
       }
       if (!accountId.isEmpty()) {
@@ -1317,7 +1312,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
         break;
 
       case KMessageBox::Cancel:
-        throw new MYMONEYEXCEPTION("USERABORT");
+        throw MYMONEYEXCEPTION("USERABORT");
         break;
     }
   }
@@ -2096,10 +2091,9 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
       delete accountSelect;
       return;
 
-    } catch (MyMoneyException *e) {
-      const QString message(i18n("Account \"%1\" disappeared: %2", account.name(), e->what()));
+    } catch (const MyMoneyException &e) {
+      const QString message(i18n("Account \"%1\" disappeared: %2", account.name(), e.what()));
       KMessageBox::error(0, message);
-      delete e;
     }
   }
 
@@ -2201,7 +2195,7 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
           }
 
         } else if (accountSelect->aborted())
-          throw new MYMONEYEXCEPTION("USERABORT");
+          throw MYMONEYEXCEPTION("USERABORT");
 
         if (typeStr == i18n("account")) {
           KMessageBox::error(0, i18n("You must select or create an account."));

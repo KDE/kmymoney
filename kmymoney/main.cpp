@@ -179,9 +179,9 @@ int main(int argc, char *argv[])
   } else {
     try {
       rc = runKMyMoney(a, splash);
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &e) {
       KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"),
-                                 i18n("%1 in file %2 line %3", e->what(), e->file(), e->line()));
+                                 i18n("%1 in file %2 line %3", e.what(), e.file(), e.line()));
       throw e;
     }
   }

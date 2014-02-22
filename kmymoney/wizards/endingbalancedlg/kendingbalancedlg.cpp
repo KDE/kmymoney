@@ -143,8 +143,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
       MyMoneyPayee payee = MyMoneyFile::instance()->payeeByName(inst.name());
       setField("payeeEdit", payee.id());
     }
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   KMyMoneyUtils::updateWizardButtons(this);
@@ -356,9 +355,8 @@ bool KEndingBalanceDlg::createTransaction(MyMoneyTransaction &t, const int sign,
     s2.setShares(shares);
     t.modifySplit(s2);
 
-  } catch (MyMoneyException *e) {
-    qDebug("%s", qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    qDebug("%s", qPrintable(e.what()));
     t = MyMoneyTransaction();
     return false;
   }

@@ -272,9 +272,8 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2004-11-01") == -(moChild) * 3);
     QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + " Week of 2005-08-29") == -moParent2);
     QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
-  } catch (MyMoneyException *e) {
-    QFAIL(qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    QFAIL(qPrintable(e.what()));
   }
 
   // Test querytable::TableRow::operator> and operator==
@@ -415,9 +414,8 @@ void QueryTableTest::testAccountQuery()
     QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + ' ' + i18n("Checking")) == moCheckingOpen - moSolo*3);
     QVERIFY(searchHTML(html, i18nc("Total balance", "Total") + ' ' + i18n("Credit Card")) == moCreditOpen - (moParent1 + moParent2 + moChild) * 3);
     QVERIFY(searchHTML(html, i18nc("Grand total balance", "Grand Total")) == moCheckingOpen + moCreditOpen - (moParent1 + moParent2 + moSolo + moChild) * 3);
-  } catch (MyMoneyException *e) {
-    QFAIL(qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    QFAIL(qPrintable(e.what()));
   }
 }
 
@@ -587,9 +585,8 @@ void QueryTableTest::testInvestment(void)
     invhold.dump("invhold.html", "<html><head></head><body>%1</body></html>");
 #endif
 
-  } catch (MyMoneyException *e) {
-    QFAIL(qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    QFAIL(qPrintable(e.what()));
   }
 }
 //this is to prevent me from making mistakes again when modifying balances - asoliverez
@@ -638,9 +635,8 @@ void QueryTableTest::testBalanceColumn()
     QVERIFY(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-702.36</td></tr>") > 0);
     QVERIFY(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-705.69</td></tr>") > 0);
 
-  } catch (MyMoneyException *e) {
-    QFAIL(qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    QFAIL(qPrintable(e.what()));
   }
 
 }
@@ -722,9 +718,8 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
     // after a transfer of 100 the balance should be 304.00
     QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000006>" + closingDateString + "</a></td><td class=\"left\"></td><td class=\"left\">Test Payee</td><td class=\"left\">Transfer from Credit Card</td><td class=\"value\">&nbsp;100.00</td><td>&nbsp;304.00</td></tr>") > 0);
 
-  } catch (MyMoneyException *e) {
-    QFAIL(qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    QFAIL(qPrintable(e.what()));
   }
 
 }
@@ -753,9 +748,8 @@ void QueryTableTest::testTaxReport()
 
     QString html = qtbl_3.renderBody();
     QVERIFY(rows.count() == 1);
-  } catch (MyMoneyException *e) {
-    QFAIL(qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    QFAIL(qPrintable(e.what()));
   }
 }
 

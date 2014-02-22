@@ -236,9 +236,8 @@ void KTagsView::slotRenameTag(QListWidgetItem* ta)
           ta->setText(m_tag.name());
           return;
         }
-      } catch (MyMoneyException *e) {
+      } catch (const MyMoneyException &) {
         // all ok, the name is unique
-        delete e;
       }
 
       m_tag.setName(new_name);
@@ -255,10 +254,9 @@ void KTagsView::slotRenameTag(QListWidgetItem* ta)
 
       ft.commit();
 
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(0, i18n("Unable to modify tag"),
-                                 i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-      delete e;
+                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   } else {
     ta->setText(new_name);
@@ -360,11 +358,10 @@ void KTagsView::slotSelectTag(void)
 
     showTransactions();
 
-  } catch (MyMoneyException *e) {
-    qDebug("exception during display of tag: %s at %s:%ld", qPrintable(e->what()), qPrintable(e->file()), e->line());
+  } catch (const MyMoneyException &e) {
+    qDebug("exception during display of tag: %s at %s:%ld", qPrintable(e.what()), qPrintable(e.file()), e.line());
     m_register->clear();
     m_tag = MyMoneyTag();
-    delete e;
   }
   m_allowEditing = true;
 }
@@ -485,10 +482,9 @@ void KTagsView::slotUpdateTag(void)
       MyMoneyFile::instance()->modifyTag(m_tag);
       ft.commit();
 
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(0, i18n("Unable to modify tag"),
-                                 i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-      delete e;
+                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   }
 }
@@ -644,9 +640,8 @@ void KTagsView::slotSelectTagAndTransaction(const QString& tagId, const QString&
         break;
       }
     }
-  } catch (MyMoneyException *e) {
-    qWarning("Unexpected exception in KTagsView::slotSelectTagAndTransaction");
-    delete e;
+  } catch (const MyMoneyException &e) {
+    qWarning("Unexpected exception in KTagsView::slotSelectTagAndTransaction %s", qPrintable(e.what()));
   }
 }
 

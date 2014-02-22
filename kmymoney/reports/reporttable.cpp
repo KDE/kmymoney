@@ -121,16 +121,14 @@ QString reports::ReportTable::renderHTML(QWidget* widget,
   try {
     //this method is implemented by each concrete class
     html += renderBody();
-  } catch (MyMoneyException *e) {
-    kDebug(2) << "reports::ReportTable::renderHTML(): ERROR " << e->what();
+  } catch (const MyMoneyException &e) {
+    kDebug(2) << "reports::ReportTable::renderHTML(): ERROR " << e.what();
 
-    QString error = i18n("There was an error creating your report: \"%1\".\nPlease report this error to the developer's list: kmymoney-devel@kde.org", e->what());
+    QString error = i18n("There was an error creating your report: \"%1\".\nPlease report this error to the developer's list: kmymoney-devel@kde.org", e.what());
 
     KMessageBox::error(widget, error, i18n("Critical Error"));
 
     html += "<h1>" + i18n("Unable to generate report") + "</h1><p>" + error + "</p>";
-
-    delete e;
   }
 
   //this renders a common footer

@@ -714,8 +714,7 @@ void KGlobalLedgerView::loadView(void)
     updateSummaryLine(actBalance, clearedBalance);
     kmymoney->slotStatusProgressBar(-1, -1);
 
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     m_account = MyMoneyAccount();
     clear();
   }
@@ -845,8 +844,7 @@ void KGlobalLedgerView::loadAccounts(void)
   if (!m_account.id().isEmpty()) {
     try {
       m_account = file->account(m_account.id());
-    } catch (MyMoneyException *e) {
-      delete e;
+    } catch (const MyMoneyException &) {
       m_account = MyMoneyAccount();
       return;
     }
@@ -898,9 +896,8 @@ void KGlobalLedgerView::loadAccounts(void)
     d->m_accountComboBox->setSelected(m_account.id());
     try {
       d->m_precision = MyMoneyMoney::denomToPrec(m_account.fraction());
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &) {
       qDebug("Security %s for account %s not found", qPrintable(m_account.currencyId()), qPrintable(m_account.name()));
-      delete e;
       d->m_precision = 2;
     }
   }
@@ -1010,9 +1007,8 @@ bool KGlobalLedgerView::slotSelectAccount(const QString& id, const QString& tran
         }
         m_newAccountLoaded = true;
         slotLoadView();
-      } catch (MyMoneyException* e) {
+      } catch (const MyMoneyException &) {
         qDebug("Unable to retrieve account %s", qPrintable(id));
-        delete e;
         rc = false;
       }
     } else {
@@ -1391,9 +1387,8 @@ void KGlobalLedgerView::slotSortOptions(void)
         try {
           MyMoneyFile::instance()->modifyAccount(m_account);
           ft.commit();
-        } catch (MyMoneyException* e) {
-          qDebug("Unable to update sort order for account '%s': %s", qPrintable(m_account.name()), qPrintable(e->what()));
-          delete e;
+        } catch (const MyMoneyException &e) {
+          qDebug("Unable to update sort order for account '%s': %s", qPrintable(m_account.name()), qPrintable(e.what()));
         }
       }
     }

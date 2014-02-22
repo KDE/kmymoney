@@ -48,10 +48,9 @@ int SelectedTransaction::warnLevel() const
         warnLevel = 2;
       else if ((*it_s).reconcileFlag() == MyMoneySplit::Reconciled && warnLevel < 1)
         warnLevel = 1;
-    } catch (MyMoneyException* e) {
-      //qDebug("Exception in SelectedTransaction::warnLevel(): %s", qPrintable(e->what()));
+    } catch (const MyMoneyException &) {
+      //qDebug("Exception in SelectedTransaction::warnLevel(): %s", qPrintable(e.what()));
       warnLevel = 0;
-      delete e;
     }
   }
   return warnLevel;

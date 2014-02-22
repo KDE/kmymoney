@@ -69,7 +69,7 @@ MyMoneyInstitution::MyMoneyInstitution(const QDomElement& node) :
     MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement())
 {
   if ("INSTITUTION" != node.tagName())
-    throw new MYMONEYEXCEPTION("Node was not INSTITUTION");
+    throw MYMONEYEXCEPTION("Node was not INSTITUTION");
 
   m_sortcode = node.attribute("sortcode");
   m_name = node.attribute("name");
@@ -78,7 +78,7 @@ MyMoneyInstitution::MyMoneyInstitution(const QDomElement& node) :
   QDomNodeList nodeList = node.elementsByTagName("ADDRESS");
   if (nodeList.count() == 0) {
     QString msg = QString("No ADDRESS in institution %1").arg(m_name);
-    throw new MYMONEYEXCEPTION(msg);
+    throw MYMONEYEXCEPTION(msg);
   }
 
   QDomElement addrNode = nodeList.item(0).toElement();

@@ -19,6 +19,6 @@
 
 #include "mymoneyexception.h"
 
-void unexpectedException(MyMoneyException *e);
+void unexpectedException(const MyMoneyException &e);
 
 #endif // AUTOTEST_H

@@ -64,13 +64,13 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
 
   // verify, that tm is a manually (non-matched) transaction and ti an imported one
   if (sm.isMatched() || (!allowImportedTransactions && tm.isImported()))
-    throw new MYMONEYEXCEPTION(i18n("First transaction does not match requirement for matching"));
+    throw MYMONEYEXCEPTION(i18n("First transaction does not match requirement for matching"));
   if (!ti.isImported())
-    throw new MYMONEYEXCEPTION(i18n("Second transaction does not match requirement for matching"));
+    throw MYMONEYEXCEPTION(i18n("Second transaction does not match requirement for matching"));
 
   // verify that the amounts are the same, otherwise we should not be matching!
   if (sm.shares() != si.shares()) {
-    throw new MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)", m_account.name(), MyMoneyUtils::formatMoney(sm.shares(), m_account, sec), MyMoneyUtils::formatMoney(si.shares(), m_account, sec)));
+    throw MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)", m_account.name(), MyMoneyUtils::formatMoney(sm.shares(), m_account, sec), MyMoneyUtils::formatMoney(si.shares(), m_account, sec)));
   }
 
   // ipwizard: I took over the code to keep the bank id found in the endMatchTransaction
@@ -83,12 +83,11 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
         sm.setBankID(bankID);
         tm.modifySplit(sm);
       } else if (sm.bankID() != bankID) {
-        throw new MYMONEYEXCEPTION(i18n("Both of these transactions have been imported into %1.  Therefore they cannot be matched.  Matching works with one imported transaction and one non-imported transaction.", m_account.name()));
+        throw MYMONEYEXCEPTION(i18n("Both of these transactions have been imported into %1.  Therefore they cannot be matched.  Matching works with one imported transaction and one non-imported transaction.", m_account.name()));
       }
-    } catch (MyMoneyException *e) {
-      QString estr = e->what();
-      delete e;
-      throw new MYMONEYEXCEPTION(i18n("Unable to match all splits (%1)", estr));
+    } catch (const MyMoneyException &e) {
+      QString estr = e.what();
+      throw MYMONEYEXCEPTION(i18n("Unable to match all splits (%1)", estr));
     }
   }
 
@@ -142,8 +141,7 @@ void TransactionMatcher::unmatch(const MyMoneyTransaction& _t, const MyMoneySpli
     // if we don't have a split, then we don't have a memo
     try {
       si = ti.splitById(sm.value("kmm-match-split"));
-    } catch (MyMoneyException* e) {
-      delete e;
+    } catch (const MyMoneyException &) {
     }
     sm.removeMatch();
 

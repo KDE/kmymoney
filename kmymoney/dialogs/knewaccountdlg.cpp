@@ -394,9 +394,8 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
       institutionName = file->institution(account.institutionId()).name();
     else
       institutionName.clear();
-  } catch (MyMoneyException *e) {
-    qDebug("exception in init for account dialog: %s", qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    qDebug("exception in init for account dialog: %s", qPrintable(e.what()));
   }
 
   if (m_account.isInvest())
@@ -470,8 +469,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
           m_grossAmount->setChecked(true);
           if (m_account.value("VatAmount") == "Net")
             m_netAmount->setChecked(true);
-        } catch (MyMoneyException *e) {
-          delete e;
+        } catch (const MyMoneyException &) {
         }
       }
     }
@@ -524,9 +522,8 @@ void KNewAccountDlg::okClicked()
           if ((*institutionIterator).name() == institutionNameText)
             m_account.setInstitutionId((*institutionIterator).id());
         }
-      } catch (MyMoneyException *e) {
-        qDebug("Exception in account institution set: %s", qPrintable(e->what()));
-        delete e;
+      } catch (const MyMoneyException &e) {
+        qDebug("Exception in account institution set: %s", qPrintable(e.what()));
       }
     } else {
       m_account.setInstitutionId(QString());
@@ -754,9 +751,8 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
     }
 
     m_qcomboboxInstitutions->setCurrentItem(name, false);
-  } catch (MyMoneyException *e) {
-    qDebug("Exception in institution load: %s", qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    qDebug("Exception in institution load: %s", qPrintable(e.what()));
   }
 }
 
@@ -774,8 +770,7 @@ void KNewAccountDlg::slotNewClicked()
       file->addInstitution(institution);
       ft.commit();
       slotLoadInstitutions(institution.name());
-    } catch (MyMoneyException *e) {
-      delete e;
+    } catch (const MyMoneyException &) {
       KMessageBox::information(this, i18n("Cannot add institution"));
     }
   }
@@ -796,8 +791,7 @@ void KNewAccountDlg::slotAccountTypeChanged(const QString& typeStr)
       m_filterProxyModel->clear();
       m_filterProxyModel->addAccountGroup(m_account.accountGroup());
     }
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     qWarning("Unexpected exception in KNewAccountDlg::slotAccountTypeChanged()");
   }
 }

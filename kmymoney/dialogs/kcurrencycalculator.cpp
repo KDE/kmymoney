@@ -293,9 +293,8 @@ void KCurrencyCalculator::accept(void)
       try {
         MyMoneyFile::instance()->addPrice(pr);
         ft.commit();
-      } catch (MyMoneyException *e) {
+      } catch (const MyMoneyException &) {
         qDebug("Cannot add price");
-        delete e;
       }
     }
   }

@@ -60,8 +60,7 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent)
   try {
     QString id = m_account.value("schedule");
     m_schedule = file->schedule(id);
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
   m_lastSelection = -1;
 
@@ -165,8 +164,7 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
         try {
           payee = file->payee(it_s.payeeId());
           setField("payeeEdit", payee.id());
-        } catch (MyMoneyException *e) {
-          delete e;
+        } catch (const MyMoneyException &) {
           qWarning("Payee for schedule has been deleted");
         }
       }
@@ -383,9 +381,8 @@ bool KEditLoanWizard::validateCurrentPage()
             split = (*it).splitByAccount(m_account.id());
             balance += split.value();
 
-          } catch(MyMoneyException *e) {
+          } catch(const MyMoneyException &e) {
             // account is not referenced within this transaction
-            delete e;
           }
         }
         m_loanAmountEdit->setText(balance.formatMoney());

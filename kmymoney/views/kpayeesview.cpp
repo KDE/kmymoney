@@ -310,9 +310,8 @@ void KPayeesView::slotRenamePayee(QListWidgetItem* p)
           p->setText(m_payee.name());
           return;
         }
-      } catch (MyMoneyException *e) {
+      } catch (const MyMoneyException &) {
         // all ok, the name is unique
-        delete e;
       }
 
       m_payee.setName(new_name);
@@ -329,10 +328,9 @@ void KPayeesView::slotRenamePayee(QListWidgetItem* p)
 
       ft.commit();
 
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
-                                 i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-      delete e;
+                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   } else {
     p->setText(new_name);
@@ -450,11 +448,10 @@ void KPayeesView::slotSelectPayee(void)
 
     showTransactions();
 
-  } catch (MyMoneyException *e) {
-    qDebug("exception during display of payee: %s at %s:%ld", qPrintable(e->what()), qPrintable(e->file()), e->line());
+  } catch (const MyMoneyException &e) {
+    qDebug("exception during display of payee: %s at %s:%ld", qPrintable(e.what()), qPrintable(e.file()), e.line());
     m_register->clear();
     m_payee = MyMoneyPayee();
-    delete e;
   }
   m_allowEditing = true;
 }
@@ -648,10 +645,9 @@ void KPayeesView::slotUpdatePayee(void)
       MyMoneyFile::instance()->modifyPayee(m_payee);
       ft.commit();
 
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
-                                 i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-      delete e;
+                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   }
 }
@@ -806,9 +802,8 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
         break;
       }
     }
-  } catch (MyMoneyException *e) {
-    qWarning("Unexpected exception in KPayeesView::slotSelectPayeeAndTransaction");
-    delete e;
+  } catch (const MyMoneyException &e) {
+    qWarning("Unexpected exception in KPayeesView::slotSelectPayeeAndTransaction %s", qPrintable(e.what()));
   }
 }
 

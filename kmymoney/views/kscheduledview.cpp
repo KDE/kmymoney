@@ -146,9 +146,8 @@ void KScheduledView::refresh(bool full, const QString& schedId)
           }
         }
 
-      } catch (MyMoneyException *e) {
-        KMessageBox::detailedError(this, i18n("Unable to load accounts: "), e->what());
-        delete e;
+      } catch (const MyMoneyException &e) {
+        KMessageBox::detailedError(this, i18n("Unable to load accounts: "), e.what());
       }
     }
 
@@ -272,9 +271,8 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     if (m_openLoans)
       itemLoans->setExpanded(true);
 
-  } catch (MyMoneyException *e) {
-    KMessageBox::error(this, e->what());
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::error(this, e.what());
   }
 
   for (int i = 0; i < m_scheduleTree->columnCount(); ++i) {
@@ -396,10 +394,9 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
     item->setData(4, KScheduleTreeItem::OrderRole, QVariant(nextDueDate));
     item->setText(5, i18nc("Frequency of schedule", schedule.occurrenceToString().toLatin1()));
     item->setText(6, KMyMoneyUtils::paymentMethodToString(schedule.paymentType()));
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     item->setText(0, "Error:");
-    item->setText(1, e->what());
-    delete e;
+    item->setText(1, e.what());
   }
   return item;
 }
@@ -488,9 +485,8 @@ void KScheduledView::slotListViewContextMenu(const QPoint& pos)
       emit scheduleSelected(schedule);
       m_selectedSchedule = schedule.id();
       emit openContextMenu();
-    } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(this, i18n("Error activating context menu"), e->what());
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(this, i18n("Error activating context menu"), e.what());
     }
   } else {
     emit openContextMenu();
@@ -506,9 +502,8 @@ void KScheduledView::slotListItemExecuted(QTreeWidgetItem* item, int)
     MyMoneySchedule schedule = item->data(0, Qt::UserRole).value<MyMoneySchedule>();
     m_selectedSchedule = schedule.id();
     emit editSchedule();
-  } catch (MyMoneyException *e) {
-    KMessageBox::detailedSorry(this, i18n("Error executing item"), e->what());
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(this, i18n("Error executing item"), e.what());
   }
 }
 
@@ -542,9 +537,8 @@ void KScheduledView::slotAccountActivated(int /*id*/)
     m_calendar->setFilterAccounts(m_filterAccounts);
 
     refresh(false, m_selectedSchedule);
-  } catch (MyMoneyException *e) {
-    KMessageBox::detailedError(this, i18n("Unable to filter account"), e->what());
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedError(this, i18n("Unable to filter account"), e.what());
   }
 }
 
@@ -606,9 +600,8 @@ void KScheduledView::slotSetSelectedItem()
       MyMoneySchedule schedule = item->data(0, Qt::UserRole).value<MyMoneySchedule>();
       emit scheduleSelected(schedule);
       m_selectedSchedule = schedule.id();
-    } catch (MyMoneyException* e) {
-      qDebug("KScheduledView::slotSetSelectedItem: %s", qPrintable(e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      qDebug("KScheduledView::slotSetSelectedItem: %s", qPrintable(e.what()));
     }
   }
 }

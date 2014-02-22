@@ -270,9 +270,8 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   if (!s.m_accountId.isEmpty()) {
     try {
       m_account = MyMoneyFile::instance()->account(s.m_accountId);
-    } catch (MyMoneyException* e) {
+    } catch (const MyMoneyException &) {
       qDebug("Received reference '%s' to unknown account in statement", qPrintable(s.m_accountId));
-      delete e;
     }
   }
 
@@ -319,9 +318,8 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
 
     try {
       MyMoneyFile::instance()->modifyAccount(m_account);
-    } catch (MyMoneyException* e) {
+    } catch (const MyMoneyException &) {
       qDebug("Updating account in MyMoneyStatementReader::startImport failed");
-      delete e;
     }
   }
 
@@ -363,12 +361,11 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
       }
       qDebug("Processing transactions done (%s)", qPrintable(m_account.name()));
 
-    } catch (MyMoneyException* e) {
-      if (e->what() == "USERABORT")
+    } catch (const MyMoneyException &e) {
+      if (e.what() == "USERABORT")
         m_userAbort = true;
       else
-        qDebug("Caught exception from processTransactionEntry() not caused by USERABORT: %s", qPrintable(e->what()));
-      delete e;
+        qDebug("Caught exception from processTransactionEntry() not caused by USERABORT: %s", qPrintable(e.what()));
     }
     signalProgress(-1, -1);
   }
@@ -393,12 +390,11 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
         signalProgress(++progress, 0);
         ++it_p;
       }
-    } catch (MyMoneyException* e) {
-      if (e->what() == "USERABORT")
+    } catch (const MyMoneyException &e) {
+      if (e.what() == "USERABORT")
         m_userAbort = true;
       else
-        qDebug("Caught exception from processPriceEntry() not caused by USERABORT: %s", qPrintable(e->what()));
-      delete e;
+        qDebug("Caught exception from processPriceEntry() not caused by USERABORT: %s", qPrintable(e.what()));
     }
     signalProgress(-1, -1);
   }
@@ -412,9 +408,8 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     try {
       MyMoneyFile::instance()->removePayee(*it_p);
       --payeeCount;
-    } catch (MyMoneyException* e) {
+    } catch (const MyMoneyException &) {
       // if we can't delete it, it must be in use which is ok for us
-      delete e;
     }
   }
 
@@ -514,8 +509,8 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
       file->addSecurity(security);
       ft.commit();
       kDebug(0) << "Created " << security.name() << " with id " << security.id();
-    } catch (MyMoneyException *e) {
-      KMessageBox::error(0, i18n("Error creating security record: %1", e->what()), i18n("Error"));
+    } catch (const MyMoneyException &e) {
+      KMessageBox::error(0, i18n("Error creating security record: %1", e.what()), i18n("Error"));
     }
   } else {
     kDebug(0) << "Found " << security.name() << " with id " << security.id();
@@ -886,10 +881,10 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
       // if we did not find a matching payee, we throw an exception and try to create it
       if (payeeid.isEmpty())
-        throw new MYMONEYEXCEPTION("payee not matched");
+        throw MYMONEYEXCEPTION("payee not matched");
 
       s1.setPayeeId(payeeid);
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &) {
       MyMoneyPayee payee;
       int rc = KMessageBox::Yes;
 
@@ -910,7 +905,6 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         rc = KMessageBox::questionYesNoCancel(0, msg, i18n("New payee/receiver"),
                                               KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(), askKey);
       }
-      delete e;
 
       if (rc == KMessageBox::Yes) {
         // for now, we just add the payee to the pool and turn
@@ -967,7 +961,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             payee.setDefaultAccountId(accountId);
           } else if (result != KDialog::No) {
             //add cancel button? and throw exception like below
-            throw new MYMONEYEXCEPTION("USERABORT");
+            throw MYMONEYEXCEPTION("USERABORT");
           }
         }
 
@@ -978,10 +972,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           payeeid = payee.id();
           s1.setPayeeId(payeeid);
 
-        } catch (MyMoneyException *e) {
+        } catch (const MyMoneyException &e) {
           KMessageBox::detailedSorry(0, i18n("Unable to add payee/receiver"),
-                                     i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-          delete e;
+                                     i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
 
         }
 
@@ -989,7 +982,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s1.setPayeeId(QString());
 
       } else {
-        throw new MYMONEYEXCEPTION("USERABORT");
+        throw MYMONEYEXCEPTION("USERABORT");
 
       }
     }
@@ -1162,14 +1155,13 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       return;
     }
 
-  } catch (MyMoneyException *e) {
-    QString message(i18n("Problem adding or matching imported transaction with id '%1': %2", statementTransactionUnderImport.m_strBankID, e->what()));
+  } catch (const MyMoneyException &e) {
+    QString message(i18n("Problem adding or matching imported transaction with id '%1': %2", statementTransactionUnderImport.m_strBankID, e.what()));
     qDebug("%s", qPrintable(message));
-    delete e;
 
     int result = KMessageBox::warningContinueCancel(0, message);
     if (result == KMessageBox::Cancel)
-      throw new MYMONEYEXCEPTION("USERABORT");
+      throw MYMONEYEXCEPTION("USERABORT");
   }
 }
 
@@ -1253,14 +1245,13 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
           MyMoneyFile::instance()->modifyAccount(account);
           ft.commit();
           accname = account.name();
-        } catch (MyMoneyException* e) {
+        } catch (const MyMoneyException &) {
           qDebug("Updating account in MyMoneyStatementReader::selectOrCreateAccount failed");
-          delete e;
         }
       }
     } else {
       if (accountSelect->aborted())
-        //throw new MYMONEYEXCEPTION("USERABORT");
+        //throw MYMONEYEXCEPTION("USERABORT");
         done = true;
       else
         KMessageBox::error(0, QString("<qt>%1</qt>").arg(i18n("You must select an account, create a new one, or press the <b>Abort</b> button.")));
@@ -1363,7 +1354,7 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
         matcher.match(torig, matchedSplit, importedTransaction, importedSplit);
         d->transactionsMatched++;
 
-      } catch (MyMoneyException *e) {
+      } catch (const MyMoneyException &e) {
         // make sure we get rid of the editor before
         // the KEnterScheduleDlg is destroyed
         delete editor;

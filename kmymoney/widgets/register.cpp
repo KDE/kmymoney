@@ -1222,14 +1222,13 @@ int Register::minimumColumnWidth(int col)
       int nw = 0;
       try {
         nw = t->registerColWidth(col, cellFontMetrics);
-      } catch (MyMoneyException* e) {
+      } catch (const MyMoneyException &) {
         // This should only be reached if the data in the file disappeared
         // from under us, such as when the account was deleted from a
         // different view, then this view is restored. In this case, new
         // data is about to be loaded into the view anyway, so just remove
         // the item from the register and swallow the exception.
-        //qDebug("%s", qPrintable(e->what()));
-        delete e;
+        //qDebug("%s", qPrintable(e.what()));
         removeItem(t);
       }
       w = qMax(w, nw);

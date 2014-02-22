@@ -54,7 +54,7 @@ TransactionMatchFinder::MatchResult TransactionMatchFinder::findMatch(const MyMo
 MyMoneySplit TransactionMatchFinder::getMatchedSplit() const
 {
   if (matchedSplit.isNull()) {
-    throw new MYMONEYEXCEPTION(i18n("Internal error - no matching splits"));
+    throw MYMONEYEXCEPTION(i18n("Internal error - no matching splits"));
   }
 
   return *matchedSplit;
@@ -63,7 +63,7 @@ MyMoneySplit TransactionMatchFinder::getMatchedSplit() const
 MyMoneyTransaction TransactionMatchFinder::getMatchedTransaction() const
 {
   if (matchedTransaction.isNull()) {
-    throw new MYMONEYEXCEPTION(i18n("Internal error - no matching transactions"));
+    throw MYMONEYEXCEPTION(i18n("Internal error - no matching transactions"));
   }
 
   return *matchedTransaction;
@@ -72,7 +72,7 @@ MyMoneyTransaction TransactionMatchFinder::getMatchedTransaction() const
 MyMoneySchedule TransactionMatchFinder::getMatchedSchedule() const
 {
   if (matchedSchedule.isNull()) {
-    throw new MYMONEYEXCEPTION(i18n("Internal error - no matching schedules"));
+    throw MYMONEYEXCEPTION(i18n("Internal error - no matching schedules"));
   }
 
   return *matchedSchedule;

@@ -330,8 +330,7 @@ void MyMoneySplitTest::testReadXML()
   try {
     s = MyMoneySplit(node);
     QFAIL("Missing expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   doc.setContent(ref_ok);
@@ -353,8 +352,7 @@ void MyMoneySplitTest::testReadXML()
     QVERIFY(s.action() == MyMoneySplit::ActionDeposit);
     QVERIFY(s.accountId() == "A000076");
     QVERIFY(s.memo() == "MyMemo");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
 }
@@ -424,8 +422,7 @@ void MyMoneySplitTest::testReplaceId(void)
     QVERIFY(s.matchedTransaction().splits()[0].payeeId() == "P0010");
     QVERIFY(s.matchedTransaction().splits()[1].payeeId() == "P0011");
 
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 }

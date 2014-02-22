@@ -745,9 +745,8 @@ bool KMyMoneyBanking::askMapAccount(const MyMoneyAccount& acc)
     bankId = bank.name();
     if (!bank.sortcode().isEmpty())
       bankId = bank.sortcode();
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     // no bank assigned, we just leave the field emtpy
-    delete e;
   }
 
   // extract account information. if we have an account number

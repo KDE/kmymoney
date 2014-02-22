@@ -342,9 +342,8 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
             splitB.setValue(splitB.shares());
             (*it_t).transaction().modifySplit(splitB);
 
-          } catch (MyMoneyException *e) {
-            qDebug("Unable to update commodity to second splits currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
-            delete e;
+          } catch (const MyMoneyException &e) {
+            qDebug("Unable to update commodity to second splits currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e.what()));
           }
           break;
 
@@ -379,9 +378,8 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
             (*it_t).transaction().modifySplit(splitA);
             (*it_t).transaction().modifySplit(splitB);
 
-          } catch (MyMoneyException *e) {
-            qDebug("Unable to update commodity to second splits currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
-            delete e;
+          } catch (const MyMoneyException &e) {
+            qDebug("Unable to update commodity to second splits currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e.what()));
           }
           break;
 
@@ -425,9 +423,8 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
                 (*it_t).transaction().modifySplit(s);
               }
             }
-          } catch (MyMoneyException *e) {
-            qDebug("Unable to update commodity of split currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
-            delete e;
+          } catch (const MyMoneyException &e) {
+            qDebug("Unable to update commodity of split currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e.what()));
           }
           break;
       }
@@ -726,9 +723,8 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           }
         }
       }
-    } catch (MyMoneyException * e) {
-      qDebug("Unable to store transaction within engine: %s", qPrintable(e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      qDebug("Unable to store transaction within engine: %s", qPrintable(e.what()));
       newTransactionCreated = false;
     }
 

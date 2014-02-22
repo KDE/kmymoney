@@ -365,9 +365,8 @@ void KEquityPriceUpdateDlg::storePrices(void)
     }
     ft.commit();
 
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &) {
     qDebug("Unable to add price information for %s", qPrintable(name));
-    delete e;
   }
 }
 
@@ -450,9 +449,8 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _id, const QString& _
       // Re-commit the security
       MyMoneyFile::instance()->modifySecurity(security);
       ft.commit();
-    } catch (MyMoneyException* e) {
-      KMessageBox::error(this, QString("<qt>") + i18n("Cannot update security <b>%1</b>: %2", _symbol, e->what()) + QString("</qt>"), i18n("Price Update Failed"));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::error(this, QString("<qt>") + i18n("Cannot update security <b>%1</b>: %2", _symbol, e.what()) + QString("</qt>"), i18n("Price Update Failed"));
     }
   }
 
@@ -509,9 +507,8 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
         try {
           sec = MyMoneyFile::instance()->security(id);
           sec = MyMoneyFile::instance()->security(sec.tradingCurrency());
-        } catch (MyMoneyException *e) {
+        } catch (const MyMoneyException &) {
           sec = MyMoneySecurity();
-          delete e;
         }
 
       } else {
@@ -519,9 +516,8 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
         if (splitrx.indexIn(_id) != -1) {
           try {
             sec = MyMoneyFile::instance()->security(splitrx.cap(2).toUtf8());
-          } catch (MyMoneyException *e) {
+          } catch (const MyMoneyException &) {
             sec = MyMoneySecurity();
-            delete e;
           }
         }
       }

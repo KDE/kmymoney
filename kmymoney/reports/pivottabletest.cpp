@@ -108,9 +108,8 @@ void PivotTableTest::testNetWorthSingle()
     QVERIFY(networth_f.m_grid.m_total[eActual][4] == moZero);
     QVERIFY(networth_f.m_grid.m_total[eActual][5] == moCheckingOpen);
     QVERIFY(networth_f.m_grid.m_total[eActual][6] == moCheckingOpen);
-  } catch (MyMoneyException *e) {
-    QFAIL(qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    QFAIL(qPrintable(e.what()));
   }
 }
 
@@ -926,9 +925,8 @@ void PivotTableTest::testInvestment(void)
     invhold.dump("invhold.html", "<html><head></head><body>%1</body></html>");
 #endif
 
-  } catch (MyMoneyException *e) {
-    QFAIL(qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    QFAIL(qPrintable(e.what()));
   }
 }
 

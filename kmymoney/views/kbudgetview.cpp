@@ -683,9 +683,8 @@ void KBudgetView::slotItemChanged(QTreeWidgetItem* p, int col)
           p->setText(0, pBudget->budget().name());
           return;
         }
-      } catch (MyMoneyException *e) {
+      } catch (const MyMoneyException &) {
         // all ok, the name is unique
-        delete e;
       }
 
       MyMoneyBudget b = pBudget->budget();
@@ -700,10 +699,9 @@ void KBudgetView::slotItemChanged(QTreeWidgetItem* p, int col)
       // re-established. You cannot use pBudget beyond this point!!!
       ft.commit();
 
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(0, i18n("Unable to modify budget"),
-                                 i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-      delete e;
+                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   } else {
     pBudget->setText(0, new_name);
@@ -865,10 +863,9 @@ void KBudgetView::slotResetBudget(void)
       m_budgetValue->clear();
     }
 
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     KMessageBox::detailedSorry(0, i18n("Unable to reset budget"),
-                               i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-    delete e;
+                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
   }
 }
 
@@ -879,10 +876,9 @@ void KBudgetView::slotUpdateBudget(void)
     MyMoneyFile::instance()->modifyBudget(m_budget);
     ft.commit();
     slotRefreshHideUnusedButton();
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     KMessageBox::detailedSorry(0, i18n("Unable to modify budget"),
-                               i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-    delete e;
+                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
   }
 }
 

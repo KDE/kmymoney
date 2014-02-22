@@ -82,7 +82,6 @@
 #include <kprogressdialog.h>
 #include <kio/netaccess.h>
 #include <kstartupinfo.h>
-#include <kparts/componentfactory.h>
 #include <krun.h>
 #include <kconfigdialog.h>
 #include <kinputdialog.h>
@@ -1380,8 +1379,7 @@ void KMyMoneyApp::slotFileNew(void)
         d->m_recentFiles->addUrl(d->m_fileName);
         writeLastUsedFile(d->m_fileName.url());
 
-      } catch (MyMoneyException* e) {
-        delete e;
+      } catch (const MyMoneyException &) {
         // next line required until we move all file handling out of KMyMoneyView
         d->m_myMoneyView->closeFile();
       }
@@ -1551,9 +1549,8 @@ void KMyMoneyApp::slotFileOpenRecent(const KUrl& url)
             // Check the schedules
             slotCheckSchedules();
           }
-        } catch (MyMoneyException* e) {
-          KMessageBox::sorry(this, i18n("Cannot open file as requested. Error was: %1", e->what()));
-          delete e;
+        } catch (const MyMoneyException &e) {
+          KMessageBox::sorry(this, i18n("Cannot open file as requested. Error was: %1", e.what()));
         }
         updateCaption();
         emit fileLoaded(d->m_fileName);
@@ -1803,9 +1800,8 @@ bool KMyMoneyApp::slotSaveAsDatabase(void)
     } else {
       try {
         rc = d->m_myMoneyView->saveAsDatabase(url);
-      } catch (MyMoneyException* e) {
-        KMessageBox::sorry(this, i18n("Cannot save to current database: %1", e->what()));
-        delete e;
+      } catch (const MyMoneyException &e) {
+        KMessageBox::sorry(this, i18n("Cannot save to current database: %1", e.what()));
       }
     }
   }
@@ -2010,9 +2006,8 @@ void KMyMoneyApp::slotFileViewPersonal(void)
     try {
       file->setUser(user);
       ft.commit();
-    } catch (MyMoneyException *e) {
-      KMessageBox::information(this, i18n("Unable to store user information: %1", e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::information(this, i18n("Unable to store user information: %1", e.what()));
     }
   }
   delete newFileDlg;
@@ -2049,9 +2044,8 @@ void KMyMoneyApp::slotLoadAccountTemplates(void)
         (*it_t).importTemplate(&progressCallback);
       }
       ft.commit();
-    } catch (MyMoneyException* e) {
-      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to import template(s): %1, thrown in %2:%3", e->what(), e->file(), e->line()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to import template(s): %1, thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   }
   delete dlg;
@@ -2727,9 +2721,8 @@ void KMyMoneyApp::createInstitution(MyMoneyInstitution& institution)
     file->addInstitution(institution);
     ft.commit();
 
-  } catch (MyMoneyException *e) {
-    KMessageBox::information(this, i18n("Cannot add institution: %1", e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::information(this, i18n("Cannot add institution: %1", e.what()));
   }
 }
 
@@ -2774,17 +2767,15 @@ void KMyMoneyApp::slotInstitutionEdit(const MyMoneyObject& obj)
         ft.commit();
         slotSelectInstitution(file->institution(dlg->institution().id()));
 
-      } catch (MyMoneyException *e) {
-        KMessageBox::information(this, i18n("Unable to store institution: %1", e->what()));
-        delete e;
+      } catch (const MyMoneyException &e) {
+        KMessageBox::information(this, i18n("Unable to store institution: %1", e.what()));
       }
     }
     delete dlg;
 
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     if (!obj.id().isEmpty())
-      KMessageBox::information(this, i18n("Unable to edit institution: %1", e->what()));
-    delete e;
+      KMessageBox::information(this, i18n("Unable to edit institution: %1", e.what()));
   }
 }
 
@@ -2801,13 +2792,11 @@ void KMyMoneyApp::slotInstitutionDelete(void)
     try {
       file->removeInstitution(institution);
       ft.commit();
-    } catch (MyMoneyException *e) {
-      KMessageBox::information(this, i18n("Unable to delete institution: %1", e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::information(this, i18n("Unable to delete institution: %1", e.what()));
     }
-  } catch (MyMoneyException *e) {
-    KMessageBox::information(this, i18n("Unable to delete institution: %1", e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::information(this, i18n("Unable to delete institution: %1", e.what()));
   }
 }
 
@@ -2858,9 +2847,8 @@ const MyMoneyAccount& KMyMoneyApp::findAccount(const MyMoneyAccount& acc, const 
         return existingAccount;
       }
     }
-  } catch (MyMoneyException *e) {
-    KMessageBox::error(0, i18n("Unable to find account: %1", e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::error(0, i18n("Unable to find account: %1", e.what()));
   }
   return nullAccount;
 }
@@ -2960,9 +2948,8 @@ void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
       file->createOpeningBalanceTransaction(newAccount, openingBal);
 
     ft.commit();
-  } catch (MyMoneyException *e) {
-    KMessageBox::information(this, i18n("Unable to add account: %1", e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::information(this, i18n("Unable to add account: %1", e.what()));
   }
 }
 
@@ -3002,8 +2989,7 @@ void KMyMoneyApp::slotCategoryNew(void)
     MyMoneyFile* file = MyMoneyFile::instance();
     try {
       parent = file->account(d->m_selectedAccount.id());
-    } catch (MyMoneyException *e) {
-      delete e;
+    } catch (const MyMoneyException &) {
     }
   }
 
@@ -3018,8 +3004,7 @@ void KMyMoneyApp::createCategory(MyMoneyAccount& account, const MyMoneyAccount& 
       MyMoneyFile::instance()->account(parent.id());
       account.setParentAccountId(parent.id());
       account.setAccountType(parent.accountType());
-    } catch (MyMoneyException *e) {
-      delete e;
+    } catch (const MyMoneyException &) {
     }
   }
 
@@ -3101,8 +3086,8 @@ void KMyMoneyApp::slotAccountNew(MyMoneyAccount& account)
         }
         ft.commit();
         account = acc;
-      } catch (MyMoneyException *e) {
-        KMessageBox::error(this, i18n("Unable to create account: %1", e->what()));
+      } catch (const MyMoneyException &e) {
+        KMessageBox::error(this, i18n("Unable to create account: %1", e.what()));
       }
     }
   }
@@ -3154,9 +3139,8 @@ void KMyMoneyApp::slotInvestmentDelete(void)
     try {
       file->removeAccount(d->m_selectedInvestment);
       ft.commit();
-    } catch (MyMoneyException *e) {
-      KMessageBox::information(this, i18n("Unable to delete investment: %1", e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::information(this, i18n("Unable to delete investment: %1", e.what()));
     }
   } else {
     // we should not keep the 'no' setting because that can confuse people like
@@ -3196,9 +3180,8 @@ void KMyMoneyApp::slotManualPriceUpdate(void)
       // The dialog takes care of adding the price if necessary
       calc->exec();
       delete calc;
-    } catch (MyMoneyException* e) {
-      qDebug("Error in price update: %s", qPrintable(e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      qDebug("Error in price update: %s", qPrintable(e.what()));
     }
   }
 }
@@ -3214,7 +3197,7 @@ void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& ne
       // We assume at least 2 splits in the transaction
       MyMoneyTransaction t = newSchedule.transaction();
       if (t.splitCount() < 2) {
-        throw new MYMONEYEXCEPTION("Transaction for schedule has less than 2 splits!");
+        throw MYMONEYEXCEPTION("Transaction for schedule has less than 2 splits!");
       }
 
       MyMoneyFileTransaction ft;
@@ -3229,13 +3212,11 @@ void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& ne
           file->modifyAccount(newAccount);
         }
         ft.commit();
-      } catch (MyMoneyException *e) {
-        KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", e->what()));
-        delete e;
+      } catch (const MyMoneyException &e) {
+        KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", e.what()));
       }
-    } catch (MyMoneyException *e) {
-      KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", e.what()));
     }
   }
 }
@@ -3355,9 +3336,8 @@ void KMyMoneyApp::slotAccountDelete(void)
         }
         slotStatusProgressBar(blist.count(), 0);
       }
-    } catch (MyMoneyException  *e) {
-      KMessageBox::error(this, i18n("Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3", d->m_selectedAccount.name(), newCategory.name(), e->what()));
-      delete e;
+    } catch (MyMoneyException &e) {
+      KMessageBox::error(this, i18n("Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3", d->m_selectedAccount.name(), newCategory.name(), e.what()));
       exit = true;
     }
     slotStatusProgressBar(-1, -1);
@@ -3387,9 +3367,8 @@ void KMyMoneyApp::slotAccountDelete(void)
               d->m_selectedAccount.clearId();
               slotUpdateActions();
               ft.commit();
-            } catch (MyMoneyException* e) {
-              KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete category <b>%1</b>. Cause: %2", selectedAccountName, e->what()) + QString("</qt>"));
-              delete e;
+            } catch (const MyMoneyException &e) {
+              KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete category <b>%1</b>. Cause: %2", selectedAccountName, e.what()) + QString("</qt>"));
             }
           }
           return;
@@ -3453,9 +3432,8 @@ void KMyMoneyApp::slotAccountDelete(void)
           // don't forget to update d->m_selectedAccount, because we still have a copy of
           // the old account list, which is no longer valid
           d->m_selectedAccount = file->account(d->m_selectedAccount.id());
-        } catch (MyMoneyException* e) {
-          KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete a sub-category of category <b>%1</b>. Reason: %2", selectedAccountName, e->what()) + QString("</qt>"));
-          delete e;
+        } catch (const MyMoneyException &e) {
+          KMessageBox::error(this, QString("<qt>") + i18n("Unable to delete a sub-category of category <b>%1</b>. Reason: %2", selectedAccountName, e.what()) + QString("</qt>"));
           return;
         }
       }
@@ -3476,9 +3454,8 @@ void KMyMoneyApp::slotAccountDelete(void)
     d->m_selectedAccount.clearId();
     slotUpdateActions();
     ft.commit();
-  } catch (MyMoneyException* e) {
-    KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", selectedAccountName, e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", selectedAccountName, e.what()));
   }
 }
 
@@ -3524,10 +3501,9 @@ void KMyMoneyApp::slotAccountEdit(void)
               if (d->m_selectedAccount.accountGroup() == MyMoneyAccount::Liability) {
                 dlg->setOpeningBalance(-s0.shares());
               }
-            } catch (MyMoneyException *e) {
-              kDebug(2) << "Error retrieving opening balance transaction " << tid << ": " << e->what() << "\n";
+            } catch (const MyMoneyException &e) {
+              kDebug(2) << "Error retrieving opening balance transaction " << tid << ": " << e.what() << "\n";
               tid.clear();
-              delete e;
             }
           }
         }
@@ -3588,9 +3564,8 @@ void KMyMoneyApp::slotAccountEdit(void)
             // reload the account object as it might have changed in the meantime
             slotSelectAccount(file->account(account.id()));
 
-          } catch (MyMoneyException* e) {
-            KMessageBox::error(this, i18n("Unable to modify account '%1'. Cause: %2", d->m_selectedAccount.name(), e->what()));
-            delete e;
+          } catch (const MyMoneyException &e) {
+            KMessageBox::error(this, i18n("Unable to modify account '%1'. Cause: %2", d->m_selectedAccount.name(), e.what()));
           }
         }
 
@@ -3612,20 +3587,17 @@ void KMyMoneyApp::slotAccountEdit(void)
                 file->schedule(sch.id());
                 file->modifySchedule(sch);
                 ft.commit();
-              } catch (MyMoneyException *e) {
+              } catch (const MyMoneyException &) {
                 try {
                   file->addSchedule(sch);
                   ft.commit();
-                } catch (MyMoneyException *f) {
-                  qDebug("Cannot add schedule: '%s'", qPrintable(f->what()));
-                  delete f;
+                } catch (const MyMoneyException &e) {
+                  qDebug("Cannot add schedule: '%s'", qPrintable(e.what()));
                 }
-                delete e;
               }
-            } catch (MyMoneyException *e) {
+            } catch (const MyMoneyException &e) {
               qDebug("Unable to modify account %s: '%s'", qPrintable(d->m_selectedAccount.name()),
-                     qPrintable(e->what()));
-              delete e;
+                     qPrintable(e.what()));
             }
           }
         }
@@ -3849,9 +3821,8 @@ void KMyMoneyApp::slotAccountReconcileStart(void)
               }
               ft.commit();
 
-            } catch (MyMoneyException *e) {
-              qWarning("interest transaction not stored: '%s'", qPrintable(e->what()));
-              delete e;
+            } catch (const MyMoneyException &e) {
+              qWarning("interest transaction not stored: '%s'", qPrintable(e.what()));
             }
 
             // reload the account object as it might have changed in the meantime
@@ -3860,8 +3831,7 @@ void KMyMoneyApp::slotAccountReconcileStart(void)
           }
         }
       }
-    } catch (MyMoneyException *e) {
-      delete e;
+    } catch (const MyMoneyException &) {
     }
   }
 }
@@ -3972,9 +3942,8 @@ void KMyMoneyApp::slotAccountReconcileFinish(void)
                              d->m_endingBalanceDlg->endingBalance(),
                              transactionList);
 
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &) {
       qDebug("Unexpected exception when setting cleared to reconcile");
-      delete e;
     }
   }
   // Turn off reconciliation mode
@@ -4003,9 +3972,8 @@ void KMyMoneyApp::slotAccountReconcilePostpone(void)
       ft.commit();
       d->m_reconciliationAccount = MyMoneyAccount();
       slotUpdateActions();
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &) {
       qDebug("Unexpected exception when setting last reconcile info into account");
-      delete e;
       ft.rollback();
       d->m_reconciliationAccount = file->account(d->m_reconciliationAccount.id());
     }
@@ -4032,8 +4000,7 @@ void KMyMoneyApp::slotAccountOpen(const MyMoneyObject& obj)
     try {
       MyMoneyAccount account = file->account(id);
       d->m_myMoneyView->slotLedgerSelected(account.id());
-    } catch (MyMoneyException *e) {
-      delete e;
+    } catch (const MyMoneyException &) {
     }
   }
 }
@@ -4083,8 +4050,7 @@ void KMyMoneyApp::slotAccountClose(void)
     if (KMyMoneyGlobalSettings::hideClosedAccounts()) {
       KMessageBox::information(this, QString("<qt>") + i18n("You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b> or by deselecting the <b>Do not show closed accounts</b> setting.") + QString("</qt>"), i18n("Information"), "CloseAccountInfo");
     }
-  } catch (MyMoneyException* e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 }
 
@@ -4107,8 +4073,7 @@ void KMyMoneyApp::slotAccountReopen(void)
       a = file->account(a.parentAccountId());
     }
     ft.commit();
-  } catch (MyMoneyException* e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 }
 
@@ -4120,9 +4085,8 @@ void KMyMoneyApp::slotReparentAccount(const MyMoneyAccount& _src, const MyMoneyI
   try {
     MyMoneyFile::instance()->modifyAccount(src);
     ft.commit();
-  } catch (MyMoneyException* e) {
-    KMessageBox::sorry(this, i18n("<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>", src.name(), _dst.name(), e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::sorry(this, i18n("<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>", src.name(), _dst.name(), e.what()));
   }
 }
 
@@ -4134,9 +4098,8 @@ void KMyMoneyApp::slotReparentAccount(const MyMoneyAccount& _src, const MyMoneyA
   try {
     MyMoneyFile::instance()->reparentAccount(src, dst);
     ft.commit();
-  } catch (MyMoneyException* e) {
-    KMessageBox::sorry(this, i18n("<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>", src.name(), dst.name(), e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::sorry(this, i18n("<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>", src.name(), dst.name(), e.what()));
   }
 }
 
@@ -4191,9 +4154,8 @@ void KMyMoneyApp::slotScheduleNew(const MyMoneyTransaction& _t, MyMoneySchedule:
         MyMoneyFile::instance()->addSchedule(schedule);
         ft.commit();
 
-      } catch (MyMoneyException *e) {
-        KMessageBox::error(this, i18n("Unable to add scheduled transaction: %1", e->what()), i18n("Add scheduled transaction"));
-        delete e;
+      } catch (const MyMoneyException &e) {
+        KMessageBox::error(this, i18n("Unable to add scheduled transaction: %1", e.what()), i18n("Add scheduled transaction"));
       }
     }
   }
@@ -4243,9 +4205,8 @@ void KMyMoneyApp::slotScheduleEdit(void)
                 // engine. Calling this twice in a row does not hurt.
                 deleteTransactionEditor();
                 ft.commit();
-              } catch (MyMoneyException *e) {
-                KMessageBox::detailedSorry(this, i18n("Unable to modify scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
-                delete e;
+              } catch (const MyMoneyException &e) {
+                KMessageBox::detailedSorry(this, i18n("Unable to modify scheduled transaction '%1'", d->m_selectedSchedule.name()), e.what());
               }
             }
             deleteTransactionEditor();
@@ -4263,9 +4224,8 @@ void KMyMoneyApp::slotScheduleEdit(void)
               MyMoneyFile::instance()->modifySchedule(loan_wiz->schedule());
               MyMoneyFile::instance()->modifyAccount(loan_wiz->account());
               ft.commit();
-            } catch (MyMoneyException *e) {
-              KMessageBox::detailedSorry(this, i18n("Unable to modify scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
-              delete e;
+            } catch (const MyMoneyException &e) {
+              KMessageBox::detailedSorry(this, i18n("Unable to modify scheduled transaction '%1'", d->m_selectedSchedule.name()), e.what());
             }
           }
           delete loan_wiz;
@@ -4275,9 +4235,8 @@ void KMyMoneyApp::slotScheduleEdit(void)
           break;
       }
 
-    } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to modify scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(this, i18n("Unable to modify scheduled transaction '%1'", d->m_selectedSchedule.name()), e.what());
     }
   }
 }
@@ -4299,9 +4258,8 @@ void KMyMoneyApp::slotScheduleDelete(void)
       MyMoneyFile::instance()->removeSchedule(sched);
       ft.commit();
 
-    } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to remove scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(this, i18n("Unable to remove scheduled transaction '%1'", d->m_selectedSchedule.name()), e.what());
     }
   }
 }
@@ -4328,9 +4286,8 @@ void KMyMoneyApp::slotScheduleDuplicate(void)
       if (!d->m_selectedSchedule.id().isEmpty())
         d->m_myMoneyView->slotScheduleSelected(sch.id());
 
-    } catch (MyMoneyException* e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to duplicate scheduled transaction: '%1'", d->m_selectedSchedule.name()), e->what());
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(0, i18n("Unable to duplicate scheduled transaction: '%1'", d->m_selectedSchedule.name()), e.what());
     }
   }
 }
@@ -4341,9 +4298,8 @@ void KMyMoneyApp::slotScheduleSkip(void)
     try {
       MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(d->m_selectedSchedule.id());
       skipSchedule(schedule);
-    } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_selectedSchedule.name()), e.what());
     }
   }
 }
@@ -4365,9 +4321,8 @@ void KMyMoneyApp::skipSchedule(MyMoneySchedule& schedule)
           }
         }
       }
-    } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(this, QString("<qt>") + i18n("Unable to skip scheduled transaction <b>%1</b>.", schedule.name()) + QString("</qt>"), e->what());
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(this, QString("<qt>") + i18n("Unable to skip scheduled transaction <b>%1</b>.", schedule.name()) + QString("</qt>"), e.what());
     }
   }
 }
@@ -4378,9 +4333,8 @@ void KMyMoneyApp::slotScheduleEnter(void)
     try {
       MyMoneySchedule schedule = MyMoneyFile::instance()->schedule(d->m_selectedSchedule.id());
       enterSchedule(schedule);
-    } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_selectedSchedule.name()), e->what());
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_selectedSchedule.name()), e.what());
     }
   }
 }
@@ -4391,9 +4345,8 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
   if (!schedule.id().isEmpty()) {
     try {
       schedule = MyMoneyFile::instance()->schedule(schedule.id());
-    } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e->what());
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
       return rc;
     }
 
@@ -4508,16 +4461,14 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
               deleteTransactionEditor();
               ft.commit();
             }
-          } catch (MyMoneyException *e) {
-            KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e->what());
-            delete e;
+          } catch (const MyMoneyException &e) {
+            KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
           }
           deleteTransactionEditor();
         }
       }
-    } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e->what());
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(this, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
     }
     delete dlg;
   }
@@ -4553,8 +4504,7 @@ void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
         try {
           MyMoneyFile::instance()->payeeByName(newname);
           newname = QString("%1 [%2]").arg(newnameBase).arg(++count);
-        } catch (MyMoneyException* e) {
-          delete e;
+        } catch (const MyMoneyException &) {
           break;
         }
       }
@@ -4564,10 +4514,9 @@ void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
       MyMoneyFile::instance()->addPayee(p);
       id = p.id();
       ft.commit();
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(this, i18n("Unable to add payee"),
-                                 i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-      delete e;
+                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   }
 }
@@ -4738,10 +4687,9 @@ void KMyMoneyApp::slotPayeeDelete(void)
           file->modifyAccount(loanAccount);
         }
 
-      } catch (MyMoneyException *e) {
+      } catch (const MyMoneyException &e) {
         KMessageBox::detailedSorry(0, i18n("Unable to reassign payee of transaction/split"),
-                                   i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-        delete e;
+                                   i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
       }
     } // if !translist.isEmpty()
 
@@ -4795,10 +4743,9 @@ void KMyMoneyApp::slotPayeeDelete(void)
     // If we just deleted the payees, they sure don't exist anymore
     slotSelectPayees(QList<MyMoneyPayee>());
 
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     KMessageBox::detailedSorry(0, i18n("Unable to remove payee(s)"),
-                               i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-    delete e;
+                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
   }
 }
 
@@ -4831,8 +4778,7 @@ void KMyMoneyApp::slotTagNew(const QString& newnameBase, QString& id)
         try {
           MyMoneyFile::instance()->tagByName(newname);
           newname = QString("%1 [%2]").arg(newnameBase).arg(++count);
-        } catch (MyMoneyException* e) {
-          delete e;
+        } catch (const MyMoneyException &) {
           break;
         }
       }
@@ -4842,10 +4788,9 @@ void KMyMoneyApp::slotTagNew(const QString& newnameBase, QString& id)
       MyMoneyFile::instance()->addTag(ta);
       id = ta.id();
       ft.commit();
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(this, i18n("Unable to add tag"),
-                                 i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-      delete e;
+                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   }
 }
@@ -5008,10 +4953,9 @@ void KMyMoneyApp::slotTagDelete(void)
           file->modifySchedule(*it);  // modify the schedule in the MyMoney engine
         } // for - Schedules
 
-      } catch (MyMoneyException *e) {
+      } catch (const MyMoneyException &e) {
         KMessageBox::detailedSorry(0, i18n("Unable to reassign tag of transaction/split"),
-                                   i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-        delete e;
+                                   i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
       }
     } // if !translist.isEmpty()
 
@@ -5026,10 +4970,9 @@ void KMyMoneyApp::slotTagDelete(void)
     // If we just deleted the tags, they sure don't exist anymore
     slotSelectTags(QList<MyMoneyTag>());
 
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     KMessageBox::detailedSorry(0, i18n("Unable to remove tag(s)"),
-                               i18n("%1 thrown in %2:%3", e->what(), e->file(), e->line()));
-    delete e;
+                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
   }
 }
 
@@ -5044,9 +4987,8 @@ void KMyMoneyApp::slotCurrencyNew(void)
     try {
       MyMoneyFile::instance()->addCurrency(currency);
       ft.commit();
-    } catch (MyMoneyException* e) {
-      KMessageBox::sorry(this, i18n("Cannot create new currency. %1", e->what()), i18n("New currency"));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::sorry(this, i18n("Cannot create new currency. %1", e.what()), i18n("New currency"));
     }
     emit currencyCreated(id);
   }
@@ -5065,14 +5007,12 @@ void KMyMoneyApp::slotCurrencyUpdate(const QString &currencyId, const QString& c
         file->modifyCurrency(currency);
         d->m_selectedCurrency = currency;
         ft.commit();
-      } catch (MyMoneyException* e) {
-        KMessageBox::sorry(this, i18n("Cannot update currency. %1", e->what()), i18n("Update currency"));
-        delete e;
+      } catch (const MyMoneyException &e) {
+        KMessageBox::sorry(this, i18n("Cannot update currency. %1", e.what()), i18n("Update currency"));
       }
     }
-  } catch (MyMoneyException *e) {
-    KMessageBox::sorry(this, i18n("Cannot update currency. %1", e->what()), i18n("Update currency"));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::sorry(this, i18n("Cannot update currency. %1", e.what()), i18n("Update currency"));
   }
 }
 
@@ -5083,9 +5023,8 @@ void KMyMoneyApp::slotCurrencyDelete(void)
     try {
       MyMoneyFile::instance()->removeCurrency(d->m_selectedCurrency);
       ft.commit();
-    } catch (MyMoneyException* e) {
-      KMessageBox::sorry(this, i18n("Cannot delete currency %1. %2", d->m_selectedCurrency.name(), e->what()), i18n("Delete currency"));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::sorry(this, i18n("Cannot delete currency %1. %2", d->m_selectedCurrency.name(), e.what()), i18n("Delete currency"));
     }
   }
 }
@@ -5098,9 +5037,8 @@ void KMyMoneyApp::slotCurrencySetBase(void)
       try {
         MyMoneyFile::instance()->setBaseCurrency(d->m_selectedCurrency);
         ft.commit();
-      } catch (MyMoneyException *e) {
-        KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2", d->m_selectedCurrency.name(), e->what()), i18n("Set base currency"));
-        delete e;
+      } catch (const MyMoneyException &e) {
+        KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2", d->m_selectedCurrency.name(), e.what()), i18n("Set base currency"));
       }
     }
   }
@@ -5122,9 +5060,8 @@ void KMyMoneyApp::slotBudgetNew(void)
       MyMoneyFile::instance()->budgetByName(newname);
       newname = i18n("Budget <numid>%1</numid> (<numid>%2</numid>)", date.year(), i++);
     }
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &) {
     // all ok, the name is unique
-    delete e;
   }
 
   MyMoneyFileTransaction ft;
@@ -5134,9 +5071,8 @@ void KMyMoneyApp::slotBudgetNew(void)
 
     MyMoneyFile::instance()->addBudget(budget);
     ft.commit();
-  } catch (MyMoneyException *e) {
-    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to add budget: %1, thrown in %2:%3", e->what(), e->file(), e->line()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to add budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
   }
 }
 
@@ -5166,9 +5102,8 @@ void KMyMoneyApp::slotBudgetDelete(void)
     }
     ft.commit();
 
-  } catch (MyMoneyException *e) {
-    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to remove budget: %1, thrown in %2:%3", e->what(), e->file(), e->line()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to remove budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
   }
 }
 
@@ -5183,9 +5118,8 @@ void KMyMoneyApp::slotBudgetCopy(void)
 
       MyMoneyFile::instance()->addBudget(budget);
       ft.commit();
-    } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to add budget: %1, thrown in %2:%3", e->what(), e->file(), e->line()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to add budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   }
 }
@@ -5220,9 +5154,8 @@ void KMyMoneyApp::slotBudgetChangeYear(void)
           budget.setBudgetStart(newYear);
           MyMoneyFile::instance()->modifyBudget(budget);
           ft.commit();
-        } catch (MyMoneyException *e) {
-          KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3", e->what(), e->file(), e->line()));
-          delete e;
+        } catch (const MyMoneyException &e) {
+          KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
         }
       }
     }
@@ -5258,9 +5191,8 @@ void KMyMoneyApp::slotBudgetForecast(void)
         MyMoneyFile::instance()->modifyBudget(budget);
         ft.commit();
       }
-    } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3", e->what(), e->file(), e->line()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify budget: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   }
 }
@@ -5347,9 +5279,8 @@ void KMyMoneyApp::slotTransactionDuplicate(void)
       if (!d->m_selectedAccount.id().isEmpty())
         d->m_myMoneyView->slotLedgerSelected(d->m_selectedAccount.id(), lt.id());
 
-    } catch (MyMoneyException* e) {
-      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to duplicate transaction(s): %1, thrown in %2:%3", e->what(), e->file(), e->line()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to duplicate transaction(s): %1, thrown in %2:%3", e.what(), e.file(), e.line()));
     }
     // switch off the progress bar
     slotStatusProgressBar(-1, -1);
@@ -5400,9 +5331,8 @@ void KMyMoneyApp::doDeleteTransactions(void)
       slotStatusProgressBar(i++, 0);
     }
     ft.commit();
-  } catch (MyMoneyException* e) {
-    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to delete transaction(s): %1, thrown in %2:%3", e->what(), e->file(), e->line()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to delete transaction(s): %1, thrown in %2:%3", e.what(), e.file(), e.line()));
   }
   slotStatusProgressBar(-1, -1);
 }
@@ -5477,9 +5407,8 @@ void KMyMoneyApp::slotTransactionsEditSplits(void)
           connect(d->m_transactionEditor, SIGNAL(balanceWarning(QWidget*,MyMoneyAccount,QString)), d->m_balanceWarning, SLOT(slotShowMessage(QWidget*,MyMoneyAccount,QString)));
           d->m_transactionEditor->enterTransactions(id);
           ft.commit();
-        } catch (MyMoneyException* e) {
-          KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3", e->what(), e->file(), e->line()));
-          delete e;
+        } catch (const MyMoneyException &e) {
+          KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
         }
       }
     }
@@ -5669,9 +5598,8 @@ void KMyMoneyApp::markTransaction(MyMoneySplit::reconcileFlagE flag)
     }
     slotStatusProgressBar(-1, -1);
     ft.commit();
-  } catch (MyMoneyException* e) {
-    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3", e->what(), e->file(), e->line()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
   }
 }
 
@@ -5714,9 +5642,8 @@ void KMyMoneyApp::slotTransactionsAccept(void)
     }
     slotStatusProgressBar(-1, -1);
     ft.commit();
-  } catch (MyMoneyException* e) {
-    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to accept transaction: %1, thrown in %2:%3", e->what(), e->file(), e->line()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(0, i18n("Error"), i18n("Unable to accept transaction: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
   }
 }
 
@@ -5732,8 +5659,7 @@ void KMyMoneyApp::slotTransactionGotoAccount(void)
       // d->m_accountGoto while calling slotUpdateActions()
       QString accountId = d->m_accountGoto;
       d->m_myMoneyView->slotLedgerSelected(accountId, transactionId);
-    } catch (MyMoneyException* e) {
-      delete e;
+    } catch (const MyMoneyException &) {
     }
   }
 }
@@ -5751,8 +5677,7 @@ void KMyMoneyApp::slotTransactionGotoPayee(void)
       QString payeeId = d->m_payeeGoto;
       QString accountId = d->m_selectedAccount.id();
       d->m_myMoneyView->slotPayeeSelected(payeeId, accountId, transactionId);
-    } catch (MyMoneyException* e) {
-      delete e;
+    } catch (const MyMoneyException &) {
     }
   }
 }
@@ -5828,8 +5753,7 @@ void KMyMoneyApp::slotMoveToAccount(const QString& id)
         }
       }
       ft.commit();
-    } catch (MyMoneyException *e) {
-      delete e;
+    } catch (const MyMoneyException &) {
     }
   }
 }
@@ -5966,9 +5890,8 @@ void KMyMoneyApp::transactionUnmatch(void)
     }
     ft.commit();
 
-  } catch (MyMoneyException *e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to unmatch the selected transactions"), e->what());
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(0, i18n("Unable to unmatch the selected transactions"), e.what());
   }
 }
 
@@ -6005,16 +5928,15 @@ void KMyMoneyApp::transactionMatch(void)
     MyMoneyFileTransaction ft;
     try {
       if (startMatchTransaction.id().isEmpty())
-        throw new MYMONEYEXCEPTION(i18n("No manually entered transaction selected for matching"));
+        throw MYMONEYEXCEPTION(i18n("No manually entered transaction selected for matching"));
       if (endMatchTransaction.id().isEmpty())
-        throw new MYMONEYEXCEPTION(i18n("No imported transaction selected for matching"));
+        throw MYMONEYEXCEPTION(i18n("No imported transaction selected for matching"));
 
       TransactionMatcher matcher(d->m_selectedAccount);
       matcher.match(startMatchTransaction, startSplit, endMatchTransaction, endSplit);
       ft.commit();
-    } catch (MyMoneyException *e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to match the selected transactions"), e->what());
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::detailedSorry(0, i18n("Unable to match the selected transactions"), e.what());
     }
   }
 }
@@ -6123,8 +6045,7 @@ void KMyMoneyApp::updateCaption(bool skipActions)
   bool modified;
   try {
     modified = MyMoneyFile::instance()->dirty();
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     modified = false;
     skipActions = true;
   }
@@ -6482,9 +6403,8 @@ void KMyMoneyApp::slotUpdateActions(void)
       if (!security.value("kmm-online-source").isEmpty())
         action("investment_online_price_update")->setEnabled(true);
 
-    } catch (MyMoneyException *e) {
-      qDebug("Error retrieving security for investment %s: %s", qPrintable(d->m_selectedInvestment.name()), qPrintable(e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      qDebug("Error retrieving security for investment %s: %s", qPrintable(d->m_selectedInvestment.name()), qPrintable(e.what()));
     }
     if (d->m_selectedInvestment.isClosed())
       action("account_reopen")->setEnabled(true);
@@ -6621,8 +6541,7 @@ void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransac
             name.replace(QRegExp("&(?!&)"), "&&");
             action("transaction_goto_payee")->setText(i18n("Go to '%1'", name));
           }
-        } catch (MyMoneyException *e) {
-          delete e;
+        } catch (const MyMoneyException &) {
         }
       }
       try {
@@ -6646,8 +6565,7 @@ void KMyMoneyApp::slotSelectTransactions(const KMyMoneyRegister::SelectedTransac
             }
           }
         }
-      } catch (MyMoneyException* e) {
-        delete e;
+      } catch (const MyMoneyException &) {
       }
     }
 
@@ -6771,9 +6689,8 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
   try {
     msg = MyMoneyFile::instance()->consistencyCheck();
     ft.commit();
-  } catch (MyMoneyException *e) {
-    msg.append(i18n("Consistency check failed: %1", e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    msg.append(i18n("Consistency check failed: %1", e.what()));
   }
 
   // in case the consistency check was OK, we get a single line as result
@@ -6824,8 +6741,7 @@ void KMyMoneyApp::slotCheckSchedules(void)
             rc = enterSchedule(schedule, true, true);
             schedule = file->schedule((*it).id()); // get a copy of the modified schedule
           }
-        } catch (MyMoneyException* e) {
-          delete e;
+        } catch (const MyMoneyException &) {
         }
       }
       if (rc == KMyMoneyUtils::Ignore) {
@@ -7138,9 +7054,8 @@ void KMyMoneyApp::setAccountOnlineParameters(const MyMoneyAccount& _acc, const M
     MyMoneyFile::instance()->modifyAccount(acc);
     ft.commit();
 
-  } catch (MyMoneyException *e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to setup online parameters for account '%1'", _acc.name()), e->what());
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(0, i18n("Unable to setup online parameters for account '%1'", _acc.name()), e.what());
   }
 }
 
@@ -7164,9 +7079,8 @@ void KMyMoneyApp::slotAccountUnmapOnline(void)
       d->m_selectedAccount.deletePair("StatementKey");
       MyMoneyFile::instance()->modifyAccount(d->m_selectedAccount);
       ft.commit();
-    } catch (MyMoneyException* e) {
-      KMessageBox::error(this, i18n("Unable to unmap account from online account: %1", e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::error(this, i18n("Unable to unmap account from online account: %1", e.what()));
     }
   }
 }
@@ -7237,9 +7151,8 @@ void KMyMoneyApp::slotAccountMapOnline(void)
       try {
         MyMoneyFile::instance()->modifyAccount(acc);
         ft.commit();
-      } catch (MyMoneyException* e) {
-        KMessageBox::error(this, i18n("Unable to map account to online account: %1", e->what()));
-        delete e;
+      } catch (const MyMoneyException &e) {
+        KMessageBox::error(this, i18n("Unable to map account to online account: %1", e.what()));
       }
     }
   }

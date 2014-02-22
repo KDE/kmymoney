@@ -639,9 +639,8 @@ QList<MyMoneyPrice> KForecastView::getAccountPrices(const MyMoneyAccount& acc)
       }
     }
 
-  } catch (MyMoneyException *e) {
-    kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e->what();
-    delete e;
+  } catch (const MyMoneyException &e) {
+    kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e.what();
   }
   return prices;
 }

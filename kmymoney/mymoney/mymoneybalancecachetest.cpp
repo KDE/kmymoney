@@ -98,9 +98,8 @@ void MyMoneyBalanceCacheTest::testClear()
   // Verify that searching for something not in the list is safe
   try {
     m->clear("A000001");
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
-    delete e;
   }
 
 }

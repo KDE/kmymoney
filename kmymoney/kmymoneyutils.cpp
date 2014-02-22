@@ -344,9 +344,8 @@ void KMyMoneyUtils::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTr
 {
   try {
     MyMoneyForecast::calculateAutoLoan(schedule, transaction, balances);
-  } catch (MyMoneyException* e) {
-    KMessageBox::detailedError(0, i18n("Unable to load schedule details"), e->what());
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedError(0, i18n("Unable to load schedule details"), e.what());
   }
 }
 
@@ -496,9 +495,8 @@ MyMoneyTransaction KMyMoneyUtils::scheduledTransaction(const MyMoneySchedule& sc
     if (schedule.type() == MyMoneySchedule::TYPE_LOANPAYMENT) {
       calculateAutoLoan(schedule, t, QMap<QString, MyMoneyMoney>());
     }
-  } catch (MyMoneyException* e) {
-    qDebug("Unable to load schedule details for '%s' during transaction match: %s", qPrintable(schedule.name()), qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    qDebug("Unable to load schedule details for '%s' during transaction match: %s", qPrintable(schedule.name()), qPrintable(e.what()));
   }
 
   t.clearId();
@@ -537,8 +535,7 @@ void KMyMoneyUtils::previouslyUsedCategories(const QString& investmentAccount, Q
         interestId = interestSplits.first().accountId();
       }
     }
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
 }

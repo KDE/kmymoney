@@ -66,7 +66,7 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
     MyMoneyObject(node)
 {
   if ("PAYEE" != node.tagName()) {
-    throw new MYMONEYEXCEPTION("Node was not PAYEE");
+    throw MYMONEYEXCEPTION("Node was not PAYEE");
   }
 
   m_name = node.attribute("name");
@@ -91,7 +91,7 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
   QDomNodeList nodeList = node.elementsByTagName("ADDRESS");
   if (nodeList.count() == 0) {
     QString msg = QString("No ADDRESS in payee %1").arg(m_name);
-    throw new MYMONEYEXCEPTION(msg);
+    throw MYMONEYEXCEPTION(msg);
   }
 
   QDomElement addrNode = nodeList.item(0).toElement();
