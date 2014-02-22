@@ -1724,7 +1724,7 @@ void MyMoneyFileTest::testBaseCurrency(void)
   try {
     m->setBaseCurrency(base);
     QFAIL("Missing expected exception");
-  } catch (const MyMoneyException &e) {
+  } catch (const MyMoneyException &) {
   }
 
   MyMoneyFileTransaction ft;

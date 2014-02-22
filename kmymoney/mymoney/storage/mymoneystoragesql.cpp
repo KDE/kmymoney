@@ -2874,7 +2874,7 @@ void MyMoneyStorageSql::readTags(const QList<QString>& pid)
     m_storage->loadTags(fetchTags(pid));
     readFileInfo();
     m_storage->loadTagId(m_hiIdTags);
-  } catch (const MyMoneyException &e) {
+  } catch (const MyMoneyException &) {
   }
 //  if (pid.isEmpty()) m_tagListRead = true;
 }
