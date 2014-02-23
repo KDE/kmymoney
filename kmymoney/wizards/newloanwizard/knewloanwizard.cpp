@@ -39,7 +39,6 @@
 #include <kpushbutton.h>
 #include <knuminput.h>
 #include <kmessagebox.h>
-#include <kiconloader.h>
 #include <kguiitem.h>
 
 // ----------------------------------------------------------------------------

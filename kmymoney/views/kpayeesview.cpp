@@ -129,7 +129,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_newButton->setToolTip(newButtonItem.toolTip());
 
   KGuiItem renameButtonItem(QString(""),
-                            KIcon("payee-rename"),
+                            KIcon("user-properties"),
                             i18n("Rename the current selected payee"),
                             i18n("Use this to start renaming the selected payee."));
   m_renameButton->setGuiItem(renameButtonItem);

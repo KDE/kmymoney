@@ -742,7 +742,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
 
     if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
       QString pathStatusHeader;
-      KIconLoader::global()->loadIcon(QString("online-banking"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathStatusHeader);
+      KIconLoader::global()->loadIcon(QString("download"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathStatusHeader);
       d->m_html += QString("<td class=\"center\"><img src=\"%1\" border=\"0\"></td>").arg(pathStatusHeader);
     }
 

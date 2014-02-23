@@ -164,7 +164,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     m_scheduleTree->setSortingEnabled(false);
 
     KScheduleTreeItem *itemBills = new KScheduleTreeItem(m_scheduleTree);
-    itemBills->setIcon(0, KIcon("account-types-expense"));
+    itemBills->setIcon(0, KIcon("view-expenses-categories"));
     itemBills->setText(0, i18n("Bills"));
     itemBills->setData(0, KScheduleTreeItem::OrderRole, QVariant("0"));
     itemBills->setFirstColumnSpanned(true);
@@ -173,21 +173,21 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     bold.setBold(true);
     itemBills->setFont(0, bold);
     KScheduleTreeItem *itemDeposits = new KScheduleTreeItem(m_scheduleTree);
-    itemDeposits->setIcon(0, KIcon("account-types-income"));
+    itemDeposits->setIcon(0, KIcon("view-income-categories"));
     itemDeposits->setText(0, i18n("Deposits"));
     itemDeposits->setData(0, KScheduleTreeItem::OrderRole, QVariant("1"));
     itemDeposits->setFirstColumnSpanned(true);
     itemDeposits->setFlags(Qt::ItemIsEnabled);
     itemDeposits->setFont(0, bold);
     KScheduleTreeItem *itemLoans = new KScheduleTreeItem(m_scheduleTree);
-    itemLoans->setIcon(0, KIcon("account-types-loan"));
+    itemLoans->setIcon(0, KIcon("view-loan"));
     itemLoans->setText(0, i18n("Loans"));
     itemLoans->setData(0, KScheduleTreeItem::OrderRole, QVariant("2"));
     itemLoans->setFirstColumnSpanned(true);
     itemLoans->setFlags(Qt::ItemIsEnabled);
     itemLoans->setFont(0, bold);
     KScheduleTreeItem *itemTransfers = new KScheduleTreeItem(m_scheduleTree);
-    itemTransfers->setIcon(0, KIcon("transaction"));
+    itemTransfers->setIcon(0, KIcon("view-financial-transfer"));
     itemTransfers->setText(0, i18n("Transfers"));
     itemTransfers->setData(0, KScheduleTreeItem::OrderRole, QVariant("3"));
     itemTransfers->setFirstColumnSpanned(true);

@@ -431,7 +431,7 @@ void AccountsModel::load()
   setData(favoriteAccountsItem->index(), favoritesAccountId, AccountIdRole);
   setData(favoriteAccountsItem->index(), 0, DisplayOrderRole);
   favoriteAccountsItem->setColumnCount(columnCount());
-  favoriteAccountsItem->setIcon(QIcon(DesktopIcon("account"))); //krazy:exclude=iconnames
+  favoriteAccountsItem->setIcon(QIcon(DesktopIcon("view-bank-account")));
   favoriteAccountsItem->setEditable(false);
   favoriteAccountsItem->setFont(font);
 

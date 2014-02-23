@@ -165,7 +165,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 1
   m_institutionsView = new KInstitutionsView();
   m_institutionsViewFrame = m_model->addPage(m_institutionsView, i18n("Institutions"));
-  m_institutionsViewFrame->setIcon(KIcon("institution"));
+  m_institutionsViewFrame->setIcon(KIcon("view-bank"));
 
   connect(m_institutionsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
   connect(m_institutionsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
@@ -178,7 +178,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 2
   m_accountsView = new KAccountsView();
   m_accountsViewFrame = m_model->addPage(m_accountsView, i18n("Accounts"));
-  m_accountsViewFrame->setIcon(KIcon("account")); //krazy:exclude=iconnames
+  m_accountsViewFrame->setIcon(KIcon("view-bank-account"));
 
   connect(m_accountsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
   connect(m_accountsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
@@ -208,7 +208,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 4
   m_categoriesView = new KCategoriesView();
   m_categoriesViewFrame = m_model->addPage(m_categoriesView, i18n("Categories"));
-  m_categoriesViewFrame->setIcon(KIcon("categories"));
+  m_categoriesViewFrame->setIcon(KIcon("view-financial-categories"));
 
   connect(m_categoriesView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
   connect(m_categoriesView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInstitution(MyMoneyObject)));
@@ -246,7 +246,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 7
   m_ledgerView = new KGlobalLedgerView();
   m_ledgerViewFrame = m_model->addPage(m_ledgerView, i18n("Ledgers"));
-  m_ledgerViewFrame->setIcon(KIcon("ledger"));  //krazy:exclude=iconnames
+  m_ledgerViewFrame->setIcon(KIcon("view-financial-list"));
 
   connect(m_ledgerView, SIGNAL(accountSelected(MyMoneyObject)), kmymoney, SLOT(slotSelectAccount(MyMoneyObject)));
   connect(m_ledgerView, SIGNAL(openContextMenu()), kmymoney, SLOT(slotShowTransactionContextMenu()));
@@ -264,7 +264,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 8
   m_investmentView = new KInvestmentView();
   m_investmentViewFrame = m_model->addPage(m_investmentView, i18n("Investments"));
-  m_investmentViewFrame->setIcon(KIcon("investment"));
+  m_investmentViewFrame->setIcon(KIcon("view-investment"));
 
   connect(m_investmentView, SIGNAL(accountSelected(QString,QString)),
           this, SLOT(slotLedgerSelected(QString,QString)));
@@ -275,7 +275,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 9
   m_reportsView = new KReportsView();
   m_reportsViewFrame = m_model->addPage(m_reportsView, i18n("Reports"));
-  m_reportsViewFrame->setIcon(KIcon("office-chart-tall-pie"));
+  m_reportsViewFrame->setIcon(KIcon("view-statistics"));
   connect(m_reportsView, SIGNAL(ledgerSelected(QString,QString)),
           this, SLOT(slotLedgerSelected(QString,QString)));
   connect(m_reportsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
@@ -283,7 +283,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 10
   m_budgetView = new KBudgetView();
   m_budgetViewFrame = m_model->addPage(m_budgetView, i18n("Budgets"));
-  m_budgetViewFrame->setIcon(KIcon("budget"));
+  m_budgetViewFrame->setIcon(KIcon("view-time-schedule-calculus"));
 
   connect(m_budgetView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowBudgetContextMenu()));
   connect(m_budgetView, SIGNAL(selectObjects(QList<MyMoneyBudget>)), kmymoney, SLOT(slotSelectBudget(QList<MyMoneyBudget>)));
@@ -293,7 +293,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 11
   m_forecastView = new KForecastView();
   m_forecastViewFrame = m_model->addPage(m_forecastView, i18n("Forecast"));
-  m_forecastViewFrame->setIcon(KIcon("forecast"));
+  m_forecastViewFrame->setIcon(KIcon("view-financial-forecast"));
   connect(m_forecastView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   //set the model

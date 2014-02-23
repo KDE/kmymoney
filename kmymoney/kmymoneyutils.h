@@ -409,6 +409,15 @@ public:
     * for the QWizard passed as argument.
     */
   static void updateWizardButtons(QWizard *);
+
+  /**
+    * This method overlays an icon over another one, to get a composite one
+    * eg. an icon to add accounts
+    */
+  static QPixmap overlayIcon(const QString source, const QString overlay);
+
+
+
 };
 
 #endif

@@ -82,7 +82,7 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
   //set button icons
-  m_control->buttonChart->setIcon(KIcon("office-chart-tall-pie"));
+  m_control->buttonChart->setIcon(KIcon("office-chart-pie"));
   m_control->buttonClose->setIcon(KIcon("document-close"));
   m_control->buttonConfigure->setIcon(KIcon("configure"));
   m_control->buttonCopy->setIcon(KIcon("edit-copy"));

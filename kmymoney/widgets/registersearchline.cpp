@@ -32,10 +32,11 @@
 #include <kcombobox.h>
 #include <kiconloader.h>
 #include <klocale.h>
-#include <KIcon>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include <kmymoneyutils.h>
 
 using namespace KMyMoneyRegister;
 
@@ -74,8 +75,8 @@ void RegisterSearchLine::init(Register *reg)
   // the case labels in RegisterSearchLine::itemMatches() at the same time
   d->combo->insertItem(RegisterFilter::Any, SmallIcon("system-run"), i18n("Any status"));
   d->combo->insertItem(RegisterFilter::Imported, SmallIcon("document-import"), i18n("Imported"));
-  d->combo->insertItem(RegisterFilter::Matched, SmallIcon("process-stop"), i18n("Matched"));
-  d->combo->insertItem(RegisterFilter::Erroneous, SmallIcon("attention"), i18n("Erroneous"));
+  d->combo->insertItem(RegisterFilter::Matched, KMyMoneyUtils::overlayIcon("view-financial-transfer", "document-import"), i18n("Matched"));
+  d->combo->insertItem(RegisterFilter::Erroneous, SmallIcon("task-attention"), i18n("Erroneous"));
   d->combo->insertItem(RegisterFilter::NotMarked, i18n("Not marked"));
   d->combo->insertItem(RegisterFilter::NotReconciled, i18n("Not reconciled"));
   d->combo->insertItem(RegisterFilter::Cleared, i18nc("Reconciliation state 'Cleared'", "Cleared"));

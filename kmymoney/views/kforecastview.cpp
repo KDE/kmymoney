@@ -64,7 +64,7 @@ KForecastView::KForecastView(QWidget *parent) :
   KConfigGroup grp = config->group("Last Use Settings");
   m_tab->setCurrentIndex(grp.readEntry("KForecastView_LastType", 0));
 
-  m_forecastButton->setIcon(KIcon("forecast"));
+  m_forecastButton->setIcon(KIcon("view-financial-forecast"));
 
   connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabChanged(QWidget*)));
 

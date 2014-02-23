@@ -324,21 +324,21 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_budgetList->setContextMenuPolicy(Qt::CustomContextMenu);
 
   KGuiItem newButtonItem(QString(""),
-                         KIcon("budget-add"),
+                         KIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "list-add")),
                          i18n("Creates a new budget"),
                          i18n("Use this to create a new empty budget."));
   m_newButton->setGuiItem(newButtonItem);
   m_newButton->setToolTip(newButtonItem.toolTip());
 
   KGuiItem renameButtonItem(QString(""),
-                            KIcon("budget-edit"),
+                            KIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "document-edit")),
                             i18n("Rename the current selected budget"),
                             i18n("Use this to start renaming the selected budget."));
   m_renameButton->setGuiItem(renameButtonItem);
   m_renameButton->setToolTip(renameButtonItem.toolTip());
 
   KGuiItem deleteButtonItem(QString(""),
-                            KIcon("budget-delete"),
+                            KIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "edit-delete")),
                             i18n("Delete the current selected budget"),
                             i18n("Use this to delete the selected budget."));
   m_deleteButton->setGuiItem(deleteButtonItem);

@@ -36,7 +36,6 @@
 
 #include <klocale.h>
 #include <kglobal.h>
-#include <kiconloader.h>
 #include <kdebug.h>
 #include <kpushbutton.h>
 

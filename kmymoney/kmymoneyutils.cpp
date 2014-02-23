@@ -29,6 +29,7 @@
 #include <QPixmap>
 #include <QWizard>
 #include <QAbstractButton>
+#include <QPixmapCache>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -561,4 +562,17 @@ void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)
   wizard->button(QWizard::CancelButton)->setIcon(KStandardGuiItem::cancel().icon());
   wizard->button(QWizard::NextButton)->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
   wizard->button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
+}
+
+QPixmap KMyMoneyUtils::overlayIcon(const QString icon, const QString overlay)
+{
+    QPixmap result;
+    if (!QPixmapCache::find(icon, result)) {
+      result = DesktopIcon(icon);
+      QPixmapCache::insert(icon, result);
+    }
+    QPainter pixmapPainter(&result);
+    QPixmap ovly = DesktopIcon(overlay);
+    pixmapPainter.drawPixmap(ovly.width()/2, ovly.height()/2, ovly.width()/2, ovly.height()/2, ovly);
+    return result;
 }
