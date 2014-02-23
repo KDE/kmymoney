@@ -21,9 +21,10 @@
 #include "schedulestoicalendar.h"
 
 // KDE includes
-#include <kgenericfactory.h>
-#include <kglobal.h>
-#include <kfile.h>
+#include <KPluginFactory>
+#include <KGlobal>
+#include <KLocale>
+#include <KFile>
 
 // libical includes
 #include <libical/ical.h>

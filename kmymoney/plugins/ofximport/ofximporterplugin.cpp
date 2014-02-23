@@ -29,13 +29,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kgenericfactory.h>
-#include <kdebug.h>
-#include <kfile.h>
-#include <kurl.h>
-#include <kaction.h>
-#include <kmessagebox.h>
-#include <kactioncollection.h>
+#include <KPluginFactory>
+#include <KDebug>
+#include <KFile>
+#include <KUrl>
+#include <KAction>
+#include <KMessageBox>
+#include <KActionCollection>
 #include <KWallet/Wallet>
 
 // ----------------------------------------------------------------------------

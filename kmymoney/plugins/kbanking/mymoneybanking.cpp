@@ -41,7 +41,7 @@
 
 #include <KLocale>
 #include <KMessageBox>
-#include <KGenericFactory>
+#include <KPluginFactory>
 #include <KAction>
 #include <KActionCollection>
 #include <KGlobal>

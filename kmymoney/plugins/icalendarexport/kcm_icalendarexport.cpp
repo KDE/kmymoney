@@ -25,7 +25,7 @@
 #include <QBoxLayout>
 
 // KDE includes
-#include <kgenericfactory.h>
+#include <KPluginFactory>
 
 #include "pluginsettings.h"
 #include "ui_pluginsettingsdecl.h"

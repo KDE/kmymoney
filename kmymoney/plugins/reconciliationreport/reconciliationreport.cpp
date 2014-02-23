@@ -21,14 +21,14 @@
 #include "reconciliationreport.h"
 
 // KDE includes
-#include <kgenericfactory.h>
-#include <kaction.h>
-#include <kglobal.h>
-#include <kglobalsettings.h>
-#include <klocale.h>
-#include <kstandarddirs.h>
-#include <kplugininfo.h>
-#include <kcolorscheme.h>
+#include <KPluginFactory>
+#include <KAction>
+#include <KGlobal>
+#include <KGlobalSettings>
+#include <KLocale>
+#include <KStandardDirs>
+#include <KPluginInfo>
+#include <KColorScheme>
 
 // KMyMoney includes
 #include "mymoneyfile.h"
