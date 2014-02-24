@@ -35,7 +35,6 @@ IF( KDE4_BUILD_TESTS )
 	  ${QT_QTCORE_LIBRARY}
 	  ${GMP_LIBRARIES} )
 
-IF(NOT WIN32)
   # MyMoneyDatabaseMgr
   set( mymoneydatabasemgrtest_SRCS mymoneydatabasemgrtest.cpp ../mymoneytestutils.cpp )
 
@@ -43,7 +42,6 @@ IF(NOT WIN32)
   ADD_DEPENDENCIES( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage )
 
   target_link_libraries( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage ${target_link_libraries_test} )
-ENDIF(NOT WIN32)
 
   # MyMoneyMap
   set( mymoneymaptest_SRCS mymoneymaptest.cpp ../mymoneytestutils.cpp )
