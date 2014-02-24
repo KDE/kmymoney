@@ -880,7 +880,7 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
       case 'y':
         if (_strict && (*it_scanned).length() != (*it_format).length())
           throw MYMONEYEXCEPTION(QString("Length of year (%1) does not match expected length (%2).")
-                                     .arg(*it_scanned, *it_format));
+                                 .arg(*it_scanned, *it_format));
 
         year = (*it_scanned).toUInt(&ok);
 

@@ -251,7 +251,7 @@ bool MyMoneyStorageSql::createDatabase(const KUrl& url)
     maindb.setPassword(url.pass());
     if (!maindb.open()) {
       throw MYMONEYEXCEPTION(QString("opening database %1 in function %2")
-                                 .arg(maindb.databaseName()).arg(Q_FUNC_INFO));
+                             .arg(maindb.databaseName()).arg(Q_FUNC_INFO));
     } else {
       QSqlQuery qm(maindb);
       QString qs = m_driver->createDbString(dbName) + ';';
@@ -373,7 +373,7 @@ int MyMoneyStorageSql::upgradeDb()
     if (!lowerTables.contains(tt.key().toLower())) {
       if (!q.exec(tt.value().createString())) // krazy:exclude=crashy
         throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO,
-                                              QString("creating view %1").arg(tt.key())));
+                                          QString("creating view %1").arg(tt.key())));
     }
   }
 
@@ -4062,7 +4062,7 @@ const MyMoneyKeyValueContainer MyMoneyStorageSql::readKeyValuePairs(const QStrin
   q.bindValue(":type", kvpType);
   q.bindValue(":id", kvpId);
   if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("reading Kvp for %1 %2").arg(kvpType) // krazy:exclude=crashy
-        .arg(kvpId)));
+                                          .arg(kvpId)));
   while (q.next()) list.setValue(q.value(0).toString(), q.value(1).toString());
   return (list);
 }
