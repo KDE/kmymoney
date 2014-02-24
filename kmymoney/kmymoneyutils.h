@@ -414,7 +414,7 @@ public:
     * This method overlays an icon over another one, to get a composite one
     * eg. an icon to add accounts
     */
-  static QPixmap overlayIcon(const QString source, const QString overlay);
+  static QPixmap overlayIcon(const QString source, const QString overlay, const Qt::Corner corner = Qt::BottomRightCorner);
 
 
 

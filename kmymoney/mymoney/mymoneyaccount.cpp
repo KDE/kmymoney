@@ -619,7 +619,7 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
       if (accountGroup() == MyMoneyAccount::Asset)
         icon = "view-bank-account";
       else
-        icon = "account-types-liability";
+        icon = "view-loan";
       break;
 
     case MyMoneyAccount::Investment:

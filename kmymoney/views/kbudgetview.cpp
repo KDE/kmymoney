@@ -324,7 +324,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
   m_budgetList->setContextMenuPolicy(Qt::CustomContextMenu);
 
   KGuiItem newButtonItem(QString(""),
-                         KIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "list-add")),
+                         KIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "list-add", Qt::TopRightCorner)),
                          i18n("Creates a new budget"),
                          i18n("Use this to create a new empty budget."));
   m_newButton->setGuiItem(newButtonItem);

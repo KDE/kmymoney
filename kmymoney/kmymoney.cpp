@@ -552,7 +552,7 @@ void KMyMoneyApp::initActions(void)
   // *************
   KAction *edit_find_transaction = actionCollection()->addAction("edit_find_transaction");
   edit_find_transaction->setText(i18n("Find transaction..."));
-  edit_find_transaction->setIcon(KIcon("edit-find"));
+  edit_find_transaction->setIcon(KMyMoneyUtils::overlayIcon("view-financial-transfer", "edit-find"));
   edit_find_transaction->setShortcut(KShortcut("Ctrl+F"));
   connect(edit_find_transaction, SIGNAL(triggered()), this, SLOT(slotFindTransaction()));
 
@@ -566,13 +566,13 @@ void KMyMoneyApp::initActions(void)
 
   KToggleAction *view_hide_reconciled_transactions = actionCollection()->add<KToggleAction>("view_hide_reconciled_transactions");
   view_hide_reconciled_transactions->setText(i18n("Hide reconciled transactions"));
-  view_hide_reconciled_transactions->setIcon(KIcon("hide-reconciled"));
+  view_hide_reconciled_transactions->setIcon(KMyMoneyUtils::overlayIcon("merge", "view-close"));
   view_hide_reconciled_transactions->setShortcut(KShortcut("Ctrl+R"));
   connect(view_hide_reconciled_transactions, SIGNAL(triggered()), this, SLOT(slotHideReconciledTransactions()));
 
   KToggleAction *view_hide_unused_categories = actionCollection()->add<KToggleAction>("view_hide_unused_categories");
   view_hide_unused_categories->setText(i18n("Hide unused categories"));
-  view_hide_unused_categories->setIcon(KIcon("hide-categories"));
+  view_hide_unused_categories->setIcon(KMyMoneyUtils::overlayIcon("view-financial-categories", "view-close"));
   view_hide_unused_categories->setShortcut(KShortcut("Ctrl+U"));
   connect(view_hide_unused_categories, SIGNAL(triggered()), this, SLOT(slotHideUnusedCategories()));
 
@@ -586,7 +586,7 @@ void KMyMoneyApp::initActions(void)
   // *********************
   KAction *institution_new = actionCollection()->addAction("institution_new");
   institution_new->setText(i18n("New institution..."));
-  institution_new->setIcon(KMyMoneyUtils::overlayIcon("view-bank", "list-add"));
+  institution_new->setIcon(KMyMoneyUtils::overlayIcon("view-bank", "list-add", Qt::TopRightCorner));
   connect(institution_new, SIGNAL(triggered()), this, SLOT(slotInstitutionNew()));
 
   KAction *institution_edit = actionCollection()->addAction("institution_edit");
@@ -604,7 +604,7 @@ void KMyMoneyApp::initActions(void)
   // *****************
   KAction *account_new = actionCollection()->addAction("account_new");
   account_new->setText(i18n("New account..."));
-  account_new->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "list-add"));
+  account_new->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "list-add", Qt::TopRightCorner));
   connect(account_new, SIGNAL(triggered()), this, SLOT(slotAccountNew()));
 
   // note : action "category_new" is included in this menu but defined below
@@ -615,13 +615,13 @@ void KMyMoneyApp::initActions(void)
 
   KAction *account_reconcile = actionCollection()->addAction("account_reconcile");
   account_reconcile->setText(i18n("Reconcile..."));
-  account_reconcile->setIcon(KIcon("reconcile"));
+  account_reconcile->setIcon(KIcon("merge"));
   account_reconcile->setShortcut(KShortcut("Ctrl+Shift+R"));
   connect(account_reconcile, SIGNAL(triggered()), this, SLOT(slotAccountReconcileStart()));
 
   KAction *account_reconcile_finish = actionCollection()->addAction("account_reconcile_finish");
   account_reconcile_finish->setText(i18nc("Finish reconciliation", "Finish"));
-  account_reconcile_finish->setIcon(KIcon("reconcile-finish"));
+  account_reconcile_finish->setIcon(KMyMoneyUtils::overlayIcon("merge", "dialog-ok"));
   connect(account_reconcile_finish, SIGNAL(triggered()), this, SLOT(slotAccountReconcileFinish()));
 
   KAction *account_reconcile_postpone = actionCollection()->addAction("account_reconcile_postpone");
@@ -692,7 +692,7 @@ void KMyMoneyApp::initActions(void)
   // *******************
   KAction *category_new = actionCollection()->addAction("category_new");
   category_new->setText(i18n("New category..."));
-  category_new->setIcon(KMyMoneyUtils::overlayIcon("view-financial-categories", "list-add"));
+  category_new->setIcon(KMyMoneyUtils::overlayIcon("view-financial-categories", "list-add", Qt::TopRightCorner));
   connect(category_new, SIGNAL(triggered()), this, SLOT(slotCategoryNew()));
 
   KAction *category_edit = actionCollection()->addAction("category_edit");
@@ -771,7 +771,7 @@ void KMyMoneyApp::initActions(void)
   // ***************************
   KAction *transaction_new = actionCollection()->addAction("transaction_new");
   transaction_new->setText(i18nc("New transaction button", "New"));
-  transaction_new->setIcon(KMyMoneyUtils::overlayIcon("view-financial-transfer", "list-add"));
+  transaction_new->setIcon(KMyMoneyUtils::overlayIcon("view-financial-transfer", "list-add", Qt::TopRightCorner));
   transaction_new->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Insert));
   connect(transaction_new, SIGNAL(triggered()), this, SLOT(slotTransactionsNew()));
 
@@ -872,7 +872,7 @@ void KMyMoneyApp::initActions(void)
   //Investment
   KAction *investment_new = actionCollection()->addAction("investment_new");
   investment_new->setText(i18n("New investment..."));
-  investment_new->setIcon(KMyMoneyUtils::overlayIcon("view-investment", "list-add"));
+  investment_new->setIcon(KMyMoneyUtils::overlayIcon("view-investment", "list-add", Qt::TopRightCorner));
   connect(investment_new, SIGNAL(triggered()), this, SLOT(slotInvestmentNew()));
 
   KAction *investment_edit = actionCollection()->addAction("investment_edit");
@@ -960,7 +960,7 @@ void KMyMoneyApp::initActions(void)
   //Budget
   KAction *budget_new = actionCollection()->addAction("budget_new");
   budget_new->setText(i18n("New budget"));
-  budget_new->setIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "list-add"));
+  budget_new->setIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "list-add", Qt::TopRightCorner));
   connect(budget_new, SIGNAL(triggered()), this, SLOT(slotBudgetNew()));
 
   KAction *budget_rename = actionCollection()->addAction("budget_rename");

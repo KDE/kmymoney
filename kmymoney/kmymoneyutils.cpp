@@ -564,15 +564,38 @@ void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)
   wizard->button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
 }
 
-QPixmap KMyMoneyUtils::overlayIcon(const QString icon, const QString overlay)
+QPixmap KMyMoneyUtils::overlayIcon(const QString icon, const QString overlay, const Qt::Corner corner)
 {
-    QPixmap result;
-    if (!QPixmapCache::find(icon, result)) {
-      result = DesktopIcon(icon);
-      QPixmapCache::insert(icon, result);
-    }
-    QPainter pixmapPainter(&result);
-    QPixmap ovly = DesktopIcon(overlay);
-    pixmapPainter.drawPixmap(ovly.width()/2, ovly.height()/2, ovly.width()/2, ovly.height()/2, ovly);
-    return result;
+  int x, y;
+  QPixmap result;
+  if (!QPixmapCache::find(icon, result)) {
+    result = DesktopIcon(icon);
+    QPixmapCache::insert(icon, result);
+  }
+
+  QPainter pixmapPainter(&result);
+  QPixmap ovly = DesktopIcon(overlay);
+
+  switch (corner) {
+    case Qt::TopLeftCorner:
+      x = 0;
+      y = 0;
+      break;
+    case Qt::TopRightCorner:
+      x = ovly.width()/2;
+      y = 0;
+      break;
+    case Qt::BottomLeftCorner:
+      x = 0;
+      y = ovly.height()/2;
+      break;
+    case Qt::BottomRightCorner:
+    default:
+      x = ovly.width()/2;
+      y = ovly.height()/2;
+      break;
+  }
+
+  pixmapPainter.drawPixmap(x, y, ovly.width()/2, ovly.height()/2, ovly);
+  return result;
 }
