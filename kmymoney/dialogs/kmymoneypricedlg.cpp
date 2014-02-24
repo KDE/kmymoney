@@ -45,6 +45,7 @@
 #include <kmymoneycurrencyselector.h>
 #include <mymoneyfile.h>
 #include <kmymoneyglobalsettings.h>
+#include <kmymoneyutils.h>
 #include <kpricetreeitem.h>
 
 KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
@@ -82,7 +83,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
                           i18n("Change the details of selected price information."));
   m_editButton->setGuiItem(editButtonItem);
 
-  m_onlineQuoteButton->setIcon(KIcon("investment-update-online"));
+  m_onlineQuoteButton->setIcon(KMyMoneyUtils::overlayIcon("view-investment", "download"));
 
   connect(m_editButton, SIGNAL(clicked()), this, SLOT(slotEditPrice()));
   connect(m_deleteButton, SIGNAL(clicked()), this, SLOT(slotDeletePrice()));

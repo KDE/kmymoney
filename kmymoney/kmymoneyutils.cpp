@@ -564,17 +564,17 @@ void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)
   wizard->button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
 }
 
-QPixmap KMyMoneyUtils::overlayIcon(const QString icon, const QString overlay, const Qt::Corner corner)
+QPixmap KMyMoneyUtils::overlayIcon(const QString icon, const QString overlay, const Qt::Corner corner, int size)
 {
   int x, y;
   QPixmap result;
   if (!QPixmapCache::find(icon, result)) {
-    result = DesktopIcon(icon);
+    result = DesktopIcon(icon, size);
     QPixmapCache::insert(icon, result);
   }
 
   QPainter pixmapPainter(&result);
-  QPixmap ovly = DesktopIcon(overlay);
+  QPixmap ovly = DesktopIcon(overlay, size);
 
   switch (corner) {
     case Qt::TopLeftCorner:
