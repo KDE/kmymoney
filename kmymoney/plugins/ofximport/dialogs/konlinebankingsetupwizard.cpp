@@ -456,15 +456,15 @@ int KOnlineBankingSetupWizard::ofxStatusCallback(struct OfxStatusData data, void
 
   QString message;
 
-  if (data.code_valid == true) {
+  if (data.code_valid) {
     message += QString("#%1 %2: \"%3\"\n").arg(data.code).arg(data.name, data.description);
   }
 
-  if (data.server_message_valid == true) {
+  if (data.server_message_valid) {
     message += i18n("Server message: %1\n", data.server_message);
   }
 
-  if (data.severity_valid == true) {
+  if (data.severity_valid) {
     switch (data.severity) {
       case OfxStatusData::INFO :
         break;

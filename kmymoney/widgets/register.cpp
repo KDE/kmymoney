@@ -674,11 +674,7 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
       break;
   }
 
-  switch (account.accountType()) {
-    default:
-      m_lastCol = BalanceColumn;
-      break;
-  }
+  m_lastCol = BalanceColumn;
 
   setUpdatesEnabled(true);
 }

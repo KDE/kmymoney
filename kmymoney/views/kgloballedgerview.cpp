@@ -1037,8 +1037,10 @@ void KGlobalLedgerView::slotNewTransaction(void)
 void KGlobalLedgerView::setupDefaultAction(void)
 {
   switch (m_account.accountType()) {
-      // TODO if we want a different action for different account types
-      //      we can add cases here
+    case MyMoneyAccount::Asset:
+    case MyMoneyAccount::AssetLoan:
+    case MyMoneyAccount::Savings:
+      d->m_action = KMyMoneyRegister::ActionDeposit;
     default:
       d->m_action = KMyMoneyRegister::ActionWithdrawal;
       break;

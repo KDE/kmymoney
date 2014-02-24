@@ -161,7 +161,8 @@ void MyMoneyKeyValueContainerTest::testReadXML()
 
   // make sure, an empty node does not trigger an exception
   try {
-    MyMoneyKeyValueContainer k(QDomNode);
+    QDomElement e;
+    MyMoneyKeyValueContainer k(e);
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }

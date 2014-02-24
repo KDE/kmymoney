@@ -494,37 +494,33 @@ void KMyMoneyView::removeStorage(void)
   }
 }
 
-void KMyMoneyView::enableViews(int state)
+void KMyMoneyView::enableViewsIfFileOpen()
 {
-  if (state == -1)
-    state = m_fileOpen;
-
   // call set enabled only if the state differs to avoid widgets 'bouncing on the screen' while doing this
-  if (m_accountsViewFrame->isEnabled() != state)
-    m_accountsViewFrame->setEnabled(state);
-  if (m_institutionsViewFrame->isEnabled() != state)
-    m_institutionsViewFrame->setEnabled(state);
-  if (m_scheduleViewFrame->isEnabled() != state)
-    m_scheduleViewFrame->setEnabled(state);
-  if (m_categoriesViewFrame->isEnabled() != state)
-    m_categoriesViewFrame->setEnabled(state);
-  if (m_payeesViewFrame->isEnabled() != state)
-    m_payeesViewFrame->setEnabled(state);
-  if (m_tagsViewFrame->isEnabled() != state)
-    m_tagsViewFrame->setEnabled(state);
-  if (m_budgetViewFrame->isEnabled() != state)
-    m_budgetViewFrame->setEnabled(state);
-  if (m_ledgerViewFrame->isEnabled() != state)
-    m_ledgerViewFrame->setEnabled(state);
-  if (m_investmentViewFrame->isEnabled() != state)
-    m_investmentViewFrame->setEnabled(state);
-  if (m_reportsViewFrame->isEnabled() != state)
-    m_reportsViewFrame->setEnabled(state);
-  if (m_forecastViewFrame->isEnabled() != state)
-    m_forecastViewFrame->setEnabled(state);
+  if (m_accountsViewFrame->isEnabled() != m_fileOpen)
+    m_accountsViewFrame->setEnabled(m_fileOpen);
+  if (m_institutionsViewFrame->isEnabled() != m_fileOpen)
+    m_institutionsViewFrame->setEnabled(m_fileOpen);
+  if (m_scheduleViewFrame->isEnabled() != m_fileOpen)
+    m_scheduleViewFrame->setEnabled(m_fileOpen);
+  if (m_categoriesViewFrame->isEnabled() != m_fileOpen)
+    m_categoriesViewFrame->setEnabled(m_fileOpen);
+  if (m_payeesViewFrame->isEnabled() != m_fileOpen)
+    m_payeesViewFrame->setEnabled(m_fileOpen);
+  if (m_tagsViewFrame->isEnabled() != m_fileOpen)
+    m_tagsViewFrame->setEnabled(m_fileOpen);
+  if (m_budgetViewFrame->isEnabled() != m_fileOpen)
+    m_budgetViewFrame->setEnabled(m_fileOpen);
+  if (m_ledgerViewFrame->isEnabled() != m_fileOpen)
+    m_ledgerViewFrame->setEnabled(m_fileOpen);
+  if (m_investmentViewFrame->isEnabled() != m_fileOpen)
+    m_investmentViewFrame->setEnabled(m_fileOpen);
+  if (m_reportsViewFrame->isEnabled() != m_fileOpen)
+    m_reportsViewFrame->setEnabled(m_fileOpen);
+  if (m_forecastViewFrame->isEnabled() != m_fileOpen)
+    m_forecastViewFrame->setEnabled(m_fileOpen);
 
-  emit viewStateChanged(state != 0);
-
+  emit viewStateChanged(m_fileOpen);
 }
 
 void KMyMoneyView::slotLedgerSelected(const QString& _accId, const QString& transaction)
@@ -1739,12 +1735,6 @@ void KMyMoneyView::loadAncientCurrencies(void)
 
   // Source https://en.wikipedia.org/wiki/Azerbaijani_manat
   loadAncientCurrency("AZM", i18n("Azerbaijani Manat"), "m.", QDate(2006, 1, 1), MyMoneyMoney(1, 5000), "AZN");
-}
-
-void KMyMoneyView::viewUp(void)
-{
-  if (!fileOpen())
-    return;
 }
 
 void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)

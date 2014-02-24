@@ -6057,7 +6057,7 @@ void KMyMoneyApp::updateCaption(bool skipActions)
   setCaption(caption, modified);
 
   if (!skipActions) {
-    d->m_myMoneyView->enableViews();
+    d->m_myMoneyView->enableViewsIfFileOpen();
     slotUpdateActions();
   }
 }
