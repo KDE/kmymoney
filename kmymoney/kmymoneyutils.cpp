@@ -568,6 +568,14 @@ QPixmap KMyMoneyUtils::overlayIcon(const QString icon, const QString overlay, co
 {
   int x, y;
   QPixmap result;
+  QString overlaidIcon = icon + '-' + overlay;
+
+  // If found in the cache, return quickly
+  if (QPixmapCache::find(overlaidIcon, result)) {
+      return result;
+  }
+
+  // try to retrieve the main icon from cache
   if (!QPixmapCache::find(icon, result)) {
     result = DesktopIcon(icon, size);
     QPixmapCache::insert(icon, result);
@@ -595,7 +603,10 @@ QPixmap KMyMoneyUtils::overlayIcon(const QString icon, const QString overlay, co
       y = ovly.height()/2;
       break;
   }
-
   pixmapPainter.drawPixmap(x, y, ovly.width()/2, ovly.height()/2, ovly);
+
+  //save for later use
+  QPixmapCache::insert(overlaidIcon, result);
+
   return result;
 }
