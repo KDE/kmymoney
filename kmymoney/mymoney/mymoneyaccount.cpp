@@ -679,13 +679,13 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
   QPainter pixmapPainter(&result);
   if (isClosed()) {
     QPixmap ovly = DesktopIcon("dialog-close", size);
-    pixmapPainter.drawPixmap(ovly.width()/2, ovly.height()/2, ovly.width()/2, ovly.height()/2, ovly);
+    pixmapPainter.drawPixmap(ovly.width() / 2, ovly.height() / 2, ovly.width() / 2, ovly.height() / 2, ovly);
   } else if (reconcileFlag) {
     QPixmap ovly = DesktopIcon("flag-green", size);
-    pixmapPainter.drawPixmap(size/2, size/2, ovly.width()/2, ovly.height()/2, ovly);
+    pixmapPainter.drawPixmap(size / 2, size / 2, ovly.width() / 2, ovly.height() / 2, ovly);
   } else if (!onlineBankingSettings().value("provider").isEmpty()) {
     QPixmap ovly = DesktopIcon("download", size);
-    pixmapPainter.drawPixmap(size/2, size/2, ovly.width()/2, ovly.height()/2, ovly);
+    pixmapPainter.drawPixmap(size / 2, size / 2, ovly.width() / 2, ovly.height() / 2, ovly);
   }
   return result;
 }

@@ -572,7 +572,7 @@ QPixmap KMyMoneyUtils::overlayIcon(const QString icon, const QString overlay, co
 
   // If found in the cache, return quickly
   if (QPixmapCache::find(overlaidIcon, result)) {
-      return result;
+    return result;
   }
 
   // try to retrieve the main icon from cache
@@ -590,20 +590,20 @@ QPixmap KMyMoneyUtils::overlayIcon(const QString icon, const QString overlay, co
       y = 0;
       break;
     case Qt::TopRightCorner:
-      x = ovly.width()/2;
+      x = ovly.width() / 2;
       y = 0;
       break;
     case Qt::BottomLeftCorner:
       x = 0;
-      y = ovly.height()/2;
+      y = ovly.height() / 2;
       break;
     case Qt::BottomRightCorner:
     default:
-      x = ovly.width()/2;
-      y = ovly.height()/2;
+      x = ovly.width() / 2;
+      y = ovly.height() / 2;
       break;
   }
-  pixmapPainter.drawPixmap(x, y, ovly.width()/2, ovly.height()/2, ovly);
+  pixmapPainter.drawPixmap(x, y, ovly.width() / 2, ovly.height() / 2, ovly);
 
   //save for later use
   QPixmapCache::insert(overlaidIcon, result);
