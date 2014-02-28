@@ -17,8 +17,6 @@
 
 #include "kmymoneyview.h"
 
-#include <unistd.h>
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -1251,36 +1249,15 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
 
     if (url.isLocalFile()) {
       filename = url.toLocalFile();
-      int fmode = 0600;
-      gid_t gid = static_cast<gid_t>(-1);      // don't change the group id (see "man 2 chown")
-      QFileInfo fi(filename);
-      if (fi.exists()) {
-        fmode |= fi.permission(QFile::ReadGroup) ? 040 : 0;
-        fmode |= fi.permission(QFile::WriteGroup) ? 020 : 0;
-        fmode |= fi.permission(QFile::ReadOther) ? 004 : 0;
-        fmode |= fi.permission(QFile::WriteOther) ? 002 : 0;
-        if (fi.groupId() != static_cast<uint>(-2))
-          gid = fi.groupId();
-      }
-
-      // create a new basic block here, so that the object qfile gets
-      // deleted, before we reach the chown() call
-      {
-        //FIXME: Port to KDE4 - set the mode later
-        int mask = umask((~fmode) & 0777);
-        umask(mask);
-        try {
-          unsigned int nbak = KMyMoneyGlobalSettings::autoBackupCopies();
-          if (nbak) {
-            KSaveFile::numberedBackupFile(filename, QString(), QString::fromLatin1("~"), nbak);
-          }
-          saveToLocalFile(filename, pWriter, plaintext, keyList);
-        } catch (const MyMoneyException &) {
-          throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
+      try {
+        const unsigned int nbak = KMyMoneyGlobalSettings::autoBackupCopies();
+        if (nbak) {
+          KSaveFile::numberedBackupFile(filename, QString(), QString::fromLatin1("~"), nbak);
         }
+        saveToLocalFile(filename, pWriter, plaintext, keyList);
+      } catch (const MyMoneyException &) {
+        throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
       }
-      if (chown(QFile::encodeName(filename), static_cast<uid_t>(-1), gid) != 0)
-        KMessageBox::information(this, i18n("The group identifier of the file could not be preserved"));
     } else {
       KTemporaryFile tmpfile;
       tmpfile.open(); // to obtain the name
