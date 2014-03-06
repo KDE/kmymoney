@@ -793,7 +793,7 @@ void KMyMoneyApp::initActions(void)
 
   KAction *transaction_editsplits = actionCollection()->addAction("transaction_editsplits");
   transaction_editsplits->setText(i18nc("Edit split button", "Edit splits"));
-  transaction_editsplits->setIcon(KMyMoneyUtils::overlayIcon("view-financial-transfer", "view-list-details"));
+  transaction_editsplits->setIcon(KIcon("split"));
   connect(transaction_editsplits, SIGNAL(triggered()), this, SLOT(slotTransactionsEditSplits()));
 
   KAction *transaction_cancel = actionCollection()->addAction("transaction_cancel");
