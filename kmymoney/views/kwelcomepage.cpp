@@ -88,19 +88,19 @@ const QString KWelcomePage::welcomePage(void)
   body += QString("<ul>");
   const QString newFilename = KGlobal::dirs()->findResource("appdata", "html/images/filenew.png");
   body += QString("<li><img src=\"%1\">").arg(newFilename);
-  body += QString("<a href=\"/action?id=file_new\">" + i18n("Get started and setup my accounts") + "</a></li>");
+  body += QString("<a href=\"/action?id=file_new\">" + i18n("Get started and setup accounts") + "</a></li>");
   const QString dataFilename = KGlobal::dirs()->findResource("appdata", "html/images/kmymoneydata.png");
   body += QString("<li><img src=\"%1\">").arg(dataFilename);
-  body += QString("<a href=\"/action?id=file_open\">" + i18n("Open an existing KMyMoney data file") + "</a></li>");
+  body += QString("<a href=\"/action?id=file_open\">" + i18n("Open an existing data file") + "</a></li>");
   const QString manualFilename = KGlobal::dirs()->findResource("appdata", "html/images/manual.png");
   body += QString("<li><img src=\"%1\">").arg(manualFilename);
   body += QString("<a href=\"/action?id=help_contents\">" + i18n("Learn how to use KMyMoney") + "</a></li>");
   const QString konquerorFilename = KGlobal::dirs()->findResource("appdata", "html/images/konqueror.png");
   body += QString("<li><img src=\"%1\">").arg(konquerorFilename);
-  body += QString("<a href=\"http://kmymoney2.sf.net\">" + i18n("Visit the KMyMoney website") + "</a></li>");
+  body += QString("<a href=\"http://kmymoney2.sf.net\">" + i18n("Visit our website") + "</a></li>");
   const QString aboutFilename = KGlobal::dirs()->findResource("appdata", "html/images/about_kde.png");
   body += QString("<li><img src=\"%1\">").arg(aboutFilename);
-  body += QString("<a href=\"http://forum.kde.org/viewforum.php?f=69\">" + i18n("Get help from the KMyMoney community") + "</a></li>");
+  body += QString("<a href=\"http://forum.kde.org/viewforum.php?f=69\">" + i18n("Get help from our community") + "</a></li>");
   const QString messageFilename = KGlobal::dirs()->findResource("appdata", "html/images/messagebox_info.png");
   body += QString("<li><img src=\"%1\">").arg(messageFilename);
   body += QString("<a href=\"/welcome?mode=whatsnew\">" + i18n("See what's new in this version") + "</a></li>");
@@ -165,7 +165,7 @@ const QString KWelcomePage::whatsNewPage(void)
 //This is where the content should be put to show up inside the decorative frame
 //Begin content
 
-  body += QString("<p>" + i18n("The KMyMoney development team is pleased to announce a major step forward for what has been described as \"the BEST personal finance manager for FREE users\".") + "</p>");
+  body += QString("<p>" + i18n("We are pleased to announce a major step forward for what has been described as \"the BEST personal finance manager for FREE users\".") + "</p>");
   body += QString("<h4>" + i18n("What's new in this version:") + "</h4>");
 
   body += QString("<ul>");
@@ -180,7 +180,7 @@ const QString KWelcomePage::whatsNewPage(void)
   }
   body += QString("</ul>");
 
-  body += QString("<p>" + i18n("Let us know what you think. We hope that you enjoy using this version of KMyMoney.") + "</p>");
+  body += QString("<p>" + i18n("Let us know what you think. We hope that you enjoy using the application.") + "</p>");
   body += QString("<p>" + i18n("Please let us know about any abnormal behavior in the program by selecting <a href=\"/action?id=help_report_bug\">\"Report bug...\"</a> from the help menu or by sending an e-mail to the developers mailing list."));
   body += QString("<font color=\"blue\"><a href=\"mailto:kmymoney-devel@kde.org\">kmymoney-devel@kde.org</a></font></p>");
   body += QString("<p><div align=\"right\">");
