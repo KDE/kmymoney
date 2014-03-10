@@ -104,42 +104,6 @@ MyMoneySecurity sepaOnlineTransfer::currency() const
   return MyMoneyFile::instance()->baseCurrency();
 }
 
-onlineTask::convertType sepaOnlineTransfer::canConvertInto( const QString& onlineTaskName ) const
-{
-  Q_UNUSED(onlineTaskName);
-  return onlineTask::convertImpossible;
-}
-
-onlineTask::convertType sepaOnlineTransfer::canConvert( const QString& onlineTaskName ) const
-{
-  if (onlineTaskName == "org.kmymoney.creditTransfer.germany")
-    return onlineTask::convertionLoseless;
-  return onlineTask::convertionLossy;
-}
-
-onlineTask* sepaOnlineTransfer::convertInto( const QString& onlineTaskName, QString& messageString, bool& payeeChanged ) const
-{
-  Q_UNUSED(onlineTaskName);
-  Q_UNUSED(messageString);
-  Q_UNUSED(payeeChanged);
-  throw new onlineTask::badConvert;
-}
-
-void sepaOnlineTransfer::convert(const onlineTask &task, QString& messageString, bool& payeeChanged )
-{
-  Q_UNUSED(messageString);
-  if ( task.taskName() == germanOnlineTransfer::name() ) {
-    const germanOnlineTransfer& germanTask = static_cast<const germanOnlineTransfer&>(task);
-    payeeChanged = true;
-    setOriginAccount( germanTask.responsibleAccount() );
-    setValue( germanTask.value() );
-    setPurpose( germanTask.purpose() );
-    setEndToEndReference( QString() );
-    return;
-  }
-  throw new onlineTask::badConvert;
-}
-
 QSharedPointer<const sepaOnlineTransfer::settings> sepaOnlineTransfer::getSettings() const
 {
   if (_settings.isNull()) {

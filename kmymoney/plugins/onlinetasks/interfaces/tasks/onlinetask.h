@@ -30,37 +30,20 @@ class onlineJob;
 /**
  * @brief Enables onlineTask meta system
  *
- * Use ONLINETASK_META in your onlineTask derived class to create an onlineTask type hash
- * and name. Use ONLINETASK_META_INIT() in your .cpp file to init it (important!).
+ * Use ONLINETASK_META in your onlineTask derived class to create an onlineTask type iid
+ * (the name). This is should be like the plugin iid of Qt5 (ONLINATASK_META was written
+ * for Qt4).
  *
  * @param onlineTaskSubClass the class type (e.g. onlineTask)
- * @param nameString A unique name for the task, should be replaced by IID of Qt5 plugins
+ * @param IID A unique name for the task, should be replaced by IID of Qt5 plugins
  *
  * \section onlineTaskMeta The onlineTask Meta System
  *
- * To prevent accidently using a super-class when sub-class should be used the onlineTasks
- * have a meta system. Each onlineTask has a hash and a name - analogue to C++11's type_index.
- * Both can be ask using a static way and a virtual method.
+ * To prevent accidently using a super-class if sub-class should be used, the onlineTasks
+ * have a meta system. Each onlineTask has an iid which can be requested with a virtual
+ * method or a static method.
  *
- * The @b hash of type @c size_t can be requested using
- * \code
- * // get the hash of a known type
- * onlineTask::hash;
- * // get the hash of a pointer
- * onlineTask* unknownTask = new onlineTaskSubClass();
- * unknownTask->taskHash();
- * \endcode
- *
- * The hash is created at startup and only contant during runtime. After a programm
- * restart it might change! You should only use it for testing.
- * It can be used in switchs as well.
- * \code
- * if (unknownTask->taskHash() == onlineTask::hash)
- *    // do something
- * \endcode
- *
- * The (more complex) task @b name (type @c QString) is also constant after a restart and set by the programmer.
- * It is used in communication with the plugins and if persistance is important.
+ * The task @b IID (type @c QString) is constant after a restart and set by the programmer.
  * \code
  * // get the name of a known type
  * onlineTask::name()
@@ -69,19 +52,15 @@ class onlineJob;
  * unknownTask->taskName();
  * \endcode
  *
- * There is no way to transform a name to a hash or the other way round.
- *
- * Activate the meta system using ONLINETASK_META() and ONLINETASK_META_INIT().
- *
- * @internal I am not proud of this. But I had no better idea without using C++11. Sorry.
+ * Activate the meta system using ONLINETASK_META() in your classes public section.
  */
-#define ONLINETASK_META(onlineTaskClass, nameString) \
-/** @brief Returns the name of onlineTask type (part of @ref onlineTaskMeta) */ \
+#define ONLINETASK_META(onlineTaskClass, IID) \
+/** @brief Returns the iid of onlineTask type (part of @ref onlineTaskMeta) */ \
 static const QString& name() { \
-  static const QString _name = nameString; \
+  static const QString _name = IID; \
   return _name; \
 } \
-/** @brief Returns the name of onlineTask type (part of @ref onlineTaskMeta) */ \
+/** @brief Returns the iid of onlineTask type (part of @ref onlineTaskMeta) */ \
 virtual QString taskName() const { \
   return onlineTaskClass::name(); \
 } \
@@ -94,10 +73,11 @@ friend class onlineJobAdministration
  * infrastructure is not realized yet (and needs further changes at the storage). The docu is just forward compatible.
  * 
  * Everything an onlinePlugin can do is represented as a task. Due to the huge amount of possible onlineTasks
- * they are loaded during runtime. Which also allows a third party online plugin to introduce it's own
+ * they are loaded during runtime. Which also allows a third party online plugin to introduce its own
  * tasks. However tasks are seperated from the onlinePlugins to allow more than one plugin to use the same task.
  * 
- * The widgets to edit an onlineTask are created by subclassing IonlineJobEdit.
+ * The widgets to edit an onlineTask are created by subclassing @a IonlineJobEdit. To enable KMyMoney to convert
+ * one task into another use @a onlineTaskConverter.
  * 
  * @important Do not delete onlineTasks or use pointers to onlineTasks directly. Use onlineJob instead!
  * This prevents common C++ pitfalls.
@@ -124,17 +104,6 @@ public:
   virtual QString jobTypeName() const = 0;
 
   /**
-   * @brief Type of convertion
-   * 
-   * Used by canConvert().
-   */
-  enum convertType {
-    convertImpossible = 0, /**< Convert operation is not possible */
-    convertionLossy, /**< Convertion is accompanied with loss of data. The loss has to be confirmed by the user */
-    convertionLoseless /**< Convertion is possible without user interaction */
-  };
-
-  /**
    * @brief Account/plugin dependent settings for an onlineTask
    *
    * Many onlineTasks settings vary due to multiple reasons. E.g.
@@ -158,17 +127,6 @@ public:
     virtual ~settings();
   };
 
-  /**
-   * @brief Thrown if convert or convertInto fails
-   */
-  class badConvert : public MyMoneyException
-  {
-  public:
-    badConvert(const QString file = QString(), const unsigned long line = 0)
-      : MyMoneyException("Converted onlineTask with unsupported conversion", file, line)
-    {}
-  };
-
 protected:
   onlineTask( const onlineTask& other );
 
@@ -187,11 +145,11 @@ protected:
   virtual void writeXML(QDomDocument &document, QDomElement &parent) const = 0;
   
   /**
-   * @brief Create a new instance of this task with xml data
+   * @brief Create a new instance of this task based on xml data
    * 
-   * This method is used to load an onlineTask from a file.
+   * This method is used to load an onlineTask from a xml file.
    * 
-   * This method is created const as it should create a *new* onlineTask.
+   * This method is created const as it should create a @emph new onlineTask.
    * @return A pointer to a new instance, caller takes ownership
    */
   virtual onlineTask* createFromXml(const QDomElement &element) const = 0;
@@ -203,52 +161,11 @@ protected:
    * the correct onlinePlugin which can execute this job. If the job is related to more
    * than one account (e.g. a password change) select a random one.
    * 
-   * You can make this method public if usefull.
+   * You can make this method public if it is usefull for you.
    * 
    * @return accountId
    */
   virtual QString responsibleAccount() const = 0;
-
-  /**
-   * @brief Checks if this onlineTask can be converted into onlineTaskName
-   * 
-   * @param onlineTaskName onlineTask::name() to convert into
-   */
-  virtual convertType canConvertInto( const QString& onlineTaskName ) const = 0;
-
-  /**
-   * @brief Checks if another onlineTask can be copied into this one
-   * 
-   * @param onlineTaskName onlineTask::name() of source
-   */
-  virtual convertType canConvert( const QString& onlineTaskName ) const = 0;
-
-  /**
-   * @brief Creates another onlineTask based on it's own data
-   *
-   * @param onlineTaskName onlineTask::name() to convert into
-   * @param messageString OUT a translated string with description which data was lost during convertion (not needed if only payeeChanged applies).
-   * This string is shown by the ui to the user.
-   * @param payeeChanged OUT true if the address book was used to change any beneficiary data
-   * @return newly created onlineTask, caller gains ownership of this task
-   *
-   * @throws badConvert if convert is not possible
-   */
-  virtual onlineTask* convertInto( const QString& onlineTaskName, QString& messageString, bool& payeeChanged ) const = 0;
-
-  /**
-   * @brief Replaces it's own data with the data of another task
-   *
-   * This is similar to operatior= ( other type ). But can be lossy.
-   *
-   * @param task to convert (do not modify pointer!)
-   * @param messageString OUT a translated string with description which data was lost during convertion (not needed if only payeeChanged applies).
-   * This string is shown by the ui to the user.
-   * @param payeeChanged OUT true if the address book was used to change any beneficiary data
-   *
-   * @throws badConvert if convert is not possible
-   */
-  virtual void convert( const onlineTask& task, QString& messageString, bool& payeeChanged ) = 0;
 
   friend class onlineJob;
 

@@ -120,11 +120,6 @@ public:
   
 protected:
   sepaOnlineTransfer* clone() const;
-
-  virtual convertType canConvertInto( const QString& onlineTaskName ) const;
-  virtual convertType canConvert( const QString& onlineTaskName ) const;
-  virtual onlineTask* convertInto( const QString& onlineTaskName, QString& messageString, bool& payeeChanged ) const;
-  virtual void convert( const onlineTask&, QString& messageString, bool& payeeChanged );
   
   virtual sepaOnlineTransfer* createFromXml(const QDomElement &element) const;
   virtual void writeXML(QDomDocument& document, QDomElement& parent) const;

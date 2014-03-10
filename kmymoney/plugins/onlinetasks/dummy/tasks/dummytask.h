@@ -56,10 +56,6 @@ protected:
   virtual void writeXML(QDomDocument&, QDomElement&) const {}
   virtual dummyTask* createFromXml(const QDomElement &element) const { return (new dummyTask); }
   virtual QString responsibleAccount() const { return QString(); };
-  virtual convertType canConvertInto( const QString& onlineTaskName ) const { return onlineTask::convertImpossible; }
-  virtual convertType canConvert( const QString& onlineTaskName ) const { return onlineTask::convertImpossible; }
-  virtual dummyTask* convertInto( const QString& onlineTaskName, QString& messageString, bool& payeeChanged ) const { return 0; };
-  virtual void convert( const onlineTask& task, QString& messageString, bool& payeeChanged ) {};
   
   int m_testNumber;
 };

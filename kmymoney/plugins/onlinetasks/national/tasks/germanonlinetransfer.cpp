@@ -22,7 +22,6 @@
 #include <QtGui/QRegExpValidator>
 
 #include "mymoney/mymoneyfile.h"
-#include "../../sepa/tasks/sepaonlinetransfer.h"
 #include "onlinejobadministration.h"
 
 static const unsigned short defaultTextKey = 51;
@@ -99,46 +98,6 @@ MyMoneySecurity germanOnlineTransfer::currency() const
   return MyMoneyFile::instance()->security(originMyMoneyAccount().currencyId());
 #endif
   return MyMoneyFile::instance()->baseCurrency();
-}
-
-onlineTask::convertType germanOnlineTransfer::canConvertInto( const QString& onlineTaskName ) const
-{
-  Q_UNUSED(onlineTaskName);
-  return onlineTask::convertImpossible;
-}
-
-onlineTask::convertType germanOnlineTransfer::canConvert( const QString& onlineTaskName ) const
-{
-  if(onlineTaskName == "org.kmymoney.creditTransfer.sepa")
-    return onlineTask::convertionLossy;
-
-  return onlineTask::convertImpossible;
-}
-
-onlineTask* germanOnlineTransfer::convertInto( const QString& onlineTaskName , QString& messageString, bool& payeeChanged ) const
-{
-  Q_UNUSED(onlineTaskName);
-  Q_UNUSED(messageString);
-  Q_UNUSED(payeeChanged);
-  throw new onlineTask::badConvert;
-}
-
-void germanOnlineTransfer::convert(const onlineTask &task, QString& messageString, bool& payeeChanged )
-{
-  if( task.taskName() == sepaOnlineTransfer::name() ) {
-    const sepaOnlineTransfer& sepaTask = static_cast<const sepaOnlineTransfer&>(task);
-    payeeChanged = true;
-    setOriginAccount( sepaTask.responsibleAccount() );
-    setValue( sepaTask.value() );
-    _purpose = QString("");
-    if ( !sepaTask.endToEndReference().isEmpty() ) {
-      messageString = i18n("National credit transfer has no field for SEPA reference. It was added to the purpose instead.");
-      _purpose = sepaTask.endToEndReference() + QChar('\n');
-    }
-    _purpose.append( sepaTask.purpose() );
-    return;
-  }
-  throw new onlineTask::badConvert;
 }
 
 QSharedPointer<const germanOnlineTransfer::settings> germanOnlineTransfer::getSettings() const

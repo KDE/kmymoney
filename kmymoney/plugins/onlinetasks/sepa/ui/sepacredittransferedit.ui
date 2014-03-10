@@ -139,7 +139,7 @@
    <item row="7" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Reference</string>
+      <string>End-to-end reference</string>
      </property>
      <property name="buddy">
       <cstring>sepaReference</cstring>

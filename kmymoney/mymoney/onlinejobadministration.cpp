@@ -1,3 +1,21 @@
+/*
+ * This file is part of KMyMoney, A Personal Finance Manager for KDE
+ * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "onlinejobadministration.h"
 
 // ----------------------------------------------------------------------------
@@ -15,23 +33,19 @@
 #include "mymoney/mymoneykeyvaluecontainer.h"
 #include "plugins/onlinepluginextended.h"
 
-//#include "onlinetasks/national/tasks/germanonlinetransfer.h"
-//#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
-
 onlineJobAdministration onlineJobAdministration::m_instance;
 
 onlineJobAdministration::onlineJobAdministration(QObject *parent) :
     QObject(parent)
 {
-//  registerOnlineTask( new germanOnlineTransfer );
-//  registerOnlineTask( new sepaOnlineTransfer );
 }
 
 onlineJobAdministration::~onlineJobAdministration()
 {
+// Will be done somewhere else
 //  qDeleteAll(m_onlinePlugins);
   qDeleteAll(m_onlineTasks);
-  // no m_onlinePlugins.clear(), as this is done anyway
+  qDeleteAll(m_onlineTaskConverter);
 }
 
 KMyMoneyPlugin::OnlinePluginExtended* onlineJobAdministration::getOnlinePlugin( const QString& accountId ) const
@@ -100,8 +114,8 @@ onlineTask* onlineJobAdministration::createOnlineTask(const QString& name) const
 }
 
 /**
- * @TODO Need a technique to handle task were the plugin was not loaded
- * There could be a new dummy task which is linked staticaly. If task could not be loaded
+ * @TODO Need a technique to handle tasks were the plugin was not loaded.
+ * There could be a new dummy task which is linked statically. If the original task could not be loaded the dummy is used.
  */
 onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, const QDomElement& element) const
 {
@@ -118,55 +132,17 @@ onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
   return m_onlineTasks.value(name);
 }
 
-
-onlineTask::convertType onlineJobAdministration::canConvertFrom(const QString& originalName, const QString& destinationName) const
+onlineTaskConverter::convertType onlineJobAdministration::canConvert(const QString& originalTaskIid, const QString& convertTaskIid ) const
 {
-  const onlineTask* task = m_onlineTasks.value(destinationName);
-  if (task != 0) {
-    return task->canConvert(originalName);
-  }
-
-  return onlineTask::convertImpossible;
+  return canConvert( originalTaskIid, QStringList(convertTaskIid) );
 }
 
-
-onlineTask::convertType onlineJobAdministration::canConvertInto(const QString& originalName, const QString& destinationName) const
+onlineTaskConverter::convertType onlineJobAdministration::canConvert(const QString& originalTaskIid, const QStringList& convertTaskIids) const
 {
-  const onlineTask* task = m_onlineTasks.value(originalName);
-  if (task != 0) {
-    return task->canConvertInto(destinationName);
-  }
-
-  return onlineTask::convertImpossible;
-}
-
-onlineTask::convertType onlineJobAdministration::canConvert(const QString& originalName, const QString& destinationName ) const
-{
-  if ( originalName == destinationName )
-    return onlineTask::convertionLoseless;
-
-  // test onlineTask::canConvert
-  onlineTask::convertType convertType = canConvertFrom(originalName, destinationName);
-  if (convertType != onlineTask::convertImpossible)
-    return convertType;
-
-  // test onlineTask::canConvertInto
-  return canConvertInto(originalName, destinationName);
-}
-
-onlineTask::convertType onlineJobAdministration::canConvert( const onlineJob& original, const QString& destinationName ) const
-{
-  try {
-    return canConvert(original.task()->taskName(), destinationName);
-  } catch ( onlineJob::emptyTask* e ) {
-    delete e;
-  }
-  return onlineTask::convertImpossible;
-}
-
-onlineTask::convertType onlineJobAdministration::canConvert( const onlineJob& original, const QStringList& destinationNames) const
-{
-  onlineTask::convertType bestConvertType = onlineTask::convertImpossible;
+  Q_ASSERT(false);
+  //! @todo Make alive
+  onlineTaskConverter::convertType bestConvertType = onlineTaskConverter::convertImpossible;
+#if 0
   foreach (QString destinationName, destinationNames) {
     onlineTask::convertType type = canConvert( original, destinationName );
     if ( type == onlineTask::convertionLossy )
@@ -174,53 +150,60 @@ onlineTask::convertType onlineJobAdministration::canConvert( const onlineJob& or
     else if ( type == onlineTask::convertionLoseless )
       return onlineTask::convertionLoseless;
   }
+#endif
   return bestConvertType;
 }
 
-onlineJob onlineJobAdministration::convert( const onlineJob& original, const QString& destinationName, const QString& id ) const
+/**
+ * @todo if more than one converter offers the convert, use best
+ */
+onlineJob onlineJobAdministration::convert(const onlineJob& original, const QString& convertTaskIid, onlineTaskConverter::convertType& convertType, QString& userInformation, const QString& onlineJobId) const
 {
-  const QString originalName = original.task()->taskName();
-  if ( originalName == destinationName )
-    return onlineJob(id, original);
-
-  QString messageString = QString();
-  bool payeeChanged = false;
-
-  if ( canConvertFrom(originalName, destinationName) != onlineTask::convertImpossible ) {
-    // Use onlineTask::convert()
-    onlineJob job = createOnlineJob(destinationName, id);
-    if ( job.isNull() )
-      throw new onlineTask::badConvert(__FILE__, __LINE__);
-    job.task()->convert( *original.constTask(), messageString, payeeChanged );
-    return job;
-  } else if ( canConvertInto(originalName, destinationName) !=  onlineTask::convertImpossible ) {
-    // Use onlineTask::convertInto()
-    onlineTask* const task = original.constTask()->convertInto( destinationName, messageString, payeeChanged );
-    onlineJob newJob = onlineJob(task, id);
-    return newJob;
-  }
-
-  throw new onlineTask::badConvert(__FILE__, __LINE__);
-}
-
-onlineJob onlineJobAdministration::convertBest( const onlineJob& original, const QStringList& destinationNames, const QString& id ) const
-{
-  QString bestDestination = QString();
+  onlineJob newJob;
   
-  foreach (QString destinationName, destinationNames) {
-    onlineTask::convertType type = canConvert( original, destinationName );
-    if ( type == onlineTask::convertionLossy ) {
-      bestDestination = destinationName;
-    } else if ( type == onlineTask::convertionLoseless ) {
-      bestDestination = destinationName;
-      break;
+  QList<onlineTaskConverter*> converterList = m_onlineTaskConverter.values(convertTaskIid);
+  foreach( onlineTaskConverter* converter, converterList ) {
+    if ( converter->convertibleTasks().contains(original.taskIid()) ) {
+      onlineTask* task = converter->convert(*original.task(), convertType, userInformation);
+      Q_ASSERT_X(convertType != onlineTaskConverter::convertImpossible || task != 0, qPrintable("converter for " + converter->convertedTask()), "Converter returned convertType 'impossible' but return was not null_ptr.");
+      if ( task != 0 ) {
+        newJob = onlineJob(task, onlineJobId);
+        break;
+      }
     }
   }
 
-  if ( !bestDestination.isNull() )
-    return convert( original, bestDestination, id );
+  return newJob;
+}
 
-  throw new onlineTask::badConvert(__FILE__, __LINE__);
+onlineJob onlineJobAdministration::convertBest(const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& convertType, QString& userInformation) const
+{
+  return convertBest(original, convertTaskIids, convertType, userInformation, original.id());
+}
+
+onlineJob onlineJobAdministration::convertBest( const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& bestConvertType, QString& bestUserInformation, const QString& onlineJobId ) const
+{
+  onlineJob bestConvert;
+  bestConvertType = onlineTaskConverter::convertImpossible;
+  bestUserInformation = QString();
+  
+  foreach (QString taskIid, convertTaskIids) {
+    // Try convert
+    onlineTaskConverter::convertType convertType = onlineTaskConverter::convertImpossible;
+    QString userInformation;
+    onlineJob convertJob = convert( original, taskIid, convertType, userInformation, onlineJobId );
+    
+    // Check if it was successful
+    if ( bestConvertType < convertType) {
+      bestConvert = convertJob;
+      bestUserInformation = userInformation;
+      bestConvertType = convertType;
+      if ( convertType == onlineTaskConverter::convertionLoseless )
+        break;
+    }
+  }
+
+  return bestConvert;
 }
 
 void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
@@ -232,6 +215,15 @@ void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
   qDebug() << "onlineTask available" << task->taskName();
 }
 
+void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* const converter)
+{
+  if (Q_UNLIKELY( converter == 0 ))
+    return;
+  
+  m_onlineTaskConverter.insertMulti(converter->convertedTask(), converter);
+  qDebug() << "onlineTaskConverter available" << converter->convertedTask() << converter->convertibleTasks();
+}
+
 QSharedPointer<const onlineTask::settings> onlineJobAdministration::taskSettings( const QString& taskName, const QString& accountId ) const
 {
   KMyMoneyPlugin::OnlinePluginExtended* plugin = getOnlinePlugin(accountId);
@@ -239,4 +231,3 @@ QSharedPointer<const onlineTask::settings> onlineJobAdministration::taskSettings
     return ( plugin->settings(accountId, taskName) );
   return QSharedPointer<const onlineTask::settings>();
 }
-

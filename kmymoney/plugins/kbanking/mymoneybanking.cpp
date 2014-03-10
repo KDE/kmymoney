@@ -81,7 +81,7 @@
 #include "kbaccountsettings.h"
 #include "kbmapaccount.h"
 #include "mymoneyfile.h"
-#include <onlinejobadministration.h>
+#include "onlinejobadministration.h"
 #include "kmymoneyview.h"
 #include "kbpickstartdate.h"
 
@@ -89,6 +89,10 @@
 #include "gwenhywfarqtoperators.h"
 #include "aqbankingqtoperators.h"
 #include "aqbankingkmmoperators.h"
+
+//! @todo remove includes when possible
+#include "onlinetasks/national/converter/taskconvertergermantosepa.h"
+#include "onlinetasks/national/converter/taskconvertersepatogerman.h"
 
 K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<KBankingPlugin>();)
 K_EXPORT_PLUGIN(KBankingFactory("kmm_kbanking"))
@@ -192,6 +196,8 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
   //! @FIXME: This should not be here. Just a temporarily solution until onlineTask can be loaded as plugins
   onlineJobAdministration::instance()->registerOnlineTask( new sepaOnlineTransfer );
   onlineJobAdministration::instance()->registerOnlineTask( new germanOnlineTransfer );
+  onlineJobAdministration::instance()->registerOnlineTaskConverter( new taskConverterGermanToSepa );
+  onlineJobAdministration::instance()->registerOnlineTaskConverter( new taskConverterSepaToGerman );
 }
 
 

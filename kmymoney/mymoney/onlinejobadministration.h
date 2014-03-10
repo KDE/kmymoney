@@ -1,3 +1,21 @@
+/*
+ * This file is part of KMyMoney, A Personal Finance Manager for KDE
+ * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #ifndef ONLINEJOBADMINISTRATION_H
 #define ONLINEJOBADMINISTRATION_H
 
@@ -14,6 +32,7 @@
 #include "onlinejob.h"
 #include "onlinejobtyped.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
+#include "onlinetasks/interfaces/converter/onlinetaskconverter.h"
 
 namespace KMyMoneyPlugin {
   class OnlinePluginExtended;
@@ -52,39 +71,49 @@ public:
   bool isJobSupported(const QString& accountId, const QStringList& names) const;
   bool isAnyJobSupported(const QString& accountId) const;
   
-  onlineTask::convertType canConvert( const QString& originalName, const QString& destinationName ) const;
-  onlineTask::convertType canConvert( const onlineJob& original, const QString& destinationName ) const;
-  onlineTask::convertType canConvert( const onlineJob& original, const QStringList& destinationNames) const;
+  onlineTaskConverter::convertType canConvert( const QString& originalTaskIid, const QString& convertTaskIid ) const;
+  onlineTaskConverter::convertType canConvert( const QString& originalTaskIid, const QStringList& convertTaskIids ) const;
 
+#if 0
   template<class T>
-  onlineJobTyped<T> convert( const onlineJob& original, const QString& destinationName, const QString& id = MyMoneyObject::emptyId() ) const;
+  onlineJobTyped<T> convert( const onlineJob& original, const QString& convertTaskIid, onlineTaskConverter::convertType& convertType, QString& userInformation, const QString& onlineJobId ) const;
+  template<class T>
+  onlineJobTyped<T> convert( const onlineJob& original, const QString& convertTaskIid, onlineTaskConverter::convertType& convertType, QString& userInformation ) const;
+#endif
 
-  onlineJob convert( const onlineJob& original, const QString& destinationName, const QString& id ) const;
-  onlineJob convert( const onlineJob& original, const QString& destinationName ) const
-  {
-    return convert( original, destinationName, original.id() );
-  }
+  /**
+   * @brief Convert an onlineTask to another type
+   * 
+   * @param original onlineJob to convert
+   * @param convertTaskIid onlineTask iid you want to convert into
+   * @param convertType OUT result of conversion. Note: this depends on original
+   * @param userInformation OUT A translated html-string with information about the changes which were done
+   * @param onlineJobId The id of the new onlineJob, if none is given original.id() is used
+   */
+  onlineJob convert( const onlineJob& original, const QString& convertTaskIid, onlineTaskConverter::convertType& convertType, QString& userInformation, const QString& onlineJobId ) const;
+  
+  /**
+   * @copydoc convert()
+   */
+  onlineJob convert( const onlineJob& original, const QString& convertTaskIid, onlineTaskConverter::convertType& convertType, QString& userInformation ) const;
 
   /**
    * @brief Converts a onlineTask to best fitting type of a set of onlineTasks
    * 
-   * Will look for best conversion possible from original to any of destinationNames.
+   * Will look for best conversion possible from original to any of convertTaskIids.
    * 
-   * @param id id for new onlineJob
-   * @throws onlineTask::badConvert* if no conversion is possible
+   * @param original onlineJob to convert
+   * @param convertTaskIids onlineTask-iids you want to convert into.
+   * @param convertType OUT result of conversion. Note: this depends on original
+   * @param userInformation OUT A translated html-string with information about the changes which were done
+   * @param onlineJobId The id of the new onlineJob, if none is given original.id() is used
    */
-  onlineJob convertBest( const onlineJob& original, const QStringList& destinationNames, const QString& id ) const;
+  onlineJob convertBest( const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& convertType, QString& userInformation, const QString& onlineJobId ) const;
 
   /**
-   * @brief Converts a onlineTask to best fitting type of a set of onlineTasks
-   * 
-   * Convienient method for convertBest( const onlineJob& original, const QStringList& destinationNames, const QString& id )
-   * @throws onlineTask::badConvert* if no conversion is possible
+   * @brief Convinient for convertBest() which crates an onlineJob with the same id as original.
    */
-  onlineJob convertBest( const onlineJob& original, const QStringList& destinationNames ) const
-  {
-    return convertBest( original, destinationNames, original.id() );
-  }
+  onlineJob convertBest( const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& convertType, QString& userInformation ) const;
   
   /**
    * @brief Request onlineTask::settings from plugin
@@ -113,42 +142,32 @@ public slots:
   void addPlugin( const QString& pluginName, KMyMoneyPlugin::OnlinePluginExtended* );
 
   /**
-   * @brief Slot for plugins to make an onlineJob available.
+   * @brief Slot for plugins to make an onlineTask available.
    * @param task the task to register, I take ownership
    */
   void registerOnlineTask( onlineTask *const task );
+
+  /**
+   * @brief Slot for plugins to make an onlineTaskConverter available.
+   * @param converter the converter to register, I take ownership
+   */
+  void registerOnlineTaskConverter( onlineTaskConverter *const converter );
     
 private:
+  static onlineJobAdministration m_instance;
+  
   /**
    * @brief Find onlinePlugin which is resposible for accountId
    * @param accountId
    * @return Pointer to onlinePluginExtended, do not delete.
    */
   KMyMoneyPlugin::OnlinePluginExtended* getOnlinePlugin( const QString& accountId ) const;
-
-  /**
-   * The key is the onlinePlugin's name
-   */
-  QMap<QString, KMyMoneyPlugin::OnlinePluginExtended *> m_onlinePlugins;
   
   /**
-   * The key is the name of the task
-   */
-  QMap<QString, onlineTask*> m_onlineTasks;
-  
-  static onlineJobAdministration m_instance;
-
-  /** @brief Checks destinationName's canConvert() */
-  onlineTask::convertType canConvertFrom( const QString& originalName, const QString& destinationName ) const;
-
-  /** @brief Checks originalName's canConvertInto() */
-  onlineTask::convertType canConvertInto( const QString& originalName, const QString& destinationName ) const;
-  
-  /**
-   * @brief Creates an onlineTask by names
+   * @brief Creates an onlineTask by iid
    * @return pointer to task, caller gains ownership. Can be 0.
    */
-  onlineTask* createOnlineTask( const QString& name ) const;
+  onlineTask* createOnlineTask( const QString& iid ) const;
   
   /**
    * @brief Creates an onlineTask by its iid and xml data
@@ -172,6 +191,21 @@ private:
    * @internal Made to be forward compatible whan onlineTask are loaded as plugins.
    */
   inline onlineTask* rootOnlineTask( const QString& name ) const;
+  
+  /**
+   * The key is the onlinePlugin's name
+   */
+  QMap<QString, KMyMoneyPlugin::OnlinePluginExtended *> m_onlinePlugins;
+  
+  /**
+   * The key is the name of the task
+   */
+  QMap<QString, onlineTask*> m_onlineTasks;
+  
+  /**
+   * Key is the task the converter converts to
+   */
+  QMultiMap<QString, onlineTaskConverter*> m_onlineTaskConverter;
 };
 
 template<class T>
@@ -186,11 +220,19 @@ QSharedPointer<const T> onlineJobAdministration::taskSettings( const QString& ta
   return QSharedPointer<const T>( new T() );
 }
 
+#if 0
 template<class T>
-onlineJobTyped<T> onlineJobAdministration::convert(const onlineJob& original, const QString& destinationName, const QString& id ) const
+onlineJobTyped<T> onlineJobAdministration::convert(const onlineJob& original, const QString& convertTaskIid, onlineTaskConverter::convertType& convertType, QString& userInformation, const QString& onlineJobId) const
 {
-  onlineJob job = convert(original, destinationName, id);
+  onlineJob job = convert(original, convertTaskIid, convertType, userInformation, onlineJobId);
   return onlineJobTyped<T>(job);
 }
+
+template<class T>
+onlineJobTyped< T > onlineJobAdministration::convert(const onlineJob& original, const QString& convertTaskIid, onlineTaskConverter::convertType& convertType, QString& userInformation) const
+{
+  return convert<T>(original, convertTaskIid, convertType, userInformation, original.id());
+}
+#endif
 
 #endif // ONLINEJOBADMINISTRATION_H

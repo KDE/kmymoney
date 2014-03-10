@@ -177,6 +177,9 @@
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
+           <widget class="KMessageWidget" name="convertMessage" native="true"/>
+          </item>
+          <item>
            <widget class="QScrollArea" name="creditTransferEdit">
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
@@ -196,7 +199,7 @@
                <x>0</x>
                <y>0</y>
                <width>443</width>
-               <height>295</height>
+               <height>281</height>
               </rect>
              </property>
             </widget>
@@ -288,6 +291,12 @@
    <class>KPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMessageWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">KMessageWidget</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>

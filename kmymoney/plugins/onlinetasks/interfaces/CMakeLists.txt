@@ -1,5 +1,6 @@
 
 set ( onlinetask_interfaces_SRCS
+  converter/onlinetaskconverter.cpp
   tasks/onlinetask.cpp
   ui/ionlinejobedit.cpp
 )

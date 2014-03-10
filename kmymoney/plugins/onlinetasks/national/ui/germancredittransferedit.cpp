@@ -58,7 +58,7 @@ germanCreditTransferEdit::~germanCreditTransferEdit()
 
 bool germanCreditTransferEdit::setOnlineJob(const onlineJob& job)
 {
-    if (!job.isNull() && job.task()->taskName() == germanOnlineTransfer::name()) {
+    if (job.taskIid() == germanOnlineTransfer::name()) {
       return setOnlineJob( onlineJobTyped<germanOnlineTransfer>(job) );
     }
     return false;

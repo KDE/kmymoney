@@ -107,11 +107,6 @@ public:
   virtual bool hasReferenceTo(const QString& id) const;
 
 protected:
-  virtual convertType canConvertInto( const QString& onlineTaskName ) const;
-  virtual convertType canConvert( const QString& onlineTaskName ) const;
-  virtual onlineTask* convertInto( const QString& onlineTaskName, QString& messageString, bool& payeeChanged ) const;
-  virtual void convert( const onlineTask&, QString& messageString, bool& payeeChanged );
-  
   virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
   virtual germanOnlineTransfer* createFromXml(const QDomElement &element) const;
   

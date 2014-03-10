@@ -1,20 +1,20 @@
 /*
-  This file is part of KMyMoney, A Personal Finance Manager for KDE
-  Copyright (C) 2013 Christian Dávid <christian-david@web.de>
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * This file is part of KMyMoney, A Personal Finance Manager for KDE
+ * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "konlinetransferform.h"
 #include "ui_konlinetransferformdecl.h"
@@ -49,6 +49,9 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   accountsModel->setSourceModel( Models::instance()->accountsModel() );
   ui->originAccount->setModel( accountsModel );
 
+  ui->convertMessage->hide();
+  ui->convertMessage->setWordWrap(true);
+  
   addOnlineJobEditWidget( new sepaCreditTransferEdit() );
   addOnlineJobEditWidget( new germanCreditTransferEdit() );
   
@@ -92,14 +95,31 @@ void kOnlineTransferForm::convertCurrentJob( const int& index )
 {
   Q_ASSERT( index < m_onlineJobEditWidgets.count() );
 
-  const onlineJob job = activeOnlineJob();
   IonlineJobEdit* widget = m_onlineJobEditWidgets.at(index);
-  try {
-    widget->setOnlineJob(
-      onlineJobAdministration::instance()->convertBest(job, widget->supportedOnlineTasks(), job.id() )
-    );
-  } catch ( onlineTask::badConvert* e ) {
-    delete e;
+  
+  // Vars set by onlineJobAdministration::convertBest
+  onlineTaskConverter::convertType convertType;
+  QString userMessage;
+  
+  widget->setOnlineJob( onlineJobAdministration::instance()->convertBest(activeOnlineJob(), widget->supportedOnlineTasks(), convertType, userMessage ) );
+  
+  if ( convertType == onlineTaskConverter::convertImpossible && userMessage.isEmpty())
+    userMessage = i18n("During the change of the order your previous entries could not be converted.");
+  
+  if ( !userMessage.isEmpty() ) {
+    switch( convertType ) {
+      case onlineTaskConverter::convertionLossyMajor:
+        ui->convertMessage->setMessageType(KMessageWidget::Warning);
+        break;
+      case onlineTaskConverter::convertImpossible:
+      case onlineTaskConverter::convertionLossyMinor:
+        ui->convertMessage->setMessageType(KMessageWidget::Information);
+        break;
+      case onlineTaskConverter::convertionLoseless: break;
+    }
+    
+    ui->convertMessage->setText(userMessage);
+    ui->convertMessage->animatedShow();
   }
 
   showEditWidget(widget);
@@ -199,9 +219,7 @@ onlineJob kOnlineTransferForm::activeOnlineJob() const
 bool kOnlineTransferForm::showEditWidget(const QString& onlineTaskName)
 {
   foreach (IonlineJobEdit* widget, m_onlineJobEditWidgets) {
-    if ( widget->supportedOnlineTasks().contains(onlineTaskName) ) {
-      const onlineJob convert = onlineJobAdministration::instance()->convert(activeOnlineJob(), onlineTaskName);
-      widget->setOnlineJob(convert);
+    if (widget->supportedOnlineTasks().contains(onlineTaskName) ) {
       showEditWidget( widget );
       return true;
     }

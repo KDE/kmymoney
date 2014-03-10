@@ -7,6 +7,8 @@ set( konlinetasks_national_SCRS
   tasks/germanonlinetransfer.cpp
   ui/germancredittransferedit.cpp
   ../sepa/credittransfersettingsbase.cpp
+  converter/taskconvertergermantosepa.cpp
+  converter/taskconvertersepatogerman.cpp
   )
   
 kde4_add_ui_files( konlinetasks_national_SCRS
