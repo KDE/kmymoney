@@ -17,9 +17,7 @@
    </size>
   </property>
   <property name="font">
-   <font>
-    <family></family>
-   </font>
+   <font/>
   </property>
   <property name="windowTitle">
    <string>CSV Import Wizard</string>
@@ -134,18 +132,18 @@
        </property>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout" stretch="20,3,150">
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="30,3,150">
           <item>
            <widget class="QFrame" name="frame_stage">
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>115</width>
               <height>270</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>120</width>
+              <width>200</width>
               <height>270</height>
              </size>
             </property>
@@ -160,13 +158,25 @@
               <layout class="QVBoxLayout" name="verticalLayout_stage">
                <item>
                 <widget class="QLabel" name="label_intro">
+                 <property name="minimumSize">
+                  <size>
+                   <width>110</width>
+                   <height>0</height>
+                  </size>
+                 </property>
                  <property name="text">
-                  <string comment="Noun, the intoduction." extracomment="Noun, the intoduction.">1. Introduction</string>
+                  <string comment="Noun, the introduction." extracomment="Noun, the introduction.">1. Introduction</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QLabel" name="label_separator">
+                 <property name="minimumSize">
+                  <size>
+                   <width>110</width>
+                   <height>0</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>2. Separators</string>
                  </property>

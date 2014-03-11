@@ -1030,7 +1030,7 @@ void InvestProcessing::readFile(const QString& fname)
       m_csvDialog->updateDecimalSymbol("price", m_priceColumn);
       m_csvDialog->updateDecimalSymbol("quantity", m_quantityColumn);
     } else {
-      KMessageBox::sorry(0, i18n("<center>An amount, price, and/or quantity column is missing.</center> <center><b>%1</b></center>Please check your selections."), i18n("CSV import"));
+      KMessageBox::sorry(0, i18n("<center>An amount, price, and/or quantity column is missing.</center>Please check your selections."), i18n("CSV import"));
     }
 
     emit statementReady(st);  //              investment statement ready
@@ -1095,7 +1095,6 @@ void InvestProcessing::displayLine(const QString& data)
   }
 
   QStringList::const_iterator constIterator;
-  QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(),$]";
   for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
        ++constIterator) {
     QString txt = (*constIterator);
@@ -1329,6 +1328,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
         name = m_columnList[m_detailColumn].toLower();
       }
 
+      m_trInvestData.symbol = symbol;
       m_trInvestData.security = name;
     }
 
@@ -1384,11 +1384,15 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
   //
   //  A brokerage type could have been changed in m_redefine->checkValid() above, so no longer brokerage.
   //
-  if ((m_trInvestData.type == "buy") || (m_trInvestData.type == "sell") || (m_trInvestData.type == "reinvdiv") ||
-      (m_trInvestData.type == "divx") || (m_trInvestData.type == "intinc") ||
-      (m_trInvestData.type == "shrsin") || (m_trInvestData.type == "shrsout")) {
+  if ((m_trInvestData.type == "buy") || (m_trInvestData.type == "sell") ||
+      (m_trInvestData.type == "divx") || (m_trInvestData.type == "intinc")) {
+    if (m_redefine->accountName().isEmpty()) {
+      m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:")));
+    }
     m_trInvestData.brokerageAccnt = m_redefine->accountName();
     m_tempBuffer +=  "L[" + m_redefine->accountName() + ']' + '\n';
+    m_brokerage = false;
+  } else if ((m_trInvestData.type == "reinvdiv") || (m_trInvestData.type == "shrsin") || (m_trInvestData.type == "shrsout")) {
     m_brokerage = false;
   }
 
@@ -1429,8 +1433,8 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
   } else {
     KMessageBox::sorry(0, i18n("<center>The columns selected are invalid.\n</center>"
                                "There must an amount or quantity fields, symbol or security name, plus date and type field."
-                               "<center>You possibly need to check the start and end line settings, or reset 'Skip setup'.</center>",
-                          i18n("CSV import")));
+                               "<center>You possibly need to check the start and end line settings, or reset 'Skip setup'.</center>"),
+                       i18n("CSV import"));
     return KMessageBox::Cancel;
   }
   return KMessageBox::Ok;
@@ -1609,8 +1613,9 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
   s2.m_amount = MyMoneyMoney(-s1.m_amount);
   tr.m_strInterestCategory = m_csvSplit.m_strCategoryName;
   tr.m_strSecurity = m_trInvestData.security;
+  tr.m_strSymbol = m_trInvestData.symbol;
 
-  s2.m_accountId = checkCategory(m_csvSplit.m_strCategoryName, s1.m_amount, s2.m_amount);
+  s2.m_accountId = m_csvUtil->checkCategory(m_csvSplit.m_strCategoryName, s1.m_amount, s2.m_amount);
   if ((tr.m_eAction == (MyMoneyStatement::Transaction::eaCashDividend)) ||
       (tr.m_eAction == (MyMoneyStatement::Transaction::eaBuy)) ||
       (tr.m_eAction == (MyMoneyStatement::Transaction::eaSell)) ||
@@ -2038,7 +2043,8 @@ void InvestProcessing::redrawWindow(int startLine)
   rect.setHeight(m_csvDialog->m_tableHeight);
   m_csvDialog->ui->frame_main->setFrameRect(rect);
   m_topLine = startLine;
-
+  //  ensure columnwidth reflects data width
+  m_csvDialog->ui->tableWidget->setColumnWidth(0, 100);
   int end = m_topLine + m_csvDialog->m_tableRows;
   if (end > m_fileEndLine) {
     end = m_fileEndLine;
@@ -2114,7 +2120,7 @@ void InvestProcessing::redrawWindow(int startLine)
   //
   //  Align numeric column values
   //
-  QString pattern = "[" + KGlobal::locale()->currencySymbol() + "(), $]";
+  QString pattern = QString("[%1(), $]").arg(KGlobal::locale()->currencySymbol());
 
   for (int row = 0; row < m_csvDialog->ui->tableWidget->rowCount(); row++) {
     m_csvDialog->ui->tableWidget->setRowHeight(row, 30);
@@ -2410,139 +2416,5 @@ void InvestProcessing::hideSecurity()
     m_csvDialog->m_pageInvestment->ui->comboBoxInv_securityName->removeItem(index);
     m_securityList.removeAt(index);
     m_securityName.clear();
-  }
-}
-
-
-const QString InvestProcessing::checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2)
-{
-  //  Borrowed from MyMoneyQifReader::checkCategory()
-  QString accountId;
-  MyMoneyFile *file = MyMoneyFile::instance();
-  MyMoneyAccount account;
-  bool found = true;
-
-  if (!name.isEmpty()) {
-    // The category might be constructed with an arbitraty depth (number of
-    // colon delimited fields). We try to find a parent account within this
-    // hierarchy by searching the following sequence:
-    //
-    //    aaaa:bbbb:cccc:ddddd
-    //
-    // 1. search aaaa:bbbb:cccc:dddd, create nothing
-    // 2. search aaaa:bbbb:cccc     , create dddd
-    // 3. search aaaa:bbbb          , create cccc:dddd
-    // 4. search aaaa               , create bbbb:cccc:dddd
-    // 5. don't search              , create aaaa:bbbb:cccc:dddd
-
-    account.setName(name);
-    QString accName;      // part to be created (right side in above list)
-    QString parent(name);    // a possible parent part (left side in above list)
-    do {
-      accountId = file->categoryToAccount(parent);
-      if (accountId.isEmpty()) {
-        found = false;
-        // prepare next step
-        if (!accName.isEmpty())
-          accName.prepend(':');
-        accName.prepend(parent.section(':', -1));
-        account.setName(accName);
-        parent = parent.section(':', 0, -2);
-      } else if (!accName.isEmpty()) {
-        account.setParentAccountId(accountId);
-      }
-    } while (!parent.isEmpty() && accountId.isEmpty());
-
-    // if we did not find the category, we create it
-    if (!found) {
-      MyMoneyAccount parent;
-      if (account.parentAccountId().isEmpty()) {
-        if (!value.isNegative() && value2.isNegative())
-          parent = file->income();
-        else
-          parent = file->expense();
-      } else {
-        parent = file->account(account.parentAccountId());
-      }
-      account.setAccountType((!value.isNegative() && value2.isNegative()) ? MyMoneyAccount::Income : MyMoneyAccount::Expense);
-      MyMoneyAccount brokerage;
-      // clear out the parent id, because createAccount() does not like that
-      account.setParentAccountId(QString());
-      createAccount(account, parent, brokerage, MyMoneyMoney());
-      accountId = account.id();
-    }
-  }
-
-  return accountId;
-}
-
-
-void InvestProcessing::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
-{
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  // make sure we have a currency. If none is assigned, we assume base currency
-  if (newAccount.currencyId().isEmpty())
-    newAccount.setCurrencyId(file->baseCurrency().id());
-
-  MyMoneyFileTransaction ft;
-  try {
-    int pos;
-    // check for ':' in the name and use it as separator for a hierarchy
-    while ((pos = newAccount.name().indexOf(MyMoneyFile::AccountSeperator)) != -1) {
-      QString part = newAccount.name().left(pos);
-      QString remainder = newAccount.name().mid(pos + 1);
-      const MyMoneyAccount& existingAccount = file->subAccountByName(parentAccount, part);
-      if (existingAccount.id().isEmpty()) {
-        newAccount.setName(part);
-
-        file->addAccount(newAccount, parentAccount);
-        parentAccount = newAccount;
-      } else {
-        parentAccount = existingAccount;
-      }
-      newAccount.setParentAccountId(QString());  // make sure, there's no parent
-      newAccount.clearId();                       // and no id set for adding
-      newAccount.removeAccountIds();              // and no sub-account ids
-      newAccount.setName(remainder);
-    }
-
-    const MyMoneySecurity& sec = file->security(newAccount.currencyId());
-    // Check the opening balance
-    if (openingBal.isPositive() && newAccount.accountGroup() == MyMoneyAccount::Liability) {
-      QString message = i18n("This account is a liability and if the "
-                             "opening balance represents money owed, then it should be negative.  "
-                             "Negate the amount?\n\n"
-                             "Please click Yes to change the opening balance to %1,\n"
-                             "Please click No to leave the amount as %2,\n"
-                             "Please click Cancel to abort the account creation."
-                             , MyMoneyUtils::formatMoney(-openingBal, newAccount, sec)
-                             , MyMoneyUtils::formatMoney(openingBal, newAccount, sec));
-
-      int ans = KMessageBox::questionYesNoCancel(0, message);
-      if (ans == KMessageBox::Yes) {
-        openingBal = -openingBal;
-
-      } else if (ans == KMessageBox::Cancel)
-        return;
-    }
-
-    file->addAccount(newAccount, parentAccount);
-
-    if (newAccount.accountType() == MyMoneyAccount::Investment
-        && !brokerageAccount.name().isEmpty()) {
-      file->addAccount(brokerageAccount, parentAccount);
-
-      // set a link from the investment account to the brokerage account
-      file->modifyAccount(newAccount);
-      file->createOpeningBalanceTransaction(brokerageAccount, openingBal);
-
-    } else
-      file->createOpeningBalanceTransaction(newAccount, openingBal);
-
-    ft.commit();
-  } catch (MyMoneyException *e) {
-    KMessageBox::information(0, i18n("Unable to add account: %1", e->what()));
-    delete e;
   }
 }

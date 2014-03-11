@@ -30,6 +30,7 @@
 
 class ConvertDate;
 class Parse;
+class CsvUtil;
 class BankingPage;
 class InvestmentPage;
 class LinesDatePage;
@@ -50,6 +51,13 @@ class CSVDialog : public QWidget
 {
   Q_OBJECT
 
+private:
+  struct csvSplit {
+    QString      m_strCategoryName;
+    QString      m_strMemo;
+    QString      m_amount;
+  } m_csvSplit;
+
 public:
   explicit CSVDialog(QWidget *parent = 0);
   ~CSVDialog();
@@ -66,6 +74,7 @@ public:
   ConvertDate*        m_convertDate;
   Parse*              m_parse;
   SymbolTableDlg*     m_symbolTableDlg;
+  CsvUtil*            m_csvUtil;
 
   Ui::CSVDialog*      ui;
   QVBoxLayout*        m_wizardLayout;
@@ -84,6 +93,7 @@ public:
     QString payee;
     QString amount;
     QString memo;
+    QString category;
     QString id;
   } m_trData;
 
@@ -202,6 +212,7 @@ public:
   int              payeeColumn();
   int              numberColumn();
   int              memoColumn();
+  int              categoryColumn();
 
   /**
   * This method is called when the user clicks 'Clear selections', in order to
@@ -335,7 +346,6 @@ public:
    */
   void           clearCellsBackground();
   void           clearColumnTypeList();
-  void           resizeEvent(QResizeEvent * event);
   void           setMemoColSelections();
 
   int            endColumn();
@@ -432,6 +442,7 @@ private:
   bool             m_memoColCopied;
   bool             m_payeeColCopied;
   bool             m_payeeColAdded;
+  bool             m_categorySelected;
 
   int              m_amountColumn;
   int              m_creditColumn;
@@ -440,6 +451,7 @@ private:
   int              m_memoColumn;
   int              m_numberColumn;
   int              m_payeeColumn;
+  int              m_categoryColumn;
   int              m_previousColumn;
   int              m_maxColumnCount;
   int              m_maxRowWidth;
@@ -456,7 +468,7 @@ private:
   int              m_lastHeight;
   int              m_round;
   int              m_minimumHeight;
-  int              m_windoWidth;
+  int              m_windowWidth;
   int              m_initialHeight;
 
   QBrush           m_clearBrush;
@@ -551,6 +563,12 @@ private slots:
   void           payeeColumnSelected(int);
 
   /**
+  * This method is called when the Category column is activated.
+  * It will validate the column selection.
+  */
+  void           categoryColumnSelected(int);
+
+  /**
   * This method is called when 'Cancel' is clicked.  Unless the user chooses
   * to continue, no settings will be saved, and the plugin will be terminated.
   */
@@ -588,7 +606,7 @@ class IntroPage : public QWizardPage
   Q_OBJECT
 
 public:
-  IntroPage(QWidget *parent = 0);
+  explicit IntroPage(QWidget *parent = 0);
   ~IntroPage();
 
   void                initializePage();
@@ -654,7 +672,7 @@ class SeparatorPage : public QWizardPage
   Q_OBJECT
 
 public:
-  SeparatorPage(QWidget *parent = 0);
+  explicit SeparatorPage(QWidget *parent = 0);
   ~SeparatorPage();
 
   QVBoxLayout         *m_pageLayout;
@@ -690,7 +708,7 @@ class BankingPage : public QWizardPage
   Q_OBJECT
 
 public:
-  BankingPage(QWidget *parent = 0);
+  explicit BankingPage(QWidget *parent = 0);
   ~BankingPage();
 
   Ui::BankingPage     *ui;
@@ -717,6 +735,7 @@ private slots:
   void                slotDebitColChanged(int col);
   void                slotCreditColChanged(int col);
   void                slotAmountColChanged(int col);
+  void                slotCategoryColChanged(int col);
 };
 
 namespace Ui
@@ -729,7 +748,7 @@ class InvestmentPage : public QWizardPage
   Q_OBJECT
 
 public:
-  InvestmentPage(QWidget *parent = 0);
+  explicit InvestmentPage(QWidget *parent = 0);
   ~InvestmentPage();
 
   QVBoxLayout         *m_pageLayout;
@@ -770,7 +789,7 @@ class LinesDatePage : public QWizardPage
   Q_OBJECT
 
 public:
-  LinesDatePage(QWidget *parent = 0);
+  explicit LinesDatePage(QWidget *parent = 0);
   ~LinesDatePage();
 
   QVBoxLayout         *m_pageLayout;
@@ -802,7 +821,7 @@ class CompletionPage : public QWizardPage
   Q_OBJECT
 
 public:
-  CompletionPage(QWidget *parent = 0);
+  explicit CompletionPage(QWidget *parent = 0);
   ~CompletionPage();
 
   QVBoxLayout*        m_pageLayout;

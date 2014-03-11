@@ -645,9 +645,8 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         d->m_html += tmp;
       }
     }
-  } catch (MyMoneyException* e) {
-    qDebug("Unable to display schedule entry: %s", qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    qDebug("Unable to display schedule entry: %s", qPrintable(e.what()));
   }
 }
 
@@ -743,7 +742,7 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
 
     if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
       QString pathStatusHeader;
-      KIconLoader::global()->loadIcon(QString("online-banking"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathStatusHeader);
+      KIconLoader::global()->loadIcon(QString("download"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathStatusHeader);
       d->m_html += QString("<td class=\"center\"><img src=\"%1\" border=\"0\"></td>").arg(pathStatusHeader);
     }
 
@@ -860,7 +859,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
     KIconLoader::global()->loadIcon(QString("dialog-cancel"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathNotOK);
 
     if (acc.value("lastImportedTransactionDate").isEmpty() || acc.value("lastStatementBalance").isEmpty())
-      cellStatus = "-";
+      cellStatus = '-';
     else if (file->hasMatchingOnlineBalance(acc)) {
       if (file->hasNewerTransaction(acc.id(), QDate::fromString(acc.value("lastImportedTransactionDate"), Qt::ISODate)))
         cellStatus = QString("<img src=\"%1\" border=\"0\">").arg(pathTODO);
@@ -891,7 +890,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
     if (countNotMarked)
       countStr = QString("%1").arg(countNotMarked);
     else
-      countStr = "-";
+      countStr = '-';
     tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
   }
 
@@ -899,7 +898,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
     if (countCleared)
       countStr = QString("%1").arg(countCleared);
     else
-      countStr = "-";
+      countStr = '-';
     tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
   }
 
@@ -907,7 +906,7 @@ void KHomeView::showAccountEntry(const MyMoneyAccount& acc, const MyMoneyMoney& 
     if (countNotReconciled)
       countStr = QString("%1").arg(countNotReconciled);
     else
-      countStr = "-";
+      countStr = '-';
     tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
   }
 
@@ -948,9 +947,8 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
         val = val * file->price(security.tradingCurrency(), accountCurrency.id()).rate(accountCurrency.id());
         val = val.convert(acc.fraction());
         value += val;
-      } catch (MyMoneyException* e) {
-        qWarning("%s", qPrintable(QString("cannot convert stock balance of %1 to base currency: %2").arg(stock.name(), e->what())));
-        delete e;
+      } catch (const MyMoneyException &e) {
+        qWarning("%s", qPrintable(QString("cannot convert stock balance of %1 to base currency: %2").arg(stock.name(), e.what())));
       }
     }
   }

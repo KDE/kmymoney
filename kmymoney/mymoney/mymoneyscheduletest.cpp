@@ -172,8 +172,7 @@ void MyMoneyScheduleTest::testOverdue()
     QVERIFY(sch_overdue.isOverdue() == true);
     QVERIFY(sch_intime.isOverdue() == false);
 
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 }
@@ -212,8 +211,7 @@ void MyMoneyScheduleTest::testNextPayment()
     QVERIFY(sch.nextPayment(QDate(2007, 2, 17)) == QDate(2008, 2, 17));
     QVERIFY(sch.nextPayment(QDate(2007, 2, 18)) == QDate(2008, 2, 17));
 
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 }
@@ -653,8 +651,7 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[3] == QDate(2027, 3, 24));
     // Would fall on a Saturday so gets moved to 23rd.
     QVERIFY(list[4] == QDate(2029, 3, 23));
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 }
@@ -820,8 +817,7 @@ void MyMoneyScheduleTest::testReadXML()
   try {
     sch = MyMoneySchedule(node);
     QFAIL("Missing expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   doc.setContent(ref_ok1);
@@ -846,8 +842,7 @@ void MyMoneyScheduleTest::testReadXML()
     QVERIFY(sch.nextDueDate() == sch.lastPayment().addDays(7));
     QVERIFY(sch.recordedPayments().count() == 1);
     QVERIFY(sch.recordedPayments()[0] == QDate::currentDate());
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 
@@ -873,8 +868,7 @@ void MyMoneyScheduleTest::testReadXML()
     QVERIFY(sch.nextDueDate() == sch.lastPayment().addDays(7));
     QVERIFY(sch.recordedPayments().count() == 1);
     QVERIFY(sch.recordedPayments()[0] == QDate::currentDate());
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 }
@@ -912,8 +906,7 @@ void MyMoneyScheduleTest::testHasReferenceTo()
   try {
     sch = MyMoneySchedule(node);
 
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 
@@ -1539,8 +1532,7 @@ void MyMoneyScheduleTest::testPaidEarlyOneTime()
     QVERIFY(sch.isFinished() == true);
     QVERIFY(sch.occurrencePeriod() == MyMoneySchedule::OCCUR_MONTHLY);
     QVERIFY(sch.paymentDates(QDate::currentDate(), QDate::currentDate().addDays(21)).count() == 0);
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 
@@ -1601,8 +1593,7 @@ void MyMoneyScheduleTest::testReplaceId()
     QVERIFY(sch.transaction().splits()[0].accountId() == "A000079");
     QVERIFY(sch.transaction().splits()[1].accountId() == "A000276");
 
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 

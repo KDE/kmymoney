@@ -39,6 +39,7 @@
 
 using namespace reports;
 
+class FixedColumnTreeView;
 /**
   * @author Alvaro Soliverez
   *
@@ -168,7 +169,7 @@ private:
 
   QLayout* m_chartLayout;
   KReportChartView* m_forecastChart;
-
+  QScopedPointer<FixedColumnTreeView> m_fixedColumnView;
 };
 
 #endif

@@ -167,9 +167,8 @@ void kOnlineTransferForm::accountChanged()
   const QString accountId = ui->originAccount->getSelected();
   try {
     ui->orderAccountBalance->setValue(MyMoneyFile::instance()->balance( accountId ));
-  } catch ( MyMoneyException* e ) {
+  } catch ( const MyMoneyException& ) {
     // @todo this can happen until the selection allows to select correct accounts only
-    delete e;
     ui->orderAccountBalance->setText("");
   }
 

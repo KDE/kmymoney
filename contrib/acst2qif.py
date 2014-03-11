@@ -1,6 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#***************************************************************************
+#                      acst2qif.py  -  description
+#                         -------------------
+# copyright             : (C) 2013 by Volker Paul
+# email                 : volker.paul@v-paul.de
+#
+#***************************************************************************/
+#
+#***************************************************************************
+#*                                                                         *
+#*   This program is free software; you can redistribute it and/or modify  *
+#*   it under the terms of the GNU General Public License as published by  *
+#*   the Free Software Foundation; either version 2 of the License, or     *
+#*   (at your option) any later version.                                   *
+#*                                                                         *
+#***************************************************************************/
+
 # Usage:
 # 0. Prepare .acst2qif.cfg according to your needs
 # 1. Get account statement from your bank as PDF file
@@ -34,21 +51,21 @@
 # Note that I can't write all regexps for you, I can only help you 
 # find errors and provide examples.
 
+__author__     = "Volker Paul"
+__copyright__  = "Copyright 2013, Volker Paul"
+__license__    = "GPL 2"
+__maintainer__ = "Volker Paul"
+__email__      = "volker.paul@v-paul.de"
+__docformat__  = 'restructuredtext'
+__status__     = "Production"
+
 import sys, os, os.path, copy, re, textwrap, datetime, subprocess
 from optparse import OptionParser
 import ConfigParser
 
-__author__     = "Volker Paul"
-__copyright__  = "Copyright 2011, Volker Paul"
-__license__    = "GPL 2"
-__version__    = "0.1"
-__maintainer__ = "Volker Paul"
-__email__      = "volker.paul@v-paul.de"
-__status__     = "Production"
-
 def uc(s):
     """Try to get around "'ascii' codec can't encode character xyz".
-    Convert to Unicode. Bad hack.
+    Convert to Unicode.
     """
     try:
         res = unicode(s.decode('utf-8'))
@@ -62,6 +79,9 @@ def getFileList(dir, encoding='utf-8'):
     in given directory. Subdirectories and their contents are ignored.
     Output is sorted alphabetically.
     """
+    if not os.path.isdir(dir):
+        print "ERROR: No such directory: " + dir
+        return None
     for root,dirs,files in os.walk(dir):
         if root==dir:
             files.sort()
@@ -241,6 +261,9 @@ def main():
         else:
             dir = uc(config.get(account, "dir"))
             fl = getFileList(dir)
+            if not fl:
+                print "ERROR: No input file"
+                return
             infile = uc(fl[-1])
             inpath = dir + '/' + infile
         categoryDicString = config.get(account, 'categoryDic')
@@ -248,4 +271,5 @@ def main():
         convert(inpath, output, options, config, accountName, accountType, categoryDic)
     output.close()
     print "Results written to:", outfile
+
 main()

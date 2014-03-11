@@ -56,6 +56,8 @@ public:
 
   virtual void preloadAssetAccount(void);
   virtual ~Activity() {}
+  bool    m_memoChanged;
+  QString m_memoText;
 
 protected:
   Activity(InvestTransactionEditor* editor) {

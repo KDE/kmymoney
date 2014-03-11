@@ -71,12 +71,11 @@ void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
       }
       emit signalProgress(-1, -1);
 
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &e) {
       QString errMsg = i18n("Unexpected exception '%1' thrown in %2, line %3 "
-                            "caught in MyMoneyQifWriter::write()", e->what(), e->file(), e->line());
+                            "caught in MyMoneyQifWriter::write()", e.what(), e.file(), e.line());
 
       KMessageBox::error(0, errMsg);
-      delete e;
     }
 
     qifFile.close();
@@ -286,7 +285,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
   QString s;
   QString memo;
   MyMoneyFile* file = MyMoneyFile::instance();
-  QString chkAccnt = QString();
+  QString chkAccnt;
   bool isXfer = false;
   bool noError = true;
   QList<MyMoneySplit> lst = t.splits();
@@ -311,7 +310,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
   //  Add date.
   //
   if (noError) {
-    s += "D" + m_qifProfile.date(t.postDate()) + '\n';
+    s += 'D' + m_qifProfile.date(t.postDate()) + '\n';
   }
   for (it = lst.begin(); it != lst.end(); ++it) {
     QString accName;
@@ -363,7 +362,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
         MyMoneySplit sp = t.splitByAccount(map.value(MyMoneyAccount::Checkings), true);
         QString txt = sp.value().formatMoney("", 2);
         if (noError) {
-          s += "T" + txt + '\n';
+          s += 'T' + txt + '\n';
         }
       } else if ((*it).action() == "Buy") {
 
@@ -389,7 +388,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
       //  Add action.
       //
       if (noError) {
-        s += "N" + action + '\n';
+        s += 'N' + action + '\n';
       }
       QString txt;
       if ((action == "Buy") || (action == "Sell") || (action == "ReinvDiv")) {
@@ -402,14 +401,14 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
           txt = value.formatMoney("", 2);
         }
         if (noError) {
-          s += "T" + txt + '\n';
+          s += 'T' + txt + '\n';
         }
         //
         //  Add price.
         //
         txt = (*it).price().formatMoney("", 6);
         if (noError) {
-          s += "I" + txt + '\n';
+          s += 'I' + txt + '\n';
         }
         if (!qty.isZero()) {
           //
@@ -419,7 +418,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
             if (action == "Sell") {
               qty = -qty;
             }
-            s += "Q" + m_qifProfile.value('Q', qty) + '\n';
+            s += 'Q' + m_qifProfile.value('Q', qty) + '\n';
           }
         }
       } else if ((action == "Shrsin") || (action == "Shrsout")) {
@@ -430,20 +429,20 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
           if (action == "Shrsout") {
             qty = -qty;
           }
-          s += "Q" + m_qifProfile.value('Q', qty) + '\n';
+          s += 'Q' + m_qifProfile.value('Q', qty) + '\n';
         }
       }
     }
     if (!accName.isEmpty()) {
       if (noError) {
-        s += "Y" + accName + '\n';
+        s += 'Y' + accName + '\n';
       }
     }
   }
   if (!memo.isEmpty()) {
     if (noError) {
       memo.replace('\n', "\\n");
-      s += "M" + memo + '\n';
+      s += 'M' + memo + '\n';
     }
   }
   if ((!chkAccnt.isEmpty()) && isXfer) {
@@ -451,7 +450,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
     //  Add account - including its hierarchy.
     //
     if (noError) {
-      s += "L" + m_qifProfile.accountDelimiter()[0] + file->accountToCategory(chkAccntId)
+      s += 'L' + m_qifProfile.accountDelimiter()[0] + file->accountToCategory(chkAccntId)
            + m_qifProfile.accountDelimiter()[1] + '\n';
       stream << s;
     } else {

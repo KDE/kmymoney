@@ -28,8 +28,7 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 
    You should have received a copy of the GNU Library General Public License
    along with this library; see the file COPYING.LIB.  If not, write to
-   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-   Boston, MA 02111-1307, USA.
+   the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA
 */
 /***************************************************************************
  *                                                                         *
@@ -132,10 +131,9 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter* painter, const QStyleO
                                        schedulePaymentTypes,
                                        theDate,
                                        m_filterAccounts);
-    } catch (MyMoneyException* e) {
-      // SAfe to ignore here, cause no schedules might exist
+    } catch (const MyMoneyException &) {
+      // Safe to ignore here, cause no schedules might exist
       // for the selected account
-      delete e;
     }
 
     if (schedules.count() >= 1) {
@@ -209,10 +207,9 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter* painter, const QStyleO
           text += i18np("%1 Transfer.", "%1 Transfers.", transferSchedules.count());
         }
       }
-    } catch (MyMoneyException* e) {
-      // SAfe to ignore here, cause no schedules might exist
+    } catch (const MyMoneyException &) {
+      // Safe to ignore here, cause no schedules might exist
       // for the selected account
-      delete e;
     }
 
     bool anyOverdue = false;
@@ -365,10 +362,9 @@ void kMyMoneyScheduledDateTbl::mouseMoveEvent(QMouseEvent* e)
                                        MyMoneySchedule::STYPE_ANY,
                                        drawDate,
                                        m_filterAccounts);
-    } catch (MyMoneyException* e) {
-      // SAfe to ignore here, cause no schedules might exist
+    } catch (const MyMoneyException &) {
+      // Safe to ignore here, cause no schedules might exist
       // for the selected account
-      delete e;
     }
 
     if (schedules.count() >= 1) {

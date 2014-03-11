@@ -348,19 +348,10 @@ public:
   void newFile(void);
 
   /**
-    * Moves the view up from transaction to Bank/Account view.
+    * This method enables the state of all views (except home view) according
+    * to an open file.
     */
-  void viewUp(void);
-
-  /**
-    * This method allows to set the enable state of all views (except home view)
-    * The argument @p state controls the availability.
-    *
-    * @param state Controls whether views are disabled @p (0), enabled @p (1) or
-    *              enabled/disabled according to an open file @p (-1). The latter
-    *              is the default.
-    */
-  void enableViews(int state = -1);
+  void enableViewsIfFileOpen();
 
   KMyMoneyViewBase* addBasePage(const QString& title, const QString& icon = QString());
 

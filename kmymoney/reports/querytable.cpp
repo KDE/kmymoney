@@ -335,7 +335,7 @@ void QueryTable::init(void)
       m_group = "institution,topaccount";
       break;
     default:
-      throw new MYMONEYEXCEPTION("QueryTable::QueryTable(): unhandled row type");
+      throw MYMONEYEXCEPTION("QueryTable::QueryTable(): unhandled row type");
   }
 
   QString sort = m_group + ',' + m_columns + ",id,rank";
@@ -776,7 +776,7 @@ void QueryTable::constructTransactionTable(void)
             QString delimiter = "";
             for (int i = 0; i < tagIdList.size(); i++) {
               qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
-              delimiter = "+";
+              delimiter = '+';
             }
 
             qS["payee"] = payee.isEmpty()
@@ -1365,7 +1365,7 @@ void QueryTable::constructSplitsTable(void)
       QString delimiter = "";
       for (int i = 0; i < tagIdList.size(); i++) {
         qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
-        delimiter = ",";
+        delimiter = ',';
       }
 
       qA["payee"] = payee.isEmpty()

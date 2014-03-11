@@ -1018,7 +1018,7 @@ void LoanDetailsPage::slotCalculate(void)
       // calculate the number of payments out of the other information
       val = calc.numPayments();
       if (val == 0)
-        throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
+        throw MYMONEYEXCEPTION("incorrect fincancial calculation");
 
       // if the number of payments has a fractional part, then we
       // round it to the smallest integer and calculate the balloon payment
@@ -1050,7 +1050,7 @@ void LoanDetailsPage::slotCalculate(void)
           || (moneyLend && val > 0 && qAbs(val) > qAbs(calc.payment()))) {
         // case a)
         qDebug("Future Value is %f", val);
-        throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
+        throw MYMONEYEXCEPTION("incorrect fincancial calculation");
 
       } else if ((moneyBorrowed && val < 0 && qAbs(val) <= qAbs(calc.payment()))
                  || (moneyLend && val > 0 && qAbs(val) <= qAbs(calc.payment()))) {
@@ -1063,15 +1063,14 @@ void LoanDetailsPage::slotCalculate(void)
 
       if (!m_balloonAmount->lineedit()->text().isEmpty()) {
         if ((m_balloonAmount->value().abs() - refVal.abs()).abs().toDouble() > 1) {
-          throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
+          throw MYMONEYEXCEPTION("incorrect fincancial calculation");
         }
         result = i18n("KMyMoney has successfully verified your loan information.");
       }
       m_balloonAmount->loadText(refVal.abs().formatMoney("", m_wizard->precision()));
     }
 
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     KMessageBox::error(0,
                        i18n("You have entered mis-matching information. Please modify "
                             "your figures or leave one value empty "

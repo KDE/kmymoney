@@ -41,9 +41,17 @@
 #include "mymoneyforecast.h"
 #include "pivottable.h"
 #include "pivotgrid.h"
+#include "fixedcolumntreeview.h"
 
 KForecastView::KForecastView(QWidget *parent) :
-    QWidget(parent)
+    QWidget(parent),
+    m_totalItem(0),
+    m_assetItem(0),
+    m_liabilityItem(0),
+    m_incomeItem(0),
+    m_expenseItem(0),
+    m_chartLayout(0),
+    m_forecastChart(0)
 {
   setupUi(this);
 
@@ -56,7 +64,7 @@ KForecastView::KForecastView(QWidget *parent) :
   KConfigGroup grp = config->group("Last Use Settings");
   m_tab->setCurrentIndex(grp.readEntry("KForecastView_LastType", 0));
 
-  m_forecastButton->setIcon(KIcon("forecast"));
+  m_forecastButton->setIcon(KIcon("view-financial-forecast"));
 
   connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabChanged(QWidget*)));
 
@@ -64,6 +72,7 @@ KForecastView::KForecastView(QWidget *parent) :
 
   connect(m_forecastButton, SIGNAL(clicked()), this, SLOT(slotManualForecast()));
 
+  m_forecastList->setUniformRowHeights(true);
   m_forecastList->setAllColumnsShowFocus(true);
   m_summaryList->setAllColumnsShowFocus(true);
   m_budgetList->setAllColumnsShowFocus(true);
@@ -206,6 +215,7 @@ void KForecastView::loadListView(void)
   forecast.doForecast();
 
   m_forecastList->clear();
+  m_forecastList->setColumnCount(0);
   m_forecastList->setIconSize(QSize(22, 22));
   m_forecastList->setSortingEnabled(true);
   m_forecastList->sortByColumn(0, Qt::AscendingOrder);
@@ -237,6 +247,9 @@ void KForecastView::loadListView(void)
   loadAccounts(forecast, file->liability(), m_liabilityItem, eDetailed);
 
   adjustHeadersAndResizeToContents(m_forecastList);
+
+  // add the fixed column only if the horizontal scroll bar is visible
+  m_fixedColumnView.reset(m_forecastList->horizontalScrollBar()->isVisible() ? new FixedColumnTreeView(m_forecastList) : 0);
 }
 
 void KForecastView::loadSummaryView(void)
@@ -626,9 +639,8 @@ QList<MyMoneyPrice> KForecastView::getAccountPrices(const MyMoneyAccount& acc)
       }
     }
 
-  } catch (MyMoneyException *e) {
-    kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e->what();
-    delete e;
+  } catch (const MyMoneyException &e) {
+    kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << acc.name() << "[" << acc.id() << "]: " << e.what();
   }
   return prices;
 }
@@ -708,11 +720,14 @@ bool KForecastView::includeAccount(MyMoneyForecast& forecast, const MyMoneyAccou
 
 void KForecastView::adjustHeadersAndResizeToContents(QTreeWidget *widget)
 {
+  QSize sizeHint(widget->columnWidth(0), widget->sizeHintForRow(0));
   QTreeWidgetItem *header = widget->headerItem();
   for (int i = 0; i < header->columnCount(); ++i) {
     if (i && header) {
       header->setData(i, Qt::TextAlignmentRole, Qt::AlignRight);
     }
+    // make sure that the row height stays the same even when the column that has icons is not visible
+    m_totalItem->setSizeHint(i, sizeHint);
     widget->resizeColumnToContents(i);
   }
 }

@@ -61,7 +61,7 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
     m_fraction(-1)
 {
   if ("ACCOUNT" != node.tagName())
-    throw new MYMONEYEXCEPTION("Node was not ACCOUNT");
+    throw MYMONEYEXCEPTION("Node was not ACCOUNT");
 
   setName(node.attribute("name"));
 
@@ -102,7 +102,7 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
   if (node.hasAttribute("openingbalance")) {
     if (!MyMoneyMoney(node.attribute("openingbalance")).isZero()) {
       QString msg = i18n("Account %1 contains an opening balance. Please use KMyMoney version 0.8 or later and earlier than version 0.9 to correct the problem.", m_name);
-      throw new MYMONEYEXCEPTION(msg);
+      throw MYMONEYEXCEPTION(msg);
     }
   }
   setDescription(node.attribute("description"));
@@ -617,36 +617,39 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
   switch (accountType()) {
     default:
       if (accountGroup() == MyMoneyAccount::Asset)
-        icon = "account-types-asset";
+        icon = "view-bank-account";
       else
-        icon = "account-types-liability";
+        icon = "view-loan";
       break;
 
     case MyMoneyAccount::Investment:
     case MyMoneyAccount::Stock:
     case MyMoneyAccount::MoneyMarket:
     case MyMoneyAccount::CertificateDep:
-      icon = "account-types-investments";
+      icon = "view-stock-account";
       break;
 
     case MyMoneyAccount::Checkings:
-      icon = "account-types-checking";
+      icon = "view-bank-account-checking";
       break;
     case MyMoneyAccount::Savings:
-      icon = "account-types-savings";
+      icon = "view-bank-account-savings";
       break;
 
     case MyMoneyAccount::AssetLoan:
+      icon = "view-loan-asset";
+      break;
+
     case MyMoneyAccount::Loan:
-      icon = "account-types-loan";
+      icon = "view-loan";
       break;
 
     case MyMoneyAccount::CreditCard:
-      icon = "account-types-credit-card";
+      icon = "view-credit-card-account";
       break;
 
     case MyMoneyAccount::Asset:
-      icon = "account-types-asset";
+      icon = "view-bank-account";
       break;
 
     case MyMoneyAccount::Cash:
@@ -654,15 +657,15 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
       break;
 
     case MyMoneyAccount::Income:
-      icon = "account-types-income";
+      icon = "view-income-categories";
       break;
 
     case MyMoneyAccount::Expense:
-      icon = "account-types-expense";
+      icon = "view-expenses-categories";
       break;
 
     case MyMoneyAccount::Equity:
-      icon = "account";
+      icon = "view-bank-account";
       break;
   }
 
@@ -675,14 +678,14 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
 
   QPainter pixmapPainter(&result);
   if (isClosed()) {
-    QPixmap ovly = DesktopIcon("account-types-closed", size);
-    pixmapPainter.drawPixmap(0, 0, ovly.width(), ovly.height(), ovly);
+    QPixmap ovly = DesktopIcon("dialog-close", size);
+    pixmapPainter.drawPixmap(ovly.width() / 2, ovly.height() / 2, ovly.width() / 2, ovly.height() / 2, ovly);
   } else if (reconcileFlag) {
-    QPixmap ovly = DesktopIcon("account-types-reconciled.png", size);
-    pixmapPainter.drawPixmap(0, 0, ovly.width(), ovly.height(), ovly);
+    QPixmap ovly = DesktopIcon("flag-green", size);
+    pixmapPainter.drawPixmap(size / 2, size / 2, ovly.width() / 2, ovly.height() / 2, ovly);
   } else if (!onlineBankingSettings().value("provider").isEmpty()) {
-    QPixmap ovly = DesktopIcon("online-banking.png", size);
-    pixmapPainter.drawPixmap(0, 0, ovly.width(), ovly.height(), ovly);
+    QPixmap ovly = DesktopIcon("download", size);
+    pixmapPainter.drawPixmap(size / 2, size / 2, ovly.width() / 2, ovly.height() / 2, ovly);
   }
   return result;
 }

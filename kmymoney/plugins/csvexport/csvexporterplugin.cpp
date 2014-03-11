@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KGenericFactory>
+#include <KPluginFactory>
 #include <KDebug>
 #include <KFile>
 #include <KUrl>

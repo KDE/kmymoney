@@ -121,8 +121,7 @@ void MyMoneyObjectTest::testReadXML()
   try {
     t = TestMyMoneyObject(node);
     QFAIL("Missing expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   // id attribute missing but required
@@ -132,8 +131,7 @@ void MyMoneyObjectTest::testReadXML()
   try {
     t = TestMyMoneyObject(node);
     QFAIL("Missing expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   // id present
@@ -143,8 +141,7 @@ void MyMoneyObjectTest::testReadXML()
   try {
     t = TestMyMoneyObject(node);
     QVERIFY(t.id() == "T000000000000000001");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 
@@ -155,8 +152,7 @@ void MyMoneyObjectTest::testReadXML()
   try {
     t = TestMyMoneyObject(node, false);
     QVERIFY(t.id().isEmpty());
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 }

@@ -240,7 +240,7 @@ void KGenerateSqlDlg::slotdriverSelected()
   m_mustDetachStorage = true;
   try {
     MyMoneyFile::instance()->attachStorage(m_storage);
-  } catch (MyMoneyException* e) {
+  } catch (const MyMoneyException &) {
     m_mustDetachStorage = false; // there is already a storage attached
   }
   MyMoneyDbDef db;

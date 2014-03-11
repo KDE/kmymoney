@@ -36,12 +36,14 @@
 #include <QLabel>
 #include <QTimer>
 
+#include <QDebug> //! @todo remove @c #include <QDebug>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocale>
 #include <KMessageBox>
-#include <KGenericFactory>
+#include <KPluginFactory>
 #include <KAction>
 #include <KActionCollection>
 #include <KGlobal>
@@ -650,9 +652,8 @@ QStringList KBankingPlugin::availableJobs( QString accountId )
 
   try {
     MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
-  } catch (MyMoneyException* e) {
+  } catch (const MyMoneyException&) {
     // Exception usually means account was not found
-    delete e;
     return QStringList();
   }
   
@@ -1079,9 +1080,8 @@ bool KMyMoneyBanking::askMapAccount(const MyMoneyAccount& acc)
     bankId = bank.name();
     if (!bank.sortcode().isEmpty())
       bankId = bank.sortcode();
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     // no bank assigned, we just leave the field emtpy
-    delete e;
   }
 
   // extract account information. if we have an account number

@@ -32,10 +32,11 @@
 #include <kcombobox.h>
 #include <kiconloader.h>
 #include <klocale.h>
-#include <KIcon>
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include <kmymoneyutils.h>
 
 using namespace KMyMoneyRegister;
 
@@ -46,13 +47,13 @@ public:
       reg(0),
       combo(0),
       queuedSearches(0),
-      status(0) {}
+      status(RegisterFilter::Any) {}
 
   Register* reg;
   KComboBox* combo;
   QString search;
   int queuedSearches;
-  int status;
+  RegisterFilter::ItemState status;
 };
 
 RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
@@ -72,14 +73,14 @@ void RegisterSearchLine::init(Register *reg)
   d->combo = new KComboBox(parentWidget());
   // don't change the order of the following lines unless updating
   // the case labels in RegisterSearchLine::itemMatches() at the same time
-  d->combo->addItem(SmallIcon("system-run"), i18n("Any status"));
-  d->combo->addItem(SmallIcon("document-import"), i18n("Imported"));
-  d->combo->addItem(SmallIcon("process-stop"), i18n("Matched"));
-  d->combo->addItem(SmallIcon("attention"), i18n("Erroneous"));
-  d->combo->addItem(i18n("Not marked"));
-  d->combo->addItem(i18n("Not reconciled"));
-  d->combo->addItem(i18nc("Reconciliation state 'Cleared'", "Cleared"));
-  d->combo->setCurrentIndex(0);
+  d->combo->insertItem(RegisterFilter::Any, SmallIcon("system-run"), i18n("Any status"));
+  d->combo->insertItem(RegisterFilter::Imported, SmallIcon("document-import"), i18n("Imported"));
+  d->combo->insertItem(RegisterFilter::Matched, KMyMoneyUtils::overlayIcon("view-financial-transfer", "document-import"), i18n("Matched"));
+  d->combo->insertItem(RegisterFilter::Erroneous, SmallIcon("task-attention"), i18n("Erroneous"));
+  d->combo->insertItem(RegisterFilter::NotMarked, i18n("Not marked"));
+  d->combo->insertItem(RegisterFilter::NotReconciled, i18n("Not reconciled"));
+  d->combo->insertItem(RegisterFilter::Cleared, i18nc("Reconciliation state 'Cleared'", "Cleared"));
+  d->combo->setCurrentIndex(RegisterFilter::Any);
   connect(d->combo, SIGNAL(activated(int)), this, SLOT(slotStatusChanged(int)));
   connect(this, SIGNAL(clearButtonClicked()), this, SLOT(reset()));
 
@@ -117,7 +118,7 @@ void RegisterSearchLine::setRegister(Register* reg)
 
 void RegisterSearchLine::slotStatusChanged(int status)
 {
-  d->status = status;
+  d->status = static_cast<RegisterFilter::ItemState>(status);
   updateSearch();
 }
 
@@ -150,9 +151,10 @@ void RegisterSearchLine::updateSearch(const QString& s)
 
   bool scrollBarVisible = d->reg->verticalScrollBar()->isVisible();
 
+  RegisterFilter filter(d->search, d->status);
   RegisterItem* p = d->reg->firstItem();
   for (; p; p = p->nextItem()) {
-    p->setVisible(itemMatches(p, d->search));
+    p->setVisible(p->matches(filter));
   }
   d->reg->suppressAdjacentMarkers();
   d->reg->updateAlternate();
@@ -170,57 +172,16 @@ void RegisterSearchLine::updateSearch(const QString& s)
   }
 }
 
-bool RegisterSearchLine::itemMatches(const RegisterItem* item, const QString& s) const
-{
-  const Transaction* t = dynamic_cast<const Transaction*>(item);
-  if (t && !t->transaction().id().isEmpty()) {
-    // Keep the case list of the following switch statement
-    // in sync with the logic to fill the combo box in
-    // RegisterSearchLine::init()
-    switch (d->status) {
-      default:
-        break;
-      case 1:    // Imported
-        if (!t->transaction().isImported())
-          return false;
-        break;
-      case 2:    // Matched
-        if (!t->split().isMatched())
-          return false;
-        break;
-      case 3:    // Erroneous
-        if (t->transaction().splitSum().isZero())
-          return false;
-        break;
-      case 4:    // Not marked
-        if (t->split().reconcileFlag() != MyMoneySplit::NotReconciled)
-          return false;
-        break;
-      case 5:    // Not reconciled
-        if (t->split().reconcileFlag() != MyMoneySplit::NotReconciled
-            && t->split().reconcileFlag() != MyMoneySplit::Cleared)
-          return false;
-        break;
-      case 6:    // Cleared
-        if (t->split().reconcileFlag() != MyMoneySplit::Cleared)
-          return false;
-        break;
-    }
-  }
-
-  return item->matches(s);
-}
-
 void RegisterSearchLine::reset(void)
 {
   clear();
-  d->combo->setCurrentIndex(0);
-  slotStatusChanged(0);
+  d->combo->setCurrentIndex(RegisterFilter::Any);
+  slotStatusChanged(RegisterFilter::Any);
 }
 
 void RegisterSearchLine::itemAdded(RegisterItem* item) const
 {
-  item->setVisible(itemMatches(item, text()));
+  item->setVisible(item->matches(RegisterFilter(text(), d->status)));
 }
 
 void RegisterSearchLine::registerDestroyed(void)

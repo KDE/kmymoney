@@ -82,8 +82,7 @@ void StdTransactionMatched::registerCellText(QString& txt, int& align, int row, 
     MyMoneySplit matchedSplit;
     try {
       matchedSplit = matchedTransaction.splitById(m_split.value("kmm-match-split"));
-    } catch (MyMoneyException *e) {
-      delete e;
+    } catch (const MyMoneyException &) {
     }
 
     QList<MyMoneySplit>::const_iterator it_s;

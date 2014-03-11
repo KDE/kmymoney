@@ -277,7 +277,7 @@ int AccountSet::load(kMyMoneyAccountSelector* selector)
   //get the account icon from cache or insert it if it is not there
   QPixmap accountPixmap;
   if (!QPixmapCache::find("account", accountPixmap)) {
-    accountPixmap = DesktopIcon("account"); //krazy:exclude=iconnames
+    accountPixmap = DesktopIcon("view-bank-account");
     QPixmapCache::insert("account", accountPixmap);
   }
   m_favorites->setIcon(0, QIcon(accountPixmap));

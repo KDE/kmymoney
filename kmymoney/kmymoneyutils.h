@@ -48,6 +48,7 @@
   * @author Thomas Baumgart
   */
 
+static QString m_lastNumberUsed;
 class QWizard;
 class KMyMoneyUtils
 {
@@ -352,6 +353,25 @@ public:
     */
   static QString nextCheckNumber(const MyMoneyAccount& acc);
 
+  static void updateLastNumberUsed(const MyMoneyAccount& acc, const QString& number);
+
+  static void setLastNumberUsed(const QString& num);
+
+  static QString lastNumberUsed();
+
+  /**
+    * Returns previous number if offset is -1 or
+    * the following number if offset is 1.
+    */
+  static QString getAdjacentNumber(const QString& number, int offset = 1);
+
+
+  /**
+  * remove any non-numeric characters from check number
+  * to allow validity check
+  */
+  static quint64 numericPart(const QString & num);
+
   /**
     * Returns the text representing the reconcile flag. If @a text is @p true
     * then the full text will be returned otherwise a short form (usually one character).
@@ -389,6 +409,15 @@ public:
     * for the QWizard passed as argument.
     */
   static void updateWizardButtons(QWizard *);
+
+  /**
+    * This method overlays an icon over another one, to get a composite one
+    * eg. an icon to add accounts
+    */
+  static QPixmap overlayIcon(const QString source, const QString overlay, const Qt::Corner corner = Qt::BottomRightCorner, int size = 0);
+
+
+
 };
 
 #endif

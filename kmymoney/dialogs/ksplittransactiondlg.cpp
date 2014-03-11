@@ -118,8 +118,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   try {
     MyMoneySecurity currency = MyMoneyFile::instance()->currency(t.commodity());
     m_precision = MyMoneyMoney::denomToPrec(m_account.fraction(currency));
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   slotSetTransaction(t);
@@ -310,8 +309,7 @@ void KSplitTransactionDlg::slotClearUnusedSplits(void)
 
     transactionsTable->setTransaction(m_transaction, m_split, m_account);
     slotSetTransaction(m_transaction);
-  } catch (MyMoneyException* e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 }
 
@@ -348,8 +346,7 @@ void KSplitTransactionDlg::slotMergeSplits(void)
 
     transactionsTable->setTransaction(m_transaction, m_split, m_account);
     slotSetTransaction(m_transaction);
-  } catch (MyMoneyException* e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 }
 

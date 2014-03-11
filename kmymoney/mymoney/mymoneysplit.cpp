@@ -50,7 +50,7 @@ MyMoneySplit::MyMoneySplit(const QDomElement& node) :
     MyMoneyKeyValueContainer(node.elementsByTagName("KEYVALUEPAIRS").item(0).toElement())
 {
   if ("SPLIT" != node.tagName())
-    throw new MYMONEYEXCEPTION("Node was not SPLIT");
+    throw MYMONEYEXCEPTION("Node was not SPLIT");
 
   clearId();
 

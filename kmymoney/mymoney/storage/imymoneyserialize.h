@@ -345,7 +345,7 @@ public:
     * This method is used to retrieve the list of all currencies
     * known to the engine.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @return QList of all MyMoneySecurity objects representing a currency.
     */
@@ -355,7 +355,7 @@ public:
     * This method is used to retrieve the list of all reports
     * known to the engine.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @return QList of all MyMoneyReport objects.
     */
@@ -365,7 +365,7 @@ public:
     * This method is used to retrieve the list of all budgets
     * known to the engine.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @return QList of all MyMoneyBudget objects.
     */

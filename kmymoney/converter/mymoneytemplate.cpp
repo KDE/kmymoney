@@ -285,8 +285,7 @@ bool MyMoneyTemplate::createAccounts(MyMoneyAccount& parent, QDomNode account)
           setFlags(acc, account.firstChild());
           try {
             MyMoneyFile::instance()->addAccount(acc, parent);
-          } catch (MyMoneyException *e) {
-            delete e;
+          } catch (const MyMoneyException &) {
           }
         }
         createAccounts(acc, account.firstChild());
@@ -413,10 +412,10 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
     if (qfile.open()) {
       saveToLocalFile(&qfile);
       if (!qfile.finalize()) {
-        throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
+        throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
       }
     } else {
-      throw new MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
+      throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
     }
   } else {
     KTemporaryFile tmpfile;
@@ -424,13 +423,13 @@ bool MyMoneyTemplate::saveTemplate(const KUrl& url)
     if (qfile.open()) {
       saveToLocalFile(&qfile);
       if (!qfile.finalize()) {
-        throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
+        throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
       }
     } else {
-      throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
+      throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
     }
     if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))
-      throw new MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
+      throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
   }
   return true;
 }

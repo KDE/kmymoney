@@ -75,9 +75,9 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
 
   try {
     if (to.splits().isEmpty())
-      throw new MYMONEYEXCEPTION(i18n("Transaction %1 has no splits", to.id()));
+      throw MYMONEYEXCEPTION(i18n("Transaction %1 has no splits", to.id()));
     if (tn.splits().isEmpty())
-      throw new MYMONEYEXCEPTION(i18n("Transaction %1 has no splits", tn.id()));
+      throw MYMONEYEXCEPTION(i18n("Transaction %1 has no splits", tn.id()));
 
     QString po, pn;
     if (!to.splits().front().payeeId().isEmpty())
@@ -159,9 +159,8 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
       noItemsChanged++;
       messageDetail += i18n("<p>Reconciliation flag changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>",    KMyMoneyUtils::reconcileStateToString(fo, true), KMyMoneyUtils::reconcileStateToString(fn, true));
     }
-  } catch (MyMoneyException *e) {
-    KMessageBox::error(this, i18n("Fatal error in determining data: %1", e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::error(this, i18n("Fatal error in determining data: %1", e.what()));
   }
 
   messageDetail += "</qt>";

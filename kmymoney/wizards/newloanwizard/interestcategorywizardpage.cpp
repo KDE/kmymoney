@@ -83,15 +83,14 @@ void InterestCategoryWizardPage::slotCreateCategory(void)
       QString id;
       id = file->createCategory(base, acc.name());
       if (id.isEmpty())
-        throw new MYMONEYEXCEPTION("failure while creating the account hierarchy");
+        throw MYMONEYEXCEPTION("failure while creating the account hierarchy");
 
       ft.commit();
 
       m_interestAccountEdit->setSelected(id);
 
-    } catch (MyMoneyException *e) {
-      KMessageBox::information(this, i18n("Unable to add account: %1", e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      KMessageBox::information(this, i18n("Unable to add account: %1", e.what()));
     }
   }
   delete dlg;

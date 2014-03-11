@@ -29,8 +29,8 @@
 // KDE includes
 #include <khtml_part.h>
 #include <khtmlview.h>
-#include <kgenericfactory.h>
 #include <kurlrequester.h>
+#include <KPluginFactory>
 
 #include "pluginsettings.h"
 

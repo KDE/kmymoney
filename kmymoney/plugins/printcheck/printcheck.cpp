@@ -21,14 +21,14 @@
 #include "printcheck.h"
 
 // KDE includes
-#include <kgenericfactory.h>
-#include <kaction.h>
-#include <kstandarddirs.h>
-#include <klocale.h>
+#include <KPluginFactory>
+#include <KAction>
+#include <KStandardDirs>
+#include <KLocale>
+#include <KActionCollection>
+#include <KPluginInfo>
 #include <khtmlview.h>
 #include <khtml_part.h>
-#include <kactioncollection.h>
-#include <kplugininfo.h>
 
 // KMyMoney includes
 #include "mymoneyfile.h"

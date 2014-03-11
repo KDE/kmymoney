@@ -77,6 +77,7 @@ private slots:
   void testOpeningBalance();
   void testAddPrice();
   void testRemovePrice();
+  void testGetPrice();
   void testAddAccountMissingCurrency();
   void testAddTransactionToClosedAccount();
   void testRemoveTransactionFromClosedAccount();

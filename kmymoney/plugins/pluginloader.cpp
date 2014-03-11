@@ -28,14 +28,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kplugininfo.h>
-#include <ktrader.h>
-#include <kparts/componentfactory.h>
-#include <kdebug.h>
-#include <kdialog.h>
-#include <kconfig.h>
-#include <kpluginselector.h>
-#include <klocale.h>
+#include <KPluginInfo>
+#include <KPluginSelector>
 #include <KServiceTypeTrader>
 #include <KService>
 
@@ -63,12 +57,10 @@ struct PluginLoader::Private {
   PluginsMap        m_loadedPlugins;
 };
 
-PluginLoader::PluginLoader(QObject* parent)
+PluginLoader::PluginLoader(QObject* parent) : d(new Private)
 {
   Q_ASSERT(s_instance == 0);
   s_instance = this;
-
-  d = new Private;
 
   d->m_parent = parent;
 

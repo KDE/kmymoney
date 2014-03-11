@@ -17,6 +17,11 @@ $ cmake --version
 on your command line. Version 2.6.4 is required, the most recent
 stable version of cmake is preferred.
 
+For debian/ubuntu user the following command will check for 
+required packages to build KMyMoney:
+
+  sudo apt-get build-dep kmymoney
+
 -----------------------------------------------------
 Quick-start 1: Build KMyMoney
 -----------------------------------------------------

@@ -21,12 +21,12 @@
 #include "icalendarexport.h"
 
 // KDE includes
-#include <kgenericfactory.h>
-#include <kaction.h>
-#include <kfiledialog.h>
-#include <kplugininfo.h>
-#include <kurl.h>
-#include <kactioncollection.h>
+#include <KPluginFactory>
+#include <KAction>
+#include <KFileDialog>
+#include <KPluginInfo>
+#include <KUrl>
+#include <KActionCollection>
 
 // KMyMoney includes
 #include "mymoneyfile.h"

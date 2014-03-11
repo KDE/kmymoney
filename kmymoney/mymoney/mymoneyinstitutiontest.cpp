@@ -285,8 +285,7 @@ void MyMoneyInstitutionTest::testReadXML()
   try {
     i = MyMoneyInstitution(node);
     QFAIL("Missing expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   i.addAccountId("TEST");
@@ -309,8 +308,7 @@ void MyMoneyInstitutionTest::testReadXML()
     QVERIFY(i.accountList() == alist);
     QVERIFY(i.value(QString("key")) == "value");
 
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 }

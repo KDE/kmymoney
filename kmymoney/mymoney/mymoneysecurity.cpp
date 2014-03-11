@@ -75,7 +75,7 @@ MyMoneySecurity::MyMoneySecurity(const QDomElement& node) :
   if (("SECURITY" != node.tagName())
       && ("EQUITY" != node.tagName())
       && ("CURRENCY" != node.tagName()))
-    throw new MYMONEYEXCEPTION("Node was not SECURITY or CURRENCY");
+    throw MYMONEYEXCEPTION("Node was not SECURITY or CURRENCY");
 
   setName(QStringEmpty(node.attribute("name")));
   setTradingSymbol(QStringEmpty(node.attribute("symbol")));

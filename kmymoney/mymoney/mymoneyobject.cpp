@@ -36,7 +36,7 @@ MyMoneyObject::MyMoneyObject(const QDomElement& el, const bool forceId)
 {
   m_id = el.attribute("id");
   if (m_id.length() == 0 && forceId)
-    throw new MYMONEYEXCEPTION("Node has no ID");
+    throw MYMONEYEXCEPTION("Node has no ID");
 }
 
 MyMoneyObject::MyMoneyObject()

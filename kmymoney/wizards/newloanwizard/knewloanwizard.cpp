@@ -39,7 +39,6 @@
 #include <kpushbutton.h>
 #include <knuminput.h>
 #include <kmessagebox.h>
-#include <kiconloader.h>
 #include <kguiitem.h>
 
 // ----------------------------------------------------------------------------
@@ -451,7 +450,7 @@ int KNewLoanWizard::calculateLoan(void)
       // calculate the number of payments out of the other information
       val = calc.numPayments();
       if (val == 0)
-        throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
+        throw MYMONEYEXCEPTION("incorrect fincancial calculation");
 
       // if the number of payments has a fractional part, then we
       // round it to the smallest integer and calculate the balloon payment
@@ -484,7 +483,7 @@ int KNewLoanWizard::calculateLoan(void)
           || (field("lendButton").toBool() && val > 0 && qAbs(val) > qAbs(calc.payment()))) {
         // case a)
         qDebug("Future Value is %f", val);
-        throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
+        throw MYMONEYEXCEPTION("incorrect fincancial calculation");
 
       } else if ((field("borrowButton").toBool() && val < 0 && qAbs(val) <= qAbs(calc.payment()))
                  || (field("lendButton").toBool() && val > 0 && qAbs(val) <= qAbs(calc.payment()))) {
@@ -497,7 +496,7 @@ int KNewLoanWizard::calculateLoan(void)
 
       if (field("finalPaymentEditValid").toBool()) {
         if ((field("finalPaymentEdit").value<MyMoneyMoney>().abs() - refVal.abs()).abs().toDouble() > 1) {
-          throw new MYMONEYEXCEPTION("incorrect fincancial calculation");
+          throw MYMONEYEXCEPTION("incorrect fincancial calculation");
         }
         result = i18n("KMyMoney has successfully verified your loan information.");
       }
@@ -505,8 +504,7 @@ int KNewLoanWizard::calculateLoan(void)
       m_finalPaymentPage->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
     }
 
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     KMessageBox::error(0,
                        i18n("You have entered mis-matching information. Please backup to the "
                             "appropriate page and update your figures or leave one value empty "

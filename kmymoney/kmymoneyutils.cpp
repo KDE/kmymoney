@@ -29,6 +29,7 @@
 #include <QPixmap>
 #include <QWizard>
 #include <QAbstractButton>
+#include <QPixmapCache>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -344,9 +345,8 @@ void KMyMoneyUtils::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTr
 {
   try {
     MyMoneyForecast::calculateAutoLoan(schedule, transaction, balances);
-  } catch (MyMoneyException* e) {
-    KMessageBox::detailedError(0, i18n("Unable to load schedule details"), e->what());
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedError(0, i18n("Unable to load schedule details"), e.what());
   }
 }
 
@@ -356,6 +356,7 @@ QString KMyMoneyUtils::nextCheckNumber(const MyMoneyAccount& acc)
   //                   +-#1--+ +#2++-#3-++-#4--+
   QRegExp exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
   if (exp.indexIn(acc.value("lastNumberUsed")) != -1) {
+    setLastNumberUsed(acc.value("lastNumberUsed"));
     QString arg1 = exp.cap(1);
     QString arg2 = exp.cap(2);
     QString arg3 = QString::number(exp.cap(3).toULong() + 1);
@@ -372,6 +373,77 @@ QString KMyMoneyUtils::nextCheckNumber(const MyMoneyAccount& acc)
     number = '1';
   }
   return number;
+}
+
+void KMyMoneyUtils::updateLastNumberUsed(const MyMoneyAccount& acc, const QString& number)
+{
+  MyMoneyAccount accnt = acc;
+  QString num = number;
+  // now check if this number has been used already
+  MyMoneyFile* file = MyMoneyFile::instance();
+  if (file->checkNoUsed(accnt.id(), num)) {
+    // if a number has been entered which is immediately prior to
+    // an existing number, the next new number produced would clash
+    // so need to look ahead for free next number
+    bool free = false;
+    for (int i = 0; i < 10; i++) {
+      // find next unused number - 10 tries (arbitrary)
+      if (file->checkNoUsed(accnt.id(), num)) {
+        //  increment and try again
+        num = getAdjacentNumber(num);
+      } else {
+        //  found a free number
+        free = true;
+        break;
+      }
+    }
+    if (!free) {
+      qDebug() << "No free number found - set to '1'";
+      num = '1';
+    }
+    setLastNumberUsed(getAdjacentNumber(num, - 1));
+  }
+}
+
+void KMyMoneyUtils::setLastNumberUsed(const QString& num)
+{
+  m_lastNumberUsed = num;
+}
+
+QString KMyMoneyUtils::lastNumberUsed()
+{
+  return m_lastNumberUsed;
+}
+
+QString KMyMoneyUtils::getAdjacentNumber(const QString& number, int offset)
+{
+  QString num = number;
+  //                   +-#1--+ +#2++-#3-++-#4--+
+  QRegExp exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
+  if (exp.indexIn(num) != -1) {
+    QString arg1 = exp.cap(1);
+    QString arg2 = exp.cap(2);
+    QString arg3 = QString::number(exp.cap(3).toULong() + offset);
+    QString arg4 = exp.cap(4);
+    num = QString("%1%2%3%4").arg(arg1).arg(arg2).arg(arg3).arg(arg4);
+  } else {
+    num = '1';
+  }  //  next free number
+  return num;
+}
+
+quint64 KMyMoneyUtils::numericPart(const QString & num)
+{
+  quint64 num64 = 0;
+  QRegExp exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
+  if (exp.indexIn(num) != -1) {
+    QString arg1 = exp.cap(1);
+    QString arg2 = exp.cap(2);
+    QString arg3 = QString::number(exp.cap(3).toULongLong());
+    QString arg4 = exp.cap(4);
+    num64 = QString("%2%3").arg(arg2).arg(arg3).toULongLong();
+  }
+  return num64;
 }
 
 QString KMyMoneyUtils::reconcileStateToString(MyMoneySplit::reconcileFlagE flag, bool text)
@@ -424,9 +496,8 @@ MyMoneyTransaction KMyMoneyUtils::scheduledTransaction(const MyMoneySchedule& sc
     if (schedule.type() == MyMoneySchedule::TYPE_LOANPAYMENT) {
       calculateAutoLoan(schedule, t, QMap<QString, MyMoneyMoney>());
     }
-  } catch (MyMoneyException* e) {
-    qDebug("Unable to load schedule details for '%s' during transaction match: %s", qPrintable(schedule.name()), qPrintable(e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    qDebug("Unable to load schedule details for '%s' during transaction match: %s", qPrintable(schedule.name()), qPrintable(e.what()));
   }
 
   t.clearId();
@@ -465,8 +536,7 @@ void KMyMoneyUtils::previouslyUsedCategories(const QString& investmentAccount, Q
         interestId = interestSplits.first().accountId();
       }
     }
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
 }
@@ -492,4 +562,51 @@ void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)
   wizard->button(QWizard::CancelButton)->setIcon(KStandardGuiItem::cancel().icon());
   wizard->button(QWizard::NextButton)->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
   wizard->button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
+}
+
+QPixmap KMyMoneyUtils::overlayIcon(const QString icon, const QString overlay, const Qt::Corner corner, int size)
+{
+  int x, y;
+  QPixmap result;
+  QString overlaidIcon = icon + '-' + overlay;
+
+  // If found in the cache, return quickly
+  if (QPixmapCache::find(overlaidIcon, result)) {
+    return result;
+  }
+
+  // try to retrieve the main icon from cache
+  if (!QPixmapCache::find(icon, result)) {
+    result = DesktopIcon(icon, size);
+    QPixmapCache::insert(icon, result);
+  }
+
+  QPainter pixmapPainter(&result);
+  QPixmap ovly = DesktopIcon(overlay, size);
+
+  switch (corner) {
+    case Qt::TopLeftCorner:
+      x = 0;
+      y = 0;
+      break;
+    case Qt::TopRightCorner:
+      x = ovly.width() / 2;
+      y = 0;
+      break;
+    case Qt::BottomLeftCorner:
+      x = 0;
+      y = ovly.height() / 2;
+      break;
+    case Qt::BottomRightCorner:
+    default:
+      x = ovly.width() / 2;
+      y = ovly.height() / 2;
+      break;
+  }
+  pixmapPainter.drawPixmap(x, y, ovly.width() / 2, ovly.height() / 2, ovly);
+
+  //save for later use
+  QPixmapCache::insert(overlaidIcon, result);
+
+  return result;
 }

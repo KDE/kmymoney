@@ -125,25 +125,22 @@ void MyMoneyForecastTest::testDoForecastInit()
     KMyMoneyGlobalSettings::setForecastDays(-10);
     a.doForecast();
   }
-  catch (MyMoneyException *e)
+  catch (const MyMoneyException &e)
   {
-    delete e;
     QFAIL("Unexpected exception");
   }
   try {
     KMyMoneyGlobalSettings::setForecastAccountCycle(-20);
       a.doForecast();
     }
-    catch (MyMoneyException *e) {
-      delete e;
+    catch (const MyMoneyException &e) {
       QFAIL("Unexpected exception");
   }
   try {
     KMyMoneyGlobalSettings::setForecastCycles(-10);
     a.doForecast();
   }
-  catch (MyMoneyException *e) {
-    delete e;
+  catch (const MyMoneyException &e) {
     QFAIL("Unexpected exception");
   }
 
@@ -151,8 +148,7 @@ void MyMoneyForecastTest::testDoForecastInit()
     KMyMoneyGlobalSettings::setForecastAccountCycle(0);
     a.doForecast();
   }
-  catch (MyMoneyException *e) {
-    delete e;
+  catch (const MyMoneyException &e) {
     QFAIL("Unexpected exception");
   }
   try {
@@ -161,8 +157,7 @@ void MyMoneyForecastTest::testDoForecastInit()
     KMyMoneyGlobalSettings::setForecastAccountCycle(0);
     a.doForecast();
   }
-  catch (MyMoneyException *e) {
-    delete e;
+  catch (const MyMoneyException &e) {
     QVERIFY("Unexpected exception");
   }*/
 }
@@ -275,15 +270,13 @@ void MyMoneyForecastTest::testCalculateAccountTrend()
 
   try {
     MyMoneyForecast::calculateAccountTrend(a_checking, 0);
-  } catch (MyMoneyException *e) {
-    QVERIFY(e->what().compare("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0") == 0);
-    delete e;
+  } catch (const MyMoneyException &e) {
+    QVERIFY(e.what().compare("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0") == 0);
   }
   try {
     MyMoneyForecast::calculateAccountTrend(a_checking, -10);
-  } catch (MyMoneyException *e) {
-    QVERIFY(e->what().compare("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0") == 0);
-    delete e;
+  } catch (const MyMoneyException &e) {
+    QVERIFY(e.what().compare("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0") == 0);
   }
 
   //test that it calculates correctly
@@ -605,8 +598,7 @@ void MyMoneyForecastTest::testDaysToZeroBalance()
   MyMoneyAccount nullAcc;
   try {
     a.daysToZeroBalance(nullAcc);
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 

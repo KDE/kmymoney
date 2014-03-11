@@ -382,8 +382,7 @@ void MyMoneyAccountTest::testReadXML()
   try {
     a = MyMoneyAccount(node);
     QFAIL("Missing expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   doc.setContent(ref_ok);
@@ -414,8 +413,7 @@ void MyMoneyAccountTest::testReadXML()
     QVERIFY(a.reconciliationHistory().count() == 2);
     QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 1)] == MyMoneyMoney(123, 100));
     QVERIFY(a.reconciliationHistory()[QDate(2011, 2, 1)] == MyMoneyMoney(456, 100));
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
 }

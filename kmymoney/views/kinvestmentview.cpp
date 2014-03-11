@@ -175,8 +175,7 @@ void KInvestmentView::slotInvestmentSelectionChanged()
       MyMoneyAccount account = MyMoneyFile::instance()->account(item->data(0, Qt::UserRole).value<MyMoneyAccount>().id());
       kmymoney->slotSelectInvestment(account);
 
-    } catch (MyMoneyException *e) {
-      delete e;
+    } catch (const MyMoneyException &) {
     }
   }
 }
@@ -215,8 +214,7 @@ void KInvestmentView::loadAccounts(void)
   if (!d->m_account.id().isEmpty()) {
     try {
       d->m_account = file->account(d->m_account.id());
-    } catch (MyMoneyException *e) {
-      delete e;
+    } catch (const MyMoneyException &) {
       d->m_account = MyMoneyAccount();
     }
   }
@@ -251,9 +249,8 @@ void KInvestmentView::loadAccounts(void)
     m_accountComboBox->setSelected(d->m_account.id());
     try {
       d->m_precision = MyMoneyMoney::denomToPrec(d->m_account.fraction());
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &) {
       qDebug("Security %s for account %s not found", qPrintable(d->m_account.currencyId()), qPrintable(d->m_account.name()));
-      delete e;
       d->m_precision = 2;
     }
   }
@@ -300,9 +297,8 @@ bool KInvestmentView::slotSelectAccount(const QString& id, const QString& transa
           rc = false;
         }
 
-      } catch (MyMoneyException* e) {
+      } catch (const MyMoneyException &) {
         qDebug("Unable to retrieve account %s", qPrintable(id));
-        delete e;
         rc = false;
       }
     } else {
@@ -369,10 +365,9 @@ void KInvestmentView::loadInvestmentTab(void)
       if (!acc.isClosed() || showClosedAccounts)
         loadInvestmentItem(acc);
     }
-  } catch (MyMoneyException* e) {
+  } catch (const MyMoneyException &) {
     qDebug("KInvestmentView::loadView() - selected account does not exist anymore");
     d->m_account = MyMoneyAccount();
-    delete e;
   }
 
   // and tell everyone what's selected
@@ -521,9 +516,8 @@ void KInvestmentView::slotEditSecurity(void)
           security = MyMoneyFile::instance()->security(item->text(eIdColumn).toLatin1());
           loadSecurityItem(item, security);
         }
-      } catch (MyMoneyException* e) {
-        KMessageBox::error(this, i18n("Failed to edit security: %1", e->what()));
-        delete e;
+      } catch (const MyMoneyException &e) {
+        KMessageBox::error(this, i18n("Failed to edit security: %1", e.what()));
       }
     }
     delete dlg;
@@ -552,8 +546,7 @@ void KInvestmentView::slotDeleteSecurity(void)
         else
           MyMoneyFile::instance()->removeSecurity(security);
         ft.commit();
-      } catch (MyMoneyException *e) {
-        delete e;
+      } catch (const MyMoneyException &) {
       }
     }
   }

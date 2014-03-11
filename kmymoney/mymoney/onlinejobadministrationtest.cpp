@@ -24,9 +24,8 @@ void onlineJobAdministrationTest::initTestCase()
         file->addAccount(account , asset );
         accountId = account.id();
         transaction.commit();
-    } catch (MyMoneyException* ex) {
-        QFAIL( qPrintable("Unexpected exception " + ex->what()) );
-        delete ex;
+    } catch (const MyMoneyException& ex) {
+        QFAIL( qPrintable("Unexpected exception " + ex.what()) );
     }
 }
 

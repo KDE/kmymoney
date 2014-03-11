@@ -319,10 +319,9 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           kWarning() << m_errMsg;
           rc = false;
         }
-      } catch (MyMoneyException* e) {
-        m_errMsg = i18n("Exception while creating a %1 element: %2", s, e->what());
+      } catch (const MyMoneyException &e) {
+        m_errMsg = i18n("Exception while creating a %1 element: %2", s, e.what());
         kWarning() << m_errMsg;
-        delete e;
         rc = false;
       }
       m_doc = QDomDocument();
@@ -455,7 +454,7 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
     delete m_doc;
     m_doc = 0;
     signalProgress(-1, -1);
-    throw new MYMONEYEXCEPTION("File was not parsable!");
+    throw MYMONEYEXCEPTION("File was not parsable!");
   }
 
   // check if we need to build up the account balances

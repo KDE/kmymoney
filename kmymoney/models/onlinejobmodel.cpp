@@ -108,8 +108,7 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
   
   try {
     job = MyMoneyFile::instance()->getOnlineJob( m_jobIdList[index.row()] );
-  } catch (MyMoneyException* e) {
-    delete e;
+  } catch (const MyMoneyException&) {
     return QVariant();
   }
   

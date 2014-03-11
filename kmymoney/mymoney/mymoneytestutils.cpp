@@ -19,13 +19,12 @@
 
 #include "mymoneyexception.h"
 
-void unexpectedException(MyMoneyException *e)
+void unexpectedException(const MyMoneyException &e)
 {
   QString msg = QString("Unexpected exception: %1 thrown in %2:%3")
-                .arg(e->what())
-                .arg(e->file())
-                .arg(e->line());
-  delete e;
+                .arg(e.what())
+                .arg(e.file())
+                .arg(e.line());
   QFAIL(qPrintable(msg));
 }
 

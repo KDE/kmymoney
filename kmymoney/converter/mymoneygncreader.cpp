@@ -55,8 +55,8 @@ email                : mte@users.sourceforge.net
 #include "keditscheduledlg.h"
 #include "kmymoneyedit.h"
 #define TRY try
-#define CATCH catch (MyMoneyException *e)
-#define PASS catch (MyMoneyException *e) { throw e; }
+#define CATCH catch (const MyMoneyException &)
+#define PASS catch (const MyMoneyException &) { throw; }
 #else
 #include "mymoneymoney.h"
 #include <KTextEdit>
@@ -121,7 +121,7 @@ void GncObject::checkVersion(const QString& elName, const QXmlAttributes& elAttr
       if (!map[elName].contains(elAttrs.value("version"))) {
         QString em = Q_FUNC_INFO + i18n(": Sorry. This importer cannot handle version %1 of element %2"
         , elAttrs.value("version"), elName);
-        throw new MYMONEYEXCEPTION(em);
+        throw MYMONEYEXCEPTION(em);
       }
     }
     return ;
@@ -303,7 +303,7 @@ GncObject *GncFile::startSubEl()
     GncObject *next = 0;
     switch (m_state) {
       case BOOK:
-        if (m_bookFound) throw new MYMONEYEXCEPTION(i18n("This version of the importer cannot handle multi-book files."));
+        if (m_bookFound) throw MYMONEYEXCEPTION(i18n("This version of the importer cannot handle multi-book files."));
         m_bookFound = true;
         break;
       case COUNT:
@@ -330,7 +330,7 @@ GncObject *GncFile::startSubEl()
         next = new GncSchedule;
         break;
       default:
-        throw new MYMONEYEXCEPTION("GncFile rcvd invalid state");
+        throw MYMONEYEXCEPTION("GncFile rcvd invalid state");
     }
     return (next);
   }
@@ -422,7 +422,7 @@ GncObject *GncKvp::startSubEl()
         next = new GncKvp;
         break;
       default:
-        throw new MYMONEYEXCEPTION("GncKvp rcvd invalid m_state ");
+        throw MYMONEYEXCEPTION("GncKvp rcvd invalid m_state ");
     }
     return (next);
   }
@@ -543,7 +543,7 @@ GncObject *GncPrice::startSubEl()
         next = new GncDate;
         break;
       default:
-        throw new MYMONEYEXCEPTION("GncPrice rcvd invalid m_state");
+        throw MYMONEYEXCEPTION("GncPrice rcvd invalid m_state");
     }
     return (next);
   }
@@ -564,7 +564,7 @@ void GncPrice::endSubEl(GncObject *subObj)
         m_vpPriceDate = static_cast<GncDate *>(subObj);
         break;
       default:
-        throw new MYMONEYEXCEPTION("GncPrice rcvd invalid m_state");
+        throw MYMONEYEXCEPTION("GncPrice rcvd invalid m_state");
     }
     return;
   }
@@ -618,7 +618,7 @@ GncObject *GncAccount::startSubEl()
         pMain->setLotsFound(true); // we don't handle lots; just set flag to report
         break;
       default:
-        throw new MYMONEYEXCEPTION("GncAccount rcvd invalid m_state");
+        throw MYMONEYEXCEPTION("GncAccount rcvd invalid m_state");
     }
     return (next);
   }
@@ -695,7 +695,7 @@ GncObject *GncTransaction::startSubEl()
         next = new GncKvp;
         break;
       default:
-        throw new MYMONEYEXCEPTION("GncTransaction rcvd invalid m_state");
+        throw MYMONEYEXCEPTION("GncTransaction rcvd invalid m_state");
     }
     return (next);
   }
@@ -767,7 +767,7 @@ GncObject *GncSplit::startSubEl()
         next = new GncDate;
         break;
       default:
-        throw new MYMONEYEXCEPTION("GncTemplateSplit rcvd invalid m_state ");
+        throw MYMONEYEXCEPTION("GncTemplateSplit rcvd invalid m_state ");
     }
     return (next);
   }
@@ -812,7 +812,7 @@ GncObject *GncTemplateSplit::startSubEl()
         next = new GncKvp;
         break;
       default:
-        throw new MYMONEYEXCEPTION("GncTemplateSplit rcvd invalid m_state");
+        throw MYMONEYEXCEPTION("GncTemplateSplit rcvd invalid m_state");
     }
     return (next);
   }
@@ -874,7 +874,7 @@ GncObject *GncSchedule::startSubEl()
         next = new GncSchedDef;
         break;
       default:
-        throw new MYMONEYEXCEPTION("GncSchedule rcvd invalid m_state");
+        throw MYMONEYEXCEPTION("GncSchedule rcvd invalid m_state");
     }
     return (next);
   }
@@ -944,7 +944,7 @@ GncObject *GncFreqSpec::startSubEl()
         next = new GncFreqSpec;
         break;
       default:
-        throw new MYMONEYEXCEPTION("GncFreqSpec rcvd invalid m_state");
+        throw MYMONEYEXCEPTION("GncFreqSpec rcvd invalid m_state");
     }
     return (next);
   }
@@ -998,7 +998,7 @@ GncObject *GncRecurrence::startSubEl()
         next = new GncDate;
         break;
       default:
-        throw new MYMONEYEXCEPTION("GncRecurrence rcvd invalid m_state");
+        throw MYMONEYEXCEPTION("GncRecurrence rcvd invalid m_state");
     }
     return (next);
   }
@@ -1066,7 +1066,7 @@ void XmlReader::processFile(QIODevice* pDevice)
   m_reader->setContentHandler(this);
   // go read the file
   if (!m_reader->parse(m_source)) {
-    throw new MYMONEYEXCEPTION(i18n("Input file cannot be parsed; may be corrupt\n%1", errorString()));
+    throw MYMONEYEXCEPTION(i18n("Input file cannot be parsed; may be corrupt\n%1", errorString()));
   }
   delete m_reader;
   delete m_source;
@@ -1117,7 +1117,7 @@ bool XmlReader::startElement(const QString&, const QString&, const QString& elNa
     lastType = 0;
 #else
     if ((!m_headerFound) && (elName != "gnc-v2"))
-      throw new MYMONEYEXCEPTION(i18n("Invalid header for file. Should be 'gnc-v2'"));
+      throw MYMONEYEXCEPTION(i18n("Invalid header for file. Should be 'gnc-v2'"));
     m_headerFound = true;
 #endif // _GNCFILEANON
     m_co->checkVersion(elName, elAttrs, pMain->m_versionList);
@@ -1139,11 +1139,11 @@ bool XmlReader::startElement(const QString&, const QString&, const QString& elNa
       // reduced the above to
       m_co->isDataElement(elName, elAttrs);
     }
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
 #ifndef _GNCFILEANON
     // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
-    KMessageBox::error(0, i18n("Import failed:\n\n%1", e->what()), PACKAGE);
-    qWarning("%s", qPrintable(e->what()));
+    KMessageBox::error(0, i18n("Import failed:\n\n%1", e.what()), PACKAGE);
+    qWarning("%s", qPrintable(e.what()));
 #else
     qWarning("%s", e->toLatin1());
 #endif // _GNCFILEANON
@@ -1178,11 +1178,11 @@ bool XmlReader::endElement(const QString&, const QString&, const QString&elName)
       m_co->endSubEl(temp);
     }
     return (true);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
 #ifndef _GNCFILEANON
     // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
-    KMessageBox::error(0, i18n("Import failed:\n\n%1", e->what()), PACKAGE);
-    qWarning("%s", qPrintable(e->what()));
+    KMessageBox::error(0, i18n("Import failed:\n\n%1", e.what()), PACKAGE);
+    qWarning("%s", qPrintable(e.what()));
 #else
     qWarning("%s", e->toLatin1());
 #endif // _GNCFILEANON
@@ -1274,9 +1274,9 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
     m_xr->processFile(pDevice);
     terminate();  // do all the wind-up things
     ft.commit();
-  } catch (MyMoneyException *e) {
-    KMessageBox::error(0, i18n("Import failed:\n\n%1", e->what()), PACKAGE);
-    qWarning("%s", qPrintable(e->what()));
+  } catch (const MyMoneyException &e) {
+    KMessageBox::error(0, i18n("Import failed:\n\n%1", e.what()), PACKAGE);
+    qWarning("%s", qPrintable(e.what()));
   } // end catch
   MyMoneyFile::instance()->blockSignals(blocked);
   MyMoneyFile::instance()->detachStorage(m_storage);
@@ -1299,7 +1299,7 @@ void MyMoneyGncReader::readFile(QString in, QString out)
   m_xr = new XmlReader(this);
   try {
     m_xr->processFile(&pDevice);
-  } catch (MyMoneyException *e) {
+  } catch (const MyMoneyException &e) {
     qWarning("%s", e->toLatin1());
   } // end catch
   delete m_xr;
@@ -1474,7 +1474,7 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
     } else { // we have here an account type we can't currently handle
       QString em =
         i18n("Current importer does not recognize GnuCash account type %1", gac->type());
-      throw new MYMONEYEXCEPTION(em);
+      throw MYMONEYEXCEPTION(em);
     }
     // if no parent account is present, assign to one of our standard accounts
     if ((acc.parentAccountId().isEmpty()) || (acc.parentAccountId() == m_rootId)) {
@@ -1691,7 +1691,6 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
           } CATCH {
             // stock transfer; treat like free shares?
             split.setAction(MyMoneySplit::ActionAddShares);
-            delete e;
           }
         }
       } else { // not stock
@@ -1955,7 +1954,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
       if (static_cast<const GncTemplateSplit *>((*itt)->getSplit(0))->acct() == gsc->templId()) break;
     }
     if (itt == m_templateList.constEnd()) {
-      throw new MYMONEYEXCEPTION(i18n("Cannot find template transaction for schedule %1", sc.name()));
+      throw MYMONEYEXCEPTION(i18n("Cannot find template transaction for schedule %1", sc.name()));
     } else {
       tx = convertTemplateTransaction(sc.name(), *itt);
     }
@@ -2182,7 +2181,7 @@ void MyMoneyGncReader::terminate()
           parent = checkConsistency(parent, (*acc));
           m_storage->addAccount(parent, (*acc));
         } else {
-          throw new MYMONEYEXCEPTION("terminate() could not find account id");
+          throw MYMONEYEXCEPTION("terminate() could not find account id");
         }
       }
       signalProgress(++i, 0);
@@ -2334,7 +2333,6 @@ QString MyMoneyGncReader::createPayee(const QString& gncDescription)
   TRY {
     payee = m_storage->payeeByName(gncDescription);
   } CATCH { // payee not found, create one
-    delete e;
     payee.setName(gncDescription);
     m_storage->addPayee(payee);
   }
@@ -2380,7 +2378,7 @@ QDate MyMoneyGncReader::incrDate(QDate lastDate, unsigned char interval, unsigne
       case 'o': // once-only
         return (lastDate);
     }
-    throw new MYMONEYEXCEPTION(i18n("Internal error - invalid interval char in incrDate"));
+    throw MYMONEYEXCEPTION(i18n("Internal error - invalid interval char in incrDate"));
     QDate r = QDate(); return (r); // to keep compiler happy
   }
   PASS

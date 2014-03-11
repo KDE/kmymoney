@@ -25,6 +25,7 @@
 #include <QHttp>
 #include <QFile>
 #include <QEventLoop>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -65,7 +66,7 @@ class OfxHttpRequest : public QObject
   Q_OBJECT
 public:
   OfxHttpRequest(const QString& method, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo = true);
-  virtual ~OfxHttpRequest() {}
+  virtual ~OfxHttpRequest();
 
   QHttp::Error error(void) const {
     return m_error;
@@ -78,7 +79,7 @@ private:
   QHttp*        m_job;
   KUrl          m_dst;
   QHttp::Error  m_error;
-  QEventLoop    m_eventLoop;
+  QPointer<QEventLoop> m_eventLoop;
 };
 
 class OfxHttpsRequest : public QObject
@@ -104,6 +105,6 @@ private:
   QFile             m_file;
   QHttp::Error      m_error;
   KIO::TransferJob* m_job;
-  QEventLoop        m_eventLoop;
+  QPointer<QEventLoop> m_eventLoop;
 };
 #endif // OFXPARTNER_H

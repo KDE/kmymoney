@@ -131,6 +131,8 @@ public:
   void               previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId);
   void               dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, MyMoneySplit::investTransactionTypeE& transactionType);
 
+  const QString      checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2);
+  void               createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 private:
   QString          m_feeId;
   QString          m_interestId;

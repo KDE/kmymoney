@@ -36,7 +36,6 @@
 
 #include <klocale.h>
 #include <kglobal.h>
-#include <kiconloader.h>
 #include <kdebug.h>
 #include <kpushbutton.h>
 
@@ -155,7 +154,7 @@ Transaction::Transaction(Register *parent, const MyMoneyTransaction& transaction
     m_formRowHeight(-1),
     m_selected(false),
     m_focus(false),
-    m_erronous(false),
+    m_erroneous(false),
     m_inEdit(false),
     m_inRegisterEdit(false),
     m_showBalance(true),
@@ -190,8 +189,8 @@ Transaction::Transaction(Register *parent, const MyMoneyTransaction& transaction
   if (!m_transaction.id().isEmpty())
     m_splitCurrencyId = m_account.currencyId();
 
-  // check if transaction is errnous or not
-  m_erronous = !m_transaction.splitSum().isZero();
+  // check if transaction is erroneous or not
+  m_erroneous = !m_transaction.splitSum().isZero();
 
   if (!m_uniqueId.isEmpty()) {
     m_uniqueId += '-';
@@ -254,8 +253,8 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
   }
 
   // do we need to switch to the error color?
-  if (m_erronous) {
-    option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::listErronousTransactionColor());
+  if (m_erroneous) {
+    option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::listErroneousTransactionColor());
   }
 
   // do we need to switch to the negative balance color?
@@ -264,7 +263,7 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
     if (m_account.accountGroup() == MyMoneyAccount::Liability && !m_balance.isZero())
       showNegative = !showNegative;
     if (showNegative)
-      option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::listErronousTransactionColor());
+      option.palette.setColor(QPalette::Text, KMyMoneyGlobalSettings::listErroneousTransactionColor());
   }
   return true;
 }
@@ -282,7 +281,7 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
     const QStyle *style = option.widget ? option.widget->style() : QApplication::style();
     const QWidget* widget = option.widget;
 
-    // clear the mouse ove state before painting the background
+    // clear the mouse over state before painting the background
     option.state &= ~QStyle::State_MouseOver;
     // the background
     if (option.state & QStyle::State_Selected || option.state & QStyle::State_HasFocus) {
@@ -360,7 +359,7 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
 
     // possible icons
     if (index.row() == startRow() && index.column() == DetailColumn) {
-      if (m_erronous) {
+      if (m_erroneous) {
         QPixmap attention;
         attention.loadFromData(attentionSign, sizeof(attentionSign), 0, 0);
         style->drawItemPixmap(painter, option.rect, Qt::AlignRight | Qt::AlignVCenter, attention);
@@ -520,7 +519,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
   if (col != DetailColumn)
     return false;
 
-  if (!m_erronous && m_transaction.splitCount() < 3)
+  if (!m_erroneous && m_transaction.splitCount() < 3)
     return false;
 
   // check for detail column in row 0 of the transaction for a possible
@@ -528,7 +527,7 @@ bool Transaction::maybeTip(const QPoint& cpos, int row, int col, QRect& r, QStri
   // the modelindex is based 1, so we need to add one here
   r = m_parent->visualRect(m_parent->model()->index(m_startRow + 1, col));
   r.setBottom(r.bottom() + (numRowsRegister() - 1)*r.height());
-  if (r.contains(cpos) && m_erronous) {
+  if (r.contains(cpos) && m_erroneous) {
     if (m_transaction.splits().count() < 2) {
       msg = QString("<qt>%1</qt>").arg(i18n("Transaction is missing a category assignment."));
     } else {
@@ -621,40 +620,74 @@ int Transaction::rowHeightHint(void) const
 }
 
 
-bool Transaction::matches(const QString& txt) const
+bool Transaction::matches(const RegisterFilter& filter) const
 {
-  if (txt.isEmpty() || m_transaction.splitCount() == 0)
+  // check if the state matches
+  if (!transaction().id().isEmpty()) {
+    switch (filter.state) {
+      default:
+        break;
+      case RegisterFilter::Imported:
+        if (!transaction().isImported())
+          return false;
+        break;
+      case RegisterFilter::Matched:
+        if (!split().isMatched())
+          return false;
+        break;
+      case RegisterFilter::Erroneous:
+        if (transaction().splitSum().isZero())
+          return false;
+        break;
+      case RegisterFilter::NotMarked:
+        if (split().reconcileFlag() != MyMoneySplit::NotReconciled)
+          return false;
+        break;
+      case RegisterFilter::NotReconciled:
+        if (split().reconcileFlag() != MyMoneySplit::NotReconciled
+            && split().reconcileFlag() != MyMoneySplit::Cleared)
+          return false;
+        break;
+      case RegisterFilter::Cleared:
+        if (split().reconcileFlag() != MyMoneySplit::Cleared)
+          return false;
+        break;
+    }
+  }
+
+  // check if the text matches
+  if (filter.text.isEmpty() || m_transaction.splitCount() == 0)
     return true;
 
   MyMoneyFile* file = MyMoneyFile::instance();
-  QString s(txt);
-  s.replace(MyMoneyMoney::thousandSeparator(), QChar());
 
   const QList<MyMoneySplit>&list = m_transaction.splits();
   QList<MyMoneySplit>::const_iterator it_s;
   for (it_s = list.begin(); it_s != list.end(); ++it_s) {
     // check if the text is contained in one of the fields
     // memo, number, payee, tag, account
-    if ((*it_s).memo().contains(txt, Qt::CaseInsensitive)
-        || (*it_s).number().contains(txt, Qt::CaseInsensitive))
+    if ((*it_s).memo().contains(filter.text, Qt::CaseInsensitive)
+        || (*it_s).number().contains(filter.text, Qt::CaseInsensitive))
       return true;
 
     if (!(*it_s).payeeId().isEmpty()) {
       const MyMoneyPayee& payee = file->payee((*it_s).payeeId());
-      if (payee.name().contains(txt, Qt::CaseInsensitive))
+      if (payee.name().contains(filter.text, Qt::CaseInsensitive))
         return true;
     }
     if (!(*it_s).tagIdList().isEmpty()) {
       const QList<QString>& t = (*it_s).tagIdList();
       for (int i = 0; i < t.count(); i++) {
-        if ((file->tag(t[i])).name().contains(txt, Qt::CaseInsensitive))
+        if ((file->tag(t[i])).name().contains(filter.text, Qt::CaseInsensitive))
           return true;
       }
     }
     const MyMoneyAccount& acc = file->account((*it_s).accountId());
-    if (acc.name().contains(txt, Qt::CaseInsensitive))
+    if (acc.name().contains(filter.text, Qt::CaseInsensitive))
       return true;
 
+    QString s(filter.text);
+    s.replace(MyMoneyMoney::thousandSeparator(), QChar());
     if (!s.isEmpty()) {
       // check if any of the value field matches if a value has been entered
       QString r = (*it_s).value().formatMoney(m_account.fraction(), false);
@@ -746,9 +779,8 @@ StdTransaction::StdTransaction(Register *parent, const MyMoneyTransaction& trans
         setupFormHeader(m_transaction.splitByAccount(m_split.accountId(), false).accountId());
         break;
     }
-  } catch (MyMoneyException *e) {
-    kDebug(2) << "Problem determining the category for transaction '" << m_transaction.id() << "'. Reason: " << e->what()  << "\n";
-    delete e;
+  } catch (const MyMoneyException &e) {
+    kDebug(2) << "Problem determining the category for transaction '" << m_transaction.id() << "'. Reason: " << e.what()  << "\n";
   }
   m_rowsForm = 6;
 
@@ -1035,7 +1067,7 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
               if (txt.isEmpty() && !m_split.value().isZero()) {
                 txt = i18n("*** UNASSIGNED ***");
                 if (painter)
-                  painter->setPen(KMyMoneyGlobalSettings::listErronousTransactionColor());
+                  painter->setPen(KMyMoneyGlobalSettings::listErroneousTransactionColor());
               }
             }
           }
@@ -1100,7 +1132,7 @@ void StdTransaction::registerCellText(QString& txt, int& align, int row, int col
           if (txt.isEmpty() && !m_split.value().isZero()) {
             txt = i18n("*** UNASSIGNED ***");
             if (painter)
-              painter->setPen(KMyMoneyGlobalSettings::listErronousTransactionColor());
+              painter->setPen(KMyMoneyGlobalSettings::listErroneousTransactionColor());
           }
           break;
 

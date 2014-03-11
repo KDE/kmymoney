@@ -67,7 +67,18 @@ public:
   KCurrencyCalculator(const MyMoneySecurity& from, const MyMoneySecurity& to, const MyMoneyMoney& value, const MyMoneyMoney& shares, const QDate& date, const signed64 resultFraction = 100, QWidget *parent = 0);
   ~KCurrencyCalculator();
 
-  const MyMoneyMoney price(void) const;
+  /**
+   * This method returns the price determined by the method selected by the user
+   * which is either
+   *
+   * a) based on the resulting amount or
+   * b) based on direct price entry.
+   *
+   * In case a) the price is returned without precision loss as the devision
+   * of the amount entered by the user and the @a value passed as argument.
+   * In case b) it is returned with the selected global price precision.
+   */
+  MyMoneyMoney price(void) const;
 
   void setupPriceEditor(void);
 

@@ -261,14 +261,25 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
 
 void TransactionEditor::slotNumberChanged(const QString& txt)
 {
+  QString next = txt;
   kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
 
-  if (number) {
-    if (MyMoneyFile::instance()->checkNoUsed(m_account.id(), txt)) {
-      if (KMessageBox::questionYesNo(m_regForm, QString("<qt>") + i18n("The number <b>%1</b> has already been used in account <b>%2</b>. Do you want to replace it with the next available number?", txt, m_account.name()) + QString("</qt>"), i18n("Duplicate number")) == KMessageBox::Yes) {
-        number->loadText(KMyMoneyUtils::nextCheckNumber(m_account));
-      }
+  while (MyMoneyFile::instance()->checkNoUsed(m_account.id(), next)) {
+    if (KMessageBox::questionYesNo(m_regForm, QString("<qt>") + i18n("The number <b>%1</b> has already been used in account <b>%2</b>.""<center>Do you want to replace it with the next available number?</center>", next, m_account.name()) + QString("</qt>"), i18n("Duplicate number")) == KMessageBox::Yes) {
+      assignNextNumber();
+      next = KMyMoneyUtils::nextCheckNumber(m_account);
+    } else {
+      number->setText(QString());
+      break;
     }
+  }
+}
+
+void TransactionEditor::slotUpdateMemoState(void)
+{
+  KTextEdit* memo = dynamic_cast<KTextEdit*>(m_editWidgets["memo"]);
+  if (memo) {
+    m_memoChanged = (memo->toPlainText() != m_memoText);
   }
 }
 
@@ -331,9 +342,8 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
             splitB.setValue(splitB.shares());
             (*it_t).transaction().modifySplit(splitB);
 
-          } catch (MyMoneyException *e) {
-            qDebug("Unable to update commodity to second splits currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
-            delete e;
+          } catch (const MyMoneyException &e) {
+            qDebug("Unable to update commodity to second splits currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e.what()));
           }
           break;
 
@@ -368,9 +378,8 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
             (*it_t).transaction().modifySplit(splitA);
             (*it_t).transaction().modifySplit(splitB);
 
-          } catch (MyMoneyException *e) {
-            qDebug("Unable to update commodity to second splits currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
-            delete e;
+          } catch (const MyMoneyException &e) {
+            qDebug("Unable to update commodity to second splits currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e.what()));
           }
           break;
 
@@ -414,9 +423,8 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
                 (*it_t).transaction().modifySplit(s);
               }
             }
-          } catch (MyMoneyException *e) {
-            qDebug("Unable to update commodity of split currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e->what()));
-            delete e;
+          } catch (const MyMoneyException &e) {
+            qDebug("Unable to update commodity of split currency in %s: '%s'", qPrintable((*it_t).transaction().id()), qPrintable(e.what()));
           }
           break;
       }
@@ -437,14 +445,32 @@ void TransactionEditor::assignNextNumber(void)
 {
   if (canAssignNumber()) {
     kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
-    number->loadText(KMyMoneyUtils::nextCheckNumber(m_account));
+    QString num = KMyMoneyUtils::nextCheckNumber(m_account);
+    bool showMessage = true;
+    int rc = KMessageBox::No;
+    while (MyMoneyFile::instance()->checkNoUsed(m_account.id(), num)) {
+      if (showMessage) {
+        rc = KMessageBox::questionYesNo(m_regForm, QString("<qt>") + i18n("The expected next check number <b>%1</b> has already been used in account <b>%2</b>." "<center>Do you want to replace it with the next available number?</center>", num, m_account.name()) + QString("</qt>"), i18n("Duplicate number"));
+        showMessage = false;
+      }
+      if (rc == KMessageBox::Yes) {
+        num = KMyMoneyUtils::nextCheckNumber(m_account);
+        KMyMoneyUtils::updateLastNumberUsed(m_account, num);
+        m_account.setValue("lastNumberUsed", num);
+        number->loadText(num);
+      } else {
+        num = QString();
+        break;
+      }
+    }
+    number->setText(num);
   }
 }
 
 bool TransactionEditor::canAssignNumber(void) const
 {
   kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
-  return (number != 0) && (number->text().isEmpty());
+  return (number != 0);
 }
 
 void TransactionEditor::setupCategoryWidget(KMyMoneyCategory* category, const QList<MyMoneySplit>& splits, QString& categoryId, const char* splitEditSlot, bool /* allowObjectCreation */)
@@ -597,14 +623,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
             t = (*it_ts);
 
             // if a new transaction has a valid number, keep it with the account
-            QString number;
-            if (!(*it_ts).splits().isEmpty())
-              number = (*it_ts).splits().front().number();
-            if (!number.isEmpty()) {
-              m_account.setValue("lastNumberUsed", number);
-              file->modifyAccount(m_account);
-            }
-
+            keepNewNumber((*it_ts));
           } else {
             // turn object creation on, so that moving the focus does
             // not screw up the dialog that might be popping up
@@ -619,6 +638,9 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           emit lastPostDateUsed((*it_ts).postDate());
         } else {
           // modify existing transaction
+          // its number might have been edited
+          // bearing in mind it could contain alpha characters
+          keepNewNumber((*it_ts));
           file->modifyTransaction(*it_ts);
         }
       }
@@ -701,9 +723,8 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           }
         }
       }
-    } catch (MyMoneyException * e) {
-      qDebug("Unable to store transaction within engine: %s", qPrintable(e->what()));
-      delete e;
+    } catch (const MyMoneyException &e) {
+      qDebug("Unable to store transaction within engine: %s", qPrintable(e.what()));
       newTransactionCreated = false;
     }
 
@@ -712,6 +733,28 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
 
   }
   return storeTransactions;
+}
+
+void TransactionEditor::keepNewNumber(const MyMoneyTransaction& tr)
+{
+  // verify that new number, possibly containing alpha, is valid
+  MyMoneyTransaction txn = tr;
+  MyMoneyFile* file = MyMoneyFile::instance();
+  if (!txn.splits().isEmpty()) {
+    QString number = txn.splits().first().number();
+    if (KMyMoneyUtils::numericPart(number) > 0) {
+      // numeric is valid
+      kMyMoneyLineEdit* numberEdit = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
+      if (numberEdit) {
+        numberEdit->loadText(number);
+        MyMoneySplit split = txn.splits().first();
+        split.setNumber(number);
+        txn.modifySplit(split);
+        m_account.setValue("lastNumberUsed", number);
+        file->modifyAccount(m_account);
+      }
+    }
+  }
 }
 
 void TransactionEditor::resizeForm(void)
@@ -784,7 +827,11 @@ void StdTransactionEditor::createEditWidgets(void)
   KTextEdit* memo = new KTextEdit;
   memo->setObjectName(QLatin1String("Memo"));
   memo->setTabChangesFocus(true);
+  connect(memo, SIGNAL(textChanged()), this, SLOT(slotUpdateMemoState()));
+  connect(memo, SIGNAL(textChanged()), this, SLOT(slotUpdateButtonState()));
   m_editWidgets["memo"] = memo;
+  m_memoText.clear();
+  m_memoChanged = false;
 
   bool showNumberField = true;
   switch (m_account.accountType()) {
@@ -819,6 +866,7 @@ void StdTransactionEditor::createEditWidgets(void)
   kMyMoneyDateInput* postDate = new kMyMoneyDateInput;
   m_editWidgets["postdate"] = postDate;
   postDate->setObjectName(QLatin1String("PostDate"));
+  connect(postDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotUpdateButtonState()));
   postDate->setDate(QDate());
 
   kMyMoneyEdit* value = new kMyMoneyEdit;
@@ -983,8 +1031,13 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
   if (!m_account.id().isEmpty())
     category->selector()->removeItem(m_account.id());
 
+  //  also show memo text if isMultiSelection()
+  dynamic_cast<KTextEdit*>(m_editWidgets["memo"])->setText(m_split.memo());
+  // need to know if it changed
+  m_memoText = m_split.memo();
+  m_memoChanged = false;
+
   if (!isMultiSelection()) {
-    dynamic_cast<KTextEdit*>(m_editWidgets["memo"])->setText(m_split.memo());
     if (m_transaction.postDate().isValid())
       dynamic_cast<kMyMoneyDateInput*>(m_editWidgets["postdate"])->setDate(m_transaction.postDate());
     else if (m_lastPostDate.isValid())
@@ -1765,6 +1818,8 @@ bool StdTransactionEditor::isComplete(QString& reason) const
   bool payeeIsPresent = false;
   bool categoryIsPresent = false;
   bool amountIsPresent = false;
+  bool memoIsPresent = false;
+  bool dateIsPresent = false;
 
   for (it_w = m_editWidgets.begin(); it_w != m_editWidgets.end(); ++it_w) {
     KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it_w);
@@ -1804,10 +1859,13 @@ bool StdTransactionEditor::isComplete(QString& reason) const
       if (cashflow && cashflow->direction() != KMyMoneyRegister::Unknown)
         break;
 
-      if (postDate->date().isValid() && (postDate->date() >= m_account.openingDate()))
+      if (postDate->date().isValid() && (postDate->date() >= m_account.openingDate())) {
+        dateIsPresent = true;
         break;
+      }
 
-      if (memo && !memo->toPlainText().isEmpty()) {
+      if (memo && m_memoChanged) {
+        memoIsPresent = true;
         break;
       }
 
@@ -1816,7 +1874,7 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     }
   }
   bool rc = (categoryIsPresent && amountIsPresent);  //   usual mandatory fields
-  bool rc1 = (payeeIsPresent || categoryIsPresent || amountIsPresent);  //  if isMultiSelection(), they are optional
+  bool rc1 = (payeeIsPresent || categoryIsPresent || amountIsPresent || memoIsPresent) || dateIsPresent;  //  if isMultiSelection(), these are optional
 
   return (rc || (isMultiSelection() && (it_w != m_editWidgets.end() || rc1)));
 }
@@ -2035,7 +2093,7 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   //       by the user
   KTextEdit* memo = dynamic_cast<KTextEdit*>(m_editWidgets["memo"]);
   if (memo) {
-    if (!isMultiSelection() || (isMultiSelection() && !memo->toPlainText().isEmpty()))
+    if (!isMultiSelection() || (isMultiSelection() && m_memoChanged))
       s0.setMemo(memo->toPlainText());
   }
 

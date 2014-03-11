@@ -965,7 +965,7 @@ public:
     * method returns to the caller, the id will be filled with the
     * newly created object id value.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param sched reference to the MyMoneySchedule object
     */
@@ -975,7 +975,7 @@ public:
     * This method is used to modify an existing MyMoneySchedule
     * object. Therefor, the id attribute of the object must be set.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param sched const reference to the MyMoneySchedule object to be updated
     */
@@ -985,7 +985,7 @@ public:
     * This method is used to remove an existing MyMoneySchedule object
     * from the engine. The id attribute of the object must be set.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param sched const reference to the MyMoneySchedule object to be updated
     */
@@ -995,7 +995,7 @@ public:
     * This method is used to retrieve a single MyMoneySchedule object.
     * The id of the object must be supplied in the parameter @p id.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param id QString containing the id of the MyMoneySchedule object
     * @return MyMoneySchedule object
@@ -1082,7 +1082,7 @@ public:
     * The ID of the object is the trading symbol, so there is no need for an additional
     * ID since the symbol is guaranteed to be unique.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param security reference to the MyMoneySecurity object
     */
@@ -1092,7 +1092,7 @@ public:
     * This method is used to modify an existing MyMoneySchedule
     * object.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param security reference to the MyMoneySecurity object to be updated
     */
@@ -1102,7 +1102,7 @@ public:
     * This method is used to remove an existing MyMoneySecurity object
     * from the engine.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param security reference to the MyMoneySecurity object to be removed
     */
@@ -1114,7 +1114,7 @@ public:
     * If no security with the given id is found, then a corresponding
     * currency is searched. If @p id is empty, the baseCurrency() is returned.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param id QString containing the id of the MyMoneySecurity object
     * @return MyMoneySecurity object
@@ -1131,7 +1131,7 @@ public:
     * The ID of the object is the trading symbol, so there is no need for an additional
     * ID since the symbol is guaranteed to be unique.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param currency reference to the MyMoneySecurity object
     */
@@ -1141,7 +1141,7 @@ public:
     * This method is used to modify an existing MyMoneySecurity
     * object.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param currency reference to the MyMoneySecurity object
     */
@@ -1151,7 +1151,7 @@ public:
     * This method is used to remove an existing MyMoneySecurity object
     * from the engine.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param currency reference to the MyMoneySecurity object
     */
@@ -1162,7 +1162,7 @@ public:
     * The id of the object must be supplied in the parameter @p id.
     * If @p id is empty, this method returns baseCurrency().
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param id QString containing the id of the MyMoneySchedule object
     * @return MyMoneySchedule object
@@ -1173,7 +1173,7 @@ public:
     * This method is used to retrieve the list of all currencies
     * known to the engine.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @return QList of all MyMoneySecurity objects.
     */
@@ -1186,7 +1186,7 @@ public:
     * a standard MyMoneySecurity object will be returned. See
     * MyMoneySecurity() for details.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @return MyMoneySecurity describing base currency
     */
@@ -1205,7 +1205,7 @@ public:
     * stores a reference to the base currency. The currency
     * passed as argument must exist in the engine.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param currency
     */
@@ -1260,7 +1260,7 @@ public:
     * This method is used to retrieve the list of all reports
     * known to the engine.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @return QList of all MyMoneyReport objects.
     */
@@ -1300,7 +1300,7 @@ public:
     * This method is used to retrieve a single MyMoneyReport object.
     * The id of the object must be supplied in the parameter @p id.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param id QString containing the id of the MyMoneyReport object
     * @return MyMoneyReport object
@@ -1311,7 +1311,7 @@ public:
     * This method is used to remove an existing MyMoneyReport object
     * from the engine. The id attribute of the object must be set.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param report const reference to the MyMoneyReport object to be updated
     */
@@ -1321,7 +1321,7 @@ public:
     * This method is used to retrieve the list of all budgets
     * known to the engine.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @return QList of all MyMoneyBudget objects.
     */
@@ -1374,7 +1374,7 @@ public:
     * This method is used to retrieve a single MyMoneyBudget object.
     * The id of the object must be supplied in the parameter @p id.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param id QString containing the id of the MyMoneyBudget object
     * @return MyMoneyBudget object
@@ -1385,7 +1385,7 @@ public:
     * This method is used to remove an existing MyMoneyBudget object
     * from the engine. The id attribute of the object must be set.
     *
-    * An exception will be thrown upon erronous situations.
+    * An exception will be thrown upon erroneous situations.
     *
     * @param budget const reference to the MyMoneyBudget object to be updated
     */

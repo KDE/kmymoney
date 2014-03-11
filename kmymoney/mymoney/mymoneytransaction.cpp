@@ -50,7 +50,7 @@ MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool force
     MyMoneyObject(node, forceId)
 {
   if ("TRANSACTION" != node.tagName())
-    throw new MYMONEYEXCEPTION("Node was not TRANSACTION");
+    throw MYMONEYEXCEPTION("Node was not TRANSACTION");
 
   m_nextSplitID = 1;
 
@@ -116,10 +116,10 @@ bool MyMoneyTransaction::accountReferenced(const QString& id) const
 void MyMoneyTransaction::addSplit(MyMoneySplit& split)
 {
   if (!split.id().isEmpty())
-    throw new MYMONEYEXCEPTION("Cannot add split with assigned id (" + split.id() + ')');
+    throw MYMONEYEXCEPTION("Cannot add split with assigned id (" + split.id() + ')');
 
   if (split.accountId().isEmpty())
-    throw new MYMONEYEXCEPTION("Cannot add split that does not contain an account reference");
+    throw MYMONEYEXCEPTION("Cannot add split that does not contain an account reference");
 
   MyMoneySplit newSplit(nextSplitID(), split);
   split = newSplit;
@@ -132,7 +132,7 @@ void MyMoneyTransaction::modifySplit(MyMoneySplit& split)
 // This is the other version which allows having more splits referencing
 // the same account.
   if (split.accountId().isEmpty())
-    throw new MYMONEYEXCEPTION("Cannot modify split that does not contain an account reference");
+    throw MYMONEYEXCEPTION("Cannot modify split that does not contain an account reference");
 
   QList<MyMoneySplit>::Iterator it;
   for (it = m_splits.begin(); it != m_splits.end(); ++it) {
@@ -141,7 +141,7 @@ void MyMoneyTransaction::modifySplit(MyMoneySplit& split)
       return;
     }
   }
-  throw new MYMONEYEXCEPTION(QString("Invalid split id '%1'").arg(split.id()));
+  throw MYMONEYEXCEPTION(QString("Invalid split id '%1'").arg(split.id()));
 }
 
 void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
@@ -157,7 +157,7 @@ void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
     }
   }
   if (!removed)
-    throw new MYMONEYEXCEPTION(QString("Invalid split id '%1'").arg(split.id()));
+    throw MYMONEYEXCEPTION(QString("Invalid split id '%1'").arg(split.id()));
 }
 
 void MyMoneyTransaction::removeSplits(void)
@@ -174,7 +174,7 @@ const MyMoneySplit& MyMoneyTransaction::splitByPayee(const QString& payeeId) con
     if ((*it).payeeId() == payeeId)
       return *it;
   }
-  throw new MYMONEYEXCEPTION(QString("Split not found for payee '%1'").arg(QString(payeeId)));
+  throw MYMONEYEXCEPTION(QString("Split not found for payee '%1'").arg(QString(payeeId)));
 }
 
 const MyMoneySplit& MyMoneyTransaction::splitByAccount(const QString& accountId, const bool match) const
@@ -187,7 +187,7 @@ const MyMoneySplit& MyMoneyTransaction::splitByAccount(const QString& accountId,
     if (match == false && (*it).accountId() != accountId)
       return *it;
   }
-  throw new MYMONEYEXCEPTION(QString("Split not found for account %1%2").arg(match ? "" : "!").arg(QString(accountId)));
+  throw MYMONEYEXCEPTION(QString("Split not found for account %1%2").arg(match ? "" : "!").arg(QString(accountId)));
 }
 
 const MyMoneySplit& MyMoneyTransaction::splitByAccount(const QStringList& accountIds, const bool match) const
@@ -200,7 +200,7 @@ const MyMoneySplit& MyMoneyTransaction::splitByAccount(const QStringList& accoun
     if (match == false && !accountIds.contains((*it).accountId()))
       return *it;
   }
-  throw new MYMONEYEXCEPTION(QString("Split not found for account  %1%1...%2").arg(match ? "" : "!").arg(accountIds.front(), accountIds.back()));
+  throw MYMONEYEXCEPTION(QString("Split not found for account  %1%1...%2").arg(match ? "" : "!").arg(accountIds.front(), accountIds.back()));
 }
 
 const MyMoneySplit& MyMoneyTransaction::splitById(const QString& splitId) const
@@ -211,7 +211,7 @@ const MyMoneySplit& MyMoneyTransaction::splitById(const QString& splitId) const
     if ((*it).id() == splitId)
       return *it;
   }
-  throw new MYMONEYEXCEPTION(QString("Split not found for id '%1'").arg(QString(splitId)));
+  throw MYMONEYEXCEPTION(QString("Split not found for id '%1'").arg(QString(splitId)));
 }
 
 const QString MyMoneyTransaction::nextSplitID()
@@ -261,8 +261,7 @@ bool MyMoneyTransaction::isLoanPayment(void) const
       if ((*it).isAmortizationSplit())
         return true;
     }
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
   return false;
 }

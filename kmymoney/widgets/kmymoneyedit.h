@@ -105,7 +105,6 @@ private:
   KPushButton*        m_calcButton;
   KPushButton*        m_resetButton;
   int                 m_prec;
-  bool                calculatorButtonVisibility;
   bool                allowEmpty;
 
 private:

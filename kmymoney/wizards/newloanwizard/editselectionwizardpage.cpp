@@ -35,12 +35,14 @@ EditSelectionWizardPage::EditSelectionWizardPage(QWidget *parent)
   m_selectionButtonGroup->setId(m_editInterestRateButton, 0);
   m_selectionButtonGroup->setId(m_editOtherCostButton, 1);
   m_selectionButtonGroup->setId(m_editOtherInfoButton, 2);
+  m_selectionButtonGroup->setId(m_editAttributesButton, 3);
 
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
   registerField("editInterestRateButton", m_editInterestRateButton);
   registerField("editOtherCostButton", m_editOtherCostButton);
   registerField("editOtherInfoButton", m_editOtherInfoButton);
+  registerField("editAttributesButton", m_editAttributesButton);
 
   m_editInterestRateButton->animateClick();
 }

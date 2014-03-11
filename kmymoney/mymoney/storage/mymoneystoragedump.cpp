@@ -417,9 +417,8 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, IMyMoneyStorage* storag
     try {
       acc = storage->account((*it_s).accountId());
       s << " (" << acc.name() << ") [" << acc.currencyId() << "]\n";
-    } catch (MyMoneyException *e) {
+    } catch (const MyMoneyException &) {
       s << " (---) [---]\n";
-      delete e;
     }
     s << "    Memo = " << (*it_s).memo() << "\n";
     if ((*it_s).value() == MyMoneyMoney::autoCalc)

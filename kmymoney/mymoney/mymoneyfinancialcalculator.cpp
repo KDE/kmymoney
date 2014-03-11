@@ -137,7 +137,7 @@ double MyMoneyFinancialCalculator::numPayments(void)
   const unsigned short mask = PV_SET | IR_SET | PMT_SET | FV_SET;
 
   if ((m_mask & mask) != mask)
-    throw new MYMONEYEXCEPTION("Not all parameters set for calculation of numPayments");
+    throw MYMONEYEXCEPTION("Not all parameters set for calculation of numPayments");
 
   double eint = eff_int();
 
@@ -161,7 +161,7 @@ double MyMoneyFinancialCalculator::payment(void)
   const unsigned short mask = PV_SET | IR_SET | NPP_SET | FV_SET;
 
   if ((m_mask & mask) != mask)
-    throw new MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
+    throw MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
 
   double eint = eff_int();
 
@@ -184,7 +184,7 @@ double MyMoneyFinancialCalculator::presentValue(void)
   const unsigned short mask = PMT_SET | IR_SET | NPP_SET | FV_SET;
 
   if ((m_mask & mask) != mask)
-    throw new MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
+    throw MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
 
   double eint = eff_int();
 
@@ -208,7 +208,7 @@ double MyMoneyFinancialCalculator::futureValue(void)
   const unsigned short mask = PMT_SET | IR_SET | NPP_SET | PV_SET;
 
   if ((m_mask & mask) != mask)
-    throw new MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
+    throw MYMONEYEXCEPTION("Not all parameters set for calculation of payment");
 
   double eint = eff_int();
 
@@ -259,8 +259,7 @@ double MyMoneyFinancialCalculator::interestRate(void)
       try {
         dik = _fi(eint) / _fip(eint);
         eint -= dik;
-      } catch (MyMoneyException *e) {
-        delete e;
+      } catch (const MyMoneyException &) {
         eint = 0;
       }
       (void) modf(ratio *(dik / eint), &a);
@@ -294,7 +293,7 @@ double MyMoneyFinancialCalculator::_Ax(const double eint) const
 double MyMoneyFinancialCalculator::_Bx(const double eint) const
 {
   if (eint == 0.0)
-    throw new MYMONEYEXCEPTION("Zero interest");
+    throw MYMONEYEXCEPTION("Zero interest");
 
   if (m_bep == false)
     return static_cast<double>(1.0) / eint;

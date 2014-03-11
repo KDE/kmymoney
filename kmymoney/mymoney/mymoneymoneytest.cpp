@@ -715,15 +715,13 @@ void MyMoneyMoneyTest::testZeroDenominator()
   try {
     MyMoneyMoney m((int)1, 0);
     QFAIL("Missing expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 
   try {
     MyMoneyMoney m((signed64)1, 0);
     QFAIL("Missing expected exception");
-  } catch (MyMoneyException *e) {
-    delete e;
+  } catch (const MyMoneyException &) {
   }
 }
 

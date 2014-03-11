@@ -29,13 +29,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kgenericfactory.h>
-#include <kdebug.h>
-#include <kfile.h>
-#include <kurl.h>
-#include <kaction.h>
-#include <kmessagebox.h>
-#include <kactioncollection.h>
+#include <KPluginFactory>
+#include <KDebug>
+#include <KFile>
+#include <KUrl>
+#include <KAction>
+#include <KMessageBox>
+#include <KActionCollection>
 #include <KWallet/Wallet>
 
 // ----------------------------------------------------------------------------
@@ -227,31 +227,31 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
 
   MyMoneyStatement::Transaction t;
 
-  if (data.date_posted_valid == true) {
+  if (data.date_posted_valid) {
     QDateTime dt;
     dt.setTime_t(data.date_posted);
     t.m_datePosted = dt.date();
-  } else if (data.date_initiated_valid == true) {
+  } else if (data.date_initiated_valid) {
     QDateTime dt;
     dt.setTime_t(data.date_initiated);
     t.m_datePosted = dt.date();
   }
 
-  if (data.amount_valid == true) {
+  if (data.amount_valid) {
     t.m_amount = MyMoneyMoney(data.amount, 1000);
     // if this is an investment statement, reverse the sign.  not sure
     // why this is needed, so I suppose it's a bit of a hack for the moment.
-    if (data.invtransactiontype_valid == true)
+    if (data.invtransactiontype_valid)
       t.m_amount = -t.m_amount;
   }
 
-  if (data.check_number_valid == true) {
+  if (data.check_number_valid) {
     t.m_strNumber = QString::fromUtf8(data.check_number);
   }
 
-  if (data.fi_id_valid == true) {
+  if (data.fi_id_valid) {
     t.m_strBankID = QString("ID ") + QString::fromUtf8(data.fi_id);
-  } else if (data.reference_number_valid == true) {
+  } else if (data.reference_number_valid) {
     t.m_strBankID = QString("REF ") + QString::fromUtf8(data.reference_number);
   }
 
@@ -296,7 +296,7 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
   }
 
   // extract memo field if we haven't used it as payee
-  if ((data.memo_valid == true)
+  if ((data.memo_valid)
       && (pofx->d->m_preferName != OfxImporterPlugin::Private::PreferMemo)) {
     t.m_strMemo = QString::fromUtf8(data.memo);
   }
@@ -312,41 +312,41 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
       t.m_strMemo = t.m_strPayee;
   }
 
-  if (data.security_data_valid == true) {
+  if (data.security_data_valid) {
     struct OfxSecurityData* secdata = data.security_data_ptr;
 
-    if (secdata->ticker_valid == true) {
+    if (secdata->ticker_valid) {
       t.m_strSymbol = QString::fromUtf8(secdata->ticker);
     }
 
-    if (secdata->secname_valid == true) {
+    if (secdata->secname_valid) {
       t.m_strSecurity = QString::fromUtf8(secdata->secname);
     }
   }
 
   t.m_shares = MyMoneyMoney();
-  if (data.units_valid == true) {
+  if (data.units_valid) {
     t.m_shares = MyMoneyMoney(data.units, 100000).reduce();
   }
 
   t.m_price = MyMoneyMoney();
-  if (data.unitprice_valid == true) {
+  if (data.unitprice_valid) {
     t.m_price = MyMoneyMoney(data.unitprice, 100000).reduce();
   }
 
   t.m_fees = MyMoneyMoney();
-  if (data.fees_valid == true) {
+  if (data.fees_valid) {
     t.m_fees += MyMoneyMoney(data.fees, 1000).reduce();
   }
 
-  if (data.commission_valid == true) {
+  if (data.commission_valid) {
     t.m_fees += MyMoneyMoney(data.commission, 1000).reduce();
   }
 
   bool unhandledtype = false;
   QString type;
 
-  if (data.invtransactiontype_valid == true) {
+  if (data.invtransactiontype_valid) {
     switch (data.invtransactiontype) {
       case OFX_BUYDEBT:
       case OFX_BUYMF:
@@ -421,7 +421,7 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
   // values, because of rounding errors in the price.  A more through solution would
   // be to test if the comission alone is causing a discrepency, and adjust in that case.
 
-  if (data.invtransactiontype_valid == true && data.unitprice_valid) {
+  if (data.invtransactiontype_valid && data.unitprice_valid) {
     double proper_total = t.m_dShares * data.unitprice + t.m_moneyFees;
     if (proper_total != t.m_moneyAmount) {
       pofx->addWarning(QString("Transaction %1 has an incorrect total of %2. Using calculated total of %3 instead.").arg(t.m_strBankID).arg(t.m_moneyAmount).arg(proper_total));
@@ -449,26 +449,26 @@ int OfxImporterPlugin::ofxStatementCallback(struct OfxStatementData data, void* 
 
   pofx->setValid();
 
-  if (data.currency_valid == true) {
+  if (data.currency_valid) {
     s.m_strCurrency = QString::fromUtf8(data.currency);
   }
-  if (data.account_id_valid == true) {
+  if (data.account_id_valid) {
     s.m_strAccountNumber = QString::fromUtf8(data.account_id);
   }
 
-  if (data.date_start_valid == true) {
+  if (data.date_start_valid) {
     QDateTime dt;
     dt.setTime_t(data.date_start);
     s.m_dateBegin = dt.date();
   }
 
-  if (data.date_end_valid == true) {
+  if (data.date_end_valid) {
     QDateTime dt;
     dt.setTime_t(data.date_end);
     s.m_dateEnd = dt.date();
   }
 
-  if (data.ledger_balance_valid == true) {
+  if (data.ledger_balance_valid) {
     s.m_closingBalance = MyMoneyMoney(data.ledger_balance);
   }
 
@@ -488,21 +488,21 @@ int OfxImporterPlugin::ofxAccountCallback(struct OfxAccountData data, void * pv)
   // Having any account at all makes an ofx statement valid
   pofx->d->m_valid = true;
 
-  if (data.account_id_valid == true) {
+  if (data.account_id_valid) {
     s.m_strAccountName = QString::fromUtf8(data.account_name);
     s.m_strAccountNumber = QString::fromUtf8(data.account_id);
   }
-  if (data.bank_id_valid == true) {
+  if (data.bank_id_valid) {
     s.m_strRoutingNumber = QString::fromUtf8(data.bank_id);
   }
-  if (data.broker_id_valid == true) {
+  if (data.broker_id_valid) {
     s.m_strRoutingNumber = QString::fromUtf8(data.broker_id);
   }
-  if (data.currency_valid == true) {
+  if (data.currency_valid) {
     s.m_strCurrency = QString::fromUtf8(data.currency);
   }
 
-  if (data.account_type_valid == true) {
+  if (data.account_type_valid) {
     switch (data.account_type) {
       case OfxAccountData::OFX_CHECKING : s.m_eType = MyMoneyStatement::etCheckings;
         break;
@@ -539,13 +539,13 @@ int OfxImporterPlugin::ofxSecurityCallback(struct OfxSecurityData data, void* pv
   OfxImporterPlugin* pofx = reinterpret_cast<OfxImporterPlugin*>(pv);
   MyMoneyStatement::Security sec;
 
-  if (data.unique_id_valid == true) {
+  if (data.unique_id_valid) {
     sec.m_strId = QString::fromUtf8(data.unique_id);
   }
-  if (data.secname_valid == true) {
+  if (data.secname_valid) {
     sec.m_strName = QString::fromUtf8(data.secname);
   }
-  if (data.ticker_valid == true) {
+  if (data.ticker_valid) {
     sec.m_strSymbol = QString::fromUtf8(data.ticker);
   }
 
@@ -566,16 +566,16 @@ int OfxImporterPlugin::ofxStatusCallback(struct OfxStatusData data, void * pv)
   // accounts in the file!
   pofx->d->m_fatalerror = i18n("No accounts found.");
 
-  if (data.ofx_element_name_valid == true)
+  if (data.ofx_element_name_valid)
     message.prepend(QString("%1: ").arg(QString::fromUtf8(data.ofx_element_name)));
 
-  if (data.code_valid == true)
+  if (data.code_valid)
     message += QString("%1 (Code %2): %3").arg(QString::fromUtf8(data.name)).arg(data.code).arg(QString::fromUtf8(data.description));
 
-  if (data.server_message_valid == true)
+  if (data.server_message_valid)
     message += QString(" (%1)").arg(QString::fromUtf8(data.server_message));
 
-  if (data.severity_valid == true) {
+  if (data.severity_valid) {
     switch (data.severity) {
       case OfxStatusData::INFO:
         pofx->addInfo(message);
@@ -700,9 +700,8 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
         dlg->exec();
       delete dlg;
     }
-  } catch (MyMoneyException *e) {
-    KMessageBox::information(0 , i18n("Error connecting to bank: %1", e->what()));
-    delete e;
+  } catch (const MyMoneyException &e) {
+    KMessageBox::information(0 , i18n("Error connecting to bank: %1", e.what()));
   }
 
   return false;

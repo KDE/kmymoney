@@ -143,8 +143,6 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
   bool ok1, ok2;
   qulonglong n1, n2;
 
-  MyMoneyMoney tmp;
-
   for (it = sortOrder.begin(); it != sortOrder.end(); ++it) {
     TransactionSortField sortField = static_cast<TransactionSortField>(abs(*it));
     switch (sortField) {
@@ -164,10 +162,9 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
         break;
 
       case ValueSort:
-        tmp = i1->sortValue() - i2->sortValue();
-        if (tmp.isZero())
+        if (i1->sortValue() == i2->sortValue())
           rc = 0;
-        else if (tmp.isNegative())
+        else if (i1->sortValue() < i2->sortValue())
           rc = -1;
         else
           rc = 1;
@@ -287,7 +284,7 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
   cellRect.setWidth(m_parent->viewport()->width());
   cellRect.setHeight(m_parent->rowHeight(index.row()));
 
-  option.palette.setColor(QPalette::Base, isErronous() ? KMyMoneyGlobalSettings::listErronousTransactionColor() : KMyMoneyGlobalSettings::groupMarkerColor());
+  option.palette.setColor(QPalette::Base, isErroneous() ? KMyMoneyGlobalSettings::listErroneousTransactionColor() : KMyMoneyGlobalSettings::groupMarkerColor());
 
   QBrush backgroundBrush(option.palette.color(QPalette::Base));
   painter->fillRect(cellRect, backgroundBrush);
@@ -295,7 +292,7 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
   painter->drawLine(cellRect.x(), cellRect.height() - 1, cellRect.width(), cellRect.height() - 1);
 
   // now write the text
-  painter->setPen(option.palette.color(isErronous() ? QPalette::HighlightedText : QPalette::Text));
+  painter->setPen(option.palette.color(isErroneous() ? QPalette::HighlightedText : QPalette::Text));
   QFont font = painter->font();
   font.setBold(true);
   painter->setFont(font);
@@ -465,8 +462,8 @@ Register::Register(QWidget *parent) :
     m_focusItem(0),
     m_firstItem(0),
     m_lastItem(0),
-    m_firstErronous(0),
-    m_lastErronous(0),
+    m_firstErroneous(0),
+    m_lastErroneous(0),
     m_rowHeightHint(0),
     m_ledgerLensForced(false),
     m_selectionMode(QTableWidget::MultiSelection),
@@ -481,7 +478,7 @@ Register::Register(QWidget *parent) :
 {
   // used for custom coloring with the help of the application's stylesheet
   setObjectName(QLatin1String("register"));
-  m_itemDelegate = new RegisterItemDelegate(this);
+  setItemDelegate(new RegisterItemDelegate(this));
 
   setEditTriggers(QAbstractItemView::NoEditTriggers);
   setColumnCount(MaxColumns);
@@ -677,11 +674,7 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
       break;
   }
 
-  switch (account.accountType()) {
-    default:
-      m_lastCol = BalanceColumn;
-      break;
-  }
+  m_lastCol = BalanceColumn;
 
   setUpdatesEnabled(true);
 }
@@ -756,14 +749,15 @@ TransactionSortField Register::primarySortKey(void) const
 
 void Register::clear(void)
 {
-  m_firstErronous = m_lastErronous = 0;
+  m_firstErroneous = m_lastErroneous = 0;
   m_ensureVisibleItem = 0;
+
+  m_items.clear();
 
   RegisterItem* p;
   while ((p = firstItem()) != 0) {
     delete p;
   }
-  m_items.clear();
 
   m_firstItem = m_lastItem = 0;
 
@@ -875,11 +869,6 @@ void Register::setupItemIndex(int rowCount)
   m_itemIndex.clear();
   m_itemIndex.reserve(rowCount);
 
-  // setup the item delegate for all the rows
-  for (int i = 0; i < rowCount; ++i) {
-    setItemDelegateForRow(i, m_itemDelegate);
-  }
-
   // fill index array
   rowCount = 0;
   RegisterItem* prev = 0;
@@ -947,7 +936,7 @@ void Register::updateRegister(bool forceUpdateRowHeight)
 
     int rowCount = 0;
     // determine the number of rows we need to display all items
-    // while going through the list, check for erronous transactions
+    // while going through the list, check for erroneous transactions
     for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
       RegisterItem* item = m_items[i];
       if (!item)
@@ -956,10 +945,10 @@ void Register::updateRegister(bool forceUpdateRowHeight)
       item->setNeedResize();
       rowCount += item->numRowsRegister();
 
-      if (item->isErronous()) {
-        if (!m_firstErronous)
-          m_firstErronous = item;
-        m_lastErronous = item;
+      if (item->isErroneous()) {
+        if (!m_firstErroneous)
+          m_firstErroneous = item;
+        m_lastErroneous = item;
       }
     }
 
@@ -1197,7 +1186,7 @@ void Register::resize(int col, bool force)
 
     w -= columnWidth(i);
   }
-  setColumnWidth(col, qMax(w, minimumColumnWidth(col)));
+  setColumnWidth(col, w);
 }
 
 int Register::minimumColumnWidth(int col)
@@ -1229,14 +1218,13 @@ int Register::minimumColumnWidth(int col)
       int nw = 0;
       try {
         nw = t->registerColWidth(col, cellFontMetrics);
-      } catch (MyMoneyException* e) {
+      } catch (const MyMoneyException &) {
         // This should only be reached if the data in the file disappeared
         // from under us, such as when the account was deleted from a
         // different view, then this view is restored. In this case, new
         // data is about to be loaded into the view anyway, so just remove
         // the item from the register and swallow the exception.
-        //qDebug("%s", qPrintable(e->what()));
-        delete e;
+        //qDebug("%s", qPrintable(e.what()));
         removeItem(t);
       }
       w = qMax(w, nw);

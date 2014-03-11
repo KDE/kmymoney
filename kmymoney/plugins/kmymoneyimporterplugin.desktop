@@ -2,7 +2,7 @@
 Type=ServiceType
 Name=KMyMoney Importer Plugin
 Name[bs]=Dodatak za uvoz KMyMoney
-Name[ca]=Endolable d'importació del KMyMoney
+Name[ca]=Connector d'importació del KMyMoney
 Name[ca@valencia]=Endolable d'importació del KMyMoney
 Name[da]=KMyMoney import-plugin
 Name[de]=KMyMoney-Import-Modul

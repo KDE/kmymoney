@@ -152,6 +152,8 @@ public:
 
   void addFinalWidget(const QWidget*);
 
+  QString  m_memoText;
+
 public slots:
   void slotReloadEditWidgets(void);
 
@@ -184,6 +186,7 @@ protected:
 
 protected slots:
   void slotUpdateButtonState(void);
+  void slotUpdateMemoState(void);
   void slotUpdateAccount(void);
   void slotNumberChanged(const QString&);
 
@@ -306,8 +309,15 @@ protected:
   QMap<QString, MyMoneyMoney>                       m_priceInfo;
   KMyMoneyRegister::Action                          m_initialAction;
   bool                                              m_openEditSplits;
-};
+  bool                                              m_memoChanged;
 
+private:
+  /**
+  *  If a new or an edited transaction has a valid number, keep it with the account
+  */
+  void keepNewNumber(const MyMoneyTransaction& tr);
+
+};
 
 class StdTransactionEditor : public TransactionEditor
 {

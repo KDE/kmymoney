@@ -420,6 +420,7 @@ private:
     MyMoneyMoney fee;
     QString      payee;
     QString      security;
+    QString      symbol;
     QString      brokerageAccnt;
     QString      type;
     QDate        date;
