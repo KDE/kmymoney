@@ -31,7 +31,8 @@ private slots:
   void cleanupTestCase();
 
   void copyContructor();
-  void copyContructorFailure();
+  void constructWithIncompatibleType();
+  void constructWithNull();
   void copyByAssignment();
 };
 

@@ -129,14 +129,14 @@ onlineJob::~onlineJob()
 onlineTask* onlineJob::task()
 {
   if( m_task == 0 )
-    throw new emptyTask(__FILE__, __LINE__);
+    throw emptyTask(__FILE__, __LINE__);
   return m_task;
 }
 
 const onlineTask* onlineJob::task() const
 {
   if( m_task == 0 )
-    throw new emptyTask(__FILE__, __LINE__);
+    throw emptyTask(__FILE__, __LINE__);
   return m_task;
 }
 
@@ -144,8 +144,7 @@ QString onlineJob::taskIid() const
 {
   try {
     return task()->taskName();
-  } catch ( emptyTask* e ) {
-    delete e;
+  } catch ( const emptyTask& ) {
   }
   return QString();
 }
@@ -153,8 +152,7 @@ QString onlineJob::taskIid() const
 QString onlineJob::responsibleAccount() const {
     try {
       return task()->responsibleAccount();
-    } catch ( emptyTask* e ) {
-      delete e;
+    } catch ( const emptyTask& ) {
     }
     return QString();
 }
@@ -226,8 +224,7 @@ void onlineJob::writeXML(QDomDocument &document, QDomElement &parent) const
   try {
     task()->writeXML(document, taskEl); // throws execption if there is no task
     el.appendChild(taskEl); // only append child if there is something to append
-  } catch ( emptyTask* e ) {
-    delete e;
+  } catch ( const emptyTask& ) {
   }
   
   parent.appendChild(el);

@@ -25,14 +25,23 @@ void onlineJobTypedTest::copyContructor()
   QVERIFY( job.m_taskSubType == task );
 }
 
-void onlineJobTypedTest::copyContructorFailure()
+class dummyClass2 : public dummyTask {};
+
+void onlineJobTypedTest::constructWithIncompatibleType()
 {
-  QSKIP("Need second dummy task for testing", SkipAll);
   try {
-    onlineJobTyped<dummyTask> job( new dummyTask );
+    onlineJobTyped<dummyClass2> job( new dummyTask );
     QFAIL("Missing expected exception");
-  } catch ( onlineJob::badTaskCast* e ) {
-    delete e;
+  } catch ( const onlineJob::badTaskCast& ) {
+  }
+}
+
+void onlineJobTypedTest::constructWithNull()
+{
+  try {
+    onlineJobTyped<dummyTask> job( 0 );
+    QFAIL("Missing expected exception");
+  } catch ( const onlineJob::emptyTask& ) {
   }
 }
 

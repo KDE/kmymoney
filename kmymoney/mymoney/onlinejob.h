@@ -76,7 +76,7 @@ public:
    * You should not store this pointer but use onlineJob::task() (or onlineJobKnownTask::task())
    * every time you access it.
    * 
-   * @throws emptyTask* if isNull()
+   * @throws emptyTask if isNull()
    */
   onlineTask* task();
   
@@ -85,7 +85,7 @@ public:
   
   /**
    * @brief Returns task attached to this onlineJob as const
-   * @throws emptyTask* if isNull() 
+   * @throws emptyTask if isNull()
    */
   const onlineTask* constTask() const { return task(); }
 
@@ -94,8 +94,8 @@ public:
    * 
    * Internaly a dynamic_cast is done and the result is checked.
    * 
-   * @throws emptyTask* if isNull()
-   * @throws badTaskCast* if attached task cannot be casted to T
+   * @throws emptyTask if isNull()
+   * @throws badTaskCast if attached task cannot be casted to T
    */
   template<class T> T* task();
   
@@ -269,7 +269,7 @@ public:
   {
   public:
     emptyTask(const QString& file = "", const long unsigned int& line = 0)
-      : MyMoneyException("Requested onlineTask of wrong type", file, line)
+      : MyMoneyException("Requested onlineTask of onlineJob without any task", file, line)
     {}
   };
 
@@ -317,7 +317,7 @@ T* onlineJob::task()
 {
   T* ret = dynamic_cast<T*>(m_task);
   if (ret == 0)
-    throw new badTaskCast;
+    throw badTaskCast(__FILE__, __LINE__);
   return ret;
 }
 
@@ -326,7 +326,7 @@ const T* onlineJob::task() const
 {
   const T* ret = dynamic_cast<const T*>(m_task);
   if (ret == 0)
-    throw new badTaskCast;
+    throw badTaskCast(__FILE__, __LINE__);
   return ret;
 }
 

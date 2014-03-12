@@ -147,8 +147,7 @@ bool kOnlineTransferForm::setOnlineJob(const onlineJob job)
   QString name;
   try {
     name = job.task()->taskName();
-  } catch ( onlineJob::emptyTask* e ) {
-    delete e;
+  } catch ( const onlineJob::emptyTask& ) {
     return false;
   }
   
