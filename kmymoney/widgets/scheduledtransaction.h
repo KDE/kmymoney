@@ -65,7 +65,7 @@ public:
 
 //   virtual void paintRegisterGrid(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& cg) const;
 
-//   void registerCellText(QString& txt, int& align, int row, int col, QPainter* painter = 0);
+//   void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
 };
 
 } // namespace
