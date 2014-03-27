@@ -17,19 +17,49 @@
 */
 
 
-#include "germanonlinetransfer.h"
-
-#include <QtGui/QRegExpValidator>
+#include "germanonlinetransferimpl.h"
 
 #include "mymoney/mymoneyfile.h"
-#include "onlinejobadministration.h"
+#include "mymoney/onlinejobadministration.h"
+#include "misc/validators.h"
+
+class germanOnlineTransferSettingsFallback : public germanOnlineTransfer::settings
+{
+public:
+  // Limits getter
+  virtual int purposeMaxLines() const { return 0; }
+  virtual int purposeLineLength() const { return 0; }
+  virtual int purposeMinLength() const { return 0; }
+  
+  virtual int recipientNameLineLength() const { return 0; }
+  virtual int recipientNameMinLength() const { return 0; }
+  
+  virtual int payeeNameLineLength() const { return 0; }
+  virtual int payeeNameMinLength() const { return 0; }
+  
+  virtual QString allowedChars() const { return QString(); }
+  
+  // Limits validators
+  virtual bool checkPurposeCharset( const QString& ) const { return false; }
+  virtual bool checkPurposeLineLength(const QString& ) const { return false; }
+  virtual validators::lengthStatus checkPurposeLength(const QString&) const { return validators::tooLong; }
+  virtual bool checkPurposeMaxLines(const QString&) const { return false; }
+  
+  virtual validators::lengthStatus checkNameLength(const QString&) const { return validators::tooLong; }
+  virtual bool checkNameCharset( const QString& ) const { return false; }
+  
+  virtual validators::lengthStatus checkRecipientLength(const QString&) const { return validators::tooLong; }
+  virtual bool checkRecipientCharset( const QString& ) const { return false; }
+  
+  virtual validators::lengthStatus checkRecipientAccountNumber( const QString& ) const { return validators::tooLong; }
+  virtual validators::lengthStatus checkRecipientBankCode( const QString& ) const { return validators::tooLong; }
+};
 
 static const unsigned short defaultTextKey = 51;
 static const unsigned short defaultSubTextKey = 0;
 
-germanOnlineTransfer::germanOnlineTransfer()
-  : onlineTask(),
-    creditTransfer(),
+germanOnlineTransferImpl::germanOnlineTransferImpl()
+  : germanOnlineTransfer(),
     _settings( QSharedPointer<const settings>() ),
     _value(0),
     _purpose(QString()),
@@ -41,9 +71,8 @@ germanOnlineTransfer::germanOnlineTransfer()
 
 }
 
-germanOnlineTransfer::germanOnlineTransfer(const germanOnlineTransfer& other)
-  : onlineTask( other ),
-    creditTransfer( other ),
+germanOnlineTransferImpl::germanOnlineTransferImpl(const germanOnlineTransferImpl& other)
+  : germanOnlineTransfer( other ),
     _settings( other._settings ),
     _value( other._value ),
     _purpose( other._purpose ),
@@ -55,24 +84,24 @@ germanOnlineTransfer::germanOnlineTransfer(const germanOnlineTransfer& other)
 
 }
 
-germanOnlineTransfer *germanOnlineTransfer::clone() const
+germanOnlineTransfer *germanOnlineTransferImpl::clone() const
 {
-  germanOnlineTransfer *transfer = new germanOnlineTransfer( *this );
+  germanOnlineTransfer *transfer = new germanOnlineTransferImpl( *this );
   return transfer;
 }
 
-bool germanOnlineTransfer::isValid() const
+bool germanOnlineTransferImpl::isValid() const
 {
   QSharedPointer<const germanOnlineTransfer::settings> settings = getSettings();
 
-  if ( settings->checkPurposeLength( _purpose ) == creditTransferSettingsBase::ok
+  if ( settings->checkPurposeLength( _purpose ) == validators::ok
     && settings->checkPurposeMaxLines( _purpose )
     && settings->checkPurposeLineLength( _purpose )
     && settings->checkPurposeCharset( _purpose )
     && settings->checkRecipientCharset( _remoteAccount.ownerName() )
-    && settings->checkRecipientLength( _remoteAccount.ownerName() ) == creditTransferSettingsBase::ok
-    && settings->checkRecipientAccountNumber( _remoteAccount.accountNumber() ) == creditTransferSettingsBase::ok
-    && settings->checkRecipientBankCode( _remoteAccount.bankCode() ) == creditTransferSettingsBase::ok
+    && settings->checkRecipientLength( _remoteAccount.ownerName() ) == validators::ok
+    && settings->checkRecipientAccountNumber( _remoteAccount.accountNumber() ) == validators::ok
+    && settings->checkRecipientBankCode( _remoteAccount.bankCode() ) == validators::ok
     && value().isPositive()
   )
     return true;
@@ -80,7 +109,7 @@ bool germanOnlineTransfer::isValid() const
 }
 
 /** @todo make alive */
-germanAccountIdentifier* germanOnlineTransfer::originAccountIdentifier() const
+germanAccountIdentifier* germanOnlineTransferImpl::originAccountIdentifier() const
 {
   germanAccountIdentifier* ident = new germanAccountIdentifier();
 #if 0
@@ -92,7 +121,7 @@ germanAccountIdentifier* germanOnlineTransfer::originAccountIdentifier() const
 }
 
 /** @todo make alive */
-MyMoneySecurity germanOnlineTransfer::currency() const
+MyMoneySecurity germanOnlineTransferImpl::currency() const
 {
 #if 0
   return MyMoneyFile::instance()->security(originMyMoneyAccount().currencyId());
@@ -100,15 +129,18 @@ MyMoneySecurity germanOnlineTransfer::currency() const
   return MyMoneyFile::instance()->baseCurrency();
 }
 
-QSharedPointer<const germanOnlineTransfer::settings> germanOnlineTransfer::getSettings() const
+QSharedPointer<const germanOnlineTransfer::settings> germanOnlineTransferImpl::getSettings() const
 {
   if (_settings.isNull()) {
     _settings = onlineJobAdministration::instance()->taskSettings<germanOnlineTransfer::settings>( name(), _originAccount );
+    if ( _settings.isNull() )
+      _settings = QSharedPointer<const germanOnlineTransfer::settings>( new germanOnlineTransferSettingsFallback );
   }
+  Q_ASSERT( !_settings.isNull() );
   return _settings;
 }
 
-void germanOnlineTransfer::setOriginAccount( const QString& accountId )
+void germanOnlineTransferImpl::setOriginAccount( const QString& accountId )
 {
   if (accountId != _originAccount) {
     _originAccount = accountId;
@@ -117,7 +149,7 @@ void germanOnlineTransfer::setOriginAccount( const QString& accountId )
 }
 
 /** @todo save remote account */
-void germanOnlineTransfer::writeXML(QDomDocument& document, QDomElement& parent) const
+void germanOnlineTransferImpl::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   Q_UNUSED(document);
   parent.setAttribute("originAccount", _originAccount);
@@ -131,9 +163,9 @@ void germanOnlineTransfer::writeXML(QDomDocument& document, QDomElement& parent)
 }
 
 /** @todo load remote account */
-germanOnlineTransfer* germanOnlineTransfer::createFromXml(const QDomElement& element) const
+germanOnlineTransferImpl* germanOnlineTransferImpl::createFromXml(const QDomElement& element) const
 {
-  germanOnlineTransfer* task = new germanOnlineTransfer();
+  germanOnlineTransferImpl* task = new germanOnlineTransferImpl();
   task->setOriginAccount( element.attribute("originAccount", QString()) );
   task->setValue( MyMoneyMoney( QStringEmpty(element.attribute("value", QString())) ) );
   task->_textKey = element.attribute("textKey", QString().setNum(defaultTextKey)).toUShort();
@@ -142,7 +174,7 @@ germanOnlineTransfer* germanOnlineTransfer::createFromXml(const QDomElement& ele
   return task;
 }
 
-bool germanOnlineTransfer::hasReferenceTo(const QString& id) const
+bool germanOnlineTransferImpl::hasReferenceTo(const QString& id) const
 {
   return (id == _originAccount);
 }

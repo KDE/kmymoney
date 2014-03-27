@@ -69,6 +69,7 @@ TARGET_LINK_LIBRARIES(kmm_mymoney
                       ${LIBALKIMIA_LIBRARY}
                       ${KTOBLZCHECK_LIBRARY}
                       kmm_storage
+#                     onlinetask_interfaces
 )
 
 SET_TARGET_PROPERTIES(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})

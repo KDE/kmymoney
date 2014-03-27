@@ -103,30 +103,6 @@ public:
    */
   virtual QString jobTypeName() const = 0;
 
-  /**
-   * @brief Account/plugin dependent settings for an onlineTask
-   *
-   * Many onlineTasks settings vary due to multiple reasons. E.g.
-   * a credit transfer could have a maximum amount it can transfer at
-   * once. But this amount could depend on the account and the user's
-   * contract with the bank.
-   *
-   * Therefor onlineTasks can offer thier own set of configurations. There
-   * is no predifined behavior, only subclass onlineTask::settings.
-   * Of course onlinePlugins and widgets which support that task
-   * need to know how to handle that specific settings.
-   *
-   * Using @ref onlineJobAdministration::taskSettings() KMyMoney will
-   * request the correct onlinePlugin to create the settings and return
-   * them as shared pointer. Please note that KMyMoney will try to reuse
-   * that pointer if possible, so do not edit it.
-   */
-  class settings
-  {
-  public:
-    virtual ~settings();
-  };
-
 protected:
   onlineTask( const onlineTask& other );
 

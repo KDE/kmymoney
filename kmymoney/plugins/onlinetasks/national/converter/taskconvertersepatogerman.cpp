@@ -18,7 +18,7 @@
 
 #include "taskconvertersepatogerman.h"
 
-#include "tasks/germanonlinetransfer.h"
+#include "tasks/germanonlinetransferimpl.h"
 #include "../sepa/tasks/sepaonlinetransfer.h"
 
 onlineTask* taskConverterSepaToGerman::convert(const onlineTask& source, onlineTaskConverter::convertType& convertResult, QString& userInformation) const
@@ -28,7 +28,7 @@ onlineTask* taskConverterSepaToGerman::convert(const onlineTask& source, onlineT
   convertResult = convertionLoseless;
   userInformation = QString();
   
-  germanOnlineTransfer* convert = new germanOnlineTransfer;
+  germanOnlineTransferImpl* convert = new germanOnlineTransferImpl;
   Q_CHECK_PTR(convert);
   
   const sepaOnlineTransfer& sepaTask = static_cast<const sepaOnlineTransfer&>(source);

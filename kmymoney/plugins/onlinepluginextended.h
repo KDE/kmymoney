@@ -7,6 +7,7 @@
 
 #include "mymoney/onlinejob.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
+#include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
 
 namespace KMyMoneyPlugin
 {
@@ -40,7 +41,7 @@ public:
    *
    * @see onlineTask::settings
    */
-  virtual QSharedPointer<const onlineTask::settings> settings( QString accountId, QString taskName ) = 0;
+  virtual IonlineTaskSettings::ptr settings( QString accountId, QString taskName ) = 0;
 
   /**
    * @brief Send onlineJobs to bank

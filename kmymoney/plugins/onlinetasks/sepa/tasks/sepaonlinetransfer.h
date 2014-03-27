@@ -24,9 +24,10 @@
 #include <klocalizedstring.h>
 
 #include "swiftaccountidentifier.h"
+#include "misc/validators.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
-#include "../credittransfersettingsbase.h"
+#include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
 
 /**
  * @brief SEPA Credit Transfer
@@ -37,68 +38,77 @@ class KMM_MYMONEY_EXPORT sepaOnlineTransfer : public onlineTask, public creditTr
   
 public:
   ONLINETASK_META(sepaOnlineTransfer, "org.kmymoney.creditTransfer.sepa");
-  sepaOnlineTransfer();
-  sepaOnlineTransfer(const sepaOnlineTransfer &other );
+  sepaOnlineTransfer() : onlineTask(), creditTransfer() {}
+  sepaOnlineTransfer(const sepaOnlineTransfer &other ) : onlineTask(other), creditTransfer(other) {}
 
-  QString responsibleAccount() const { return _originAccount; }
-  void setOriginAccount( const QString& accountId );
+  virtual QString responsibleAccount() const = 0;
+  virtual void setOriginAccount( const QString& accountId ) = 0;
   
-  MyMoneyMoney value() const { return _value; }
-  virtual void setValue(MyMoneyMoney value) { _value = value; }
+  virtual MyMoneyMoney value() const = 0;
+  virtual void setValue(MyMoneyMoney value) = 0;
 
-  void setRecipient ( const swiftAccountIdentifier& accountIdentifier ) { _remoteAccount = accountIdentifier; }
-  const sepaAccountIdentifier& getRecipient() const { return _remoteAccount; }
+  virtual void setRecipient ( const swiftAccountIdentifier& accountIdentifier ) = 0;
+  virtual const sepaAccountIdentifier& getRecipient() const = 0;
 
-  virtual void setPurpose( const QString purpose ) { _purpose = purpose; }
-  QString purpose() const { return _purpose; }
+  virtual void setPurpose( const QString purpose ) = 0;
+  virtual QString purpose() const = 0;
 
-  virtual void setEndToEndReference( const QString& reference ) { _endToEndReference = reference; }
-  QString endToEndReference() const { return _endToEndReference; }
+  virtual void setEndToEndReference( const QString& reference ) = 0;
+  virtual QString endToEndReference() const = 0;
 
   /**
    * @brief Returns the origin account identifier
    * @return you are owner of the object
    */
-  sepaAccountIdentifier* originAccountIdentifier() const;
+  virtual sepaAccountIdentifier* originAccountIdentifier() const = 0;
 
   /**
    * National account can handle the currency of the related account only.
    */
-  MyMoneySecurity currency() const;
+  virtual MyMoneySecurity currency() const = 0;
 
-  bool isValid() const;
+  virtual bool isValid() const = 0;
 
-  QString jobTypeName() const { return i18n("SEPA Credit Transfer"); }
+  virtual QString jobTypeName() const = 0;
 
-  unsigned short int textKey() const { return _textKey; }
-  unsigned short int subTextKey() const { return _subTextKey; }
+  virtual unsigned short int textKey() const = 0;
+  virtual unsigned short int subTextKey() const = 0;
   
-  virtual bool hasReferenceTo(const QString& id) const;
+  virtual bool hasReferenceTo(const QString& id) const = 0;
 
-  class settings : public creditTransferSettingsBase
+  class settings : public IonlineTaskSettings
   {
   public:
-    int endToEndReferenceLength() const { return m_endToEndReferenceLength; }
-    void setEndToEndReferenceLength(const int& length) { m_endToEndReferenceLength = length; }
-    lengthStatus checkEndToEndReferenceLength(const QString& reference) const;
-    static bool isIbanValid( const QString& iban );
+    // Limits getter
+    virtual int purposeMaxLines() const = 0;
+    virtual int purposeLineLength() const = 0;
+    virtual int purposeMinLength() const = 0;
     
-    bool checkRecipientBic( const QString& bic ) const
-    {
-      const int length = bic.length();
-      for (int i = 0; i < std::min(length, 6); ++i) {
-        if ( !bic.at(i).isLetter() )
-          return false;
-      }
-      for (int i = 6; i < length; ++i) {
-        if ( !bic.at(i).isLetterOrNumber() )
-          return false;
-      }
-   
-      if (length == 11 || length == 8)
-        return true;
-      return false;
-    }
+    virtual int recipientNameLineLength() const = 0;
+    virtual int recipientNameMinLength() const = 0;
+    
+    virtual int payeeNameLineLength() const = 0;
+    virtual int payeeNameMinLength() const = 0;
+    
+    virtual QString allowedChars() const = 0;
+    
+    // Checker
+    virtual bool checkPurposeCharset( const QString& string ) const = 0;
+    virtual bool checkPurposeLineLength(const QString& purpose) const = 0;
+    virtual validators::lengthStatus checkPurposeLength(const QString& purpose) const = 0;
+    virtual bool checkPurposeMaxLines(const QString& purpose) const = 0;
+    
+    virtual validators::lengthStatus checkNameLength(const QString& name) const = 0;
+    virtual bool checkNameCharset( const QString& name ) const = 0;
+    
+    virtual validators::lengthStatus checkRecipientLength(const QString& name) const = 0;
+    virtual bool checkRecipientCharset( const QString& name ) const = 0;
+    
+    virtual int endToEndReferenceLength() const = 0;
+    virtual validators::lengthStatus checkEndToEndReferenceLength(const QString& reference) const = 0;
+    virtual bool isIbanValid( const QString& iban ) const = 0;
+    
+    virtual bool checkRecipientBic( const QString& bic ) const = 0;
     
     /**
      * @brief Checks if the bic is mandatory for the given iban
@@ -109,33 +119,19 @@ public:
      * @todo LOW: Implement, should be simple to test: if the country code in iban is the same as in origin iban and
      * the iban belongs to a sepa country a bic is not necessary. Will change 1. Feb 2016.
      */
-    virtual bool isBicMandatory( const QString& iban ) const { Q_UNUSED(iban); return true; }
-    
-  private:
-    /** @brief Number of chars allowed for sepa reference */
-    int m_endToEndReferenceLength;
+    virtual bool isBicMandatory( const QString& iban ) const = 0;
   };
 
-  QSharedPointer<const settings> getSettings() const;
+  virtual QSharedPointer<const settings> getSettings() const = 0;
   
 protected:
-  sepaOnlineTransfer* clone() const;
+  virtual sepaOnlineTransfer* clone() const = 0;
   
-  virtual sepaOnlineTransfer* createFromXml(const QDomElement &element) const;
-  virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
+  virtual sepaOnlineTransfer* createFromXml(const QDomElement &element) const = 0;
+  virtual void writeXML(QDomDocument& document, QDomElement& parent) const = 0;
 
-private:
-  mutable QSharedPointer<const settings> _settings;
-  
-  QString _originAccount;
-  MyMoneyMoney _value;
-  QString _purpose;
-  QString _endToEndReference;
-
-  sepaAccountIdentifier _remoteAccount;
-
-  unsigned short int _textKey;
-  unsigned short int _subTextKey;
 };
+
+Q_DECLARE_INTERFACE(sepaOnlineTransfer, "org.kmymoney.creditTransfer.sepa")
 
 #endif // SEPAONLINETRANSFER_H

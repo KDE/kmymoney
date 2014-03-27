@@ -20,6 +20,7 @@
 
 #include "tasks/germanonlinetransfer.h"
 #include "../../sepa/tasks/sepaonlinetransfer.h"
+#include "mymoney/onlinejobadministration.h"
 
 onlineTask* taskConverterGermanToSepa::convert(const onlineTask& source, onlineTaskConverter::convertType& convertResult, QString& userInformation) const
 {
@@ -28,8 +29,13 @@ onlineTask* taskConverterGermanToSepa::convert(const onlineTask& source, onlineT
   
   Q_ASSERT( source.taskName() == germanOnlineTransfer::name() );
   
-  sepaOnlineTransfer* convert = new sepaOnlineTransfer;
-  Q_CHECK_PTR(convert);
+  onlineTask* convertBase = onlineJobAdministration::instance()->createOnlineTask(sepaOnlineTransfer::name());
+  sepaOnlineTransfer* convert = dynamic_cast<sepaOnlineTransfer*>(convertBase);
+  if (convert == 0) {
+    convertResult = convertImpossible;
+    delete convertBase;
+    return 0;
+  }
   
   const germanOnlineTransfer& origTask = static_cast<const germanOnlineTransfer&>(source);
   convert->setOriginAccount( origTask.responsibleAccount() );

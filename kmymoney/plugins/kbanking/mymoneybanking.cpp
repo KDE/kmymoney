@@ -92,10 +92,6 @@
 #include "aqbankingqtoperators.h"
 #include "aqbankingkmmoperators.h"
 
-//! @todo remove includes when possible
-#include "onlinetasks/national/converter/taskconvertergermantosepa.h"
-#include "onlinetasks/national/converter/taskconvertersepatogerman.h"
-
 K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<KBankingPlugin>();)
 K_EXPORT_PLUGIN(KBankingFactory("kmm_kbanking"))
 
@@ -194,12 +190,6 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
       m_kbanking = 0;
     }
   }
-  
-  //! @FIXME: This should not be here. Just a temporarily solution until onlineTask can be loaded as plugins
-  onlineJobAdministration::instance()->registerOnlineTask( new sepaOnlineTransfer );
-  onlineJobAdministration::instance()->registerOnlineTask( new germanOnlineTransfer );
-  onlineJobAdministration::instance()->registerOnlineTaskConverter( new taskConverterGermanToSepa );
-  onlineJobAdministration::instance()->registerOnlineTaskConverter( new taskConverterSepaToGerman );
 }
 
 
@@ -698,31 +688,31 @@ public:
   }
 };
 
-QSharedPointer<const onlineTask::settings> KBankingPlugin::settings(QString accountId, QString taskName)
+IonlineTaskSettings::ptr KBankingPlugin::settings(QString accountId, QString taskName)
 {
   AB_ACCOUNT* abAcc = aqbAccount(accountId);
   if ( abAcc == 0 )
-    return QSharedPointer<const onlineTask::settings>();
+    return IonlineTaskSettings::ptr();
 
   if ( germanOnlineTransfer::name() == taskName ) {
     // Get Limits for germanOnlineTransfer
     QScopedPointer<AB_JOB, QScopedPointerAbJobDeleter> abJob( AB_JobSingleTransfer_new(abAcc) );
     if ( AB_Job_CheckAvailability( abJob.data() ) != 0)
-      return QSharedPointer<const onlineTask::settings>();
+      return IonlineTaskSettings::ptr();
 
     const AB_TRANSACTION_LIMITS* limits = AB_JobSingleTransfer_GetFieldLimits( abJob.data() );
-    return AB_TransactionLimits_toGermanOnlineTaskSettings( limits ).dynamicCast<const onlineTask::settings>();
+    return AB_TransactionLimits_toGermanOnlineTaskSettings( limits ).dynamicCast<IonlineTaskSettings>();
     //! @todo needs free? because that is not possible with const AB_TRANSACTION_LIMITS*
     // AB_TransactionLimits_free( limits );
   } else if ( sepaOnlineTransfer::name() == taskName ) {
     // Get limits for sepaonlinetransfer
     QScopedPointer<AB_JOB, QScopedPointerAbJobDeleter> abJob( AB_JobSepaTransfer_new(abAcc) );
     if ( AB_Job_CheckAvailability( abJob.data() ) != 0)
-      return QSharedPointer<const onlineTask::settings>();
+      return IonlineTaskSettings::ptr();
     const AB_TRANSACTION_LIMITS* limits = AB_JobSingleTransfer_GetFieldLimits( abJob.data() );
-    return AB_TransactionLimits_toSepaOnlineTaskSettings( limits );
+    return AB_TransactionLimits_toSepaOnlineTaskSettings( limits ).dynamicCast<IonlineTaskSettings>();
   }
-  return QSharedPointer<const onlineTask::settings>();
+  return IonlineTaskSettings::ptr();
 }
 
 /** @todo make alive */

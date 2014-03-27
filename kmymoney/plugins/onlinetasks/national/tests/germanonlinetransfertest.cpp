@@ -21,7 +21,10 @@
 #define KMM_MYMONEY_UNIT_TESTABLE friend class germanOnlineTransferTest;
 
 #include "germanonlinetransfertest.h"
-#include "../tasks/germanonlinetransfer.h"
+#include "../tasks/germanonlinetransferimpl.h"
+#include "../converter/taskconvertersepatogerman.h"
+#include "../converter/taskconvertergermantosepa.h"
+#include "onlinetasks/sepa/tasks/sepaonlinetransferimpl.h"
 
 
 QTEST_MAIN(germanOnlineTransferTest)
@@ -46,16 +49,45 @@ void germanOnlineTransferTest::cleanup()
   // Called after every testfunction
 }
 
+class germanOnlineTransferSettings : public germanOnlineTransfer::settings
+{
+public:
+  // Limits getter
+  virtual int purposeMaxLines() const { return 1; }
+  virtual int purposeLineLength() const { return 27; }
+  virtual int purposeMinLength() const { return 1; }
+  
+  virtual int recipientNameLineLength() const { return 27; }
+  virtual int recipientNameMinLength() const { return 1; }
+  
+  virtual int payeeNameLineLength() const { return 27; }
+  virtual int payeeNameMinLength() const { return 1; }
+  
+  virtual QString allowedChars() const { return QString("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvw "); }
+  
+  // Limits validators
+  virtual bool checkPurposeCharset( const QString& ) const { return true; }
+  virtual bool checkPurposeLineLength(const QString& ) const { return true; }
+  virtual validators::lengthStatus checkPurposeLength(const QString&) const { return validators::ok; }
+  virtual bool checkPurposeMaxLines(const QString&) const { return true; }
+  
+  virtual validators::lengthStatus checkNameLength(const QString&) const { return validators::ok; }
+  virtual bool checkNameCharset( const QString& ) const { return true; }
+  
+  virtual validators::lengthStatus checkRecipientLength(const QString&) const { return validators::ok; }
+  virtual bool checkRecipientCharset( const QString& ) const { return true; }
+  
+  virtual validators::lengthStatus checkRecipientAccountNumber( const QString& ) const { return validators::ok; }
+  virtual validators::lengthStatus checkRecipientBankCode( const QString& ) const { return validators::ok; }
+};
+
 void germanOnlineTransferTest::arbitraryValidTask()
 {
-  germanOnlineTransfer* task = new germanOnlineTransfer();
-  QSharedPointer<germanOnlineTransfer::settings> settings( new germanOnlineTransfer::settings );  
+  germanOnlineTransferImpl* taskImpl = new germanOnlineTransferImpl;
+  QSharedPointer<germanOnlineTransfer::settings> settings( new germanOnlineTransferSettings );  
   
-  settings->setAllowedChars("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvw ");
-  settings->setPayeeNameLimits(1, 27, 0);
-  settings->setRecipientNameLimits( 1, 27, 1 );
-  settings->setPurposeLimits( 1, 27, 1 );
-  task->_settings = settings.staticCast<const germanOnlineTransfer::settings>();
+  taskImpl->_settings = settings;
+  germanOnlineTransfer* task = taskImpl;
   
   task->setValue( MyMoneyMoney(1, 1) );
   task->setPurpose( "Test" );
@@ -71,4 +103,24 @@ void germanOnlineTransferTest::arbitraryValidTask()
   delete task;
 }
 
-#include "../mymoney/germanonlinetransfertest.moc"
+void germanOnlineTransferTest::convertFromSepa()
+{
+  sepaOnlineTransfer* sepa = new sepaOnlineTransferImpl;
+  taskConverterSepaToGerman* converter = new taskConverterSepaToGerman;
+  
+  QCOMPARE(converter->convertedTask(), germanOnlineTransfer::name());
+  
+  delete converter;
+  delete sepa;
+}
+
+void germanOnlineTransferTest::convertToSepa()
+{
+  germanOnlineTransfer* original = new germanOnlineTransferImpl;
+  taskConverterGermanToSepa* converter = new taskConverterGermanToSepa;
+  
+  QCOMPARE(converter->convertedTask(), sepaOnlineTransfer::name());
+  
+  delete converter;
+  delete original;
+}

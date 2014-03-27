@@ -87,7 +87,7 @@ public:
   void protocols(QStringList& protocolList) const;
   
   QStringList availableJobs(QString accountId);
-  QSharedPointer<const onlineTask::settings> settings(QString accountId, QString taskName);
+  IonlineTaskSettings::ptr settings(QString accountId, QString taskName);
 
   void sendOnlineJob(QList<onlineJob>& jobs);
 

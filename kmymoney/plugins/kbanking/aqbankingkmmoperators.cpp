@@ -3,6 +3,7 @@
 #include <aqbanking/transactionlimits.h>
 #include <aqbanking/transaction.h>
 
+#include "tasksettings/credittransfersettingsbase.h"
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 #include "onlinetasks/national/tasks/germanonlinetransfer.h"
 #include "gwenhywfarqtoperators.h"
@@ -27,9 +28,10 @@ static const QString dtausChars = QString::fromUtf8("0123456789ABCDEFGHIJKLMNOPQ
  */
 static const QString sepaChars = QString("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':?.,- (+)/");
 
-QSharedPointer<onlineTask::settings> AB_TransactionLimits_toGermanOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits )
+/** @todo make alive */
+QSharedPointer<germanOnlineTransfer::settings> AB_TransactionLimits_toGermanOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits )
 {
-  QSharedPointer<germanOnlineTransfer::settings> settings( new germanOnlineTransfer::settings );
+  QSharedPointer<creditTransferSettingsBase> settings( new creditTransferSettingsBase );
 
   // AqBanking returns 0 as min length even if it requires one
   int minLength = AB_TransactionLimits_GetMinLenPurpose( aqlimits );
@@ -56,13 +58,13 @@ QSharedPointer<onlineTask::settings> AB_TransactionLimits_toGermanOnlineTaskSett
   
   settings->setAllowedChars( dtausChars );
 
-  return settings;
+  return settings.dynamicCast<germanOnlineTransfer::settings>();
 }
 
 /** @todo Check if AB_TransactionLimits_GetMaxLenCustomerReference really is the limit for the sepa reference */
-QSharedPointer<onlineTask::settings> AB_TransactionLimits_toSepaOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits )
+QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits )
 {
-  QSharedPointer<sepaOnlineTransfer::settings> settings( new sepaOnlineTransfer::settings );
+  QSharedPointer<creditTransferSettingsBase> settings( new creditTransferSettingsBase );
   
   settings->setPurposeLimits(AB_TransactionLimits_GetMaxLinesPurpose(aqlimits),
                              AB_TransactionLimits_GetMaxLenPurpose(aqlimits),
@@ -89,7 +91,7 @@ QSharedPointer<onlineTask::settings> AB_TransactionLimits_toSepaOnlineTaskSettin
 
   settings->setAllowedChars( sepaChars );
   
-  return settings;
+  return settings.dynamicCast<sepaOnlineTransfer::settings>();
 }
 
 void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const bankAccountIdentifier& ident)

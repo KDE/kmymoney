@@ -28,7 +28,8 @@
 #include "germanaccountidentifier.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
-#include "../../sepa/credittransfersettingsbase.h"
+#include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
+#include "misc/validators.h"
 
 /**
  * @brief Online Banking national transfer
@@ -43,83 +44,87 @@ class KMM_MYMONEY_EXPORT germanOnlineTransfer : public onlineTask, public credit
 public:
   ONLINETASK_META(germanOnlineTransfer, "org.kmymoney.creditTransfer.germany");
 
-  germanOnlineTransfer();
-  germanOnlineTransfer(const germanOnlineTransfer &other );
+  germanOnlineTransfer()
+  : onlineTask(),
+    creditTransfer()
+    {}
 
-  QString responsibleAccount() const { return _originAccount; };
-  void setOriginAccount( const QString& accountId );
+  germanOnlineTransfer(const germanOnlineTransfer &other )
+    : onlineTask(other),
+      creditTransfer(other)
+      {}
+
+  virtual QString responsibleAccount() const = 0;
+  virtual void setOriginAccount( const QString& accountId ) = 0;
   
-  MyMoneyMoney value() const { return _value; }
-  virtual void setValue(MyMoneyMoney value) { _value = value; }
+  virtual MyMoneyMoney value() const = 0;
+  virtual void setValue(MyMoneyMoney value) = 0;
 
-  void setRecipient ( const germanAccountIdentifier& accountIdentifier ) { _remoteAccount = accountIdentifier; }
-  const germanAccountIdentifier& getRecipient() const { return _remoteAccount; }
+  virtual void setRecipient ( const germanAccountIdentifier& accountIdentifier ) = 0;
+  virtual const germanAccountIdentifier& getRecipient() const = 0;
 
-  virtual void setPurpose( const QString purpose ) { _purpose = purpose; }
-  QString purpose() const { return _purpose; }
+  virtual void setPurpose( const QString purpose ) = 0;
+  virtual QString purpose() const = 0;
 
-  virtual QString jobTypeName() const { return creditTransfer::jobTypeName(); }
+  virtual QString jobTypeName() const = 0;
   
   /**
    * @brief Returns the origin account identifier
    * @return you are owner of the object
    */
-  germanAccountIdentifier* originAccountIdentifier() const;
+  virtual germanAccountIdentifier* originAccountIdentifier() const = 0;
 
   /**
    * National account can handle the currency of the related account only.
    */
-  MyMoneySecurity currency() const;
+  virtual MyMoneySecurity currency() const = 0;
 
-  bool isValid() const;
+  virtual bool isValid() const = 0;
 
-  germanOnlineTransfer* clone() const;
+  virtual germanOnlineTransfer* clone() const = 0;
 
-  unsigned short int textKey() const { return _textKey; }
-  unsigned short int subTextKey() const { return _subTextKey; }
+  virtual unsigned short int textKey() const = 0;
+  virtual unsigned short int subTextKey() const = 0;
 
-  class settings : public creditTransferSettingsBase
+  class settings : public IonlineTaskSettings
   {
   public:
-    lengthStatus checkRecipientAccountNumber( const QString& accountNumber ) const
-    {
-      const int length = accountNumber.length();
-      if (length == 0)
-        return tooShort;
-      else if ( length > 10 )
-        return tooLong;
-      return ok;
-    }
+    // Limits getter
+    virtual int purposeMaxLines() const = 0;
+    virtual int purposeLineLength() const = 0;
+    virtual int purposeMinLength() const = 0;
+    
+    virtual int recipientNameLineLength() const = 0;
+    virtual int recipientNameMinLength() const = 0;
+    
+    virtual int payeeNameLineLength() const = 0;
+    virtual int payeeNameMinLength() const = 0;
+    
+    virtual QString allowedChars() const = 0;
 
-    lengthStatus checkRecipientBankCode( const QString& bankCode ) const
-    {
-      const int length = bankCode.length();
-      if (length < 8)
-        return tooShort;
-      else if ( length > 8 )
-        return tooLong;
-      return ok;
-    }
+    // Limits validators
+    virtual bool checkPurposeCharset( const QString& string ) const = 0;
+    virtual bool checkPurposeLineLength(const QString& purpose) const = 0;
+    virtual validators::lengthStatus checkPurposeLength(const QString& purpose) const = 0;
+    virtual bool checkPurposeMaxLines(const QString& purpose) const = 0;
+    
+    virtual validators::lengthStatus checkNameLength(const QString& name) const = 0;
+    virtual bool checkNameCharset( const QString& name ) const = 0;
+    
+    virtual validators::lengthStatus checkRecipientLength(const QString& name) const = 0;
+    virtual bool checkRecipientCharset( const QString& name ) const = 0;
+
+    virtual validators::lengthStatus checkRecipientAccountNumber( const QString& accountNumber ) const = 0;
+    virtual validators::lengthStatus checkRecipientBankCode( const QString& bankCode ) const = 0;
   };
 
-  QSharedPointer<const settings> getSettings() const;
+  virtual QSharedPointer<const settings> getSettings() const = 0;
   
-  virtual bool hasReferenceTo(const QString& id) const;
+  virtual bool hasReferenceTo(const QString& id) const = 0;
 
 protected:
-  virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
-  virtual germanOnlineTransfer* createFromXml(const QDomElement &element) const;
-  
-private:
-  mutable QSharedPointer<const settings> _settings;
-  MyMoneyMoney _value;
-  QString _purpose;
-
-  QString _originAccount;
-  germanAccountIdentifier _remoteAccount;
-  
-  unsigned short int _textKey;
-  unsigned short int _subTextKey;
+  virtual void writeXML(QDomDocument& document, QDomElement& parent) const = 0;
+  virtual germanOnlineTransfer* createFromXml(const QDomElement &element) const = 0;
 
 };
 

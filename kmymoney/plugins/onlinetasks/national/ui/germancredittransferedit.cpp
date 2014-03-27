@@ -25,7 +25,7 @@ germanCreditTransferEdit::germanCreditTransferEdit(QWidget *parent) :
     IonlineJobEdit(parent),
     ui(new Ui::germanCreditTransferEdit),
     m_originAccount( QString() ),
-    m_germanCreditTransfer( onlineJobTyped<germanOnlineTransfer>(new germanOnlineTransfer) ),
+    m_germanCreditTransfer( onlineJobTyped<germanOnlineTransfer>() ),
     m_requiredFields( new kMandatoryFieldGroup(this) )
 {
     ui->setupUi(this);
@@ -85,8 +85,8 @@ void germanCreditTransferEdit::setOriginAccount( const QString& accountId )
 
 void germanCreditTransferEdit::beneficiaryNameChanged( const QString& name )
 {
-    const creditTransferSettingsBase::lengthStatus status = getOnlineJobTyped().task()->getSettings()->checkRecipientLength(name);
-    if ( status == creditTransferSettingsBase::tooShort ) {
+    const validators::lengthStatus status = getOnlineJobTyped().task()->getSettings()->checkRecipientLength(name);
+    if ( status == validators::tooShort ) {
         ui->statusBeneficiaryName->setColor(Qt::red);
         ui->statusBeneficiaryName->setToolTip( i18n("A beneficiary name is needed.") );
     } else {
@@ -199,6 +199,7 @@ void germanCreditTransferEdit::updateEveryStatus()
 void germanCreditTransferEdit::updateTaskSettings()
 {
   QSharedPointer<const germanOnlineTransfer::settings> settings = getOnlineJobTyped().task()->getSettings();
+
   ui->transferPurpose->setAllowedChars( settings->allowedChars() );
   ui->transferPurpose->setMaxLineLength( settings->purposeLineLength() );
   ui->transferPurpose->setMaxLines( settings->purposeMaxLines() );

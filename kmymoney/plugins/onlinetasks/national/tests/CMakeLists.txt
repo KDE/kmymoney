@@ -1,19 +1,35 @@
-set( germanonlinetransfertest_SRCS germanonlinetransfertest.cpp )
+set( germanonlinetransfertest_SRCS
+  germanonlinetransfertest.cpp
+  )
+  
+kde4_add_unit_test( germanonlinetransfertest
+  TESTNAME kmymoney-germanOnlineTransferTest
+  ${germanonlinetransfertest_SRCS}
+  $<TARGET_OBJECTS:konlinetasks_national_OBJECTS>
+  $<TARGET_OBJECTS:konlinetasks_sepa_OBJECTS>
+)
 
-kde4_add_unit_test( germanonlinetransfertest TESTNAME kmymoney-germanOnlineTransferTest ${germanonlinetransfertest_SRCS} )
-
-add_dependencies( germanonlinetransfertest kmm_mymoney )
-FIND_PACKAGE(KDE4 4.6.0 REQUIRED)
+add_dependencies( germanonlinetransfertest
+  konlinetasks_national
+  konlinetasks_sepa
+)
 
 target_link_libraries( germanonlinetransfertest
-  konlinetasks_national
-  onlinetask_interfaces
   kmm_mymoney
-  ${KDE4_KDEUI_LIBS}
+  kmm_widgets
+  kmymoney_base
+  kmm_config
+  kmm_plugin
+  kmm_utils_validators
+  onlinetask_interfaces
   ${QT_QTCORE_LIBRARIES}
   ${QT_QTGUI_LIBRARIES}
-  ${QT_QTXML_LIBRARY}
   ${QT_QTTEST_LIBRARY}
-  ${GMP_LIBRARIES}
+  ${KDE4_KDECORE_LIBS}
+  ${KDE4_KDEUI_LIBS}
+  ${KDE4_KIO_LIBS}
+  ${QT_QTXML_LIBRARY}
   ${LIBALKIMIA_LIBRARY}
+  ${GMP_LIBRARIES} # TODO: remove when alkimia cmake config file got fixed
+  ${KTOBLZCHECK_LIBRARY}
 )

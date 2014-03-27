@@ -224,10 +224,24 @@ void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* c
   qDebug() << "onlineTaskConverter available" << converter->convertedTask() << converter->convertibleTasks();
 }
 
-QSharedPointer<const onlineTask::settings> onlineJobAdministration::taskSettings( const QString& taskName, const QString& accountId ) const
+void onlineJobAdministration::registerOnlineTaskEdit(IonlineJobEdit *const editor)
+{
+  if (Q_UNLIKELY( editor == 0))
+    return;
+  
+  m_onlineTaskEditors.append(editor);
+  qDebug() << "onlineJobEditor available" << "*name optimized out*";
+}
+
+QList< IonlineJobEdit* > onlineJobAdministration::onlineJobEdits()
+{
+  return m_onlineTaskEditors;
+}
+
+IonlineTaskSettings::ptr onlineJobAdministration::taskSettings( const QString& taskName, const QString& accountId ) const
 {
   KMyMoneyPlugin::OnlinePluginExtended* plugin = getOnlinePlugin(accountId);
   if (plugin != 0)
     return ( plugin->settings(accountId, taskName) );
-  return QSharedPointer<const onlineTask::settings>();
+  return IonlineTaskSettings::ptr();
 }

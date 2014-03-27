@@ -23,6 +23,8 @@
 
 #include "mymoney/swiftaccountidentifier.h"
 
+#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+
 sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent) :
     IonlineJobEdit(parent),
     ui(new Ui::sepaCreditTransferEdit),
@@ -223,7 +225,7 @@ void sepaCreditTransferEdit::valueChanged()
 void sepaCreditTransferEdit::endToEndReferenceChanged( const QString& reference )
 {
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
-    if ( settings->checkEndToEndReferenceLength( reference ) == sepaOnlineTransfer::settings::tooLong) {
+    if ( settings->checkEndToEndReferenceLength( reference ) == validators::tooLong) {
         ui->statusReference->setToolTip( i18np("The end-to-end refence cannot contain more than one character.",
                                                "The end-to-end refence cannot contain more than %1 characters.",
                                                settings->endToEndReferenceLength()
@@ -250,8 +252,9 @@ void sepaCreditTransferEdit::purposeChanged()
         tooltip.append( i18np("In the purpose only a single line is allowed.", "The purpose cannot contain more than %1 lines.",
                               settings->purposeMaxLines()) )
         .append('\n');
-    } else if (settings->checkPurposeLength(purpose) == sepaOnlineTransfer::settings::tooShort) {
-        tooltip.append( i18np("A purpose is needed.", "The purpose must be at least %1 characters long.", settings->purposeMinLength()) );
+    } else if (settings->checkPurposeLength(purpose) == validators::tooShort) {
+        tooltip.append( i18np("A purpose is needed.", "The purpose must be at least %1 characters long.", settings->purposeMinLength()) )
+        .append('\n');
     }
 
     // Set tooltip and remove the last '\n'
@@ -266,7 +269,7 @@ void sepaCreditTransferEdit::purposeChanged()
 
 QSharedPointer< const sepaOnlineTransfer::settings > sepaCreditTransferEdit::taskSettings()
 {
-  return getOnlineJobTyped().constTask()->getSettings();
+    return getOnlineJobTyped().constTask()->getSettings();
 }
 
 QValidator::State ibanValidator::validate(QString& string, int&) const

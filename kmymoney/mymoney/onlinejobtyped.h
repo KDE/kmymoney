@@ -20,6 +20,7 @@
 #define ONLINEJOBTYPED_H
 
 #include "onlinejob.h"
+#include "onlinejobadministration.h"
 
 /**
  * @brief Convient template if you know the task type of an onlineJob
@@ -76,10 +77,10 @@ private:
 
 template<class T>
 onlineJobTyped<T>::onlineJobTyped( )
-    : onlineJob( new T() ),
+    : onlineJob( onlineJobAdministration::instance()->createOnlineTask( T::name() ) ),
       m_taskSubType( 0 )
 {
-    m_taskSubType = static_cast<T*>( onlineJob::task() );
+    m_taskSubType = static_cast<T*>( onlineJob::task() ); // this can throw emptyTask
 }
 
 template<class T>
@@ -105,7 +106,7 @@ onlineJobTyped<T> onlineJobTyped<T>::operator =( onlineJobTyped<T> const& other 
 {
     onlineJob::operator =(other);
     m_taskSubType = dynamic_cast<T*>(onlineJob::task());
-    Q_ASSERT( m_taskSubType != 0 );
+    Q_CHECK_PTR( m_taskSubType );
     return (*this);
 }
 
@@ -121,14 +122,14 @@ onlineJobTyped<T>::onlineJobTyped(const onlineJob &other)
 template<class T>
 T* onlineJobTyped<T>::task()
 {
-    Q_ASSERT(m_taskSubType != 0);
+    Q_CHECK_PTR(m_taskSubType);
     return m_taskSubType;
 }
 
 template<class T>
 const T* onlineJobTyped<T>::task() const
 {
-    Q_ASSERT(m_taskSubType != 0);
+    Q_CHECK_PTR(m_taskSubType);
     return m_taskSubType;
 }
 

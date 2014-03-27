@@ -16,25 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GERMANONLINETRANSFERTEST_H
-#define GERMANONLINETRANSFERTEST_H
+#ifndef ONLINETASKSETTINGSFACTORY_H
+#define ONLINETASKSETTINGSFACTORY_H
 
-#include <QObject>
+#include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
 
-class germanOnlineTransferTest : public QObject
+class onlineTaskSettingsFactory
 {
-  Q_OBJECT
-  
-private slots:
-  void initTestCase();
-  void cleanupTestCase();
-
-  void init();
-  void cleanup();
-
-  void arbitraryValidTask();
-  void convertFromSepa();
-  void convertToSepa();
+protected:
+  virtual IonlineTaskSettings::ptr createSettings() const = 0;
 };
 
-#endif // GERMANONLINETRANSFERTEST_H
+Q_DECLARE_INTERFACE(onlineTaskSettingsFactory, "org.kmymoney.onlinetask.settingsFactory")
+
+#endif // ONLINETASKSETTINGSFACTORY_H

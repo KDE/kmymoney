@@ -31,6 +31,9 @@ namespace Ui {
 class sepaCreditTransferEdit;
 }
 
+/**
+ * @brief Widget to edit sepaOnlineTransfer
+ */
 class sepaCreditTransferEdit : public IonlineJobEdit
 {
   Q_OBJECT
@@ -43,6 +46,8 @@ public:
 
   QStringList supportedOnlineTasks() const { return QStringList( sepaOnlineTransfer::name() ); }
   QString label() const { return i18n("SEPA Credit Transfer"); };
+  
+  bool isValid() const { return getOnlineJobTyped().isValid(); };
 signals:
   void onlineJobChanged();
   
@@ -66,6 +71,25 @@ private slots:
   void valueChanged();
   void endToEndReferenceChanged( const QString& reference );
   /** @} */
+  
+  
+  /**
+   * @brief Convenient slot to emit validityChanged()
+   * 
+   * A default implementation to emit validityChanged() based on getOnlineJob().isValid().
+   * This is useful if you use @a kMandatoryFieldsGroup in your widget. Just connect kMandatoryFieldsGroup::stateChanged(bool)
+   * to this slot.
+   * 
+   * @param status if false, validityChanged(false) is emitted without further checks.
+   */
+  void requiredFieldsCompleted( const bool& status = true )
+  { 
+    if ( status ) {
+      emit validityChanged( getOnlineJobTyped().isValid() );
+    } else {
+      emit validityChanged( false );
+    }
+  }
 
 private:
   Ui::sepaCreditTransferEdit *ui;

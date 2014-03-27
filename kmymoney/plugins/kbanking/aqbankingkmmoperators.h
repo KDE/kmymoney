@@ -9,7 +9,9 @@
 
 #include <QtCore/QSharedPointer>
 
-#include "onlinetasks/interfaces/tasks/onlinetask.h"
+#include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
+#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/national/tasks/germanonlinetransfer.h"
 
 class AB_TRANSACTION_LIMITS;
 class AB_TRANSACTION;
@@ -19,13 +21,13 @@ class bankAccountIdentifier;
  * @brief AB_TransactionLimits_toGermanOnlineTaskSettings
  * @param aqlimits IN
  */
-QSharedPointer<onlineTask::settings> AB_TransactionLimits_toGermanOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits );
+QSharedPointer<germanOnlineTransfer::settings> AB_TransactionLimits_toGermanOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits );
 
 /**
  * @brief AB_TransactionLimits_toSepaOnlineTaskSettings
  * @param aqlimits IN
  */
-QSharedPointer<onlineTask::settings> AB_TransactionLimits_toSepaOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits );
+QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits );
 
 /**
  * @brief AB_Transaction_SetRemoteAccount

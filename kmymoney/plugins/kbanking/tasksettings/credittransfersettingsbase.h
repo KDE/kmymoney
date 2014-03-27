@@ -19,16 +19,15 @@
 #ifndef CREDITTRANSFERSETTINGSBASE_H
 #define CREDITTRANSFERSETTINGSBASE_H
 
-#include "onlinetasks/interfaces/tasks/onlinetask.h"
-
-class QValidator;
+#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/national/tasks/germanonlinetransfer.h"
 
 /**
  * @brief Base class for sepaCreditTransfer and germanCreditTransfer settings
  * 
  * @internal Both credit transfers have similar fields
  */
-class KMM_MYMONEY_EXPORT creditTransferSettingsBase : public onlineTask::settings
+class creditTransferSettingsBase : public sepaOnlineTransfer::settings, public germanOnlineTransfer::settings
 {
 public:
   creditTransferSettingsBase()
@@ -56,26 +55,45 @@ public:
   int payeeNameMinLength() const { return _payeeNameMinLength; }
 
   QString allowedChars() const { return _allowedChars; }
+  
+  virtual int endToEndReferenceLength() const { return m_endToEndReferenceLength; }
 
   // Checker
-  enum lengthStatus {
-    ok = 0,
-    tooShort  = -1,
-    tooLong = 1
-  };
-
   bool checkPurposeCharset( const QString& string ) const;
   bool checkPurposeLineLength(const QString& purpose) const;
-  lengthStatus checkPurposeLength(const QString& purpose) const;
+  validators::lengthStatus checkPurposeLength(const QString& purpose) const;
   bool checkPurposeMaxLines(const QString& purpose) const;
 
-  lengthStatus checkNameLength(const QString& name) const;
+  validators::lengthStatus checkNameLength(const QString& name) const;
   bool checkNameCharset( const QString& name ) const;
 
-  lengthStatus checkRecipientLength(const QString& name) const;
+  validators::lengthStatus checkRecipientLength(const QString& name) const;
   bool checkRecipientCharset( const QString& name ) const;
+  
+  virtual validators::lengthStatus checkEndToEndReferenceLength(const QString& reference) const;
+  
+  virtual bool isIbanValid( const QString& iban ) const;
+  
+  virtual bool checkRecipientBic( const QString& bic ) const;
+  
+  /**
+   * @brief Checks if the bic is mandatory for the given iban
+   * 
+   * For the check usually only the first two chars are needed. So you do not
+   * need to validate the IBAN.
+   * 
+   * @todo LOW: Implement, should be simple to test: if the country code in iban is the same as in origin iban and
+   * the iban belongs to a sepa country a bic is not necessary. Will change 1. Feb 2016.
+   */
+  virtual bool isBicMandatory( const QString& iban ) const;
 
+  validators::lengthStatus checkRecipientAccountNumber( const QString& accountNumber ) const;
+  
+  validators::lengthStatus checkRecipientBankCode( const QString& bankCode ) const;
+  
   // Limits setter
+  void setEndToEndReferenceLength(const int& length) { m_endToEndReferenceLength = length; }
+  
   void setPurposeLimits( const int& lines, const int& lineLength, const int& minLength )
   {
     _purposeMaxLines = lines;
@@ -102,13 +120,6 @@ public:
     _allowedChars = characters;
   }
 
-protected:
-  /** @brief checks if all lines in text are shorter than length */
-  static bool checkLineLength( const QString& text, const int& length );
-
-  /** @brief checks if text uses only charactes in allowedChars */
-  static bool checkCharset( const QString& text, const QString& allowedChars );
-
 private:
 
   /** @brief number of lines allowed in purpose */
@@ -134,6 +145,9 @@ private:
 
   /** @brief characters allowd in purpose and recipient name */
   QString _allowedChars;
+
+  /** @brief Number of chars allowed for sepa reference */
+  int m_endToEndReferenceLength;
 };
 
 #endif // CREDITTRANSFERSETTINGSBASE_H

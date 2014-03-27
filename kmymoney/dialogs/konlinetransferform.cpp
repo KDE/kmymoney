@@ -31,9 +31,6 @@
 #include "mymoney/accountidentifier.h"
 #include "mymoney/onlinejobadministration.h"
 
-#include "onlinetasks/national/ui/germancredittransferedit.h"
-#include "onlinetasks/sepa/ui/sepacredittransferedit.h"
-
 #include "models/models.h"
 
 kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
@@ -52,8 +49,9 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   ui->convertMessage->hide();
   ui->convertMessage->setWordWrap(true);
   
-  addOnlineJobEditWidget( new sepaCreditTransferEdit() );
-  addOnlineJobEditWidget( new germanCreditTransferEdit() );
+  foreach( IonlineJobEdit* widget, onlineJobAdministration::instance()->onlineJobEdits() ) {
+    addOnlineJobEditWidget(widget);
+  }
   
   connect(ui->transferTypeSelection, SIGNAL(currentIndexChanged(int)), this, SLOT(convertCurrentJob(int)));
 
@@ -244,6 +242,6 @@ void kOnlineTransferForm::showEditWidget( IonlineJobEdit* widget )
 kOnlineTransferForm::~kOnlineTransferForm()
 {
   ui->creditTransferEdit->takeWidget();
-  qDeleteAll(m_onlineJobEditWidgets);
+  //qDeleteAll(m_onlineJobEditWidgets);
   delete ui;
 }

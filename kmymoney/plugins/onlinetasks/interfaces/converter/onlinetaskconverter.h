@@ -32,6 +32,7 @@ class onlineTask;
 class onlineTaskConverter
 {
 public:
+
   /**
    * @brief Type of convertion
    * 
@@ -52,6 +53,9 @@ public:
     /** Convertion is possible without user interaction */
     convertionLoseless
   };
+  
+  onlineTaskConverter();
+  virtual ~onlineTaskConverter();
   
   /**
    * @brief List of tasks you accept to convert

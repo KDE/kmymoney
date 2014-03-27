@@ -17,3 +17,11 @@
  */
 
 #include "onlinetaskconverter.h"
+
+onlineTaskConverter::onlineTaskConverter()
+{
+}
+
+onlineTaskConverter::~onlineTaskConverter()
+{
+}

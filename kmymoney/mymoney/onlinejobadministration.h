@@ -30,10 +30,11 @@
 // Project Includes
 
 #include "onlinejob.h"
-#include "onlinejobtyped.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
+#include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
 #include "onlinetasks/interfaces/converter/onlinetaskconverter.h"
 
+class IonlineJobEdit;
 namespace KMyMoneyPlugin {
   class OnlinePluginExtended;
 }
@@ -66,6 +67,15 @@ public:
 
   /** @brief Use onlineTask::name() to create a corresponding onlineJob */
   onlineJob createOnlineJob( const QString& name, const QString& id = MyMoneyObject::emptyId() ) const;
+  
+  /**
+   * @brief Return list of IonlineJobEdits
+   * 
+   * Method is temporary!
+   * 
+   * @return I stay owner of all pointers.
+   */
+  QList<IonlineJobEdit*> onlineJobEdits();
   
   bool isJobSupported(const QString& accountId, const QString& name) const;
   bool isJobSupported(const QString& accountId, const QStringList& names) const;
@@ -118,23 +128,24 @@ public:
   /**
    * @brief Request onlineTask::settings from plugin
    *
-   * @return QSharedPointer to settings from plugin or settings with default values if error occurs
-   * (so you never get QSharedPointer::isNull() == true)
+   * @return QSharedPointer to settings from plugin, can be a null_ptr
+   * 
+   * @todo with c++ 11 this template could check if T is_abstract and default construct a value if it is not.
    */
   template<class T>
-  QSharedPointer<const T> taskSettings( const QString& taskName, const QString& accountId ) const;
+  QSharedPointer<T> taskSettings( const QString& taskId, const QString& accountId ) const;
 
   /**
    * @brief Request onlineTask::settings from plugin
    *
    * @see onlineTask::settings
    *
-   * @param taskName onlineTask::name()
+   * @param taskId onlineTask::name()
    * @param accountId MyMoneyAccount.id()
    * @return QSharedPointer to settings. QSharedPointer::isNull() is true if an error occurs
    * (e.g. plugin does not support the task).
    */
-  QSharedPointer<const onlineTask::settings> taskSettings( const QString& taskName, const QString& accountId ) const;
+  QSharedPointer<IonlineTaskSettings> taskSettings( const QString& taskId, const QString& accountId ) const;
 
 signals:
     
@@ -152,6 +163,11 @@ public slots:
    * @param converter the converter to register, I take ownership
    */
   void registerOnlineTaskConverter( onlineTaskConverter *const converter );
+  
+  /**
+   * @brief Make an onlineJob editor available
+   */
+  void registerOnlineTaskEdit( IonlineJobEdit *const editor );
     
 private:
   static onlineJobAdministration m_instance;
@@ -177,6 +193,13 @@ private:
   
   // Must be able to call createOnlineTaskByXml
   friend class onlineJob;
+  
+  // Must be able to call createOnlineTask
+  template<class T>
+  friend class onlineJobTyped;
+  
+  // Must be able to call task creators
+  friend class taskConverterGermanToSepa;
   
   /**
    * @brief Get root instance of an onlineTask
@@ -206,18 +229,23 @@ private:
    * Key is the task the converter converts to
    */
   QMultiMap<QString, onlineTaskConverter*> m_onlineTaskConverter;
+  
+  /**
+   * Intances of editors
+   */
+  QList<IonlineJobEdit*> m_onlineTaskEditors;
 };
 
 template<class T>
-QSharedPointer<const T> onlineJobAdministration::taskSettings( const QString& taskName, const QString& accountId ) const
+QSharedPointer<T> onlineJobAdministration::taskSettings( const QString& taskName, const QString& accountId ) const
 {
-  QSharedPointer<const onlineTask::settings> settings = taskSettings( taskName, accountId );
+  IonlineTaskSettings::ptr settings = taskSettings( taskName, accountId );
   if ( !settings.isNull() ) {
-    QSharedPointer<const T> settingsFinal = settings.dynamicCast<const T>();
+    QSharedPointer<T> settingsFinal = settings.dynamicCast<T>();
     if ( Q_LIKELY( !settingsFinal.isNull() ) ) // This can only happen if the onlinePlugin has a bug.
       return settingsFinal;
   }
-  return QSharedPointer<const T>( new T() );
+  return QSharedPointer<T>();
 }
 
 #if 0

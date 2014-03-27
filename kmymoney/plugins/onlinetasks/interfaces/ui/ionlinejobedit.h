@@ -27,7 +27,7 @@
  * @brief Interface for widgets editing onlineTasks
  * 
  */
-class IonlineJobEdit : public QWidget
+class KMM_MYMONEY_EXPORT IonlineJobEdit : public QWidget
 {
   Q_OBJECT
 
@@ -48,7 +48,7 @@ public:
   /**
    * @brief Checks if the user input would generate a valid onlineJob
    */
-  virtual bool isValid() const { return getOnlineJob().isValid(); }
+  virtual bool isValid() const = 0;
   
   /**
    * @brief List of supported onlineTasks
@@ -78,7 +78,6 @@ public slots:
 signals:
   /**
    * @brief Emitted if a job which transfers money changed it's value
-   * 
    */
   void transferValueChanged( MyMoneyMoney );
   
@@ -88,25 +87,6 @@ signals:
    * @param valid status of onlineJob.isValid()
    */
   void validityChanged( bool valid );
-  
-protected slots:
-  /**
-   * @brief Convenient slot to emit validityChanged()
-   * 
-   * A default implementation to emit validityChanged() based on getOnlineJob().isValid().
-   * This is useful if you use @a kMandatoryFieldsGroup in your widget. Just connect kMandatoryFieldsGroup::stateChanged(bool)
-   * to this slot.
-   * 
-   * @param status if false, validityChanged(false) is emitted without further checks.
-   */
-  void requiredFieldsCompleted( const bool& status = true )
-  { 
-    if ( status ) {
-      emit validityChanged( getOnlineJob().isValid() );
-    } else {
-      emit validityChanged( false );
-    }
-  }
 
 };
 

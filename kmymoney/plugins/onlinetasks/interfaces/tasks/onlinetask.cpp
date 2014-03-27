@@ -25,11 +25,3 @@ onlineTask::onlineTask(const onlineTask &other)
 {
   Q_UNUSED(other);
 }
-
-/**void onlineJob::setState( jobState new_state )
-{
-  m_state = new_state;
-}*/
-
-onlineTask::settings::~settings()
-{}
