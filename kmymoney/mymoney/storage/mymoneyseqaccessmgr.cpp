@@ -1205,6 +1205,17 @@ void MyMoneySeqAccessMgr::loadPrices(const MyMoneyPriceList& list)
 void MyMoneySeqAccessMgr::loadOnlineJobs(const QMap< QString, onlineJob >& onlineJobs)
 {
   m_onlineJobList = onlineJobs;
+  QString lastId("");
+  const QMap< QString, onlineJob >::const_iterator end = onlineJobs.constEnd();
+  for (QMap< QString, onlineJob >::const_iterator iter = onlineJobs.constBegin(); iter != end; ++iter) {
+    if ((*iter).id() > lastId)
+      lastId = (*iter).id();
+  }
+  
+  const int pos = lastId.indexOf(QRegExp("\\d+"), 0);
+  if (pos != -1) {
+    m_nextOnlineJobID = lastId.mid(pos).toInt();
+  }
 }
 
 void MyMoneySeqAccessMgr::loadAccountId(const unsigned long id)
