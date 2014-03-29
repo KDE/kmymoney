@@ -273,7 +273,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 9
   m_reportsView = new KReportsView();
   m_reportsViewFrame = m_model->addPage(m_reportsView, i18n("Reports"));
-  m_reportsViewFrame->setIcon(KIcon("view-statistics"));
+  m_reportsViewFrame->setIcon(KIcon("office-chart-bar"));
   connect(m_reportsView, SIGNAL(ledgerSelected(QString,QString)),
           this, SLOT(slotLedgerSelected(QString,QString)));
   connect(m_reportsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));

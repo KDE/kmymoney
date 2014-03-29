@@ -656,7 +656,7 @@ void KMyMoneyApp::initActions(void)
 
   KAction *account_chart = actionCollection()->addAction("account_chart");
   account_chart->setText(i18n("Show balance chart..."));
-  account_chart->setIcon(KIcon("view-statistics"));
+  account_chart->setIcon(KIcon("office-chart-line"));
   connect(account_chart, SIGNAL(triggered()), this, SLOT(slotAccountChart()));
 
   KAction *account_online_map = actionCollection()->addAction("account_online_map");
@@ -2406,7 +2406,7 @@ void KMyMoneyApp::slotSettings(void)
   dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "view-pim-calendar");
 #endif
   dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "preferences-system-network");
-  dlg->addPage(reportsPage, i18nc("Report settings", "Reports"), "view-statistics");
+  dlg->addPage(reportsPage, i18nc("Report settings", "Reports"), "office-chart-bar");
   dlg->addPage(forecastPage, i18nc("Forecast settings", "Forecast"), "view-financial-forecast");
   dlg->addPage(encryptionPage, i18n("Encryption"), "kgpg");
   dlg->addPage(colorsPage, i18n("Colors"), "preferences-desktop-color");
