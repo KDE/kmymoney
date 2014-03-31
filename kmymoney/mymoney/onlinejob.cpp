@@ -101,6 +101,8 @@ void onlineJob::copyPointerFromOtherJob(const onlineJob &other)
 
 onlineJob onlineJob::operator = (const onlineJob& other)
 {
+  if ( this == &other )
+    return *this;
   delete m_task;
   m_id = other.m_id;
   m_jobSend = other.m_jobSend;
