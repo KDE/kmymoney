@@ -241,6 +241,7 @@ public:
   const QMap<QString, MyMoneyInstitution> fetchInstitutions(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyPayee> fetchPayees(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyTag> fetchTags(const QStringList& idList = QStringList(), bool forUpdate = false) const;
+  const QMap<QString, onlineJob> fetchOnlineJobs(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const MyMoneyPriceList fetchPrices(const QStringList& fromIdList = QStringList(), const QStringList& toIdList = QStringList(), bool forUpdate = false) const;
   const MyMoneyPrice fetchSinglePrice(const QString& fromIdList, const QString& toIdList, const QDate& date, bool exactDate, bool forUpdate = false) const;
   const QMap<QString, MyMoneyReport> fetchReports(const QStringList& idList = QStringList(), bool forUpdate = false) const;
@@ -275,6 +276,7 @@ public:
   long unsigned getNextInstitutionId() const;
   long unsigned getNextPayeeId() const;
   long unsigned getNextTagId() const;
+  long unsigned getNextOnlineJobId() const;
   long unsigned getNextReportId() const;
   long unsigned getNextScheduleId() const;
   long unsigned getNextSecurityId() const;
@@ -285,6 +287,7 @@ public:
   long unsigned incrementInstitutionId();
   long unsigned incrementPayeeId();
   long unsigned incrementTagId();
+  long unsigned incrementOnlineJobId();
   long unsigned incrementReportId();
   long unsigned incrementScheduleId();
   long unsigned incrementSecurityId();
@@ -294,6 +297,7 @@ public:
   void loadTransactionId(const unsigned long& id);
   void loadPayeeId(const unsigned long& id);
   void loadTagId(const unsigned long& id);
+  void loadOnlineJobId(const unsigned long& id);
   void loadInstitutionId(const unsigned long& id);
   void loadScheduleId(const unsigned long& id);
   void loadSecurityId(const unsigned long& id);

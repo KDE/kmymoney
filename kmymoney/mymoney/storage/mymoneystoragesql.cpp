@@ -2879,6 +2879,12 @@ void MyMoneyStorageSql::readTags(const QList<QString>& pid)
 //  if (pid.isEmpty()) m_tagListRead = true;
 }
 
+const QMap<QString, onlineJob> fetchOnlineJobs(const QStringList& idList = QStringList(), bool forUpdate = false) const
+{
+  DBG("*** Entering MyMoneyStorageSql::fetchOnlineJobs");
+  //TODO: implement
+}
+
 const QMap<QString, MyMoneyTag> MyMoneyStorageSql::fetchTags(const QStringList& idList, bool /*forUpdate*/) const
 {
   DBG("*** Entering MyMoneyStorageSql::fetchTags");

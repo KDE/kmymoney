@@ -371,6 +371,59 @@ const QList<MyMoneyTag> MyMoneyDatabaseMgr::tagList(void) const
     return QList<MyMoneyTag> ();
 }
 
+void MyMoneyDatabaseMgr::modifyOnlineJob(const onlineJob& job)
+{
+  Q_UNUSED(job);
+  //TODO: add code here similar to other data types
+}
+
+void MyMoneyDatabaseMgr::addOnlineJob( onlineJob& job )
+{
+  Q_UNUSED(job);
+  //TODO: add code here similar to other data types
+}
+
+const onlineJob MyMoneyDatabaseMgr::getOnlineJob(const QString &jobId) const
+{
+  if (id.isEmpty()) {
+    throw MYMONEYEXCEPTION("empty online job id");
+  }
+
+  if (m_sql) {
+    if (! m_sql->isOpen())((QSqlDatabase*)(m_sql.data()))->open();
+    QMap <QString, onlineJob> jobList = m_sql->fetchOnlineJobs(QStringList(id));
+    QMap <QString, onlineJob>::ConstIterator pos = jobList.constFind(id);
+
+    // locate the account and if present, return it's data
+    if (pos != jobList.constEnd())
+      return *pos;
+  } else {
+    throw MYMONEYEXCEPTION("No database connected");
+  }
+
+  // throw an exception, if it does not exist
+  QString msg = "Unknown online job id '" + id + '\'';
+  throw MYMONEYEXCEPTION(msg);
+}
+
+long unsigned int MyMoneyDatabaseMgr::onlineJobId() const
+{
+  //return m_sql->getNextOnlineJobId();
+  //TODO: implement this
+  return 1;
+}
+
+const QList<onlineJob> MyMoneyDatabaseMgr::onlineJobList() const
+{
+  //TODO: add code here similar to other data types
+  return QList<onlineJob>();
+}
+
+void MyMoneyDatabaseMgr::removeOnlineJob( const onlineJob& )
+{
+  //TODO: add code here similar to other data types
+}
+
 const MyMoneyAccount MyMoneyDatabaseMgr::account(const QString& id) const
 {
   if (id.isEmpty()) {

@@ -208,12 +208,12 @@ public:
   virtual const QList<MyMoneyTag> tagList(void) const;
 
   /** @todo implement all onlineJob related functions @{ */
-  void modifyOnlineJob(const onlineJob& job) { Q_UNUSED(job); }
-  void addOnlineJob( onlineJob& job ) { Q_UNUSED(job); }
-  const onlineJob getOnlineJob(const QString &jobId) const { Q_UNUSED(jobId); return onlineJob(); }
-  long unsigned int onlineJobId() const { return 0; }
-  const QList<onlineJob> onlineJobList() const { return QList<onlineJob>(); }
-  void removeOnlineJob( const onlineJob& ) { }
+  void modifyOnlineJob(const onlineJob& job);
+  void addOnlineJob( onlineJob& job );
+  const onlineJob getOnlineJob(const QString &jobId) const;
+  long unsigned int onlineJobId() const;
+  const QList<onlineJob> onlineJobList() const;
+  void removeOnlineJob( const onlineJob& );
   /** @} */
 
   /**
