@@ -23,6 +23,8 @@
 
 #include "autotest.h"
 
+#include "onlinetasks/dummy/tasks/dummytask.h"
+
 QTEST_MAIN(MyMoneyDatabaseMgrTest)
 
 MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
@@ -65,6 +67,7 @@ void MyMoneyDatabaseMgrTest::testEmptyConstructor()
   QVERIFY(m->nextPayeeID() == 0);
   QVERIFY(m->nextScheduleID() == 0);
   QVERIFY(m->nextReportID() == 0);
+  QVERIFY(m->nextOnlineJobID() == 0);
   QVERIFY(m->institutionList().count() == 0);
 
   QList<MyMoneyAccount> accList;
@@ -240,6 +243,7 @@ void MyMoneyDatabaseMgrTest::testSupportFunctions()
     QVERIFY(m->nextTagID() == "G000001");
     QVERIFY(m->nextScheduleID() == "SCH000001");
     QVERIFY(m->nextReportID() == "R000001");
+    QVERIFY(m->nextOnlineJobID() == "O000001");
 
     QVERIFY(m->liability().name() == "Liability");
     QVERIFY(m->asset().name() == "Asset");
@@ -2304,5 +2308,104 @@ void MyMoneyDatabaseMgrTest::testAccountList()
   m->accountList(accounts);
   QVERIFY(accounts.count() == 2);
 }
+
+void MyMoneyDatabaseMgrTest::testAddOnlineJob()
+{
+  testAttachDb();
+
+  if (!m_canOpen) {
+    std::cout << "Database test skipped because no database could be opened." << std::endl;
+    return;
+  }
+
+  // Add a onlineJob
+  onlineJob job(new dummyTask());
+  QCOMPARE(job.id(), QString("O000001"));
+
+  QVERIFY(m->onlineJobList().count() == 0);
+  m->setDirty();
+
+  try {
+    m->addOnlineJob(job);
+
+    QVERIFY(m->onlineJobList().count() == 1);
+    QVERIFY((*(m->onlineJobList().begin())).id() == "O000001");
+
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  // Try to re-add the same job. It should fail.
+  m->setDirty();
+  try {
+    m->addOnlineJob(job);
+    QFAIL("Expected exception missing");
+  } catch (const MyMoneyException &) {
+    QVERIFY(m->dirty() == false);
+  }
+
+void MyMoneyDatabaseMgrTest::testModifyOnlineJob()
+{
+  testAttachDb();
+
+  if (!m_canOpen) {
+    std::cout << "Database test skipped because no database could be opened." << std::endl;
+    return;
+  }
+
+  onlineJob job(new dummyTask());
+  testAddOnlineJob();
+  m->setDirty();
+  // update online job
+  try {
+    m->modifyOnlineJob(job);
+    QVERIFY(m->onlineJobList().count() == 1);
+    //QVERIFY((*(m->onlineJobList().begin())).name() == "EURO");
+    QVERIFY((*(m->onlineJobList().begin())).id() == "O000001");
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  m->setDirty();
+
+  onlineJob unknownJob(new dummyTask());
+  try {
+    m->modifyOnlineJob(unknownJob);
+    QFAIL("Expected exception missing");
+  } catch (const MyMoneyException &) {
+    QVERIFY(m->dirty() == false);
+  }
+}
+
+void MyMoneyDatabaseMgrTest::testRemoveOnlineJob()
+{
+  testAttachDb();
+
+  if (!m_canOpen) {
+    std::cout << "Database test skipped because no database could be opened." << std::endl;
+    return;
+  }
+
+  onlineJob job(new dummyTask());
+  testAddOnlineJob();
+  m->setDirty();
+  try {
+    m->removeOnlineJob(job);
+    QVERIFY(m->onlineJobList().count() == 0);
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  m->setDirty();
+
+  onlineJob unknownJob(new dummyTask());
+  try {
+    m->removeOnlineJob(unknownJob);
+    QFAIL("Expected exception missing");
+  } catch (const MyMoneyException &) {
+    QVERIFY(m->dirty() == false);
+  }
+}
+
 #include "mymoneydatabasemgrtest.moc"
 

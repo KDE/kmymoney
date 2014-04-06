@@ -42,7 +42,7 @@ IF( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneydatabasemgrtest TESTNAME kmymoney-mymoneydatabasemgrtest ${mymoneydatabasemgrtest_SRCS} )
   ADD_DEPENDENCIES( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage )
 
-  target_link_libraries( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage ${target_link_libraries_test} )
+  target_link_libraries( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage onlinetask_interfaces ${target_link_libraries_test} )
 
   # MyMoneyMap
   set( mymoneymaptest_SRCS mymoneymaptest.cpp ../mymoneytestutils.cpp )
