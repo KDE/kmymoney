@@ -426,6 +426,7 @@ private:
   TABLE(Currencies)
   TABLE(Reports)
   TABLE(Budgets)
+  TABLE(OnlineJobs)
   VIEW(Balances)
 protected:
   QMap<QString, MyMoneyDbTable> m_tables;

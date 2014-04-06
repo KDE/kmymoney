@@ -54,6 +54,7 @@ MyMoneyDbDef::MyMoneyDbDef()
   Reports();
   Budgets();
   Balances();
+  //OnlineJobs();
 }
 
 /* PRIMARYKEY - these fields combine to form a unique key field on which the db will create an index
@@ -349,6 +350,18 @@ void MyMoneyDbDef::Reports(void)
   appendField(MyMoneyDbTextColumn("XML", MyMoneyDbTextColumn::LONG));
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL, 6));
   MyMoneyDbTable t("kmmReportConfig", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
+void MyMoneyDbDef::OnlineJobs(void)
+{
+  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+
+  // Add appropriate fields for Online Jobs here
+  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL, 6));
+
+  MyMoneyDbTable t("kmmOnlineJobs", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
 }
