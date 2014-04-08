@@ -61,6 +61,13 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="KPushButton" name="m_mergeButton">
+             <property name="text">
+              <string>Merge</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>

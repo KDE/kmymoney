@@ -137,10 +137,18 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   KGuiItem deleteButtonItem(QString(""),
                             KIcon("list-remove-user"),
-                            i18n("Delete the current selected payee"),
-                            i18n("Use this to delete the selected payee."));
+                            i18n("Delete selected payee(s)"),
+                            i18n("Use this to delete the selected payee. You can also select "
+                                 "multiple payees to be deleted."));
   m_deleteButton->setGuiItem(deleteButtonItem);
   m_deleteButton->setToolTip(deleteButtonItem.toolTip());
+
+  KGuiItem mergeButtonItem(QString(""),
+                           KIcon("merge"),
+                           i18n("Merge multiple selected payees"),
+                           i18n("Use this to merge multiple selected payees."));
+  m_mergeButton->setGuiItem(mergeButtonItem);
+  m_mergeButton->setToolTip(mergeButtonItem.toolTip());
 
   KGuiItem updateButtonItem(i18nc("Update payee", "Update"),
                             KIcon("dialog-ok"),
@@ -177,6 +185,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   connect(m_renameButton, SIGNAL(clicked()), this, SLOT(slotRenameButtonCliked()));
   connect(m_deleteButton, SIGNAL(clicked()), kmymoney->action("payee_delete"), SLOT(trigger()));
+  connect(m_mergeButton, SIGNAL(clicked()), kmymoney->action("payee_merge"), SLOT(trigger()));
   connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotPayeeNew()));
 
   connect(addressEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
@@ -211,8 +220,9 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   //At start we haven't any payee selected
   m_tabWidget->setEnabled(false); // disable tab widget
-  m_deleteButton->setEnabled(false); //disable delete and rename button
+  m_deleteButton->setEnabled(false); //disable delete, rename and merge buttons
   m_renameButton->setEnabled(false);
+  m_mergeButton->setEnabled(false);
   m_payee = MyMoneyPayee(); // make sure we don't access an undefined payee
   clearItemData();
 }
@@ -383,18 +393,22 @@ void KPayeesView::slotSelectPayee(void)
       m_inSelection = false;
     }
   }
+
+  // make sure we always clear the selected list when listing again
+  m_selectedPayeesList.clear();
+
   // loop over all payees and count the number of payees, also
   // obtain last selected payee
-  QList<MyMoneyPayee> payeesList;
-  selectedPayees(payeesList);
+  selectedPayees(m_selectedPayeesList);
 
-  emit selectObjects(payeesList);
+  emit selectObjects(m_selectedPayeesList);
 
-  if (payeesList.isEmpty()) {
+  if (m_selectedPayeesList.isEmpty()) {
     m_tabWidget->setEnabled(false); // disable tab widget
     m_balanceLabel->hide();
-    m_deleteButton->setEnabled(false); //disable delete and rename button
+    m_deleteButton->setEnabled(false); //disable delete, rename and merge buttons
     m_renameButton->setEnabled(false);
+    m_mergeButton->setEnabled(false);
     clearItemData();
     m_payee = MyMoneyPayee();
     return; // make sure we don't access an undefined payee
@@ -403,12 +417,16 @@ void KPayeesView::slotSelectPayee(void)
   m_deleteButton->setEnabled(true); //re-enable delete button
 
   // if we have multiple payees selected, clear and disable the payee information
-  if (payeesList.count() > 1) {
+  if (m_selectedPayeesList.count() > 1) {
     m_tabWidget->setEnabled(false); // disable tab widget
     m_renameButton->setEnabled(false); // disable also the rename button
+    m_mergeButton->setEnabled(true);
     m_balanceLabel->hide();
     clearItemData();
-  } else m_renameButton->setEnabled(true);
+  } else {
+    m_mergeButton->setEnabled(false);
+    m_renameButton->setEnabled(true);
+  }
 
   // otherwise we have just one selected, enable payee information widget
   m_tabWidget->setEnabled(true);
@@ -418,7 +436,7 @@ void KPayeesView::slotSelectPayee(void)
   // selection mode of the QListView has been changed to Extended, this
   // will also be the only selection and behave exactly as before - Andreas
   try {
-    m_payee = payeesList[0];
+    m_payee = m_selectedPayeesList[0];
 
     m_newName = m_payee.name();
 
@@ -451,6 +469,7 @@ void KPayeesView::slotSelectPayee(void)
   } catch (const MyMoneyException &e) {
     qDebug("exception during display of payee: %s at %s:%ld", qPrintable(e.what()), qPrintable(e.file()), e.line());
     m_register->clear();
+    m_selectedPayeesList.clear();
     m_payee = MyMoneyPayee();
   }
   m_allowEditing = true;
@@ -478,14 +497,19 @@ void KPayeesView::showTransactions(void)
   // clear the register
   m_register->clear();
 
-  if (m_payee.id().isEmpty() || !m_tabWidget->isEnabled()) {
+  if (m_selectedPayeesList.isEmpty() || !m_tabWidget->isEnabled()) {
     m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
     return;
   }
 
   // setup the list and the pointer vector
   MyMoneyTransactionFilter filter;
-  filter.addPayee(m_payee.id());
+
+  for (QList<MyMoneyPayee>::const_iterator it = m_selectedPayeesList.constBegin();
+       it != m_selectedPayeesList.constEnd();
+       ++it)
+    filter.addPayee((*it).id());
+
   filter.setDateFilter(KMyMoneyGlobalSettings::startDate().date(), QDate());
 
   // retrieve the list from the engine

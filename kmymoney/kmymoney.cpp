@@ -941,6 +941,11 @@ void KMyMoneyApp::initActions(void)
   payee_delete->setIcon(KIcon("list-remove-user"));
   connect(payee_delete, SIGNAL(triggered()), this, SLOT(slotPayeeDelete()));
 
+  KAction *payee_merge = actionCollection()->addAction("payee_merge");
+  payee_merge->setText(i18n("Merge payees"));
+  payee_merge->setIcon(KIcon("merge"));
+  connect(payee_merge, SIGNAL(triggered()), this, SLOT(slotPayeeMerge()));
+
   //Tags
   KAction *tag_new = actionCollection()->addAction("tag_new");
   tag_new->setText(i18n("New tag"));
@@ -4476,7 +4481,7 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
   return rc;
 }
 
-void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
+bool KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
 {
   bool doit = true;
 
@@ -4518,8 +4523,10 @@ void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(this, i18n("Unable to add payee"),
                                  i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      doit = false;
     }
   }
+  return doit;
 }
 
 void KMyMoneyApp::slotPayeeNew(void)
@@ -4552,19 +4559,6 @@ void KMyMoneyApp::slotPayeeDelete(void)
   if (d->m_selectedPayees.isEmpty())
     return; // shouldn't happen
 
-  MyMoneyFile * file = MyMoneyFile::instance();
-
-  // first create list with all non-selected payees
-  QList<MyMoneyPayee> remainingPayees = file->payeeList();
-  QList<MyMoneyPayee>::iterator it_p;
-  for (it_p = remainingPayees.begin(); it_p != remainingPayees.end();) {
-    if (d->m_selectedPayees.contains(*it_p)) {
-      it_p = remainingPayees.erase(it_p);
-    } else {
-      ++it_p;
-    }
-  }
-
   // get confirmation from user
   QString prompt;
   if (d->m_selectedPayees.size() == 1)
@@ -4574,6 +4568,30 @@ void KMyMoneyApp::slotPayeeDelete(void)
 
   if (KMessageBox::questionYesNo(this, prompt, i18n("Remove Payee")) == KMessageBox::No)
     return;
+
+  payeeReassign(KPayeeReassignDlg::TypeDelete);
+}
+
+void KMyMoneyApp::slotPayeeMerge(void)
+{
+  if (d->m_selectedPayees.size() < 1)
+    return; // shouldn't happen
+
+  if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to merge the selected payees"),
+                                 i18n("Merge Payees")) == KMessageBox::No)
+    return;
+
+  if (payeeReassign(KPayeeReassignDlg::TypeMerge))
+    // clean selection since we just deleted the selected payees
+    slotSelectPayees(QList<MyMoneyPayee>());
+}
+
+bool KMyMoneyApp::payeeReassign(int type)
+{
+  if (!(type >= 0 && type < KPayeeReassignDlg::TypeCount))
+    return false;
+
+  MyMoneyFile * file = MyMoneyFile::instance();
 
   MyMoneyFileTransaction ft;
   try {
@@ -4624,24 +4642,55 @@ void KMyMoneyApp::slotPayeeDelete(void)
     bool addToMatchList = false;
     // if at least one payee is still referenced, we need to reassign its transactions first
     if (!translist.isEmpty() || !used_schedules.isEmpty() || !usedAccounts.isEmpty()) {
+
+      // first create list with all non-selected payees
+      QList<MyMoneyPayee> remainingPayees;
+      if (type == KPayeeReassignDlg::TypeMerge) {
+        remainingPayees = d->m_selectedPayees;
+      } else {
+        remainingPayees = file->payeeList();
+        QList<MyMoneyPayee>::iterator it_p;
+        for (it_p = remainingPayees.begin(); it_p != remainingPayees.end();) {
+          if (d->m_selectedPayees.contains(*it_p)) {
+            it_p = remainingPayees.erase(it_p);
+          } else {
+            ++it_p;
+          }
+        }
+      }
+
       // show error message if no payees remain
       if (remainingPayees.isEmpty()) {
         KMessageBox::sorry(this, i18n("At least one transaction/scheduled transaction or loan account is still referenced by a payee. "
                                       "Currently you have all payees selected. However, at least one payee must remain so "
                                       "that the transaction/scheduled transaction or loan account can be reassigned."));
-        return;
+        return false;
       }
 
       // show transaction reassignment dialog
-      KPayeeReassignDlg * dlg = new KPayeeReassignDlg(this);
+      KPayeeReassignDlg * dlg = new KPayeeReassignDlg(static_cast<KPayeeReassignDlg::OperationType>(type), this);
       KMyMoneyGlobalSettings::setSubstringSearch(dlg);
       QString payee_id = dlg->show(remainingPayees);
       addToMatchList = dlg->addToMatchList();
       delete dlg; // and kill the dialog
       if (payee_id.isEmpty())
-        return; // the user aborted the dialog, so let's abort as well
+        return false; // the user aborted the dialog, so let's abort as well
 
-      newPayee = file->payee(payee_id);
+      // try to get selected payee. If not possible and we are merging payees,
+      // then we create a new one
+      try {
+        newPayee = file->payee(payee_id);
+      } catch (const MyMoneyException &e) {
+        if (type == KPayeeReassignDlg::TypeMerge) {
+          // it's ok to use payee_id for both arguments since the first is const,
+          // so it's garantee not to change its content
+          if (!slotPayeeNew(payee_id, payee_id))
+            return false; // the user aborted the dialog, so let's abort as well
+          newPayee = file->payee(payee_id);
+        } else {
+          return false;
+        }
+      }
 
       // TODO : check if we have a report that explicitively uses one of our payees
       //        and issue an appropriate warning
@@ -4692,7 +4741,12 @@ void KMyMoneyApp::slotPayeeDelete(void)
         KMessageBox::detailedSorry(0, i18n("Unable to reassign payee of transaction/split"),
                                    i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
       }
-    } // if !translist.isEmpty()
+    } else { // if !translist.isEmpty()
+      if (type == KPayeeReassignDlg::TypeMerge) {
+        KMessageBox::sorry(this, i18n("Nothing to merge."), i18n("Merge Payees"));
+        return false;
+      }
+    }
 
     bool ignorecase;
     QStringList payeeNames;
@@ -4702,10 +4756,12 @@ void KMyMoneyApp::slotPayeeDelete(void)
     // now loop over all selected payees and remove them
     for (QList<MyMoneyPayee>::iterator it = d->m_selectedPayees.begin();
          it != d->m_selectedPayees.end(); ++it) {
-      if (addToMatchList) {
-        deletedPayeeNames << (*it).name();
+      if (newPayee.id() != (*it).id()) {
+        if (addToMatchList) {
+          deletedPayeeNames << (*it).name();
+        }
+        file->removePayee(*it);
       }
-      file->removePayee(*it);
     }
 
     // if we initially have no matching turned on, we just ignore the case (default)
@@ -4748,6 +4804,8 @@ void KMyMoneyApp::slotPayeeDelete(void)
     KMessageBox::detailedSorry(0, i18n("Unable to remove payee(s)"),
                                i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
   }
+
+  return true;
 }
 
 void KMyMoneyApp::slotTagNew(const QString& newnameBase, QString& id)
@@ -6133,6 +6191,7 @@ void KMyMoneyApp::slotUpdateActions(void)
 
   action("payee_delete")->setEnabled(false);
   action("payee_rename")->setEnabled(false);
+  action("payee_merge")->setEnabled(false);
 
   action("tag_delete")->setEnabled(false);
   action("tag_rename")->setEnabled(false);
@@ -6427,6 +6486,7 @@ void KMyMoneyApp::slotUpdateActions(void)
 
   if (d->m_selectedPayees.count() >= 1) {
     action("payee_rename")->setEnabled(d->m_selectedPayees.count() == 1);
+    action("payee_merge")->setEnabled(d->m_selectedPayees.count() > 1);
     action("payee_delete")->setEnabled(true);
   }
 

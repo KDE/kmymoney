@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="39" name="kmymoney" >
+<kpartgui version="40" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <Action append="open_merge" name="open_database" />
@@ -163,6 +163,7 @@
   <Action name="payee_new" />
   <Action name="payee_rename" />
   <Action name="payee_delete" />
+  <Action name="payee_merge" />
  </Menu>
  <Menu name="tag_context_menu">
   <title>Tag options</title>

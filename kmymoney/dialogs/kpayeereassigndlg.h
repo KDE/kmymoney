@@ -50,8 +50,15 @@ class KPayeeReassignDlg : public KPayeeReassignDlgDecl
 {
   Q_OBJECT
 public:
+  /** Change behavior based on type of operation */
+  enum OperationType {
+    TypeMerge = 0,
+    TypeDelete,
+    TypeCount,
+  };
+
   /** Default constructor */
-  KPayeeReassignDlg(QWidget* parent = 0);
+  KPayeeReassignDlg(OperationType type, QWidget* parent = 0);
 
   /** Destructor */
   ~KPayeeReassignDlg();
@@ -77,6 +84,9 @@ public:
 
 protected:
   void accept(void);
+
+private:
+  OperationType m_type;
 
 };
 

@@ -275,12 +275,17 @@ protected slots:
 
   /**
     */
-  void slotPayeeNew(const QString& newnameBase, QString& id);
+  bool slotPayeeNew(const QString& newnameBase, QString& id);
   void slotPayeeNew(void);
 
   /**
     */
   void slotPayeeDelete(void);
+
+  /**
+    * Slot that merges two or more selected payess into a new payee
+    */
+  void slotPayeeMerge(void);
 
   /**
     */
@@ -1115,6 +1120,11 @@ private:
     * @returns see return values of KMessageBox::warningYesNoCancel()
     */
   int askSaveOnClose(void);
+
+  /**
+    * Implement common task when deleting or merging payees
+    */
+  bool payeeReassign(int type);
 
 signals:
   /**
