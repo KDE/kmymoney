@@ -4577,7 +4577,7 @@ void KMyMoneyApp::slotPayeeMerge(void)
   if (d->m_selectedPayees.size() < 1)
     return; // shouldn't happen
 
-  if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to merge the selected payees"),
+  if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to merge the selected payees?"),
                                  i18n("Merge Payees")) == KMessageBox::No)
     return;
 
