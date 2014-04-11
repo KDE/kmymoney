@@ -39,9 +39,9 @@
 #include <kguiutils.h>
 
 /** This lookup table needs to be in sync with KPayeeReassignDlg::OperationType enum */
-static const QString labelText[KPayeeReassignDlg::TypeCount] = {
-  i18n("To be able to merge previous selected payees, please select a payee from the list below or create a new one."),
-  i18n("The transactions associated with the selected payees need to be re-assigned to a different payee before the selected payees can be deleted. Please select a payee from the list below."),
+static const char * labelText[KPayeeReassignDlg::TypeCount] = {
+  I18N_NOOP("To be able to merge previous selected payees, please select a payee from the list below or create a new one."),
+  I18N_NOOP("The transactions associated with the selected payees need to be re-assigned to a different payee before the selected payees can be deleted. Please select a payee from the list below."),
 };
 
 KPayeeReassignDlg::KPayeeReassignDlg(KPayeeReassignDlg::OperationType type, QWidget* parent) :
@@ -53,7 +53,7 @@ KPayeeReassignDlg::KPayeeReassignDlg(KPayeeReassignDlg::OperationType type, QWid
   kMandatoryFieldGroup* mandatory = new kMandatoryFieldGroup(this);
   mandatory->add(payeeCombo);
   mandatory->setOkButton(buttonOk);
-  textLabel1->setText(labelText[m_type]);
+  textLabel1->setText(i18n(labelText[m_type]));
 }
 
 KPayeeReassignDlg::~KPayeeReassignDlg()
