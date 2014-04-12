@@ -1167,18 +1167,15 @@ bool KMyMoneyApp::queryClose(void)
 
     if (ans == KMessageBox::Cancel)
       return false;
-    else if (ans == KMessageBox::Yes)
-      return slotFileSave();
+    else if (ans == KMessageBox::Yes) {
+      bool saved = slotFileSave();
+      saveOptions();
+      return saved;
+    }
   }
   if (d->m_myMoneyView->isDatabase())
     slotFileClose(); // close off the database
-  return true;
-}
-
-bool KMyMoneyApp::queryExit(void)
-{
   saveOptions();
-
   return true;
 }
 
