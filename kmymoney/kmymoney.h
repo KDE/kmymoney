@@ -712,9 +712,6 @@ public slots:
   /** */
   void slotFileNew(void);
 
-  /** Open a new window */
-  void slotFileNewWindow(void);
-
   /** open a file and load it into the document*/
   void slotFileOpen(void);
 

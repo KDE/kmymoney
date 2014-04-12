@@ -2649,13 +2649,6 @@ void KMyMoneyApp::slotProcessExited(void)
   }
 }
 
-void KMyMoneyApp::slotFileNewWindow(void)
-{
-  KMyMoneyApp *newWin = new KMyMoneyApp;
-
-  newWin->show();
-}
-
 void KMyMoneyApp::slotShowTipOfTheDay(void)
 {
   KTipDialog::showTip(d->m_myMoneyView, "", true);
