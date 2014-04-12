@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>643</width>
-    <height>402</height>
+    <width>726</width>
+    <height>425</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -96,7 +96,7 @@
          </sizepolicy>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -362,7 +362,7 @@
                 <bool>true</bool>
                </property>
                <attribute name="buttonGroup">
-                <string>m_matchType</string>
+                <string notr="true">m_matchType</string>
                </attribute>
               </widget>
              </item>
@@ -372,7 +372,7 @@
                 <string>Match on Payee name</string>
                </property>
                <attribute name="buttonGroup">
-                <string>m_matchType</string>
+                <string notr="true">m_matchType</string>
                </attribute>
               </widget>
              </item>
@@ -382,7 +382,7 @@
                 <string>Match on a name listed below</string>
                </property>
                <attribute name="buttonGroup">
-                <string>m_matchType</string>
+                <string notr="true">m_matchType</string>
                </attribute>
               </widget>
              </item>
@@ -482,6 +482,23 @@ new transactions with this payee</string>
              </size>
             </property>
            </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_bankaccount">
+         <attribute name="title">
+          <string>Bank Account</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="KBankAccountsView" name="widget" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -585,6 +602,12 @@ new transactions with this payee</string>
    <class>KMyMoneyRegister::Register</class>
    <extends>QTableWidget</extends>
    <header>register.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KBankAccountsView</class>
+   <extends>QWidget</extends>
+   <header location="global">kbankaccountsview.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <includes>
