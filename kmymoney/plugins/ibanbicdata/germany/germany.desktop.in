@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=GermanIbanBicDatabase
+Comment=Make information about german IBANs and BICs available.
+Type=Service
+ServiceTypes=KMyMoney/IbanBicData
+X-KDE-PluginInfo-Author=Christian David
+X-KDE-PluginInfo-Email=christian-david@web.de
+X-KDE-PluginInfo-Version=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX}
+X-KDE-PluginInfo-Website=http://kmymoney.org/plugins.html
+X-KDE-PluginInfo-License=Unknown
+X-KDE-PluginInfo-EnabledByDefault=true
+
+X-KMyMoney-CountryCodes=DE
+X-KMyMoney-IBAN-2-BIC-supported=true
+X-KMyMoney-BBAN-Length=18
+X-KMyMoney-BankIdentifier-Position=0
+X-KMyMoney-BankIdentifier-Length=8
+X-KMyMoney-Bankdata-Database=bankdata.de.db
+X-KMyMoney-Sepa-Country=true
