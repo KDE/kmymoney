@@ -1,6 +1,6 @@
 /*
- * <one line to give the program's name and a brief idea of what it does.>
- * Copyright (C) 2014  Christian David <c.david@christian-david.de>
+ * This file is part of KMyMoney, A Personal Finance Manager for KDE
+ * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License

@@ -1,6 +1,6 @@
 /*
  * A tan input dialog for optical chipTan used in online banking
- * Copyright 2014  Christian David <c.david@christian-david.de>
+ * Copyright 2014  Christian David <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
