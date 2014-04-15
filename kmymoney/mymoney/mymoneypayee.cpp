@@ -21,12 +21,14 @@
 // QT Includes
 
 #include <QStringList>
+#include <QDebug> //! @todo remove QDebugs
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneyutils.h"
 #include <mymoneyexception.h>
+#include "payeeidentifier/payeeidentifierloader.h"
 
 MyMoneyPayee MyMoneyPayee::null;
 
@@ -88,6 +90,7 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
     m_defaultAccountId = node.attribute("defaultaccountid");
   }
 
+  // Load Address
   QDomNodeList nodeList = node.elementsByTagName("ADDRESS");
   if (nodeList.count() == 0) {
     QString msg = QString("No ADDRESS in payee %1").arg(m_name);
@@ -100,6 +103,25 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
   m_postcode = addrNode.attribute("postcode");
   m_state = addrNode.attribute("state");
   m_telephone = addrNode.attribute("telephone");
+  
+  // Load identifiers
+  QDomNodeList identifierNodes = node.elementsByTagName("payeeIdentifier");
+  uint identifierNodesLength = identifierNodes.length();
+  for (uint i = 0; i < identifierNodesLength; ++i) {
+    const QDomElement element = identifierNodes.item(i).toElement();
+    const QString payeeIdentifierId = element.attribute("type", QString());
+    if ( !payeeIdentifierId.isEmpty() ) {
+      payeeIdentifier::ptr ident = payeeIdentifierLoader::instance()->createPayeeIdentifierFromXML( payeeIdentifierId, element );
+      if ( ident.isNull() ) {
+        /** @internal improve error handling of payee identifier loading if they are not linked staticaly anymore. */
+        qWarning() << "Could not load payee identifier" << payeeIdentifierId;
+        continue;
+      }
+      addPayeeIdentifier( ident );
+      qDebug() << "Got something " << payeeIdentifierId;
+      
+    }
+  }
 }
 
 MyMoneyPayee::~MyMoneyPayee()
@@ -135,6 +157,26 @@ bool MyMoneyPayee::operator < (const MyMoneyPayee& right) const
   return m_name < right.name();
 }
 
+int MyMoneyPayee::addPayeeIdentifier(const payeeIdentifier::ptr identifier)
+{
+  const unsigned int newId = m_payeeIdentifiers.count();
+  m_payeeIdentifiers.insert( newId , identifier->cloneSharedPtr() );
+  return newId;
+}
+
+void MyMoneyPayee::modifyPayeeIdentifier(const unsigned int& index, payeeIdentifier::ptr identifier)
+{
+  Q_ASSERT( m_payeeIdentifiers.constFind( index ) != m_payeeIdentifiers.constEnd() );
+  Q_CHECK_PTR( identifier );
+  
+  m_payeeIdentifiers[index] = identifier;
+}
+
+void MyMoneyPayee::removePayeeIdentifier(const unsigned int& index)
+{
+  m_payeeIdentifiers.remove( index );
+}
+
 void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   QDomElement el = document.createElement("PAYEE");
@@ -158,6 +200,7 @@ void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
     el.setAttribute("defaultaccountid", m_defaultAccountId);
   }
 
+  // Save address
   QDomElement address = document.createElement("ADDRESS");
   address.setAttribute("street", m_address);
   address.setAttribute("city", m_city);
@@ -167,6 +210,16 @@ void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
 
   el.appendChild(address);
 
+  // Add payee identifiers
+  foreach( payeeIdentifier::ptr ident, m_payeeIdentifiers ) {
+    if ( !ident.isNull() ) {
+      QDomElement identElement = document.createElement("payeeIdentifier");
+      identElement.setAttribute("type", ident->payeeIdentifierId());
+      ident->writeXML(document, identElement);
+      el.appendChild(identElement);
+    }
+  }
+  
   parent.appendChild(el);
 }
 
@@ -218,6 +271,18 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
 void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QString& keys)
 {
   setMatchData(type, ignorecase, keys.split(';'));
+}
+
+payeeIdentifier::constList MyMoneyPayee::payeeIdentifiers() const
+{
+  payeeIdentifier::constList list;
+  list.reserve(m_payeeIdentifiers.count());
+
+  const payeeIdentifier::list::const_iterator end = m_payeeIdentifiers.constEnd();
+  for (payeeIdentifier::list::const_iterator iter = m_payeeIdentifiers.constBegin(); iter != end; ++iter) {
+    list.insert(iter.key(), iter.value().constCast<const payeeIdentifier>());
+  }
+  return list;
 }
 
 // vim:cin:si:ai:et:ts=2:sw=2:

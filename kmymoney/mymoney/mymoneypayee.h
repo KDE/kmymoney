@@ -23,6 +23,8 @@
 
 #include <QString>
 #include <QMetaType>
+#include <QHash>
+#include <QSharedPointer>
 class QStringList;
 
 // ----------------------------------------------------------------------------
@@ -30,6 +32,7 @@ class QStringList;
 
 #include <kmm_mymoney_export.h>
 #include <mymoneyobject.h>
+#include "payeeidentifier/payeeidentifier.h"
 
 /**
   * This class represents a payee or receiver within the MyMoney engine.
@@ -75,6 +78,15 @@ private:
     * empty by the application.
     */
   QString m_reference;
+  
+  /**
+   * @brief payeeIdentifiers of this payee
+   * 
+   * The key of this list is a unique id within this payee.
+   * 
+   * @see payeeIdentifier
+   */
+  QHash< unsigned int, payeeIdentifier::ptr > m_payeeIdentifiers;
 
 public:
   typedef enum {
@@ -165,6 +177,35 @@ public:
     m_reference = ref;
   }
 
+  /**
+   * @brief Add a payee identifier to this payee
+   * 
+   * @return The index of the added payeeIdentifier (only unique within a payee!)
+   * At the moment you should not store this index, as it may change after reopening the file.
+   */
+  int addPayeeIdentifier( const payeeIdentifier::ptr identifier );
+  
+  /**
+   * @brief Access all payeeIdentifiers
+   * 
+   * @return I stay owner, do not modify content as this leads to undefined behaviour.
+   */
+  payeeIdentifier::constList payeeIdentifiers() const;
+  
+  /**
+   * @brief Change a payeeIdentifier
+   * 
+   * @param identifier I take ownership.
+   */
+  void modifyPayeeIdentifier( const unsigned int& index, payeeIdentifier::ptr identifier );
+
+  /**
+   * @brief Remove payeeIdentifier
+   * 
+   * It there is still a shared pointer to the removed value, that pointer stays valid.
+   */
+  void removePayeeIdentifier( const unsigned int& index );
+  
   /**
    * Get all match data in one call
    *

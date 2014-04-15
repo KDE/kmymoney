@@ -49,6 +49,13 @@ kde4_add_ui_files(libviews_a_SOURCES ${libviews_a_UI})
 
 KDE4_ADD_LIBRARY(views STATIC ${libviews_a_SOURCES})
 
+# TODO: Remove this dependency. But it is needed as long as the payee editor uses these objects directly
+# This should be replaced by virtual methods in a pure abstract object.
+target_link_libraries( views
+  payeeidentifier_iban_bic
+  payeeidentifier_nationalAccount
+)
+
 # we rely on some of the dialogs to be generated
 ADD_DEPENDENCIES(views dialogs newinvestmentwizard newloanwizard endingbalancedlg)
 

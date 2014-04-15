@@ -446,6 +446,7 @@ void KPayeesView::slotSelectPayee(void)
 
     checkEnableDefaultCategory->setChecked(m_payee.defaultAccountEnabled());
     comboDefaultCategory->setSelected(m_payee.defaultAccountId());
+    m_payeeIdentifierList->slotLoadAccounts( m_payee );
 
     slotPayeeDataChanged();
 

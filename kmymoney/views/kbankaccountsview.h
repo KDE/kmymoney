@@ -48,7 +48,7 @@ public:
   virtual ~KBankAccountsView();
 
 public slots:
-  void slotLoadAccounts(void);
+  void slotLoadAccounts( const MyMoneyPayee& payee );
 
   /**
     * Override the base class behaviour to include all updates that

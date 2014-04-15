@@ -96,7 +96,7 @@
          </sizepolicy>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -491,7 +491,7 @@ new transactions with this payee</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="KBankAccountsView" name="widget" native="true">
+           <widget class="KBankAccountsView" name="m_payeeIdentifierList" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -558,6 +558,16 @@ new transactions with this payee</string>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>KMyMoneyRegister::Register</class>
+   <extends>QTableWidget</extends>
+   <header>register.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyAccountCombo</class>
+   <extends>KComboBox</extends>
+   <header>kmymoneyaccountcombo.h</header>
+  </customwidget>
+  <customwidget>
    <class>KEditListBox</class>
    <extends>QGroupBox</extends>
    <header>keditlistbox.h</header>
@@ -592,16 +602,6 @@ new transactions with this payee</string>
    <extends>QTabWidget</extends>
    <header>ktabwidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyAccountCombo</class>
-   <extends>KComboBox</extends>
-   <header>kmymoneyaccountcombo.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyRegister::Register</class>
-   <extends>QTableWidget</extends>
-   <header>register.h</header>
   </customwidget>
   <customwidget>
    <class>KBankAccountsView</class>

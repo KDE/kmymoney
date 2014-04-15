@@ -50,6 +50,8 @@
 #include "kmymoney.h"
 #include "kmymoneyaccounttreeview.h"
 #include "models.h"
+#include "payeeidentifier/ibanandbic/internationalaccountidentifier.h"
+#include <payeeidentifier/nationalaccount/nationalaccountid.h>
 
 KBankAccountsView::KBankAccountsView(QWidget *parent) :
     QWidget(parent)
@@ -78,10 +80,7 @@ KBankAccountsView::KBankAccountsView(QWidget *parent) :
   bankAccounts->setSelectionMode(QAbstractItemView::SingleSelection);
   bankAccounts->setShowGrid(false);
 //    bankAccounts->setGeometry(QApplication::desktop()->screenGeometry());
-// Test Data  
-  bankAccountsAddRow("Giro privat", true, "Mustermann, Max", "1234567890", "20050550", "HASPA", "DE", "National");
-  rowContentToEditor(0);
-  bankAccountsAddRow("Giro Geschaeft", false, "Firma Mustermann, Max", "DE99200505509876543210", "HASPDEHHXXX", "HASPA", "DE", "Sepa");
+
   connect(pb_new, SIGNAL(clicked(bool)), this, SLOT(slotNewAccount(bool)));
   connect(pb_del, SIGNAL(clicked(bool)), this, SLOT(slotDelAccount(bool)));
   connect (bankAccounts, SIGNAL(currentCellChanged ( int , int , int , int  )), this, SLOT(slotCurrentCellChanged ( int , int , int , int  )));
@@ -222,8 +221,24 @@ void KBankAccountsView::rowContentToEditor ( int row )
   rowInEditor = row;
 }
 
-void KBankAccountsView::slotLoadAccounts(void)
+void KBankAccountsView::slotLoadAccounts( const MyMoneyPayee& payee )
 {
+  bankAccounts->clear();
+  payeeIdentifier::constList identifiers = payee.payeeIdentifiers();
+  
+  if (identifiers.isEmpty())
+    return;
+  
+  foreach( payeeIdentifier::constPtr ident, identifiers ) {
+    if ( QSharedPointer<const internationalAccountIdentifier> ibanBic = ident.dynamicCast<const internationalAccountIdentifier>() ) {
+      bankAccountsAddRow("", true, "", ibanBic->paperformatIban(), ibanBic->storedBic(), "", "", "Sepa");
+    } else if ( QSharedPointer<const nationalAccountId> nationalAccount = ident.dynamicCast<const nationalAccountId>() ) {
+      bankAccountsAddRow("", false, "", nationalAccount->accountNumber(), nationalAccount->bankCode(), "", "", "National");
+    } else {
+      bankAccountsAddRow(i18n("Plugin missing"), false, QString(), QString(), QString(), QString(), QString(), QString());
+    }
+  }
+  rowContentToEditor(0);
 }
 
 void KBankAccountsView::showEvent(QShowEvent * event)

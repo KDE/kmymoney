@@ -1,4 +1,5 @@
 ADD_SUBDIRECTORY( storage )
+ADD_SUBDIRECTORY( payeeidentifier )
 
 # TODO move this to a findKtoblzcheck.cmake and use find_package() instead
 find_library( KTOBLZCHECK_LIBRARY NAMES libktoblzcheck ktoblzcheck
@@ -31,6 +32,8 @@ SET(kmm_mymoney_LIB_SRCS
   onlinejobadministration.cpp
   onlinejobmessage.cpp
   onlinejobfolder.cpp
+  payeeidentifier/payeeidentifierloader.cpp
+  payeeidentifier/payeeidentifier.cpp # TODO: this is not clean, but I needed a target where this file is in quickly
   )
 
 
@@ -70,7 +73,10 @@ TARGET_LINK_LIBRARIES(kmm_mymoney
                       ${KTOBLZCHECK_LIBRARY}
                       kmm_storage
 #                     onlinetask_interfaces
+                      payeeidentifier_iban_bic
+                      payeeidentifier_nationalAccount
 )
+# TODO: Remove payeeidentifier_nationalAccount and payeeidentifier_iban_bic from link list
 
 SET_TARGET_PROPERTIES(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 
@@ -264,4 +270,3 @@ IF( KDE4_BUILD_TESTS )
 
 
 ENDIF( KDE4_BUILD_TESTS )
-
