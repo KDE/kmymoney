@@ -28,24 +28,24 @@
 
 class ibanBicData;
 
+namespace payeeIdentifiers {
 /**
  * @brief Plugin to handle IBANs and BICs
  * 
  * Can store a pair of an International Bank Account Number (ISO 13616) and Business Identifier Code (ISO 9362).
  * 
- * With it's own plugins (@ref KMyMoneyPlugin::ibanBicPlugin) futher information can be accessed.
  */
-class IBAN_BIC_IDENTIFIER_EXPORT internationalAccountIdentifier : public payeeIdentifier
+class IBAN_BIC_IDENTIFIER_EXPORT ibanBic : public payeeIdentifier
 {
   KMM_UNIT_TESTABLE
 public:
-  PAYEEIDENTIFIER_ID(internationalAccountIdentifier, "org.kmymoney.payeeIdentifier.ibanbic");
+  PAYEEIDENTIFIER_ID(ibanBic, "org.kmymoney.payeeIdentifier.ibanbic");
   
-  internationalAccountIdentifier();
-  internationalAccountIdentifier(const internationalAccountIdentifier& other);
+  ibanBic();
+  ibanBic(const ibanBic& other);
   
-  internationalAccountIdentifier* clone() const;
-  internationalAccountIdentifier* createFromXml(const QDomElement& element) const;
+  ibanBic* clone() const;
+  ibanBic* createFromXml(const QDomElement& element) const;
   void writeXML(QDomDocument& document, QDomElement& parent) const;
   
   /**
@@ -110,7 +110,7 @@ public:
   
   
   virtual bool operator==(const payeeIdentifier& other) const;
-  bool operator==(const internationalAccountIdentifier& other) const;
+  bool operator==(const ibanBic& other) const;
   virtual bool isValid() const;
   
   /**
@@ -166,6 +166,8 @@ private:
   
   static ::ibanBicData* m_ibanBicData;
 };
+
+} // namespace payeeIdentifiers
 
 #endif // INTERNATIONALACCOUNTIDENTIFIER_H
 

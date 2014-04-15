@@ -3,7 +3,7 @@ configure_file(ibanbicdata.desktop.in ibanbicdata.desktop)
 set ( PAYEEIDENTIFIER_IBAN_BIC_SCRS
   bicmodel.cpp
   ibanbicdata.cpp
-  internationalaccountidentifier.cpp
+  ibanbic.cpp
 )
 
 kde4_add_plugin( payeeidentifier_iban_bic SHARED
@@ -19,7 +19,7 @@ target_link_libraries( payeeidentifier_iban_bic
 
 install(TARGETS payeeidentifier_iban_bic
         ${INSTALL_TARGETS_DEFAULT_ARGS})
-        
+
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ibanbicdata.desktop
         DESTINATION ${SERVICETYPES_INSTALL_DIR})
 

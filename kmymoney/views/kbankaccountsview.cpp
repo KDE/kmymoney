@@ -50,8 +50,8 @@
 #include "kmymoney.h"
 #include "kmymoneyaccounttreeview.h"
 #include "models.h"
-#include "payeeidentifier/ibanandbic/internationalaccountidentifier.h"
-#include <payeeidentifier/nationalaccount/nationalaccountid.h>
+#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include <payeeidentifier/nationalaccount/nationalaccount.h>
 
 KBankAccountsView::KBankAccountsView(QWidget *parent) :
     QWidget(parent)
@@ -230,9 +230,9 @@ void KBankAccountsView::slotLoadAccounts( const MyMoneyPayee& payee )
     return;
   
   foreach( payeeIdentifier::constPtr ident, identifiers ) {
-    if ( QSharedPointer<const internationalAccountIdentifier> ibanBic = ident.dynamicCast<const internationalAccountIdentifier>() ) {
+    if ( QSharedPointer<const payeeIdentifiers::ibanBic> ibanBic = ident.dynamicCast<const payeeIdentifiers::ibanBic>() ) {
       bankAccountsAddRow("", true, "", ibanBic->paperformatIban(), ibanBic->storedBic(), "", "", "Sepa");
-    } else if ( QSharedPointer<const nationalAccountId> nationalAccount = ident.dynamicCast<const nationalAccountId>() ) {
+    } else if ( QSharedPointer<const payeeIdentifiers::nationalAccount> nationalAccount = ident.dynamicCast<const payeeIdentifiers::nationalAccount>() ) {
       bankAccountsAddRow("", false, "", nationalAccount->accountNumber(), nationalAccount->bankCode(), "", "", "National");
     } else {
       bankAccountsAddRow(i18n("Plugin missing"), false, QString(), QString(), QString(), QString(), QString(), QString());

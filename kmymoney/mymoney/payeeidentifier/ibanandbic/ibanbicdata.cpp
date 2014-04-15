@@ -24,7 +24,7 @@
 #include <QtSql/QSqlQuery>
 #include <QSqlError>
 
-#include "internationalaccountidentifier.h"
+#include "ibanbic.h"
 
 ibanBicData::~ibanBicData()
 {
@@ -59,7 +59,7 @@ QString ibanBicData::iban2Bic(const QString& iban)
 {
   Q_ASSERT( iban.length() < 1 || iban.at(0).isLetterOrNumber() );
   Q_ASSERT( iban.length() < 2 || iban.at(1).isLetterOrNumber() );
-  Q_ASSERT( iban == internationalAccountIdentifier::ibanToElectronic(iban) );
+  Q_ASSERT( iban == payeeIdentifiers::ibanBic::ibanToElectronic(iban) );
   
   if ( iban.length() <= 4 ) // This iban is to short to extract a BIC
     return QString("");
@@ -142,7 +142,7 @@ QPair< QString, QString > ibanBicData::bankNameAndBic(const QString& iban)
 {
   Q_ASSERT( iban.length() < 1 || iban.at(0).isLetterOrNumber() );
   Q_ASSERT( iban.length() < 2 || iban.at(1).isLetterOrNumber() );
-  Q_ASSERT( iban == internationalAccountIdentifier::ibanToElectronic(iban) );
+  Q_ASSERT( iban == payeeIdentifiers::ibanBic::ibanToElectronic(iban) );
   
   if ( iban.length() <= 4 ) // This iban is to short to extract a BIC
     return QPair<QString, QString>();

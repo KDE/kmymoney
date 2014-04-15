@@ -18,15 +18,15 @@
 
 #include "payeeidentifier/payeeidentifierloader.h"
 
-#include "payeeidentifier/ibanandbic/internationalaccountidentifier.h"
-#include "payeeidentifier/nationalaccount/nationalaccountid.h"
+#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
 
 payeeIdentifierLoader payeeIdentifierLoader::m_self;
 
 payeeIdentifierLoader::payeeIdentifierLoader()
 {
-  addPayeeIdentifier( new internationalAccountIdentifier() );
-  addPayeeIdentifier( new nationalAccountId() );
+  addPayeeIdentifier( new payeeIdentifiers::ibanBic() );
+  addPayeeIdentifier( new payeeIdentifiers::nationalAccount() );
 }
 
 void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifier* const identifier)

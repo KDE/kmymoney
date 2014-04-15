@@ -2,7 +2,7 @@
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoneynationalaccountnumberplugin.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoneynationalaccountnumberplugin.desktop)
 
 set (nationalAccountId_SCRS
-  nationalaccountid.cpp
+  nationalaccount.cpp
 )
 
 kde4_add_library( payeeidentifier_nationalAccount

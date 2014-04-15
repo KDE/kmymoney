@@ -16,42 +16,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "nationalaccountid.h"
+#include "nationalaccount.h"
 
 #include <typeinfo>
 
-nationalAccountId* nationalAccountId::createFromXml(const QDomElement& element) const
+namespace payeeIdentifiers {
+
+nationalAccount* nationalAccount::createFromXml(const QDomElement& element) const
 {
-  nationalAccountId* ident = new nationalAccountId;
+  nationalAccount* ident = new nationalAccount;
   
   ident->setBankCode( element.attribute("bankcode", QString()) );
   ident->setAccountNumber( element.attribute("accountnumber", QString()) );
   return ident;
 }
 
-void nationalAccountId::writeXML(QDomDocument& document, QDomElement& parent) const
+void nationalAccount::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   Q_UNUSED( document );
   parent.setAttribute("accountNumber", m_accountNumber);
   parent.setAttribute("bankCode", m_bankCode );  
 }
 
-bool nationalAccountId::isValid() const
+bool nationalAccount::isValid() const
 {
   return true;
 }
 
-bool nationalAccountId::operator==(const payeeIdentifier& other) const
+bool nationalAccount::operator==(const payeeIdentifier& other) const
 {
   try {
-    const nationalAccountId otherCasted = dynamic_cast<const nationalAccountId&>(other);
+    const nationalAccount otherCasted = dynamic_cast<const nationalAccount&>(other);
     return operator==(otherCasted);
   } catch ( const std::bad_cast& ) {
   }
   return false;
 }
 
-bool nationalAccountId::operator==(const nationalAccountId& other) const
+bool nationalAccount::operator==(const nationalAccount& other) const
 {
   return ( m_accountNumber == other.m_accountNumber && m_bankCode == other.m_bankCode );
 }
+
+} // namespace payeeIdentifiers

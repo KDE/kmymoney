@@ -22,17 +22,19 @@
 #include "mymoney/payeeidentifier/payeeidentifier.h"
 #include "nationalaccountidmacros.h"
 
-class NATIONALACCOUNT_IDENTIFIER_EXPORT nationalAccountId : public payeeIdentifier
+namespace payeeIdentifiers {
+
+class NATIONALACCOUNT_IDENTIFIER_EXPORT nationalAccount : public payeeIdentifier
 {
 public:
-  PAYEEIDENTIFIER_ID(nationalAccountId, "org.kmymoney.payeeIdentifier.national");
+  PAYEEIDENTIFIER_ID(nationalAccount, "org.kmymoney.payeeIdentifier.national");
   
   virtual bool isValid() const;
   virtual bool operator==(const payeeIdentifier& other) const;
-  bool operator==(const nationalAccountId& other) const;
+  bool operator==(const nationalAccount& other) const;
   
-  nationalAccountId* clone() const { return new nationalAccountId(*this); }
-  nationalAccountId* createFromXml(const QDomElement& element) const;
+  nationalAccount* clone() const { return new nationalAccount(*this); }
+  nationalAccount* createFromXml(const QDomElement& element) const;
   void writeXML(QDomDocument& document, QDomElement& parent) const;
   
   QString bankCode() const { return m_bankCode; }
@@ -45,5 +47,7 @@ private:
   QString m_bankCode;
   QString m_accountNumber;
 };
+
+} // namespace payeeIdentifiers
 
 #endif // NATIONALACCOUNTID_H

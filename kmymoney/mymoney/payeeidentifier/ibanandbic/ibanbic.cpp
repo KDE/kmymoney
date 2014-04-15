@@ -16,79 +16,81 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "internationalaccountidentifier.h"
+#include "ibanbic.h"
 
 #include <typeinfo>
 #include <algorithm>
 
 #include "ibanbicdata.h"
 
-ibanBicData* internationalAccountIdentifier::m_ibanBicData = new ibanBicData;
-const int internationalAccountIdentifier::ibanMaxLength = 30;
+namespace payeeIdentifiers {
 
-internationalAccountIdentifier::internationalAccountIdentifier()
+ibanBicData* ibanBic::m_ibanBicData = new ibanBicData;
+const int ibanBic::ibanMaxLength = 30;
+
+ibanBic::ibanBic()
   : m_bic( QLatin1String("") ),
     m_iban( QLatin1String("") )
 {
 
 }
 
-internationalAccountIdentifier::internationalAccountIdentifier(const internationalAccountIdentifier& other)
+ibanBic::ibanBic(const ibanBic& other)
   : m_bic( other.m_bic ),
     m_iban( other.m_iban )
 {
 
 }
 
-bool internationalAccountIdentifier::operator==(const payeeIdentifier& other) const
+bool ibanBic::operator==(const payeeIdentifier& other) const
 {
   try {
-    const internationalAccountIdentifier otherCasted = dynamic_cast<const internationalAccountIdentifier&>(other);
+    const ibanBic otherCasted = dynamic_cast<const ibanBic&>(other);
     return operator==(otherCasted);
   } catch ( const std::bad_cast& ) {
   }
   return false;
 }
 
-bool internationalAccountIdentifier::operator==(const internationalAccountIdentifier& other) const
+bool ibanBic::operator==(const ibanBic& other) const
 {
   return ( m_iban == other.m_iban && m_bic == other.m_bic );
 }
 
-internationalAccountIdentifier* internationalAccountIdentifier::clone() const
+ibanBic* ibanBic::clone() const
 {
-  return (new internationalAccountIdentifier(*this));
+  return (new ibanBic(*this));
 }
 
-internationalAccountIdentifier* internationalAccountIdentifier::createFromXml(const QDomElement& element) const
+ibanBic* ibanBic::createFromXml(const QDomElement& element) const
 {
-  internationalAccountIdentifier* ident = new internationalAccountIdentifier;
+  ibanBic* ident = new ibanBic;
   
   ident->setBic( element.attribute("bic", QString()) );
   ident->setIban( element.attribute("iban", QString()) );
   return ident;
 }
 
-void internationalAccountIdentifier::writeXML(QDomDocument& document, QDomElement& parent) const
+void ibanBic::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   Q_UNUSED( document );
   parent.setAttribute("iban", m_iban);
   
   if ( !m_bic.isEmpty() )
-    parent.setAttribute( "bic", m_bic );  
+    parent.setAttribute( "bic", m_bic );
 }
 
-QString internationalAccountIdentifier::paperformatIban(const QString& seperator) const
+QString ibanBic::paperformatIban(const QString& seperator) const
 {
   return ibanToPaperformat( m_iban, seperator );
 }
 
-void internationalAccountIdentifier::setIban(const QString& iban)
+void ibanBic::setIban(const QString& iban)
 {
   m_iban = ibanToElectronic(iban);
 }
 
-void internationalAccountIdentifier::setBic(const QString& bic)
+void ibanBic::setBic(const QString& bic)
 {
   m_bic = bic.toUpper();
 
@@ -96,14 +98,14 @@ void internationalAccountIdentifier::setBic(const QString& bic)
     m_bic = m_bic.left(8);
 }
 
-QString internationalAccountIdentifier::fullStoredBic() const
+QString ibanBic::fullStoredBic() const
 {
   if ( m_bic.length() == 8 )
     return ( m_bic + QLatin1String("XXX") );
   return m_bic;
 }
 
-QString internationalAccountIdentifier::fullBic() const
+QString ibanBic::fullBic() const
 {
   if ( m_bic.isNull() ) {
     Q_CHECK_PTR(m_ibanBicData);
@@ -112,7 +114,7 @@ QString internationalAccountIdentifier::fullBic() const
   return fullStoredBic();
 }
 
-QString internationalAccountIdentifier::bic() const
+QString ibanBic::bic() const
 {
   if ( m_bic.isNull() ) {
     Q_CHECK_PTR(m_ibanBicData);
@@ -134,7 +136,7 @@ inline bool madeOfLettersAndNumbersOnly( const QString& string )
   return true;
 }
 
-bool internationalAccountIdentifier::isValid() const
+bool ibanBic::isValid() const
 {
   Q_ASSERT( m_iban == ibanToElectronic(m_iban) );
   
@@ -166,7 +168,7 @@ bool internationalAccountIdentifier::isValid() const
   return true;
 }
 
-QString internationalAccountIdentifier::ibanToElectronic(const QString& iban)
+QString ibanBic::ibanToElectronic(const QString& iban)
 {
   QString canonicalIban;
   const int length = iban.length();
@@ -183,7 +185,7 @@ QString internationalAccountIdentifier::ibanToElectronic(const QString& iban)
   return canonicalIban;
 }
 
-QString internationalAccountIdentifier::ibanToPaperformat(const QString& iban, const QString& seperator)
+QString ibanBic::ibanToPaperformat(const QString& iban, const QString& seperator)
 {
   QString paperformat;
   const int length = iban.length();
@@ -207,25 +209,27 @@ QString internationalAccountIdentifier::ibanToPaperformat(const QString& iban, c
   return paperformat;
 }
 
-QString internationalAccountIdentifier::bban(const QString& iban)
+QString ibanBic::bban(const QString& iban)
 {
   return iban.mid(4);
 }
 
-int internationalAccountIdentifier::ibanLengthByCountry(const QString& countryCode)
+int ibanBic::ibanLengthByCountry(const QString& countryCode)
 {
   Q_CHECK_PTR( m_ibanBicData );
   return (m_ibanBicData->bbanLength( countryCode )+4);
 }
 
-QString internationalAccountIdentifier::bicByIban(const QString& iban)
+QString ibanBic::bicByIban(const QString& iban)
 {
   Q_CHECK_PTR( m_ibanBicData );
   return m_ibanBicData->iban2Bic( iban );
 }
 
-QString internationalAccountIdentifier::institutionNameByBic(const QString& bic)
+QString ibanBic::institutionNameByBic(const QString& bic)
 {
   Q_CHECK_PTR( m_ibanBicData );
   return m_ibanBicData->bankNameByBic( bic );
 }
+
+} // namespace payeeIdentifiers

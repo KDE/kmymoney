@@ -17,7 +17,7 @@
  */
 
 #include "internationalaccountidentifiertest.h"
-#include "../internationalaccountidentifier.h"
+#include "../ibanbic.h"
 #include "../ibanbicdata.h"
 
 #include <QtTest>
@@ -87,7 +87,7 @@ void internationalAccountIdentifierTest::paperformatIban()
   QFETCH(QString, iban);
   QFETCH(QString, paperformat);
   
-  QCOMPARE(internationalAccountIdentifier::ibanToPaperformat(iban), paperformat);
+  QCOMPARE(payeeIdentifiers::ibanBic::ibanToPaperformat(iban), paperformat);
 }
 
 void internationalAccountIdentifierTest::electronicformatIban_data()
@@ -107,7 +107,7 @@ void internationalAccountIdentifierTest::electronicformatIban()
 {
   QFETCH(QString, iban);
   QFETCH(QString, electronic);
-  QCOMPARE(internationalAccountIdentifier::ibanToElectronic(iban), electronic);
+  QCOMPARE(payeeIdentifiers::ibanBic::ibanToElectronic(iban), electronic);
 }
 
 void internationalAccountIdentifierTest::setIban_data()
@@ -129,7 +129,7 @@ void internationalAccountIdentifierTest::setIban()
   QFETCH(QString, electronic);
   QFETCH(QString, paperformat);
   
-  internationalAccountIdentifier ident;
+  payeeIdentifiers::ibanBic ident;
   ident.setIban(iban);
   QCOMPARE(ident.electronicIban(), electronic);
   QCOMPARE(ident.paperformatIban(), paperformat);
@@ -154,7 +154,7 @@ void internationalAccountIdentifierTest::setBic()
   QFETCH(QString, normalized);
   QFETCH(QString, full);
   
-  internationalAccountIdentifier ident;
+  payeeIdentifiers::ibanBic ident;
   ident.setBic( input );
   QCOMPARE(ident.bic(), normalized);
   QCOMPARE(ident.fullBic(), full);
@@ -181,11 +181,11 @@ void internationalAccountIdentifierTest::equalOperator()
   QFETCH(QString, iban2);
   QFETCH(bool, equals);
   
-  internationalAccountIdentifier ident1;
+  payeeIdentifiers::ibanBic ident1;
   ident1.setBic(bic1);
   ident1.setIban(iban1);
   
-  internationalAccountIdentifier ident2;
+  payeeIdentifiers::ibanBic ident2;
   ident2.setBic(bic2);
   ident2.setIban(iban2);
   
@@ -208,11 +208,11 @@ void internationalAccountIdentifierTest::uneqalOperator()
   QFETCH(QString, iban2);
   QFETCH(bool, equals);
   
-  internationalAccountIdentifier ident1;
+  payeeIdentifiers::ibanBic ident1;
   ident1.setBic(bic1);
   ident1.setIban(iban1);
   
-  internationalAccountIdentifier ident2;
+  payeeIdentifiers::ibanBic ident2;
   ident2.setBic(bic2);
   ident2.setIban(iban2);
   
@@ -248,7 +248,7 @@ void internationalAccountIdentifierTest::getProperties()
   if ( fileName.isEmpty() )
     QSKIP(qPrintable(QString("Could not find ibanBicData service for this country (was looking for \"%1\"). Did you install the services (e.g. with \"make install\")?").arg(serviceFile)), SkipSingle);
   
-  QCOMPARE(internationalAccountIdentifier::ibanLengthByCountry( countryCode ), bbanLength+4);
+  QCOMPARE(payeeIdentifiers::ibanBic::ibanLengthByCountry( countryCode ), bbanLength+4);
 }
 
 void internationalAccountIdentifierTest::iban2bic_data()
@@ -265,7 +265,7 @@ void internationalAccountIdentifierTest::iban2bic()
   QFETCH(QString, iban);
   QFETCH(QString, bic);
 
-  QCOMPARE(internationalAccountIdentifier::bicByIban(iban), bic);
+  QCOMPARE(payeeIdentifiers::ibanBic::bicByIban(iban), bic);
 }
 
 void internationalAccountIdentifierTest::nameByBic_data()
@@ -281,7 +281,7 @@ void internationalAccountIdentifierTest::nameByBic()
   QFETCH(QString, bic);
   QFETCH(QString, name);
   
-  QCOMPARE(internationalAccountIdentifier::institutionNameByBic(bic), name);
+  QCOMPARE(payeeIdentifiers::ibanBic::institutionNameByBic(bic), name);
 }
 
 void internationalAccountIdentifierTest::bicAndNameByIban_data()
