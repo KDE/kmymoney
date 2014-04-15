@@ -568,7 +568,9 @@ void MyMoneyMoneyTest::testDoubleConstructor()
     MyMoneyMoney r(i, 100);
     d /= 100;
     MyMoneyMoney t(d, 100);
+    MyMoneyMoney s(i);
     QVERIFY(t == r);
+    QVERIFY(i == s.toDouble());
   }
 }
 
