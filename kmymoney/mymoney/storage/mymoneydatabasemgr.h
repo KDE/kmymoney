@@ -1092,6 +1092,9 @@ private:
   const QString nextSecurityID(void);
 
   const QString nextReportID(void);
+  
+  /** @todo implement */
+  const QString nextOnlineJobID() { return QLatin1String("NOT-IMPLEMENTED"); };
 
   /**
     * This method is used to get the next valid ID for a budget object.

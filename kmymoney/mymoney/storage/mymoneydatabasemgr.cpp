@@ -385,14 +385,14 @@ void MyMoneyDatabaseMgr::addOnlineJob( onlineJob& job )
 
 const onlineJob MyMoneyDatabaseMgr::getOnlineJob(const QString &jobId) const
 {
-  if (id.isEmpty()) {
+  if (jobId.isEmpty()) {
     throw MYMONEYEXCEPTION("empty online job id");
   }
 
   if (m_sql) {
     if (! m_sql->isOpen())((QSqlDatabase*)(m_sql.data()))->open();
-    QMap <QString, onlineJob> jobList = m_sql->fetchOnlineJobs(QStringList(id));
-    QMap <QString, onlineJob>::ConstIterator pos = jobList.constFind(id);
+    QMap <QString, onlineJob> jobList = m_sql->fetchOnlineJobs(QStringList(jobId));
+    QMap <QString, onlineJob>::ConstIterator pos = jobList.constFind(jobId);
 
     // locate the account and if present, return it's data
     if (pos != jobList.constEnd())
@@ -402,7 +402,7 @@ const onlineJob MyMoneyDatabaseMgr::getOnlineJob(const QString &jobId) const
   }
 
   // throw an exception, if it does not exist
-  QString msg = "Unknown online job id '" + id + '\'';
+  QString msg = "Unknown online job id '" + jobId + '\'';
   throw MYMONEYEXCEPTION(msg);
 }
 

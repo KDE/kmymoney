@@ -2343,6 +2343,7 @@ void MyMoneyDatabaseMgrTest::testAddOnlineJob()
   } catch (const MyMoneyException &) {
     QVERIFY(m->dirty() == false);
   }
+}
 
 void MyMoneyDatabaseMgrTest::testModifyOnlineJob()
 {
