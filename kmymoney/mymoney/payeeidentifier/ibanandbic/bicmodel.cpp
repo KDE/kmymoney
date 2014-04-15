@@ -19,6 +19,8 @@
 #include "bicmodel.h"
 
 #include <KDebug>
+#include <KServiceTypeTrader>
+#include <KStandardDirs>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
 #include <QtCore/QString>
@@ -37,14 +39,30 @@ bicModel::bicModel(QObject* parent)
   QSqlQuery query(db);
   query.prepare("ATTACH DATABASE ? AS ?");
 
-  QStringList databases;
-  databases << "/home/christian/Develop/install/kmymoney/share/apps/kmymoney/ibanbicdata/bankdata.de.db"
-            << "/home/christian/Develop/install/kmymoney/share/apps/kmymoney/ibanbicdata/bankdata.ch.db";
-  query.addBindValue(databases);
+  // Get services which support iban2bic and have a database entry
+  KService::List services = KServiceTypeTrader::self()->query("KMyMoney/IbanBicData",
+    QString("exist [X-KMyMoney-Bankdata-Database]")
+  );
   
+  QStringList databases;
   QStringList dbNames;
-  dbNames << "db1";
-  dbNames << "db2";
+  
+  unsigned int databaseCount = 0;
+  
+  foreach( KService::Ptr service, services ) {
+    QString database = service->property(QLatin1String("X-KMyMoney-Bankdata-Database")).toString();
+    
+    // Locate database
+    QString path = KGlobal::dirs()->locate("data", QLatin1String("kmymoney/ibanbicdata/") + database);
+    if ( path.isEmpty() ) {
+      kWarning() << QString("Could not locate database file \"%1\" to recive BIC data.").arg(database);
+    } else {
+      databases << path;
+      dbNames << QString("db%1").arg(++databaseCount);
+    }
+  }
+  
+  query.addBindValue(databases);
   query.addBindValue(dbNames);
 
   qDebug() << "Attached databases" << query.execBatch() << query.lastError().text();
@@ -53,8 +71,8 @@ bicModel::bicModel(QObject* parent)
   foreach (QString dbName, dbNames) {
     queries.append(QString("SELECT bic, name FROM %1.institutions").arg(dbName));
   }
+
   query.exec(queries.join( QLatin1String(" UNION ") ));
-  
   setQuery(query);
 }
 
