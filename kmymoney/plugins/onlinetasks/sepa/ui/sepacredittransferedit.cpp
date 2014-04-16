@@ -33,7 +33,6 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent) :
 {
     ui->setupUi(this);
     
-    ui->beneficiaryBankCode->setValidator( new bicValidator(ui->beneficiaryBankCode) );
     ui->beneficiaryAccNum->setValidator( new ibanValidator(ui->beneficiaryAccNum) );
     
     ui->statusBeneficiaryName->setVisible(false);
@@ -304,27 +303,4 @@ QValidator::State ibanValidator::validate(QString& string, int&) const
         return Acceptable;
 
     return Intermediate;
-}
-
-QValidator::State bicValidator::validate(QString &string, int&) const
-{
-  for (int i = 0; i < std::min(string.length(), 6); ++i) {
-    if ( !string.at(i).isLetter() )
-      return Invalid;
-    if (string.at(i).isLower())
-        string[i] = string.at(i).toUpper();
-  }
-  for (int i = 6; i < string.length(); ++i) {
-    if ( !string.at(i).isLetterOrNumber() )
-      return Invalid;
-    if (string.at(i).isLower())
-        string[i] = string.at(i).toUpper();
-  }
-
-  if ( string.length() > 11 )
-    return Invalid;
-  else if (string.length() == 8 || string.length() == 11)
-    return Acceptable;
-
-  return Intermediate;
 }

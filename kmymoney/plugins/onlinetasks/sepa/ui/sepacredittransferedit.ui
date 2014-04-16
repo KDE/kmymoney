@@ -14,6 +14,20 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="2">
+    <widget class="KLed" name="statusBeneficiaryName">
+     <property name="state">
+      <enum>KLed::On</enum>
+     </property>
+     <property name="color">
+      <color>
+       <red>255</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
    <item row="3" column="2">
     <widget class="KLed" name="statusIban">
      <property name="state">
@@ -95,20 +109,6 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="2">
-    <widget class="KLed" name="statusAmount">
-     <property name="state">
-      <enum>KLed::On</enum>
-     </property>
-     <property name="color">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label_iban">
      <property name="text">
@@ -118,23 +118,6 @@
       <cstring>beneficiaryAccNum</cstring>
      </property>
     </widget>
-   </item>
-   <item row="5" column="2">
-    <widget class="KLed" name="statusBic">
-     <property name="state">
-      <enum>KLed::On</enum>
-     </property>
-     <property name="color">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="2">
-    <widget class="KLineEdit" name="beneficiaryBankCode"/>
    </item>
    <item row="7" column="0">
     <widget class="QLabel" name="label">
@@ -201,8 +184,18 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="2">
-    <widget class="KLed" name="statusBeneficiaryName">
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_bic">
+     <property name="text">
+      <string>BIC</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="KBicEdit" name="beneficiaryBankCode"/>
+   </item>
+   <item row="6" column="2">
+    <widget class="KLed" name="statusAmount">
      <property name="state">
       <enum>KLed::On</enum>
      </property>
@@ -215,13 +208,14 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_bic">
-     <property name="text">
-      <string>BIC</string>
-     </property>
-     <property name="buddy">
-      <cstring>beneficiaryBankCode</cstring>
+   <item row="5" column="2">
+    <widget class="KLed" name="statusBic">
+     <property name="color">
+      <color>
+       <red>255</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
      </property>
     </widget>
    </item>
@@ -235,13 +229,13 @@
   <zorder>beneficiaryAccNum</zorder>
   <zorder>label_bic</zorder>
   <zorder>label_iban</zorder>
-  <zorder>beneficiaryBankCode</zorder>
   <zorder>statusPurpose</zorder>
   <zorder>statusReference</zorder>
   <zorder>statusAmount</zorder>
-  <zorder>statusBic</zorder>
   <zorder>statusIban</zorder>
   <zorder>statusBeneficiaryName</zorder>
+  <zorder>beneficiaryBankCode</zorder>
+  <zorder>statusBic</zorder>
  </widget>
  <customwidgets>
   <customwidget>
@@ -265,11 +259,15 @@
    <extends>QTextEdit</extends>
    <header>kmymoneytextedit.h</header>
   </customwidget>
+  <customwidget>
+   <class>KBicEdit</class>
+   <extends>QLineEdit</extends>
+   <header>mymoney/payeeidentifier/ibanandbic/widgets/kbicedit.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>beneficiaryName</tabstop>
   <tabstop>beneficiaryAccNum</tabstop>
-  <tabstop>beneficiaryBankCode</tabstop>
   <tabstop>sepaReference</tabstop>
   <tabstop>purpose</tabstop>
  </tabstops>

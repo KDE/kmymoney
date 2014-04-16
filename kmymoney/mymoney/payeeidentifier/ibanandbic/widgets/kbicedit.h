@@ -19,9 +19,12 @@
 #ifndef KBICEDIT_H
 #define KBICEDIT_H
 
-#include <klineedit.h>
+#include <QtGui/QValidator>
+#include <KLineEdit>
 
 #include "../ibanbicmacros.h"
+
+class QAbstractItemDelegate;
 
 class IBAN_BIC_IDENTIFIER_EXPORT KBicEdit : public KLineEdit
 {
@@ -29,8 +32,23 @@ class IBAN_BIC_IDENTIFIER_EXPORT KBicEdit : public KLineEdit
 
 public:
   KBicEdit(QWidget* parent = 0);
-
+  virtual ~KBicEdit();
+  
 private:
+  QAbstractItemDelegate* m_popupDelegate;
+};
+
+/**
+ * @brief Validator for BIC
+ * A check if this code actualy exists is not done
+ */
+class bicValidator : public QValidator
+{
+  Q_OBJECT
+public:
+  explicit bicValidator(QObject* parent = 0)
+  : QValidator(parent) {}
+  State validate(QString &string, int &pos) const;
 };
 
 #endif // KBICEDIT_H

@@ -45,10 +45,17 @@ KBicEdit::KBicEdit(QWidget* parent)
   
   bicModel* model = new bicModel(this);
   completer->setModel(model);
-  
-  completer->popup()->setItemDelegate( new bicItemDelegate(this) );
+  m_popupDelegate = new bicItemDelegate(this);
+  completer->popup()->setItemDelegate( m_popupDelegate );
   
   setCompleter(completer);
+  
+  setValidator( new bicValidator( this ) );
+}
+
+KBicEdit::~KBicEdit()
+{
+  delete m_popupDelegate;
 }
 
 QFont bicItemDelegate::getSmallFont(const QStyleOptionViewItem& option) const
@@ -82,7 +89,6 @@ void bicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
 
   // Background
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
-  //style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, opt.widget);
   style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
  
   const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
@@ -108,4 +114,28 @@ void bicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
   style->drawItemText(painter, bicRect, Qt::AlignTop, QApplication::palette(), true, bic, option.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text);
 
   painter->restore();
+}
+
+
+QValidator::State bicValidator::validate(QString &string, int&) const
+{
+  for (int i = 0; i < qMin(string.length(), 6); ++i) {
+    if ( !string.at(i).isLetter() )
+      return Invalid;
+    if (string.at(i).isLower())
+      string[i] = string.at(i).toUpper();
+  }
+  for (int i = 6; i < string.length(); ++i) {
+    if ( !string.at(i).isLetterOrNumber() )
+      return Invalid;
+    if (string.at(i).isLower())
+      string[i] = string.at(i).toUpper();
+  }
+  
+  if ( string.length() > 11 )
+    return Invalid;
+  else if (string.length() == 8 || string.length() == 11)
+    return Acceptable;
+  
+  return Intermediate;
 }

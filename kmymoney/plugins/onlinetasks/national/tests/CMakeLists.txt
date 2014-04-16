@@ -22,6 +22,7 @@ target_link_libraries( germanonlinetransfertest
   kmm_plugin
   kmm_utils_validators
   onlinetask_interfaces
+  payeeidentifier_iban_bic_widgets
   ${QT_QTCORE_LIBRARIES}
   ${QT_QTGUI_LIBRARIES}
   ${QT_QTTEST_LIBRARY}
