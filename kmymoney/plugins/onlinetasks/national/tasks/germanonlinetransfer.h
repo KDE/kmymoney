@@ -25,10 +25,10 @@
 #include <QtCore/QSharedPointer>
 
 #include "kmm_mymoney_export.h"
-#include "germanaccountidentifier.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 #include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "misc/validators.h"
 
 /**
@@ -60,8 +60,8 @@ public:
   virtual MyMoneyMoney value() const = 0;
   virtual void setValue(MyMoneyMoney value) = 0;
 
-  virtual void setRecipient ( const germanAccountIdentifier& accountIdentifier ) = 0;
-  virtual const germanAccountIdentifier& getRecipient() const = 0;
+  virtual void setBeneficiary ( const payeeIdentifiers::nationalAccount& accountIdentifier ) = 0;
+  virtual payeeIdentifiers::nationalAccount beneficiaryTyped() const = 0;
 
   virtual void setPurpose( const QString purpose ) = 0;
   virtual QString purpose() const = 0;
@@ -72,7 +72,7 @@ public:
    * @brief Returns the origin account identifier
    * @return you are owner of the object
    */
-  virtual germanAccountIdentifier* originAccountIdentifier() const = 0;
+  virtual payeeIdentifier::ptr originAccountIdentifier() const = 0;
 
   /**
    * National account can handle the currency of the related account only.

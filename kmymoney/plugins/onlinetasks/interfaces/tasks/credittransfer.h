@@ -22,7 +22,7 @@
 
 #include "mymoney/mymoneymoney.h"
 #include "mymoney/mymoneysecurity.h"
-#include "mymoney/accountidentifier.h"
+#include "payeeidentifier/payeeidentifier.h"
 
 class QValidator;
 
@@ -47,11 +47,11 @@ public:
   virtual QString responsibleAccount() const = 0;
 
   /**
-   * @brief accountIdentifier of destination of the money
+   * @brief payeeIdentifier of recipient
    *
-   * The return must never be null_ptr! If you implement this method return a new accountIdentifier() instead.
+   * The return must never be null_ptr!
    */
-  virtual const accountIdentifier& getRecipient() const = 0;
+  virtual payeeIdentifier::ptr beneficiary() const = 0;
 
   /**
    * @brief

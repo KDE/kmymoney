@@ -16,30 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PAYEEIDENTIFIERLOADER_H
-#define PAYEEIDENTIFIERLOADER_H
+/* needed for KDE_EXPORT and KDE_IMPORT macros */
+#include <kdemacros.h>
 
-#include "payeeidentifier/payeeidentifier.h"
+# if defined(MAKE_KMM_PAYEEIDENTIFIER_LIB)
+/* We are building this library */
+#  define PAYEEIDENTIFIER_EXPORT KDE_EXPORT
+# else
+/* We are using this library */
+#  define PAYEEIDENTIFIER_EXPORT KDE_IMPORT
+# endif
 
-#include <QHash>
-#include <QDomElement>
-
-class payeeIdentifierLoader
-{
-public:
-  payeeIdentifierLoader();
-
-  payeeIdentifier::ptr createPayeeIdentifier( const QString& payeeIdentifierId );
-  payeeIdentifier::ptr createPayeeIdentifierFromXML( const QString& payeeIdentifierId, const QDomElement& element );
-  
-  /** I take ownership */
-  void addPayeeIdentifier( payeeIdentifier *const identifier );
-  
-  static payeeIdentifierLoader* instance() { return &m_self; }
-
-private:
-  QHash<QString, payeeIdentifier*> m_identifiers;
-  static payeeIdentifierLoader m_self;
-};
-
-#endif // PAYEEIDENTIFIERLOADER_H
+#ifndef KMM_UNIT_TESTABLE
+#  define KMM_UNIT_TESTABLE
+#endif

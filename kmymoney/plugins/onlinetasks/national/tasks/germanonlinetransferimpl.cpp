@@ -64,7 +64,7 @@ germanOnlineTransferImpl::germanOnlineTransferImpl()
     _value(0),
     _purpose(QString()),
     _originAccount( QString() ),
-    _remoteAccount( germanAccountIdentifier() ),
+    _beneficiaryAccount( payeeIdentifiers::nationalAccount() ),
     _textKey(defaultTextKey),
     _subTextKey(defaultSubTextKey)
 {
@@ -77,7 +77,7 @@ germanOnlineTransferImpl::germanOnlineTransferImpl(const germanOnlineTransferImp
     _value( other._value ),
     _purpose( other._purpose ),
     _originAccount( other._originAccount ),
-    _remoteAccount( other._remoteAccount ),
+    _beneficiaryAccount( other._beneficiaryAccount ),
     _textKey( other._textKey ),
     _subTextKey( other._subTextKey )
 {
@@ -98,10 +98,10 @@ bool germanOnlineTransferImpl::isValid() const
     && settings->checkPurposeMaxLines( _purpose )
     && settings->checkPurposeLineLength( _purpose )
     && settings->checkPurposeCharset( _purpose )
-    && settings->checkRecipientCharset( _remoteAccount.ownerName() )
-    && settings->checkRecipientLength( _remoteAccount.ownerName() ) == validators::ok
-    && settings->checkRecipientAccountNumber( _remoteAccount.accountNumber() ) == validators::ok
-    && settings->checkRecipientBankCode( _remoteAccount.bankCode() ) == validators::ok
+    //&& settings->checkRecipientCharset( _beneficiaryAccount.ownerName() )
+    //&& settings->checkRecipientLength( _beneficiaryAccount.ownerName() ) == validators::ok
+    && settings->checkRecipientAccountNumber( _beneficiaryAccount.accountNumber() ) == validators::ok
+    && settings->checkRecipientBankCode( _beneficiaryAccount.bankCode() ) == validators::ok
     && value().isPositive()
   )
     return true;
@@ -109,15 +109,15 @@ bool germanOnlineTransferImpl::isValid() const
 }
 
 /** @todo make alive */
-germanAccountIdentifier* germanOnlineTransferImpl::originAccountIdentifier() const
+payeeIdentifier::ptr germanOnlineTransferImpl::originAccountIdentifier() const
 {
-  germanAccountIdentifier* ident = new germanAccountIdentifier();
+  payeeIdentifiers::nationalAccount* ident = new payeeIdentifiers::nationalAccount();
 #if 0
   ident->setAccountNumber( originMyMoneyAccount().number() );
   ident->setBankCode( MyMoneyFile::instance()->institution( originMyMoneyAccount().institutionId()).sortcode() );
   ident->setOwnerName( MyMoneyFile::instance()->user().name() );
 #endif
-  return ident;
+  return payeeIdentifier::ptr(ident);
 }
 
 /** @todo make alive */

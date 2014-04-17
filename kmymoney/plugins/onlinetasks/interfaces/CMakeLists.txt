@@ -18,6 +18,7 @@ set ( onlinetask_interfaces_SRCS
 kde4_add_library(onlinetask_interfaces STATIC ${onlinetask_interfaces_SRCS})
 
 target_link_libraries( onlinetask_interfaces
+  kmm_payeeidentifier
   ${QT_QTCORE_LIBRARIES}
 )
 

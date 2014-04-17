@@ -34,6 +34,8 @@ private slots:
   void cleanup();
 
   void comparison();
+  
+  void ibanChecksum_data();
   void ibanChecksum();
   
   void paperformatIban_data();

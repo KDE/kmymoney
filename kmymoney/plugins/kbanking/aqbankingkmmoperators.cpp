@@ -94,16 +94,26 @@ QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTa
   return settings.dynamicCast<sepaOnlineTransfer::settings>();
 }
 
-void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const bankAccountIdentifier& ident)
+void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident)
 {
   AB_Transaction_SetRemoteAccountNumber(transaction, ident.accountNumber().toUtf8().constData());
   AB_Transaction_SetRemoteBankCode(transaction, ident.bankCode().toUtf8().constData());
-  AB_Transaction_SetRemoteName(transaction, GWEN_StringList_fromQString(ident.ownerName()));
+  /** @todo set owner name */
+//  AB_Transaction_SetRemoteName(transaction, GWEN_StringList_fromQString(ident.ownerName()));
 }
 
-void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const bankAccountIdentifier& ident )
+void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::ibanBic& ident)
 {
-  AB_Transaction_SetLocalName(transaction, ident.ownerName().toUtf8().constData());
+  AB_Transaction_SetRemoteAccountNumber(transaction, ident.electronicIban().toUtf8().constData());
+  AB_Transaction_SetRemoteBankCode(transaction, ident.storedBic().toUtf8().constData());
+  /** @todo set owner name */
+  //  AB_Transaction_SetRemoteName(transaction, GWEN_StringList_fromQString(ident.ownerName()));
+}
+
+void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident )
+{
+  /** @todo enable setOwnerName */
+  //AB_Transaction_SetLocalName(transaction, ident.ownerName().toUtf8().constData());
   AB_Transaction_SetLocalAccountNumber(transaction, ident.accountNumber().toUtf8().constData());
   AB_Transaction_SetLocalBankCode(transaction, ident.bankCode().toUtf8().constData());
 }

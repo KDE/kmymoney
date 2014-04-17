@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INTERNATIONALACCOUNTIDENTIFIER_H
-#define INTERNATIONALACCOUNTIDENTIFIER_H
+#ifndef PAYEEIDENTIFIER_IBANBIC_H
+#define PAYEEIDENTIFIER_IBANBIC_H
 
 #include <QtCore/QString>
 #include <QtCore/QChar>
@@ -146,6 +146,24 @@ public:
   
   static QString localBankCodeByIban( const QString& iban );
   
+  /**
+   * @brief Check if this iban can be valid
+   * 
+   * This method also checks if the given country code is valid.
+   * 
+   * If also local aware checks are done (e.g. character set and length of BBAN).
+   * 
+   * @todo Implement local aware checks
+   */
+  static bool isIbanValid( const QString& iban );
+  
+  /**
+   * @brief Check the checksum
+   * 
+   * Test if the ISO 7064 mod 97-10 checksum of the iban is correct.
+   */
+  static bool validateIbanChecksum( const QString& iban );
+  
   static const int ibanMaxLength;
   
 private:
@@ -169,5 +187,5 @@ private:
 
 } // namespace payeeIdentifiers
 
-#endif // INTERNATIONALACCOUNTIDENTIFIER_H
+#endif // PAYEEIDENTIFIER_IBANBIC_H
 

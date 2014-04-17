@@ -29,6 +29,7 @@
 #include "mymoneyutils.h"
 #include <mymoneyexception.h>
 #include "payeeidentifier/payeeidentifierloader.h"
+#include <pluginloader.h>
 
 MyMoneyPayee MyMoneyPayee::null;
 

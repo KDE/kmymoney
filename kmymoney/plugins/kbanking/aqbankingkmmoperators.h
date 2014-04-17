@@ -15,7 +15,11 @@
 
 class AB_TRANSACTION_LIMITS;
 class AB_TRANSACTION;
-class bankAccountIdentifier;
+
+namespace payeeIdentifiers {
+  class ibanBic;
+  class nationalAccount;
+}
 
 /**
  * @brief AB_TransactionLimits_toGermanOnlineTaskSettings
@@ -34,13 +38,15 @@ QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTa
  * @param transaction
  * @param ident
  */
-void AB_Transaction_SetRemoteAccount( AB_TRANSACTION* transaction, const bankAccountIdentifier& ident );
+void AB_Transaction_SetRemoteAccount( AB_TRANSACTION* transaction, const payeeIdentifiers::ibanBic& ident );
+
+void AB_Transaction_SetRemoteAccount( AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident );
 
 /**
  * @brief AB_Transaction_SetLocalAccount
  * @param transaction
  * @param ident
  */
-void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const bankAccountIdentifier& ident );
+void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident );
 
 #endif // AQBANKINGKMMOPERATORS_H

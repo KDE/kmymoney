@@ -1,8 +1,3 @@
-# Todo move this to a findKtoblzcheck.cmake and use find_package() instead
-find_library( KTOBLZCHECK_LIBRARY NAMES libktoblzcheck ktoblzcheck
-    DOC "German account number and bank code check http://ktoblzcheck.sourceforge.net/")
-message(STATUS "Found ktoblzcheck at " ${KTOBLZCHECK_LIBRARY})
-
 # patch the version with the version defined in the build system
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/kmm_kbanking.desktop ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
@@ -53,13 +48,14 @@ TARGET_LINK_LIBRARIES(kmm_kbanking
                       kmm_mymoney
                       kmm_widgets
                       kmm_plugin
+                      payeeidentifier_iban_bic
+                      payeeidentifier_nationalaccount
                       ${KDE4_KDEUI_LIBS}
                       ${QT_QTDECLARATIVE_LIBRARY}
                       ${GWENHYWFAR_LIBRARIES}
                       ${AQBANKING_LIBRARIES}
                       #${GMP_LIBRARIES}
                       ${LIBALKIMIA_LIBRARY}
-                      ${KTOBLZCHECK_LIBRARY}
                       )
 
 

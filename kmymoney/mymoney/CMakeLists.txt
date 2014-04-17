@@ -1,12 +1,6 @@
 ADD_SUBDIRECTORY( storage )
 ADD_SUBDIRECTORY( payeeidentifier )
 
-# TODO move this to a findKtoblzcheck.cmake and use find_package() instead
-find_library( KTOBLZCHECK_LIBRARY NAMES libktoblzcheck ktoblzcheck
-    DOC "German account number and bank code check http://ktoblzcheck.sourceforge.net/")
-message(STATUS "Found ktoblzcheck at " ${KTOBLZCHECK_LIBRARY})
-
-
 ########### next target ###############
 
 SET(kmm_mymoney_LIB_SRCS
@@ -25,15 +19,10 @@ SET(kmm_mymoney_LIB_SRCS
   mymoneyobjectcontainer.cpp
   mymoneyforecast.cpp
   mymoneybalancecache.cpp
-  bankaccountidentifier.cpp
-  germanaccountidentifier.cpp
-  swiftaccountidentifier.cpp
   onlinejob.cpp
   onlinejobadministration.cpp
   onlinejobmessage.cpp
   onlinejobfolder.cpp
-  payeeidentifier/payeeidentifierloader.cpp
-  payeeidentifier/payeeidentifier.cpp # TODO: this is not clean, but I needed a target where this file is in quickly
   )
 
 
@@ -48,10 +37,6 @@ SET(mymoney_HEADERS kmm_mymoney_export.h
   mymoneyutils.h mymoneybudget.h mymoneyobjectcontainer.h mymoneyforecast.h
   imymoneyprocessingcalendar.h
   mymoneyfile.h
-  onlinejob.h
-  accountidentifier.h
-  bankaccountidentifier.h
-  swiftaccountidentifier.h
   onlinejob.h
   onlinejobtyped.h
   onlinejobmessage.h
@@ -70,9 +55,9 @@ TARGET_LINK_LIBRARIES(kmm_mymoney
                       ${KDE4_KIO_LIBS}
                       ${GMP_LIBRARIES}
                       ${LIBALKIMIA_LIBRARY}
-                      ${KTOBLZCHECK_LIBRARY}
                       kmm_storage
 #                     onlinetask_interfaces
+                      kmm_payeeidentifier_loader
                       payeeidentifier_iban_bic
                       payeeidentifier_nationalAccount
 )

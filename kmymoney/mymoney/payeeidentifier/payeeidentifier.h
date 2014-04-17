@@ -24,12 +24,16 @@
 #include <QtCore/QHash>
 #include <QtXml/QDomElement>
 
+#include "payeeidentifiermacros.h"
+
 /**
  * @brief Define a unique identifier for an payeeIdentifier subclass
  * 
+ * Use this macro in your class's public section.
+ * 
  * @param PIDID the payeeIdentifier id, e.g. "org.kmymoney.payeeIdentifier.swift". Must be
  * unique among all payeeIdentifiers as it is used internaly to store data, to compare
- * end for type casting (there must not be more than one class which uses that pidid).
+ * types and for type casting (there must not be more than one class which uses that pidid).
  */
 #define PAYEEIDENTIFIER_ID(className, PIDID) \
 /** @brief Returns the payeeIdentifier Id */ \
@@ -52,7 +56,7 @@ static const QString& staticPayeeIdentifierId() { \
  * But also the creditor identifier for debit-notes in sepa-countries can be a subclass. It does not
  * address an account but a company.
  * 
- * Any payee (@see MyMoneyPayee) can have several payeeIdentifiers.
+ * Any payee (@ref MyMoneyPayee) can have several payeeIdentifiers.
  * 
  * The online banking system uses payeeIdentifiers to dertermine if it is able so create a credit-transfer
  * to a given payee. During import the payeeIdentifiers are used to find a payee.
@@ -66,10 +70,10 @@ static const QString& staticPayeeIdentifierId() { \
  * 
  * @section Inheriting
  * 
- * To identify the type of an payeeIdentifier you must use the macro @see PAYEEIDENTIFIER_ID(className, PIDID)
+ * To identify the type of an payeeIdentifier you must use the macro @ref PAYEEIDENTIFIER_ID(className, PIDID)
  * in the public section of your subclass.
  */
-class payeeIdentifier
+class PAYEEIDENTIFIER_EXPORT payeeIdentifier
 {
 public:
   /** @brief Shared pointer to payeeIdentifier */

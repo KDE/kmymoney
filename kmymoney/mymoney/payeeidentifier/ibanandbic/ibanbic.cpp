@@ -20,6 +20,9 @@
 
 #include <typeinfo>
 #include <algorithm>
+#include <gmpxx.h>
+
+#include <QDebug>
 
 #include "ibanbicdata.h"
 
@@ -168,6 +171,11 @@ bool ibanBic::isValid() const
   return true;
 }
 
+bool ibanBic::isIbanValid(const QString& iban)
+{
+  return validateIbanChecksum(iban);
+}
+
 QString ibanBic::ibanToElectronic(const QString& iban)
 {
   QString canonicalIban;
@@ -212,6 +220,32 @@ QString ibanBic::ibanToPaperformat(const QString& iban, const QString& seperator
 QString ibanBic::bban(const QString& iban)
 {
   return iban.mid(4);
+}
+
+bool ibanBic::validateIbanChecksum(const QString& iban)
+{
+  Q_ASSERT( iban == ibanToElectronic(iban) );
+  
+  // Reodrder
+  QString reordered = iban.mid(4) + iban.left(4);
+  
+  // Replace letters
+  for( int i = 0; i < reordered.length(); ++i) {
+    if ( reordered.at(i).isLetter() ) {
+      // Replace charactes A -> 10, ..., Z -> 35
+      reordered.replace(i, 1, QString::number(reordered.at(i).toAscii() - 'A' + 10));
+      ++i; // the inserted number is always two characters long, jump beyond
+    }
+  }
+  
+  // Calculations
+  try {
+    mpz_class number( reordered.toAscii().constData(), 10 );
+    return ( number % 97 == 1 );
+  } catch ( std::invalid_argument& ) {
+    // This can happen if the given iban contains incorrect data
+  }
+  return false;
 }
 
 int ibanBic::ibanLengthByCountry(const QString& countryCode)

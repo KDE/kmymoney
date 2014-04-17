@@ -72,8 +72,6 @@ public:
   
   virtual validators::lengthStatus checkEndToEndReferenceLength(const QString& reference) const;
   
-  virtual bool isIbanValid( const QString& iban ) const;
-  
   virtual bool checkRecipientBic( const QString& bic ) const;
   
   /**

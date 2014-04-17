@@ -24,7 +24,6 @@
 #include "onlinetasks/interfaces/ui/ionlinejobedit.h"
 #include "mymoney/onlinejobtyped.h"
 #include "../tasks/germanonlinetransfer.h"
-#include "mymoney/swiftaccountidentifier.h"
 
 class kMandatoryFieldGroup;
 

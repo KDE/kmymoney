@@ -25,7 +25,6 @@
 #include <QtCore/QSharedPointer>
 
 #include "kmm_mymoney_export.h"
-#include "germanaccountidentifier.h"
 #include "germanonlinetransfer.h"
 
 /**
@@ -49,8 +48,9 @@ public:
   MyMoneyMoney value() const { return _value; }
   virtual void setValue(MyMoneyMoney value) { _value = value; }
 
-  void setRecipient ( const germanAccountIdentifier& accountIdentifier ) { _remoteAccount = accountIdentifier; }
-  const germanAccountIdentifier& getRecipient() const { return _remoteAccount; }
+  void setBeneficiary ( const payeeIdentifiers::nationalAccount& accountIdentifier ) { _beneficiaryAccount = accountIdentifier; }
+  payeeIdentifier::ptr beneficiary() const { return _beneficiaryAccount.cloneSharedPtr(); }
+  virtual payeeIdentifiers::nationalAccount beneficiaryTyped() const { return _beneficiaryAccount; };
 
   virtual void setPurpose( const QString purpose ) { _purpose = purpose; }
   QString purpose() const { return _purpose; }
@@ -61,7 +61,7 @@ public:
    * @brief Returns the origin account identifier
    * @return you are owner of the object
    */
-  germanAccountIdentifier* originAccountIdentifier() const;
+  payeeIdentifier::ptr originAccountIdentifier() const;
 
   /**
    * National account can handle the currency of the related account only.
@@ -89,7 +89,7 @@ private:
   QString _purpose;
 
   QString _originAccount;
-  germanAccountIdentifier _remoteAccount;
+  payeeIdentifiers::nationalAccount _beneficiaryAccount;
   
   unsigned short int _textKey;
   unsigned short int _subTextKey;

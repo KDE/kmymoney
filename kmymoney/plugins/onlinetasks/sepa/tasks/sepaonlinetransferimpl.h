@@ -25,8 +25,6 @@
 
 #include "sepaonlinetransfer.h"
 
-#include "swiftaccountidentifier.h"
-
 /**
  * @brief SEPA Credit Transfer
  */
@@ -45,8 +43,9 @@ public:
   MyMoneyMoney value() const { return _value; }
   virtual void setValue(MyMoneyMoney value) { _value = value; }
 
-  void setRecipient ( const swiftAccountIdentifier& accountIdentifier ) { _remoteAccount = accountIdentifier; }
-  const sepaAccountIdentifier& getRecipient() const { return _remoteAccount; }
+  virtual void setBeneficiary ( const payeeIdentifiers::ibanBic& accountIdentifier ) { _beneficiaryAccount = accountIdentifier; };
+  virtual payeeIdentifier::ptr beneficiary() const { return _beneficiaryAccount.cloneSharedPtr(); }
+  virtual payeeIdentifiers::ibanBic beneficiaryTyped() const { return _beneficiaryAccount; }
 
   virtual void setPurpose( const QString purpose ) { _purpose = purpose; }
   QString purpose() const { return _purpose; }
@@ -54,7 +53,7 @@ public:
   virtual void setEndToEndReference( const QString& reference ) { _endToEndReference = reference; }
   QString endToEndReference() const { return _endToEndReference; }
 
-  sepaAccountIdentifier* originAccountIdentifier() const;
+  payeeIdentifier::ptr originAccountIdentifier() const;
 
   MyMoneySecurity currency() const;
 
@@ -83,7 +82,7 @@ private:
   QString _purpose;
   QString _endToEndReference;
 
-  sepaAccountIdentifier _remoteAccount;
+  payeeIdentifiers::ibanBic _beneficiaryAccount;
 
   unsigned short int _textKey;
   unsigned short int _subTextKey;

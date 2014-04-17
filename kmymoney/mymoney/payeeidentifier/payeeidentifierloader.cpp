@@ -24,6 +24,7 @@
 payeeIdentifierLoader payeeIdentifierLoader::m_self;
 
 payeeIdentifierLoader::payeeIdentifierLoader()
+  : m_identifiers( QHash<QString, payeeIdentifier*>() )
 {
   addPayeeIdentifier( new payeeIdentifiers::ibanBic() );
   addPayeeIdentifier( new payeeIdentifiers::nationalAccount() );
@@ -32,6 +33,16 @@ payeeIdentifierLoader::payeeIdentifierLoader()
 void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifier* const identifier)
 {
   m_identifiers.insert(identifier->payeeIdentifierId(), identifier);
+}
+
+payeeIdentifier::ptr payeeIdentifierLoader::createPayeeIdentifier(const QString& payeeIdentifierId)
+{
+  const payeeIdentifier* ident = m_identifiers.value( payeeIdentifierId );
+  if ( ident != 0 ) {
+    return ident->cloneSharedPtr();
+  }
+  
+  return payeeIdentifier::ptr();  
 }
 
 payeeIdentifier::ptr payeeIdentifierLoader::createPayeeIdentifierFromXML(const QString& payeeIdentifierId, const QDomElement& element)

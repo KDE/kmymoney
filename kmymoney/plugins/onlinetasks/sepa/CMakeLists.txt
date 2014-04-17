@@ -31,6 +31,7 @@ target_link_libraries( konlinetasks_sepa
   kmm_plugin
   kmm_utils_validators
   onlinetask_interfaces
+  payeeidentifier_iban_bic
   payeeidentifier_iban_bic_widgets
   ${QT_QTCORE_LIBRARIES}
   ${QT_QTGUI_LIBRARIES}

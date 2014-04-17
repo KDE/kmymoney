@@ -51,9 +51,22 @@ void internationalAccountIdentifierTest::comparison()
 
 }
 
+void internationalAccountIdentifierTest::ibanChecksum_data()
+{
+  QTest::addColumn<QString>("iban");
+  QTest::addColumn<bool>("testResult");
+  
+  QTest::newRow("KDE e.V.") << "DE82200700240066644600" << true;
+  QTest::newRow("Invalid iban") << "DE82200700240066644601" << false;
+  QTest::newRow("Random IBAN") << "BH82AEHI21601643513576" << true;
+}
+
 void internationalAccountIdentifierTest::ibanChecksum()
 {
-
+  QFETCH(QString, iban);
+  QFETCH(bool, testResult);
+  
+  QCOMPARE(payeeIdentifiers::ibanBic::validateIbanChecksum(iban), testResult);
 }
 
 void internationalAccountIdentifierTest::paperformatIban_data()

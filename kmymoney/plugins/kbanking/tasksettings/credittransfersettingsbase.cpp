@@ -125,17 +125,3 @@ validators::lengthStatus creditTransferSettingsBase::checkRecipientBankCode(cons
     return validators::tooLong;
   return validators::ok;
 }
-
-bool creditTransferSettingsBase::isIbanValid(const QString& iban) const
-{
-  IbanCheck checker;
-  switch (checker.check(Iban(iban.toLatin1().constData()))) {
-  case IbanCheck::COUNTRY_NOT_FOUND:
-  case IbanCheck::OK: return true;
-  case IbanCheck::BAD_CHECKSUM:
-  case IbanCheck::TOO_SHORT:
-  case IbanCheck::WRONG_LENGTH:
-  case IbanCheck::WRONG_COUNTRY:
-  default: return false;
-  }
-}

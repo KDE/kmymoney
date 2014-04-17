@@ -23,11 +23,11 @@
 
 #include <klocalizedstring.h>
 
-#include "swiftaccountidentifier.h"
 #include "misc/validators.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 #include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
+#include "payeeidentifier/ibanandbic/ibanbic.h"
 
 /**
  * @brief SEPA Credit Transfer
@@ -47,8 +47,8 @@ public:
   virtual MyMoneyMoney value() const = 0;
   virtual void setValue(MyMoneyMoney value) = 0;
 
-  virtual void setRecipient ( const swiftAccountIdentifier& accountIdentifier ) = 0;
-  virtual const sepaAccountIdentifier& getRecipient() const = 0;
+  virtual void setBeneficiary ( const payeeIdentifiers::ibanBic& accountIdentifier ) = 0;
+  virtual payeeIdentifiers::ibanBic beneficiaryTyped() const = 0;
 
   virtual void setPurpose( const QString purpose ) = 0;
   virtual QString purpose() const = 0;
@@ -60,7 +60,7 @@ public:
    * @brief Returns the origin account identifier
    * @return you are owner of the object
    */
-  virtual sepaAccountIdentifier* originAccountIdentifier() const = 0;
+  virtual payeeIdentifier::ptr originAccountIdentifier() const = 0;
 
   /**
    * National account can handle the currency of the related account only.
@@ -106,7 +106,6 @@ public:
     
     virtual int endToEndReferenceLength() const = 0;
     virtual validators::lengthStatus checkEndToEndReferenceLength(const QString& reference) const = 0;
-    virtual bool isIbanValid( const QString& iban ) const = 0;
     
     virtual bool checkRecipientBic( const QString& bic ) const = 0;
     

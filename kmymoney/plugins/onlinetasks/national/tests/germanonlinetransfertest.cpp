@@ -92,11 +92,12 @@ void germanOnlineTransferTest::arbitraryValidTask()
   task->setValue( MyMoneyMoney(1, 1) );
   task->setPurpose( "Test" );
   
-  germanAccountIdentifier ident;
+  payeeIdentifiers::nationalAccount ident;
   ident.setBankCode( "37020500" );
   ident.setAccountNumber( "300000" );
-  ident.setOwnerName( "UNICEF Deutschland" );
-  task->setRecipient( ident );
+  /** @todo enable setOwnerName */
+  //ident.setOwnerName( "UNICEF Deutschland" );
+  task->setBeneficiary( ident );
   
   QVERIFY( task->isValid() );
   

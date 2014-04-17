@@ -40,6 +40,9 @@ public:
   QString bankCode() const { return m_bankCode; }
   QString accountNumber() const { return m_accountNumber; }
   
+  /** @todo implement */
+  QString bankName() const { return QString(); }
+  
   void setBankCode( const QString& bankCode ) { m_bankCode = bankCode; }
   void setAccountNumber( const QString& accountNumber ) { m_accountNumber = accountNumber; }
 

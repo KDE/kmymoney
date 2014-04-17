@@ -28,7 +28,6 @@
 
 #include "mymoney/mymoneyfile.h"
 #include "mymoney/mymoneyaccount.h"
-#include "mymoney/accountidentifier.h"
 #include "mymoney/onlinejobadministration.h"
 
 #include "models/models.h"

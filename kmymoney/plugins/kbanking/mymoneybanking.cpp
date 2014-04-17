@@ -76,7 +76,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoney/accountidentifier.h"
 #include "mymoney/onlinejob.h"
 
 #include "kbjobview.h"
@@ -745,7 +744,7 @@ onlineJobTyped<germanOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobT
   AB_TRANSACTION *ABtransaction = AB_Transaction_new();
 
   // Recipient
-  germanAccountIdentifier beneficiaryAcc = job.task()->getRecipient();
+  payeeIdentifiers::nationalAccount beneficiaryAcc = job.task()->beneficiaryTyped();
   AB_Transaction_SetRemoteAccount(ABtransaction, beneficiaryAcc);
 
   // Origin Account
@@ -803,12 +802,15 @@ onlineJobTyped<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyp
   AB_TRANSACTION *AbTransaction = AB_Transaction_new();
 
   // Recipient
-  sepaAccountIdentifier beneficiaryAcc = job.constTask()->getRecipient();
-  AB_Transaction_SetRemoteName( AbTransaction, GWEN_StringList_fromQString(beneficiaryAcc.ownerName()) );
-  AB_Transaction_SetRemoteIban( AbTransaction, beneficiaryAcc.accountNumber().toUtf8().constData() );
-  AB_Transaction_SetRemoteBic(  AbTransaction, beneficiaryAcc.bankCode().toUtf8().constData() );
+  payeeIdentifiers::ibanBic beneficiaryAcc = job.constTask()->beneficiaryTyped();
+  /** @todo enable setOwnerName */
+  //AB_Transaction_SetRemoteName( AbTransaction, GWEN_StringList_fromQString(beneficiaryAcc.ownerName()) );
+  AB_Transaction_SetRemoteIban( AbTransaction, beneficiaryAcc.electronicIban().toUtf8().constData() );
+  AB_Transaction_SetRemoteBic(  AbTransaction, beneficiaryAcc.fullStoredBic().toUtf8().constData() );
 
   // Origin Account
+  /** @todo enable setting of origin account */
+#if 0
   sepaAccountIdentifier localAcc;
   MyMoneyAccount account = job.responsibleMyMoneyAccount();
   QString accountNumber = account.number();
@@ -816,7 +818,7 @@ onlineJobTyped<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyp
   QString sortCode = MyMoneyFile::instance()->institution( account.institutionId() ).sortcode();
   localAcc.setBankCode( sortCode.remove(QRegExp("\\s")) );
   localAcc.setOwnerName( MyMoneyFile::instance()->user().name() );
-  
+
   QString iban = account.value("iban");
   QString bic = MyMoneyFile::instance()->institution( account.institutionId() ).value("bic");
   AB_Transaction_SetLocalIban( AbTransaction, iban.remove(QRegExp("\\s")).toUtf8().constData() );
@@ -832,7 +834,7 @@ onlineJobTyped<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyp
     return job;
   }
   AB_Transaction_SetLocalAccount(AbTransaction, localAcc);
-
+#endif
   // Purpose
   QStringList qPurpose = job.constTask()->purpose().split('\n');
   GWEN_STRINGLIST *purpose = GWEN_StringList_fromQStringList(qPurpose);

@@ -120,7 +120,7 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
     switch (index.column()) {
     case ColAccount: return QVariant::fromValue(job.responsibleMyMoneyAccount().name());
     case ColAction: return QVariant::fromValue(job.task()->jobTypeName());
-    case ColDestination: return ( (transfer != 0) ? QVariant::fromValue(transfer->getRecipient().ownerName()) : QVariant());
+    case ColDestination: return QVariant(); //( (transfer != 0) ? QVariant::fromValue(transfer->getRecipient().ownerName()) : QVariant());
     case ColValue: return ( (transfer != 0) ? QVariant::fromValue(MyMoneyUtils::formatMoney(transfer->value(), transfer->currency())) : QVariant() );
     default: return QVariant();
     }

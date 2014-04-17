@@ -83,7 +83,7 @@ sepaOnlineTransferImpl::sepaOnlineTransferImpl()
     _value(0),
     _purpose(QString("")),
     _endToEndReference(QString("")),
-    _remoteAccount( sepaAccountIdentifier() ),
+    _beneficiaryAccount( payeeIdentifiers::ibanBic() ),
     _textKey(defaultTextKey),
     _subTextKey(defaultSubTextKey)
 {
@@ -97,7 +97,7 @@ sepaOnlineTransferImpl::sepaOnlineTransferImpl(const sepaOnlineTransferImpl& oth
     _value( other._value ),
     _purpose( other._purpose ),
     _endToEndReference(other._endToEndReference),
-    _remoteAccount( other._remoteAccount ),
+    _beneficiaryAccount( other._beneficiaryAccount ),
     _textKey( other._textKey ),
     _subTextKey( other._subTextKey )
 {
@@ -119,23 +119,23 @@ bool sepaOnlineTransferImpl::isValid() const
     && settings->checkPurposeLineLength( _purpose )
     && settings->checkPurposeCharset( _purpose )
     && settings->checkEndToEndReferenceLength( _endToEndReference ) == validators::ok
-    && settings->checkRecipientCharset( _remoteAccount.ownerName() )
-    && settings->checkRecipientLength( _remoteAccount.ownerName()) == validators::ok
-    && settings->isIbanValid( _remoteAccount.accountNumber() )
-    && settings->checkRecipientBic( _remoteAccount.bankCode() )
+    //&& settings->checkRecipientCharset( _beneficiaryAccount.ownerName() )
+    //&& settings->checkRecipientLength( _beneficiaryAccount.ownerName()) == validators::ok
+    && _beneficiaryAccount.isValid()
+    && ( !settings->isBicMandatory(_beneficiaryAccount.electronicIban()) || settings->checkRecipientBic(_beneficiaryAccount.bic()) )
     && value().isPositive()
   )
     return true;
   return false;
 }
 
-sepaAccountIdentifier* sepaOnlineTransferImpl::originAccountIdentifier() const
+payeeIdentifier::ptr sepaOnlineTransferImpl::originAccountIdentifier() const
 {
-  sepaAccountIdentifier* ident = new sepaAccountIdentifier();
+  QSharedPointer<payeeIdentifiers::ibanBic> ident( new payeeIdentifiers::ibanBic() );
 //  ident->setAccountNumber( originMyMoneyAccount().number() );
 //  ident->setBankCode( MyMoneyFile::instance()->institution( originMyMoneyAccount().institutionId()).sortcode() );
 //  ident->setOwnerName( MyMoneyFile::instance()->user().name() );
-  return ident;
+  return ident.staticCast<payeeIdentifier>();
 }
 
 /** @todo Return EUR */

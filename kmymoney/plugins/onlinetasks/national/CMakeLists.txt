@@ -38,6 +38,7 @@ target_link_libraries( konlinetasks_national
   kmm_plugin
   kmm_utils_validators
   onlinetask_interfaces
+  payeeidentifier_nationalAccount
   ${QT_QTCORE_LIBRARIES}
   ${QT_QTGUI_LIBRARIES}
   ${KDE4_KDECORE_LIBS}

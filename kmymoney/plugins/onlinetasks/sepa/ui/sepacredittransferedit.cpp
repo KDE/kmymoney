@@ -21,8 +21,6 @@
 #include "ui_sepacredittransferedit.h"
 #include "kguiutils.h"
 
-#include "mymoney/swiftaccountidentifier.h"
-
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 
 sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent) :
@@ -76,11 +74,11 @@ onlineJobTyped<sepaOnlineTransfer> sepaCreditTransferEdit::getOnlineJobTyped() c
   sepaJob.task()->setPurpose( ui->purpose->toPlainText() );
   sepaJob.task()->setEndToEndReference( ui->sepaReference->text() );
 
-  sepaAccountIdentifier accIdent;
-  accIdent.setOwnerName( ui->beneficiaryName->text() );
-  accIdent.setAccountNumber( ui->beneficiaryAccNum->text() );
-  accIdent.setBankCode( ui->beneficiaryBankCode->text() );
-  sepaJob.task()->setRecipient(accIdent);
+  payeeIdentifiers::ibanBic accIdent;
+  //accIdent.setOwnerName( ui->beneficiaryName->text() );
+  accIdent.setIban( ui->beneficiaryAccNum->text() );
+  accIdent.setBic( ui->beneficiaryBankCode->text() );
+  sepaJob.task()->setBeneficiary(accIdent);
 
   return sepaJob;
 }
@@ -92,9 +90,9 @@ void sepaCreditTransferEdit::setOnlineJob(const onlineJobTyped<sepaOnlineTransfe
   ui->purpose->setText( job.task()->purpose() );
   ui->sepaReference->setText( job.task()->endToEndReference() );
   ui->value->setValue( job.task()->value() );
-  ui->beneficiaryName->setText( job.task()->getRecipient().ownerName() );
-  ui->beneficiaryAccNum->setText( job.task()->getRecipient().accountNumber() );
-  ui->beneficiaryBankCode->setText( job.task()->getRecipient().bankCode() );
+  //ui->beneficiaryName->setText( job.task()->beneficiaryTyped().ownerName() );
+  ui->beneficiaryAccNum->setText( job.task()->beneficiaryTyped().paperformatIban() );
+  ui->beneficiaryBankCode->setText( job.task()->beneficiaryTyped().storedBic() );
 }
 
 bool sepaCreditTransferEdit::setOnlineJob( const onlineJob& job )
@@ -156,7 +154,7 @@ void sepaCreditTransferEdit::updateSettings()
 void sepaCreditTransferEdit::beneficiaryIbanChanged(const QString& iban)
 {
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
-  if ( settings->isIbanValid( iban ) ) {
+  if ( payeeIdentifiers::ibanBic::isIbanValid(iban) ) {
     ui->statusIban->setToolTip(QString());
     ui->statusIban->setVisible(false);
   } else {

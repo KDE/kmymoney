@@ -68,10 +68,10 @@ bool germanCreditTransferEdit::setOnlineJob(const onlineJobTyped<germanOnlineTra
 {
     m_germanCreditTransfer = job;
     setOriginAccount( job.task()->responsibleAccount() );
-    ui->beneficiaryName->setText( m_germanCreditTransfer.task()->getRecipient().ownerName() );
-    ui->beneficiaryAccNum->setText( m_germanCreditTransfer.task()->getRecipient().accountNumber() );
-    ui->beneficiaryBankCode->setText( m_germanCreditTransfer.task()->getRecipient().bankCode() );
-    ui->beneficiaryBankName->setText( m_germanCreditTransfer.task()->getRecipient().getBankName() );
+    //ui->beneficiaryName->setText( m_germanCreditTransfer.task()->beneficiaryTyped().ownerName() );
+    ui->beneficiaryAccNum->setText( m_germanCreditTransfer.task()->beneficiaryTyped().accountNumber() );
+    ui->beneficiaryBankCode->setText( m_germanCreditTransfer.task()->beneficiaryTyped().bankCode() );
+    //ui->beneficiaryBankName->setText( m_germanCreditTransfer.task()->beneficiaryTyped().getBankName() );
     ui->transferValue->setValue( m_germanCreditTransfer.task()->value() );
     ui->transferPurpose->setText( m_germanCreditTransfer.task()->purpose() );
     return true;
@@ -108,9 +108,9 @@ void germanCreditTransferEdit::beneficiaryAccountChanged(const QString& accountN
 
 void germanCreditTransferEdit::beneficiaryBankCodeChanged( QString bankCode )
 {
-  germanAccountIdentifier accountIdent;
+  payeeIdentifiers::nationalAccount accountIdent;
   accountIdent.setBankCode( bankCode.remove(QRegExp("\\s")) );
-  const QString bankName = accountIdent.getBankName();
+  const QString bankName = accountIdent.bankName();
   ui->beneficiaryBankName->setText( bankName );
   
   if ( bankCode.length() != 8 ) {
@@ -178,12 +178,12 @@ void germanCreditTransferEdit::purposeChanged()
 onlineJobTyped<germanOnlineTransfer> germanCreditTransferEdit::getOnlineJobTyped() const
 {
   onlineJobTyped<germanOnlineTransfer> job( m_germanCreditTransfer );
-  germanAccountIdentifier accountIdent;
-  accountIdent.setOwnerName( ui->beneficiaryName->text() );
+  payeeIdentifiers::nationalAccount accountIdent;
+  //accountIdent.setOwnerName( ui->beneficiaryName->text() );
   accountIdent.setAccountNumber( ui->beneficiaryAccNum->text() );
   accountIdent.setBankCode( ui->beneficiaryBankCode->text().remove(QRegExp("\\s")) );
   job.task()->setOriginAccount( m_originAccount );
-  job.task()->setRecipient( accountIdent );
+  job.task()->setBeneficiary( accountIdent );
   job.task()->setValue( ui->transferValue->value() );
   job.task()->setPurpose( ui->transferPurpose->toPlainText() );
   return job;

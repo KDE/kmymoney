@@ -1,2 +1,0 @@
-#include "swiftaccountidentifier.h"
-
