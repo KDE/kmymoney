@@ -696,19 +696,19 @@ IonlineTaskSettings::ptr KBankingPlugin::settings(QString accountId, QString tas
   if ( germanOnlineTransfer::name() == taskName ) {
     // Get Limits for germanOnlineTransfer
     QScopedPointer<AB_JOB, QScopedPointerAbJobDeleter> abJob( AB_JobSingleTransfer_new(abAcc) );
-    if ( AB_Job_CheckAvailability( abJob.data() ) != 0)
+    if ( AB_Job_CheckAvailability( abJob.data() ) != 0 )
       return IonlineTaskSettings::ptr();
 
-    const AB_TRANSACTION_LIMITS* limits = AB_JobSingleTransfer_GetFieldLimits( abJob.data() );
+    const AB_TRANSACTION_LIMITS* limits = AB_Job_GetFieldLimits( abJob.data() );
     return AB_TransactionLimits_toGermanOnlineTaskSettings( limits ).dynamicCast<IonlineTaskSettings>();
     //! @todo needs free? because that is not possible with const AB_TRANSACTION_LIMITS*
     // AB_TransactionLimits_free( limits );
   } else if ( sepaOnlineTransfer::name() == taskName ) {
     // Get limits for sepaonlinetransfer
     QScopedPointer<AB_JOB, QScopedPointerAbJobDeleter> abJob( AB_JobSepaTransfer_new(abAcc) );
-    if ( AB_Job_CheckAvailability( abJob.data() ) != 0)
+    if ( AB_Job_CheckAvailability( abJob.data() ) != 0 )
       return IonlineTaskSettings::ptr();
-    const AB_TRANSACTION_LIMITS* limits = AB_JobSingleTransfer_GetFieldLimits( abJob.data() );
+    const AB_TRANSACTION_LIMITS* limits = AB_Job_GetFieldLimits( abJob.data() );
     return AB_TransactionLimits_toSepaOnlineTaskSettings( limits ).dynamicCast<IonlineTaskSettings>();
   }
   return IonlineTaskSettings::ptr();
@@ -762,7 +762,7 @@ onlineJobTyped<germanOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobT
   AB_Transaction_SetValue(ABtransaction, AB_Value_fromMyMoneyMoney(job.task()->value()));
 
   /** @todo LOW remove Debug info */
-  qDebug() << "SetTransaction: " << AB_JobSingleTransfer_SetTransaction(abJob, ABtransaction);
+  qDebug() << "SetTransaction: " << AB_Job_SetTransaction(abJob, ABtransaction);
 
   GWEN_DB_NODE *gwenNode = AB_Job_GetAppData(abJob);
   GWEN_DB_SetCharValue(gwenNode, GWEN_DB_FLAGS_DEFAULT, "kmmOnlineJobId", m_kbanking->mappingId(job).toLatin1().constData());
@@ -850,7 +850,7 @@ onlineJobTyped<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyp
   AB_Transaction_SetValue(AbTransaction, AB_Value_fromMyMoneyMoney(job.constTask()->value()));
 
   /** @todo LOW remove Debug info */
-  qDebug() << "SetTransaction: " << AB_JobSepaTransfer_SetTransaction(abJob, AbTransaction);
+  qDebug() << "SetTransaction: " << AB_Job_SetTransaction(abJob, AbTransaction);
 
   GWEN_DB_NODE *gwenNode = AB_Job_GetAppData(abJob);
   GWEN_DB_SetCharValue(gwenNode, GWEN_DB_FLAGS_DEFAULT, "kmmOnlineJobId", m_kbanking->mappingId(job).toLatin1().constData());
