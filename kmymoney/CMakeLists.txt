@@ -59,6 +59,7 @@ TARGET_LINK_LIBRARIES(kmymoney_common
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
 ADD_DEPENDENCIES(kmymoney_common generate_base_ui_srcs kmm_config)
+ADD_DEPENDENCIES(wizardpages widgets)
 
 SET( kmymoney_common_LIBS
   views reports kmymoney_base kmymoney_common
