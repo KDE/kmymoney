@@ -1620,7 +1620,7 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("CHF", i18n("Swiss Franc"),            "SFr"), create);
   loadDefaultCurrency(MyMoneySecurity("SYP", i18n("Syrian Pound"),           QChar(0x00A3)), create);
   loadDefaultCurrency(MyMoneySecurity("TWD", i18n("Taiwan Dollar"),          "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("TJS", i18n("Tajikistan Somani")), create);
+  loadDefaultCurrency(MyMoneySecurity("TJS", i18n("Tajikistan Somoni")), create);
   loadDefaultCurrency(MyMoneySecurity("TZS", i18n("Tanzanian Shilling")), create);
   loadDefaultCurrency(MyMoneySecurity("THB", i18n("Thai Baht"),              QChar(0x0E3F)), create);
   loadDefaultCurrency(MyMoneySecurity("TOP", i18n("Tongan Pa'anga")), create);
