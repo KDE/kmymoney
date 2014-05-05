@@ -25,3 +25,9 @@ Type=int
 
 [PropertyDef::X-KMyMoney-Bankdata-Database]
 Type=QString
+
+[PropertyDef::X-KMyMoney-Bankdata-IsComplete]
+Type=bool
+Default=false
+# Set if the dasabase contains all banks for the countries given in X-KMyMoney-CountryCodes
+# If true, a bic which is not found in the database is considered invalid.

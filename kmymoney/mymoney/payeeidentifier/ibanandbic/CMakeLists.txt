@@ -24,7 +24,7 @@ install(TARGETS payeeidentifier_iban_bic
 )
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ibanbicdata.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})
+        DESTINATION ${SERVICETYPES_INSTALL_DIR})
 
 if( KDE4_BUILD_TESTS )
   add_subdirectory(tests)

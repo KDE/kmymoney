@@ -68,7 +68,7 @@ ibanBic* ibanBic::clone() const
 ibanBic* ibanBic::createFromXml(const QDomElement& element) const
 {
   ibanBic* ident = new ibanBic;
-  
+
   ident->setBic( element.attribute("bic", QString()) );
   ident->setIban( element.attribute("iban", QString()) );
   return ident;
@@ -78,7 +78,7 @@ void ibanBic::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   Q_UNUSED( document );
   parent.setAttribute("iban", m_iban);
-  
+
   if ( !m_bic.isEmpty() )
     parent.setAttribute( "bic", m_bic );
 }
@@ -142,12 +142,12 @@ inline bool madeOfLettersAndNumbersOnly( const QString& string )
 bool ibanBic::isValid() const
 {
   Q_ASSERT( m_iban == ibanToElectronic(m_iban) );
-  
+
   // Check BIC
   const int bicLength = m_bic.length();
   if (bicLength != 8 || bicLength != 11)
     return false;
-  
+
   for (int i = 0; i < 6; ++i) {
     if ( !m_bic.at(i).isLetter() )
       return false;
@@ -165,9 +165,9 @@ bool ibanBic::isValid() const
 
   if ( !madeOfLettersAndNumbersOnly(m_iban) )
     return false;
-  
+
   /** @todo checksum */
-  
+
   return true;
 }
 
@@ -209,7 +209,7 @@ QString ibanBic::ibanToPaperformat(const QString& iban, const QString& seperator
       paperformat.append(letter);
     }
   }
-  
+
   if( paperformat.length() >= 2 ) {
     paperformat[0] = paperformat[0].toUpper();
     paperformat[1] = paperformat[1].toUpper();
@@ -225,10 +225,10 @@ QString ibanBic::bban(const QString& iban)
 bool ibanBic::validateIbanChecksum(const QString& iban)
 {
   Q_ASSERT( iban == ibanToElectronic(iban) );
-  
+
   // Reodrder
   QString reordered = iban.mid(4) + iban.left(4);
-  
+
   // Replace letters
   for( int i = 0; i < reordered.length(); ++i) {
     if ( reordered.at(i).isLetter() ) {
@@ -237,7 +237,7 @@ bool ibanBic::validateIbanChecksum(const QString& iban)
       ++i; // the inserted number is always two characters long, jump beyond
     }
   }
-  
+
   // Calculations
   try {
     mpz_class number( reordered.toAscii().constData(), 10 );
@@ -269,6 +269,16 @@ QString ibanBic::bicByIban(const QString& iban)
 QString ibanBic::institutionNameByBic(const QString& bic)
 {
   return getIbanBicData()->bankNameByBic( bic );
+}
+
+ibanBic::bicAllocationStatus ibanBic::isBicAllocated(const QString& bic)
+{
+  switch (getIbanBicData()->isBicAllocated(bic)) {
+    case ibanBicData::bicAllocated: return bicAllocated;
+    case ibanBicData::bicNotAllocated: return bicNotAllocated;
+    case ibanBicData::bicAllocationUncertain: return bicAllocationUncertain;
+  }
+  return bicAllocationUncertain;
 }
 
 } // namespace payeeIdentifiers

@@ -34,41 +34,44 @@ private slots:
   void cleanup();
 
   void comparison();
-  
+
   void ibanChecksum_data();
   void ibanChecksum();
-  
+
   void paperformatIban_data();
   void paperformatIban();
-  
+
   void electronicformatIban_data();
   void electronicformatIban();
-  
+
   void setIban_data();
   void setIban();
-  
+
   void setBic_data();
   void setBic();
-  
+
   void equalOperator_data();
   void equalOperator();
-  
+
   void uneqalOperator_data();
   void uneqalOperator();
-  
+
   void getProperties_data();
   void getProperties();
-  
+
   void iban2bic_data();
   void iban2bic();
-  
+
   void nameByBic_data();
   void nameByBic();
-  
+
   void bicAndNameByIban_data();
   void bicAndNameByIban();
-  
+
   void qStringNullAndEmpty();
+
+  void bicAllocated_data();
+  void bicAllocated();
 };
 
 #endif // INTERNATIONALACCOUNTIDENTIFIERTEST_H
