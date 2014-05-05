@@ -19,11 +19,16 @@ IF (KBANKING_FOUND)
   ADD_SUBDIRECTORY( kbanking )
 ENDIF (KBANKING_FOUND)
 
+option(ENABLE_SQLCIPHER "Enable SQLCipher plugin" OFF)
+if (ENABLE_SQLCIPHER)
+  add_subdirectory(sqlcipher)
+endif(ENABLE_SQLCIPHER)
+
 ########### next target ###############
 
 SET(kmm_plugin_LIB_SRCS
-  importinterface.cpp 
-  kmymoneyplugin.cpp 
+  importinterface.cpp
+  kmymoneyplugin.cpp
   pluginloader.cpp
   statementinterface.cpp viewinterface.cpp)
 
@@ -38,7 +43,7 @@ SET_TARGET_PROPERTIES(kmm_plugin PROPERTIES VERSION ${GENERIC_LIB_VERSION}  SOVE
 
 ########### install files ###############
 
-INSTALL(TARGETS kmm_plugin 
+INSTALL(TARGETS kmm_plugin
   ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 INSTALL(FILES ${plugins_HEADERS}

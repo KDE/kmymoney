@@ -219,7 +219,6 @@ void KGenerateSqlDlg::slotdriverSelected()
     m_widget->urlSqlite->setEnabled(false);
     m_widget->textDbName->setEnabled(true);
     m_widget->textHostName->setEnabled(true);
-    m_widget->textPassword->setEnabled(true);
     m_widget->textUserName->setEnabled(true);
     m_requiredFields->add(m_widget->textDbName);
     m_requiredFields->add(m_widget->textHostName);
@@ -232,6 +231,8 @@ void KGenerateSqlDlg::slotdriverSelected()
       m_widget->textUserName->setText(QString(pwd->pw_name));
     m_widget->textPassword->setText("");
   }
+
+  m_widget->textPassword->setEnabled(m_dbDriver->isPasswordSupported());
   m_requiredFields->setOkButton(button(createTables));
   m_widget->textSQL->setEnabled(true);
   // check if we have a storage; if not, create a skeleton one

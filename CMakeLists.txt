@@ -367,6 +367,7 @@ ENDMACRO(nice_yesno _varname)
 nice_yesno("LIBOFX_FOUND")
 nice_yesno("KBANKING_FOUND")
 nice_yesno("LIBICAL_FOUND")
+nice_yesno("ENABLE_SQLCIPHER")
 nice_yesno("USE_QT_DESIGNER")
 nice_yesno("USE_DEVELOPER_DOC")
 nice_yesno("KDE4_BUILD_TESTS")
@@ -382,6 +383,8 @@ OFX plugin:                              ${nice_LIBOFX_FOUND}
 KBanking plugin:                         ${nice_KBANKING_FOUND}
 
 iCalendar export plugin:                 ${nice_LIBICAL_FOUND}
+
+SQLCipher plugin:                        ${nice_ENABLE_SQLCIPHER}
 --------------------------------------------
 
 

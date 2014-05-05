@@ -208,7 +208,6 @@ void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
     // file system permissions must be used
     m_widget->textHostName->setEnabled(false);
     m_widget->textUserName->setEnabled(false);
-    m_widget->textPassword->setEnabled(false);
   } else {                         // not sqlite3
     m_sqliteSelected = false;
     m_requiredFields->add(m_widget->textDbName);
@@ -217,8 +216,8 @@ void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
     m_widget->urlSqlite->setEnabled(false);
     m_widget->textUserName->setEnabled(true);
     m_widget->textHostName->setEnabled(true);
-    m_widget->textPassword->setEnabled(true);
   }
+  m_widget->textPassword->setEnabled( dbDriver->isPasswordSupported() );
 }
 
 void KSelectDatabaseDlg::slotHelp(void)
