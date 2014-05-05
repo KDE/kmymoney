@@ -182,6 +182,7 @@ private:
    */
   QString m_iban;
   
+  static ::ibanBicData* getIbanBicData();
   static ::ibanBicData* m_ibanBicData;
 };
 

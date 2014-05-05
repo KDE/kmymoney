@@ -28,7 +28,7 @@
 
 namespace payeeIdentifiers {
 
-ibanBicData* ibanBic::m_ibanBicData = new ibanBicData;
+ibanBicData* ibanBic::m_ibanBicData = 0;
 const int ibanBic::ibanMaxLength = 30;
 
 ibanBic::ibanBic()
@@ -248,22 +248,27 @@ bool ibanBic::validateIbanChecksum(const QString& iban)
   return false;
 }
 
+ibanBicData* ibanBic::getIbanBicData()
+{
+  if ( m_ibanBicData == 0 )
+    m_ibanBicData = new ibanBicData;
+  Q_CHECK_PTR( m_ibanBicData );
+  return m_ibanBicData;
+}
+
 int ibanBic::ibanLengthByCountry(const QString& countryCode)
 {
-  Q_CHECK_PTR( m_ibanBicData );
-  return (m_ibanBicData->bbanLength( countryCode )+4);
+  return (getIbanBicData()->bbanLength( countryCode )+4);
 }
 
 QString ibanBic::bicByIban(const QString& iban)
 {
-  Q_CHECK_PTR( m_ibanBicData );
-  return m_ibanBicData->iban2Bic( iban );
+  return getIbanBicData()->iban2Bic( iban );
 }
 
 QString ibanBic::institutionNameByBic(const QString& bic)
 {
-  Q_CHECK_PTR( m_ibanBicData );
-  return m_ibanBicData->bankNameByBic( bic );
+  return getIbanBicData()->bankNameByBic( bic );
 }
 
 } // namespace payeeIdentifiers
