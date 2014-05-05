@@ -28,25 +28,35 @@ class NATIONALACCOUNT_IDENTIFIER_EXPORT nationalAccount : public payeeIdentifier
 {
 public:
   PAYEEIDENTIFIER_ID(nationalAccount, "org.kmymoney.payeeIdentifier.national");
-  
+
+  nationalAccount( const nationalAccount& other );
+
   virtual bool isValid() const;
   virtual bool operator==(const payeeIdentifier& other) const;
   bool operator==(const nationalAccount& other) const;
-  
+
   nationalAccount* clone() const { return new nationalAccount(*this); }
   nationalAccount* createFromXml(const QDomElement& element) const;
   void writeXML(QDomDocument& document, QDomElement& parent) const;
-  
+
+  void setBankCode( const QString& bankCode ) { m_bankCode = bankCode; }
   QString bankCode() const { return m_bankCode; }
-  QString accountNumber() const { return m_accountNumber; }
-  
+
   /** @todo implement */
   QString bankName() const { return QString(); }
-  
-  void setBankCode( const QString& bankCode ) { m_bankCode = bankCode; }
+
   void setAccountNumber( const QString& accountNumber ) { m_accountNumber = accountNumber; }
+  QString accountNumber() const { return m_accountNumber; }
+
+  QString country() const { return m_country; }
+  void setCountry( const QString& countryCode ) { m_country = countryCode.toUpper(); }
+
+  QString ownerName() const { return m_ownerName; }
+  void setOwnerName( const QString& ownerName ) { m_ownerName = ownerName; }
 
 private:
+  QString m_ownerName;
+  QString m_country;
   QString m_bankCode;
   QString m_accountNumber;
 };

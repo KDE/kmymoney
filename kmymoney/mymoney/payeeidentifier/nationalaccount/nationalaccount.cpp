@@ -22,12 +22,23 @@
 
 namespace payeeIdentifiers {
 
+nationalAccount::nationalAccount(const nationalAccount& other)
+: m_ownerName( other.m_ownerName ),
+  m_country( other.m_country ),
+  m_bankCode( other.m_bankCode ),
+  m_accountNumber( other.m_accountNumber )
+{
+
+}
+
 nationalAccount* nationalAccount::createFromXml(const QDomElement& element) const
 {
   nationalAccount* ident = new nationalAccount;
-  
+
   ident->setBankCode( element.attribute("bankcode", QString()) );
   ident->setAccountNumber( element.attribute("accountnumber", QString()) );
+  ident->setOwnerName( element.attribute("ownerName", QString()) );
+  ident->setCountry( element.attribute("country", QString()) );
   return ident;
 }
 
@@ -35,7 +46,9 @@ void nationalAccount::writeXML(QDomDocument& document, QDomElement& parent) cons
 {
   Q_UNUSED( document );
   parent.setAttribute("accountNumber", m_accountNumber);
-  parent.setAttribute("bankCode", m_bankCode );  
+  parent.setAttribute("bankCode", m_bankCode );
+  parent.setAttribute("ownerName", m_ownerName);
+  parent.setAttribute("country", m_country);
 }
 
 bool nationalAccount::isValid() const
@@ -55,7 +68,7 @@ bool nationalAccount::operator==(const payeeIdentifier& other) const
 
 bool nationalAccount::operator==(const nationalAccount& other) const
 {
-  return ( m_accountNumber == other.m_accountNumber && m_bankCode == other.m_bankCode );
+  return ( m_accountNumber == other.m_accountNumber && m_bankCode == other.m_bankCode && m_ownerName == other.m_ownerName && m_country == other.m_country );
 }
 
 } // namespace payeeIdentifiers

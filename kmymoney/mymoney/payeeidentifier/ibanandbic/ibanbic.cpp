@@ -33,14 +33,16 @@ const int ibanBic::ibanMaxLength = 30;
 
 ibanBic::ibanBic()
   : m_bic( QLatin1String("") ),
-    m_iban( QLatin1String("") )
+    m_iban( QLatin1String("") ),
+    m_ownerName( QLatin1String("") )
 {
 
 }
 
 ibanBic::ibanBic(const ibanBic& other)
   : m_bic( other.m_bic ),
-    m_iban( other.m_iban )
+    m_iban( other.m_iban ),
+    m_ownerName( other.m_ownerName )
 {
 
 }
@@ -71,6 +73,7 @@ ibanBic* ibanBic::createFromXml(const QDomElement& element) const
 
   ident->setBic( element.attribute("bic", QString()) );
   ident->setIban( element.attribute("iban", QString()) );
+  ident->setOwnerName( element.attribute("ownerName", QString()) );
   return ident;
 }
 
@@ -81,6 +84,8 @@ void ibanBic::writeXML(QDomDocument& document, QDomElement& parent) const
 
   if ( !m_bic.isEmpty() )
     parent.setAttribute( "bic", m_bic );
+  if ( !m_ownerName.isEmpty() )
+    parent.setAttribute("ownerName", m_ownerName);
 }
 
 QString ibanBic::paperformatIban(const QString& seperator) const

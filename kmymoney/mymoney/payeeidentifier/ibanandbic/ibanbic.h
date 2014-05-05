@@ -55,6 +55,12 @@ public:
   void writeXML(QDomDocument& document, QDomElement& parent) const;
 
   /**
+   * @brief Set an owner name for this account
+   */
+  void setOwnerName( const QString& ownerName ) { m_ownerName  = ownerName; }
+  QString ownerName() const { return m_ownerName; }
+
+  /**
    * @brief Set a IBAN
    *
    * The IBAN can contain spaces and other special chars.
@@ -163,7 +169,7 @@ public:
    */
   static bool isIbanValid( const QString& iban );
 
-  
+
   static bicAllocationStatus isBicAllocated( const QString& bic );
 
   /**
@@ -190,6 +196,8 @@ private:
    * in normalized (electronic) format (no spaces etc.)
    */
   QString m_iban;
+
+  QString m_ownerName;
 
   static ::ibanBicData* getIbanBicData();
   static ::ibanBicData* m_ibanBicData;
