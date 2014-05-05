@@ -106,7 +106,7 @@ pkg_check_modules (PKGS libxml-2.0 libxml++-2.6 glib-2.0 glibmm-2.4)
 # (cf. /usr/share/cmake/Modules/FindPkgConfig.cmake for more info)
 
 # check some functions
-INCLUDE (CheckFunctionExists) 
+INCLUDE (CheckFunctionExists)
 
 IF(NOT WIN32)
     SET(CMAKE_REQUIRED_FLAGS "-std=c99")
@@ -166,8 +166,9 @@ OPTION(ENABLE_KBANKING "Enable KBanking plugin" ON)
 IF(ENABLE_KBANKING)
   FIND_PACKAGE(Gwenhywfar)
   message(STATUS "Gwenhywfar ${GWENHYWFAR_VERSION} found at ${GWENHYWFAR_INCLUDE_DIRS} (${GWENHYWFAR_LIBRARIES})")
-  FIND_PACKAGE(AqBanking "5.3.3")
+  FIND_PACKAGE(AQBANKING "5.3.3")
   message(STATUS "AqBanking ${AQBANKING_VERSION} found at ${AQBANKING_INCLUDE_DIRS} (${AQBANKING_LIBRARIES})")
+
   IF (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
     SET(KBANKING_FOUND ON)
   ELSE (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
@@ -338,7 +339,7 @@ IF(RPMTools_FOUND)
     # remove the leading dash from the version suffix
     STRING(LENGTH ${RPM_VERSION_SUFFIX} LEN)
     MATH(EXPR LEN ${LEN}-1)
-    STRING(SUBSTRING ${RPM_VERSION_SUFFIX} 1 ${LEN} RPM_VERSION_SUFFIX) 
+    STRING(SUBSTRING ${RPM_VERSION_SUFFIX} 1 ${LEN} RPM_VERSION_SUFFIX)
   ENDIF(${RPM_VERSION_SUFFIX} MATCHES "-.*")
 
   # kmymoney conflicts with kmymoney-unstable
