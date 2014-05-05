@@ -49,7 +49,7 @@ TARGET_LINK_LIBRARIES(kmm_kbanking
                       kmm_widgets
                       kmm_plugin
                       payeeidentifier_iban_bic
-                      payeeidentifier_nationalaccount
+                      payeeidentifier_nationalAccount
                       ${KDE4_KDEUI_LIBS}
                       ${QT_QTDECLARATIVE_LIBRARY}
                       ${GWENHYWFAR_LIBRARIES}

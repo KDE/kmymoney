@@ -1,7 +1,7 @@
 set( germanonlinetransfertest_SRCS
   germanonlinetransfertest.cpp
   )
-  
+
 kde4_add_unit_test( germanonlinetransfertest
   TESTNAME kmymoney-germanOnlineTransferTest
   ${germanonlinetransfertest_SRCS}
@@ -22,7 +22,7 @@ target_link_libraries( germanonlinetransfertest
   kmm_plugin
   kmm_utils_validators
   onlinetask_interfaces
-  payeeidentifier_nationalaccount
+  payeeidentifier_nationalAccount
   payeeidentifier_iban_bic
   payeeidentifier_iban_bic_widgets
   ${QT_QTCORE_LIBRARIES}

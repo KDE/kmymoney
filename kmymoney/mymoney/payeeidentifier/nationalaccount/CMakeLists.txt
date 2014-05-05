@@ -5,18 +5,18 @@ set (nationalAccountId_SCRS
   nationalaccount.cpp
 )
 
-kde4_add_library( payeeidentifier_nationalaccount
+kde4_add_library( payeeidentifier_nationalAccount
   SHARED
   ${nationalAccountId_SCRS}
 )
 
-target_link_libraries( payeeidentifier_nationalaccount
+target_link_libraries( payeeidentifier_nationalAccount
   kmm_payeeidentifier
   ${QT_QTCORE_LIBRARY}
   ${QT_QTXML_LIBRARY}
 )
 
-install(TARGETS payeeidentifier_nationalaccount
+install(TARGETS payeeidentifier_nationalAccount
     ${INSTALL_TARGETS_DEFAULT_ARGS}
 )
 

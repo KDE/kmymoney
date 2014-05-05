@@ -43,7 +43,7 @@ SET(mymoney_HEADERS kmm_mymoney_export.h
   onlinejobfolder.h
   )
 
-KDE4_ADD_LIBRARY(kmm_mymoney SHARED 
+KDE4_ADD_LIBRARY(kmm_mymoney SHARED
 	${kmm_mymoney_LIB_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_mymoney
@@ -61,7 +61,6 @@ TARGET_LINK_LIBRARIES(kmm_mymoney
                       payeeidentifier_iban_bic
                       payeeidentifier_nationalAccount
 )
-# TODO: Remove payeeidentifier_nationalAccount and payeeidentifier_iban_bic from link list
 
 SET_TARGET_PROPERTIES(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 
@@ -76,7 +75,7 @@ INSTALL(FILES ${mymoney_HEADERS}
 ############## tests ####################
 IF( KDE4_BUILD_TESTS )
 
-  set(target_link_libraries_test 
+  set(target_link_libraries_test
 	  ${QT_QTGUI_LIBRARY}
 	  ${QT_QTXML_LIBRARY}
  	  ${QT_QTCORE_LIBRARY}
@@ -164,7 +163,7 @@ IF( KDE4_BUILD_TESTS )
   ADD_DEPENDENCIES( onlinejobtest kmm_mymoney )
 
   target_link_libraries( onlinejobtest kmm_mymoney onlinetask_interfaces ${target_link_libraries_test})
-  
+
   # MyMoneyPayee
   set( mymoneypayeetest_SRCS mymoneypayeetest.cpp )
 
