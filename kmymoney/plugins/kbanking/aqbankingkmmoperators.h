@@ -49,4 +49,14 @@ void AB_Transaction_SetRemoteAccount( AB_TRANSACTION* transaction, const payeeId
  */
 void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident );
 
+/**
+ * @brief Set local account of transaction from list
+ *
+ * Will check if an element of accountNumbers is valid and if it is payeeIdentifiers::ibanBic or payeeIdentifiers::natinalAccount.
+ * If they such a payeeIdentifier is found, it is set as local account for transaction
+ *
+ * @return true if a valid payeeIdentifiers::natinalAccount was set
+ */
+bool AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const QList< payeeIdentifier::constPtr >& accountNumbers );
+
 #endif // AQBANKINGKMMOPERATORS_H

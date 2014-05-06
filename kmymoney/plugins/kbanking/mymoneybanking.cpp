@@ -614,7 +614,7 @@ void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
 {
   Q_ASSERT(m_kbanking != 0);
   QList<onlineJob> unhandledJobs;
-  
+
   if (jobs.size()) {
     foreach (onlineJob job, jobs) {
       if ( germanOnlineTransfer::name() == job.task()->taskName() ) {
@@ -645,21 +645,21 @@ QStringList KBankingPlugin::availableJobs( QString accountId )
     // Exception usually means account was not found
     return QStringList();
   }
-  
+
   AB_ACCOUNT* abAccount = aqbAccount( accountId );
-  
+
   if (!abAccount) {
     return list;
   }
 
   // Check availableJobs
-  
+
   // national transfer
   AB_JOB *abJob = AB_JobSingleTransfer_new(abAccount);
   if( AB_Job_CheckAvailability(abJob) == 0 )
     list.append( germanOnlineTransfer::name() );
   AB_Job_free( abJob );
-  
+
   // sepa transfer
   abJob = AB_JobSepaTransfer_new(abAccount);
   if( AB_Job_CheckAvailability(abJob) == 0 )
@@ -718,7 +718,7 @@ IonlineTaskSettings::ptr KBankingPlugin::settings(QString accountId, QString tas
 onlineJobTyped<germanOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyped<germanOnlineTransfer> job)
 {
   /* get AqBanking account */
-  QString accId = job.task()->responsibleAccount();
+  QString accId = job.constTask()->responsibleAccount();
   AB_ACCOUNT *abAccount = aqbAccount(accId);
   if (!abAccount) {
     job.addJobMessage( onlineJobMessage(onlineJobMessage::warning, "KBanking", i18n("<qt>"
@@ -803,49 +803,30 @@ onlineJobTyped<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyp
 
   // Recipient
   payeeIdentifiers::ibanBic beneficiaryAcc = job.constTask()->beneficiaryTyped();
-  /** @todo enable setOwnerName */
-  //AB_Transaction_SetRemoteName( AbTransaction, GWEN_StringList_fromQString(beneficiaryAcc.ownerName()) );
+  AB_Transaction_SetRemoteName( AbTransaction, GWEN_StringList_fromQString(beneficiaryAcc.ownerName()) );
   AB_Transaction_SetRemoteIban( AbTransaction, beneficiaryAcc.electronicIban().toUtf8().constData() );
   AB_Transaction_SetRemoteBic(  AbTransaction, beneficiaryAcc.fullStoredBic().toUtf8().constData() );
 
   // Origin Account
-  /** @todo enable setting of origin account */
-#if 0
-  sepaAccountIdentifier localAcc;
-  MyMoneyAccount account = job.responsibleMyMoneyAccount();
-  QString accountNumber = account.number();
-  localAcc.setAccountNumber( accountNumber.remove(QRegExp("\\s")) );
-  QString sortCode = MyMoneyFile::instance()->institution( account.institutionId() ).sortcode();
-  localAcc.setBankCode( sortCode.remove(QRegExp("\\s")) );
-  localAcc.setOwnerName( MyMoneyFile::instance()->user().name() );
-
-  QString iban = account.value("iban");
-  QString bic = MyMoneyFile::instance()->institution( account.institutionId() ).value("bic");
-  AB_Transaction_SetLocalIban( AbTransaction, iban.remove(QRegExp("\\s")).toUtf8().constData() );
-  AB_Transaction_SetLocalBic( AbTransaction, bic.remove(QRegExp("\\s")).toUtf8().constData() );
-  
-  qDebug() << "Set origin account to" << accountNumber.remove(QRegExp("\\s")) << "at" << sortCode.remove(QRegExp("\\s"));
-  
-  if (!localAcc.isValid()) {
+  if ( !AB_Transaction_SetLocalAccount( AbTransaction, job.responsibleMyMoneyAccount().accountIdentifiers()) ) {
     job.addJobMessage(onlineJobMessage(onlineJobMessage::error, "KBanking",
-                                       QString("Sepa account information for \"%1\" are not valid.").arg(MyMoneyFile::instance()->account(accId).name(), rv)
-                                       )
-                     );
+                                        QString("Sepa account information for \"%1\" are not valid.").arg(MyMoneyFile::instance()->account(accId).name(), rv)
+    )
+    );
     return job;
   }
-  AB_Transaction_SetLocalAccount(AbTransaction, localAcc);
-#endif
+
   // Purpose
   QStringList qPurpose = job.constTask()->purpose().split('\n');
   GWEN_STRINGLIST *purpose = GWEN_StringList_fromQStringList(qPurpose);
   AB_Transaction_SetPurpose(AbTransaction, purpose);
   GWEN_StringList_free(purpose);
-  
+
   // Reference
   // AqBanking duplicates the string. This should be safe.
   AB_Transaction_SetEndToEndReference(AbTransaction, job.constTask()->endToEndReference().toUtf8().constData());
 
-  // Other
+  // Other Fields
   AB_Transaction_SetTextKey(AbTransaction, job.constTask()->textKey());
   AB_Transaction_SetValue(AbTransaction, AB_Value_fromMyMoneyMoney(job.constTask()->value()));
 
@@ -986,7 +967,7 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
         job.setBankAnswer( onlineJob::acceptedByBank );
       else if ( abStatus == AB_Job_StatusError || abStatus == AB_Job_StatusUnknown)
         job.setBankAnswer( onlineJob::sendingError );
-      
+
       job.addJobMessage(onlineJobMessage(onlineJobMessage::debug, "KBanking", "Job was processed"));
       m_parent->m_onlineJobQueue.insert(jobIdent, job);
       abJob = AB_Job_List2Iterator_Next(jobIter);
@@ -1359,7 +1340,7 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
   } else {
     DBG_WARN(0, "No date in current transaction");
   }
-  
+
   // add information about remote account to memo in case we have something
   const char *remoteAcc = AB_Transaction_GetRemoteAccountNumber(t);
   const char *remoteBankCode = AB_Transaction_GetRemoteBankCode(t);
