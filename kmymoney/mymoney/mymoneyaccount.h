@@ -35,8 +35,10 @@
 #include <mymoneysecurity.h>
 #include <kmm_mymoney_export.h>
 #include "mymoneyutils.h"
+
+#include "payeeidentifier/payeeidentifier.h"
+
 class MyMoneyTransaction;
-class MyMoneyInstitution;
 class MyMoneySplit;
 class MyMoneyObjectContainer;
 
@@ -304,6 +306,11 @@ public:
     * @see number
     */
   void setNumber(const QString& number);
+
+  /**
+   * Return the stored account identifiers
+   */
+  QList< payeeIdentifier::constPtr > accountIdentifiers() const;
 
   /**
     * This method is used to set the descriptive text of the account

@@ -29,6 +29,7 @@ class NATIONALACCOUNT_IDENTIFIER_EXPORT nationalAccount : public payeeIdentifier
 public:
   PAYEEIDENTIFIER_ID(nationalAccount, "org.kmymoney.payeeIdentifier.national");
 
+  nationalAccount();
   nationalAccount( const nationalAccount& other );
 
   virtual bool isValid() const;

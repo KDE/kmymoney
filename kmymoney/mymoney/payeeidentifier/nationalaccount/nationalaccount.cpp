@@ -22,6 +22,14 @@
 
 namespace payeeIdentifiers {
 
+nationalAccount::nationalAccount()
+  : m_ownerName(),
+    m_country(),
+    m_bankCode(),
+    m_accountNumber()
+{
+}
+
 nationalAccount::nationalAccount(const nationalAccount& other)
 : m_ownerName( other.m_ownerName ),
   m_country( other.m_country ),
