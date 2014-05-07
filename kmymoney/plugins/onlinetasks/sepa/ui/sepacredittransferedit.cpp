@@ -30,29 +30,29 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent) :
     m_requiredFields( new kMandatoryFieldGroup(this) )
 {
     ui->setupUi(this);
-    
+
     ui->beneficiaryAccNum->setValidator( new ibanValidator(ui->beneficiaryAccNum) );
-    
+
     ui->statusBeneficiaryName->setVisible(false);
     ui->statusIban->setVisible(false);
     ui->statusBic->setVisible(false);
     ui->statusAmount->setVisible(false);
     ui->statusPurpose->setVisible(false);
     ui->statusReference->setVisible(false);
-    
+
     m_requiredFields->add(ui->beneficiaryAccNum);
     m_requiredFields->add(ui->value);
     // Other required fields are set in updateSettings()
-    
+
     connect(m_requiredFields, SIGNAL(stateChanged(bool)), this, SLOT(requiredFieldsCompleted(bool)));
-    
+
     connect(ui->beneficiaryName, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryNameChanged(QString)));
     connect(ui->beneficiaryAccNum, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryIbanChanged(QString)));
     connect(ui->beneficiaryBankCode, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryBicChanged(QString)));
     connect(ui->value, SIGNAL(valueChanged(QString)), this, SLOT(valueChanged()));
     connect(ui->sepaReference, SIGNAL(textChanged(QString)), this, SLOT(endToEndReferenceChanged(QString)));
     connect(ui->purpose, SIGNAL(textChanged()), this, SLOT(purposeChanged()));
-    
+
     connect(ui->beneficiaryName, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
     connect(ui->beneficiaryAccNum, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
     connect(ui->beneficiaryBankCode, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
@@ -90,7 +90,7 @@ void sepaCreditTransferEdit::setOnlineJob(const onlineJobTyped<sepaOnlineTransfe
   ui->purpose->setText( job.task()->purpose() );
   ui->sepaReference->setText( job.task()->endToEndReference() );
   ui->value->setValue( job.task()->value() );
-  //ui->beneficiaryName->setText( job.task()->beneficiaryTyped().ownerName() );
+  ui->beneficiaryName->setText( job.task()->beneficiaryTyped().ownerName() );
   ui->beneficiaryAccNum->setText( job.task()->beneficiaryTyped().paperformatIban() );
   ui->beneficiaryBankCode->setText( job.task()->beneficiaryTyped().storedBic() );
 }
@@ -138,16 +138,16 @@ void sepaCreditTransferEdit::updateSettings()
     m_requiredFields->add(ui->purpose);
   else
     m_requiredFields->remove(ui->purpose);
-  
+
   // Beneficiary Name
   ui->beneficiaryName->setValidator( new QRegExpValidator(QRegExp( QString("[%1]*").arg(settings->allowedChars()) ), ui->beneficiaryName) );
   ui->beneficiaryName->setMaxLength( settings->recipientNameLineLength() );
-  
+
   if (settings->recipientNameMinLength() != 0)
     m_requiredFields->add(ui->beneficiaryName);
   else
     m_requiredFields->remove(ui->beneficiaryName);
-  
+
   updateEveryStatus();
 }
 
@@ -161,7 +161,7 @@ void sepaCreditTransferEdit::beneficiaryIbanChanged(const QString& iban)
     ui->statusIban->setToolTip( i18n("The checksum for this IBAN is invalid.") );
     ui->statusIban->setVisible(true);
   }
-  
+
   if (settings->isBicMandatory( iban ))
     m_requiredFields->add( ui->beneficiaryBankCode );
   else
@@ -201,10 +201,10 @@ void sepaCreditTransferEdit::valueChanged()
         ui->statusAmount->setVisible( true );
         return;
     }
-    
+
     const MyMoneyAccount account = getOnlineJob().responsibleMyMoneyAccount();
     const MyMoneyMoney expectedBalance = account.balance() - ui->value->value();
-    
+
     if ( expectedBalance < MyMoneyMoney(  account.value("maxCreditAbsolute") ) ) {
         ui->statusAmount->setToolTip(i18n("After this credit transfer the account's balance will be below your credit limit."));
         ui->statusAmount->setColor( Qt::darkYellow );
@@ -257,7 +257,7 @@ void sepaCreditTransferEdit::purposeChanged()
     // Set tooltip and remove the last '\n'
     tooltip.chop(1);
     ui->statusPurpose->setToolTip( tooltip );
-    
+
     if (tooltip.isEmpty())
         ui->statusPurpose->setVisible( false );
     else

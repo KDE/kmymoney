@@ -150,7 +150,7 @@ bool ibanBic::isValid() const
 
   // Check BIC
   const int bicLength = m_bic.length();
-  if (bicLength != 8 || bicLength != 11)
+  if (bicLength != 8 && bicLength != 11)
     return false;
 
   for (int i = 0; i < 6; ++i) {
@@ -178,7 +178,7 @@ bool ibanBic::isValid() const
 
 bool ibanBic::isIbanValid(const QString& iban)
 {
-  return validateIbanChecksum(iban);
+  return validateIbanChecksum( ibanToElectronic(iban) );
 }
 
 QString ibanBic::ibanToElectronic(const QString& iban)
