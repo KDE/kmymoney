@@ -75,7 +75,7 @@ onlineJobTyped<sepaOnlineTransfer> sepaCreditTransferEdit::getOnlineJobTyped() c
   sepaJob.task()->setEndToEndReference( ui->sepaReference->text() );
 
   payeeIdentifiers::ibanBic accIdent;
-  //accIdent.setOwnerName( ui->beneficiaryName->text() );
+  accIdent.setOwnerName( ui->beneficiaryName->text() );
   accIdent.setIban( ui->beneficiaryAccNum->text() );
   accIdent.setBic( ui->beneficiaryBankCode->text() );
   sepaJob.task()->setBeneficiary(accIdent);

@@ -37,39 +37,39 @@ public:
   virtual int purposeMaxLines() const { return 1; }
   virtual int purposeLineLength() const { return 27; }
   virtual int purposeMinLength() const { return 0; }
-  
+
   virtual int recipientNameLineLength() const { return 1; }
   virtual int recipientNameMinLength() const { return 0; }
-  
+
   virtual int payeeNameLineLength() const { return 0; }
   virtual int payeeNameMinLength() const { return 0; }
-  
+
   virtual QString allowedChars() const { return QString(); }
-  
+
   // Checker
   virtual bool checkPurposeCharset( const QString& ) const { return false; }
   virtual bool checkPurposeLineLength(const QString&) const { return false; }
   virtual validators::lengthStatus checkPurposeLength(const QString&) const { return validators::tooLong; }
   virtual bool checkPurposeMaxLines(const QString&) const { return false; }
-  
+
   virtual validators::lengthStatus checkNameLength(const QString&) const { return validators::tooLong; }
   virtual bool checkNameCharset( const QString& ) const { return false; }
-  
+
   virtual validators::lengthStatus checkRecipientLength(const QString&) const { return validators::tooLong; }
   virtual bool checkRecipientCharset( const QString& ) const { return false; }
-  
+
   virtual int endToEndReferenceLength() const { return 0; }
   virtual validators::lengthStatus checkEndToEndReferenceLength(const QString&) const { return validators::tooLong; }
   virtual bool isIbanValid( const QString& ) const { return false; }
-  
+
   virtual bool checkRecipientBic( const QString& ) const { return false; }
-  
+
   /**
    * @brief Checks if the bic is mandatory for the given iban
-   * 
+   *
    * For the check usually only the first two chars are needed. So you do not
    * need to validate the IBAN.
-   * 
+   *
    * @todo LOW: Implement, should be simple to test: if the country code in iban is the same as in origin iban and
    * the iban belongs to a sepa country a bic is not necessary. Will change 1. Feb 2016.
    */
@@ -179,14 +179,18 @@ void sepaOnlineTransferImpl::writeXML(QDomDocument& document, QDomElement& paren
   parent.setAttribute("value", _value.toString());
   parent.setAttribute("textKey", _textKey);
   parent.setAttribute("subTextKey", _subTextKey);
-  
+
   if (!_purpose.isEmpty()) {
     parent.setAttribute("purpose", _purpose);
   }
-  
+
   if (!_endToEndReference.isEmpty()) {
     parent.setAttribute("endToEndReference", _endToEndReference);
   }
+
+  QDomElement beneficiaryEl = document.createElement("beneficiary");
+  _beneficiaryAccount.writeXML(document, beneficiaryEl);
+  parent.appendChild(beneficiaryEl);
 }
 
 /** @todo load remote account */
@@ -196,9 +200,19 @@ sepaOnlineTransfer* sepaOnlineTransferImpl::createFromXml(const QDomElement& ele
   task->setOriginAccount( element.attribute("originAccount", QString()) );
   task->setValue( MyMoneyMoney( QStringEmpty(element.attribute("value", QString())) ) );
   task->_textKey = element.attribute("textKey", QString().setNum(defaultTextKey)).toUShort();
-  task->_subTextKey = element.attribute("subTextKey", QString().setNum(defaultSubTextKey)).toUShort(); 
+  task->_subTextKey = element.attribute("subTextKey", QString().setNum(defaultSubTextKey)).toUShort();
   task->setPurpose( element.attribute("purpose", QString()) );
   task->setEndToEndReference( element.attribute("endToEndReference", QString()) );
+
+  payeeIdentifiers::ibanBic beneficiary;
+  QDomElement beneficiaryEl = element.firstChildElement("beneficiary");
+  if ( !beneficiaryEl.isNull() ) {
+    payeeIdentifiers::ibanBic* beneficiaryPtr = beneficiary.createFromXml(beneficiaryEl);
+    task->_beneficiaryAccount = *beneficiaryPtr;
+  } else {
+    task->_beneficiaryAccount = beneficiary;
+  }
+
   return task;
 }
 
