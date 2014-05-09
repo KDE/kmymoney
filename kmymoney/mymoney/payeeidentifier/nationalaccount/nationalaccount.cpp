@@ -45,7 +45,7 @@ nationalAccount* nationalAccount::createFromXml(const QDomElement& element) cons
 
   ident->setBankCode( element.attribute("bankcode", QString()) );
   ident->setAccountNumber( element.attribute("accountnumber", QString()) );
-  ident->setOwnerName( element.attribute("ownerName", QString()) );
+  ident->setOwnerName( element.attribute("ownername", QString()) );
   ident->setCountry( element.attribute("country", QString()) );
   return ident;
 }
@@ -53,9 +53,10 @@ nationalAccount* nationalAccount::createFromXml(const QDomElement& element) cons
 void nationalAccount::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   Q_UNUSED( document );
-  parent.setAttribute("accountNumber", m_accountNumber);
-  parent.setAttribute("bankCode", m_bankCode );
-  parent.setAttribute("ownerName", m_ownerName);
+  parent.setAttribute("accountnumber", m_accountNumber);
+  if ( !m_bankCode.isEmpty() )
+    parent.setAttribute("bankcode", m_bankCode );
+  parent.setAttribute("ownername", m_ownerName);
   parent.setAttribute("country", m_country);
 }
 
@@ -67,7 +68,7 @@ bool nationalAccount::isValid() const
 bool nationalAccount::operator==(const payeeIdentifier& other) const
 {
   try {
-    const nationalAccount otherCasted = dynamic_cast<const nationalAccount&>(other);
+    const nationalAccount& otherCasted = dynamic_cast<const nationalAccount&>(other);
     return operator==(otherCasted);
   } catch ( const std::bad_cast& ) {
   }

@@ -30,27 +30,27 @@ public:
   virtual int purposeMaxLines() const { return 0; }
   virtual int purposeLineLength() const { return 0; }
   virtual int purposeMinLength() const { return 0; }
-  
+
   virtual int recipientNameLineLength() const { return 0; }
   virtual int recipientNameMinLength() const { return 0; }
-  
+
   virtual int payeeNameLineLength() const { return 0; }
   virtual int payeeNameMinLength() const { return 0; }
-  
+
   virtual QString allowedChars() const { return QString(); }
-  
+
   // Limits validators
   virtual bool checkPurposeCharset( const QString& ) const { return false; }
   virtual bool checkPurposeLineLength(const QString& ) const { return false; }
   virtual validators::lengthStatus checkPurposeLength(const QString&) const { return validators::tooLong; }
   virtual bool checkPurposeMaxLines(const QString&) const { return false; }
-  
+
   virtual validators::lengthStatus checkNameLength(const QString&) const { return validators::tooLong; }
   virtual bool checkNameCharset( const QString& ) const { return false; }
-  
+
   virtual validators::lengthStatus checkRecipientLength(const QString&) const { return validators::tooLong; }
   virtual bool checkRecipientCharset( const QString& ) const { return false; }
-  
+
   virtual validators::lengthStatus checkRecipientAccountNumber( const QString& ) const { return validators::tooLong; }
   virtual validators::lengthStatus checkRecipientBankCode( const QString& ) const { return validators::tooLong; }
 };
@@ -156,10 +156,14 @@ void germanOnlineTransferImpl::writeXML(QDomDocument& document, QDomElement& par
   parent.setAttribute("value", _value.toString());
   parent.setAttribute("textKey", _textKey);
   parent.setAttribute("subTextKey", _subTextKey);
-  
+
   if (!_purpose.isEmpty()) {
     parent.setAttribute("purpose", _purpose);
   }
+
+  QDomElement beneficiaryEl = document.createElement("beneficiary");
+  _beneficiaryAccount.writeXML(document, beneficiaryEl);
+  parent.appendChild(beneficiaryEl);
 }
 
 /** @todo load remote account */
@@ -169,8 +173,22 @@ germanOnlineTransferImpl* germanOnlineTransferImpl::createFromXml(const QDomElem
   task->setOriginAccount( element.attribute("originAccount", QString()) );
   task->setValue( MyMoneyMoney( QStringEmpty(element.attribute("value", QString())) ) );
   task->_textKey = element.attribute("textKey", QString().setNum(defaultTextKey)).toUShort();
-  task->_subTextKey = element.attribute("subTextKey", QString().setNum(defaultSubTextKey)).toUShort(); 
+  task->_subTextKey = element.attribute("subTextKey", QString().setNum(defaultSubTextKey)).toUShort();
   task->setPurpose( element.attribute("purpose", QString()) );
+
+  payeeIdentifiers::nationalAccount beneficiary;
+  payeeIdentifiers::nationalAccount* beneficiaryPtr = 0;
+  QDomElement beneficiaryEl = element.firstChildElement("beneficiary");
+  if ( !beneficiaryEl.isNull() ) {
+    beneficiaryPtr = beneficiary.createFromXml(beneficiaryEl);
+  }
+
+  if ( beneficiaryPtr == 0 ) {
+    task->_beneficiaryAccount = beneficiary;
+  } else {
+    task->_beneficiaryAccount = *beneficiaryPtr;
+  }
+
   return task;
 }
 

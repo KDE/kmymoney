@@ -159,7 +159,7 @@ QSharedPointer<const sepaOnlineTransfer::settings> sepaOnlineTransferImpl::getSe
     if (_settings.isNull())
       _settings = QSharedPointer< const sepaOnlineTransfer::settings >( new sepaOnlineTransferSettingsFallback );
   }
-  Q_ASSERT( !_settings.isNull() );
+  Q_CHECK_PTR( _settings );
   return _settings;
 }
 
@@ -205,12 +205,16 @@ sepaOnlineTransfer* sepaOnlineTransferImpl::createFromXml(const QDomElement& ele
   task->setEndToEndReference( element.attribute("endToEndReference", QString()) );
 
   payeeIdentifiers::ibanBic beneficiary;
+  payeeIdentifiers::ibanBic* beneficiaryPtr = 0;
   QDomElement beneficiaryEl = element.firstChildElement("beneficiary");
   if ( !beneficiaryEl.isNull() ) {
-    payeeIdentifiers::ibanBic* beneficiaryPtr = beneficiary.createFromXml(beneficiaryEl);
-    task->_beneficiaryAccount = *beneficiaryPtr;
-  } else {
+    beneficiaryPtr = beneficiary.createFromXml(beneficiaryEl);
+  }
+
+  if ( beneficiaryPtr == 0 ) {
     task->_beneficiaryAccount = beneficiary;
+  } else {
+    task->_beneficiaryAccount = *beneficiaryPtr;
   }
 
   return task;

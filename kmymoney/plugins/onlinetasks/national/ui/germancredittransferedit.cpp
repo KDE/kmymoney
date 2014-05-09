@@ -68,10 +68,10 @@ bool germanCreditTransferEdit::setOnlineJob(const onlineJobTyped<germanOnlineTra
 {
     m_germanCreditTransfer = job;
     setOriginAccount( job.task()->responsibleAccount() );
-    //ui->beneficiaryName->setText( m_germanCreditTransfer.task()->beneficiaryTyped().ownerName() );
+    ui->beneficiaryName->setText( m_germanCreditTransfer.task()->beneficiaryTyped().ownerName() );
     ui->beneficiaryAccNum->setText( m_germanCreditTransfer.task()->beneficiaryTyped().accountNumber() );
     ui->beneficiaryBankCode->setText( m_germanCreditTransfer.task()->beneficiaryTyped().bankCode() );
-    //ui->beneficiaryBankName->setText( m_germanCreditTransfer.task()->beneficiaryTyped().getBankName() );
+    ui->beneficiaryBankName->setText( m_germanCreditTransfer.task()->beneficiaryTyped().bankName() );
     ui->transferValue->setValue( m_germanCreditTransfer.task()->value() );
     ui->transferPurpose->setText( m_germanCreditTransfer.task()->purpose() );
     return true;
