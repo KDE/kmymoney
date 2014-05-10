@@ -1481,10 +1481,11 @@ public:
   bool hasMatchingOnlineBalance(const MyMoneyAccount& account) const;
 
   /**
-    * This returns the number of not reconciled transactions of account with id @p accId.
+    * This returns the number of transactions of a specific reconciliation state @p state of account with id @p accId.
     *
-    * @param accId @p account id of account to be checked
-    * @return number of transactions with state "not reconciled"
+    * @param accId @p accId is the account id of account to be checked
+    * @param state @p state reconciliation state
+    * @return number of transactions with state @p state
     */
   int countTransactionsWithSpecificReconciliationState(const QString& accId, enum MyMoneyTransactionFilter::stateOptionE state) const;
 
