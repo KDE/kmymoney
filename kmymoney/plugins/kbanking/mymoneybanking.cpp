@@ -612,15 +612,19 @@ void KBankingPlugin::executeQueue(void) {
  */
 void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
 {
-  Q_ASSERT(m_kbanking != 0);
+  Q_CHECK_PTR( m_kbanking );
   QList<onlineJob> unhandledJobs;
 
   if (jobs.size()) {
     foreach (onlineJob job, jobs) {
       if ( germanOnlineTransfer::name() == job.task()->taskName() ) {
-        job = enqueTransaction( onlineJobTyped<germanOnlineTransfer>(job) );
+        onlineJobTyped<germanOnlineTransfer> typedJob(job);
+        enqueTransaction( typedJob );
+        job = typedJob;
       } else if ( sepaOnlineTransfer::name() == job.task()->taskName() ) {
-        job = enqueTransaction( onlineJobTyped<sepaOnlineTransfer>(job) );
+        onlineJobTyped<sepaOnlineTransfer> typedJob(job);
+        enqueTransaction( typedJob );
+        job = typedJob;
       } else {
         job.addJobMessage( onlineJobMessage(onlineJobMessage::error, "KBanking", "Cannot handle this request" ) );
         unhandledJobs.append(job);
@@ -715,7 +719,7 @@ IonlineTaskSettings::ptr KBankingPlugin::settings(QString accountId, QString tas
 }
 
 /** @todo make alive */
-onlineJobTyped<germanOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyped<germanOnlineTransfer> job)
+bool KBankingPlugin::enqueTransaction(onlineJobTyped<germanOnlineTransfer>& job)
 {
   /* get AqBanking account */
   QString accId = job.constTask()->responsibleAccount();
@@ -727,7 +731,7 @@ onlineJobTyped<germanOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobT
                                                                                     "account."
                                                                                     "</qt>",
                                                                                     MyMoneyFile::instance()->account(accId).name())) );
-    return job;
+    return false;
   }
   //setupAccountReference(acc, ba); // needed?
 
@@ -735,11 +739,11 @@ onlineJobTyped<germanOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobT
   int rv = AB_Job_CheckAvailability(abJob);
   if (rv) {
     qDebug("AB_ERROR_OFFSET is %i", AB_ERROR_OFFSET);
-    job.addJobMessage(onlineJobMessage(onlineJobMessage::error, "AqBanking",
-                                       QString("German credit transfers for account \"%1\" are not available, error code %2.").arg(MyMoneyFile::instance()->account(accId).name(), rv)
-                                       )
+    job.addJobMessage(onlineJobMessage::error, "AqBanking",
+                      QString("German credit transfers for account \"%1\" are not available, error code %2.").arg(MyMoneyFile::instance()->account(accId).name(), rv),
+                      QString::number(rv)
                      );
-    return job;
+    return false;
   }
   AB_TRANSACTION *ABtransaction = AB_Transaction_new();
 
@@ -769,10 +773,10 @@ onlineJobTyped<germanOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobT
 
   qDebug() << "Enqueue: " << m_kbanking->enqueueJob(abJob);
   //delete localAcc;
-  return job;
+  return true;
 }
 
-onlineJobTyped<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer> job)
+bool KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
 {
   /* get AqBanking account */
   const QString accId = job.constTask()->responsibleAccount();
@@ -785,7 +789,7 @@ onlineJobTyped<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyp
                                                                                     "account."
                                                                                     "</qt>",
                                                                                     MyMoneyFile::instance()->account(accId).name())) );
-    return job;
+    return false;
   }
   //setupAccountReference(acc, ba); // needed?
 
@@ -797,7 +801,7 @@ onlineJobTyped<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyp
                                        QString("Sepa credit transfers for account \"%1\" are not available, error code %2.").arg(MyMoneyFile::instance()->account(accId).name(), rv)
                                        )
                      );
-    return job;
+    return false;
   }
   AB_TRANSACTION *AbTransaction = AB_Transaction_new();
 
@@ -813,7 +817,7 @@ onlineJobTyped<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyp
                                         QString("Sepa account information for \"%1\" are not valid.").arg(MyMoneyFile::instance()->account(accId).name(), rv)
     )
     );
-    return job;
+    return false;
   }
 
   // Purpose
@@ -839,7 +843,7 @@ onlineJobTyped<sepaOnlineTransfer> KBankingPlugin::enqueTransaction(onlineJobTyp
   qDebug() << "Enqueue: " << m_kbanking->enqueueJob(abJob);
 
   //delete localAcc;
-  return job;
+  return true;
 }
 
 void KBankingPlugin::startPasswordTimer(void)

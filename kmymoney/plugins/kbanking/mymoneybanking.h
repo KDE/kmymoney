@@ -85,7 +85,7 @@ public:
   void setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps) const;
 
   void protocols(QStringList& protocolList) const;
-  
+
   QStringList availableJobs(QString accountId);
   IonlineTaskSettings::ptr settings(QString accountId, QString taskName);
 
@@ -182,14 +182,14 @@ private:
     * @deprecated
     */
   bool updateAccount(const MyMoneyAccount& acc);
-  
+
   /**
     * Trigger the password cache timer
     */
   void startPasswordTimer(void);
 
-  onlineJobTyped<germanOnlineTransfer> enqueTransaction(onlineJobTyped<germanOnlineTransfer> job);
-  onlineJobTyped<sepaOnlineTransfer> enqueTransaction(onlineJobTyped<sepaOnlineTransfer> job);
+  bool enqueTransaction(onlineJobTyped<germanOnlineTransfer>& job);
+  bool enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job);
 
 
 protected slots:
@@ -235,9 +235,9 @@ public:
   int dequeueJob(AB_JOB *j);
   std::list<AB_JOB*> getEnqueuedJobs();
   void transfer();
-  
+
   virtual bool interactiveImport();
-  
+
 protected:
   int init();
   int fini();
