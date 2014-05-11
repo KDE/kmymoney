@@ -18,18 +18,18 @@
   <screenshots>
     <screenshot type="default">
       <caption>KMyMoney has a welcome page to help new users get off to a good start.</caption>
-      <image>http://kmymoney2.sourceforge.net/images/home.png</image>
+      <image>http://www.kmymoney.org/images/screenshots/large/kmm1.png</image>
     </screenshot>
     <screenshot>
       <caption>The financial summary gives you an overview of your finances, including overdue and upcoming scheduled transactions.</caption>
-      <image>http://kmymoney2.sourceforge.net/images/home1.png</image>
+      <image>http://www.kmymoney.org/images/screenshots/large/kmm2.png</image>
     </screenshot>
     <screenshot>
       <caption>In this view your accounts are organized, viewed, and managed by the institutions they are held at.</caption>
-      <image>http://kmymoney2.sourceforge.net/images/institutions.png</image>
+      <image>http://www.kmymoney.org/images/screenshots/large/kmm3.png</image>
     </screenshot>
   </screenshots>
-  <url type="homepage">http://kmymoney2.sourceforge.net</url>
+  <url type="homepage">http://www.kmymoney.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?product=kmymoney4&amp;format=guided</url>
   <url type="help">http://docs.kde.org/stable/en/extragear-office/kmymoney/index.html</url>
   <project_group>KDE</project_group>
