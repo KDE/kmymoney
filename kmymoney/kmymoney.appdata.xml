@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop">
+  <id>kmymoney.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>KMyMoney</name>
+  <summary>Personal Finance Manager</summary>
+  <description>
+    <p>
+      KMyMoney is a personal finance manager for KDE.
+    </p>
+    <p>
+      It supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format.
+      Direct download using the OFX and HBCI formats is also possible via plugins.
+      Online banking support (statement download) is also provided for the OFX and HBCI protocols.
+    </p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>KMyMoney has a welcome page to help new users get off to a good start.</caption>
+      <image>http://kmymoney2.sourceforge.net/images/home.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>The financial summary gives you an overview of your finances, including overdue and upcoming scheduled transactions.</caption>
+      <image>http://kmymoney2.sourceforge.net/images/home1.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>In this view your accounts are organized, viewed, and managed by the institutions they are held at.</caption>
+      <image>http://kmymoney2.sourceforge.net/images/institutions.png</image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">http://kmymoney2.sourceforge.net</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?product=kmymoney4&amp;format=guided</url>
+  <url type="help">http://docs.kde.org/stable/en/extragear-office/kmymoney/index.html</url>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>kmymoney</binary>
+  </provides>
+</component>

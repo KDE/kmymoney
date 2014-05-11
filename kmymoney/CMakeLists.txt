@@ -99,6 +99,9 @@ INSTALL(FILES ${_HEADERS}
 INSTALL(PROGRAMS kmymoney.desktop
   DESTINATION ${XDG_APPS_INSTALL_DIR}
   )
+INSTALL(PROGRAMS kmymoney.appdata.xml
+  DESTINATION share/appdata/
+  )
 
 INSTALL(FILES x-kmymoney.xml
   DESTINATION ${XDG_MIME_INSTALL_DIR})
