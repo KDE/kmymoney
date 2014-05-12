@@ -61,11 +61,18 @@ public:
   /** @brief DateTime of message */
   QDateTime timestamp() const { return m_timestamp; }
 
+  /**
+   * @brief Set an error code of the plugin
+   */
+  void setSenderErrorCode( const QString& errorCode ) { m_senderErrorCode = errorCode; }
+  QString senderErrorCode() { return m_senderErrorCode; }
+
 private:
   messageType m_type;
   QString m_sender;
   QString m_message;
   QDateTime m_timestamp;
+  QString m_senderErrorCode;
 
   onlineJobMessage();
 };

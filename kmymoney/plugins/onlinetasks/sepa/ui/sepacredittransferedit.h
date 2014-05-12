@@ -1,17 +1,17 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager for KDE
  * Copyright (C) 2013 Christian Dávid <christian-david@web.de>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -37,7 +37,9 @@ class sepaCreditTransferEdit;
 class sepaCreditTransferEdit : public IonlineJobEdit
 {
   Q_OBJECT
-    
+  Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly NOTIFY readOnlyChanged);
+  Q_PROPERTY(onlineJob job READ getOnlineJob WRITE setOnlineJob );
+
 public:
   explicit sepaCreditTransferEdit(QWidget *parent = 0);
   ~sepaCreditTransferEdit();
@@ -46,20 +48,24 @@ public:
 
   QStringList supportedOnlineTasks() const { return QStringList( sepaOnlineTransfer::name() ); }
   QString label() const { return i18n("SEPA Credit Transfer"); };
-  
+
   bool isValid() const { return getOnlineJobTyped().isValid(); };
+  bool isReadOnly() const { return m_readOnly; }
+
 signals:
   void onlineJobChanged();
-  
+  void readOnlyChanged(bool);
+
 public slots:
   void setOnlineJob( const onlineJobTyped<sepaOnlineTransfer> &job );
   bool setOnlineJob( const onlineJob& job );
   void setOriginAccount(const QString& accountId );
+  void setReadOnly( const bool& );
 
 private slots:
   void updateSettings();
   void updateEveryStatus();
-  
+
   /** @{
    * These slots are called when the corosponding field is changed
    * to start the validation
@@ -71,19 +77,19 @@ private slots:
   void valueChanged();
   void endToEndReferenceChanged( const QString& reference );
   /** @} */
-  
-  
+
+
   /**
    * @brief Convenient slot to emit validityChanged()
-   * 
+   *
    * A default implementation to emit validityChanged() based on getOnlineJob().isValid().
    * This is useful if you use @a kMandatoryFieldsGroup in your widget. Just connect kMandatoryFieldsGroup::stateChanged(bool)
    * to this slot.
-   * 
+   *
    * @param status if false, validityChanged(false) is emitted without further checks.
    */
   void requiredFieldsCompleted( const bool& status = true )
-  { 
+  {
     if ( status ) {
       emit validityChanged( getOnlineJobTyped().isValid() );
     } else {
@@ -95,7 +101,8 @@ private:
   Ui::sepaCreditTransferEdit *ui;
   onlineJobTyped<sepaOnlineTransfer> m_onlineJob;
   kMandatoryFieldGroup* m_requiredFields;
-  
+  bool m_readOnly;
+
   QSharedPointer<const sepaOnlineTransfer::settings> taskSettings();
 };
 

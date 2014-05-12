@@ -26,36 +26,39 @@ class KMyMoneyTextEditHighlighter;
 
 /**
  * @brief KTextEdit with restricted character set and length
- * 
- * Used 
+ *
+ * Used to set constraints on input. It allows to set readOnly property by
+ * slots as well (not possible with KTextEdit).
  */
 class KMyMoneyTextEdit : public KTextEdit
 {
   Q_OBJECT
-  
+
   /**
    * @brief Maximal number of characters allowed
    */
   Q_PROPERTY(int maxLength READ maxLength WRITE setMaxLength)
-  
+
   /**
    * @brief Maximal number characters in each line allowed
    */
   Q_PROPERTY(int maxLineLength READ maxLineLength WRITE setMaxLineLength)
-  
+
   /**
    * @brief Maximal number of lines
    */
   Q_PROPERTY(int maxLines READ maxLines WRITE setMaxLines)
-  
+
   /**
    * @brief List of all allowed chars
    */
   Q_PROPERTY(QString allowedChars READ allowedChars WRITE setAllowedChars)
 
+  Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly);
+
 public:
   KMyMoneyTextEdit( QWidget* parent = 0);
-  
+
   int maxLength() const;
   int maxLineLength() const;
   int maxLines() const;
@@ -67,6 +70,9 @@ public Q_SLOTS:
   void setMaxLineLength(const int& maxLineLength);
   void setMaxLines(const int& maxLines);
   void setAllowedChars(const QString& allowedChars);
+
+  /** @brief Slot to set this text edit read only */
+  void setReadOnly(const bool&);
 
 protected:
   virtual void keyReleaseEvent(QKeyEvent* e);

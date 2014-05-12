@@ -38,8 +38,10 @@ namespace Ui {
 
 /**
  * @brief The kOnlineTransferForm class
- * 
+ *
  * @todo Disable Send/Enque button if no task is shown.
+ * @todo If this dialog is shown a second time without setting a onlineJob it, it shows the previous content.
+ *       Fix this by creating the IonlineJobEdit widgets on demand and destroying them afterwards.
  */
 class kOnlineTransferForm : public QDialog
 {
@@ -47,7 +49,7 @@ class kOnlineTransferForm : public QDialog
 
 public:
   kOnlineTransferForm(QWidget *parent = 0);
-  virtual ~kOnlineTransferForm();  
+  virtual ~kOnlineTransferForm();
 
 signals:
   /** @brief The user wants this job to be saved */
@@ -55,11 +57,11 @@ signals:
 
   /** @brief User wants to send the onlineJob directly */
   void acceptedForSend( onlineJob );
-  
-public slots:  
+
+public slots:
   virtual void accept();
   virtual void reject();
-    
+
   /** @brief sets the current origin account */
   virtual void setCurrentAccount( const QString& accountId );
 
@@ -69,6 +71,8 @@ public slots:
    * @return true if there is widget which supports editing this onlineJob
    */
   virtual bool setOnlineJob( const onlineJob );
+
+  void duplicateCurrentJob();
 
 private slots:
   /** @brief Slot for account selection box */
@@ -85,7 +89,7 @@ private slots:
 
   /**
    * @brief add a widget
-   * 
+   *
    * Caller gives away ownership.
    */
   void addOnlineJobEditWidget( IonlineJobEdit* widget );
@@ -98,11 +102,13 @@ private slots:
   void showEditWidget( IonlineJobEdit* widget );
 
   /** @} */
-   
+
   /**
    * @brief Shows warning if checkEditWidget() == false
    */
   void checkNotSupportedWidget();
+
+  void jobIsReadOnly( const bool& );
 
 private:
   /**
@@ -114,7 +120,8 @@ private:
   Ui::kOnlineTransferFormDecl* ui;
   QList<IonlineJobEdit*> m_onlineJobEditWidgets;
   kMandatoryFieldGroup* m_requiredFields;
-  
+  QAction* m_duplicateJob;
+
   /**
    * @brief Checks if widget can edit any task the selected account supports
    */
@@ -124,7 +131,7 @@ private:
    * @see checkEditWidget( IonlineJobEdit* widget )
    */
   bool checkEditWidget();
-  
+
   void editWidgetChanged();
 };
 

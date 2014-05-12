@@ -26,7 +26,8 @@ germanCreditTransferEdit::germanCreditTransferEdit(QWidget *parent) :
     ui(new Ui::germanCreditTransferEdit),
     m_originAccount( QString() ),
     m_germanCreditTransfer( onlineJobTyped<germanOnlineTransfer>() ),
-    m_requiredFields( new kMandatoryFieldGroup(this) )
+    m_requiredFields( new kMandatoryFieldGroup(this) ),
+    m_readOnly( false )
 {
     ui->setupUi(this);
     updateTaskSettings();
@@ -41,6 +42,12 @@ germanCreditTransferEdit::germanCreditTransferEdit(QWidget *parent) :
     connect(ui->beneficiaryBankCode, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryBankCodeChanged(QString)));
     connect(ui->transferValue, SIGNAL(textChanged(QString)), this, SLOT(valueChanged()));
     connect(ui->transferPurpose, SIGNAL(textChanged()), this, SLOT(purposeChanged()));
+
+    connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryName, SLOT(setReadOnly(bool)));
+    connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryAccNum, SLOT(setReadOnly(bool)));
+    connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryBankCode, SLOT(setReadOnly(bool)));
+    connect(this, SIGNAL(readOnlyChanged(bool)), ui->transferValue, SLOT(setReadOnly(bool)));
+    connect(this, SIGNAL(readOnlyChanged(bool)), ui->transferPurpose, SLOT(setReadOnly(bool)));
 
     m_requiredFields->add(ui->beneficiaryName);
     m_requiredFields->add(ui->beneficiaryAccNum);
@@ -74,6 +81,8 @@ bool germanCreditTransferEdit::setOnlineJob(const onlineJobTyped<germanOnlineTra
     ui->beneficiaryBankName->setText( m_germanCreditTransfer.task()->beneficiaryTyped().bankName() );
     ui->transferValue->setValue( m_germanCreditTransfer.task()->value() );
     ui->transferPurpose->setText( m_germanCreditTransfer.task()->purpose() );
+
+    setReadOnly( !job.isEditable() );
     return true;
 }
 
@@ -187,6 +196,15 @@ onlineJobTyped<germanOnlineTransfer> germanCreditTransferEdit::getOnlineJobTyped
   job.task()->setValue( ui->transferValue->value() );
   job.task()->setPurpose( ui->transferPurpose->toPlainText() );
   return job;
+}
+
+void germanCreditTransferEdit::setReadOnly(const bool& readOnly)
+{
+  // Only set writeable if it changes something and if it is possible
+  if ( readOnly != m_readOnly && (readOnly == true || getOnlineJobTyped().isEditable()) ) {
+    m_readOnly = readOnly;
+    emit readOnlyChanged( m_readOnly );
+  }
 }
 
 void germanCreditTransferEdit::updateEveryStatus()
