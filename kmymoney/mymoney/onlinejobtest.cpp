@@ -67,10 +67,12 @@ void onlineJobTest::testCopyAssignment()
 void onlineJobTest::testCopyConstructorWithNewId()
 {
     onlineJob originalJob = onlineJob( new dummyTask, "O000001" );
+    originalJob.setBankAnswer(onlineJob::acceptedByBank);
     QVERIFY( !originalJob.isNull() );
 
     onlineJob jobCopy = onlineJob("O000002", originalJob);
     QVERIFY( !jobCopy.isNull() );
     QCOMPARE( jobCopy.id(), QString("O000002"));
     QVERIFY( originalJob.task() != jobCopy.task() );
+    QVERIFY( jobCopy.bankAnswerDate().isNull() );
 }

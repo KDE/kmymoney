@@ -57,16 +57,21 @@ void KMyMoneyTextEditHighlighter::setMaxLineLength( const int& length )
   rehighlight();
 }
 
+void KMyMoneyTextEdit::setReadOnly(const bool& readOnly)
+{
+  KTextEdit::setReadOnly(readOnly);
+}
+
 void KMyMoneyTextEditHighlighter::highlightBlock(const QString& text)
 {
   // Spell checker first
   Highlighter::highlightBlock(text);
-  
+
   QTextCharFormat invalidFormat;
   invalidFormat.setFontItalic(true);
   invalidFormat.setForeground(Qt::red);
   invalidFormat.setUnderlineStyle(QTextCharFormat::SingleUnderline);
-  
+
   // Check used characters
   const int length = text.length();
   for(int i = 0; i < length; ++i) {
@@ -74,7 +79,7 @@ void KMyMoneyTextEditHighlighter::highlightBlock(const QString& text)
       setFormat(i, 1, invalidFormat);
     }
   }
-   
+
   if ( m_maxLines != -1 ) {
     //! @todo Is using QTextBlock::blockNumber() as line number dangerous?
     if ( currentBlock().blockNumber() >= m_maxLines ) {
@@ -82,7 +87,7 @@ void KMyMoneyTextEditHighlighter::highlightBlock(const QString& text)
       return;
     }
   }
-  
+
   if (m_maxLength != -1 ) {
     const int blockPosition = currentBlock().position();
     if ( m_maxLength < (length+blockPosition) ) {
@@ -90,7 +95,7 @@ void KMyMoneyTextEditHighlighter::highlightBlock(const QString& text)
       return;
     }
   }
-  
+
   if (m_maxLineLength != -1 && length >= m_maxLineLength) {
     setFormat(m_maxLineLength, length-m_maxLineLength, invalidFormat);
     return;
@@ -118,11 +123,11 @@ bool KMyMoneyTextEdit::isEventAllowed(QKeyEvent* e) const
     if ( text.at(0).isPrint() ) {
       if (!m_allowedChars.contains(text))
         return false;
-      
+
       // Do not check max lengths etc if something is replaced
       if ( textCursor().hasSelection() )
         return true;
-      
+
       const QString plainText = toPlainText();
 
       if ( m_maxLength != -1 && plainText.length() >= m_maxLength )
@@ -140,23 +145,23 @@ bool KMyMoneyTextEdit::isEventAllowed(QKeyEvent* e) const
 bool KMyMoneyTextEdit::isValid() const
 {
   const QString text = toPlainText();
-  
+
   if ( m_maxLength != -1 && text.length() >= m_maxLength )
     return false;
-  
+
   const QStringList lines = text.split('\n');
-  
+
   if ( m_maxLines != -1 && lines.count() >= m_maxLines ) {
     return false;
   }
-  
-  if ( m_maxLineLength != -1 ) {    
+
+  if ( m_maxLineLength != -1 ) {
     foreach (QString line, lines) {
       if (line.length() > m_maxLineLength)
         return false;
     }
   }
-  
+
   const int length = text.length();
   for (int i = 0; i < length; ++i) {
     if (!m_allowedChars.contains(text.at(i)))

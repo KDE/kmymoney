@@ -27,7 +27,8 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent) :
     IonlineJobEdit(parent),
     ui(new Ui::sepaCreditTransferEdit),
     m_onlineJob( onlineJobTyped<sepaOnlineTransfer>() ),
-    m_requiredFields( new kMandatoryFieldGroup(this) )
+    m_requiredFields( new kMandatoryFieldGroup(this) ),
+    m_readOnly( false )
 {
     ui->setupUi(this);
 
@@ -59,6 +60,13 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent) :
     connect(ui->value, SIGNAL(valueChanged(QString)), this, SIGNAL(onlineJobChanged()));
     connect(ui->sepaReference, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
     connect(ui->purpose, SIGNAL(textChanged()), this, SIGNAL(onlineJobChanged()));
+
+    connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryName, SLOT(setReadOnly(bool)));
+    connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryAccNum, SLOT(setReadOnly(bool)));
+    connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryBankCode, SLOT(setReadOnly(bool)));
+    connect(this, SIGNAL(readOnlyChanged(bool)), ui->value, SLOT(setReadOnly(bool)));
+    connect(this, SIGNAL(readOnlyChanged(bool)), ui->sepaReference, SLOT(setReadOnly(bool)));
+    connect(this, SIGNAL(readOnlyChanged(bool)), ui->purpose, SLOT(setReadOnly(bool)));
 }
 
 sepaCreditTransferEdit::~sepaCreditTransferEdit()
@@ -87,6 +95,8 @@ void sepaCreditTransferEdit::setOnlineJob(const onlineJobTyped<sepaOnlineTransfe
 {
   m_onlineJob = job;
   updateSettings();
+  setReadOnly( !job.isEditable() );
+
   ui->purpose->setText( job.task()->purpose() );
   ui->sepaReference->setText( job.task()->endToEndReference() );
   ui->value->setValue( job.task()->value() );
@@ -118,6 +128,15 @@ void sepaCreditTransferEdit::updateEveryStatus()
     purposeChanged();
     valueChanged();
     endToEndReferenceChanged( ui->sepaReference->text() );
+}
+
+void sepaCreditTransferEdit::setReadOnly(const bool& readOnly)
+{
+  // Only set writeable if it changes something and if it is possible
+  if ( readOnly != m_readOnly && (readOnly == true || getOnlineJobTyped().isEditable()) ) {
+    m_readOnly = readOnly;
+    emit readOnlyChanged( m_readOnly );
+  }
 }
 
 void sepaCreditTransferEdit::updateSettings()

@@ -58,9 +58,9 @@ signals:
  *
  * In case a onlineJob got available during runtime, emit one of these signals.
  */
-  void jobAvailable( QString accountId, size_t );
-  void jobAvailable( QString accountId, QList<size_t> );
-  void jobUnavailable( QString accountId, size_t );
+  void jobAvailable( QString accountId, QString );
+  void jobAvailable( QString accountId, QStringList );
+  void jobUnavailable( QString accountId, QString );
   //void jobUnavailable( QString accountId );
 };
 

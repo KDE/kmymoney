@@ -40,28 +40,38 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
 {
   ui->setupUi(this);
 
-
-  OnlineBankingAccountNamesFilterProxyModel* accountsModel = new OnlineBankingAccountNamesFilterProxyModel(this);  
+  OnlineBankingAccountNamesFilterProxyModel* accountsModel = new OnlineBankingAccountNamesFilterProxyModel(this);
   accountsModel->setSourceModel( Models::instance()->accountsModel() );
   ui->originAccount->setModel( accountsModel );
 
   ui->convertMessage->hide();
   ui->convertMessage->setWordWrap(true);
-  
+
+  // Message Widget for read only jobs
+  m_duplicateJob = new QAction(i18n("Duplicate"), this);
+  connect(m_duplicateJob, SIGNAL(triggered(bool)), SLOT(duplicateCurrentJob()));
+
+  ui->headMessage->hide();
+  ui->headMessage->setWordWrap(true);
+  ui->headMessage->setCloseButtonVisible(false);
+  ui->headMessage->addAction(m_duplicateJob);
+
+  // Load widgets
   foreach( IonlineJobEdit* widget, onlineJobAdministration::instance()->onlineJobEdits() ) {
     addOnlineJobEditWidget(widget);
   }
-  
+
   connect(ui->transferTypeSelection, SIGNAL(currentIndexChanged(int)), this, SLOT(convertCurrentJob(int)));
 
   connect(ui->buttonAbort, SIGNAL(clicked(bool)), this, SLOT(reject()));
   connect(ui->buttonSend, SIGNAL(clicked(bool)), this, SLOT(sendJob()));
   connect(ui->buttonEnque, SIGNAL(clicked(bool)), this, SLOT(accept()));
   connect(m_requiredFields, SIGNAL(stateChanged(bool)), ui->buttonEnque, SLOT(setEnabled(bool)));
-  
+
   connect(ui->originAccount, SIGNAL(accountSelected(QString)), this, SLOT(accountChanged()));
-  
+
   accountChanged();
+  jobIsReadOnly( false );
   m_requiredFields->add(ui->originAccount);
   m_requiredFields->setOkButton(ui->buttonSend);
 }
@@ -71,7 +81,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
  */
 void kOnlineTransferForm::addOnlineJobEditWidget(IonlineJobEdit* widget)
 {
-  Q_ASSERT( widget != 0 );
+  Q_CHECK_PTR( widget );
 
   // directly load the first widget into QScrollArea
   bool showWidget = true;
@@ -79,11 +89,11 @@ void kOnlineTransferForm::addOnlineJobEditWidget(IonlineJobEdit* widget)
     widget->setEnabled(false);
     showWidget = false;
   }
-  
+
   m_onlineJobEditWidgets.append( widget );
   ui->transferTypeSelection->addItem(widget->label());
   m_requiredFields->add(widget);
-  
+
   if (showWidget)
     showEditWidget(widget);
 }
@@ -93,16 +103,16 @@ void kOnlineTransferForm::convertCurrentJob( const int& index )
   Q_ASSERT( index < m_onlineJobEditWidgets.count() );
 
   IonlineJobEdit* widget = m_onlineJobEditWidgets.at(index);
-  
+
   // Vars set by onlineJobAdministration::convertBest
   onlineTaskConverter::convertType convertType;
   QString userMessage;
-  
+
   widget->setOnlineJob( onlineJobAdministration::instance()->convertBest(activeOnlineJob(), widget->supportedOnlineTasks(), convertType, userMessage ) );
-  
+
   if ( convertType == onlineTaskConverter::convertImpossible && userMessage.isEmpty())
     userMessage = i18n("During the change of the order your previous entries could not be converted.");
-  
+
   if ( !userMessage.isEmpty() ) {
     switch( convertType ) {
       case onlineTaskConverter::convertionLossyMajor:
@@ -114,12 +124,22 @@ void kOnlineTransferForm::convertCurrentJob( const int& index )
         break;
       case onlineTaskConverter::convertionLoseless: break;
     }
-    
+
     ui->convertMessage->setText(userMessage);
     ui->convertMessage->animatedShow();
   }
 
   showEditWidget(widget);
+}
+
+void kOnlineTransferForm::duplicateCurrentJob()
+{
+  IonlineJobEdit* widget = qobject_cast< IonlineJobEdit* >( ui->creditTransferEdit->widget() );
+  if ( widget == 0 )
+    return;
+
+  onlineJob duplicate( QString(), activeOnlineJob() );
+  widget->setOnlineJob(duplicate);
 }
 
 void kOnlineTransferForm::accept()
@@ -147,12 +167,14 @@ bool kOnlineTransferForm::setOnlineJob(const onlineJob job)
   } catch ( const onlineJob::emptyTask& ) {
     return false;
   }
-  
+
   setCurrentAccount( job.responsibleAccount() );
   if (showEditWidget( name )) {
     IonlineJobEdit* widget = qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget());
     if (widget != 0) { // This can happen if there are no widgets
-      return widget->setOnlineJob(job);
+      const bool ret = widget->setOnlineJob(job);
+      jobIsReadOnly( !job.isEditable() );
+      return ret;
     }
   }
   return false;
@@ -170,7 +192,7 @@ void kOnlineTransferForm::accountChanged()
 
   foreach (IonlineJobEdit* widget, m_onlineJobEditWidgets)
     widget->setOriginAccount( accountId );
-  
+
   checkNotSupportedWidget();
 }
 
@@ -207,33 +229,61 @@ onlineJob kOnlineTransferForm::activeOnlineJob() const
   IonlineJobEdit* widget = qobject_cast<IonlineJobEdit*>(ui->creditTransferEdit->widget());
   if ( widget == 0 )
     return onlineJob();
-  
+
   return widget->getOnlineJob();
+}
+
+void kOnlineTransferForm::jobIsReadOnly(const bool& readOnly)
+{
+  ui->originAccount->setDisabled( readOnly );
+  ui->transferTypeSelection->setDisabled( readOnly );
+
+  if ( readOnly ) {
+    ui->headMessage->setMessageType(KMessageWidget::Information);
+    if ( activeOnlineJob().sendDate().isValid() )
+      ui->headMessage->setText( i18n("This credit-transfer was send to your bank at %1 therefore it cannot be edited anymore. You may create a copy for editing.").arg(activeOnlineJob().sendDate().toString( Qt::DefaultLocaleShortDate )) );
+    else
+      ui->headMessage->setText( i18n("This credit-transfer is not editable. You may create a copy for editing.") );
+
+    if ( this->isHidden() )
+      ui->headMessage->show();
+    else if ( ui->headMessage->isHidden() )
+      ui->headMessage->animatedShow();
+  } else if ( ui->headMessage->isVisible() ) {
+    ui->headMessage->animatedHide();
+  }
 }
 
 bool kOnlineTransferForm::showEditWidget(const QString& onlineTaskName)
 {
+  int index = 0;
   foreach (IonlineJobEdit* widget, m_onlineJobEditWidgets) {
     if (widget->supportedOnlineTasks().contains(onlineTaskName) ) {
+      ui->transferTypeSelection->setCurrentIndex( index );
       showEditWidget( widget );
       return true;
     }
+    ++index;
   }
   return false;
 }
 
 void kOnlineTransferForm::showEditWidget( IonlineJobEdit* widget )
 {
-  Q_ASSERT(widget != 0);
+  Q_CHECK_PTR(widget);
 
   QWidget* oldWidget = ui->creditTransferEdit->takeWidget();
-  if (oldWidget != 0) // This is not the case at the first call of showEditWidget() and if there are no widgets.
+  if (oldWidget != 0) { // This is true at the first call of showEditWidget() and if there are no widgets.
     oldWidget->setEnabled(false);
+    disconnect(oldWidget, SIGNAL(readOnlyChanged(bool)), this, SLOT(jobIsReadOnly(bool)));
+  }
 
   widget->setEnabled(true);
   ui->creditTransferEdit->setWidget(widget);
+  jobIsReadOnly( widget->isReadOnly() );
   widget->show();
-  
+
+  connect(widget, SIGNAL(readOnlyChanged(bool)), SLOT(jobIsReadOnly(bool)));
   checkNotSupportedWidget();
   m_requiredFields->changed();
 }
@@ -242,5 +292,7 @@ kOnlineTransferForm::~kOnlineTransferForm()
 {
   ui->creditTransferEdit->takeWidget();
   //qDeleteAll(m_onlineJobEditWidgets);
+
   delete ui;
+  delete m_duplicateJob;
 }

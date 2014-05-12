@@ -33,9 +33,9 @@ class onlineTask;
  * onlineJob has two tasks:
  * 1) storing the pointer to an onlineTask safely,
  * 2) storing status information about the onlineTask.
- * 
+ *
  * It works like a shared pointer for onlineTasks.
- * 
+ *
  * It is save to use because accesses to pointers (e.g. task() ) throw an execption if onlineJob is null.
  *
  * @todo LOW make data implicitly shared
@@ -46,7 +46,7 @@ public:
 
   /**
    * @brief Contructor for null onlineJobs
-   * 
+   *
    * A onlineJob which is null cannot become valid again.
    * @see isNull()
    */
@@ -62,27 +62,31 @@ public:
   /** @brief Copy constructor */
   onlineJob( onlineJob const& other );
 
-  /** @brief Copy constructor with new id */
+  /**
+   * @brief Create new onlineJob as copy of other
+   *
+   * This constructor does not copy the status information but the task only.
+   */
   onlineJob( const QString &id, const onlineJob& other );
 
   /** @brief Contruct from xml */
   onlineJob( const QDomElement& );
-  
+
   virtual ~onlineJob();
 
   /**
    * @brief Returns task attached to this onlineJob
-   * 
+   *
    * You should not store this pointer but use onlineJob::task() (or onlineJobKnownTask::task())
    * every time you access it.
-   * 
+   *
    * @throws emptyTask if isNull()
    */
   onlineTask* task();
-  
+
   /** @copydoc task(); */
   const onlineTask* task() const;
-  
+
   /**
    * @brief Returns task attached to this onlineJob as const
    * @throws emptyTask if isNull()
@@ -91,20 +95,20 @@ public:
 
   /**
    * @brief Returns task of type T attached to this onlineJob
-   * 
+   *
    * Internaly a dynamic_cast is done and the result is checked.
-   * 
+   *
    * @throws emptyTask if isNull()
    * @throws badTaskCast if attached task cannot be casted to T
    */
   template<class T> T* task();
-  
+
   /** @copydoc task() */
   template<class T> const T* task() const;
   template<class T> const T* constTask() const { return task<T>(); }
 
   template<class T> bool canTaskCast() const;
-  
+
   QString taskIid() const;
 
   /** @todo implement */
@@ -128,7 +132,7 @@ public:
    * Each job must have an account on which the job operates. This is used to determine
    * the correct onlinePlugin which can execute this job. If the job is related to more
    * than one account (e.g. a password change) select a random one.
-   * 
+   *
    * @return accountId or QString() if none is set or job isNull.
    */
   virtual QString responsibleAccount() const;
@@ -152,18 +156,18 @@ public:
 
   /**
    * @brief Checks if this onlineJob has an attached task
-   * 
+   *
    * @return true if no task is attached to this job
    */
   virtual bool isNull() const { return (m_task == 0); }
 
   /**
    * @brief Checks if an valid onlineTask is attached
-   * 
+   *
    * @return true if task().isValid(), false if isNull() or !task.isValid()
    */
   virtual bool isValid() const;
-  
+
   /**
    * @brief DateTime the job was send to the bank
    *
@@ -205,9 +209,9 @@ public:
 
   /**
    * @brief locks the onlineJob for sending it
-   * 
+   *
    * Used when the job is in sending process by the online plugin.
-   * 
+   *
    * A locked onlineJob cannot be removed from the storage.
    *
    * @note The onlineJob can still be edited and stored. But it should be done by
@@ -215,7 +219,7 @@ public:
    *
    * @todo Enforce the lock somehow? Note: the onlinePlugin must still be able to
    * write to the job.
-   * 
+   *
    * @param enable true locks the job, false unlocks the job
    */
   virtual bool setLock( bool enable = true );
@@ -240,6 +244,11 @@ public:
    * @param message
    */
   virtual void addJobMessage(const onlineJobMessage &message);
+
+  /**
+   * @brief Convenient method to set add a log message
+   */
+  virtual void addJobMessage(const onlineJobMessage::messageType& type, const QString& sender, const QString& message, const QString& errorCode = QString(), const QDateTime& timestamp = QDateTime::currentDateTime());
 
   /**
    * @brief jobMessageList
@@ -279,21 +288,21 @@ private:
 
   /**
    * @brief Date-time the job was send to the bank
-   * 
+   *
    * This does not mean an answer was given by the bank
    */
   QDateTime m_jobSend;
 
   /**
    * @brief Date-time of confirmation/rejection of the bank
-   * 
+   *
    * which state this timestamp belongs to is stored in m_jobBankAnswerState
    */
   QDateTime m_jobBankAnswerDate;
 
   /**
    * @brief Answer of the bank
-   * 
+   *
    * combined with m_jobBankAnswerDate
    */
   sendingState m_jobBankAnswerState;
