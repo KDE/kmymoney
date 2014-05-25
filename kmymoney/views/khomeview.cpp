@@ -76,6 +76,10 @@
 #define VIEW_HOME           "home"
 #define VIEW_REPORTS        "reports"
 
+bool accountNameLess(const MyMoneyAccount &acc1, const MyMoneyAccount &acc2)
+{
+  return acc1.name().localeAwareCompare(acc2.name()) < 0;
+}
 
 using namespace reports;
 
@@ -87,8 +91,6 @@ public:
       m_needReload(true),
       m_netWorthGraphLastValidSize(400, 300) {
   }
-
-  void addNameIndex(QMap<QString, MyMoneyAccount> &idx, const MyMoneyAccount& account);
 
   /**
    * daily balances of an account
@@ -112,23 +114,6 @@ public:
     */
   QMap<QString, dailyBalances> m_accountList;
 };
-
-void KHomeView::Private::addNameIndex(QMap<QString, MyMoneyAccount> &idx, const MyMoneyAccount& account)
-{
-  QString key = account.name();
-
-  if (idx[key].id().isEmpty()) {
-    idx[key] = account;
-    //take care of accounts with duplicate names
-  } else if (idx[key].id() != account.id()) {
-    key = account.name() + "[%1]";
-    int dup = 2;
-    while (!idx[key.arg(dup)].id().isEmpty()
-           && idx[key.arg(dup)].id() != account.id())
-      ++dup;
-    idx[key.arg(dup)] = account;
-  }
-}
 
 KHomeView::KHomeView(QWidget *parent, const char *name) :
     KMyMoneyViewBase(parent, name, i18n("Home")),
@@ -655,14 +640,12 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
   MyMoneyFile* file = MyMoneyFile::instance();
   int prec = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
   QList<MyMoneyAccount> accounts;
-  QList<MyMoneyAccount>::Iterator it;
-  QMap<QString, MyMoneyAccount> nameIdx;
 
   bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked();
 
   // get list of all accounts
   file->accountList(accounts);
-  for (it = accounts.begin(); it != accounts.end();) {
+  for (QList<MyMoneyAccount>::Iterator it = accounts.begin(); it != accounts.end();) {
     bool removeAccount = false;
     if (!(*it).isClosed() || showClosedAccounts) {
       switch ((*it).accountType()) {
@@ -726,13 +709,13 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
 
     if (removeAccount)
       it = accounts.erase(it);
-    else {
-      d->addNameIndex(nameIdx, *it);
+    else
       ++it;
-    }
   }
 
   if (!accounts.isEmpty()) {
+    // sort the accounts by name
+    qStableSort(accounts.begin(), accounts.end(), accountNameLess);
     QString tmp;
     int i = 0;
     tmp = "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + header + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
@@ -772,8 +755,8 @@ void KHomeView::showAccounts(KHomeView::paymentTypeE type, const QString& header
     d->m_html += "</tr>";
 
     d->m_total = 0;
-    QMap<QString, MyMoneyAccount>::const_iterator it_m;
-    for (it_m = nameIdx.constBegin(); it_m != nameIdx.constEnd(); ++it_m) {
+    QList<MyMoneyAccount>::const_iterator it_m;
+    for (it_m = accounts.constBegin(); it_m != accounts.constEnd(); ++it_m) {
       d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
       showAccountEntry(*it_m);
       d->m_html += "</tr>";
@@ -993,7 +976,6 @@ void KHomeView::showFavoriteReports(void)
 
 void KHomeView::showForecast(void)
 {
-  QMap<QString, MyMoneyAccount> nameIdx;
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneyAccount> accList;
 
@@ -1003,13 +985,9 @@ void KHomeView::showForecast(void)
 
   accList = d->m_forecast.accountList();
 
-  //add it to a map to have it ordered by name
-  QList<MyMoneyAccount>::const_iterator accList_t = accList.constBegin();
-  for (; accList_t != accList.constEnd(); ++accList_t) {
-    d->addNameIndex(nameIdx, *accList_t);
-  }
-
-  if (nameIdx.count() > 0) {
+  if (accList.count() > 0) {
+    // sort the accounts by name
+    qStableSort(accList.begin(), accList.end(), accountNameLess);
     int i = 0;
 
     int colspan = 1;
@@ -1038,8 +1016,8 @@ void KHomeView::showForecast(void)
     // Now output entries
     i = 0;
 
-    QMap<QString, MyMoneyAccount>::ConstIterator it_account;
-    for (it_account = nameIdx.constBegin(); it_account != nameIdx.constEnd(); ++it_account) {
+    QList<MyMoneyAccount>::ConstIterator it_account;
+    for (it_account = accList.constBegin(); it_account != accList.constEnd(); ++it_account) {
       //MyMoneyAccount acc = (*it_n);
 
       d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
@@ -1235,8 +1213,8 @@ void KHomeView::showAssetsLiabilities(void)
 {
   QList<MyMoneyAccount> accounts;
   QList<MyMoneyAccount>::ConstIterator it;
-  QMap<QString, MyMoneyAccount> nameAssetsIdx;
-  QMap<QString, MyMoneyAccount> nameLiabilitiesIdx;
+  QList<MyMoneyAccount> assets;
+  QList<MyMoneyAccount> liabilities;
   MyMoneyMoney netAssets;
   MyMoneyMoney netLiabilities;
   QString fontStart, fontEnd;
@@ -1253,7 +1231,7 @@ void KHomeView::showAssetsLiabilities(void)
       switch ((*it).accountType()) {
           // group all assets into one list but make sure that investment accounts always show up
         case MyMoneyAccount::Investment:
-          d->addNameIndex(nameAssetsIdx, *it);
+          assets << *it;
           break;
 
         case MyMoneyAccount::Checkings:
@@ -1263,7 +1241,7 @@ void KHomeView::showAssetsLiabilities(void)
         case MyMoneyAccount::AssetLoan:
           // list account if it's the last in the hierarchy or has transactions in it
           if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
-            d->addNameIndex(nameAssetsIdx, *it);
+            assets << *it;
           }
           break;
 
@@ -1273,7 +1251,7 @@ void KHomeView::showAssetsLiabilities(void)
         case MyMoneyAccount::Loan:
           // list account if it's the last in the hierarchy or has transactions in it
           if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
-            d->addNameIndex(nameLiabilitiesIdx, *it);
+            liabilities << *it;
           }
           break;
 
@@ -1285,7 +1263,10 @@ void KHomeView::showAssetsLiabilities(void)
   }
 
   //only do it if we have assets or liabilities account
-  if (nameAssetsIdx.count() > 0 || nameLiabilitiesIdx.count() > 0) {
+  if (assets.count() > 0 || liabilities.count() > 0) {
+    // sort the accounts by name
+    qStableSort(assets.begin(), assets.end(), accountNameLess);
+    qStableSort(liabilities.begin(), liabilities.end(), accountNameLess);
     QString statusHeader;
     if (KMyMoneyGlobalSettings::showBalanceStatusOfOnlineAccounts()) {
       QString pathStatusHeader;
@@ -1357,12 +1338,12 @@ void KHomeView::showAssetsLiabilities(void)
     if (KMyMoneyGlobalSettings::showCountOfNotReconciledTransactions()) placeHolder_Counts += "<td></td>";
 
     //get asset and liability accounts
-    QMap<QString, MyMoneyAccount>::const_iterator asset_it = nameAssetsIdx.constBegin();
-    QMap<QString, MyMoneyAccount>::const_iterator liabilities_it = nameLiabilitiesIdx.constBegin();
-    for (; asset_it != nameAssetsIdx.constEnd() || liabilities_it != nameLiabilitiesIdx.constEnd();) {
+    QList<MyMoneyAccount>::const_iterator asset_it = assets.constBegin();
+    QList<MyMoneyAccount>::const_iterator liabilities_it = liabilities.constBegin();
+    for (; asset_it != assets.constEnd() || liabilities_it != liabilities.constEnd();) {
       d->m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
       //write an asset account if we still have any
-      if (asset_it != nameAssetsIdx.constEnd()) {
+      if (asset_it != assets.constEnd()) {
         MyMoneyMoney value;
         //investment accounts consolidate the balance of its subaccounts
         if ((*asset_it).accountType() == MyMoneyAccount::Investment) {
@@ -1393,7 +1374,7 @@ void KHomeView::showAssetsLiabilities(void)
       d->m_html += "<td class=\"setcolor\"></td>";
 
       //write a liability account
-      if (liabilities_it != nameLiabilitiesIdx.constEnd()) {
+      if (liabilities_it != liabilities.constEnd()) {
         MyMoneyMoney value;
         value = MyMoneyFile::instance()->balance((*liabilities_it).id(), QDate::currentDate());
         //calculate balance if foreign currency
