@@ -98,11 +98,11 @@ void sqlcipherdrivertest::checkReadAccess()
 void sqlcipherdrivertest::createTable()
 {
   QSqlQuery query;
-  QVERIFY( query.exec("CREATE TABLE test ("
-    "id int PRIMARY_KEY,"
-    "text varchar(20)"
-    ");"
-  ) );
+  QVERIFY(query.exec("CREATE TABLE test ("
+                     "id int PRIMARY_KEY,"
+                     "text varchar(20)"
+                     ");"
+                    ));
   QVERIFY(!query.lastError().isValid());
 }
 
@@ -130,11 +130,11 @@ void sqlcipherdrivertest::write()
 
   QSqlQuery query;
   query.prepare("INSERT INTO test (id, text) "
-    "VALUES (:id, :text);"
-  );
+                "VALUES (:id, :text);"
+               );
   query.bindValue(":id", id);
   query.bindValue(":text", text);
-  QVERIFY( query.exec() );
+  QVERIFY(query.exec());
   QVERIFY(!query.lastError().isValid());
   QCOMPARE(query.numRowsAffected(), 1);
 }
@@ -142,8 +142,8 @@ void sqlcipherdrivertest::write()
 void sqlcipherdrivertest::count()
 {
   QSqlQuery query;
-  QVERIFY( query.exec("SELECT count(id) FROM test;") );
-  QVERIFY( query.next() );
+  QVERIFY(query.exec("SELECT count(id) FROM test;"));
+  QVERIFY(query.next());
   QCOMPARE(query.value(0).toInt(), data());
 }
 
@@ -160,7 +160,7 @@ void sqlcipherdrivertest::readData()
   QSqlQuery query;
   query.prepare("SELECT id, text FROM test WHERE id = :id;");
   query.bindValue(":id", QVariant::fromValue(id));
-  QVERIFY( query.exec() );
+  QVERIFY(query.exec());
 
   QVERIFY(!query.lastError().isValid());
   QVERIFY(query.next());
@@ -185,7 +185,7 @@ void sqlcipherdrivertest::isFileEncrpyted()
   file.open();
   // http://www.sqlite.org/fileformat.html#database_header
   QString header = file.read(16);
-  QVERIFY( header !=  "SQLite format 3\000" );
+  QVERIFY(header !=  "SQLite format 3\000");
   file.close();
 }
 
@@ -224,7 +224,7 @@ void sqlcipherdrivertest::reopenDatabase()
 
   QSqlQuery query;
   query.prepare("PRAGMA key = '" + passphrase + "'");
-  QVERIFY( query.exec() );
+  QVERIFY(query.exec());
 
   QVERIFY(!query.lastError().isValid());
 

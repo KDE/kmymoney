@@ -217,7 +217,7 @@ void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
     m_widget->textUserName->setEnabled(true);
     m_widget->textHostName->setEnabled(true);
   }
-  m_widget->textPassword->setEnabled( dbDriver->isPasswordSupported() );
+  m_widget->textPassword->setEnabled(dbDriver->isPasswordSupported());
 }
 
 void KSelectDatabaseDlg::slotHelp(void)

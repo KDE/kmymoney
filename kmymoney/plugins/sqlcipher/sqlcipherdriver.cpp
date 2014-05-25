@@ -31,13 +31,13 @@
 
 bool SQLCipherDriver::open(const QString& db, const QString& user, const QString& password, const QString& host, int port, const QString& connOpts)
 {
-  if ( QSQLiteDriver::open(db, user, password, host, port, connOpts) ) {
+  if (QSQLiteDriver::open(db, user, password, host, port, connOpts)) {
     // SQLCipher does not accept empty passwords
     if (password.isEmpty())
       return true;
 
     // This is ugly but needed as the handle is stored in the private section of QSQLiteDriver
-    sqlite3* handle = *static_cast<sqlite3**>( QSQLiteDriver::handle().data() );
+    sqlite3* handle = *static_cast<sqlite3**>(QSQLiteDriver::handle().data());
     if (sqlite3_key(handle, password.toUtf8().constData(), password.length()) == SQLITE_OK) {
       return true;
     } else {
