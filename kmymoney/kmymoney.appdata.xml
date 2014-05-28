@@ -5,6 +5,7 @@
   <project_license>GPL-2.0+</project_license>
   <name>KMyMoney</name>
   <name xml:lang="cs">KMyMoney</name>
+  <name xml:lang="da">KMyMoney</name>
   <name xml:lang="de">KMyMoney</name>
   <name xml:lang="es">KMyMoney</name>
   <name xml:lang="nl">KMyMoney</name>
@@ -17,6 +18,7 @@
   <name xml:lang="x-test">xxKMyMoneyxx</name>
   <summary>Personal Finance Manager</summary>
   <summary xml:lang="cs">Osobní správce financí</summary>
+  <summary xml:lang="da">Styring af privatøkonomi</summary>
   <summary xml:lang="de">Persönliche Finanzenverwaltung</summary>
   <summary xml:lang="nl">Persoonlijk financieel beheer</summary>
   <summary xml:lang="pl">Zarządzanie finansami osobistymi</summary>
@@ -30,6 +32,7 @@
     <p>
       KMyMoney is a personal finance manager for KDE.
     </p>
+    <p xml:lang="da">KMyMoney er styring af privatøkonomien til KDE</p>
     <p xml:lang="de">KMyMoney ist eine persönliche Finanzverwaltung für KDE.</p>
     <p xml:lang="nl">KMyMoney is een persoonlijke financieelbeheerder voor KDE.</p>
     <p xml:lang="pl">KMyMoney służy do zarządzania finansami osobistymi w KDE.</p>
@@ -44,6 +47,7 @@
       Direct download using the OFX and HBCI formats is also possible via plugins.
       Online banking support (statement download) is also provided for the OFX and HBCI protocols.
     </p>
+    <p xml:lang="da">Den understøtter forskellige kontotyper, kategorisering af udgifter og indtægter, afstemning af bankkonti og import/eksport af filformatet "QIF". Direkte download med brug af af formaterne OFX og HBCI er også muligt via plugins. Netbankunderstøttelse (download af kontoudtog) leveres også for protokollerne OFX og HBCI.</p>
     <p xml:lang="nl">Het ondersteunt verschillende typen rekeningen, in categorieën indelen van uitgaven en inkomsten, controle op bankrekeningen en importeren/exporteren naar het “QIF” bestandsformaat. Direct downloaden met de OFX en HBCI formaten is ook mogelijk via plug-ins. Onderstuening voor online bankieren (downloaden van afschriften) wordt ook geleverd voor de OFX en HBCI protocollen.</p>
     <p xml:lang="pl">Obsługuje różne rodzaj kont, kategoryzacje rozchodów i przychodów, uzgadnianie kont bankowych oraz importowanie/eksportowanie do formatu plików “QIF”. Bezpośrednie pobieranie przy użyciu formatów OFX oraz HBCI również jest możliwe poprzez wtyczki. Obsługa bankowości w sieci (pobieranie wyciągów) jest również zapewniona przez protokoły OFX oraz HBCI.</p>
     <p xml:lang="pt">Suporta diferentes tipos de contas, a classificação de despesas e receitas, a consolidação das contas dos bancos e a importação/exportação para o formato de ficheiros "QIF". Também é possível a transferência directa dos formatos OFX e HBCI, através de 'plugins'. O suporte para a banca 'online' (com a transferência de extractos) também está disponível para os protocolos OFX e HBCI.</p>
@@ -56,6 +60,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>KMyMoney has a welcome page to help new users get off to a good start.</caption>
+      <caption xml:lang="da">KMyMoney har en velkomstside til at hjælpe nye brugere godt i gang.</caption>
       <caption xml:lang="nl">KMyMoney heeft een welkomstpagina om nieuwe gebruikers bij een goede start te helpen.</caption>
       <caption xml:lang="pl">KMyMoney zawiera stronę powitalną, aby pomoc nowym użytkownikom w szybkim rozpoczęciu pracy.</caption>
       <caption xml:lang="pt">O KMyMoney tem uma página de boas-vindas para ajudar os utilizadores novos a terem um bom início.</caption>
@@ -68,6 +73,7 @@
     </screenshot>
     <screenshot>
       <caption>The financial summary gives you an overview of your finances, including overdue and upcoming scheduled transactions.</caption>
+      <caption xml:lang="da">Økonomioversigten giver dig en oversigt over din økonomi, derunder forfaldne og kommende planlagte transaktioner.</caption>
       <caption xml:lang="nl">De financiële samenvatting geeft u een overzicht van uw financiën, inclusief over de rand en aankomende geplande transacties.</caption>
       <caption xml:lang="pl">Podsumowanie finansowe daje pogląd na twoje finanse, uwzględniając transakcje po terminie i te zaplanowane.</caption>
       <caption xml:lang="pt">O resumo financeiro dá-lhe uma visão geral sobre as suas finanças, incluindo as transacções atrasadas e agendadas para breve.</caption>
@@ -80,6 +86,7 @@
     </screenshot>
     <screenshot>
       <caption>In this view your accounts are organized, viewed, and managed by the institutions they are held at.</caption>
+      <caption xml:lang="da">I denne visning er dine regnskaber organiseret, fremvist og håndteret af de institutioner de hører til.</caption>
       <caption xml:lang="nl">In deze weergave zijn uw rekeningen georganiseerd, getoond en beheerd door de banken waar ze berusten.</caption>
       <caption xml:lang="pl">W tym widoku konta są urządzane, oglądane i zarządzane przez instytucje, w których się je obsługuje.</caption>
       <caption xml:lang="pt">Nesta janela, poderá organizar, ver e gerir as suas contas, com base nas instituições em que estas estão guardadas.</caption>
