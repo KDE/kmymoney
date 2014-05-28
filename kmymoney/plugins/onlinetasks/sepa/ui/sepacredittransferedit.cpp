@@ -23,8 +23,8 @@
 
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 
-sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent) :
-    IonlineJobEdit(parent),
+sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList args) :
+    IonlineJobEdit(parent, args),
     ui(new Ui::sepaCreditTransferEdit),
     m_onlineJob( onlineJobTyped<sepaOnlineTransfer>() ),
     m_requiredFields( new kMandatoryFieldGroup(this) ),

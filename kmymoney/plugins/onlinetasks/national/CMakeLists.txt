@@ -9,11 +9,11 @@ set( konlinetasks_national_SCRS
   converter/taskconvertergermantosepa.cpp
   converter/taskconvertersepatogerman.cpp
   )
-  
+
 set( konlinetasks_national_HEADER
   tasks/germanonlinetransfer.h
 )
-  
+
 kde4_add_ui_files( konlinetasks_national_SCRS
   ui/germancredittransferedit.ui
 )
@@ -28,7 +28,8 @@ kde4_add_plugin( konlinetasks_national
   nationalonlinetasksloader.cpp
 )
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/nationalorders.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/nationalorders.desktop)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-nationalorders.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalorders.desktop)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-nationalordersui.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalordersui.desktop)
 
 target_link_libraries( konlinetasks_national
   kmm_mymoney
@@ -53,14 +54,13 @@ target_link_libraries( konlinetasks_national
 install(TARGETS konlinetasks_national
         DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/nationalorders.desktop
+install(FILES
+          ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalorders.desktop
+          ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalordersui.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
-        
+
 install(FILES ${konlinetasks_national_HEADER}
     DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney/onlinetasks/national/ COMPONENT Devel)
-
-get_target_property(sources konlinetasks_national SOURCES)
-message( STATUS "get_target_property(konlinetasks_national SOURCES)" ${sources})
 
 if( KDE4_BUILD_TESTS )
   add_subdirectory(tests)

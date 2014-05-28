@@ -26,14 +26,16 @@
 #include "converter/taskconvertergermantosepa.h"
 #include "converter/taskconvertersepatogerman.h"
 
-K_PLUGIN_FACTORY(NationalOnlineTaskFactory, registerPlugin<nationalOnlineTasksLoader>();)
+K_PLUGIN_FACTORY(NationalOnlineTaskFactory,
+                 registerPlugin<nationalOnlineTasksLoader>();
+                 registerPlugin<germanCreditTransferEdit>("creditTransferUi");
+                )
 K_EXPORT_PLUGIN(NationalOnlineTaskFactory("nationalOnlineTasksLoader"))
 
 nationalOnlineTasksLoader::nationalOnlineTasksLoader(QObject* parent, const QVariantList&)
 : KMyMoneyPlugin::Plugin::Plugin(parent, "nationalOnlineTasksLoader")
 {
   onlineJobAdministration::instance()->registerOnlineTask( new germanOnlineTransferImpl );
-  onlineJobAdministration::instance()->registerOnlineTaskEdit( new germanCreditTransferEdit );
   onlineJobAdministration::instance()->registerOnlineTaskConverter( new taskConverterSepaToGerman );
   onlineJobAdministration::instance()->registerOnlineTaskConverter( new taskConverterGermanToSepa);
 }

@@ -23,6 +23,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #include <QtGui/QDialog>
+#include <KService>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -92,7 +93,7 @@ private slots:
    *
    * Caller gives away ownership.
    */
-  void addOnlineJobEditWidget( IonlineJobEdit* widget );
+  void addOnlineJobEditWidget( KService::Ptr widget );
 
   /** @{ */
   /**
@@ -108,7 +109,7 @@ private slots:
    */
   void checkNotSupportedWidget();
 
-  void jobIsReadOnly( const bool& );
+  void setJobReadOnly( const bool& );
 
 private:
   /**

@@ -26,8 +26,8 @@ ENDIF (KBANKING_FOUND)
 ########### next target ###############
 
 SET(kmm_plugin_LIB_SRCS
-  importinterface.cpp 
-  kmymoneyplugin.cpp 
+  importinterface.cpp
+  kmymoneyplugin.cpp
   pluginloader.cpp
   statementinterface.cpp
   viewinterface.cpp
@@ -53,11 +53,14 @@ SET_TARGET_PROPERTIES(kmm_plugin PROPERTIES VERSION ${GENERIC_LIB_VERSION}  SOVE
 
 ########### install files ###############
 
-INSTALL(TARGETS kmm_plugin 
+INSTALL(TARGETS kmm_plugin
   ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 INSTALL(FILES ${plugins_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney  COMPONENT Devel)
 
-INSTALL(FILES kmymoneyplugin.desktop kmymoneyimporterplugin.desktop
+INSTALL(FILES
+    kmymoneyplugin.desktop
+    kmymoneyimporterplugin.desktop
+    kmymoney-onlinetaskui.desktop
   DESTINATION ${SERVICETYPES_INSTALL_DIR})

@@ -21,8 +21,8 @@
 
 #include "kguiutils.h"
 
-germanCreditTransferEdit::germanCreditTransferEdit(QWidget *parent) :
-    IonlineJobEdit(parent),
+germanCreditTransferEdit::germanCreditTransferEdit(QWidget *parent, QVariantList args) :
+    IonlineJobEdit(parent, args),
     ui(new Ui::germanCreditTransferEdit),
     m_originAccount( QString() ),
     m_germanCreditTransfer( onlineJobTyped<germanOnlineTransfer>() ),

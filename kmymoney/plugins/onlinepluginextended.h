@@ -6,8 +6,10 @@
 #include <QtCore/QList>
 
 #include "mymoney/onlinejob.h"
-#include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
+
+class onlineTask;
+class IonlineJobEdit;
 
 namespace KMyMoneyPlugin
 {
@@ -64,6 +66,18 @@ signals:
   //void jobUnavailable( QString accountId );
 };
 
+class KMM_PLUGINS_EXPORT onlineTaskFactory
+{
+public:
+  virtual onlineTask* createOnlineTask( const QString& taskId ) const = 0;
+
+  // Make g++ happy
+  virtual ~onlineTaskFactory() {}
+};
+
 } // namespace KMyMoneyPlugin
+
+Q_DECLARE_INTERFACE(KMyMoneyPlugin::OnlinePluginExtended, "org.kmymoney.plugin.onlinepluginextended");
+Q_DECLARE_INTERFACE(KMyMoneyPlugin::onlineTaskFactory, "org.kmymoney.plugin.onlinetaskfactory");
 
 #endif // ONLINEPLUGINEXTENDED_H

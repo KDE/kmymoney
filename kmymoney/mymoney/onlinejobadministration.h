@@ -25,6 +25,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QSharedPointer>
 #include <QPair>
+#include <KService>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -60,27 +61,31 @@ class KMM_MYMONEY_EXPORT onlineJobAdministration : public QObject
 public:
   explicit onlineJobAdministration(QObject *parent = 0);
   ~onlineJobAdministration();
-  
+
+  typedef KService::Ptr onlineJobEditOffer;
+  typedef KService::List onlineJobEditOffers;
+
   //onlineJobList availableJobs( QString accountId );
 
   static onlineJobAdministration* instance() { return &m_instance; }
 
   /** @brief Use onlineTask::name() to create a corresponding onlineJob */
   onlineJob createOnlineJob( const QString& name, const QString& id = MyMoneyObject::emptyId() ) const;
-  
+
   /**
    * @brief Return list of IonlineJobEdits
-   * 
+   *
    * Method is temporary!
-   * 
+   *
    * @return I stay owner of all pointers.
    */
-  QList<IonlineJobEdit*> onlineJobEdits();
-  
+  onlineJobEditOffers onlineJobEdits();
+  QString onlineJobEditName( onlineJobEditOffer );
+
   bool isJobSupported(const QString& accountId, const QString& name) const;
   bool isJobSupported(const QString& accountId, const QStringList& names) const;
   bool isAnyJobSupported(const QString& accountId) const;
-  
+
   onlineTaskConverter::convertType canConvert( const QString& originalTaskIid, const QString& convertTaskIid ) const;
   onlineTaskConverter::convertType canConvert( const QString& originalTaskIid, const QStringList& convertTaskIids ) const;
 
@@ -93,7 +98,7 @@ public:
 
   /**
    * @brief Convert an onlineTask to another type
-   * 
+   *
    * @param original onlineJob to convert
    * @param convertTaskIid onlineTask iid you want to convert into
    * @param convertType OUT result of conversion. Note: this depends on original
@@ -101,7 +106,7 @@ public:
    * @param onlineJobId The id of the new onlineJob, if none is given original.id() is used
    */
   onlineJob convert( const onlineJob& original, const QString& convertTaskIid, onlineTaskConverter::convertType& convertType, QString& userInformation, const QString& onlineJobId ) const;
-  
+
   /**
    * @copydoc convert()
    */
@@ -109,9 +114,9 @@ public:
 
   /**
    * @brief Converts a onlineTask to best fitting type of a set of onlineTasks
-   * 
+   *
    * Will look for best conversion possible from original to any of convertTaskIids.
-   * 
+   *
    * @param original onlineJob to convert
    * @param convertTaskIids onlineTask-iids you want to convert into.
    * @param convertType OUT result of conversion. Note: this depends on original
@@ -124,12 +129,12 @@ public:
    * @brief Convinient for convertBest() which crates an onlineJob with the same id as original.
    */
   onlineJob convertBest( const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& convertType, QString& userInformation ) const;
-  
+
   /**
    * @brief Request onlineTask::settings from plugin
    *
    * @return QSharedPointer to settings from plugin, can be a null_ptr
-   * 
+   *
    * @todo with c++ 11 this template could check if T is_abstract and default construct a value if it is not.
    */
   template<class T>
@@ -148,7 +153,7 @@ public:
   QSharedPointer<IonlineTaskSettings> taskSettings( const QString& taskId, const QString& accountId ) const;
 
 signals:
-    
+
 public slots:
   void addPlugin( const QString& pluginName, KMyMoneyPlugin::OnlinePluginExtended* );
 
@@ -163,73 +168,68 @@ public slots:
    * @param converter the converter to register, I take ownership
    */
   void registerOnlineTaskConverter( onlineTaskConverter *const converter );
-  
-  /**
-   * @brief Make an onlineJob editor available
-   */
-  void registerOnlineTaskEdit( IonlineJobEdit *const editor );
-    
+
 private:
   static onlineJobAdministration m_instance;
-  
+
   /**
    * @brief Find onlinePlugin which is resposible for accountId
    * @param accountId
    * @return Pointer to onlinePluginExtended, do not delete.
    */
   KMyMoneyPlugin::OnlinePluginExtended* getOnlinePlugin( const QString& accountId ) const;
-  
+
   /**
    * @brief Creates an onlineTask by iid
    * @return pointer to task, caller gains ownership. Can be 0.
    */
   onlineTask* createOnlineTask( const QString& iid ) const;
-  
+
   /**
    * @brief Creates an onlineTask by its iid and xml data
    * @return pointer to task, caller gains ownership. Can be 0.
    */
   onlineTask* createOnlineTaskByXml( const QString& iid, const QDomElement& element ) const;
-  
+
   // Must be able to call createOnlineTaskByXml
   friend class onlineJob;
-  
+
   // Must be able to call createOnlineTask
   template<class T>
   friend class onlineJobTyped;
-  
+
   // Must be able to call task creators
   friend class taskConverterGermanToSepa;
-  
+
   /**
    * @brief Get root instance of an onlineTask
-   * 
+   *
    * Returns a pointer from m_onlineTasks or tries to load/create
    * a approiate root element.
-   * 
+   *
    * Only createOnlineTask and createOnlineTaskByXml use it.
-   * 
+   *
    * @return A pointer, you do *not* gain ownership! Can be 0 if something went wrong.
-   * 
+   *
    * @internal Made to be forward compatible whan onlineTask are loaded as plugins.
    */
   inline onlineTask* rootOnlineTask( const QString& name ) const;
-  
+
   /**
    * The key is the onlinePlugin's name
    */
   QMap<QString, KMyMoneyPlugin::OnlinePluginExtended *> m_onlinePlugins;
-  
+
   /**
    * The key is the name of the task
    */
   QMap<QString, onlineTask*> m_onlineTasks;
-  
+
   /**
    * Key is the task the converter converts to
    */
   QMultiMap<QString, onlineTaskConverter*> m_onlineTaskConverter;
-  
+
   /**
    * Intances of editors
    */

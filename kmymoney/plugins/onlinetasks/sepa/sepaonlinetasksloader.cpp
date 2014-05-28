@@ -24,12 +24,14 @@
 #include "tasks/sepaonlinetransferimpl.h"
 #include "ui/sepacredittransferedit.h"
 
-K_PLUGIN_FACTORY(SepaOnlineTaskFactory, registerPlugin<sepaOnlineTasksLoader>();)
+K_PLUGIN_FACTORY(SepaOnlineTaskFactory,
+                 registerPlugin<sepaOnlineTasksLoader>();
+                 registerPlugin<sepaCreditTransferEdit>("sepaCreditTransferUi");
+                )
 K_EXPORT_PLUGIN(SepaOnlineTaskFactory("sepaOnlineTasksLoader"))
 
 sepaOnlineTasksLoader::sepaOnlineTasksLoader(QObject* parent, const QVariantList&)
 : KMyMoneyPlugin::Plugin::Plugin(parent, "sepaOnlineTasksLoader")
 {
   onlineJobAdministration::instance()->registerOnlineTask( new sepaOnlineTransferImpl );
-  onlineJobAdministration::instance()->registerOnlineTaskEdit( new sepaCreditTransferEdit );
 }

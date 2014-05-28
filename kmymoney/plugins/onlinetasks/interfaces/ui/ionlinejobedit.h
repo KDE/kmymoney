@@ -20,20 +20,22 @@
 #define IONLINEJOBEDIT_H
 
 #include <QWidget>
+#include <QVariant>
 
 #include "mymoney/onlinejob.h"
 
 /**
  * @brief Interface for widgets editing onlineTasks
  *
+ * @since 4.8.0
  */
 class KMM_MYMONEY_EXPORT IonlineJobEdit : public QWidget
 {
   Q_OBJECT
 
 public:
-  explicit IonlineJobEdit(QWidget* parent = 0, Qt::WindowFlags f = 0)
-    : QWidget(parent, f)
+  explicit IonlineJobEdit(QWidget* parent = 0, QVariantList args = QVariantList())
+    : QWidget(parent)
   {
 
   }
@@ -53,18 +55,13 @@ public:
   /**
    * @brief List of supported onlineTasks
    *
-   * Returns a list of all onlineTask::name()s which can be edited with this
+   * Returns a list of all task ids which can be edited with this
    * widget.
    */
   virtual QStringList supportedOnlineTasks() const = 0;
 
   /**
-   * @brief a localized string presented to select this widget
-   */
-  virtual QString label() const = 0;
-
-  /**
-   * @brief Returns if this widget is editable
+   * @brief Returns true if this widget is editable
    */
   virtual bool isReadOnly() const = 0;
 
@@ -99,5 +96,7 @@ signals:
   void readOnlyChanged( bool );
 
 };
+
+Q_DECLARE_INTERFACE(IonlineJobEdit, "org.kmymoney.plugin.ionlinejobedit");
 
 #endif // IONLINEJOBEDIT_H

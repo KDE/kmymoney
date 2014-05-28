@@ -25,6 +25,11 @@
 #include <QtCore/QDebug>
 #include <QtCore/QScopedPointer>
 
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+#include <KServiceTypeTrader>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -160,7 +165,7 @@ onlineTaskConverter::convertType onlineJobAdministration::canConvert(const QStri
 onlineJob onlineJobAdministration::convert(const onlineJob& original, const QString& convertTaskIid, onlineTaskConverter::convertType& convertType, QString& userInformation, const QString& onlineJobId) const
 {
   onlineJob newJob;
-  
+
   QList<onlineTaskConverter*> converterList = m_onlineTaskConverter.values(convertTaskIid);
   foreach( onlineTaskConverter* converter, converterList ) {
     if ( converter->convertibleTasks().contains(original.taskIid()) ) {
@@ -186,13 +191,13 @@ onlineJob onlineJobAdministration::convertBest( const onlineJob& original, const
   onlineJob bestConvert;
   bestConvertType = onlineTaskConverter::convertImpossible;
   bestUserInformation = QString();
-  
+
   foreach (QString taskIid, convertTaskIids) {
     // Try convert
     onlineTaskConverter::convertType convertType = onlineTaskConverter::convertImpossible;
     QString userInformation;
     onlineJob convertJob = convert( original, taskIid, convertType, userInformation, onlineJobId );
-    
+
     // Check if it was successful
     if ( bestConvertType < convertType) {
       bestConvert = convertJob;
@@ -219,23 +224,14 @@ void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* c
 {
   if (Q_UNLIKELY( converter == 0 ))
     return;
-  
+
   m_onlineTaskConverter.insertMulti(converter->convertedTask(), converter);
   qDebug() << "onlineTaskConverter available" << converter->convertedTask() << converter->convertibleTasks();
 }
 
-void onlineJobAdministration::registerOnlineTaskEdit(IonlineJobEdit *const editor)
+onlineJobAdministration::onlineJobEditOffers onlineJobAdministration::onlineJobEdits()
 {
-  if (Q_UNLIKELY( editor == 0))
-    return;
-  
-  m_onlineTaskEditors.append(editor);
-  qDebug() << "onlineJobEditor available" << "*name optimized out*";
-}
-
-QList< IonlineJobEdit* > onlineJobAdministration::onlineJobEdits()
-{
-  return m_onlineTaskEditors;
+  return KServiceTypeTrader::self()->query(QLatin1String("KMyMoney/OnlineTaskUi"));
 }
 
 IonlineTaskSettings::ptr onlineJobAdministration::taskSettings( const QString& taskName, const QString& accountId ) const

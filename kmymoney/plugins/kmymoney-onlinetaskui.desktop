@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=KMyMoney/OnlineTaskUi
+Name=Form to edit online orders/tasks
+
+[PropertyDef::X-KMyMoney-onlineTaskIds]
+Type=QStringList
+# A list of onlineTask ids which can be edited by this ui

@@ -21,7 +21,8 @@ kde4_add_plugin(konlinetasks_sepa
   sepaonlinetasksloader.cpp
 )
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/sepaorders.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/sepaorders.desktop)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepaorders.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaorders.desktop)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepaordersui.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaordersui.desktop)
 
 target_link_libraries( konlinetasks_sepa
   kmm_mymoney
@@ -46,9 +47,10 @@ target_link_libraries( konlinetasks_sepa
 install(TARGETS konlinetasks_sepa
         DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/sepaorders.desktop
+install(FILES
+          ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaorders.desktop
+          ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaordersui.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
-        
+
 install(FILES ${sepaOnlineTasks_HEADER}
         DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney/onlinetasks/sepa/ COMPONENT Devel)
-        

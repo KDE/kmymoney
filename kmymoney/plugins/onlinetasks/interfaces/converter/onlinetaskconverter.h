@@ -25,7 +25,7 @@ class onlineTask;
 
 /**
  * @brief Base to convert task of one type to another type.
- * 
+ *
  * If you want to enable KMyMoney to convert a task to another task you must implement this
  * interface.
  */
@@ -35,9 +35,9 @@ public:
 
   /**
    * @brief Type of convertion
-   * 
+   *
    * They are ordered. convertImpossible is 0, higher number means better.
-   * 
+   *
    * Used by canConvert().
    */
   enum convertType {
@@ -53,24 +53,24 @@ public:
     /** Convertion is possible without user interaction */
     convertionLoseless
   };
-  
+
   onlineTaskConverter();
   virtual ~onlineTaskConverter();
-  
+
   /**
    * @brief List of tasks you accept to convert
-   * 
+   *
    * @return list of task iids
    */
   virtual QStringList convertibleTasks() const = 0;
-  
+
   /**
    * @brief Task you convert into
-   * 
+   *
    * @return task iid
    */
   virtual QString convertedTask() const = 0;
-  
+
   /**
    * @brief Convert a task
    *
@@ -80,18 +80,18 @@ public:
    * @param convertResult OUT convertType, if convertionLossy you should provide a userInformation
    * @param userInformation OUT a translated string with description which data was lost during convertion.
    * This string is shown by the ui to the user using a KMessageWidget.
-   * 
+   *
    * Never forget to set convertResult! You should allways set userInformation and convertResult. Code for copy & paste:
    * @code
    * userInformation = QString();
    * convertResult = convertImpossible;
    * @endcode
-   * 
+   *
    * You must not throw exceptions.
    */
   virtual onlineTask* convert( const onlineTask& source, convertType &convertResult, QString& userInformation ) const = 0;
 };
 
-Q_DECLARE_INTERFACE(onlineTaskConverter, "org.kmymoney.onlineTaskConverter");
+Q_DECLARE_INTERFACE(onlineTaskConverter, "org.kmymoney.plugin.onlinetaskconverter");
 
 #endif // ONLINETASKCONVERTER_H

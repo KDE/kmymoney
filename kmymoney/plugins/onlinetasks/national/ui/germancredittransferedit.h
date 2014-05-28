@@ -36,9 +36,10 @@ class germanCreditTransferEdit : public IonlineJobEdit
     Q_OBJECT
     Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly NOTIFY readOnlyChanged);
     Q_PROPERTY(onlineJob job READ getOnlineJob WRITE setOnlineJob STORED false );
+    Q_INTERFACES( IonlineJobEdit )
 
 public:
-  explicit germanCreditTransferEdit(QWidget *parent = 0);
+  explicit germanCreditTransferEdit(QWidget *parent = 0, QVariantList args = QVariantList());
   ~germanCreditTransferEdit();
 
   /** @brief Reads interface and creates an onlineJob */
