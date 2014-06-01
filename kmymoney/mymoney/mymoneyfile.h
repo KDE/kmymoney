@@ -627,6 +627,19 @@ public:
   const MyMoneyMoney balance(const QString& id, const QDate& date = QDate()) const;
 
   /**
+    * This method is used to return the cleared balance of an account
+    * without it's sub-ordinate accounts for a specific date. All
+    * recorded  transactions are included in the balance.
+    * This method is used by the reconcialition functionality
+    *
+    * @param id id of the account in question
+    * @param date return cleared balance for specific date
+    * @return balance of the account as MyMoneyMoney object
+    */
+  const MyMoneyMoney clearedBalance(const QString& id, const QDate& date) const;
+
+
+  /**
     * This method is used to return the actual balance of an account
     * including it's sub-ordinate accounts. If a @p date is presented,
     * the balance at the beginning of this date (not including any

@@ -92,6 +92,7 @@ private slots:
   void testCountTransactionsWithSpecificReconciliationState_noTransactions();
   void testCountTransactionsWithSpecificReconciliationState_transactionWithWantedReconcileState();
   void testCountTransactionsWithSpecificReconciliationState_transactionWithUnwantedReconcileState();
+  void testClearedBalance();
 
 private slots:
   void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);
