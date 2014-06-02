@@ -2322,6 +2322,9 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
       m_wizard->button(QWizard::NextButton)->hide();
       m_wizard->button(QWizard::CustomButton1)->hide();
       return;
+    } else {  //  allow user to change setting and try again
+      m_importError = false;
+      m_importNow = true;
     }
   }
 }
