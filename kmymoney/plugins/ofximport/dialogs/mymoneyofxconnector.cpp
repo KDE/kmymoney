@@ -96,6 +96,7 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
   m_appMap[i18n("Quicken Windows 2011")] = "QWIN:1900";
   m_appMap[i18n("Quicken Windows 2012")] = "QWIN:2100";
   m_appMap[i18n("Quicken Windows 2013")] = "QWIN:2200";
+  m_appMap[i18n("Quicken Windows 2014")] = "QWIN:2300";
 
   // MS-Money
   m_appMap[i18n("MS-Money 2003")] = "Money:1100";
