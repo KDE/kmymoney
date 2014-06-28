@@ -131,5 +131,3 @@ extern MyMoneyMoney searchHTML(const QString& _html, const QString& _search);
 } // end namespace test
 
 #endif // REPORTSTESTCOMMON_H
-
-// vim:cin:si:ai:et:ts=2:sw=2:

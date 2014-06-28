@@ -72,5 +72,3 @@ public:
 } // namespace
 
 #endif
-// vim:cin:si:ai:et:ts=2:sw=2:
-

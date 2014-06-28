@@ -176,5 +176,3 @@ KConfirmManualEnterDlg::Action KConfirmManualEnterDlg::action(void) const
     return ModifyAlways;
   return ModifyOnce;
 }
-
-#include "kconfirmmanualenterdlg.moc"

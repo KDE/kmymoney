@@ -57,6 +57,3 @@ void InterestWizardPage::resetCalculator()
   m_payment2->setText(QString());
   m_balloon2->setText(QString());
 }
-
-#include "interestwizardpage.moc"
-

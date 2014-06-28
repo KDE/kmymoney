@@ -726,6 +726,3 @@ void MyMoneyMoneyTest::testZeroDenominator()
   } catch (const MyMoneyException &) {
   }
 }
-
-#include "mymoneymoneytest.moc"
-

@@ -45,5 +45,3 @@ void SqlCipherDriverInstallTest::createDatabase()
   QVERIFY(db.open());
   db.close();
 }
-
-#include "sqlcipherdriverinstalltest.moc"

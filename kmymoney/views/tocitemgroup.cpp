@@ -46,5 +46,3 @@ TocItemGroup::TocItemGroup(QTreeWidget* parent, int groupNo, QString title):
   QVariant data(key);
   this->setData(0, Qt::UserRole, data);
 }
-
-// vim:cin:si:ai:et:ts=2:sw=2:

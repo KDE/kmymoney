@@ -67,7 +67,3 @@ void ScheduleWizardPage::initializePage()
     setField("nextDueDateEdit", field("firstDueDateEdit").toDate());
   }
 }
-
-
-#include "schedulewizardpage.moc"
-

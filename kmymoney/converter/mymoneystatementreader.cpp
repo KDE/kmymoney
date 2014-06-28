@@ -50,6 +50,7 @@
 #include <mymoneystatement.h>
 #include <kmymoneyglobalsettings.h>
 #include <transactioneditor.h>
+#include <investtransactioneditor.h>
 #include <kmymoneyedit.h>
 #include "kaccountselectdlg.h"
 #include "transactionmatcher.h"
@@ -90,6 +91,14 @@ public:
   bool                           m_skipCategoryMatching;
 private:
   void scanCategories(QString& id, const MyMoneyAccount& invAcc, const MyMoneyAccount& parentAccount, const QString& defaultName);
+  /**
+   * This method tries to figure out the category to be used for fees and interest
+   * from previous transactions in the given @a investmentAccount and returns the
+   * ids of those categories in @a feesId and @a interestId. The last used category
+   * will be returned.
+   */
+  void previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId);
+
   QString nameToId(const QString&name, MyMoneyAccount& parent);
 private:
   QString                        m_feeId;
@@ -171,11 +180,46 @@ QString MyMoneyStatementReader::Private::feeId(const QString& name)
   return nameToId(name, parent);
 }
 
+void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId)
+{
+  feesId.clear();
+  interestId.clear();
+  MyMoneyFile* file = MyMoneyFile::instance();
+  try {
+    MyMoneyAccount acc = file->account(investmentAccount);
+    MyMoneyTransactionFilter filter(investmentAccount);
+    filter.setReportAllSplits(false);
+    // since we assume an investment account here, we need to collect the stock accounts as well
+    filter.addAccount(acc.accountList());
+    QList< QPair<MyMoneyTransaction, MyMoneySplit> > list;
+    file->transactionList(list, filter);
+    QList< QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it_t;
+    for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
+      const MyMoneyTransaction& t = (*it_t).first;
+      const MyMoneySplit&s = (*it_t).second;
+      MyMoneySplit assetAccountSplit;
+      QList<MyMoneySplit> feeSplits;
+      QList<MyMoneySplit> interestSplits;
+      MyMoneySecurity security;
+      MyMoneySecurity currency;
+      MyMoneySplit::investTransactionTypeE transactionType;
+      InvestTransactionEditor::dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+      if (feeSplits.count() == 1) {
+        feesId = feeSplits.first().accountId();
+      }
+      if (interestSplits.count() == 1) {
+        interestId = interestSplits.first().accountId();
+      }
+    }
+  } catch (const MyMoneyException &) {
+  }
+
+}
 
 void MyMoneyStatementReader::Private::scanCategories(QString& id, const MyMoneyAccount& invAcc, const MyMoneyAccount& parentAccount, const QString& defaultName)
 {
   if (!scannedCategories) {
-    KMyMoneyUtils::previouslyUsedCategories(invAcc.id(), m_feeId, m_interestId);
+    previouslyUsedCategories(invAcc.id(), m_feeId, m_interestId);
     scannedCategories = true;
   }
 
@@ -1390,8 +1434,3 @@ bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySche
 
   return (userAnswer == KMessageBox::Yes);
 }
-
-
-
-#include "mymoneystatementreader.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

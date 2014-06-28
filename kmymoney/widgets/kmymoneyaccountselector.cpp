@@ -482,6 +482,3 @@ bool AccountSet::includeAccount(const MyMoneyAccount& acc)
   }
   return false;
 }
-
-
-#include "kmymoneyaccountselector.moc"

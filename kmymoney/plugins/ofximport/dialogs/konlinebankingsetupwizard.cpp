@@ -520,9 +520,3 @@ KOnlineBankingSetupWizard::ListViewItem::ListViewItem(QTreeWidget* parent, const
   setText(2, value("bankid"));
   setText(3, value("branchid"));
 }
-
-// void KOnlineBankingSetupWizard::ListViewItem::x(void) {}
-
-#include "konlinebankingsetupwizard.moc"
-
-// vim:cin:si:ai:et:ts=2:sw=2:

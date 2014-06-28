@@ -270,5 +270,3 @@ QList<MyMoneyTemplate> KAccountTemplateSelector::selectedTemplates(void) const
   return QList<MyMoneyTemplate>();
 #endif
 }
-
-#include "kaccounttemplateselector.moc"

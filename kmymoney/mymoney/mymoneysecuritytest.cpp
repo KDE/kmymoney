@@ -214,6 +214,3 @@ void MyMoneySecurityTest::testAccountIDList () {
 
 }
 */
-
-#include "mymoneysecuritytest.moc"
-

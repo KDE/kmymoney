@@ -85,6 +85,3 @@ void MyMoneyPriceTest::testRate()
   } catch (const MyMoneyException &) {
   }
 }
-
-#include "mymoneypricetest.moc"
-

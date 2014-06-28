@@ -2130,7 +2130,3 @@ void Register::setDetailsColumnType(DetailsColumnType detailsColumnType)
 {
   m_detailsColumnType = detailsColumnType;
 }
-
-#include "register.moc"
-
-// vim:cin:si:ai:et:ts=2:sw=2:

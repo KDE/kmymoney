@@ -190,8 +190,3 @@ void MyMoneyPayeeTest::testMatchKeyAllowSpaceAtEnd()
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String("payee "));
 }
-
-
-
-#include "mymoneypayeetest.moc"
-

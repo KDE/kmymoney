@@ -167,5 +167,3 @@ void kMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
   }
   KLineEdit::keyPressEvent(k);
 }
-
-#include "kmymoneylineedit.moc"

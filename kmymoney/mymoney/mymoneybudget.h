@@ -307,4 +307,3 @@ private:
 Q_DECLARE_METATYPE(MyMoneyBudget)
 
 #endif // MYMONEYBudget_H
-// vim:cin:si:ai:et:ts=2:sw=2:

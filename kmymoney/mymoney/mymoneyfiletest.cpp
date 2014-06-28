@@ -2287,6 +2287,3 @@ void MyMoneyFileTest::testClearedBalance()
     QFAIL("Unexpected exception!");
   }
 }
-
-#include "mymoneyfiletest.moc"
-

@@ -558,5 +558,3 @@ void kMyMoneyEdit::setReadOnly(bool readOnly)
   if (m_edit)
     m_edit->QLineEdit::setReadOnly(readOnly); //krazy:exclude=qclasses
 }
-
-#include "kmymoneyedit.moc"

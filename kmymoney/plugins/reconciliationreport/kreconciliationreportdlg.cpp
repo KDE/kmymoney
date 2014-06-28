@@ -83,5 +83,3 @@ void KReportDlg::print()
   }
   delete dlg;
 }
-
-#include "kreconciliationreportdlg.moc"

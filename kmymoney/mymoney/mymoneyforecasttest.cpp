@@ -971,6 +971,3 @@ void MyMoneyForecastTest::testLinearRegression()
 
 
 }
-
-#include "mymoneyforecasttest.moc"
-

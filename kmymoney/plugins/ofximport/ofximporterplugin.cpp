@@ -788,6 +788,3 @@ const QStringList& OfxImporterPlugin::errors(void) const
 {
   return d->m_errors;
 }
-
-#include "ofximporterplugin.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

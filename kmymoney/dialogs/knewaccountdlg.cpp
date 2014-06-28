@@ -878,7 +878,3 @@ void KNewAccountDlg::addTab(QWidget* w, const QString& name)
     m_tab->addTab(w, name);
   }
 }
-
-
-#include "knewaccountdlg.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

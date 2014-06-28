@@ -3040,6 +3040,3 @@ void MyMoneyFileTransaction::rollback(void)
     MyMoneyFile::instance()->rollbackTransaction();
   m_needRollback = false;
 }
-
-
-#include "mymoneyfile.moc"

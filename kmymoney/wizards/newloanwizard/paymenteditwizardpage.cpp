@@ -39,6 +39,3 @@ PaymentEditWizardPage::PaymentEditWizardPage(QWidget *parent)
   connect(m_newPaymentEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
 
 }
-
-#include "paymenteditwizardpage.moc"
-

@@ -240,5 +240,3 @@ RegisterSearchLine* RegisterSearchLineWidget::searchLine(void) const
 {
   return d->searchLine;
 }
-
-#include "registersearchline.moc"

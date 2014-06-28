@@ -33,7 +33,3 @@ EditIntroWizardPage::EditIntroWizardPage(QWidget *parent)
     : EditIntroWizardPageDecl(parent)
 {
 }
-
-
-#include "editintrowizardpage.moc"
-

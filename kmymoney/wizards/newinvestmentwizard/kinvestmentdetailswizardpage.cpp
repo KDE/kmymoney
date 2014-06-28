@@ -123,5 +123,3 @@ void KInvestmentDetailsWizardPage::setupInvestmentSymbol()
   m_investmentSymbol->setFocus();
   connect(m_investmentSymbol, SIGNAL(lineChanged(QString)), this, SIGNAL(checkForExistingSymbol(QString)));
 }
-
-#include "kinvestmentdetailswizardpage.moc"

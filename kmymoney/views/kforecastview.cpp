@@ -1031,5 +1031,3 @@ void KForecastView::loadChartView(void)
   m_forecastChart->update();
 
 }
-
-#include "kforecastview.moc"

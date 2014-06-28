@@ -125,20 +125,18 @@ KDE4_INSTALL_ICONS(${ICON_INSTALL_DIR})
 IF( KDE4_BUILD_TESTS )
 
   SET(target_link_libraries_test
-	widgets
-	kmm_mymoney
-	kmymoney_common
-	dialogs
-	widgets
-	kmm_config
-	${KDE4_KHTML_LIBS}
-	${KDE4_KDEUI_LIBS}
-	${KDE4_KFILE_LIBS}
-	${KDE4_KUTILS_LIBRARY}
+        kmm_mymoney
+        kmymoney_common
+        kmm_config
+        widgets
+        ${KDE4_KHTML_LIBS}
+        ${KDE4_KDEUI_LIBS}
+        ${KDE4_KFILE_LIBS}
+        ${KDE4_KUTILS_LIBRARY}
         ${QT_QTGUI_LIBRARY}
         ${QT_QTXML_LIBRARY}
         ${QT_QTCORE_LIBRARY}
-	${QT_QTSQL_LIBRARY}
+        ${QT_QTSQL_LIBRARY}
         ${QT_QTTEST_LIBRARY}
         ${GMP_LIBRARIES}
         ${LIBALKIMIA_LIBRARY})

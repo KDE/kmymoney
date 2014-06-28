@@ -103,5 +103,3 @@ void kMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
     }
   }
 }
-
-#include "kmymoneyaccountcompletion.moc"

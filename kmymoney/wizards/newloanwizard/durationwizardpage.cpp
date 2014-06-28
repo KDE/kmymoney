@@ -116,6 +116,3 @@ QString DurationWizardPage::updateTermWidgets(const double val)
   m_durationValueEdit->setValue(vl);
   return valString;
 }
-
-#include "durationwizardpage.moc"
-

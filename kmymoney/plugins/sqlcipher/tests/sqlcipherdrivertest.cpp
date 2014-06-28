@@ -240,5 +240,3 @@ void sqlcipherdrivertest::readData2()
 {
   readData();
 }
-
-#include "sqlcipherdrivertest.moc"

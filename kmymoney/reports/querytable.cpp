@@ -1552,4 +1552,3 @@ void QueryTable::constructSplitsTable(void)
 
 
 }
-// vim:cin:si:ai:et:ts=2:sw=2:

@@ -1779,6 +1779,3 @@ void MyMoneySeqAccessMgrTest::testLoaderFunctions()
   // restart a transaction so that teardown() is happy
   m->startTransaction();
 }
-
-
-#include "mymoneyseqaccessmgrtest.moc"

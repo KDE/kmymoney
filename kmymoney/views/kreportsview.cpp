@@ -1775,6 +1775,3 @@ void KReportsView::restoreTocExpandState(QMap<QString, bool>& expandStates)
 #undef VIEW_WELCOME
 #undef VIEW_HOME
 #undef VIEW_REPORTS
-
-#include "kreportsview.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

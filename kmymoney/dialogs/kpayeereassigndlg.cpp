@@ -91,5 +91,3 @@ void KPayeeReassignDlg::accept(void)
     KPayeeReassignDlgDecl::accept();
   }
 }
-
-#include "kpayeereassigndlg.moc"

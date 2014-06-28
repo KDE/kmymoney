@@ -163,6 +163,3 @@ void MyMoneyBalanceCacheTest::testRetrieve()
   QVERIFY(item.balance() == MyMoneyMoney(20, 100));
   QVERIFY(item.date() == QDate(2010, 9, 18));
 }
-
-#include "mymoneybalancecachetest.moc"
-

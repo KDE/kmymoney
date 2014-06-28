@@ -486,5 +486,3 @@ void KAccountsView::loadAccountIconsIntoList(const MyMoneyAccount& parentAccount
     listWidget->addItem(accountItem);
   }
 }
-
-#include "kaccountsview.moc"

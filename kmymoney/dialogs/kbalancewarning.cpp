@@ -65,6 +65,3 @@ void KBalanceWarning::slotShowMessage(QWidget* parent, const MyMoneyAccount& acc
     }
   }
 }
-
-
-#include "kbalancewarning.moc"

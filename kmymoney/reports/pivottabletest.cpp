@@ -1026,6 +1026,3 @@ void PivotTableTest::testHtmlEncoding(void)
   rx.setCaseSensitivity(Qt::CaseInsensitive);
   QVERIFY(rx.exactMatch(html));
 }
-
-#include "pivottabletest.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

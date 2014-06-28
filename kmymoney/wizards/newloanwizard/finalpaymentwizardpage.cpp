@@ -52,6 +52,3 @@ void FinalPaymentWizardPage::resetCalculator()
   m_payment5->setText(QString());
   m_balloon5->setText(QString());
 }
-
-#include "finalpaymentwizardpage.moc"
-

@@ -7384,6 +7384,3 @@ void KMyMoneyApp::Private::closeFile(void)
 
   emit q->fileLoaded(m_fileName);
 }
-
-#include "kmymoney.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

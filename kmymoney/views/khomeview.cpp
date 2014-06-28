@@ -2013,5 +2013,3 @@ void KHomeView::showCashFlowSummary()
 #undef VIEW_WELCOME
 #undef VIEW_HOME
 #undef VIEW_REPORTS
-
-#include "khomeview.moc"

@@ -2304,5 +2304,3 @@ void MyMoneyDatabaseMgrTest::testAccountList()
   m->accountList(accounts);
   QVERIFY(accounts.count() == 2);
 }
-#include "mymoneydatabasemgrtest.moc"
-

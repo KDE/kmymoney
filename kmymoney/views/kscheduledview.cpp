@@ -605,6 +605,3 @@ void KScheduledView::slotSetSelectedItem()
     }
   }
 }
-
-
-#include "kscheduledview.moc"

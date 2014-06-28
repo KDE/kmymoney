@@ -866,5 +866,3 @@ void KPayeesView::setDirty(bool dirty)
 {
   m_updateButton->setEnabled(dirty);
 }
-
-#include "kpayeesview.moc"

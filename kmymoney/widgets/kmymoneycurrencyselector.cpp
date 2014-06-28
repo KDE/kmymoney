@@ -183,5 +183,3 @@ KMyMoneyCurrencySelector::KMyMoneyCurrencySelector(QWidget *parent) :
 {
   setDisplayType(TypeCurrencies);
 }
-
-#include "kmymoneycurrencyselector.moc"

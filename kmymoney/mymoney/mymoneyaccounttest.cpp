@@ -642,6 +642,3 @@ void MyMoneyAccountTest::reconciliationHistory()
   QVERIFY(a.reconciliationHistory()[QDate(2011, 2, 1)] == MyMoneyMoney(456, 100));
   QVERIFY(a.reconciliationHistory().count() == 2);
 }
-
-#include "mymoneyaccounttest.moc"
-

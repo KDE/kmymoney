@@ -201,6 +201,3 @@ void MyMoneyKeyValueContainerTest::testArrayWrite()
   QVERIFY(kvp.pairs().count() == 1);
   QVERIFY(kvp.value("Key") == "Value");
 }
-
-#include "mymoneykeyvaluecontainertest.moc"
-

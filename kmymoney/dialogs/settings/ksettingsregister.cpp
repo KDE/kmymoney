@@ -71,5 +71,3 @@ void KSettingsRegister::slotLoadSearch(const QString& text)
   disconnect(kcfg_sortSearchView, SIGNAL(textChanged(QString)), this, SLOT(slotLoadSearch(QString)));
   m_sortSearchView->setSettings(text);
 }
-
-#include "ksettingsregister.moc"

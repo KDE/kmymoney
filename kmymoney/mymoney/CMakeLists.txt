@@ -32,10 +32,9 @@ SET(mymoney_HEADERS kmm_mymoney_export.h
   imymoneyprocessingcalendar.h
   )
 
-KDE4_ADD_LIBRARY(kmm_mymoney SHARED 
-	${kmm_mymoney_LIB_SRCS})
+KDE4_ADD_LIBRARY(kmm_mymoney SHARED ${kmm_mymoney_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(kmm_mymoney
+TARGET_LINK_LIBRARIES(kmm_mymoney LINK_PUBLIC
                       ${KDE4_KDEUI_LIBS}
                       ${QT_QTGUI_LIBRARY}
                       ${QT_QTXML_LIBRARY}

@@ -329,6 +329,3 @@ void KMMReconciliationReportPlugin::slotUnplug(KPluginInfo* info)
     disconnect(viewInterface(), SIGNAL(accountReconciled(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)), this, SLOT(slotGenerateReconciliationReport(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)));
   }
 }
-
-#include "reconciliationreport.moc"
-

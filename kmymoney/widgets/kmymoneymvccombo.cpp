@@ -839,4 +839,4 @@ void KMyMoneyFrequencyCombo::slotCurrentDataChanged()
   emit currentDataChanged(currentData());
 }
 
-#include "kmymoneymvccombo.moc"
+#include "moc_kmymoneymvccombo.cpp"

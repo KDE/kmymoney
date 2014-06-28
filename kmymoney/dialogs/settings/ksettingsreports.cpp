@@ -163,5 +163,3 @@ void KSettingsReports::slotEditingFinished()
   QString txt = d->m_fileKLineEdit->text();
   d->checkCssFile(txt);
 }
-
-#include "ksettingsreports.moc"

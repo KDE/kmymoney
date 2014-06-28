@@ -33,6 +33,3 @@ NewIntroWizardPage::NewIntroWizardPage(QWidget *parent)
     : NewIntroWizardPageDecl(parent)
 {
 }
-
-#include "newintrowizardpage.moc"
-

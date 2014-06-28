@@ -313,5 +313,3 @@ void kMyMoneyCompletion::setSelected(const QString& id)
   m_id = id;
   m_selector->setSelected(id, true);
 }
-
-#include "kmymoneycompletion.moc"

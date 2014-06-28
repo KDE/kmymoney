@@ -145,5 +145,3 @@ KPluginSelector* PluginLoader::pluginSelectorWidget()
 }
 
 } // namespace
-
-#include "pluginloader.moc"

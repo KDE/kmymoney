@@ -33,5 +33,3 @@ KSettingsFonts::KSettingsFonts(QWidget* parent) :
 KSettingsFonts::~KSettingsFonts()
 {
 }
-
-#include "ksettingsfonts.moc"

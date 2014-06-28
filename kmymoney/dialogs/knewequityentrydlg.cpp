@@ -96,5 +96,3 @@ void KNewEquityEntryDlg::slotDataChanged(void)
 
   btnOK->setEnabled(okEnabled);
 }
-
-#include "knewequityentrydlg.moc"

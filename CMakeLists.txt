@@ -2,7 +2,10 @@
 PROJECT(KMyMoney)
 
 # The CMake version we require
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6.4)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.6)
+
+# Automoc all sources
+set(CMAKE_AUTOMOC TRUE)
 
 # cmake 2.6 proposed to add this policy
 if(COMMAND cmake_policy)

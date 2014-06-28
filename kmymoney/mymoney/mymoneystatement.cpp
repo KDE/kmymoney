@@ -279,4 +279,3 @@ bool MyMoneyStatement::readXMLFile(MyMoneyStatement& _s, const QString& _filenam
 
   return result;
 }
-// vim:cin:si:ai:et:ts=2:sw=2:

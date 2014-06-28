@@ -129,4 +129,3 @@ PivotGridRowSet PivotGrid::rowSet(QString id)
 }
 
 } // namespace
-// vim:cin:si:ai:et:ts=2:sw=2:

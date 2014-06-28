@@ -1263,5 +1263,3 @@ bool AccountsFilterProxyModel::hideUnusedIncomeExpenseAccounts(void) const
 {
   return d->m_hideUnusedIncomeExpenseAccounts;
 }
-
-#include "accountsmodel.moc"

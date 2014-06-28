@@ -271,6 +271,3 @@ void MyMoneyBudgetTest::addMonthByMonthToMonthByMonth()
   QVERIFY(a0.totalBalance() == MyMoneyMoney(23400, 1));
   QVERIFY(a1.totalBalance() == MyMoneyMoney(15600, 1));
 }
-
-
-#include "mymoneybudgettest.moc"

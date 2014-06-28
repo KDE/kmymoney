@@ -911,5 +911,3 @@ void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney &balance)
   m_balanceLabel->setFont(KMyMoneyGlobalSettings::listCellFont());
   m_balanceLabel->setText(s);
 }
-
-#include "kbudgetview.moc"

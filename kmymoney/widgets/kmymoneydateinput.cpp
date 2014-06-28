@@ -399,4 +399,3 @@ void kMyMoneyDateInput::setRange(const QDate & min, const QDate & max)
   d->m_dateEdit->setDateRange(min, max);
 }
 */
-#include "kmymoneydateinput.moc"

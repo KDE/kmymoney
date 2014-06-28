@@ -153,5 +153,3 @@ void KInstitutionsView::slotExpandCollapse(void)
     KMyMoneyGlobalSettings::setShowAccountsExpanded(sender() == m_expandButton);
   }
 }
-
-#include "kinstitutionsview.moc"

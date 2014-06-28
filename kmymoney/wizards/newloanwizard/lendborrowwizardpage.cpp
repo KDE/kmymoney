@@ -43,6 +43,3 @@ LendBorrowWizardPage::LendBorrowWizardPage(QWidget *parent)
 
   m_borrowButton->animateClick();
 }
-
-#include "lendborrowwizardpage.moc"
-

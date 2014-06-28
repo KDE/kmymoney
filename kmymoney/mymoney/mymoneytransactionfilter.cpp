@@ -898,6 +898,3 @@ void MyMoneyTransactionFilter::removeReference(const QString& id)
     m_tags.remove(id);
   }
 }
-
-
-// vim:cin:si:ai:et:ts=2:sw=2:

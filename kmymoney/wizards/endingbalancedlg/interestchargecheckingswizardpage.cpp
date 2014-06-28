@@ -67,5 +67,3 @@ bool InterestChargeCheckingsWizardPage::isComplete() const
   return true;
 }
 
-#include "interestchargecheckingswizardpage.moc"
-

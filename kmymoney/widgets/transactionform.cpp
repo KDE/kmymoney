@@ -456,5 +456,3 @@ void TransactionForm::removeEditWidgets(QMap<QString, QWidget*>& editWidgets)
     it = editWidgets.begin();
   }
 }
-
-#include "transactionform.moc"

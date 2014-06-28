@@ -122,6 +122,3 @@ vector<string> NodeParser::Text(void) const
     result.push_back(string());
   return result;
 }
-
-
-// vim:cin:si:ai:et:ts=2:sw=2:

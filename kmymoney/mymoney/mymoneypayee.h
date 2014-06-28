@@ -250,4 +250,3 @@ inline bool operator==(const MyMoneyPayee& lhs, const QString& rhs)
 Q_DECLARE_METATYPE(MyMoneyPayee)
 
 #endif
-// vim:cin:si:ai:et:ts=2:sw=2:

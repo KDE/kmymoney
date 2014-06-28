@@ -219,5 +219,3 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
 {
   setMatchData(type, ignorecase, keys.split(';'));
 }
-
-// vim:cin:si:ai:et:ts=2:sw=2:

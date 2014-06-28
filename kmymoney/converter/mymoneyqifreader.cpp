@@ -2286,5 +2286,3 @@ void MyMoneyQifReader::processSecurityEntry(void)
 
   d->st.m_listSecurities += security;
 }
-
-#include "mymoneyqifreader.moc"

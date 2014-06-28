@@ -1572,5 +1572,3 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
   }
   return rc;
 }
-
-#include "kgloballedgerview.moc"

@@ -680,6 +680,3 @@ void MyMoneyTransactionTest::testReplaceId(void)
     unexpectedException(e);
   }
 }
-
-#include "mymoneytransactiontest.moc"
-

@@ -344,5 +344,3 @@ QSize KMyMoneyCombo::sizeHint() const
   return sizeHint;
 #endif
 }
-
-#include "kmymoneycombo.moc"

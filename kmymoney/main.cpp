@@ -292,5 +292,3 @@ void timestamp(char *txt)
     qDebug("Time(%s): %d", txt, timer.elapsed());
   }
 }
-
-// vim:cin:si:ai:et:ts=2:sw=2:

@@ -1181,6 +1181,3 @@ bool KMyMoneyBanking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
   }
   return true;
 }
-
-
-#include "mymoneybanking.moc"

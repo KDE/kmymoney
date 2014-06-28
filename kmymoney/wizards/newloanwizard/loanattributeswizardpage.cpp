@@ -102,6 +102,3 @@ void LoanAttributesWizardPage::slotNewClicked()
   }
   delete dlg;
 }
-
-#include "loanattributeswizardpage.moc"
-

@@ -97,5 +97,3 @@ void KSettingsSchedules::slotResetRegion()
 KSettingsSchedules::~KSettingsSchedules()
 {
 }
-
-#include "ksettingsschedules.moc"

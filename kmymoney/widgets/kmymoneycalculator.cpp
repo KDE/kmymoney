@@ -444,5 +444,3 @@ void kMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
   else
     m_clearOperandOnDigit = true;
 }
-
-#include "kmymoneycalculator.moc"

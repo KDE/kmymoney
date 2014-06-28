@@ -2330,5 +2330,3 @@ QVBoxLayout* KMyMoneyViewBase::layout(void) const
 {
   return d->m_viewLayout;
 }
-
-#include "kmymoneyview.moc"

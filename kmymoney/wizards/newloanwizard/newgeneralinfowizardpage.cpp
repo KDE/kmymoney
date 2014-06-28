@@ -33,6 +33,3 @@ NewGeneralInfoWizardPage::NewGeneralInfoWizardPage(QWidget *parent)
     : NewGeneralInfoWizardPageDecl(parent)
 {
 }
-
-#include "newgeneralinfowizardpage.moc"
-

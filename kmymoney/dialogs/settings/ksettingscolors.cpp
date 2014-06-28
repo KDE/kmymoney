@@ -33,5 +33,3 @@ KSettingsColors::KSettingsColors(QWidget* parent) :
 KSettingsColors::~KSettingsColors()
 {
 }
-
-#include "ksettingscolors.moc"

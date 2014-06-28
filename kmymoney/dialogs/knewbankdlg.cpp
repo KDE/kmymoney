@@ -97,6 +97,3 @@ const MyMoneyInstitution& KNewBankDlg::institution(void)
 {
   return m_institution;
 }
-
-
-#include "knewbankdlg.moc"

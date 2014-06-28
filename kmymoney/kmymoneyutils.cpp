@@ -505,42 +505,6 @@ MyMoneyTransaction KMyMoneyUtils::scheduledTransaction(const MyMoneySchedule& sc
   return t;
 }
 
-void KMyMoneyUtils::previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId)
-{
-  feesId.clear();
-  interestId.clear();
-  MyMoneyFile* file = MyMoneyFile::instance();
-  try {
-    MyMoneyAccount acc = file->account(investmentAccount);
-    MyMoneyTransactionFilter filter(investmentAccount);
-    filter.setReportAllSplits(false);
-    // since we assume an investment account here, we need to collect the stock accounts as well
-    filter.addAccount(acc.accountList());
-    QList< QPair<MyMoneyTransaction, MyMoneySplit> > list;
-    file->transactionList(list, filter);
-    QList< QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it_t;
-    for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
-      const MyMoneyTransaction& t = (*it_t).first;
-      const MyMoneySplit&s = (*it_t).second;
-      MyMoneySplit assetAccountSplit;
-      QList<MyMoneySplit> feeSplits;
-      QList<MyMoneySplit> interestSplits;
-      MyMoneySecurity security;
-      MyMoneySecurity currency;
-      MyMoneySplit::investTransactionTypeE transactionType;
-      InvestTransactionEditor::dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
-      if (feeSplits.count() == 1) {
-        feesId = feeSplits.first().accountId();
-      }
-      if (interestSplits.count() == 1) {
-        interestId = interestSplits.first().accountId();
-      }
-    }
-  } catch (const MyMoneyException &) {
-  }
-
-}
-
 KXmlGuiWindow* KMyMoneyUtils::mainWindow()
 {
   foreach (QWidget *widget, QApplication::topLevelWidgets()) {

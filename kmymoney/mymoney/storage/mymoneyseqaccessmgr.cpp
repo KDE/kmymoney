@@ -1975,5 +1975,3 @@ void MyMoneySeqAccessMgr::removeReferences(const QString& id)
 #undef TRY
 #undef CATCH
 #undef PASS
-
-// vim:cin:si:ai:et:ts=2:sw=2:

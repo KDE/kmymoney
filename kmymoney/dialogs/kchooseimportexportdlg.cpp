@@ -116,5 +116,3 @@ void KChooseImportExportDlg::writeConfig(void)
   grp.writeEntry("KChooseImportExportDlg_LastType", d->ui.typeCombo->currentText());
   config->sync();
 }
-
-#include "kchooseimportexportdlg.moc"

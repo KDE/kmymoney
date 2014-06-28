@@ -143,4 +143,3 @@ public:
 Q_DECLARE_METATYPE(MyMoneyStatement)
 
 #endif
-// vim:cin:si:ai:et:ts=2:sw=2:

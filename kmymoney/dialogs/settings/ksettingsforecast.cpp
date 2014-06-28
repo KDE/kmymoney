@@ -33,5 +33,3 @@ KSettingsForecast::KSettingsForecast(QWidget* parent) :
 KSettingsForecast::~KSettingsForecast()
 {
 }
-
-#include "ksettingsforecast.moc"

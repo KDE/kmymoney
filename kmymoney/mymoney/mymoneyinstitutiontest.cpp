@@ -310,5 +310,3 @@ void MyMoneyInstitutionTest::testReadXML()
     QFAIL("Unexpected exception");
   }
 }
-#include "mymoneyinstitutiontest.moc"
-

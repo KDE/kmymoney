@@ -44,5 +44,3 @@ CheckingStatementInfoWizardPage::CheckingStatementInfoWizardPage(QWidget *parent
   registerField("previousBalanceValid", m_previousBalance, "valid", SIGNAL(textChanged()));
 }
 
-#include "checkingstatementinfowizardpage.moc"
-

@@ -158,5 +158,3 @@ void KMyMoneyAccountCombo::setModel(AccountNamesFilterProxyModel *model)
 
   connect(this, SIGNAL(activated(int)), SLOT(activated()));
 }
-
-#include "kmymoneyaccountcombo.moc"

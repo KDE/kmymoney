@@ -180,6 +180,3 @@ bool KSelectTransactionsDlg::eventFilter(QObject* o, QEvent* e)
   }
   return rc;
 }
-
-#include "kselecttransactionsdlg.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

@@ -346,5 +346,3 @@ void KBudgetValues::slotUpdateClearButton(void)
   }
   m_clearButton->setEnabled(rc);
 }
-
-#include "kbudgetvalues.moc"

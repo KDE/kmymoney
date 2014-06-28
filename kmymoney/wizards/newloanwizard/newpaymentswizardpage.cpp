@@ -33,6 +33,3 @@ NewPaymentsWizardPage::NewPaymentsWizardPage(QWidget *parent)
     : NewPaymentsWizardPageDecl(parent)
 {
 }
-
-#include "newpaymentswizardpage.moc"
-

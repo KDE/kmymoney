@@ -752,6 +752,3 @@ void QueryTableTest::testTaxReport()
     QFAIL(qPrintable(e.what()));
   }
 }
-
-#include "querytabletest.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

@@ -525,5 +525,3 @@ QStringList KMyMoneySelector::itemList(void) const
   itemList(list);
   return list;
 }
-
-#include "kmymoneyselector.moc"

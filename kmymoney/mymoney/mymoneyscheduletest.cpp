@@ -1633,6 +1633,3 @@ void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
   s.setNextDueDate(endDate.addMonths(-1));
   QVERIFY(s.transactionsRemaining() == 2);
 }
-
-#include "mymoneyscheduletest.moc"
-

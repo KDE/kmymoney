@@ -131,6 +131,3 @@ QString KOnlineBankingStatus::headerVersion(void) const
     return m_headerVersion->headerVersion();
   return QString();
 }
-
-#include "konlinebankingstatus.moc"
-

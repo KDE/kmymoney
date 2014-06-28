@@ -31,5 +31,3 @@ KMyMoneyPlugin::ImportInterface::ImportInterface(QObject* parent, const char* na
 {
   setObjectName(name);
 }
-
-#include "importinterface.moc"

@@ -149,6 +149,3 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
 
   return chartWidget;
 }
-
-#include "kbalancechartdlg.moc"
-

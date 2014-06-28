@@ -317,6 +317,3 @@ bool MyMoneySplit::replaceId(const QString& newId, const QString& oldId)
 
   return changed;
 }
-
-
-// vim:cin:si:ai:et:ts=2:sw=2:

@@ -226,5 +226,3 @@ void KOfxDirectConnectDlg::reject(void)
   }
   QDialog::reject();
 }
-
-#include "kofxdirectconnectdlg.moc"

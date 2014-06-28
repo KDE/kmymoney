@@ -424,6 +424,3 @@ void MyMoneySplitTest::testReplaceId(void)
     QFAIL("Unexpected exception");
   }
 }
-
-#include "mymoneysplittest.moc"
-

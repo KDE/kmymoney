@@ -37,6 +37,3 @@ CheckingStartWizardPage::CheckingStartWizardPage(QWidget *parent)
   // appropriate signals to update the "Next" button correctly
 
 }
-
-#include "checkingstartwizardpage.moc"
-

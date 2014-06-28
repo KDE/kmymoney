@@ -357,5 +357,3 @@ void MyMoneyObjectContainer::institution(QList<MyMoneyInstitution>& list)
 {
   d->listMethodImpl(list, d->institutionCache);
 }
-
-#include "mymoneyobjectcontainer.moc"

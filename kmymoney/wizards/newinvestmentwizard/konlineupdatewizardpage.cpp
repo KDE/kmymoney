@@ -108,6 +108,3 @@ void KOnlineUpdateWizardPage::slotSourceChanged(bool useFQ)
     m_onlineSourceCombo->addItems(WebPriceQuote::quoteSources());
   }
 }
-
-#include "konlineupdatewizardpage.moc"
-

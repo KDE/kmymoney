@@ -461,6 +461,3 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
   }
   stream << '^' << '\n';
 }
-
-#include "mymoneyqifwriter.moc"
-

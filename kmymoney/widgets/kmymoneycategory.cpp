@@ -222,5 +222,3 @@ void KMyMoneySecurity::setCurrentTextById(const QString& id)
     clearEditText();
   }
 }
-
-#include "kmymoneycategory.moc"

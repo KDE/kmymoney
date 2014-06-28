@@ -30,5 +30,3 @@ Accounts::Accounts(QWidget* parent) :
     AccountsDecl(parent)
 {
 }
-
-#include "accounts.moc"

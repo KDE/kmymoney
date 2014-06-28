@@ -157,5 +157,3 @@ bool TocItem::operator<(const QTreeWidgetItem &other)const
 
   return compareResult;
 }
-
-// vim:cin:si:ai:et:ts=2:sw=2:

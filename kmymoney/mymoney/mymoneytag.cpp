@@ -107,4 +107,3 @@ bool MyMoneyTag::hasReferenceTo(const QString& /*id*/) const
 {
   return false;
 }
-// vim:cin:si:ai:et:ts=2:sw=2:

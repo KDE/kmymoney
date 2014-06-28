@@ -574,6 +574,3 @@ void KEquityPriceUpdateDlg::finishUpdate(void)
 #undef DATE_COL
 #undef ID_COL
 #undef SOURCE_COL
-
-#include "kequitypriceupdatedlg.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

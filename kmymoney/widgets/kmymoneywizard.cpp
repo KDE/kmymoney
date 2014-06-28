@@ -391,6 +391,3 @@ void KMyMoneyWizard::accept(void)
   if (page->isComplete())
     QDialog::accept();
 }
-
-#include "kmymoneywizard.moc"
-#include "kmymoneywizard_p.moc"

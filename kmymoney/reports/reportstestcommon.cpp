@@ -465,5 +465,3 @@ MyMoneyMoney searchHTML(const QString& _html, const QString& _search)
 }
 
 } // end namespace test
-
-// vim:cin:si:ai:et:ts=2:sw=2:
