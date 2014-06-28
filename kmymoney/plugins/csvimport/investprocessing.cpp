@@ -1738,11 +1738,7 @@ void InvestProcessing::saveAs()
     QStringList outFile = m_inFileName .split('.');
     const KUrl& name = QString((outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif");
 
-    QString outFileName = KFileDialog::getSaveFileName(name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")), 0, i18n("Save QIF")
-#if KDE_IS_VERSION(4,4,0)
-                          , KFileDialog::ConfirmOverwrite
-#endif
-                                                      );
+    QString outFileName = KFileDialog::getSaveFileName(name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")), 0, i18n("Save QIF"), KFileDialog::ConfirmOverwrite);
     QFile oFile(outFileName);
     oFile.open(QIODevice::WriteOnly);
     QTextStream out(&oFile);

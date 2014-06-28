@@ -24,11 +24,11 @@
 #include <libofx/libofx.h>
 
 // if OFX has a major version number defined, we'll take it
-// if not, we assume 0.8.3. 0.8.3 was the last version w/o version number info
+// if not, we assume 0.9.4. since that's the minimum version
 #ifdef LIBOFX_MAJOR_VERSION
 #define LIBOFX_VERSION KDE_MAKE_VERSION(LIBOFX_MAJOR_VERSION, LIBOFX_MINOR_VERSION, LIBOFX_MICRO_VERSION)
 #else
-#define LIBOFX_VERSION KDE_MAKE_VERSION(0,8,3)
+#define LIBOFX_VERSION KDE_MAKE_VERSION(0,9,4)
 #endif
 #define LIBOFX_IS_VERSION(a,b,c) (LIBOFX_VERSION >= KDE_MAKE_VERSION(a,b,c))
 

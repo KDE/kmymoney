@@ -122,10 +122,8 @@ void MyMoneyKeyValueContainerTest::testWriteXML()
     " </KEYVALUEPAIRS>\n"
     "</KVP-CONTAINER>\n");
 
-#if QT_VERSION >= QT_VERSION_CHECK(4,6,0)
   ref.replace(QString(" />\n"), QString("/>\n"));
   ref.replace(QString(" >\n"), QString(">\n"));
-#endif
 
   QVERIFY(doc.toString() == ref);
 }

@@ -2401,12 +2401,8 @@ void KMyMoneyApp::slotSettings(void)
   dlg->addPage(homePage, i18n("Home"), "go-home");
   dlg->addPage(registerPage, i18nc("Ledger view settings", "Ledger"), "view-financial-list");
 
-//this is to solve the way long strings are handled differently among versions of KPageWidget
-#if KDE_IS_VERSION(4,4,0)
   dlg->addPage(schedulesPage, i18n("Scheduled transactions"), "view-pim-calendar");
-#else
-  dlg->addPage(schedulesPage, i18n("Scheduled\ntransactions"), "view-pim-calendar");
-#endif
+
   dlg->addPage(onlineQuotesPage, i18n("Online Quotes"), "preferences-system-network");
   dlg->addPage(reportsPage, i18nc("Report settings", "Reports"), "office-chart-bar");
   dlg->addPage(forecastPage, i18nc("Forecast settings", "Forecast"), "view-financial-forecast");
@@ -7280,7 +7276,6 @@ void KMyMoneyApp::slotAccountUpdateOnline(void)
 
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
 {
-#if KDE_IS_VERSION(4,5,0)
   //since the cost of updating the cache is now not negligible
   //check whether the region has been modified
   if (!d->m_holidayRegion || d->m_holidayRegion->regionCode() != holidayRegion) {
@@ -7292,14 +7287,6 @@ void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
     //clear and update the holiday cache
     preloadHolidays();
   }
-#else
-  // Delete the previous holidayRegion before creating a new one.
-  delete d->m_holidayRegion;
-  // Create a new holidayRegion.
-  d->m_holidayRegion = new KHolidays::HolidayRegion(holidayRegion);
-  // clear the holiday cache
-  preloadHolidays();
-#endif
 }
 
 bool KMyMoneyApp::isProcessingDate(const QDate& date) const
@@ -7323,7 +7310,6 @@ void KMyMoneyApp::preloadHolidays()
 {
   //clear the cache before loading
   d->m_holidayMap.clear();
-#if KDE_IS_VERSION(4,5,0)
   //only do this if it is a valid region
   if (d->m_holidayRegion && d->m_holidayRegion->isValid()) {
     //load holidays for the forecast days plus 1 cycle, to be on the safe side
@@ -7350,7 +7336,6 @@ void KMyMoneyApp::preloadHolidays()
       }
     }
   }
-#endif
 }
 
 KMStatus::KMStatus(const QString &text)

@@ -304,7 +304,6 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
     strncpy(fi.userid, username.toLatin1(), OFX_USERID_LENGTH - 1);
     strncpy(fi.userpass, password.toLatin1(), OFX_USERPASS_LENGTH - 1);
 
-#if LIBOFX_IS_VERSION(0,9,0)
     // pretend we're Quicken 2008
     // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
     // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
@@ -320,7 +319,6 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
 
     QString hver = m_headerVersion->headerVersion();
     strncpy(fi.header_version, hver.toLatin1(), OFX_HEADERVERSION_LENGTH - 1);
-#endif
 
     KUrl filename(QString("%1response.ofx").arg(KStandardDirs::locateLocal("appdata", "")));
     QByteArray req(libofx_request_accountinfo(&fi));

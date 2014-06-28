@@ -189,11 +189,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 3
   m_scheduledView = new KScheduledView();
 //this is to solve the way long strings are handled differently among versions of KPageWidget
-#if KDE_IS_VERSION(4,4,0)
   m_scheduleViewFrame = m_model->addPage(m_scheduledView, i18n("Scheduled transactions"));
-#else
-  m_scheduleViewFrame = m_model->addPage(m_scheduledView, i18n("Scheduled\ntransactions"));
-#endif
   m_scheduleViewFrame->setIcon(KIcon("view-pim-calendar"));
 
   connect(m_scheduledView, SIGNAL(scheduleSelected(MyMoneySchedule)), kmymoney, SLOT(slotSelectSchedule(MyMoneySchedule)));
