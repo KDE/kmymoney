@@ -757,7 +757,7 @@ void MyMoneySchedule::fixDate(QDate& date) const
   if (fixDate.isValid()
       && date.day() != fixDate.day()
       && QDate::isValid(date.year(), date.month(), fixDate.day())) {
-    date.setYMD(date.year(), date.month(), fixDate.day());
+    date = QDate(date.year(), date.month(), fixDate.day());
   }
 }
 
