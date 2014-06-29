@@ -19,10 +19,6 @@
 #include <QList>
 #include <QtTest/QtTest>
 
-// Include internationalization
-#include <klocale.h>
-#include <KHolidays/Holidays>
-
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyScheduleTest;
 
 #include "mymoneysplit.h"
