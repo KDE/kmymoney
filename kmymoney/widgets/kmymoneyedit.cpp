@@ -40,6 +40,7 @@
 #include <kvbox.h>
 #include <khbox.h>
 #include <kconfiggroup.h>
+#include <kicon.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -66,7 +67,7 @@ kMyMoneyMoneyValidator::kMyMoneyMoneyValidator(double bottom, double top, int de
 QValidator::State kMyMoneyMoneyValidator::validate(QString & input, int & _p) const
 {
   QString s = input;
-  KLocale * l = KGlobal::locale();
+  KLocale * l = KLocale::global();
   // ok, we have to re-format the number to have:
   // 1. decimalSymbol == '.'
   // 2. negativeSign  == '-'
@@ -164,7 +165,7 @@ kMyMoneyEdit::kMyMoneyEdit(QWidget *parent, const int prec)
 {
   m_prec = prec;
   if (prec < -1 || prec > 20)
-    m_prec = KGlobal::locale()->monetaryDecimalPlaces();
+    m_prec = KLocale::global()->monetaryDecimalPlaces();
   init();
 }
 
@@ -318,7 +319,7 @@ void kMyMoneyEdit::resetText(void)
 
 void kMyMoneyEdit::theTextChanged(const QString & theText)
 {
-  KLocale * l = KGlobal::locale();
+  KLocale * l = KLocale::global();
   QString d = l->monetaryDecimalSymbol();
   QString l_text = theText;
   QString nsign, psign;
@@ -362,8 +363,7 @@ void kMyMoneyEdit::ensureFractionalPart(void)
 
 void kMyMoneyEdit::ensureFractionalPart(QString& s) const
 {
-
-  KLocale* locale = KGlobal::locale();
+  KLocale* locale = KLocale::global();
   QString decimalSymbol = locale->monetaryDecimalSymbol();
   if (decimalSymbol.isEmpty())
     decimalSymbol = '.';

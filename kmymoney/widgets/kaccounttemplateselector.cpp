@@ -181,16 +181,16 @@ void KAccountTemplateSelector::slotLoadTemplateList(void)
       QRegExp exp("(..)_(..)");
       if (exp.indexIn(*it_d) != -1) {
 
-        QString country = KGlobal::locale()->countryCodeToName(exp.cap(2));
+        QString country = KLocale::global()->countryCodeToName(exp.cap(2));
         if (country.isEmpty())
           country = exp.cap(2);
-        QString lang = KGlobal::locale()->languageCodeToName(exp.cap(1));
+        QString lang = KLocale::global()->languageCodeToName(exp.cap(1));
         if (d->countries.contains(country)) {
           if (d->countries[country] != *it_d) {
             QString oName = d->countries[country];
             exp.indexIn(oName);
-            QString oCountry = KGlobal::locale()->countryCodeToName(exp.cap(2));
-            QString oLang = KGlobal::locale()->languageCodeToName(exp.cap(1));
+            QString oCountry = KLocale::global()->countryCodeToName(exp.cap(2));
+            QString oLang = KLocale::global()->languageCodeToName(exp.cap(1));
             d->countries.remove(country);
             d->countries[QString("%1 (%2)").arg(oCountry).arg(oLang)] = oName;
             d->countries[QString("%1 (%2)").arg(country).arg(lang)] = *it_d;
@@ -199,7 +199,7 @@ void KAccountTemplateSelector::slotLoadTemplateList(void)
           d->countries[country] = *it_d;
         }
       } else if ((*it_d).length() == 2) {
-        QString country = KGlobal::locale()->countryCodeToName((*it_d).toUpper());
+        QString country = KLocale::global()->countryCodeToName((*it_d).toUpper());
         d->countries[country] = *it_d;
       } else {
         qDebug("'%s/%s' not scanned", qPrintable(*it), qPrintable(*it_d));

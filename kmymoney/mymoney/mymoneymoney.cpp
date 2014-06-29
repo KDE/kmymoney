@@ -155,7 +155,7 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
 #endif
 
   // Once we really support multiple currencies then this method will
-  // be much better than using KGlobal::locale()->formatMoney.
+  // be much better than using KLocale::global()->formatMoney.
   bool bNegative = false;
   mpz_class left = value / static_cast<MyMoneyMoney>(convertDenominator(d)).valueRef().get_den();
   mpz_class right = mpz_class((valueRef() - mpq_class(left)) * denom);

@@ -14,7 +14,7 @@ SET(kmm_csvexport_PART_SRCS
   csvexportdlg.cpp
 )
 
-KDE4_ADD_UI_FILES(kmm_csvexport_PART_SRCS
+qt5_wrap_ui(kmm_csvexport_PART_SRCS
   csvexportdlg.ui
 )
 
@@ -24,9 +24,9 @@ KDE4_ADD_PLUGIN(kmm_csvexport
 
 TARGET_LINK_LIBRARIES(kmm_csvexport
   kmm_mymoney kmm_plugin
-  ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS}
+  ${KDE4_KDEUI_LIBS} KF5::KIOWidgets
   ${GMP_LIBRARIES}
-  ${LIBALKIMIA_LIBRARY} #kmymoney_common kmm_config dialogs widgets models
+  Alkimia::alkimia #kmymoney_common kmm_config dialogs widgets models
 )
 
 ########### install files ###############

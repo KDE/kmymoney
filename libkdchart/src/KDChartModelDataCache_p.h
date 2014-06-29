@@ -46,7 +46,7 @@ namespace KDChart
             virtual void resetModel() = 0;
             virtual void columnsInserted( const QModelIndex&, int, int ) = 0;
             virtual void columnsRemoved( const QModelIndex&, int, int ) = 0;
-            virtual void dataChanged( const QModelIndex&, const QModelIndex& ) = 0;
+            virtual void dataChanged( const QModelIndex&, const QModelIndex&, const QVector<int> &roles = QVector<int>() ) = 0;
             virtual void layoutChanged() = 0;
             virtual void modelReset() = 0;
             virtual void rowsInserted( const QModelIndex&, int, int ) = 0;
@@ -68,7 +68,7 @@ namespace KDChart
             void resetModel();
             void columnsInserted( const QModelIndex&, int, int );
             void columnsRemoved( const QModelIndex&, int, int );
-            void dataChanged( const QModelIndex&, const QModelIndex& );
+            void dataChanged( const QModelIndex&, const QModelIndex&, const QVector<int> &roles = QVector<int>());
             void layoutChanged();
             void modelReset();
             void rowsInserted( const QModelIndex&, int, int );
@@ -239,8 +239,9 @@ namespace KDChart
             }
         }
 
-        void dataChanged( const QModelIndex& topLeft, const QModelIndex& bottomRight )
+        void dataChanged( const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int> &roles )
         {
+            Q_UNUSED( roles );
             if ( !m_model )
                 return;
             Q_ASSERT( m_model != 0 );

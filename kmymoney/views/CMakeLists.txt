@@ -39,9 +39,11 @@ SET(libviews_a_UI
 
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
-kde4_add_ui_files(libviews_a_SOURCES ${libviews_a_UI})
+qt5_wrap_ui(libviews_a_SOURCES ${libviews_a_UI})
 
-KDE4_ADD_LIBRARY(views STATIC ${libviews_a_SOURCES})
+add_library(views STATIC ${libviews_a_SOURCES})
+
+target_link_libraries(views PUBLIC KF5::Archive KF5::KHtml Qt5::Sql)
 
 # we rely on some of the dialogs to be generated
 ADD_DEPENDENCIES(views dialogs newinvestmentwizard newloanwizard endingbalancedlg)

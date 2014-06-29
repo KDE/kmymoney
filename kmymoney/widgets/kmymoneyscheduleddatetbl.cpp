@@ -291,7 +291,7 @@ void kMyMoneyScheduledDateTbl::mouseMoveEvent(QMouseEvent* e)
       return;
     }
 
-    int firstWeekDay = KGlobal::locale()->weekStartDay();
+    int firstWeekDay = KLocale::global()->weekStartDay();
 
     QDate drawDate(date);
     QString text;

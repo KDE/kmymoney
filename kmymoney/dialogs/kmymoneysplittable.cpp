@@ -51,6 +51,7 @@
 #include <kmenu.h>
 #include <kstdaccel.h>
 #include <kshortcut.h>
+#include <kicon.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

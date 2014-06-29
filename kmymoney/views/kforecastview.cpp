@@ -30,6 +30,8 @@
 #include <KDebug>
 #include <KLocale>
 #include <KTextEdit>
+#include <kglobal.h>
+#include <kicon.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -229,7 +231,7 @@ void KForecastView::loadListView(void)
 
   for (int i = 1; i <= forecast.forecastDays(); ++i) {
     QDate forecastDate = QDate::currentDate().addDays(i);
-    headerLabels << KGlobal::locale()->formatDate(forecastDate, KLocale::LongDate);
+    headerLabels << KLocale::global()->formatDate(forecastDate, KLocale::LongDate);
   }
 
   //add variation columns
@@ -520,7 +522,7 @@ void KForecastView::loadAdvancedView(void)
       }
       it_c++;
 
-      QString dateString = KGlobal::locale()->formatDate(minDate, KLocale::ShortDate);
+      QString dateString = KLocale::global()->formatDate(minDate, KLocale::ShortDate);
       advancedItem->setText(it_c, dateString);
       advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {
@@ -544,7 +546,7 @@ void KForecastView::loadAdvancedView(void)
       }
       it_c++;
 
-      QString dateString = KGlobal::locale()->formatDate(maxDate, KLocale::ShortDate);
+      QString dateString = KLocale::global()->formatDate(maxDate, KLocale::ShortDate);
       advancedItem->setText(it_c, dateString);
       advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {

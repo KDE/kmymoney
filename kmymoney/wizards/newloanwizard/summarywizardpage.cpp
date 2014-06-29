@@ -24,6 +24,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <kglobal.h>
+#include <klocalizedstring.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -47,7 +49,7 @@ void SummaryWizardPage::initializePage()
   else
     m_summaryLoanType->setText(i18n("lend"));
 
-  m_summaryFirstPayment->setText(KGlobal::locale()->formatDate(field("firstDueDateEdit").toDate()));
+  m_summaryFirstPayment->setText(KLocale::global()->formatDate(field("firstDueDateEdit").toDate()));
 
   if (field("payeeEdit").toString().isEmpty()) {
     m_summaryPayee->setText(i18n("not assigned"));
@@ -79,7 +81,7 @@ void SummaryWizardPage::initializePage()
   }
   m_summaryAdditionalFees->setText(field("additionalCost").toString());
   m_summaryTotalPeriodicPayment->setText(field("periodicPayment").toString());
-  m_summaryNextPayment->setText(KGlobal::locale()->formatDate(field("nextDueDateEdit").toDate()));
+  m_summaryNextPayment->setText(KLocale::global()->formatDate(field("nextDueDateEdit").toDate()));
 
   try {
     QStringList sel = field("paymentAccountEdit").toStringList();

@@ -124,14 +124,14 @@ void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
     if (k->modifiers() & Qt::KeypadModifier) {
       if (k->key() == Qt::Key_Comma
           || k->key() == Qt::Key_Period) {
-        if (KGlobal::locale()->monetaryDecimalSymbol() == ",") {
+        if (KLocale::global()->monetaryDecimalSymbol() == ",") {
           QKeyEvent newk(k->type(), Qt::Key_Comma, k->modifiers(), ",", k->isAutoRepeat(), k->count());
           KLineEdit::keyReleaseEvent(&newk);
           k->accept();
           return;
         }
 
-        if (KGlobal::locale()->monetaryDecimalSymbol() == ".") {
+        if (KLocale::global()->monetaryDecimalSymbol() == ".") {
           QKeyEvent newk(k->type(), Qt::Key_Comma, k->modifiers(), ".", k->isAutoRepeat(), k->count());
           KLineEdit::keyReleaseEvent(&newk);
           k->accept();
@@ -149,14 +149,14 @@ void kMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
     if (k->modifiers() & Qt::KeypadModifier) {
       if (k->key() == Qt::Key_Comma
           || k->key() == Qt::Key_Period) {
-        if (KGlobal::locale()->monetaryDecimalSymbol() == ",") {
+        if (KLocale::global()->monetaryDecimalSymbol() == ",") {
           QKeyEvent newk(k->type(), Qt::Key_Comma, k->modifiers(), ",", k->isAutoRepeat(), k->count());
           KLineEdit::keyPressEvent(&newk);
           k->accept();
           return;
         }
 
-        if (KGlobal::locale()->monetaryDecimalSymbol() == ".") {
+        if (KLocale::global()->monetaryDecimalSymbol() == ".") {
           QKeyEvent newk(k->type(), Qt::Key_Period, k->modifiers(), ".", k->isAutoRepeat(), k->count());
           KLineEdit::keyPressEvent(&newk);
           k->accept();

@@ -11,9 +11,9 @@ SET(kmm_ofximport_PART_SRCS ofximporterplugin.cpp ofxpartner.cpp)
 
 SET(kmm_ofximport_PART_UI importoption.ui)
 
-KDE4_ADD_UI_FILES(kmm_ofximport_PART_SRCS ${kmm_ofximport_PART_UI})
+qt5_wrap_ui(kmm_ofximport_PART_SRCS ${kmm_ofximport_PART_UI})
 
-KDE4_ADD_PLUGIN(kmm_ofximport ${kmm_ofximport_PART_SRCS})
+add_library(kmm_ofximport MODULE ${kmm_ofximport_PART_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_ofximport
                       kmm_ofximport_dialogs
@@ -21,9 +21,9 @@ TARGET_LINK_LIBRARIES(kmm_ofximport
                       kmm_widgets
                       kmm_plugin
                       ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KIO_LIBS}
+                      KF5::KIOWidgets
                       ${GMP_LIBRARIES} 
-                      ${LIBALKIMIA_LIBRARY}
+                      Alkimia::alkimia
                       ${LIBOFX_LIBRARIES})
 
 ########### install files ###############

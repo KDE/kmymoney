@@ -25,7 +25,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
+#include <kicon.h>
+#include <kglobal.h>
 #include <klocale.h>
 #include <KToggleAction>
 #include <KMessageBox>

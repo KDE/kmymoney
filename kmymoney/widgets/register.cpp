@@ -310,7 +310,7 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
     cellRect.setX(m_parent->horizontalHeader()->sectionPosition(DateColumn));
     cellRect.setWidth(m_parent->horizontalHeader()->sectionSize(DateColumn));
     painter->setFont(font);
-    painter->drawText(cellRect, Qt::AlignVCenter | Qt::AlignCenter, KGlobal::locale()->formatDate(sortPostDate(), KLocale::ShortDate));
+    painter->drawText(cellRect, Qt::AlignVCenter | Qt::AlignCenter, KLocale::global()->formatDate(sortPostDate(), KLocale::ShortDate));
   }
 
   painter->restore();
@@ -1202,7 +1202,7 @@ int Register::minimumColumnWidth(int col)
   QFontMetrics cellFontMetrics(KMyMoneyGlobalSettings::listCellFont());
   switch (col) {
     case DateColumn:
-      minWidth = cellFontMetrics.width(KGlobal::locale()->formatDate(QDate(6999, 12, 29), KLocale::ShortDate) + "  ");
+      minWidth = cellFontMetrics.width(KLocale::global()->formatDate(QDate(6999, 12, 29), KLocale::ShortDate) + "  ");
       break;
     default:
       break;
@@ -1961,7 +1961,7 @@ void Register::addGroupMarkers(void)
       yesterday = today.addDays(-1);
       // a = QDate::dayOfWeek()      todays weekday (1 = Monday, 7 = Sunday)
       // b = KLocale::weekStartDay() first day of week (1 = Monday, 7 = Sunday)
-      weekStartOfs = today.dayOfWeek() - KGlobal::locale()->weekStartDay();
+      weekStartOfs = today.dayOfWeek() - KLocale::global()->weekStartDay();
       if (weekStartOfs < 0) {
         weekStartOfs = 7 + weekStartOfs;
       }

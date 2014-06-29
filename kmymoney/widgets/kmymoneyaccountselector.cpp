@@ -40,6 +40,7 @@
 
 #include <klocale.h>
 #include <kpushbutton.h>
+#include <kiconloader.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

@@ -32,6 +32,7 @@
 #include <ksplashscreen.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
+#include <k4aboutdata.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -47,7 +48,8 @@ KStartupLogo::KStartupLogo() :
     return;
 
   QString filename = KGlobal::dirs()->findResource("appdata", "pics/startlogo.png");
-  QString localeFilename = KGlobal::locale()->localizedFilePath(filename);
+  // TODO: port KF5
+  QString localeFilename = filename;//KLocale::global()->localizedFilePath(filename);
   QPixmap logoOverlay(localeFilename);
 
   QPixmap logoPixmap(logoOverlay.size());
@@ -56,7 +58,7 @@ KStartupLogo::KStartupLogo() :
   pixmapPainter.drawPixmap(0, 0, logoOverlay, 0, 0, logoOverlay.width(), logoOverlay.height());
 
   if (!logoOverlay.isNull()) {
-    const KAboutData *aboutData = KCmdLineArgs::aboutData();
+    const K4AboutData *aboutData = KCmdLineArgs::aboutData();
     KSplashScreen* splash = new KSplashScreen(logoPixmap);
     splash->setFixedSize(logoPixmap.size());
 

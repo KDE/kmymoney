@@ -38,13 +38,14 @@
 #include <kiconloader.h>
 #include <kapplication.h>
 #include <KColorScheme>
+#include <kicon.h>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneytitlelabel.h"
 #include "kguiutils.h"
-#include "ktoolinvocation.h"
 
 KMyMoneyWizardPagePrivate::KMyMoneyWizardPagePrivate(QObject* parent) :
     QObject(parent)
@@ -360,7 +361,7 @@ void KMyMoneyWizard::helpButtonClicked(void)
   QString ctx = currentPage->helpContext();
   if (ctx.isEmpty())
     ctx = m_helpContext;
-  KToolInvocation::invokeHelp(ctx);
+  KHelpClient::invokeHelp(ctx);
 }
 
 void KMyMoneyWizard::completeStateChanged(void)

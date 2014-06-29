@@ -197,7 +197,8 @@ protected:
   /// the line edit to enter the date directly
   KLineEdit *line;
   /// the validator for the line edit:
-  KDateValidator *val;
+  // TODO: port KF5
+  //KDateValidator *val;
   /// the date table
   kMyMoneyDateTbl *table;
   /// the size calculated during resize events
@@ -260,7 +261,7 @@ private:
   // calculate ISO 8601 week number
   int weekOfYear(const QDate&);
 
-#define MONTH_NAME(a,b,c)  KGlobal::locale()->calendar()->monthName(a,b,c)
+#define MONTH_NAME(a,b,c)  KLocale::global()->calendar()->monthName(a,b,c)
 };
 
 //taken from kdatepicker_p.h until kmymoneycalendar is ported to not duplicate KDE code

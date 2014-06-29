@@ -38,6 +38,7 @@
 #include <kfiledialog.h>
 #include <kglobal.h>
 #include <kstandarddirs.h>
+#include <kicon.h>
 #include <kicontheme.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
@@ -1170,18 +1171,19 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
 
   } else if (!plaintext) {
 
-    base = KFilterBase::findFilterByMimeType(COMPRESSION_MIME_TYPE);
-    if (base) {
-      base->setDevice(&qfile, false);
-      // we need to reopen the file to set the mode inside the filter stuff
-      dev = KFilterDev::deviceForFile(localFile, COMPRESSION_MIME_TYPE, true);
-      if (!dev || !dev->open(QIODevice::WriteOnly)) {
-        MyMoneyFile::instance()->blockSignals(blocked);
-        delete dev;
-        throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.", localFile));
-      }
-      statusDevice = base->device();
-    }
+// TODO: port to KF5
+//     base = KFilterBase::findFilterByMimeType(COMPRESSION_MIME_TYPE);
+//     if (base) {
+//       base->setDevice(&qfile, false);
+//       // we need to reopen the file to set the mode inside the filter stuff
+//       dev = KFilterDev::deviceForFile(localFile, COMPRESSION_MIME_TYPE, true);
+//       if (!dev || !dev->open(QIODevice::WriteOnly)) {
+//         MyMoneyFile::instance()->blockSignals(blocked);
+//         delete dev;
+//         throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.", localFile));
+//       }
+//       statusDevice = base->device();
+//     }
   } else if (plaintext) {
     qfile.open();
     if (qfile.error() != QFile::NoError) {
@@ -1248,7 +1250,8 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
       try {
         const unsigned int nbak = KMyMoneyGlobalSettings::autoBackupCopies();
         if (nbak) {
-          KSaveFile::numberedBackupFile(filename, QString(), QString::fromLatin1("~"), nbak);
+          // TODO: port KF5
+          //KSaveFile::numberedBackupFile(filename, QString(), QString::fromLatin1("~"), nbak);
         }
         saveToLocalFile(filename, pWriter, plaintext, keyList);
       } catch (const MyMoneyException &) {

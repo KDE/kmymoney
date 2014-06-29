@@ -829,8 +829,8 @@ void PivotTableTest::testColumnType()
   QVERIFY(spending_days.m_grid.m_total[eActual][13] == -moSolo);
   QVERIFY(spending_days.m_grid.m_total[eActual].m_total == -moSolo - moParent2);
 
-  unsigned save_dayweekstart = KGlobal::locale()->weekStartDay();
-  KGlobal::locale()->setWeekStartDay(2);
+  unsigned save_dayweekstart = KLocale::global()->weekStartDay();
+  KLocale::global()->setWeekStartDay(2);
 
   filter.setDateFilter(QDate(2004, 7, 2), QDate(2004, 8, 1));
   filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -841,7 +841,7 @@ void PivotTableTest::testColumnType()
   PivotTable spending_weeks(filter);
   writeTabletoHTML(spending_weeks, "Spending by Weeks.html");
 
-  KGlobal::locale()->setWeekStartDay(save_dayweekstart);
+  KLocale::global()->setWeekStartDay(save_dayweekstart);
 
   QVERIFY(spending_weeks.m_grid.m_total[eActual][0] == moZero);
   QVERIFY(spending_weeks.m_grid.m_total[eActual][1] == -moParent2);
@@ -1017,7 +1017,7 @@ void PivotTableTest::testHtmlEncoding(void)
   XMLandback(filter);
   PivotTable networth_f(filter);
 
-  QByteArray encoding = KGlobal::locale()->encoding();
+  QByteArray encoding = KLocale::global()->encoding();
 
   QString html = networth_f.renderHTML(0, encoding, filter.name(), false);
 

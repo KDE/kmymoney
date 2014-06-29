@@ -95,18 +95,6 @@ public:
     *
     * @sa KMyMoneySelector::setSelectionMode()
     *
-    * @param id reference to QString containing the id. If no item
-    *           is selected id will be empty.
-    */
-  KDE_DEPRECATED void selectedItem(QString& id) const;
-
-  /**
-    * This method returns the id of the first selected item.
-    * Usage makes usually only sense when the selection mode
-    * of the associated KMyMoneySelector is QListView::Single.
-    *
-    * @sa KMyMoneySelector::setSelectionMode()
-    *
     * @return reference to QString containing the id. If no item
     *         is selected the QString will be empty.
     */
@@ -175,12 +163,12 @@ protected:
   /**
     * Overridden for internal reasons, no API change
     */
-  void connectNotify(const char* signal);
+  void connectNotify(const QMetaMethod & signal);
 
   /**
     * Overridden for internal reasons, no API change
     */
-  void disconnectNotify(const char* signal);
+  void disconnectNotify(const QMetaMethod & signal);
 
 protected:
   /**

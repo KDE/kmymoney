@@ -44,7 +44,7 @@
 kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
     : QFrame(parent)
 {
-  m_comma = KGlobal::locale()->monetaryDecimalSymbol()[0];
+  m_comma = KLocale::global()->monetaryDecimalSymbol()[0];
   m_clearOperandOnDigit = false;
 
   QGridLayout* grid = new QGridLayout(this);
@@ -322,7 +322,7 @@ const QString kMyMoneyCalculator::result(void) const
   if (txt[0] == '-') {
     txt = txt.mid(1); // get rid of the minus sign
     QString mask;
-    switch (KGlobal::locale()->negativeMonetarySignPosition()) {
+    switch (KLocale::global()->negativeMonetarySignPosition()) {
       case KLocale::ParensAround:
         mask = "(%1)";
         break;
@@ -419,7 +419,7 @@ void kMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
   bool negative = false;
   // setup operand
   operand = value;
-  operand.replace(QRegExp(QString('\\') + KGlobal::locale()->thousandsSeparator()), QChar());
+  operand.replace(QRegExp(QString('\\') + KLocale::global()->thousandsSeparator()), QChar());
   operand.replace(QRegExp(QString('\\') + m_comma), ".");
   if (operand.contains('(')) {
     negative = true;

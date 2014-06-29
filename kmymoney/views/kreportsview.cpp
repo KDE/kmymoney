@@ -33,6 +33,7 @@
 #include <QVBoxLayout>
 #include <QVariant>
 #include <QCheckBox>
+#include <QMimeData>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -43,6 +44,8 @@
 #include <kdebug.h>
 #include <kfiledialog.h>
 #include <kmessagebox.h>
+#include <kicon.h>
+#include <kglobal.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -100,7 +103,7 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   parent->setTabEnabled(parent->indexOf(this), true);
 
   // get users character set encoding
-  m_encoding = KGlobal::locale()->encoding();
+  m_encoding = KLocale::global()->encoding();
 }
 
 KReportsView::KReportTab::~KReportTab()
@@ -692,7 +695,7 @@ void KReportsView::slotSaveView(void)
             this, SLOT(slotSaveFilterChanged(QString)));
 
     dlg->setOperationMode(KFileDialog::Saving);
-    dlg->setCaption(i18n("Export as"));
+    dlg->setWindowTitle(i18n("Export as"));
 
     // set current file filter && enable or disable includeCssCheckBox
     KFileFilterCombo* combo = dlg->filterWidget();

@@ -36,6 +36,7 @@
 
 #include <KIcon>
 #include <klocale.h>
+#include <kglobal.h>
 #include <kstandarddirs.h>
 #include <klineedit.h>
 #include <ktextedit.h>
@@ -43,12 +44,14 @@
 #include <kurlrequester.h>
 #include <kio/netaccess.h>
 #include <kurl.h>
+#if 0
 #include <KPIMIdentities/IdentityManager>
 #include <KPIMIdentities/Identity>
 #include <akonadi/recursiveitemfetchjob.h>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/Collection>
 #include <KABC/Addressee>
+#endif
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 
@@ -183,14 +186,17 @@ GeneralPage::GeneralPage(Wizard* wizard) :
 {
   m_userNameEdit->setFocus();
 
+#if 0
   KPIMIdentities::IdentityManager im;
   KPIMIdentities::Identity id = im.defaultIdentity();
   m_loadAddressButton->setEnabled(!id.isNull());
+#endif
   connect(m_loadAddressButton, SIGNAL(clicked()), this, SLOT(slotLoadFromAddressBook()));
 }
 
 void GeneralPage::slotLoadFromAddressBook(void)
 {
+#if 0
   KPIMIdentities::IdentityManager im;
   KPIMIdentities::Identity id = im.defaultIdentity();
   if (id.isNull() || id.primaryEmailAddress().isEmpty()) {
@@ -207,10 +213,12 @@ void GeneralPage::slotLoadFromAddressBook(void)
 
   m_userNameEdit->setText(id.fullName());
   m_emailEdit->setText(id.primaryEmailAddress());
+#endif
 }
 
 void GeneralPage::searchContactResult(KJob *job)
 {
+#if 0
   const Akonadi::RecursiveItemFetchJob *contactJob = qobject_cast<Akonadi::RecursiveItemFetchJob*>(job);
   Akonadi::Item::List items;
   if (contactJob)
@@ -233,6 +241,7 @@ void GeneralPage::searchContactResult(KJob *job)
     }
   }
   m_loadAddressButton->setEnabled(true);
+#endif
 }
 
 KMyMoneyWizardPage* GeneralPage::nextPage(void) const
@@ -349,8 +358,9 @@ FilePage::FilePage(Wizard* wizard) :
 
   KUser user;
   m_dataFileEdit->setUrl(QString("%1/%2.kmy").arg(QDir::homePath(), user.loginName()));
-  m_dataFileEdit->fileDialog()->setFilter(i18n("*.kmy *.xml|KMyMoney files\n*|All files"));
-  m_dataFileEdit->fileDialog()->setOperationMode(KFileDialog::Saving);
+  // TODO: port KF5
+  //m_dataFileEdit->fileDialog()->setFilter(i18n("*.kmy *.xml|KMyMoney files\n*|All files"));
+  //m_dataFileEdit->fileDialog()->setOperationMode(KFileDialog::Saving);
   m_dataFileEdit->setMode(KFile::File);
 }
 

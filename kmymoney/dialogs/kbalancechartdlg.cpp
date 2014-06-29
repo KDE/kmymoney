@@ -30,6 +30,7 @@
 
 #include <kpushbutton.h>
 #include <klocale.h>
+#include <kglobal.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

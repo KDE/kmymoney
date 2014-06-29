@@ -173,8 +173,6 @@ protected slots:
 
   void slotNewBudget(void);
 
-  void languageChange(void);
-
   void slotBudgetBalanceChanged(const MyMoneyMoney &);
 
 private slots:

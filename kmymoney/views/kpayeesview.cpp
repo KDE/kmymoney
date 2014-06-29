@@ -49,12 +49,13 @@
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 #include <kiconloader.h>
+#include <kicon.h>
 #include <kguiitem.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>
 #include <kapplication.h>
 #include <keditlistbox.h>
-#include <ktoolinvocation.h>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -847,7 +848,7 @@ void KPayeesView::slotPayeeNew(void)
 
 void KPayeesView::slotHelp(void)
 {
-  KToolInvocation::invokeHelp("details.payees");
+  KHelpClient::invokeHelp("details.payees");
 }
 
 void KPayeesView::slotChangeFilter(int index)

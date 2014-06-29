@@ -29,6 +29,7 @@
 #include <QFrame>
 #include <QLabel>
 #include <QToolButton>
+#include <QMetaMethod>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -194,16 +195,16 @@ void KMyMoneyMVCCombo::editTextChanged(const QString &text)
   }
 }
 
-void KMyMoneyMVCCombo::connectNotify(const char* signal)
+void KMyMoneyMVCCombo::connectNotify(const QMetaMethod & signal)
 {
-  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(QString,QString&))))) {
+  if (signal != QMetaMethod::fromSignal(&KMyMoneyMVCCombo::createItem)) {
     d->m_canCreateObjects = true;
   }
 }
 
-void KMyMoneyMVCCombo::disconnectNotify(const char* signal)
+void KMyMoneyMVCCombo::disconnectNotify(const QMetaMethod & signal)
 {
-  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(QString,QString&))))) {
+  if (signal != QMetaMethod::fromSignal(&KMyMoneyMVCCombo::createItem)) {
     d->m_canCreateObjects = false;
   }
 }

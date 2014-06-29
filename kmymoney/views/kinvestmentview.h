@@ -28,7 +28,8 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <KTreeWidgetSearchLineWidget>
+
+#include <ktreewidgetsearchlinewidget.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

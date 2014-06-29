@@ -173,15 +173,15 @@ public:
 #endif
   }
 
-  inline Q_TYPENAME QMap<Key, T>::const_iterator find(const Key& k) const {
+  inline typename QMap<Key, T>::const_iterator find(const Key& k) const {
     return QMap<Key, T>::find(k);
   }
 
-  inline Q_TYPENAME QMap<Key, T>::const_iterator begin(void) const {
+  inline typename QMap<Key, T>::const_iterator begin(void) const {
     return QMap<Key, T>::constBegin();
   }
 
-  inline Q_TYPENAME QMap<Key, T>::const_iterator end(void) const {
+  inline typename QMap<Key, T>::const_iterator end(void) const {
     return QMap<Key, T>::constEnd();
   }
 

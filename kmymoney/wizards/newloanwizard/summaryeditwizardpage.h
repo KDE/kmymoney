@@ -22,6 +22,7 @@
 // QT Includes
 
 #include <QWizardPage>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

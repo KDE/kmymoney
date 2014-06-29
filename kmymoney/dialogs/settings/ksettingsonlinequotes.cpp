@@ -31,6 +31,8 @@
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
+#include <kicon.h>
+
 
 // ----------------------------------------------------------------------------
 // Project Includes

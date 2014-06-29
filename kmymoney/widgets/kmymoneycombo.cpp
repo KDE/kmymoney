@@ -31,6 +31,7 @@
 #include <QPaintEvent>
 #include <QSortFilterProxyModel>
 #include <QCompleter>
+#include <QMetaMethod>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -215,16 +216,16 @@ void KMyMoneyCombo::keyPressEvent(QKeyEvent* e)
   KComboBox::keyPressEvent(e);
 }
 
-void KMyMoneyCombo::connectNotify(const char* signal)
+void KMyMoneyCombo::connectNotify(const QMetaMethod & signal)
 {
-  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(QString,QString&))))) {
+  if (signal != QMetaMethod::fromSignal(&KMyMoneyCombo::createItem)) {
     m_canCreateObjects = true;
   }
 }
 
-void KMyMoneyCombo::disconnectNotify(const char* signal)
+void KMyMoneyCombo::disconnectNotify(const QMetaMethod & signal)
 {
-  if (signal && QLatin1String(signal) != QLatin1String(QMetaObject::normalizedSignature(SIGNAL(createItem(QString,QString&))))) {
+  if (signal != QMetaMethod::fromSignal(&KMyMoneyCombo::createItem)) {
     m_canCreateObjects = false;
   }
 }
@@ -292,11 +293,6 @@ KMyMoneySelector* KMyMoneyCombo::selector(void) const
 kMyMoneyCompletion* KMyMoneyCombo::completion(void) const
 {
   return m_completion;
-}
-
-void KMyMoneyCombo::selectedItem(QString& id) const
-{
-  id = m_id;
 }
 
 void KMyMoneyCombo::selectedItems(QStringList& list) const

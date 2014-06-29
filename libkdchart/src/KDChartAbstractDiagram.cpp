@@ -366,10 +366,12 @@ void AbstractDiagram::doItemsLayout()
 }
 
 void AbstractDiagram::dataChanged( const QModelIndex &topLeft,
-                                   const QModelIndex &bottomRight )
+                                   const QModelIndex &bottomRight,
+                                   const QVector<int> &roles )
 {
     Q_UNUSED( topLeft );
     Q_UNUSED( bottomRight );
+    Q_UNUSED( roles );
     // We are still too dumb to do intelligent updates...
     setDataBoundariesDirty();
     scheduleDelayedItemsLayout();

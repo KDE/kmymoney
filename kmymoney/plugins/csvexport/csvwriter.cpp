@@ -438,7 +438,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
     //
     strCheckingAccountName = file->accountToCategory(chkAccntId);
   }
-  QString localeThousands = KGlobal::locale()->thousandsSeparator();  //  In case of clash with field separator
+  QString localeThousands = KLocale::global()->thousandsSeparator();  //  In case of clash with field separator
   str += QString("%1,%2,%3,%4,%5,%6,%7,%8").arg(strAccName).arg(strAction).arg(strAmount.remove(localeThousands)).arg(strQuantity).arg(strPrice).arg(strCheckingAccountName).arg(strMemo).arg(strStatus);
 
   QString date = t.postDate().toString(Qt::ISODate);

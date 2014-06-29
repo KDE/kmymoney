@@ -42,6 +42,7 @@
 #include <kconfig.h>
 #include <kmenu.h>
 #include <kiconloader.h>
+#include <kicon.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 
@@ -389,7 +390,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
       item->setText(4, i18nc("Finished schedule", "Finished"));
     } else {
       nextDueDate = schedule.adjustedNextDueDate();
-      item->setText(4, KGlobal::locale()->formatDate(schedule.adjustedNextDueDate(), KLocale::ShortDate));
+      item->setText(4, KLocale::global()->formatDate(schedule.adjustedNextDueDate(), KLocale::ShortDate));
     }
     item->setData(4, KScheduleTreeItem::OrderRole, QVariant(nextDueDate));
     item->setText(5, i18nc("Frequency of schedule", schedule.occurrenceToString().toLatin1()));

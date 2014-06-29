@@ -866,8 +866,8 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
           // maybe it's a textual date
           unsigned i = 1;
           while (i <= 12) {
-            if (KGlobal::locale()->calendar()->monthName(i, 2000).toLower() == *it_scanned
-                || KGlobal::locale()->calendar()->monthName(i, 2000, KCalendarSystem::ShortName).toLower() == *it_scanned)
+            if (KLocale::global()->calendar()->monthName(i, 2000).toLower() == *it_scanned
+                || KLocale::global()->calendar()->monthName(i, 2000, KCalendarSystem::ShortName).toLower() == *it_scanned)
               month = i;
             ++i;
           }

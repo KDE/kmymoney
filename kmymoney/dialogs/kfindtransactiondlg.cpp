@@ -45,6 +45,7 @@
 #include <kcombobox.h>
 #include <kstdguiitem.h>
 #include <kiconloader.h>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -57,7 +58,6 @@
 #include <kmymoneyglobalsettings.h>
 #include <register.h>
 #include <transaction.h>
-#include <ktoolinvocation.h>
 #include "ui_kfindtransactiondlgdecl.h"
 #include "ui_ksortoptiondlg.h"
 
@@ -967,7 +967,7 @@ void KFindTransactionDlg::slotShowHelp(void)
   if (anchor.isEmpty())
     anchor = QString("details.search");
 
-  KToolInvocation::invokeHelp(anchor);
+  KHelpClient::invokeHelp(anchor);
 }
 
 void KFindTransactionDlg::slotSortOptions(void)

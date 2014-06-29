@@ -75,9 +75,9 @@ void ModelSignalMapperConnector::columnsRemoved( const QModelIndex& parent, int 
     m_mapper.columnsRemoved( parent, start, end );
 }
 
-void ModelSignalMapperConnector::dataChanged( const QModelIndex& topLeft, const QModelIndex& bottomRight )
+void ModelSignalMapperConnector::dataChanged( const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int> &roles )
 {
-    m_mapper.dataChanged( topLeft, bottomRight );
+    m_mapper.dataChanged( topLeft, bottomRight, roles );
 }
 
 void ModelSignalMapperConnector::layoutChanged()

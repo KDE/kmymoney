@@ -34,6 +34,7 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
+#include <kicon.h>
 #include <klocale.h>
 #include <kglobal.h>
 #include <kiconloader.h>
@@ -256,8 +257,8 @@ QString KMyMoneyUtils::variableCSS(void)
 
 QString KMyMoneyUtils::findResource(const char* type, const QString& filename)
 {
-  QString language = KGlobal::locale()->language();
-  QString country = KGlobal::locale()->country();
+  QString language = KLocale::global()->language();
+  QString country = KLocale::global()->country();
   QString rc, mask;
 
   // check that the placeholder is present

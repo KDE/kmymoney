@@ -36,7 +36,7 @@
 #include <kstdguiitem.h>
 #include <knuminput.h>
 #include <klineedit.h>
-#include <KToolInvocation>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -570,7 +570,7 @@ void KEditScheduleDlg::updateTransactionsRemaining(void)
 
 void KEditScheduleDlg::slotShowHelp(void)
 {
-  KToolInvocation::invokeHelp("details.schedules.intro");
+  KHelpClient::invokeHelp("details.schedules.intro");
 }
 
 void KEditScheduleDlg::slotFilterPaymentType(int index)

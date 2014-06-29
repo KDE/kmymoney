@@ -2913,7 +2913,7 @@
   * Fixed crash when reading an encrypted file that does not contain
     the "kmm-encryption-key" is missing in the file (could happen when
     reading rather old files)
-  * replaced QDate::shortMonthName() with KGlobal::locale()->monthName()
+  * replaced QDate::shortMonthName() with KLocale::global()->monthName()
   * Only assign check numbers for scheduled payments, if payment type
     is 'write check'.
 

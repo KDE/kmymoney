@@ -71,8 +71,9 @@
 #include <klineedit.h>
 #include <kdebug.h>
 #include <knotification.h>
-#include <kdatetable.h> // for maximum re-use
+//#include <kdatetable.h> // for maximum re-use
 #include <kmenu.h>
+#include <kglobalsettings.h>
 
 #include <kcalendarsystem.h>
 
@@ -80,6 +81,10 @@
 // Project Includes
 
 #include "kmymoneydatetbl.h"
+
+/**
+* Validates user-entered dates.
+*/
 
 KDatePickerPrivateYearSelector::KDatePickerPrivateYearSelector(
   const KCalendarSystem *cal, const QDate &currentDate, QWidget* parent)
@@ -186,7 +191,7 @@ public:
 
   QDate validDateInYearMonth(int year, int month) {
     QDate newDate;
-    const KCalendarSystem* calendar = KGlobal::locale()->calendar();
+    const KCalendarSystem* calendar = KLocale::global()->calendar();
 
     // Try to create a valid date in this year and month
     // First try the first of the month, then try last of month
@@ -229,7 +234,8 @@ void kMyMoneyCalendar::init(const QDate &dt)
   selectMonth = new QToolButton(this);
   selectYear = new QToolButton(this);
   line = new KLineEdit(this);
-  val = new KDateValidator(this);
+  // TODO: port KF5
+  //val = new KDateValidator(this);
   fontsize = 10;
 
   d->selectWeek = new QToolButton(this);
@@ -250,7 +256,8 @@ void kMyMoneyCalendar::init(const QDate &dt)
 
   // -----
   setFontSize(10);
-  line->setValidator(val);
+  // TODO: port KF5
+  //line->setValidator(val);
   line->installEventFilter(this);
   yearForward->setIcon(QIcon(BarIcon("arrow-right-double")));
   yearBackward->setIcon(QIcon(BarIcon("arrow-left-double")));
@@ -370,7 +377,7 @@ void
 kMyMoneyCalendar::dateChangedSlot(const QDate& date)
 {
   kDebug() << "kMyMoneyCalendar::dateChangedSlot: date changed (" << date.year() << "/" << date.month() << "/" << date.day() << ").";
-  line->setText(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
+  line->setText(KLocale::global()->formatDate(date, KLocale::ShortDate));
   d->selectWeek->setText(i18n("Week %1", weekOfYear(date)));
   selectMonth->setText(MONTH_NAME(date.month(), date.year(), KCalendarSystem::ShortName));
   selectYear->setText(date.toString("yyyy"));
@@ -411,7 +418,7 @@ kMyMoneyCalendar::setDate(const QDate& date)
     selectMonth->setText(MONTH_NAME(date.month(), date.year(), KCalendarSystem::LongName));
     temp.setNum(date.year());
     selectYear->setText(temp);
-    line->setText(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
+    line->setText(KLocale::global()->formatDate(date, KLocale::ShortDate));
     return true;
   } else {
     kDebug() << "kMyMoneyCalendar::setDate: refusing to set invalid date.";
@@ -446,8 +453,9 @@ kMyMoneyCalendar::yearBackwardClicked()
 void
 kMyMoneyCalendar::selectWeekClicked()
 {
-  const KCalendarSystem* calendar = KGlobal::locale()->calendar();
+  const KCalendarSystem* calendar = KLocale::global()->calendar();
 
+#if 0
   KPopupFrame *popup = new KPopupFrame(this);
   KDatePickerPrivateWeekSelector *picker = new KDatePickerPrivateWeekSelector(calendar, date(), popup);
   picker->resize(picker->sizeHint());
@@ -477,13 +485,14 @@ kMyMoneyCalendar::selectWeekClicked()
     }
   }
   delete popup;
+#endif
 }
 
 void
 kMyMoneyCalendar::selectMonthClicked()
 {
   QMenu popup(selectMonth);
-  const KCalendarSystem* calendar = KGlobal::locale()->calendar();
+  const KCalendarSystem* calendar = KLocale::global()->calendar();
 
   // Populate the pick list with all the month names, this may change by year
   // JPL do we need to do somethng here for months that fall outside valid range?
@@ -525,8 +534,9 @@ void
 kMyMoneyCalendar::selectYearClicked()
 {
   QDate newDate;
-  const KCalendarSystem* calendar = KGlobal::locale()->calendar();
+  const KCalendarSystem* calendar = KLocale::global()->calendar();
 
+#if 0
   KPopupFrame *popup = new KPopupFrame(this);
   KDatePickerPrivateYearSelector *picker = new KDatePickerPrivateYearSelector(calendar, date(), popup);
   picker->resize(picker->sizeHint());
@@ -556,6 +566,7 @@ kMyMoneyCalendar::selectYearClicked()
     }
   }
   delete popup;
+#endif
 }
 
 void
@@ -580,6 +591,8 @@ kMyMoneyCalendar::lineEnterPressed()
 {
   QDate temp;
   // -----
+  // TODO: port KF5
+#if 0
   if (val->date(line->text(), temp) == QValidator::Acceptable) {
     kDebug() << "kMyMoneyCalendar::lineEnterPressed: valid date entered.";
     emit(dateEntered(temp));
@@ -588,6 +601,7 @@ kMyMoneyCalendar::lineEnterPressed()
     KNotification::beep();
     kDebug() << "kMyMoneyCalendar::lineEnterPressed: invalid date entered.";
   }
+#endif
 }
 
 QSize
@@ -766,4 +780,3 @@ void kMyMoneyCalendar::setUserButton2(bool enable, QPushButton* pb)
 
   updateGeometry();
 }
-

@@ -33,11 +33,14 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kconfig.h>
+#include <kconfiggroup.h>
 #include <kglobalsettings.h>
 #include <kpushbutton.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kfiledialog.h>
+#include <kicon.h>
+#include <kurl.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

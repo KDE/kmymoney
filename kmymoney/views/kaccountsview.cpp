@@ -33,7 +33,9 @@
 #include <KListWidget>
 #include <kdebug.h>
 #include <klocale.h>
+#include <kglobal.h>
 #include <kiconloader.h>
+#include <kicon.h>
 #include <kguiitem.h>
 #include <kpushbutton.h>
 #include <KToggleAction>

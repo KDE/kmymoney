@@ -40,8 +40,9 @@
 #include <ktextbrowser.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <ktoolinvocation.h>
+#include <khelpclient.h>
 #include <kfiledialog.h>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -97,7 +98,7 @@ bool KSelectDatabaseDlg::checkDrivers()
                                     i18n("No Qt SQL Drivers"),
                                     KStandardGuiItem::help(), KStandardGuiItem::cancel()))
         == KMessageBox::Yes) { // Yes stands in for help here
-      KToolInvocation::invokeHelp("details.database.usage");
+      KHelpClient::invokeHelp("details.database.usage");
     }
     return(false);
   }
@@ -222,5 +223,5 @@ void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
 
 void KSelectDatabaseDlg::slotHelp(void)
 {
-  KToolInvocation::invokeHelp("details.database.selectdatabase");
+  KHelpClient::invokeHelp("details.database.selectdatabase");
 }

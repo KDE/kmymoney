@@ -9,15 +9,15 @@ SET(kmm_reconciliationreport_PART_SRCS
     reconciliationreport.cpp
    )
 
-KDE4_ADD_UI_FILES(kmm_reconciliationreport_PART_SRCS kreconciliationreportdlgdecl.ui )
+qt5_wrap_ui(kmm_reconciliationreport_PART_SRCS kreconciliationreportdlgdecl.ui )
 
-KDE4_ADD_PLUGIN(kmm_reconciliationreport ${kmm_reconciliationreport_PART_SRCS})
+add_library(kmm_reconciliationreport MODULE ${kmm_reconciliationreport_PART_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_reconciliationreport
                       ${KDE4_KDEUI_LIBS}
-                      ${KDE4_KHTML_LIBS}
+                      KF5::KHtml
                       ${GMP_LIBRARIES} 
-                      ${LIBALKIMIA_LIBRARY}
+                      Alkimia::alkimia
                       kmm_mymoney kmm_plugin
                       )
 

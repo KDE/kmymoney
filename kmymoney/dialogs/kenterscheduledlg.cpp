@@ -33,6 +33,8 @@
 #include <kpushbutton.h>
 #include <kstdguiitem.h>
 #include <kiconloader.h>
+#include <kicon.h>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -48,7 +50,6 @@
 #include <kmymoneycategory.h>
 #include <kmymoneyaccountselector.h>
 #include <kmymoneydateinput.h>
-#include <ktoolinvocation.h>
 #include <kmymoneyglobalsettings.h>
 
 #include "kmymoney.h"
@@ -330,5 +331,5 @@ bool KEnterScheduleDlg::focusNextPrevChild(bool next)
 
 void KEnterScheduleDlg::slotShowHelp(void)
 {
-  KToolInvocation::invokeHelp("details.schedules.entering");
+  KHelpClient::invokeHelp("details.schedules.entering");
 }

@@ -19,6 +19,8 @@
 
 #include "kmymoneyreportconfigtabimpl.h"
 
+#include <klocalizedstring.h>
+
 #include "ui_kmymoneyreportconfigtab1decl.h"
 #include "ui_kmymoneyreportconfigtab2decl.h"
 #include "ui_kmymoneyreportconfigtab3decl.h"

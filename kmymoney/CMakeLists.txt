@@ -45,16 +45,16 @@ SET( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 
 ########### settings code (kmm_config) STATIC ###############
 SET( kmm_config_SRCS kmymoneyglobalsettings.cpp )
-KDE4_ADD_KCFG_FILES( kmm_config_SRCS kmymoneysettings.kcfgc )
-KDE4_ADD_LIBRARY(kmm_config STATIC ${kmm_config_SRCS})
+kconfig_add_kcfg_files( kmm_config_SRCS kmymoneysettings.kcfgc )
+add_library(kmm_config STATIC ${kmm_config_SRCS})
 
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney, kmymoneytest, and libkmymoney.so
 
 SET( kmymoney_common_SRCS kmymoneyutils.cpp kstartuplogo.cpp )
-KDE4_ADD_LIBRARY(kmymoney_common STATIC ${kmymoney_common_SRCS})
+add_library(kmymoney_common STATIC ${kmymoney_common_SRCS})
 TARGET_LINK_LIBRARIES(kmymoney_common
-  ${QT_AND_KDECORE_LIBS} ${KDEPIMLIBS_KHOLIDAYS_LIBS} ${GMP_LIBRARIES} ${LIBALKIMIA_LIBRARY} kmm_widgets kmm_mymoney)
+  Qt5::Core ${GMP_LIBRARIES} Alkimia::alkimia kmm_widgets kmm_mymoney)
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
@@ -67,17 +67,17 @@ SET( kmymoney_common_LIBS
   endingbalancedlg wizardpages
   dialogs widgets settings converter models kmm_config
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
-  ${QT_AND_KDECORE_LIBS} ${QT_QTSQL_LIBRARY}
-  ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDEPIMLIBS_KPIMIDENTITIES_LIBS} ${KDEPIMLIBS_AKONADI_CONTACT_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KUTILS_LIBRARY})
+  Qt5::Core Qt5::Sql
+  KF5::KHtml KF5::Archive KF5::Holidays)
 
 ########### kmymoney executable ###############
 
 SET( kmymoney_SRCS main.cpp kmymoney.cpp )
 
-QT4_ADD_DBUS_ADAPTOR(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
-KDE4_ADD_APP_ICON( kmymoney_SRCS hi*-app-kmymoney.png )
+qt5_add_dbus_adaptor(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
+#KDE4_ADD_APP_ICON( kmymoney_SRCS hi*-app-kmymoney.png )
 
-KDE4_ADD_EXECUTABLE( kmymoney ${kmymoney_SRCS} )
+add_executable( kmymoney ${kmymoney_SRCS} )
 TARGET_LINK_LIBRARIES( kmymoney ${kmymoney_common_LIBS} )
 
 ########### install files ###############
@@ -106,7 +106,9 @@ INSTALL(PROGRAMS kmymoney.appdata.xml
 INSTALL(FILES x-kmymoney.xml
   DESTINATION ${XDG_MIME_INSTALL_DIR})
 
-UPDATE_XDG_MIMETYPES(${XDG_MIME_INSTALL_DIR})
+#UPDATE_XDG_MIMETYPES(${XDG_MIME_INSTALL_DIR})
+
+include(ECMInstallIcons)
 
 ########## Application Icons #############
 INSTALL(DIRECTORY icons/hicolor
@@ -119,9 +121,11 @@ INSTALL(DIRECTORY icons/oxygen
   PATTERN "*Make*" EXCLUDE
   PATTERN ".svn" EXCLUDE
   )
-KDE4_INSTALL_ICONS(${ICON_INSTALL_DIR})
+ecm_install_icons(${ICON_INSTALL_DIR})
 
 ############## tests ####################
+include(ECMMarkAsTest)
+
 IF( KDE4_BUILD_TESTS )
 
   SET(target_link_libraries_test
@@ -129,22 +133,17 @@ IF( KDE4_BUILD_TESTS )
         kmymoney_common
         kmm_config
         widgets
-        ${KDE4_KHTML_LIBS}
-        ${KDE4_KDEUI_LIBS}
-        ${KDE4_KFILE_LIBS}
-        ${KDE4_KUTILS_LIBRARY}
-        ${QT_QTGUI_LIBRARY}
-        ${QT_QTXML_LIBRARY}
-        ${QT_QTCORE_LIBRARY}
-        ${QT_QTSQL_LIBRARY}
-        ${QT_QTTEST_LIBRARY}
-        ${GMP_LIBRARIES}
-        ${LIBALKIMIA_LIBRARY})
+        KF5::KHtml KF5::Archive KF5::Holidays
+        Qt5::Core Qt5::Sql Qt5::Test
+        Alkimia::alkimia)
 
   # KMyMoneyUtils
   SET( kmymoneyutilstest_SRCS kmymoneyutilstest.cpp )
 
-  KDE4_ADD_UNIT_TEST( kmymoneyutilstest TESTNAME kmymoney-utilstest ${kmymoneyutilstest_SRCS} )
+  add_executable( kmymoneyutilstest ${kmymoneyutilstest_SRCS} )
+  ecm_mark_as_test(kmymoneyutilstest)
+  add_test(kmymoney-utilstest kmymoneyutilstest)
+
   ADD_DEPENDENCIES( kmymoneyutilstest kmymoney_common kmm_mymoney )
   TARGET_LINK_LIBRARIES( kmymoneyutilstest ${target_link_libraries_test})
 

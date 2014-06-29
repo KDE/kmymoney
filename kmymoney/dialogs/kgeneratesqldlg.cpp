@@ -36,10 +36,10 @@
 
 #include <kapplication.h>
 #include <klocale.h>
-#include <ktoolinvocation.h>
 #include <kfiledialog.h>
 #include <kmessagebox.h>
 #include <kurlrequester.h>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -110,7 +110,7 @@ int  KGenerateSqlDlg::exec()
                                     i18n("No Qt SQL Drivers"),
                                     KStandardGuiItem::help(), KStandardGuiItem::cancel()))
         == KMessageBox::Yes) { // Yes stands in for help here
-      KToolInvocation::invokeHelp("details.database.usage");
+      KHelpClient::invokeHelp("details.database.usage");
     }
     return (1);
   }
@@ -258,5 +258,5 @@ void KGenerateSqlDlg::slotdriverSelected()
 
 void KGenerateSqlDlg::slotHelp(void)
 {
-  KToolInvocation::invokeHelp("details.database.generatesql");
+  KHelpClient::invokeHelp("details.database.generatesql");
 }

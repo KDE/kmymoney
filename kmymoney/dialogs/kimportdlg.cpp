@@ -40,6 +40,8 @@
 #include <kiconloader.h>
 #include <kio/netaccess.h>
 #include <kstandarddirs.h>
+#include <kconfiggroup.h>
+#include <kicon.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -107,11 +109,11 @@ void KImportDlg::slotBrowse()
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-import"),
       i18n("%1|Import files\n%2|All files", tmpprofile.filterFileType(), "*"),
       this);
-  dialog->setCaption(i18n("Import File..."));
+  dialog->setWindowTitle(i18n("Import File..."));
   dialog->setMode(KFile::File | KFile::ExistingOnly);
 
   if (dialog->exec() == QDialog::Accepted) {
-    m_qlineeditFile->setText(dialog->selectedUrl().pathOrUrl());
+    m_qlineeditFile->setText(KUrl(dialog->selectedUrl()).pathOrUrl());
   }
   delete dialog;
 }

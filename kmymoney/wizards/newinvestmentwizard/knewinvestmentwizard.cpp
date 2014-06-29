@@ -33,6 +33,7 @@
 #include <klocale.h>
 #include <kapplication.h>
 #include <kmessagebox.h>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -41,7 +42,6 @@
 #include "kmymoneyedit.h"
 #include "mymoneysecurity.h"
 #include "mymoneyfile.h"
-#include "ktoolinvocation.h"
 #include "kmymoneycurrencyselector.h"
 #include "webpricequote.h"
 #include "kmymoneyutils.h"
@@ -161,7 +161,7 @@ void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
 
 void KNewInvestmentWizard::slotHelp(void)
 {
-  KToolInvocation::invokeHelp("details.investments.newinvestmentwizard");
+  KHelpClient::invokeHelp("details.investments.newinvestmentwizard");
 }
 
 void KNewInvestmentWizard::createObjects(const QString& parentId)

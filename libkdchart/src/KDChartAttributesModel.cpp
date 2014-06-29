@@ -785,5 +785,6 @@ void AttributesModel::setDefaultForRole( int role, const QVariant& value )
         }
     }
 
-    Q_ASSERT( defaultsForRole( role ) == value );
+    // TODO: port KF5s
+    //Q_ASSERT( defaultsForRole( role ) == value );
 }

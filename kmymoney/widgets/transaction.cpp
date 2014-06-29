@@ -956,7 +956,7 @@ bool StdTransaction::formCellText(QString& txt, Qt::Alignment& align, int row, i
         case ValueColumn2:
           align |= Qt::AlignRight;
           if (m_transaction != MyMoneyTransaction())
-            txt = KGlobal::locale()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
+            txt = KLocale::global()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
           break;
       }
       break;
@@ -1044,7 +1044,7 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
 
         case DateColumn:
           align |= Qt::AlignLeft;
-          txt = KGlobal::locale()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
+          txt = KLocale::global()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
           break;
 
         case DetailColumn:
@@ -1494,7 +1494,7 @@ bool InvestTransaction::formCellText(QString& txt, Qt::Alignment& align, int row
           align |= Qt::AlignRight;
           fieldEditable = true;
           if (m_transaction != MyMoneyTransaction())
-            txt = KGlobal::locale()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
+            txt = KLocale::global()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
           break;
       }
       break;
@@ -1682,7 +1682,7 @@ void InvestTransaction::registerCellText(QString& txt, Qt::Alignment& align, int
       switch (col) {
         case DateColumn:
           align |= Qt::AlignLeft;
-          txt = KGlobal::locale()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
+          txt = KLocale::global()->formatDate(m_transaction.postDate(), KLocale::ShortDate);
           break;
 
         case DetailColumn:

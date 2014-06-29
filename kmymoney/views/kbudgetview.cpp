@@ -44,6 +44,7 @@
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 #include <kiconloader.h>
+#include <kicon.h>
 #include <kguiitem.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>
@@ -873,17 +874,6 @@ void KBudgetView::slotUpdateBudget(void)
     KMessageBox::detailedSorry(0, i18n("Unable to modify budget"),
                                i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
   }
-}
-
-void KBudgetView::languageChange(void)
-{
-  QWidget::languageChange();
-
-  m_newButton->setText(QString());
-  m_renameButton->setText(QString());
-  m_deleteButton->setText(QString());
-  m_updateButton->setText(QString());
-  m_resetButton->setText(QString());
 }
 
 void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney &balance)

@@ -24,8 +24,8 @@ SET(kmm_widgets_sources
   kmymoneydateinput.cpp
   )
 
-KDE4_ADD_LIBRARY(kmm_widgets SHARED ${kmm_widgets_sources})
-TARGET_LINK_LIBRARIES(kmm_widgets LINK_PUBLIC ${KDE4_KDEUI_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDECORE_LIBS})
+add_library(kmm_widgets SHARED ${kmm_widgets_sources})
+TARGET_LINK_LIBRARIES(kmm_widgets PUBLIC KF5::I18n KF5::KDELibs4Support Qt5::Gui Qt5::Core )
 SET_TARGET_PROPERTIES(kmm_widgets PROPERTIES
    COMPILE_FLAGS "-DKMM_BUILD_WIDGETS_LIB"
    VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
@@ -77,7 +77,7 @@ SET (kmymoney_base_UI
   kbudgetvaluesdecl.ui transactionsortoptiondecl.ui kaccounttemplateselectordecl.ui
   )
 
-KDE4_ADD_UI_FILES(kmymoney_base_ui_srcs ${kmymoney_base_UI})
+qt5_wrap_ui(kmymoney_base_ui_srcs ${kmymoney_base_UI})
 SET(_uncritial_common_sources ${_uncritial_common_sources}
   ${kmymoney_base_ui_srcs})
 
@@ -88,7 +88,7 @@ ADD_CUSTOM_TARGET(generate_base_ui_srcs DEPENDS
   ${kmymoney_base_ui_srcs})
 
 # We can compile the uncritical sources without KMM_DESIGNER flags
-KDE4_ADD_LIBRARY(kmymoney_base STATIC ${_uncritial_common_sources})
+add_library(kmymoney_base STATIC ${_uncritial_common_sources})
 
 ADD_DEPENDENCIES(kmymoney_base kmm_config)
 
@@ -105,7 +105,7 @@ IF( USE_QT_DESIGNER )
     ${_critial_common_sources}
     ${kmymoneywidgets_PART_SRCS})
 
-  KDE4_ADD_PLUGIN(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
+  add_library(kmymoneywidgets MODULE ${kmymoneywidgets_PART_SRCS})
 
   INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
@@ -113,7 +113,7 @@ IF( USE_QT_DESIGNER )
   SET_TARGET_PROPERTIES(kmymoneywidgets PROPERTIES
     COMPILE_FLAGS "-DKMM_DESIGNER")
 
-  TARGET_LINK_LIBRARIES(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_config dialogs models converter ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+  TARGET_LINK_LIBRARIES(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_config dialogs models converter  ${KDE4_KDEUI_LIBS})
 
   INSTALL(TARGETS kmymoneywidgets DESTINATION ${QT_PLUGINS_DIR}/designer )
 ENDIF( USE_QT_DESIGNER )
@@ -144,10 +144,10 @@ SET(libwidgets_a_UI
 # of undefined type `struct KMyMoneyGeneralCombo'"
 
 
-kde4_add_ui_files(widgets_ui_srcs ${libwidgets_a_UI})
+qt5_wrap_ui(widgets_ui_srcs ${libwidgets_a_UI})
 ADD_CUSTOM_TARGET(generate_widgets_ui_srcs DEPENDS ${widgets_ui_srcs})
 
-KDE4_ADD_LIBRARY(widgets STATIC
+add_library(widgets STATIC
   ${libwidgets_a_SOURCES}
   ${widgets_ui_srcs}
   )

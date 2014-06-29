@@ -10,8 +10,6 @@
 # Redistribution and use is allowed according to the terms of the BSD license.
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 
-include(MacroEnsureVersion)
-
 set(LIBICAL_FOUND FALSE)
 
 if(NOT LIBICAL_MIN_VERSION)
@@ -66,14 +64,13 @@ if(LIBICAL_INCLUDE_DIRS AND LIBICAL_LIBRARIES)
 
   if(COMPILE_RESULT AND RUN_RESULT EQUAL 1)
     message(STATUS "Found Libical version ${LIBICAL_VERSION}")
-    macro_ensure_version2(${LIBICAL_MIN_VERSION} ${LIBICAL_VERSION} LIBICAL_VERSION_OK)
-    if(NOT LIBICAL_VERSION_OK)
+    if(${LIBICAL_VERSION} VERSION_LESS ${LIBICAL_MIN_VERSION})
       message(STATUS "Libcal version ${LIBICAL_VERSION} is too old. At least version ${LIBICAL_MIN_VERSION} is needed.")
       set(LIBICAL_INCLUDE_DIRS "")
       set(LIBICAL_LIBRARIES "")
-    else(NOT LIBICAL_VERSION_OK)
+    else(${LIBICAL_VERSION} VERSION_LESS ${LIBICAL_MIN_VERSION})
       set(LIBICAL_FOUND TRUE)
-    endif(NOT LIBICAL_VERSION_OK)
+    endif(${LIBICAL_VERSION} VERSION_LESS ${LIBICAL_MIN_VERSION})
   else(COMPILE_RESULT AND RUN_RESULT EQUAL 1)
     message(FATAL_ERROR "Unable to compile or run the libical version detection program.")
   endif(COMPILE_RESULT AND RUN_RESULT EQUAL 1)

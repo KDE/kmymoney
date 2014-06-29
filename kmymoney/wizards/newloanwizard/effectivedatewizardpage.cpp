@@ -24,6 +24,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <kglobal.h>
+#include <klocalizedstring.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -44,7 +46,7 @@ void EffectiveDateWizardPage::initializePage()
   m_effectiveDateLabel->setText(QString("\n") + i18n(
                                   "Please enter the date from which on the following changes will be effective. "
                                   "The date entered must be later than the opening date of this account (%1), but must "
-                                  "not be in the future. The default will be today.", KGlobal::locale()->formatDate(qobject_cast<KNewLoanWizard*>(wizard())->account().openingDate())));
+                                  "not be in the future. The default will be today.", KLocale::global()->formatDate(qobject_cast<KNewLoanWizard*>(wizard())->account().openingDate())));
 }
 
 /**

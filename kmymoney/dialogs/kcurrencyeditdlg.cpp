@@ -40,6 +40,7 @@
 // KDE Includes
 
 #include <klocale.h>
+#include <kicon.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

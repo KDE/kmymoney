@@ -34,6 +34,8 @@
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kmessagebox.h>
+#include <kglobal.h>
+#include <kicon.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -185,7 +187,7 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
     priceTreeItem->setText(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : m_stockNameMap.value(from.id()));
     priceTreeItem->setToolTip(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : m_stockNameMap.value(from.id()));
     priceTreeItem->setText(KPriceTreeItem::ePriceCurrency, to.id());
-    priceTreeItem->setText(KPriceTreeItem::ePriceDate, KGlobal::locale()->formatDate(price.date(), KLocale::ShortDate));
+    priceTreeItem->setText(KPriceTreeItem::ePriceDate, KLocale::global()->formatDate(price.date(), KLocale::ShortDate));
     priceTreeItem->setData(KPriceTreeItem::ePriceDate, KPriceTreeItem::OrderRole, QVariant(price.date()));
     priceTreeItem->setText(KPriceTreeItem::ePricePrice, price.rate(priceBase).formatMoney("", m_pricePrecision));
     priceTreeItem->setTextAlignment(KPriceTreeItem::ePricePrice, Qt::AlignRight | Qt::AlignVCenter);

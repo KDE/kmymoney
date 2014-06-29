@@ -41,9 +41,9 @@ SET (libnewloanwizard_a_UI
   lendborrowwizardpagedecl.ui
 	)
 
-kde4_add_ui_files(libnewloanwizard_a_SOURCES ${libnewloanwizard_a_UI} )
+qt5_wrap_ui(libnewloanwizard_a_SOURCES ${libnewloanwizard_a_UI} )
 
-KDE4_ADD_LIBRARY(newloanwizard STATIC ${libnewloanwizard_a_SOURCES})
+add_library(newloanwizard STATIC ${libnewloanwizard_a_SOURCES})
 
 # we rely on some dialogs to be generated
 ADD_DEPENDENCIES(newloanwizard dialogs)

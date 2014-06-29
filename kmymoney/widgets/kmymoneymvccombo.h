@@ -126,12 +126,12 @@ protected:
   /**
     * Overridden for internal reasons, no API change
     */
-  void connectNotify(const char* signal);
+  void connectNotify(const QMetaMethod & signal);
 
   /**
     * Overridden for internal reasons, no API change
     */
-  void disconnectNotify(const char* signal);
+  void disconnectNotify(const QMetaMethod & signal);
 
   /**
     * overridden for internal reasons, no API change

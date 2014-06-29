@@ -27,6 +27,7 @@
 
 #include <KLineEdit>
 #include <KMessageBox>
+#include <KUrl>
 
 // ----------------------------------------------------------------------------
 // Project Includes

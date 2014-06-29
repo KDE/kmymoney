@@ -1275,7 +1275,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     else if (m_columnTypeList[i] == "price") {      //              Price Col
       ++neededFieldsCount;
       txt = m_csvDialog->m_pageInvestment->ui->comboBoxInv_priceFraction->currentText(); //fraction
-      txt = txt.replace(m_csvDialog->decimalSymbol(), KGlobal::locale()->decimalSymbol());
+      txt = txt.replace(m_csvDialog->decimalSymbol(), KLocale::global()->decimalSymbol());
       MyMoneyMoney fraction = MyMoneyMoney(txt);
       txt = m_columnList[i].remove('"');  //                     price
       newTxt = m_parse->possiblyReplaceSymbol(txt);
@@ -2116,7 +2116,7 @@ void InvestProcessing::redrawWindow(int startLine)
   //
   //  Align numeric column values
   //
-  QString pattern = QString("[%1(), $]").arg(KGlobal::locale()->currencySymbol());
+  QString pattern = QString("[%1(), $]").arg(KLocale::global()->currencySymbol());
 
   for (int row = 0; row < m_csvDialog->ui->tableWidget->rowCount(); row++) {
     m_csvDialog->ui->tableWidget->setRowHeight(row, 30);

@@ -629,8 +629,8 @@ void QueryTableTest::testBalanceColumn()
     QVERIFY(rows.count() == 16);
 
     //this is to make sure that the dates of closing and opening balances and the balance numbers are ok
-    QString openingDate = KGlobal::locale()->formatDate(QDate(2004, 1, 1), KLocale::ShortDate);
-    QString closingDate = KGlobal::locale()->formatDate(QDate(2005, 9, 1), KLocale::ShortDate);
+    QString openingDate = KLocale::global()->formatDate(QDate(2004, 1, 1), KLocale::ShortDate);
+    QString closingDate = KLocale::global()->formatDate(QDate(2005, 9, 1), KLocale::ShortDate);
     QVERIFY(html.indexOf(openingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Opening Balance")) > 0);
     QVERIFY(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-702.36</td></tr>") > 0);
     QVERIFY(html.indexOf(closingDate + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;-705.69</td></tr>") > 0);
@@ -691,9 +691,9 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
     QVERIFY(rows.count() == 18);
 
     //this is to make sure that the dates of closing and opening balances and the balance numbers are ok
-    QString openingDateString = KGlobal::locale()->formatDate(openingDate, KLocale::ShortDate);
-    QString intermediateDateString = KGlobal::locale()->formatDate(intermediateDate, KLocale::ShortDate);
-    QString closingDateString = KGlobal::locale()->formatDate(closingDate, KLocale::ShortDate);
+    QString openingDateString = KLocale::global()->formatDate(openingDate, KLocale::ShortDate);
+    QString intermediateDateString = KLocale::global()->formatDate(intermediateDate, KLocale::ShortDate);
+    QString closingDateString = KLocale::global()->formatDate(closingDate, KLocale::ShortDate);
     // check the opening and closing balances
     QVERIFY(html.indexOf(openingDateString + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Opening Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;0.00</td></tr>") > 0);
     QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left\"></td><td class=\"left\">" + i18n("Closing Balance") + "</td><td class=\"left\"></td><td class=\"value\"></td><td>&nbsp;304.00</td></tr>") > 0);

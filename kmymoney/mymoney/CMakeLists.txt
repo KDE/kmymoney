@@ -32,17 +32,17 @@ SET(mymoney_HEADERS kmm_mymoney_export.h
   imymoneyprocessingcalendar.h
   )
 
-KDE4_ADD_LIBRARY(kmm_mymoney SHARED ${kmm_mymoney_LIB_SRCS})
+add_library(kmm_mymoney SHARED ${kmm_mymoney_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(kmm_mymoney LINK_PUBLIC
-                      ${KDE4_KDEUI_LIBS}
-                      ${QT_QTGUI_LIBRARY}
-                      ${QT_QTXML_LIBRARY}
-                      ${QT_QTCORE_LIBRARY}
-                      ${KDE4_KDECORE_LIBS}
-                      ${KDE4_KIO_LIBS}
+TARGET_LINK_LIBRARIES(kmm_mymoney PUBLIC
+                      PUBLIC
+                      Qt5::Gui
+                      Qt5::Xml
+                      Qt5::Core
+                      KF5::KIOWidgets
+                      KF5::KDELibs4Support
                       ${GMP_LIBRARIES}
-                      ${LIBALKIMIA_LIBRARY}
+                      Alkimia::alkimia
                       kmm_storage)
 
 SET_TARGET_PROPERTIES(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
@@ -59,12 +59,12 @@ INSTALL(FILES ${mymoney_HEADERS}
 IF( KDE4_BUILD_TESTS )
 
   set(target_link_libraries_test 
-	  ${QT_QTGUI_LIBRARY}
-	  ${QT_QTXML_LIBRARY}
- 	  ${QT_QTCORE_LIBRARY}
-	  ${QT_QTTEST_LIBRARY}
+	  Qt5::Gui
+	  Qt5::Xml
+	  Qt5::Core
+	  Qt5::Test
 	  ${GMP_LIBRARIES}
-	  ${LIBALKIMIA_LIBRARY})
+	  Alkimia::alkimia)
 
   # MyMoneyAccount
   set( mymoneyaccounttest_SRCS mymoneyaccounttest.cpp )

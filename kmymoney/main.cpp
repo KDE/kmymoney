@@ -34,8 +34,9 @@
 // KDE Includes
 
 #include <kcmdlineargs.h>
-#include <kaboutdata.h>
+#include <k4aboutdata.h>
 #include <klocale.h>
+#include <kglobal.h>
 #include <ktip.h>
 #include <kmessagebox.h>
 #include <kapplication.h>
@@ -68,8 +69,8 @@ int main(int argc, char *argv[])
   if (!feature.isEmpty())
     feature = I18N_NOOP("Compiled with the following settings:\n") + feature;
 
-  KAboutData aboutData("kmymoney", 0, ki18n("KMyMoney"),
-                       VERSION, ki18n("\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions."), KAboutData::License_GPL,
+  K4AboutData aboutData("kmymoney", 0, ki18n("KMyMoney"),
+                       VERSION, ki18n("\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions."), K4AboutData::License_GPL,
                        ki18n("(c) 2000-2012 The KMyMoney development team"), /*feature*/KLocalizedString(),
                        I18N_NOOP("http://kmymoney.org/")/*,
                                                       "kmymoney-devel@kde.org")*/);
@@ -119,7 +120,7 @@ int main(int argc, char *argv[])
 
   KApplication* a = new KApplication();
 
-  if (KGlobal::locale()->monetaryDecimalSymbol().isEmpty()) {
+  if (KLocale::global()->monetaryDecimalSymbol().isEmpty()) {
     KMessageBox::error(0, i18n("The monetary decimal symbol is not correctly set in the KDE System Settings module Country/Region & Language. Please set it to a reasonable value and start KMyMoney again."), i18n("Invalid settings"));
     delete a;
     exit(1);
@@ -132,16 +133,16 @@ int main(int argc, char *argv[])
   args = KCmdLineArgs::parsedArgs();
 
   // setup the MyMoneyMoney locale settings according to the KDE settings
-  MyMoneyMoney::setThousandSeparator(KGlobal::locale()->monetaryThousandsSeparator()[0]);
-  MyMoneyMoney::setDecimalSeparator(KGlobal::locale()->monetaryDecimalSymbol()[0]);
-  MyMoneyMoney::setNegativeMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KGlobal::locale()->negativeMonetarySignPosition()));
-  MyMoneyMoney::setPositiveMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KGlobal::locale()->positiveMonetarySignPosition()));
-  MyMoneyMoney::setNegativePrefixCurrencySymbol(KGlobal::locale()->negativePrefixCurrencySymbol());
-  MyMoneyMoney::setPositivePrefixCurrencySymbol(KGlobal::locale()->positivePrefixCurrencySymbol());
+  MyMoneyMoney::setThousandSeparator(KLocale::global()->monetaryThousandsSeparator()[0]);
+  MyMoneyMoney::setDecimalSeparator(KLocale::global()->monetaryDecimalSymbol()[0]);
+  MyMoneyMoney::setNegativeMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->negativeMonetarySignPosition()));
+  MyMoneyMoney::setPositiveMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->positiveMonetarySignPosition()));
+  MyMoneyMoney::setNegativePrefixCurrencySymbol(KLocale::global()->negativePrefixCurrencySymbol());
+  MyMoneyMoney::setPositivePrefixCurrencySymbol(KLocale::global()->positivePrefixCurrencySymbol());
 
   QString language = args->getOption("lang");
   if (!language.isEmpty()) {
-    if (!KGlobal::locale()->setLanguage(QStringList() << language)) {
+    if (!KLocale::global()->setLanguage(QStringList() << language)) {
       qWarning("Unable to select language '%s'. This has one of two reasons:\n\ta) the standard KDE message catalog is not installed\n\tb) the KMyMoney message catalog is not installed", qPrintable(language));
     }
   }

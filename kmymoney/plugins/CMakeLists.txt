@@ -1,22 +1,22 @@
 ADD_SUBDIRECTORY( interfaces )
 
-ADD_SUBDIRECTORY( csvimport )
+#ADD_SUBDIRECTORY( csvimport )
 
-ADD_SUBDIRECTORY( csvexport )
+#ADD_SUBDIRECTORY( csvexport )
 
 if(LIBOFX_FOUND)
-  ADD_SUBDIRECTORY( ofximport )
+  #ADD_SUBDIRECTORY( ofximport )
 endif(LIBOFX_FOUND)
 
 IF (LIBICAL_FOUND)
-  ADD_SUBDIRECTORY( icalendarexport )
+  #ADD_SUBDIRECTORY( icalendarexport )
 ENDIF (LIBICAL_FOUND)
 
-ADD_SUBDIRECTORY( reconciliationreport )
-ADD_SUBDIRECTORY( printcheck )
+#ADD_SUBDIRECTORY( reconciliationreport )
+#ADD_SUBDIRECTORY( printcheck )
 
 IF (KBANKING_FOUND)
-  ADD_SUBDIRECTORY( kbanking )
+  #ADD_SUBDIRECTORY( kbanking )
 ENDIF (KBANKING_FOUND)
 
 option(ENABLE_SQLCIPHER "Enable SQLCipher plugin" OFF)
@@ -36,8 +36,8 @@ SET(plugins_HEADERS
   importinterface.h kmymoneyplugin.h pluginloader.h
   statementinterface.h viewinterface.h kmm_plugin_export.h)
 
-KDE4_ADD_LIBRARY(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
-TARGET_LINK_LIBRARIES(kmm_plugin LINK_PUBLIC ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KUTILS_LIBS} ${GMP_LIBRARIES} ${LIBALKIMIA_LIBRARY})
+add_library(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
+TARGET_LINK_LIBRARIES(kmm_plugin PUBLIC KF5::KCMUtils KF5::KIOWidgets KF5::XmlGui kmm_mymoney ${GMP_LIBRARIES} Alkimia::alkimia)
 
 SET_TARGET_PROPERTIES(kmm_plugin PROPERTIES VERSION ${GENERIC_LIB_VERSION}  SOVERSION ${GENERIC_LIB_SOVERSION} )
 

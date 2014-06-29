@@ -23,6 +23,8 @@
 // KDE Includes
 
 #include <kdeversion.h>
+#include <klocale.h>
+#include <klocalizedstring.h>
 #include <KStandardDirs>
 #include <KHolidays/Holidays>
 using namespace KHolidays;
@@ -54,7 +56,7 @@ void KSettingsSchedules::loadList(void)
 
   foreach (const QString &regionCode, regionCodes) {
     QString regionName = HolidayRegion::name(regionCode);
-    QString languageName = KGlobal::locale()->languageCodeToName(HolidayRegion::languageCode(regionCode));
+    QString languageName = KLocale::global()->languageCodeToName(HolidayRegion::languageCode(regionCode));
     QString region;
     if (languageName.isEmpty())
       region = regionName;

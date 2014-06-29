@@ -31,7 +31,7 @@
 #include <kurlrequester.h>
 #include <ktextbrowser.h>
 #include <klocale.h>
-#include <ktoolinvocation.h>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -108,5 +108,5 @@ QTextCodec* KGncImportOptionsDlg::decodeOption(void)
 
 void KGncImportOptionsDlg::slotHelp(void)
 {
-  KToolInvocation::invokeHelp("details.impexp.gncoptions");
+  KHelpClient::invokeHelp("details.impexp.gncoptions");
 }

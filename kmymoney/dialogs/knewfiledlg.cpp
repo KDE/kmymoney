@@ -31,13 +31,14 @@
 #include <kstdguiitem.h>
 #include <kpushbutton.h>
 #include <kmessagebox.h>
+#if 0
 #include <KPIMIdentities/IdentityManager>
 #include <KPIMIdentities/Identity>
 #include <akonadi/recursiveitemfetchjob.h>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/Collection>
 #include <KABC/Addressee>
-
+#endif
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -82,11 +83,12 @@ void KNewFileDlg::init(const QString& title)
   if (!title.isEmpty())
     setWindowTitle(title);
 
+#if 0
   KPIMIdentities::IdentityManager im;
   KPIMIdentities::Identity id = im.defaultIdentity();
   if (!id.isNull())
     showLoadButton = true;
-
+#endif
   if (!showLoadButton)
     d->ui.kabcBtn->hide();
 
@@ -117,6 +119,7 @@ void KNewFileDlg::okClicked()
 
 void KNewFileDlg::loadFromAddressBook(void)
 {
+#if 0
   KPIMIdentities::IdentityManager im;
   KPIMIdentities::Identity id = im.defaultIdentity();
   if (id.isNull() || id.primaryEmailAddress().isEmpty()) {
@@ -134,10 +137,12 @@ void KNewFileDlg::loadFromAddressBook(void)
 
   d->ui.userNameEdit->setText(id.fullName());
   d->ui.emailEdit->setText(id.primaryEmailAddress());
+#endif
 }
 
 void KNewFileDlg::searchContactResult(KJob *job)
 {
+#if 0
   const Akonadi::RecursiveItemFetchJob *contactJob = qobject_cast<Akonadi::RecursiveItemFetchJob*>(job);
   Akonadi::Item::List items;
   if (contactJob)
@@ -157,6 +162,7 @@ void KNewFileDlg::searchContactResult(KJob *job)
     }
   }
   d->ui.kabcBtn->setEnabled(true);
+#endif
 }
 
 KPushButton* KNewFileDlg::cancelButton(void)

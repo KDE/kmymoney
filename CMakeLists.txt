@@ -2,7 +2,7 @@
 PROJECT(KMyMoney)
 
 # The CMake version we require
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.6)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 
 # Automoc all sources
 set(CMAKE_AUTOMOC TRUE)
@@ -27,8 +27,8 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
 
 # The current version of KMyMoney (used for packages and config.h)
 SET(VERSION_MAJOR "4")
-SET(VERSION_MINOR "6")
-SET(VERSION_PATCH "90")
+SET(VERSION_MINOR "100")
+SET(VERSION_PATCH "0")
 
 # Determine the GIT reference (if we're based on GIT)
 IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git AND CMAKE_SYSTEM_NAME MATCHES Linux)
@@ -48,29 +48,18 @@ ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git AND CMAKE_SYSTEM_NAME MATCHES Linu
 
 ######################### General Requirements ##########################
 
-# setup default CMAKE_INSTALL_PREFIX before calling FIND_PACKAGE(KDE4)
-# see https://bugs.kde.org/show_bug.cgi?id=261132
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  execute_process(COMMAND kde4-config --prefix COMMAND tr -d "\n" OUTPUT_VARIABLE KDE4_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "${KDE4_INSTALL_PREFIX}" CACHE PATH
-    "KMyMoney install prefix defaults to the KDE4 install prefix: ${KDE4_INSTALL_PREFIX}" FORCE)
-endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+find_package(ECM 0.0.11 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
-FIND_PACKAGE(KDE4 4.6.0 REQUIRED)
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings)
+include(FeatureSummary)
 
-include( KDE4Defaults )
-include( MacroLibrary )
+find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons Config KHtml KDELibs4Support Completion KCMUtils ItemViews Holidays Gpgmepp QGpgme)
+
 include( KMyMoneyMacros )
-# needed by libkgpgfile
-if (WIN32)
-  find_package(Boost "1.33.1")
-else (WIN32)
-  find_package(Boost "1.33.1" COMPONENTS graph)
-endif (WIN32)
-# needed by libkgpgfile
-find_package(QGpgme REQUIRED)
-find_package(KdepimLibs REQUIRED)
-find_package(SharedMimeInfo REQUIRED)
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
@@ -83,7 +72,8 @@ endif()
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
 
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}" )
+#set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations -Wno-overloaded-virtual" )
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations" )
 
 # check for Doxygen
 FIND_PACKAGE(Doxygen)
@@ -290,10 +280,10 @@ ENDIF(USE_HTML_HANDBOOK)
 ADD_SUBDIRECTORY( libkgpgfile )
 ADD_SUBDIRECTORY( libkdchart )
 ADD_SUBDIRECTORY( kmymoney )
-ADD_SUBDIRECTORY( doc )
-IF (USE_DEVELOPER_DOC)
-  ADD_SUBDIRECTORY( developer-doc )
-ENDIF (USE_DEVELOPER_DOC)
+#ADD_SUBDIRECTORY( doc )
+#IF (USE_DEVELOPER_DOC)
+#  ADD_SUBDIRECTORY( developer-doc )
+#ENDIF (USE_DEVELOPER_DOC)
 
 #CONFIGURE_FILE(
 #  "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
@@ -332,7 +322,7 @@ INCLUDE(CPack)
 
 ##### RPM Setup (.rpm and .srpm) #####
 # We use cmake/modules/UseRPMTools.cmake for RPM creation
-INCLUDE(UseRPMTools)
+#INCLUDE(UseRPMTools)
 IF(RPMTools_FOUND)
   SET(RPM_VERSION_SUFFIX  ${VERSION_SUFFIX})
   IF(${RPM_VERSION_SUFFIX} MATCHES "-.*")

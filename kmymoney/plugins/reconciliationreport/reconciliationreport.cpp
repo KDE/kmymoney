@@ -113,7 +113,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   QString reportName = i18n("Reconciliation report of account %1", account.name());
   QString report = QString("<h2 class=\"report\">%1</h2>\n").arg(reportName);
   report += QString("<div class=\"subtitle\">");
-  report += QString("%1").arg(KGlobal::locale()->formatDate(date, KLocale::ShortDate));
+  report += QString("%1").arg(KLocale::global()->formatDate(date, KLocale::ShortDate));
   report += QString("</div>\n");
   report += QString("<div class=\"gap\">&nbsp;</div>\n");
   report += QString("<div class=\"subtitle\">");
@@ -173,7 +173,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   report += "</td></tr>";
   // row 8
   report += "<tr class=\"row-even\"><td class=\"left\">";
-  report += i18n("Register balance as of %1", KGlobal::locale()->formatDate(date, KLocale::ShortDate));
+  report += i18n("Register balance as of %1", KLocale::global()->formatDate(date, KLocale::ShortDate));
   report += "</td><td>";
   report += MyMoneyUtils::formatMoney(MyMoneyFile::instance()->balance(account.id(), date), currency);
   report += "</td></tr>";
@@ -206,13 +206,13 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
 
   // row 9
   report += "<tr class=\"row-odd\"><td class=\"left\">";
-  report += i18np("%1 payment after %2", "%1 payments after %2", afterPayments, KGlobal::locale()->formatDate(date, KLocale::ShortDate));
+  report += i18np("%1 payment after %2", "%1 payments after %2", afterPayments, KLocale::global()->formatDate(date, KLocale::ShortDate));
   report += "</td><td>";
   report += MyMoneyUtils::formatMoney(afterPaymentAmount, currency);
   report += "</td></tr>";
   // row 10
   report += "<tr class=\"row-even\"><td class=\"left\">";
-  report += i18np("%1 deposit after %2", "%1 deposits after %2", afterDeposits, KGlobal::locale()->formatDate(date, KLocale::ShortDate));
+  report += i18np("%1 deposit after %2", "%1 deposits after %2", afterDeposits, KLocale::global()->formatDate(date, KLocale::ShortDate));
   report += "</td><td>";
   report += MyMoneyUtils::formatMoney(afterDepositAmount, currency);
   report += "</td></tr>";
@@ -254,7 +254,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
       }
 
       detailsReport += QString("<tr class=\"%1\"><td>").arg((index++ % 2 == 1) ? "row-odd" : "row-even");
-      detailsReport += QString("%1").arg(KGlobal::locale()->formatDate((*it).first.entryDate(), KLocale::ShortDate));
+      detailsReport += QString("%1").arg(KLocale::global()->formatDate((*it).first.entryDate(), KLocale::ShortDate));
       detailsReport += "</td><td>";
       detailsReport += QString("%1").arg((*it).second.number());
       detailsReport += "</td><td>";
@@ -290,7 +290,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
       }
 
       detailsReport += QString("<tr class=\"%1\"><td>").arg((index++ % 2 == 1) ? "row-odd" : "row-even");
-      detailsReport += QString("%1").arg(KGlobal::locale()->formatDate((*it).first.entryDate(), KLocale::ShortDate));
+      detailsReport += QString("%1").arg(KLocale::global()->formatDate((*it).first.entryDate(), KLocale::ShortDate));
       detailsReport += "</td><td>";
       detailsReport += QString("%1").arg((*it).second.number());
       detailsReport += "</td><td>";

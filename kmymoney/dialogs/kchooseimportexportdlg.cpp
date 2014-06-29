@@ -35,6 +35,7 @@
 #include <kconfig.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
+#include <kconfiggroup.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

@@ -142,7 +142,7 @@ void KMMPrintCheckPlugin::slotPrintCheck(void)
     checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
     checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
     // data about the transaction
-    checkHTML.replace("$DATE", KGlobal::locale()->formatDate(QDate::currentDate(), KLocale::LongDate));
+    checkHTML.replace("$DATE", KLocale::global()->formatDate(QDate::currentDate(), KLocale::LongDate));
     checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
     checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
     checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());

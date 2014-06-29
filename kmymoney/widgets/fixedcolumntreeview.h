@@ -22,7 +22,7 @@
 #ifndef FIXEDCOLUMNTREEVIEW_H
 #define FIXEDCOLUMNTREEVIEW_H
 
-#include <QtGui/QTreeView>
+#include <QTreeView>
 
 /**
   * This tree view should be used together with a source

@@ -34,6 +34,7 @@ email                : mte@users.sourceforge.net
 #include <kfiledialog.h>
 #include <kinputdialog.h>
 #include <kurl.h>
+#include <kicon.h>
 #ifndef _GNCFILEANON
 #include <klocale.h>
 #include <kconfig.h>

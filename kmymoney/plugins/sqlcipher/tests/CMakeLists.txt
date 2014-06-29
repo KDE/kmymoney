@@ -24,9 +24,9 @@
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 set (LIBRARIES
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTTEST_LIBRARY}
-  ${QT_QTSQL_LIBRARY}
+  Qt5::Core
+  Qt5::Test
+  Qt5::Sql
 )
 
 set( sqlcipherdriverinstalltest_SRCS

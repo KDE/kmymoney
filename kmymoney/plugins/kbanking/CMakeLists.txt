@@ -22,7 +22,7 @@ SET(kmm_kbanking_PART_SRCS
     banking.cpp
     )
 
-KDE4_ADD_PLUGIN(kmm_kbanking ${kmm_kbanking_PART_SRCS})
+add_library(kmm_kbanking MODULE ${kmm_kbanking_PART_SRCS})
 
 TARGET_LINK_LIBRARIES(kmm_kbanking
                       kmm_kbanking_dialogs
@@ -35,7 +35,7 @@ TARGET_LINK_LIBRARIES(kmm_kbanking
                       ${GWENHYWFAR_LIBRARIES}
                       ${AQBANKING_LIBRARIES}
                       ${GMP_LIBRARIES}
-                      ${LIBALKIMIA_LIBRARY}
+                      Alkimia::alkimia
                       )
 
 ########### install files ###############

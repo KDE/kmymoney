@@ -1683,7 +1683,7 @@ void CSVDialog::redrawWindow(int startLine)
   //
   //  Align numeric column values
   //
-  QString pattern = QString("[%1(), $]").arg(KGlobal::locale()->currencySymbol());
+  QString pattern = QString("[%1(), $]").arg(KLocale::global()->currencySymbol());
   for (int row = 0; row < ui->tableWidget->rowCount(); row++) {
     ui->tableWidget->setRowHeight(row, 30);
     for (int col = 0; col < ui->tableWidget->columnCount(); col ++) {
@@ -3700,7 +3700,7 @@ bool LinesDatePage::validatePage()
 {
   bool ok;
   QString value;
-  QString pattern = QString("[%1(), $]").arg(KGlobal::locale()->currencySymbol());
+  QString pattern = QString("[%1(), $]").arg(KLocale::global()->currencySymbol());
   //
   //  Ensure numeric columns do contain valid numeric values
   //
@@ -3717,7 +3717,7 @@ bool LinesDatePage::validatePage()
           }
           value.toDouble(&ok); // Test validity.
           if ((!ok) && (!m_dlg->m_acceptAllInvalid)) {
-            QString str = KGlobal::locale()->currencySymbol();
+            QString str = KLocale::global()->currencySymbol();
             int rc = KMessageBox::questionYesNoCancel(this, i18n("<center>An invalid value has been detected in column %1 on row %2.</center>"
                      "Please check that you have selected the correct columns."
                      "<center>You may accept all similar items, or just this one, or cancel.</center>",
@@ -3755,7 +3755,7 @@ bool LinesDatePage::validatePage()
           }
           value.toDouble(&ok); // Test validity.
           if ((!ok) && (!m_dlg->m_acceptAllInvalid)) {
-            QString str = KGlobal::locale()->currencySymbol();
+            QString str = KLocale::global()->currencySymbol();
             int rc = KMessageBox::questionYesNoCancel(this, i18n("<center>An invalid value has been detected in column %1 on row %2.</center>"
                      "Please check that you have selected the correct columns."
                      "<center>You may accept all similar items, or just this one, or cancel.</center>",

@@ -6,7 +6,7 @@ SET(kgpgfile_STAT_SRCS
    kgpgfile.cpp
    )
 
-KDE4_ADD_LIBRARY(kgpgfile STATIC ${kgpgfile_STAT_SRCS})
-TARGET_LINK_LIBRARIES(kgpgfile ${QGPGME_LIBRARIES})
+ADD_LIBRARY(kgpgfile STATIC ${kgpgfile_STAT_SRCS})
+TARGET_LINK_LIBRARIES(kgpgfile PUBLIC Qt5::Core KF5::Gpgmepp KF5::QGpgme)
 
 

@@ -31,7 +31,7 @@
 // KDE Includes
 
 #include <KDialog>
-#include <ktreewidgetsearchline.h>
+#include <ktreewidgetsearchlinewidget.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

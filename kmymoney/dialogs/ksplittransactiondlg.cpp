@@ -38,6 +38,7 @@
 #include <kglobal.h>
 #include <kconfig.h>
 #include <klocale.h>
+#include <kicon.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 #include <kstdguiitem.h>

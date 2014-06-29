@@ -31,14 +31,16 @@
 #include <klocale.h>
 #include <kglobal.h>
 #include <kconfig.h>
+#include <kconfiggroup.h>
 #include <klineedit.h>
 #include <kmessagebox.h>
 #include <kcombobox.h>
 #include <kurlrequester.h>
 #include <kiconloader.h>
+#include <kicon.h>
 #include <kapplication.h>
 #include <kinputdialog.h>
-#include <ktoolinvocation.h>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -429,7 +431,7 @@ void MyMoneyQifProfileEditor::slotDelete(void)
 
 void MyMoneyQifProfileEditor::slotHelp(void)
 {
-  KToolInvocation::invokeHelp("details.impexp.qifimp.profile");
+  KHelpClient::invokeHelp("details.impexp.qifimp.profile");
 }
 
 void MyMoneyQifProfileEditor::slotAmountTypeSelected()

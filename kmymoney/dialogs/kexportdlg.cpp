@@ -36,6 +36,9 @@
 #include <kfiledialog.h>
 #include <kpushbutton.h>
 #include <kiconloader.h>
+#include <kicon.h>
+#include <kconfiggroup.h>
+#include <kurl.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers

@@ -215,7 +215,7 @@ void Parse::thousandsSeparatorChanged(int val)
 {
   m_thousandsSeparatorIndex = val;
   m_thousandsSeparator = m_thousandsSeparatorList[val];
-  if (m_thousandsSeparator == KGlobal::locale()->thousandsSeparator()) {
+  if (m_thousandsSeparator == KLocale::global()->thousandsSeparator()) {
     return;
   }
 }
@@ -273,7 +273,7 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
     m_symbolFound = false;
     if ((thouIndex == -1) || (thouIndex == length - 4))  {      //no separator || correct format
       txt.remove(m_thousandsSeparator);
-      QString tmp = txt + KGlobal::locale()->decimalSymbol() + "00";
+      QString tmp = txt + KLocale::global()->decimalSymbol() + "00";
       return tmp;
     } else
       m_invalidConversion = true;
@@ -295,7 +295,7 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
   }//  thouIndex = -1                            no thousands separator
 
   //  m_symbolFound = true                      found genuine decimal
-  txt.replace(m_decimalSymbol, KGlobal::locale()->decimalSymbol());  // so swap it
+  txt.replace(m_decimalSymbol, KLocale::global()->decimalSymbol());  // so swap it
   return txt;
 }
 

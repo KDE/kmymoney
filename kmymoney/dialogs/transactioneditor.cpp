@@ -40,6 +40,7 @@
 #include <kmessagebox.h>
 #include <kstdguiitem.h>
 #include <kiconloader.h>
+#include <kicon.h>
 #include <kguiitem.h>
 
 // ----------------------------------------------------------------------------

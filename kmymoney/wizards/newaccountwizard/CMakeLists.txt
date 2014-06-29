@@ -12,9 +12,9 @@ SET (libnewaccountwizard_a_UI
   kloanpayoutpagedecl.ui kloanschedulepagedecl.ui kschedulepagedecl.ui
 	)
 
-kde4_add_ui_files(libnewaccountwizard_a_SOURCES ${libnewaccountwizard_a_UI} )
+qt5_wrap_ui(libnewaccountwizard_a_SOURCES ${libnewaccountwizard_a_UI} )
 
-KDE4_ADD_LIBRARY(newaccountwizard STATIC ${libnewaccountwizard_a_SOURCES})
+add_library(newaccountwizard STATIC ${libnewaccountwizard_a_SOURCES})
 
 # we rely on some dialogs to be generated
 ADD_DEPENDENCIES(newaccountwizard dialogs)

@@ -47,6 +47,7 @@
 #include <kpassivepopup.h>
 #include <kdatepicker.h>
 #include <kvbox.h>
+#include <kicon.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -129,7 +130,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_datePopup = new KPassivePopup(d->m_dateEdit);
   d->m_datePopup->setObjectName("datePopup");
   d->m_datePopup->setTimeout(DATE_POPUP_TIMEOUT);
-  d->m_datePopup->setView(new QLabel(KGlobal::locale()->formatDate(d->m_date), d->m_datePopup));
+  d->m_datePopup->setView(new QLabel(KLocale::global()->formatDate(d->m_date), d->m_datePopup));
 
   d->m_dateFrame = new KVBox(this);
   d->m_dateFrame->setWindowFlags(Qt::Popup);
@@ -137,7 +138,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_dateFrame->setLineWidth(3);
   d->m_dateFrame->hide();
 
-  QString dateFormat = KGlobal::locale()->dateFormatShort().toLower();
+  QString dateFormat = KLocale::global()->dateFormatShort().toLower();
   QString order, separator;
   bool lastWasPercent = false;
   for (int i = 0; i < dateFormat.length(); ++i) {
@@ -336,7 +337,7 @@ void kMyMoneyDateInput::slotDateChosenRef(const QDate& date)
 
 #ifndef Q_OS_MAC
     QLabel *lbl = static_cast<QLabel*>(d->m_datePopup->view());
-    lbl->setText(KGlobal::locale()->formatDate(date));
+    lbl->setText(KLocale::global()->formatDate(date));
     lbl->adjustSize();
     if (d->m_datePopup->isVisible() || hasFocus())
       d->m_datePopup->show(mapToGlobal(QPoint(0, height()))); // Repaint

@@ -167,14 +167,14 @@ void MyMoneyQifProfile::clear(void)
     m_decimal['Q'] =
       m_decimal['T'] =
         m_decimal['O'] =
-          m_decimal['I'] = KGlobal::locale()->monetaryDecimalSymbol()[0];
+          m_decimal['I'] = KLocale::global()->monetaryDecimalSymbol()[0];
 
   m_thousands.clear();
   m_thousands['$'] =
     m_thousands['Q'] =
       m_thousands['T'] =
         m_thousands['O'] =
-          m_thousands['I'] = KGlobal::locale()->monetaryThousandsSeparator()[0];
+          m_thousands['I'] = KLocale::global()->monetaryThousandsSeparator()[0];
 
   m_openingBalanceText = "Opening Balance";
   m_voidMark = "VOID ";
@@ -413,7 +413,7 @@ const QString MyMoneyQifProfile::date(const QDate& datein) const
         if (! delim.isNull())
           buffer += delim;
         if (maskLen == 3)
-          buffer += KGlobal::locale()->calendar()->monthName(datein.month(), datein.year(), KCalendarSystem::ShortName);
+          buffer += KLocale::global()->calendar()->monthName(datein.month(), datein.year(), KCalendarSystem::ShortName);
         else
           buffer += QString::number(datein.month()).rightJustified(2, '0');
       } else if (maskChar == 'y') {
@@ -455,7 +455,7 @@ const QDate MyMoneyQifProfile::date(const QString& datein) const
     QStringList monthNames = QString("jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec").split(',');
     int j;
     for (j = 1; j <= 12; ++j) {
-      if ((KGlobal::locale()->calendar()->monthName(j, 2000, KCalendarSystem::ShortName).toLower() == scannedParts[d->m_partPos['m']].toLower())
+      if ((KLocale::global()->calendar()->monthName(j, 2000, KCalendarSystem::ShortName).toLower() == scannedParts[d->m_partPos['m']].toLower())
           || (monthNames[j-1] == scannedParts[d->m_partPos['m']].toLower())) {
         mon = j;
         break;
@@ -579,7 +579,7 @@ const QDate MyMoneyQifProfile::date(const QString& datein) const
             msg = "Invalid numeric character in month string";
         } else {
           for (j = 1; j <= 12; ++j) {
-            if (KGlobal::locale()->calendar()->monthName(j, 2000, true).toLower() == formatParts[i].toLower()) {
+            if (KLocale::global()->calendar()->monthName(j, 2000, true).toLower() == formatParts[i].toLower()) {
               mon = j;
               ok = true;
               break;

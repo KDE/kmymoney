@@ -43,12 +43,13 @@
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 #include <kiconloader.h>
+#include <kicon.h>
 #include <kguiitem.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>
 #include <kapplication.h>
 #include <keditlistbox.h>
-#include <ktoolinvocation.h>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -661,7 +662,7 @@ void KTagsView::slotTagNew(void)
 
 void KTagsView::slotHelp(void)
 {
-  KToolInvocation::invokeHelp("details.tags.attributes");
+  KHelpClient::invokeHelp("details.tags.attributes");
   //FIXME-ALEX update help file
 }
 

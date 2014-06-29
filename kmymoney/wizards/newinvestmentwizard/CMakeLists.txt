@@ -14,9 +14,9 @@ SET (libnewinvestmentwizard_a_UI
   konlineupdatewizardpagedecl.ui
 	)
 
-kde4_add_ui_files(libnewinvestmentwizard_a_SOURCES ${libnewinvestmentwizard_a_UI} )
+qt5_wrap_ui(libnewinvestmentwizard_a_SOURCES ${libnewinvestmentwizard_a_UI} )
 
-KDE4_ADD_LIBRARY(newinvestmentwizard STATIC ${libnewinvestmentwizard_a_SOURCES})
+add_library(newinvestmentwizard STATIC ${libnewinvestmentwizard_a_SOURCES})
 
 # we rely on some widgets to be generated
 ADD_DEPENDENCIES(newinvestmentwizard widgets)

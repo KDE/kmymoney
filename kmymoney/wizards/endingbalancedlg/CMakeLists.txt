@@ -16,9 +16,9 @@ SET (libendingbalancedlg_a_UI
   previouspostponewizardpagedecl.ui
 	)
 
-kde4_add_ui_files(libendingbalancedlg_a_SOURCES ${libendingbalancedlg_a_UI} )
+qt5_wrap_ui(libendingbalancedlg_a_SOURCES ${libendingbalancedlg_a_UI} )
 
-KDE4_ADD_LIBRARY(endingbalancedlg STATIC ${libendingbalancedlg_a_SOURCES})
+add_library(endingbalancedlg STATIC ${libendingbalancedlg_a_SOURCES})
 
 # we rely on some widgets to be generated
 ADD_DEPENDENCIES(endingbalancedlg widgets dialogs)

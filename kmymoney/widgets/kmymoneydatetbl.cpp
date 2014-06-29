@@ -62,7 +62,7 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kdatetable.h> // Use the classes available for maximum re-use
+//#include <kdatetable.h> // Use the classes available for maximum re-use
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <kapplication.h>
@@ -75,7 +75,7 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#define WEEK_DAY_NAME(a,b)  KGlobal::locale()->calendar()->weekDayName(a,b)
+#define WEEK_DAY_NAME(a,b)  KLocale::global()->calendar()->weekDayName(a,b)
 
 KMyMoneyDateTbDelegate::KMyMoneyDateTbDelegate(kMyMoneyDateTbl* parent): QStyledItemDelegate(parent), m_parent(parent)
 {
@@ -94,7 +94,7 @@ void KMyMoneyDateTbDelegate::paint(QPainter *painter, const QStyleOptionViewItem
   QFont font = KGlobalSettings::generalFont();
   font.setPointSize(m_parent->fontsize);
 
-  int firstWeekDay = KGlobal::locale()->weekStartDay();
+  int firstWeekDay = KLocale::global()->weekStartDay();
 
   if (index.row() == 0) { // we are drawing the headline
     QStyledItemDelegate::paint(painter, opt, index);
@@ -295,7 +295,7 @@ void kMyMoneyDateTbl::mouseReleaseEvent(QMouseEvent *e)
     return;
   }
 
-  int dayoff = KGlobal::locale()->weekStartDay();
+  int dayoff = KLocale::global()->weekStartDay();
 
   // -----
   int row, col, pos;
@@ -441,7 +441,7 @@ void kMyMoneyDateTbl::mouseMoveEvent(QMouseEvent* e)
     return;
   }
 
-  int firstWeekDay = KGlobal::locale()->weekStartDay();
+  int firstWeekDay = KLocale::global()->weekStartDay();
 
   QDate drawDate(date);
   QString text;

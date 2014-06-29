@@ -521,7 +521,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
           }
         }
       }
-      item->setText(PRICE_COL, KGlobal::locale()->formatMoney(price, sec.tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision()));
+      item->setText(PRICE_COL, KLocale::global()->formatMoney(price, sec.tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision()));
       item->setText(DATE_COL, date.toString(Qt::ISODate));
       logStatusMessage(i18n("Price for %1 updated (id %2)", _symbol, _id));
       // make sure to make OK button available

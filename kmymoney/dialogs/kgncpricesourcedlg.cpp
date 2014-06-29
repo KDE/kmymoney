@@ -29,8 +29,8 @@
 #include <kurlrequester.h>
 #include <ktextbrowser.h>
 #include <klocale.h>
-#include <ktoolinvocation.h>
 #include <klistwidget.h>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -138,5 +138,5 @@ bool KGncPriceSourceDlg::alwaysUse() const
 
 void KGncPriceSourceDlg::slotHelp(void)
 {
-  KToolInvocation::invokeHelp("details.impexp.gncquotes");
+  KHelpClient::invokeHelp("details.impexp.gncquotes");
 }

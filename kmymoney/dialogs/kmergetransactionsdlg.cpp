@@ -26,7 +26,7 @@
 #include <kpushbutton.h>
 #include <kapplication.h>
 #include <klocale.h>
-#include <ktoolinvocation.h>
+#include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -48,5 +48,5 @@ KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWid
 
 void KMergeTransactionsDlg::slotHelp(void)
 {
-  KToolInvocation::invokeHelp("details.ledgers.match");
+  KHelpClient::invokeHelp("details.ledgers.match");
 }

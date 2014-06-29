@@ -14,7 +14,10 @@ SET(storage_a_SOURCES
 
 # This library is actually not needed. It is built just for
 # convenience, and then linked into kmm_mymoney.
-KDE4_ADD_LIBRARY( kmm_storage STATIC ${storage_a_SOURCES} )
+ADD_LIBRARY( kmm_storage STATIC ${storage_a_SOURCES} )
+kde_target_enable_exceptions(kmm_storage PUBLIC)
+
+TARGET_LINK_LIBRARIES( kmm_storage PUBLIC Qt5::Core Qt5::Xml Qt5::Sql Qt5::Gui)
 
 ########### install files ###############
 
@@ -25,14 +28,13 @@ INSTALL(FILES ${storage_HEADERS}
 IF( KDE4_BUILD_TESTS )
 
   set(target_link_libraries_test 
-	  ${LIBALKIMIA_LIBRARY}
-	  ${KDE4_KDECORE_LIBS}
-	  ${KDE4_KIO_LIBS}
-	  ${QT_QTGUI_LIBRARY}
-	  ${QT_QTXML_LIBRARY}
-	  ${QT_QTTEST_LIBRARY}
-	  ${QT_QTSQL_LIBRARY}
-	  ${QT_QTCORE_LIBRARY}
+	  Alkimia::alkimia
+	  KF5::KIOWidgets
+	  Qt5::Gui
+	  Qt5::Xml
+	  Qt5::Test
+	  Qt5::Sql
+	  Qt5::Core
 	  ${GMP_LIBRARIES} )
 
   # MyMoneyDatabaseMgr

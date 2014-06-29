@@ -35,6 +35,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <kiconloader.h>
+#include <kicon.h>
 #include <kguiitem.h>
 #include <kpushbutton.h>
 #include <KToggleAction>

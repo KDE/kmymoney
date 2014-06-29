@@ -3,4 +3,4 @@ SET (libinterfaces_a_SOURCES
   kmmviewinterface.cpp
   )
 
-KDE4_ADD_LIBRARY(interfaces STATIC ${libinterfaces_a_SOURCES})
+add_library(interfaces STATIC ${libinterfaces_a_SOURCES})

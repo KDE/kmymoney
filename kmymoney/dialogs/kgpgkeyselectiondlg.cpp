@@ -35,7 +35,6 @@
 // Project Includes
 
 #include <kgpgfile.h>
-#include <ktoolinvocation.h>
 
 KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
     KDialog(parent),
@@ -94,7 +93,7 @@ void KGpgKeySelectionDlg::slotShowHelp(void)
   if (anchor.isEmpty())
     anchor = QString("details.search");
 
-  KToolInvocation::invokeHelp(anchor);
+  KHelpClient::invokeHelp(anchor);
 }
 #endif
 

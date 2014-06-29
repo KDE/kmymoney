@@ -51,10 +51,10 @@ QT4_AUTOMOC(${sqlcipherdriver_srcs})
 QT4_WRAP_CPP(sqlcipherdriver_moc ${sqlcipherdriver_header})
 ADD_LIBRARY(sqlcipherdriver SHARED ${sqlcipherdriver_header} ${sqlcipherdriver_srcs} ${sqlcipherdriver_moc})
 
-TARGET_LINK_LIBRARIES(sqlcipherdriver LINK_PUBLIC
+TARGET_LINK_LIBRARIES(sqlcipherdriver PUBLIC
   ${QT_LIBRARIES}
   ${QT_QTCORE_LIBRARIES}
-  ${QT_QTSQL_LIBRARY}
+  Qt5::Sql
   ${SQLCIPHER_LIBRARIES}
 )
 

@@ -6,4 +6,4 @@ SET(kmm_kbanking_widgets_la_SOURCES
     kbjoblist.cpp
     )
 
-KDE4_ADD_LIBRARY(kmm_kbanking_widgets STATIC ${kmm_kbanking_widgets_la_SOURCES})
+add_library(kmm_kbanking_widgets STATIC ${kmm_kbanking_widgets_la_SOURCES})
