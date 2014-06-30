@@ -322,9 +322,9 @@ void MyMoneyFileTest::testInstitutionListRetrieval()
   QList<MyMoneyInstitution>::ConstIterator it;
   it = list.constBegin();
 
-  QVERIFY((*it).name() == "institution1");
+  QVERIFY((*it).name() == "institution1" || (*it).name() == "institution2");
   ++it;
-  QVERIFY((*it).name() == "institution2");
+  QVERIFY((*it).name() == "institution2"  || (*it).name() == "institution1");
   ++it;
   QVERIFY(it == list.constEnd());
 }
