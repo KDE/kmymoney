@@ -54,6 +54,7 @@
 #include <kdebug.h>
 #include <kdeversion.h>
 #include <ktitlewidget.h>
+#include <kcompressiondevice.h>
 
 #ifdef KActivities_FOUND
 #include <KActivities/ResourceInstance>
@@ -101,7 +102,7 @@
 #include "kmymoneyutils.h"
 #include "models.h"
 
-#define COMPRESSION_MIME_TYPE "application/x-gzip"
+KCompressionDevice::CompressionType COMPRESSION_TYPE = KCompressionDevice::GZip;
 #define RECOVER_KEY_ID        "0xD2B08440"
 
 
@@ -720,7 +721,7 @@ bool KMyMoneyView::readFile(const KUrl& url)
 
     if (cnt == 2) {
       if (QString(hdr) == QString("\037\213")) {        // gzipped?
-        qfile = KFilterDev::deviceForFile(filename, COMPRESSION_MIME_TYPE);
+        qfile = new KCompressionDevice(filename, COMPRESSION_TYPE);
       } else if (QString(hdr) == QString("--")          // PGP ASCII armored?
                  || QString(hdr) == QString("\205\001")     // PGP binary?
                  || QString(hdr) == QString("\205\002")) {  // PGP binary?
@@ -1171,19 +1172,18 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
 
   } else if (!plaintext) {
 
-// TODO: port to KF5
-//     base = KFilterBase::findFilterByMimeType(COMPRESSION_MIME_TYPE);
-//     if (base) {
-//       base->setDevice(&qfile, false);
-//       // we need to reopen the file to set the mode inside the filter stuff
-//       dev = KFilterDev::deviceForFile(localFile, COMPRESSION_MIME_TYPE, true);
-//       if (!dev || !dev->open(QIODevice::WriteOnly)) {
-//         MyMoneyFile::instance()->blockSignals(blocked);
-//         delete dev;
-//         throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.", localFile));
-//       }
-//       statusDevice = base->device();
-//     }
+    base = KCompressionDevice::filterForCompressionType(COMPRESSION_TYPE);
+    if (base) {
+      base->setDevice(&qfile, false);
+      // we need to reopen the file to set the mode inside the filter stuff
+      dev = new KCompressionDevice(localFile, COMPRESSION_TYPE);
+      if (!dev || !dev->open(QIODevice::WriteOnly)) {
+        MyMoneyFile::instance()->blockSignals(blocked);
+        delete dev;
+        throw MYMONEYEXCEPTION(i18n("Unable to open file '%1' for writing.", localFile));
+      }
+      statusDevice = base->device();
+    }
   } else if (plaintext) {
     qfile.open();
     if (qfile.error() != QFile::NoError) {
