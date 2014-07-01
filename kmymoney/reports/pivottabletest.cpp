@@ -820,6 +820,7 @@ void PivotTableTest::testColumnType()
   filter.setRowType(MyMoneyReport::eExpenseIncome);
   filter.setColumnType(MyMoneyReport::eMonths);
   filter.setColumnsAreDays(true);
+  filter.setName("Spending by Days");
 
   XMLandback(filter);
   PivotTable spending_days(filter);
@@ -836,6 +837,7 @@ void PivotTableTest::testColumnType()
   filter.setRowType(MyMoneyReport::eExpenseIncome);
   filter.setColumnType(static_cast<MyMoneyReport::EColumnType>(7));
   filter.setColumnsAreDays(true);
+  filter.setName("Spending by Weeks");
 
   XMLandback(filter);
   PivotTable spending_weeks(filter);
