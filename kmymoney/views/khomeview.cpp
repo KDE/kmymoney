@@ -120,6 +120,7 @@ KHomeView::KHomeView(QWidget *parent, const char *name) :
     d(new Private)
 {
   d->m_part = new KHTMLPart(this);
+  d->m_part->setOnlyLocalReferences(true);
   addWidget(d->m_part->view());
 
   d->m_part->begin();
@@ -130,9 +131,9 @@ KHomeView::KHomeView(QWidget *parent, const char *name) :
   connect(d->m_part->view(), SIGNAL(zoomView(int)), this, SLOT(slotZoomView(int)));
   disconnect(d->m_part->view(), SIGNAL(zoomView(int)), d->m_part, SLOT(slotZoomView(int)));
 
-  connect(d->m_part->browserExtension(), SIGNAL(openUrlRequest(const KUrl &,
+  connect(d->m_part->browserExtension(), SIGNAL(openUrlRequest(const QUrl &,
           const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
-          this, SLOT(slotOpenUrl(KUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
+          this, SLOT(slotOpenUrl(QUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
 }
@@ -201,7 +202,7 @@ void KHomeView::loadView(void)
     d->m_forecast.setForecastDone(false);
 
     const QString filename = KGlobal::dirs()->findResource("appdata", "html/kmymoney.css");
-    QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">\n").arg(filename);
+    QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">\n").arg(QUrl::fromLocalFile(filename).url());
 
     header += KMyMoneyUtils::variableCSS();
 
@@ -1143,15 +1144,16 @@ const QString KHomeView::linkend(void) const
   return "</a>";
 }
 
-void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)
+void KHomeView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)
 {
-  QString protocol = url.protocol();
+  QString protocol = url.scheme();
   QString view = url.fileName();
-  QString id = url.queryItem("id");
-  QString mode = url.queryItem("mode");
+  QUrlQuery query(url);
+  QString id = query.queryItemValue("id");
+  QString mode = query.queryItemValue("mode");
 
   if (protocol == "http") {
-    KToolInvocation::invokeBrowser(url.prettyUrl());
+    KToolInvocation::invokeBrowser(url.toDisplayString());
   } else if (protocol == "mailto") {
     KToolInvocation::invokeMailer(url);
   } else {

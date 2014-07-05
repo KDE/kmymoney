@@ -96,7 +96,7 @@ QString reports::ReportTable::renderHeader(const QString& title, bool includeCSS
   } else {
     // do not include css inline instead use a link to the css file
     header += "\n<link rel=\"stylesheet\" type=\"text/css\" href=\""
-              + cssfilename + "\">\n";
+              + QUrl::fromLocalFile(cssfilename).url() + "\">\n";
   }
 
   header += KMyMoneyUtils::variableCSS();
