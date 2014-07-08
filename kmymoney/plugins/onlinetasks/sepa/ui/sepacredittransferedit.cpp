@@ -166,10 +166,13 @@ void sepaCreditTransferEdit::beneficiaryIbanChanged(const QString& iban)
 {
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
 
-  if (settings->isBicMandatory( iban ))
+  if (settings->isBicMandatory( iban )) {
     m_requiredFields->add( ui->beneficiaryBankCode );
-  else
+    beneficiaryBicChanged( ui->beneficiaryBankCode->text() );
+  } else {
     m_requiredFields->remove( ui->beneficiaryBankCode );
+    beneficiaryBicChanged( ui->beneficiaryBankCode->text() );
+  }
 }
 
 void sepaCreditTransferEdit::beneficiaryBicChanged(const QString& bic)
@@ -178,11 +181,11 @@ void sepaCreditTransferEdit::beneficiaryBicChanged(const QString& bic)
     QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
 
     if (settings->isBicMandatory( ui->beneficiaryBankCode->text() )) {
-      ui->feedbackBic->setFeedback(KMyMoneyValidationFeedback::Error, i18n("For this beneficary a BIC is mandatory."));
+      ui->feedbackBic->setFeedback(KMyMoneyValidationFeedback::Error, i18n("For this beneficiary's country the BIC is mandatory."));
       return;
     }
   }
-  ui->feedbackBic->removeFeedback(KMyMoneyValidationFeedback::Error, i18n("For this beneficary a BIC is mandatory."));
+  ui->feedbackBic->removeFeedback(KMyMoneyValidationFeedback::Error, i18n("For this beneficiary's country the BIC is mandatory."));
 }
 
 void sepaCreditTransferEdit::beneficiaryNameChanged( const QString& name )
