@@ -267,7 +267,7 @@ QDate MyMoneySchedule::adjustedNextDueDate(void) const
 
 QDate MyMoneySchedule::adjustedDate(QDate date, weekendOptionE option) const
 {
-  if (option == MyMoneySchedule::MoveNothing || isProcessingDate(date))
+  if (!date.isValid() || option == MyMoneySchedule::MoveNothing || isProcessingDate(date))
     return date;
 
   int step = 1;
