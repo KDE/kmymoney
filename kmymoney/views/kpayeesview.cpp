@@ -186,9 +186,6 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(notesEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
   connect(matchKeyEditList, SIGNAL(changed()), this, SLOT(slotKeyListChanged()));
 
-  //connect(m_bankaccountedit, SIGNAL(dataChanged()), this, SLOT(slotPayeeDataChanged())); // szo, added for bankacoount
-  qDebug() << "KPayeesView Constructor hinter meinem connect";
-  
   connect(radioNoMatch, SIGNAL(toggled(bool)), this, SLOT(slotPayeeDataChanged()));
   connect(radioNameMatch, SIGNAL(toggled(bool)), this, SLOT(slotPayeeDataChanged()));
   connect(radioKeyMatch, SIGNAL(toggled(bool)), this, SLOT(slotPayeeDataChanged()));
@@ -446,7 +443,6 @@ void KPayeesView::slotSelectPayee(void)
 
     checkEnableDefaultCategory->setChecked(m_payee.defaultAccountEnabled());
     comboDefaultCategory->setSelected(m_payee.defaultAccountId());
-    m_payeeIdentifierList->slotLoadAccounts( m_payee );
 
     slotPayeeDataChanged();
 
