@@ -1,6 +1,6 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager for KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright (C) 2014  Christian David <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,30 +16,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KBICEDIT_H
-#define KBICEDIT_H
-
-#include <QtGui/QValidator>
-#include <KLineEdit>
+#ifndef KIBANLINEEDIT_H
+#define KIBANLINEEDIT_H
 
 #include "../ibanbicmacros.h"
+
+#include <KLineEdit>
+
 #include "kmymoneyvalidationfeedback.h"
 
-class QAbstractItemDelegate;
+class ibanValidator;
 
-class IBAN_BIC_IDENTIFIER_EXPORT KBicEdit : public KLineEdit
+
+class IBAN_BIC_IDENTIFIER_EXPORT KIbanLineEdit : public KLineEdit
 {
   Q_OBJECT
 
 public:
-  KBicEdit(QWidget* parent = 0);
-  virtual ~KBicEdit();
+  KIbanLineEdit(QWidget* parent);
+  const ibanValidator* validator() const;
 
 signals:
   void validatorFeedback(KMyMoneyValidationFeedback::MessageType type, QString message);
 
 private:
-  QAbstractItemDelegate* m_popupDelegate;
 };
 
-#endif // KBICEDIT_H
+#endif // KIBANLINEEDIT_H

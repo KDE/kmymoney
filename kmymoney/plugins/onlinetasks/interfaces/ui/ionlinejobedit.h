@@ -37,7 +37,7 @@ public:
   explicit IonlineJobEdit(QWidget* parent = 0, QVariantList args = QVariantList())
     : QWidget(parent)
   {
-
+        Q_UNUSED(args);
   }
 
   /**

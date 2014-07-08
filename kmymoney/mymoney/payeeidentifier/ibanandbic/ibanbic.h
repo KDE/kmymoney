@@ -126,6 +126,13 @@ public:
   virtual bool isValid() const;
 
   /**
+   * @brief Extends a bic to 11 characters
+   *
+   * Also all characters are made upper case.
+   */
+  static QString bicToFullFormat( QString bic );
+
+  /**
    * @brief Converts an iban to canonical format for machines
    *
    * Will remove all white spaces.
@@ -159,7 +166,7 @@ public:
   static QString localBankCodeByIban( const QString& iban );
 
   /**
-   * @brief Check if this iban can be valid
+   * @brief Check if this IBAN can be valid
    *
    * This method also checks if the given country code is valid.
    *
@@ -170,12 +177,30 @@ public:
   static bool isIbanValid( const QString& iban );
 
 
+  /**
+   * @brief Check if this BIC is assigned to an bank
+   *
+   * This method does not check the given BIC but looks up in the database directly.
+   * So it might be useful if time consumption is important but isBicAllocated() should
+   * be your first option.
+   *
+   * @param bic BIC to test in canonical format (always 11 characters long, all characters uppercase)
+   * @see isBicAllocated()
+   */
+  static bicAllocationStatus isCanonicalBicAllocated( const QString& bic );
+
+  /** @brief Check if this BIC is assigned to an bank
+   *
+   * @param bic BIC to test.
+   */
   static bicAllocationStatus isBicAllocated( const QString& bic );
 
   /**
    * @brief Check the checksum
    *
    * Test if the ISO 7064 mod 97-10 checksum of the iban is correct.
+   *
+   * @param iban An IBAN in electronic format (important!)
    */
   static bool validateIbanChecksum( const QString& iban );
 

@@ -231,7 +231,7 @@ bool ibanBic::validateIbanChecksum(const QString& iban)
 {
   Q_ASSERT( iban == ibanToElectronic(iban) );
 
-  // Reodrder
+  // Reorder
   QString reordered = iban.mid(4) + iban.left(4);
 
   // Replace letters
@@ -276,8 +276,18 @@ QString ibanBic::institutionNameByBic(const QString& bic)
   return getIbanBicData()->bankNameByBic( bic );
 }
 
-ibanBic::bicAllocationStatus ibanBic::isBicAllocated(const QString& bic)
+QString ibanBic::bicToFullFormat(QString bic)
 {
+  bic = bic.toUpper();
+  if ( bic.length() == 8 )
+    return ( bic + QLatin1String("XXX") );
+  return bic;
+}
+
+ibanBic::bicAllocationStatus ibanBic::isCanonicalBicAllocated(const QString& bic)
+{
+  Q_ASSERT( bic == bicToFullFormat(bic) );
+
   switch (getIbanBicData()->isBicAllocated(bic)) {
     case ibanBicData::bicAllocated: return bicAllocated;
     case ibanBicData::bicNotAllocated: return bicNotAllocated;
@@ -285,5 +295,13 @@ ibanBic::bicAllocationStatus ibanBic::isBicAllocated(const QString& bic)
   }
   return bicAllocationUncertain;
 }
+
+ibanBic::bicAllocationStatus ibanBic::isBicAllocated(const QString& bic)
+{
+  if ( bic.length() != 8 && bic.length() != 11 )
+    return bicNotAllocated;
+  return isCanonicalBicAllocated( bicToFullFormat( bic ) );
+}
+
 
 } // namespace payeeIdentifiers

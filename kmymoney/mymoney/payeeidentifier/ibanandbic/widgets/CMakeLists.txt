@@ -1,5 +1,8 @@
 set ( IBAN_BIC_WIDGETS_SCRS
+  kibanlineedit.cpp
   kbicedit.cpp
+  ibanvalidator.cpp
+  bicvalidator.cpp
 )
 
 kde4_add_library( payeeidentifier_iban_bic_widgets SHARED
@@ -11,6 +14,7 @@ target_link_libraries( payeeidentifier_iban_bic_widgets
   ${QT_QTCORE_LIBRARY}
   ${KDE4_KDECORE_LIBS}
   ${KDE4_KDEUI_LIBS}
+  kmm_widgets
 )
 
 install(TARGETS payeeidentifier_iban_bic_widgets

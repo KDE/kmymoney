@@ -40,7 +40,7 @@ class KMyMoneyTextEdit : public KTextEdit
   Q_PROPERTY(int maxLength READ maxLength WRITE setMaxLength)
 
   /**
-   * @brief Maximal number characters in each line allowed
+   * @brief Maximal number of characters allowed per line
    */
   Q_PROPERTY(int maxLineLength READ maxLineLength WRITE setMaxLineLength)
 
@@ -72,7 +72,7 @@ public Q_SLOTS:
   void setAllowedChars(const QString& allowedChars);
 
   /** @brief Slot to set this text edit read only */
-  void setReadOnly(const bool&);
+  void setReadOnly(bool);
 
 protected:
   virtual void keyReleaseEvent(QKeyEvent* e);

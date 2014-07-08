@@ -69,12 +69,12 @@ private slots:
 
   /** @{
    * These slots are called when the corosponding field is changed
-   * to start the validation
+   * to start the validation.
    */
   void purposeChanged();
   void beneficiaryIbanChanged( const QString& iban );
-  void beneficiaryNameChanged( const QString& name );
   void beneficiaryBicChanged( const QString& bic );
+  void beneficiaryNameChanged( const QString& name );
   void valueChanged();
   void endToEndReferenceChanged( const QString& reference );
   /** @} */

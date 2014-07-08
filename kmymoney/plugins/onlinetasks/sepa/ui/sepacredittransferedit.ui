@@ -6,46 +6,57 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>348</width>
-    <height>320</height>
+    <width>340</width>
+    <height>347</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="2">
-    <widget class="KLed" name="statusBeneficiaryName">
-     <property name="state">
-      <enum>KLed::On</enum>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Beneficiary Name</string>
      </property>
-     <property name="color">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
+     <property name="buddy">
+      <cstring>beneficiaryName</cstring>
      </property>
     </widget>
    </item>
-   <item row="3" column="2">
-    <widget class="KLed" name="statusIban">
-     <property name="state">
-      <enum>KLed::On</enum>
-     </property>
-     <property name="color">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
+   <item>
+    <widget class="KLineEdit" name="beneficiaryName"/>
+   </item>
+   <item>
+    <widget class="KMyMoneyValidationFeedback" name="feedbackName" native="true"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_iban">
+     <property name="text">
+      <string>IBAN</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="KLineEdit" name="beneficiaryAccNum"/>
+   <item>
+    <widget class="KIbanLineEdit" name="beneficiaryIban"/>
    </item>
-   <item row="6" column="0" colspan="2">
+   <item>
+    <widget class="KMyMoneyValidationFeedback" name="feedbackIban" native="true"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_bic">
+     <property name="text">
+      <string>BIC</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="KBicEdit" name="beneficiaryBankCode"/>
+   </item>
+   <item>
+    <widget class="KMyMoneyValidationFeedback" name="feedbackBic" native="true"/>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="label_7">
@@ -82,44 +93,10 @@
      </item>
     </layout>
    </item>
-   <item row="7" column="1">
-    <widget class="KLineEdit" name="sepaReference"/>
+   <item>
+    <widget class="KMyMoneyValidationFeedback" name="feedbackAmount" native="true"/>
    </item>
-   <item row="7" column="2">
-    <widget class="KLed" name="statusReference">
-     <property name="state">
-      <enum>KLed::On</enum>
-     </property>
-     <property name="color">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Purpose</string>
-     </property>
-     <property name="buddy">
-      <cstring>purpose</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_iban">
-     <property name="text">
-      <string>IBAN</string>
-     </property>
-     <property name="buddy">
-      <cstring>beneficiaryAccNum</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0">
+   <item>
     <widget class="QLabel" name="label">
      <property name="text">
       <string>End-to-end reference</string>
@@ -129,21 +106,23 @@
      </property>
     </widget>
    </item>
-   <item row="8" column="2">
-    <widget class="KLed" name="statusPurpose">
-     <property name="state">
-      <enum>KLed::On</enum>
+   <item>
+    <widget class="KLineEdit" name="sepaReference"/>
+   </item>
+   <item>
+    <widget class="KMyMoneyValidationFeedback" name="feedbackReference" native="true"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Purpose</string>
      </property>
-     <property name="color">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
+     <property name="buddy">
+      <cstring>purpose</cstring>
      </property>
     </widget>
    </item>
-   <item row="9" column="0" colspan="3">
+   <item>
     <widget class="KMyMoneyTextEdit" name="purpose">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -171,71 +150,26 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="KLineEdit" name="beneficiaryName"/>
-   </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Beneficiary Name</string>
-     </property>
-     <property name="buddy">
-      <cstring>beneficiaryName</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_bic">
-     <property name="text">
-      <string>BIC</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="2">
-    <widget class="KBicEdit" name="beneficiaryBankCode"/>
-   </item>
-   <item row="6" column="2">
-    <widget class="KLed" name="statusAmount">
-     <property name="state">
-      <enum>KLed::On</enum>
-     </property>
-     <property name="color">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="2">
-    <widget class="KLed" name="statusBic">
-     <property name="color">
-      <color>
-       <red>255</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </property>
-    </widget>
+   <item>
+    <widget class="KMyMoneyValidationFeedback" name="feedbackPurpose" native="true"/>
    </item>
   </layout>
   <zorder>label</zorder>
-  <zorder>sepaReference</zorder>
   <zorder>purpose</zorder>
   <zorder>label_4</zorder>
   <zorder>label_2</zorder>
   <zorder>beneficiaryName</zorder>
-  <zorder>beneficiaryAccNum</zorder>
   <zorder>label_bic</zorder>
   <zorder>label_iban</zorder>
-  <zorder>statusPurpose</zorder>
-  <zorder>statusReference</zorder>
-  <zorder>statusAmount</zorder>
-  <zorder>statusIban</zorder>
-  <zorder>statusBeneficiaryName</zorder>
   <zorder>beneficiaryBankCode</zorder>
-  <zorder>statusBic</zorder>
+  <zorder>feedbackName</zorder>
+  <zorder>feedbackBic</zorder>
+  <zorder>feedbackAmount</zorder>
+  <zorder>feedbackReference</zorder>
+  <zorder>feedbackPurpose</zorder>
+  <zorder>sepaReference</zorder>
+  <zorder>feedbackIban</zorder>
+  <zorder>beneficiaryIban</zorder>
  </widget>
  <customwidgets>
   <customwidget>
@@ -250,11 +184,6 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KLed</class>
-   <extends>QWidget</extends>
-   <header>kled.h</header>
-  </customwidget>
-  <customwidget>
    <class>KMyMoneyTextEdit</class>
    <extends>QTextEdit</extends>
    <header>kmymoneytextedit.h</header>
@@ -263,14 +192,65 @@
    <class>KBicEdit</class>
    <extends>QLineEdit</extends>
    <header>mymoney/payeeidentifier/ibanandbic/widgets/kbicedit.h</header>
+   <slots>
+    <signal>validatorFeedback(KMyMoneyValidationFeedback::MessageType,QString)</signal>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyValidationFeedback</class>
+   <extends>QWidget</extends>
+   <header>kmymoneyvalidationfeedback.h</header>
+   <container>1</container>
+   <slots>
+    <slot>setFeedback(KMyMoneyValidationFeedback::MessageType,QString)</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>KIbanLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>payeeidentifier/ibanandbic/widgets/kibanlineedit.h</header>
+   <slots>
+    <signal>validatorFeedback(KMyMoneyValidationFeedback::MessageType,QString)</signal>
+   </slots>
   </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>beneficiaryName</tabstop>
-  <tabstop>beneficiaryAccNum</tabstop>
-  <tabstop>sepaReference</tabstop>
   <tabstop>purpose</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>beneficiaryIban</sender>
+   <signal>validatorFeedback(KMyMoneyValidationFeedback::MessageType,QString)</signal>
+   <receiver>feedbackIban</receiver>
+   <slot>setFeedback(KMyMoneyValidationFeedback::MessageType,QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>58</x>
+     <y>96</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>58</x>
+     <y>107</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>beneficiaryBankCode</sender>
+   <signal>validatorFeedback(KMyMoneyValidationFeedback::MessageType,QString)</signal>
+   <receiver>feedbackBic</receiver>
+   <slot>setFeedback(KMyMoneyValidationFeedback::MessageType,QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>93</x>
+     <y>143</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>117</x>
+     <y>172</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

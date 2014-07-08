@@ -57,7 +57,7 @@ void KMyMoneyTextEditHighlighter::setMaxLineLength( const int& length )
   rehighlight();
 }
 
-void KMyMoneyTextEdit::setReadOnly(const bool& readOnly)
+void KMyMoneyTextEdit::setReadOnly(bool readOnly)
 {
   KTextEdit::setReadOnly(readOnly);
 }

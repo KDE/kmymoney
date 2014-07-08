@@ -17,6 +17,7 @@
  */
 
 #include "kbicedit.h"
+
 #include <QDebug>
 #include <QtGui/QApplication>
 #include <QtGui/QCompleter>
@@ -26,6 +27,7 @@
 #include <QtGui/QStyle>
 
 #include "../bicmodel.h"
+#include "bicvalidator.h"
 
 class bicItemDelegate : public QStyledItemDelegate
 {
@@ -33,7 +35,7 @@ public:
   explicit bicItemDelegate(QObject* parent = 0) : QStyledItemDelegate(parent) {}
   void paint ( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const;
   virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  
+
 private:
   inline QFont getSmallFont(const QStyleOptionViewItem& option) const;
 };
@@ -42,15 +44,17 @@ KBicEdit::KBicEdit(QWidget* parent)
   : KLineEdit(parent)
 {
   QCompleter* completer = new QCompleter(this);
-  
+
   bicModel* model = new bicModel(this);
   completer->setModel(model);
   m_popupDelegate = new bicItemDelegate(this);
   completer->popup()->setItemDelegate( m_popupDelegate );
-  
+
   setCompleter(completer);
-  
-  setValidator( new bicValidator( this ) );
+
+  bicValidator *const validator = new bicValidator( this );
+  setValidator( validator );
+  connect( validator, SIGNAL(feedback(KMyMoneyValidationFeedback::MessageType,QString)), this, SIGNAL(validatorFeedback(KMyMoneyValidationFeedback::MessageType,QString)) );
 }
 
 KBicEdit::~KBicEdit()
@@ -69,7 +73,7 @@ QSize bicItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
 {
   QStyleOptionViewItemV4 opt = option;
   initStyleOption(&opt, index);
-  
+
   QFontMetrics metrics(option.font);
   QFontMetrics smallMetrics(getSmallFont(option));
   const QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
@@ -90,7 +94,7 @@ void bicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
   // Background
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
   style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
- 
+
   const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
   const QRect textArea = QRect(opt.rect.x()+margin, opt.rect.y()+margin, opt.rect.width()-2*margin, opt.rect.height()-2*margin);
 
@@ -103,7 +107,7 @@ void bicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
   painter->setFont( smallFont );
   style->drawItemText( painter, nameRect, Qt::AlignBottom, QApplication::palette(), true, index.model()->data(index, bicModel::InstitutionNameRole).toString(), option.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Mid );
   painter->restore();
-  
+
   // Paint BIC
   painter->save();
   QFont normal = painter->font();
@@ -114,28 +118,4 @@ void bicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
   style->drawItemText(painter, bicRect, Qt::AlignTop, QApplication::palette(), true, bic, option.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text);
 
   painter->restore();
-}
-
-
-QValidator::State bicValidator::validate(QString &string, int&) const
-{
-  for (int i = 0; i < qMin(string.length(), 6); ++i) {
-    if ( !string.at(i).isLetter() )
-      return Invalid;
-    if (string.at(i).isLower())
-      string[i] = string.at(i).toUpper();
-  }
-  for (int i = 6; i < string.length(); ++i) {
-    if ( !string.at(i).isLetterOrNumber() )
-      return Invalid;
-    if (string.at(i).isLower())
-      string[i] = string.at(i).toUpper();
-  }
-  
-  if ( string.length() > 11 )
-    return Invalid;
-  else if (string.length() == 8 || string.length() == 11)
-    return Acceptable;
-  
-  return Intermediate;
 }

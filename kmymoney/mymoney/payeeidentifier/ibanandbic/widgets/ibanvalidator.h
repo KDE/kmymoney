@@ -1,37 +1,41 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager for KDE
- * Copyright (C) 2013 Christian Dávid <christian-david@web.de>
- * 
+ * Copyright (C) 2014 Christian David <christian-david@web.de>
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SEPACREDITTRANSFEREDIT_P_H
-#define SEPACREDITTRANSFEREDIT_P_H
+#ifndef IBANVALIDATOR_H
+#define IBANVALIDATOR_H
+
+#include "../ibanbicmacros.h"
 
 #include <QtGui/QValidator>
 
-/**
-  * @brief Validator for IBAN
-  * A check if this code actualy exists is not done
-  */
-class ibanValidator : public QValidator
+#include "kmymoneyvalidationfeedback.h"
+
+class IBAN_BIC_IDENTIFIER_EXPORT ibanValidator : public QValidator
 {
   Q_OBJECT
+
 public:
-  explicit ibanValidator(QObject* parent = 0)
-    : QValidator(parent) {}
-  State validate(QString &string, int &pos) const;
+  explicit ibanValidator(QObject* parent = 0);
+  virtual State validate(QString& , int&) const;
+  virtual void fixup(QString&) const;
+
+signals:
+  void feedback(KMyMoneyValidationFeedback::MessageType type, QString message) const;
 };
 
-#endif // SEPACREDITTRANSFEREDIT_P_H
+#endif // IBANVALIDATOR_H

@@ -17,11 +17,11 @@
 */
 
 #include "sepacredittransferedit.h"
-#include "sepacredittransferedit_p.h"
 #include "ui_sepacredittransferedit.h"
 #include "kguiutils.h"
 
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "payeeidentifier/ibanandbic/widgets/ibanvalidator.h"
 
 sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList args) :
     IonlineJobEdit(parent, args),
@@ -32,37 +32,29 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
 {
     ui->setupUi(this);
 
-    ui->beneficiaryAccNum->setValidator( new ibanValidator(ui->beneficiaryAccNum) );
-
-    ui->statusBeneficiaryName->setVisible(false);
-    ui->statusIban->setVisible(false);
-    ui->statusBic->setVisible(false);
-    ui->statusAmount->setVisible(false);
-    ui->statusPurpose->setVisible(false);
-    ui->statusReference->setVisible(false);
-
-    m_requiredFields->add(ui->beneficiaryAccNum);
+    m_requiredFields->add(ui->beneficiaryIban);
     m_requiredFields->add(ui->value);
     // Other required fields are set in updateSettings()
 
     connect(m_requiredFields, SIGNAL(stateChanged(bool)), this, SLOT(requiredFieldsCompleted(bool)));
 
     connect(ui->beneficiaryName, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryNameChanged(QString)));
-    connect(ui->beneficiaryAccNum, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryIbanChanged(QString)));
+    connect(ui->beneficiaryIban, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryIbanChanged(QString)));
     connect(ui->beneficiaryBankCode, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryBicChanged(QString)));
     connect(ui->value, SIGNAL(valueChanged(QString)), this, SLOT(valueChanged()));
     connect(ui->sepaReference, SIGNAL(textChanged(QString)), this, SLOT(endToEndReferenceChanged(QString)));
     connect(ui->purpose, SIGNAL(textChanged()), this, SLOT(purposeChanged()));
 
     connect(ui->beneficiaryName, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
-    connect(ui->beneficiaryAccNum, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
+    connect(ui->beneficiaryIban, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
     connect(ui->beneficiaryBankCode, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
     connect(ui->value, SIGNAL(valueChanged(QString)), this, SIGNAL(onlineJobChanged()));
     connect(ui->sepaReference, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
     connect(ui->purpose, SIGNAL(textChanged()), this, SIGNAL(onlineJobChanged()));
 
+    // Connect signals for read only
     connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryName, SLOT(setReadOnly(bool)));
-    connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryAccNum, SLOT(setReadOnly(bool)));
+    connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryIban, SLOT(setReadOnly(bool)));
     connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryBankCode, SLOT(setReadOnly(bool)));
     connect(this, SIGNAL(readOnlyChanged(bool)), ui->value, SLOT(setReadOnly(bool)));
     connect(this, SIGNAL(readOnlyChanged(bool)), ui->sepaReference, SLOT(setReadOnly(bool)));
@@ -84,7 +76,7 @@ onlineJobTyped<sepaOnlineTransfer> sepaCreditTransferEdit::getOnlineJobTyped() c
 
   payeeIdentifiers::ibanBic accIdent;
   accIdent.setOwnerName( ui->beneficiaryName->text() );
-  accIdent.setIban( ui->beneficiaryAccNum->text() );
+  accIdent.setIban( ui->beneficiaryIban->text() );
   accIdent.setBic( ui->beneficiaryBankCode->text() );
   sepaJob.task()->setBeneficiary(accIdent);
 
@@ -101,7 +93,7 @@ void sepaCreditTransferEdit::setOnlineJob(const onlineJobTyped<sepaOnlineTransfe
   ui->sepaReference->setText( job.task()->endToEndReference() );
   ui->value->setValue( job.task()->value() );
   ui->beneficiaryName->setText( job.task()->beneficiaryTyped().ownerName() );
-  ui->beneficiaryAccNum->setText( job.task()->beneficiaryTyped().paperformatIban() );
+  ui->beneficiaryIban->setText( job.task()->beneficiaryTyped().paperformatIban() );
   ui->beneficiaryBankCode->setText( job.task()->beneficiaryTyped().storedBic() );
 }
 
@@ -123,7 +115,7 @@ void sepaCreditTransferEdit::setOriginAccount(const QString& accountId)
 void sepaCreditTransferEdit::updateEveryStatus()
 {
     beneficiaryNameChanged( ui->beneficiaryName->text() );
-    beneficiaryIbanChanged( ui->beneficiaryAccNum->text() );
+    beneficiaryIbanChanged( ui->beneficiaryIban->text() );
     beneficiaryBicChanged( ui->beneficiaryBankCode->text() );
     purposeChanged();
     valueChanged();
@@ -173,13 +165,6 @@ void sepaCreditTransferEdit::updateSettings()
 void sepaCreditTransferEdit::beneficiaryIbanChanged(const QString& iban)
 {
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
-  if ( payeeIdentifiers::ibanBic::isIbanValid(iban) ) {
-    ui->statusIban->setToolTip(QString());
-    ui->statusIban->setVisible(false);
-  } else {
-    ui->statusIban->setToolTip( i18n("The checksum for this IBAN is invalid.") );
-    ui->statusIban->setVisible(true);
-  }
 
   if (settings->isBicMandatory( iban ))
     m_requiredFields->add( ui->beneficiaryBankCode );
@@ -187,137 +172,97 @@ void sepaCreditTransferEdit::beneficiaryIbanChanged(const QString& iban)
     m_requiredFields->remove( ui->beneficiaryBankCode );
 }
 
+void sepaCreditTransferEdit::beneficiaryBicChanged(const QString& bic)
+{
+  if ( bic.isEmpty() && !ui->beneficiaryIban->text().isEmpty() ) {
+    QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
+
+    if (settings->isBicMandatory( ui->beneficiaryBankCode->text() )) {
+      ui->feedbackBic->setFeedback(KMyMoneyValidationFeedback::Error, i18n("For this beneficary a BIC is mandatory."));
+      return;
+    }
+  }
+  ui->feedbackBic->removeFeedback(KMyMoneyValidationFeedback::Error, i18n("For this beneficary a BIC is mandatory."));
+}
+
 void sepaCreditTransferEdit::beneficiaryNameChanged( const QString& name )
 {
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
   if ( name.length() < settings->recipientNameMinLength() ) {
-      ui->statusBeneficiaryName->setToolTip( i18np("A beneficiary name is needed.", "The beneficiary name must be at least %i characters long",
+    ui->feedbackName->setFeedback( KMyMoneyValidationFeedback::Error, i18np("A beneficiary name is needed.", "The beneficiary name must be at least %i characters long",
         settings->recipientNameMinLength()
       ) );
-      ui->statusBeneficiaryName->setVisible( true );
   } else {
-      ui->statusBeneficiaryName->setToolTip( QString() );
-      ui->statusBeneficiaryName->setVisible( false );
+    ui->feedbackName->removeFeedback( KMyMoneyValidationFeedback::Error, i18np("A beneficiary name is needed.", "The beneficiary name must be at least %i characters long",
+                                                                            settings->recipientNameMinLength()
+    )  );
   }
-}
-
-void sepaCreditTransferEdit::beneficiaryBicChanged( const QString& bic )
-{
-    if ( bic.length() == 8 || bic.length() == 11 ) {
-        ui->statusBic->setToolTip( QString() );
-        ui->statusBic->setVisible( false );
-    } else {
-        ui->statusBic->setToolTip( i18n("A valid BIC must contain 8 or 11 characters.") );
-        ui->statusBic->setVisible( true );
-    }
 }
 
 void sepaCreditTransferEdit::valueChanged()
 {
-    if ( !ui->value->isValid() || !ui->value->value().isPositive() ) {
-        ui->statusAmount->setToolTip( i18n("A positiv amount to transfer is needed.") );
-        ui->statusAmount->setColor( Qt::red );
-        ui->statusAmount->setVisible( true );
-        return;
-    }
+  if ( !ui->value->isValid() || !ui->value->value().isPositive() ) {
+    ui->feedbackAmount->setFeedback( KMyMoneyValidationFeedback::Error, i18n("A positiv amount to transfer is needed.") );
+    return;
+  }
 
-    const MyMoneyAccount account = getOnlineJob().responsibleMyMoneyAccount();
-    const MyMoneyMoney expectedBalance = account.balance() - ui->value->value();
+  const MyMoneyAccount account = getOnlineJob().responsibleMyMoneyAccount();
+  const MyMoneyMoney expectedBalance = account.balance() - ui->value->value();
 
-    if ( expectedBalance < MyMoneyMoney(  account.value("maxCreditAbsolute") ) ) {
-        ui->statusAmount->setToolTip(i18n("After this credit transfer the account's balance will be below your credit limit."));
-        ui->statusAmount->setColor( Qt::darkYellow );
-        ui->statusAmount->setVisible( true );
-    } else if ( expectedBalance < MyMoneyMoney( account.value("minBalanceAbsolute") )) {
-        ui->statusAmount->setToolTip(i18n("After this credit transfer the account's balance will be below the minium balance."));
-        ui->statusAmount->setColor( Qt::yellow );
-        ui->statusAmount->setVisible( true );
-    } else {
-        ui->statusAmount->setToolTip(QString());
-        ui->statusAmount->setVisible( false );
-    }
+  if ( expectedBalance < MyMoneyMoney(  account.value("maxCreditAbsolute") ) ) {
+    ui->feedbackAmount->setFeedback( KMyMoneyValidationFeedback::Warning, i18n("After this credit transfer the account's balance will be below your credit limit."));
+  } else if ( expectedBalance < MyMoneyMoney( account.value("minBalanceAbsolute") )) {
+    ui->feedbackAmount->setFeedback( KMyMoneyValidationFeedback::Information, i18n("After this credit transfer the account's balance will be below the minium balance."));
+  } else {
+    ui->feedbackAmount->removeFeedback();
+  }
 }
 
 void sepaCreditTransferEdit::endToEndReferenceChanged( const QString& reference )
 {
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
-    if ( settings->checkEndToEndReferenceLength( reference ) == validators::tooLong) {
-        ui->statusReference->setToolTip( i18np("The end-to-end refence cannot contain more than one character.",
-                                               "The end-to-end refence cannot contain more than %1 characters.",
-                                               settings->endToEndReferenceLength()
-                                              ) );
-        ui->statusReference->setVisible(true);
-    } else {
-        ui->statusReference->setVisible(false);
-    }
+  if ( settings->checkEndToEndReferenceLength( reference ) == validators::tooLong) {
+    ui->feedbackReference->setFeedback( KMyMoneyValidationFeedback::Error, i18np("The end-to-end refence cannot contain more than one character.",
+                                                                                 "The end-to-end refence cannot contain more than %1 characters.",
+                                                                                 settings->endToEndReferenceLength()
+    ) );
+  } else {
+    ui->feedbackReference->removeFeedback();
+  }
 }
 
 void sepaCreditTransferEdit::purposeChanged()
 {
-    const QString purpose = ui->purpose->toPlainText();
-    QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
+  const QString purpose = ui->purpose->toPlainText();
+  QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
 
-    QString tooltip = QString("");
-    if (!settings->checkPurposeLineLength( purpose ))
-        tooltip = i18np("The maximal line length of %1 character per line is exceeded.", "The maximal line length of %1 characters per line is exceeded.",
-                        settings->purposeLineLength())
-        .append('\n');
-    if (!settings->checkPurposeCharset( purpose ))
-        tooltip.append( i18n("The purpose can only contain the letters A-Z, spaces and ':?.,-()+ and /") ).append('\n');
-    if ( !settings->checkPurposeMaxLines(purpose) ) {
-        tooltip.append( i18np("In the purpose only a single line is allowed.", "The purpose cannot contain more than %1 lines.",
-                              settings->purposeMaxLines()) )
-        .append('\n');
-    } else if (settings->checkPurposeLength(purpose) == validators::tooShort) {
-        tooltip.append( i18np("A purpose is needed.", "The purpose must be at least %1 characters long.", settings->purposeMinLength()) )
-        .append('\n');
-    }
+  QString message = QString();
+  if (!settings->checkPurposeLineLength( purpose ))
+    message = i18np("The maximal line length of %1 character per line is exceeded.", "The maximal line length of %1 characters per line is exceeded.",
+                    settings->purposeLineLength())
+    .append('\n');
+  if (!settings->checkPurposeCharset( purpose ))
+    message.append( i18n("The purpose can only contain the letters A-Z, spaces and ':?.,-()+ and /") ).append('\n');
+  if ( !settings->checkPurposeMaxLines(purpose) ) {
+    message.append( i18np("In the purpose only a single line is allowed.", "The purpose cannot contain more than %1 lines.",
+                          settings->purposeMaxLines()) )
+    .append('\n');
+  } else if (settings->checkPurposeLength(purpose) == validators::tooShort) {
+    message.append( i18np("A purpose is needed.", "The purpose must be at least %1 characters long.", settings->purposeMinLength()) )
+    .append('\n');
+  }
 
-    // Set tooltip and remove the last '\n'
-    tooltip.chop(1);
-    ui->statusPurpose->setToolTip( tooltip );
+  // Remove the last '\n'
+  message.chop(1);
 
-    if (tooltip.isEmpty())
-        ui->statusPurpose->setVisible( false );
-    else
-        ui->statusPurpose->setVisible( true );
+  if ( !message.isEmpty() ) {
+    ui->feedbackPurpose->setFeedback( KMyMoneyValidationFeedback::Error, message );
+  } else {
+    ui->feedbackPurpose->removeFeedback();
+  }
 }
 
 QSharedPointer< const sepaOnlineTransfer::settings > sepaCreditTransferEdit::taskSettings()
 {
     return getOnlineJobTyped().constTask()->getSettings();
-}
-
-QValidator::State ibanValidator::validate(QString& string, int&) const
-{
-    if( string.length() >= 1 ) {
-        if( !string.at(0).isLetter() )
-            return Invalid;
-        if ( string.at(0).isLower() )
-            string[0] = string.at(0).toUpper();
-    }
-
-    if ( string.length() >= 2 ) {
-        if ( !string.at(1).isLetter() )
-            return Invalid;
-        if (string.at(1).isLower())
-            string[1] = string.at(1).toUpper();
-    }
-
-    int digitCount = 0;
-    for(int i = 2; i < string.length(); ++i) {
-      if (string.at(i).isDigit()) {
-          ++digitCount;
-      } else if ( !string.at(i).isSpace() ) {
-        return Invalid;
-      }
-    }
-
-    if (digitCount > 32)
-        return Invalid;
-
-    if (digitCount > 2)
-        return Acceptable;
-
-    return Intermediate;
 }
