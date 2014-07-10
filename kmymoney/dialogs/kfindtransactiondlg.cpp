@@ -43,7 +43,7 @@
 #include <kpushbutton.h>
 #include <klineedit.h>
 #include <kcombobox.h>
-#include <kstdguiitem.h>
+#include <kstandardguiitem.h>
 #include <kiconloader.h>
 #include <khelpclient.h>
 

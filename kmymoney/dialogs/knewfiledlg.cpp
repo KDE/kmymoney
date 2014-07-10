@@ -28,7 +28,7 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <kstdguiitem.h>
+#include <kstandardguiitem.h>
 #include <kpushbutton.h>
 #include <kmessagebox.h>
 #if 0

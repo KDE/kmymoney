@@ -39,7 +39,7 @@
 #include <kcalendarsystem.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
-#include <kstdguiitem.h>
+#include <kstandardguiitem.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

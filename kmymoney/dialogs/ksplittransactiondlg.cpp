@@ -41,7 +41,7 @@
 #include <kicon.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
-#include <kstdguiitem.h>
+#include <kstandardguiitem.h>
 #include <kapplication.h>
 
 // ----------------------------------------------------------------------------

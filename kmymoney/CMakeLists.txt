@@ -54,7 +54,7 @@ add_library(kmm_config STATIC ${kmm_config_SRCS})
 SET( kmymoney_common_SRCS kmymoneyutils.cpp kstartuplogo.cpp )
 add_library(kmymoney_common STATIC ${kmymoney_common_SRCS})
 TARGET_LINK_LIBRARIES(kmymoney_common
-  Qt5::Core ${GMP_LIBRARIES} Alkimia::alkimia kmm_widgets kmm_mymoney)
+  Qt5::Core KF5::ConfigGui KF5::WidgetsAddons ${GMP_LIBRARIES} Alkimia::alkimia kmm_widgets kmm_mymoney)
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
@@ -68,7 +68,7 @@ SET( kmymoney_common_LIBS
   dialogs widgets settings converter models kmm_config
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
   Qt5::Core Qt5::Sql
-  KF5::KHtml KF5::Archive KF5::Holidays)
+  KF5::KHtml KF5::Archive KF5::Holidays KF5::ConfigGui KF5::WidgetsAddons)
 
 ########### kmymoney executable ###############
 
@@ -133,7 +133,7 @@ IF( KDE4_BUILD_TESTS )
         kmymoney_common
         kmm_config
         widgets
-        KF5::KHtml KF5::Archive KF5::Holidays
+        KF5::KHtml KF5::Archive KF5::Holidays KF5::ConfigGui KF5::WidgetsAddons
         Qt5::Core Qt5::Sql Qt5::Test
         Alkimia::alkimia)
 
