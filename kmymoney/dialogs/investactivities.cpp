@@ -448,7 +448,10 @@ bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
 
   MyMoneyMoney total = sumSplits(s0, feeSplits, interestSplits);
   assetAccountSplit.setValue(-total);
-  assetAccountSplit.setShares(-total);
+
+  if (!m_parent->setupPrice(t, assetAccountSplit))
+    return false;
+
   return true;
 }
 
@@ -760,7 +763,9 @@ bool IntInc::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneyS
 
   MyMoneyMoney total = sumSplits(s0, feeSplits, interestSplits);
   assetAccountSplit.setValue(-total);
-  assetAccountSplit.setShares(-total);
+
+  if (!m_parent->setupPrice(t, assetAccountSplit))
+    return false;
 
   return true;
 }
