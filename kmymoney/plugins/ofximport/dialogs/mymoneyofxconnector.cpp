@@ -40,6 +40,7 @@
 #include <kpassworddialog.h>
 #include <KWallet/Wallet>
 #include <KMainWindow>
+#include <KLineEdit>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -71,8 +72,9 @@ QString OfxHeaderVersion::headerVersion(void) const
   return m_combo->currentText();
 }
 
-OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
-    m_combo(combo)
+OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QString& appId) :
+    m_combo(combo),
+    m_versionEdit(versionEdit)
 {
 // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
 // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
@@ -91,6 +93,7 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
   m_appMap[i18n("Quicken Windows 2012")] = "QWIN:2100";
   m_appMap[i18n("Quicken Windows 2013")] = "QWIN:2200";
   m_appMap[i18n("Quicken Windows 2014")] = "QWIN:2300";
+  m_appMap[i18n("Quicken Windows (Expert)")] = "QWIN:";
 
   // MS-Money
   m_appMap[i18n("MS-Money 2003")] = "Money:1100";
@@ -99,21 +102,45 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
   m_appMap[i18n("MS-Money 2006")] = "Money:1500";
   m_appMap[i18n("MS-Money 2007")] = "Money:1600";
   m_appMap[i18n("MS-Money Plus")] = "Money:1700";
+  m_appMap[i18n("MS-Money (Expert)")] = "Money:";
 
   // KMyMoney
   m_appMap["KMyMoney"] = "KMyMoney:1000";
 
   combo->clear();
   combo->addItems(m_appMap.keys());
+  if(versionEdit)
+    versionEdit->hide();
 
   QMap<QString, QString>::const_iterator it_a;
+  // check for an exact match
   for (it_a = m_appMap.constBegin(); it_a != m_appMap.constEnd(); ++it_a) {
     if (*it_a == appId)
       break;
   }
 
+  // not found, check if we have a manual version of this product
+  QRegExp appExp("(\\w+:)(\\d+)");
+  if (it_a == m_appMap.constEnd()) {
+    if(appExp.exactMatch(appId)) {
+      for (it_a = m_appMap.constBegin(); it_a != m_appMap.constEnd(); ++it_a) {
+        if (*it_a == appExp.cap(1))
+          break;
+      }
+    }
+  }
+
+  // if we still haven't found it, we use a default as last resort
   if (it_a != m_appMap.constEnd()) {
     combo->setCurrentItem(it_a.key());
+    if((*it_a).endsWith(':')) {
+      if(versionEdit) {
+        versionEdit->show();
+        versionEdit->setText(appExp.cap(2));
+      } else {
+        combo->setCurrentItem(i18n("Quicken Windows 2008"));
+      }
+    }
   } else {
     combo->setCurrentItem(i18n("Quicken Windows 2008"));
   }
@@ -124,9 +151,33 @@ const QString OfxAppVersion::appId(void) const
   static QString defaultAppId("QWIN:1700");
 
   QString app = m_combo->currentText();
-  if (m_appMap[app] != defaultAppId)
+  if (m_appMap[app] != defaultAppId) {
+    if(m_appMap[app].endsWith(':')) {
+      if(m_versionEdit) {
+        return m_appMap[app] + m_versionEdit->text();
+      } else {
+        return QString();
+      }
+    }
     return m_appMap[app];
+  }
   return QString();
+}
+
+bool OfxAppVersion::isValid() const
+{
+  QRegExp exp(".+:\\d+");
+  QString app = m_combo->currentText();
+  if(m_appMap[app].endsWith(':')) {
+    if(m_versionEdit) {
+      app = m_appMap[app] + m_versionEdit->text();
+    } else {
+      app.clear();
+    }
+  } else {
+    app = m_appMap[app];
+  }
+  return exp.exactMatch(app);
 }
 
 MyMoneyOfxConnector::MyMoneyOfxConnector(const MyMoneyAccount& _account):
