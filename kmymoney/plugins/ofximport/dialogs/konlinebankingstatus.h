@@ -57,6 +57,9 @@ public:
   ~KOnlineBankingStatus();
   const QString appId(void) const;
   QString headerVersion(void) const;
+protected Q_SLOTS:
+  void applicationSelectionChanged();
+
 private:
   OfxAppVersion*  m_appId;
   OfxHeaderVersion* m_headerVersion;

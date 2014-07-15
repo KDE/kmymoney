@@ -40,6 +40,7 @@ class QDate;
 // ----------------------------------------------------------------------------
 // KDE Includes
 class KComboBox;
+class KLineEdit;
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -56,7 +57,7 @@ class MyMoneyAccount;
 class OfxAppVersion
 {
 public:
-  OfxAppVersion(KComboBox* combo, const QString& appId);
+  OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QString& appId);
   /**
    * This method returns the currently selected application id
    * as a colon separated value consisting of the application
@@ -65,9 +66,16 @@ public:
    */
   const QString appId(void) const;
 
+  /**
+   * This method returns @c true in case the current selected application
+   * version is valid (contains app and version) or @c false otherwise.
+   */
+  bool isValid() const;
+
 private:
   QMap<QString, QString> m_appMap;
   KComboBox*             m_combo;
+  KLineEdit*             m_versionEdit;
 };
 
 /**
