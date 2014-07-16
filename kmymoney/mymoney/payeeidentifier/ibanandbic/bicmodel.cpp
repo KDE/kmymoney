@@ -26,32 +26,55 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 
+/**
+ * @warning At the moment the completion may fail if bicModel was created in more than one thread
+ * (it uses a QSqlDatabase object over all instances of bicModel, so the first created bicModel defines
+ * the thread)
+ *
+ * @todo Make thread safe.
+ */
 bicModel::bicModel(QObject* parent)
   : QSqlQueryModel(parent)
 {
-  QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "bicModel");
-  db.setDatabaseName( ":memory:" );
-  db.setConnectOptions("QSQLITE_OPEN_READONLY=1;QSQLITE_ENABLE_SHARED_CACHE=1;");
-  const bool opened = db.open();
-  if ( !opened ) {
+
+  QSqlDatabase db = QSqlDatabase::database("bicModel", true);
+  // Save if the database was opened before
+  bool attachDatabases = false;
+
+  if ( !db.isValid() ) {
+    db = QSqlDatabase::addDatabase("QSQLITE", "bicModel");
+    db.setDatabaseName( ":memory:" );
+    db.setConnectOptions("QSQLITE_OPEN_READONLY=1;QSQLITE_ENABLE_SHARED_CACHE=1;");
+    db.open();
+    // Database was not opened before
+    attachDatabases = true;
+  }
+
+  if ( !db.isOpen() ) {
     kWarning() << QString("Could not open in-memory database for bic data.");
   }
   QSqlQuery query(db);
-  query.prepare("ATTACH DATABASE ? AS ?");
 
   // Get services which support iban2bic and have a database entry
   KService::List services = KServiceTypeTrader::self()->query("KMyMoney/IbanBicData",
     QString("exist [X-KMyMoney-Bankdata-Database]")
   );
-  
+
+  if ( services.isEmpty() ) {
+    // Set a valid query
+    query.exec("SELECT null;");
+    setQuery(query);
+    return;
+  }
+
   QStringList databases;
   QStringList dbNames;
-  
+
   unsigned int databaseCount = 0;
-  
+
   foreach( KService::Ptr service, services ) {
     QString database = service->property(QLatin1String("X-KMyMoney-Bankdata-Database")).toString();
-    
+
     // Locate database
     QString path = KGlobal::dirs()->locate("data", QLatin1String("kmymoney/ibanbicdata/") + database);
     if ( path.isEmpty() ) {
@@ -61,11 +84,16 @@ bicModel::bicModel(QObject* parent)
       dbNames << QString("db%1").arg(++databaseCount);
     }
   }
-  
-  query.addBindValue(databases);
-  query.addBindValue(dbNames);
 
-  qDebug() << "Attached databases" << query.execBatch() << query.lastError().text();
+  if ( attachDatabases ) {
+    query.prepare("ATTACH DATABASE ? AS ?");
+    query.addBindValue(databases);
+    query.addBindValue(dbNames);
+    if (!query.execBatch()) {
+      qWarning() << "Could not init bic for bicModel, last error:" << query.lastError().text();
+      dbNames = QStringList(); // clear so no query will be set
+    }
+  }
 
   QStringList queries;
   foreach (QString dbName, dbNames) {

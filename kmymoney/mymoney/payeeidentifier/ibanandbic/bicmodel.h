@@ -31,7 +31,7 @@ public:
   enum DisplayRole {
     InstitutionNameRole = Qt::UserRole
   };
-  
+
   explicit bicModel(QObject* parent = 0);
   virtual QVariant data(const QModelIndex& item, int role = Qt::DisplayRole) const;
 
