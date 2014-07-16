@@ -21,6 +21,8 @@
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 
+#include "payeeidentifier/ibanandbic/widgets/ibanbicitemdelegate.h"
+
 payeeIdentifierLoader payeeIdentifierLoader::m_self;
 
 payeeIdentifierLoader::payeeIdentifierLoader()
@@ -41,8 +43,8 @@ payeeIdentifier::ptr payeeIdentifierLoader::createPayeeIdentifier(const QString&
   if ( ident != 0 ) {
     return ident->cloneSharedPtr();
   }
-  
-  return payeeIdentifier::ptr();  
+
+  return payeeIdentifier::ptr();
 }
 
 payeeIdentifier::ptr payeeIdentifierLoader::createPayeeIdentifierFromXML(const QString& payeeIdentifierId, const QDomElement& element)
@@ -52,6 +54,14 @@ payeeIdentifier::ptr payeeIdentifierLoader::createPayeeIdentifierFromXML(const Q
     payeeIdentifier* newIdent = ident->createFromXml( element );
     return payeeIdentifier::ptr( newIdent );
   }
-  
+
   return payeeIdentifier::ptr();
+}
+
+QAbstractItemDelegate* payeeIdentifierLoader::createItemDelegate(const QString& payeeIdentifierId, QObject* parent)
+{
+  if ( payeeIdentifierId == payeeIdentifiers::ibanBic::staticPayeeIdentifierId() )
+    return new ibanBicItemDelegate(parent);
+
+  return 0;
 }

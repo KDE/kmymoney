@@ -3,6 +3,14 @@ set ( IBAN_BIC_WIDGETS_SCRS
   kbicedit.cpp
   ibanvalidator.cpp
   bicvalidator.cpp
+  ibanbicitemdelegate.cpp
+  ibanbicitemedit.ui
+  ibanbicitemedit.cpp
+)
+
+kde4_add_ui_files(
+  IBAN_BIC_WIDGETS_SCRS
+  ibanbicitemedit.ui
 )
 
 kde4_add_library( payeeidentifier_iban_bic_widgets SHARED

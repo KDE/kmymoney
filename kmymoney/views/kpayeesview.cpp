@@ -447,6 +447,7 @@ void KPayeesView::slotSelectPayee(void)
     slotPayeeDataChanged();
 
     showTransactions();
+    payeeIdentifiers->setPayee(m_payee);
 
   } catch (const MyMoneyException &e) {
     qDebug("exception during display of payee: %s at %s:%ld", qPrintable(e.what()), qPrintable(e.file()), e.line());

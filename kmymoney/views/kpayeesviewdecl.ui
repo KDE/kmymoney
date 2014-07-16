@@ -362,7 +362,7 @@
                 <bool>true</bool>
                </property>
                <attribute name="buttonGroup">
-                <string>m_matchType</string>
+                <string notr="true">m_matchType</string>
                </attribute>
               </widget>
              </item>
@@ -372,7 +372,7 @@
                 <string>Match on Payee name</string>
                </property>
                <attribute name="buttonGroup">
-                <string>m_matchType</string>
+                <string notr="true">m_matchType</string>
                </attribute>
               </widget>
              </item>
@@ -382,7 +382,7 @@
                 <string>Match on a name listed below</string>
                </property>
                <attribute name="buttonGroup">
-                <string>m_matchType</string>
+                <string notr="true">m_matchType</string>
                </attribute>
               </widget>
              </item>
@@ -485,6 +485,16 @@ new transactions with this payee</string>
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tabPayeeIdentifiers">
+         <attribute name="title">
+          <string>Account Numbers</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="KPayeeIdentifierView" name="payeeIdentifiers" native="true"/>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </widget>
      </item>
@@ -549,6 +559,7 @@ new transactions with this payee</string>
    <class>KMyMoneyAccountCombo</class>
    <extends>KComboBox</extends>
    <header>kmymoneyaccountcombo.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>KEditListBox</class>
@@ -587,18 +598,10 @@ new transactions with this payee</string>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>KBankAccountsView</class>
+   <class>KPayeeIdentifierView</class>
    <extends>QWidget</extends>
-   <header location="global">kbankaccountsview.h</header>
+   <header>kpayeeidentifierview.h</header>
    <container>1</container>
-   <class>KMyMoneyAccountCombo</class>
-   <extends>KComboBox</extends>
-   <header>kmymoneyaccountcombo.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyRegister::Register</class>
-   <extends>QTableWidget</extends>
-   <header>register.h</header>
   </customwidget>
  </customwidgets>
  <includes>

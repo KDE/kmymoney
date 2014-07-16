@@ -19,22 +19,27 @@
 #ifndef PAYEEIDENTIFIERLOADER_H
 #define PAYEEIDENTIFIERLOADER_H
 
+#include "mymoney/kmm_mymoney_export.h"
 #include "payeeidentifier/payeeidentifier.h"
 
 #include <QHash>
 #include <QDomElement>
 
-class payeeIdentifierLoader
+class QAbstractItemDelegate;
+
+class KMM_MYMONEY_EXPORT payeeIdentifierLoader
 {
 public:
   payeeIdentifierLoader();
 
   payeeIdentifier::ptr createPayeeIdentifier( const QString& payeeIdentifierId );
   payeeIdentifier::ptr createPayeeIdentifierFromXML( const QString& payeeIdentifierId, const QDomElement& element );
-  
+
+  QAbstractItemDelegate* createItemDelegate( const QString& payeeIdentifierId, QObject* parent = 0 );
+
   /** I take ownership */
   void addPayeeIdentifier( payeeIdentifier *const identifier );
-  
+
   static payeeIdentifierLoader* instance() { return &m_self; }
 
 private:

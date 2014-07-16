@@ -3,6 +3,7 @@ SET(libmodels_a_SOURCES
     onlinejobmodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
     models.cpp
+    payeeidentifiermodel.cpp
    )
 
 KDE4_ADD_LIBRARY(models STATIC ${libmodels_a_SOURCES})

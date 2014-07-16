@@ -22,6 +22,7 @@
 #include <QtCore/QtPlugin>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QHash>
+#include <QtCore/QMetaType>
 #include <QtXml/QDomElement>
 
 #include "payeeidentifiermacros.h"
@@ -30,6 +31,8 @@
  * @brief Define a unique identifier for an payeeIdentifier subclass
  *
  * Use this macro in your class's public section.
+ *
+ * This also defines the helper ::ptr, ::constPtr and className::ptr cloneSharedPtr()
  *
  * @param PIDID the payeeIdentifier id, e.g. "org.kmymoney.payeeIdentifier.swift". Must be
  * unique among all payeeIdentifiers as it is used internaly to store data, to compare
@@ -45,8 +48,9 @@ static const QString& staticPayeeIdentifierId() { \
   virtual QString payeeIdentifierId() const { \
     return className::staticPayeeIdentifierId(); \
     } \
-    typedef QSharedPointer< className > ptr; \
-    typedef QSharedPointer< const className > constPtr
+  typedef QSharedPointer< className > ptr; \
+  typedef QSharedPointer< const className > constPtr; \
+  className::ptr cloneSharedPtr() const { return className::ptr( this->clone() ); }
 
 /**
  * @brief "Something" that identifies a payee (or an account of a payee)
@@ -67,7 +71,7 @@ static const QString& staticPayeeIdentifierId() { \
  * cloneSharedPtr().
  *
  * @intenal First this is more complex than creating a superset of all possible identifiers. But there
- * are many of them. And using this method it is a lot easier to create the comparison operatiors and
+ * are many of them. And using this method it is a lot easier to create the comparison operators and
  * things like isValid().
  *
  * @section Inheriting
@@ -125,8 +129,8 @@ public:
 
   /**
    * @see MyMoneyObject::writeXML()
-   * @warning Do not set an attribute "type" to parent, it is used to store the payeeIdentifierId and set
-   * automatically.
+   * @warning Do not set an attribute "type" to parent, it is used to store the payeeIdentifierId and is
+   * set automatically.
    */
   virtual void writeXML(QDomDocument &document, QDomElement &parent) const = 0;
 
@@ -154,5 +158,7 @@ protected:
 };
 
 Q_DECLARE_INTERFACE(payeeIdentifier, "org.kmymoney.payeeIdentifier")
+Q_DECLARE_METATYPE( payeeIdentifier::ptr )
+Q_DECLARE_METATYPE( payeeIdentifier::constPtr )
 
 #endif // PAYEEIDENTIFIER_H

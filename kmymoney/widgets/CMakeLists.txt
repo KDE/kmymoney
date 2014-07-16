@@ -24,6 +24,7 @@ SET(kmymoney_STAT_HEADERS
 SET(kmm_widgets_sources
   kmymoneydateinput.cpp
   kmymoneyvalidationfeedback.cpp
+  styleditemdelegateforwarder.cpp
   )
 
 kde4_add_ui_files(kmm_widgets_sources kmymoneyvalidationfeedback.ui)

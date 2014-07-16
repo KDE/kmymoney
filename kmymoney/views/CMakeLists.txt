@@ -22,6 +22,7 @@ SET(libviews_a_SOURCES
   kscheduletreeitem.cpp
   ktagsview.cpp
   konlinejoboutbox.cpp
+  kpayeeidentifierview.cpp
   )
 
 SET(libviews_a_HEADER kmymoneyview.h)
@@ -37,6 +38,7 @@ SET(libviews_a_UI
   kscheduledviewdecl.ui
   ktagsviewdecl.ui
   konlinejoboutbox.ui
+  kpayeeidentifierview.ui
   )
 
 # The handling of these ui files depends
@@ -50,6 +52,7 @@ KDE4_ADD_LIBRARY(views STATIC ${libviews_a_SOURCES})
 target_link_libraries( views
   payeeidentifier_iban_bic
   payeeidentifier_nationalAccount
+  kmm_mymoney # needed to load payeeIdentifier
 )
 
 # we rely on some of the dialogs to be generated
