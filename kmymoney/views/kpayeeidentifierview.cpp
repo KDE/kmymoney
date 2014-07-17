@@ -45,13 +45,8 @@ QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelInde
     delegate = defaultDelegate;
   }
 
-  connect( delegate, SIGNAL(sizeHintChanged(QModelIndex)), this, SLOT(sizeHintChangedSlot(QModelIndex)), Qt::UniqueConnection);
-  return delegate;
-}
 
-void payeeIdentifierDelegate::sizeHintChangedSlot(const QModelIndex& index)
-{
-  //qDebug() << "sizeHintChanged for" << index.row() << index.column();
+  return delegate;
 }
 
 KPayeeIdentifierView::KPayeeIdentifierView(QWidget* parent)
@@ -60,6 +55,7 @@ KPayeeIdentifierView::KPayeeIdentifierView(QWidget* parent)
   ui = new Ui::KPayeeIdentifierView;
   ui->setupUi(this);
   ui->view->setItemDelegate( new payeeIdentifierDelegate(ui->view) );
+
 }
 
 void KPayeeIdentifierView::setPayee(MyMoneyPayee payee)
@@ -71,4 +67,24 @@ void KPayeeIdentifierView::setPayee(MyMoneyPayee payee)
 
   Q_CHECK_PTR( qobject_cast<payeeIdentifierModel*>(ui->view->model()) );  // this should never fail but may help during debugging
   static_cast<payeeIdentifierModel*>(ui->view->model())->setPayee(payee);
+}
+
+/**
+ * @param index not used at the moment
+ */
+void KPayeeIdentifierView::addEntry(const QModelIndex& index)
+{
+  Q_UNUSED( index );
+  ui->view->model()->insertRow(ui->view->model()->rowCount());
+}
+
+void KPayeeIdentifierView::removeSelected()
+{
+  QModelIndexList selectedRows = ui->view->selectionModel()->selectedRows();
+  QAbstractItemModel *const model = ui->view->model();
+  Q_CHECK_PTR( model );
+
+  Q_FOREACH( QModelIndex row, selectedRows ) {
+    model->removeRow(row.row());
+  }
 }

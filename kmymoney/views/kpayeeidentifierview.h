@@ -38,6 +38,10 @@ public:
 public slots:
   void setPayee( MyMoneyPayee );
 
+private slots:
+  void addEntry( const QModelIndex& index = QModelIndex());
+  void removeSelected();
+
 private:
   Ui::KPayeeIdentifierView* ui;
 };
@@ -48,9 +52,6 @@ class payeeIdentifierDelegate : public StyledItemDelegateForwarder
 public:
   payeeIdentifierDelegate(QObject* parent = 0);
   virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex& index) const;
-
-public slots:
-  void sizeHintChangedSlot( const QModelIndex& );
 };
 
 #endif // KPAYEEIDENTIFIERVIEW_H

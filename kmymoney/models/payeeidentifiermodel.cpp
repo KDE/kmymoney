@@ -19,6 +19,7 @@
 #include "payeeidentifiermodel.h"
 #include "mymoney/mymoneyfile.h"
 #include <payeeidentifier/ibanandbic/ibanbic.h>
+#include <payeeidentifier/payeeidentifierloader.h>
 
 #include <QDebug>
 
@@ -42,6 +43,7 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
   return QVariant();
 }
 
+/** @todo implement dataChanged signal */
 bool payeeIdentifierModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
   if ( role == payeeIdentifierPtr ) {
@@ -76,14 +78,48 @@ int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
   return m_payee.payeeIdentifiers().count();
 }
 
+/** @todo implement dataChanged signal */
 bool payeeIdentifierModel::insertRows(int row, int count, const QModelIndex& parent)
 {
-  return false;
+//  if ( row != m_payee.payeeIdentifiers().count()-1 || count != 1 || parent.isValid())
+//    return false; // cannot add rows in the middle at the moment and only a single row
+
+  beginInsertRows(parent, row+1, row+1);
+  try {
+    m_payee.addPayeeIdentifier( payeeIdentifierLoader::instance()->createPayeeIdentifier("org.kmymoney.payeeIdentifier.ibanbic") );
+    MyMoneyFileTransaction transaction;
+    MyMoneyFile::instance()->modifyPayee(m_payee);
+    transaction.commit();
+  } catch ( MyMoneyException& ) {
+    endInsertRows();
+    return false;
+  }
+  endInsertRows();
+  return true;
 }
 
+/** @todo implement dataChanged signal */
 bool payeeIdentifierModel::removeRows(int row, int count, const QModelIndex& parent)
 {
-  return false;
+  if (count < 1)
+    return false;
+
+  beginRemoveRows(parent, row, row+count-1);
+
+  try {
+    for( int i = row; i < row+count; ++i) {
+      m_payee.removePayeeIdentifier(i);
+    }
+    MyMoneyFileTransaction transaction;
+    MyMoneyFile::instance()->modifyPayee( m_payee );
+    transaction.commit();
+  } catch ( MyMoneyException& ) {
+    endRemoveRows();
+    return false;
+  }
+
+  endRemoveRows();
+  return true;
 }
 
 void payeeIdentifierModel::setPayee(MyMoneyPayee payee)
