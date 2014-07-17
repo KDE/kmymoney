@@ -104,7 +104,7 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
   m_postcode = addrNode.attribute("postcode");
   m_state = addrNode.attribute("state");
   m_telephone = addrNode.attribute("telephone");
-  
+
   // Load identifiers
   QDomNodeList identifierNodes = node.elementsByTagName("payeeIdentifier");
   uint identifierNodesLength = identifierNodes.length();
@@ -120,7 +120,7 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
       }
       addPayeeIdentifier( ident );
       qDebug() << "Got something " << payeeIdentifierId;
-      
+
     }
   }
 }
@@ -160,6 +160,8 @@ bool MyMoneyPayee::operator < (const MyMoneyPayee& right) const
 
 int MyMoneyPayee::addPayeeIdentifier(const payeeIdentifier::ptr identifier)
 {
+  if (identifier.isNull())
+    throw MYMONEYEXCEPTION("Added invalid payeeIdentifier to an payee");
   const unsigned int newId = m_payeeIdentifiers.count();
   m_payeeIdentifiers.insert( newId , identifier->cloneSharedPtr() );
   return newId;
@@ -169,7 +171,7 @@ void MyMoneyPayee::modifyPayeeIdentifier(const unsigned int& index, payeeIdentif
 {
   Q_ASSERT( m_payeeIdentifiers.constFind( index ) != m_payeeIdentifiers.constEnd() );
   Q_CHECK_PTR( identifier );
-  
+
   m_payeeIdentifiers[index] = identifier;
 }
 
@@ -220,7 +222,7 @@ void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
       el.appendChild(identElement);
     }
   }
-  
+
   parent.appendChild(el);
 }
 
