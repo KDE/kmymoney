@@ -58,6 +58,8 @@ include(FeatureSummary)
 
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config KHtml KDELibs4Support Completion KCMUtils ItemViews Holidays Gpgmepp QGpgme)
+find_package(GMP REQUIRED)
+find_package(LibAlkimia REQUIRED)
 
 include( KMyMoneyMacros )
 
@@ -83,10 +85,6 @@ IF(DOXYGEN_FOUND)
 
   ADD_CUSTOM_TARGET(apidoc ${DOXYGEN} ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen)
 ENDIF(DOXYGEN_FOUND)
-
-FIND_PACKAGE(GMP REQUIRED)
-SET(LIBALKIMIA_MIN_VERSION 4.3.2)
-FIND_PACKAGE(LibAlkimia REQUIRED)
 
 # check for PkgConfig
 FIND_PACKAGE(PkgConfig)
