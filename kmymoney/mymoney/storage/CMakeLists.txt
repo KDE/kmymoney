@@ -17,7 +17,7 @@ SET(storage_a_SOURCES
 ADD_LIBRARY( kmm_storage STATIC ${storage_a_SOURCES} )
 kde_target_enable_exceptions(kmm_storage PUBLIC)
 
-TARGET_LINK_LIBRARIES( kmm_storage PUBLIC Qt5::Core Qt5::Xml Qt5::Sql Qt5::Gui)
+TARGET_LINK_LIBRARIES( kmm_storage PUBLIC Qt5::Core Qt5::Xml Qt5::Sql Qt5::Gui Alkimia::alkimia)
 
 ########### install files ###############
 
