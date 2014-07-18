@@ -15,6 +15,7 @@ SET (libnewaccountwizard_a_UI
 qt5_wrap_ui(libnewaccountwizard_a_SOURCES ${libnewaccountwizard_a_UI} )
 
 add_library(newaccountwizard STATIC ${libnewaccountwizard_a_SOURCES})
+target_link_libraries(newaccountwizard Alkimia::alkimia)
 
 # we rely on some dialogs to be generated
 ADD_DEPENDENCIES(newaccountwizard dialogs)

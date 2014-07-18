@@ -89,6 +89,7 @@ ADD_CUSTOM_TARGET(generate_base_ui_srcs DEPENDS
 
 # We can compile the uncritical sources without KMM_DESIGNER flags
 add_library(kmymoney_base STATIC ${_uncritial_common_sources})
+target_link_libraries(kmymoney_base Alkimia::alkimia)
 
 ADD_DEPENDENCIES(kmymoney_base kmm_config)
 

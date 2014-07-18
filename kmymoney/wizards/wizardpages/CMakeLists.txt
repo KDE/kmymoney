@@ -17,4 +17,5 @@ ADD_CUSTOM_TARGET(generate_wizardpages_ui_srcs DEPENDS
 
 add_library(wizardpages STATIC
   ${libwizardpages_a_SOURCES} ${wizardpages_ui_srcs})
+target_link_libraries(wizardpages Alkimia::alkimia)
 

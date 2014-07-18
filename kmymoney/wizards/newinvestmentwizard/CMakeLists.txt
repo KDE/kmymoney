@@ -17,6 +17,7 @@ SET (libnewinvestmentwizard_a_UI
 qt5_wrap_ui(libnewinvestmentwizard_a_SOURCES ${libnewinvestmentwizard_a_UI} )
 
 add_library(newinvestmentwizard STATIC ${libnewinvestmentwizard_a_SOURCES})
+target_link_libraries(newinvestmentwizard Alkimia::alkimia)
 
 # we rely on some widgets to be generated
 ADD_DEPENDENCIES(newinvestmentwizard widgets)

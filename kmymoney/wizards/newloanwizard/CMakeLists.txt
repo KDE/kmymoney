@@ -44,6 +44,7 @@ SET (libnewloanwizard_a_UI
 qt5_wrap_ui(libnewloanwizard_a_SOURCES ${libnewloanwizard_a_UI} )
 
 add_library(newloanwizard STATIC ${libnewloanwizard_a_SOURCES})
+target_link_libraries(newloanwizard Alkimia::alkimia)
 
 # we rely on some dialogs to be generated
 ADD_DEPENDENCIES(newloanwizard dialogs)
