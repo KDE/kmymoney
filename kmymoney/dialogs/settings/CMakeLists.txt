@@ -32,6 +32,6 @@ qt5_wrap_ui(libsettings_a_SOURCES ${libsettings_a_UI} )
 
 add_library(settings STATIC ${libsettings_a_SOURCES})
 
-target_link_libraries(settings PUBLIC KF5::KCMUtils KF5::ItemViews KF5::Holidays)
+target_link_libraries(settings PUBLIC KF5::KCMUtils KF5::ItemViews KF5::Holidays Alkimia::alkimia)
 
 ADD_DEPENDENCIES(settings widgets kmm_config)

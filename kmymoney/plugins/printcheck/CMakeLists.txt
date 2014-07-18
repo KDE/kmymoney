@@ -52,6 +52,7 @@ add_library(kcm_kmm_printcheck MODULE ${kcm_kmm_printcheck_PART_SRCS})
 TARGET_LINK_LIBRARIES(kcm_kmm_printcheck
                       ${KDE4_KDEUI_LIBS}
                       KF5::KHtml
+                      Alkimia::alkimia
                       )
 
 INSTALL(TARGETS kcm_kmm_printcheck

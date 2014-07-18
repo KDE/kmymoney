@@ -25,7 +25,7 @@ SET(kmm_widgets_sources
   )
 
 add_library(kmm_widgets SHARED ${kmm_widgets_sources})
-TARGET_LINK_LIBRARIES(kmm_widgets PUBLIC KF5::I18n KF5::KDELibs4Support Qt5::Gui Qt5::Core )
+TARGET_LINK_LIBRARIES(kmm_widgets PUBLIC KF5::I18n KF5::KDELibs4Support Qt5::Gui Qt5::Core Alkimia::alkimia)
 SET_TARGET_PROPERTIES(kmm_widgets PROPERTIES
    COMPILE_FLAGS "-DKMM_BUILD_WIDGETS_LIB"
    VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})

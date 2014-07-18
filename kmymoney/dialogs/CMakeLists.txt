@@ -79,7 +79,7 @@ ADD_CUSTOM_TARGET(generate_dialogs_ui_srcs DEPENDS ${dialogs_ui_srcs})
 
 add_library(dialogs STATIC ${libdialogs_a_SOURCES} ${dialogs_ui_srcs})
 
-TARGET_LINK_LIBRARIES(dialogs PUBLIC KF5::ItemViews Qt5::Sql)
+TARGET_LINK_LIBRARIES(dialogs PUBLIC KF5::ItemViews Qt5::Sql Alkimia::alkimia)
 
 # we rely on the widgets to be generated
 ADD_DEPENDENCIES(dialogs widgets)

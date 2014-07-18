@@ -13,6 +13,7 @@ SET (libreports_a_SOURCES
 )
 
 add_library(reports STATIC ${libreports_a_SOURCES})
+target_link_libraries(reports Alkimia::alkimia)
 
 ADD_DEPENDENCIES(reports kmm_config)
 

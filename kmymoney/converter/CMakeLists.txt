@@ -13,7 +13,7 @@ SET (libconverter_a_SOURCES
 
 add_library(converter STATIC ${libconverter_a_SOURCES})
 
-target_link_libraries(converter PUBLIC Qt5::Sql)
+target_link_libraries(converter PUBLIC Qt5::Sql Alkimia::alkimia)
 
 # we rely on some dialogs to be generated
 ADD_DEPENDENCIES(converter dialogs)

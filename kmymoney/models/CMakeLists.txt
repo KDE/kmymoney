@@ -4,6 +4,7 @@ SET(libmodels_a_SOURCES
    )
 
 add_library(models STATIC ${libmodels_a_SOURCES})
+target_link_libraries(models Alkimia::alkimia)
 
 ADD_DEPENDENCIES(models kmm_config)
 
