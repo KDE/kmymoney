@@ -47,6 +47,7 @@ SET( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 SET( kmm_config_SRCS kmymoneyglobalsettings.cpp )
 kconfig_add_kcfg_files( kmm_config_SRCS kmymoneysettings.kcfgc )
 add_library(kmm_config STATIC ${kmm_config_SRCS})
+target_link_libraries(kmm_config Alkimia::alkimia)
 
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney, kmymoneytest, and libkmymoney.so
