@@ -33,6 +33,7 @@
 // Project Includes
 
 #include <kmm_mymoney_export.h>
+#include <mymoneyunittestable.h>
 
 /**
   * @author Thomas Baumgart

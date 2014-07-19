@@ -34,9 +34,10 @@ SET(kmm_plugin_LIB_SRCS
 
 SET(plugins_HEADERS
   importinterface.h kmymoneyplugin.h pluginloader.h
-  statementinterface.h viewinterface.h kmm_plugin_export.h)
+  statementinterface.h viewinterface.h ${CMAKE_CURRENT_BINARY_DIR}/kmm_plugin_export.h)
 
 KDE4_ADD_LIBRARY(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
+GENERATE_EXPORT_HEADER(kmm_plugin BASE_NAME kmm_plugin)
 TARGET_LINK_LIBRARIES(kmm_plugin LINK_PUBLIC ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KUTILS_LIBS} ${GMP_LIBRARIES} ${LIBALKIMIA_LIBRARY})
 
 SET_TARGET_PROPERTIES(kmm_plugin PROPERTIES VERSION ${GENERIC_LIB_VERSION}  SOVERSION ${GENERIC_LIB_SOVERSION} )

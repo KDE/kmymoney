@@ -61,6 +61,7 @@ FIND_PACKAGE(KDE4 4.6.0 REQUIRED)
 include( KDE4Defaults )
 include( MacroLibrary )
 include( KMyMoneyMacros )
+include( GenerateExportHeader )
 # needed by libkgpgfile
 if (WIN32)
   find_package(Boost "1.33.1")
@@ -110,11 +111,6 @@ pkg_check_modules (PKGS libxml-2.0 libxml++-2.6 glib-2.0 glibmm-2.4)
 
 # check some functions
 INCLUDE (CheckFunctionExists) 
-
-IF(NOT WIN32)
-    SET(CMAKE_REQUIRED_FLAGS "-std=c99")
-    SET(CMAKE_REQUIRED_LIBRARIES m)
-ENDIF(NOT WIN32)
 
 # check for function in header
 INCLUDE(CheckSymbolExists)

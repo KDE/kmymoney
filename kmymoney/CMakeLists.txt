@@ -9,11 +9,13 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/mymoney/
                     ${CMAKE_CURRENT_SOURCE_DIR}/mymoney/storage/
                     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/
+                    ${CMAKE_CURRENT_BINARY_DIR}/plugins/
                     ${CMAKE_CURRENT_SOURCE_DIR}/views/
                     ${CMAKE_CURRENT_SOURCE_DIR}/dialogs/
                     ${CMAKE_CURRENT_SOURCE_DIR}/converter/
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs/settings/
                     ${CMAKE_CURRENT_BINARY_DIR}/mymoney/storage/
+                    ${CMAKE_CURRENT_BINARY_DIR}/mymoney/
                     ${CMAKE_CURRENT_SOURCE_DIR}/reports/
                     ${CMAKE_CURRENT_SOURCE_DIR}/wizards/endingbalancedlg/
                     ${CMAKE_CURRENT_BINARY_DIR}/wizards/endingbalancedlg/

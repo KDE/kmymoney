@@ -34,6 +34,7 @@ class QDomDocument;
 #include <mymoneyaccount.h>
 #include <mymoneymoney.h>
 #include <kmm_mymoney_export.h>
+#include <mymoneyunittestable.h>
 
 /**
   * This class defines a Budget within the MyMoneyEngine.  The Budget class

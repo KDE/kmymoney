@@ -43,6 +43,7 @@
 #include <mymoneybudget.h>
 #include "mymoneyschedule.h"
 #include <kmm_mymoney_export.h>
+#include <mymoneyunittestable.h>
 
 /**
   * @author Thomas Baumgart, Michael Edwardes, Kevin Tambascio

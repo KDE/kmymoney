@@ -39,7 +39,7 @@ namespace KMyMoneyPlugin
 {
 class Plugin;
 
-class KMM_PLUGINS_EXPORT PluginLoader : public QObject
+class KMM_PLUGIN_EXPORT PluginLoader : public QObject
 {
   Q_OBJECT
 public:
