@@ -50,7 +50,7 @@ namespace KMyMoneyPlugin
   * add new view pages to the JanusWidget of KMyMoney. It
   * also gives access to the account context menu.
   */
-class KMM_PLUGINS_EXPORT ViewInterface : public QObject
+class KMM_PLUGIN_EXPORT ViewInterface : public QObject
 {
   Q_OBJECT
 

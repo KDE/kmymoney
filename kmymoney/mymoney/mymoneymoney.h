@@ -33,6 +33,7 @@
 #include <QMetaType>
 
 #include "kmm_mymoney_export.h"
+#include "mymoneyunittestable.h"
 #include "mymoneyexception.h"
 
 // Check for standard definitions

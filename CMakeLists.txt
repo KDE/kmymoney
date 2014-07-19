@@ -55,11 +55,18 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 include(FeatureSummary)
+include(GenerateExportHeader)
 
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config KHtml KDELibs4Support Completion KCMUtils ItemViews Holidays Gpgmepp QGpgme)
 find_package(GMP REQUIRED)
 find_package(LibAlkimia REQUIRED)
+
+if(WIN32)
+    find_package(KDEWin REQUIRED)
+    include_directories(${KDEWIN_INCLUDES})
+    link_libraries(${KDEWIN_LIBRARIES})
+endif()
 
 include( KMyMoneyMacros )
 
@@ -95,11 +102,6 @@ pkg_check_modules (PKGS libxml-2.0 libxml++-2.6 glib-2.0 glibmm-2.4)
 
 # check some functions
 INCLUDE (CheckFunctionExists) 
-
-IF(NOT WIN32)
-    SET(CMAKE_REQUIRED_FLAGS "-std=c99")
-    SET(CMAKE_REQUIRED_LIBRARIES m)
-ENDIF(NOT WIN32)
 
 # check for function in header
 INCLUDE(CheckSymbolExists)

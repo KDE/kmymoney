@@ -34,6 +34,7 @@
 #include <mymoneykeyvaluecontainer.h>
 #include <mymoneysecurity.h>
 #include <kmm_mymoney_export.h>
+#include <mymoneyunittestable.h>
 #include "mymoneyutils.h"
 class MyMoneyTransaction;
 class MyMoneyInstitution;

@@ -35,7 +35,7 @@
 // Project Includes
 
 #include <kmm_mymoney_export.h>
-
+#include <mymoneyunittestable.h>
 
 /**
   * This class implements a container for key/value pairs. This is used

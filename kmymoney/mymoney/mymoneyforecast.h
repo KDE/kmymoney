@@ -33,6 +33,7 @@
 #include <mymoneymoney.h>
 #include "mymoneyschedule.h"
 #include <kmm_mymoney_export.h>
+#include <mymoneyunittestable.h>
 #include "mymoneybudget.h"
 
 /**
