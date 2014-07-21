@@ -90,8 +90,9 @@
 #include <krecentfilesaction.h>
 #include <kglobalsettings.h>
 #include <kaction.h>
-
+#ifdef KF5Holidays_FOUND
 #include <KHolidays/Holidays>
+#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -207,7 +208,9 @@ public:
       m_additionalKeyLabel(0),
       m_additionalKeyButton(0),
       m_recentFiles(0),
+#ifdef KF5Holidays_FOUND
       m_holidayRegion(0),
+#endif
       m_applicationIsReady(true) {
     // since the days of the week are from 1 to 7,
     // and a day of the week is used to index this bit array,
@@ -329,8 +332,10 @@ public:
 
   KRecentFilesAction*   m_recentFiles;
 
+#ifdef KF5Holidays_FOUND
   // used by the calendar interface for schedules
   KHolidays::HolidayRegion* m_holidayRegion;
+#endif
   QBitArray             m_processingDays;
   QMap<QDate, bool>     m_holidayMap;
 
@@ -434,7 +439,9 @@ KMyMoneyApp::~KMyMoneyApp()
   delete d->m_transactionEditor;
   delete d->m_endingBalanceDlg;
   delete d->m_moveToAccountSelector;
+#ifdef KF5Holidays_FOUND
   delete d->m_holidayRegion;
+#endif
   delete d;
 }
 
@@ -7297,6 +7304,7 @@ void KMyMoneyApp::slotAccountUpdateOnline(void)
 
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
 {
+#ifdef KF5Holidays_FOUND
   //since the cost of updating the cache is now not negligible
   //check whether the region has been modified
   if (!d->m_holidayRegion || d->m_holidayRegion->regionCode() != holidayRegion) {
@@ -7308,10 +7316,14 @@ void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
     //clear and update the holiday cache
     preloadHolidays();
   }
+#else
+  Q_UNUSED(holidayRegion);
+#endif
 }
 
 bool KMyMoneyApp::isProcessingDate(const QDate& date) const
 {
+#ifdef KF5Holidays_FOUND
   if (!d->m_processingDays.testBit(date.dayOfWeek()))
     return false;
   if (!d->m_holidayRegion || !d->m_holidayRegion->isValid())
@@ -7325,10 +7337,15 @@ bool KMyMoneyApp::isProcessingDate(const QDate& date) const
     d->m_holidayMap.insert(date, processingDay);
     return processingDay;
   }
+#else
+  Q_UNUSED(date);
+  return true;
+#endif
 }
 
 void KMyMoneyApp::preloadHolidays()
 {
+#ifdef KF5Holidays_FOUND
   //clear the cache before loading
   d->m_holidayMap.clear();
   //only do this if it is a valid region
@@ -7357,6 +7374,7 @@ void KMyMoneyApp::preloadHolidays()
       }
     }
   }
+#endif
 }
 
 KMStatus::KMStatus(const QString &text)

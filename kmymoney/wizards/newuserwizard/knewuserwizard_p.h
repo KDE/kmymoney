@@ -21,6 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -35,8 +37,8 @@
 #include "currency.h"
 #include "accounts.h"
 
-#include <mymoneytemplate.h>
-#include <QList>
+#include "mymoneytemplate.h"
+#include "mymoneycontact.h"
 
 class Wizard;
 class KJob;
@@ -74,8 +76,10 @@ public:
 
 protected slots:
   void slotLoadFromAddressBook(void);
-  /** Gets the result of searching for the contact details of the current user */
-  void searchContactResult(KJob *job);
+  void slotContactFetched(const ContactData &identity);
+
+private:
+  MyMoneyContact *m_contact;
 };
 
 /**

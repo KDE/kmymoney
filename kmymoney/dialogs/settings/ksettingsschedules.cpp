@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config-kmymoney.h>
+
 #include "ksettingsschedules.h"
 
 // ----------------------------------------------------------------------------
@@ -26,8 +28,10 @@
 #include <klocale.h>
 #include <klocalizedstring.h>
 #include <KStandardDirs>
+#ifdef KF5Holidays_FOUND
 #include <KHolidays/Holidays>
 using namespace KHolidays;
+#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -52,6 +56,7 @@ KSettingsSchedules::KSettingsSchedules(QWidget* parent) :
 void KSettingsSchedules::loadList(void)
 {
   QStringList regions;
+#ifdef KF5Holidays_FOUND
   QStringList regionCodes = HolidayRegion::regionCodes();
 
   foreach (const QString &regionCode, regionCodes) {
@@ -67,6 +72,7 @@ void KSettingsSchedules::loadList(void)
     regions << region;
   }
   regions.sort();
+#endif
 
   m_regionMap[m_holidayRegion->itemText(0)] = "";
   m_holidayRegion->insertItems(1, regions);

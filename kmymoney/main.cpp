@@ -64,14 +64,11 @@ int main(int argc, char *argv[])
 {
   timer.start();
 
-  QString feature;
-
-  if (!feature.isEmpty())
-    feature = I18N_NOOP("Compiled with the following settings:\n") + feature;
-
   K4AboutData aboutData("kmymoney", 0, ki18n("KMyMoney"),
                        VERSION, ki18n("\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions."), K4AboutData::License_GPL,
-                       ki18n("(c) 2000-2014 The KMyMoney development team"), /*feature*/KLocalizedString(),
+                       ki18n("(c) 2000-2014 The KMyMoney development team"),
+                       // TODO: show optional compiled features
+                       KLocalizedString(),
                        I18N_NOOP("http://kmymoney.org/")/*,
                                                       "kmymoney-devel@kde.org")*/);
 

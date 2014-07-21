@@ -18,6 +18,7 @@ SET(kmm_mymoney_LIB_SRCS
   mymoneyobjectcontainer.cpp
   mymoneyforecast.cpp
   mymoneybalancecache.cpp
+  mymoneycontact.cpp
   )
 
 
@@ -45,6 +46,10 @@ TARGET_LINK_LIBRARIES(kmm_mymoney PUBLIC
                       ${GMP_LIBRARIES}
                       Alkimia::alkimia
                       kmm_storage)
+
+IF(KMM_ADDRESSBOOK_FOUND)
+TARGET_LINK_LIBRARIES(kmm_mymoney PUBLIC KF5::PimIdentities KF5::AkonadiCore KF5::Abc)
+ENDIF()
 
 SET_TARGET_PROPERTIES(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 

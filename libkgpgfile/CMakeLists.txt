@@ -7,6 +7,8 @@ SET(kgpgfile_STAT_SRCS
    )
 
 ADD_LIBRARY(kgpgfile STATIC ${kgpgfile_STAT_SRCS})
-TARGET_LINK_LIBRARIES(kgpgfile PUBLIC Qt5::Core KF5::Gpgmepp KF5::QGpgme)
-
+TARGET_LINK_LIBRARIES(kgpgfile PUBLIC Qt5::Core)
+IF(KF5Gpgmepp_FOUND)
+  TARGET_LINK_LIBRARIES(kgpgfile PUBLIC KF5::Gpgmepp KF5::QGpgme)
+ENDIF()
 

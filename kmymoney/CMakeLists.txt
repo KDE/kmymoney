@@ -71,7 +71,12 @@ SET( kmymoney_common_LIBS
   dialogs widgets settings converter models kmm_config
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
   Qt5::Core Qt5::Sql
-  KF5::KHtml KF5::Archive KF5::Holidays KF5::ConfigGui KF5::WidgetsAddons)
+  KF5::KHtml KF5::Archive KF5::ConfigGui KF5::WidgetsAddons)
+
+if(KF5Holidays_FOUND)
+  list(APPEND kmymoney_common_LIBS KF5::Holidays)
+endif()
+
 
 ########### kmymoney executable ###############
 
@@ -136,9 +141,13 @@ IF( KDE4_BUILD_TESTS )
         kmymoney_common
         kmm_config
         widgets
-        KF5::KHtml KF5::Archive KF5::Holidays KF5::ConfigGui KF5::WidgetsAddons
+        KF5::KHtml KF5::Archive KF5::ConfigGui KF5::WidgetsAddons
         Qt5::Core Qt5::Sql Qt5::Test
         Alkimia::alkimia)
+
+  if(KF5Holidays_FOUND)
+    list(APPEND target_link_libraries_test KF5::Holidays)
+  endif()
 
   # KMyMoneyUtils
   SET( kmymoneyutilstest_SRCS kmymoneyutilstest.cpp )

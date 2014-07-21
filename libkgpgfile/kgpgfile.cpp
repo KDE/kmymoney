@@ -13,6 +13,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -39,6 +40,7 @@
 #include <kstandarddirs.h>
 #include <ksavefile.h>
 
+#ifdef KF5Gpgmepp_FOUND
 #include <gpg-error.h>
 #include <gpgme++/context.h>
 #include <gpgme++/encryptionresult.h>
@@ -370,3 +372,77 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
     d->ctx->endKeyListing();
   }
 }
+
+#else // not KF5Gpgmepp_FOUND
+
+// NOOP implementation
+KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options) : d(0)
+{
+  Q_UNUSED(fn);
+  Q_UNUSED(homedir);
+  Q_UNUSED(options);
+}
+
+KGPGFile::~KGPGFile()
+{
+}
+
+bool KGPGFile::open(OpenMode mode)
+{
+  Q_UNUSED(mode);
+  return false;
+}
+
+void KGPGFile::close(void)
+{
+}
+
+void KGPGFile::flush(void)
+{
+}
+
+qint64 KGPGFile::readData(char *data, qint64 maxlen)
+{
+  Q_UNUSED(data);
+  Q_UNUSED(maxlen);
+  return 0;
+}
+
+qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
+{
+  Q_UNUSED(data);
+  Q_UNUSED(maxlen);
+  return 0;
+}
+
+void KGPGFile::addRecipient(const QString& recipient)
+{
+  Q_UNUSED(recipient);
+}
+
+QString KGPGFile::errorToString() const
+{
+  return QString();
+}
+
+bool KGPGFile::GPGAvailable(void)
+{
+  return false;
+}
+
+bool KGPGFile::keyAvailable(const QString& name)
+{
+  Q_UNUSED(name);
+  return false;
+}
+
+void KGPGFile::secretKeyList(QStringList& list)
+{
+  Q_UNUSED(list);
+}
+
+void KGPGFile::publicKeyList(QStringList& list)
+{
+  Q_UNUSED(list);
+}
+#endif

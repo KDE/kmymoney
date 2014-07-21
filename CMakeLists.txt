@@ -58,7 +58,8 @@ include(FeatureSummary)
 include(GenerateExportHeader)
 
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
-find_package(KF5 REQUIRED COMPONENTS CoreAddons Config KHtml KDELibs4Support Completion KCMUtils ItemViews Holidays Gpgmepp QGpgme)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons Config KHtml KDELibs4Support Completion KCMUtils ItemViews)
+find_package(KF5 COMPONENTS Holidays Gpgmepp QGpgme PimIdentities Akonadi Abc)
 find_package(GMP REQUIRED)
 find_package(LibAlkimia REQUIRED)
 
@@ -129,6 +130,9 @@ GET_FILENAME_COMPONENT(QT_DIR     ${QT_BIN_DIR}        PATH)
 SET(QT_INSTALL_DIR ${QT_DIR} CACHE PATH
   "Qt install prefix defaults to the Qt prefix: ${QT_DIR}")
 
+IF(KF5PimIdentities_FOUND AND KF5Akonadi_FOUND AND KF5Abc_FOUND)
+  SET(KMM_ADDRESSBOOK_FOUND 1)
+ENDIF()
 
 # check for optional OFX support
 SET(LIBOFX_DEFAULT "AUTO")
@@ -354,6 +358,9 @@ MACRO(nice_yesno _varname)
   endif(${_varname})
 ENDMACRO(nice_yesno _varname)
 
+nice_yesno("KF5Holidays_FOUND")
+nice_yesno("KF5Gpgmepp_FOUND")
+nice_yesno("KMM_ADDRESSBOOK_FOUND")
 nice_yesno("LIBOFX_FOUND")
 nice_yesno("KBANKING_FOUND")
 nice_yesno("LIBICAL_FOUND")
@@ -368,6 +375,12 @@ message("
 
 Configure results (user options):
 --------------------------------------------
+KDE PIM holidays:                        ${nice_KF5Holidays_FOUND}
+
+KDE PIM encryption:                      ${nice_KF5Gpgmepp_FOUND}
+
+KDE PIM addressbook:                     ${nice_KMM_ADDRESSBOOK_FOUND}
+
 OFX plugin:                              ${nice_LIBOFX_FOUND}
 
 KBanking plugin:                         ${nice_KBANKING_FOUND}
