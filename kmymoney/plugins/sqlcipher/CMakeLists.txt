@@ -23,7 +23,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-PROJECT(QSqlcipherDriverPlugin)
+project(QSqlcipherDriverPlugin)
 
 add_definitions(${QT_DEFINITIONS})
 
@@ -47,11 +47,11 @@ set ( sqlcipherdriver_header
 include_directories(${QSQLITESOURCE_INCLUDE_DIRS})
 include_directories(${SQLCIPHER_INCLUDE_DIR})
 
-QT4_AUTOMOC(${sqlcipherdriver_srcs})
-QT4_WRAP_CPP(sqlcipherdriver_moc ${sqlcipherdriver_header})
-ADD_LIBRARY(sqlcipherdriver SHARED ${sqlcipherdriver_header} ${sqlcipherdriver_srcs} ${sqlcipherdriver_moc})
+qt4_automoc(${sqlcipherdriver_srcs})
+qt4_wrap_cpp(sqlcipherdriver_moc ${sqlcipherdriver_header})
+add_library(sqlcipherdriver SHARED ${sqlcipherdriver_header} ${sqlcipherdriver_srcs} ${sqlcipherdriver_moc})
 
-TARGET_LINK_LIBRARIES(sqlcipherdriver LINK_PUBLIC
+target_link_libraries(sqlcipherdriver LINK_PUBLIC
   ${QT_LIBRARIES}
   ${QT_QTCORE_LIBRARIES}
   ${QT_QTSQL_LIBRARY}
@@ -64,6 +64,6 @@ endif(KDE4_BUILD_TESTS)
 
 #### Install files ####
 
-INSTALL(TARGETS sqlcipherdriver
+install(TARGETS sqlcipherdriver
         DESTINATION ${PLUGIN_INSTALL_DIR}/sqldrivers/
 )

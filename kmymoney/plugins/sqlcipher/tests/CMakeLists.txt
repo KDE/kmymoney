@@ -33,12 +33,12 @@ set( sqlcipherdriverinstalltest_SRCS
   sqlcipherdriverinstalltest.cpp
 )
 
-KDE4_ADD_UNIT_TEST( sqlcipherdriverinstalltest
+kde4_add_unit_test( sqlcipherdriverinstalltest
   TESTNAME sqlcipherdriver-installed-test
   ${sqlcipherdriverinstalltest_SRCS}
 )
 
-TARGET_LINK_LIBRARIES( sqlcipherdriverinstalltest
+target_link_libraries( sqlcipherdriverinstalltest
   ${LIBRARIES}
 )
 
@@ -47,11 +47,11 @@ set( sqlcipherdrivertest_SRCS
   sqlcipherdrivertest.cpp
 )
 
-KDE4_ADD_UNIT_TEST( sqlcipherdrivertest
+kde4_add_unit_test( sqlcipherdrivertest
   TESTNAME sqlcipherdriver
   ${sqlcipherdrivertest_SRCS}
 )
 
-TARGET_LINK_LIBRARIES( sqlcipherdrivertest
+target_link_libraries( sqlcipherdrivertest
   ${LIBRARIES}
 )

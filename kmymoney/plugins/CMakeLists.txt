@@ -1,23 +1,23 @@
-ADD_SUBDIRECTORY( interfaces )
+add_subdirectory( interfaces )
 
-ADD_SUBDIRECTORY( csvimport )
+add_subdirectory( csvimport )
 
-ADD_SUBDIRECTORY( csvexport )
+add_subdirectory( csvexport )
 
 if(LIBOFX_FOUND)
-  ADD_SUBDIRECTORY( ofximport )
+  add_subdirectory( ofximport )
 endif(LIBOFX_FOUND)
 
-IF (LIBICAL_FOUND)
-  ADD_SUBDIRECTORY( icalendarexport )
-ENDIF (LIBICAL_FOUND)
+if (LIBICAL_FOUND)
+  add_subdirectory( icalendarexport )
+endif (LIBICAL_FOUND)
 
-ADD_SUBDIRECTORY( reconciliationreport )
-ADD_SUBDIRECTORY( printcheck )
+add_subdirectory( reconciliationreport )
+add_subdirectory( printcheck )
 
-IF (KBANKING_FOUND)
-  ADD_SUBDIRECTORY( kbanking )
-ENDIF (KBANKING_FOUND)
+if (KBANKING_FOUND)
+  add_subdirectory( kbanking )
+endif (KBANKING_FOUND)
 
 option(ENABLE_SQLCIPHER "Enable SQLCipher plugin" OFF)
 if (ENABLE_SQLCIPHER)
@@ -26,29 +26,29 @@ endif(ENABLE_SQLCIPHER)
 
 ########### next target ###############
 
-SET(kmm_plugin_LIB_SRCS
+set(kmm_plugin_LIB_SRCS
   importinterface.cpp
   kmymoneyplugin.cpp
   pluginloader.cpp
   statementinterface.cpp viewinterface.cpp)
 
-SET(plugins_HEADERS
+set(plugins_HEADERS
   importinterface.h kmymoneyplugin.h pluginloader.h
   statementinterface.h viewinterface.h ${CMAKE_CURRENT_BINARY_DIR}/kmm_plugin_export.h)
 
-KDE4_ADD_LIBRARY(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
-GENERATE_EXPORT_HEADER(kmm_plugin BASE_NAME kmm_plugin)
-TARGET_LINK_LIBRARIES(kmm_plugin LINK_PUBLIC ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KUTILS_LIBS} ${LIBALKIMIA_LIBRARY})
+kde4_add_library(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
+generate_export_header(kmm_plugin BASE_NAME kmm_plugin)
+target_link_libraries(kmm_plugin LINK_PUBLIC ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KUTILS_LIBS} ${LIBALKIMIA_LIBRARY})
 
-SET_TARGET_PROPERTIES(kmm_plugin PROPERTIES VERSION ${GENERIC_LIB_VERSION}  SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties(kmm_plugin PROPERTIES VERSION ${GENERIC_LIB_VERSION}  SOVERSION ${GENERIC_LIB_SOVERSION} )
 
 ########### install files ###############
 
-INSTALL(TARGETS kmm_plugin
+install(TARGETS kmm_plugin
   ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-INSTALL(FILES ${plugins_HEADERS}
+install(FILES ${plugins_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney  COMPONENT Devel)
 
-INSTALL(FILES kmymoneyplugin.desktop kmymoneyimporterplugin.desktop
+install(FILES kmymoneyplugin.desktop kmymoneyimporterplugin.desktop
   DESTINATION ${SERVICETYPES_INSTALL_DIR})

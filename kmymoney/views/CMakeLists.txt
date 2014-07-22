@@ -1,7 +1,7 @@
-INCLUDE_DIRECTORIES( ${KMyMoney_SOURCE_DIR}/libkdchart/include)
+include_directories( ${KMyMoney_SOURCE_DIR}/libkdchart/include)
 
 ############# next target (views) STATIC ###################
-SET(libviews_a_SOURCES
+set(libviews_a_SOURCES
   kaccountsview.cpp
   kbudgetview.cpp
   kcategoriesview.cpp
@@ -23,9 +23,9 @@ SET(libviews_a_SOURCES
   ktagsview.cpp
   )
 
-SET(libviews_a_HEADER kmymoneyview.h)
+set(libviews_a_HEADER kmymoneyview.h)
 
-SET(libviews_a_UI
+set(libviews_a_UI
   kaccountsviewdecl.ui
   kbudgetviewdecl.ui
   kcategoriesviewdecl.ui
@@ -41,12 +41,12 @@ SET(libviews_a_UI
 # on libkmymoney.so (the widgets library)
 kde4_add_ui_files(libviews_a_SOURCES ${libviews_a_UI})
 
-KDE4_ADD_LIBRARY(views STATIC ${libviews_a_SOURCES})
+kde4_add_library(views STATIC ${libviews_a_SOURCES})
 
 # we rely on some of the dialogs to be generated
-ADD_DEPENDENCIES(views dialogs newinvestmentwizard newloanwizard endingbalancedlg)
+add_dependencies(views dialogs newinvestmentwizard newloanwizard endingbalancedlg)
 
 ########### install files ###############
 
-INSTALL(FILES ${libviews_a_HEADER}
+install(FILES ${libviews_a_HEADER}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
