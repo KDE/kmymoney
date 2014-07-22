@@ -1,6 +1,6 @@
 # patch the version with the version defined in the build system
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/kmm_kbanking.desktop ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop)
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmm_kbanking.desktop ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/dialogs
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs
@@ -11,20 +11,20 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
                     ${GWENHYWFAR_INCLUDE_DIRS}
                     ${AQBANKING_INCLUDE_DIRS})
 
-ADD_SUBDIRECTORY( dialogs )
-ADD_SUBDIRECTORY( views )
-ADD_SUBDIRECTORY( widgets )
+add_subdirectory( dialogs )
+add_subdirectory( views )
+add_subdirectory( widgets )
 
 ########### next target ###############
 
-SET(kmm_kbanking_PART_SRCS 
+set(kmm_kbanking_PART_SRCS
     mymoneybanking.cpp
     banking.cpp
     )
 
 add_library(kmm_kbanking MODULE ${kmm_kbanking_PART_SRCS})
 
-TARGET_LINK_LIBRARIES(kmm_kbanking
+target_link_libraries(kmm_kbanking
                       kmm_kbanking_dialogs
                       kmm_kbanking_views
                       kmm_kbanking_widgets
@@ -39,11 +39,11 @@ TARGET_LINK_LIBRARIES(kmm_kbanking
 
 ########### install files ###############
 
-INSTALL(FILES kmm_kbanking.rc
+install(FILES kmm_kbanking.rc
         DESTINATION  ${DATA_INSTALL_DIR}/kmm_kbanking)
 
-INSTALL(TARGETS kmm_kbanking
+install(TARGETS kmm_kbanking
         DESTINATION ${PLUGIN_INSTALL_DIR})
 
-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})

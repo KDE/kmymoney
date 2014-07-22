@@ -1,1 +1,1 @@
-ADD_SUBDIRECTORY(phb)
+add_subdirectory(phb)

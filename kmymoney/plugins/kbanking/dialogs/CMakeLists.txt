@@ -1,13 +1,13 @@
 
 ########### next target ###############
 
-SET(kmm_kbanking_dialogs_la_SOURCES
+set(kmm_kbanking_dialogs_la_SOURCES
     kbaccountsettings.cpp
     kbpickstartdate.cpp
     kbmapaccount.cpp
     )
 
-SET(kmm_kbanking_dialogs_UI
+set(kmm_kbanking_dialogs_UI
     kbaccountsettings.ui
     kbpickstartdate.ui
     kbmapaccount.ui

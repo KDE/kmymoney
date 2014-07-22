@@ -1,13 +1,13 @@
-INCLUDE_DIRECTORIES(${LIBOFX_INCLUDE_DIR})
+include_directories(${LIBOFX_INCLUDE_DIR})
 
 ########### next target ###############
 
-SET(kmm_ofximport_dialogs_la_SOURCES
+set(kmm_ofximport_dialogs_la_SOURCES
   kofxdirectconnectdlg.cpp konlinebankingsetupwizard.cpp
   konlinebankingstatus.cpp mymoneyofxconnector.cpp
   )
 
-SET(kmm_ofximport_dialogs_UI
+set(kmm_ofximport_dialogs_UI
   kofxdirectconnectdlgdecl.ui konlinebankingsetupwizard.ui
   konlinebankingstatusdecl.ui
   )

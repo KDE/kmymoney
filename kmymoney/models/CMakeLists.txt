@@ -1,4 +1,4 @@
-SET(libmodels_a_SOURCES
+set(libmodels_a_SOURCES
     accountsmodel.cpp
     models.cpp
    )
@@ -6,5 +6,5 @@ SET(libmodels_a_SOURCES
 add_library(models STATIC ${libmodels_a_SOURCES})
 target_link_libraries(models Alkimia::alkimia)
 
-ADD_DEPENDENCIES(models kmm_config)
+add_dependencies(models kmm_config)
 

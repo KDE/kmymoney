@@ -1,7 +1,7 @@
-INCLUDE_DIRECTORIES( ${KMyMoney_SOURCE_DIR}/libkdchart/include)
+include_directories( ${KMyMoney_SOURCE_DIR}/libkdchart/include)
 
 ############# next target (views) STATIC ###################
-SET(libviews_a_SOURCES
+set(libviews_a_SOURCES
   kaccountsview.cpp
   kbudgetview.cpp
   kcategoriesview.cpp
@@ -23,9 +23,9 @@ SET(libviews_a_SOURCES
   ktagsview.cpp
   )
 
-SET(libviews_a_HEADER kmymoneyview.h)
+set(libviews_a_HEADER kmymoneyview.h)
 
-SET(libviews_a_UI
+set(libviews_a_UI
   kaccountsviewdecl.ui
   kbudgetviewdecl.ui
   kcategoriesviewdecl.ui
@@ -46,9 +46,9 @@ add_library(views STATIC ${libviews_a_SOURCES})
 target_link_libraries(views PUBLIC KF5::Archive KF5::KHtml Qt5::Sql Alkimia::alkimia)
 
 # we rely on some of the dialogs to be generated
-ADD_DEPENDENCIES(views dialogs newinvestmentwizard newloanwizard endingbalancedlg)
+add_dependencies(views dialogs newinvestmentwizard newloanwizard endingbalancedlg)
 
 ########### install files ###############
 
-INSTALL(FILES ${libviews_a_HEADER}
+install(FILES ${libviews_a_HEADER}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)

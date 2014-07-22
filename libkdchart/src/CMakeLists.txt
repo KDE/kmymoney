@@ -3,11 +3,11 @@
 ## KDE4 includes needed for kdemacros.h
 include_directories(
         ${KDE4_INCLUDES}
-	${CMAKE_CURRENT_SOURCE_DIR}/../include 
-	${CMAKE_CURRENT_SOURCE_DIR}/../kdablibfakes/include 
+  ${CMAKE_CURRENT_SOURCE_DIR}/../include
+  ${CMAKE_CURRENT_SOURCE_DIR}/../kdablibfakes/include
 )
 
-ADD_DEFINITIONS(-DKDCHART_BUILD_KDCHART_LIB)
+add_definitions(-DKDCHART_BUILD_KDCHART_LIB)
 
 ########### next target ###############
 
@@ -114,7 +114,7 @@ qt_wrap_cpp(kdchart kdchart_LIB_SRCS KDChartEnums.h)
 add_library(kmm_kdchart SHARED ${kdchart_LIB_SRCS})
 
 target_link_libraries(kmm_kdchart PUBLIC Qt5::Svg Qt5::Xml Qt5::Gui Qt5::Core ${ZLIB_LIBRARY} )
-SET_TARGET_PROPERTIES(kmm_kdchart PROPERTIES VERSION ${GENERIC_LIB_VERSION}
+set_target_properties(kmm_kdchart PROPERTIES VERSION ${GENERIC_LIB_VERSION}
 SOVERSION ${GENERIC_LIB_SOVERSION})
 install(TARGETS kmm_kdchart  ${INSTALL_TARGETS_DEFAULT_ARGS})
 

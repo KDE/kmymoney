@@ -1,4 +1,4 @@
-ADD_SUBDIRECTORY( interfaces )
+add_subdirectory( interfaces )
 
 #ADD_SUBDIRECTORY( csvimport )
 
@@ -8,16 +8,16 @@ if(LIBOFX_FOUND)
   #ADD_SUBDIRECTORY( ofximport )
 endif(LIBOFX_FOUND)
 
-IF (LIBICAL_FOUND)
+if (LIBICAL_FOUND)
   #ADD_SUBDIRECTORY( icalendarexport )
-ENDIF (LIBICAL_FOUND)
+endif (LIBICAL_FOUND)
 
 #ADD_SUBDIRECTORY( reconciliationreport )
 #ADD_SUBDIRECTORY( printcheck )
 
-IF (KBANKING_FOUND)
+if (KBANKING_FOUND)
   #ADD_SUBDIRECTORY( kbanking )
-ENDIF (KBANKING_FOUND)
+endif (KBANKING_FOUND)
 
 option(ENABLE_SQLCIPHER "Enable SQLCipher plugin" OFF)
 if (ENABLE_SQLCIPHER)
@@ -26,29 +26,29 @@ endif(ENABLE_SQLCIPHER)
 
 ########### next target ###############
 
-SET(kmm_plugin_LIB_SRCS
+set(kmm_plugin_LIB_SRCS
   importinterface.cpp
   kmymoneyplugin.cpp
   pluginloader.cpp
   statementinterface.cpp viewinterface.cpp)
 
-SET(plugins_HEADERS
+set(plugins_HEADERS
   importinterface.h kmymoneyplugin.h pluginloader.h
   statementinterface.h viewinterface.h ${CMAKE_CURRENT_BINARY_DIR}/kmm_plugin_export.h)
 
 add_library(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
 generate_export_header(kmm_plugin BASE_NAME kmm_plugin)
-TARGET_LINK_LIBRARIES(kmm_plugin PUBLIC KF5::KCMUtils KF5::KIOWidgets KF5::XmlGui kmm_mymoney Alkimia::alkimia)
+target_link_libraries(kmm_plugin PUBLIC KF5::KCMUtils KF5::KIOWidgets KF5::XmlGui kmm_mymoney Alkimia::alkimia)
 
-SET_TARGET_PROPERTIES(kmm_plugin PROPERTIES VERSION ${GENERIC_LIB_VERSION}  SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties(kmm_plugin PROPERTIES VERSION ${GENERIC_LIB_VERSION}  SOVERSION ${GENERIC_LIB_SOVERSION} )
 
 ########### install files ###############
 
-INSTALL(TARGETS kmm_plugin
+install(TARGETS kmm_plugin
   ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-INSTALL(FILES ${plugins_HEADERS}
+install(FILES ${plugins_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney  COMPONENT Devel)
 
-INSTALL(FILES kmymoneyplugin.desktop kmymoneyimporterplugin.desktop
+install(FILES kmymoneyplugin.desktop kmymoneyimporterplugin.desktop
   DESTINATION ${SERVICETYPES_INSTALL_DIR})

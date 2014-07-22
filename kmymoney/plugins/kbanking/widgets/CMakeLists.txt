@@ -1,7 +1,7 @@
 
 ########### next target ###############
 
-SET(kmm_kbanking_widgets_la_SOURCES
+set(kmm_kbanking_widgets_la_SOURCES
     kbaccountlist.cpp
     kbjoblist.cpp
     )

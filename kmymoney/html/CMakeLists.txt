@@ -1,17 +1,17 @@
 ########### install files ###############
 
-FILE(GLOB html_files *.html)
-FILE(GLOB css_files  *.css)
+file(GLOB html_files *.html)
+file(GLOB css_files  *.css)
 
-INSTALL(FILES ${html_files}
-	DESTINATION ${DATA_INSTALL_DIR}/kmymoney/html
+install(FILES ${html_files}
+  DESTINATION ${DATA_INSTALL_DIR}/kmymoney/html
 )
-INSTALL(FILES ${css_files}
-	DESTINATION ${DATA_INSTALL_DIR}/kmymoney/html
+install(FILES ${css_files}
+  DESTINATION ${DATA_INSTALL_DIR}/kmymoney/html
 )
-INSTALL(DIRECTORY images
-	DESTINATION ${DATA_INSTALL_DIR}/kmymoney/html
-	PATTERN ".svn" EXCLUDE
-	PATTERN "*Make*" EXCLUDE
+install(DIRECTORY images
+  DESTINATION ${DATA_INSTALL_DIR}/kmymoney/html
+  PATTERN ".svn" EXCLUDE
+  PATTERN "*Make*" EXCLUDE
 )
 

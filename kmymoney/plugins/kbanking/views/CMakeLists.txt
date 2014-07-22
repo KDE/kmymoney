@@ -1,11 +1,11 @@
 
 ########### next target ###############
 
-SET(kmm_kbanking_views_la_SOURCES
+set(kmm_kbanking_views_la_SOURCES
     kbjobview.cpp
     )
 
-SET(kmm_kbanking_views_UI
+set(kmm_kbanking_views_UI
     kbjobview.ui
     )
 
