@@ -25,8 +25,7 @@ KDE4_ADD_PLUGIN(kmm_csvexport
 TARGET_LINK_LIBRARIES(kmm_csvexport
   kmm_mymoney kmm_plugin
   ${KDE4_KDEUI_LIBS} KF5::KIOWidgets
-  ${GMP_LIBRARIES}
-  Alkimia::alkimia #kmymoney_common kmm_config dialogs widgets models
+  Alkimia::alkimia
 )
 
 ########### install files ###############

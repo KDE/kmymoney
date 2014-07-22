@@ -38,7 +38,6 @@ KDE4_ADD_PLUGIN(kmm_csvimport
 TARGET_LINK_LIBRARIES(kmm_csvimport
   kmm_mymoney kmm_plugin
   ${KDE4_KDEUI_LIBS} KF5::KIOWidgets
-  ${GMP_LIBRARIES}
   Alkimia::alkimia
 )
 
@@ -53,15 +52,13 @@ IF(KDE4_BUILD_TESTS)
   KDE4_ADD_UNIT_TEST(parsedatatest TESTNAME kmymoney-plugin-parsedatatest
     ${parsedatatest_SRCS})
   TARGET_LINK_LIBRARIES(parsedatatest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS}
-    Qt5::Test  ${GMP_LIBRARIES}
-    Alkimia::alkimia kmm_mymoney)
+    Qt5::Test Alkimia::alkimia kmm_mymoney)
 
   SET(symboltest_SRCS symboltest.cpp csvutil.cpp)
   KDE4_ADD_UNIT_TEST(symboltest TESTNAME kmymoney-plugin-symboltest
     ${symboltest_SRCS})
   TARGET_LINK_LIBRARIES(symboltest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS}
-    Qt5::Test  ${GMP_LIBRARIES}
-    Alkimia::alkimia kmm_mymoney)
+    Qt5::Test Alkimia::alkimia kmm_mymoney)
 ENDIF(KDE4_BUILD_TESTS)
 
 ########### install files ###############

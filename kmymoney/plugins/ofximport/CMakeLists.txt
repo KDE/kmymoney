@@ -22,7 +22,6 @@ TARGET_LINK_LIBRARIES(kmm_ofximport
                       kmm_plugin
                       ${KDE4_KDEUI_LIBS}
                       KF5::KIOWidgets
-                      ${GMP_LIBRARIES} 
                       Alkimia::alkimia
                       ${LIBOFX_LIBRARIES})
 

@@ -17,7 +17,6 @@ add_library(kmm_icalendarexport MODULE ${kmm_icalendarexport_PART_SRCS})
 TARGET_LINK_LIBRARIES(kmm_icalendarexport
                       ${KDE4_KDEUI_LIBS}
                       KF5::KIOWidgets
-                      ${GMP_LIBRARIES} 
                       Alkimia::alkimia
                       kmm_mymoney kmm_plugin
                       ${LIBICAL_LIBRARIES}

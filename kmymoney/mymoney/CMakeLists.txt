@@ -43,7 +43,6 @@ TARGET_LINK_LIBRARIES(kmm_mymoney PUBLIC
                       Qt5::Core
                       KF5::KIOWidgets
                       KF5::KDELibs4Support
-                      ${GMP_LIBRARIES}
                       Alkimia::alkimia
                       kmm_storage)
 
@@ -69,7 +68,6 @@ IF( KDE4_BUILD_TESTS )
 	  Qt5::Xml
 	  Qt5::Core
 	  Qt5::Test
-	  ${GMP_LIBRARIES}
 	  Alkimia::alkimia)
 
   # MyMoneyAccount
@@ -132,7 +130,7 @@ IF( KDE4_BUILD_TESTS )
   set( mymoneymoneytest_SRCS mymoneymoneytest.cpp )
 
   kde4_add_unit_test( mymoneymoneytest TESTNAME kmymoney-mymoneymoneytest ${mymoneymoneytest_SRCS} )
-  ADD_DEPENDENCIES( mymoneymoneytest kmm_mymoney %{${GMP_LIBRARIES})
+  ADD_DEPENDENCIES( mymoneymoneytest kmm_mymoney )
 
   target_link_libraries( mymoneymoneytest kmm_mymoney ${target_link_libraries_test})
 

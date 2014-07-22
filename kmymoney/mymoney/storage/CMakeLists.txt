@@ -34,8 +34,7 @@ IF( KDE4_BUILD_TESTS )
 	  Qt5::Xml
 	  Qt5::Test
 	  Qt5::Sql
-	  Qt5::Core
-	  ${GMP_LIBRARIES} )
+	  Qt5::Core)
 
   # MyMoneyDatabaseMgr
   set( mymoneydatabasemgrtest_SRCS mymoneydatabasemgrtest.cpp ../mymoneytestutils.cpp )

@@ -16,7 +16,6 @@ add_library(kmm_printcheck MODULE ${kmm_printcheck_PART_SRCS})
 TARGET_LINK_LIBRARIES(kmm_printcheck
                       ${KDE4_KDEUI_LIBS}
                       KF5::KHtml
-                      ${GMP_LIBRARIES} 
                       Alkimia::alkimia
                       kmm_mymoney kmm_plugin
                       )

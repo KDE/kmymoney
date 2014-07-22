@@ -57,7 +57,7 @@ target_link_libraries(kmm_config Alkimia::alkimia)
 SET( kmymoney_common_SRCS kmymoneyutils.cpp kstartuplogo.cpp )
 add_library(kmymoney_common STATIC ${kmymoney_common_SRCS})
 TARGET_LINK_LIBRARIES(kmymoney_common
-  Qt5::Core KF5::ConfigGui KF5::WidgetsAddons ${GMP_LIBRARIES} Alkimia::alkimia kmm_widgets kmm_mymoney)
+  Qt5::Core KF5::ConfigGui KF5::WidgetsAddons Alkimia::alkimia kmm_widgets kmm_mymoney)
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
