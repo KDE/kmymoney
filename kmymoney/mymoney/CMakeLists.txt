@@ -127,7 +127,7 @@ IF( KDE4_BUILD_TESTS )
   set( mymoneymoneytest_SRCS mymoneymoneytest.cpp )
 
   kde4_add_unit_test( mymoneymoneytest TESTNAME kmymoney-mymoneymoneytest ${mymoneymoneytest_SRCS} )
-  ADD_DEPENDENCIES( mymoneymoneytest kmm_mymoney %{${GMP_LIBRARIES})
+  ADD_DEPENDENCIES( mymoneymoneytest kmm_mymoney)
 
   target_link_libraries( mymoneymoneytest kmm_mymoney ${target_link_libraries_test})
 

@@ -34,7 +34,6 @@ TARGET_LINK_LIBRARIES(kmm_kbanking
                       ${KDE4_KDEUI_LIBS}
                       ${GWENHYWFAR_LIBRARIES}
                       ${AQBANKING_LIBRARIES}
-                      ${GMP_LIBRARIES}
                       ${LIBALKIMIA_LIBRARY}
                       )
 

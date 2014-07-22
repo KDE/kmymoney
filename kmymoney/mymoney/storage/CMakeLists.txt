@@ -32,8 +32,7 @@ IF( KDE4_BUILD_TESTS )
 	  ${QT_QTXML_LIBRARY}
 	  ${QT_QTTEST_LIBRARY}
 	  ${QT_QTSQL_LIBRARY}
-	  ${QT_QTCORE_LIBRARY}
-	  ${GMP_LIBRARIES} )
+	  ${QT_QTCORE_LIBRARY})
 
   # MyMoneyDatabaseMgr
   set( mymoneydatabasemgrtest_SRCS mymoneydatabasemgrtest.cpp ../mymoneytestutils.cpp )
