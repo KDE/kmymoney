@@ -98,8 +98,13 @@ if(DOXYGEN_FOUND)
   add_custom_target(apidoc ${DOXYGEN} ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen)
 endif(DOXYGEN_FOUND)
 
-find_package(GMP REQUIRED)
 find_package(LibAlkimia 4.3.2 REQUIRED)
+#TODO: remove when LibAlkimia minimum version will be raised
+if (NOT LIBALKIMIA_LIBRARIES AND LIBALKIMIA_LIBRARY)
+  # LibAlkimia 4.3.2 does not properly define LIBALKIMIA_LIBRARIES
+  find_package(GMP REQUIRED)
+  set(LIBALKIMIA_LIBRARIES ${GMP_LIBRARIES} ${LIBALKIMIA_LIBRARY} )
+endif()
 
 # check for PkgConfig
 find_package(PkgConfig)
