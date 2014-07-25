@@ -60,8 +60,7 @@ include(GenerateExportHeader)
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config KHtml KDELibs4Support Completion KCMUtils ItemViews)
 find_package(KF5 COMPONENTS Holidays Gpgmepp QGpgme PimIdentities Akonadi Abc)
-find_package(GMP REQUIRED)
-find_package(LibAlkimia REQUIRED)
+find_package(LibAlkimia 4.100.0 REQUIRED)
 
 if(WIN32)
     find_package(KDEWin REQUIRED)
@@ -96,10 +95,6 @@ endif(DOXYGEN_FOUND)
 
 # check for PkgConfig
 find_package(PkgConfig)
-# check for some modules we require
-pkg_check_modules (PKGS libxml-2.0 libxml++-2.6 glib-2.0 glibmm-2.4)
-# this sets variables like ${PKGS_INCLUDE_DIRS} ${PKGS_LIBRARY_DIRS}
-# (cf. /usr/share/cmake/Modules/FindPkgConfig.cmake for more info)
 
 # check some functions
 include (CheckFunctionExists)

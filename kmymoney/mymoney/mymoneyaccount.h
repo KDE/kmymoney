@@ -497,7 +497,7 @@ public:
     *
     * @deprecated use isIncomeExpense() instead
     */
-  KDE_DEPRECATED bool isCategory(void) const;
+  KMM_MYMONEY_DEPRECATED bool isCategory(void) const;
 
   /**
     * This method returns @a true if the account type is
