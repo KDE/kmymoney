@@ -144,11 +144,6 @@ public:
   explicit kMyMoneyEdit(const MyMoneySecurity& eq, QWidget *parent = 0);
   ~kMyMoneyEdit();
 
-  /**
-    * @deprecated Use value() instead
-    */
-  //KDE_DEPRECATED MyMoneyMoney getMoneyValue(void);
-
   MyMoneyMoney value(void) const;
 
   void setValue(const MyMoneyMoney& value);

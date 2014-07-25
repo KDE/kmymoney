@@ -25,7 +25,7 @@ kde4_add_plugin(kmm_csvexport
 target_link_libraries(kmm_csvexport
   kmm_mymoney kmm_plugin
   ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS}
-  ${LIBALKIMIA_LIBRARY}
+  ${LIBALKIMIA_LIBRARIES}
 )
 
 ########### install files ###############

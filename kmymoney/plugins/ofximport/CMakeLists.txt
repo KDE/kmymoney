@@ -22,7 +22,7 @@ target_link_libraries(kmm_ofximport
                       kmm_plugin
                       ${KDE4_KDEUI_LIBS}
                       ${KDE4_KIO_LIBS}
-                      ${LIBALKIMIA_LIBRARY}
+                      ${LIBALKIMIA_LIBRARIES}
                       ${LIBOFX_LIBRARIES})
 
 ########### install files ###############

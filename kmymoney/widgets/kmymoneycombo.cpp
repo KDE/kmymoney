@@ -294,11 +294,6 @@ kMyMoneyCompletion* KMyMoneyCombo::completion(void) const
   return m_completion;
 }
 
-void KMyMoneyCombo::selectedItem(QString& id) const
-{
-  id = m_id;
-}
-
 void KMyMoneyCombo::selectedItems(QStringList& list) const
 {
   if (lineEdit() && lineEdit()->text().length() == 0) {

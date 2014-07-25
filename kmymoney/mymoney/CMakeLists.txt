@@ -42,8 +42,7 @@ target_link_libraries(kmm_mymoney LINK_PUBLIC
                       ${QT_QTCORE_LIBRARY}
                       ${KDE4_KDECORE_LIBS}
                       ${KDE4_KIO_LIBS}
-                      ${GMP_LIBRARIES}
-                      ${LIBALKIMIA_LIBRARY}
+                      ${LIBALKIMIA_LIBRARIES}
                       kmm_storage)
 
 set_target_properties(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
@@ -64,8 +63,7 @@ if( KDE4_BUILD_TESTS )
     ${QT_QTXML_LIBRARY}
     ${QT_QTCORE_LIBRARY}
     ${QT_QTTEST_LIBRARY}
-    ${GMP_LIBRARIES}
-    ${LIBALKIMIA_LIBRARY})
+    ${LIBALKIMIA_LIBRARIES})
 
   # MyMoneyAccount
   set( mymoneyaccounttest_SRCS mymoneyaccounttest.cpp )

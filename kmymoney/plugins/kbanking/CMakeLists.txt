@@ -34,7 +34,7 @@ target_link_libraries(kmm_kbanking
                       ${KDE4_KDEUI_LIBS}
                       ${GWENHYWFAR_LIBRARIES}
                       ${AQBANKING_LIBRARIES}
-                      ${LIBALKIMIA_LIBRARY}
+                      ${LIBALKIMIA_LIBRARIES}
                       )
 
 ########### install files ###############

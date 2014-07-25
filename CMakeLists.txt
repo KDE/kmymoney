@@ -99,15 +99,10 @@ if(DOXYGEN_FOUND)
 endif(DOXYGEN_FOUND)
 
 find_package(GMP REQUIRED)
-set(LIBALKIMIA_MIN_VERSION 4.3.2)
-find_package(LibAlkimia REQUIRED)
+find_package(LibAlkimia 4.3.2 REQUIRED)
 
 # check for PkgConfig
 find_package(PkgConfig)
-# check for some modules we require
-pkg_check_modules (PKGS libxml-2.0 libxml++-2.6 glib-2.0 glibmm-2.4)
-# this sets variables like ${PKGS_INCLUDE_DIRS} ${PKGS_LIBRARY_DIRS}
-# (cf. /usr/share/cmake/Modules/FindPkgConfig.cmake for more info)
 
 # check some functions
 include (CheckFunctionExists)

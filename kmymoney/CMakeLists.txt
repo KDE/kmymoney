@@ -56,7 +56,7 @@ kde4_add_library(kmm_config STATIC ${kmm_config_SRCS})
 set( kmymoney_common_SRCS kmymoneyutils.cpp kstartuplogo.cpp )
 kde4_add_library(kmymoney_common STATIC ${kmymoney_common_SRCS})
 target_link_libraries(kmymoney_common
-  ${QT_AND_KDECORE_LIBS} ${KDEPIMLIBS_KHOLIDAYS_LIBS} ${LIBALKIMIA_LIBRARY} kmm_widgets kmm_mymoney)
+  ${QT_AND_KDECORE_LIBS} ${KDEPIMLIBS_KHOLIDAYS_LIBS} ${LIBALKIMIA_LIBRARIES} kmm_widgets kmm_mymoney)
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
@@ -140,7 +140,7 @@ if( KDE4_BUILD_TESTS )
         ${QT_QTCORE_LIBRARY}
         ${QT_QTSQL_LIBRARY}
         ${QT_QTTEST_LIBRARY}
-        ${LIBALKIMIA_LIBRARY})
+        ${LIBALKIMIA_LIBRARIES})
 
   # KMyMoneyUtils
   set( kmymoneyutilstest_SRCS kmymoneyutilstest.cpp )

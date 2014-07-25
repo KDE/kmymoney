@@ -16,7 +16,7 @@ kde4_add_plugin(kmm_reconciliationreport ${kmm_reconciliationreport_PART_SRCS})
 target_link_libraries(kmm_reconciliationreport
                       ${KDE4_KDEUI_LIBS}
                       ${KDE4_KHTML_LIBS}
-                      ${LIBALKIMIA_LIBRARY}
+                      ${LIBALKIMIA_LIBRARIES}
                       kmm_mymoney kmm_plugin
                       )
 

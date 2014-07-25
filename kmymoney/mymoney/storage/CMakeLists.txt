@@ -25,7 +25,7 @@ install(FILES ${storage_HEADERS}
 if( KDE4_BUILD_TESTS )
 
   set(target_link_libraries_test
-    ${LIBALKIMIA_LIBRARY}
+    ${LIBALKIMIA_LIBRARIES}
     ${KDE4_KDECORE_LIBS}
     ${KDE4_KIO_LIBS}
     ${QT_QTGUI_LIBRARY}
