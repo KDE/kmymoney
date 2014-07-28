@@ -228,7 +228,7 @@ if(NOT WIN32)
 endif(NOT WIN32)
 if(CMAKE_COMPILER_IS_GNUCXX)
   # be more pedantic about common symbols
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wlogical-op")
 
   # Debug, Debugfull, Profile
   set(CMAKE_CXX_FLAGS_DEBUG
