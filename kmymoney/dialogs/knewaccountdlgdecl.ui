@@ -124,7 +124,7 @@
            <widget class="kMyMoneyDateInput" name="startDateEdit"/>
           </item>
           <item row="1" column="2">
-           <widget class="QLabel" name="textLabel1_3">
+           <widget class="QLabel" name="m_openingBalanceLabel">
             <property name="text">
              <string>Balance:</string>
             </property>
