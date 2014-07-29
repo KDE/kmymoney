@@ -1477,8 +1477,8 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
     bool okToSelect = true;
     int cnt = itemList.count();
     bool sameEntryType = true;
-    if (cnt > 0) {
-      if (typeid(*itemList.begin()) != typeid(item))
+    if (cnt > 0 && itemList.front()) {
+      if (typeid(*itemList.front()) != typeid(*item))
         sameEntryType = false;
     }
 
