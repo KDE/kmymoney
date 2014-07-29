@@ -3031,6 +3031,8 @@ void KMyMoneyApp::createCategory(MyMoneyAccount& account, const MyMoneyAccount& 
   QPointer<KNewAccountDlg> dialog =
     new KNewAccountDlg(account, false, true, 0, i18n("Create a new Category"));
 
+  dialog->setOpeningBalanceShown(false);
+
   if (dialog->exec() == QDialog::Accepted && dialog != 0) {
     MyMoneyAccount parentAccount, brokerageAccount;
     account = dialog->account();
@@ -3511,6 +3513,7 @@ void KMyMoneyApp::slotAccountEdit(void)
 
         if (category || d->m_selectedAccount.accountType() == MyMoneyAccount::Investment) {
           dlg->setOpeningBalanceShown(false);
+          tid.clear();
         } else {
           if (!tid.isEmpty()) {
             try {
