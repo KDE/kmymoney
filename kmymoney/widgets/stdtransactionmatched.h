@@ -52,7 +52,7 @@ public:
 
   virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
 
-  void registerCellText(QString& txt, int& align, int row, int col, QPainter* painter = 0);
+  void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
 
   /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister(bool)
@@ -72,5 +72,3 @@ public:
 } // namespace
 
 #endif
-// vim:cin:si:ai:et:ts=2:sw=2:
-

@@ -34,6 +34,7 @@ class QDomDocument;
 #include <mymoneyaccount.h>
 #include <mymoneymoney.h>
 #include <kmm_mymoney_export.h>
+#include <mymoneyunittestable.h>
 
 /**
   * This class defines a Budget within the MyMoneyEngine.  The Budget class
@@ -307,4 +308,3 @@ private:
 Q_DECLARE_METATYPE(MyMoneyBudget)
 
 #endif // MYMONEYBudget_H
-// vim:cin:si:ai:et:ts=2:sw=2:

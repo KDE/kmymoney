@@ -1,4 +1,4 @@
-SET(libmodels_a_SOURCES
+set(libmodels_a_SOURCES
     accountsmodel.cpp
     onlinejobmodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
@@ -6,11 +6,10 @@ SET(libmodels_a_SOURCES
     payeeidentifiermodel.cpp
    )
 
-KDE4_ADD_LIBRARY(models STATIC ${libmodels_a_SOURCES})
+kde4_add_library(models STATIC ${libmodels_a_SOURCES})
 
-TARGET_LINK_LIBRARIES(models
+target_link_libraries(models
     kmm_mymoney
 )
 
-ADD_DEPENDENCIES(models kmm_config)
-
+add_dependencies(models kmm_config)

@@ -153,5 +153,3 @@ void CsvDateTest::testDateConvertFormats()
 
   QVERIFY(m_convert->convertDate(aDate) == QDate(2001, 11, 30));
 }
-
-#include "csvdatetest.moc"

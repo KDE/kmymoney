@@ -1,9 +1,9 @@
-PROJECT(widgets)
+project(widgets)
 
 ########### custom command #############
 
 ########### create links ###############
-SET(kmymoney_STAT_HEADERS
+set(kmymoney_STAT_HEADERS
   kaccounttemplateselector.h kbudgetvalues.h kguiutils.h
   kmymoneyaccountcombo.h kmymoneyaccountcompletion.h
   kmymoneyaccountselector.h
@@ -21,7 +21,7 @@ SET(kmymoney_STAT_HEADERS
   )
 
 ########### Shared widget library ###########
-SET(kmm_widgets_sources
+set(kmm_widgets_sources
   kmymoneydateinput.cpp
   kmymoneyvalidationfeedback.cpp
   styleditemdelegateforwarder.cpp
@@ -29,18 +29,18 @@ SET(kmm_widgets_sources
 
 kde4_add_ui_files(kmm_widgets_sources kmymoneyvalidationfeedback.ui)
 
-KDE4_ADD_LIBRARY(kmm_widgets SHARED ${kmm_widgets_sources})
-TARGET_LINK_LIBRARIES(kmm_widgets ${KDE4_KDEUI_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDECORE_LIBS})
-SET_TARGET_PROPERTIES(kmm_widgets PROPERTIES
+kde4_add_library(kmm_widgets SHARED ${kmm_widgets_sources})
+target_link_libraries(kmm_widgets LINK_PUBLIC ${KDE4_KDEUI_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDECORE_LIBS})
+set_target_properties(kmm_widgets PROPERTIES
    COMPILE_FLAGS "-DKMM_BUILD_WIDGETS_LIB"
    VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
-INSTALL(TARGETS kmm_widgets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS kmm_widgets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### Basic Widget Library (kmymoney_base) STATIC #################
 
 # Common sources for libkmymoney.so and libwidgets.a that do not
 # contain the KMM_DESIGNER flag
-SET(_uncritial_common_sources
+set(_uncritial_common_sources
   fixedcolumntreeview.cpp
   kbudgetvalues.cpp
   kguiutils.cpp
@@ -70,7 +70,7 @@ SET(_uncritial_common_sources
   )
 
 # sources that contain the KMM_DESIGNER flag
-SET (_critial_common_sources
+set (_critial_common_sources
   kaccounttemplateselector.cpp
   kmymoneycurrencyselector.cpp
   kmymoneyaccountcompletion.cpp
@@ -79,54 +79,54 @@ SET (_critial_common_sources
   )
 
 
-SET (kmymoney_base_UI
+set (kmymoney_base_UI
   kbudgetvaluesdecl.ui transactionsortoptiondecl.ui kaccounttemplateselectordecl.ui
   )
 
-KDE4_ADD_UI_FILES(kmymoney_base_ui_srcs ${kmymoney_base_UI})
-SET(_uncritial_common_sources ${_uncritial_common_sources}
+kde4_add_ui_files(kmymoney_base_ui_srcs ${kmymoney_base_UI})
+set(_uncritial_common_sources ${_uncritial_common_sources}
   ${kmymoney_base_ui_srcs})
 
 # in order to use add_dependencies, we need to add this custom target
 # for all generated header files.
 # (see http://www.vtk.org/Wiki/CMake_FAQ#How_can_I_add_a_dependency_to_a_source_file_which_is_generated_in_a_subdirectory.3F )
-ADD_CUSTOM_TARGET(generate_base_ui_srcs DEPENDS
+add_custom_target(generate_base_ui_srcs DEPENDS
   ${kmymoney_base_ui_srcs})
 
 # We can compile the uncritical sources without KMM_DESIGNER flags
-KDE4_ADD_LIBRARY(kmymoney_base STATIC ${_uncritial_common_sources})
+kde4_add_library(kmymoney_base STATIC ${_uncritial_common_sources})
 
-ADD_DEPENDENCIES(kmymoney_base kmm_config)
+add_dependencies(kmymoney_base kmm_config)
 
 ########### QtDesigner Widget Library (kmymoneywidgets) #################
 # we never link against this library,
 # but it is needed for uic and QtDesigner
-IF( USE_QT_DESIGNER )
-  SET(kmymoneywidgets_PART_SRCS
+if( USE_QT_DESIGNER )
+  set(kmymoneywidgets_PART_SRCS
       ${CMAKE_CURRENT_BINARY_DIR}/kmymoneywidgets.cpp)
 
-  KDE4_ADD_WIDGET_FILES(kmymoneywidgets_PART_SRCS kmymoney.widgets)
+  kde4_add_widget_files(kmymoneywidgets_PART_SRCS kmymoney.widgets)
 
-  SET(kmymoneywidgets_PART_SRCS
+  set(kmymoneywidgets_PART_SRCS
     ${_critial_common_sources}
     ${kmymoneywidgets_PART_SRCS})
 
-  KDE4_ADD_PLUGIN(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
+  kde4_add_plugin(kmymoneywidgets ${kmymoneywidgets_PART_SRCS})
 
-  INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
+  include_directories( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
   # The option -DKMM_DESIGNER will leave away any code that breaks uic.
-  SET_TARGET_PROPERTIES(kmymoneywidgets PROPERTIES
+  set_target_properties(kmymoneywidgets PROPERTIES
     COMPILE_FLAGS "-DKMM_DESIGNER")
 
-  TARGET_LINK_LIBRARIES(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_config dialogs models converter ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+  target_link_libraries(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_config dialogs models converter ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
 
-  INSTALL(TARGETS kmymoneywidgets DESTINATION ${QT_PLUGINS_DIR}/designer )
-ENDIF( USE_QT_DESIGNER )
+  install(TARGETS kmymoneywidgets DESTINATION ${QT_PLUGINS_DIR}/designer )
+endif( USE_QT_DESIGNER )
 
 ########### Widget Library (widgets) STATIC #################
 
-SET(libwidgets_a_SOURCES
+set(libwidgets_a_SOURCES
   ${_critial_common_sources}
   kmymoneybriefschedule.cpp
   kmymoneycalendar.cpp
@@ -138,7 +138,7 @@ SET(libwidgets_a_SOURCES
   kmymoneyreportcontrolimpl.cpp
   )
 
-SET(libwidgets_a_UI
+set(libwidgets_a_UI
   kschedulebriefwidget.ui kmymoneyreportcontroldecl.ui
   kmymoneyreportconfigtab1decl.ui kmymoneyreportconfigtab2decl.ui
   kmymoneyreportconfigtab3decl.ui kmymoneyreportconfigtabchartdecl.ui
@@ -151,18 +151,18 @@ SET(libwidgets_a_UI
 
 
 kde4_add_ui_files(widgets_ui_srcs ${libwidgets_a_UI})
-ADD_CUSTOM_TARGET(generate_widgets_ui_srcs DEPENDS ${widgets_ui_srcs})
+add_custom_target(generate_widgets_ui_srcs DEPENDS ${widgets_ui_srcs})
 
-KDE4_ADD_LIBRARY(widgets STATIC
+kde4_add_library(widgets STATIC
   ${libwidgets_a_SOURCES}
   ${widgets_ui_srcs}
   )
-TARGET_LINK_LIBRARIES(widgets kmymoney_base)
+target_link_libraries(widgets kmymoney_base)
 
-ADD_DEPENDENCIES(widgets kmm_config)
+add_dependencies(widgets kmm_config)
 
 ########### install files ###############
 
-INSTALL(FILES ${kmymoney_STAT_HEADERS}
+install(FILES ${kmymoney_STAT_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 

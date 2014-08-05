@@ -46,6 +46,3 @@ EditSelectionWizardPage::EditSelectionWizardPage(QWidget *parent)
 
   m_editInterestRateButton->animateClick();
 }
-
-#include "editselectionwizardpage.moc"
-

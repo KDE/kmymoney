@@ -52,7 +52,7 @@ namespace KMyMoneyPlugin
   * http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
   *
   */
-class KMM_PLUGINS_EXPORT Plugin : public QObject, public KXMLGUIClient
+class KMM_PLUGIN_EXPORT Plugin : public QObject, public KXMLGUIClient
 {
   Q_OBJECT
 public:
@@ -84,7 +84,7 @@ protected:
    * http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
    *
  */
-class KMM_PLUGINS_EXPORT OnlinePlugin
+class KMM_PLUGIN_EXPORT OnlinePlugin
 {
 public:
   OnlinePlugin() {}
@@ -150,7 +150,7 @@ public:
   * http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
   *
   */
-class KMM_PLUGINS_EXPORT ImporterPlugin
+class KMM_PLUGIN_EXPORT ImporterPlugin
 {
 public:
   ImporterPlugin() {}

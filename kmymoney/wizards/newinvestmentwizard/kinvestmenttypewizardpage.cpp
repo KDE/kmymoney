@@ -57,6 +57,3 @@ void KInvestmentTypeWizardPage::setIntroLabelText(const QString& text)
 {
   m_introLabel->setText(text);
 }
-
-#include "kinvestmenttypewizardpage.moc"
-

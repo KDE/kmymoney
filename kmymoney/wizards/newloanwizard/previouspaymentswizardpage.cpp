@@ -42,6 +42,3 @@ PreviousPaymentsWizardPage::PreviousPaymentsWizardPage(QWidget *parent)
 
   m_noPreviousPaymentButton->animateClick();
 }
-
-#include "previouspaymentswizardpage.moc"
-

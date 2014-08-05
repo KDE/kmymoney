@@ -1167,6 +1167,3 @@ void InvestTransactionEditor::slotUpdateInvestMemoState(void)
     d->m_activity->m_memoChanged = (memo->toPlainText() != d->m_activity->m_memoText);
   }
 }
-
-#include "investtransactioneditor.moc"
-

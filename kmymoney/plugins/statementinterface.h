@@ -40,7 +40,7 @@ namespace KMyMoneyPlugin
   * This abstract class represents the interface to import statements
   * into the KMyMoney application
   */
-class KMM_PLUGINS_EXPORT StatementInterface : public QObject
+class KMM_PLUGIN_EXPORT StatementInterface : public QObject
 {
   Q_OBJECT
 

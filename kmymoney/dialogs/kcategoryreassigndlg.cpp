@@ -102,5 +102,3 @@ void KCategoryReassignDlg::accept(void)
     KCategoryReassignDlgDecl::accept();
   }
 }
-
-#include "kcategoryreassigndlg.moc"

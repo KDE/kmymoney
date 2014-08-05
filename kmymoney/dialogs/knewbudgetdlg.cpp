@@ -96,5 +96,3 @@ QString& KNewBudgetDlg::getName()
 {
   return d->m_name;
 }
-
-#include "knewbudgetdlg.moc"

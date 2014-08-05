@@ -187,5 +187,3 @@ const QString& KAccountSelectDlg::selectedAccount(void) const
 {
   return m_accountSelector->selectedItem();
 }
-
-#include "kaccountselectdlg.moc"

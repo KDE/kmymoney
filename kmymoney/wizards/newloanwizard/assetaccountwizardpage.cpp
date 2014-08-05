@@ -75,6 +75,3 @@ bool AssetAccountWizardPage::isComplete() const
   }
   return false;
 }
-
-#include "assetaccountwizardpage.moc"
-

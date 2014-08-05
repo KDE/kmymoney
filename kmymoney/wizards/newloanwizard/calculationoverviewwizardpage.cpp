@@ -40,6 +40,3 @@ CalculationOverviewWizardPage::CalculationOverviewWizardPage(QWidget *parent)
   registerField("payment6", m_payment6, "text");
   registerField("balloon6", m_balloon6, "text");
 }
-
-#include "calculationoverviewwizardpage.moc"
-

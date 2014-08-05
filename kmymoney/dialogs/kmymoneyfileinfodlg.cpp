@@ -86,5 +86,3 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent)
 KMyMoneyFileInfoDlg::~KMyMoneyFileInfoDlg()
 {
 }
-
-#include "kmymoneyfileinfodlg.moc"

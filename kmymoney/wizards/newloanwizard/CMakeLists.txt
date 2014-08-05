@@ -1,6 +1,6 @@
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
-SET (libnewloanwizard_a_SOURCES
+set (libnewloanwizard_a_SOURCES
   additionalfeeswizardpage.cpp       lendborrowwizardpage.cpp
   assetaccountwizardpage.cpp         loanamountwizardpage.cpp
   loanattributeswizardpage.cpp
@@ -20,7 +20,7 @@ SET (libnewloanwizard_a_SOURCES
   knewloanwizard.cpp                 variableinterestdatewizardpage.cpp
   )
 
-SET (libnewloanwizard_a_UI
+set (libnewloanwizard_a_UI
   knewloanwizarddecl.ui
   additionalfeeswizardpagedecl.ui       loanamountwizardpagedecl.ui
   loanattributeswizardpagedecl.ui
@@ -39,11 +39,11 @@ SET (libnewloanwizard_a_UI
   interestwizardpagedecl.ui             summarywizardpagedecl.ui
   knewloanwizarddecl.ui                 variableinterestdatewizardpagedecl.ui
   lendborrowwizardpagedecl.ui
-	)
+  )
 
 kde4_add_ui_files(libnewloanwizard_a_SOURCES ${libnewloanwizard_a_UI} )
 
-KDE4_ADD_LIBRARY(newloanwizard STATIC ${libnewloanwizard_a_SOURCES})
+kde4_add_library(newloanwizard STATIC ${libnewloanwizard_a_SOURCES})
 
 # we rely on some dialogs to be generated
-ADD_DEPENDENCIES(newloanwizard dialogs)
+add_dependencies(newloanwizard dialogs)

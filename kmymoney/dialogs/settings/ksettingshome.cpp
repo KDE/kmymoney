@@ -174,5 +174,3 @@ void KSettingsHome::slotMoveDown(void)
     slotUpdateItemList();
   }
 }
-
-#include "ksettingshome.moc"

@@ -1,6 +1,6 @@
-INCLUDE_DIRECTORIES( ${LIBALKIMIA_INCLUDE_DIR} )
+include_directories( ${LIBALKIMIA_INCLUDE_DIR} )
 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     ${KDEPIMLIBS_INCLUDE_DIRS}
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs/
@@ -9,11 +9,13 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/mymoney/
                     ${CMAKE_CURRENT_SOURCE_DIR}/mymoney/storage/
                     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/
+                    ${CMAKE_CURRENT_BINARY_DIR}/plugins/
                     ${CMAKE_CURRENT_SOURCE_DIR}/views/
                     ${CMAKE_CURRENT_SOURCE_DIR}/dialogs/
                     ${CMAKE_CURRENT_SOURCE_DIR}/converter/
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs/settings/
                     ${CMAKE_CURRENT_BINARY_DIR}/mymoney/storage/
+                    ${CMAKE_CURRENT_BINARY_DIR}/mymoney/
                     ${CMAKE_CURRENT_SOURCE_DIR}/reports/
                     ${CMAKE_CURRENT_SOURCE_DIR}/wizards/endingbalancedlg/
                     ${CMAKE_CURRENT_BINARY_DIR}/wizards/endingbalancedlg/
@@ -27,40 +29,41 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}
                     ${KMyMoney_SOURCE_DIR}/libkgpgfile/
                     ${KMyMoney_SOURCE_DIR}/libkdchart/include )
 
-ADD_SUBDIRECTORY( mymoney )
-ADD_SUBDIRECTORY( models  )
-ADD_SUBDIRECTORY( plugins )
-ADD_SUBDIRECTORY( reports )
-ADD_SUBDIRECTORY( widgets )
-ADD_SUBDIRECTORY( dialogs )
-ADD_SUBDIRECTORY( views )
-ADD_SUBDIRECTORY( converter )
-ADD_SUBDIRECTORY( wizards )
-ADD_SUBDIRECTORY( pics )
-ADD_SUBDIRECTORY( html )
-ADD_SUBDIRECTORY( templates )
-ADD_SUBDIRECTORY( misc )
+add_subdirectory( mymoney )
+add_subdirectory( models  )
+add_subdirectory( plugins )
+add_subdirectory( reports )
+add_subdirectory( widgets )
+add_subdirectory( dialogs )
+add_subdirectory( views )
+add_subdirectory( converter )
+add_subdirectory( wizards )
+add_subdirectory( pics )
+add_subdirectory( html )
+add_subdirectory( templates )
+add_subdirectory( misc )
 
-SET( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
+set( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 
 ########### settings code (kmm_config) STATIC ###############
-SET( kmm_config_SRCS kmymoneyglobalsettings.cpp )
-KDE4_ADD_KCFG_FILES( kmm_config_SRCS kmymoneysettings.kcfgc )
-KDE4_ADD_LIBRARY(kmm_config STATIC ${kmm_config_SRCS})
+set( kmm_config_SRCS kmymoneyglobalsettings.cpp )
+kde4_add_kcfg_files( kmm_config_SRCS kmymoneysettings.kcfgc )
+kde4_add_library(kmm_config STATIC ${kmm_config_SRCS})
 
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney, kmymoneytest, and libkmymoney.so
 
-SET( kmymoney_common_SRCS kmymoneyutils.cpp kstartuplogo.cpp )
-KDE4_ADD_LIBRARY(kmymoney_common STATIC ${kmymoney_common_SRCS})
-TARGET_LINK_LIBRARIES(kmymoney_common
-  ${QT_AND_KDECORE_LIBS} ${KDEPIMLIBS_KHOLIDAYS_LIBS} ${GMP_LIBRARIES} ${LIBALKIMIA_LIBRARY} kmm_widgets kmm_mymoney )
+set( kmymoney_common_SRCS kmymoneyutils.cpp kstartuplogo.cpp )
+kde4_add_library(kmymoney_common STATIC ${kmymoney_common_SRCS})
+target_link_libraries(kmymoney_common
+  ${QT_AND_KDECORE_LIBS} ${KDEPIMLIBS_KHOLIDAYS_LIBS} ${LIBALKIMIA_LIBRARIES} kmm_widgets kmm_mymoney)
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
-ADD_DEPENDENCIES(kmymoney_common generate_base_ui_srcs kmm_config)
+add_dependencies(kmymoney_common generate_base_ui_srcs kmm_config)
+add_dependencies(wizardpages widgets)
 
-SET( kmymoney_common_LIBS
+set( kmymoney_common_LIBS
   views reports kmymoney_base kmymoney_common
   newuserwizard newaccountwizard newinvestmentwizard newloanwizard
   endingbalancedlg wizardpages
@@ -72,81 +75,81 @@ SET( kmymoney_common_LIBS
 
 ########### kmymoney executable ###############
 
-SET( kmymoney_SRCS main.cpp kmymoney.cpp )
+set( kmymoney_SRCS main.cpp kmymoney.cpp )
 
-QT4_ADD_DBUS_ADAPTOR(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
-KDE4_ADD_APP_ICON( kmymoney_SRCS hi*-app-kmymoney.png )
+qt4_add_dbus_adaptor(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
+kde4_add_app_icon( kmymoney_SRCS hi*-app-kmymoney.png )
 
-KDE4_ADD_EXECUTABLE( kmymoney ${kmymoney_SRCS} )
-TARGET_LINK_LIBRARIES( kmymoney ${kmymoney_common_LIBS} )
+kde4_add_executable( kmymoney ${kmymoney_SRCS} )
+target_link_libraries( kmymoney ${kmymoney_common_LIBS} )
 
 ########### install files ###############
 
-INSTALL(TARGETS kmymoney ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kmymoney ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-INSTALL(FILES kmymoney.kcfg
+install(FILES kmymoney.kcfg
   DESTINATION ${KCFG_INSTALL_DIR}
   )
-INSTALL(FILES kmymoney.upd
+install(FILES kmymoney.upd
   DESTINATION ${KCONF_UPDATE_INSTALL_DIR}
   )
-INSTALL(FILES kmymoneyui.rc tips
+install(FILES kmymoneyui.rc tips
   DESTINATION ${DATA_INSTALL_DIR}/kmymoney
   )
-INSTALL(FILES ${_HEADERS}
+install(FILES ${_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
   )
-INSTALL(PROGRAMS kmymoney.desktop
+install(PROGRAMS kmymoney.desktop
   DESTINATION ${XDG_APPS_INSTALL_DIR}
   )
+install(PROGRAMS kmymoney.appdata.xml
+  DESTINATION share/appdata/
+  )
 
-INSTALL(FILES x-kmymoney.xml
+install(FILES x-kmymoney.xml
   DESTINATION ${XDG_MIME_INSTALL_DIR})
 
-UPDATE_XDG_MIMETYPES(${XDG_MIME_INSTALL_DIR})
+update_xdg_mimetypes(${XDG_MIME_INSTALL_DIR})
 
 ########## Application Icons #############
-INSTALL(DIRECTORY icons/hicolor
+install(DIRECTORY icons/hicolor
   DESTINATION ${DATA_INSTALL_DIR}/kmymoney/icons
   PATTERN "*Make*" EXCLUDE
   PATTERN ".svn" EXCLUDE
   )
-INSTALL(DIRECTORY icons/oxygen
+install(DIRECTORY icons/oxygen
   DESTINATION ${DATA_INSTALL_DIR}/kmymoney/icons
   PATTERN "*Make*" EXCLUDE
   PATTERN ".svn" EXCLUDE
   )
-KDE4_INSTALL_ICONS(${ICON_INSTALL_DIR})
+kde4_install_icons(${ICON_INSTALL_DIR})
 
 ############## tests ####################
-IF( KDE4_BUILD_TESTS )
+if( KDE4_BUILD_TESTS )
 
-  SET(target_link_libraries_test
-	widgets
-	kmm_mymoney
-	kmymoney_common
-	dialogs
-	widgets
-	kmm_config
-	${KDE4_KHTML_LIBS}
-	${KDE4_KDEUI_LIBS}
-	${KDE4_KFILE_LIBS}
-	${KDE4_KUTILS_LIBRARY}
+  set(target_link_libraries_test
+        kmm_mymoney
+        kmymoney_common
+        kmm_config
+        widgets
+        ${KDE4_KHTML_LIBS}
+        ${KDE4_KDEUI_LIBS}
+        ${KDE4_KFILE_LIBS}
+        ${KDE4_KUTILS_LIBRARY}
         ${QT_QTGUI_LIBRARY}
         ${QT_QTXML_LIBRARY}
         ${QT_QTCORE_LIBRARY}
-	${QT_QTSQL_LIBRARY}
+        ${QT_QTSQL_LIBRARY}
         ${QT_QTTEST_LIBRARY}
-        ${GMP_LIBRARIES}
         ${LIBALKIMIA_LIBRARY}
         )
 
   # KMyMoneyUtils
-  SET( kmymoneyutilstest_SRCS kmymoneyutilstest.cpp )
+  set( kmymoneyutilstest_SRCS kmymoneyutilstest.cpp )
 
-  KDE4_ADD_UNIT_TEST( kmymoneyutilstest TESTNAME kmymoney-utilstest ${kmymoneyutilstest_SRCS} )
-  ADD_DEPENDENCIES( kmymoneyutilstest kmymoney_common kmm_mymoney )
-  TARGET_LINK_LIBRARIES( kmymoneyutilstest ${target_link_libraries_test})
+  kde4_add_unit_test( kmymoneyutilstest TESTNAME kmymoney-utilstest ${kmymoneyutilstest_SRCS} )
+  add_dependencies( kmymoneyutilstest kmymoney_common kmm_mymoney )
+  target_link_libraries( kmymoneyutilstest ${target_link_libraries_test})
 
-ENDIF( KDE4_BUILD_TESTS )
+endif( KDE4_BUILD_TESTS )
 

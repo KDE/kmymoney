@@ -792,5 +792,3 @@ void MyMoneyReport::setLineWidth(int width)
 {
   m_lineWidth = width;
 }
-
-// vim:cin:si:ai:et:ts=2:sw=2:

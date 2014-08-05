@@ -47,6 +47,7 @@
 #include <QWizard>
 #include <QWizardPage>
 #include <QTextCodec>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -726,6 +727,10 @@ void CSVDialog::readFile(const QString& fname)
 
   m_importError = false;
   m_payeeColAdded = false;
+  m_clearAll = false;
+  m_firstIsValid = false;
+  m_secondIsValid = false;
+  m_firstField = true;
   int columnCount = 0;
   MyMoneyStatement st = MyMoneyStatement();
   if (!fname.isEmpty()) {
@@ -1035,9 +1040,7 @@ void CSVDialog::markUnwantedRows()
 int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
 {
   QString newTxt;
-  bool firstField = true;
-  QString firstValue;
-
+  m_firstField = true;
   if (m_columnList.count() < m_endColumn) {
     if (!m_accept) {
       QString row = QString::number(m_row);
@@ -1067,12 +1070,12 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
     if (m_columnTypeList[i] == "number") {
       txt = m_columnList[i];
       m_trData.number = txt;
-      m_qifBuffer = m_qifBuffer + 'N' + txt + '\n';  // Number column
+      m_qifBuffer = m_qifBuffer + 'N' + txt + '\n';     // Number column
     } else if (m_columnTypeList[i] == "date") {
       ++neededFieldsCount;
       txt = m_columnList[i];
-      txt = txt.remove(m_textDelimiterCharacter);  //   "16/09/2009
-      QDate dat = m_convertDate->convertDate(txt);  //  Date column
+      txt = txt.remove(m_textDelimiterCharacter);       //   "16/09/2009
+      QDate dat = m_convertDate->convertDate(txt);      //  Date column
       if (dat == QDate()) {
         KMessageBox::sorry(this, i18n("<center>An invalid date has been detected during import.</center>"
                                       "<center><b>'%1'</b></center>"
@@ -1104,18 +1107,18 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
       //  Resource file DebitFlag setting of -1 means 'ignore/notused'.
       //  DebitFlag setting of >=0 indicates the column containing the flag.
 
-      if (m_flagCol == -1) {      //                        it's a new file
+      if (m_flagCol == -1) {      //                    it's a new file
         switch (m_debitFlag) {  //                      Flag if amount is debit or credit
-          case -1://                                  Ignore flag
-            m_flagCol = 0;//                          ...and continue
+          case -1://                                    Ignore flag
+            m_flagCol = 0;//                            ...and continue
             break;
-          case  0://                                  Ask for column no.of flag
+          case  0://                                    Ask for column no.of flag
             m_flagCol = columnNumber(i18n("Enter debit flag column number"));
-            if (m_flagCol == 0) {      //                  0 means Cancel was pressed
+            if (m_flagCol == 0) {      //               0 means Cancel was pressed
               return KMessageBox::Cancel;//           ... so exit
             }
             break;
-          default : m_flagCol = m_debitFlag;//        Contains flag/column no.
+          default : m_flagCol = m_debitFlag;//          Contains flag/column no.
         }
       }
       if ((m_flagCol < 0) || (m_flagCol > m_endColumn)) {      // shouldn't get here
@@ -1143,29 +1146,10 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
 
     else if ((m_columnTypeList[i] == "debit") || (m_columnTypeList[i] == "credit")) {      //  Credit or debit?
       ++neededFieldsCount;
-      txt = m_columnList[i].trimmed();  //                     A field of blanks is not good...
-
-      if ((!txt.isEmpty()) && ((i == m_debitColumn))) {
-        txt = '-' + txt;  //                                   Mark as -ve
+      if (!ensureBothFieldsValid(i)) {
+        return KMessageBox::Cancel;
       }
-      if (firstField) {  //                                    Debit or credit, whichever comes first.
-        firstValue = txt;  //                                  Save field until second arrives.
-      } else {  //                                             Second field.
-        if (txt.isEmpty()) {  //                               If second field empty,...
-          txt = firstValue;  //                                ...use first (which could also be empty..)
-        }
-      }
-      if (txt.isEmpty()) {
-        txt = '0';
-      }
-      if (!firstField) {  //                                   Process outcome.
-        newTxt = m_parse->possiblyReplaceSymbol(txt);
-        m_trData.amount = newTxt;
-        m_qifBuffer = m_qifBuffer + 'T' + newTxt + '\n';
-      }
-      firstField = !firstField;
     }
-
     else if (m_columnTypeList[i] == "memo") {      //         could be more than one
       txt = m_columnList[i];
       txt.replace('~', "\n");  //                             replace NL which was substituted
@@ -1174,24 +1158,24 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
         m_columnList[i] = txt;
       }
       if (!memo.isEmpty()) {
-        memo += '\n';//                                 separator for multiple memos
+        memo += '\n';//                                       separator for multiple memos
       }
-      memo += txt;//                                    next memo
+      memo += txt;//                                          next memo
     }//end of memo field
 
-    else if (m_columnTypeList[i] == "category") {      //         "category"
+    else if (m_columnTypeList[i] == "category") {  //         "category"
       txt = m_columnList[i];
       txt.replace('~', "\n");  //                             replace NL which was substituted
       txt = m_columnList[m_categoryColumn];
       m_columnList[i] = txt;
-      txt.remove('~');  //                              replace NL which was substituted
+      txt.remove('~');  //                                    replace NL which was substituted
       txt = txt.remove('\'');
 
       m_trData.category = txt;
       m_csvSplit.m_strCategoryName = m_columnList[m_categoryColumn];
       m_csvSplit.m_strMemo = m_trData.memo;
       m_csvSplit.m_amount = m_trData.amount;
-      m_qifBuffer = m_qifBuffer + 'L' + txt + '\n';  //  Category column
+      m_qifBuffer = m_qifBuffer + 'L' + txt + '\n';  //       Category column
     }//end of category field
   }//end of col loop
   m_trData.memo = memo;
@@ -1227,6 +1211,124 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
   }
 }
 
+QString CSVDialog::clearInvalidField(QString m_firstValue, QString m_secondValue)
+{
+  if (MyMoneyMoney(m_firstValue).isZero()) {
+    m_firstValue = QString();
+    return m_secondValue;
+  } else {
+    m_secondValue = QString();
+    return m_firstValue;
+  }
+}
+
+int CSVDialog::ensureBothFieldsValid(int col)
+{
+  int ret = 0;
+  QString newTxt;
+  QString txt = m_columnList[col].trimmed();  //               A field of blanks is not good...
+  if ((!txt.isEmpty()) && ((col == m_debitColumn))) {
+    txt = '-' + txt;  //                                      Mark as -ve
+  }
+  if (!txt.isEmpty() && !txt.contains(m_decimalSymbol)) {
+    //  This field has no decimal part
+    txt += m_decimalSymbol + "00";
+  }
+  if (m_firstField) {  //                                     Debit or credit, whichever comes first.
+    m_firstValue = txt;  //                                   Save first field until second arrives.
+    m_firstType = m_columnTypeList[col];
+  } else {  //                                                Second field.
+    if (txt.isEmpty()) {
+      m_secondValue = txt;
+    } else if (QString::number(txt.toDouble(), 'f', 2 ) == 0) {
+      m_secondValue = QString();
+      m_secondType = m_columnTypeList[col];
+      txt = m_firstValue;
+    }
+    if ((txt.isEmpty()) || (QString::number(txt.toDouble(), 'f', 2 ) == 0)) {  //  If second field empty,...
+      m_secondValue = txt;//QString()
+      m_secondType = m_columnTypeList[col];
+      txt = m_firstValue;  //                                                      ...use first (which could also be empty..)
+    } else {
+      m_secondValue = txt;
+    }
+  }  //  end of second field.
+  bool bothFieldsNotZero = false;
+  QString zero = "0" + m_decimalSymbol + "00";
+  if (!m_firstField) {  //                                    Process outcome.
+    //  a field is valid only if it is non-zero and if the other (credit/debit) field is empty
+    m_firstIsValid = m_firstValue != zero && m_secondValue.isEmpty();
+    m_secondIsValid = m_secondValue != zero && m_firstValue.isEmpty();
+    //  need to remove temporarily any minus sign so keep both originalfields
+    QString firstTemp = m_firstValue;
+    firstTemp = firstTemp.remove('-');
+    QString secondTemp = m_secondValue;
+    secondTemp = secondTemp.remove('-');
+    bothFieldsNotZero = firstTemp != zero && secondTemp != zero;
+    //  beware - an empty field is not zero so bypasses this message
+    if ((firstTemp == zero || secondTemp == zero) && (m_clearAll == false)) {
+      //  Warn user if either field is zero - so needs to be cleared
+      // user may opt to clear just this or all similar
+      int ret = KMessageBox::questionYesNoCancel(this, i18n("<center>The %1 field contains '%2'</center>"
+                "<center>and the %3 field contains '%4'.</center>"
+                "<center>This combination is not valid.</center>"
+                "<center>If you wish for just this zero field to be cleared, click 'Clear this'.</center>"
+                "<center>Or, if you wish for all such zero fields to be cleared, click 'Clear all'.</center>"
+                "<center>Otherwise, click 'Cancel'.</center>",
+                m_firstType, m_firstValue, m_secondType, m_secondValue), i18n("CSV invalid field values"),
+                KGuiItem(i18n("Clear this")),
+                KGuiItem(i18n("Clear all")),
+                KGuiItem(i18n("Cancel")));
+      switch (ret) {
+        case KMessageBox::Yes:
+          txt = clearInvalidField(m_firstValue, m_secondValue);
+          break;
+        case KMessageBox::No:
+          m_clearAll = true;
+          txt = clearInvalidField(m_firstValue, m_secondValue);
+          break;
+        case KMessageBox::Cancel:
+          m_clearAll = false;
+          return ret;
+      }
+      newTxt = m_parse->possiblyReplaceSymbol(txt);
+      m_trData.amount = newTxt;
+      m_qifBuffer = m_qifBuffer + 'T' + m_trData.amount + '\n';
+    }  //  end of first error test
+    else if (bothFieldsNotZero && !m_firstValue.isEmpty() && !m_secondValue.isEmpty()) {  //  credit and debit contain values - not good
+      //  both debit and credit have entries so ask user how to proceed.
+      //  if just one field is empty, that's OK - bypass this message
+      ret = KMessageBox::questionYesNoCancel(this, i18n("<center>The %1 field contains '%2'</center>"
+            "<center>and the %3 field contains '%4'.</center>"
+            "<center>Please choose which you wish to accept.</center>",
+            m_columnTypeList[m_debitColumn], m_columnList[m_debitColumn],m_columnTypeList[m_creditColumn], m_columnList[m_creditColumn]), i18n("CSV invalid field values"),
+            KGuiItem(i18n("Accept %1", m_columnTypeList[m_debitColumn])),
+            KGuiItem(i18n("Accept %1", m_columnTypeList[m_creditColumn])),
+            KGuiItem(i18n("Cancel")));
+      if (ret == KMessageBox::Cancel) {
+        return ret;
+      }
+      if (ret == KMessageBox::Yes) {
+        m_trData.amount = '-' + m_parse->possiblyReplaceSymbol(m_columnList[m_debitColumn]);
+      } else if (ret == KMessageBox::No) {
+        m_trData.amount = m_parse->possiblyReplaceSymbol(m_columnList[m_creditColumn]);
+      }
+      m_qifBuffer = m_qifBuffer + 'T' + m_trData.amount + '\n';
+    } //  end of second error test
+    else {  //  resolved amount
+      if (!m_firstValue.isEmpty() && m_firstValue != zero) {  //           m_firstIsValid
+        m_trData.amount = m_firstValue;
+      } else if (!m_secondValue.isEmpty() && m_secondValue != zero) {  //  m_secondIsValid
+        m_trData.amount = m_secondValue;
+      } else {
+        m_trData.amount = QString(zero);
+      }
+      m_qifBuffer = m_qifBuffer + 'T' + m_trData.amount + '\n';
+    }  //  end of second field
+  }
+  m_firstField = !m_firstField;
+  return KMessageBox::Yes;
+}
 
 void CSVDialog::csvImportTransaction(MyMoneyStatement& st)
 {
@@ -1342,11 +1444,7 @@ void CSVDialog::slotSaveAsQIF()
     QStringList outFile = m_inFileName.split('.');
     const KUrl& name = QString((outFile.isEmpty() ? "CsvProcessing" : outFile[0]) + ".qif");
 
-    QString outFileName = KFileDialog::getSaveFileName(name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")), 0, i18n("Save QIF")
-#if KDE_IS_VERSION(4,4,0)
-                          , KFileDialog::ConfirmOverwrite
-#endif
-                                                      );
+    QString outFileName = KFileDialog::getSaveFileName(name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")), 0, i18n("Save QIF"), KFileDialog::ConfirmOverwrite);
 
     QFile oFile(outFileName);
     oFile.open(QIODevice::WriteOnly);
@@ -2220,6 +2318,9 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
       m_wizard->button(QWizard::NextButton)->hide();
       m_wizard->button(QWizard::CustomButton1)->hide();
       return;
+    } else {  //  allow user to change setting and try again
+      m_importError = false;
+      m_importNow = true;
     }
   }
 }
@@ -2310,9 +2411,19 @@ void CSVDialog::decimalSymbolSelected(int index)
   }
 }
 
+void CSVDialog::decimalSymbolSelected()
+{
+  decimalSymbolSelected(m_decimalSymbolIndex);
+}
+
 QString CSVDialog::decimalSymbol()
 {
   return m_decimalSymbol;
+}
+
+int CSVDialog::decimalSymbolIndex()
+{
+  return m_decimalSymbolIndex;
 }
 
 void CSVDialog::setDecimalSymbol(int val)
@@ -3805,6 +3916,8 @@ void CompletionPage::initializePage()
       }
     }
   }
+  //  use saved value of index to trigger validity test
+     QTimer::singleShot(200, m_dlg, SLOT(decimalSymbolSelected()));
 }
 
 void CompletionPage::slotImportValid()

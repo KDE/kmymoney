@@ -42,6 +42,3 @@ InterestTypeWizardPage::InterestTypeWizardPage(QWidget *parent)
 
   m_fixedInterestButton->animateClick();
 }
-
-#include "interesttypewizardpage.moc"
-

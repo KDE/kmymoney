@@ -51,8 +51,8 @@ public:
   explicit KGenerateSqlDlg(QWidget *parent = 0);
   ~KGenerateSqlDlg();
   /**
-    * execute the generation
-  **/
+   * execute the generation
+   */
   int exec();
 public slots:
   void slotHelp();

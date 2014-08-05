@@ -163,5 +163,3 @@ KPushButton* KNewFileDlg::cancelButton(void)
 {
   return d->ui.cancelBtn;
 }
-
-#include "knewfiledlg.moc"

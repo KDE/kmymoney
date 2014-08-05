@@ -2254,6 +2254,3 @@ void StdTransactionEditor::slotUpdateAccount(const QString& id)
     category->splitButton()->setDisabled(id.isEmpty());
   }
 }
-
-#include "transactioneditor.moc"
-

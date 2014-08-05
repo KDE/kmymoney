@@ -143,5 +143,3 @@ void KMMiCalendarExportPlugin::slotUpdateConfig(void)
   if (!icalFilePath.isEmpty())
     d->m_exporter.exportToFile(icalFilePath);
 }
-
-#include "icalendarexport.moc"

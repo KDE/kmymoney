@@ -42,7 +42,7 @@ namespace KMyMoneyPlugin
   * This abstract class represents the ImportInterface to
   * add new importers to KMyMoney.
   */
-class KMM_PLUGINS_EXPORT ImportInterface : public QObject
+class KMM_PLUGIN_EXPORT ImportInterface : public QObject
 {
   Q_OBJECT
 

@@ -45,6 +45,3 @@ void SummaryEditWizardPage::initializePage()
   m_interestRate7->setText(field("interestRate6").toString());
   m_startDateChanges->setText(KGlobal::locale()->formatDate(field("effectiveChangeDateEdit").toDate()));
 }
-
-#include "summaryeditwizardpage.moc"
-

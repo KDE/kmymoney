@@ -35,6 +35,3 @@ void MyMoneyTagTest::testXml()
   QVERIFY(!el.isNull());
   MyMoneyTag tag2(el);
 }
-
-#include "mymoneytagtest.moc"
-

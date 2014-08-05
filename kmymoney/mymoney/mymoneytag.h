@@ -124,4 +124,3 @@ inline bool operator==(const MyMoneyTag& lhs, const QString& rhs)
 Q_DECLARE_METATYPE(MyMoneyTag)
 
 #endif
-// vim:cin:si:ai:et:ts=2:sw=2:

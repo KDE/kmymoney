@@ -58,7 +58,7 @@ bool StdTransactionMatched::paintRegisterCellSetup(QPainter *painter, QStyleOpti
   return rc;
 }
 
-void StdTransactionMatched::registerCellText(QString& txt, int& align, int row, int col, QPainter* painter)
+void StdTransactionMatched::registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter)
 {
   // run through the standard
   StdTransaction::registerCellText(txt, align, row, col, painter);

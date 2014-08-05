@@ -47,5 +47,3 @@ MyMoneyReport& TocItemReport::getReport(void)
 {
   return m_report;
 }
-
-// vim:cin:si:ai:et:ts=2:sw=2:

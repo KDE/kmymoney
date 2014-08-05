@@ -285,5 +285,3 @@ void FixedColumnTreeView::updateSortIndicator(int logicalIndex, Qt::SortOrder or
     header()->setSortIndicator(logicalIndex, order);
   }
 }
-
-#include "fixedcolumntreeview.moc"

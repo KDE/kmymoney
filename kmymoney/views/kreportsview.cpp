@@ -82,7 +82,7 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
   //set button icons
-  m_control->buttonChart->setIcon(KIcon("office-chart-pie"));
+  m_control->buttonChart->setIcon(KIcon("office-chart-line"));
   m_control->buttonClose->setIcon(KIcon("document-close"));
   m_control->buttonConfigure->setIcon(KIcon("configure"));
   m_control->buttonCopy->setIcon(KIcon("edit-copy"));
@@ -208,6 +208,7 @@ void KReportsView::KReportTab::toggleChart(void)
 
     m_control->buttonChart->setText(i18n("Chart"));
     m_control->buttonChart->setToolTip(i18n("Show the chart version of this report"));
+    m_control->buttonChart->setIcon(KIcon("office-chart-line"));
   } else {
     m_part->view()->hide();
 
@@ -215,6 +216,7 @@ void KReportsView::KReportTab::toggleChart(void)
 
     m_control->buttonChart->setText(i18n("Report"));
     m_control->buttonChart->setToolTip(i18n("Show the report version of this chart"));
+    m_control->buttonChart->setIcon(KIcon("view-financial-list"));
   }
   m_showingChart = ! m_showingChart;
 }
@@ -1773,6 +1775,3 @@ void KReportsView::restoreTocExpandState(QMap<QString, bool>& expandStates)
 #undef VIEW_WELCOME
 #undef VIEW_HOME
 #undef VIEW_REPORTS
-
-#include "kreportsview.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

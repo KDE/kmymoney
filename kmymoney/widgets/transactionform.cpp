@@ -397,7 +397,7 @@ void TransactionForm::adjustColumn(Column col)
 
     // scan through the rows
     for (int i = rowCount() - 1; i >= 0; --i) {
-      int align;
+      Qt::Alignment align;
       int spacing = 10;
       m_transaction->formCellText(txt, align, i, static_cast<int>(col), 0);
       QWidget* cw = cellWidget(i, col);
@@ -456,5 +456,3 @@ void TransactionForm::removeEditWidgets(QMap<QString, QWidget*>& editWidgets)
     it = editWidgets.begin();
   }
 }
-
-#include "transactionform.moc"

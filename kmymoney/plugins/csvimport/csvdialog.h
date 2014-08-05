@@ -152,6 +152,7 @@ public:
   bool           m_separatorPageVisible;
   bool           m_delimiterError;
   bool           m_needFieldDelimiter;
+  bool           m_firstField;
 
   int            m_dateFormatIndex;
   int            m_debitFlag;
@@ -183,6 +184,7 @@ public:
 
   QString          columnType(int column);
   QString          decimalSymbol();
+  int              decimalSymbolIndex();
   void             setDecimalSymbol(int val);
   QString          currentUI();
   QStringList      columnTypeList();
@@ -418,17 +420,27 @@ public slots:
   * This method is called when the user selects a new decimal symbol.  The
   * UI is updated using the new symbol.
   */
-  void           decimalSymbolSelected(int val);
+  void           decimalSymbolSelected(int);
+  void           decimalSymbolSelected();
 
   void           markUnwantedRows();
 
 private:
   QStringList      m_columnTypeList;  //  holds field types - date, payee, etc.
 
+  /**
+  * Clear an invalid debit or credit field and return
+  * pointer to the valid field.
+  */
+  QString          clearInvalidField(QString, QString);
   QString          m_currentUI;
   QString          m_decimalSymbol;
   QString          m_previousType;
   QString          m_thousandsSeparator;
+  QString          m_firstValue;
+  QString          m_secondValue;
+  QString          m_firstType;
+  QString          m_secondType;
   QStringList      m_lineList;
 
   bool             m_amountSelected;
@@ -443,6 +455,9 @@ private:
   bool             m_payeeColCopied;
   bool             m_payeeColAdded;
   bool             m_categorySelected;
+  bool             m_clearAll;
+  bool             m_firstIsValid;
+  bool             m_secondIsValid;
 
   int              m_amountColumn;
   int              m_creditColumn;
@@ -483,6 +498,12 @@ private:
 
   void             closeEvent(QCloseEvent *event);
   void             restoreBackground();
+
+  /**
+   * Check that the debit and credit field combination
+   * is valid.
+   */
+  int              ensureBothFieldsValid(int);
   int              validateColumn(const int& col, QString& type);
 
 private slots:

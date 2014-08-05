@@ -53,5 +53,3 @@ void KSettingsGeneral::slotLoadStartDate(const QDate&)
   disconnect(kcfg_StartDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotLoadStartDate(QDate)));
   m_startDateEdit->setDate(kcfg_StartDate->date());
 }
-
-#include "ksettingsgeneral.moc"

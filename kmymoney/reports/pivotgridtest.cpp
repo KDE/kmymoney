@@ -169,6 +169,3 @@ void PivotGridTest::testCellRunningSum(void)
   QVERIFY(a.m_stockSplit == MyMoneyMoney(1, 1));
   QVERIFY(a.m_postSplit == MyMoneyMoney(0, 1));
 }
-
-#include "pivotgridtest.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

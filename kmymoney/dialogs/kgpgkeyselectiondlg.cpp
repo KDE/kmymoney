@@ -154,8 +154,3 @@ void KGpgKeySelectionDlg::slotIdChanged(void)
     --m_checkCount;
   }
 }
-
-
-#include "kgpgkeyselectiondlg.moc"
-
-// vim:cin:si:ai:et:ts=2:sw=2:

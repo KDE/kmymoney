@@ -24,11 +24,11 @@
 #include <libofx/libofx.h>
 
 // if OFX has a major version number defined, we'll take it
-// if not, we assume 0.8.3. 0.8.3 was the last version w/o version number info
+// if not, we assume 0.9.4. since that's the minimum version
 #ifdef LIBOFX_MAJOR_VERSION
 #define LIBOFX_VERSION KDE_MAKE_VERSION(LIBOFX_MAJOR_VERSION, LIBOFX_MINOR_VERSION, LIBOFX_MICRO_VERSION)
 #else
-#define LIBOFX_VERSION KDE_MAKE_VERSION(0,8,3)
+#define LIBOFX_VERSION KDE_MAKE_VERSION(0,9,4)
 #endif
 #define LIBOFX_IS_VERSION(a,b,c) (LIBOFX_VERSION >= KDE_MAKE_VERSION(a,b,c))
 
@@ -40,6 +40,7 @@ class QDate;
 // ----------------------------------------------------------------------------
 // KDE Includes
 class KComboBox;
+class KLineEdit;
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -56,7 +57,7 @@ class MyMoneyAccount;
 class OfxAppVersion
 {
 public:
-  OfxAppVersion(KComboBox* combo, const QString& appId);
+  OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QString& appId);
   /**
    * This method returns the currently selected application id
    * as a colon separated value consisting of the application
@@ -65,9 +66,16 @@ public:
    */
   const QString appId(void) const;
 
+  /**
+   * This method returns @c true in case the current selected application
+   * version is valid (contains app and version) or @c false otherwise.
+   */
+  bool isValid() const;
+
 private:
   QMap<QString, QString> m_appMap;
   KComboBox*             m_combo;
+  KLineEdit*             m_versionEdit;
 };
 
 /**

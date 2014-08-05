@@ -1277,7 +1277,7 @@ void PivotTable::createRow(const QString& outergroup, const ReportAccount& row, 
 int PivotTable::columnValue(const QDate& _date) const
 {
   if (m_config_f.isColumnsAreDays())
-    return (QDate().daysTo(_date));
+    return (m_beginDate.daysTo(_date));
   else
     return (_date.year() * 12 + _date.month());
 }
@@ -2291,4 +2291,3 @@ int PivotTable::currentDateColumn(void)
 }
 
 } // namespace
-// vim:cin:si:ai:et:ts=2:sw=2:

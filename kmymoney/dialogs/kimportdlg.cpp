@@ -216,7 +216,3 @@ void KImportDlg::addCategories(QStringList& strList, const QString& id, const QS
     addCategories(strList, *it_a, leadIn + account.name() + MyMoneyFile::AccountSeperator);
   }
 }
-
-
-#include "kimportdlg.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

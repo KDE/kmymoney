@@ -124,6 +124,13 @@ public:
   virtual const QString intString(const MyMoneyDbIntColumn& c) const;
   virtual bool requiresExternalFile() const;
   virtual bool requiresCreation() const;
+  virtual bool isPasswordSupported() const;
+};
+
+class MyMoneySqlCipher3Driver : public MyMoneySqlite3Driver
+{
+public:
+  virtual bool isPasswordSupported() const;
 };
 
 //********************* The driver map *********************
@@ -140,7 +147,7 @@ const QMap<QString, QString> MyMoneyDbDriver::driverMap()
   map["QPSQL"] = QString("PostgreSQL v7.3 and up");
   map["QTDS"] = QString("Sybase Adaptive Server and Microsoft SQL Server");
   map["QSQLITE"] = QString("SQLite Version 3");
-
+  map["SQLCIPHER"] = QString("SQLCipher Version 3 (encrypted SQLite)");
   return map;
 }
 
@@ -163,6 +170,8 @@ KSharedPtr<MyMoneyDbDriver> MyMoneyDbDriver::create(const QString& type)
     return KSharedPtr<MyMoneyDbDriver> (new MyMoneySybaseDriver());
   else if (type == "QSQLITE")
     return KSharedPtr<MyMoneyDbDriver> (new MyMoneySqlite3Driver());
+  else if (type == "SQLCIPHER")
+    return KSharedPtr<MyMoneyDbDriver> (new MyMoneySqlCipher3Driver());
   else throw MYMONEYEXCEPTION(QString("Unknown database driver type").arg(type));
 }
 
@@ -619,6 +628,23 @@ const QString MyMoneyMysqlDriver::tableOptionString() const
 const QString MyMoneyDbDriver::tableOptionString() const
 {
   return "";
+}
+
+//*************************************************
+// Define
+bool MyMoneyDbDriver::isPasswordSupported() const
+{
+  return true;
+}
+
+bool MyMoneySqlite3Driver::isPasswordSupported() const
+{
+  return false;
+}
+
+bool MyMoneySqlCipher3Driver::isPasswordSupported() const
+{
+  return true;
 }
 
 //*************************************************

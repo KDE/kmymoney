@@ -83,6 +83,7 @@ protected slots:
   void checkNextButton(void);
   void newPage(int id);
   void walletOpened(bool ok);
+  void applicationSelectionChanged();
 
 protected:
   bool finishAccountPage(void);
@@ -108,4 +109,3 @@ private:
 };
 
 #endif
-// vim:cin:si:ai:et:ts=2:sw=2:

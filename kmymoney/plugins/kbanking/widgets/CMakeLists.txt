@@ -1,10 +1,11 @@
 
 ########### next target ###############
 
-SET(kmm_kbanking_widgets_la_SOURCES 
-    chiptandialog.cpp
-    kbaccountlist.cpp
-    kbjoblist.cpp
-    )
-KDE4_ADD_UI_FILES(kmm_kbanking_widgets_la_SOURCES chiptandialog.ui)
-KDE4_ADD_LIBRARY(kmm_kbanking_widgets STATIC ${kmm_kbanking_widgets_la_SOURCES})
+set(kmm_kbanking_widgets_la_SOURCES
+  chiptandialog.cpp
+  kbaccountlist.cpp
+  kbjoblist.cpp
+)
+
+kde4_add_ui_files(kmm_kbanking_widgets_la_SOURCES chiptandialog.ui)
+kde4_add_library(kmm_kbanking_widgets STATIC ${kmm_kbanking_widgets_la_SOURCES})

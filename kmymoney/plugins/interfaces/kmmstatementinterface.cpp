@@ -53,5 +53,3 @@ void KMyMoneyPlugin::KMMStatementInterface::setAccountOnlineParameters(const MyM
 {
   m_app->setAccountOnlineParameters(acc, kvps);
 }
-
-#include "kmmstatementinterface.moc"

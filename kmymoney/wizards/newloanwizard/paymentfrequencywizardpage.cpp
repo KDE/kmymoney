@@ -35,6 +35,3 @@ PaymentFrequencyWizardPage::PaymentFrequencyWizardPage(QWidget *parent)
   registerField("paymentFrequencyUnitEdit", m_paymentFrequencyUnitEdit, "data", SIGNAL(currentDataChanged(QVariant)));
   m_paymentFrequencyUnitEdit->setCurrentIndex(m_paymentFrequencyUnitEdit->findData(QVariant(MyMoneySchedule::OCCUR_MONTHLY), Qt::UserRole, Qt::MatchExactly));
 }
-
-#include "paymentfrequencywizardpage.moc"
-

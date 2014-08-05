@@ -57,10 +57,12 @@ public:
   ~KOnlineBankingStatus();
   const QString appId(void) const;
   QString headerVersion(void) const;
+protected Q_SLOTS:
+  void applicationSelectionChanged();
+
 private:
   OfxAppVersion*  m_appId;
   OfxHeaderVersion* m_headerVersion;
 };
 
 #endif
-// vim:cin:si:ai:et:ts=2:sw=2:

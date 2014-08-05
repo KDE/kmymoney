@@ -315,5 +315,3 @@ MyMoneyMoney KCurrencyCalculator::price(void) const
   else
     return m_conversionRate->value();
 }
-
-#include "kcurrencycalculator.moc"

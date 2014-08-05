@@ -26,6 +26,7 @@
 #include <QCheckBox>
 #include <QTabWidget>
 #include <QTextStream>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -69,7 +70,10 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
 {
   setupUi(this);
 
-  m_appId = new OfxAppVersion(m_applicationCombo, "");
+  m_applicationEdit->hide();
+  m_headerVersionEdit->hide();
+
+  m_appId = new OfxAppVersion(m_applicationCombo, m_applicationEdit, "");
   m_headerVersion = new OfxHeaderVersion(m_headerVersionCombo, "");
 
   // fill the list view with banks
@@ -84,7 +88,10 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   //set password field according to KDE preferences
   m_editPassword->setPasswordMode(true);
 
-  vboxLayout1->insertWidget(0, new KListWidgetSearchLine(autoTab, m_listFi));
+  KListWidgetSearchLine* searchLine = new KListWidgetSearchLine(autoTab, m_listFi);
+  vboxLayout1->insertWidget(0, searchLine);
+  QTimer::singleShot(20, searchLine, SLOT(setFocus()));
+
   OfxPartner::setDirectory(KStandardDirs::locateLocal("appdata", ""));
   m_listFi->addItems(OfxPartner::BankNames());
   m_fInit = true;
@@ -101,6 +108,8 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   connect(m_url, SIGNAL(textChanged(QString)), this, SLOT(checkNextButton()));
   connect(m_editUsername, SIGNAL(userTextChanged(QString)), this, SLOT(checkNextButton()));
   connect(m_editPassword, SIGNAL(userTextChanged(QString)), this, SLOT(checkNextButton()));
+  connect(m_applicationEdit, SIGNAL(userTextChanged(QString)), this, SLOT(checkNextButton()));
+  connect(m_applicationCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(applicationSelectionChanged()));
 
   // setup text on buttons
   setButtonText(QWizard::NextButton, i18nc("Go to next page of the wizard", "&Next"));
@@ -117,6 +126,12 @@ KOnlineBankingSetupWizard::~KOnlineBankingSetupWizard()
 {
   delete m_appId;
   delete d;
+}
+
+void KOnlineBankingSetupWizard::applicationSelectionChanged()
+{
+  m_applicationEdit->setVisible(m_appId->appId().endsWith(':'));
+  checkNextButton();
 }
 
 void KOnlineBankingSetupWizard::walletOpened(bool ok)
@@ -147,7 +162,8 @@ void KOnlineBankingSetupWizard::checkNextButton(void)
 
     case 1:
       enableButton = !(m_editUsername->text().isEmpty()
-                       || m_editPassword->text().isEmpty());
+                       || m_editPassword->text().isEmpty()
+                       || !m_appId->isValid());
       break;
 
     case 2:
@@ -160,6 +176,8 @@ void KOnlineBankingSetupWizard::checkNextButton(void)
 
 void KOnlineBankingSetupWizard::newPage(int id)
 {
+  QWidget* focus = 0;
+
   bool ok = true;
   if ((id - d->m_prevPage) == 1) { // one page forward?
     switch (d->m_prevPage) {
@@ -170,16 +188,22 @@ void KOnlineBankingSetupWizard::newPage(int id)
           d->m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), winId(), Wallet::Asynchronous);
           connect(d->m_wallet, SIGNAL(walletOpened(bool)), SLOT(walletOpened(bool)));
         }
+        focus = m_editUsername;
         break;
       case 1:
         ok = finishLoginPage();
+        focus = m_listAccount;
         break;
       case 2:
         m_fDone = ok = finishAccountPage();
         break;
     }
 
-    if (!ok) {
+    if (ok) {
+      if(focus) {
+        focus->setFocus();
+      }
+    } else {
       // force to go back to prev page
       back();
     }
@@ -304,7 +328,6 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
     strncpy(fi.userid, username.toLatin1(), OFX_USERID_LENGTH - 1);
     strncpy(fi.userpass, password.toLatin1(), OFX_USERPASS_LENGTH - 1);
 
-#if LIBOFX_IS_VERSION(0,9,0)
     // pretend we're Quicken 2008
     // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
     // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
@@ -312,7 +335,11 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
     QRegExp exp("(.*):(.*)");
     if (exp.indexIn(appId) != -1) {
       strncpy(fi.appid, exp.cap(1).toLatin1(), OFX_APPID_LENGTH - 1);
-      strncpy(fi.appver, exp.cap(2).toLatin1(), OFX_APPVER_LENGTH - 1);
+      if(exp.cap(2).isEmpty()) {
+        strncpy(fi.appver, m_applicationEdit->text().toLatin1(), OFX_APPVER_LENGTH - 1);
+      } else {
+        strncpy(fi.appver, exp.cap(2).toLatin1(), OFX_APPVER_LENGTH - 1);
+      }
     } else {
       strncpy(fi.appid, "QWIN", OFX_APPID_LENGTH - 1);
       strncpy(fi.appver, "1700", OFX_APPVER_LENGTH - 1);
@@ -320,7 +347,6 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
 
     QString hver = m_headerVersion->headerVersion();
     strncpy(fi.header_version, hver.toLatin1(), OFX_HEADERVERSION_LENGTH - 1);
-#endif
 
     KUrl filename(QString("%1response.ofx").arg(KStandardDirs::locateLocal("appdata", "")));
     QByteArray req(libofx_request_accountinfo(&fi));
@@ -493,8 +519,12 @@ bool KOnlineBankingSetupWizard::chosenSettings(MyMoneyKeyValueContainer& setting
       settings.deletePair("appId");
       settings.deletePair("kmmofx-headerVersion");
       QString appId = m_appId->appId();
-      if (!appId.isEmpty())
+      if (!appId.isEmpty()) {
+        if(appId.endsWith(':')) {
+          appId += m_applicationEdit->text();
+        }
         settings.setValue("appId", appId);
+      }
       QString hVer = m_headerVersion->headerVersion();
       if (!hVer.isEmpty())
         settings.setValue("kmmofx-headerVersion", hVer);
@@ -522,9 +552,3 @@ KOnlineBankingSetupWizard::ListViewItem::ListViewItem(QTreeWidget* parent, const
   setText(2, value("bankid"));
   setText(3, value("branchid"));
 }
-
-// void KOnlineBankingSetupWizard::ListViewItem::x(void) {}
-
-#include "konlinebankingsetupwizard.moc"
-
-// vim:cin:si:ai:et:ts=2:sw=2:

@@ -98,6 +98,7 @@ private slots:
   void testRemoveLockedOnlineJob();
   void testOnlineJobRollback();
   void testModifyOnlineJob();
+  void testClearedBalance();
 
 private slots:
   void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);

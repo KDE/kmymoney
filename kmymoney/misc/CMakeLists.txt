@@ -1,5 +1,5 @@
-INSTALL(PROGRAMS financequote.pl
-	      DESTINATION ${DATA_INSTALL_DIR}/kmymoney/misc)
+install(PROGRAMS financequote.pl
+        DESTINATION ${DATA_INSTALL_DIR}/kmymoney/misc)
 
 
 set( kmm_utils_validators_SRCS

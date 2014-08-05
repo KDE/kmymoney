@@ -44,6 +44,7 @@
 #include <onlinejob.h>
 #include "mymoneyschedule.h"
 #include <kmm_mymoney_export.h>
+#include <mymoneyunittestable.h>
 
 /**
   * @author Thomas Baumgart, Michael Edwardes, Kevin Tambascio
@@ -627,6 +628,19 @@ public:
     * @return balance of the account as MyMoneyMoney object
     */
   const MyMoneyMoney balance(const QString& id, const QDate& date = QDate()) const;
+
+  /**
+    * This method is used to return the cleared balance of an account
+    * without it's sub-ordinate accounts for a specific date. All
+    * recorded  transactions are included in the balance.
+    * This method is used by the reconcialition functionality
+    *
+    * @param id id of the account in question
+    * @param date return cleared balance for specific date
+    * @return balance of the account as MyMoneyMoney object
+    */
+  const MyMoneyMoney clearedBalance(const QString& id, const QDate& date) const;
+
 
   /**
     * This method is used to return the actual balance of an account
@@ -1483,10 +1497,11 @@ public:
   bool hasMatchingOnlineBalance(const MyMoneyAccount& account) const;
 
   /**
-    * This returns the number of not reconciled transactions of account with id @p accId.
+    * This returns the number of transactions of a specific reconciliation state @p state of account with id @p accId.
     *
-    * @param accId @p account id of account to be checked
-    * @return number of transactions with state "not reconciled"
+    * @param accId @p accId is the account id of account to be checked
+    * @param state @p state reconciliation state
+    * @return number of transactions with state @p state
     */
   int countTransactionsWithSpecificReconciliationState(const QString& accId, enum MyMoneyTransactionFilter::stateOptionE state) const;
 

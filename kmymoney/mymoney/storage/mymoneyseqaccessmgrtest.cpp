@@ -1801,5 +1801,3 @@ void MyMoneySeqAccessMgrTest::testAddOnlineJob()
   QVERIFY(! m->m_onlineJobList["O000001"].isNull());
 
 }
-
-#include "mymoneyseqaccessmgrtest.moc"

@@ -282,5 +282,3 @@ void AccountsViewFilterProxyModel::expandAll()
 {
   d->markAllExpanded(this);
 }
-
-#include "kmymoneyaccounttreeview.moc"

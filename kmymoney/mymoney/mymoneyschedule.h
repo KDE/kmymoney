@@ -32,6 +32,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneyaccount.h"
 #include "kmm_mymoney_export.h"
+#include "mymoneyunittestable.h"
 #include "mymoneyobject.h"
 
 class IMyMoneyProcessingCalendar;

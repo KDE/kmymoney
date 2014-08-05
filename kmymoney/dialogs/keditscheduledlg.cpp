@@ -603,5 +603,3 @@ void KEditScheduleDlg::slotFilterPaymentType(int index)
   }
 
 }
-
-#include <keditscheduledlg.moc>

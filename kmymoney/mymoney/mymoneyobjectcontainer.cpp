@@ -103,7 +103,7 @@ struct MyMoneyObjectContainer::Private {
     static ObjType nullElement;
     if (id.isEmpty())
       return nullElement;
-    typename QHash<QString, ObjType const *>::const_iterator it = hash.find(id);
+    typename QHash<QString, ObjType const *>::const_iterator it = hash.constFind(id);
     if (it == hash.constEnd()) {
       /* not found, need to load from engine */
       const ObjType &x = (storage->*f)(id);
@@ -225,7 +225,7 @@ const MyMoneyAccount& MyMoneyObjectContainer::accountByName(const QString& name)
 {
   static MyMoneyAccount nullElement;
   QHash<QString, MyMoneyAccount const *>::const_iterator it;
-  for (it = d->accountCache.begin(); it != d->accountCache.end(); ++it) {
+  for (it = d->accountCache.constBegin(); it != d->accountCache.constEnd(); ++it) {
     const MyMoneyAccount* node = *it;
     if (node && node->name() == name) {
       return **it;
@@ -378,5 +378,3 @@ void MyMoneyObjectContainer::institution(QList<MyMoneyInstitution>& list)
 {
   d->listMethodImpl(list, d->institutionCache);
 }
-
-#include "mymoneyobjectcontainer.moc"

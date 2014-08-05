@@ -169,6 +169,11 @@ private:
   QString      m_newName;
 
   /**
+    * List of selected payees
+    */
+  QList<MyMoneyPayee> m_selectedPayeesList;
+
+  /**
     * This member holds a list of all transactions
     */
   QList<QPair<MyMoneyTransaction, MyMoneySplit> > m_transactionList;

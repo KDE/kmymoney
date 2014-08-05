@@ -69,5 +69,3 @@ KMyMoneyPlugin::ImportInterface* KMyMoneyPlugin::Plugin::importInterface() const
 {
   return parent()->findChild<ImportInterface*>();
 }
-
-#include "kmymoneyplugin.moc"

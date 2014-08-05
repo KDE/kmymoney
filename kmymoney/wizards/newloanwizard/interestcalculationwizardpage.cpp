@@ -42,6 +42,3 @@ InterestCalculationWizardPage::InterestCalculationWizardPage(QWidget *parent)
 
   m_interestOnReceptionButton->animateClick();
 }
-
-#include "interestcalculationwizardpage.moc"
-

@@ -66,6 +66,3 @@ void FirstPaymentWizardPage::initializePage()
            "if you consult the last statement of last year."));
   }
 }
-
-#include "firstpaymentwizardpage.moc"
-

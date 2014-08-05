@@ -244,6 +244,3 @@ void kMandatoryFieldGroup::clear(void)
     m_enabled = true;
   }
 }
-
-#include "kguiutils.moc"
-

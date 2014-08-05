@@ -32,6 +32,3 @@ NewCalculateLoanWizardPage::NewCalculateLoanWizardPage(QWidget *parent)
     : NewCalculateLoanWizardPageDecl(parent)
 {
 }
-
-#include "newcalculateloanwizardpage.moc"
-

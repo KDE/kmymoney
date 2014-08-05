@@ -83,6 +83,3 @@ void AdditionalFeesWizardPage::updatePeriodicPayment(const MyMoneyAccount& accou
 
   m_periodicPayment->setText((base + add).formatMoney(account.fraction(MyMoneyFile::instance()->security(account.currencyId()))));
 }
-
-#include "additionalfeeswizardpage.moc"
-

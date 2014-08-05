@@ -494,5 +494,3 @@ void kMyMoneyDateTbl::mouseMoveEvent(QMouseEvent* e)
 
   QTableWidget::mouseMoveEvent(e);
 }
-
-#include "kmymoneydatetbl.moc"

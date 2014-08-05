@@ -285,6 +285,33 @@ void MyMoneySplitTest::testWriteXML()
   doc.appendChild(el);
   s.writeXML(doc, el);
 
+  QCOMPARE(doc.doctype().name(), QLatin1String("TEST"));
+  QDomElement splitContainer = doc.documentElement();
+  QCOMPARE(splitContainer.tagName(), QLatin1String("SPLIT-CONTAINER"));
+  QCOMPARE(splitContainer.childNodes().size(), 1);
+
+  QVERIFY(splitContainer.childNodes().at(0).isElement());
+  QDomElement split = splitContainer.childNodes().at(0).toElement();
+  QCOMPARE(split.tagName(), QLatin1String("SPLIT"));
+  QCOMPARE(split.attribute("payee"), QLatin1String("P000001"));
+  QCOMPARE(split.attribute("reconcileflag"), QLatin1String("2"));
+  QCOMPARE(split.attribute("shares"), QLatin1String("96379/100"));
+  QCOMPARE(split.attribute("reconciledate"), QString());
+  QCOMPARE(split.attribute("action"), QLatin1String("Deposit"));
+  QCOMPARE(split.attribute("bankid"), QLatin1String("SPID"));
+  QCOMPARE(split.attribute("account"), QLatin1String("A000076"));
+  QCOMPARE(split.attribute("number"), QLatin1String("124"));
+  QCOMPARE(split.attribute("value"), QLatin1String("96379/1000"));
+  QCOMPARE(split.attribute("memo"), QString());
+  QCOMPARE(split.attribute("id"), QString());
+  QCOMPARE(split.childNodes().size(), 1);
+
+  QVERIFY(split.childNodes().at(0).isElement());
+  QDomElement tag = split.childNodes().at(0).toElement();
+  QCOMPARE(tag.tagName(), QLatin1String("TAG"));
+  QCOMPARE(tag.attribute("id"), QLatin1String("G000001"));
+  QCOMPARE(tag.childNodes().size(), 0);
+
   QString ref = QString(
                   "<!DOCTYPE TEST>\n"
                   "<SPLIT-CONTAINER>\n"
@@ -292,16 +319,6 @@ void MyMoneySplitTest::testWriteXML()
                   "  <TAG id=\"G000001\"/>\n"
                   " </SPLIT>\n"
                   "</SPLIT-CONTAINER>\n");
-
-#if QT_VERSION >= QT_VERSION_CHECK(4,6,0)
-  ref.replace(QString(" />\n"), QString("/>\n"));
-  ref.replace(QString(" >\n"), QString(">\n"));
-#endif
-
-  //qDebug("ref = '%s'", qPrintable(ref));
-  //qDebug("doc = '%s'", qPrintable(doc.toString()));
-
-  QVERIFY(doc.toString() == ref);
 }
 
 void MyMoneySplitTest::testReadXML()
@@ -426,6 +443,3 @@ void MyMoneySplitTest::testReplaceId(void)
     QFAIL("Unexpected exception");
   }
 }
-
-#include "mymoneysplittest.moc"
-

@@ -82,13 +82,6 @@ public:
   KBudgetListItem(QTreeWidget *parent, const MyMoneyBudget& budget);
   ~KBudgetListItem();
 
-  /**
-    * This method is re-implemented from QListViewItem::paintCell().
-    * Besides the standard implementation, the QPainter is set
-    * according to the applications settings.
-    */
-  void paintCell(QPainter *p, const QColorGroup & cg, int column, int width, int align);
-
   const MyMoneyBudget& budget(void) {
     return m_budget;
   };
@@ -911,5 +904,3 @@ void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney &balance)
   m_balanceLabel->setFont(KMyMoneyGlobalSettings::listCellFont());
   m_balanceLabel->setText(s);
 }
-
-#include "kbudgetview.moc"

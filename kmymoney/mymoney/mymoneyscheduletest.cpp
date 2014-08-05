@@ -19,10 +19,6 @@
 #include <QList>
 #include <QtTest/QtTest>
 
-// Include internationalization
-#include <klocale.h>
-#include <KHolidays/Holidays>
-
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyScheduleTest;
 
 #include "mymoneysplit.h"
@@ -704,37 +700,88 @@ void MyMoneyScheduleTest::testWriteXML()
   doc.appendChild(el);
   sch.writeXML(doc, el);
 
-  QString ref = QString(
-                  "<!DOCTYPE TEST>\n"
-                  "<SCHEDULE-CONTAINER>\n"
-                  " <SCHEDULED_TX paymentType=\"1\" autoEnter=\"1\" occurenceMultiplier=\"123\" startDate=\"%1\" lastPayment=\"%2\" occurence=\"4\" weekendOption=\"2\" type=\"1\" id=\"SCH0001\" name=\"A Name\" endDate=\"\" fixed=\"1\" >\n" // krazy:exclude=spelling
-                  "  <PAYMENTS>\n"
-                  "   <PAYMENT date=\"%3\" />\n"
-                  "  </PAYMENTS>\n"
-                  "  <TRANSACTION postdate=\"2001-12-28\" commodity=\"EUR\" memo=\"Wohnung:Miete\" id=\"\" entrydate=\"2003-09-29\" >\n"
-                  "   <SPLITS>\n"
-                  "    <SPLIT payee=\"P000001\" reconcileflag=\"2\" shares=\"96379/100\" reconciledate=\"\" action=\"\" bankid=\"\" account=\"A000076\" number=\"\" value=\"96379/100\" memo=\"\" id=\"S0001\" />\n"
-                  "    <SPLIT payee=\"P000001\" reconcileflag=\"1\" shares=\"-96379/100\" reconciledate=\"\" action=\"\" bankid=\"\" account=\"A000276\" number=\"\" value=\"-96379/100\" memo=\"\" id=\"S0002\" />\n"
-                  "   </SPLITS>\n"
-                  "   <KEYVALUEPAIRS>\n"
-                  "    <PAIR key=\"key\" value=\"value\" />\n"
-                  "   </KEYVALUEPAIRS>\n"
-                  "  </TRANSACTION>\n"
-                  " </SCHEDULED_TX>\n"
-                  "</SCHEDULE-CONTAINER>\n"
-                ).arg(QDate::currentDate().toString(Qt::ISODate))
-                .arg(QDate::currentDate().toString(Qt::ISODate))
-                .arg(QDate::currentDate().toString(Qt::ISODate));
+  QCOMPARE(doc.doctype().name(), QLatin1String("TEST"));
+  QDomElement scheduleContainer = doc.documentElement();
+  QVERIFY(scheduleContainer.isElement());
+  QCOMPARE(scheduleContainer.tagName(), QLatin1String("SCHEDULE-CONTAINER"));
+  QVERIFY(scheduleContainer.childNodes().size() == 1);
+  QVERIFY(scheduleContainer.childNodes().at(0).isElement());
 
-#if QT_VERSION >= QT_VERSION_CHECK(4,6,0)
-  ref.replace(QString(" />\n"), QString("/>\n"));
-  ref.replace(QString(" >\n"), QString(">\n"));
-#endif
+  QDomElement schedule = scheduleContainer.childNodes().at(0).toElement();
+  QCOMPARE(schedule.tagName(), QLatin1String("SCHEDULED_TX"));
+  QCOMPARE(schedule.attribute("id"), QLatin1String("SCH0001"));
+  QCOMPARE(schedule.attribute("paymentType"), QLatin1String("1"));
+  QCOMPARE(schedule.attribute("autoEnter"), QLatin1String("1"));
+  QCOMPARE(schedule.attribute("occurenceMultiplier"), QLatin1String("123"));
+  QCOMPARE(schedule.attribute("startDate"), QDate::currentDate().toString(Qt::ISODate));
+  QCOMPARE(schedule.attribute("lastPayment"), QDate::currentDate().toString(Qt::ISODate));
+  QCOMPARE(schedule.attribute("occurenceMultiplier"), QLatin1String("123"));
+  QCOMPARE(schedule.attribute("occurence"), QLatin1String("4"));
+  QCOMPARE(schedule.attribute("type"), QLatin1String("1"));
+  QCOMPARE(schedule.attribute("name"), QLatin1String("A Name"));
+  QCOMPARE(schedule.attribute("fixed"), QLatin1String("1"));
+  QCOMPARE(schedule.attribute("endDate"), QString());
+  QCOMPARE(schedule.childNodes().size(), 2);
 
-  //qDebug("ref = '%s'", qPrintable(ref));
-  //qDebug("doc = '%s'", qPrintable(doc.toString()));
+  QVERIFY(schedule.childNodes().at(0).isElement());
+  QDomElement payments = schedule.childNodes().at(0).toElement();
 
-  QVERIFY(doc.toString() == ref);
+  QVERIFY(schedule.childNodes().at(1).isElement());
+  QDomElement transaction = schedule.childNodes().at(1).toElement();
+  QCOMPARE(transaction.tagName(), QLatin1String("TRANSACTION"));
+  QCOMPARE(transaction.attribute("id"), QString());
+  QCOMPARE(transaction.attribute("postdate"), QLatin1String("2001-12-28"));
+  QCOMPARE(transaction.attribute("commodity"), QLatin1String("EUR"));
+  QCOMPARE(transaction.attribute("memo"), QLatin1String("Wohnung:Miete"));
+  QCOMPARE(transaction.attribute("entrydate"), QLatin1String("2003-09-29"));
+  QCOMPARE(transaction.childNodes().size(), 2);
+
+  QVERIFY(transaction.childNodes().at(0).isElement());
+  QDomElement splits = transaction.childNodes().at(0).toElement();
+  QCOMPARE(splits.tagName(), QLatin1String("SPLITS"));
+  QCOMPARE(splits.childNodes().size(), 2);
+  QVERIFY(splits.childNodes().at(0).isElement());
+  QDomElement split1 = splits.childNodes().at(0).toElement();
+  QCOMPARE(split1.tagName(), QLatin1String("SPLIT"));
+  QCOMPARE(split1.attribute("id"), QLatin1String("S0001"));
+  QCOMPARE(split1.attribute("payee"), QLatin1String("P000001"));
+  QCOMPARE(split1.attribute("reconcileflag"), QLatin1String("2"));
+  QCOMPARE(split1.attribute("shares"), QLatin1String("96379/100"));
+  QCOMPARE(split1.attribute("reconciledate"), QString());
+  QCOMPARE(split1.attribute("action"), QString());
+  QCOMPARE(split1.attribute("bankid"), QString());
+  QCOMPARE(split1.attribute("account"), QLatin1String("A000076"));
+  QCOMPARE(split1.attribute("number"), QString());
+  QCOMPARE(split1.attribute("value"), QLatin1String("96379/100"));
+  QCOMPARE(split1.attribute("memo"), QString());
+  QCOMPARE(split1.childNodes().size(), 0);
+
+  QVERIFY(splits.childNodes().at(1).isElement());
+  QDomElement split2 = splits.childNodes().at(1).toElement();
+  QCOMPARE(split2.tagName(), QLatin1String("SPLIT"));
+  QCOMPARE(split2.attribute("id"), QLatin1String("S0002"));
+  QCOMPARE(split2.attribute("payee"), QLatin1String("P000001"));
+  QCOMPARE(split2.attribute("reconcileflag"), QLatin1String("1"));
+  QCOMPARE(split2.attribute("shares"), QLatin1String("-96379/100"));
+  QCOMPARE(split2.attribute("reconciledate"), QString());
+  QCOMPARE(split2.attribute("action"), QString());
+  QCOMPARE(split2.attribute("bankid"), QString());
+  QCOMPARE(split2.attribute("account"), QLatin1String("A000276"));
+  QCOMPARE(split2.attribute("number"), QString());
+  QCOMPARE(split2.attribute("value"), QLatin1String("-96379/100"));
+  QCOMPARE(split2.attribute("memo"), QString());
+  QCOMPARE(split2.childNodes().size(), 0);
+
+  QDomElement keyValuePairs = transaction.childNodes().at(1).toElement();
+  QCOMPARE(keyValuePairs.tagName(), QLatin1String("KEYVALUEPAIRS"));
+  QCOMPARE(keyValuePairs.childNodes().size(), 1);
+
+  QVERIFY(keyValuePairs.childNodes().at(0).isElement());
+  QDomElement keyValuePair1 = keyValuePairs.childNodes().at(0).toElement();
+  QCOMPARE(keyValuePair1.tagName(), QLatin1String("PAIR"));
+  QCOMPARE(keyValuePair1.attribute("key"), QLatin1String("key"));
+  QCOMPARE(keyValuePair1.attribute("value"), QLatin1String("value"));
+  QCOMPARE(keyValuePair1.childNodes().size(), 0);
 }
 
 void MyMoneyScheduleTest::testReadXML()
@@ -1635,6 +1682,3 @@ void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
   s.setNextDueDate(endDate.addMonths(-1));
   QVERIFY(s.transactionsRemaining() == 2);
 }
-
-#include "mymoneyscheduletest.moc"
-

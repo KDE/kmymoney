@@ -50,5 +50,3 @@ MyMoneyPayee UserInfo::user(void) const
   user.setEmail(m_emailEdit->text());
   return user;
 }
-
-#include "userinfo.moc"

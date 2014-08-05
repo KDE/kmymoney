@@ -370,5 +370,3 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
     d->ctx->endKeyListing();
   }
 }
-
-#include "kgpgfile.moc"

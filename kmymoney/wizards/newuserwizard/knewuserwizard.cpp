@@ -379,6 +379,3 @@ bool FilePage::isComplete(void) const
   return rc;
 }
 }
-
-#include "knewuserwizard.moc"
-#include "knewuserwizard_p.moc"

@@ -986,9 +986,3 @@ void KFindTransactionDlg::slotSortOptions(void)
   }
   delete dlg;
 }
-
-
-// vim:cin:si:ai:et:ts=2:sw=2:
-
-
-#include "kfindtransactiondlg.moc"

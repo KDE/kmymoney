@@ -187,6 +187,3 @@ void KCategoriesView::slotProfitChanged(const MyMoneyMoney &profit)
   m_totalProfitsLabel->setFont(KMyMoneyGlobalSettings::listCellFont());
   m_totalProfitsLabel->setText(s);
 }
-
-#include "kcategoriesview.moc"
-

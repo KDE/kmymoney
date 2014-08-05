@@ -79,6 +79,3 @@ void LoanAmountWizardPage::resetCalculator(void)
   m_payment1->setText(QString());
   m_balloon1->setText(QString());
 }
-
-#include "loanamountwizardpage.moc"
-

@@ -384,6 +384,3 @@ int KEndingBalanceDlg::nextId() const
   }
   return -1;
 }
-
-#include "kendingbalancedlg.moc"
-

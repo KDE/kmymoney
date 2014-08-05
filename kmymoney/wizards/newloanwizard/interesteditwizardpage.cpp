@@ -47,6 +47,3 @@ bool InterestEditWizardPage::isComplete() const
   return field("newPaymentEditValid").toBool()
          || m_newInterestRateEdit->isValid();
 }
-
-#include "interesteditwizardpage.moc"
-

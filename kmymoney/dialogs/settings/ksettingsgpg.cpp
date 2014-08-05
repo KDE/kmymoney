@@ -196,5 +196,3 @@ void KSettingsGpg::slotStatusChanged(bool state)
     m_userKeysFound->setState(KLed::Off);
   }
 }
-
-#include "ksettingsgpg.moc"

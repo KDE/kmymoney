@@ -274,5 +274,3 @@ void KCurrencyEditDlg::slotSelectBaseCurrency(void)
       slotLoadCurrencies();
   }
 }
-
-#include "kcurrencyeditdlg.moc"

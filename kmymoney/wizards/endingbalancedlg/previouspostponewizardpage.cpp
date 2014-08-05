@@ -37,6 +37,3 @@ PreviousPostponeWizardPage::PreviousPostponeWizardPage(QWidget *parent)
   // appropriate signals to update the "Next" button correctly
 
 }
-
-#include "previouspostponewizardpage.moc"
-

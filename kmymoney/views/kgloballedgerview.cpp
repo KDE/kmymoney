@@ -633,15 +633,6 @@ void KGlobalLedgerView::loadView(void)
         }
 
         if (!t->isScheduled()) {
-          if (split.reconcileFlag() == MyMoneySplit::NotReconciled) {
-            tracer.printf("Reducing cleared balance by %s because %s/%s(%s) is not reconciled", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable(t->transaction().id()), qPrintable(split.id()), qPrintable(t->transaction().postDate().toString(Qt::ISODate)));
-            clearedBalance[split.accountId()] -= split.shares() * factor;
-          }
-          if (isReconciliationAccount() && t->transaction().postDate() > reconciliationDate && split.reconcileFlag() == MyMoneySplit::Cleared) {
-            tracer.printf("Reducing cleared balance by %s because we are in reconciliation, %s/%s(%s)'s date is after or on reconciliation date (%s) and is cleared", qPrintable((split.shares() * factor).formatMoney("", 2)), qPrintable(t->transaction().id()), qPrintable(split.id()), qPrintable(t->transaction().postDate().toString(Qt::ISODate)), qPrintable(reconciliationDate.toString(Qt::ISODate)));
-
-            clearedBalance[split.accountId()] -= split.shares() * factor;
-          }
           if (isReconciliationAccount() && t->transaction().postDate() <= reconciliationDate && split.reconcileFlag() == MyMoneySplit::Cleared) {
             if (split.shares().isNegative()) {
               payments[split.accountId()]++;
@@ -661,6 +652,8 @@ void KGlobalLedgerView::loadView(void)
       }
       p = p->prevItem();
     }
+
+    clearedBalance[m_account.id()] = MyMoneyFile::instance()->clearedBalance(m_account.id(), reconciliationDate);
 
     tracer.printf("total balance of %s = %s", qPrintable(m_account.name()), qPrintable(actBalance[m_account.id()].formatMoney("", 2)));
     tracer.printf("future balance of %s = %s", qPrintable(m_account.name()), qPrintable(futureBalance[m_account.id()].formatMoney("", 2)));
@@ -1579,5 +1572,3 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
   }
   return rc;
 }
-
-#include "kgloballedgerview.moc"

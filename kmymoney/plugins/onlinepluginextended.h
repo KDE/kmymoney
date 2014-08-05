@@ -21,7 +21,7 @@ namespace KMyMoneyPlugin
  *
  * @author Christian David (christian-david@web.de)
  */
-class KMM_PLUGINS_EXPORT OnlinePluginExtended : public Plugin, public OnlinePlugin
+class KMM_PLUGIN_EXPORT OnlinePluginExtended : public Plugin, public OnlinePlugin
 {
   Q_OBJECT
 
@@ -66,7 +66,7 @@ signals:
   //void jobUnavailable( QString accountId );
 };
 
-class KMM_PLUGINS_EXPORT onlineTaskFactory
+class KMM_PLUGIN_EXPORT onlineTaskFactory
 {
 public:
   virtual onlineTask* createOnlineTask( const QString& taskId ) const = 0;

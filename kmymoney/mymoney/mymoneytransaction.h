@@ -34,6 +34,7 @@
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneysplit.h"
 #include <kmm_mymoney_export.h>
+#include <mymoneyunittestable.h>
 
 /**
   * This class represents a transaction within the MyMoneyEngine. A transaction
@@ -84,7 +85,7 @@ public:
   const QString& commodity(void) const {
     return m_commodity;
   };
-  /* KDE_DEPRECATED */ const QString& bankID(void) const {
+  const QString& bankID(void) const {
     return m_bankID;
   };
 
@@ -95,7 +96,7 @@ public:
   void setCommodity(const QString& commodityId) {
     m_commodity = commodityId;
   };
-  /* KDE_DEPRECATED */ void setBankID(const QString& bankID) {
+  void setBankID(const QString& bankID) {
     m_bankID = bankID;
   };
 

@@ -429,32 +429,58 @@ void MyMoneyTransactionTest::testWriteXML()
   doc.appendChild(el);
   t.writeXML(doc, el);
 
-  QString ref = QString(
-                  "<!DOCTYPE TEST>\n"
-                  "<TRANSACTION-CONTAINER>\n"
-                  " <TRANSACTION postdate=\"2001-12-28\" commodity=\"EUR\" memo=\"Wohnung:Miete\" id=\"T000000000000000001\" entrydate=\"2003-09-29\" >\n"
-                  "  <SPLITS>\n"
-                  "   <SPLIT payee=\"P000001\" reconcileflag=\"2\" shares=\"96379/100\" reconciledate=\"\" action=\"Withdrawal\" bankid=\"SPID\" account=\"A000076\" number=\"\" value=\"96379/100\" memo=\"\" id=\"S0001\" >\n"
-                  "    <TAG id=\"G000001\"/>\n"
-                  "   </SPLIT>\n"
-                  "  </SPLITS>\n"
-                  "  <KEYVALUEPAIRS>\n"
-                  "   <PAIR key=\"key\" value=\"value\" />\n"
-                  "  </KEYVALUEPAIRS>\n"
-                  " </TRANSACTION>\n"
-                  "</TRANSACTION-CONTAINER>\n"
+  QCOMPARE(doc.doctype().name(), QLatin1String("TEST"));
+  QDomElement transactionContainer = doc.documentElement();
+  QVERIFY(transactionContainer.isElement());
+  QCOMPARE(transactionContainer.tagName(), QLatin1String("TRANSACTION-CONTAINER"));
+  QVERIFY(transactionContainer.childNodes().size() == 1);
+  QVERIFY(transactionContainer.childNodes().at(0).isElement());
 
-                );
+  QDomElement transaction = transactionContainer.childNodes().at(0).toElement();
+  QCOMPARE(transaction.tagName(), QLatin1String("TRANSACTION"));
+  QCOMPARE(transaction.attribute("id"), QLatin1String("T000000000000000001"));
+  QCOMPARE(transaction.attribute("postdate"), QLatin1String("2001-12-28"));
+  QCOMPARE(transaction.attribute("commodity"), QLatin1String("EUR"));
+  QCOMPARE(transaction.attribute("memo"), QLatin1String("Wohnung:Miete"));
+  QCOMPARE(transaction.attribute("entrydate"), QLatin1String("2003-09-29"));
+  QCOMPARE(transaction.childNodes().size(), 2);
 
-#if QT_VERSION >= QT_VERSION_CHECK(4,6,0)
-  ref.replace(QString(" />\n"), QString("/>\n"));
-  ref.replace(QString(" >\n"), QString(">\n"));
-#endif
+  QVERIFY(transaction.childNodes().at(0).isElement());
+  QDomElement splits = transaction.childNodes().at(0).toElement();
+  QCOMPARE(splits.tagName(), QLatin1String("SPLITS"));
+  QCOMPARE(splits.childNodes().size(), 1);
+  QVERIFY(splits.childNodes().at(0).isElement());
+  QDomElement split = splits.childNodes().at(0).toElement();
+  QCOMPARE(split.tagName(), QLatin1String("SPLIT"));
+  QCOMPARE(split.attribute("id"), QLatin1String("S0001"));
+  QCOMPARE(split.attribute("payee"), QLatin1String("P000001"));
+  QCOMPARE(split.attribute("reconcileflag"), QLatin1String("2"));
+  QCOMPARE(split.attribute("shares"), QLatin1String("96379/100"));
+  QCOMPARE(split.attribute("reconciledate"), QString());
+  QCOMPARE(split.attribute("action"), QLatin1String("Withdrawal"));
+  QCOMPARE(split.attribute("bankid"), QLatin1String("SPID"));
+  QCOMPARE(split.attribute("account"), QLatin1String("A000076"));
+  QCOMPARE(split.attribute("number"), QString());
+  QCOMPARE(split.attribute("value"), QLatin1String("96379/100"));
+  QCOMPARE(split.attribute("memo"), QString());
+  QCOMPARE(split.childNodes().size(), 1);
 
-  //qDebug("ref = '%s'", qPrintable(ref));
-  //qDebug("doc = '%s'", qPrintable(doc.toString()));
+  QVERIFY(split.childNodes().at(0).isElement());
+  QDomElement tag = split.childNodes().at(0).toElement();
+  QCOMPARE(tag.tagName(), QLatin1String("TAG"));
+  QCOMPARE(tag.attribute("id"), QLatin1String("G000001"));
+  QCOMPARE(tag.childNodes().size(), 0);
 
-  QVERIFY(doc.toString() == ref);
+  QDomElement keyValuePairs = transaction.childNodes().at(1).toElement();
+  QCOMPARE(keyValuePairs.tagName(), QLatin1String("KEYVALUEPAIRS"));
+  QCOMPARE(keyValuePairs.childNodes().size(), 1);
+
+  QVERIFY(keyValuePairs.childNodes().at(0).isElement());
+  QDomElement keyValuePair1 = keyValuePairs.childNodes().at(0).toElement();
+  QCOMPARE(keyValuePair1.tagName(), QLatin1String("PAIR"));
+  QCOMPARE(keyValuePair1.attribute("key"), QLatin1String("key"));
+  QCOMPARE(keyValuePair1.attribute("value"), QLatin1String("value"));
+  QCOMPARE(keyValuePair1.childNodes().size(), 0);
 }
 
 void MyMoneyTransactionTest::testReadXML()
@@ -682,6 +708,3 @@ void MyMoneyTransactionTest::testReplaceId(void)
     unexpectedException(e);
   }
 }
-
-#include "mymoneytransactiontest.moc"
-

@@ -40,6 +40,7 @@
 #include <kpassworddialog.h>
 #include <KWallet/Wallet>
 #include <KMainWindow>
+#include <KLineEdit>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -64,12 +65,6 @@ OfxHeaderVersion::OfxHeaderVersion(KComboBox* combo, const QString& headerVersio
   } else {
     combo->setCurrentItem("102");
   }
-
-#if ! LIBOFX_IS_VERSION(0,9,0)
-  // This feature does not work with libOFX < 0.9 so
-  // we just make disable the button in this case
-  combo->setDisabled(true);
-#endif
 }
 
 QString OfxHeaderVersion::headerVersion(void) const
@@ -77,8 +72,9 @@ QString OfxHeaderVersion::headerVersion(void) const
   return m_combo->currentText();
 }
 
-OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
-    m_combo(combo)
+OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QString& appId) :
+    m_combo(combo),
+    m_versionEdit(versionEdit)
 {
 // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
 // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
@@ -96,6 +92,8 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
   m_appMap[i18n("Quicken Windows 2011")] = "QWIN:1900";
   m_appMap[i18n("Quicken Windows 2012")] = "QWIN:2100";
   m_appMap[i18n("Quicken Windows 2013")] = "QWIN:2200";
+  m_appMap[i18n("Quicken Windows 2014")] = "QWIN:2300";
+  m_appMap[i18n("Quicken Windows (Expert)")] = "QWIN:";
 
   // MS-Money
   m_appMap[i18n("MS-Money 2003")] = "Money:1100";
@@ -104,30 +102,48 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, const QString& appId) :
   m_appMap[i18n("MS-Money 2006")] = "Money:1500";
   m_appMap[i18n("MS-Money 2007")] = "Money:1600";
   m_appMap[i18n("MS-Money Plus")] = "Money:1700";
+  m_appMap[i18n("MS-Money (Expert)")] = "Money:";
 
   // KMyMoney
   m_appMap["KMyMoney"] = "KMyMoney:1000";
 
   combo->clear();
   combo->addItems(m_appMap.keys());
+  if(versionEdit)
+    versionEdit->hide();
 
   QMap<QString, QString>::const_iterator it_a;
+  // check for an exact match
   for (it_a = m_appMap.constBegin(); it_a != m_appMap.constEnd(); ++it_a) {
     if (*it_a == appId)
       break;
   }
 
+  // not found, check if we have a manual version of this product
+  QRegExp appExp("(\\w+:)(\\d+)");
+  if (it_a == m_appMap.constEnd()) {
+    if(appExp.exactMatch(appId)) {
+      for (it_a = m_appMap.constBegin(); it_a != m_appMap.constEnd(); ++it_a) {
+        if (*it_a == appExp.cap(1))
+          break;
+      }
+    }
+  }
+
+  // if we still haven't found it, we use a default as last resort
   if (it_a != m_appMap.constEnd()) {
     combo->setCurrentItem(it_a.key());
+    if((*it_a).endsWith(':')) {
+      if(versionEdit) {
+        versionEdit->show();
+        versionEdit->setText(appExp.cap(2));
+      } else {
+        combo->setCurrentItem(i18n("Quicken Windows 2008"));
+      }
+    }
   } else {
     combo->setCurrentItem(i18n("Quicken Windows 2008"));
   }
-
-#if ! LIBOFX_IS_VERSION(0,9,0)
-  // This feature does not work with libOFX < 0.9 so
-  // we just make disable the button in this case
-  combo->setDisabled(true);
-#endif
 }
 
 const QString OfxAppVersion::appId(void) const
@@ -135,9 +151,33 @@ const QString OfxAppVersion::appId(void) const
   static QString defaultAppId("QWIN:1700");
 
   QString app = m_combo->currentText();
-  if (m_appMap[app] != defaultAppId)
+  if (m_appMap[app] != defaultAppId) {
+    if(m_appMap[app].endsWith(':')) {
+      if(m_versionEdit) {
+        return m_appMap[app] + m_versionEdit->text();
+      } else {
+        return QString();
+      }
+    }
     return m_appMap[app];
+  }
   return QString();
+}
+
+bool OfxAppVersion::isValid() const
+{
+  QRegExp exp(".+:\\d+");
+  QString app = m_combo->currentText();
+  if(m_appMap[app].endsWith(':')) {
+    if(m_versionEdit) {
+      app = m_appMap[app] + m_versionEdit->text();
+    } else {
+      app.clear();
+    }
+  } else {
+    app = m_appMap[app];
+  }
+  return exp.exactMatch(app);
 }
 
 MyMoneyOfxConnector::MyMoneyOfxConnector(const MyMoneyAccount& _account):
@@ -208,7 +248,6 @@ QDate MyMoneyOfxConnector::statementStartDate(void) const
   return QDate::currentDate().addMonths(-2);
 }
 
-#if LIBOFX_IS_VERSION(0,9,0)
 OfxAccountData::AccountType MyMoneyOfxConnector::accounttype(void) const
 {
   OfxAccountData::AccountType result = OfxAccountData::OFX_CHECKING;
@@ -264,45 +303,6 @@ OfxAccountData::AccountType MyMoneyOfxConnector::accounttype(void) const
 
   return result;
 }
-#else
-AccountType MyMoneyOfxConnector::accounttype(void) const
-{
-  AccountType result = OFX_BANK_ACCOUNT;
-
-  switch (m_account.accountType()) {
-    case MyMoneyAccount::Investment:
-      result = OFX_INVEST_ACCOUNT;
-      break;
-    case MyMoneyAccount::CreditCard:
-      result = OFX_CREDITCARD_ACCOUNT;
-      break;
-    default:
-      break;
-  }
-
-  // This is a bit of a personalized hack.  Sometimes we may want to override the
-  // ofx type for an account.  For now, I will stash it in the notes!
-
-  QRegExp rexp("OFXTYPE:([A-Z]*)");
-  if (rexp.search(m_account.description()) != -1) {
-    QString override = rexp.cap(1);
-    kDebug(2) << "MyMoneyOfxConnector::accounttype() overriding to " << result;
-
-    if (override == "BANK")
-      result = OFX_BANK_ACCOUNT;
-    else if (override == "CC")
-      result = OFX_CREDITCARD_ACCOUNT;
-    else if (override == "INV")
-      result = OFX_INVEST_ACCOUNT;
-#if 0  // money market is not supported by 0.8.x
-    else if (override == "MONEYMARKET")
-      result = OFX_MONEYMRKT;
-#endif
-  }
-
-  return result;
-}
-#endif
 
 void MyMoneyOfxConnector::initRequest(OfxFiLogin* fi) const
 {
@@ -312,7 +312,6 @@ void MyMoneyOfxConnector::initRequest(OfxFiLogin* fi) const
   strncpy(fi->userid, username().toLatin1(), OFX_USERID_LENGTH - 1);
   strncpy(fi->userpass, password().toLatin1(), OFX_USERPASS_LENGTH - 1);
 
-#if LIBOFX_IS_VERSION(0,9,0)
   // If we don't know better, we pretend to be Quicken 2008
   // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
   // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
@@ -330,7 +329,6 @@ void MyMoneyOfxConnector::initRequest(OfxFiLogin* fi) const
   if (!headerVersion.isEmpty()) {
     strncpy(fi->header_version, headerVersion.toLatin1(), OFX_HEADERVERSION_LENGTH - 1);
   }
-#endif
 }
 
 const QByteArray MyMoneyOfxConnector::statementRequest(void) const
@@ -338,7 +336,6 @@ const QByteArray MyMoneyOfxConnector::statementRequest(void) const
   OfxFiLogin fi;
   initRequest(&fi);
 
-#if LIBOFX_IS_VERSION(0,9,0)
   OfxAccountData account;
   memset(&account, 0, sizeof(OfxAccountData));
 
@@ -348,17 +345,6 @@ const QByteArray MyMoneyOfxConnector::statementRequest(void) const
   }
   strncpy(account.account_number, accountnum().toLatin1(), OFX_ACCTID_LENGTH - 1);
   account.account_type = accounttype();
-#else
-  OfxAccountInfo account;
-  memset(&account, 0, sizeof(OfxAccountInfo));
-
-  if (iban().toLatin1() != 0) {
-    strncpy(account.bankid, iban().toLatin1(), OFX_BANKID_LENGTH - 1);
-    strncpy(account.brokerid, iban().toLatin1(), OFX_BROKERID_LENGTH - 1);
-  }
-  strncpy(account.accountid, accountnum().toLatin1(), OFX_ACCOUNT_ID_LENGTH - 1);
-  account.type = accounttype();
-#endif
 
   QByteArray result;
   if (fi.userpass[0]) {
@@ -373,24 +359,6 @@ const QByteArray MyMoneyOfxConnector::statementRequest(void) const
   return result;
 }
 
-#if 0
-// this code is not used anymore. The logic is now
-// contained in KOnlineBankingSetupWizard::finishLoginPage(void)
-const QByteArray MyMoneyOfxConnector::accountInfoRequest(void) const
-{
-  OfxFiLogin fi;
-  initRequest(&fi);
-
-  char* szrequest = libofx_request_accountinfo(&fi);
-  QString request = szrequest;
-  // remove the trailing zero
-  QByteArray result = request.utf8();
-  result.truncate(result.size() - 1);
-  free(szrequest);
-
-  return result;
-}
-#endif
 
 #if 0
 

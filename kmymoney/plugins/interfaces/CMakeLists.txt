@@ -1,6 +1,6 @@
-SET (libinterfaces_a_SOURCES
+set (libinterfaces_a_SOURCES
   kmmimportinterface.cpp kmmstatementinterface.cpp
   kmmviewinterface.cpp
   )
 
-KDE4_ADD_LIBRARY(interfaces STATIC ${libinterfaces_a_SOURCES})
+kde4_add_library(interfaces STATIC ${libinterfaces_a_SOURCES})

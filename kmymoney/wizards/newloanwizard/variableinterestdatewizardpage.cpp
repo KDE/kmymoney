@@ -49,6 +49,3 @@ VariableInterestDateWizardPage::VariableInterestDateWizardPage(QWidget *parent)
   m_interestFrequencyUnitEdit->setCurrentItem(static_cast<int>(MyMoneyAccountLoan::changeYearly));
 
 }
-
-#include "variableinterestdatewizardpage.moc"
-

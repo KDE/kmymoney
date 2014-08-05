@@ -55,9 +55,10 @@ public:
   virtual ~MyMoneyDbDriver();
 
   /**
-    *  @return a list ofsupported Qt database driver types, their qt names and useful names
-    **/
+   *  @return a list ofsupported Qt database driver types, their qt names and useful names
+   */
   static const QMap<QString, QString> driverMap();
+
   /**
    * Has the database been tested by developers?
    *
@@ -142,24 +143,31 @@ public:
   virtual const QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
 
   /**
-    * @ return Whether this DBMS requires an external file for storage
-    */
+   * @return Whether this DBMS requires an external file for storage
+   */
   virtual bool requiresExternalFile() const;
-  /**
-    * @ return Whether this DBMS requires creation before use
-    */
-  virtual bool requiresCreation() const;
-  /**
-    * Some DBMS require additional options to create-table
 
-      @ return additional option string
-    */
-  virtual const QString tableOptionString() const;
   /**
-    * Override standard tables() call for bug 252841
-    */
+   * @return Whether this DBMS requires creation before use
+   */
+  virtual bool requiresCreation() const;
+
+  /**
+   * Some DBMS require additional options to create-table
+   * @return additional option string
+   */
+  virtual const QString tableOptionString() const;
+
+  /**
+   * Override standard tables() call for bug 252841
+   */
   virtual const QStringList tables(QSql::TableType tt, const QSqlDatabase& db) const;
 
+  /**
+   * @return Returns if this driver supports setting of passwords
+   *
+   */
+  virtual bool isPasswordSupported() const;
 protected:
   MyMoneyDbDriver(); // only allow create() and derived types to construct
 };

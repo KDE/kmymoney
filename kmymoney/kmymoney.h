@@ -280,12 +280,17 @@ protected slots:
 
   /**
     */
-  void slotPayeeNew(const QString& newnameBase, QString& id);
+  bool slotPayeeNew(const QString& newnameBase, QString& id);
   void slotPayeeNew(void);
 
   /**
     */
   void slotPayeeDelete(void);
+
+  /**
+    * Slot that merges two or more selected payess into a new payee
+    */
+  void slotPayeeMerge(void);
 
   /**
     */
@@ -627,21 +632,14 @@ protected:
    */
   void initStatusBar(void);
 
-  /** queryClose is called by KTMainWindow on each closeEvent of a window. Against the
-   * default implementation (only returns true), this calles saveModified() on the document object to ask if the document shall
+  /** queryClose is called by KMainWindow on each closeEvent of a window. Against the
+   * default implementation (only returns true), this calls saveModified() on the document object to ask if the document shall
    * be saved if Modified; on cancel the closeEvent is rejected.
-   * @see KTMainWindow#queryClose
-   * @see KTMainWindow#closeEvent
+   * The settings are saved using saveOptions() if we are about to close.
+   * @see KMainWindow#queryClose
+   * @see QWidget#closeEvent
    */
   virtual bool queryClose(void);
-
-  /** queryExit is called by KTMainWindow when the last window of the application is going to be closed during the closeEvent().
-   * Against the default implementation that just returns true, this calls saveOptions() to save the settings of the last window's
-   * properties.
-   * @see KTMainWindow#queryExit
-   * @see KTMainWindow#closeEvent
-   */
-  virtual bool queryExit(void);
 
   void slotCheckSchedules(void);
 
@@ -747,9 +745,6 @@ public slots:
 
   /** */
   void slotFileNew(void);
-
-  /** Open a new window */
-  void slotFileNewWindow(void);
 
   /** open a file and load it into the document*/
   void slotFileOpen(void);
@@ -1156,6 +1151,11 @@ private:
     * @returns see return values of KMessageBox::warningYesNoCancel()
     */
   int askSaveOnClose(void);
+
+  /**
+    * Implement common task when deleting or merging payees
+    */
+  bool payeeReassign(int type);
 
 signals:
   /**

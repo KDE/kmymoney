@@ -666,5 +666,3 @@ QDate KNewLoanWizard::initialPaymentDate(void) const
   }
   return field("paymentDate").toDate();
 }
-
-#include "knewloanwizard.moc"

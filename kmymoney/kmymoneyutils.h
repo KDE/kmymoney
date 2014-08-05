@@ -388,14 +388,6 @@ public:
   static MyMoneyTransaction scheduledTransaction(const MyMoneySchedule& schedule);
 
   /**
-   * This method tries to figure out the category to be used for fees and interest
-   * from previous transactions in the given @a investmentAccount and returns the
-   * ids of those categories in @a feesId and @a interestId. The last used category
-   * will be returned.
-   */
-  static void previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId);
-
-  /**
    * This method replaces the deprecated QApplication::mainWidget() from Qt 3.x.
    * It assumes that there is only one KXmlGuiWindow in the application, and
    * returns it.

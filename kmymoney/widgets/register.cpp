@@ -63,7 +63,7 @@
 
 const int LinesPerMemo = 3;
 
-static QString sortOrderText[] = {
+static const char * sortOrderText[] = {
   I18N_NOOP2("Unknown sort order", "Unknown"),
   I18N_NOOP("Post date"),
   I18N_NOOP("Date entered"),
@@ -1477,8 +1477,8 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
     bool okToSelect = true;
     int cnt = itemList.count();
     bool sameEntryType = true;
-    if (cnt > 0) {
-      if (typeid(*itemList.begin()) != typeid(item))
+    if (cnt > 0 && itemList.front()) {
+      if (typeid(*itemList.front()) != typeid(*item))
         sameEntryType = false;
     }
 
@@ -1601,7 +1601,7 @@ void Register::slotEnsureItemVisible(void)
 TransactionSortField KMyMoneyRegister::textToSortOrder(const QString& text)
 {
   for (int idx = 1; idx < static_cast<int>(MaxSortFields); ++idx) {
-    if (text == i18n(qPrintable(sortOrderText[idx]))) {
+    if (text == i18n(sortOrderText[idx])) {
       return static_cast<TransactionSortField>(idx);
     }
   }
@@ -1612,7 +1612,7 @@ const QString KMyMoneyRegister::sortOrderToText(TransactionSortField idx)
 {
   if (idx < PostDateSort || idx >= MaxSortFields)
     idx = UnknownSort;
-  return i18n(qPrintable(sortOrderText[idx]));
+  return i18n(sortOrderText[idx]);
 }
 
 QString Register::text(int /*row*/, int /*col*/) const
@@ -1748,10 +1748,8 @@ void Register::selectRange(RegisterItem* from, RegisterItem* to, bool invert, bo
         }
       } else {
         bool sel = !item->isSelected();
-        if ((item->isSelected() != sel) && (sel || !sel)) {
-          if (item->isVisible()) {
-            item->setSelected(sel);
-          }
+        if ((item->isSelected() != sel) && item->isVisible()) {
+          item->setSelected(sel);
         }
       }
     }
@@ -2130,7 +2128,3 @@ void Register::setDetailsColumnType(DetailsColumnType detailsColumnType)
 {
   m_detailsColumnType = detailsColumnType;
 }
-
-#include "register.moc"
-
-// vim:cin:si:ai:et:ts=2:sw=2:

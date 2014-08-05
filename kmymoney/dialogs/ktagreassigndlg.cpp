@@ -77,5 +77,3 @@ void KTagReassignDlg::accept(void)
     KTagReassignDlgDecl::accept();
   }
 }
-
-#include "ktagreassigndlg.moc"

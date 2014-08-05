@@ -90,5 +90,3 @@ void KBackupDlg::writeConfig(void)
   grp.writeEntry("KBackupDlg_BackupMountPoint", txtMountPoint->text());
   config->sync();
 }
-
-#include "kbackupdlg.moc"

@@ -1,10 +1,10 @@
-PROJECT(Wizards)
+project(Wizards)
 
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR}/wizardpages)
+include_directories( ${CMAKE_CURRENT_BINARY_DIR}/wizardpages)
 
-ADD_SUBDIRECTORY( wizardpages )
-ADD_SUBDIRECTORY( newuserwizard ) 
-ADD_SUBDIRECTORY( newaccountwizard )
-ADD_SUBDIRECTORY( newinvestmentwizard )
-ADD_SUBDIRECTORY( newloanwizard )
-ADD_SUBDIRECTORY( endingbalancedlg )
+add_subdirectory( wizardpages )
+add_subdirectory( newuserwizard )
+add_subdirectory( newaccountwizard )
+add_subdirectory( newinvestmentwizard )
+add_subdirectory( newloanwizard )
+add_subdirectory( endingbalancedlg )

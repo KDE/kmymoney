@@ -207,7 +207,3 @@ void ConverterTest::testDateFormat()
     QFAIL(qPrintable(e.what()));
   }
 }
-
-#include "convertertest.moc"
-
-// vim:cin:si:ai:et:ts=2:sw=2:

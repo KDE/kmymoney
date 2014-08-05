@@ -136,6 +136,3 @@ QString reports::ReportTable::renderHTML(QWidget* widget,
 
   return html;
 }
-
-
-// vim:cin:si:ai:et:ts=2:sw=2:

@@ -44,6 +44,3 @@ void MyMoneyExceptionTest::testConstructor()
   QVERIFY(e.line() == 1234);
   QVERIFY(e.file() == "Joe's file");
 }
-
-#include "mymoneyexceptiontest.moc"
-

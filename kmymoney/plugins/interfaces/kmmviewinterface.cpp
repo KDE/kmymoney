@@ -58,6 +58,3 @@ void KMyMoneyPlugin::KMMViewInterface::addWidget(KMyMoneyViewBase* view, QWidget
   if (view && w)
     view->addWidget(w);
 }
-
-
-#include "kmmviewinterface.moc"

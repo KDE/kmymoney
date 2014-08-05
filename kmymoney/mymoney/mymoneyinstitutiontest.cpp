@@ -221,30 +221,58 @@ void MyMoneyInstitutionTest::testWriteXML()
 
   i.writeXML(doc, el);
 
-  QString ref = QString(
-                  "<!DOCTYPE TEST>\n"
-                  "<INSTITUTION-CONTAINER>\n"
-                  " <INSTITUTION manager=\"manager\" id=\"I00001\" name=\"name\" sortcode=\"sortcode\" >\n"
-                  "  <ADDRESS street=\"street\" telephone=\"telephone\" zip=\"postcode\" city=\"town\" />\n"
-                  "  <ACCOUNTIDS>\n"
-                  "   <ACCOUNTID id=\"A000001\" />\n"
-                  "   <ACCOUNTID id=\"A000003\" />\n"
-                  "  </ACCOUNTIDS>\n"
-                  "  <KEYVALUEPAIRS>\n"
-                  "   <PAIR key=\"key\" value=\"value\" />\n"
-                  "  </KEYVALUEPAIRS>\n"
-                  " </INSTITUTION>\n"
-                  "</INSTITUTION-CONTAINER>\n");
+  QCOMPARE(doc.doctype().name(), QLatin1String("TEST"));
+  QDomElement institutionContainer = doc.documentElement();
+  QVERIFY(institutionContainer.isElement());
+  QCOMPARE(institutionContainer.tagName(), QLatin1String("INSTITUTION-CONTAINER"));
+  QVERIFY(institutionContainer.childNodes().size() == 1);
+  QVERIFY(institutionContainer.elementsByTagName("INSTITUTION").at(0).isElement());
 
-#if QT_VERSION >= QT_VERSION_CHECK(4,6,0)
-  ref.replace(QString(" />\n"), QString("/>\n"));
-  ref.replace(QString(" >\n"), QString(">\n"));
-#endif
+  QDomElement institution = institutionContainer.elementsByTagName("INSTITUTION").at(0).toElement();
+  QCOMPARE(institution.tagName(), QLatin1String("INSTITUTION"));
+  QCOMPARE(institution.attribute("id"), QLatin1String("I00001"));
+  QCOMPARE(institution.attribute("manager"), QLatin1String("manager"));
+  QCOMPARE(institution.attribute("name"), QLatin1String("name"));
+  QCOMPARE(institution.attribute("sortcode"), QLatin1String("sortcode"));
+  QCOMPARE(institution.childNodes().size(), 3);
 
-  // qDebug("ref = '%s'", qPrintable(ref));
-  // qDebug("doc = '%s'", qPrintable(doc.toString()));
+  QVERIFY(institution.childNodes().at(0).isElement());
+  QDomElement address = institution.childNodes().at(0).toElement();
+  QCOMPARE(address.tagName(), QLatin1String("ADDRESS"));
+  QCOMPARE(address.attribute("street"), QLatin1String("street"));
+  QCOMPARE(address.attribute("telephone"), QLatin1String("telephone"));
+  QCOMPARE(address.attribute("zip"), QLatin1String("postcode"));
+  QCOMPARE(address.attribute("city"), QLatin1String("town"));
+  QCOMPARE(address.childNodes().size(), 0);
 
-  QVERIFY(doc.toString() == ref);
+  QVERIFY(institution.childNodes().at(1).isElement());
+  QDomElement accountIds = institution.childNodes().at(1).toElement();
+  QCOMPARE(accountIds.tagName(), QLatin1String("ACCOUNTIDS"));
+  QCOMPARE(accountIds.childNodes().size(), 2);
+
+  QVERIFY(accountIds.childNodes().at(0).isElement());
+  QDomElement account1 = accountIds.childNodes().at(0).toElement();
+  QCOMPARE(account1.tagName(), QLatin1String("ACCOUNTID"));
+  QCOMPARE(account1.attribute("id"), QLatin1String("A000001"));
+  QCOMPARE(account1.childNodes().size(), 0);
+
+  QVERIFY(accountIds.childNodes().at(1).isElement());
+  QDomElement account2 = accountIds.childNodes().at(1).toElement();
+  QCOMPARE(account2.tagName(), QLatin1String("ACCOUNTID"));
+  QCOMPARE(account2.attribute("id"), QLatin1String("A000003"));
+  QCOMPARE(account2.childNodes().size(), 0);
+
+  QVERIFY(institution.childNodes().at(2).isElement());
+  QDomElement keyValuePairs = institution.childNodes().at(2).toElement();
+  QCOMPARE(keyValuePairs.tagName(), QLatin1String("KEYVALUEPAIRS"));
+  QCOMPARE(keyValuePairs.childNodes().size(), 1);
+
+  QVERIFY(keyValuePairs.childNodes().at(0).isElement());
+  QDomElement keyValuePair1 = keyValuePairs.childNodes().at(0).toElement();
+  QCOMPARE(keyValuePair1.tagName(), QLatin1String("PAIR"));
+  QCOMPARE(keyValuePair1.attribute("key"), QLatin1String("key"));
+  QCOMPARE(keyValuePair1.attribute("value"), QLatin1String("value"));
+  QCOMPARE(keyValuePair1.childNodes().size(), 0);
 }
 
 void MyMoneyInstitutionTest::testReadXML()
@@ -312,5 +340,3 @@ void MyMoneyInstitutionTest::testReadXML()
     QFAIL("Unexpected exception");
   }
 }
-#include "mymoneyinstitutiontest.moc"
-

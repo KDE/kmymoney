@@ -50,7 +50,6 @@ KSettingsSchedules::KSettingsSchedules(QWidget* parent) :
 void KSettingsSchedules::loadList(void)
 {
   QStringList regions;
-#if KDE_IS_VERSION(4,5,0)
   QStringList regionCodes = HolidayRegion::regionCodes();
 
   foreach (const QString &regionCode, regionCodes) {
@@ -65,25 +64,6 @@ void KSettingsSchedules::loadList(void)
     m_regionMap[region] = regionCode;
     regions << region;
   }
-#else
-  QStringList countries = HolidayRegion::locations();
-
-  foreach (const QString &country, countries) {
-    QString file = KStandardDirs::locate("locale",
-                                         "l10n/" + country + "/entry.desktop");
-    QString region;
-    if (!file.isEmpty()) {
-      KConfig entry(file, KConfig::SimpleConfig);
-      KConfigGroup grp = entry.group("KCM Locale");
-      region = grp.readEntry("Name");
-    }
-    if (region.isEmpty())
-      region = country;
-
-    m_regionMap[region] = country;
-    regions << region;
-  }
-#endif
   regions.sort();
 
   m_regionMap[m_holidayRegion->itemText(0)] = "";
@@ -117,5 +97,3 @@ void KSettingsSchedules::slotResetRegion()
 KSettingsSchedules::~KSettingsSchedules()
 {
 }
-
-#include "ksettingsschedules.moc"

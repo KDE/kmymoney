@@ -270,7 +270,7 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
 
 void Transaction::registerCellText(QString& txt, int row, int col)
 {
-  int align = 0;
+  Qt::Alignment align;
   registerCellText(txt, align, row, col, 0);
 }
 
@@ -327,23 +327,30 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
 
     // the text
     // construct the text for the cell
-    int align = Qt::AlignVCenter;
     QString txt;
+    option.displayAlignment = Qt::AlignVCenter;
     if (m_transaction != MyMoneyTransaction() && !m_inRegisterEdit) {
-      registerCellText(txt, align, index.row() - startRow(), index.column(), painter);
+      registerCellText(txt, option.displayAlignment, index.row() - startRow(), index.column(), painter);
     }
 
-    QTextDocument document;
-    document.setDocumentMargin(2);
-    document.setHtml(txt);
-    painter->translate(option.rect.topLeft());
-    QAbstractTextDocumentLayout::PaintContext ctx;
-    ctx.palette = option.palette;
-    // Highlighting text if item is selected
-    if (m_selected)
-      ctx.palette.setColor(QPalette::Text, option.palette.color(QPalette::HighlightedText));
-    document.documentLayout()->draw(painter, ctx);
-    painter->translate(-option.rect.topLeft());
+    if (Qt::mightBeRichText(txt)) {
+      QTextDocument document;
+      // this should set the alignment of the html but it does not work so htmls will be left aligned
+      document.setDefaultTextOption(QTextOption(option.displayAlignment));
+      document.setDocumentMargin(2);
+      document.setHtml(txt);
+      painter->translate(option.rect.topLeft());
+      QAbstractTextDocumentLayout::PaintContext ctx;
+      ctx.palette = option.palette;
+      // Highlighting text if item is selected
+      if (m_selected)
+        ctx.palette.setColor(QPalette::Text, option.palette.color(QPalette::HighlightedText));
+      document.documentLayout()->draw(painter, ctx);
+      painter->translate(-option.rect.topLeft());
+    } else {
+      // draw plain text properly aligned
+      style->drawItemText(painter, option.rect.adjusted(2, 0, -2, 0), option.displayAlignment, option.palette, true, txt, m_selected ? QPalette::HighlightedText : QPalette::Text);
+    }
 
     // draw the grid if it's needed
     if (KMyMoneySettings::showGrid()) {
@@ -426,7 +433,7 @@ void Transaction::paintFormCell(QPainter *painter, const QStyleOptionViewItem &o
   painter->setPen(option.palette.text().color());
 
   QString txt;
-  int align = Qt::AlignVCenter;
+  Qt::Alignment align = Qt::AlignVCenter;
   bool editField = formCellText(txt, align, index.row(), index.column(), painter);
 
   // if we have an editable field and don't currently edit the transaction
@@ -886,7 +893,7 @@ void StdTransaction::setShowRowInForm(int row, bool show)
     m_showAccountRow = show;
 }
 
-bool StdTransaction::formCellText(QString& txt, int& align, int row, int col, QPainter* /* painter */)
+bool StdTransaction::formCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* /* painter */)
 {
   // if(m_transaction != MyMoneyTransaction()) {
   switch (row) {
@@ -1024,7 +1031,7 @@ bool StdTransaction::formCellText(QString& txt, int& align, int row, int col, QP
   return (col == ValueColumn1 && row < 5) || (col == ValueColumn2 && row > 0 && row != 4);
 }
 
-void StdTransaction::registerCellText(QString& txt, int& align, int row, int col, QPainter* painter)
+void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter)
 {
   switch (row) {
     case 0:
@@ -1162,7 +1169,7 @@ int StdTransaction::registerColWidth(int col, const QFontMetrics& cellFontMetric
 
   int nw = 0;
   for (int i = firstRow; i <= lastRow; ++i) {
-    int align;
+    Qt::Alignment align;
     registerCellText(txt, align, i, col, 0);
     int w = cellFontMetrics.width(txt + "   ");
     if (w > nw)
@@ -1460,7 +1467,7 @@ void InvestTransaction::activity(QString& txt, MyMoneySplit::investTransactionTy
   }
 }
 
-bool InvestTransaction::formCellText(QString& txt, int& align, int row, int col, QPainter* /* painter */)
+bool InvestTransaction::formCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* /* painter */)
 {
   bool fieldEditable = false;
 
@@ -1668,7 +1675,7 @@ bool InvestTransaction::formCellText(QString& txt, int& align, int row, int col,
   return fieldEditable;
 }
 
-void InvestTransaction::registerCellText(QString& txt, int& align, int row, int col, QPainter* /* painter */)
+void InvestTransaction::registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* /* painter */)
 {
   switch (row) {
     case 0:

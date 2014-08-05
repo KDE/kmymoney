@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 
   KAboutData aboutData("kmymoney", 0, ki18n("KMyMoney"),
                        VERSION, ki18n("\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions."), KAboutData::License_GPL,
-                       ki18n("(c) 2000-2012 The KMyMoney development team"), /*feature*/KLocalizedString(),
+                       ki18n("(c) 2000-2014 The KMyMoney development team"), /*feature*/KLocalizedString(),
                        I18N_NOOP("http://kmymoney.org/")/*,
                                                       "kmymoney-devel@kde.org")*/);
 
@@ -292,5 +292,3 @@ void timestamp(char *txt)
     qDebug("Time(%s): %d", txt, timer.elapsed());
   }
 }
-
-// vim:cin:si:ai:et:ts=2:sw=2:

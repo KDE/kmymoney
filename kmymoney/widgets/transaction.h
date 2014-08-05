@@ -164,10 +164,10 @@ public:
   virtual void paintRegisterCell(QPainter* painter, QStyleOptionViewItemV4& option, const QModelIndex& index);
 
   virtual void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index);
-  virtual bool formCellText(QString& /* txt */, int& /* align */, int /* row */, int /* col */, QPainter* /* painter */) {
+  virtual bool formCellText(QString& /* txt */, Qt::Alignment& /* align */, int /* row */, int /* col */, QPainter* /* painter */) {
     return false;
   }
-  virtual void registerCellText(QString& /* txt */, int& /* align */, int /* row */, int /* col */, QPainter* /* painter */) {}
+  virtual void registerCellText(QString& /* txt */, Qt::Alignment& /* align */, int /* row */, int /* col */, QPainter* /* painter */) {}
   virtual int registerColWidth(int /* col */, const QFontMetrics& /* cellFontMetrics */) {
     return 0;
   }
@@ -313,8 +313,8 @@ public:
     return "StdTransaction";
   }
 
-  bool formCellText(QString& txt, int& align, int row, int col, QPainter* painter = 0);
-  void registerCellText(QString& txt, int& align, int row, int col, QPainter* painter = 0);
+  bool formCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
+  void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
 
   int registerColWidth(int col, const QFontMetrics& cellFontMetrics);
   void setupForm(KMyMoneyTransactionForm::TransactionForm* form);
@@ -373,8 +373,8 @@ public:
     return "InvestTransaction";
   }
 
-  bool formCellText(QString& txt, int& align, int row, int col, QPainter* painter = 0);
-  void registerCellText(QString& txt, int& align, int row, int col, QPainter* painter = 0);
+  bool formCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
+  void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
 
   int registerColWidth(int col, const QFontMetrics& cellFontMetrics);
   void setupForm(KMyMoneyTransactionForm::TransactionForm* form);
@@ -444,5 +444,3 @@ private:
 } // namespace
 
 #endif
-// vim:cin:si:ai:et:ts=2:sw=2:
-

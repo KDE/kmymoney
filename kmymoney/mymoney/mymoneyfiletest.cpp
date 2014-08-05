@@ -322,9 +322,9 @@ void MyMoneyFileTest::testInstitutionListRetrieval()
   QList<MyMoneyInstitution>::ConstIterator it;
   it = list.constBegin();
 
-  QVERIFY((*it).name() == "institution1");
+  QVERIFY((*it).name() == "institution1" || (*it).name() == "institution2");
   ++it;
-  QVERIFY((*it).name() == "institution2");
+  QVERIFY((*it).name() == "institution2"  || (*it).name() == "institution1");
   ++it;
   QVERIFY(it == list.constEnd());
 }
@@ -2262,7 +2262,7 @@ void MyMoneyFileTest::testRemoveOnlineJob()
   onlineJob job2(new germanOnlineTransfer());
   onlineJob job3(new germanOnlineTransfer());
 
-  
+
   MyMoneyFileTransaction ft;
   m->addOnlineJob( job );
   m->addOnlineJob( job2 );
@@ -2331,7 +2331,7 @@ void MyMoneyFileTest::testRemoveLockedOnlineJob()
   QVERIFY(m_objectsModified.count() == 0);
   QVERIFY(m_balanceChanged.count() == 0);
   QVERIFY(m_valueChanged.count() == 0);
-  
+
 #endif
 }
 
@@ -2365,5 +2365,67 @@ void MyMoneyFileTest::testModifyOnlineJob()
 #endif
 }
 
-#include "mymoneyfiletest.moc"
+void MyMoneyFileTest::testClearedBalance()
+{
+  testAddTransaction();
+  MyMoneyTransaction t1;
+  MyMoneyTransaction t2;
 
+  // construct a transaction and add it to the pool
+  t1.setPostDate(QDate(2002, 2, 1));
+  t1.setMemo("Memotext");
+
+  t2.setPostDate(QDate(2002, 2, 4));
+  t2.setMemo("Memotext");
+
+  MyMoneySplit split1;
+  MyMoneySplit split2;
+  MyMoneySplit split3;
+  MyMoneySplit split4;
+
+  MyMoneyFileTransaction ft;
+  try {
+    split1.setAccountId("A000002");
+    split1.setShares(MyMoneyMoney(-1000, 100));
+    split1.setValue(MyMoneyMoney(-1000, 100));
+    split1.setReconcileFlag(MyMoneySplit::Cleared);
+    split2.setAccountId("A000004");
+    split2.setValue(MyMoneyMoney(1000, 100));
+    split2.setShares(MyMoneyMoney(1000, 100));
+    split2.setReconcileFlag(MyMoneySplit::Cleared);
+    t1.addSplit(split1);
+    t1.addSplit(split2);
+    m->addTransaction(t1);
+    ft.commit();
+    ft.restart();
+    QVERIFY(t1.id() == "T000000000000000002");
+    split3.setAccountId("A000002");
+    split3.setShares(MyMoneyMoney(-2000, 100));
+    split3.setValue(MyMoneyMoney(-2000, 100));
+    split3.setReconcileFlag(MyMoneySplit::Cleared);
+    split4.setAccountId("A000004");
+    split4.setValue(MyMoneyMoney(2000, 100));
+    split4.setShares(MyMoneyMoney(2000, 100));
+    split4.setReconcileFlag(MyMoneySplit::Cleared);
+    t2.addSplit(split3);
+    t2.addSplit(split4);
+    m->addTransaction(t2);
+    ft.commit();
+    ft.restart();
+
+    QVERIFY(m->balance("A000001", QDate(2002, 2, 4)) == MyMoneyMoney(-1000, 100));
+    QVERIFY(m->balance("A000002", QDate(2002, 2, 4)) == MyMoneyMoney(-3000, 100));
+    // Date of last cleared transaction
+    QVERIFY(m->clearedBalance("A000002", QDate(2002, 2, 1)) == MyMoneyMoney(-1000, 100));
+
+    // Date of last transaction
+    QVERIFY(m->balance("A000002", QDate(2002, 2, 4)) == MyMoneyMoney(-3000, 100));
+
+    // Date before first transaction
+    QVERIFY(m->clearedBalance("A000002", QDate(2002, 1, 15)).isZero());
+
+
+  } catch (const MyMoneyException &) {
+    QFAIL("Unexpected exception!");
+  }
+}

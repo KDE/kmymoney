@@ -332,7 +332,3 @@ void KEnterScheduleDlg::slotShowHelp(void)
 {
   KToolInvocation::invokeHelp("details.schedules.entering");
 }
-
-
-#include "kenterscheduledlg.moc"
-

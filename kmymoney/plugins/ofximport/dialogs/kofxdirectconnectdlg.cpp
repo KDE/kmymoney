@@ -102,7 +102,9 @@ bool KOfxDirectConnectDlg::init(void)
     d->m_fpTrace.write(data, strlen(data));
     d->m_fpTrace.write("\n", 1);
     d->m_fpTrace.write("request:\n", 9);
-    d->m_fpTrace.write(request, request.size());
+    QByteArray trcData(request);  // make local copy
+    trcData.replace('\r', "");
+    d->m_fpTrace.write(trcData, trcData.size());
     d->m_fpTrace.write("\n", 1);
     d->m_fpTrace.write("response:\n", 10);
   }
@@ -158,11 +160,13 @@ void KOfxDirectConnectDlg::slotOfxData(KIO::Job*, const QByteArray& _ba)
   QTextStream out(m_tmpfile);
   out << QString(_ba);
 
-  if (d->m_fpTrace.isOpen()) {
-    d->m_fpTrace.write(_ba, _ba.size());
-  }
-
   setDetails(QString("Got %1 bytes").arg(_ba.size()));
+
+  if (d->m_fpTrace.isOpen()) {
+    QByteArray trcData(_ba);
+    trcData.replace('\r', "");
+    d->m_fpTrace.write(trcData, trcData.size());
+  }
 }
 
 void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
@@ -226,5 +230,3 @@ void KOfxDirectConnectDlg::reject(void)
   }
   QDialog::reject();
 }
-
-#include "kofxdirectconnectdlg.moc"

@@ -490,6 +490,7 @@ void KNewAccountDlg::setOpeningBalance(const MyMoneyMoney& balance)
 
 void KNewAccountDlg::setOpeningBalanceShown(bool shown)
 {
+  m_openingBalanceLabel->setVisible(shown);
   m_openingBalanceEdit->setVisible(shown);
 }
 
@@ -878,7 +879,3 @@ void KNewAccountDlg::addTab(QWidget* w, const QString& name)
     m_tab->addTab(w, name);
   }
 }
-
-
-#include "knewaccountdlg.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

@@ -962,5 +962,3 @@ bool kMyMoneySplitTable::focusNextPrevChild(bool next)
     rc = QTableWidget::focusNextPrevChild(next);
   return rc;
 }
-
-#include "kmymoneysplittable.moc"

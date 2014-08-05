@@ -208,5 +208,3 @@ void KMMPrintCheckPlugin::slotUpdateConfig(void)
   readCheckTemplate();
   d->m_printedTransactionIdList = PluginSettings::printedChecks();
 }
-
-#include "printcheck.moc"

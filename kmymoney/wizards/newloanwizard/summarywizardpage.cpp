@@ -92,6 +92,3 @@ void SummaryWizardPage::initializePage()
   }
 
 }
-
-#include "summarywizardpage.moc"
-

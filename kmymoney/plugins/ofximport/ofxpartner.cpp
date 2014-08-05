@@ -535,7 +535,3 @@ void OfxHttpRequest::slotOfxFinished(int, bool rc)
   if (m_eventLoop)
     m_eventLoop->exit();
 }
-
-#include "ofxpartner.moc"
-
-// vim:cin:si:ai:et:ts=2:sw=2:

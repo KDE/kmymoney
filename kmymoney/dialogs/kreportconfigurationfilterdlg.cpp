@@ -654,5 +654,3 @@ void KReportConfigurationFilterDlg::slotUpdateCheckTransfers(void)
     cb->setEnabled(true);
   }
 }
-
-#include "kreportconfigurationfilterdlg.moc"

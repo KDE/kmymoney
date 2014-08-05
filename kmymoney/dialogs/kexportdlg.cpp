@@ -237,5 +237,3 @@ QString KExportDlg::accountId() const
 {
   return m_lastAccount;
 }
-
-#include "kexportdlg.moc"

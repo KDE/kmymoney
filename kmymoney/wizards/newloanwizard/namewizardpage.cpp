@@ -57,6 +57,3 @@ void NameWizardPage::initializePage()
   }
   m_nameEdit->setFocus();
 }
-
-#include "namewizardpage.moc"
-

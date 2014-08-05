@@ -32,24 +32,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-namespace GpgME
-{
-class Key;
-class KeyListResult;
-class Error;
-class DecryptionResult;
-class EncryptionResult;
-};
-
 // ----------------------------------------------------------------------------
 // Project Includes
-
-
-namespace GpgME
-{
-class Error;
-class KeyListResult;
-}
 
 /**
   * @author Thomas Baumgart

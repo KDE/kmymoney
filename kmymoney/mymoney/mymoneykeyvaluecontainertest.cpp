@@ -113,21 +113,29 @@ void MyMoneyKeyValueContainerTest::testWriteXML()
   doc.appendChild(el);
   m->writeXML(doc, el);
 
-  QString ref(
-    "<!DOCTYPE TEST>\n"
-    "<KVP-CONTAINER>\n"
-    " <KEYVALUEPAIRS>\n"
-    "  <PAIR key=\"Key\" value=\"Value\" />\n"
-    "  <PAIR key=\"key\" value=\"value\" />\n"
-    " </KEYVALUEPAIRS>\n"
-    "</KVP-CONTAINER>\n");
+  QCOMPARE(doc.doctype().name(), QLatin1String("TEST"));
+  QDomElement kvpContainer = doc.documentElement();
+  QCOMPARE(kvpContainer.tagName(), QLatin1String("KVP-CONTAINER"));
+  QCOMPARE(kvpContainer.childNodes().size(), 1);
 
-#if QT_VERSION >= QT_VERSION_CHECK(4,6,0)
-  ref.replace(QString(" />\n"), QString("/>\n"));
-  ref.replace(QString(" >\n"), QString(">\n"));
-#endif
+  QVERIFY(kvpContainer.childNodes().at(0).isElement());
+  QDomElement keyValuePairs = kvpContainer.childNodes().at(0).toElement();
+  QCOMPARE(keyValuePairs.tagName(), QLatin1String("KEYVALUEPAIRS"));
+  QCOMPARE(keyValuePairs.childNodes().size(), 2);
 
-  QVERIFY(doc.toString() == ref);
+  QVERIFY(keyValuePairs.childNodes().at(0).isElement());
+  QDomElement keyValuePair1 = keyValuePairs.childNodes().at(0).toElement();
+  QCOMPARE(keyValuePair1.tagName(), QLatin1String("PAIR"));
+  QCOMPARE(keyValuePair1.attribute("key"), QLatin1String("Key"));
+  QCOMPARE(keyValuePair1.attribute("value"), QLatin1String("Value"));
+  QCOMPARE(keyValuePair1.childNodes().size(), 0);
+
+  QVERIFY(keyValuePairs.childNodes().at(1).isElement());
+  QDomElement keyValuePair2 = keyValuePairs.childNodes().at(1).toElement();
+  QCOMPARE(keyValuePair2.tagName(), QLatin1String("PAIR"));
+  QCOMPARE(keyValuePair2.attribute("key"), QLatin1String("key"));
+  QCOMPARE(keyValuePair2.attribute("value"), QLatin1String("value"));
+  QCOMPARE(keyValuePair2.childNodes().size(), 0);
 }
 
 void MyMoneyKeyValueContainerTest::testReadXML()
@@ -203,6 +211,3 @@ void MyMoneyKeyValueContainerTest::testArrayWrite()
   QVERIFY(kvp.pairs().count() == 1);
   QVERIFY(kvp.value("Key") == "Value");
 }
-
-#include "mymoneykeyvaluecontainertest.moc"
-

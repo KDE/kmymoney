@@ -671,5 +671,3 @@ void KTagsView::slotChangeFilter(int index)
   m_tagFilterType = index;
   loadTags();
 }
-
-#include "ktagsview.moc"

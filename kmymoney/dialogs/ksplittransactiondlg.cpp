@@ -437,5 +437,3 @@ void KSplitTransactionDlg::slotCreateCategory(const QString& name, QString& id)
   // return id
   id = acc.id();
 }
-
-#include "ksplittransactiondlg.moc"

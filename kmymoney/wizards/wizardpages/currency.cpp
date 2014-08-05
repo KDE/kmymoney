@@ -66,5 +66,3 @@ QString Currency::selectedCurrency(void) const
   }
   return id;
 }
-
-#include "currency.moc"

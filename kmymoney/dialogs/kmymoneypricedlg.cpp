@@ -339,5 +339,3 @@ void KMyMoneyPriceDlg::slotOpenContextMenu(const QPoint& p)
     emit openContextMenu(item->data(0, Qt::UserRole).value<MyMoneyPrice>());
   }
 }
-
-#include "kmymoneypricedlg.moc"

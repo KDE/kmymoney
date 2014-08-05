@@ -1001,5 +1001,3 @@ void MyMoneyQifProfile::scanDate(const QString& txt) const
     }
   }
 }
-
-#include "mymoneyqifprofile.moc"

@@ -49,5 +49,3 @@ QList<MyMoneyTemplate> KLoadTemplateDlg::templates(void) const
 void KLoadTemplateDlg::slotHelp(void)
 {
 }
-
-#include "kloadtemplatedlg.moc"

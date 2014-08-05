@@ -81,7 +81,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
 
     // create button
     KGuiItem splitButtonItem("",
-                             KIcon(KMyMoneyUtils::overlayIcon("view-financial-transfer", "view-list-details")), "", "");
+                             KIcon("split"), "", "");
     d->splitButton = new KPushButton(splitButtonItem, d->frame);
     d->splitButton->setObjectName("splitButton");
 
@@ -222,5 +222,3 @@ void KMyMoneySecurity::setCurrentTextById(const QString& id)
     clearEditText();
   }
 }
-
-#include "kmymoneycategory.moc"

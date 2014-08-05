@@ -551,5 +551,3 @@ void KInvestmentView::slotDeleteSecurity(void)
     }
   }
 }
-
-#include "kinvestmentview.moc"

@@ -64,5 +64,3 @@ void KSettingsPlugins::slotDefaultsPlugins()
 {
   KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget()->defaults();
 }
-
-#include "ksettingsplugins.moc"

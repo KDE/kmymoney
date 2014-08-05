@@ -56,6 +56,3 @@ bool EffectiveDateWizardPage::isComplete() const
            || m_effectiveChangeDateEdit->date() > QDate::currentDate());
   return true;
 }
-
-#include "effectivedatewizardpage.moc"
-

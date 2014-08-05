@@ -49,15 +49,15 @@ KInvestmentDetailsWizardPage::KInvestmentDetailsWizardPage(QWidget *parent)
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
   registerField("investmentName", m_investmentName);
-  connect(m_investmentName, SIGNAL(selectionChanged()),
+  connect(m_investmentName, SIGNAL(textChanged(QString)),
           this, SIGNAL(completeChanged()));
 
   registerField("investmentIdentification", m_investmentIdentification);
-  connect(m_investmentIdentification, SIGNAL(selectionChanged()),
+  connect(m_investmentIdentification, SIGNAL(textChanged(QString)),
           this, SIGNAL(completeChanged()));
 
   registerField("investmentSymbol", m_investmentSymbol);
-  connect(m_investmentSymbol, SIGNAL(selectionChanged()),
+  connect(m_investmentSymbol, SIGNAL(textChanged(QString)),
           this, SIGNAL(completeChanged()));
 
   registerField("tradingCurrencyEdit", m_tradingCurrencyEdit, "security");
@@ -123,5 +123,3 @@ void KInvestmentDetailsWizardPage::setupInvestmentSymbol()
   m_investmentSymbol->setFocus();
   connect(m_investmentSymbol, SIGNAL(lineChanged(QString)), this, SIGNAL(checkForExistingSymbol(QString)));
 }
-
-#include "kinvestmentdetailswizardpage.moc"

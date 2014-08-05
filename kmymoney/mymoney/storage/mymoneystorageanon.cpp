@@ -306,5 +306,3 @@ void MyMoneyStorageANON::writeReport(QDomElement& reports, const MyMoneyReport& 
 
   MyMoneyStorageXML::writeReport(reports, rn);
 }
-
-// vim:cin:si:ai:et:ts=2:sw=2:

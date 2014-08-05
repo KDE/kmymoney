@@ -38,5 +38,3 @@ KUrl KMyMoneyPlugin::KMMImportInterface::selectFile(const QString& title, const 
 {
   return m_app->selectFile(title, path, mask, mode, widget);
 }
-
-#include "kmmimportinterface.moc"

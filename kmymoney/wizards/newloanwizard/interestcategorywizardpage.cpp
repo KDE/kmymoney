@@ -95,6 +95,3 @@ void InterestCategoryWizardPage::slotCreateCategory(void)
   }
   delete dlg;
 }
-
-#include "interestcategorywizardpage.moc"
-

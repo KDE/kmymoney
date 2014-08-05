@@ -50,6 +50,3 @@ void KMergeTransactionsDlg::slotHelp(void)
 {
   KToolInvocation::invokeHelp("details.ledgers.match");
 }
-
-#include "kmergetransactionsdlg.moc"
-// vim:cin:si:ai:et:ts=2:sw=2:

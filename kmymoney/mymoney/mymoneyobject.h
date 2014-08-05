@@ -29,6 +29,7 @@
 // Project Includes
 
 #include <kmm_mymoney_export.h>
+#include <mymoneyunittestable.h>
 
 /**
   * @author Thomas Baumgart
@@ -114,7 +115,7 @@ protected:
    */
   MyMoneyObject(const QDomElement& node, const bool forceId = true);
 
-  /* KDE_DEPRECATED */ void setId(const QString& id);
+  void setId(const QString& id);
 
   /**
    * This method writes out the members contained in this object.

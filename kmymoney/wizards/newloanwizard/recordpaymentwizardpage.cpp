@@ -48,6 +48,3 @@ void RecordPaymentWizardPage::initializePage()
   if (field("noPreviousPaymentButton").toBool())
     m_allPaymentsButton->animateClick();
 }
-
-#include "recordpaymentwizardpage.moc"
-

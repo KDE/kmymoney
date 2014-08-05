@@ -2407,6 +2407,3 @@ void MyMoneyDatabaseMgrTest::testRemoveOnlineJob()
     QVERIFY(m->dirty() == false);
   }
 }
-
-#include "mymoneydatabasemgrtest.moc"
-

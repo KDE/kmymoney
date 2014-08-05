@@ -34,6 +34,7 @@
 #include <mymoneykeyvaluecontainer.h>
 #include <mymoneysecurity.h>
 #include <kmm_mymoney_export.h>
+#include <mymoneyunittestable.h>
 #include "mymoneyutils.h"
 
 #include "payeeidentifier/payeeidentifier.h"
@@ -503,7 +504,7 @@ public:
     *
     * @deprecated use isIncomeExpense() instead
     */
-  KDE_DEPRECATED bool isCategory(void) const;
+  KMM_MYMONEY_DEPRECATED bool isCategory(void) const;
 
   /**
     * This method returns @a true if the account type is

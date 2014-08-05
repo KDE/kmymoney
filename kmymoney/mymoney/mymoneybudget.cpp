@@ -365,5 +365,3 @@ void MyMoneyBudget::setBudgetStart(const QDate& _start)
     }
   }
 }
-
-// vim:cin:si:ai:et:ts=2:sw=2:

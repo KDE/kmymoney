@@ -202,5 +202,3 @@ void MyMoneyFinancialCalculatorTest::testUseCase2()
   res = MyMoneyMoney(m->futureValue());
   QVERIFY(res == MyMoneyMoney(-67, 100));
 }
-
-#include "mymoneyfinancialcalculatortest.moc"

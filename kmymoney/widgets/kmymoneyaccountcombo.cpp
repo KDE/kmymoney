@@ -132,5 +132,3 @@ void KMyMoneyAccountCombo::setModel(QAbstractItemModel *model)
 
   connect(this, SIGNAL(activated(int)), SLOT(activated()));
 }
-
-#include "kmymoneyaccountcombo.moc"

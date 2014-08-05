@@ -190,11 +190,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 3
   m_scheduledView = new KScheduledView();
 //this is to solve the way long strings are handled differently among versions of KPageWidget
-#if KDE_IS_VERSION(4,4,0)
   m_scheduleViewFrame = m_model->addPage(m_scheduledView, i18n("Scheduled transactions"));
-#else
-  m_scheduleViewFrame = m_model->addPage(m_scheduledView, i18n("Scheduled\ntransactions"));
-#endif
   m_scheduleViewFrame->setIcon(KIcon("view-pim-calendar"));
 
   connect(m_scheduledView, SIGNAL(scheduleSelected(MyMoneySchedule)), kmymoney, SLOT(slotSelectSchedule(MyMoneySchedule)));
@@ -274,7 +270,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   // Page 9
   m_reportsView = new KReportsView();
   m_reportsViewFrame = m_model->addPage(m_reportsView, i18n("Reports"));
-  m_reportsViewFrame->setIcon(KIcon("view-statistics"));
+  m_reportsViewFrame->setIcon(KIcon("office-chart-bar"));
   connect(m_reportsView, SIGNAL(ledgerSelected(QString,QString)),
           this, SLOT(slotLedgerSelected(QString,QString)));
   connect(m_reportsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
@@ -1630,7 +1626,7 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("CHF", i18n("Swiss Franc"),            "SFr"), create);
   loadDefaultCurrency(MyMoneySecurity("SYP", i18n("Syrian Pound"),           QChar(0x00A3)), create);
   loadDefaultCurrency(MyMoneySecurity("TWD", i18n("Taiwan Dollar"),          "$"), create);
-  loadDefaultCurrency(MyMoneySecurity("TJS", i18n("Tajikistan Somani")), create);
+  loadDefaultCurrency(MyMoneySecurity("TJS", i18n("Tajikistan Somoni")), create);
   loadDefaultCurrency(MyMoneySecurity("TZS", i18n("Tanzanian Shilling")), create);
   loadDefaultCurrency(MyMoneySecurity("THB", i18n("Thai Baht"),              QChar(0x0E3F)), create);
   loadDefaultCurrency(MyMoneySecurity("TOP", i18n("Tongan Pa'anga")), create);
@@ -2344,5 +2340,3 @@ QVBoxLayout* KMyMoneyViewBase::layout(void) const
 {
   return d->m_viewLayout;
 }
-
-#include "kmymoneyview.moc"

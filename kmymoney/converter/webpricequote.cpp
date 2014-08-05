@@ -961,6 +961,13 @@ void convertertest::QuoteReceiver::slotError(const QString& msg)
   m_errors += msg;
 }
 
-// vim:cin:si:ai:et:ts=2:sw=2:
-
-#include "webpricequote.moc"
+// leave this moc until we will have resolved our dependency issues
+// now 'converter' depends on 'kmymoney' a pointer to the application
+// defined in main.cpp, which makes this static library unusable without
+// the --as-needed linker flag;
+// otherwise the 'moc' methods of this object will be linked into the automoc
+// object file which contains methods from all the other objects from this
+// library, thus even if the --as-needed option is used all objects will be
+// pulled in while linking 'convertertest' which only needs the WebPriceQuote
+// object - spent a whole day investigating this
+#include "moc_webpricequote.cpp"
