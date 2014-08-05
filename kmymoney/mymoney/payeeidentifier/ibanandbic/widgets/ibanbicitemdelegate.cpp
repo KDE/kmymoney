@@ -1,6 +1,6 @@
 /*
- * <one line to give the program's name and a brief idea of what it does.>
- * Copyright (C) 2014  Christian David <c.david@christian-david.de>
+ * This file is part of KMyMoney, A Personal Finance Manager for KDE
+ * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,6 @@ void ibanBicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
   QStyleOptionViewItemV4 opt = option;
   initStyleOption(&opt, index);
 
-  //qDebug() << "row" << index.row() << "paint in " << opt.rect;
-
   // Background
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
   style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
@@ -61,7 +59,7 @@ void ibanBicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
   style->drawItemText( painter, nameRect, Qt::AlignBottom, QApplication::palette(), true, ibanBic->storedBic(), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text );
   painter->restore();
 
-  // Paint BIC
+  // Paint IBAN
   painter->save();
   QFont normal = painter->font();
   normal.setBold(true);
@@ -76,18 +74,12 @@ void ibanBicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
   QRect typeRect = style->alignedRect( opt.direction, Qt::AlignTop | Qt::AlignRight, QSize(textArea.width()/5, metrics.lineSpacing()), textArea);
   style->drawItemText( painter, typeRect, Qt::AlignTop | Qt::AlignRight, QApplication::palette(), true, i18n("IBAN & BIC"), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text);
   painter->restore();
-
-  emit sizeHintChanged(index);
 }
 
 QSize ibanBicItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
   QStyleOptionViewItemV4 opt = option;
   initStyleOption(&opt, index);
-
-  if (opt.state.testFlag(QStyle::State_HasFocus)) {
-    qDebug() << "Got QStyle::State_HasFocus in sizeHint!";
-  }
 
   // Set allways to true because QStyle::State_Editing is never set (seems to be a bug in Qt)
   if ( true || opt.state.testFlag(QStyle::State_Editing) ) {

@@ -54,3 +54,10 @@ void StyledItemDelegateForwarder::updateEditorGeometry(QWidget* editor, const QS
 {
   getItemDelegate(index)->updateEditorGeometry(editor, option, index);
 }
+
+void StyledItemDelegateForwarder::connectSignals(QAbstractItemDelegate* delegate, Qt::ConnectionType type) const
+{
+  connect(delegate, SIGNAL(commitData(QWidget*)), this, SIGNAL(commitData(QWidget*)), type);
+  connect(delegate, SIGNAL(closeEditor(QWidget*,QAbstractItemDelegate::EndEditHint)), this, SIGNAL(closeEditor(QWidget*,QAbstractItemDelegate::EndEditHint)), type);
+  connect(delegate, SIGNAL(sizeHintChanged(QModelIndex)), this, SIGNAL(sizeHintChanged(QModelIndex)), type);
+}

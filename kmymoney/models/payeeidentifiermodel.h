@@ -29,7 +29,7 @@ class payeeIdentifierModel : public QAbstractListModel
 public:
   enum roles {
     payeeIdentifierType = Qt::UserRole, /**< type of payeeIdentifier */
-    payeeIdentifierPtr = Qt::UserRole+1 /**< Pointer to acual payeeIdentifier */
+    payeeIdentifierPtr = Qt::UserRole+1 /**< Pointer to actual payeeIdentifier */
   };
 
   payeeIdentifierModel( QObject* parent = 0 );
@@ -47,7 +47,7 @@ public:
   virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
 
   virtual Qt::ItemFlags flags(const QModelIndex& index) const;
-  
+
   virtual int rowCount(const QModelIndex& parent) const;
 
   virtual bool insertRows(int row, int count, const QModelIndex& parent);

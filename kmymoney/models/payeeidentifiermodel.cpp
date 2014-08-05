@@ -70,7 +70,12 @@ bool payeeIdentifierModel::setData(const QModelIndex& index, const QVariant& val
 /** @todo make items editable if a plugin exists only */
 Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex& index) const
 {
-  return (QAbstractItemModel::flags(index) | Qt::ItemIsEditable | Qt::ItemIsDragEnabled);
+  Qt::ItemFlags flags = QAbstractItemModel::flags(index) | Qt::ItemIsDragEnabled;
+  const QString type = data(index, payeeIdentifierType).toString();
+  // type.isNull() means the type selection can be shown
+  if ( type.isNull() || payeeIdentifierLoader::instance()->hasItemEditDelegate(type) )
+    flags |= Qt::ItemIsEditable;
+  return flags;
 }
 
 int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
@@ -86,7 +91,7 @@ bool payeeIdentifierModel::insertRows(int row, int count, const QModelIndex& par
 
   beginInsertRows(parent, row+1, row+1);
   try {
-    m_payee.addPayeeIdentifier( payeeIdentifierLoader::instance()->createPayeeIdentifier("org.kmymoney.payeeIdentifier.ibanbic") );
+    m_payee.addPayeeIdentifier( payeeIdentifier::ptr() );
     MyMoneyFileTransaction transaction;
     MyMoneyFile::instance()->modifyPayee(m_payee);
     transaction.commit();

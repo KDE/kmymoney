@@ -35,17 +35,23 @@ payeeIdentifierDelegate::payeeIdentifierDelegate(QObject* parent)
 QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelIndex& index) const
 {
   static QAbstractItemDelegate* defaultDelegate = 0;
+  const QString type = index.model()->data(index, payeeIdentifierModel::payeeIdentifierType).toString();
+
+  if ( type.isNull() ) {
+    QAbstractItemDelegate* delegate = payeeIdentifierLoader::instance()->createItemDelegate("org.kmymoney.payeeIdentifier.empty", this->parent());
+    connectSignals(delegate);
+    return delegate;
+  }
 
   // Use this->parent() as parent because "this" is const
-  QAbstractItemDelegate* delegate = payeeIdentifierLoader::instance()->createItemDelegate(index.model()->data(index, payeeIdentifierModel::payeeIdentifierType).toString(), this->parent());
+  QAbstractItemDelegate* delegate = payeeIdentifierLoader::instance()->createItemDelegate(type, this->parent());
 
   if (delegate == 0) {
     if (defaultDelegate == 0)
       defaultDelegate = new QStyledItemDelegate( this->parent() );
     delegate = defaultDelegate;
   }
-
-
+  connectSignals(delegate, Qt::UniqueConnection);
   return delegate;
 }
 
@@ -70,12 +76,16 @@ void KPayeeIdentifierView::setPayee(MyMoneyPayee payee)
 }
 
 /**
- * @param index not used at the moment
+ * @param index not used at the moment, a new item is always inserted at the end
  */
 void KPayeeIdentifierView::addEntry(const QModelIndex& index)
 {
   Q_UNUSED( index );
-  ui->view->model()->insertRow(ui->view->model()->rowCount());
+  if ( ui->view->model()->insertRow(ui->view->model()->rowCount()) ) {
+    QModelIndex index = ui->view->model()->index(ui->view->model()->rowCount()-1, 0);
+    ui->view->setCurrentIndex( index );
+    ui->view->openPersistentEditor(index);
+  }
 }
 
 void KPayeeIdentifierView::removeSelected()

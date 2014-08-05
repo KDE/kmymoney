@@ -119,8 +119,6 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
         continue;
       }
       addPayeeIdentifier( ident );
-      qDebug() << "Got something " << payeeIdentifierId;
-
     }
   }
 }
@@ -160,10 +158,11 @@ bool MyMoneyPayee::operator < (const MyMoneyPayee& right) const
 
 int MyMoneyPayee::addPayeeIdentifier(const payeeIdentifier::ptr identifier)
 {
-  if (identifier.isNull())
-    throw MYMONEYEXCEPTION("Added invalid payeeIdentifier to an payee");
   const unsigned int newId = m_payeeIdentifiers.count();
-  m_payeeIdentifiers.insert( newId , identifier->cloneSharedPtr() );
+  if ( identifier.isNull() )
+    m_payeeIdentifiers.insert( newId, identifier );
+  else
+    m_payeeIdentifiers.insert( newId , identifier->cloneSharedPtr() );
   return newId;
 }
 

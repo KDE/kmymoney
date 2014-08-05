@@ -49,8 +49,17 @@ public:
    * the correct delegate where the call is forwarded to.
    *
    * @return You must return a valid item delegate.
+   * @see connectSignals()
    */
   virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex& index) const = 0;
+
+protected:
+  /**
+   * @brief Connects all signals accordingly
+   *
+   * Call this function if you create a new delegate in getItemDelegate().
+   */
+  void connectSignals( QAbstractItemDelegate* delegate, Qt::ConnectionType type = Qt::AutoConnection ) const;
 
 };
 

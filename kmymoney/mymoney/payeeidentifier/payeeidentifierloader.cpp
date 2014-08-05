@@ -20,8 +20,11 @@
 
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
+#include "payeeidentifier/emptyidentifier/empty.h"
 
 #include "payeeidentifier/ibanandbic/widgets/ibanbicitemdelegate.h"
+#include "payeeidentifier/emptyidentifier/widgets/typeselectiondelegate.h"
+#include <KLocalizedString>
 
 payeeIdentifierLoader payeeIdentifierLoader::m_self;
 
@@ -30,6 +33,7 @@ payeeIdentifierLoader::payeeIdentifierLoader()
 {
   addPayeeIdentifier( new payeeIdentifiers::ibanBic() );
   addPayeeIdentifier( new payeeIdentifiers::nationalAccount() );
+  addPayeeIdentifier( new payeeIdentifiers::empty() );
 }
 
 void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifier* const identifier)
@@ -62,6 +66,32 @@ QAbstractItemDelegate* payeeIdentifierLoader::createItemDelegate(const QString& 
 {
   if ( payeeIdentifierId == payeeIdentifiers::ibanBic::staticPayeeIdentifierId() )
     return new ibanBicItemDelegate(parent);
-
+  else if ( payeeIdentifierId == payeeIdentifiers::empty::staticPayeeIdentifierId() )
+    return new typeSelectionDelegate(parent);
   return 0;
+}
+
+bool payeeIdentifierLoader::hasItemEditDelegate(const QString& payeeIdentifierId)
+{
+  QAbstractItemDelegate* delegate = createItemDelegate(payeeIdentifierId);
+  const bool ret = ( delegate != 0 );
+  delete delegate;
+  return ret;
+}
+
+QStringList payeeIdentifierLoader::availableDelegates()
+{
+  QStringList list;
+  list << payeeIdentifiers::ibanBic::staticPayeeIdentifierId();
+  return list;
+}
+
+QString payeeIdentifierLoader::translatedDelegateName(const QString& payeeIdentifierId)
+{
+  if ( payeeIdentifierId == payeeIdentifiers::ibanBic::staticPayeeIdentifierId() )
+    return i18n("IBAN and BIC");
+  else if ( payeeIdentifierId == payeeIdentifiers::nationalAccount::staticPayeeIdentifierId() )
+    return i18n("National Account Number");
+
+  return QString();
 }

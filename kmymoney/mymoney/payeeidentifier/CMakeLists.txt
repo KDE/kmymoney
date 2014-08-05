@@ -1,5 +1,6 @@
 add_subdirectory( ibanandbic )
 add_subdirectory( nationalaccount )
+add_subdirectory( emptyidentifier )
 
 ## PayeeIdentifiers
 
@@ -33,5 +34,7 @@ target_link_libraries( kmm_payeeidentifier_loader
   payeeidentifier_iban_bic
   payeeidentifier_iban_bic_widgets
   payeeidentifier_nationalAccount
+  payeeidentifier_empty
+  payeeidentifier_empty_widgets
   ${QT_QTCORE_LIBRARY}
 )

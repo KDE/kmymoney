@@ -27,6 +27,10 @@
 
 class QAbstractItemDelegate;
 
+/**
+ *
+ * @todo Load delegates dynamically
+ */
 class KMM_MYMONEY_EXPORT payeeIdentifierLoader
 {
 public:
@@ -35,7 +39,33 @@ public:
   payeeIdentifier::ptr createPayeeIdentifier( const QString& payeeIdentifierId );
   payeeIdentifier::ptr createPayeeIdentifierFromXML( const QString& payeeIdentifierId, const QDomElement& element );
 
+  /**
+   * @brief Create a delegate to show/edit
+   *
+   * The payeeIdentifier to edit is identified by payeeIdentifierId. parent is set as parent of the created
+   * Delegate.
+   *
+   * @return a pointer to a delegate or null_ptr. Caller takes ownership.
+   */
   QAbstractItemDelegate* createItemDelegate( const QString& payeeIdentifierId, QObject* parent = 0 );
+
+  /**
+   * @brief Test if a delegate for editing is available
+   */
+  bool hasItemEditDelegate( const QString& payeeIdentifierId );
+
+  /**
+   * @brief List availableDelegates delegates
+   *
+   * @return a list of payeeIdentifierIds for which a delegate exists.
+   * @see createItemDelegate()
+   */
+  QStringList availableDelegates();
+
+  /**
+   * @brief Human readable name of a delegate for a given payeeIdentifierId
+   */
+  QString translatedDelegateName( const QString& payeeIdentifierId );
 
   /** I take ownership */
   void addPayeeIdentifier( payeeIdentifier *const identifier );
