@@ -7268,10 +7268,9 @@ void KMyMoneyApp::slotEditOnlineJob(const QString jobId)
 
 void KMyMoneyApp::slotEditOnlineJob(onlineJob job)
 {
-  Q_ASSERT(!job.isNull());
-  creditTransfer* trans = dynamic_cast<creditTransfer*>(job.task());
-  if (trans) {
+  try {
     slotEditOnlineJob( onlineJobTyped<creditTransfer>(job) );
+  } catch ( MyMoneyException& ) {
   }
 }
 
@@ -7315,7 +7314,7 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
 {
   MyMoneyFile* kmmFile = MyMoneyFile::instance();
   QMultiMap<QString, onlineJob> jobsByPlugin;
-  
+
   // Sort jobs by online plugin & lock them
   foreach(onlineJob job, jobs) {
     Q_ASSERT(job.id() != MyMoneyObject::emptyId());
@@ -7328,11 +7327,11 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
     fileTransaction.commit();
     jobsByPlugin.insert(originAcc.onlineBankingSettings().value("provider"), job);
   }
-  
+
   // Send onlineJobs to plugins
   foreach(QString pluginKey, jobsByPlugin.keys()) {
     QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_onlinePlugins.constFind(pluginKey);
-    
+
     if (it_p != d->m_onlinePlugins.constEnd() ) {
       // plugin found, call it
       KMyMoneyPlugin::OnlinePluginExtended *pluginExt = dynamic_cast< KMyMoneyPlugin::OnlinePluginExtended* >(*it_p);
@@ -7345,7 +7344,7 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
       QList<onlineJob> jobsToExecute = jobsByPlugin.values(pluginKey);
       QList<onlineJob> executedJobs = jobsToExecute;
       pluginExt->sendOnlineJob(executedJobs);
-      
+
       // Save possible changes of the online job and remove lock
       MyMoneyFileTransaction fileTransaction;
       foreach( onlineJob job, executedJobs ) {
@@ -7354,12 +7353,12 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
         kmmFile->modifyOnlineJob( job );
         fileTransaction.commit();
       }
-      
+
       if (  Q_UNLIKELY( executedJobs.size() != jobsToExecute.size() ) ) {
         // OnlinePlugin did not return all jobs
         qWarning() << "Error saving send online tasks. After restart you should see at minimum all succesfully executed jobs marked send. Imperfect plugin: " << pluginExt->objectName();
       }
-      
+
     } else {
       qWarning() << "Error, got onlineJob for a account without online plugin.";
       /** @FIXME can this actually happen? */
