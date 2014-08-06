@@ -83,6 +83,7 @@ target_link_libraries(dialogs PUBLIC KF5::ItemViews Qt5::Sql Alkimia::alkimia)
 
 # we rely on the widgets to be generated
 add_dependencies(dialogs widgets)
+target_link_libraries(dialogs LINK_PUBLIC kmm_widgets)
 
 ########### install files ###############
 

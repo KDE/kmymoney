@@ -38,6 +38,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmm_widgets_export.h"
+
 /**
   *@author Thomas Baumgart
   */
@@ -52,7 +54,7 @@
   * without having the user to re-type the data. See setInitialValues()
   * for details.
   */
-class kMyMoneyCalculator : public QFrame
+class KMM_WIDGETS_EXPORT kMyMoneyCalculator : public QFrame
 {
   Q_OBJECT
 public:

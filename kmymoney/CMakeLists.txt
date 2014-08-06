@@ -69,6 +69,7 @@ set( kmymoney_common_LIBS
   newuserwizard newaccountwizard newinvestmentwizard newloanwizard
   endingbalancedlg wizardpages
   dialogs widgets settings converter models kmm_config
+  kmm_widgets
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
   Qt5::Core Qt5::Sql
   KF5::KHtml KF5::Archive KF5::ConfigGui KF5::WidgetsAddons)

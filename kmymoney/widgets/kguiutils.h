@@ -34,10 +34,12 @@ class QWidget;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmm_widgets_export.h"
+
 /**
   * @author Tony Bloomfield
   */
-class kMandatoryFieldGroup : public QObject
+class KMM_WIDGETS_EXPORT kMandatoryFieldGroup : public QObject
 {
   Q_OBJECT
 
