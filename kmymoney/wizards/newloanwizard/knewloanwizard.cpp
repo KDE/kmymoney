@@ -63,7 +63,7 @@ KNewLoanWizard::KNewLoanWizard(QWidget *parent) :
 {
   setModal(true);
 
-  KMyMoneyGlobalSettings::setSubstringSearch(m_namePage);
+  KMyMoneyMVCCombo::setSubstringSearchForChildren(m_namePage, !KMyMoneySettings::stringMatchFromStart());
 
   // make sure, the back button does not clear fields
   setOption(QWizard::IndependentPages, true);

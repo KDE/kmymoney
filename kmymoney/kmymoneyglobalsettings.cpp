@@ -31,7 +31,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneymvccombo.h"
 #include "mymoneyforecast.h"
 
 QFont KMyMoneyGlobalSettings::listCellFont(void)
@@ -109,17 +108,6 @@ QDate KMyMoneyGlobalSettings::firstFiscalDate(void)
   if (date > QDate::currentDate())
     date.addYears(-1);
   return date;
-}
-
-void KMyMoneyGlobalSettings::setSubstringSearch(QWidget* w)
-{
-  if (w) {
-    QList<KMyMoneyMVCCombo *> comboList;
-    comboList = w->findChildren<KMyMoneyMVCCombo *>();
-    foreach (KMyMoneyMVCCombo *combo, comboList) {
-      combo->setSubstringSearch(!stringMatchFromStart());
-    }
-  }
 }
 
 MyMoneyForecast KMyMoneyGlobalSettings::forecast(void)
