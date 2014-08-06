@@ -150,7 +150,7 @@
    <default>true</default>
   </entry>
   <entry name="stringMatchFromStart" type="Bool">
-   <label>Start string matches for e.g. payees at start of string</label>
+   <label>Match strings in auto-completion only from the first letter on. A substring behind the first letter is not found.</label>
    <default>false</default>
   </entry>
   <entry name="stdTransactionFormTabOrder" type="String">
@@ -287,11 +287,11 @@
   </entry>
   <entry name="groupMarkerColor" type="Color">
    <label>Background color for group marker</label>
-   <default>255,242,155</default> 
+   <default>255,242,155</default>
   </entry>
   <entry name="requiredFieldColor" type="Color">
    <label>Background color for required fields</label>
-   <default>255,255,221</default> 
+   <default>255,255,221</default>
   </entry>
   <entry name="useSystemFont" type="Bool">
    <label>Use system font</label>

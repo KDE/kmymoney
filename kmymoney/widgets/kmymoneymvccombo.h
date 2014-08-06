@@ -99,6 +99,13 @@ public:
   void setSubstringSearch(bool enabled);
 
   /**
+    * set setSubstringSearch(enabled) of all children of widget
+    *
+    * @param widget a valid pointer (not 0)
+    */
+  static void setSubstringSearchForChildren( QWidget *const widget, bool enabled = false );
+
+  /**
     * Reimplemented for internal reasons, no API change
     */
   void setModel(QAbstractItemModel *model);

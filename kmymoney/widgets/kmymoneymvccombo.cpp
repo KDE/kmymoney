@@ -135,6 +135,16 @@ void KMyMoneyMVCCombo::setSubstringSearch(bool enabled)
   }
 }
 
+void KMyMoneyMVCCombo::setSubstringSearchForChildren(QWidget*const widget, bool enabled)
+{
+  Q_CHECK_PTR(widget);
+  QList<KMyMoneyMVCCombo *> comboList;
+  comboList = widget->findChildren<KMyMoneyMVCCombo *>();
+  foreach (KMyMoneyMVCCombo *combo, comboList) {
+    combo->setSubstringSearch(enabled);
+  }
+}
+
 void KMyMoneyMVCCombo::setModel(QAbstractItemModel *model)
 {
   if (!model)

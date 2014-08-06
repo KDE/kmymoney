@@ -4141,7 +4141,7 @@ void KMyMoneyApp::slotScheduleNew(const MyMoneyTransaction& _t, MyMoneySchedule:
   QPointer<KEditScheduleDlg> dlg = new KEditScheduleDlg(schedule, this);
   TransactionEditor* transactionEditor = dlg->startEdit();
   if (transactionEditor) {
-    KMyMoneyGlobalSettings::setSubstringSearch(dlg);
+    KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
     if (dlg->exec() == QDialog::Accepted && dlg != 0) {
       MyMoneyFileTransaction ft;
       try {
@@ -4175,7 +4175,7 @@ void KMyMoneyApp::slotScheduleEdit(void)
           sched_dlg = new KEditScheduleDlg(schedule, this);
           d->m_transactionEditor = sched_dlg->startEdit();
           if (d->m_transactionEditor) {
-            KMyMoneyGlobalSettings::setSubstringSearch(sched_dlg);
+            KMyMoneyMVCCombo::setSubstringSearchForChildren(sched_dlg, !KMyMoneySettings::stringMatchFromStart());
             if (sched_dlg->exec() == QDialog::Accepted) {
               MyMoneyFileTransaction ft;
               try {
@@ -4354,7 +4354,7 @@ KMyMoneyUtils::EnterScheduleResultCodeE KMyMoneyApp::enterSchedule(MyMoneySchedu
 
       d->m_transactionEditor = dlg->startEdit();
       if (d->m_transactionEditor) {
-        KMyMoneyGlobalSettings::setSubstringSearch(dlg);
+        KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
         MyMoneyTransaction torig, taccepted;
         d->m_transactionEditor->createTransaction(torig, dlg->transaction(),
             schedule.transaction().splits().isEmpty() ? MyMoneySplit() : schedule.transaction().splits().front(), true);
@@ -4658,7 +4658,7 @@ bool KMyMoneyApp::payeeReassign(int type)
 
       // show transaction reassignment dialog
       KPayeeReassignDlg * dlg = new KPayeeReassignDlg(static_cast<KPayeeReassignDlg::OperationType>(type), this);
-      KMyMoneyGlobalSettings::setSubstringSearch(dlg);
+      KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
       QString payee_id = dlg->show(remainingPayees);
       addToMatchList = dlg->addToMatchList();
       delete dlg; // and kill the dialog
@@ -4941,7 +4941,7 @@ void KMyMoneyApp::slotTagDelete(void)
 
       // show transaction reassignment dialog
       KTagReassignDlg * dlg = new KTagReassignDlg(this);
-      KMyMoneyGlobalSettings::setSubstringSearch(dlg);
+      KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
       QString tag_id = dlg->show(remainingTags);
       delete dlg; // and kill the dialog
       if (tag_id.isEmpty())  //FIXME-ALEX Let the user choose to not reassign a to-be deleted tag to another one.
@@ -5393,7 +5393,7 @@ void KMyMoneyApp::slotTransactionsNew(void)
     if (d->m_myMoneyView->createNewTransaction()) {
       d->m_transactionEditor = d->m_myMoneyView->startEdit(d->m_selectedTransactions);
       if (d->m_transactionEditor) {
-        KMyMoneyGlobalSettings::setSubstringSearch(d->m_myMoneyView);
+        KMyMoneyMVCCombo::setSubstringSearchForChildren(d->m_myMoneyView, !KMyMoneySettings::stringMatchFromStart());
         KMyMoneyPayeeCombo* payeeEdit = dynamic_cast<KMyMoneyPayeeCombo*>(d->m_transactionEditor->haveWidget("payee"));
         if (payeeEdit && !d->m_lastPayeeEnteredId.isEmpty()) {
           // in case we entered a new transaction before and used a payee,
@@ -5422,7 +5422,7 @@ void KMyMoneyApp::slotTransactionsEdit(void)
     // as soon as we edit a transaction, we don't remember the last payee entered
     d->m_lastPayeeEnteredId.clear();
     d->m_transactionEditor = d->m_myMoneyView->startEdit(d->m_selectedTransactions);
-    KMyMoneyGlobalSettings::setSubstringSearch(d->m_myMoneyView);
+    KMyMoneyMVCCombo::setSubstringSearchForChildren(d->m_myMoneyView, !KMyMoneySettings::stringMatchFromStart());
     slotUpdateActions();
   }
 }
@@ -5447,7 +5447,7 @@ void KMyMoneyApp::slotTransactionsEditSplits(void)
     slotUpdateActions();
 
     if (d->m_transactionEditor) {
-      KMyMoneyGlobalSettings::setSubstringSearch(d->m_myMoneyView);
+      KMyMoneyMVCCombo::setSubstringSearchForChildren(d->m_myMoneyView, !KMyMoneySettings::stringMatchFromStart());
       if (d->m_transactionEditor->slotEditSplits() == QDialog::Accepted) {
         MyMoneyFileTransaction ft;
         try {
