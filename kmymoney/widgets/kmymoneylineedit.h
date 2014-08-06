@@ -34,6 +34,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmm_widgets_export.h"
+
 /**
   * This class represents a special verson of a KLineEdit object that
   * supports the display of a hint if the display area is empty. It also
@@ -43,7 +45,7 @@
   * @author Michael Edwardes
   * @author Thomas Baumgart
   */
-class kMyMoneyLineEdit : public KLineEdit
+class KMM_WIDGETS_EXPORT kMyMoneyLineEdit : public KLineEdit
 {
   Q_OBJECT
 public:

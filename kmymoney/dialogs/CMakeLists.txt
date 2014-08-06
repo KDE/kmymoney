@@ -81,6 +81,7 @@ kde4_add_library(dialogs STATIC ${libdialogs_a_SOURCES} ${dialogs_ui_srcs})
 
 # we rely on the widgets to be generated
 add_dependencies(dialogs widgets)
+target_link_libraries(dialogs LINK_PUBLIC kmm_widgets)
 
 ########### install files ###############
 

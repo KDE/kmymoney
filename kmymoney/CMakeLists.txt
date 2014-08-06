@@ -68,6 +68,7 @@ set( kmymoney_common_LIBS
   newuserwizard newaccountwizard newinvestmentwizard newloanwizard
   endingbalancedlg wizardpages
   dialogs widgets settings converter models kmm_config
+  kmm_widgets
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
   ${QT_AND_KDECORE_LIBS} ${QT_QTSQL_LIBRARY}
   ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDEPIMLIBS_KPIMIDENTITIES_LIBS} ${KDEPIMLIBS_AKONADI_CONTACT_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KUTILS_LIBRARY})

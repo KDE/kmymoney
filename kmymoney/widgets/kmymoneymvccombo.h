@@ -41,6 +41,7 @@
 #include <mymoneysplit.h>
 #include <mymoneytransactionfilter.h>
 #include <register.h>
+#include "kmm_widgets_export.h"
 
 class QSortFilterProxyModel;
 
@@ -48,7 +49,7 @@ class QSortFilterProxyModel;
   * @author Cristian Onet
   * This class will replace the KMyMoneyCombo class when all widgets will use the MVC
   */
-class KMyMoneyMVCCombo : public KComboBox
+class KMM_WIDGETS_EXPORT KMyMoneyMVCCombo : public KComboBox
 {
   Q_OBJECT
   Q_PROPERTY(QString selectedItem READ selectedItem WRITE setSelectedItem STORED false)
@@ -182,7 +183,7 @@ private:
   *
   * @author Thomas Baumgart
   */
-class KMyMoneyPayeeCombo : public KMyMoneyMVCCombo
+class KMM_WIDGETS_EXPORT KMyMoneyPayeeCombo : public KMyMoneyMVCCombo
 
 {
   Q_OBJECT
@@ -200,7 +201,7 @@ public:
   *
   * @author Alessandro Russo
   */
-class KMyMoneyTagCombo : public KMyMoneyMVCCombo
+class KMM_WIDGETS_EXPORT KMyMoneyTagCombo : public KMyMoneyMVCCombo
 {
   Q_OBJECT
 public:
@@ -251,7 +252,7 @@ private:
   *
   * @author Alessandro Russo
   */
-class KTagContainer : public QWidget
+class KMM_WIDGETS_EXPORT KTagContainer : public QWidget
 {
   Q_OBJECT
 public:
@@ -284,7 +285,7 @@ private:
   * This class implements a combo box with the possible states for
   * reconciliation.
   */
-class KMyMoneyReconcileCombo : public KMyMoneyMVCCombo
+class KMM_WIDGETS_EXPORT KMyMoneyReconcileCombo : public KMyMoneyMVCCombo
 {
   Q_OBJECT
 public:
@@ -303,7 +304,7 @@ protected slots:
   * This class implements a combo box with the possible states for
   * actions (Deposit, Withdrawal, etc.).
   */
-class KMyMoneyCashFlowCombo : public KMyMoneyMVCCombo
+class KMM_WIDGETS_EXPORT KMyMoneyCashFlowCombo : public KMyMoneyMVCCombo
 {
   Q_OBJECT
 public:
@@ -334,7 +335,7 @@ private:
   * This class implements a combo box with the possible activities
   * for investment transactions (buy, sell, dividend, etc.)
   */
-class KMyMoneyActivityCombo : public KMyMoneyMVCCombo
+class KMM_WIDGETS_EXPORT KMyMoneyActivityCombo : public KMyMoneyMVCCombo
 {
   Q_OBJECT
 public:
@@ -358,7 +359,7 @@ private:
   MyMoneySplit::investTransactionTypeE  m_activity;
 };
 
-class KMyMoneyGeneralCombo : public KComboBox
+class KMM_WIDGETS_EXPORT KMyMoneyGeneralCombo : public KComboBox
 {
   Q_OBJECT
   Q_PROPERTY(int currentItem READ currentItem WRITE setCurrentItem STORED false)
@@ -392,7 +393,7 @@ protected slots:
  * This class implements a time period selector
  * @author Thomas Baumgart
  */
-class KMyMoneyPeriodCombo : public KMyMoneyGeneralCombo
+class KMM_WIDGETS_EXPORT KMyMoneyPeriodCombo : public KMyMoneyGeneralCombo
 {
   Q_OBJECT
 public:
@@ -424,7 +425,7 @@ public:
  *
  * @author Colin Wright
  */
-class KMyMoneyOccurrenceCombo : public KMyMoneyGeneralCombo
+class KMM_WIDGETS_EXPORT KMyMoneyOccurrenceCombo : public KMyMoneyGeneralCombo
 {
   Q_OBJECT
 public:
@@ -438,7 +439,7 @@ public:
  *
  * @author Colin Wright
  */
-class KMyMoneyOccurrencePeriodCombo : public KMyMoneyOccurrenceCombo
+class KMM_WIDGETS_EXPORT KMyMoneyOccurrencePeriodCombo : public KMyMoneyOccurrenceCombo
 {
   Q_OBJECT
 public:
@@ -450,7 +451,7 @@ public:
  * This class implements a payment frequency selector
  * @author Thomas Baumgart
  */
-class KMyMoneyFrequencyCombo : public KMyMoneyOccurrenceCombo
+class KMM_WIDGETS_EXPORT KMyMoneyFrequencyCombo : public KMyMoneyOccurrenceCombo
 {
   Q_OBJECT
 
