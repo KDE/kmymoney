@@ -42,6 +42,7 @@ add_subdirectory( pics )
 add_subdirectory( html )
 add_subdirectory( templates )
 add_subdirectory( misc )
+add_subdirectory( payeeidentifier )
 
 set( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 

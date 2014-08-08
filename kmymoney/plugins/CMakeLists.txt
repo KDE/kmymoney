@@ -75,5 +75,6 @@ install(FILES
   kmymoneyplugin.desktop
   kmymoneyimporterplugin.desktop
   kmymoney-onlinetaskui.desktop
+  kmymoney-payeeidentifierdelegate.desktop
   DESTINATION ${SERVICETYPES_INSTALL_DIR}
 )

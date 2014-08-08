@@ -1,3 +1,5 @@
+configure_file(kmymoney-ibanandbic-delegate.desktop.in kmymoney-ibanandbic-delegate.desktop)
+
 set ( IBAN_BIC_WIDGETS_SCRS
   kibanlineedit.cpp
   kbicedit.cpp
@@ -6,6 +8,7 @@ set ( IBAN_BIC_WIDGETS_SCRS
   ibanbicitemdelegate.cpp
   ibanbicitemedit.ui
   ibanbicitemedit.cpp
+  pluginfactory.cpp
 )
 
 kde4_add_ui_files(
@@ -13,7 +16,7 @@ kde4_add_ui_files(
   ibanbicitemedit.ui
 )
 
-kde4_add_library( payeeidentifier_iban_bic_widgets SHARED
+kde4_add_plugin( payeeidentifier_iban_bic_widgets
   ${IBAN_BIC_WIDGETS_SCRS}
 )
 
@@ -26,4 +29,7 @@ target_link_libraries( payeeidentifier_iban_bic_widgets
 )
 
 install(TARGETS payeeidentifier_iban_bic_widgets
-        ${INSTALL_TARGETS_DEFAULT_ARGS})
+        DESTINATION ${PLUGIN_INSTALL_DIR})
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanandbic-delegate.desktop
+        DESTINATION ${SERVICES_INSTALL_DIR})

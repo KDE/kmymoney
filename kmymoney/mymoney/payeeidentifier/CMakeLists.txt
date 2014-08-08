@@ -1,9 +1,3 @@
-add_subdirectory( ibanandbic )
-add_subdirectory( nationalaccount )
-add_subdirectory( emptyidentifier )
-
-## PayeeIdentifiers
-
 set ( PAYEEIDENTIFIER_HEADER
   payeeidentifier.h
 )

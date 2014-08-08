@@ -24,7 +24,12 @@
 
 #include "payeeidentifier/ibanandbic/widgets/ibanbicitemdelegate.h"
 #include "payeeidentifier/emptyidentifier/widgets/typeselectiondelegate.h"
+
+#include <QDebug>
+#include <QAbstractItemDelegate>
+
 #include <KLocalizedString>
+#include <KServiceTypeTrader>
 
 payeeIdentifierLoader payeeIdentifierLoader::m_self;
 
@@ -67,12 +72,15 @@ payeeIdentifier::ptr payeeIdentifierLoader::createPayeeIdentifierFromXML(const Q
  */
 QAbstractItemDelegate* payeeIdentifierLoader::createItemDelegate(const QString& payeeIdentifierId, QObject* parent)
 {
-#if 0
-  if ( payeeIdentifierId == payeeIdentifiers::ibanBic::staticPayeeIdentifierId() )
-    return new ibanBicItemDelegate(parent);
-  else if ( payeeIdentifierId == payeeIdentifiers::empty::staticPayeeIdentifierId() )
-    return new typeSelectionDelegate(parent);
-#endif
+  /** @todo escape ' in  payeeIdentifierId */
+  KService::List offers = KServiceTypeTrader::self()->query(QLatin1String("KMyMoney/PayeeIdentifierDelegate"), QString("'%1' ~in [X-KMyMoney-payeeIdentifierIds]").arg(payeeIdentifierId));
+  qDebug() << "Got sooo many offers:" << QString("'%1' ~in [X-KMyMoney-payeeIdentifierIds]").arg(payeeIdentifierId) << offers;
+  if ( !offers.isEmpty() ) {
+    QString error;
+    QAbstractItemDelegate* ptr = offers.at(0)->createInstance<QAbstractItemDelegate>(parent, QVariantList(), &error);
+    qDebug() << "My ptr" << ptr << offers.at(0)->library() << offers.at(0)->pluginKeyword() << error;
+    return ptr;
+  }
   return 0;
 }
 

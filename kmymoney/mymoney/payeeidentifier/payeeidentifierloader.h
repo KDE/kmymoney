@@ -20,10 +20,11 @@
 #define PAYEEIDENTIFIERLOADER_H
 
 #include "mymoney/kmm_mymoney_export.h"
-#include "payeeidentifier/payeeidentifier.h"
 
 #include <QHash>
 #include <QDomElement>
+
+#include "payeeidentifier/payeeidentifier.h"
 
 class QAbstractItemDelegate;
 

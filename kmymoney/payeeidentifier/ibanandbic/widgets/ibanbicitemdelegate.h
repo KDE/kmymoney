@@ -28,7 +28,7 @@ class IBAN_BIC_IDENTIFIER_EXPORT ibanBicItemDelegate : public QStyledItemDelegat
 {
   Q_OBJECT
 public:
-  ibanBicItemDelegate(QObject* parent);
+  ibanBicItemDelegate(QObject* parent, const QVariantList& options = QVariantList());
   virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
   virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
   virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
