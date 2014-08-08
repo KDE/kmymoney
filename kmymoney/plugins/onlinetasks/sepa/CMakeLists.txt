@@ -26,10 +26,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepaordersui.desktop.in ${CM
 
 target_link_libraries( konlinetasks_sepa
   kmm_mymoney
-  kmymoney_base
-  kmymoney_common
   kmm_widgets
-  widgets
   kmm_config
   kmm_plugin
   kmm_utils_validators

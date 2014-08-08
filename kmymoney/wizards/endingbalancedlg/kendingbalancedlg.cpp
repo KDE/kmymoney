@@ -130,7 +130,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
   connect(m_interestChargeCheckings->m_chargesCategoryEdit, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateChargesCategory(QString,QString&)));
   connect(m_interestChargeCheckings->m_payeeEdit, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createPayee(QString,QString&)));
 
-  KMyMoneyGlobalSettings::setSubstringSearch(m_interestChargeCheckings);
+  KMyMoneyMVCCombo::setSubstringSearchForChildren(m_interestChargeCheckings, !KMyMoneySettings::stringMatchFromStart());
 
   slotReloadEditWidgets();
 

@@ -62,12 +62,17 @@ payeeIdentifier::ptr payeeIdentifierLoader::createPayeeIdentifierFromXML(const Q
   return payeeIdentifier::ptr();
 }
 
+/**
+ * @todo enable delegates again
+ */
 QAbstractItemDelegate* payeeIdentifierLoader::createItemDelegate(const QString& payeeIdentifierId, QObject* parent)
 {
+#if 0
   if ( payeeIdentifierId == payeeIdentifiers::ibanBic::staticPayeeIdentifierId() )
     return new ibanBicItemDelegate(parent);
   else if ( payeeIdentifierId == payeeIdentifiers::empty::staticPayeeIdentifierId() )
     return new typeSelectionDelegate(parent);
+#endif
   return 0;
 }
 

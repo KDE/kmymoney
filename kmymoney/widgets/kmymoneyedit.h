@@ -41,6 +41,8 @@ class KHBox;
 
 #include <kmymoneylineedit.h>
 #include <mymoneysecurity.h>
+#include "kmm_widgets_export.h"
+
 class MyMoneyMoney;
 class kMyMoneyCalculator;
 
@@ -51,7 +53,7 @@ class kMyMoneyCalculator;
   *
   * @author Thomas Baumgart
   */
-class kMyMoneyMoneyValidator : public QDoubleValidator
+class KMM_WIDGETS_EXPORT kMyMoneyMoneyValidator : public QDoubleValidator
 {
   Q_OBJECT
 
@@ -86,7 +88,7 @@ public:
   *
   * @author Michael Edwardes, Thomas Baumgart
   */
-class kMyMoneyEdit : public KHBox
+class KMM_WIDGETS_EXPORT kMyMoneyEdit : public KHBox
 {
   Q_OBJECT
   Q_PROPERTY(bool calculatorButtonVisibility READ isCalculatorButtonVisible WRITE setCalculatorButtonVisible)

@@ -30,6 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmm_widgets_export.h"
 #include <mymoneyutils.h>
 
 class QHBoxLayout;
@@ -49,7 +50,7 @@ class QHBoxLayout;
   *   out of the set of displayed items. Selection is performed
   *   by marking the item in the view.
   */
-class KMyMoneySelector : public QWidget
+class KMM_WIDGETS_EXPORT KMyMoneySelector : public QWidget
 {
   Q_OBJECT
   Q_PROPERTY(QStringList selectedItems READ selectedItems DESIGNABLE false STORED false)

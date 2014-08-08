@@ -25,15 +25,29 @@ set(kmm_widgets_sources
   kmymoneydateinput.cpp
   kmymoneyvalidationfeedback.cpp
   styleditemdelegateforwarder.cpp
+  kmymoneyedit.cpp
+  kmymoneylineedit.cpp
+  kmymoneytextedit.cpp
+  kmymoneymvccombo.cpp
+  kmymoneyselector.cpp
+  kmymoneycalculator.cpp
+  kguiutils.cpp
   )
 
 kde4_add_ui_files(kmm_widgets_sources kmymoneyvalidationfeedback.ui)
 
 kde4_add_library(kmm_widgets SHARED ${kmm_widgets_sources})
-target_link_libraries(kmm_widgets LINK_PUBLIC ${KDE4_KDEUI_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDECORE_LIBS})
+target_link_libraries(kmm_widgets LINK_PUBLIC ${KDE4_KDEUI_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDECORE_LIBS}
+  kmm_config
+  kmm_mymoney
+)
+
 set_target_properties(kmm_widgets PROPERTIES
    COMPILE_FLAGS "-DKMM_BUILD_WIDGETS_LIB"
    VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+
+generate_export_header(kmm_widgets)
+
 install(TARGETS kmm_widgets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### Basic Widget Library (kmymoney_base) STATIC #################
@@ -43,19 +57,12 @@ install(TARGETS kmm_widgets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 set(_uncritial_common_sources
   fixedcolumntreeview.cpp
   kbudgetvalues.cpp
-  kguiutils.cpp
   kmymoneyaccountcombo.cpp
   kmymoneyaccountselector.cpp
   kmymoneyaccounttreeview.cpp
-  kmymoneycalculator.cpp
   kmymoneycombo.cpp
   kmymoneycompletion.cpp
   kmymoneydatetbl.cpp
-  kmymoneyedit.cpp
-  kmymoneylineedit.cpp
-  kmymoneytextedit.cpp
-  kmymoneymvccombo.cpp
-  kmymoneyselector.cpp
   kmymoneytitlelabel.cpp
   kmymoneywizard.cpp
   kpricetreeitem.cpp
@@ -163,6 +170,6 @@ add_dependencies(widgets kmm_config)
 
 ########### install files ###############
 
-install(FILES ${kmymoney_STAT_HEADERS}
+install(FILES ${kmymoney_STAT_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/kmm_widgets_export.h
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 

@@ -20,6 +20,7 @@
 #define KMYMONEYTEXTEDIT_H
 
 #include <KTextEdit>
+#include "kmm_widgets_export.h"
 
 class KMyMoneyTextEditHighlighter;
 
@@ -30,7 +31,7 @@ class KMyMoneyTextEditHighlighter;
  * Used to set constraints on input. It allows to set readOnly property by
  * slots as well (not possible with KTextEdit).
  */
-class KMyMoneyTextEdit : public KTextEdit
+class KMM_WIDGETS_EXPORT KMyMoneyTextEdit : public KTextEdit
 {
   Q_OBJECT
 

@@ -89,6 +89,7 @@ target_link_libraries(dialogs
 
 # we rely on the widgets to be generated
 add_dependencies(dialogs widgets)
+target_link_libraries(dialogs LINK_PUBLIC kmm_widgets)
 
 
 ########### install files ###############
