@@ -16,14 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "typeselectiondelegate.h"
+#include "payeeidentifierselectiondelegate.h"
 
 #include <KLocalizedString>
 
 #include "payeeidentifier/payeeidentifierloader.h"
 #include "models/payeeidentifiermodel.h"
 
-#include <QDebug>
 
 payeeIdentifierTypeSelectionWidget::payeeIdentifierTypeSelectionWidget(QWidget* parent)
   : QComboBox(parent)
@@ -39,12 +38,12 @@ void payeeIdentifierTypeSelectionWidget::itemSelected(int index)
   }
 }
 
-typeSelectionDelegate::typeSelectionDelegate(QObject* parent)
+payeeIdentifierSelectionDelegate::payeeIdentifierSelectionDelegate(QObject* parent)
   : QStyledItemDelegate(parent)
 {
 }
 
-QWidget* typeSelectionDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
+QWidget* payeeIdentifierSelectionDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
   payeeIdentifierTypeSelectionWidget* comboBox = new payeeIdentifierTypeSelectionWidget(parent);
   comboBox->setFrame(false);
@@ -59,7 +58,7 @@ QWidget* typeSelectionDelegate::createEditor(QWidget* parent, const QStyleOption
   return comboBox;
 }
 
-void typeSelectionDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
+void payeeIdentifierSelectionDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
 {
   QComboBox *const comboBox = qobject_cast<QComboBox*>(editor);
   const QString selectedPidid = comboBox->model()->data(comboBox->model()->index(comboBox->currentIndex(), 0 ), Qt::UserRole).toString();
@@ -67,12 +66,12 @@ void typeSelectionDelegate::setModelData(QWidget* editor, QAbstractItemModel* mo
   model->setData(index, QVariant::fromValue<payeeIdentifier::ptr>(ident), payeeIdentifierModel::payeeIdentifierPtr);
 }
 
-void typeSelectionDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& /*index*/) const
+void payeeIdentifierSelectionDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& /*index*/) const
 {
   editor->setGeometry(option.rect);
 }
 
-QSize typeSelectionDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
+QSize payeeIdentifierSelectionDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     return QStyledItemDelegate::sizeHint(option, index);
 }

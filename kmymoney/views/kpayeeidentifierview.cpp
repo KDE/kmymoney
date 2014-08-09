@@ -25,6 +25,7 @@
 
 #include "payeeidentifier/payeeidentifierloader.h"
 #include "payeeidentifiermodel.h"
+#include "payeeidentifierselectiondelegate.h"
 
 payeeIdentifierDelegate::payeeIdentifierDelegate(QObject* parent)
   : StyledItemDelegateForwarder(parent)
@@ -38,7 +39,7 @@ QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelInde
   const QString type = index.model()->data(index, payeeIdentifierModel::payeeIdentifierType).toString();
 
   if ( type.isNull() ) {
-    QAbstractItemDelegate* delegate = payeeIdentifierLoader::instance()->createItemDelegate("org.kmymoney.payeeIdentifier.empty", this->parent());
+    QAbstractItemDelegate* delegate = new payeeIdentifierSelectionDelegate(this->parent());
     connectSignals(delegate);
     return delegate;
   }

@@ -32,11 +32,6 @@ payeeIdentifierModel::payeeIdentifierModel( QObject* parent )
 
 QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 {
-  // The custom delegates wont ask for this role
-  if (role == Qt::DisplayRole) {
-    return QVariant::fromValue( i18n("The plugin to show this information could not be found.") );
-  }
-
   payeeIdentifier::constPtr ident = m_payee.payeeIdentifiers().values().at(index.row());
 
   if ( role == payeeIdentifierPtr) {
@@ -45,6 +40,9 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
     return QVariant();
   } else if ( role == payeeIdentifierType) {
     return ident->payeeIdentifierId();
+  } else if (role == Qt::DisplayRole) {
+    // The custom delegates won't ask for this role
+    return QVariant::fromValue( i18n("The plugin to show this information could not be found.") );
   }
   return QVariant();
 }

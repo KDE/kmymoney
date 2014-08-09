@@ -22,14 +22,12 @@
 #include <QStyledItemDelegate>
 #include <QComboBox>
 
-#include "../emptyidentifiermacros.h"
-
-class EMPTY_IDENTIFIER_EXPORT typeSelectionDelegate : public QStyledItemDelegate
+class payeeIdentifierSelectionDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
 
 public:
-  typeSelectionDelegate(QObject* parent = 0);
+  payeeIdentifierSelectionDelegate(QObject* parent = 0);
   virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
   virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
   virtual void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const;

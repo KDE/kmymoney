@@ -23,6 +23,7 @@ set(libviews_a_SOURCES
   ktagsview.cpp
   konlinejoboutbox.cpp
   kpayeeidentifierview.cpp
+  payeeidentifierselectiondelegate.cpp
   )
 
 set(libviews_a_HEADER kmymoneyview.h)

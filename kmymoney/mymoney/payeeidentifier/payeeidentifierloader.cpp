@@ -22,9 +22,6 @@
 
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
-#include "payeeidentifier/emptyidentifier/empty.h"
-
-#include "payeeidentifier/emptyidentifier/widgets/typeselectiondelegate.h"
 
 #include <QDebug>
 #include <QAbstractItemDelegate>
@@ -39,7 +36,6 @@ payeeIdentifierLoader::payeeIdentifierLoader()
 {
   addPayeeIdentifier( new payeeIdentifiers::ibanBic() );
   addPayeeIdentifier( new payeeIdentifiers::nationalAccount() );
-  addPayeeIdentifier( new payeeIdentifiers::empty() );
 }
 
 void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifier* const identifier)
@@ -94,12 +90,13 @@ bool payeeIdentifierLoader::hasItemEditDelegate(const QString& payeeIdentifierId
   return ret;
 }
 
-/** @todo use KService */
 QStringList payeeIdentifierLoader::availableDelegates()
 {
-  Q_ASSERT(false);
   QStringList list;
-  list << payeeIdentifiers::ibanBic::staticPayeeIdentifierId();
+  KService::List offers = KServiceTypeTrader::self()->query(QLatin1String("KMyMoney/PayeeIdentifierDelegate"));
+  foreach (KService::Ptr offer, offers) {
+    list.append( offer->property("X-KMyMoney-payeeIdentifierIds", QVariant::StringList).toStringList() );
+  }
   return list;
 }
 
