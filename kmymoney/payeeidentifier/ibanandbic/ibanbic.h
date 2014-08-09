@@ -120,6 +120,12 @@ public:
    */
   QString fullStoredBic() const;
 
+  /**
+   * @brief Lookup institutions name
+   *
+   * Uses any available information to return an institutionName
+   */
+  QString institutionName() const { return institutionNameByBic(bic()); }
 
   virtual bool operator==(const payeeIdentifier& other) const;
   bool operator==(const ibanBic& other) const;

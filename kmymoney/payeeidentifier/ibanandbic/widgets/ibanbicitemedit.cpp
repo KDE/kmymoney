@@ -17,6 +17,7 @@
  */
 
 #include "ibanbicitemedit.h"
+#include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "ui_ibanbicitemedit.h"
 
 ibanBicItemEdit::ibanBicItemEdit(QWidget* parent)
@@ -46,5 +47,5 @@ void ibanBicItemEdit::setBic(QString bic)
 
 void ibanBicItemEdit::setIban(QString iban)
 {
-  ui->ibanEdit->setText( iban );
+  ui->ibanEdit->setText( payeeIdentifiers::ibanBic::ibanToPaperformat(iban) );
 }
