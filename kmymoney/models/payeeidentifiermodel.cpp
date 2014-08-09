@@ -18,10 +18,11 @@
 
 #include "payeeidentifiermodel.h"
 #include "mymoney/mymoneyfile.h"
-#include <payeeidentifier/ibanandbic/ibanbic.h>
-#include <payeeidentifier/payeeidentifierloader.h>
+#include "payeeidentifier/payeeidentifierloader.h"
 
 #include <QDebug>
+
+#include <KLocalizedString>
 
 payeeIdentifierModel::payeeIdentifierModel( QObject* parent )
   : QAbstractListModel(parent),
@@ -31,13 +32,18 @@ payeeIdentifierModel::payeeIdentifierModel( QObject* parent )
 
 QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 {
+  // The custom delegates wont ask for this role
+  if (role == Qt::DisplayRole) {
+    return QVariant::fromValue( i18n("The plugin to show this information could not be found.") );
+  }
+
   payeeIdentifier::constPtr ident = m_payee.payeeIdentifiers().values().at(index.row());
 
   if ( role == payeeIdentifierPtr) {
     return QVariant::fromValue<payeeIdentifier::constPtr>(ident);
   } else if ( ident.isNull() ) {
     return QVariant();
-  } else if ( role == payeeIdentifierType || role == Qt::DisplayRole) {
+  } else if ( role == payeeIdentifierType) {
     return ident->payeeIdentifierId();
   }
   return QVariant();
