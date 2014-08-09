@@ -25,3 +25,5 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmymoneynationalaccountnumberplugin.de
 #if( KDE4_BUILD_TESTS )
 #  add_subdirectory(tests)
 #endif()
+
+add_subdirectory( ui )
