@@ -74,11 +74,12 @@ QAbstractItemDelegate* payeeIdentifierLoader::createItemDelegate(const QString& 
 {
   /** @todo escape ' in  payeeIdentifierId */
   KService::List offers = KServiceTypeTrader::self()->query(QLatin1String("KMyMoney/PayeeIdentifierDelegate"), QString("'%1' ~in [X-KMyMoney-payeeIdentifierIds]").arg(payeeIdentifierId));
-  qDebug() << "Got sooo many offers:" << QString("'%1' ~in [X-KMyMoney-payeeIdentifierIds]").arg(payeeIdentifierId) << offers;
   if ( !offers.isEmpty() ) {
     QString error;
     QAbstractItemDelegate* ptr = offers.at(0)->createInstance<QAbstractItemDelegate>(parent, QVariantList(), &error);
-    qDebug() << "My ptr" << ptr << offers.at(0)->library() << offers.at(0)->pluginKeyword() << error;
+    if ( ptr == 0 ) {
+      qWarning() << "could not load delegate" << error << payeeIdentifierId;
+    }
     return ptr;
   }
   return 0;
