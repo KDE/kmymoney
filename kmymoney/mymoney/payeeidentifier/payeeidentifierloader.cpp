@@ -18,11 +18,12 @@
 
 #include "payeeidentifier/payeeidentifierloader.h"
 
+#include "payeeidentifier/unavailableplugin/unavailableplugin.h"
+
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "payeeidentifier/emptyidentifier/empty.h"
 
-#include "payeeidentifier/ibanandbic/widgets/ibanbicitemdelegate.h"
 #include "payeeidentifier/emptyidentifier/widgets/typeselectiondelegate.h"
 
 #include <QDebug>
@@ -64,7 +65,7 @@ payeeIdentifier::ptr payeeIdentifierLoader::createPayeeIdentifierFromXML(const Q
     return payeeIdentifier::ptr( newIdent );
   }
 
-  return payeeIdentifier::ptr();
+  return payeeIdentifier::ptr( new payeeIdentifiers::payeeIdentifierUnavailable(element) );
 }
 
 /**
@@ -93,8 +94,10 @@ bool payeeIdentifierLoader::hasItemEditDelegate(const QString& payeeIdentifierId
   return ret;
 }
 
+/** @todo use KService */
 QStringList payeeIdentifierLoader::availableDelegates()
 {
+  Q_ASSERT(false);
   QStringList list;
   list << payeeIdentifiers::ibanBic::staticPayeeIdentifierId();
   return list;

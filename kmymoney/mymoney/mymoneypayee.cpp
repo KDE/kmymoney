@@ -216,6 +216,8 @@ void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
   foreach( payeeIdentifier::ptr ident, m_payeeIdentifiers ) {
     if ( !ident.isNull() ) {
       QDomElement identElement = document.createElement("payeeIdentifier");
+      // Important: type must be set before calling ident->writeXML()
+      // the plugin for unavailable plugins must be able to set type itself
       identElement.setAttribute("type", ident->payeeIdentifierId());
       ident->writeXML(document, identElement);
       el.appendChild(identElement);

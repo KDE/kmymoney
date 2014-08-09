@@ -26,9 +26,8 @@ add_library( kmm_payeeidentifier_loader STATIC
 
 target_link_libraries( kmm_payeeidentifier_loader
   payeeidentifier_iban_bic
-  #payeeidentifier_iban_bic_widgets
   payeeidentifier_nationalAccount
   payeeidentifier_empty
-  #payeeidentifier_empty_widgets
+  payeeidentifier_unavailable
   ${QT_QTCORE_LIBRARY}
 )
