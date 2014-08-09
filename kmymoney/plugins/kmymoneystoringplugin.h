@@ -1,6 +1,6 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager for KDE
- * Copyright (C) 2014 Christian David <christian-david@web.de>
+ * This file is part of KMyMoney, A Personal Finance Manager f*or KDE
+ * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,26 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef IBANVALIDATOR_H
-#define IBANVALIDATOR_H
+#ifndef KMYMONEYSTORINGPLUGIN_H
+#define KMYMONEYSTORINGPLUGIN_H
 
-#include "payeeidentifier_iban_bic_widgets_export.h"
+#include <QString>
 
-#include <QtGui/QValidator>
-
-#include "kmymoneyvalidationfeedback.h"
-
-class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT ibanValidator : public QValidator
+/**
+ * @brief Interface for plugins which store data
+ *
+ */
+class KMyMoneyStoringPlugin
 {
-  Q_OBJECT
-
 public:
-  explicit ibanValidator(QObject* parent = 0);
-  virtual State validate(QString& , int&) const;
-  virtual void fixup(QString&) const;
-
-signals:
-  void feedback(KMyMoneyValidationFeedback::MessageType type, QString message) const;
+  /**
+   * @brief Setup database to make it usable by the plugins
+   *
+   * Use @c QSqlDatabase::database(connectionName); to get a database connection.
+   */
+  bool setupDatabase( const QString& connectionName ) = 0;
+  bool uninstallPlugin( const QString& connectionName ) = 0;
 };
 
-#endif // IBANVALIDATOR_H
+#endif // KMYMONEYSTORINGPLUGIN_H

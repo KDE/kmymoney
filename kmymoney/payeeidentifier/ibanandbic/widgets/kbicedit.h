@@ -22,12 +22,12 @@
 #include <QtGui/QValidator>
 #include <KLineEdit>
 
-#include "../ibanbicmacros.h"
+#include "payeeidentifier_iban_bic_widgets_export.h"
 #include "kmymoneyvalidationfeedback.h"
 
 class QAbstractItemDelegate;
 
-class IBAN_BIC_IDENTIFIER_EXPORT KBicEdit : public KLineEdit
+class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT KBicEdit : public KLineEdit
 {
   Q_OBJECT
 

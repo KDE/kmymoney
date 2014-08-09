@@ -19,7 +19,7 @@
 #ifndef KIBANLINEEDIT_H
 #define KIBANLINEEDIT_H
 
-#include "../ibanbicmacros.h"
+#include "payeeidentifier_iban_bic_widgets_export.h"
 
 #include <KLineEdit>
 
@@ -28,7 +28,7 @@
 class ibanValidator;
 
 
-class IBAN_BIC_IDENTIFIER_EXPORT KIbanLineEdit : public KLineEdit
+class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT KIbanLineEdit : public KLineEdit
 {
   Q_OBJECT
 

@@ -20,9 +20,10 @@
 #define BICVALIDATOR_H
 
 #include <QtGui/QValidator>
+#include "payeeidentifier_iban_bic_widgets_export.h"
 #include "kmymoneyvalidationfeedback.h"
 
-class bicValidator : public QValidator
+class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT bicValidator : public QValidator
 {
   Q_OBJECT
 
