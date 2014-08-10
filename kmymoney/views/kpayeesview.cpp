@@ -55,6 +55,7 @@
 #include <kapplication.h>
 #include <keditlistbox.h>
 #include <khelpclient.h>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -214,7 +215,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(m_filterBox, SIGNAL(currentIndexChanged(int)), this, SLOT(slotChangeFilter(int)));
 
   // use the size settings of the last run (if any)
-  KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
   m_splitter->restoreState(grp.readEntry("KPayeesViewSplitterSize", QByteArray()));
   m_splitter->setChildrenCollapsible(false);
 
@@ -230,7 +231,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
 KPayeesView::~KPayeesView()
 {
   // remember the splitter settings for startup
-  KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
   grp.writeEntry("KPayeesViewSplitterSize", m_splitter->saveState());
   grp.sync();
 }

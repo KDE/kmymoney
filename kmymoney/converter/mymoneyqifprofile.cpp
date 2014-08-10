@@ -32,6 +32,7 @@
 #include <klocale.h>
 #include <kcalendarsystem.h>
 #include <KConfigGroup>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -189,7 +190,7 @@ void MyMoneyQifProfile::clear(void)
 
 void MyMoneyQifProfile::loadProfile(const QString& name)
 {
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group(name);
 
   clear();
@@ -235,7 +236,7 @@ void MyMoneyQifProfile::loadProfile(const QString& name)
 void MyMoneyQifProfile::saveProfile(void)
 {
   if (m_isDirty == true) {
-    KSharedConfigPtr config = KGlobal::config();
+    KSharedConfigPtr config = KSharedConfig::openConfig();
     KConfigGroup grp = config->group(m_profileName);
 
     grp.writeEntry("Description", m_profileDescription);

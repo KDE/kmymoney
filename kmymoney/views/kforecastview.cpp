@@ -32,6 +32,7 @@
 #include <KTextEdit>
 #include <kglobal.h>
 #include <kicon.h>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -62,7 +63,7 @@ KForecastView::KForecastView(QWidget *parent) :
   for (int i = 0; i < MaxViewTabs; ++i)
     m_needReload[i] = false;
 
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
   m_tab->setCurrentIndex(grp.readEntry("KForecastView_LastType", 0));
 
@@ -104,7 +105,7 @@ void KForecastView::slotTabChanged(QWidget* _tab)
   ForecastViewTab tab = static_cast<ForecastViewTab>(m_tab->indexOf(_tab));
 
   // remember this setting for startup
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
   grp.writeEntry("KForecastView_LastType", QVariant(tab).toString());
 

@@ -52,6 +52,7 @@
 #include <transactioneditor.h>
 #include <investtransactioneditor.h>
 #include <kmymoneyedit.h>
+#include <KSharedConfig>
 #include "kaccountselectdlg.h"
 #include "transactionmatcher.h"
 #include "kenterscheduledlg.h"
@@ -472,7 +473,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   messages += QString();
 
   // remove the Don't ask again entries
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
   QStringList::ConstIterator it;
 

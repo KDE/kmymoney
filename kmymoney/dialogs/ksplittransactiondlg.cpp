@@ -42,6 +42,7 @@
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
 #include <kapplication.h>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -127,7 +128,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   transactionsTable->setup(priceInfo);
 
   QSize size(width(), height());
-  KConfigGroup grp = KGlobal::config()->group("SplitTransactionEditor");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("SplitTransactionEditor");
   size = grp.readEntry("Geometry", size);
   size.setHeight(size.height() - 1);
   KDialog::resize(size.expandedTo(minimumSizeHint()));
@@ -143,7 +144,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
 
 KSplitTransactionDlg::~KSplitTransactionDlg()
 {
-  KConfigGroup grp =  KGlobal::config()->group("SplitTransactionEditor");
+  KConfigGroup grp =  KSharedConfig::openConfig()->group("SplitTransactionEditor");
   grp.writeEntry("Geometry", size());
 }
 

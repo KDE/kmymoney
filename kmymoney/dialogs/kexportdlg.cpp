@@ -41,6 +41,7 @@
 #include <kconfiggroup.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -137,7 +138,7 @@ void KExportDlg::loadProfiles(const bool selectLast)
   m_profileComboBox->clear();
 
   QStringList list;
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Profiles");
 
   list = grp.readEntry("profiles", QStringList());
@@ -163,7 +164,7 @@ void KExportDlg::slotOkClicked()
 
 void KExportDlg::readConfig(void)
 {
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup kgrp = kconfig->group("Last Use Settings");
   m_qlineeditFile->setText(kgrp.readEntry("KExportDlg_LastFile"));
   m_qcheckboxAccount->setChecked(kgrp.readEntry("KExportDlg_AccountOpt", true));
@@ -176,7 +177,7 @@ void KExportDlg::readConfig(void)
 
 void KExportDlg::writeConfig(void)
 {
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup grp = kconfig->group("Last Use Settings");
   grp.writeEntry("KExportDlg_LastFile", m_qlineeditFile->text());
   grp.writeEntry("KExportDlg_AccountOpt", m_qcheckboxAccount->isChecked());

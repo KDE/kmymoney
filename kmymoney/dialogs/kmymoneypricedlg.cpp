@@ -36,6 +36,7 @@
 #include <kmessagebox.h>
 #include <kglobal.h>
 #include <kicon.h>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -98,7 +99,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
 
   //get the price precision
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup grp =  kconfig->group("General Options");
   m_pricePrecision = grp.readEntry("PricePrecision", 4);
 

@@ -42,6 +42,7 @@
 #include <KConfigGroup>
 #include <kprocess.h>
 #include <kencodingprober.h>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -518,7 +519,7 @@ const QStringList WebPriceQuote::quoteSources(const _quoteSystemE _system)
 
 const QStringList WebPriceQuote::quoteSourcesNative()
 {
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   QStringList groups = kconfig->groupList();
 
   QStringList::Iterator it;
@@ -606,7 +607,7 @@ WebPriceQuoteSource::WebPriceQuoteSource(const QString& name, const QString& url
 WebPriceQuoteSource::WebPriceQuoteSource(const QString& name)
 {
   m_name = name;
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup grp = kconfig->group(QString("Online-Quote-Source-%1").arg(m_name));
   m_sym = grp.readEntry("SymbolRegex");
   m_date = grp.readEntry("DateRegex");
@@ -618,7 +619,7 @@ WebPriceQuoteSource::WebPriceQuoteSource(const QString& name)
 
 void WebPriceQuoteSource::write(void) const
 {
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup grp = kconfig->group(QString("Online-Quote-Source-%1").arg(m_name));
   grp.writeEntry("URL", m_url);
   grp.writeEntry("PriceRegex", m_price);
@@ -640,7 +641,7 @@ void WebPriceQuoteSource::rename(const QString& name)
 
 void WebPriceQuoteSource::remove(void) const
 {
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   kconfig->deleteGroup(QString("Online-Quote-Source-%1").arg(m_name));
 }
 

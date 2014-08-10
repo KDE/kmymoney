@@ -44,6 +44,8 @@
 #include <kinputdialog.h>
 #include <kio/netaccess.h>
 #include <KConfigGroup>
+#include <KSharedConfig>
+
 // ----------------------------------------------------------------------------
 // Project Headers
 
@@ -480,7 +482,7 @@ bool MyMoneyQifReader::finishImport(void)
   m_file = 0;
 
   // remove the Don't ask again entries
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
   QStringList::ConstIterator it;
 
@@ -500,7 +502,7 @@ bool MyMoneyQifReader::finishImport(void)
     m_file = 0;
 
     // remove the Don't ask again entries
-    KSharedConfigPtr config = KGlobal::config();
+    KSharedConfigPtr config = KSharedConfig::openConfig();
     KConfigGroup grp = config->group(QString::fromLatin1("Notification Messages"));
     QStringList::ConstIterator it;
 

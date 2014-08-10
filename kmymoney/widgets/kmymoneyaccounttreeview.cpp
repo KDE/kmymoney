@@ -32,6 +32,7 @@
 #include <KGlobal>
 #include <KConfig>
 #include <KConfigGroup>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -49,7 +50,7 @@ KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
 KMyMoneyAccountTreeView::~KMyMoneyAccountTreeView()
 {
   if (!m_groupName.isEmpty()) {
-    KConfigGroup grp = KGlobal::config()->group(m_groupName);
+    KConfigGroup grp = KSharedConfig::openConfig()->group(m_groupName);
     QByteArray columns = header()->saveState();
     grp.writeEntry("HeaderState", columns);
   }
@@ -63,7 +64,7 @@ void KMyMoneyAccountTreeView::setConfigGroupName(const QString& group)
   if (!group.isEmpty()) {
     m_groupName = group;
     // restore the headers
-    KConfigGroup grp = KGlobal::config()->group(m_groupName);
+    KConfigGroup grp = KSharedConfig::openConfig()->group(m_groupName);
     QByteArray columns;
     columns = grp.readEntry("HeaderState", columns);
     header()->restoreState(columns);

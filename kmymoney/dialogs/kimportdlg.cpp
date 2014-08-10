@@ -50,6 +50,7 @@
 
 #include "kmymoneyutils.h"
 #include <mymoneyfile.h>
+#include <KSharedConfig>
 #include "mymoneyqifprofileeditor.h"
 #include "mymoneyqifprofile.h"
 
@@ -130,7 +131,7 @@ void KImportDlg::slotOkClicked()
 
 void KImportDlg::readConfig(void)
 {
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup kgrp = kconfig->group("Last Use Settings");
   m_qlineeditFile->setText(kgrp.readEntry("KImportDlg_LastFile"));
 
@@ -138,7 +139,7 @@ void KImportDlg::readConfig(void)
 
 void KImportDlg::writeConfig(void)
 {
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup grp = kconfig->group("Last Use Settings");
   grp.writeEntry("KImportDlg_LastFile", m_qlineeditFile->text());
   grp.writeEntry("KImportDlg_LastProfile", m_profileComboBox->currentText());
@@ -184,7 +185,7 @@ void KImportDlg::loadProfiles(const bool selectLast)
   m_profileComboBox->clear();
 
   QStringList list;
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Profiles");
 
   list = grp.readEntry("profiles", QStringList());

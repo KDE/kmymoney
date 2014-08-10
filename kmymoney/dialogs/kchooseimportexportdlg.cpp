@@ -36,6 +36,7 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kconfiggroup.h>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -105,14 +106,14 @@ QString KChooseImportExportDlg::importExportType(void)
 
 void KChooseImportExportDlg::readConfig(void)
 {
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
   m_lastType = grp.readEntry("KChooseImportExportDlg_LastType");
 }
 
 void KChooseImportExportDlg::writeConfig(void)
 {
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
   grp.writeEntry("KChooseImportExportDlg_LastType", d->ui.typeCombo->currentText());
   config->sync();

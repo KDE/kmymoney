@@ -39,6 +39,7 @@
 #include <kicon.h>
 #include <kguiitem.h>
 #include <KToggleAction>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -70,7 +71,7 @@ KAccountsView::KAccountsView(QWidget *parent) :
   for (int i = 0; i < MaxViewTabs; ++i)
     m_needReload[i] = false;
 
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
   m_tab->setCurrentIndex(grp.readEntry("KAccountsView_LastType", 0));
 
@@ -175,7 +176,7 @@ void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
   AccountsViewTab tab = static_cast<AccountsViewTab>(m_tab->indexOf(_tab));
 
   // remember this setting for startup
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
   grp.writeEntry("KAccountsView_LastType", QVariant(tab).toString());
 

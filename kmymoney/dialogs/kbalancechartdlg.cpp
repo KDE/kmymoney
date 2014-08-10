@@ -31,6 +31,7 @@
 
 #include <klocale.h>
 #include <kglobal.h>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -49,7 +50,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   setButtonsOrientation(Qt::Horizontal);
 
   // restore the last used dialog size
-  KConfigGroup grp = KGlobal::config()->group("KBalanceChartDlg");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("KBalanceChartDlg");
   if (grp.isValid()) {
     restoreDialogSize(grp);
   }
@@ -65,7 +66,7 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
 KBalanceChartDlg::~KBalanceChartDlg()
 {
   // store the last used dialog size
-  KConfigGroup grp = KGlobal::config()->group("KBalanceChartDlg");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("KBalanceChartDlg");
   if (grp.isValid()) {
     saveDialogSize(grp);
   }

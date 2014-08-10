@@ -49,6 +49,7 @@
 #include <kapplication.h>
 #include <keditlistbox.h>
 #include <khelpclient.h>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -177,7 +178,7 @@ KTagsView::KTagsView(QWidget *parent) :
   connect(m_filterBox, SIGNAL(currentIndexChanged(int)), this, SLOT(slotChangeFilter(int)));
 
   // use the size settings of the last run (if any)
-  KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
   m_splitter->restoreState(grp.readEntry("KTagsViewSplitterSize", QByteArray()));
   m_splitter->setChildrenCollapsible(false);
 
@@ -192,7 +193,7 @@ KTagsView::KTagsView(QWidget *parent) :
 KTagsView::~KTagsView()
 {
   // remember the splitter settings for startup
-  KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
   grp.writeEntry("KTagsViewSplitterSize", m_splitter->saveState());
   grp.sync();
 }

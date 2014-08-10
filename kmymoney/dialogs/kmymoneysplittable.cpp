@@ -52,6 +52,7 @@
 #include <kstandardshortcut.h>
 #include <kshortcut.h>
 #include <kicon.h>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -99,7 +100,7 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
   horizontalHeader()->setMovable(false);
   horizontalHeader()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
 
-  KConfigGroup grp = KGlobal::config()->group("SplitTable");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("SplitTable");
   QByteArray columns;
   columns = grp.readEntry("HeaderState", columns);
   horizontalHeader()->restoreState(columns);
@@ -130,7 +131,7 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
 
 kMyMoneySplitTable::~kMyMoneySplitTable()
 {
-  KConfigGroup grp = KGlobal::config()->group("SplitTable");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("SplitTable");
   QByteArray columns = horizontalHeader()->saveState();
   grp.writeEntry("HeaderState", columns);
   grp.sync();

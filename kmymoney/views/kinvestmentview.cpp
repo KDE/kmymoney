@@ -30,6 +30,7 @@
 #include <klocale.h>
 #include <KToggleAction>
 #include <KMessageBox>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -73,13 +74,13 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
   setupUi(this);
 
   // load the header state of the equities list
-  KConfigGroup grp = KGlobal::config()->group("KInvestmentView_Equities");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("KInvestmentView_Equities");
   QByteArray columns;
   columns = grp.readEntry("HeaderState", columns);
   m_investmentsList->header()->restoreState(columns);
 
   // load the header state of the securities list
-  grp = KGlobal::config()->group("KInvestmentView_Securities");
+  grp = KSharedConfig::openConfig()->group("KInvestmentView_Securities");
   columns.clear();
   columns = grp.readEntry("HeaderState", columns);
   m_securitiesList->header()->restoreState(columns);
@@ -135,12 +136,12 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
 KInvestmentView::~KInvestmentView()
 {
   // save the header state of the equities list
-  KConfigGroup grp = KGlobal::config()->group("KInvestmentView_Equities");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("KInvestmentView_Equities");
   QByteArray columns = m_investmentsList->header()->saveState();
   grp.writeEntry("HeaderState", columns);
 
   // save the header state of the securities list
-  grp = KGlobal::config()->group("KInvestmentView_Securities");
+  grp = KSharedConfig::openConfig()->group("KInvestmentView_Securities");
   columns = m_securitiesList->header()->saveState();
   grp.writeEntry("HeaderState", columns);
 

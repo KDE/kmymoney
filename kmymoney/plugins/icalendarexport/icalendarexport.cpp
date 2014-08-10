@@ -27,6 +27,7 @@
 #include <KPluginInfo>
 #include <QUrl>
 #include <KActionCollection>
+#include <KSharedConfig>
 
 // KMyMoney includes
 #include "mymoneyfile.h"
@@ -63,7 +64,7 @@ KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QVaria
   QString actionName = i18n("Schedules to iCalendar");
   QString icalFilePath;
   // Note the below code only exists to move existing settings to the new plugin specific config
-  KConfigGroup config = KGlobal::config()->group(d->m_profileName);
+  KConfigGroup config = KSharedConfig::openConfig()->group(d->m_profileName);
   icalFilePath = config.readEntry(d->m_iCalendarFileEntryName, icalFilePath);
 
   // read the settings
@@ -73,7 +74,7 @@ KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QVaria
     // move the old setting to the new config
     PluginSettings::setIcalendarFile(icalFilePath);
     PluginSettings::self()->writeConfig();
-    KGlobal::config()->deleteGroup(d->m_profileName);
+    KSharedConfig::openConfig()->deleteGroup(d->m_profileName);
   } else {
     // read it from the new config
     icalFilePath = PluginSettings::icalendarFile();

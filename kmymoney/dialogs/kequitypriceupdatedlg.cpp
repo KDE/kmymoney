@@ -46,6 +46,7 @@
 #include <kconfig.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -169,7 +170,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
 
   // previous versions of this dialog allowed to store a "Don't ask again" switch.
   // Since we don't support it anymore, we just get rid of it
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Notification Messages");
   grp.deleteEntry("KEquityPriceUpdateDlg::slotQuoteFailed::Price Update Failed");
 }

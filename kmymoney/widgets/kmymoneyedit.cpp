@@ -41,6 +41,7 @@
 #include <khbox.h>
 #include <kconfiggroup.h>
 #include <kicon.h>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -237,7 +238,7 @@ void kMyMoneyEdit::init(void)
   m_resetButton->setEnabled(false);
   m_resetButton->setFocusProxy(m_edit);
 
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup grp = kconfig->group("General Options");
   if (grp.readEntry("DontShowCalculatorButton", false) == true)
     setCalculatorButtonVisible(false);

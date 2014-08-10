@@ -49,6 +49,7 @@
 #include <kdebug.h>
 #include <kcalendarsystem.h>
 #include <kcombobox.h>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -425,7 +426,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotRefreshView()));
 
-  KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
   m_splitter->restoreState(grp.readEntry("KBudgetViewSplitterSize", QByteArray()));
   m_splitter->setChildrenCollapsible(false);
 }
@@ -433,7 +434,7 @@ KBudgetView::KBudgetView(QWidget *parent) :
 KBudgetView::~KBudgetView()
 {
   // remember the splitter settings for startup
-  KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
+  KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
   grp.writeEntry("KBudgetViewSplitterSize", m_splitter->saveState());
   grp.sync();
 }

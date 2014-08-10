@@ -55,6 +55,7 @@
 #include <kdeversion.h>
 #include <ktitlewidget.h>
 #include <kcompressiondevice.h>
+#include <KSharedConfig>
 
 #ifdef KActivities_FOUND
 #include <KActivities/ResourceInstance>
@@ -1000,7 +1001,7 @@ bool KMyMoneyView::initializeStorage()
     selectBaseCurrency();
   }
 
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KPageWidgetItem* page;
   KConfigGroup grp = config->group("General Options");
 

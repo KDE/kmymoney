@@ -91,6 +91,8 @@
 #include <krecentfilesaction.h>
 #include <kglobalsettings.h>
 #include <kaction.h>
+#include <ktoolinvocation.h>
+#include <KSharedConfig>
 #ifdef KF5Holidays_FOUND
 #include <KHolidays/Holidays>
 #endif
@@ -169,7 +171,6 @@
 #include <libkgpgfile/kgpgfile.h>
 
 #include <transactioneditor.h>
-#include <ktoolinvocation.h>
 
 #include "kmymoneyutils.h"
 
@@ -362,7 +363,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   // preset the pointer because we need it during the course of this constructor
   kmymoney = this;
-  d->m_config = KGlobal::config();
+  d->m_config = KSharedConfig::openConfig();
 
   d->setCustomColors();
 
@@ -2993,7 +2994,7 @@ void KMyMoneyApp::slotCategoryNew(MyMoneyAccount& account, const MyMoneyAccount&
   } else {
     // we should not keep the 'no' setting because that can confuse people like
     // I have seen in some usability tests. So we just delete it right away.
-    KSharedConfigPtr kconfig = KGlobal::config();
+    KSharedConfigPtr kconfig = KSharedConfig::openConfig();
     if (kconfig) {
       kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("CreateNewCategories"));
     }
@@ -3168,7 +3169,7 @@ void KMyMoneyApp::slotInvestmentDelete(void)
   } else {
     // we should not keep the 'no' setting because that can confuse people like
     // I have seen in some usability tests. So we just delete it right away.
-    KSharedConfigPtr kconfig = KGlobal::config();
+    KSharedConfigPtr kconfig = KSharedConfig::openConfig();
     if (kconfig) {
       kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("DeleteInvestment"));
     }
@@ -4511,7 +4512,7 @@ bool KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
       doit = false;
       // we should not keep the 'no' setting because that can confuse people like
       // I have seen in some usability tests. So we just delete it right away.
-      KSharedConfigPtr kconfig = KGlobal::config();
+      KSharedConfigPtr kconfig = KSharedConfig::openConfig();
       if (kconfig) {
         kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("NewPayee"));
       }
@@ -4838,7 +4839,7 @@ void KMyMoneyApp::slotTagNew(const QString& newnameBase, QString& id)
       doit = false;
       // we should not keep the 'no' setting because that can confuse people like
       // I have seen in some usability tests. So we just delete it right away.
-      KSharedConfigPtr kconfig = KGlobal::config();
+      KSharedConfigPtr kconfig = KSharedConfig::openConfig();
       if (kconfig) {
         kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("NewTag"));
       }
@@ -6834,7 +6835,7 @@ void KMyMoneyApp::slotCheckSchedules(void)
 void KMyMoneyApp::writeLastUsedDir(const QString& directory)
 {
   //get global config object for our app.
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   if (kconfig) {
     KConfigGroup grp = kconfig->group("General Options");
 
@@ -6846,7 +6847,7 @@ void KMyMoneyApp::writeLastUsedDir(const QString& directory)
 void KMyMoneyApp::writeLastUsedFile(const QString& fileName)
 {
   //get global config object for our app.
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   if (kconfig) {
     KConfigGroup grp = d->m_config->group("General Options");
 
@@ -6862,7 +6863,7 @@ QString KMyMoneyApp::readLastUsedDir(void) const
   QString str;
 
   //get global config object for our app.
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   if (kconfig) {
     KConfigGroup grp = d->m_config->group("General Options");
 
@@ -6881,7 +6882,7 @@ QString KMyMoneyApp::readLastUsedFile(void) const
   QString str;
 
   // get global config object for our app.
-  KSharedConfigPtr kconfig = KGlobal::config();
+  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   if (kconfig) {
     KConfigGroup grp = d->m_config->group("General Options");
 

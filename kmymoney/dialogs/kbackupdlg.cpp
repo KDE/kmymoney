@@ -43,6 +43,7 @@
 #include <kicon.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -81,7 +82,7 @@ void KBackupDlg::chooseButtonClicked()
 
 void KBackupDlg::readConfig(void)
 {
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
   mountCheckBox->setChecked(grp.readEntry("KBackupDlg_mountDevice", false));
   txtMountPoint->setText(grp.readEntry("KBackupDlg_BackupMountPoint", "/mnt/floppy"));
@@ -89,7 +90,7 @@ void KBackupDlg::readConfig(void)
 
 void KBackupDlg::writeConfig(void)
 {
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
   grp.writeEntry("KBackupDlg_mountDevice", mountCheckBox->isChecked());
   grp.writeEntry("KBackupDlg_BackupMountPoint", txtMountPoint->text());

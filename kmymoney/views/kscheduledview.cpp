@@ -45,6 +45,7 @@
 #include <kiconloader.h>
 #include <kicon.h>
 #include <kmessagebox.h>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -449,7 +450,7 @@ void KScheduledView::slotRearrange(void)
 
 void KScheduledView::readConfig(void)
 {
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
   m_openBills = grp.readEntry("KScheduleView_openBills", true);
   m_openDeposits = grp.readEntry("KScheduleView_openDeposits", true);
@@ -464,7 +465,7 @@ void KScheduledView::readConfig(void)
 
 void KScheduledView::writeConfig(void)
 {
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
   grp.writeEntry("KScheduleView_openBills", m_openBills);
   grp.writeEntry("KScheduleView_openDeposits", m_openDeposits);

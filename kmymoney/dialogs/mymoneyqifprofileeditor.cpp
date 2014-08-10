@@ -43,6 +43,7 @@
 #include <khelpclient.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -58,7 +59,7 @@ MyMoneyQifProfileNameValidator::~MyMoneyQifProfileNameValidator()
 
 QValidator::State MyMoneyQifProfileNameValidator::validate(QString& name, int&) const
 {
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Profiles");
   QStringList list = grp.readEntry("profiles", QStringList());
 
@@ -134,7 +135,7 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
 MyMoneyQifProfileEditor::~MyMoneyQifProfileEditor()
 {
   if (m_inEdit && m_isDirty && m_isAccepted) {
-    KSharedConfigPtr config = KGlobal::config();
+    KSharedConfigPtr config = KSharedConfig::openConfig();
     config->sync();
   } else {
     slotReset();
@@ -222,7 +223,7 @@ void MyMoneyQifProfileEditor::loadProfileListFromConfig(void)
   m_profileListBox->clear();
 
   QStringList list;
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Profiles");
   list = grp.readEntry("profiles", QStringList());
 
@@ -318,7 +319,7 @@ void MyMoneyQifProfileEditor::showProfile(void)
 
 void MyMoneyQifProfileEditor::deleteProfile(const QString& name)
 {
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
 
   config->deleteGroup("Profile-" + name);
 
@@ -332,7 +333,7 @@ void MyMoneyQifProfileEditor::deleteProfile(const QString& name)
 
 void MyMoneyQifProfileEditor::addProfile(const QString& name)
 {
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Profiles");
   QStringList list = grp.readEntry("profiles", QStringList());
 
@@ -353,7 +354,7 @@ void MyMoneyQifProfileEditor::slotOk(void)
 
   m_profile.saveProfile();
 
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   config->sync();
 
   m_isAccepted = true;
@@ -365,7 +366,7 @@ void MyMoneyQifProfileEditor::slotReset(void)
   // first flush any changes
   m_profile.saveProfile();
 
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   config->reparseConfiguration();
 
   QString currentProfile = m_profile.profileName().mid(8);
