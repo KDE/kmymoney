@@ -28,7 +28,7 @@ email                 : agander93@gmail.com
 #include <QtGui/QCloseEvent>
 // ----------------------------------------------------------------------------
 // KDE Headers
-#include <KUrl>
+#include <QUrl>
 // ----------------------------------------------------------------------------
 // Project Headers
 

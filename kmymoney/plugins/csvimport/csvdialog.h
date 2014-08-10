@@ -175,7 +175,7 @@ public:
   int            m_lastDelimiterIndex;
   int            m_errorColumn;
 
-  KUrl           m_url;
+  QUrl           m_url;
   KComboBox*     m_comboBoxEncode;
 
   QFile*         m_inFile;

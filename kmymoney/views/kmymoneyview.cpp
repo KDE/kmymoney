@@ -31,6 +31,7 @@
 #include <QList>
 #include <QVBoxLayout>
 #include <QByteArray>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -42,7 +43,6 @@
 #include <kicontheme.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
-#include <kurl.h>
 #include <kio/netaccess.h>
 #include <ktemporaryfile.h>
 #include <ksavefile.h>
@@ -145,7 +145,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
 
   m_model = new KPageWidgetModel(parent);
 
-  connect(kmymoney, SIGNAL(fileLoaded(KUrl)), this, SLOT(slotRefreshViews()));
+  connect(kmymoney, SIGNAL(fileLoaded(QUrl)), this, SLOT(slotRefreshViews()));
 
   // let the accounts model know which account is being currently reconciled
   connect(this, SIGNAL(reconciliationStarts(MyMoneyAccount,QDate,MyMoneyMoney)), Models::instance()->accountsModel(), SLOT(slotReconcileAccount(MyMoneyAccount,QDate,MyMoneyMoney)));
@@ -307,7 +307,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
 #ifdef KActivities_FOUND
   m_activityResourceInstance = new KActivities::ResourceInstance(window()->winId());
   m_activityResourceInstance->setParent(this);
-  connect(kmymoney, SIGNAL(fileLoaded(KUrl)), m_activityResourceInstance, SLOT(setUri(KUrl)));
+  connect(kmymoney, SIGNAL(fileLoaded(QUrl)), m_activityResourceInstance, SLOT(setUri(QUrl)));
 #endif
 }
 
@@ -645,7 +645,7 @@ void KMyMoneyView::ungetString(QIODevice *qfile, char *buf, int len)
   }
 }
 
-bool KMyMoneyView::readFile(const KUrl& url)
+bool KMyMoneyView::readFile(const QUrl &url)
 {
   QString filename;
 
@@ -662,11 +662,11 @@ bool KMyMoneyView::readFile(const KUrl& url)
   // disconnect the current storga manager from the engine
   MyMoneyFile::instance()->detachStorage();
 
-  if (url.protocol() == "sql") { // handle reading of database
+  if (url.scheme() == "sql") { // handle reading of database
     m_fileType = KmmDb;
     // get rid of the mode parameter which is now redundant
-    KUrl newUrl(url);
-    if (!url.queryItem("mode").isNull()) {
+    QUrl newUrl(url);
+    if (!QUrlQuery(url).queryItemValue("mode").isNull()) {
       newUrl.removeQueryItem("mode");
     }
     return (openDatabase(newUrl)); // on error, any message will have been displayed
@@ -885,7 +885,7 @@ void KMyMoneyView::checkAccountName(const MyMoneyAccount& _acc, const QString& n
   }
 }
 
-bool KMyMoneyView::openDatabase(const KUrl& url)
+bool KMyMoneyView::openDatabase(const QUrl &url)
 {
   m_fileOpen = false;
 
@@ -897,7 +897,7 @@ bool KMyMoneyView::openDatabase(const KUrl& url)
     pStorage = dynamic_cast<IMyMoneySerialize*>(pDBMgr);
   }
   KSharedPtr <MyMoneyStorageSql> reader = pStorage->connectToDatabase(url);
-  KUrl dbURL(url);
+  QUrl dbURL(url);
   bool retry = true;
   while (retry) {
     switch (reader->open(dbURL, QIODevice::ReadWrite)) {
@@ -905,7 +905,7 @@ bool KMyMoneyView::openDatabase(const KUrl& url)
         retry = false;
         break;
       case 1: // permanent error
-        KMessageBox::detailedError(this, i18n("Cannot open database %1\n", dbURL.prettyUrl()), reader->lastError());
+        KMessageBox::detailedError(this, i18n("Cannot open database %1\n", dbURL.toDisplayString()), reader->lastError());
         if (pDBMgr) {
           removeStorage();
           delete pDBMgr;
@@ -919,7 +919,7 @@ bool KMyMoneyView::openDatabase(const KUrl& url)
           }
           return false;
         } else {
-          QString options = dbURL.queryItem("options") + ",override";
+          QString options = QUrlQuery(dbURL).queryItemValue("options") + ",override";
           dbURL.removeQueryItem("mode"); // now redundant
           dbURL.removeQueryItem("options");
           dbURL.addQueryItem("options", options);
@@ -1215,7 +1215,7 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
     qfile.close();
 }
 
-bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
+bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
 {
   QString filename = url.path();
 
@@ -1262,7 +1262,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
       tmpfile.open(); // to obtain the name
       saveToLocalFile(tmpfile.fileName(), pWriter, plaintext, keyList);
       if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))
-        throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.prettyUrl()));
+        throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.toDisplayString()));
       tmpfile.close();
     }
     m_fileType = KmmXML;
@@ -1276,7 +1276,7 @@ bool KMyMoneyView::saveFile(const KUrl& url, const QString& keyList)
   return rc;
 }
 
-bool KMyMoneyView::saveAsDatabase(const KUrl& url)
+bool KMyMoneyView::saveAsDatabase(const QUrl &url)
 {
   bool rc = false;
   if (!fileOpen()) {
@@ -1316,7 +1316,7 @@ bool KMyMoneyView::saveAsDatabase(const KUrl& url)
     KMessageBox::detailedError(this,
                                i18n("Cannot open or create database %1.\n"
                                     "Retry Save As Database and click Help"
-                                    " for further info.", url.prettyUrl()), writer->lastError());
+                                    " for further info.", url.toDisplayString()), writer->lastError());
   }
   delete writer;
   return (rc);

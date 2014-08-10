@@ -211,7 +211,7 @@ protected:
   void setColumnsAlreadyAdjusted(bool adjusted);
 
 public slots:
-  void slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments& args, const KParts::BrowserArguments& browArgs);
+  void slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments& args, const KParts::BrowserArguments& browArgs);
 
   void slotLoadView(void);
   void slotPrintView(void);

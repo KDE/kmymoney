@@ -1888,7 +1888,7 @@ void MyMoneyDatabaseMgr::setCreationDate(const QDate& val)
   m_creationDate = val;
 }
 
-KSharedPtr <MyMoneyStorageSql> MyMoneyDatabaseMgr::connectToDatabase(const KUrl& url)
+KSharedPtr <MyMoneyStorageSql> MyMoneyDatabaseMgr::connectToDatabase(const QUrl &url)
 {
   m_sql = new MyMoneyStorageSql(this, url);
   return m_sql;

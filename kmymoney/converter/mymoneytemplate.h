@@ -21,8 +21,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QtXml/QDomDocument>
-#include <QtXml/QDomNode>
+#include <QDomDocument>
+#include <QDomNode>
+#include <QUrl>
 
 class QFile;
 class QTreeWidgetItem;
@@ -30,8 +31,7 @@ class QTreeWidgetItem;
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KDE/KSaveFile>
-#include <KDE/KUrl>
+#include <KSaveFile>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -53,11 +53,11 @@ class MyMoneyTemplate
 {
 public:
   MyMoneyTemplate();
-  explicit MyMoneyTemplate(const KUrl& url);
+  explicit MyMoneyTemplate(const QUrl &url);
   ~MyMoneyTemplate();
 
-  bool loadTemplate(const KUrl& url);
-  bool saveTemplate(const KUrl& url);
+  bool loadTemplate(const QUrl &url);
+  bool saveTemplate(const QUrl &url);
   bool importTemplate(void(*callback)(int, int, const QString&));
   bool exportTemplate(void(*callback)(int, int, const QString&));
 
@@ -89,7 +89,7 @@ private:
   QString         m_title;
   QString         m_shortDesc;
   QString         m_longDesc;
-  KUrl            m_source;
+  QUrl            m_source;
   void (*m_progressCallback)(int, int, const QString&);
   int             m_accountsRead;
 };

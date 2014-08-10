@@ -32,7 +32,7 @@ email                 : agander93@gmail.com
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <KUrl>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -480,7 +480,7 @@ private:
 
   QStringList    m_columnTypeList;  //  holds field types - date, payee, etc.
 
-  KUrl           m_url;
+  QUrl           m_url;
   QFile*         m_inFile;
 
   QCompleter*     m_completer;

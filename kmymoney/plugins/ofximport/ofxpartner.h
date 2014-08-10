@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kurl.h>
+#include <QUrl>
 class KJob;
 namespace KIO
 {
@@ -65,7 +65,7 @@ class OfxHttpRequest : public QObject
 {
   Q_OBJECT
 public:
-  OfxHttpRequest(const QString& method, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo = true);
+  OfxHttpRequest(const QString& method, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo = true);
   virtual ~OfxHttpRequest();
 
   QHttp::Error error(void) const {
@@ -77,7 +77,7 @@ protected slots:
 
 private:
   QHttp*        m_job;
-  KUrl          m_dst;
+  QUrl          m_dst;
   QHttp::Error  m_error;
   QPointer<QEventLoop> m_eventLoop;
 };
@@ -86,7 +86,7 @@ class OfxHttpsRequest : public QObject
 {
   Q_OBJECT
 public:
-  OfxHttpsRequest(const QString& method, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo = true);
+  OfxHttpsRequest(const QString& method, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo = true);
   virtual ~OfxHttpsRequest();
 
   QHttp::Error error(void) const {
@@ -101,7 +101,7 @@ protected slots:
 private:
   class Private;
   Private*          d;
-  KUrl              m_dst;
+  QUrl              m_dst;
   QFile             m_file;
   QHttp::Error      m_error;
   KIO::TransferJob* m_job;

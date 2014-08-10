@@ -25,6 +25,7 @@
 #include <QWidget>
 #include <QList>
 #include <QVBoxLayout>
+#include <QUrl>
 
 
 // ----------------------------------------------------------------------------
@@ -33,8 +34,6 @@
 #include <ksavefile.h>
 #include <kmenu.h>
 #include <KPageWidget>
-
-#include <kurl.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -274,7 +273,7 @@ public:
     *
     * @return Whether the read was successful.
     */
-  bool readFile(const KUrl& url);
+  bool readFile(const QUrl &url);
 
   /**
     * Saves the data into permanent storage using the XML format.
@@ -288,7 +287,7 @@ public:
     * @retval false save operation failed
     * @retval true save operation was successful
     */
-  bool saveFile(const KUrl& url, const QString& keyList = QString());
+  bool saveFile(const QUrl &url, const QString& keyList = QString());
   /**
    * Saves the data into permanent storage on a new or empty SQL database.
    *
@@ -297,7 +296,7 @@ public:
    * @retval false save operation failed
    * @retval true save operation was successful
    */
-  //const bool saveDatabase(const KUrl& url); This no longer relevant
+  //const bool saveDatabase(const QUrl &url); This no longer relevant
   /**
    * Saves the data into permanent storage on a new or empty SQL database.
    *
@@ -306,7 +305,7 @@ public:
    * @retval false save operation failed
    * @retval true save operation was successful
    */
-  bool saveAsDatabase(const KUrl& url);
+  bool saveAsDatabase(const QUrl &url);
 
   /**
     * Call this to find out if the currently open file is native KMM
@@ -559,12 +558,12 @@ private:
    * This method is called from readFile to open a database file which
    * is to be processed in 'proper' database mode, i.e. in-place updates
    *
-   * @param dbaseURL pseudo-KUrl representation of database
+   * @param dbaseURL pseudo-QUrl representation of database
    *
    * @retval true Database opened successfully
    * @retval false Could not open or read database
    */
-  bool openDatabase(const KUrl& dbaseURL);
+  bool openDatabase(const QUrl &dbaseURL);
   /**
    * This method is used after a file or database has been
    * read into storage, and performs various initialization tasks

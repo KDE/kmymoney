@@ -100,8 +100,8 @@ MyMoneyDbTransaction::~MyMoneyDbTransaction()
 }
 
 //************************ Constructor/Destructor *****************************
-MyMoneyStorageSql::MyMoneyStorageSql(IMyMoneySerialize *storage, const KUrl& url)
-    : QSqlDatabase(url.queryItem("driver"))
+MyMoneyStorageSql::MyMoneyStorageSql(IMyMoneySerialize *storage, const QUrl &url)
+    : QSqlDatabase(QUrlQuery(url).queryItemValue("driver"))
 {
   DBG("*** Entering MyMoneyStorageSql::MyMoneyStorageSql");
   m_storage = storage;
@@ -117,14 +117,14 @@ MyMoneyStorageSql::MyMoneyStorageSql(IMyMoneySerialize *storage, const KUrl& url
   m_preferred.setReportAllSplits(false);
 }
 
-int MyMoneyStorageSql::open(const KUrl& url, int openMode, bool clear)
+int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
 {
   DBG("*** Entering MyMoneyStorageSql::open");
   try {
     int rc = 0;
-    m_driver = MyMoneyDbDriver::create(url.queryItem("driver"));
+    m_driver = MyMoneyDbDriver::create(QUrlQuery(url).queryItemValue("driver"));
     //get the input options
-    QStringList options = url.queryItem("options").split(',');
+    QStringList options = QUrlQuery(url).queryItemValue("options").split(',');
     m_loadAll = options.contains("loadAll")/*|| m_mode == 0*/;
     m_override = options.contains("override");
 
@@ -132,8 +132,8 @@ int MyMoneyStorageSql::open(const KUrl& url, int openMode, bool clear)
     QString dbName = url.path().right(url.path().length() - 1); // remove separator slash
     setDatabaseName(dbName);
     setHostName(url.host());
-    setUserName(url.user());
-    setPassword(url.pass());
+    setUserName(url.userName());
+    setPassword(url.password());
     switch (openMode) {
       case QIODevice::ReadOnly:    // OpenDatabase menu entry (or open last file)
       case QIODevice::ReadWrite:   // Save menu entry with database open
@@ -196,7 +196,7 @@ int MyMoneyStorageSql::open(const KUrl& url, int openMode, bool clear)
       close(false);
       rc = -1; // retryable error
     } else {
-      m_logonUser = url.user() + '@' + url.host();
+      m_logonUser = url.userName() + '@' + url.host();
       m_logonAt = QDateTime::currentDateTime();
       writeFileInfo();
     }
@@ -231,7 +231,7 @@ bool MyMoneyStorageSql::fileExists(const QString& dbName)
   return (true);
 }
 
-bool MyMoneyStorageSql::createDatabase(const KUrl& url)
+bool MyMoneyStorageSql::createDatabase(const QUrl &url)
 {
   DBG("*** Entering MyMoneyStorageSql::createDatabase");
   int rc = true;
@@ -247,8 +247,8 @@ bool MyMoneyStorageSql::createDatabase(const KUrl& url)
     QSqlDatabase maindb = QSqlDatabase::addDatabase(driverName(), "main");
     maindb.setDatabaseName(m_driver->defaultDbName());
     maindb.setHostName(url.host());
-    maindb.setUserName(url.user());
-    maindb.setPassword(url.pass());
+    maindb.setUserName(url.userName());
+    maindb.setPassword(url.password());
     if (!maindb.open()) {
       throw MYMONEYEXCEPTION(QString("opening database %1 in function %2")
                              .arg(maindb.databaseName()).arg(Q_FUNC_INFO));

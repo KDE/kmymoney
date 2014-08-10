@@ -21,10 +21,11 @@
 // QT Includes
 
 #include <QLabel>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <kurl.h>
+
 #include <kdialog.h>
 
 // ----------------------------------------------------------------------------
@@ -46,7 +47,7 @@ class KSelectDatabaseDlg : public KDialog
 {
   Q_OBJECT
 public:
-  explicit KSelectDatabaseDlg(int openMode, KUrl openURL = KUrl(), QWidget *parent = 0);
+  explicit KSelectDatabaseDlg(int openMode, QUrl openURL = QUrl(), QWidget *parent = 0);
   ~KSelectDatabaseDlg();
   /**
     * Check whether we have required database drivers
@@ -56,7 +57,7 @@ public:
   /** Return URL of database
     * @return - pseudo-URL of database selected by user
   **/
-  const KUrl selectedURL();
+  const QUrl selectedURL();
   /** Execute the database selection dialog
     * @return - as QDialog::exec()
   **/
@@ -67,7 +68,7 @@ public slots:
 private:
   KSelectDatabaseDlgDecl* m_widget;
   int m_mode;
-  KUrl m_url;
+  QUrl m_url;
   QStringList m_supportedDrivers;
   //MyMoneyDbDrivers m_map;
   kMandatoryFieldGroup* m_requiredFields;

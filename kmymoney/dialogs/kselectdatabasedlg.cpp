@@ -47,7 +47,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, KUrl openURL, QWidget *)
+KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, QUrl openURL, QWidget *)
 {
   m_widget = new KSelectDatabaseDlgDecl();
   setMainWidget(m_widget);
@@ -81,8 +81,8 @@ bool KSelectDatabaseDlg::checkDrivers()
     }
     it  ++;
   }
-  if (m_url != KUrl()) {
-    QString driverName = m_url.queryItem("driver");
+  if (m_url != QUrl()) {
+    QString driverName = QUrlQuery(m_url).queryItemValue("driver");
     //qDebug() << driverName;
     //qDebug() << m_supportedDrivers;
     if (!m_supportedDrivers.join(",").contains(driverName)) {
@@ -108,7 +108,7 @@ bool KSelectDatabaseDlg::checkDrivers()
 int KSelectDatabaseDlg::exec()
 {
   m_widget->listDrivers->clear();
-  if (m_url == KUrl()) {
+  if (m_url == QUrl()) {
     m_widget->listDrivers->addItems(m_supportedDrivers);
     m_widget->textDbName->setText("KMyMoney");
     m_widget->textHostName->setText("localhost");
@@ -131,13 +131,13 @@ int KSelectDatabaseDlg::exec()
     }
   } else {
     // fill in the fixed data from the URL
-    QString driverName = m_url.queryItem("driver");
+    QString driverName = QUrlQuery(m_url).queryItemValue("driver");
     m_widget->listDrivers->addItem(QString(driverName + " - " + MyMoneyDbDriver::driverMap()[driverName]));
     m_widget->listDrivers->setCurrentItem(m_widget->listDrivers->item(0));
     QString dbName = m_url.path().right(m_url.path().length() - 1); // remove separator slash
     m_widget->textDbName->setText(dbName);
     m_widget->textHostName->setText(m_url.host());
-    m_widget->textUserName->setText(m_url.user());
+    m_widget->textUserName->setText(m_url.userName());
     // disable all but the password field, coz that's why we're here
     m_widget->textDbName->setEnabled(false);
     m_widget->urlSqlite->setEnabled(false);
@@ -158,12 +158,12 @@ int KSelectDatabaseDlg::exec()
   return (KDialog::exec());
 }
 
-const KUrl KSelectDatabaseDlg::selectedURL()
+const QUrl KSelectDatabaseDlg::selectedURL()
 {
-  KUrl url;
-  url.setProtocol("sql");
-  url.setUser(m_widget->textUserName->text());
-  url.setPass(m_widget->textPassword->text());
+  QUrl url;
+  url.setScheme("sql");
+  url.setUserName(m_widget->textUserName->text());
+  url.setPassword(m_widget->textPassword->text());
   url.setHost(m_widget->textHostName->text());
   if (m_sqliteSelected)
     url.setPath('/' + m_widget->urlSqlite->url().path());

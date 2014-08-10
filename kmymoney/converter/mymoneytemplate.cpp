@@ -45,7 +45,7 @@ MyMoneyTemplate::MyMoneyTemplate() :
 {
 }
 
-MyMoneyTemplate::MyMoneyTemplate(const KUrl& url) :
+MyMoneyTemplate::MyMoneyTemplate(const QUrl &url) :
     m_progressCallback(0)
 {
   loadTemplate(url);
@@ -55,7 +55,7 @@ MyMoneyTemplate::~MyMoneyTemplate()
 {
 }
 
-bool MyMoneyTemplate::loadTemplate(const KUrl& url)
+bool MyMoneyTemplate::loadTemplate(const QUrl &url)
 {
   QString filename;
 
@@ -142,7 +142,7 @@ bool MyMoneyTemplate::loadDescription(void)
         m_longDesc = childElement.text();
         validMask |= validLong;
       } else {
-        KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>", childElement.tagName(), m_source.prettyUrl()));
+        KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>", childElement.tagName(), m_source.toDisplayString()));
         validMask |= invalid;
       }
       child = child.nextSibling();
@@ -241,7 +241,7 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
           break;
 
         default:
-          KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid top-level account type <b>%1</b> in template file <b>%2</b></p>", childElement.attribute("type"), m_source.prettyUrl()));
+          KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid top-level account type <b>%1</b> in template file <b>%2</b></p>", childElement.attribute("type"), m_source.toDisplayString()));
           rc = false;
       }
 
@@ -308,7 +308,7 @@ bool MyMoneyTemplate::setFlags(MyMoneyAccount& acc, QDomNode flags)
         if (value == "Tax") {
           acc.setValue(value.toLatin1(), "Yes");
         } else {
-          KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b></p>", flagElement.attribute("name"), m_source.prettyUrl(), acc.name()));
+          KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("<p>Invalid flag type <b>%1</b> for account <b>%3</b> in template file <b>%2</b></p>", flagElement.attribute("name"), m_source.toDisplayString(), acc.name()));
           rc = false;
         }
       }
@@ -397,7 +397,7 @@ bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAcco
   return true;
 }
 
-bool MyMoneyTemplate::saveTemplate(const KUrl& url)
+bool MyMoneyTemplate::saveTemplate(const QUrl &url)
 {
   QString filename;
 

@@ -202,7 +202,7 @@ int runKMyMoney(KApplication *a, KStartupLogo *splash)
         // notify the primary instance of the file and kill ourselves.
 
         if (args->count() > 0) {
-          KUrl url = args->url(0);
+          QUrl url = args->url(0);
           if (kmymoney->isImportableFile(url.path())) {
             // if there are multiple instances, we'll send this to the first one
             QString primary = instances[0];
@@ -241,7 +241,7 @@ int runKMyMoney(KApplication *a, KStartupLogo *splash)
     qApp->processEvents();
 
     QString importfile;
-    KUrl url;
+    QUrl url;
     // make sure, we take the file provided on the command
     // line before we go and open the last one used
     if (args->count() > 0) {
@@ -255,11 +255,11 @@ int runKMyMoney(KApplication *a, KStartupLogo *splash)
 
       if (kmymoney->isImportableFile(url.path())) {
         importfile = url.path();
-        url = kmymoney->readLastUsedFile();
+        url = QUrl::fromUserInput(kmymoney->readLastUsedFile());
       }
 
     } else {
-      url = kmymoney->readLastUsedFile();
+      url = QUrl::fromUserInput(kmymoney->readLastUsedFile());
     }
 
     KTipDialog::showTip(kmymoney, "", false);

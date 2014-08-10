@@ -90,7 +90,7 @@ CsvExportDlg::~CsvExportDlg()
 
 void CsvExportDlg::slotBrowse()
 {
-  QString newName(KFileDialog::getSaveFileName(KUrl(), QLatin1String("*.CSV"), this));
+  QString newName(KFileDialog::getSaveFileName(QUrl(), QLatin1String("*.CSV"), this));
   newName += QLatin1String("csv");
   if (!newName.isEmpty())
     ui->m_qlineeditFile->setText(newName);

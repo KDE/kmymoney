@@ -32,7 +32,7 @@
 #include <KPluginFactory>
 #include <KDebug>
 #include <KFile>
-#include <KUrl>
+#include <QUrl>
 #include <KAction>
 #include <KMessageBox>
 #include <KActionCollection>
@@ -87,7 +87,7 @@ void CsvExporterPlugin::slotCsvExport(void)
   }
 }
 
-bool CsvExporterPlugin::okToWriteFile(const KUrl& url)
+bool CsvExporterPlugin::okToWriteFile(const QUrl &url)
 {
   // check if the file exists and warn the user
   bool reallySaveFile = true;

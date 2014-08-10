@@ -29,7 +29,7 @@
 #include <KPluginFactory>
 #include <KDebug>
 #include <KFile>
-#include <KUrl>
+#include <QUrl>
 #include <KAction>
 #include <KMessageBox>
 #include <KActionCollection>

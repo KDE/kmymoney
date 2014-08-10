@@ -96,7 +96,7 @@ public:
   /**
     * This method is used to get a SQL reader for subsequent database access
     */
-  KSharedPtr <MyMoneyStorageSql> connectToDatabase(const KUrl& url);
+  KSharedPtr <MyMoneyStorageSql> connectToDatabase(const QUrl &url);
   /**
   * This method is used when a database file is open, and the data is to
   * be saved in a different file or format. It will ensure that all data

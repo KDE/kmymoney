@@ -26,12 +26,11 @@
 #include <QSqlError>
 #include <QList>
 #include <QStack>
-
+#include <QUrl>
 #include <QtDebug>
 
 class QIODevice;
 
-#include <kurl.h>
 #include <ksharedptr.h>
 
 #include "imymoneystorageformat.h"
@@ -121,7 +120,7 @@ class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, pub
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  explicit MyMoneyStorageSql(IMyMoneySerialize *storage, const KUrl& = KUrl());
+  explicit MyMoneyStorageSql(IMyMoneySerialize *storage, const QUrl& = QUrl());
   virtual ~MyMoneyStorageSql() {
     close(true);
   }
@@ -142,7 +141,7 @@ public:
   * @return -1 - output database not opened, contains data, clean not specified
   *
    */
-  int open(const KUrl& url, int openMode, bool clear = false);
+  int open(const QUrl &url, int openMode, bool clear = false);
   /**
    * MyMoneyStorageSql close the database
    *
@@ -402,7 +401,7 @@ private:
    * @return false - could not create
    *
    */
-  bool createDatabase(const KUrl& url);
+  bool createDatabase(const QUrl &url);
   int upgradeDb();
   int upgradeToV1();
   int upgradeToV2();

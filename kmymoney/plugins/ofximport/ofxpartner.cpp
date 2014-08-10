@@ -60,8 +60,8 @@
 
 namespace OfxPartner
 {
-bool post(const QString& request, const QMap<QString, QString>& attr, const KUrl& url, const KUrl& filename);
-bool get(const QString& request, const QMap<QString, QString>& attr, const KUrl& url, const KUrl& filename);
+bool post(const QString& request, const QMap<QString, QString>& attr, const QUrl &url, const QUrl& filename);
+bool get(const QString& request, const QMap<QString, QString>& attr, const QUrl &url, const QUrl& filename);
 
 const QString kBankFilename = "ofx-bank-index.xml";
 const QString kCcFilename = "ofx-cc-index.xml";
@@ -87,7 +87,7 @@ void ValidateIndexCache(void)
 {
   // TODO (Ace) Check whether these files exist and are recent enough before getting them again
 
-  KUrl fname;
+  QUrl fname;
 
   QMap<QString, QString> attr;
 
@@ -95,7 +95,7 @@ void ValidateIndexCache(void)
   fname = directory + kBankFilename;
   QFileInfo i(fname.path());
   if (needReload(i))
-    get("", attr, KUrl("http://www.ofxhome.com/api.php?all=yes"), fname);
+    get("", attr, QUrl("http://www.ofxhome.com/api.php?all=yes"), fname);
 #endif
 
 #if MSN
@@ -105,17 +105,17 @@ void ValidateIndexCache(void)
   fname = directory + kBankFilename;
   QFileInfo i(fname.path());
   if (needReload(i))
-    post("T=1&S=*&R=1&O=0&TEST=0", attr, KUrl("http://moneycentral.msn.com/money/2005/mnynet/service/ols/filist.aspx?SKU=3&VER=" VER), fname);
+    post("T=1&S=*&R=1&O=0&TEST=0", attr, QUrl("http://moneycentral.msn.com/money/2005/mnynet/service/ols/filist.aspx?SKU=3&VER=" VER), fname);
 
   fname = directory + kCcFilename;
   i = QFileInfo(fname.path());
   if (needReload(i))
-    post("T=2&S=*&R=1&O=0&TEST=0", attr, KUrl("http://moneycentral.msn.com/money/2005/mnynet/service/ols/filist.aspx?SKU=3&VER=" VER) , fname);
+    post("T=2&S=*&R=1&O=0&TEST=0", attr, QUrl("http://moneycentral.msn.com/money/2005/mnynet/service/ols/filist.aspx?SKU=3&VER=" VER) , fname);
 
   fname = directory + kInvFilename;
   i = QFileInfo(fname.path());
   if (needReload(i))
-    post("T=3&S=*&R=1&O=0&TEST=0", attr, KUrl("http://moneycentral.msn.com/money/2005/mnynet/service/ols/filist.aspx?SKU=3&VER=" VER), fname);
+    post("T=3&S=*&R=1&O=0&TEST=0", attr, QUrl("http://moneycentral.msn.com/money/2005/mnynet/service/ols/filist.aspx?SKU=3&VER=" VER), fname);
 #endif
 }
 
@@ -281,7 +281,7 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
 
   QMap<QString, QString> attr;
 
-  KUrl guidFile(QString("%1fipid-%2.xml").arg(directory).arg(fipid));
+  QUrl guidFile(QString("%1fipid-%2.xml").arg(directory).arg(fipid));
 
   // Apparently at some point in time, for VER=6 msn returned an online URL
   // to a static error page (http://moneycentral.msn.com/cust404.htm).
@@ -291,7 +291,7 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
 
 #if OFXHOME
   if (!i.isReadable() || i.lastModified().addDays(7) < QDateTime::currentDateTime())
-    get("", attr, KUrl(QString("http://www.ofxhome.com/api.php?lookup=%1").arg(fipid)), guidFile);
+    get("", attr, QUrl(QString("http://www.ofxhome.com/api.php?lookup=%1").arg(fipid)), guidFile);
 
   QFile f(guidFile.path());
   if (f.open(QIODevice::ReadOnly)) {
@@ -321,7 +321,7 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
   attr["accept"] = "*/*";
 
   if (!i.isReadable() || i.lastModified().addDays(7) < QDateTime::currentDateTime())
-    get("", attr, KUrl(QString("http://moneycentral.msn.com/money/2005/mnynet/service/olsvcupd/OnlSvcBrandInfo.aspx?MSNGUID=&GUID=%1&SKU=3&VER=" VER).arg(fipid)), guidFile);
+    get("", attr, QUrl(QString("http://moneycentral.msn.com/money/2005/mnynet/service/olsvcupd/OnlSvcBrandInfo.aspx?MSNGUID=&GUID=%1&SKU=3&VER=" VER).arg(fipid)), guidFile);
 
   QFile f(guidFile.path());
   if (f.open(QIODevice::ReadOnly)) {
@@ -348,7 +348,7 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
   return result;
 }
 
-bool get(const QString& request, const QMap<QString, QString>& attr, const KUrl& url, const KUrl& filename)
+bool get(const QString& request, const QMap<QString, QString>& attr, const QUrl &url, const QUrl& filename)
 {
   Q_UNUSED(request);
 
@@ -358,7 +358,7 @@ bool get(const QString& request, const QMap<QString, QString>& attr, const KUrl&
   return job.error() == QHttp::NoError;
 }
 
-bool post(const QString& request, const QMap<QString, QString>& attr, const KUrl& url, const KUrl& filename)
+bool post(const QString& request, const QMap<QString, QString>& attr, const QUrl &url, const QUrl& filename)
 {
   QByteArray req(request.toAscii());
 
@@ -374,7 +374,7 @@ public:
   QFile  m_fpTrace;
 };
 
-OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo) :
+OfxHttpsRequest::OfxHttpsRequest(const QString& type, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo) :
     d(new Private),
     m_dst(dst)
 {
@@ -398,7 +398,7 @@ OfxHttpsRequest::OfxHttpsRequest(const QString& type, const KUrl &url, const QBy
 
   if (d->m_fpTrace.isOpen()) {
     QTextStream ts(&d->m_fpTrace);
-    ts << "url: " << url.prettyUrl() << "\n";
+    ts << "url: " << url.toDisplayString() << "\n";
     ts << "request:\n" << QString(postData) << "\n" << "response:\n";
   }
 
@@ -479,7 +479,7 @@ void OfxHttpsRequest::slotOfxFinished(KJob* /* e */)
 
 
 
-OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const KUrl& dst, bool showProgressInfo)
+OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo)
 {
   Q_UNUSED(showProgressInfo);
 

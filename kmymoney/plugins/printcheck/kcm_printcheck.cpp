@@ -43,13 +43,13 @@ PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
   m_previewFrame->setLayout(layout);
   layout->addWidget(m_checkTemplatePreviewHTMLPart->view());
 
-  connect(kcfg_checkTemplateFile, SIGNAL(urlSelected(KUrl)),
-          this, SLOT(urlSelected(KUrl)));
+  connect(kcfg_checkTemplateFile, SIGNAL(urlSelected(QUrl)),
+          this, SLOT(urlSelected(QUrl)));
   connect(kcfg_checkTemplateFile, SIGNAL(returnPressed(QString)),
           this, SLOT(returnPressed(QString)));
 }
 
-void PluginSettingsWidget::urlSelected(const KUrl& url)
+void PluginSettingsWidget::urlSelected(const QUrl &url)
 {
   if (!url.isEmpty())
     m_checkTemplatePreviewHTMLPart->openUrl(url);

@@ -465,7 +465,7 @@ public:
     * @return URL of last opened file or empty if the program
     *         should start with the open file dialog
     */
-  const KUrl lastOpenedURL(void);
+  const QUrl lastOpenedURL(void);
 
   /**
     * construtor of KMyMoneyApp, calls all init functions to create the application.
@@ -487,7 +487,7 @@ public:
   /**
     * Returns whether there is an importer available that can handle this file
     */
-  bool isImportableFile(const KUrl& url);
+  bool isImportableFile(const QUrl &url);
 
   /**
     * This method is used to update the caption of the application window.
@@ -539,7 +539,7 @@ public:
    */
   void setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps);
 
-  KUrl selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode, QWidget *widget);
+  QUrl selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode, QWidget *widget);
 
   const MyMoneyAccount& findAccount(const MyMoneyAccount& acc, const MyMoneyAccount& parent) const;
 
@@ -557,7 +557,7 @@ public:
     * If the user's answer is negative, @p false will be returned.
     * @p true will be returned in all other cases.
     */
-  bool okToWriteFile(const KUrl& url);
+  bool okToWriteFile(const QUrl &url);
 
 protected:
   /** save general Options like all bar positions and status as well as the geometry and the recent file list to the configuration
@@ -710,7 +710,7 @@ public slots:
 
   /** opens a file from the recent files menu */
 
-  void slotFileOpenRecent(const KUrl& url);
+  void slotFileOpenRecent(const QUrl &url);
 
   /** open a SQL database */
   void slotOpenDatabase(void);
@@ -1121,7 +1121,7 @@ signals:
     * This signal is emitted when a new file is loaded. In the case file
     * is closed, this signal is also emitted with an empty url.
     */
-  void fileLoaded(const KUrl& url);
+  void fileLoaded(const QUrl &url);
 
   /**
     * This signal is emitted when a payee/list of payees has been selected by

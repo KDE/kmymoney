@@ -19,10 +19,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QUrl>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kurl.h>
 #include <klocalizedstring.h>
 
 // ----------------------------------------------------------------------------
@@ -124,8 +125,8 @@ KSettingsReports::KSettingsReports(QWidget* parent) :
 
   d->m_fileKLineEdit = kcfg_CssFileDefault->lineEdit();
 
-  connect(kcfg_CssFileDefault, SIGNAL(urlSelected(KUrl)),
-          this, SLOT(slotCssUrlSelected(KUrl)));
+  connect(kcfg_CssFileDefault, SIGNAL(urlSelected(QUrl)),
+          this, SLOT(slotCssUrlSelected(QUrl)));
 
   connect(d->m_fileKLineEdit, SIGNAL(editingFinished()),
           this, SLOT(slotEditingFinished()));
@@ -146,7 +147,7 @@ KSettingsReports::~KSettingsReports()
  *
  * @see KSettingsReports#Private#checkCssFile
  */
-void KSettingsReports::slotCssUrlSelected(const KUrl& cssUrl)
+void KSettingsReports::slotCssUrlSelected(const QUrl &cssUrl)
 {
   QString css = cssUrl.isLocalFile() ? cssUrl.toLocalFile() : cssUrl.url();
   d->checkCssFile(css);

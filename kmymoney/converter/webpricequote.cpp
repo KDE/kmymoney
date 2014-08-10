@@ -114,7 +114,7 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
   else
     emit error(i18n("Source <placeholder>%1</placeholder> does not exist.", sourcename));
 
-  KUrl url;
+  QUrl url;
 
   // if the source has room for TWO symbols..
   if (d->m_source.m_url.contains("%2")) {
@@ -123,12 +123,12 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
     QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
     // if we've truly found 2 symbols delimited this way...
     if (splitrx.indexIn(d->m_symbol) != -1)
-      url = KUrl(d->m_source.m_url.arg(splitrx.cap(1), splitrx.cap(2)));
+      url = QUrl(d->m_source.m_url.arg(splitrx.cap(1), splitrx.cap(2)));
     else
       kDebug(Private::dbgArea()) << "WebPriceQuote::launch() did not find 2 symbols";
   } else
     // a regular one-symbol quote
-    url = KUrl(d->m_source.m_url.arg(d->m_symbol));
+    url = QUrl(d->m_source.m_url.arg(d->m_symbol));
 
   if (url.isLocalFile()) {
     emit status(i18nc("The process x is executing", "Executing %1...", url.toLocalFile()));
@@ -147,7 +147,7 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
       slotParseQuote(QString());
     }
   } else {
-    emit status(i18n("Fetching URL %1...", url.prettyUrl()));
+    emit status(i18n("Fetching URL %1...", url.toDisplayString()));
 
     QString tmpFile;
     if (KIO::NetAccess::download(url, tmpFile, 0)) {

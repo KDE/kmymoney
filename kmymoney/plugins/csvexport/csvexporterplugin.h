@@ -43,7 +43,7 @@ public:
   ~CsvExporterPlugin();
 
   KAction*          m_action;
-  bool              okToWriteFile(const KUrl& url);
+  bool              okToWriteFile(const QUrl &url);
   CsvExportDlg*     exporterDialog() {
     return m_dlg;
   }

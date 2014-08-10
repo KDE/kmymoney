@@ -32,7 +32,7 @@
 #include <KPluginFactory>
 #include <KDebug>
 #include <KFile>
-#include <KUrl>
+#include <QUrl>
 #include <KAction>
 #include <KMessageBox>
 #include <KActionCollection>
@@ -112,7 +112,7 @@ void OfxImporterPlugin::slotImportFile(void)
   Ui_ImportOption* option = new Ui_ImportOption;
   option->setupUi(widget);
 
-  KUrl url = importInterface()->selectFile(i18n("OFX import file selection"),
+  QUrl url = importInterface()->selectFile(i18n("OFX import file selection"),
              "",
              "*.ofx *.qfx *.ofc|OFX files (*.ofx, *.qfx, *.ofc)\n*|All files",
              static_cast<KFile::Mode>((int)(KFile::File | KFile::ExistingOnly)),
@@ -124,7 +124,7 @@ void OfxImporterPlugin::slotImportFile(void)
     if (isMyFormat(url.path())) {
       slotImportFile(url.path());
     } else {
-      KMessageBox::error(0, i18n("Unable to import %1 using the OFX importer plugin.  This file is not the correct format.", url.prettyUrl()), i18n("Incorrect format"));
+      KMessageBox::error(0, i18n("Unable to import %1 using the OFX importer plugin.  This file is not the correct format.", url.toDisplayString()), i18n("Incorrect format"));
     }
 
   }

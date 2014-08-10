@@ -244,7 +244,7 @@ void InvestProcessing::slotFileDialogClicked()
     m_invPath  = "~/";
   }
 
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl(m_invPath),
+  QPointer<KFileDialog> dialog = new KFileDialog(QUrl(m_invPath),
       i18n("*.csv *.PRN *.txt|CSV Files\n*|All files"), 0);
 
   //  Add encoding selection to FileDialog
@@ -265,7 +265,7 @@ void InvestProcessing::slotFileDialogClicked()
   m_csvDialog->m_inFileName.clear();
 
   if (!KIO::NetAccess::download(m_url,  m_csvDialog->m_inFileName, 0)) {
-    KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.prettyUrl()),
+    KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.toDisplayString()),
                                KIO::NetAccess::lastErrorString(),
                                i18n("File access error"));
     return;
@@ -1736,7 +1736,7 @@ void InvestProcessing::saveAs()
 {
   if (m_csvDialog->m_fileType == "Invest") {
     QStringList outFile = m_inFileName .split('.');
-    const KUrl& name = QString((outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif");
+    const QUrl &name = QString((outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif");
 
     QString outFileName = KFileDialog::getSaveFileName(name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")), 0, i18n("Save QIF"), KFileDialog::ConfirmOverwrite);
     QFile oFile(outFileName);

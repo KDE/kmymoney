@@ -31,13 +31,13 @@
 #include <QString>
 #include <QStringList>
 #include <QByteArray>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
 #include <ktemporaryfile.h>
 #include <kprocess.h>
-#include <kurl.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -90,7 +90,7 @@ public:
     *
     * @param url URL of the file to be imported
     */
-  void setURL(const KUrl& url);
+  void setURL(const QUrl &url);
 
   /**
     * This method is used to store the name of the profile into the object.
@@ -363,7 +363,7 @@ private:
 
   KProcess                m_filter;
   QString                 m_filename;
-  KUrl                    m_url;
+  QUrl                    m_url;
   MyMoneyQifProfile       m_qifProfile;
   MyMoneyAccount          m_account;
   unsigned long           m_transactionsSkipped;

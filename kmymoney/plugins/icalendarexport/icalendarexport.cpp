@@ -25,7 +25,7 @@
 #include <KAction>
 #include <KFileDialog>
 #include <KPluginInfo>
-#include <KUrl>
+#include <QUrl>
 #include <KActionCollection>
 
 // KMyMoney includes
@@ -98,13 +98,13 @@ KMMiCalendarExportPlugin::~KMMiCalendarExportPlugin()
 
 void KMMiCalendarExportPlugin::slotFirstExport(void)
 {
-  QPointer<KFileDialog> fileDialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-export"), QString("%1|%2\n").arg("*.ics").arg(i18nc("ICS (Filefilter)", "iCalendar files")), d->m_action->parentWidget());
+  QPointer<KFileDialog> fileDialog = new KFileDialog(QUrl("kfiledialog:///kmymoney-export"), QString("%1|%2\n").arg("*.ics").arg(i18nc("ICS (Filefilter)", "iCalendar files")), d->m_action->parentWidget());
 
   fileDialog->setOperationMode(KFileDialog::Saving);
   fileDialog->setCaption(i18n("Export as"));
 
   if (fileDialog->exec() == QDialog::Accepted) {
-    KUrl newURL = fileDialog->selectedUrl();
+    QUrl newURL = fileDialog->selectedUrl();
     if (newURL.isLocalFile()) {
       PluginSettings::setIcalendarFile(newURL.toLocalFile());
       PluginSettings::self()->writeConfig();

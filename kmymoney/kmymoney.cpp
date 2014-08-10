@@ -57,6 +57,7 @@
 #include <KMenu>
 #include <QProgressBar>
 #include <QList>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -278,7 +279,7 @@ public:
   KMyMoneyView *m_myMoneyView;
 
   /// The URL of the file currently being edited when open.
-  KUrl  m_fileName;
+  QUrl  m_fileName;
 
   bool m_startDialog;
   QString m_mountpoint;
@@ -445,12 +446,12 @@ KMyMoneyApp::~KMyMoneyApp()
   delete d;
 }
 
-const KUrl KMyMoneyApp::lastOpenedURL(void)
+const QUrl KMyMoneyApp::lastOpenedURL(void)
 {
-  KUrl url = d->m_startDialog ? KUrl() : d->m_fileName;
+  QUrl url = d->m_startDialog ? QUrl() : d->m_fileName;
 
   if (!url.isValid()) {
-    url = readLastUsedFile();
+    url = QUrl::fromUserInput(readLastUsedFile());
   }
 
   ready();
@@ -497,7 +498,7 @@ void KMyMoneyApp::initActions(void)
 
   actionCollection()->addAction(KStandardAction::New, this, SLOT(slotFileNew()));
   actionCollection()->addAction(KStandardAction::Open, this, SLOT(slotFileOpen()));
-  d->m_recentFiles = KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(KUrl)), actionCollection());
+  d->m_recentFiles = KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(QUrl)), actionCollection());
   actionCollection()->addAction(KStandardAction::Save, this, SLOT(slotFileSave()));
   actionCollection()->addAction(KStandardAction::SaveAs, this, SLOT(slotFileSaveAs()));
   actionCollection()->addAction(KStandardAction::Close, this, SLOT(slotFileClose()));
@@ -1342,7 +1343,7 @@ void KMyMoneyApp::slotFileNew(void)
     // next line required until we move all file handling out of KMyMoneyView
     d->m_myMoneyView->newFile();
 
-    d->m_fileName = KUrl();
+    d->m_fileName = QUrl();
     updateCaption();
 
     // before we create the wizard, we need to preload the currencies
@@ -1389,7 +1390,7 @@ void KMyMoneyApp::slotFileNew(void)
           (*it_t).importTemplate(&progressCallback);
         }
 
-        d->m_fileName = KUrl(wizard->url());
+        d->m_fileName = QUrl(wizard->url());
         ft.commit();
         KMyMoneyGlobalSettings::setFirstTimeRun(false);
 
@@ -1424,9 +1425,9 @@ void KMyMoneyApp::slotFileNew(void)
   }
 }
 
-KUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, const QString& mask, KFile::Mode mode, QWidget* widget)
+QUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, const QString& mask, KFile::Mode mode, QWidget* widget)
 {
-  KUrl url;
+  QUrl url;
   QString path(_path);
 
   // if the path is not specified open the file dialog in the last used directory
@@ -1434,7 +1435,7 @@ KUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, con
   if (path.isEmpty())
     path = "kfiledialog:///kmymoney-import";
 
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl(path), mask, this, widget);
+  QPointer<KFileDialog> dialog = new KFileDialog(QUrl(path), mask, this, widget);
   dialog->setMode(mode);
 
   if (dialog->exec() == QDialog::Accepted && dialog != 0) {
@@ -1458,7 +1459,7 @@ void KMyMoneyApp::slotFileOpen(void)
 {
   KMSTATUS(i18n("Open a file."));
 
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-open"),
+  QPointer<KFileDialog> dialog = new KFileDialog(QUrl("kfiledialog:///kmymoney-open"),
       i18n("*.kmy *.xml|KMyMoney files\n*|All files"),
       this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
@@ -1484,7 +1485,7 @@ void KMyMoneyApp::slotOpenDatabase(void)
   delete dialog;
 }
 
-bool KMyMoneyApp::isImportableFile(const KUrl& url)
+bool KMyMoneyApp::isImportableFile(const QUrl &url)
 {
   bool result = false;
 
@@ -1512,10 +1513,10 @@ bool KMyMoneyApp::isImportableFile(const KUrl& url)
   return result;
 }
 
-void KMyMoneyApp::slotFileOpenRecent(const KUrl& url)
+void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
 {
   KMSTATUS(i18n("Loading file..."));
-  KUrl lastFile = d->m_fileName;
+  QUrl lastFile = d->m_fileName;
 
   // check if there are other instances which might have this file open
   QList<QString> list = instanceList();
@@ -1533,13 +1534,13 @@ void KMyMoneyApp::slotFileOpenRecent(const KUrl& url)
     }
   }
   if (!duplicate) {
-    KUrl newurl = url;
-    if ((newurl.protocol() == "sql")) {
-      if (newurl.queryItem("driver") == "QMYSQL3") { // fix any old urls
+    QUrl newurl = url;
+    if ((newurl.scheme() == "sql")) {
+      if (QUrlQuery(newurl).queryItemValue("driver") == "QMYSQL3") { // fix any old urls
         newurl.removeQueryItem("driver");
         newurl.addQueryItem("driver", "QMYSQL");
       }
-      if (newurl.queryItem("driver") == "QSQLITE3") {
+      if (QUrlQuery(newurl).queryItemValue("driver") == "QSQLITE3") {
         newurl.removeQueryItem("driver");
         newurl.addQueryItem("driver", "QSQLITE");
       }
@@ -1551,7 +1552,7 @@ void KMyMoneyApp::slotFileOpenRecent(const KUrl& url)
       }
       // if we need to supply a password, then show the dialog
       // otherwise it isn't needed
-      if ((newurl.queryItem("secure") == "yes") && newurl.pass().isEmpty()) {
+      if ((QUrlQuery(newurl).queryItemValue("secure") == "yes") && newurl.password().isEmpty()) {
         if (dialog->exec() == QDialog::Accepted && dialog != 0)
           newurl = dialog->selectedURL();
         else {
@@ -1561,7 +1562,7 @@ void KMyMoneyApp::slotFileOpenRecent(const KUrl& url)
       }
       delete dialog;
     }
-    if ((newurl.protocol() == "sql") || (newurl.isValid() && KIO::NetAccess::exists(newurl, KIO::NetAccess::SourceSide, this))) {
+    if ((newurl.scheme() == "sql") || (newurl.isValid() && KIO::NetAccess::exists(newurl, KIO::NetAccess::SourceSide, this))) {
       slotFileClose();
       if (!d->m_myMoneyView->fileOpen()) {
         try {
@@ -1569,10 +1570,10 @@ void KMyMoneyApp::slotFileOpenRecent(const KUrl& url)
             if ((d->m_myMoneyView->isNativeFile())) {
               d->m_fileName = newurl;
               updateCaption();
-              d->m_recentFiles->addUrl(newurl.pathOrUrl());
-              writeLastUsedFile(newurl.pathOrUrl());
+              d->m_recentFiles->addUrl(newurl.toDisplayString(QUrl::PreferLocalFile));
+              writeLastUsedFile(newurl.toDisplayString(QUrl::PreferLocalFile));
             } else {
-              d->m_fileName = KUrl(); // imported files have no filename
+              d->m_fileName = QUrl(); // imported files have no filename
             }
             // Check the schedules
             slotCheckSchedules();
@@ -1588,10 +1589,10 @@ void KMyMoneyApp::slotFileOpenRecent(const KUrl& url)
       }
     } else { // newurl invalid
       slotFileClose();
-      KMessageBox::sorry(this, i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>", url.pathOrUrl()), i18n("File not found"));
+      KMessageBox::sorry(this, i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("File not found"));
     }
   } else { // isDuplicate
-    KMessageBox::sorry(this, i18n("<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>", url.pathOrUrl()), i18n("Duplicate open"));
+    KMessageBox::sorry(this, i18n("<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("Duplicate open"));
   }
 }
 
@@ -1727,7 +1728,7 @@ bool KMyMoneyApp::slotFileSaveAs(void)
 
     d->consistencyCheck(false);
 
-    KUrl newURL = dlg->selectedUrl();
+    QUrl newURL = dlg->selectedUrl();
 
     // deleting the dialog will delete the combobox pointed to by d->m_saveEncrypted so get the key name here
     QString selectedKeyName;
@@ -1739,7 +1740,7 @@ bool KMyMoneyApp::slotFileSaveAs(void)
     delete dlg;
 
     if (!newURL.isEmpty()) {
-      QString newName = newURL.pathOrUrl();
+      QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
 
       // end of copy
 
@@ -1802,7 +1803,7 @@ bool KMyMoneyApp::slotFileSaveAs(void)
 bool KMyMoneyApp::slotSaveAsDatabase(void)
 {
   bool rc = false;
-  KUrl oldUrl;
+  QUrl oldUrl;
   // in event of it being a database, ensure that all data is read into storage for saveas
   if (d->m_myMoneyView->isDatabase()) {
     dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage())->fillStorage();
@@ -1810,7 +1811,7 @@ bool KMyMoneyApp::slotSaveAsDatabase(void)
   }
   KMSTATUS(i18n("Saving file to database..."));
   QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::WriteOnly);
-  KUrl url = oldUrl;
+  QUrl url = oldUrl;
   if (!dialog->checkDrivers()) {
     delete dialog;
     return (false);
@@ -1820,9 +1821,9 @@ bool KMyMoneyApp::slotSaveAsDatabase(void)
     url = dialog->selectedURL();
     // If the protocol is SQL for the old and new, and the hostname and database names match
     // Let the user know that the current database cannot be saved on top of itself.
-    if (url.protocol() == "sql" && oldUrl.protocol() == "sql"
+    if (url.scheme() == "sql" && oldUrl.scheme() == "sql"
         && oldUrl.host() == url.host()
-        && oldUrl.queryItem("driver") == url.queryItem("driver")
+        && QUrlQuery(oldUrl).queryItemValue("driver") == QUrlQuery(url).queryItemValue("driver")
         && oldUrl.path().right(oldUrl.path().length() - 1) == url.path().right(url.path().length() - 1)) {
       KMessageBox::sorry(this, i18n("Cannot save to current database."));
     } else {
@@ -1838,8 +1839,8 @@ bool KMyMoneyApp::slotSaveAsDatabase(void)
   if (rc) {
     //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
     //if(p)
-    d->m_recentFiles->addUrl(url.pathOrUrl());
-    writeLastUsedFile(url.pathOrUrl());
+    d->m_recentFiles->addUrl(url.toDisplayString(QUrl::PreferLocalFile));
+    writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
   }
   d->m_autoSaveTimer->stop();
   updateCaption();
@@ -2226,7 +2227,7 @@ void KMyMoneyApp::slotGncImport(void)
 
   KMSTATUS(i18n("Importing a GnuCash file."));
 
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-import"),
+  QPointer<KFileDialog> dialog = new KFileDialog(QUrl("kfiledialog:///kmymoney-import"),
       i18n("*|GnuCash files\n*|All files"),
       this);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
@@ -2235,7 +2236,7 @@ void KMyMoneyApp::slotGncImport(void)
     // call the importer
     d->m_myMoneyView->readFile(dialog->selectedUrl());
     // imported files don't have a name
-    d->m_fileName = KUrl();
+    d->m_fileName = QUrl();
 
     updateCaption();
     emit fileLoaded(d->m_fileName);
@@ -2264,16 +2265,16 @@ void KMyMoneyApp::slotStatementImport(void)
   bool result = false;
   KMSTATUS(i18n("Importing an XML Statement."));
 
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-import"),
+  QPointer<KFileDialog> dialog = new KFileDialog(QUrl("kfiledialog:///kmymoney-import"),
       i18n("*.xml|XML files\n*|All files"),
       this);
   dialog->setMode(KFile::Files | KFile::ExistingOnly);
 
   if (dialog->exec() == QDialog::Accepted && dialog != 0) {
-    KUrl::List files = dialog->selectedUrls();
+    QList<QUrl> files = dialog->selectedUrls();
     d->m_collectingStatements = (files.count() > 1);
 
-    foreach (const KUrl& url, files) {
+    foreach (const QUrl &url, files) {
       qDebug("Processing '%s'", qPrintable(url.path()));
       result |= slotStatementImport(url.path());
     }
@@ -2390,13 +2391,13 @@ void KMyMoneyApp::slotQifExport(void)
   delete dlg;
 }
 
-bool KMyMoneyApp::okToWriteFile(const KUrl& url)
+bool KMyMoneyApp::okToWriteFile(const QUrl &url)
 {
   // check if the file exists and warn the user
   bool reallySaveFile = true;
 
   if (KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this)) {
-    if (KMessageBox::warningYesNo(this, QString("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.pathOrUrl()) + QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
+    if (KMessageBox::warningYesNo(this, QString("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile)) + QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
       reallySaveFile = false;
   }
   return reallySaveFile;
@@ -2584,7 +2585,7 @@ void KMyMoneyApp::slotProcessExited(void)
         if (d->m_backupResult == 0) {
           progressCallback(50, 0, i18n("Writing %1", backupfile));
 //FIXME: FIX on windows
-          d->m_proc << "cp" << "-f" << d->m_fileName.path(KUrl::LeaveTrailingSlash) << backupfile;
+          d->m_proc << "cp" << "-f" << d->m_fileName.path() << backupfile;
           d->m_backupState = BACKUP_COPYING;
           d->m_proc.start();
         }
@@ -7417,7 +7418,7 @@ void KMyMoneyApp::Private::closeFile(void)
   m_myMoneyView->finishReconciliation(m_reconciliationAccount);
 
   m_myMoneyView->closeFile();
-  m_fileName = KUrl();
+  m_fileName = QUrl();
   q->updateCaption();
 
   // just create a new balance warning object

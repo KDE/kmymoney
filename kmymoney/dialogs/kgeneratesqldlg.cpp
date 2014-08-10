@@ -170,7 +170,7 @@ void KGenerateSqlDlg::slotcreateTables()
 void KGenerateSqlDlg::slotsaveSQL()
 {
   QString fileName = KFileDialog::getSaveFileName(
-                       KUrl(),
+                       QUrl(),
                        QString(),
                        this,
                        i18n("Select output file"));

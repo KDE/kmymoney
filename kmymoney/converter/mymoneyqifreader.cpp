@@ -268,7 +268,7 @@ void MyMoneyQifReader::setCategoryMapping(bool map)
   d->mapCategories = map;
 }
 
-void MyMoneyQifReader::setURL(const KUrl& url)
+void MyMoneyQifReader::setURL(const QUrl &url)
 {
   m_url = url;
 }
@@ -413,7 +413,7 @@ bool MyMoneyQifReader::startImport(void)
 
   if (!KIO::NetAccess::download(m_url, m_filename, 0)) {
     KMessageBox::detailedError(0,
-                               i18n("Error while loading file '%1'.", m_url.prettyUrl()),
+                               i18n("Error while loading file '%1'.", m_url.toDisplayString()),
                                KIO::NetAccess::lastErrorString(),
                                i18n("File access error"));
     return false;

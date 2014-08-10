@@ -119,12 +119,12 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   connect(m_thousandsBox, SIGNAL(activated(QString)), this, SLOT(slotThousandsChanged(QString)));
 
   connect(m_editInputFilterLocation, SIGNAL(textChanged(QString)), &m_profile, SLOT(setFilterScriptImport(QString)));
-  connect(m_editInputFilterLocation, SIGNAL(urlSelected(KUrl)), m_editInputFilterLocation, SLOT(setUrl(KUrl)));
+  connect(m_editInputFilterLocation, SIGNAL(urlSelected(QUrl)), m_editInputFilterLocation, SLOT(setUrl(QUrl)));
 
   connect(m_editInputFilterFileType, SIGNAL(textChanged(QString)), &m_profile, SLOT(setFilterFileType(QString)));
 
   connect(m_editOutputFilterLocation, SIGNAL(textChanged(QString)), &m_profile, SLOT(setFilterScriptExport(QString)));
-  connect(m_editOutputFilterLocation, SIGNAL(urlSelected(KUrl)), m_editOutputFilterLocation, SLOT(setUrl(KUrl)));
+  connect(m_editOutputFilterLocation, SIGNAL(urlSelected(QUrl)), m_editOutputFilterLocation, SLOT(setUrl(QUrl)));
 
   connect(m_attemptMatch, SIGNAL(toggled(bool)), &m_profile, SLOT(setAttemptMatchDuplicates(bool)));
 }

@@ -25,6 +25,7 @@
 #include <QPixmap>
 #include <QLabel>
 #include <QCheckBox>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -40,7 +41,6 @@
 #include <kguiitem.h>
 #include <kfiledialog.h>
 #include <kicon.h>
-#include <kurl.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -72,8 +72,8 @@ KBackupDlg::~KBackupDlg()
 
 void KBackupDlg::chooseButtonClicked()
 {
-  KUrl newDir = KFileDialog::getExistingDirectoryUrl(KUrl::fromPath(KGlobalSettings::documentPath()));
-  if (newDir.hasPath())
+  QUrl newDir = KFileDialog::getExistingDirectoryUrl(QUrl::fromLocalFile(KGlobalSettings::documentPath()));
+  if (!newDir.path().isEmpty())
     txtMountPoint->setText(newDir.path());
 }
 

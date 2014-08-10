@@ -35,7 +35,7 @@ public:
   PluginSettingsWidget(QWidget* parent = 0);
 
 public slots:
-  void urlSelected(const KUrl& url);
+  void urlSelected(const QUrl &url);
   void returnPressed(const QString& url);
 
 private:

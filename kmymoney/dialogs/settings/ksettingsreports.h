@@ -21,13 +21,13 @@
 // QT Includes
 
 #include <QFileInfo>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLineEdit>
 #include <KMessageBox>
-#include <KUrl>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -51,7 +51,7 @@ public:
   ~KSettingsReports();
 
 protected slots:
-  void slotCssUrlSelected(const KUrl&);
+  void slotCssUrlSelected(const QUrl&);
   void slotEditingFinished();
 
 private:

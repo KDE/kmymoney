@@ -629,12 +629,12 @@ void KReportsView::loadView(void)
   m_tocTreeWidget->setUpdatesEnabled(true);
 }
 
-void KReportsView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)
+void KReportsView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)
 {
   QString view = url.fileName();
-  QString command = url.queryItem("command");
-  QString id = url.queryItem("id");
-  QString tid = url.queryItem("tid");
+  QString command = QUrlQuery(url).queryItemValue("command");
+  QString id = QUrlQuery(url).queryItemValue("id");
+  QString tid = QUrlQuery(url).queryItemValue("tid");
 
   if (view == VIEW_REPORTS) {
 
@@ -688,7 +688,7 @@ void KReportsView::slotSaveView(void)
 
     QString filterList = d->fSavProps->filtCsv + '\n' + d->fSavProps->filtHtml;
     QPointer<KFileDialog> dlg =
-      new KFileDialog(KUrl("kfiledialog:///kmymoney-export"), filterList, this,
+      new KFileDialog(QUrl("kfiledialog:///kmymoney-export"), filterList, this,
                       qobject_cast<QWidget*>(d->fSavProps->includeCssCheckBox));
 
     connect(dlg, SIGNAL(filterChanged(QString)),
@@ -708,9 +708,9 @@ void KReportsView::slotSaveView(void)
     }
 
     if (dlg->exec() == QDialog::Accepted) {
-      KUrl newURL = dlg->selectedUrl();
+      QUrl newURL = dlg->selectedUrl();
       if (!newURL.isEmpty()) {
-        QString newName = newURL.pathOrUrl();
+        QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
 
         if (newName.indexOf('.') == -1)
           newName.append(".html");
@@ -1068,9 +1068,9 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
   connect(tab->control()->buttonClose, SIGNAL(clicked()),
           this, SLOT(slotCloseCurrent()));
 
-  connect(tab->browserExtenstion(), SIGNAL(openUrlRequest(const KUrl &,
+  connect(tab->browserExtenstion(), SIGNAL(openUrlRequest(const QUrl &,
           const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
-          this, SLOT(slotOpenUrl(KUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
+          this, SLOT(slotOpenUrl(QUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
 
   // if this is a default report, then you can't delete it!
   if (report.id().isEmpty())
