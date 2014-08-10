@@ -45,7 +45,7 @@
 #include <kiconloader.h>
 #include <kicon.h>
 #include <kguiitem.h>
-#include <kstandarddirs.h>
+
 #include <kdebug.h>
 #include <kcalendarsystem.h>
 #include <kcombobox.h>

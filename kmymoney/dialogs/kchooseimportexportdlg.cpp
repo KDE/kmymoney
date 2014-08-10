@@ -34,7 +34,7 @@
 #include <kglobal.h>
 #include <kconfig.h>
 #include <klocale.h>
-#include <kstandarddirs.h>
+
 #include <kconfiggroup.h>
 #include <KSharedConfig>
 

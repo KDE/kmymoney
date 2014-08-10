@@ -68,6 +68,7 @@
 #include <KIO/NetAccess>
 #include "KAboutApplicationDialog"
 #include <KAboutData>
+#include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 
@@ -317,12 +318,12 @@ CSVDialog::~CSVDialog()
 
 void CSVDialog::readSettingsProfiles()
 {
-  KSharedConfigPtr  newConfig = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+  KSharedConfigPtr  newConfig = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
   KConfigGroup newBankGroup(newConfig, "BankProfiles");
   if (newBankGroup.exists()) {     //  If local config file exists, exit
     return;
   }
-  KSharedConfigPtr  config = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
+  KSharedConfigPtr  config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, "csvimporterrc"));
   KConfigGroup bankGroup(config, "BankProfiles");
 
   QStringList lst = bankGroup.readEntry("BankNames", QStringList());
@@ -345,7 +346,7 @@ void CSVDialog::readSettingsProfiles()
 void CSVDialog::readSettingsInit()
 {
   m_pageIntro->m_index = 0;
-  KSharedConfigPtr  myconfig = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+  KSharedConfigPtr  myconfig = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
   KConfigGroup bankProfilesGroup(myconfig, "BankProfiles");
 
   m_profileList.clear();
@@ -397,7 +398,7 @@ void CSVDialog::readSettings()
   m_profileExists = false;
   int tmp = -1;
   QString txt;
-  KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
+  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, "csvimporterrc"));
   bool found = false;
   for (int i = 0; i < m_profileList.count(); i++) {
     if (m_profileList[i] != m_profileName) {
@@ -516,7 +517,7 @@ void CSVDialog::reloadUISettings()
 
 void CSVDialog::createProfile(QString newName)
 {
-  KSharedConfigPtr  config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+  KSharedConfigPtr  config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
   KConfigGroup bankProfilesGroup(config, "BankProfiles");
 
   bankProfilesGroup.writeEntry("BankNames", m_profileList);
@@ -527,7 +528,7 @@ void CSVDialog::createProfile(QString newName)
 
   KConfigGroup profilesGroup(config, "Profiles-New Profile###");
 
-  KSharedConfigPtr  configBackup = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
+  KSharedConfigPtr  configBackup = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, "csvimporterrc"));
   KConfigGroup bkprofilesGroup(configBackup, "Profiles-New Profile###");
 
   KConfigGroup newProfilesGroup(config, txt);
@@ -594,7 +595,7 @@ void CSVDialog::slotFileDialogClicked()
   m_accept = false;
 
   QString profileName;
-  KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
+  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, "csvimporterrc"));
   for (int i = 0; i < m_profileList.count(); i++) {
     if (m_profileList[i] != m_profileName) {
       continue;
@@ -1733,7 +1734,7 @@ void CSVDialog::saveSettings()
     return;
   }
 
-  KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
 
   KConfigGroup mainGroup(config, "MainWindow");
   mainGroup.writeEntry("Height", height());
@@ -2904,7 +2905,7 @@ void IntroPage::slotComboEditTextChanged(QString txt)
     ui->combobox_source->setCurrentIndex(-1);
     m_dlg->m_profileName.clear();
     m_priorName.clear();
-    KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+    KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
     KConfigGroup bankProfilesGroup(config, "BankProfiles");
     if (m_dlg->m_fileType == "Banking") {
       m_dlg->m_priorCsvProfile.clear();

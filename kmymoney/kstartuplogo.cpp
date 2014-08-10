@@ -21,13 +21,14 @@
 
 #include <QPixmap>
 #include <QPainter>
+#include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <kglobal.h>
 #include <klocale.h>
-#include <kstandarddirs.h>
+
 #include <kcolorscheme.h>
 #include <ksplashscreen.h>
 #include <kcmdlineargs.h>
@@ -47,7 +48,7 @@ KStartupLogo::KStartupLogo() :
   if (!KMyMoneyGlobalSettings::showSplash())
     return;
 
-  QString filename = KGlobal::dirs()->findResource("appdata", "pics/startlogo.png");
+  QString filename = QStandardPaths::locate(QStandardPaths::DataLocation, "pics/startlogo.png");
   // TODO: port KF5
   QString localeFilename = filename;//KLocale::global()->localizedFilePath(filename);
   QPixmap logoOverlay(localeFilename);

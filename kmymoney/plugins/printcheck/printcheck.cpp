@@ -29,6 +29,7 @@
 #include <KPluginInfo>
 #include <khtmlview.h>
 #include <khtml_part.h>
+#include <QStandardPaths>
 
 // KMyMoney includes
 #include "mymoneyfile.h"
@@ -83,7 +84,7 @@ KMMPrintCheckPlugin::~KMMPrintCheckPlugin()
 
 void KMMPrintCheckPlugin::readCheckTemplate()
 {
-  QString checkTemplateHTMLPath = KGlobal::dirs()->findResource("appdata", "check_template.html");
+  QString checkTemplateHTMLPath = QStandardPaths::locate(QStandardPaths::DataLocation, "check_template.html");
 
   if (PluginSettings::checkTemplateFile().isEmpty()) {
     PluginSettings::setCheckTemplateFile(checkTemplateHTMLPath);

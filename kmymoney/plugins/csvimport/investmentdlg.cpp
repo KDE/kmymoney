@@ -44,6 +44,7 @@
 #include <KAboutData>
 #include <KAction>
 #include <KAboutApplicationDialog>
+#include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -90,7 +91,7 @@ void InvestmentDlg::saveSettings()
     return;
   }
   QString str;
-  KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
 
   KConfigGroup bankProfilesGroup(config, "BankProfiles");
 

@@ -40,7 +40,7 @@
 #include <kapplication.h>
 #include <kglobal.h>
 #include <klocale.h>
-#include <kstandarddirs.h>
+
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kstandardguiitem.h>

@@ -27,7 +27,7 @@
 // KDE Includes
 
 #include <kglobal.h>
-#include <kstandarddirs.h>
+
 #include <kiconloader.h>
 
 // ----------------------------------------------------------------------------

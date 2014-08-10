@@ -26,12 +26,13 @@
 #include <QPainter>
 #include <QResizeEvent>
 #include <QLabel>
+#include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <kglobal.h>
-#include <kstandarddirs.h>
+
 #include <kdebug.h>
 #include <kglobalsettings.h>
 #include <KColorScheme>
@@ -54,14 +55,14 @@ KMyMoneyTitleLabel::~KMyMoneyTitleLabel()
 void KMyMoneyTitleLabel::setLeftImageFile(const QString& _file)
 {
   m_leftImageFile = _file;
-  QString lfullpath = KGlobal::dirs()->findResource("appdata", m_leftImageFile);
+  QString lfullpath = QStandardPaths::locate(QStandardPaths::DataLocation, m_leftImageFile);
   m_leftImage.load(lfullpath);
 }
 
 void KMyMoneyTitleLabel::setRightImageFile(const QString& _file)
 {
   m_rightImageFile = _file;
-  QString rfullpath = KGlobal::dirs()->findResource("appdata", m_rightImageFile);
+  QString rfullpath = QStandardPaths::locate(QStandardPaths::DataLocation, m_rightImageFile);
   m_rightImage.load(rfullpath);
   if (m_rightImage.height() < 30)
     setMinimumHeight(30);

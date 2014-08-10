@@ -26,6 +26,7 @@
 #include <QTimer>
 #include <QList>
 #include <QTreeWidget>
+#include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -167,7 +168,7 @@ void KAccountTemplateSelector::slotLoadTemplateList(void)
 #ifndef KMM_DESIGNER
   QStringList dirs;
   // get list of template subdirs and scan them for the list of subdirs
-  d->dirlist = KGlobal::dirs()->findDirs("appdata", "templates");
+  d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates");
   QStringList::iterator it;
   for (it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
     QDir dir(*it);

@@ -46,6 +46,7 @@
 #include <KAboutData>
 #include <KAboutApplicationDialog>
 #include <kvbox.h>
+#include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -211,7 +212,7 @@ void InvestProcessing::slotFileDialogClicked()
   m_importCompleted = false;
   m_csvDialog->m_accept = false;
 
-  KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
+  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, "csvimporterrc"));
   bool found = false;
   QString profileName;
   for (int i = 0; i < m_csvDialog->m_profileList.count(); i++) {
@@ -1857,7 +1858,7 @@ void InvestProcessing::readSettings()
   int tmp;
   QString str;
 
-  KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
+  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, "csvimporterrc"));
   KConfigGroup securitiesGroup(config, "Securities");
   m_securityList.clear();
   m_csvDialog->m_pageInvestment->ui->comboBoxInv_securityName->clear();

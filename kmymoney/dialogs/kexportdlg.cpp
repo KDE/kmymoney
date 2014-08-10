@@ -32,7 +32,7 @@
 
 #include <kglobal.h>
 #include <klocale.h>
-#include <kstandarddirs.h>
+
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 #include <QPushButton>

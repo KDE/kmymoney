@@ -39,7 +39,7 @@
 #include <kglobal.h>
 #include <kiconloader.h>
 #include <kio/netaccess.h>
-#include <kstandarddirs.h>
+
 #include <kconfiggroup.h>
 #include <kicon.h>
 #include <KGuiItem>

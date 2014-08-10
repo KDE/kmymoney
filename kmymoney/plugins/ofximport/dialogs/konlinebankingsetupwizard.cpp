@@ -34,13 +34,14 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
-#include <kstandarddirs.h>
+
 #include <kprogressdialog.h>
 #include <kapplication.h>
 #include <klistwidgetsearchline.h>
 #include <kcombobox.h>
 #include <kurlrequester.h>
 #include <KWallet/Wallet>
+#include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -92,7 +93,7 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   vboxLayout1->insertWidget(0, searchLine);
   QTimer::singleShot(20, searchLine, SLOT(setFocus()));
 
-  OfxPartner::setDirectory(KStandardDirs::locateLocal("appdata", ""));
+  OfxPartner::setDirectory(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "");
   m_listFi->addItems(OfxPartner::BankNames());
   m_fInit = true;
   delete dlg;
@@ -348,7 +349,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
     QString hver = m_headerVersion->headerVersion();
     strncpy(fi.header_version, hver.toLatin1(), OFX_HEADERVERSION_LENGTH - 1);
 
-    QUrl filename(QString("%1response.ofx").arg(KStandardDirs::locateLocal("appdata", "")));
+    QUrl filename(QString("%1response.ofx").arg(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + ""));
     QByteArray req(libofx_request_accountinfo(&fi));
     // because the event loop is running while the request is performed disable the back button
     // (this function is not reentrant so the application might crash when back/next are used)

@@ -39,7 +39,7 @@
 
 #include <kfiledialog.h>
 #include <kglobal.h>
-#include <kstandarddirs.h>
+
 #include <kicon.h>
 #include <kicontheme.h>
 #include <kiconloader.h>

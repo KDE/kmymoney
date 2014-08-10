@@ -69,14 +69,14 @@ private:
   /**
    * Name of application resource type.
    *
-   * @see KGlobal::dirs()->findResource()
+   * @see KStandardDirs::locate()
    */
   const char* m_resourceType;
 
   /**
    * Subdirectory for html-resources of application.
    *
-   * @see KGlobal::dirs()->findResource()
+   * @see KStandardDirs::locate()
    */
   QString m_resourceHtml;
 

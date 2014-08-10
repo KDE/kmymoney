@@ -269,17 +269,17 @@ QString KMyMoneyUtils::findResource(const char* type, const QString& filename)
 
   // search the given resource
   mask = filename.arg("_%1.%2");
-  rc = KGlobal::dirs()->findResource(type, mask.arg(country).arg(language));
+  rc = KStandardDirs::locate(type, mask.arg(country).arg(language));
   if (rc.isEmpty()) {
     mask = filename.arg("_%1");
-    rc = KGlobal::dirs()->findResource(type, mask.arg(language));
+    rc = KStandardDirs::locate(type, mask.arg(language));
   }
   if (rc.isEmpty()) {
     // qDebug(QString("html/home_%1.html not found").arg(country).toLatin1());
-    rc = KGlobal::dirs()->findResource(type, mask.arg(country));
+    rc = KStandardDirs::locate(type, mask.arg(country));
   }
   if (rc.isEmpty()) {
-    rc = KGlobal::dirs()->findResource(type, filename.arg(""));
+    rc = KStandardDirs::locate(type, filename.arg(""));
   }
 
   if (rc.isEmpty()) {

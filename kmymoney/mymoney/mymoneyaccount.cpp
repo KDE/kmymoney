@@ -29,7 +29,7 @@
 // KDE Includes
 
 #include <klocale.h>
-#include <kstandarddirs.h>
+
 #include <kiconloader.h>
 
 // ----------------------------------------------------------------------------

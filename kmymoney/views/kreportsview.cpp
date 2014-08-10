@@ -38,7 +38,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kstandarddirs.h>
+
 #include <khtmlview.h>
 #include <kconfig.h>
 #include <kdebug.h>

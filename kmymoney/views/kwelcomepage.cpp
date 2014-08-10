@@ -25,11 +25,12 @@
 #include <QString>
 #include <QStringList>
 #include <QUrl>
+#include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <klocale.h>
-#include <kstandarddirs.h>
+
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <k4aboutdata.h>
@@ -56,7 +57,7 @@ const QString KWelcomePage::welcomePage(void)
   header += QString("<title>" + i18n("Home Page") + "</title>");
   header += QString("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">");
 
-  const QString welcomeFilename = KGlobal::dirs()->findResource("appdata", "html/welcome.css");
+  const QString welcomeFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/welcome.css");
   header += QString("<link href=\"%1\" rel=\"stylesheet\" type=\"text/css\">").arg(QUrl::fromLocalFile(welcomeFilename).url());
   header += QString("</head>");
 
@@ -64,13 +65,13 @@ const QString KWelcomePage::welcomePage(void)
   body = QString("<body>");
   //"background_image", if enabled, displays an image in the background of this page.
   //If you wish to use a background, un-comment the following line
-  const QString backgroundFilename = KGlobal::dirs()->findResource("appdata", "html/images/background.png");
+  const QString backgroundFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/background.png");
   body += QString("<img id=\"background_image\" src=\"%1\" height=\"100%\">").arg(QUrl::fromLocalFile(backgroundFilename).url());
-  const QString logoFilename = KGlobal::dirs()->findResource("appdata", "html/images/trans_logo.png");
+  const QString logoFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/trans_logo.png");
   body += QString("<img id=\"KMyMoneyLogo\" src=\"%1\">").arg(QUrl::fromLocalFile(logoFilename).url());
   body += QString("<h3 id=\"title\">" + i18n("Welcome to KMyMoney") + "</h3>");
   body += QString("<h4 id=\"subtitle\">" + i18n("The free, easy to use, personal finance manager for KDE") + "</h4>");
-  const QString backArrowFilename = KGlobal::dirs()->findResource("appdata", "html/images/backarrow.png");
+  const QString backArrowFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/backarrow.png");
   body += QString("<div id=\"returnLink\"><a href=\"/home\"><img src=\"%1\">").arg(QUrl::fromLocalFile(backArrowFilename).url());
   body += QString(i18n("Go to My Financial Summary"));
   body += QString("</a></div>");
@@ -89,22 +90,22 @@ const QString KWelcomePage::welcomePage(void)
 
   //Welcome menu
   body += QString("<ul>");
-  const QString newFilename = KGlobal::dirs()->findResource("appdata", "html/images/filenew.png");
+  const QString newFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/filenew.png");
   body += QString("<li><img src=\"%1\">").arg(QUrl::fromLocalFile(newFilename).url());
   body += QString("<a href=\"/action?id=file_new\">" + i18n("Get started and setup accounts") + "</a></li>");
-  const QString dataFilename = KGlobal::dirs()->findResource("appdata", "html/images/kmymoneydata.png");
+  const QString dataFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/kmymoneydata.png");
   body += QString("<li><img src=\"%1\">").arg(QUrl::fromLocalFile(dataFilename).url());
   body += QString("<a href=\"/action?id=file_open\">" + i18n("Open an existing data file") + "</a></li>");
-  const QString manualFilename = KGlobal::dirs()->findResource("appdata", "html/images/manual.png");
+  const QString manualFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/manual.png");
   body += QString("<li><img src=\"%1\">").arg(QUrl::fromLocalFile(manualFilename).url());
   body += QString("<a href=\"/action?id=help_contents\">" + i18n("Learn how to use KMyMoney") + "</a></li>");
-  const QString konquerorFilename = KGlobal::dirs()->findResource("appdata", "html/images/konqueror.png");
+  const QString konquerorFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/konqueror.png");
   body += QString("<li><img src=\"%1\">").arg(QUrl::fromLocalFile(konquerorFilename).url());
   body += QString("<a href=\"http://kmymoney2.sf.net\">" + i18n("Visit our website") + "</a></li>");
-  const QString aboutFilename = KGlobal::dirs()->findResource("appdata", "html/images/about_kde.png");
+  const QString aboutFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/about_kde.png");
   body += QString("<li><img src=\"%1\">").arg(QUrl::fromLocalFile(aboutFilename).url());
   body += QString("<a href=\"http://forum.kde.org/viewforum.php?f=69\">" + i18n("Get help from our community") + "</a></li>");
-  const QString messageFilename = KGlobal::dirs()->findResource("appdata", "html/images/messagebox_info.png");
+  const QString messageFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/messagebox_info.png");
   body += QString("<li><img src=\"%1\">").arg(QUrl::fromLocalFile(messageFilename).url());
   body += QString("<a href=\"/welcome?mode=whatsnew\">" + i18n("See what's new in this version") + "</a></li>");
   body += QString("</ul>");
@@ -144,7 +145,7 @@ const QString KWelcomePage::whatsNewPage(void)
   header += QString("<head>");
   header += QString("<title>" + i18n("What's new in this version") + "</title>");
 
-  const QString welcomeFilename = KGlobal::dirs()->findResource("appdata", "html/welcome.css");
+  const QString welcomeFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/welcome.css");
   header += QString("<link href=\"%1\" rel=\"stylesheet\" type=\"text/css\">").arg(QUrl::fromLocalFile(welcomeFilename).url());
   header += QString("</head>");
 
@@ -152,12 +153,12 @@ const QString KWelcomePage::whatsNewPage(void)
   body = QString("<body>");
   //"background_image", if enabled, displays an image in the background of this page.
   //If you wish to use a background, un-comment the following line
-  const QString backgroundFilename = KGlobal::dirs()->findResource("appdata", "html/images/background.png");
+  const QString backgroundFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/background.png");
   body += QString("<img id=\"background_image\" src=\"%1\" height=\"100%\">").arg(QUrl::fromLocalFile(backgroundFilename).url());
-  const QString logoFilename = KGlobal::dirs()->findResource("appdata", "html/images/trans_logo.png");
+  const QString logoFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/trans_logo.png");
   body += QString("<img id=\"KMyMoneyLogo\" src=\"%1\">").arg(QUrl::fromLocalFile(logoFilename).url());
   body += QString("<h3 id=\"title\">" + i18n("What's new in KMyMoney %1", KCmdLineArgs::aboutData()->version()) + "</h3>");
-  const QString backArrowFilename = KGlobal::dirs()->findResource("appdata", "html/images/backarrow.png");
+  const QString backArrowFilename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/images/backarrow.png");
   body += QString("<div id=\"returnLink\"><img src=\"%1\">").arg(QUrl::fromLocalFile(backArrowFilename).url());
   body += QString("<a href=\"/welcome\">" + i18n("Return to the Welcome page") + "</a></div>");
 

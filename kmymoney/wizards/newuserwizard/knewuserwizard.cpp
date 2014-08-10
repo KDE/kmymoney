@@ -37,7 +37,7 @@
 #include <KIcon>
 #include <klocale.h>
 #include <kglobal.h>
-#include <kstandarddirs.h>
+
 #include <klineedit.h>
 #include <ktextedit.h>
 #include <kuser.h>

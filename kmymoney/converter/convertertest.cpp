@@ -27,7 +27,7 @@
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
-#include <kstandarddirs.h>
+
 
 #include <qtest_kde.h>
 

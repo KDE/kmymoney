@@ -29,7 +29,7 @@
 #include <kicon.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <kstandarddirs.h>
+
 #include <KToggleAction>
 // ----------------------------------------------------------------------------
 // Project Includes

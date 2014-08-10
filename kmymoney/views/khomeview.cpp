@@ -35,13 +35,13 @@
 #include <QFile>
 #include <QTimer>
 #include <QBuffer>
+#include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <kglobal.h>
 #include <klocale.h>
-#include <kstandarddirs.h>
 #include <khtmlview.h>
 #include <kconfig.h>
 #include <kstandardaction.h>
@@ -201,7 +201,7 @@ void KHomeView::loadView(void)
     //clear the forecast flag so it will be reloaded
     d->m_forecast.setForecastDone(false);
 
-    const QString filename = KGlobal::dirs()->findResource("appdata", "html/kmymoney.css");
+    const QString filename = QStandardPaths::locate(QStandardPaths::DataLocation, "html/kmymoney.css");
     QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">\n").arg(QUrl::fromLocalFile(filename).url());
 
     header += KMyMoneyUtils::variableCSS();

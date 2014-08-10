@@ -50,7 +50,7 @@
 #include <kiconloader.h>
 #include <kicon.h>
 #include <kguiitem.h>
-#include <kstandarddirs.h>
+
 #include <kdebug.h>
 #include <kapplication.h>
 #include <keditlistbox.h>

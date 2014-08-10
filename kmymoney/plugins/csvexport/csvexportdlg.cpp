@@ -32,7 +32,7 @@
 
 #include <kglobal.h>
 #include <klocale.h>
-#include <kstandarddirs.h>
+
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 #include <QPushButton>
@@ -40,6 +40,7 @@
 #include <kmymoneydateinput.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
+#include <QStandardPaths>
 // ----------------------------------------------------------------------------
 // Project Headers
 
@@ -107,7 +108,7 @@ void CsvExportDlg::slotOkClicked()
 
 void CsvExportDlg::readConfig(void)
 {
-  KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locate("config", QLatin1String("csvexporterrc")));
+  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, QLatin1String("csvexporterrc")));
   KConfigGroup conf = config->group("Last Use Settings");
   ui->m_qlineeditFile->setText(conf.readEntry("CsvExportDlg_LastFile"));
   ui->m_radioButtonAccount->setChecked(conf.readEntry("CsvExportDlg_AccountOpt", true));
@@ -118,7 +119,7 @@ void CsvExportDlg::readConfig(void)
 
 void CsvExportDlg::writeConfig(void)
 {
-  KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", QLatin1String("csvexporterrc")));
+  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1String("/csvexporterrc"));
   KConfigGroup grp = config->group("Last Use Settings");
   grp.writeEntry("CsvExportDlg_LastFile", ui->m_qlineeditFile->text());
   grp.writeEntry("CsvExportDlg_AccountOpt", ui->m_radioButtonAccount->isChecked());

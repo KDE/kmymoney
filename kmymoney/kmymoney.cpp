@@ -78,7 +78,7 @@
 #include <kactioncollection.h>
 #include <kactionmenu.h>
 #include <kglobal.h>
-#include <kstandarddirs.h>
+
 #include <kstatusbar.h>
 #include <ktip.h>
 #include <kprogressdialog.h>

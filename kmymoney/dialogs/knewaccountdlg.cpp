@@ -40,7 +40,7 @@
 #include <kglobal.h>
 #include <kmessagebox.h>
 #include <kcombobox.h>
-#include <kstandarddirs.h>
+
 #include <kiconloader.h>
 #include <kled.h>
 #include <kdebug.h>

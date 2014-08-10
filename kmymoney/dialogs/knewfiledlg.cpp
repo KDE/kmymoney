@@ -28,7 +28,7 @@
 
 #include <kglobal.h>
 #include <klocale.h>
-#include <kstandarddirs.h>
+
 #include <kstandardguiitem.h>
 #include <kmessagebox.h>
 #include <KGuiItem>
