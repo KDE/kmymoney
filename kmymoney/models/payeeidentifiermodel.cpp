@@ -133,8 +133,18 @@ bool payeeIdentifierModel::removeRows(int row, int count, const QModelIndex& par
 
 void payeeIdentifierModel::setPayee(MyMoneyPayee payee)
 {
+  // Remove all rows
+  const int oldLastRow = m_payee.payeeIdentifiers().count()-1;
+  beginRemoveRows(QModelIndex(), 0, oldLastRow);
   m_payee = payee;
-  /** @todo emit signals after change of payee */
+  endRemoveRows();
+  emit dataChanged(index(0, 0), index(oldLastRow, 0));
+
+  // Insert new rows
+  const int newLastRow = m_payee.payeeIdentifiers().count()-1;
+  beginInsertRows(QModelIndex(), 0, newLastRow);
+  endInsertRows();
+  emit dataChanged(index(0, 0), index(newLastRow, 0));
 }
 
 void payeeIdentifierModel::setPayee(QString payeeId)
