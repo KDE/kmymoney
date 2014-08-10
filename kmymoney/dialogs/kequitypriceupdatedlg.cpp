@@ -39,12 +39,13 @@
 
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kpushbutton.h>
 #include <ktextedit.h>
 #include <kdebug.h>
 #include <kprogressdialog.h>
 #include <kglobal.h>
 #include <kconfig.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -84,8 +85,8 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
 
   btnUpdateAll->setEnabled(false);
 
-  btnOK->setGuiItem(KStandardGuiItem::ok());
-  btnCancel->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(btnOK, KStandardGuiItem::ok());
+  KGuiItem::assign(btnCancel, KStandardGuiItem::cancel());
 
   MyMoneyFile* file = MyMoneyFile::instance();
 

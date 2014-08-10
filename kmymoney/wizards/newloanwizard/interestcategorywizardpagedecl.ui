@@ -70,7 +70,7 @@ Please select the category you want to assign the interest payments to or create
           </spacer>
         </item>
         <item>
-          <widget class="KPushButton" name="m_createCategoryButton">
+          <widget class="QPushButton" name="m_createCategoryButton">
             <property name="text">
               <string/>
             </property>

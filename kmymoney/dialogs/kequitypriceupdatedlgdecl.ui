@@ -54,7 +54,7 @@
    <item>
     <layout class="QHBoxLayout">
      <item>
-      <widget class="KPushButton" name="btnConfigure">
+      <widget class="QPushButton" name="btnConfigure">
        <property name="text">
         <string>Configure</string>
        </property>
@@ -77,14 +77,14 @@
       </spacer>
      </item>
      <item>
-      <widget class="KPushButton" name="btnUpdateAll">
+      <widget class="QPushButton" name="btnUpdateAll">
        <property name="text">
         <string>Update All</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="KPushButton" name="btnUpdateSelected">
+      <widget class="QPushButton" name="btnUpdateSelected">
        <property name="text">
         <string>Update Selected</string>
        </property>
@@ -131,7 +131,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="KPushButton" name="btnOK">
+      <widget class="QPushButton" name="btnOK">
        <property name="text">
         <string>&amp;OK</string>
        </property>
@@ -144,7 +144,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KPushButton" name="btnCancel">
+      <widget class="QPushButton" name="btnCancel">
        <property name="text">
         <string>&amp;Cancel</string>
        </property>
@@ -160,7 +160,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

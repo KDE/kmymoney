@@ -42,21 +42,21 @@
        <item>
         <layout class="QHBoxLayout">
          <item>
-          <widget class="KPushButton" name="m_newButton">
+          <widget class="QPushButton" name="m_newButton">
            <property name="text">
             <string comment="New budget">New</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="KPushButton" name="m_renameButton">
+          <widget class="QPushButton" name="m_renameButton">
            <property name="text">
             <string>Ren</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="KPushButton" name="m_deleteButton">
+          <widget class="QPushButton" name="m_deleteButton">
            <property name="text">
             <string>Del</string>
            </property>
@@ -107,7 +107,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="KPushButton" name="m_updateButton">
+          <widget class="QPushButton" name="m_updateButton">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -120,7 +120,7 @@
           </widget>
          </item>
          <item>
-          <widget class="KPushButton" name="m_resetButton">
+          <widget class="QPushButton" name="m_resetButton">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -133,10 +133,10 @@
           </widget>
          </item>
          <item>
-          <widget class="KPushButton" name="m_collapseButton"/>
+          <widget class="QPushButton" name="m_collapseButton"/>
          </item>
          <item>
-          <widget class="KPushButton" name="m_expandButton"/>
+          <widget class="QPushButton" name="m_expandButton"/>
          </item>
          <item>
           <widget class="QCheckBox" name="m_hideUnusedButton">
@@ -269,7 +269,7 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

@@ -26,7 +26,7 @@
 
 
 #include <kcombobox.h>
-class KPushButton;
+class QPushButton;
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -62,7 +62,7 @@ public:
     *
     * If parameter @a splitButton is @a true, the widget
     * will construct a surrounding QFrame and reparent itself to be a child of this
-    * QFrame. It also adds a KPushButton with the "Split" icon to the right of the
+    * QFrame. It also adds a QPushButton with the "Split" icon to the right of the
     * input field. In this case it is important not to use the pointer to this widget
     * but it's parent when placing the object in a QLayout, QTable or some such. The
     * parent widget (the QFrame in this case) can be extracted with the parentWidget()
@@ -103,7 +103,7 @@ public:
     * This member returns a pointer to the split button. In case the @a splitButton parameter
     * of the constructor was @a false, this method prints a warning to stderr and returns 0.
     */
-  KPushButton* splitButton(void) const;
+  QPushButton* splitButton(void) const;
 
   /**
     * Reimplemented for internal reasons. No API change

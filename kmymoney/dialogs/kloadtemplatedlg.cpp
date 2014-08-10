@@ -19,24 +19,26 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QPushButton>
+#include <QList>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kstandardguiitem.h>
-#include <kpushbutton.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kaccounttemplateselector.h"
-#include <QList>
 
 KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
     KLoadTemplateDlgDecl(parent)
 {
-  buttonOk->setGuiItem(KStandardGuiItem::ok());
-  buttonCancel->setGuiItem(KStandardGuiItem::cancel());
-  buttonHelp->setGuiItem(KStandardGuiItem::help());
+  KGuiItem::assign(buttonOk, KStandardGuiItem::ok());
+  KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
+  KGuiItem::assign(buttonHelp, KStandardGuiItem::help());
 
   connect(buttonHelp, SIGNAL(clicked()), this, SLOT(slotHelp()));
 }

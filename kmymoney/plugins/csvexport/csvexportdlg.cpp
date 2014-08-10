@@ -35,9 +35,11 @@
 #include <kstandarddirs.h>
 #include <kmessagebox.h>
 #include <kfiledialog.h>
-#include <kpushbutton.h>
+#include <QPushButton>
 #include <kiconloader.h>
 #include <kmymoneydateinput.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 // ----------------------------------------------------------------------------
 // Project Headers
 
@@ -56,7 +58,7 @@ CsvExportDlg::CsvExportDlg(QWidget *parent) : QDialog(parent), ui(new Ui::CsvExp
   loadAccounts();
 
   // load button icons
-  ui->m_qbuttonCancel->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(ui->m_qbuttonCancel, KStandardGuiItem::cancel());
 
   KGuiItem okButtonItem(i18n("&Export"),
                         KIcon("document-export"),

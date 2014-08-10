@@ -38,21 +38,21 @@
          <item>
           <layout class="QHBoxLayout">
            <item>
-            <widget class="KPushButton" name="m_newButton">
+            <widget class="QPushButton" name="m_newButton">
              <property name="text">
               <string comment="New payee">New</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="KPushButton" name="m_renameButton">
+            <widget class="QPushButton" name="m_renameButton">
              <property name="text">
               <string>Ren</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="KPushButton" name="m_deleteButton">
+            <widget class="QPushButton" name="m_deleteButton">
              <property name="text">
               <string>Del</string>
              </property>
@@ -264,7 +264,7 @@
      <item>
       <layout class="QHBoxLayout">
        <item>
-        <widget class="KPushButton" name="m_helpButton">
+        <widget class="QPushButton" name="m_helpButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -293,7 +293,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="KPushButton" name="m_updateButton">
+        <widget class="QPushButton" name="m_updateButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -324,7 +324,7 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

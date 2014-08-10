@@ -26,6 +26,7 @@
 #include <QPixmap>
 #include <QLayout>
 #include <QList>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,7 +38,6 @@
 #include <kiconloader.h>
 #include <kicon.h>
 #include <kguiitem.h>
-#include <kpushbutton.h>
 #include <KToggleAction>
 
 // ----------------------------------------------------------------------------
@@ -64,8 +64,8 @@ KAccountsView::KAccountsView(QWidget *parent) :
                          KIcon("zoom-in"),
                          QString(),
                          QString());
-  m_collapseButton->setGuiItem(collapseGuiItem);
-  m_expandButton->setGuiItem(expandGuiItem);
+  KGuiItem::assign(m_collapseButton, collapseGuiItem);
+  KGuiItem::assign(m_expandButton, expandGuiItem);
 
   for (int i = 0; i < MaxViewTabs; ++i)
     m_needReload[i] = false;

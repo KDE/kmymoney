@@ -80,7 +80,7 @@ If this loan is a 'consumer loan' (money to use however you want), you can use a
               </widget>
             </item>
             <item row="1" column="3">
-              <widget class="KPushButton" name="m_createAssetButton">
+              <widget class="QPushButton" name="m_createAssetButton">
                 <property name="text">
                   <string>Create</string>
                 </property>

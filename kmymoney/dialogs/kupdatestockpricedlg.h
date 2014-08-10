@@ -28,12 +28,12 @@
 // QT Includes
 
 #include <QDateTime>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
-#include <kpushbutton.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

@@ -21,6 +21,7 @@
 
 #include <QLabel>
 #include <QPixmap>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,22 +30,22 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kmessagebox.h>
-#include <kpushbutton.h>
-#include <kguiitem.h>
 #include <klineedit.h>
+#include <kguiutils.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include <mymoneyinstitution.h>
-#include <kguiutils.h>
 
 KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent)
     : KNewBankDlgDecl(parent), m_institution(institution)
 {
   setModal(true);
-  okBtn->setGuiItem(KStandardGuiItem::ok());
-  cancelBtn->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(okBtn, KStandardGuiItem::ok());
+  KGuiItem::assign(cancelBtn, KStandardGuiItem::cancel());
 
   nameEdit->setFocus();
   nameEdit->setText(institution.name());

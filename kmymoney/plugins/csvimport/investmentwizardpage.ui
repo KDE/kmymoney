@@ -526,7 +526,7 @@ The names are retained and may be selected from the list here.&lt;/p&gt;</string
           </widget>
          </item>
          <item row="5" column="5">
-          <widget class="KPushButton" name="buttonInv_hideSecurity">
+          <widget class="QPushButton" name="buttonInv_hideSecurity">
            <property name="minimumSize">
             <size>
              <width>95</width>
@@ -551,7 +551,7 @@ The names are retained and may be selected from the list here.&lt;/p&gt;</string
           </widget>
          </item>
          <item row="2" column="6">
-          <widget class="KPushButton" name="button_clear">
+          <widget class="QPushButton" name="button_clear">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
@@ -692,7 +692,7 @@ incorporated into the price.&lt;/span&gt;&lt;/p&gt;</string>
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

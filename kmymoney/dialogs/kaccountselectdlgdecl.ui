@@ -46,7 +46,7 @@
        <item>
         <layout class="QGridLayout">
          <item row="3" column="1">
-          <widget class="KPushButton" name="m_createButton">
+          <widget class="QPushButton" name="m_createButton">
            <property name="text">
             <string>Create</string>
            </property>
@@ -129,7 +129,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="KPushButton" name="m_kButtonAbort">
+      <widget class="QPushButton" name="m_kButtonAbort">
        <property name="text">
         <string>Abort</string>
        </property>
@@ -152,14 +152,14 @@
       </spacer>
      </item>
      <item>
-      <widget class="KPushButton" name="m_qbuttonOk">
+      <widget class="QPushButton" name="m_qbuttonOk">
        <property name="text">
         <string>OK</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="KPushButton" name="m_qbuttonCancel">
+      <widget class="QPushButton" name="m_qbuttonCancel">
        <property name="text">
         <string>Skip</string>
        </property>
@@ -172,7 +172,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

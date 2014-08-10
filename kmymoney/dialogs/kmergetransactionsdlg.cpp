@@ -20,10 +20,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QPushButton>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kpushbutton.h>
 #include <kapplication.h>
 #include <klocale.h>
 #include <khelpclient.h>

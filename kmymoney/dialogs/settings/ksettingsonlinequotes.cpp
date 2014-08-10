@@ -53,19 +53,19 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
                             KIcon("dialog-ok"),
                             i18n("Accepts the entered data and stores it"),
                             i18n("Use this to accept the modified data."));
-  m_updateButton->setGuiItem(updateButtenItem);
+  KGuiItem::assign(m_updateButton, updateButtenItem);
 
   KGuiItem deleteButtenItem(i18n("&Delete"),
                             KIcon("edit-delete"),
                             i18n("Delete the selected source entry"),
                             i18n("Use this to delete the selected online source entry"));
-  m_deleteButton->setGuiItem(deleteButtenItem);
+  KGuiItem::assign(m_deleteButton, deleteButtenItem);
 
   KGuiItem newButtenItem(i18nc("Create a new source entry for online quotes", "&New..."),
                          KIcon("document-new"),
                          i18n("Create a new source entry for online quotes"),
                          i18n("Use this to create a new entry for online quotes"));
-  m_newButton->setGuiItem(newButtenItem);
+  KGuiItem::assign(m_newButton, newButtenItem);
 
   connect(m_updateButton, SIGNAL(clicked()), this, SLOT(slotUpdateEntry()));
   connect(m_newButton, SIGNAL(clicked()), this, SLOT(slotNewEntry()));

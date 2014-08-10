@@ -22,12 +22,12 @@
 
 #include <QLabel>
 #include <QList>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
-#include <kpushbutton.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

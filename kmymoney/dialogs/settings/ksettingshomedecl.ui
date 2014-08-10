@@ -38,14 +38,14 @@
                 </spacer>
               </item>
               <item>
-                <widget class="KPushButton" name="m_upButton">
+                <widget class="QPushButton" name="m_upButton">
                   <property name="text">
                     <string comment="@action move item up">Up</string>
                   </property>
                 </widget>
               </item>
               <item>
-                <widget class="KPushButton" name="m_downButton">
+                <widget class="QPushButton" name="m_downButton">
                   <property name="text">
                     <string comment="@action move item down">Down</string>
                   </property>

@@ -29,12 +29,12 @@
 #include <QLabel>
 #include <QRadioButton>
 #include <QCheckBox>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocale>
-#include <KPushButton>
 #include <kglobal.h>
 
 // ----------------------------------------------------------------------------

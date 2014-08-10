@@ -22,13 +22,13 @@
 
 #include <QButtonGroup>
 #include <QRadioButton>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
 #include <ktextedit.h>
-#include <kpushbutton.h>
 #include <kstandardguiitem.h>
 #include <kmessagebox.h>
 
@@ -38,6 +38,8 @@
 #include <mymoneyfile.h>
 #include <kmymoneyutils.h>
 #include <mymoneytransaction.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 #include "ui_kconfirmmanualenterdlgdecl.h"
 
 struct KConfirmManualEnterDlg::Private {
@@ -52,8 +54,8 @@ KConfirmManualEnterDlg::KConfirmManualEnterDlg(const MyMoneySchedule& schedule, 
   d->ui.buttonGroup1->setId(d->ui.m_onceRadio, 1);
   d->ui.buttonGroup1->setId(d->ui.m_setRadio, 2);
 
-  d->ui.buttonOk->setGuiItem(KStandardGuiItem::ok());
-  d->ui.buttonCancel->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(d->ui.buttonOk, KStandardGuiItem::ok());
+  KGuiItem::assign(d->ui.buttonCancel, KStandardGuiItem::cancel());
   d->ui.m_onceRadio->setChecked(true);
 
   if (schedule.type() == MyMoneySchedule::TYPE_LOANPAYMENT) {

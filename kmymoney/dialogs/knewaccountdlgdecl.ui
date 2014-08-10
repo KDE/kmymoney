@@ -781,7 +781,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="KPushButton" name="createButton">
+      <widget class="QPushButton" name="createButton">
        <property name="text">
         <string>OK</string>
        </property>
@@ -794,7 +794,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KPushButton" name="cancelButton">
+      <widget class="QPushButton" name="cancelButton">
        <property name="text">
         <string>Cancel</string>
        </property>
@@ -813,7 +813,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

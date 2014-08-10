@@ -180,7 +180,7 @@ This information will be seen and used only by you. The information is used to p
               <item>
                 <layout class="QHBoxLayout">
                   <item>
-                    <widget class="KPushButton" name="m_loadAddressButton">
+                    <widget class="QPushButton" name="m_loadAddressButton">
                       <property name="text">
                         <string>Load from Addressbook</string>
                       </property>

@@ -28,12 +28,12 @@
 #include <QHBoxLayout>
 #include <QFrame>
 #include <QFocusEvent>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
-#include <kpushbutton.h>
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
@@ -54,7 +54,7 @@ public:
       recursive(false),
       isSplit(false) {}
 
-  KPushButton*      splitButton;
+  QPushButton*      splitButton;
   QFrame*           frame;
   bool              recursive;
   bool              isSplit;
@@ -83,8 +83,9 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
     // create button
     KGuiItem splitButtonItem("",
                              KIcon("split"), "", "");
-    d->splitButton = new KPushButton(splitButtonItem, d->frame);
+    d->splitButton = new QPushButton(d->frame);
     d->splitButton->setObjectName("splitButton");
+    KGuiItem::assign(d->splitButton, splitButtonItem);
 
     layout->addWidget(this, 5);
     layout->addWidget(d->splitButton);
@@ -106,7 +107,7 @@ KMyMoneyCategory::~KMyMoneyCategory()
   delete d;
 }
 
-KPushButton* KMyMoneyCategory::splitButton(void) const
+QPushButton* KMyMoneyCategory::splitButton(void) const
 {
   return d->splitButton;
 }

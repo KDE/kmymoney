@@ -47,7 +47,7 @@ AdditionalFeesWizardPage::AdditionalFeesWizardPage(QWidget *parent)
                                    0, //KIcon("document-new"),
                                    i18n("Enter additional fees"),
                                    i18n("Use this to add any additional fees other than principal and interest contained in your periodical payments."));
-  m_additionalFeeButton->setGuiItem(additionalFeeButtonItem);
+  KGuiItem::assign(m_additionalFeeButton, additionalFeeButtonItem);
   connect(m_additionalFeeButton, SIGNAL(clicked()), this, SLOT(slotAdditionalFees()));
 }
 

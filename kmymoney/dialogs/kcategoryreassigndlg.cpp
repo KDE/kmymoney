@@ -19,14 +19,18 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QPushButton>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <kdialog.h>
 #include <klocale.h>
 #include <kstandardguiitem.h>
-#include <kpushbutton.h>
 #include <kmessagebox.h>
+#include <kguiutils.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -34,13 +38,12 @@
 #include <mymoneyfile.h>
 #include <kmymoneycategory.h>
 #include <kmymoneyaccountselector.h>
-#include <kguiutils.h>
 
 KCategoryReassignDlg::KCategoryReassignDlg(QWidget* parent) :
     KCategoryReassignDlgDecl(parent)
 {
-  buttonOk->setGuiItem(KStandardGuiItem::ok());
-  buttonCancel->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(buttonOk, KStandardGuiItem::ok());
+  KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
   kMandatoryFieldGroup* mandatory = new kMandatoryFieldGroup(this);
   mandatory->add(m_category);
   mandatory->setOkButton(buttonOk);

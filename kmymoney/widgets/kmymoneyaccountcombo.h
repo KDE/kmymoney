@@ -25,15 +25,16 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QList>
 #include <QItemSelection>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kpushbutton.h>
 #include <kcombobox.h>
 
 // ----------------------------------------------------------------------------

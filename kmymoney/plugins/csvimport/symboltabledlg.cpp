@@ -33,7 +33,7 @@
 #include <KLocale>
 #include <KMessageBox>
 #include <KGlobal>
-#include <KPushButton>
+#include <QPushButton>
 #include <ui_csvdialog.h>
 
 

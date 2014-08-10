@@ -20,11 +20,11 @@
 // QT Includes
 
 #include <QStringList>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kpushbutton.h>
 #include <kglobalsettings.h>
 #include <kglobal.h>
 #include <kiconloader.h>
@@ -54,9 +54,9 @@ KSettingsHome::KSettingsHome(QWidget* parent) :
                           i18n("Move selected item down"),
                           i18n("Use this to move the selected item down by one position in the list."));
 
-  m_upButton->setGuiItem(upButtonItem);
+  KGuiItem::assign(m_upButton, upButtonItem);
   m_upButton->setEnabled(false);
-  m_downButton->setGuiItem(downButtonItem);
+  KGuiItem::assign(m_downButton, downButtonItem);
   m_downButton->setEnabled(false);
 
   // connect this, so that the list gets loaded once the edit field is filled

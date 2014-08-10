@@ -75,7 +75,7 @@
           <item>
             <layout class="QHBoxLayout">
               <item>
-                <widget class="KPushButton" name="m_pbOk">
+                <widget class="QPushButton" name="m_pbOk">
                   <property name="sizePolicy">
                     <sizepolicy>
                       <hsizetype>5</hsizetype>
@@ -90,7 +90,7 @@
                 </widget>
               </item>
               <item>
-                <widget class="KPushButton" name="m_pbCancel">
+                <widget class="QPushButton" name="m_pbCancel">
                   <property name="sizePolicy">
                     <sizepolicy>
                       <hsizetype>5</hsizetype>

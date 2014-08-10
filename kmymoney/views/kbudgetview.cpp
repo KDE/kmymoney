@@ -42,7 +42,6 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kmessagebox.h>
-#include <kpushbutton.h>
 #include <kiconloader.h>
 #include <kicon.h>
 #include <kguiitem.h>
@@ -321,35 +320,35 @@ KBudgetView::KBudgetView(QWidget *parent) :
                          KIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "list-add", Qt::TopRightCorner)),
                          i18n("Creates a new budget"),
                          i18n("Use this to create a new empty budget."));
-  m_newButton->setGuiItem(newButtonItem);
+  KGuiItem::assign(m_newButton, newButtonItem);
   m_newButton->setToolTip(newButtonItem.toolTip());
 
   KGuiItem renameButtonItem(QString(""),
                             KIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "document-edit")),
                             i18n("Rename the current selected budget"),
                             i18n("Use this to start renaming the selected budget."));
-  m_renameButton->setGuiItem(renameButtonItem);
+  KGuiItem::assign(m_renameButton, renameButtonItem);
   m_renameButton->setToolTip(renameButtonItem.toolTip());
 
   KGuiItem deleteButtonItem(QString(""),
                             KIcon(KMyMoneyUtils::overlayIcon("view-time-schedule-calculus", "edit-delete")),
                             i18n("Delete the current selected budget"),
                             i18n("Use this to delete the selected budget."));
-  m_deleteButton->setGuiItem(deleteButtonItem);
+  KGuiItem::assign(m_deleteButton, deleteButtonItem);
   m_deleteButton->setToolTip(deleteButtonItem.toolTip());
 
   KGuiItem updateButtonItem(QString(""),
                             KIcon("document-save"),
                             i18n("Accepts the entered values and stores the budget"),
                             i18n("Use this to store the modified data."));
-  m_updateButton->setGuiItem(updateButtonItem);
+  KGuiItem::assign(m_updateButton, updateButtonItem);
   m_updateButton->setToolTip(updateButtonItem.toolTip());
 
   KGuiItem resetButtonItem(QString(""),
                            KIcon("edit-undo"),
                            i18n("Revert budget to last saved state"),
                            i18n("Use this to discard the modified data."));
-  m_resetButton->setGuiItem(resetButtonItem);
+  KGuiItem::assign(m_resetButton, resetButtonItem);
   m_resetButton->setToolTip(resetButtonItem.toolTip());
 
   KGuiItem collapseGuiItem("",
@@ -360,8 +359,8 @@ KBudgetView::KBudgetView(QWidget *parent) :
                          KIcon("zoom-in"),
                          QString(),
                          QString());
-  m_collapseButton->setGuiItem(collapseGuiItem);
-  m_expandButton->setGuiItem(expandGuiItem);
+  KGuiItem::assign(m_collapseButton, collapseGuiItem);
+  KGuiItem::assign(m_expandButton, expandGuiItem);
 
   m_filterProxyModel = new BudgetAccountsProxyModel(this);
   m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());

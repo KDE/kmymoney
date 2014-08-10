@@ -22,6 +22,7 @@
 
 #include <QList>
 #include <QLineEdit>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,14 +30,15 @@
 #include <kdialog.h>
 #include <klocale.h>
 #include <kstandardguiitem.h>
-#include <kpushbutton.h>
 #include <kmessagebox.h>
+#include <kguiutils.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include <kmymoneymvccombo.h>
-#include <kguiutils.h>
 
 /** This lookup table needs to be in sync with KPayeeReassignDlg::OperationType enum */
 static const char * labelText[KPayeeReassignDlg::TypeCount] = {
@@ -48,8 +50,8 @@ KPayeeReassignDlg::KPayeeReassignDlg(KPayeeReassignDlg::OperationType type, QWid
     KPayeeReassignDlgDecl(parent),
     m_type(type)
 {
-  buttonOk->setGuiItem(KStandardGuiItem::ok());
-  buttonCancel->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(buttonOk, KStandardGuiItem::ok());
+  KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
   kMandatoryFieldGroup* mandatory = new kMandatoryFieldGroup(this);
   mandatory->add(payeeCombo);
   mandatory->setOkButton(buttonOk);

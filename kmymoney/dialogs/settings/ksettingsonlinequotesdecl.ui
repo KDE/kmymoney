@@ -168,14 +168,14 @@
       <item>
         <layout class="QHBoxLayout">
           <item>
-            <widget class="KPushButton" name="m_newButton">
+            <widget class="QPushButton" name="m_newButton">
               <property name="text">
                 <string comment="@action create new quote source">New</string>
               </property>
             </widget>
           </item>
           <item>
-            <widget class="KPushButton" name="m_deleteButton">
+            <widget class="QPushButton" name="m_deleteButton">
               <property name="text">
                 <string>Delete</string>
               </property>
@@ -198,7 +198,7 @@
             </spacer>
           </item>
           <item>
-            <widget class="KPushButton" name="m_updateButton">
+            <widget class="QPushButton" name="m_updateButton">
               <property name="text">
                 <string comment="@action update quotes from online quote source">Update</string>
               </property>

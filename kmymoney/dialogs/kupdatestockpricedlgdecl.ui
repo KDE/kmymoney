@@ -183,7 +183,7 @@
             </spacer>
           </item>
           <item>
-            <widget class="KPushButton" name="m_okButton">
+            <widget class="QPushButton" name="m_okButton">
               <property name="text">
                 <string>&amp;OK</string>
               </property>
@@ -199,7 +199,7 @@
             </widget>
           </item>
           <item>
-            <widget class="KPushButton" name="m_cancelButton">
+            <widget class="QPushButton" name="m_cancelButton">
               <property name="text">
                 <string>&amp;Cancel</string>
               </property>

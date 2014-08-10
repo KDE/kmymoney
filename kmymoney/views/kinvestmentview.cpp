@@ -118,13 +118,13 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
                             KIcon("edit-delete"),
                             i18n("Delete this entry"),
                             i18n("Remove this security item from the file"));
-  m_deleteSecurityButton->setGuiItem(removeButtonItem);
+  KGuiItem::assign(m_deleteSecurityButton, removeButtonItem);
 
   KGuiItem editButtonItem(i18n("&Edit"),
                           KIcon("document-edit"),
                           i18n("Modify the selected entry"),
                           i18n("Change the security information of the selected entry."));
-  m_editSecurityButton->setGuiItem(editButtonItem);
+  KGuiItem::assign(m_editSecurityButton, editButtonItem);
 
   connect(m_showCurrencyButton, SIGNAL(toggled(bool)), this, SLOT(slotLoadView()));
   connect(m_securitiesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotUpdateSecuritiesButtons()));

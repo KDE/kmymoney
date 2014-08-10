@@ -28,6 +28,7 @@
 #include <QPalette>
 #include <QFrame>
 #include <QHeaderView>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,7 +37,6 @@
 #include <kglobal.h>
 #include <kdebug.h>
 #include <kcombobox.h>
-#include <KPushButton>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -405,7 +405,7 @@ void TransactionForm::adjustColumn(Column col)
         w = qMax(w, cw->sizeHint().width() + spacing);
         // if the cell widget contains a push button increase the spacing used
         // for the cell text value to consider the size of the push button
-        if (KPushButton *pushButton = cw->findChild<KPushButton *>()) {
+        if (QPushButton *pushButton = cw->findChild<QPushButton *>()) {
           spacing += pushButton->sizeHint().width() + 5;
         }
       }

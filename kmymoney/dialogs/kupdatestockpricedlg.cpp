@@ -28,7 +28,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kguiitem.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -49,8 +50,8 @@ KUpdateStockPriceDlg::~KUpdateStockPriceDlg()
 
 void KUpdateStockPriceDlg::init()
 {
-  m_okButton->setGuiItem(KStandardGuiItem::ok());
-  m_cancelButton->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(m_okButton, KStandardGuiItem::ok());
+  KGuiItem::assign(m_cancelButton, KStandardGuiItem::cancel());
 
   connect(m_okButton, SIGNAL(clicked()), this, SLOT(accept()));
   connect(m_cancelButton, SIGNAL(clicked()), this, SLOT(reject()));

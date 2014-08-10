@@ -54,8 +54,8 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
                          KIcon("zoom-in"),
                          QString(),
                          QString());
-  m_collapseButton->setGuiItem(collapseGuiItem);
-  m_expandButton->setGuiItem(expandGuiItem);
+  KGuiItem::assign(m_collapseButton, collapseGuiItem);
+  KGuiItem::assign(m_expandButton, expandGuiItem);
 
   // the proxy filter model
   m_filterProxyModel = new AccountsViewFilterProxyModel(this);

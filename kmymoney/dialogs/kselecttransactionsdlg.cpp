@@ -24,11 +24,11 @@
 #include <QEvent>
 #include <QList>
 #include <QKeyEvent>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kpushbutton.h>
 #include <kstandardguiitem.h>
 #include <kapplication.h>
 #include <klocale.h>
@@ -39,6 +39,8 @@
 #include <mymoneyfile.h>
 #include <mymoneytransaction.h>
 #include <kmymoneyglobalsettings.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 #include "kmergetransactionsdlg.h"
 
 KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, QWidget* parent) :
@@ -71,9 +73,9 @@ KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, Q
   m_register->setupRegister(m_account);
 
   // setup buttons
-  m_helpButton->setGuiItem(KStandardGuiItem::help());
-  buttonOk->setGuiItem(KStandardGuiItem::ok());
-  buttonCancel->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(m_helpButton, KStandardGuiItem::help());
+  KGuiItem::assign(buttonOk, KStandardGuiItem::ok());
+  KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
 
   // default is to need at least one transaction selected
   buttonOk->setDisabled(true);

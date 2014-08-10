@@ -31,7 +31,7 @@ class QFrame;
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-class KPushButton;
+class QPushButton;
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -491,11 +491,11 @@ protected:
   /*
    * The buttons
    */
-  KPushButton*          m_cancelButton;
-  KPushButton*          m_backButton;
-  KPushButton*          m_nextButton;
-  KPushButton*          m_finishButton;
-  KPushButton*          m_helpButton;
+  QPushButton*          m_cancelButton;
+  QPushButton*          m_backButton;
+  QPushButton*          m_nextButton;
+  QPushButton*          m_finishButton;
+  QPushButton*          m_helpButton;
 
 private:
   /**

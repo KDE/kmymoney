@@ -24,7 +24,7 @@
    <item>
     <layout class="QVBoxLayout">
      <item>
-      <widget class="KPushButton" name="dequeueButton">
+      <widget class="QPushButton" name="dequeueButton">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -34,7 +34,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KPushButton" name="executeButton">
+      <widget class="QPushButton" name="executeButton">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -67,7 +67,7 @@
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

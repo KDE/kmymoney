@@ -49,7 +49,7 @@ AssetAccountWizardPage::AssetAccountWizardPage(QWidget *parent)
                                  KIcon("document-new"),
                                  i18n("Create a new asset account"),
                                  i18n("Use this to create a new account to which the initial payment should be made"));
-  m_createNewAssetButton->setGuiItem(createAssetButtonItem);
+  KGuiItem::assign(m_createNewAssetButton, createAssetButtonItem);
   connect(m_createNewAssetButton, SIGNAL(clicked()), kmymoney, SLOT(slotAccountNew()));
 
   m_assetAccountEdit->removeButtons();

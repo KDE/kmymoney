@@ -50,7 +50,7 @@ InterestCategoryWizardPage::InterestCategoryWizardPage(QWidget *parent)
                                     KIcon("document-new"),
                                     i18n("Create a new category"),
                                     i18n("Use this to open the new account editor"));
-  m_createCategoryButton->setGuiItem(createCategoryButtonItem);
+  KGuiItem::assign(m_createCategoryButton, createCategoryButtonItem);
   connect(m_createCategoryButton, SIGNAL(clicked()), this, SLOT(slotCreateCategory()));
 }
 

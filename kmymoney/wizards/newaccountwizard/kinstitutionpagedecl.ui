@@ -56,7 +56,7 @@ Enter the account number used by the institution to identify the account.</strin
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="KPushButton" name="m_newInstitutionButton">
+        <widget class="QPushButton" name="m_newInstitutionButton">
          <property name="text">
           <string>New Institution</string>
          </property>
@@ -146,7 +146,7 @@ KMyMoney keeps this field only for documentation purposes and does not use it ot
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

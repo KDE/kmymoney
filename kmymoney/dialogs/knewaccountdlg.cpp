@@ -42,10 +42,12 @@
 #include <kcombobox.h>
 #include <kstandarddirs.h>
 #include <kiconloader.h>
-#include <kpushbutton.h>
 #include <kled.h>
 #include <kdebug.h>
 #include <kglobalsettings.h>
+#include <kguiutils.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -56,7 +58,6 @@
 #include <mymoneyfile.h>
 #include <kmymoneyglobalsettings.h>
 #include <mymoneyreport.h>
-#include <kguiutils.h>
 #include "kmymoneycurrencyselector.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "knewbankdlg.h"
@@ -410,8 +411,8 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     setWindowTitle(title);
 
   // load button icons
-  cancelButton->setGuiItem(KStandardGuiItem::cancel());
-  createButton->setGuiItem(KStandardGuiItem::ok());
+  KGuiItem::assign(cancelButton, KStandardGuiItem::cancel());
+  KGuiItem::assign(createButton, KStandardGuiItem::ok());
 
   connect(cancelButton, SIGNAL(clicked()), SLOT(reject()));
   connect(createButton, SIGNAL(clicked()), this, SLOT(okClicked()));

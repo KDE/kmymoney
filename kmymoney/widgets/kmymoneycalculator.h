@@ -30,11 +30,10 @@
 #include <QLayout>
 #include <QLabel>
 #include <QKeyEvent>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <kpushbutton.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -211,7 +210,7 @@ private:
     * buttons of the calculator. It is setup during the
     * constructor of this object
     */
-  KPushButton *buttons[20];
+  QPushButton *buttons[20];
 
   /**
     * This enumeration type stores the values used for the

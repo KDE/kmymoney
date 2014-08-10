@@ -30,13 +30,13 @@
 #include <QCheckBox>
 #include <QLabel>
 #include <QList>
+#include <QPushButton>
 #include <qmath.h>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
-#include <kpushbutton.h>
 #include <knuminput.h>
 #include <kmessagebox.h>
 #include <kguiitem.h>

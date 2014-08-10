@@ -31,7 +31,7 @@
 #include <QToolTip>
 #include <QHBoxLayout>
 
-#include <KPushButton>
+#include <QPushButton>
 #include <KGuiItem>
 #include <KLocale>
 #include <KGlobal>

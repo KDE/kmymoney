@@ -30,6 +30,7 @@
 #include <QApplication>
 #include <QKeyEvent>
 #include <QEvent>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,7 +39,6 @@
 #include <klocale.h>
 #include <kcalendarsystem.h>
 #include <kmessagebox.h>
-#include <kpushbutton.h>
 #include <kstandardguiitem.h>
 
 // ----------------------------------------------------------------------------
@@ -102,7 +102,7 @@ KBudgetValues::KBudgetValues(QWidget* parent) :
 
   KGuiItem clearItem(KStandardGuiItem::clear());
 
-  m_clearButton->setGuiItem(clearItem);
+  KGuiItem::assign(m_clearButton, clearItem);
   m_clearButton->setText("");
   m_clearButton->setToolTip(clearItem.toolTip());
 }

@@ -83,28 +83,28 @@
             <item>
               <layout class="QVBoxLayout">
                 <item>
-                  <widget class="KPushButton" name="m_newButton">
+                  <widget class="QPushButton" name="m_newButton">
                     <property name="text">
                       <string comment="@action add new price">New</string>
                     </property>
                   </widget>
                 </item>
                 <item>
-                  <widget class="KPushButton" name="m_editButton">
+                  <widget class="QPushButton" name="m_editButton">
                     <property name="text">
                       <string>Modify</string>
                     </property>
                   </widget>
                 </item>
                 <item>
-                  <widget class="KPushButton" name="m_onlineQuoteButton">
+                  <widget class="QPushButton" name="m_onlineQuoteButton">
                     <property name="text">
                       <string>Online Quotes</string>
                     </property>
                   </widget>
                 </item>
                 <item>
-                  <widget class="KPushButton" name="m_deleteButton">
+                  <widget class="QPushButton" name="m_deleteButton">
                     <property name="text">
                       <string>Delete</string>
                     </property>

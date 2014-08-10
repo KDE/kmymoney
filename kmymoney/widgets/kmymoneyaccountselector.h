@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-class KPushButton;
+class QPushButton;
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -155,10 +155,10 @@ protected slots:
   };
 
 protected:
-  KPushButton*              m_allAccountsButton;
-  KPushButton*              m_noAccountButton;
-  KPushButton*              m_incomeCategoriesButton;
-  KPushButton*              m_expenseCategoriesButton;
+  QPushButton*              m_allAccountsButton;
+  QPushButton*              m_noAccountButton;
+  QPushButton*              m_incomeCategoriesButton;
+  QPushButton*              m_expenseCategoriesButton;
   QList<int>                m_typeList;
   QStringList               m_accountList;
 };

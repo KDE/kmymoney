@@ -27,12 +27,12 @@
 #include <QHBoxLayout>
 #include <QList>
 #include <QVBoxLayout>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
-#include <kpushbutton.h>
 #include <kstandardguiitem.h>
 #include <kglobalsettings.h>
 #include <kiconloader.h>
@@ -124,11 +124,11 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
   setSizeGripEnabled(true);
 
   // create buttons
-  m_cancelButton = new KPushButton(i18n("&Cancel"), this);
-  m_backButton = new KPushButton(i18nc("Go to previous page of the wizard", "&Back"), this);
-  m_nextButton = new KPushButton(i18nc("Go to next page of the wizard", "&Next"), this);
-  m_finishButton = new KPushButton(i18nc("Finish the wizard", "&Finish"), this);
-  m_helpButton = new KPushButton(i18n("&Help"), this);
+  m_cancelButton = new QPushButton(i18n("&Cancel"), this);
+  m_backButton = new QPushButton(i18nc("Go to previous page of the wizard", "&Back"), this);
+  m_nextButton = new QPushButton(i18nc("Go to next page of the wizard", "&Next"), this);
+  m_finishButton = new QPushButton(i18nc("Finish the wizard", "&Finish"), this);
+  m_helpButton = new QPushButton(i18n("&Help"), this);
 
   if (KGlobalSettings::showIconsOnPushButtons()) {
     m_backButton->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
@@ -372,7 +372,7 @@ void KMyMoneyWizard::completeStateChanged(void)
   m_finishButton->setVisible(lastPage);
   m_nextButton->setVisible(!lastPage);
 
-  KPushButton* button;
+  QPushButton* button;
 
   button = lastPage ? m_finishButton : m_nextButton;
 

@@ -200,14 +200,14 @@
        <item>
         <layout class="QVBoxLayout">
          <item>
-          <widget class="KPushButton" name="m_editSecurityButton">
+          <widget class="QPushButton" name="m_editSecurityButton">
            <property name="text">
             <string>Edit...</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="KPushButton" name="m_deleteSecurityButton">
+          <widget class="QPushButton" name="m_deleteSecurityButton">
            <property name="text">
             <string>Delete...</string>
            </property>
@@ -261,7 +261,7 @@
    <header>kmymoneyaccountcombo.h</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

@@ -43,7 +43,6 @@
 // KDE Includes
 
 #include <kapplication.h>
-#include <kpushbutton.h>
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kguiitem.h>

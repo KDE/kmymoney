@@ -54,7 +54,7 @@
 
 #include <kdeversion.h>
 #include <kmessagebox.h>
-#include <kpushbutton.h>
+#include <QPushButton>
 #include <kstdguiitem.h>
 #include <kvbox.h>
 #include <KAction>

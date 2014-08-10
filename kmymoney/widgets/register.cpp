@@ -40,6 +40,7 @@
 #include <QHeaderView>
 #include <QStyleOptionViewItem>
 #include <QApplication>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -47,7 +48,6 @@
 #include <klocale.h>
 #include <kglobal.h>
 #include <kdebug.h>
-#include <KPushButton>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -1136,7 +1136,7 @@ void Register::resize(int col, bool force)
     // a) the size required by the input widget if no transaction form is shown and the register is used with an editor
     // b) the adjusted value for the input widget if the transaction form is visible or an editor is not used
     if (m_usedWithEditor && !KMyMoneyGlobalSettings::transactionForm()) {
-      KPushButton *pushButton = new KPushButton;
+      QPushButton *pushButton = new QPushButton;
       const int pushButtonSpacing = pushButton->sizeHint().width() + 5;
       setColumnWidth(DateColumn, columnWidth(DateColumn) + pushButtonSpacing + 4/* space for the spinbox arrows */);
       ewidth += pushButtonSpacing;

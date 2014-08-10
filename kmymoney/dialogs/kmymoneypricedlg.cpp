@@ -26,11 +26,11 @@
 // QT Includes
 
 #include <QCheckBox>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kpushbutton.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kmessagebox.h>
@@ -71,19 +71,19 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
                             KIcon("edit-delete"),
                             i18n("Delete this entry"),
                             i18n("Remove this price item from the file"));
-  m_deleteButton->setGuiItem(removeButtonItem);
+  KGuiItem::assign(m_deleteButton, removeButtonItem);
 
   KGuiItem newButtonItem(i18nc("New price entry", "&New"),
                          KIcon("document-new"),
                          i18n("Add a new entry"),
                          i18n("Create a new price entry."));
-  m_newButton->setGuiItem(newButtonItem);
+  KGuiItem::assign(m_newButton, newButtonItem);
 
   KGuiItem editButtonItem(i18n("&Edit"),
                           KIcon("document-edit"),
                           i18n("Modify the selected entry"),
                           i18n("Change the details of selected price information."));
-  m_editButton->setGuiItem(editButtonItem);
+  KGuiItem::assign(m_editButton, editButtonItem);
 
   m_onlineQuoteButton->setIcon(KMyMoneyUtils::overlayIcon("view-investment", "download"));
 

@@ -27,6 +27,7 @@
 #include <QEventLoop>
 #include <QRadioButton>
 #include <QList>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,7 +35,6 @@
 #include <ktextedit.h>
 #include <klocale.h>
 #include <kcombobox.h>
-#include <kpushbutton.h>
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
 

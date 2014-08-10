@@ -1377,7 +1377,7 @@ LoanPayoutPage::LoanPayoutPage(Wizard* wizard) :
                                  KIcon("document-new"),
                                  i18n("Create a new asset account"),
                                  i18n("If the asset account does not yet exist, press this button to create it."));
-  m_createAssetButton->setGuiItem(createAssetButtenItem);
+  KGuiItem::assign(m_createAssetButton, createAssetButtenItem);
   m_createAssetButton->setToolTip(createAssetButtenItem.toolTip());
   m_createAssetButton->setWhatsThis(createAssetButtenItem.whatsThis());
   connect(m_createAssetButton, SIGNAL(clicked()), this, SLOT(slotCreateAssetAccount()));

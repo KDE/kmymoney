@@ -32,7 +32,7 @@ class QWidget;
 
 #include <KLineEdit>
 #include <KHBox>
-class KPushButton;
+class QPushButton;
 class KVBox;
 class KHBox;
 
@@ -102,8 +102,8 @@ private:
   kMyMoneyCalculator* m_calculator;
   KVBox*              m_calculatorFrame;
   kMyMoneyLineEdit*   m_edit;
-  KPushButton*        m_calcButton;
-  KPushButton*        m_resetButton;
+  QPushButton*        m_calcButton;
+  QPushButton*        m_resetButton;
   int                 m_prec;
   bool                allowEmpty;
 

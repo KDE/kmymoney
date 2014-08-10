@@ -234,7 +234,7 @@ void KAccountTemplateSelector::slotLoadCountry(void)
     if (dir.exists()) {
       QStringList files = dir.entryList(QStringList("*"), QDir::Files);
       for (it_f = files.begin(); it_f != files.end(); ++it_f) {
-        MyMoneyTemplate templ(QString("%1/%2").arg(dir.canonicalPath()).arg(*it_f));
+        MyMoneyTemplate templ(QUrl::fromUserInput(QString("%1/%2").arg(dir.canonicalPath()).arg(*it_f)));
         d->m_templates[QString("%1").arg(d->id)] = templ;
         QTreeWidgetItem *item = new QTreeWidgetItem(parent);
         item->setText(0, templ.title());

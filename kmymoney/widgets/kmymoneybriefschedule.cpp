@@ -28,6 +28,7 @@
 #include <QLabel>
 #include <QToolButton>
 #include <QList>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,7 +37,6 @@
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kicon.h>
-#include <kpushbutton.h>
 #include <kdeversion.h>
 
 // ----------------------------------------------------------------------------
@@ -61,7 +61,7 @@ KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
                        KIcon("media-seek-forward"),
                        i18n("Skip this transaction"),
                        i18n("Use this button to skip this transaction"));
-  m_skipButton->setGuiItem(skipGuiItem);
+  KGuiItem::assign(m_skipButton, skipGuiItem);
 
   // as of KDE 4.8 the icon we use here move to a different location
   QString iconName("go-jump-locationbar");;
@@ -73,7 +73,7 @@ KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
                         KIcon(iconName),
                         i18n("Record this transaction into the register"),
                         i18n("Use this button to record this transaction"));
-  m_buttonEnter->setGuiItem(enterGuiItem);
+  KGuiItem::assign(m_buttonEnter, enterGuiItem);
 }
 
 KMyMoneyBriefSchedule::~KMyMoneyBriefSchedule()

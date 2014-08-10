@@ -28,6 +28,7 @@
 #include <QLayout>
 #include <QList>
 #include <QVBoxLayout>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,7 +38,6 @@
 #include <kiconloader.h>
 #include <kicon.h>
 #include <kguiitem.h>
-#include <kpushbutton.h>
 #include <KToggleAction>
 
 // ----------------------------------------------------------------------------
@@ -64,8 +64,8 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
                          KIcon("zoom-in"),
                          QString(),
                          QString());
-  m_collapseButton->setGuiItem(collapseGuiItem);
-  m_expandButton->setGuiItem(expandGuiItem);
+  KGuiItem::assign(m_collapseButton, collapseGuiItem);
+  KGuiItem::assign(m_expandButton, expandGuiItem);
 
   connect(Models::instance()->accountsModel(), SIGNAL(profitChanged(MyMoneyMoney)), this, SLOT(slotProfitChanged(MyMoneyMoney)));
 

@@ -38,7 +38,7 @@
 // KDE Includes
 
 class KMenu;
-class KPushButton;
+class QPushButton;
 class QFrame;
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -239,8 +239,8 @@ private:
   QWidgetList         m_tabOrderWidgets;
 
   QPointer<QFrame>           m_registerButtonFrame;
-  QPointer<KPushButton>      m_registerEnterButton;
-  QPointer<KPushButton>      m_registerCancelButton;
+  QPointer<QPushButton>      m_registerEnterButton;
+  QPointer<QPushButton>      m_registerCancelButton;
 
   QMap<QString, MyMoneyMoney>  m_priceInfo;
 };

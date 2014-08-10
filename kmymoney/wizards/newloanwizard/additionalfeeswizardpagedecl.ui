@@ -134,7 +134,7 @@ If your regular payment contains any additional fees, click on the button &quot;
                 </widget>
               </item>
               <item>
-                <widget class="KPushButton" name="m_additionalFeeButton">
+                <widget class="QPushButton" name="m_additionalFeeButton">
                   <property name="text">
                     <string/>
                   </property>

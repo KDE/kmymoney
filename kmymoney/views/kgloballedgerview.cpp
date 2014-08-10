@@ -35,13 +35,13 @@
 #include <QHeaderView>
 #include <QApplication>
 #include <QToolTip>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
 #include <kcombobox.h>
-#include <kpushbutton.h>
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <ktoolbar.h>

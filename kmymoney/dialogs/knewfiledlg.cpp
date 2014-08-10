@@ -21,6 +21,7 @@
 
 #include <QPixmap>
 #include <QLabel>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -29,8 +30,9 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kstandardguiitem.h>
-#include <kpushbutton.h>
 #include <kmessagebox.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -74,8 +76,8 @@ KNewFileDlg::KNewFileDlg(QString userName, QString userStreet,
 
 void KNewFileDlg::init(const QString& title)
 {
-  d->ui.okBtn->setGuiItem(KStandardGuiItem::ok());
-  d->ui.cancelBtn->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(d->ui.okBtn, KStandardGuiItem::ok());
+  KGuiItem::assign(d->ui.cancelBtn, KStandardGuiItem::cancel());
 
   if (!title.isEmpty())
     setWindowTitle(title);
@@ -132,7 +134,7 @@ void KNewFileDlg::slotContactFetched(const ContactData &identity)
   d->ui.kabcBtn->setEnabled(true);
 }
 
-KPushButton* KNewFileDlg::cancelButton(void)
+QPushButton* KNewFileDlg::cancelButton(void)
 {
   return d->ui.cancelBtn;
 }

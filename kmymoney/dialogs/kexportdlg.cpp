@@ -35,10 +35,12 @@
 #include <kstandarddirs.h>
 #include <kmessagebox.h>
 #include <kfiledialog.h>
-#include <kpushbutton.h>
+#include <QPushButton>
 #include <kiconloader.h>
 #include <kicon.h>
 #include <kconfiggroup.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -60,25 +62,25 @@ KExportDlg::KExportDlg(QWidget *parent)
   loadAccounts();
 
   // load button icons
-  m_qbuttonCancel->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(m_qbuttonCancel, KStandardGuiItem::cancel());
 
   KGuiItem okButtenItem(i18n("&Export"),
                         KIcon("document-export"),
                         i18n("Start operation"),
                         i18n("Use this to start the export operation"));
-  m_qbuttonOk->setGuiItem(okButtenItem);
+  KGuiItem::assign(m_qbuttonOk, okButtenItem);
 
   KGuiItem browseButtenItem(i18n("&Browse..."),
                             KIcon("document-open"),
                             i18n("Select filename"),
                             i18n("Use this to select a filename to export to"));
-  m_qbuttonBrowse->setGuiItem(browseButtenItem);
+  KGuiItem::assign(m_qbuttonBrowse, browseButtenItem);
 
   KGuiItem newButtenItem(i18nc("New profile", "&New..."),
                          KIcon("document-new"),
                          i18n("Create a new profile"),
                          i18n("Use this to open the profile editor"));
-  m_profileEditorButton->setGuiItem(newButtenItem);
+  KGuiItem::assign(m_profileEditorButton, newButtenItem);
 
 
   // connect the buttons to their functionality

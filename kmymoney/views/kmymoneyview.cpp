@@ -32,6 +32,7 @@
 #include <QVBoxLayout>
 #include <QByteArray>
 #include <QUrl>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -49,7 +50,6 @@
 #include <kfilterdev.h>
 #include <kfilterbase.h>
 #include <kfileitem.h>
-#include <kpushbutton.h>
 #include <kapplication.h>
 #include <kdebug.h>
 #include <kdeversion.h>

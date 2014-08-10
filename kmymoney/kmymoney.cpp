@@ -329,7 +329,7 @@ public:
 
   QStringList           m_additionalGpgKeys;
   QLabel*               m_additionalKeyLabel;
-  KPushButton*          m_additionalKeyButton;
+  QPushButton*          m_additionalKeyButton;
 
   KRecentFilesAction*   m_recentFiles;
 
@@ -1570,7 +1570,7 @@ void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
             if ((d->m_myMoneyView->isNativeFile())) {
               d->m_fileName = newurl;
               updateCaption();
-              d->m_recentFiles->addUrl(newurl.toDisplayString(QUrl::PreferLocalFile));
+              d->m_recentFiles->addUrl(newurl);
               writeLastUsedFile(newurl.toDisplayString(QUrl::PreferLocalFile));
             } else {
               d->m_fileName = QUrl(); // imported files have no filename
@@ -1680,7 +1680,7 @@ bool KMyMoneyApp::slotFileSaveAs(void)
 
     KHBox* labelBox = new KHBox(vbox);
     d->m_additionalKeyLabel = new QLabel(i18n("Additional encryption keys to be used: %1", d->m_additionalGpgKeys.count()), labelBox);
-    d->m_additionalKeyButton = new KPushButton(i18n("Manage additional keys"), labelBox);
+    d->m_additionalKeyButton = new QPushButton(i18n("Manage additional keys"), labelBox);
     connect(d->m_additionalKeyButton, SIGNAL(clicked()), this, SLOT(slotManageGpgKeys()));
     connect(d->m_saveEncrypted, SIGNAL(activated(int)), this, SLOT(slotKeySelected(int)));
 
@@ -1763,7 +1763,7 @@ bool KMyMoneyApp::slotFileSaveAs(void)
       if (okToWriteFile(newName)) {
         //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
         //if(p)
-        d->m_recentFiles->addUrl(newName);
+        d->m_recentFiles->addUrl(QUrl::fromUserInput(newName));
 
         setEnabled(false);
         // If this is the anonymous file export, just save it, don't actually take the
@@ -1839,7 +1839,7 @@ bool KMyMoneyApp::slotSaveAsDatabase(void)
   if (rc) {
     //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
     //if(p)
-    d->m_recentFiles->addUrl(url.toDisplayString(QUrl::PreferLocalFile));
+    d->m_recentFiles->addUrl(url);
     writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
   }
   d->m_autoSaveTimer->stop();

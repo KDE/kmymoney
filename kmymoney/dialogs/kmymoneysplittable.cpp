@@ -38,6 +38,7 @@
 #include <QResizeEvent>
 #include <QMouseEvent>
 #include <QEvent>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -47,7 +48,6 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kcompletionbox.h>
-#include <kpushbutton.h>
 #include <kmenu.h>
 #include <kstandardshortcut.h>
 #include <kshortcut.h>
@@ -820,9 +820,9 @@ KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
   m_registerButtonFrame->setPalette(palette);
 
   QHBoxLayout* l = new QHBoxLayout(m_registerButtonFrame);
-  m_registerEnterButton = new KPushButton(KIcon("dialog-ok"), QString(), m_registerButtonFrame);
+  m_registerEnterButton = new QPushButton(KIcon("dialog-ok"), QString(), m_registerButtonFrame);
 
-  m_registerCancelButton = new KPushButton(KIcon("dialog-cancel"), QString(), m_registerButtonFrame);
+  m_registerCancelButton = new QPushButton(KIcon("dialog-cancel"), QString(), m_registerButtonFrame);
 
   l->addWidget(m_registerEnterButton);
   l->addWidget(m_registerCancelButton);

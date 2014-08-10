@@ -26,6 +26,7 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QUrl>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,11 +37,12 @@
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include <kglobalsettings.h>
-#include <kpushbutton.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kfiledialog.h>
 #include <kicon.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -51,14 +53,14 @@ KBackupDlg::KBackupDlg(QWidget* parent)
   readConfig();
 
   // add icons to buttons
-  btnOK->setGuiItem(KStandardGuiItem::ok());
-  btnCancel->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(btnOK, KStandardGuiItem::ok());
+  KGuiItem::assign(btnCancel, KStandardGuiItem::cancel());
 
   KGuiItem chooseButtenItem(i18n("C&hoose..."),
                             KIcon("folder"),
                             i18n("Select mount point"),
                             i18n("Use this to browse to the mount point."));
-  chooseButton->setGuiItem(chooseButtenItem);
+  KGuiItem::assign(chooseButton, chooseButtenItem);
 
   connect(chooseButton, SIGNAL(clicked()), this, SLOT(chooseButtonClicked()));
   connect(btnOK, SIGNAL(clicked()), this, SLOT(accept()));

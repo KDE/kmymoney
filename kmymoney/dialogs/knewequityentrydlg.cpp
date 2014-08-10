@@ -25,10 +25,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QPushButton>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kpushbutton.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -52,8 +55,8 @@ KNewEquityEntryDlg::KNewEquityEntryDlg(QWidget *parent)
   connect(edtEquityName, SIGNAL(textChanged(QString)), this, SLOT(slotDataChanged()));
 
   // add icons to buttons
-  btnOK->setGuiItem(KStandardGuiItem::ok());
-  btnCancel->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(btnOK, KStandardGuiItem::ok());
+  KGuiItem::assign(btnCancel, KStandardGuiItem::cancel());
 
   slotDataChanged();
 

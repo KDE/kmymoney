@@ -26,6 +26,7 @@
 // QT Includes
 
 #include <QLabel>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,11 +34,12 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kglobal.h>
-#include <kpushbutton.h>
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kicon.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -65,20 +67,20 @@ KAccountSelectDlg::KAccountSelectDlg(const KMyMoneyUtils::categoryTypeE accountT
                           KIcon("media-skip-forward"),
                           i18n("Skip this transaction"),
                           i18n("Use this to skip importing this transaction and proceed with the next one."));
-  m_qbuttonCancel->setGuiItem(skipButtonItem);
+  KGuiItem::assign(m_qbuttonCancel, skipButtonItem);
 
   KGuiItem createButtenItem(i18n("&Create..."),
                             KIcon("document-new"),
                             i18n("Create a new account/category"),
                             i18n("Use this to add a new account/category to the file"));
-  m_createButton->setGuiItem(createButtenItem);
-  m_qbuttonOk->setGuiItem(KStandardGuiItem::ok());
+  KGuiItem::assign(m_createButton, createButtenItem);
+  KGuiItem::assign(m_qbuttonOk, KStandardGuiItem::ok());
 
   KGuiItem abortButtenItem(i18n("&Abort"),
                            KIcon("dialog-cancel"),
                            i18n("Abort the import operation and dismiss all changes"),
                            i18n("Use this to abort the import. Your financial data will be in the state before you started the QIF import."));
-  m_kButtonAbort->setGuiItem(abortButtenItem);
+  KGuiItem::assign(m_kButtonAbort, abortButtenItem);
 
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotReloadWidget()));

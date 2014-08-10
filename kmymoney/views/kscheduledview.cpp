@@ -33,6 +33,7 @@
 #include <QTabWidget>
 #include <QTimer>
 #include <QToolButton>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -44,7 +45,6 @@
 #include <kiconloader.h>
 #include <kicon.h>
 #include <kmessagebox.h>
-#include <kpushbutton.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -83,8 +83,8 @@ KScheduledView::KScheduledView(QWidget *parent) :
   m_accountsCombo->setMenu(m_kaccPopup);
   connect(m_kaccPopup, SIGNAL(activated(int)), this, SLOT(slotAccountActivated(int)));
 
-  m_qbuttonNew->setGuiItem(KMyMoneyUtils::scheduleNewGuiItem());
-  m_accountsCombo->setGuiItem(KMyMoneyUtils::accountsFilterGuiItem());
+  KGuiItem::assign(m_qbuttonNew, KMyMoneyUtils::scheduleNewGuiItem());
+  KGuiItem::assign(m_accountsCombo, KMyMoneyUtils::accountsFilterGuiItem());
 
   m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_listTab), KIcon("view-calendar-list"));
   m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_calendarTab), KIcon("view-calendar-timeline"));

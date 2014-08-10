@@ -35,10 +35,12 @@
 #include <QDateTime>
 
 // KDE includes
-#include <kpushbutton.h>
+#include <QPushButton>
 #include <kdatewidget.h>
 #include <kstdguiitem.h>
 #include <klocale.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // KMyMoney includes
 #include "kmymoneydateinput.h"
@@ -69,9 +71,9 @@ KBPickStartDate::KBPickStartDate(KMyMoneyBanking* qb,
 
   d->banking = qb;
 
-  d->ui.buttonOk->setGuiItem(KStandardGuiItem::ok());
-  d->ui.buttonCancel->setGuiItem(KStandardGuiItem::cancel());
-  d->ui.buttonHelp->setGuiItem(KStandardGuiItem::help());
+  KGuiItem::assign(d->ui.buttonOk, KStandardGuiItem::ok());
+  KGuiItem::assign(d->ui.buttonCancel, KStandardGuiItem::cancel());
+  KGuiItem::assign(d->ui.buttonHelp, KStandardGuiItem::help());
 
   QObject::connect(d->ui.buttonHelp, SIGNAL(clicked()),
                    this, SLOT(slotHelpClicked()));

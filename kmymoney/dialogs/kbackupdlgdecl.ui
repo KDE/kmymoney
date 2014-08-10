@@ -86,7 +86,7 @@ Click OK to perform the backup. If your system does not use an automounter, make
                   <widget class="KLineEdit" name="txtMountPoint"/>
                 </item>
                 <item>
-                  <widget class="KPushButton" name="chooseButton">
+                  <widget class="QPushButton" name="chooseButton">
                     <property name="text">
                       <string>Choose...</string>
                     </property>
@@ -145,7 +145,7 @@ Click OK to perform the backup. If your system does not use an automounter, make
             </spacer>
           </item>
           <item>
-            <widget class="KPushButton" name="btnOK">
+            <widget class="QPushButton" name="btnOK">
               <property name="text">
                 <string>OK</string>
               </property>
@@ -158,7 +158,7 @@ Click OK to perform the backup. If your system does not use an automounter, make
             </widget>
           </item>
           <item>
-            <widget class="KPushButton" name="btnCancel">
+            <widget class="QPushButton" name="btnCancel">
               <property name="text">
                 <string>Cancel</string>
               </property>

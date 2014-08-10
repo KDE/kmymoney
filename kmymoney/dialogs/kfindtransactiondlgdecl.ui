@@ -425,14 +425,14 @@
                         <number>6</number>
                       </property>
                       <item>
-                        <widget class="KPushButton" name="m_allTagsButton">
+                        <widget class="QPushButton" name="m_allTagsButton">
                           <property name="text">
                             <string>Select all</string>
                           </property>
                         </widget>
                       </item>
                       <item>
-                        <widget class="KPushButton" name="m_clearTagsButton">
+                        <widget class="QPushButton" name="m_clearTagsButton">
                           <property name="text">
                             <string>Select none</string>
                           </property>
@@ -513,14 +513,14 @@
                         <number>6</number>
                       </property>
                       <item>
-                        <widget class="KPushButton" name="m_allPayeesButton">
+                        <widget class="QPushButton" name="m_allPayeesButton">
                           <property name="text">
                             <string>Select all</string>
                           </property>
                         </widget>
                       </item>
                       <item>
-                        <widget class="KPushButton" name="m_clearPayeesButton">
+                        <widget class="QPushButton" name="m_clearPayeesButton">
                           <property name="text">
                             <string>Select none</string>
                           </property>

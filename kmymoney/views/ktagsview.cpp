@@ -41,7 +41,6 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kpushbutton.h>
 #include <kiconloader.h>
 #include <kicon.h>
 #include <kguiitem.h>
@@ -117,28 +116,28 @@ KTagsView::KTagsView(QWidget *parent) :
                          KIcon("list-add-tag"),
                          i18n("Creates a new tag"),
                          i18n("Use this to create a new tag."));
-  m_newButton->setGuiItem(newButtonItem);
+  KGuiItem::assign(m_newButton, newButtonItem);
   m_newButton->setToolTip(newButtonItem.toolTip());
 
   KGuiItem renameButtonItem(QString(""),
                             KIcon("edit-rename"),
                             i18n("Rename the current selected tag"),
                             i18n("Use this to start renaming the selected tag."));
-  m_renameButton->setGuiItem(renameButtonItem);
+  KGuiItem::assign(m_renameButton, renameButtonItem);
   m_renameButton->setToolTip(renameButtonItem.toolTip());
 
   KGuiItem deleteButtonItem(QString(""),
                             KIcon("list-remove-tag"),
                             i18n("Delete the current selected tag"),
                             i18n("Use this to delete the selected tag."));
-  m_deleteButton->setGuiItem(deleteButtonItem);
+  KGuiItem::assign(m_deleteButton, deleteButtonItem);
   m_deleteButton->setToolTip(deleteButtonItem.toolTip());
 
   KGuiItem updateButtonItem(i18nc("Update tag", "Update"),
                             KIcon("dialog-ok"),
                             i18n("Accepts the entered data and stores it"),
                             i18n("Use this to accept the modified data."));
-  m_updateButton->setGuiItem(updateButtonItem);
+  KGuiItem::assign(m_updateButton, updateButtonItem);
 
   m_updateButton->setEnabled(false);
 

@@ -19,12 +19,13 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QDialog>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <klocale.h>
-#include <kpushbutton.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -43,7 +44,7 @@ public:
                        QString userEmail, QWidget *parent = 0, const QString& title = QString());
   ~KNewFileDlg();
 
-  KPushButton* cancelButton(void);
+  QPushButton* cancelButton(void);
 
 public:
   QString userNameText;

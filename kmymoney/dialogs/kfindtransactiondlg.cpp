@@ -32,6 +32,7 @@
 #include <QList>
 #include <QResizeEvent>
 #include <QEvent>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -40,7 +41,6 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <kpushbutton.h>
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kstandardguiitem.h>
@@ -58,6 +58,8 @@
 #include <kmymoneyglobalsettings.h>
 #include <register.h>
 #include <transaction.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 #include "ui_kfindtransactiondlgdecl.h"
 #include "ui_ksortoptiondlg.h"
 
@@ -84,9 +86,9 @@ KSortOptionDlg::~KSortOptionDlg()
 void KSortOptionDlg::init()
 {
   setButtons(ButtonCodes(KDialog::None));
-  d->ui.m_cancelButton->setGuiItem(KStandardGuiItem::cancel());
-  d->ui.m_okButton->setGuiItem(KStandardGuiItem::ok());
-  d->ui.m_helpButton->setGuiItem(KStandardGuiItem::help());
+  KGuiItem::assign(d->ui.m_cancelButton, KStandardGuiItem::cancel());
+  KGuiItem::assign(d->ui.m_okButton, KStandardGuiItem::ok());
+  KGuiItem::assign(d->ui.m_helpButton, KStandardGuiItem::help());
 }
 
 void KSortOptionDlg::setSortOption(const QString& option, const QString& def)

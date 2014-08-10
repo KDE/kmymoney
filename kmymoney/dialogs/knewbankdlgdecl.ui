@@ -222,7 +222,7 @@
             </spacer>
           </item>
           <item>
-            <widget class="KPushButton" name="okBtn">
+            <widget class="QPushButton" name="okBtn">
               <property name="text">
                 <string>OK</string>
               </property>
@@ -232,7 +232,7 @@
             </widget>
           </item>
           <item>
-            <widget class="KPushButton" name="cancelBtn">
+            <widget class="QPushButton" name="cancelBtn">
               <property name="text">
                 <string>Cancel</string>
               </property>

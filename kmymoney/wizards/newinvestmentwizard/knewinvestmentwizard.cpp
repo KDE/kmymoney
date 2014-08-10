@@ -23,11 +23,11 @@
 #include <QCheckBox>
 #include <QLabel>
 #include <QList>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kpushbutton.h>
 #include <kcombobox.h>
 #include <kurlrequester.h>
 #include <klocale.h>

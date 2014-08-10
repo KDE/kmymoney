@@ -34,12 +34,12 @@
 #include <QList>
 #include <QVBoxLayout>
 #include <QPixmapCache>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
-#include <kpushbutton.h>
 #include <kiconloader.h>
 
 // ----------------------------------------------------------------------------
@@ -62,22 +62,22 @@ kMyMoneyAccountSelector::kMyMoneyAccountSelector(QWidget *parent, Qt::WFlags fla
     QVBoxLayout* buttonLayout = new QVBoxLayout();
     buttonLayout->setSpacing(6);
 
-    m_allAccountsButton = new KPushButton(this);
+    m_allAccountsButton = new QPushButton(this);
     m_allAccountsButton->setObjectName("m_allAccountsButton");
     m_allAccountsButton->setText(i18nc("Select all accounts", "All"));
     buttonLayout->addWidget(m_allAccountsButton);
 
-    m_incomeCategoriesButton = new KPushButton(this);
+    m_incomeCategoriesButton = new QPushButton(this);
     m_incomeCategoriesButton->setObjectName("m_incomeCategoriesButton");
     m_incomeCategoriesButton->setText(i18n("Income"));
     buttonLayout->addWidget(m_incomeCategoriesButton);
 
-    m_expenseCategoriesButton = new KPushButton(this);
+    m_expenseCategoriesButton = new QPushButton(this);
     m_expenseCategoriesButton->setObjectName("m_expenseCategoriesButton");
     m_expenseCategoriesButton->setText(i18n("Expense"));
     buttonLayout->addWidget(m_expenseCategoriesButton);
 
-    m_noAccountButton = new KPushButton(this);
+    m_noAccountButton = new QPushButton(this);
     m_noAccountButton->setObjectName("m_noAccountButton");
     m_noAccountButton->setText(i18nc("No account", "None"));
     buttonLayout->addWidget(m_noAccountButton);

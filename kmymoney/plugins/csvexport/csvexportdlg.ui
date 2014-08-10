@@ -78,7 +78,7 @@ You can choose the file's path, and the account. Choose Account to export all th
         <widget class="KLineEdit" name="m_qlineeditFile"/>
        </item>
        <item>
-        <widget class="KPushButton" name="m_qbuttonBrowse">
+        <widget class="QPushButton" name="m_qbuttonBrowse">
          <property name="text">
           <string>Browse...</string>
          </property>
@@ -331,7 +331,7 @@ You can choose the file's path, and the account. Choose Account to export all th
         </spacer>
        </item>
        <item>
-        <widget class="KPushButton" name="m_qbuttonOk">
+        <widget class="QPushButton" name="m_qbuttonOk">
          <property name="text">
           <string>Export</string>
          </property>
@@ -344,7 +344,7 @@ You can choose the file's path, and the account. Choose Account to export all th
         </widget>
        </item>
        <item>
-        <widget class="KPushButton" name="m_qbuttonCancel">
+        <widget class="QPushButton" name="m_qbuttonCancel">
          <property name="text">
           <string>Cancel</string>
          </property>
@@ -372,7 +372,7 @@ You can choose the file's path, and the account. Choose Account to export all th
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

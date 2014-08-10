@@ -26,17 +26,19 @@
 #include <QLayout>
 #include <QList>
 #include <QResizeEvent>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kpushbutton.h>
 #include <kstandardguiitem.h>
 #include <knuminput.h>
 #include <klineedit.h>
 #include <khelpclient.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -71,9 +73,9 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
   d->m_schedule = schedule;
   d->m_editor = 0;
 
-  buttonOk->setGuiItem(KStandardGuiItem::ok());
-  buttonCancel->setGuiItem(KStandardGuiItem::cancel());
-  buttonHelp->setGuiItem(KStandardGuiItem::help());
+  KGuiItem::assign(buttonOk, KStandardGuiItem::ok());
+  KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
+  KGuiItem::assign(buttonHelp, KStandardGuiItem::help());
 
   d->m_requiredFields = new kMandatoryFieldGroup(this);
   d->m_requiredFields->setOkButton(buttonOk); // button to be enabled when all fields present

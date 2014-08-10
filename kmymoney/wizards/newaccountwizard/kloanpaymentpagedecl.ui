@@ -86,7 +86,7 @@
                 </widget>
               </item>
               <item row="1" column="1">
-                <widget class="KPushButton" name="m_additionalFeesButton">
+                <widget class="QPushButton" name="m_additionalFeesButton">
                   <property name="text">
                     <string>Additional Fees</string>
                   </property>

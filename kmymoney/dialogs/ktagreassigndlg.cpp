@@ -20,6 +20,7 @@
 // QT Includes
 
 #include <QList>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -27,20 +28,21 @@
 #include <kdialog.h>
 #include <klocale.h>
 #include <kstandardguiitem.h>
-#include <kpushbutton.h>
 #include <kmessagebox.h>
+#include <kguiutils.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include <kmymoneymvccombo.h>
-#include <kguiutils.h>
 
 KTagReassignDlg::KTagReassignDlg(QWidget* parent) :
     KTagReassignDlgDecl(parent)
 {
-  buttonOk->setGuiItem(KStandardGuiItem::ok());
-  buttonCancel->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(buttonOk, KStandardGuiItem::ok());
+  KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
   kMandatoryFieldGroup* mandatory = new kMandatoryFieldGroup(this);
   mandatory->add(tagCombo);
   mandatory->setOkButton(buttonOk);

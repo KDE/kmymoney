@@ -258,21 +258,21 @@
                       <number>6</number>
                     </property>
                     <item>
-                      <widget class="KPushButton" name="m_buttonEnter">
+                      <widget class="QPushButton" name="m_buttonEnter">
                         <property name="text">
                           <string>Enter...</string>
                         </property>
                       </widget>
                     </item>
                     <item>
-                      <widget class="KPushButton" name="m_skipButton">
+                      <widget class="QPushButton" name="m_skipButton">
                         <property name="text">
                           <string>Skip</string>
                         </property>
                       </widget>
                     </item>
                     <item>
-                      <widget class="KPushButton" name="m_closeButton">
+                      <widget class="QPushButton" name="m_closeButton">
                         <property name="text">
                           <string>&amp;Close</string>
                         </property>

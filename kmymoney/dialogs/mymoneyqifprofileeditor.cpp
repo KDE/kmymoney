@@ -41,6 +41,8 @@
 #include <kapplication.h>
 #include <kinputdialog.h>
 #include <khelpclient.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -83,18 +85,18 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   loadProfileListFromConfig();
 
   // load button icons
-  m_resetButton->setGuiItem(KStandardGuiItem::reset());
-  m_cancelButton->setGuiItem(KStandardGuiItem::cancel());
-  m_okButton->setGuiItem(KStandardGuiItem::ok());
-  m_deleteButton->setGuiItem(KStandardGuiItem::del());
-  m_helpButton->setGuiItem(KStandardGuiItem::help());
+  KGuiItem::assign(m_resetButton, KStandardGuiItem::reset());
+  KGuiItem::assign(m_cancelButton, KStandardGuiItem::cancel());
+  KGuiItem::assign(m_okButton, KStandardGuiItem::ok());
+  KGuiItem::assign(m_deleteButton, KStandardGuiItem::del());
+  KGuiItem::assign(m_helpButton, KStandardGuiItem::help());
 
   KIconLoader* il = KIconLoader::global();
   KGuiItem newButtenItem(i18nc("New profile", "&New"),
                          KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
                          i18n("Create a new profile"),
                          i18n("Use this to create a new QIF import/export profile"));
-  m_newButton->setGuiItem(newButtenItem);
+  KGuiItem::assign(m_newButton, newButtenItem);
 
   connect(m_profileListBox, SIGNAL(currentTextChanged(QString)), this, SLOT(slotLoadProfileFromConfig(QString)));
   connect(m_resetButton, SIGNAL(clicked()), this, SLOT(slotReset()));

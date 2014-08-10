@@ -24,13 +24,13 @@
 #include <QWidget>
 #include <QLabel>
 #include <QResizeEvent>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kpushbutton.h>
 #include <kstandardguiitem.h>
 #include <kiconloader.h>
 #include <kicon.h>
@@ -51,6 +51,8 @@
 #include <kmymoneyaccountselector.h>
 #include <kmymoneydateinput.h>
 #include <kmymoneyglobalsettings.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 #include "kmymoney.h"
 
@@ -75,8 +77,8 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
   d->m_extendedReturnCode = KMyMoneyUtils::Enter;
   buttonOk->setIcon(KIcon(KMyMoneyGlobalSettings::enterScheduleIcon()));
   buttonSkip->setIcon(KIcon("media-seek-forward"));
-  buttonCancel->setGuiItem(KStandardGuiItem::cancel());
-  buttonHelp->setGuiItem(KStandardGuiItem::help());
+  KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
+  KGuiItem::assign(buttonHelp, KStandardGuiItem::help());
   buttonIgnore->setHidden(true);
   buttonSkip->setHidden(true);
 
