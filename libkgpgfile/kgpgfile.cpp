@@ -20,9 +20,6 @@
 
 #include "kgpgfile.h"
 
-// C Includes
-#include <unistd.h>
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -37,8 +34,6 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <kstandarddirs.h>
 
 #ifdef KF5Gpgmepp_FOUND
 #include <gpg-error.h>
