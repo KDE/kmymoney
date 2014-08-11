@@ -28,10 +28,9 @@
 #include <QStack>
 #include <QUrl>
 #include <QtDebug>
+#include <QExplicitlySharedDataPointer>
 
 class QIODevice;
-
-#include <QExplicitlySharedDataPointer>
 
 #include "imymoneystorageformat.h"
 #include "mymoneyinstitution.h"

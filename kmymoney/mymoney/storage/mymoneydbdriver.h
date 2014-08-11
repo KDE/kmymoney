@@ -23,10 +23,10 @@
 #include <QMap>
 #include <QString>
 #include <QSqlDatabase>
+#include <QExplicitlySharedDataPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <QExplicitlySharedDataPointer>
 
 // ----------------------------------------------------------------------------
 // Project Includes

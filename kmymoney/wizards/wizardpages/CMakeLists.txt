@@ -17,5 +17,5 @@ add_custom_target(generate_wizardpages_ui_srcs DEPENDS
 
 add_library(wizardpages STATIC
   ${libwizardpages_a_SOURCES} ${wizardpages_ui_srcs})
-target_link_libraries(wizardpages Alkimia::alkimia)
+target_link_libraries(wizardpages KF5::KDELibs4Support Alkimia::alkimia)
 

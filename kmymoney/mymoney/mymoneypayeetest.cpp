@@ -13,6 +13,9 @@
 
 #include "mymoneypayeetest.h"
 
+#include <QDomDocument>
+#include <QDomElement>
+
 #include <QtTest/QtTest>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyPayeeTest;

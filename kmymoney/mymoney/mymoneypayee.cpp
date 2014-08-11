@@ -21,6 +21,8 @@
 // QT Includes
 
 #include <QStringList>
+#include <QDomDocument>
+#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // Project Includes

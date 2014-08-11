@@ -22,8 +22,8 @@
 
 #include <QString>
 #include <QDateTime>
-#include <QDomDocument>
-#include <QDomElement>
+class QDomDocument;
+class QDomElement;
 
 // ----------------------------------------------------------------------------
 // Project Includes

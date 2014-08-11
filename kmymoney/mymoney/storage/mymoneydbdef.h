@@ -21,18 +21,20 @@
 
 // ----------------------------------------------------------------------------
 // System Includes
+
 #include <limits>
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QHash>
 #include <QMap>
 #include <QString>
 #include <QStringList>
+#include <QExplicitlySharedDataPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <QExplicitlySharedDataPointer>
 
 // ----------------------------------------------------------------------------
 // Project Includes

@@ -21,7 +21,6 @@
 
 #include <QList>
 #include <QByteArray>
-#include <QResizeEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
