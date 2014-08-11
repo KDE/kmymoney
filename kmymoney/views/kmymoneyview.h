@@ -27,11 +27,11 @@
 #include <QVBoxLayout>
 #include <QUrl>
 #include <QSaveFile>
+#include <QMenu>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmenu.h>
 #include <KPageWidget>
 
 // ----------------------------------------------------------------------------

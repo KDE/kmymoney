@@ -25,11 +25,11 @@
 #include <QWidget>
 #include <QResizeEvent>
 #include <QList>
+#include <QMenu>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kmenu.h>
 #include <klistwidgetsearchline.h>
 
 // ----------------------------------------------------------------------------

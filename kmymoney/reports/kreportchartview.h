@@ -21,13 +21,12 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+#include <QStandardItemModel>
+#include <QMouseEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <QLabel>
-#include <QStandardItemModel>
-#include <QMouseEvent>
 #include <KDChartWidget>
 #include <KDChartChart>
 #include <KDChartAbstractDiagram>

@@ -34,6 +34,7 @@
 #include <QTimer>
 #include <QToolButton>
 #include <QPushButton>
+#include <QMenu>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -41,7 +42,6 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kconfig.h>
-#include <kmenu.h>
 #include <kiconloader.h>
 #include <kicon.h>
 #include <kmessagebox.h>
@@ -80,7 +80,7 @@ KScheduledView::KScheduledView(QWidget *parent) :
   connect(m_qbuttonNew, SIGNAL(clicked()), kmymoney->action("schedule_new"), SLOT(trigger()));
 
   // attach popup to 'Filter...' button
-  m_kaccPopup = new KMenu(this);
+  m_kaccPopup = new QMenu(this);
   m_accountsCombo->setMenu(m_kaccPopup);
   connect(m_kaccPopup, SIGNAL(activated(int)), this, SLOT(slotAccountActivated(int)));
 

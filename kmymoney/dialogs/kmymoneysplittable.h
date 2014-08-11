@@ -37,7 +37,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-class KMenu;
+class QMenu;
 class QPushButton;
 class QFrame;
 // ----------------------------------------------------------------------------
@@ -204,7 +204,7 @@ private:
   /**
     * This member keeps a pointer to the context menu
     */
-  KMenu*         m_contextMenu;
+  QMenu*         m_contextMenu;
 
   /// keeps the QAction of the delete entry in the context menu
   QAction*       m_contextMenuDelete;

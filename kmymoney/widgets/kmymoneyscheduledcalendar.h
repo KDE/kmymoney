@@ -35,7 +35,7 @@
 #include "kmymoneycalendar.h"
 #include "kmymoneyscheduleddatetbl.h"
 
-class KMenu;
+class QMenu;
 class kMyMoneyDateTbl;
 
 /**
@@ -87,7 +87,7 @@ protected slots:
   void slotSetViewTransfers();
 
 private:
-  KMenu* kpopupmenu;
+  QMenu* kpopupmenu;
   kMyMoneyScheduledDateTbl *m_scheduledDateTable;
 };
 

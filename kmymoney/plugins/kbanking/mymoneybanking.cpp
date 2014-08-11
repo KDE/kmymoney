@@ -46,7 +46,7 @@
 #include <KActionCollection>
 #include <KGlobal>
 #include <KStandardDirs>
-#include <KMenu>
+#include <QMenu>
 #include <KIconLoader>
 #include <KGuiItem>
 #include <KLineEdit>

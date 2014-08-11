@@ -39,6 +39,7 @@
 #include <QMouseEvent>
 #include <QEvent>
 #include <QPushButton>
+#include <QMenu>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -48,7 +49,6 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kcompletionbox.h>
-#include <kmenu.h>
 #include <kstandardshortcut.h>
 #include <kshortcut.h>
 #include <kicon.h>
@@ -111,7 +111,7 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
   setEditTriggers(QAbstractItemView::NoEditTriggers);
 
   // setup the context menu
-  m_contextMenu = new KMenu(this);
+  m_contextMenu = new QMenu(this);
   m_contextMenu->setTitle(i18n("Split Options"));
   m_contextMenu->setIcon(KIcon("view-financial-transfer"));
   m_contextMenu->addAction(KIcon("document-edit"), i18n("Edit..."), this, SLOT(slotStartEdit()));

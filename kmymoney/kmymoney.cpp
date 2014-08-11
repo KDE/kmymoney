@@ -54,7 +54,7 @@
 #include <QBoxLayout>
 #include <QResizeEvent>
 #include <QLabel>
-#include <KMenu>
+#include <QMenu>
 #include <QProgressBar>
 #include <QList>
 #include <QUrl>
@@ -471,7 +471,7 @@ void KMyMoneyApp::createTransactionMoveMenu(void)
 {
   if (!d->m_moveToAccountSelector) {
     QWidget* w = factory()->container("transaction_move_menu", this);
-    KMenu *menu = dynamic_cast<KMenu*>(w);
+    QMenu *menu = dynamic_cast<QMenu*>(w);
     if (menu) {
       QWidgetAction *accountSelectorAction = new QWidgetAction(menu);
       d->m_moveToAccountSelector = new kMyMoneyAccountSelector(menu, 0, false);
@@ -6008,7 +6008,7 @@ void KMyMoneyApp::transactionMatch(void)
 void KMyMoneyApp::showContextMenu(const QString& containerName)
 {
   QWidget* w = factory()->container(containerName, this);
-  KMenu *menu = dynamic_cast<KMenu*>(w);
+  QMenu *menu = dynamic_cast<QMenu*>(w);
   if (menu)
     menu->exec(QCursor::pos());
   else

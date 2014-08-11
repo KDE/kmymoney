@@ -60,6 +60,7 @@
 #include <QEvent>
 #include <QStyleOptionToolButton>
 #include <QIntValidator>
+#include <QMenu>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -72,7 +73,6 @@
 #include <kdebug.h>
 #include <knotification.h>
 //#include <kdatetable.h> // for maximum re-use
-#include <kmenu.h>
 #include <kglobalsettings.h>
 
 #include <kcalendarsystem.h>
@@ -240,7 +240,7 @@ void kMyMoneyCalendar::init(const QDate &dt)
 
   d->selectWeek = new QToolButton(this);
 
-  KMenu* kpopupmenuNew = new KMenu(this);
+  QMenu* kpopupmenuNew = new QMenu(this);
   kpopupmenuNew->addAction(i18n("Week"), this, SLOT(slotSetStyleWeekly()));
   kpopupmenuNew->addAction(i18n("Month"), this, SLOT(slotSetStyleMonthly()));
   styleControl->setMenu(kpopupmenuNew);

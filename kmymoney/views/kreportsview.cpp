@@ -1094,7 +1094,7 @@ void KReportsView::slotListContextMenu(const QPoint & p)
     return;
   }
 
-  KMenu* contextmenu = new KMenu(this);
+  QMenu* contextmenu = new QMenu(this);
 
   contextmenu->addAction(i18nc("To open a new report", "&Open"),
                          this, SLOT(slotOpenFromList()));

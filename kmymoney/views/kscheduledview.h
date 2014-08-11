@@ -138,7 +138,7 @@ private:
     */
 //  void loadAccounts(void);
 
-  KMenu *m_kaccPopup;
+  QMenu *m_kaccPopup;
   QStringList m_filterAccounts;
   bool m_openBills;
   bool m_openDeposits;

@@ -27,12 +27,12 @@
 
 #include <QPushButton>
 #include <QKeySequence>
+#include <QMenu>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
-#include <kmenu.h>
 #include <kmessagebox.h>
 
 // ----------------------------------------------------------------------------
@@ -45,7 +45,7 @@ kMyMoneyScheduledCalendar::kMyMoneyScheduledCalendar(QWidget *parent)
 {
   QPushButton *pb1 = new QPushButton(i18n("Select Schedules"), this);
 
-  kpopupmenu = new KMenu(this);
+  kpopupmenu = new QMenu(this);
   kpopupmenu->addAction(i18n("Bills"), this, SLOT(slotSetViewBills()));
   kpopupmenu->addAction(i18n("Deposits"), this, SLOT(slotSetViewDeposits()));
   kpopupmenu->addAction(i18n("Transfers"), this, SLOT(slotSetViewTransfers()));
