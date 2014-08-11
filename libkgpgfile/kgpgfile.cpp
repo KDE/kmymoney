@@ -33,12 +33,12 @@
 #include <QByteArray>
 #include <QBuffer>
 #include <QList>
+#include <QSaveFile>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <kstandarddirs.h>
-#include <ksavefile.h>
 
 #ifdef KF5Gpgmepp_FOUND
 #include <gpg-error.h>
@@ -68,7 +68,7 @@ public:
 
   QString m_fn;
   QFile* m_fileRead;
-  KSaveFile* m_fileWrite;
+  QSaveFile* m_fileWrite;
 
   GpgME::Error m_lastError;
 
@@ -165,14 +165,15 @@ bool KGPGFile::open(OpenMode mode)
     }
 
     // qDebug("check access rights");
-    if (!KStandardDirs::checkAccess(d->m_fn, W_OK)) {
+    QFileInfo file(d->m_fn);
+    if (!file.isWritable()) {
       setOpenMode(NotOpen);
       return false;
     }
 
     // write out in ASCII armor mode
     d->ctx->setArmor(true);
-    d->m_fileWrite = new KSaveFile;
+    d->m_fileWrite = new QSaveFile;
 
   } else if (isReadable()) {
     d->m_fileRead = new QFile;
@@ -181,7 +182,7 @@ bool KGPGFile::open(OpenMode mode)
   // open the 'physical' file
   // qDebug("open physical file");
   // Since some of the methods in QFile are not virtual, we need to
-  // differentiate here between the QFile* and the KSaveFile* case
+  // differentiate here between the QFile* and the QSaveFile* case
   if (isReadable()) {
     d->m_fileRead->setFileName(d->m_fn);
     if (!d->m_fileRead->open(mode)) {
@@ -221,7 +222,6 @@ void KGPGFile::close(void)
     GpgME::Data dcipher(d->m_fileWrite->handle());
     d->m_lastError = d->ctx->encrypt(d->m_recipients, d->m_data, dcipher, GpgME::Context::AlwaysTrust).error();
     if (d->m_lastError.encodedError()) {
-      d->m_fileWrite->abort();
       qDebug("Failure while writing file: '%s'", d->m_lastError.asString());
     }
   }

@@ -24,14 +24,13 @@
 #include <QDomDocument>
 #include <QDomNode>
 #include <QUrl>
+#include <QSaveFile>
 
 class QFile;
 class QTreeWidgetItem;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KSaveFile>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -71,7 +70,7 @@ protected:
   bool loadDescription(void);
   bool createAccounts(MyMoneyAccount& parent, QDomNode account);
   bool setFlags(MyMoneyAccount& acc, QDomNode flags);
-  bool saveToLocalFile(KSaveFile* qfile);
+  bool saveToLocalFile(QSaveFile* qfile);
   bool addAccountStructure(QDomElement& parent, const MyMoneyAccount& acc);
   bool hierarchy(QMap<QString, QTreeWidgetItem*>& list, const QString& parent, QDomNode account);
 

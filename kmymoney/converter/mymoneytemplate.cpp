@@ -25,13 +25,13 @@
 #include <QApplication>
 #include <QTextStream>
 #include <QList>
+#include <QSaveFile>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocale>
 #include <KMessageBox>
-#include <KSaveFile>
 #include <KTemporaryFile>
 #include <kio/netaccess.h>
 
@@ -408,10 +408,10 @@ bool MyMoneyTemplate::saveTemplate(const QUrl &url)
 
   if (url.isLocalFile()) {
     filename = url.toLocalFile();
-    KSaveFile qfile(filename/*, 0600*/);
-    if (qfile.open()) {
+    QSaveFile qfile(filename/*, 0600*/);
+    if (qfile.open(QIODevice::WriteOnly)) {
       saveToLocalFile(&qfile);
-      if (!qfile.finalize()) {
+      if (!qfile.commit()) {
         throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
       }
     } else {
@@ -419,10 +419,10 @@ bool MyMoneyTemplate::saveTemplate(const QUrl &url)
     }
   } else {
     KTemporaryFile tmpfile;
-    KSaveFile qfile(tmpfile.fileName());
-    if (qfile.open()) {
+    QSaveFile qfile(tmpfile.fileName());
+    if (qfile.open(QIODevice::WriteOnly)) {
       saveToLocalFile(&qfile);
-      if (!qfile.finalize()) {
+      if (!qfile.commit()) {
         throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
       }
     } else {
@@ -434,7 +434,7 @@ bool MyMoneyTemplate::saveTemplate(const QUrl &url)
   return true;
 }
 
-bool MyMoneyTemplate::saveToLocalFile(KSaveFile* qfile)
+bool MyMoneyTemplate::saveToLocalFile(QSaveFile* qfile)
 {
   QTextStream stream(qfile);
   stream.setCodec("UTF-8");

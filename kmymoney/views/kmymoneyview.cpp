@@ -33,20 +33,19 @@
 #include <QByteArray>
 #include <QUrl>
 #include <QPushButton>
+#include <QSaveFile>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <kfiledialog.h>
 #include <kglobal.h>
-
 #include <kicon.h>
 #include <kicontheme.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kio/netaccess.h>
 #include <ktemporaryfile.h>
-#include <ksavefile.h>
 #include <kfilterdev.h>
 #include <kfilterbase.h>
 #include <kfileitem.h>
@@ -56,6 +55,7 @@
 #include <ktitlewidget.h>
 #include <kcompressiondevice.h>
 #include <KSharedConfig>
+#include <KBackup>
 
 #ifdef KActivities_FOUND
 #include <KActivities/ResourceInstance>
@@ -1106,7 +1106,7 @@ bool KMyMoneyView::initializeStorage()
 
 void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageFormat* pWriter, bool plaintext, const QString& keyList)
 {
-  KSaveFile qfile(localFile);
+  QSaveFile qfile(localFile);
   QIODevice *dev = &qfile;
   KFilterBase *base = 0;
   QIODevice *statusDevice = dev;
@@ -1186,7 +1186,7 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
       statusDevice = base->device();
     }
   } else if (plaintext) {
-    qfile.open();
+    qfile.open(QIODevice::WriteOnly);
     if (qfile.error() != QFile::NoError) {
       throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", localFile));
     }
@@ -1198,8 +1198,8 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
   pWriter->setProgressCallback(&KMyMoneyView::progressCallback);
   pWriter->writeFile(dev, dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage()));
   MyMoneyFile::instance()->blockSignals(blocked);
-  QFile *fileStatusDevice = qobject_cast<QFile*>(statusDevice);
-  if (fileStatusDevice->error() != QFile::NoError) {
+  QFileDevice *fileStatusDevice = qobject_cast<QFileDevice*>(statusDevice);
+  if (fileStatusDevice && fileStatusDevice->error() != QFile::NoError) {
     throw MYMONEYEXCEPTION(i18n("Failure while writing to '%1'", localFile));
   }
   pWriter->setProgressCallback(0);
@@ -1213,7 +1213,7 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
     }
     delete dev;
   } else
-    qfile.close();
+    qfile.commit();
 }
 
 bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
@@ -1251,8 +1251,7 @@ bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
       try {
         const unsigned int nbak = KMyMoneyGlobalSettings::autoBackupCopies();
         if (nbak) {
-          // TODO: port KF5
-          //KSaveFile::numberedBackupFile(filename, QString(), QString::fromLatin1("~"), nbak);
+          KBackup::numberedBackupFile(filename, QString(), QString::fromLatin1("~"), nbak);
         }
         saveToLocalFile(filename, pWriter, plaintext, keyList);
       } catch (const MyMoneyException &) {
