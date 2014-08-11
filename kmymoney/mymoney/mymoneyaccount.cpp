@@ -792,6 +792,7 @@ const QMap<QDate, MyMoneyMoney>& MyMoneyAccount::reconciliationHistory()
 
 /**
  * @todo Improve setting of country for nationalAccount
+ * @todo something is wrong with kvp key iban (upper or lower case?)
  */
 QList< payeeIdentifier::constPtr > MyMoneyAccount::accountIdentifiers() const
 {
@@ -800,9 +801,9 @@ QList< payeeIdentifier::constPtr > MyMoneyAccount::accountIdentifiers() const
   MyMoneyFile* file = MyMoneyFile::instance();
 
   // Iban & Bic
-  if ( !value( QLatin1String("iban") ).isEmpty() ) {
+  if ( !value( QLatin1String("IBAN") ).isEmpty() ) {
     payeeIdentifiers::ibanBic::ptr iban( new payeeIdentifiers::ibanBic );
-    iban->setIban( value("iban") );
+    iban->setIban( value("IBAN") );
     iban->setBic( file->institution( institutionId() ).value("bic") );
     iban->setOwnerName( file->user().name() );
     list.append(iban);

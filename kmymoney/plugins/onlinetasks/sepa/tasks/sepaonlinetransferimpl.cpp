@@ -64,16 +64,7 @@ public:
 
   virtual bool checkRecipientBic( const QString& ) const { return false; }
 
-  /**
-   * @brief Checks if the bic is mandatory for the given iban
-   *
-   * For the check usually only the first two chars are needed. So you do not
-   * need to validate the IBAN.
-   *
-   * @todo LOW: Implement, should be simple to test: if the country code in iban is the same as in origin iban and
-   * the iban belongs to a sepa country a bic is not necessary. Will change 1. Feb 2016.
-   */
-  virtual bool isBicMandatory( const QString& ) const { return true; }
+  virtual bool isBicMandatory( const QString&, const QString& ) const { return true; }
 };
 
 sepaOnlineTransferImpl::sepaOnlineTransferImpl()
@@ -113,6 +104,12 @@ sepaOnlineTransfer *sepaOnlineTransferImpl::clone() const
 //! @todo add validation of local name
 bool sepaOnlineTransferImpl::isValid() const
 {
+  QString iban;
+  payeeIdentifiers::ibanBic::ptr ident = originAccountIdentifier().dynamicCast<payeeIdentifiers::ibanBic>();
+  if (!ident.isNull()) {
+    iban = ident->electronicIban();
+  }
+
   QSharedPointer<const sepaOnlineTransfer::settings> settings = getSettings();
   if ( settings->checkPurposeLength( _purpose ) == validators::ok
     && settings->checkPurposeMaxLines( _purpose )
@@ -122,7 +119,7 @@ bool sepaOnlineTransferImpl::isValid() const
     //&& settings->checkRecipientCharset( _beneficiaryAccount.ownerName() )
     //&& settings->checkRecipientLength( _beneficiaryAccount.ownerName()) == validators::ok
     && _beneficiaryAccount.isValid()
-    && ( !settings->isBicMandatory(_beneficiaryAccount.electronicIban()) || settings->checkRecipientBic(_beneficiaryAccount.bic()) )
+    && ( !settings->isBicMandatory(iban, _beneficiaryAccount.electronicIban()) || settings->checkRecipientBic(_beneficiaryAccount.bic()) )
     && value().isPositive()
   )
     return true;
@@ -132,6 +129,7 @@ bool sepaOnlineTransferImpl::isValid() const
 payeeIdentifier::ptr sepaOnlineTransferImpl::originAccountIdentifier() const
 {
   QSharedPointer<payeeIdentifiers::ibanBic> ident( new payeeIdentifiers::ibanBic() );
+  ident->setIban( MyMoneyFile::instance()->account(_originAccount).value("iban") );
 //  ident->setAccountNumber( originMyMoneyAccount().number() );
 //  ident->setBankCode( MyMoneyFile::instance()->institution( originMyMoneyAccount().institutionId()).sortcode() );
 //  ident->setOwnerName( MyMoneyFile::instance()->user().name() );

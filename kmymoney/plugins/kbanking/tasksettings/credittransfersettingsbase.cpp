@@ -18,8 +18,7 @@
 
 #include "credittransfersettingsbase.h"
 
-// Ktoblz check
-#include <iban.h>
+#include <QDebug>
 
 validators::lengthStatus creditTransferSettingsBase::checkNameLength(const QString& name) const
 {
@@ -76,10 +75,29 @@ bool creditTransferSettingsBase::checkRecipientCharset(const QString& name) cons
   return validators::checkCharset(name, _allowedChars);
 }
 
-bool creditTransferSettingsBase::isBicMandatory(const QString& iban) const
+bool creditTransferSettingsBase::isBicMandatory(const QString& payeeIban, const QString& beneficaryIban) const
 {
-  Q_UNUSED(iban);
-  return true;
+  const QString payeeContryCode = payeeIban.trimmed().left(2);
+  const QString beneficaryCountryCode = beneficaryIban.trimmed().left(2);
+
+  /**
+   * Data source for sepa participants:
+   * @url http://www.europeanpaymentscouncil.eu/index.cfm/knowledge-bank/epc-documents/epc-list-of-sepa-scheme-countries/
+   * EPC409-09
+   * Version 2.0
+   * Date issued: 20 January 2014
+   */
+  QStringList codes;
+  codes << "FI" << "AT" << "PT" << "BE" << "BG" << "ES" << "HR" << "CY" << "CZ" << "DK" << "EE" << "FI"
+  << "FR" << "DE" << "GI" << "GR" << "HU" << "IS" << "IE" << "IT" << "LV" << "LI" << "LT" << "LU" << "PT" << "MT" << "MC" << "NL"
+  << "NO" << "PL" << "RO" << "SM" << "SK" << "SI" << "ES" << "SE" << "CH" << "GB";
+
+  // Starting form 1st Febuary 2016 no bic is needed between sepa countries
+  if (QDate::currentDate() >= QDate(2016, 2, 1))
+    return ( !codes.contains(payeeContryCode, Qt::CaseInsensitive) || !codes.contains(beneficaryCountryCode, Qt::CaseInsensitive) );
+
+  // Before that date the bic is needed except for transfers within a single sepa country
+  return ( payeeContryCode.compare(beneficaryCountryCode, Qt::CaseInsensitive) != 0 || !codes.contains(payeeContryCode, Qt::CaseInsensitive) );
 }
 
 bool creditTransferSettingsBase::checkRecipientBic(const QString& bic) const

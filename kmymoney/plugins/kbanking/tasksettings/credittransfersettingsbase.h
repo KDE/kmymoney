@@ -24,7 +24,7 @@
 
 /**
  * @brief Base class for sepaCreditTransfer and germanCreditTransfer settings
- * 
+ *
  * @internal Both credit transfers have similar fields
  */
 class creditTransferSettingsBase : public sepaOnlineTransfer::settings, public germanOnlineTransfer::settings
@@ -55,7 +55,7 @@ public:
   int payeeNameMinLength() const { return _payeeNameMinLength; }
 
   QString allowedChars() const { return _allowedChars; }
-  
+
   virtual int endToEndReferenceLength() const { return m_endToEndReferenceLength; }
 
   // Checker
@@ -69,29 +69,28 @@ public:
 
   validators::lengthStatus checkRecipientLength(const QString& name) const;
   bool checkRecipientCharset( const QString& name ) const;
-  
+
   virtual validators::lengthStatus checkEndToEndReferenceLength(const QString& reference) const;
-  
+
   virtual bool checkRecipientBic( const QString& bic ) const;
-  
+
   /**
    * @brief Checks if the bic is mandatory for the given iban
-   * 
+   *
    * For the check usually only the first two chars are needed. So you do not
    * need to validate the IBAN.
-   * 
-   * @todo LOW: Implement, should be simple to test: if the country code in iban is the same as in origin iban and
-   * the iban belongs to a sepa country a bic is not necessary. Will change 1. Feb 2016.
+   *
+   * There is no need to format fromIban or toIban in any way (it is trimmed automatically).
    */
-  virtual bool isBicMandatory( const QString& iban ) const;
+  virtual bool isBicMandatory( const QString& fromIban, const QString& toIban ) const;
 
   validators::lengthStatus checkRecipientAccountNumber( const QString& accountNumber ) const;
-  
+
   validators::lengthStatus checkRecipientBankCode( const QString& bankCode ) const;
-  
+
   // Limits setter
   void setEndToEndReferenceLength(const int& length) { m_endToEndReferenceLength = length; }
-  
+
   void setPurposeLimits( const int& lines, const int& lineLength, const int& minLength )
   {
     _purposeMaxLines = lines;
