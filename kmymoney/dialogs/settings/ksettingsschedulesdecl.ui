@@ -53,7 +53,11 @@
                     </widget>
                   </item>
                   <item>
-                    <widget class="QSpinBox" name="kcfg_CheckSchedulePreview"/>
+                    <widget class="QSpinBox" name="kcfg_CheckSchedulePreview">
+                      <property name="maximum">
+                        <number>999</number>
+                      </property>
+                    </widget>
                   </item>
                 </layout>
               </widget>
@@ -121,7 +125,11 @@
             </widget>
           </item>
           <item>
-            <widget class="KIntSpinBox" name="kcfg_SchedulePreview"/>
+            <widget class="QSpinBox" name="kcfg_SchedulePreview">
+              <property name="maximum">
+                <number>999</number>
+              </property>
+            </widget>
           </item>
           <item>
             <spacer name="spacer2">
@@ -162,7 +170,7 @@
   <layoutdefault spacing="6" margin="11"/>
   <customwidgets>
     <customwidget>
-      <class>KIntSpinBox</class>
+      <class>QSpinBox</class>
       <extends>QSpinBox</extends>
       <header>knuminput.h</header>
     </customwidget>

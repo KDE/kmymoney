@@ -30,7 +30,7 @@
       <item row="0" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
-         <widget class="KIntSpinBox" name="kcfg_MaximumLegendItems">
+         <widget class="QSpinBox" name="kcfg_MaximumLegendItems">
           <property name="toolTip">
            <string>maximum number of items in diagram legends</string>
           </property>
@@ -61,7 +61,7 @@
       <item row="1" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout_7">
         <item>
-         <widget class="KIntSpinBox" name="kcfg_LineWidth">
+         <widget class="QSpinBox" name="kcfg_LineWidth">
           <property name="toolTip">
            <string>Line width for diagrams, in pixels</string>
           </property>
@@ -170,7 +170,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KIntSpinBox</class>
+   <class>QSpinBox</class>
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
   </customwidget>

@@ -210,7 +210,11 @@ Set it to 0 to turn the feature off.</string>
            </widget>
           </item>
           <item>
-           <widget class="KIntSpinBox" name="kcfg_FiscalYearBeginDay"/>
+           <widget class="QSpinBox" name="kcfg_FiscalYearBeginDay">
+            <property name="maximum">
+                <number>366</number>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="KComboBox" name="kcfg_FiscalYearBegin">
@@ -580,7 +584,7 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KIntSpinBox</class>
+   <class>QSpinBox</class>
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
   </customwidget>

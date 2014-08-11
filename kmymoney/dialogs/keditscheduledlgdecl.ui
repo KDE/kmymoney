@@ -253,12 +253,15 @@
                   </widget>
                 </item>
                 <item>
-                  <widget class="KIntSpinBox" name="m_variation">
+                  <widget class="QSpinBox" name="m_variation">
                     <property name="enabled">
                       <bool>false</bool>
                     </property>
                     <property name="value">
                       <number>10</number>
+                    </property>
+                    <property name="maximum">
+                      <number>32767</number>
                     </property>
                   </widget>
                 </item>
@@ -450,7 +453,7 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>KIntSpinBox</class>
+   <class>QSpinBox</class>
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
   </customwidget>

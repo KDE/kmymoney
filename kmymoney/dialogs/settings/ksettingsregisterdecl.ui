@@ -323,7 +323,7 @@ Selecting 0% will list all transactions.</string>
                           </widget>
                         </item>
                         <item>
-                          <widget class="KIntSpinBox" name="kcfg_AutoFillDifference">
+                          <widget class="QSpinBox" name="kcfg_AutoFillDifference">
                             <property name="maximum">
                               <number>100</number>
                             </property>
@@ -409,7 +409,7 @@ Selecting 0% will list all transactions.</string>
                     </widget>
                   </item>
                   <item>
-                    <widget class="KIntSpinBox" name="kcfg_matchInterval">
+                    <widget class="QSpinBox" name="kcfg_matchInterval">
                       <property name="buttonSymbols">
                         <enum>UpDownArrows</enum>
                       </property>
@@ -483,7 +483,7 @@ Selecting 0% will list all transactions.</string>
   <layoutdefault spacing="6" margin="11"/>
     <customwidgets>
   <customwidget>
-   <class>KIntSpinBox</class>
+   <class>QSpinBox</class>
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
   </customwidget>
