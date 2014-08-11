@@ -40,21 +40,21 @@ class chipTanDialog : public QDialog
 public:
   chipTanDialog(QWidget* parent = 0);
   ~chipTanDialog();
-  
+
   enum Result { Accepted=0, Rejected, InternalError };
-  
+
   QString infoText();
   QString hhdCode();
   QString tan();
   int flickerFieldWidth();
-  
+
 public slots:
   void accept();
   void reject();
-  
+
   void setInfoText(const QString&);
   void setHhdCode(const QString&);
-  
+
   void setTanLimits(const int& minLength, const int& maxLength);
   void setFlickerFieldWidth(const int& width);
   void setFlickerFieldClockSetting(const int& width);
@@ -63,12 +63,12 @@ private slots:
   void tanInputChanged(const QString&);
   void flickerFieldWidthChanged( const int& width );
   void flickerFieldClockSettingChanged( const int& takt );
-  
+
 private:
   Ui::chipTanDialog* ui;
   QString m_tan;
   bool m_accepted;
-  
+
   void setRootObjectProperty(const char* property, const QVariant& value);
   };
 

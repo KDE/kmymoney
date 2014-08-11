@@ -48,7 +48,7 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
 {
   if ((flags & GWEN_GUI_INPUT_FLAGS_OPTICAL) && text && *text) {
     // Optical Tan (chipTan)
-    
+
     // Extract text to display and hhd code
     QString infoText = QString::fromUtf8(text);
     QRegExp hhdRegExp = QRegExp("^(.*)\\$OBEGIN\\$(.*)\\$OEND\\$(.*)$", Qt::CaseInsensitive);
@@ -57,21 +57,19 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
     QStringList captured = hhdRegExp.capturedTexts();
     QString hhdCode = captured.at(2);
     infoText = captured.at(1) + captured.at(3);
-    
+
     chipTanDialog dialog(getParentWidget());
     dialog.setInfoText(infoText);
     dialog.setHhdCode(hhdCode);
     dialog.setTanLimits(minLen, maxLen);
-    //! @todo save flicker field width
-    //dialog.setFlickerFieldWidth( dialog.flickerFieldWidth() );
-    
+
     int rv = dialog.exec();
 
     if (rv == chipTanDialog::Rejected)
       return GWEN_ERROR_USER_ABORTED;
     else if (rv == chipTanDialog::InternalError)
       return GWEN_ERROR_INTERNAL;
-    
+
     QString tan = dialog.tan();
     if ( tan.length() >= minLen && tan.length() <= maxLen ) {
       strncpy(buffer, tan.toUtf8().constData() , tan.length());
@@ -81,6 +79,6 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
     qDebug( "Recieved Tan with incorrect length by ui." );
     return GWEN_ERROR_INTERNAL;
   }
-  
+
   return QT4_Gui::getPassword(flags, token, title, text, buffer, minLen, maxLen, guiid);
 }
