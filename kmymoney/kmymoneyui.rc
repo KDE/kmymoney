@@ -136,6 +136,7 @@
   <Action name="account_online_unmap" />
   <Action name="account_online_map" />
   <Action name="account_online_update" />
+  <Action name="account_online_new_credit_transfer" />
   <Separator/>
   <Action name="investment_new" />
   <Action name="investment_edit" />

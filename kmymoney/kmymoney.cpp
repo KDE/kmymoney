@@ -695,11 +695,11 @@ void KMyMoneyApp::initActions(void)
   connect(account_online_update_all, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnlineAll()));
   menu->addAction(account_online_update_all);
 
-  /** @todo disable "New Credit Transfer" option if no file is loaded or no transfer can be created */
-  KAction *account_online_transfer = actionCollection()->addAction("account_online_transfer");
-  account_online_transfer->setText(i18n("New Credit Transfer"));
+  /** @todo disable "new credit transfer" option if no file is loaded or no transfer can be created */
+  KAction *account_online_transfer = actionCollection()->addAction("account_online_new_credit_transfer");
+  account_online_transfer->setText(i18n("New credit transfer"));
+  account_online_transfer->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "mail-message-new"));
   connect(account_online_transfer, SIGNAL(triggered()), this, SLOT(slotNewOnlineTransfer()));
-  menu->addAction(account_online_transfer);
 
   // *******************
   // The categories menu
