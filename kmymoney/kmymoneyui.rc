@@ -61,6 +61,7 @@
    <Action name="account_online_map" />
    <Action name="account_online_update" />
    <Action name="account_online_update_all" />
+   <Action name="account_online_new_credit_transfer" />
   </Menu>
   <Menu name="category" >
    <text>&amp;Category</text>
@@ -268,6 +269,7 @@
   <Action name="account_edit" />
   <Action name="account_reconcile" />
   <Action name="account_online_update_menu" />
+  <Action name="account_online_new_credit_transfer" />
   <Action name="account_chart" />
   <Separator lineSeparator="true"/>
   <Action name="edit_find_transaction" />
