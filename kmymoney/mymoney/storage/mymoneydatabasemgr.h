@@ -913,7 +913,7 @@ public:
   /**
    * This method is used to get a SQL reader for subsequent database access
    */
-  virtual KSharedPtr <MyMoneyStorageSql> connectToDatabase
+  virtual QExplicitlySharedDataPointer <MyMoneyStorageSql> connectToDatabase
   (const QUrl &url);
   /**
     * This method is used when a database file is open, and the data is to
@@ -1028,7 +1028,7 @@ private:
   /**
     * This contains the interface with SQL reader for database access
     */
-  KSharedPtr <MyMoneyStorageSql> m_sql;
+  QExplicitlySharedDataPointer <MyMoneyStorageSql> m_sql;
 
   /**
     * This member variable keeps the User information.

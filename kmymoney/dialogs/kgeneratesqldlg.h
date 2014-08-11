@@ -67,7 +67,7 @@ private:
   //MyMoneyDbDrivers m_map;
   kMandatoryFieldGroup* m_requiredFields;
   bool m_sqliteSelected;
-  KSharedPtr<MyMoneyDbDriver> m_dbDriver;
+  QExplicitlySharedDataPointer<MyMoneyDbDriver> m_dbDriver;
   QString m_dbName;
   MyMoneySeqAccessMgr* m_storage;
   bool m_mustDetachStorage;

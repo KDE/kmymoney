@@ -97,10 +97,10 @@ MyMoneySeqAccessMgr const * MyMoneySeqAccessMgr::duplicate(void)
 /**
 * This method is used to get a SQL reader for subsequent database access
  */
-KSharedPtr <MyMoneyStorageSql> MyMoneySeqAccessMgr::connectToDatabase
+QExplicitlySharedDataPointer <MyMoneyStorageSql> MyMoneySeqAccessMgr::connectToDatabase
 (const QUrl& /*url*/)
 {
-  return KSharedPtr <MyMoneyStorageSql>();
+  return QExplicitlySharedDataPointer <MyMoneyStorageSql>();
 }
 
 bool MyMoneySeqAccessMgr::isStandardAccount(const QString& id) const

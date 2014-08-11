@@ -31,7 +31,7 @@
 
 class QIODevice;
 
-#include <ksharedptr.h>
+#include <QExplicitlySharedDataPointer>
 
 #include "imymoneystorageformat.h"
 #include "mymoneyinstitution.h"
@@ -114,7 +114,7 @@ class IMyMoneySerialize;
   * The MyMoneyDbColumn class is a base type for generic db columns.
   * Derived types exist for several common column types.
   */
-class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, public KShared
+class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, public QSharedData
 {
   friend class MyMoneyDbDef;
   KMM_MYMONEY_UNIT_TESTABLE
@@ -422,7 +422,7 @@ private:
   };
 
   // data
-  KSharedPtr<MyMoneyDbDriver> m_driver;
+  QExplicitlySharedDataPointer<MyMoneyDbDriver> m_driver;
 
   MyMoneyDbDef m_db;
   unsigned int m_dbVersion;

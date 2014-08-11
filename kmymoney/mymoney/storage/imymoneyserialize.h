@@ -73,7 +73,7 @@ public:
   /**
    * This method is used to get a SQL reader for subsequent database access
    */
-  virtual KSharedPtr <MyMoneyStorageSql> connectToDatabase
+  virtual QExplicitlySharedDataPointer <MyMoneyStorageSql> connectToDatabase
   (const QUrl &url) = 0;
   /**
     * This method is used when a database file is open, and the data is to

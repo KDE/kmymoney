@@ -26,7 +26,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <ksharedptr.h>
+#include <QExplicitlySharedDataPointer>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -40,7 +40,7 @@
   * The MyMoneyDbDriver class hierarchy provides a way to implement DBMS
   * specific parts of SQL strings.
   */
-class MyMoneyDbDriver : public KShared
+class MyMoneyDbDriver : public QSharedData
 {
 public:
   /**
@@ -48,9 +48,9 @@ public:
    *
    * @param type The name of the driver, according to Qt (QMYSQL, etc)
    *
-   * @return A KSharedPtr to the driver for the desired implementation
+   * @return A QExplicitlySharedDataPointer to the driver for the desired implementation
    */
-  static KSharedPtr<MyMoneyDbDriver> create(const QString& type);
+  static QExplicitlySharedDataPointer<MyMoneyDbDriver> create(const QString& type);
 
   virtual ~MyMoneyDbDriver();
 

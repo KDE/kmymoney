@@ -179,7 +179,7 @@ const QUrl KSelectDatabaseDlg::selectedURL()
 
 void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
 {
-  KSharedPtr<MyMoneyDbDriver> dbDriver = MyMoneyDbDriver::create(driver->text().section(' ', 0, 0));
+  QExplicitlySharedDataPointer<MyMoneyDbDriver> dbDriver = MyMoneyDbDriver::create(driver->text().section(' ', 0, 0));
   if (!dbDriver->isTested()) {
     int rc = KMessageBox::warningContinueCancel(0,
              i18n("Database type %1 has not been fully tested in a KMyMoney environment.\n"

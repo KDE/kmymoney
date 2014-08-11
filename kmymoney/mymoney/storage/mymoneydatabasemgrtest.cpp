@@ -99,7 +99,7 @@ void MyMoneyDatabaseMgrTest::testBadConnections()
   m_url = QString("sql://%1@localhost/%2kmm_test_driver?driver=%3")
           .arg(userName, dir, mode);
 
-  KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
+  QExplicitlySharedDataPointer <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
   QVERIFY(sql);
   int openStatus = sql->open(m_url, QIODevice::ReadWrite);
   QVERIFY(0 != openStatus);
@@ -134,7 +134,7 @@ void MyMoneyDatabaseMgrTest::testCreateDb()
       m_url = QString("sql://%1@localhost/%2kmm_test_driver?driver=%3")
               .arg(userName, dir, mode);
 
-      KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
+      QExplicitlySharedDataPointer <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
       QVERIFY(0 != sql);
       //qDebug("Database driver is %s", qPrintable(sql->driverName()));
       // Clear the database, so there is a fresh start on each run.
@@ -157,7 +157,7 @@ void MyMoneyDatabaseMgrTest::testAttachDb()
     testCreateDb();
     if (m_canOpen) {
       MyMoneyFile::instance()->detachStorage();
-      KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
+      QExplicitlySharedDataPointer <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
       QVERIFY(sql);
       int openStatus = sql->open(m_url, QIODevice::ReadWrite);
       QVERIFY(0 == openStatus);

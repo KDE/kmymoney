@@ -897,7 +897,7 @@ bool KMyMoneyView::openDatabase(const QUrl &url)
     pDBMgr = new MyMoneyDatabaseMgr;
     pStorage = dynamic_cast<IMyMoneySerialize*>(pDBMgr);
   }
-  KSharedPtr <MyMoneyStorageSql> reader = pStorage->connectToDatabase(url);
+  QExplicitlySharedDataPointer <MyMoneyStorageSql> reader = pStorage->connectToDatabase(url);
   QUrl dbURL(url);
   bool retry = true;
   while (retry) {

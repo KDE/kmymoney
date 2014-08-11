@@ -67,10 +67,10 @@ MyMoneyDbDef::MyMoneyDbDef()
 #define UNSIGNED false
 //#define ISKEY true
 
-#define appendField(a) fields.append(KSharedPtr<MyMoneyDbColumn>(new a))
+#define appendField(a) fields.append(QExplicitlySharedDataPointer<MyMoneyDbColumn>(new a))
 void MyMoneyDbDef::FileInfo(void)
 {
-  QList< KSharedPtr<MyMoneyDbColumn> > fields;
+  QList< QExplicitlySharedDataPointer<MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("version", "varchar(16)"));
   appendField(MyMoneyDbColumn("created", "date"));
   appendField(MyMoneyDbColumn("lastModified", "date"));
@@ -112,7 +112,7 @@ void MyMoneyDbDef::FileInfo(void)
 
 void MyMoneyDbDef::Institutions(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbTextColumn("name", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
   appendField(MyMoneyDbTextColumn("manager"));
@@ -128,7 +128,7 @@ void MyMoneyDbDef::Institutions(void)
 
 void MyMoneyDbDef::Payees(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)",  PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbTextColumn("name"));
   appendField(MyMoneyDbTextColumn("reference"));
@@ -150,7 +150,7 @@ void MyMoneyDbDef::Payees(void)
 
 void MyMoneyDbDef::Tags(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)",  PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbTextColumn("name"));
   appendField(MyMoneyDbColumn("closed", "char(1)", false, false, 5));
@@ -163,7 +163,7 @@ void MyMoneyDbDef::Tags(void)
 
 void MyMoneyDbDef::TagSplits(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("transactionId", "varchar(32)", PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbColumn("tagId", "varchar(32)", PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbIntColumn("splitId", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL));
@@ -174,7 +174,7 @@ void MyMoneyDbDef::TagSplits(void)
 
 void MyMoneyDbDef::Accounts(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)",  PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbColumn("institutionId", "varchar(32)"));
   appendField(MyMoneyDbColumn("parentId", "varchar(32)"));
@@ -198,7 +198,7 @@ void MyMoneyDbDef::Accounts(void)
 
 void MyMoneyDbDef::Transactions(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbColumn("txType", "char(1)"));
   appendField(MyMoneyDbDatetimeColumn("postDate"));
@@ -213,7 +213,7 @@ void MyMoneyDbDef::Transactions(void)
 
 void MyMoneyDbDef::Splits(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("transactionId", "varchar(32)",  PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbColumn("txType", "char(1)"));
   appendField(MyMoneyDbIntColumn("splitId", MyMoneyDbIntColumn::SMALL, UNSIGNED,  PRIMARYKEY, NOTNULL));
@@ -242,7 +242,7 @@ void MyMoneyDbDef::Splits(void)
 
 void MyMoneyDbDef::KeyValuePairs(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("kvpType", "varchar(16)", false, NOTNULL));
   appendField(MyMoneyDbColumn("kvpId", "varchar(32)"));
   appendField(MyMoneyDbColumn("kvpKey", "varchar(255)", false, NOTNULL));
@@ -257,7 +257,7 @@ void MyMoneyDbDef::KeyValuePairs(void)
 
 void MyMoneyDbDef::Schedules(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbTextColumn("name", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
   appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::TINY, UNSIGNED, false, NOTNULL));
@@ -285,7 +285,7 @@ void MyMoneyDbDef::Schedules(void)
 
 void MyMoneyDbDef::SchedulePaymentHistory(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("schedId", "varchar(32)", PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbColumn("payDate", "date", PRIMARYKEY,  NOTNULL));
   MyMoneyDbTable t("kmmSchedulePaymentHistory", fields);
@@ -295,7 +295,7 @@ void MyMoneyDbDef::SchedulePaymentHistory(void)
 
 void MyMoneyDbDef::Securities(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbColumn("name", "text", false, NOTNULL));
   appendField(MyMoneyDbTextColumn("symbol"));
@@ -311,7 +311,7 @@ void MyMoneyDbDef::Securities(void)
 
 void MyMoneyDbDef::Prices(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("fromId", "varchar(32)", PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbColumn("toId", "varchar(32)",  PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbColumn("priceDate", "date", PRIMARYKEY, NOTNULL));
@@ -325,7 +325,7 @@ void MyMoneyDbDef::Prices(void)
 
 void MyMoneyDbDef::Currencies(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("ISOcode", "char(3)", PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbTextColumn("name", MyMoneyDbTextColumn::NORMAL, false, NOTNULL));
   appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::SMALL, UNSIGNED));
@@ -344,7 +344,7 @@ void MyMoneyDbDef::Currencies(void)
 
 void MyMoneyDbDef::Reports(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("name", "varchar(255)", false, NOTNULL));
   appendField(MyMoneyDbTextColumn("XML", MyMoneyDbTextColumn::LONG));
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL, 6));
@@ -355,7 +355,7 @@ void MyMoneyDbDef::Reports(void)
 
 void MyMoneyDbDef::Budgets(void)
 {
-  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
   appendField(MyMoneyDbColumn("name", "text", false, NOTNULL));
   appendField(MyMoneyDbColumn("start", "date", false, NOTNULL));
@@ -380,7 +380,7 @@ void MyMoneyDbDef::Balances(void)
 }
 
 // function to write create SQL to a stream
-const QString MyMoneyDbDef::generateSQL(const KSharedPtr<MyMoneyDbDriver>& driver) const
+const QString MyMoneyDbDef::generateSQL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const
 {
   QString retval;
 
@@ -536,7 +536,7 @@ const QString MyMoneyDbTable::columnList(const int version) const
   return (qs.left(qs.length() - 2));
 }
 
-const QString MyMoneyDbTable::generateCreateSQL(const KSharedPtr<MyMoneyDbDriver>& driver, int version) const
+const QString MyMoneyDbTable::generateCreateSQL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver, int version) const
 {
   QString qs = QString("CREATE TABLE %1 (").arg(name());
   QString pkey;
@@ -564,7 +564,7 @@ const QString MyMoneyDbTable::generateCreateSQL(const KSharedPtr<MyMoneyDbDriver
   return qs;
 }
 
-const QString MyMoneyDbTable::dropPrimaryKeyString(const KSharedPtr<MyMoneyDbDriver>& driver) const
+const QString MyMoneyDbTable::dropPrimaryKeyString(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const
 {
   return driver->dropPrimaryKeyString(m_name);
 }
@@ -582,7 +582,7 @@ bool MyMoneyDbTable::hasPrimaryKey(int version) const
   return (false);
 }
 
-const QString MyMoneyDbTable::modifyColumnString(const KSharedPtr<MyMoneyDbDriver>& driver, const QString& columnName, const MyMoneyDbColumn& newDef) const
+const QString MyMoneyDbTable::modifyColumnString(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver, const QString& columnName, const MyMoneyDbColumn& newDef) const
 {
   return driver->modifyColumnString(m_name, columnName, newDef);
 }
@@ -597,7 +597,7 @@ int MyMoneyDbTable::fieldNumber(const QString& name) const
 }
 
 //*****************************************************************************
-const QString MyMoneyDbIndex::generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const
+const QString MyMoneyDbIndex::generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const
 {
   Q_UNUSED(driver);
 
@@ -647,7 +647,7 @@ MyMoneyDbTextColumn* MyMoneyDbTextColumn::clone() const
   return (new MyMoneyDbTextColumn(*this));
 }
 
-const QString MyMoneyDbColumn::generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const
+const QString MyMoneyDbColumn::generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const
 {
   Q_UNUSED(driver);
 
@@ -656,17 +656,17 @@ const QString MyMoneyDbColumn::generateDDL(const KSharedPtr<MyMoneyDbDriver>& dr
   return qs;
 }
 
-const QString MyMoneyDbIntColumn::generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const
+const QString MyMoneyDbIntColumn::generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const
 {
   return driver->intString(*this);
 }
 
-const QString MyMoneyDbTextColumn::generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const
+const QString MyMoneyDbTextColumn::generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const
 {
   return driver->textString(*this);
 }
 
-const QString MyMoneyDbDatetimeColumn::generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const
+const QString MyMoneyDbDatetimeColumn::generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const
 {
   return driver->timestampString(*this);
 }

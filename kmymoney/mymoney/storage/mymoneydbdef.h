@@ -32,7 +32,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <ksharedptr.h>
+#include <QExplicitlySharedDataPointer>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -44,7 +44,7 @@ class MyMoneyStorageSql;
   * The MyMoneyDbColumn class is a base type for generic db columns.
   * Derived types exist for several common column types.
   */
-class MyMoneyDbColumn : public KShared
+class MyMoneyDbColumn : public QSharedData
 {
 public:
   explicit MyMoneyDbColumn(const QString& iname,
@@ -73,7 +73,7 @@ public:
     *
     * @return QString of the DDL for the column, tailored for what the driver supports.
     */
-  virtual const QString generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const;
+  virtual const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
 
   const QString& name(void) const {
     return (m_name);
@@ -110,7 +110,7 @@ public:
                                    const int initVersion = 0):
       MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion) {}
   virtual ~MyMoneyDbDatetimeColumn() {}
-  virtual const QString generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const;
+  virtual const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
   virtual MyMoneyDbDatetimeColumn* clone() const;
 private:
   static const QString calcType(void);
@@ -133,7 +133,7 @@ public:
       m_type(type),
       m_isSigned(isigned) {}
   virtual ~MyMoneyDbIntColumn() {}
-  virtual const QString generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const;
+  virtual const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
   virtual MyMoneyDbIntColumn* clone() const;
   size type() const {
     return m_type;
@@ -163,7 +163,7 @@ public:
       MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion),
       m_type(type) {}
   virtual ~MyMoneyDbTextColumn() {}
-  virtual const QString generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const;
+  virtual const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
   virtual MyMoneyDbTextColumn* clone() const;
   size type() const {
     return m_type;
@@ -205,7 +205,7 @@ public:
   inline const QStringList columns() const {
     return m_columns;
   }
-  const QString generateDDL(const KSharedPtr<MyMoneyDbDriver>& driver) const;
+  const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
 private:
   QString m_table;
   bool m_unique;
@@ -226,7 +226,7 @@ class MyMoneyDbTable
 {
 public:
   MyMoneyDbTable(const QString& iname,
-                 const QList<KSharedPtr <MyMoneyDbColumn> >& ifields,
+                 const QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> >& ifields,
                  const QString& initVersion = "1.0"):
       m_name(iname),
       m_fields(ifields),
@@ -264,7 +264,7 @@ public:
     *
     * @return QString for the syntax to drop the primary key.
     */
-  const QString dropPrimaryKeyString(const KSharedPtr<MyMoneyDbDriver>& driver) const;
+  const QString dropPrimaryKeyString(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
   /**
     * This method returns a comma-separated list of all column names in the table
     * which were present in a given version
@@ -284,7 +284,7 @@ public:
     *
     * @return QString containing DDL to change the column.
     */
-  const QString modifyColumnString(const KSharedPtr<MyMoneyDbDriver>& driver, const QString& columnName, const MyMoneyDbColumn& newDef) const;
+  const QString modifyColumnString(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver, const QString& columnName, const MyMoneyDbColumn& newDef) const;
 
   /**
     * This method builds all of the SQL strings for common operations.
@@ -298,7 +298,7 @@ public:
     *
     * @return QString of the DDL.
     */
-  const QString generateCreateSQL(const KSharedPtr<MyMoneyDbDriver>& driver, int version = std::numeric_limits<int>::max()) const;
+  const QString generateCreateSQL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver, int version = std::numeric_limits<int>::max()) const;
 
   /**
     * This method creates a MyMoneyDbIndex object and adds it to the list of indices for the table.
@@ -309,7 +309,7 @@ public:
     */
   void addIndex(const QString& name, const QStringList& columns, bool unique = false);
 
-  typedef QList<KSharedPtr <MyMoneyDbColumn> >::const_iterator field_iterator;
+  typedef QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> >::const_iterator field_iterator;
   inline field_iterator begin(void) const {
     return m_fields.constBegin();
   }
@@ -328,7 +328,7 @@ public:
   }
 private:
   QString m_name;
-  QList<KSharedPtr <MyMoneyDbColumn> > m_fields;
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > m_fields;
   QHash<QString, int> m_fieldOrder;
 
   QList<MyMoneyDbIndex> m_indices;
@@ -379,7 +379,7 @@ public:
   MyMoneyDbDef();
   ~MyMoneyDbDef() {}
 
-  const QString generateSQL(const KSharedPtr<MyMoneyDbDriver>& driver) const;
+  const QString generateSQL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
 
   typedef QMap<QString, MyMoneyDbTable>::const_iterator table_iterator;
   inline table_iterator tableBegin(void) const {

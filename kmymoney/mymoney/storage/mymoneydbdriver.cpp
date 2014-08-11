@@ -152,26 +152,26 @@ const QMap<QString, QString> MyMoneyDbDriver::driverMap()
 }
 
 //********************* The factory *********************
-KSharedPtr<MyMoneyDbDriver> MyMoneyDbDriver::create(const QString& type)
+QExplicitlySharedDataPointer<MyMoneyDbDriver> MyMoneyDbDriver::create(const QString& type)
 {
   if (type == "QDB2")
-    return KSharedPtr<MyMoneyDbDriver> (new MyMoneyDb2Driver());
+    return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneyDb2Driver());
   else if (type == "QIBASE")
-    return KSharedPtr<MyMoneyDbDriver> (new MyMoneyInterbaseDriver());
+    return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneyInterbaseDriver());
   else if (type == "QMYSQL")
-    return KSharedPtr<MyMoneyDbDriver> (new MyMoneyMysqlDriver());
+    return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneyMysqlDriver());
   else if (type == "QOCI")
-    return KSharedPtr<MyMoneyDbDriver> (new MyMoneyOracleDriver());
+    return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneyOracleDriver());
   else if (type == "QODBC")
-    return KSharedPtr<MyMoneyDbDriver> (new MyMoneyODBCDriver());
+    return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneyODBCDriver());
   else if (type == "QPSQL")
-    return KSharedPtr<MyMoneyDbDriver> (new MyMoneyPostgresqlDriver());
+    return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneyPostgresqlDriver());
   else if (type == "QTDS")
-    return KSharedPtr<MyMoneyDbDriver> (new MyMoneySybaseDriver());
+    return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneySybaseDriver());
   else if (type == "QSQLITE")
-    return KSharedPtr<MyMoneyDbDriver> (new MyMoneySqlite3Driver());
+    return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneySqlite3Driver());
   else if (type == "SQLCIPHER")
-    return KSharedPtr<MyMoneyDbDriver> (new MyMoneySqlCipher3Driver());
+    return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneySqlCipher3Driver());
   else throw MYMONEYEXCEPTION(QString("Unknown database driver type").arg(type));
 }
 
@@ -343,7 +343,7 @@ const QString MyMoneyMysqlDriver::modifyColumnString(const QString& tableName, c
   return QString("ALTER TABLE %1 CHANGE %2 %3")
          .arg(tableName)
          .arg(columnName)
-         .arg(newDef.generateDDL(KSharedPtr<MyMoneyDbDriver>(const_cast<MyMoneyMysqlDriver*>(this))));
+         .arg(newDef.generateDDL(QExplicitlySharedDataPointer<MyMoneyDbDriver>(const_cast<MyMoneyMysqlDriver*>(this))));
 }
 
 const QString MyMoneyPostgresqlDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
@@ -351,7 +351,7 @@ const QString MyMoneyPostgresqlDriver::modifyColumnString(const QString& tableNa
   return QString("ALTER TABLE %1 ALTER COLUMN %2 TYPE %3")
          .arg(tableName)
          .arg(columnName)
-         .arg(newDef.generateDDL(KSharedPtr<MyMoneyDbDriver>(const_cast<MyMoneyPostgresqlDriver*>(this))));
+         .arg(newDef.generateDDL(QExplicitlySharedDataPointer<MyMoneyDbDriver>(const_cast<MyMoneyPostgresqlDriver*>(this))));
 }
 
 const QString MyMoneyOracleDriver::modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const
@@ -359,7 +359,7 @@ const QString MyMoneyOracleDriver::modifyColumnString(const QString& tableName, 
   return QString("ALTER TABLE %1 MODIFY %2 %3")
          .arg(tableName)
          .arg(columnName)
-         .arg(newDef.generateDDL(KSharedPtr<MyMoneyDbDriver>(const_cast<MyMoneyOracleDriver*>(this))));
+         .arg(newDef.generateDDL(QExplicitlySharedDataPointer<MyMoneyDbDriver>(const_cast<MyMoneyOracleDriver*>(this))));
 }
 
 //*******************************************************
