@@ -25,6 +25,26 @@
 
 QTEST_MAIN(onlineJobTypedTest)
 
+class dummyTask2 : public dummyTask {};
+
+class onlineTaskInterface {};
+class onlineTaskDummy3 : public onlineTask, public onlineTaskInterface
+{
+public:
+  ONLINETASK_META(dummyTask, "org.kmymoney.onlinetasks.dummytask");
+
+  virtual bool isValid() const { return true; }
+  virtual QString jobTypeName() const { return QLatin1String("Dummy credit transfer"); }
+
+protected:
+
+  virtual onlineTaskDummy3* clone() const { return (new onlineTaskDummy3); }
+  virtual bool hasReferenceTo(const QString &id) const { return false; }
+  virtual void writeXML(QDomDocument&, QDomElement&) const {}
+  virtual onlineTaskDummy3* createFromXml(const QDomElement &element) const { return (new onlineTaskDummy3); }
+  virtual QString responsibleAccount() const { return QString(); };
+};
+
 void onlineJobTypedTest::initTestCase()
 {
 
@@ -43,12 +63,10 @@ void onlineJobTypedTest::copyContructor()
   QVERIFY( job.m_task == task );
 }
 
-class dummyClass2 : public dummyTask {};
-
 void onlineJobTypedTest::constructWithIncompatibleType()
 {
   try {
-    onlineJobTyped<dummyClass2> job( new dummyTask );
+    onlineJobTyped<dummyTask2> job( new dummyTask );
     QFAIL("Missing expected exception");
   } catch ( const onlineJob::badTaskCast& ) {
   } catch ( ... ) {
@@ -77,4 +95,14 @@ void onlineJobTypedTest::copyByAssignment()
   QVERIFY( !job.isNull() );
   QVERIFY( dynamic_cast<dummyTask*>(job.task()));
   QCOMPARE(job.task()->testNumber(), 8888 );
+}
+
+void onlineJobTypedTest::constructWithManadtoryDynamicCast()
+{
+  onlineJob job( new onlineTaskDummy3 );
+  try {
+    onlineJobTyped<onlineTaskInterface> jobTyped( job );
+  } catch ( ... ) {
+    QFAIL("Unexpected exception");
+  }
 }
