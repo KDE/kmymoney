@@ -29,6 +29,7 @@
 #include <QFrame>
 #include <QFocusEvent>
 #include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,7 +38,6 @@
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
-#include <kicon.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -82,7 +82,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
 
     // create button
     KGuiItem splitButtonItem("",
-                             KIcon("split"), "", "");
+                             QIcon::fromTheme("split"), "", "");
     d->splitButton = new QPushButton(d->frame);
     d->splitButton->setObjectName("splitButton");
     KGuiItem::assign(d->splitButton, splitButtonItem);

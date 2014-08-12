@@ -35,12 +35,12 @@
 #include <QList>
 #include <QTreeWidget>
 #include <QStyledItemDelegate>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
-#include <kicon.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -158,7 +158,7 @@ void KCurrencyEditDlg::slotLoadCurrencies(void)
     p->setText(2, (*it).tradingSymbol());
 
     if ((*it).id() == baseCurrency) {
-      p->setData(0, Qt::DecorationRole, KIcon("kmymoney"));
+      p->setData(0, Qt::DecorationRole, QIcon::fromTheme("kmymoney"));
       if (m_currency.id().isEmpty())
         first = p;
     } else {

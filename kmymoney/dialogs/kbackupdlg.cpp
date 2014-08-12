@@ -27,20 +27,19 @@
 #include <QCheckBox>
 #include <QUrl>
 #include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <kglobal.h>
 #include <klocale.h>
-
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kfiledialog.h>
-#include <kicon.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
 #include <KSharedConfig>
@@ -58,7 +57,7 @@ KBackupDlg::KBackupDlg(QWidget* parent)
   KGuiItem::assign(btnCancel, KStandardGuiItem::cancel());
 
   KGuiItem chooseButtenItem(i18n("C&hoose..."),
-                            KIcon("folder"),
+                            QIcon::fromTheme("folder"),
                             i18n("Select mount point"),
                             i18n("Use this to browse to the mount point."));
   KGuiItem::assign(chooseButton, chooseButtenItem);

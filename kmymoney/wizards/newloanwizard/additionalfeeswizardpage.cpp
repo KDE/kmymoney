@@ -44,7 +44,7 @@ AdditionalFeesWizardPage::AdditionalFeesWizardPage(QWidget *parent)
   registerField("basePayment", m_basePayment, "text");
   // load button icons
   KGuiItem additionalFeeButtonItem(i18n("&Additional fees..."),
-                                   0, //KIcon("document-new"),
+                                   0, //QIcon::fromTheme("document-new"),
                                    i18n("Enter additional fees"),
                                    i18n("Use this to add any additional fees other than principal and interest contained in your periodical payments."));
   KGuiItem::assign(m_additionalFeeButton, additionalFeeButtonItem);

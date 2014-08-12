@@ -34,10 +34,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KIcon>
 #include <klocale.h>
 #include <kglobal.h>
-
 #include <klineedit.h>
 #include <ktextedit.h>
 #include <kuser.h>
@@ -233,7 +231,7 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
     QTreeWidgetItem* p = insertCurrency(*it);
     if ((*it).id() == baseCurrency) {
       first = p;
-      QIcon icon = static_cast<QIcon>(KIcon("view-bank-account"));
+      QIcon icon = static_cast<QIcon>(QIcon::fromTheme("view-bank-account"));
       p->setIcon(0, icon);
     } else {
       p->setIcon(0, QIcon());

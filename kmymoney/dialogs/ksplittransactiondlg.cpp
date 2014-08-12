@@ -31,6 +31,7 @@
 #include <QRadioButton>
 #include <QCursor>
 #include <QList>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,7 +39,6 @@
 #include <kglobal.h>
 #include <kconfig.h>
 #include <klocale.h>
-#include <kicon.h>
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
 #include <kapplication.h>
@@ -80,12 +80,12 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   setButtonText(User1, i18n("Clear &All"));
   setButtonToolTip(User1, i18n("Clear all splits"));
   setButtonWhatsThis(User1, i18n("Use this to clear all splits of this transaction"));
-  setButtonIcon(User1, KIcon("edit-clear"));
+  setButtonIcon(User1, QIcon::fromTheme("edit-clear"));
 
   //clearZero button
   setButtonText(User2, i18n("Clear &Zero"));
   setButtonToolTip(User2, i18n("Removes all splits that have a value of zero"));
-  setButtonIcon(User2, KIcon("edit-clear"));
+  setButtonIcon(User2, QIcon::fromTheme("edit-clear"));
 
   //merge button
   setButtonText(User3, i18n("&Merge"));

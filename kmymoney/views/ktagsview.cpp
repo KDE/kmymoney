@@ -34,6 +34,7 @@
 #include <QResizeEvent>
 #include <QtAlgorithms>
 #include <QTimer>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -42,7 +43,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kiconloader.h>
-#include <kicon.h>
 #include <kguiitem.h>
 
 #include <kdebug.h>
@@ -114,28 +114,28 @@ KTagsView::KTagsView(QWidget *parent) :
   m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
   KGuiItem newButtonItem(QString(""),
-                         KIcon("list-add-tag"),
+                         QIcon::fromTheme("list-add-tag"),
                          i18n("Creates a new tag"),
                          i18n("Use this to create a new tag."));
   KGuiItem::assign(m_newButton, newButtonItem);
   m_newButton->setToolTip(newButtonItem.toolTip());
 
   KGuiItem renameButtonItem(QString(""),
-                            KIcon("edit-rename"),
+                            QIcon::fromTheme("edit-rename"),
                             i18n("Rename the current selected tag"),
                             i18n("Use this to start renaming the selected tag."));
   KGuiItem::assign(m_renameButton, renameButtonItem);
   m_renameButton->setToolTip(renameButtonItem.toolTip());
 
   KGuiItem deleteButtonItem(QString(""),
-                            KIcon("list-remove-tag"),
+                            QIcon::fromTheme("list-remove-tag"),
                             i18n("Delete the current selected tag"),
                             i18n("Use this to delete the selected tag."));
   KGuiItem::assign(m_deleteButton, deleteButtonItem);
   m_deleteButton->setToolTip(deleteButtonItem.toolTip());
 
   KGuiItem updateButtonItem(i18nc("Update tag", "Update"),
-                            KIcon("dialog-ok"),
+                            QIcon::fromTheme("dialog-ok"),
                             i18n("Accepts the entered data and stores it"),
                             i18n("Use this to accept the modified data."));
   KGuiItem::assign(m_updateButton, updateButtonItem);

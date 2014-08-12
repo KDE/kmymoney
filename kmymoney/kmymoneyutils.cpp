@@ -30,11 +30,11 @@
 #include <QWizard>
 #include <QAbstractButton>
 #include <QPixmapCache>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kicon.h>
 #include <klocale.h>
 #include <kglobal.h>
 #include <kiconloader.h>
@@ -150,7 +150,7 @@ const QString KMyMoneyUtils::scheduleTypeToString(MyMoneySchedule::typeE type)
 KGuiItem KMyMoneyUtils::scheduleNewGuiItem(void)
 {
   KGuiItem splitGuiItem(i18n("&New Schedule..."),
-                        KIcon("document-new"),
+                        QIcon::fromTheme("document-new"),
                         i18n("Create a new schedule."),
                         i18n("Use this to create a new schedule."));
 
@@ -160,7 +160,7 @@ KGuiItem KMyMoneyUtils::scheduleNewGuiItem(void)
 KGuiItem KMyMoneyUtils::accountsFilterGuiItem(void)
 {
   KGuiItem splitGuiItem(i18n("&Filter"),
-                        KIcon("view-filter"),
+                        QIcon::fromTheme("view-filter"),
                         i18n("Filter out accounts"),
                         i18n("Use this to filter out accounts"));
 

@@ -21,11 +21,11 @@
 // QT Includes
 
 #include <QPointer>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kicon.h>
 #include <klocalizedstring.h>
 #include <KMessageBox>
 
@@ -47,7 +47,7 @@ InterestCategoryWizardPage::InterestCategoryWizardPage(QWidget *parent)
 
   // load button icons
   KGuiItem createCategoryButtonItem(i18n("&Create..."),
-                                    KIcon("document-new"),
+                                    QIcon::fromTheme("document-new"),
                                     i18n("Create a new category"),
                                     i18n("Use this to open the new account editor"));
   KGuiItem::assign(m_createCategoryButton, createCategoryButtonItem);

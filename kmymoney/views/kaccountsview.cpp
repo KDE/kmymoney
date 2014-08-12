@@ -27,6 +27,7 @@
 #include <QLayout>
 #include <QList>
 #include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,7 +37,6 @@
 #include <klocale.h>
 #include <kglobal.h>
 #include <kiconloader.h>
-#include <kicon.h>
 #include <kguiitem.h>
 #include <KToggleAction>
 #include <KSharedConfig>
@@ -58,11 +58,11 @@ KAccountsView::KAccountsView(QWidget *parent) :
 
   // setup icons for collapse and expand button
   KGuiItem collapseGuiItem("",
-                           KIcon("zoom-out"),
+                           QIcon::fromTheme("zoom-out"),
                            QString(),
                            QString());
   KGuiItem expandGuiItem("",
-                         KIcon("zoom-in"),
+                         QIcon::fromTheme("zoom-in"),
                          QString(),
                          QString());
   KGuiItem::assign(m_collapseButton, collapseGuiItem);

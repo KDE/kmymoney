@@ -29,6 +29,7 @@
 #include <QToolButton>
 #include <QList>
 #include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,7 +37,6 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kiconloader.h>
-#include <kicon.h>
 #include <kdeversion.h>
 
 // ----------------------------------------------------------------------------
@@ -48,8 +48,8 @@
 KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
     : kScheduleBriefWidget(parent/*,name, Qt::WStyle_Customize | Qt::WStyle_NoBorder*/)
 {
-  m_nextButton->setIcon(KIcon(QString::fromLatin1("arrow-right")));
-  m_prevButton->setIcon(KIcon(QString::fromLatin1("arrow-left")));
+  m_nextButton->setIcon(QIcon::fromTheme(QString::fromLatin1("arrow-right")));
+  m_prevButton->setIcon(QIcon::fromTheme(QString::fromLatin1("arrow-left")));
 
   connect(m_prevButton, SIGNAL(clicked()), this, SLOT(slotPrevClicked()));
   connect(m_nextButton, SIGNAL(clicked()), this, SLOT(slotNextClicked()));
@@ -58,7 +58,7 @@ KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
   connect(m_buttonEnter, SIGNAL(clicked()), this, SLOT(slotEnterClicked()));
 
   KGuiItem skipGuiItem(i18n("&Skip"),
-                       KIcon("media-seek-forward"),
+                       QIcon::fromTheme("media-seek-forward"),
                        i18n("Skip this transaction"),
                        i18n("Use this button to skip this transaction"));
   KGuiItem::assign(m_skipButton, skipGuiItem);
@@ -70,7 +70,7 @@ KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
   }
 
   KGuiItem enterGuiItem(i18n("&Enter"),
-                        KIcon(iconName),
+                        QIcon::fromTheme(iconName),
                         i18n("Record this transaction into the register"),
                         i18n("Use this button to record this transaction"));
   KGuiItem::assign(m_buttonEnter, enterGuiItem);

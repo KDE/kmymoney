@@ -535,13 +535,13 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       // for later execution
       KIconLoader *ic = KIconLoader::global();
       KGuiItem executeButton(i18n("&Execute"),
-                             KIcon(ic->loadIcon("tools-wizard",
+                             QIcon::fromTheme(ic->loadIcon("tools-wizard",
                                                 KIconLoader::Small, KIconLoader::SizeSmall)),
                              i18n("Close this window"),
                              i18n("Use this button to close the window"));
 
       KGuiItem queueButton(i18n("&Queue"),
-                           KIcon(ic->loadIcon("document-export",
+                           QIcon::fromTheme(ic->loadIcon("document-export",
                                               KIconLoader::Small, KIconLoader::SizeSmall)),
                            i18n("Close this window"),
                            i18n("Use this button to close the window"));

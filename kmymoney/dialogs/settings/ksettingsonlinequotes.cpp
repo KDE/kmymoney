@@ -22,6 +22,7 @@
 
 #include <QRegExp>
 #include <QCheckBox>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,8 +32,6 @@
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
-#include <kicon.h>
-
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -50,19 +49,19 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent)
   m_updateButton->setEnabled(false);
 
   KGuiItem updateButtenItem(i18nc("Accepts the entered data and stores it", "&Update"),
-                            KIcon("dialog-ok"),
+                            QIcon::fromTheme("dialog-ok"),
                             i18n("Accepts the entered data and stores it"),
                             i18n("Use this to accept the modified data."));
   KGuiItem::assign(m_updateButton, updateButtenItem);
 
   KGuiItem deleteButtenItem(i18n("&Delete"),
-                            KIcon("edit-delete"),
+                            QIcon::fromTheme("edit-delete"),
                             i18n("Delete the selected source entry"),
                             i18n("Use this to delete the selected online source entry"));
   KGuiItem::assign(m_deleteButton, deleteButtenItem);
 
   KGuiItem newButtenItem(i18nc("Create a new source entry for online quotes", "&New..."),
-                         KIcon("document-new"),
+                         QIcon::fromTheme("document-new"),
                          i18n("Create a new source entry for online quotes"),
                          i18n("Use this to create a new entry for online quotes"));
   KGuiItem::assign(m_newButton, newButtenItem);

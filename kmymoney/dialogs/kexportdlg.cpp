@@ -26,18 +26,17 @@
 #include <QPixmap>
 #include <QList>
 #include <QUrl>
+#include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
 #include <kglobal.h>
 #include <klocale.h>
-
 #include <kmessagebox.h>
 #include <kfiledialog.h>
-#include <QPushButton>
 #include <kiconloader.h>
-#include <kicon.h>
 #include <kconfiggroup.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
@@ -66,19 +65,19 @@ KExportDlg::KExportDlg(QWidget *parent)
   KGuiItem::assign(m_qbuttonCancel, KStandardGuiItem::cancel());
 
   KGuiItem okButtenItem(i18n("&Export"),
-                        KIcon("document-export"),
+                        QIcon::fromTheme("document-export"),
                         i18n("Start operation"),
                         i18n("Use this to start the export operation"));
   KGuiItem::assign(m_qbuttonOk, okButtenItem);
 
   KGuiItem browseButtenItem(i18n("&Browse..."),
-                            KIcon("document-open"),
+                            QIcon::fromTheme("document-open"),
                             i18n("Select filename"),
                             i18n("Use this to select a filename to export to"));
   KGuiItem::assign(m_qbuttonBrowse, browseButtenItem);
 
   KGuiItem newButtenItem(i18nc("New profile", "&New..."),
-                         KIcon("document-new"),
+                         QIcon::fromTheme("document-new"),
                          i18n("Create a new profile"),
                          i18n("Use this to open the profile editor"));
   KGuiItem::assign(m_profileEditorButton, newButtenItem);

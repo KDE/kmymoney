@@ -22,10 +22,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QIcon>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kicon.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <KToggleAction>
@@ -116,13 +117,13 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
   m_securitiesLayout->insertWidget(0, m_searchSecuritiesWidget);
 
   KGuiItem removeButtonItem(i18n("&Delete"),
-                            KIcon("edit-delete"),
+                            QIcon::fromTheme("edit-delete"),
                             i18n("Delete this entry"),
                             i18n("Remove this security item from the file"));
   KGuiItem::assign(m_deleteSecurityButton, removeButtonItem);
 
   KGuiItem editButtonItem(i18n("&Edit"),
-                          KIcon("document-edit"),
+                          QIcon::fromTheme("document-edit"),
                           i18n("Modify the selected entry"),
                           i18n("Change the security information of the selected entry."));
   KGuiItem::assign(m_editSecurityButton, editButtonItem);

@@ -29,12 +29,12 @@ email                : mte@users.sourceforge.net
 #include <QObject>
 #include <QDateTime>
 #include <QUrl>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <kfiledialog.h>
 #include <kinputdialog.h>
-#include <kicon.h>
 #ifndef _GNCFILEANON
 #include <klocale.h>
 #include <kconfig.h>
@@ -2218,8 +2218,8 @@ void MyMoneyGncReader::terminate()
       QString button0Text = i18nc("Button to show more detailed data", "More");
       if (si + 1 == sectionsToReport.count())
         button0Text = i18nc("Button to close the current dialog", "Done"); // last section
-      KGuiItem yesItem(button0Text, KIcon(), "", "");
-      KGuiItem noItem(i18n("Save Report"), KIcon(), "", "");
+      KGuiItem yesItem(button0Text, QIcon(), "", "");
+      KGuiItem noItem(i18n("Save Report"), QIcon(), "", "");
 
       switch (KMessageBox::questionYesNoCancel(0,
               buildReportSection(sectionsToReport[si]),

@@ -34,6 +34,7 @@
 #include <QVariant>
 #include <QCheckBox>
 #include <QMimeData>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -44,7 +45,6 @@
 #include <kdebug.h>
 #include <kfiledialog.h>
 #include <kmessagebox.h>
-#include <kicon.h>
 #include <kglobal.h>
 
 // ----------------------------------------------------------------------------
@@ -85,13 +85,13 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
   //set button icons
-  m_control->buttonChart->setIcon(KIcon("office-chart-line"));
-  m_control->buttonClose->setIcon(KIcon("document-close"));
-  m_control->buttonConfigure->setIcon(KIcon("configure"));
-  m_control->buttonCopy->setIcon(KIcon("edit-copy"));
-  m_control->buttonDelete->setIcon(KIcon("edit-delete"));
-  m_control->buttonExport->setIcon(KIcon("document-export"));
-  m_control->buttonNew->setIcon(KIcon("document-new"));
+  m_control->buttonChart->setIcon(QIcon::fromTheme("office-chart-line"));
+  m_control->buttonClose->setIcon(QIcon::fromTheme("document-close"));
+  m_control->buttonConfigure->setIcon(QIcon::fromTheme("configure"));
+  m_control->buttonCopy->setIcon(QIcon::fromTheme("edit-copy"));
+  m_control->buttonDelete->setIcon(QIcon::fromTheme("edit-delete"));
+  m_control->buttonExport->setIcon(QIcon::fromTheme("document-export"));
+  m_control->buttonNew->setIcon(QIcon::fromTheme("document-new"));
 
   m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   m_chartView->hide();
@@ -99,7 +99,7 @@ KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& re
   m_layout->addWidget(m_part->view());
   m_layout->addWidget(m_chartView);
 
-  parent->addTab(this, KIcon("application-vnd.oasis.opendocument.spreadsheet"), report.name());
+  parent->addTab(this, QIcon::fromTheme("application-vnd.oasis.opendocument.spreadsheet"), report.name());
   parent->setTabEnabled(parent->indexOf(this), true);
 
   // get users character set encoding
@@ -211,7 +211,7 @@ void KReportsView::KReportTab::toggleChart(void)
 
     m_control->buttonChart->setText(i18n("Chart"));
     m_control->buttonChart->setToolTip(i18n("Show the chart version of this report"));
-    m_control->buttonChart->setIcon(KIcon("office-chart-line"));
+    m_control->buttonChart->setIcon(QIcon::fromTheme("office-chart-line"));
   } else {
     m_part->view()->hide();
 
@@ -219,7 +219,7 @@ void KReportsView::KReportTab::toggleChart(void)
 
     m_control->buttonChart->setText(i18n("Report"));
     m_control->buttonChart->setToolTip(i18n("Show the report version of this chart"));
-    m_control->buttonChart->setIcon(KIcon("view-financial-list"));
+    m_control->buttonChart->setIcon(QIcon::fromTheme("view-financial-list"));
   }
   m_showingChart = ! m_showingChart;
 }

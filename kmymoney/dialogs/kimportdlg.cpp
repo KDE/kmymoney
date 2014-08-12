@@ -27,6 +27,7 @@
 #include <QPixmap>
 #include <QApplication>
 #include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -39,9 +40,7 @@
 #include <kglobal.h>
 #include <kiconloader.h>
 #include <kio/netaccess.h>
-
 #include <kconfiggroup.h>
-#include <kicon.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
 
@@ -67,19 +66,19 @@ KImportDlg::KImportDlg(QWidget *parent)
   KGuiItem::assign(m_qbuttonCancel, KStandardGuiItem::cancel());
 
   KGuiItem okButtenItem(i18n("&Import"),
-                        KIcon("document-import"),
+                        QIcon::fromTheme("document-import"),
                         i18n("Start operation"),
                         i18n("Use this to start the import operation"));
   KGuiItem::assign(m_qbuttonOk, okButtenItem);
 
   KGuiItem browseButtenItem(i18n("&Browse..."),
-                            KIcon("document-open"),
+                            QIcon::fromTheme("document-open"),
                             i18n("Select filename"),
                             i18n("Use this to select a filename to export to"));
   KGuiItem::assign(m_qbuttonBrowse, browseButtenItem);
 
   KGuiItem newButtenItem(i18nc("New profile", "&New..."),
-                         KIcon("document-new"),
+                         QIcon::fromTheme("document-new"),
                          i18n("Create a new profile"),
                          i18n("Use this to open the profile editor"));
   KGuiItem::assign(m_profileEditorButton, newButtenItem);

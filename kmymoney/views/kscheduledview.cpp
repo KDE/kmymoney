@@ -35,6 +35,7 @@
 #include <QToolButton>
 #include <QPushButton>
 #include <QMenu>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -43,7 +44,6 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kiconloader.h>
-#include <kicon.h>
 #include <kmessagebox.h>
 #include <KSharedConfig>
 
@@ -87,8 +87,8 @@ KScheduledView::KScheduledView(QWidget *parent) :
   KGuiItem::assign(m_qbuttonNew, KMyMoneyUtils::scheduleNewGuiItem());
   KGuiItem::assign(m_accountsCombo, KMyMoneyUtils::accountsFilterGuiItem());
 
-  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_listTab), KIcon("view-calendar-list"));
-  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_calendarTab), KIcon("view-calendar-timeline"));
+  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_listTab), QIcon::fromTheme("view-calendar-list"));
+  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_calendarTab), QIcon::fromTheme("view-calendar-timeline"));
 
   connect(m_scheduleTree, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotListViewContextMenu(QPoint)));
   connect(m_scheduleTree, SIGNAL(itemSelectionChanged()),
@@ -166,7 +166,7 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     m_scheduleTree->setSortingEnabled(false);
 
     KScheduleTreeItem *itemBills = new KScheduleTreeItem(m_scheduleTree);
-    itemBills->setIcon(0, KIcon("view-expenses-categories"));
+    itemBills->setIcon(0, QIcon::fromTheme("view-expenses-categories"));
     itemBills->setText(0, i18n("Bills"));
     itemBills->setData(0, KScheduleTreeItem::OrderRole, QVariant("0"));
     itemBills->setFirstColumnSpanned(true);
@@ -175,21 +175,21 @@ void KScheduledView::refresh(bool full, const QString& schedId)
     bold.setBold(true);
     itemBills->setFont(0, bold);
     KScheduleTreeItem *itemDeposits = new KScheduleTreeItem(m_scheduleTree);
-    itemDeposits->setIcon(0, KIcon("view-income-categories"));
+    itemDeposits->setIcon(0, QIcon::fromTheme("view-income-categories"));
     itemDeposits->setText(0, i18n("Deposits"));
     itemDeposits->setData(0, KScheduleTreeItem::OrderRole, QVariant("1"));
     itemDeposits->setFirstColumnSpanned(true);
     itemDeposits->setFlags(Qt::ItemIsEnabled);
     itemDeposits->setFont(0, bold);
     KScheduleTreeItem *itemLoans = new KScheduleTreeItem(m_scheduleTree);
-    itemLoans->setIcon(0, KIcon("view-loan"));
+    itemLoans->setIcon(0, QIcon::fromTheme("view-loan"));
     itemLoans->setText(0, i18n("Loans"));
     itemLoans->setData(0, KScheduleTreeItem::OrderRole, QVariant("2"));
     itemLoans->setFirstColumnSpanned(true);
     itemLoans->setFlags(Qt::ItemIsEnabled);
     itemLoans->setFont(0, bold);
     KScheduleTreeItem *itemTransfers = new KScheduleTreeItem(m_scheduleTree);
-    itemTransfers->setIcon(0, KIcon("view-financial-transfer"));
+    itemTransfers->setIcon(0, QIcon::fromTheme("view-financial-transfer"));
     itemTransfers->setText(0, i18n("Transfers"));
     itemTransfers->setData(0, KScheduleTreeItem::OrderRole, QVariant("3"));
     itemTransfers->setFirstColumnSpanned(true);
@@ -292,17 +292,17 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
   item->setData(0, KScheduleTreeItem::OrderRole, schedule.name());
   if (!schedule.isFinished()) {
     if (schedule.isOverdue()) {
-      item->setIcon(0, KIcon("view-calendar-upcoming-events"));
+      item->setIcon(0, QIcon::fromTheme("view-calendar-upcoming-events"));
       QBrush brush = item->foreground(0);
       brush.setColor(Qt::red);
       for (int i = 0; i < m_scheduleTree->columnCount(); ++i) {
         item->setForeground(i, brush);
       }
     } else {
-      item->setIcon(0, KIcon("view-calendar-day"));
+      item->setIcon(0, QIcon::fromTheme("view-calendar-day"));
     }
   } else {
-    item->setIcon(0, KIcon("dialog-close"));
+    item->setIcon(0, QIcon::fromTheme("dialog-close"));
     QBrush brush = item->foreground(0);
     brush.setColor(Qt::darkGreen);
     for (int i = 0; i < m_scheduleTree->columnCount(); ++i) {

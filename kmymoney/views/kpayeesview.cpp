@@ -40,6 +40,7 @@
 #include <QResizeEvent>
 #include <QtAlgorithms>
 #include <QTimer>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -48,7 +49,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kiconloader.h>
-#include <kicon.h>
 #include <kguiitem.h>
 
 #include <kdebug.h>
@@ -123,21 +123,21 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
   KGuiItem newButtonItem(QString(""),
-                         KIcon("list-add-user"),
+                         QIcon::fromTheme("list-add-user"),
                          i18n("Creates a new payee"),
                          i18n("Use this to create a new payee."));
   KGuiItem::assign(m_newButton, newButtonItem);
   m_newButton->setToolTip(newButtonItem.toolTip());
 
   KGuiItem renameButtonItem(QString(""),
-                            KIcon("user-properties"),
+                            QIcon::fromTheme("user-properties"),
                             i18n("Rename the current selected payee"),
                             i18n("Use this to start renaming the selected payee."));
   KGuiItem::assign(m_renameButton, renameButtonItem);
   m_renameButton->setToolTip(renameButtonItem.toolTip());
 
   KGuiItem deleteButtonItem(QString(""),
-                            KIcon("list-remove-user"),
+                            QIcon::fromTheme("list-remove-user"),
                             i18n("Delete selected payee(s)"),
                             i18n("Use this to delete the selected payee. You can also select "
                                  "multiple payees to be deleted."));
@@ -145,14 +145,14 @@ KPayeesView::KPayeesView(QWidget *parent) :
   m_deleteButton->setToolTip(deleteButtonItem.toolTip());
 
   KGuiItem mergeButtonItem(QString(""),
-                           KIcon("merge"),
+                           QIcon::fromTheme("merge"),
                            i18n("Merge multiple selected payees"),
                            i18n("Use this to merge multiple selected payees."));
   KGuiItem::assign(m_mergeButton, mergeButtonItem);
   m_mergeButton->setToolTip(mergeButtonItem.toolTip());
 
   KGuiItem updateButtonItem(i18nc("Update payee", "Update"),
-                            KIcon("dialog-ok"),
+                            QIcon::fromTheme("dialog-ok"),
                             i18n("Accepts the entered data and stores it"),
                             i18n("Use this to accept the modified data."));
   KGuiItem::assign(m_updateButton, updateButtonItem);

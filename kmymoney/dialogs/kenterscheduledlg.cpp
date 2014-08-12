@@ -25,6 +25,7 @@
 #include <QLabel>
 #include <QResizeEvent>
 #include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,7 +34,6 @@
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
 #include <kiconloader.h>
-#include <kicon.h>
 #include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
@@ -75,8 +75,8 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
 {
   d->m_schedule = schedule;
   d->m_extendedReturnCode = KMyMoneyUtils::Enter;
-  buttonOk->setIcon(KIcon(KMyMoneyGlobalSettings::enterScheduleIcon()));
-  buttonSkip->setIcon(KIcon("media-seek-forward"));
+  buttonOk->setIcon(QIcon::fromTheme(KMyMoneyGlobalSettings::enterScheduleIcon()));
+  buttonSkip->setIcon(QIcon::fromTheme("media-seek-forward"));
   KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
   KGuiItem::assign(buttonHelp, KStandardGuiItem::help());
   buttonIgnore->setHidden(true);

@@ -19,8 +19,19 @@
 
 #include "transactionsortoptionimpl.h"
 
+// ----------------------------------------------------------------------------
+// QT Includes
+
+#include <QIcon>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
 #include <kiconloader.h>
-#include <kicon.h>
+
+// ----------------------------------------------------------------------------
+// Project Includes
+
 #include "register.h"
 
 #include "ui_transactionsortoptiondecl.h"
@@ -40,10 +51,10 @@ TransactionSortOption::~TransactionSortOption()
 
 void TransactionSortOption::init()
 {
-  ui->m_addButton->setIcon(KIcon("arrow-right"));
-  ui->m_removeButton->setIcon(KIcon("arrow-left"));
-  ui->m_upButton->setIcon(KIcon("arrow-up"));
-  ui->m_downButton->setIcon(KIcon("arrow-down"));
+  ui->m_addButton->setIcon(QIcon::fromTheme("arrow-right"));
+  ui->m_removeButton->setIcon(QIcon::fromTheme("arrow-left"));
+  ui->m_upButton->setIcon(QIcon::fromTheme("arrow-up"));
+  ui->m_downButton->setIcon(QIcon::fromTheme("arrow-down"));
 
   // don't allow sorting of the selected entries
   ui->m_selectedList->setSortingEnabled(false);
@@ -159,9 +170,9 @@ void TransactionSortOption::toggleDirection(QListWidgetItem* item)
 void TransactionSortOption::setDirectionIcon(QListWidgetItem* item)
 {
   if (item->data(Qt::UserRole).toInt() > 0) {
-    item->setIcon(KIcon("view-sort-ascending"));
+    item->setIcon(QIcon::fromTheme("view-sort-ascending"));
   } else {
-    item->setIcon(KIcon("view-sort-descending"));
+    item->setIcon(QIcon::fromTheme("view-sort-descending"));
   }
 }
 

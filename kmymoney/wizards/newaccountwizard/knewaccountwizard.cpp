@@ -26,11 +26,11 @@
 #include <QLabel>
 #include <QList>
 #include <qmath.h>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kicon.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <klineedit.h>
@@ -1374,7 +1374,7 @@ LoanPayoutPage::LoanPayoutPage(Wizard* wizard) :
   m_mandatoryGroup->add(m_loanAccount->lineEdit());
 
   KGuiItem createAssetButtenItem(i18n("&Create..."),
-                                 KIcon("document-new"),
+                                 QIcon::fromTheme("document-new"),
                                  i18n("Create a new asset account"),
                                  i18n("If the asset account does not yet exist, press this button to create it."));
   KGuiItem::assign(m_createAssetButton, createAssetButtenItem);

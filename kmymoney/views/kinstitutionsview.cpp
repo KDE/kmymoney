@@ -22,11 +22,11 @@
 #include <QLabel>
 #include <QTabWidget>
 #include <QList>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kicon.h>
 #include <kdebug.h>
 #include <klocale.h>
 
@@ -47,11 +47,11 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
 
   // setup icons for collapse and expand button
   KGuiItem collapseGuiItem("",
-                           KIcon("zoom-out"),
+                           QIcon::fromTheme("zoom-out"),
                            QString(),
                            QString());
   KGuiItem expandGuiItem("",
-                         KIcon("zoom-in"),
+                         QIcon::fromTheme("zoom-in"),
                          QString(),
                          QString());
   KGuiItem::assign(m_collapseButton, collapseGuiItem);

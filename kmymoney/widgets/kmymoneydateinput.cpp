@@ -37,6 +37,7 @@
 #include <QDateEdit>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -47,7 +48,6 @@
 #include <kpassivepopup.h>
 #include <kdatepicker.h>
 #include <kvbox.h>
-#include <kicon.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -182,7 +182,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_datePicker->setCloseButton(true);
 
   // the next line is a try to add an icon to the button
-  d->m_dateButton = new QPushButton(KIcon("view-calendar-day"), QString(""), this);
+  d->m_dateButton = new QPushButton(QIcon::fromTheme("view-calendar-day"), QString(""), this);
   // use the most space for the edit widget
   setStretchFactor(d->m_dateEdit, 3);
 

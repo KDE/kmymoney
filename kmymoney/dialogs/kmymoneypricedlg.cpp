@@ -27,6 +27,7 @@
 
 #include <QCheckBox>
 #include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,7 +36,6 @@
 #include <kguiitem.h>
 #include <kmessagebox.h>
 #include <kglobal.h>
-#include <kicon.h>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
@@ -69,19 +69,19 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   m_priceList->setContextMenuPolicy(Qt::CustomContextMenu);
 
   KGuiItem removeButtonItem(i18n("&Delete"),
-                            KIcon("edit-delete"),
+                            QIcon::fromTheme("edit-delete"),
                             i18n("Delete this entry"),
                             i18n("Remove this price item from the file"));
   KGuiItem::assign(m_deleteButton, removeButtonItem);
 
   KGuiItem newButtonItem(i18nc("New price entry", "&New"),
-                         KIcon("document-new"),
+                         QIcon::fromTheme("document-new"),
                          i18n("Add a new entry"),
                          i18n("Create a new price entry."));
   KGuiItem::assign(m_newButton, newButtonItem);
 
   KGuiItem editButtonItem(i18n("&Edit"),
-                          KIcon("document-edit"),
+                          QIcon::fromTheme("document-edit"),
                           i18n("Modify the selected entry"),
                           i18n("Change the details of selected price information."));
   KGuiItem::assign(m_editButton, editButtonItem);

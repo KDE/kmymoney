@@ -27,6 +27,7 @@
 #include <QPixmap>
 #include <QKeyEvent>
 #include <QEvent>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -40,7 +41,6 @@
 #include <kvbox.h>
 #include <khbox.h>
 #include <kconfiggroup.h>
-#include <kicon.h>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
@@ -229,12 +229,12 @@ void kMyMoneyEdit::init(void)
   m_calculator = new kMyMoneyCalculator(m_calculatorFrame);
   m_calculatorFrame->hide();
 
-  m_calcButton = new QPushButton(KIcon("accessories-calculator"), QString(""), this);
+  m_calcButton = new QPushButton(QIcon::fromTheme("accessories-calculator"), QString(""), this);
   m_calcButton->setFocusProxy(m_edit);
 
   QPixmap pixmap;
   pixmap.loadFromData(resetButtonImage, sizeof(resetButtonImage), "PNG", 0);
-  m_resetButton = new QPushButton(KIcon(pixmap), QString(""), this);
+  m_resetButton = new QPushButton(pixmap, QString(""), this);
   m_resetButton->setEnabled(false);
   m_resetButton->setFocusProxy(m_edit);
 

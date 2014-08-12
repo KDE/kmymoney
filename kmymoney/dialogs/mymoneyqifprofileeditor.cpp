@@ -24,6 +24,7 @@
 #include <QCheckBox>
 #include <QListWidget>
 #include <QTabWidget>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,7 +38,6 @@
 #include <kcombobox.h>
 #include <kurlrequester.h>
 #include <kiconloader.h>
-#include <kicon.h>
 #include <kapplication.h>
 #include <kinputdialog.h>
 #include <khelpclient.h>
@@ -94,7 +94,7 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
 
   KIconLoader* il = KIconLoader::global();
   KGuiItem newButtenItem(i18nc("New profile", "&New"),
-                         KIcon(il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall)),
+                         il->loadIcon("document-new", KIconLoader::Small, KIconLoader::SizeSmall),
                          i18n("Create a new profile"),
                          i18n("Use this to create a new QIF import/export profile"));
   KGuiItem::assign(m_newButton, newButtenItem);

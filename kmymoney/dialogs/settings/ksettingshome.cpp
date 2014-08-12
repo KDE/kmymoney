@@ -21,6 +21,7 @@
 
 #include <QStringList>
 #include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,7 +31,6 @@
 #include <kiconloader.h>
 #include <klocale.h>
 #include <ktextedit.h>
-#include <kicon.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -46,11 +46,11 @@ KSettingsHome::KSettingsHome(QWidget* parent) :
 
   KIconLoader* il = KIconLoader::global();
   KGuiItem upButtonItem(i18nc("Move item up",  "&Up"),
-                        KIcon(il->loadIcon("go-up", KIconLoader::Small, KIconLoader::SizeSmall)),
+                        il->loadIcon("go-up", KIconLoader::Small, KIconLoader::SizeSmall),
                         i18n("Move selected item up"),
                         i18n("Use this to move the selected item up by one position in the list."));
   KGuiItem downButtonItem(i18n("&Down"),
-                          KIcon(il->loadIcon("go-down", KIconLoader::Small, KIconLoader::SizeSmall)),
+                          il->loadIcon("go-down", KIconLoader::Small, KIconLoader::SizeSmall),
                           i18n("Move selected item down"),
                           i18n("Use this to move the selected item down by one position in the list."));
 

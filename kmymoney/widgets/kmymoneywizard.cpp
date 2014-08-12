@@ -28,6 +28,7 @@
 #include <QList>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,7 +39,6 @@
 #include <kiconloader.h>
 #include <kapplication.h>
 #include <KColorScheme>
-#include <kicon.h>
 #include <khelpclient.h>
 
 // ----------------------------------------------------------------------------
@@ -133,9 +133,9 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
   if (KGlobalSettings::showIconsOnPushButtons()) {
     m_backButton->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
     m_nextButton->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
-    m_finishButton->setIcon(KIcon("dialog-ok-apply"));
-    m_cancelButton->setIcon(KIcon("dialog-cancel"));
-    m_helpButton->setIcon(KIcon("help-contents"));
+    m_finishButton->setIcon(QIcon::fromTheme("dialog-ok-apply"));
+    m_cancelButton->setIcon(QIcon::fromTheme("dialog-cancel"));
+    m_helpButton->setIcon(QIcon::fromTheme("help-contents"));
   }
 
   // create button layout

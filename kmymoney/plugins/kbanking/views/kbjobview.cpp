@@ -79,11 +79,11 @@ KBJobView::KBJobView(KMyMoneyBanking *kb,
   // add some icons to the buttons
   KIconLoader* il = KIconLoader::global();
   KGuiItem dequeueItem(i18n("Dequeue"),
-                       KIcon(il->loadIcon("edit-delete-shred", KIconLoader::Small, KIconLoader::SizeSmall)),
+                       QIcon::fromTheme(il->loadIcon("edit-delete-shred", KIconLoader::Small, KIconLoader::SizeSmall)),
                        i18n("Dequeue selected job"),
                        i18n("Remove the selected job from the list"));
   KGuiItem executeItem(i18n("Execute"),
-                       KIcon(il->loadIcon("system-run", KIconLoader::Small, KIconLoader::SizeSmall)),
+                       QIcon::fromTheme(il->loadIcon("system-run", KIconLoader::Small, KIconLoader::SizeSmall)),
                        i18n("Execute all jobs in the queue"),
                        i18n("Execute all jobs in the queue"));
 

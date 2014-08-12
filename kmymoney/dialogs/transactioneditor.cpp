@@ -29,6 +29,7 @@
 #include <QEvent>
 #include <QToolTip>
 #include <QPushButton>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -40,7 +41,6 @@
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
 #include <kiconloader.h>
-#include <kicon.h>
 #include <kguiitem.h>
 
 // ----------------------------------------------------------------------------
@@ -603,11 +603,11 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
           if (askForSchedule && (*it_ts).postDate() > QDate::currentDate()) {
             KGuiItem enterItem;
             KGuiItem enterButton(i18n("&Enter"),
-                                 KIcon("dialog-ok"),
+                                 QIcon::fromTheme("dialog-ok"),
                                  i18n("Accepts the entered data and stores it"),
                                  i18n("Use this to enter the transaction into the ledger."));
             KGuiItem scheduleButton(i18n("&Schedule"),
-                                    KIcon("appointment-new"),
+                                    QIcon::fromTheme("appointment-new"),
                                     i18n("Accepts the entered data and stores it as schedule"),
                                     i18n("Use this to schedule the transaction for later entry into the ledger."));
 

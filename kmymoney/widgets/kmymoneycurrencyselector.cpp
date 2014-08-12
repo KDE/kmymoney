@@ -27,12 +27,11 @@
 
 #include <QPixmap>
 #include <QBitmap>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-//
-#include <KIcon>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -130,7 +129,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
         break;
     }
     if ((*it).id() == baseCurrency) {
-      insertItem(itemId, KIcon("view-bank-account"), display);
+      insertItem(itemId, QIcon::fromTheme("view-bank-account"), display);
     } else {
       insertItem(itemId, emptyIcon, display);
     }

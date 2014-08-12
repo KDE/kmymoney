@@ -40,6 +40,7 @@
 #include <QEvent>
 #include <QPushButton>
 #include <QMenu>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -51,7 +52,6 @@
 #include <kcompletionbox.h>
 #include <kstandardshortcut.h>
 #include <kshortcut.h>
-#include <kicon.h>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
@@ -113,10 +113,10 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
   // setup the context menu
   m_contextMenu = new QMenu(this);
   m_contextMenu->setTitle(i18n("Split Options"));
-  m_contextMenu->setIcon(KIcon("view-financial-transfer"));
-  m_contextMenu->addAction(KIcon("document-edit"), i18n("Edit..."), this, SLOT(slotStartEdit()));
-  m_contextMenuDuplicate = m_contextMenu->addAction(KIcon("edit-copy"), i18nc("To duplicate a split", "Duplicate"), this, SLOT(slotDuplicateSplit()));
-  m_contextMenuDelete = m_contextMenu->addAction(KIcon("edit-delete"),
+  m_contextMenu->setIcon(QIcon::fromTheme("view-financial-transfer"));
+  m_contextMenu->addAction(QIcon::fromTheme("document-edit"), i18n("Edit..."), this, SLOT(slotStartEdit()));
+  m_contextMenuDuplicate = m_contextMenu->addAction(QIcon::fromTheme("edit-copy"), i18nc("To duplicate a split", "Duplicate"), this, SLOT(slotDuplicateSplit()));
+  m_contextMenuDelete = m_contextMenu->addAction(QIcon::fromTheme("edit-delete"),
                         i18n("Delete..."),
                         this, SLOT(slotDeleteSplit()));
 
@@ -821,9 +821,9 @@ KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
   m_registerButtonFrame->setPalette(palette);
 
   QHBoxLayout* l = new QHBoxLayout(m_registerButtonFrame);
-  m_registerEnterButton = new QPushButton(KIcon("dialog-ok"), QString(), m_registerButtonFrame);
+  m_registerEnterButton = new QPushButton(QIcon::fromTheme("dialog-ok"), QString(), m_registerButtonFrame);
 
-  m_registerCancelButton = new QPushButton(KIcon("dialog-cancel"), QString(), m_registerButtonFrame);
+  m_registerCancelButton = new QPushButton(QIcon::fromTheme("dialog-cancel"), QString(), m_registerButtonFrame);
 
   l->addWidget(m_registerEnterButton);
   l->addWidget(m_registerCancelButton);
