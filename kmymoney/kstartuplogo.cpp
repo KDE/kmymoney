@@ -22,6 +22,7 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QStandardPaths>
+#include <QSplashScreen>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -60,7 +61,7 @@ KStartupLogo::KStartupLogo() :
 
   if (!logoOverlay.isNull()) {
     const K4AboutData *aboutData = KCmdLineArgs::aboutData();
-    KSplashScreen* splash = new KSplashScreen(logoPixmap);
+    QSplashScreen* splash = new QSplashScreen(logoPixmap);
     splash->setFixedSize(logoPixmap.size());
 
     splash->show();
