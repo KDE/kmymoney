@@ -298,7 +298,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect( m_onlineJobOutboxView, SIGNAL(sendJobs(QList<onlineJob>)), kmymoney, SLOT( slotOnlineJobSend( QList< onlineJob > ) ));
   connect( m_onlineJobOutboxView, SIGNAL(editJob(QString)), kmymoney, SLOT(slotEditOnlineJob(QString)) );
   connect( m_onlineJobOutboxView, SIGNAL(newCreditTransfer()), kmymoney, SLOT(slotNewOnlineTransfer()) );
-  /** @todo do I need aboutToShow()? in kmymoneyview */
+  connect( m_onlineJobOutboxView, SIGNAL(aboutToShow()), this, SLOT(aboutToChangeView()));
 
   //set the model
   setModel(m_model);
@@ -523,7 +523,8 @@ void KMyMoneyView::enableViewsIfFileOpen()
     m_reportsViewFrame->setEnabled(m_fileOpen);
   if (m_forecastViewFrame->isEnabled() != m_fileOpen)
     m_forecastViewFrame->setEnabled(m_fileOpen);
-
+  if (m_onlineJobOutboxViewFrame->isEnabled() != m_fileOpen)
+    m_onlineJobOutboxViewFrame->setEnabled(m_fileOpen);
   emit viewStateChanged(m_fileOpen);
 }
 
