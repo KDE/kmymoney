@@ -28,16 +28,23 @@
 class onlineTask;
 
 /**
- * @brief The onlineJob class
+ * @brief Class to share jobs which can be procceded by an online banking plugin
  *
- * onlineJob has two tasks:
- * 1) storing the pointer to an onlineTask safely,
- * 2) storing status information about the onlineTask.
+ * This class stores only the status information and a pointer to an @r onlineTask which stores
+ * the real data. So onlineJob is similar to an shared pointer.
  *
- * It works like a shared pointer for onlineTasks.
+ * If you know the type of the onlineTask, @r onlineJobTyped is the first choice to use.
  *
  * It is save to use because accesses to pointers (e.g. task() ) throw an execption if onlineJob is null.
  *
+ * Online jobs are usually not created directly but over @r onlineJobAdministration::createOnlineJob. This is
+ * required to allow loading of onlineTasks at runtime and only if needed.
+ *
+ * This class was created to help writing stable and reliable code. Before an unsafe structure (= pointer)
+ * is accessed it is checked. Exceptions are thrown if the content is unsafe.
+ *
+ * @see onlineTask
+ * @see onlineJobTyped
  * @todo LOW make data implicitly shared
  */
 class KMM_MYMONEY_EXPORT onlineJob : public MyMoneyObject
@@ -77,8 +84,11 @@ public:
   /**
    * @brief Returns task attached to this onlineJob
    *
-   * You should not store this pointer but use onlineJob::task() (or onlineJobKnownTask::task())
+   * You should not store this pointer but use onlineJob::task() (or @r onlineJobTyped::task())
    * every time you access it.
+   *
+   * @note The return type may change in future (e.g. to an atomic pointer). But you can always expect
+   * the operator @c -> to work like it does for onlineTask*.
    *
    * @throws emptyTask if isNull()
    */
@@ -282,9 +292,10 @@ public:
     {}
   };
 
-private:
   /** @brief onlineTask attatched to this job */
   onlineTask* m_task;
+
+private:
 
   /**
    * @brief Date-time the job was send to the bank

@@ -40,7 +40,7 @@ void onlineJobTypedTest::copyContructor()
   dummyTask* task = new dummyTask;
   onlineJobTyped<dummyTask> job( task );
   QVERIFY( !job.isNull() );
-  QVERIFY( job.m_taskSubType == task );
+  QVERIFY( job.m_task == task );
 }
 
 class dummyClass2 : public dummyTask {};
@@ -51,6 +51,8 @@ void onlineJobTypedTest::constructWithIncompatibleType()
     onlineJobTyped<dummyClass2> job( new dummyTask );
     QFAIL("Missing expected exception");
   } catch ( const onlineJob::badTaskCast& ) {
+  } catch ( ... ) {
+    QFAIL("Wrong exception thrown");
   }
 }
 
@@ -60,6 +62,8 @@ void onlineJobTypedTest::constructWithNull()
     onlineJobTyped<dummyTask> job( 0 );
     QFAIL("Missing expected exception");
   } catch ( const onlineJob::emptyTask& ) {
+  } catch ( ... ) {
+    QFAIL("Wrong exception thrown");
   }
 }
 
