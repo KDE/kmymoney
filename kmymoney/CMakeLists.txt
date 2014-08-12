@@ -100,7 +100,7 @@ install(FILES kmymoney.upd
   DESTINATION ${KCONF_UPDATE_INSTALL_DIR}
   )
 install(FILES kmymoneyui.rc tips
-  DESTINATION ${DATA_INSTALL_DIR}/kmymoney
+  DESTINATION ${KXMLGUI_INSTALL_DIR}/kmymoney
   )
 install(FILES ${_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
