@@ -84,25 +84,29 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
  */
 void kOnlineTransferForm::addOnlineJobEditWidget(KService::Ptr service)
 {
-  IonlineJobEdit *const widget = service->createInstance<IonlineJobEdit>();
-  if (widget == 0) {
-    qWarning() << "Error while loading user interface for online task" << service->name() << service->library();
-    return;
+  try {
+    IonlineJobEdit *const widget = service->createInstance<IonlineJobEdit>();
+    if (widget == 0) {
+      qWarning() << "Error while loading user interface for online task" << service->name() << service->library();
+      return;
+    }
+
+    // directly load the first widget into QScrollArea
+    bool showWidget = true;
+    if (!m_onlineJobEditWidgets.isEmpty()) {
+      widget->setEnabled(false);
+      showWidget = false;
+    }
+
+    m_onlineJobEditWidgets.append( widget );
+    ui->transferTypeSelection->addItem(service->name());
+    m_requiredFields->add(widget);
+
+    if (showWidget)
+      showEditWidget(widget);
+  } catch ( MyMoneyException& e ) {
+    qWarning("Error while loading a plugin (IonlineJobEdit).");
   }
-
-  // directly load the first widget into QScrollArea
-  bool showWidget = true;
-  if (!m_onlineJobEditWidgets.isEmpty()) {
-    widget->setEnabled(false);
-    showWidget = false;
-  }
-
-  m_onlineJobEditWidgets.append( widget );
-  ui->transferTypeSelection->addItem(service->name());
-  m_requiredFields->add(widget);
-
-  if (showWidget)
-    showEditWidget(widget);
 }
 
 void kOnlineTransferForm::convertCurrentJob( const int& index )
