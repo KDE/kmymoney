@@ -566,7 +566,7 @@ void KMyMoneyApp::initActions(void)
   QAction *edit_find_transaction = actionCollection()->addAction("edit_find_transaction");
   edit_find_transaction->setText(i18n("Find transaction..."));
   edit_find_transaction->setIcon(KMyMoneyUtils::overlayIcon("view-financial-transfer", "edit-find"));
-  edit_find_transaction->setShortcut(QKeySequence("Ctrl+F"));
+  actionCollection()->setDefaultShortcut(edit_find_transaction, QKeySequence("Ctrl+F"));
   connect(edit_find_transaction, SIGNAL(triggered()), this, SLOT(slotFindTransaction()));
 
   // *************
@@ -575,23 +575,23 @@ void KMyMoneyApp::initActions(void)
   KToggleAction *view_show_transaction_detail = actionCollection()->add<KToggleAction>("view_show_transaction_detail");
   view_show_transaction_detail->setIcon(QIcon::fromTheme("zoom-in"));
   view_show_transaction_detail->setText(i18n("Show Transaction Detail"));
-  view_show_transaction_detail->setShortcut(QKeySequence("Ctrl+T"));
+  actionCollection()->setDefaultShortcut(view_show_transaction_detail, QKeySequence("Ctrl+T"));
 
   KToggleAction *view_hide_reconciled_transactions = actionCollection()->add<KToggleAction>("view_hide_reconciled_transactions");
   view_hide_reconciled_transactions->setText(i18n("Hide reconciled transactions"));
   view_hide_reconciled_transactions->setIcon(KMyMoneyUtils::overlayIcon("merge", "view-close"));
-  view_hide_reconciled_transactions->setShortcut(QKeySequence("Ctrl+R"));
+  actionCollection()->setDefaultShortcut(view_hide_reconciled_transactions, QKeySequence("Ctrl+R"));
   connect(view_hide_reconciled_transactions, SIGNAL(triggered()), this, SLOT(slotHideReconciledTransactions()));
 
   KToggleAction *view_hide_unused_categories = actionCollection()->add<KToggleAction>("view_hide_unused_categories");
   view_hide_unused_categories->setText(i18n("Hide unused categories"));
   view_hide_unused_categories->setIcon(KMyMoneyUtils::overlayIcon("view-financial-categories", "view-close"));
-  view_hide_unused_categories->setShortcut(QKeySequence("Ctrl+U"));
+  actionCollection()->setDefaultShortcut(view_hide_unused_categories, QKeySequence("Ctrl+U"));
   connect(view_hide_unused_categories, SIGNAL(triggered()), this, SLOT(slotHideUnusedCategories()));
 
   KToggleAction *view_show_all_accounts = actionCollection()->add<KToggleAction>("view_show_all_accounts");
   view_show_all_accounts->setText(i18n("Show all accounts"));
-  view_show_all_accounts->setShortcut(QKeySequence("Ctrl+Shift+A"));
+  actionCollection()->setDefaultShortcut(view_show_all_accounts, QKeySequence("Ctrl+Shift+A"));
   connect(view_show_all_accounts, SIGNAL(triggered()), this, SLOT(slotShowAllAccounts()));
 
   // *********************
@@ -629,7 +629,7 @@ void KMyMoneyApp::initActions(void)
   QAction *account_reconcile = actionCollection()->addAction("account_reconcile");
   account_reconcile->setText(i18n("Reconcile..."));
   account_reconcile->setIcon(QIcon::fromTheme("merge"));
-  account_reconcile->setShortcut(QKeySequence("Ctrl+Shift+R"));
+  actionCollection()->setDefaultShortcut(account_reconcile, QKeySequence("Ctrl+Shift+R"));
   connect(account_reconcile, SIGNAL(triggered()), this, SLOT(slotAccountReconcileStart()));
 
   QAction *account_reconcile_finish = actionCollection()->addAction("account_reconcile_finish");
@@ -785,7 +785,7 @@ void KMyMoneyApp::initActions(void)
   QAction *transaction_new = actionCollection()->addAction("transaction_new");
   transaction_new->setText(i18nc("New transaction button", "New"));
   transaction_new->setIcon(KMyMoneyUtils::overlayIcon("view-financial-transfer", "list-add", Qt::TopRightCorner));
-  transaction_new->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Insert));
+  actionCollection()->setDefaultShortcut(transaction_new, QKeySequence(Qt::CTRL | Qt::Key_Insert));
   connect(transaction_new, SIGNAL(triggered()), this, SLOT(slotTransactionsNew()));
 
 
@@ -834,17 +834,17 @@ void KMyMoneyApp::initActions(void)
 
   QAction *transaction_mark_toggle = actionCollection()->addAction("transaction_mark_toggle");
   transaction_mark_toggle->setText(i18nc("Toggle reconciliation flag", "Toggle"));
-  transaction_mark_toggle->setShortcut(QKeySequence("Ctrl+Space"));
+  actionCollection()->setDefaultShortcut(transaction_mark_toggle, QKeySequence("Ctrl+Space"));
   connect(transaction_mark_toggle, SIGNAL(triggered()), this, SLOT(slotToggleReconciliationFlag()));
 
   QAction *transaction_mark_cleared = actionCollection()->addAction("transaction_mark_cleared");
   transaction_mark_cleared->setText(i18nc("Mark transaction cleared", "Cleared"));
-  transaction_mark_cleared->setShortcut(QKeySequence("Ctrl+Alt+Space"));
+  actionCollection()->setDefaultShortcut(transaction_mark_cleared, QKeySequence("Ctrl+Alt+Space"));
   connect(transaction_mark_cleared, SIGNAL(triggered()), this, SLOT(slotMarkTransactionCleared()));
 
   QAction *transaction_mark_reconciled = actionCollection()->addAction("transaction_mark_reconciled");
   transaction_mark_reconciled->setText(i18nc("Mark transaction reconciled", "Reconciled"));
-  transaction_mark_reconciled->setShortcut(QKeySequence("Ctrl+Shift+Space"));
+  actionCollection()->setDefaultShortcut(transaction_mark_reconciled, QKeySequence("Ctrl+Shift+Space"));
   connect(transaction_mark_reconciled, SIGNAL(triggered()), this, SLOT(slotMarkTransactionReconciled()));
 
   QAction *transaction_mark_notreconciled = actionCollection()->addAction("transaction_mark_notreconciled");
@@ -853,7 +853,7 @@ void KMyMoneyApp::initActions(void)
 
   QAction *transaction_select_all = actionCollection()->addAction("transaction_select_all");
   transaction_select_all->setText(i18nc("Select all transactions", "Select all"));
-  transaction_select_all->setShortcut(QKeySequence("Ctrl+A"));
+  actionCollection()->setDefaultShortcut(transaction_select_all, QKeySequence("Ctrl+A"));
   connect(transaction_select_all, SIGNAL(triggered()), this, SIGNAL(selectAllTransactions()));
 
   QAction *transaction_goto_account = actionCollection()->addAction("transaction_goto_account");
@@ -873,7 +873,7 @@ void KMyMoneyApp::initActions(void)
 
   QAction *transaction_assign_number = actionCollection()->addAction("transaction_assign_number");
   transaction_assign_number->setText(i18n("Assign next number"));
-  transaction_assign_number->setShortcut(QKeySequence("Ctrl+Shift+N"));
+  actionCollection()->setDefaultShortcut(transaction_assign_number, QKeySequence("Ctrl+Shift+N"));
   connect(transaction_assign_number, SIGNAL(triggered()), this, SLOT(slotTransactionAssignNumber()));
 
   QAction *transaction_combine = actionCollection()->addAction("transaction_combine");
@@ -1050,7 +1050,7 @@ void KMyMoneyApp::initActions(void)
 #ifdef KMM_DEBUG
   QAction *new_user_wizard = actionCollection()->addAction("new_user_wizard");
   new_user_wizard->setText(i18n("Test new feature"));
-  new_user_wizard->setShortcut(QKeySequence("Ctrl+G"));
+  actionCollection()->setDefaultShortcut(new_user_wizard, QKeySequence("Ctrl+G"));
   connect(new_user_wizard, SIGNAL(triggered()), this, SLOT(slotNewFeature()));
 
   KToggleAction *debug_traces = actionCollection()->add<KToggleAction>("debug_traces");
