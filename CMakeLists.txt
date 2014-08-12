@@ -56,19 +56,12 @@ include(KDECMakeSettings)
 include(KDECompilerSettings)
 include(FeatureSummary)
 include(GenerateExportHeader)
+include(KMyMoneyMacros)
 
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config KHtml KDELibs4Support Completion KCMUtils ItemViews)
 find_package(KF5 COMPONENTS Holidays Gpgmepp QGpgme PimIdentities Akonadi Abc)
 find_package(LibAlkimia 4.100.0 REQUIRED)
-
-if(WIN32)
-    find_package(KDEWin REQUIRED)
-    include_directories(${KDEWIN_INCLUDES})
-    link_libraries(${KDEWIN_LIBRARIES})
-endif()
-
-include( KMyMoneyMacros )
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
