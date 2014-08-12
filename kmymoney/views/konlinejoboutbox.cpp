@@ -1,17 +1,17 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager for KDE
- * Copyright (C) 2013 Christian Dávid <christian-david@web.de>
- * 
+ * Copyright (C) 2013-2014 Christian Dávid <christian-david@web.de>
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -33,7 +33,13 @@ KOnlineJobOutbox::KOnlineJobOutbox(QWidget *parent) :
     ui(new Ui::KOnlineJobOutbox)
 {
     ui->setupUi(this);
-    
+
+    // Restore column state
+    KConfigGroup configGroup = KGlobal::config()->group("KOnlineJobOutbox");
+    QByteArray columns;
+    columns = configGroup.readEntry("HeaderState", columns);
+    ui->m_onlineJobView->header()->restoreState(columns);
+
     ui->m_onlineJobView->setModel( Models::instance()->onlineJobsModel() );
     connect(ui->m_buttonSend, SIGNAL( clicked() ), this, SLOT( slotSendJobs() ));
     connect(ui->m_buttonRemove, SIGNAL(clicked()), this, SLOT( slotRemoveJob() ));
@@ -44,6 +50,10 @@ KOnlineJobOutbox::KOnlineJobOutbox(QWidget *parent) :
 
 KOnlineJobOutbox::~KOnlineJobOutbox()
 {
+    // Save column state
+    KConfigGroup configGroup = KGlobal::config()->group("KOnlineJobOutbox");
+    configGroup.writeEntry("HeaderState", ui->m_onlineJobView->header()->saveState());
+
     delete ui;
 }
 
