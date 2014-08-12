@@ -1,6 +1,6 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager for KDE
- * Copyright (C) 2013 Christian Dávid <christian-david@web.de>
+ * Copyright (C) 2013-2014 Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,35 +112,81 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
     return QVariant();
   }
 
-  const creditTransfer *transfer = ( job.isNull() ? 0 : dynamic_cast< creditTransfer* >(job.task()) );
+  // id of MyMoneyObject
+  if ( role == OnlineJobId )
+    return QVariant::fromValue( job.id() );
 
-  if (role == Qt::DisplayRole) {
-    switch (index.column()) {
-    case ColAccount: return QVariant::fromValue(job.responsibleMyMoneyAccount().name());
-    case ColAction: return ( job.isNull() ? i18n("Error during loading of online job") : QVariant::fromValue(job.task()->jobTypeName()) );
-    case ColDestination: return QVariant(); //( (transfer != 0) ? QVariant::fromValue(transfer->getRecipient().ownerName()) : QVariant());
-    case ColValue: return ( (transfer != 0) ? QVariant::fromValue(MyMoneyUtils::formatMoney(transfer->value(), transfer->currency())) : QVariant() );
-    default: return QVariant();
+  // If job is null, display an error message and exit
+  if ( job.isNull() ) {
+    if ( index.column() == ColAction ) {
+      switch( role ) {
+        case Qt::DisplayRole: return i18n("Not able to display this task.");
+        case Qt::ToolTipRole: return i18n("Could not find a plugin to display this task or it does not contain any data.");
+      }
     }
-  } else if (role == Qt::DecorationRole && index.column() == 0 && transfer != 0) {
-    if (job.isLocked())
-      return KIcon("task-ongoing");
-
-    switch (job.bankAnswerState()) {
-    case onlineJob::acceptedByBank: return KIcon("task-complete");
-    case onlineJob::sendingError:
-    case onlineJob::abortedByUser:
-    case onlineJob::rejectedByBank: return KIcon("task-reject");
-    case onlineJob::noBankAnswer: break;
-    }
-    if (job.sendDate().isValid()) {
-      return KIcon("task-accepted");
-    } else if ( !job.isValid() ) {
-      return KIcon("task-attention");
-    }
-  } else if (role == OnlineJobId || role == Qt::ToolTipRole) {
-    return job.id();
+    return QVariant();
   }
+
+  // Show general information
+  if ( index.column() == ColAccount ) {
+    // Account column
+    if ( role == Qt::DisplayRole ) {
+      return QVariant::fromValue(job.responsibleMyMoneyAccount().name());
+    } else if ( role == Qt::DecorationRole ) {
+      if (job.isLocked())
+        return KIcon("task-ongoing");
+
+      switch (job.bankAnswerState()) {
+        case onlineJob::acceptedByBank: return KIcon("task-complete");
+        case onlineJob::sendingError:
+        case onlineJob::abortedByUser:
+        case onlineJob::rejectedByBank: return KIcon("task-reject");
+        case onlineJob::noBankAnswer: break;
+      }
+      if (job.sendDate().isValid()) {
+        return KIcon("task-accepted");
+      } else if ( !job.isValid() ) {
+        return KIcon("task-attention");
+      }
+    } else if ( role == Qt::ToolTipRole ) {
+      if ( job.isLocked() )
+        return i18n("Task is being processed at the moment.");
+
+      switch (job.bankAnswerState()) {
+        case onlineJob::acceptedByBank: return i18nc("Arg 1 is a date/time", "This task was accepted by the bank on %1").arg(job.bankAnswerDate().toString( Qt::DefaultLocaleShortDate ));
+        case onlineJob::sendingError: return i18nc("Arg 1 is a date/time", "Sending this task failed on %1").arg(job.sendDate().toString( Qt::DefaultLocaleShortDate ));
+        case onlineJob::abortedByUser: return i18n("Sending this task was aborted manually.");
+        case onlineJob::rejectedByBank: return i18nc("Arg 1 is a date/time", "The bank rejected this task on %1").arg(job.bankAnswerDate().toString( Qt::DefaultLocaleShortDate ));
+        case onlineJob::noBankAnswer:
+          if ( job.sendDate().isValid() )
+            return i18nc("Arg 1 is a date/time", "This task was send on %1 without receiving a confirmation.").arg(job.sendDate().toString( Qt::DefaultLocaleShortDate ));
+          else if ( !job.isValid() )
+            return i18n("This task needs further editing and cannot be send therefore.");
+          else
+            return i18n("This task is ready for sending.");
+      }
+    }
+
+    return QVariant();
+  } else if ( index.column() == ColAction ) {
+    if ( role == Qt::DisplayRole )
+      return QVariant::fromValue(job.task()->jobTypeName());
+    return QVariant();
+  }
+
+  // Show credit transfer data
+  try {
+    onlineJobTyped<creditTransfer> transfer( job );
+
+    if ( index.column() == ColValue ) {
+      if ( role == Qt::DisplayRole )
+        return QVariant::fromValue(MyMoneyUtils::formatMoney(transfer.task()->value(), transfer.task()->currency()));
+    } else if ( index.column() == ColDestination ) {
+      return QVariant();
+    }
+  } catch ( MyMoneyException& ) {
+  }
+
   return QVariant();
 }
 
