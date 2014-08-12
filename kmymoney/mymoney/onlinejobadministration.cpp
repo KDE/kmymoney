@@ -38,6 +38,8 @@
 #include "mymoney/mymoneykeyvaluecontainer.h"
 #include "plugins/onlinepluginextended.h"
 
+#include "onlinetasks/unavailabletask/tasks/unavailabletask.h"
+
 onlineJobAdministration onlineJobAdministration::m_instance;
 
 onlineJobAdministration::onlineJobAdministration(QObject *parent) :
@@ -129,7 +131,7 @@ onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, c
     return task->createFromXml(element);
   }
   qWarning("In the file is a onlineTask for which I could not find the plugin ('%s')", qPrintable(iid));
-  return 0;
+  return new unavailableTask( element );
 }
 
 onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const

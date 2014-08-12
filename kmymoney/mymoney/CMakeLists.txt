@@ -59,6 +59,7 @@ target_link_libraries(kmm_mymoney LINK_PUBLIC
                       ${LIBALKIMIA_LIBRARY}
                       kmm_storage
 #                     onlinetask_interfaces
+                      onlinetask_unavailabletask
                       kmm_payeeidentifier_loader
                       payeeidentifier_iban_bic
                       payeeidentifier_nationalAccount

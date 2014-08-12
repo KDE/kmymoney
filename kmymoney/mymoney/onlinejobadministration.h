@@ -25,6 +25,10 @@
 #include <QtCore/QObject>
 #include <QtCore/QSharedPointer>
 #include <QPair>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
 #include <KService>
 
 // ----------------------------------------------------------------------------
