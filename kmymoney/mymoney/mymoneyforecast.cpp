@@ -25,10 +25,10 @@
 #include <QTextStream>
 #include <QList>
 #include <QtAlgorithms>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <kdebug.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -717,7 +717,7 @@ void MyMoneyForecast::addScheduledTransactions(void)
           (*it).setLastPayment(date);
 
         } catch (const MyMoneyException &e) {
-          kDebug(2) << Q_FUNC_INFO << " Schedule " << (*it).id() << " (" << (*it).name() << "): " << e.what();
+          qDebug() << Q_FUNC_INFO << " Schedule " << (*it).id() << " (" << (*it).name() << "): " << e.what();
 
           schedule.erase(it);
         }

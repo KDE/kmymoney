@@ -32,9 +32,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kdebug.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -2107,7 +2105,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       tChanged = true;
       t.setPostDate(t.entryDate().isValid() ? t.entryDate() : QDate::currentDate());
       rc << i18n("  * Transaction '%1' has an invalid post date.", t.id());
-      rc << i18n("    The post date was updated to '%1'.", KLocale::global()->formatDate(t.postDate(), KLocale::ShortDate));
+      rc << i18n("    The post date was updated to '%1'.", QLocale().toString(t.postDate(), QLocale::ShortFormat));
       ++problemCount;
     }
 

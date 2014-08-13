@@ -28,9 +28,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-
-#include <kiconloader.h>
+#include <KLocalizedString>
+#include <KIconLoader>
 
 // ----------------------------------------------------------------------------
 // Project Includes

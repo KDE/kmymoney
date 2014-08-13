@@ -18,16 +18,19 @@
 #include "mymoneykeyvaluecontainer.h"
 
 // ----------------------------------------------------------------------------
-// KDE Includes
+// QT Includes
 
-#include <kglobal.h>
+#include <QtGlobal>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneyexception.h"
 
-K_GLOBAL_STATIC(QString, nullString)
+Q_GLOBAL_STATIC(QString, nullString)
 
 MyMoneyKeyValueContainer::MyMoneyKeyValueContainer()
 {

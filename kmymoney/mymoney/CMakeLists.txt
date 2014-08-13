@@ -41,7 +41,7 @@ target_link_libraries(kmm_mymoney PUBLIC
                       Qt5::Gui
                       Qt5::Xml
                       Qt5::Core
-                      KF5::KIOWidgets
+                      KF5::IconThemes
                       Alkimia::alkimia
                       kmm_storage)
 
