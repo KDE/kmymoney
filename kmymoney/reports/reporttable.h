@@ -29,7 +29,6 @@
 #include <KDebug>
 #include <KLocale>
 #include <KMessageBox>
-#include <KStandardDirs>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -67,16 +66,9 @@ private:
   QString cssFileNameGet(void);
 
   /**
-   * Name of application resource type.
-   *
-   * @see KStandardDirs::locate()
-   */
-  const char* m_resourceType;
-
-  /**
    * Subdirectory for html-resources of application.
    *
-   * @see KStandardDirs::locate()
+   * @see QStandardPaths
    */
   QString m_resourceHtml;
 

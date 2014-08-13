@@ -34,8 +34,6 @@ reports::ReportTable::ReportTable(void):
     m_cssFileDefault("kmymoney.css")
 
 {
-  // set up default values
-  m_resourceType = QLatin1String("appdata").latin1();
 }
 
 QString reports::ReportTable::cssFileNameGet(void)
@@ -44,7 +42,7 @@ QString reports::ReportTable::cssFileNameGet(void)
 
   if (!MyMoneyFile::instance()->value(m_reportStyleSheet).isEmpty()) {
     // try to find the stylesheet specific for this report
-    cssfilename = KMyMoneyUtils::findResource(m_resourceType, m_resourceHtml + '/' + MyMoneyFile::instance()->value(m_reportStyleSheet));
+    cssfilename = KMyMoneyUtils::findResource(QStandardPaths::DataLocation, m_resourceHtml + '/' + MyMoneyFile::instance()->value(m_reportStyleSheet));
   }
 
   if (cssfilename.isEmpty()) {
@@ -54,7 +52,7 @@ QString reports::ReportTable::cssFileNameGet(void)
 
   if (cssfilename.isEmpty()) {
     // if there still is nothing, try to use the installation default
-    cssfilename = KMyMoneyUtils::findResource(m_resourceType, m_resourceHtml + '/' + m_cssFileDefault);
+    cssfilename = KMyMoneyUtils::findResource(QStandardPaths::DataLocation, m_resourceHtml + '/' + m_cssFileDefault);
   }
 
   return cssfilename;

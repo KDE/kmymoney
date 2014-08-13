@@ -32,7 +32,6 @@
 // KDE Includes
 
 #include <klocale.h>
-#include <kstandarddirs.h>
 #include <ktextedit.h>
 
 // ----------------------------------------------------------------------------

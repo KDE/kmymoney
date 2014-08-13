@@ -35,7 +35,6 @@
 #include <kdebug.h>
 #include <kapplication.h>
 #include <kconfig.h>
-#include <kstandarddirs.h>
 #include <kcalendarsystem.h>
 #include <ktemporaryfile.h>
 #include <kshell.h>
@@ -76,8 +75,7 @@ WebPriceQuote::WebPriceQuote(QObject* _parent):
   // only do this once (I know, it is not thread safe, but it should
   // always yield the same result so we don't do any semaphore foo here)
   if (m_financeQuoteScriptPath.isEmpty()) {
-    m_financeQuoteScriptPath = KStandardDirs::locate("appdata",
-                               QString("misc/financequote.pl"));
+    m_financeQuoteScriptPath = QStandardPaths::locate(QStandardPaths::DataLocation, QString("misc/financequote.pl"));
   }
   connect(&d->m_filter, SIGNAL(processExited(QString)), this, SLOT(slotParseQuote(QString)));
 }
@@ -574,8 +572,7 @@ const QStringList WebPriceQuote::quoteSourcesFinanceQuote()
     // since this is a static function it can be called without constructing an object
     // so we need to make sure that m_financeQuoteScriptPath is properly initialized
     if (m_financeQuoteScriptPath.isEmpty()) {
-      m_financeQuoteScriptPath = KStandardDirs::locate("appdata",
-                                 QString("misc/financequote.pl"));
+      m_financeQuoteScriptPath = QStandardPaths::locate(QStandardPaths::DataLocation, QString("misc/financequote.pl"));
     }
     FinanceQuoteProcess getList;
     getList.launch(m_financeQuoteScriptPath);

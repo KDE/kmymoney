@@ -27,7 +27,6 @@
 #include <kdeversion.h>
 #include <klocale.h>
 #include <klocalizedstring.h>
-#include <KStandardDirs>
 #ifdef KF5Holidays_FOUND
 #include <KHolidays/Holidays>
 using namespace KHolidays;

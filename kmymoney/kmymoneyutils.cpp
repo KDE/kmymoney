@@ -24,6 +24,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QApplication>
 #include <QList>
 #include <QPixmap>
@@ -39,8 +40,8 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
-#include <kstandarddirs.h>
 #include <KColorScheme>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -253,7 +254,7 @@ QString KMyMoneyUtils::variableCSS(void)
   return css;
 }
 
-QString KMyMoneyUtils::findResource(const char* type, const QString& filename)
+QString KMyMoneyUtils::findResource(QStandardPaths::StandardLocation type, const QString& filename)
 {
   QString language = KLocale::global()->language();
   QString country = KLocale::global()->country();
@@ -267,17 +268,17 @@ QString KMyMoneyUtils::findResource(const char* type, const QString& filename)
 
   // search the given resource
   mask = filename.arg("_%1.%2");
-  rc = KStandardDirs::locate(type, mask.arg(country).arg(language));
+  rc = QStandardPaths::locate(type, mask.arg(country).arg(language));
   if (rc.isEmpty()) {
     mask = filename.arg("_%1");
-    rc = KStandardDirs::locate(type, mask.arg(language));
+    rc = QStandardPaths::locate(type, mask.arg(language));
   }
   if (rc.isEmpty()) {
     // qDebug(QString("html/home_%1.html not found").arg(country).toLatin1());
-    rc = KStandardDirs::locate(type, mask.arg(country));
+    rc = QStandardPaths::locate(type, mask.arg(country));
   }
   if (rc.isEmpty()) {
-    rc = KStandardDirs::locate(type, filename.arg(""));
+    rc = QStandardPaths::locate(type, filename.arg(""));
   }
 
   if (rc.isEmpty()) {

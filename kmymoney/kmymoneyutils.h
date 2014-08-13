@@ -29,6 +29,7 @@
 #include <QColor>
 #include <QFont>
 #include <QPixmap>
+#include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -312,7 +313,7 @@ public:
     *
     * @note See KStandardDirs::findResource() for details on the parameters
     */
-  static QString findResource(const char* type, const QString& filename);
+  static QString findResource(QStandardPaths::StandardLocation type, const QString& filename);
 
   /**
     * This method returns the split referencing a stock account if
