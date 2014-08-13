@@ -30,9 +30,7 @@
 #include <klocale.h>
 #include <kcolorscheme.h>
 #include <ksplashscreen.h>
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
-#include <k4aboutdata.h>
+#include <KAboutData>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -58,12 +56,11 @@ KStartupLogo::KStartupLogo() :
   pixmapPainter.drawPixmap(0, 0, logoOverlay, 0, 0, logoOverlay.width(), logoOverlay.height());
 
   if (!logoOverlay.isNull()) {
-    const K4AboutData *aboutData = KCmdLineArgs::aboutData();
-    QSplashScreen* splash = new QSplashScreen(logoPixmap);
+    QSplashScreen* splash = new QSplashScreen(logoPixmap, Qt::WindowStaysOnTopHint);
     splash->setFixedSize(logoPixmap.size());
 
     splash->show();
-    splash->showMessage(i18n("Loading %1...", aboutData->version()),  //krazy:exclude=qmethods
+    splash->showMessage(i18n("Loading %1...", KAboutData::applicationData().version()),  //krazy:exclude=qmethods
                         Qt::AlignLeft | Qt::AlignBottom,
                         KColorScheme(QPalette::Active, KColorScheme::Selection)
                         .foreground(KColorScheme::NormalText).color());

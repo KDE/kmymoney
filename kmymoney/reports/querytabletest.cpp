@@ -19,12 +19,6 @@
 
 #include <QFile>
 
-#include <kaboutdata.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
-#include <kdeversion.h>
-#include <klocale.h>
-
 #include <qtest_kde.h>
 
 #include "reportstestcommon.h"
