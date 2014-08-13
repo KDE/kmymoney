@@ -19,6 +19,7 @@
 #include "payeeidentifiermodel.h"
 #include "mymoney/mymoneyfile.h"
 #include "payeeidentifier/payeeidentifierloader.h"
+#include "payeeidentifier/payeeidentifier.h"
 
 #include <QDebug>
 
@@ -32,14 +33,14 @@ payeeIdentifierModel::payeeIdentifierModel( QObject* parent )
 
 QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 {
-  payeeIdentifier::constPtr ident = m_payee.payeeIdentifiers().values().at(index.row());
+  const ::payeeIdentifier ident = m_payee.payeeIdentifiers().at(index.row());
 
-  if ( role == payeeIdentifierPtr) {
-    return QVariant::fromValue<payeeIdentifier::constPtr>(ident);
+  if ( role == payeeIdentifier) {
+    return QVariant::fromValue< ::payeeIdentifier >(ident);
   } else if ( ident.isNull() ) {
     return QVariant();
   } else if ( role == payeeIdentifierType) {
-    return ident->payeeIdentifierId();
+    return ident.iid();
   } else if (role == Qt::DisplayRole) {
     // The custom delegates won't ask for this role
     return QVariant::fromValue( i18n("The plugin to show this information could not be found.") );
@@ -50,8 +51,8 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 /** @todo implement dataChanged signal */
 bool payeeIdentifierModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-  if ( role == payeeIdentifierPtr ) {
-    payeeIdentifier::ptr ident = value.value<payeeIdentifier::ptr>();
+  if ( role == payeeIdentifier ) {
+    ::payeeIdentifier ident = value.value< ::payeeIdentifier >();
     if ( !ident.isNull() ) {
       m_payee.modifyPayeeIdentifier(index.row(), ident);
       try {
@@ -95,7 +96,7 @@ bool payeeIdentifierModel::insertRows(int row, int count, const QModelIndex& par
 
   beginInsertRows(parent, row+1, row+1);
   try {
-    m_payee.addPayeeIdentifier( payeeIdentifier::ptr() );
+    m_payee.addPayeeIdentifier( ::payeeIdentifier() );
     MyMoneyFileTransaction transaction;
     MyMoneyFile::instance()->modifyPayee(m_payee);
     transaction.commit();
@@ -137,14 +138,14 @@ void payeeIdentifierModel::setPayee(MyMoneyPayee payee)
   const int oldLastRow = m_payee.payeeIdentifiers().count()-1;
   beginRemoveRows(QModelIndex(), 0, oldLastRow);
   m_payee = payee;
-  endRemoveRows();
   emit dataChanged(index(0, 0), index(oldLastRow, 0));
+  endRemoveRows();
 
   // Insert new rows
   const int newLastRow = m_payee.payeeIdentifiers().count()-1;
   beginInsertRows(QModelIndex(), 0, newLastRow);
-  endInsertRows();
   emit dataChanged(index(0, 0), index(newLastRow, 0));
+  endInsertRows();
 }
 
 void payeeIdentifierModel::setPayee(QString payeeId)

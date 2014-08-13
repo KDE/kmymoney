@@ -51,7 +51,7 @@ void ibanBicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
     return;
 
   // Get data
-  payeeIdentifiers::ibanBic::constPtr ibanBic = ibanBicByIndex( index );
+  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic = ibanBicByIndex( index );
 
   // Paint Bic
   painter->save();
@@ -122,7 +122,7 @@ QWidget* ibanBicItemDelegate::createEditor(QWidget* parent, const QStyleOptionVi
 
 void ibanBicItemDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
 {
-  payeeIdentifiers::ibanBic::constPtr ibanBic = ibanBicByIndex(index);
+  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic = ibanBicByIndex(index);
   ibanBicItemEdit* ibanEditor = qobject_cast< ibanBicItemEdit* >(editor);
   Q_CHECK_PTR( ibanEditor );
 
@@ -139,10 +139,10 @@ void ibanBicItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* mode
   ibanBicItemEdit* ibanEditor = qobject_cast< ibanBicItemEdit* >(editor);
   Q_CHECK_PTR( ibanEditor );
 
-  payeeIdentifiers::ibanBic::ptr ibanBic = ibanBicByIndex(index)->cloneSharedPtr();
+  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic = ibanBicByIndex(index);
   ibanBic->setBic( ibanEditor->bic() );
   ibanBic->setIban( ibanEditor->iban() );
-  model->setData(index, QVariant::fromValue<payeeIdentifier::ptr>( ibanBic ), payeeIdentifierModel::payeeIdentifierPtr);
+  model->setData(index, QVariant::fromValue<payeeIdentifier>( ibanBic ), payeeIdentifierModel::payeeIdentifier);
 }
 
 void ibanBicItemDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -154,9 +154,11 @@ void ibanBicItemDelegate::updateEditorGeometry(QWidget* editor, const QStyleOpti
 /**
  * Internal helper to direcly convert the QVariant into the correct pointer type.
  */
-payeeIdentifiers::ibanBic::constPtr ibanBicItemDelegate::ibanBicByIndex(const QModelIndex& index) const
+payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBicItemDelegate::ibanBicByIndex(const QModelIndex& index) const
 {
-  const payeeIdentifiers::ibanBic::constPtr ibanBic = index.model()->data(index, payeeIdentifierModel::payeeIdentifierPtr).value<payeeIdentifier::constPtr>().staticCast<const payeeIdentifiers::ibanBic>();
+  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
+    index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
+  );
   Q_ASSERT( !ibanBic.isNull() );
   return ibanBic;
 }

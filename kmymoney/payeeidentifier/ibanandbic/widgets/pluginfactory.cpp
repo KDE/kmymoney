@@ -20,7 +20,7 @@
 
 #include "ibanbicitemdelegate.h"
 
-K_PLUGIN_FACTORY(ibanAndBicPidWidgetsFactory,
+K_PLUGIN_FACTORY(ibanAndBicPidDelegatesFactory,
                  registerPlugin<ibanBicItemDelegate>("ibanBicDelegate");
 )
-K_EXPORT_PLUGIN(ibanAndBicPidWidgetsFactory("payeeidentifier_iban_bic_widgets"))
+K_EXPORT_PLUGIN(ibanAndBicPidDelegatesFactory("payeeidentifier_iban_bic_delegates"))

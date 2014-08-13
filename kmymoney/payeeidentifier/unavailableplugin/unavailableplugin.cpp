@@ -23,13 +23,13 @@
 namespace payeeIdentifiers {
 
 payeeIdentifierUnavailable::payeeIdentifierUnavailable()
-  : payeeIdentifier(),
+  : payeeIdentifierData(),
     m_data( QDomElement() )
 {
 }
 
 payeeIdentifierUnavailable::payeeIdentifierUnavailable(QDomElement data)
-  : payeeIdentifier(),
+  : payeeIdentifierData(),
     m_data( data )
 {
 
@@ -56,7 +56,7 @@ bool payeeIdentifierUnavailable::isValid() const
   return false;
 }
 
-bool payeeIdentifierUnavailable::operator==(const payeeIdentifier& other) const
+bool payeeIdentifierUnavailable::operator==(const payeeIdentifierData& other) const
 {
   if ( payeeIdentifierId() == other.payeeIdentifierId()) {
     try {

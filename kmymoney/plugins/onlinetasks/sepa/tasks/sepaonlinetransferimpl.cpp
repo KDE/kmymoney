@@ -105,10 +105,13 @@ sepaOnlineTransfer *sepaOnlineTransferImpl::clone() const
 bool sepaOnlineTransferImpl::isValid() const
 {
   QString iban;
-  payeeIdentifiers::ibanBic::ptr ident = originAccountIdentifier().dynamicCast<payeeIdentifiers::ibanBic>();
+  // @todo enable checks which depend on the iban of the origin account
+#if 0
+  payeeIdentifiers::ibanBic ident = originAccountIdentifier();
   if (!ident.isNull()) {
     iban = ident->electronicIban();
   }
+#endif
 
   QSharedPointer<const sepaOnlineTransfer::settings> settings = getSettings();
   if ( settings->checkPurposeLength( _purpose ) == validators::ok
@@ -126,14 +129,16 @@ bool sepaOnlineTransferImpl::isValid() const
   return false;
 }
 
-payeeIdentifier::ptr sepaOnlineTransferImpl::originAccountIdentifier() const
+payeeIdentifier sepaOnlineTransferImpl::originAccountIdentifier() const
 {
-  QSharedPointer<payeeIdentifiers::ibanBic> ident( new payeeIdentifiers::ibanBic() );
-  ident->setIban( MyMoneyFile::instance()->account(_originAccount).value("iban") );
-//  ident->setAccountNumber( originMyMoneyAccount().number() );
-//  ident->setBankCode( MyMoneyFile::instance()->institution( originMyMoneyAccount().institutionId()).sortcode() );
-//  ident->setOwnerName( MyMoneyFile::instance()->user().name() );
-  return ident.staticCast<payeeIdentifier>();
+  QList<payeeIdentifier> idents = MyMoneyFile::instance()->account(_originAccount).accountIdentifiers();
+  foreach( payeeIdentifier ident, idents ) {
+    if ( ident.iid() == payeeIdentifiers::ibanBic::staticPayeeIdentifierId() ) {
+      ident.data<payeeIdentifiers::ibanBic>()->setOwnerName(MyMoneyFile::instance()->user().name());
+      return ident;
+    }
+  }
+  return payeeIdentifier( new payeeIdentifiers::ibanBic );
 }
 
 /** @todo Return EUR */

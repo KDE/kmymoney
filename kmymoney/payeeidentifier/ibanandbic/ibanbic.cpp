@@ -47,7 +47,7 @@ ibanBic::ibanBic(const ibanBic& other)
 
 }
 
-bool ibanBic::operator==(const payeeIdentifier& other) const
+bool ibanBic::operator==(const payeeIdentifierData& other) const
 {
   try {
     const ibanBic otherCasted = dynamic_cast<const ibanBic&>(other);
@@ -116,8 +116,7 @@ QString ibanBic::fullStoredBic() const
 QString ibanBic::fullBic() const
 {
   if ( m_bic.isNull() ) {
-    Q_CHECK_PTR(m_ibanBicData);
-    return m_ibanBicData->iban2Bic( m_iban );
+    return getIbanBicData()->iban2Bic( m_iban );
   }
   return fullStoredBic();
 }
@@ -125,8 +124,7 @@ QString ibanBic::fullBic() const
 QString ibanBic::bic() const
 {
   if ( m_bic.isNull() ) {
-    Q_CHECK_PTR(m_ibanBicData);
-    const QString bic = m_ibanBicData->iban2Bic( m_iban );
+    const QString bic = getIbanBicData()->iban2Bic( m_iban );
     if ( bic.length() == 11 && bic.endsWith("XXX") )
       return bic.left(8);
     return bic;

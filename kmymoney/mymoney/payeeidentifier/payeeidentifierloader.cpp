@@ -32,36 +32,37 @@
 payeeIdentifierLoader payeeIdentifierLoader::m_self;
 
 payeeIdentifierLoader::payeeIdentifierLoader()
-  : m_identifiers( QHash<QString, payeeIdentifier*>() )
+  : m_identifiers( QHash<QString, payeeIdentifierData*>() )
 {
   addPayeeIdentifier( new payeeIdentifiers::ibanBic() );
   addPayeeIdentifier( new payeeIdentifiers::nationalAccount() );
 }
 
-void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifier* const identifier)
+void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifierData* const identifier)
 {
   m_identifiers.insert(identifier->payeeIdentifierId(), identifier);
 }
 
-payeeIdentifier::ptr payeeIdentifierLoader::createPayeeIdentifier(const QString& payeeIdentifierId)
+payeeIdentifier payeeIdentifierLoader::createPayeeIdentifier(const QString& payeeIdentifierId)
 {
-  const payeeIdentifier* ident = m_identifiers.value( payeeIdentifierId );
+  const payeeIdentifierData* ident = m_identifiers.value( payeeIdentifierId );
   if ( ident != 0 ) {
-    return ident->cloneSharedPtr();
+    return payeeIdentifier( ident->clone() );
   }
 
-  return payeeIdentifier::ptr();
+  return payeeIdentifier();
 }
 
-payeeIdentifier::ptr payeeIdentifierLoader::createPayeeIdentifierFromXML(const QString& payeeIdentifierId, const QDomElement& element)
+payeeIdentifier payeeIdentifierLoader::createPayeeIdentifierFromXML(const QDomElement& element)
 {
-  const payeeIdentifier* ident = m_identifiers.value( payeeIdentifierId );
+  const QString payeeIdentifierId = element.attribute("type");
+  const payeeIdentifierData* ident = m_identifiers.value( payeeIdentifierId );
   if ( ident != 0 ) {
-    payeeIdentifier* newIdent = ident->createFromXml( element );
-    return payeeIdentifier::ptr( newIdent );
+    payeeIdentifierData* newIdent = ident->createFromXml( element );
+    return payeeIdentifier( newIdent );
   }
 
-  return payeeIdentifier::ptr( new payeeIdentifiers::payeeIdentifierUnavailable(element) );
+  return payeeIdentifier( new payeeIdentifiers::payeeIdentifierUnavailable(element) );
 }
 
 /**

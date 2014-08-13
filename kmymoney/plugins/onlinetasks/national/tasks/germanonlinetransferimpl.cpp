@@ -109,15 +109,16 @@ bool germanOnlineTransferImpl::isValid() const
 }
 
 /** @todo make alive */
-payeeIdentifier::ptr germanOnlineTransferImpl::originAccountIdentifier() const
+payeeIdentifier germanOnlineTransferImpl::originAccountIdentifier() const
 {
-  payeeIdentifiers::nationalAccount* ident = new payeeIdentifiers::nationalAccount();
-#if 0
-  ident->setAccountNumber( originMyMoneyAccount().number() );
-  ident->setBankCode( MyMoneyFile::instance()->institution( originMyMoneyAccount().institutionId()).sortcode() );
-  ident->setOwnerName( MyMoneyFile::instance()->user().name() );
-#endif
-  return payeeIdentifier::ptr(ident);
+  QList<payeeIdentifier> idents = MyMoneyFile::instance()->account(_originAccount).accountIdentifiers();
+  foreach( payeeIdentifier ident, idents ) {
+    if ( ident.iid() == payeeIdentifiers::nationalAccount::staticPayeeIdentifierId() ) {
+      ident.data<payeeIdentifiers::nationalAccount>()->setOwnerName(MyMoneyFile::instance()->user().name());
+      return ident;
+    }
+  }
+  return payeeIdentifier( new payeeIdentifiers::nationalAccount );
 }
 
 /** @todo make alive */

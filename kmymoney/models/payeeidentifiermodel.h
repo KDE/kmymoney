@@ -29,7 +29,7 @@ class payeeIdentifierModel : public QAbstractListModel
 public:
   enum roles {
     payeeIdentifierType = Qt::UserRole, /**< type of payeeIdentifier */
-    payeeIdentifierPtr = Qt::UserRole+1 /**< Pointer to actual payeeIdentifier */
+    payeeIdentifier = Qt::UserRole+1 /**< Pointer to actual payeeIdentifier */
   };
 
   payeeIdentifierModel( QObject* parent = 0 );

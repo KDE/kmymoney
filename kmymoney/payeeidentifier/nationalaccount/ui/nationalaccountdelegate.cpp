@@ -50,7 +50,7 @@ void nationalAccountDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     return;
 
   // Get data
-  payeeIdentifiers::nationalAccount::constPtr ident = identByIndex( index );
+  payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = identByIndex( index );
 
   // Paint bank code
   painter->save();
@@ -123,7 +123,7 @@ void nationalAccountDelegate::setEditorData(QWidget* editor, const QModelIndex& 
   nationalAccountEdit* nationalEditor = qobject_cast< nationalAccountEdit* >(editor);
   Q_CHECK_PTR( nationalEditor );
 
-  payeeIdentifiers::nationalAccount::constPtr ident = identByIndex(index);
+  payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = identByIndex(index);
   nationalEditor->setAccountNumber( ident->accountNumber() );
   nationalEditor->setInstitutionCode( ident->bankCode() );
 }
@@ -137,10 +137,10 @@ void nationalAccountDelegate::setModelData(QWidget* editor, QAbstractItemModel* 
   nationalAccountEdit* nationalEditor = qobject_cast< nationalAccountEdit* >(editor);
   Q_CHECK_PTR( nationalEditor );
 
-  payeeIdentifiers::nationalAccount::ptr ident = identByIndex(index)->cloneSharedPtr();
+  payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = identByIndex(index);
   ident->setAccountNumber( nationalEditor->accountNumber() );
   ident->setBankCode( nationalEditor->institutionCode() );
-  model->setData(index, QVariant::fromValue<payeeIdentifier::ptr>( ident ), payeeIdentifierModel::payeeIdentifierPtr);
+  model->setData(index, QVariant::fromValue<payeeIdentifier>( ident ), payeeIdentifierModel::payeeIdentifier);
 }
 
 void nationalAccountDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -152,9 +152,12 @@ void nationalAccountDelegate::updateEditorGeometry(QWidget* editor, const QStyle
 /**
  * Internal helper to direcly convert the QVariant into the correct pointer type.
  */
-payeeIdentifiers::nationalAccount::constPtr nationalAccountDelegate::identByIndex(const QModelIndex& index) const
+payeeIdentifierTyped<payeeIdentifiers::nationalAccount> nationalAccountDelegate::identByIndex(const QModelIndex& index) const
 {
-  const payeeIdentifiers::nationalAccount::constPtr ident = index.model()->data(index, payeeIdentifierModel::payeeIdentifierPtr).value<payeeIdentifier::constPtr>().staticCast<const payeeIdentifiers::nationalAccount>();
+  payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = payeeIdentifierTyped<payeeIdentifiers::nationalAccount>(
+    index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
+  );
+
   Q_ASSERT( !ident.isNull() );
   return ident;
 }

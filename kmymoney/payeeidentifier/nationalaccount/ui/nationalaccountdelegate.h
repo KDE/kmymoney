@@ -22,6 +22,7 @@
 #include <QStyledItemDelegate>
 
 #include "../nationalaccount.h"
+#include "payeeidentifier/payeeidentifiertyped.h"
 
 class nationalAccountDelegate : public QStyledItemDelegate
 {
@@ -40,7 +41,7 @@ signals:
   void sizeHintChanged( const QModelIndex& ) const;
 
 private:
-  inline payeeIdentifiers::nationalAccount::constPtr identByIndex( const QModelIndex& index ) const;
+  inline payeeIdentifierTyped<payeeIdentifiers::nationalAccount> identByIndex( const QModelIndex& index ) const;
 
 };
 

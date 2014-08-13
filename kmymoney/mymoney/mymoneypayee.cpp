@@ -36,14 +36,16 @@ MyMoneyPayee MyMoneyPayee::null;
 MyMoneyPayee::MyMoneyPayee() :
     m_matchingEnabled(false),
     m_usingMatchKey(false),
-    m_matchKeyIgnoreCase(true)
+    m_matchKeyIgnoreCase(true),
+    m_payeeIdentifiers( QHash <unsigned int, payeeIdentifier >() )
 {
 }
 
 MyMoneyPayee::MyMoneyPayee(const QString& id, const MyMoneyPayee& payee) :
     m_matchingEnabled(false),
     m_usingMatchKey(false),
-    m_matchKeyIgnoreCase(true)
+    m_matchKeyIgnoreCase(true),
+    m_payeeIdentifiers( QHash <unsigned int, payeeIdentifier >() )
 {
   *this = payee;
   m_id = id;
@@ -54,7 +56,8 @@ MyMoneyPayee::MyMoneyPayee(const QString& name, const QString& address,
                            const QString& telephone, const QString& email) :
     m_matchingEnabled(false),
     m_usingMatchKey(false),
-    m_matchKeyIgnoreCase(true)
+    m_matchKeyIgnoreCase(true),
+    m_payeeIdentifiers( QHash <unsigned int, payeeIdentifier >() )
 {
   m_name      = name;
   m_address   = address;
@@ -65,8 +68,9 @@ MyMoneyPayee::MyMoneyPayee(const QString& name, const QString& address,
   m_email     = email;
 }
 
-MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
-    MyMoneyObject(node)
+MyMoneyPayee::MyMoneyPayee(const QDomElement& node)
+  : MyMoneyObject(node),
+  m_payeeIdentifiers( QHash <unsigned int, payeeIdentifier >() )
 {
   if ("PAYEE" != node.tagName()) {
     throw MYMONEYEXCEPTION("Node was not PAYEE");
@@ -107,19 +111,15 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
 
   // Load identifiers
   QDomNodeList identifierNodes = node.elementsByTagName("payeeIdentifier");
-  uint identifierNodesLength = identifierNodes.length();
+  const uint identifierNodesLength = identifierNodes.length();
   for (uint i = 0; i < identifierNodesLength; ++i) {
     const QDomElement element = identifierNodes.item(i).toElement();
-    const QString payeeIdentifierId = element.attribute("type", QString());
-    if ( !payeeIdentifierId.isEmpty() ) {
-      payeeIdentifier::ptr ident = payeeIdentifierLoader::instance()->createPayeeIdentifierFromXML( payeeIdentifierId, element );
-      if ( ident.isNull() ) {
-        /** @internal improve error handling of payee identifier loading if they are not linked staticaly anymore. */
-        qWarning() << "Could not load payee identifier" << payeeIdentifierId;
-        continue;
-      }
-      addPayeeIdentifier( ident );
+    const payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifierFromXML( element );
+    if ( ident.isNull() ) {
+      qWarning() << "Could not load payee identifier" << element.attribute("type", "*no pidid set*");
+      continue;
     }
+    addPayeeIdentifier( ident );
   }
 }
 
@@ -127,8 +127,9 @@ MyMoneyPayee::~MyMoneyPayee()
 {
 }
 
-MyMoneyPayee::MyMoneyPayee(const MyMoneyPayee& right) :
-    MyMoneyObject(right)
+MyMoneyPayee::MyMoneyPayee(const MyMoneyPayee& right)
+  : MyMoneyObject(right),
+  m_payeeIdentifiers( QHash <unsigned int, payeeIdentifier >() )
 {
   *this = right;
 }
@@ -156,21 +157,16 @@ bool MyMoneyPayee::operator < (const MyMoneyPayee& right) const
   return m_name < right.name();
 }
 
-int MyMoneyPayee::addPayeeIdentifier(const payeeIdentifier::ptr identifier)
+int MyMoneyPayee::addPayeeIdentifier(const payeeIdentifier identifier)
 {
   const unsigned int newId = m_payeeIdentifiers.count();
-  if ( identifier.isNull() )
-    m_payeeIdentifiers.insert( newId, identifier );
-  else
-    m_payeeIdentifiers.insert( newId , identifier->cloneSharedPtr() );
+  m_payeeIdentifiers.insert( newId , identifier );
   return newId;
 }
 
-void MyMoneyPayee::modifyPayeeIdentifier(const unsigned int& index, payeeIdentifier::ptr identifier)
+void MyMoneyPayee::modifyPayeeIdentifier(const unsigned int& index, payeeIdentifier identifier)
 {
   Q_ASSERT( m_payeeIdentifiers.constFind( index ) != m_payeeIdentifiers.constEnd() );
-  Q_CHECK_PTR( identifier );
-
   m_payeeIdentifiers[index] = identifier;
 }
 
@@ -213,14 +209,9 @@ void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
   el.appendChild(address);
 
   // Add payee identifiers
-  foreach( payeeIdentifier::ptr ident, m_payeeIdentifiers ) {
+  foreach( payeeIdentifier ident, m_payeeIdentifiers ) {
     if ( !ident.isNull() ) {
-      QDomElement identElement = document.createElement("payeeIdentifier");
-      // Important: type must be set before calling ident->writeXML()
-      // the plugin for unavailable plugins must be able to set type itself
-      identElement.setAttribute("type", ident->payeeIdentifierId());
-      ident->writeXML(document, identElement);
-      el.appendChild(identElement);
+      ident.writeXML(document, el);
     }
   }
 
@@ -277,16 +268,9 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
   setMatchData(type, ignorecase, keys.split(';'));
 }
 
-payeeIdentifier::constList MyMoneyPayee::payeeIdentifiers() const
+QList<payeeIdentifier> MyMoneyPayee::payeeIdentifiers() const
 {
-  payeeIdentifier::constList list;
-  list.reserve(m_payeeIdentifiers.count());
-
-  const payeeIdentifier::list::const_iterator end = m_payeeIdentifiers.constEnd();
-  for (payeeIdentifier::list::const_iterator iter = m_payeeIdentifiers.constBegin(); iter != end; ++iter) {
-    list.insert(iter.key(), iter.value().constCast<const payeeIdentifier>());
-  }
-  return list;
+  return m_payeeIdentifiers.values();
 }
 
 // vim:cin:si:ai:et:ts=2:sw=2:

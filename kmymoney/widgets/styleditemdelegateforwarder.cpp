@@ -31,7 +31,6 @@ void StyledItemDelegateForwarder::paint(QPainter* painter, const QStyleOptionVie
 QSize StyledItemDelegateForwarder::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
   QAbstractItemDelegate* delegate = getItemDelegate(index);
-  connect(delegate, SIGNAL(sizeHintChanged(QModelIndex)), this, SIGNAL(sizeHintChanged(QModelIndex)), Qt::UniqueConnection);
   return delegate->sizeHint(option, index);
 }
 

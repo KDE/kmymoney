@@ -20,6 +20,7 @@
 #define IBANBICITEMDELEGATE_H
 
 #include <QStyledItemDelegate>
+#include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 
 #include "../ibanbicmacros.h"
@@ -40,7 +41,7 @@ signals:
   void sizeHintChanged( const QModelIndex& ) const;
 
 private:
-  inline payeeIdentifiers::ibanBic::constPtr ibanBicByIndex( const QModelIndex& index ) const;
+  inline payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBicByIndex( const QModelIndex& index ) const;
 
 };
 

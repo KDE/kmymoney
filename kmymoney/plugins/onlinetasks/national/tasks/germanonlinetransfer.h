@@ -40,7 +40,7 @@ class KMM_MYMONEY_EXPORT germanOnlineTransfer : public onlineTask, public credit
 {
   KMM_MYMONEY_UNIT_TESTABLE
   Q_INTERFACES(creditTransfer);
-  
+
 public:
   ONLINETASK_META(germanOnlineTransfer, "org.kmymoney.creditTransfer.germany");
 
@@ -56,7 +56,7 @@ public:
 
   virtual QString responsibleAccount() const = 0;
   virtual void setOriginAccount( const QString& accountId ) = 0;
-  
+
   virtual MyMoneyMoney value() const = 0;
   virtual void setValue(MyMoneyMoney value) = 0;
 
@@ -67,12 +67,12 @@ public:
   virtual QString purpose() const = 0;
 
   virtual QString jobTypeName() const = 0;
-  
+
   /**
    * @brief Returns the origin account identifier
    * @return you are owner of the object
    */
-  virtual payeeIdentifier::ptr originAccountIdentifier() const = 0;
+  virtual payeeIdentifier originAccountIdentifier() const = 0;
 
   /**
    * National account can handle the currency of the related account only.
@@ -93,13 +93,13 @@ public:
     virtual int purposeMaxLines() const = 0;
     virtual int purposeLineLength() const = 0;
     virtual int purposeMinLength() const = 0;
-    
+
     virtual int recipientNameLineLength() const = 0;
     virtual int recipientNameMinLength() const = 0;
-    
+
     virtual int payeeNameLineLength() const = 0;
     virtual int payeeNameMinLength() const = 0;
-    
+
     virtual QString allowedChars() const = 0;
 
     // Limits validators
@@ -107,10 +107,10 @@ public:
     virtual bool checkPurposeLineLength(const QString& purpose) const = 0;
     virtual validators::lengthStatus checkPurposeLength(const QString& purpose) const = 0;
     virtual bool checkPurposeMaxLines(const QString& purpose) const = 0;
-    
+
     virtual validators::lengthStatus checkNameLength(const QString& name) const = 0;
     virtual bool checkNameCharset( const QString& name ) const = 0;
-    
+
     virtual validators::lengthStatus checkRecipientLength(const QString& name) const = 0;
     virtual bool checkRecipientCharset( const QString& name ) const = 0;
 
@@ -119,7 +119,7 @@ public:
   };
 
   virtual QSharedPointer<const settings> getSettings() const = 0;
-  
+
   virtual bool hasReferenceTo(const QString& id) const = 0;
 
 protected:

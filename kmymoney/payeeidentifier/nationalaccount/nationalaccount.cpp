@@ -65,7 +65,7 @@ bool nationalAccount::isValid() const
   return true;
 }
 
-bool nationalAccount::operator==(const payeeIdentifier& other) const
+bool nationalAccount::operator==(const payeeIdentifierData& other) const
 {
   try {
     const nationalAccount& otherCasted = dynamic_cast<const nationalAccount&>(other);

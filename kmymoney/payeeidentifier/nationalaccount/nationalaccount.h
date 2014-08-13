@@ -19,12 +19,12 @@
 #ifndef NATIONALACCOUNTID_H
 #define NATIONALACCOUNTID_H
 
-#include "mymoney/payeeidentifier/payeeidentifier.h"
+#include "mymoney/payeeidentifier/payeeidentifierdata.h"
 #include "nationalaccountidmacros.h"
 
 namespace payeeIdentifiers {
 
-class NATIONALACCOUNT_IDENTIFIER_EXPORT nationalAccount : public payeeIdentifier
+class NATIONALACCOUNT_IDENTIFIER_EXPORT nationalAccount : public payeeIdentifierData
 {
 public:
   PAYEEIDENTIFIER_ID(nationalAccount, "org.kmymoney.payeeIdentifier.national");
@@ -33,7 +33,7 @@ public:
   nationalAccount( const nationalAccount& other );
 
   virtual bool isValid() const;
-  virtual bool operator==(const payeeIdentifier& other) const;
+  virtual bool operator==(const payeeIdentifierData& other) const;
   bool operator==(const nationalAccount& other) const;
 
   nationalAccount* clone() const { return new nationalAccount(*this); }

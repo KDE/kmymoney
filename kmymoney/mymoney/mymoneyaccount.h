@@ -311,7 +311,7 @@ public:
   /**
    * Return the stored account identifiers
    */
-  QList< payeeIdentifier::constPtr > accountIdentifiers() const;
+  QList< payeeIdentifier > accountIdentifiers() const;
 
   /**
     * This method is used to set the descriptive text of the account

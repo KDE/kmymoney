@@ -39,12 +39,12 @@ public:
 
   QString responsibleAccount() const { return _originAccount; }
   void setOriginAccount( const QString& accountId );
-  
+
   MyMoneyMoney value() const { return _value; }
   virtual void setValue(MyMoneyMoney value) { _value = value; }
 
   virtual void setBeneficiary ( const payeeIdentifiers::ibanBic& accountIdentifier ) { _beneficiaryAccount = accountIdentifier; };
-  virtual payeeIdentifier::ptr beneficiary() const { return _beneficiaryAccount.cloneSharedPtr(); }
+  virtual payeeIdentifier beneficiary() const { return payeeIdentifier(_beneficiaryAccount.clone()); }
   virtual payeeIdentifiers::ibanBic beneficiaryTyped() const { return _beneficiaryAccount; }
 
   virtual void setPurpose( const QString purpose ) { _purpose = purpose; }
@@ -53,7 +53,7 @@ public:
   virtual void setEndToEndReference( const QString& reference ) { _endToEndReference = reference; }
   QString endToEndReference() const { return _endToEndReference; }
 
-  payeeIdentifier::ptr originAccountIdentifier() const;
+  payeeIdentifier originAccountIdentifier() const;
 
   MyMoneySecurity currency() const;
 
@@ -63,20 +63,20 @@ public:
 
   unsigned short int textKey() const { return _textKey; }
   unsigned short int subTextKey() const { return _subTextKey; }
-  
+
   virtual bool hasReferenceTo(const QString& id) const;
 
   QSharedPointer<const sepaOnlineTransfer::settings> getSettings() const;
-  
+
 protected:
   sepaOnlineTransfer* clone() const;
-  
+
   virtual sepaOnlineTransfer* createFromXml(const QDomElement &element) const;
   virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
 
 private:
   mutable QSharedPointer<const settings> _settings;
-  
+
   QString _originAccount;
   MyMoneyMoney _value;
   QString _purpose;

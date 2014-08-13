@@ -19,146 +19,103 @@
 #ifndef PAYEEIDENTIFIER_H
 #define PAYEEIDENTIFIER_H
 
-#include <QtCore/QtPlugin>
-#include <QtCore/QSharedPointer>
-#include <QtCore/QHash>
-#include <QtCore/QMetaType>
 #include <QtXml/QDomElement>
 
-#include "payeeidentifiermacros.h"
+/** @todo fix include path after upgrade to cmake 3 */
+#include "payeeidentifier/kmm_payeeidentifier_export.h"
+#include "mymoneyexception.h"
 
-/**
- * @brief Define a unique identifier for an payeeIdentifier subclass
- *
- * Use this macro in your class's public section.
- *
- * This also defines the helper ::ptr, ::constPtr and className::ptr cloneSharedPtr()
- *
- * @param PIDID the payeeIdentifier id, e.g. "org.kmymoney.payeeIdentifier.swift". Must be
- * unique among all payeeIdentifiers as it is used internaly to store data, to compare
- * types and for type casting (there must not be more than one class which uses that pidid).
- */
-#define PAYEEIDENTIFIER_ID(className, PIDID) \
-/** @brief Returns the payeeIdentifier Id */ \
-static const QString& staticPayeeIdentifierId() { \
-  static const QString _pidid = QLatin1String( PIDID ); \
-  return _pidid; \
-  } \
-  /** @brief Returns the payeeIdentifier Id */ \
-  virtual QString payeeIdentifierId() const { \
-    return className::staticPayeeIdentifierId(); \
-    } \
-  typedef QSharedPointer< className > ptr; \
-  typedef QSharedPointer< const className > constPtr; \
-  className::ptr cloneSharedPtr() const { return className::ptr( this->clone() ); }
+// Q_DECLARE_METATYPE requries this include
+#include "payeeidentifierdata.h"
 
-/**
- * @brief "Something" that identifies a payee (or an account of a payee)
- *
- * The simplest form of this class is an identifier for an bank account (consisting of an account number
- * and a bank code). But also an e-mail address which is used by an online money-transfer service could be
- * such an identifier (that is the reason for the abstract name "payeeIdentifier").
- *
- * But also the creditor identifier for debit-notes in sepa-countries can be a subclass. It does not
- * address an account but a company.
- *
- * Any payee (@ref MyMoneyPayee) can have several payeeIdentifiers.
- *
- * The online banking system uses payeeIdentifiers to dertermine if it is able so create a credit-transfer
- * to a given payee. During import the payeeIdentifiers are used to find a payee.
- *
- * You should use the shared pointer payeeIdentifier::ptr to handle payeeIdentifiers. To copy them used
- * cloneSharedPtr().
- *
- * @intenal First this is more complex than creating a superset of all possible identifiers. But there
- * are many of them. And using this method it is a lot easier to create the comparison operators and
- * things like isValid().
- *
- * @section Inheriting
- *
- * To identify the type of an payeeIdentifier you must use the macro @ref PAYEEIDENTIFIER_ID(className, PIDID)
- * in the public section of your subclass.
- */
-class PAYEEIDENTIFIER_EXPORT payeeIdentifier
+class KMM_PAYEEIDENTIFIER_EXPORT payeeIdentifier
 {
 public:
-  /** @brief Shared pointer to payeeIdentifier */
-  typedef QSharedPointer<payeeIdentifier> ptr;
+  explicit payeeIdentifier();
+  explicit payeeIdentifier( payeeIdentifierData *const identifier );
 
-  /** @brief constant variant of payeeIdentifier::ptr */
-  typedef QSharedPointer<const payeeIdentifier> constPtr;
+  payeeIdentifier(const payeeIdentifier& other);
+  ~payeeIdentifier();
+  payeeIdentifier& operator=(const payeeIdentifier& other);
+  bool operator==(const payeeIdentifier& other);
+
+  /** @brief Check if any data is associated */
+  bool isNull() const { return (m_payeeIdentifier == 0); }
 
   /**
-   * @brief Indexed list for payeeIdentifier::ptr
+   * @brief create xml to save this payeeIdentifier
    *
-   * Usually the key is used as index within a payee ( the payees id + this index is a unique key for an element of a payee ).
-   */
-  typedef QHash< unsigned int, payeeIdentifier::ptr> list;
-
-  /** @brief Constant variant of payeeIdentifier::list */
-  typedef QHash< unsigned int, payeeIdentifier::constPtr> constList;
-
-  virtual ~payeeIdentifier() {}
-
-  /**
-   * Use PAYEEIDENTIFIER_ID(className, PIDID) to reimplement this method.
-   */
-  virtual QString payeeIdentifierId() const = 0;
-
-  /**
-   * @brief Comparison operator
-   */
-  virtual bool operator==(const payeeIdentifier& other) const = 0;
-  virtual bool operator!=(const payeeIdentifier& other) { return (!operator==(other)); }
-
-  /**
-   * @brief Check if this payeeIdentifier contains correct data
+   * It creates a new element below parent which is used to store all data.
    *
-   * You should be able to handle invalid data. It is the task of the ui to prevent
-   * invalid data. But during several proceedures invalid data could be used (e.g.
-   * during import).
+   * The counter part to load a payee identifier again is payeeIdentifierLoader::createPayeeIdentifierFromXML().
    */
-  virtual bool isValid() const = 0;
+  void writeXML(QDomDocument &document, QDomElement &parent, const QString& elementName = QLatin1String("payeeIdentifier") ) const;
 
   /**
-   * @brief Create a new payeeIdentifier form XML data
+   * @throws nullPayeeIdentifier
+   */
+  payeeIdentifierData* operator->();
+
+  /** @copydoc operator->() */
+  const payeeIdentifierData* operator->() const;
+
+  /** @copydoc operator->() */
+  payeeIdentifierData* data();
+
+  /** @copydoc operator->() */
+  const payeeIdentifierData* data() const;
+
+  template< class T >
+  T* data();
+
+  bool isValid() const;
+
+  /**
+   * @brief Get payeeIdentifier id
    *
-   * @param element Note: there could be more data in that elemenet than you created in writeXML()
+   * @return An payeeIdentifier id or QString() if no data is associated
    */
-  virtual payeeIdentifier* createFromXml(const QDomElement &element) const = 0;
+  QString iid() const;
 
   /**
-   * @see MyMoneyObject::writeXML()
-   * @warning Do not set an attribute "type" to parent, it is used to store the payeeIdentifierId and is
-   * set automatically.
-   */
-  virtual void writeXML(QDomDocument &document, QDomElement &parent) const = 0;
-
-  /**
-   * @brief Helper to copy a list of pointers
+   * @brief Thrown if a cast of a task fails
    *
-   * Copies list but uses the clone() method of it's elements to create new objects.
-   *
-   * @return a new list with cloned elements
+   * This is inspired by std::bad_cast
+   * @todo inherit from MyMoneyException
    */
-  static QHash< unsigned int, payeeIdentifier::ptr > cloneList( QHash< unsigned int, payeeIdentifier::ptr > list );
+  class badPayeeIdenitifierCast
+  {
+  public:
+    badPayeeIdenitifierCast(const QString& file = "", const long unsigned int& line = 0)
+    //: MyMoneyException("Casted payeeIdentifier with wrong type", file, line)
+    { Q_UNUSED(file); Q_UNUSED(line); }
+  };
 
   /**
-   * @brief Create a deep copy
-   *
-   * Internaly it calls clone(). No need to overwrite it.
+   * @brief Thrown if a task of an invalid onlineJob is requested
+   * @todo inherit from MyMoneyException
    */
-  payeeIdentifier::ptr cloneSharedPtr() const;
+  class nullPayeeIdentifier
+  {
+  public:
+    nullPayeeIdentifier(const QString& file = "", const long unsigned int& line = 0)
+    //: MyMoneyException("Requested payeeIdentifierData of empty payeeIdentifier", file, line)
+    { Q_UNUSED(file); Q_UNUSED(line); }
+  };
 
-protected:
-  /**
-   * @brief Create deep copy
-   */
-  virtual payeeIdentifier* clone() const = 0;
+private:
+  payeeIdentifierData* m_payeeIdentifier;
 };
 
-Q_DECLARE_INTERFACE(payeeIdentifier, "org.kmymoney.payeeIdentifier")
-Q_DECLARE_METATYPE( payeeIdentifier::ptr )
-Q_DECLARE_METATYPE( payeeIdentifier::constPtr )
+template<class T>
+T* payeeIdentifier::data()
+{
+  T *const ident = dynamic_cast<T*>(m_payeeIdentifier);
+  if ( ident == 0 )
+    throw badPayeeIdenitifierCast(__FILE__, __LINE__);
+  return ident;
+}
+
+Q_DECLARE_METATYPE( payeeIdentifier )
 
 #endif // PAYEEIDENTIFIER_H

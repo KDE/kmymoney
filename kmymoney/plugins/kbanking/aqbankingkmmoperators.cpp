@@ -3,6 +3,7 @@
 #include <aqbanking/transactionlimits.h>
 #include <aqbanking/transaction.h>
 
+#include "payeeidentifier/payeeidentifiertyped.h"
 #include "tasksettings/credittransfersettingsbase.h"
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 #include "onlinetasks/national/tasks/germanonlinetransfer.h"
@@ -125,21 +126,27 @@ void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const payeeIde
   AB_Transaction_SetLocalBankCode(transaction, ident.bankCode().toUtf8().constData());
 }
 
-bool AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const QList< payeeIdentifier::constPtr >& accountNumbers)
+bool AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const QList<payeeIdentifier>& accountNumbers)
 {
   Q_CHECK_PTR( transaction );
 
   bool validOriginAccountSet = false;
-  foreach( payeeIdentifier::constPtr accountNumber, accountNumbers ) {
-    if ( !accountNumber->isValid() )
+  foreach( payeeIdentifier accountNumber, accountNumbers ) {
+    if ( !accountNumber.isValid() )
       continue;
 
-    if  ( payeeIdentifiers::ibanBic::constPtr iban = accountNumber.dynamicCast<const payeeIdentifiers::ibanBic>() ) {
+    try {
+      payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban( accountNumber );
       AB_Transaction_SetLocalIban( transaction, iban->electronicIban().toUtf8().constData() );
       AB_Transaction_SetLocalBic( transaction, iban->fullStoredBic().toUtf8().constData() );
-    } else if ( payeeIdentifiers::nationalAccount::constPtr national = accountNumber.dynamicCast<const payeeIdentifiers::nationalAccount>() ) {
-      AB_Transaction_SetLocalAccount( transaction, *national );
+    } catch  ( ... ) {
+    }
+
+    try {
+      payeeIdentifierTyped<payeeIdentifiers::nationalAccount> national( accountNumber );
+      AB_Transaction_SetLocalAccount( transaction, *(national.data()) );
       validOriginAccountSet = true;
+    } catch ( ... ) {
     }
   }
   return validOriginAccountSet;

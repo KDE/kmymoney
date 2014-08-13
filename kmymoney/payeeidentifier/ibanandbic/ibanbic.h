@@ -22,7 +22,7 @@
 #include <QtCore/QString>
 #include <QtCore/QChar>
 
-#include "payeeidentifier/payeeidentifier.h"
+#include "payeeidentifier/payeeidentifierdata.h"
 
 #include "ibanbicmacros.h"
 
@@ -35,7 +35,7 @@ namespace payeeIdentifiers {
  * Can store a pair of an International Bank Account Number (ISO 13616) and Business Identifier Code (ISO 9362).
  *
  */
-class IBAN_BIC_IDENTIFIER_EXPORT ibanBic : public payeeIdentifier
+class IBAN_BIC_IDENTIFIER_EXPORT ibanBic : public payeeIdentifierData
 {
   KMM_UNIT_TESTABLE
 public:
@@ -127,7 +127,7 @@ public:
    */
   QString institutionName() const { return institutionNameByBic(bic()); }
 
-  virtual bool operator==(const payeeIdentifier& other) const;
+  virtual bool operator==(const payeeIdentifierData& other) const;
   bool operator==(const ibanBic& other) const;
   virtual bool isValid() const;
 

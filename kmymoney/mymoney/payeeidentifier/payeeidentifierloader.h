@@ -37,8 +37,8 @@ class KMM_MYMONEY_EXPORT payeeIdentifierLoader
 public:
   payeeIdentifierLoader();
 
-  payeeIdentifier::ptr createPayeeIdentifier( const QString& payeeIdentifierId );
-  payeeIdentifier::ptr createPayeeIdentifierFromXML( const QString& payeeIdentifierId, const QDomElement& element );
+  payeeIdentifier createPayeeIdentifier( const QString& payeeIdentifierId );
+  payeeIdentifier createPayeeIdentifierFromXML( const QDomElement& element );
 
   /**
    * @brief Create a delegate to show/edit
@@ -69,12 +69,12 @@ public:
   QString translatedDelegateName( const QString& payeeIdentifierId );
 
   /** I take ownership */
-  void addPayeeIdentifier( payeeIdentifier *const identifier );
+  void addPayeeIdentifier( payeeIdentifierData *const identifier );
 
   static payeeIdentifierLoader* instance() { return &m_self; }
 
 private:
-  QHash<QString, payeeIdentifier*> m_identifiers;
+  QHash<QString, payeeIdentifierData*> m_identifiers;
   static payeeIdentifierLoader m_self;
 };
 

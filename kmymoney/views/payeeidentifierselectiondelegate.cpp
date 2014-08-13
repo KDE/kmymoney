@@ -62,8 +62,8 @@ void payeeIdentifierSelectionDelegate::setModelData(QWidget* editor, QAbstractIt
 {
   QComboBox *const comboBox = qobject_cast<QComboBox*>(editor);
   const QString selectedPidid = comboBox->model()->data(comboBox->model()->index(comboBox->currentIndex(), 0 ), Qt::UserRole).toString();
-  payeeIdentifier::ptr ident = payeeIdentifierLoader::instance()->createPayeeIdentifier(selectedPidid);
-  model->setData(index, QVariant::fromValue<payeeIdentifier::ptr>(ident), payeeIdentifierModel::payeeIdentifierPtr);
+  payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifier(selectedPidid);
+  model->setData(index, QVariant::fromValue<payeeIdentifier>(ident), payeeIdentifierModel::payeeIdentifier);
 }
 
 void payeeIdentifierSelectionDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& /*index*/) const

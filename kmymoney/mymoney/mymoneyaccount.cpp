@@ -38,6 +38,7 @@
 #include "mymoneyexception.h"
 #include "mymoneysplit.h"
 #include "mymoneyfile.h"
+#include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 
@@ -792,18 +793,17 @@ const QMap<QDate, MyMoneyMoney>& MyMoneyAccount::reconciliationHistory()
 
 /**
  * @todo Improve setting of country for nationalAccount
- * @todo something is wrong with kvp key iban (upper or lower case?)
  */
-QList< payeeIdentifier::constPtr > MyMoneyAccount::accountIdentifiers() const
+QList< payeeIdentifier > MyMoneyAccount::accountIdentifiers() const
 {
-  QList< payeeIdentifier::constPtr > list;
+  QList< payeeIdentifier > list;
 
   MyMoneyFile* file = MyMoneyFile::instance();
 
   // Iban & Bic
-  if ( !value( QLatin1String("IBAN") ).isEmpty() ) {
-    payeeIdentifiers::ibanBic::ptr iban( new payeeIdentifiers::ibanBic );
-    iban->setIban( value("IBAN") );
+  if ( !value( QLatin1String("iban") ).isEmpty() ) {
+    payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban( new payeeIdentifiers::ibanBic );
+    iban->setIban( value("iban") );
     iban->setBic( file->institution( institutionId() ).value("bic") );
     iban->setOwnerName( file->user().name() );
     list.append(iban);
@@ -811,7 +811,7 @@ QList< payeeIdentifier::constPtr > MyMoneyAccount::accountIdentifiers() const
 
   // National Account number
   if ( !number().isEmpty() ) {
-    payeeIdentifiers::nationalAccount::ptr national( new payeeIdentifiers::nationalAccount );
+    payeeIdentifierTyped<payeeIdentifiers::nationalAccount> national( new payeeIdentifiers::nationalAccount );
     national->setAccountNumber( number() );
     national->setBankCode( file->institution( institutionId() ).sortcode() );
     if ( file->user().state().length() == 2 )

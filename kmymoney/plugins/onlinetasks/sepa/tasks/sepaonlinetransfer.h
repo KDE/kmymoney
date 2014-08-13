@@ -60,7 +60,7 @@ public:
    * @brief Returns the origin account identifier
    * @return you are owner of the object
    */
-  virtual payeeIdentifier::ptr originAccountIdentifier() const = 0;
+  virtual payeeIdentifier originAccountIdentifier() const = 0;
 
   /**
    * National account can handle the currency of the related account only.

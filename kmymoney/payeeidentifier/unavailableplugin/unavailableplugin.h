@@ -19,7 +19,7 @@
 #ifndef PAYEEIDENTIFIERUNAVAILABLE_H
 #define PAYEEIDENTIFIERUNAVAILABLE_H
 
-#include "mymoney/payeeidentifier/payeeidentifier.h"
+#include "payeeidentifier/payeeidentifierdata.h"
 #include <QDomElement>
 
 class payeeIdentifierLoader;
@@ -32,7 +32,7 @@ namespace payeeIdentifiers {
  * To avoid data loss if a plugin could not be loaded this payeeIdentifier is used in the xml backend.
  * It stores the data in plain xml so it can be written back to the file.
  */
-class payeeIdentifierUnavailable : public payeeIdentifier
+class payeeIdentifierUnavailable : public payeeIdentifierData
 {
 public:
   PAYEEIDENTIFIER_ID(payeeIdentifierUnavailable, "org.kmymoney.payeeIdentifier.payeeIdentifierUnavailable");
@@ -41,7 +41,7 @@ public:
   virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
   virtual payeeIdentifierUnavailable* createFromXml(const QDomElement& element) const;
   virtual bool isValid() const;
-  virtual bool operator==(const payeeIdentifier& other) const;
+  virtual bool operator==(const payeeIdentifierData& other) const;
   bool operator==(const payeeIdentifierUnavailable& other) const;
 
   friend class payeeIdentifierLoader;
