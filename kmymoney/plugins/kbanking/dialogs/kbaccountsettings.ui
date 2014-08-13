@@ -12,7 +12,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
-    <widget class="KTabWidget" name="tabWidget2">
+    <widget class="QTabWidget" name="tabWidget2">
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -261,7 +261,7 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KTabWidget</class>
+   <class>QTabWidget</class>
    <extends>QTabWidget</extends>
    <header>ktabwidget.h</header>
    <container>1</container>

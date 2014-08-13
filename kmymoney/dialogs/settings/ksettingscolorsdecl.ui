@@ -18,7 +18,7 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="KTabWidget" name="tabWidget2">
+        <widget class="QTabWidget" name="tabWidget2">
           <widget class="QWidget" name="m_foregroundTab">
             <attribute name="title">
               <string>Foreground</string>
@@ -378,7 +378,7 @@
   </connections>
   <customwidgets>
     <customwidget>
-      <class>KTabWidget</class>
+      <class>QTabWidget</class>
       <extends>QTabWidget</extends>
       <header location="global">ktabwidget.h</header>
     </customwidget>

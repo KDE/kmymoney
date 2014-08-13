@@ -88,7 +88,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="KTabWidget" name="m_tabWidget">
+       <widget class="QTabWidget" name="m_tabWidget">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>2</horstretch>
@@ -339,7 +339,7 @@
    <header>klistwidget.h</header>
   </customwidget>
   <customwidget>
-   <class>KTabWidget</class>
+   <class>QTabWidget</class>
    <extends>QTabWidget</extends>
    <header>ktabwidget.h</header>
    <container>1</container>

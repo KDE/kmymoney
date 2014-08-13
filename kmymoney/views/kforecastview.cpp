@@ -69,7 +69,7 @@ KForecastView::KForecastView(QWidget *parent) :
 
   m_forecastButton->setIcon(QIcon::fromTheme("view-financial-forecast"));
 
-  connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabChanged(QWidget*)));
+  connect(m_tab, SIGNAL(currentChanged(int)), this, SLOT(slotTabChanged(int)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadForecast()));
 
@@ -100,9 +100,9 @@ KForecastView::~KForecastView()
 {
 }
 
-void KForecastView::slotTabChanged(QWidget* _tab)
+void KForecastView::slotTabChanged(int index)
 {
-  ForecastViewTab tab = static_cast<ForecastViewTab>(m_tab->indexOf(_tab));
+  ForecastViewTab tab = static_cast<ForecastViewTab>(index);
 
   // remember this setting for startup
   KSharedConfigPtr config = KSharedConfig::openConfig();
@@ -143,7 +143,7 @@ void KForecastView::showEvent(QShowEvent* event)
 {
   emit aboutToShow();
 
-  slotTabChanged(m_tab->currentWidget());
+  slotTabChanged(m_tab->currentIndex());
 
   // don't forget base class implementation
   QWidget::showEvent(event);
@@ -161,7 +161,7 @@ void KForecastView::slotLoadForecast(void)
   loadForecastSettings();
 
   if (isVisible())
-    slotTabChanged(m_tab->currentWidget());
+    slotTabChanged(m_tab->currentIndex());
 }
 
 void KForecastView::slotManualForecast(void)
@@ -173,7 +173,7 @@ void KForecastView::slotManualForecast(void)
   m_needReload[ChartView] = true;
 
   if (isVisible())
-    slotTabChanged(m_tab->currentWidget());
+    slotTabChanged(m_tab->currentIndex());
 }
 
 void KForecastView::loadForecastSettings(void)

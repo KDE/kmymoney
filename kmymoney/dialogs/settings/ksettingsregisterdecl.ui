@@ -18,7 +18,7 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="KTabWidget" name="tab">
+        <widget class="QTabWidget" name="tab">
           <widget class="QWidget" name="tab1">
             <attribute name="title">
               <string comment="@title The way in which items will be displayed">Display</string>
@@ -118,7 +118,7 @@
             </attribute>
             <layout class="QVBoxLayout">
               <item>
-                <widget class="KTabWidget" name="tabWidget3">
+                <widget class="QTabWidget" name="tabWidget3">
                   <widget class="QWidget" name="tab3">
                     <attribute name="title">
                       <string>Normal view</string>
@@ -498,7 +498,7 @@ Selecting 0% will list all transactions.</string>
       <header location="global">kcombobox.h</header>
     </customwidget>
     <customwidget>
-      <class>KTabWidget</class>
+      <class>QTabWidget</class>
       <extends>QTabWidget</extends>
       <header location="global">ktabwidget.h</header>
     </customwidget>

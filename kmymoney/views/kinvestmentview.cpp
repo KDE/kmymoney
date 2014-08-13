@@ -100,7 +100,7 @@ KInvestmentView::KInvestmentView(QWidget *parent) :
   for (int i = 0; i < MaxViewTabs; ++i)
     d->m_needReload[i] = false;
 
-  connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabCurrentChanged(QWidget*)));
+  connect(m_tab, SIGNAL(currentChanged(int)), this, SLOT(slotTabCurrentChanged(int)));
 
   connect(m_investmentsList, SIGNAL(customContextMenuRequested(QPoint)),
           this, SLOT(slotInvestmentContextMenu(QPoint)));
@@ -198,12 +198,12 @@ void KInvestmentView::slotLoadView(void)
   d->m_needReload[EquitiesTab] = true;
   d->m_needReload[SecuritiesTab] = true;
   if (isVisible())
-    slotTabCurrentChanged(m_tab->currentWidget());
+    slotTabCurrentChanged(m_tab->currentIndex());
 }
 
-void KInvestmentView::slotTabCurrentChanged(QWidget* _tab)
+void KInvestmentView::slotTabCurrentChanged(int index)
 {
-  InvestmentsViewTab tab = static_cast<InvestmentsViewTab>(m_tab->indexOf(_tab));
+  InvestmentsViewTab tab = static_cast<InvestmentsViewTab>(index);
 
   loadView(tab);
 }
@@ -435,7 +435,7 @@ void KInvestmentView::showEvent(QShowEvent* event)
     emit accountSelected(d->m_account);
   }*/
 
-  slotTabCurrentChanged(m_tab->currentWidget());
+  slotTabCurrentChanged(m_tab->currentIndex());
 
   // don't forget base class implementation
   QWidget::showEvent(event);

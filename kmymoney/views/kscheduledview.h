@@ -99,7 +99,7 @@ protected slots:
 
   void slotListItemExecuted(QTreeWidgetItem*, int);
 
-  void slotAccountActivated(int);
+  void slotAccountActivated();
 
   void slotListViewCollapsed(QTreeWidgetItem* item);
   void slotListViewExpanded(QTreeWidgetItem* item);

@@ -686,7 +686,7 @@ void KMyMoneyApp::initActions(void)
   actionCollection()->addAction("account_online_update_menu", menu);
 
   // activating the menu button is the same as selecting the current account
-  connect(menu, SIGNAL(activated()), this, SLOT(slotAccountUpdateOnline()));
+  connect(menu, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnline()));
 
   QAction *account_online_update = actionCollection()->addAction("account_online_update");
   account_online_update->setText(i18n("Update account..."));

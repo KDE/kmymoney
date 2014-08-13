@@ -51,7 +51,7 @@
 using namespace KMyMoneyTransactionForm;
 
 TabBar::TabBar(QWidget* parent) :
-    KTabBar(parent),
+    QTabBar(parent),
     m_signalType(SignalNormal)
 {
   connect(this, SIGNAL(currentChanged(int)), this, SLOT(slotTabCurrentChanged(int)));
@@ -67,7 +67,7 @@ TabBar::SignalEmissionE TabBar::setSignalEmission(TabBar::SignalEmissionE type)
 int TabBar::currentIndex(void) const
 {
   QMap<int, int>::const_iterator it;
-  int id = KTabBar::currentIndex();
+  int id = QTabBar::currentIndex();
   for (it = m_idMap.constBegin(); it != m_idMap.constEnd(); ++it) {
     if (*it == id) {
       return it.key();
@@ -82,7 +82,7 @@ void TabBar::setCurrentIndex(int id)
     blockSignals(true);
 
   if (m_idMap.contains(id)) {
-    KTabBar::setCurrentIndex(m_idMap[id]);
+    QTabBar::setCurrentIndex(m_idMap[id]);
   }
 
   if (m_signalType != SignalNormal)
@@ -95,13 +95,13 @@ void TabBar::setCurrentIndex(int id)
 void TabBar::setTabEnabled(int id, bool enable)
 {
   if (m_idMap.contains(id)) {
-    KTabBar::setTabEnabled(m_idMap[id], enable);
+    QTabBar::setTabEnabled(m_idMap[id], enable);
   }
 }
 
 void TabBar::insertTab(int id, const QString& title)
 {
-  int newId = KTabBar::insertTab(id, title);
+  int newId = QTabBar::insertTab(id, title);
   m_idMap[id] = newId;
 }
 
@@ -124,7 +124,7 @@ void TabBar::showEvent(QShowEvent* event)
   if (m_signalType != SignalNormal)
     blockSignals(true);
 
-  KTabBar::showEvent(event);
+  QTabBar::showEvent(event);
 
   if (m_signalType != SignalNormal)
     blockSignals(false);
@@ -141,17 +141,17 @@ void TabBar::copyTabs(const TabBar* otabbar)
   m_idMap = otabbar->m_idMap;
 
   for (int i = 0; i < otabbar->count(); ++i) {
-    KTabBar::insertTab(i, otabbar->tabText(i));
-    if (i == otabbar->KTabBar::currentIndex()) {
-      KTabBar::setCurrentIndex(i);
+    QTabBar::insertTab(i, otabbar->tabText(i));
+    if (i == otabbar->QTabBar::currentIndex()) {
+      QTabBar::setCurrentIndex(i);
     }
   }
 }
 
 int TabBar::indexAtPos(const QPoint& p) const
 {
-  if (tabRect(KTabBar::currentIndex()).contains(p))
-    return KTabBar::currentIndex();
+  if (tabRect(QTabBar::currentIndex()).contains(p))
+    return QTabBar::currentIndex();
   for (int i = 0; i < count(); ++i)
     if (isTabEnabled(i) && tabRect(i).contains(p))
       return i;
@@ -160,13 +160,13 @@ int TabBar::indexAtPos(const QPoint& p) const
 
 void TabBar::mousePressEvent(QMouseEvent *e)
 {
-  KTabBar::mousePressEvent(e);
+  QTabBar::mousePressEvent(e);
 
   // in case we receive a mouse press event on the current
   // selected tab emit a signal no matter what as the base
   // class does not do that
-  if (indexAtPos(e->pos()) == KTabBar::currentIndex()) {
-    slotTabCurrentChanged(KTabBar::currentIndex());
+  if (indexAtPos(e->pos()) == QTabBar::currentIndex()) {
+    slotTabCurrentChanged(QTabBar::currentIndex());
   }
 }
 

@@ -31,13 +31,13 @@
 #include <QList>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
+#include <QTabWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KHTMLPart>
 #include <KListWidget>
-#include <KTabWidget>
 #include <kfilefiltercombo.h>
 
 // ----------------------------------------------------------------------------
@@ -101,7 +101,7 @@ public:
     QByteArray m_encoding;
 
   public:
-    KReportTab(KTabWidget* parent, const MyMoneyReport& report);
+    KReportTab(QTabWidget* parent, const MyMoneyReport& report);
     ~KReportTab();
     const MyMoneyReport& report(void) const {
       return m_report;
@@ -164,7 +164,7 @@ private:
   bool m_needReload;
 
   KListWidget* m_reportListView;
-  KTabWidget* m_reportTabWidget;
+  QTabWidget* m_reportTabWidget;
   QWidget* m_listTab;
   QVBoxLayout* m_listTabLayout;
   QTreeWidget* m_tocTreeWidget;
@@ -224,7 +224,7 @@ public slots:
   void slotOpenReport(const QString&);
   void slotOpenReport(const MyMoneyReport&);
   void slotCloseCurrent(void);
-  void slotClose(QWidget*);
+  void slotClose(int index);
   void slotCloseAll(void);
   void slotDelete(void);
   void slotListContextMenu(const QPoint &);

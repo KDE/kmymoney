@@ -75,7 +75,7 @@ KAccountsView::KAccountsView(QWidget *parent) :
   KConfigGroup grp = config->group("Last Use Settings");
   m_tab->setCurrentIndex(grp.readEntry("KAccountsView_LastType", 0));
 
-  connect(m_tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(slotTabCurrentChanged(QWidget*)));
+  connect(m_tab, SIGNAL(currentChanged(int)), this, SLOT(slotTabCurrentChanged(int)));
 
   connect(Models::instance()->accountsModel(), SIGNAL(netWorthChanged(MyMoneyMoney)), this, SLOT(slotNetWorthChanged(MyMoneyMoney)));
 
@@ -168,12 +168,12 @@ void KAccountsView::slotLoadAccounts(void)
   m_needReload[ListView] = true;
   m_needReload[IconView] = true;
   if (isVisible())
-    slotTabCurrentChanged(m_tab->currentWidget());
+    slotTabCurrentChanged(m_tab->currentIndex());
 }
 
-void KAccountsView::slotTabCurrentChanged(QWidget* _tab)
+void KAccountsView::slotTabCurrentChanged(int index)
 {
-  AccountsViewTab tab = static_cast<AccountsViewTab>(m_tab->indexOf(_tab));
+  AccountsViewTab tab = static_cast<AccountsViewTab>(index);
 
   // remember this setting for startup
   KSharedConfigPtr config = KSharedConfig::openConfig();
@@ -226,7 +226,7 @@ void KAccountsView::showEvent(QShowEvent * event)
 {
   emit aboutToShow();
 
-  slotTabCurrentChanged(m_tab->currentWidget());
+  slotTabCurrentChanged(m_tab->currentIndex());
 
   QWidget::showEvent(event);
 }

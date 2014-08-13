@@ -59,7 +59,7 @@
     </widget>
    </item>
    <item>
-    <widget class="KTabWidget" name="m_tabWidget">
+    <widget class="QTabWidget" name="m_tabWidget">
      <widget class="QWidget" name="m_listTab">
       <attribute name="title">
        <string>List View</string>
@@ -140,7 +140,7 @@
    <header>kpushbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>KTabWidget</class>
+   <class>QTabWidget</class>
    <extends>QTabWidget</extends>
    <header>ktabwidget.h</header>
    <container>1</container>

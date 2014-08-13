@@ -69,7 +69,7 @@ using namespace reports;
   * KReportsView::KReportTab Implementation
   */
 
-KReportsView::KReportTab::KReportTab(KTabWidget* parent, const MyMoneyReport& report):
+KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report):
     QWidget(parent),
     m_part(new KHTMLPart(this)),
     m_chartView(new KReportChartView(this)),
@@ -294,7 +294,7 @@ KReportsView::KReportsView(QWidget *parent, const char *name) :
 
   setColumnsAlreadyAdjusted(false);
 
-  m_reportTabWidget = new KTabWidget(this);
+  m_reportTabWidget = new QTabWidget(this);
   addWidget(m_reportTabWidget);
   m_reportTabWidget->setTabsClosable(true);
 
@@ -330,8 +330,8 @@ KReportsView::KReportsView(QWidget *parent, const char *name) :
   m_listTabLayout->addWidget(m_tocTreeWidget);
   m_reportTabWidget->addTab(m_listTab, i18n("Reports"));
 
-  connect(m_reportTabWidget, SIGNAL(closeRequest(QWidget*)),
-          this, SLOT(slotClose(QWidget*)));
+  connect(m_reportTabWidget, SIGNAL(tabCloseRequested(int)),
+          this, SLOT(slotClose(int)));
 
   connect(m_tocTreeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
           this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
@@ -883,7 +883,7 @@ void KReportsView::slotDelete(void)
     if (KMessageBox::Continue == deleteReportDialog(report.name())) {
       // close the tab and then remove the report so that it is not
       // generated again during the following loadView() call
-      slotClose(tab);
+      slotClose(m_reportTabWidget->currentIndex());
 
       MyMoneyFileTransaction ft;
       MyMoneyFile::instance()->removeReport(report);
@@ -1017,16 +1017,14 @@ void KReportsView::slotToggleChart(void)
 
 void KReportsView::slotCloseCurrent(void)
 {
-  if (m_reportTabWidget->currentWidget()) {
-    slotClose(m_reportTabWidget->currentWidget());
-  }
+  slotClose(m_reportTabWidget->currentIndex());
 }
 
-void KReportsView::slotClose(QWidget* w)
+void KReportsView::slotClose(int index)
 {
-  KReportTab* tab = dynamic_cast<KReportTab*>(w);
+  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index));
   if (tab) {
-    m_reportTabWidget->removeTab(m_reportTabWidget->indexOf(tab));
+    m_reportTabWidget->removeTab(index);
     tab->setReadyToDelete(true);
   }
 }

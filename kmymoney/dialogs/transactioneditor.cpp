@@ -791,7 +791,7 @@ void StdTransactionEditor::createEditWidgets(void)
     account->setClickMessage(i18n("Account"));
     account->setObjectName(QLatin1String("Account"));
     m_editWidgets["account"] = account;
-    connect(account, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+    connect(account, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
     connect(account, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateAccount(QString)));
   }
 
@@ -803,14 +803,14 @@ void StdTransactionEditor::createEditWidgets(void)
   connect(payee, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createPayee(QString,QString&)));
   connect(payee, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(payee, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdatePayee(QString)));
-  connect(payee, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(payee, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyCategory* category = new KMyMoneyCategory(0, true);
   category->setClickMessage(i18n("Category/Account"));
   category->setObjectName(QLatin1String("Category/Account"));
   m_editWidgets["category"] = category;
   connect(category, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateCategory(QString)));
-  connect(category, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(category, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
   connect(category, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateCategory(QString,QString&)));
   connect(category, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(category->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditSplits()));

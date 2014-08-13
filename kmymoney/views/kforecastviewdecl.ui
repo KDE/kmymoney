@@ -311,7 +311,7 @@
     </widget>
    </item>
    <item>
-    <widget class="KTabWidget" name="m_tab">
+    <widget class="QTabWidget" name="m_tab">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -458,7 +458,7 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KTabWidget</class>
+   <class>QTabWidget</class>
    <extends>QTabWidget</extends>
    <header>ktabwidget.h</header>
    <container>1</container>

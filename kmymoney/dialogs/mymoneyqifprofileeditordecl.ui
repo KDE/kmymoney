@@ -46,7 +46,7 @@
             </widget>
           </item>
           <item>
-            <widget class="KTabWidget" name="profileTabs">
+            <widget class="QTabWidget" name="profileTabs">
               <widget class="QWidget" name="tabGeneral">
                 <attribute name="title">
                   <string comment="@title QIF profile general information">General</string>
@@ -789,7 +789,7 @@
       <header location="global">klineedit.h</header>
     </customwidget>
     <customwidget>
-      <class>KTabWidget</class>
+      <class>QTabWidget</class>
       <extends>QTabWidget</extends>
       <header location="global">ktabwidget.h</header>
     </customwidget>

@@ -25,10 +25,10 @@
 #include <QWidget>
 #include <QMouseEvent>
 #include <QKeyEvent>
+#include <QTabBar>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <ktabbar.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -43,7 +43,7 @@ namespace KMyMoneyTransactionForm
 /**
   * @author Thomas Baumgart
   */
-class TabBar : public KTabBar
+class TabBar : public QTabBar
 {
   Q_OBJECT
 public:
