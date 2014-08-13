@@ -35,7 +35,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
 #include <klocale.h>
 #include <kcalendarsystem.h>
 #include <kmessagebox.h>

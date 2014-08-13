@@ -61,11 +61,11 @@
 #include <QStyleOptionToolButton>
 #include <QIntValidator>
 #include <QMenu>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
 #include <kapplication.h>
 #include <klocale.h>
 #include <kiconloader.h>

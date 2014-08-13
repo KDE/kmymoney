@@ -58,12 +58,12 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 #include <QKeyEvent>
 #include <QEvent>
 #include <QHeaderView>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 //#include <kdatetable.h> // Use the classes available for maximum re-use
-#include <kglobal.h>
 #include <kglobalsettings.h>
 #include <kapplication.h>
 #include <klocale.h>

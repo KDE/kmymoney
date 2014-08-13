@@ -37,10 +37,8 @@
 // KDE Headers
 
 #include <klocale.h>
-#include <kglobal.h>
 #include <kmessagebox.h>
 #include <kcombobox.h>
-
 #include <kiconloader.h>
 #include <kled.h>
 #include <kglobalsettings.h>

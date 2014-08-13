@@ -31,7 +31,6 @@
 #include <KDebug>
 #include <KLocale>
 #include <KTextEdit>
-#include <kglobal.h>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------

@@ -23,8 +23,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -46,10 +44,7 @@ QString reports::ReportTable::cssFileNameGet(void)
 
   if (!MyMoneyFile::instance()->value(m_reportStyleSheet).isEmpty()) {
     // try to find the stylesheet specific for this report
-    cssfilename = KGlobal::dirs()->
-                  findResource(m_resourceType, m_resourceHtml + '/'
-                               + MyMoneyFile::instance()->
-                               value(m_reportStyleSheet));
+    cssfilename = KMyMoneyUtils::findResource(m_resourceType, m_resourceHtml + '/' + MyMoneyFile::instance()->value(m_reportStyleSheet));
   }
 
   if (cssfilename.isEmpty()) {
@@ -59,9 +54,7 @@ QString reports::ReportTable::cssFileNameGet(void)
 
   if (cssfilename.isEmpty()) {
     // if there still is nothing, try to use the installation default
-    cssfilename = KGlobal::dirs()->
-                  findResource(m_resourceType, m_resourceHtml + '/'
-                               + m_cssFileDefault);
+    cssfilename = KMyMoneyUtils::findResource(m_resourceType, m_resourceHtml + '/' + m_cssFileDefault);
   }
 
   return cssfilename;

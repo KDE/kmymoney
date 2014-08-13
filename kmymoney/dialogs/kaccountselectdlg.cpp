@@ -34,7 +34,6 @@
 
 #include <klocale.h>
 #include <kconfig.h>
-#include <kglobal.h>
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <kguiitem.h>

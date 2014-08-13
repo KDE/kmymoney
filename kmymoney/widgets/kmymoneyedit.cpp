@@ -28,11 +28,11 @@
 #include <QKeyEvent>
 #include <QEvent>
 #include <QIcon>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
 #include <klocale.h>
 #include <klineedit.h>
 #include <kiconloader.h>

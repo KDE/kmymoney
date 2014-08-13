@@ -40,7 +40,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
 #include <klocale.h>
 #include <khtmlview.h>
 #include <kconfig.h>

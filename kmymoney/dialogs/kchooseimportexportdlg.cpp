@@ -31,7 +31,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
 #include <kconfig.h>
 #include <klocale.h>
 

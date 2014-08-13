@@ -35,7 +35,6 @@
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kmessagebox.h>
-#include <kglobal.h>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------

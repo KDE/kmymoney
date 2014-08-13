@@ -35,7 +35,6 @@
 // KDE Includes
 
 #include <KLocale>
-#include <kglobal.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

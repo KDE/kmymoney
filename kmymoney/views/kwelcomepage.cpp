@@ -34,7 +34,6 @@
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <k4aboutdata.h>
-#include <kglobal.h>
 
 KWelcomePage::KWelcomePage()
 {

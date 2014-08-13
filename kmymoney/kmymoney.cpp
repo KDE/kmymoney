@@ -76,8 +76,6 @@
 #include <ktoggleaction.h>
 #include <kactioncollection.h>
 #include <kactionmenu.h>
-#include <kglobal.h>
-
 #include <kstatusbar.h>
 #include <ktip.h>
 #include <kprogressdialog.h>

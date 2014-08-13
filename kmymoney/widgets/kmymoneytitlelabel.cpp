@@ -31,7 +31,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
 #include <kglobalsettings.h>
 #include <KColorScheme>
 

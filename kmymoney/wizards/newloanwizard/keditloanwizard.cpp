@@ -37,7 +37,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <knuminput.h>
-#include <kglobal.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

@@ -40,7 +40,6 @@
 // KDE Includes
 
 #include <kfiledialog.h>
-#include <kglobal.h>
 #include <kicontheme.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>

@@ -23,7 +23,6 @@
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kdeversion.h>
-#include <kglobal.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
 

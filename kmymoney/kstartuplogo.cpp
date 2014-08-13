@@ -27,9 +27,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
 #include <klocale.h>
-
 #include <kcolorscheme.h>
 #include <ksplashscreen.h>
 #include <kcmdlineargs.h>

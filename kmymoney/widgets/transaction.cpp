@@ -36,7 +36,6 @@
 // KDE Includes
 
 #include <klocale.h>
-#include <kglobal.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

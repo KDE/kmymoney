@@ -27,7 +27,6 @@
 // KDE Includes
 
 #include <kglobalsettings.h>
-#include <kglobal.h>
 #include <kiconloader.h>
 #include <klocale.h>
 #include <ktextedit.h>

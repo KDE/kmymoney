@@ -36,7 +36,6 @@
 #include <kcmdlineargs.h>
 #include <k4aboutdata.h>
 #include <klocale.h>
-#include <kglobal.h>
 #include <ktip.h>
 #include <kmessagebox.h>
 #include <kapplication.h>

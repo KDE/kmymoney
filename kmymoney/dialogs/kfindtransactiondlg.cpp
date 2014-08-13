@@ -38,9 +38,7 @@
 // KDE Includes
 
 #include <kapplication.h>
-#include <kglobal.h>
 #include <klocale.h>
-
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kstandardguiitem.h>

@@ -48,7 +48,6 @@
 #include <kdialog.h>
 #include <kpassivepopup.h>
 #include <ktoggleaction.h>
-#include <kglobal.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

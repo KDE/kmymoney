@@ -42,7 +42,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
 #include <klocale.h>
 #include <kshortcut.h>
 #include <kpassivepopup.h>

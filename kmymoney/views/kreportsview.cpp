@@ -43,7 +43,6 @@
 #include <kconfig.h>
 #include <kfiledialog.h>
 #include <kmessagebox.h>
-#include <kglobal.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

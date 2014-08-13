@@ -28,14 +28,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "accountsmodel.h"
 
-K_GLOBAL_STATIC(Models, models);
+Q_GLOBAL_STATIC(Models, models);
 
 struct Models::Private {
   Private() :

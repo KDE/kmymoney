@@ -41,7 +41,6 @@
 #include <kmessagebox.h>
 #include <ktextedit.h>
 #include <kprogressdialog.h>
-#include <kglobal.h>
 #include <kconfig.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>

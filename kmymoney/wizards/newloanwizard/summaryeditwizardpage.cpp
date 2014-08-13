@@ -24,8 +24,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -44,5 +42,5 @@ void SummaryEditWizardPage::initializePage()
   m_additionalFees7->setText(field("additionalCost").toString());
   m_totalPayment7->setText(field("periodicPayment").toString());
   m_interestRate7->setText(field("interestRate6").toString());
-  m_startDateChanges->setText(KLocale::global()->formatDate(field("effectiveChangeDateEdit").toDate()));
+  m_startDateChanges->setText(QLocale().toString(field("effectiveChangeDateEdit").toDate()));
 }

@@ -26,9 +26,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
 #include <klocale.h>
-
 #include <kmessagebox.h>
 #include <klineedit.h>
 #include <kguiutils.h>

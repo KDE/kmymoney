@@ -37,7 +37,6 @@
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 #include <klocale.h>
-#include <kglobal.h>
 #include <kiconloader.h>
 #include <kio/netaccess.h>
 #include <kconfiggroup.h>

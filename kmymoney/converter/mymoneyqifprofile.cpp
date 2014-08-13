@@ -27,8 +27,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
-#include <kconfig.h>
 #include <klocale.h>
 #include <kcalendarsystem.h>
 #include <KConfigGroup>

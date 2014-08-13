@@ -28,7 +28,6 @@
 // KDE Includes
 
 #include <kconfig.h>
-#include <kglobal.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kguiitem.h>

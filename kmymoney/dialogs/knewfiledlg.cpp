@@ -26,9 +26,7 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kglobal.h>
 #include <klocale.h>
-
 #include <kstandardguiitem.h>
 #include <kmessagebox.h>
 #include <KGuiItem>

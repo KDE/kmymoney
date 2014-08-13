@@ -35,7 +35,6 @@
 #include <kdebug.h>
 #include <kapplication.h>
 #include <kconfig.h>
-#include <kglobal.h>
 #include <kstandarddirs.h>
 #include <kcalendarsystem.h>
 #include <ktemporaryfile.h>

@@ -57,7 +57,6 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
 #include <kglobalsettings.h>
 #include <kcolorscheme.h>
 #include <klocale.h>

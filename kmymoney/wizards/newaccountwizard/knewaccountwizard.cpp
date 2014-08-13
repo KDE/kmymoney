@@ -31,7 +31,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobal.h>
 #include <klocale.h>
 #include <klineedit.h>
 #include <kmessagebox.h>
