@@ -58,19 +58,5 @@ public:
     * Construct a MyMoneyForecast object setup with all KMyMoneySettings
     */
   static MyMoneyForecast forecast(void);
-
-  /**
-    * Call the setSubstringSearch() method of all children of
-    * @p w that are of type KMyMoneyMVCCombo and pass the inverse return
-    * value of KMyMoneyGlobalSettings::stringMatchFromStart() to
-    * their KMyMoneyMVCCombo::setSubstringSearch() method
-    */
-  static void setSubstringSearch(QWidget* w);
-
-  /**
-    * Returns the name of the icon to be used for the 'enter schedule'
-    * action depending on the underlying KDE version
-    */
-  static QString enterScheduleIcon(void);
 };
 #endif

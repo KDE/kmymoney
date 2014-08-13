@@ -128,12 +128,3 @@ MyMoneyForecast KMyMoneyGlobalSettings::forecast(void)
 
   return forecast;
 }
-
-QString KMyMoneyGlobalSettings::enterScheduleIcon(void)
-{
-  if (KDE::version() >= 0x040800) {
-    return QLatin1String("key-enter");
-  }
-
-  return QLatin1String("go-jump-locationbar");
-}

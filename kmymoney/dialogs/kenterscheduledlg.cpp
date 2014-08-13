@@ -75,7 +75,7 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
 {
   d->m_schedule = schedule;
   d->m_extendedReturnCode = KMyMoneyUtils::Enter;
-  buttonOk->setIcon(QIcon::fromTheme(KMyMoneyGlobalSettings::enterScheduleIcon()));
+  buttonOk->setIcon(QIcon::fromTheme("key-enter"));
   buttonSkip->setIcon(QIcon::fromTheme("media-seek-forward"));
   KGuiItem::assign(buttonCancel, KStandardGuiItem::cancel());
   KGuiItem::assign(buttonHelp, KStandardGuiItem::help());

@@ -585,7 +585,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
         QString pathEnter, pathSkip;
-        KIconLoader::global()->loadIcon(KMyMoneyGlobalSettings::enterScheduleIcon(), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathEnter, false);
+        KIconLoader::global()->loadIcon(QString("key-enter"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathEnter, false);
         KIconLoader::global()->loadIcon(QString("media-seek-forward"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathSkip);
 
         //show payment date
@@ -593,9 +593,9 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
               KLocale::global()->formatDate(sched.adjustedNextDueDate(), KLocale::ShortDate) +
               "</td><td>";
         if (pathEnter.length() > 0)
-          tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathEnter) + linkend();
+          tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(QUrl::fromLocalFile(pathEnter).url()) + linkend();
         if (pathSkip.length() > 0)
-          tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathSkip) + linkend();
+          tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(QUrl::fromLocalFile(pathSkip).url()) + linkend();
 
         tmp += QString("&nbsp;");
         tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=edit").arg(sched.id()), i18n("Edit schedule")) + sched.name() + linkend();

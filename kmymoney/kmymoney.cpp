@@ -927,7 +927,7 @@ void KMyMoneyApp::initActions(void)
 
   QAction *schedule_enter = actionCollection()->addAction("schedule_enter");
   schedule_enter->setText(i18n("Enter next transaction..."));
-  schedule_enter->setIcon(QIcon::fromTheme(KMyMoneyGlobalSettings::enterScheduleIcon()));
+  schedule_enter->setIcon(QIcon::fromTheme("key-enter"));
   connect(schedule_enter, SIGNAL(triggered()), this, SLOT(slotScheduleEnter()));
 
   QAction *schedule_skip = actionCollection()->addAction("schedule_skip");
