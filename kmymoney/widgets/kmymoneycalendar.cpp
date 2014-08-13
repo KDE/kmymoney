@@ -592,12 +592,12 @@ kMyMoneyCalendar::lineEnterPressed()
   // TODO: port KF5
 #if 0
   if (val->date(line->text(), temp) == QValidator::Acceptable) {
-    kDebug() << "kMyMoneyCalendar::lineEnterPressed: valid date entered.";
+    qDebug() << "kMyMoneyCalendar::lineEnterPressed: valid date entered.";
     emit(dateEntered(temp));
     setDate(temp);
   } else {
     KNotification::beep();
-    kDebug() << "kMyMoneyCalendar::lineEnterPressed: invalid date entered.";
+    qDebug() << "kMyMoneyCalendar::lineEnterPressed: invalid date entered.";
   }
 #endif
 }

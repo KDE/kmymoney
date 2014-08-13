@@ -215,7 +215,7 @@ void KTagsView::slotRenameTag(QListWidgetItem* ta)
   if (m_allowEditing == false || !m_tagsList->currentItem() || ta != m_tagsList->currentItem())
     return;
 
-  //kDebug() << "[KTagsView::slotRenameTag]";
+  //qDebug() << "[KTagsView::slotRenameTag]";
   // create a copy of the new name without appended whitespaces
   QString new_name = ta->text();
   if (m_tag.name() != new_name) {

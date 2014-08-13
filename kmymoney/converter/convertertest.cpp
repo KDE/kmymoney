@@ -120,7 +120,7 @@ void ConverterTest::testWebQuotesDefault()
     QuoteReceiver qr(&q);
 
     q.launch("DIS", "test default");
-//    kDebug(2) << "ConverterTest::testWebQuotes(): quote for " << q.m_symbol << " on " << qr.m_date.toString() << " is " << qr.m_price.toString() << " errors(" << qr.m_errors.count() << "): " << qr.m_errors.join(" /// ");
+//    qDebug() << "ConverterTest::testWebQuotes(): quote for " << q.m_symbol << " on " << qr.m_date.toString() << " is " << qr.m_price.toString() << " errors(" << qr.m_errors.count() << "): " << qr.m_errors.join(" /// ");
 
     // No errors allowed
     QVERIFY(qr.m_errors.count() == 0);

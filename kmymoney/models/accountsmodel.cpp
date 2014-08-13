@@ -29,7 +29,6 @@
 #include <KLocalizedString>
 #include <KIconLoader>
 #include <KColorScheme>
-#include <KDebug>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -249,7 +248,7 @@ public:
       }
 
     } catch (const MyMoneyException &e) {
-      kDebug(2) << Q_FUNC_INFO << " caught exception while adding " << account.name() << "[" << account.id() << "]: " << e.what();
+      qDebug() << Q_FUNC_INFO << " caught exception while adding " << account.name() << "[" << account.id() << "]: " << e.what();
     }
 
     MyMoneyMoney value = balance;

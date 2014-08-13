@@ -115,7 +115,7 @@ QString reports::ReportTable::renderHTML(QWidget* widget,
     //this method is implemented by each concrete class
     html += renderBody();
   } catch (const MyMoneyException &e) {
-    kDebug(2) << "reports::ReportTable::renderHTML(): ERROR " << e.what();
+    qDebug() << "reports::ReportTable::renderHTML(): ERROR " << e.what();
 
     QString error = i18n("There was an error creating your report: \"%1\".\nPlease report this error to the developer's list: kmymoney-devel@kde.org", e.what());
 

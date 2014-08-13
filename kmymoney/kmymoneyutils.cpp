@@ -282,7 +282,7 @@ QString KMyMoneyUtils::findResource(QStandardPaths::StandardLocation type, const
   }
 
   if (rc.isEmpty()) {
-    qWarning("No resource found for (%s,%s)", type, qPrintable(filename));
+    qWarning("No resource found for (%s,%s)", qPrintable(QStandardPaths::displayName(type)), qPrintable(filename));
   }
   return rc;
 }

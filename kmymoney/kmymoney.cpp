@@ -3410,7 +3410,7 @@ void KMyMoneyApp::slotAccountDelete(void)
               // or if we have at least one sub-account that is used for transactions
               if (!file->hasOnlyUnusedAccounts(file->account(*it).accountList())) {
                 accountsToReparent.push_back(*it);
-                //kDebug() << "subaccount not empty";
+                //qDebug() << "subaccount not empty";
               }
             }
           }
@@ -4603,7 +4603,7 @@ bool KMyMoneyApp::payeeReassign(int type)
     }
     // request a list of all transactions that still use the payees in question
     QList<MyMoneyTransaction> translist = file->transactionList(f);
-//     kDebug() << "[KPayeesView::slotDeletePayee]  " << translist.count() << " transaction still assigned to payees";
+//     qDebug() << "[KPayeesView::slotDeletePayee]  " << translist.count() << " transaction still assigned to payees";
 
     // now get a list of all schedules that make use of one of the payees
     QList<MyMoneySchedule> all_schedules = file->scheduleList();
@@ -4620,7 +4620,7 @@ bool KMyMoneyApp::payeeReassign(int type)
         }
       }
     }
-//     kDebug() << "[KPayeesView::slotDeletePayee]  " << used_schedules.count() << " schedules use one of the selected payees";
+//     qDebug() << "[KPayeesView::slotDeletePayee]  " << used_schedules.count() << " schedules use one of the selected payees";
 
     // and a list of all loan accounts that references one of the payees
     QList<MyMoneyAccount> allAccounts;
@@ -4917,7 +4917,7 @@ void KMyMoneyApp::slotTagDelete(void)
     }
     // request a list of all transactions that still use the tags in question
     QList<MyMoneyTransaction> translist = file->transactionList(f);
-//     kDebug() << "[KTagsView::slotDeleteTag]  " << translist.count() << " transaction still assigned to tags";
+//     qDebug() << "[KTagsView::slotDeleteTag]  " << translist.count() << " transaction still assigned to tags";
 
     // now get a list of all schedules that make use of one of the tags
     QList<MyMoneySchedule> all_schedules = file->scheduleList();
@@ -4936,7 +4936,7 @@ void KMyMoneyApp::slotTagDelete(void)
         }
       }
     }
-//     kDebug() << "[KTagsView::slotDeleteTag]  " << used_schedules.count() << " schedules use one of the selected tags";
+//     qDebug() << "[KTagsView::slotDeleteTag]  " << used_schedules.count() << " schedules use one of the selected tags";
 
     MyMoneyTag newTag;
     // if at least one tag is still referenced, we need to reassign its transactions first

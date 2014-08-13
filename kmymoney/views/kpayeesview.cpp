@@ -299,7 +299,7 @@ void KPayeesView::slotRenamePayee(QListWidgetItem* p)
   if (m_allowEditing == false || !m_payeesList->currentItem() || p != m_payeesList->currentItem())
     return;
 
-  //kDebug() << "[KPayeesView::slotRenamePayee]";
+  //qDebug() << "[KPayeesView::slotRenamePayee]";
   // create a copy of the new name without appended whitespaces
   QString new_name = p->text();
   if (m_payee.name() != new_name) {

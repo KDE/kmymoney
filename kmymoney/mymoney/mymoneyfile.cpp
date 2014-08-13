@@ -791,7 +791,7 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
   // process all accounts in the list and test if they have transactions assigned
   for (QStringList::ConstIterator it = account_list.constBegin(); it != account_list.constEnd(); ++it) {
     MyMoneyAccount a = d->m_storage->account(*it);
-    //kDebug() << "Deleting account '"<< a.name() << "'";
+    //qDebug() << "Deleting account '"<< a.name() << "'";
 
     // first remove all sub-accounts
     if (!a.accountList().isEmpty()) {

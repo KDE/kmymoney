@@ -824,7 +824,7 @@ void PivotTable::calculateBudgetMapping(void)
     }
 
     // Dump the budget
-    //kDebug(2) << "Budget " << budget.name() << ": ";
+    //qDebug() << "Budget " << budget.name() << ": ";
 
     // Go through all accounts in the system to build the mapping
     QList<MyMoneyAccount> accounts;
@@ -840,21 +840,21 @@ void PivotTable::calculateBudgetMapping(void)
         if (budget.contains(id)) {
           // Add it to the mapping
           m_budgetMap[acid] = id;
-          // kDebug(2) << ReportAccount(acid).debugName() << " self-maps / type =" << budget.account(id).budgetLevel();
+          // qDebug() << ReportAccount(acid).debugName() << " self-maps / type =" << budget.account(id).budgetLevel();
         }
         // Otherwise, search for a parent account which includes sub-accounts
         else {
           //if includeBudgetActuals, include all accounts regardless of whether in budget or not
           if (m_config_f.isIncludingBudgetActuals()) {
             m_budgetMap[acid] = id;
-            // kDebug(2) << ReportAccount(acid).debugName() << " maps to " << ReportAccount(id).debugName();
+            // qDebug() << ReportAccount(acid).debugName() << " maps to " << ReportAccount(id).debugName();
           }
           do {
             id = file->account(id).parentAccountId();
             if (budget.contains(id)) {
               if (budget.account(id).budgetSubaccounts()) {
                 m_budgetMap[acid] = id;
-                // kDebug(2) << ReportAccount(acid).debugName() << " maps to " << ReportAccount(id).debugName();
+                // qDebug() << ReportAccount(acid).debugName() << " maps to " << ReportAccount(id).debugName();
                 break;
               }
             }

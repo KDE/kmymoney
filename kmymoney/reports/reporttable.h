@@ -26,7 +26,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KDebug>
 #include <KLocale>
 #include <KMessageBox>
 

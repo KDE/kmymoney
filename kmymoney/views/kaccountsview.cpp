@@ -407,7 +407,7 @@ void KAccountsView::slotOpenObject(QListWidgetItem* item)
       try {
         MyMoneyFile::instance()->modifyAccount(a);
       } catch (const MyMoneyException &e) {
-        kDebug(2) << "Unable to update icon pos: " << e.what();
+        qDebug() << "Unable to update icon pos: " << e.what();
       }
     }
   }

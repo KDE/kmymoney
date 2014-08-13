@@ -932,7 +932,7 @@ void KReportsView::slotOpenReport(const QString& id)
 
 void KReportsView::slotOpenReport(const MyMoneyReport& report)
 {
-  kDebug(2) << Q_FUNC_INFO << " " << report.name();
+  qDebug() << Q_FUNC_INFO << " " << report.name();
   KReportTab* page = 0;
 
   // Find the tab which contains the report indicated by this list item

@@ -29,10 +29,10 @@
 
 // ----------------------------------------------------------------------------
 // KDE Headers
+
 #include <kio/netaccess.h>
 #include <kio/scheduler.h>
 #include <klocale.h>
-#include <kdebug.h>
 #include <kapplication.h>
 #include <kconfig.h>
 #include <kcalendarsystem.h>
@@ -651,13 +651,13 @@ WebPriceQuoteProcess::WebPriceQuoteProcess(void)
 
 void WebPriceQuoteProcess::slotReceivedDataFromFilter()
 {
-//   kDebug(2) << "WebPriceQuoteProcess::slotReceivedDataFromFilter(): " << QString(data);
+//   qDebug() << "WebPriceQuoteProcess::slotReceivedDataFromFilter(): " << QString(data);
   m_string += QString(readAllStandardOutput());
 }
 
 void WebPriceQuoteProcess::slotProcessExited(int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/)
 {
-//   kDebug(2) << "WebPriceQuoteProcess::slotProcessExited()";
+//   qDebug() << "WebPriceQuoteProcess::slotProcessExited()";
   emit processExited(m_string);
   m_string.truncate(0);
 }
@@ -733,13 +733,13 @@ void FinanceQuoteProcess::slotReceivedDataFromFilter()
 {
   QByteArray data(readAllStandardOutput());
 
-//   kDebug(2) << "WebPriceQuoteProcess::slotReceivedDataFromFilter(): " << QString(data);
+//   qDebug() << "WebPriceQuoteProcess::slotReceivedDataFromFilter(): " << QString(data);
   m_string += QString(data);
 }
 
 void FinanceQuoteProcess::slotProcessExited()
 {
-//   kDebug(2) << "WebPriceQuoteProcess::slotProcessExited()";
+//   qDebug() << "WebPriceQuoteProcess::slotProcessExited()";
   m_isDone = true;
 }
 
@@ -939,7 +939,7 @@ convertertest::QuoteReceiver::~QuoteReceiver()
 
 void convertertest::QuoteReceiver::slotGetQuote(const QString&, const QString&, const QDate& d, const double& m)
 {
-//   kDebug(2) << "test::QuoteReceiver::slotGetQuote( , " << d << " , " << m.toString() << " )";
+//   qDebug() << "test::QuoteReceiver::slotGetQuote( , " << d << " , " << m.toString() << " )";
 
   m_price = MyMoneyMoney(m);
   m_date = d;
@@ -947,14 +947,14 @@ void convertertest::QuoteReceiver::slotGetQuote(const QString&, const QString&, 
 
 void convertertest::QuoteReceiver::slotStatus(const QString& msg)
 {
-//   kDebug(2) << "test::QuoteReceiver::slotStatus( " << msg << " )";
+//   qDebug() << "test::QuoteReceiver::slotStatus( " << msg << " )";
 
   m_statuses += msg;
 }
 
 void convertertest::QuoteReceiver::slotError(const QString& msg)
 {
-//   kDebug(2) << "test::QuoteReceiver::slotError( " << msg << " )";
+//   qDebug() << "test::QuoteReceiver::slotError( " << msg << " )";
 
   m_errors += msg;
 }

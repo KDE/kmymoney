@@ -24,7 +24,6 @@
 // KDE Includes
 
 #include <KLocale>
-#include <KDebug>
 
 // ----------------------------------------------------------------------------
 // Project Includes
