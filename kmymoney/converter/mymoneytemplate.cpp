@@ -32,7 +32,7 @@
 
 #include <KLocale>
 #include <KMessageBox>
-#include <KTemporaryFile>
+#include <QTemporaryFile>
 #include <kio/netaccess.h>
 
 // ----------------------------------------------------------------------------
@@ -418,7 +418,7 @@ bool MyMoneyTemplate::saveTemplate(const QUrl &url)
       throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
     }
   } else {
-    KTemporaryFile tmpfile;
+    QTemporaryFile tmpfile;
     QSaveFile qfile(tmpfile.fileName());
     if (qfile.open(QIODevice::WriteOnly)) {
       saveToLocalFile(&qfile);

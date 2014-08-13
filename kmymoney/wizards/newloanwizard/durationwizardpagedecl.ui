@@ -55,7 +55,14 @@ Please enter the term of this loan or leave the field empty to calculate it. The
           </widget>
         </item>
         <item>
-          <widget class="KIntNumInput" name="m_durationValueEdit"/>
+          <widget class="QSpinBox" name="m_durationValueEdit">
+                <property name="minimum">
+                  <number>0</number>
+                </property>
+                <property name="maximum">
+                  <number>1000</number>
+                </property>
+            </widget>
         </item>
         <item>
           <widget class="KMyMoneyGeneralCombo" name="m_durationUnitEdit"/>
@@ -240,12 +247,6 @@ Please enter the term of this loan or leave the field empty to calculate it. The
  <resources/>
  <connections/>
  <customwidgets>
-  <customwidget>
-   <class>KIntNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>KMyMoneyGeneralCombo</class>
    <extends>QWidget</extends>

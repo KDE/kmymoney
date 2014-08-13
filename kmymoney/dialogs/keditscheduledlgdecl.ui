@@ -56,7 +56,7 @@
                 </widget>
               </item>
               <item>
-                <widget class="KIntNumInput" name="m_frequencyNoEdit">
+                <widget class="QSpinBox" name="m_frequencyNoEdit">
                   <property name="maximum">
                     <number>999</number>
                   </property>
@@ -336,7 +336,7 @@
                     </widget>
                   </item>
                   <item>
-                    <widget class="KIntNumInput" name="m_RemainingEdit">
+                    <widget class="QSpinBox" name="m_RemainingEdit">
                       <property name="minimum">
                         <number>0</number>
                       </property>
@@ -446,17 +446,6 @@
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
     </customwidget>
-  <customwidget>
-   <class>KIntNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>QSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
-  </customwidget>
   <customwidget>                                                    
    <class>KMyMoneyGeneralCombo</class>                                
    <extends>QWidget</extends>                                       

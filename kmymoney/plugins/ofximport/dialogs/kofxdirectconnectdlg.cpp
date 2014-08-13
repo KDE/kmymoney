@@ -117,7 +117,7 @@ bool KOfxDirectConnectDlg::init(void)
     kDebug(0) << "Already connected, using " << m_tmpfile->fileName();
     delete m_tmpfile; //delete otherwise we mem leak
   }
-  m_tmpfile = new KTemporaryFile();
+  m_tmpfile = new QTemporaryFile();
   // for debugging purposes one might want to leave the temp file around
   // in order to achieve this, please uncomment the next line
   // m_tmpfile->setAutoRemove(false);

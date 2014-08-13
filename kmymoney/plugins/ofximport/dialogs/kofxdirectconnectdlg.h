@@ -24,7 +24,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-class KTemporaryFile;
+class QTemporaryFile;
 class KJob;
 
 namespace KIO
@@ -88,7 +88,7 @@ private:
   /// \internal d-pointer instance.
   Private* const d;
 
-  KTemporaryFile* m_tmpfile;
+  QTemporaryFile* m_tmpfile;
   MyMoneyOfxConnector m_connector;
   KIO::TransferJob* m_job;
 };

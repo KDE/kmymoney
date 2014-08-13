@@ -35,6 +35,7 @@
 #include <QPushButton>
 #include <QSaveFile>
 #include <QIcon>
+#include <QTemporaryFile>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -44,7 +45,6 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kio/netaccess.h>
-#include <ktemporaryfile.h>
 #include <kfilterdev.h>
 #include <kfilterbase.h>
 #include <kfileitem.h>
@@ -1256,7 +1256,7 @@ bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
         throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
       }
     } else {
-      KTemporaryFile tmpfile;
+      QTemporaryFile tmpfile;
       tmpfile.open(); // to obtain the name
       saveToLocalFile(tmpfile.fileName(), pWriter, plaintext, keyList);
       if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))

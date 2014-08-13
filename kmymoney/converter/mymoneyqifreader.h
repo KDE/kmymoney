@@ -32,11 +32,11 @@
 #include <QStringList>
 #include <QByteArray>
 #include <QUrl>
+#include <QFile>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <ktemporaryfile.h>
 #include <kprocess.h>
 
 // ----------------------------------------------------------------------------

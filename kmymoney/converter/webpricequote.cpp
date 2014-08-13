@@ -36,7 +36,6 @@
 #include <kapplication.h>
 #include <kconfig.h>
 #include <kcalendarsystem.h>
-#include <ktemporaryfile.h>
 #include <kshell.h>
 #include <KConfigGroup>
 #include <kprocess.h>

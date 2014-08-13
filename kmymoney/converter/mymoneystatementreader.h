@@ -28,8 +28,6 @@
 #include <QString>
 #include <QStringList>
 
-#include <ktemporaryfile.h>
-
 #include "mymoneyqifprofile.h"
 #include "mymoneyaccount.h"
 #include "mymoneystatement.h"
