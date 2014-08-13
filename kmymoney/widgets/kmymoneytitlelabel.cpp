@@ -27,11 +27,11 @@
 #include <QResizeEvent>
 #include <QLabel>
 #include <QStandardPaths>
+#include <QFontDatabase>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobalsettings.h>
 #include <KColorScheme>
 
 // ----------------------------------------------------------------------------
@@ -42,7 +42,7 @@ KMyMoneyTitleLabel::KMyMoneyTitleLabel(QWidget *parent) :
 {
   m_bgColor = KColorScheme(isEnabled() ? QPalette::Active : QPalette::Inactive, KColorScheme::Selection).background(KColorScheme::NormalBackground).color();
 
-  setFont(KGlobalSettings::windowTitleFont());
+  setFont(QFontDatabase::systemFont(QFontDatabase::TitleFont));
 }
 
 KMyMoneyTitleLabel::~KMyMoneyTitleLabel()

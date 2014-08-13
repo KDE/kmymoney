@@ -22,12 +22,12 @@
 #include <QLabel>
 #include <QFrame>
 #include <QStandardItemModel>
+#include <QFontDatabase>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <kcolorscheme.h>
 #include <klocale.h>
-#include <kglobalsettings.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -201,7 +201,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     xAxis->setPosition(CartesianAxis::Bottom);
     xAxis->setTitleText(i18n("Time"));
     TextAttributes xAxisTitleTextAttr(xAxis->titleTextAttributes());
-    xAxisTitleTextAttr.setMinimalFontSize(KGlobalSettings::generalFont().pointSize());
+    xAxisTitleTextAttr.setMinimalFontSize(QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize());
     xAxisTitleTextAttr.setPen(m_foregroundBrush.color());
     xAxis->setTitleTextAttributes(xAxisTitleTextAttr);
     TextAttributes xAxisTextAttr(xAxis->textAttributes());
@@ -236,7 +236,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     }
 
     TextAttributes yAxisTitleTextAttr(yAxis->titleTextAttributes());
-    yAxisTitleTextAttr.setMinimalFontSize(KGlobalSettings::generalFont().pointSize());
+    yAxisTitleTextAttr.setMinimalFontSize(QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize());
     yAxisTitleTextAttr.setPen(m_foregroundBrush.color());
     yAxis->setTitleTextAttributes(yAxisTitleTextAttr);
     TextAttributes yAxisTextAttr(yAxis->textAttributes());
@@ -451,13 +451,13 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   }
   legend->setPosition(Position::East);
   TextAttributes legendTextAttr(legend->textAttributes());
-  legendTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize() + 2);
+  legendTextAttr.setFontSize(QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize() + 2);
   legendTextAttr.setAutoShrink(true);
   legendTextAttr.setPen(m_foregroundBrush.color());
   legend->setTextAttributes(legendTextAttr);
 
   TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
-  legendTitleTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize() + 4);
+  legendTitleTextAttr.setFontSize(QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize() + 4);
   legendTitleTextAttr.setAutoShrink(true);
   legendTitleTextAttr.setPen(m_foregroundBrush.color());
   legend->setTitleTextAttributes(legendTitleTextAttr);

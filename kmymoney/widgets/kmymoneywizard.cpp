@@ -35,7 +35,6 @@
 
 #include <klocale.h>
 #include <kstandardguiitem.h>
-#include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <kapplication.h>
 #include <KColorScheme>
@@ -130,7 +129,7 @@ KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
   m_finishButton = new QPushButton(i18nc("Finish the wizard", "&Finish"), this);
   m_helpButton = new QPushButton(i18n("&Help"), this);
 
-  if (KGlobalSettings::showIconsOnPushButtons()) {
+  if (style()->styleHint(QStyle::SH_DialogButtonBox_ButtonsHaveIcons, 0, this)) {
     m_backButton->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
     m_nextButton->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
     m_finishButton->setIcon(QIcon::fromTheme("dialog-ok-apply"));

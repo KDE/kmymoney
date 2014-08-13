@@ -35,7 +35,6 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kconfiggroup.h>
-#include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kfiledialog.h>
@@ -73,7 +72,7 @@ KBackupDlg::~KBackupDlg()
 
 void KBackupDlg::chooseButtonClicked()
 {
-  QUrl newDir = KFileDialog::getExistingDirectoryUrl(QUrl::fromLocalFile(KGlobalSettings::documentPath()));
+  QUrl newDir = KFileDialog::getExistingDirectoryUrl(QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)));
   if (!newDir.path().isEmpty())
     txtMountPoint->setText(newDir.path());
 }

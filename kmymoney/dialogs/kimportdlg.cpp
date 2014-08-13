@@ -32,7 +32,6 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kglobalsettings.h>
 #include <kcombobox.h>
 #include <kmessagebox.h>
 #include <kfiledialog.h>

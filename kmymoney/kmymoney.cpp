@@ -86,7 +86,6 @@
 #include <kinputdialog.h>
 #include <kxmlguifactory.h>
 #include <krecentfilesaction.h>
-#include <kglobalsettings.h>
 #include <kaction.h>
 #include <ktoolinvocation.h>
 #include <KSharedConfig>
@@ -2069,7 +2068,7 @@ void KMyMoneyApp::slotSaveAccountTemplates(void)
 {
   KMSTATUS(i18n("Exporting account templates."));
 
-  QString newName = KFileDialog::getSaveFileName(KGlobalSettings::documentPath(),
+  QString newName = KFileDialog::getSaveFileName(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
                     i18n("*.kmt|KMyMoney template files\n"
                          "*|All files"), this, i18n("Save as..."));
   //
@@ -6850,10 +6849,10 @@ QString KMyMoneyApp::readLastUsedDir(void) const
     KConfigGroup grp = d->m_config->group("General Options");
 
     //read path entry.  Second parameter is the default if the setting is not found, which will be the default document path.
-    str = grp.readEntry("LastUsedDirectory", KGlobalSettings::documentPath());
+    str = grp.readEntry("LastUsedDirectory", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
     // if the path stored is empty, we use the default nevertheless
     if (str.isEmpty())
-      str = KGlobalSettings::documentPath();
+      str = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
   }
 
   return str;

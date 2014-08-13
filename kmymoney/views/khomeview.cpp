@@ -49,7 +49,6 @@
 #include <kapplication.h>
 #include <kmessagebox.h>
 #include <kcodecs.h>
-#include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <ktoolinvocation.h>
 #include <KToggleAction>

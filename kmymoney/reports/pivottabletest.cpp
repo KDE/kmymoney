@@ -21,7 +21,6 @@
 #include <QFile>
 
 #include <kdeversion.h>
-#include <kglobalsettings.h>
 #include <klocale.h>
 
 #include <qtest_kde.h>

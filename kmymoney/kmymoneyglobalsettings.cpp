@@ -20,11 +20,11 @@
 // QT Includes
 
 #include <QRegExp>
+#include <QFontDatabase>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KGlobalSettings>
 #include <KColorScheme>
 #include <kdeversion.h>
 
@@ -36,7 +36,7 @@
 QFont KMyMoneyGlobalSettings::listCellFont(void)
 {
   if (useSystemFont()) {
-    return KGlobalSettings::generalFont();
+    return QFontDatabase::systemFont(QFontDatabase::GeneralFont);
   } else {
     return KMyMoneySettings::listCellFont();
   }
@@ -45,7 +45,7 @@ QFont KMyMoneyGlobalSettings::listCellFont(void)
 QFont KMyMoneyGlobalSettings::listHeaderFont(void)
 {
   if (useSystemFont()) {
-    QFont font = KGlobalSettings::generalFont();
+    QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
     font.setBold(true);
     return font;
   } else {

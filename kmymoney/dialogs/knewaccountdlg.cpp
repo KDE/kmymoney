@@ -41,7 +41,6 @@
 #include <kcombobox.h>
 #include <kiconloader.h>
 #include <kled.h>
-#include <kglobalsettings.h>
 #include <kguiutils.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>

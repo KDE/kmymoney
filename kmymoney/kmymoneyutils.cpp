@@ -40,7 +40,6 @@
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
-#include <KGlobalSettings>
 #include <KColorScheme>
 // ----------------------------------------------------------------------------
 // Project Includes

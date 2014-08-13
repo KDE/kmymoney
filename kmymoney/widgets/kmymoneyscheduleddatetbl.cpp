@@ -57,7 +57,6 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kglobalsettings.h>
 #include <kcolorscheme.h>
 #include <klocale.h>
 
@@ -83,7 +82,7 @@ void kMyMoneyScheduledDateTbl::drawCellContents(QPainter* painter, const QStyleO
   Q_UNUSED(index)
   QString text;
   QPen pen;
-  QFont font = KGlobalSettings::generalFont();
+  QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
   MyMoneyFile *file = MyMoneyFile::instance();
 
   const QStyle *style = QApplication::style();

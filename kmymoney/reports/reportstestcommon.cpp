@@ -22,7 +22,6 @@
 #include <QTextStream>
 
 #include <kdeversion.h>
-#include <kglobalsettings.h>
 #include <klocale.h>
 
 

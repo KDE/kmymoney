@@ -62,6 +62,7 @@
 #include <QIntValidator>
 #include <QMenu>
 #include <QDebug>
+#include <QFontDatabase>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -72,8 +73,6 @@
 #include <klineedit.h>
 #include <knotification.h>
 //#include <kdatetable.h> // for maximum re-use
-#include <kglobalsettings.h>
-
 #include <kcalendarsystem.h>
 
 // ----------------------------------------------------------------------------
@@ -93,7 +92,7 @@ KDatePickerPrivateYearSelector::KDatePickerPrivateYearSelector(
   oldDate = currentDate;
 
   QFont font;
-  font = KGlobalSettings::generalFont();
+  font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
   setFont(font);
 
   setFrame(false);
@@ -145,7 +144,7 @@ KDatePickerPrivateWeekSelector::KDatePickerPrivateWeekSelector(
   oldDate = currentDate;
 
   QFont font;
-  font = KGlobalSettings::generalFont();
+  font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
   setFont(font);
 
   setFrame(false);

@@ -59,12 +59,12 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 #include <QEvent>
 #include <QHeaderView>
 #include <QDebug>
+#include <QFontDatabase>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 //#include <kdatetable.h> // Use the classes available for maximum re-use
-#include <kglobalsettings.h>
 #include <kapplication.h>
 #include <klocale.h>
 #include <knotification.h>
@@ -90,7 +90,7 @@ void KMyMoneyDateTbDelegate::paint(QPainter *painter, const QStyleOptionViewItem
   initStyleOption(&opt, index);
   const QStyle *style = QApplication::style();
 
-  QFont font = KGlobalSettings::generalFont();
+  QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
   font.setPointSize(m_parent->fontsize);
 
   int firstWeekDay = KLocale::global()->weekStartDay();
