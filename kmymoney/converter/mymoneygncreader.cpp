@@ -30,11 +30,11 @@ email                : mte@users.sourceforge.net
 #include <QDateTime>
 #include <QUrl>
 #include <QIcon>
+#include <QInputDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <kfiledialog.h>
-#include <kinputdialog.h>
 #ifndef _GNCFILEANON
 #include <klocale.h>
 #include <kconfig.h>
@@ -1337,7 +1337,7 @@ void MyMoneyGncReader::setFileHideFactor()
   srand(QTime::currentTime().second());  // seed randomizer for anonymize
   m_fileHideFactor = 0.0;
   while (m_fileHideFactor == 0.0) {
-    m_fileHideFactor = KInputDialog::getDouble(
+    m_fileHideFactor = QInputDialog::getDouble(0,
                          i18n("Disguise your wealth"),
                          i18n("Each monetary value on your file will be multiplied by a random number between 0.01 and 1.99\n"
                               "with a different value used for each transaction. In addition, to further disguise the true\n"
@@ -2453,9 +2453,9 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
     if (singleInvAccId.isEmpty()) { // if the account has not yet been created
       QString invAccName;
       while (!ok) {
-        invAccName = KInputDialog::getText(PACKAGE,
+        invAccName = QInputDialog::getText(0, QStringLiteral(PACKAGE),
                                            i18n("Enter the investment account name "),
-                                           i18n("My Investments"), &ok);
+                                           QLineEdit::Normal, i18n("My Investments"), &ok);
       }
       singleInvAcc.setName(invAccName);
       singleInvAcc.setAccountType(MyMoneyAccount::Investment);
@@ -2490,7 +2490,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
     //if (accList.isEmpty()) qWarning ("No available accounts");
     bool ok = false;
     while (!ok) { // keep going till we have a valid investment parent
-      QString invAccName = KInputDialog::getItem(
+      QString invAccName = QInputDialog::getItem(0,
                              PACKAGE,
                              i18n("Select parent investment account or enter new name. Stock %1", stockAcc.name()),
                              accList,

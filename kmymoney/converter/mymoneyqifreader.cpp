@@ -32,6 +32,7 @@
 #include <QRegExp>
 #include <QBuffer>
 #include <QByteArray>
+#include <QInputDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -40,7 +41,6 @@
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <kprogressdialog.h>
-#include <kinputdialog.h>
 #include <kio/netaccess.h>
 #include <KConfigGroup>
 #include <KSharedConfig>
@@ -354,20 +354,19 @@ void MyMoneyQifReader::slotProcessData(void)
   // decide which one to pick.
   QStringList dateFormats;
   m_qifProfile.possibleDateFormats(dateFormats);
-  QStringList list;
+  QString format;
   if (dateFormats.count() > 1) {
-    list << dateFormats.first();
     bool ok;
-    list = KInputDialog::getItemList(i18n("Date format selection"), i18n("Pick the date format that suits your input file"), dateFormats, list, false, &ok);
+    format = QInputDialog::getItem(0, i18n("Date format selection"), i18n("Pick the date format that suits your input file"), dateFormats, 05, false, &ok);
     if (!ok) {
       m_userAbort = true;
     }
   } else
-    list = dateFormats;
+    format = dateFormats.first();
 
-  if (!list.empty()) {
-    m_qifProfile.setInputDateFormat(list.first());
-    qDebug("Selected date format: '%s'", qPrintable(list.first()));
+  if (!format.isEmpty()) {
+    m_qifProfile.setInputDateFormat(format);
+    qDebug("Selected date format: '%s'", qPrintable(format));
   } else {
     // cancel the process because there is probably nothing to work with
     m_userAbort = true;

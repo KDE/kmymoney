@@ -60,6 +60,7 @@
 #include <QUrl>
 #include <QKeySequence>
 #include <QIcon>
+#include <QInputDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -83,7 +84,6 @@
 #include <kstartupinfo.h>
 #include <krun.h>
 #include <kconfigdialog.h>
-#include <kinputdialog.h>
 #include <kxmlguifactory.h>
 #include <krecentfilesaction.h>
 #include <kaction.h>
@@ -5038,7 +5038,7 @@ void KMyMoneyApp::slotTagDelete(void)
 
 void KMyMoneyApp::slotCurrencyNew(void)
 {
-  QString sid = KInputDialog::getText(i18n("New currency"), i18n("Enter ISO 4217 code for the new currency"), QString(), 0, 0, 0, 0, ">AAA");
+  QString sid = QInputDialog::getText(0, i18n("New currency"), i18n("Enter ISO 4217 code for the new currency"));
   if (!sid.isEmpty()) {
     QString id(sid);
     MyMoneySecurity currency(id, i18n("New currency"));
@@ -5202,7 +5202,7 @@ void KMyMoneyApp::slotBudgetChangeYear(void)
       current = 0;
     bool ok = false;
 
-    QString yearString = KInputDialog::getItem(i18n("Select year"), i18n("Budget year"), years, current, false, &ok, this);
+    QString yearString = QInputDialog::getItem(this, i18n("Select year"), i18n("Budget year"), years, current, false, &ok);
 
     if (ok) {
       int year = yearString.toInt(0, 0);

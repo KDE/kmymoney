@@ -25,6 +25,7 @@
 #include <QListWidget>
 #include <QTabWidget>
 #include <QIcon>
+#include <QInputDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,7 +39,6 @@
 #include <kurlrequester.h>
 #include <kiconloader.h>
 #include <kapplication.h>
-#include <kinputdialog.h>
 #include <khelpclient.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
@@ -402,15 +402,13 @@ void MyMoneyQifProfileEditor::slotNew(void)
 
 const QString MyMoneyQifProfileEditor::enterName(bool& ok)
 {
-  MyMoneyQifProfileNameValidator val(this);
-  return KInputDialog::getText(i18n("QIF Profile Editor"),
+  // TODO: port KF5 use the validator
+  //MyMoneyQifProfileNameValidator val(this);
+  return QInputDialog::getText(this, i18n("QIF Profile Editor"),
                                i18n("Enter new profile name"),
+                               QLineEdit::Normal,
                                QString(),
-                               &ok,
-                               this,
-
-                               &val,
-                               0);
+                               &ok);
 }
 
 void MyMoneyQifProfileEditor::slotDelete(void)
