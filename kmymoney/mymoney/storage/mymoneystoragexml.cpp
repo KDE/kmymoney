@@ -31,7 +31,6 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <kdebug.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -302,12 +301,12 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           m_reader->signalProgress(++m_elementCount, 0);
         } else {
           m_errMsg = i18n("Unknown XML tag %1 found in line %2", qName, m_loc->lineNumber());
-          kWarning() << m_errMsg;
+          qWarning() << m_errMsg;
           rc = false;
         }
       } catch (const MyMoneyException &e) {
         m_errMsg = i18n("Exception while creating a %1 element: %2", s, e.what());
-        kWarning() << m_errMsg;
+        qWarning() << m_errMsg;
         rc = false;
       }
       m_doc = QDomDocument();
