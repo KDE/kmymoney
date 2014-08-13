@@ -342,7 +342,7 @@ Set it to 0 to turn the feature off.</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_7">
        <item>
-        <widget class="KButtonGroup" name="kcfg_StartLastViewSelected">
+        <widget class="QGroupBox" name="kcfg_StartLastViewSelected">
          <property name="title">
           <string>Startup page options</string>
          </property>
@@ -368,7 +368,7 @@ Set it to 0 to turn the feature off.</string>
         </widget>
        </item>
        <item>
-        <widget class="KButtonGroup" name="kcfg_viewType">
+        <widget class="QGroupBox" name="kcfg_viewType">
          <property name="title">
           <string>Type of the KMyMoney view</string>
          </property>
@@ -587,12 +587,6 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
    <class>QSpinBox</class>
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KButtonGroup</class>
-   <extends>QGroupBox</extends>
-   <header>kbuttongroup.h</header>
-   <container>1</container>
   </customwidget>
   <customwidget>
    <class>KLineEdit</class>
