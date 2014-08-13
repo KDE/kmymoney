@@ -50,7 +50,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="KListWidget" name="m_listFi"/>
+           <widget class="QListWidget" name="m_listFi"/>
           </item>
          </layout>
         </widget>
@@ -372,7 +372,7 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KListWidget</class>
+   <class>QListWidget</class>
    <extends>QListWidget</extends>
    <header>klistwidget.h</header>
   </customwidget>

@@ -75,7 +75,7 @@
          </property>
          <layout class="QVBoxLayout" name="m_assetsListLayout">
           <item>
-           <widget class="KListWidget" name="m_assetsList">
+           <widget class="QListWidget" name="m_assetsList">
             <property name="dragDropMode">
              <enum>QAbstractItemView::InternalMove</enum>
             </property>
@@ -94,7 +94,7 @@
          </property>
          <layout class="QVBoxLayout" name="m_liabilitiesListLayout">
           <item>
-           <widget class="KListWidget" name="m_liabilitiesList">
+           <widget class="QListWidget" name="m_liabilitiesList">
             <property name="dragDropMode">
              <enum>QAbstractItemView::InternalMove</enum>
             </property>
@@ -113,7 +113,7 @@
          </property>
          <layout class="QVBoxLayout" name="m_equitiesListLayout">
           <item>
-           <widget class="KListWidget" name="m_equitiesList">
+           <widget class="QListWidget" name="m_equitiesList">
             <property name="dragDropMode">
              <enum>QAbstractItemView::InternalMove</enum>
             </property>
@@ -191,7 +191,7 @@
    <header>kmymoneyaccounttreeview.h</header>
   </customwidget>
   <customwidget>
-   <class>KListWidget</class>
+   <class>QListWidget</class>
    <extends>QListWidget</extends>
    <header>klistwidget.h</header>
   </customwidget>

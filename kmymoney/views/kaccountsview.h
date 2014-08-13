@@ -20,10 +20,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QListWidget>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KListWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -97,7 +97,7 @@ protected:
     * This method loads all the subaccounts recursively of a given root account
     *
     */
-  void loadAccountIconsIntoList(const MyMoneyAccount& parentAccount, KListWidget* listWidget);
+  void loadAccountIconsIntoList(const MyMoneyAccount& parentAccount, QListWidget* listWidget);
 
   /**
     * This method returns a pointer to the currently selected
@@ -119,7 +119,7 @@ protected slots:
   void slotOpenObject(QListWidgetItem* item);
   void slotExpandCollapse(void);
   void slotUnusedIncomeExpenseAccountHidden(void);
-  void slotReconcileAccount(KListWidget* list, const MyMoneyAccount& acc);
+  void slotReconcileAccount(QListWidget* list, const MyMoneyAccount& acc);
 
 signals:
   /**

@@ -22,11 +22,12 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QListWidgetItem>
+#include <QListWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <KListWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -47,7 +48,7 @@ public slots:
   void toggleDirection(QListWidgetItem * item);
 
 protected:
-  QListWidgetItem * addEntry(KListWidget * p, QListWidgetItem * after, int idx);
+  QListWidgetItem * addEntry(QListWidget * p, QListWidgetItem * after, int idx);
   void setDirectionIcon(QListWidgetItem* item);
 protected slots:
   void slotAvailableSelected(void);

@@ -24,7 +24,7 @@
     </property>
     <layout class="QVBoxLayout">
       <item>
-        <widget class="KListWidget" name="m_quoteSourceList">
+        <widget class="QListWidget" name="m_quoteSourceList">
           <property name="sizePolicy">
             <sizepolicy>
               <hsizetype>7</hsizetype>
@@ -211,7 +211,7 @@
   <layoutdefault spacing="6" margin="11"/>
     <customwidgets>
     <customwidget>
-      <class>KListWidget</class>
+      <class>QListWidget</class>
       <extends>QListWidget</extends>
       <header location="global">klistwidget.h</header>
     </customwidget>

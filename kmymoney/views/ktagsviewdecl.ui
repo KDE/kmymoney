@@ -71,7 +71,7 @@
           </layout>
          </item>
          <item>
-          <widget class="KListWidget" name="m_tagsList">
+          <widget class="QListWidget" name="m_tagsList">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
              <horstretch>1</horstretch>
@@ -334,7 +334,7 @@
    <header>ktextedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KListWidget</class>
+   <class>QListWidget</class>
    <extends>QListWidget</extends>
    <header>klistwidget.h</header>
   </customwidget>

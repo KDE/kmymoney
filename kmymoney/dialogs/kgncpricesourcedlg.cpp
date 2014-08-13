@@ -22,6 +22,7 @@
 #include <QLayout>
 #include <QApplication>
 #include <QButtonGroup>
+#include <QListWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,7 +30,6 @@
 #include <kurlrequester.h>
 #include <ktextbrowser.h>
 #include <klocale.h>
-#include <klistwidget.h>
 #include <khelpclient.h>
 
 // ----------------------------------------------------------------------------

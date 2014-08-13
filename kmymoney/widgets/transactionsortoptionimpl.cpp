@@ -140,7 +140,7 @@ void TransactionSortOption::setSettings(const QString& settings)
   slotAvailableSelected();
 }
 
-QListWidgetItem* TransactionSortOption::addEntry(KListWidget* p, QListWidgetItem* after, int idx)
+QListWidgetItem* TransactionSortOption::addEntry(QListWidget* p, QListWidgetItem* after, int idx)
 {
   QString txt = KMyMoneyRegister::sortOrderToText(static_cast<KMyMoneyRegister::TransactionSortField>(abs(idx)));
   if (txt.isEmpty())

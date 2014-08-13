@@ -28,11 +28,11 @@
 #include <QList>
 #include <QPushButton>
 #include <QIcon>
+#include <QListWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KListWidget>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kglobal.h>
@@ -286,7 +286,7 @@ void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate&
 
 }
 
-void KAccountsView::slotReconcileAccount(KListWidget* list, const MyMoneyAccount& acc)
+void KAccountsView::slotReconcileAccount(QListWidget* list, const MyMoneyAccount& acc)
 {
   //scan all the items in the list and set the flag
   for (int i = 0; i < list->count(); ++i) {
@@ -440,7 +440,7 @@ void KAccountsView::loadIconGroups()
   }
 }
 
-void KAccountsView::loadAccountIconsIntoList(const MyMoneyAccount& parentAccount, KListWidget* listWidget)
+void KAccountsView::loadAccountIconsIntoList(const MyMoneyAccount& parentAccount, QListWidget* listWidget)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()

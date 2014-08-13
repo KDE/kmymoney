@@ -17,7 +17,7 @@
       <item>
         <layout class="QVBoxLayout">
           <item>
-            <widget class="KListWidget" name="m_availableList">
+            <widget class="QListWidget" name="m_availableList">
               <column>
                 <property name="text">
                   <string>Sort options</string>
@@ -86,7 +86,7 @@
       <item>
         <layout class="QVBoxLayout">
           <item>
-            <widget class="KListWidget" name="m_selectedList">
+            <widget class="QListWidget" name="m_selectedList">
               <column>
                 <property name="text">
                   <string>Sort order</string>
@@ -157,7 +157,7 @@
   <layoutdefault spacing="6" margin="11"/>
   <customwidgets>
     <customwidget>
-      <class>KListWidget</class>
+      <class>QListWidget</class>
       <extends>QListWidget</extends>
       <header location="global">klistwidget.h</header>
     </customwidget>

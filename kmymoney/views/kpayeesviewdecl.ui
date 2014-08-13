@@ -78,7 +78,7 @@
           </layout>
          </item>
          <item>
-          <widget class="KListWidget" name="m_payeesList">
+          <widget class="QListWidget" name="m_payeesList">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
              <horstretch>1</horstretch>
@@ -573,7 +573,7 @@ new transactions with this payee</string>
    <header>ktextedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KListWidget</class>
+   <class>QListWidget</class>
    <extends>QListWidget</extends>
    <header>klistwidget.h</header>
   </customwidget>

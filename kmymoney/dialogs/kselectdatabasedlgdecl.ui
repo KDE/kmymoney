@@ -188,7 +188,7 @@ As always, please make sure you have adequate backups of your data.</string>
       <property name="title">
        <string>Database Type</string>
       </property>
-      <widget class="KListWidget" name="listDrivers">
+      <widget class="QListWidget" name="listDrivers">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -306,7 +306,7 @@ As always, please make sure you have adequate backups of your data.</string>
    <header>kurlrequester.h</header>
   </customwidget>
   <customwidget>
-   <class>KListWidget</class>
+   <class>QListWidget</class>
    <extends>QListWidget</extends>
    <header>klistwidget.h</header>
   </customwidget>

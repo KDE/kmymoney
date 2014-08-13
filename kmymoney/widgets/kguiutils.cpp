@@ -26,11 +26,11 @@
 #include <QWidget>
 #include <QSpinBox>
 #include <QApplication>
+#include <QListWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klistwidget.h>
 #include <kcombobox.h>
 #include <klineedit.h>
 #include <kurlrequester.h>
@@ -92,8 +92,8 @@ void kMandatoryFieldGroup::add(QWidget *widget)
               SIGNAL(valueChanged(QString)),
               this, SLOT(changed()));
 
-    else if (qobject_cast<KListWidget*>(widget))
-      connect(qobject_cast<KListWidget*>(widget),
+    else if (qobject_cast<QListWidget*>(widget))
+      connect(qobject_cast<QListWidget*>(widget),
               SIGNAL(itemSelectionChanged()),
               this, SLOT(changed()));
 
@@ -168,8 +168,8 @@ void kMandatoryFieldGroup::changed(void)
       } else
         continue;
     }
-    if ((qobject_cast<KListWidget*>(widget))) {
-      if ((qobject_cast<KListWidget*>(widget))->selectedItems().count() == 0) {
+    if ((qobject_cast<QListWidget*>(widget))) {
+      if ((qobject_cast<QListWidget*>(widget))->selectedItems().count() == 0) {
         enable = false;
         break;
       } else

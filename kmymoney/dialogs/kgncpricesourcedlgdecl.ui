@@ -77,7 +77,7 @@
        </widget>
       </item>
       <item>
-       <widget class="KListWidget" name="listKnownSource"/>
+       <widget class="QListWidget" name="listKnownSource"/>
       </item>
       <item>
        <widget class="QRadioButton" name="buttonUserSource">
@@ -108,7 +108,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KListWidget</class>
+   <class>QListWidget</class>
    <extends>QListWidget</extends>
    <header>klistwidget.h</header>
   </customwidget>

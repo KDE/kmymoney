@@ -32,12 +32,12 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QTabWidget>
+#include <QListWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KHTMLPart>
-#include <KListWidget>
 #include <kfilefiltercombo.h>
 
 // ----------------------------------------------------------------------------
@@ -163,7 +163,7 @@ private:
 
   bool m_needReload;
 
-  KListWidget* m_reportListView;
+  QListWidget* m_reportListView;
   QTabWidget* m_reportTabWidget;
   QWidget* m_listTab;
   QVBoxLayout* m_listTabLayout;
