@@ -70,7 +70,6 @@
 #include <klocale.h>
 #include <kiconloader.h>
 #include <klineedit.h>
-#include <kdebug.h>
 #include <knotification.h>
 //#include <kdatetable.h> // for maximum re-use
 #include <kglobalsettings.h>
@@ -376,7 +375,7 @@ kMyMoneyCalendar::resizeEvent(QResizeEvent*)
 void
 kMyMoneyCalendar::dateChangedSlot(const QDate& date)
 {
-  kDebug() << "kMyMoneyCalendar::dateChangedSlot: date changed (" << date.year() << "/" << date.month() << "/" << date.day() << ").";
+  qDebug() << "kMyMoneyCalendar::dateChangedSlot: date changed (" << date.year() << "/" << date.month() << "/" << date.day() << ").";
   line->setText(KLocale::global()->formatDate(date, KLocale::ShortDate));
   d->selectWeek->setText(i18n("Week %1", weekOfYear(date)));
   selectMonth->setText(MONTH_NAME(date.month(), date.year(), KCalendarSystem::ShortName));
@@ -387,7 +386,7 @@ kMyMoneyCalendar::dateChangedSlot(const QDate& date)
 void
 kMyMoneyCalendar::tableClickedSlot()
 {
-  kDebug() << "kMyMoneyCalendar::tableClickedSlot: table clicked.";
+  qDebug() << "kMyMoneyCalendar::tableClickedSlot: table clicked.";
   emit(dateSelected(table->getDate()));
   emit(tableClicked());
 }
@@ -421,7 +420,7 @@ kMyMoneyCalendar::setDate(const QDate& date)
     line->setText(KLocale::global()->formatDate(date, KLocale::ShortDate));
     return true;
   } else {
-    kDebug() << "kMyMoneyCalendar::setDate: refusing to set invalid date.";
+    qDebug() << "kMyMoneyCalendar::setDate: refusing to set invalid date.";
     return false;
   }
 }

@@ -21,7 +21,6 @@
 #include <QFile>
 #include <QTextStream>
 
-#include <kdebug.h>
 #include <kdeversion.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>

@@ -64,7 +64,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kdebug.h>
 #include <kapplication.h>
 #include <ktoolbar.h>
 #include <kiconloader.h>
@@ -3512,7 +3511,7 @@ void KMyMoneyApp::slotAccountEdit(void)
                 dlg->setOpeningBalance(-s0.shares());
               }
             } catch (const MyMoneyException &e) {
-              kDebug(2) << "Error retrieving opening balance transaction " << tid << ": " << e.what() << "\n";
+              qDebug() << "Error retrieving opening balance transaction " << tid << ": " << e.what() << "\n";
               tid.clear();
             }
           }

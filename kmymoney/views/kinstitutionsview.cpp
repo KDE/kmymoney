@@ -27,7 +27,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kdebug.h>
 #include <klocale.h>
 
 #include <KToggleAction>

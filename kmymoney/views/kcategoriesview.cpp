@@ -35,7 +35,6 @@
 // KDE Includes
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <KToggleAction>

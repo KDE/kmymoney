@@ -40,7 +40,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
-#include <kdebug.h>
 #include <kdialog.h>
 
 // ----------------------------------------------------------------------------
@@ -553,12 +552,12 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
     try {
       file->addSecurity(security);
       ft.commit();
-      kDebug(0) << "Created " << security.name() << " with id " << security.id();
+      qDebug() << "Created " << security.name() << " with id " << security.id();
     } catch (const MyMoneyException &e) {
       KMessageBox::error(0, i18n("Error creating security record: %1", e.what()), i18n("Error"));
     }
   } else {
-    kDebug(0) << "Found " << security.name() << " with id " << security.id();
+    qDebug() << "Found " << security.name() << " with id " << security.id();
   }
 }
 
@@ -686,7 +685,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             thisaccount.setCurrencyId(security.id());
 
             file->addAccount(thisaccount, m_account);
-            kDebug(0) << Q_FUNC_INFO << ": created account " << thisaccount.id() << " for security " << statementTransactionUnderImport.m_strSecurity << " under account " << m_account.id();
+            qDebug() << Q_FUNC_INFO << ": created account " << thisaccount.id() << " for security " << statementTransactionUnderImport.m_strSecurity << " under account " << m_account.id();
           }
           // this security does not exist in the file.
           else {

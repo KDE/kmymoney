@@ -43,7 +43,6 @@
 
 #include <kiconloader.h>
 #include <kled.h>
-#include <kdebug.h>
 #include <kglobalsettings.h>
 #include <kguiutils.h>
 #include <KGuiItem>

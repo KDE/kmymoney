@@ -39,7 +39,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
-#include <kdebug.h>
 #include <kprogressdialog.h>
 #include <kinputdialog.h>
 #include <kio/netaccess.h>
@@ -663,7 +662,7 @@ void MyMoneyQifReader::processQifEntry(void)
         break;
 
       case EntryUnknown:
-        kDebug(2) << "Line " << m_linenumber << ": Warning: Found an entry without a type being specified. Checking assumed.";
+        qDebug() << "Line " << m_linenumber << ": Warning: Found an entry without a type being specified. Checking assumed.";
         processTransactionEntry();
         break;
 
@@ -692,23 +691,23 @@ void MyMoneyQifReader::processQifEntry(void)
         break;
 
       case EntryClass:
-        kDebug(2) << "Line " << m_linenumber << ": Classes are not yet supported!";
+        qDebug() << "Line " << m_linenumber << ": Classes are not yet supported!";
         break;
 
       case EntryMemorizedTransaction:
-        kDebug(2) << "Line " << m_linenumber << ": Memorized transactions are not yet implemented!";
+        qDebug() << "Line " << m_linenumber << ": Memorized transactions are not yet implemented!";
         break;
 
       case EntrySkip:
         break;
 
       default:
-        kDebug(2) << "Line " << m_linenumber << ": EntryType " << m_entryType << " not yet implemented!";
+        qDebug() << "Line " << m_linenumber << ": EntryType " << m_entryType << " not yet implemented!";
         break;
     }
   } catch (const MyMoneyException &e) {
     if (e.what() != "USERABORT") {
-      kDebug(2) << "Line " << m_linenumber << ": Unhandled error: " << e.what();
+      qDebug() << "Line " << m_linenumber << ": Unhandled error: " << e.what();
     } else {
       m_userAbort = true;
     }
@@ -1184,16 +1183,16 @@ void MyMoneyQifReader::processTransactionEntry(void)
         // FIXME: check that the type matches and ask if not
 
         if (account.accountType() == MyMoneyAccount::Investment) {
-          kDebug(0) << "Line " << m_linenumber << ": Cannot transfer to/from an investment account. Transaction ignored.";
+          qDebug() << "Line " << m_linenumber << ": Cannot transfer to/from an investment account. Transaction ignored.";
           return;
         }
         if (account.id() == m_account.id()) {
-          kDebug(0) << "Line " << m_linenumber << ": Cannot transfer to the same account. Transfer ignored.";
+          qDebug() << "Line " << m_linenumber << ": Cannot transfer to the same account. Transfer ignored.";
           accountId.clear();
         }
 
       } catch (const MyMoneyException &) {
-        kDebug(0) << "Line " << m_linenumber << ": Account with id " << accountId.data() << " not found";
+        qDebug() << "Line " << m_linenumber << ": Account with id " << accountId.data() << " not found";
         accountId.clear();
       }
     }
@@ -1230,17 +1229,17 @@ void MyMoneyQifReader::processTransactionEntry(void)
           // FIXME: check that the type matches and ask if not
 
           if (account.accountType() == MyMoneyAccount::Investment) {
-            kDebug(0) << "Line " << m_linenumber << ": Cannot convert a split transfer to/from an investment account. Split removed. Total amount adjusted from " << tr.m_amount.formatMoney("", 2) << " to " << (tr.m_amount + s2.m_amount).formatMoney("", 2) << "\n";
+            qDebug() << "Line " << m_linenumber << ": Cannot convert a split transfer to/from an investment account. Split removed. Total amount adjusted from " << tr.m_amount.formatMoney("", 2) << " to " << (tr.m_amount + s2.m_amount).formatMoney("", 2) << "\n";
             tr.m_amount += s2.m_amount;
             continue;
           }
           if (account.id() == m_account.id()) {
-            kDebug(0) << "Line " << m_linenumber << ": Cannot transfer to the same account. Transfer ignored.";
+            qDebug() << "Line " << m_linenumber << ": Cannot transfer to the same account. Transfer ignored.";
             accountId.clear();
           }
 
         } catch (const MyMoneyException &) {
-          kDebug(0) << "Line " << m_linenumber << ": Account with id " << accountId.data() << " not found";
+          qDebug() << "Line " << m_linenumber << ": Account with id " << accountId.data() << " not found";
           accountId.clear();
         }
       }
@@ -1266,7 +1265,7 @@ void MyMoneyQifReader::processTransactionEntry(void)
 
 void MyMoneyQifReader::processInvestmentTransactionEntry(void)
 {
-//   kDebug(2) << "Investment Transaction:" << m_qifEntry.count() << " lines";
+//   qDebug() << "Investment Transaction:" << m_qifEntry.count() << " lines";
   /*
   Items for Investment Accounts
   Field   Indicator Explanation
@@ -1368,7 +1367,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
 
   QString securityname = extractLine('Y').toLower();
   if (securityname.isEmpty()) {
-    kDebug(2) << "Line " << m_linenumber << ": Investment transaction without a security is not supported.";
+    qDebug() << "Line " << m_linenumber << ": Investment transaction without a security is not supported.";
     return;
   }
   tr.m_strSecurity = securityname;
@@ -1429,7 +1428,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
   }
 
   if (!found) {
-    kDebug(2) << "Line " << m_linenumber << ": Security " << securityname << " not found in this account.  Transaction ignored.";
+    qDebug() << "Line " << m_linenumber << ": Security " << securityname << " not found in this account.  Transaction ignored.";
 
     // If the security is not known, notify the user
     // TODO (Ace) A "SelectOrCreateAccount" interface for investments
@@ -1578,7 +1577,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
     MyMoneyMoney splitfactor = (quantity / MyMoneyMoney(10, 1)).reduce();
 
     // Stock splits not supported
-//     kDebug(2) << "Line " << m_linenumber << ": Stock split not supported (date=" << date << " security=" << securityname << " factor=" << splitfactor.toString() << ")";
+//     qDebug() << "Line " << m_linenumber << ": Stock split not supported (date=" << date << " security=" << securityname << " factor=" << splitfactor.toString() << ")";
 
 //    s1.setShares(splitfactor);
 //    s1.setValue(0);
@@ -1587,7 +1586,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
 //     return;
   } else {
     // Unsupported action type
-    kDebug(0) << "Line " << m_linenumber << ": Unsupported transaction action (" << action << ")";
+    qDebug() << "Line " << m_linenumber << ": Unsupported transaction action (" << action << ")";
     return;
   }
   d->st.m_strAccountName = accountname;  //  accountname appears not to get set
@@ -1986,7 +1985,7 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
     // don't do anything with the type, leave it unknown
   } else {
     account.setAccountType(MyMoneyAccount::Checkings);
-    kDebug(2) << "Line " << m_linenumber << ": Unknown account type '" << type << "', checkings assumed";
+    qDebug() << "Line " << m_linenumber << ": Unknown account type '" << type << "', checkings assumed";
   }
 
   // check if we can find the account already in the file
@@ -2255,7 +2254,7 @@ void MyMoneyQifReader::processPriceEntry(void)
       price.m_strSecurity = priceExp.cap(1);
       QString pricestr = priceExp.cap(2);
       QString datestr = priceExp.cap(3);
-      kDebug(0) << "Price:" << price.m_strSecurity << " / " << pricestr << " / " << datestr;
+      qDebug() << "Price:" << price.m_strSecurity << " / " << pricestr << " / " << datestr;
 
       // Only add the price if the date is valid.  If invalid, fail silently.  See note above.
       // Also require the price value to not have any slashes.  Old prices will be something like

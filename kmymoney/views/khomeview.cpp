@@ -49,7 +49,6 @@
 #include <kactioncollection.h>
 #include <kapplication.h>
 #include <kmessagebox.h>
-#include <kdebug.h>
 #include <kcodecs.h>
 #include <kglobalsettings.h>
 #include <kiconloader.h>

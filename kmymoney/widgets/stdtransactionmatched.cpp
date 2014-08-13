@@ -27,7 +27,6 @@
 // KDE Includes
 
 #include <klocale.h>
-#include <kdebug.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

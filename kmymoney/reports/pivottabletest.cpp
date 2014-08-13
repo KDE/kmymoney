@@ -20,7 +20,6 @@
 #include <QList>
 #include <QFile>
 
-#include <kdebug.h>
 #include <kdeversion.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>

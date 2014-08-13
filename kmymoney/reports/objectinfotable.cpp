@@ -30,7 +30,6 @@
 // without using this macro directly, I'll be freed of KDE dependency.
 
 #include <klocale.h>
-#include <kdebug.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

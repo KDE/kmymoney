@@ -40,7 +40,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <ktextedit.h>
-#include <kdebug.h>
 #include <kprogressdialog.h>
 #include <kglobal.h>
 #include <kconfig.h>

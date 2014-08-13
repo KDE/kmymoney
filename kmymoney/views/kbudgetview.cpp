@@ -45,8 +45,6 @@
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
-
-#include <kdebug.h>
 #include <kcalendarsystem.h>
 #include <kcombobox.h>
 #include <KSharedConfig>

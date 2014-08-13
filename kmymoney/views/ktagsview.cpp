@@ -44,8 +44,6 @@
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
-
-#include <kdebug.h>
 #include <kapplication.h>
 #include <keditlistbox.h>
 #include <khelpclient.h>

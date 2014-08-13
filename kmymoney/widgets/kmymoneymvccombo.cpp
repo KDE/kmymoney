@@ -35,7 +35,6 @@
 // KDE Includes
 #include <kapplication.h>
 #include <klocale.h>
-#include <kdebug.h>
 #include <klineedit.h>
 #include <KIconLoader>
 #include <kmessagebox.h>
@@ -563,7 +562,7 @@ void KMyMoneyReconcileCombo::setState(MyMoneySplit::reconcileFlagE state)
       id = 'U';
       break;
     default:
-      kDebug(2) << "Unknown reconcile state '" << state << "' in KMyMoneyReconcileCombo::setState()\n";
+      qDebug() << "Unknown reconcile state '" << state << "' in KMyMoneyReconcileCombo::setState()\n";
       break;
   }
   setSelectedItem(id);

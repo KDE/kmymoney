@@ -22,7 +22,6 @@
 
 #include <kaboutdata.h>
 #include <kcomponentdata.h>
-#include <kdebug.h>
 #include <kdeversion.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>

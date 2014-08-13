@@ -34,7 +34,6 @@
 
 #include <kglobal.h>
 #include <klocale.h>
-#include <kdebug.h>
 #include <klineedit.h>
 #include <kiconloader.h>
 #include <kconfig.h>
@@ -93,7 +92,7 @@ QValidator::State kMyMoneyMoneyValidator::validate(QString & input, int & _p) co
   if ((!n.isEmpty() && n.indexOf('.') != -1) ||
       (!d.isEmpty() && d.indexOf('-') != -1)) {
     // make sure we don't replace something twice:
-    kWarning() << "KDoubleValidator: decimal symbol contains '-' or "
+    qWarning() << "KDoubleValidator: decimal symbol contains '-' or "
     "negative sign contains '.' -> improve algorithm" << endl;
     return Invalid;
   }

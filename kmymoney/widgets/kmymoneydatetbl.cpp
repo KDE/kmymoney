@@ -67,7 +67,6 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 #include <kglobalsettings.h>
 #include <kapplication.h>
 #include <klocale.h>
-#include <kdebug.h>
 #include <knotification.h>
 #include <kcalendarsystem.h>
 #include <KColorScheme>
@@ -190,7 +189,7 @@ kMyMoneyDateTbl::kMyMoneyDateTbl(QWidget *parent, QDate date_)
   setFontSize(10);
 
   if (!date_.isValid()) {
-    kDebug() << "kMyMoneyDateTbl ctor: WARNING: Given date is invalid, using current date.";
+    qDebug() << "kMyMoneyDateTbl ctor: WARNING: Given date is invalid, using current date.";
     date_ = QDate::currentDate();
   }
   setFocusPolicy(Qt::StrongFocus);
@@ -354,7 +353,7 @@ bool kMyMoneyDateTbl::setDate(const QDate& date_)
   QDate temp;
   // -----
   if (!date_.isValid()) {
-    kDebug() << "kMyMoneyDateTbl::setDate: refusing to set invalid date.";
+    qDebug() << "kMyMoneyDateTbl::setDate: refusing to set invalid date.";
     return false;
   }
 

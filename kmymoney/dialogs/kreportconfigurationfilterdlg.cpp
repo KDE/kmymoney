@@ -47,7 +47,6 @@
 #include <kcombobox.h>
 #include <kguiitem.h>
 #include <kiconloader.h>
-#include <kdebug.h>
 #include <kstandardguiitem.h>
 #include <klocale.h>
 #include <khelpclient.h>

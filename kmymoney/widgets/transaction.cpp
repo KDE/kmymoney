@@ -37,7 +37,6 @@
 
 #include <klocale.h>
 #include <kglobal.h>
-#include <kdebug.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -787,7 +786,7 @@ StdTransaction::StdTransaction(Register *parent, const MyMoneyTransaction& trans
         break;
     }
   } catch (const MyMoneyException &e) {
-    kDebug(2) << "Problem determining the category for transaction '" << m_transaction.id() << "'. Reason: " << e.what()  << "\n";
+    qDebug() << "Problem determining the category for transaction '" << m_transaction.id() << "'. Reason: " << e.what()  << "\n";
   }
   m_rowsForm = 6;
 

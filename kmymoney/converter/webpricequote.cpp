@@ -25,6 +25,7 @@
 #include <QTextStream>
 #include <QTextCodec>
 #include <QByteArray>
+#include <QLoggingCategory>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -50,6 +51,9 @@
 #include "mymoneyexception.h"
 #include "mymoneyqifprofile.h"
 
+Q_DECLARE_LOGGING_CATEGORY(WEBPRICEQUOTE)
+Q_LOGGING_CATEGORY(WEBPRICEQUOTE, "kmymoney_webpricequote")
+
 // define static members
 QString WebPriceQuote::m_financeQuoteScriptPath;
 QStringList WebPriceQuote::m_financeQuoteSources;
@@ -64,11 +68,6 @@ public:
   QDate m_date;
   double m_price;
   WebPriceQuoteSource m_source;
-
-  static int dbgArea(void) {
-    static int s_area = KDebug::registerArea("KMyMoney (WebPriceQuote)");
-    return s_area;
-  }
 };
 
 WebPriceQuote::WebPriceQuote(QObject* _parent):
@@ -126,7 +125,7 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
     if (splitrx.indexIn(d->m_symbol) != -1)
       url = QUrl(d->m_source.m_url.arg(splitrx.cap(1), splitrx.cap(2)));
     else
-      kDebug(Private::dbgArea()) << "WebPriceQuote::launch() did not find 2 symbols";
+      qCDebug(WEBPRICEQUOTE) << "WebPriceQuote::launch() did not find 2 symbols";
   } else
     // a regular one-symbol quote
     url = QUrl(d->m_source.m_url.arg(d->m_symbol));
@@ -152,8 +151,7 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
 
     QString tmpFile;
     if (KIO::NetAccess::download(url, tmpFile, 0)) {
-      // kDebug(Private::dbgArea()) << "Downloaded " << tmpFile;
-      kDebug(Private::dbgArea()) << "Downloaded" << tmpFile << "from" << url;
+      qCDebug(WEBPRICEQUOTE) << "Downloaded" << tmpFile << "from" << url;
       QFile f(tmpFile);
       if (f.open(QIODevice::ReadOnly)) {
         result = true;
@@ -221,7 +219,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
   bool gotprice = false;
   bool gotdate = false;
 
-  kDebug(Private::dbgArea()) << "quotedata" << _quotedata;
+  qCDebug(WEBPRICEQUOTE) << "quotedata" << _quotedata;
 
   if (! quotedata.isEmpty()) {
     if (!d->m_source.m_skipStripping) {
@@ -237,7 +235,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
 
       // Extra white space
       quotedata = quotedata.simplified();
-      kDebug(Private::dbgArea()) << "stripped text" << quotedata;
+      qCDebug(WEBPRICEQUOTE) << "stripped text" << quotedata;
     }
 
     QRegExp symbolRegExp(d->m_source.m_sym);
@@ -245,7 +243,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
     QRegExp priceRegExp(d->m_source.m_price);
 
     if (symbolRegExp.indexIn(quotedata) > -1) {
-      kDebug(Private::dbgArea()) << "Symbol" << symbolRegExp.cap(1);
+      qCDebug(WEBPRICEQUOTE) << "Symbol" << symbolRegExp.cap(1);
       emit status(i18n("Symbol found: %1", symbolRegExp.cap(1)));
     }
 
@@ -272,7 +270,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       }
 
       d->m_price = pricestr.toDouble();
-      kDebug(Private::dbgArea()) << "Price" << pricestr;
+      qCDebug(WEBPRICEQUOTE) << "Price" << pricestr;
       emit status(i18n("Price found: %1 (%2)", pricestr, d->m_price));
     }
 
@@ -283,7 +281,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       try {
         d->m_date = dateparse.convertString(datestr, false /*strict*/);
         gotdate = true;
-        kDebug(Private::dbgArea()) << "Date" << datestr;
+        qCDebug(WEBPRICEQUOTE) << "Date" << datestr;
         emit status(i18n("Date found: %1", d->m_date.toString()));;
       } catch (const MyMoneyException &) {
         // emit error(i18n("Unable to parse date %1 using format %2: %3").arg(datestr,dateparse.format(),e.what()));
