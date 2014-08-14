@@ -36,6 +36,7 @@
 #include <KAction>
 #include <KMessageBox>
 #include <KActionCollection>
+#include <KLocalizedString>
 #include <KWallet/Wallet>
 
 // ----------------------------------------------------------------------------
@@ -46,8 +47,9 @@
 #include "kofxdirectconnectdlg.h"
 #include "ui_importoption.h"
 
-K_PLUGIN_FACTORY(OfxImportFactory, registerPlugin<OfxImporterPlugin>();)
-K_EXPORT_PLUGIN(OfxImportFactory("kmm_ofximport"))
+// TODO: port KF5
+//K_PLUGIN_FACTORY(OfxImportFactory, registerPlugin<OfxImporterPlugin>();)
+//K_EXPORT_PLUGIN(OfxImportFactory("kmm_ofximport"))
 
 using KWallet::Wallet;
 
@@ -86,7 +88,8 @@ OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::ImporterPlugin(),
     d(new Private)
 {
-  setComponentData(OfxImportFactory::componentData());
+  // TODO: port KF5
+  //setComponentData(OfxImportFactory::componentData());
   setXMLFile("kmm_ofximport.rc");
   createActions();
 
@@ -101,7 +104,7 @@ OfxImporterPlugin::~OfxImporterPlugin()
 
 void OfxImporterPlugin::createActions(void)
 {
-  KAction *action = actionCollection()->addAction("file_import_ofx");
+  QAction *action = actionCollection()->addAction("file_import_ofx");
   action->setText(i18n("OFX..."));
   connect(action, SIGNAL(triggered(bool)), this, SLOT(slotImportFile()));
 }

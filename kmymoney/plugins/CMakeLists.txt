@@ -5,7 +5,7 @@ ADD_SUBDIRECTORY( csvimport )
 ADD_SUBDIRECTORY( csvexport )
 
 if(LIBOFX_FOUND)
-  ADD_SUBDIRECTORY( ofximport )
+  #ADD_SUBDIRECTORY( ofximport )
 endif(LIBOFX_FOUND)
 
 if (LIBICAL_FOUND)

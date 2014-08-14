@@ -189,7 +189,6 @@ void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
 
   if (error) {
     qDebug("Show error message");
-    m_job->ui()->setWindow(0);
     m_job->ui()->showErrorMessage();
   } else if (m_job->isErrorPage()) {
     qDebug("Process error page");
