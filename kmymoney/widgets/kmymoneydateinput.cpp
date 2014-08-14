@@ -38,12 +38,12 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QIcon>
+#include <QShortcut>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
-#include <kshortcut.h>
 #include <kpassivepopup.h>
 #include <kdatepicker.h>
 #include <kvbox.h>
@@ -277,7 +277,7 @@ void kMyMoneyDateInput::toggleDatePicker()
   */
 void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
 {
-  KShortcut today(i18nc("Enter todays date into date input widget", "T"));
+  QKeySequence today(i18nc("Enter todays date into date input widget", "T"));
 
   switch (k->key()) {
     case Qt::Key_Equal:
@@ -292,7 +292,7 @@ void kMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
       break;
 
     default:
-      if (today.contains(QKeySequence(k->key())) || k->key() == Qt::Key_T) {
+      if (today == QKeySequence(k->key()) || k->key() == Qt::Key_T) {
         slotDateChosen(QDate::currentDate());
         k->accept();
       }
