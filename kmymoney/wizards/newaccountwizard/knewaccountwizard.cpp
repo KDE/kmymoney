@@ -143,7 +143,7 @@ const MyMoneyAccount& Wizard::account(void)
   m_account.setAccountType(m_accountTypePage->accountType());
   m_account.setInstitutionId(m_institutionPage->institution().id());
   m_account.setNumber(m_institutionPage->m_accountNumber->text());
-  m_account.setValue("IBAN", m_institutionPage->m_iban->text());
+  m_account.setValue("iban", m_institutionPage->m_iban->text());
   if (m_accountTypePage->m_preferredAccount->isChecked())
     m_account.setValue("PreferredAccount", "Yes");
   else
@@ -221,7 +221,7 @@ MyMoneyAccount Wizard::brokerageAccount(void) const
     if (m_brokeragepage->m_accountNumber->isEnabled() && !m_brokeragepage->m_accountNumber->text().isEmpty())
       account.setNumber(m_brokeragepage->m_accountNumber->text());
     if (m_brokeragepage->m_iban->isEnabled() && !m_brokeragepage->m_iban->text().isEmpty())
-      account.setValue("IBAN", m_brokeragepage->m_iban->text());
+      account.setValue("iban", m_brokeragepage->m_iban->text());
   }
   return account;
 }
@@ -1587,8 +1587,8 @@ void AccountSummaryPage::enterPage(void)
     if (!acc.number().isEmpty()) {
       m_dataList->append(i18n("Number: %1", acc.number()));
     }
-    if (!acc.value("IBAN").isEmpty()) {
-      m_dataList->append(i18n("IBAN: %1", acc.value("IBAN")));
+    if (!acc.value("iban").isEmpty()) {
+      m_dataList->append(i18n("IBAN: %1", acc.value("iban")));
     }
   }
 
