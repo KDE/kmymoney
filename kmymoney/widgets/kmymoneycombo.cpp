@@ -119,10 +119,10 @@ void KMyMoneyCombo::setEditable(bool y)
   }
 }
 
-void KMyMoneyCombo::setClickMessage(const QString& hint) const
+void KMyMoneyCombo::setPlaceholderText(const QString& hint) const
 {
   if (m_edit)
-    m_edit->setClickMessage(hint);
+    m_edit->setPlaceholderText(hint);
 }
 
 void KMyMoneyCombo::paintEvent(QPaintEvent* ev)

@@ -157,11 +157,11 @@ void KMyMoneyMVCCombo::setModel(QAbstractItemModel *model)
   }
 }
 
-void KMyMoneyMVCCombo::setClickMessage(const QString& hint) const
+void KMyMoneyMVCCombo::setPlaceholderText(const QString& hint) const
 {
   KLineEdit* le = qobject_cast<KLineEdit*>(lineEdit());
   if (le) {
-    le->setClickMessage(hint);
+    le->setPlaceholderText(hint);
   }
 }
 

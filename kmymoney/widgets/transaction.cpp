@@ -1212,13 +1212,13 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
     KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it);
     KTagContainer* tag = dynamic_cast<KTagContainer*>(*it);
     if (combo)
-      combo->setClickMessage(QString());
+      combo->setPlaceholderText(QString());
     if (edit)
-      edit->setClickMessage(QString());
+      edit->setPlaceholderText(QString());
     if (payee)
-      payee->setClickMessage(QString());
+      payee->setPlaceholderText(QString());
     if (tag)
-      tag->tagCombo()->setClickMessage(QString());
+      tag->tagCombo()->setPlaceholderText(QString());
   }
 
   KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_form);
@@ -1913,13 +1913,13 @@ void InvestTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidget
     kMyMoneyEdit* edit = dynamic_cast<kMyMoneyEdit*>(*it);
     KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it);
     if (combo)
-      combo->setClickMessage(QString());
+      combo->setPlaceholderText(QString());
     if (edit)
-      edit->setClickMessage(QString());
+      edit->setPlaceholderText(QString());
     if (lineedit)
-      lineedit->setClickMessage(QString());
+      lineedit->setPlaceholderText(QString());
     if (payee)
-      payee->setClickMessage(QString());
+      payee->setPlaceholderText(QString());
   }
 }
 

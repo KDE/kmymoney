@@ -50,7 +50,6 @@
 #include <kmessagebox.h>
 #include <kcompletionbox.h>
 #include <kstandardshortcut.h>
-#include <kshortcut.h>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
@@ -804,13 +803,13 @@ KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
   m_editAmount->setResetButtonVisible(false);
 
   m_editCategory = new KMyMoneyCategory();
-  m_editCategory->setClickMessage(i18n("Category"));
+  m_editCategory->setPlaceholderText(i18n("Category"));
   m_editCategory->setFont(cellFont);
   connect(m_editCategory, SIGNAL(createItem(QString,QString&)), this, SIGNAL(createCategory(QString,QString&)));
   connect(m_editCategory, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   m_editMemo = new kMyMoneyLineEdit(0, false, Qt::AlignLeft | Qt::AlignVCenter);
-  m_editMemo->setClickMessage(i18n("Memo"));
+  m_editMemo->setPlaceholderText(i18n("Memo"));
   m_editMemo->setFont(cellFont);
 
   // create buttons for the mouse users

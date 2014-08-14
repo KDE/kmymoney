@@ -208,7 +208,7 @@ void InvestTransactionEditor::createEditWidgets(void)
   m_editWidgets["postdate"] = new kMyMoneyDateInput;
 
   KMyMoneySecurity* security = new KMyMoneySecurity;
-  security->setClickMessage(i18n("Security"));
+  security->setPlaceholderText(i18n("Security"));
   m_editWidgets["security"] = security;
   connect(security, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateSecurity(QString)));
   connect(security, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
@@ -216,13 +216,13 @@ void InvestTransactionEditor::createEditWidgets(void)
   connect(security, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   KMyMoneyCategory* asset = new KMyMoneyCategory(0, false);
-  asset->setClickMessage(i18n("Asset account"));
+  asset->setPlaceholderText(i18n("Asset account"));
   m_editWidgets["asset-account"] = asset;
   connect(asset, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
   connect(asset, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   KMyMoneyCategory* fees = new KMyMoneyCategory(0, true);
-  fees->setClickMessage(i18n("Fees"));
+  fees->setPlaceholderText(i18n("Fees"));
   m_editWidgets["fee-account"] = fees;
   connect(fees, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateFeeCategory(QString)));
   connect(fees, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
@@ -232,7 +232,7 @@ void InvestTransactionEditor::createEditWidgets(void)
   connect(fees->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditFeeSplits()));
 
   KMyMoneyCategory* interest = new KMyMoneyCategory(0, true);
-  interest->setClickMessage(i18n("Interest"));
+  interest->setPlaceholderText(i18n("Interest"));
   m_editWidgets["interest-account"] = interest;
   connect(interest, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateInterestCategory(QString)));
   connect(interest, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
@@ -242,7 +242,7 @@ void InvestTransactionEditor::createEditWidgets(void)
   connect(interest->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditInterestSplits()));
 
   KTagContainer* tag = new KTagContainer;
-  tag->tagCombo()->setClickMessage(i18n("Tag"));
+  tag->tagCombo()->setPlaceholderText(i18n("Tag"));
   tag->tagCombo()->setObjectName(QLatin1String("Tag"));
   m_editWidgets["tag"] = tag;
   connect(tag->tagCombo(), SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
@@ -259,14 +259,14 @@ void InvestTransactionEditor::createEditWidgets(void)
   d->m_activity->m_memoChanged = false;
 
   kMyMoneyEdit* value = new kMyMoneyEdit;
-  value->setClickMessage(i18n("Shares"));
+  value->setPlaceholderText(i18n("Shares"));
   value->setResetButtonVisible(false);
   m_editWidgets["shares"] = value;
   connect(value, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
   connect(value, SIGNAL(valueChanged(QString)), this, SLOT(slotUpdateTotalAmount()));
 
   value = new kMyMoneyEdit;
-  value->setClickMessage(i18n("Price"));
+  value->setPlaceholderText(i18n("Price"));
   value->setResetButtonVisible(false);
   value->setPrecision(KMyMoneyGlobalSettings::pricePrecision());
   m_editWidgets["price"] = value;

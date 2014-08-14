@@ -208,7 +208,7 @@ public:
 
   KLineEdit* lineedit(void) const;
 
-  void setClickMessage(const QString& hint) const;
+  void setPlaceholderText(const QString& hint) const;
 
   bool isReadOnly(void) const;
 

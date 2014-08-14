@@ -787,7 +787,7 @@ void StdTransactionEditor::createEditWidgets(void)
   // to avoid confusion in the tab order later on.
   if (m_item->showRowInForm(0)) {
     KMyMoneyCategory* account = new KMyMoneyCategory;
-    account->setClickMessage(i18n("Account"));
+    account->setPlaceholderText(i18n("Account"));
     account->setObjectName(QLatin1String("Account"));
     m_editWidgets["account"] = account;
     connect(account, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
@@ -795,7 +795,7 @@ void StdTransactionEditor::createEditWidgets(void)
   }
 
   KMyMoneyPayeeCombo* payee = new KMyMoneyPayeeCombo;
-  payee->setClickMessage(i18n("Payer/Receiver"));
+  payee->setPlaceholderText(i18n("Payer/Receiver"));
   payee->setObjectName(QLatin1String("Payee"));
   m_editWidgets["payee"] = payee;
 
@@ -805,7 +805,7 @@ void StdTransactionEditor::createEditWidgets(void)
   connect(payee, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
 
   KMyMoneyCategory* category = new KMyMoneyCategory(0, true);
-  category->setClickMessage(i18n("Category/Account"));
+  category->setPlaceholderText(i18n("Category/Account"));
   category->setObjectName(QLatin1String("Category/Account"));
   m_editWidgets["category"] = category;
   connect(category, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateCategory(QString)));
@@ -818,7 +818,7 @@ void StdTransactionEditor::createEditWidgets(void)
     category->splitButton()->setDisabled(m_account.id().isEmpty());
 
   KTagContainer* tag = new KTagContainer;
-  tag->tagCombo()->setClickMessage(i18n("Tag"));
+  tag->tagCombo()->setPlaceholderText(i18n("Tag"));
   tag->tagCombo()->setObjectName(QLatin1String("Tag"));
   m_editWidgets["tag"] = tag;
   connect(tag->tagCombo(), SIGNAL(createItem(QString,QString&)), this, SIGNAL(createTag(QString,QString&)));
@@ -856,7 +856,7 @@ void StdTransactionEditor::createEditWidgets(void)
 
   if (showNumberField) {
     kMyMoneyLineEdit* number = new kMyMoneyLineEdit;
-    number->setClickMessage(i18n("Number"));
+    number->setPlaceholderText(i18n("Number"));
     number->setObjectName(QLatin1String("Number"));
     m_editWidgets["number"] = number;
     connect(number, SIGNAL(lineChanged(QString)), this, SLOT(slotNumberChanged(QString)));

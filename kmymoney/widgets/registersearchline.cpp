@@ -60,7 +60,7 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
     KLineEdit(parent),
     d(new RegisterSearchLinePrivate)
 {
-  setClearButtonShown(true);
+  setClearButtonEnabled(true);
   init(reg);
 }
 

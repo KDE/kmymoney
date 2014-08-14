@@ -537,10 +537,10 @@ bool kMyMoneyEdit::isEmptyAllowed(void) const
   return allowEmpty;
 }
 
-void kMyMoneyEdit::setClickMessage(const QString& hint) const
+void kMyMoneyEdit::setPlaceholderText(const QString& hint) const
 {
   if (m_edit)
-    m_edit->setClickMessage(hint);
+    m_edit->setPlaceholderText(hint);
 }
 
 bool kMyMoneyEdit::isReadOnly(void) const

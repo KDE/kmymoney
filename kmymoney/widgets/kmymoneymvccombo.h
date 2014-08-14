@@ -60,9 +60,9 @@ public:
   ~KMyMoneyMVCCombo();
 
   /**
-    * @sa KLineEdit::setClickMessage()
+    * @sa KLineEdit::setPlaceholderText()
     */
-  void setClickMessage(const QString& hint) const;
+  void setPlaceholderText(const QString& hint) const;
 
   /**
     * This method returns the id of the first selected item.
