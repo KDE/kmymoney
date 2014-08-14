@@ -44,14 +44,14 @@ payeeIdentifier::~payeeIdentifier()
 payeeIdentifierData* payeeIdentifier::operator->()
 {
   if ( m_payeeIdentifier == 0 )
-    throw nullPayeeIdentifier(__FILE__, __LINE__);
+    throw badContent(__FILE__, __LINE__);
   return m_payeeIdentifier;
 }
 
 const payeeIdentifierData* payeeIdentifier::operator->() const
 {
   if ( m_payeeIdentifier == 0 )
-    throw nullPayeeIdentifier(__FILE__, __LINE__);
+    throw badContent(__FILE__, __LINE__);
   return m_payeeIdentifier;
 }
 

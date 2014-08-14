@@ -77,28 +77,40 @@ public:
    */
   QString iid() const;
 
+
   /**
-   * @brief Thrown if a cast of a task fails
+   * @brief Base for exceptions thrown by payeeIdentifier
+   *
+   * @internal Using MyMoneyException instead is not possible because
+   * it would lead to cyclic inter-target dependenies. We could create a new
+   * shared library which includes MyMoneyException only, but this could be over-
+   * powered.
+   */
+  class exception
+  {};
+
+  /**
+   * @brief Thrown if a cast of a payeeIdentifier fails
    *
    * This is inspired by std::bad_cast
    * @todo inherit from MyMoneyException
    */
-  class badPayeeIdenitifierCast
+  class badCast : public exception
   {
   public:
-    badPayeeIdenitifierCast(const QString& file = "", const long unsigned int& line = 0)
+    badCast(const QString& file = "", const long unsigned int& line = 0)
     //: MyMoneyException("Casted payeeIdentifier with wrong type", file, line)
     { Q_UNUSED(file); Q_UNUSED(line); }
   };
 
   /**
-   * @brief Thrown if a task of an invalid onlineJob is requested
+   * @brief Thrown if one tried to access the data of a null payeeIdentifier
    * @todo inherit from MyMoneyException
    */
-  class nullPayeeIdentifier
+  class badContent : public exception
   {
   public:
-    nullPayeeIdentifier(const QString& file = "", const long unsigned int& line = 0)
+    badContent(const QString& file = "", const long unsigned int& line = 0)
     //: MyMoneyException("Requested payeeIdentifierData of empty payeeIdentifier", file, line)
     { Q_UNUSED(file); Q_UNUSED(line); }
   };
@@ -112,7 +124,7 @@ T* payeeIdentifier::data()
 {
   T *const ident = dynamic_cast<T*>(m_payeeIdentifier);
   if ( ident == 0 )
-    throw badPayeeIdenitifierCast(__FILE__, __LINE__);
+    throw badCast(__FILE__, __LINE__);
   return ident;
 }
 

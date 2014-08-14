@@ -108,7 +108,6 @@ bool germanOnlineTransferImpl::isValid() const
   return false;
 }
 
-/** @todo make alive */
 payeeIdentifier germanOnlineTransferImpl::originAccountIdentifier() const
 {
   QList<payeeIdentifier> idents = MyMoneyFile::instance()->account(_originAccount).accountIdentifiers();

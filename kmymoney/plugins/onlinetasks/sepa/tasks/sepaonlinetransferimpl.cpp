@@ -105,13 +105,11 @@ sepaOnlineTransfer *sepaOnlineTransferImpl::clone() const
 bool sepaOnlineTransferImpl::isValid() const
 {
   QString iban;
-  // @todo enable checks which depend on the iban of the origin account
-#if 0
-  payeeIdentifiers::ibanBic ident = originAccountIdentifier();
-  if (!ident.isNull()) {
-    iban = ident->electronicIban();
+  try {
+    payeeIdentifier ident = originAccountIdentifier();
+    iban = ident.data<payeeIdentifiers::ibanBic>()->electronicIban();
+  } catch ( payeeIdentifier::exception& ) {
   }
-#endif
 
   QSharedPointer<const sepaOnlineTransfer::settings> settings = getSettings();
   if ( settings->checkPurposeLength( _purpose ) == validators::ok
@@ -174,7 +172,6 @@ void sepaOnlineTransferImpl::setOriginAccount(const QString &accountId)
     }
 }
 
-/** @todo save remote account */
 void sepaOnlineTransferImpl::writeXML(QDomDocument& document, QDomElement& parent) const
 {
   Q_UNUSED(document);
@@ -196,7 +193,6 @@ void sepaOnlineTransferImpl::writeXML(QDomDocument& document, QDomElement& paren
   parent.appendChild(beneficiaryEl);
 }
 
-/** @todo load remote account */
 sepaOnlineTransfer* sepaOnlineTransferImpl::createFromXml(const QDomElement& element) const
 {
   sepaOnlineTransferImpl* task = new sepaOnlineTransferImpl();
@@ -220,6 +216,7 @@ sepaOnlineTransfer* sepaOnlineTransferImpl::createFromXml(const QDomElement& ele
     task->_beneficiaryAccount = *beneficiaryPtr;
   }
 
+  delete beneficiaryPtr;
   return task;
 }
 

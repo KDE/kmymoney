@@ -167,13 +167,11 @@ void sepaCreditTransferEdit::beneficiaryIbanChanged(const QString& iban)
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
 
   QString payeeIban;
-  /** @todo enable use of local iban again */
-#if 0
-  payeeIdentifiers::ibanBic::ptr ident = getOnlineJobTyped().task()->originAccountIdentifier().dynamicCast<payeeIdentifiers::ibanBic>();
-  if (!ident.isNull()) {
-    payeeIban = ident->electronicIban();
+  try {
+    payeeIdentifier ident = getOnlineJobTyped().task()->originAccountIdentifier();
+    payeeIban = ident.data<payeeIdentifiers::ibanBic>()->electronicIban();
+  } catch ( payeeIdentifier::exception& ) {
   }
-#endif
 
   if (settings->isBicMandatory( payeeIban, iban )) {
     m_requiredFields->add( ui->beneficiaryBankCode );
@@ -190,7 +188,7 @@ void sepaCreditTransferEdit::beneficiaryBicChanged(const QString& bic)
     QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
 
     const payeeIdentifiers::ibanBic payee = getOnlineJobTyped().task()->beneficiaryTyped();
-    if (settings->isBicMandatory(payee.electronicIban() , ui->beneficiaryBankCode->text() )) {
+    if (settings->isBicMandatory(payee.electronicIban() , ui->beneficiaryIban->text() )) {
       ui->feedbackBic->setFeedback(KMyMoneyValidationFeedback::Error, i18n("For this beneficiary's country the BIC is mandatory."));
       return;
     }
