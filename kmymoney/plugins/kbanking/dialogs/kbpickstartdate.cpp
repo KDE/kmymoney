@@ -37,7 +37,7 @@
 // KDE includes
 #include <QPushButton>
 #include <kdatewidget.h>
-#include <kstdguiitem.h>
+#include <kguiitem.h>
 #include <klocale.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>

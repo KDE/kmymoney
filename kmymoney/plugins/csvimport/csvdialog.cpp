@@ -55,7 +55,7 @@
 #include <kdeversion.h>
 #include <kmessagebox.h>
 #include <QPushButton>
-#include <kstdguiitem.h>
+#include <kguiitem.h>
 #include <QVBoxLayout>
 #include <KAction>
 #include <KSharedConfig>

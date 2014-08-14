@@ -31,7 +31,7 @@ target_link_libraries(kmm_kbanking
                       kmm_mymoney
                       kmm_widgets
                       kmm_plugin
-                      ${KDE4_KDEUI_LIBS}
+                      KF5::KDELibs4Support
                       ${GWENHYWFAR_LIBRARIES}
                       ${AQBANKING_LIBRARIES}
                       Alkimia::alkimia

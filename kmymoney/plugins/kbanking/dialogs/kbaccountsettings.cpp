@@ -25,6 +25,7 @@
 #include "kbaccountsettings.h"
 
 #include <KMessageBox>
+#include <KLocalizedString>
 
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneyaccount.h"

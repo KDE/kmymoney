@@ -79,8 +79,9 @@
 #include "kmymoneyview.h"
 #include "kbpickstartdate.h"
 
-K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<KBankingPlugin>();)
-K_EXPORT_PLUGIN(KBankingFactory("kmm_kbanking"))
+// TODO: port to KF5
+//K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<KBankingPlugin>();)
+//K_EXPORT_PLUGIN(KBankingFactory("kmm_kbanking"))
 
 class KBankingPlugin::Private
 {
@@ -157,7 +158,8 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
     GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Debug);
     if (m_kbanking->init() == 0) {
       // Tell the host application to load my GUI component
-      setComponentData(KBankingFactory::componentData());
+      // TODO: port to KF5
+      //setComponentData(KBankingFactory::componentData());
       setXMLFile("kmm_kbanking.rc");
       qDebug("KMyMoney kbanking plugin loaded");
 
@@ -258,11 +260,11 @@ void KBankingPlugin::createJobView(void)
 
 void KBankingPlugin::createActions(void)
 {
-  KAction *settings_aqbanking  = actionCollection()->addAction("settings_aqbanking");
+  QAction *settings_aqbanking  = actionCollection()->addAction("settings_aqbanking");
   settings_aqbanking->setText(i18n("Configure Aq&Banking..."));
   connect(settings_aqbanking, SIGNAL(triggered()), this, SLOT(slotSettings()));
 
-  KAction *file_import_aqbanking  = actionCollection()->addAction("file_import_aqbanking");
+  QAction *file_import_aqbanking  = actionCollection()->addAction("file_import_aqbanking");
   file_import_aqbanking->setText(i18n("AqBanking importer..."));
   connect(file_import_aqbanking, SIGNAL(triggered()), this, SLOT(slotImport()));
 
@@ -535,14 +537,12 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       // for later execution
       KIconLoader *ic = KIconLoader::global();
       KGuiItem executeButton(i18n("&Execute"),
-                             QIcon::fromTheme(ic->loadIcon("tools-wizard",
-                                                KIconLoader::Small, KIconLoader::SizeSmall)),
+                             ic->loadIcon("tools-wizard", KIconLoader::Small, KIconLoader::SizeSmall),
                              i18n("Close this window"),
                              i18n("Use this button to close the window"));
 
       KGuiItem queueButton(i18n("&Queue"),
-                           QIcon::fromTheme(ic->loadIcon("document-export",
-                                              KIconLoader::Small, KIconLoader::SizeSmall)),
+                           ic->loadIcon("document-export", KIconLoader::Small, KIconLoader::SizeSmall),
                            i18n("Close this window"),
                            i18n("Use this button to close the window"));
 
