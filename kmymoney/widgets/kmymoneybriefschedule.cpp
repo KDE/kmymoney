@@ -62,14 +62,8 @@ KMyMoneyBriefSchedule::KMyMoneyBriefSchedule(QWidget *parent)
                        i18n("Use this button to skip this transaction"));
   KGuiItem::assign(m_skipButton, skipGuiItem);
 
-  // as of KDE 4.8 the icon we use here move to a different location
-  QString iconName("go-jump-locationbar");;
-  if (KDE::version() >= 0x040800) {
-    iconName = QLatin1String("key-enter");
-  }
-
   KGuiItem enterGuiItem(i18n("&Enter"),
-                        QIcon::fromTheme(iconName),
+                        QIcon::fromTheme(QLatin1String("key-enter")),
                         i18n("Record this transaction into the register"),
                         i18n("Use this button to record this transaction"));
   KGuiItem::assign(m_buttonEnter, enterGuiItem);
