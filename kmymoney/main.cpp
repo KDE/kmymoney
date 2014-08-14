@@ -69,11 +69,23 @@ int main(int argc, char *argv[])
   /**
    * construct about data
    */
+  QStringList features;
+#if KF5Gpgmepp_FOUND
+  features << i18n("GPG encryption");
+#endif
+#if KMM_ADDRESSBOOK_FOUND
+  features << i18n("Addressbook integration");
+#endif
+#if KF5Holidays_FOUND
+  features << i18n("Holiday regions integration");
+#endif
+  QString featuresDescription;
+  if (!features.empty())
+      featuresDescription = i18n("Compiled with the following optional features:\n%1", features.join(QLatin1Char('\n')));
   KAboutData aboutData(QStringLiteral("kmymoney"), i18n("KMyMoney"), QStringLiteral(VERSION),
                        i18n("\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions."), KAboutLicense::GPL,
                        i18n("(c) 2000-2014 The KMyMoney development team"),
-                       // TODO: show optional compiled features
-                       QString(),
+                       featuresDescription,
                        QStringLiteral("http://kmymoney.org/"));
 
   //Temporarily, the product name to report bugs in BKO is different than the application name
