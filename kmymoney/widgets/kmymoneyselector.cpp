@@ -56,7 +56,7 @@ KMyMoneySelector::KMyMoneySelector(QWidget *parent, Qt::WFlags flags) :
   m_treeWidget->setAllColumnsShowFocus(true);
 
   m_layout = new QHBoxLayout(this);
-  m_layout->setSpacing(6);
+  m_layout->setSpacing(0);
   m_layout->setMargin(0);
 
   m_treeWidget->header()->hide();

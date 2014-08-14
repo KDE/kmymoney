@@ -29,6 +29,8 @@
 #include <QEvent>
 #include <QIcon>
 #include <QDebug>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,8 +39,6 @@
 #include <klineedit.h>
 #include <kiconloader.h>
 #include <kconfig.h>
-#include <kvbox.h>
-#include <khbox.h>
 #include <kconfiggroup.h>
 #include <KSharedConfig>
 
@@ -161,7 +161,7 @@ QValidator::State kMyMoneyMoneyValidator::validate(QString & input, int & _p) co
 }
 
 kMyMoneyEdit::kMyMoneyEdit(QWidget *parent, const int prec)
-    : KHBox(parent)
+    : QWidget(parent)
 {
   m_prec = prec;
   if (prec < -1 || prec > 20)
@@ -170,7 +170,7 @@ kMyMoneyEdit::kMyMoneyEdit(QWidget *parent, const int prec)
 }
 
 kMyMoneyEdit::kMyMoneyEdit(const MyMoneySecurity& sec, QWidget *parent)
-    : KHBox(parent)
+    : QWidget(parent)
 {
   m_prec = MyMoneyMoney::denomToPrec(sec.smallestAccountFraction());
   init();
@@ -209,33 +209,41 @@ static const uchar resetButtonImage[] = {
 
 void kMyMoneyEdit::init(void)
 {
+  QHBoxLayout *editLayout = new QHBoxLayout(this);
+  editLayout->setSpacing(0);
+  editLayout->setContentsMargins(0, 0, 0, 0);
+
   allowEmpty = false;
   m_edit = new kMyMoneyLineEdit(this, true);
   m_edit->installEventFilter(this);
   setFocusProxy(m_edit);
+  editLayout->addWidget(m_edit);
 
   // Yes, just a simple double validator !
   kMyMoneyMoneyValidator *validator = new kMyMoneyMoneyValidator(this);
   m_edit->setValidator(validator);
   m_edit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-  m_calculatorFrame = new KVBox(this);
+  m_calculatorFrame = new QWidget(this);
+  QVBoxLayout *calculatorFrameVBoxLayout = new QVBoxLayout(m_calculatorFrame);
+  calculatorFrameVBoxLayout->setMargin(0);
   m_calculatorFrame->setWindowFlags(Qt::Popup);
-
-  m_calculatorFrame->setFrameStyle(QFrame::Panel | QFrame::Raised);
-  m_calculatorFrame->setLineWidth(3);
+  editLayout->addWidget(m_calculatorFrame);
 
   m_calculator = new kMyMoneyCalculator(m_calculatorFrame);
+  calculatorFrameVBoxLayout->addWidget(m_calculator);
   m_calculatorFrame->hide();
 
   m_calcButton = new QPushButton(QIcon::fromTheme("accessories-calculator"), QString(""), this);
   m_calcButton->setFocusProxy(m_edit);
+  editLayout->addWidget(m_calcButton);
 
   QPixmap pixmap;
   pixmap.loadFromData(resetButtonImage, sizeof(resetButtonImage), "PNG", 0);
   m_resetButton = new QPushButton(pixmap, QString(""), this);
   m_resetButton->setEnabled(false);
   m_resetButton->setFocusProxy(m_edit);
+  editLayout->addWidget(m_resetButton);
 
   KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup grp = kconfig->group("General Options");

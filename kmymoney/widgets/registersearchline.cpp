@@ -66,11 +66,14 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
 
 void RegisterSearchLine::init(Register *reg)
 {
+  parentWidget()->layout()->addWidget(this);
   d->reg = reg;
   connect(this, SIGNAL(textChanged(QString)), this, SLOT(queueSearch(QString)));
 
   QLabel* label = new QLabel(i18nc("label for status combo", "Stat&us"), parentWidget());
+  parentWidget()->layout()->addWidget(label);
   d->combo = new KComboBox(parentWidget());
+  parentWidget()->layout()->addWidget(d->combo);
   // don't change the order of the following lines unless updating
   // the case labels in RegisterSearchLine::itemMatches() at the same time
   d->combo->insertItem(RegisterFilter::Any, SmallIcon("system-run"), i18n("Any status"));
@@ -204,11 +207,10 @@ public:
 
 
 RegisterSearchLineWidget::RegisterSearchLineWidget(Register* reg, QWidget* parent) :
-    KHBox(parent),
+    QWidget(parent),
     d(new RegisterSearchLineWidgetPrivate)
 {
   d->reg = reg;
-  setSpacing(6);
   QTimer::singleShot(0, this, SLOT(createWidgets()));
 }
 
@@ -226,7 +228,12 @@ RegisterSearchLine* RegisterSearchLineWidget::createSearchLine(Register* reg)
 
 void RegisterSearchLineWidget::createWidgets(void)
 {
+  QHBoxLayout *searchLineLayout = new QHBoxLayout(this);
+  searchLineLayout->setSpacing(0);
+  searchLineLayout->setContentsMargins(0, 0, 0, 0);
+
   QLabel *label = new QLabel(i18nc("Search widget label", "S&earch:"), this);
+  searchLineLayout->addWidget(label);
 
   d->searchLine = createSearchLine(d->reg);
   d->searchLine->show();

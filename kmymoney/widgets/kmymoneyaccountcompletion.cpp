@@ -29,6 +29,7 @@
 
 #include <QApplication>
 #include <QRegExp>
+#include <QLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -44,6 +45,7 @@ kMyMoneyAccountCompletion::kMyMoneyAccountCompletion(QWidget *parent) :
   delete m_selector;
   m_selector = new kMyMoneyAccountSelector(this, 0, false);
   m_selector->listView()->setFocusProxy(parent);
+  layout()->addWidget(m_selector);
 
 #ifndef KMM_DESIGNER
   // Default is to show all accounts

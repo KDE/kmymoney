@@ -47,7 +47,7 @@ class Parse;
 class CsvUtil;
 class MyMoneyStatement;
 class KAbstractFileWidget;
-class KHBox;
+
 class KComboBox;
 
 class InvestProcessing : public QObject

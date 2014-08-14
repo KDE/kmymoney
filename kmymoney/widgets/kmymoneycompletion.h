@@ -35,7 +35,6 @@ class QTreeWidget;
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kvbox.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -46,7 +45,7 @@ class KMyMoneySelector;
   * @author Thomas Baumgart
   */
 
-class kMyMoneyCompletion : public KVBox
+class kMyMoneyCompletion : public QWidget
 {
   Q_OBJECT
 public:

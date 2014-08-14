@@ -167,6 +167,8 @@
 #include <libkgpgfile/kgpgfile.h>
 
 #include <transactioneditor.h>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 
 #include "kmymoneyutils.h"
 
@@ -1654,15 +1656,27 @@ bool KMyMoneyApp::slotFileSaveAs(void)
   // fill the additional key list with the default
   d->m_additionalGpgKeys = KMyMoneyGlobalSettings::gpgRecipientList();
 
-  KVBox* vbox = new KVBox();
+  QWidget* vbox = new QWidget();
+  QVBoxLayout *vboxVBoxLayout = new QVBoxLayout(vbox);
+  vboxVBoxLayout->setMargin(0);
   if (KGPGFile::GPGAvailable()) {
-    KHBox* keyBox = new KHBox(vbox);
-    new QLabel(i18n("Encryption key to be used"), keyBox);
+    QWidget* keyBox = new QWidget(vbox);
+    QHBoxLayout *keyBoxHBoxLayout = new QHBoxLayout(keyBox);
+    keyBoxHBoxLayout->setMargin(0);
+    vboxVBoxLayout->addWidget(keyBox);
+    QLabel *keyLabel = new QLabel(i18n("Encryption key to be used"), keyBox);
+    keyBoxHBoxLayout->addWidget(keyLabel);
     d->m_saveEncrypted = new KComboBox(keyBox);
+    keyBoxHBoxLayout->addWidget(d->m_saveEncrypted);
 
-    KHBox* labelBox = new KHBox(vbox);
+    QWidget* labelBox = new QWidget(vbox);
+    QHBoxLayout *labelBoxHBoxLayout = new QHBoxLayout(labelBox);
+    labelBoxHBoxLayout->setMargin(0);
+    vboxVBoxLayout->addWidget(labelBox);
     d->m_additionalKeyLabel = new QLabel(i18n("Additional encryption keys to be used: %1", d->m_additionalGpgKeys.count()), labelBox);
+    labelBoxHBoxLayout->addWidget(d->m_additionalKeyLabel);
     d->m_additionalKeyButton = new QPushButton(i18n("Manage additional keys"), labelBox);
+    labelBoxHBoxLayout->addWidget(d->m_additionalKeyButton);
     connect(d->m_additionalKeyButton, SIGNAL(clicked()), this, SLOT(slotManageGpgKeys()));
     connect(d->m_saveEncrypted, SIGNAL(activated(int)), this, SLOT(slotKeySelected(int)));
 

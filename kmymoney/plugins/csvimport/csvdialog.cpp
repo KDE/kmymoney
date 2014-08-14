@@ -56,7 +56,7 @@
 #include <kmessagebox.h>
 #include <QPushButton>
 #include <kstdguiitem.h>
-#include <kvbox.h>
+#include <QVBoxLayout>
 #include <KAction>
 #include <KSharedConfig>
 #include <KComponentData>
@@ -69,6 +69,7 @@
 #include "KAboutApplicationDialog"
 #include <KAboutData>
 #include <QStandardPaths>
+#include <QHBoxLayout>
 
 // ----------------------------------------------------------------------------
 
@@ -653,8 +654,11 @@ void CSVDialog::slotFileDialogClicked()
       i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"), 0);
 
   //  Add encoding selection to FileDialog
-  KHBox* encodeBox = new KHBox();
+  QWidget* encodeBox = new QWidget();
+  QHBoxLayout *encodeBoxHBoxLayout = new QHBoxLayout(encodeBox);
+  encodeBoxHBoxLayout->setMargin(0);
   m_comboBoxEncode = new KComboBox(encodeBox);
+  encodeBoxHBoxLayout->addWidget(m_comboBoxEncode);
   m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
   setCodecList(m_codecs);
   connect(m_comboBoxEncode, SIGNAL(activated(int)), this, SLOT(encodingChanged(int)));

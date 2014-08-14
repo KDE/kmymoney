@@ -27,8 +27,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <khbox.h>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -70,7 +68,7 @@ protected:
   * which is based on an edit field with spin boxes and adds a QPushButton
   * to open a KDatePicker.
   */
-class KMM_WIDGETS_EXPORT kMyMoneyDateInput : public KHBox
+class KMM_WIDGETS_EXPORT kMyMoneyDateInput : public QWidget
 {
   Q_OBJECT
   Q_PROPERTY(QDate date READ date WRITE setDate STORED false)

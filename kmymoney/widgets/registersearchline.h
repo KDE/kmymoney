@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <khbox.h>
+#include <QHBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -96,7 +96,7 @@ private:
   *
   * @author Thomas Baumgart
   */
-class RegisterSearchLineWidget : public KHBox
+class RegisterSearchLineWidget : public QWidget
 {
   Q_OBJECT
 public:

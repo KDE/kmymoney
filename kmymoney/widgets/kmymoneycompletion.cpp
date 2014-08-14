@@ -31,6 +31,7 @@
 #include <QEvent>
 #include <QDesktopWidget>
 #include <QLineEdit>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -44,16 +45,18 @@
 const int kMyMoneyCompletion::MAX_ITEMS = 16;
 
 kMyMoneyCompletion::kMyMoneyCompletion(QWidget *parent) :
-    KVBox(parent)
+    QWidget(parent)
 {
   setWindowFlags(Qt::ToolTip);
   // make it look like the Qt completer
-  setMargin(0);
-  setLineWidth(0);
+  QVBoxLayout *completionLayout = new QVBoxLayout(this);
+  completionLayout->setContentsMargins(0, 0, 0, 0);
+  completionLayout->setSpacing(0);
 
   m_parent = parent;
   m_selector = new KMyMoneySelector(this);
   m_selector->listView()->setFocusProxy(parent);
+  completionLayout->addWidget(m_selector);
 
   // to handle the keyboard events received by this widget in the same way as
   // the keyboard events received by the other widgets
@@ -132,7 +135,7 @@ void kMyMoneyCompletion::adjustSize(const int count)
 void kMyMoneyCompletion::showEvent(QShowEvent* e)
 {
   show(true);
-  KVBox::showEvent(e);
+  QWidget::showEvent(e);
 }
 
 void kMyMoneyCompletion::show(bool presetSelected)
@@ -152,7 +155,7 @@ void kMyMoneyCompletion::show(bool presetSelected)
       c->lineEdit()->installEventFilter(this);
     }
   }
-  KVBox::show();
+  QWidget::show();
 
   // make sure that the parent is the input context's focus widget instead of the selector's list
   //if (qApp->inputContext()->focusWidget() == m_selector->listView())
@@ -171,7 +174,7 @@ void kMyMoneyCompletion::hide(void)
       c->lineEdit()->removeEventFilter(this);
     }
   }
-  KVBox::hide();
+  QWidget::hide();
 }
 
 bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
@@ -277,7 +280,7 @@ bool kMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
       }
     }
   }
-  return KVBox::eventFilter(o, e);
+  return QWidget::eventFilter(o, e);
 }
 
 void kMyMoneyCompletion::slotMakeCompletion(const QString& txt)

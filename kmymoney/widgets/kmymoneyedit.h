@@ -31,10 +31,9 @@ class QWidget;
 // KDE Includes
 
 #include <KLineEdit>
-#include <KHBox>
 class QPushButton;
-class KVBox;
-class KHBox;
+
+
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -88,7 +87,7 @@ public:
   *
   * @author Michael Edwardes, Thomas Baumgart
   */
-class KMM_WIDGETS_EXPORT kMyMoneyEdit : public KHBox
+class KMM_WIDGETS_EXPORT kMyMoneyEdit : public QWidget
 {
   Q_OBJECT
   Q_PROPERTY(bool calculatorButtonVisibility READ isCalculatorButtonVisible WRITE setCalculatorButtonVisible)
@@ -102,7 +101,7 @@ private:
   QString previousText; // keep track of what has been typed
   QString m_text;       // keep track of what was the original value
   kMyMoneyCalculator* m_calculator;
-  KVBox*              m_calculatorFrame;
+  QWidget*            m_calculatorFrame;
   kMyMoneyLineEdit*   m_edit;
   QPushButton*        m_calcButton;
   QPushButton*        m_resetButton;

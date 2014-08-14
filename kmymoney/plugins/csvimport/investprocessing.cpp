@@ -45,8 +45,9 @@
 #include <KIO/NetAccess>
 #include <KAboutData>
 #include <KAboutApplicationDialog>
-#include <kvbox.h>
+#include <QVBoxLayout>
 #include <QStandardPaths>
+#include <QHBoxLayout>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -249,8 +250,11 @@ void InvestProcessing::slotFileDialogClicked()
       i18n("*.csv *.PRN *.txt|CSV Files\n*|All files"), 0);
 
   //  Add encoding selection to FileDialog
-  KHBox* encodeBox = new KHBox();
+  QWidget* encodeBox = new QWidget();
+  QHBoxLayout *encodeBoxHBoxLayout = new QHBoxLayout(encodeBox);
+  encodeBoxHBoxLayout->setMargin(0);
   m_comboBoxEncode = new KComboBox(encodeBox);
+  encodeBoxHBoxLayout->addWidget(m_comboBoxEncode);
   m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
   setCodecList(m_codecs);
   connect(m_comboBoxEncode, SIGNAL(activated(int)), this, SLOT(encodingChanged(int)));

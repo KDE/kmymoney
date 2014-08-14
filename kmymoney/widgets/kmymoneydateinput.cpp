@@ -39,6 +39,7 @@
 #include <QPushButton>
 #include <QIcon>
 #include <QShortcut>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -46,7 +47,6 @@
 #include <klocale.h>
 #include <kpassivepopup.h>
 #include <kdatepicker.h>
-#include <kvbox.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -107,18 +107,22 @@ struct kMyMoneyDateInput::Private {
   QDate m_date;
   QDate m_prevDate;
   Qt::AlignmentFlag m_qtalignment;
-  KVBox *m_dateFrame;
+  QWidget *m_dateFrame;
   QPushButton *m_dateButton;
   KPassivePopup *m_datePopup;
 };
 
 kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
-    : KHBox(parent), d(new Private)
+    : QWidget(parent), d(new Private)
 {
   d->m_qtalignment = flags;
   d->m_date = QDate::currentDate();
 
+  QHBoxLayout *dateInputLayout = new QHBoxLayout(this);
+  dateInputLayout->setSpacing(0);
+  dateInputLayout->setContentsMargins(0, 0, 0, 0);
   d->m_dateEdit = new KMyMoneyDateEdit(d->m_date, this);
+  dateInputLayout->addWidget(d->m_dateEdit, 3);
   setFocusProxy(d->m_dateEdit);
   d->m_dateEdit->installEventFilter(this); // To get d->m_dateEdit's FocusIn/Out and some KeyPress events
 
@@ -131,10 +135,12 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_datePopup->setTimeout(DATE_POPUP_TIMEOUT);
   d->m_datePopup->setView(new QLabel(KLocale::global()->formatDate(d->m_date), d->m_datePopup));
 
-  d->m_dateFrame = new KVBox(this);
+  d->m_dateFrame = new QWidget(this);
+  dateInputLayout->addWidget(d->m_dateFrame);
+  QVBoxLayout *dateFrameVBoxLayout = new QVBoxLayout(d->m_dateFrame);
+  dateFrameVBoxLayout->setMargin(0);
+  dateFrameVBoxLayout->setContentsMargins(0, 0, 0, 0);
   d->m_dateFrame->setWindowFlags(Qt::Popup);
-  d->m_dateFrame->setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
-  d->m_dateFrame->setLineWidth(3);
   d->m_dateFrame->hide();
 
   QString dateFormat = KLocale::global()->dateFormatShort().toLower();
@@ -177,13 +183,13 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   }
 
   d->m_datePicker = new KDatePicker(d->m_date, d->m_dateFrame);
+  dateFrameVBoxLayout->addWidget(d->m_datePicker);
   // Let the date picker have a close button (Added in 3.1)
   d->m_datePicker->setCloseButton(true);
 
   // the next line is a try to add an icon to the button
   d->m_dateButton = new QPushButton(QIcon::fromTheme("view-calendar-day"), QString(""), this);
-  // use the most space for the edit widget
-  setStretchFactor(d->m_dateEdit, 3);
+  dateInputLayout->addWidget(d->m_dateButton);
 
   connect(d->m_dateButton, SIGNAL(clicked()), SLOT(toggleDatePicker()));
   connect(d->m_dateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(slotDateChosenRef(QDate)));
@@ -210,7 +216,7 @@ void kMyMoneyDateInput::markAsBadDate(bool bad, const QColor& color)
 void kMyMoneyDateInput::showEvent(QShowEvent* event)
 {
   // don't forget the standard behaviour  ;-)
-  KHBox::showEvent(event);
+  QWidget::showEvent(event);
 
   // If the widget is shown, the size must be fixed a little later
   // to be appropriate. I saw this in some other places and the only
