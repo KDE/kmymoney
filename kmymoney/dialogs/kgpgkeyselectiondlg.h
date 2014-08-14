@@ -24,7 +24,7 @@
 // KDE Includes
 
 #include <KDialog>
-#include <KEditListBox>
+#include <KEditListWidget>
 
 class KLed;
 
@@ -48,10 +48,10 @@ public:
   void setKeys(const QStringList& list);
 
   /**
-   * Returns the list of keys currently listed in the KEditListBox
+   * Returns the list of keys currently listed in the KEditListWidget
    */
   const QStringList keys(void) const {
-    return m_listBox->items();
+    return m_listWidget->items();
   }
 
 protected slots:
@@ -59,7 +59,7 @@ protected slots:
   void slotKeyListChanged(void);
 
 private:
-  KEditListBox*   m_listBox;
+  KEditListWidget*   m_listWidget;
   KLed*           m_keyLed;
   bool            m_needCheckList;
   bool            m_listOk;

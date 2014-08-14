@@ -27,7 +27,6 @@
 
 #include <kled.h>
 #include <klineedit.h>
-#include <keditlistbox.h>
 #include <kcombobox.h>
 #include <kmessagebox.h>
 #include <klocale.h>

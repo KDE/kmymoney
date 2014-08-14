@@ -63,19 +63,25 @@ The &lt;i&gt;additional recovery encryption&lt;/i&gt; is only accessible, if the
        <widget class="KLineEdit" name="kcfg_GpgRecipient"/>
       </item>
       <item>
-       <widget class="KEditListBox" name="kcfg_GpgRecipientList">
-        <property name="whatsThis">
-         <string>Enter the id of the key you want to use for data encryption. This can either be an e-mail address or the hexadecimal key id. In case of the key id do not forget the leading 0x.</string>
-        </property>
+       <widget class="QGroupBox" name="groupBox">
         <property name="title">
          <string>Additional keys</string>
         </property>
-        <property name="checkable">
-         <bool>false</bool>
-        </property>
-        <property name="buttons">
-         <set>KEditListBox::Add|KEditListBox::Remove</set>
-        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="KEditListWidget" name="kcfg_GpgRecipientList">
+           <property name="whatsThis">
+            <string>Enter the id of the key you want to use for data encryption. This can either be an e-mail address or the hexadecimal key id. In case of the key id do not forget the leading 0x.</string>
+           </property>
+           <property name="buttons">
+            <set>KEditListWidget::Add|KEditListWidget::Remove</set>
+           </property>
+           <property name="title" stdset="0">
+            <string>Additional keys</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
@@ -200,24 +206,24 @@ This mechanism is provided for the case that you have lost your key and cannot a
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KLed</class>
-   <extends>QWidget</extends>
-   <header>kled.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KEditListBox</class>
-   <extends>QGroupBox</extends>
-   <header>keditlistbox.h</header>
-  </customwidget>
-  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
+   <class>KEditListWidget</class>
+   <extends>QWidget</extends>
+   <header>keditlistwidget.h</header>
+  </customwidget>
+  <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLed</class>
+   <extends>QWidget</extends>
+   <header>kled.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

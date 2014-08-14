@@ -44,7 +44,6 @@
 #include <kiconloader.h>
 #include <kguiitem.h>
 #include <kapplication.h>
-#include <keditlistbox.h>
 #include <khelpclient.h>
 #include <KSharedConfig>
 

@@ -23,12 +23,13 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QGroupBox>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <klocale.h>
-#include <keditlistbox.h>
+#include <KEditListWidget>
 #include <kled.h>
 
 // ----------------------------------------------------------------------------
@@ -51,12 +52,16 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
   QVBoxLayout* topLayout = new QVBoxLayout(page);
   topLayout->setSpacing(spacingHint());
 
-  m_listBox = new KEditListBox(page);
-  m_listBox->setTitle(i18n("User identification"));
-  m_listBox->setButtons((KEditListBox::Remove | KEditListBox::Add));
-  m_listBox->setWhatsThis(i18n("Enter the id of the key you want to use for data encryption. This can either be an e-mail address or the hexadecimal key id. In case of the key id, do not forget the leading 0x."));
+  QGroupBox *listBox = new QGroupBox(i18n("User identification"), page);
+  QVBoxLayout *verticalLayout = new QVBoxLayout(listBox);
+  verticalLayout->setSpacing(6);
+  verticalLayout->setContentsMargins(0, 0, 0, 0);
+  m_listWidget = new KEditListWidget(listBox);
+  m_listWidget->setButtons((KEditListWidget::Remove | KEditListWidget::Add));
+  m_listWidget->setWhatsThis(i18n("Enter the id of the key you want to use for data encryption. This can either be an e-mail address or the hexadecimal key id. In case of the key id, do not forget the leading 0x."));
+  verticalLayout->addWidget(m_listWidget);
 
-  topLayout->addWidget(m_listBox);
+  topLayout->addWidget(listBox);
 
   // add a LED for the availability of all keys
   QHBoxLayout* ledBox = new QHBoxLayout();
@@ -74,15 +79,15 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
 
   topLayout->addLayout(ledBox);
 
-  connect(m_listBox, SIGNAL(changed()), this, SLOT(slotIdChanged()));
-  connect(m_listBox, SIGNAL(added(QString)), this, SLOT(slotKeyListChanged()));
-  connect(m_listBox, SIGNAL(removed(QString)), this, SLOT(slotKeyListChanged()));
+  connect(m_listWidget, SIGNAL(changed()), this, SLOT(slotIdChanged()));
+  connect(m_listWidget, SIGNAL(added(QString)), this, SLOT(slotKeyListChanged()));
+  connect(m_listWidget, SIGNAL(removed(QString)), this, SLOT(slotKeyListChanged()));
 }
 
 void KGpgKeySelectionDlg::setKeys(const QStringList& list)
 {
-  m_listBox->clear();
-  m_listBox->insertStringList(list);
+  m_listWidget->clear();
+  m_listWidget->insertStringList(list);
   slotKeyListChanged();
 }
 
@@ -118,14 +123,14 @@ void KGpgKeySelectionDlg::slotIdChanged(void)
     while (1) {
       // first we check the current edit field if filled
       bool keysOk = true;
-      if (!m_listBox->currentText().isEmpty()) {
-        keysOk = KGPGFile::keyAvailable(m_listBox->currentText());
+      if (!m_listWidget->currentText().isEmpty()) {
+        keysOk = KGPGFile::keyAvailable(m_listWidget->currentText());
       }
 
       // if it is available, then scan the current list if we need to
       if (keysOk) {
         if (m_needCheckList) {
-          QStringList keys = m_listBox->items();
+          QStringList keys = m_listWidget->items();
           QStringList::const_iterator it_s;
           for (it_s = keys.constBegin(); keysOk && it_s != keys.constEnd(); ++it_s) {
             if (!KGPGFile::keyAvailable(*it_s))
@@ -145,8 +150,8 @@ void KGpgKeySelectionDlg::slotIdChanged(void)
         continue;
       }
 
-      m_keyLed->setState(static_cast<KLed::State>(keysOk && (m_listBox->items().count() != 0) ? KLed::On : KLed::Off));
-      enableButtonOk((m_listBox->items().count() == 0) || (m_keyLed->state() == KLed::On));
+      m_keyLed->setState(static_cast<KLed::State>(keysOk && (m_listWidget->items().count() != 0) ? KLed::On : KLed::Off));
+      enableButtonOk((m_listWidget->items().count() == 0) || (m_keyLed->state() == KLed::On));
       break;
     }
 
