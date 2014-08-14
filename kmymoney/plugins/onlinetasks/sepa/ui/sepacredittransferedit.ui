@@ -7,13 +7,16 @@
     <x>0</x>
     <y>0</y>
     <width>340</width>
-    <height>347</height>
+    <height>361</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="KMessageWidget" name="messageOriginAccount" native="true"/>
+   </item>
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
@@ -170,6 +173,7 @@
   <zorder>sepaReference</zorder>
   <zorder>feedbackIban</zorder>
   <zorder>beneficiaryIban</zorder>
+  <zorder>messageOriginAccount</zorder>
  </widget>
  <customwidgets>
   <customwidget>
@@ -212,6 +216,12 @@
    <slots>
     <signal>validatorFeedback(KMyMoneyValidationFeedback::MessageType,QString)</signal>
    </slots>
+  </customwidget>
+  <customwidget>
+   <class>KMessageWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">KMessageWidget</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>
