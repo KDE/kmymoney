@@ -48,7 +48,6 @@
 #include <kfilterdev.h>
 #include <kfilterbase.h>
 #include <kfileitem.h>
-#include <kapplication.h>
 #include <kdeversion.h>
 #include <ktitlewidget.h>
 #include <kcompressiondevice.h>

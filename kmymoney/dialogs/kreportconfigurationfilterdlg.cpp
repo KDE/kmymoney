@@ -42,7 +42,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kapplication.h>
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kguiitem.h>

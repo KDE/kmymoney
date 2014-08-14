@@ -37,7 +37,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kapplication.h>
 #include <klocale.h>
 #include <klineedit.h>
 #include <kcombobox.h>

@@ -33,7 +33,6 @@
 #include <kio/netaccess.h>
 #include <kio/scheduler.h>
 #include <klocale.h>
-#include <kapplication.h>
 #include <kconfig.h>
 #include <kcalendarsystem.h>
 #include <kshell.h>
@@ -576,7 +575,7 @@ const QStringList WebPriceQuote::quoteSourcesFinanceQuote()
     FinanceQuoteProcess getList;
     getList.launch(m_financeQuoteScriptPath);
     while (!getList.isFinished()) {
-      kapp->processEvents();
+      QCoreApplication::processEvents();
     }
     m_financeQuoteSources = getList.getSourceList();
   }

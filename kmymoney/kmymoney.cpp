@@ -65,7 +65,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kapplication.h>
 #include <ktoolbar.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
@@ -1902,10 +1901,10 @@ void KMyMoneyApp::slotFileQuit(void)
     }
     // We will only quit if all windows were processed and not cancelled
     if (w == 0)
-      kapp->quit();
+      QCoreApplication::quit();
 
   } else
-    kapp->quit();
+    QCoreApplication::quit();
 }
 
 void KMyMoneyApp::slotHideReconciledTransactions(void)

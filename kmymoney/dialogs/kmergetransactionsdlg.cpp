@@ -25,7 +25,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kapplication.h>
 #include <klocale.h>
 #include <khelpclient.h>
 

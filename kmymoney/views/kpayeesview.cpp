@@ -49,7 +49,6 @@
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
-#include <kapplication.h>
 #include <khelpclient.h>
 #include <KSharedConfig>
 

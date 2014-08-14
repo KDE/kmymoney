@@ -30,10 +30,11 @@
 #include <QLabel>
 #include <QToolButton>
 #include <QMetaMethod>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <kapplication.h>
+
 #include <klocale.h>
 #include <klineedit.h>
 #include <KIconLoader>

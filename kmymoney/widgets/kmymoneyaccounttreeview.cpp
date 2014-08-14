@@ -29,7 +29,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KGlobal>
 #include <KConfig>
 #include <KConfigGroup>
 #include <KSharedConfig>

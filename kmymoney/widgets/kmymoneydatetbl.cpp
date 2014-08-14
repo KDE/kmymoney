@@ -60,15 +60,15 @@ Contains code from the KDateTable class ala kdelibs-3.1.2.  Original license:
 #include <QHeaderView>
 #include <QDebug>
 #include <QFontDatabase>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 //#include <kdatetable.h> // Use the classes available for maximum re-use
-#include <kapplication.h>
-#include <klocale.h>
-#include <knotification.h>
-#include <kcalendarsystem.h>
+#include <KLocale>
+#include <KNotification>
+#include <KCalendarSystem>
 #include <KColorScheme>
 
 // ----------------------------------------------------------------------------

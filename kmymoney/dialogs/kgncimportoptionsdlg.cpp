@@ -18,6 +18,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QCheckBox>
 #include <QLayout>
 #include <QApplication>
@@ -27,7 +28,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <kapplication.h>
+
 #include <kurlrequester.h>
 #include <ktextbrowser.h>
 #include <klocale.h>

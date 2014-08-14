@@ -35,7 +35,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kapplication.h>
 #include <kurlrequester.h>
 #include <ktextbrowser.h>
 #include <klocale.h>

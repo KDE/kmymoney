@@ -30,7 +30,6 @@
 // KDE Includes
 
 #include <kstandardguiitem.h>
-#include <kapplication.h>
 #include <klocale.h>
 
 // ----------------------------------------------------------------------------

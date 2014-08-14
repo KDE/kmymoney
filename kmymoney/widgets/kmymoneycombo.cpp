@@ -36,13 +36,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <kconfig.h>
+#include <kconfiggroup.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kconfiggroup.h>
 #include "kmymoneyselector.h"
 #include <kmymoneycompletion.h>
 #include <kmymoneylineedit.h>

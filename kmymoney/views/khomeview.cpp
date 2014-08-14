@@ -46,7 +46,6 @@
 #include <kstandardaction.h>
 #include <kxmlguiwindow.h>
 #include <kactioncollection.h>
-#include <kapplication.h>
 #include <kmessagebox.h>
 #include <kcodecs.h>
 #include <kiconloader.h>

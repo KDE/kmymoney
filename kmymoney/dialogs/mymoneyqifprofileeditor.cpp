@@ -38,7 +38,6 @@
 #include <kcombobox.h>
 #include <kurlrequester.h>
 #include <kiconloader.h>
-#include <kapplication.h>
 #include <khelpclient.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>

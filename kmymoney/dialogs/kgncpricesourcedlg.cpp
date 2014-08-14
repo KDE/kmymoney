@@ -18,6 +18,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QLabel>
 #include <QLayout>
 #include <QApplication>
@@ -26,7 +27,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <kapplication.h>
+
 #include <kurlrequester.h>
 #include <ktextbrowser.h>
 #include <klocale.h>
@@ -34,6 +35,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
 #include "webpricequote.h"
 #include "ui_kgncpricesourcedlgdecl.h"
 

@@ -27,7 +27,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kapplication.h>
 #include <kstandardguiitem.h>
 #include <khelpclient.h>
 

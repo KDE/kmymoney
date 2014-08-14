@@ -35,10 +35,10 @@
 // KDE Includes
 
 #include <KAboutData>
+#include <KStartupInfo>
 #include <klocale.h>
 #include <ktip.h>
 #include <kmessagebox.h>
-#include <kapplication.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -265,7 +265,7 @@ int runKMyMoney(QApplication *a, KStartupLogo *splash, const QUrl & file, bool n
 
             // send a message to the primary client to import this file
             QDBusInterface remoteApp(primary, "/KMymoney", "org.kde.kmymoney");
-            remoteApp.call("webConnect", file.path(), kapp->startupId());
+            remoteApp.call("webConnect", file.path(), KStartupInfo::startupId());
 
             // Before we delete the application, we make sure that we destroy all
             // widgets by running the event loop for some time to catch all those
@@ -324,8 +324,8 @@ int runKMyMoney(QApplication *a, KStartupLogo *splash, const QUrl & file, bool n
     }
     KMyMoneyGlobalSettings::setFirstTimeRun(false);
 
-    if (! importfile.isEmpty())
-      kmymoney->webConnect(importfile, kapp->startupId());
+    if (!importfile.isEmpty())
+      kmymoney->webConnect(importfile, KStartupInfo::startupId());
 
     if (kmymoney != 0) {
       kmymoney->updateCaption();

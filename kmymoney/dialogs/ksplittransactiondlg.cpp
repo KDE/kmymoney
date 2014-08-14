@@ -40,7 +40,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
-#include <kapplication.h>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------

@@ -63,11 +63,11 @@
 #include <QMenu>
 #include <QDebug>
 #include <QFontDatabase>
+#include <QApplication>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kapplication.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <klineedit.h>

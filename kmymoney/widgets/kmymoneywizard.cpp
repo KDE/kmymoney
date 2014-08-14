@@ -36,7 +36,6 @@
 #include <klocale.h>
 #include <kstandardguiitem.h>
 #include <kiconloader.h>
-#include <kapplication.h>
 #include <KColorScheme>
 #include <khelpclient.h>
 

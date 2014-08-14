@@ -31,7 +31,6 @@
 #include <kcombobox.h>
 #include <kurlrequester.h>
 #include <klocale.h>
-#include <kapplication.h>
 #include <kmessagebox.h>
 #include <khelpclient.h>
 
