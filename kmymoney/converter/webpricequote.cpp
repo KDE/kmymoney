@@ -160,7 +160,10 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
         QByteArray page = f.readAll();
         KEncodingProber prober(KEncodingProber::Universal);
         prober.feed(page);
-        QString quote = QTextCodec::codecForName(prober.encoding())->toUnicode(page);
+        QTextCodec* codec = QTextCodec::codecForName(prober.encoding());
+        if (!codec)
+          codec = QTextCodec::codecForLocale();
+        QString quote = codec->toUnicode(page);
         f.close();
         slotParseQuote(quote);
       } else {
