@@ -28,6 +28,7 @@
 #include <QUrl>
 #include <KActionCollection>
 #include <KSharedConfig>
+#include <KLocalizedString>
 
 // KMyMoney includes
 #include "mymoneyfile.h"
@@ -36,11 +37,12 @@
 #include "schedulestoicalendar.h"
 #include "pluginsettings.h"
 
-K_PLUGIN_FACTORY(ICalendarExportFactory, registerPlugin<KMMiCalendarExportPlugin>();)
-K_EXPORT_PLUGIN(ICalendarExportFactory("kmm_icalendarexport"))
+// TODO: port to KF5
+//K_PLUGIN_FACTORY(ICalendarExportFactory, registerPlugin<KMMiCalendarExportPlugin>();)
+//K_EXPORT_PLUGIN(ICalendarExportFactory("kmm_icalendarexport"))
 
 struct KMMiCalendarExportPlugin::Private {
-  KAction* m_action;
+  QAction* m_action;
   QString  m_profileName;
   QString  m_iCalendarFileEntryName;
   KMMSchedulesToiCalendar m_exporter;
@@ -54,7 +56,8 @@ KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QVaria
   d->m_iCalendarFileEntryName = "iCalendarFile";
 
   // Tell the host application to load my GUI component
-  setComponentData(ICalendarExportFactory::componentData());
+  // TODO: port to KF5
+  //setComponentData(ICalendarExportFactory::componentData());
   setXMLFile("kmm_icalendarexport.rc");
 
   // For ease announce that we have been loaded.
@@ -102,7 +105,7 @@ void KMMiCalendarExportPlugin::slotFirstExport(void)
   QPointer<KFileDialog> fileDialog = new KFileDialog(QUrl("kfiledialog:///kmymoney-export"), QString("%1|%2\n").arg("*.ics").arg(i18nc("ICS (Filefilter)", "iCalendar files")), d->m_action->parentWidget());
 
   fileDialog->setOperationMode(KFileDialog::Saving);
-  fileDialog->setCaption(i18n("Export as"));
+  fileDialog->setWindowTitle(i18n("Export as"));
 
   if (fileDialog->exec() == QDialog::Accepted) {
     QUrl newURL = fileDialog->selectedUrl();

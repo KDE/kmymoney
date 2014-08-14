@@ -20,10 +20,10 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <QtGui/QScrollBar>
-#include <QtGui/QDesktopWidget>
-#include <QtGui/QCloseEvent>
-#include <QtGui/QLineEdit>
+#include <QScrollBar>
+#include <QDesktopWidget>
+#include <QCloseEvent>
+#include <QLineEdit>
 
 #include <QtCore/QFile>
 #include <QFileDialog>

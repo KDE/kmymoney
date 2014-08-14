@@ -42,7 +42,7 @@ public:
   explicit CsvExporterPlugin(QObject* parent, const QVariantList&);
   ~CsvExporterPlugin();
 
-  KAction*          m_action;
+  QAction*          m_action;
   bool              okToWriteFile(const QUrl &url);
   CsvExportDlg*     exporterDialog() {
     return m_dlg;

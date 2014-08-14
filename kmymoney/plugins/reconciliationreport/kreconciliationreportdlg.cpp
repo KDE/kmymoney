@@ -27,6 +27,7 @@
 #include <QTabWidget>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QPointer>
 
 // KDE includes
 #include <khtmlview.h>

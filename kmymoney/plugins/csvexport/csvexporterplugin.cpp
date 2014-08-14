@@ -46,13 +46,15 @@
 
 #include "kmymoney.h"
 
-K_PLUGIN_FACTORY(CsvExporterFactory, registerPlugin<CsvExporterPlugin>();)
-K_EXPORT_PLUGIN(CsvExporterFactory("kmm_csvexport"))
+// TODO: port KF5
+//K_PLUGIN_FACTORY(CsvExporterFactory, registerPlugin<CsvExporterPlugin>();)
+//K_EXPORT_PLUGIN(CsvExporterFactory("kmm_csvexport"))
 
 CsvExporterPlugin::CsvExporterPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::Plugin(parent, "csvexport"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
-  setComponentData(CsvExporterFactory::componentData());
+  // TODO: port KF5
+  //setComponentData(CsvExporterFactory::componentData());
   setXMLFile("kmm_csvexport.rc");
   createActions();
 // For information, announce that we have been loaded.
@@ -93,7 +95,7 @@ bool CsvExporterPlugin::okToWriteFile(const QUrl &url)
   bool reallySaveFile = true;
 
   if (KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, 0)) {
-    if (KMessageBox::warningYesNo(0, QString("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.pathOrUrl()) + QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
+    if (KMessageBox::warningYesNo(0, QString("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile)) + QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
       reallySaveFile = false;
   }
   return reallySaveFile;

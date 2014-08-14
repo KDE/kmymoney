@@ -27,7 +27,7 @@ email                 : agander93@gmail.com
 #include <QtCore/QFile>
 #include <QtCore/QStringList>
 #include <QtCore/QList>
-#include <QtGui/QCompleter>
+#include <QCompleter>
 
 // ----------------------------------------------------------------------------
 // KDE Headers

@@ -38,11 +38,12 @@
 #include "numbertowords.h"
 #include "pluginsettings.h"
 
-K_PLUGIN_FACTORY(PrintCheckFactory, registerPlugin<KMMPrintCheckPlugin>();)
-K_EXPORT_PLUGIN(PrintCheckFactory("kmm_printcheck"))
+// TODO: port to KF5
+//K_PLUGIN_FACTORY(PrintCheckFactory, registerPlugin<KMMPrintCheckPlugin>();)
+//K_EXPORT_PLUGIN(PrintCheckFactory("kmm_printcheck"))
 
 struct KMMPrintCheckPlugin::Private {
-  KAction* m_action;
+  QAction* m_action;
   QString  m_checkTemplateHTML;
   QStringList m_printedTransactionIdList;
   KMyMoneyRegister::SelectedTransactions m_transactions;
@@ -52,7 +53,8 @@ KMMPrintCheckPlugin::KMMPrintCheckPlugin(QObject *parent, const QVariantList&)
     : KMyMoneyPlugin::Plugin(parent, "iCalendar"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   // Tell the host application to load my GUI component
-  setComponentData(PrintCheckFactory::componentData());
+  // TODO: port to KF5
+  //setComponentData(PrintCheckFactory::componentData());
   setXMLFile("kmm_printcheck.rc");
 
   // For ease announce that we have been loaded.

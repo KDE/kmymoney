@@ -167,7 +167,7 @@ struct icalrecurrencetype scheduleToRecurenceRule(const MyMoneySchedule& schedul
     case MyMoneySchedule::OCCUR_ONCE:
     case MyMoneySchedule::OCCUR_ANY:
     default:
-      kWarning() << "Once, any or unknown recurrence returned recurrence is invalid" << endl;
+      qWarning() << "Once, any or unknown recurrence returned recurrence is invalid" << endl;
       recurrence.freq = ICAL_NO_RECURRENCE;
       break;
   }
@@ -247,9 +247,9 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
   } else {
     vCalendar = icalcomponent_new_from_string(d->m_icalendarAsString.toUtf8());
     if (vCalendar == 0) {
-      kDebug() << "Error parsing the following string into an icalendar:" << endl;
-      kDebug() << d->m_icalendarAsString << endl;
-      kDebug() << "so we will overwrite this with a new calendar" << endl;
+      qDebug() << "Error parsing the following string into an icalendar:" << endl;
+      qDebug() << d->m_icalendarAsString << endl;
+      qDebug() << "so we will overwrite this with a new calendar" << endl;
       newCalendar = true;
       vCalendar = icalcomponent_new_vcalendar();
     }
@@ -257,7 +257,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
 
   if (vCalendar == 0) {
     // one way or the other we must have a calendar by now
-    kDebug() << "Unable to create vcalendar component" << endl;
+    qDebug() << "Unable to create vcalendar component" << endl;
     return;
   }
 

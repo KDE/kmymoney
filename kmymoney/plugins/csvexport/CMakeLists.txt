@@ -18,13 +18,13 @@ qt5_wrap_ui(kmm_csvexport_PART_SRCS
   csvexportdlg.ui
 )
 
-kde4_add_plugin(kmm_csvexport
+add_library(kmm_csvexport
   ${kmm_csvexport_PART_SRCS}
 )
 
 target_link_libraries(kmm_csvexport
   kmm_mymoney kmm_plugin
-  ${KDE4_KDEUI_LIBS} KF5::KIOWidgets
+  KF5::KDELibs4Support
   Alkimia::alkimia
 )
 

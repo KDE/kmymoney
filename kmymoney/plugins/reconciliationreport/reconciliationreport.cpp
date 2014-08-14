@@ -36,8 +36,9 @@
 
 #include "kreconciliationreportdlg.h"
 
-K_PLUGIN_FACTORY(ReconciliationReportFactory, registerPlugin<KMMReconciliationReportPlugin>();)
-K_EXPORT_PLUGIN(ReconciliationReportFactory("kmm_reconciliationreport", "kmymoney"))
+// TODO: port to KF5
+//K_PLUGIN_FACTORY(ReconciliationReportFactory, registerPlugin<KMMReconciliationReportPlugin>();)
+//K_EXPORT_PLUGIN(ReconciliationReportFactory("kmm_reconciliationreport", "kmymoney"))
 
 KMMReconciliationReportPlugin::KMMReconciliationReportPlugin(QObject *parent, const QVariantList&)
     : KMyMoneyPlugin::Plugin(parent, "Reconciliation report"/*must be the same as X-KDE-PluginInfo-Name*/)

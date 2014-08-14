@@ -14,7 +14,7 @@ kconfig_add_kcfg_files(kmm_printcheck_PART_SRCS pluginsettings.kcfgc)
 add_library(kmm_printcheck MODULE ${kmm_printcheck_PART_SRCS})
 
 target_link_libraries(kmm_printcheck
-                      ${KDE4_KDEUI_LIBS}
+                      KF5::KDELibs4Support
                       KF5::KHtml
                       Alkimia::alkimia
                       kmm_mymoney kmm_plugin
@@ -49,7 +49,7 @@ qt5_wrap_ui(kcm_kmm_printcheck_PART_SRCS pluginsettingsdecl.ui)
 add_library(kcm_kmm_printcheck MODULE ${kcm_kmm_printcheck_PART_SRCS})
 
 target_link_libraries(kcm_kmm_printcheck
-                      ${KDE4_KDEUI_LIBS}
+                      KF5::KDELibs4Support
                       KF5::KHtml
                       Alkimia::alkimia
                       )

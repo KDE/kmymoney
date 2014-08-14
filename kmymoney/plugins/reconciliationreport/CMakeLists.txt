@@ -14,7 +14,7 @@ qt5_wrap_ui(kmm_reconciliationreport_PART_SRCS kreconciliationreportdlgdecl.ui )
 add_library(kmm_reconciliationreport MODULE ${kmm_reconciliationreport_PART_SRCS})
 
 target_link_libraries(kmm_reconciliationreport
-                      ${KDE4_KDEUI_LIBS}
+                      KF5::KDELibs4Support
                       KF5::KHtml
                       Alkimia::alkimia
                       kmm_mymoney kmm_plugin

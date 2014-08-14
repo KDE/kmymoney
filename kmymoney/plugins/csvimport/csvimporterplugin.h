@@ -42,7 +42,7 @@ public:
   ~CsvImporterPlugin();
 
   CSVDialog*        m_csvImporter;
-  KAction*          m_action;
+  QAction*          m_action;
 
 public slots:
   bool slotGetStatement(MyMoneyStatement& s);

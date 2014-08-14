@@ -25,7 +25,7 @@ email                 : agander93@gmail.com
 #include <QtCore/QDate>
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
-#include <QtGui/QCloseEvent>
+#include <QCloseEvent>
 // ----------------------------------------------------------------------------
 // KDE Headers
 #include <QUrl>

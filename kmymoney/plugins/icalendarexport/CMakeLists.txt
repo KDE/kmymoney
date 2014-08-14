@@ -44,7 +44,7 @@ qt5_wrap_ui(kcm_kmm_icalendarexport_PART_SRCS pluginsettingsdecl.ui)
 add_library(kcm_kmm_icalendarexport MODULE ${kcm_kmm_icalendarexport_PART_SRCS})
 
 target_link_libraries(kcm_kmm_icalendarexport
-                      ${KDE4_KDEUI_LIBS}
+                      KF5::KDELibs4Support
                       KF5::KIOWidgets
                       )
 

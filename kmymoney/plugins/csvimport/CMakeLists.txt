@@ -31,13 +31,13 @@ qt5_wrap_ui(kmm_csvimport_PART_SRCS
   symboltabledlg.ui
 )
 
-kde4_add_plugin(kmm_csvimport
+add_library(kmm_csvimport
   ${kmm_csvimport_PART_SRCS}
 )
 
 target_link_libraries(kmm_csvimport
   kmm_mymoney kmm_plugin
-  ${KDE4_KDEUI_LIBS} KF5::KIOWidgets
+  KF5::KDELibs4Support
   Alkimia::alkimia
 )
 
@@ -45,19 +45,19 @@ if(KDE4_BUILD_TESTS)
   set(csvdatetest_SRCS csvdatetest.cpp convdate.cpp)
   kde4_add_unit_test(csvdatetest TESTNAME kmymoney-plugin-csvdatetest
     ${csvdatetest_SRCS})
-  target_link_libraries(csvdatetest ${QT_AND_KDECORE_LIBS}
+  target_link_libraries(csvdatetest KF5::KDELibs4Support
     Qt5::Test  kmm_mymoney)
 
   set(parsedatatest_SRCS parsedatatest.cpp csvutil.cpp)
   kde4_add_unit_test(parsedatatest TESTNAME kmymoney-plugin-parsedatatest
     ${parsedatatest_SRCS})
-  target_link_libraries(parsedatatest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS}
+  target_link_libraries(parsedatatest KF5::KDELibs4Support
     Qt5::Test Alkimia::alkimia kmm_mymoney)
 
   set(symboltest_SRCS symboltest.cpp csvutil.cpp)
   kde4_add_unit_test(symboltest TESTNAME kmymoney-plugin-symboltest
     ${symboltest_SRCS})
-  target_link_libraries(symboltest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS}
+  target_link_libraries(symboltest KF5::KDELibs4Support
     Qt5::Test Alkimia::alkimia kmm_mymoney)
 endif(KDE4_BUILD_TESTS)
 

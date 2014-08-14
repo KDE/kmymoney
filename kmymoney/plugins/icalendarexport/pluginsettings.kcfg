@@ -7,7 +7,7 @@
 	<group name="General">
 		<entry name="createAlarm" type="Bool">
 			<label>To create an alarm for the exported schedules</label>
-			<default>TRUE</default>
+                        <default>true</default>
 		</entry>
     <entry name="beforeAfter" type="Int">
       <label>Tells whether the reminder should be triggered before or after the schedule start</label>
@@ -23,7 +23,7 @@
     </entry>
     <entry name="repeatingReminders" type="Bool">
       <label>If the reminders should repeat or not</label>
-      <default>TRUE</default>
+      <default>true</default>
     </entry>
     <entry name="intervalBetweenRemindersTimeUnits" type="Int">
       <label>The number of units of the interval between reminders</label>

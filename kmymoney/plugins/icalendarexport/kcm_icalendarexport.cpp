@@ -26,6 +26,7 @@
 
 // KDE includes
 #include <KPluginFactory>
+#include <KLocalizedString>
 
 #include "pluginsettings.h"
 #include "ui_pluginsettingsdecl.h"
@@ -49,12 +50,14 @@ public:
   }
 };
 
-K_PLUGIN_FACTORY(KCMiCalendarExportFactory,
-                 registerPlugin<KCMiCalendarExport>();
-                )
-K_EXPORT_PLUGIN(KCMiCalendarExportFactory("kmm_icalendarexport", "kmymoney"))
+// TODO: port KF5
+//K_PLUGIN_FACTORY(KCMiCalendarExportFactory,
+//                 registerPlugin<KCMiCalendarExport>();
+//                )
+//K_EXPORT_PLUGIN(KCMiCalendarExportFactory("kmm_icalendarexport", "kmymoney"))
 
-KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args) : KCModule(KCMiCalendarExportFactory::componentData(), parent, args)
+// TODO: port KF5
+KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args) : KCModule(0/*KCMiCalendarExportFactory::componentData()*/, parent, args)
 {
   PluginSettingsWidget *w = new PluginSettingsWidget(this);
   addConfig(PluginSettings::self(), w);

@@ -21,9 +21,9 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <QtGui/QScrollBar>
-#include <QtGui/QDesktopWidget>
-#include <QtGui/QCloseEvent>
+#include <QScrollBar>
+#include <QDesktopWidget>
+#include <QCloseEvent>
 
 #include <QtCore/QFile>
 #include <QFileDialog>

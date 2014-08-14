@@ -23,8 +23,8 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QPointer>
-#include <QtGui/QResizeEvent>
-#include <QtGui/QScrollBar>
+#include <QResizeEvent>
+#include <QScrollBar>
 
 // ----------------------------------------------------------------------------
 // KDE Headers

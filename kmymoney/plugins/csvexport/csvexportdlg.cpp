@@ -41,6 +41,8 @@
 #include <KGuiItem>
 #include <KStandardGuiItem>
 #include <QStandardPaths>
+#include <KConfigGroup>
+
 // ----------------------------------------------------------------------------
 // Project Headers
 
@@ -65,13 +67,13 @@ CsvExportDlg::CsvExportDlg(QWidget *parent) : QDialog(parent), ui(new Ui::CsvExp
                         QIcon::fromTheme("document-export"),
                         i18n("Start operation"),
                         i18n("Use this to start the export operation"));
-  ui->m_qbuttonOk->setGuiItem(okButtonItem);
+  KGuiItem::assign(ui->m_qbuttonOk, okButtonItem);
 
   KGuiItem browseButtonItem(i18n("&Browse..."),
                             QIcon::fromTheme("document-open"),
                             i18n("Select filename"),
                             i18n("Use this to select a filename to export to"));
-  ui->m_qbuttonBrowse->setGuiItem(browseButtonItem);
+  KGuiItem::assign(ui->m_qbuttonBrowse, browseButtonItem);
 
   // connect the buttons to their functionality
   connect(ui->m_qbuttonBrowse, SIGNAL(clicked()), this, SLOT(slotBrowse()));
