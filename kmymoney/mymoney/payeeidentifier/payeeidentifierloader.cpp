@@ -103,9 +103,9 @@ QStringList payeeIdentifierLoader::availableDelegates()
 
 QString payeeIdentifierLoader::translatedDelegateName(const QString& payeeIdentifierId)
 {
-  if ( payeeIdentifierId == payeeIdentifiers::ibanBic::staticPayeeIdentifierId() )
+  if ( payeeIdentifierId == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid() )
     return i18n("IBAN and BIC");
-  else if ( payeeIdentifierId == payeeIdentifiers::nationalAccount::staticPayeeIdentifierId() )
+  else if ( payeeIdentifierId == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid() )
     return i18n("National Account Number");
 
   return QString();

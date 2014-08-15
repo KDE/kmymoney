@@ -41,15 +41,15 @@ class payeeIdentifierLoader;
  * unique among all payeeIdentifiers as it is used internaly to store data, to compare
  * types and for type casting (there must not be more than one class which uses that pidid).
  */
-#define PAYEEIDENTIFIER_ID(className, PIDID) \
-/** @brief Returns the payeeIdentifier Id */ \
-static const QString& staticPayeeIdentifierId() { \
-  static const QString _pidid = QLatin1String( PIDID ); \
+#define PAYEEIDENTIFIER_IID(className, iid) \
+/** @brief Returns the payeeIdentifier Iid */ \
+static const QString& staticPayeeIdentifierIid() { \
+  static const QString _pidid = QLatin1String( iid ); \
   return _pidid; \
   } \
   /** @brief Returns the payeeIdentifier Id */ \
   virtual QString payeeIdentifierId() const { \
-    return className::staticPayeeIdentifierId(); \
+    return className::staticPayeeIdentifierIid(); \
   }
 
 /**
@@ -76,7 +76,7 @@ static const QString& staticPayeeIdentifierId() { \
  *
  * @section Inheriting
  *
- * To identify the type of an payeeIdentifier you must use the macro @ref PAYEEIDENTIFIER_ID(className, PIDID)
+ * To identify the type of an payeeIdentifier you must use the macro @ref PAYEEIDENTIFIER_IID()
  * in the public section of your subclass.
  */
 class KMM_PAYEEIDENTIFIER_EXPORT payeeIdentifierData

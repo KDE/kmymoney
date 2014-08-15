@@ -35,7 +35,7 @@ namespace payeeIdentifiers {
 class payeeIdentifierUnavailable : public payeeIdentifierData
 {
 public:
-  PAYEEIDENTIFIER_ID(payeeIdentifierUnavailable, "org.kmymoney.payeeIdentifier.payeeIdentifierUnavailable");
+  PAYEEIDENTIFIER_IID(payeeIdentifierUnavailable, "org.kmymoney.payeeIdentifier.payeeIdentifierUnavailable");
 
   payeeIdentifierUnavailable();
   virtual void writeXML(QDomDocument& document, QDomElement& parent) const;

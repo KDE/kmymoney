@@ -39,7 +39,7 @@ class IBAN_BIC_IDENTIFIER_EXPORT ibanBic : public payeeIdentifierData
 {
   KMM_UNIT_TESTABLE
 public:
-  PAYEEIDENTIFIER_ID(ibanBic, "org.kmymoney.payeeIdentifier.ibanbic");
+  PAYEEIDENTIFIER_IID(ibanBic, "org.kmymoney.payeeIdentifier.ibanbic");
 
   enum bicAllocationStatus {
     bicAllocated = 0,

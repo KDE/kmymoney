@@ -27,7 +27,7 @@ namespace payeeIdentifiers {
 class NATIONALACCOUNT_IDENTIFIER_EXPORT nationalAccount : public payeeIdentifierData
 {
 public:
-  PAYEEIDENTIFIER_ID(nationalAccount, "org.kmymoney.payeeIdentifier.national");
+  PAYEEIDENTIFIER_IID(nationalAccount, "org.kmymoney.payeeIdentifier.national");
 
   nationalAccount();
   nationalAccount( const nationalAccount& other );

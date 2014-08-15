@@ -131,7 +131,7 @@ payeeIdentifier sepaOnlineTransferImpl::originAccountIdentifier() const
 {
   QList<payeeIdentifier> idents = MyMoneyFile::instance()->account(_originAccount).accountIdentifiers();
   foreach( payeeIdentifier ident, idents ) {
-    if ( ident.iid() == payeeIdentifiers::ibanBic::staticPayeeIdentifierId() ) {
+    if ( ident.iid() == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid() ) {
       ident.data<payeeIdentifiers::ibanBic>()->setOwnerName(MyMoneyFile::instance()->user().name());
       return ident;
     }

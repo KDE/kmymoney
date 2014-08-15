@@ -112,7 +112,7 @@ payeeIdentifier germanOnlineTransferImpl::originAccountIdentifier() const
 {
   QList<payeeIdentifier> idents = MyMoneyFile::instance()->account(_originAccount).accountIdentifiers();
   foreach( payeeIdentifier ident, idents ) {
-    if ( ident.iid() == payeeIdentifiers::nationalAccount::staticPayeeIdentifierId() ) {
+    if ( ident.iid() == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid() ) {
       ident.data<payeeIdentifiers::nationalAccount>()->setOwnerName(MyMoneyFile::instance()->user().name());
       return ident;
     }
