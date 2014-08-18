@@ -20,6 +20,7 @@
 #define NATIONALACCOUNTEDIT_H
 
 #include <QWidget>
+#include "payeeidentifier/payeeidentifier.h"
 
 namespace Ui
 {
@@ -29,16 +30,19 @@ namespace Ui
 class nationalAccountEdit : public QWidget
 {
   Q_OBJECT
-  Q_PROPERTY(QString accountNumber READ accountNumber WRITE setAccountNumber NOTIFY accountNumberChannged STORED true DESIGNABLE true)
-  Q_PROPERTY(QString institutionCode READ institutionCode WRITE setInstitutionCode NOTIFY institutionCodeChanged STORED true DESIGNABLE true)
+  Q_PROPERTY(payeeIdentifier identifier READ identifier WRITE setIdentifier STORED true)
+  Q_PROPERTY(QString accountNumber READ accountNumber WRITE setAccountNumber NOTIFY accountNumberChannged STORED false DESIGNABLE true)
+  Q_PROPERTY(QString institutionCode READ institutionCode WRITE setInstitutionCode NOTIFY institutionCodeChanged STORED false DESIGNABLE true)
 
 public:
   nationalAccountEdit(QWidget* parent = 0);
 
+  payeeIdentifier identifier() const;
   QString accountNumber() const;
   QString institutionCode() const;
 
 public slots:
+  void setIdentifier( const payeeIdentifier& );
   void setAccountNumber( const QString& );
   void setInstitutionCode( const QString& );
 
@@ -47,7 +51,8 @@ signals:
   void accountNumberChannged( QString );
 
 private:
-  Ui::nationalAccountEdit* ui;
+  struct Private;
+  Private* d;
 };
 
 #endif // NATIONALACCOUNTEDIT_H

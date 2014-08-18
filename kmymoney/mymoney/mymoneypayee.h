@@ -32,7 +32,7 @@ class QStringList;
 
 #include <kmm_mymoney_export.h>
 #include <mymoneyobject.h>
-#include "payeeidentifier/payeeidentifier.h"
+#include "mymoneypayeeidentifiercontainer.h"
 
 /**
   * This class represents a payee or receiver within the MyMoney engine.
@@ -41,7 +41,7 @@ class QStringList;
   *
   * @author Thomas Baumgart
   */
-class KMM_MYMONEY_EXPORT MyMoneyPayee : public MyMoneyObject
+class KMM_MYMONEY_EXPORT MyMoneyPayee : public MyMoneyObject, public MyMoneyPayeeIdentifierContainer
 {
 private:
   // Simple fields
@@ -78,15 +78,6 @@ private:
     * empty by the application.
     */
   QString m_reference;
-
-  /**
-   * @brief payeeIdentifiers of this payee
-   *
-   * The key of this list is a unique id within this payee.
-   *
-   * @see payeeIdentifier
-   */
-  QHash< unsigned int, payeeIdentifier > m_payeeIdentifiers;
 
 public:
   typedef enum {
@@ -176,29 +167,6 @@ public:
   void setReference(const QString& ref) {
     m_reference = ref;
   }
-
-  /**
-   * @brief Add a payee identifier to this payee
-   *
-   * @return The index of the added payeeIdentifier (only unique within a payee!)
-   * At the moment you should not store this index, as it may change after reopening the file.
-   */
-  int addPayeeIdentifier( const payeeIdentifier identifier );
-
-  /**
-   * @brief Access all payeeIdentifiers
-   */
-  QList<payeeIdentifier> payeeIdentifiers() const;
-
-  /**
-   * @brief Change a payeeIdentifier
-   */
-  void modifyPayeeIdentifier( const unsigned int& index, payeeIdentifier identifier );
-
-  /**
-   * @brief Remove payeeIdentifier
-   */
-  void removePayeeIdentifier( const unsigned int& index );
 
   /**
    * Get all match data in one call

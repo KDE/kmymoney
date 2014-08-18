@@ -28,7 +28,6 @@
 
 #include "mymoneyutils.h"
 #include <mymoneyexception.h>
-#include "payeeidentifier/payeeidentifierloader.h"
 #include <pluginloader.h>
 
 MyMoneyPayee MyMoneyPayee::null;
@@ -36,16 +35,14 @@ MyMoneyPayee MyMoneyPayee::null;
 MyMoneyPayee::MyMoneyPayee() :
     m_matchingEnabled(false),
     m_usingMatchKey(false),
-    m_matchKeyIgnoreCase(true),
-    m_payeeIdentifiers( QHash <unsigned int, payeeIdentifier >() )
+    m_matchKeyIgnoreCase(true)
 {
 }
 
 MyMoneyPayee::MyMoneyPayee(const QString& id, const MyMoneyPayee& payee) :
     m_matchingEnabled(false),
     m_usingMatchKey(false),
-    m_matchKeyIgnoreCase(true),
-    m_payeeIdentifiers( QHash <unsigned int, payeeIdentifier >() )
+    m_matchKeyIgnoreCase(true)
 {
   *this = payee;
   m_id = id;
@@ -56,8 +53,7 @@ MyMoneyPayee::MyMoneyPayee(const QString& name, const QString& address,
                            const QString& telephone, const QString& email) :
     m_matchingEnabled(false),
     m_usingMatchKey(false),
-    m_matchKeyIgnoreCase(true),
-    m_payeeIdentifiers( QHash <unsigned int, payeeIdentifier >() )
+    m_matchKeyIgnoreCase(true)
 {
   m_name      = name;
   m_address   = address;
@@ -69,8 +65,7 @@ MyMoneyPayee::MyMoneyPayee(const QString& name, const QString& address,
 }
 
 MyMoneyPayee::MyMoneyPayee(const QDomElement& node)
-  : MyMoneyObject(node),
-  m_payeeIdentifiers( QHash <unsigned int, payeeIdentifier >() )
+  : MyMoneyObject(node)
 {
   if ("PAYEE" != node.tagName()) {
     throw MYMONEYEXCEPTION("Node was not PAYEE");
@@ -109,18 +104,7 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node)
   m_state = addrNode.attribute("state");
   m_telephone = addrNode.attribute("telephone");
 
-  // Load identifiers
-  QDomNodeList identifierNodes = node.elementsByTagName("payeeIdentifier");
-  const uint identifierNodesLength = identifierNodes.length();
-  for (uint i = 0; i < identifierNodesLength; ++i) {
-    const QDomElement element = identifierNodes.item(i).toElement();
-    const payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifierFromXML( element );
-    if ( ident.isNull() ) {
-      qWarning() << "Could not load payee identifier" << element.attribute("type", "*no pidid set*");
-      continue;
-    }
-    addPayeeIdentifier( ident );
-  }
+  MyMoneyPayeeIdentifierContainer::loadXML(node);
 }
 
 MyMoneyPayee::~MyMoneyPayee()
@@ -128,8 +112,7 @@ MyMoneyPayee::~MyMoneyPayee()
 }
 
 MyMoneyPayee::MyMoneyPayee(const MyMoneyPayee& right)
-  : MyMoneyObject(right),
-  m_payeeIdentifiers( QHash <unsigned int, payeeIdentifier >() )
+  : MyMoneyObject(right)
 {
   *this = right;
 }
@@ -155,24 +138,6 @@ bool MyMoneyPayee::operator == (const MyMoneyPayee& right) const
 bool MyMoneyPayee::operator < (const MyMoneyPayee& right) const
 {
   return m_name < right.name();
-}
-
-int MyMoneyPayee::addPayeeIdentifier(const payeeIdentifier identifier)
-{
-  const unsigned int newId = m_payeeIdentifiers.count();
-  m_payeeIdentifiers.insert( newId , identifier );
-  return newId;
-}
-
-void MyMoneyPayee::modifyPayeeIdentifier(const unsigned int& index, payeeIdentifier identifier)
-{
-  Q_ASSERT( m_payeeIdentifiers.constFind( index ) != m_payeeIdentifiers.constEnd() );
-  m_payeeIdentifiers[index] = identifier;
-}
-
-void MyMoneyPayee::removePayeeIdentifier(const unsigned int& index)
-{
-  m_payeeIdentifiers.remove( index );
 }
 
 void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
@@ -208,12 +173,8 @@ void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
 
   el.appendChild(address);
 
-  // Add payee identifiers
-  foreach( payeeIdentifier ident, m_payeeIdentifiers ) {
-    if ( !ident.isNull() ) {
-      ident.writeXML(document, el);
-    }
-  }
+  // Save payeeIdentifiers (account numbers)
+  MyMoneyPayeeIdentifierContainer::writeXML(document, el);
 
   parent.appendChild(el);
 }
@@ -266,11 +227,6 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
 void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QString& keys)
 {
   setMatchData(type, ignorecase, keys.split(';'));
-}
-
-QList<payeeIdentifier> MyMoneyPayee::payeeIdentifiers() const
-{
-  return m_payeeIdentifiers.values();
 }
 
 // vim:cin:si:ai:et:ts=2:sw=2:

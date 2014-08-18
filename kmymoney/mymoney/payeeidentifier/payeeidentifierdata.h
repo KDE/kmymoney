@@ -113,7 +113,8 @@ public:
 
   /**
    * @see MyMoneyObject::writeXML()
-   * @warning Do not set an attribute "type" to parent, it is used to store the payeeIdentifierId and is
+   *
+   * @warning Do not set an attribute "type" or "id" to parent, it is used to store internal data and is
    * set automatically.
    */
   virtual void writeXML(QDomDocument &document, QDomElement &parent) const = 0;

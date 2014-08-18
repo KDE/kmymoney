@@ -19,21 +19,37 @@
 #include "payeeidentifier.h"
 
 payeeIdentifier::payeeIdentifier()
-  : m_payeeIdentifier(0)
+  : m_id(0),
+  m_payeeIdentifier(0)
 {
 }
 
 payeeIdentifier::payeeIdentifier(const payeeIdentifier& other)
-  : m_payeeIdentifier(0)
+  : m_id( other.m_id ),
+    m_payeeIdentifier(0)
 {
   if ( other.m_payeeIdentifier != 0 )
     m_payeeIdentifier = other.m_payeeIdentifier->clone();
 }
 
-payeeIdentifier::payeeIdentifier(payeeIdentifierData*const identifier)
-  : m_payeeIdentifier( identifier )
+payeeIdentifier::payeeIdentifier(payeeIdentifierData*const data)
+  : m_id(0),
+    m_payeeIdentifier( data )
 {
+}
 
+payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, payeeIdentifierData*const data)
+  : m_id(id),
+  m_payeeIdentifier( data )
+{
+}
+
+payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, const payeeIdentifier& other)
+  : m_id(id),
+  m_payeeIdentifier(0)
+{
+  if ( other.m_payeeIdentifier != 0 )
+    m_payeeIdentifier = other.m_payeeIdentifier->clone();
 }
 
 payeeIdentifier::~payeeIdentifier()
@@ -44,14 +60,14 @@ payeeIdentifier::~payeeIdentifier()
 payeeIdentifierData* payeeIdentifier::operator->()
 {
   if ( m_payeeIdentifier == 0 )
-    throw badContent(__FILE__, __LINE__);
+    throw empty(__FILE__, __LINE__);
   return m_payeeIdentifier;
 }
 
 const payeeIdentifierData* payeeIdentifier::operator->() const
 {
   if ( m_payeeIdentifier == 0 )
-    throw badContent(__FILE__, __LINE__);
+    throw empty(__FILE__, __LINE__);
   return m_payeeIdentifier;
 }
 
@@ -84,6 +100,7 @@ payeeIdentifier& payeeIdentifier::operator=(const payeeIdentifier& other)
   if ( this == &other )
     return *this;
 
+  m_id = other.m_id;
   m_payeeIdentifier = other.m_payeeIdentifier->clone();
 
   return *this;
@@ -91,6 +108,9 @@ payeeIdentifier& payeeIdentifier::operator=(const payeeIdentifier& other)
 
 bool payeeIdentifier::operator==(const payeeIdentifier& other)
 {
+  if ( m_id != other.m_id )
+    return false;
+
   if ( isNull() || other.isNull() ) {
     if ( !isNull() ||  !other.isNull() )
       return false;
@@ -104,6 +124,9 @@ void payeeIdentifier::writeXML(QDomDocument& document, QDomElement& parent, cons
   // Important: type must be set before calling m_payeeIdentifier->writeXML()
   // the plugin for unavailable plugins must be able to set type itself
   QDomElement elem = document.createElement(elemenName);
+  if ( m_id != 0 )
+    elem.setAttribute("id", m_id);
+
   if ( !isNull() ) {
     elem.setAttribute("type", m_payeeIdentifier->payeeIdentifierId());
     m_payeeIdentifier->writeXML(document, elem);

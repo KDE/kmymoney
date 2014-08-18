@@ -27,7 +27,7 @@ class payeeIdentifierTyped : public payeeIdentifier
 public:
   payeeIdentifierTyped(const payeeIdentifierTyped& other);
   payeeIdentifierTyped( T* pid );
-  explicit payeeIdentifierTyped();
+  //explicit payeeIdentifierTyped();
   explicit payeeIdentifierTyped(const payeeIdentifier& other);
 
   T* operator->();
@@ -40,16 +40,20 @@ public:
   bool operator==(const payeeIdentifierTyped& other);
 
 private:
+  /** this method is not save in this class, so deactivate it */
+  void setData( payeeIdentifierData* dataPtr );
   T* m_payeeIdentifierTyped;
 };
 
+#if 0
 template< class T >
 payeeIdentifierTyped<T>::payeeIdentifierTyped()
   : payeeIdentifier()
 {
   Q_ASSERT( false && "This method is not implemented yet" );
-  throw payeeIdentifier::badContent();
+  throw payeeIdentifier::empty();
 }
+#endif
 
 template< class T >
 payeeIdentifierTyped<T>::payeeIdentifierTyped(T* pid)
@@ -57,7 +61,7 @@ payeeIdentifierTyped<T>::payeeIdentifierTyped(T* pid)
   m_payeeIdentifierTyped(pid)
 {
   if ( m_payeeIdentifierTyped == 0 )
-    throw payeeIdentifier::badContent(__FILE__, __LINE__);
+    throw payeeIdentifier::empty(__FILE__, __LINE__);
 }
 
 template< class T >
@@ -87,7 +91,7 @@ payeeIdentifierTyped<T>::payeeIdentifierTyped(const payeeIdentifier& other)
   m_payeeIdentifierTyped = dynamic_cast<T*>(payeeIdentifier::data());
   if ( m_payeeIdentifierTyped == 0 ) {
     if ( payeeIdentifier::data() == 0 )
-      throw payeeIdentifier::badContent(__FILE__, __LINE__);
+      throw payeeIdentifier::empty(__FILE__, __LINE__);
     throw payeeIdentifier::badCast(__FILE__, __LINE__);
   }
 }

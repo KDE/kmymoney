@@ -56,13 +56,18 @@ payeeIdentifier payeeIdentifierLoader::createPayeeIdentifier(const QString& paye
 payeeIdentifier payeeIdentifierLoader::createPayeeIdentifierFromXML(const QDomElement& element)
 {
   const QString payeeIdentifierId = element.attribute("type");
-  const payeeIdentifierData* ident = m_identifiers.value( payeeIdentifierId );
-  if ( ident != 0 ) {
-    payeeIdentifierData* newIdent = ident->createFromXml( element );
-    return payeeIdentifier( newIdent );
+  const payeeIdentifierData* identData = m_identifiers.value( payeeIdentifierId );
+  payeeIdentifier ident;
+
+  if ( identData != 0 ) {
+    payeeIdentifierData* newIdent = identData->createFromXml( element );
+    ident = payeeIdentifier(newIdent);
+  } else {
+    ident = payeeIdentifier( new payeeIdentifiers::payeeIdentifierUnavailable(element) );
   }
 
-  return payeeIdentifier( new payeeIdentifiers::payeeIdentifierUnavailable(element) );
+  ident.m_id = element.attribute("id", 0).toUInt();
+  return ident;
 }
 
 /**

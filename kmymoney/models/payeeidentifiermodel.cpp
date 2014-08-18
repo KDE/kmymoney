@@ -27,13 +27,15 @@
 
 payeeIdentifierModel::payeeIdentifierModel( QObject* parent )
   : QAbstractListModel(parent),
-  m_payee( MyMoneyPayee() )
+  m_data(0),
+  m_loadedType(NONE)
 {
 }
 
 QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 {
-  const ::payeeIdentifier ident = m_payee.payeeIdentifiers().at(index.row());
+  Q_CHECK_PTR( m_data );
+  const ::payeeIdentifier ident = m_data->payeeIdentifiers().at(index.row());
 
   if ( role == payeeIdentifier) {
     return QVariant::fromValue< ::payeeIdentifier >(ident);
@@ -51,23 +53,13 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 /** @todo implement dataChanged signal */
 bool payeeIdentifierModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
+  Q_CHECK_PTR( m_data );
+
   if ( role == payeeIdentifier ) {
     ::payeeIdentifier ident = value.value< ::payeeIdentifier >();
-    if ( !ident.isNull() ) {
-      m_payee.modifyPayeeIdentifier(index.row(), ident);
-      try {
-        MyMoneyFileTransaction transaction;
-        MyMoneyFile *const file = MyMoneyFile::instance();
-        file->modifyPayee(m_payee);
-        transaction.commit();
-        m_payee = file->payee(m_payee.id());
-      } catch ( MyMoneyException& e ) {
-        qDebug( "payeeIdentifierModel could not edit payee" );
-        return false;
-      }
-      return true;
-    }
-    return false;
+    m_data->modifyPayeeIdentifier(ident);
+    const bool ret = saveCurrentObject();
+    return ret;
   }
   return QAbstractItemModel::setData(index, value, role);
 }
@@ -85,76 +77,90 @@ Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex& index) const
 
 int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
 {
-  return m_payee.payeeIdentifiers().count();
+  Q_CHECK_PTR( m_data );
+  return m_data->payeeIdentifiers().count();
 }
 
 /** @todo implement dataChanged signal */
 bool payeeIdentifierModel::insertRows(int row, int count, const QModelIndex& parent)
 {
+  Q_CHECK_PTR( m_data );
 //  if ( row != m_payee.payeeIdentifiers().count()-1 || count != 1 || parent.isValid())
 //    return false; // cannot add rows in the middle at the moment and only a single row
 
   beginInsertRows(parent, row+1, row+1);
-  try {
-    m_payee.addPayeeIdentifier( ::payeeIdentifier() );
-    MyMoneyFileTransaction transaction;
-    MyMoneyFile::instance()->modifyPayee(m_payee);
-    transaction.commit();
-  } catch ( MyMoneyException& ) {
-    endInsertRows();
-    return false;
-  }
+  ::payeeIdentifier ident;
+  m_data->addPayeeIdentifier( ident );
+  const bool ret = saveCurrentObject();
   endInsertRows();
-  return true;
+  return ret;
 }
 
 /** @todo implement dataChanged signal */
 bool payeeIdentifierModel::removeRows(int row, int count, const QModelIndex& parent)
 {
+  Q_CHECK_PTR( m_data );
   if (count < 1)
     return false;
 
   beginRemoveRows(parent, row, row+count-1);
-
-  try {
-    for( int i = row; i < row+count; ++i) {
-      m_payee.removePayeeIdentifier(i);
-    }
-    MyMoneyFileTransaction transaction;
-    MyMoneyFile::instance()->modifyPayee( m_payee );
-    transaction.commit();
-  } catch ( MyMoneyException& ) {
-    endRemoveRows();
-    return false;
+  for( int i = row; i < row+count; ++i) {
+    m_data->removePayeeIdentifier(data(index(i, 0), payeeIdentifier).value< ::payeeIdentifier >());
   }
-
+  const bool ret = saveCurrentObject();
   endRemoveRows();
-  return true;
+  return ret;
 }
 
-void payeeIdentifierModel::setPayee(MyMoneyPayee payee)
+void payeeIdentifierModel::setSource(MyMoneyPayee payee)
 {
-  // Remove all rows
-  const int oldLastRow = m_payee.payeeIdentifiers().count()-1;
-  beginRemoveRows(QModelIndex(), 0, oldLastRow);
   m_payee = payee;
-  emit dataChanged(index(0, 0), index(oldLastRow, 0));
-  endRemoveRows();
+  m_loadedType = PAYEE;
+  setSource( &m_payee );
+}
+
+void payeeIdentifierModel::setSource(MyMoneyAccount account)
+{
+  m_account = account;
+  m_loadedType = ACCOUNT;
+  setSource(&m_account);
+}
+
+void payeeIdentifierModel::setSource(MyMoneyPayeeIdentifierContainer* data)
+{
+  if ( m_data != 0 ) {
+    // Remove all rows
+    const int oldLastRow = m_data->payeeIdentifiers().count()-1;
+    beginRemoveRows(QModelIndex(), 0, oldLastRow);
+    emit dataChanged(index(0, 0), index(oldLastRow, 0));
+    endRemoveRows();
+  }
+
+  // no need to delete data as it always points to 0, m_account or m_payee
+  m_data = data;
 
   // Insert new rows
-  const int newLastRow = m_payee.payeeIdentifiers().count()-1;
+  const int newLastRow = m_data->payeeIdentifiers().count()-1;
   beginInsertRows(QModelIndex(), 0, newLastRow);
   emit dataChanged(index(0, 0), index(newLastRow, 0));
   endInsertRows();
 }
 
-void payeeIdentifierModel::setPayee(QString payeeId)
+bool payeeIdentifierModel::saveCurrentObject()
 {
+  Q_ASSERT( m_loadedType != NONE );
   try {
-    setPayee( MyMoneyFile::instance()->payee( payeeId ) );
-  } catch ( MyMoneyException& ) {
-    qWarning("Tried to load non-existent payee into payeeIdentifierModel");
-  }
-}
+    MyMoneyFileTransaction transaction;
 
-#include "../models/payeeidentifiermodel.moc"
+    if ( m_loadedType == PAYEE ) {
+      MyMoneyFile::instance()->modifyPayee( m_payee );
+    } else if ( m_loadedType == ACCOUNT ) {
+      MyMoneyFile::instance()->modifyAccount( m_account );
+    }
+
+    transaction.commit();
+  } catch ( MyMoneyException& ) {
+    return false;
+  }
+  return true;
+}

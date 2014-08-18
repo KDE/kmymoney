@@ -123,9 +123,7 @@ void nationalAccountDelegate::setEditorData(QWidget* editor, const QModelIndex& 
   nationalAccountEdit* nationalEditor = qobject_cast< nationalAccountEdit* >(editor);
   Q_CHECK_PTR( nationalEditor );
 
-  payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = identByIndex(index);
-  nationalEditor->setAccountNumber( ident->accountNumber() );
-  nationalEditor->setInstitutionCode( ident->bankCode() );
+  nationalEditor->setIdentifier( identByIndex(index) );
 }
 
 void nationalAccountDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const

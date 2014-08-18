@@ -73,7 +73,7 @@ void KPayeeIdentifierView::setPayee(MyMoneyPayee payee)
   }
 
   Q_CHECK_PTR( qobject_cast<payeeIdentifierModel*>(ui->view->model()) );  // this should never fail but may help during debugging
-  static_cast<payeeIdentifierModel*>(ui->view->model())->setPayee(payee);
+  static_cast<payeeIdentifierModel*>(ui->view->model())->setSource(payee);
 }
 
 /**

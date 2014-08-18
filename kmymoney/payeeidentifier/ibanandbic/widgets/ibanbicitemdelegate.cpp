@@ -126,8 +126,7 @@ void ibanBicItemDelegate::setEditorData(QWidget* editor, const QModelIndex& inde
   ibanBicItemEdit* ibanEditor = qobject_cast< ibanBicItemEdit* >(editor);
   Q_CHECK_PTR( ibanEditor );
 
-  ibanEditor->setBic( ibanBic->storedBic() );
-  ibanEditor->setIban( ibanBic->electronicIban() );
+  ibanEditor->setIdentifier( ibanBic );
 }
 
 void ibanBicItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
@@ -139,10 +138,7 @@ void ibanBicItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* mode
   ibanBicItemEdit* ibanEditor = qobject_cast< ibanBicItemEdit* >(editor);
   Q_CHECK_PTR( ibanEditor );
 
-  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic = ibanBicByIndex(index);
-  ibanBic->setBic( ibanEditor->bic() );
-  ibanBic->setIban( ibanEditor->iban() );
-  model->setData(index, QVariant::fromValue<payeeIdentifier>( ibanBic ), payeeIdentifierModel::payeeIdentifier);
+  model->setData(index, QVariant::fromValue<payeeIdentifier>( ibanEditor->identifier() ), payeeIdentifierModel::payeeIdentifier);
 }
 
 void ibanBicItemDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const

@@ -18,34 +18,86 @@
 
 #include "ibanbicitemedit.h"
 #include "payeeidentifier/ibanandbic/ibanbic.h"
+#include <payeeidentifier/payeeidentifiertyped.h>
 #include "ui_ibanbicitemedit.h"
 
-ibanBicItemEdit::ibanBicItemEdit(QWidget* parent)
-  : QWidget(parent)
+struct ibanBicItemEdit::Private
 {
-  ui = new Ui::ibanBicItemEdit;
-  ui->setupUi(this);
+  Ui::ibanBicItemEdit* ui;
+  payeeIdentifier m_identifier;
+};
 
-  connect(ui->ibanEdit, SIGNAL(textChanged(QString)), this, SIGNAL(ibanChanged(QString)));
-  connect(ui->bicEdit, SIGNAL(textChanged(QString)), this, SIGNAL(bicChanged(QString)));
+ibanBicItemEdit::ibanBicItemEdit(QWidget* parent)
+  : QWidget(parent),
+  d( new Private )
+{
+  d->ui = new Ui::ibanBicItemEdit;
+  d->ui->setupUi(this);
+
+  connect(d->ui->ibanEdit, SIGNAL(textChanged(QString)), this, SLOT(updateIdentifier()));
+  connect(d->ui->bicEdit, SIGNAL(textChanged(QString)), this, SLOT(updateIdentifier()));
+
+  connect(d->ui->ibanEdit, SIGNAL(textChanged(QString)), this, SIGNAL(ibanChanged(QString)));
+  connect(d->ui->bicEdit, SIGNAL(textChanged(QString)), this, SIGNAL(bicChanged(QString)));
+}
+
+payeeIdentifier ibanBicItemEdit::identifier() const
+{
+  return d->m_identifier;
 }
 
 QString ibanBicItemEdit::bic() const
 {
-  return ui->bicEdit->text();
+  return d->ui->bicEdit->text();
 }
 
 QString ibanBicItemEdit::iban() const
 {
-  return ui->ibanEdit->text();
+  return d->ui->ibanEdit->text();
 }
 
-void ibanBicItemEdit::setBic(QString bic)
+void ibanBicItemEdit::setIdentifier(const payeeIdentifier& ident)
 {
-  ui->bicEdit->setText( bic );
+  try {
+    payeeIdentifierTyped<payeeIdentifiers::ibanBic> identTyped(ident);
+    d->ui->bicEdit->setText(identTyped->storedBic());
+    d->ui->ibanEdit->setText(identTyped->paperformatIban());
+    d->m_identifier = ident;
+  } catch ( payeeIdentifier::exception& ) {
+  }
 }
 
-void ibanBicItemEdit::setIban(QString iban)
+void ibanBicItemEdit::setBic(const QString& bic)
 {
-  ui->ibanEdit->setText( payeeIdentifiers::ibanBic::ibanToPaperformat(iban) );
+  d->ui->bicEdit->setText( bic );
+}
+
+void ibanBicItemEdit::setIban(const QString& iban)
+{
+  d->ui->ibanEdit->setText( payeeIdentifiers::ibanBic::ibanToPaperformat(iban) );
+}
+
+void ibanBicItemEdit::updateIdentifier()
+{
+  if ( d->m_identifier.isNull() )
+    d->m_identifier = payeeIdentifier(d->m_identifier.id(), new payeeIdentifiers::ibanBic );
+
+  const QString iban = payeeIdentifiers::ibanBic::ibanToElectronic(d->ui->ibanEdit->text());
+  const QString bic = d->ui->bicEdit->text();
+  bool changed = false;
+
+  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident( d->m_identifier );
+  if ( ident->storedBic() != bic ) {
+    ident->setBic( bic );
+    changed = true;
+  }
+
+  if (ident->electronicIban() != iban ) {
+    ident->setElectronicIban( iban );
+    changed = true;
+  }
+  d->m_identifier = ident;
+
+  if (changed)
+    emit identifierChanged( d->m_identifier );
 }

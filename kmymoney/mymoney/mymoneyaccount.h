@@ -38,6 +38,7 @@
 #include "mymoneyutils.h"
 
 #include "payeeidentifier/payeeidentifier.h"
+#include "mymoneypayeeidentifiercontainer.h"
 
 class MyMoneyTransaction;
 class MyMoneySplit;
@@ -76,7 +77,7 @@ class MyMoneyObjectContainer;
   * @author Thomas Baumgart 2002
   *
 **/
-class KMM_MYMONEY_EXPORT MyMoneyAccount : public MyMoneyObject, public MyMoneyKeyValueContainer
+class KMM_MYMONEY_EXPORT MyMoneyAccount : public MyMoneyObject, public MyMoneyKeyValueContainer, public MyMoneyPayeeIdentifierContainer
 {
   friend class MyMoneyObjectContainer;
   KMM_MYMONEY_UNIT_TESTABLE

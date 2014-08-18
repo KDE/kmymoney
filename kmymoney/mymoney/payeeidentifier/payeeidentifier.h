@@ -28,11 +28,17 @@
 // Q_DECLARE_METATYPE requries this include
 #include "payeeidentifierdata.h"
 
+class MyMoneyPayeeIdentifierContainer;
+
 class KMM_PAYEEIDENTIFIER_EXPORT payeeIdentifier
 {
 public:
+  typedef unsigned int id_t;
+
   explicit payeeIdentifier();
-  explicit payeeIdentifier( payeeIdentifierData *const identifier );
+  explicit payeeIdentifier( payeeIdentifierData *const data );
+  explicit payeeIdentifier( const id_t& id, payeeIdentifierData *const data );
+  explicit payeeIdentifier( const payeeIdentifier::id_t& id, const payeeIdentifier& other );
 
   payeeIdentifier(const payeeIdentifier& other);
   ~payeeIdentifier();
@@ -70,13 +76,15 @@ public:
 
   bool isValid() const;
 
+  id_t id() const { return m_id; }
+  void clearId() { m_id = 0; }
+
   /**
-   * @brief Get payeeIdentifier id
+   * @brief Get payeeIdentifier Iid which identifiers the type
    *
    * @return An payeeIdentifier id or QString() if no data is associated
    */
   QString iid() const;
-
 
   /**
    * @brief Base for exceptions thrown by payeeIdentifier
@@ -107,15 +115,24 @@ public:
    * @brief Thrown if one tried to access the data of a null payeeIdentifier
    * @todo inherit from MyMoneyException
    */
-  class badContent : public exception
+  class empty : public exception
   {
   public:
-    badContent(const QString& file = "", const long unsigned int& line = 0)
+    empty(const QString& file = "", const long unsigned int& line = 0)
     //: MyMoneyException("Requested payeeIdentifierData of empty payeeIdentifier", file, line)
     { Q_UNUSED(file); Q_UNUSED(line); }
   };
 
 private:
+  /**
+   * The id is only used in MyMoneyPayeeIdentifierContainer at the moment.
+   */
+  id_t m_id;
+
+  // Must access the id, but the id should not be used outside of that class at the moment
+  friend class MyMoneyPayeeIdentifierContainer;
+  friend class payeeIdentifierLoader;
+
   payeeIdentifierData* m_payeeIdentifier;
 };
 
