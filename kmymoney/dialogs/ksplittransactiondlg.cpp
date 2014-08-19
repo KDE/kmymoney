@@ -123,7 +123,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   slotSetTransaction(t);
 
   // pass on those vars
-  transactionsTable->setup(priceInfo);
+  transactionsTable->setup(priceInfo, m_precision);
 
   QSize size(width(), height());
   KConfigGroup grp = KSharedConfig::openConfig()->group("SplitTransactionEditor");

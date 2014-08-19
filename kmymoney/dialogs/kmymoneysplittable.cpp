@@ -73,7 +73,8 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
     m_maxRows(0),
     m_editCategory(0),
     m_editMemo(0),
-    m_editAmount(0)
+    m_editAmount(0),
+    m_precision(2)
 {
   // used for custom coloring with the help of the application's stylesheet
   setObjectName(QLatin1String("splittable"));
@@ -140,9 +141,10 @@ int kMyMoneySplitTable::currentRow() const
   return m_currentRow;
 }
 
-void kMyMoneySplitTable::setup(const QMap<QString, MyMoneyMoney>& priceInfo)
+void kMyMoneySplitTable::setup(const QMap<QString, MyMoneyMoney>& priceInfo, int precision)
 {
   m_priceInfo = priceInfo;
+  m_precision = precision;
 }
 
 bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
@@ -801,6 +803,7 @@ KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
   m_editAmount = new kMyMoneyEdit(0);
   m_editAmount->setFont(cellFont);
   m_editAmount->setResetButtonVisible(false);
+  m_editAmount->setPrecision(m_precision);
 
   m_editCategory = new KMyMoneyCategory();
   m_editCategory->setPlaceholderText(i18n("Category"));
