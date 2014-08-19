@@ -170,6 +170,8 @@ MyMoneyReport::MyMoneyReport(const QDomElement& node) :
     MyMoneyObject(node),
     m_currentDateColumn(0)
 {
+  // properly initialize the object before reading it
+  *this = MyMoneyReport();
   if (!read(node))
     clearId();
 }
