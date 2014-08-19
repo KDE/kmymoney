@@ -87,7 +87,7 @@ public:
     */
   const QList<MyMoneySplit> getSplits(const MyMoneyTransaction& t) const;
 
-  void setup(const QMap<QString, MyMoneyMoney>& priceInfo);
+  void setup(const QMap<QString, MyMoneyMoney>& priceInfo, int precision);
 
   int currentRow() const;
 
@@ -200,6 +200,11 @@ private:
   MyMoneyAccount      m_account;
   MyMoneySplit        m_split;
   MyMoneySplit        m_hiddenSplit;
+
+  /**
+    * This member keeps the precision for the values
+    */
+  int                 m_precision;
 
   /**
     * This member keeps a pointer to the context menu
