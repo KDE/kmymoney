@@ -51,6 +51,7 @@ add_library(kcm_kmm_printcheck MODULE ${kcm_kmm_printcheck_PART_SRCS})
 target_link_libraries(kcm_kmm_printcheck
                       KF5::KDELibs4Support
                       KF5::KHtml
+                      KF5::CoreAddons
                       Alkimia::alkimia
                       )
 
