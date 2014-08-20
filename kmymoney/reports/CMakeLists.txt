@@ -26,7 +26,7 @@ if( KDE4_BUILD_TESTS )
   kde4_add_unit_test( pivotgridtest TESTNAME kmymoney-pivotgridtest ${pivotgridtest_SRCS} )
   add_dependencies( pivotgridtest reports kmymoney_base kmymoney_common kmm_storage )
 
-  target_link_libraries( pivotgridtest reports kmymoney_base kmymoney_common kmm_storage KF5::KHtml KF5::Archive Qt5::Gui Qt5::Xml Qt5::Core Qt5::Test )
+  target_link_libraries( pivotgridtest reports kmymoney_base kmymoney_common kmm_storage KF5::KDELibs4Support KF5::KHtml KF5::Archive Qt5::Gui Qt5::Xml Qt5::Core Qt5::Test )
 
   # Pivot Table
   set( pivottabletest_SRCS pivottabletest.cpp reportstestcommon.cpp ../mymoney/mymoneytestutils.cpp )
@@ -35,7 +35,7 @@ if( KDE4_BUILD_TESTS )
 
   add_dependencies( pivottabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_kdchart kmm_storage kmm_config )
 
-  target_link_libraries( pivottabletest reports settings kmymoney_base kmymoney_common dialogs widgets kmm_kdchart kmm_storage kmm_config KF5::KHtml KF5::Archive Qt5::Gui Qt5::Xml Qt5::Core Qt5::Test )
+  target_link_libraries( pivottabletest reports settings kmymoney_base kmymoney_common dialogs widgets kmm_kdchart kmm_storage kmm_config KF5::KDELibs4Support KF5::KHtml KF5::Archive Qt5::Gui Qt5::Xml Qt5::Core Qt5::Test )
 
   # Query Table
   set( querytabletest_SRCS querytabletest.cpp reportstestcommon.cpp ../mymoney/mymoneytestutils.cpp )
@@ -43,7 +43,7 @@ if( KDE4_BUILD_TESTS )
   kde4_add_unit_test( querytabletest TESTNAME kmymoney-querytabletest ${querytabletest_SRCS} )
   add_dependencies( querytabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_storage kmm_config )
 
-  target_link_libraries( querytabletest reports kmymoney_base kmymoney_common dialogs widgets kmm_storage kmm_config KF5::KHtml KF5::Archive Qt5::Gui Qt5::Xml Qt5::Core Qt5::Test )
+  target_link_libraries( querytabletest reports kmymoney_base kmymoney_common dialogs widgets kmm_storage kmm_config KF5::KDELibs4Support KF5::KHtml KF5::Archive Qt5::Gui Qt5::Xml Qt5::Core Qt5::Test )
 
   if (KF5Holidays_FOUND)
     target_link_libraries(pivotgridtest KF5::Holidays)
