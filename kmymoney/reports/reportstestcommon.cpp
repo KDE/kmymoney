@@ -21,10 +21,6 @@
 #include <QFile>
 #include <QTextStream>
 
-#include <kdeversion.h>
-#include <klocale.h>
-
-
 #include "kreportsviewtest.h"
 
 #include "pivottable.h"
