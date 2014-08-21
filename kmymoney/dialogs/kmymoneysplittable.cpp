@@ -71,10 +71,10 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
     QTableWidget(parent),
     m_currentRow(0),
     m_maxRows(0),
+    m_precision(2),
     m_editCategory(0),
     m_editMemo(0),
-    m_editAmount(0),
-    m_precision(2)
+    m_editAmount(0)
 {
   // used for custom coloring with the help of the application's stylesheet
   setObjectName(QLatin1String("splittable"));
