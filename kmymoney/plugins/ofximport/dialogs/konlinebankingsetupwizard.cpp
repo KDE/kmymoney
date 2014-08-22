@@ -201,7 +201,7 @@ void KOnlineBankingSetupWizard::newPage(int id)
     }
 
     if (ok) {
-      if(focus) {
+      if (focus) {
         focus->setFocus();
       }
     } else {
@@ -336,7 +336,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
     QRegExp exp("(.*):(.*)");
     if (exp.indexIn(appId) != -1) {
       strncpy(fi.appid, exp.cap(1).toLatin1(), OFX_APPID_LENGTH - 1);
-      if(exp.cap(2).isEmpty()) {
+      if (exp.cap(2).isEmpty()) {
         strncpy(fi.appver, m_applicationEdit->text().toLatin1(), OFX_APPVER_LENGTH - 1);
       } else {
         strncpy(fi.appver, exp.cap(2).toLatin1(), OFX_APPVER_LENGTH - 1);
@@ -521,7 +521,7 @@ bool KOnlineBankingSetupWizard::chosenSettings(MyMoneyKeyValueContainer& setting
       settings.deletePair("kmmofx-headerVersion");
       QString appId = m_appId->appId();
       if (!appId.isEmpty()) {
-        if(appId.endsWith(':')) {
+        if (appId.endsWith(':')) {
           appId += m_applicationEdit->text();
         }
         settings.setValue("appId", appId);

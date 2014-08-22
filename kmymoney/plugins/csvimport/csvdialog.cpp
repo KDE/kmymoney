@@ -1155,8 +1155,7 @@ int CSVDialog::processQifLine(QString& iBuff)  //   parse input line
       if (!ensureBothFieldsValid(i)) {
         return KMessageBox::Cancel;
       }
-    }
-    else if (m_columnTypeList[i] == "memo") {      //         could be more than one
+    } else if (m_columnTypeList[i] == "memo") {     //         could be more than one
       txt = m_columnList[i];
       txt.replace('~', "\n");  //                             replace NL which was substituted
       if ((!m_firstPass) && (txt.isEmpty()) && (m_payeeColCopied)) {
@@ -1246,12 +1245,12 @@ int CSVDialog::ensureBothFieldsValid(int col)
   } else {  //                                                Second field.
     if (txt.isEmpty()) {
       m_secondValue = txt;
-    } else if (QString::number(txt.toDouble(), 'f', 2 ) == 0) {
+    } else if (QString::number(txt.toDouble(), 'f', 2) == 0) {
       m_secondValue = QString();
       m_secondType = m_columnTypeList[col];
       txt = m_firstValue;
     }
-    if ((txt.isEmpty()) || (QString::number(txt.toDouble(), 'f', 2 ) == 0)) {  //  If second field empty,...
+    if ((txt.isEmpty()) || (QString::number(txt.toDouble(), 'f', 2) == 0)) {   //  If second field empty,...
       m_secondValue = txt;//QString()
       m_secondType = m_columnTypeList[col];
       txt = m_firstValue;  //                                                      ...use first (which could also be empty..)
@@ -1305,12 +1304,12 @@ int CSVDialog::ensureBothFieldsValid(int col)
       //  both debit and credit have entries so ask user how to proceed.
       //  if just one field is empty, that's OK - bypass this message
       ret = KMessageBox::questionYesNoCancel(this, i18n("<center>The %1 field contains '%2'</center>"
-            "<center>and the %3 field contains '%4'.</center>"
-            "<center>Please choose which you wish to accept.</center>",
-            m_columnTypeList[m_debitColumn], m_columnList[m_debitColumn],m_columnTypeList[m_creditColumn], m_columnList[m_creditColumn]), i18n("CSV invalid field values"),
-            KGuiItem(i18n("Accept %1", m_columnTypeList[m_debitColumn])),
-            KGuiItem(i18n("Accept %1", m_columnTypeList[m_creditColumn])),
-            KGuiItem(i18n("Cancel")));
+                                             "<center>and the %3 field contains '%4'.</center>"
+                                             "<center>Please choose which you wish to accept.</center>",
+                                             m_columnTypeList[m_debitColumn], m_columnList[m_debitColumn], m_columnTypeList[m_creditColumn], m_columnList[m_creditColumn]), i18n("CSV invalid field values"),
+                                             KGuiItem(i18n("Accept %1", m_columnTypeList[m_debitColumn])),
+                                             KGuiItem(i18n("Accept %1", m_columnTypeList[m_creditColumn])),
+                                             KGuiItem(i18n("Cancel")));
       if (ret == KMessageBox::Cancel) {
         return ret;
       }
@@ -3923,7 +3922,7 @@ void CompletionPage::initializePage()
     }
   }
   //  use saved value of index to trigger validity test
-     QTimer::singleShot(200, m_dlg, SLOT(decimalSymbolSelected()));
+  QTimer::singleShot(200, m_dlg, SLOT(decimalSymbolSelected()));
 }
 
 void CompletionPage::slotImportValid()
