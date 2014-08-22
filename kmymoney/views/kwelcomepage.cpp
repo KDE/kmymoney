@@ -212,6 +212,7 @@ const QStringList KWelcomePage::featuresList(void)
   featuresList.append(i18n("Added a frozen column to improve visualizing forecast details"));
   featuresList.append(i18n("Improved multiple records management actions (payees, transactions)"));
   featuresList.append(i18n("Better performance of the user interface"));
+  featuresList.append(i18n("Homepage can show accounts online banking status"));
   featuresList.append(i18n("Improved the icon theme"));
   featuresList.append(i18n("CSV importer was improved"));
   featuresList.append(i18n("CSV exporter added"));
