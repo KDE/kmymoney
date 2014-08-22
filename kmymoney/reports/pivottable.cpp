@@ -1156,9 +1156,7 @@ void PivotTable::calculateTotals(void)
         (*it_outergroup).m_total[ m_rowTypeList[i] ].m_total += value;
 
         //so far the invert only applies to actual and budget
-        if (invert_total
-            && m_rowTypeList[i] != eBudgetDiff
-            &&  m_rowTypeList[i] != eForecast)
+        if (invert_total && m_rowTypeList[i] != eBudgetDiff)
           value = -value;
 
         m_grid.m_total[ m_rowTypeList[i] ][column] += value;
@@ -1995,9 +1993,8 @@ void PivotTable::calculateForecast(void)
         } else {
           //if columns are months
           while (column < m_numColumns) {
-            //set forecastDate to last day of each month
-            //TODO we really need a date manipulation util
-            forecastDate = QDate(forecastDate.year(), forecastDate.month(), forecastDate.daysInMonth());
+            // the forecast balance is on the first day of the month see MyMoneyForecast::calculateScheduledMonthlyBalances()
+            forecastDate = QDate(forecastDate.year(), forecastDate.month(), 1);
             //check that forecastDate is not over ending date
             if (forecastDate > m_endDate)
               forecastDate = m_endDate;
@@ -2005,7 +2002,7 @@ void PivotTable::calculateForecast(void)
             //get forecast balance and set the corresponding column
             it_row.value()[eForecast][column] = forecast.forecastBalance(it_row.key(), forecastDate);
 
-            forecastDate = forecastDate.addDays(1);
+            forecastDate = forecastDate.addMonths(1);
             ++column;
           }
         }

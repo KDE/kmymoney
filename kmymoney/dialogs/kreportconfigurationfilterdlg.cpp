@@ -99,8 +99,10 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
     m_tab2 = new kMyMoneyReportConfigTab2Decl(m_ui->m_criteriaTab);
     m_tab2->setObjectName("kMyMoneyReportConfigTab2");
     m_ui->m_criteriaTab->insertTab(1, m_tab2, i18n("Rows/Columns"));
-    connect(m_tab2->findChild<KComboBox*>("m_comboRows"), SIGNAL(highlighted(int)), this, SLOT(slotRowTypeChanged(int)));
+    connect(m_tab2->findChild<KComboBox*>("m_comboRows"), SIGNAL(activated(int)), this, SLOT(slotRowTypeChanged(int)));
     connect(m_tab2->findChild<KComboBox*>("m_comboColumns"), SIGNAL(activated(int)), this, SLOT(slotColumnTypeChanged(int)));
+    connect(m_tab2->findChild<KComboBox*>("m_comboRows"), SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
+    connect(m_tab2->findChild<KComboBox*>("m_comboColumns"), SIGNAL(activated(int)), this, SLOT(slotUpdateColumnsCombo()));
     //control the state of the includeTransfer check
     connect(m_ui->m_categoriesView, SIGNAL(stateChanged()), this, SLOT(slotUpdateCheckTransfers()));
 
@@ -256,7 +258,17 @@ void KReportConfigurationFilterDlg::slotRowTypeChanged(int row)
 
 void KReportConfigurationFilterDlg::slotColumnTypeChanged(int row)
 {
-  if (m_tab2->findChild<KMyMoneyGeneralCombo*>("m_comboBudget")->isEnabled() && row < 2) {
+  if ((m_tab2->findChild<KMyMoneyGeneralCombo*>("m_comboBudget")->isEnabled() && row < 2)) {
+    m_tab2->findChild<KComboBox*>("m_comboColumns")->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
+  }
+}
+
+void KReportConfigurationFilterDlg::slotUpdateColumnsCombo(void)
+{
+  const int monthlyIndex = 2;
+  const int incomeExpenseIndex = 0;
+  const bool isIncomeExpenseForecast = m_currentState.isIncludingForecast() && m_tab2->findChild<KComboBox*>("m_comboRows")->currentIndex() == incomeExpenseIndex;
+  if (isIncomeExpenseForecast && m_tab2->findChild<KComboBox*>("m_comboColumns")->currentIndex() != monthlyIndex) {
     m_tab2->findChild<KComboBox*>("m_comboColumns")->setCurrentItem(i18nc("@item the columns will display monthly data", "Monthly"), false);
   }
 }

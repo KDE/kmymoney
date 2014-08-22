@@ -83,6 +83,7 @@ protected slots:
   virtual void slotDateChanged(void);
 
   void slotUpdateCheckTransfers(void);
+  void slotUpdateColumnsCombo(void);
 
 private:
   QVector<MyMoneyBudget> m_budgets;
