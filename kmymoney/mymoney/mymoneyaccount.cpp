@@ -131,10 +131,10 @@ MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
 
   // Up to and including version 4.6.6 the new account dialog stored the iban in the kvp-key "IBAN".
   // But the rest of the software uses "iban". So correct this:
-  if ( !value("IBAN").isEmpty() ) {
+  if (!value("IBAN").isEmpty()) {
     // If "iban" was not set, set it now. If it is set, the user reseted it already, so remove
     // the garbage.
-    if ( value("iban").isEmpty() )
+    if (value("iban").isEmpty())
       setValue("iban", value("IBAN"));
     deletePair("IBAN");
   }
