@@ -106,6 +106,7 @@ int main(int argc, char *argv[])
   aboutData.addCredit(i18n("Robert Wadley"), i18n("Icons & splash screen"), "rob@robntina.fastmail.us");
   aboutData.addCredit(i18n("Laurent Montel"), i18n("Patches and port to kde4"), "montel@kde.org");
   aboutData.addCredit(i18n("Wolfgang Rohdewald"), i18n("Patches"), "woro@users.sourceforge.net");
+  aboutData.addCredit(i18n("Marko Käning"), i18n("Patches and packaging for OS X"), "mk-lists@email.de");
   aboutData.setOrganizationDomain("kde.org");
 
   /**
