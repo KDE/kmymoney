@@ -209,14 +209,16 @@ const QStringList KWelcomePage::featuresList(void)
 {
   QStringList featuresList;
 
-  featuresList.append(i18n("Can import csv files with the new CSV Import plugin"));
-  featuresList.append(i18n("Documentation and translations have been improved"));
-  featuresList.append(i18n("Now works with latest version of AqBanking"));
+  featuresList.append(i18n("Transaction tags were added"));
+  featuresList.append(i18n("Proper input methods support was added"));
+  featuresList.append(i18n("Improved the transaction form"));
+  featuresList.append(i18n("Added a frozen column to improve visualizing forecast details"));
+  featuresList.append(i18n("Improved multiple records management actions (payees, transactions)"));
   featuresList.append(i18n("Better performance of the user interface"));
-  featuresList.append(i18n("Improved usability of the online banking features"));
-  featuresList.append(i18n("Allow to base the payee name from either the PAYEEID, NAME or MEMO field in an OFX transaction"));
-  featuresList.append(i18n("Runs on all operating systems supported by KDE"));
-
+  featuresList.append(i18n("Improved the icon theme"));
+  featuresList.append(i18n("CSV importer was improved"));
+  featuresList.append(i18n("CSV exporter added"));
+  featuresList.append(i18n("OFX plugin now allows custom application version"));
 
   return featuresList;
 }
