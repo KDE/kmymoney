@@ -386,17 +386,17 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources(void
       ", (\\d+\\D+\\d+\\D+\\d+)", // dateregexp
       "%d %m %y" // dateformat
                                                                 );
-
-  // This quote source provided by Peter Lord
-  // The trading symbol will normally be the SEDOL (see wikipedia) but
-  // the flexibility presently (1/2008) in the code will allow use of
-  // the ISIN or MEXID (FT specific) codes
+  // This quote source provided by e-mail and should replace the previous one:
+  // From: David Houlden <djhoulden@gmail.com>
+  // To: kmymoney@kde.org
+  // Date: Sat, 6 Apr 2013 13:22:45 +0100
   result["Financial Times UK Funds"] = WebPriceQuoteSource("Financial Times UK Funds",
-                                       "http://funds.ft.com/funds/simpleSearch.do?searchArea=%&search=%1",
-                                       "SEDOL[\\ ]*(\\d+.\\d+)", // symbol regexp
-                                       "\\(GBX\\)[\\ ]*([0-9,]*.\\d+)[\\ ]*", // price regexp
-                                       "Valuation date:[\\ ]*(\\d+/\\d+/\\d+)", // date regexp
-                                       "%d/%m/%y" // date format
+                                       "http://funds.ft.com/uk/Tearsheet/Summary?s=%1:GBP",
+                                       "data-display-symbol=\"(.*):", // symbol regexp
+                                       "class=\"text first\">([\\d,]*\\d+\\.\\d+)</td>", // price regexp
+                                       "As of market close\\ (.*)\\.", // date regexp
+                                       "%m %d %y", // date format
+                                       true // skip HTML stripping
                                                           );
 
   // This quote source provided by Danny Scott
