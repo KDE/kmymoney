@@ -14,65 +14,66 @@
 </para>
 
 <para>
-  This is the second full release of &kappname; for KDE4.  Many of the
-  performance issues noticed with the 4.5 release have been resolved.  The user
-  interface has been further improved, and over 100 bugs have been eliminated.
-</para>
-
-<para>
   Here are some of the new features found in this release:
 </para>
 
 <itemizedlist>
   <listitem>
     <para>
-      <link linkend="firsttime.mainwindow">Runs natively on KDE4</link> and on
-      all operating systems supported by KDE, with many improvements especially
-      for the &MacOS; X and &Windows; platforms.
+      Transaction tags were added. This was long requested feature and allows an improved categorization of transaction.
     </para>
-  </listitem> 
+  </listitem>
 
   <listitem>
     <para>
-      Better performance of the user interface.  Performance in general has been
-      improved, addressing the degradation that was introduced with the
-      migration to KDE4.
+      Better performance of the user interface.  Performance in general has been improved by fixing performance issues spotted using a profiler.
     </para>
   </listitem>
-  
+
   <listitem>
     <para>
-      Documentation and translations have been further improved.
+      Proper input methods support was added. &kappname; can now be safely used with languages that need input methods for easier use.
     </para>
-  </listitem> 
-  
+  </listitem>
+
+  <listitem>
+    <para>
+      Added a frozen column to improve visualizing forecast details. This way the account name won't be shifted out of the view when horizontally scrolling the forecast details.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      The application icons were improved.
+    </para>
+  </listitem>
+
   <listitem>
     <para>
       Many improvements in the importing and online banking modules, including:
     </para>
-  </listitem> 
+  </listitem>
 
   <listitem>
     <itemizedlist>
       <listitem>
-	<para>
-	  There is a new plugin to import csv files
-	</para>
-      </listitem> 
+        <para>
+          The homepage can show accounts online banking status.
+        </para>
+      </listitem>
 
       <listitem>
-	<para>
-	  The payee name can now be based on either the PAYEEID, NAME, or MEMO
-	  field when importing a transaction via OFX direct connect
-	</para>
+        <para>
+          OFX plugin now allows custom application version.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          There is a new plugin to export csv files.
+        </para>
       </listitem>
     </itemizedlist>
-  </listitem>
-
-  <listitem>
-    <para>
-      Improvements have been made to the database back end.
-    </para>
   </listitem>
 </itemizedlist>
 

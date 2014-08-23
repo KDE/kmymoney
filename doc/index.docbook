@@ -18,9 +18,9 @@
   <!ENTITY userlist "<email>kmymoney@kde.org</email>">
   <!ENTITY olduserlist "<email>kmymoney2-user@lists.sourceforge.net</email>">
 
-  <!-- the following author entities have been added to contributor.entities in 4.5 branch and trunk of svn 
+  <!-- the following author entities have been added to contributor.entities in 4.5 branch and trunk of svn
        they can be removed from this file once they are present in the kdelibs minimum version required by &kappname; -->
-  
+
   <!ENTITY Michael.T.Edwardes "<personname><firstname>Michael</firstname><othername>T.</othername><surname>Edwardes</surname></personname>">
   <!ENTITY Michael.T.Edwardes.mail "<email>mte@users.sourceforge.net</email>">
 
@@ -57,7 +57,7 @@
   <!ENTITY Cristian.Onet "<personname><firstname>Cristian</firstname><surname>Oneț</surname></personname>">
   <!ENTITY Cristian.Onet.mail "<email>onet.cristian@gmail.com</email>">
 
-  <!-- the following author entity has been added to contributor.entities in trunk and probably 4.6 branch of svn 
+  <!-- the following author entity has been added to contributor.entities in trunk and probably 4.6 branch of svn
        it can be removed from this file once it is present in the kdelibs minimum version required by &kappname; -->
 
   <!ENTITY Allan.Anderson "<personname><firstname>Allan</firstname><surname>Anderson</surname></personname>">
@@ -98,6 +98,7 @@
   <!ENTITY details-budgets SYSTEM "details-budgets.docbook">
   <!ENTITY details-forecast SYSTEM "details-forecast.docbook">
   <!ENTITY details-categories SYSTEM "details-categories.docbook">
+  <!ENTITY details-tags SYSTEM "details-tags.docbook">
   <!ENTITY details-payees SYSTEM "details-payees.docbook">
   <!ENTITY details-schedules SYSTEM "details-schedules.docbook">
   <!ENTITY details-ledgers SYSTEM "details-ledgers.docbook">
@@ -154,6 +155,7 @@ and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
 <year>2009</year>
 <year>2010</year>
 <year>2011</year>
+<year>2014</year>
 <holder>The &kappname; Development Team</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
@@ -221,6 +223,7 @@ consistent documentation style across all KDE apps. -->
 &details-institutions;
 &details-accounts;
 &details-categories;
+&details-tags;
 &details-payees;
 &details-schedules;
 &details-ledgers;
