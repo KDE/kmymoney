@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.tags">
+<chapterinfo>
+  <authorgroup>
+    <author>&Cristian.Onet; &Cristian.Onet.mail;</author>
+  </authorgroup>
+  <date>2014-08-23</date>
+  <releaseinfo>4.7</releaseinfo>
+</chapterinfo>
+
+<title id="details.tags.title">Tags</title>
+
+<para>
+  The Tags screen provides detailed information about all the tags which are
+  applied to transactions. The Tags screen is split into two main
+  areas: a tags list and a detail area.
+</para>
+
+<para>
+  The Tags screen allows for viewing the transactions for the selected tag and
+  updating the tag's details.
+</para>
+
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="tags.png" format="PNG" />
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.tags.list">
+<title>Tags List</title>
+
+<para>
+  A list of tags is on the left side of this screen. The tags list
+  is sorted alphabetically.
+</para>
+
+<sect2>
+<title>Adding a Tag</title>
+
+<para>
+  To add a tag, right-click on any tag and choose
+  <guimenuitem>New tag</guimenuitem>. This creates a new tag called
+  <quote>New tag</quote>. Right-click on this tag and select
+  <guimenuitem>Rename tag</guimenuitem> to enter the name of the new tag.
+</para>
+</sect2>
+
+<sect2>
+<title>Renaming a Tag</title>
+
+<para>
+  To rename a tag, simply right-click on the name, select
+  <guimenuitem>Rename tag</guimenuitem> and the name becomes
+  editable. Changing the name will affect the name in all the transactions in
+  which it appears.
+</para>
+</sect2>
+
+<sect2>
+<title>Deleting a Tag</title>
+
+<para>
+  To remove a tag, right-click the name and select
+  <guimenuitem>Delete tag</guimenuitem>. If the tag has any transactions,
+  you will be presented with a dialog that allows you to reassign them to a
+  different tag.
+</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.tags.details">
+<title>Tag Details</title>
+
+<para>
+  To view and edit the information associated with a particular tag,
+  select the tag from the list and select the Details tab. To modify this
+  information, edit the detail area directly and press the Update button when
+  finished.
+</para>
+
+<para>
+<screenshot>
+  <screeninfo>The tag details tab</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="tag_details.png" format="PNG" />
+  </imageobject>
+  <textobject>
+  <phrase>Tag details</phrase>
+  </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+</sect1>
+
+</chapter>
