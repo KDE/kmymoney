@@ -240,7 +240,7 @@ if(NOT WIN32)
 endif(NOT WIN32)
 if(CMAKE_COMPILER_IS_GNUCXX)
   # be more pedantic about common symbols
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wlogical-op")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common")
 
   # Debug, Debugfull, Profile
   set(CMAKE_CXX_FLAGS_DEBUG
@@ -252,6 +252,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 
   # be pedantic about undefined symbols when linking shared libraries
   if(CMAKE_SYSTEM_NAME MATCHES Linux OR CMAKE_SYSTEM_NAME MATCHES kFreeBSD OR CMAKE_SYSTEM_NAME STREQUAL GNU)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined -Wl,--as-needed")
   endif(CMAKE_SYSTEM_NAME MATCHES Linux OR CMAKE_SYSTEM_NAME MATCHES kFreeBSD OR CMAKE_SYSTEM_NAME STREQUAL GNU)
 endif(CMAKE_COMPILER_IS_GNUCXX)
