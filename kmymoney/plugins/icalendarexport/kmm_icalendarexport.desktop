@@ -1,6 +1,17 @@
 [Desktop Entry]
 Name=iCalendar
+Name[es]=iCalendar
+Name[nl]=iCalendar
+Name[pt]=iCalendar
+Name[sk]=iCalendar
+Name[uk]=iCalendar
+Name[x-test]=xxiCalendarxx
 Comment=Exports schedules to iCalendar files
+Comment[nl]=Exporteert planningen naar iCalender bestanden
+Comment[pt]=Exporta os calendários para ficheiros iCalendar
+Comment[sk]=Exportovať rozvrhy do súborov iCalendar
+Comment[uk]=Експортує розклади до файлів iCalendar
+Comment[x-test]=xxExports schedules to iCalendar filesxx
 Type=Service
 Icon=x-office-calendar
 ServiceTypes=KMyMoneyPlugin

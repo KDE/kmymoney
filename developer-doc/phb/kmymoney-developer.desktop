@@ -1,5 +1,10 @@
 [Desktop Entry]
 Name=KMyMoney developer handbook
+Name[nl]=Handleiding voor de ontwikkelaar van KMyMoney
+Name[pt]=Manual de desenvolvimento do KMyMoney
+Name[sk]=Vývojárska príručka KMyMoney
+Name[uk]=Підручник для розробників KMyMoney
+Name[x-test]=xxKMyMoney developer handbookxx
 Icon=kmymoney
 Exec=kmymoney
 Categories=Qt;KDE;Office;ProjectManagement;

@@ -1,6 +1,17 @@
 [Desktop Entry]
 Name=KBanking
+Name[es]=KBanking
+Name[nl]=KBanking
+Name[pt]=KBanking
+Name[sk]=KBanking
+Name[uk]=KBanking
+Name[x-test]=xxKBankingxx
 Comment=Add online banking to KMyMoney
+Comment[nl]=Voegt online bankieren toe aan KMyMoney
+Comment[pt]=Adiciona a banca 'online' ao KMyMoney
+Comment[sk]=Pridať online banking do KMyMoney
+Comment[uk]=Додає можливість роботи з банками за допомогою мережі до KMyMoney
+Comment[x-test]=xxAdd online banking to KMyMoneyxx
 ServiceTypes=KMyMoneyPlugin
 Type=Service
 Icon=network-connect

@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=Reconciliation report
+Name[nl]=Rapport over transactiecontrole
+Name[pt]=Relatório de reconciliação
+Name[sk]=Zrovnávacia správa
+Name[uk]=Звіт щодо звірки
+Name[x-test]=xxReconciliation reportxx
 Comment=Creates a report after each reconciliation containing data about the reconciliation process
+Comment[nl]=Maakt een rapport aan na elke transactiecontrole met gegevens over het controleproces
+Comment[pt]=Cria um relatório, a seguir a cada reconciliação, que contém os dados do processo de reconciliação
+Comment[sk]=Vytvorí report po každom zrovnaní obsahujúcom dáta o procese zrovnania
+Comment[uk]=Створює звіт після кожної звірки з даними щодо процесу звірки
+Comment[x-test]=xxCreates a report after each reconciliation containing data about the reconciliation processxx
 Type=Service
 Icon=application-vnd.oasis.opendocument.spreadsheet
 ServiceTypes=KMyMoneyPlugin

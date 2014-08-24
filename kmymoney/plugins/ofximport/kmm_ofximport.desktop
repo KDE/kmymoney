@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=KMyMoney OFX
+Name[nl]=KMyMoney OFX
+Name[pt]=OFX do KMyMoney
+Name[sk]=KMyMoney OFX
+Name[uk]=OFX KMyMoney
+Name[x-test]=xxKMyMoney OFXxx
 Comment=Add OFX importing to KMyMoney
+Comment[nl]=Voeg OFX importeren toe aan KMyMoney
+Comment[pt]=Adiciona a importação de OFX ao KMyMoney
+Comment[sk]=Pridať OFX import do KMyMoney
+Comment[uk]=Додає можливість імпортування OFX до KMyMoney
+Comment[x-test]=xxAdd OFX importing to KMyMoneyxx
 ServiceTypes=KMyMoneyPlugin
 Type=Service
 Icon=network-connect

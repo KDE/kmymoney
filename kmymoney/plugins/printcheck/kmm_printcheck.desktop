@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=Print check
+Name[nl]=Cheque afdrukken
+Name[pt]=Imprimir um cheque
+Name[sk]=Tlačiť šek
+Name[uk]=Надрукувати чек
+Name[x-test]=xxPrint checkxx
 Comment=Provides the capability to print checks
+Comment[nl]=Levert de mogelijkheid checks af te drukken
+Comment[pt]=Oferece a capacidade de impressão de cheques
+Comment[sk]=Poskytuje možnosť tlačiť účty
+Comment[uk]=Надає змогу друкувати чеки
+Comment[x-test]=xxProvides the capability to print checksxx
 Type=Service
 Icon=document-print
 ServiceTypes=KMyMoneyPlugin
