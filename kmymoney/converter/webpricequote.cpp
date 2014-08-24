@@ -385,7 +385,7 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources(void
   // To: kmymoney@kde.org
   // Date: Sat, 6 Apr 2013 13:22:45 +0100
   result["Financial Times UK Funds"] = WebPriceQuoteSource("Financial Times UK Funds",
-                                       "http://funds.ft.com/uk/Tearsheet/Summary?s=%1:GBP",
+                                       "http://funds.ft.com/uk/Tearsheet/Summary?s=%1",
                                        "data-display-symbol=\"(.*):", // symbol regexp
                                        "class=\"text first\">([\\d,]*\\d+\\.\\d+)</td>", // price regexp
                                        "As of market close\\ (.*)\\.", // date regexp
