@@ -49,7 +49,6 @@
 #include <kcompletionbox.h>
 #include <kpushbutton.h>
 #include <kmenu.h>
-#include <kstdaccel.h>
 #include <kshortcut.h>
 
 // ----------------------------------------------------------------------------
