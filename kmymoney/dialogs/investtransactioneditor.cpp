@@ -36,7 +36,6 @@
 #include <kcombobox.h>
 #include <kpushbutton.h>
 #include <kmessagebox.h>
-#include <kstdguiitem.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

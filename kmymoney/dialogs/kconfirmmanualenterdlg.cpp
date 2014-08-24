@@ -29,7 +29,6 @@
 #include <klocale.h>
 #include <ktextedit.h>
 #include <kpushbutton.h>
-#include <kstdguiitem.h>
 #include <kmessagebox.h>
 
 // ----------------------------------------------------------------------------

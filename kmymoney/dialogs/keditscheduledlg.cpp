@@ -33,7 +33,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
-#include <kstdguiitem.h>
 #include <knuminput.h>
 #include <klineedit.h>
 #include <KToolInvocation>
