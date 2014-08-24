@@ -224,7 +224,7 @@ public slots:
   void slotOpenReport(const QString&);
   void slotOpenReport(const MyMoneyReport&);
   void slotCloseCurrent(void);
-  void slotClose(QWidget*);
+  void slotClose(int index);
   void slotCloseAll(void);
   void slotDelete(void);
   void slotListContextMenu(const QPoint &);
