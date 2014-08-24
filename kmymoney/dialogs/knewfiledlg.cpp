@@ -28,7 +28,6 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <kstdguiitem.h>
 #include <kpushbutton.h>
 #include <kmessagebox.h>
 #include <KPIMIdentities/IdentityManager>

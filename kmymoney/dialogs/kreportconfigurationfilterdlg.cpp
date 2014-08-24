@@ -49,7 +49,6 @@
 #include <kguiitem.h>
 #include <kiconloader.h>
 #include <kdebug.h>
-#include <kstdguiitem.h>
 #include <klocale.h>
 
 // ----------------------------------------------------------------------------

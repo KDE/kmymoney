@@ -26,7 +26,6 @@
 
 #include <kdialog.h>
 #include <klocale.h>
-#include <kstdguiitem.h>
 #include <kpushbutton.h>
 #include <kmessagebox.h>
 

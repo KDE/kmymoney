@@ -37,7 +37,6 @@
 // KDE includes
 #include <kpushbutton.h>
 #include <kdatewidget.h>
-#include <kstdguiitem.h>
 #include <klocale.h>
 
 // KMyMoney includes

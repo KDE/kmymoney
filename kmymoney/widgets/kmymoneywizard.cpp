@@ -33,7 +33,6 @@
 
 #include <klocale.h>
 #include <kpushbutton.h>
-#include <kstdguiitem.h>
 #include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <kapplication.h>

@@ -39,7 +39,6 @@
 #include <KInputDialog>
 #include <KSharedConfig>
 #include <kmessagebox.h>
-#include <kstdguiitem.h>
 #include <KStandardDirs>
 #include <KLocale>
 #include <KIO/NetAccess>

@@ -29,7 +29,6 @@
 // KDE Includes
 
 #include <kpushbutton.h>
-#include <kstdguiitem.h>
 #include <kapplication.h>
 #include <klocale.h>
 
