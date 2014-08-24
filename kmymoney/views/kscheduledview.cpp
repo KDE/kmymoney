@@ -80,7 +80,7 @@ KScheduledView::KScheduledView(QWidget *parent) :
   // attach popup to 'Filter...' button
   m_kaccPopup = new KMenu(this);
   m_accountsCombo->setMenu(m_kaccPopup);
-  connect(m_kaccPopup, SIGNAL(activated(int)), this, SLOT(slotAccountActivated(int)));
+  connect(m_kaccPopup, SIGNAL(triggered(QAction*)), this, SLOT(slotAccountActivated()));
 
   m_qbuttonNew->setGuiItem(KMyMoneyUtils::scheduleNewGuiItem());
   m_accountsCombo->setGuiItem(KMyMoneyUtils::accountsFilterGuiItem());
@@ -507,7 +507,7 @@ void KScheduledView::slotListItemExecuted(QTreeWidgetItem* item, int)
   }
 }
 
-void KScheduledView::slotAccountActivated(int /*id*/)
+void KScheduledView::slotAccountActivated()
 {
   m_filterAccounts.clear();
 

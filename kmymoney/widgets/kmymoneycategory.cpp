@@ -93,7 +93,7 @@ KMyMoneyCategory::KMyMoneyCategory(QWidget* parent, bool splitButton) :
 
   m_completion = new kMyMoneyAccountCompletion(this);
   connect(m_completion, SIGNAL(itemSelected(QString)), this, SLOT(slotItemSelected(QString)));
-  connect(this, SIGNAL(textChanged(QString)), m_completion, SLOT(slotMakeCompletion(QString)));
+  connect(this, SIGNAL(editTextChanged(QString)), m_completion, SLOT(slotMakeCompletion(QString)));
 }
 
 KMyMoneyCategory::~KMyMoneyCategory()

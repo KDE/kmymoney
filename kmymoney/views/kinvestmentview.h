@@ -127,7 +127,7 @@ protected:
   void loadSecurityItem(QTreeWidgetItem* item, const MyMoneySecurity& security);
 
 protected slots:
-  void slotTabCurrentChanged(QWidget*);
+  void slotTabCurrentChanged(int index);
   /**
     * This slot receives the signal from the listview @c lv control that the context menu
     * was requested for @c item at @c point.

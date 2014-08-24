@@ -118,7 +118,7 @@ protected:
   void loadForecastSettings(void);
 
 protected slots:
-  void slotTabChanged(QWidget*);
+  void slotTabChanged(int index);
 
   /**
    * Get the list of prices for an account

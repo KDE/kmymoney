@@ -210,22 +210,22 @@ void InvestTransactionEditor::createEditWidgets(void)
   security->setClickMessage(i18n("Security"));
   m_editWidgets["security"] = security;
   connect(security, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateSecurity(QString)));
-  connect(security, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(security, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
   connect(security, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateSecurity(QString,QString&)));
   connect(security, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   KMyMoneyCategory* asset = new KMyMoneyCategory(0, false);
   asset->setClickMessage(i18n("Asset account"));
   m_editWidgets["asset-account"] = asset;
-  connect(asset, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(asset, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
   connect(asset, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   KMyMoneyCategory* fees = new KMyMoneyCategory(0, true);
   fees->setClickMessage(i18n("Fees"));
   m_editWidgets["fee-account"] = fees;
   connect(fees, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateFeeCategory(QString)));
-  connect(fees, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
-  connect(fees, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateFeeVisibility(QString)));
+  connect(fees, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(fees, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateFeeVisibility(QString)));
   connect(fees, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateFeeCategory(QString,QString&)));
   connect(fees, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(fees->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditFeeSplits()));
@@ -234,8 +234,8 @@ void InvestTransactionEditor::createEditWidgets(void)
   interest->setClickMessage(i18n("Interest"));
   m_editWidgets["interest-account"] = interest;
   connect(interest, SIGNAL(itemSelected(QString)), this, SLOT(slotUpdateInterestCategory(QString)));
-  connect(interest, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
-  connect(interest, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateInterestVisibility(QString)));
+  connect(interest, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(interest, SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateInterestVisibility(QString)));
   connect(interest, SIGNAL(createItem(QString,QString&)), this, SLOT(slotCreateInterestCategory(QString,QString&)));
   connect(interest, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
   connect(interest->splitButton(), SIGNAL(clicked()), this, SLOT(slotEditInterestSplits()));
@@ -244,7 +244,7 @@ void InvestTransactionEditor::createEditWidgets(void)
   tag->tagCombo()->setClickMessage(i18n("Tag"));
   tag->tagCombo()->setObjectName(QLatin1String("Tag"));
   m_editWidgets["tag"] = tag;
-  connect(tag->tagCombo(), SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonState()));
+  connect(tag->tagCombo(), SIGNAL(editTextChanged(QString)), this, SLOT(slotUpdateButtonState()));
   connect(tag->tagCombo(), SIGNAL(createItem(QString,QString&)), this, SIGNAL(createTag(QString,QString&)));
   connect(tag->tagCombo(), SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 

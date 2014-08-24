@@ -107,7 +107,7 @@ protected:
 
 protected slots:
   void slotNetWorthChanged(const MyMoneyMoney &);
-  void slotTabCurrentChanged(QWidget*);
+  void slotTabCurrentChanged(int index);
   void slotSelectIcon(QListWidgetItem* item);
   void slotOpenContextMenu(MyMoneyAccount account);
   void slotAssetsSelectIcon(void);
