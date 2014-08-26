@@ -1,16 +1,20 @@
 [Desktop Entry]
 Name=Reconciliation report
+Name[ca]=Informe de conciliació
 Name[es]=Informe de conciliación
 Name[nl]=Rapport over transactiecontrole
 Name[pt]=Relatório de reconciliação
+Name[pt_BR]=Relatório de reconciliação
 Name[sk]=Zrovnávacia správa
 Name[sv]=Avstämningsrapport
 Name[uk]=Звіт щодо звірки
 Name[x-test]=xxReconciliation reportxx
 Comment=Creates a report after each reconciliation containing data about the reconciliation process
+Comment[ca]=Crea un informe després de cada conciliació amb les dades sobre el procés de conciliació
 Comment[es]=Crea un informe tras cada conciliación que contiene datos sobre el proceso de conciliación.
 Comment[nl]=Maakt een rapport aan na elke transactiecontrole met gegevens over het controleproces
 Comment[pt]=Cria um relatório, a seguir a cada reconciliação, que contém os dados do processo de reconciliação
+Comment[pt_BR]=Cria um relatório que contém os dados de cada processo de reconciliação
 Comment[sk]=Vytvorí report po každom zrovnaní obsahujúcom dáta o procese zrovnania
 Comment[sv]=Skapar en rapport efter varje avstämning som innehåller information om avstämningsprocessen
 Comment[uk]=Створює звіт після кожної звірки з даними щодо процесу звірки
