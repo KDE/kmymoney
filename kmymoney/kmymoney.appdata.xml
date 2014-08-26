@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>KMyMoney</name>
+  <name xml:lang="ca">KMyMoney</name>
   <name xml:lang="cs">KMyMoney</name>
   <name xml:lang="da">KMyMoney</name>
   <name xml:lang="de">KMyMoney</name>
@@ -20,6 +21,7 @@
   <name xml:lang="uk">KMyMoney</name>
   <name xml:lang="x-test">xxKMyMoneyxx</name>
   <summary>Personal Finance Manager</summary>
+  <summary xml:lang="ca">Gestor per a les finances personals</summary>
   <summary xml:lang="cs">Osobní správce financí</summary>
   <summary xml:lang="da">Styring af privatøkonomi</summary>
   <summary xml:lang="de">Persönliche Finanzenverwaltung</summary>
@@ -39,6 +41,7 @@
     <p>
       KMyMoney is a personal finance manager for KDE.
     </p>
+    <p xml:lang="ca">El KMyMoney és un gestor de les finances personals pel KDE.</p>
     <p xml:lang="da">KMyMoney er styring af privatøkonomien til KDE</p>
     <p xml:lang="de">KMyMoney ist eine persönliche Finanzverwaltung für KDE.</p>
     <p xml:lang="en-GB">KMyMoney is a personal finance manager for KDE.</p>
@@ -58,6 +61,7 @@
       Direct download using the OFX and HBCI formats is also possible via plugins.
       Online banking support (statement download) is also provided for the OFX and HBCI protocols.
     </p>
+    <p xml:lang="ca">És compatible amb diferents tipus de comptes, la categorització de les despeses i els ingressos, la conciliació dels comptes bancaris i importa/exporta al format de fitxer «QIF». La baixada directa usant els formats OFX i HBCI també és possible a través de connectors. També implementa la banca en línia (baixada dels extractes) per als protocols OFX i HBCI.</p>
     <p xml:lang="da">Den understøtter forskellige kontotyper, kategorisering af udgifter og indtægter, afstemning af bankkonti og import/eksport af filformatet "QIF". Direkte download med brug af af formaterne OFX og HBCI er også muligt via plugins. Netbankunderstøttelse (download af kontoudtog) leveres også for protokollerne OFX og HBCI.</p>
     <p xml:lang="en-GB">It supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format. Direct download using the OFX and HBCI formats is also possible via plugins. Online banking support (statement download) is also provided for the OFX and HBCI protocols.</p>
     <p xml:lang="es">Soporta diferentes tipos de cuentas, categorización de gastos e ingresos, reconciliación de cuentas bancarias e importación/exportación del formato de archivo «QIF». Posibilita la descarga directa usando los formatos OFX y HBCI a través de complementos. También incluye soporte para la banca electrónica (descarga de estados de cuenta) para los protocolos OFX y HBCI</p>
@@ -74,6 +78,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>KMyMoney has a welcome page to help new users get off to a good start.</caption>
+      <caption xml:lang="ca">El KMyMoney disposa d'una pàgina de benvinguda per ajudar els nous usuaris a tenir un bon començament.</caption>
       <caption xml:lang="da">KMyMoney har en velkomstside til at hjælpe nye brugere godt i gang.</caption>
       <caption xml:lang="en-GB">KMyMoney has a welcome page to help new users get off to a good start.</caption>
       <caption xml:lang="es">KMyMoney dispone de una página de bienvenida para ayudar a los nuevos usuarios a tener un buen comienzo.</caption>
@@ -90,6 +95,7 @@
     </screenshot>
     <screenshot>
       <caption>The financial summary gives you an overview of your finances, including overdue and upcoming scheduled transactions.</caption>
+      <caption xml:lang="ca">El resum financer ofereix una visió general de les vostres finances, incloent les transaccions programades endarrerides i futures.</caption>
       <caption xml:lang="da">Økonomioversigten giver dig en oversigt over din økonomi, derunder forfaldne og kommende planlagte transaktioner.</caption>
       <caption xml:lang="en-GB">The financial summary gives you an overview of your finances, including overdue and upcoming scheduled transactions.</caption>
       <caption xml:lang="es">El resumen financiero le ofrece una descripción general de sus finanzas, incluyendo las transacciones planificadas pasadas y futuras.</caption>
@@ -106,6 +112,7 @@
     </screenshot>
     <screenshot>
       <caption>In this view your accounts are organized, viewed, and managed by the institutions they are held at.</caption>
+      <caption xml:lang="ca">En aquesta vista s'organitzen, visualitzen i administren els vostres comptes per les institucions en les que es duen a terme.</caption>
       <caption xml:lang="da">I denne visning er dine regnskaber organiseret, fremvist og håndteret af de institutioner de hører til.</caption>
       <caption xml:lang="en-GB">In this view your accounts are organised, viewed, and managed by the institutions they are held at.</caption>
       <caption xml:lang="es">En esta vista sus cuentas aparecen organizadas, visibles y gestionadas por las instituciones en las que se llevan a cabo.</caption>
