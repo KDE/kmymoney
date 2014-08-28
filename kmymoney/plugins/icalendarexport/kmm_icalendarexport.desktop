@@ -1,15 +1,23 @@
 [Desktop Entry]
 Name=iCalendar
+Name[ca]=iCalendar
+Name[cs]=iCalendar
 Name[es]=iCalendar
 Name[nl]=iCalendar
 Name[pt]=iCalendar
+Name[pt_BR]=iCalendar
 Name[sk]=iCalendar
+Name[sv]=iCalendar
 Name[uk]=iCalendar
 Name[x-test]=xxiCalendarxx
 Comment=Exports schedules to iCalendar files
+Comment[ca]=Exporta les programacions als fitxers de l'iCalendar
+Comment[es]=Exporta programaciones a archivos de iCalendar
 Comment[nl]=Exporteert planningen naar iCalender bestanden
 Comment[pt]=Exporta os calendários para ficheiros iCalendar
+Comment[pt_BR]=Exporta os calendários para arquivos iCalendar
 Comment[sk]=Exportovať rozvrhy do súborov iCalendar
+Comment[sv]=Exporterar scheman till iCalendar-filer
 Comment[uk]=Експортує розклади до файлів iCalendar
 Comment[x-test]=xxExports schedules to iCalendar filesxx
 Type=Service

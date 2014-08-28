@@ -1,15 +1,22 @@
 [Desktop Entry]
 Name=csvimport
+Name[ca]=csvimport
 Name[es]=csvimport
 Name[nl]=csvimport
 Name[pt]=csvimport
+Name[pt_BR]=csvimport
 Name[sk]=csvimport
+Name[sv]=CSV-import
 Name[uk]=csvimport
 Name[x-test]=xxcsvimportxx
 Comment=Add CSV importing to KMyMoney
+Comment[ca]=Afegeix la importació CSV al KMyMoney
+Comment[es]=Añade la importación de CSV a KMyMoney
 Comment[nl]=Voeg CSV importeren toe aan KMyMoney
 Comment[pt]=Adição da importação de CSV ao KMyMoney
+Comment[pt_BR]=Adiciona a importação de CSV ao KMyMoney
 Comment[sk]=Pridať CSV importovanie do KMyMoney
+Comment[sv]=Lägg till CSV-import till KMyMoney
 Comment[uk]=Додає можливість імпортування CSV до KMyMoney
 Comment[x-test]=xxAdd CSV importing to KMyMoneyxx
 ServiceTypes=KMyMoneyPlugin

@@ -1,14 +1,22 @@
 [Desktop Entry]
 Name=Print check
+Name[ca]=Imprimeix el xec
+Name[es]=Imprimir cheque
 Name[nl]=Cheque afdrukken
 Name[pt]=Imprimir um cheque
+Name[pt_BR]=Imprimir um cheque
 Name[sk]=Tlačiť šek
+Name[sv]=Skriv ut check
 Name[uk]=Надрукувати чек
 Name[x-test]=xxPrint checkxx
 Comment=Provides the capability to print checks
+Comment[ca]=Aporta la capacitat d'imprimir xecs
+Comment[es]=Proporciona la capacidad de imprimir cheques
 Comment[nl]=Levert de mogelijkheid checks af te drukken
 Comment[pt]=Oferece a capacidade de impressão de cheques
+Comment[pt_BR]=Fornece a capacidade de impressão de cheques
 Comment[sk]=Poskytuje možnosť tlačiť účty
+Comment[sv]=Tillhandahåller möjlighet att skriva ut checkar
 Comment[uk]=Надає змогу друкувати чеки
 Comment[x-test]=xxProvides the capability to print checksxx
 Type=Service

@@ -1,15 +1,22 @@
 [Desktop Entry]
 Name=csvexport
+Name[ca]=csvexport
 Name[es]=csvexport
 Name[nl]=csvexport
 Name[pt]=csvexport
+Name[pt_BR]=csvexport
 Name[sk]=csvexport
+Name[sv]=CSV-export
 Name[uk]=csvexport
 Name[x-test]=xxcsvexportxx
 Comment=Add CSV exporting to KMyMoney
+Comment[ca]=Afegeix l'exportació CSV al KMyMoney
+Comment[es]=Añade la exportación a CSV a KMyMoney
 Comment[nl]=Voeg CSV exporteren toe aan KMyMoney
 Comment[pt]=Adição da exportação de CSV ao KMyMoney
+Comment[pt_BR]=Adiciona a exportação de CSV ao KMyMoney
 Comment[sk]=Pridať CSV exportovanie do KMyMoney
+Comment[sv]=Lägg till CSV-export till KMyMoney
 Comment[uk]=Додає можливість експортування CSV з KMyMoney
 Comment[x-test]=xxAdd CSV exporting to KMyMoneyxx
 ServiceTypes=KMyMoneyPlugin
