@@ -71,6 +71,37 @@ class KGlobalLedgerView::Private
 public:
   Private();
 
+  // used to store the id of an item and the id of an immeadiate unselected sibling
+  void storeId(KMyMoneyRegister::RegisterItem *item, QString &id, QString &backupId) {
+    if (item) {
+      // the id of the item
+      id = item->id();
+      // the id of the item's previous/next unselected item
+      for (KMyMoneyRegister::RegisterItem *it = item->prevItem(); it != 0 && backupId.isEmpty(); it = it->prevItem()) {
+        if (!it->isSelected()) {
+          backupId = it->id();
+        }
+      }
+      // if we didn't found previous unselected items search trough the next items
+      for (KMyMoneyRegister::RegisterItem *it = item->nextItem(); it != 0 && backupId.isEmpty(); it = it->nextItem()) {
+        if (!it->isSelected()) {
+          backupId = it->id();
+        }
+      }
+    }
+  }
+
+  // use to match an item by it's id or a backup id which has a lower precedence
+  void matchItemById(KMyMoneyRegister::RegisterItem **item, KMyMoneyRegister::Transaction* t, QString &id, QString &backupId) {
+    if (!backupId.isEmpty() && t->id() == backupId)
+      *item = t;
+    if (!id.isEmpty() && t->id() == id) {
+      // we found the real thing there's no need for the backup anymore
+      backupId.clear();
+      *item = t;
+    }
+  }
+
   MousePressFilter*    m_mousePressFilter;
   KMyMoneyRegister::RegisterSearchLineWidget* m_registerSearchLine;
   QString              m_reconciliationAccount;
@@ -354,7 +385,9 @@ void KGlobalLedgerView::loadView(void)
 
   QMap<QString, bool> isSelected;
   QString focusItemId;
+  QString backUpFocusItemId;  // in case the focus item is removed
   QString anchorItemId;
+  QString backUpAnchorItemId; // in case the anchor item is removed
 
   if (!m_newAccountLoaded) {
     // remember the current selected transactions
@@ -365,11 +398,9 @@ void KGlobalLedgerView::loadView(void)
       }
     }
     // remember the item that has the focus
-    if (m_register->focusItem())
-      focusItemId = m_register->focusItem()->id();
+    d->storeId(m_register->focusItem(), focusItemId, backUpFocusItemId);
     // and the one that has the selection anchor
-    if (m_register->anchorItem())
-      anchorItemId = m_register->anchorItem()->id();
+    d->storeId(m_register->anchorItem(), anchorItemId, backUpAnchorItemId);
   } else {
     d->m_registerSearchLine->searchLine()->reset();
   }
@@ -617,10 +648,8 @@ void KGlobalLedgerView::loadView(void)
         if (isSelected.contains(t->id()))
           t->setSelected(true);
 
-        if (t->id() == focusItemId)
-          focusItem = t;
-        if (t->id() == anchorItemId)
-          anchorItem = t;
+        d->matchItemById(&focusItem, t, focusItemId, backUpFocusItemId);
+        d->matchItemById(&anchorItem, t, anchorItemId, backUpAnchorItemId);
 
         const MyMoneySplit& split = t->split();
         MyMoneyMoney balance = futureBalance[split.accountId()];
@@ -692,7 +721,7 @@ void KGlobalLedgerView::loadView(void)
     if (focusItem) {
       // in case we have some selected items we just set the focus item
       // in other cases, we make the focusitem also the selected item
-      if (isSelected.count() > 1) {
+      if (anchorItem && (anchorItem != focusItem)) {
         m_register->setFocusItem(focusItem);
         m_register->setAnchorItem(anchorItem);
       } else
