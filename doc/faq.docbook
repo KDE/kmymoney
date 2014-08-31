@@ -4,8 +4,8 @@
   <authorgroup>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2014-08-30</date>
+  <releaseinfo>4.7.01</releaseinfo>
 </chapterinfo>
 
 <title>Questions and Answers</title>
@@ -221,6 +221,21 @@
 
 <qandaentry>
  <question>
+   <para>I compiled from source, but the version number in the Help->About
+   dialog no longer gets changed to show the latest git commit, like it used
+   to?</para>
+ </question>
+ <answer>
+   <para>You probably ran <command>$ make</command> without running <command>$
+   cmake</command> or <command>$ ccmake</command> first.  If you update the
+   code, using <command>$ git pull</command>, one of those two commands is
+   necessary to put the updated version number/git commit in the right place.
+</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
    <para>Will &kappname; work on my X/&ubuntu; desktop? Will &kappname; work
    without a full KDE desktop?</para>
  </question>
@@ -259,7 +274,7 @@
    <para>Why is there no translation for 'my' language?</para>
  </question>
  <answer>
-   <para>First, &kappname; uses the &kde; settings for language, so first, make
+   <para>&kappname; uses the &kde; settings for language, so first, make
    sure that your region and language settings are correct.  If they are, the
    most likely reason is that no one has offered to translate it yet.
    Translating &kde;/&Qt;-based applications is very simple, and does not
@@ -300,6 +315,18 @@
    <para>The developers encourage your feedback.  See the section on <link
    linkend="firsttime.contact">Contacting the Developers / Reporting
    Bugs</link>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para>Why isn't there an easy way to print some scheduled transactions, or
+   part of the ledger, or ...</para>
+ </question>
+ <answer>
+   <para>Look in the <link linkend="details.reports.avail">Reports</link>
+   section.  Many of the reports actually provide an easy way to print thing you
+   can't quite do directly from the ledger or other screens.</para>
  </answer>
 </qandaentry>
 
