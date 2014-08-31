@@ -154,11 +154,6 @@ bool kMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
   int row = currentRow();
   int lines = viewport()->height() / rowHeight(0);
 
-  if (o == this && e->type() == QEvent::Resize && isEditMode()) {
-    rc = false;
-    endEdit(false);
-  }
-
   if (e->type() == QEvent::KeyPress && !isEditMode()) {
     rc = true;
     switch (k->key()) {
@@ -354,8 +349,8 @@ void kMyMoneySplitTable::slotSetFocus(const QModelIndex& index, int button)
   scrollTo(model()->index(row, 0));
 
   if (isEditMode()) {                   // in edit mode?
-    if (KMyMoneyGlobalSettings::focusChangeIsEnter())
-      slotEndEdit();
+    if (isEditSplitValid() && KMyMoneyGlobalSettings::focusChangeIsEnter())
+      endEdit(false/*keyboard driven*/, false/*set focus to next row*/);
     else
       slotCancelEdit();
   }
@@ -583,7 +578,11 @@ void kMyMoneySplitTable::updateTransactionTableSize(void)
 void kMyMoneySplitTable::resizeEvent(QResizeEvent* ev)
 {
   QTableWidget::resizeEvent(ev);
-  updateTransactionTableSize();
+  if (!isEditMode()) {
+    // update the size of the transaction table only if a split is not being edited
+    // otherwise the height of the editors would be altered in an undesired way
+    updateTransactionTableSize();
+  }
 }
 
 void kMyMoneySplitTable::slotDuplicateSplit(void)
@@ -644,14 +643,14 @@ void kMyMoneySplitTable::slotEndEditKeyboard(void)
   endEdit(true);
 }
 
-void kMyMoneySplitTable::endEdit(bool keyBoardDriven)
+void kMyMoneySplitTable::endEdit(bool keyboardDriven, bool setFocusToNextRow)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
   MYMONEYTRACER(tracer);
   MyMoneySplit s1 = m_split;
 
-  if (m_editCategory->selectedItem().isEmpty()) {
+  if (!isEditSplitValid()) {
     KMessageBox::information(this, i18n("You need to assign a category to this split before it can be entered."), i18n("Enter split"), "EnterSplitWithEmptyCategory");
     m_editCategory->setFocus();
     return;
@@ -744,11 +743,13 @@ void kMyMoneySplitTable::endEdit(bool keyBoardDriven)
   }
   this->setFocus();
   destroyEditWidgets();
-  slotSetFocus(model()->index(currentRow() + 1, 0));
+  if (setFocusToNextRow) {
+    slotSetFocus(model()->index(currentRow() + 1, 0));
+  }
 
   // if we still have more splits, we start editing right away
   // in case we have selected 'enter moves between fields'
-  if (keyBoardDriven
+  if (keyboardDriven
       && currentRow() < m_transaction.splits().count() - 1
       && KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
     slotStartEdit();
@@ -767,7 +768,13 @@ void kMyMoneySplitTable::slotCancelEdit(void)
 
 bool kMyMoneySplitTable::isEditMode(void) const
 {
-  return state() == QAbstractItemView::EditingState;
+  // while the edit widgets exist we're in edit mode
+  return m_editAmount || m_editMemo || m_editCategory;
+}
+
+bool kMyMoneySplitTable::isEditSplitValid() const
+{
+  return isEditMode() && !m_editCategory->selectedItem().isEmpty();
 }
 
 void kMyMoneySplitTable::destroyEditWidgets(void)
@@ -780,8 +787,6 @@ void kMyMoneySplitTable::destroyEditWidgets(void)
   destroyEditWidget(m_currentRow, 1);
   destroyEditWidget(m_currentRow, 2);
   destroyEditWidget(m_currentRow + 1, 0);
-  setState(QAbstractItemView::NoState);
-  QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents, 100);
 }
 
 void kMyMoneySplitTable::destroyEditWidget(int r, int c)
@@ -816,13 +821,13 @@ KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
 
   // create buttons for the mouse users
   m_registerButtonFrame = new QFrame(this);
-  QPalette palette = m_registerButtonFrame->palette();
-  //palette.setColor(QPalette::Background, rowBackgroundColor(m_currentRow+1) );
-  m_registerButtonFrame->setPalette(palette);
+  m_registerButtonFrame->setContentsMargins(0, 0, 0, 0);
+  m_registerButtonFrame->setAutoFillBackground(true);
 
   QHBoxLayout* l = new QHBoxLayout(m_registerButtonFrame);
+  l->setContentsMargins(0, 0, 0, 0);
+  l->setSpacing(0);
   m_registerEnterButton = new KPushButton(KIcon("dialog-ok"), QString(), m_registerButtonFrame);
-
   m_registerCancelButton = new KPushButton(KIcon("dialog-cancel"), QString(), m_registerButtonFrame);
 
   l->addWidget(m_registerEnterButton);
@@ -881,8 +886,6 @@ KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
     m_editCategory->lineEdit()->setFocus();
     m_editCategory->lineEdit()->selectAll();
   }
-
-  setState(QAbstractItemView::EditingState);
 
   // resize the rows so the added edit widgets would fit appropriately
   resizeRowsToContents();
