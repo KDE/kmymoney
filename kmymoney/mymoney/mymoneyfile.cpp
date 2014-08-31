@@ -1503,8 +1503,7 @@ const MyMoneyMoney MyMoneyFile::clearedBalance(const QString &id, const QDate& d
 
   MyMoneyAccount account = this->account(id);
   MyMoneyMoney factor(1, 1);
-  if (account.accountGroup() == MyMoneyAccount::Liability
-      || account.accountGroup() == MyMoneyAccount::Equity)
+  if (account.accountGroup() == MyMoneyAccount::Liability || account.accountGroup() == MyMoneyAccount::Equity)
     factor = -factor;
 
   MyMoneyTransactionFilter filter;
@@ -1520,10 +1519,10 @@ const MyMoneyMoney MyMoneyFile::clearedBalance(const QString &id, const QDate& d
       const MyMoneySplit &split = (*it_s);
       if (split.accountId() != id)
         continue;
-      cleared -= split.shares() * factor;
+      cleared -= split.shares();
     }
   }
-  return cleared;
+  return cleared * factor;
 }
 
 const MyMoneyMoney MyMoneyFile::totalBalance(const QString& id, const QDate& date) const
