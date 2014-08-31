@@ -176,6 +176,13 @@
 
 
 #define RECOVER_KEY_ID        "59B0F826D2B08440"
+
+// define the default period to warn about an expiring recoverkey to 30 days
+// but allows to override this setting during build time
+#ifndef RECOVER_KEY_EXPIRATION_WARNING
+#define RECOVER_KEY_EXPIRATION_WARNING 30
+#endif
+
 #define ID_STATUS_MSG 1
 
 enum backupStateE {
@@ -2471,6 +2478,36 @@ void KMyMoneyApp::slotUpdateConfiguration(void)
   }
 
   d->setCustomColors();
+
+  // check if the recovery key is still valid or expires soon
+
+  if (KMyMoneySettings::writeDataEncrypted() && KMyMoneySettings::encryptRecover()) {
+    if (KGPGFile::GPGAvailable()) {
+      KGPGFile file;
+      QDateTime expirationDate = file.keyExpires(QLatin1String(RECOVER_KEY_ID));
+      if (expirationDate.isValid() && QDateTime::currentDateTime().daysTo(expirationDate) <= RECOVER_KEY_EXPIRATION_WARNING) {
+        bool skipMessage = false;
+
+        //get global config object for our app.
+        KSharedConfigPtr kconfig = KGlobal::config();
+        KConfigGroup grp;
+        QDate lastWarned;
+        if (kconfig) {
+          grp = d->m_config->group("General Options");
+          lastWarned = grp.readEntry("LastRecoverKeyExpirationWarning", QDate());
+          if (QDate::currentDate() == lastWarned) {
+            skipMessage = true;
+          }
+        }
+        if (!skipMessage) {
+          if (kconfig) {
+            grp.writeEntry("LastRecoverKeyExpirationWarning", QDate::currentDate());
+          }
+          KMessageBox::information(this, i18n("You have configured KMyMoney to use GPG to protect your data and to encrypt your data also with the KMyMoney recover key. This key is about to expire in %1 days. Please update the key from a keyserver using your GPG frontend (e.g. KGPG).").arg(QDateTime::currentDateTime().daysTo(expirationDate)), i18n("Recover key expires soon"));
+        }
+      }
+    }
+  }
 }
 
 /** No descriptions */

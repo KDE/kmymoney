@@ -29,6 +29,7 @@
 
 #include <vector>
 
+class QDateTime;
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -107,6 +108,13 @@ public:
     * readable string. The strinf is empty if there were no errors.
     */
   QString errorToString() const;
+
+  /**
+   * This method returns the information about the expiration date of a key.
+   * An invalid QDateTime object is returned if @a name matches more than one
+   * key or the key does not have an expiration date.
+   */
+  QDateTime keyExpires(const QString& name);
 
   /**
     * Checks whether GPG is available or not

@@ -32,6 +32,7 @@
 #include <QByteArray>
 #include <QBuffer>
 #include <QList>
+#include <QDateTime>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -315,6 +316,26 @@ void KGPGFile::secretKeyList(QStringList& list)
   // qDebug("Reading secrect keys");
   KGPGFile file;
   file.keyList(list, true);
+}
+
+QDateTime KGPGFile::keyExpires(const QString& name)
+{
+  QDateTime expirationDate;
+
+  // skip a possible leading 0x in the id
+  QString cmp = name;
+  if (cmp.startsWith(QLatin1String("0x")))
+    cmp = cmp.mid(2);
+
+  QStringList keylist;
+  keyList(keylist, false, cmp);
+
+  // in case we have no or more than one matching key
+  // or the key does not have subkeys, we return an invalid date
+  if (d->m_keys.size() == 1 && d->m_keys[0].subkeys().size() > 0 && !d->m_keys[0].subkeys()[0].neverExpires()) {
+    expirationDate.setTime_t(d->m_keys[0].subkeys()[0].expirationTime());
+  }
+  return expirationDate;
 }
 
 void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& pattern)
