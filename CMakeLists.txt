@@ -2,7 +2,7 @@
 project(KMyMoney)
 
 # The CMake version we require
-cmake_minimum_required(VERSION 2.8.6)
+cmake_minimum_required(VERSION 2.8.7)
 
 # Automoc all sources
 set(CMAKE_AUTOMOC TRUE)
