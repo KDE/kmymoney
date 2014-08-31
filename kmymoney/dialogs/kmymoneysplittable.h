@@ -123,7 +123,15 @@ protected:
     */
   bool isEditMode(void) const;
 
-  void endEdit(bool keyboardDriven);
+  /**
+    * This method returns true if the currently edited split is valid
+    * and can be entered.
+    *
+    * @return true if the split can be entered, false otherwise
+    */
+  bool isEditSplitValid() const;
+
+  void endEdit(bool keyboardDriven, bool setFocusToNextRow = true);
 
 public slots:
   /** No descriptions */
