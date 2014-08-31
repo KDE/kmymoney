@@ -2496,7 +2496,7 @@ void KMyMoneyApp::slotUpdateConfiguration(void)
         bool skipMessage = false;
 
         //get global config object for our app.
-        KSharedConfigPtr kconfig = KGlobal::config();
+        KSharedConfigPtr kconfig = KSharedConfig::openConfig();
         KConfigGroup grp;
         QDate lastWarned;
         if (kconfig) {
