@@ -86,6 +86,12 @@
       <contrib>Relecture de la documentation française&nbsp;</contrib></othercredit>'>
   <!ENTITY SimonDepiets    'Simon Depiets <email>2df@tuxfamily.org</email>'>
 
+<!-- entities to allow use of icons inline in describing some configuration dialogs -->
+  <!ENTITY infoicon "<inlinemediaobject><imageobject><imagedata fileref='icon-dialog-information.png' format='PNG'/>
+    </imageobject></inlinemediaobject>">
+  <!ENTITY configicon "<inlinemediaobject><imageobject><imagedata fileref='icon-dialog-configure.png' format='PNG'/>
+    </imageobject></inlinemediaobject>">
+
 <!-- the chapters -->
   <!ENTITY introduction SYSTEM "introduction.docbook">
   <!ENTITY makemostof SYSTEM "makemostof.docbook">
