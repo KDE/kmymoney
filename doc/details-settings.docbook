@@ -747,16 +747,27 @@
 <title id="details.settings.plugins.title">Plugins</title>
 
 <para>
-  These options allow you to modify the behavior of any installed plugins.  For
-  most plugins, the only choice is to enable or disable it, although there is
-  also an <guibutton>Info</guibutton> button which will show the plugin version
-  and author.  Further information on configuring and using these plugins may be
-  found in the separate sections for <link linkend="details.impexp.csv">CSV
-  Import</link> and <link linkend="details.impexp.ofx">OFX Import</link>
-  plugins.  It is also true for the <link
-  linkend="details.reconcile">Reconciliation report</link>, although that report
-  is only a minor part of the larger reconciliation process.  The one plugin
-  that does require a configuration step is the Print Check plugin.
+  These options allow you to modify the behavior of any installed plugins.
+  <screenshot>
+	<screeninfo>Configure Plugins</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="configure_plugins.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Configure Plugins</phrase>
+	</textobject>
+	</mediaobject>
+  </screenshot>
+  For most plugins, the only choice is to enable or disable it, although for
+  each there is also an <guibutton>information</guibutton> (&infoicon;) button
+  which will show the plugin version and author.  Further information on
+  configuring and using these plugins may be found in the separate sections for
+  <link linkend="details.impexp.csv">CSV Import</link> and <link
+  linkend="details.impexp.ofx">OFX Import</link> plugins.  It is also true for
+  the <link linkend="details.reconcile">Reconciliation report</link>, although
+  that report is only a minor part of the larger reconciliation process.  The
+  one plugin that does require a configuration step is the Print Check plugin.
 </para>
 
 <sect2 id="details.settings.plugins.printchecks">
@@ -765,9 +776,9 @@
 <para>
   This plugin is inlcuded with the source of &kappname;, and should always be
   enabled.  It allows printing of a check based on the data from a selected
-  transaction, with the layout controlled by an html template. Usually, the
-  template is matched to pre-printed checks.  When you click on the
-  <guibutton>configure</guibutton> (a small wrench), the <guilabel>Print
+  transaction, with the layout controlled by an html template. You need to use a 
+  template which is matched to your pre-printed checks.  When you click on the
+  <guibutton>configure</guibutton> (&configicon;) button , the <guilabel>Print
   check</guilabel>configuration dialog is displayed.  At the top is a text box
   for the path to the selected template.  To the right of that is a button which
   brings up a file chooser, to select an alternative template file.
@@ -775,11 +786,12 @@
 
 <para>
   A template file is an html file, which is used with specific strings to
-  reference the fields from the transaction or from the current account and
+  reference the fields from the transaction and from the current account and
   institution to show where they will be printed on the check.  &kappname; is
-  shipped with several template files.  You should either be able to use one of
-  them, or modify one to suit your needs.  The default value of the template
-  file will show you the directory which contains the sample files.
+  shipped with some sample template files.  You should either be able to use one
+  of them, or modify one to suit your needs.  When the default template is
+  selected, the configuration dialog will show you the directory which contains
+  the sample files.
 </para>
 </sect2>
 </sect1>
