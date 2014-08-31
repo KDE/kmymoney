@@ -4,8 +4,8 @@
   <authorgroup>
     <author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2014-08-30</date>
+  <releaseinfo>4.7.01</releaseinfo>
 </chapterinfo>
 
 <title>File Formats</title>
@@ -156,8 +156,8 @@
   case you lose your own private key. This is possible because the data is not
   only encrypted for your own key, but also for the &kappname; recover key. This
   key is only available to selected &kappname; developers (at the time of
-  writing only to the author).  As of the release of &kappname; version 4.5, the
-  release key is set to expire on 3 January 2015.
+  writing only to the author).  As of the release of &kappname; version 4.7, the
+  recover key is set to expire on 3 January 2015.
 </para>
 
 <para>

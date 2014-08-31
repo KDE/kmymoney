@@ -4,8 +4,8 @@
   <authorgroup>
     <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
   </authorgroup>
-  <date>2011-07-20</date>
-  <releaseinfo>4.6</releaseinfo>
+  <date>2014-08-30</date>
+  <releaseinfo>4.7.01</releaseinfo>
 </appendixinfo>
 
 <title>Installation</title>
@@ -20,13 +20,21 @@
 <title>How to obtain &kappname;</title>
 
 <para>
-  Although &kappname; has existed for a number of years, we are still working on
-  full integration into &kde;.  Early stable versions (1.0.x) required libraries
-  from &kde; 3, and so were not available in many Linux distributions, which had
-  already migrated to &kde; 4.  However, with the release of version 4.5 in
-  August 2010, &kappname; could be easily compiled and installed on any version
-  of &kde; 4.3 or higher.  The current version, 4.6, requires &kde; 4.3,
+  &kappname; has existed for a number of years, and we have worked very hard on
+  full integration into &kde;.  The earliest stable versions (1.0.x) required
+  libraries from &kde; 3, and so were not available in many Linux distributions,
+  which had already migrated to &kde; 4.  However, with the release of version
+  4.5 in August 2010, &kappname; could be easily compiled and installed on any
+  version of &kde; 4.3 or higher.  The current version, 4.7, requires &kde; 4.6,
   specifically kdelibs and kdepimlibs.
+</para>
+
+<para>
+  Althouh work has begun porting &kappname; to the new KDE Frameworks 5, this is
+  still very early, and not yet usable.  Hopefully it will be available in the
+  5.0 version, which we expect to release in early 2015.  Until then, if you are
+  specifically interested in following this work, you should subscribe to the
+  developers mailing list &devlist;.
 </para>
 
 <para>
@@ -82,8 +90,9 @@
   check out a recent bug fix or new feature, you can download a tarball which is
   a snapshot of the development repository.  You can also check the source
   directly out of the repository.  The version 4.x source is in &kde; Git.  (The
-  version 1.0.x source is in SourceForge cvs, but it is no longer being
-  developed.)  Instructions for access are on the project home page.
+  version 1.0.x source was in SourceForge cvs, but it is no longer being
+  developed or supported at all.)  Instructions for access are on the project
+  home page.
 </para>
 
 <warning>

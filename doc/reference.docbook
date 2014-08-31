@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="reference">
 <chapterinfo>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2014-08-30</date>
+  <releaseinfo>4.7.01</releaseinfo>
 </chapterinfo>
 
 <title>Reference</title>
@@ -670,6 +670,22 @@
     </menuchoice></term>
     <listitem>
       <para><action>Selects all transactions on the register.</action></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu><guimenuitem>Print check</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para>
+        <action>Prints the contents of the selected transaction in the displayed
+        register, formatted according to the selected template.</action> Note
+        that this menu choice is only present if a transaction is selected in
+        the register.  See the section on configuring the <link
+        linkend="details.settings.plugins">Print check</link> plugin for more
+        information.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>

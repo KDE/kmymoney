@@ -16,7 +16,6 @@
        from entities/general.entities and $LANG/user.entities. -->
   <!ENTITY devlist "<email>kmymoney-devel@kde.org</email>">
   <!ENTITY userlist "<email>kmymoney@kde.org</email>">
-  <!ENTITY olduserlist "<email>kmymoney2-user@lists.sourceforge.net</email>">
 
   <!-- the following author entities have been added to contributor.entities in 4.5 branch and trunk of svn
        they can be removed from this file once they are present in the kdelibs minimum version required by &kappname; -->
@@ -123,7 +122,7 @@
 
 <bookinfo>
 <title>The &kappname; Handbook</title>
-<subtitle>for &kappname; version 4.6</subtitle>
+<subtitle>for &kappname; version 4.7</subtitle>
 
 <authorgroup>
 <!-- This is just put in as an example.  For real documentation, please
@@ -170,8 +169,8 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2011-07-04</date>
-<releaseinfo>4.06.00</releaseinfo>
+<date>2014-08-30</date>
+<releaseinfo>4.07.01</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -181,7 +180,7 @@ Do NOT change these in the translation. -->
 </para>
 
 <para>
-  This handbook describes &kappname; version 4.6.
+  This handbook describes &kappname; version 4.7.
 </para>
 </abstract>
 
