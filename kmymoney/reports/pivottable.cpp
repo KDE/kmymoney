@@ -1144,7 +1144,8 @@ void PivotTable::calculateTotals(void)
     // Outer Row Group Totals
     //
 
-    bool invert_total = (*it_outergroup).m_inverted;
+    const bool isIncomeExpense = (m_config_f.rowType() == MyMoneyReport::eExpenseIncome);
+    const bool invert_total = (*it_outergroup).m_inverted;
     int column = 1;
     while (column < m_numColumns) {
       for (int i = 0; i < m_rowTypeList.size(); ++i) {
@@ -1156,7 +1157,10 @@ void PivotTable::calculateTotals(void)
         (*it_outergroup).m_total[ m_rowTypeList[i] ].m_total += value;
 
         //so far the invert only applies to actual and budget
-        if (invert_total && m_rowTypeList[i] != eBudgetDiff)
+        if (invert_total && m_rowTypeList[i] != eBudgetDiff && m_rowTypeList[i] != eForecast)
+          value = -value;
+        // forecast income expense reports should be inverted as oposed to asset/liability reports
+        if (invert_total && isIncomeExpense && m_rowTypeList[i] == eForecast)
           value = -value;
 
         m_grid.m_total[ m_rowTypeList[i] ][column] += value;
