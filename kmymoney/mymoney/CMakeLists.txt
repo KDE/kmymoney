@@ -105,7 +105,7 @@ if( KDE4_BUILD_TESTS )
   set( mymoneyforecasttest_SRCS mymoneyforecasttest.cpp mymoneytestutils.cpp ../reports/reportstestcommon.cpp )
 
   kde4_add_unit_test( mymoneyforecasttest TESTNAME kmymoney-mymoneyforecasttest ${mymoneyforecasttest_SRCS} )
-  add_dependencies( mymoneyforecasttest kmm_mymoney kmm_storage )
+  add_dependencies( mymoneyforecasttest kmm_mymoney kmm_storage KF5::KDELibs4Support )
 
   target_link_libraries( mymoneyforecasttest kmm_storage kmm_mymoney ${target_link_libraries_test})
 
