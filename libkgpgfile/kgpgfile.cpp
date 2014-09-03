@@ -461,4 +461,11 @@ void KGPGFile::publicKeyList(QStringList& list)
 {
   Q_UNUSED(list);
 }
+
+QDateTime KGPGFile::keyExpires(const QString& name)
+{
+  Q_UNUSED(name);
+	return QDateTime();
+}
+
 #endif
