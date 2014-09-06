@@ -951,6 +951,39 @@
 </sect2>
 
 <sect2>
+<title>What is OFX</title>
+
+<para>
+  OFX stands for <quote>Open Financial Exchange</quote>.  According to the
+  <ulink url="http://www.ofx.net/">OFX web site</ulink> <quote>Open Financial
+  Exchange (OFX) is a unified specification for the electronic exchange of
+  financial data between financial institutions, businesses and consumers via
+  the Internet. OFX is not a financial institution.</quote> The specification
+  defines formats for transfer of finacial data both by file and by direct
+  interchange.
+</para>
+
+<para>
+  Although the standard is much more complete and robust than QIF, there are
+  still variations, depending on the specific implementation used by any
+  institution.  OFX files may have an extension of <quote>OFX</quote> or
+  <quote>QFX</quote> (upper or lower case); this does not imply any particular
+  difference in the content.  The specification is based on XML, so the files
+  can be read in any text editor, but as whitespace is not relevant to the
+  content itself, some implementations do not use any, making it very hard for a
+  human to read.
+</para>
+
+<para>
+  Another site with good information is <ulink url="http:/ofxhome.com/">OFX
+  Home</ulink>.  They maintain a directory of financial institutions that
+  support OFX.  This can be useful if you have problems setting up <link
+  linkend="details.impexp.ofxdirectconnect">OFX direct connect.</link> They also
+  have a forum for discussions about OFX issues.
+</para>
+</sect2>
+
+<sect2>
 <title>Importing an OFX file</title>
 
 <para>
@@ -1048,6 +1081,22 @@
   manual option. Your bank may be able to provide the required parameters, or
   you may have to do some research to find them.
 </para>
+
+<note>
+  <para>
+    Setting up OFX Direct Connect can sometimes be a challenge, especially as
+    the implementation at most institutions do not provide sufficient details in
+    error messages.  One particular issue to note is that many institutuions
+    require you to change your password the first time you access it online
+    using this method.  Unfortunately, at this time, the library that &kappname;
+    uses (libofx) does not have a way to interactively change a password.  In
+    some cases, it is possible to get a techincal support person at the
+    institution to change the password for you.  Until we are able to expand
+    this section with more detailed troubleshooting information, if you have
+    trouble getting this to work for you, you can ask for help on the &kappname;
+    developer list &devlist;.
+  </para>
+</note>
 
 <para>
   Once you have an account set up with online banking, go to the ledger for that

@@ -269,8 +269,19 @@
 <title>Sub-Categories</title>
 
 <para>
-  Categories can be split into sub-categories, but the sub-category totals are
-  not included in the higher level category total.
+  Categories can be split into sub-categories, but this relationship is only for
+  display purposes, as the sub-category totals are not included in the higher
+  level category total.
+</para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.tags">
+<title>Tags</title>
+
+<para>
+  Tags are very similar to Categories, as they are also non-managed accounts
+  that do not have a value.  However, unlike Categories, the use of Tags is
+  completely optional.
 </para>
 </sect2>
 
@@ -288,7 +299,7 @@
 <title>Scheduled transactions</title>
 
 <para>
-  Where regular transactions occur, these can be set up against a
+  Where transactions occur on a regular basis, these can be set up against a
   Schedule. Transactions are created from a schedule; any that are overdue can
   be seen on the home page.
 </para>
@@ -299,10 +310,11 @@
 <title>Useful Tips</title>
 
 <para>
-  Unless you keep you money under the floorboards, you probably make use of one
-  or more institutions where you have accounts which may be in credit or
-  debit. In order to familiarize yourself with the way &kappname; works, choose
-  an account you want to track of with &kappname; and select <menuchoice><guimenu>File</guimenu> 
+  Unless you keep your money under your mattress or under the floorboards, you
+  probably make use of one or more institutions where you have accounts, which
+  may be in credit or debit. In order to familiarize yourself with the way
+  &kappname; works, choose an account you want to track with &kappname; and
+  select <menuchoice><guimenu>File</guimenu>
   <guimenuitem>New</guimenuitem></menuchoice> in order
   to set up an account file.
 </para>
@@ -315,9 +327,9 @@
 <para>
   If you have some regular receipts into or outgoings from this account, go to
   Payee and enter the names of both the payers and the payees involved; then go
-  to Schedule and fill in a New Schedule for each transaction. If you haven't
-  entered the payee or payer, &kappname; will offer you the opportunity to do
-  this in the middle of entering the schedule.
+  to Schedule and fill in a New Schedule for each recurring transaction. If you
+  haven't entered the payee or payer, &kappname; will offer you the opportunity
+  to do this in the middle of entering the schedule.
 </para>
 
 <para>

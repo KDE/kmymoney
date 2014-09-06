@@ -696,8 +696,8 @@
 <title>Foreground tab</title>
 
 <para>
-  Modify the foreground colors by clicking on the color button and opening a
-  color select palette.
+  Modify any of the foreground colors by clicking on the color button and
+  opening a color select palette.
 </para>
 </sect2>
 
@@ -705,8 +705,17 @@
 <title>Background tab</title>
 
 <para>
-  Modify the background colors by clicking on the color button and opening a
-  color select palette.
+  Modify any of the background colors by clicking on the color button and
+  opening a color select palette.
+</para>
+
+<para>
+  Note the <guilabel>Use system colors</guilabel> checkbox at the top of the
+  tab.  If this is checked, &kappname; uses colors provided by the system, such
+  as those associated with a selected theme, although the details depend on
+  which operating system and possibly which window system or display manager is
+  running.  Very often, if you experience odd colors or odd combination of
+  colors, toggling this checkbox will help.
 </para>
 </sect2>
 </sect1>
@@ -744,10 +753,13 @@
 </sect1>
 
 <sect1 id="details.settings.plugins">
-<title id="details.settings.plugins.title">Plugins</title>
+<title>Plugins</title>
 
 <para>
-  These options allow you to modify the behavior of any installed plugins.
+  These options allow you to modify the behavior of any installed plugins.  Note
+  that the list of plugins displayed will depend on which plugins &kappname;
+  found when it started.  It does not matter whether the plugin was compiled as
+  part of the application or added as a separate package.
   <screenshot>
 	<screeninfo>Configure Plugins</screeninfo>
 	<mediaobject>
@@ -759,11 +771,12 @@
 	</textobject>
 	</mediaobject>
   </screenshot>
-  For most plugins, the only choice is to enable or disable it, although for
-  each there is also an <guibutton>information</guibutton> (&infoicon;) button
-  which will show the plugin version and author.  Further information on
-  configuring and using these plugins may be found in the separate sections for
-  <link linkend="details.impexp.csv">CSV Import</link> and <link
+  For most plugins, the only choice is to enable or disable it, as indicated by
+  the checkbox next to the name of the plugin.  In addition, there is also an
+  <guibutton>information</guibutton> (&infoicon;) button for each, which will
+  show the plugin version and author.  Further information on configuring and
+  using these plugins may be found in the separate sections for <link
+  linkend="details.impexp.csv">CSV Import</link> and <link
   linkend="details.impexp.ofx">OFX Import</link> plugins.  It is also true for
   the <link linkend="details.reconcile">Reconciliation report</link>, although
   that report is only a minor part of the larger reconciliation process.  The
@@ -779,13 +792,13 @@
   transaction, with the layout controlled by an html template. You need to use a 
   template which is matched to your pre-printed checks.  When you click on the
   <guibutton>configure</guibutton> (&configicon;) button , the <guilabel>Print
-  check</guilabel>configuration dialog is displayed.  At the top is a text box
+  check</guilabel> configuration dialog is displayed.  At the top is a text box
   for the path to the selected template.  To the right of that is a button which
   brings up a file chooser, to select an alternative template file.
 </para>
 
 <para>
-  A template file is an html file, which is used with specific strings to
+  A template file is an html file, in which specific strings are used to
   reference the fields from the transaction and from the current account and
   institution to show where they will be printed on the check.  &kappname; is
   shipped with some sample template files.  You should either be able to use one
