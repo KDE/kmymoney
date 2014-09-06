@@ -196,9 +196,16 @@
   the <ulink url="http://www.macports.com">MacPorts web site</ulink>.
 </para>
 <para>
-  &kappname; is also reported to be available for &Windows;.  This initiative is
-  still a work in progress, and more information can be found at the <ulink
-  url="http://windows.kde.org">KDE on Windows Initiative</ulink> page.
+  &kappname; is also available for &Windows;.  This initiative is still a work
+  in progress, but great improvements have been made in the past year.  For more
+  information about running &kde;, including &kappname; on &Windows; see the
+  <ulink url="http://windows.kde.org">KDE on Windows Initiative</ulink> page.
+  For a standalone installer that only installs &kappname; see the download link
+  on the right of the <ulink url="http://www.kmymoney.org">&kappname; home
+  page</ulink>.  Note that the most recent version of this installer no longer
+  works on &Windows; XP.  At the time of this release, it was not known if this
+  could be changed, as the issue was related to the tools used to build the
+  application, not the application itself.
 </para>
 
 <para>

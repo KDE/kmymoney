@@ -4,33 +4,17 @@
   <authorgroup>
     <author>&Cristian.Onet; &Cristian.Onet.mail;</author>
   </authorgroup>
-  <date>2014-08-23</date>
-  <releaseinfo>4.7</releaseinfo>
+  <date>2014-08-30</date>
+  <releaseinfo>4.7.01</releaseinfo>
 </chapterinfo>
 
-<title id="details.tags.title">Tags</title>
+<title>Tags</title>
 
 <para>
   The Tags screen provides detailed information about all the tags which are
   applied to transactions. The Tags screen is split into two main
   areas: a tags list and a detail area.
-</para>
-
-<para>
-  The Tags screen allows for viewing the transactions for the selected tag and
-  updating the tag's details.
-</para>
-
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="tags.png" format="PNG" />
-	</imageobject>
-	</mediaobject>
-	</screenshot>
-</para>
+  </para>
 
 <sect1 id="details.tags.list">
 <title>Tags List</title>
@@ -38,54 +22,68 @@
 <para>
   A list of tags is on the left side of this screen. The tags list
   is sorted alphabetically.
+
+  <screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="tags.png" format="PNG" />
+  </imageobject>
+  </mediaobject>
+  </screenshot>
 </para>
 
 <sect2>
 <title>Adding a Tag</title>
-
 <para>
-  To add a tag, right-click on any tag and choose
-  <guimenuitem>New tag</guimenuitem>. This creates a new tag called
-  <quote>New tag</quote>. Right-click on this tag and select
-  <guimenuitem>Rename tag</guimenuitem> to enter the name of the new tag.
+  To add a tag, either click on the Add tag icon
+  <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="list-add.png"/></imageobject></inlinemediaobject></guiicon> or
+  right-click on any tag and choose <guimenuitem>New tag</guimenuitem>. This
+  creates a new tag called <quote>New tag</quote>. Right-click on this tag and
+  select <guimenuitem>Rename tag</guimenuitem> to enter the name of the new tag.
 </para>
 </sect2>
 
 <sect2>
 <title>Renaming a Tag</title>
-
 <para>
-  To rename a tag, simply right-click on the name, select
-  <guimenuitem>Rename tag</guimenuitem> and the name becomes
-  editable. Changing the name will affect the name in all the transactions in
-  which it appears.
+  To rename a tag, either click on the tag name to select it and click on the
+  <guiicon>Rename tag</guiicon> (between the add and remove icons) or
+  right-click on the name and then select <guimenuitem>Rename tag</guimenuitem>.
+  The name then becomes editable. Changing the name will affect the name in all
+  the transactions in which it appears.
 </para>
 </sect2>
 
 <sect2>
 <title>Deleting a Tag</title>
-
 <para>
-  To remove a tag, right-click the name and select
-  <guimenuitem>Delete tag</guimenuitem>. If the tag has any transactions,
-  you will be presented with a dialog that allows you to reassign them to a
-  different tag.
+  To remove a tag, either click on the Delete tag icon
+  <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="list-remove.png"/></imageobject></inlinemediaobject></guiicon> or
+  right-click the name and select <guimenuitem>Delete tag</guimenuitem>. If the
+  tag has any transactions, you will be presented with a dialog that allows you
+  to reassign them to a different tag.
 </para>
-</sect2>
 
+<note>
+<para>
+  As Tags have just been introduced to &kappname; in version 4.7, none of the
+  methods for importing data are able to import tags.  It is understood that
+  this is an important feature, and each import method is likely to introduce
+  it in an upcoming release.
+</para>
+</note>
+</sect2>
 </sect1>
 
-<sect1 id="details.tags.details">
-<title>Tag Details</title>
-
+<sect1 id="details.tags.info">
+<title>Tagged transactions and Tag details</title>
 <para>
-  To view and edit the information associated with a particular tag,
-  select the tag from the list and select the Details tab. To modify this
-  information, edit the detail area directly and press the Update button when
-  finished.
-</para>
+  To view the transactions or view and edit the information associated with a
+  particular tag, select the tag from the list and select the appropriate tab on
+  the right side of the dialog.
 
-<para>
 <screenshot>
   <screeninfo>The tag details tab</screeninfo>
   <mediaobject>
@@ -98,6 +96,49 @@
   </mediaobject>
 </screenshot>
 </para>
-</sect1>
 
+<sect2 id="details.tags.info.transactions">
+<title>Tagged transactions</title>
+<para>
+  To see a list of the transacitons associated with the selected tag, select the
+  <guilabel>Transactions</guilabel> tab.  This list is similar to the list of
+  transactions for a Payee.  You can double-click on a transaction, and you will
+  be taken to the ledger view of that transaction for the account in which the
+  transaction has been tagged.
+</para>
+</sect2>
+
+
+<sect2 id="details.tags.info.details">
+<title>Tag details</title>
+<para>
+  To view and edit the information associated with a particular tag, select the
+  <guilabel>Details</guilabel> tab.
+  <itemizedlist>
+    <listitem>
+      <para>
+        You can select the color used to highlight transactions with which this
+        tag has been asociated.  If you click on the color bar, you will get a
+        color chooser dialog.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        To modify the notes associated with the tag, just edit the text in the
+        box.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Clicking the <guilabel>Closed</guilabel> checkbox will not alter any
+        transactions already associated with the tag, but it will prevent
+        assigning the tag to any additional transactions.
+      </para>
+    </listitem>
+  </itemizedlist>
+  When you are done, don't forget to click the <guiicon>Update</guiicon> button, although you will
+  be prompted if you leave the dialog without havin done so.
+</para>
+</sect2>
+</sect1>
 </chapter>
