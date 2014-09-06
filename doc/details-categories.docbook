@@ -4,8 +4,8 @@
   <authorgroup>
     <author>&Roger.Lum; &Roger.Lum.mail;</author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2014-08-30</date>
+  <releaseinfo>4.7.01</releaseinfo>
 </chapterinfo>
 
 <title id="details.categories.title">Categories</title>
@@ -27,7 +27,7 @@
 </para>
 
 <sect1 id="details.categories.create">
-<title>Creating categories</title>
+<title>Creating a category</title>
 
 <para>
   To create a new category, either select <menuchoice><guimenu>Category</guimenu>
@@ -59,7 +59,7 @@
 </sect1>
 
 <sect1 id="details.categories.edit">
-<title id="details.categories.edit.title">Editing a Category</title>
+<title>Editing a Category</title>
 
 <para>
   To edit a category, right-click on a category name, and choose
@@ -81,7 +81,9 @@
   category to a different parent.
 -->
   You can change the parent category by clicking on another category in this
-  view of the category hierarchy.
+  view of the category hierarchy.  In an earlier version of &kappname; it was possible to change the parent of
+  a category by dragging and dropping.  This functionality will return in a future version, but possibly not
+  until the conversion of &kappname; to &kde; Frameworks.
 </para>
 
 <para>
@@ -135,7 +137,7 @@
 </sect1>
 
 <sect1 id="details.categories.delete">
-<title>Deleting categories</title>
+<title>Deleting a category</title>
 
 <para>
   To delete a category, select it in the tree, right click to bring up the popup

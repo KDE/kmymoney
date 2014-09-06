@@ -284,6 +284,19 @@
 </sect3>
 
 <sect3>
+<title>The Tag</title>
+
+<para>
+  Tags were introduced to &kappname; in version 4.7, and they are not yet fully
+  documented in this handbook.  Tags are similar to Categories, and can be used
+  to maintain an orthogonal view to Categories.  For example, you might have
+  a Category for each different type of automotice expenses, and then have a Tag
+  for each vehicle.  As with Categories, you can select from the dropdown list, or type
+  a new Tag name, and be prompted if you want to create a new Tag with that name.
+</para>
+</sect3>
+
+<sect3>
 <title>The Memo</title>
 
 <para>

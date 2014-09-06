@@ -198,6 +198,23 @@
       <guiicon>
         <inlinemediaobject>
 	  <imageobject>
+	    <imagedata fileref="mail-tagged.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Tags View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Tags: Special accounts that provide an additional means to Categories for
+      you to group associated transactions.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <guiicon>
+        <inlinemediaobject>
+	  <imageobject>
 	    <imagedata fileref="payees_view.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
@@ -515,7 +532,7 @@ transactions this is currently empty.</para>
 <title>Creating accounts</title>
 
 <para>
-  You can create an account in one of two ways both of which are described here:
+  You can create an account in one of two ways, both of which are described here:
 </para>
 
 <variablelist>
@@ -535,6 +552,8 @@ transactions this is currently empty.</para>
     <listitem>
       <para>
         To create an account using the accounts view click on the Accounts icon
+        <guiicon><inlinemediaobject><imageobject><imagedata
+        fileref="accounts_view.png"/></imageobject></inlinemediaobject></guiicon>
         in the view selector and then right click on the Asset tree icon in the
         right hand view and select <guimenuitem>New account</guimenuitem> from
         the popup menu.  The Asset tree holds all of your accounts that are an
@@ -590,9 +609,9 @@ transactions this is currently empty.</para>
 
 <para>
   To maintain <link linkend="details.schedules">schedules</link> click on the
-  <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="schedule_view.png"/></imageobject></inlinemediaobject>Schedules</guiicon>
-  icon in the view selector.
+  Schedules icon <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="schedule_view.png"/></imageobject></inlinemediaobject></guiicon> in
+  the view selector.
 </para>
 </sect1>
 
@@ -602,8 +621,8 @@ transactions this is currently empty.</para>
 <para>
   To maintain <link linkend="details.categories">categories</link> click on the
   <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="categories_view.png"/></imageobject></inlinemediaobject>Categories</guiicon>
-  icon in the view selector.
+  fileref="categories_view.png"/></imageobject></inlinemediaobject></guiicon>
+  Categories icon in the view selector.
 </para>
 
 <para>
@@ -612,14 +631,30 @@ transactions this is currently empty.</para>
 </para>
 </sect1>
 
+<sect1 id="firsttime.tags">
+<title>Tags</title>
+
+<para>
+  To maintain <link linkend="details.tags">tags</link> click on the Tags icon
+  <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="mail-tagged.png"/></imageobject></inlinemediaobject></guiicon> in the
+  view selector.
+</para>
+
+<para>
+  A full description of this topic can be found in the <link
+  linkend="details.tags">Tags</link> section.
+</para>
+</sect1>
+
 <sect1 id="firsttime.payees">
 <title>Payees</title>
 
 <para>
-  To maintain your list of payees click on the
+  To maintain your list of payees click on the Payees icon
   <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="payees_view.png"/></imageobject></inlinemediaobject>Payees</guiicon>
-  icon in the view selector.
+  fileref="payees_view.png"/></imageobject></inlinemediaobject></guiicon> in the
+  view selector.
 </para>
 
 <para>
@@ -653,10 +688,10 @@ transactions this is currently empty.</para>
 </para>
 
 <para>
-  The search dialog can be opened from the toolbar using the
+  The search dialog can be opened from the toolbar using the Find icon
   <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="transaction_find.png"/></imageobject></inlinemediaobject>Find</guiicon>
-  icon or by selecting <guimenuitem>Find Transaction</guimenuitem> from the
+  fileref="transaction_find.png"/></imageobject></inlinemediaobject></guiicon>
+  or by selecting <guimenuitem>Find Transaction</guimenuitem> from the
   <guimenu>Edit</guimenu> menu.
 </para>
 
@@ -691,7 +726,6 @@ transactions this is currently empty.</para>
   A full description of this topic can be found in the <link
   linkend="details.reconcile">Reconciliation</link> section.
 </para>
-
 </sect1>
 
 <sect1 id="firsttime.backup">
@@ -733,7 +767,7 @@ transactions this is currently empty.</para>
 
 <para>
   For a complete description of all the available line options, see the man page
-  for &kappname;  However, there are two special cases which we describe here.
+  for &kappname;.  However, there are two special cases which we describe here.
 </para>
 
 <formalpara><title><command>kmymoney -n</command></title>
@@ -752,7 +786,85 @@ transactions this is currently empty.</para>
     used to import a <link linkend="details.impexp.gnucash">GnuCash</link> file.
   </para>
 </formalpara>
+</sect1>
 
+<sect1 id="firsttime.newpc">
+<title>How to move &kappname; to a new computer</title>
+
+<sect2 id="firsttime.newpc.data">
+<title>Moving your data</title>
+
+<para>
+  If you get a new computer, it's very easy to move your data.  In fact, all you
+  have to do is to copy your &kappname; data file.  The name of the file is
+  shown in the title bar when &kappname; is running, it usually ends in .kmy.
+  The first time you run the application on the new computer you will have to
+  tell it where you have put the data file, either by running from the command
+  line, or from the
+  <menuchoice><guimenu>File</guimenu><guimenuitem>Open...</guimenuitem></menuchoice>
+  menu.  You should even be able to move between &Windows;, &MacOS;, and &Linux; systems.
+</para>
+
+<para>
+  If you have encrypted your data file, be sure the appropriate software and
+  keys have also been set up on the new computer.
+</para>
+
+<para>
+  If your data is in an SQL database, refer to documentation for your database
+  software for guidance on migrating your data.
+</para>
+
+<para>
+  Note that this assumes you have installed the same version of &kappname; on the new
+  computer as you were running on the old computer.  Installing a newer versiou should
+  also be safe, but you need to be aware of any issues related to that upgrade.  Any such
+  issues should be noted in the release notes for the new version.
+</para>
+</sect2>
+
+<sect2 id="firsttime.newpc.settings">
+<title>Moving your settings</title>
+
+<para>
+  If you only move your data file to the new machine, as described in the
+  previous section, &kappname; will work correctly, but you will have lost any
+  settings you changed from the default on your old machine.  To maintain these
+  settings, you also need to copy your configuration file.  This file is called
+  <quote>kmymoneyrc</quote>.  This file will be in a directory with other &kde;
+  application configuration files.  On a &Linux; system, this will be in
+  <quote>$KDEHOME/share/config</quote> where <quote>$KDEHOME</quote> is usually
+  <quote>.kde4</quote> within your home directory.
+</para>
+
+<sect3 id="firsttime.newpc.settings.plugins">
+<title>Moving plugin settings</title>
+
+<para>
+  If you have run any &kappname; plugins, such as the csv importer or exporter,
+  it may also have created a conguration file in that same directory, such as
+  csvimporterrc or csvexporterrc.  These should also be copied to the new
+  computer.
+</para>
+
+<para>
+  As with the main data file, this assumes the same version of the plugin on
+  both computers.  Upgrades are generally safe, but if the functionality of the
+  plugin has changed greatly, it is advisable to carefully test using the old
+  configuration file, to be sure the plugin behaves as you expect.
+</para>
+
+<note>
+<para>
+  These instructions are solely for moving your &kappname; data and settings.
+  However, there may be important items which are stored by &kde; and not by
+  &kappname;, such as any passwords stored in kwallet.  Moving other parts of
+  your &kde; setup is beyond the scope of this manual, although many of the
+  relevant files are also stored under <quote>$KDEHOME</quote>.
+</para>
+</note>
+</sect3>
+</sect2>
 </sect1>
 
 <sect1 id="firsttime.contact">
@@ -762,7 +874,9 @@ transactions this is currently empty.</para>
 <title>Contacting the developers</title>
 
 <para>
-  You can contact the developers through their mailing list &devlist;.
+  For general questions or comments about &kappname;, there is a users' mailing
+  list &userlist;.  In addition, you can contact the developers through their
+  mailing list &devlist;.
 </para>
 
 <para>
@@ -812,9 +926,12 @@ transactions this is currently empty.</para>
   <para>
     The <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
     Bug</guimenuitem></menuchoice> menu choice will fill this in automatically,
-    but if you would prefer not to use this interface, we will need to know the
-    version of &kappname; you're running, the version of &kde;, the name and
-    version of your distribution, and the version of your kernel.
+    but if you would prefer not to use this interface, there are several items
+    you need to include in the report.  We will need to know what operating
+    system you are using (&Linux;, &MacOS;, or &Windows;), the version of &kde;
+    and the version of &kappname; you're running, and either the version of
+    &MacOS; or &Windows; or the name and version of your &Linux; distribution
+    and the version of your kernel.
   </para>
 </formalpara>
 

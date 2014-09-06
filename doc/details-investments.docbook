@@ -4,8 +4,8 @@
   <authorgroup>
     <author> &Ace.Jones; &Ace.Jones.mail; </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2014-08-30</date>
+  <releaseinfo>4.7.01</releaseinfo>
 </chapterinfo>
 
 <title>Investments</title>
@@ -88,9 +88,22 @@
 <title>Adding Investments to Your Account</title>
 
 <para>
-  To add individual Investments to your Investment Account, navigate to
-  the <guibutton>Investments</guibutton> view, and choose the account where the
+  To add individual Investments to your Investment Account, navigate to the
+  <guibutton>Investments</guibutton> view, select the
+  <guibutton>Equities</guibutton> tab, and choose the account where the
   investment is held from the <guilabel>Select Account</guilabel> drop-down box.
+
+  <screenshot>
+  <screeninfo>Investment View, Equities Tab</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="investments_summarytab.png" format="PNG" />
+  </imageobject>
+  <textobject>
+  <phrase>Investment View, Equities Tab</phrase>
+  </textobject>
+  </mediaobject>
+  </screenshot>
 </para>
 
 <para>
@@ -199,13 +212,14 @@
 <title>Editing an Investment</title>
 
 <para>
-  The Investment view window lists your current holdings in this account, along
-  with their symbol, value, and price.  Right-click the mouse on any of the
-  investments to bring up the <guimenu>Investment Options</guimenu> context
-  menu, where you have the option to add, edit, or delete individual investments
-  from this account. Also, you can update the price of your investments here
-  either manually or via their online source. In addition, it is possible to
-  close an empty account, or to reopen a closed account.
+  The <guilabel>Euities</guilabel> tab of the Investments view window lists your
+  current holdings in this account, along with their symbol, value, quantity, and price.
+  Right-click the mouse on any of the investments to bring up the
+  <guimenu>Investment Options</guimenu> context menu, where you have the option
+  to add, edit, or delete individual investments from this account. Also, you
+  can update the price of your investments here either manually or via their
+  online source. In addition, it is possible to close an empty account, or to
+  reopen a closed account.
 </para>
 </sect1>
 

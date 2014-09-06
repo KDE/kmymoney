@@ -161,6 +161,8 @@ and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
 <year>2009</year>
 <year>2010</year>
 <year>2011</year>
+<year>2012</year>
+<year>2013</year>
 <year>2014</year>
 <holder>The &kappname; Development Team</holder>
 </copyright>
@@ -177,7 +179,7 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date>2014-08-30</date>
-<releaseinfo>4.07.01</releaseinfo>
+<releaseinfo>4.7.01</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
