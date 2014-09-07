@@ -91,7 +91,7 @@
   a profile selector box, which is enabled once one of the radio buttons has
   been selected.  At the bottom of the display are buttons to move on to the
   next step of the wizard, go <guibutton>Back</guibutton> to the previous step,
-  or <guibutton>Cancel</guibutton> the import.  At the inital step, there is
+  or <guibutton>Cancel</guibutton> the import.  At the initial step, there is
   also a button <guilabel>Select File</guilabel> to initially select the file to
   import.
 <!-- want to use inlinemediaobject to avoid lines above and below. -->
@@ -194,7 +194,7 @@
 <para>
   It is possible to select more than one column for the Memo field, by
   consecutive selections.  Memo columns already selected are marked in the
-  drop-down with an asterix (*).  If you select multiple columns in this way,
+  drop-down with an asterisk (*).  If you select multiple columns in this way,
   their contents will be concatenated in the Memo field.
 </para>
 </listitem>

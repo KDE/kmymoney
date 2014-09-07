@@ -100,7 +100,7 @@
 <sect2 id="details.tags.info.transactions">
 <title>Tagged transactions</title>
 <para>
-  To see a list of the transacitons associated with the selected tag, select the
+  To see a list of the transactions associated with the selected tag, select the
   <guilabel>Transactions</guilabel> tab.  This list is similar to the list of
   transactions for a Payee.  You can double-click on a transaction, and you will
   be taken to the ledger view of that transaction for the account in which the
@@ -114,11 +114,12 @@
 <para>
   To view and edit the information associated with a particular tag, select the
   <guilabel>Details</guilabel> tab.
+</para>
   <itemizedlist>
     <listitem>
       <para>
         You can select the color used to highlight transactions with which this
-        tag has been asociated.  If you click on the color bar, you will get a
+        tag has been associated.  If you click on the color bar, you will get a
         color chooser dialog.
       </para>
     </listitem>
@@ -136,8 +137,9 @@
       </para>
     </listitem>
   </itemizedlist>
+<para>
   When you are done, don't forget to click the <guiicon>Update</guiicon> button, although you will
-  be prompted if you leave the dialog without havin done so.
+  be prompted if you leave the dialog without having done so.
 </para>
 </sect2>
 </sect1>
