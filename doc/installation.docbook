@@ -30,7 +30,7 @@
 </para>
 
 <para>
-  Althouh work has begun porting &kappname; to the new KDE Frameworks 5, this is
+  Although work has begun porting &kappname; to the new KDE Frameworks 5, this is
   still very early, and not yet usable.  Hopefully it will be available in the
   5.0 version, which we expect to release in early 2015.  Until then, if you are
   specifically interested in following this work, you should subscribe to the

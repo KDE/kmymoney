@@ -817,7 +817,7 @@ transactions this is currently empty.</para>
 
 <para>
   Note that this assumes you have installed the same version of &kappname; on the new
-  computer as you were running on the old computer.  Installing a newer versiou should
+  computer as you were running on the old computer.  Installing a newer version should
   also be safe, but you need to be aware of any issues related to that upgrade.  Any such
   issues should be noted in the release notes for the new version.
 </para>
@@ -842,7 +842,7 @@ transactions this is currently empty.</para>
 
 <para>
   If you have run any &kappname; plugins, such as the csv importer or exporter,
-  it may also have created a conguration file in that same directory, such as
+  it may also have created a configuration file in that same directory, such as
   csvimporterrc or csvexporterrc.  These should also be copied to the new
   computer.
 </para>
