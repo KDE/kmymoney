@@ -94,6 +94,7 @@
   or <guibutton>Cancel</guibutton> the import.  At the initial step, there is
   also a button <guilabel>Select File</guilabel> to initially select the file to
   import.
+</para>
 <!-- want to use inlinemediaobject to avoid lines above and below. -->
   <screenshot>
   <mediaobject>
@@ -103,6 +104,7 @@
   </mediaobject>
   </screenshot>
 
+<para>
   Also, note the <guilabel>Skip setup</guilabel> checkbox next to the profile
   selector.  Initially, you should not select this check-box.  Once you have set
   up a profile and finished the wizard, those parameters are saved in the
@@ -131,6 +133,7 @@
 <para>
   The wizard will now have advanced to the <guilabel>Separators</guilabel> page,
   and you should now see your data.
+</para>
 
   <screenshot>
   <mediaobject>
@@ -152,6 +155,7 @@
     </para> 
   </warning>
 
+<para>
   The plugin should have detected the appropriate <guilabel>Field
   Separator</guilabel> to use, and it is not usually possible to select a
   different one.  In fact, attempting to do so will reset any field choices you
@@ -166,6 +170,7 @@
 <title>CSV Import Wizard: Banking</title>
 <para>
   On this page, you select the column numbers from which to import the relevant fields.
+</para>
 
   <screenshot>
   <mediaobject>
@@ -175,8 +180,10 @@
   </mediaobject>
   </screenshot>
 
+<para>
   For most fields, you just need to use the appropriate dropdown to select the
   appropriate column.  However, there are a few special considerations.
+</para>
 
 <itemizedlist>
 <listitem>
@@ -221,7 +228,6 @@
 </para>
 </listitem>
 </itemizedlist>
-</para>
 
 <para>
   If you notice you have made an incorrect choice, just change that selection.
