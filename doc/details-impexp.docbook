@@ -959,7 +959,7 @@
   Exchange (OFX) is a unified specification for the electronic exchange of
   financial data between financial institutions, businesses and consumers via
   the Internet. OFX is not a financial institution.</quote> The specification
-  defines formats for transfer of finacial data both by file and by direct
+  defines formats for transfer of financial data both by file and by direct
   interchange.
 </para>
 
@@ -1086,7 +1086,7 @@
   <para>
     Setting up OFX Direct Connect can sometimes be a challenge, especially as
     the implementation at most institutions do not provide sufficient details in
-    error messages.  One particular issue to note is that many institutuions
+    error messages.  One particular issue to note is that many institutions
     require you to change your password the first time you access it online
     using this method.  Unfortunately, at this time, the library that &kappname;
     uses (libofx) does not have a way to interactively change a password.  In
