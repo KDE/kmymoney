@@ -787,7 +787,7 @@
 <title>Print check plugin</title>
 
 <para>
-  This plugin is inlcuded with the source of &kappname;, and should always be
+  This plugin is included with the source of &kappname;, and should always be
   enabled.  It allows printing of a check based on the data from a selected
   transaction, with the layout controlled by an html template. You need to use a 
   template which is matched to your pre-printed checks.  When you click on the

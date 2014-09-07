@@ -212,7 +212,7 @@
 <title>Editing an Investment</title>
 
 <para>
-  The <guilabel>Euities</guilabel> tab of the Investments view window lists your
+  The <guilabel>Equities</guilabel> tab of the Investments view window lists your
   current holdings in this account, along with their symbol, value, quantity, and price.
   Right-click the mouse on any of the investments to bring up the
   <guimenu>Investment Options</guimenu> context menu, where you have the option
