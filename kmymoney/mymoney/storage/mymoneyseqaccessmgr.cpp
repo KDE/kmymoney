@@ -19,9 +19,22 @@
 #include "mymoneyseqaccessmgr.h"
 
 #include <typeinfo>
+
+// ----------------------------------------------------------------------------
+// QT Includes
+
+#include <QList>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+#include <klocalizedstring.h>
+
+// ----------------------------------------------------------------------------
+// Project Includes
+
 #include "mymoneytransactionfilter.h"
 #include "mymoneycategory.h"
-#include <QList>
 
 #define TRY try {
 #define CATCH } catch (const MyMoneyException &e) {
