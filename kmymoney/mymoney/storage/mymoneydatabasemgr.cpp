@@ -20,6 +20,17 @@
 #include <list>
 #include <typeinfo>
 
+// ----------------------------------------------------------------------------
+// QT Includes
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+#include <klocalizedstring.h>
+
+// ----------------------------------------------------------------------------
+// Project Includes
+
 #include "../mymoneytransactionfilter.h"
 #include "../mymoneycategory.h"
 
