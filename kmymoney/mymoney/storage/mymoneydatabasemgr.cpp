@@ -1621,7 +1621,7 @@ void MyMoneyDatabaseMgr::addCurrency(const MyMoneySecurity& currency)
 
     it = currencyList.constFind(currency.id());
     if (it != currencyList.constEnd()) {
-      throw MYMONEYEXCEPTION(QString("Cannot add currency with existing id %1").arg(currency.id()));
+      throw MYMONEYEXCEPTION(i18n("Cannot add currency with existing id %1", currency.id()));
     }
 
     m_sql->addCurrency(currency);
@@ -1635,7 +1635,7 @@ void MyMoneyDatabaseMgr::modifyCurrency(const MyMoneySecurity& currency)
 
   it = currencyList.constFind(currency.id());
   if (it == currencyList.constEnd()) {
-    throw MYMONEYEXCEPTION(QString("Cannot modify currency with unknown id %1").arg(currency.id()));
+    throw MYMONEYEXCEPTION(i18n("Cannot modify currency with unknown id %1", currency.id()));
   }
 
   m_sql->modifyCurrency(currency);
@@ -1650,7 +1650,7 @@ void MyMoneyDatabaseMgr::removeCurrency(const MyMoneySecurity& currency)
 
   it = currencyList.constFind(currency.id());
   if (it == currencyList.constEnd()) {
-    throw MYMONEYEXCEPTION(QString("Cannot remove currency with unknown id %1").arg(currency.id()));
+    throw MYMONEYEXCEPTION(i18n("Cannot remove currency with unknown id %1", currency.id()));
   }
 
   m_sql->removeCurrency(currency);
@@ -1666,7 +1666,7 @@ const MyMoneySecurity MyMoneyDatabaseMgr::currency(const QString& id) const
 
   it = currencyList.constFind(id);
   if (it == currencyList.constEnd()) {
-    throw MYMONEYEXCEPTION(QString("Cannot retrieve currency with unknown id '%1'").arg(id));
+    throw MYMONEYEXCEPTION(i18n("Cannot retrieve currency with unknown id '%1'", id));
   }
 
   return *it;

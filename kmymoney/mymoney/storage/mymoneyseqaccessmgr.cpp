@@ -1567,7 +1567,7 @@ void MyMoneySeqAccessMgr::addCurrency(const MyMoneySecurity& currency)
 
   it = m_currencyList.find(currency.id());
   if (it != m_currencyList.end()) {
-    throw MYMONEYEXCEPTION(QString("Cannot add currency with existing id %1").arg(currency.id()));
+    throw MYMONEYEXCEPTION(i18n("Cannot add currency with existing id %1", currency.id()));
   }
 
   m_currencyList.insert(currency.id(), currency);
@@ -1579,7 +1579,7 @@ void MyMoneySeqAccessMgr::modifyCurrency(const MyMoneySecurity& currency)
 
   it = m_currencyList.find(currency.id());
   if (it == m_currencyList.end()) {
-    throw MYMONEYEXCEPTION(QString("Cannot modify currency with unknown id %1").arg(currency.id()));
+    throw MYMONEYEXCEPTION(i18n("Cannot modify currency with unknown id %1", currency.id()));
   }
 
   m_currencyList.modify(currency.id(), currency);
@@ -1593,7 +1593,7 @@ void MyMoneySeqAccessMgr::removeCurrency(const MyMoneySecurity& currency)
 
   it = m_currencyList.find(currency.id());
   if (it == m_currencyList.end()) {
-    throw MYMONEYEXCEPTION(QString("Cannot remove currency with unknown id %1").arg(currency.id()));
+    throw MYMONEYEXCEPTION(i18n("Cannot remove currency with unknown id %1", currency.id()));
   }
 
   m_currencyList.remove(currency.id());
@@ -1608,7 +1608,7 @@ const MyMoneySecurity MyMoneySeqAccessMgr::currency(const QString& id) const
 
   it = m_currencyList.find(id);
   if (it == m_currencyList.end()) {
-    throw MYMONEYEXCEPTION(QString("Cannot retrieve currency with unknown id '%1'").arg(id));
+    throw MYMONEYEXCEPTION(i18n("Cannot retrieve currency with unknown id '%1'", id));
   }
 
   return *it;
