@@ -49,10 +49,16 @@ void SummaryWizardPage::initializePage()
 
   m_summaryFirstPayment->setText(KGlobal::locale()->formatDate(field("firstDueDateEdit").toDate()));
 
-  if (field("payeeEdit").toString().isEmpty()) {
-    m_summaryPayee->setText(i18n("not assigned"));
+  const QString &payeeId = field("payeeEdit").toString();
+  if (!payeeId.isEmpty()) {
+    try {
+      const MyMoneyPayee &payee = MyMoneyFile::instance()->payee(payeeId);
+      m_summaryPayee->setText(payee.name());
+    } catch (const MyMoneyException &) {
+      qWarning("Unable to load the payee name from the id");
+    }
   } else {
-    m_summaryPayee->setText(field("payeeEdit").toString());
+    m_summaryPayee->setText(i18n("not assigned"));
   }
 
   // Calculation
