@@ -804,7 +804,7 @@ const QMap<QDate, MyMoneyMoney>& MyMoneyAccount::reconciliationHistory()
 /**
  * @todo Improve setting of country for nationalAccount
  */
-QList< payeeIdentifier > MyMoneyAccount::accountIdentifiers() const
+QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
 {
   QList< payeeIdentifier > list;
 

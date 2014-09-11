@@ -77,7 +77,7 @@ class MyMoneyObjectContainer;
   * @author Thomas Baumgart 2002
   *
 **/
-class KMM_MYMONEY_EXPORT MyMoneyAccount : public MyMoneyObject, public MyMoneyKeyValueContainer, public MyMoneyPayeeIdentifierContainer
+class KMM_MYMONEY_EXPORT MyMoneyAccount : public MyMoneyObject, public MyMoneyKeyValueContainer /*, public MyMoneyPayeeIdentifierContainer */
 {
   friend class MyMoneyObjectContainer;
   KMM_MYMONEY_UNIT_TESTABLE
@@ -311,8 +311,19 @@ public:
 
   /**
    * Return the stored account identifiers
+   *
+   * @internal This method is temporary until MyMoneyAccount is a MyMoneyPayeeIdentifierContainer. But before this
+   * can happen the account numbers and iban kvp data must be moved there.
    */
-  QList< payeeIdentifier > accountIdentifiers() const;
+  QList< payeeIdentifier > payeeIdentifiers() const;
+
+  /**
+   * @see MyMoneyPayeeIdentifierContainer::payeeIdentifiersByType()
+   *
+   * @copydoc payeeIdentifiers();
+   */
+  template< class type >
+  QList< ::payeeIdentifierTyped<type> > payeeIdentifiersByType() const;
 
   /**
     * This method is used to set the descriptive text of the account
@@ -752,6 +763,13 @@ public:
   virtual bool hasReferenceTo(const QString& id) const;
 
 };
+
+template< class type >
+QList< payeeIdentifierTyped<type> > MyMoneyAccount::payeeIdentifiersByType() const
+{
+  QList< payeeIdentifierTyped<type> > typedList;
+  return typedList;
+}
 
 /**
   * Make it possible to hold @ref MyMoneyAccount objects inside @ref QVariant objects.

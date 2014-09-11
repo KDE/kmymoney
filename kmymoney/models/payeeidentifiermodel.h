@@ -58,7 +58,7 @@ public:
   virtual bool removeRows(int row, int count, const QModelIndex& parent);
 
   void setSource( MyMoneyPayee payee );
-  void setSource( MyMoneyAccount account );
+  // void setSource( MyMoneyAccount account );
 
 private:
   void setSource( MyMoneyPayeeIdentifierContainer* data );

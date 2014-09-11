@@ -129,12 +129,11 @@ bool sepaOnlineTransferImpl::isValid() const
 
 payeeIdentifier sepaOnlineTransferImpl::originAccountIdentifier() const
 {
-  QList<payeeIdentifier> idents = MyMoneyFile::instance()->account(_originAccount).accountIdentifiers();
-  foreach( payeeIdentifier ident, idents ) {
-    if ( ident.iid() == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid() ) {
-      ident.data<payeeIdentifiers::ibanBic>()->setOwnerName(MyMoneyFile::instance()->user().name());
-      return ident;
-    }
+  QList<payeeIdentifierTyped<payeeIdentifiers::ibanBic> > idents = MyMoneyFile::instance()->account(_originAccount).payeeIdentifiersByType<payeeIdentifiers::ibanBic>();
+  if ( !idents.isEmpty() ) {
+    payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = idents[0];
+    ident->setOwnerName(MyMoneyFile::instance()->user().name());
+    return ident;
   }
   return payeeIdentifier( new payeeIdentifiers::ibanBic );
 }

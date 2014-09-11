@@ -119,12 +119,14 @@ void payeeIdentifierModel::setSource(MyMoneyPayee payee)
   setSource( &m_payee );
 }
 
+#if 0
 void payeeIdentifierModel::setSource(MyMoneyAccount account)
 {
   m_account = account;
   m_loadedType = ACCOUNT;
   setSource(&m_account);
 }
+#endif
 
 void payeeIdentifierModel::setSource(MyMoneyPayeeIdentifierContainer* data)
 {

@@ -812,7 +812,7 @@ bool KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
   AB_Transaction_SetRemoteBic(  AbTransaction, beneficiaryAcc.fullStoredBic().toUtf8().constData() );
 
   // Origin Account
-  if ( !AB_Transaction_SetLocalAccount( AbTransaction, job.responsibleMyMoneyAccount().accountIdentifiers()) ) {
+  if ( !AB_Transaction_SetLocalAccount( AbTransaction, job.responsibleMyMoneyAccount().payeeIdentifiers()) ) {
     job.addJobMessage(onlineJobMessage(onlineJobMessage::error, "KBanking",
                                         QString("Sepa account information for \"%1\" are not valid.").arg(MyMoneyFile::instance()->account(accId).name(), rv)
     )

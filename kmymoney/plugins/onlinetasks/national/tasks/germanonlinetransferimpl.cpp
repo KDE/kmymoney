@@ -110,12 +110,11 @@ bool germanOnlineTransferImpl::isValid() const
 
 payeeIdentifier germanOnlineTransferImpl::originAccountIdentifier() const
 {
-  QList<payeeIdentifier> idents = MyMoneyFile::instance()->account(_originAccount).accountIdentifiers();
-  foreach( payeeIdentifier ident, idents ) {
-    if ( ident.iid() == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid() ) {
-      ident.data<payeeIdentifiers::nationalAccount>()->setOwnerName(MyMoneyFile::instance()->user().name());
-      return ident;
-    }
+  QList< payeeIdentifierTyped<payeeIdentifiers::nationalAccount> > idents = MyMoneyFile::instance()->account(_originAccount).payeeIdentifiersByType<payeeIdentifiers::nationalAccount>();
+  if ( !idents.isEmpty() ) {
+    payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = idents[0];
+    ident->setOwnerName(MyMoneyFile::instance()->user().name());
+    return ident;
   }
   return payeeIdentifier( new payeeIdentifiers::nationalAccount );
 }
