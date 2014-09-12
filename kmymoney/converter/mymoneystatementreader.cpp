@@ -760,29 +760,13 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // income account.  This is a hack, but it's needed in order to get the
       // amount into the transaction.
 
-      // There are some sign issues.  The OFX plugin universally reverses the sign
-      // for investment transactions.
-      //
-      // The way we interpret the sign on 'amount' is the s1 split, which is always
-      // the thing that's NOT the cash account.  For dividends, it's the income
-      // category, for buy/sell it's the stock account.
-      //
-      // For cash account transactions, the s1 split IS the cash account split,
-      // which explains why they have to be reversed for investment transactions
-      //
-      // Ergo, the 'amount' is negative at this point and needs to stay negative.
-      // The 'fees' is positive.
-      //
-      // This should probably change.  It would be more consistent to ALWAYS
-      // interpret the 'amount' as the cash account part.
-
       if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
         s1.setAccountId(d->interestId(thisaccount));
       else {//  Ensure category sub-accounts are dealt with properly
         s1.setAccountId(d->interestId(statementTransactionUnderImport.m_strInterestCategory));
       }
-      s1.setShares(statementTransactionUnderImport.m_amount);
-      s1.setValue(statementTransactionUnderImport.m_amount);
+      s1.setShares(-statementTransactionUnderImport.m_amount);
+      s1.setValue(-statementTransactionUnderImport.m_amount);
 
       // Split 2 will be the zero-amount investment split that serves to
       // mark this transaction as a cash dividend and note which stock account
@@ -793,15 +777,15 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       s2.setAccountId(thisaccount.id());
       transactionUnderImport.addSplit(s2);
 
-      transfervalue = -statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
+      transfervalue = statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
     } else if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaInterest) {
       if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
         s1.setAccountId(d->interestId(thisaccount));
       else {//  Ensure category sub-accounts are dealt with properly
         if (statementTransactionUnderImport.m_amount.isPositive())
-          s1.setAccountId(d->expenseId(statementTransactionUnderImport.m_strInterestCategory));
-        else
           s1.setAccountId(d->interestId(statementTransactionUnderImport.m_strInterestCategory));
+        else
+          s1.setAccountId(d->expenseId(statementTransactionUnderImport.m_strInterestCategory));
       }
       s1.setShares(statementTransactionUnderImport.m_amount);
       s1.setValue(statementTransactionUnderImport.m_amount);
@@ -817,7 +801,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       transactionUnderImport.addSplit(s2);
 
 
-      transfervalue = -statementTransactionUnderImport.m_amount;
+      transfervalue = statementTransactionUnderImport.m_amount;
 
     } else if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaFees) {
       if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
@@ -827,7 +811,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       s1.setShares(statementTransactionUnderImport.m_amount);
       s1.setValue(statementTransactionUnderImport.m_amount);
 
-      transfervalue = -statementTransactionUnderImport.m_amount;
+      transfervalue = statementTransactionUnderImport.m_amount;
 
     } else if ((statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaBuy) ||
                (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaSell)) {
@@ -835,7 +819,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s1.setPrice(statementTransactionUnderImport.m_price.abs());
       } else {
         MyMoneyMoney total;
-        total = statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
+        total = -statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
         if (!statementTransactionUnderImport.m_shares.isZero())
           s1.setPrice((total / statementTransactionUnderImport.m_shares).abs().convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
       }

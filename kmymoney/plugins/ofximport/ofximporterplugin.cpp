@@ -239,10 +239,6 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
 
   if (data.amount_valid) {
     t.m_amount = MyMoneyMoney(data.amount, 1000);
-    // if this is an investment statement, reverse the sign.  not sure
-    // why this is needed, so I suppose it's a bit of a hack for the moment.
-    if (data.invtransactiontype_valid)
-      t.m_amount = -t.m_amount;
   }
 
   if (data.check_number_valid) {
