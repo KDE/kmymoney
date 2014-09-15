@@ -51,7 +51,6 @@ void onlineJobModel::load()
     m_jobIdList.append(job.id());
   }
   endInsertRows();
-  emit dataChanged(index(0, 0, QModelIndex()), index(rowCount()-1, columnCount()-1, QModelIndex()));
 }
 
 void onlineJobModel::unload()
@@ -61,7 +60,6 @@ void onlineJobModel::unload()
     beginRemoveRows(QModelIndex(), 0, rowCount());
     m_jobIdList.clear();
     endRemoveRows();
-    emit dataChanged(index(0, 0, QModelIndex()), index(oldRowCount-1, columnCount()-1, QModelIndex()));
   }
 }
 
@@ -240,7 +238,6 @@ void onlineJobModel::slotObjectAdded(MyMoneyFile::notificationObjectT objType, c
   beginInsertRows(QModelIndex(), rowCount(), rowCount());
   m_jobIdList.append(obj->id());
   endInsertRows();
-  emit dataChanged(index(rowCount()-1, 0, QModelIndex()), index(rowCount()-1, columnCount()-1, QModelIndex()));
 }
 
 void onlineJobModel::slotObjectModified(MyMoneyFile::notificationObjectT objType, const MyMoneyObject * const obj)
@@ -263,6 +260,5 @@ void onlineJobModel::slotObjectRemoved(MyMoneyFile::notificationObjectT objType,
     m_jobIdList.removeAll(id);
     beginRemoveRows(QModelIndex(), row, row);
     endRemoveRows();
-    emit dataChanged(index(row, 0), index(row, columnCount()-1));
   }
 }
