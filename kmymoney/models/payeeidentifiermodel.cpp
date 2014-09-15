@@ -134,7 +134,6 @@ void payeeIdentifierModel::setSource(MyMoneyPayeeIdentifierContainer* data)
     // Remove all rows
     const int oldLastRow = m_data->payeeIdentifiers().count()-1;
     beginRemoveRows(QModelIndex(), 0, oldLastRow);
-    emit dataChanged(index(0, 0), index(oldLastRow, 0));
     endRemoveRows();
   }
 
@@ -144,7 +143,6 @@ void payeeIdentifierModel::setSource(MyMoneyPayeeIdentifierContainer* data)
   // Insert new rows
   const int newLastRow = m_data->payeeIdentifiers().count()-1;
   beginInsertRows(QModelIndex(), 0, newLastRow);
-  emit dataChanged(index(0, 0), index(newLastRow, 0));
   endInsertRows();
 }
 
