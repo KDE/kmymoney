@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>473</width>
-    <height>494</height>
+    <width>624</width>
+    <height>617</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,10 +76,10 @@
          </size>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="accountUnsupported">
-         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,1,0">
           <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
@@ -94,7 +94,7 @@
            </spacer>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1,0">
             <item>
              <spacer name="horizontalSpacer_2">
               <property name="orientation">
@@ -102,40 +102,37 @@
               </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>198</width>
+                <width>0</width>
                 <height>20</height>
                </size>
               </property>
              </spacer>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout">
+             <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
+              <property name="sizeConstraint">
+               <enum>QLayout::SetMaximumSize</enum>
+              </property>
               <item>
-               <widget class="QGraphicsView" name="graphicsView">
+               <widget class="QLabel" name="unsupportedIcon">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>40</width>
-                  <height>40</height>
-                 </size>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::NoFrame</enum>
-                </property>
-                <property name="interactive">
-                 <bool>false</bool>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QLabel" name="label">
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This account does not support online banking.&lt;/p&gt;&lt;p&gt;Please select another account.&lt;/p&gt;&lt;p&gt;If you think this is an error, check the plugin settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This account does not support online banking.&lt;/p&gt;&lt;p&gt;If you think this is an error, please check if the plugin for this type of credit transfer and your online banking plugins are available.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -151,7 +148,7 @@
               </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>188</width>
+                <width>0</width>
                 <height>20</height>
                </size>
               </property>
@@ -201,8 +198,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>443</width>
-               <height>267</height>
+               <width>75</width>
+               <height>16</height>
               </rect>
              </property>
             </widget>
@@ -303,7 +300,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>graphicsView</tabstop>
   <tabstop>buttonSend</tabstop>
   <tabstop>buttonEnque</tabstop>
   <tabstop>buttonAbort</tabstop>

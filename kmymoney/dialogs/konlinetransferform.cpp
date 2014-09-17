@@ -43,6 +43,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
     m_requiredFields( new kMandatoryFieldGroup(this) )
 {
   ui->setupUi(this);
+  ui->unsupportedIcon->setPixmap( QIcon::fromTheme("dialog-information").pixmap(style()->pixelMetric(QStyle::PM_MessageBoxIconSize)) );
 
   OnlineBankingAccountNamesFilterProxyModel* accountsModel = new OnlineBankingAccountNamesFilterProxyModel(this);
   accountsModel->setSourceModel( Models::instance()->accountsModel() );
