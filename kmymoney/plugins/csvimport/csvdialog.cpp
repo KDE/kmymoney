@@ -105,12 +105,12 @@ CSVDialog::CSVDialog(QWidget *parent) : QWidget(parent), ui(new Ui::CSVDialog)
   m_startLine = 1;
   m_topLine = 0;
   m_row = 0;
-  m_tableRows = 10;
+  m_visibleRows = 10;
   m_fieldDelimiterIndex = 0;
   m_rowHght = 30;
   m_header = 27;
   m_borders = 14;
-  m_tableHeight = m_header + m_rowHght * m_tableRows + m_borders;
+  m_tableHeight = m_header + m_rowHght * m_visibleRows + m_borders;
   m_minimumHeight = 595;
   m_windowWidth = geometry().width();
   m_initialHeight = geometry().height();
@@ -142,12 +142,11 @@ void CSVDialog::init()
 
   readSettingsProfiles();
 
+  m_hScrollBarHeight = 17;
   m_wizard = new QWizard;
-  ui->horizontalLayout->insertWidget(2, m_wizard, 0);
-  ui->horizontalLayout->setStretch(0, 10);//180
-  ui->horizontalLayout->setStretch(1, 1);
-  ui->horizontalLayout->setStretch(2, 50);//350
-  ui->horizontalLayout->setStretch(3, 1);
+  m_wizard->installEventFilter(this);
+  m_wizard->setWizardStyle(QWizard::ClassicStyle);
+  ui->horizontalLayout->addWidget(m_wizard, 100);
 
   this->setAutoFillBackground(true);
 
@@ -268,8 +267,7 @@ void CSVDialog::init()
 
   findCodecs();//                             returns m_codecs = codecMap.values();
 
-  connect(m_vScrollBar, SIGNAL(actionTriggered(int)), this, SLOT(slotVertScrollBarAction(int)));
-  connect(m_vScrollBar, SIGNAL(actionTriggered(int)), m_investProcessing, SLOT(slotVertScrollBarAction(int)));
+  connect(m_vScrollBar, SIGNAL(actionTriggered(int)), this, SLOT(slotVertScrollBarMoved(int)));
 
   connect(m_wizard->button(QWizard::CancelButton), SIGNAL(clicked()), this, SLOT(slotCancel()));
 
@@ -569,7 +567,7 @@ void CSVDialog::slotFileDialogClicked()
   for (int i = 0; i < ui->tableWidget->columnCount(); i++) {
     ui->tableWidget->setColumnWidth(i, 0);
   }
-  m_tableHeight = m_header + m_rowHght * m_tableRows + m_borders;
+  m_tableHeight = m_header + m_rowHght * m_visibleRows + m_borders;
   QRect rect = ui->frame_main->frameRect();
   rect.setHeight(m_tableHeight);
   ui->frame_main->setFrameRect(rect);
@@ -1581,7 +1579,6 @@ void CSVDialog::enableInputs()
   m_pageBanking->ui->comboBoxBnk_payeeCol->setEnabled(true);
   m_pageBanking->ui->comboBoxBnk_memoCol->setEnabled(true);
   m_pageBanking->ui->button_clear->setEnabled(true);
-  m_pageBanking->ui->gridLayout_2->columnStretch(2);
   m_pageLinesDate->ui->spinBox_skipToLast->setEnabled(true);
   m_pageSeparator->ui->comboBox_fieldDelimiter->setEnabled(true);
 
@@ -1607,18 +1604,18 @@ void CSVDialog::redrawWindow(int startLine)
     ui->tableWidget->setColumnWidth(i, 0);
   }
 
-  m_tableHeight = m_header + m_rowHght * m_tableRows + m_borders;
+  m_tableHeight = m_header + m_rowHght * m_visibleRows + m_borders;
   ui->tableWidget->setRowHeight(0, m_rowHght);
   QRect rect = ui->frame_main->frameRect();
   ui->frame_main->setFrameRect(rect);
   m_topLine = startLine;
   ui->tableWidget->setColumnWidth(0, 100);
-  int end = m_topLine + m_tableRows;
+  int end = m_topLine + m_visibleRows;
   if (end > m_fileEndLine) {
     end = m_fileEndLine;
 
-    if (end > m_tableRows) {
-      m_topLine = end - m_tableRows;
+    if (end > m_visibleRows) {
+      m_topLine = end - m_visibleRows;
     } else {
       m_topLine = 0;
     }
@@ -1665,7 +1662,7 @@ void CSVDialog::redrawWindow(int startLine)
     if (maxColWidth == 0) {
       maxColWidth = 49;
     }
-    ui->tableWidget->setColumnWidth(col, maxColWidth);
+    ui->tableWidget->resizeColumnToContents(col);
     m_rowWidth += maxColWidth;
   }  //  end cols
   m_maxRowWidth = m_rowWidth;
@@ -2157,6 +2154,19 @@ void CSVDialog::closeEvent(QCloseEvent *event)
   event->accept();
 }
 
+bool CSVDialog::eventFilter(QObject *object, QEvent *event)
+{
+  // prevent the wizard from closing on escape leaving the importer empty
+  if (object == m_wizard && event->type() == QEvent::KeyPress) {
+    QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+    if (keyEvent->key() == Qt::Key_Escape) {
+      close();// slotCancel();
+      return true;
+    }
+  }
+  return false;
+}
+
 QString CSVDialog::columnType(int column)
 {
   return  m_columnTypeList[column];
@@ -2418,7 +2428,7 @@ void CSVDialog::decimalSymbolSelected(int index)
 
 void CSVDialog::decimalSymbolSelected()
 {
-  decimalSymbolSelected(m_decimalSymbolIndex);
+  decimalSymbolSelected(m_parse->decimalSymbolIndex());
 }
 
 QString CSVDialog::decimalSymbol()
@@ -2723,61 +2733,24 @@ int CSVDialog::categoryColumn()
   return m_categoryColumn;
 }
 
-void CSVDialog::slotVertScrollBarAction(int val)
+void CSVDialog::slotVertScrollBarMoved(int val)
 {
-  if (m_fileType != "Banking") {
-    return;
+  int bottom = val + m_visibleRows - 1;
+  if (m_fileType == "Banking") {
+    if (m_fileEndLine == 0) {  // file not read yet
+      return;
+    }
+    if (bottom > m_fileEndLine) {
+      bottom = m_fileEndLine;
+    }
+  } else {
+    if (m_investProcessing->m_fileEndLine == 0) {  // file not read yet
+      return;
+    }
+    if (bottom > m_investProcessing->m_fileEndLine) {
+      bottom = m_investProcessing->m_fileEndLine;
+    }
   }
-  int pos = m_vScrollBar->value();
-  int nextTop = 0;
-  m_topLine = pos;
-  switch (val) {
-    case QAbstractSlider::SliderSingleStepAdd://1
-      m_topLine += m_vScrollBar->singleStep();
-      m_vScrollBar->setValue(pos + 1);
-      break;
-    case QAbstractSlider::SliderSingleStepSub://2
-      if (pos < 1) {
-        return;
-      }
-      m_topLine -= m_vScrollBar->singleStep();
-      if (m_topLine < 1) {
-        m_topLine = 0;
-      }
-      m_vScrollBar->setValue(pos - 1);
-      break;
-    case QAbstractSlider::SliderPageStepAdd://3
-      m_topLine += m_vScrollBar->pageStep();
-      nextTop = m_topLine + m_vScrollBar->pageStep();
-      if (nextTop >= m_fileEndLine) {
-        m_topLine = m_fileEndLine - m_vScrollBar->pageStep();
-      }
-      m_vScrollBar->setValue(m_topLine);
-      redrawWindow(m_topLine);
-      break;
-    case QAbstractSlider::SliderPageStepSub://4
-      m_topLine -= m_vScrollBar->pageStep();
-      if (m_topLine < 1) {
-        m_topLine = 1;
-      }
-      pos -= m_vScrollBar->pageStep();
-      if (pos < 1) {
-        pos = 0;
-      }
-      m_vScrollBar->setValue(pos);
-      redrawWindow(pos);
-      break;
-    case QAbstractSlider::SliderToMinimum://5
-      break;
-    case QAbstractSlider::SliderToMaximum://6
-      break;
-    case QAbstractSlider::SliderMove:     //7
-      m_topLine = m_vScrollBar->sliderPosition();
-      break;
-    case QAbstractSlider::SliderNoAction: //0
-      break;
-  }
-  redrawWindow(m_topLine);
 }
 
 void CSVDialog::clearCellsBackground()
@@ -2816,13 +2789,11 @@ void CSVDialog::setMemoColSelections()
 IntroPage::IntroPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::IntroPage)
 {
   ui->setupUi(this);
-  m_pageLayout = new QVBoxLayout;
   m_priorIndex = 0;
   m_priorName = QString();
   m_addRequested = false;
   m_lastRadioButton.clear();
   m_firstLineEdit = true;
-  ui->horizontalLayout->insertLayout(0, m_pageLayout);
   m_messageBoxJustCancelled = false;
   registerField("source", ui->combobox_source, "currentIndex", SIGNAL(currentIndexChanged()));
   disconnect(ui->combobox_source, 0, 0, 0);
@@ -3232,7 +3203,11 @@ void IntroPage::initializePage()
   m_newProfileCreated  = QString();
 
   m_dlg->m_importError = false;
-  wizard()->button(QWizard::CustomButton1)->setEnabled(true);
+  if (m_dlg->m_profileName.isEmpty() || m_dlg->m_profileName == "Add New Profile") {
+    wizard()->button(QWizard::CustomButton1)->setEnabled(false);  // disable 'Select file' if no profile selected
+  } else {
+    wizard()->button(QWizard::CustomButton1)->setEnabled(true);  //  enable 'Select file' when profile selected
+  }
 
   connect(ui->combobox_source, SIGNAL(activated(int)), this, SLOT(slotComboSourceClicked(int)));
   connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));

@@ -162,7 +162,7 @@ public:
   int            m_endColumn;
   int            m_flagCol;
   int            m_row;
-  int            m_tableRows;
+  int            m_visibleRows;
   int            m_rowHght;
   int            m_tableHeight;
   int            m_activityType;
@@ -382,7 +382,7 @@ public slots:
   void           slotIdChanged(int id);
   void           slotNamesEdited();
   void           slotBackButtonClicked();
-  void           slotVertScrollBarAction(int val);
+  void           slotVertScrollBarMoved(int val);
 
   /**
     * This method is called when the user clicks 'Open File', and opens
@@ -497,6 +497,7 @@ private:
   QList<int>       m_memoColList;
 
   void             closeEvent(QCloseEvent *event);
+  bool             eventFilter(QObject *object, QEvent *event);
   void             restoreBackground();
 
   /**

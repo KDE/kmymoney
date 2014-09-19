@@ -54,6 +54,7 @@ public:
 
   QString          fieldDelimiterCharacter(int index);
   QString          decimalSymbol(int index);
+  int              decimalSymbolIndex();
   QString          textDelimiterCharacter(int index);
   void             thousandsSeparatorChanged(int index);
   QString          thousandsSeparator();
