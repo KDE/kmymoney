@@ -188,7 +188,7 @@ void InvestProcessing::slotFileDialogClicked()
   for (int i = 0; i < m_csvDialog->ui->tableWidget->columnCount(); i++) {
     m_csvDialog->ui->tableWidget->setColumnWidth(i, 0);
   }
-  m_csvDialog->m_tableHeight = m_csvDialog->m_header + m_csvDialog->m_rowHght * m_csvDialog->m_tableRows + m_csvDialog->m_borders;
+  m_csvDialog->m_tableHeight = m_csvDialog->m_header + m_csvDialog->m_rowHght * m_csvDialog->m_visibleRows + m_csvDialog->m_borders;
   QRect rect = m_csvDialog->ui->frame_main->frameRect();
   rect.setHeight(m_csvDialog->m_tableHeight);
   m_csvDialog->ui->frame_main->setFrameRect(rect);
@@ -302,7 +302,7 @@ void InvestProcessing::slotFileDialogClicked()
   profileGroup.config()->sync();
 
   enableInputs();
-  redrawWindow(m_startLine);
+
   if (m_csvDialog->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
     m_csvDialog->m_pageCompletion->initializePage();//  Using a profile so skip setup and go to Completion.
     m_csvDialog->m_pageSeparator->initializePage();
@@ -1018,7 +1018,7 @@ void InvestProcessing::readFile(const QString& fname)
     m_endColumn = m_maxColumnCount;
   }// end of buffer
   m_csvDialog->m_header = m_csvDialog->ui->tableWidget->horizontalHeader()->height() + 6;
-  m_csvDialog->m_tableHeight = m_csvDialog->m_header + m_csvDialog->m_rowHght * m_csvDialog->m_tableRows + m_csvDialog->m_borders;
+  m_csvDialog->m_tableHeight = m_csvDialog->m_header + m_csvDialog->m_rowHght * m_csvDialog->m_visibleRows + m_csvDialog->m_borders;
   m_csvDialog->ui->tableWidget->resizeColumnsToContents();
 
   redrawWindow(m_startLine - 1);
@@ -2031,7 +2031,7 @@ void InvestProcessing::redrawWindow(int startLine)
 {
   bool ok = true;
   int tableHeight;
-  m_csvDialog->m_tableHeight = m_csvDialog->m_header + m_csvDialog->m_rowHght * m_csvDialog->m_tableRows + m_csvDialog->m_borders;
+  m_csvDialog->m_tableHeight = m_csvDialog->m_header + m_csvDialog->m_rowHght * m_csvDialog->m_visibleRows + m_csvDialog->m_borders;
   m_csvDialog->ui->tableWidget->setRowHeight(0, m_csvDialog->m_rowHght);
 
   QRect rect = m_csvDialog->ui->frame_main->frameRect();
@@ -2040,12 +2040,12 @@ void InvestProcessing::redrawWindow(int startLine)
   m_topLine = startLine;
   //  ensure columnwidth reflects data width
   m_csvDialog->ui->tableWidget->setColumnWidth(0, 100);
-  int end = m_topLine + m_csvDialog->m_tableRows;
+  int end = m_topLine + m_csvDialog->m_visibleRows;
   if (end > m_fileEndLine) {
     end = m_fileEndLine;
   }
-  if (end > m_csvDialog->m_tableRows) {
-    m_topLine = end - m_csvDialog->m_tableRows;
+  if (end > m_csvDialog->m_visibleRows) {
+    m_topLine = end - m_csvDialog->m_visibleRows;
   } else {
     m_topLine = 0;
   }
@@ -2137,63 +2137,6 @@ void InvestProcessing::redrawWindow(int startLine)
       }
     }
   }
-}
-
-void InvestProcessing::slotVertScrollBarAction(int val)
-{
-  if (m_csvDialog->m_fileType != "Invest") {
-    return;
-  }
-  int pos = m_csvDialog->m_vScrollBar->value();
-  int nextTop = 0;
-  m_topLine = pos;
-  switch (val) {
-    case QAbstractSlider::SliderSingleStepAdd://1
-      m_topLine += m_csvDialog->m_vScrollBar->singleStep();
-      m_csvDialog->m_vScrollBar->setValue(pos + 1);
-      break;
-    case QAbstractSlider::SliderSingleStepSub://2
-      if (pos < 1) {
-        return;
-      }
-      m_topLine -= m_csvDialog->m_vScrollBar->singleStep();
-      if (m_topLine < 1) {
-        m_topLine = 0;
-      }
-      m_csvDialog->m_vScrollBar->setValue(pos - 1);
-      break;
-    case QAbstractSlider::SliderPageStepAdd://3
-      m_topLine += m_csvDialog->m_vScrollBar->pageStep();
-      nextTop = m_topLine + m_csvDialog->m_vScrollBar->pageStep();
-      if (nextTop >= m_fileEndLine) {
-        m_topLine = m_fileEndLine - m_csvDialog->m_vScrollBar->pageStep();
-      }
-      m_csvDialog->m_vScrollBar->setValue(m_topLine);
-      redrawWindow(m_topLine);
-      break;
-    case QAbstractSlider::SliderPageStepSub://4
-      m_topLine -= m_csvDialog->m_vScrollBar->pageStep();
-      if (m_topLine < 1) {
-        m_topLine = 1;
-      }
-      pos -= m_csvDialog->m_vScrollBar->pageStep();
-      if (pos < 1) {
-        pos = 0;
-      }
-      m_csvDialog->m_vScrollBar->setValue(pos);
-      redrawWindow(pos);
-      break;
-    case QAbstractSlider::SliderToMinimum://5
-      break;
-    case QAbstractSlider::SliderToMaximum://6
-      break;
-    case QAbstractSlider::SliderMove:     //7
-      m_topLine = m_csvDialog->m_vScrollBar->sliderPosition();
-      break;
-    case QAbstractSlider::SliderNoAction: //0
-      break;
-  }
-  redrawWindow(m_topLine);
 }
 
 void InvestProcessing::clearColumnType(int column)

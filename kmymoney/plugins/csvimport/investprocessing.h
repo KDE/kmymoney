@@ -504,7 +504,6 @@ private slots:
 
   void           securityNameSelected(const QString& name);
   void           securityNameEdited();
-  void           slotVertScrollBarAction(int val);
 
   int            validateNewColumn(const int& col, const QString& type);
 
