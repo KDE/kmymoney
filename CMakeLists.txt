@@ -230,6 +230,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     "-g3 -fno-inline")
   set(CMAKE_CXX_FLAGS_PROFILE
     "-g3 -fno-inline -ftest-coverage -fprofile-arcs")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op")
 
   # be pedantic about undefined symbols when linking shared libraries
   if(CMAKE_SYSTEM_NAME MATCHES Linux OR CMAKE_SYSTEM_NAME MATCHES kFreeBSD OR CMAKE_SYSTEM_NAME STREQUAL GNU)
@@ -269,10 +270,10 @@ endif(USE_HTML_HANDBOOK)
 add_subdirectory( libkgpgfile )
 add_subdirectory( libkdchart )
 add_subdirectory( kmymoney )
-#ADD_SUBDIRECTORY( doc )
-#IF (USE_DEVELOPER_DOC)
-#  ADD_SUBDIRECTORY( developer-doc )
-#ENDIF (USE_DEVELOPER_DOC)
+add_subdirectory( doc )
+if (USE_DEVELOPER_DOC)
+  add_subdirectory( developer-doc )
+endif (USE_DEVELOPER_DOC)
 
 #CONFIGURE_FILE(
 #  "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
@@ -311,7 +312,7 @@ include(CPack)
 
 ##### RPM Setup (.rpm and .srpm) #####
 # We use cmake/modules/UseRPMTools.cmake for RPM creation
-#INCLUDE(UseRPMTools)
+include(UseRPMTools)
 if(RPMTools_FOUND)
   set(RPM_VERSION_SUFFIX  ${VERSION_SUFFIX})
   if(${RPM_VERSION_SUFFIX} MATCHES "-.*")

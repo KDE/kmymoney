@@ -49,9 +49,9 @@ InterestChargeCheckingsWizardPage::InterestChargeCheckingsWizardPage(QWidget *pa
   registerField("payeeEdit", m_payeeEdit, "selectedItem", SIGNAL(itemSelected(QString)));
 
   connect(m_interestEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
-  connect(m_interestCategoryEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+  connect(m_interestCategoryEdit, SIGNAL(editTextChanged(QString)), this, SIGNAL(completeChanged()));
   connect(m_chargesEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
-  connect(m_chargesCategoryEdit, SIGNAL(textChanged(QString)), this, SIGNAL(completeChanged()));
+  connect(m_chargesCategoryEdit, SIGNAL(editTextChanged(QString)), this, SIGNAL(completeChanged()));
 
 
 }
