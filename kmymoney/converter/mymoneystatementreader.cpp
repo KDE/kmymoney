@@ -77,6 +77,7 @@ public:
   QString expenseId(const QString& name);
   QString feeId(const QString& name);
   void assignUniqueBankID(MyMoneySplit& s, const MyMoneyStatement::Transaction& t_in);
+  void setupPrice(MyMoneySplit &s, const MyMoneyAccount &splitAccount, const MyMoneyAccount &transactionAccount, const QDate &postDate);
 
   MyMoneyAccount                 lastAccount;
   QList<MyMoneyTransaction> transactions;
@@ -100,6 +101,7 @@ private:
   void previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId);
 
   QString nameToId(const QString&name, MyMoneyAccount& parent);
+
 private:
   QString                        m_feeId;
   QString                        m_interestId;
@@ -261,6 +263,27 @@ void MyMoneyStatementReader::Private::assignUniqueBankID(MyMoneySplit& s, const 
   }
 }
 
+void MyMoneyStatementReader::Private::setupPrice(MyMoneySplit &s, const MyMoneyAccount &splitAccount, const MyMoneyAccount &transactionAccount, const QDate &postDate)
+{
+  if (transactionAccount.currencyId() != splitAccount.currencyId()) {
+    // a currency converstion is needed asume that split has already a proper value
+    MyMoneyFile* file = MyMoneyFile::instance();
+    MyMoneySecurity toCurrency = file->security(splitAccount.currencyId());
+    MyMoneySecurity fromCurrency = file->security(transactionAccount.currencyId());
+    // get the price for the transaction's date
+    MyMoneyPrice price = file->price(fromCurrency.id(), toCurrency.id(), postDate);
+    // if the price is valid calculate the shares
+    if (price.isValid()) {
+      const int fract = splitAccount.fraction(toCurrency);
+      const MyMoneyMoney &shares = s.value() * price.rate(toCurrency.id());
+      s.setShares(shares.convert(fract));
+      qDebug("Setting second split shares to %s", qPrintable(s.shares().formatMoney(toCurrency.id(), 2)));
+    } else {
+      qDebug("No price entry was found to convert from '%s' to '%s' on '%s'",
+             qPrintable(fromCurrency.tradingSymbol()), qPrintable(toCurrency.tradingSymbol()), qPrintable(postDate.toString(Qt::ISODate)));
+    }
+  }
+}
 
 MyMoneyStatementReader::MyMoneyStatementReader() :
     d(new Private),
@@ -1048,6 +1071,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       //
       const MyMoneyPayee& payeeObj = MyMoneyFile::instance()->payee(payeeid);
       if (statementTransactionUnderImport.m_listSplits.isEmpty() && payeeObj.defaultAccountEnabled()) {
+        MyMoneyAccount splitAccount = file->account(payeeObj.defaultAccountId());
         MyMoneySplit s;
         s.setReconcileFlag(MyMoneySplit::Cleared);
         s.clearId();
@@ -1055,10 +1079,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s.setShares(-s1.shares());
         s.setValue(-s1.value());
         s.setAccountId(payeeObj.defaultAccountId());
+        d->setupPrice(s, splitAccount, m_account, statementTransactionUnderImport.m_datePosted);
         transactionUnderImport.addSplit(s);
-        MyMoneyFile* file = MyMoneyFile::instance();
-        MyMoneyAccount category = file->account(payeeObj.defaultAccountId());
-        file->addVATSplit(transactionUnderImport, m_account, category, statementTransactionUnderImport.m_amount);
+        file->addVATSplit(transactionUnderImport, m_account, splitAccount, statementTransactionUnderImport.m_amount);
       } else if (statementTransactionUnderImport.m_listSplits.isEmpty() && !d->m_skipCategoryMatching) {
         MyMoneyTransactionFilter filter(thisaccount.id());
         filter.addPayee(payeeid);
@@ -1112,10 +1135,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                   s.setValue(-s1.value());
                   s.setMemo(s1.memo());
                 }
-                MyMoneyAccount acc = file->account(s.accountId());
+                MyMoneyAccount splitAccount = file->account(s.accountId());
                 qDebug("Adding second split to %s(%s)",
-                       qPrintable(acc.name()),
+                       qPrintable(splitAccount.name()),
                        qPrintable(s.accountId()));
+                d->setupPrice(s, splitAccount, m_account, statementTransactionUnderImport.m_datePosted);
                 transactionUnderImport.addSplit(s);
               }
             }
@@ -1140,13 +1164,14 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     }
 //  There is no BrokerageAccount so have to nowhere to put this split.
     if (!brokerageactid.isEmpty()) {
-      // FIXME This may not deal with foreign currencies properly
       MyMoneySplit s;
       s.setMemo(statementTransactionUnderImport.m_strMemo);
       s.setValue(transfervalue);
       s.setShares(transfervalue);
       s.setAccountId(brokerageactid);
       s.setReconcileFlag(statementTransactionUnderImport.m_reconcile);
+      MyMoneyAccount splitAccount = file->account(s.accountId());
+      d->setupPrice(s, splitAccount, m_account, statementTransactionUnderImport.m_datePosted);
       transactionUnderImport.addSplit(s);
     }
   }
@@ -1167,6 +1192,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       s2.setShares((*it_s).m_amount);
       s2.setValue((*it_s).m_amount);
       s2.setReconcileFlag((*it_s).m_reconcile);
+      d->setupPrice(s2, acc, m_account, statementTransactionUnderImport.m_datePosted);
       transactionUnderImport.addSplit(s2);
     }
   }
