@@ -39,6 +39,7 @@
 #include "plugins/onlinepluginextended.h"
 
 #include "onlinetasks/unavailabletask/tasks/unavailabletask.h"
+#include "onlinetasks/interfaces/tasks/credittransfer.h"
 
 onlineJobAdministration onlineJobAdministration::m_instance;
 
@@ -71,7 +72,15 @@ KMyMoneyPlugin::OnlinePluginExtended* onlineJobAdministration::getOnlinePlugin( 
 
 void onlineJobAdministration::addPlugin(const QString& pluginName, KMyMoneyPlugin::OnlinePluginExtended *plugin )
 {
+  const bool sendAnyTask = canSendAnyTask();
+  const bool sendCreditTransfer = canSendCreditTransfer();
+
   m_onlinePlugins.insert(pluginName, plugin);
+
+  if ( !sendAnyTask && canSendAnyTask() )
+    emit canSendAnyTaskChanged( true );
+  if ( !sendCreditTransfer && canSendCreditTransfer() )
+    emit canSendCreditTransferChanged( true );
 }
 
 /**
@@ -218,8 +227,16 @@ void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
   if (Q_UNLIKELY( task == 0 ))
     return;
 
+  const bool sendAnyTask = canSendAnyTask();
+  const bool sendCreditTransfer = canSendCreditTransfer();
+
   m_onlineTasks.insert(task->taskName(), task);
   qDebug() << "onlineTask available" << task->taskName();
+
+  if ( sendAnyTask != canSendAnyTask() )
+    emit canSendAnyTaskChanged( !sendAnyTask );
+  if ( sendCreditTransfer != canSendCreditTransfer() )
+    emit canSendCreditTransferChanged( !sendCreditTransfer );
 }
 
 void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* const converter)
@@ -242,4 +259,44 @@ IonlineTaskSettings::ptr onlineJobAdministration::taskSettings( const QString& t
   if (plugin != 0)
     return ( plugin->settings(accountId, taskName) );
   return IonlineTaskSettings::ptr();
+}
+
+bool onlineJobAdministration::canSendAnyTask()
+{
+  // Check if any plugin supports a loaded online task
+  foreach(KMyMoneyPlugin::OnlinePluginExtended* plugin, m_onlinePlugins ) {
+    QList<MyMoneyAccount> accounts;
+    MyMoneyFile::instance()->accountList(accounts, QStringList(), true);
+    foreach( MyMoneyAccount account, accounts ) {
+      foreach( QString onlineTaskIid, plugin->availableJobs( account.id() ) ) {
+        if (m_onlineTasks.contains( onlineTaskIid ))
+          return true;
+      }
+    }
+  }
+  return false;
+}
+
+bool onlineJobAdministration::canSendCreditTransfer()
+{
+  foreach( onlineTask* task, m_onlineTasks ) {
+    // Check if a online task has the correct type
+    if ( dynamic_cast<creditTransfer*>( task ) != 0) {
+      foreach(KMyMoneyPlugin::OnlinePluginExtended* plugin, m_onlinePlugins ) {
+        QList<MyMoneyAccount> accounts;
+        MyMoneyFile::instance()->accountList(accounts, QStringList(), true);
+        foreach( MyMoneyAccount account, accounts ) {
+          if ( plugin->availableJobs(account.id()).contains(task->taskName()) )
+              return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+
+void onlineJobAdministration::updateOnlineTaskProperties()
+{
+  emit canSendAnyTaskChanged( canSendAnyTask() );
+  emit canSendCreditTransferChanged( canSendCreditTransfer() );
 }

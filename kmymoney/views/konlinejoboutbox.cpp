@@ -20,11 +20,13 @@
 #include "ui_konlinejoboutbox.h"
 
 #include <KMessageBox>
+#include <QAction>
 
 #include "models/models.h"
 #include "models/onlinejobmodel.h"
 
 #include "mymoney/mymoneyfile.h"
+#include "kmymoney.h"
 
 #include <QDebug>
 
@@ -45,7 +47,11 @@ KOnlineJobOutbox::KOnlineJobOutbox(QWidget *parent) :
     connect(ui->m_buttonRemove, SIGNAL(clicked()), this, SLOT( slotRemoveJob() ));
     connect(ui->m_buttonEdit, SIGNAL(clicked()), this, SLOT( slotEditJob() ));
     connect(ui->m_onlineJobView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotEditJob(QModelIndex)));
+
+    // Set new credit transfer button
+    connect(kmymoney->action("account_online_new_credit_transfer"), SIGNAL(changed()), SLOT(updateNewCreditTransferButton()));
     connect(ui->m_buttonNewCreditTransfer, SIGNAL(clicked()), this, SIGNAL(newCreditTransfer()));
+    updateNewCreditTransferButton();
 }
 
 KOnlineJobOutbox::~KOnlineJobOutbox()
@@ -55,6 +61,13 @@ KOnlineJobOutbox::~KOnlineJobOutbox()
     configGroup.writeEntry("HeaderState", ui->m_onlineJobView->header()->saveState());
 
     delete ui;
+}
+
+void KOnlineJobOutbox::updateNewCreditTransferButton()
+{
+  QAction* action = kmymoney->action("account_online_new_credit_transfer");
+  Q_CHECK_PTR( action );
+  ui->m_buttonNewCreditTransfer->setEnabled( action->isEnabled() );
 }
 
 void KOnlineJobOutbox::slotRemoveJob()
@@ -97,4 +110,14 @@ void KOnlineJobOutbox::slotEditJob(const QModelIndex &index)
 {
   QString jobId = ui->m_onlineJobView->model()->data(index, onlineJobModel::OnlineJobId).toString();
   emit editJob(jobId);
+}
+
+/**
+ * Do not know why this is needed, but all other views in KMyMoney have it.
+ */
+void KOnlineJobOutbox::showEvent(QShowEvent* event)
+{
+  emit aboutToShow();
+  // don't forget base class implementation
+  QWidget::showEvent(event);
 }

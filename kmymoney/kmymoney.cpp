@@ -429,6 +429,8 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   // kickstart date change timer
   slotDateChanged();
+
+  connect(this, SIGNAL(fileLoaded(KUrl)), onlineJobAdministration::instance(), SLOT(updateOnlineTaskProperties()));
 }
 
 KMyMoneyApp::~KMyMoneyApp()
@@ -695,11 +697,11 @@ void KMyMoneyApp::initActions(void)
   connect(account_online_update_all, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnlineAll()));
   menu->addAction(account_online_update_all);
 
-  /** @todo disable "new credit transfer" option if no file is loaded or no transfer can be created */
   KAction *account_online_transfer = actionCollection()->addAction("account_online_new_credit_transfer");
   account_online_transfer->setText(i18n("New credit transfer"));
   account_online_transfer->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "mail-message-new"));
   connect(account_online_transfer, SIGNAL(triggered()), this, SLOT(slotNewOnlineTransfer()));
+  connect(onlineJobAdministration::instance(), SIGNAL(canSendCreditTransferChanged(bool)),  account_online_transfer, SLOT(setEnabled(bool)));
 
   // *******************
   // The categories menu
@@ -6172,6 +6174,7 @@ void KMyMoneyApp::slotUpdateActions(void)
   action("account_online_update")->setEnabled(false);
   action("account_online_update_all")->setEnabled(false);
   action("account_online_unmap")->setEnabled(false);
+  action("account_online_new_credit_transfer")->setEnabled( onlineJobAdministration::instance()->canSendCreditTransfer() );
   action("account_chart")->setEnabled(false);
 
   action("category_new")->setEnabled(fileOpen);
@@ -7147,6 +7150,8 @@ void KMyMoneyApp::slotAccountUnmapOnline(void)
       d->m_selectedAccount.deletePair("StatementKey");
       MyMoneyFile::instance()->modifyAccount(d->m_selectedAccount);
       ft.commit();
+      // The mapping could disable the online task system
+      onlineJobAdministration::instance()->updateOnlineTaskProperties();
     } catch (const MyMoneyException &e) {
       KMessageBox::error(this, i18n("Unable to unmap account from online account: %1", e.what()));
     }
@@ -7219,6 +7224,8 @@ void KMyMoneyApp::slotAccountMapOnline(void)
       try {
         MyMoneyFile::instance()->modifyAccount(acc);
         ft.commit();
+        // The mapping could enable the online task system
+        onlineJobAdministration::instance()->updateOnlineTaskProperties();
       } catch (const MyMoneyException &e) {
         KMessageBox::error(this, i18n("Unable to map account to online account: %1", e.what()));
       }

@@ -146,8 +146,6 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
   connect(d->passwordCacheTimer, SIGNAL(timeout()), this, SLOT(slotClearPasswordCache()));
 
   if (m_kbanking) {
-    gwenKdeGui *gui;
-
     if (AB_Banking_HasConf4(m_kbanking->getCInterface())) {
       qDebug("KBankingPlugin: No AqB4 config found.");
       if (AB_Banking_HasConf3(m_kbanking->getCInterface())) {
@@ -162,7 +160,8 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
       }
     }
 
-    gui = new gwenKdeGui();
+    //! @todo when is gwenKdeGui deleted?
+    gwenKdeGui *gui = new gwenKdeGui();
     GWEN_Gui_SetGui(gui->getCInterface());
     GWEN_Logger_SetLevel(0, GWEN_LoggerLevel_Info);
     GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Debug);
@@ -330,7 +329,7 @@ AB_ACCOUNT* KBankingPlugin::aqbAccount(const MyMoneyAccount& acc) const
   AB_ACCOUNT *ab_acc = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), m_kbanking->mappingId(acc).toUtf8().data());
   // if the account is not found, we temporarily scan for the 'old' mapping (the one w/o the file id)
   // in case we find it, we setup the new mapping in addition on the fly.
-  if (!ab_acc) {
+  if (!ab_acc && acc.isAssetLiability()) {
     ab_acc = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), acc.id().toUtf8().data());
     if (ab_acc) {
       qDebug("Found old mapping for '%s' but not new. Setup new mapping", qPrintable(acc.name()));

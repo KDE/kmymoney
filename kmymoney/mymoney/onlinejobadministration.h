@@ -62,6 +62,10 @@ class KMM_MYMONEY_EXPORT onlineJobAdministration : public QObject
 {
   Q_OBJECT
   KMM_MYMONEY_UNIT_TESTABLE
+
+  Q_PROPERTY(bool canSendAnyTask READ canSendAnyTask NOTIFY canSendAnyTaskChanged STORED false);
+  Q_PROPERTY(bool canSendCreditTransfer READ canSendCreditTransfer NOTIFY canSendCreditTransferChanged STORED false);
+
 public:
   explicit onlineJobAdministration(QObject *parent = 0);
   ~onlineJobAdministration();
@@ -137,9 +141,7 @@ public:
   /**
    * @brief Request onlineTask::settings from plugin
    *
-   * @return QSharedPointer to settings from plugin, can be a null_ptr
-   *
-   * @todo with c++ 11 this template could check if T is_abstract and default construct a value if it is not.
+   * @return QSharedPointer to settings from plugin, can be a nullptr
    */
   template<class T>
   QSharedPointer<T> taskSettings( const QString& taskId, const QString& accountId ) const;
@@ -156,7 +158,44 @@ public:
    */
   QSharedPointer<IonlineTaskSettings> taskSettings( const QString& taskId, const QString& accountId ) const;
 
+  /**
+   * @brief Check if the onlineTask system can do anything
+   *
+   * This is true if at least one plugin can process one of the available onlineTasks for at least one available account.
+   */
+  bool canSendAnyTask();
+
+  /**
+   * @brief Are there plugins and accounts to send a credit transfers?
+   *
+   * Like @r canSendAnyTask() but restricts the onlineTasks to credit transfers. This is useful
+   * to disable the create credit transfer buttons.
+   */
+  bool canSendCreditTransfer();
+
+  /**
+   * @brief See if a online task has a sepcified base
+   *
+   * This is usable if you want to see if e.g. taskIid is
+   * of type creditTransfer
+   */
+  template<class baseTask>
+  bool isInherited( const QString& taskIid ) const;
+
 signals:
+  /**
+   * @brief Emitted if canSendAnyTask() changed
+   *
+   * At the moment it this signal can be send even if the status did not change.
+   */
+  void canSendAnyTaskChanged( bool );
+
+  /**
+   * @brief Emitted if canSendCreditTransfer changed
+   *
+   * At the moment it this signal can be send even if the status did not change.
+   */
+  void canSendCreditTransferChanged( bool );
 
 public slots:
   void addPlugin( const QString& pluginName, KMyMoneyPlugin::OnlinePluginExtended* );
@@ -172,6 +211,11 @@ public slots:
    * @param converter the converter to register, I take ownership
    */
   void registerOnlineTaskConverter( onlineTaskConverter *const converter );
+
+  /**
+   * @brief Check if the properties about available and sendable online tasks are still valid
+   */
+  void updateOnlineTaskProperties();
 
 private:
   static onlineJobAdministration m_instance;
@@ -250,6 +294,12 @@ QSharedPointer<T> onlineJobAdministration::taskSettings( const QString& taskName
       return settingsFinal;
   }
   return QSharedPointer<T>();
+}
+
+template< class baseTask >
+bool onlineJobAdministration::isInherited(const QString& taskIid) const
+{
+  return ( dynamic_cast<baseTask*>( rootOnlineTask( taskIid ) ) != 0 );
 }
 
 #if 0

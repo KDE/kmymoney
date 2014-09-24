@@ -298,7 +298,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect( m_onlineJobOutboxView, SIGNAL(sendJobs(QList<onlineJob>)), kmymoney, SLOT( slotOnlineJobSend( QList< onlineJob > ) ));
   connect( m_onlineJobOutboxView, SIGNAL(editJob(QString)), kmymoney, SLOT(slotEditOnlineJob(QString)) );
   connect( m_onlineJobOutboxView, SIGNAL(newCreditTransfer()), kmymoney, SLOT(slotNewOnlineTransfer()) );
-  connect( m_onlineJobOutboxView, SIGNAL(aboutToShow()), this, SLOT(aboutToChangeView()));
+  connect( m_onlineJobOutboxView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   //set the model
   setModel(m_model);
