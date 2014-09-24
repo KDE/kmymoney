@@ -1,1 +1,1 @@
-#add_subdirectory( germany )
+add_subdirectory( germany )
