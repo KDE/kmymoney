@@ -204,7 +204,6 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
     connect(editor, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)), kmymoney, SLOT(slotCategoryNew(MyMoneyAccount&,MyMoneyAccount)));
     connect(editor, SIGNAL(createSecurity(MyMoneyAccount&,MyMoneyAccount)), kmymoney, SLOT(slotInvestmentNew(MyMoneyAccount&,MyMoneyAccount)));
     connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), editor, SLOT(slotReloadEditWidgets()));
-    connect(editor, SIGNAL(operationTypeChanged(int)), this, SLOT(slotFilterPaymentType(int)));
 
     // create the widgets, place them in the parent and load them with data
     // setup tab order
@@ -319,6 +318,7 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
     slotSetPaymentMethod(d->m_schedule.paymentType());
 
     connect(m_paymentMethodEdit, SIGNAL(itemSelected(int)), this, SLOT(slotSetPaymentMethod(int)));
+    connect(editor, SIGNAL(operationTypeChanged(int)), this, SLOT(slotFilterPaymentType(int)));
   }
 
   return editor;
