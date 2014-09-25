@@ -52,7 +52,6 @@ using namespace reports;
 // the percent from the height of the widget which will be set as the maximum height of the legend
 // note that this will work as long as we have the legend positioned at Position::East
 static const qreal LEGEND_HEIGHT_PERCENT = 0.8;
-static const qreal LEGEND_WIDTH_PERCENT = 0.2;
 
 KReportChartView::KReportChartView(QWidget* parent) :
     KDChart::Chart(parent),
@@ -449,26 +448,25 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   for (uint i = static_cast<uint>(KMyMoneyGlobalSettings::maximumLegendItems()); i < legend->datasetCount(); ++i) {
     legend->setDatasetHidden(i, true);
   }
-  legend->setPosition(Position::East);
   TextAttributes legendTextAttr(legend->textAttributes());
-  legendTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize() + 2);
-  legendTextAttr.setAutoShrink(true);
   legendTextAttr.setPen(m_foregroundBrush.color());
   legend->setTextAttributes(legendTextAttr);
 
   TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
-  legendTitleTextAttr.setFontSize(KGlobalSettings::generalFont().pointSize() + 4);
-  legendTitleTextAttr.setAutoShrink(true);
   legendTitleTextAttr.setPen(m_foregroundBrush.color());
   legend->setTitleTextAttributes(legendTitleTextAttr);
   legend->setTitleText(i18nc("Chart lines legend", "Legend"));
   legend->setUseAutomaticMarkerSize(false);
   FrameAttributes legendFrameAttr(legend->frameAttributes());
   legendFrameAttr.setPen(m_foregroundBrush.color());
+  // leave some space between the content and the frame
+  legendFrameAttr.setPadding(2);
   legend->setFrameAttributes(legendFrameAttr);
   // see also KReportChartView::resizeEvent
   legend->setMaximumHeight(height() * LEGEND_HEIGHT_PERCENT);
-  legend->setMaximumWidth(width() * LEGEND_WIDTH_PERCENT);
+  legend->setPosition(Position::East);
+  legend->setTextAlignment(Qt::AlignLeft);
+  legend->setLegendStyle(KDChart::Legend::MarkersAndLines);
   replaceLegend(legend);
 
   //this sets the line width only for line diagrams
@@ -496,7 +494,6 @@ void KReportChartView::resizeEvent(QResizeEvent* event)
   Legend* legend = KReportChartView::legend();
   if (legend) {
     legend->setMaximumHeight(height() * LEGEND_HEIGHT_PERCENT);
-    legend->setMaximumWidth(width() * LEGEND_WIDTH_PERCENT);
   }
   Chart::resizeEvent(event);
 }
