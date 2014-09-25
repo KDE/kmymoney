@@ -1225,8 +1225,9 @@ void MyMoneyForecast::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoney
     //get amortization and interest autoCalc splits
     MyMoneySplit amortizationSplit = transaction.amortizationSplit();
     MyMoneySplit interestSplit = transaction.interestSplit();
+    const bool interestSplitValid = !interestSplit.id().isEmpty();
 
-    if (!amortizationSplit.id().isEmpty() && !interestSplit.id().isEmpty()) {
+    if (!amortizationSplit.id().isEmpty()) {
       MyMoneyAccountLoan acc(MyMoneyFile::instance()->account(amortizationSplit.accountId()));
       MyMoneyFinancialCalculator calc;
       QDate dueDate;
@@ -1275,14 +1276,17 @@ void MyMoneyForecast::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoney
       }
 
       amortizationSplit.setShares(amortization);
-      interestSplit.setShares(interest);
+      if (interestSplitValid)
+        interestSplit.setShares(interest);
 
       // FIXME: for now we only assume loans to be in the currency of the transaction
       amortizationSplit.setValue(amortization);
-      interestSplit.setValue(interest);
+      if (interestSplitValid)
+        interestSplit.setValue(interest);
 
       transaction.modifySplit(amortizationSplit);
-      transaction.modifySplit(interestSplit);
+      if (interestSplitValid)
+        transaction.modifySplit(interestSplit);
     }
   }
 }

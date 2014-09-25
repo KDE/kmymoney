@@ -1474,12 +1474,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
     QList<RegisterItem*> itemList = selectedItems();
     bool okToSelect = true;
     int cnt = itemList.count();
-    bool sameEntryType = true;
-    if (cnt > 0 && itemList.front()) {
-      if (typeid(*itemList.front()) != typeid(*item))
-        sameEntryType = false;
-    }
-
+    const bool scheduledTransactionSelected = (cnt > 0 && itemList.front() && typeid(*itemList.front()) == typeid(StdTransactionScheduled));
     if (buttonState & Qt::LeftButton) {
       if (!(modifiers & (Qt::ShiftModifier | Qt::ControlModifier))
           || (m_selectAnchor == 0)) {
@@ -1500,8 +1495,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
       if (m_selectionMode == MultiSelection) {
         switch (modifiers & (Qt::ShiftModifier | Qt::ControlModifier)) {
           case Qt::ControlModifier:
-            okToSelect = sameEntryType;
-            if (typeid(*item) == typeid(StdTransactionScheduled))
+            if (scheduledTransactionSelected || typeid(*item) == typeid(StdTransactionScheduled))
               okToSelect = false;
             // toggle selection state of current item
             emit aboutToSelectItem(item, okToSelect);
@@ -1514,8 +1508,7 @@ void Register::selectItem(RegisterItem* item, bool dontChangeSelections)
             break;
 
           case Qt::ShiftModifier:
-            okToSelect = sameEntryType;
-            if (typeid(*item) == typeid(StdTransactionScheduled))
+            if (scheduledTransactionSelected || typeid(*item) == typeid(StdTransactionScheduled))
               okToSelect = false;
             emit aboutToSelectItem(item, okToSelect);
             if (okToSelect) {
