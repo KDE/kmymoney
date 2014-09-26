@@ -74,12 +74,6 @@ public:
     */
   void removeLegend(void);
 
-protected:
-  /**
-    * Reimplemented to adjust size of the legend to the size of the widget.
-    */
-  void resizeEvent(QResizeEvent* event);
-
 private:
 
   /**

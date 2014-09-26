@@ -49,10 +49,6 @@
 
 using namespace reports;
 
-// the percent from the height of the widget which will be set as the maximum height of the legend
-// note that this will work as long as we have the legend positioned at Position::East
-static const qreal LEGEND_HEIGHT_PERCENT = 0.8;
-
 KReportChartView::KReportChartView(QWidget* parent) :
     KDChart::Chart(parent),
     m_backgroundBrush(KColorScheme(QPalette::Current).background()),
@@ -448,13 +444,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   for (uint i = static_cast<uint>(KMyMoneyGlobalSettings::maximumLegendItems()); i < legend->datasetCount(); ++i) {
     legend->setDatasetHidden(i, true);
   }
-  TextAttributes legendTextAttr(legend->textAttributes());
-  legendTextAttr.setPen(m_foregroundBrush.color());
-  legend->setTextAttributes(legendTextAttr);
-
-  TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
-  legendTitleTextAttr.setPen(m_foregroundBrush.color());
-  legend->setTitleTextAttributes(legendTitleTextAttr);
   legend->setTitleText(i18nc("Chart lines legend", "Legend"));
   legend->setUseAutomaticMarkerSize(false);
   FrameAttributes legendFrameAttr(legend->frameAttributes());
@@ -462,12 +451,24 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   // leave some space between the content and the frame
   legendFrameAttr.setPadding(2);
   legend->setFrameAttributes(legendFrameAttr);
-  // see also KReportChartView::resizeEvent
-  legend->setMaximumHeight(height() * LEGEND_HEIGHT_PERCENT);
   legend->setPosition(Position::East);
   legend->setTextAlignment(Qt::AlignLeft);
   legend->setLegendStyle(KDChart::Legend::MarkersAndLines);
   replaceLegend(legend);
+
+  // set the text attributes after calling replaceLegend() otherwise fon sizes will get overwritten
+  qreal generalFontSize = KGlobalSettings::generalFont().pointSizeF();
+  if (generalFontSize == -1)
+    generalFontSize = 8; // this is a fallback if the fontsize was specified in pixels
+  TextAttributes legendTextAttr(legend->textAttributes());
+  legendTextAttr.setPen(m_foregroundBrush.color());
+  legendTextAttr.setFontSize(KDChart::Measure(generalFontSize, KDChartEnums::MeasureCalculationModeAbsolute));
+  legend->setTextAttributes(legendTextAttr);
+
+  TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
+  legendTitleTextAttr.setPen(m_foregroundBrush.color());
+  legendTitleTextAttr.setFontSize(KDChart::Measure(generalFontSize + 4, KDChartEnums::MeasureCalculationModeAbsolute));
+  legend->setTitleTextAttributes(legendTitleTextAttr);
 
   //this sets the line width only for line diagrams
   setLineWidth(config.chartLineWidth());
@@ -487,15 +488,6 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   dataValueAttr.setDecimalDigits(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
   planeDiagram->setDataValueAttributes(dataValueAttr);
   planeDiagram->setAllowOverlappingDataValueTexts(true);
-}
-
-void KReportChartView::resizeEvent(QResizeEvent* event)
-{
-  Legend* legend = KReportChartView::legend();
-  if (legend) {
-    legend->setMaximumHeight(height() * LEGEND_HEIGHT_PERCENT);
-  }
-  Chart::resizeEvent(event);
 }
 
 unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int endColumn)
