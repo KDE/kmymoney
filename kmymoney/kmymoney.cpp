@@ -2717,9 +2717,9 @@ void KMyMoneyApp::slotToolsStartKCalc(void)
   QString cmd = KMyMoneyGlobalSettings::externalCalculator();
   // if none is present, we fall back to the default
   if (cmd.isEmpty()) {
-#if Q_OS_WIN32
+#ifdef Q_OS_WIN32
     cmd = QLatin1String("calc");
-#elif Q_OS_MAC
+#elseif Q_OS_MAC
     cmd = QLatin1String("open -a Calculator");
 #else
     cmd = QLatin1String("kcalc");
