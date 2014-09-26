@@ -33,10 +33,6 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
 {
     ui->setupUi(this);
 
-    ui->messageOriginAccount->setWordWrap(true);
-    ui->messageOriginAccount->setCloseButtonVisible(false);
-    ui->messageOriginAccount->setVisible(false);
-
     m_requiredFields->add(ui->beneficiaryIban);
     m_requiredFields->add(ui->value);
     // Other required fields are set in updateSettings()
@@ -115,21 +111,6 @@ void sepaCreditTransferEdit::setOriginAccount(const QString& accountId)
 {
   m_onlineJob.task()->setOriginAccount( accountId );
   updateSettings();
-
-  // Create a warning if no iban was set in account settings
-  payeeIdentifier origin = getOnlineJobTyped().task()->originAccountIdentifier();
-
-  if ( !origin.isValid() && !m_readOnly ) {
-    ui->messageOriginAccount->setMessageType(KMessageWidget::Warning);
-    ui->messageOriginAccount->setText(i18n("To execute this credit transfers you must set an IBAN in the settings of the account \"%1\" first.")
-      .arg(getOnlineJobTyped().responsibleMyMoneyAccount().name())
-    );
-    ui->messageOriginAccount->animatedShow();
-  } else {
-    ui->messageOriginAccount->setText(QString());
-    ui->messageOriginAccount->setVisible(false);
-    // animatedHide() does not work here, I do not know why
-  }
 }
 
 void sepaCreditTransferEdit::updateEveryStatus()
@@ -147,7 +128,6 @@ void sepaCreditTransferEdit::setReadOnly(const bool& readOnly)
   // Only set writeable if it changes something and if it is possible
   if ( readOnly != m_readOnly && (readOnly == true || getOnlineJobTyped().isEditable()) ) {
     m_readOnly = readOnly;
-    ui->messageOriginAccount->animatedHide();
     emit readOnlyChanged( m_readOnly );
   }
 }

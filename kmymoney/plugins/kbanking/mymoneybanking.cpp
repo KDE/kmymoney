@@ -717,7 +717,6 @@ IonlineTaskSettings::ptr KBankingPlugin::settings(QString accountId, QString tas
   return IonlineTaskSettings::ptr();
 }
 
-/** @todo make alive */
 bool KBankingPlugin::enqueTransaction(onlineJobTyped<germanOnlineTransfer>& job)
 {
   /* get AqBanking account */
@@ -739,33 +738,32 @@ bool KBankingPlugin::enqueTransaction(onlineJobTyped<germanOnlineTransfer>& job)
   if (rv) {
     qDebug("AB_ERROR_OFFSET is %i", AB_ERROR_OFFSET);
     job.addJobMessage(onlineJobMessage::error, "AqBanking",
-                      QString("German credit transfers for account \"%1\" are not available, error code %2.").arg(MyMoneyFile::instance()->account(accId).name(), rv),
+                      QString("National credit transfers for account \"%1\" are not available, error code %2.").arg(MyMoneyFile::instance()->account(accId).name(), rv),
                       QString::number(rv)
                      );
     return false;
   }
-  AB_TRANSACTION *ABtransaction = AB_Transaction_new();
+  AB_TRANSACTION *abTransaction = AB_Transaction_new();
 
   // Recipient
   payeeIdentifiers::nationalAccount beneficiaryAcc = job.task()->beneficiaryTyped();
-  AB_Transaction_SetRemoteAccount(ABtransaction, beneficiaryAcc);
+  AB_Transaction_SetRemoteAccount(abTransaction, beneficiaryAcc);
 
   // Origin Account
-  //germanAccountIdentifier *localAcc = transaction->originAccountIdentifier();
-  //AB_Transaction_SetLocalAccount(ABtransaction, *localAcc);
+  AB_Transaction_SetLocalAccount(abTransaction, abAccount);
 
   // Purpose
   QStringList qPurpose = job.task()->purpose().split('\n', QString::SkipEmptyParts);
   GWEN_STRINGLIST *purpose = GWEN_StringList_fromQStringList(qPurpose);
-  AB_Transaction_SetPurpose(ABtransaction, purpose);
+  AB_Transaction_SetPurpose(abTransaction, purpose);
   GWEN_StringList_free(purpose);
 
   // Other
-  AB_Transaction_SetTextKey(ABtransaction, job.task()->textKey());
-  AB_Transaction_SetValue(ABtransaction, AB_Value_fromMyMoneyMoney(job.task()->value()));
+  AB_Transaction_SetTextKey(abTransaction, job.task()->textKey());
+  AB_Transaction_SetValue(abTransaction, AB_Value_fromMyMoneyMoney(job.task()->value()));
 
   /** @todo LOW remove Debug info */
-  qDebug() << "SetTransaction: " << AB_Job_SetTransaction(abJob, ABtransaction);
+  qDebug() << "SetTransaction: " << AB_Job_SetTransaction(abJob, abTransaction);
 
   GWEN_DB_NODE *gwenNode = AB_Job_GetAppData(abJob);
   GWEN_DB_SetCharValue(gwenNode, GWEN_DB_FLAGS_DEFAULT, "kmmOnlineJobId", m_kbanking->mappingId(job).toLatin1().constData());
@@ -811,13 +809,7 @@ bool KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
   AB_Transaction_SetRemoteBic(  AbTransaction, beneficiaryAcc.fullStoredBic().toUtf8().constData() );
 
   // Origin Account
-  if ( !AB_Transaction_SetLocalAccount( AbTransaction, job.responsibleMyMoneyAccount().payeeIdentifiers()) ) {
-    job.addJobMessage(onlineJobMessage(onlineJobMessage::error, "KBanking",
-                                        QString("Sepa account information for \"%1\" are not valid.").arg(MyMoneyFile::instance()->account(accId).name(), rv)
-    )
-    );
-    return false;
-  }
+  AB_Transaction_SetLocalAccount(AbTransaction, abAccount);
 
   // Purpose
   QStringList qPurpose = job.constTask()->purpose().split('\n');

@@ -13,6 +13,7 @@
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 #include "onlinetasks/national/tasks/germanonlinetransfer.h"
 
+class AB_ACCOUNT;
 class AB_TRANSACTION_LIMITS;
 class AB_TRANSACTION;
 
@@ -41,6 +42,11 @@ QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTa
 void AB_Transaction_SetRemoteAccount( AB_TRANSACTION* transaction, const payeeIdentifiers::ibanBic& ident );
 
 void AB_Transaction_SetRemoteAccount( AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident );
+
+/**
+ * @brief Set local account of transaction by aqBanking account ptr
+ */
+void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const AB_ACCOUNT* account );
 
 /**
  * @brief AB_Transaction_SetLocalAccount

@@ -2,6 +2,7 @@
 
 #include <aqbanking/transactionlimits.h>
 #include <aqbanking/transaction.h>
+#include <aqbanking/account.h>
 
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "tasksettings/credittransfersettingsbase.h"
@@ -29,7 +30,6 @@ static const QString dtausChars = QString::fromUtf8("0123456789ABCDEFGHIJKLMNOPQ
  */
 static const QString sepaChars = QString("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':?.,- (+)/");
 
-/** @todo make alive */
 QSharedPointer<germanOnlineTransfer::settings> AB_TransactionLimits_toGermanOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits )
 {
   Q_CHECK_PTR( aqlimits );
@@ -115,6 +115,19 @@ void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIde
   AB_Transaction_SetRemoteAccountNumber(transaction, ident.electronicIban().toUtf8().constData());
   AB_Transaction_SetRemoteBankCode(transaction, ident.fullStoredBic().toUtf8().constData());
   AB_Transaction_SetRemoteName(transaction, GWEN_StringList_fromQString(ident.ownerName()));
+}
+
+void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const AB_ACCOUNT* account)
+{
+  Q_CHECK_PTR( transaction );
+  Q_CHECK_PTR( account );
+
+  AB_Transaction_SetLocalName(transaction, AB_Account_GetOwnerName(account));
+  AB_Transaction_SetLocalAccountNumber(transaction, AB_Account_GetAccountNumber(account));
+  AB_Transaction_SetLocalBankCode(transaction, AB_Account_GetBankCode(account));
+
+  AB_Transaction_SetLocalIban(transaction, AB_Account_GetIBAN(account));
+  AB_Transaction_SetLocalBic(transaction, AB_Account_GetBIC(account));
 }
 
 void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident )
