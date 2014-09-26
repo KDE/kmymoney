@@ -230,6 +230,9 @@ TransactionEditor* KEnterScheduleDlg::startEdit(void)
     d->m_tabOrderWidgets.clear();
     KMyMoneyRegister::Action action = KMyMoneyRegister::ActionWithdrawal;
     switch (d->m_schedule.type()) {
+      case MyMoneySchedule::TYPE_TRANSFER:
+        action = KMyMoneyRegister::ActionTransfer;
+        break;
       case MyMoneySchedule::TYPE_DEPOSIT:
         action = KMyMoneyRegister::ActionDeposit;
         break;
