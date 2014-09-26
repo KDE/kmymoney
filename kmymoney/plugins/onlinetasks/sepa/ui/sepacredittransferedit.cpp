@@ -67,6 +67,12 @@ sepaCreditTransferEdit::~sepaCreditTransferEdit()
     delete ui;
 }
 
+void sepaCreditTransferEdit::showEvent(QShowEvent* event)
+{
+  updateEveryStatus();
+  QWidget::showEvent(event);
+}
+
 onlineJobTyped<sepaOnlineTransfer> sepaCreditTransferEdit::getOnlineJobTyped() const
 {
   onlineJobTyped<sepaOnlineTransfer> sepaJob( m_onlineJob );

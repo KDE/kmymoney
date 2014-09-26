@@ -52,6 +52,8 @@ public:
 
   bool isReadOnly() const { return m_readOnly; }
 
+  virtual void showEvent(QShowEvent*);
+
 signals:
   void readOnlyChanged( bool );
 

@@ -63,6 +63,12 @@ germanCreditTransferEdit::~germanCreditTransferEdit()
     delete ui;
 }
 
+void germanCreditTransferEdit::showEvent(QShowEvent* event)
+{
+  updateEveryStatus();
+  QWidget::showEvent(event);
+}
+
 bool germanCreditTransferEdit::setOnlineJob(const onlineJob& job)
 {
     if (job.taskIid() == germanOnlineTransfer::name()) {

@@ -53,6 +53,8 @@ public:
   bool isValid() const { return getOnlineJobTyped().isValid(); };
   bool isReadOnly() const { return m_readOnly; }
 
+  virtual void showEvent(QShowEvent*);
+
 signals:
   void onlineJobChanged();
   void readOnlyChanged(bool);
