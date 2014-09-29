@@ -7107,6 +7107,8 @@ void KMyMoneyApp::slotPluginUnplug(KPluginInfo* info)
 void KMyMoneyApp::slotAutoSave(void)
 {
   if (!d->m_inAutoSaving) {
+    // store the focus widget so we can restore it after save
+    QPointer<QWidget> focusWidget = qApp->focusWidget();
     d->m_inAutoSaving = true;
     KMSTATUS(i18n("Auto saving..."));
 
@@ -7120,6 +7122,10 @@ void KMyMoneyApp::slotAutoSave(void)
     }
 
     d->m_inAutoSaving = false;
+    if (focusWidget && focusWidget != qApp->focusWidget()) {
+      // we have a valid focus widget so restore it
+      focusWidget->setFocus();
+    }
   }
 }
 

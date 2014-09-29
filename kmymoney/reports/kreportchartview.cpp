@@ -488,6 +488,11 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   dataValueAttr.setDecimalDigits(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
   planeDiagram->setDataValueAttributes(dataValueAttr);
   planeDiagram->setAllowOverlappingDataValueTexts(true);
+
+  if (qMin(static_cast<uint>(KMyMoneyGlobalSettings::maximumLegendItems()), legend->datasetCount()) < 2) {
+    // the legend is needed only if at least two data sets are rendered
+    removeLegend();
+  }
 }
 
 unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& rowSet, const ERowType rowType, const QString& legendText, int startColumn, int endColumn)
