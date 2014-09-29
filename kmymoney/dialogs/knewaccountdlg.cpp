@@ -261,13 +261,11 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     // get rid of the tabs that are not used for accounts
     int taxtab = m_tab->indexOf(m_taxTab);
     if (taxtab != -1) {
-      if (m_account.isAssetLiability()) {
         m_vatCategory->setText(i18n("VAT account"));
-        m_vatAssignmentFrame->hide();
         m_qcheckboxTax->setChecked(account.value("Tax") == "Yes");
-      } else {
+        loadVatAccounts();
+    } else {
         m_tab->removeTab(taxtab);
-      }
     }
 
     switch (m_account.accountType()) {
