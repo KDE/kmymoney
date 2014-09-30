@@ -458,6 +458,7 @@ void KForecastView::loadAdvancedView(void)
   //clear the list, including columns
   m_advancedList->clear();
   m_advancedList->setColumnCount(0);
+  m_advancedList->setIconSize(QSize(22, 22));
 
   QStringList headerLabels;
 
@@ -504,6 +505,7 @@ void KForecastView::loadAdvancedView(void)
 
     advancedItem = new QTreeWidgetItem(m_advancedList, advancedItem, false);
     advancedItem->setText(0, acc.name());
+    advancedItem->setIcon(0, acc.accountPixmap());
     int it_c = 1; // iterator for the columns of the listview
 
     //get minimum balance list
@@ -721,14 +723,16 @@ bool KForecastView::includeAccount(MyMoneyForecast& forecast, const MyMoneyAccou
 
 void KForecastView::adjustHeadersAndResizeToContents(QTreeWidget *widget)
 {
-  QSize sizeHint(widget->columnWidth(0), widget->sizeHintForRow(0));
+  QSize sizeHint(0, widget->sizeHintForRow(0));
   QTreeWidgetItem *header = widget->headerItem();
   for (int i = 0; i < header->columnCount(); ++i) {
-    if (i && header) {
+    if (i > 0) {
       header->setData(i, Qt::TextAlignmentRole, Qt::AlignRight);
+      // make sure that the row height stays the same even when the column that has icons is not visible
+      if (m_totalItem) {
+        m_totalItem->setSizeHint(i, sizeHint);
+      }
     }
-    // make sure that the row height stays the same even when the column that has icons is not visible
-    m_totalItem->setSizeHint(i, sizeHint);
     widget->resizeColumnToContents(i);
   }
 }
