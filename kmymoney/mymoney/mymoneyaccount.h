@@ -38,6 +38,7 @@
 #include "mymoneyutils.h"
 
 #include "payeeidentifier/payeeidentifier.h"
+#include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "mymoneypayeeidentifiercontainer.h"
 
 class MyMoneyTransaction;
@@ -770,6 +771,9 @@ QList< payeeIdentifierTyped<type> > MyMoneyAccount::payeeIdentifiersByType() con
   QList< payeeIdentifierTyped<type> > typedList;
   return typedList;
 }
+
+template<>
+QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const;
 
 /**
   * Make it possible to hold @ref MyMoneyAccount objects inside @ref QVariant objects.

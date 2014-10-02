@@ -74,6 +74,9 @@ public:
   template< class T >
   T* data();
 
+  template< class T >
+  const T* data() const;
+
   bool isValid() const;
 
   id_t id() const { return m_id; }
@@ -140,6 +143,15 @@ template<class T>
 T* payeeIdentifier::data()
 {
   T *const ident = dynamic_cast<T*>(m_payeeIdentifier);
+  if ( ident == 0 )
+    throw badCast(__FILE__, __LINE__);
+  return ident;
+}
+
+template<class T>
+const T* payeeIdentifier::data() const
+{
+  const T *const ident = dynamic_cast<const T*>(m_payeeIdentifier);
   if ( ident == 0 )
     throw badCast(__FILE__, __LINE__);
   return ident;

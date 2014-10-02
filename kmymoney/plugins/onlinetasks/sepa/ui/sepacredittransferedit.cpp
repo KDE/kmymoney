@@ -194,8 +194,14 @@ void sepaCreditTransferEdit::beneficiaryBicChanged(const QString& bic)
   if ( bic.isEmpty() && !ui->beneficiaryIban->text().isEmpty() ) {
     QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
 
-    const payeeIdentifiers::ibanBic payee = getOnlineJobTyped().task()->beneficiaryTyped();
-    if (settings->isBicMandatory(payee.electronicIban() , ui->beneficiaryIban->text() )) {
+    const payeeIdentifier payee = getOnlineJobTyped().task()->originAccountIdentifier();
+    QString iban;
+    try {
+      iban = payee.data<payeeIdentifiers::ibanBic>()->electronicIban();
+    } catch ( payeeIdentifier::badCast& ) {
+    }
+
+    if (settings->isBicMandatory(iban , ui->beneficiaryIban->text() )) {
       ui->feedbackBic->setFeedback(KMyMoneyValidationFeedback::Error, i18n("For this beneficiary's country the BIC is mandatory."));
       return;
     }

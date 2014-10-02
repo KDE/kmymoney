@@ -286,6 +286,24 @@ bool MyMoneyAccount::isLiquidAsset(void) const
          accountType() == Cash;
 }
 
+template<>
+QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const
+{
+  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = payeeIdentifierTyped<payeeIdentifiers::ibanBic>( new payeeIdentifiers::ibanBic );
+  ident->setIban( value(QLatin1String("iban")) );
+
+  if ( !institutionId().isEmpty() ) {
+    const MyMoneyInstitution institution = MyMoneyFile::instance()->institution( institutionId() );
+    ident->setBic( institution.value("bic") );
+  }
+
+  ident->setOwnerName( MyMoneyFile::instance()->user().name() );
+
+  QList< payeeIdentifierTyped<payeeIdentifiers::ibanBic> > typedList;
+  typedList << ident;
+  return typedList;
+}
+
 MyMoneyAccountLoan::MyMoneyAccountLoan(const MyMoneyAccount& acc)
     : MyMoneyAccount(acc)
 {

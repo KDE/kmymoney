@@ -87,17 +87,17 @@ bool creditTransferSettingsBase::isBicMandatory(const QString& payeeIban, const 
    * Version 2.0
    * Date issued: 20 January 2014
    */
-  QStringList codes;
-  codes << "FI" << "AT" << "PT" << "BE" << "BG" << "ES" << "HR" << "CY" << "CZ" << "DK" << "EE" << "FI"
+  QStringList sepaParticipants;
+  sepaParticipants << "FI" << "AT" << "PT" << "BE" << "BG" << "ES" << "HR" << "CY" << "CZ" << "DK" << "EE" << "FI"
   << "FR" << "DE" << "GI" << "GR" << "HU" << "IS" << "IE" << "IT" << "LV" << "LI" << "LT" << "LU" << "PT" << "MT" << "MC" << "NL"
   << "NO" << "PL" << "RO" << "SM" << "SK" << "SI" << "ES" << "SE" << "CH" << "GB";
 
   // Starting form 1st Febuary 2016 no bic is needed between sepa countries
   if (QDate::currentDate() >= QDate(2016, 2, 1))
-    return ( !codes.contains(payeeContryCode, Qt::CaseInsensitive) || !codes.contains(beneficaryCountryCode, Qt::CaseInsensitive) );
+    return ( !sepaParticipants.contains(payeeContryCode, Qt::CaseInsensitive) || !sepaParticipants.contains(beneficaryCountryCode, Qt::CaseInsensitive) );
 
   // Before that date the bic is needed except for transfers within a single sepa country
-  return ( payeeContryCode.compare(beneficaryCountryCode, Qt::CaseInsensitive) != 0 || !codes.contains(payeeContryCode, Qt::CaseInsensitive) );
+  return ( payeeContryCode.compare(beneficaryCountryCode, Qt::CaseInsensitive) != 0 || !sepaParticipants.contains(payeeContryCode, Qt::CaseInsensitive) );
 }
 
 bool creditTransferSettingsBase::checkRecipientBic(const QString& bic) const
