@@ -39,7 +39,17 @@ public:
 signals:
   void validatorFeedback(KMyMoneyValidationFeedback::MessageType type, QString message);
 
+protected:
+  virtual void focusOutEvent(QFocusEvent* ev);
+
+private slots:
+  void delayFeedback(KMyMoneyValidationFeedback::MessageType type, QString message);
+  void emitFeedback();
+
 private:
+  class Private;
+  Private* d_ptr;
+  Q_DECLARE_PRIVATE();
 };
 
 #endif // KIBANLINEEDIT_H

@@ -18,17 +18,66 @@
 
 #include "kibanlineedit.h"
 
+#include <QTimer>
+
 #include "ibanvalidator.h"
 
-KIbanLineEdit::KIbanLineEdit(QWidget* parent)
-  : KLineEdit(parent)
+struct KIbanLineEdit::Private
 {
+  QTimer* timer;
+  KMyMoneyValidationFeedback::MessageType delayedMessageType;
+  QString delayedMessage;
+};
+
+KIbanLineEdit::KIbanLineEdit(QWidget* parent)
+  : KLineEdit(parent),
+  d_ptr( new KIbanLineEdit::Private )
+{
+  Q_D();
+
   ibanValidator *const validatorPtr = new ibanValidator;
   setValidator( validatorPtr );
-  connect(validatorPtr, SIGNAL(feedback(KMyMoneyValidationFeedback::MessageType,QString)), this, SIGNAL(validatorFeedback(KMyMoneyValidationFeedback::MessageType,QString)));
+
+  d->timer = new QTimer( this );
+  d->timer->setSingleShot( true );
+  d->timer->setInterval( 2000 );
+
+  connect(validatorPtr, SIGNAL(feedback(KMyMoneyValidationFeedback::MessageType,QString)), this, SLOT(delayFeedback(KMyMoneyValidationFeedback::MessageType,QString)));
+  connect(this, SIGNAL(returnPressed()), SLOT(emitFeedback()));
+  connect(d->timer, SIGNAL(timeout()), this, SLOT(emitFeedback()));
 }
 
 const ibanValidator* KIbanLineEdit::validator() const
 {
   return qobject_cast<const ibanValidator*>(KLineEdit::validator());
+}
+
+void KIbanLineEdit::delayFeedback(KMyMoneyValidationFeedback::MessageType type, QString message)
+{
+  Q_D();
+  d->timer->stop();
+
+  if  ( type < d->delayedMessageType ) {
+    // Directly show feedback if something got better
+    emit validatorFeedback(type, message);
+  } else {
+    d->timer->start();
+  }
+
+  // The timer will execute in the event loop, so setting the
+  // messages here is early enough.
+  d->delayedMessageType = type;
+  d->delayedMessage = message;
+}
+
+void KIbanLineEdit::focusOutEvent(QFocusEvent* ev)
+{
+  KLineEdit::focusOutEvent(ev);
+  emitFeedback();
+}
+
+void KIbanLineEdit::emitFeedback()
+{
+  Q_D();
+  emit validatorFeedback(d->delayedMessageType, d->delayedMessage);
 }

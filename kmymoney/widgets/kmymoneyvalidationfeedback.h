@@ -38,11 +38,11 @@ public:
   ~KMyMoneyValidationFeedback();
 
   enum MessageType {
+    None,
     Positive,
     Information,
     Warning,
-    Error,
-    None
+    Error
   };
 
 public slots:
