@@ -46,6 +46,28 @@
 #include "kmymoney.h"
 #include "models.h"
 
+/**
+  * This class is only needed to implement proper sorting.
+  */
+class InvestmentItem : public QTreeWidgetItem
+{
+public:
+  InvestmentItem(QTreeWidget *view) : QTreeWidgetItem(view) {}
+  virtual bool operator<(const QTreeWidgetItem &other) const;
+};
+
+bool InvestmentItem::operator<(const QTreeWidgetItem &other) const
+{
+  const int sortColumn = treeWidget()->sortColumn();
+  if (sortColumn > eInvestmentSymbolColumn) {
+    // these columns have a MyMoneyMoney value in the Qt::UserRole role
+    const MyMoneyMoney &money = data(sortColumn, Qt::UserRole).value<MyMoneyMoney>();
+    const MyMoneyMoney &otherMoney = other.data(sortColumn, Qt::UserRole).value<MyMoneyMoney>();
+    return money < otherMoney;
+  }
+  return QTreeWidgetItem::operator<(other);
+}
+
 class KInvestmentView::Private
 {
 public:
@@ -376,7 +398,7 @@ void KInvestmentView::loadInvestmentTab(void)
 
 void KInvestmentView::loadInvestmentItem(const MyMoneyAccount& account)
 {
-  QTreeWidgetItem* item = new QTreeWidgetItem(m_investmentsList);
+  QTreeWidgetItem* item = new InvestmentItem(m_investmentsList);
   MyMoneySecurity security;
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -393,9 +415,12 @@ void KInvestmentView::loadInvestmentItem(const MyMoneyAccount& account)
   item->setText(eInvestmentSymbolColumn, security.tradingSymbol());
 
   //column 2 is the net value (price * quantity owned)
-  MyMoneyPrice price = file->price(account.currencyId(), tradingCurrency.id());
+  const MyMoneyPrice &price = file->price(account.currencyId(), tradingCurrency.id());
+  const MyMoneyMoney &balance = file->balance(account.id());
   if (price.isValid()) {
-    item->setText(eValueColumn, (file->balance(account.id()) * price.rate(tradingCurrency.id())).formatMoney(tradingCurrency.tradingSymbol(), prec));
+    const MyMoneyMoney &value = balance * price.rate(tradingCurrency.id());
+    item->setText(eValueColumn, value.formatMoney(tradingCurrency.tradingSymbol(), prec));
+    item->setData(eValueColumn, Qt::UserRole, QVariant::fromValue(value));
   } else {
     item->setText(eValueColumn, "---");
   }
@@ -403,8 +428,10 @@ void KInvestmentView::loadInvestmentItem(const MyMoneyAccount& account)
 
   //column 3 (COLUMN_QUANTITY_INDEX) is the quantity of shares owned
   prec = MyMoneyMoney::denomToPrec(security.smallestAccountFraction());
-  item->setText(eQuantityColumn, file->balance(account.id()).formatMoney("", prec));
+
+  item->setText(eQuantityColumn, balance.formatMoney("", prec));
   item->setTextAlignment(eQuantityColumn, Qt::AlignRight | Qt::AlignVCenter);
+  item->setData(eQuantityColumn, Qt::UserRole, QVariant::fromValue(balance));
 
   //column 4 is the current price
   // Get the price precision from the configuration
@@ -413,6 +440,7 @@ void KInvestmentView::loadInvestmentItem(const MyMoneyAccount& account)
   // prec = MyMoneyMoney::denomToPrec(m_tradingCurrency.smallestAccountFraction());
   if (price.isValid()) {
     item->setText(ePriceColumn, price.rate(tradingCurrency.id()).formatMoney(tradingCurrency.tradingSymbol(), prec));
+    item->setData(ePriceColumn, Qt::UserRole, QVariant::fromValue(price.rate(tradingCurrency.id())));
   } else {
     item->setText(ePriceColumn, "---");
   }

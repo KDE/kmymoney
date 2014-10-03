@@ -445,7 +445,7 @@
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="6" margin="11"/>
+ <layoutdefault spacing="0" margin="0"/>
  <customwidgets>
   <customwidget>
    <class>KPushButton</class>

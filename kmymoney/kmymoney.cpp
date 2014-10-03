@@ -2732,8 +2732,15 @@ void KMyMoneyApp::slotToolsStartKCalc(void)
 {
   QString cmd = KMyMoneyGlobalSettings::externalCalculator();
   // if none is present, we fall back to the default
-  if (cmd.isEmpty())
+  if (cmd.isEmpty()) {
+#ifdef Q_OS_WIN32
+    cmd = QLatin1String("calc");
+#elseif Q_OS_MAC
+    cmd = QLatin1String("open -a Calculator");
+#else
     cmd = QLatin1String("kcalc");
+#endif
+  }
   KRun::runCommand(cmd, this);
 }
 
@@ -7099,6 +7106,8 @@ void KMyMoneyApp::slotPluginUnplug(KPluginInfo* info)
 void KMyMoneyApp::slotAutoSave(void)
 {
   if (!d->m_inAutoSaving) {
+    // store the focus widget so we can restore it after save
+    QPointer<QWidget> focusWidget = qApp->focusWidget();
     d->m_inAutoSaving = true;
     KMSTATUS(i18n("Auto saving..."));
 
@@ -7112,6 +7121,10 @@ void KMyMoneyApp::slotAutoSave(void)
     }
 
     d->m_inAutoSaving = false;
+    if (focusWidget && focusWidget != qApp->focusWidget()) {
+      // we have a valid focus widget so restore it
+      focusWidget->setFocus();
+    }
   }
 }
 

@@ -61,7 +61,6 @@
   </entry>
   <entry name="ExternalCalculator" type="String">
    <label>Name of external calculator program</label>
-   <default>kcalc</default>
   </entry>
   <entry name="HolidayRegion" type="String">
    <label>Name of region used for non-processing days</label>

@@ -140,7 +140,6 @@ QStringList Parse::parseFile(const QString& buf, int strt, int end)
         //  last char in file is data char
         //  meaning no return on last line
         //  so bump line count
-        qDebug() << "139 parse eoFile = true" << charCount << chr;
         lineCount ++;
       }
     }
@@ -204,6 +203,11 @@ QString Parse::decimalSymbol(int index)
 void Parse::setDecimalSymbol(int index)
 {
   m_decimalSymbol = m_decimalSymbolList[index];
+}
+
+int Parse::decimalSymbolIndex()
+{
+  return m_decimalSymbolIndex;
 }
 
 void Parse::setDecimalSymbolIndex(int index)
