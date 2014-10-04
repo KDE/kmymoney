@@ -17,6 +17,7 @@
   <name xml:lang="pl">KMyMoney</name>
   <name xml:lang="pt">KMyMoney</name>
   <name xml:lang="pt-BR">KMyMoney</name>
+  <name xml:lang="ro">KMyMoney</name>
   <name xml:lang="sk">KMyMoney</name>
   <name xml:lang="sv">KMyMoney</name>
   <name xml:lang="uk">KMyMoney</name>
@@ -35,6 +36,7 @@
   <summary xml:lang="pl">Zarządzanie finansami osobistymi</summary>
   <summary xml:lang="pt">Gestor de Finanças Pessoais</summary>
   <summary xml:lang="pt-BR">Gerenciador de Finanças Pessoais</summary>
+  <summary xml:lang="ro">Gestionar de finanțe personale</summary>
   <summary xml:lang="sk">Osobný manažér financií</summary>
   <summary xml:lang="sv">Hemekonomihanterare</summary>
   <summary xml:lang="uk">Програма для керування особистими фінансами</summary>
@@ -55,6 +57,7 @@
     <p xml:lang="pl">KMyMoney służy do zarządzania finansami osobistymi w KDE.</p>
     <p xml:lang="pt">O KMyMoney é um gestor de finanças pessoais para o KDE.</p>
     <p xml:lang="pt-BR">KMyMoney é um gerenciador de finanças pessoais para o KDE.</p>
+    <p xml:lang="ro">KMyMoney este un gestionar de finanțe personale pentru KDE.</p>
     <p xml:lang="sk">KMyMoney je osobný správca financií pre KDE.</p>
     <p xml:lang="sv">KMyMoney är en hemekonomihanterare för KDE.</p>
     <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами для KDE.</p>
@@ -92,6 +95,7 @@
       <caption xml:lang="pl">KMyMoney zawiera stronę powitalną, aby pomoc nowym użytkownikom w szybkim rozpoczęciu pracy.</caption>
       <caption xml:lang="pt">O KMyMoney tem uma página de boas-vindas para ajudar os novos utilizadores a terem um bom ponto de partida.</caption>
       <caption xml:lang="pt-BR">O KMyMoney tem uma página de boas-vindas para ajudar os novos usuários a terem um bom começo.</caption>
+      <caption xml:lang="ro">KMyMoney are o pagină de întîmpinare pentru a-i ajuta pe noii utilizatori să se inițieze ușor.</caption>
       <caption xml:lang="sk">KMyMoney má uvítaciu stránku na pomoc novým používateľom na dobrý začiatok.</caption>
       <caption xml:lang="sv">KMyMoney har en välkomstsida för att hjälpa nya användare att komma igång.</caption>
       <caption xml:lang="uk">У KMyMoney передбачено сторінку вітання, за допомогою якої новим користувачам буде простіше розпочати користування програмою.</caption>
