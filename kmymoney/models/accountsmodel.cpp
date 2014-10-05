@@ -130,21 +130,31 @@ public:
       case MyMoneyAccount::Expense:
       case MyMoneyAccount::Asset:
       case MyMoneyAccount::Liability:
+        // Tax
+        newIndex = model->index(index.row(), index.column() + Tax, index.parent());
         if (account.value("Tax").toLower() == "yes") {
-          // Tax
-          newIndex = model->index(index.row(), index.column() + Tax, index.parent());
           model->setData(newIndex, checkMark, Qt::DecorationRole);
+        } else {
+          model->setData(newIndex, QPixmap(), Qt::DecorationRole);
         }
+
+        // VAT Account
+        newIndex = model->index(index.row(), index.column() + VAT, index.parent());
         if (!account.value("VatAccount").isEmpty()) {
-          // VAT
-          newIndex = model->index(index.row(), index.column() + VAT, index.parent());
-          model->setData(newIndex, checkMark, Qt::DecorationRole);
-        }
-        if (!account.value("VatRate").isEmpty()) {
+          MyMoneyFile* file = MyMoneyFile::instance();
+          const MyMoneyAccount &vatAccount = file->account(account.value("VatAccount"));
+
+          model->setData(newIndex, vatAccount.name(), Qt::DisplayRole);
+          model->setData(newIndex, QVariant(Qt::AlignLeft | Qt::AlignVCenter), Qt::TextAlignmentRole);
+
+        // VAT Rate
+        } else if (!account.value("VatRate").isEmpty()) {
           MyMoneyMoney vatRate = MyMoneyMoney(account.value("VatRate")) * MyMoneyMoney(100, 1);
-          newIndex = model->index(index.row(), index.column() + VAT, index.parent());
           model->setData(newIndex, QString("%1 %").arg(vatRate.formatMoney("", 1)), Qt::DisplayRole);
           model->setData(newIndex, QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
+
+        } else {
+          model->setData(newIndex, QString(), Qt::DisplayRole);
         }
         break;
       default:

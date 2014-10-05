@@ -114,6 +114,8 @@ class IMyMoneySerialize;
 /**
   * The MyMoneyDbColumn class is a base type for generic db columns.
   * Derived types exist for several common column types.
+  *
+  * @todo Remove unneeded columns which store the row count of tables from kmmFileInfo
   */
 class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, public KShared
 {

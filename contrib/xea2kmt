@@ -1,0 +1,236 @@
+#!/usr/bin/perl
+#***************************************************************************
+#                   xea2kmt  -  Convert GNUCash template to KMyMoney
+#                         -------------------
+# copyright             : (C) 2008 by Thomas Baumgart
+# email                 : ipwizard@kmymoney.org
+#
+#***************************************************************************/
+#
+#***************************************************************************
+#*                                                                         *
+#*   This program is free software; you can redistribute it and/or modify  *
+#*   it under the terms of the GNU General Public License as published by  *
+#*   the Free Software Foundation; either version 2 of the License, or     *
+#*   (at your option) any later version.                                   *
+#*                                                                         *
+#***************************************************************************/
+
+# $file = "devel/gnucash/accounts/C/acctchrt_full.gnucash-xea";
+# $file = "devel/gnucash/accounts/en_GB/uk-vat.gnucash-xea";
+# $file = "devel/gnucash/accounts/de_DE/acctchrt_skr03.gnucash-xea";
+$file = $ARGV[0];
+
+%All_Accounts;
+
+{ package Account;
+  sub new {
+    my $proto = shift;
+    my $class = ref($proto) || $proto;
+    my $self = {};
+    $self->{name} = undef;
+    $self->{id} = undef;
+    $self->{parentId} = undef;
+    $self->{dumped} = 0;
+    bless($self, $class);
+    return $self;
+  }
+  sub name {
+    my $self = shift;
+    if(@_) { $self->{name} = shift }
+    return $self->{name};
+  }
+  sub id {
+    my $self = shift;
+    if(@_) { $self->{id} = shift }
+    return $self->{id};
+  }
+  sub parentId {
+    my $self = shift;
+    if(@_) { $self->{parentId} = shift }
+    return $self->{parentId};
+  }
+  sub type {
+    my $self = shift;
+    if(@_) { $self->{type} = shift }
+    return $self->{type};
+  }
+  sub newType {
+    my $self = shift;
+    my $type = $self->{type};
+    return 0 if($type eq "ROOT");
+    return 1 if($type eq "BANK");
+    return 3 if($type eq "CASH");
+    return 4 if($type eq "CREDIT");
+    return 7 if($type eq "INVEST");
+    return 9 if($type eq "ASSET");
+    return 10 if($type eq "LIABILITY");
+    return 12 if($type eq "INCOME");
+    return 13 if($type eq "EXPENSE");
+    return 15 if($type eq "STOCK");
+    return 15 if($type eq "MUTUAL");
+    return 16 if($type eq "EQUITY");
+
+    return 99; # unknown
+  }
+}
+
+$tmp="/tmp/xea2kmt";
+system("cp $file $tmp");
+open(IN, "< $tmp") or die();
+$encoding = "";
+while(<IN>) {
+  chomp($_);
+  if($_ =~ /xml +version.*encoding="(.*)"/) {
+    $encoding=$1;
+  }
+}
+close(IN);
+
+if(length($encoding)==0) {
+  print STDERR "No encoding in $file. Assume iso8859-1\n";
+  system("recode iso8859-1..utf-8 $tmp");
+} else {
+  system("recode $encoding..utf-8 $tmp");
+}
+open(IN, "< $tmp") or die();
+$state = 0;
+$startLevel = 1;
+
+while(<IN>) {
+  # print "$state:$_";
+  chomp($_);
+
+  $title .= $1 if($state == 1 && $_ =~ /(.*)<\/gnc-act:title>/);
+  $short .= $1 if($state == 2 && $_ =~ /(.*)<\/gnc-act:short-description>/);
+  $long .= $1 if($state == 3 && $_ =~ /(.*)<\/gnc-act:long-description>/);
+  
+  $state = 0 if($_ =~ /<\/gnc-act:title>/);
+  $state = 0 if($_ =~ /<\/gnc-act:short-description>/);
+  $state = 0 if($_ =~ /<\/gnc-act:long-description>/);
+
+  if($state == 1) {
+    $title .= $_;
+  } elsif($state == 2) {
+    $short .= $_;
+  } elsif($state == 3) {
+    $long .= $_;
+  } elsif($state == 4) {
+    if($_ =~ /<act:name>(.*)<\/act:name>/) {
+      $acc = new Account;
+      $acc->name($1);
+    } elsif($_ =~ /<act:id type=.*>(.*)<\/act:id>/) {
+      $acc->id($1);
+    } elsif($_ =~ /<act:parent type=.*>(.*)<\/act:parent>/) {
+      $acc->parentId($1);
+    } elsif($_ =~ /<act:type>(.*)<\/act:type>/) {
+      $acc->type($1);
+      $startLevel=0 if($1 eq "ROOT");
+    } elsif($_ =~ /\/gnc:account>/) {
+      $All_Accounts{$acc->id} = $acc;
+      $state = 0;
+    }
+  }
+
+  $state = 1 if($_ =~ /<gnc-act:title>/);
+  $state = 2 if($_ =~ /<gnc-act:short-description>/);
+  $state = 3 if($_ =~ /<gnc-act:long-description>/);
+  $state = 4 if($_ =~ /<gnc:account version/);
+}
+close IN;
+unlink($tmp);
+
+$title = trim($title);
+$short = trim($short);
+$long = trim($long);
+
+#print "Title: '$title'\n";
+#print "Short: '$short'\n";
+#print "Long : '$long'\n";
+
+
+# fix the parent account if the child is a stock, mutual fund etc
+for my $i (keys %All_Accounts) {
+  my $acc = $All_Accounts{$i};
+  if($All_Accounts{$i}->newType == 15) {
+    fixParent($acc->parentId, "INVEST");
+  }
+}
+
+$level = $startLevel;
+$file =~ /devel\/gnucash\/(.*)/;
+my $gncfile = $1;
+print "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+print "<!--\n";
+print "     Converted using xea2kmt by Thomas Baumgart from GnuCash sources\n";
+print "\n";
+print "        $gncfile\n";
+print "\n";
+print "     Please check the source file for possible copyright\n";
+print "     and licence information.\n";
+print "-->\n";
+print "<!DOCTYPE KMYMONEY-TEMPLATE>\n";
+print "<kmymoney-account-template>\n";
+print " <title>$title</title>\n";
+print " <shortdesc>$short</shortdesc>\n";
+print " <longdesc>$long</longdesc>\n";
+print " <accounts>\n";
+
+dumpAccount(undef);
+
+print " </accounts>\n";
+print "</kmymoney-account-template>\n";
+ 
+sub trim (@)
+{
+  my $s = shift @_;
+  while($s =~ s/^\s//) {}
+  while($s =~ s/\s$//) {}
+  while($s =~ s/\s\s/ /) {}
+  return $s;
+}
+
+sub fixParent(@@)
+{
+  my $id = shift;
+  my $type = shift;
+  for my $i (keys %All_Accounts) {
+    my $acc = $All_Accounts{$i};
+    if(($acc->id eq $id) && ($acc->type ne $type)) {
+      $acc->type($type);
+      $All_Accounts{$i} = $acc;
+      return;
+    }
+  }
+}
+
+sub dumpAccount(@)
+{
+  $level += 1;
+  my $lev = sprintf("%*s", $level, "");
+  my $id = shift;
+  my $dumped = 0;
+  # print "--> search '$id'\n";
+  for my $i (keys %All_Accounts) {
+    my $acc = $All_Accounts{$i};
+    # print "--> parent '$i->{parentId}'\n";
+    if($acc->parentId eq $id && $acc->newType ne 15) {
+      if($acc->newType ne 0 && $acc->newType ne 99) {
+        print ">\n" if($dumped == 0 && $level > 2);
+        print "$lev<account type=\"".$acc->newType."\" name=\"";
+        print $acc->name if($level > 2);
+        print "\"";
+        # print $lev.":".$i->name." - ".$i->id."\n";
+        ++$dumped;
+      }
+      my $children = 0;
+      $children = dumpAccount($acc->id) if($acc->newType ne 99);
+      if($level > 1 && $acc->newType ne 99) {
+        print "/>\n" if($children == 0);
+        print "$lev</account>\n" if($children > 0);
+      }
+    }
+  }
+  $level -= 1;
+  return $dumped;
+}
