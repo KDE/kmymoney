@@ -3563,7 +3563,7 @@ void KMyMoneyApp::slotAccountEdit(void)
           }
         }
 
-        if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+        if (dlg != 0 && dlg->exec() == QDialog::Accepted) {
           try {
             MyMoneyFileTransaction ft;
 
