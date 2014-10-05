@@ -137,8 +137,11 @@ public:
         }
         if (!account.value("VatAccount").isEmpty()) {
           // VAT
+          MyMoneyFile* file = MyMoneyFile::instance();
+          const MyMoneyAccount &vatAccount = file->account(account.value("VatAccount"));
+
           newIndex = model->index(index.row(), index.column() + VAT, index.parent());
-          model->setData(newIndex, checkMark, Qt::DecorationRole);
+          model->setData(newIndex, vatAccount.name(), Qt::DisplayRole);
         }
         if (!account.value("VatRate").isEmpty()) {
           MyMoneyMoney vatRate = MyMoneyMoney(account.value("VatRate")) * MyMoneyMoney(100, 1);
