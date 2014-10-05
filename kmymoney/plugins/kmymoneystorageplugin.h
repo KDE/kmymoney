@@ -1,5 +1,5 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager f*or KDE
+ * This file is part of KMyMoney, A Personal Finance Manager for KDE
  * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
@@ -16,16 +16,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KMYMONEYSTORINGPLUGIN_H
-#define KMYMONEYSTORINGPLUGIN_H
+#ifndef KMYMONEYPLUGIN_STORAGEPLUGIN_H
+#define KMYMONEYPLUGIN_STORAGEPLUGIN_H
 
 #include <QString>
 
+namespace KMyMoneyPlugin
+{
+
 /**
- * @brief Interface for plugins which store data
+ * @brief Interface for plugins which store data in the database
  *
  */
-class KMyMoneyStoringPlugin
+class storagePlugin
 {
 public:
   /**
@@ -34,7 +37,15 @@ public:
    * Use @c QSqlDatabase::database(connectionName); to get a database connection.
    */
   bool setupDatabase( const QString& connectionName ) = 0;
-  bool uninstallPlugin( const QString& connectionName ) = 0;
+
+  /**
+   * @brief Remove all data belonging to the plugin from the database
+   *
+   * Use @c QSqlDatabase::database(connectionName); to get a database connection.
+   */
+  bool removePluginData( const QString& connectionName ) = 0;
 };
 
-#endif // KMYMONEYSTORINGPLUGIN_H
+} // end namespace KMyMoneyPlugin
+
+#endif // KMYMONEYPLUGIN_STORAGEPLUGIN_H

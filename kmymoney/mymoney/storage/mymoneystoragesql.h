@@ -219,6 +219,12 @@ public:
   void addBudget(const MyMoneyBudget& bud);
   void modifyBudget(const MyMoneyBudget& bud);
   void removeBudget(const MyMoneyBudget& bud);
+  void addOnlineJob( const onlineJob& job );
+  void modifyOnlineJob( const onlineJob& job);
+  void removeOnlineJob( const onlineJob& job);
+  void addPayeeIdentifier( const payeeIdentifier& ident );
+  void modifiyPayeeIdentifier( const payeeIdentifier& ident );
+  void removePayeeIdentifier( const payeeIdentifier& ident );
 
   unsigned long transactionCount(const QString& aid = QString()) const;
   inline const QHash<QString, unsigned long> transactionCountMap() const {
@@ -279,6 +285,7 @@ public:
   long unsigned getNextPayeeId() const;
   long unsigned getNextTagId() const;
   long unsigned getNextOnlineJobId() const;
+  long unsigned getNextPayeeIdentifierId() const;
   long unsigned getNextReportId() const;
   long unsigned getNextScheduleId() const;
   long unsigned getNextSecurityId() const;
@@ -289,22 +296,24 @@ public:
   long unsigned incrementInstitutionId();
   long unsigned incrementPayeeId();
   long unsigned incrementTagId();
-  long unsigned incrementOnlineJobId();
   long unsigned incrementReportId();
   long unsigned incrementScheduleId();
   long unsigned incrementSecurityId();
   long unsigned incrementTransactionId();
+  long unsigned incrementOnlineJobId();
+  long unsigned incrementPayeeIdentfierId();
 
   void loadAccountId(const unsigned long& id);
   void loadTransactionId(const unsigned long& id);
   void loadPayeeId(const unsigned long& id);
   void loadTagId(const unsigned long& id);
-  void loadOnlineJobId(const unsigned long& id);
   void loadInstitutionId(const unsigned long& id);
   void loadScheduleId(const unsigned long& id);
   void loadSecurityId(const unsigned long& id);
   void loadReportId(const unsigned long& id);
   void loadBudgetId(const unsigned long& id);
+  void loadOnlineJobId(const unsigned long& id);
+  void loadPayeeIdentifierId(const unsigned long& id);
 
   /**
     * This method allows to modify the precision with which prices
@@ -356,6 +365,7 @@ private:
   void writeReport(const MyMoneyReport& rep, QSqlQuery& q);
   void writeBudget(const MyMoneyBudget& bud, QSqlQuery& q);
   void writeKeyValuePairs(const QString& kvpType, const QVariantList& kvpId, const QList<QMap<QString, QString> >& pairs);
+  void writeOnlineJob(const onlineJob& job, QSqlQuery& query);
 
   // read routines
   void readFileInfo(void);
@@ -417,6 +427,7 @@ private:
   int upgradeToV5();
   int upgradeToV6();
   int upgradeToV7();
+  int upgradeToV8();
 
   int createTables(int version = std::numeric_limits<int>::max());
   void createTable(const MyMoneyDbTable& t, int version = std::numeric_limits<int>::max());
@@ -454,6 +465,9 @@ private:
   long unsigned m_reports;
   long unsigned m_kvps;
   long unsigned m_budgets;
+  long unsigned m_onlineJobs;
+  long unsigned m_payeeIdentifier;
+
   // next id to use (for future archive)
   long unsigned m_hiIdInstitutions;
   long unsigned m_hiIdPayees;
@@ -464,6 +478,9 @@ private:
   long unsigned m_hiIdSecurities;
   long unsigned m_hiIdReports;
   long unsigned m_hiIdBudgets;
+  long unsigned m_hiIdOnlineJobs;
+  long unsigned m_hiIdPayeeIdentifier;
+
   // encrypt option - usage TBD
   QString m_encryptData;
 

@@ -32,7 +32,7 @@
 #include "mymoneyfile.h"
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
-unsigned int MyMoneyDbDef::m_currentVersion = 7;
+unsigned int MyMoneyDbDef::m_currentVersion = 8;
 
 // ************************* Build table descriptions ****************************
 MyMoneyDbDef::MyMoneyDbDef()
@@ -54,7 +54,8 @@ MyMoneyDbDef::MyMoneyDbDef()
   Reports();
   Budgets();
   Balances();
-  //OnlineJobs();
+  OnlineJobs();
+  PayeeIdentifier();
 }
 
 /* PRIMARYKEY - these fields combine to form a unique key field on which the db will create an index
@@ -102,6 +103,8 @@ void MyMoneyDbDef::FileInfo(void)
   appendField(MyMoneyDbColumn("updateInProgress", "char(1)"));
   appendField(MyMoneyDbIntColumn("budgets", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 1));
   appendField(MyMoneyDbIntColumn("hiBudgetId", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 1));
+  appendField(MyMoneyDbIntColumn("hiOnlineJobId", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 8));
+  appendField(MyMoneyDbIntColumn("hiPayeeIdentifierId", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 8));
   appendField(MyMoneyDbColumn("logonUser", "varchar(255)", false, false, 1));
   appendField(MyMoneyDbDatetimeColumn("logonAt", false, false, 1));
   appendField(MyMoneyDbIntColumn("fixLevel",
@@ -358,10 +361,26 @@ void MyMoneyDbDef::OnlineJobs(void)
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
 
-  // Add appropriate fields for Online Jobs here
-  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL, 6));
+  appendField(MyMoneyDbIntColumn("id", MyMoneyDbIntColumn::BIG, PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbColumn("type", "varchar(255)", false, NOTNULL, 8));
+  appendField(MyMoneyDbDatetimeColumn("jobSend", false, false, 8));
+  appendField(MyMoneyDbDatetimeColumn("bankAnswerDate", false, false, 8));
+  appendField(MyMoneyDbColumn("state", "varchar(15)", false, NOTNULL, 8));
+  appendField(MyMoneyDbColumn("locked", "char(1)", false, NOTNULL, 8));
 
   MyMoneyDbTable t("kmmOnlineJobs", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
+void MyMoneyDbDef::PayeeIdentifier()
+{
+  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+
+  appendField(MyMoneyDbIntColumn("id", MyMoneyDbIntColumn::BIG, PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbColumn("type", "varchar(255)", false, NOTNULL, 8));
+
+  MyMoneyDbTable t("kmmPayeeIdentifier", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
 }

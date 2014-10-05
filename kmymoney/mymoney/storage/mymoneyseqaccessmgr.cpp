@@ -206,8 +206,6 @@ void MyMoneySeqAccessMgr::modifyOnlineJob(const onlineJob &job)
 const onlineJob MyMoneySeqAccessMgr::getOnlineJob(const QString &id) const
 {
   if (m_onlineJobList.contains( id )) {
-    //!TODO: reactivate when stored onlineTasks can be handled even if the plugin was not found.
-    //Q_ASSERT( !m_onlineJobList[id].isNull() );
     return m_onlineJobList[id];
   }
   throw MYMONEYEXCEPTION("Unkown online Job '" + id + "'");
@@ -536,7 +534,6 @@ QString MyMoneySeqAccessMgr::nextOnlineJobID(void)
   id = 'O' + id.rightJustified(ONLINE_JOB_ID_SIZE, '0');
   return id;
 }
-
 
 void MyMoneySeqAccessMgr::addTransaction(MyMoneyTransaction& transaction, const bool skipAccountUpdate)
 {
@@ -1224,7 +1221,7 @@ void MyMoneySeqAccessMgr::loadOnlineJobs(const QMap< QString, onlineJob >& onlin
     if ((*iter).id() > lastId)
       lastId = (*iter).id();
   }
-  
+
   const int pos = lastId.indexOf(QRegExp("\\d+"), 0);
   if (pos != -1) {
     m_nextOnlineJobID = lastId.mid(pos).toInt();
