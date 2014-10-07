@@ -1368,6 +1368,14 @@ int Register::selectedItemsCount(void) const
 
 void Register::mouseReleaseEvent(QMouseEvent *e)
 {
+  if (e->button() == Qt::RightButton) {
+    // see the comment in Register::contextMenuEvent
+    // on Linux we never get here but on Windows this
+    // event is fired before the contextMenuEvent which
+    // causes the loss of the multiple selection; to avoid
+    // this just ignore the event and act like on Linux
+    return;
+  }
   if (m_ignoreNextButtonRelease) {
     m_ignoreNextButtonRelease = false;
     return;
