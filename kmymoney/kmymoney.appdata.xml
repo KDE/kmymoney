@@ -81,7 +81,7 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <caption>KMyMoney has a welcome page to help new users get off to a good start.</caption>
+      <caption>KMyMoney has a welcome page to help new users get off to a good start</caption>
       <caption xml:lang="ca">El KMyMoney disposa d'una pàgina de benvinguda per ajudar els nous usuaris a tenir un bon començament.</caption>
       <caption xml:lang="da">KMyMoney har en velkomstside til at hjælpe nye brugere godt i gang.</caption>
       <caption xml:lang="en-GB">KMyMoney has a welcome page to help new users get off to a good start.</caption>
@@ -99,7 +99,7 @@
       <image>http://www.kmymoney.org/images/screenshots/large/kmm1.png</image>
     </screenshot>
     <screenshot>
-      <caption>The financial summary gives you an overview of your finances, including overdue and upcoming scheduled transactions.</caption>
+      <caption>The financial summary gives you an overview of your finances</caption>
       <caption xml:lang="ca">El resum financer ofereix una visió general de les vostres finances, incloent les transaccions programades endarrerides i futures.</caption>
       <caption xml:lang="da">Økonomioversigten giver dig en oversigt over din økonomi, derunder forfaldne og kommende planlagte transaktioner.</caption>
       <caption xml:lang="en-GB">The financial summary gives you an overview of your finances, including overdue and upcoming scheduled transactions.</caption>
@@ -117,7 +117,7 @@
       <image>http://www.kmymoney.org/images/screenshots/large/kmm2.png</image>
     </screenshot>
     <screenshot>
-      <caption>In this view your accounts are organized, viewed, and managed by the institutions they are held at.</caption>
+      <caption>In this view your accounts are organized, viewed, and managed by the institutions they are held at</caption>
       <caption xml:lang="ca">En aquesta vista s'organitzen, visualitzen i administren els vostres comptes per les institucions en les que es duen a terme.</caption>
       <caption xml:lang="da">I denne visning er dine regnskaber organiseret, fremvist og håndteret af de institutioner de hører til.</caption>
       <caption xml:lang="en-GB">In this view your accounts are organised, viewed, and managed by the institutions they are held at.</caption>
