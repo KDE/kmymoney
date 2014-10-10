@@ -82,6 +82,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>KMyMoney has a welcome page to help new users get off to a good start</caption>
+      <caption xml:lang="ca">El KMyMoney disposa d'una pàgina de benvinguda per ajudar els nous usuaris a començar amb bon peu.</caption>
       <caption xml:lang="de">KMyMoney hat eine Willkommensseite, um neue Anwender zu Anfang zu unterstützten</caption>
       <caption xml:lang="fi">KMyMoneyssa on tervetulosivu auttamaan uusia käyttäjiä</caption>
       <caption xml:lang="nl">KMyMoney heeft een welkomstpagina om nieuwe gebruikers bij een goede start te helpen</caption>
@@ -95,6 +96,7 @@
     </screenshot>
     <screenshot>
       <caption>The financial summary gives you an overview of your finances</caption>
+      <caption xml:lang="ca">El resum financer us ofereix una visió general de les vostres finances</caption>
       <caption xml:lang="fi">Taloustietojen yhteenveto antaa yleiskuvan taloustilanteestasi</caption>
       <caption xml:lang="nl">De financiële samenvatting geeft u een overzicht van uw financiën</caption>
       <caption xml:lang="pt">O resumo financeiro dá-lhe uma visão geral sobre as suas finanças</caption>
@@ -107,6 +109,7 @@
     </screenshot>
     <screenshot>
       <caption>In this view your accounts are organized, viewed, and managed by the institutions they are held at</caption>
+      <caption xml:lang="ca">En aquesta vista s'organitzen, visualitzen i administren els vostres comptes per les institucions que els gestionen</caption>
       <caption xml:lang="fi">Tässä näkymässä tilit järjestellään, katsotaan ja hallitaan niihin liittyvien rahalaitosten kautta</caption>
       <caption xml:lang="nl">In deze weergave zijn uw rekeningen georganiseerd, getoond en beheerd door de banken waar ze berusten</caption>
       <caption xml:lang="pt">Nesta janela, poderá organizar, ver e gerir as suas contas, com base nas instituições em que estas estão guardadas</caption>
