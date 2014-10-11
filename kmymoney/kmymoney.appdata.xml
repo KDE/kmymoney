@@ -86,6 +86,7 @@
       <caption xml:lang="de">KMyMoney hat eine Willkommensseite, um neue Anwender zu Anfang zu unterstützten</caption>
       <caption xml:lang="fi">KMyMoneyssa on tervetulosivu auttamaan uusia käyttäjiä</caption>
       <caption xml:lang="nl">KMyMoney heeft een welkomstpagina om nieuwe gebruikers bij een goede start te helpen</caption>
+      <caption xml:lang="pl">KMyMoney zawiera stronę powitalną, aby pomoc nowym użytkownikom w szybkim rozpoczęciu pracy</caption>
       <caption xml:lang="pt">O KMyMoney tem uma página de boas-vindas para ajudar os utilizadores novos a terem um bom início</caption>
       <caption xml:lang="pt-BR">O KMyMoney tem uma página de boas-vindas para ajudar os novos usuários a terem um bom começo</caption>
       <caption xml:lang="sk">KMyMoney má uvítaciu stránku na pomoc novým používateľom na dobrý začiatok</caption>
@@ -99,6 +100,7 @@
       <caption xml:lang="ca">El resum financer us ofereix una visió general de les vostres finances</caption>
       <caption xml:lang="fi">Taloustietojen yhteenveto antaa yleiskuvan taloustilanteestasi</caption>
       <caption xml:lang="nl">De financiële samenvatting geeft u een overzicht van uw financiën</caption>
+      <caption xml:lang="pl">Podsumowanie finansowe daje pogląd na twoje finanse</caption>
       <caption xml:lang="pt">O resumo financeiro dá-lhe uma visão geral sobre as suas finanças</caption>
       <caption xml:lang="pt-BR">O resumo financeiro lhe apresenta uma visão geral das suas finanças</caption>
       <caption xml:lang="sk">Finančný sumár vám poskytne prehľad vašich financií</caption>
@@ -112,6 +114,7 @@
       <caption xml:lang="ca">En aquesta vista s'organitzen, visualitzen i administren els vostres comptes per les institucions que els gestionen</caption>
       <caption xml:lang="fi">Tässä näkymässä tilit järjestellään, katsotaan ja hallitaan niihin liittyvien rahalaitosten kautta</caption>
       <caption xml:lang="nl">In deze weergave zijn uw rekeningen georganiseerd, getoond en beheerd door de banken waar ze berusten</caption>
+      <caption xml:lang="pl">W tym widoku konta są urządzane, oglądane i zarządzane przez instytucje, w których się je obsługuje</caption>
       <caption xml:lang="pt">Nesta janela, poderá organizar, ver e gerir as suas contas, com base nas instituições em que estas estão guardadas</caption>
       <caption xml:lang="pt-BR">Nesta janela as suas contas podem ser organizadas, visualizadas e gerenciadas, com base nas instituições em que estão guardadas</caption>
       <caption xml:lang="sk">V tomto pohľade sú vaše účty usporiadané, zobrazené a spravované inštitúciami, ktoré ich držia</caption>
