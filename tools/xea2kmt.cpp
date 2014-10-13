@@ -31,9 +31,30 @@ QDebug operator <<(QDebug out, const QXmlStreamAttribute &a)
     return out;
 }
 
+bool debug = false;
+
+int toKMyMoneyAccountType(const QString &type)
+{
+    if(type == "ROOT") return 0;
+    else if (type == "BANK") return 1;
+    else if (type == "CASH") return 3;
+    else if (type == "CREDIT") return 4;
+    else if (type == "INVEST") return 7;
+    else if (type == "ASSET") return 9;
+    else if (type == "LIABILITY") return 10;
+    else if (type == "INCOME") return 12;
+    else if (type == "EXPENSE") return 13;
+    else if (type == "STOCK") return 15;
+    else if (type == "MUTUAL") return 15;
+    else if (type == "EQUITY") return 16;
+    else return 99; // unknown
+}
+
 class TemplateAccount {
 public:
-    typedef QList<TemplateAccount> TemplateAccountMap;
+    typedef QList<TemplateAccount> List;
+    typedef QList<TemplateAccount*> PointerList;
+
     QString id;
     QString type;
     QString name;
@@ -71,7 +92,7 @@ public:
                 return true;
             if (xml.isStartElement())
             {
-                QString value = xml.readElementText(QXmlStreamReader::SkipChildElements);
+                QString value = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                 if (_name == "name")
                     name = value;
                 else if (_name == "id")
@@ -84,7 +105,8 @@ public:
                     parent = value;
                 else
                 {
-                    qDebug() << "skipping" << _name.toString();
+                    if (debug)
+                        qDebug() << "skipping" << _name.toString();
                 }
             }
         }
@@ -104,12 +126,21 @@ QDebug operator <<(QDebug out, const TemplateAccount &a)
     return out;
 }
 
+QDebug operator <<(QDebug out, const TemplateAccount::PointerList &a)
+{
+    out << "TemplateAccount::List(";
+    foreach(const TemplateAccount *account, a)
+            out << *account;
+    out << ")";
+    return out;
+}
+
 class TemplateFile {
 public:
     QString title;
     QString longDescription;
     QString shortDescription;
-    TemplateAccount::TemplateAccountMap accounts;
+    TemplateAccount::List accounts;
 
     bool read(QXmlStreamReader &xml)
     {
@@ -118,11 +149,11 @@ public:
         while (xml.readNextStartElement()) {
             QStringRef name = xml.name();
             if (xml.name() == "title")
-                title = xml.readElementText();
+                title = xml.readElementText().trimmed();
             else if (xml.name() == "short-description")
-                shortDescription = xml.readElementText();
+                shortDescription = xml.readElementText().trimmed();
             else if (xml.name() == "long-description")
-                longDescription = xml.readElementText();
+                longDescription = xml.readElementText().trimmed();
             else if (xml.name() == "account")
             {
                 TemplateAccount account;
@@ -131,13 +162,119 @@ public:
             }
             else
             {
-                qDebug() << "skipping" << name.toString();
+                if (debug)
+                    qDebug() << "skipping" << name.toString();
                 xml.skipCurrentElement();
             }
         }
         return true;
     }
 
+    bool writeAsXml(QXmlStreamWriter &xml)
+    {
+        xml.writeStartElement("","title");
+        xml.writeCharacters(title);
+        xml.writeEndElement();
+        xml.writeStartElement("","shortdesc");
+        xml.writeCharacters(shortDescription);
+        xml.writeEndElement();
+        xml.writeStartElement("","longdesc");
+        xml.writeCharacters(longDescription);
+        xml.writeEndElement();
+        xml.writeStartElement("","accounts");
+        bool result = writeAccountsAsXml(xml);
+        xml.writeEndElement();
+        return result;
+    }
+
+    bool writeAccountsAsXml(QXmlStreamWriter &xml, const QString &id="", int index=0)
+    {
+        TemplateAccount::PointerList list;
+
+        if (index == 0)
+            list = accountsByType("ROOT");
+        else
+            list = accountsByParentID(id);
+
+        foreach(TemplateAccount *account, list)
+        {
+            if (account->type != "ROOT")
+            {
+                xml.writeStartElement("","account");
+                xml.writeAttribute("type", QString::number(toKMyMoneyAccountType(account->type)));
+                xml.writeAttribute("name", account->name);
+            }
+            index++;
+            writeAccountsAsXml(xml, account->id, index);
+            index--;
+            xml.writeEndElement();
+        }
+        return true;
+    }
+
+    TemplateAccount *account(const QString &id)
+    {
+        for(int i=0; i < accounts.size(); i++)
+        {
+            TemplateAccount &account = accounts[i];
+            if (account.id == id)
+                return &account;
+        }
+        return 0;
+    }
+
+    TemplateAccount::PointerList accountsByType(const QString &type)
+    {
+        TemplateAccount::PointerList list;
+        for(int i=0; i < accounts.size(); i++)
+        {
+            TemplateAccount &account = accounts[i];
+            if (account.type == type)
+                list.append(&account);
+        }
+        return list;
+    }
+
+
+    static bool nameLessThan(TemplateAccount *a1, TemplateAccount *a2)
+    {
+        return a1->name < a2->name;
+    }
+
+    TemplateAccount::PointerList accountsByParentID(const QString &parentID)
+    {
+        TemplateAccount::PointerList list;
+
+        for(int i=0; i < accounts.size(); i++)
+        {
+            TemplateAccount &account = accounts[i];
+            if (account.parent == parentID)
+                list.append(&account);
+        }
+        qSort(list.begin(), list.end(), nameLessThan);
+        return list;
+    }
+
+    bool dumpTemplates(const QString &id="", int index=0)
+    {
+        TemplateAccount::PointerList list;
+
+        if (index == 0)
+            list = accountsByType("ROOT");
+        else
+            list = accountsByParentID(id);
+
+        foreach(TemplateAccount *account, list)
+        {
+            QString a;
+            a.fill(' ', index);
+            qDebug() << a << account->name << toKMyMoneyAccountType(account->type);
+            index++;
+            dumpTemplates(account->id, index);
+            index--;
+        }
+        return true;
+    }
 };
 
 QDebug operator <<(QDebug out, const TemplateFile &a)
@@ -163,10 +300,11 @@ public:
     {
         QFile file(filename);
         QTextStream in(&file);
-        in.setCodec("UTF-8");
+        in.setCodec("utf-8");
 
         if(!file.open(QIODevice::ReadOnly))
             return false;
+        inFileName = filename;
         return read(in.device());
     }
 
@@ -175,32 +313,107 @@ public:
         return _template;
     }
 
+    bool dumpTemplates()
+    {
+        return _template.dumpTemplates();
+    }
+
+    bool writeAsXml(const QString &filename=QString())
+    {
+        if (filename.isEmpty())
+        {
+            QTextStream stream(stdout);
+            return writeAsXml(stream.device());
+        }
+        else
+        {
+            QFile file(filename);
+            if(!file.open(QIODevice::WriteOnly))
+                return false;
+            return writeAsXml(&file);
+        }
+    }
+
 protected:
     bool read(QIODevice *device)
     {
         xml.setDevice(device);
-
-        if (xml.readNextStartElement()) {
-            QStringRef name = xml.name();
-            if (xml.name() == "gnc-account-example")
-                _template.read(xml);
-            else
-                xml.raiseError(QObject::tr("The file is not an gnucash account template file."));
+        while(!xml.atEnd())
+        {
+            xml.readNext();
+            if (xml.isStartElement())
+            {
+                if (xml.name() == "gnc-account-example")
+                    _template.read(xml);
+                else
+                    xml.raiseError(QObject::tr("The file is not an gnucash account template file."));
+            }
         }
         return !xml.error();
     }
 
+    bool writeAsXml(QIODevice *device)
+    {
+            QXmlStreamWriter xml(device);
+        xml.setAutoFormatting(true);
+        xml.setAutoFormattingIndent(1);
+        xml.setCodec("utf-8");
+        xml.writeStartDocument();
+
+        QString fileName = inFileName.replace(QRegExp(".*/accounts"),"accounts");
+        xml.writeComment(QString("\n"
+            "     Converted using xea2kmt from GnuCash sources\n"
+            "\n"
+            "        %1\n"
+            "\n"
+            "     Please check the source file for possible copyright\n"
+            "     and licence information.\n"
+        ).arg(fileName));
+        xml.writeDTD("<!DOCTYPE KMYMONEY-TEMPLATE>");
+        xml.writeStartElement("","kmymoney-account-template");
+        bool result = _template.writeAsXml(xml);
+        xml.writeEndElement();
+        return result;
+    }
+
     QXmlStreamReader xml;
     TemplateFile _template;
+    QString inFileName;
 };
 
 int main(int argc, char *argv[])
 {
-    GnuCashAccountTemplateReader reader;
-    bool result = reader.read(argv[1]);
-    qDebug() << reader.result();
+    if (argc < 2)
+    {
+        qWarning() << "convert gnucash template file to kmymoney template file";
+        qWarning() << argv[0] << "<options> <gnucash-template-file> [<kmymoney-template-output-file>]";
+        qWarning() << "options:";
+        qWarning() << "          --debug - output debug information";
+        return -1;
+    }
 
-    // create account hierachy
-    // export kmt file
-    return result;
+    QString inFileName;
+    QString outFileName;
+
+    if (QLatin1String(argv[1]) == "--debug")
+    {
+        debug = true;
+        inFileName = argv[2];
+        outFileName = argc > 3 ? argv[3] : "";
+    }
+    else
+    {
+        inFileName = argv[1];
+        outFileName = argc > 2 ? argv[2] : "";
+    }
+
+    GnuCashAccountTemplateReader reader;
+    bool result = reader.read(inFileName);
+    if (debug)
+    {
+        qDebug() << reader.result();
+        reader.dumpTemplates();
+    }
+    reader.writeAsXml(outFileName);
+    return result ? 0 : -2;
 }
