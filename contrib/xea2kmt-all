@@ -6,6 +6,7 @@
 # 
 d=$(dirname $0)
 r=$(realpath $d)
+s=~/src/kmymoney-build/tools
 
 if test -z "$1"; then
     echo "xea2kmt-all <gnucash-templates-dir>"
@@ -29,5 +30,5 @@ for j in $(cd $in; find -name '*-xea'); do
     else
 	echo "using $infile to update $outfile"
     fi
-    $r/xea2kmt $infile > $outfile
+    $s/xea2kmt $infile > $outfile
 done
