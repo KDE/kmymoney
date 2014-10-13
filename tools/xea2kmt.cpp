@@ -20,6 +20,16 @@
 #include <QXmlStreamReader>
 #include <QtDebug>
 
+
+QDebug operator <<(QDebug out, const QXmlStreamNamespaceDeclaration &a)
+{
+    out << "QXmlStreamNamespaceDeclaration("
+        << "prefix:" << a.prefix().toString()
+        << "namespaceuri:" << a.namespaceUri().toString()
+        << ")";
+    return out;
+}
+
 QDebug operator <<(QDebug out, const QXmlStreamAttribute &a)
 {
     out << "QXmlStreamAttribute("
@@ -335,6 +345,21 @@ public:
     }
 
 protected:
+
+    bool checkAndUpdateAvailableNamespaces(QXmlStreamReader &xml)
+    {
+        if (xml.namespaceDeclarations().size() < 5)
+        {
+            qWarning() << "gnucash template file is missing required name space declarations; adding by self";
+        }
+        xml.addExtraNamespaceDeclaration(QXmlStreamNamespaceDeclaration("act", "http://www.gnucash.org/XML/act"));
+        xml.addExtraNamespaceDeclaration(QXmlStreamNamespaceDeclaration("gnc", "http://www.gnucash.org/XML/gnc"));
+        xml.addExtraNamespaceDeclaration(QXmlStreamNamespaceDeclaration("gnc-act", "http://www.gnucash.org/XML/gnc-act"));
+        xml.addExtraNamespaceDeclaration(QXmlStreamNamespaceDeclaration("cmdty","http://www.gnucash.org/XML/cmdty"));
+        xml.addExtraNamespaceDeclaration(QXmlStreamNamespaceDeclaration("slot","http://www.gnucash.org/XML/slot"));
+        return true;
+    }
+
     bool read(QIODevice *device)
     {
         xml.setDevice(device);
@@ -344,7 +369,10 @@ protected:
             if (xml.isStartElement())
             {
                 if (xml.name() == "gnc-account-example")
+                {
+                    checkAndUpdateAvailableNamespaces(xml);
                     _template.read(xml);
+                }
                 else
                     xml.raiseError(QObject::tr("The file is not an gnucash account template file."));
             }
