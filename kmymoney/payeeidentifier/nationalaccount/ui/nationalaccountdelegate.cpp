@@ -20,6 +20,7 @@
 
 #include <QApplication>
 #include <QPainter>
+#include <QAbstractItemView>
 
 #include <KLocalizedString>
 
@@ -46,7 +47,8 @@ void nationalAccountDelegate::paint(QPainter* painter, const QStyleOptionViewIte
   const QRect textArea = QRect(opt.rect.x()+margin, opt.rect.y()+margin, opt.rect.width()-2*margin, opt.rect.height()-2*margin);
 
   // Do not paint text if the edit widget is shown
-  if (opt.state.testFlag(QStyle::State_Editing))
+  const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(opt.widget);
+  if (view && view->indexWidget(index))
     return;
 
   // Get data
@@ -95,12 +97,9 @@ QSize nationalAccountDelegate::sizeHint(const QStyleOptionViewItem& option, cons
   initStyleOption(&opt, index);
 
   // QStyle::State_Editing is never set (seems to be a bug in Qt)! This code is here only because it was written already
-  if ( opt.state.testFlag(QStyle::State_Editing) ) {
-    nationalAccountEdit* edit = new nationalAccountEdit();
-    const QSize hint = edit->sizeHint();
-    delete edit;
-    return hint;
-  }
+  const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(opt.widget);
+  if (view && view->indexWidget(index))
+    return view->indexWidget(index)->sizeHint();
 
   QFontMetrics metrics(option.font);
   const QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
