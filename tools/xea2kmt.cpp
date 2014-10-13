@@ -349,6 +349,8 @@ protected:
                     xml.raiseError(QObject::tr("The file is not an gnucash account template file."));
             }
         }
+        if (xml.error() != QXmlStreamReader::NoError)
+            qWarning() << xml.errorString();
         return !xml.error();
     }
 
