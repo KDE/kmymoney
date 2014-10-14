@@ -50,7 +50,9 @@ int toKMyMoneyAccountType(const QString &type)
     else if (type == "CASH") return 3;
     else if (type == "CREDIT") return 4;
     else if (type == "INVEST") return 7;
+    else if (type == "RECEIVABLE") return 9;
     else if (type == "ASSET") return 9;
+    else if (type == "PAYABLE") return 10;
     else if (type == "LIABILITY") return 10;
     else if (type == "INCOME") return 12;
     else if (type == "EXPENSE") return 13;
