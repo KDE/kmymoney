@@ -405,6 +405,7 @@ protected:
         xml.writeStartElement("","kmymoney-account-template");
         bool result = _template.writeAsXml(xml);
         xml.writeEndElement();
+        xml.writeEndDocument();
         return result;
     }
 
