@@ -427,17 +427,23 @@ int main(int argc, char *argv[])
 
     QString inFileName;
     QString outFileName;
-
-    if (QLatin1String(argv[1]) == "--debug")
+    for(int i = 1; i < argc; i++)
     {
-        debug = true;
-        inFileName = argv[2];
-        outFileName = argc > 3 ? argv[3] : "";
-    }
-    else
-    {
-        inFileName = argv[1];
-        outFileName = argc > 2 ? argv[2] : "";
+        QString arg = QLatin1String(argv[i]);
+        if (arg == "--debug")
+            debug = true;
+        else if (!arg.startsWith("--"))
+        {
+            if (inFileName.isEmpty())
+                inFileName = arg;
+            else
+                outFileName = arg;
+        }
+        else
+        {
+            qWarning() << "invalid command line parameter'" << arg << "'";
+            return -1;
+        }
     }
 
     GnuCashAccountTemplateReader reader;
