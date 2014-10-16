@@ -42,6 +42,7 @@ QDebug operator <<(QDebug out, const QXmlStreamAttribute &a)
 }
 
 bool debug = false;
+bool withID = false;
 
 int toKMyMoneyAccountType(const QString &type)
 {
@@ -215,6 +216,8 @@ public:
                 xml.writeStartElement("","account");
                 xml.writeAttribute("type", QString::number(toKMyMoneyAccountType(account->type)));
                 xml.writeAttribute("name", account->name);
+                if (withID)
+                    xml.writeAttribute("id", account->id);
             }
             index++;
             writeAccountsAsXml(xml, account->id, index);
@@ -421,7 +424,8 @@ int main(int argc, char *argv[])
         qWarning() << "convert gnucash template file to kmymoney template file";
         qWarning() << argv[0] << "<options> <gnucash-template-file> [<kmymoney-template-output-file>]";
         qWarning() << "options:";
-        qWarning() << "          --debug - output debug information";
+        qWarning() << "          --debug   - output debug information";
+        qWarning() << "          --with-id - write account id attribute";
         return -1;
     }
 
@@ -432,6 +436,8 @@ int main(int argc, char *argv[])
         QString arg = QLatin1String(argv[i]);
         if (arg == "--debug")
             debug = true;
+        else if (arg == "--with-id")
+            withID = true;
         else if (!arg.startsWith("--"))
         {
             if (inFileName.isEmpty())
