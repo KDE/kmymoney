@@ -62,7 +62,7 @@ if(KDE4_BUILD_TESTS)
   target_link_libraries(symboltest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS}
     ${QT_QTTEST_LIBRARY} ${KDE4_KDECORE_LIBS} ${GMP_LIBRARIES}
     ${LIBALKIMIA_LIBRARY} kmm_mymoney)
-endif((KDE4_BUILD_TESTS)
+endif(KDE4_BUILD_TESTS)
 
 ########### install files ###############
 
