@@ -30,5 +30,5 @@ for j in $(cd $in; find -name '*-xea'); do
     else
 	echo "using $infile to update $outfile"
     fi
-    $s/xea2kmt $infile > $outfile
+    $s/xea2kmt --no-level1-names $infile > $outfile
 done
