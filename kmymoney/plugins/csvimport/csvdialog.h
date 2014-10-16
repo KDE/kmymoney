@@ -59,7 +59,7 @@ private:
   } m_csvSplit;
 
 public:
-  explicit CSVDialog(QWidget *parent = 0);
+  explicit CSVDialog();
   ~CSVDialog();
 
   enum { Page_Intro, Page_Separator, Page_Banking, Page_Investment,
@@ -153,6 +153,9 @@ public:
   bool           m_delimiterError;
   bool           m_needFieldDelimiter;
   bool           m_firstField;
+  bool           m_errorFoundAlready;
+  bool           m_rowWidthsDone;
+  bool           m_widthResized;
 
   int            m_dateFormatIndex;
   int            m_debitFlag;
@@ -163,17 +166,22 @@ public:
   int            m_flagCol;
   int            m_row;
   int            m_visibleRows;
-  int            m_rowHght;
+  int            m_rowHeight;
   int            m_tableHeight;
   int            m_activityType;
   int            m_initHeight;
   int            m_startHeight;
   int            m_hScrollBarHeight;
+  int            m_vScrollBarWidth;
+  int            m_vHeaderWidth;
   int            m_header;
   int            m_borders;
   int            m_possibleDelimiter;
   int            m_lastDelimiterIndex;
   int            m_errorColumn;
+  int            m_pluginWidth;
+  int            m_pluginHeight;
+  int            m_windowHeight;
 
   KUrl           m_url;
   KComboBox*     m_comboBoxEncode;
@@ -239,19 +247,19 @@ public:
   void           clearComboBoxText();
 
   /**
-   * This method is called when an input file has been selected, to clear
-   * previous column selections.
-   */
+  * This method is called when an input file has been selected, to clear
+  * previous column selections.
+  */
   void           clearColumnTypesList();
 
   int            columnNumber(const QString& msg);
 
   /**
-    * This method is called initially after an input file has been selected.
-    * It will call other routines to display file content and to complete the
-    * statement import. It will also be called to reposition the file after row
-    * deletion, or to reread following encoding or delimiter change.
-    */
+  * This method is called initially after an input file has been selected.
+  * It will call other routines to display file content and to complete the
+  * statement import. It will also be called to reposition the file after row
+  * deletion, or to reread following encoding or delimiter change.
+  */
   void           readFile(const QString& fname);
 
   /**
@@ -268,9 +276,9 @@ public:
   void           updateDecimalSymbol(const QString&, int col);
 
   /**
-    * This method is called when an input file has been selected.
-    * It will enable the UI elements for column selection.
-    */
+  * This method is called when an input file has been selected.
+  * It will enable the UI elements for column selection.
+  */
   void           enableInputs();
 
   /**
@@ -340,15 +348,13 @@ public:
   */
   void           createProfile(QString newName);
 
-  void           redrawWindow(int startLine);
   void           showStage();
 
   /**
-   *  Clear cells background.
-   */
+  *  Clear cells background.
+  */
   void           clearCellsBackground();
   void           clearColumnTypeList();
-  void           setMemoColSelections();
 
   int            endColumn();
   int            fieldDelimiterIndex();
@@ -364,7 +370,6 @@ public:
   QPixmap        m_iconCSV;
   QPixmap        m_iconFinish;
   QPixmap        m_iconImport;
-
   QPixmap        m_iconNext;
   QPixmap        m_iconQIF;
 
@@ -385,9 +390,9 @@ public slots:
   void           slotVertScrollBarMoved(int val);
 
   /**
-    * This method is called when the user clicks 'Open File', and opens
-    * a file selector dialog.
-    */
+  * This method is called when the user clicks 'Open File', and opens
+  * a file selector dialog.
+  */
   void           slotFileDialogClicked();
 
   /**
@@ -422,7 +427,6 @@ public slots:
   */
   void           decimalSymbolSelected(int);
   void           decimalSymbolSelected();
-
   void           markUnwantedRows();
 
 private:
@@ -458,6 +462,9 @@ private:
   bool             m_clearAll;
   bool             m_firstIsValid;
   bool             m_secondIsValid;
+  bool             m_initWindow;
+  bool             m_resizing;
+  bool             m_vScrollBarVisible;
 
   int              m_amountColumn;
   int              m_creditColumn;
@@ -485,6 +492,7 @@ private:
   int              m_minimumHeight;
   int              m_windowWidth;
   int              m_initialHeight;
+  int              m_rectWidth;
 
   QBrush           m_clearBrush;
   QBrush           m_colorBrush;
@@ -499,11 +507,24 @@ private:
   void             closeEvent(QCloseEvent *event);
   bool             eventFilter(QObject *object, QEvent *event);
   void             restoreBackground();
+  void             resizeEvent(QResizeEvent* ev);
 
   /**
-   * Check that the debit and credit field combination
-   * is valid.
-   */
+  * Recalculates column widths for the visible rows
+  */
+  void             updateColumnWidths(int firstLine, int lastLine);
+
+  /**
+  * Called in order to adjust window size to suit the file,
+  * depending upon column data width between current firstLine and lastLine
+  * and also the number of rows.
+  */
+  void             setWindowSize(int firstLine, int lastLine);
+
+  /**
+  * Check that the debit and credit field combination
+  * is valid.
+  */
   int              ensureBothFieldsValid(int);
   int              validateColumn(const int& col, QString& type);
 
@@ -591,21 +612,15 @@ private slots:
   void           categoryColumnSelected(int);
 
   /**
-  * This method is called when 'Cancel' is clicked.  Unless the user chooses
-  * to continue, no settings will be saved, and the plugin will be terminated.
-  */
-  void           slotCancel();
-
-  /**
-  * This method is called when 'Quit' is clicked.  The plugin settings will
+  * This method is called when 'Exit' is clicked.  The plugin settings will
   * be saved and the plugin will be terminated.
   */
   void           slotClose();
 
   /**
-    * This method is called when the user selects a new thousands separator.  The
-    * UI is updated using the new symbol.
-    */
+  * This method is called when the user selects a new thousands separator.  The
+  * UI is updated using the new symbol.
+  */
   void           thousandsSeparatorChanged();
 
   /**
@@ -876,4 +891,3 @@ private slots:
 };
 
 #endif // CSVDIALOG_H
-

@@ -39,6 +39,7 @@
 #include <KInputDialog>
 #include <KSharedConfig>
 #include <kmessagebox.h>
+#include <kstdguiitem.h>
 #include <KStandardDirs>
 #include <KLocale>
 #include <KIO/NetAccess>
@@ -188,10 +189,6 @@ void InvestProcessing::slotFileDialogClicked()
   for (int i = 0; i < m_csvDialog->ui->tableWidget->columnCount(); i++) {
     m_csvDialog->ui->tableWidget->setColumnWidth(i, 0);
   }
-  m_csvDialog->m_tableHeight = m_csvDialog->m_header + m_csvDialog->m_rowHght * m_csvDialog->m_visibleRows + m_csvDialog->m_borders;
-  QRect rect = m_csvDialog->ui->frame_main->frameRect();
-  rect.setHeight(m_csvDialog->m_tableHeight);
-  m_csvDialog->ui->frame_main->setFrameRect(rect);
 
   m_inFileName.clear();
   m_url.clear();
@@ -209,6 +206,7 @@ void InvestProcessing::slotFileDialogClicked()
   m_csvDialog->m_delimiterError = false;
   m_importCompleted = false;
   m_csvDialog->m_accept = false;
+  m_initWindow = true;
 
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locate("config", "csvimporterrc"));
   bool found = false;
@@ -279,13 +277,16 @@ void InvestProcessing::slotFileDialogClicked()
     if (m_columnTypeList[i] == "memo") {
       m_columnTypeList[i].clear();   //    ensure no memo entries remain
     }
-  m_csvDialog->m_hScrollBarHeight = 0;
   //
   //  This line seems to be needed when selecting a new file
   //  after previously selecting one.  Reset later.
   //
   disconnect(m_csvDialog->m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
   m_csvDialog->ui->tableWidget->horizontalScrollBar()->setSliderPosition(0);
+
+  KConfigGroup mainGroup(config, "MainWindow");
+  m_csvDialog->m_pluginHeight = mainGroup.readEntry("Height", 640);
+  m_csvDialog->m_pluginWidth = mainGroup.readEntry("Width", 800);
 
   readFile(m_csvDialog->m_inFileName);
   m_invPath  =  m_csvDialog->m_inFileName;
@@ -839,6 +840,9 @@ void InvestProcessing::readFile(const QString& fname)
   MyMoneyStatement st = MyMoneyStatement();
   MyMoneyStatement stBrokerage = MyMoneyStatement();
   m_csvDialog->m_importError = false;
+  m_csvDialog->m_errorFoundAlready = false;
+  m_csvDialog->m_rowWidthsDone = false;
+  m_initWindow = true;
   m_fieldDelimiterIndex = m_csvDialog->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex();
   if (m_fieldDelimiterIndex == -1) {
     return;
@@ -852,7 +856,6 @@ void InvestProcessing::readFile(const QString& fname)
 
   m_csvDialog->ui->tableWidget->clear();// including vert headers
   m_csvDialog->ui->tableWidget->verticalScrollBar()->setValue(0);
-  m_csvDialog->m_startHeight = 0;
   m_inBuffer.clear();
   m_outBuffer = "!Type:Invst\n";
   m_brokerBuff.clear();
@@ -897,6 +900,9 @@ void InvestProcessing::readFile(const QString& fname)
     } else {
       columnCount = m_maxColumnCount;
     }
+  }
+  if (m_fileEndLine == 0) { // copy from later
+      m_fileEndLine = m_parse->lastLine();
   }
   m_csvDialog->ui->tableWidget->setColumnCount(m_maxColumnCount);
   disconnect(m_csvDialog->m_pageLinesDate->ui->spinBox_skip, 0, 0, 0);  //  Avoid disruption from start/endline changes.
@@ -995,10 +1001,10 @@ void InvestProcessing::readFile(const QString& fname)
   }
 
   m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast->setValue(m_endLine);
+  m_csvDialog->ui->tableWidget->setRowCount(m_endLine);
   connect(m_csvDialog->m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
   connect(m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), this, SLOT(endLineChanged(int)));
 
-  m_csvDialog->ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Fixed);
   //  Display the buffer
   for (int line = 0; line < m_lineList.count(); line++) {
     m_inBuffer = m_lineList[line];
@@ -1029,11 +1035,8 @@ void InvestProcessing::readFile(const QString& fname)
     m_csvDialog->m_pageLinesDate->ui->spinBox_skip->setEnabled(true);
     m_endColumn = m_maxColumnCount;
   }// end of buffer
-  m_csvDialog->m_header = m_csvDialog->ui->tableWidget->horizontalHeader()->height() + 6;
-  m_csvDialog->m_tableHeight = m_csvDialog->m_header + m_csvDialog->m_rowHght * m_csvDialog->m_visibleRows + m_csvDialog->m_borders;
-  m_csvDialog->ui->tableWidget->resizeColumnsToContents();
 
-  redrawWindow(m_startLine - 1);
+  setWindowSize(-1, -1);
 
   if ((m_importNow) && (m_csvDialog->m_fileType == "Invest")) {
     if ((!m_inFileName.isEmpty()) && (m_amountColumn >= 0) && (m_quantityColumn >= 0) && (m_priceColumn >= 0)) {
@@ -1063,6 +1066,61 @@ void InvestProcessing::readFile(const QString& fname)
   m_csvDialog->m_columnsNotSet = false;  //  Prevent check of column settings until user sees them.
 }
 
+void InvestProcessing::setWindowSize(int firstLine, int lastLine)
+{
+  int screenHeight = QApplication::desktop()->height();
+  int launcherHeight = 41;//  allow for horizontal app launch bar - approx
+  int variousMarginsEtc = 120;//  all margins, hscrollbar, title, gap between frames, etc.
+  int maxLines = (screenHeight - launcherHeight - m_csvDialog->ui->frame_low->height() - variousMarginsEtc) / m_csvDialog->m_rowHeight;
+
+  if (m_initWindow) {
+    m_csvDialog->m_visibleRows = qMin(m_lineList.count(), maxLines);
+    m_initWindow = false;
+  }
+  m_csvDialog->m_tableHeight = m_csvDialog->m_visibleRows * m_csvDialog->m_rowHeight + m_csvDialog->m_header + m_csvDialog->m_hScrollBarHeight + 2;
+
+  if (firstLine == - 1 || lastLine == -1) {
+    updateColumnWidths(0, m_lineList.count() - 1);
+  } else {
+    updateColumnWidths(firstLine, lastLine);
+  }
+
+  QRect rect;
+  rect = m_csvDialog->ui->frame_main->frameRect();
+  m_csvDialog->ui->frame_main->setMinimumHeight(120);
+
+  QMargins hLayout_MainMargin = m_csvDialog->ui->horizontalLayout_Main->layout()->contentsMargins();
+  QMargins vLayoutMargin = m_csvDialog->ui->verticalLayout->layout()->contentsMargins();
+
+  m_csvDialog->m_vHeaderWidth = m_csvDialog->ui->tableWidget->verticalHeader()->width();
+  if (m_csvDialog->m_visibleRows < 10) {
+    m_csvDialog->m_vHeaderWidth = 18;  //  allow space for double-digit row number
+  } else {
+    m_csvDialog->m_vHeaderWidth = 26;
+  }
+
+  if (m_csvDialog->m_visibleRows < m_fileEndLine) {
+    //  vert scrollbar is visible
+    m_csvDialog->m_vScrollBarWidth = m_csvDialog->ui->tableWidget->verticalScrollBar()->width();
+  } else {
+    m_csvDialog->m_vScrollBarWidth = 0;
+  }
+
+  int wd = m_rowWidth + m_csvDialog->m_vHeaderWidth;
+  //
+  //  resize
+  //
+  int scrollbarWidth = 17;  //  scrollbar space for when needed
+  variousMarginsEtc = 58;//  all margins, hscrollbar, title, gap between frames, etc.
+
+  m_csvDialog->resize(wd +  2 * (vLayoutMargin.left() +1) + 12 + hLayout_MainMargin.left() + hLayout_MainMargin.right() + scrollbarWidth,
+                      m_csvDialog->m_tableHeight + m_csvDialog->ui->frame_low->height() + 4 * (vLayoutMargin.top() +1) + 8);
+
+  rect.setHeight(m_csvDialog->height() - m_csvDialog->ui->frame_low->height() - m_csvDialog->m_hScrollBarHeight - m_csvDialog->m_header - 4 * (vLayoutMargin.top() +1) + variousMarginsEtc);
+  rect.setWidth(m_csvDialog->width() - hLayout_MainMargin.left() - hLayout_MainMargin.right());
+  m_csvDialog->ui->frame_main->setFrameRect(rect);
+}
+
 void InvestProcessing::displayLine(const QString& data)
 {
   QBrush dropBrush;
@@ -1070,6 +1128,8 @@ void InvestProcessing::displayLine(const QString& data)
   dropColor.setRgb(255, 0, 127, 100);
   dropBrush.setColor(dropColor);
   dropBrush.setStyle(Qt::SolidPattern);
+  QFont font(QApplication::font());
+  m_csvDialog->ui->tableWidget->setFont(font);
 
   m_fieldDelimiterIndex = m_csvDialog->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex();
   m_parse->setFieldDelimiterIndex(m_fieldDelimiterIndex);
@@ -1108,14 +1168,21 @@ void InvestProcessing::displayLine(const QString& data)
   QStringList::const_iterator constIterator;
   for (constIterator = m_columnList.constBegin(); constIterator != m_columnList.constEnd();
        ++constIterator) {
-    QString txt = (*constIterator);
+    QString txt = (*constIterator) + "  ";
     QTableWidgetItem *item = new QTableWidgetItem;  //             new item for UI
     item->setText(txt);
     m_csvDialog->ui->tableWidget->setRowCount(m_row + 1);
     m_csvDialog->ui->tableWidget->setItem(m_row, col, item);  //   add items to UI here
     m_csvDialog->ui->tableWidget->setRowHeight(m_row, 30);
     m_rowWidth += m_csvDialog->ui->tableWidget->columnWidth(col);
+    m_csvDialog->ui->tableWidget->resizeColumnToContents(col);
     col ++;
+  }
+
+  if (m_csvDialog->ui->tableWidget->horizontalScrollBar()->isVisible()) {
+    m_csvDialog->m_hScrollBarHeight = 17;
+  } else {
+    m_csvDialog->m_hScrollBarHeight = 0;
   }
   ++m_row;
 }
@@ -1763,7 +1830,11 @@ void InvestProcessing::saveAs()
     QStringList outFile = m_inFileName .split('.');
     const KUrl& name = QString((outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif");
 
-    QString outFileName = KFileDialog::getSaveFileName(name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")), 0, i18n("Save QIF"), KFileDialog::ConfirmOverwrite);
+    QString outFileName = KFileDialog::getSaveFileName(name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")), 0, i18n("Save QIF")
+#if KDE_IS_VERSION(4,4,0)
+                          , KFileDialog::ConfirmOverwrite
+#endif
+                                                      );
     QFile oFile(outFileName);
     oFile.open(QIODevice::WriteOnly);
     QTextStream out(&oFile);
@@ -1793,12 +1864,11 @@ void InvestProcessing::startLineChanged(int val)
     return;
   }
   m_startLine = val;
-  m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast->setMinimum(m_csvDialog->m_investProcessing->m_startLine);  //  need to update UI
+  m_csvDialog->m_pageLinesDate->ui->spinBox_skipToLast->setMinimum(m_csvDialog->m_investProcessing->m_startLine);  //  to update UI
 
   if (!m_inFileName.isEmpty()) {
     m_csvDialog->m_vScrollBar->setValue(m_startLine - 1);
     m_csvDialog->markUnwantedRows();
-    redrawWindow(m_startLine - 1);
   }
 }
 
@@ -1822,14 +1892,13 @@ void InvestProcessing::endLineChanged(int val)
   }
   m_csvDialog->m_pageLinesDate->m_trailerLines = m_fileEndLine - val;
   m_endLine = val;
-  m_csvDialog->ui->tableWidget->verticalScrollBar()->setValue(val);
   if (!m_inFileName.isEmpty()) {
     m_csvDialog->markUnwantedRows();
-    int strt = val - 9;
+    int strt = val - m_csvDialog->m_visibleRows;
     if (strt < 0) {  //  start line too low
       strt = 0;
     }
-    redrawWindow(strt);
+    updateColumnWidths(strt, strt + m_csvDialog->m_visibleRows);
   }
 }
 
@@ -2017,8 +2086,9 @@ void InvestProcessing::readSettings()
       m_csvDialog->m_pageInvestment->ui->comboBoxInv_symbolCol->setCurrentIndex(tmp);
       m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
 
-      tmp = profilesGroup.readEntry("DecimalSymbol", 0);
+      tmp = profilesGroup.readEntry("", 0);
       m_csvDialog->setDecimalSymbol(tmp);
+      m_parse->setDecimalSymbolIndex(tmp);
       m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(tmp);
       m_csvDialog->m_pageCompletion->ui->comboBox_thousandsDelimiter->setCurrentIndex(-1);
 
@@ -2034,6 +2104,10 @@ void InvestProcessing::readSettings()
       m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol->setCurrentIndex(-1);
     }
   }
+  KConfigGroup mainGroup(config, "MainWindow");
+  m_csvDialog->m_pluginHeight = mainGroup.readEntry("Height", 640);
+  m_csvDialog->m_pluginWidth = mainGroup.readEntry("Width", 800);
+
   if (m_columnTypeList.count() < 4) {  //  m_columnTypeList invalid
     m_previousColumn = -1;
     m_previousType = -1;
@@ -2056,28 +2130,20 @@ void InvestProcessing::reloadUISettings()
 void InvestProcessing::redrawWindow(int startLine)
 {
   bool ok = true;
-  int tableHeight;
-  m_csvDialog->m_tableHeight = m_csvDialog->m_header + m_csvDialog->m_rowHght * m_csvDialog->m_visibleRows + m_csvDialog->m_borders;
-  m_csvDialog->ui->tableWidget->setRowHeight(0, m_csvDialog->m_rowHght);
-
-  QRect rect = m_csvDialog->ui->frame_main->frameRect();
-  rect.setHeight(m_csvDialog->m_tableHeight);
-  m_csvDialog->ui->frame_main->setFrameRect(rect);
-  m_topLine = startLine;
-  //  ensure columnwidth reflects data width
-  m_csvDialog->ui->tableWidget->setColumnWidth(0, 100);
-  int end = m_topLine + m_csvDialog->m_visibleRows;
-  if (end > m_fileEndLine) {
-    end = m_fileEndLine;
+  if (m_firstRead) {  //  Don't redraw until file has been read
+    return;
   }
-  if (end > m_csvDialog->m_visibleRows) {
-    m_topLine = end - m_csvDialog->m_visibleRows;
+  m_csvDialog->ui->tableWidget->hide();  //  needed to ensure scrollbar.isVisible() is uptodate
+  m_csvDialog->ui->tableWidget->show();
+
+  if (m_csvDialog->ui->tableWidget->verticalScrollBar()->isVisible()) {
+    m_csvDialog->m_vScrollBarWidth = m_csvDialog->ui->tableWidget->verticalScrollBar()->width() + 4;
   } else {
-    m_topLine = 0;
+    m_csvDialog->m_vScrollBarWidth = 0;
   }
-
-  m_csvDialog->m_vScrollBar->setMaximum(m_fileEndLine - m_csvDialog->m_vScrollBar->pageStep());
-  m_csvDialog->m_vScrollBar->setValue(m_topLine);
+  //  ensure columnwidth reflects data width
+  startLine = 0;
+  m_topLine = startLine;
   m_maxRowWidth = 0;
   m_rowWidth = 0;
   //
@@ -2087,57 +2153,7 @@ void InvestProcessing::redrawWindow(int startLine)
     m_csvDialog->ui->tableWidget->setColumnCount(2);
     m_csvDialog->ui->tableWidget->setColumnWidth(1, 1);
   }
-  //
-  //  Need to find max. column width in case a hor. scroll-bar increases table height.
-  //
-  for (int col = 0; col < m_csvDialog->ui->tableWidget->columnCount(); col ++) {
-    int maxColWidth = 0;
-
-    for (int row = m_topLine; row < end; row++) {
-      if ((row >= m_lineList.count()) || (row >= m_fileEndLine)) {
-        break;
-      }
-
-      if (m_csvDialog->ui->tableWidget->item(row, col) == 0) {  //  cell does not exist
-        continue;
-      }
-      //
-      //  Ensure colwidth is wide enough for true data width.
-      //
-      int colWidth = m_csvDialog->ui->tableWidget->columnWidth(col);
-      QLabel label;
-      label.setText(m_csvDialog->ui->tableWidget->item(row, col)->text());
-      int wd = label.sizeHint().width() + 10;
-      if (wd > colWidth) {
-        colWidth = wd;
-      }
-      if (colWidth > maxColWidth) {
-        maxColWidth = colWidth;
-      }
-    }  //  end rows
-
-    if (maxColWidth == 0) {
-      maxColWidth = 49;
-    }
-    m_csvDialog->ui->tableWidget->setColumnWidth(col, maxColWidth);
-    m_rowWidth += maxColWidth;
-  }  //  end cols
-  m_maxRowWidth = m_rowWidth;
-  m_csvDialog->m_hScrollBarHeight = 0;
-
-  tableHeight = m_csvDialog->m_tableHeight + m_csvDialog->m_hScrollBarHeight;
-  rect = m_csvDialog->ui->frame_main->frameRect();
-  rect.setHeight(tableHeight);
-  m_csvDialog->ui->frame_main->setFrameRect(rect);
-  if (m_maxRowWidth > m_csvDialog->ui->tableWidget->width() - m_csvDialog->ui->tableWidget->verticalScrollBar()->width() - m_csvDialog->ui->tableWidget->verticalHeader()->width()) {
-    //  Wide enough for scroll-bar to show
-    m_csvDialog->m_hScrollBarHeight = 17;
-    tableHeight = m_csvDialog->m_tableHeight + m_csvDialog->m_hScrollBarHeight;
-
-    rect = m_csvDialog->ui->frame_main->frameRect();
-    rect.setHeight(tableHeight);
-    m_csvDialog->ui->frame_main->setFrameRect(rect);
-  }
+  setWindowSize(m_topLine, m_topLine + m_csvDialog->m_visibleRows);
   //
   //  Align numeric column values
   //
@@ -2381,4 +2397,48 @@ void InvestProcessing::hideSecurity()
     m_securityList.removeAt(index);
     m_securityName.clear();
   }
+}
+
+void InvestProcessing::updateColumnWidths(int firstLine, int lastLine)
+{
+  m_rowWidth = 0;
+  m_fileEndLine = m_parse->lastLine();
+  QFont font(QApplication::font());
+  QFontMetrics cellFontMetrics(font);
+  //
+  //  Need to recalculate column widths in the visible rows,
+  //  to allow shrinking or expanding with the data.
+  //
+  for (int col = 0; col < m_csvDialog->ui->tableWidget->columnCount(); col ++) {
+    int maxColWidth = 0;
+    for (int row = firstLine; row <= lastLine; row++) {
+      if ((row >= m_lineList.count()) || (row >= m_fileEndLine)) {
+        break;
+      }
+
+      if (m_csvDialog->ui->tableWidget->item(row, col) == 0) {  //  cell does not exist
+        continue;
+      }
+      //
+      //  Ensure colwidth is wide enough for true data width.
+      //
+      int colWidth = 0;
+      QLabel label;
+      label.setText(m_csvDialog->ui->tableWidget->item(row, col)->text() + "  ");
+      int pad = 0;
+      if (col < 10) {
+        pad = 6;  //  need to leave extraspace for column number in header
+      }
+      int wd = 1.05 * cellFontMetrics.width(label.text() + "  ") + pad;
+      if (wd > colWidth) {
+        colWidth = wd;
+      }
+      if (colWidth > maxColWidth) {
+        maxColWidth = colWidth;
+      }
+    }  //  end rows
+    m_csvDialog->ui->tableWidget->setColumnWidth(col, maxColWidth);
+    m_rowWidth += maxColWidth;
+  }  //  end cols
+  return;
 }
