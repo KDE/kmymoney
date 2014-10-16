@@ -144,6 +144,17 @@ public:
   */
   void           redrawWindow(int startLine);
 
+  /**
+   * Recalculates column widths for the visible rows
+  */
+  void           updateColumnWidths(int firstLine, int lastLine);
+  
+  /**
+  * Called on reading a file in order to
+  * adjust window size to suit the file.
+  */
+  void           setWindowSize(int firstLine, int lastLine);
+
   QString        columnType(int column);
   QString        invPath();
   QString        inFileName();
@@ -199,6 +210,7 @@ public:
   int            m_startLine;
   int            m_topLine;
   int            m_row;
+  int            m_rowWidth;
   int            m_fieldDelimiterIndex;
 
   bool           m_screenUpdated;
@@ -464,7 +476,8 @@ private:
   int            m_typeColumn;
   int            m_symbolRow;
   int            m_maxRowWidth;
-  int            m_rowWidth;
+  int            m_initWindow;
+  int            m_screenWidth;
 
   QString        m_accountName;
   QString        m_brokerBuff;
