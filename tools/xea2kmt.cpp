@@ -43,6 +43,7 @@ QDebug operator <<(QDebug out, const QXmlStreamAttribute &a)
 
 bool debug = false;
 bool withID = false;
+bool noLevel1Names = false;
 
 int toKMyMoneyAccountType(const QString &type)
 {
@@ -215,7 +216,7 @@ public:
             {
                 xml.writeStartElement("","account");
                 xml.writeAttribute("type", QString::number(toKMyMoneyAccountType(account->type)));
-                xml.writeAttribute("name", account->name);
+                xml.writeAttribute("name", noLevel1Names && index < 2 ? "" : account->name);
                 if (withID)
                     xml.writeAttribute("id", account->id);
             }
@@ -438,6 +439,8 @@ int main(int argc, char *argv[])
             debug = true;
         else if (arg == "--with-id")
             withID = true;
+        else if (arg == "--no-level1-names")
+            noLevel1Names = true;
         else if (!arg.startsWith("--"))
         {
             if (inFileName.isEmpty())
