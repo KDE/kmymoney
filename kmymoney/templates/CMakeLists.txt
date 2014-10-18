@@ -8,3 +8,9 @@ install(DIRECTORY
   PATTERN ".svn" EXCLUDE
   PATTERN "*Make*" EXCLUDE
   )
+
+########### test files ###############
+#
+# A simple testrun could be done like follows with a simple shell command:
+#
+# find -name \*.kmt -print0 | xargs --null xmllint --noout --dtdvalid kmt.dtd
