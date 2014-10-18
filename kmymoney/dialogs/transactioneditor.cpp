@@ -1641,6 +1641,10 @@ void StdTransactionEditor::slotUpdateAmount(const QString& txt)
 
 void StdTransactionEditor::updateAmount(const MyMoneyMoney& val)
 {
+  // we don't do anything if we have multiple transactions selected
+  if (isMultiSelection())
+    return;
+
   QLabel *categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
   if (categoryLabel) {
     KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(m_editWidgets["cashflow"]);
