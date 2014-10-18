@@ -1818,11 +1818,6 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     postDate->markAsBadDate();
     postDate->setToolTip("");
   }
-  bool payeeIsPresent = false;
-  bool categoryIsPresent = false;
-  bool amountIsPresent = false;
-  bool memoIsPresent = false;
-  bool dateIsPresent = false;
 
   for (it_w = m_editWidgets.begin(); it_w != m_editWidgets.end(); ++it_w) {
     KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it_w);
@@ -1833,22 +1828,14 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(*it_w);
     KTextEdit* memo = dynamic_cast<KTextEdit*>(*it_w);
 
-    if (payee && !(payee->currentText().isEmpty())) {
-      payeeIsPresent = true;
-    }
+    if (payee && !(payee->currentText().isEmpty()))
+      break;
 
-//    if (tagContainer && !(tagContainer->selectedTags().isEmpty()))  //  Tag is not a mandatory field
-//      break;
+    if (category && !category->lineEdit()->text().isEmpty())
+      break;
 
-    //  Mandatory fields
-
-    if (category && !category->lineEdit()->text().isEmpty()) {
-      categoryIsPresent = true;
-    }
-
-    if (amount && !(amount->value().isZero())) {
-      amountIsPresent = true;
-    }
+    if (amount && !(amount->value().isZero()))
+      break;
 
     // the following widgets are only checked if we are editing multiple transactions
     if (isMultiSelection()) {
@@ -1862,24 +1849,17 @@ bool StdTransactionEditor::isComplete(QString& reason) const
       if (cashflow && cashflow->direction() != KMyMoneyRegister::Unknown)
         break;
 
-      if (postDate->date().isValid() && (postDate->date() >= m_account.openingDate())) {
-        dateIsPresent = true;
+      if (postDate->date().isValid() && (postDate->date() >= m_account.openingDate()))
         break;
-      }
 
-      if (memo && m_memoChanged) {
-        memoIsPresent = true;
+      if (memo && m_memoChanged)
         break;
-      }
 
       if (tagContainer && !(tagContainer->selectedTags().isEmpty()))  //  Tag is optional field
         break;
     }
   }
-  bool rc = (categoryIsPresent && amountIsPresent);  //   usual mandatory fields
-  bool rc1 = (payeeIsPresent || categoryIsPresent || amountIsPresent || memoIsPresent) || dateIsPresent;  //  if isMultiSelection(), these are optional
-
-  return (rc || (isMultiSelection() && (it_w != m_editWidgets.end() || rc1)));
+  return it_w != m_editWidgets.end();
 }
 
 void StdTransactionEditor::slotCreateCategory(const QString& name, QString& id)
