@@ -72,7 +72,6 @@ bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares, const MyMoneyTra
       if (priceInfo.find(cat.currencyId()) != priceInfo.end()) {
         toValue = (fromValue * priceInfo[cat.currencyId()]).convert(fract);
       }
-
       // if the shares are still 0, we need to change that
       if (toValue.isZero()) {
         MyMoneyPrice price = file->price(fromCurrency.id(), toCurrency.id());
@@ -156,7 +155,7 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
   if (m_result == MyMoneyMoney() && !m_value.isZero()) {
     MyMoneyPrice pr = file->price(m_fromCurrency.id(), m_toCurrency.id(), date);
     if (pr.isValid()) {
-      m_result = m_value * pr.rate(m_fromCurrency.id());
+      m_result = m_value * pr.rate(m_toCurrency.id());
     }
   }
 
