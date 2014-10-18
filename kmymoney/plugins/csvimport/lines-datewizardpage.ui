@@ -45,7 +45,7 @@
        </property>
        <property name="text">
         <string>Please select the start and end lines.
-Esure you drop any trailer lines.
+Ensure you drop any trailer lines.
 Also, select the correct date format.</string>
        </property>
        <property name="alignment">
