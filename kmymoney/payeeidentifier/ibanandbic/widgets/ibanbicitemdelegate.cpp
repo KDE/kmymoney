@@ -60,17 +60,17 @@ void ibanBicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
   const QFont smallFont = painter->font();
   const QFontMetrics metrics( opt.font );
   const QFontMetrics smallMetrics( smallFont );
-  const QRect bicRect = style->alignedRect(opt.direction, Qt::AlignTop, QSize(textArea.width(), smallMetrics.lineSpacing()),
+  const QRect bicRect = style->alignedRect((opt.direction  == Qt::RightToLeft) ? Qt::LeftToRight : Qt::RightToLeft, Qt::AlignTop, QSize(textArea.width(), smallMetrics.lineSpacing()),
                                            QRect(textArea.left(), metrics.lineSpacing()+textArea.top(), textArea.width(), smallMetrics.lineSpacing())
                                           );
   painter->setFont( smallFont );
-  style->drawItemText( painter, bicRect, Qt::AlignBottom, QApplication::palette(), true, ibanBic->storedBic(), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text );
+  style->drawItemText( painter, bicRect, Qt::AlignBottom | Qt::AlignRight, QApplication::palette(), true, ibanBic->storedBic(), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text );
   painter->restore();
 
   // Paint Bank name
   painter->save();
   const QRect nameRect = style->alignedRect(opt.direction, Qt::AlignTop, QSize(textArea.width(), smallMetrics.lineSpacing()),
-                                           QRect(textArea.left(), metrics.lineSpacing()+smallMetrics.lineSpacing()+textArea.top(), textArea.width(), smallMetrics.lineSpacing())
+                                           QRect(textArea.left(), metrics.lineSpacing()+textArea.top(), textArea.width(), smallMetrics.lineSpacing())
   );
   style->drawItemText( painter, nameRect, Qt::AlignBottom, QApplication::palette(), true, ibanBic->institutionName(), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text );
   painter->restore();
@@ -97,7 +97,7 @@ QSize ibanBicItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
   QStyleOptionViewItemV4 opt = option;
   initStyleOption(&opt, index);
 
-  // QStyle::State_Editing is never set (seems to be a bug in Qt)! This code is here only because it was written already
+  // Test if current index is edited at the moment
   const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(opt.widget);
   if (view && view->indexWidget(index))
     return view->indexWidget(index)->sizeHint();
@@ -107,8 +107,7 @@ QSize ibanBicItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QM
   const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
 
   // A bic has maximal 11 characters, an IBAN 32
-  // The first extra "2*" in height is just there to have enough space for the edit-widget ( because QStyle::State_Editing is not set :( )
-  return QSize( (32+11)*metrics.width(QLatin1Char('X')) + 3*margin, 3*metrics.lineSpacing() + metrics.leading() + 2*margin );
+  return QSize( (32+11)*metrics.width(QLatin1Char('X')) + 3*margin, 2*metrics.lineSpacing() + metrics.leading() + 2*margin );
 }
 
 QWidget* ibanBicItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
