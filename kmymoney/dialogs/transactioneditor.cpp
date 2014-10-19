@@ -1565,6 +1565,7 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
       tabbar->setTabEnabled(KMyMoneyRegister::ActionWithdrawal, true);
     }
 
+    bool disableTransferTab = false;
     if (!id.isEmpty()) {
       MyMoneyAccount acc = MyMoneyFile::instance()->account(id);
       if (acc.isAssetLiability()
@@ -1587,19 +1588,25 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
         } else
           categoryLabel->setText(i18n("Transfer to"));
       } else {
-        if (tabbar)
-          tabbar->setTabEnabled(KMyMoneyRegister::ActionTransfer, false);
+        disableTransferTab = true;
         categoryLabel->setText(i18n("Category"));
       }
       updateAmount(val);
     } else {  //id.isEmpty()
       KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(m_editWidgets["category"]);
-      if (!category->currentText().isEmpty() && tabbar)
-        tabbar->setTabEnabled(KMyMoneyRegister::ActionTransfer, false);
+      disableTransferTab = !category->currentText().isEmpty();
       categoryLabel->setText(i18n("Category"));
     }
-    if (tabbar)
+    if (tabbar) {
+      if (disableTransferTab) {
+        // set the proper tab before disabling the currently active tab
+        if (tabbar->currentIndex() == KMyMoneyRegister::ActionTransfer) {
+          tabbar->setCurrentIndex(val.isPositive() ? KMyMoneyRegister::ActionWithdrawal : KMyMoneyRegister::ActionDeposit);
+        }
+        tabbar->setTabEnabled(KMyMoneyRegister::ActionTransfer, false);
+      }
       tabbar->update();
+    }
 
     resizeForm();
   }
