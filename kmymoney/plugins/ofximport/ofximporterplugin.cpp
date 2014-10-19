@@ -184,7 +184,7 @@ bool OfxImporterPlugin::import(const QString& filename)
   d->m_statementlist.clear();
   d->m_securitylist.clear();
 
-  QByteArray filename_deep(filename.toUtf8());
+  QByteArray filename_deep = QFile::encodeName(filename);
 
   LibofxContextPtr ctx = libofx_get_new_context();
   Q_CHECK_PTR(ctx);
