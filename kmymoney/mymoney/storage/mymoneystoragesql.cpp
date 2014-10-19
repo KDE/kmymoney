@@ -2504,45 +2504,45 @@ void MyMoneyStorageSql::writeFileInfo()
     if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "inserting fileinfo")); // krazy:exclude=crashy
   }
 
-  q.prepare( QLatin1String(
-    "UPDATE kmmFileInfo SET "
-      "version = :version, "
-      "fixLevel = :fixLevel, "
-      "created = :created, "
-      "lastModified = :lastModified, "
-      "baseCurrency = :baseCurrency, "
-      "dateRangeStart = :dateRangeStart, "
-      "dateRangeEnd = :dateRangeEnd, "
-      "hiInstitutionId = :hiInstitutionId, "
-      "hiPayeeId = :hiPayeeId, "
-      "hiTagId = :hiTagId, "
-      "hiAccountId = :hiAccountId, "
-      "hiTransactionId = :hiTransactionId, "
-      "hiScheduleId = :hiScheduleId, "
-      "hiSecurityId = :hiSecurityId, "
-      "hiReportId = :hiReportId, "
-      "hiBudgetId = :hiBudgetId, "
-      "encryptData = :encryptData, "
-      "updateInProgress = :updateInProgress, "
-      "logonUser = :logonUser, "
-      "logonAt = :logonAt, "
-      //! @todo The following updates are for backwards compatibility only
-      //! remove backwards compatibility in a later version
-      "institutions = :institutions, "
-      "accounts = :accounts, "
-      "payees = :payees, "
-      "tags = :tags, "
-      "transactions = :transactions, "
-      "splits = :splits, "
-      "securities = :securities, "
-      "prices = :prices, "
-      "currencies = :currencies, "
-      "schedules = :schedules, "
-      "reports = :reports, "
-      "kvps = :kvps, "
-      "budgets = :budgets; "
-    )
-  );
+  q.prepare(QLatin1String(
+              "UPDATE kmmFileInfo SET "
+              "version = :version, "
+              "fixLevel = :fixLevel, "
+              "created = :created, "
+              "lastModified = :lastModified, "
+              "baseCurrency = :baseCurrency, "
+              "dateRangeStart = :dateRangeStart, "
+              "dateRangeEnd = :dateRangeEnd, "
+              "hiInstitutionId = :hiInstitutionId, "
+              "hiPayeeId = :hiPayeeId, "
+              "hiTagId = :hiTagId, "
+              "hiAccountId = :hiAccountId, "
+              "hiTransactionId = :hiTransactionId, "
+              "hiScheduleId = :hiScheduleId, "
+              "hiSecurityId = :hiSecurityId, "
+              "hiReportId = :hiReportId, "
+              "hiBudgetId = :hiBudgetId, "
+              "encryptData = :encryptData, "
+              "updateInProgress = :updateInProgress, "
+              "logonUser = :logonUser, "
+              "logonAt = :logonAt, "
+              //! @todo The following updates are for backwards compatibility only
+              //! remove backwards compatibility in a later version
+              "institutions = :institutions, "
+              "accounts = :accounts, "
+              "payees = :payees, "
+              "tags = :tags, "
+              "transactions = :transactions, "
+              "splits = :splits, "
+              "securities = :securities, "
+              "prices = :prices, "
+              "currencies = :currencies, "
+              "schedules = :schedules, "
+              "reports = :reports, "
+              "kvps = :kvps, "
+              "budgets = :budgets; "
+            )
+           );
   q.bindValue(":version", m_dbVersion);
   q.bindValue(":fixLevel", m_storage->fileFixVersion());
   q.bindValue(":created", m_storage->creationDate().toString(Qt::ISODate));

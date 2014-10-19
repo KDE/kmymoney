@@ -1,0 +1,34 @@
+<!--
+   dtd for kmymoney kmt file format
+-->
+
+<!ELEMENT kmymoney-account-template (title, shortdesc, longdesc, accounts)
+>
+
+<!ELEMENT title (#PCDATA)
+>
+
+<!ELEMENT shortdesc (#PCDATA)
+>
+
+<!ELEMENT longdesc (#PCDATA)
+>
+
+<!ELEMENT accounts (account)+
+>
+
+<!ELEMENT account (account | flag)*
+>
+
+<!ELEMENT flag EMPTY
+>
+
+<!ATTLIST account
+          type CDATA #REQUIRED
+          name CDATA #REQUIRED
+          description CDATA #IMPLIED
+>
+
+<!ATTLIST flag
+          name CDATA #REQUIRED
+>

@@ -1113,14 +1113,6 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
     t.addSplit(s0);
   }
 
-  // adjust the value to the smallestAccountFraction found
-  // for the commodity of the transaction.
-  for (it_s = t.splits().constBegin(); it_s != t.splits().constEnd(); ++it_s) {
-    MyMoneySplit s = (*it_s);
-    s.setValue((*it_s).value().convert(currency.smallestAccountFraction()));
-    t.modifySplit(s);
-  }
-
   return rc;
 }
 

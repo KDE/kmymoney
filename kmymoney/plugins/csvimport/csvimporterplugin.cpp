@@ -71,16 +71,16 @@ void CsvImporterPlugin::createActions(void)
 
 void CsvImporterPlugin::slotImportFile(void)
 {
-  m_csvImporter = new CSVDialog;
-  m_csvImporter->m_plugin = this;
-  m_csvImporter->init();
+  m_action->setEnabled(false);
+  CSVDialog *csvImporter = new CSVDialog;
+  csvImporter->m_plugin = this;
+  csvImporter->init();
 
-  m_csvImporter->setWindowTitle(i18nc("CSV Importer dialog title", "CSV Importer"));
+  csvImporter->setWindowTitle(i18nc("CSV Importer dialog title", "CSV Importer"));
 
-  m_action->setEnabled(false);  //            disable csv menuitem once plugin is loaded
-
-  connect(m_csvImporter, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
-  m_csvImporter->show();
+  connect(csvImporter, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
+  csvImporter->show();
+  m_action->setEnabled(false);//  don't allow further plugins to start while this is open
 }
 
 bool CsvImporterPlugin::slotGetStatement(MyMoneyStatement& s)

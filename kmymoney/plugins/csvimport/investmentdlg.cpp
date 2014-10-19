@@ -73,7 +73,6 @@ void InvestmentDlg::init()
 {
   m_csvDialog->m_investProcessing->init();
   m_csvDialog->m_investProcessing->m_investDlg = this;
-  m_csvDialog->ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
   m_csvDialog->ui->tableWidget->setWordWrap(false);
   m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
 
@@ -91,6 +90,11 @@ void InvestmentDlg::saveSettings()
   }
   QString str;
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+
+  KConfigGroup mainGroup(config, "MainWindow");
+  mainGroup.writeEntry("Height", m_csvDialog->height());
+  mainGroup.writeEntry("Width", m_csvDialog->width());
+  mainGroup.config()->sync();
 
   KConfigGroup bankProfilesGroup(config, "BankProfiles");
 

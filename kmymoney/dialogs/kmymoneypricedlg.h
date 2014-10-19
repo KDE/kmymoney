@@ -73,7 +73,6 @@ signals:
 
 private:
   QTreeWidgetItem*              m_currentItem;
-  int                           m_pricePrecision;
   /**
     * Search widget for the list
     */
