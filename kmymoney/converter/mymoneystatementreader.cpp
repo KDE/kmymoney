@@ -591,7 +591,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
   MyMoneyTransaction transactionUnderImport;
 
   QString dbgMsg;
-  dbgMsg = QString("Process %1, '%3', %2").arg(statementTransactionUnderImport.m_datePosted.toString(Qt::ISODate)).arg(statementTransactionUnderImport.m_amount.formatMoney("", 2)).arg(statementTransactionUnderImport.m_strBankID);
+  dbgMsg = QString("Process on: '%1', id: '%3', amount: '%2', fees: '%4'")
+           .arg(statementTransactionUnderImport.m_datePosted.toString(Qt::ISODate))
+           .arg(statementTransactionUnderImport.m_amount.formatMoney("", 2))
+           .arg(statementTransactionUnderImport.m_strBankID)
+           .arg(statementTransactionUnderImport.m_fees.formatMoney("", 2));
   qDebug("%s", qPrintable(dbgMsg));
 
   // mark it imported for the view
@@ -607,7 +611,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
   MyMoneySplit s1;
 
   s1.setMemo(statementTransactionUnderImport.m_strMemo);
-  s1.setValue(statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
+  s1.setValue(statementTransactionUnderImport.m_amount + statementTransactionUnderImport.m_fees);
   s1.setShares(s1.value());
   s1.setNumber(statementTransactionUnderImport.m_strNumber);
 
@@ -740,7 +744,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           KMessageBox::information(0, i18n("This imported statement contains investment transactions with no share amount.  These transactions will be ignored."), i18n("No share amount provided"), QString("BlankAmount"));
           return;
         }
-        s1.setPrice(((statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees) / statementTransactionUnderImport.m_shares).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
+        MyMoneyMoney total = -statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
+        s1.setPrice((total / statementTransactionUnderImport.m_shares).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
       }
 
 
@@ -777,7 +782,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       s2.setAccountId(thisaccount.id());
       transactionUnderImport.addSplit(s2);
 
-      transfervalue = statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
+      transfervalue = statementTransactionUnderImport.m_amount + statementTransactionUnderImport.m_fees;
     } else if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaInterest) {
       if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
         s1.setAccountId(d->interestId(thisaccount));
@@ -818,10 +823,10 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       if (!statementTransactionUnderImport.m_price.isZero()) {
         s1.setPrice(statementTransactionUnderImport.m_price.abs());
       } else {
-        MyMoneyMoney total;
-        total = -statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
-        if (!statementTransactionUnderImport.m_shares.isZero())
+        if (!statementTransactionUnderImport.m_shares.isZero()) {
+          MyMoneyMoney total = -statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
           s1.setPrice((total / statementTransactionUnderImport.m_shares).abs().convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision())));
+        }
       }
 
       s1.setAction(MyMoneySplit::ActionBuyShares);
