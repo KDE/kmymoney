@@ -41,7 +41,6 @@ public:
   explicit CsvImporterPlugin(QObject* parent, const QVariantList&);
   ~CsvImporterPlugin();
 
-  CSVDialog*        m_csvImporter;
   QAction*          m_action;
 
 public slots:

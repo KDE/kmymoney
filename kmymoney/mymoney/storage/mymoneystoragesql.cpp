@@ -5,6 +5,7 @@
     copyright            : (C) 2005 by Tony Bloomfield
     email                : tonybloom@users.sourceforge.net
                          : Fernando Vilas <fvilas@iname.com>
+                         : Christian Dávid <christian-david@web.de>
  ***************************************************************************/
 
 /***************************************************************************
@@ -2491,35 +2492,63 @@ void MyMoneyStorageSql::writeFileInfo()
   pairs << m_storage->pairs();
   deleteKeyValuePairs("STORAGE", kvpList);
   writeKeyValuePairs("STORAGE", kvpList, pairs);
-  //
+
   QSqlQuery q(*this);
-  q.prepare("SELECT * FROM kmmFileInfo;");
-  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "checking fileinfo")); // krazy:exclude=crashy
-  QString qs;
-  if (q.next())
-    qs = m_db.m_tables["kmmFileInfo"].updateString();
-  else
-    qs = (m_db.m_tables["kmmFileInfo"].insertString());
-  q.prepare(qs);
+  q.prepare("SELECT count(*) FROM kmmFileInfo;");
+  if (!q.exec() || !q.next())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "checking fileinfo")); // krazy:exclude=crashy
+
+  if (q.value(0).toInt() == 0) {
+    // Cannot use "INSERT INTO kmmFileInfo DEFAULT VALUES;" because it is not supported by MySQL
+    q.prepare(QLatin1String("INSERT INTO kmmFileInfo (version) VALUES (null);"));
+    if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "inserting fileinfo")); // krazy:exclude=crashy
+  }
+
+  q.prepare(QLatin1String(
+              "UPDATE kmmFileInfo SET "
+              "version = :version, "
+              "fixLevel = :fixLevel, "
+              "created = :created, "
+              "lastModified = :lastModified, "
+              "baseCurrency = :baseCurrency, "
+              "dateRangeStart = :dateRangeStart, "
+              "dateRangeEnd = :dateRangeEnd, "
+              "hiInstitutionId = :hiInstitutionId, "
+              "hiPayeeId = :hiPayeeId, "
+              "hiTagId = :hiTagId, "
+              "hiAccountId = :hiAccountId, "
+              "hiTransactionId = :hiTransactionId, "
+              "hiScheduleId = :hiScheduleId, "
+              "hiSecurityId = :hiSecurityId, "
+              "hiReportId = :hiReportId, "
+              "hiBudgetId = :hiBudgetId, "
+              "encryptData = :encryptData, "
+              "updateInProgress = :updateInProgress, "
+              "logonUser = :logonUser, "
+              "logonAt = :logonAt, "
+              //! @todo The following updates are for backwards compatibility only
+              //! remove backwards compatibility in a later version
+              "institutions = :institutions, "
+              "accounts = :accounts, "
+              "payees = :payees, "
+              "tags = :tags, "
+              "transactions = :transactions, "
+              "splits = :splits, "
+              "securities = :securities, "
+              "prices = :prices, "
+              "currencies = :currencies, "
+              "schedules = :schedules, "
+              "reports = :reports, "
+              "kvps = :kvps, "
+              "budgets = :budgets; "
+            )
+           );
   q.bindValue(":version", m_dbVersion);
   q.bindValue(":fixLevel", m_storage->fileFixVersion());
   q.bindValue(":created", m_storage->creationDate().toString(Qt::ISODate));
   //q.bindValue(":lastModified", m_storage->lastModificationDate().toString(Qt::ISODate));
   q.bindValue(":lastModified", QDate::currentDate().toString(Qt::ISODate));
   q.bindValue(":baseCurrency", m_storage->pairs()["kmm-baseCurrency"]);
-  q.bindValue(":institutions", (unsigned long long) m_institutions);
-  q.bindValue(":accounts", (unsigned long long) m_accounts);
-  q.bindValue(":payees", (unsigned long long) m_payees);
-  q.bindValue(":tags", (unsigned long long) m_tags);
-  q.bindValue(":transactions", (unsigned long long) m_transactions);
-  q.bindValue(":splits", (unsigned long long) m_splits);
-  q.bindValue(":securities", (unsigned long long) m_securities);
-  q.bindValue(":prices", (unsigned long long) m_prices);
-  q.bindValue(":currencies", (unsigned long long) m_currencies);
-  q.bindValue(":schedules", (unsigned long long) m_schedules);
-  q.bindValue(":reports", (unsigned long long) m_reports);
-  q.bindValue(":kvps", (unsigned long long) m_kvps);
-  q.bindValue(":budgets", (unsigned long long) m_budgets);
   q.bindValue(":dateRangeStart", QDate());
   q.bindValue(":dateRangeEnd", QDate());
 
@@ -2549,6 +2578,23 @@ void MyMoneyStorageSql::writeFileInfo()
   q.bindValue(":updateInProgress", "N");
   q.bindValue(":logonUser", m_logonUser);
   q.bindValue(":logonAt", m_logonAt.toString(Qt::ISODate));
+
+  //! @todo The following bindings are for backwards compatibility only
+  //! remove backwards compatibility in a later version
+  q.bindValue(":institutions", (unsigned long long) m_institutions);
+  q.bindValue(":accounts", (unsigned long long) m_accounts);
+  q.bindValue(":payees", (unsigned long long) m_payees);
+  q.bindValue(":tags", (unsigned long long) m_tags);
+  q.bindValue(":transactions", (unsigned long long) m_transactions);
+  q.bindValue(":splits", (unsigned long long) m_splits);
+  q.bindValue(":securities", (unsigned long long) m_securities);
+  q.bindValue(":prices", (unsigned long long) m_prices);
+  q.bindValue(":currencies", (unsigned long long) m_currencies);
+  q.bindValue(":schedules", (unsigned long long) m_schedules);
+  q.bindValue(":reports", (unsigned long long) m_reports);
+  q.bindValue(":kvps", (unsigned long long) m_kvps);
+  q.bindValue(":budgets", (unsigned long long) m_budgets);
+
   if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing FileInfo"))); // krazy:exclude=crashy
 }
 
@@ -2622,39 +2668,62 @@ void MyMoneyStorageSql::readFileInfo(void)
 {
   DBG("*** Entering MyMoneyStorageSql::readFileInfo");
   signalProgress(0, 1, QObject::tr("Loading file information..."));
-  MyMoneyDbTable& t = m_db.m_tables["kmmFileInfo"];
+
   QSqlQuery q(*this);
-  q.prepare(t.selectAllString());
-  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("reading FileInfo"))); // krazy:exclude=crashy
-  if (!q.next()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("retrieving FileInfo")));
+  q.prepare(
+    "SELECT "
+    "  created, lastModified, hiInstitutionId, hiPayeeId, hiTagId, hiAccountId, hiTransactionId,"
+    "  hiScheduleId, hiSecurityId, hiReportId, hiBudgetId, encryptData, logonUser, logonAt, "
+    "  (SELECT count(*) FROM kmmInstitutions) AS institutions, "
+    "  (SELECT count(*) FROM kmmAccounts) AS accounts, "
+    "  (SELECT count(*) FROM kmmCurrencies) AS currencies, "
+    "  (SELECT count(*) FROM kmmPayees) AS payees, "
+    "  (SELECT count(*) FROM kmmTags) AS tags, "
+    "  (SELECT count(*) FROM kmmTransactions) AS transactions, "
+    "  (SELECT count(*) FROM kmmSplits) AS splits, "
+    "  (SELECT count(*) FROM kmmSecurities) AS securities, "
+    "  (SELECT count(*) FROM kmmCurrencies) AS currencies, "
+    "  (SELECT count(*) FROM kmmSchedules) AS schedules, "
+    "  (SELECT count(*) FROM kmmPrices) AS prices, "
+    "  (SELECT count(*) FROM kmmKeyValuePairs) AS kvps, "
+    "  (SELECT count(*) FROM kmmReportConfig) AS reports, "
+    "  (SELECT count(*) FROM kmmBudgetConfig) AS budgets "
+    "FROM kmmFileInfo;"
+  );
+
+  if (!q.exec())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("reading FileInfo"))); // krazy:exclude=crashy
+  if (!q.next())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("retrieving FileInfo")));
+
   QSqlRecord rec = q.record();
-  m_storage->setCreationDate(GETDATE(t.fieldNumber("created")));
-  m_storage->setLastModificationDate(GETDATE(t.fieldNumber("lastModified")));
-  m_hiIdInstitutions = (unsigned long) GETULL(t.fieldNumber("hiInstitutionId"));
-  m_hiIdPayees = (unsigned long) GETULL(t.fieldNumber("hiPayeeId"));
-  m_hiIdTags = (unsigned long) GETULL(t.fieldNumber("hiTagId"));
-  m_hiIdAccounts = (unsigned long) GETULL(t.fieldNumber("hiAccountId"));
-  m_hiIdTransactions = (unsigned long) GETULL(t.fieldNumber("hiTransactionId"));
-  m_hiIdSchedules = (unsigned long) GETULL(t.fieldNumber("hiScheduleId"));
-  m_hiIdSecurities = (unsigned long) GETULL(t.fieldNumber("hiSecurityId"));
-  m_hiIdReports = (unsigned long) GETULL(t.fieldNumber("hiReportId"));
-  m_hiIdBudgets = (unsigned long) GETULL(t.fieldNumber("hiBudgetId"));
-  m_institutions = (unsigned long) GETULL(t.fieldNumber("institutions"));
-  m_accounts = (unsigned long) GETULL(t.fieldNumber("accounts"));
-  m_payees = (unsigned long) GETULL(t.fieldNumber("payees"));
-  m_tags = (unsigned long) GETULL(t.fieldNumber("tags"));
-  m_transactions = (unsigned long) GETULL(t.fieldNumber("transactions"));
-  m_splits = (unsigned long) GETULL(t.fieldNumber("splits"));
-  m_securities = (unsigned long) GETULL(t.fieldNumber("securities"));
-  m_currencies = (unsigned long) GETULL(t.fieldNumber("currencies"));
-  m_schedules = (unsigned long) GETULL(t.fieldNumber("schedules"));
-  m_prices = (unsigned long) GETULL(t.fieldNumber("prices"));
-  m_kvps = (unsigned long) GETULL(t.fieldNumber("kvps"));
-  m_reports = (unsigned long) GETULL(t.fieldNumber("reports"));
-  m_budgets = (unsigned long) GETULL(t.fieldNumber("budgets"));
-  m_encryptData = GETSTRING(t.fieldNumber("encryptData"));
-  m_logonUser = GETSTRING(t.fieldNumber("logonUser"));
-  m_logonAt = GETDATETIME(t.fieldNumber("logonAt"));
+  m_storage->setCreationDate(GETDATE(rec.indexOf("created")));
+  m_storage->setLastModificationDate(GETDATE(rec.indexOf("lastModified")));
+  m_hiIdInstitutions = (unsigned long) GETULL(rec.indexOf("hiInstitutionId"));
+  m_hiIdPayees = (unsigned long) GETULL(rec.indexOf("hiPayeeId"));
+  m_hiIdTags = (unsigned long) GETULL(rec.indexOf("hiTagId"));
+  m_hiIdAccounts = (unsigned long) GETULL(rec.indexOf("hiAccountId"));
+  m_hiIdTransactions = (unsigned long) GETULL(rec.indexOf("hiTransactionId"));
+  m_hiIdSchedules = (unsigned long) GETULL(rec.indexOf("hiScheduleId"));
+  m_hiIdSecurities = (unsigned long) GETULL(rec.indexOf("hiSecurityId"));
+  m_hiIdReports = (unsigned long) GETULL(rec.indexOf("hiReportId"));
+  m_hiIdBudgets = (unsigned long) GETULL(rec.indexOf("hiBudgetId"));
+  m_institutions = (unsigned long) GETULL(rec.indexOf("institutions"));
+  m_accounts = (unsigned long) GETULL(rec.indexOf("accounts"));
+  m_payees = (unsigned long) GETULL(rec.indexOf("payees"));
+  m_tags = (unsigned long) GETULL(rec.indexOf("tags"));
+  m_transactions = (unsigned long) GETULL(rec.indexOf("transactions"));
+  m_splits = (unsigned long) GETULL(rec.indexOf("splits"));
+  m_securities = (unsigned long) GETULL(rec.indexOf("securities"));
+  m_currencies = (unsigned long) GETULL(rec.indexOf("currencies"));
+  m_schedules = (unsigned long) GETULL(rec.indexOf("schedules"));
+  m_prices = (unsigned long) GETULL(rec.indexOf("prices"));
+  m_kvps = (unsigned long) GETULL(rec.indexOf("kvps"));
+  m_reports = (unsigned long) GETULL(rec.indexOf("reports"));
+  m_budgets = (unsigned long) GETULL(rec.indexOf("budgets"));
+  m_encryptData = GETSTRING(rec.indexOf("encryptData"));
+  m_logonUser = GETSTRING(rec.indexOf("logonUser"));
+  m_logonAt = GETDATETIME(rec.indexOf("logonAt"));
   signalProgress(1, 0);
   m_storage->setPairs(readKeyValuePairs("STORAGE", QString("")).pairs());
 }

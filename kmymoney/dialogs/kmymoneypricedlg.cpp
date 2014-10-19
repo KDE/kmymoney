@@ -97,11 +97,6 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   connect(m_showAllPrices, SIGNAL(toggled(bool)), this, SLOT(slotLoadWidgets()));
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
 
-  //get the price precision
-  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
-  KConfigGroup grp =  kconfig->group("General Options");
-  m_pricePrecision = grp.readEntry("PricePrecision", 4);
-
   slotLoadWidgets();
   slotSelectPrice();
 }
@@ -189,7 +184,7 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
     priceTreeItem->setText(KPriceTreeItem::ePriceCurrency, to.id());
     priceTreeItem->setText(KPriceTreeItem::ePriceDate, KLocale::global()->formatDate(price.date(), KLocale::ShortDate));
     priceTreeItem->setData(KPriceTreeItem::ePriceDate, KPriceTreeItem::OrderRole, QVariant(price.date()));
-    priceTreeItem->setText(KPriceTreeItem::ePricePrice, price.rate(priceBase).formatMoney("", m_pricePrecision));
+    priceTreeItem->setText(KPriceTreeItem::ePricePrice, price.rate(priceBase).formatMoney("", KMyMoneyGlobalSettings::pricePrecision()));
     priceTreeItem->setTextAlignment(KPriceTreeItem::ePricePrice, Qt::AlignRight | Qt::AlignVCenter);
     priceTreeItem->setData(KPriceTreeItem::ePricePrice, KPriceTreeItem::OrderRole, QVariant::fromValue(price.rate(priceBase)));
     priceTreeItem->setText(KPriceTreeItem::ePriceSource, price.source());

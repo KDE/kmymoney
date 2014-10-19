@@ -2740,9 +2740,9 @@ void KMyMoneyApp::slotToolsStartKCalc(void)
   QString cmd = KMyMoneyGlobalSettings::externalCalculator();
   // if none is present, we fall back to the default
   if (cmd.isEmpty()) {
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32)
     cmd = QLatin1String("calc");
-#elseif Q_OS_MAC
+#elif defined(Q_OS_MAC)
     cmd = QLatin1String("open -a Calculator");
 #else
     cmd = QLatin1String("kcalc");
@@ -3586,7 +3586,7 @@ void KMyMoneyApp::slotAccountEdit(void)
           }
         }
 
-        if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+        if (dlg != 0 && dlg->exec() == QDialog::Accepted) {
           try {
             MyMoneyFileTransaction ft;
 

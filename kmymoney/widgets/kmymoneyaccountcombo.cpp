@@ -134,6 +134,7 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
     setCurrentIndex(index.row());
     // restore the old root item
     setRootModelIndex(oldRootModelIndex);
+    emit accountSelected(id);
   }
 }
 
