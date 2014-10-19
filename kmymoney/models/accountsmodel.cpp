@@ -147,7 +147,7 @@ public:
           model->setData(newIndex, vatAccount.name(), Qt::DisplayRole);
           model->setData(newIndex, QVariant(Qt::AlignLeft | Qt::AlignVCenter), Qt::TextAlignmentRole);
 
-        // VAT Rate
+          // VAT Rate
         } else if (!account.value("VatRate").isEmpty()) {
           MyMoneyMoney vatRate = MyMoneyMoney(account.value("VatRate")) * MyMoneyMoney(100, 1);
           model->setData(newIndex, QString("%1 %").arg(vatRate.formatMoney("", 1)), Qt::DisplayRole);

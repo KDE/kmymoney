@@ -890,7 +890,7 @@ void InvestProcessing::readFile(const QString& fname)
     }
   }
   if (m_fileEndLine == 0) { // copy from later
-      m_fileEndLine = m_parse->lastLine();
+    m_fileEndLine = m_parse->lastLine();
   }
   m_csvDialog->ui->tableWidget->setColumnCount(m_maxColumnCount);
   disconnect(m_csvDialog->m_pageLinesDate->ui->spinBox_skip, 0, 0, 0);  //  Avoid disruption from start/endline changes.
@@ -1101,10 +1101,10 @@ void InvestProcessing::setWindowSize(int firstLine, int lastLine)
   int scrollbarWidth = 17;  //  scrollbar space for when needed
   variousMarginsEtc = 58;//  all margins, hscrollbar, title, gap between frames, etc.
 
-  m_csvDialog->resize(wd +  2 * (vLayoutMargin.left() +1) + 12 + hLayout_MainMargin.left() + hLayout_MainMargin.right() + scrollbarWidth,
-                      m_csvDialog->m_tableHeight + m_csvDialog->ui->frame_low->height() + 4 * (vLayoutMargin.top() +1) + 8);
+  m_csvDialog->resize(wd +  2 *(vLayoutMargin.left() + 1) + 12 + hLayout_MainMargin.left() + hLayout_MainMargin.right() + scrollbarWidth,
+                      m_csvDialog->m_tableHeight + m_csvDialog->ui->frame_low->height() + 4 *(vLayoutMargin.top() + 1) + 8);
 
-  rect.setHeight(m_csvDialog->height() - m_csvDialog->ui->frame_low->height() - m_csvDialog->m_hScrollBarHeight - m_csvDialog->m_header - 4 * (vLayoutMargin.top() +1) + variousMarginsEtc);
+  rect.setHeight(m_csvDialog->height() - m_csvDialog->ui->frame_low->height() - m_csvDialog->m_hScrollBarHeight - m_csvDialog->m_header - 4 *(vLayoutMargin.top() + 1) + variousMarginsEtc);
   rect.setWidth(m_csvDialog->width() - hLayout_MainMargin.left() - hLayout_MainMargin.right());
   m_csvDialog->ui->frame_main->setFrameRect(rect);
 }

@@ -108,7 +108,7 @@ CSVDialog::CSVDialog() : ui(new Ui::CSVDialog)
   m_hScrollBarHeight = 17;
   m_rowHeight = 30;
   m_header = 27;
-  m_tableHeight= m_visibleRows * m_rowHeight + m_header - 3;
+  m_tableHeight = m_visibleRows * m_rowHeight + m_header - 3;
   m_borders = 14;
   m_curId = -1;
   m_lastId = -1;
@@ -235,8 +235,8 @@ void CSVDialog::init()
   m_vScrollBar = ui->tableWidget->verticalScrollBar();
   m_vScrollBar->setTracking(false);
 
-   m_vHeaderWidth = 26;
-   m_rectWidth = this->width() - 24;
+  m_vHeaderWidth = 26;
+  m_rectWidth = this->width() - 24;
 
   m_dateFormats << "yyyy/MM/dd" << "MM/dd/yyyy" << "dd/MM/yyyy";
 
@@ -1002,10 +1002,10 @@ void CSVDialog::setWindowSize(int firstLine, int lastLine)
   QMargins vLayoutMargin = ui->verticalLayout->layout()->contentsMargins();  //              window margins
 
   //  height needs to take into account gap between the two frames
-  resize(wd +  2 * (vLayoutMargin.left() +1) + hLayout_MainMargin.left() + hLayout_MainMargin.right() + scrollbarWidth + 6,
-         m_tableHeight + ui->frame_low->height() + 4 * (vLayoutMargin.top() +1) + 16);
+  resize(wd +  2 *(vLayoutMargin.left() + 1) + hLayout_MainMargin.left() + hLayout_MainMargin.right() + scrollbarWidth + 6,
+         m_tableHeight + ui->frame_low->height() + 4 *(vLayoutMargin.top() + 1) + 16);
 
-  rect.setHeight(m_tableHeight + 2 * (vLayoutMargin.left() +1) + 2);
+  rect.setHeight(m_tableHeight + 2 *(vLayoutMargin.left() + 1) + 2);
   rect.setWidth(width() - hLayout_MainMargin.left() - hLayout_MainMargin.right());
   ui->frame_main->setFrameRect(rect);
 }
@@ -1263,8 +1263,7 @@ int CSVDialog::processQifLine(QString& iBuff)
       if (!ensureBothFieldsValid(i)) {
         return KMessageBox::Cancel;
       }
-    }
-    else if (m_columnTypeList[i] == "memo") {      //         could be more than one
+    } else if (m_columnTypeList[i] == "memo") {     //         could be more than one
       txt = m_columnList[i];
       txt.replace('~', "\n");  //                             replace NL which was substituted
       if ((!m_firstPass) && (txt.isEmpty()) && (m_payeeColCopied)) {
@@ -1356,12 +1355,12 @@ int CSVDialog::ensureBothFieldsValid(int col)
   } else {  //                                                Second field.
     if (txt.isEmpty()) {
       m_secondValue = txt;
-    } else if (QString::number(txt.toDouble(), 'f', 2 ) == 0) {
+    } else if (QString::number(txt.toDouble(), 'f', 2) == 0) {
       m_secondValue = QString();
       m_secondType = m_columnTypeList[col];
       txt = m_firstValue;
     }
-    if ((txt.isEmpty()) || (QString::number(txt.toDouble(), 'f', 2 ) == 0)) {  //  If second field empty,...
+    if ((txt.isEmpty()) || (QString::number(txt.toDouble(), 'f', 2) == 0)) {   //  If second field empty,...
       m_secondValue = txt;
       m_secondType = m_columnTypeList[col];
       txt = m_firstValue;  //                                                      ...use first (which could also be empty..)
@@ -1415,12 +1414,12 @@ int CSVDialog::ensureBothFieldsValid(int col)
       //  both debit and credit have entries so ask user how to proceed.
       //  if just one field is empty, that's OK - bypass this message
       ret = KMessageBox::questionYesNoCancel(this, i18n("<center>The %1 field contains '%2'</center>"
-            "<center>and the %3 field contains '%4'.</center>"
-            "<center>Please choose which you wish to accept.</center>",
-            m_columnTypeList[m_debitColumn], m_columnList[m_debitColumn],m_columnTypeList[m_creditColumn], m_columnList[m_creditColumn]), i18n("CSV invalid field values"),
-            KGuiItem(i18n("Accept %1", m_columnTypeList[m_debitColumn])),
-            KGuiItem(i18n("Accept %1", m_columnTypeList[m_creditColumn])),
-            KGuiItem(i18n("Cancel")));
+                                             "<center>and the %3 field contains '%4'.</center>"
+                                             "<center>Please choose which you wish to accept.</center>",
+                                             m_columnTypeList[m_debitColumn], m_columnList[m_debitColumn], m_columnTypeList[m_creditColumn], m_columnList[m_creditColumn]), i18n("CSV invalid field values"),
+                                             KGuiItem(i18n("Accept %1", m_columnTypeList[m_debitColumn])),
+                                             KGuiItem(i18n("Accept %1", m_columnTypeList[m_creditColumn])),
+                                             KGuiItem(i18n("Cancel")));
       if (ret == KMessageBox::Cancel) {
         return ret;
       }
@@ -2319,8 +2318,8 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
     if (invalidResult && !m_errorFoundAlready) {
       ui->tableWidget->verticalScrollBar()->setValue(errorRow - 1);  //              ensure row visible
       KMessageBox::sorry(this, i18n("<center>The selected decimal symbol ('%1') was not present</center>"
-                                 "<center>or has produced invalid results in row %2, and possibly more.</center>"
-                                 "<center>Please try again.</center>", decimalSymbol(), errorRow + 1), i18n("Invalid Conversion"));
+                                    "<center>or has produced invalid results in row %2, and possibly more.</center>"
+                                    "<center>Please try again.</center>", decimalSymbol(), errorRow + 1), i18n("Invalid Conversion"));
       m_importError = true;
       m_importNow = false;
       m_wizard->button(QWizard::NextButton)->hide();
@@ -2405,9 +2404,9 @@ void CSVDialog::decimalSymbolSelected(int index)
         updateDecimalSymbol("quantity", m_investProcessing->quantityColumn());
       }
       if (m_errorColumn == -1) {
-      m_errorColumn = m_investProcessing->amountColumn();
-    }
-    ui->tableWidget->horizontalScrollBar()->setValue(m_errorColumn);  //                     ensure col visible
+        m_errorColumn = m_investProcessing->amountColumn();
+      }
+      ui->tableWidget->horizontalScrollBar()->setValue(m_errorColumn);  //                     ensure col visible
     }
   }
   if (!m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
@@ -2770,7 +2769,7 @@ void CSVDialog::resizeEvent(QResizeEvent* ev)
     return;
   }
   QMargins margn = ui->verticalLayout->layout()->contentsMargins();
-  int height = ev->size().height() - ui->frame_low->height() -m_hScrollBarHeight - m_header - 2 * margn.top() + 4;  //  space between frames, etc.
+  int height = ev->size().height() - ui->frame_low->height() - m_hScrollBarHeight - m_header - 2 * margn.top() + 4; //  space between frames, etc.
 
   m_visibleRows = (height - m_hScrollBarHeight - m_header  + 14) / m_rowHeight;
   height = m_visibleRows * m_rowHeight + m_hScrollBarHeight + m_header + 2 * (margn.top());
@@ -3909,7 +3908,7 @@ void CompletionPage::initializePage()
     }
   }
   //  use saved value of index to trigger validity test
-     QTimer::singleShot(200, m_dlg, SLOT(decimalSymbolSelected()));
+  QTimer::singleShot(200, m_dlg, SLOT(decimalSymbolSelected()));
 }
 
 void CompletionPage::slotImportValid()

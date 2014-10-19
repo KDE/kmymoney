@@ -148,7 +148,7 @@ public:
    * Recalculates column widths for the visible rows
   */
   void           updateColumnWidths(int firstLine, int lastLine);
-  
+
   /**
   * Called on reading a file in order to
   * adjust window size to suit the file.
