@@ -1715,7 +1715,6 @@ void CSVDialog::enableInputs()
   }
 }
 
-<<<<<<< HEAD
 void CSVDialog::redrawWindow(int startLine)
 {
   bool ok = true;
