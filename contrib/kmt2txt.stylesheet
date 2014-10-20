@@ -21,17 +21,17 @@
   <xsl:text>-</xsl:text>
   <xsl:value-of select="../../../@type"/>
   <xsl:text>-</xsl:text>
-  <xsl:value-of select="../../../@name"/>
-  <xsl:text>-</xsl:text>
   <xsl:value-of select="../../@type"/>
-  <xsl:text>-</xsl:text>
-  <xsl:value-of select="../../@name"/>
   <xsl:text>-</xsl:text>
   <xsl:value-of select="../@type"/>
   <xsl:text>-</xsl:text>
-  <xsl:value-of select="../@name"/>
-  <xsl:text>-</xsl:text>
   <xsl:value-of select="@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../../../@name"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../../@name"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../@name"/>
   <xsl:text>-</xsl:text>
   <xsl:value-of select="@name"/>
   <xsl:text>&nl;</xsl:text>
@@ -42,13 +42,13 @@
   <xsl:text>-</xsl:text>
   <xsl:value-of select="../../@type"/>
   <xsl:text>-</xsl:text>
-  <xsl:value-of select="../../@name"/>
-  <xsl:text>-</xsl:text>
   <xsl:value-of select="../@type"/>
   <xsl:text>-</xsl:text>
-  <xsl:value-of select="../@name"/>
-  <xsl:text>-</xsl:text>
   <xsl:value-of select="@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../../@name"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../@name"/>
   <xsl:text>-</xsl:text>
   <xsl:value-of select="@name"/>
   <xsl:text>&nl;</xsl:text>
@@ -59,9 +59,9 @@
   <xsl:text>-</xsl:text>
   <xsl:value-of select="../@type"/>
   <xsl:text>-</xsl:text>
-  <xsl:value-of select="../@name"/>
-  <xsl:text>-</xsl:text>
   <xsl:value-of select="@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../@name"/>
   <xsl:text>-</xsl:text>
   <xsl:value-of select="@name"/>
   <xsl:text>&nl;</xsl:text>
