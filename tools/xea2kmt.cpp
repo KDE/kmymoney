@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "../kmymoney/mymoney/mymoneyaccount.h"
+
 #include <QFile>
 #include <QStringList>
 #include <QTextStream>
@@ -47,21 +49,21 @@ bool noLevel1Names = false;
 
 int toKMyMoneyAccountType(const QString &type)
 {
-    if(type == "ROOT") return 0;
-    else if (type == "BANK") return 1;
-    else if (type == "CASH") return 3;
-    else if (type == "CREDIT") return 4;
-    else if (type == "INVEST") return 7;
-    else if (type == "RECEIVABLE") return 9;
-    else if (type == "ASSET") return 9;
-    else if (type == "PAYABLE") return 10;
-    else if (type == "LIABILITY") return 10;
-    else if (type == "CURRENCY") return 11;
-    else if (type == "INCOME") return 12;
-    else if (type == "EXPENSE") return 13;
-    else if (type == "STOCK") return 15;
-    else if (type == "MUTUAL") return 15;
-    else if (type == "EQUITY") return 16;
+    if(type == "ROOT") return MyMoneyAccount::UnknownAccountType;
+    else if (type == "BANK") return MyMoneyAccount::Checkings;
+    else if (type == "CASH") return MyMoneyAccount::Cash;
+    else if (type == "CREDIT") return MyMoneyAccount::CreditCard;
+    else if (type == "INVEST") return MyMoneyAccount::Investment;
+    else if (type == "RECEIVABLE") return MyMoneyAccount::Asset;
+    else if (type == "ASSET") return MyMoneyAccount::Asset;
+    else if (type == "PAYABLE") return MyMoneyAccount::Liability;
+    else if (type == "LIABILITY") return MyMoneyAccount::Liability;
+    else if (type == "CURRENCY") return MyMoneyAccount::Currency;
+    else if (type == "INCOME") return MyMoneyAccount::Income;
+    else if (type == "EXPENSE") return MyMoneyAccount::Expense;
+    else if (type == "STOCK") return MyMoneyAccount::Stock;
+    else if (type == "MUTUAL") return MyMoneyAccount::Stock;
+    else if (type == "EQUITY") return MyMoneyAccount::Equity;
     else return 99; // unknown
 }
 
