@@ -286,6 +286,7 @@ endif(USE_HTML_HANDBOOK)
 ######################### The Actual Targets ##########################
 add_subdirectory( libkgpgfile )
 add_subdirectory( libkdchart )
+add_subdirectory( tools )
 add_subdirectory( kmymoney )
 add_subdirectory( doc )
 if (USE_DEVELOPER_DOC)

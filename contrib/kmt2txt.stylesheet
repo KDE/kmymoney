@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE xsl:stylesheet [
+  <!ENTITY nl "&#xa;">
+]>
+<xsl:stylesheet
+    version="1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    exclude-result-prefixes="html"
+>
+<xsl:output method="text"/>
+
+<xsl:variable name='newline'><xsl:text>
+</xsl:text></xsl:variable>
+
+<xsl:template match="text()">
+</xsl:template>
+
+<xsl:template match="//accounts/account/account/account/account">
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../../../@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../../@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../../../@name"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../../@name"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../@name"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="@name"/>
+  <xsl:text>&nl;</xsl:text>
+  <xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="//accounts/account/account/account">
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../../@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../../@name"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../@name"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="@name"/>
+  <xsl:text>&nl;</xsl:text>
+  <xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="//accounts/account/account">
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="../@name"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="@name"/>
+  <xsl:text>&nl;</xsl:text>
+  <xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="//accounts/account">
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="@type"/>
+  <xsl:text>-</xsl:text>
+  <xsl:value-of select="@name"/>
+  <xsl:text>&nl;</xsl:text>
+  <xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="//accounts">
+  <xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="/kmymoney-account-template">
+  <xsl:text>title:</xsl:text>
+  <xsl:value-of select="title"/>
+  <xsl:text>&nl;longdesc:</xsl:text>
+  <xsl:value-of select="longdesc"/>
+  <xsl:text>&nl;shortdesc:</xsl:text>
+  <xsl:value-of select="shortdesc"/>
+  <xsl:text>&nl;</xsl:text>
+  <xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="/">
+  <xsl:apply-templates/>
+</xsl:template>
+
+</xsl:stylesheet>
+
