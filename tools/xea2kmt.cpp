@@ -168,9 +168,9 @@ public:
             if (xml.name() == "title")
                 title = xml.readElementText().trimmed();
             else if (xml.name() == "short-description")
-                shortDescription = xml.readElementText().trimmed();
+                shortDescription = xml.readElementText().trimmed().replace("  ", " ");
             else if (xml.name() == "long-description")
-                longDescription = xml.readElementText().trimmed();
+                longDescription = xml.readElementText().trimmed().replace("  ", " ");
             else if (xml.name() == "account")
             {
                 TemplateAccount account;
