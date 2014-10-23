@@ -621,6 +621,8 @@ void KMyMoneyView::closeFile(void)
   disconnect(MyMoneyFile::instance(), SIGNAL(valueChanged(MyMoneyAccount)),
              Models::instance()->institutionsModel(), SLOT(slotBalanceOrValueChanged(MyMoneyAccount)));
 
+  disconnect(MyMoneyFile::instance(), SIGNAL(dataChanged()), m_homeView, SLOT(slotLoadView()));
+
   // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
   Models::instance()->fileClosed();
 
@@ -1092,6 +1094,9 @@ bool KMyMoneyView::initializeStorage()
   // inform everyone about new data
   MyMoneyFile::instance()->preloadCache();
   MyMoneyFile::instance()->forceDataChanged();
+
+  // views can wait since they are going to be refresed in slotRefreshViews
+  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), m_homeView, SLOT(slotLoadView()));
 
   // if we currently see a different page, then select the right one
   if (m_model->index(page).row() != KPageView::currentPage().row()) {

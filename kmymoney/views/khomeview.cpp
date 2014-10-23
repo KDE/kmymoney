@@ -88,7 +88,7 @@ class KHomeView::Private
 public:
   Private() :
       m_showAllSchedules(false),
-      m_needReload(true),
+      m_needReload(false),
       m_netWorthGraphLastValidSize(400, 300) {
   }
 
@@ -133,8 +133,6 @@ KHomeView::KHomeView(QWidget *parent, const char *name) :
   connect(d->m_part->browserExtension(), SIGNAL(openUrlRequest(const KUrl &,
           const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
           this, SLOT(slotOpenUrl(KUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
-
-  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
 }
 
 KHomeView::~KHomeView()
