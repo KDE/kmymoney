@@ -129,7 +129,7 @@ public:
    *
    * @return the balance of the account at the end of the date given
    */
-  const MyMoneyBalanceCacheItem balance(const QString& accountId, const QDate& date) const;
+  MyMoneyBalanceCacheItem balance(const QString& accountId, const QDate& date) const;
 
   /**
    * This function retrieves the balance from the cache having a date less
@@ -142,7 +142,7 @@ public:
    * @return the balance of the account at the end the nearest day on or
    * before the date provided
    */
-  const MyMoneyBalanceCacheItem mostRecentBalance(const QString& accountId, const QDate& date) const;
+  MyMoneyBalanceCacheItem mostRecentBalance(const QString& accountId, const QDate& date) const;
 
   /**
    * This function inserts the balance into the cache for the account on

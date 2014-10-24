@@ -1358,7 +1358,7 @@ const QList<MyMoneyInstitution> MyMoneyFile::institutionList(void) const
 }
 
 // general get functions
-const MyMoneyPayee MyMoneyFile::user(void) const
+const MyMoneyPayee& MyMoneyFile::user(void) const
 {
   d->checkStorage();
   return d->m_storage->user();
@@ -2588,7 +2588,7 @@ void MyMoneyFile::removePrice(const MyMoneyPrice& price)
   d->m_storage->removePrice(price);
 }
 
-const MyMoneyPrice MyMoneyFile::price(const QString& fromId, const QString& toId, const QDate& date, const bool exactDate) const
+MyMoneyPrice MyMoneyFile::price(const QString& fromId, const QString& toId, const QDate& date, const bool exactDate) const
 {
   d->checkStorage();
 

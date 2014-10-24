@@ -244,7 +244,7 @@ public:
   const QMap<QString, MyMoneyPayee> fetchPayees(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyTag> fetchTags(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const MyMoneyPriceList fetchPrices(const QStringList& fromIdList = QStringList(), const QStringList& toIdList = QStringList(), bool forUpdate = false) const;
-  const MyMoneyPrice fetchSinglePrice(const QString& fromIdList, const QString& toIdList, const QDate& date, bool exactDate, bool forUpdate = false) const;
+  MyMoneyPrice fetchSinglePrice(const QString& fromId, const QString& toId, const QDate& date_, bool exactDate, bool = false) const;
   const QMap<QString, MyMoneyReport> fetchReports(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneySchedule> fetchSchedules(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneySecurity> fetchSecurities(const QStringList& idList = QStringList(), bool forUpdate = false) const;

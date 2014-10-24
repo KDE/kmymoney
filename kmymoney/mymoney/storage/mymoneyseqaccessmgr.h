@@ -62,7 +62,7 @@ public:
   ~MyMoneySeqAccessMgr();
 
   // general get functions
-  const MyMoneyPayee user(void) const {
+  const MyMoneyPayee& user(void) const {
     return m_user;
   };
   const QDate creationDate(void) const {
@@ -1031,7 +1031,7 @@ public:
     * This method retrieves a price from the price list.
     * If @p date is inValid, QDate::currentDate() is assumed.
     */
-  const MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& date, const bool exactDate) const;
+  MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& _date, const bool exactDate) const;
 
   /**
     * This method returns a list of all price entries.

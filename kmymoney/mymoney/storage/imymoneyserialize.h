@@ -60,7 +60,7 @@ public:
   virtual ~IMyMoneySerialize();
 
   // general get functions
-  virtual const MyMoneyPayee user(void) const = 0;
+  virtual const MyMoneyPayee& user(void) const = 0;
   virtual const QDate creationDate(void) const = 0;
   virtual const QDate lastModificationDate(void) const = 0;
   virtual unsigned int currentFixVersion(void) const = 0;

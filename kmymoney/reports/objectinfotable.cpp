@@ -339,7 +339,7 @@ MyMoneyMoney ObjectInfoTable::investmentBalance(const MyMoneyAccount& acc)
       MyMoneyMoney val;
       MyMoneyMoney balance = file->balance(stock.id());
       MyMoneySecurity security = file->security(stock.currencyId());
-      MyMoneyPrice price = file->price(stock.currencyId(), security.tradingCurrency());
+      const MyMoneyPrice &price = file->price(stock.currencyId(), security.tradingCurrency());
       val = balance * price.rate(security.tradingCurrency());
       // adjust value of security to the currency of the account
       MyMoneySecurity accountCurrency = file->currency(acc.currencyId());

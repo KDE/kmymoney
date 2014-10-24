@@ -276,7 +276,7 @@ void MyMoneyStatementReader::Private::setupPrice(MyMoneySplit &s, const MyMoneyA
     MyMoneySecurity toCurrency = file->security(splitAccount.currencyId());
     MyMoneySecurity fromCurrency = file->security(transactionAccount.currencyId());
     // get the price for the transaction's date
-    MyMoneyPrice price = file->price(fromCurrency.id(), toCurrency.id(), postDate);
+    const MyMoneyPrice &price = file->price(fromCurrency.id(), toCurrency.id(), postDate);
     // if the price is valid calculate the shares
     if (price.isValid()) {
       const int fract = splitAccount.fraction(toCurrency);
@@ -670,7 +670,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // update the price, while we're here.  in the future, this should be
             // an option
             QString basecurrencyid = file->baseCurrency().id();
-            MyMoneyPrice price = file->price(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted, true);
+            const MyMoneyPrice &price = file->price(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted, true);
             if (!price.isValid()  && ((!statementTransactionUnderImport.m_amount.isZero() && !statementTransactionUnderImport.m_shares.isZero()) || !statementTransactionUnderImport.m_price.isZero())) {
               MyMoneyPrice newprice;
               if (!statementTransactionUnderImport.m_price.isZero()) {

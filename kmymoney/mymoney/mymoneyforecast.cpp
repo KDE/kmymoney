@@ -177,11 +177,10 @@ void MyMoneyForecast::pastTransactions()
       MyMoneySecurity undersecurity = file->security(acc.currencyId());
       if (! undersecurity.isCurrency()) { //only do it if the security is not an actual currency
         MyMoneyMoney rate = MyMoneyMoney(1, 1);    //set the default value
-        MyMoneyPrice price;
 
         for (QDate it_date = historyStartDate().addDays(-1) ; it_date <= historyEndDate();) {
           //get the price for the tradingCurrency that day
-          price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), it_date);
+          const MyMoneyPrice &price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), it_date);
           if (price.isValid()) {
             rate = price.rate(undersecurity.tradingCurrency());
           }
@@ -538,11 +537,10 @@ void MyMoneyForecast::doFutureScheduledForecast(void)
       if (! undersecurity.isCurrency()) {
         //set the default value
         MyMoneyMoney rate = MyMoneyMoney(1, 1);
-        MyMoneyPrice price;
 
         for (QDate it_day = QDate::currentDate(); it_day <= forecastEndDate();) {
           //get the price for the tradingCurrency that day
-          price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), it_day);
+          const MyMoneyPrice &price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), it_day);
           if (price.isValid()) {
             rate = price.rate(undersecurity.tradingCurrency());
           }
@@ -1144,7 +1142,7 @@ void MyMoneyForecast::setStartingBalance(const MyMoneyAccount &acc)
       //set the default value
       MyMoneyMoney rate = MyMoneyMoney(1, 1);
       //get te
-      MyMoneyPrice price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), QDate::currentDate());
+      const MyMoneyPrice &price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), QDate::currentDate());
       if (price.isValid()) {
         rate = price.rate(undersecurity.tradingCurrency());
       }
@@ -1185,7 +1183,7 @@ void MyMoneyForecast::setStartingBalance(const MyMoneyAccount &acc)
             MyMoneyMoney rate = MyMoneyMoney(1, 1);
 
             //get the rate for that specific date
-            MyMoneyPrice price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), it_date);
+            const MyMoneyPrice &price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), it_date);
             if (price.isValid()) {
               rate = price.rate(undersecurity.tradingCurrency());
             }
