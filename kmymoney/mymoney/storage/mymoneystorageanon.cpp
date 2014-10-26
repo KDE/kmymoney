@@ -240,9 +240,9 @@ MyMoneyMoney MyMoneyStorageANON::hideNumber(const MyMoneyMoney& _in) const
 
   // preserve sign
   if (_in.isNegative())
-    result = MyMoneyMoney(-1, 1);
+    result = MyMoneyMoney::MINUS_ONE;
   else
-    result = MyMoneyMoney(1, 1);
+    result = MyMoneyMoney::ONE;
 
   result = result * counter;
   counter += MyMoneyMoney("10/100");

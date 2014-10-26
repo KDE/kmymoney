@@ -479,7 +479,7 @@ void KGlobalLedgerView::loadView(void)
     for (it = m_transactionList.constBegin(); it != m_transactionList.constEnd(); ++it) {
       uniqueMap[(*it).first.id()]++;
       KMyMoneyRegister::Transaction* t = KMyMoneyRegister::Register::transactionFactory(m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
-      actBalance[t->split().accountId()] = MyMoneyMoney(0, 1);
+      actBalance[t->split().accountId()] = MyMoneyMoney();
       kmymoney->slotStatusProgressBar(++i, 0);
       // if we're in reconciliation and the state is cleared, we
       // force the item to show in dimmed intensity to get a visual focus

@@ -3055,7 +3055,7 @@ void KMyMoneyApp::createCategory(MyMoneyAccount& account, const MyMoneyAccount& 
     account = dialog->account();
     parentAccount = dialog->parentAccount();
 
-    createAccount(account, parentAccount, brokerageAccount, MyMoneyMoney(0, 1));
+    createAccount(account, parentAccount, brokerageAccount, MyMoneyMoney());
   }
   delete dialog;
 }
@@ -3213,7 +3213,7 @@ void KMyMoneyApp::slotManualPriceUpdate(void)
       signed64 fract = MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision());
 
       QPointer<KCurrencyCalculator> calc =
-        new KCurrencyCalculator(security, currency, MyMoneyMoney(1, 1), price.rate(currency.id()), price.date(), fract);
+        new KCurrencyCalculator(security, currency, MyMoneyMoney::ONE, price.rate(currency.id()), price.date(), fract);
       calc->setupPriceEditor();
 
       // The dialog takes care of adding the price if necessary

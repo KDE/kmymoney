@@ -120,7 +120,7 @@ MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date, bool exactDate)
                    .arg(undersecurity.name())
                    .arg(file->security(undersecurity.tradingCurrency()).name())
                    .arg(date.toString()));
-      result = MyMoneyMoney(0, 1);
+      result = MyMoneyMoney();
     }
   }
 

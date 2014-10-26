@@ -202,7 +202,10 @@ public:
     return (*this == autoCalc);
   }
 
-  const MyMoneyMoney reduce(void) const;
+  MyMoneyMoney reduce(void) const;
+
+  static const MyMoneyMoney ONE;
+  static const MyMoneyMoney MINUS_ONE;
 
 private:
 

@@ -267,7 +267,7 @@ void KCurrencyCalculator::updateExample(const MyMoneyMoney& price)
     if (m_fromCurrency.isCurrency()) {
       msg += QString("\n");
       msg += QString("1 %1 = %2 %3").arg(m_toCurrency.tradingSymbol())
-             .arg((MyMoneyMoney(1, 1) / price).formatMoney("", KMyMoneyGlobalSettings::pricePrecision()))
+             .arg((MyMoneyMoney::ONE / price).formatMoney("", KMyMoneyGlobalSettings::pricePrecision()))
              .arg(m_fromCurrency.tradingSymbol());
     }
   }

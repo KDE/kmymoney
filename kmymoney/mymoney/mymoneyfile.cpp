@@ -2601,7 +2601,7 @@ MyMoneyPrice MyMoneyFile::price(const QString& fromId, const QString& toId, cons
 
   // we don't search our tables if someone asks stupid stuff
   if (fromId == toId) {
-    return MyMoneyPrice(fromId, toId, date, MyMoneyMoney(1, 1), "KMyMoney");
+    return MyMoneyPrice(fromId, toId, date, MyMoneyMoney::ONE, "KMyMoney");
   }
 
   // if not asking for exact date, try to find the exact date match first,
@@ -2805,7 +2805,7 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
       if (category.value("VatAmount").toLower() != QString("net")) {
         // split value is the gross value
         gv = amount;
-        nv = gv / (MyMoneyMoney(1, 1) + vatRate);
+        nv = gv / (MyMoneyMoney::ONE + vatRate);
         MyMoneySplit catSplit = transaction.splitByAccount(account.id(), false);
         catSplit.setShares(-nv.convert(fract));
         catSplit.setValue(catSplit.shares());
@@ -2814,7 +2814,7 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
       } else {
         // split value is the net value
         nv = amount;
-        gv = nv * (MyMoneyMoney(1, 1) + vatRate);
+        gv = nv * (MyMoneyMoney::ONE + vatRate);
         MyMoneySplit accSplit = transaction.splitByAccount(account.id());
         accSplit.setValue(gv.convert(fract));
         accSplit.setShares(accSplit.value());

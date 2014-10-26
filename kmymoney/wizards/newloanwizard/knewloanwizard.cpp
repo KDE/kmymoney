@@ -439,7 +439,7 @@ int KNewLoanWizard::calculateLoan(void)
         result += i18n("The number of payments has been decremented and the final payment has been modified to %1.", m_finalPaymentPage->m_finalPaymentEdit->lineedit()->text());
       } else if ((field("borrowButton").toBool() && val < 0 && qAbs(val) < qAbs(calc.payment()))
                  || (field("lendButton").toBool() && val > 0 && qAbs(val) < qAbs(calc.payment()))) {
-        m_finalPaymentPage->m_finalPaymentEdit->loadText(MyMoneyMoney(0, 1).formatMoney(fraction));
+        m_finalPaymentPage->m_finalPaymentEdit->loadText(MyMoneyMoney().formatMoney(fraction));
       } else {
         MyMoneyMoney refVal(static_cast<double>(val));
         m_finalPaymentPage->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));

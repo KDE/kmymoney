@@ -258,7 +258,7 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
     }
   }
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney(1, 1), feeSplits, m_feeSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
     return false;
 
   createAssetAccountSplit(assetAccountSplit, s0);
@@ -357,10 +357,10 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
     }
   }
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney(1, 1), feeSplits, m_feeSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
     return false;
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney(-1, 1), interestSplits, m_interestSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
     return false;
 
   createAssetAccountSplit(assetAccountSplit, s0);
@@ -436,12 +436,12 @@ bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   MyMoneyMoney shares;
   s0.setShares(shares);
   s0.setValue(shares);
-  s0.setPrice(MyMoneyMoney(1, 1));
+  s0.setPrice(MyMoneyMoney::ONE);
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney(1, 1), feeSplits, m_feeSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
     return false;
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney(-1, 1), interestSplits, m_interestSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
     return false;
 
   createAssetAccountSplit(assetAccountSplit, s0);
@@ -534,10 +534,10 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
     }
   }
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney(1, 1), feeSplits, m_feeSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
     return false;
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney(-1, 1), interestSplits, m_interestSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
     return false;
 
   if (interestSplits.count() != 1) {
@@ -590,8 +590,8 @@ bool Add::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
 
   s0.setAction(MyMoneySplit::AddShares);
   s0.setShares(sharesEdit->value().abs());
-  s0.setValue(MyMoneyMoney(0, 1));
-  s0.setPrice(MyMoneyMoney(0, 1));
+  s0.setValue(MyMoneyMoney());
+  s0.setPrice(MyMoneyMoney());
 
   assetAccountSplit.setValue(MyMoneyMoney());//  Clear any leftover value from previous Dividend.
 
@@ -633,8 +633,8 @@ bool Remove::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneyS
 
   s0.setAction(MyMoneySplit::AddShares);
   s0.setShares(-(sharesEdit->value().abs()));
-  s0.setValue(MyMoneyMoney(0, 1));
-  s0.setPrice(MyMoneyMoney(0, 1));
+  s0.setValue(MyMoneyMoney());
+  s0.setPrice(MyMoneyMoney());
 
   assetAccountSplit.setValue(MyMoneyMoney());//  Clear any leftover value from previous Dividend.
 
@@ -680,8 +680,8 @@ bool Split::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySp
 
   s0.setAction(MyMoneySplit::SplitShares);
   s0.setShares(sharesEdit->value().abs());
-  s0.setValue(MyMoneyMoney(0, 1));
-  s0.setPrice(MyMoneyMoney(0, 1));
+  s0.setValue(MyMoneyMoney());
+  s0.setPrice(MyMoneyMoney());
 
   feeSplits.clear();
   interestSplits.clear();
@@ -752,11 +752,11 @@ bool IntInc::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneyS
   MyMoneyMoney shares;
   s0.setShares(shares);
   s0.setValue(shares);
-  s0.setPrice(MyMoneyMoney(1, 1));
+  s0.setPrice(MyMoneyMoney::ONE);
 
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney(1, 1), feeSplits, m_feeSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount")), MyMoneyMoney::ONE, feeSplits, m_feeSplits))
     return false;
-  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney(-1, 1), interestSplits, m_interestSplits))
+  if (!createCategorySplits(t, dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account")), dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount")), MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
     return false;
 
   createAssetAccountSplit(assetAccountSplit, s0);

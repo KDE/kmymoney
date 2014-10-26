@@ -674,7 +674,7 @@ void PivotTable::calculateOpeningBalances(void)
 
 void PivotTable::calculateRunningSums(PivotInnerGroup::iterator& it_row)
 {
-  MyMoneyMoney runningsum = it_row.value()[eActual][0].calculateRunningSum(MyMoneyMoney(0, 1));
+  MyMoneyMoney runningsum = it_row.value()[eActual][0].calculateRunningSum(MyMoneyMoney());
   int column = 1;
   while (column < m_numColumns) {
     if (it_row.value()[eActual].count() <= column)
@@ -991,7 +991,7 @@ void PivotTable::convertToBaseCurrency(void)
               //convert to lowest fraction
               it_row.value()[ m_rowTypeList[i] ][column] = PivotCell(value.convert(fraction));
 
-              DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney(1, 1) , QString("Factor of %1, value was %2, now %3").arg(conversionfactor).arg(DEBUG_SENSITIVE(oldval)).arg(DEBUG_SENSITIVE(it_row.value()[m_rowTypeList[i]][column].toDouble())));
+              DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE , QString("Factor of %1, value was %2, now %3").arg(conversionfactor).arg(DEBUG_SENSITIVE(oldval)).arg(DEBUG_SENSITIVE(it_row.value()[m_rowTypeList[i]][column].toDouble())));
             }
           }
 
@@ -1047,7 +1047,7 @@ void PivotTable::convertToDeepCurrency(void)
             it_row.value()[ePrice][column] = PivotCell(priceValue.convert(10000));
           }
 
-          DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney(1, 1) , QString("Factor of %1, value was %2, now %3").arg(conversionfactor).arg(DEBUG_SENSITIVE(oldval)).arg(DEBUG_SENSITIVE(it_row.value()[eActual][column].toDouble())));
+          DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE , QString("Factor of %1, value was %2, now %3").arg(conversionfactor).arg(DEBUG_SENSITIVE(oldval)).arg(DEBUG_SENSITIVE(it_row.value()[eActual][column].toDouble())));
 
           ++column;
         }
@@ -2081,7 +2081,7 @@ void PivotTable::calculateMovingAverage(void)
         //check whether columns are days or months
         if (m_config_f.columnType() == MyMoneyReport::eDays) {
           while (column < m_numColumns) {
-            MyMoneyMoney totalPrice = MyMoneyMoney(0, 1);
+            MyMoneyMoney totalPrice = MyMoneyMoney();
 
             QDate averageStart = columnDate(column).addDays(-delta);
             QDate averageEnd = columnDate(column).addDays(delta);
@@ -2135,7 +2135,7 @@ void PivotTable::calculateMovingAverage(void)
             }
 
             //gather the actual data and calculate the average
-            MyMoneyMoney totalPrice = MyMoneyMoney(0, 1);
+            MyMoneyMoney totalPrice = MyMoneyMoney();
             QDate averageEnd = columnDate(column);
             for (QDate averageDate = averageStart; averageDate <= averageEnd; averageDate = averageDate.addDays(1)) {
               if (m_config_f.isConvertCurrency()) {
@@ -2197,7 +2197,7 @@ void PivotTable::fillBasePriceUnit(ERowType rowType)
           //only add the dummy value if there is a price for that date
           if (firstPriceExists) {
             //insert a unit of currency for each account
-            it_row.value()[rowType][column] = MyMoneyMoney(1, 1);
+            it_row.value()[rowType][column] = MyMoneyMoney::ONE;
           }
           ++column;
         }

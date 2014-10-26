@@ -807,7 +807,7 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
     switch (activityCombo->activity()) {
       case MyMoneySplit::BuyShares:
       case MyMoneySplit::ReinvestDividend:
-        factor = MyMoneyMoney(1, 1);
+        factor = MyMoneyMoney::ONE;
         break;
       default:
         break;
@@ -820,7 +820,7 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
     MyMoneyMoney factor(1, 1);
     switch (activityCombo->activity()) {
       case MyMoneySplit::BuyShares:
-        factor = MyMoneyMoney(-1, 1);
+        factor = MyMoneyMoney::MINUS_ONE;
         break;
       default:
         break;

@@ -62,7 +62,7 @@ void MyMoneyAccountTest::testConstructor()
   r.setNumber("465500");
   r.setParentAccountId(parent);
   r.setValue(QString("key"), "value");
-  s.setShares(MyMoneyMoney(1, 1));
+  s.setShares(MyMoneyMoney::ONE);
   r.adjustBalance(s);
   QVERIFY(r.m_kvp.count() == 1);
   QVERIFY(r.value("key") == "value");
@@ -78,7 +78,7 @@ void MyMoneyAccountTest::testConstructor()
   QVERIFY(a.description() == "Desc");
   QVERIFY(a.accountList().count() == 0);
   QVERIFY(a.parentAccountId() == "Parent");
-  QVERIFY(a.balance() == MyMoneyMoney(1, 1));
+  QVERIFY(a.balance() == MyMoneyMoney::ONE);
 
   QMap<QString, QString> copy;
   copy = r.pairs();
