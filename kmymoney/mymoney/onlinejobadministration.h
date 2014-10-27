@@ -239,6 +239,12 @@ private:
    */
   onlineTask* createOnlineTaskByXml( const QString& iid, const QDomElement& element ) const;
 
+  /**
+   * @brief Creates an onlineTask by its iid and xml data
+   * @return pointer to task, caller gains ownership. Can be 0.
+   */
+  onlineTask* createOnlineTaskFromSqlDatabase( const QString& iid, const QString& onlineJobId, QSqlDatabase connection ) const;
+
   // Must be able to call createOnlineTaskByXml
   friend class onlineJob;
 
@@ -248,6 +254,9 @@ private:
 
   // Must be able to call task creators
   friend class taskConverterGermanToSepa;
+
+  // Must be able to call createOnlineTaskFromSqlDatabase()
+  friend class MyMoneyStorageSql;
 
   /**
    * @brief Get root instance of an onlineTask

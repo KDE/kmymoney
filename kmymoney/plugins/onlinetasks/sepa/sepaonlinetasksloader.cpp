@@ -23,10 +23,12 @@
 
 #include "tasks/sepaonlinetransferimpl.h"
 #include "ui/sepacredittransferedit.h"
+#include "sepastorageplugin.h"
 
 K_PLUGIN_FACTORY(SepaOnlineTaskFactory,
                  registerPlugin<sepaOnlineTasksLoader>();
                  registerPlugin<sepaCreditTransferEdit>("sepaCreditTransferUi");
+                 registerPlugin<sepaStoragePlugin>("sepaSqlStoragePlugin");
                 )
 K_EXPORT_PLUGIN(SepaOnlineTaskFactory("sepaOnlineTasksLoader"))
 

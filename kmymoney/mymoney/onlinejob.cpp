@@ -186,7 +186,6 @@ void onlineJob::setJobSend( const QDateTime &dateTime )
 
 void onlineJob::setBankAnswer( const sendingState sendingState, const QDateTime &dateTime )
 {
-  Q_ASSERT( sendingState == abortedByUser || sendingState == rejectedByBank || sendingState == acceptedByBank || sendingState == sendingError );
   m_jobBankAnswerState = sendingState;
   m_jobBankAnswerDate = dateTime;
 }

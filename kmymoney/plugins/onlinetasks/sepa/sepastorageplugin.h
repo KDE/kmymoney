@@ -1,5 +1,5 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager f*or KDE
+ * This file is part of KMyMoney, A Personal Finance Manager for KDE
  * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
@@ -16,25 +16,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KMYMONEYSTORINGPLUGIN_H
-#define KMYMONEYSTORINGPLUGIN_H
+#ifndef SEPASTORAGEPLUGIN_H
+#define SEPASTORAGEPLUGIN_H
 
-#include <QString>
+#include "kmymoneystorageplugin.h"
 
-/**
- * @brief Interface for plugins which store data
- *
- */
-class KMyMoneyStoringPlugin
+#include <QVariantList>
+
+class sepaStoragePlugin : public KMyMoneyPlugin::storagePlugin
 {
+  Q_OBJECT
+
 public:
-  /**
-   * @brief Setup database to make it usable by the plugins
-   *
-   * Use @c QSqlDatabase::database(connectionName); to get a database connection.
-   */
-  bool setupDatabase( const QString& connectionName ) = 0;
-  bool uninstallPlugin( const QString& connectionName ) = 0;
+  sepaStoragePlugin(QObject* parent = 0, const QVariantList& options = QVariantList());
+  virtual bool removePluginData(QSqlDatabase connection);
+  virtual bool setupDatabase(QSqlDatabase connection);
+
+private:
+  static const QString iid;
 };
 
-#endif // KMYMONEYSTORINGPLUGIN_H
+#endif // SEPASTORAGEPLUGIN_H

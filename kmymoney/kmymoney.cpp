@@ -7369,8 +7369,12 @@ void KMyMoneyApp::slotNewOnlineTransfer(void)
 
 void KMyMoneyApp::slotEditOnlineJob(const QString jobId)
 {
-  const onlineJob constJob = MyMoneyFile::instance()->getOnlineJob( jobId );
-  slotEditOnlineJob( constJob );
+  try {
+    const onlineJob constJob = MyMoneyFile::instance()->getOnlineJob( jobId );
+    slotEditOnlineJob( constJob );
+  } catch ( MyMoneyException& ) {
+    // Prevent a crash in very rare cases
+  }
 }
 
 void KMyMoneyApp::slotEditOnlineJob(onlineJob job)

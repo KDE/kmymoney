@@ -378,30 +378,33 @@ const QList<MyMoneyTag> MyMoneyDatabaseMgr::tagList(void) const
   if (m_sql) {
     if (! m_sql->isOpen())((QSqlDatabase*)(m_sql.data()))->open();
     return m_sql->fetchTags().values();
-  } else
+  } else {
     return QList<MyMoneyTag> ();
+  }
 }
 
 void MyMoneyDatabaseMgr::modifyOnlineJob(const onlineJob& job)
 {
-  Q_UNUSED(job);
-  //TODO: add code here similar to other data types
+  if (job.id().isEmpty())
+    throw MYMONEYEXCEPTION("empty online job id");
+  m_sql->modifyOnlineJob(job);
 }
 
 void MyMoneyDatabaseMgr::addOnlineJob( onlineJob& job )
 {
-  Q_UNUSED(job);
-  //TODO: add code here similar to other data types
+  job = onlineJob(nextOnlineJobID(), job);
+  m_sql->addOnlineJob(job);
 }
 
 const onlineJob MyMoneyDatabaseMgr::getOnlineJob(const QString &jobId) const
 {
-  if (jobId.isEmpty()) {
+  if (jobId.isEmpty())
     throw MYMONEYEXCEPTION("empty online job id");
-  }
 
   if (m_sql) {
-    if (! m_sql->isOpen())((QSqlDatabase*)(m_sql.data()))->open();
+    if (! m_sql->isOpen())
+      ((QSqlDatabase*)(m_sql.data()))->open();
+
     QMap <QString, onlineJob> jobList = m_sql->fetchOnlineJobs(QStringList(jobId));
     QMap <QString, onlineJob>::ConstIterator pos = jobList.constFind(jobId);
 
@@ -413,26 +416,25 @@ const onlineJob MyMoneyDatabaseMgr::getOnlineJob(const QString &jobId) const
   }
 
   // throw an exception, if it does not exist
-  QString msg = "Unknown online job id '" + jobId + '\'';
-  throw MYMONEYEXCEPTION(msg);
-}
-
-long unsigned int MyMoneyDatabaseMgr::onlineJobId() const
-{
-  //return m_sql->getNextOnlineJobId();
-  //TODO: implement this
-  return 1;
+  throw MYMONEYEXCEPTION(QLatin1String("Unknown online job id '") + jobId + QLatin1Char('\''));
 }
 
 const QList<onlineJob> MyMoneyDatabaseMgr::onlineJobList() const
 {
-  //TODO: add code here similar to other data types
+  if (m_sql) {
+    if ( !m_sql->isOpen() )
+      ((QSqlDatabase*)(m_sql.data()))->open();
+    return m_sql->fetchOnlineJobs().values();
+  }
   return QList<onlineJob>();
 }
 
-void MyMoneyDatabaseMgr::removeOnlineJob( const onlineJob& )
+void MyMoneyDatabaseMgr::removeOnlineJob( const onlineJob& job )
 {
-  //TODO: add code here similar to other data types
+  if (job.id().isEmpty())
+    throw MYMONEYEXCEPTION("Empty online job id during remove.");
+
+  m_sql->removeOnlineJob(job);
 }
 
 const MyMoneyAccount MyMoneyDatabaseMgr::account(const QString& id) const
@@ -591,6 +593,17 @@ const QString MyMoneyDatabaseMgr::nextSecurityID(void)
     if (! m_sql->isOpen())((QSqlDatabase*)(m_sql.data()))->open();
     id.setNum(ulong(m_sql->incrementSecurityId()));
     id = 'E' + id.rightJustified(SECURITY_ID_SIZE, '0');
+  }
+  return id;
+}
+
+const QString MyMoneyDatabaseMgr::nextOnlineJobID()
+{
+  QString id;
+  if (m_sql) {
+    if (! m_sql->isOpen())((QSqlDatabase*)(m_sql.data()))->open();
+    id.setNum(m_sql->incrementOnlineJobId());
+    id = QLatin1Char('O') + id.rightJustified(ONLINEJOB_ID_SIZE, '0');
   }
   return id;
 }
@@ -2076,6 +2089,11 @@ void MyMoneyDatabaseMgr::loadPrices(const MyMoneyPriceList& list)
   Q_UNUSED(list);
 }
 
+void MyMoneyDatabaseMgr::loadOnlineJobs(const QMap< QString, onlineJob >& onlineJobs)
+{
+  Q_UNUSED(onlineJobs);
+}
+
 unsigned long MyMoneyDatabaseMgr::accountId(void) const
 {
   return m_sql->getNextAccountId();
@@ -2121,6 +2139,16 @@ unsigned long MyMoneyDatabaseMgr::budgetId(void) const
   return m_sql->getNextBudgetId();
 }
 
+long unsigned int MyMoneyDatabaseMgr::onlineJobId() const
+{
+  return m_sql->getNextOnlineJobId();
+}
+
+long unsigned int MyMoneyDatabaseMgr::payeeIdentifierId() const
+{
+  return m_sql->getNextPayeeIdentifierId();
+}
+
 void MyMoneyDatabaseMgr::loadAccountId(const unsigned long id)
 {
   m_sql->loadAccountId(id);
@@ -2164,6 +2192,16 @@ void MyMoneyDatabaseMgr::loadReportId(const unsigned long id)
 void MyMoneyDatabaseMgr::loadBudgetId(const unsigned long id)
 {
   m_sql->loadBudgetId(id);
+}
+
+void MyMoneyDatabaseMgr::loadOnlineJobId(const long unsigned int id)
+{
+  m_sql->loadOnlineJobId(id);
+}
+
+void MyMoneyDatabaseMgr::loadPayeeIdentifierId(const long unsigned int id)
+{
+  m_sql->loadPayeeIdentifierId(id);
 }
 
 void MyMoneyDatabaseMgr::rebuildAccountBalances(void)

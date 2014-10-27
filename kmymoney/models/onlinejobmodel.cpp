@@ -153,7 +153,7 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
       switch (job.bankAnswerState()) {
         case onlineJob::acceptedByBank: return i18nc("Arg 1 is a date/time", "This task was accepted by the bank on %1").arg(job.bankAnswerDate().toString( Qt::DefaultLocaleShortDate ));
         case onlineJob::sendingError: return i18nc("Arg 1 is a date/time", "Sending this task failed on %1").arg(job.sendDate().toString( Qt::DefaultLocaleShortDate ));
-        case onlineJob::abortedByUser: return i18n("Sending this task was aborted manually.");
+        case onlineJob::abortedByUser: return i18n("Sending this task was manually aborted.");
         case onlineJob::rejectedByBank: return i18nc("Arg 1 is a date/time", "The bank rejected this task on %1").arg(job.bankAnswerDate().toString( Qt::DefaultLocaleShortDate ));
         case onlineJob::noBankAnswer:
           if ( job.sendDate().isValid() )

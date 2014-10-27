@@ -22,6 +22,7 @@
 #include <algorithm>
 
 #include <klocalizedstring.h>
+#include <QSqlQuery>
 
 #include "sepaonlinetransfer.h"
 
@@ -60,6 +61,10 @@ public:
   bool isValid() const;
 
   QString jobTypeName() const { return i18n("SEPA Credit Transfer"); }
+  virtual QString storagePluginIid() const { return QLatin1String("org.kmymoney.sqlStoragePlugin.sepa"); }
+  virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
+  virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
+  virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
 
   unsigned short int textKey() const { return _textKey; }
   unsigned short int subTextKey() const { return _subTextKey; }
@@ -72,9 +77,12 @@ protected:
   sepaOnlineTransfer* clone() const;
 
   virtual sepaOnlineTransfer* createFromXml(const QDomElement &element) const;
+  virtual onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const;
   virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
 
 private:
+  void bindValuesToQuery( QSqlQuery& query, const QString& id ) const;
+
   mutable QSharedPointer<const settings> _settings;
 
   QString _originAccount;
