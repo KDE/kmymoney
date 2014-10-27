@@ -695,7 +695,7 @@ void kMyMoneySplitTable::endEdit(bool keyboardDriven, bool setFocusToNextRow)
 
         // if the shares are still 0, we need to change that
         if (toValue.isZero()) {
-          MyMoneyPrice price = MyMoneyFile::instance()->price(fromCurrency.id(), toCurrency.id());
+          const MyMoneyPrice &price = MyMoneyFile::instance()->price(fromCurrency.id(), toCurrency.id());
           // if the price is valid calculate the shares. If it is invalid
           // assume a conversion rate of 1.0
           if (price.isValid()) {

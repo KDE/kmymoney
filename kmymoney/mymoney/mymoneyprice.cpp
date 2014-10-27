@@ -37,8 +37,7 @@
 
 #include "mymoneyexception.h"
 
-MyMoneyPrice::MyMoneyPrice() :
-    m_date(QDate())
+MyMoneyPrice::MyMoneyPrice()
 {
 }
 
@@ -78,7 +77,7 @@ MyMoneyPrice::~MyMoneyPrice()
 {
 }
 
-const MyMoneyMoney MyMoneyPrice::rate(const QString& id) const
+const MyMoneyMoney& MyMoneyPrice::rate(const QString& id) const
 {
   static MyMoneyMoney dummyPrice(1, 1);
 

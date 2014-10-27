@@ -193,7 +193,7 @@ public:
   MyMoneyFile(IMyMoneyStorage *storage);
 
   // general get functions
-  const MyMoneyPayee user(void) const;
+  const MyMoneyPayee& user(void) const;
 
   // general set functions
   void setUser(const MyMoneyPayee& user);
@@ -1250,7 +1250,7 @@ public:
     * @return price found as MyMoneyPrice object
     * @note This throws an exception when the base currency is not set and toId is empty
     */
-  const MyMoneyPrice price(const QString& fromId, const QString& toId = QString(), const QDate& date = QDate::currentDate(), const bool exactDate = false) const;
+  MyMoneyPrice price(const QString& fromId, const QString& toId = QString(), const QDate& date = QDate::currentDate(), const bool exactDate = false) const;
 
   /**
     * This method returns a list of all prices.

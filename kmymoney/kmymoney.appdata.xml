@@ -84,6 +84,7 @@
       <caption>KMyMoney has a welcome page to help new users get off to a good start</caption>
       <caption xml:lang="ca">El KMyMoney disposa d'una pàgina de benvinguda per ajudar els nous usuaris a començar amb bon peu.</caption>
       <caption xml:lang="de">KMyMoney hat eine Willkommensseite, um neuen Benutzern zu Anfang zu unterstützten</caption>
+      <caption xml:lang="en-GB">KMyMoney has a welcome page to help new users get off to a good start</caption>
       <caption xml:lang="fi">KMyMoneyssa on tervetulosivu auttamaan uusia käyttäjiä</caption>
       <caption xml:lang="it">KMyMoney ha una pagina di benvenuto per aiutare i nuovi utenti a iniziare a utilizzarlo nel modo giusto</caption>
       <caption xml:lang="nl">KMyMoney heeft een welkomstpagina om nieuwe gebruikers bij een goede start te helpen</caption>
@@ -99,6 +100,7 @@
     <screenshot>
       <caption>The financial summary gives you an overview of your finances</caption>
       <caption xml:lang="ca">El resum financer us ofereix una visió general de les vostres finances</caption>
+      <caption xml:lang="en-GB">The financial summary gives you an overview of your finances</caption>
       <caption xml:lang="fi">Taloustietojen yhteenveto antaa yleiskuvan taloustilanteestasi</caption>
       <caption xml:lang="it">Il riepilogo finanziario ti offre una panoramica delle tue finanze</caption>
       <caption xml:lang="nl">De financiële samenvatting geeft u een overzicht van uw financiën</caption>
@@ -114,6 +116,7 @@
     <screenshot>
       <caption>In this view your accounts are organized, viewed, and managed by the institutions they are held at</caption>
       <caption xml:lang="ca">En aquesta vista s'organitzen, visualitzen i administren els vostres comptes per les institucions que els gestionen</caption>
+      <caption xml:lang="en-GB">In this view your accounts are organised, viewed, and managed by the institutions they are held at</caption>
       <caption xml:lang="fi">Tässä näkymässä tilit järjestellään, katsotaan ja hallitaan niihin liittyvien rahalaitosten kautta</caption>
       <caption xml:lang="it">In questa vista i tuoi conti sono organizzati, visualizzati e gestiti in base agli istituti presso i quali sono stati accesi.</caption>
       <caption xml:lang="nl">In deze weergave zijn uw rekeningen georganiseerd, getoond en beheerd door de banken waar ze berusten</caption>

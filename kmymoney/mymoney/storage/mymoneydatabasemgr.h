@@ -52,7 +52,7 @@ public:
   ~MyMoneyDatabaseMgr();
 
   // general get functions
-  virtual const MyMoneyPayee user(void) const;
+  virtual const MyMoneyPayee& user(void) const;
   virtual const QDate creationDate(void) const;
   virtual const QDate lastModificationDate(void) const;
   virtual unsigned int currentFixVersion(void) const;
@@ -607,7 +607,7 @@ public:
 
   virtual void addPrice(const MyMoneyPrice& price);
   virtual void removePrice(const MyMoneyPrice& price);
-  virtual const MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& date, const bool exactDate) const;
+  virtual MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& _date, const bool exactDate) const;
 
   /**
     * This method returns a list of all prices.

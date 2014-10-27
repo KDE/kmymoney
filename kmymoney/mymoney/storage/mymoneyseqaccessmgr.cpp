@@ -1844,7 +1844,7 @@ const MyMoneyPriceList MyMoneySeqAccessMgr::priceList(void) const
   return list;
 }
 
-const MyMoneyPrice MyMoneySeqAccessMgr::price(const QString& fromId, const QString& toId, const QDate& _date, const bool exactDate) const
+MyMoneyPrice MyMoneySeqAccessMgr::price(const QString& fromId, const QString& toId, const QDate& _date, const bool exactDate) const
 {
   // if the caller selected an exact entry, we can search for it using the date as the key
   QMap<MyMoneySecurityPair, MyMoneyPriceEntries>::const_iterator itm = m_priceList.find(qMakePair(fromId, toId));

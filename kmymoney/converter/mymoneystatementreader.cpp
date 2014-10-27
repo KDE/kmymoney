@@ -61,6 +61,11 @@
 #include "existingtransactionmatchfinder.h"
 #include "scheduledtransactionmatchfinder.h"
 
+bool matchNotEmpty(const QString &l, const QString &r)
+{
+  return !l.isEmpty() && QString::compare(l, r, Qt::CaseInsensitive) == 0;
+}
+
 class MyMoneyStatementReader::Private
 {
 public:
@@ -271,7 +276,7 @@ void MyMoneyStatementReader::Private::setupPrice(MyMoneySplit &s, const MyMoneyA
     MyMoneySecurity toCurrency = file->security(splitAccount.currencyId());
     MyMoneySecurity fromCurrency = file->security(transactionAccount.currencyId());
     // get the price for the transaction's date
-    MyMoneyPrice price = file->price(fromCurrency.id(), toCurrency.id(), postDate);
+    const MyMoneyPrice &price = file->price(fromCurrency.id(), toCurrency.id(), postDate);
     // if the price is valid calculate the shares
     if (price.isValid()) {
       const int fract = splitAccount.fraction(toCurrency);
@@ -553,11 +558,10 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
   QList<MyMoneySecurity> list = file->securityList();
   QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
   while (it != list.constEnd() && security.id().isEmpty()) {
-    if (sec_in.m_strSymbol.isEmpty()) {
-      if ((*it).name() == sec_in.m_strName)
-        security = *it;
-    } else if ((*it).tradingSymbol().toLower() == sec_in.m_strSymbol.toLower())
+    if (matchNotEmpty(sec_in.m_strSymbol, (*it).tradingSymbol()) ||
+        matchNotEmpty(sec_in.m_strName, (*it).name())) {
       security = *it;
+    }
     ++it;
   }
 
@@ -654,8 +658,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       while (!found && it_account != accounts.constEnd()) {
         QString currencyid = file->account(*it_account).currencyId();
         MyMoneySecurity security = file->security(currencyid);
-        if ((statementTransactionUnderImport.m_strSymbol.toLower() == security.tradingSymbol().toLower())
-            || (statementTransactionUnderImport.m_strSecurity.toLower() == security.name().toLower())) {
+        if (matchNotEmpty(statementTransactionUnderImport.m_strSymbol, security.tradingSymbol()) ||
+            matchNotEmpty(statementTransactionUnderImport.m_strSecurity, security.name())) {
           thisaccount = file->account(*it_account);
           found = true;
 
@@ -666,7 +670,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // update the price, while we're here.  in the future, this should be
             // an option
             QString basecurrencyid = file->baseCurrency().id();
-            MyMoneyPrice price = file->price(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted, true);
+            const MyMoneyPrice &price = file->price(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted, true);
             if (!price.isValid()  && ((!statementTransactionUnderImport.m_amount.isZero() && !statementTransactionUnderImport.m_shares.isZero()) || !statementTransactionUnderImport.m_price.isZero())) {
               MyMoneyPrice newprice;
               if (!statementTransactionUnderImport.m_price.isZero()) {
@@ -699,8 +703,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
           QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
           while (it != list.constEnd() && security.id().isEmpty()) {
-            if (statementTransactionUnderImport.m_strSymbol.toLower() == (*it).tradingSymbol().toLower()
-                || statementTransactionUnderImport.m_strSecurity.toLower() == (*it).name().toLower()) {
+            if (matchNotEmpty(statementTransactionUnderImport.m_strSymbol, (*it).tradingSymbol()) ||
+                matchNotEmpty(statementTransactionUnderImport.m_strSecurity, (*it).name())) {
               security = *it;
             }
             ++it;

@@ -788,18 +788,17 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
         MyMoneyAccount stock = file->account(it_b.key());
         QString currencyId = stock.currencyId();
         MyMoneySecurity sec = file->security(currencyId);
-        MyMoneyPrice priceInfo;
         MyMoneyMoney rate(1, 1);
 
         if (stock.isInvest()) {
           currencyId = sec.tradingCurrency();
-          priceInfo = file->price(sec.id(), currencyId);
+          const MyMoneyPrice &priceInfo = file->price(sec.id(), currencyId);
           d->m_balanceIsApproximated |= !priceInfo.isValid();
           rate = priceInfo.rate(sec.tradingCurrency());
         }
 
         if (currencyId != base.id()) {
-          priceInfo = file->price(sec.tradingCurrency(), base.id());
+          const MyMoneyPrice &priceInfo = file->price(sec.tradingCurrency(), base.id());
           d->m_balanceIsApproximated |= !priceInfo.isValid();
           rate = (rate * priceInfo.rate(base.id())).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()));
         }

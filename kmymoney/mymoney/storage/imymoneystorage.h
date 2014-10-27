@@ -110,7 +110,7 @@ public:
   virtual ~IMyMoneyStorage();
 
   // general get functions
-  virtual const MyMoneyPayee user(void) const = 0;
+  virtual const MyMoneyPayee& user(void) const = 0;
   virtual const QDate creationDate(void) const = 0;
   virtual const QDate lastModificationDate(void) const = 0;
   virtual unsigned int currentFixVersion(void) const = 0;
@@ -637,7 +637,7 @@ public:
 
   virtual void addPrice(const MyMoneyPrice& price) = 0;
   virtual void removePrice(const MyMoneyPrice& price) = 0;
-  virtual const MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& date, const bool exactDate) const = 0;
+  virtual MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& date, const bool exactDate) const = 0;
 
   /**
     * This method returns a list of all prices.

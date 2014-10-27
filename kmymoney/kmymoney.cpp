@@ -3225,7 +3225,7 @@ void KMyMoneyApp::slotManualPriceUpdate(void)
     try {
       MyMoneySecurity security = MyMoneyFile::instance()->security(d->m_selectedInvestment.currencyId());
       MyMoneySecurity currency = MyMoneyFile::instance()->security(security.tradingCurrency());
-      MyMoneyPrice price = MyMoneyFile::instance()->price(security.id(), currency.id());
+      const MyMoneyPrice &price = MyMoneyFile::instance()->price(security.id(), currency.id());
       signed64 fract = MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision());
 
       QPointer<KCurrencyCalculator> calc =

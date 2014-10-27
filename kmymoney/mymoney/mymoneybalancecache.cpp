@@ -97,7 +97,7 @@ void MyMoneyBalanceCache::insert(const QString& accountId, const QDate& date, co
   m_cache[accountId].insert(date, balance);
 }
 
-const MyMoneyBalanceCacheItem MyMoneyBalanceCache::balance(const QString& accountId, const QDate& date) const
+MyMoneyBalanceCacheItem MyMoneyBalanceCache::balance(const QString& accountId, const QDate& date) const
 {
   BalanceCacheType::ConstIterator acctPos = m_cache.constFind(accountId);
   if (m_cache.constEnd() == acctPos)
@@ -111,7 +111,7 @@ const MyMoneyBalanceCacheItem MyMoneyBalanceCache::balance(const QString& accoun
   return MyMoneyBalanceCacheItem(datePos.value(), datePos.key());
 }
 
-const MyMoneyBalanceCacheItem MyMoneyBalanceCache::mostRecentBalance(const QString& accountId, const QDate& date) const
+MyMoneyBalanceCacheItem MyMoneyBalanceCache::mostRecentBalance(const QString& accountId, const QDate& date) const
 {
   BalanceCacheType::ConstIterator acctPos = m_cache.constFind(accountId);
   if (m_cache.constEnd() == acctPos)

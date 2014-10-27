@@ -44,7 +44,7 @@ MyMoneyDatabaseMgr::~MyMoneyDatabaseMgr()
 { }
 
 // general get functions
-const MyMoneyPayee MyMoneyDatabaseMgr::user(void) const
+const MyMoneyPayee& MyMoneyDatabaseMgr::user(void) const
 {
   return m_user;
 }
@@ -1399,7 +1399,7 @@ void MyMoneyDatabaseMgr::removePrice(const MyMoneyPrice& price)
   m_sql->removePrice(price);
 }
 
-const MyMoneyPrice MyMoneyDatabaseMgr::price(const QString& fromId, const QString& toId, const QDate& _date, const bool exactDate) const
+MyMoneyPrice MyMoneyDatabaseMgr::price(const QString& fromId, const QString& toId, const QDate& _date, const bool exactDate) const
 {
   return m_sql->fetchSinglePrice(fromId, toId, _date, exactDate);
 }

@@ -145,7 +145,7 @@ public:
     void clearPeriods(void) {
       m_periods.clear();
     }
-    const MyMoneyMoney balance(void) const {
+    MyMoneyMoney balance(void) const {
       MyMoneyMoney balance;
 
       QMap<QDate, PeriodGroup>::const_iterator it;
@@ -155,7 +155,7 @@ public:
       return balance;
     };
 
-    const MyMoneyMoney totalBalance(void) const {
+    MyMoneyMoney totalBalance(void) const {
       MyMoneyMoney bal = balance();
       switch (m_budgetlevel) {
         default:

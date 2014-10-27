@@ -58,7 +58,7 @@ target_link_libraries(kmm_mymoney LINK_PUBLIC
                       ${QT_QTCORE_LIBRARY}
                       ${KDE4_KDECORE_LIBS}
                       ${KDE4_KIO_LIBS}
-                      ${LIBALKIMIA_LIBRARY}
+                      ${LIBALKIMIA_LIBRARIES}
                       kmm_storage
 #                     onlinetask_interfaces
                       onlinetask_unavailabletask

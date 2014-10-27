@@ -106,7 +106,7 @@ MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date, bool exactDate)
 
   MyMoneySecurity undersecurity = file->security(currencyId());
   if (! undersecurity.isCurrency()) {
-    MyMoneyPrice price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), date, exactDate);
+    const MyMoneyPrice &price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), date, exactDate);
     if (price.isValid()) {
       result = price.rate(undersecurity.tradingCurrency());
 
@@ -157,7 +157,6 @@ MyMoneyMoney ReportAccount::foreignCurrencyPrice(const QString foreignCurrency, 
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
-  MyMoneyPrice price;
   MyMoneyMoney result(1, 1);
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneySecurity security = file->security(foreignCurrency);
@@ -172,7 +171,7 @@ MyMoneyMoney ReportAccount::foreignCurrencyPrice(const QString foreignCurrency, 
 
   //It makes no sense to get the price if both currencies are the same
   if (currency().id() != tradingCurrency) {
-    price = file->price(currency().id(), tradingCurrency, date, exactDate);
+    const MyMoneyPrice &price = file->price(currency().id(), tradingCurrency, date, exactDate);
 
     if (price.isValid()) {
       result = price.rate(tradingCurrency);

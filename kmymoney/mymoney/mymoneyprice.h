@@ -103,7 +103,7 @@ public:
     * @p 3/1 even though the price information kept with the object was @p 1/3, but based on the other
     * conversion direction (from ADF to GBP).
     */
-  const MyMoneyMoney rate(const QString& id) const;
+  const MyMoneyMoney& rate(const QString& id) const;
 
   const QDate& date(void) const {
     return m_date;
