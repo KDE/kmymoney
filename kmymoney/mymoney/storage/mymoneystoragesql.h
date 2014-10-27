@@ -26,6 +26,7 @@
 #include <QSqlError>
 #include <QList>
 #include <QStack>
+#include <QSet>
 
 #include <QtDebug>
 
@@ -439,6 +440,14 @@ private:
     return (m_driver->tables(tt, static_cast<const QSqlDatabase&>(*this)));
   };
 
+  /**
+   * @brief Ensure the storagePlugin with iid was setup
+   *
+   * @throws MyMoneyException in case of an error which makes the use
+   * of the plugin unavailable.
+   */
+  bool setupStoragePlugin( QString iid );
+
   // data
   KSharedPtr<MyMoneyDbDriver> m_driver;
 
@@ -540,5 +549,10 @@ private:
     * @sa setStartDate()
     */
   static QDate m_startDate;
+
+  /**
+    *
+    */
+  QSet<QString> m_loadedStoragePlugins;
 };
 #endif // MYMONEYSTORAGESQL_H

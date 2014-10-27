@@ -1,6 +1,7 @@
 set( sepaOnlineTasks_SRCS
   tasks/sepaonlinetransferimpl.cpp
   ui/sepacredittransferedit.cpp
+  sepastorageplugin.cpp
 )
 
 set( sepaOnlineTasks_HEADER
@@ -23,6 +24,7 @@ kde4_add_plugin(konlinetasks_sepa
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepaorders.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaorders.desktop)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepaordersui.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaordersui.desktop)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepastorageplugin.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepastorageplugin.desktop)
 
 target_link_libraries( konlinetasks_sepa
   kmm_mymoney
@@ -49,6 +51,7 @@ install(TARGETS konlinetasks_sepa
 install(FILES
           ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaorders.desktop
           ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaordersui.desktop
+          ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepastorageplugin.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
 install(FILES ${sepaOnlineTasks_HEADER}

@@ -35,6 +35,7 @@ public:
 
   virtual bool isValid() const { return true; }
   virtual QString jobTypeName() const { return QLatin1String("Dummy credit transfer"); }
+  virtual QString storagePluginIid() const { return QString(); }
 
 protected:
 

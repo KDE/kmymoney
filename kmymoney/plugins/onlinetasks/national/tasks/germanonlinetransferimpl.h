@@ -56,6 +56,7 @@ public:
   QString purpose() const { return _purpose; }
 
   virtual QString jobTypeName() const { return creditTransfer::jobTypeName(); }
+  virtual QString storagePluginIid() const { return QLatin1String("org.kmymoney.sqlStoragePlugin.creditTransfer.sepa"); }
 
   /**
    * @brief Returns the origin account identifier

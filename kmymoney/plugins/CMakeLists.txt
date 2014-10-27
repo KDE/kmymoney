@@ -47,7 +47,6 @@ set(plugins_HEADERS
   viewinterface.h
   ${CMAKE_CURRENT_BINARY_DIR}/kmm_plugin_export.h
   onlinepluginextended.h
-  kmymoneystorageplugin.h
 )
 
 kde4_add_library(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})

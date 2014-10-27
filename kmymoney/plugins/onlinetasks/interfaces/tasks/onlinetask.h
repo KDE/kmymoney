@@ -21,6 +21,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QDateTime>
+#include <QSqlDatabase>
 
 #include "mymoneyaccount.h"
 #include "onlinejobmessage.h"
@@ -122,6 +123,16 @@ public:
    */
   virtual QString jobTypeName() const = 0;
 
+  /**
+   * Iid of the KMyMoneyPlugin::storagePlugin which is needed to save this
+   * onlineTask.
+   */
+  virtual QString storagePluginIid() const = 0;
+
+  virtual bool sqlSave( QSqlDatabase databaseConnection, const QString& onlineJobId ) const { return false; }
+  virtual bool sqlModify( QSqlDatabase databaseConnection, const QString& onlineJobId ) const { return false; }
+  virtual bool sqlRemove( QSqlDatabase databaseConnection, const QString& onlineJobId ) const { return false; }
+
 protected:
   onlineTask( const onlineTask& other );
 
@@ -148,6 +159,13 @@ protected:
    * @return A pointer to a new instance, caller takes ownership
    */
   virtual onlineTask* createFromXml(const QDomElement &element) const = 0;
+
+  /**
+   * @brief Create new instance of this task from a SQL database
+   *
+   * Equivalent to createFromXml()
+   */
+  virtual onlineTask* createFromSqlDatabase( QSqlDatabase connection, const QString& onlineJobId ) const { return 0; }
 
   /**
    * @brief Account this job is related to

@@ -378,14 +378,16 @@ const QList<MyMoneyTag> MyMoneyDatabaseMgr::tagList(void) const
   if (m_sql) {
     if (! m_sql->isOpen())((QSqlDatabase*)(m_sql.data()))->open();
     return m_sql->fetchTags().values();
-  } else
+  } else {
     return QList<MyMoneyTag> ();
+  }
 }
 
 void MyMoneyDatabaseMgr::modifyOnlineJob(const onlineJob& job)
 {
-  Q_UNUSED(job);
-  //TODO: add code here similar to other data types
+  if (job.id().isEmpty())
+    throw MYMONEYEXCEPTION("empty online job id");
+  m_sql->modifyOnlineJob(job);
 }
 
 void MyMoneyDatabaseMgr::addOnlineJob( onlineJob& job )
@@ -396,12 +398,13 @@ void MyMoneyDatabaseMgr::addOnlineJob( onlineJob& job )
 
 const onlineJob MyMoneyDatabaseMgr::getOnlineJob(const QString &jobId) const
 {
-  if (jobId.isEmpty()) {
+  if (jobId.isEmpty())
     throw MYMONEYEXCEPTION("empty online job id");
-  }
 
   if (m_sql) {
-    if (! m_sql->isOpen())((QSqlDatabase*)(m_sql.data()))->open();
+    if (! m_sql->isOpen())
+      ((QSqlDatabase*)(m_sql.data()))->open();
+
     QMap <QString, onlineJob> jobList = m_sql->fetchOnlineJobs(QStringList(jobId));
     QMap <QString, onlineJob>::ConstIterator pos = jobList.constFind(jobId);
 
@@ -413,8 +416,7 @@ const onlineJob MyMoneyDatabaseMgr::getOnlineJob(const QString &jobId) const
   }
 
   // throw an exception, if it does not exist
-  QString msg = QLatin1String("Unknown online job id '") + jobId + QLatin1Char('\'');
-  throw MYMONEYEXCEPTION(msg);
+  throw MYMONEYEXCEPTION(QLatin1String("Unknown online job id '") + jobId + QLatin1Char('\''));
 }
 
 const QList<onlineJob> MyMoneyDatabaseMgr::onlineJobList() const
@@ -427,9 +429,12 @@ const QList<onlineJob> MyMoneyDatabaseMgr::onlineJobList() const
   return QList<onlineJob>();
 }
 
-void MyMoneyDatabaseMgr::removeOnlineJob( const onlineJob& )
+void MyMoneyDatabaseMgr::removeOnlineJob( const onlineJob& job )
 {
-  //TODO: add code here similar to other data types
+  if (job.id().isEmpty())
+    throw MYMONEYEXCEPTION("Empty online job id during remove.");
+
+  m_sql->removeOnlineJob(job);
 }
 
 const MyMoneyAccount MyMoneyDatabaseMgr::account(const QString& id) const

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=KMyMoney/sqlStoragePlugin
+Name=Enables plugins to store data in the sql database
+
+[PropertyDef::X-KMyMoney-PluginIid]
+Type=QStringList
+# The unique identifier for the plugin

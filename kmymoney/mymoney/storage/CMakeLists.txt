@@ -1,5 +1,6 @@
 set(storage_HEADERS
   imymoneystorage.h imymoneyserialize.h imymoneystorageformat.h
+  kmymoneystorageplugin.h
   )
 
 set(storage_a_SOURCES
@@ -10,6 +11,7 @@ set(storage_a_SOURCES
   mymoneydatabasemgr.cpp
   mymoneydbdef.cpp
   mymoneydbdriver.cpp
+  kmymoneystorageplugin.cpp
   )
 
 # This library is actually not needed. It is built just for
@@ -20,6 +22,10 @@ kde4_add_library( kmm_storage STATIC ${storage_a_SOURCES} )
 
 install(FILES ${storage_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel )
+
+install(FILES kmymoney-sqlstorageplugin.desktop
+  DESTINATION ${SERVICETYPES_INSTALL_DIR}
+)
 
 ############## tests ####################
 if( KDE4_BUILD_TESTS )

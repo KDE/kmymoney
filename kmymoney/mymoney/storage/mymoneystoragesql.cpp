@@ -43,11 +43,15 @@
 // KDE Includes
 
 #include <klocale.h>
+#include <KServiceTypeTrader>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "imymoneyserialize.h"
+#include "kmymoneystorageplugin.h"
+#include "onlinejobadministration.h"
+#include "onlinetasks/interfaces/tasks/onlinetask.h"
 
 #define DBG(a) //qDebug (a)
 
@@ -2501,6 +2505,32 @@ void MyMoneyStorageSql::writeBudget(const MyMoneyBudget& bud, QSqlQuery& q)
   if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Budgets"))); // krazy:exclude=crashy
 }
 
+bool MyMoneyStorageSql::setupStoragePlugin(QString iid)
+{
+  if ( iid.isEmpty() || m_loadedStoragePlugins.contains(iid) )
+    return false;
+
+  QString errorMsg;
+  KMyMoneyPlugin::storagePlugin* plugin = KServiceTypeTrader::createInstanceFromQuery<KMyMoneyPlugin::storagePlugin>(
+    QLatin1String("KMyMoney/sqlStoragePlugin"),
+    QString("'%1' ~in [X-KMyMoney-PluginIid]").arg(iid.replace(QLatin1Char('\''), QLatin1String("\'"))),
+    0,
+    QVariantList(),
+    &errorMsg
+  );
+
+  if ( plugin == 0 )
+    throw MYMONEYEXCEPTION(QString("Could not load sqlStoragePlugin '%1', (error: %2)").arg(iid, errorMsg));
+
+  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
+  if ( plugin->setupDatabase(*this) ) {
+    m_loadedStoragePlugins.insert(iid);
+    return true;
+  }
+
+  throw MYMONEYEXCEPTION( QString("Could not install sqlStoragePlugin '%1' in database.").arg(iid) );
+}
+
 void MyMoneyStorageSql::addOnlineJob(const onlineJob& job)
 {
   DBG("*** Entering MyMoneyStorageSql::addOnlineJob");
@@ -2508,44 +2538,66 @@ void MyMoneyStorageSql::addOnlineJob(const onlineJob& job)
   QSqlQuery q(*this);
   q.prepare("INSERT INTO kmmOnlineJobs (id, type, jobSend, bankAnswerDate, state, locked) VALUES(:id, :type, :jobSend, :bankAnswerDate, :state, :locked);");
   writeOnlineJob(job, q);
-  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing onlineJob"))); // krazy:exclude=crashy
+  if (!q.exec())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing onlineJob"))); // krazy:exclude=crashy
   ++m_onlineJobs;
 
-  //! @todo add onlineTask
+  try {
+    // Save online task
+    const QString& storageIid = job.task()->storagePluginIid();
+    setupStoragePlugin(storageIid);
+    if ( !job.task()->sqlSave(*this, job.id()) )
+      throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("Could not save onlineTask with id '%1' in database.").arg(job.id())));
+  } catch ( onlineJob::emptyTask& ) {
+  }
 }
 
 void MyMoneyStorageSql::modifyOnlineJob(const onlineJob& job)
 {
+  Q_ASSERT( !job.id().isEmpty() );
+
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   QSqlQuery query(*this);
   query.prepare( QLatin1String(
-    "UPDATE kmmOnlineJobs SET"
-    "type = :type, "
-    "jobSend = :jobSend, "
-    "bankAnswerDate = :bankAnswerDate, "
-    "bankAnswerState = :bankAnswerState, "
-    "locked = :locked;"
+    "UPDATE kmmOnlineJobs SET "
+    " type = :type, "
+    " jobSend = :jobSend, "
+    " bankAnswerDate = :bankAnswerDate, "
+    " state = :state, "
+    " locked = :locked "
+    " WHERE id = :id"
   ));
 
   writeOnlineJob(job, query);
-  if (!query.exec()) throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing onlineJob"))); // krazy:exclude=crashy
-  //! @todo handle onlineTask
+  if (!query.exec())
+    throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("writing onlineJob"))); // krazy:exclude=crashy
+
+  try {
+    // Modify online task
+    const QString& storageIid = job.task()->storagePluginIid();
+    setupStoragePlugin(storageIid);
+    if ( !job.task()->sqlModify(*this, job.id()) )
+      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("Could not modify onlineTask with id '%1' in database.").arg(job.id())));
+  } catch ( onlineJob::emptyTask& ) {
+    // If there is no task attached this is fine as well
+  }
 }
 
 void MyMoneyStorageSql::writeOnlineJob(const onlineJob& job, QSqlQuery& query)
 {
   Q_ASSERT( job.id().startsWith('O') );
 
-  query.bindValue(":id", QVariant::fromValue(job.id().mid(1).toULongLong()));
+  query.bindValue(":id", job.id());
   query.bindValue(":type", job.taskIid());
   query.bindValue(":jobSend", job.sendDate());
   query.bindValue(":bankAnswerDate", job.bankAnswerDate());
   switch(job.bankAnswerState()) {
-    case onlineJob::noBankAnswer: query.bindValue(":state", QLatin1String("noBankAnswer")); break;
     case onlineJob::acceptedByBank: query.bindValue(":state", QLatin1String("acceptedByBank")); break;
     case onlineJob::rejectedByBank: query.bindValue(":state", QLatin1String("rejectedByBank")); break;
     case onlineJob::abortedByUser: query.bindValue(":state", QLatin1String("abortedByUser")); break;
     case onlineJob::sendingError: query.bindValue(":state", QLatin1String("sendingError")); break;
+    case onlineJob::noBankAnswer:
+    default: query.bindValue(":state", QLatin1String("noBankAnswer"));
   }
   query.bindValue(":locked", QVariant::fromValue<QString>( job.isLocked() ? QLatin1String("Y") : QLatin1String("N") ));
 }
@@ -2554,15 +2606,26 @@ void MyMoneyStorageSql::removeOnlineJob(const onlineJob& job)
 {
   DBG("*** Entering MyMoneyStorageSql::removeOnlineJob");
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
+
+  // Remove onlineTask first, because it could have a contraint
+  // which could block the removal of the onlineJob
+
+  try {
+    // Remove task
+    const QString& storageIid = job.task()->storagePluginIid();
+    setupStoragePlugin(storageIid);
+    if ( !job.task()->sqlRemove(*this, job.id()) )
+      throw MYMONEYEXCEPTION(QString("Could not remove onlineTask with id '%1' from database.").arg(job.id()));
+  } catch ( onlineJob::emptyTask& ) {
+  }
+
   QSqlQuery q(*this);
   q.prepare(m_db.m_tables["kmmOnlineJobs"].deleteString());
   q.bindValue(":id", job.id());
-  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("deleting onlineJob"))); // krazy:exclude=crashy
+  if (!q.exec())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("deleting onlineJob"))); // krazy:exclude=crashy
   --m_onlineJobs;
-
-  //! @todo remove online task
 }
-
 
 void MyMoneyStorageSql::writeFileInfo()
 {
@@ -3075,7 +3138,9 @@ const QMap<QString, onlineJob> MyMoneyStorageSql::fetchOnlineJobs(const QStringL
   QMap<QString, onlineJob> jobList;
 
   while (query.next()) {
-    onlineJob job = onlineJob(0, query.value(0).toString());
+    const QString& id = query.value(0).toString();
+    onlineTask *const task = onlineJobAdministration::instance()->createOnlineTaskFromSqlDatabase(query.value(1).toString(), id, *this);
+    onlineJob job = onlineJob(task, id);
     job.setJobSend( query.value(2).toDateTime() );
     onlineJob::sendingState state;
     const QString stateString = query.value(4).toString();

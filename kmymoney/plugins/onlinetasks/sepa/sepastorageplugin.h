@@ -16,36 +16,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KMYMONEYPLUGIN_STORAGEPLUGIN_H
-#define KMYMONEYPLUGIN_STORAGEPLUGIN_H
+#ifndef SEPASTORAGEPLUGIN_H
+#define SEPASTORAGEPLUGIN_H
 
-#include <QString>
+#include "kmymoneystorageplugin.h"
 
-namespace KMyMoneyPlugin
+#include <QVariantList>
+
+class sepaStoragePlugin : public KMyMoneyPlugin::storagePlugin
 {
+  Q_OBJECT
 
-/**
- * @brief Interface for plugins which store data in the database
- *
- */
-class storagePlugin
-{
 public:
-  /**
-   * @brief Setup database to make it usable by the plugins
-   *
-   * Use @c QSqlDatabase::database(connectionName); to get a database connection.
-   */
-  bool setupDatabase( const QString& connectionName ) = 0;
+  sepaStoragePlugin(QObject* parent = 0, const QVariantList& options = QVariantList());
+  virtual bool removePluginData(QSqlDatabase connection);
+  virtual bool setupDatabase(QSqlDatabase connection);
 
-  /**
-   * @brief Remove all data belonging to the plugin from the database
-   *
-   * Use @c QSqlDatabase::database(connectionName); to get a database connection.
-   */
-  bool removePluginData( const QString& connectionName ) = 0;
+private:
+  static const QString iid;
 };
 
-} // end namespace KMyMoneyPlugin
-
-#endif // KMYMONEYPLUGIN_STORAGEPLUGIN_H
+#endif // SEPASTORAGEPLUGIN_H

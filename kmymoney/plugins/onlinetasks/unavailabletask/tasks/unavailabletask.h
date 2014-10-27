@@ -35,6 +35,7 @@ public:
   ONLINETASK_META(unavailableTask, "org.kmymoney.onlineTask.unavailableTask");
   virtual bool isValid() const;
   virtual QString jobTypeName() const;
+  virtual QString storagePluginIid() const { return QString(); }
 
 protected:
   virtual QString responsibleAccount() const;
