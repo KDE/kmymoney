@@ -29,6 +29,35 @@ QString unavailableTask::jobTypeName() const
   return i18n("Could not load responsible plugin to view this task.");
 }
 
+QString unavailableTask::storagePluginIid() const
+{
+  return false;
+}
+
+bool unavailableTask::sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const
+{
+  Q_UNUSED(databaseConnection);
+  Q_UNUSED(onlineJobId);
+  Q_ASSERT(false);
+  return false;
+}
+
+bool unavailableTask::sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const
+{
+  Q_UNUSED(databaseConnection);
+  Q_UNUSED(onlineJobId);
+  Q_ASSERT(false);
+  return false;
+}
+
+bool unavailableTask::sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const
+{
+  Q_UNUSED(databaseConnection);
+  Q_UNUSED(onlineJobId);
+  Q_ASSERT(false);
+  return false;
+}
+
 QString unavailableTask::responsibleAccount() const
 {
   return QString();

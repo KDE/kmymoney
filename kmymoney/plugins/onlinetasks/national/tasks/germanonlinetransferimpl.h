@@ -58,6 +58,10 @@ public:
   virtual QString jobTypeName() const { return creditTransfer::jobTypeName(); }
   virtual QString storagePluginIid() const { return QLatin1String("org.kmymoney.sqlStoragePlugin.creditTransfer.sepa"); }
 
+  virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
+  virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
+  virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
+
   /**
    * @brief Returns the origin account identifier
    * @return you are owner of the object

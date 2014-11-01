@@ -24,7 +24,7 @@
 /**
  * @brief Task which can be used if original task is unavailable
  *
- * This task simply stores  the XML data given to it and can write it back.
+ * This task simply stores the XML data given to it and can write it back.
  *
  * The XML storage backend needs to load all tasks into memory. To prevent
  * data corruption if the original task cannot be loaded, this task can be used.
@@ -35,7 +35,18 @@ public:
   ONLINETASK_META(unavailableTask, "org.kmymoney.onlineTask.unavailableTask");
   virtual bool isValid() const;
   virtual QString jobTypeName() const;
-  virtual QString storagePluginIid() const { return QString(); }
+
+  /**
+   * @name SqlMethods
+   * @{
+   * For sql databases this plugin is not needed nor used. So these functions
+   * do not have a real implementation.
+   */
+  virtual QString storagePluginIid() const;
+  virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
+  virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
+  virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
+  /** @} */
 
 protected:
   virtual QString responsibleAccount() const;

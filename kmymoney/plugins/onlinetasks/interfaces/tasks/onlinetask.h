@@ -129,9 +129,9 @@ public:
    */
   virtual QString storagePluginIid() const = 0;
 
-  virtual bool sqlSave( QSqlDatabase databaseConnection, const QString& onlineJobId ) const { return false; }
-  virtual bool sqlModify( QSqlDatabase databaseConnection, const QString& onlineJobId ) const { return false; }
-  virtual bool sqlRemove( QSqlDatabase databaseConnection, const QString& onlineJobId ) const { return false; }
+  virtual bool sqlSave( QSqlDatabase databaseConnection, const QString& onlineJobId ) const = 0;
+  virtual bool sqlModify( QSqlDatabase databaseConnection, const QString& onlineJobId ) const = 0;
+  virtual bool sqlRemove( QSqlDatabase databaseConnection, const QString& onlineJobId ) const = 0;
 
 protected:
   onlineTask( const onlineTask& other );

@@ -50,6 +50,10 @@ public:
   int testNumber() { return m_testNumber; }
   virtual QString storagePluginIid() const { return QString(); }
 
+  virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const { return false; }
+  virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const { return false; }
+  virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const { return false; }
+
 protected:
 
   virtual dummyTask* clone() const { return (new dummyTask(*this)); }

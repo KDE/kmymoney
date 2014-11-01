@@ -36,6 +36,9 @@ public:
   virtual bool isValid() const { return true; }
   virtual QString jobTypeName() const { return QLatin1String("Dummy credit transfer"); }
   virtual QString storagePluginIid() const { return QString(); }
+  virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const { return false; }
+  virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const { return false; }
+  virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const { return false; }
 
 protected:
 

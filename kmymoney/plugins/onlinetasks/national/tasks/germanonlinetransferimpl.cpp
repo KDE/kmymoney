@@ -191,6 +191,24 @@ germanOnlineTransferImpl* germanOnlineTransferImpl::createFromXml(const QDomElem
   return task;
 }
 
+/** @todo implement */
+bool germanOnlineTransferImpl::sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const
+{
+  return false;
+}
+
+/** @todo implement */
+bool germanOnlineTransferImpl::sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const
+{
+  return false;
+}
+
+/** @todo implement */
+bool germanOnlineTransferImpl::sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const
+{
+  return false;
+}
+
 bool germanOnlineTransferImpl::hasReferenceTo(const QString& id) const
 {
   return (id == _originAccount);
