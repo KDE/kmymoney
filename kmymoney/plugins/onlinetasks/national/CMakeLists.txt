@@ -8,6 +8,7 @@ set( konlinetasks_national_SCRS
   ui/germancredittransferedit.cpp
   converter/taskconvertergermantosepa.cpp
   converter/taskconvertersepatogerman.cpp
+  nationalstorageplugin.cpp
   )
 
 set( konlinetasks_national_HEADER
@@ -30,6 +31,7 @@ kde4_add_plugin( konlinetasks_national
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-nationalorders.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalorders.desktop)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-nationalordersui.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalordersui.desktop)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-nationalstorageplugin.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalstorageplugin.desktop)
 
 target_link_libraries( konlinetasks_national
   kmm_mymoney
@@ -57,6 +59,7 @@ install(TARGETS konlinetasks_national
 install(FILES
           ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalorders.desktop
           ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalordersui.desktop
+          ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalstorageplugin.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
 install(FILES ${konlinetasks_national_HEADER}

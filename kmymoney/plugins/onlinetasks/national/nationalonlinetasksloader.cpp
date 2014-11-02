@@ -19,6 +19,8 @@
 #include <KPluginFactory>
 
 #include "nationalonlinetasksloader.h"
+
+#include "nationalstorageplugin.h"
 #include "mymoney/onlinejobadministration.h"
 
 #include "tasks/germanonlinetransferimpl.h"
@@ -29,6 +31,7 @@
 K_PLUGIN_FACTORY(NationalOnlineTaskFactory,
                  registerPlugin<nationalOnlineTasksLoader>();
                  registerPlugin<germanCreditTransferEdit>("creditTransferUi");
+                 registerPlugin<nationalStoragePlugin>("storagePlugin");
                 )
 K_EXPORT_PLUGIN(NationalOnlineTaskFactory("nationalOnlineTasksLoader"))
 

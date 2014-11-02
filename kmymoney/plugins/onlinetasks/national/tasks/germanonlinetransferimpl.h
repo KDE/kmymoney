@@ -26,6 +26,7 @@
 
 #include "kmm_mymoney_export.h"
 #include "germanonlinetransfer.h"
+#include "../nationalstorageplugin.h"
 
 /**
  * @brief Online Banking national transfer
@@ -56,7 +57,7 @@ public:
   QString purpose() const { return _purpose; }
 
   virtual QString jobTypeName() const { return creditTransfer::jobTypeName(); }
-  virtual QString storagePluginIid() const { return QLatin1String("org.kmymoney.sqlStoragePlugin.creditTransfer.sepa"); }
+  virtual QString storagePluginIid() const { return nationalStoragePlugin::iid; }
 
   virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
   virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const;

@@ -2577,7 +2577,7 @@ void MyMoneyStorageSql::modifyOnlineJob(const onlineJob& job)
     const QString& storageIid = job.task()->storagePluginIid();
     setupStoragePlugin(storageIid);
     if ( !job.task()->sqlModify(*this, job.id()) )
-      throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QString("Could not modify onlineTask with id '%1' in database.").arg(job.id())));
+      throw MYMONEYEXCEPTION(QString("Could not modify onlineTask with id '%1' in database (plugin failed).").arg(job.id()));
   } catch ( onlineJob::emptyTask& ) {
     // If there is no task attached this is fine as well
   }
