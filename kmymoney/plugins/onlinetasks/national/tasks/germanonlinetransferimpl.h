@@ -88,6 +88,9 @@ public:
 protected:
   virtual void writeXML(QDomDocument& document, QDomElement& parent) const;
   virtual germanOnlineTransferImpl* createFromXml(const QDomElement &element) const;
+  virtual onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const;
+
+  void bindValuesToQuery(QSqlQuery& query, const QString& id) const;
 
 private:
   mutable QSharedPointer<const settings> _settings;

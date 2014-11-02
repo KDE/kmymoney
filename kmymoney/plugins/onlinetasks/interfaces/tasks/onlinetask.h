@@ -165,7 +165,7 @@ protected:
    *
    * Equivalent to createFromXml()
    */
-  virtual onlineTask* createFromSqlDatabase( QSqlDatabase connection, const QString& onlineJobId ) const { return 0; }
+  virtual onlineTask* createFromSqlDatabase( QSqlDatabase connection, const QString& onlineJobId ) const = 0;
 
   /**
    * @brief Account this job is related to

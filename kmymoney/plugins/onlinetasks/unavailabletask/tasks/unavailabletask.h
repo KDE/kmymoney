@@ -46,6 +46,7 @@ public:
   virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
   virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
   virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
+  virtual onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const;
   /** @} */
 
 protected:

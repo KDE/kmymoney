@@ -58,6 +58,13 @@ bool unavailableTask::sqlRemove(QSqlDatabase databaseConnection, const QString& 
   return false;
 }
 
+onlineTask* unavailableTask::createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const
+{
+  Q_UNUSED(connection);
+  Q_UNUSED(onlineJobId);
+  return 0;
+}
+
 QString unavailableTask::responsibleAccount() const
 {
   return QString();

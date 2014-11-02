@@ -19,6 +19,9 @@
 
 #include "germanonlinetransferimpl.h"
 
+#include <QSqlQuery>
+#include <QSqlError>
+
 #include "mymoney/mymoneyfile.h"
 #include "mymoney/onlinejobadministration.h"
 #include "misc/validators.h"
@@ -191,22 +194,95 @@ germanOnlineTransferImpl* germanOnlineTransferImpl::createFromXml(const QDomElem
   return task;
 }
 
-/** @todo implement */
+onlineTask* germanOnlineTransferImpl::createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const
+{
+  Q_ASSERT( !onlineJobId.isEmpty() );
+  Q_ASSERT( connection.isOpen() );
+
+  QSqlQuery query = QSqlQuery(
+    "SELECT originAccount, value, purpose, beneficiaryName, beneficiaryAccountNumber, "
+    " beneficiaryBankCode, textKey, subTextKey FROM kmmNationalOrders WHERE id = ?",
+    connection
+  );
+  query.bindValue(0, onlineJobId);
+
+  if ( query.exec() && query.next() ) {
+    germanOnlineTransferImpl* task = new germanOnlineTransferImpl();
+    task->setOriginAccount( query.value(0).toString() );
+    task->setValue( MyMoneyMoney( query.value(1).toString() ) );
+    task->setPurpose( query.value(2).toString() );
+    task->_textKey = query.value(6).toUInt();
+    task->_subTextKey = query.value(7).toUInt();
+
+    payeeIdentifiers::nationalAccount beneficiary;
+    beneficiary.setOwnerName( query.value(3).toString() );
+    beneficiary.setAccountNumber( query.value(4).toString() );
+    beneficiary.setBankCode( query.value(5).toString() );
+    task->_beneficiaryAccount = beneficiary;
+    return task;
+  }
+
+  return 0;
+}
+
 bool germanOnlineTransferImpl::sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const
 {
-  return false;
+  QSqlQuery query = QSqlQuery(databaseConnection);
+  query.prepare("INSERT INTO kmmNationalOrders ("
+  " id, originAccount, value, purpose, beneficiaryName, beneficiaryAccountNumber, "
+  " beneficiaryBankCode, textKey, subTextKey) "
+  " VALUES( :id, :originAccount, :value, :purpose, :beneficiaryName, :beneficiaryAccountNumber, "
+  "         :beneficiaryBankCode, :textKey, :subTextKey ) "
+  );
+  bindValuesToQuery( query, onlineJobId );
+  if ( !query.exec() ) {
+    qWarning( qPrintable(query.lastError().text()) );
+    return false;
+  }
+  return true;
 }
 
-/** @todo implement */
 bool germanOnlineTransferImpl::sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const
 {
-  return false;
+  QSqlQuery query = QSqlQuery(databaseConnection);
+  query.prepare(
+    "UPDATE kmmNationalOrders SET"
+    " originAccount = :originAccount,"
+    " value = :value,"
+    " purpose = :purpose,"
+    " beneficiaryName = :beneficiaryName,"
+    " beneficiaryAccountNumber = :beneficiaryAccountNumber,"
+    " beneficiaryBankCode = :beneficiaryBankCode,"
+    " textKey = :textKey,"
+    " subTextKey = :subTextKey "
+    " WHERE id = :id");
+  bindValuesToQuery( query, onlineJobId );
+  if ( !query.exec() ) {
+    qWarning( qPrintable(QLatin1String("Could not modify national order: ") + query.lastError().text()) );
+    return false;
+  }
+  return true;
 }
 
-/** @todo implement */
 bool germanOnlineTransferImpl::sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const
 {
-  return false;
+  QSqlQuery query = QSqlQuery(databaseConnection);
+  query.prepare("DELETE FROM kmmNationalOrders WHERE id = ?");
+  query.bindValue(0, onlineJobId);
+  return query.exec();
+}
+
+void germanOnlineTransferImpl::bindValuesToQuery(QSqlQuery& query, const QString& id) const
+{
+  query.bindValue(":id", id);
+  query.bindValue(":originAccount", _originAccount);
+  query.bindValue(":value", _value.toString());
+  query.bindValue(":purpose", _purpose);
+  query.bindValue(":beneficiaryName", _beneficiaryAccount.ownerName());
+  query.bindValue(":beneficiaryAccountNumber", _beneficiaryAccount.accountNumber());
+  query.bindValue(":beneficiaryBankCode", _beneficiaryAccount.bankCode());
+  query.bindValue(":textKey", _textKey);
+  query.bindValue(":subTextKey", _subTextKey);
 }
 
 bool germanOnlineTransferImpl::hasReferenceTo(const QString& id) const

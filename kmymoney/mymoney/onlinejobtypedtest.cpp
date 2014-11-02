@@ -46,6 +46,7 @@ protected:
   virtual bool hasReferenceTo(const QString &id) const { return false; }
   virtual void writeXML(QDomDocument&, QDomElement&) const {}
   virtual onlineTaskDummy3* createFromXml(const QDomElement &element) const { return (new onlineTaskDummy3); }
+  virtual onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const { return (new onlineTaskDummy3); }
   virtual QString responsibleAccount() const { return QString(); };
 };
 
