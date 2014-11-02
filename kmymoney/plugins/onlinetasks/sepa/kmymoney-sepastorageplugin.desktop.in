@@ -2,7 +2,7 @@
 Type=Service
 ServiceTypes=KMyMoney/sqlStoragePlugin
 
-X-KMyMoney-PluginIid=org.kmymoney.sqlStoragePlugin.sepa
+X-KMyMoney-PluginIid=org.kmymoney.creditTransfer.sepa.sqlStoragePlugin
 
 X-KDE-Library=konlinetasks_sepa
 X-KDE-PluginKeyword=sepaSqlStoragePlugin

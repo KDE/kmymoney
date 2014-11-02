@@ -20,7 +20,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
-const QString sepaStoragePlugin::iid = QLatin1String("org.kmymoney.sqlStoragePlugin.sepa");
+const QString sepaStoragePlugin::iid = QLatin1String("org.kmymoney.creditTransfer.sepa.sqlStoragePlugin");
 
 sepaStoragePlugin::sepaStoragePlugin(QObject* parent, const QVariantList& options)
   : storagePlugin( parent )
@@ -40,7 +40,7 @@ bool sepaStoragePlugin::setupDatabase(QSqlDatabase connection)
   query.prepare("SELECT versionMajor FROM kmmPluginInfo WHERE iid = ?");
   query.bindValue(0, iid);
   if (!query.exec()) {
-    qWarning( qPrintable(query.lastError().text()) );
+    qWarning( qPrintable(QLatin1String("Could not execute query for sepaStoragePlugin:") + query.lastError().text()) );
     return false;
   }
 
@@ -73,7 +73,7 @@ bool sepaStoragePlugin::setupDatabase(QSqlDatabase connection)
     query.bindValue(0, iid);
     query.bindValue(1, 1);
     query.bindValue(2, 0);
-    query.bindValue(3, "");
+    query.bindValue(3, "DROP TABLE kmmSepaOrders;");
     if ( query.exec() )
       return true;
     qWarning( qPrintable(query.lastError().text()) );

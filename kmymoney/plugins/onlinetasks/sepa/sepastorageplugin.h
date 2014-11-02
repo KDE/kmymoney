@@ -32,7 +32,6 @@ public:
   virtual bool removePluginData(QSqlDatabase connection);
   virtual bool setupDatabase(QSqlDatabase connection);
 
-private:
   static const QString iid;
 };
 

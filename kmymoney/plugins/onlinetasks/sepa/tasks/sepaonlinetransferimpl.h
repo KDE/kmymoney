@@ -25,6 +25,7 @@
 #include <QSqlQuery>
 
 #include "sepaonlinetransfer.h"
+#include "../sepastorageplugin.h"
 
 /**
  * @brief SEPA Credit Transfer
@@ -61,7 +62,7 @@ public:
   bool isValid() const;
 
   QString jobTypeName() const { return i18n("SEPA Credit Transfer"); }
-  virtual QString storagePluginIid() const { return QLatin1String("org.kmymoney.sqlStoragePlugin.sepa"); }
+  virtual QString storagePluginIid() const { return sepaStoragePlugin::iid; }
   virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
   virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
   virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
