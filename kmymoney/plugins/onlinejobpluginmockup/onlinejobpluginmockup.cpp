@@ -21,6 +21,8 @@
 #include <mymoneyfile.h>
 #include <onlinejobadministration.h>
 
+#include "germancredittransfersettingsmockup.h"
+
 K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<onlineJobPluginMockup>();)
 K_EXPORT_PLUGIN(KBankingFactory("onlinejobpluginmockup"))
 
@@ -76,8 +78,11 @@ QStringList onlineJobPluginMockup::availableJobs(QString accountId)
 
 IonlineTaskSettings::ptr onlineJobPluginMockup::settings(QString accountId, QString taskName)
 {
-  Q_UNUSED(accountId);
-  Q_UNUSED(taskName);
+  try {
+    if (taskName == germanOnlineTransfer::name() && MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider") == objectName())
+      return IonlineTaskSettings::ptr( new germanCreditTransferSettingsMockup );
+  } catch ( MyMoneyException& ) {
+  }
   return IonlineTaskSettings::ptr();
 }
 
