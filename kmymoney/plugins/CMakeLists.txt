@@ -28,6 +28,11 @@ if (ENABLE_SQLCIPHER)
   add_subdirectory(sqlcipher)
 endif(ENABLE_SQLCIPHER)
 
+option(ENABLE_ONLINEJOBPLUGINMOCKUP "Enable onlineJob-plugin mockup (only for developers)" OFF)
+if (ENABLE_ONLINEJOBPLUGINMOCKUP)
+  add_subdirectory(onlinejobpluginmockup)
+endif()
+
 ########### next target ###############
 
 set(kmm_plugin_LIB_SRCS

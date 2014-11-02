@@ -73,7 +73,10 @@ public:
   typedef KService::Ptr onlineJobEditOffer;
   typedef KService::List onlineJobEditOffers;
 
-  //onlineJobList availableJobs( QString accountId );
+  /**
+   * @brief List all available onlineTasks
+   */
+  QStringList availableOnlineTasks();
 
   static onlineJobAdministration* instance() { return &m_instance; }
 

@@ -83,6 +83,15 @@ void onlineJobAdministration::addPlugin(const QString& pluginName, KMyMoneyPlugi
     emit canSendCreditTransferChanged( true );
 }
 
+QStringList onlineJobAdministration::availableOnlineTasks()
+{
+  QStringList list;
+  foreach ( onlineTask* task, m_onlineTasks ) {
+    list.append(task->taskName());
+  }
+  return list;
+}
+
 /**
  * @internal The real work is done here.
  */

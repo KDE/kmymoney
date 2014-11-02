@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=onlinejobpluginmockup
+Comment=If mapped to an account, it prevents it could handle all onlineTasks
+ServiceTypes=KMyMoneyPlugin
+Type=Service
+
+X-KDE-Library=kmm_onlinejobpluginmockup
+X-KDE-PluginInfo-Name=onlinejobpluginmockup
+
+X-KDE-PluginInfo-Author=Christian David
+X-KDE-PluginInfo-Email=christian-david@web.de
+X-KDE-PluginInfo-Version=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX}
+X-KDE-PluginInfo-Website=http://kmymoney.org
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
