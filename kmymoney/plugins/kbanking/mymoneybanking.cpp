@@ -88,7 +88,6 @@
 
 #include "gwenkdegui.h"
 #include "gwenhywfarqtoperators.h"
-#include "aqbankingqtoperators.h"
 #include "aqbankingkmmoperators.h"
 
 K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<KBankingPlugin>();)

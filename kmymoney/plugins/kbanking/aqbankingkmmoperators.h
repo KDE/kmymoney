@@ -16,6 +16,7 @@
 class AB_ACCOUNT;
 class AB_TRANSACTION_LIMITS;
 class AB_TRANSACTION;
+class AB_VALUE;
 
 namespace payeeIdentifiers {
   class ibanBic;
@@ -64,5 +65,12 @@ void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const payeeIde
  * @return true if a valid payeeIdentifiers::natinalAccount was set
  */
 bool AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const QList<payeeIdentifier>& accountNumbers );
+
+/**
+ * @brief Create AB_VALUE from MyMoneyMoney
+ *
+ * @return caller gains ownership
+ */
+AB_VALUE* AB_Value_fromMyMoneyMoney(const MyMoneyMoney& input);
 
 #endif // AQBANKINGKMMOPERATORS_H

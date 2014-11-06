@@ -3,6 +3,7 @@
 #include <aqbanking/transactionlimits.h>
 #include <aqbanking/transaction.h>
 #include <aqbanking/account.h>
+#include <aqbanking/value.h>
 
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "tasksettings/credittransfersettingsbase.h"
@@ -163,4 +164,9 @@ bool AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const QList<pay
     }
   }
   return validOriginAccountSet;
+}
+
+AB_VALUE* AB_Value_fromMyMoneyMoney(const MyMoneyMoney& input)
+{
+  return (AB_Value_fromString(input.toString().toUtf8().constData()));
 }
