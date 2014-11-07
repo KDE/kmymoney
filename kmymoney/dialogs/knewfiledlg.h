@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class KJob;
+struct ContactData;
 
 // This dialog lets the user create/edit a file.
 // Use the second constructor to edit a file.
@@ -62,7 +62,7 @@ protected slots:
   void okClicked();
   void loadFromAddressBook(void);
   /** Gets the result of searching for the contact details of the current user */
-  void searchContactResult(KJob *job);
+  void slotContactFetched(const ContactData &identity);
 
 private:
   /// \internal d-pointer class.

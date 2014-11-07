@@ -73,6 +73,11 @@ find_package(QGpgme REQUIRED)
 find_package(KdepimLibs REQUIRED)
 find_package(SharedMimeInfo REQUIRED)
 
+# set the configuration switch signaling that KDE PIM libraries were found
+if (KdepimLibs_FOUND)
+  set(HAVE_KDEPIMLIBS 1)
+endif (KdepimLibs_FOUND)
+
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 

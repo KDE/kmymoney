@@ -18,6 +18,7 @@ set(kmm_mymoney_LIB_SRCS
   mymoneyobjectcontainer.cpp
   mymoneyforecast.cpp
   mymoneybalancecache.cpp
+  mymoneycontact.cpp
   )
 
 
@@ -42,6 +43,8 @@ target_link_libraries(kmm_mymoney LINK_PUBLIC
                       ${QT_QTCORE_LIBRARY}
                       ${KDE4_KDECORE_LIBS}
                       ${KDE4_KIO_LIBS}
+                      ${KDEPIMLIBS_KPIMIDENTITIES_LIBS}
+                      ${KDEPIMLIBS_AKONADI_CONTACT_LIBS}
                       ${LIBALKIMIA_LIBRARIES}
                       kmm_storage)
 
