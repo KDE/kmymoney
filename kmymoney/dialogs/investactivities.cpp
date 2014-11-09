@@ -186,22 +186,27 @@ void Activity::preloadAssetAccount(void)
   }
 }
 
+void Activity::setWidgetVisibility(const QStringList& widgetIds, bool visible) const
+{
+  for (QStringList::const_iterator it_w = widgetIds.constBegin(); it_w != widgetIds.constEnd(); ++it_w) {
+    QWidget* w = haveWidget(*it_w);
+    if (w) {
+      if (visible) {
+        w->show();
+      } else {
+        w->hide();
+      }
+    }
+  }
+}
+
 void Buy::showWidgets(void) const
 {
-  KMyMoneyCategory* cat;
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
-  cat->show();
-  cat->splitButton()->show();
+  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "shares" << "price" << "total" << "interest-account" << "fee-account";
+  setWidgetVisibility(visibleWidgetIds, true);
 
-  QStringList widgets;
-  widgets << "asset-account" << "shares" << "price" << "total";
-  QStringList::const_iterator it_w;
-  for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
-    QWidget* w = haveWidget(*it_w);
-    if (w)
-      w->show();
-  }
-
+  setLabelText("interest-amount-label", i18n("Interest"));
+  setLabelText("interest-label", i18n("Interest"));
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
   setLabelText("shares-label", i18n("Shares"));
@@ -278,26 +283,12 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
 
 void Sell::showWidgets(void) const
 {
-  KMyMoneyCategory* cat;
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
-  cat->show();
-  cat->splitButton()->show();
-
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
-  cat->show();
-  cat->splitButton()->show();
+  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "shares" << "price" << "total" << "interest-account" << "fee-account";
+  setWidgetVisibility(visibleWidgetIds, true);
 
   kMyMoneyEdit* shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
   shareEdit->setPrecision(MyMoneyMoney::denomToPrec(m_parent->security().smallestAccountFraction()));
 
-  QStringList widgets;
-  widgets << "asset-account" << "interest-amount" << "shares" << "price" << "total";
-  QStringList::const_iterator it_w;
-  for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
-    QWidget* w = haveWidget(*it_w);
-    if (w)
-      w->show();
-  }
   setLabelText("interest-amount-label", i18n("Interest"));
   setLabelText("interest-label", i18n("Interest"));
   setLabelText("fee-label", i18n("Fees"));
@@ -376,32 +367,11 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
 
 void Div::showWidgets(void) const
 {
-  KMyMoneyCategory* cat;
+  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "total" << "interest-account" << "fee-account";
+  setWidgetVisibility(visibleWidgetIds, true);
+  static const QStringList hiddenWidgetIds = QStringList() << "shares" << "price";
+  setWidgetVisibility(hiddenWidgetIds, false);
 
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
-  cat->show();
-  cat->splitButton()->show();
-
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
-  cat->show();
-  cat->splitButton()->show();
-
-  QStringList widgets;
-  widgets << "asset-account" << "interest-amount" << "total";
-  QStringList::const_iterator it_w;
-  for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
-    QWidget* w = haveWidget(*it_w);
-    if (w)
-      w->show();
-  }
-
-  widgets.clear();
-  widgets << "shares" << "price";
-  for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
-    QWidget* w = haveWidget(*it_w);
-    if (w)
-      w->hide();
-  }
   setLabelText("interest-amount-label", i18n("Interest"));
   setLabelText("interest-label", i18n("Interest"));
   setLabelText("fee-label", i18n("Fees"));
@@ -457,22 +427,12 @@ bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
 
 void Reinvest::showWidgets(void) const
 {
-  KMyMoneyCategory* cat;
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
-  cat->show();
-  cat->splitButton()->hide();  //  don't need it as no interest-amount
-
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
-  cat->show();
-  cat->splitButton()->show();
+  static const QStringList visibleWidgetIds = QStringList() << "price" << "fee-account" << "interest-account";
+  setWidgetVisibility(visibleWidgetIds, true);
 
   kMyMoneyEdit* shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
   shareEdit->show();
   shareEdit->setPrecision(MyMoneyMoney::denomToPrec(m_parent->security().smallestAccountFraction()));
-
-  QWidget* w = haveWidget("price");
-  if (w)
-    w->show();
 
   kMyMoneyEdit* intAmount = dynamic_cast<kMyMoneyEdit*>(haveWidget("interest-amount"));
   intAmount->hide();
@@ -691,33 +651,10 @@ bool Split::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySp
 
 void IntInc::showWidgets(void) const
 {
-  KMyMoneyCategory* cat;
-
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
-  cat->show();
-  cat->splitButton()->show();
-
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
-  cat->show();
-  cat->splitButton()->show();
-
-  QStringList widgets;
-  widgets << "asset-account" << "interest-amount" << "total";
-  QStringList::const_iterator it_w;
-  for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
-    QWidget* w = haveWidget(*it_w);
-    if (w)
-      w->show();
-  }
-
-  widgets.clear();
-  widgets << "shares" << "price" << "fee-amount";
-  for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
-    QWidget* w = haveWidget(*it_w);
-    if (w)
-      w->hide();
-  }
-
+  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "total" << "interest-account" << "fee-account";
+  setWidgetVisibility(visibleWidgetIds, true);
+  static const QStringList hiddenWidgetIds = QStringList() << "shares" << "price" << "fee-amount";
+  setWidgetVisibility(hiddenWidgetIds, false);
 
   setLabelText("interest-amount-label", i18n("Interest"));
   setLabelText("interest-label", i18n("Interest"));
