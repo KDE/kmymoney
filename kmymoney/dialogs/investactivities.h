@@ -83,6 +83,7 @@ protected:
   MyMoneyMoney sumSplits(const MyMoneySplit& s0, const QList<MyMoneySplit>& feeSplits, const QList<MyMoneySplit>& interestSplits) const;
   bool haveCategoryAndAmount(const QString& category, const QString& amount, bool optional) const;
   void setLabelText(const QString& idx, const QString& txt) const;
+  void setWidgetVisibility(const QStringList& widgetIds, bool visible) const;
   InvestTransactionEditor::priceModeE priceMode(void) const {
     return m_parent->priceMode();
   }
