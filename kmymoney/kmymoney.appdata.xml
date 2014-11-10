@@ -19,6 +19,7 @@
   <name xml:lang="pt-BR">KMyMoney</name>
   <name xml:lang="sk">KMyMoney</name>
   <name xml:lang="sv">KMyMoney</name>
+  <name xml:lang="tr">KMyMoney</name>
   <name xml:lang="uk">KMyMoney</name>
   <name xml:lang="x-test">xxKMyMoneyxx</name>
   <summary>Personal Finance Manager</summary>
@@ -37,6 +38,7 @@
   <summary xml:lang="pt-BR">Gerenciador de Finanças Pessoais</summary>
   <summary xml:lang="sk">Osobný manažér financií</summary>
   <summary xml:lang="sv">Hemekonomihanterare</summary>
+  <summary xml:lang="tr">Kişisel Finans Yönetici</summary>
   <summary xml:lang="uk">Програма для керування особистими фінансами</summary>
   <summary xml:lang="x-test">xxPersonal Finance Managerxx</summary>
   <description>
@@ -57,6 +59,7 @@
     <p xml:lang="pt-BR">KMyMoney é um gerenciador de finanças pessoais para o KDE.</p>
     <p xml:lang="sk">KMyMoney je osobný správca financií pre KDE.</p>
     <p xml:lang="sv">KMyMoney är en hemekonomihanterare för KDE.</p>
+    <p xml:lang="tr">KMyMoney, KDE için kişisel finans yöneticisidir.</p>
     <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами для KDE.</p>
     <p xml:lang="x-test">xxKMyMoney is a personal finance manager for KDE.xx</p>
     <p>
