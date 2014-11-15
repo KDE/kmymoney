@@ -32,10 +32,14 @@ QList<payeeIdentifier> MyMoneyPayeeIdentifierContainer::payeeIdentifiers() const
   return m_payeeIdentifiers;
 }
 
-void MyMoneyPayeeIdentifierContainer::addPayeeIdentifier(payeeIdentifier& ident)
+void MyMoneyPayeeIdentifierContainer::addPayeeIdentifier(const payeeIdentifier& ident)
 {
-  ident.m_id = nextId();
   m_payeeIdentifiers.append(ident);
+}
+
+void MyMoneyPayeeIdentifierContainer::addPayeeIdentifier(const unsigned int position, const payeeIdentifier& ident)
+{
+  m_payeeIdentifiers.insert(position, ident);
 }
 
 void MyMoneyPayeeIdentifierContainer::removePayeeIdentifier(const payeeIdentifier& ident)
@@ -43,30 +47,25 @@ void MyMoneyPayeeIdentifierContainer::removePayeeIdentifier(const payeeIdentifie
   m_payeeIdentifiers.removeOne(ident);
 }
 
+void MyMoneyPayeeIdentifierContainer::removePayeeIdentifier(const unsigned int index)
+{
+  m_payeeIdentifiers.removeAt(index);
+}
+
 void MyMoneyPayeeIdentifierContainer::modifyPayeeIdentifier(const payeeIdentifier& ident)
 {
   QList<payeeIdentifier>::Iterator end = m_payeeIdentifiers.end();
   for( QList<payeeIdentifier>::Iterator iter = m_payeeIdentifiers.begin(); iter != end; ++iter) {
-    if ( iter->m_id == ident.m_id ) {
+    if ( iter->id() == ident.id() ) {
       *iter = ident;
       return;
     }
   }
 }
 
-/**
- * @brief Return a free id
- *
- * It is not unique in the file, just in this container.
- */
-unsigned int MyMoneyPayeeIdentifierContainer::nextId()
+void MyMoneyPayeeIdentifierContainer::modifyPayeeIdentifier(const unsigned int index, const payeeIdentifier& ident)
 {
-  unsigned int id = 1;
-  foreach( const payeeIdentifier ident, m_payeeIdentifiers ) {
-    if ( ident.m_id >= id )
-      id = ident.m_id+1;
-  }
-  return id;
+  m_payeeIdentifiers[index] = ident;
 }
 
 void MyMoneyPayeeIdentifierContainer::loadXML(QDomElement node)
@@ -88,7 +87,7 @@ void MyMoneyPayeeIdentifierContainer::loadXML(QDomElement node)
 void MyMoneyPayeeIdentifierContainer::writeXML(QDomDocument document, QDomElement parent) const
 {
   // Add payee identifiers
-  foreach( payeeIdentifier ident, m_payeeIdentifiers ) {
+  foreach( const payeeIdentifier& ident, m_payeeIdentifiers ) {
     if ( !ident.isNull() ) {
       ident.writeXML(document, parent);
     }

@@ -39,7 +39,6 @@ public slots:
   void setPayee( MyMoneyPayee );
 
 private slots:
-  void addEntry( const QModelIndex& index = QModelIndex());
   void removeSelected();
 
 private:

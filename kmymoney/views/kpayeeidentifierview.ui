@@ -6,13 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>647</width>
+    <height>583</height>
    </rect>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <widget class="QListView" name="view">
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
      <property name="uniformItemSizes">
       <bool>false</bool>
      </property>
@@ -23,16 +29,6 @@
    </item>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="KPushButton" name="buttonAdd">
-       <property name="text">
-        <string>Add</string>
-       </property>
-       <property name="autoDefault">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item>
       <widget class="KPushButton" name="buttonRemove">
        <property name="text">
@@ -67,33 +63,17 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonAdd</sender>
-   <signal>clicked()</signal>
-   <receiver>KPayeeIdentifierView</receiver>
-   <slot>addEntry()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>369</x>
-     <y>18</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>319</x>
-     <y>-6</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>buttonRemove</sender>
    <signal>clicked()</signal>
    <receiver>KPayeeIdentifierView</receiver>
    <slot>removeSelected()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>352</x>
+     <x>568</x>
      <y>47</y>
     </hint>
     <hint type="destinationlabel">
-     <x>401</x>
+     <x>400</x>
      <y>102</y>
     </hint>
    </hints>

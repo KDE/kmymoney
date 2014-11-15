@@ -35,13 +35,17 @@ payeeIdentifierModel::payeeIdentifierModel( QObject* parent )
 QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 {
   Q_CHECK_PTR( m_data );
+
+  if ( index.row() == rowCount(index.parent())-1 )
+    return QVariant();
+
   const ::payeeIdentifier ident = m_data->payeeIdentifiers().at(index.row());
 
-  if ( role == payeeIdentifier) {
+  if (role == payeeIdentifier) {
     return QVariant::fromValue< ::payeeIdentifier >(ident);
-  } else if ( ident.isNull() ) {
+  } else if (ident.isNull()) {
     return QVariant();
-  } else if ( role == payeeIdentifierType) {
+  } else if (role == payeeIdentifierType) {
     return ident.iid();
   } else if (role == Qt::DisplayRole) {
     // The custom delegates won't ask for this role
@@ -57,20 +61,26 @@ bool payeeIdentifierModel::setData(const QModelIndex& index, const QVariant& val
 
   if ( role == payeeIdentifier ) {
     ::payeeIdentifier ident = value.value< ::payeeIdentifier >();
-    m_data->modifyPayeeIdentifier(ident);
+    if ( index.row() == rowCount(index.parent())-1 ) {
+      // The new row will be the last but one
+      beginInsertRows(index.parent(), index.row()-1, index.row()-1);
+      m_data->addPayeeIdentifier(ident);
+      endInsertRows();
+    } else {
+      m_data->modifyPayeeIdentifier(index.row(), ident);
+    }
     const bool ret = saveCurrentObject();
     return ret;
   }
   return QAbstractItemModel::setData(index, value, role);
 }
 
-/** @todo make items editable if a plugin exists only */
 Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex& index) const
 {
   Qt::ItemFlags flags = QAbstractItemModel::flags(index) | Qt::ItemIsDragEnabled;
   const QString type = data(index, payeeIdentifierType).toString();
-  // type.isNull() means the type selection can be shown
-  if ( type.isNull() || payeeIdentifierLoader::instance()->hasItemEditDelegate(type) )
+  // type.isEmpty() means the type selection can be shown
+  if ( type.isEmpty() || payeeIdentifierLoader::instance()->hasItemEditDelegate(type) )
     flags |= Qt::ItemIsEditable;
   return flags;
 }
@@ -78,34 +88,26 @@ Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex& index) const
 int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
 {
   Q_CHECK_PTR( m_data );
-  return m_data->payeeIdentifiers().count();
+  // Always a row more which creates new entries
+  return m_data->payeeIdentifiers().count()+1;
 }
 
-/** @todo implement dataChanged signal */
+/** @brief unused at the moment */
 bool payeeIdentifierModel::insertRows(int row, int count, const QModelIndex& parent)
 {
   Q_CHECK_PTR( m_data );
-//  if ( row != m_payee.payeeIdentifiers().count()-1 || count != 1 || parent.isValid())
-//    return false; // cannot add rows in the middle at the moment and only a single row
-
-  beginInsertRows(parent, row+1, row+1);
-  ::payeeIdentifier ident;
-  m_data->addPayeeIdentifier( ident );
-  const bool ret = saveCurrentObject();
-  endInsertRows();
-  return ret;
+  return false;
 }
 
-/** @todo implement dataChanged signal */
 bool payeeIdentifierModel::removeRows(int row, int count, const QModelIndex& parent)
 {
   Q_CHECK_PTR( m_data );
-  if (count < 1)
+  if (count < 1 || row+count >= rowCount(parent))
     return false;
 
   beginRemoveRows(parent, row, row+count-1);
-  for( int i = row; i < row+count; ++i) {
-    m_data->removePayeeIdentifier(data(index(i, 0), payeeIdentifier).value< ::payeeIdentifier >());
+  for( unsigned int i = row; i < row+count; ++i) {
+    m_data->removePayeeIdentifier(i);
   }
   const bool ret = saveCurrentObject();
   endRemoveRows();
@@ -152,14 +154,16 @@ bool payeeIdentifierModel::saveCurrentObject()
   try {
     MyMoneyFileTransaction transaction;
 
-    if ( m_loadedType == PAYEE ) {
+    if ( m_loadedType == PAYEE )
       MyMoneyFile::instance()->modifyPayee( m_payee );
-    } else if ( m_loadedType == ACCOUNT ) {
+    else if ( m_loadedType == ACCOUNT )
       MyMoneyFile::instance()->modifyAccount( m_account );
-    }
+    else
+      return false;
 
     transaction.commit();
-  } catch ( MyMoneyException& ) {
+  } catch ( MyMoneyException& e ) {
+    qWarning() << e.what() << e.file() << e.line();
     return false;
   }
   return true;

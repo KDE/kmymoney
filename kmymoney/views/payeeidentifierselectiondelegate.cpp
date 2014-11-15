@@ -34,7 +34,7 @@ void payeeIdentifierTypeSelectionWidget::itemSelected(int index)
 {
   if (index != 0) {
     emit commitData(this);
-    deleteLater(); // this closes the editor
+    setCurrentIndex(0);
   }
 }
 

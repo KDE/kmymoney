@@ -36,9 +36,9 @@ payeeIdentifierDelegate::payeeIdentifierDelegate(QObject* parent)
 QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelIndex& index) const
 {
   static QAbstractItemDelegate* defaultDelegate = 0;
-  const QString type = index.model()->data(index, payeeIdentifierModel::payeeIdentifierType).toString();
+  const QString type = (index.isValid()) ? index.model()->data(index, payeeIdentifierModel::payeeIdentifierType).toString() : QString();
 
-  if ( type.isNull() ) {
+  if ( type.isEmpty() ) {
     QAbstractItemDelegate* delegate = new payeeIdentifierSelectionDelegate(this->parent());
     connectSignals(delegate);
     return delegate;
@@ -62,7 +62,6 @@ KPayeeIdentifierView::KPayeeIdentifierView(QWidget* parent)
   ui = new Ui::KPayeeIdentifierView;
   ui->setupUi(this);
   ui->view->setItemDelegate( new payeeIdentifierDelegate(ui->view) );
-
 }
 
 void KPayeeIdentifierView::setPayee(MyMoneyPayee payee)
@@ -74,28 +73,34 @@ void KPayeeIdentifierView::setPayee(MyMoneyPayee payee)
 
   Q_CHECK_PTR( qobject_cast<payeeIdentifierModel*>(ui->view->model()) );  // this should never fail but may help during debugging
   static_cast<payeeIdentifierModel*>(ui->view->model())->setSource(payee);
+
+  // Open persistent editor for last row
+  ui->view->openPersistentEditor(ui->view->model()->index( ui->view->model()->rowCount(QModelIndex())-1, 0 ));
 }
 
 /**
- * @param index not used at the moment, a new item is always inserted at the end
+ * @brief Helper to sort QModelIndexList in decreasing order.
  */
-void KPayeeIdentifierView::addEntry(const QModelIndex& index)
+inline bool QModelIndexRowComparison(const QModelIndex& first, const QModelIndex& second)
 {
-  Q_UNUSED( index );
-  if ( ui->view->model()->insertRow(ui->view->model()->rowCount()) ) {
-    QModelIndex index = ui->view->model()->index(ui->view->model()->rowCount()-1, 0);
-    ui->view->setCurrentIndex( index );
-    ui->view->openPersistentEditor(index);
-  }
+  return (first.row() > second.row());
 }
 
+/**
+ * @bug If the last row is removed the type selection editor (which is always behind that last row) closes.
+ * Maybe that is a Qt bug?!
+ */
 void KPayeeIdentifierView::removeSelected()
 {
   QModelIndexList selectedRows = ui->view->selectionModel()->selectedRows();
-  QAbstractItemModel *const model = ui->view->model();
+  // To keep the items valid during remove the data must be removed from highest row
+  // to the lowes. Unfortunately QList has no reverse iterator.
+  std::sort(selectedRows.begin(), selectedRows.end(), QModelIndexRowComparison);
+
+  QAbstractItemModel* model = ui->view->model();
   Q_CHECK_PTR( model );
 
-  Q_FOREACH( QModelIndex row, selectedRows ) {
-    model->removeRow(row.row());
-  }
+  QModelIndexList::const_iterator end = selectedRows.constEnd();
+  for(QModelIndexList::const_iterator iter = selectedRows.constBegin(); iter != end; ++iter)
+    model->removeRow(iter->row(), iter->parent());
 }

@@ -33,20 +33,16 @@ class payeeIdentifierModel : public QAbstractListModel
 public:
   enum roles {
     payeeIdentifierType = Qt::UserRole, /**< type of payeeIdentifier */
-    payeeIdentifier = Qt::UserRole+1 /**< Pointer to actual payeeIdentifier */
+    payeeIdentifier = Qt::UserRole+1 /**< actual payeeIdentifier */
   };
 
   payeeIdentifierModel( QObject* parent = 0 );
 
-  /**
-   * Returend QVariants for payeeIdentifierPtr are of type payeeIdentifier::constPtr
-   */
   virtual QVariant data(const QModelIndex& index, int role) const;
 
   /**
-   * This model only supports to edit payeeIdentifierPtr role with a QVariant of type
-   * payeeIdentifier::ptr. I take ownership of the pointer, modifing it later leads to
-   * undefined behaviour.
+   * This model only supports to edit payeeIdentifier role with a QVariant of type
+   * payeeIdentifier.
    */
   virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
 
