@@ -52,6 +52,13 @@ payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, const payeeIde
     m_payeeIdentifier = other.m_payeeIdentifier->clone();
 }
 
+QString payeeIdentifier::idString() const
+{
+  if ( m_id == 0 )
+    return QString();
+  return QLatin1String("IDENT") + QString::number(m_id).rightJustified(6, '0');
+}
+
 payeeIdentifier::~payeeIdentifier()
 {
   delete m_payeeIdentifier;
@@ -101,7 +108,10 @@ payeeIdentifier& payeeIdentifier::operator=(const payeeIdentifier& other)
     return *this;
 
   m_id = other.m_id;
-  m_payeeIdentifier = other.m_payeeIdentifier->clone();
+  if (other.m_payeeIdentifier == 0)
+    m_payeeIdentifier = 0;
+  else
+    m_payeeIdentifier = other.m_payeeIdentifier->clone();
 
   return *this;
 }

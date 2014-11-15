@@ -58,7 +58,7 @@ public:
   void writeXML(QDomDocument &document, QDomElement &parent, const QString& elementName = QLatin1String("payeeIdentifier") ) const;
 
   /**
-   * @throws nullPayeeIdentifier
+   * @throws payeeIdentifier::empty
    */
   payeeIdentifierData* operator->();
 
@@ -79,7 +79,9 @@ public:
 
   bool isValid() const;
 
+
   id_t id() const { return m_id; }
+  QString idString() const;
   void clearId() { m_id = 0; }
 
   /**
