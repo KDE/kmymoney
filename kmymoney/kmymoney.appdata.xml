@@ -79,6 +79,7 @@
     <p xml:lang="pt-BR">Tem suporte a diferentes tipos de contas, a classificação de despesas e receitas por categoria, a conciliação das contas bancárias e a importação/exportação para o formato de arquivos "QIF". Por meio de plugins, também é possível baixar diretamente usando os formatos OFX e HBCI. Também há suporte para banco online (baixar extratos) através dos protocolos OFX e HBCI.</p>
     <p xml:lang="sk">Podporuje rôzne typy účtov, kategorizáciu výdavkov a príjmov, súlad bankových účtov a import/export do formátu "QIF". Priame sťahovanie pomocou formátov OFX a HBCI je možné cez pluginy. Podpora online bankingu je možná pre protokoly OFX a HBCI.</p>
     <p xml:lang="sv">Den stöder olika kontotyper, kategorisering av utgifter och inkomster, avstämning av bankkonton samt import från och export till filformatet "QIF". Direkt nerladdning med användning av formaten OFX och HBCI är också möjlig via insticksprogram. Stöd för internetbank (nerladdning av kontoutdrag) tillhandahålls också för protokollen OFX och HBCI.</p>
+    <p xml:lang="tr">Farklı hesap türlerini, gelir ve giderlerin sınıflandırmasını, banka hesaplarının uzlaştırılmasını ve "QIF" biçiminde içe/dışa aktarmayı destekler. Eklentilerle OFX ve HBCI biçimlerinde doğrudan indirme mümkündür. OFX ve HBCI protokolleri için çevrimiçi bankacılık desteği de mevcuttur.</p>
     <p xml:lang="uk">У програмі передбачено різні типи рахунків, категоризацію за витратами та надходженнями коштів, звірення банківських рахунків, а також імпортування та експортування даних у форматі QIF. Крім того, можливе безпосереднє отримання банківських даних (виписок) з інтернету у форматах OFX та HBCI за допомогою додатків.</p>
     <p xml:lang="x-test">xxIt supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format. Direct download using the OFX and HBCI formats is also possible via plugins. Online banking support (statement download) is also provided for the OFX and HBCI protocols.xx</p>
   </description>
@@ -97,6 +98,7 @@
       <caption xml:lang="pt-BR">O KMyMoney tem uma página de boas-vindas para ajudar os novos usuários a terem um bom começo</caption>
       <caption xml:lang="sk">KMyMoney má uvítaciu stránku na pomoc novým používateľom na dobrý začiatok</caption>
       <caption xml:lang="sv">KMyMoney har en välkomstsida för att hjälpa nya användare att komma igång</caption>
+      <caption xml:lang="tr">KMyMoney yeni kullanıcıların iyi bir başlangıç yapmalarına yardımcı olmak için bir hoş geldiniz sayfasına sahiptir</caption>
       <caption xml:lang="uk">У KMyMoney передбачено сторінку вітання, за допомогою якої новим користувачам буде простіше розпочати користування програмою.</caption>
       <caption xml:lang="x-test">xxKMyMoney has a welcome page to help new users get off to a good startxx</caption>
       <image>http://www.kmymoney.org/images/screenshots/large/kmm1.png</image>
@@ -114,6 +116,7 @@
       <caption xml:lang="pt-BR">O resumo financeiro lhe apresenta uma visão geral das suas finanças</caption>
       <caption xml:lang="sk">Finančný sumár vám poskytne prehľad vašich financií</caption>
       <caption xml:lang="sv">Den ekonomiska sammanfattningen ger en översikt av ekonomin</caption>
+      <caption xml:lang="tr">Mali durumunuzu gözden geçirmeniz için bir özet sunar</caption>
       <caption xml:lang="uk">За допомогою сторінки фінансового резюме вам буде простіше розібратися з поточним фінансовим станом.</caption>
       <caption xml:lang="x-test">xxThe financial summary gives you an overview of your financesxx</caption>
       <image>http://www.kmymoney.org/images/screenshots/large/kmm2.png</image>
@@ -131,6 +134,7 @@
       <caption xml:lang="pt-BR">Nesta janela as suas contas podem ser organizadas, visualizadas e gerenciadas, com base nas instituições em que estão guardadas</caption>
       <caption xml:lang="sk">V tomto pohľade sú vaše účty usporiadané, zobrazené a spravované inštitúciami, ktoré ich držia</caption>
       <caption xml:lang="sv">I den här vyn organiseras, granskas och hanteras konton enligt institution som de hör till</caption>
+      <caption xml:lang="tr">Bu görünümde hesaplarınız onları yöneten kurumlara göre düzenlenmiş şekilde görüntülenirler</caption>
       <caption xml:lang="uk">Рахунки на сторінці резюме упорядковано за установами, з якими ці рахунки пов’язано.</caption>
       <caption xml:lang="x-test">xxIn this view your accounts are organized, viewed, and managed by the institutions they are held atxx</caption>
       <image>http://www.kmymoney.org/images/screenshots/large/kmm3.png</image>
