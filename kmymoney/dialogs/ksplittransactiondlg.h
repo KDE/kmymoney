@@ -125,7 +125,9 @@ protected slots:
   void slotClearUnusedSplits(void);
   void slotSetTransaction(const MyMoneyTransaction& t);
   void slotCreateCategory(const QString& txt, QString& id);
+  void slotUpdateButtons();
   void slotMergeSplits(void);
+  void slotEditStarted(void);
 
   /// used internally to setup the initial size of all widgets
   void initSize(void);

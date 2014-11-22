@@ -781,6 +781,8 @@ void kMyMoneySplitTable::destroyEditWidgets(void)
 {
   MYMONEYTRACER(tracer);
 
+  emit editFinished();
+
   disconnect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadEditWidgets()));
 
   destroyEditWidget(m_currentRow, 0);
@@ -799,6 +801,8 @@ void kMyMoneySplitTable::destroyEditWidget(int r, int c)
 KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
 {
   MYMONEYTRACER(tracer);
+
+  emit editStarted();
 
   QFont cellFont = KMyMoneyGlobalSettings::listCellFont();
   m_tabOrderWidgets.clear();
