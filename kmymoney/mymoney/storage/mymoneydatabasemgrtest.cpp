@@ -27,12 +27,16 @@ QTEST_MAIN(MyMoneyDatabaseMgrTest)
 
 MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
     : m_dbAttached(false),
-    m_canOpen(true)
+    m_canOpen(true),
+    m_file(this)
 {}
 
 void MyMoneyDatabaseMgrTest::init()
 {
   m = new MyMoneyDatabaseMgr;
+  // Create file and close it to release possible read-write locks
+  m_file.open();
+  m_file.close();
 }
 
 void MyMoneyDatabaseMgrTest::cleanup()
@@ -90,14 +94,9 @@ void MyMoneyDatabaseMgrTest::testBadConnections()
     userName = QString(pwd->pw_name);
   }
 
-  QString dir(qgetenv("TMPDIR"));
-  if (!dir.isEmpty() && !dir.endsWith('/')) {
-    dir += '/';
-  }
-
   QString mode = "QSQLITE&mode=single";
-  m_url = QString("sql://%1@localhost/%2kmm_test_driver?driver=%3")
-          .arg(userName, dir, mode);
+  m_url = QString("sql://%1@localhost/%2?driver=%3")
+          .arg(userName, m_file.fileName(), mode);
 
   QExplicitlySharedDataPointer <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
   QVERIFY(sql);
@@ -121,18 +120,13 @@ void MyMoneyDatabaseMgrTest::testCreateDb()
         userName = QString(pwd->pw_name);
       }
 
-      QString dir(qgetenv("TMPDIR"));
-      if (!dir.isEmpty() && !dir.endsWith('/')) {
-        dir += '/';
-      }
-
       QString mode =
         //"QPSQL&mode=single";
         //"QMYSQL&mode=single";
         "QSQLITE&mode=single";
 
-      m_url = QString("sql://%1@localhost/%2kmm_test_driver?driver=%3")
-              .arg(userName, dir, mode);
+      m_url = QString("sql://%1@localhost/%2?driver=%3")
+        .arg(userName, m_file.fileName(), mode);
 
       QExplicitlySharedDataPointer <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
       QVERIFY(0 != sql);

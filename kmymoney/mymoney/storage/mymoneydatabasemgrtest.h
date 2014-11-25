@@ -18,6 +18,7 @@
 #define MYMONEYDATABASEMGRTEST_H
 
 #include <QtCore/QObject>
+#include <QTemporaryFile>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyDatabaseMgrTest;
 
@@ -32,7 +33,9 @@ protected:
   MyMoneyDatabaseMgr *m;
   bool m_dbAttached;
   bool m_canOpen;
-  QUrl m_url;
+  KUrl m_url;
+  QTemporaryFile m_file;
+
 public:
   MyMoneyDatabaseMgrTest();
 
