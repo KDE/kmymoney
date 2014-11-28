@@ -14,17 +14,18 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "mymoneyutils.h"
+
 #include <QtGlobal>
 #include <QtTest/QtTest>
 
 #include "mymoneyexception.h"
 
-void unexpectedException(const MyMoneyException &e)
+QString unexpectedExceptionString(const MyMoneyException &e)
 {
-  QString msg = QString("Unexpected exception: %1 thrown in %2:%3")
+  return QString("Unexpected exception: %1 thrown in %2:%3")
                 .arg(e.what())
                 .arg(e.file())
                 .arg(e.line());
-  QFAIL(qPrintable(msg));
 }
 

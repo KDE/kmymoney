@@ -1,7 +1,6 @@
 /***************************************************************************
-                          autotest.h
-                             -------------------
     copyright            : (C) 2002 by Thomas Baumgart
+                           (C) 2014 by Christian Dávid
     email                : ipwizard@users.sourceforge.net
  ***************************************************************************/
 
@@ -14,11 +13,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef AUTOTEST_H
-#define AUTOTEST_H
+#ifndef MYMONEYTESTUTILS_H
+#define MYMONEYTESTUTILS_H
 
 #include "mymoneyexception.h"
 
-void unexpectedException(const MyMoneyException &e);
+#define unexpectedException(e) QFAIL(qPrintable(unexpectedExceptionString(e)));
 
-#endif // AUTOTEST_H
+QString unexpectedExceptionString(const MyMoneyException &e);
+
+#endif // MYMONEYTESTUTILS_H

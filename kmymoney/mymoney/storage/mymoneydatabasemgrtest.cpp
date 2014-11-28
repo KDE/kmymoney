@@ -21,7 +21,7 @@
 
 #include <QtTest/QtTest>
 
-#include "autotest.h"
+#include "mymoneytestutils.h"
 
 QTEST_MAIN(MyMoneyDatabaseMgrTest)
 
@@ -29,14 +29,15 @@ MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
     : m_dbAttached(false),
     m_canOpen(true),
     m_file(this)
-{}
+{
+  // Create file and close it to release possible read-write locks
+  m_file.open();
+  m_file.close();
+}
 
 void MyMoneyDatabaseMgrTest::init()
 {
   m = new MyMoneyDatabaseMgr;
-  // Create file and close it to release possible read-write locks
-  m_file.open();
-  m_file.close();
 }
 
 void MyMoneyDatabaseMgrTest::cleanup()
@@ -98,10 +99,13 @@ void MyMoneyDatabaseMgrTest::testBadConnections()
   m_url = QString("sql://%1@localhost/%2?driver=%3")
           .arg(userName, m_file.fileName(), mode);
 
-  KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
-  QVERIFY(sql);
-  int openStatus = sql->open(m_url, QIODevice::ReadWrite);
-  QVERIFY(0 != openStatus);
+  try {
+    KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
+    QVERIFY(sql);
+    QVERIFY(sql->open(m_url, QIODevice::ReadWrite) != 0);
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
 }
 
 void MyMoneyDatabaseMgrTest::testCreateDb()
@@ -150,13 +154,17 @@ void MyMoneyDatabaseMgrTest::testAttachDb()
   if (!m_dbAttached) {
     testCreateDb();
     if (m_canOpen) {
-      MyMoneyFile::instance()->detachStorage();
-      KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
-      QVERIFY(sql);
-      int openStatus = sql->open(m_url, QIODevice::ReadWrite);
-      QVERIFY(0 == openStatus);
-      MyMoneyFile::instance()->attachStorage(m);
-      m_dbAttached = true;
+      try {
+        MyMoneyFile::instance()->detachStorage();
+        KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
+        QVERIFY(sql);
+        int openStatus = sql->open(m_url, QIODevice::ReadWrite);
+        QVERIFY(0 == openStatus);
+        MyMoneyFile::instance()->attachStorage(m);
+        m_dbAttached = true;
+      } catch (const MyMoneyException &e) {
+        unexpectedException(e);
+      }
     }
   }
 }
