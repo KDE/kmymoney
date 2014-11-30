@@ -122,9 +122,7 @@ class MyMoneyStorageSql : public IMyMoneyStorageFormat, public QSqlDatabase, pub
 
 public:
   explicit MyMoneyStorageSql(IMyMoneySerialize *storage, const QUrl& = QUrl());
-  virtual ~MyMoneyStorageSql() {
-    close(true);
-  }
+  virtual ~MyMoneyStorageSql();
 
   unsigned int currentVersion() const {
     return (m_db.currentVersion());

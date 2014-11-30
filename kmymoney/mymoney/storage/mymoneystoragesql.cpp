@@ -118,6 +118,15 @@ MyMoneyStorageSql::MyMoneyStorageSql(IMyMoneySerialize *storage, const QUrl &url
   m_preferred.setReportAllSplits(false);
 }
 
+MyMoneyStorageSql::~MyMoneyStorageSql()
+{
+  try {
+    close(true);
+  } catch (const MyMoneyException& e) {
+    DBG("Caught Exception in MMStorageSql dtor: " + e.what());
+  }
+}
+
 int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
 {
   DBG("*** Entering MyMoneyStorageSql::open");
