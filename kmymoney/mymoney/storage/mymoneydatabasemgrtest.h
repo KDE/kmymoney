@@ -33,7 +33,7 @@ protected:
   MyMoneyDatabaseMgr *m;
   bool m_dbAttached;
   bool m_canOpen;
-  KUrl m_url;
+  QUrl m_url;
   QTemporaryFile m_file;
 
 public:
