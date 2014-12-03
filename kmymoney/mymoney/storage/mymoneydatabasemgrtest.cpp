@@ -236,21 +236,21 @@ void MyMoneyDatabaseMgrTest::testSupportFunctions()
   }
 
   try {
-    QVERIFY(m->nextInstitutionID() == "I000001");
-    QVERIFY(m->nextAccountID() == "A000001");
-    QVERIFY(m->nextTransactionID() == "T000000000000000001");
-    QVERIFY(m->nextPayeeID() == "P000001");
-    QVERIFY(m->nextTagID() == "G000001");
-    QVERIFY(m->nextScheduleID() == "SCH000001");
-    QVERIFY(m->nextReportID() == "R000001");
-    QVERIFY(m->nextOnlineJobID() == "O000001");
+    QCOMPARE(m->nextInstitutionID(), QLatin1String("I000001"));
+    QCOMPARE(m->nextAccountID(), QLatin1String("A000001"));
+    QCOMPARE(m->nextTransactionID(), QLatin1String("T000000000000000001"));
+    QCOMPARE(m->nextPayeeID(), QLatin1String("P000001"));
+    QCOMPARE(m->nextTagID(), QLatin1String("G000001"));
+    QCOMPARE(m->nextScheduleID(), QLatin1String("SCH000001"));
+    QCOMPARE(m->nextReportID(), QLatin1String("R000001"));
+    QCOMPARE(m->nextOnlineJobID(), QLatin1String("O000001"));
 
-    QVERIFY(m->liability().name() == "Liability");
-    QVERIFY(m->asset().name() == "Asset");
-    QVERIFY(m->expense().name() == "Expense");
-    QVERIFY(m->income().name() == "Income");
-    QVERIFY(m->equity().name() == "Equity");
-    QVERIFY(m->dirty() == false);
+    QCOMPARE(m->liability().name(), QLatin1String("Liability"));
+    QCOMPARE(m->asset().name(), QLatin1String("Asset"));
+    QCOMPARE(m->expense().name(), QLatin1String("Expense"));
+    QCOMPARE(m->income().name(), QLatin1String("Income"));
+    QCOMPARE(m->equity().name(), QLatin1String("Equity"));
+    QCOMPARE(m->dirty(), false);
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
@@ -2320,16 +2320,16 @@ void MyMoneyDatabaseMgrTest::testAddOnlineJob()
 
   // Add a onlineJob
   onlineJob job(new dummyTask());
-  QCOMPARE(job.id(), QString("O000001"));
+  QCOMPARE(job.id(), QLatin1String("O000001"));
 
-  QVERIFY(m->onlineJobList().count() == 0);
+  QCOMPARE(m->onlineJobList().count(), 0);
   m->setDirty();
 
   try {
     m->addOnlineJob(job);
 
-    QVERIFY(m->onlineJobList().count() == 1);
-    QVERIFY((*(m->onlineJobList().begin())).id() == "O000001");
+    QCOMPARE(m->onlineJobList().count(), 1);
+    QCOMPARE((*(m->onlineJobList().begin())).id(), QLatin1String("O000001"));
 
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
@@ -2341,7 +2341,7 @@ void MyMoneyDatabaseMgrTest::testAddOnlineJob()
     m->addOnlineJob(job);
     QFAIL("Expected exception missing");
   } catch (const MyMoneyException &) {
-    QVERIFY(m->dirty() == false);
+    QCOMPARE(m->dirty(), false);
   }
 }
 
