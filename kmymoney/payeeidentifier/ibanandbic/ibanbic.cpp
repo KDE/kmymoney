@@ -186,13 +186,9 @@ QString ibanBic::ibanToElectronic(const QString& iban)
   for( int i = 0; i < length; ++i ) {
      const QChar letter = iban.at(i);
      if ( letter.isLetterOrNumber() )
-       canonicalIban.append(letter);
+       canonicalIban.append(letter.toUpper());
   }
 
-  if( canonicalIban.length() >= 2 ) {
-    canonicalIban[0] = canonicalIban[0].toUpper();
-    canonicalIban[1] = canonicalIban[1].toUpper();
-  }
   return canonicalIban;
 }
 
