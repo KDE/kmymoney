@@ -1710,6 +1710,8 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
       (tr.m_eAction == (MyMoneyStatement::Transaction::eaSell)) ||
       (tr.m_eAction == (MyMoneyStatement::Transaction::eaInterest))) {
     tr.m_strBrokerageAccount = m_trInvestData.brokerageAccnt;
+    //  no need to adjust sign here now
+    //  tr.m_amount = - tr.m_amount;
     /*
      *  need to deduct fees here
      */

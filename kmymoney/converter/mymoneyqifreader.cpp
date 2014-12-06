@@ -1499,6 +1499,8 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
 
     // For historic reasons (coming from the OFX importer) the statement
     // reader expects the dividend with a reverse sign. So we just do that.
+    /*  not needed anymore */
+    //  tr.m_amount = -(amount - tr.m_fees);
     tr.m_amount -= tr.m_fees;
 
     // We need an extra split which will be the zero-amount investment split
@@ -1521,6 +1523,8 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
 
     if (action == "intinc") {
       MyMoneyMoney price = m_qifProfile.value('I', extractLine('I'));
+      /*  not needed anymore */
+//      tr.m_amount = -(amount - tr.m_fees);
       tr.m_amount -= tr.m_fees;
       if ((!quantity.isZero()) && (!price.isZero()))
         tr.m_amount = -(quantity * price);
