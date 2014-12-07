@@ -41,6 +41,7 @@ class KMM_MYMONEY_EXPORT MyMoneyPayeeIdentifierContainer
 public:
   MyMoneyPayeeIdentifierContainer();
 
+  unsigned int payeeIdentifierCount() const;
   QList< payeeIdentifier > payeeIdentifiers() const;
 
   template< class type >
@@ -54,6 +55,8 @@ public:
 
   void modifyPayeeIdentifier( const payeeIdentifier& ident );
   void modifyPayeeIdentifier( const unsigned int index, const payeeIdentifier& ident );
+
+  void resetPayeeIdentifiers( const QList< payeeIdentifier > list );
 
 protected:
   void loadXML( QDomElement node );

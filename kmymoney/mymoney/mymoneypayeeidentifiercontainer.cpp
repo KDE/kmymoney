@@ -27,6 +27,11 @@ MyMoneyPayeeIdentifierContainer::MyMoneyPayeeIdentifierContainer()
 {
 }
 
+unsigned int MyMoneyPayeeIdentifierContainer::payeeIdentifierCount() const
+{
+  return m_payeeIdentifiers.count();
+}
+
 QList<payeeIdentifier> MyMoneyPayeeIdentifierContainer::payeeIdentifiers() const
 {
   return m_payeeIdentifiers;
@@ -49,6 +54,7 @@ void MyMoneyPayeeIdentifierContainer::removePayeeIdentifier(const payeeIdentifie
 
 void MyMoneyPayeeIdentifierContainer::removePayeeIdentifier(const unsigned int index)
 {
+  Q_ASSERT(m_payeeIdentifiers.count() > index && index >= 0);
   m_payeeIdentifiers.removeAt(index);
 }
 
@@ -65,7 +71,13 @@ void MyMoneyPayeeIdentifierContainer::modifyPayeeIdentifier(const payeeIdentifie
 
 void MyMoneyPayeeIdentifierContainer::modifyPayeeIdentifier(const unsigned int index, const payeeIdentifier& ident)
 {
+  Q_ASSERT(m_payeeIdentifiers.count() > index && index >= 0);
   m_payeeIdentifiers[index] = ident;
+}
+
+void MyMoneyPayeeIdentifierContainer::resetPayeeIdentifiers(const QList< payeeIdentifier > list)
+{
+  m_payeeIdentifiers = list;
 }
 
 void MyMoneyPayeeIdentifierContainer::loadXML(QDomElement node)
