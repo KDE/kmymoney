@@ -64,6 +64,7 @@ private slots:
   void testAddPayee();
   void testModifyPayee();
   void testRemovePayee();
+  void testPayeeWithIdentifier();
   void testAddTransactionStd();
   void testAttachStorage();
   void testAccount2Category();

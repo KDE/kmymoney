@@ -24,7 +24,10 @@
 #include <QList>
 #include <QtTest/QtTest>
 
+#include "payeeidentifier/ibanandbic/ibanbic.h"
+
 #include "autotest.h"
+#include "payeeidentifier/payeeidentifierloader.h"
 
 QTEST_MAIN(MyMoneyFileTest)
 
@@ -1426,6 +1429,40 @@ void MyMoneyFileTest::testRemovePayee()
 
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
+  }
+}
+
+void MyMoneyFileTest::testPayeeWithIdentifier()
+{
+  MyMoneyPayee p;
+  try {
+    MyMoneyFileTransaction ft;
+    m->addPayee(p);
+    ft.commit();
+
+    p = m->payee(p.id());
+
+    payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifier(payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
+    payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban(ident);
+    iban->setIban(QLatin1String("DE82 2007 0024 0066 6446 00"));
+
+    ft.restart();
+    p.addPayeeIdentifier(iban);
+    m->modifyPayee(p);
+    ft.commit();
+
+    p = m->payee(p.id());
+    QCOMPARE(p.payeeIdentifiers().count(), 1);
+
+    ident = p.payeeIdentifiers().first();
+    try {
+      iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(ident);
+    } catch (...) {
+      QFAIL("Unexpected exception");
+    }
+    QCOMPARE(iban->electronicIban(), QLatin1String("DE82200700240066644600"));
+  } catch (const MyMoneyException& e) {
+    unexpectedException(e);
   }
 }
 
