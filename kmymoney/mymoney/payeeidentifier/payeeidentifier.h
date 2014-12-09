@@ -38,7 +38,8 @@ public:
   explicit payeeIdentifier();
   explicit payeeIdentifier( payeeIdentifierData *const data );
   explicit payeeIdentifier( const id_t& id, payeeIdentifierData *const data );
-  explicit payeeIdentifier( const payeeIdentifier::id_t& id, const payeeIdentifier& other );
+  explicit payeeIdentifier( const QString& id, payeeIdentifierData *const data );
+  explicit payeeIdentifier( const id_t& id, const payeeIdentifier& other );
 
   payeeIdentifier(const payeeIdentifier& other);
   ~payeeIdentifier();
