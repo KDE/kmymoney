@@ -21,7 +21,7 @@
 
 #include <QWidget>
 
-#include "mymoney/mymoneypayee.h"
+#include "mymoney/mymoneypayeeidentifiercontainer.h"
 #include "widgets/styleditemdelegateforwarder.h"
 
 namespace Ui
@@ -32,11 +32,16 @@ namespace Ui
 class KPayeeIdentifierView : public QWidget
 {
   Q_OBJECT
+
 public:
   KPayeeIdentifierView(QWidget* parent);
+  QList<payeeIdentifier> identifiers() const;
+
+signals:
+  void dataChanged();
 
 public slots:
-  void setPayee( MyMoneyPayee );
+  void setSource( MyMoneyPayeeIdentifierContainer data );
 
 private slots:
   void removeSelected();

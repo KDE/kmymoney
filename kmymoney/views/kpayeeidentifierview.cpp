@@ -19,6 +19,8 @@
 #include "kpayeeidentifierview.h"
 #include "ui_kpayeeidentifierview.h"
 
+#include <algorithm>
+
 #include <QStyledItemDelegate>
 #include <QDebug>
 #include <QTimer>
@@ -30,7 +32,6 @@
 payeeIdentifierDelegate::payeeIdentifierDelegate(QObject* parent)
   : StyledItemDelegateForwarder(parent)
 {
-
 }
 
 QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelIndex& index) const
@@ -64,18 +65,27 @@ KPayeeIdentifierView::KPayeeIdentifierView(QWidget* parent)
   ui->view->setItemDelegate( new payeeIdentifierDelegate(ui->view) );
 }
 
-void KPayeeIdentifierView::setPayee(MyMoneyPayee payee)
+void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
 {
   if ( ui->view->model() == 0 ) {
     payeeIdentifierModel* model = new payeeIdentifierModel( ui->view );
     ui->view->setModel( model );
+    connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SIGNAL(dataChanged()));
   }
 
   Q_CHECK_PTR( qobject_cast<payeeIdentifierModel*>(ui->view->model()) );  // this should never fail but may help during debugging
-  static_cast<payeeIdentifierModel*>(ui->view->model())->setSource(payee);
+  static_cast<payeeIdentifierModel*>(ui->view->model())->setSource(container);
 
   // Open persistent editor for last row
   ui->view->openPersistentEditor(ui->view->model()->index( ui->view->model()->rowCount(QModelIndex())-1, 0 ));
+}
+
+QList< payeeIdentifier > KPayeeIdentifierView::identifiers() const
+{
+  const QAbstractItemModel* model = ui->view->model();
+  if ( model != 0 )
+    return static_cast<const payeeIdentifierModel*>(model)->identifiers();
+  return QList< payeeIdentifier >();
 }
 
 /**

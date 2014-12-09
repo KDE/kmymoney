@@ -20,8 +20,8 @@
 #define PAYEEIDENTIFIERMODEL_H
 
 #include <QtCore/QModelIndex>
-#include "mymoney/mymoneyaccount.h"
-#include "mymoney/mymoneypayee.h"
+#include "mymoney/mymoneypayeeidentifiercontainer.h"
+#include "payeeidentifier/payeeidentifier.h"
 
 /**
  * @warning You must set the source with setSource() before you call any other method.
@@ -53,28 +53,11 @@ public:
   virtual bool insertRows(int row, int count, const QModelIndex& parent);
   virtual bool removeRows(int row, int count, const QModelIndex& parent);
 
-  void setSource( MyMoneyPayee payee );
-  // void setSource( MyMoneyAccount account );
+  void setSource( MyMoneyPayeeIdentifierContainer data );
+  QList< ::payeeIdentifier > identifiers() const;
 
 private:
-  void setSource( MyMoneyPayeeIdentifierContainer* data );
-
-  MyMoneyPayeeIdentifierContainer* m_data;
-
-  /**
-   * When data is read or written to MyMoneyFile the model has to call
-   * modifyAccount or modifyPayee. This made this a bit complicated.
-   * m_data always points to the current and correct object.
-   *
-   * When ever possible use m_data!
-   */
-  bool saveCurrentObject();
-  /** @brief Store which data source is loaded */
-  enum {NONE, PAYEE, ACCOUNT} m_loadedType;
-  /** Contains the payee if this is the current type */
-  MyMoneyPayee m_payee;
-  /** Cointains the account if this is the current type */
-  MyMoneyAccount m_account;
+  QSharedPointer<MyMoneyPayeeIdentifierContainer> m_data;
 };
 
 #endif // PAYEEIDENTIFIERMODEL_H

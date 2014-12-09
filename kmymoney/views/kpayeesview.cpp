@@ -213,6 +213,8 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
   connect(m_filterBox, SIGNAL(currentIndexChanged(int)), this, SLOT(slotChangeFilter(int)));
 
+  connect(payeeIdentifiers, SIGNAL(dataChanged()), this, SLOT(slotPayeeDataChanged()));
+
   // use the size settings of the last run (if any)
   KConfigGroup grp = KGlobal::config()->group("Last Use Settings");
   m_splitter->restoreState(grp.readEntry("KPayeesViewSplitterSize", QByteArray()));
@@ -465,7 +467,8 @@ void KPayeesView::slotSelectPayee(void)
     slotPayeeDataChanged();
 
     showTransactions();
-    payeeIdentifiers->setPayee(m_payee);
+
+    payeeIdentifiers->setSource(m_payee);
 
   } catch (const MyMoneyException &e) {
     qDebug("exception during display of payee: %s at %s:%ld", qPrintable(e.what()), qPrintable(e.file()), e.line());
@@ -640,6 +643,8 @@ void KPayeesView::slotPayeeDataChanged(void)
       comboDefaultCategory->setEnabled(false);
       labelDefaultCategory->setEnabled(false);
     }
+
+    rc |= (m_payee.payeeIdentifiers() != payeeIdentifiers->identifiers());
   }
   setDirty(rc);
 }
@@ -658,6 +663,7 @@ void KPayeesView::slotUpdatePayee(void)
       m_payee.setNotes(notesEdit->toPlainText());
       m_payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(m_matchType->checkedId()), checkMatchIgnoreCase->isChecked(), matchKeyEditList->items());
       m_payee.setDefaultAccountId();
+      m_payee.resetPayeeIdentifiers(payeeIdentifiers->identifiers());
 
       if (checkEnableDefaultCategory->isChecked()) {
         QString temp;

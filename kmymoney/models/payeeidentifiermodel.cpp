@@ -27,8 +27,7 @@
 
 payeeIdentifierModel::payeeIdentifierModel( QObject* parent )
   : QAbstractListModel(parent),
-  m_data(0),
-  m_loadedType(NONE)
+  m_data(QSharedPointer<MyMoneyPayeeIdentifierContainer>())
 {
 }
 
@@ -36,7 +35,8 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 {
   Q_CHECK_PTR( m_data );
 
-  if ( index.row() == rowCount(index.parent())-1 )
+  // Needed for the selection box and it prevents a crash if index is out of range
+  if ( index.row() >= rowCount(index.parent())-1 )
     return QVariant();
 
   const ::payeeIdentifier ident = m_data->payeeIdentifiers().at(index.row());
@@ -54,7 +54,6 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
   return QVariant();
 }
 
-/** @todo implement dataChanged signal */
 bool payeeIdentifierModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
   Q_CHECK_PTR( m_data );
@@ -68,9 +67,9 @@ bool payeeIdentifierModel::setData(const QModelIndex& index, const QVariant& val
       endInsertRows();
     } else {
       m_data->modifyPayeeIdentifier(index.row(), ident);
+      emit dataChanged(createIndex(index.row(), 0), createIndex(index.row(), 0));
     }
-    const bool ret = saveCurrentObject();
-    return ret;
+    return true;
   }
   return QAbstractItemModel::setData(index, value, role);
 }
@@ -80,7 +79,7 @@ Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex& index) const
   Qt::ItemFlags flags = QAbstractItemModel::flags(index) | Qt::ItemIsDragEnabled;
   const QString type = data(index, payeeIdentifierType).toString();
   // type.isEmpty() means the type selection can be shown
-  if ( type.isEmpty() || payeeIdentifierLoader::instance()->hasItemEditDelegate(type) )
+  if ( !type.isEmpty() && payeeIdentifierLoader::instance()->hasItemEditDelegate(type) )
     flags |= Qt::ItemIsEditable;
   return flags;
 }
@@ -109,62 +108,35 @@ bool payeeIdentifierModel::removeRows(int row, int count, const QModelIndex& par
   for( unsigned int i = row; i < row+count; ++i) {
     m_data->removePayeeIdentifier(i);
   }
-  const bool ret = saveCurrentObject();
   endRemoveRows();
-  return ret;
+  return true;
 }
 
-void payeeIdentifierModel::setSource(MyMoneyPayee payee)
+void payeeIdentifierModel::setSource( const MyMoneyPayeeIdentifierContainer data)
 {
-  m_payee = payee;
-  m_loadedType = PAYEE;
-  setSource( &m_payee );
-}
-
-#if 0
-void payeeIdentifierModel::setSource(MyMoneyAccount account)
-{
-  m_account = account;
-  m_loadedType = ACCOUNT;
-  setSource(&m_account);
-}
-#endif
-
-void payeeIdentifierModel::setSource(MyMoneyPayeeIdentifierContainer* data)
-{
-  if ( m_data != 0 ) {
+  if ( !m_data.isNull() ) {
     // Remove all rows
     const int oldLastRow = m_data->payeeIdentifiers().count()-1;
-    beginRemoveRows(QModelIndex(), 0, oldLastRow);
-    endRemoveRows();
+    if (oldLastRow >= 0) {
+      beginRemoveRows(QModelIndex(), 0, oldLastRow);
+      endRemoveRows();
+    }
   }
 
   // no need to delete data as it always points to 0, m_account or m_payee
-  m_data = data;
+  m_data = QSharedPointer<MyMoneyPayeeIdentifierContainer>(new MyMoneyPayeeIdentifierContainer(data));
 
   // Insert new rows
   const int newLastRow = m_data->payeeIdentifiers().count()-1;
-  beginInsertRows(QModelIndex(), 0, newLastRow);
-  endInsertRows();
+  if (newLastRow >= 0) {
+    beginInsertRows(QModelIndex(), 0, newLastRow);
+    endInsertRows();
+  }
 }
 
-bool payeeIdentifierModel::saveCurrentObject()
+QList< ::payeeIdentifier > payeeIdentifierModel::identifiers() const
 {
-  Q_ASSERT( m_loadedType != NONE );
-  try {
-    MyMoneyFileTransaction transaction;
-
-    if ( m_loadedType == PAYEE )
-      MyMoneyFile::instance()->modifyPayee( m_payee );
-    else if ( m_loadedType == ACCOUNT )
-      MyMoneyFile::instance()->modifyAccount( m_account );
-    else
-      return false;
-
-    transaction.commit();
-  } catch ( MyMoneyException& e ) {
-    qWarning() << e.what() << e.file() << e.line();
-    return false;
-  }
-  return true;
+  if ( m_data.isNull() )
+    return QList< ::payeeIdentifier >();
+  return m_data->payeeIdentifiers();
 }
