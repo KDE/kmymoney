@@ -69,11 +69,12 @@ public:
     * @param categoryData If true, the categories will be exported as well
     * @param startDate Transactions before this date will not be exported
     * @param endDate Transactions after this date will not be exported
+    * @param fieldSeparator Current field separator
     */
-  void write(const QString &filename,
-             const QString &accountId, const bool accountData,
-             const bool categoryData,
-             const QDate &startDate, const QDate &endDate);
+  void write(const QString& filename,
+             const QString& accountId, const bool accountData,
+             const bool categoryData, const QDate& startDate, const QDate& endDate,
+             const QString& separator);
 
 private:
   bool m_firstSplit;
@@ -137,6 +138,8 @@ signals:
 
 private:
   QStringList m_headerLine;
+
+  QString m_separator;
 
   int m_highestSplitCount;
 
