@@ -109,6 +109,13 @@ public:
     return m_accountId;
   };
 
+  /**
+    * This method returns the field separator value
+    */
+  QString separator() {
+    return m_separator;
+  };
+
 protected slots:
   /**
     * Called when the user clicked on the Export button
@@ -119,6 +126,12 @@ protected slots:
     * Called when the user needs to browse the filesystem for a CSV file
     */
   void slotBrowse();
+
+  /**
+    * Called when the user changes the field separator setting
+    */
+  void separator(int separatorIndex);
+
 
   /**
     * This slot checks whether all data is correct to enable
@@ -157,7 +170,9 @@ private:
 
   Ui::CsvExportDlg* ui;
   QString           m_accountId;
+  QString           m_separator;
   QStringList       m_idList;
+  QStringList       m_fieldDelimiterCharList;
 };
 
 bool caseInsensitiveLessThan(const QString &s1, const QString &s2);
