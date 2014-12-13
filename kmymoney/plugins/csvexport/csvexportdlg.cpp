@@ -50,7 +50,7 @@
 CsvExportDlg::CsvExportDlg(QWidget *parent) : QDialog(parent), ui(new Ui::CsvExportDlg)
 {
   ui->setupUi(this);
-  m_fieldDelimiterCharList << "," << ";" << "\t";
+  m_fieldDelimiterCharList << "," << ";" << ":" << "\t";
   ui->m_separatorComboBox->setCurrentIndex(-1);
 
   // Set (almost) all the last used options
