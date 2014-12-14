@@ -41,9 +41,11 @@ MyMoneyDbDef::MyMoneyDbDef()
   PluginInfo();
   Institutions();
   Payees();
+  PayeesPayeeIdentifier();
   Tags();
   TagSplits(); // a table to bind tags and splits
   Accounts();
+  AccountsPayeeIdentifier();
   Transactions();
   Splits();
   KeyValuePairs();
@@ -153,6 +155,17 @@ void MyMoneyDbDef::Payees(void)
   m_tables[t.name()] = t;
 }
 
+void MyMoneyDbDef::PayeesPayeeIdentifier()
+{
+  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  appendField(MyMoneyDbColumn("payeeId", "varchar(32)",  PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
+  MyMoneyDbTable t("kmmPayeesPayeeIdentifier", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
 void MyMoneyDbDef::Tags(void)
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
@@ -197,6 +210,17 @@ void MyMoneyDbDef::Accounts(void)
   appendField(MyMoneyDbTextColumn("balanceFormatted"));
   appendField(MyMoneyDbIntColumn("transactionCount", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 1));
   MyMoneyDbTable t("kmmAccounts", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
+void MyMoneyDbDef::AccountsPayeeIdentifier()
+{
+  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  appendField(MyMoneyDbColumn("accountId", "varchar(32)",  PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
+  MyMoneyDbTable t("kmmAccountsPayeeIdentifier", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
 }
@@ -378,8 +402,8 @@ void MyMoneyDbDef::PayeeIdentifier()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
 
-  appendField(MyMoneyDbIntColumn("id", MyMoneyDbIntColumn::BIG, PRIMARYKEY, NOTNULL, 8));
-  appendField(MyMoneyDbColumn("type", "varchar(255)", false, NOTNULL, 8));
+  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbColumn("type", "varchar(255)", false, false, 8));
 
   MyMoneyDbTable t("kmmPayeeIdentifier", fields);
   t.buildSQLStrings();

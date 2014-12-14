@@ -2349,10 +2349,8 @@ void MyMoneyDatabaseMgrTest::testModifyOnlineJob()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   onlineJob job(new dummyTask());
   testAddOnlineJob();
@@ -2382,10 +2380,8 @@ void MyMoneyDatabaseMgrTest::testRemoveOnlineJob()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   onlineJob job(new dummyTask());
   testAddOnlineJob();

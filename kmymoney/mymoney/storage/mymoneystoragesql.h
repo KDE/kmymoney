@@ -3,6 +3,7 @@
                           -------------------
     begin                : 11 November 2005
     copyright            : (C) 2005 by Tony Bloomfield
+                         : (C) 2014 by Christian David
     email                : tonybloom@users.sourceforge.net
                          : Fernando Vilas <fvilas@iname.com>
  ***************************************************************************/
@@ -54,6 +55,7 @@ class QIODevice;
 #include "mymoneytransactionfilter.h"
 #include "mymoneydbdef.h"
 #include "mymoneydbdriver.h"
+#include "databasestoreableobject.h"
 
 class MyMoneyDbDriver;
 
@@ -192,7 +194,7 @@ public:
   void modifyInstitution(const MyMoneyInstitution& inst);
   void removeInstitution(const MyMoneyInstitution& inst);
   void addPayee(const MyMoneyPayee& payee);
-  void modifyPayee(const MyMoneyPayee& payee);
+  void modifyPayee(MyMoneyPayee payee);
   void removePayee(const MyMoneyPayee& payee);
   void addTag(const MyMoneyTag& tag);
   void modifyTag(const MyMoneyTag& tag);
@@ -223,8 +225,8 @@ public:
   void addOnlineJob( const onlineJob& job );
   void modifyOnlineJob( const onlineJob& job);
   void removeOnlineJob( const onlineJob& job);
-  void addPayeeIdentifier( const payeeIdentifier& ident );
-  void modifiyPayeeIdentifier( const payeeIdentifier& ident );
+  void addPayeeIdentifier( payeeIdentifier& ident );
+  void modifyPayeeIdentifier( const payeeIdentifier& ident );
   void removePayeeIdentifier( const payeeIdentifier& ident );
 
   unsigned long transactionCount(const QString& aid = QString()) const;
@@ -258,6 +260,8 @@ public:
   const QMap<QString, MyMoneySecurity> fetchSecurities(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyTransaction> fetchTransactions(const QString& tidList = QString(), const QString& dateClause = QString(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyTransaction> fetchTransactions(const MyMoneyTransactionFilter& filter) const;
+  payeeIdentifier fetchPayeeIdentifier(const QString& id) const;
+  const QMap<QString, payeeIdentifier> fetchPayeeIdentifiers(const QStringList& idList = QStringList()) const;
   bool isReferencedByTransaction(const QString& id) const;
 
   void readPayees(const QString&);
@@ -350,6 +354,12 @@ private:
   void writeReports(void);
   void writeBudgets(void);
 
+  /**
+   * @name writeMethods
+   * @{
+   * These methods bind the data fields of MyMoneyObjects to a given query.
+   * This is helpfull as the query has usually an update and a insert format.
+   */
   void writeInstitutionList(const QList<MyMoneyInstitution>& iList, QSqlQuery& q);
   void writePayee(const MyMoneyPayee& p, QSqlQuery& q, bool isUserInfo = false);
   void writeTag(const MyMoneyTag& p, QSqlQuery& q);
@@ -367,8 +377,13 @@ private:
   void writeBudget(const MyMoneyBudget& bud, QSqlQuery& q);
   void writeKeyValuePairs(const QString& kvpType, const QVariantList& kvpId, const QList<QMap<QString, QString> >& pairs);
   void writeOnlineJob(const onlineJob& job, QSqlQuery& query);
+  void writePayeeIdentifier(const payeeIdentifier& pid, QSqlQuery& query);
+  /** @} */
 
-  // read routines
+  /**
+   * @name readMethods
+   * @{
+   */
   void readFileInfo(void);
   void readLogonData(void);
   void readUserInformation(void);
@@ -384,6 +399,7 @@ private:
   void readCurrencies(void);
   void readReports(void);
   void readBudgets(void);
+  /** @} */
 
   void deleteTransaction(const QString& id);
   void deleteTagSplitsList(const QString& txId, const QList<int>& splitIdList);
@@ -447,6 +463,10 @@ private:
    * of the plugin unavailable.
    */
   bool setupStoragePlugin( QString iid );
+
+  void insertStorableObject( const databaseStoreableObject& obj, const QString& id );
+  void updateStorableObject( const databaseStoreableObject& obj, const QString& id );
+  void deleteStorableObject( const databaseStoreableObject& obj, const QString& id );
 
   // data
   KSharedPtr<MyMoneyDbDriver> m_driver;

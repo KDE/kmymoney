@@ -70,6 +70,18 @@ payeeIdentifier payeeIdentifierLoader::createPayeeIdentifierFromXML(const QDomEl
   return ident;
 }
 
+payeeIdentifier payeeIdentifierLoader::createPayeeIdentifierFromSqlDatabase( QSqlDatabase db, const QString& identifierType, const QString& identifierId)
+{
+  const payeeIdentifierData* identData = m_identifiers.value( identifierType );
+
+  if ( identData != 0 ) {
+    payeeIdentifierData* data = identData->createFromSqlDatabase( db, identifierId );
+    return payeeIdentifier(identifierId, data);
+  }
+
+  return payeeIdentifier(identifierId, 0);
+}
+
 /**
  * @todo enable delegates again
  */

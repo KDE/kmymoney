@@ -19,8 +19,6 @@
 #ifndef SEPAONLINETRANSFERIMPL_H
 #define SEPAONLINETRANSFERIMPL_H
 
-#include <algorithm>
-
 #include <klocalizedstring.h>
 #include <QSqlQuery>
 

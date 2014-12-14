@@ -23,8 +23,35 @@ install(TARGETS payeeidentifier_iban_bic
         ${INSTALL_TARGETS_DEFAULT_ARGS}
 )
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ibanbicdata.desktop
-        DESTINATION ${SERVICETYPES_INSTALL_DIR})
+install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/ibanbicdata.desktop
+  DESTINATION ${SERVICETYPES_INSTALL_DIR})
+
+# Storage plugin
+
+configure_file(kmymoney-ibanbic-storageplugin.desktop.in kmymoney-ibanbic-storageplugin.desktop)
+
+set ( IBAN_BIC_STORAGE_PLUGIN_SCRS
+  ibanbicstorageplugin.cpp
+)
+
+kde4_add_plugin( payeeidentifier_ibanbic_storageplugin
+  ${IBAN_BIC_STORAGE_PLUGIN_SCRS}
+)
+
+target_link_libraries( payeeidentifier_ibanbic_storageplugin
+  ${QT_QTCORE_LIBRARY}
+  ${QT_QTSQL_LIBRARY}
+  kmm_mymoney
+)
+
+install(TARGETS payeeidentifier_ibanbic_storageplugin
+  DESTINATION ${PLUGIN_INSTALL_DIR})
+
+install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-storageplugin.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}
+  )
 
 if( KDE4_BUILD_TESTS )
   add_subdirectory(tests)

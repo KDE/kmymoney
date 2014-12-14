@@ -60,6 +60,37 @@ void nationalAccount::writeXML(QDomDocument& document, QDomElement& parent) cons
   parent.setAttribute("country", m_country);
 }
 
+/** @todo implement */
+nationalAccount* nationalAccount::createFromSqlDatabase(QSqlDatabase db, const QString& identId) const
+{
+  return 0;
+}
+
+/** @todo implement */
+QString nationalAccount::storagePluginIid() const
+{
+  return QString();
+}
+
+/** @todo implement */
+bool nationalAccount::sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const
+{
+  return false;
+}
+
+/** @todo implement */
+bool nationalAccount::sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const
+{
+  return false;
+}
+
+/** @todo implement */
+bool nationalAccount::sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const
+{
+  return false;
+}
+
+/** @todo implement */
 bool nationalAccount::isValid() const
 {
   return true;

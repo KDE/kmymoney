@@ -40,6 +40,12 @@ public:
   nationalAccount* createFromXml(const QDomElement& element) const;
   void writeXML(QDomDocument& document, QDomElement& parent) const;
 
+  QString storagePluginIid() const;
+  bool sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const;
+  bool sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const;
+  bool sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const;
+  nationalAccount* createFromSqlDatabase(QSqlDatabase db, const QString& identId) const;
+
   void setBankCode( const QString& bankCode ) { m_bankCode = bankCode; }
   QString bankCode() const { return m_bankCode; }
 

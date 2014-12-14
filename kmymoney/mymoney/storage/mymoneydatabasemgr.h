@@ -1097,6 +1097,9 @@ private:
   /** @brief get next valid id for an onlineJob */
   const QString nextOnlineJobID();
 
+  /** @brief get next valid id for payeeIdentifier */
+  const QString nextPayeeIdentifierID();
+
   /**
     * This method is used to get the next valid ID for a budget object.
     * @return id for an budget object
@@ -1114,6 +1117,7 @@ private:
   static const int REPORT_ID_SIZE = 6;
   static const int BUDGET_ID_SIZE = 6;
   static const int ONLINEJOB_ID_SIZE = 8;
+  static const int PAYEEIDENTIFIER_ID_SIZE = 6;
 
   // Increment this to force an update in KMMView.
   // This is different from the db schema version stored in

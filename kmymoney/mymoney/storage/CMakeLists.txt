@@ -1,6 +1,7 @@
 set(storage_HEADERS
   imymoneystorage.h imymoneyserialize.h imymoneystorageformat.h
   kmymoneystorageplugin.h
+  databasestoreableobject.h
   )
 
 set(storage_a_SOURCES

@@ -608,6 +608,17 @@ const QString MyMoneyDatabaseMgr::nextOnlineJobID()
   return id;
 }
 
+const QString MyMoneyDatabaseMgr::nextPayeeIdentifierID()
+{
+  QString id;
+  if (m_sql) {
+    if (! m_sql->isOpen())((QSqlDatabase*)(m_sql.data()))->open();
+    id.setNum(m_sql->incrementPayeeIdentfierId());
+    id = QLatin1String("IDENT") + id.rightJustified(PAYEEIDENTIFIER_ID_SIZE, '0');
+  }
+  return id;
+}
+
 void MyMoneyDatabaseMgr::addTransaction(MyMoneyTransaction& transaction, const bool skipAccountUpdate)
 {
   // perform some checks to see that the transaction stuff is OK. For

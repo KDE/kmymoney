@@ -23,8 +23,11 @@
 #include <gmpxx.h>
 
 #include <QDebug>
+#include <QSqlQuery>
+#include <QSqlError>
 
 #include "ibanbicdata.h"
+#include "mymoney/mymoneyexception.h"
 
 namespace payeeIdentifiers {
 
@@ -40,7 +43,8 @@ ibanBic::ibanBic()
 }
 
 ibanBic::ibanBic(const ibanBic& other)
-  : m_bic( other.m_bic ),
+  : payeeIdentifierData(other),
+    m_bic( other.m_bic ),
     m_iban( other.m_iban ),
     m_ownerName( other.m_ownerName )
 {
@@ -59,12 +63,29 @@ bool ibanBic::operator==(const payeeIdentifierData& other) const
 
 bool ibanBic::operator==(const ibanBic& other) const
 {
-  return ( m_iban == other.m_iban && m_bic == other.m_bic );
+  return ( m_iban == other.m_iban && m_bic == other.m_bic && m_ownerName == other.m_ownerName );
 }
 
 ibanBic* ibanBic::clone() const
 {
   return (new ibanBic(*this));
+}
+
+payeeIdentifierData* ibanBic::createFromSqlDatabase(QSqlDatabase db, const QString& identId) const
+{
+  QSqlQuery query(db);
+  query.prepare("SELECT iban, bic, name FROM kmmIbanBic WHERE id = ?;");
+  query.bindValue(0, identId);
+  if (!query.exec() || !query.next()) {
+    qWarning("Could load iban bic identifier from database");
+    return 0;
+  }
+
+  ibanBic *const ident = new ibanBic;
+  ident->setIban(query.value(0).toString());
+  ident->setBic(query.value(1).toString());
+  ident->setOwnerName(query.value(2).toString());
+  return ident;
 }
 
 ibanBic* ibanBic::createFromXml(const QDomElement& element) const
@@ -88,6 +109,49 @@ void ibanBic::writeXML(QDomDocument& document, QDomElement& parent) const
     parent.setAttribute("ownerName", m_ownerName);
 }
 
+bool ibanBic::writeQuery(QSqlQuery& query, const QString& id) const
+{
+  query.bindValue(":id", id);
+  query.bindValue(":iban", electronicIban());
+  const QString bic = fullStoredBic();
+  query.bindValue(":bic", (bic.isEmpty()) ? QVariant(QVariant::String) : bic);
+  query.bindValue(":name", ownerName());
+  if ( !query.exec() ) {
+    qWarning( qPrintable(query.lastError().text()) );
+    return false;
+  }
+  return true;
+}
+
+bool ibanBic::sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const
+{
+  QSqlQuery query(databaseConnection);
+  query.prepare("INSERT INTO kmmIbanBic "
+  " ( id, iban, bic, name )"
+  " VALUES( :id, :iban, :bic, :name ) "
+  );
+  return writeQuery( query, objectId );
+}
+
+bool ibanBic::sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const
+{
+  QSqlQuery query(databaseConnection);
+  query.prepare("UPDATE kmmIbanBic SET iban = :iban, bic = :bic, name = :name WHERE id = :id;");
+  return writeQuery(query, objectId);
+}
+
+bool ibanBic::sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const
+{
+  QSqlQuery query(databaseConnection);
+  query.prepare("DELETE FROM kmmIbanBic WHERE id = ?;");
+  query.bindValue(0, objectId);
+  if ( !query.exec() ) {
+    qWarning( qPrintable(query.lastError().text()) );
+    return false;
+  }
+  return true;
+}
+
 QString ibanBic::paperformatIban(const QString& seperator) const
 {
   return ibanToPaperformat( m_iban, seperator );
@@ -100,10 +164,16 @@ void ibanBic::setIban(const QString& iban)
 
 void ibanBic::setBic(const QString& bic)
 {
-  m_bic = bic.toUpper();
+  m_bic = canonizeBic(bic);
+}
 
-  if ( m_bic.length() == 11 && m_bic.endsWith(QLatin1String("XXX")) )
-    m_bic = m_bic.left(8);
+QString ibanBic::canonizeBic(const QString& bic)
+{
+  QString canonizedBic = bic.toUpper();
+
+  if ( canonizedBic.length() == 11 && canonizedBic.endsWith(QLatin1String("XXX")) )
+    canonizedBic = canonizedBic.left(8);
+  return canonizedBic;
 }
 
 QString ibanBic::fullStoredBic() const

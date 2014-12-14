@@ -39,6 +39,7 @@ public:
 
   payeeIdentifier createPayeeIdentifier( const QString& payeeIdentifierId );
   payeeIdentifier createPayeeIdentifierFromXML( const QDomElement& element );
+  payeeIdentifier createPayeeIdentifierFromSqlDatabase( QSqlDatabase db, const QString& identifierType, const QString& identifierId );
 
   /**
    * @brief Create a delegate to show/edit

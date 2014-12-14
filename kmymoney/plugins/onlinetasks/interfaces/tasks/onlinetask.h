@@ -25,6 +25,7 @@
 
 #include "mymoneyaccount.h"
 #include "onlinejobmessage.h"
+#include "storage/databasestoreableobject.h"
 
 class onlineJob;
 
@@ -105,7 +106,7 @@ friend class onlineJobAdministration
  *
  * @see onlineJob
  */
-class KMM_MYMONEY_EXPORT onlineTask
+class KMM_MYMONEY_EXPORT onlineTask : public databaseStoreableObject
 {
 public:
   ONLINETASK_META(onlineTask, "org.kmymoney.onlineTask");
@@ -122,16 +123,6 @@ public:
    * @brief Human readable type-name
    */
   virtual QString jobTypeName() const = 0;
-
-  /**
-   * Iid of the KMyMoneyPlugin::storagePlugin which is needed to save this
-   * onlineTask.
-   */
-  virtual QString storagePluginIid() const = 0;
-
-  virtual bool sqlSave( QSqlDatabase databaseConnection, const QString& onlineJobId ) const = 0;
-  virtual bool sqlModify( QSqlDatabase databaseConnection, const QString& onlineJobId ) const = 0;
-  virtual bool sqlRemove( QSqlDatabase databaseConnection, const QString& onlineJobId ) const = 0;
 
 protected:
   onlineTask( const onlineTask& other );

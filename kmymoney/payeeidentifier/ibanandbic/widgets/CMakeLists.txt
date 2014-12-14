@@ -63,7 +63,7 @@ install(TARGETS payeeidentifier_iban_bic_delegates
         DESTINATION ${PLUGIN_INSTALL_DIR})
 
 
-configure_file(kmymoney-ibanandbic-delegate.desktop.in kmymoney-ibanandbic-delegate.desktop)
+configure_file(kmymoney-ibanbic-delegate.desktop.in kmymoney-ibanbic-delegate.desktop)
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanandbic-delegate.desktop
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-delegate.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
