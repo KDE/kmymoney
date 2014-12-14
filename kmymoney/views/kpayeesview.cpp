@@ -65,10 +65,6 @@
 #include "models.h"
 #include "mymoneysecurity.h"
 
-/* -------------------------------------------------------------------------*/
-/*                         KTransactionPtrVector                            */
-/* -------------------------------------------------------------------------*/
-
 // *** KPayeeListItem Implementation ***
 
 KPayeeListItem::KPayeeListItem(QListWidget *parent, const MyMoneyPayee& payee) :
