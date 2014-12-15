@@ -1622,7 +1622,7 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("TOP", i18n("Tongan Pa'anga")), create);
   loadDefaultCurrency(MyMoneySecurity("TTD", i18n("Trinidad and Tobago Dollar"), "$"), create);
   loadDefaultCurrency(MyMoneySecurity("TND", i18n("Tunisian Dinar"),         "TND", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("TRY", i18n("Turkish Lira (new)"), "YTL"), true);
+  loadDefaultCurrency(MyMoneySecurity("TRY", i18n("Turkish Lira (new)"), QChar(0x20BA)), create);
   loadDefaultCurrency(MyMoneySecurity("TMM", i18n("Turkmenistan Manat")), create);
   loadDefaultCurrency(MyMoneySecurity("USD", i18n("US Dollar"),              "$"), create);
   loadDefaultCurrency(MyMoneySecurity("UGX", i18n("Uganda Shilling")), create);
