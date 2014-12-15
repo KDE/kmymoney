@@ -1627,7 +1627,7 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("TOP", i18n("Tongan Pa'anga")), create);
   loadDefaultCurrency(MyMoneySecurity("TTD", i18n("Trinidad and Tobago Dollar"), "$"), create);
   loadDefaultCurrency(MyMoneySecurity("TND", i18n("Tunisian Dinar"),         "TND", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("TRY", i18n("Turkish Lira (new)"), QChar(0x20BA)), create);
+  loadDefaultCurrency(MyMoneySecurity("TRY", i18n("Turkish Lira"), QChar(0x20BA)), create);
   loadDefaultCurrency(MyMoneySecurity("TMM", i18n("Turkmenistan Manat")), create);
   loadDefaultCurrency(MyMoneySecurity("USD", i18n("US Dollar"),              "$"), create);
   loadDefaultCurrency(MyMoneySecurity("UGX", i18n("Uganda Shilling")), create);
@@ -1699,7 +1699,7 @@ void KMyMoneyView::loadAncientCurrencies(void)
   loadAncientCurrency("SIT", i18n("Slovenian Tolar"), "SIT", QDate(2006, 12, 31), MyMoneyMoney(100, 23964), "EUR");
 
   // Source: http://www.tf-portfoliosolutions.net/products/turkishlira.aspx
-  loadAncientCurrency("TRL", i18n("Turkish Lira"), "TL", QDate(2004, 12, 31), MyMoneyMoney(1, 1000000), "TRY");
+  loadAncientCurrency("TRL", i18n("Turkish Lira (old)"), "TL", QDate(2004, 12, 31), MyMoneyMoney(1, 1000000), "TRY");
 
   // Source: http://www.focus.de/finanzen/news/malta-und-zypern_aid_66058.html
   loadAncientCurrency("MTL", i18n("Maltese Lira"), "MTL", QDate(2008, 1, 1), MyMoneyMoney(429300, 1000000), "EUR");
