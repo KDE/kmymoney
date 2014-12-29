@@ -1633,7 +1633,6 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("VUV", i18n("Vanuatu Vatu")), create);
   loadDefaultCurrency(MyMoneySecurity("VEB", i18n("Venezuelan Bolivar")), create);
   loadDefaultCurrency(MyMoneySecurity("VND", i18n("Vietnamese Dong"),        QChar(0x20AB)), create);
-  loadDefaultCurrency(MyMoneySecurity("YUM", i18n("Yugoslav Dinar")), create);
   loadDefaultCurrency(MyMoneySecurity("ZMK", i18n("Zambian Kwacha")), create);
   loadDefaultCurrency(MyMoneySecurity("ZWD", i18n("Zimbabwe Dollar"),        "$"), create);
 
