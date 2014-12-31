@@ -1564,7 +1564,6 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("LSL", i18n("Lesotho Loti")), create);
   loadDefaultCurrency(MyMoneySecurity("LRD", i18n("Liberian Dollar"),        "$"), create);
   loadDefaultCurrency(MyMoneySecurity("LYD", i18n("Libyan Dinar"),           "LYD", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("LTL", i18n("Lithuanian Litas")), create);
   loadDefaultCurrency(MyMoneySecurity("MOP", i18n("Macau Pataca")), create);
   loadDefaultCurrency(MyMoneySecurity("MKD", i18n("Macedonian Denar")), create);
   loadDefaultCurrency(MyMoneySecurity("MGF", i18n("Malagasy Franc"),         "MGF", 500, 500), create);
@@ -1606,8 +1605,6 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("SCR", i18n("Seychelles Rupee")), create);
   loadDefaultCurrency(MyMoneySecurity("SLL", i18n("Sierra Leone Leone")), create);
   loadDefaultCurrency(MyMoneySecurity("SGD", i18n("Singapore Dollar"),       "$"), create);
-  // loadDefaultCurrency(MyMoneySecurity("SKK", i18n("Slovak Koruna")), create);
-  // loadDefaultCurrency(MyMoneySecurity("SIT", i18n("Slovenian Tolar")), create);
   loadDefaultCurrency(MyMoneySecurity("SBD", i18n("Solomon Islands Dollar"), "$"), create);
   loadDefaultCurrency(MyMoneySecurity("SOS", i18n("Somali Shilling")), create);
   loadDefaultCurrency(MyMoneySecurity("ZAR", i18n("South African Rand")), create);
@@ -1712,6 +1709,9 @@ void KMyMoneyView::loadAncientCurrencies(void)
 
   // Source https://en.wikipedia.org/wiki/Azerbaijani_manat
   loadAncientCurrency("AZM", i18n("Azerbaijani Manat"), "m.", QDate(2006, 1, 1), MyMoneyMoney(1, 5000), "AZN");
+
+  // Source: https://en.wikipedia.org/wiki/Litas
+  loadAncientCurrency("LTL", i18n("Lithuanian Litas"), "Lt", QDate(2015, 1, 1), MyMoneyMoney(100000, 345280), "EUR");
 }
 
 void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
