@@ -118,7 +118,7 @@ private:
     CategoryNew
   };
 
-  enum storageTypeE { // not used but keep for future implementation
+  enum storageTypeE {
     Memory = 0,
     Database
   } _storageType;
