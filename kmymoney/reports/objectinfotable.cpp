@@ -154,7 +154,7 @@ void ObjectInfoTable::constructScheduleTable(void)
       TableRow scheduleRow;
 
       //convert to base currency if needed
-      MyMoneyMoney xr = MyMoneyMoney(1, 1);
+      MyMoneyMoney xr = MyMoneyMoney::ONE;
       if (m_config.isConvertCurrency() && account.isForeignCurrency()) {
         xr = account.baseCurrencyPrice(QDate::currentDate()).reduce();
       }
@@ -294,7 +294,7 @@ void ObjectInfoTable::constructAccountLoanTable(void)
 
     if (m_config.includes(account) && account.isLoan() && !account.isClosed()) {
       //convert to base currency if needed
-      MyMoneyMoney xr = MyMoneyMoney(1, 1);
+      MyMoneyMoney xr = MyMoneyMoney::ONE;
       if (m_config.isConvertCurrency() && account.isForeignCurrency()) {
         xr = account.baseCurrencyPrice(QDate::currentDate()).reduce();
       }

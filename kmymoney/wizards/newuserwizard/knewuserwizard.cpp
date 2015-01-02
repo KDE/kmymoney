@@ -43,12 +43,6 @@
 #include <kurlrequester.h>
 #include <kio/netaccess.h>
 #include <kurl.h>
-#include <KPIMIdentities/IdentityManager>
-#include <KPIMIdentities/Identity>
-#include <akonadi/recursiveitemfetchjob.h>
-#include <Akonadi/ItemFetchScope>
-#include <Akonadi/Collection>
-#include <KABC/Addressee>
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 
@@ -179,59 +173,38 @@ KMyMoneyWizardPage* IntroPage::nextPage(void) const
 
 GeneralPage::GeneralPage(Wizard* wizard) :
     UserInfo(wizard),
-    WizardPage<Wizard>(stepCount++, this, wizard)
+    WizardPage<Wizard>(stepCount++, this, wizard),
+    m_contact(new MyMoneyContact(this))
 {
   m_userNameEdit->setFocus();
 
-  KPIMIdentities::IdentityManager im;
-  KPIMIdentities::Identity id = im.defaultIdentity();
-  m_loadAddressButton->setEnabled(!id.isNull());
+  m_loadAddressButton->setEnabled(m_contact->ownerExists());
   connect(m_loadAddressButton, SIGNAL(clicked()), this, SLOT(slotLoadFromAddressBook()));
 }
 
 void GeneralPage::slotLoadFromAddressBook(void)
 {
-  KPIMIdentities::IdentityManager im;
-  KPIMIdentities::Identity id = im.defaultIdentity();
-  if (id.isNull() || id.primaryEmailAddress().isEmpty()) {
+  m_userNameEdit->setText(m_contact->ownerFullName());
+  m_emailEdit->setText(m_contact->ownerEmail());
+  if (m_emailEdit->text().isEmpty()) {
     KMessageBox::sorry(this, i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."), i18n("Address book import"));
     return;
   }
-  // Search all contacts for the matching email address
   m_loadAddressButton->setEnabled(false);
-  Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList() << KABC::Addressee::mimeType());
-  job->fetchScope().fetchFullPayload();
-  job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(searchContactResult(KJob*)));
-  job->start();
-
-  m_userNameEdit->setText(id.fullName());
-  m_emailEdit->setText(id.primaryEmailAddress());
+  connect(m_contact, SIGNAL(contactFetched(ContactData)), this, SLOT(slotContactFetched(ContactData)));
+  m_contact->fetchContact(m_emailEdit->text());
 }
 
-void GeneralPage::searchContactResult(KJob *job)
+void GeneralPage::slotContactFetched(const ContactData &identity)
 {
-  const Akonadi::RecursiveItemFetchJob *contactJob = qobject_cast<Akonadi::RecursiveItemFetchJob*>(job);
-  Akonadi::Item::List items;
-  if (contactJob)
-    items = contactJob->items();
-  foreach (const Akonadi::Item &item, items) {
-    const KABC::Addressee &contact = item.payload<KABC::Addressee>();
-    if (contact.emails().contains(m_emailEdit->text())) {
-      KABC::PhoneNumber phone = contact.phoneNumber(KABC::PhoneNumber::Home);
-      m_telephoneEdit->setText(phone.number());
-
-      const KABC::Address &address = contact.address(KABC::Address::Home);
-      QString sep;
-      if (!address.country().isEmpty() && !address.region().isEmpty())
-        sep = " / ";
-      m_countyEdit->setText(QString("%1%2%3").arg(address.country(), sep, address.region()));
-      m_postcodeEdit->setText(address.postalCode());
-      m_townEdit->setText(address.locality());
-      m_streetEdit->setText(address.street());
-      break;
-    }
-  }
+  m_telephoneEdit->setText(identity.phoneNumber);
+  QString sep;
+  if (!identity.country.isEmpty() && !identity.region.isEmpty())
+    sep = " / ";
+  m_countyEdit->setText(QString("%1%2%3").arg(identity.country, sep, identity.region));
+  m_postcodeEdit->setText(identity.postalCode);
+  m_townEdit->setText(identity.locality);
+  m_streetEdit->setText(identity.street);
   m_loadAddressButton->setEnabled(true);
 }
 

@@ -21,3 +21,5 @@
 #cmakedefine KMM_DEBUG 1
 
 #cmakedefine KMM_DESIGNER 1
+
+#cmakedefine HAVE_KDEPIMLIBS 1

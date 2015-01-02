@@ -24,9 +24,9 @@
 #include <QList>
 #include <QtTest/QtTest>
 
-#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "mymoneytestutils.h"
 
-#include "autotest.h"
+#include "payeeidentifier/ibanandbic/ibanbic.h"
 #include "payeeidentifier/payeeidentifierloader.h"
 
 QTEST_MAIN(MyMoneyFileTest)
@@ -2071,7 +2071,7 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithEqualImported
   MyMoneyAccount a = m->account("A000001");
 
   a.setValue("lastImportedTransactionDate", QDate(2011, 12, 1).toString(Qt::ISODate));
-  a.setValue("lastStatementBalance", MyMoneyMoney(0, 1).toString());
+  a.setValue("lastStatementBalance", MyMoneyMoney().toString());
 
   MyMoneyFileTransaction ft;
   m->modifyAccount(a);
@@ -2087,7 +2087,7 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithUnequalImport
   MyMoneyAccount a = m->account("A000001");
 
   a.setValue("lastImportedTransactionDate", QDate(2011, 12, 1).toString(Qt::ISODate));
-  a.setValue("lastStatementBalance", MyMoneyMoney(1, 1).toString());
+  a.setValue("lastStatementBalance", MyMoneyMoney::ONE.toString());
 
   MyMoneyFileTransaction ft;
   m->modifyAccount(a);

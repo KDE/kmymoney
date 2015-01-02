@@ -567,7 +567,7 @@ MyMoneyTransactionFilter::validityOptionE MyMoneyTransactionFilter::validTransac
   for (it_s = t.splits().begin(); it_s != t.splits().end(); ++it_s) {
     val += (*it_s).value();
   }
-  return (val == MyMoneyMoney(0, 1)) ? valid : invalid;
+  return (val == MyMoneyMoney()) ? valid : invalid;
 }
 
 bool MyMoneyTransactionFilter::includesCategory(const QString& cat) const

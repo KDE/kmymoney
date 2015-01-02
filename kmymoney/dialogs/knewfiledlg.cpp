@@ -30,25 +30,22 @@
 #include <kstandarddirs.h>
 #include <kpushbutton.h>
 #include <kmessagebox.h>
-#include <KPIMIdentities/IdentityManager>
-#include <KPIMIdentities/Identity>
-#include <akonadi/recursiveitemfetchjob.h>
-#include <Akonadi/ItemFetchScope>
-#include <Akonadi/Collection>
-#include <KABC/Addressee>
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
+#include "mymoneycontact.h"
 #include "ui_knewfiledlgdecl.h"
 
 struct KNewFileDlg::Private {
+  Private() : m_contact(0) {}
   Ui::KNewFileDlgDecl ui;
+  MyMoneyContact *m_contact;
 };
 
 KNewFileDlg::KNewFileDlg(QWidget *parent, const QString& title)
     : QDialog(parent), d(new Private)
 {
+  d->m_contact = new MyMoneyContact(this);
   d->ui.setupUi(this);
   setModal(true);
   init(title);
@@ -59,6 +56,7 @@ KNewFileDlg::KNewFileDlg(QString userName, QString userStreet,
                          QString userEmail, QWidget *parent, const QString& title)
     : QDialog(parent), d(new Private)
 {
+  d->m_contact = new MyMoneyContact(this);
   d->ui.setupUi(this);
   setModal(true);
   d->ui.userNameEdit->setText(userName);
@@ -74,21 +72,13 @@ KNewFileDlg::KNewFileDlg(QString userName, QString userStreet,
 
 void KNewFileDlg::init(const QString& title)
 {
-  bool showLoadButton = false;
   d->ui.okBtn->setGuiItem(KStandardGuiItem::ok());
   d->ui.cancelBtn->setGuiItem(KStandardGuiItem::cancel());
 
   if (!title.isEmpty())
     setWindowTitle(title);
 
-  KPIMIdentities::IdentityManager im;
-  KPIMIdentities::Identity id = im.defaultIdentity();
-  if (!id.isNull())
-    showLoadButton = true;
-
-  if (!showLoadButton)
-    d->ui.kabcBtn->hide();
-
+  d->ui.kabcBtn->setEnabled(d->m_contact->ownerExists());
   d->ui.userNameEdit->setFocus();
 
   connect(d->ui.cancelBtn, SIGNAL(clicked()), this, SLOT(reject()));
@@ -116,45 +106,27 @@ void KNewFileDlg::okClicked()
 
 void KNewFileDlg::loadFromAddressBook(void)
 {
-  KPIMIdentities::IdentityManager im;
-  KPIMIdentities::Identity id = im.defaultIdentity();
-  if (id.isNull() || id.primaryEmailAddress().isEmpty()) {
+  d->ui.userNameEdit->setText(d->m_contact->ownerFullName());
+  d->ui.emailEdit->setText(d->m_contact->ownerEmail());
+  if (d->ui.emailEdit->text().isEmpty()) {
     KMessageBox::sorry(this, i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."), i18n("Address book import"));
     return;
   }
-
-  // Search all contacts for the matching email address
   d->ui.kabcBtn->setEnabled(false);
-  Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList() << KABC::Addressee::mimeType());
-  job->fetchScope().fetchFullPayload();
-  job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(searchContactResult(KJob*)));
-  job->start();
-
-  d->ui.userNameEdit->setText(id.fullName());
-  d->ui.emailEdit->setText(id.primaryEmailAddress());
+  connect(d->m_contact, SIGNAL(contactFetched(ContactData)), this, SLOT(slotContactFetched(ContactData)));
+  d->m_contact->fetchContact(d->ui.emailEdit->text());
 }
 
-void KNewFileDlg::searchContactResult(KJob *job)
+void KNewFileDlg::slotContactFetched(const ContactData &identity)
 {
-  const Akonadi::RecursiveItemFetchJob *contactJob = qobject_cast<Akonadi::RecursiveItemFetchJob*>(job);
-  Akonadi::Item::List items;
-  if (contactJob)
-    items = contactJob->items();
-  foreach (const Akonadi::Item &item, items) {
-    const KABC::Addressee &contact = item.payload<KABC::Addressee>();
-    if (contact.emails().contains(d->ui.emailEdit->text())) {
-      KABC::PhoneNumber phone = contact.phoneNumber(KABC::PhoneNumber::Home);
-      d->ui.telephoneEdit->setText(phone.number());
-
-      const KABC::Address &address = contact.address(KABC::Address::Home);
-      d->ui.countyEdit->setText(address.country() + " / " + address.region());
-      d->ui.postcodeEdit->setText(address.postalCode());
-      d->ui.townEdit->setText(address.locality());
-      d->ui.streetEdit->setText(address.street());
-      break;
-    }
-  }
+  d->ui.telephoneEdit->setText(identity.phoneNumber);
+  QString sep;
+  if (!identity.country.isEmpty() && !identity.region.isEmpty())
+    sep = " / ";
+  d->ui.countyEdit->setText(QString("%1%2%3").arg(identity.country, sep, identity.region));
+  d->ui.postcodeEdit->setText(identity.postalCode);
+  d->ui.townEdit->setText(identity.locality);
+  d->ui.streetEdit->setText(identity.street);
   d->ui.kabcBtn->setEnabled(true);
 }
 

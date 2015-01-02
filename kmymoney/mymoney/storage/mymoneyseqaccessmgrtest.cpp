@@ -19,7 +19,7 @@
 #include <QList>
 #include <QtTest/QtTest>
 
-#include "autotest.h"
+#include "mymoneytestutils.h"
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
 

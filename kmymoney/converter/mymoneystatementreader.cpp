@@ -774,8 +774,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       else {//  Ensure category sub-accounts are dealt with properly
         s1.setAccountId(d->interestId(statementTransactionUnderImport.m_strInterestCategory));
       }
-      s1.setShares(-statementTransactionUnderImport.m_amount);
-      s1.setValue(-statementTransactionUnderImport.m_amount);
+      s1.setShares(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
+      s1.setValue(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
 
       // Split 2 will be the zero-amount investment split that serves to
       // mark this transaction as a cash dividend and note which stock account
@@ -786,7 +786,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       s2.setAccountId(thisaccount.id());
       transactionUnderImport.addSplit(s2);
 
-      transfervalue = statementTransactionUnderImport.m_amount + statementTransactionUnderImport.m_fees;
+      /*  at this point any fees have been taken into account already
+       *  so don't deduct them again.
+       *  BUG 322381
+       */
+      transfervalue = statementTransactionUnderImport.m_amount;
     } else if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaInterest) {
       if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
         s1.setAccountId(d->interestId(thisaccount));
@@ -796,8 +800,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         else
           s1.setAccountId(d->expenseId(statementTransactionUnderImport.m_strInterestCategory));
       }
-      s1.setShares(statementTransactionUnderImport.m_amount);
-      s1.setValue(statementTransactionUnderImport.m_amount);
+      s1.setShares(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
+      s1.setValue(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
 
 /// ***********   Add split as per Div       **********
       // Split 2 will be the zero-amount investment split that serves to

@@ -1658,10 +1658,10 @@ void KHomeView::showCashFlowSummary()
             //convert to base currency if necessary
             if (repSplitAcc.currencyId() != file->baseCurrency().id()) {
               MyMoneyMoney curPrice = repSplitAcc.baseCurrencyPrice((*it_transaction).postDate());
-              value = ((*it_split).shares() * MyMoneyMoney(-1, 1)) * curPrice;
+              value = ((*it_split).shares() * MyMoneyMoney::MINUS_ONE) * curPrice;
               value = value.convert(10000);
             } else {
-              value = ((*it_split).shares() * MyMoneyMoney(-1, 1));
+              value = ((*it_split).shares() * MyMoneyMoney::MINUS_ONE);
             }
 
             //store depending on account type

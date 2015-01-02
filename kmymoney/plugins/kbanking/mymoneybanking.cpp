@@ -112,7 +112,7 @@ public:
         case 1: // manual specified
           proxy = grp.readEntry("httpsProxy");
           qDebug("KDE https proxy setting is '%s'", qPrintable(proxy));
-          if (exp.exactMatch(proxy) != -1) {
+          if (exp.exactMatch(proxy)) {
             proxy = exp.cap(2);
             qDebug("Setting GWEN_PROXY to '%s'", qPrintable(proxy));
             if (setenv("GWEN_PROXY", qPrintable(proxy), 1) == -1) {
@@ -350,7 +350,7 @@ QString KBankingPlugin::stripLeadingZeroes(const QString& s) const
 {
   QString rc(s);
   QRegExp exp("^(0*)([^0].*)");
-  if (exp.exactMatch(s) != -1) {
+  if (exp.exactMatch(s)) {
     rc = exp.cap(2);
   }
   return rc;

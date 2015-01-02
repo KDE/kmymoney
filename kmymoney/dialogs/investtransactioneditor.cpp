@@ -495,24 +495,28 @@ void InvestTransactionEditor::slotUpdateFeeCategory(const QString& id)
 
 void InvestTransactionEditor::slotUpdateFeeVisibility(const QString& txt)
 {
+  static const QSet<MyMoneySplit::investTransactionTypeE> transactionTypesWithoutFee = QSet<MyMoneySplit::investTransactionTypeE>()
+      << MyMoneySplit::AddShares << MyMoneySplit::RemoveShares << MyMoneySplit::SplitShares;
+
   kMyMoneyEdit* feeAmount = dynamic_cast<kMyMoneyEdit*>(haveWidget("fee-amount"));
   feeAmount->setHidden(txt.isEmpty());
   QLabel* l = dynamic_cast<QLabel*>(haveWidget("fee-amount-label"));
 
-  const bool hideFee = txt.isEmpty() || d->m_activity->type() == MyMoneySplit::AddShares ||
-                       d->m_activity->type() == MyMoneySplit::RemoveShares ||
-                       d->m_activity->type() == MyMoneySplit::SplitShares;
+  KMyMoneyCategory* fee = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
+  const bool hideFee = txt.isEmpty() || transactionTypesWithoutFee.contains(d->m_activity->type());
   //  no fee expected so hide
   if (hideFee) {
     if (l) {
       l->setText("");
     }
     feeAmount->hide();
+    fee->splitButton()->hide();
   } else {
     if (l) {
       l->setText(i18n("Fee Amount"));
     }
     feeAmount->show();
+    fee->splitButton()->show();
   }
 }
 
@@ -523,23 +527,23 @@ void InvestTransactionEditor::slotUpdateInterestCategory(const QString& id)
 
 void InvestTransactionEditor::slotUpdateInterestVisibility(const QString& txt)
 {
+  static const QSet<MyMoneySplit::investTransactionTypeE> transactionTypesWithInterest = QSet<MyMoneySplit::investTransactionTypeE>()
+      << MyMoneySplit::BuyShares << MyMoneySplit::SellShares << MyMoneySplit::Dividend << MyMoneySplit::InterestIncome << MyMoneySplit::Yield;
+
   QWidget* w = haveWidget("interest-amount");
   w->setHidden(txt.isEmpty());
   QLabel* l = dynamic_cast<QLabel*>(haveWidget("interest-amount-label"));
 
   KMyMoneyCategory* interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
-  const bool showInterest = !txt.isEmpty() && (d->m_activity->type() == MyMoneySplit::SellShares || d->m_activity->type() == MyMoneySplit::Dividend ||
-                            d->m_activity->type() == MyMoneySplit::InterestIncome || d->m_activity->type() == MyMoneySplit::Yield);
+  const bool showInterest = !txt.isEmpty() && transactionTypesWithInterest.contains(d->m_activity->type());
   if (interest && showInterest) {
     interest->splitButton()->show();
     w->show();
     if (l)
       l->setText(i18n("Interest"));
   } else {
-    // for the following activity->types -
-    //  ReinvestDividend, BuyShares, AddShares, RemoveShares and SplitShares
     if (interest) {
-      interest->splitButton()->hide();  //no interest-amount so no splits
+      interest->splitButton()->hide();
       w->hide();
       if (l)
         l->setText(QString());
@@ -807,7 +811,7 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
     switch (activityCombo->activity()) {
       case MyMoneySplit::BuyShares:
       case MyMoneySplit::ReinvestDividend:
-        factor = MyMoneyMoney(1, 1);
+        factor = MyMoneyMoney::ONE;
         break;
       default:
         break;
@@ -820,7 +824,7 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
     MyMoneyMoney factor(1, 1);
     switch (activityCombo->activity()) {
       case MyMoneySplit::BuyShares:
-        factor = MyMoneyMoney(-1, 1);
+        factor = MyMoneyMoney::MINUS_ONE;
         break;
       default:
         break;

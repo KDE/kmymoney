@@ -102,7 +102,7 @@ void MyMoneyForecastTest::testEmptyConstructor()
 
   QVERIFY(a.forecastBalance(b, QDate::currentDate()).isZero());
   QVERIFY(!a.isForecastAccount(b));
-  QVERIFY(a.forecastBalance(b, QDate::currentDate()) == MyMoneyMoney(0, 1));
+  QVERIFY(a.forecastBalance(b, QDate::currentDate()) == MyMoneyMoney());
   QVERIFY(a.daysToMinimumBalance(b) == -1);
   QVERIFY(a.daysToZeroBalance(b) == -2);
   QVERIFY(a.forecastDays() == 90);
@@ -316,16 +316,16 @@ void MyMoneyForecastTest::testGetForecastBalance()
   MyMoneyAccount a_credit = file->account(acCredit);
 
   //test invalid arguments
-  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(-1)) == MyMoneyMoney(0, 1));
-  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(-10)) == MyMoneyMoney(0, 1));
-  QVERIFY(a.forecastBalance(a_checking, -1) == MyMoneyMoney(0, 1));
-  QVERIFY(a.forecastBalance(a_checking, -100) == MyMoneyMoney(0, 1));
+  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(-1)) == MyMoneyMoney());
+  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(-10)) == MyMoneyMoney());
+  QVERIFY(a.forecastBalance(a_checking, -1) == MyMoneyMoney());
+  QVERIFY(a.forecastBalance(a_checking, -100) == MyMoneyMoney());
 
   //test a date outside the forecast days
-  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(4)) == MyMoneyMoney(0, 1));
-  QVERIFY(a.forecastBalance(a_checking, 4) == MyMoneyMoney(0, 1));
-  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(10)) == MyMoneyMoney(0, 1));
-  QVERIFY(a.forecastBalance(a_checking, 10) == MyMoneyMoney(0, 1));
+  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(4)) == MyMoneyMoney());
+  QVERIFY(a.forecastBalance(a_checking, 4) == MyMoneyMoney());
+  QVERIFY(a.forecastBalance(a_checking, QDate::currentDate().addDays(10)) == MyMoneyMoney());
+  QVERIFY(a.forecastBalance(a_checking, 10) == MyMoneyMoney());
 
   //test it returns valid results
   MyMoneyMoney b_credit = file->balance(a_credit.id(), QDate::currentDate());
@@ -895,7 +895,7 @@ void MyMoneyForecastTest::testCreateBudget()
   QVERIFY(b.forecastBalance(a_solo, QDate(2007, 1, 1)) == (moT1 + moT3));
   QVERIFY(b.forecastBalance(a_parent, QDate(2007, 1, 1)) == (moT2));
   QVERIFY(b.forecastBalance(a_solo, QDate(2007, 4, 1)) == (moT1));
-  QVERIFY(b.forecastBalance(a_parent, QDate(2007, 5, 1)) == (MyMoneyMoney(0, 1)));
+  QVERIFY(b.forecastBalance(a_parent, QDate(2007, 5, 1)) == (MyMoneyMoney()));
 
   //set up schedule environment for testing
   MyMoneyAccount a_cash = file->account(acCash);

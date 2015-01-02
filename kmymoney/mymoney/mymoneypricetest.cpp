@@ -74,7 +74,7 @@ void MyMoneyPriceTest::testRate()
     QVERIFY(n1.rate(QString()) == MyMoneyMoney(1, 3));
 
     QVERIFY(n2.isValid() == false);
-    QVERIFY(n2.rate("to") == MyMoneyMoney(1, 1));
+    QVERIFY(n2.rate("to") == MyMoneyMoney::ONE);
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }

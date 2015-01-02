@@ -50,6 +50,9 @@
 CsvExportDlg::CsvExportDlg(QWidget *parent) : QDialog(parent), ui(new Ui::CsvExportDlg)
 {
   ui->setupUi(this);
+  m_fieldDelimiterCharList << "," << ";" << "\t";
+  ui->m_separatorComboBox->setCurrentIndex(-1);
+
   // Set (almost) all the last used options
   readConfig();
 
@@ -80,6 +83,8 @@ CsvExportDlg::CsvExportDlg(QWidget *parent) : QDialog(parent), ui(new Ui::CsvExp
   connect(ui->m_radioButtonAccount, SIGNAL(toggled(bool)), this, SLOT(checkData()));
   connect(ui->m_radioButtonCategories, SIGNAL(toggled(bool)), this, SLOT(checkData()));
   connect(ui->m_accountComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(checkData(QString)));
+  connect(ui->m_separatorComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(separator(int)));
+  connect(ui->m_separatorComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(checkData()));
 
   checkData(QString());
 }
@@ -103,6 +108,11 @@ void CsvExportDlg::slotOkClicked()
   accept();
 }
 
+void CsvExportDlg::separator(int separatorIndex)
+{
+  m_separator = m_fieldDelimiterCharList[separatorIndex];
+}
+
 void CsvExportDlg::readConfig(void)
 {
   KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locate("config", QLatin1String("csvexporterrc")));
@@ -123,6 +133,7 @@ void CsvExportDlg::writeConfig(void)
   grp.writeEntry("CsvExportDlg_CatOpt", ui->m_radioButtonCategories->isChecked());
   grp.writeEntry("CsvExportDlg_StartDate", QDateTime(ui->m_kmymoneydateStart->date()));
   grp.writeEntry("CsvExportDlg_EndDate", QDateTime(ui->m_kmymoneydateEnd->date()));
+  grp.writeEntry("CsvExportDlg_separatorIndex", ui->m_separatorComboBox->currentIndex());
   config->sync();
 }
 
@@ -184,7 +195,8 @@ void CsvExportDlg::checkData(const QString& accountName)
   if (!ui->m_qlineeditFile->text().isEmpty()
       && !ui->m_accountComboBox->currentText().isEmpty()
       && ui->m_kmymoneydateStart->date() <= ui->m_kmymoneydateEnd->date()
-      && (ui->m_radioButtonAccount->isChecked() || ui->m_radioButtonCategories->isChecked())) {
+      && (ui->m_radioButtonAccount->isChecked() || ui->m_radioButtonCategories->isChecked())
+      && (ui->m_separatorComboBox->currentIndex() >= 0)) {
     okEnabled = true;
   }
   ui->m_qbuttonOk->setEnabled(okEnabled);

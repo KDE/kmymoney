@@ -1575,7 +1575,6 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("LSL", i18n("Lesotho Loti")), create);
   loadDefaultCurrency(MyMoneySecurity("LRD", i18n("Liberian Dollar"),        "$"), create);
   loadDefaultCurrency(MyMoneySecurity("LYD", i18n("Libyan Dinar"),           "LYD", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("LTL", i18n("Lithuanian Litas")), create);
   loadDefaultCurrency(MyMoneySecurity("MOP", i18n("Macau Pataca")), create);
   loadDefaultCurrency(MyMoneySecurity("MKD", i18n("Macedonian Denar")), create);
   loadDefaultCurrency(MyMoneySecurity("MGF", i18n("Malagasy Franc"),         "MGF", 500, 500), create);
@@ -1617,8 +1616,6 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("SCR", i18n("Seychelles Rupee")), create);
   loadDefaultCurrency(MyMoneySecurity("SLL", i18n("Sierra Leone Leone")), create);
   loadDefaultCurrency(MyMoneySecurity("SGD", i18n("Singapore Dollar"),       "$"), create);
-  // loadDefaultCurrency(MyMoneySecurity("SKK", i18n("Slovak Koruna")), create);
-  // loadDefaultCurrency(MyMoneySecurity("SIT", i18n("Slovenian Tolar")), create);
   loadDefaultCurrency(MyMoneySecurity("SBD", i18n("Solomon Islands Dollar"), "$"), create);
   loadDefaultCurrency(MyMoneySecurity("SOS", i18n("Somali Shilling")), create);
   loadDefaultCurrency(MyMoneySecurity("ZAR", i18n("South African Rand")), create);
@@ -1638,7 +1635,7 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("TOP", i18n("Tongan Pa'anga")), create);
   loadDefaultCurrency(MyMoneySecurity("TTD", i18n("Trinidad and Tobago Dollar"), "$"), create);
   loadDefaultCurrency(MyMoneySecurity("TND", i18n("Tunisian Dinar"),         "TND", 1000, 1000), create);
-  loadDefaultCurrency(MyMoneySecurity("TRY", i18n("Turkish Lira (new)"), "YTL"), true);
+  loadDefaultCurrency(MyMoneySecurity("TRY", i18n("Turkish Lira"), QChar(0x20BA)), create);
   loadDefaultCurrency(MyMoneySecurity("TMM", i18n("Turkmenistan Manat")), create);
   loadDefaultCurrency(MyMoneySecurity("USD", i18n("US Dollar"),              "$"), create);
   loadDefaultCurrency(MyMoneySecurity("UGX", i18n("Uganda Shilling")), create);
@@ -1649,7 +1646,6 @@ void KMyMoneyView::loadDefaultCurrencies(void)
   loadDefaultCurrency(MyMoneySecurity("VUV", i18n("Vanuatu Vatu")), create);
   loadDefaultCurrency(MyMoneySecurity("VEB", i18n("Venezuelan Bolivar")), create);
   loadDefaultCurrency(MyMoneySecurity("VND", i18n("Vietnamese Dong"),        QChar(0x20AB)), create);
-  loadDefaultCurrency(MyMoneySecurity("YUM", i18n("Yugoslav Dinar")), create);
   loadDefaultCurrency(MyMoneySecurity("ZMK", i18n("Zambian Kwacha")), create);
   loadDefaultCurrency(MyMoneySecurity("ZWD", i18n("Zimbabwe Dollar"),        "$"), create);
 
@@ -1710,7 +1706,7 @@ void KMyMoneyView::loadAncientCurrencies(void)
   loadAncientCurrency("SIT", i18n("Slovenian Tolar"), "SIT", QDate(2006, 12, 31), MyMoneyMoney(100, 23964), "EUR");
 
   // Source: http://www.tf-portfoliosolutions.net/products/turkishlira.aspx
-  loadAncientCurrency("TRL", i18n("Turkish Lira"), "TL", QDate(2004, 12, 31), MyMoneyMoney(1, 1000000), "TRY");
+  loadAncientCurrency("TRL", i18n("Turkish Lira (old)"), "TL", QDate(2004, 12, 31), MyMoneyMoney(1, 1000000), "TRY");
 
   // Source: http://www.focus.de/finanzen/news/malta-und-zypern_aid_66058.html
   loadAncientCurrency("MTL", i18n("Maltese Lira"), "MTL", QDate(2008, 1, 1), MyMoneyMoney(429300, 1000000), "EUR");
@@ -1724,6 +1720,9 @@ void KMyMoneyView::loadAncientCurrencies(void)
 
   // Source https://en.wikipedia.org/wiki/Azerbaijani_manat
   loadAncientCurrency("AZM", i18n("Azerbaijani Manat"), "m.", QDate(2006, 1, 1), MyMoneyMoney(1, 5000), "AZN");
+
+  // Source: https://en.wikipedia.org/wiki/Litas
+  loadAncientCurrency("LTL", i18n("Lithuanian Litas"), "Lt", QDate(2015, 1, 1), MyMoneyMoney(100000, 345280), "EUR");
 }
 
 void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)

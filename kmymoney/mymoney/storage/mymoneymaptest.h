@@ -19,7 +19,7 @@
 
 #include <QtCore/QObject>
 
-#include "autotest.h"
+#include "mymoneytestutils.h"
 
 #include "mymoneyseqaccessmgr.h"
 

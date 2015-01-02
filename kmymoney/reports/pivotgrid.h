@@ -67,7 +67,7 @@ class PivotCell: public MyMoneyMoney
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  PivotCell() : m_stockSplit(MyMoneyMoney(1, 1)), m_cellUsed(false) {}
+  PivotCell() : m_stockSplit(MyMoneyMoney::ONE), m_cellUsed(false) {}
   PivotCell(const MyMoneyMoney& value);
   static PivotCell stockSplit(const MyMoneyMoney& factor);
   PivotCell operator += (const PivotCell& right);

@@ -21,7 +21,7 @@
 
 #include <QtTest/QtTest>
 
-#include "autotest.h"
+#include "mymoneytestutils.h"
 
 #include "onlinetasks/dummy/tasks/dummytask.h"
 
@@ -29,8 +29,13 @@ QTEST_MAIN(MyMoneyDatabaseMgrTest)
 
 MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
     : m_dbAttached(false),
-    m_canOpen(true)
-{}
+    m_canOpen(true),
+    m_file(this)
+{
+  // Create file and close it to release possible read-write locks
+  m_file.open();
+  m_file.close();
+}
 
 void MyMoneyDatabaseMgrTest::init()
 {
@@ -93,19 +98,17 @@ void MyMoneyDatabaseMgrTest::testBadConnections()
     userName = QString(pwd->pw_name);
   }
 
-  QString dir(qgetenv("TMPDIR"));
-  if (!dir.isEmpty() && !dir.endsWith('/')) {
-    dir += '/';
-  }
-
   QString mode = "QSQLITE&mode=single";
-  m_url = QString("sql://%1@localhost/%2kmm_test_driver?driver=%3")
-          .arg(userName, dir, mode);
+  m_url = QString("sql://%1@localhost/%2?driver=%3")
+          .arg(userName, m_file.fileName(), mode);
 
-  KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
-  QVERIFY(sql);
-  int openStatus = sql->open(m_url, QIODevice::ReadWrite);
-  QVERIFY(0 != openStatus);
+  try {
+    KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
+    QVERIFY(sql);
+    QVERIFY(sql->open(m_url, QIODevice::ReadWrite) != 0);
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
 }
 
 void MyMoneyDatabaseMgrTest::testCreateDb()
@@ -124,18 +127,13 @@ void MyMoneyDatabaseMgrTest::testCreateDb()
         userName = QString(pwd->pw_name);
       }
 
-      QString dir(qgetenv("TMPDIR"));
-      if (!dir.isEmpty() && !dir.endsWith('/')) {
-        dir += '/';
-      }
-
       QString mode =
         //"QPSQL&mode=single";
         //"QMYSQL&mode=single";
         "QSQLITE&mode=single";
 
-      m_url = QString("sql://%1@localhost/%2kmm_test_driver?driver=%3")
-              .arg(userName, dir, mode);
+      m_url = QString("sql://%1@localhost/%2?driver=%3")
+        .arg(userName, m_file.fileName(), mode);
 
       KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
       QVERIFY(0 != sql);
@@ -159,13 +157,17 @@ void MyMoneyDatabaseMgrTest::testAttachDb()
   if (!m_dbAttached) {
     testCreateDb();
     if (m_canOpen) {
-      MyMoneyFile::instance()->detachStorage();
-      KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
-      QVERIFY(sql);
-      int openStatus = sql->open(m_url, QIODevice::ReadWrite);
-      QVERIFY(0 == openStatus);
-      MyMoneyFile::instance()->attachStorage(m);
-      m_dbAttached = true;
+      try {
+        MyMoneyFile::instance()->detachStorage();
+        KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
+        QVERIFY(sql);
+        int openStatus = sql->open(m_url, QIODevice::ReadWrite);
+        QVERIFY(0 == openStatus);
+        MyMoneyFile::instance()->attachStorage(m);
+        m_dbAttached = true;
+      } catch (const MyMoneyException &e) {
+        unexpectedException(e);
+      }
     }
   }
 }
