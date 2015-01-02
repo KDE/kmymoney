@@ -114,24 +114,16 @@ bool payeeIdentifierModel::removeRows(int row, int count, const QModelIndex& par
 
 void payeeIdentifierModel::setSource( const MyMoneyPayeeIdentifierContainer data)
 {
-  if ( !m_data.isNull() ) {
-    // Remove all rows
-    const int oldLastRow = m_data->payeeIdentifiers().count()-1;
-    if (oldLastRow >= 0) {
-      beginRemoveRows(QModelIndex(), 0, oldLastRow);
-      endRemoveRows();
-    }
-  }
-
-  // no need to delete data as it always points to 0, m_account or m_payee
+  beginResetModel();
   m_data = QSharedPointer<MyMoneyPayeeIdentifierContainer>(new MyMoneyPayeeIdentifierContainer(data));
+  endResetModel();
+}
 
-  // Insert new rows
-  const int newLastRow = m_data->payeeIdentifiers().count()-1;
-  if (newLastRow >= 0) {
-    beginInsertRows(QModelIndex(), 0, newLastRow);
-    endInsertRows();
-  }
+void payeeIdentifierModel::closeSource()
+{
+  beginResetModel();
+  m_data = QSharedPointer<MyMoneyPayeeIdentifierContainer>(new MyMoneyPayeeIdentifierContainer());
+  endResetModel();
 }
 
 QList< ::payeeIdentifier > payeeIdentifierModel::identifiers() const

@@ -56,6 +56,9 @@ public:
   void setSource( MyMoneyPayeeIdentifierContainer data );
   QList< ::payeeIdentifier > identifiers() const;
 
+public slots:
+  void closeSource();
+
 private:
   QSharedPointer<MyMoneyPayeeIdentifierContainer> m_data;
 };

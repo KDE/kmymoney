@@ -25,6 +25,7 @@
 #include <QDebug>
 #include <QTimer>
 
+#include "kmymoney.h"
 #include "payeeidentifier/payeeidentifierloader.h"
 #include "payeeidentifiermodel.h"
 #include "payeeidentifierselectiondelegate.h"
@@ -69,8 +70,9 @@ void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
 {
   if ( ui->view->model() == 0 ) {
     payeeIdentifierModel* model = new payeeIdentifierModel( ui->view );
-    ui->view->setModel( model );
+    connect(kmymoney, SIGNAL(fileLoaded(KUrl)), model, SLOT(closeSource()));
     connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SIGNAL(dataChanged()));
+    ui->view->setModel( model );
   }
 
   Q_CHECK_PTR( qobject_cast<payeeIdentifierModel*>(ui->view->model()) );  // this should never fail but may help during debugging
