@@ -4,15 +4,12 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/dialogs
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs
-                    ${CMAKE_CURRENT_SOURCE_DIR}/views
-                    ${CMAKE_CURRENT_BINARY_DIR}/views
                     ${CMAKE_CURRENT_SOURCE_DIR}/widgets
                     ${CMAKE_CURRENT_BINARY_DIR}/widgets
                     ${GWENHYWFAR_INCLUDE_DIRS}
                     ${AQBANKING_INCLUDE_DIRS})
 
 add_subdirectory( dialogs )
-add_subdirectory( views )
 add_subdirectory( widgets )
 add_subdirectory( qml )
 add_subdirectory( tasksettings )
@@ -41,7 +38,6 @@ kde4_add_plugin(kmm_kbanking ${kmm_kbanking_PART_SRCS})
 
 target_link_libraries(kmm_kbanking
                       kmm_kbanking_dialogs
-                      kmm_kbanking_views
                       kmm_kbanking_widgets
                       kmm_kbanking_settings
                       kmm_kbanking_tasksettings

@@ -93,11 +93,6 @@ public:
 
 private:
   /**
-    * creates the job view and hooks it into the main view
-    */
-  void createJobView(void);
-
-  /**
     * creates the action objects available through the application menus
     */
   void createActions(void);

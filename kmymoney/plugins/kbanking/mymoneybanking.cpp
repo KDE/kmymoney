@@ -2,6 +2,7 @@
  *   Copyright 2004  Martin Preuss aquamaniac@users.sourceforge.net        *
  *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
  *   Copyright 2010  Thomas Baumgart ipwizard@users.sourceforge.net        *
+ *   Copyright 2015  Christian David christian-david@web.de                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -78,7 +79,6 @@
 
 #include "mymoney/onlinejob.h"
 
-#include "kbjobview.h"
 #include "kbaccountsettings.h"
 #include "kbmapaccount.h"
 #include "mymoneyfile.h"
@@ -173,9 +173,6 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
       // get certificate handling and dialog settings management
       AB_Gui_Extend(gui->getCInterface(), m_kbanking->getCInterface());
 
-      // create view
-      createJobView();
-
       // create actions
       createActions();
 
@@ -254,15 +251,6 @@ MyMoneyKeyValueContainer KBankingPlugin::onlineBankingSettings(const MyMoneyKeyV
     m_accountSettings->loadKvp(kvp);
   }
   return kvp;
-}
-
-void KBankingPlugin::createJobView(void)
-{
-  KMyMoneyViewBase* view = viewInterface()->addPage(i18nc("Label for icon in KMyMoney's view pane", "Outbox"), "online-banking");
-  QWidget* w = new KBJobView(m_kbanking, this, view, "JobView");
-  viewInterface()->addWidget(view, w);
-  connect(viewInterface(), SIGNAL(viewStateChanged(bool)), view, SLOT(setEnabled(bool)));
-  connect(this, SIGNAL(queueChanged()), w, SLOT(slotQueueUpdated()));
 }
 
 void KBankingPlugin::createActions(void)
