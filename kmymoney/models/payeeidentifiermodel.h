@@ -23,6 +23,11 @@
 #include "mymoney/mymoneypayeeidentifiercontainer.h"
 #include "payeeidentifier/payeeidentifier.h"
 
+/**
+ * @brief Model for MyMoneyPayeeIdentifierContainer
+ *
+ * Changes the user does have initernal effect only.
+ */
 class payeeIdentifierModel : public QAbstractListModel
 {
   Q_OBJECT
@@ -50,13 +55,29 @@ public:
   virtual bool insertRows(int row, int count, const QModelIndex& parent);
   virtual bool removeRows(int row, int count, const QModelIndex& parent);
 
+  /**
+   * @brief Set source of data
+   *
+   * This makes the model editable.
+   */
   void setSource( MyMoneyPayeeIdentifierContainer data );
+
+  /** @brief Get stored data */
   QList< ::payeeIdentifier > identifiers() const;
 
 public slots:
+  /**
+   * @brief Removes all data from the model
+   *
+   * The model is not editable afterwards.
+   */
   void closeSource();
 
 private:
+  /** @internal
+   * The use of a shared pointer makes this future prof. Because using identifier() causes
+   * some unnecessary work.
+   */
   QSharedPointer<MyMoneyPayeeIdentifierContainer> m_data;
 };
 
