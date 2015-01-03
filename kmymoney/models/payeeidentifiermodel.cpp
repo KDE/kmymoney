@@ -33,10 +33,8 @@ payeeIdentifierModel::payeeIdentifierModel( QObject* parent )
 
 QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 {
-  Q_CHECK_PTR( m_data );
-
   // Needed for the selection box and it prevents a crash if index is out of range
-  if ( index.row() >= rowCount(index.parent())-1 )
+  if ( m_data.isNull() || index.row() >= rowCount(index.parent())-1 )
     return QVariant();
 
   const ::payeeIdentifier ident = m_data->payeeIdentifiers().at(index.row());
@@ -56,9 +54,7 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 
 bool payeeIdentifierModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-  Q_CHECK_PTR( m_data );
-
-  if ( role == payeeIdentifier ) {
+  if ( !m_data.isNull() && role == payeeIdentifier ) {
     ::payeeIdentifier ident = value.value< ::payeeIdentifier >();
     if ( index.row() == rowCount(index.parent())-1 ) {
       // The new row will be the last but one
@@ -86,7 +82,8 @@ Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex& index) const
 
 int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
 {
-  Q_CHECK_PTR( m_data );
+  if (m_data.isNull())
+    return 0;
   // Always a row more which creates new entries
   return m_data->payeeIdentifiers().count()+1;
 }
@@ -94,13 +91,14 @@ int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
 /** @brief unused at the moment */
 bool payeeIdentifierModel::insertRows(int row, int count, const QModelIndex& parent)
 {
-  Q_CHECK_PTR( m_data );
   return false;
 }
 
 bool payeeIdentifierModel::removeRows(int row, int count, const QModelIndex& parent)
 {
-  Q_CHECK_PTR( m_data );
+  if (m_data.isNull())
+    return false;
+
   if (count < 1 || row+count >= rowCount(parent))
     return false;
 
@@ -122,7 +120,7 @@ void payeeIdentifierModel::setSource( const MyMoneyPayeeIdentifierContainer data
 void payeeIdentifierModel::closeSource()
 {
   beginResetModel();
-  m_data = QSharedPointer<MyMoneyPayeeIdentifierContainer>(new MyMoneyPayeeIdentifierContainer());
+  m_data = QSharedPointer<MyMoneyPayeeIdentifierContainer>();
   endResetModel();
 }
 

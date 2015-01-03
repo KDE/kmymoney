@@ -23,9 +23,6 @@
 #include "mymoney/mymoneypayeeidentifiercontainer.h"
 #include "payeeidentifier/payeeidentifier.h"
 
-/**
- * @warning You must set the source with setSource() before you call any other method.
- */
 class payeeIdentifierModel : public QAbstractListModel
 {
   Q_OBJECT
