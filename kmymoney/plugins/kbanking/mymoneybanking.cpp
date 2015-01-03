@@ -497,6 +497,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
             if (psd->exec() != QDialog::Accepted) {
               AB_Job_free(job);
               delete psd;
+              /** @todo do not return here but check if something is in the queue which has to be executed */
               return rc;
             }
             qd = psd->date();
@@ -546,45 +547,8 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
     // make sure, we have at least one job in the queue before we continue.
     if (m_kbanking->getEnqueuedJobs().size() > 0) {
       emit queueChanged();
-
-      // ask if the user want's to execute this job right away or spool it
-      // for later execution
-      KIconLoader *ic = KIconLoader::global();
-      KGuiItem executeButton(i18n("&Execute"),
-                             KIcon(ic->loadIcon("tools-wizard",
-                                                KIconLoader::Small, KIconLoader::SizeSmall)),
-                             i18n("Close this window"),
-                             i18n("Use this button to close the window"));
-
-      KGuiItem queueButton(i18n("&Queue"),
-                           KIcon(ic->loadIcon("document-export",
-                                              KIconLoader::Small, KIconLoader::SizeSmall)),
-                           i18n("Close this window"),
-                           i18n("Use this button to close the window"));
-
-      KMessageBox::ButtonCode result = KMessageBox::Cancel;
-      if (!moreAccounts) {
-        switch (acc.onlineBankingSettings().value("kbanking-jobexec").toInt()) {
-          case 1:
-            result = KMessageBox::Yes;
-            break;
-          case 2:
-            result = KMessageBox::No;
-            break;
-          default:
-            result = static_cast<KMessageBox::ButtonCode>(KMessageBox::questionYesNo(0,
-                     i18n("Do you want to execute or queue this job in the outbox?"),
-                     i18n("Execution"), executeButton, queueButton));
-            break;
-        }
-      } else {
-        result = KMessageBox::No;
-      }
-
-
-      if (result == KMessageBox::Yes) {
+      if (!moreAccounts)
         executeQueue();
-      }
       rc = true;
     }
   }
