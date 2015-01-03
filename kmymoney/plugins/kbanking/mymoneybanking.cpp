@@ -405,15 +405,17 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
   bool rc = false;
 
   if (!acc.id().isEmpty()) {
-    AB_ACCOUNT *ba = 0;
     AB_JOB *job = 0;
     int rv;
     int days;
     int year, month, day;
-    QDate qd;
 
     /* get AqBanking account */
-    ba = aqbAccount(acc);
+    AB_ACCOUNT *ba = aqbAccount(acc);
+    // Update the connection between the KMyMoney account and the AqBanking equivalent.
+    // If the account is not found anymore ba == 0 and the connection is removed.
+    setupAccountReference(acc, ba);
+
     if (!ba) {
       KMessageBox::error(0,
                          i18n("<qt>"
@@ -423,14 +425,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                               "</qt>",
                               acc.name()),
                          i18n("Account Not Mapped"));
-      // clear the connection between the KMyMoney account
-      // and the AqBanking equivalent
-      setupAccountReference(acc, 0);
-    }
-
-    if (ba) {
-      setupAccountReference(acc, ba);
-
+    } else {
       if (acc.onlineBankingSettings().value("kbanking-txn-download") != "no") {
         /* create getTransactions job */
         job = AB_JobGetTransactions_new(ba);
@@ -449,6 +444,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 
         if (job) {
           days = AB_JobGetTransactions_GetMaxStoreDays(job);
+          QDate qd;
           if (days > 0) {
             GWEN_TIME *ti1;
             GWEN_TIME *ti2;
@@ -490,38 +486,39 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           // the pick start date option dialog is needed in
           // case the dateOption is 0 or the date option is > 1
           // and the qd is invalid
-          if (dateOption == 0
-              || (dateOption > 1 && !qd.isValid())) {
+          bool enqueJob = false;
+          if (dateOption == 0 || (dateOption > 1 && !qd.isValid())) {
             QPointer<KBPickStartDate> psd = new KBPickStartDate(m_kbanking, qd, lastUpdate, acc.name(),
                 lastUpdate.isValid() ? 2 : 3, 0, true);
-            if (psd->exec() != QDialog::Accepted) {
-              AB_Job_free(job);
-              delete psd;
-              /** @todo do not return here but check if something is in the queue which has to be executed */
-              return rc;
+            if (psd->exec() == QDialog::Accepted) {
+              enqueJob = true;
+              qd = psd->date();
+            } else {
+              qd = QDate();
             }
-            qd = psd->date();
             delete psd;
           }
 
-          if (qd.isValid()) {
-            GWEN_TIME *ti1;
+          if (enqueJob) {
+            if (qd.isValid()) {
+              GWEN_TIME *ti1;
 
-            ti1 = GWEN_Time_new(qd.year(), qd.month() - 1, qd.day(), 0, 0, 0, 0);
-            AB_JobGetTransactions_SetFromTime(job, ti1);
-            GWEN_Time_free(ti1);
+              ti1 = GWEN_Time_new(qd.year(), qd.month() - 1, qd.day(), 0, 0, 0, 0);
+              AB_JobGetTransactions_SetFromTime(job, ti1);
+              GWEN_Time_free(ti1);
+            }
+
+            rv = m_kbanking->enqueueJob(job);
+            if (rv) {
+              DBG_ERROR(0, "Error %d", rv);
+              KMessageBox::error(0,
+                                i18n("<qt>"
+                                      "Could not enqueue the job.\n"
+                                      "</qt>"),
+                                i18n("Error"));
+            }
           }
-
-          rv = m_kbanking->enqueueJob(job);
           AB_Job_free(job);
-          if (rv) {
-            DBG_ERROR(0, "Error %d", rv);
-            KMessageBox::error(0,
-                               i18n("<qt>"
-                                    "Could not enqueue the job.\n"
-                                    "</qt>"),
-                               i18n("Error"));
-          }
         }
       }
 
@@ -541,17 +538,17 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                                 "Could not enqueue the job.\n"
                                 "</qt>"),
                            i18n("Error"));
+      } else {
+        rc = true;
+        emit queueChanged();
       }
     }
-
-    // make sure, we have at least one job in the queue before we continue.
-    if (m_kbanking->getEnqueuedJobs().size() > 0) {
-      emit queueChanged();
-      if (!moreAccounts)
-        executeQueue();
-      rc = true;
-    }
   }
+
+  // make sure we have at least one job in the queue before sending it
+  if (!moreAccounts && m_kbanking->getEnqueuedJobs().size() > 0)
+    executeQueue();
+
   return rc;
 }
 
