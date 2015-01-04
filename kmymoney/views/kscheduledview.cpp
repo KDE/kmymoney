@@ -49,9 +49,10 @@
 // Project Includes
 
 #include "kmymoneyscheduleddatetbl.h"
-#include <kmymoneyutils.h>
-#include <kmymoneyglobalsettings.h>
-#include <kscheduletreeitem.h>
+#include "kmymoneyutils.h"
+#include "kmymoneyglobalsettings.h"
+#include "kscheduletreeitem.h"
+#include "ktreewidgetfilterlinewidget.h"
 
 #include "kmymoney.h"
 
@@ -66,7 +67,7 @@ KScheduledView::KScheduledView(QWidget *parent) :
 
   // create the searchline widget
   // and insert it into the existing layout
-  m_searchWidget = new KTreeWidgetSearchLineWidget(m_listTab, m_scheduleTree);
+  m_searchWidget = new KTreeWidgetFilterLineWidget(m_listTab, m_scheduleTree);
   m_listTabLayout->insertWidget(0, m_searchWidget);
 
   //enable custom context menu
