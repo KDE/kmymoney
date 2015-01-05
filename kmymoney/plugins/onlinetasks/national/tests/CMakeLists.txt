@@ -34,5 +34,5 @@ target_link_libraries( germanonlinetransfertest
   ${QT_QTXML_LIBRARY}
   ${LIBALKIMIA_LIBRARY}
   ${GMP_LIBRARIES} # TODO: remove when alkimia cmake config file got fixed
-  ${KTOBLZCHECK_LIBRARY}
+#  ${KTOBLZCHECK_LIBRARY}
 )
