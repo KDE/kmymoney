@@ -226,7 +226,7 @@ RegisterSearchLine* RegisterSearchLineWidget::createSearchLine(Register* reg)
 
 void RegisterSearchLineWidget::createWidgets(void)
 {
-  QLabel *label = new QLabel(i18nc("Search widget label", "S&earch:"), this);
+  QLabel *label = new QLabel(i18nc("Filter widget label", "Fi&lter:"), this);
 
   d->searchLine = createSearchLine(d->reg);
   d->searchLine->show();

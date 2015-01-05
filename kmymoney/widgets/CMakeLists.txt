@@ -31,6 +31,7 @@ set(kmm_widgets_sources
   kmymoneymvccombo.cpp
   kmymoneyselector.cpp
   kmymoneycalculator.cpp
+  ktreewidgetfilterlinewidget.cpp
   kguiutils.cpp
   )
 

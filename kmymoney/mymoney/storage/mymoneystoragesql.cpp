@@ -656,9 +656,8 @@ int MyMoneyStorageSql::upgradeToV7()
   // kmmFileInfo - add tags and hiTagId
   if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
     return (1);
-  readFileInfo();
+
   m_tags = getRecCount("kmmTags");
-  writeFileInfo();
   return 0;
 }
 
