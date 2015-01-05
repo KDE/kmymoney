@@ -1,0 +1,4 @@
+File=kbanking.kcfg
+ClassName=KBankingSettings
+Singleton=true
+Mutators=true

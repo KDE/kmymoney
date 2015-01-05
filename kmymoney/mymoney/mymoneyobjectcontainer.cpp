@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoney/onlinejob.h"
+
 #include <mymoneyobjectcontainer.h>
 
 struct MyMoneyObjectContainer::Private {
@@ -117,6 +119,8 @@ struct MyMoneyObjectContainer::Private {
   QHash<QString, MyMoneySecurity const *> securityCache;
   QHash<QString, MyMoneyInstitution const *> institutionCache;
   QHash<QString, MyMoneySchedule const *> scheduleCache;
+  QHash<QString, onlineJob const *> onlineJobCache;
+
   IMyMoneyStorage* storage;
   MyMoneyObjectContainer *pub;
 };
@@ -139,6 +143,7 @@ void MyMoneyObjectContainer::clear(IMyMoneyStorage* storage)
   d->clearCache(d->securityCache);
   d->clearCache(d->institutionCache);
   d->clearCache(d->scheduleCache);
+  d->clearCache(d->onlineJobCache);
 
   if (storage)
     d->storage = storage;
@@ -158,6 +163,8 @@ void MyMoneyObjectContainer::clear(const QString& id)
     return;
   if (d->clearObject(d->scheduleCache, id))
     return;
+  if (d->clearObject(d->onlineJobCache, id))
+    return;
   qWarning("Ooops, should clear an unknown object with id '%s'", qPrintable(id));
 }
 
@@ -175,6 +182,8 @@ const MyMoneyObject * MyMoneyObjectContainer::object(const QString& id) const
   if ((obj = d->getObject(d->institutionCache, id)))
     return obj;
   if ((obj = d->getObject(d->scheduleCache, id)))
+    return obj;
+  if ((obj = d->getObject(d->onlineJobCache, id)))
     return obj;
   qWarning("Ooops, should get an unknown object with id '%s'", qPrintable(id));
   return 0;
@@ -239,6 +248,8 @@ void MyMoneyObjectContainer::refresh(const QString& id)
   if (d->refreshObject(id, d->institutionCache, &IMyMoneyStorage::institution))
     return;
   if (d->refreshObject(id, d->scheduleCache, &IMyMoneyStorage::schedule))
+    return;
+  if (d->refreshObject(id, d->onlineJobCache, &IMyMoneyStorage::getOnlineJob))
     return;
 
   // special handling of securities
@@ -313,6 +324,11 @@ void MyMoneyObjectContainer::preloadSchedule(const QList<MyMoneySchedule>& list)
   d->preloadListMethodImpl(list, d->scheduleCache);
 }
 
+void MyMoneyObjectContainer::preloadOnlineJob(const QList< onlineJob >& list)
+{
+  d->preloadListMethodImpl(list, d->onlineJobCache);
+}
+
 void MyMoneyObjectContainer::preloadAccount(const MyMoneyAccount& account)
 {
   d->preloadMethodImpl(account, d->accountCache);
@@ -341,6 +357,11 @@ void MyMoneyObjectContainer::preloadInstitution(const MyMoneyInstitution& instit
 void MyMoneyObjectContainer::preloadSchedule(const MyMoneySchedule& schedule)
 {
   d->preloadMethodImpl(schedule, d->scheduleCache);
+}
+
+void MyMoneyObjectContainer::preloadOnlineJob(const onlineJob& job)
+{
+  d->preloadMethodImpl(job, d->onlineJobCache);
 }
 
 void MyMoneyObjectContainer::payee(QList<MyMoneyPayee>& list)

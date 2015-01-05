@@ -81,6 +81,7 @@ private slots:
   void testCurrencyList();
   void testAccountList();
   void testLoaderFunctions();
+  void testAddOnlineJob();
 };
 
 #endif

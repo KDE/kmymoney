@@ -28,6 +28,7 @@
 #include <QtGlobal>
 #include <QVariant>
 #include <QUuid>
+#include <QSharedPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -96,6 +97,12 @@ public:
       m_objType(MyMoneyFile::notifySecurity),
       m_notificationMode(mode),
       m_id(security.id()) {
+  }
+
+  MyMoneyNotification(MyMoneyFile::notificationModeT mode, const onlineJob& job) :
+      m_objType(MyMoneyFile::notifyOnlineJob),
+      m_notificationMode(mode),
+      m_id(job.id()) {
   }
 
   MyMoneyFile::notificationObjectT objectType(void) const {
@@ -234,6 +241,13 @@ public:
 
   bool                   m_inTransaction;
   MyMoneySecurity        m_baseCurrency;
+  
+  /**
+   * @brief Cache for MyMoneyObjects
+   * 
+   * It is also used to emit the objectAdded() and objectModified() signals.
+   * => If one of these signals is used, you must use this cache.
+   */
   MyMoneyObjectContainer m_cache;
   MyMoneyPriceList       m_priceCache;
   MyMoneyBalanceCache    m_balanceCache;
@@ -2774,6 +2788,69 @@ void MyMoneyFile::removeBudget(const MyMoneyBudget& budget)
   d->addCacheNotification(budget.id(), false);
 }
 
+void MyMoneyFile::addOnlineJob( onlineJob& job )
+{
+  d->checkTransaction(Q_FUNC_INFO);
+
+  // clear all changed objects from cache
+  MyMoneyNotifier notifier(d);
+  d->m_storage->addOnlineJob( job );
+  d->m_cache.preloadOnlineJob( job );
+  d->m_changeSet += MyMoneyNotification(notifyAdd, job);
+}
+
+void MyMoneyFile::modifyOnlineJob( const onlineJob job )
+{
+  d->checkTransaction(Q_FUNC_INFO);
+  d->m_storage->modifyOnlineJob( job );
+  d->m_changeSet += MyMoneyNotification(notifyModify, job);
+  d->addCacheNotification(job.id());
+}
+
+const onlineJob MyMoneyFile::getOnlineJob( const QString &jobId ) const
+{
+  d->checkStorage();
+  return d->m_storage->getOnlineJob( jobId );
+}
+
+const QList<onlineJob> MyMoneyFile::onlineJobList() const
+{
+  d->checkStorage();
+  return d->m_storage->onlineJobList();
+}
+
+/** @todo improve speed by passing count job to m_storage */
+int MyMoneyFile::countOnlineJobs() const
+{
+  return onlineJobList().count();
+}
+
+/**
+ * @brief Remove onlineJob
+ * @param job onlineJob to remove
+ */
+void MyMoneyFile::removeOnlineJob(const onlineJob& job)
+{
+  d->checkTransaction(Q_FUNC_INFO);
+
+  // clear all changed objects from cache
+  MyMoneyNotifier notifier(d);
+  if ( job.isLocked() ) {
+    return;
+  }
+  d->addCacheNotification(job.id(), false);
+  d->m_cache.clear(job.id());
+  d->m_changeSet += MyMoneyNotification(notifyRemove, job);
+  d->m_storage->removeOnlineJob( job );
+}
+
+void MyMoneyFile::removeOnlineJob(const QStringList onlineJobIds)
+{
+  foreach(QString jobId, onlineJobIds) {
+    removeOnlineJob(getOnlineJob(jobId));
+  }
+}
+ 
 bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAccount& account, const MyMoneyAccount& category, const MyMoneyMoney& amount)
 {
   bool rc = false;

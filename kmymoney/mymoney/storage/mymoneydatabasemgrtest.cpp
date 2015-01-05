@@ -23,6 +23,8 @@
 
 #include "mymoneytestutils.h"
 
+#include "onlinetasks/dummy/tasks/dummytask.h"
+
 QTEST_MAIN(MyMoneyDatabaseMgrTest)
 
 MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
@@ -70,6 +72,7 @@ void MyMoneyDatabaseMgrTest::testEmptyConstructor()
   QVERIFY(m->nextPayeeID() == 0);
   QVERIFY(m->nextScheduleID() == 0);
   QVERIFY(m->nextReportID() == 0);
+  QVERIFY(m->nextOnlineJobID() == 0);
   QVERIFY(m->institutionList().count() == 0);
 
   QList<MyMoneyAccount> accList;
@@ -235,20 +238,21 @@ void MyMoneyDatabaseMgrTest::testSupportFunctions()
   }
 
   try {
-    QVERIFY(m->nextInstitutionID() == "I000001");
-    QVERIFY(m->nextAccountID() == "A000001");
-    QVERIFY(m->nextTransactionID() == "T000000000000000001");
-    QVERIFY(m->nextPayeeID() == "P000001");
-    QVERIFY(m->nextTagID() == "G000001");
-    QVERIFY(m->nextScheduleID() == "SCH000001");
-    QVERIFY(m->nextReportID() == "R000001");
+    QCOMPARE(m->nextInstitutionID(), QLatin1String("I000001"));
+    QCOMPARE(m->nextAccountID(), QLatin1String("A000001"));
+    QCOMPARE(m->nextTransactionID(), QLatin1String("T000000000000000001"));
+    QCOMPARE(m->nextPayeeID(), QLatin1String("P000001"));
+    QCOMPARE(m->nextTagID(), QLatin1String("G000001"));
+    QCOMPARE(m->nextScheduleID(), QLatin1String("SCH000001"));
+    QCOMPARE(m->nextReportID(), QLatin1String("R000001"));
+    QCOMPARE(m->nextOnlineJobID(), QLatin1String("O000001"));
 
-    QVERIFY(m->liability().name() == "Liability");
-    QVERIFY(m->asset().name() == "Asset");
-    QVERIFY(m->expense().name() == "Expense");
-    QVERIFY(m->income().name() == "Income");
-    QVERIFY(m->equity().name() == "Equity");
-    QVERIFY(m->dirty() == false);
+    QCOMPARE(m->liability().name(), QLatin1String("Liability"));
+    QCOMPARE(m->asset().name(), QLatin1String("Asset"));
+    QCOMPARE(m->expense().name(), QLatin1String("Expense"));
+    QCOMPARE(m->income().name(), QLatin1String("Income"));
+    QCOMPARE(m->equity().name(), QLatin1String("Equity"));
+    QCOMPARE(m->dirty(), false);
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
@@ -2305,4 +2309,99 @@ void MyMoneyDatabaseMgrTest::testAccountList()
   accounts.clear();
   m->accountList(accounts);
   QVERIFY(accounts.count() == 2);
+}
+
+void MyMoneyDatabaseMgrTest::testAddOnlineJob()
+{
+  testAttachDb();
+
+  if (!m_canOpen) {
+    std::cout << "Database test skipped because no database could be opened." << std::endl;
+    return;
+  }
+
+  // Add a onlineJob
+  onlineJob job(new dummyTask());
+  QCOMPARE(job.id(), QLatin1String("O000001"));
+
+  QCOMPARE(m->onlineJobList().count(), 0);
+  m->setDirty();
+
+  try {
+    m->addOnlineJob(job);
+
+    QCOMPARE(m->onlineJobList().count(), 1);
+    QCOMPARE((*(m->onlineJobList().begin())).id(), QLatin1String("O000001"));
+
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  // Try to re-add the same job. It should fail.
+  m->setDirty();
+  try {
+    m->addOnlineJob(job);
+    QFAIL("Expected exception missing");
+  } catch (const MyMoneyException &) {
+    QCOMPARE(m->dirty(), false);
+  }
+}
+
+void MyMoneyDatabaseMgrTest::testModifyOnlineJob()
+{
+  testAttachDb();
+
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
+
+  onlineJob job(new dummyTask());
+  testAddOnlineJob();
+  m->setDirty();
+  // update online job
+  try {
+    m->modifyOnlineJob(job);
+    QVERIFY(m->onlineJobList().count() == 1);
+    //QVERIFY((*(m->onlineJobList().begin())).name() == "EURO");
+    QVERIFY((*(m->onlineJobList().begin())).id() == "O000001");
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  m->setDirty();
+
+  onlineJob unknownJob(new dummyTask());
+  try {
+    m->modifyOnlineJob(unknownJob);
+    QFAIL("Expected exception missing");
+  } catch (const MyMoneyException &) {
+    QVERIFY(m->dirty() == false);
+  }
+}
+
+void MyMoneyDatabaseMgrTest::testRemoveOnlineJob()
+{
+  testAttachDb();
+
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
+
+  onlineJob job(new dummyTask());
+  testAddOnlineJob();
+  m->setDirty();
+  try {
+    m->removeOnlineJob(job);
+    QVERIFY(m->onlineJobList().count() == 0);
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  m->setDirty();
+
+  onlineJob unknownJob(new dummyTask());
+  try {
+    m->removeOnlineJob(unknownJob);
+    QFAIL("Expected exception missing");
+  } catch (const MyMoneyException &) {
+    QVERIFY(m->dirty() == false);
+  }
 }

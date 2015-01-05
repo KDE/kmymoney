@@ -47,32 +47,6 @@
 #include <mymoneyfile.h>
 #include "kmymoneyaccountcompletion.h"
 
-AccountNamesFilterProxyModel::AccountNamesFilterProxyModel(QObject *parent)
-    : AccountsFilterProxyModel(parent)
-{
-}
-
-/**
-  * Top items are not selectable because they are not real accounts but are only used for grouping.
-  */
-Qt::ItemFlags AccountNamesFilterProxyModel::flags(const QModelIndex &index) const
-{
-  if (!index.parent().isValid())
-    return AccountsFilterProxyModel::flags(index) & ~Qt::ItemIsSelectable;
-  return AccountsFilterProxyModel::flags(index);
-}
-
-/**
-  * Filter all but the first column.
-  */
-bool AccountNamesFilterProxyModel::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
-{
-  Q_UNUSED(source_parent)
-  if (source_column == 0)
-    return true;
-  return false;
-}
-
 class KMyMoneyAccountCombo::Private
 {
 public:
@@ -81,7 +55,7 @@ public:
   QString    m_lastSelectedAccount;
 };
 
-KMyMoneyAccountCombo::KMyMoneyAccountCombo(AccountNamesFilterProxyModel *model, QWidget *parent/* = 0*/)
+KMyMoneyAccountCombo::KMyMoneyAccountCombo(QAbstractItemModel *model, QWidget *parent/* = 0*/)
     : KComboBox(parent), d(new Private)
 {
   setModel(model);
@@ -143,7 +117,7 @@ const QString& KMyMoneyAccountCombo::getSelected() const
   return d->m_lastSelectedAccount;
 }
 
-void KMyMoneyAccountCombo::setModel(AccountNamesFilterProxyModel *model)
+void KMyMoneyAccountCombo::setModel(QAbstractItemModel *model)
 {
   KComboBox::setModel(model);
   delete d->m_popupView;

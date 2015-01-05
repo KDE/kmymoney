@@ -1,0 +1,33 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=KMyMoney/IbanBicData
+Name=A database for institution names and iban to bic rules
+
+[PropertyDef::X-KMyMoney-CountryCodes]
+Type=QStringList
+# A list of ISO 3166-1 country codes as used in IBAN and BIC
+# or * if it contains all countries
+
+[PropertyDef::X-KMyMoney-IBAN-2-BIC-supported]
+Type=bool
+Default=false
+# Set if database has information to create a bic from a given iban.
+
+[PropertyDef::X-KMyMoney-BBAN-Length]
+Type=int
+
+[PropertyDef::X-KMyMoney-BankIdentifier-Position]
+Type=int
+# Start of bank identifier in BBAN, first char has position 0
+
+[PropertyDef::X-KMyMoney-BankIdentifier-Length]
+Type=int
+
+[PropertyDef::X-KMyMoney-Bankdata-Database]
+Type=QString
+
+[PropertyDef::X-KMyMoney-Bankdata-IsComplete]
+Type=bool
+Default=false
+# Set if the dasabase contains all banks for the countries given in X-KMyMoney-CountryCodes
+# If true, a bic which is not found in the database is considered invalid.

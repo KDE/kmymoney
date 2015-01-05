@@ -96,6 +96,7 @@
 #include "kreportsview.h"
 #include "kbudgetview.h"
 #include "kforecastview.h"
+#include "konlinejoboutbox.h"
 #include "kmymoney.h"
 #include "kmymoneyutils.h"
 #include "models.h"
@@ -289,6 +290,15 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   m_forecastViewFrame = m_model->addPage(m_forecastView, i18n("Forecast"));
   m_forecastViewFrame->setIcon(KIcon("view-financial-forecast"));
   connect(m_forecastView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
+
+  // Page 12
+  m_onlineJobOutboxView = new KOnlineJobOutbox();
+  m_onlineJobOutboxViewFrame = m_model->addPage(m_onlineJobOutboxView, i18n("Outbox"));
+  m_onlineJobOutboxViewFrame->setIcon(KIcon("online-banking"));
+  connect( m_onlineJobOutboxView, SIGNAL(sendJobs(QList<onlineJob>)), kmymoney, SLOT( slotOnlineJobSend( QList< onlineJob > ) ));
+  connect( m_onlineJobOutboxView, SIGNAL(editJob(QString)), kmymoney, SLOT(slotEditOnlineJob(QString)) );
+  connect( m_onlineJobOutboxView, SIGNAL(newCreditTransfer()), kmymoney, SLOT(slotNewOnlineTransfer()) );
+  connect( m_onlineJobOutboxView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   //set the model
   setModel(m_model);
@@ -513,7 +523,8 @@ void KMyMoneyView::enableViewsIfFileOpen()
     m_reportsViewFrame->setEnabled(m_fileOpen);
   if (m_forecastViewFrame->isEnabled() != m_fileOpen)
     m_forecastViewFrame->setEnabled(m_fileOpen);
-
+  if (m_onlineJobOutboxViewFrame->isEnabled() != m_fileOpen)
+    m_onlineJobOutboxViewFrame->setEnabled(m_fileOpen);
   emit viewStateChanged(m_fileOpen);
 }
 

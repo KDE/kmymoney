@@ -64,6 +64,7 @@ private slots:
   void testAddPayee();
   void testModifyPayee();
   void testRemovePayee();
+  void testPayeeWithIdentifier();
   void testAddTransactionStd();
   void testAttachStorage();
   void testAccount2Category();
@@ -92,6 +93,12 @@ private slots:
   void testCountTransactionsWithSpecificReconciliationState_noTransactions();
   void testCountTransactionsWithSpecificReconciliationState_transactionWithWantedReconcileState();
   void testCountTransactionsWithSpecificReconciliationState_transactionWithUnwantedReconcileState();
+  void testAddOnlineJob();
+  void testGetOnlineJob();
+  void testRemoveOnlineJob();
+  void testRemoveLockedOnlineJob();
+  void testOnlineJobRollback();
+  void testModifyOnlineJob();
   void testClearedBalance();
 
 private slots:

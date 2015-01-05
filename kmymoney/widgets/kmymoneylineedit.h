@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klineedit.h>
+#include <KLineEdit>
 #include <QFocusEvent>
 #include <QKeyEvent>
 

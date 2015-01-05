@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=KMyMoney/PayeeIdentifierDelegate
+Name=Painter of payee identifier
+
+[PropertyDef::X-KMyMoney-payeeIdentifierIds]
+Type=QStringList
+# A list of payeeIdentifier ids which can be viewed/edited by this delegate

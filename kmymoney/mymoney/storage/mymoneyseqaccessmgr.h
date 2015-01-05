@@ -167,6 +167,11 @@ public:
   void addPayee(MyMoneyPayee& payee);
 
   /**
+   * Create now onlineJob
+   */
+  void addOnlineJob(onlineJob& job);
+
+  /**
     * This method is used to retrieve information about a payee
     * An exception will be thrown upon error conditions.
     *
@@ -338,6 +343,9 @@ public:
     */
   void modifyTransaction(const MyMoneyTransaction& transaction);
 
+  /** @todo implement */
+  void modifyOnlineJob(const onlineJob& job);
+
   /**
     * This method re-parents an existing account
     *
@@ -375,6 +383,12 @@ public:
     * @param institution institution to be deleted.
     */
   void removeInstitution(const MyMoneyInstitution& institution);
+
+  const onlineJob getOnlineJob(const QString &id) const;
+  /** @todo implement */
+  long unsigned int onlineJobId() const { return 1; }
+
+  void removeOnlineJob(const onlineJob & );
 
   /**
     * This method is used to extract a transaction from the file global
@@ -519,6 +533,11 @@ public:
   const QList<MyMoneyTransaction> transactionList(MyMoneyTransactionFilter& filter) const;
 
   /**
+   * @brief Return all onlineJobs
+   */
+  const QList<onlineJob> onlineJobList() const;
+
+  /**
     * This method returns whether a given transaction is already in memory, to avoid
     * reloading it from the database
     */
@@ -606,6 +625,7 @@ public:
   virtual void loadSecurities(const QMap<QString, MyMoneySecurity>& map);
   virtual void loadCurrencies(const QMap<QString, MyMoneySecurity>& map);
   virtual void loadPrices(const MyMoneyPriceList& list);
+  virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs);
 
   virtual void loadAccountId(const unsigned long id);
   virtual void loadTransactionId(const unsigned long id);
@@ -616,6 +636,7 @@ public:
   virtual void loadSecurityId(const unsigned long id);
   virtual void loadReportId(const unsigned long id);
   virtual void loadBudgetId(const unsigned long id);
+  virtual void loadOnlineJobId(const unsigned long id);
 
   virtual unsigned long accountId(void) const {
     return m_nextAccountID;
@@ -1088,6 +1109,7 @@ private:
   static const int SECURITY_ID_SIZE = 6;
   static const int REPORT_ID_SIZE = 6;
   static const int BUDGET_ID_SIZE = 6;
+  static const int ONLINE_JOB_ID_SIZE = 6;
 
   /**
     * This method is used to set the dirty flag and update the
@@ -1166,6 +1188,12 @@ private:
   unsigned long m_nextBudgetID;
 
   /**
+    * This member variable keeps the number that will be assigned to the
+    * next onlineJob object created. It is maintained by nextOnlineJobID()
+    */
+  unsigned long m_nextOnlineJobID;
+
+  /**
     * The member variable m_institutionList is the container for the
     * institutions known within this file.
     */
@@ -1228,6 +1256,11 @@ private:
   MyMoneyMap<QString, MyMoneyBudget> m_budgetList;
 
   MyMoneyMap<MyMoneySecurityPair, MyMoneyPriceEntries> m_priceList;
+
+  /**
+    * A list containing all the onlineJob information objects.
+    */
+  MyMoneyMap<QString, onlineJob> m_onlineJobList;
 
   /**
     * This member signals if the file has been modified or not
@@ -1307,6 +1340,10 @@ private:
     */
   QString nextBudgetID(void);
 
+  /**
+    * This method is used to get the next valid ID for an onlineJob object.
+    */
+  QString nextOnlineJobID(void);
 
   /**
     * This method re-parents an existing account

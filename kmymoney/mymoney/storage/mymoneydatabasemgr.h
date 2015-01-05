@@ -207,6 +207,14 @@ public:
     */
   virtual const QList<MyMoneyTag> tagList(void) const;
 
+  /** @todo implement all onlineJob related functions @{ */
+  void modifyOnlineJob(const onlineJob& job);
+  void addOnlineJob( onlineJob& job );
+  const onlineJob getOnlineJob(const QString &jobId) const;
+  const QList<onlineJob> onlineJobList() const;
+  void removeOnlineJob( const onlineJob& );
+  /** @} */
+
   /**
     * Returns the account addressed by it's id.
     *
@@ -949,6 +957,8 @@ public:
   virtual void loadReports(const QMap<QString, MyMoneyReport>& reports);
   virtual void loadBudgets(const QMap<QString, MyMoneyBudget>& budgets);
   virtual void loadPrices(const MyMoneyPriceList& list);
+  virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs);
+  //virtual void loadPayeeIdentifier(const QMap<QString, payeeIdentifier>& idents);
 
   virtual unsigned long accountId(void) const;
   virtual unsigned long transactionId(void) const;
@@ -959,6 +969,8 @@ public:
   virtual unsigned long securityId(void) const;
   virtual unsigned long reportId(void) const;
   virtual unsigned long budgetId(void) const;
+  virtual unsigned long onlineJobId() const;
+  virtual unsigned long payeeIdentifierId() const;
 
   virtual void loadAccountId(const unsigned long id);
   virtual void loadTransactionId(const unsigned long id);
@@ -969,6 +981,8 @@ public:
   virtual void loadSecurityId(const unsigned long id);
   virtual void loadReportId(const unsigned long id);
   virtual void loadBudgetId(const unsigned long id);
+  virtual void loadOnlineJobId(const unsigned long id);
+  virtual void loadPayeeIdentifierId(const unsigned long id);
 
   /**
     * This method is used to retrieve the whole set of key/value pairs
@@ -1080,6 +1094,12 @@ private:
 
   const QString nextReportID(void);
 
+  /** @brief get next valid id for an onlineJob */
+  const QString nextOnlineJobID();
+
+  /** @brief get next valid id for payeeIdentifier */
+  const QString nextPayeeIdentifierID();
+
   /**
     * This method is used to get the next valid ID for a budget object.
     * @return id for an budget object
@@ -1096,6 +1116,8 @@ private:
   static const int SECURITY_ID_SIZE = 6;
   static const int REPORT_ID_SIZE = 6;
   static const int BUDGET_ID_SIZE = 6;
+  static const int ONLINEJOB_ID_SIZE = 8;
+  static const int PAYEEIDENTIFIER_ID_SIZE = 6;
 
   // Increment this to force an update in KMMView.
   // This is different from the db schema version stored in

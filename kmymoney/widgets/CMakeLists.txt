@@ -17,19 +17,25 @@ set(kmymoney_STAT_HEADERS
   transactionform.h transaction.h transactionsortoptionimpl.h
   kmymoneyreportconfigtabimpl.h kmymoneyreportcontrolimpl.h
   kmymoney_export.h
+  kmymoneyvalidationfeedback.h
   )
 
 ########### Shared widget library ###########
 set(kmm_widgets_sources
   kmymoneydateinput.cpp
+  kmymoneyvalidationfeedback.cpp
+  styleditemdelegateforwarder.cpp
   kmymoneyedit.cpp
   kmymoneylineedit.cpp
+  kmymoneytextedit.cpp
   kmymoneymvccombo.cpp
   kmymoneyselector.cpp
   kmymoneycalculator.cpp
   ktreewidgetfilterlinewidget.cpp
   kguiutils.cpp
   )
+
+kde4_add_ui_files(kmm_widgets_sources kmymoneyvalidationfeedback.ui)
 
 kde4_add_library(kmm_widgets SHARED ${kmm_widgets_sources})
 target_link_libraries(kmm_widgets LINK_PUBLIC ${KDE4_KDEUI_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDECORE_LIBS}

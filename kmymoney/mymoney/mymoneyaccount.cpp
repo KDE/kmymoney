@@ -35,8 +35,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyexception.h>
-#include <mymoneysplit.h>
+#include "mymoneyexception.h"
+#include "mymoneysplit.h"
+#include "mymoneyfile.h"
+#include "payeeidentifier/payeeidentifiertyped.h"
+#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
 
 MyMoneyAccount::MyMoneyAccount() :
     m_fraction(-1)
@@ -280,6 +284,24 @@ bool MyMoneyAccount::isLiquidAsset(void) const
   return accountType() == Checkings ||
          accountType() == Savings ||
          accountType() == Cash;
+}
+
+template<>
+QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const
+{
+  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = payeeIdentifierTyped<payeeIdentifiers::ibanBic>( new payeeIdentifiers::ibanBic );
+  ident->setIban( value(QLatin1String("iban")) );
+
+  if ( !institutionId().isEmpty() ) {
+    const MyMoneyInstitution institution = MyMoneyFile::instance()->institution( institutionId() );
+    ident->setBic( institution.value("bic") );
+  }
+
+  ident->setOwnerName( MyMoneyFile::instance()->user().name() );
+
+  QList< payeeIdentifierTyped<payeeIdentifiers::ibanBic> > typedList;
+  typedList << ident;
+  return typedList;
 }
 
 MyMoneyAccountLoan::MyMoneyAccountLoan(const MyMoneyAccount& acc)
@@ -796,3 +818,36 @@ const QMap<QDate, MyMoneyMoney>& MyMoneyAccount::reconciliationHistory()
 
   return m_reconciliationHistory;
 }
+
+/**
+ * @todo Improve setting of country for nationalAccount
+ */
+QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
+{
+  QList< payeeIdentifier > list;
+
+  MyMoneyFile* file = MyMoneyFile::instance();
+
+  // Iban & Bic
+  if ( !value( QLatin1String("iban") ).isEmpty() ) {
+    payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban( new payeeIdentifiers::ibanBic );
+    iban->setIban( value("iban") );
+    iban->setBic( file->institution( institutionId() ).value("bic") );
+    iban->setOwnerName( file->user().name() );
+    list.append(iban);
+  }
+
+  // National Account number
+  if ( !number().isEmpty() ) {
+    payeeIdentifierTyped<payeeIdentifiers::nationalAccount> national( new payeeIdentifiers::nationalAccount );
+    national->setAccountNumber( number() );
+    national->setBankCode( file->institution( institutionId() ).sortcode() );
+    if ( file->user().state().length() == 2 )
+      national->setCountry( file->user().state() );
+    national->setOwnerName( file->user().name() );
+    list.append(national);
+  }
+
+  return list;
+}
+

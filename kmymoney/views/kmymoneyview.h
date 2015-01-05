@@ -70,6 +70,7 @@ class KMyMoneyViewBase;
 class MyMoneyReport;
 class TransactionEditor;
 class KForecastView;
+class KOnlineJobOutbox;
 class KMyMoneyTitleLabel;
 /**
   * This class represents the view of the MyMoneyFile which contains
@@ -96,7 +97,8 @@ public:
     InvestmentsView,
     ReportsView,
     BudgetView,
-    ForecastView
+    ForecastView,
+    OnlineJobOutboxView
   };
   // file actions for plugin
   enum fileActions {
@@ -116,7 +118,7 @@ private:
     CategoryNew
   };
 
-  enum storageTypeE { // not used but keep for future implementation
+  enum storageTypeE {
     Memory = 0,
     Database
   } _storageType;
@@ -135,6 +137,7 @@ private:
   KInvestmentView *m_investmentView;
   KReportsView* m_reportsView;
   KForecastView* m_forecastView;
+  KOnlineJobOutbox* m_onlineJobOutboxView;
 
   KPageWidgetItem* m_homeViewFrame;
   KPageWidgetItem* m_accountsViewFrame;
@@ -148,6 +151,7 @@ private:
   KPageWidgetItem* m_investmentViewFrame;
   KPageWidgetItem* m_reportsViewFrame;
   KPageWidgetItem* m_forecastViewFrame;
+  KPageWidgetItem* m_onlineJobOutboxViewFrame;
 
   KMyMoneyTitleLabel* m_header;
 

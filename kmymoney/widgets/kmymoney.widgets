@@ -10,6 +10,9 @@ ToolTip=The KMyMoney title label widget
 [kMyMoneyEdit]
 ToolTip=The KMyMoney edit widget
 
+[KMyMoneyTextEdit]
+ToolTip=The KMyMoney version of KTextEdit
+
 [kMyMoneyDateInput]
 ToolTip=The KMyMoney date input widget
 

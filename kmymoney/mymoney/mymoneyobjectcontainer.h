@@ -35,6 +35,7 @@
 #include <mymoneytag.h>
 #include <mymoneyobject.h>
 #include <mymoneysecurity.h>
+#include <onlinejob.h>
 #include <imymoneystorage.h>
 
 /**
@@ -69,6 +70,7 @@ public:
   void preloadInstitution(const QList<MyMoneyInstitution>& list);
   void preloadSecurity(const QList<MyMoneySecurity>& list);
   void preloadSchedule(const QList<MyMoneySchedule>& list);
+  void preloadOnlineJob(const QList<onlineJob>& list);
 
   void preloadAccount(const MyMoneyAccount& account);
   void preloadSecurity(const MyMoneySecurity& security);
@@ -76,6 +78,7 @@ public:
   void preloadTag(const MyMoneyTag& tag);
   void preloadInstitution(const MyMoneyInstitution& institution);
   void preloadSchedule(const MyMoneySchedule& schedule);
+  void preloadOnlineJob(const onlineJob& job);
 
   void clear(const QString& id);
   void clear(IMyMoneyStorage* storage = 0);

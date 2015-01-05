@@ -26,6 +26,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/wizards/wizardpages/
                     ${CMAKE_CURRENT_SOURCE_DIR}/models/
                     ${CMAKE_CURRENT_BINARY_DIR}/models/
+                    ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/ibanandbic/widgets/ # TODO: this line should be moved to the target it belongs
                     ${KMyMoney_SOURCE_DIR}/libkgpgfile/
                     ${KMyMoney_SOURCE_DIR}/libkdchart/include )
 
@@ -42,6 +43,7 @@ add_subdirectory( pics )
 add_subdirectory( html )
 add_subdirectory( templates )
 add_subdirectory( misc )
+add_subdirectory( payeeidentifier )
 
 set( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 
@@ -71,7 +73,8 @@ set( kmymoney_common_LIBS
   kmm_widgets
   kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
   ${QT_AND_KDECORE_LIBS} ${QT_QTSQL_LIBRARY}
-  ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDEPIMLIBS_KPIMIDENTITIES_LIBS} ${KDEPIMLIBS_AKONADI_CONTACT_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KUTILS_LIBRARY})
+  ${KDE4_KHTML_LIBS} ${KDE4_KDEUI_LIBS} ${KDEPIMLIBS_KPIMIDENTITIES_LIBS} ${KDEPIMLIBS_AKONADI_CONTACT_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KUTILS_LIBRARY}
+  )
 
 ########### kmymoney executable ###############
 
@@ -141,7 +144,8 @@ if( KDE4_BUILD_TESTS )
         ${QT_QTCORE_LIBRARY}
         ${QT_QTSQL_LIBRARY}
         ${QT_QTTEST_LIBRARY}
-        ${LIBALKIMIA_LIBRARIES})
+        ${LIBALKIMIA_LIBRARY}
+        )
 
   # KMyMoneyUtils
   set( kmymoneyutilstest_SRCS kmymoneyutilstest.cpp )

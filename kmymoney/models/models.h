@@ -36,6 +36,7 @@
   */
 class AccountsModel;
 class InstitutionsModel;
+class onlineJobModel;
 
 /**
   * This object is the owner and maintainer of all the core models of KMyMoney.
@@ -69,6 +70,7 @@ public:
 
   AccountsModel* accountsModel();
   InstitutionsModel* institutionsModel();
+  onlineJobModel* onlineJobsModel();
 
 public slots:
   /**

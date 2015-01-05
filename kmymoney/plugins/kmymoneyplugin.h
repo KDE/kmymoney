@@ -38,6 +38,7 @@ class KToggleAction;
 #include <importinterface.h>
 #include <kmm_plugin_export.h>
 
+
 namespace KMyMoneyPlugin
 {
 

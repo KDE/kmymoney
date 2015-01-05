@@ -44,6 +44,7 @@ set(libdialogs_a_SOURCES
   mymoneyqifprofileeditor.cpp
   transactioneditor.cpp
   transactionmatcher.cpp
+  konlinetransferform.cpp
 )
 
 set(dialogs_HEADERS
@@ -68,6 +69,7 @@ set(dialogs_UI
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlgdecl.ui
   kupdatestockpricedlgdecl.ui mymoneyqifprofileeditordecl.ui
   ../widgets/kaccounttemplateselectordecl.ui ../widgets/transactionsortoptiondecl.ui
+  konlinetransferformdecl.ui
 )
 
 kde4_add_ui_files(libdialogs_a_SOURCES ${dialogs_UI} )
@@ -79,9 +81,16 @@ add_custom_target(generate_dialogs_ui_srcs DEPENDS ${dialogs_ui_srcs})
 
 kde4_add_library(dialogs STATIC ${libdialogs_a_SOURCES} ${dialogs_ui_srcs})
 
+# @TODO: need kmm_mymoney for online banking, is this ok?
+target_link_libraries(dialogs
+  kmm_mymoney
+  onlinetask_interfaces
+)
+
 # we rely on the widgets to be generated
 add_dependencies(dialogs widgets)
 target_link_libraries(dialogs LINK_PUBLIC kmm_widgets)
+
 
 ########### install files ###############
 

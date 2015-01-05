@@ -2,6 +2,7 @@
  *   Copyright 2004  Martin Preuss aquamaniac@users.sourceforge.net        *
  *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
  *   Copyright 2010  Thomas Baumgart ipwizard@users.sourceforge.net        *
+ *   Copyright 2015  Christian David christian-david@web.de                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -36,6 +37,8 @@
 #include <QLabel>
 #include <QTimer>
 
+#include <QDebug> //! @todo remove @c #include <QDebug>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -59,25 +62,33 @@
 // Library Includes
 
 #include <aqbanking/imexporter.h>
+#include <aqbanking/jobsingletransfer.h>
+#include <aqbanking/jobsepatransfer.h>
 #include <aqbanking/jobgettransactions.h>
 #include <aqbanking/jobgetbalance.h>
 #include <aqbanking/job.h>
 #include <aqbanking/abgui.h>
 #include <aqbanking/dlg_setup.h>
 #include <aqbanking/dlg_importer.h>
+#include <aqbanking/transactionlimits.h>
 #include <gwenhywfar/logger.h>
 #include <gwenhywfar/debug.h>
-#include <gwen-gui-qt4/qt4_gui.hpp>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kbjobview.h"
+#include "mymoney/onlinejob.h"
+
 #include "kbaccountsettings.h"
 #include "kbmapaccount.h"
 #include "mymoneyfile.h"
+#include "onlinejobadministration.h"
 #include "kmymoneyview.h"
 #include "kbpickstartdate.h"
+
+#include "gwenkdegui.h"
+#include "gwenhywfarqtoperators.h"
+#include "aqbankingkmmoperators.h"
 
 K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<KBankingPlugin>();)
 K_EXPORT_PLUGIN(KBankingFactory("kmm_kbanking"))
@@ -122,8 +133,7 @@ public:
 };
 
 KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
-    KMyMoneyPlugin::Plugin(parent, "KBanking"/*must be the same as X-KDE-PluginInfo-Name*/),
-    KMyMoneyPlugin::OnlinePlugin(),
+    KMyMoneyPlugin::OnlinePluginExtended(parent, "KBanking"/*must be the same as X-KDE-PluginInfo-Name*/),
     d(new Private),
     m_accountSettings(0)
 {
@@ -135,8 +145,6 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
   connect(d->passwordCacheTimer, SIGNAL(timeout()), this, SLOT(slotClearPasswordCache()));
 
   if (m_kbanking) {
-    QT4_Gui *gui;
-
     if (AB_Banking_HasConf4(m_kbanking->getCInterface())) {
       qDebug("KBankingPlugin: No AqB4 config found.");
       if (AB_Banking_HasConf3(m_kbanking->getCInterface())) {
@@ -151,7 +159,8 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
       }
     }
 
-    gui = new QT4_Gui();
+    //! @todo when is gwenKdeGui deleted?
+    gwenKdeGui *gui = new gwenKdeGui();
     GWEN_Gui_SetGui(gui->getCInterface());
     GWEN_Logger_SetLevel(0, GWEN_LoggerLevel_Info);
     GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Debug);
@@ -163,9 +172,6 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
 
       // get certificate handling and dialog settings management
       AB_Gui_Extend(gui->getCInterface(), m_kbanking->getCInterface());
-
-      // create view
-      createJobView();
 
       // create actions
       createActions();
@@ -247,15 +253,6 @@ MyMoneyKeyValueContainer KBankingPlugin::onlineBankingSettings(const MyMoneyKeyV
   return kvp;
 }
 
-void KBankingPlugin::createJobView(void)
-{
-  KMyMoneyViewBase* view = viewInterface()->addPage(i18nc("Label for icon in KMyMoney's view pane", "Outbox"), "online-banking");
-  QWidget* w = new KBJobView(m_kbanking, view, "JobView");
-  viewInterface()->addWidget(view, w);
-  connect(viewInterface(), SIGNAL(viewStateChanged(bool)), view, SLOT(setEnabled(bool)));
-  connect(this, SIGNAL(queueChanged()), w, SLOT(slotQueueUpdated()));
-}
-
 void KBankingPlugin::createActions(void)
 {
   KAction *settings_aqbanking  = actionCollection()->addAction("settings_aqbanking");
@@ -319,7 +316,7 @@ AB_ACCOUNT* KBankingPlugin::aqbAccount(const MyMoneyAccount& acc) const
   AB_ACCOUNT *ab_acc = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), m_kbanking->mappingId(acc).toUtf8().data());
   // if the account is not found, we temporarily scan for the 'old' mapping (the one w/o the file id)
   // in case we find it, we setup the new mapping in addition on the fly.
-  if (!ab_acc) {
+  if (!ab_acc && acc.isAssetLiability()) {
     ab_acc = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), acc.id().toUtf8().data());
     if (ab_acc) {
       qDebug("Found old mapping for '%s' but not new. Setup new mapping", qPrintable(acc.name()));
@@ -329,6 +326,13 @@ AB_ACCOUNT* KBankingPlugin::aqbAccount(const MyMoneyAccount& acc) const
   }
   return ab_acc;
 }
+
+AB_ACCOUNT* KBankingPlugin::aqbAccount(const QString& accountId) const
+{
+  MyMoneyAccount account = MyMoneyFile::instance()->account(accountId);
+  return aqbAccount(account);
+}
+
 
 QString KBankingPlugin::stripLeadingZeroes(const QString& s) const
 {
@@ -389,15 +393,17 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
   bool rc = false;
 
   if (!acc.id().isEmpty()) {
-    AB_ACCOUNT *ba = 0;
     AB_JOB *job = 0;
     int rv;
     int days;
     int year, month, day;
-    QDate qd;
 
     /* get AqBanking account */
-    ba = aqbAccount(acc);
+    AB_ACCOUNT *ba = aqbAccount(acc);
+    // Update the connection between the KMyMoney account and the AqBanking equivalent.
+    // If the account is not found anymore ba == 0 and the connection is removed.
+    setupAccountReference(acc, ba);
+
     if (!ba) {
       KMessageBox::error(0,
                          i18n("<qt>"
@@ -407,14 +413,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                               "</qt>",
                               acc.name()),
                          i18n("Account Not Mapped"));
-      // clear the connection between the KMyMoney account
-      // and the AqBanking equivalent
-      setupAccountReference(acc, 0);
-    }
-
-    if (ba) {
-      setupAccountReference(acc, ba);
-
+    } else {
       if (acc.onlineBankingSettings().value("kbanking-txn-download") != "no") {
         /* create getTransactions job */
         job = AB_JobGetTransactions_new(ba);
@@ -433,6 +432,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 
         if (job) {
           days = AB_JobGetTransactions_GetMaxStoreDays(job);
+          QDate qd;
           if (days > 0) {
             GWEN_TIME *ti1;
             GWEN_TIME *ti2;
@@ -474,37 +474,39 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           // the pick start date option dialog is needed in
           // case the dateOption is 0 or the date option is > 1
           // and the qd is invalid
-          if (dateOption == 0
-              || (dateOption > 1 && !qd.isValid())) {
+          bool enqueJob = false;
+          if (dateOption == 0 || (dateOption > 1 && !qd.isValid())) {
             QPointer<KBPickStartDate> psd = new KBPickStartDate(m_kbanking, qd, lastUpdate, acc.name(),
                 lastUpdate.isValid() ? 2 : 3, 0, true);
-            if (psd->exec() != QDialog::Accepted) {
-              AB_Job_free(job);
-              delete psd;
-              return rc;
+            if (psd->exec() == QDialog::Accepted) {
+              enqueJob = true;
+              qd = psd->date();
+            } else {
+              qd = QDate();
             }
-            qd = psd->date();
             delete psd;
           }
 
-          if (qd.isValid()) {
-            GWEN_TIME *ti1;
+          if (enqueJob) {
+            if (qd.isValid()) {
+              GWEN_TIME *ti1;
 
-            ti1 = GWEN_Time_new(qd.year(), qd.month() - 1, qd.day(), 0, 0, 0, 0);
-            AB_JobGetTransactions_SetFromTime(job, ti1);
-            GWEN_Time_free(ti1);
+              ti1 = GWEN_Time_new(qd.year(), qd.month() - 1, qd.day(), 0, 0, 0, 0);
+              AB_JobGetTransactions_SetFromTime(job, ti1);
+              GWEN_Time_free(ti1);
+            }
+
+            rv = m_kbanking->enqueueJob(job);
+            if (rv) {
+              DBG_ERROR(0, "Error %d", rv);
+              KMessageBox::error(0,
+                                i18n("<qt>"
+                                      "Could not enqueue the job.\n"
+                                      "</qt>"),
+                                i18n("Error"));
+            }
           }
-
-          rv = m_kbanking->enqueueJob(job);
           AB_Job_free(job);
-          if (rv) {
-            DBG_ERROR(0, "Error %d", rv);
-            KMessageBox::error(0,
-                               i18n("<qt>"
-                                    "Could not enqueue the job.\n"
-                                    "</qt>"),
-                               i18n("Error"));
-          }
         }
       }
 
@@ -524,65 +526,263 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                                 "Could not enqueue the job.\n"
                                 "</qt>"),
                            i18n("Error"));
-      }
-    }
-
-    // make sure, we have at least one job in the queue before we continue.
-    if (m_kbanking->getEnqueuedJobs().size() > 0) {
-      emit queueChanged();
-
-      // ask if the user want's to execute this job right away or spool it
-      // for later execution
-      KIconLoader *ic = KIconLoader::global();
-      KGuiItem executeButton(i18n("&Execute"),
-                             KIcon(ic->loadIcon("tools-wizard",
-                                                KIconLoader::Small, KIconLoader::SizeSmall)),
-                             i18n("Close this window"),
-                             i18n("Use this button to close the window"));
-
-      KGuiItem queueButton(i18n("&Queue"),
-                           KIcon(ic->loadIcon("document-export",
-                                              KIconLoader::Small, KIconLoader::SizeSmall)),
-                           i18n("Close this window"),
-                           i18n("Use this button to close the window"));
-
-      KMessageBox::ButtonCode result = KMessageBox::Cancel;
-      if (!moreAccounts) {
-        switch (acc.onlineBankingSettings().value("kbanking-jobexec").toInt()) {
-          case 1:
-            result = KMessageBox::Yes;
-            break;
-          case 2:
-            result = KMessageBox::No;
-            break;
-          default:
-            result = static_cast<KMessageBox::ButtonCode>(KMessageBox::questionYesNo(0,
-                     i18n("Do you want to execute or queue this job in the outbox?"),
-                     i18n("Execution"), executeButton, queueButton));
-            break;
-        }
       } else {
-        result = KMessageBox::No;
+        rc = true;
+        emit queueChanged();
       }
-
-
-      if (result == KMessageBox::Yes) {
-
-        AB_IMEXPORTER_CONTEXT *ctx;
-
-        ctx = AB_ImExporterContext_new();
-        rv = m_kbanking->executeQueue(ctx);
-        if (!rv)
-          m_kbanking->importContext(ctx, 0);
-        else {
-          DBG_ERROR(0, "Error: %d", rv);
-        }
-        AB_ImExporterContext_free(ctx);
-      }
-      rc = true;
     }
   }
+
+  // make sure we have at least one job in the queue before sending it
+  if (!moreAccounts && m_kbanking->getEnqueuedJobs().size() > 0)
+    executeQueue();
+
   return rc;
+}
+
+void KBankingPlugin::executeQueue(void) {
+  if (m_kbanking && m_kbanking->getEnqueuedJobs().size() > 0) {
+    AB_IMEXPORTER_CONTEXT *ctx;
+    ctx = AB_ImExporterContext_new();
+    int rv = m_kbanking->executeQueue(ctx);
+    if (!rv) {
+      m_kbanking->importContext(ctx, 0);
+    } else {
+      DBG_ERROR(0, "Error: %d", rv);
+    }
+    AB_ImExporterContext_free(ctx);
+  }
+}
+
+/** @todo improve error handling, e.g. by adding a .isValid to nationalTransfer
+ * @todo use new onlineJob system
+ */
+void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
+{
+  Q_CHECK_PTR( m_kbanking );
+  QList<onlineJob> unhandledJobs;
+
+  if (jobs.size()) {
+    foreach (onlineJob job, jobs) {
+      if ( germanOnlineTransfer::name() == job.task()->taskName() ) {
+        onlineJobTyped<germanOnlineTransfer> typedJob(job);
+        enqueTransaction( typedJob );
+        job = typedJob;
+      } else if ( sepaOnlineTransfer::name() == job.task()->taskName() ) {
+        onlineJobTyped<sepaOnlineTransfer> typedJob(job);
+        enqueTransaction( typedJob );
+        job = typedJob;
+      } else {
+        job.addJobMessage( onlineJobMessage(onlineJobMessage::error, "KBanking", "Cannot handle this request" ) );
+        unhandledJobs.append(job);
+      }
+      m_onlineJobQueue.insert(m_kbanking->mappingId(job), job);
+    }
+
+    //emit queueChanged();
+    executeQueue();
+  }
+  jobs = m_onlineJobQueue.values() + unhandledJobs;
+  m_onlineJobQueue.clear();
+}
+
+QStringList KBankingPlugin::availableJobs( QString accountId )
+{
+  QStringList list = QStringList();
+
+  try {
+    MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
+  } catch (const MyMoneyException&) {
+    // Exception usually means account was not found
+    return QStringList();
+  }
+
+  AB_ACCOUNT* abAccount = aqbAccount( accountId );
+
+  if (!abAccount) {
+    return list;
+  }
+
+  // Check availableJobs
+
+  // national transfer
+  AB_JOB *abJob = AB_JobSingleTransfer_new(abAccount);
+  if( AB_Job_CheckAvailability(abJob) == 0 )
+    list.append( germanOnlineTransfer::name() );
+  AB_Job_free( abJob );
+
+  // sepa transfer
+  abJob = AB_JobSepaTransfer_new(abAccount);
+  if( AB_Job_CheckAvailability(abJob) == 0 )
+    list.append( sepaOnlineTransfer::name() );
+  AB_Job_free( abJob );
+
+  return list;
+}
+
+/** @brief experimenting with QScopedPointer and aqBanking pointers */
+class QScopedPointerAbJobDeleter {
+public:
+  static void cleanup(AB_JOB* job)
+  {
+    AB_Job_free(job);
+  }
+};
+
+/** @brief experimenting with QScopedPointer and aqBanking pointers */
+class QScopedPointerAbAccountDeleter {
+public:
+  static void cleanup(AB_ACCOUNT* account)
+  {
+    AB_Account_free(account);
+  }
+};
+
+IonlineTaskSettings::ptr KBankingPlugin::settings(QString accountId, QString taskName)
+{
+  AB_ACCOUNT* abAcc = aqbAccount(accountId);
+  if ( abAcc == 0 )
+    return IonlineTaskSettings::ptr();
+
+  if ( germanOnlineTransfer::name() == taskName ) {
+    // Get Limits for germanOnlineTransfer
+    QScopedPointer<AB_JOB, QScopedPointerAbJobDeleter> abJob( AB_JobSingleTransfer_new(abAcc) );
+    if ( AB_Job_CheckAvailability( abJob.data() ) != 0 )
+      return IonlineTaskSettings::ptr();
+
+    const AB_TRANSACTION_LIMITS* limits = AB_Job_GetFieldLimits( abJob.data() );
+    return AB_TransactionLimits_toGermanOnlineTaskSettings( limits ).dynamicCast<IonlineTaskSettings>();
+    //! @todo needs free? because that is not possible with const AB_TRANSACTION_LIMITS*
+    // AB_TransactionLimits_free( limits );
+  } else if ( sepaOnlineTransfer::name() == taskName ) {
+    // Get limits for sepaonlinetransfer
+    QScopedPointer<AB_JOB, QScopedPointerAbJobDeleter> abJob( AB_JobSepaTransfer_new(abAcc) );
+    if ( AB_Job_CheckAvailability( abJob.data() ) != 0 )
+      return IonlineTaskSettings::ptr();
+    const AB_TRANSACTION_LIMITS* limits = AB_Job_GetFieldLimits( abJob.data() );
+    return AB_TransactionLimits_toSepaOnlineTaskSettings( limits ).dynamicCast<IonlineTaskSettings>();
+  }
+  return IonlineTaskSettings::ptr();
+}
+
+bool KBankingPlugin::enqueTransaction(onlineJobTyped<germanOnlineTransfer>& job)
+{
+  /* get AqBanking account */
+  QString accId = job.constTask()->responsibleAccount();
+  AB_ACCOUNT *abAccount = aqbAccount(accId);
+  if (!abAccount) {
+    job.addJobMessage( onlineJobMessage(onlineJobMessage::warning, "KBanking", i18n("<qt>"
+                                                                                    "The given application account <b>%1</b> "
+                                                                                    "has not been mapped to an online "
+                                                                                    "account."
+                                                                                    "</qt>",
+                                                                                    MyMoneyFile::instance()->account(accId).name())) );
+    return false;
+  }
+  //setupAccountReference(acc, ba); // needed?
+
+  AB_JOB *abJob = AB_JobSingleTransfer_new(abAccount);
+  int rv = AB_Job_CheckAvailability(abJob);
+  if (rv) {
+    qDebug("AB_ERROR_OFFSET is %i", AB_ERROR_OFFSET);
+    job.addJobMessage(onlineJobMessage::error, "AqBanking",
+                      QString("National credit transfers for account \"%1\" are not available, error code %2.").arg(MyMoneyFile::instance()->account(accId).name(), rv),
+                      QString::number(rv)
+                     );
+    return false;
+  }
+  AB_TRANSACTION *abTransaction = AB_Transaction_new();
+
+  // Recipient
+  payeeIdentifiers::nationalAccount beneficiaryAcc = job.task()->beneficiaryTyped();
+  AB_Transaction_SetRemoteAccount(abTransaction, beneficiaryAcc);
+
+  // Origin Account
+  AB_Transaction_SetLocalAccount(abTransaction, abAccount);
+
+  // Purpose
+  QStringList qPurpose = job.task()->purpose().split('\n', QString::SkipEmptyParts);
+  GWEN_STRINGLIST *purpose = GWEN_StringList_fromQStringList(qPurpose);
+  AB_Transaction_SetPurpose(abTransaction, purpose);
+  GWEN_StringList_free(purpose);
+
+  // Other
+  AB_Transaction_SetTextKey(abTransaction, job.task()->textKey());
+  AB_Transaction_SetValue(abTransaction, AB_Value_fromMyMoneyMoney(job.task()->value()));
+
+  /** @todo LOW remove Debug info */
+  qDebug() << "SetTransaction: " << AB_Job_SetTransaction(abJob, abTransaction);
+
+  GWEN_DB_NODE *gwenNode = AB_Job_GetAppData(abJob);
+  GWEN_DB_SetCharValue(gwenNode, GWEN_DB_FLAGS_DEFAULT, "kmmOnlineJobId", m_kbanking->mappingId(job).toLatin1().constData());
+
+  qDebug() << "Enqueue: " << m_kbanking->enqueueJob(abJob);
+  //delete localAcc;
+  return true;
+}
+
+bool KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
+{
+  /* get AqBanking account */
+  const QString accId = job.constTask()->responsibleAccount();
+
+  AB_ACCOUNT *abAccount = aqbAccount(accId);
+  if (!abAccount) {
+    job.addJobMessage( onlineJobMessage(onlineJobMessage::warning, "KBanking", i18n("<qt>"
+                                                                                    "The given application account <b>%1</b> "
+                                                                                    "has not been mapped to an online "
+                                                                                    "account."
+                                                                                    "</qt>",
+                                                                                    MyMoneyFile::instance()->account(accId).name())) );
+    return false;
+  }
+  //setupAccountReference(acc, ba); // needed?
+
+  AB_JOB *abJob = AB_JobSepaTransfer_new(abAccount);
+  int rv = AB_Job_CheckAvailability(abJob);
+  if (rv) {
+    qDebug("AB_ERROR_OFFSET is %i", AB_ERROR_OFFSET);
+    job.addJobMessage(onlineJobMessage(onlineJobMessage::error, "AqBanking",
+                                       QString("Sepa credit transfers for account \"%1\" are not available, error code %2.").arg(MyMoneyFile::instance()->account(accId).name(), rv)
+                                       )
+                     );
+    return false;
+  }
+  AB_TRANSACTION *AbTransaction = AB_Transaction_new();
+
+  // Recipient
+  payeeIdentifiers::ibanBic beneficiaryAcc = job.constTask()->beneficiaryTyped();
+  AB_Transaction_SetRemoteName( AbTransaction, GWEN_StringList_fromQString(beneficiaryAcc.ownerName()) );
+  AB_Transaction_SetRemoteIban( AbTransaction, beneficiaryAcc.electronicIban().toUtf8().constData() );
+  AB_Transaction_SetRemoteBic(  AbTransaction, beneficiaryAcc.fullStoredBic().toUtf8().constData() );
+
+  // Origin Account
+  AB_Transaction_SetLocalAccount(AbTransaction, abAccount);
+
+  // Purpose
+  QStringList qPurpose = job.constTask()->purpose().split('\n');
+  GWEN_STRINGLIST *purpose = GWEN_StringList_fromQStringList(qPurpose);
+  AB_Transaction_SetPurpose(AbTransaction, purpose);
+  GWEN_StringList_free(purpose);
+
+  // Reference
+  // AqBanking duplicates the string. This should be safe.
+  AB_Transaction_SetEndToEndReference(AbTransaction, job.constTask()->endToEndReference().toUtf8().constData());
+
+  // Other Fields
+  AB_Transaction_SetTextKey(AbTransaction, job.constTask()->textKey());
+  AB_Transaction_SetValue(AbTransaction, AB_Value_fromMyMoneyMoney(job.constTask()->value()));
+
+  /** @todo LOW remove Debug info */
+  qDebug() << "SetTransaction: " << AB_Job_SetTransaction(abJob, AbTransaction);
+
+  GWEN_DB_NODE *gwenNode = AB_Job_GetAppData(abJob);
+  GWEN_DB_SetCharValue(gwenNode, GWEN_DB_FLAGS_DEFAULT, "kmmOnlineJobId", m_kbanking->mappingId(job).toLatin1().constData());
+
+  qDebug() << "Enqueue: " << m_kbanking->enqueueJob(abJob);
+
+  //delete localAcc;
+  return true;
 }
 
 void KBankingPlugin::startPasswordTimer(void)
@@ -667,13 +867,58 @@ int KMyMoneyBanking::fini()
 
 int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
 {
-  int rv;
-  AB_JOB_LIST2 *oldQ;
-
   m_parent->startPasswordTimer();
 
-  rv = AB_Banking::executeJobs(_jobQueue, ctx);
-  oldQ = _jobQueue;
+  int rv = AB_Banking::executeJobs(_jobQueue, ctx);
+  if (rv != 0) {
+    qDebug() << "Sending queue by aqbanking got error no " << rv;
+  }
+
+  /** check result of each job */
+  AB_JOB_LIST2_ITERATOR* jobIter = AB_Job_List2_First( _jobQueue );
+  if (jobIter) {
+    AB_JOB* abJob = AB_Job_List2Iterator_Data(jobIter);
+
+    while(abJob) {
+      GWEN_DB_NODE* gwenNode = AB_Job_GetAppData(abJob);
+      if (gwenNode == 0) {
+        qWarning("Executed AB_Job without KMyMoney id");
+        abJob = AB_Job_List2Iterator_Next(jobIter);
+        break;
+      }
+      QString jobIdent = QString::fromUtf8(GWEN_DB_GetCharValue(gwenNode, "kmmOnlineJobId", 0, ""));
+
+      onlineJob job = m_parent->m_onlineJobQueue.value(jobIdent);
+      if (job.isNull()) {
+        // It should not be possiblie that this will happen (only if AqBanking fails heavily).
+        //! @todo correct exception text
+        qWarning("Executed a job which was not in queue. Please inform the KMyMoney developers.");
+        abJob = AB_Job_List2Iterator_Next(jobIter);
+        break;
+      }
+
+      AB_JOB_STATUS abStatus = AB_Job_GetStatus(abJob);
+
+      if (abStatus == AB_Job_StatusSent
+          || abStatus == AB_Job_StatusPending
+          || abStatus == AB_Job_StatusFinished
+          || abStatus == AB_Job_StatusError
+          || abStatus == AB_Job_StatusUnknown )
+        job.setJobSend();
+
+      if (abStatus == AB_Job_StatusFinished)
+        job.setBankAnswer( onlineJob::acceptedByBank );
+      else if ( abStatus == AB_Job_StatusError || abStatus == AB_Job_StatusUnknown)
+        job.setBankAnswer( onlineJob::sendingError );
+
+      job.addJobMessage(onlineJobMessage(onlineJobMessage::debug, "KBanking", "Job was processed"));
+      m_parent->m_onlineJobQueue.insert(jobIdent, job);
+      abJob = AB_Job_List2Iterator_Next(jobIter);
+    }
+    AB_Job_List2Iterator_free(jobIter);
+  }
+
+  AB_JOB_LIST2 *oldQ = _jobQueue;
   _jobQueue = AB_Job_List2_new();
   AB_Job_List2_FreeAll(oldQ);
 
@@ -712,6 +957,7 @@ std::list<AB_JOB*> KMyMoneyBanking::getEnqueuedJobs()
   return rl;
 }
 
+
 int KMyMoneyBanking::enqueueJob(AB_JOB *j)
 {
   assert(_jobQueue);
@@ -722,7 +968,6 @@ int KMyMoneyBanking::enqueueJob(AB_JOB *j)
 }
 
 
-
 int KMyMoneyBanking::dequeueJob(AB_JOB *j)
 {
   assert(_jobQueue);
@@ -731,6 +976,12 @@ int KMyMoneyBanking::dequeueJob(AB_JOB *j)
   emit m_parent->queueChanged();
   return 0;
 }
+
+void KMyMoneyBanking::transfer()
+{
+  //m_parent->transfer();
+}
+
 
 bool KMyMoneyBanking::askMapAccount(const MyMoneyAccount& acc)
 {
@@ -791,10 +1042,9 @@ bool KMyMoneyBanking::askMapAccount(const MyMoneyAccount& acc)
   return false;
 }
 
-QString KMyMoneyBanking::mappingId(const MyMoneyAccount& acc) const
+QString KMyMoneyBanking::mappingId(const MyMoneyObject& object) const
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
-  QString id = file->storageId() + QLatin1Char('-') + acc.id();
+  QString id = MyMoneyFile::instance()->storageId() + QLatin1Char('-') + object.id();
 
   // AqBanking does not handle the enclosing parens, so we remove it
   id.remove('{');
@@ -917,21 +1167,21 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
   sl = AB_Transaction_GetPurpose(t);
   if (sl) {
     GWEN_STRINGLISTENTRY *se;
-    bool insertSpace = false;
+    bool insertLineSep = false;
 
     se = GWEN_StringList_FirstEntry(sl);
     while (se) {
       p = GWEN_StringListEntry_Data(se);
       assert(p);
-      if (insertSpace)
-        s += ' ';
-      insertSpace = true;
-      s += QString::fromUtf8(p);
+      if (insertLineSep)
+        s += '\n';
+      insertLineSep = true;
+      s += QString::fromUtf8(p).trimmed();
       se = GWEN_StringListEntry_Next(se);
     } // while
   }
   kt.m_strMemo = s;
-  h = MyMoneyTransaction::hash(s.trimmed(), h);
+  h = MyMoneyTransaction::hash(s, h);
 
   // see, if we need to extract the payee from the memo field
   const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
@@ -960,12 +1210,8 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     }
   }
 
-  // massage whitespaces a bit:
-  // - remove leading blanks
-  // - remove trailing blanks
-  // - reduce multiple blanks to one
-  kt.m_strMemo = kt.m_strMemo.simplified();
-  kt.m_strPayee = kt.m_strPayee.simplified();
+  kt.m_strMemo = kt.m_strMemo;
+  kt.m_strPayee = kt.m_strPayee.trimmed();
 
   // date
   ti = AB_Transaction_GetDate(t);
