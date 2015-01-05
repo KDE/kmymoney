@@ -27,7 +27,7 @@
 /**
   * This tree view should be used together with a source
   * tree view to obtain a view that has the first column
-  * fixed just like in the "Frozen Colum" Qt example.
+  * fixed just like in the "Frozen Column" Qt example.
   *
   * @usage Just create this view by passing the source view
   *        as a parameter. If you intend to change the model

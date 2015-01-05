@@ -271,7 +271,7 @@ void MyMoneyStatementReader::Private::assignUniqueBankID(MyMoneySplit& s, const 
 void MyMoneyStatementReader::Private::setupPrice(MyMoneySplit &s, const MyMoneyAccount &splitAccount, const MyMoneyAccount &transactionAccount, const QDate &postDate)
 {
   if (transactionAccount.currencyId() != splitAccount.currencyId()) {
-    // a currency converstion is needed asume that split has already a proper value
+    // a currency converstion is needed assume that split has already a proper value
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneySecurity toCurrency = file->security(splitAccount.currencyId());
     MyMoneySecurity fromCurrency = file->security(transactionAccount.currencyId());

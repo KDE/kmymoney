@@ -406,7 +406,7 @@ protected:
             "        %1\n"
             "\n"
             "     Please check the source file for possible copyright\n"
-            "     and licence information.\n"
+            "     and license information.\n"
         ).arg(fileName));
         xml.writeDTD("<!DOCTYPE KMYMONEY-TEMPLATE>");
         xml.writeStartElement("","kmymoney-account-template");
@@ -444,7 +444,7 @@ int main(int argc, char *argv[])
             withID = true;
         else if (arg == "--no-level1-names")
             noLevel1Names = true;
-        else if (!arg.startsWith("--"))
+        else if (!arg.startsWith(QLatin1String("--")))
         {
             if (inFileName.isEmpty())
                 inFileName = arg;
