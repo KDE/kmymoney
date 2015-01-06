@@ -213,11 +213,11 @@ void sepaCreditTransferEdit::beneficiaryNameChanged( const QString& name )
 {
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
   if ( name.length() < settings->recipientNameMinLength() ) {
-    ui->feedbackName->setFeedback( KMyMoneyValidationFeedback::Error, i18np("A beneficiary name is needed.", "The beneficiary name must be at least %i characters long",
+    ui->feedbackName->setFeedback( KMyMoneyValidationFeedback::Error, i18np("A beneficiary name is needed.", "The beneficiary name must be at least %1 characters long",
         settings->recipientNameMinLength()
       ) );
   } else {
-    ui->feedbackName->removeFeedback( KMyMoneyValidationFeedback::Error, i18np("A beneficiary name is needed.", "The beneficiary name must be at least %i characters long",
+    ui->feedbackName->removeFeedback( KMyMoneyValidationFeedback::Error, i18np("A beneficiary name is needed.", "The beneficiary name must be at least %1 characters long",
                                                                             settings->recipientNameMinLength()
     )  );
   }
