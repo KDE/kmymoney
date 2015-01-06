@@ -189,14 +189,14 @@ signals:
   /**
    * @brief Emitted if canSendAnyTask() changed
    *
-   * At the moment it this signal can be send even if the status did not change.
+   * At the moment it this signal can be sent even if the status did not change.
    */
   void canSendAnyTaskChanged( bool );
 
   /**
    * @brief Emitted if canSendCreditTransfer changed
    *
-   * At the moment it this signal can be send even if the status did not change.
+   * At the moment it this signal can be sent even if the status did not change.
    */
   void canSendCreditTransferChanged( bool );
 

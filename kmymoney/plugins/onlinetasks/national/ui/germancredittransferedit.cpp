@@ -174,7 +174,7 @@ void germanCreditTransferEdit::purposeChanged()
                         settings->purposeLineLength())
         .append('\n');
     if (!settings->checkPurposeCharset( purpose ))
-        tooltip.append( i18n("The purpose can only contain the letters A-Z, ä,ö,ü, spaces and .,&-+*%/$ or &.") ).append('\n');
+        tooltip.append( i18n("The purpose can only contain the letters A-Z, ä,ö,ü, spaces and .,-+*%/$ or &.") ).append('\n');
     if ( !settings->checkPurposeMaxLines(purpose) )
         tooltip.append( i18np("In the purpose only a single line is allowed.", "The purpose cannot contain more than %1 lines.",
                               settings->purposeMaxLines()) )
