@@ -24,51 +24,51 @@
 class germanCreditTransferSettingsMockup : public germanOnlineTransfer::settings
 {
 public:
-  virtual validators::lengthStatus checkRecipientBankCode(const QString& bankCode) const
+  virtual validators::lengthStatus checkRecipientBankCode(const QString&) const
   {
     return validators::ok;
   }
 
-  virtual validators::lengthStatus checkRecipientAccountNumber(const QString& accountNumber) const
+  virtual validators::lengthStatus checkRecipientAccountNumber(const QString&) const
   {
     return validators::ok;
   }
 
-  virtual bool checkRecipientCharset(const QString& name) const
+  virtual bool checkRecipientCharset(const QString&) const
   {
     return true;
   }
 
-  virtual validators::lengthStatus checkRecipientLength(const QString& name) const
+  virtual validators::lengthStatus checkRecipientLength(const QString&) const
   {
     return validators::ok;
   }
 
-  virtual bool checkNameCharset(const QString& name) const
+  virtual bool checkNameCharset(const QString&) const
   {
     return true;
   }
 
-  virtual validators::lengthStatus checkNameLength(const QString& name) const
+  virtual validators::lengthStatus checkNameLength(const QString&) const
   {
     return validators::ok;
   }
 
-  virtual bool checkPurposeMaxLines(const QString& purpose) const
+  virtual bool checkPurposeMaxLines(const QString&) const
   {
     return true;
   }
 
-  virtual validators::lengthStatus checkPurposeLength(const QString& purpose) const
+  virtual validators::lengthStatus checkPurposeLength(const QString&) const
   {
     return validators::ok;
   }
 
-  virtual bool checkPurposeLineLength(const QString& purpose) const
+  virtual bool checkPurposeLineLength(const QString&) const
   {
     return true;
   }
-  virtual bool checkPurposeCharset(const QString& string) const
+  virtual bool checkPurposeCharset(const QString&) const
   {
     return true;
   }

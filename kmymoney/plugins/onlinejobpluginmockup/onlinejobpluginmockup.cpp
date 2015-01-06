@@ -37,7 +37,7 @@ void onlineJobPluginMockup::protocols(QStringList& protocolList) const
   protocolList << QLatin1String("Imaginary debugging protocol");
 }
 
-QWidget* onlineJobPluginMockup::accountConfigTab(const MyMoneyAccount& account, QString& tabName)
+QWidget* onlineJobPluginMockup::accountConfigTab(const MyMoneyAccount&, QString&)
 {
   return 0;
 }
