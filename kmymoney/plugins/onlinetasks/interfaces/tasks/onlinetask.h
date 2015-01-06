@@ -38,7 +38,7 @@ class onlineJob;
  *
  * Given this code
  * @code
-   onlineTask* taskA = // unkown;
+   onlineTask* taskA = // unknown;
    onlineTaskB *taskB = new onlineTaskB;
  * @endcode
  *

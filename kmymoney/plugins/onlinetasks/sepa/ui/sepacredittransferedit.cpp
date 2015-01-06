@@ -226,7 +226,7 @@ void sepaCreditTransferEdit::beneficiaryNameChanged( const QString& name )
 void sepaCreditTransferEdit::valueChanged()
 {
   if ( !ui->value->isValid() || !ui->value->value().isPositive() ) {
-    ui->feedbackAmount->setFeedback( KMyMoneyValidationFeedback::Error, i18n("A positiv amount to transfer is needed.") );
+    ui->feedbackAmount->setFeedback( KMyMoneyValidationFeedback::Error, i18n("A positive amount to transfer is needed.") );
     return;
   }
 
@@ -236,7 +236,7 @@ void sepaCreditTransferEdit::valueChanged()
   if ( expectedBalance < MyMoneyMoney(  account.value("maxCreditAbsolute") ) ) {
     ui->feedbackAmount->setFeedback( KMyMoneyValidationFeedback::Warning, i18n("After this credit transfer the account's balance will be below your credit limit."));
   } else if ( expectedBalance < MyMoneyMoney( account.value("minBalanceAbsolute") )) {
-    ui->feedbackAmount->setFeedback( KMyMoneyValidationFeedback::Information, i18n("After this credit transfer the account's balance will be below the minium balance."));
+    ui->feedbackAmount->setFeedback( KMyMoneyValidationFeedback::Information, i18n("After this credit transfer the account's balance will be below the minimal balance."));
   } else {
     ui->feedbackAmount->removeFeedback();
   }
@@ -246,8 +246,8 @@ void sepaCreditTransferEdit::endToEndReferenceChanged( const QString& reference 
 {
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
   if ( settings->checkEndToEndReferenceLength( reference ) == validators::tooLong) {
-    ui->feedbackReference->setFeedback( KMyMoneyValidationFeedback::Error, i18np("The end-to-end refence cannot contain more than one character.",
-                                                                                 "The end-to-end refence cannot contain more than %1 characters.",
+    ui->feedbackReference->setFeedback( KMyMoneyValidationFeedback::Error, i18np("The end-to-end reference cannot contain more than one character.",
+                                                                                 "The end-to-end reference cannot contain more than %1 characters.",
                                                                                  settings->endToEndReferenceLength()
     ) );
   } else {

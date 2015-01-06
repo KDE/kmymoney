@@ -21,7 +21,7 @@
    <item>
     <widget class="QLineEdit" name="institutionCodeEdit">
      <property name="placeholderText">
-      <string>institition code</string>
+      <string>institution code</string>
      </property>
     </widget>
    </item>

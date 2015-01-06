@@ -230,7 +230,7 @@
      <item>
       <widget class="KPushButton" name="buttonEnque">
        <property name="text">
-        <string>Enque</string>
+        <string>Enqueue</string>
        </property>
        <property name="icon">
         <iconset theme="document-save">

@@ -129,10 +129,10 @@ void germanCreditTransferEdit::beneficiaryBankCodeChanged( QString bankCode )
   ui->beneficiaryBankName->setText( bankName );
 
   if ( bankCode.length() != 8 ) {
-      ui->statusBankIdentifier->setToolTip(i18n("This bank identifier must be eigth digits long."));
+      ui->statusBankIdentifier->setToolTip(i18n("This bank identifier must be eight digits long."));
       ui->statusBankIdentifier->setColor(Qt::red);
   } else if ( bankName.isEmpty() ) {
-      ui->statusBankIdentifier->setToolTip(i18n("This bank identifier is unkown. Please re-check it."));
+      ui->statusBankIdentifier->setToolTip(i18n("This bank identifier is unknown. Please re-check it."));
       ui->statusBankIdentifier->setColor(Qt::yellow);
   } else if (bankCode.length() == 8 ) {
       ui->statusBankIdentifier->setToolTip(QString());
@@ -143,7 +143,7 @@ void germanCreditTransferEdit::beneficiaryBankCodeChanged( QString bankCode )
 void germanCreditTransferEdit::valueChanged()
 {
     if ( !ui->transferValue->isValid() || !ui->transferValue->value().isPositive() ) {
-        ui->statusAmount->setToolTip( i18n("A positiv amount to transfer is needed.") );
+        ui->statusAmount->setToolTip( i18n("A positive amount to transfer is needed.") );
         ui->statusAmount->setColor( Qt::red );
         return;
     }
@@ -155,7 +155,7 @@ void germanCreditTransferEdit::valueChanged()
         ui->statusAmount->setToolTip(i18n("After this credit transfer the account's balance will be below your credit limit."));
         ui->statusAmount->setColor(Qt::darkYellow);
     } else if ( expectedBalance < MyMoneyMoney( account.value("minBalanceAbsolute") )) {
-        ui->statusAmount->setToolTip(i18n("After this credit transfer the account's balance will be below the minium balance."));
+        ui->statusAmount->setToolTip(i18n("After this credit transfer the account's balance will be below the minimal balance."));
         ui->statusAmount->setColor(Qt::yellow);
     } else {
         ui->statusAmount->setToolTip(QString());
