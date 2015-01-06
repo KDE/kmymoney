@@ -162,8 +162,8 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
     //! @todo when is gwenKdeGui deleted?
     gwenKdeGui *gui = new gwenKdeGui();
     GWEN_Gui_SetGui(gui->getCInterface());
-    GWEN_Logger_SetLevel(0, GWEN_LoggerLevel_Info);
-    GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Debug);
+    GWEN_Logger_SetLevel(0, GWEN_LoggerLevel_Critical);
+
     if (m_kbanking->init() == 0) {
       // Tell the host application to load my GUI component
       setComponentData(KBankingFactory::componentData());
@@ -178,6 +178,8 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
 
       // load protocol conversion list
       loadProtocolConversion();
+      GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Critical);
+
     } else {
       qWarning("Could not initialize KBanking online banking interface");
       delete m_kbanking;
