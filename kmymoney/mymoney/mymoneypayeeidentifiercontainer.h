@@ -51,10 +51,10 @@ public:
   void addPayeeIdentifier( const unsigned int position, const payeeIdentifier& ident );
 
   void removePayeeIdentifier( const payeeIdentifier& ident );
-  void removePayeeIdentifier( const unsigned int index );
+  void removePayeeIdentifier( const int index );
 
   void modifyPayeeIdentifier( const payeeIdentifier& ident );
-  void modifyPayeeIdentifier( const unsigned int index, const payeeIdentifier& ident );
+  void modifyPayeeIdentifier( const int index, const payeeIdentifier& ident );
 
   void resetPayeeIdentifiers( const QList< payeeIdentifier > list );
 

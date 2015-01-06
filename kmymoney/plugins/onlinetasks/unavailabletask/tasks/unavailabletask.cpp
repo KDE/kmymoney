@@ -31,7 +31,7 @@ QString unavailableTask::jobTypeName() const
 
 QString unavailableTask::storagePluginIid() const
 {
-  return false;
+  return QString();
 }
 
 bool unavailableTask::sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const

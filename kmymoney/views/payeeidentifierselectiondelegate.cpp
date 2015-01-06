@@ -45,6 +45,9 @@ payeeIdentifierSelectionDelegate::payeeIdentifierSelectionDelegate(QObject* pare
 
 QWidget* payeeIdentifierSelectionDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
+  Q_UNUSED(option);
+  Q_UNUSED(index);
+
   payeeIdentifierTypeSelectionWidget* comboBox = new payeeIdentifierTypeSelectionWidget(parent);
   comboBox->setFrame(false);
   connect( comboBox, SIGNAL(commitData(QWidget*)), this, SIGNAL(commitData(QWidget*)));

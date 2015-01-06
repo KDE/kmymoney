@@ -236,7 +236,7 @@ bool germanOnlineTransferImpl::sqlSave(QSqlDatabase databaseConnection, const QS
   );
   bindValuesToQuery( query, onlineJobId );
   if ( !query.exec() ) {
-    qWarning( qPrintable(query.lastError().text()) );
+    qWarning("Error while inserting national order '%s': %s", qPrintable(onlineJobId), qPrintable(query.lastError().text()));
     return false;
   }
   return true;
@@ -258,7 +258,7 @@ bool germanOnlineTransferImpl::sqlModify(QSqlDatabase databaseConnection, const 
     " WHERE id = :id");
   bindValuesToQuery( query, onlineJobId );
   if ( !query.exec() ) {
-    qWarning( qPrintable(QLatin1String("Could not modify national order: ") + query.lastError().text()) );
+    qWarning("Could not modify national order: %s", qPrintable(query.lastError().text()));
     return false;
   }
   return true;

@@ -39,8 +39,10 @@ ibanBicStoragePlugin::ibanBicStoragePlugin(QObject* parent, const QVariantList& 
 
 }
 
+/** @todo to be implemented */
 bool ibanBicStoragePlugin::removePluginData(QSqlDatabase connection)
 {
+  Q_UNUSED(connection);
   return false;
 }
 
@@ -51,7 +53,7 @@ bool ibanBicStoragePlugin::setupDatabase(QSqlDatabase connection)
   query.prepare("SELECT versionMajor FROM kmmPluginInfo WHERE iid = ?");
   query.bindValue(0, iid());
   if (!query.exec()) {
-    qWarning( qPrintable(QLatin1String("Could not execute query for ibanBicStoragePlugin:") + query.lastError().text()) );
+    qWarning("Could not execute query for ibanBicStoragePlugin: %s", qPrintable(query.lastError().text()));
     return false;
   }
 
@@ -70,7 +72,7 @@ bool ibanBicStoragePlugin::setupDatabase(QSqlDatabase connection)
       "  name text"
       " );"
     )) {
-      qWarning( qPrintable(query.lastError().text()) );
+      qWarning("Could not create table for ibanBicStoragePlugin: %s", qPrintable(query.lastError().text()));
       return false;
     }
 
@@ -81,7 +83,7 @@ bool ibanBicStoragePlugin::setupDatabase(QSqlDatabase connection)
     query.bindValue(3, "DROP TABLE kmmIbanBic;");
     if ( query.exec() )
       return true;
-    qWarning( qPrintable(query.lastError().text()) );
+    qWarning("Could not save plugin info for ibanBicStoragePlugin (%s): %s", qPrintable(iid()), qPrintable(query.lastError().text()));
     return false;
   }
 

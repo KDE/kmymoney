@@ -82,6 +82,7 @@ Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex& index) const
 
 int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
 {
+  Q_UNUSED(parent);
   if (m_data.isNull())
     return 0;
   // Always a row more which creates new entries
@@ -91,6 +92,9 @@ int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
 /** @brief unused at the moment */
 bool payeeIdentifierModel::insertRows(int row, int count, const QModelIndex& parent)
 {
+  Q_UNUSED(row);
+  Q_UNUSED(count);
+  Q_UNUSED(parent);
   return false;
 }
 
@@ -103,7 +107,7 @@ bool payeeIdentifierModel::removeRows(int row, int count, const QModelIndex& par
     return false;
 
   beginRemoveRows(parent, row, row+count-1);
-  for( unsigned int i = row; i < row+count; ++i) {
+  for( int i = row; i < row+count; ++i) {
     m_data->removePayeeIdentifier(i);
   }
   endRemoveRows();

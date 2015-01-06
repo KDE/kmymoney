@@ -276,7 +276,7 @@ bool sepaOnlineTransferImpl::sqlSave(QSqlDatabase databaseConnection, const QStr
   );
   bindValuesToQuery( query, onlineJobId );
   if ( !query.exec() ) {
-    qWarning( qPrintable(query.lastError().text()) );
+    qWarning("Error while saving sepa order '%s': %s", qPrintable(onlineJobId), qPrintable(query.lastError().text()));
     return false;
   }
   return true;
@@ -299,7 +299,7 @@ bool sepaOnlineTransferImpl::sqlModify(QSqlDatabase databaseConnection, const QS
     " WHERE id = :id");
   bindValuesToQuery( query, onlineJobId );
   if ( !query.exec() ) {
-    qWarning( qPrintable(QLatin1String("Could not modify sepaOnlineTransfer: ") + query.lastError().text()) );
+    qWarning("Could not modify sepaOnlineTransfer '%s': %s", qPrintable(onlineJobId), qPrintable(query.lastError().text()));
     return false;
   }
   return true;

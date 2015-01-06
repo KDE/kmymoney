@@ -25,11 +25,13 @@ const QString sepaStoragePlugin::iid = QLatin1String("org.kmymoney.creditTransfe
 sepaStoragePlugin::sepaStoragePlugin(QObject* parent, const QVariantList& options)
   : storagePlugin( parent )
 {
-
+  Q_UNUSED(options);
 }
 
+/** @todo implement */
 bool sepaStoragePlugin::removePluginData(QSqlDatabase connection)
 {
+  Q_UNUSED(connection);
   return false;
 }
 
@@ -40,7 +42,7 @@ bool sepaStoragePlugin::setupDatabase(QSqlDatabase connection)
   query.prepare("SELECT versionMajor FROM kmmPluginInfo WHERE iid = ?");
   query.bindValue(0, iid);
   if (!query.exec()) {
-    qWarning( qPrintable(QLatin1String("Could not execute query for sepaStoragePlugin:") + query.lastError().text()) );
+    qWarning("Could not execute query for sepaStoragePlugin: %s", qPrintable(query.lastError().text()));
     return false;
   }
 
@@ -65,7 +67,7 @@ bool sepaStoragePlugin::setupDatabase(QSqlDatabase connection)
       "  subTextKey int"
       " );"
     )) {
-      qWarning( qPrintable(query.lastError().text()) );
+      qWarning("Error while creating table kmmSepaOrders: %s", qPrintable(query.lastError().text()));
       return false;
     }
 
@@ -76,7 +78,7 @@ bool sepaStoragePlugin::setupDatabase(QSqlDatabase connection)
     query.bindValue(3, "DROP TABLE kmmSepaOrders;");
     if ( query.exec() )
       return true;
-    qWarning( qPrintable(query.lastError().text()) );
+    qWarning("Error while inserting kmmPluginInfo for '%s': %s", qPrintable(iid), qPrintable(query.lastError().text()));
     return false;
   }
 

@@ -56,10 +56,9 @@ void onlineJobModel::load()
 void onlineJobModel::unload()
 {
   if (rowCount() != 0) {
-    unsigned int oldRowCount = rowCount();
-    beginRemoveRows(QModelIndex(), 0, rowCount());
+    beginResetModel();
     m_jobIdList.clear();
-    endRemoveRows();
+    endResetModel();
   }
 }
 

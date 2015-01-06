@@ -117,7 +117,7 @@ bool ibanBic::writeQuery(QSqlQuery& query, const QString& id) const
   query.bindValue(":bic", (bic.isEmpty()) ? QVariant(QVariant::String) : bic);
   query.bindValue(":name", ownerName());
   if ( !query.exec() ) {
-    qWarning( qPrintable(query.lastError().text()) );
+    qWarning("Error while saving ibanbic data for '%s': %s", qPrintable(id), qPrintable(query.lastError().text()) );
     return false;
   }
   return true;
@@ -146,7 +146,7 @@ bool ibanBic::sqlRemove(QSqlDatabase databaseConnection, const QString& objectId
   query.prepare("DELETE FROM kmmIbanBic WHERE id = ?;");
   query.bindValue(0, objectId);
   if ( !query.exec() ) {
-    qWarning( qPrintable(query.lastError().text()) );
+    qWarning("Error while deleting ibanbic data '%s': %s", qPrintable(objectId), qPrintable(query.lastError().text()) );
     return false;
   }
   return true;

@@ -36,17 +36,17 @@ public:
   virtual bool isValid() const { return true; }
   virtual QString jobTypeName() const { return QLatin1String("Dummy credit transfer"); }
   virtual QString storagePluginIid() const { return QString(); }
-  virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const { return false; }
-  virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const { return false; }
-  virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const { return false; }
+  virtual bool sqlModify(QSqlDatabase, const QString&) const { return false; }
+  virtual bool sqlSave(QSqlDatabase, const QString&) const { return false; }
+  virtual bool sqlRemove(QSqlDatabase, const QString&) const { return false; }
 
 protected:
 
   virtual onlineTaskDummy3* clone() const { return (new onlineTaskDummy3); }
-  virtual bool hasReferenceTo(const QString &id) const { return false; }
+  virtual bool hasReferenceTo(const QString&) const { return false; }
   virtual void writeXML(QDomDocument&, QDomElement&) const {}
-  virtual onlineTaskDummy3* createFromXml(const QDomElement &element) const { return (new onlineTaskDummy3); }
-  virtual onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const { return (new onlineTaskDummy3); }
+  virtual onlineTaskDummy3* createFromXml(const QDomElement &) const { return (new onlineTaskDummy3); }
+  virtual onlineTask* createFromSqlDatabase(QSqlDatabase, const QString&) const { return (new onlineTaskDummy3); }
   virtual QString responsibleAccount() const { return QString(); };
 };
 

@@ -52,7 +52,7 @@ void MyMoneyPayeeIdentifierContainer::removePayeeIdentifier(const payeeIdentifie
   m_payeeIdentifiers.removeOne(ident);
 }
 
-void MyMoneyPayeeIdentifierContainer::removePayeeIdentifier(const unsigned int index)
+void MyMoneyPayeeIdentifierContainer::removePayeeIdentifier(const int index)
 {
   Q_ASSERT(m_payeeIdentifiers.count() > index && index >= 0);
   m_payeeIdentifiers.removeAt(index);
@@ -69,7 +69,7 @@ void MyMoneyPayeeIdentifierContainer::modifyPayeeIdentifier(const payeeIdentifie
   }
 }
 
-void MyMoneyPayeeIdentifierContainer::modifyPayeeIdentifier(const unsigned int index, const payeeIdentifier& ident)
+void MyMoneyPayeeIdentifierContainer::modifyPayeeIdentifier(const int index, const payeeIdentifier& ident)
 {
   Q_ASSERT(m_payeeIdentifiers.count() > index && index >= 0);
   m_payeeIdentifiers[index] = ident;

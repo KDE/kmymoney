@@ -3364,6 +3364,7 @@ void MyMoneyStorageSql::readTags(const QList<QString>& pid)
 
 const QMap<QString, onlineJob> MyMoneyStorageSql::fetchOnlineJobs(const QStringList& idList, bool forUpdate) const
 {
+  Q_UNUSED(forUpdate);
   DBG("*** Entering MyMoneyStorageSql::fetchOnlineJobs");
   MyMoneyDbTransaction trans(const_cast <MyMoneyStorageSql&>(*this), Q_FUNC_INFO);
   if (m_displayStatus)

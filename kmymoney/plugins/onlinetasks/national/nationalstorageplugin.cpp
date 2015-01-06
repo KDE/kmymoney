@@ -28,8 +28,10 @@ nationalStoragePlugin::nationalStoragePlugin(QObject* parent, const QVariantList
   Q_UNUSED( options );
 }
 
+/** @todo to be implemented */
 bool nationalStoragePlugin::removePluginData(QSqlDatabase connection)
 {
+  Q_UNUSED(connection)
   return false;
 }
 
@@ -40,7 +42,7 @@ bool nationalStoragePlugin::setupDatabase(QSqlDatabase connection)
   query.prepare("SELECT versionMajor FROM kmmPluginInfo WHERE iid = ?");
   query.bindValue(0, iid);
   if (!query.exec()) {
-    qWarning( qPrintable(QLatin1String("Could not execute query for nationalStoragePlugin:") + query.lastError().text()) );
+    qWarning("Could not execute query for nationalStoragePlugin: %s", qPrintable(query.lastError().text()));
     return false;
   }
 
@@ -64,7 +66,7 @@ bool nationalStoragePlugin::setupDatabase(QSqlDatabase connection)
       "  subTextKey int"
       " );"
     )) {
-      qWarning( qPrintable(query.lastError().text()) );
+      qWarning("Error while creating table 'kmmNationalOrders': %s", qPrintable(query.lastError().text()));
       return false;
     }
 
@@ -75,7 +77,7 @@ bool nationalStoragePlugin::setupDatabase(QSqlDatabase connection)
     query.bindValue(3, "DROP TABLE kmmNationalOrders;");
     if ( query.exec() )
       return true;
-    qWarning( qPrintable(query.lastError().text()) );
+    qWarning("Error while saving plugin info for %s: %s", qPrintable(iid), qPrintable(query.lastError().text()));
     return false;
   }
 
