@@ -10,9 +10,6 @@
     <height>617</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Transfer Form</string>
-  </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>
   </property>
