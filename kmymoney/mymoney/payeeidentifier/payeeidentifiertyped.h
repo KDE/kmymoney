@@ -73,9 +73,12 @@ payeeIdentifierTyped<T>::payeeIdentifierTyped(const payeeIdentifierTyped& other)
 }
 
 template< class T >
-payeeIdentifierTyped<T>& payeeIdentifierTyped<T>::operator=(const payeeIdentifierTyped& other)
+payeeIdentifierTyped<T>& payeeIdentifierTyped<T>::operator=(const payeeIdentifierTyped<T>& other)
 {
-  return *this;
+  payeeIdentifierTyped<T>& ret = static_cast<payeeIdentifierTyped<T>&>(payeeIdentifier::operator=(other));
+  // This operation is save even if this == &other
+  ret.m_payeeIdentifierTyped = other.m_payeeIdentifierTyped;
+  return ret;
 }
 
 template< class T >
