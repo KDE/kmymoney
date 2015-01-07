@@ -312,8 +312,15 @@ bool KBankingPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContai
 
 AB_ACCOUNT* KBankingPlugin::aqbAccount(const MyMoneyAccount& acc) const
 {
-  if (m_kbanking == 0)
+  if (m_kbanking == 0) {
     return 0;
+  }
+
+  // certainly looking for an expense or income account does not make sense at this point
+  // so we better get out right away
+  if (acc.isIncomeExpense()) {
+    return 0;
+  }
 
   AB_ACCOUNT *ab_acc = AB_Banking_GetAccountByAlias(m_kbanking->getCInterface(), m_kbanking->mappingId(acc).toUtf8().data());
   // if the account is not found, we temporarily scan for the 'old' mapping (the one w/o the file id)
