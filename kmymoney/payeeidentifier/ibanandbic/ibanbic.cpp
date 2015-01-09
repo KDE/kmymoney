@@ -195,7 +195,7 @@ QString ibanBic::bic() const
 {
   if ( m_bic.isNull() ) {
     const QString bic = getIbanBicData()->iban2Bic( m_iban );
-    if ( bic.length() == 11 && bic.endsWith("XXX") )
+    if ( bic.length() == 11 && bic.endsWith(QLatin1String("XXX")) )
       return bic.left(8);
     return bic;
   }

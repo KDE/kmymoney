@@ -32,7 +32,7 @@ Rectangle {
     /** @brief Duration of each takt in ms */
     property int clockSetting: 50
 
-    /** @brief suggested minumum with of this component */
+    /** @brief suggested minimum with of this component */
     property int minimumWidth: 100
 
     /** @brief Data to transfer as HEX code in a string */
