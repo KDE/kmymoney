@@ -76,12 +76,12 @@ public:
    *
    * @return The returned task must be of type convertedTask() or 0. Caller takes ownership.
    *
-   * @param source task to convert (do not modify it!). It is allways of one of the types convertibleTasks()
+   * @param source task to convert (do not modify it!). It is always of one of the types convertibleTasks()
    * @param convertResult OUT convertType, if convertionLossy you should provide a userInformation
    * @param userInformation OUT a translated string with description which data was lost during convertion.
    * This string is shown by the ui to the user using a KMessageWidget.
    *
-   * Never forget to set convertResult! You should allways set userInformation and convertResult. Code for copy & paste:
+   * Never forget to set convertResult! You should always set userInformation and convertResult. Code for copy & paste:
    * @code
    * userInformation = QString();
    * convertResult = convertImpossible;

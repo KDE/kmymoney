@@ -90,7 +90,7 @@ QString ibanBicData::iban2Bic(const QString& iban)
   query.bindValue(1, countryCode);
 
   if (!query.exec()) {
-    qWarning() << QString("Could not execute query on \"%1\" to recive BIC. Error: %2").arg(db.databaseName()).arg(query.lastError().text());
+    qWarning() << QString("Could not execute query on \"%1\" to receive BIC. Error: %2").arg(db.databaseName()).arg(query.lastError().text());
     return QString();
   }
 
@@ -127,7 +127,7 @@ QString ibanBicData::bankNameByBic(QString bic)
   query.bindValue(0, bic);
 
   if (!query.exec()) {
-    qWarning() << QString("Could not execute query on \"%1\" to recive bank name. Error: %2").arg(db.databaseName()).arg(query.lastError().text());
+    qWarning() << QString("Could not execute query on \"%1\" to receive bank name. Error: %2").arg(db.databaseName()).arg(query.lastError().text());
     return QString();
   }
 
@@ -173,7 +173,7 @@ QPair< QString, QString > ibanBicData::bankNameAndBic(const QString& iban)
   query.bindValue(1, countryCode);
 
   if (!query.exec()) {
-    qWarning() << QString("Could not execute query on \"%1\" to recive BIC and name. Error: %2").arg(db.databaseName()).arg(query.lastError().text());
+    qWarning() << QString("Could not execute query on \"%1\" to receive BIC and name. Error: %2").arg(db.databaseName()).arg(query.lastError().text());
     return QPair<QString, QString>();
   }
 
@@ -259,7 +259,7 @@ QSqlDatabase ibanBicData::createDatabaseConnection(const QString& database)
   // Need to create new connection, locate database
   QString path = KGlobal::dirs()->locate("data", QLatin1String("kmymoney/ibanbicdata/") + database);
   if ( path.isEmpty() ) {
-    kWarning() << QString("Could not locate database file \"%1\" to recive IBAN and BIC data.").arg(database);
+    kWarning() << QString("Could not locate database file \"%1\" to receive IBAN and BIC data.").arg(database);
     return QSqlDatabase();
   }
 
@@ -269,7 +269,7 @@ QSqlDatabase ibanBicData::createDatabaseConnection(const QString& database)
   db.setConnectOptions("QSQLITE_OPEN_READONLY=1;QSQLITE_ENABLE_SHARED_CACHE=1;");
   const bool opened = db.open();
   if ( !opened ) {
-    kWarning() << QString("Could not open database \"%1\" to recive IBAN and BIC data.").arg(path);
+    kWarning() << QString("Could not open database \"%1\" to receive IBAN and BIC data.").arg(path);
   }
 
   return db;

@@ -76,7 +76,7 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
       buffer[tan.length()]=0;
       return 0;
     }
-    qDebug( "Recieved Tan with incorrect length by ui." );
+    qDebug( "Received Tan with incorrect length by ui." );
     return GWEN_ERROR_INTERNAL;
   }
 

@@ -177,7 +177,7 @@ public:
   bool canSendCreditTransfer();
 
   /**
-   * @brief See if a online task has a sepcified base
+   * @brief See if a online task has a specified base
    *
    * This is usable if you want to see if e.g. taskIid is
    * of type creditTransfer
@@ -224,7 +224,7 @@ private:
   static onlineJobAdministration m_instance;
 
   /**
-   * @brief Find onlinePlugin which is resposible for accountId
+   * @brief Find onlinePlugin which is responsible for accountId
    * @param accountId
    * @return Pointer to onlinePluginExtended, do not delete.
    */

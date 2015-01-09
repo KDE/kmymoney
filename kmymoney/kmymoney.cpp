@@ -7467,7 +7467,7 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
 
       if (  Q_UNLIKELY( executedJobs.size() != jobsToExecute.size() ) ) {
         // OnlinePlugin did not return all jobs
-        qWarning() << "Error saving send online tasks. After restart you should see at minimum all succesfully executed jobs marked send. Imperfect plugin: " << pluginExt->objectName();
+        qWarning() << "Error saving send online tasks. After restart you should see at minimum all successfully executed jobs marked send. Imperfect plugin: " << pluginExt->objectName();
       }
 
     } else {

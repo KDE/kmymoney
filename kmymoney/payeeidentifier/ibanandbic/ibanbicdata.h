@@ -58,7 +58,7 @@ public:
    *
    * The bic is always 11 characters long.
    *
-   * @return QString::isNull() == true means an internal error occoured, QString::isEmpty() == true means there is no BIC
+   * @return QString::isNull() == true means an internal error occurred, QString::isEmpty() == true means there is no BIC
    */
   QString iban2Bic( const QString& iban );
 
@@ -70,7 +70,7 @@ public:
    * first: bic, always 11 characters long.
    * second: instution name
    *
-   * QString::isNull() == true means an internal error occoured, QString::isEmpty() == true means there is no data
+   * QString::isNull() == true means an internal error occurred, QString::isEmpty() == true means there is no data
    */
   QPair<QString, QString> bankNameAndBic( const QString& iban );
 

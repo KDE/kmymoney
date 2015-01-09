@@ -23,7 +23,7 @@
 #include "onlinejobadministration.h"
 
 /**
- * @brief Convient template if you know the task type of an onlineJob
+ * @brief Convenient template if you know the task type of an onlineJob
  *
  * To prevent using onlineJob.task<T>() repeatingly you can use this class
  * where task() has a defined return type.

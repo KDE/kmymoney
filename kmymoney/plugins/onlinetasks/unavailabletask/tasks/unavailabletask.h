@@ -60,7 +60,7 @@ private:
   explicit unavailableTask( const QDomElement& element );
 
   /**
-   * The data recieved by createFromXml(). Written back by writeXML().
+   * The data received by createFromXml(). Written back by writeXML().
    */
   QDomElement m_data;
 };

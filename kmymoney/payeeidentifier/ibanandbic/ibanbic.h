@@ -148,10 +148,10 @@ public:
   /**
    * @brief Converts an iban to human readable format
    *
-   * Grouped in four letters strings seperated by a white space.
+   * Grouped in four letters strings separated by a white space.
    *
    * @param iban an iban, not needed to be canonical, valid or completed
-   * @param seperator Overwrite the default seperator (e.g. a smaller space)
+   * @param seperator Overwrite the default separator (e.g. a smaller space)
    */
   static QString ibanToPaperformat( const QString& iban, const QString& seperator = QLatin1String(" ") );
 
@@ -222,7 +222,7 @@ private:
    * @brief Business Identifier Code
    * According to ISO 9362
    *
-   * A tailing XXX must be ommited. All characters must be upper case.
+   * A trailing XXX must be ommitted. All characters must be upper case.
    */
   QString m_bic;
 

@@ -88,7 +88,7 @@ friend class onlineJobAdministration
  * onlineTask.
  *
  * Due to the huge amount of possible onlineTasks they are loaded during runtime. Which also allows a third party
- * online plugin to introduce its own tasks. However tasks are seperated from the onlinePlugins to allow more than one
+ * online plugin to introduce its own tasks. However tasks are separated from the onlinePlugins to allow more than one
  * plugin to use the same task. Usually you will have an interface and an implementation (which derives from the
  * interface) to enable this.
  *
@@ -165,7 +165,7 @@ protected:
    * the correct onlinePlugin which can execute this job. If the job is related to more
    * than one account (e.g. a password change) select a random one.
    *
-   * You can make this method public if it is usefull for you.
+   * You can make this method public if it is useful for you.
    *
    * @return accountId
    */

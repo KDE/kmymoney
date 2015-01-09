@@ -101,7 +101,7 @@ public:
    * @brief Check if this payeeIdentifier contains correct data
    *
    * You should be able to handle invalid data. It is the task of the ui to prevent
-   * invalid data. But during several proceedures invalid data could be used (e.g.
+   * invalid data. But during several procedures invalid data could be used (e.g.
    * during import).
    */
   virtual bool isValid() const = 0;

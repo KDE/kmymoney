@@ -133,7 +133,7 @@ public:
     acceptedByBank /**< bank definetly confirmed the job */,
     rejectedByBank /**< bank definetly rejected this job */,
     abortedByUser /**< aborted by user during sending */,
-    sendingError /**< an error occured, the job is certainly not executed by the bank */
+    sendingError /**< an error occurred, the job is certainly not executed by the bank */
   };
 
   /**

@@ -49,7 +49,7 @@ public:
 
 #include <QObject>
 /**
- * @brief Helper class which is reciever for several signals
+ * @brief Helper class which is receiver for several signals
  */
 class gwenKdeGuiTanResult : public QObject
 {
