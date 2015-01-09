@@ -5,6 +5,7 @@ Name=Enables plugins to store data in the sql database
 Name[en_GB]=Enables plugins to store data in the sql database
 Name[nl]=Schakelt plug-ins in om gegevens in de sql-database op te slaan
 Name[pt]=Permite aos 'plugins' armazenarem dados na base de dados SQL
+Name[pt_BR]=Permite que os plugins armazenem dados no banco de dados SQL
 Name[sv]=Gör det möjligt för insticksprogram att lagra data i SQL-databasen
 Name[uk]=Надає змогу додаткам зберігати дані у базі даних SQL
 Name[x-test]=xxEnables plugins to store data in the sql databasexx
