@@ -260,7 +260,7 @@ void sepaCreditTransferEdit::purposeChanged()
   const QString purpose = ui->purpose->toPlainText();
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
 
-  QString message = QString();
+  QString message;
   if (!settings->checkPurposeLineLength( purpose ))
     message = i18np("The maximal line length of %1 character per line is exceeded.", "The maximal line length of %1 characters per line is exceeded.",
                     settings->purposeLineLength())

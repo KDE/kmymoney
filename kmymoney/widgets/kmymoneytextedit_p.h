@@ -30,10 +30,10 @@ public:
   void setMaxLength( const int& length );
   void setMaxLines( const int& lines );
   void setMaxLineLength( const int& length );
-  
+
 protected:
   virtual void highlightBlock(const QString& text);
-    
+
 private:
   QString m_allowedChars;
   int m_maxLines;

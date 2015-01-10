@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PAYEEIDENTIFIERUNAVAILABLE_H
-#define PAYEEIDENTIFIERUNAVAILABLE_H
+#ifndef PAYEEIDENTIFIERS_PAYEEIDENTIFIERUNAVAILABLE_H
+#define PAYEEIDENTIFIERS_PAYEEIDENTIFIERUNAVAILABLE_H
 
 #include "payeeidentifier/payeeidentifierdata.h"
 #include <QDomElement>
@@ -70,4 +70,4 @@ private:
 
 } // namespace payeeidentifiers
 
-#endif // PAYEEIDENTIFIERUNAVAILABLE_H
+#endif // PAYEEIDENTIFIERS_PAYEEIDENTIFIERUNAVAILABLE_H

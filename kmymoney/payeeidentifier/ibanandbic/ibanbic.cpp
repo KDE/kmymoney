@@ -262,7 +262,7 @@ QString ibanBic::ibanToElectronic(const QString& iban)
   return canonicalIban;
 }
 
-QString ibanBic::ibanToPaperformat(const QString& iban, const QString& seperator)
+QString ibanBic::ibanToPaperformat(const QString& iban, const QString& separator)
 {
   QString paperformat;
   const int length = iban.length();
@@ -272,7 +272,7 @@ QString ibanBic::ibanToPaperformat(const QString& iban, const QString& seperator
     if ( letter.isLetterOrNumber() ) {
       ++letterCounter;
       if ( letterCounter == 5 ) {
-        paperformat.append(seperator);
+        paperformat.append(separator);
         letterCounter = 1;
       }
       paperformat.append(letter);

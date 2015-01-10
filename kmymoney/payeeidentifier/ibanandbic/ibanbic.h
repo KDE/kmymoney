@@ -79,7 +79,7 @@ public:
    * @brief Returns iban in human readable format
    * @see toPaperformatIban()
    */
-  QString paperformatIban( const QString& seperator = QLatin1String(" ") ) const;
+  QString paperformatIban( const QString& separator = QLatin1String(" ") ) const;
 
   /**
    * @brief Set Business Identifier Code
@@ -151,7 +151,7 @@ public:
    * Grouped in four letters strings separated by a white space.
    *
    * @param iban an iban, not needed to be canonical, valid or completed
-   * @param seperator Overwrite the default separator (e.g. a smaller space)
+   * @param separator Overwrite the default separator (e.g. a smaller space)
    */
   static QString ibanToPaperformat( const QString& iban, const QString& seperator = QLatin1String(" ") );
 

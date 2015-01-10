@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TYPESELECTIONDELEGATE_H
-#define TYPESELECTIONDELEGATE_H
+#ifndef PAYEEIDENTIFIERSELECTIONDELEGATE_H
+#define PAYEEIDENTIFIERSELECTIONDELEGATE_H
 
 #include <QStyledItemDelegate>
 #include <QComboBox>
@@ -47,4 +47,4 @@ private slots:
   void itemSelected(int index);
 };
 
-#endif // TYPESELECTIONDELEGATE_H
+#endif // PAYEEIDENTIFIERSELECTIONDELEGATE_H
