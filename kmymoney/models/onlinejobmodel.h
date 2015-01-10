@@ -1,3 +1,21 @@
+/*
+ * This file is part of KMyMoney, A Personal Finance Manager for KDE
+ * Copyright (C) 2014-2015 Christian Dávid <christian-david@web.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #ifndef ONLINEJOBMODEL_H
 #define ONLINEJOBMODEL_H
 
@@ -10,7 +28,7 @@ class Models;
 class onlineJobModel : public QAbstractTableModel
 {
     Q_OBJECT
-public: 
+public:
   /**
    * @brief Item Data roles for onlineJobs
    * In addition to Qt::ItemDataRole
@@ -36,7 +54,7 @@ public:
   bool removeRows ( int row, int count, const QModelIndex & parent = QModelIndex() );
 
 signals:
-    
+
 public slots:
   void reloadAll();
 
@@ -47,12 +65,12 @@ public slots:
   /** @brief Load data from MyMoneyFile */
   void load();
   void unload();
-  
+
 protected:
   /** Only @ref Models should be able to construct this class */
   explicit onlineJobModel(QObject *parent = 0);
   friend class Models;
-  
+
 private:
   QStringList m_jobIdList;
 
