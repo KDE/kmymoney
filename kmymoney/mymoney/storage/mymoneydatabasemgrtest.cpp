@@ -2326,7 +2326,7 @@ void MyMoneyDatabaseMgrTest::testAddOnlineJob()
   QCOMPARE(m->onlineJobList().count(), 0);
   m->setDirty();
 
-  QEXPECT_FAIL("", "Test not fully implemented, yet.", QTest::Abort);
+  QSKIP("Test not fully implemented, yet.", SkipAll);
 
   try {
     m->addOnlineJob(job);
@@ -2359,7 +2359,7 @@ void MyMoneyDatabaseMgrTest::testModifyOnlineJob()
   testAddOnlineJob();
   m->setDirty();
 
-  QEXPECT_FAIL("", "Test not fully implemented, yet.", QTest::Abort);
+  QSKIP("Test not fully implemented, yet.", SkipAll);
 
   // update online job
   try {
@@ -2393,7 +2393,7 @@ void MyMoneyDatabaseMgrTest::testRemoveOnlineJob()
   testAddOnlineJob();
   m->setDirty();
 
-  QEXPECT_FAIL("", "Test not fully implemented, yet.", QTest::Abort);
+  QSKIP("Test not fully implemented, yet.", SkipAll);
 
   try {
     m->removeOnlineJob(job);
