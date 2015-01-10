@@ -157,7 +157,7 @@ int MyMoneyStorageSql::open(const KUrl& url, int openMode, bool clear)
           buildError(QSqlQuery(*this), Q_FUNC_INFO, "opening database");
           rc = 1;
         } else {
-          rc = createTables(); // check all tables are present, create if not (we may add tables at some time)
+          rc = createTables(); // check all tables are present, create if not
         }
         break;
       case QIODevice::WriteOnly:   // SaveAs Database - if exists, must be empty, if not will create
@@ -282,7 +282,7 @@ int MyMoneyStorageSql::upgradeDb()
   q.prepare("SELECT version FROM kmmFileInfo;");
   if (!q.exec() || !q.next()) { // krazy:exclude=crashy
     if (!m_newDatabase) {
-      buildError(q, Q_FUNC_INFO, "Error retrieving file info(version)");
+      buildError(q, Q_FUNC_INFO, "Error retrieving file info (version)");
       return(1);
     } else {
       m_dbVersion = m_db.currentVersion();
@@ -657,7 +657,7 @@ int MyMoneyStorageSql::upgradeToV7()
   if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
     return (1);
 
-  m_tags = getRecCount("kmmTags");
+  m_tags = 0;
   return 0;
 }
 
@@ -729,7 +729,7 @@ long unsigned MyMoneyStorageSql::getRecCount(const QString& table) const
   return ((unsigned long) q.value(0).toULongLong());
 }
 
-int MyMoneyStorageSql::createTables(int version)
+int MyMoneyStorageSql::createTables()
 {
   DBG("*** Entering MyMoneyStorageSql::createTables");
   // check tables, create if required
@@ -742,7 +742,7 @@ int MyMoneyStorageSql::createTables(int version)
 
   for (QMap<QString, MyMoneyDbTable>::ConstIterator tt = m_db.tableBegin(); tt != m_db.tableEnd(); ++tt) {
     if (!lowerTables.contains(tt.key().toLower())) {
-      createTable(tt.value(), version);
+      createTable(tt.value());
     }
   }
 
@@ -753,10 +753,18 @@ int MyMoneyStorageSql::createTables(int version)
     }
   }
 
-  // get the current db version from kmmFileInfo.
-  // upgrade if necessary.
+  // The columns to store version info changed with version 6. Prior versions are not supported here but an error is prevented and
+  // an old behaviour is used: call upgradeDb().
+  m_dbVersion = m_db.currentVersion();
+  if (m_dbVersion >= 6) {
+    q.prepare(QLatin1String("INSERT INTO kmmFileInfo (version, fixLevel) VALUES(?,?);"));
+    q.bindValue(0, m_dbVersion);
+    q.bindValue(1, m_storage->fileFixVersion());
+    if (!q.exec())
+      throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("Saving database version")));
+  }
 
-  return (upgradeDb()); // any errors will be caught by exception handling
+  return upgradeDb();
 }
 
 void MyMoneyStorageSql::createTable(const MyMoneyDbTable& t, int version)

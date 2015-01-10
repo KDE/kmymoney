@@ -446,7 +446,7 @@ private:
   int upgradeToV7();
   int upgradeToV8();
 
-  int createTables(int version = std::numeric_limits<int>::max());
+  int createTables();
   void createTable(const MyMoneyDbTable& t, int version = std::numeric_limits<int>::max());
   bool alterTable(const MyMoneyDbTable& t, int fromVersion);
   void clean();
