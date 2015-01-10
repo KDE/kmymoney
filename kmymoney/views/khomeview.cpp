@@ -130,8 +130,7 @@ KHomeView::KHomeView(QWidget *parent, const char *name) :
   connect(d->m_part->view(), SIGNAL(zoomView(int)), this, SLOT(slotZoomView(int)));
   disconnect(d->m_part->view(), SIGNAL(zoomView(int)), d->m_part, SLOT(slotZoomView(int)));
 
-  connect(d->m_part->browserExtension(), SIGNAL(openUrlRequest(const KUrl &,
-          const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
+  connect(d->m_part->browserExtension(), SIGNAL(openUrlRequest(KUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)),
           this, SLOT(slotOpenUrl(KUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
 }
 

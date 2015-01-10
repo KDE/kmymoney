@@ -44,9 +44,9 @@ KOnlineJobOutbox::KOnlineJobOutbox(QWidget *parent) :
     ui->m_onlineJobView->header()->restoreState(columns);
 
     ui->m_onlineJobView->setModel( Models::instance()->onlineJobsModel() );
-    connect(ui->m_buttonSend, SIGNAL( clicked() ), this, SLOT( slotSendJobs() ));
-    connect(ui->m_buttonRemove, SIGNAL(clicked()), this, SLOT( slotRemoveJob() ));
-    connect(ui->m_buttonEdit, SIGNAL(clicked()), this, SLOT( slotEditJob() ));
+    connect(ui->m_buttonSend, SIGNAL(clicked()), this, SLOT(slotSendJobs()));
+    connect(ui->m_buttonRemove, SIGNAL(clicked()), this, SLOT(slotRemoveJob()));
+    connect(ui->m_buttonEdit, SIGNAL(clicked()), this, SLOT(slotEditJob()));
     connect(ui->m_onlineJobView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotEditJob(QModelIndex)));
     connect(ui->m_onlineJobView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(updateButtonState()));
 

@@ -35,7 +35,7 @@ onlineJobModel::onlineJobModel(QObject *parent) :
     m_jobIdList( QStringList() )
 {
   MyMoneyFile *file = MyMoneyFile::instance();
-  connect(file, SIGNAL( objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const) ),
+  connect(file, SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
           this, SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
   connect(file, SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
           this, SLOT(slotObjectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
