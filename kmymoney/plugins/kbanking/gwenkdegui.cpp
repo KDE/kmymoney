@@ -28,7 +28,7 @@
 
 #include <QDebug>
 #include <QEventLoop>
-#include <unistd.h>
+#include <QPointer>
 #include <KUrl>
 
 #include "widgets/chiptandialog.h"
@@ -58,25 +58,25 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
     QString hhdCode = captured.at(2);
     infoText = captured.at(1) + captured.at(3);
 
-    chipTanDialog dialog(getParentWidget());
-    dialog.setInfoText(infoText);
-    dialog.setHhdCode(hhdCode);
-    dialog.setTanLimits(minLen, maxLen);
+    QPointer<chipTanDialog> dialog = new chipTanDialog(getParentWidget());
+    dialog->setInfoText(infoText);
+    dialog->setHhdCode(hhdCode);
+    dialog->setTanLimits(minLen, maxLen);
 
-    int rv = dialog.exec();
+    const int rv = dialog->exec();
 
     if (rv == chipTanDialog::Rejected)
       return GWEN_ERROR_USER_ABORTED;
-    else if (rv == chipTanDialog::InternalError)
+    else if (rv == chipTanDialog::InternalError || dialog.isNull())
       return GWEN_ERROR_INTERNAL;
 
-    QString tan = dialog.tan();
+    QString tan = dialog->tan();
     if ( tan.length() >= minLen && tan.length() <= maxLen ) {
       strncpy(buffer, tan.toUtf8().constData() , tan.length());
       buffer[tan.length()]=0;
       return 0;
     }
-    qDebug( "Received Tan with incorrect length by ui." );
+    qDebug("Received Tan with incorrect length by ui.");
     return GWEN_ERROR_INTERNAL;
   }
 
