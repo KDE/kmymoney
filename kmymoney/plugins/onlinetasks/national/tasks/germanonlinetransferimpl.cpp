@@ -168,7 +168,6 @@ void germanOnlineTransferImpl::writeXML(QDomDocument& document, QDomElement& par
   parent.appendChild(beneficiaryEl);
 }
 
-/** @todo load remote account */
 germanOnlineTransferImpl* germanOnlineTransferImpl::createFromXml(const QDomElement& element) const
 {
   germanOnlineTransferImpl* task = new germanOnlineTransferImpl();
