@@ -47,6 +47,7 @@ signals:
 
 private slots:
   void updateNewCreditTransferButton();
+  void updateButtonState() const;
 
 private:
   Ui::KOnlineJobOutbox *ui;

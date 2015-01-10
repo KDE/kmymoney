@@ -21,6 +21,7 @@
 
 #include <KMessageBox>
 #include <QAction>
+#include <QModelIndexList>
 
 #include "models/models.h"
 #include "models/onlinejobmodel.h"
@@ -47,6 +48,7 @@ KOnlineJobOutbox::KOnlineJobOutbox(QWidget *parent) :
     connect(ui->m_buttonRemove, SIGNAL(clicked()), this, SLOT( slotRemoveJob() ));
     connect(ui->m_buttonEdit, SIGNAL(clicked()), this, SLOT( slotEditJob() ));
     connect(ui->m_onlineJobView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotEditJob(QModelIndex)));
+    connect(ui->m_onlineJobView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(updateButtonState()));
 
     // Set new credit transfer button
     connect(kmymoney->action("account_online_new_credit_transfer"), SIGNAL(changed()), SLOT(updateNewCreditTransferButton()));
@@ -61,6 +63,14 @@ KOnlineJobOutbox::~KOnlineJobOutbox()
     configGroup.writeEntry("HeaderState", ui->m_onlineJobView->header()->saveState());
 
     delete ui;
+}
+
+void KOnlineJobOutbox::updateButtonState() const
+{
+  const int selectedItems = ui->m_onlineJobView->selectionModel()->selectedRows().count();
+  ui->m_buttonSend->setEnabled(selectedItems > 0);
+  ui->m_buttonEdit->setEnabled(selectedItems == 1);
+  ui->m_buttonRemove->setEnabled(selectedItems > 0);
 }
 
 void KOnlineJobOutbox::updateNewCreditTransferButton()

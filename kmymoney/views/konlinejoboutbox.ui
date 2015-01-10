@@ -45,6 +45,9 @@
    </item>
    <item row="0" column="1">
     <widget class="KPushButton" name="m_buttonSend">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Send</string>
      </property>
@@ -57,6 +60,9 @@
    </item>
    <item row="3" column="1">
     <widget class="KPushButton" name="m_buttonRemove">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Remove</string>
      </property>
@@ -69,6 +75,9 @@
    </item>
    <item row="2" column="1">
     <widget class="KPushButton" name="m_buttonEdit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Edit</string>
      </property>
