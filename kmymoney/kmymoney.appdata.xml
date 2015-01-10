@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>KMyMoney</name>
+  <name xml:lang="ar">أموالك</name>
   <name xml:lang="ca">KMyMoney</name>
   <name xml:lang="cs">KMyMoney</name>
   <name xml:lang="da">KMyMoney</name>
@@ -24,6 +25,7 @@
   <name xml:lang="uk">KMyMoney</name>
   <name xml:lang="x-test">xxKMyMoneyxx</name>
   <summary>Personal Finance Manager</summary>
+  <summary xml:lang="ar">مدير ماليّة شخصيّ</summary>
   <summary xml:lang="ca">Gestor per a les finances personals</summary>
   <summary xml:lang="cs">Osobní správce financí</summary>
   <summary xml:lang="da">Styring af privatøkonomi</summary>
@@ -47,6 +49,7 @@
     <p>
       KMyMoney is a personal finance manager for KDE.
     </p>
+    <p xml:lang="ar">أموالك هو مدير ماليّة شخصيّ لِكدي.</p>
     <p xml:lang="ca">El KMyMoney és un gestor de les finances personals pel KDE.</p>
     <p xml:lang="da">KMyMoney er styring af privatøkonomien til KDE</p>
     <p xml:lang="de">KMyMoney ist eine persönliche Finanzverwaltung für KDE.</p>
@@ -106,6 +109,7 @@
     </screenshot>
     <screenshot>
       <caption>The financial summary gives you an overview of your finances</caption>
+      <caption xml:lang="ar">يعطيك ملخّص الماليّة لمحة عن ماليّتك</caption>
       <caption xml:lang="ca">El resum financer ofereix una visió general de les vostres finances.</caption>
       <caption xml:lang="en-GB">The financial summary gives you an overview of your finances</caption>
       <caption xml:lang="es">El resumen financiero le ofrece una descripción general de sus finanzas</caption>
