@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=KMyMoney OFX
+Name[ar]=OFX لأموالك
 Name[bs]=KMyMoney OFX
 Name[ca]=KMyMoney OFX
 Name[ca@valencia]=KMyMoney OFX
@@ -33,6 +34,7 @@ Name[x-test]=xxKMyMoney OFXxx
 Name[zh_CN]=KMyMoney OFX
 Name[zh_TW]=KMyMoney OFX
 Comment=Add OFX importing to KMyMoney
+Comment[ar]=أضف استيراد OFX إلى أموالك
 Comment[bs]=Dodaj OFX uvoz za KMyMoney
 Comment[ca]=Afegeix la importació OFX al KMyMoney
 Comment[ca@valencia]=Afig la importació OFX al KMyMoney

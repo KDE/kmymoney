@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=csvimport
+Name[ar]=استيراد CSV
 Name[bs]=csvimport
 Name[ca]=csvimport
 Name[ca@valencia]=csvimport
@@ -33,6 +34,7 @@ Name[x-test]=xxcsvimportxx
 Name[zh_CN]=csv 导入
 Name[zh_TW]=csvimport
 Comment=Add CSV importing to KMyMoney
+Comment[ar]=أضف استيراد CSV إلى أموالك
 Comment[bs]=Dodaj uvoz CSV za KMyMoney
 Comment[ca]=Afegeix la importació CSV al KMyMoney
 Comment[ca@valencia]=Afig la importació CSV al KMyMoney
