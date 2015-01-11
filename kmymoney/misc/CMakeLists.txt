@@ -4,10 +4,12 @@ install(PROGRAMS financequote.pl
 
 set( kmm_utils_validators_SRCS
   validators.cpp
+  charvalidator.cpp
 )
 
 set( kmm_utils_validators_HEADER
   validators.h
+  charvalidator.h
 )
 
 kde4_add_library(kmm_utils_validators STATIC ${kmm_utils_validators_SRCS})

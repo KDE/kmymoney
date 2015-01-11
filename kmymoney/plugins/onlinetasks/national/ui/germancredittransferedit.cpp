@@ -21,6 +21,8 @@
 
 #include "kguiutils.h"
 
+#include "misc/charvalidator.h"
+
 germanCreditTransferEdit::germanCreditTransferEdit(QWidget *parent, QVariantList args) :
     IonlineJobEdit(parent, args),
     ui(new Ui::germanCreditTransferEdit),
@@ -228,7 +230,7 @@ void germanCreditTransferEdit::updateTaskSettings()
   ui->transferPurpose->setMaxLineLength( settings->purposeLineLength() );
   ui->transferPurpose->setMaxLines( settings->purposeMaxLines() );
 
-  ui->beneficiaryName->setValidator( new QRegExpValidator(QRegExp( QString("[%1]*").arg(settings->allowedChars()) ), ui->beneficiaryName) );
+  ui->beneficiaryName->setValidator( new charValidator(ui->beneficiaryName, settings->allowedChars()) );
   ui->beneficiaryName->setMaxLength( settings->recipientNameLineLength() );
 
   updateEveryStatus();

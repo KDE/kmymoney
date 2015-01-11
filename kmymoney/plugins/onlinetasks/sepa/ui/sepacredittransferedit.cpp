@@ -23,6 +23,7 @@
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 #include "payeeidentifier/ibanandbic/widgets/ibanvalidator.h"
 #include "payeeidentifier/payeeidentifiertyped.h"
+#include "misc/charvalidator.h"
 
 sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList args) :
     IonlineJobEdit(parent, args),
@@ -158,7 +159,7 @@ void sepaCreditTransferEdit::updateSettings()
     m_requiredFields->remove(ui->purpose);
 
   // Beneficiary Name
-  ui->beneficiaryName->setValidator( new QRegExpValidator(QRegExp( QString("[%1]*").arg(settings->allowedChars()) ), ui->beneficiaryName) );
+  ui->beneficiaryName->setValidator( new charValidator(ui->beneficiaryName, settings->allowedChars()) );
   ui->beneficiaryName->setMaxLength( settings->recipientNameLineLength() );
 
   if (settings->recipientNameMinLength() != 0)
