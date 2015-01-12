@@ -156,7 +156,7 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
         case onlineJob::rejectedByBank: return i18nc("Arg 1 is a date/time", "The bank rejected this task on %1").arg(job.bankAnswerDate().toString( Qt::DefaultLocaleShortDate ));
         case onlineJob::noBankAnswer:
           if ( job.sendDate().isValid() )
-            return i18nc("Arg 1 is a date/time", "This task was send on %1 without receiving a confirmation.").arg(job.sendDate().toString( Qt::DefaultLocaleShortDate ));
+            return i18nc("Arg 1 is a date/time", "This task was sent on %1 without receiving a confirmation.").arg(job.sendDate().toString( Qt::DefaultLocaleShortDate ));
           else if ( !job.isValid() )
             return i18n("This task needs further editing and cannot be sent therefore.");
           else

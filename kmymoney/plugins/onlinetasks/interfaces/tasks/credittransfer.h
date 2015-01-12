@@ -30,7 +30,7 @@ class QValidator;
  * @brief Describes an online credit-transfer (or similar)
  *
  * This class is used by KMyMoney to create a MyMoneySchedule
- * after a task was send to the bank.
+ * after a task was sent to the bank.
  */
 class KMM_MYMONEY_EXPORT creditTransfer
 {

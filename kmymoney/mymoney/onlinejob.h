@@ -157,7 +157,7 @@ public:
    * @brief Check if this onlineJob is editable by the user
    *
    * A job is no longer editable by the user if it is used for documentary purposes
-   * e.g. the job was send to the bank. In that case create a new job based on the
+   * e.g. the job was sent to the bank. In that case create a new job based on the
    * old one.
    *
    * @todo make it possible to use onlineJobs as templates
@@ -179,7 +179,7 @@ public:
   virtual bool isValid() const;
 
   /**
-   * @brief DateTime the job was send to the bank
+   * @brief DateTime the job was sent to the bank
    *
    * A valid return does not mean that this job was accepted by the bank.
    *
@@ -298,7 +298,7 @@ public:
 private:
 
   /**
-   * @brief Date-time the job was send to the bank
+   * @brief Date-time the job was sent to the bank
    *
    * This does not mean an answer was given by the bank
    */
