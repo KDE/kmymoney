@@ -7423,7 +7423,7 @@ void KMyMoneyApp::slotOnlineJobSend( onlineJob job )
 
 void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
 {
-  MyMoneyFile* kmmFile = MyMoneyFile::instance();
+  MyMoneyFile *const kmmFile = MyMoneyFile::instance();
   QMultiMap<QString, onlineJob> jobsByPlugin;
 
   // Sort jobs by online plugin & lock them
@@ -7440,7 +7440,12 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
   }
 
   // Send onlineJobs to plugins
-  foreach(QString pluginKey, jobsByPlugin.keys()) {
+  QList<QString> usedPlugins = jobsByPlugin.keys();
+  std::sort(usedPlugins.begin(), usedPlugins.end());
+  const QList<QString>::iterator newEnd = std::unique(usedPlugins.begin(), usedPlugins.end());
+  usedPlugins.erase(newEnd, usedPlugins.end());
+
+  foreach(const QString& pluginKey, usedPlugins) {
     QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_onlinePlugins.constFind(pluginKey);
 
     if (it_p != d->m_onlinePlugins.constEnd() ) {
