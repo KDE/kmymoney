@@ -66,6 +66,7 @@
 #include <KIO/NetAccess>
 #include "KAboutApplicationDialog"
 #include <KAboutData>
+#include <KColorScheme>
 
 // ----------------------------------------------------------------------------
 
@@ -213,15 +214,12 @@ void CSVDialog::init()
   m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(-1);  //  The memo col might not get selected, so clear it
   m_pageSeparator->ui->comboBox_fieldDelimiter->setEnabled(false);
 
-  m_setColor.setRgb(0, 255, 127, 100);
-  m_errorColor.setRgb(255, 0, 127, 100);
-  m_clearColor.setRgb(255, 255, 255, 255);
-  m_colorBrush.setColor(m_setColor);
-  m_clearBrush.setColor(m_clearColor);
-  m_colorBrush.setStyle(Qt::SolidPattern);
-  m_clearBrush.setStyle(Qt::SolidPattern);
-  m_errorBrush.setColor(m_errorColor);
-  m_errorBrush.setStyle(Qt::SolidPattern);
+  m_clearBrush = KColorScheme(QPalette::Normal).background(KColorScheme::NormalBackground);
+  m_clearBrushText = KColorScheme(QPalette::Normal).foreground(KColorScheme::NormalText);
+  m_colorBrush = KColorScheme(QPalette::Normal).background(KColorScheme::PositiveBackground);
+  m_colorBrushText = KColorScheme(QPalette::Normal).foreground(KColorScheme::PositiveText);
+  m_errorBrush = KColorScheme(QPalette::Normal).background(KColorScheme::NegativeBackground);
+  m_errorBrushText = KColorScheme(QPalette::Normal).foreground(KColorScheme::NegativeText);
 
   m_pageBanking->ui->comboBoxBnk_numberCol->setMaxVisibleItems(12);
   m_pageBanking->ui->comboBoxBnk_dateCol->setMaxVisibleItems(12);
@@ -247,7 +245,6 @@ void CSVDialog::init()
 
   m_dateFormatIndex = m_pageLinesDate->ui->comboBox_dateFormat->currentIndex();
   m_date = m_dateFormats[m_dateFormatIndex];
-  m_dateFormatIndex = m_dateFormatIndex;
 
   findCodecs();//                             returns m_codecs = codecMap.values();
 
@@ -1136,15 +1133,19 @@ void CSVDialog::markUnwantedRows()
   //  highlight unwanted lines instead of not showing them.
   //
   QBrush brush;
+  QBrush brushText;
   for (int row = 0; row < ui->tableWidget->rowCount(); row++) {
     if ((row < first) || (row > last)) {
       brush = m_errorBrush;
+      brushText = m_errorBrushText;
     } else {
       brush = m_clearBrush;
+      brushText = m_clearBrushText;
     }
     for (int col = 0; col < ui->tableWidget->columnCount(); col ++) {
       if (ui->tableWidget->item(row, col) != 0) {
         ui->tableWidget->item(row, col)->setBackground(brush);
+        ui->tableWidget->item(row, col)->setForeground(brushText);
       }
     }
   }
@@ -2235,6 +2236,7 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
   for (int row = 0; row < ui->tableWidget->rowCount(); row++) {
     if (ui->tableWidget->item(row, col) != 0) {
       ui->tableWidget->item(row, col)->setBackground(m_clearBrush);
+      ui->tableWidget->item(row, col)->setForeground(m_clearBrushText);
     }
   }
 
@@ -2277,10 +2279,12 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
         newTxt = m_parse->possiblyReplaceSymbol(txt);  //       update data
         ui->tableWidget->item(row, col)->setText(newTxt);   //  highlight selection
         ui->tableWidget->item(row, col)->setBackground(m_colorBrush);
+        ui->tableWidget->item(row, col)->setForeground(m_colorBrushText);
         if (m_parse->invalidConversion()) {
           invalidResult = true;
           errorItem = ui->tableWidget->item(row, col);
           errorItem->setBackground(m_errorBrush);
+          errorItem->setForeground(m_errorBrushText);
           ui->tableWidget->scrollToItem(errorItem, QAbstractItemView::EnsureVisible);
           if (errorRow == 0) {
             errorRow = row;
@@ -2299,6 +2303,7 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
       if (!symbolFound) {
         errorItem = ui->tableWidget->item(row, col);
         errorItem->setBackground(m_errorBrush);
+        errorItem->setForeground(m_errorBrushText);
       }
     }//  last row
 
@@ -2578,6 +2583,7 @@ void CSVDialog::restoreBackground()
     for (int col = 0; col < lastCol; col++) {
       if (ui->tableWidget->item(row, col) != 0) {
         ui->tableWidget->item(row, col)->setBackground(m_clearBrush);
+        ui->tableWidget->item(row, col)->setForeground(m_clearBrushText);
       }
     }
   }
@@ -2751,6 +2757,7 @@ void CSVDialog::clearCellsBackground()
     for (int col = 0; col < ui->tableWidget->columnCount(); col ++) {
       if (ui->tableWidget->item(row, col) != 0) {
         ui->tableWidget->item(row, col)->setBackground(m_clearBrush);
+        ui->tableWidget->item(row, col)->setForeground(m_clearBrushText);
       }
     }
   }
