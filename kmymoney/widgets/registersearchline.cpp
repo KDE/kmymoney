@@ -67,6 +67,8 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
 
 void RegisterSearchLine::init(Register *reg)
 {
+  if (!parentWidget()->layout())
+    parentWidget()->setLayout(new QHBoxLayout);
   parentWidget()->layout()->addWidget(this);
   d->reg = reg;
   connect(this, SIGNAL(textChanged(QString)), this, SLOT(queueSearch(QString)));
@@ -229,7 +231,11 @@ RegisterSearchLine* RegisterSearchLineWidget::createSearchLine(Register* reg)
 
 void RegisterSearchLineWidget::createWidgets(void)
 {
+  QHBoxLayout *searchLineLayout = new QHBoxLayout(this);
+  searchLineLayout->setSpacing(0);
+  searchLineLayout->setContentsMargins(0, 0, 0, 0);
   QLabel *label = new QLabel(i18nc("Filter widget label", "Fi&lter:"), this);
+  searchLineLayout->addWidget(label);
 
   d->searchLine = createSearchLine(d->reg);
   d->searchLine->show();
