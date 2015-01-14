@@ -37,7 +37,7 @@ set(kmm_widgets_sources
 kde4_add_ui_files(kmm_widgets_sources kmymoneyvalidationfeedback.ui)
 
 add_library(kmm_widgets SHARED ${kmm_widgets_sources})
-target_link_libraries(kmm_widgets PUBLIC KF5::I18n KF5::KDELibs4Support Qt5::Gui Qt5::Sql Qt5::Core Alkimia::alkimia kmm_config kmm_mymoney)
+target_link_libraries(kmm_widgets PUBLIC KF5::ItemViews KF5::I18n KF5::KDELibs4Support Qt5::Gui Qt5::Sql Qt5::Core Alkimia::alkimia kmm_config kmm_mymoney)
 set_target_properties(kmm_widgets PROPERTIES
    COMPILE_FLAGS "-DKMM_BUILD_WIDGETS_LIB"
    VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
