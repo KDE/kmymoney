@@ -35,6 +35,9 @@
 #include "mymoneysecurity.h"
 
 
+const MyMoneyMoney MyMoneyMoney::ONE = MyMoneyMoney(1, 1);
+const MyMoneyMoney MyMoneyMoney::MINUS_ONE = MyMoneyMoney(-1, 1);
+
 QChar MyMoneyMoney::_thousandSeparator = ',';
 QChar MyMoneyMoney::_decimalSeparator = '.';
 MyMoneyMoney::signPosition MyMoneyMoney::_negativeMonetarySignPosition = BeforeQuantityMoney;
@@ -149,9 +152,9 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   } else {
     d = 1000000000;
   }
-  value = static_cast<MyMoneyMoney>(convertDenominator(d)).valueRef().get_num();
+  value = static_cast<const MyMoneyMoney>(convertDenominator(d)).valueRef().get_num();
 #else
-  value = static_cast<MyMoneyMoney>(convertDenominator(denom)).valueRef().get_num();
+  value = static_cast<const MyMoneyMoney>(convertDenominator(denom)).valueRef().get_num();
 #endif
 
   // Once we really support multiple currencies then this method will
@@ -291,10 +294,10 @@ MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMethod h
   return convertDenominator(_denom, static_cast<RoundingMethod>(how));
 }
 
-const MyMoneyMoney MyMoneyMoney::reduce(void) const
+MyMoneyMoney MyMoneyMoney::reduce(void) const
 {
   MyMoneyMoney out(*this);
-  out.valueRef().canonicalize();
+  out.canonicalize();
   return out;
 }
 

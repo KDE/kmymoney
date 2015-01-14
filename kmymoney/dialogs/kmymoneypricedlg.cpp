@@ -236,7 +236,7 @@ void KMyMoneyPriceDlg::slotNewPrice(void)
     }
 
     if (dlg->exec()) {
-      MyMoneyPrice price(dlg->m_security->security().id(), dlg->m_currency->security().id(), dlg->date(), MyMoneyMoney(1, 1));
+      MyMoneyPrice price(dlg->m_security->security().id(), dlg->m_currency->security().id(), dlg->date(), MyMoneyMoney::ONE);
       QTreeWidgetItem* p = loadPriceItem(price);
       m_priceList->setCurrentItem(p, true);
       // If the user cancels the following operation, we delete the new item
@@ -266,7 +266,7 @@ int KMyMoneyPriceDlg::slotEditPrice(void)
     QPointer<KCurrencyCalculator> calc =
       new KCurrencyCalculator(from,
                               to,
-                              MyMoneyMoney(1, 1),
+                              MyMoneyMoney::ONE,
                               item->data(0, Qt::UserRole).value<MyMoneyPrice>().rate(to.id()),
                               item->data(0, Qt::UserRole).value<MyMoneyPrice>().date(),
                               fract,

@@ -106,6 +106,8 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
 
   connect(transactionsTable, SIGNAL(returnPressed()), this, SLOT(accept()));
   connect(transactionsTable, SIGNAL(escapePressed()), this, SLOT(reject()));
+  connect(transactionsTable, SIGNAL(editStarted()), this, SLOT(slotEditStarted()));
+  connect(transactionsTable, SIGNAL(editFinished()), this, SLOT(slotUpdateButtons()));
 
   connect(button(KDialog::Cancel), SIGNAL(clicked()), this, SLOT(reject()));
   connect(button(KDialog::Ok), SIGNAL(clicked()), this, SLOT(accept()));
@@ -352,13 +354,17 @@ void KSplitTransactionDlg::slotMergeSplits(void)
 void KSplitTransactionDlg::slotSetTransaction(const MyMoneyTransaction& t)
 {
   m_transaction = t;
-  QList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
-  QList<MyMoneySplit>::ConstIterator it;
+  slotUpdateButtons();
+  updateSums();
+}
 
+void KSplitTransactionDlg::slotUpdateButtons()
+{
+  QList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
   // check if we can merge splits or not, have zero splits or not
   QMap<QString, int> splits;
   bool haveZeroSplit = false;
-  for (it = list.constBegin(); it != list.constEnd(); ++it) {
+  for (QList<MyMoneySplit>::const_iterator it = list.constBegin(); it != list.constEnd(); ++it) {
     splits[(*it).accountId()]++;
     if (((*it).id() != m_split.id()) && ((*it).shares().isZero()))
       haveZeroSplit = true;
@@ -370,8 +376,12 @@ void KSplitTransactionDlg::slotSetTransaction(const MyMoneyTransaction& t)
   }
   enableButton(KDialog::User3, it_s != splits.constEnd());
   enableButton(KDialog::User2, haveZeroSplit);
+}
 
-  updateSums();
+void KSplitTransactionDlg::slotEditStarted(void)
+{
+  enableButton(KDialog::User3, false);
+  enableButton(KDialog::User2, false);
 }
 
 void KSplitTransactionDlg::updateSums(void)
@@ -436,3 +446,4 @@ void KSplitTransactionDlg::slotCreateCategory(const QString& name, QString& id)
   // return id
   id = acc.id();
 }
+

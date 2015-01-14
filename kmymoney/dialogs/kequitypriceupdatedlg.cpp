@@ -186,7 +186,7 @@ void KEquityPriceUpdateDlg::addPricePair(const MyMoneySecurityPair& pair, bool d
   QString id = QString("%1 %2").arg(pair.first, pair.second);
   // Check that the pair does not already exist
   if (lvEquityList->findItems(id, Qt::MatchExactly, ID_COL).empty()) {
-    MyMoneyPrice pr = file->price(pair.first, pair.second);
+    const MyMoneyPrice &pr = file->price(pair.first, pair.second);
     if (pr.source() != "KMyMoney") {
       bool keep = true;
       if ((pair.first == file->baseCurrency().id())
@@ -255,7 +255,7 @@ void KEquityPriceUpdateDlg::addInvestment(const MyMoneySecurity& inv)
       item->setText(SYMBOL_COL, symbol);
       item->setText(NAME_COL, inv.name());
       MyMoneySecurity currency = file->currency(inv.tradingCurrency());
-      MyMoneyPrice pr = file->price(id.toUtf8(), inv.tradingCurrency());
+      const MyMoneyPrice &pr = file->price(id.toUtf8(), inv.tradingCurrency());
       if (pr.isValid()) {
         item->setText(PRICE_COL, pr.rate(currency.id()).formatMoney(currency.tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision()));
         item->setText(DATE_COL, pr.date().toString(Qt::ISODate));

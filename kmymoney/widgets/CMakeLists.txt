@@ -17,21 +17,28 @@ set(kmymoney_STAT_HEADERS
   transactionform.h transaction.h transactionsortoptionimpl.h
   kmymoneyreportconfigtabimpl.h kmymoneyreportcontrolimpl.h
   kmymoney_export.h
+  kmymoneyvalidationfeedback.h
   )
 
 ########### Shared widget library ###########
 set(kmm_widgets_sources
   kmymoneydateinput.cpp
+  kmymoneyvalidationfeedback.cpp
+  styleditemdelegateforwarder.cpp
   kmymoneyedit.cpp
   kmymoneylineedit.cpp
+  kmymoneytextedit.cpp
   kmymoneymvccombo.cpp
   kmymoneyselector.cpp
   kmymoneycalculator.cpp
+  ktreewidgetfilterlinewidget.cpp
   kguiutils.cpp
   )
 
+kde4_add_ui_files(kmm_widgets_sources kmymoneyvalidationfeedback.ui)
+
 add_library(kmm_widgets SHARED ${kmm_widgets_sources})
-target_link_libraries(kmm_widgets PUBLIC KF5::I18n KF5::KDELibs4Support Qt5::Gui Qt5::Core Alkimia::alkimia kmm_config kmm_mymoney)
+target_link_libraries(kmm_widgets PUBLIC KF5::I18n KF5::KDELibs4Support Qt5::Gui Qt5::Sql Qt5::Core Alkimia::alkimia kmm_config kmm_mymoney)
 set_target_properties(kmm_widgets PROPERTIES
    COMPILE_FLAGS "-DKMM_BUILD_WIDGETS_LIB"
    VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
@@ -92,7 +99,7 @@ add_custom_target(generate_base_ui_srcs DEPENDS
 
 # We can compile the uncritical sources without KMM_DESIGNER flags
 add_library(kmymoney_base STATIC ${_uncritial_common_sources})
-target_link_libraries(kmymoney_base KF5::KDELibs4Support Alkimia::alkimia)
+target_link_libraries(kmymoney_base KF5::KDELibs4Support Qt5::Sql Alkimia::alkimia)
 
 add_dependencies(kmymoney_base kmm_config)
 

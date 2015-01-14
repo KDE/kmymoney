@@ -1,3 +1,4 @@
+
 /***************************************************************************
                           registersearchline.cpp
                              -------------------
@@ -228,12 +229,7 @@ RegisterSearchLine* RegisterSearchLineWidget::createSearchLine(Register* reg)
 
 void RegisterSearchLineWidget::createWidgets(void)
 {
-  QHBoxLayout *searchLineLayout = new QHBoxLayout(this);
-  searchLineLayout->setSpacing(0);
-  searchLineLayout->setContentsMargins(0, 0, 0, 0);
-
-  QLabel *label = new QLabel(i18nc("Search widget label", "S&earch:"), this);
-  searchLineLayout->addWidget(label);
+  QLabel *label = new QLabel(i18nc("Filter widget label", "Fi&lter:"), this);
 
   d->searchLine = createSearchLine(d->reg);
   d->searchLine->show();

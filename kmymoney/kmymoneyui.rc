@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="40" name="kmymoney" >
+<kpartgui version="41" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <Action append="open_merge" name="open_database" />
@@ -61,6 +61,7 @@
    <Action name="account_online_map" />
    <Action name="account_online_update" />
    <Action name="account_online_update_all" />
+   <Action name="account_online_new_credit_transfer" />
   </Menu>
   <Menu name="category" >
    <text>&amp;Category</text>
@@ -136,6 +137,7 @@
   <Action name="account_online_unmap" />
   <Action name="account_online_map" />
   <Action name="account_online_update" />
+  <Action name="account_online_new_credit_transfer" />
   <Separator/>
   <Action name="investment_new" />
   <Action name="investment_edit" />
@@ -267,6 +269,7 @@
   <Action name="account_edit" />
   <Action name="account_reconcile" />
   <Action name="account_online_update_menu" />
+  <Action name="account_online_new_credit_transfer" />
   <Action name="account_chart" />
   <Separator lineSeparator="true"/>
   <Action name="edit_find_transaction" />

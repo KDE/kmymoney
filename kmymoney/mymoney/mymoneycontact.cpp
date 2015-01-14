@@ -71,19 +71,18 @@ QString MyMoneyContact::ownerFullName() const
 
 void MyMoneyContact::fetchContact(const QString &email)
 {
-  // reset the identity
-  m_contact = ContactData();
-  m_contact.email = email;
-
 #ifdef KMM_ADDRESSBOOK_FOUND
   // fetch the contact data
   Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList() << KABC::Addressee::mimeType());
   job->fetchScope().fetchFullPayload();
   job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
+  job->setProperty("MyMoneyContact_email", email);
   connect(job, SIGNAL(result(KJob*)), this, SLOT(searchContactResult(KJob*)));
   job->start();
 #else
-  emit contactFetched(m_contact);
+  ContactData contact;
+  contact.email = email;
+  emit contactFetched(contact);
 #endif
 }
 
@@ -94,21 +93,23 @@ void MyMoneyContact::searchContactResult(KJob *job)
   Akonadi::Item::List items;
   if (contactJob)
     items = contactJob->items();
+  ContactData contactData;
+  contactData.email = job->property("MyMoneyContact_email").toString();
   foreach (const Akonadi::Item &item, items) {
     const KABC::Addressee &contact = item.payload<KABC::Addressee>();
-    if (contact.emails().contains(m_contact.email)) {
+    if (contact.emails().contains(contactData.email)) {
       KABC::PhoneNumber phone = contact.phoneNumber(KABC::PhoneNumber::Home);
-      m_contact.phoneNumber = phone.number();
+      contactData.phoneNumber = phone.number();
       const KABC::Address &address = contact.address(KABC::Address::Home);
-      m_contact.street = address.street();
-      m_contact.locality = address.locality();
-      m_contact.country = address.country();
-      m_contact.region = address.region();
-      m_contact.postalCode = address.postalCode();
+      contactData.street = address.street();
+      contactData.locality = address.locality();
+      contactData.country = address.country();
+      contactData.region = address.region();
+      contactData.postalCode = address.postalCode();
       break;
     }
   }
-  emit contactFetched(m_contact);
+  emit contactFetched(contactData);
 #else
   Q_UNUSED(job);
 #endif

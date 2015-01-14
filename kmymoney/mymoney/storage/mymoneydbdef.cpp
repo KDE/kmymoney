@@ -32,17 +32,20 @@
 #include "mymoneyfile.h"
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
-unsigned int MyMoneyDbDef::m_currentVersion = 7;
+unsigned int MyMoneyDbDef::m_currentVersion = 8;
 
 // ************************* Build table descriptions ****************************
 MyMoneyDbDef::MyMoneyDbDef()
 {
   FileInfo();
+  PluginInfo();
   Institutions();
   Payees();
+  PayeesPayeeIdentifier();
   Tags();
   TagSplits(); // a table to bind tags and splits
   Accounts();
+  AccountsPayeeIdentifier();
   Transactions();
   Splits();
   KeyValuePairs();
@@ -54,6 +57,8 @@ MyMoneyDbDef::MyMoneyDbDef()
   Reports();
   Budgets();
   Balances();
+  OnlineJobs();
+  PayeeIdentifier();
 }
 
 /* PRIMARYKEY - these fields combine to form a unique key field on which the db will create an index
@@ -101,6 +106,8 @@ void MyMoneyDbDef::FileInfo(void)
   appendField(MyMoneyDbColumn("updateInProgress", "char(1)"));
   appendField(MyMoneyDbIntColumn("budgets", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 1));
   appendField(MyMoneyDbIntColumn("hiBudgetId", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 1));
+  appendField(MyMoneyDbIntColumn("hiOnlineJobId", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 8));
+  appendField(MyMoneyDbIntColumn("hiPayeeIdentifierId", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 8));
   appendField(MyMoneyDbColumn("logonUser", "varchar(255)", false, false, 1));
   appendField(MyMoneyDbDatetimeColumn("logonAt", false, false, 1));
   appendField(MyMoneyDbIntColumn("fixLevel",
@@ -144,6 +151,17 @@ void MyMoneyDbDef::Payees(void)
   appendField(MyMoneyDbColumn("matchIgnoreCase", "char(1)", false, false, 5));
   appendField(MyMoneyDbTextColumn("matchKeys", MyMoneyDbTextColumn::MEDIUM, false, false, 5));
   MyMoneyDbTable t("kmmPayees", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
+void MyMoneyDbDef::PayeesPayeeIdentifier()
+{
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+  appendField(MyMoneyDbColumn("payeeId", "varchar(32)",  PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
+  MyMoneyDbTable t("kmmPayeesPayeeIdentifier", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
 }
@@ -192,6 +210,17 @@ void MyMoneyDbDef::Accounts(void)
   appendField(MyMoneyDbTextColumn("balanceFormatted"));
   appendField(MyMoneyDbIntColumn("transactionCount", MyMoneyDbIntColumn::BIG, UNSIGNED, false, false, 1));
   MyMoneyDbTable t("kmmAccounts", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
+void MyMoneyDbDef::AccountsPayeeIdentifier()
+{
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+  appendField(MyMoneyDbColumn("accountId", "varchar(32)",  PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
+  MyMoneyDbTable t("kmmAccountsPayeeIdentifier", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
 }
@@ -349,6 +378,48 @@ void MyMoneyDbDef::Reports(void)
   appendField(MyMoneyDbTextColumn("XML", MyMoneyDbTextColumn::LONG));
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL, 6));
   MyMoneyDbTable t("kmmReportConfig", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
+void MyMoneyDbDef::OnlineJobs(void)
+{
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+
+  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbColumn("type", "varchar(255)", false, NOTNULL, 8));
+  appendField(MyMoneyDbDatetimeColumn("jobSend", false, false, 8));
+  appendField(MyMoneyDbDatetimeColumn("bankAnswerDate", false, false, 8));
+  appendField(MyMoneyDbColumn("state", "varchar(15)", false, NOTNULL, 8));
+  appendField(MyMoneyDbColumn("locked", "char(1)", false, NOTNULL, 8));
+
+  MyMoneyDbTable t("kmmOnlineJobs", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
+void MyMoneyDbDef::PayeeIdentifier()
+{
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+
+  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbColumn("type", "varchar(255)", false, false, 8));
+
+  MyMoneyDbTable t("kmmPayeeIdentifier", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
+void MyMoneyDbDef::PluginInfo()
+{
+  QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
+
+  appendField(MyMoneyDbColumn("iid", "varchar(255)", PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbIntColumn("versionMajor", MyMoneyDbIntColumn::TINY, false, false, NOTNULL, 8));
+  appendField(MyMoneyDbIntColumn("versionMinor", MyMoneyDbIntColumn::TINY, false, false, false, 8));
+  appendField(MyMoneyDbTextColumn("uninstallQuery", MyMoneyDbTextColumn::LONG, false, false, 8));
+
+  MyMoneyDbTable t("kmmPluginInfo", fields);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
 }

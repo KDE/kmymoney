@@ -96,6 +96,9 @@ private slots:
   void testCurrency();
   void testCurrencyList();
   void testAccountList();
+  void testAddOnlineJob();
+  void testModifyOnlineJob();
+  void testRemoveOnlineJob();
 };
 
 #endif

@@ -21,7 +21,7 @@
 // QT Includes
 
 #include <QStringList>
-#include <QDomDocument>
+#include <QDebug> //! @todo remove QDebugs
 #include <QDomElement>
 
 // ----------------------------------------------------------------------------
@@ -29,6 +29,7 @@
 
 #include "mymoneyutils.h"
 #include <mymoneyexception.h>
+#include <pluginloader.h>
 
 MyMoneyPayee MyMoneyPayee::null;
 
@@ -64,8 +65,8 @@ MyMoneyPayee::MyMoneyPayee(const QString& name, const QString& address,
   m_email     = email;
 }
 
-MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
-    MyMoneyObject(node)
+MyMoneyPayee::MyMoneyPayee(const QDomElement& node)
+  : MyMoneyObject(node)
 {
   if ("PAYEE" != node.tagName()) {
     throw MYMONEYEXCEPTION("Node was not PAYEE");
@@ -90,6 +91,7 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
     m_defaultAccountId = node.attribute("defaultaccountid");
   }
 
+  // Load Address
   QDomNodeList nodeList = node.elementsByTagName("ADDRESS");
   if (nodeList.count() == 0) {
     QString msg = QString("No ADDRESS in payee %1").arg(m_name);
@@ -102,14 +104,16 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
   m_postcode = addrNode.attribute("postcode");
   m_state = addrNode.attribute("state");
   m_telephone = addrNode.attribute("telephone");
+
+  MyMoneyPayeeIdentifierContainer::loadXML(node);
 }
 
 MyMoneyPayee::~MyMoneyPayee()
 {
 }
 
-MyMoneyPayee::MyMoneyPayee(const MyMoneyPayee& right) :
-    MyMoneyObject(right)
+MyMoneyPayee::MyMoneyPayee(const MyMoneyPayee& right)
+  : MyMoneyObject(right)
 {
   *this = right;
 }
@@ -160,6 +164,7 @@ void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
     el.setAttribute("defaultaccountid", m_defaultAccountId);
   }
 
+  // Save address
   QDomElement address = document.createElement("ADDRESS");
   address.setAttribute("street", m_address);
   address.setAttribute("city", m_city);
@@ -168,6 +173,9 @@ void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
   address.setAttribute("telephone", m_telephone);
 
   el.appendChild(address);
+
+  // Save payeeIdentifiers (account numbers)
+  MyMoneyPayeeIdentifierContainer::writeXML(document, el);
 
   parent.appendChild(el);
 }
@@ -221,3 +229,5 @@ void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStr
 {
   setMatchData(type, ignorecase, keys.split(';'));
 }
+
+// vim:cin:si:ai:et:ts=2:sw=2:

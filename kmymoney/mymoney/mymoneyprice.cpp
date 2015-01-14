@@ -37,8 +37,7 @@
 
 #include "mymoneyexception.h"
 
-MyMoneyPrice::MyMoneyPrice() :
-    m_date(QDate())
+MyMoneyPrice::MyMoneyPrice()
 {
 }
 
@@ -55,7 +54,7 @@ MyMoneyPrice::MyMoneyPrice(const QString& from, const QString& to, const QDomEle
   m_source = node.attribute("source");
 
   if (!m_rate.isZero())
-    m_invRate = MyMoneyMoney(1, 1) / m_rate;
+    m_invRate = MyMoneyMoney::ONE / m_rate;
   else
     qDebug("Price with zero value loaded");
 }
@@ -68,7 +67,7 @@ MyMoneyPrice::MyMoneyPrice(const QString& from, const QString& to, const QDate& 
     m_source(source)
 {
   if (!m_rate.isZero())
-    m_invRate = MyMoneyMoney(1, 1) / m_rate;
+    m_invRate = MyMoneyMoney::ONE / m_rate;
   else
     qDebug("Price with zero value created for '%s' to '%s'",
            qPrintable(from), qPrintable(to));
@@ -78,7 +77,7 @@ MyMoneyPrice::~MyMoneyPrice()
 {
 }
 
-const MyMoneyMoney MyMoneyPrice::rate(const QString& id) const
+const MyMoneyMoney& MyMoneyPrice::rate(const QString& id) const
 {
   static MyMoneyMoney dummyPrice(1, 1);
 

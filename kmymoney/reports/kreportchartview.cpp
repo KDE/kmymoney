@@ -549,7 +549,7 @@ unsigned KReportChartView::drawPivotRowSet(int rowNum, const PivotGridRowSet& ro
 
 void KReportChartView::setDataCell(int row, int column, const double data)
 {
-  if (! coordinatePlane()->diagram()->datasetDimension() == 1)
+  if (coordinatePlane()->diagram()->datasetDimension() != 1)
     return;
 
   justifyModelSize(row + 1, column + 1);
@@ -560,7 +560,7 @@ void KReportChartView::setDataCell(int row, int column, const double data)
 
 void KReportChartView::setCellTip(int row, int column, QString tip)
 {
-  if (! coordinatePlane()->diagram()->datasetDimension() == 1)
+  if (coordinatePlane()->diagram()->datasetDimension() != 1)
     return;
 
   justifyModelSize(row + 1, column + 1);

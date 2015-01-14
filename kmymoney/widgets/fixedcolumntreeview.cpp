@@ -40,13 +40,11 @@
 
 class FixedColumnDelegate : public QStyledItemDelegate
 {
-  FixedColumnTreeView *m_fixedColumView;
   QTreeView *m_sourceView;
 
 public:
   explicit FixedColumnDelegate(FixedColumnTreeView *fixedColumView, QTreeView *sourceView) :
       QStyledItemDelegate(fixedColumView),
-      m_fixedColumView(fixedColumView),
       m_sourceView(sourceView) {
   }
 

@@ -75,9 +75,6 @@ signals:
 
 private slots:
   void searchContactResult(KJob *job);
-
-private:
-  ContactData m_contact;
 };
 
 #endif // MYMONEYCONTACT_H

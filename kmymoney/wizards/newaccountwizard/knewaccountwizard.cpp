@@ -334,7 +334,7 @@ MyMoneyMoney Wizard::openingBalance(void) const
 
   if (m_accountTypePage->accountType() == MyMoneyAccount::Loan) {
     if (m_generalLoanInfoPage->recordAllPayments())
-      return MyMoneyMoney(0, 1);
+      return MyMoneyMoney();
     if (moneyBorrowed())
       return -(m_generalLoanInfoPage->m_openingBalance->value());
     return m_generalLoanInfoPage->m_openingBalance->value();
@@ -348,7 +348,7 @@ MyMoneyPrice Wizard::conversionRate(void) const
     return MyMoneyPrice(MyMoneyFile::instance()->baseCurrency().id(),
                         m_accountTypePage->m_currencyComboBox->security().id(),
                         m_accountTypePage->m_openingDate->date(),
-                        MyMoneyMoney(1, 1),
+                        MyMoneyMoney::ONE,
                         i18n("User"));
   return MyMoneyPrice(MyMoneyFile::instance()->baseCurrency().id(),
                       m_accountTypePage->m_currencyComboBox->security().id(),
@@ -480,7 +480,7 @@ AccountTypePage::AccountTypePage(Wizard* wizard) :
   m_mandatoryGroup->add(m_conversionRate->lineedit());
 
   m_conversionRate->setPrecision(KMyMoneyGlobalSettings::pricePrecision());
-  m_conversionRate->setValue(MyMoneyMoney(1, 1));
+  m_conversionRate->setValue(MyMoneyMoney::ONE);
   slotUpdateCurrency();
 
   connect(m_typeSelection, SIGNAL(itemSelected(int)), this, SLOT(slotUpdateType(int)));
@@ -546,7 +546,7 @@ void AccountTypePage::slotGetOnlineQuote(void)
   QString id = MyMoneyFile::instance()->baseCurrency().id() + ' ' + m_currencyComboBox->security().id();
   QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, id);
   if (dlg->exec() == QDialog::Accepted) {
-    MyMoneyPrice price = dlg->price(id);
+    const MyMoneyPrice &price = dlg->price(id);
     if (price.isValid()) {
       m_conversionRate->setValue(price.rate(m_currencyComboBox->security().id()));
       if (price.date() != m_openingDate->date()) {
@@ -1008,7 +1008,7 @@ void LoanDetailsPage::slotCalculate(void)
         result += i18n("The number of payments has been decremented and the balloon payment has been modified to %1.", m_balloonAmount->lineedit()->text());
       } else if ((moneyBorrowed && val < 0 && qAbs(val) < qAbs(calc.payment()))
                  || (moneyLend && val > 0 && qAbs(val) < qAbs(calc.payment()))) {
-        m_balloonAmount->loadText(MyMoneyMoney(0, 1).formatMoney("", m_wizard->precision()));
+        m_balloonAmount->loadText(MyMoneyMoney().formatMoney("", m_wizard->precision()));
       } else {
         MyMoneyMoney refVal(static_cast<double>(val));
         m_balloonAmount->loadText(refVal.abs().formatMoney("", m_wizard->precision()));

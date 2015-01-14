@@ -61,10 +61,6 @@
 #include "models.h"
 #include "mymoneysecurity.h"
 
-/* -------------------------------------------------------------------------*/
-/*                         KTransactionPtrVector                            */
-/* -------------------------------------------------------------------------*/
-
 // *** KPayeeListItem Implementation ***
 
 KPayeeListItem::KPayeeListItem(QListWidget *parent, const MyMoneyPayee& payee) :
@@ -208,6 +204,8 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadPayees()));
 
   connect(m_filterBox, SIGNAL(currentIndexChanged(int)), this, SLOT(slotChangeFilter(int)));
+
+  connect(payeeIdentifiers, SIGNAL(dataChanged()), this, SLOT(slotPayeeDataChanged()));
 
   // use the size settings of the last run (if any)
   KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
@@ -462,6 +460,8 @@ void KPayeesView::slotSelectPayee(void)
 
     showTransactions();
 
+    payeeIdentifiers->setSource(m_payee);
+
   } catch (const MyMoneyException &e) {
     qDebug("exception during display of payee: %s at %s:%ld", qPrintable(e.what()), qPrintable(e.file()), e.line());
     m_register->clear();
@@ -529,7 +529,7 @@ void KPayeesView::showTransactions(void)
     // take care of foreign currencies
     MyMoneyMoney val = split.shares().abs();
     if (acc.currencyId() != base.id()) {
-      MyMoneyPrice price = file->price(acc.currencyId(), base.id());
+      const MyMoneyPrice &price = file->price(acc.currencyId(), base.id());
       // in case the price is valid, we use it. Otherwise, we keep
       // a flag that tells us that the balance is somewhat inaccurate
       if (price.isValid()) {
@@ -635,6 +635,8 @@ void KPayeesView::slotPayeeDataChanged(void)
       comboDefaultCategory->setEnabled(false);
       labelDefaultCategory->setEnabled(false);
     }
+
+    rc |= (m_payee.payeeIdentifiers() != payeeIdentifiers->identifiers());
   }
   setDirty(rc);
 }
@@ -653,6 +655,7 @@ void KPayeesView::slotUpdatePayee(void)
       m_payee.setNotes(notesEdit->toPlainText());
       m_payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(m_matchType->checkedId()), checkMatchIgnoreCase->isChecked(), matchKeyEditList->items());
       m_payee.setDefaultAccountId();
+      m_payee.resetPayeeIdentifiers(payeeIdentifiers->identifiers());
 
       if (checkEnableDefaultCategory->isChecked()) {
         QString temp;

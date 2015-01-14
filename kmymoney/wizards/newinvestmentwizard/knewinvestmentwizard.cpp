@@ -196,7 +196,7 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
         newSecurity.setValue("kmm-online-source", field("onlineSourceCombo").toString());
       }
     }
-    if (m_onlineUpdatePage->isOnlineFactorEnabled() && (field("onlineFactor").value<MyMoneyMoney>() != MyMoneyMoney(1, 1)))
+    if (m_onlineUpdatePage->isOnlineFactorEnabled() && (field("onlineFactor").value<MyMoneyMoney>() != MyMoneyMoney::ONE))
       newSecurity.setValue("kmm-online-factor", field("onlineFactor").value<MyMoneyMoney>().toString());
     if (!field("investmentIdentification").toString().isEmpty())
       newSecurity.setValue("kmm-security-id", field("investmentIdentification").toString());

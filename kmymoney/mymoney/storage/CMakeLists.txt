@@ -1,5 +1,7 @@
 set(storage_HEADERS
   imymoneystorage.h imymoneyserialize.h imymoneystorageformat.h
+  kmymoneystorageplugin.h
+  databasestoreableobject.h
   )
 
 set(storage_a_SOURCES
@@ -10,6 +12,7 @@ set(storage_a_SOURCES
   mymoneydatabasemgr.cpp
   mymoneydbdef.cpp
   mymoneydbdriver.cpp
+  kmymoneystorageplugin.cpp
   )
 
 # This library is actually not needed. It is built just for
@@ -17,12 +20,16 @@ set(storage_a_SOURCES
 add_library( kmm_storage STATIC ${storage_a_SOURCES} )
 kde_target_enable_exceptions(kmm_storage PUBLIC)
 
-target_link_libraries( kmm_storage PUBLIC KF5::I18n Qt5::Core Qt5::Xml Qt5::Sql Qt5::Gui Alkimia::alkimia)
+target_link_libraries( kmm_storage PUBLIC KF5::Service KF5::I18n Qt5::Core Qt5::Xml Qt5::Sql Qt5::Gui Alkimia::alkimia)
 
 ########### install files ###############
 
 install(FILES ${storage_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel )
+
+install(FILES kmymoney-sqlstorageplugin.desktop
+  DESTINATION ${SERVICETYPES_INSTALL_DIR}
+)
 
 ############## tests ####################
 if( KDE4_BUILD_TESTS )
@@ -42,7 +49,7 @@ if( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneydatabasemgrtest TESTNAME kmymoney-mymoneydatabasemgrtest ${mymoneydatabasemgrtest_SRCS} )
   add_dependencies( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage )
 
-  target_link_libraries( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage ${target_link_libraries_test} )
+  target_link_libraries( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage onlinetask_interfaces ${target_link_libraries_test} )
 
   # MyMoneyMap
   set( mymoneymaptest_SRCS mymoneymaptest.cpp ../mymoneytestutils.cpp )
@@ -58,6 +65,6 @@ if( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyseqaccessmgrtest TESTNAME kmymoney-mymoneyseqaccessmgrtest ${mymoneyseqaccessmgrtest_SRCS} )
   add_dependencies( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage )
 
-  target_link_libraries( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage ${target_link_libraries_test} )
+  target_link_libraries( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage onlinetask_interfaces ${target_link_libraries_test} )
 
 endif( KDE4_BUILD_TESTS )

@@ -413,7 +413,7 @@ void KTagsView::showTransactions(void)
     // take care of foreign currencies
     MyMoneyMoney val = split.shares().abs();
     if (acc.currencyId() != base.id()) {
-      MyMoneyPrice price = file->price(acc.currencyId(), base.id());
+      const MyMoneyPrice &price = file->price(acc.currencyId(), base.id());
       // in case the price is valid, we use it. Otherwise, we keep
       // a flag that tells us that the balance is somewhat inaccurate
       if (price.isValid()) {

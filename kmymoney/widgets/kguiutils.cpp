@@ -40,6 +40,8 @@
 // Project Includes
 
 #include "kmymoneyglobalsettings.h"
+#include "onlinetasks/interfaces/ui/ionlinejobedit.h"
+#include "kmymoneytextedit.h"
 
 /**************************************************************************
  *                                                                        *
@@ -101,6 +103,21 @@ void kMandatoryFieldGroup::add(QWidget *widget)
       connect(qobject_cast<KUrlRequester*>(widget),
               SIGNAL(textChanged(QString)),
               this, SLOT(changed()));
+
+    else if (qobject_cast<KMyMoneyTextEdit*>(widget))
+      connect(qobject_cast<KMyMoneyTextEdit*>(widget),
+              SIGNAL(textChanged()),
+              this, SLOT(changed()));
+
+    else if (qobject_cast<IonlineJobEdit*>(widget)) {
+      connect(qobject_cast<IonlineJobEdit*>(widget),
+              SIGNAL(validityChanged(bool)),
+              this, SLOT(changed()));
+      // Do not set palette for IonlineJobEdits as they contain subwidgets
+      m_widgets.append(widget);
+      changed();
+      return;
+    }
 
     else {
       qWarning("MandatoryFieldGroup: unsupported class %s", (widget->metaObject()->className()));
@@ -188,6 +205,22 @@ void kMandatoryFieldGroup::changed(void)
         break;
       } else
         continue;
+    }
+    if (qobject_cast<KMyMoneyTextEdit*>(widget)) {
+      if ( !(qobject_cast<KMyMoneyTextEdit*>(widget))->isValid() ) {
+        enable = false;
+        break;
+      } else {
+        continue;
+      }
+    }
+    if (qobject_cast<IonlineJobEdit*>(widget)) {
+      if ( !(qobject_cast<IonlineJobEdit*>(widget))->isValid() ) {
+        enable = false;
+        break;
+      } else {
+        continue;
+      }
     }
   }
 

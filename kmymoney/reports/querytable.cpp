@@ -950,7 +950,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
 
   //work around if there is no price for the starting balance
   if (!(file->balance(account.id(), startingDate)).isZero()
-      && account.deepCurrencyPrice(startingDate) == MyMoneyMoney(1, 1)) {
+      && account.deepCurrencyPrice(startingDate) == MyMoneyMoney::ONE) {
     MyMoneyTransactionFilter filter;
     //get the transactions for the time before the report
     filter.setDateFilter(QDate(), startingDate);
@@ -1014,7 +1014,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     if (m_config.isConvertCurrency()) {
       price = account.baseCurrencyPrice((*it_transaction).postDate()); //we only need base currency because the value is in deep currency
     } else {
-      price = MyMoneyMoney(1, 1);
+      price = MyMoneyMoney::ONE;
     }
 
     MyMoneyMoney value = s.value() * price;
@@ -1089,7 +1089,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     returnInvestment = ((endingBal + paidDividend) - returnInvestment) / returnInvestment;
     returnInvestment = returnInvestment.convert(10000);
   } else {
-    returnInvestment = MyMoneyMoney(0, 1);
+    returnInvestment = MyMoneyMoney();
   }
 
   try {

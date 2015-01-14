@@ -32,7 +32,7 @@ qt5_wrap_ui(libsettings_a_SOURCES ${libsettings_a_UI} )
 
 add_library(settings STATIC ${libsettings_a_SOURCES})
 
-target_link_libraries(settings PUBLIC KF5::KDELibs4Support KF5::KCMUtils KF5::ItemViews Alkimia::alkimia)
+target_link_libraries(settings PUBLIC KF5::KDELibs4Support KF5::KCMUtils KF5::ItemViews Alkimia::alkimia Qt5::Sql)
 
 if (KF5Holidays_FOUND)
   target_link_libraries(settings PUBLIC KF5::Holidays)

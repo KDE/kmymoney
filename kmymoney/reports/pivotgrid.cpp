@@ -34,7 +34,7 @@ const unsigned PivotOuterGroup::m_kDefaultSortOrder = 100;
 
 PivotCell::PivotCell(const MyMoneyMoney& value) :
     MyMoneyMoney(value),
-    m_stockSplit(MyMoneyMoney(1, 1))
+    m_stockSplit(MyMoneyMoney::ONE)
 {
   m_cellUsed |= !value.isZero();
 }
@@ -53,7 +53,7 @@ PivotCell PivotCell::operator += (const PivotCell& right)
 PivotCell PivotCell::operator += (const MyMoneyMoney& value)
 {
   m_cellUsed |= !value.isZero();
-  if (m_stockSplit != MyMoneyMoney(1, 1))
+  if (m_stockSplit != MyMoneyMoney::ONE)
     m_postSplit += value;
   else
     MyMoneyMoney::operator += (value);
@@ -83,8 +83,8 @@ MyMoneyMoney PivotCell::calculateRunningSum(const MyMoneyMoney& runningSum)
 {
   MyMoneyMoney::operator += (runningSum);
   MyMoneyMoney::operator = ((*this * m_stockSplit) + m_postSplit);
-  m_postSplit = MyMoneyMoney(0, 1);
-  m_stockSplit = MyMoneyMoney(1, 1);
+  m_postSplit = MyMoneyMoney();
+  m_stockSplit = MyMoneyMoney::ONE;
   return *this;
 }
 

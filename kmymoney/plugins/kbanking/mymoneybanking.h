@@ -57,14 +57,19 @@ class KBAccountSettings;
 // Project Includes
 
 #include "kmymoneyplugin.h"
+#include "onlinepluginextended.h"
 #include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
+
+#include "mymoney/onlinejobtyped.h"
+#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/national/tasks/germanonlinetransfer.h"
 
 /**
   * This class represents the KBanking plugin towards KMymoney.
   * All GUI related issues are handled in this object.
   */
-class KBankingPlugin : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::OnlinePlugin
+class KBankingPlugin : public KMyMoneyPlugin::OnlinePluginExtended
 {
   friend class KMyMoneyBanking;
 
@@ -81,12 +86,12 @@ public:
 
   void protocols(QStringList& protocolList) const;
 
-private:
-  /**
-    * creates the job view and hooks it into the main view
-    */
-  void createJobView(void);
+  QStringList availableJobs(QString accountId);
+  IonlineTaskSettings::ptr settings(QString accountId, QString taskName);
 
+  void sendOnlineJob(QList<onlineJob>& jobs);
+
+private:
   /**
     * creates the action objects available through the application menus
     */
@@ -154,6 +159,11 @@ private:
   AB_ACCOUNT* aqbAccount(const MyMoneyAccount& acc) const;
 
   /**
+   * This is a convenient method for aqbAccount if you have KMyMoney's account id only.
+   */
+  AB_ACCOUNT* aqbAccount(const QString& accountId) const;
+
+  /**
     * Called by the application framework to update the
     * KMyMoney account @a acc with data from the online source.
     * Store the jobs in the outbox in case @a moreAccounts is true
@@ -173,10 +183,15 @@ private:
     */
   void startPasswordTimer(void);
 
+  bool enqueTransaction(onlineJobTyped<germanOnlineTransfer>& job);
+  bool enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job);
+
+
 protected slots:
   void slotSettings(void);
   void slotImport(void);
   void slotClearPasswordCache(void);
+  void executeQueue(void);
 
 signals:
   void queueChanged(void);
@@ -189,6 +204,12 @@ private:
   KMyMoneyBanking*      m_kbanking;
   QMap<QString, QString> m_protocolConversionMap;
   KBAccountSettings* m_accountSettings;
+
+  /**
+   * @brief @ref onlineJob "onlineJobs" which are executed right
+   * Key is onlineJob->id(). This container is used during execution of jobs.
+   */
+  QMap<QString, onlineJob> m_onlineJobQueue;
 };
 
 /**
@@ -208,7 +229,7 @@ public:
   int enqueueJob(AB_JOB *j);
   int dequeueJob(AB_JOB *j);
   std::list<AB_JOB*> getEnqueuedJobs();
-
+  void transfer();
 
   virtual bool interactiveImport();
 
@@ -217,7 +238,7 @@ protected:
   int fini();
 
   bool askMapAccount(const MyMoneyAccount& acc);
-  QString mappingId(const MyMoneyAccount& acc) const;
+  QString mappingId(const MyMoneyObject& object) const;
 
   bool importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags);
   const AB_ACCOUNT_STATUS* _getAccountStatus(AB_IMEXPORTER_ACCOUNTINFO *ai);

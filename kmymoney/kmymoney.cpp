@@ -153,6 +153,10 @@
 #include "mymoney/storage/mymoneystoragedump.h"
 #include "mymoney/mymoneyforecast.h"
 
+#include "mymoney/onlinejob.h"
+#include "mymoney/onlinetransfer.h"
+#include "mymoney/onlinejobadministration.h"
+
 #include "converter/mymoneyqifwriter.h"
 #include "converter/mymoneyqifreader.h"
 #include "converter/mymoneystatementreader.h"
@@ -162,11 +166,12 @@
 #include "plugins/interfaces/kmmstatementinterface.h"
 #include "plugins/interfaces/kmmimportinterface.h"
 #include "plugins/pluginloader.h"
+#include "plugins/onlinepluginextended.h"
 
 #include <libkgpgfile/kgpgfile.h>
 
 #include <transactioneditor.h>
-#include <QVBoxLayout>
+#include "konlinetransferform.h"
 #include <QHBoxLayout>
 
 #include "kmymoneyutils.h"
@@ -214,14 +219,14 @@ public:
       m_additionalKeyLabel(0),
       m_additionalKeyButton(0),
       m_recentFiles(0),
-#ifdef KF5Holidays_FOUND
       m_holidayRegion(0),
-#endif
-      m_applicationIsReady(true) {
+      m_applicationIsReady(true)
+  {
     // since the days of the week are from 1 to 7,
     // and a day of the week is used to index this bit array,
     // resize the array to 8 elements (element 0 is left unused)
     m_processingDays.resize(8);
+
   }
 
   void closeFile(void);
@@ -436,6 +441,8 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   // kickstart date change timer
   slotDateChanged();
+
+  connect(this, SIGNAL(fileLoaded(KUrl)), onlineJobAdministration::instance(), SLOT(updateOnlineTaskProperties()));
 }
 
 KMyMoneyApp::~KMyMoneyApp()
@@ -703,6 +710,12 @@ void KMyMoneyApp::initActions(void)
   account_online_update_all->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "download"));
   connect(account_online_update_all, SIGNAL(triggered()), this, SLOT(slotAccountUpdateOnlineAll()));
   menu->addAction(account_online_update_all);
+
+  QAction *account_online_transfer = actionCollection()->addAction("account_online_new_credit_transfer");
+  account_online_transfer->setText(i18n("New credit transfer"));
+  account_online_transfer->setIcon(KMyMoneyUtils::overlayIcon("view-bank-account", "mail-message-new"));
+  connect(account_online_transfer, SIGNAL(triggered()), this, SLOT(slotNewOnlineTransfer()));
+  connect(onlineJobAdministration::instance(), SIGNAL(canSendCreditTransferChanged(bool)),  account_online_transfer, SLOT(setEnabled(bool)));
 
   // *******************
   // The categories menu
@@ -3078,7 +3091,7 @@ void KMyMoneyApp::createCategory(MyMoneyAccount& account, const MyMoneyAccount& 
     account = dialog->account();
     parentAccount = dialog->parentAccount();
 
-    createAccount(account, parentAccount, brokerageAccount, MyMoneyMoney(0, 1));
+    createAccount(account, parentAccount, brokerageAccount, MyMoneyMoney());
   }
   delete dialog;
 }
@@ -3232,11 +3245,11 @@ void KMyMoneyApp::slotManualPriceUpdate(void)
     try {
       MyMoneySecurity security = MyMoneyFile::instance()->security(d->m_selectedInvestment.currencyId());
       MyMoneySecurity currency = MyMoneyFile::instance()->security(security.tradingCurrency());
-      MyMoneyPrice price = MyMoneyFile::instance()->price(security.id(), currency.id());
+      const MyMoneyPrice &price = MyMoneyFile::instance()->price(security.id(), currency.id());
       signed64 fract = MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision());
 
       QPointer<KCurrencyCalculator> calc =
-        new KCurrencyCalculator(security, currency, MyMoneyMoney(1, 1), price.rate(currency.id()), price.date(), fract);
+        new KCurrencyCalculator(security, currency, MyMoneyMoney::ONE, price.rate(currency.id()), price.date(), fract);
       calc->setupPriceEditor();
 
       // The dialog takes care of adding the price if necessary
@@ -6226,6 +6239,7 @@ void KMyMoneyApp::slotUpdateActions(void)
   action("account_online_update")->setEnabled(false);
   action("account_online_update_all")->setEnabled(false);
   action("account_online_unmap")->setEnabled(false);
+  action("account_online_new_credit_transfer")->setEnabled( onlineJobAdministration::instance()->canSendCreditTransfer() );
   action("account_chart")->setEnabled(false);
 
   action("category_new")->setEnabled(fileOpen);
@@ -7068,6 +7082,8 @@ void KMyMoneyApp::slotPluginPlug(KPluginInfo* info)
 
   // check for online plugin
   KMyMoneyPlugin::OnlinePlugin* op = dynamic_cast<KMyMoneyPlugin::OnlinePlugin *>(plugin);
+  // check for extended online plugin
+  KMyMoneyPlugin::OnlinePluginExtended* ope = dynamic_cast<KMyMoneyPlugin::OnlinePluginExtended*>(plugin);
   // check for importer plugin
   KMyMoneyPlugin::ImporterPlugin* ip = dynamic_cast<KMyMoneyPlugin::ImporterPlugin *>(plugin);
 
@@ -7076,6 +7092,9 @@ void KMyMoneyApp::slotPluginPlug(KPluginInfo* info)
 
   if (op)
     d->m_onlinePlugins[plugin->objectName()] = op;
+
+  if (ope)
+    onlineJobAdministration::instance()->addPlugin(plugin->objectName(), ope);
 
   if (ip)
     d->m_importerPlugins[plugin->objectName()] = ip;
@@ -7202,6 +7221,8 @@ void KMyMoneyApp::slotAccountUnmapOnline(void)
       d->m_selectedAccount.deletePair("StatementKey");
       MyMoneyFile::instance()->modifyAccount(d->m_selectedAccount);
       ft.commit();
+      // The mapping could disable the online task system
+      onlineJobAdministration::instance()->updateOnlineTaskProperties();
     } catch (const MyMoneyException &e) {
       KMessageBox::error(this, i18n("Unable to unmap account from online account: %1", e.what()));
     }
@@ -7274,6 +7295,8 @@ void KMyMoneyApp::slotAccountMapOnline(void)
       try {
         MyMoneyFile::instance()->modifyAccount(acc);
         ft.commit();
+        // The mapping could enable the online task system
+        onlineJobAdministration::instance()->updateOnlineTaskProperties();
       } catch (const MyMoneyException &e) {
         KMessageBox::error(this, i18n("Unable to map account to online account: %1", e.what()));
       }
@@ -7350,6 +7373,135 @@ void KMyMoneyApp::slotAccountUpdateOnline(void)
   // re-enable the disabled actions
   slotUpdateActions();
 }
+
+void KMyMoneyApp::slotNewOnlineTransfer(void)
+{
+  kOnlineTransferForm *transferForm = new kOnlineTransferForm(this);
+  if (!d->m_selectedAccount.id().isEmpty()) {
+    transferForm->setCurrentAccount(d->m_selectedAccount.id());
+  }
+  connect( transferForm, SIGNAL(rejected()), transferForm, SLOT(deleteLater()));
+  connect( transferForm, SIGNAL(acceptedForSave(onlineJob)), this, SLOT(slotOnlineJobSave(onlineJob)));
+  connect( transferForm, SIGNAL(acceptedForSend(onlineJob)), this, SLOT(slotOnlineJobSend(onlineJob)));
+  connect( transferForm, SIGNAL(accepted()), transferForm, SLOT(deleteLater()));
+  transferForm->show();
+}
+
+void KMyMoneyApp::slotEditOnlineJob(const QString jobId)
+{
+  try {
+    const onlineJob constJob = MyMoneyFile::instance()->getOnlineJob( jobId );
+    slotEditOnlineJob( constJob );
+  } catch ( MyMoneyException& ) {
+    // Prevent a crash in very rare cases
+  }
+}
+
+void KMyMoneyApp::slotEditOnlineJob(onlineJob job)
+{
+  try {
+    slotEditOnlineJob( onlineJobTyped<creditTransfer>(job) );
+  } catch ( MyMoneyException& ) {
+  }
+}
+
+void KMyMoneyApp::slotEditOnlineJob(const onlineJobTyped<creditTransfer> job )
+{
+  kOnlineTransferForm *transferForm = new kOnlineTransferForm(this);
+  transferForm->setOnlineJob( job );
+  connect( transferForm, SIGNAL(rejected()), transferForm, SLOT(deleteLater()));
+  connect( transferForm, SIGNAL(acceptedForSave(onlineJob)), this, SLOT(slotOnlineJobSave(onlineJob)));
+  connect( transferForm, SIGNAL(acceptedForSend(onlineJob)), this, SLOT(slotOnlineJobSend(onlineJob)));
+  connect( transferForm, SIGNAL(accepted()), transferForm, SLOT(deleteLater()));
+  transferForm->show();
+}
+
+void KMyMoneyApp::slotOnlineJobSave(onlineJob job)
+{
+  MyMoneyFileTransaction fileTransaction;
+  if ( job.id() == MyMoneyObject::emptyId() )
+      MyMoneyFile::instance()->addOnlineJob( job );
+  else
+    MyMoneyFile::instance()->modifyOnlineJob( job );
+  fileTransaction.commit();
+}
+
+/** @todo when onlineJob queue is used, continue here */
+void KMyMoneyApp::slotOnlineJobSend( onlineJob job )
+{
+    MyMoneyFileTransaction fileTransaction;
+    if ( job.id() == MyMoneyObject::emptyId() )
+        MyMoneyFile::instance()->addOnlineJob( job );
+    else
+        MyMoneyFile::instance()->modifyOnlineJob( job );
+    fileTransaction.commit();
+
+    QList<onlineJob> jobList;
+    jobList.append(job);
+    slotOnlineJobSend( jobList );
+}
+
+void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
+{
+  MyMoneyFile *const kmmFile = MyMoneyFile::instance();
+  QMultiMap<QString, onlineJob> jobsByPlugin;
+
+  // Sort jobs by online plugin & lock them
+  foreach(onlineJob job, jobs) {
+    Q_ASSERT(job.id() != MyMoneyObject::emptyId());
+    // find the provider
+    const MyMoneyAccount originAcc = job.responsibleMyMoneyAccount();
+    job.setLock();
+    job.addJobMessage( onlineJobMessage(onlineJobMessage::debug, "KMyMoneyApp::slotOnlineJobSend", "Added to queue for plugin '"+originAcc.onlineBankingSettings().value("provider")+'\'') );
+    MyMoneyFileTransaction fileTransaction;
+    kmmFile->modifyOnlineJob( job );
+    fileTransaction.commit();
+    jobsByPlugin.insert(originAcc.onlineBankingSettings().value("provider"), job);
+  }
+
+  // Send onlineJobs to plugins
+  QList<QString> usedPlugins = jobsByPlugin.keys();
+  std::sort(usedPlugins.begin(), usedPlugins.end());
+  const QList<QString>::iterator newEnd = std::unique(usedPlugins.begin(), usedPlugins.end());
+  usedPlugins.erase(newEnd, usedPlugins.end());
+
+  foreach(const QString& pluginKey, usedPlugins) {
+    QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_onlinePlugins.constFind(pluginKey);
+
+    if (it_p != d->m_onlinePlugins.constEnd() ) {
+      // plugin found, call it
+      KMyMoneyPlugin::OnlinePluginExtended *pluginExt = dynamic_cast< KMyMoneyPlugin::OnlinePluginExtended* >(*it_p);
+      if (pluginExt == 0) {
+        qWarning("Job given for plugin which is not an extended plugin");
+        continue;
+      }
+      //! @fixme remove debug message
+      qDebug() << "Sending " << jobsByPlugin.count(pluginKey) << " job(s) to online plugin " << pluginKey;
+      QList<onlineJob> jobsToExecute = jobsByPlugin.values(pluginKey);
+      QList<onlineJob> executedJobs = jobsToExecute;
+      pluginExt->sendOnlineJob(executedJobs);
+
+      // Save possible changes of the online job and remove lock
+      MyMoneyFileTransaction fileTransaction;
+      foreach( onlineJob job, executedJobs ) {
+        fileTransaction.restart();
+        job.setLock( false );
+        kmmFile->modifyOnlineJob( job );
+        fileTransaction.commit();
+      }
+
+      if (  Q_UNLIKELY( executedJobs.size() != jobsToExecute.size() ) ) {
+        // OnlinePlugin did not return all jobs
+        qWarning() << "Error saving send online tasks. After restart you should see at minimum all successfully executed jobs marked send. Imperfect plugin: " << pluginExt->objectName();
+      }
+
+    } else {
+      qWarning() << "Error, got onlineJob for a account without online plugin.";
+      /** @FIXME can this actually happen? */
+    }
+  }
+}
+
 
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
 {

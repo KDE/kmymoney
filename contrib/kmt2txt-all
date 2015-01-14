@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# Update all kmymoney templates from gnucash accounts
+#
+# Author: Ralf Habacker <ralf.habacker@freenet.de>
+# 
+d=$(dirname $0)
+c=$(pwd)
+cd $d
+r=~/src/kmymoney-build/tools
+
+if test -z "$1"; then
+    echo "kmt2txt-all <outdir>"
+    exit 1
+fi
+
+xsltscript=$(realpath kmt2txt.stylesheet)
+in=$(realpath ../kmymoney/templates)
+out=$1
+for j in $(cd $in; find -name '*.kmt'); do
+    i=$(echo $j | sed 's,^./,,g')
+    p=$(dirname $i | sed 's,./,,g')
+    f=$(basename $i | sed 's,kmt,txt,g')
+    if ! test -d "$c/$out/$p"; then
+	mkdir -p "$c/$out/$p"
+    fi
+    infile="$in/$i"
+    outfile="$c/$out/$p/$f"
+#    if ! test -f "$out/$p/$f"; then
+#        echo "using $infile  to create template $outfile"
+#    else
+#	echo "using $infile to update $outfile"
+#    fi
+    xsltproc $xsltscript $infile | sort > $outfile
+done

@@ -1,23 +1,29 @@
 add_subdirectory( storage )
+add_subdirectory( payeeidentifier )
 
 ########### next target ###############
 
 set(kmm_mymoney_LIB_SRCS
   mymoneymoney.cpp mymoneyfinancialcalculator.cpp
   mymoneytransactionfilter.cpp
-  mymoneyobject.cpp mymoneykeyvaluecontainer.cpp
+  mymoneyfile.cpp mymoneykeyvaluecontainer.cpp
+  mymoneyobject.cpp
+  mymoneypayeeidentifiercontainer.cpp
   mymoneysplit.cpp mymoneyinstitution.cpp
   mymoneyexception.cpp mymoneyinvesttransaction.cpp mymoneyutils.cpp
   mymoneysecurity.cpp mymoneytransaction.cpp mymoneyschedule.cpp
   mymoneypayee.cpp
   mymoneytag.cpp
-  mymoneyfile.cpp
   mymoneycategory.cpp
   mymoneyaccount.cpp
   mymoneyreport.cpp mymoneystatement.cpp mymoneyprice.cpp mymoneybudget.cpp
   mymoneyobjectcontainer.cpp
   mymoneyforecast.cpp
   mymoneybalancecache.cpp
+  onlinejob.cpp
+  onlinejobadministration.cpp
+  onlinejobmessage.cpp
+  onlinejobfolder.cpp
   mymoneycontact.cpp
   )
 
@@ -30,10 +36,18 @@ set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   mymoneyschedule.h mymoneysecurity.h mymoneysplit.h mymoneystatement.h
   mymoneytransactionfilter.h mymoneytransaction.h
   mymoneyutils.h mymoneybudget.h mymoneyobjectcontainer.h mymoneyforecast.h
+  imymoneyprocessingcalendar.h
+  mymoneyfile.h
   mymoneyunittestable.h imymoneyprocessingcalendar.h
+  mymoneypayeeidentifiercontainer.h
+  onlinejob.h
+  onlinejobtyped.h
+  onlinejobmessage.h
+  onlinejobfolder.h
   )
 
 add_library(kmm_mymoney SHARED ${kmm_mymoney_LIB_SRCS})
+
 generate_export_header(kmm_mymoney BASE_NAME kmm_mymoney)
 
 target_link_libraries(kmm_mymoney PUBLIC
@@ -42,8 +56,16 @@ target_link_libraries(kmm_mymoney PUBLIC
                       Qt5::Xml
                       Qt5::Core
                       KF5::IconThemes
+                      KF5::Service
                       Alkimia::alkimia
-                      kmm_storage)
+                      kmm_storage
+#                     onlinetask_interfaces
+                      onlinetask_unavailabletask
+                      kmm_payeeidentifier_loader
+                      kmm_payeeidentifier
+                      payeeidentifier_iban_bic
+                      payeeidentifier_nationalAccount
+)
 
 if(KMM_ADDRESSBOOK_FOUND)
 target_link_libraries(kmm_mymoney PUBLIC KF5::PimIdentities KF5::AkonadiCore KF5::Abc)
@@ -91,7 +113,7 @@ if( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyfiletest TESTNAME kmymoney-mymoneyfiletest ${mymoneyfiletest_SRCS} )
   add_dependencies( mymoneyfiletest kmm_mymoney kmm_storage )
 
-  target_link_libraries( mymoneyfiletest kmm_storage kmm_mymoney ${target_link_libraries_test})
+  target_link_libraries( mymoneyfiletest kmm_storage kmm_mymoney ${target_link_libraries_test} )
 
   # MyMoneyFinancialCalculatorTest
   set( mymoneyfinancialcalculatortest_SRCS mymoneyfinancialcalculatortest.cpp mymoneytestutils.cpp )
@@ -140,6 +162,14 @@ if( KDE4_BUILD_TESTS )
   add_dependencies( mymoneyobjecttest kmm_mymoney )
 
   target_link_libraries( mymoneyobjecttest kmm_mymoney ${target_link_libraries_test})
+
+  # onlineJob
+  set( onlinejobtest_SRCS onlinejobtest.cpp )
+
+  kde4_add_unit_test( onlinejobtest TESTNAME kmymoney-onlinejobtest ${onlinejobtest_SRCS} )
+  ADD_DEPENDENCIES( onlinejobtest kmm_mymoney )
+
+  target_link_libraries( onlinejobtest kmm_mymoney onlinetask_interfaces ${target_link_libraries_test})
 
   # MyMoneyPayee
   set( mymoneypayeetest_SRCS mymoneypayeetest.cpp )
@@ -212,5 +242,22 @@ if( KDE4_BUILD_TESTS )
   add_dependencies( mymoneybalancecachetest kmm_mymoney )
 
   target_link_libraries( mymoneybalancecachetest kmm_mymoney ${target_link_libraries_test})
+
+  # OnlineJobAdministration
+  set( onlinejobtestadministration_SRCS onlinejobadministrationtest.cpp )
+
+  kde4_add_unit_test( onlinejobadministrationtest TESTNAME kmymoney-onlinejobadministrationtest ${onlinejobtestadministration_SRCS} )
+  add_dependencies( onlinejobadministrationtest kmm_mymoney )
+
+  target_link_libraries( onlinejobadministrationtest kmm_mymoney kmm_storage onlinetask_interfaces ${target_link_libraries_test})
+
+  # onlineJobTyped
+  set( onlinejobtypedtest_SRCS onlinejobtypedtest.cpp )
+
+  kde4_add_unit_test( onlinejobtypedtest TESTNAME kmymoney-onlinejobtypedtest ${onlinejobtypedtest_SRCS} )
+  #ADD_DEPENDENCIES( onlinejobknowntasktest  )
+
+  target_link_libraries( onlinejobtypedtest kmm_mymoney onlinetask_interfaces ${target_link_libraries_test})
+
 
 endif( KDE4_BUILD_TESTS )

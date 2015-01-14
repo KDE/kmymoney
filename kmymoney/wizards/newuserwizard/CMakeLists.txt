@@ -15,6 +15,6 @@ set (libnewuserwizard_a_UI
 qt5_wrap_ui(libnewuserwizard_a_SOURCES ${libnewuserwizard_a_UI})
 
 add_library(newuserwizard STATIC ${libnewuserwizard_a_SOURCES})
-target_link_libraries(newuserwizard KF5::KDELibs4Support Alkimia::alkimia)
+target_link_libraries(newuserwizard KF5::KDELibs4Support Qt5::Sql Alkimia::alkimia)
 add_dependencies(newuserwizard widgets wizardpages)
 

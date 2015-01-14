@@ -1063,8 +1063,7 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
   connect(tab->control()->buttonClose, SIGNAL(clicked()),
           this, SLOT(slotCloseCurrent()));
 
-  connect(tab->browserExtenstion(), SIGNAL(openUrlRequest(const QUrl &,
-          const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
+  connect(tab->browserExtenstion(), SIGNAL(openUrlRequest(const QUrl &, const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
           this, SLOT(slotOpenUrl(QUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
 
   // if this is a default report, then you can't delete it!

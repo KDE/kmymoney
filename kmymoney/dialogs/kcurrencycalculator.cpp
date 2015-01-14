@@ -74,7 +74,7 @@ bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares, const MyMoneyTra
       }
       // if the shares are still 0, we need to change that
       if (toValue.isZero()) {
-        MyMoneyPrice price = file->price(fromCurrency.id(), toCurrency.id());
+        const MyMoneyPrice &price = file->price(fromCurrency.id(), toCurrency.id());
         // if the price is valid calculate the shares. If it is invalid
         // assume a conversion rate of 1.0
         if (price.isValid()) {
@@ -153,7 +153,7 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
 
   // setup initial result
   if (m_result == MyMoneyMoney() && !m_value.isZero()) {
-    MyMoneyPrice pr = file->price(m_fromCurrency.id(), m_toCurrency.id(), date);
+    const MyMoneyPrice &pr = file->price(m_fromCurrency.id(), m_toCurrency.id(), date);
     if (pr.isValid()) {
       m_result = m_value * pr.rate(m_toCurrency.id());
     }
@@ -267,7 +267,7 @@ void KCurrencyCalculator::updateExample(const MyMoneyMoney& price)
     if (m_fromCurrency.isCurrency()) {
       msg += QString("\n");
       msg += QString("1 %1 = %2 %3").arg(m_toCurrency.tradingSymbol())
-             .arg((MyMoneyMoney(1, 1) / price).formatMoney("", KMyMoneyGlobalSettings::pricePrecision()))
+             .arg((MyMoneyMoney::ONE / price).formatMoney("", KMyMoneyGlobalSettings::pricePrecision()))
              .arg(m_fromCurrency.tradingSymbol());
     }
   }

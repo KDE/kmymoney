@@ -206,7 +206,7 @@ MyMoneyMoney MyMoneySplit::price(void) const
     return m_price;
   if (!m_value.isZero() && !m_shares.isZero())
     return m_value / m_shares;
-  return MyMoneyMoney(1, 1);
+  return MyMoneyMoney::ONE;
 }
 
 void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const

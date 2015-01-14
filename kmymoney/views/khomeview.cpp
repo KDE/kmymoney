@@ -84,7 +84,7 @@ class KHomeView::Private
 public:
   Private() :
       m_showAllSchedules(false),
-      m_needReload(true),
+      m_needReload(false),
       m_netWorthGraphLastValidSize(400, 300) {
   }
 
@@ -127,11 +127,8 @@ KHomeView::KHomeView(QWidget *parent, const char *name) :
   connect(d->m_part->view(), SIGNAL(zoomView(int)), this, SLOT(slotZoomView(int)));
   disconnect(d->m_part->view(), SIGNAL(zoomView(int)), d->m_part, SLOT(slotZoomView(int)));
 
-  connect(d->m_part->browserExtension(), SIGNAL(openUrlRequest(const QUrl &,
-          const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
+  connect(d->m_part->browserExtension(), SIGNAL(openUrlRequest(const QUrl &, const KParts::OpenUrlArguments &, const KParts::BrowserArguments &)),
           this, SLOT(slotOpenUrl(QUrl,KParts::OpenUrlArguments,KParts::BrowserArguments)));
-
-  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadView()));
 }
 
 KHomeView::~KHomeView()
@@ -920,7 +917,7 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
         MyMoneyMoney val;
         MyMoneyMoney balance = file->balance(stock.id(), QDate::currentDate());
         MyMoneySecurity security = file->security(stock.currencyId());
-        MyMoneyPrice price = file->price(stock.currencyId(), security.tradingCurrency());
+        const MyMoneyPrice &price = file->price(stock.currencyId(), security.tradingCurrency());
         val = (balance * price.rate(security.tradingCurrency())).convert(MyMoneyMoney::precToDenom(KMyMoneyGlobalSettings::pricePrecision()));
         // adjust value of security to the currency of the account
         MyMoneySecurity accountCurrency = file->currency(acc.currencyId());
@@ -1658,10 +1655,10 @@ void KHomeView::showCashFlowSummary()
             //convert to base currency if necessary
             if (repSplitAcc.currencyId() != file->baseCurrency().id()) {
               MyMoneyMoney curPrice = repSplitAcc.baseCurrencyPrice((*it_transaction).postDate());
-              value = ((*it_split).shares() * MyMoneyMoney(-1, 1)) * curPrice;
+              value = ((*it_split).shares() * MyMoneyMoney::MINUS_ONE) * curPrice;
               value = value.convert(10000);
             } else {
-              value = ((*it_split).shares() * MyMoneyMoney(-1, 1));
+              value = ((*it_split).shares() * MyMoneyMoney::MINUS_ONE);
             }
 
             //store depending on account type

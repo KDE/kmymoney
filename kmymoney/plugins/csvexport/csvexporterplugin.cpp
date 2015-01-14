@@ -84,7 +84,8 @@ void CsvExporterPlugin::slotCsvExport(void)
 
       writer->write(m_dlg->filename(), m_dlg->accountId(),
                     m_dlg->accountSelected(), m_dlg->categorySelected(),
-                    m_dlg->startDate(), m_dlg->endDate());
+                    m_dlg->startDate(), m_dlg->endDate(),
+                    m_dlg->separator());
     }
   }
 }

@@ -537,6 +537,16 @@ new transactions with this payee</string>
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tabPayeeIdentifiers">
+         <attribute name="title">
+          <string>Account Numbers</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="KPayeeIdentifierView" name="payeeIdentifiers" native="true"/>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </widget>
      </item>
@@ -593,9 +603,17 @@ new transactions with this payee</string>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KTextEdit</class>
-   <extends>QTextEdit</extends>
-   <header>ktextedit.h</header>
+   <class>KMyMoneyRegister::Register</class>
+   <extends>QTableWidget</extends>
+   <header>register.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyAccountCombo</class>
+   <extends>KComboBox</extends>
+   <header>kmymoneyaccountcombo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
   </customwidget>
   <customwidget>
    <class>KLineEdit</class>
@@ -613,14 +631,10 @@ new transactions with this payee</string>
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyAccountCombo</class>
-   <extends>KComboBox</extends>
-   <header>kmymoneyaccountcombo.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyRegister::Register</class>
-   <extends>QTableWidget</extends>
-   <header>register.h</header>
+   <class>KPayeeIdentifierView</class>
+   <extends>QWidget</extends>
+   <header>kpayeeidentifierview.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <includes>

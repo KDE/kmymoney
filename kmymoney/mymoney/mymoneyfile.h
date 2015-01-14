@@ -41,6 +41,7 @@
 #include <mymoneyprice.h>
 #include <mymoneyreport.h>
 #include <mymoneybudget.h>
+#include <onlinejob.h>
 #include "mymoneyschedule.h"
 #include <kmm_mymoney_export.h>
 #include <mymoneyunittestable.h>
@@ -153,7 +154,8 @@ public:
     notifyPayee,
     notifyTag,
     notifySchedule,
-    notifySecurity
+    notifySecurity,
+    notifyOnlineJob
   } notificationObjectT;
 
   /**
@@ -191,7 +193,7 @@ public:
   MyMoneyFile(IMyMoneyStorage *storage);
 
   // general get functions
-  const MyMoneyPayee user(void) const;
+  const MyMoneyPayee& user(void) const;
 
   // general set functions
   void setUser(const MyMoneyPayee& user);
@@ -1248,7 +1250,7 @@ public:
     * @return price found as MyMoneyPrice object
     * @note This throws an exception when the base currency is not set and toId is empty
     */
-  const MyMoneyPrice price(const QString& fromId, const QString& toId = QString(), const QDate& date = QDate::currentDate(), const bool exactDate = false) const;
+  MyMoneyPrice price(const QString& fromId, const QString& toId = QString(), const QDate& date = QDate::currentDate(), const bool exactDate = false) const;
 
   /**
     * This method returns a list of all prices.
@@ -1502,6 +1504,50 @@ public:
     * @return number of transactions with state @p state
     */
   int countTransactionsWithSpecificReconciliationState(const QString& accId, enum MyMoneyTransactionFilter::stateOptionE state) const;
+
+  /**
+   * @brief Saves a new onlineJob
+   * @param job you stay owner of the object (a copy will be created)
+   */
+  void addOnlineJob( onlineJob& job );
+
+  /**
+   * @brief Saves a onlineJob
+   * @param job you stay owner of the object (a copy will be created)
+   */
+  void modifyOnlineJob(const onlineJob job );
+
+  /**
+   * @brief Returns onlineJob identified by jobId
+   * @param jobId
+   * @return
+   */
+  const onlineJob getOnlineJob( const QString &jobId ) const;
+
+  /**
+   * @brief Returns all onlineJobs
+   * @return all online jobs, caller gains ownership
+   */
+  const QList<onlineJob> onlineJobList() const;
+
+  /**
+   * @brief Returns the number of onlineJobs
+   */
+  int countOnlineJobs() const;
+
+  /**
+   * @brief Remove onlineJob
+   *
+   * @note Removing an onlineJob fails if it is locked
+   */
+  void removeOnlineJob(const onlineJob& job);
+
+  /**
+   * @brief Removes multiple onlineJobs by id
+   *
+   * @note Removing an onlineJob fails if it is locked
+   */
+  void removeOnlineJob(const QStringList onlineJobIds);
 
 protected:
   /**

@@ -29,12 +29,9 @@
 #include <klocale.h>
 #include <kstandardguiitem.h>
 #include <kmessagebox.h>
-#include <KGuiItem>
-#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
 #include "mymoneycontact.h"
 #include "ui_knewfiledlgdecl.h"
 
@@ -74,8 +71,9 @@ KNewFileDlg::KNewFileDlg(QString userName, QString userStreet,
 
 void KNewFileDlg::init(const QString& title)
 {
-  KGuiItem::assign(d->ui.okBtn, KStandardGuiItem::ok());
-  KGuiItem::assign(d->ui.cancelBtn, KStandardGuiItem::cancel());
+    // TODO: port KF5
+  //d->ui.okBtn->setGuiItem(KStandardGuiItem::ok());
+  //d->ui.cancelBtn->setGuiItem(KStandardGuiItem::cancel());
 
   if (!title.isEmpty())
     setWindowTitle(title);

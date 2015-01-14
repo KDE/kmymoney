@@ -59,8 +59,6 @@
 #include "kmymoneyglobalsettings.h"
 #include "mymoneyfile.h"
 
-const int LinesPerMemo = 3;
-
 static const char * sortOrderText[] = {
   I18N_NOOP2("Unknown sort order", "Unknown"),
   I18N_NOOP("Post date"),

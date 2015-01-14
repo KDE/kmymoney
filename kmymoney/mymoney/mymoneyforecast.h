@@ -22,6 +22,7 @@
 // QT Includes
 
 #include <QMap>
+#include <QSet>
 #include <QList>
 #include <QString>
 
@@ -82,7 +83,7 @@ public:
   /**
    * Returns the forecast balance trend for account @a acc for day @p QDate
    */
-  MyMoneyMoney forecastBalance(const MyMoneyAccount& acc, QDate forecastDate);
+  MyMoneyMoney forecastBalance(const MyMoneyAccount& acc, const QDate &forecastDate);
 
   /**
    * Returns the forecast balance trend for account @a acc for offset @p int
@@ -399,9 +400,9 @@ private:
   QMap<QString, trendBalances> m_accountTrendList;
 
   /**
-   * list of forecast accounts
+   * list of forecast account ids.
    */
-  QMap<QString, QString> m_nameIdx;
+  QSet<QString> m_forecastAccounts;
 
   /**
    * cycle of accounts in days

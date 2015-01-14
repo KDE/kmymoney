@@ -34,7 +34,7 @@
 KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent)
     : KOnlineUpdateWizardPageDecl(parent)
 {
-  m_onlineFactor->setValue(MyMoneyMoney(1, 1));
+  m_onlineFactor->setValue(MyMoneyMoney::ONE);
   m_onlineFactor->setPrecision(4);
 
   // Connect signals-slots

@@ -21,7 +21,9 @@
 
 #include <QtTest/QtTest>
 
-#include "autotest.h"
+#include "mymoneytestutils.h"
+
+#include "onlinetasks/dummy/tasks/dummytask.h"
 
 QTEST_MAIN(MyMoneyDatabaseMgrTest)
 
@@ -29,7 +31,11 @@ MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
     : m_dbAttached(false),
     m_canOpen(true),
     m_file(this)
-{}
+{
+  // Create file and close it to release possible read-write locks
+  m_file.open();
+  m_file.close();
+}
 
 void MyMoneyDatabaseMgrTest::init()
 {
@@ -69,6 +75,7 @@ void MyMoneyDatabaseMgrTest::testEmptyConstructor()
   QVERIFY(m->nextPayeeID() == 0);
   QVERIFY(m->nextScheduleID() == 0);
   QVERIFY(m->nextReportID() == 0);
+  QVERIFY(m->nextOnlineJobID() == 0);
   QVERIFY(m->institutionList().count() == 0);
 
   QList<MyMoneyAccount> accList;
@@ -98,10 +105,14 @@ void MyMoneyDatabaseMgrTest::testBadConnections()
   m_url = QString("sql://%1@localhost/%2?driver=%3")
           .arg(userName, m_file.fileName(), mode);
 
-  QExplicitlySharedDataPointer <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
-  QVERIFY(sql);
-  int openStatus = sql->open(m_url, QIODevice::ReadWrite);
-  QVERIFY(0 != openStatus);
+  try {
+    QExplicitlySharedDataPointer <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
+    QVERIFY(sql);
+    QEXPECT_FAIL("", "Will fix when correct behaviour in this case is clear.", Continue);
+    QVERIFY(sql->open(m_url, QIODevice::ReadWrite) != 0);
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
 }
 
 void MyMoneyDatabaseMgrTest::testCreateDb()
@@ -135,7 +146,6 @@ void MyMoneyDatabaseMgrTest::testCreateDb()
       if (0 == sql->open(m_url, QIODevice::WriteOnly, true)) {
         MyMoneyFile::instance()->attachStorage(m);
         QVERIFY(sql->writeFile());
-        QVERIFY(0 == sql->upgradeDb());
       } else {
         m_canOpen = false;
       }
@@ -150,13 +160,17 @@ void MyMoneyDatabaseMgrTest::testAttachDb()
   if (!m_dbAttached) {
     testCreateDb();
     if (m_canOpen) {
-      MyMoneyFile::instance()->detachStorage();
-      QExplicitlySharedDataPointer <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
-      QVERIFY(sql);
-      int openStatus = sql->open(m_url, QIODevice::ReadWrite);
-      QVERIFY(0 == openStatus);
-      MyMoneyFile::instance()->attachStorage(m);
-      m_dbAttached = true;
+      try {
+        MyMoneyFile::instance()->detachStorage();
+        QExplicitlySharedDataPointer <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
+        QVERIFY(sql);
+        int openStatus = sql->open(m_url, QIODevice::ReadWrite);
+        QVERIFY(0 == openStatus);
+        MyMoneyFile::instance()->attachStorage(m);
+        m_dbAttached = true;
+      } catch (const MyMoneyException &e) {
+        unexpectedException(e);
+      }
     }
   }
 }
@@ -227,20 +241,21 @@ void MyMoneyDatabaseMgrTest::testSupportFunctions()
   }
 
   try {
-    QVERIFY(m->nextInstitutionID() == "I000001");
-    QVERIFY(m->nextAccountID() == "A000001");
-    QVERIFY(m->nextTransactionID() == "T000000000000000001");
-    QVERIFY(m->nextPayeeID() == "P000001");
-    QVERIFY(m->nextTagID() == "G000001");
-    QVERIFY(m->nextScheduleID() == "SCH000001");
-    QVERIFY(m->nextReportID() == "R000001");
+    QCOMPARE(m->nextInstitutionID(), QLatin1String("I000001"));
+    QCOMPARE(m->nextAccountID(), QLatin1String("A000001"));
+    QCOMPARE(m->nextTransactionID(), QLatin1String("T000000000000000001"));
+    QCOMPARE(m->nextPayeeID(), QLatin1String("P000001"));
+    QCOMPARE(m->nextTagID(), QLatin1String("G000001"));
+    QCOMPARE(m->nextScheduleID(), QLatin1String("SCH000001"));
+    QCOMPARE(m->nextReportID(), QLatin1String("R000001"));
+    QCOMPARE(m->nextOnlineJobID(), QLatin1String("O00000001"));
 
-    QVERIFY(m->liability().name() == "Liability");
-    QVERIFY(m->asset().name() == "Asset");
-    QVERIFY(m->expense().name() == "Expense");
-    QVERIFY(m->income().name() == "Income");
-    QVERIFY(m->equity().name() == "Equity");
-    QVERIFY(m->dirty() == false);
+    QCOMPARE(m->liability().name(), QLatin1String("Liability"));
+    QCOMPARE(m->asset().name(), QLatin1String("Asset"));
+    QCOMPARE(m->expense().name(), QLatin1String("Expense"));
+    QCOMPARE(m->income().name(), QLatin1String("Income"));
+    QCOMPARE(m->equity().name(), QLatin1String("Equity"));
+    QCOMPARE(m->dirty(), false);
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
@@ -2297,4 +2312,106 @@ void MyMoneyDatabaseMgrTest::testAccountList()
   accounts.clear();
   m->accountList(accounts);
   QVERIFY(accounts.count() == 2);
+}
+
+void MyMoneyDatabaseMgrTest::testAddOnlineJob()
+{
+  testAttachDb();
+
+  if (!m_canOpen) {
+    std::cout << "Database test skipped because no database could be opened." << std::endl;
+    return;
+  }
+
+  // Add a onlineJob
+  onlineJob job(new dummyTask());
+
+  QCOMPARE(m->onlineJobList().count(), 0);
+  m->setDirty();
+
+  QSKIP("Test not fully implemented, yet.", SkipAll);
+
+  try {
+    m->addOnlineJob(job);
+
+    QCOMPARE(m->onlineJobList().count(), 1);
+    QCOMPARE((*(m->onlineJobList().begin())).id(), QLatin1String("O00000001"));
+
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  // Try to re-add the same job. It should fail.
+  m->setDirty();
+  try {
+    m->addOnlineJob(job);
+    QFAIL("Expected exception missing");
+  } catch (const MyMoneyException &) {
+    QCOMPARE(m->dirty(), false);
+  }
+}
+
+void MyMoneyDatabaseMgrTest::testModifyOnlineJob()
+{
+  testAttachDb();
+
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
+
+  onlineJob job(new dummyTask());
+  testAddOnlineJob();
+  m->setDirty();
+
+  QSKIP("Test not fully implemented, yet.", SkipAll);
+
+  // update online job
+  try {
+    m->modifyOnlineJob(job);
+    QVERIFY(m->onlineJobList().count() == 1);
+    //QVERIFY((*(m->onlineJobList().begin())).name() == "EURO");
+    QVERIFY((*(m->onlineJobList().begin())).id() == "O00000001");
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  m->setDirty();
+
+  onlineJob unknownJob(new dummyTask());
+  try {
+    m->modifyOnlineJob(unknownJob);
+    QFAIL("Expected exception missing");
+  } catch (const MyMoneyException &) {
+    QVERIFY(m->dirty() == false);
+  }
+}
+
+void MyMoneyDatabaseMgrTest::testRemoveOnlineJob()
+{
+  testAttachDb();
+
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
+
+  onlineJob job(new dummyTask());
+  testAddOnlineJob();
+  m->setDirty();
+
+  QSKIP("Test not fully implemented, yet.", SkipAll);
+
+  try {
+    m->removeOnlineJob(job);
+    QVERIFY(m->onlineJobList().count() == 0);
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  m->setDirty();
+
+  onlineJob unknownJob(new dummyTask());
+  try {
+    m->removeOnlineJob(unknownJob);
+    QFAIL("Expected exception missing");
+  } catch (const MyMoneyException &) {
+    QVERIFY(m->dirty() == false);
+  }
 }

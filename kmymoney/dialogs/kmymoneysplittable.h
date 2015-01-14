@@ -162,6 +162,16 @@ protected slots:
 
 signals:
   /**
+    * This signal is emitted whenever the widget goes into edit mode.
+    */
+  void editStarted(void);
+
+  /**
+    * This signal is emitted whenever the widget ends edit mode.
+    */
+  void editFinished(void);
+
+  /**
     * This signal is emitted whenever the return key is pressed
     * and the widget is not in edit mode.
     */

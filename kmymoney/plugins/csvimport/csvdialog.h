@@ -25,6 +25,7 @@
 #include <QScrollBar>
 
 #include <KComboBox>
+#include <KColorScheme>
 
 #include "csvimporterplugin.h"
 
@@ -495,11 +496,11 @@ private:
   int              m_rectWidth;
 
   QBrush           m_clearBrush;
+  QBrush           m_clearBrushText;
   QBrush           m_colorBrush;
+  QBrush           m_colorBrushText;
   QBrush           m_errorBrush;
-  QColor           m_clearColor;
-  QColor           m_setColor;
-  QColor           m_errorColor;
+  QBrush           m_errorBrushText;
 
   QList<QLabel*>   m_stageLabels;
   QList<int>       m_memoColList;

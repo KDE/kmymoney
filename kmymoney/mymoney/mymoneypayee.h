@@ -23,6 +23,8 @@
 
 #include <QString>
 #include <QMetaType>
+#include <QHash>
+#include <QSharedPointer>
 class QStringList;
 
 // ----------------------------------------------------------------------------
@@ -30,6 +32,7 @@ class QStringList;
 
 #include <kmm_mymoney_export.h>
 #include <mymoneyobject.h>
+#include "mymoneypayeeidentifiercontainer.h"
 
 /**
   * This class represents a payee or receiver within the MyMoney engine.
@@ -38,7 +41,7 @@ class QStringList;
   *
   * @author Thomas Baumgart
   */
-class KMM_MYMONEY_EXPORT MyMoneyPayee : public MyMoneyObject
+class KMM_MYMONEY_EXPORT MyMoneyPayee : public MyMoneyObject, public MyMoneyPayeeIdentifierContainer
 {
 private:
   // Simple fields

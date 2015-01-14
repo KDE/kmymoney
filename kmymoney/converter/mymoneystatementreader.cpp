@@ -61,6 +61,11 @@
 #include "existingtransactionmatchfinder.h"
 #include "scheduledtransactionmatchfinder.h"
 
+bool matchNotEmpty(const QString &l, const QString &r)
+{
+  return !l.isEmpty() && QString::compare(l, r, Qt::CaseInsensitive) == 0;
+}
+
 class MyMoneyStatementReader::Private
 {
 public:
@@ -266,12 +271,12 @@ void MyMoneyStatementReader::Private::assignUniqueBankID(MyMoneySplit& s, const 
 void MyMoneyStatementReader::Private::setupPrice(MyMoneySplit &s, const MyMoneyAccount &splitAccount, const MyMoneyAccount &transactionAccount, const QDate &postDate)
 {
   if (transactionAccount.currencyId() != splitAccount.currencyId()) {
-    // a currency converstion is needed asume that split has already a proper value
+    // a currency converstion is needed assume that split has already a proper value
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneySecurity toCurrency = file->security(splitAccount.currencyId());
     MyMoneySecurity fromCurrency = file->security(transactionAccount.currencyId());
     // get the price for the transaction's date
-    MyMoneyPrice price = file->price(fromCurrency.id(), toCurrency.id(), postDate);
+    const MyMoneyPrice &price = file->price(fromCurrency.id(), toCurrency.id(), postDate);
     // if the price is valid calculate the shares
     if (price.isValid()) {
       const int fract = splitAccount.fraction(toCurrency);
@@ -553,11 +558,10 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
   QList<MyMoneySecurity> list = file->securityList();
   QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
   while (it != list.constEnd() && security.id().isEmpty()) {
-    if (sec_in.m_strSymbol.isEmpty()) {
-      if ((*it).name() == sec_in.m_strName)
-        security = *it;
-    } else if ((*it).tradingSymbol().toLower() == sec_in.m_strSymbol.toLower())
+    if (matchNotEmpty(sec_in.m_strSymbol, (*it).tradingSymbol()) ||
+        matchNotEmpty(sec_in.m_strName, (*it).name())) {
       security = *it;
+    }
     ++it;
   }
 
@@ -654,8 +658,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       while (!found && it_account != accounts.constEnd()) {
         QString currencyid = file->account(*it_account).currencyId();
         MyMoneySecurity security = file->security(currencyid);
-        if ((statementTransactionUnderImport.m_strSymbol.toLower() == security.tradingSymbol().toLower())
-            || (statementTransactionUnderImport.m_strSecurity.toLower() == security.name().toLower())) {
+        if (matchNotEmpty(statementTransactionUnderImport.m_strSymbol, security.tradingSymbol()) ||
+            matchNotEmpty(statementTransactionUnderImport.m_strSecurity, security.name())) {
           thisaccount = file->account(*it_account);
           found = true;
 
@@ -666,7 +670,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // update the price, while we're here.  in the future, this should be
             // an option
             QString basecurrencyid = file->baseCurrency().id();
-            MyMoneyPrice price = file->price(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted, true);
+            const MyMoneyPrice &price = file->price(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted, true);
             if (!price.isValid()  && ((!statementTransactionUnderImport.m_amount.isZero() && !statementTransactionUnderImport.m_shares.isZero()) || !statementTransactionUnderImport.m_price.isZero())) {
               MyMoneyPrice newprice;
               if (!statementTransactionUnderImport.m_price.isZero()) {
@@ -699,8 +703,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           QList<MyMoneySecurity> list = MyMoneyFile::instance()->securityList();
           QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
           while (it != list.constEnd() && security.id().isEmpty()) {
-            if (statementTransactionUnderImport.m_strSymbol.toLower() == (*it).tradingSymbol().toLower()
-                || statementTransactionUnderImport.m_strSecurity.toLower() == (*it).name().toLower()) {
+            if (matchNotEmpty(statementTransactionUnderImport.m_strSymbol, (*it).tradingSymbol()) ||
+                matchNotEmpty(statementTransactionUnderImport.m_strSecurity, (*it).name())) {
               security = *it;
             }
             ++it;
@@ -770,8 +774,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       else {//  Ensure category sub-accounts are dealt with properly
         s1.setAccountId(d->interestId(statementTransactionUnderImport.m_strInterestCategory));
       }
-      s1.setShares(-statementTransactionUnderImport.m_amount);
-      s1.setValue(-statementTransactionUnderImport.m_amount);
+      s1.setShares(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
+      s1.setValue(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
 
       // Split 2 will be the zero-amount investment split that serves to
       // mark this transaction as a cash dividend and note which stock account
@@ -782,7 +786,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       s2.setAccountId(thisaccount.id());
       transactionUnderImport.addSplit(s2);
 
-      transfervalue = statementTransactionUnderImport.m_amount + statementTransactionUnderImport.m_fees;
+      /*  at this point any fees have been taken into account already
+       *  so don't deduct them again.
+       *  BUG 322381
+       */
+      transfervalue = statementTransactionUnderImport.m_amount;
     } else if (statementTransactionUnderImport.m_eAction == MyMoneyStatement::Transaction::eaInterest) {
       if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
         s1.setAccountId(d->interestId(thisaccount));
@@ -792,8 +800,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         else
           s1.setAccountId(d->expenseId(statementTransactionUnderImport.m_strInterestCategory));
       }
-      s1.setShares(statementTransactionUnderImport.m_amount);
-      s1.setValue(statementTransactionUnderImport.m_amount);
+      s1.setShares(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
+      s1.setValue(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
 
 /// ***********   Add split as per Div       **********
       // Split 2 will be the zero-amount investment split that serves to

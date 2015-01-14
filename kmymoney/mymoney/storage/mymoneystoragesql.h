@@ -1,20 +1,22 @@
-/***************************************************************************
-                          mymoneystoragesql.h
-                          -------------------
-    begin                : 11 November 2005
-    copyright            : (C) 2005 by Tony Bloomfield
-    email                : tonybloom@users.sourceforge.net
-                         : Fernando Vilas <fvilas@iname.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * This file is part of KMyMoney, A Personal Finance Manager for KDE
+ * Copyright (C) 2005 Tony Bloomfield <tonybloom@users.sourceforge.net>
+ * Copyright (C)      Fernando Vilas <fvilas@iname.com>
+ * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYSTORAGESQL_H
 #define MYMONEYSTORAGESQL_H
@@ -51,6 +53,7 @@ class QIODevice;
 #include "mymoneytransactionfilter.h"
 #include "mymoneydbdef.h"
 #include "mymoneydbdriver.h"
+#include "databasestoreableobject.h"
 
 class MyMoneyDbDriver;
 
@@ -187,7 +190,7 @@ public:
   void modifyInstitution(const MyMoneyInstitution& inst);
   void removeInstitution(const MyMoneyInstitution& inst);
   void addPayee(const MyMoneyPayee& payee);
-  void modifyPayee(const MyMoneyPayee& payee);
+  void modifyPayee(MyMoneyPayee payee);
   void removePayee(const MyMoneyPayee& payee);
   void addTag(const MyMoneyTag& tag);
   void modifyTag(const MyMoneyTag& tag);
@@ -215,6 +218,12 @@ public:
   void addBudget(const MyMoneyBudget& bud);
   void modifyBudget(const MyMoneyBudget& bud);
   void removeBudget(const MyMoneyBudget& bud);
+  void addOnlineJob( const onlineJob& job );
+  void modifyOnlineJob( const onlineJob& job);
+  void removeOnlineJob( const onlineJob& job);
+  void addPayeeIdentifier( payeeIdentifier& ident );
+  void modifyPayeeIdentifier( const payeeIdentifier& ident );
+  void removePayeeIdentifier( const payeeIdentifier& ident );
 
   unsigned long transactionCount(const QString& aid = QString()) const;
   inline const QHash<QString, unsigned long> transactionCountMap() const {
@@ -239,13 +248,16 @@ public:
   const QMap<QString, MyMoneyInstitution> fetchInstitutions(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyPayee> fetchPayees(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyTag> fetchTags(const QStringList& idList = QStringList(), bool forUpdate = false) const;
+  const QMap<QString, onlineJob> fetchOnlineJobs(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const MyMoneyPriceList fetchPrices(const QStringList& fromIdList = QStringList(), const QStringList& toIdList = QStringList(), bool forUpdate = false) const;
-  const MyMoneyPrice fetchSinglePrice(const QString& fromIdList, const QString& toIdList, const QDate& date, bool exactDate, bool forUpdate = false) const;
+  MyMoneyPrice fetchSinglePrice(const QString& fromId, const QString& toId, const QDate& date_, bool exactDate, bool = false) const;
   const QMap<QString, MyMoneyReport> fetchReports(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneySchedule> fetchSchedules(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneySecurity> fetchSecurities(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyTransaction> fetchTransactions(const QString& tidList = QString(), const QString& dateClause = QString(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyTransaction> fetchTransactions(const MyMoneyTransactionFilter& filter) const;
+  payeeIdentifier fetchPayeeIdentifier(const QString& id) const;
+  const QMap<QString, payeeIdentifier> fetchPayeeIdentifiers(const QStringList& idList = QStringList()) const;
   bool isReferencedByTransaction(const QString& id) const;
 
   void readPayees(const QString&);
@@ -273,6 +285,8 @@ public:
   long unsigned getNextInstitutionId() const;
   long unsigned getNextPayeeId() const;
   long unsigned getNextTagId() const;
+  long unsigned getNextOnlineJobId() const;
+  long unsigned getNextPayeeIdentifierId() const;
   long unsigned getNextReportId() const;
   long unsigned getNextScheduleId() const;
   long unsigned getNextSecurityId() const;
@@ -287,6 +301,8 @@ public:
   long unsigned incrementScheduleId();
   long unsigned incrementSecurityId();
   long unsigned incrementTransactionId();
+  long unsigned incrementOnlineJobId();
+  long unsigned incrementPayeeIdentfierId();
 
   void loadAccountId(const unsigned long& id);
   void loadTransactionId(const unsigned long& id);
@@ -297,6 +313,8 @@ public:
   void loadSecurityId(const unsigned long& id);
   void loadReportId(const unsigned long& id);
   void loadBudgetId(const unsigned long& id);
+  void loadOnlineJobId(const unsigned long& id);
+  void loadPayeeIdentifierId(const unsigned long& id);
 
   /**
     * This method allows to modify the precision with which prices
@@ -332,6 +350,12 @@ private:
   void writeReports(void);
   void writeBudgets(void);
 
+  /**
+   * @name writeMethods
+   * @{
+   * These methods bind the data fields of MyMoneyObjects to a given query.
+   * This is helpfull as the query has usually an update and a insert format.
+   */
   void writeInstitutionList(const QList<MyMoneyInstitution>& iList, QSqlQuery& q);
   void writePayee(const MyMoneyPayee& p, QSqlQuery& q, bool isUserInfo = false);
   void writeTag(const MyMoneyTag& p, QSqlQuery& q);
@@ -348,8 +372,14 @@ private:
   void writeReport(const MyMoneyReport& rep, QSqlQuery& q);
   void writeBudget(const MyMoneyBudget& bud, QSqlQuery& q);
   void writeKeyValuePairs(const QString& kvpType, const QVariantList& kvpId, const QList<QMap<QString, QString> >& pairs);
+  void writeOnlineJob(const onlineJob& job, QSqlQuery& query);
+  void writePayeeIdentifier(const payeeIdentifier& pid, QSqlQuery& query);
+  /** @} */
 
-  // read routines
+  /**
+   * @name readMethods
+   * @{
+   */
   void readFileInfo(void);
   void readLogonData(void);
   void readUserInformation(void);
@@ -365,6 +395,7 @@ private:
   void readCurrencies(void);
   void readReports(void);
   void readBudgets(void);
+  /** @} */
 
   void deleteTransaction(const QString& id);
   void deleteTagSplitsList(const QString& txId, const QList<int>& splitIdList);
@@ -409,8 +440,9 @@ private:
   int upgradeToV5();
   int upgradeToV6();
   int upgradeToV7();
+  int upgradeToV8();
 
-  int createTables(int version = std::numeric_limits<int>::max());
+  int createTables();
   void createTable(const MyMoneyDbTable& t, int version = std::numeric_limits<int>::max());
   bool alterTable(const MyMoneyDbTable& t, int fromVersion);
   void clean();
@@ -419,6 +451,18 @@ private:
   const QStringList tables(QSql::TableType tt) {
     return (m_driver->tables(tt, static_cast<const QSqlDatabase&>(*this)));
   };
+
+  /**
+   * @brief Ensure the storagePlugin with iid was setup
+   *
+   * @throws MyMoneyException in case of an error which makes the use
+   * of the plugin unavailable.
+   */
+  bool setupStoragePlugin( QString iid );
+
+  void insertStorableObject( const databaseStoreableObject& obj, const QString& id );
+  void updateStorableObject( const databaseStoreableObject& obj, const QString& id );
+  void deleteStorableObject( const databaseStoreableObject& obj, const QString& id );
 
   // data
   QExplicitlySharedDataPointer<MyMoneyDbDriver> m_driver;
@@ -446,6 +490,9 @@ private:
   long unsigned m_reports;
   long unsigned m_kvps;
   long unsigned m_budgets;
+  long unsigned m_onlineJobs;
+  long unsigned m_payeeIdentifier;
+
   // next id to use (for future archive)
   long unsigned m_hiIdInstitutions;
   long unsigned m_hiIdPayees;
@@ -456,6 +503,9 @@ private:
   long unsigned m_hiIdSecurities;
   long unsigned m_hiIdReports;
   long unsigned m_hiIdBudgets;
+  long unsigned m_hiIdOnlineJobs;
+  long unsigned m_hiIdPayeeIdentifier;
+
   // encrypt option - usage TBD
   QString m_encryptData;
 
@@ -515,5 +565,10 @@ private:
     * @sa setStartDate()
     */
   static QDate m_startDate;
+
+  /**
+    *
+    */
+  QSet<QString> m_loadedStoragePlugins;
 };
 #endif // MYMONEYSTORAGESQL_H

@@ -24,7 +24,10 @@
 #include <QList>
 #include <QtTest/QtTest>
 
-#include "autotest.h"
+#include "mymoneytestutils.h"
+
+#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "payeeidentifier/payeeidentifierloader.h"
 
 QTEST_MAIN(MyMoneyFileTest)
 
@@ -1429,6 +1432,40 @@ void MyMoneyFileTest::testRemovePayee()
   }
 }
 
+void MyMoneyFileTest::testPayeeWithIdentifier()
+{
+  MyMoneyPayee p;
+  try {
+    MyMoneyFileTransaction ft;
+    m->addPayee(p);
+    ft.commit();
+
+    p = m->payee(p.id());
+
+    payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifier(payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
+    payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban(ident);
+    iban->setIban(QLatin1String("DE82 2007 0024 0066 6446 00"));
+
+    ft.restart();
+    p.addPayeeIdentifier(iban);
+    m->modifyPayee(p);
+    ft.commit();
+
+    p = m->payee(p.id());
+    QCOMPARE(p.payeeIdentifiers().count(), 1);
+
+    ident = p.payeeIdentifiers().first();
+    try {
+      iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(ident);
+    } catch (...) {
+      QFAIL("Unexpected exception");
+    }
+    QCOMPARE(iban->electronicIban(), QLatin1String("DE82200700240066644600"));
+  } catch (const MyMoneyException& e) {
+    unexpectedException(e);
+  }
+}
+
 void MyMoneyFileTest::testAddTransactionStd()
 {
   testAddAccounts();
@@ -2034,7 +2071,7 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithEqualImported
   MyMoneyAccount a = m->account("A000001");
 
   a.setValue("lastImportedTransactionDate", QDate(2011, 12, 1).toString(Qt::ISODate));
-  a.setValue("lastStatementBalance", MyMoneyMoney(0, 1).toString());
+  a.setValue("lastStatementBalance", MyMoneyMoney().toString());
 
   MyMoneyFileTransaction ft;
   m->modifyAccount(a);
@@ -2050,7 +2087,7 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithUnequalImport
   MyMoneyAccount a = m->account("A000001");
 
   a.setValue("lastImportedTransactionDate", QDate(2011, 12, 1).toString(Qt::ISODate));
-  a.setValue("lastStatementBalance", MyMoneyMoney(1, 1).toString());
+  a.setValue("lastStatementBalance", MyMoneyMoney::ONE.toString());
 
   MyMoneyFileTransaction ft;
   m->modifyAccount(a);
@@ -2221,6 +2258,148 @@ void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_trans
   ft.commit();
 
   QVERIFY(m->countTransactionsWithSpecificReconciliationState(accountId, MyMoneyTransactionFilter::notReconciled) == 0);
+}
+
+void MyMoneyFileTest::testAddOnlineJob()
+{
+  QSKIP("Need dummy task for this test", SkipAll);
+#if 0
+  // Add a onlineJob
+  onlineJob job(new germanOnlineTransfer());
+
+  MyMoneyFileTransaction ft;
+  m->addOnlineJob( job );
+  QCOMPARE( job.id(), QString("O000001"));
+  ft.commit();
+
+  QVERIFY(m_objectsRemoved.count() == 0);
+  QVERIFY(m_objectsAdded.count() == 1);
+  QVERIFY(m_objectsModified.count() == 0);
+  QVERIFY(m_balanceChanged.count() == 0);
+  QVERIFY(m_valueChanged.count() == 0);
+#endif
+}
+
+void MyMoneyFileTest::testGetOnlineJob()
+{
+  QSKIP("Need dummy task for this test", SkipAll);
+  testAddOnlineJob();
+
+  const onlineJob requestedJob = m->getOnlineJob( "O000001" );
+  QVERIFY( !requestedJob.isNull() );
+  QCOMPARE( requestedJob.id(), QString("O000001") );
+}
+
+void MyMoneyFileTest::testRemoveOnlineJob()
+{
+  QSKIP("Need dummy task for this test", SkipAll);
+#if 0
+  // Add a onlineJob
+  onlineJob job(new germanOnlineTransfer());
+  onlineJob job2(new germanOnlineTransfer());
+  onlineJob job3(new germanOnlineTransfer());
+
+
+  MyMoneyFileTransaction ft;
+  m->addOnlineJob( job );
+  m->addOnlineJob( job2 );
+  m->addOnlineJob( job3 );
+  ft.commit();
+
+  clearObjectLists();
+
+  ft.restart();
+  m->removeOnlineJob( job );
+  m->removeOnlineJob( job2 );
+  ft.commit();
+
+  QCOMPARE(m_objectsRemoved.count(), 2);
+  QCOMPARE(m_objectsAdded.count(), 0);
+  QCOMPARE(m_objectsModified.count(), 0);
+  QCOMPARE(m_balanceChanged.count(), 0);
+  QCOMPARE(m_valueChanged.count(), 0);
+#endif
+}
+
+void MyMoneyFileTest::testOnlineJobRollback()
+{
+  QSKIP("Need dummy task for this test", SkipAll);
+#if 0
+  // Add a onlineJob
+  onlineJob job(new germanOnlineTransfer());
+  onlineJob job2(new germanOnlineTransfer());
+  onlineJob job3(new germanOnlineTransfer());
+
+  MyMoneyFileTransaction ft;
+  m->addOnlineJob( job );
+  m->addOnlineJob( job2 );
+  m->addOnlineJob( job3 );
+  ft.rollback();
+
+  QCOMPARE(m_objectsRemoved.count(), 0);
+  QCOMPARE(m_objectsAdded.count(), 0);
+  QCOMPARE(m_objectsModified.count(), 0);
+  QCOMPARE(m_balanceChanged.count(), 0);
+  QCOMPARE(m_valueChanged.count(), 0);
+#endif
+}
+
+void MyMoneyFileTest::testRemoveLockedOnlineJob()
+{
+  QSKIP("Need dummy task for this test", SkipAll);
+#if 0
+  // Add a onlineJob
+  onlineJob job(new germanOnlineTransfer());
+  job.setLock(true);
+  QVERIFY( job.isLocked() );
+
+  MyMoneyFileTransaction ft;
+  m->addOnlineJob( job );
+  ft.commit();
+
+  clearObjectLists();
+
+  // Try removing locked transfer
+  ft.restart();
+  m->removeOnlineJob( job );
+  ft.commit();
+  QVERIFY2(m_objectsRemoved.count() == 0, "Online Job was locked, removing is not allowed");
+  QVERIFY(m_objectsAdded.count() == 0);
+  QVERIFY(m_objectsModified.count() == 0);
+  QVERIFY(m_balanceChanged.count() == 0);
+  QVERIFY(m_valueChanged.count() == 0);
+
+#endif
+}
+
+/** @todo */
+void MyMoneyFileTest::testModifyOnlineJob()
+{
+  QSKIP("Need dummy task for this test", SkipAll);
+#if 0
+  // Add a onlineJob
+  onlineJob job(new germanOnlineTransfer());
+  MyMoneyFileTransaction ft;
+  m->addOnlineJob( job );
+  ft.commit();
+
+  clearObjectLists();
+
+  // Modify online job
+  job.setJobSend();
+  ft.restart();
+  m->modifyOnlineJob(job);
+  ft.commit();
+
+  QCOMPARE(m_objectsRemoved.count(), 0);
+  QCOMPARE(m_objectsAdded.count(), 0);
+  QCOMPARE(m_objectsModified.count(), 1);
+  QCOMPARE(m_balanceChanged.count(), 0);
+  QCOMPARE(m_valueChanged.count(), 0);
+
+  //onlineJob modifiedJob = m->getOnlineJob( job.id() );
+  //QCOMPARE(modifiedJob.responsibleAccount(), QString("Std::Assert"));
+#endif
 }
 
 void MyMoneyFileTest::testClearedBalance()

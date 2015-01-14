@@ -45,6 +45,7 @@
 #include <mymoneyprice.h>
 #include <mymoneyreport.h>
 #include <mymoneybudget.h>
+#include <onlinejob.h>
 
 /**
   * @author Thomas Baumgart
@@ -109,7 +110,7 @@ public:
   virtual ~IMyMoneyStorage();
 
   // general get functions
-  virtual const MyMoneyPayee user(void) const = 0;
+  virtual const MyMoneyPayee& user(void) const = 0;
   virtual const QDate creationDate(void) const = 0;
   virtual const QDate lastModificationDate(void) const = 0;
   virtual unsigned int currentFixVersion(void) const = 0;
@@ -636,7 +637,7 @@ public:
 
   virtual void addPrice(const MyMoneyPrice& price) = 0;
   virtual void removePrice(const MyMoneyPrice& price) = 0;
-  virtual const MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& date, const bool exactDate) const = 0;
+  virtual MyMoneyPrice price(const QString& fromId, const QString& toId, const QDate& date, const bool exactDate) const = 0;
 
   /**
     * This method returns a list of all prices.
@@ -914,6 +915,39 @@ public:
   virtual void removeBudget(const MyMoneyBudget& budget) = 0;
 
 
+  /**
+    * This method is used to add a new onlineJob. The id will be
+    * overwritten.
+    *
+    * An exception will be thrown upon erronous situations.
+    *
+    * @param job The onlineJob, caller remains owner of it. Id might be updated.
+    */
+  virtual void addOnlineJob( onlineJob& job ) = 0;
+
+  /**
+   * @brief Saves a onlineJob
+   * @param job
+   */
+  virtual void modifyOnlineJob(const onlineJob& job ) = 0;
+
+  /**
+   * @brief Get onlineJob by id
+   *
+   * @return onlineJob you are not the owner nor allowed to delete it.
+   * @throw MyMoneyException if jobId was not found
+   */
+  virtual const onlineJob getOnlineJob( const QString& jobId ) const = 0;
+
+  /**
+   * @brief Return all onlineJobs
+   */
+  virtual const QList<onlineJob> onlineJobList() const = 0;
+
+  /**
+   * @brief Remove an onlineJobs
+   */
+  virtual void removeOnlineJob( const onlineJob& ) = 0;
 
   /**
     * This method checks, if the given @p object is referenced

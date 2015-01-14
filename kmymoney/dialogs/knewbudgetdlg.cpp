@@ -56,7 +56,7 @@ KNewBudgetDlg::KNewBudgetDlg(QWidget* parent) :
     d->ui.m_cbYear->addItem(QString::number(iYear++));
 
   iYear = dToday.year();
-  for (int i = 0; i <= icFutureYears; i++)
+  for (int i = 0; i <= icPastYears; i++)
     d->ui.m_cbYear->addItem(QString::number(--iYear));
 }
 

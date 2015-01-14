@@ -416,7 +416,7 @@ void KForecastView::loadSummaryView(void)
     //advice about trends
     msg.clear();
     MyMoneyMoney accCycleVariation = forecast.accountCycleVariation(acc);
-    if (accCycleVariation < MyMoneyMoney(0, 1)) {
+    if (accCycleVariation < MyMoneyMoney()) {
       msg = QString("<font color=\"%1\">").arg(KMyMoneyGlobalSettings::listNegativeValueColor().name());
       msg += i18n("The account %1 is decreasing %2 per cycle.", acc.name(), MyMoneyUtils::formatMoney(accCycleVariation, acc, currency));
       msg += QString("</font>");

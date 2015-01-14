@@ -635,7 +635,7 @@ void InvestProcessing::quantityColumnSelected(int col)
     m_csvDialog->m_pageInvestment->ui->comboBoxInv_quantityCol->setCurrentIndex(col);  // accept new column
     m_quantitySelected = true;
     if (m_quantityColumn != -1) {
-//          if a previous fee column is detected, but in a different column...
+      //  if a previous quantity column is detected, but in a different column...
       if ((m_columnTypeList[m_quantityColumn] == type)  && (m_quantityColumn != col)) {
         m_columnTypeList[m_quantityColumn].clear();// ...clear it
       }
@@ -1692,7 +1692,12 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
       (tr.m_eAction == (MyMoneyStatement::Transaction::eaSell)) ||
       (tr.m_eAction == (MyMoneyStatement::Transaction::eaInterest))) {
     tr.m_strBrokerageAccount = m_trInvestData.brokerageAccnt;
-    tr.m_amount = - tr.m_amount;
+    //  no need to adjust sign here now
+    //  tr.m_amount = - tr.m_amount;
+    /*
+     *  need to deduct fees here
+     */
+    tr.m_amount -= m_trInvestData.fee;
   }
 
   else if (tr.m_eAction == (MyMoneyStatement::Transaction::eaNone)) {

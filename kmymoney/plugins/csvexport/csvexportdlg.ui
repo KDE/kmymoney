@@ -34,7 +34,7 @@
         </size>
        </property>
        <property name="text">
-        <string>From this dialog you are able to export transactions to a comma separated file, (known as a CSV file, because of the extension).  Please enter the path to the CSV file or select it by clicking on the Browse button.
+        <string>From this dialog you are able to export transactions to a comma separated file, (known as a CSV file, because of the extension).  However, you are able to specify an alternative separator below.  Please enter the path to the CSV file or select it by clicking on the Browse button.
 
 You can choose the file's path, and the account. Choose Account to export all the transactions between the specified dates,  or just choose to export Categories.</string>
        </property>
@@ -146,7 +146,7 @@ You can choose the file's path, and the account. Choose Account to export all th
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="5,12,12,5">
+      <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="3,12,12,8,3">
        <item>
         <spacer name="horizontalSpacer_3">
          <property name="orientation">
@@ -260,6 +260,40 @@ You can choose the file's path, and the account. Choose Account to export all th
              <widget class="QDateEdit" name="m_kmymoneydateEnd"/>
             </item>
            </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="m_qgroupboxSeparator">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Field Separator</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QComboBox" name="m_separatorComboBox">
+            <item>
+             <property name="text">
+              <string>Comma (,)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Semicolon (;)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Tab (\t)</string>
+             </property>
+            </item>
+           </widget>
           </item>
          </layout>
         </widget>

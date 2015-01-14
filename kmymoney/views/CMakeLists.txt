@@ -21,6 +21,9 @@ set(libviews_a_SOURCES
   tocitemreport.cpp
   kscheduletreeitem.cpp
   ktagsview.cpp
+  konlinejoboutbox.cpp
+  kpayeeidentifierview.cpp
+  payeeidentifierselectiondelegate.cpp
   )
 
 set(libviews_a_HEADER kmymoneyview.h)
@@ -35,6 +38,8 @@ set(libviews_a_UI
   kpayeesviewdecl.ui
   kscheduledviewdecl.ui
   ktagsviewdecl.ui
+  konlinejoboutbox.ui
+  kpayeeidentifierview.ui
   )
 
 # The handling of these ui files depends
@@ -44,6 +49,14 @@ qt5_wrap_ui(libviews_a_SOURCES ${libviews_a_UI})
 add_library(views STATIC ${libviews_a_SOURCES})
 
 target_link_libraries(views PUBLIC KF5::Archive KF5::KHtml KF5::KDELibs4Support Qt5::Sql Alkimia::alkimia)
+
+# TODO: Remove this dependency. But it is needed as long as the payee editor uses these objects directly
+# This should be replaced by virtual methods in a pure abstract object.
+target_link_libraries( views PUBLIC
+  payeeidentifier_iban_bic
+  payeeidentifier_nationalAccount
+  kmm_mymoney # needed to load payeeIdentifier
+)
 
 # we rely on some of the dialogs to be generated
 add_dependencies(views dialogs newinvestmentwizard newloanwizard endingbalancedlg)

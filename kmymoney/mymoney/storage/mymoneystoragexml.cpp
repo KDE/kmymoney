@@ -57,6 +57,7 @@ public:
   QMap<QString, MyMoneySecurity> secList;
   QMap<QString, MyMoneyReport> rList;
   QMap<QString, MyMoneyBudget> bList;
+  QMap<QString, onlineJob> onlineJobList;
   QMap<MyMoneySecurityPair, MyMoneyPriceEntries> prList;
 
   QString           m_fromSecurity;
@@ -73,7 +74,6 @@ public:
 
 
 };
-
 
 class MyMoneyXmlContentHandler : public QXmlContentHandler
 {
@@ -100,7 +100,15 @@ private:
   int                m_level;
   int                m_elementCount;
   QDomDocument       m_doc;
+
+  /**
+   * @node Text in the xml file is not added to this QDomElement. Only tags and their attributes are added.
+   */
   QDomElement        m_baseNode;
+
+  /**
+   * @node Text in the xml file is not added to this QDomElement. Only tags and their attributes are added.
+   */
   QDomElement        m_currNode;
   QString            m_errMsg;
 };
@@ -160,7 +168,8 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
         || s == "budget"
         || s == "fileinfo"
         || s == "user"
-        || s == "scheduled_tx") {
+        || s == "scheduled_tx"
+        || s == "onlinejob" ) {
       m_baseNode = m_doc.createElement(qName);
       for (int i = 0; i < atts.count(); ++i) {
         m_baseNode.setAttribute(atts.qName(i), atts.value(i));
@@ -299,6 +308,10 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           MyMoneyPrice p(m_reader->d->m_fromSecurity, m_reader->d->m_toSecurity, m_baseNode);
           m_reader->d->prList[MyMoneySecurityPair(m_reader->d->m_fromSecurity, m_reader->d->m_toSecurity)][p.date()] = p;
           m_reader->signalProgress(++m_elementCount, 0);
+        } else if (s == "onlinejob") {
+          onlineJob job(m_baseNode);
+          if (!job.id().isEmpty())
+            m_reader->d->onlineJobList[job.id()] = job;
         } else {
           m_errMsg = i18n("Unknown XML tag %1 found in line %2", qName, m_loc->lineNumber());
           qWarning() << m_errMsg;
@@ -362,6 +375,9 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       m_reader->m_storage->loadPrices(m_reader->d->prList);
       m_reader->d->bList.clear();
       m_reader->signalProgress(-1, -1);
+    } else if (s == "onlinejobs") {
+      m_reader->m_storage->loadOnlineJobs(m_reader->d->onlineJobList);
+      m_reader->d->onlineJobList.clear();
     }
   }
   return rc;
@@ -528,6 +544,10 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, IMyMoneySerialize* storage)
   writeBudgets(budgets);
   mainElement.appendChild(budgets);
 
+  QDomElement onlineJobs = m_doc->createElement("ONLINEJOBS");
+  writeOnlineJobs(onlineJobs);
+  mainElement.appendChild(onlineJobs);
+  
   QTextStream stream(qf);
   stream.setCodec("UTF-8");
   stream << m_doc->toString();
@@ -824,6 +844,24 @@ void MyMoneyStorageXML::writeBudgets(QDomElement& parent)
 void MyMoneyStorageXML::writeBudget(QDomElement& budget, const MyMoneyBudget& b)
 {
   b.writeXML(*m_doc, budget);
+}
+
+void MyMoneyStorageXML::writeOnlineJobs(QDomElement& parent)
+{
+  const QList<onlineJob> list = m_storage->onlineJobList();
+  parent.setAttribute("count", list.count());
+  signalProgress(0, list.count(), i18n("Saving online banking orders..."));
+  unsigned i = 0;
+  QList<onlineJob>::ConstIterator end = list.constEnd();
+  for (QList<onlineJob>::ConstIterator it = list.constBegin(); it != end; ++it) {
+    writeOnlineJob(parent, *it);
+    signalProgress(++i, 0);
+  }
+}
+
+void MyMoneyStorageXML::writeOnlineJob(QDomElement& onlineJobs, const onlineJob& job)
+{
+  job.writeXML(*m_doc, onlineJobs);
 }
 
 

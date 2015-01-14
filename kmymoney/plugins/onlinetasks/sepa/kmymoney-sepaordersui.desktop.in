@@ -1,0 +1,19 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KMyMoney/OnlineTaskUi
+
+X-KMyMoney-onlineTaskIds=org.kmymoney.creditTransfer.sepa
+
+X-KDE-Library=konlinetasks_sepa
+X-KDE-PluginKeyword=sepaCreditTransferUi
+
+X-KDE-PluginInfo-Name=SEPA orders for online banking
+X-KDE-PluginInfo-Author=Christian David
+X-KDE-PluginInfo-Email=christian-david@web.de
+X-KDE-PluginInfo-Version=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX}
+X-KDE-PluginInfo-Website=http://kmymoney.org/plugins.html
+X-KDE-PluginInfo-License=GPLv2+
+X-KDE-PluginInfo-EnabledByDefault=true
+
+Name=SEPA Credit Transfer
+Comment=Credit Transfer within the Single Euro Payments Area

@@ -21,7 +21,7 @@
 
 #include <QtTest/QtTest>
 
-#include "autotest.h"
+#include "mymoneytestutils.h"
 #include "mymoneybalancecache.h"
 
 QTEST_MAIN(MyMoneyBalanceCacheTest)

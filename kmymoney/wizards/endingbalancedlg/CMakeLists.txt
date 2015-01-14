@@ -19,7 +19,7 @@ set (libendingbalancedlg_a_UI
 qt5_wrap_ui(libendingbalancedlg_a_SOURCES ${libendingbalancedlg_a_UI} )
 
 add_library(endingbalancedlg STATIC ${libendingbalancedlg_a_SOURCES})
-target_link_libraries(endingbalancedlg KF5::KDELibs4Support Alkimia::alkimia)
+target_link_libraries(endingbalancedlg KF5::KDELibs4Support Qt5::Sql Alkimia::alkimia)
 
 # we rely on some widgets to be generated
 add_dependencies(endingbalancedlg widgets dialogs)

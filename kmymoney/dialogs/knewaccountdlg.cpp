@@ -360,9 +360,9 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     loadKVP("maxCreditEarly", m_maxCreditEarlyEdit);
     // reverse the sign for display purposes
     if (!m_maxCreditAbsoluteEdit->lineedit()->text().isEmpty())
-      m_maxCreditAbsoluteEdit->setValue(m_maxCreditAbsoluteEdit->value()*MyMoneyMoney(-1, 1));
+      m_maxCreditAbsoluteEdit->setValue(m_maxCreditAbsoluteEdit->value()*MyMoneyMoney::MINUS_ONE);
     if (!m_maxCreditEarlyEdit->lineedit()->text().isEmpty())
-      m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney(-1, 1));
+      m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney::MINUS_ONE);
     loadKVP("lastNumberUsed", m_lastCheckNumberUsed);
 
     if (m_account.isInvest()) {
@@ -536,15 +536,15 @@ void KNewAccountDlg::okClicked()
 
   // the figures for credit line with reversed sign
   if (!m_maxCreditAbsoluteEdit->lineedit()->text().isEmpty())
-    m_maxCreditAbsoluteEdit->setValue(m_maxCreditAbsoluteEdit->value()*MyMoneyMoney(-1, 1));
+    m_maxCreditAbsoluteEdit->setValue(m_maxCreditAbsoluteEdit->value()*MyMoneyMoney::MINUS_ONE);
   if (!m_maxCreditEarlyEdit->lineedit()->text().isEmpty())
-    m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney(-1, 1));
+    m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney::MINUS_ONE);
   storeKVP("maxCreditAbsolute", m_maxCreditAbsoluteEdit);
   storeKVP("maxCreditEarly", m_maxCreditEarlyEdit);
   if (!m_maxCreditAbsoluteEdit->lineedit()->text().isEmpty())
-    m_maxCreditAbsoluteEdit->setValue(m_maxCreditAbsoluteEdit->value()*MyMoneyMoney(-1, 1));
+    m_maxCreditAbsoluteEdit->setValue(m_maxCreditAbsoluteEdit->value()*MyMoneyMoney::MINUS_ONE);
   if (!m_maxCreditEarlyEdit->lineedit()->text().isEmpty())
-    m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney(-1, 1));
+    m_maxCreditEarlyEdit->setValue(m_maxCreditEarlyEdit->value()*MyMoneyMoney::MINUS_ONE);
 
   storeKVP("lastNumberUsed", m_lastCheckNumberUsed);
   // delete a previous version of the minimumbalance information

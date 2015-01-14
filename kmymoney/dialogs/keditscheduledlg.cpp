@@ -110,7 +110,7 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget *par
   m_nameEdit->setText(d->m_schedule.name());
 
   m_frequencyEdit->setCurrentItem(d->m_schedule.occurrencePeriod());
-  if (m_frequencyEdit->currentItem() == -1)
+  if (m_frequencyEdit->currentItem() == MyMoneySchedule::OCCUR_ANY)
     m_frequencyEdit->setCurrentItem(MyMoneySchedule::OCCUR_MONTHLY);
   slotFrequencyChanged(m_frequencyEdit->currentItem());
   m_frequencyNoEdit->setValue(d->m_schedule.occurrenceMultiplier());

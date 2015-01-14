@@ -42,6 +42,7 @@
 
 #include "kmymoneyutils.h"
 #include "accountsmodel.h"
+#include "models/onlinebankingaccountsfilterproxymodel.h"
 
 class kMyMoneyAccountCompletion;
 
@@ -50,24 +51,49 @@ class kMyMoneyAccountCompletion;
   * only the name of the accounts so this model can be used in the account
   * completion combo.
   *
+  * It shows only the first column (account name) and makes top level items non-selectable.
+  *
   * @see AccountsModel
   * @see AccountsFilterProxyModel
   *
   * @author Cristian Onet 2010
-  *
+  * @author Christian David
   */
-class AccountNamesFilterProxyModel : public AccountsFilterProxyModel
+template <class baseProxyModel>
+class AccountNamesFilterProxyModelTpl : public baseProxyModel
 {
-  Q_OBJECT
-
 public:
-  AccountNamesFilterProxyModel(QObject *parent = 0);
+  AccountNamesFilterProxyModelTpl(QObject *parent = 0);
 
   virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
 protected:
   bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;
 };
+
+/**
+ * @brief "typedef" for AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel>
+ * 
+ * To create valid Qt moc data this class inherits the template and uses Q_OBJECT.
+ * 
+ * @code typedef AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel> AccountNamesFilterProxyModel;
+ * sould work as well
+ */
+class AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel>
+{
+  Q_OBJECT
+public:
+  AccountNamesFilterProxyModel(QObject* parent = 0)
+  : AccountNamesFilterProxyModelTpl< AccountsFilterProxyModel >(parent)
+  {}
+};
+
+/**
+ * @brief OnlineBankingAccountFilterProxyModel showing only the name column
+ * 
+ * Is equivalent to AccountNamesFilterProxyModel using OnlineBankingAccountFilterProxyModel as base.
+ */
+typedef AccountNamesFilterProxyModelTpl<OnlineBankingAccountsFilterProxyModel> OnlineBankingAccountNamesFilterProxyModel;
 
 /**
   *
@@ -78,14 +104,14 @@ class KMyMoneyAccountCombo : public KComboBox
 {
   Q_OBJECT
 public:
-  explicit KMyMoneyAccountCombo(AccountNamesFilterProxyModel *model, QWidget *parent = 0);
+  explicit KMyMoneyAccountCombo(QAbstractItemModel *model, QWidget *parent = 0);
   explicit KMyMoneyAccountCombo(QWidget *parent = 0);
   ~KMyMoneyAccountCombo();
 
   void setSelected(const QString& id);
   const QString& getSelected() const;
 
-  void setModel(AccountNamesFilterProxyModel *model);
+  void setModel(QAbstractItemModel *model);
 
 public slots:
   void expandAll();
@@ -104,4 +130,33 @@ private:
   Private* const d;
 };
 
+
+template <class baseProxyModel>
+AccountNamesFilterProxyModelTpl<baseProxyModel>::AccountNamesFilterProxyModelTpl(QObject *parent)
+: baseProxyModel(parent)
+{
+}
+
+/**
+ * Top items are not selectable because they are not real accounts but are only used for grouping.
+ */
+template <class baseProxyModel>
+Qt::ItemFlags AccountNamesFilterProxyModelTpl<baseProxyModel>::flags(const QModelIndex &index) const
+{
+  if (!index.parent().isValid())
+    return baseProxyModel::flags(index) & ~Qt::ItemIsSelectable;
+  return baseProxyModel::flags(index);
+}
+
+/**
+ * Filter all but the first column.
+ */
+template <class baseProxyModel>
+bool AccountNamesFilterProxyModelTpl<baseProxyModel>::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
+{
+  Q_UNUSED(source_parent)
+  if (source_column == 0)
+    return true;
+  return false;
+}
 #endif
