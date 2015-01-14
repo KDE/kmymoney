@@ -16,6 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef IBANBICMACROS_H
+#define IBANBICMACROS_H
+
 /* needed for KDE_EXPORT and KDE_IMPORT macros */
 #include <kdemacros.h>
 
@@ -29,4 +32,6 @@
 
 #ifndef KMM_UNIT_TESTABLE
 #  define KMM_UNIT_TESTABLE
+#endif
+
 #endif
