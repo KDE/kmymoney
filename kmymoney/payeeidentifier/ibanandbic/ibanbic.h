@@ -23,8 +23,8 @@
 #include <QtCore/QChar>
 
 #include "payeeidentifier/payeeidentifierdata.h"
-
-#include "ibanbicmacros.h"
+#include "mymoneyunittestable.h"
+#include "iban_bic_identifier_export.h"
 
 class ibanBicData;
 
@@ -37,7 +37,7 @@ namespace payeeIdentifiers {
  */
 class IBAN_BIC_IDENTIFIER_EXPORT ibanBic : public payeeIdentifierData
 {
-  KMM_UNIT_TESTABLE
+  KMM_MYMONEY_UNIT_TESTABLE
 public:
   PAYEEIDENTIFIER_IID(ibanBic, "org.kmymoney.payeeIdentifier.ibanbic");
 

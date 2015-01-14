@@ -20,7 +20,7 @@
 #define NATIONALACCOUNTID_H
 
 #include "mymoney/payeeidentifier/payeeidentifierdata.h"
-#include "nationalaccountidmacros.h"
+#include "nationalaccount_identifier_export.h"
 
 namespace payeeIdentifiers {
 

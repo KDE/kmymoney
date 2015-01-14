@@ -9,6 +9,7 @@ kde4_add_library( payeeidentifier_nationalAccount
   SHARED
   ${nationalAccountId_SCRS}
 )
+generate_export_header(payeeidentifier_nationalAccount BASE_NAME nationalaccount_identifier)
 
 target_link_libraries( payeeidentifier_nationalAccount
   kmm_payeeidentifier

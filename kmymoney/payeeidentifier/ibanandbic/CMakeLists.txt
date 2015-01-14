@@ -9,6 +9,7 @@ set ( PAYEEIDENTIFIER_IBAN_BIC_SCRS
 kde4_add_plugin( payeeidentifier_iban_bic SHARED
   ${PAYEEIDENTIFIER_IBAN_BIC_SCRS}
 )
+generate_export_header(payeeidentifier_iban_bic BASE_NAME iban_bic_identifier)
 
 target_link_libraries( payeeidentifier_iban_bic
   kmm_payeeidentifier
