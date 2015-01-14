@@ -21,7 +21,7 @@
 
 #include <QObject>
 
-#define KMM_UNIT_TESTABLE friend class internationalAccountIdentifierTest;
+#define KMM_MYMONEY_UNIT_TESTABLE friend class internationalAccountIdentifierTest;
 
 class internationalAccountIdentifierTest : public QObject
 {

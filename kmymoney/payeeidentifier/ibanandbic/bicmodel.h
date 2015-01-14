@@ -21,7 +21,7 @@
 
 #include <QtSql/QSqlQueryModel>
 
-#include "ibanbicmacros.h"
+#include "iban_bic_identifier_export.h"
 
 class IBAN_BIC_IDENTIFIER_EXPORT bicModel : public QSqlQueryModel
 {

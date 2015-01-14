@@ -19,8 +19,8 @@
 #ifndef IBANBICDATA_H
 #define IBANBICDATA_H
 
-#ifndef KMM_UNIT_TESTABLE
-#  define KMM_UNIT_TESTABLE
+#ifndef KMM_MYMONEY_UNIT_TESTABLE
+#  define KMM_MYMONEY_UNIT_TESTABLE
 #endif
 
 #include <QtCore/QObject>
@@ -38,7 +38,7 @@
 class ibanBicData : public QObject
 {
   Q_OBJECT
-  KMM_UNIT_TESTABLE
+  KMM_MYMONEY_UNIT_TESTABLE
 
 public:
   ~ibanBicData();

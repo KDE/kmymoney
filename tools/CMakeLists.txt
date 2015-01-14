@@ -1,6 +1,7 @@
 include_directories(
     ../kmymoney/mymoney
     ${CMAKE_BINARY_DIR}/kmymoney/mymoney
+    ${CMAKE_BINARY_DIR}/kmymoney/payeeidentifier/ibanandbic
     ../kmymoney
     # Todo: this alkimia should not be needed here
     ${LIBALKIMIA_INCLUDE_DIR}
