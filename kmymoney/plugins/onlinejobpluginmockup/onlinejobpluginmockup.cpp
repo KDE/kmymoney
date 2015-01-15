@@ -22,9 +22,9 @@
 #include <onlinejobadministration.h>
 
 #include "germancredittransfersettingsmockup.h"
-
-K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<onlineJobPluginMockup>();)
-K_EXPORT_PLUGIN(KBankingFactory("onlinejobpluginmockup"))
+// TODO: port KF5
+//K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<onlineJobPluginMockup>();)
+//K_EXPORT_PLUGIN(KBankingFactory("onlinejobpluginmockup"))
 
 onlineJobPluginMockup::onlineJobPluginMockup(QObject* parent, const QVariantList&)
 : OnlinePluginExtended(parent, "onlinejobpluginmockup")

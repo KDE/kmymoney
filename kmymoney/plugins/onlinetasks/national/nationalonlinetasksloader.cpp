@@ -28,12 +28,13 @@
 #include "converter/taskconvertergermantosepa.h"
 #include "converter/taskconvertersepatogerman.h"
 
-K_PLUGIN_FACTORY(NationalOnlineTaskFactory,
+// TODO: port KF5
+/*K_PLUGIN_FACTORY(NationalOnlineTaskFactory,
                  registerPlugin<nationalOnlineTasksLoader>();
                  registerPlugin<germanCreditTransferEdit>("creditTransferUi");
                  registerPlugin<nationalStoragePlugin>("storagePlugin");
                 )
-K_EXPORT_PLUGIN(NationalOnlineTaskFactory("nationalOnlineTasksLoader"))
+K_EXPORT_PLUGIN(NationalOnlineTaskFactory("nationalOnlineTasksLoader"))*/
 
 nationalOnlineTasksLoader::nationalOnlineTasksLoader(QObject* parent, const QVariantList&)
 : KMyMoneyPlugin::Plugin::Plugin(parent, "nationalOnlineTasksLoader")

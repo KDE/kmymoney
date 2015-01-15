@@ -25,12 +25,13 @@
 #include "ui/sepacredittransferedit.h"
 #include "sepastorageplugin.h"
 
-K_PLUGIN_FACTORY(SepaOnlineTaskFactory,
+// TODO: port KF5
+/*K_PLUGIN_FACTORY(SepaOnlineTaskFactory,
                  registerPlugin<sepaOnlineTasksLoader>();
                  registerPlugin<sepaCreditTransferEdit>("sepaCreditTransferUi");
                  registerPlugin<sepaStoragePlugin>("sepaSqlStoragePlugin");
                 )
-K_EXPORT_PLUGIN(SepaOnlineTaskFactory("sepaOnlineTasksLoader"))
+K_EXPORT_PLUGIN(SepaOnlineTaskFactory("sepaOnlineTasksLoader"))*/
 
 sepaOnlineTasksLoader::sepaOnlineTasksLoader(QObject* parent, const QVariantList&)
 : KMyMoneyPlugin::Plugin::Plugin(parent, "sepaOnlineTasksLoader")
