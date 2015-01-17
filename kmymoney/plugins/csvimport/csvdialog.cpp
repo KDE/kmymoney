@@ -2118,7 +2118,6 @@ void CSVDialog::numberColumnSelected(int col)
 void CSVDialog::categoryColumnSelected(int col)
 {
   if (col < 0) {  //                              it is unset
-    m_wizard->button(QWizard::NextButton)->setEnabled(false);
     return;
   }
   QString type = "category";
