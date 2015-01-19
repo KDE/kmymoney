@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=onlinejobpluginmockup
 Name[ca]=onlinejobpluginmockup
+Name[en_GB]=onlinejobpluginmockup
 Name[nl]=onlinejobpluginmockup
 Name[pl]=onlinejobpluginmockup
 Name[pt]=onlinejobpluginmockup
@@ -11,6 +12,7 @@ Name[uk]=onlinejobpluginmockup
 Name[x-test]=xxonlinejobpluginmockupxx
 Comment=If mapped to an account, it prevents it could handle all onlineTasks
 Comment[ca]=Si està vinculat a un compte, evita que pugui gestionar totes les tasques en línia
+Comment[en_GB]=If mapped to an account, it prevents it could handle all onlineTasks
 Comment[nl]=Indien gekoppeld aan een account, voorkomt het dat het alle online taken kan afhandelen
 Comment[pl]=Jeśli zmapowana do konta, zapobiega obsługi przez nią wszystkich zadań w sieci
 Comment[pt]=Se estiver associado a uma conta, evita que esta possa tratar de todas as tarefas 'online'
