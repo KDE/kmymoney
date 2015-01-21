@@ -350,7 +350,3 @@ void internationalAccountIdentifierTest::bicAllocated()
 
   QCOMPARE( payeeIdentifiers::ibanBic::isBicAllocated(bic), allocated);
 }
-
-
-
-#include "internationalaccountidentifiertest.moc"
