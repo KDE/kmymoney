@@ -143,7 +143,6 @@ ecm_install_icons(ICONS
   hi64-apps-kmymoney.png
   hi48-apps-kmymoney.png
   hi32-apps-kmymoney.png
-  hi22-apps-kmymoney.png
   hi16-apps-kmymoney.png
   lo32-apps-kmymoney.png
   lo16-apps-kmymoney.png
