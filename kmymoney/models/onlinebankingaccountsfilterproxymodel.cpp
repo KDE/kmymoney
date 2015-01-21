@@ -59,6 +59,3 @@ bool OnlineBankingAccountsFilterProxyModel::filterAcceptsParent( const QModelInd
   }
   return false;
 }
-
-
-#include "onlinebankingaccountsfilterproxymodel.moc"

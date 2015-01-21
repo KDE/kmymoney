@@ -225,5 +225,3 @@ void KMyMoneyTextEdit::setAllowedChars(const QString& allowedChars)
   m_allowedChars = allowedChars;
   m_highligther->setAllowedChars( allowedChars );
 }
-
-#include "kmymoneytextedit.moc"
