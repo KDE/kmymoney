@@ -87,7 +87,6 @@ endif()
 set( kmymoney_SRCS main.cpp kmymoney.cpp )
 
 qt5_add_dbus_adaptor(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
-#KDE4_ADD_APP_ICON( kmymoney_SRCS hi*-app-kmymoney.png )
 
 add_executable( kmymoney ${kmymoney_SRCS} )
 target_link_libraries( kmymoney ${kmymoney_common_LIBS} )
@@ -133,7 +132,22 @@ install(DIRECTORY icons/oxygen
   PATTERN "*Make*" EXCLUDE
   PATTERN ".svn" EXCLUDE
   )
-ecm_install_icons(${ICON_INSTALL_DIR})
+ecm_install_icons(ICONS
+  hi128-mimetypes-application-x-kmymoney.png
+  hi64-mimetypes-application-x-kmymoney.png
+  hi48-mimetypes-application-x-kmymoney.png
+  hi32-mimetypes-application-x-kmymoney.png
+  hi22-mimetypes-application-x-kmymoney.png
+  hi16-mimetypes-application-x-kmymoney.png
+  hi128-apps-kmymoney.png
+  hi64-apps-kmymoney.png
+  hi48-apps-kmymoney.png
+  hi32-apps-kmymoney.png
+  hi22-apps-kmymoney.png
+  hi16-apps-kmymoney.png
+  lo32-apps-kmymoney.png
+  lo16-apps-kmymoney.png
+  DESTINATION ${ICON_INSTALL_DIR})
 
 ############## tests ####################
 include(ECMMarkAsTest)

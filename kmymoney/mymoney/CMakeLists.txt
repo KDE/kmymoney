@@ -68,7 +68,7 @@ target_link_libraries(kmm_mymoney PUBLIC
 )
 
 if(KMM_ADDRESSBOOK_FOUND)
-target_link_libraries(kmm_mymoney PUBLIC KF5::PimIdentities KF5::AkonadiCore KF5::Abc)
+target_link_libraries(kmm_mymoney PUBLIC KF5::IdentityManagement KF5::AkonadiCore KF5::AkonadiContact)
 endif()
 
 set_target_properties(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})

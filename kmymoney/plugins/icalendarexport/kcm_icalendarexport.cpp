@@ -50,14 +50,14 @@ public:
   }
 };
 
-// TODO: port KF5
-//K_PLUGIN_FACTORY(KCMiCalendarExportFactory,
-//                 registerPlugin<KCMiCalendarExport>();
-//                )
+K_PLUGIN_FACTORY_WITH_JSON(KCMiCalendarExportFactory,
+                           "kcm_kmm_icalendarexport.json",
+                           registerPlugin<KCMiCalendarExport>();
+                           )
+// TODO: port to KF5
 //K_EXPORT_PLUGIN(KCMiCalendarExportFactory("kmm_icalendarexport", "kmymoney"))
 
-// TODO: port KF5
-KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args) : KCModule(0/*KCMiCalendarExportFactory::componentData()*/, parent, args)
+KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args) : KCModule(/*KCMiCalendarExportFactory::componentData(),*/ parent, args)
 {
   PluginSettingsWidget *w = new PluginSettingsWidget(this);
   addConfig(PluginSettings::self(), w);
@@ -70,3 +70,5 @@ KCMiCalendarExport::KCMiCalendarExport(QWidget *parent, const QVariantList& args
 KCMiCalendarExport::~KCMiCalendarExport()
 {
 }
+
+#include "kcm_icalendarexport.moc"

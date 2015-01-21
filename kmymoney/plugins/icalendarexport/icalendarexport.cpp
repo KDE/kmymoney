@@ -29,6 +29,7 @@
 #include <KActionCollection>
 #include <KSharedConfig>
 #include <KLocalizedString>
+#include <KAboutData>
 
 // KMyMoney includes
 #include "mymoneyfile.h"
@@ -37,9 +38,7 @@
 #include "schedulestoicalendar.h"
 #include "pluginsettings.h"
 
-// TODO: port to KF5
-//K_PLUGIN_FACTORY(ICalendarExportFactory, registerPlugin<KMMiCalendarExportPlugin>();)
-//K_EXPORT_PLUGIN(ICalendarExportFactory("kmm_icalendarexport"))
+K_PLUGIN_FACTORY_WITH_JSON(ICalendarExportFactory, "kmm_icalendarexport.json", registerPlugin<KMMiCalendarExportPlugin>();)
 
 struct KMMiCalendarExportPlugin::Private {
   QAction* m_action;
@@ -71,12 +70,12 @@ KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QVaria
   icalFilePath = config.readEntry(d->m_iCalendarFileEntryName, icalFilePath);
 
   // read the settings
-  PluginSettings::self()->readConfig();
+  PluginSettings::self()->load();
 
   if (!icalFilePath.isEmpty()) {
     // move the old setting to the new config
     PluginSettings::setIcalendarFile(icalFilePath);
-    PluginSettings::self()->writeConfig();
+    PluginSettings::self()->save();
     KSharedConfig::openConfig()->deleteGroup(d->m_profileName);
   } else {
     // read it from the new config
@@ -111,7 +110,7 @@ void KMMiCalendarExportPlugin::slotFirstExport(void)
     QUrl newURL = fileDialog->selectedUrl();
     if (newURL.isLocalFile()) {
       PluginSettings::setIcalendarFile(newURL.toLocalFile());
-      PluginSettings::self()->writeConfig();
+      PluginSettings::self()->save();
       slotExport();
     }
   }
@@ -141,9 +140,11 @@ void KMMiCalendarExportPlugin::slotUnplug(KPluginInfo* info)
 
 void KMMiCalendarExportPlugin::slotUpdateConfig(void)
 {
-  PluginSettings::self()->readConfig();
+  PluginSettings::self()->load();
   // export the schedules because the configuration has changed
   QString icalFilePath = PluginSettings::icalendarFile();
   if (!icalFilePath.isEmpty())
     d->m_exporter.exportToFile(icalFilePath);
 }
+
+#include "icalendarexport.moc"

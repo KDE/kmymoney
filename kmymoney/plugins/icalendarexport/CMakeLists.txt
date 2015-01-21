@@ -11,8 +11,8 @@ set(kmm_icalendarexport_PART_SRCS
     )
 
 kconfig_add_kcfg_files(kmm_icalendarexport_PART_SRCS pluginsettings.kcfgc)
-
 add_library(kmm_icalendarexport MODULE ${kmm_icalendarexport_PART_SRCS})
+kcoreaddons_desktop_to_json(kmm_icalendarexport kmm_icalendarexport.desktop)
 
 target_link_libraries(kmm_icalendarexport
                       ${KDE4_KDEUI_LIBS}
@@ -38,10 +38,10 @@ set(kcm_kmm_icalendarexport_PART_SRCS
     )
 
 kconfig_add_kcfg_files(kcm_kmm_icalendarexport_PART_SRCS pluginsettings.kcfgc)
-
 qt5_wrap_ui(kcm_kmm_icalendarexport_PART_SRCS pluginsettingsdecl.ui)
 
 add_library(kcm_kmm_icalendarexport MODULE ${kcm_kmm_icalendarexport_PART_SRCS})
+kcoreaddons_desktop_to_json(kcm_kmm_icalendarexport kcm_kmm_icalendarexport.desktop)
 
 target_link_libraries(kcm_kmm_icalendarexport
                       KF5::KDELibs4Support

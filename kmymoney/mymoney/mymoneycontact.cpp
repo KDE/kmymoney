@@ -24,12 +24,12 @@
 #include "mymoneycontact.h"
 
 #ifdef KMM_ADDRESSBOOK_FOUND
-#include <KPIMIdentities/IdentityManager>
-#include <KPIMIdentities/Identity>
+#include <KIdentityManagement/IdentityManager>
+#include <KIdentityManagement/Identity>
 #include <AkonadiCore/RecursiveItemFetchJob>
 #include <AkonadiCore/ItemFetchScope>
 #include <AkonadiCore/Collection>
-#include <KABC/Addressee>
+#include <KContacts/Addressee>
 #endif
 
 MyMoneyContact::MyMoneyContact(QObject *parent) : QObject(parent)
@@ -39,8 +39,8 @@ MyMoneyContact::MyMoneyContact(QObject *parent) : QObject(parent)
 bool MyMoneyContact::ownerExists() const
 {
 #ifdef KMM_ADDRESSBOOK_FOUND
-  KPIMIdentities::IdentityManager im;
-  KPIMIdentities::Identity id = im.defaultIdentity();
+  KIdentityManagement::IdentityManager im;
+  KIdentityManagement::Identity id = im.defaultIdentity();
   return !id.isNull();
 #else
   return false;
@@ -50,8 +50,8 @@ bool MyMoneyContact::ownerExists() const
 QString MyMoneyContact::ownerEmail() const
 {
 #ifdef KMM_ADDRESSBOOK_FOUND
-  KPIMIdentities::IdentityManager im;
-  KPIMIdentities::Identity id = im.defaultIdentity();
+  KIdentityManagement::IdentityManager im;
+  KIdentityManagement::Identity id = im.defaultIdentity();
   return id.primaryEmailAddress();
 #else
   return QString();
@@ -61,8 +61,8 @@ QString MyMoneyContact::ownerEmail() const
 QString MyMoneyContact::ownerFullName() const
 {
 #ifdef KMM_ADDRESSBOOK_FOUND
-  KPIMIdentities::IdentityManager im;
-  KPIMIdentities::Identity id = im.defaultIdentity();
+  KIdentityManagement::IdentityManager im;
+  KIdentityManagement::Identity id = im.defaultIdentity();
   return id.fullName();
 #else
   return QString();
@@ -73,7 +73,7 @@ void MyMoneyContact::fetchContact(const QString &email)
 {
 #ifdef KMM_ADDRESSBOOK_FOUND
   // fetch the contact data
-  Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList() << KABC::Addressee::mimeType());
+  Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList() << KContacts::Addressee::mimeType());
   job->fetchScope().fetchFullPayload();
   job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
   job->setProperty("MyMoneyContact_email", email);
@@ -96,11 +96,11 @@ void MyMoneyContact::searchContactResult(KJob *job)
   ContactData contactData;
   contactData.email = job->property("MyMoneyContact_email").toString();
   foreach (const Akonadi::Item &item, items) {
-    const KABC::Addressee &contact = item.payload<KABC::Addressee>();
+    const KContacts::Addressee &contact = item.payload<KContacts::Addressee>();
     if (contact.emails().contains(contactData.email)) {
-      KABC::PhoneNumber phone = contact.phoneNumber(KABC::PhoneNumber::Home);
+      KContacts::PhoneNumber phone = contact.phoneNumber(KContacts::PhoneNumber::Home);
       contactData.phoneNumber = phone.number();
-      const KABC::Address &address = contact.address(KABC::Address::Home);
+      const KContacts::Address &address = contact.address(KContacts::Address::Home);
       contactData.street = address.street();
       contactData.locality = address.locality();
       contactData.country = address.country();
