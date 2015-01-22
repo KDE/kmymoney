@@ -12,6 +12,7 @@ set(kmm_reconciliationreport_PART_SRCS
 qt5_wrap_ui(kmm_reconciliationreport_PART_SRCS kreconciliationreportdlgdecl.ui )
 
 add_library(kmm_reconciliationreport MODULE ${kmm_reconciliationreport_PART_SRCS})
+kcoreaddons_desktop_to_json(kmm_reconciliationreport kmm_reconciliationreport.desktop)
 
 target_link_libraries(kmm_reconciliationreport
                       KF5::KDELibs4Support

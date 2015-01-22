@@ -36,9 +36,7 @@
 
 #include "kreconciliationreportdlg.h"
 
-// TODO: port to KF5
-//K_PLUGIN_FACTORY(ReconciliationReportFactory, registerPlugin<KMMReconciliationReportPlugin>();)
-//K_EXPORT_PLUGIN(ReconciliationReportFactory("kmm_reconciliationreport", "kmymoney"))
+K_PLUGIN_FACTORY_WITH_JSON(ReconciliationReportFactory, "kmm_reconciliationreport.json", registerPlugin<KMMReconciliationReportPlugin>();)
 
 KMMReconciliationReportPlugin::KMMReconciliationReportPlugin(QObject *parent, const QVariantList&)
     : KMyMoneyPlugin::Plugin(parent, "Reconciliation report"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -330,3 +328,5 @@ void KMMReconciliationReportPlugin::slotUnplug(KPluginInfo* info)
     disconnect(viewInterface(), SIGNAL(accountReconciled(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)), this, SLOT(slotGenerateReconciliationReport(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)));
   }
 }
+
+#include "reconciliationreport.moc"
