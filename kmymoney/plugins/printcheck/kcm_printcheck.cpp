@@ -61,12 +61,9 @@ void PluginSettingsWidget::returnPressed(const QString& url)
     m_checkTemplatePreviewHTMLPart->openUrl(url);
 }
 
-// TODO:
-//K_PLUGIN_FACTORY(KCMPrintCheckFactory,
-//                 registerPlugin<KCMPrintCheck>();
-//                )
-//K_EXPORT_PLUGIN(KCMPrintCheckFactory("kmm_printcheck", "kmymoney"))
+K_PLUGIN_FACTORY_WITH_JSON(KCMPrintCheckFactory, "kcm_kmm_printcheck.json", registerPlugin<KCMPrintCheck>();)
 
+// TODO: port to KF5
 KCMPrintCheck::KCMPrintCheck(QWidget *parent, const QVariantList& args) : KCModule(0/*KCMPrintCheckFactory::componentData()*/, parent, args)
 {
   PluginSettingsWidget* w = new PluginSettingsWidget(this);
@@ -81,3 +78,5 @@ KCMPrintCheck::KCMPrintCheck(QWidget *parent, const QVariantList& args) : KCModu
 KCMPrintCheck::~KCMPrintCheck()
 {
 }
+
+#include "kcm_printcheck.moc"

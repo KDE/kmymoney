@@ -13,6 +13,8 @@ kconfig_add_kcfg_files(kmm_printcheck_PART_SRCS pluginsettings.kcfgc)
 
 add_library(kmm_printcheck MODULE ${kmm_printcheck_PART_SRCS})
 
+kcoreaddons_desktop_to_json(kmm_printcheck kmm_printcheck.desktop)
+
 target_link_libraries(kmm_printcheck
                       KF5::KDELibs4Support
                       KF5::KHtml
@@ -47,6 +49,8 @@ kconfig_add_kcfg_files(kcm_kmm_printcheck_PART_SRCS pluginsettings.kcfgc)
 qt5_wrap_ui(kcm_kmm_printcheck_PART_SRCS pluginsettingsdecl.ui)
 
 add_library(kcm_kmm_printcheck MODULE ${kcm_kmm_printcheck_PART_SRCS})
+
+kcoreaddons_desktop_to_json(kcm_kmm_printcheck kcm_kmm_printcheck.desktop)
 
 target_link_libraries(kcm_kmm_printcheck
                       KF5::KDELibs4Support

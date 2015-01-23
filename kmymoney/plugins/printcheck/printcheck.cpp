@@ -38,9 +38,7 @@
 #include "numbertowords.h"
 #include "pluginsettings.h"
 
-// TODO: port to KF5
-//K_PLUGIN_FACTORY(PrintCheckFactory, registerPlugin<KMMPrintCheckPlugin>();)
-//K_EXPORT_PLUGIN(PrintCheckFactory("kmm_printcheck"))
+K_PLUGIN_FACTORY_WITH_JSON(PrintCheckFactory, "kmm_printcheck.json", registerPlugin<KMMPrintCheckPlugin>();)
 
 struct KMMPrintCheckPlugin::Private {
   QAction* m_action;
@@ -90,7 +88,7 @@ void KMMPrintCheckPlugin::readCheckTemplate()
 
   if (PluginSettings::checkTemplateFile().isEmpty()) {
     PluginSettings::setCheckTemplateFile(checkTemplateHTMLPath);
-    PluginSettings::self()->writeConfig();
+    PluginSettings::self()->save();
   }
 
   QFile checkTemplateHTMLFile(PluginSettings::checkTemplateFile());
@@ -206,8 +204,10 @@ void KMMPrintCheckPlugin::slotUnplug(KPluginInfo *info)
 // the plugin's configurations has changed
 void KMMPrintCheckPlugin::slotUpdateConfig(void)
 {
-  PluginSettings::self()->readConfig();
+  PluginSettings::self()->load();
   // re-read the data because the configuration has changed
   readCheckTemplate();
   d->m_printedTransactionIdList = PluginSettings::printedChecks();
 }
+
+#include "printcheck.moc"
