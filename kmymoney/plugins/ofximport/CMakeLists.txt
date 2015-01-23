@@ -7,8 +7,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dialogs
 
 ########### next target ###############
 
-#TODO: port QHttp to Qt5
-set(kmm_ofximport_PART_SRCS ofximporterplugin.cpp) #ofxpartner.cpp)
+set(kmm_ofximport_PART_SRCS ofximporterplugin.cpp ofxpartner.cpp)
 
 set(kmm_ofximport_PART_UI importoption.ui)
 
@@ -16,12 +15,15 @@ qt5_wrap_ui(kmm_ofximport_PART_SRCS ${kmm_ofximport_PART_UI})
 
 add_library(kmm_ofximport MODULE ${kmm_ofximport_PART_SRCS})
 
+kcoreaddons_desktop_to_json(kmm_ofximport kmm_ofximport.desktop)
+
 target_link_libraries(kmm_ofximport
                       kmm_ofximport_dialogs
                       kmm_mymoney
                       kmm_widgets
                       kmm_plugin
                       KF5::KDELibs4Support
+                      KF5::Wallet
                       Alkimia::alkimia
                       ${LIBOFX_LIBRARIES})
 

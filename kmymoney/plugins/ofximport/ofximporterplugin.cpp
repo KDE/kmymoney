@@ -47,9 +47,7 @@
 #include "kofxdirectconnectdlg.h"
 #include "ui_importoption.h"
 
-// TODO: port KF5
-//K_PLUGIN_FACTORY(OfxImportFactory, registerPlugin<OfxImporterPlugin>();)
-//K_EXPORT_PLUGIN(OfxImportFactory("kmm_ofximport"))
+K_PLUGIN_FACTORY_WITH_JSON(OfxImportFactory, "kmm_ofximport.json", registerPlugin<OfxImporterPlugin>();)
 
 using KWallet::Wallet;
 
@@ -787,3 +785,5 @@ const QStringList& OfxImporterPlugin::errors(void) const
 {
   return d->m_errors;
 }
+
+#include "ofximporterplugin.moc"

@@ -451,7 +451,8 @@ void OfxHttpsRequest::slotOfxFinished(KJob* /* e */)
 
   int error = m_job->error();
   if (error) {
-    m_job->ui()->setWindow(0);
+    // TODO: port to KF5
+    //m_job->ui()->setWindow(0);
     m_job->ui()->showErrorMessage();
 //FIXME: FIX on windows
     unlink(m_dst.path().toUtf8().data());
@@ -482,7 +483,8 @@ void OfxHttpsRequest::slotOfxFinished(KJob* /* e */)
 OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo)
 {
   Q_UNUSED(showProgressInfo);
-
+// TODO: port to KF5
+#if 0
   m_eventLoop = new QEventLoop(qApp->activeWindow());
   QFile f(dst.path());
   m_error = QHttp::NoError;
@@ -519,6 +521,7 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByte
 //FIXME: FIX on windows
     unlink(dst.path().toUtf8().data());
   }
+#endif
 }
 
 OfxHttpRequest::~OfxHttpRequest()
@@ -528,10 +531,13 @@ OfxHttpRequest::~OfxHttpRequest()
 
 void OfxHttpRequest::slotOfxFinished(int, bool rc)
 {
+// TODO: port to KF5
+#if 0
   if (rc) {
     m_error = m_job->error();
   }
   qDebug("Finishing eventloop");
   if (m_eventLoop)
     m_eventLoop->exit();
+#endif
 }

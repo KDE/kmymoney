@@ -22,7 +22,30 @@
 // QT Includes
 
 #include <QObject>
+// TODO: port to KF5
+#if 0
 #include <QHttp>
+#else
+// in QT5 QHttp is no longer public
+// dummy used for compilation
+// port this to http://doc.qt.io/qt-5/qnetworkaccessmanager.html
+struct QHttp
+{
+  enum Error {
+    NoError,
+    UnknownError,
+    HostNotFound,
+    ConnectionRefused,
+    UnexpectedClose,
+    InvalidResponseHeader,
+    WrongContentLength,
+    Aborted,
+    AuthenticationRequiredError,
+    ProxyAuthenticationRequiredError
+  };
+  QHttp(QString) {}
+};
+#endif
 #include <QFile>
 #include <QEventLoop>
 #include <QPointer>

@@ -4,23 +4,23 @@ add_subdirectory( onlinetasks )
 
 add_subdirectory( interfaces )
 
-ADD_SUBDIRECTORY( csvimport )
+add_subdirectory( csvimport )
 
-ADD_SUBDIRECTORY( csvexport )
+add_subdirectory( csvexport )
 
 if(LIBOFX_FOUND)
-  #ADD_SUBDIRECTORY( ofximport )
+  add_subdirectory( ofximport )
 endif(LIBOFX_FOUND)
 
 if (LIBICAL_FOUND)
-  ADD_SUBDIRECTORY( icalendarexport )
+  add_subdirectory( icalendarexport )
 endif (LIBICAL_FOUND)
 
-ADD_SUBDIRECTORY( reconciliationreport )
-ADD_SUBDIRECTORY( printcheck )
+add_subdirectory( reconciliationreport )
+add_subdirectory( printcheck )
 
 if (KBANKING_FOUND)
-  ADD_SUBDIRECTORY( kbanking )
+  add_subdirectory( kbanking )
 endif (KBANKING_FOUND)
 
 option(ENABLE_SQLCIPHER "Enable SQLCipher plugin" OFF)
