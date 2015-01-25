@@ -26,6 +26,9 @@
 class internationalAccountIdentifierTest : public QObject
 {
   Q_OBJECT
+
+  bool dataInstalled(const QString& countryCode);
+
 private slots:
   void initTestCase();
   void cleanupTestCase();
