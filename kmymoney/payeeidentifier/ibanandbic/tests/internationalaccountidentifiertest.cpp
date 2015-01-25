@@ -26,6 +26,12 @@
 
 QTEST_MAIN(internationalAccountIdentifierTest);
 
+bool internationalAccountIdentifierTest::dataInstalled(const QString& countryCode)
+{
+  // Not really implemented yet
+  return false;
+}
+
 void internationalAccountIdentifierTest::initTestCase()
 {
   // Called before the first testfunction is executed
@@ -238,28 +244,21 @@ void internationalAccountIdentifierTest::uneqalOperator()
 void internationalAccountIdentifierTest::getProperties_data()
 {
   QTest::addColumn<QString>("countryCode");
-  /**
-   * @internal The desktop file is included into the testdata to check if the service is installed.
-   * If file is not found, skip test.
-   */
-  QTest::addColumn<QString>("serviceFile");
   QTest::addColumn<int>("bbanLength");
   QTest::addColumn<int>("bankIdentifierLength");
 
-  QTest::newRow("Germany")     << "DE" << "germany.desktop"      << 18 << 8;
-  QTest::newRow("France")      << "FR" << "france.desktop"       << 23 << 10;
-  QTest::newRow("Switzerland") << "CH" << "switzerland.desktop"  << 17 << 5;
+  QTest::newRow("Germany")     << "DE" << 18 << 8;
+  QTest::newRow("France")      << "FR" << 23 << 10;
+  QTest::newRow("Switzerland") << "CH" << 17 << 5;
 }
 
 void internationalAccountIdentifierTest::getProperties()
 {
   QFETCH(QString, countryCode);
-  QFETCH(QString, serviceFile);
   QFETCH(int, bbanLength);
 
-  QString fileName = KGlobal::dirs()->findResource("services", QLatin1String("ibanbicdata/")+serviceFile);
-  if ( fileName.isEmpty() )
-    QSKIP(qPrintable(QString("Could not find ibanBicData service for this country (was looking for \"%1\"). Did you install the services (e.g. with \"make install\")?").arg(serviceFile)), SkipSingle);
+  if ( !dataInstalled(countryCode) )
+    QSKIP(qPrintable(QString("Could not find ibanBicData service for this country (was looking for \"%1\"). Did you install the services?").arg(countryCode)), SkipSingle);
 
   QCOMPARE(payeeIdentifiers::ibanBic::ibanLengthByCountry( countryCode ), bbanLength+4);
 }
@@ -278,6 +277,9 @@ void internationalAccountIdentifierTest::iban2bic()
   QFETCH(QString, iban);
   QFETCH(QString, bic);
 
+  if ( !dataInstalled(iban.left(2)) )
+    QSKIP(qPrintable(QString("Could not find ibanBicData service for this country (was looking for \"%1\"). Did you install the services?").arg(iban)), SkipSingle);
+
   QCOMPARE(payeeIdentifiers::ibanBic::bicByIban(iban), bic);
 }
 
@@ -293,6 +295,9 @@ void internationalAccountIdentifierTest::nameByBic()
 {
   QFETCH(QString, bic);
   QFETCH(QString, name);
+
+  if ( !dataInstalled(bic.mid(4, 2)) )
+    QSKIP(qPrintable(QString("Could not find ibanBicData service for this country (was looking for \"%1\"). Did you install the services?").arg(bic)), SkipSingle);
 
   QCOMPARE(payeeIdentifiers::ibanBic::institutionNameByBic(bic), name);
 }
@@ -347,6 +352,9 @@ void internationalAccountIdentifierTest::bicAllocated()
 {
   QFETCH(QString, bic);
   QFETCH(payeeIdentifiers::ibanBic::bicAllocationStatus, allocated);
+
+  if ( !dataInstalled(bic.mid(4, 2)) )
+    QSKIP(qPrintable(QString("Could not find ibanBicData service for this country (was looking for \"%1\"). Did you install the services?").arg(bic)), SkipSingle);
 
   QCOMPARE( payeeIdentifiers::ibanBic::isBicAllocated(bic), allocated);
 }
