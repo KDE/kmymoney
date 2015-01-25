@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 This file is part of KMyMoney, A Personal Finance Manager for KDE
-Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+Copyright (C) 2014-2015 Christian Dávid <christian-david@web.de>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@ import sqlite3
 import codecs
 import argparse
 
+
 def createTable():
     """ Create table structure
     """
@@ -43,6 +44,7 @@ def createTable():
     )
     db.commit()
 
+
 def processFile(fileName):
     """ Fills the database with institutions saved in fileName
     """
@@ -55,19 +57,20 @@ def processFile(fileName):
     def submitInstitute(bankCode, bankName, bic):
         try:
             cursor.execute("INSERT INTO institutions (bankcode, bic, name) VALUES(?,?,?)", (bankCode, bic, bankName))
-        except sqlite3.Error, e:
-            print "Error: {0} while inserting {1} ({2})".format(e.args[0], bankCode, bic)
+        except sqlite3.Error as e:
+            print("Error: {0} while inserting {1} ({2})".format(e.args[0], bankCode, bic))
 
     institutesFile = codecs.open(fileName, "r", encoding=args.encoding)
     for institute in institutesFile:
         if institute[8:9] == "1":
             submitInstitute(institute[0:8], institute[9:67].strip(), institute[139:150])
             rowsInserted += 1
-            
+
     db.commit()
     return rowsInserted
 
-if __name__ == '__main__':   
+
+if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Creates a SQLite database for KMyMoney with information about IBAN and BICs based on a fixed-column text file from the german central bank."
                                      " You can download the source file at http://www.bundesbank.de/Redaktion/DE/Standardartikel/Aufgaben/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html"
                                      )
@@ -76,17 +79,17 @@ if __name__ == '__main__':
     parser.add_argument('-e', '--encoding', default="iso 8859-1", help='Charset of file')
     args = parser.parse_args()
 
-    print "Read data from \"{0}\" with \"{1}\" encoding".format(args.file, args.encoding)
+    print("Read data from \"{0}\" with \"{1}\" encoding".format(args.file, args.encoding))
     db = sqlite3.connect(args.output)
 
     createTable()
-    institutions = processFile( args.file )
-    print "Inserted {0} institutions into database \"{1}\"".format(institutions, args.output)
-    
-    cursor = db.cursor();
-    cursor.execute("ANALYZE institutions");
-    cursor.execute("CREATE INDEX bic_index ON institutions (bic)");
-    cursor.execute("REINDEX");
-    cursor.execute("VACUUM");
+    institutions = processFile(args.file)
+    print("Inserted {0} institutions into database \"{1}\"".format(institutions, args.output))
+
+    cursor = db.cursor()
+    cursor.execute("ANALYZE institutions")
+    cursor.execute("CREATE INDEX bic_index ON institutions (bic)")
+    cursor.execute("REINDEX")
+    cursor.execute("VACUUM")
     db.commit();
     db.close()
