@@ -44,5 +44,5 @@ EditSelectionWizardPage::EditSelectionWizardPage(QWidget *parent)
   registerField("editOtherInfoButton", m_editOtherInfoButton);
   registerField("editAttributesButton", m_editAttributesButton);
 
-  m_editInterestRateButton->animateClick();
+  m_editInterestRateButton->click();
 }

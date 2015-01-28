@@ -40,5 +40,5 @@ InterestCalculationWizardPage::InterestCalculationWizardPage(QWidget *parent)
   registerField("interestOnReceptionButton", m_interestOnReceptionButton);
   registerField("interestOnPaymentButton", m_interestOnPaymentButton);
 
-  m_interestOnReceptionButton->animateClick();
+  m_interestOnReceptionButton->click();
 }

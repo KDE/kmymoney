@@ -41,5 +41,5 @@ LendBorrowWizardPage::LendBorrowWizardPage(QWidget *parent)
   registerField("borrowButton", m_borrowButton);
   registerField("lendButton", m_lendButton);
 
-  m_borrowButton->animateClick();
+  m_borrowButton->click();
 }

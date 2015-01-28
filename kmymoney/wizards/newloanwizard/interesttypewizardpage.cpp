@@ -40,5 +40,5 @@ InterestTypeWizardPage::InterestTypeWizardPage(QWidget *parent)
   registerField("fixedInterestButton", m_fixedInterestButton);
   registerField("variableInterestButton", m_variableInterestButton);
 
-  m_fixedInterestButton->animateClick();
+  m_fixedInterestButton->click();
 }
