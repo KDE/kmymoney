@@ -109,9 +109,9 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
 
   //FIXME: port
   if (m_account.fixedInterestRate()) {
-    m_interestTypePage->m_fixedInterestButton->animateClick();
+    m_interestTypePage->m_fixedInterestButton->click();
   } else {
-    m_interestTypePage->m_variableInterestButton->animateClick();
+    m_interestTypePage->m_variableInterestButton->click();
   }
 
   QString institutionName = file->institution(m_account.institutionId()).name();

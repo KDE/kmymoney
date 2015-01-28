@@ -40,11 +40,11 @@ RecordPaymentWizardPage::RecordPaymentWizardPage(QWidget *parent)
   registerField("allPaymentsButton", m_allPaymentsButton);
   registerField("thisYearPaymentButton", m_thisYearPaymentButton);
 
-  m_allPaymentsButton->animateClick();
+  m_allPaymentsButton->click();
 }
 
 void RecordPaymentWizardPage::initializePage()
 {
   if (field("noPreviousPaymentButton").toBool())
-    m_allPaymentsButton->animateClick();
+    m_allPaymentsButton->click();
 }
