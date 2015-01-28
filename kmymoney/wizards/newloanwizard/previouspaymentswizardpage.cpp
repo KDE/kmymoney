@@ -40,5 +40,5 @@ PreviousPaymentsWizardPage::PreviousPaymentsWizardPage(QWidget *parent)
   registerField("noPreviousPaymentButton", m_noPreviousPaymentButton);
   registerField("previousPaymentButton", m_previousPaymentButton);
 
-  m_noPreviousPaymentButton->animateClick();
+  m_noPreviousPaymentButton->click();
 }
