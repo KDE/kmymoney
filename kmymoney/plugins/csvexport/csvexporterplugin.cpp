@@ -51,11 +51,10 @@ K_PLUGIN_FACTORY_WITH_JSON(CsvExporterFactory, "kmm_csvexport.json", registerPlu
 CsvExporterPlugin::CsvExporterPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::Plugin(parent, "csvexport"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
-  // TODO: port KF5
-  //setComponentData(CsvExporterFactory::componentData());
+  setComponentName("kmm_csvexport", i18n("CSV exporter"));
   setXMLFile("kmm_csvexport.rc");
   createActions();
-// For information, announce that we have been loaded.
+  // For information, announce that we have been loaded.
   qDebug("KMyMoney csvexport plugin loaded");
 }
 

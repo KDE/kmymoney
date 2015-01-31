@@ -66,7 +66,7 @@ endif(KDE4_BUILD_TESTS)
 ########### install files ###############
 
 install(FILES kmm_csvimport.rc
-        DESTINATION  ${DATA_INSTALL_DIR}/kmm_csvimport)
+        DESTINATION  ${KXMLGUI_INSTALL_DIR}/kmm_csvimport)
 
 install(TARGETS kmm_csvimport
         DESTINATION ${PLUGIN_INSTALL_DIR})

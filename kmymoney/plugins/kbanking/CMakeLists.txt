@@ -49,7 +49,7 @@ target_link_libraries(kmm_kbanking
 ########### install files ###############
 
 install(FILES kmm_kbanking.rc
-        DESTINATION  ${DATA_INSTALL_DIR}/kmm_kbanking)
+        DESTINATION  ${KXMLGUI_INSTALL_DIR}/kmm_kbanking)
 
 install(TARGETS kmm_kbanking
         DESTINATION ${PLUGIN_INSTALL_DIR})

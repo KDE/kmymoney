@@ -48,11 +48,10 @@ struct KMMPrintCheckPlugin::Private {
 };
 
 KMMPrintCheckPlugin::KMMPrintCheckPlugin(QObject *parent, const QVariantList&)
-    : KMyMoneyPlugin::Plugin(parent, "iCalendar"/*must be the same as X-KDE-PluginInfo-Name*/)
+    : KMyMoneyPlugin::Plugin(parent, "Print check"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   // Tell the host application to load my GUI component
-  // TODO: port to KF5
-  //setComponentData(PrintCheckFactory::componentData());
+  setComponentName("kmm_printcheck", i18n("Print check"));
   setXMLFile("kmm_printcheck.rc");
 
   // For ease announce that we have been loaded.
@@ -84,7 +83,7 @@ KMMPrintCheckPlugin::~KMMPrintCheckPlugin()
 
 void KMMPrintCheckPlugin::readCheckTemplate()
 {
-  QString checkTemplateHTMLPath = QStandardPaths::locate(QStandardPaths::DataLocation, "check_template.html");
+  QString checkTemplateHTMLPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "kmm_printcheck/check_template.html");
 
   if (PluginSettings::checkTemplateFile().isEmpty()) {
     PluginSettings::setCheckTemplateFile(checkTemplateHTMLPath);

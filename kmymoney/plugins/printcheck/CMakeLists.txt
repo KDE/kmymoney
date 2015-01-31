@@ -30,7 +30,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_printcheck.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
 install(FILES kmm_printcheck.rc
-        DESTINATION  ${DATA_INSTALL_DIR}/kmm_printcheck)
+        DESTINATION  ${KXMLGUI_INSTALL_DIR}/kmm_printcheck)
 
 install(FILES check_template.html
         DESTINATION  ${DATA_INSTALL_DIR}/kmm_printcheck)

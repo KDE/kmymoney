@@ -33,7 +33,7 @@ target_link_libraries(kmm_csvexport
 ########### install files ###############
 
 install(FILES kmm_csvexport.rc
-        DESTINATION  ${DATA_INSTALL_DIR}/kmm_csvexport)
+        DESTINATION  ${KXMLGUI_INSTALL_DIR}/kmm_csvexport)
 
 install(TARGETS kmm_csvexport
         DESTINATION ${PLUGIN_INSTALL_DIR})

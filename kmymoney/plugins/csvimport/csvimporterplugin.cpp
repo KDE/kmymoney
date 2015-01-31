@@ -45,17 +45,15 @@
 #include "csvdialog.h"
 #include "investprocessing.h"
 
-// TODO: port KF5
 K_PLUGIN_FACTORY_WITH_JSON(CsvImporterFactory, "kmm_csvimport.json", registerPlugin<CsvImporterPlugin>();)
 
 CsvImporterPlugin::CsvImporterPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::Plugin(parent, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
-  // TODO: port KF5
-  //setComponentData(CsvImporterFactory::componentData());
+  setComponentName("kmm_csvimport", i18n("CSV importer"));
   setXMLFile("kmm_csvimport.rc");
   createActions();
-// For information, announce that we have been loaded.
+  // For information, announce that we have been loaded.
   qDebug("KMyMoney csvimport plugin loaded");
 }
 

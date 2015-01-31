@@ -165,8 +165,7 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
 
     if (m_kbanking->init() == 0) {
       // Tell the host application to load my GUI component
-      // TODO: port to KF5
-      //setComponentData(KBankingFactory::componentData());
+      setComponentName("kmm_kbanking", "KBanking");
       setXMLFile("kmm_kbanking.rc");
       qDebug("KMyMoney kbanking plugin loaded");
 

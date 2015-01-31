@@ -86,8 +86,7 @@ OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::ImporterPlugin(),
     d(new Private)
 {
-  // TODO: port KF5
-  //setComponentData(OfxImportFactory::componentData());
+  setComponentName("kmm_ofximport", i18n("KMyMoney OFX"));
   setXMLFile("kmm_ofximport.rc");
   createActions();
 

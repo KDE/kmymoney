@@ -30,7 +30,7 @@ target_link_libraries(kmm_ofximport
 ########### install files ###############
 
 install(FILES kmm_ofximport.rc
-        DESTINATION  ${DATA_INSTALL_DIR}/kmm_ofximport)
+        DESTINATION  ${KXMLGUI_INSTALL_DIR}/kmm_ofximport)
 
 install(TARGETS kmm_ofximport
         DESTINATION ${PLUGIN_INSTALL_DIR})

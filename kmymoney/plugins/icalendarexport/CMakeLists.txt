@@ -23,7 +23,7 @@ target_link_libraries(kmm_icalendarexport
                       )
 
 install(FILES kmm_icalendarexport.rc
-        DESTINATION  ${DATA_INSTALL_DIR}/kmm_icalendarexport)
+        DESTINATION  ${KXMLGUI_INSTALL_DIR}/kmm_icalendarexport)
 
 install(TARGETS kmm_icalendarexport
         DESTINATION ${PLUGIN_INSTALL_DIR})

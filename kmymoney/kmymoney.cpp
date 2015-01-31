@@ -442,7 +442,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   // kickstart date change timer
   slotDateChanged();
 
-  connect(this, SIGNAL(fileLoaded(KUrl)), onlineJobAdministration::instance(), SLOT(updateOnlineTaskProperties()));
+  connect(this, SIGNAL(fileLoaded(QUrl)), onlineJobAdministration::instance(), SLOT(updateOnlineTaskProperties()));
 }
 
 KMyMoneyApp::~KMyMoneyApp()

@@ -55,8 +55,7 @@ KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QVaria
   d->m_iCalendarFileEntryName = "iCalendarFile";
 
   // Tell the host application to load my GUI component
-  // TODO: port to KF5
-  //setComponentData(ICalendarExportFactory::componentData());
+  setComponentName("kmm_icalendarexport", i18n("iCalendar exporter"));
   setXMLFile("kmm_icalendarexport.rc");
 
   // For ease announce that we have been loaded.
