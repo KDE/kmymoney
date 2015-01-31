@@ -40,7 +40,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <ktextedit.h>
-#include <kprogressdialog.h>
+#include <QProgressDialog>
 #include <kconfig.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>

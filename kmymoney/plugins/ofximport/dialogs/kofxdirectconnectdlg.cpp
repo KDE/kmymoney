@@ -35,7 +35,7 @@
 #include <kio/jobuidelegate.h>
 #include <kdebug.h>
 #include <ktemporaryfile.h>
-#include <kprogressdialog.h>
+#include <QProgressDialog>
 #include <kmessagebox.h>
 #include <klocale.h>
 

@@ -35,7 +35,7 @@
 #include <kdebug.h>
 #include <kmessagebox.h>
 
-#include <kprogressdialog.h>
+#include <QProgressDialog>
 #include <kapplication.h>
 #include <klistwidgetsearchline.h>
 #include <kcombobox.h>
@@ -78,9 +78,11 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   m_headerVersion = new OfxHeaderVersion(m_headerVersionCombo, "");
 
   // fill the list view with banks
-  KProgressDialog* dlg = new KProgressDialog(this, i18n("Loading banklist"), i18n("Getting list of banks from http://moneycentral.msn.com/\nThis may take some time depending on the available bandwidth."));
+  QProgressDialog* dlg = new QProgressDialog(this);
+  dlg->setWindowTitle(i18n("Loading banklist"));
+  dlg->setLabelText(i18n("Getting list of banks from http://moneycentral.msn.com/\nThis may take some time depending on the available bandwidth."));
   dlg->setModal(true);
-  dlg->setAllowCancel(false);
+  dlg->setCancelButton(0);
   // force to show immediately as the call to OfxPartner::BankNames()
   // does not call the processEvents() loop
   dlg->setMinimumDuration(0);

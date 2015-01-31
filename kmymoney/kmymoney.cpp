@@ -78,7 +78,7 @@
 #include <kactionmenu.h>
 #include <kstatusbar.h>
 #include <ktip.h>
-#include <kprogressdialog.h>
+#include <QProgressDialog>
 #include <kio/netaccess.h>
 #include <kstartupinfo.h>
 #include <krun.h>

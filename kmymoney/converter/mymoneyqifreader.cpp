@@ -40,7 +40,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
-#include <kprogressdialog.h>
 #include <kio/netaccess.h>
 #include <KConfigGroup>
 #include <KSharedConfig>
@@ -523,36 +522,6 @@ bool MyMoneyQifReader::finishImport(void)
   // stays untouched on the local filesystem
   KIO::NetAccess::removeTempFile(m_filename);
 
-#if 0
-  // Add the transaction entries
-  KProgressDialog dlg(0, "transactionaddprogress", i18n("Adding transactions"), i18n("Now adding the transactions to your ledger..."));
-  dlg.progressBar()->setTotalSteps(m_transactionCache.count());
-  dlg.progressBar()->setTextEnabled(true);
-  dlg.setAllowCancel(true);
-  dlg.show();
-  kapp->processEvents();
-  MyMoneyFile* file = MyMoneyFile::instance();
-  QList<MyMoneyTransaction>::iterator it = m_transactionCache.begin();
-  MyMoneyFileTransaction ft;
-  try {
-    while (it != m_transactionCache.end()) {
-      if (dlg.wasCancelled()) {
-        m_userAbort = true;
-        rc = false;
-        break;
-      }
-      file->addTransaction(*it);
-      dlg.progressBar()->advance(1);
-      ++it;
-    }
-    if (rc)
-      ft.commit();
-  } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to add transactions"),
-                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
-    rc = false;
-  }
-#endif
   // Now to import the statements
   QList<MyMoneyStatement>::const_iterator it_st;
   for (it_st = d->statements.constBegin(); it_st != d->statements.constEnd(); ++it_st)
