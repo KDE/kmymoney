@@ -896,12 +896,12 @@ bool MyMoneyStorageSql::writeFile(void)
   }
 }
 
-long unsigned MyMoneyStorageSql::highestIdNum(QString tableName, QString tableField, int prefixLength)
+long unsigned MyMoneyStorageSql::highestNumberFromIdString(QString tableName, QString tableField, int prefixLength)
 {
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   QSqlQuery q(*this);
 
-  if (!q.exec(m_driver->highestIdNumString(tableName, tableField, prefixLength)) || !q.next())
+  if (!q.exec(m_driver->highestNumberFromIdString(tableName, tableField, prefixLength)) || !q.next())
     throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("retrieving highest ID number"))); // krazy:exclude=crashy
 
   return q.value(0).toULongLong();

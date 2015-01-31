@@ -99,7 +99,7 @@ private slots:
   void testAddOnlineJob();
   void testModifyOnlineJob();
   void testRemoveOnlineJob();
-  void testHighestIdNum();
+  void testHighestNumberFromIdString();
 };
 
 #endif

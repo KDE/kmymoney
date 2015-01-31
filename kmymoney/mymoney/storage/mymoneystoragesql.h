@@ -187,7 +187,7 @@ public:
    * @return : highest ID number
    *
    */
-  long unsigned highestIdNum(QString tableName, QString tableField, int prefixLength);
+  long unsigned highestNumberFromIdString(QString tableName, QString tableField, int prefixLength);
 
   /**
    * This method is used when a database file is open, and the data is to

@@ -2413,7 +2413,7 @@ void MyMoneyDatabaseMgrTest::testRemoveOnlineJob()
   }
 }
 
-void MyMoneyDatabaseMgrTest::testHighestIdNum()
+void MyMoneyDatabaseMgrTest::testHighestNumberFromIdString()
 {
   testAttachDb();
 
@@ -2422,6 +2422,6 @@ void MyMoneyDatabaseMgrTest::testHighestIdNum()
 
   testAddTransactions();
 
-  QCOMPARE(m->m_sql->highestIdNum(QLatin1String("kmmTransactions"), QLatin1String("id"), 1), 2ul);
-  QCOMPARE(m->m_sql->highestIdNum(QLatin1String("kmmAccounts"), QLatin1String("id"), 1), 6ul);
+  QCOMPARE(m->m_sql->highestNumberFromIdString(QLatin1String("kmmTransactions"), QLatin1String("id"), 1), 2ul);
+  QCOMPARE(m->m_sql->highestNumberFromIdString(QLatin1String("kmmAccounts"), QLatin1String("id"), 1), 6ul);
 }
