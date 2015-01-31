@@ -126,7 +126,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QDeclarativeView" name="declarativeView">
+      <widget class="QQuickWidget" name="declarativeView">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>

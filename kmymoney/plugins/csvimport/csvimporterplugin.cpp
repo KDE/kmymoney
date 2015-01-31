@@ -46,8 +46,7 @@
 #include "investprocessing.h"
 
 // TODO: port KF5
-//K_PLUGIN_FACTORY(CsvImporterFactory, registerPlugin<CsvImporterPlugin>();)
-//K_EXPORT_PLUGIN(CsvImporterFactory("kmm_csvimport"))
+K_PLUGIN_FACTORY_WITH_JSON(CsvImporterFactory, "kmm_csvimport.json", registerPlugin<CsvImporterPlugin>();)
 
 CsvImporterPlugin::CsvImporterPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::Plugin(parent, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -90,3 +89,4 @@ bool CsvImporterPlugin::slotGetStatement(MyMoneyStatement& s)
   return statementInterface()->import(s);
 }
 
+#include "csvimporterplugin.moc"

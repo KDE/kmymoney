@@ -86,10 +86,11 @@
 #include "kmymoneyview.h"
 #include "kbpickstartdate.h"
 
-// TODO: port to KF5
-//K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<KBankingPlugin>();)
-//K_EXPORT_PLUGIN(KBankingFactory("kmm_kbanking"))
+#include "gwenkdegui.h"
+#include "gwenhywfarqtoperators.h"
+#include "aqbankingkmmoperators.h"
 
+K_PLUGIN_FACTORY_WITH_JSON(KBankingFactory, "kmm_kbanking.json", registerPlugin<KBankingPlugin>();)
 
 class KBankingPlugin::Private
 {
@@ -1435,3 +1436,5 @@ bool KMyMoneyBanking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
   }
   return true;
 }
+
+#include "mymoneybanking.moc"

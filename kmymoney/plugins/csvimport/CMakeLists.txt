@@ -35,6 +35,8 @@ add_library(kmm_csvimport
   ${kmm_csvimport_PART_SRCS}
 )
 
+kcoreaddons_desktop_to_json(kmm_csvimport kmm_csvimport.desktop)
+
 target_link_libraries(kmm_csvimport
   kmm_mymoney kmm_plugin
   KF5::KDELibs4Support

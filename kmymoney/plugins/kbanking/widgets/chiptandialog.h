@@ -23,7 +23,7 @@
 #ifndef CHIPTANDIALOG_H
 #define CHIPTANDIALOG_H
 
-#include <QtGui/QDialog>
+#include <QDialog>
 
 namespace Ui
 {

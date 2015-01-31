@@ -46,9 +46,7 @@
 
 #include "kmymoney.h"
 
-// TODO: port KF5
-//K_PLUGIN_FACTORY(CsvExporterFactory, registerPlugin<CsvExporterPlugin>();)
-//K_EXPORT_PLUGIN(CsvExporterFactory("kmm_csvexport"))
+K_PLUGIN_FACTORY_WITH_JSON(CsvExporterFactory, "kmm_csvexport.json", registerPlugin<CsvExporterPlugin>();)
 
 CsvExporterPlugin::CsvExporterPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::Plugin(parent, "csvexport"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -102,3 +100,4 @@ bool CsvExporterPlugin::okToWriteFile(const QUrl &url)
   return reallySaveFile;
 }
 
+#include "csvexporterplugin.moc"
