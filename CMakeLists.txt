@@ -61,7 +61,7 @@ include(KMyMoneyMacros)
 
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config KHtml KDELibs4Support Completion KCMUtils ItemViews Service Wallet)
-find_package(KF5 COMPONENTS Holidays Gpgmepp AkonadiContact Akonadi IdentityManagement)
+find_package(KF5 COMPONENTS Holidays Gpgmepp Contacts Akonadi IdentityManagement)
 find_package(LibAlkimia 4.100.0 REQUIRED)
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS})
@@ -119,7 +119,7 @@ get_filename_component(QT_DIR     ${QT_BIN_DIR}        PATH)
 set(QT_INSTALL_DIR ${QT_DIR} CACHE PATH
   "Qt install prefix defaults to the Qt prefix: ${QT_DIR}")
 
-if(KF5IdentityManagement_FOUND AND KF5Akonadi_FOUND AND KF5AkonadiContact_FOUND)
+if(KF5IdentityManagement_FOUND AND KF5Akonadi_FOUND AND KF5Contacts_FOUND)
   set(KMM_ADDRESSBOOK_FOUND 1)
 endif()
 
