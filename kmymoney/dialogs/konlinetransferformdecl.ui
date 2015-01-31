@@ -225,7 +225,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="KPushButton" name="buttonEnque">
+      <widget class="QPushButton" name="buttonEnque">
        <property name="text">
         <string>Enqueue</string>
        </property>
@@ -237,7 +237,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KPushButton" name="buttonSend">
+      <widget class="QPushButton" name="buttonSend">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -252,7 +252,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KPushButton" name="buttonAbort">
+      <widget class="QPushButton" name="buttonAbort">
        <property name="text">
         <string>Abort</string>
        </property>
@@ -285,7 +285,7 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

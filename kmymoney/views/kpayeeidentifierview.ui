@@ -30,7 +30,7 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="KPushButton" name="buttonRemove">
+      <widget class="QPushButton" name="buttonRemove">
        <property name="text">
         <string>Remove</string>
        </property>
@@ -55,7 +55,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

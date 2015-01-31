@@ -36,6 +36,7 @@
 #include <QTimer>
 #include <QBuffer>
 #include <QStandardPaths>
+#include <QDesktopServices>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -136,7 +137,7 @@ KHomeView::~KHomeView()
   // if user wants to remember the font size, store it here
   if (KMyMoneyGlobalSettings::rememberFontSize()) {
     KMyMoneyGlobalSettings::setFontSizePercentage(d->m_part->fontScaleFactor());
-    KMyMoneyGlobalSettings::self()->writeConfig();
+    KMyMoneyGlobalSettings::self()->save();
   }
   //This is to prevent a crash on exit with KDE 4.3.2
   delete d->m_part;
@@ -1146,9 +1147,9 @@ void KHomeView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&, co
   QString mode = query.queryItemValue("mode");
 
   if (protocol == "http") {
-    KToolInvocation::invokeBrowser(url.toDisplayString());
+    QDesktopServices::openUrl(url.toDisplayString());
   } else if (protocol == "mailto") {
-    KToolInvocation::invokeMailer(url);
+    QDesktopServices::openUrl(url);
   } else {
     KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
     Q_CHECK_PTR(mw);

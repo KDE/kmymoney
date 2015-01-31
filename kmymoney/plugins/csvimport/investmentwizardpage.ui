@@ -283,7 +283,7 @@ incorporated into the price.&lt;/span&gt;&lt;/p&gt;</string>
           </widget>
          </item>
          <item row="6" column="6">
-          <widget class="KPushButton" name="buttonInv_hideSecurity">
+          <widget class="QPushButton" name="buttonInv_hideSecurity">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -344,7 +344,7 @@ incorporated into the price.&lt;/span&gt;&lt;/p&gt;</string>
           </widget>
          </item>
          <item row="2" column="6">
-          <widget class="KPushButton" name="button_clear">
+          <widget class="QPushButton" name="button_clear">
            <property name="minimumSize">
             <size>
              <width>100</width>
