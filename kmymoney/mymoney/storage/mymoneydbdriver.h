@@ -159,6 +159,11 @@ public:
   virtual const QString tableOptionString() const;
 
   /**
+   * @return The SQL string to find the highest ID number with an arbitrary prefix
+   */
+  virtual const QString highestIdNumString(const QString& tableName, const QString& tableField, const int prefixLength) const;
+
+  /**
    * Override standard tables() call for bug 252841
    */
   virtual const QStringList tables(QSql::TableType tt, const QSqlDatabase& db) const;

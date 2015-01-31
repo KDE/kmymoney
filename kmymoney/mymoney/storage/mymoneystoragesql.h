@@ -180,6 +180,15 @@ public:
   const QString& lastError() const {
     return (m_error);
   };
+
+  /**
+   * MyMoneyStorageSql get highest ID number from the database
+   *
+   * @return : highest ID number
+   *
+   */
+  long unsigned highestIdNum(QString tableName, QString tableField, int prefixLength);
+
   /**
    * This method is used when a database file is open, and the data is to
    * be saved in a different file or format. It will ensure that all data

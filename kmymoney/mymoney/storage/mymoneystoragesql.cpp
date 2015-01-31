@@ -895,6 +895,18 @@ bool MyMoneyStorageSql::writeFile(void)
     return false;
   }
 }
+
+long unsigned MyMoneyStorageSql::highestIdNum(QString tableName, QString tableField, int prefixLength)
+{
+  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
+  QSqlQuery q(*this);
+
+  if (!q.exec(m_driver->highestIdNumString(tableName, tableField, prefixLength)) || !q.next())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("retrieving highest ID number"))); // krazy:exclude=crashy
+
+  return q.value(0).toULongLong();
+}
+
 // --------------- SQL Transaction (commit unit) handling -----------------------------------
 void MyMoneyStorageSql::startCommitUnit(const QString& callingFunction)
 {

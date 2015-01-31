@@ -2412,3 +2412,16 @@ void MyMoneyDatabaseMgrTest::testRemoveOnlineJob()
     QVERIFY(m->dirty() == false);
   }
 }
+
+void MyMoneyDatabaseMgrTest::testHighestIdNum()
+{
+  testAttachDb();
+
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
+
+  testAddTransactions();
+
+  QCOMPARE(m->m_sql->highestIdNum(QLatin1String("kmmTransactions"), QLatin1String("id"), 1), 2ul);
+  QCOMPARE(m->m_sql->highestIdNum(QLatin1String("kmmAccounts"), QLatin1String("id"), 1), 6ul);
+}

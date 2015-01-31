@@ -66,6 +66,7 @@ public:
   virtual const QString intString(const MyMoneyDbIntColumn& c) const;
   virtual const QString timestampString(const MyMoneyDbDatetimeColumn& c) const;
   virtual const QString tableOptionString() const;
+  virtual const QString highestIdNumString(const QString& tableName, const QString& tableField, const int prefixLength) const;
   virtual const QStringList tables(QSql::TableType tt, const QSqlDatabase& db) const;
 };
 
@@ -79,6 +80,7 @@ public:
   virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
   virtual const QString intString(const MyMoneyDbIntColumn& c) const;
   virtual const QString textString(const MyMoneyDbTextColumn& c) const;
+  virtual const QString highestIdNumString(const QString& tableName, const QString& tableField, const int prefixLength) const;
 };
 
 class MyMoneyODBCDriver : public MyMoneyDbDriver
@@ -104,6 +106,7 @@ public:
   virtual const QString modifyColumnString(const QString& tableName, const QString& columnName, const MyMoneyDbColumn& newDef) const;
   virtual const QString intString(const MyMoneyDbIntColumn& c) const;
   virtual const QString textString(const MyMoneyDbTextColumn& c) const;
+  virtual const QString highestIdNumString(const QString& tableName, const QString& tableField, const int prefixLength) const;
 };
 
 class MyMoneySybaseDriver : public MyMoneyDbDriver
@@ -628,6 +631,29 @@ const QString MyMoneyMysqlDriver::tableOptionString() const
 const QString MyMoneyDbDriver::tableOptionString() const
 {
   return "";
+}
+
+//***********************************************
+// Define the highestIdNum string
+// PostgreSQL and Oracle return errors when a non-numerical string is cast to an integer, so a regex is used to skip strings that aren't entirely numerical after the prefix is removed
+const QString MyMoneyDbDriver::highestIdNumString(const QString& tableName, const QString& tableField, const int prefixLength) const
+{
+  return QString("SELECT MAX(CAST(SUBSTR(%1, %2) AS INTEGER)) FROM %3;").arg(tableField).arg(prefixLength + 1).arg(tableName);
+}
+
+const QString MyMoneyMysqlDriver::highestIdNumString(const QString& tableName, const QString& tableField, const int prefixLength) const
+{
+  return QString("SELECT MAX(CAST(SUBSTR(%1, %2) AS UNSIGNED INTEGER)) FROM %3;").arg(tableField).arg(prefixLength + 1).arg(tableName);
+}
+
+const QString MyMoneyPostgresqlDriver::highestIdNumString(const QString& tableName, const QString& tableField, const int prefixLength) const
+{
+  return QString("SELECT MAX(CAST(SUBSTR(%1, %2) AS INTEGER)) FROM %3 WHERE SUBSTR(%1, %2) ~ '^[0-9]+$';").arg(tableField).arg(prefixLength + 1).arg(tableName);
+}
+
+const QString MyMoneyOracleDriver::highestIdNumString(const QString& tableName, const QString& tableField, const int prefixLength) const
+{
+  return QString("SELECT MAX(TO_NUMBER(SUBSTR(%1, %2))) FROM %3 WHERE REGEXP_LIKE(SUBSTR(%1, %2), '^[0-9]+$');").arg(tableField).arg(prefixLength + 1).arg(tableName);
 }
 
 //*************************************************
