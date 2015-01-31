@@ -58,7 +58,7 @@
 #include <KAction>
 #include <KSharedConfig>
 #include <KComponentData>
-#include <KInputDialog>
+#include <QInputDialog>
 #include <KFileDialog>
 #include <KFileWidget>
 #include <KStandardDirs>
@@ -1595,7 +1595,7 @@ int CSVDialog::columnNumber(const QString& msg)
   //  indicating the sign of the value column. ie a debit or a credit.
   bool ok;
   static int ret;
-  ret = KInputDialog::getInteger(i18n("Enter column number of debit/credit code"), msg, 0, 1, m_endColumn, 1, 10, &ok);
+  ret = QInputDialog::getInteger(0, i18n("Enter column number of debit/credit code"), msg, 0, 1, m_endColumn, 1, &ok);
   if (ok && ret > 0)
     return ret;
   return 0;

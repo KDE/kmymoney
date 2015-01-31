@@ -35,7 +35,6 @@
 // KDE Headers
 
 #include <KFileDialog>
-#include <KInputDialog>
 #include <KSharedConfig>
 #include <KMessageBox>
 #include <KStandardDirs>

@@ -27,6 +27,7 @@
 
 #include <QtCore/QFile>
 #include <QFileDialog>
+#include <QInputDialog>
 #include <QtCore/QTextCodec>
 #include <QtCore/QTextStream>
 #include <QtCore/QDebug>
@@ -36,7 +37,6 @@
 #include <kdeversion.h>
 #include <KFileDialog>
 #include <KFileWidget>
-#include <KInputDialog>
 #include <KSharedConfig>
 #include <kmessagebox.h>
 #include <kguiitem.h>
@@ -1903,7 +1903,7 @@ int InvestProcessing::columnNumber(const QString& column)
 {
   bool ok;
   static int ret;
-  ret = KInputDialog::getInteger(i18n("Brokerage Item"), column, 0, 1, m_endColumn, 1, 10, &ok);
+  ret = QInputDialog::getInteger(0, i18n("Brokerage Item"), column, 0, 1, m_endColumn, 1, &ok);
   if (ok && ret > 0)
     return ret;
   return 0;
@@ -1913,7 +1913,7 @@ QString InvestProcessing::accountName(const QString& aName)
 {
   bool ok;
   static QString accntName;
-  accntName = KInputDialog::getText(i18n("Parameters"), aName, QString(), &ok, 0, 0, 0);
+  accntName = QInputDialog::getText(0, i18n("Parameters"), aName, QLineEdit::Normal, QString(), &ok);
   if (ok && !accntName.isEmpty())
     return accntName;
   else return "";

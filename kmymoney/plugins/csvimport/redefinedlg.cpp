@@ -24,11 +24,11 @@
 #include <QtCore/QPointer>
 #include <QResizeEvent>
 #include <QScrollBar>
+#include <QInputDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <KInputDialog>
 #include <KLocale>
 #include <KMessageBox>
 #include <KIconLoader>
@@ -269,7 +269,7 @@ QString RedefineDlg::inputParameter(const QString& aName)
 {
   bool ok;
   static QString accntName;
-  accntName = KInputDialog::getText(i18n("Enter Account Name"), aName, QString(), &ok, 0, 0, 0);
+  accntName = QInputDialog::getText(0, i18n("Enter Account Name"), aName, QLineEdit::Normal, QString(), &ok);
 
   if (ok && !accntName.isEmpty())
     return accntName;

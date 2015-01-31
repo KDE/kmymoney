@@ -29,7 +29,6 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <KInputDialog>
 #include <KLocale>
 #include <KMessageBox>
 #include <KGlobal>
