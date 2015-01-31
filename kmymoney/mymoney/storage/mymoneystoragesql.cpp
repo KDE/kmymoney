@@ -847,7 +847,7 @@ bool MyMoneyStorageSql::readFile(void)
 }
 
 // The following is called from 'SaveAsDatabase'
-bool MyMoneyStorageSql::writeFile(void)
+bool MyMoneyStorageSql::writeFile()
 {
   DBG("*** Entering MyMoneyStorageSql::writeFile");
   // initialize record counts and hi ids
@@ -2981,7 +2981,8 @@ void MyMoneyStorageSql::writeFileInfo()
   q.bindValue(":kvps", (unsigned long long) m_kvps);
   q.bindValue(":budgets", (unsigned long long) m_budgets);
 
-  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing FileInfo"))); // krazy:exclude=crashy
+  if (!q.exec())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing FileInfo"))); // krazy:exclude=crashy
 }
 
 // **** Key/value pairs ****
@@ -4893,8 +4894,7 @@ void MyMoneyStorageSql::loadPayeeIdentifierId(const long unsigned int& id)
 }
 
 //****************************************************
-long unsigned MyMoneyStorageSql::calcHighId
-(const long unsigned& i, const QString& id)
+long unsigned MyMoneyStorageSql::calcHighId(const long unsigned& i, const QString& id)
 {
   DBG("*** Entering MyMoneyStorageSql::calcHighId");
   QString nid = id;

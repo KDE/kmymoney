@@ -290,13 +290,13 @@ void MyMoneyDatabaseMgrTest::testNewAccount()
 
   m->addAccount(a);
 
-  QVERIFY(m->accountId() == 1);
+  QCOMPARE(m->accountId(), 1ul);
   QList<MyMoneyAccount> accList;
   m->accountList(accList);
-  QVERIFY(accList.count() == 1);
-  QVERIFY((*(accList.begin())).name() == "AccountName");
-  QVERIFY((*(accList.begin())).id() == "A000001");
-  QVERIFY((*(accList.begin())).value("Key") == "Value");
+  QCOMPARE(accList.count(), 1);
+  QCOMPARE((*(accList.begin())).name(), QLatin1String("AccountName"));
+  QCOMPARE((*(accList.begin())).id(), QLatin1String("A000001"));
+  QCOMPARE((*(accList.begin())).value("Key"), QLatin1String("Value"));
 }
 
 void MyMoneyDatabaseMgrTest::testAccount()
@@ -775,12 +775,12 @@ void MyMoneyDatabaseMgrTest::testTransactionCount()
   }
 
   testAddTransactions();
-  QVERIFY(m->transactionCount("A000001") == 0);
-  QVERIFY(m->transactionCount("A000002") == 1);
-  QVERIFY(m->transactionCount("A000003") == 1);
-  QVERIFY(m->transactionCount("A000004") == 1);
-  QVERIFY(m->transactionCount("A000005") == 1);
-  QVERIFY(m->transactionCount("A000006") == 2);
+  QVERIFY(m->transactionCount("A000001") == 0ul);
+  QVERIFY(m->transactionCount("A000002") == 1ul);
+  QVERIFY(m->transactionCount("A000003") == 1ul);
+  QVERIFY(m->transactionCount("A000004") == 1ul);
+  QVERIFY(m->transactionCount("A000005") == 1ul);
+  QVERIFY(m->transactionCount("A000006") == 2ul);
 }
 
 void MyMoneyDatabaseMgrTest::testAddBudget()
@@ -799,12 +799,12 @@ void MyMoneyDatabaseMgrTest::testAddBudget()
 
   m->addBudget(budget);
 
-  QVERIFY(m->budgetList().count() == 1);
-  QVERIFY(m->budgetId() == 1);
+  QCOMPARE(m->budgetList().count(), 1);
+  QCOMPARE(m->budgetId(), 1ul);
   MyMoneyBudget newBudget = m->budgetByName("TestBudget");
 
-  QVERIFY(budget.budgetStart() == newBudget.budgetStart());
-  QVERIFY(budget.name() == newBudget.name());
+  QCOMPARE(budget.budgetStart(), newBudget.budgetStart());
+  QCOMPARE(budget.name(), newBudget.name());
 }
 
 void MyMoneyDatabaseMgrTest::testCopyBudget()
