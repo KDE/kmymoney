@@ -179,9 +179,13 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
       if ( role == Qt::DisplayRole )
         return QVariant::fromValue(MyMoneyUtils::formatMoney(transfer.task()->value(), transfer.task()->currency()));
     } else if ( index.column() == ColDestination ) {
-      return QVariant();
+      if (role == Qt::DisplayRole) {
+        const payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic(transfer.constTask()->beneficiary());
+        return QVariant(ibanBic->ownerName());
+      }
     }
   } catch ( MyMoneyException& ) {
+  } catch ( payeeIdentifier::exception& ) {
   }
 
   return QVariant();
