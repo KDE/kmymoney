@@ -173,6 +173,7 @@
 #include <transactioneditor.h>
 #include "konlinetransferform.h"
 #include <QHBoxLayout>
+#include <QFileDialog>
 
 #include "kmymoneyutils.h"
 
@@ -1462,13 +1463,13 @@ void KMyMoneyApp::slotFileOpen(void)
 {
   KMSTATUS(i18n("Open a file."));
 
-  QPointer<KFileDialog> dialog = new KFileDialog(QUrl("kfiledialog:///kmymoney-open"),
-      i18n("*.kmy *.xml|KMyMoney files\n*|All files"),
-      this);
-  dialog->setMode(KFile::File | KFile::ExistingOnly);
+  QPointer<QFileDialog> dialog = new QFileDialog(this, QString(), QStringLiteral("kfiledialog:///kmymoney-open"),
+                                                 i18n("KMyMoney files (*.kmy *.xml);;All files"));
+  dialog->setFileMode(QFileDialog::ExistingFile);
+  dialog->setAcceptMode(QFileDialog::AcceptOpen);
 
-  if (dialog->exec() == QDialog::Accepted && dialog != 0) {
-    slotFileOpenRecent(dialog->selectedUrl());
+  if (dialog->exec() == QDialog::Accepted && dialog != nullptr) {
+    slotFileOpenRecent(dialog->selectedUrls().first());
   }
   delete dialog;
 }
@@ -2101,9 +2102,8 @@ void KMyMoneyApp::slotSaveAccountTemplates(void)
 {
   KMSTATUS(i18n("Exporting account templates."));
 
-  QString newName = KFileDialog::getSaveFileName(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
-                    i18n("*.kmt|KMyMoney template files\n"
-                         "*|All files"), this, i18n("Save as..."));
+  QString newName = QFileDialog::getSaveFileName(this, i18n("Save as..."), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
+                    i18n("*.kmt|KMyMoney template files\n*|All files"));
   //
   // If there is no file extension, then append a .kmt at the end of the file name.
   // If there is a file extension, make sure it is .kmt, delete any others.
