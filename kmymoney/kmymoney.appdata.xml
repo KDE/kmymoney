@@ -24,6 +24,7 @@
   <name xml:lang="sv">KMyMoney</name>
   <name xml:lang="uk">KMyMoney</name>
   <name xml:lang="x-test">xxKMyMoneyxx</name>
+  <name xml:lang="zh-CN">KMyMoney</name>
   <summary>Personal Finance Manager</summary>
   <summary xml:lang="ar">مدير ماليّة شخصيّ</summary>
   <summary xml:lang="ca">Gestor per a les finances personals</summary>
@@ -45,6 +46,7 @@
   <summary xml:lang="sv">Hemekonomihanterare</summary>
   <summary xml:lang="uk">Програма для керування особистими фінансами</summary>
   <summary xml:lang="x-test">xxPersonal Finance Managerxx</summary>
+  <summary xml:lang="zh-CN">个人金融管理器</summary>
   <description>
     <p>
       KMyMoney is a personal finance manager for KDE.
