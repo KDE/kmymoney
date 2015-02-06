@@ -711,7 +711,8 @@ void InvestProcessing::symbolColumnSelected(int col)
 {
   QString type = "symbol";
   m_symbolColumn = col;
-  if (col < 0) {      //                              it is unset
+  if (col < 0) {
+    //  it is not set so remove any prior settings
     int indx = m_columnTypeList.indexOf(type);
     m_symbolSelected = false;
     if (indx > -1) {
@@ -747,7 +748,8 @@ void InvestProcessing::detailColumnSelected(int col)
 {
   QString type = "detail";
   m_detailColumn = col;
-  if (col < 0) {      //                              it is unset
+  if (col < 0) {
+    //  it is not set so remove any prior settings
     int indx = m_columnTypeList.indexOf(type);
     m_detailSelected = false;
     if (indx > -1) {
