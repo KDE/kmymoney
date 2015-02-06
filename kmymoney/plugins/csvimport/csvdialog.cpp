@@ -3779,7 +3779,7 @@ bool LinesDatePage::validatePage()
   }
 
   int symTableRow = -1;
-  if ((m_dlg->m_fileType == "Banking") || (field("symbolCol").toInt() == -1)) {  //  Only check symbols if that field is set, and not Banking.
+  if ((m_dlg->m_fileType == "Banking") || (field("symbolCol").toInt() == -1)) {  //  Don't check symbols if field("symbolCol") not set, or if Banking.
     if ((m_dlg->m_pageIntro->ui->checkBoxSkipSetup->isChecked())) {
       if (m_dlg->m_importError) {
         wizard()->next();
