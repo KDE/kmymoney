@@ -5867,6 +5867,8 @@ void KMyMoneyApp::slotTransactionCopySplits()
             continue;
           }
 
+          const MyMoneySplit& baseSplit = st.split();
+
           if(t.splitCount() == 1) {
             foreach(const MyMoneySplit& split, sourceTransaction.splits()) {
               // Don't copy the source split, as we already have that
@@ -5886,8 +5888,8 @@ void KMyMoneyApp::slotTransactionCopySplits()
               // just created. We need to keep a possible price in mind in case
               // of different currencies
               if(sourceTransaction.splitCount() == 2) {
-                sp.setValue(-split.value());
-                sp.setShares(-(split.shares() * split.price()));
+                sp.setValue(-baseSplit.value());
+                sp.setShares(-(baseSplit.shares() * baseSplit.price()));
               }
               t.addSplit(sp);
             }
