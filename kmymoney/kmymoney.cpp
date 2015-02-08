@@ -4262,7 +4262,6 @@ void KMyMoneyApp::slotScheduleEdit(void)
       KEditScheduleDlg* sched_dlg = 0;
       KEditLoanWizard* loan_wiz = 0;
 
-
       switch (schedule.type()) {
         case MyMoneySchedule::TYPE_BILL:
         case MyMoneySchedule::TYPE_DEPOSIT:
@@ -7605,7 +7604,7 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
       }
 
     } else {
-      qWarning() << "Error, got onlineJob for a account without online plugin.";
+      qWarning() << "Error, got onlineJob for an account without online plugin.";
       /** @FIXME can this actually happen? */
     }
   }

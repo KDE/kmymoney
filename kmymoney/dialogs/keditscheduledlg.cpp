@@ -193,6 +193,7 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
   }
 
   if (editor) {
+    editor->m_scheduleInfo = m_nameEdit->text();
     connect(editor, SIGNAL(transactionDataSufficient(bool)), buttonOk, SLOT(setEnabled(bool)));
     connect(editor, SIGNAL(escapePressed()), buttonCancel, SLOT(animateClick()));
     connect(editor, SIGNAL(returnPressed()), buttonOk, SLOT(animateClick()));
@@ -215,6 +216,7 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
         break;
       case MyMoneySchedule::TYPE_BILL:
         action = KMyMoneyRegister::ActionWithdrawal;
+        editor->m_paymentMethod = d->m_schedule.paymentType();
         break;
       case MyMoneySchedule::TYPE_TRANSFER:
         action = KMyMoneyRegister::ActionTransfer;
