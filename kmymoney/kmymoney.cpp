@@ -4212,7 +4212,6 @@ void KMyMoneyApp::slotScheduleEdit(void)
       KEditScheduleDlg* sched_dlg = 0;
       KEditLoanWizard* loan_wiz = 0;
 
-
       switch (schedule.type()) {
         case MyMoneySchedule::TYPE_BILL:
         case MyMoneySchedule::TYPE_DEPOSIT:
