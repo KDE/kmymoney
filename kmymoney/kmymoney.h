@@ -411,6 +411,13 @@ protected slots:
   void slotTransactionCombine(void);
 
   /**
+   * This method takes the selected splits and checks that only one transaction (src)
+   * has more than one split and all others have only a single one. It then copies the
+   * splits of the @b src transaction to all others.
+   */
+  void slotTransactionCopySplits();
+
+  /**
     * Accept the selected transactions that are marked as 'imported' and remove the flag
     */
   void slotTransactionsAccept(void);
@@ -448,7 +455,7 @@ protected slots:
   void slotAccountUnmapOnline(void);
   void slotAccountUpdateOnline(void);
   void slotAccountUpdateOnlineAll(void);
-  
+
   /**
    * @brief Start dialog for an online banking transfer
    */

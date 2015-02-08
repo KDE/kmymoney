@@ -893,6 +893,10 @@ void KMyMoneyApp::initActions(void)
   transaction_combine->setText(i18nc("Combine transactions", "Combine"));
   connect(transaction_combine, SIGNAL(triggered()), this, SLOT(slotTransactionCombine()));
 
+  KAction *transaction_copy_splits = actionCollection()->addAction("transaction_copy_splits");
+  transaction_copy_splits->setText(i18n("Copy splits"));
+  connect(transaction_copy_splits, SIGNAL(triggered()), this, SLOT(slotTransactionCopySplits()));
+
   //Investment
   KAction *investment_new = actionCollection()->addAction("investment_new");
   investment_new->setText(i18n("New investment..."));
@@ -5829,6 +5833,75 @@ void KMyMoneyApp::slotTransactionCombine(void)
   qDebug("slotTransactionCombine() not implemented yet");
 }
 
+void KMyMoneyApp::slotTransactionCopySplits()
+{
+  MyMoneyFile* file = MyMoneyFile::instance();
+
+  if (d->m_selectedTransactions.count() >= 2) {
+    int singleSplitTransactions = 0;
+    int multipleSplitTransactions = 0;
+    KMyMoneyRegister::SelectedTransaction selectedSourceTransaction;
+    foreach(const KMyMoneyRegister::SelectedTransaction& st, d->m_selectedTransactions) {
+      switch(st.transaction().splitCount()) {
+        case 0:
+          break;
+        case 1:
+          singleSplitTransactions++;
+          break;
+        default:
+          selectedSourceTransaction = st;
+          multipleSplitTransactions++;
+          break;
+      }
+    }
+    if(singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
+      MyMoneyFileTransaction ft;
+      try {
+        const MyMoneyTransaction& sourceTransaction = selectedSourceTransaction.transaction();
+        const MyMoneySplit& sourceSplit = selectedSourceTransaction.split();
+        foreach(const KMyMoneyRegister::SelectedTransaction& st, d->m_selectedTransactions) {
+          MyMoneyTransaction t = st.transaction();
+
+          // don't process the source transaction
+          if(sourceTransaction.id() == t.id()) {
+            continue;
+          }
+
+          if(t.splitCount() == 1) {
+            foreach(const MyMoneySplit& split, sourceTransaction.splits()) {
+              // Don't copy the source split, as we already have that
+              // as part of the destination transaction
+              if(split.id() == sourceSplit.id()) {
+                continue;
+              }
+
+              MyMoneySplit sp(split);
+              // clear the ID and reconciliation state
+              sp.clearId();
+              sp.setReconcileFlag(MyMoneySplit::NotReconciled);
+              sp.setReconcileDate(QDate());
+
+              // in case it is a simple transaction consisting of two splits,
+              // we can adjust the share and value part of the second split we
+              // just created. We need to keep a possible price in mind in case
+              // of different currencies
+              if(sourceTransaction.splitCount() == 2) {
+                sp.setValue(-split.value());
+                sp.setShares(-(split.shares() * split.price()));
+              }
+              t.addSplit(sp);
+            }
+            file->modifyTransaction(t);
+          }
+        }
+        ft.commit();
+      } catch (const MyMoneyException &) {
+        qDebug() << "transactionCopySplits() failed";
+      }
+    }
+  }
+}
+
 void KMyMoneyApp::slotMoveToAccount(const QString& id)
 {
   // close the menu, if it is still open
@@ -6278,6 +6351,7 @@ void KMyMoneyApp::slotUpdateActions(void)
   action("transaction_create_schedule")->setEnabled(false);
   action("transaction_combine")->setEnabled(false);
   action("transaction_select_all")->setEnabled(false);
+  action("transaction_copy_splits")->setEnabled(false);
 
   action("schedule_new")->setEnabled(fileOpen);
   action("schedule_edit")->setEnabled(false);
@@ -6389,6 +6463,25 @@ void KMyMoneyApp::slotUpdateActions(void)
 
       if (d->m_selectedTransactions.count() > 1) {
         action("transaction_combine")->setEnabled(true);
+      }
+      if (d->m_selectedTransactions.count() >= 2) {
+        int singleSplitTransactions = 0;
+        int multipleSplitTransactions = 0;
+        foreach(const KMyMoneyRegister::SelectedTransaction& st, d->m_selectedTransactions) {
+          switch(st.transaction().splitCount()) {
+            case 0:
+              break;
+            case 1:
+              singleSplitTransactions++;
+              break;
+            default:
+              multipleSplitTransactions++;
+              break;
+          }
+        }
+        if(singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
+          action("transaction_copy_splits")->setEnabled(true);
+        }
       }
     } else {
       action("transaction_assign_number")->setEnabled(d->m_transactionEditor->canAssignNumber());
