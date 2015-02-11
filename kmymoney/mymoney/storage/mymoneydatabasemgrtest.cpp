@@ -35,10 +35,12 @@ MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
   // Create file and close it to release possible read-write locks
   m_file.open();
   m_file.close();
+  testCaseTimer.start();
 }
 
 void MyMoneyDatabaseMgrTest::init()
 {
+  testStepTimer.start();
   m = new MyMoneyDatabaseMgr;
 }
 
@@ -53,6 +55,7 @@ void MyMoneyDatabaseMgrTest::cleanup()
     m_dbAttached = false;
   }
   delete m;
+  qDebug() << "teststep" << testStepTimer.elapsed() << "seconds, total" << testCaseTimer.elapsed() << "sec";
 }
 
 void MyMoneyDatabaseMgrTest::testEmptyConstructor()
