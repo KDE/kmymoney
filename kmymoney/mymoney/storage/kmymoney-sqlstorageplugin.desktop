@@ -4,6 +4,7 @@ X-KDE-ServiceType=KMyMoney/sqlStoragePlugin
 Name=Enables plugins to store data in the sql database
 Name[da]=Aktiverer plugins til at lagre data i sql-databasen
 Name[en_GB]=Enables plugins to store data in the sql database
+Name[es]=Permite a los complementos almacenar datos en la base de datos sql
 Name[nl]=Schakelt plug-ins in om gegevens in de sql-database op te slaan
 Name[pl]=Włącza wtyczki do przechowywania danych w bazach danych sql
 Name[pt]=Permite aos 'plugins' armazenarem dados na base de dados SQL
