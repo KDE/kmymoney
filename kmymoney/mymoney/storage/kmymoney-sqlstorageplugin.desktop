@@ -5,6 +5,7 @@ Name=Enables plugins to store data in the sql database
 Name[ca]=Activa els connectors per emmagatzemar dades en la base de dades SQL
 Name[de]=Aktiviert Module, um Daten in der SQL-Datenbank zu speichern
 Name[en_GB]=Enables plugins to store data in the sql database
+Name[es]=Activa los complementos para almacenar datos en la base de datos sql
 Name[nl]=Schakelt plug-ins in om gegevens in de sql-database op te slaan
 Name[pl]=Włącza wtyczki do przechowywania danych w bazach danych sql
 Name[pt]=Permite aos 'plugins' guardarem dados na base de dados de SQL
