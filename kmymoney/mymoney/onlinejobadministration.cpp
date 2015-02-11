@@ -185,6 +185,9 @@ onlineTaskConverter::convertType onlineJobAdministration::canConvert(const QStri
     else if ( type == onlineTask::convertionLoseless )
       return onlineTask::convertionLoseless;
   }
+#else
+  Q_UNUSED(originalTaskIid);
+  Q_UNUSED(convertTaskIids);
 #endif
   return bestConvertType;
 }

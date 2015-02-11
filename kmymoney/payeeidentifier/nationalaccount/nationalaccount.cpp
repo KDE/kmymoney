@@ -63,6 +63,8 @@ void nationalAccount::writeXML(QDomDocument& document, QDomElement& parent) cons
 /** @todo implement */
 nationalAccount* nationalAccount::createFromSqlDatabase(QSqlDatabase db, const QString& identId) const
 {
+  Q_UNUSED(db);
+  Q_UNUSED(identId);
   return 0;
 }
 
@@ -75,18 +77,24 @@ QString nationalAccount::storagePluginIid() const
 /** @todo implement */
 bool nationalAccount::sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const
 {
+  Q_UNUSED(databaseConnection);
+  Q_UNUSED(objectId);
   return false;
 }
 
 /** @todo implement */
 bool nationalAccount::sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const
 {
+  Q_UNUSED(databaseConnection);
+  Q_UNUSED(objectId);
   return false;
 }
 
 /** @todo implement */
 bool nationalAccount::sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const
 {
+  Q_UNUSED(databaseConnection);
+  Q_UNUSED(objectId);
   return false;
 }
 
