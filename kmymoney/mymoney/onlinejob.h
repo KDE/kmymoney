@@ -350,4 +350,6 @@ const T* onlineJob::task() const
   return ret;
 }
 
+Q_DECLARE_METATYPE(onlineJob)
+
 #endif // ONLINEJOB_H

@@ -34,7 +34,8 @@ public:
    * In addition to Qt::ItemDataRole
    */
   enum roles {
-    OnlineJobId = Qt::UserRole /**< QString of onlineJob.id() */
+    OnlineJobId = Qt::UserRole, /**< QString of onlineJob.id() */
+    OnlineJobRole /**< the real onlineJob */
   };
 
   enum columns {

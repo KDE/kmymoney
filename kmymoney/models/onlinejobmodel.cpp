@@ -112,6 +112,8 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
   // id of MyMoneyObject
   if ( role == OnlineJobId )
     return QVariant::fromValue( job.id() );
+  else if (role == OnlineJobRole)
+    return QVariant::fromValue( job );
 
   // If job is null, display an error message and exit
   if ( job.isNull() ) {
