@@ -492,6 +492,12 @@ protected slots:
    */
   void slotOnlineJobSend(QList<onlineJob> jobs );
 
+  /**
+   * @brief Show the log currently selected online job
+   */
+  void slotOnlineJobLog();
+  void slotOnlineJobLog(const QStringList& onlineJobIds);
+
   void slotManageGpgKeys(void);
   void slotKeySelected(int idx);
 

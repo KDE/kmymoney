@@ -1,7 +1,5 @@
 project(widgets)
 
-########### custom command #############
-
 ########### create links ###############
 set(kmymoney_STAT_HEADERS
   kaccounttemplateselector.h kbudgetvalues.h kguiutils.h
@@ -17,6 +15,7 @@ set(kmymoney_STAT_HEADERS
   transactionform.h transaction.h transactionsortoptionimpl.h
   kmymoneyreportconfigtabimpl.h kmymoneyreportcontrolimpl.h
   kmymoneyvalidationfeedback.h
+  onlinejobmessagesview.h
   )
 
 ########### Shared widget library ###########
@@ -32,6 +31,7 @@ set(kmm_widgets_sources
   kmymoneycalculator.cpp
   ktreewidgetfilterlinewidget.cpp
   kguiutils.cpp
+  onlinejobmessagesview.cpp
   )
 
 kde4_add_ui_files(kmm_widgets_sources kmymoneyvalidationfeedback.ui)
@@ -149,6 +149,7 @@ set(libwidgets_a_UI
   kschedulebriefwidget.ui kmymoneyreportcontroldecl.ui
   kmymoneyreportconfigtab1decl.ui kmymoneyreportconfigtab2decl.ui
   kmymoneyreportconfigtab3decl.ui kmymoneyreportconfigtabchartdecl.ui
+  onlinejobmessagesview.ui
   )
 
 # using uic on the above UI files DEPENDS on libkmymoney.so. If uic
@@ -172,4 +173,3 @@ add_dependencies(widgets kmm_config)
 
 install(FILES ${kmymoney_STAT_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/kmm_widgets_export.h
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
-

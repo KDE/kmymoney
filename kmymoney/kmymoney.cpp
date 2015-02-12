@@ -140,12 +140,14 @@
 #include "wizards/newuserwizard/knewuserwizard.h"
 #include "wizards/newaccountwizard/knewaccountwizard.h"
 #include "dialogs/kbalancewarning.h"
+#include "widgets/onlinejobmessagesview.h"
 
 #include "widgets/kmymoneymvccombo.h"
 #include "widgets/kmymoneycompletion.h"
 
 #include "views/kmymoneyview.h"
 #include "views/konlinejoboutbox.h"
+#include "models/onlinejobmessagesmodel.h"
 
 #include "mymoney/mymoneyutils.h"
 #include "mymoney/mymoneystatement.h"
@@ -1091,6 +1093,9 @@ void KMyMoneyApp::initActions(void)
   onlineJob_edit->setText(i18n("Edit credit transfer"));
   onlineJob_edit->setIcon(KIcon::fromTheme("document-edit"));
 
+  KAction* onlineJob_log = actionCollection()->addAction("onlinejob_log");
+  onlineJob_log->setText(i18n("Show log"));
+  connect(onlineJob_log, SIGNAL(triggered()), this, SLOT(slotOnlineJobLog()));
 
   // ************************
   // Currently unused actions
@@ -7607,6 +7612,22 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
   }
 }
 
+void KMyMoneyApp::slotOnlineJobLog()
+{
+  QStringList jobIds = d->m_myMoneyView->getOnlineJobOutbox()->selectedOnlineJobs();
+  slotOnlineJobLog(jobIds);
+}
+
+void KMyMoneyApp::slotOnlineJobLog(const QStringList& onlineJobIds)
+{
+  onlineJobMessagesView *const dialog = new onlineJobMessagesView();
+  onlineJobMessagesModel *const model = new onlineJobMessagesModel(dialog);
+  model->setOnlineJob( MyMoneyFile::instance()->getOnlineJob(onlineJobIds.first()) );
+  dialog->setModel(model);
+  dialog->setAttribute(Qt::WA_DeleteOnClose);
+  dialog->show();
+  // Note: Objects are not deleted here, Qt's parent-child system has to do that.
+}
 
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
 {
