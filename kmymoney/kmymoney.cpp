@@ -145,6 +145,7 @@
 #include "widgets/kmymoneycompletion.h"
 
 #include "views/kmymoneyview.h"
+#include "views/konlinejoboutbox.h"
 
 #include "mymoney/mymoneyutils.h"
 #include "mymoney/mymoneystatement.h"
@@ -393,6 +394,8 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   connect(d->m_myMoneyView, SIGNAL(aboutToChangeView()), this, SLOT(slotResetSelections()));
   connect(d->m_myMoneyView, SIGNAL(currentPageChanged(KPageWidgetItem*,KPageWidgetItem*)),
           this, SLOT(slotUpdateActions()));
+
+  connectActionsAndViews();
 
   ///////////////////////////////////////////////////////////////////
   // call inits to invoke all other construction parts
@@ -1079,6 +1082,15 @@ void KMyMoneyApp::initActions(void)
   debug_timers->setText(i18n("Debug Timers"));
   connect(debug_timers, SIGNAL(triggered()), this, SLOT(slotToggleTimers()));
 
+  // onlineJob actions
+  KAction* onlineJob_delete = actionCollection()->addAction("onlinejob_delete");
+  onlineJob_delete->setText(i18n("Remove credit transfer"));
+  onlineJob_delete->setIcon(KIcon::fromTheme("edit-delete"));
+
+  KAction* onlineJob_edit = actionCollection()->addAction("onlinejob_edit");
+  onlineJob_edit->setText(i18n("Edit credit transfer"));
+  onlineJob_edit->setIcon(KIcon::fromTheme("document-edit"));
+
 
   // ************************
   // Currently unused actions
@@ -1099,6 +1111,20 @@ void KMyMoneyApp::initActions(void)
 
   // use the absolute path to your kmymoneyui.rc file for testing purpose in createGUI();
   setupGUI();
+}
+
+void KMyMoneyApp::connectActionsAndViews()
+{
+  KOnlineJobOutbox *const outbox = d->m_myMoneyView->getOnlineJobOutbox();
+  Q_CHECK_PTR(outbox);
+
+  QAction *const onlineJob_delete = actionCollection()->action("onlinejob_delete");
+  Q_CHECK_PTR(onlineJob_delete);
+  connect(onlineJob_delete, SIGNAL(triggered()), outbox, SLOT(slotRemoveJob()));
+
+  QAction *const onlineJob_edit = actionCollection()->action("onlinejob_edit");
+  Q_CHECK_PTR(onlineJob_edit);
+  connect(onlineJob_edit, SIGNAL(triggered()), outbox, SLOT(slotEditJob()));
 }
 
 void KMyMoneyApp::dumpActions(void) const
@@ -6207,6 +6233,10 @@ void KMyMoneyApp::slotShowPriceContextMenu(void)
   showContextMenu("price_context_menu");
 }
 
+void KMyMoneyApp::slotShowOnlineJobContextMenu()
+{
+  showContextMenu("onlinejob_context_menu");
+}
 
 void KMyMoneyApp::slotPrintView(void)
 {

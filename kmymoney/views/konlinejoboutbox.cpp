@@ -122,6 +122,15 @@ void KOnlineJobOutbox::slotEditJob(const QModelIndex &index)
   emit editJob(jobId);
 }
 
+void KOnlineJobOutbox::contextMenuEvent(QContextMenuEvent*)
+{
+  QModelIndexList indexes = ui->m_onlineJobView->selectionModel()->selectedIndexes();
+  if (!indexes.isEmpty()) {
+    onlineJob job = ui->m_onlineJobView->model()->data(indexes.first(), onlineJobModel::OnlineJobRole).value<onlineJob>();
+    emit showContextMenu(job);
+  }
+}
+
 /**
  * Do not know why this is needed, but all other views in KMyMoney have it.
  */

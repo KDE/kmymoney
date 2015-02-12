@@ -639,6 +639,13 @@ protected:
    */
   void initStatusBar(void);
 
+  /**
+   * @brief Establish connections between actions and views
+   *
+   * Must be called after creation of actions and views.
+   */
+  void connectActionsAndViews();
+
   /** queryClose is called by KMainWindow on each closeEvent of a window. Against the
    * default implementation (only returns true), this calls saveModified() on the document object to ask if the document shall
    * be saved if Modified; on cancel the closeEvent is rejected.
@@ -998,6 +1005,10 @@ public slots:
     */
   void slotShowPriceContextMenu(void);
 
+  /**
+   * Open onlineJob options menu at current cursor position.
+   */
+  void slotShowOnlineJobContextMenu();
 
   /**
     * This slot collects information for a new scheduled transaction

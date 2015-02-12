@@ -299,6 +299,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect( m_onlineJobOutboxView, SIGNAL(editJob(QString)), kmymoney, SLOT(slotEditOnlineJob(QString)) );
   connect( m_onlineJobOutboxView, SIGNAL(newCreditTransfer()), kmymoney, SLOT(slotNewOnlineTransfer()) );
   connect( m_onlineJobOutboxView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
+  connect( m_onlineJobOutboxView, SIGNAL(showContextMenu(onlineJob)), kmymoney, SLOT(slotShowOnlineJobContextMenu()));
 
   //set the model
   setModel(m_model);

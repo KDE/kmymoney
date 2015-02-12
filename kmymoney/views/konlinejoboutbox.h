@@ -44,6 +44,10 @@ signals:
   void newCreditTransfer();
 
   void aboutToShow();
+  void showContextMenu(onlineJob);
+
+protected:
+  void contextMenuEvent(QContextMenuEvent*);
 
 private slots:
   void updateNewCreditTransferButton();
