@@ -960,15 +960,15 @@ public:
   virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs);
   //virtual void loadPayeeIdentifier(const QMap<QString, payeeIdentifier>& idents);
 
-  virtual unsigned long accountId(void) const;
-  virtual unsigned long transactionId(void) const;
-  virtual unsigned long payeeId(void) const;
-  virtual unsigned long tagId(void) const;
-  virtual unsigned long institutionId(void) const;
-  virtual unsigned long scheduleId(void) const;
-  virtual unsigned long securityId(void) const;
-  virtual unsigned long reportId(void) const;
-  virtual unsigned long budgetId(void) const;
+  virtual unsigned long accountId() const;
+  virtual unsigned long transactionId() const;
+  virtual unsigned long payeeId() const;
+  virtual unsigned long tagId() const;
+  virtual unsigned long institutionId() const;
+  virtual unsigned long scheduleId() const;
+  virtual unsigned long securityId() const;
+  virtual unsigned long reportId() const;
+  virtual unsigned long budgetId() const;
   virtual unsigned long onlineJobId() const;
   virtual unsigned long payeeIdentifierId() const;
 

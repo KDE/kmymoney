@@ -2105,59 +2105,59 @@ void MyMoneyDatabaseMgr::loadOnlineJobs(const QMap< QString, onlineJob >& online
   Q_UNUSED(onlineJobs);
 }
 
-unsigned long MyMoneyDatabaseMgr::accountId(void) const
+unsigned long MyMoneyDatabaseMgr::accountId() const
 {
-  return m_sql->getNextAccountId();
+  return m_sql->getNextAccountId()-1;
 }
 
-unsigned long MyMoneyDatabaseMgr::transactionId(void) const
+unsigned long MyMoneyDatabaseMgr::transactionId() const
 {
-  return m_sql->getNextTransactionId();
+  return m_sql->getNextTransactionId()-1;
 }
 
-unsigned long MyMoneyDatabaseMgr::payeeId(void) const
+unsigned long MyMoneyDatabaseMgr::payeeId() const
 {
-  return m_sql->getNextPayeeId();
+  return m_sql->getNextPayeeId()-1;
 }
 
-unsigned long MyMoneyDatabaseMgr::tagId(void) const
+unsigned long MyMoneyDatabaseMgr::tagId() const
 {
-  return m_sql->getNextTagId();
+  return m_sql->getNextTagId()-1;
 }
 
-unsigned long MyMoneyDatabaseMgr::institutionId(void) const
+unsigned long MyMoneyDatabaseMgr::institutionId() const
 {
-  return m_sql->getNextInstitutionId();
+  return m_sql->getNextInstitutionId()-1;
 }
 
-unsigned long MyMoneyDatabaseMgr::scheduleId(void) const
+unsigned long MyMoneyDatabaseMgr::scheduleId() const
 {
-  return m_sql->getNextScheduleId();
+  return m_sql->getNextScheduleId()-1;
 }
 
-unsigned long MyMoneyDatabaseMgr::securityId(void) const
+unsigned long MyMoneyDatabaseMgr::securityId() const
 {
-  return m_sql->getNextSecurityId();
+  return m_sql->getNextSecurityId()-1;
 }
 
-unsigned long MyMoneyDatabaseMgr::reportId(void) const
+unsigned long MyMoneyDatabaseMgr::reportId() const
 {
-  return m_sql->getNextReportId();
+  return m_sql->getNextReportId()-1;
 }
 
-unsigned long MyMoneyDatabaseMgr::budgetId(void) const
+unsigned long MyMoneyDatabaseMgr::budgetId() const
 {
-  return m_sql->getNextBudgetId();
+  return m_sql->getNextBudgetId()-1;
 }
 
 long unsigned int MyMoneyDatabaseMgr::onlineJobId() const
 {
-  return m_sql->getNextOnlineJobId();
+  return m_sql->getNextOnlineJobId()-1;
 }
 
 long unsigned int MyMoneyDatabaseMgr::payeeIdentifierId() const
 {
-  return m_sql->getNextPayeeIdentifierId();
+  return m_sql->getNextPayeeIdentifierId()-1;
 }
 
 void MyMoneyDatabaseMgr::loadAccountId(const unsigned long id)

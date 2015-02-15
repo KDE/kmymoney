@@ -167,20 +167,29 @@ public:
   bool writeFile(void);
 
   /**
-  * MyMoneyStorageSql generalized error routine
-  *
-  * @return : error message to be displayed
-  *
+   * MyMoneyStorageSql generalized error routine
+   *
+   * @return : error message to be displayed
+   *
    */
   const QString& lastError() const {
     return (m_error);
   };
+
+  /**
+   * MyMoneyStorageSql get highest ID number from the database
+   *
+   * @return : highest ID number
+   */
+  long unsigned highestNumberFromIdString(QString tableName, QString tableField, int prefixLength);
+
   /**
    * This method is used when a database file is open, and the data is to
    * be saved in a different file or format. It will ensure that all data
    * from the database is available in memory to enable it to be written.
    */
   virtual void fillStorage();
+
   /**
     * The following functions correspond to the identically named (usually) functions
     * within the Storage Manager, and are called to update the database
@@ -397,6 +406,9 @@ private:
   void readBudgets(void);
   /** @} */
 
+  template<long unsigned MyMoneyStorageSql::* cache>
+  long unsigned int getNextId(const QString& table, const QString& id, const int prefixLength) const;
+
   void deleteTransaction(const QString& id);
   void deleteTagSplitsList(const QString& txId, const QList<int>& splitIdList);
   void deleteSchedule(const QString& id);
@@ -493,7 +505,8 @@ private:
   long unsigned m_onlineJobs;
   long unsigned m_payeeIdentifier;
 
-  // next id to use (for future archive)
+  // Cache for next id to use
+  // value 0 means data is not available and has to be loaded from the database
   long unsigned m_hiIdInstitutions;
   long unsigned m_hiIdPayees;
   long unsigned m_hiIdTags;

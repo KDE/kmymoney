@@ -129,10 +129,10 @@ public:
    * @brief The state of a job given by the onlinePlugin
    */
   enum sendingState {
-    noBankAnswer, /**< Used during or before sending or when the onlinePlugin cannot give an answer */
-    acceptedByBank /**< bank definetly confirmed the job */,
-    rejectedByBank /**< bank definetly rejected this job */,
-    abortedByUser /**< aborted by user during sending */,
+    noBankAnswer, /**< Used during or before sending or if sendDate().isValid() the job was successfully sent */
+    acceptedByBank, /**< bank definetly confirmed the job */
+    rejectedByBank, /**< bank definetly rejected this job */
+    abortedByUser, /**< aborted by user during sending */
     sendingError /**< an error occurred, the job is certainly not executed by the bank */
   };
 
@@ -349,5 +349,7 @@ const T* onlineJob::task() const
     throw badTaskCast(__FILE__, __LINE__);
   return ret;
 }
+
+Q_DECLARE_METATYPE(onlineJob)
 
 #endif // ONLINEJOB_H

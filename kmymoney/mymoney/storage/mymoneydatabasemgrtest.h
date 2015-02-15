@@ -19,6 +19,7 @@
 
 #include <QtCore/QObject>
 #include <QTemporaryFile>
+#include <QElapsedTimer>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyDatabaseMgrTest;
 
@@ -36,8 +37,15 @@ protected:
   QUrl m_url;
   QTemporaryFile m_file;
 
+private:
+  QElapsedTimer testStepTimer;
+  QElapsedTimer testCaseTimer;
+
 public:
   MyMoneyDatabaseMgrTest();
+
+private:
+  void testEquality(const MyMoneyDatabaseMgr* t);
 
 private slots:
   void init();
@@ -82,7 +90,6 @@ private slots:
   void testRemoveTag();
   void testRemoveAccountFromTree();
   void testAssignment();
-  void testEquality(const MyMoneyDatabaseMgr* t);
   void testDuplicate();
   void testAddSchedule();
   void testSchedule();
@@ -99,6 +106,7 @@ private slots:
   void testAddOnlineJob();
   void testModifyOnlineJob();
   void testRemoveOnlineJob();
+  void testHighestNumberFromIdString();
 };
 
 #endif

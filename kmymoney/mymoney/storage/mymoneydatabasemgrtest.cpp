@@ -35,10 +35,12 @@ MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
   // Create file and close it to release possible read-write locks
   m_file.open();
   m_file.close();
+  testCaseTimer.start();
 }
 
 void MyMoneyDatabaseMgrTest::init()
 {
+  testStepTimer.start();
   m = new MyMoneyDatabaseMgr;
   // Create file and close it to release possible read-write locks
   m_file.open();
@@ -56,6 +58,7 @@ void MyMoneyDatabaseMgrTest::cleanup()
     m_dbAttached = false;
   }
   delete m;
+  qDebug() << "teststep" << testStepTimer.elapsed() << "seconds, total" << testCaseTimer.elapsed() << "sec";
 }
 
 void MyMoneyDatabaseMgrTest::testEmptyConstructor()
@@ -178,10 +181,9 @@ void MyMoneyDatabaseMgrTest::testAttachDb()
 void MyMoneyDatabaseMgrTest::testDisconnection()
 {
   testAttachDb();
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
+
   try {
     ((QSqlDatabase*)(m->m_sql.data()))->close();
     QList<MyMoneyAccount> accList;
@@ -194,10 +196,8 @@ void MyMoneyDatabaseMgrTest::testDisconnection()
 void MyMoneyDatabaseMgrTest::testSetFunctions()
 {
   testAttachDb();
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyPayee user = m->user();
 
@@ -235,10 +235,8 @@ void MyMoneyDatabaseMgrTest::testSetFunctions()
 void MyMoneyDatabaseMgrTest::testSupportFunctions()
 {
   testAttachDb();
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   try {
     QCOMPARE(m->nextInstitutionID(), QLatin1String("I000001"));
@@ -264,10 +262,8 @@ void MyMoneyDatabaseMgrTest::testSupportFunctions()
 void MyMoneyDatabaseMgrTest::testIsStandardAccount()
 {
   testAttachDb();
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   QVERIFY(m->isStandardAccount(STD_ACC_LIABILITY) == true);
   QVERIFY(m->isStandardAccount(STD_ACC_ASSET) == true);
@@ -280,10 +276,8 @@ void MyMoneyDatabaseMgrTest::testIsStandardAccount()
 void MyMoneyDatabaseMgrTest::testNewAccount()
 {
   testAttachDb();
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyAccount a;
 
@@ -293,22 +287,20 @@ void MyMoneyDatabaseMgrTest::testNewAccount()
 
   m->addAccount(a);
 
-  QVERIFY(m->accountId() == 1);
+  QCOMPARE(m->accountId(), 1ul);
   QList<MyMoneyAccount> accList;
   m->accountList(accList);
-  QVERIFY(accList.count() == 1);
-  QVERIFY((*(accList.begin())).name() == "AccountName");
-  QVERIFY((*(accList.begin())).id() == "A000001");
-  QVERIFY((*(accList.begin())).value("Key") == "Value");
+  QCOMPARE(accList.count(), 1);
+  QCOMPARE((*(accList.begin())).name(), QLatin1String("AccountName"));
+  QCOMPARE((*(accList.begin())).id(), QLatin1String("A000001"));
+  QCOMPARE((*(accList.begin())).value("Key"), QLatin1String("Value"));
 }
 
 void MyMoneyDatabaseMgrTest::testAccount()
 {
   testNewAccount();
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   m->setDirty();
 
@@ -335,10 +327,8 @@ void MyMoneyDatabaseMgrTest::testAccount()
 void MyMoneyDatabaseMgrTest::testAddNewAccount()
 {
   testNewAccount();
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyAccount a, b;
   b.setName("Account2");
@@ -379,10 +369,8 @@ void MyMoneyDatabaseMgrTest::testAddInstitution()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyInstitution i;
 
@@ -398,10 +386,8 @@ void MyMoneyDatabaseMgrTest::testAddInstitution()
 void MyMoneyDatabaseMgrTest::testInstitution()
 {
   testAddInstitution();
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyInstitution i;
 
@@ -430,10 +416,8 @@ void MyMoneyDatabaseMgrTest::testAccount2Institution()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddInstitution();
   testAddNewAccount();
@@ -478,10 +462,8 @@ void MyMoneyDatabaseMgrTest::testModifyAccount()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAccount2Institution();
 
@@ -532,10 +514,8 @@ void MyMoneyDatabaseMgrTest::testModifyAccount()
 void MyMoneyDatabaseMgrTest::testModifyInstitution()
 {
   testAddInstitution();
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyInstitution i = m->institution("I000001");
 
@@ -562,10 +542,8 @@ void MyMoneyDatabaseMgrTest::testReparentAccount()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   // this one adds some accounts to the database
   MyMoneyAccount ex1;
@@ -641,10 +619,8 @@ void MyMoneyDatabaseMgrTest::testAddTransactions()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testReparentAccount();
 
@@ -732,36 +708,32 @@ void MyMoneyDatabaseMgrTest::testAddTransactions()
     QList<MyMoneyTransaction> transactionList(m->transactionList(f));
     QList<MyMoneyTransaction>::ConstIterator it_t(transactionList.constBegin());
 
-    //QVERIFY((*it_k) == "2002-05-10-T000000000000000001");
-    QVERIFY((*it_t).id() == "T000000000000000002");
+    QCOMPARE((*it_t).id(), QLatin1String("T000000000000000002"));
 
-    //++it_k;
     ++it_t;
-    //QVERIFY((*it_k) == "2002-05-09-T000000000000000002");
-    QVERIFY((*it_t).id() == "T000000000000000001");
-    //++it_k;
+    QCOMPARE((*it_t).id(), QLatin1String("T000000000000000001"));
+
     ++it_t;
-    //QVERIFY(it_k == m->m_transactionKeys.end());
-    QVERIFY(it_t == transactionList.constEnd());
+    QCOMPARE(it_t, transactionList.constEnd());
 
     ch = m->account("A000006");
-    QVERIFY(ch.value("Key") == "Value");
+    QCOMPARE(ch.value("Key"), QLatin1String("Value"));
 
     // check that the account's transaction list is updated
     QList<MyMoneyTransaction> list;
     MyMoneyTransactionFilter filter("A000006");
     list = m->transactionList(filter);
-    QVERIFY(list.size() == 2);
+    QCOMPARE(list.size(), 2);
 
     QList<MyMoneyTransaction>::ConstIterator it;
     it = list.constBegin();
     //QVERIFY((*it).id() == "T000000000000000002");
-    QVERIFY((*it) == t2);
+    QCOMPARE((*it), t2);
     ++it;
 
-    QVERIFY((*it) == t1);
+    QCOMPARE((*it), t1);
     ++it;
-    QVERIFY(it == list.constEnd());
+    QCOMPARE(it, list.constEnd());
 
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
@@ -772,28 +744,24 @@ void MyMoneyDatabaseMgrTest::testTransactionCount()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddTransactions();
-  QVERIFY(m->transactionCount("A000001") == 0);
-  QVERIFY(m->transactionCount("A000002") == 1);
-  QVERIFY(m->transactionCount("A000003") == 1);
-  QVERIFY(m->transactionCount("A000004") == 1);
-  QVERIFY(m->transactionCount("A000005") == 1);
-  QVERIFY(m->transactionCount("A000006") == 2);
+  QCOMPARE(m->transactionCount("A000001"), 0u);
+  QCOMPARE(m->transactionCount("A000002"), 1u);
+  QCOMPARE(m->transactionCount("A000003"), 1u);
+  QCOMPARE(m->transactionCount("A000004"), 1u);
+  QCOMPARE(m->transactionCount("A000005"), 1u);
+  QCOMPARE(m->transactionCount("A000006"), 2u);
 }
 
 void MyMoneyDatabaseMgrTest::testAddBudget()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyBudget budget;
 
@@ -802,22 +770,20 @@ void MyMoneyDatabaseMgrTest::testAddBudget()
 
   m->addBudget(budget);
 
-  QVERIFY(m->budgetList().count() == 1);
-  QVERIFY(m->budgetId() == 1);
+  QCOMPARE(m->budgetList().count(), 1);
+  QCOMPARE(m->budgetId(), 1ul);
   MyMoneyBudget newBudget = m->budgetByName("TestBudget");
 
-  QVERIFY(budget.budgetStart() == newBudget.budgetStart());
-  QVERIFY(budget.name() == newBudget.name());
+  QCOMPARE(budget.budgetStart(), newBudget.budgetStart());
+  QCOMPARE(budget.name(), newBudget.name());
 }
 
 void MyMoneyDatabaseMgrTest::testCopyBudget()
 {
   testAddBudget();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   try {
     MyMoneyBudget oldBudget = m->budgetByName("TestBudget");
@@ -827,21 +793,20 @@ void MyMoneyDatabaseMgrTest::testCopyBudget()
     newBudget.setName(QString("Copy of %1").arg(oldBudget.name()));
     m->addBudget(newBudget);
 
-    QVERIFY(m->budgetList().count() == 2);
-    QVERIFY(m->budgetId() == 2);
+    QCOMPARE(m->budgetList().count(), 2);
+    QCOMPARE(m->budgetId(), 2ul);
 
     MyMoneyBudget testBudget = m->budgetByName("TestBudget");
 
-    QVERIFY(oldBudget.budgetStart() == testBudget.budgetStart());
-    QVERIFY(oldBudget.name() == testBudget.name());
+    QCOMPARE(oldBudget.budgetStart(), testBudget.budgetStart());
+    QCOMPARE(oldBudget.name(), testBudget.name());
 
     testBudget = m->budgetByName("Copy of TestBudget");
 
-    QVERIFY(testBudget.budgetStart() == newBudget.budgetStart());
-    QVERIFY(testBudget.name() == newBudget.name());
+    QCOMPARE(testBudget.budgetStart(), newBudget.budgetStart());
+    QCOMPARE(testBudget.name(), newBudget.name());
   } catch (QString& s) {
-    qDebug("Error in testCopyBudget(): %s", qPrintable(s));
-    QVERIFY(false);
+    QFAIL(qPrintable(QString("Error in testCopyBudget(): %1").arg(qPrintable(s))));
   }
 }
 
@@ -849,10 +814,8 @@ void MyMoneyDatabaseMgrTest::testModifyBudget()
 {
   testAddBudget();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyBudget budget = m->budgetByName("TestBudget");
 
@@ -862,19 +825,17 @@ void MyMoneyDatabaseMgrTest::testModifyBudget()
 
   MyMoneyBudget newBudget = m->budgetByName("TestBudget");
 
-  QVERIFY(budget.id() == newBudget.id());
-  QVERIFY(budget.budgetStart() == newBudget.budgetStart());
-  QVERIFY(budget.name() == newBudget.name());
+  QCOMPARE(budget.id(), newBudget.id());
+  QCOMPARE(budget.budgetStart(), newBudget.budgetStart());
+  QCOMPARE(budget.name(), newBudget.name());
 }
 
 void MyMoneyDatabaseMgrTest::testRemoveBudget()
 {
   testAddBudget();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyBudget budget = m->budgetByName("TestBudget");
   m->removeBudget(budget);
@@ -882,7 +843,7 @@ void MyMoneyDatabaseMgrTest::testRemoveBudget()
   try {
     budget = m->budgetByName("TestBudget");
     // exception should be thrown if budget not found.
-    QVERIFY(false);
+    QFAIL("Missing expected exception.");
   } catch (const MyMoneyException &) {
     QVERIFY(true);
   }
@@ -892,17 +853,15 @@ void MyMoneyDatabaseMgrTest::testBalance()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddTransactions();
 
   try {
     QVERIFY(m->balance("A000001", QDate()).isZero());
-    QVERIFY(m->balance("A000002", QDate()) == MyMoneyMoney(1200, 100));
-    QVERIFY(m->balance("A000003", QDate()) == MyMoneyMoney(400, 100));
+    QCOMPARE(m->balance("A000002", QDate()), MyMoneyMoney(1200, 100));
+    QCOMPARE(m->balance("A000003", QDate()), MyMoneyMoney(400, 100));
     //Add a transaction to zero account A000003
     MyMoneyTransaction t1;
     MyMoneySplit s;
@@ -924,20 +883,11 @@ void MyMoneyDatabaseMgrTest::testBalance()
 
     m->addTransaction(t1);
 
-    //qDebug ("Balance of A000003 is 0 = %s", m->balance("A000003", QDate()).toString().ascii());
     QVERIFY(m->balance("A000003", QDate()).isZero());
-
-    //qDebug ("Balance of A000001 is 1600 = %s", m->balance("A000001", QDate()).toString().ascii());
-    QVERIFY(m->totalBalance("A000001", QDate()) == MyMoneyMoney(1600, 100));
-
-    //qDebug ("Balance of A000006 is -11600 = %s", m->balance("A000006", QDate(2002,5,9)).toString().ascii());
-    QVERIFY(m->balance("A000006", QDate(2002, 5, 9)) == MyMoneyMoney(-11600, 100));
-
-    //qDebug ("Balance of A000005 is -100000 = %s", m->balance("A000005", QDate(2002,5,10)).toString().ascii());
-    QVERIFY(m->balance("A000005", QDate(2002, 5, 10)) == MyMoneyMoney(-100000, 100));
-
-    //qDebug ("Balance of A000006 is 88400 = %s", m->balance("A000006", QDate(2002,5,10)).toString().ascii());
-    QVERIFY(m->balance("A000006", QDate(2002, 5, 10)) == MyMoneyMoney(88400, 100));
+    QCOMPARE(m->totalBalance("A000001", QDate()), MyMoneyMoney(1600, 100));
+    QCOMPARE(m->balance("A000006", QDate(2002, 5, 9)), MyMoneyMoney(-11600, 100));
+    QCOMPARE(m->balance("A000005", QDate(2002, 5, 10)), MyMoneyMoney(-100000, 100));
+    QCOMPARE(m->balance("A000006", QDate(2002, 5, 10)), MyMoneyMoney(88400, 100));
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
@@ -947,10 +897,8 @@ void MyMoneyDatabaseMgrTest::testModifyTransaction()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddTransactions();
 
@@ -1097,10 +1045,8 @@ void MyMoneyDatabaseMgrTest::testRemoveUnusedAccount()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAccount2Institution();
 
@@ -1165,10 +1111,8 @@ void MyMoneyDatabaseMgrTest::testRemoveUsedAccount()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddTransactions();
 
@@ -1185,10 +1129,8 @@ void MyMoneyDatabaseMgrTest::testRemoveInstitution()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testModifyInstitution();
   testReparentAccount();
@@ -1225,10 +1167,8 @@ void MyMoneyDatabaseMgrTest::testRemoveTransaction()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddTransactions();
 
@@ -1247,10 +1187,8 @@ void MyMoneyDatabaseMgrTest::testTransactionList()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddTransactions();
 
@@ -1293,10 +1231,8 @@ void MyMoneyDatabaseMgrTest::testAddPayee()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyPayee p;
 
@@ -1338,10 +1274,8 @@ void MyMoneyDatabaseMgrTest::testSetAccountName()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   try {
     m->setAccountName(STD_ACC_LIABILITY, "Verbindlichkeiten");
@@ -1386,10 +1320,8 @@ void MyMoneyDatabaseMgrTest::testModifyPayee()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyPayee p;
 
@@ -1411,10 +1343,8 @@ void MyMoneyDatabaseMgrTest::testRemovePayee()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddPayee();
   m->setDirty();
@@ -1473,10 +1403,8 @@ void MyMoneyDatabaseMgrTest::testAddTag()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyTag ta;
 
@@ -1503,10 +1431,8 @@ void MyMoneyDatabaseMgrTest::testModifyTag()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyTag ta;
 
@@ -1528,10 +1454,8 @@ void MyMoneyDatabaseMgrTest::testRemoveTag()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddTag();
   m->setDirty();
@@ -1592,10 +1516,8 @@ void MyMoneyDatabaseMgrTest::testRemoveAccountFromTree()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneyAccount a, b, c;
   a.setName("Acc A");
@@ -1645,10 +1567,8 @@ void MyMoneyDatabaseMgrTest::testPayeeName()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddPayee();
 
@@ -1677,10 +1597,8 @@ void MyMoneyDatabaseMgrTest::testTagName()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddTag();
 
@@ -1709,10 +1627,8 @@ void MyMoneyDatabaseMgrTest::testAssignment()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddTransactions();
 
@@ -1728,10 +1644,8 @@ void MyMoneyDatabaseMgrTest::testEquality(const MyMoneyDatabaseMgr *t)
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   QVERIFY(m->user().name() == t->user().name());
   QVERIFY(m->user().address() == t->user().address());
@@ -1776,10 +1690,8 @@ void MyMoneyDatabaseMgrTest::testDuplicate()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   const MyMoneyDatabaseMgr* t;
 
@@ -1801,10 +1713,8 @@ void MyMoneyDatabaseMgrTest::testAddSchedule()
 
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   // put some accounts in the db, so the tests don't break
   testReparentAccount();
@@ -1886,10 +1796,8 @@ void MyMoneyDatabaseMgrTest::testSchedule()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddSchedule();
   MyMoneySchedule sched;
@@ -1909,10 +1817,8 @@ void MyMoneyDatabaseMgrTest::testModifySchedule()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddSchedule();
   MyMoneySchedule sched;
@@ -1943,10 +1849,8 @@ void MyMoneyDatabaseMgrTest::testRemoveSchedule()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   testAddSchedule();
   MyMoneySchedule sched;
@@ -1973,10 +1877,8 @@ void MyMoneyDatabaseMgrTest::testScheduleList()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   // put some accounts in the db, so the tests don't break
   testReparentAccount();
@@ -2144,10 +2046,8 @@ void MyMoneyDatabaseMgrTest::testAddCurrency()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneySecurity curr("EUR", "Euro", "?", 100, 100);
   QVERIFY(m->currencyList().count() == 0);
@@ -2174,10 +2074,8 @@ void MyMoneyDatabaseMgrTest::testModifyCurrency()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneySecurity curr("EUR", "Euro", "?", 100, 100);
   testAddCurrency();
@@ -2207,10 +2105,8 @@ void MyMoneyDatabaseMgrTest::testRemoveCurrency()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneySecurity curr("EUR", "Euro", "?", 100, 100);
   testAddCurrency();
@@ -2237,10 +2133,8 @@ void MyMoneyDatabaseMgrTest::testCurrency()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   MyMoneySecurity curr("EUR", "Euro", "?", 100, 100);
   MyMoneySecurity newCurr;
@@ -2267,10 +2161,8 @@ void MyMoneyDatabaseMgrTest::testCurrencyList()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   QVERIFY(m->currencyList().count() == 0);
 
@@ -2293,10 +2185,8 @@ void MyMoneyDatabaseMgrTest::testAccountList()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   QList<MyMoneyAccount> accounts;
   m->accountList(accounts);
@@ -2318,10 +2208,8 @@ void MyMoneyDatabaseMgrTest::testAddOnlineJob()
 {
   testAttachDb();
 
-  if (!m_canOpen) {
-    std::cout << "Database test skipped because no database could be opened." << std::endl;
-    return;
-  }
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
   // Add a onlineJob
   onlineJob job(new dummyTask());
@@ -2414,4 +2302,17 @@ void MyMoneyDatabaseMgrTest::testRemoveOnlineJob()
   } catch (const MyMoneyException &) {
     QVERIFY(m->dirty() == false);
   }
+}
+
+void MyMoneyDatabaseMgrTest::testHighestNumberFromIdString()
+{
+  testAttachDb();
+
+  if (!m_canOpen)
+    QSKIP("Database test skipped because no database could be opened.", SkipAll);
+
+  testAddTransactions();
+
+  QCOMPARE(m->m_sql->highestNumberFromIdString(QLatin1String("kmmTransactions"), QLatin1String("id"), 1), 2ul);
+  QCOMPARE(m->m_sql->highestNumberFromIdString(QLatin1String("kmmAccounts"), QLatin1String("id"), 1), 6ul);
 }

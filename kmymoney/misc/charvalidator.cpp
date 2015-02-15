@@ -26,6 +26,7 @@ charValidator::charValidator(QObject* parent, const QString& characters)
 
 QValidator::State charValidator::validate(QString& string, int& pos) const
 {
+  Q_UNUSED(pos);
   const int length = string.length();
   for (int i = 0; i < length; ++i) {
     if ( !m_allowedCharacters.contains(string.at(i)) )

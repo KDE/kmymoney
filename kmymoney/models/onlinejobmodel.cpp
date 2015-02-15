@@ -112,13 +112,15 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
   // id of MyMoneyObject
   if ( role == OnlineJobId )
     return QVariant::fromValue( job.id() );
+  else if (role == OnlineJobRole)
+    return QVariant::fromValue( job );
 
   // If job is null, display an error message and exit
   if ( job.isNull() ) {
     if ( index.column() == ColAction ) {
       switch( role ) {
-        case Qt::DisplayRole: return i18n("Not able to display this task.");
-        case Qt::ToolTipRole: return i18n("Could not find a plugin to display this task or it does not contain any data.");
+        case Qt::DisplayRole: return i18n("Not able to display this job.");
+        case Qt::ToolTipRole: return i18n("Could not find a plugin to display this job or it does not contain any data.");
       }
     }
     return QVariant();
@@ -147,20 +149,20 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
       }
     } else if ( role == Qt::ToolTipRole ) {
       if ( job.isLocked() )
-        return i18n("Task is being processed at the moment.");
+        return i18n("Job is being processed at the moment.");
 
       switch (job.bankAnswerState()) {
-        case onlineJob::acceptedByBank: return i18nc("Arg 1 is a date/time", "This task was accepted by the bank on %1").arg(job.bankAnswerDate().toString( Qt::DefaultLocaleShortDate ));
-        case onlineJob::sendingError: return i18nc("Arg 1 is a date/time", "Sending this task failed on %1").arg(job.sendDate().toString( Qt::DefaultLocaleShortDate ));
-        case onlineJob::abortedByUser: return i18n("Sending this task was manually aborted.");
-        case onlineJob::rejectedByBank: return i18nc("Arg 1 is a date/time", "The bank rejected this task on %1").arg(job.bankAnswerDate().toString( Qt::DefaultLocaleShortDate ));
+        case onlineJob::acceptedByBank: return i18nc("Arg 1 is a date/time", "This job was accepted by the bank on %1.").arg(job.bankAnswerDate().toString( Qt::DefaultLocaleShortDate ));
+        case onlineJob::sendingError: return i18nc("Arg 1 is a date/time", "Sending this job failed (tried on %1).").arg(job.sendDate().toString( Qt::DefaultLocaleShortDate ));
+        case onlineJob::abortedByUser: return i18n("Sending this job was manually aborted.");
+        case onlineJob::rejectedByBank: return i18nc("Arg 1 is a date/time", "The bank rejected this job on %1.").arg(job.bankAnswerDate().toString( Qt::DefaultLocaleShortDate ));
         case onlineJob::noBankAnswer:
           if ( job.sendDate().isValid() )
-            return i18nc("Arg 1 is a date/time", "This task was sent on %1 without receiving a confirmation.").arg(job.sendDate().toString( Qt::DefaultLocaleShortDate ));
+            return i18nc("Arg 1 is a date/time", "The bank accepted this job on %1.").arg(job.sendDate().toString( Qt::DefaultLocaleShortDate ));
           else if ( !job.isValid() )
-            return i18n("This task needs further editing and cannot be sent therefore.");
+            return i18n("This job needs further editing and cannot be sent therefore.");
           else
-            return i18n("This task is ready for sending.");
+            return i18n("This job is ready for sending.");
       }
     }
 
@@ -179,9 +181,13 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
       if ( role == Qt::DisplayRole )
         return QVariant::fromValue(MyMoneyUtils::formatMoney(transfer.task()->value(), transfer.task()->currency()));
     } else if ( index.column() == ColDestination ) {
-      return QVariant();
+      if (role == Qt::DisplayRole) {
+        const payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic(transfer.constTask()->beneficiary());
+        return QVariant(ibanBic->ownerName());
+      }
     }
   } catch ( MyMoneyException& ) {
+  } catch ( payeeIdentifier::exception& ) {
   }
 
   return QVariant();

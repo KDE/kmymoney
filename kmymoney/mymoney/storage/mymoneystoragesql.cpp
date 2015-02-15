@@ -107,7 +107,18 @@ MyMoneyDbTransaction::~MyMoneyDbTransaction()
 
 //************************ Constructor/Destructor *****************************
 MyMoneyStorageSql::MyMoneyStorageSql(IMyMoneySerialize *storage, const QUrl &url)
-    : QSqlDatabase(QUrlQuery(url).queryItemValue("driver"))
+    : QSqlDatabase(QUrlQuery(url).queryItemValue("driver")),
+    m_hiIdInstitutions(0),
+    m_hiIdPayees(0),
+    m_hiIdTags(0),
+    m_hiIdAccounts(0),
+    m_hiIdTransactions(0),
+    m_hiIdSchedules(0),
+    m_hiIdSecurities(0),
+    m_hiIdReports(0),
+    m_hiIdBudgets(0),
+    m_hiIdOnlineJobs(0),
+    m_hiIdPayeeIdentifier(0)
 {
   DBG("*** Entering MyMoneyStorageSql::MyMoneyStorageSql");
   m_storage = storage;
@@ -121,8 +132,6 @@ MyMoneyStorageSql::MyMoneyStorageSql(IMyMoneySerialize *storage, const QUrl &url
   m_loadAll = false;
   m_override = false;
   m_preferred.setReportAllSplits(false);
-
-  m_hiIdOnlineJobs = 0;
 }
 
 MyMoneyStorageSql::~MyMoneyStorageSql()
@@ -520,21 +529,6 @@ int MyMoneyStorageSql::upgradeToV1()
     }
   }
   m_transactionCountMap.clear();
-  // there were considerable problems with record counts in V0, so rebuild them
-  readFileInfo();
-  m_institutions = getRecCount("kmmInstitutions");
-  m_accounts = getRecCount("kmmAccounts");
-  m_payees = getRecCount("kmmPayees");
-  m_transactions = getRecCount("kmmTransactions WHERE txType = 'N'");
-  m_splits = getRecCount("kmmSplits");
-  m_securities = getRecCount("kmmSecurities");
-  m_prices = getRecCount("kmmPrices");
-  m_currencies = getRecCount("kmmCurrencies");
-  m_schedules = getRecCount("kmmSchedules");
-  m_reports = getRecCount("kmmReportConfig");
-  m_kvps = getRecCount("kmmKeyValuePairs");
-  m_budgets = getRecCount("kmmBudgetConfig");
-  writeFileInfo();
   return (0);
 }
 
@@ -619,9 +613,7 @@ int MyMoneyStorageSql::upgradeToV6()
       }
     }
   }
-  // kmmReportConfig - add a unique id as primary key
-  // read and write reports to get ids inserted
-  readFileInfo();
+
   // the alterTable function really doesn't work too well
   // with adding a new column which is also to be primary key
   // so add the column first
@@ -642,15 +634,14 @@ int MyMoneyStorageSql::upgradeToV6()
   // add unique id to reports table
   if (!alterTable(m_db.m_tables["kmmReportConfig"], m_dbVersion))
     return(1);
-  unsigned long long hiReportId = 0;
+
   QMap<QString, MyMoneyReport>::const_iterator it_r;
   for (it_r = reportList.constBegin(); it_r != reportList.constEnd(); ++it_r) {
     MyMoneyReport r = *it_r;
-    hiReportId = calcHighId(hiReportId, r.id());
     q.prepare(m_db.m_tables["kmmReportConfig"].insertString());
     writeReport(*it_r, q);
   }
-  m_hiIdReports = hiReportId;
+
   m_storage->loadReportId(m_hiIdReports);
   endCommitUnit(Q_FUNC_INFO);
   return 0;
@@ -679,9 +670,6 @@ int MyMoneyStorageSql::upgradeToV8()
   // Added onlineJobs and payeeIdentifier
   if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
     return (1);
-
-  m_hiIdOnlineJobs = getRecCount("kmmOnlineJobs");
-  m_hiIdPayeeIdentifier = getRecCount("kmmPayeeIdentifier");
 
   return 0;
 }
@@ -869,7 +857,7 @@ bool MyMoneyStorageSql::readFile(void)
 }
 
 // The following is called from 'SaveAsDatabase'
-bool MyMoneyStorageSql::writeFile(void)
+bool MyMoneyStorageSql::writeFile()
 {
   DBG("*** Entering MyMoneyStorageSql::writeFile");
   // initialize record counts and hi ids
@@ -877,6 +865,7 @@ bool MyMoneyStorageSql::writeFile(void)
                                 = m_securities = m_prices = m_currencies = m_schedules  = m_reports = m_kvps = m_budgets = 0;
   m_hiIdInstitutions = m_hiIdPayees = m_hiIdTags = m_hiIdAccounts = m_hiIdTransactions =
                                         m_hiIdSchedules = m_hiIdSecurities = m_hiIdReports = m_hiIdBudgets = 0;
+  m_onlineJobs = m_payeeIdentifier = 0;
   m_displayStatus = true;
   try {
     MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
@@ -905,6 +894,18 @@ bool MyMoneyStorageSql::writeFile(void)
     return false;
   }
 }
+
+long unsigned MyMoneyStorageSql::highestNumberFromIdString(QString tableName, QString tableField, int prefixLength)
+{
+  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
+  QSqlQuery q(*this);
+
+  if (!q.exec(m_driver->highestNumberFromIdString(tableName, tableField, prefixLength)) || !q.next())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("retrieving highest ID number"))); // krazy:exclude=crashy
+
+  return q.value(0).toULongLong();
+}
+
 // --------------- SQL Transaction (commit unit) handling -----------------------------------
 void MyMoneyStorageSql::startCommitUnit(const QString& callingFunction)
 {
@@ -1069,8 +1070,6 @@ void MyMoneyStorageSql::writeInstitutionList(const QList<MyMoneyInstitution>& iL
   QVariantList telephoneList;
   QList<QMap<QString, QString> > kvpPairsList;
 
-  unsigned long hiId = m_hiIdInstitutions;
-
   foreach (const MyMoneyInstitution& i, iList) {
     idList << i.id();
     nameList << i.name();
@@ -1081,7 +1080,6 @@ void MyMoneyStorageSql::writeInstitutionList(const QList<MyMoneyInstitution>& iL
     addressZipcodeList << i.postcode();
     telephoneList << i.telephone();
     kvpPairsList << i.pairs();
-    hiId = calcHighId(hiId, i.id());
   }
 
   q.bindValue(":id", idList);
@@ -1093,9 +1091,11 @@ void MyMoneyStorageSql::writeInstitutionList(const QList<MyMoneyInstitution>& iL
   q.bindValue(":addressZipcode", addressZipcodeList);
   q.bindValue(":telephone", telephoneList);
 
-  if (!q.execBatch()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Institution")));
+  if (!q.execBatch())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Institution")));
   writeKeyValuePairs("OFXSETTINGS", idList, kvpPairsList);
-  m_hiIdInstitutions = std::max(m_hiIdInstitutions, hiId);
+  // Set m_hiIdInstitutions to 0 to force recalculation the next time it is requested
+  m_hiIdInstitutions = 0;
 }
 
 // **** Payees ****
@@ -1328,11 +1328,18 @@ void MyMoneyStorageSql::writePayee(const MyMoneyPayee& p, QSqlQuery& q, bool isU
   QString matchKeys;
   MyMoneyPayee::payeeMatchType type = p.matchData(ignoreCase, matchKeys);
   q.bindValue(":matchData", static_cast<unsigned int>(type));
-  if (ignoreCase) q.bindValue(":matchIgnoreCase", "Y");
-  else q.bindValue(":matchIgnoreCase", "N");
+
+  if (ignoreCase)
+    q.bindValue(":matchIgnoreCase", "Y");
+  else
+    q.bindValue(":matchIgnoreCase", "N");
+
   q.bindValue(":matchKeys", matchKeys);
-  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Payee"))); // krazy:exclude=crashy
-  if (!isUserInfo) m_hiIdPayees = calcHighId(m_hiIdPayees, p.id());
+  if (!q.exec())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Payee"))); // krazy:exclude=crashy
+
+  if (!isUserInfo)
+    m_hiIdPayees = 0;
 }
 
 // **** Tags ****
@@ -1417,7 +1424,7 @@ void MyMoneyStorageSql::writeTag(const MyMoneyTag& ta, QSqlQuery& q)
   else q.bindValue(":closed", "N");
   q.bindValue(":notes", ta.notes());
   if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Tag"))); // krazy:exclude=crashy
-  m_hiIdTags = calcHighId(m_hiIdTags, ta.id());
+  m_hiIdTags = 0;
 }
 
 // **** Accounts ****
@@ -1605,8 +1612,6 @@ void MyMoneyStorageSql::writeAccountList(const QList<MyMoneyAccount>& accList, Q
   QList<QMap<QString, QString> > pairs;
   QList<QMap<QString, QString> > onlineBankingPairs;
 
-  unsigned long hiId = m_hiIdAccounts;
-
   foreach (const MyMoneyAccount& a, accList) {
     idList << a.id();
     institutionIdList << a.institutionId();
@@ -1646,8 +1651,6 @@ void MyMoneyStorageSql::writeAccountList(const QList<MyMoneyAccount>& accList, Q
     }
     transactionCountList << quint64(m_transactionCountMap[a.id()]);
 
-    hiId = calcHighId(hiId, a.id());
-
     //MMAccount inherits from KVPContainer AND has a KVPContainer member
     //so handle both
     pairs << a.pairs();
@@ -1671,12 +1674,13 @@ void MyMoneyStorageSql::writeAccountList(const QList<MyMoneyAccount>& accList, Q
   q.bindValue(":balanceFormatted", balanceFormattedList);
   q.bindValue(":transactionCount", transactionCountList);
 
-  if (!q.execBatch()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Account")));
+  if (!q.execBatch())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Account")));
 
   //Add in Key-Value Pairs for accounts.
   writeKeyValuePairs("ACCOUNT", idList, pairs);
   writeKeyValuePairs("ONLINEBANKING", idList, onlineBankingPairs);
-  m_hiIdAccounts = std::max(m_hiIdAccounts, hiId);
+  m_hiIdAccounts = 0;
 }
 
 // **** Transactions and Splits ****
@@ -1832,7 +1836,7 @@ void MyMoneyStorageSql::writeTransaction(const QString& txId, const MyMoneyTrans
   QList<QMap<QString, QString> > pairs;
   pairs << tx.pairs();
   writeKeyValuePairs("TRANSACTION", idList, pairs);
-  m_hiIdTransactions = calcHighId(m_hiIdTransactions, tx.id());
+  m_hiIdTransactions = 0;
 }
 
 void MyMoneyStorageSql::writeSplits(const QString& txId, const QString& type, const QList<MyMoneySplit>& splitList)
@@ -2177,7 +2181,6 @@ void MyMoneyStorageSql::writeSchedule(const MyMoneySchedule& sch, QSqlQuery& q, 
   //Add in Key-Value Pairs for transactions.
   //deleteKeyValuePairs("SCHEDULE", sch.id());
   //writeKeyValuePairs("SCHEDULE", sch.id(), sch.pairs());
-  m_hiIdSchedules = calcHighId(m_hiIdSchedules, sch.id());
 }
 
 // **** Securities ****
@@ -2284,7 +2287,7 @@ void MyMoneyStorageSql::writeSecurity(const MyMoneySecurity& security, QSqlQuery
   QList<QMap<QString, QString> > pairs;
   pairs << security.pairs();
   writeKeyValuePairs("SECURITY", idList, pairs);
-  m_hiIdSecurities = calcHighId(m_hiIdSecurities, security.id());
+  m_hiIdSecurities = 0;
 }
 
 // **** Prices ****
@@ -2958,17 +2961,19 @@ void MyMoneyStorageSql::writeFileInfo()
   //startCommitUnit(Q_FUNC_INFO);
   //}
 
-  q.bindValue(":hiInstitutionId", (unsigned long long) m_hiIdInstitutions);
-  q.bindValue(":hiPayeeId", (unsigned long long) m_hiIdPayees);
-  q.bindValue(":hiTagId", (unsigned long long) m_hiIdTags);
-  q.bindValue(":hiAccountId", (unsigned long long) m_hiIdAccounts);
-  q.bindValue(":hiTransactionId", (unsigned long long) m_hiIdTransactions);
-  q.bindValue(":hiScheduleId", (unsigned long long) m_hiIdSchedules);
-  q.bindValue(":hiSecurityId", (unsigned long long) m_hiIdSecurities);
-  q.bindValue(":hiReportId", (unsigned long long) m_hiIdReports);
-  q.bindValue(":hiBudgetId", (unsigned long long) m_hiIdBudgets);
-  q.bindValue(":hiOnlineJobId",  (unsigned long long) m_hiIdOnlineJobs);
-  q.bindValue(":hiPayeeIdentifierId",  (unsigned long long) m_hiIdPayeeIdentifier);
+  //! @todo The following bindings are for backwards compatibility only
+  //! remove backwards compatibility in a later version
+  q.bindValue(":hiInstitutionId", QVariant::fromValue(getNextInstitutionId()));
+  q.bindValue(":hiPayeeId", QVariant::fromValue(getNextPayeeId()));
+  q.bindValue(":hiTagId", QVariant::fromValue(getNextTagId()));
+  q.bindValue(":hiAccountId", QVariant::fromValue(getNextAccountId()));
+  q.bindValue(":hiTransactionId", QVariant::fromValue(getNextTransactionId()));
+  q.bindValue(":hiScheduleId", QVariant::fromValue(getNextScheduleId()));
+  q.bindValue(":hiSecurityId", QVariant::fromValue(getNextSecurityId()));
+  q.bindValue(":hiReportId", QVariant::fromValue(getNextReportId()));
+  q.bindValue(":hiBudgetId", QVariant::fromValue(getNextBudgetId()));
+  q.bindValue(":hiOnlineJobId", QVariant::fromValue(getNextOnlineJobId()));
+  q.bindValue(":hiPayeeIdentifierId", QVariant::fromValue(getNextPayeeIdentifierId()));
 
   q.bindValue(":encryptData", m_encryptData);
   q.bindValue(":updateInProgress", "N");
@@ -2991,7 +2996,8 @@ void MyMoneyStorageSql::writeFileInfo()
   q.bindValue(":kvps", (unsigned long long) m_kvps);
   q.bindValue(":budgets", (unsigned long long) m_budgets);
 
-  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing FileInfo"))); // krazy:exclude=crashy
+  if (!q.exec())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing FileInfo"))); // krazy:exclude=crashy
 }
 
 // **** Key/value pairs ****
@@ -3069,8 +3075,7 @@ void MyMoneyStorageSql::readFileInfo(void)
 
   q.prepare(
     "SELECT "
-    "  created, lastModified, hiInstitutionId, hiPayeeId, hiTagId, hiAccountId, hiTransactionId,"
-    "  hiScheduleId, hiSecurityId, hiReportId, hiBudgetId, hiOnlineJobId, hiPayeeIdentifierId, "
+    "  created, lastModified, "
     "  encryptData, logonUser, logonAt, "
     "  (SELECT count(*) FROM kmmInstitutions) AS institutions, "
     "  (SELECT count(*) from kmmAccounts) AS accounts, "
@@ -3099,18 +3104,6 @@ void MyMoneyStorageSql::readFileInfo(void)
   QSqlRecord rec = q.record();
   m_storage->setCreationDate(GETDATE(rec.indexOf("created")));
   m_storage->setLastModificationDate(GETDATE(rec.indexOf("lastModified")));
-
-  m_hiIdInstitutions = (unsigned long) GETULL(rec.indexOf("hiInstitutionId"));
-  m_hiIdPayees = (unsigned long) GETULL(rec.indexOf("hiPayeeId"));
-  m_hiIdTags = (unsigned long) GETULL(rec.indexOf("hiTagId"));
-  m_hiIdAccounts = (unsigned long) GETULL(rec.indexOf("hiAccountId"));
-  m_hiIdTransactions = (unsigned long) GETULL(rec.indexOf("hiTransactionId"));
-  m_hiIdSchedules = (unsigned long) GETULL(rec.indexOf("hiScheduleId"));
-  m_hiIdSecurities = (unsigned long) GETULL(rec.indexOf("hiSecurityId"));
-  m_hiIdReports = (unsigned long) GETULL(rec.indexOf("hiReportId"));
-  m_hiIdBudgets = (unsigned long) GETULL(rec.indexOf("hiBudgetId"));
-  m_hiIdOnlineJobs = (unsigned long) GETULL(rec.indexOf("hiOnlineJobId"));
-  m_hiIdPayeeIdentifier = (unsigned long) GETULL(rec.indexOf("hiPayeeIdentifierId"));
 
   m_institutions = (unsigned long) GETULL(rec.indexOf("institutions"));
   m_accounts = (unsigned long) GETULL(rec.indexOf("accounts"));
@@ -3246,8 +3239,7 @@ void MyMoneyStorageSql::readPayees(const QList<QString>& pid)
   DBG("*** Entering MyMoneyStorageSql::readPayees(list)");
   try {
     m_storage->loadPayees(fetchPayees(pid));
-    readFileInfo();
-    m_storage->loadPayeeId(m_hiIdPayees);
+    m_storage->loadPayeeId(getNextPayeeId());
   } catch (const MyMoneyException &) {
   }
 //  if (pid.isEmpty()) m_payeeListRead = true;
@@ -3740,7 +3732,7 @@ void MyMoneyStorageSql::readTransactions(const QString& tidList, const QString& 
 {
   try {
     m_storage->loadTransactions(fetchTransactions(tidList, dateClause));
-    m_storage->loadTransactionId(m_hiIdTransactions);
+    m_storage->loadTransactionId(getNextTransactionId());
   } catch (const MyMoneyException &) {
     throw;
   }
@@ -3750,7 +3742,7 @@ void MyMoneyStorageSql::readTransactions(const MyMoneyTransactionFilter& filter)
 {
   try {
     m_storage->loadTransactions(fetchTransactions(filter));
-    m_storage->loadTransactionId(m_hiIdTransactions);
+    m_storage->loadTransactionId(getNextTransactionId());
   } catch (const MyMoneyException &) {
     throw;
   }
@@ -4154,8 +4146,7 @@ void MyMoneyStorageSql::readSchedules(void)
 
   try {
     m_storage->loadSchedules(fetchSchedules());
-    readFileInfo();
-    m_storage->loadScheduleId(m_hiIdSchedules);
+    m_storage->loadScheduleId(getNextScheduleId());
   } catch (const MyMoneyException &) {
     throw;
   }
@@ -4307,8 +4298,7 @@ void MyMoneyStorageSql::readSecurities(void)
 {
   try {
     m_storage->loadSecurities(fetchSecurities());
-    readFileInfo();
-    m_storage->loadSecurityId(m_hiIdSecurities);
+    m_storage->loadSecurityId(getNextSecurityId());
   } catch (const MyMoneyException &) {
     throw;
   }
@@ -4581,8 +4571,7 @@ void MyMoneyStorageSql::readReports(void)
 {
   try {
     m_storage->loadReports(fetchReports());
-    readFileInfo();
-    m_storage->loadReportId(m_hiIdReports);
+    m_storage->loadReportId(getNextReportId());
   } catch (const MyMoneyException &) {
     throw;
   }
@@ -4714,245 +4703,143 @@ const QHash<QString, MyMoneyKeyValueContainer> MyMoneyStorageSql::readKeyValuePa
   return (retval);
 }
 
+template<long unsigned MyMoneyStorageSql::* cache>
+long unsigned int MyMoneyStorageSql::getNextId(const QString& table, const QString& id, const int prefixLength) const
+{
+  Q_CHECK_PTR(cache);
+  if (this->*cache == 0) {
+    MyMoneyStorageSql* nonConstThis = const_cast<MyMoneyStorageSql*>(this);
+    nonConstThis->*cache = 1 + nonConstThis->highestNumberFromIdString(table, id, prefixLength);
+  }
+  Q_ASSERT(this->*cache > 0); // everything else is never a valid id
+  return this->*cache;
+}
+
 long unsigned MyMoneyStorageSql::getNextBudgetId() const
 {
-  const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
-  return m_hiIdBudgets;
+  return getNextId<&MyMoneyStorageSql::m_hiIdBudgets>(QLatin1String("kmmBudgetConfig"), QLatin1String("id"), 1);
 }
 
 long unsigned MyMoneyStorageSql::getNextAccountId() const
 {
-  const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
-  return m_hiIdAccounts;
+  return getNextId<&MyMoneyStorageSql::m_hiIdAccounts>(QLatin1String("kmmAccounts"), QLatin1String("id"), 1);
 }
 
 long unsigned MyMoneyStorageSql::getNextInstitutionId() const
 {
-  const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
-  return m_hiIdInstitutions;
+  return getNextId<&MyMoneyStorageSql::m_hiIdInstitutions>(QLatin1String("kmmInstitutions"), QLatin1String("id"), 1);
 }
 
 long unsigned MyMoneyStorageSql::getNextPayeeId() const
 {
-  const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
-  return m_hiIdPayees;
+  return getNextId<&MyMoneyStorageSql::m_hiIdPayees>(QLatin1String("kmmPayees"), QLatin1String("id"), 1);
 }
 
 long unsigned MyMoneyStorageSql::getNextTagId() const
 {
-  const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
-  return m_hiIdTags;
+  return getNextId<&MyMoneyStorageSql::m_hiIdTags>(QLatin1String("kmmTags"), QLatin1String("id"), 1);
 }
 
 long unsigned MyMoneyStorageSql::getNextReportId() const
 {
-  const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
-  return m_hiIdReports;
+  return getNextId<&MyMoneyStorageSql::m_hiIdReports>(QLatin1String("kmmReportConfig"), QLatin1String("id"), 1);
 }
 
 long unsigned MyMoneyStorageSql::getNextScheduleId() const
 {
-  const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
-  return m_hiIdSchedules;
+  return getNextId<&MyMoneyStorageSql::m_hiIdSchedules>(QLatin1String("kmmSchedules"), QLatin1String("id"), 3);
 }
 
 long unsigned MyMoneyStorageSql::getNextSecurityId() const
 {
-  const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
-  return m_hiIdSecurities;
+  return getNextId<&MyMoneyStorageSql::m_hiIdSecurities>(QLatin1String("kmmSecurities"), QLatin1String("id"), 1);
 }
 
 long unsigned MyMoneyStorageSql::getNextTransactionId() const
 {
-  const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
-  return m_hiIdTransactions;
+  return getNextId<&MyMoneyStorageSql::m_hiIdTransactions>(QLatin1String("kmmTransactions"), QLatin1String("id"), 1);
 }
 
 long unsigned MyMoneyStorageSql::getNextOnlineJobId() const
 {
-  const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
-  return m_hiIdOnlineJobs;
+  return getNextId<&MyMoneyStorageSql::m_hiIdOnlineJobs>(QLatin1String("kmmOnlineJobs"), QLatin1String("id"), 1);
 }
 
 long unsigned MyMoneyStorageSql::getNextPayeeIdentifierId() const
 {
-  const_cast <MyMoneyStorageSql*>(this)->readFileInfo();
-  return m_hiIdPayeeIdentifier;
+  return getNextId<&MyMoneyStorageSql::m_hiIdPayeeIdentifier>(QLatin1String("kmmPayeeIdentifier"), QLatin1String("id"), 5);
 }
 
 long unsigned MyMoneyStorageSql::incrementBudgetId()
 {
-  QSqlQuery q(*this);
-
-  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiBudgetId FROM kmmFileInfo " + m_driver->forUpdateString());
-  q.exec(); // krazy:exclude=crashy
-  q.next();
-  long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
-  ++returnValue;
-  q.prepare(QString("UPDATE kmmFileInfo SET hiBudgetId = %1").arg(returnValue));
-  q.exec(); // krazy:exclude=crashy
-  m_hiIdBudgets = returnValue;
-  return returnValue;
+  m_hiIdBudgets = getNextBudgetId() + 1;
+  return (m_hiIdBudgets-1);
 }
 
+/**
+ * @warning This method uses getNextAccountId() internaly. The database is not informed which can cause issues
+ * when the database is accessed concurrently. Then maybe a single id is used twice but the RDBMS will detect the
+ * issue and KMyMoney crashes. This issue can only occour when two instances of KMyMoney access the same database.
+ * But in this unlikley case MyMoneyStorageSql will have a lot more issues, I think.
+ */
 long unsigned MyMoneyStorageSql::incrementAccountId()
 {
-  QSqlQuery q(*this);
-
-  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiAccountId FROM kmmFileInfo " + m_driver->forUpdateString());
-  q.exec(); // krazy:exclude=crashy
-  q.next();
-  long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
-  ++returnValue;
-  q.prepare(QString("UPDATE kmmFileInfo SET hiAccountId = %1").arg(returnValue));
-  q.exec(); // krazy:exclude=crashy
-  m_hiIdAccounts = returnValue;
-  return returnValue;
+  m_hiIdAccounts = getNextAccountId() + 1;
+  return (m_hiIdAccounts-1);
 }
 
 long unsigned MyMoneyStorageSql::incrementInstitutionId()
 {
-  QSqlQuery q(*this);
-
-  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiInstitutionId FROM kmmFileInfo " + m_driver->forUpdateString());
-  q.exec(); // krazy:exclude=crashy
-  q.next();
-  long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
-  ++returnValue;
-  q.prepare(QString("UPDATE kmmFileInfo SET hiInstitutionId = %1").arg(returnValue));
-  q.exec(); // krazy:exclude=crashy
-  m_hiIdInstitutions = returnValue;
-  return returnValue;
+  m_hiIdInstitutions = getNextInstitutionId() + 1;
+  return (m_hiIdInstitutions-1);
 }
 
 long unsigned MyMoneyStorageSql::incrementPayeeId()
 {
-  QSqlQuery q(*this);
-
-  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiPayeeId FROM kmmFileInfo " + m_driver->forUpdateString());
-  q.exec(); // krazy:exclude=crashy
-  q.next();
-  long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
-  ++returnValue;
-  q.prepare(QString("UPDATE kmmFileInfo SET hiPayeeId = %1").arg(returnValue));
-  q.exec(); // krazy:exclude=crashy
-  m_hiIdPayees = returnValue;
-  return returnValue;
+  m_hiIdPayees = getNextPayeeId() + 1;
+  return (m_hiIdPayees-1);
 }
 
 long unsigned MyMoneyStorageSql::incrementTagId()
 {
-  QSqlQuery q(*this);
-
-  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiTagId FROM kmmFileInfo " + m_driver->forUpdateString());
-  q.exec(); // krazy:exclude=crashy
-  q.next();
-  long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
-  ++returnValue;
-  q.prepare(QString("UPDATE kmmFileInfo SET hiTagId = %1").arg(returnValue));
-  q.exec(); // krazy:exclude=crashy
-  m_hiIdTags = returnValue;
-  return returnValue;
+  m_hiIdTags = getNextTagId() + 1;
+  return (m_hiIdTags-1);
 }
 
 long unsigned MyMoneyStorageSql::incrementReportId()
 {
-  QSqlQuery q(*this);
-
-  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiReportId FROM kmmFileInfo " + m_driver->forUpdateString());
-  q.exec(); // krazy:exclude=crashy
-  q.next();
-  long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
-  ++returnValue;
-  q.prepare(QString("UPDATE kmmFileInfo SET hiReportId = %1").arg(returnValue));
-  q.exec(); // krazy:exclude=crashy
-  m_hiIdReports = returnValue;
-  return returnValue;
+  m_hiIdReports = getNextReportId() + 1;
+  return (m_hiIdReports-1);
 }
 
 long unsigned MyMoneyStorageSql::incrementScheduleId()
 {
-  QSqlQuery q(*this);
-
-  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiScheduleId FROM kmmFileInfo " + m_driver->forUpdateString());
-  q.exec(); // krazy:exclude=crashy
-  q.next();
-  long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
-  ++returnValue;
-  q.prepare(QString("UPDATE kmmFileInfo SET hiScheduleId = %1").arg(returnValue));
-  q.exec(); // krazy:exclude=crashy
-  m_hiIdSchedules = returnValue;
-  return returnValue;
+  m_hiIdSchedules = getNextScheduleId() + 1;
+  return (m_hiIdSchedules-1);
 }
 
 long unsigned MyMoneyStorageSql::incrementSecurityId()
 {
-  QSqlQuery q(*this);
-
-  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiSecurityId FROM kmmFileInfo " + m_driver->forUpdateString());
-  q.exec(); // krazy:exclude=crashy
-  q.next();
-  long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
-  ++returnValue;
-  q.prepare(QString("UPDATE kmmFileInfo SET hiSecurityId = %1").arg(returnValue));
-  q.exec(); // krazy:exclude=crashy
-  m_hiIdSecurities = returnValue;
-  return returnValue;
+  m_hiIdSecurities = getNextSecurityId() + 1;
+  return (m_hiIdSecurities-1);
 }
 
 long unsigned MyMoneyStorageSql::incrementTransactionId()
 {
-  QSqlQuery q(*this);
-
-  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiTransactionId FROM kmmFileInfo " + m_driver->forUpdateString());
-  q.exec(); // krazy:exclude=crashy
-  q.next();
-  long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
-  ++returnValue;
-  q.prepare(QString("UPDATE kmmFileInfo SET hiTransactionId = %1").arg(returnValue));
-  q.exec(); // krazy:exclude=crashy
-  m_hiIdTransactions = returnValue;
-  return returnValue;
+  m_hiIdTransactions = getNextTransactionId() + 1;
+  return (m_hiIdTransactions-1);
 }
 
 long unsigned int MyMoneyStorageSql::incrementOnlineJobId()
 {
-  QSqlQuery q(*this);
-
-  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiOnlineJobId FROM kmmFileInfo " + m_driver->forUpdateString());
-  q.exec(); // krazy:exclude=crashy
-  q.next();
-  long unsigned returnValue = ((unsigned long) q.value(0).toULongLong()) + 1;
-  q.prepare(QString("UPDATE kmmFileInfo SET hiOnlineJobId = %1").arg(returnValue));
-  q.exec(); // krazy:exclude=crashy
-  m_hiIdOnlineJobs = returnValue;
-  return returnValue;
+  m_hiIdOnlineJobs = getNextOnlineJobId() + 1;
+  return (m_hiIdOnlineJobs-1);
 }
 
 long unsigned int MyMoneyStorageSql::incrementPayeeIdentfierId()
 {
-  QSqlQuery q(*this);
-
-  MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  q.prepare("SELECT hiPayeeIdentifierId FROM kmmFileInfo " + m_driver->forUpdateString());
-  q.exec();
-  q.next();
-  long unsigned returnValue = (unsigned long) q.value(0).toULongLong();
-  ++returnValue;
-  q.prepare(QString("UPDATE kmmFileInfo SET hiPayeeIdentifierId = %1").arg(returnValue));
-  q.exec(); // krazy:exclude=crashy
-  m_hiIdPayeeIdentifier = returnValue;
-  return returnValue;
+  m_hiIdPayeeIdentifier = getNextPayeeIdentifierId() + 1;
+  return (m_hiIdPayeeIdentifier-1);
 }
 
 void MyMoneyStorageSql::loadAccountId(const unsigned long& id)
@@ -5022,8 +4909,7 @@ void MyMoneyStorageSql::loadPayeeIdentifierId(const long unsigned int& id)
 }
 
 //****************************************************
-long unsigned MyMoneyStorageSql::calcHighId
-(const long unsigned& i, const QString& id)
+long unsigned MyMoneyStorageSql::calcHighId(const long unsigned& i, const QString& id)
 {
   DBG("*** Entering MyMoneyStorageSql::calcHighId");
   QString nid = id;
