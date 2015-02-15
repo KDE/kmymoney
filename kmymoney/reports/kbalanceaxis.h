@@ -19,16 +19,16 @@
 #ifndef KBALANCEAXIS_H
 #define KBALANCEAXIS_H
 
-#include <KDChartCartesianAxis>
+#include <KChartCartesianAxis>
 
-using namespace KDChart;
+using namespace KChart;
 
-class KBalanceAxis : public KDChart::CartesianAxis
+class KBalanceAxis : public KChart::CartesianAxis
 {
   Q_OBJECT
 public:
   KBalanceAxis();
-  explicit KBalanceAxis(KDChart::AbstractCartesianDiagram* parent);
+  explicit KBalanceAxis(KChart::AbstractCartesianDiagram* parent);
   const QString customizedLabel(const QString& label) const;
 };
 

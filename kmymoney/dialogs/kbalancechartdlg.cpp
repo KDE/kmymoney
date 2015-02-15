@@ -38,6 +38,9 @@
 #include <mymoneyreport.h>
 #include <pivottable.h>
 #include <kmymoneyglobalsettings.h>
+#include <kreportchartview.h>
+
+using namespace reports;
 
 KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent) :
     KDialog(parent)

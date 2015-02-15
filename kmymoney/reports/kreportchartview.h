@@ -27,10 +27,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KDChartWidget>
-#include <KDChartChart>
-#include <KDChartAbstractDiagram>
-#include <KDChartAbstractCoordinatePlane>
+#include <KChartWidget>
+#include <KChartChart>
+#include <KChartAbstractDiagram>
+#include <KChartAbstractCoordinatePlane>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -38,7 +38,7 @@
 #include "pivotgrid.h"
 #include "mymoneyreport.h"
 
-using namespace KDChart;
+using namespace KChart;
 
 namespace reports
 {

@@ -28,10 +28,10 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <kreportchartview.h>
+namespace reports {
+  class KReportChartView;
+}
 class MyMoneyAccount;
-
-using namespace reports;
 
 /**
  * @author Thomas Baumgart <ipwizard@users.sourceforge.net>
@@ -49,7 +49,7 @@ protected:
   /**
     * Draw the chart and calculate and draw the account limits if any
     */
-  KReportChartView* drawChart(const MyMoneyAccount& account);
+  reports::KReportChartView* drawChart(const MyMoneyAccount& account);
 
 };
 

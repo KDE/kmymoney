@@ -29,8 +29,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/ibanandbic/widgets/ # TODO: this line should be moved to the target it belongs
                     ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/ibanandbic/
                     ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/nationalaccount/
-                    ${KMyMoney_SOURCE_DIR}/libkgpgfile/
-                    ${KMyMoney_SOURCE_DIR}/libkdchart/include )
+                    ${KMyMoney_SOURCE_DIR}/libkgpgfile/ )
 
 add_subdirectory( mymoney )
 add_subdirectory( models  )
@@ -74,9 +73,9 @@ set( kmymoney_common_LIBS
   endingbalancedlg wizardpages
   dialogs widgets settings converter models kmm_config
   kmm_widgets
-  kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs kmm_kdchart
+  kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs
   Qt5::Core Qt5::Sql
-  KF5::KHtml KF5::Archive KF5::ConfigGui KF5::WidgetsAddons)
+  KF5::KHtml KF5::Archive KF5::ConfigGui KF5::WidgetsAddons KChart)
 
 if(KF5Holidays_FOUND)
   list(APPEND kmymoney_common_LIBS KF5::Holidays)

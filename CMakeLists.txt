@@ -63,6 +63,7 @@ find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config KHtml KDELibs4Support Completion KCMUtils ItemViews Service Wallet)
 find_package(KF5 COMPONENTS Holidays Gpgmepp Contacts Akonadi IdentityManagement)
 find_package(LibAlkimia 4.100.0 REQUIRED)
+find_package(KChart 2.6.0 REQUIRED)
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
@@ -272,7 +273,6 @@ endif(USE_HTML_HANDBOOK)
 
 ######################### The Actual Targets ##########################
 add_subdirectory( libkgpgfile )
-add_subdirectory( libkdchart )
 add_subdirectory( tools )
 add_subdirectory( kmymoney )
 add_subdirectory( doc )

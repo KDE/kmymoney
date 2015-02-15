@@ -1,5 +1,3 @@
-include_directories( ${KMyMoney_SOURCE_DIR}/libkdchart/include)
-
 ############# next target (views) STATIC ###################
 set(libviews_a_SOURCES
   kaccountsview.cpp
@@ -48,7 +46,7 @@ qt5_wrap_ui(libviews_a_SOURCES ${libviews_a_UI})
 
 add_library(views STATIC ${libviews_a_SOURCES})
 
-target_link_libraries(views PUBLIC KF5::Archive KF5::KHtml KF5::KDELibs4Support Qt5::Sql Alkimia::alkimia)
+target_link_libraries(views PUBLIC KChart KF5::Archive KF5::KHtml KF5::KDELibs4Support Qt5::Sql Alkimia::alkimia)
 
 # TODO: Remove this dependency. But it is needed as long as the payee editor uses these objects directly
 # This should be replaced by virtual methods in a pure abstract object.

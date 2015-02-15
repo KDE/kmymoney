@@ -35,9 +35,10 @@
 #include <mymoneyutils.h>
 
 #include "ui_kforecastviewdecl.h"
-#include "kreportchartview.h"
 
-using namespace reports;
+namespace reports {
+  class KReportChartView;
+};
 
 class FixedColumnTreeView;
 /**
@@ -168,7 +169,7 @@ private:
   QTreeWidgetItem* m_expenseItem;
 
   QLayout* m_chartLayout;
-  KReportChartView* m_forecastChart;
+  reports::KReportChartView* m_forecastChart;
   QScopedPointer<FixedColumnTreeView> m_fixedColumnView;
 };
 

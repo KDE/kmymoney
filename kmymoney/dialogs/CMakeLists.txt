@@ -81,7 +81,7 @@ add_custom_target(generate_dialogs_ui_srcs DEPENDS ${dialogs_ui_srcs})
 
 add_library(dialogs STATIC ${libdialogs_a_SOURCES} ${dialogs_ui_srcs})
 
-target_link_libraries(dialogs PUBLIC KF5::ItemViews KF5::I18n Qt5::Sql Alkimia::alkimia kmm_mymoney onlinetask_interfaces kmm_widgets)
+target_link_libraries(dialogs PUBLIC KChart KF5::ItemViews KF5::I18n Qt5::Sql Alkimia::alkimia kmm_mymoney onlinetask_interfaces kmm_widgets)
 
 # @TODO: need kmm_mymoney for online banking, is this ok?
 target_link_libraries(dialogs LINK_PUBLIC

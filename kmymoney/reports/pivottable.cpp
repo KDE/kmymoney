@@ -50,7 +50,7 @@
 namespace reports
 {
 
-using KDChart::Widget;
+using KChart::Widget;
 
 QString Debug::m_sTabs;
 bool Debug::m_sEnabled = DEBUG_ENABLED_BY_DEFAULT;

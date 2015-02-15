@@ -27,10 +27,10 @@ install(FILES mymoneytemplate.h
 if( KDE4_BUILD_TESTS )
   set( convertertest_SRCS convertertest.cpp ../reports/reportstestcommon.cpp )
   kde4_add_unit_test( convertertest TESTNAME kmymoney-convertertest ${convertertest_SRCS} )
-  target_link_libraries( convertertest converter kmymoney_base kmymoney_common kmm_storage ${QT_AND_KDECORE_LIBS} KF5::KIOWidgets Qt5::Test )
+  target_link_libraries( convertertest converter kmymoney_base kmymoney_common kmm_storage KF5::KDELibs4Support KChart KF5::KIOWidgets Qt5::Test )
 
   set( matchfindertest_SRCS matchfindertest.cpp )
   kde4_add_unit_test( matchfindertest TESTNAME kmymoney-matchfindertest ${matchfindertest_SRCS} )
-  target_link_libraries( matchfindertest converter widgets kmymoney_common dialogs widgets kmm_config kmm_storage ${KDE4_KUTILS_LIBRARY} Qt5::Test )
+  target_link_libraries( matchfindertest converter widgets kmymoney_common dialogs widgets kmm_config kmm_storage KF5::KDELibs4Support KChart Qt5::Test )
 
 endif( KDE4_BUILD_TESTS )

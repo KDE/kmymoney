@@ -32,12 +32,12 @@
 
 
 KBalanceAxis::KBalanceAxis()
-    : KDChart::CartesianAxis()
+    : KChart::CartesianAxis()
 {
 }
 
-KBalanceAxis::KBalanceAxis(KDChart::AbstractCartesianDiagram* parent)
-    : KDChart::CartesianAxis(parent)
+KBalanceAxis::KBalanceAxis(KChart::AbstractCartesianDiagram* parent)
+    : KChart::CartesianAxis(parent)
 {
 }
 

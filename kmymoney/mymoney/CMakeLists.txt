@@ -129,7 +129,7 @@ if( KDE4_BUILD_TESTS )
   kde4_add_unit_test( mymoneyforecasttest TESTNAME kmymoney-mymoneyforecasttest ${mymoneyforecasttest_SRCS} )
   add_dependencies( mymoneyforecasttest kmm_mymoney kmm_storage )
 
-  target_link_libraries( mymoneyforecasttest kmm_storage kmm_mymoney ${target_link_libraries_test} KF5::KDELibs4Support )
+  target_link_libraries( mymoneyforecasttest kmm_storage kmm_mymoney ${target_link_libraries_test} KF5::KDELibs4Support KChart )
 
   # MyMoneyInstitution
   set( mymoneyinstitutiontest_SRCS mymoneyinstitutiontest.cpp )

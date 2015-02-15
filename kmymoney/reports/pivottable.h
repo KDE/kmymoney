@@ -38,7 +38,7 @@
 #include "pivotgrid.h"
 #include "reportaccount.h"
 
-using namespace KDChart;
+using namespace KChart;
 
 namespace reports
 {

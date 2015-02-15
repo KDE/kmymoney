@@ -31,18 +31,18 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <KDChartBackgroundAttributes>
-#include <KDChartDataValueAttributes>
-#include <KDChartMarkerAttributes>
-#include <KDChartGridAttributes>
-#include <KDChartHeaderFooter>
-#include <KDChartLegend>
-#include <KDChartLineDiagram>
-#include <KDChartBarDiagram>
-#include <KDChartPieDiagram>
-#include <KDChartRingDiagram>
-#include <KDChartCartesianAxis>
-#include <KDChartFrameAttributes>
+#include <KChartBackgroundAttributes>
+#include <KChartDataValueAttributes>
+#include <KChartMarkerAttributes>
+#include <KChartGridAttributes>
+#include <KChartHeaderFooter>
+#include <KChartLegend>
+#include <KChartLineDiagram>
+#include <KChartBarDiagram>
+#include <KChartPieDiagram>
+#include <KChartRingDiagram>
+#include <KChartCartesianAxis>
+#include <KChartFrameAttributes>
 #include "kmymoneyglobalsettings.h"
 #include <kbalanceaxis.h>
 #include <mymoneyfile.h>
@@ -50,7 +50,7 @@
 using namespace reports;
 
 KReportChartView::KReportChartView(QWidget* parent) :
-    KDChart::Chart(parent),
+    KChart::Chart(parent),
     m_backgroundBrush(KColorScheme(QPalette::Current).background()),
     m_foregroundBrush(KColorScheme(QPalette::Current).foreground())
 
@@ -67,7 +67,7 @@ KReportChartView::KReportChartView(QWidget* parent) :
   setBackgroundAttributes(backAttr);
 
   //Line diagram
-  KDChart::LineDiagram* diagram = new KDChart::LineDiagram;
+  KChart::LineDiagram* diagram = new KChart::LineDiagram;
   diagram->setModel(&m_model);
   this->coordinatePlane()->replaceDiagram(diagram);
 }
@@ -114,7 +114,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     case MyMoneyReport::eChartNone:
     case MyMoneyReport::eChartEnd:
     case MyMoneyReport::eChartLine: {
-        KDChart::LineDiagram* diagram = new KDChart::LineDiagram;
+        KChart::LineDiagram* diagram = new KChart::LineDiagram;
 
         if (config.isSkippingZero()) {
           LineAttributes attributes = diagram->lineAttributes();
@@ -128,14 +128,14 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         break;
       }
     case MyMoneyReport::eChartBar: {
-        KDChart::BarDiagram* diagram = new KDChart::BarDiagram;
+        KChart::BarDiagram* diagram = new KChart::BarDiagram;
         CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
         replaceCoordinatePlane(cartesianPlane);
         coordinatePlane()->replaceDiagram(diagram);
         break;
       }
     case MyMoneyReport::eChartStackedBar: {
-        KDChart::BarDiagram* diagram = new KDChart::BarDiagram;
+        KChart::BarDiagram* diagram = new KChart::BarDiagram;
         CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane;
         replaceCoordinatePlane(cartesianPlane);
         diagram->setType(BarDiagram::Stacked);
@@ -143,7 +143,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         break;
       }
     case MyMoneyReport::eChartPie: {
-        KDChart::PieDiagram* diagram = new KDChart::PieDiagram;
+        KChart::PieDiagram* diagram = new KChart::PieDiagram;
         PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
         replaceCoordinatePlane(polarPlane);
         coordinatePlane()->replaceDiagram(diagram);
@@ -152,7 +152,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         break;
       }
     case MyMoneyReport::eChartRing: {
-        KDChart::RingDiagram* diagram = new KDChart::RingDiagram;
+        KChart::RingDiagram* diagram = new KChart::RingDiagram;
         PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane;
         replaceCoordinatePlane(polarPlane);
         polarPlane->replaceDiagram(diagram);
@@ -244,12 +244,12 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
     //add the axes to the corresponding diagram
     if (config.chartType() == MyMoneyReport::eChartLine) {
-      KDChart::LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(planeDiagram);
+      KChart::LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(planeDiagram);
       lineDiagram->addAxis(xAxis);
       lineDiagram->addAxis(yAxis);
     } else if (config.chartType() == MyMoneyReport::eChartBar ||
                config.chartType() == MyMoneyReport::eChartStackedBar) {
-      KDChart::BarDiagram* barDiagram = qobject_cast<BarDiagram*>(planeDiagram);
+      KChart::BarDiagram* barDiagram = qobject_cast<BarDiagram*>(planeDiagram);
       barDiagram->addAxis(xAxis);
       barDiagram->addAxis(yAxis);
     }
@@ -453,7 +453,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   legend->setFrameAttributes(legendFrameAttr);
   legend->setPosition(Position::East);
   legend->setTextAlignment(Qt::AlignLeft);
-  legend->setLegendStyle(KDChart::Legend::MarkersAndLines);
+  legend->setLegendStyle(KChart::Legend::MarkersAndLines);
   replaceLegend(legend);
 
   // set the text attributes after calling replaceLegend() otherwise fon sizes will get overwritten
@@ -462,12 +462,12 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     generalFontSize = 8; // this is a fallback if the fontsize was specified in pixels
   TextAttributes legendTextAttr(legend->textAttributes());
   legendTextAttr.setPen(m_foregroundBrush.color());
-  legendTextAttr.setFontSize(KDChart::Measure(generalFontSize, KDChartEnums::MeasureCalculationModeAbsolute));
+  legendTextAttr.setFontSize(KChart::Measure(generalFontSize, KChartEnums::MeasureCalculationModeAbsolute));
   legend->setTextAttributes(legendTextAttr);
 
   TextAttributes legendTitleTextAttr(legend->titleTextAttributes());
   legendTitleTextAttr.setPen(m_foregroundBrush.color());
-  legendTitleTextAttr.setFontSize(KDChart::Measure(generalFontSize + 4, KDChartEnums::MeasureCalculationModeAbsolute));
+  legendTitleTextAttr.setFontSize(KChart::Measure(generalFontSize + 4, KChartEnums::MeasureCalculationModeAbsolute));
   legend->setTitleTextAttributes(legendTitleTextAttr);
 
   //this sets the line width only for line diagrams

@@ -1,5 +1,3 @@
-include_directories( ${KMyMoney_SOURCE_DIR}/libkdchart/include)
-
 set (libreports_a_SOURCES
   kreportchartview.cpp
   reportaccount.cpp
@@ -13,7 +11,7 @@ set (libreports_a_SOURCES
 )
 
 add_library(reports STATIC ${libreports_a_SOURCES})
-target_link_libraries(reports KF5::KDELibs4Support Alkimia::alkimia Qt5::Sql)
+target_link_libraries(reports KChart KF5::KDELibs4Support Alkimia::alkimia Qt5::Sql)
 
 add_dependencies(reports kmm_config)
 
@@ -33,9 +31,9 @@ if( KDE4_BUILD_TESTS )
 
   kde4_add_unit_test( pivottabletest TESTNAME kmymoney-pivottabletest ${pivottabletest_SRCS} )
 
-  add_dependencies( pivottabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_kdchart kmm_storage kmm_config )
+  add_dependencies( pivottabletest dialogs widgets reports settings kmymoney_base kmymoney_common kmm_storage kmm_config )
 
-  target_link_libraries( pivottabletest reports settings kmymoney_base kmymoney_common dialogs widgets kmm_kdchart kmm_storage kmm_config KF5::KDELibs4Support KF5::KHtml KF5::Archive Qt5::Gui Qt5::Xml Qt5::Core Qt5::Test )
+  target_link_libraries( pivottabletest reports settings kmymoney_base kmymoney_common dialogs widgets kmm_storage kmm_config KChart KF5::KDELibs4Support KF5::KHtml KF5::Archive Qt5::Gui Qt5::Xml Qt5::Core Qt5::Test )
 
   # Query Table
   set( querytabletest_SRCS querytabletest.cpp reportstestcommon.cpp ../mymoney/mymoneytestutils.cpp )

@@ -43,6 +43,9 @@
 #include "pivottable.h"
 #include "pivotgrid.h"
 #include "fixedcolumntreeview.h"
+#include "kreportchartview.h"
+
+using namespace reports;
 
 KForecastView::KForecastView(QWidget *parent) :
     QWidget(parent),
