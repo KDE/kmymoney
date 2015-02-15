@@ -6505,6 +6505,25 @@ void KMyMoneyApp::slotUpdateActions(void)
           action("transaction_copy_splits")->setEnabled(true);
         }
       }
+      if (d->m_selectedTransactions.count() >= 2) {
+        int singleSplitTransactions = 0;
+        int multipleSplitTransactions = 0;
+        foreach(const KMyMoneyRegister::SelectedTransaction& st, d->m_selectedTransactions) {
+          switch(st.transaction().splitCount()) {
+            case 0:
+              break;
+            case 1:
+              singleSplitTransactions++;
+              break;
+            default:
+              multipleSplitTransactions++;
+              break;
+          }
+        }
+        if(singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
+          action("transaction_copy_splits")->setEnabled(true);
+        }
+      }
     } else {
       action("transaction_assign_number")->setEnabled(d->m_transactionEditor->canAssignNumber());
       action("transaction_new")->setEnabled(false);

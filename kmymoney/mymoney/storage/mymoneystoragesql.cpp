@@ -133,7 +133,6 @@ MyMoneyStorageSql::MyMoneyStorageSql(IMyMoneySerialize *storage, const QUrl &url
   m_override = false;
   m_preferred.setReportAllSplits(false);
 }
-
 MyMoneyStorageSql::~MyMoneyStorageSql()
 {
   try {
