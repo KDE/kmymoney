@@ -44,7 +44,7 @@
 #include <mymoneysecurity.h>
 #include <selectedtransaction.h>
 
-#ifdef KActivities_FOUND
+#ifdef KF5Activities_FOUND
 namespace KActivities
 {
 class ResourceInstance;
@@ -173,7 +173,7 @@ private:
   } fileTypeE;
   fileTypeE m_fileType;
 
-#ifdef KActivities_FOUND
+#ifdef KF5Activities_FOUND
 private:
   KActivities::ResourceInstance * m_activityResourceInstance;
 #endif

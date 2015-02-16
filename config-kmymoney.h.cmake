@@ -27,3 +27,5 @@
 #cmakedefine KF5Gpgmepp_FOUND 1
 
 #cmakedefine KMM_ADDRESSBOOK_FOUND 1
+
+#cmakedefine KF5Activities_FOUND 1

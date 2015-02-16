@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include "kmymoneyview.h"
+#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -54,14 +55,13 @@
 #include <KSharedConfig>
 #include <KBackup>
 
-#ifdef KActivities_FOUND
+#ifdef KF5Activities_FOUND
 #include <KActivities/ResourceInstance>
 #endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <config-kmymoney.h>
 #include <kmymoneyglobalsettings.h>
 #include <kmymoneytitlelabel.h>
 #include <libkgpgfile/kgpgfile.h>
@@ -112,7 +112,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
     m_fileOpen(false),
     m_fmode(0600),
     m_lastViewSelected(0)
-#ifdef KActivities_FOUND
+#ifdef KF5Activities_FOUND
     , m_activityResourceInstance(0)
 #endif
 {
@@ -312,7 +312,7 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
 
   // Initialize kactivities resource instance
 
-#ifdef KActivities_FOUND
+#ifdef KF5Activities_FOUND
   m_activityResourceInstance = new KActivities::ResourceInstance(window()->winId());
   m_activityResourceInstance->setParent(this);
   connect(kmymoney, SIGNAL(fileLoaded(QUrl)), m_activityResourceInstance, SLOT(setUri(QUrl)));
