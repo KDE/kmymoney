@@ -29,6 +29,7 @@ QTEST_MAIN(internationalAccountIdentifierTest);
 bool internationalAccountIdentifierTest::dataInstalled(const QString& countryCode)
 {
   // Not really implemented yet
+  Q_UNUSED(countryCode);
   return false;
 }
 
