@@ -32,7 +32,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <KConfigGroup>
-#include <KGlobal>
 #include <KLocale>
 
 // ----------------------------------------------------------------------------
@@ -201,7 +200,7 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
   }
   QString memo = split.memo();
   memo.replace('\n', '~').remove('\'');
-  QString localeThousands = KGlobal::locale()->thousandsSeparator();  //  In case of clash with field separator
+  QString localeThousands = KLocale::global()->thousandsSeparator();  //  In case of clash with field separator
   if (m_separator == localeThousands) {
     memo.replace(localeThousands, QString());
   }
@@ -254,7 +253,7 @@ void CsvWriter::writeSplitEntry(QString &str, const MyMoneySplit& split, const i
   }
   QString m = split.memo();
   m.replace(QLatin1Char('\n'), QLatin1Char('~'));
-  QString localeThousands = KGlobal::locale()->thousandsSeparator();  //  In case of clash with field separator
+  QString localeThousands = KLocale::global()->thousandsSeparator();  //  In case of clash with field separator
   if (m_separator == localeThousands) {
     m.replace(localeThousands, QString());
   }
@@ -334,7 +333,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
   //  Add date.
   //
   QString str = QString("\n%1" + m_separator).arg(t.postDate().toString(Qt::ISODate));
-  QString localeThousands = KGlobal::locale()->thousandsSeparator();  //  In case of clash with field separator
+  QString localeThousands = KLocale::global()->thousandsSeparator();  //  In case of clash with field separator
   for (itSplit = lst.begin(); itSplit != lst.end(); ++itSplit) {
     MyMoneyAccount acc = file->account((*itSplit).accountId());
     //
