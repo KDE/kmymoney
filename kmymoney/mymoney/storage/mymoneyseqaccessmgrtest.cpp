@@ -894,7 +894,7 @@ void MyMoneySeqAccessMgrTest::testSetAccountName()
     QFAIL("Unexpected exception");
   }
   try {
-    m->setAccountName(STD_ACC_ASSET, "Verm�gen");
+    m->setAccountName(STD_ACC_ASSET, QString("Vermögen"));
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
@@ -910,7 +910,7 @@ void MyMoneySeqAccessMgrTest::testSetAccountName()
   }
 
   QCOMPARE(m->liability().name(), QLatin1String("Verbindlichkeiten"));
-  QCOMPARE(m->asset().name(), QLatin1String("Verm�gen"));
+  QCOMPARE(m->asset().name(), QString("Vermögen"));
   QCOMPARE(m->expense().name(), QLatin1String("Ausgaben"));
   QCOMPARE(m->income().name(), QLatin1String("Einnahmen"));
 
