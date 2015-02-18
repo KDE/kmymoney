@@ -317,6 +317,11 @@ bool onlineJobAdministration::canSendCreditTransfer()
   return false;
 }
 
+bool onlineJobAdministration::canEditOnlineJob(const onlineJob& job)
+{
+  return (!job.taskIid().isEmpty() && !KServiceTypeTrader::self()->query(QLatin1String("KMyMoney/OnlineTaskUi"), QString("'%1' ~in [X-KMyMoney-onlineTaskIds]").arg(job.taskIid())).isEmpty());
+}
+
 void onlineJobAdministration::updateOnlineTaskProperties()
 {
   emit canSendAnyTaskChanged( canSendAnyTask() );
