@@ -30,11 +30,17 @@ QTEST_MAIN(MyMoneyDatabaseMgrTest)
 MyMoneyDatabaseMgrTest::MyMoneyDatabaseMgrTest()
     : m_dbAttached(false),
     m_canOpen(true),
-    m_file(this)
+    m_haveEmptyDataBase(false),
+    m_file(this),
+    m_emptyFile(this)
 {
-  // Create file and close it to release possible read-write locks
+  // Open and close the temp file so that it exists
   m_file.open();
   m_file.close();
+  // The same with the empty db file
+  m_emptyFile.open();
+  m_emptyFile.close();
+
   testCaseTimer.start();
 }
 
@@ -69,41 +75,60 @@ void MyMoneyDatabaseMgrTest::testEmptyConstructor()
   QVERIFY(user.postcode().isEmpty());
   QVERIFY(user.telephone().isEmpty());
   QVERIFY(user.email().isEmpty());
-  QVERIFY(m->nextInstitutionID() == 0);
-  QVERIFY(m->nextAccountID() == 0);
-  QVERIFY(m->nextTransactionID() == 0);
-  QVERIFY(m->nextPayeeID() == 0);
-  QVERIFY(m->nextScheduleID() == 0);
-  QVERIFY(m->nextReportID() == 0);
-  QVERIFY(m->nextOnlineJobID() == 0);
-  QVERIFY(m->institutionList().count() == 0);
+  QVERIFY(m->nextInstitutionID().isEmpty());
+  QVERIFY(m->nextAccountID().isEmpty());
+  QVERIFY(m->nextTransactionID().isEmpty());
+  QVERIFY(m->nextPayeeID().isEmpty());
+  QVERIFY(m->nextScheduleID().isEmpty());
+  QVERIFY(m->nextReportID().isEmpty());
+  QVERIFY(m->nextOnlineJobID().isEmpty());
+  QCOMPARE(m->institutionList().count(), 0);
 
   QList<MyMoneyAccount> accList;
   m->accountList(accList);
-  QVERIFY(accList.count() == 0);
+  QCOMPARE(accList.count(), 0);
 
   MyMoneyTransactionFilter f;
-  QVERIFY(m->transactionList(f).count() == 0);
+  QCOMPARE(m->transactionList(f).count(), 0);
 
-  QVERIFY(m->payeeList().count() == 0);
-  QVERIFY(m->tagList().count() == 0);
-  QVERIFY(m->scheduleList().count() == 0);
+  QCOMPARE(m->payeeList().count(), 0);
+  QCOMPARE(m->tagList().count(), 0);
+  QCOMPARE(m->scheduleList().count(), 0);
 
-  QVERIFY(m->m_creationDate == QDate::currentDate());
+  QCOMPARE(m->m_creationDate, QDate::currentDate());
+}
+
+void MyMoneyDatabaseMgrTest::setupUrl(const QString& fname)
+{
+  struct passwd * pwd = getpwuid(geteuid());
+  QString m_userName;
+  if (pwd != 0) {
+    m_userName = QString(pwd->pw_name);
+  }
+
+  QString m_mode =
+    //"QPSQL&mode=single";
+    //"QMYSQL&mode=single";
+    "QSQLITE&mode=single";
+
+  m_url = QString("sql://%1@localhost/%2?driver=%3").arg(m_userName, fname, m_mode);
+}
+
+void MyMoneyDatabaseMgrTest::copyDatabaseFile(QFile& src, QFile& dest)
+{
+  if(src.open(QIODevice::ReadOnly)) {
+    if(dest.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+      dest.write(src.readAll());
+      dest.close();
+    }
+    src.close();
+  }
 }
 
 void MyMoneyDatabaseMgrTest::testBadConnections()
 {
   // Check a connection that exists but has empty tables
-  struct passwd * pwd = getpwuid(geteuid());
-  QString userName;
-  if (pwd != 0) {
-    userName = QString(pwd->pw_name);
-  }
-
-  QString mode = "QSQLITE&mode=single";
-  m_url = QString("sql://%1@localhost/%2?driver=%3")
-          .arg(userName, m_file.fileName(), mode);
+  setupUrl(m_file.fileName());
 
   try {
     KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
@@ -125,20 +150,7 @@ void MyMoneyDatabaseMgrTest::testCreateDb()
     if (it == list.end()) {
       m_canOpen = false;
     } else {
-      struct passwd * pwd = getpwuid(geteuid());
-      QString userName;
-      if (pwd != 0) {
-        userName = QString(pwd->pw_name);
-      }
-
-      QString mode =
-        //"QPSQL&mode=single";
-        //"QMYSQL&mode=single";
-        "QSQLITE&mode=single";
-
-      m_url = QString("sql://%1@localhost/%2?driver=%3")
-        .arg(userName, m_file.fileName(), mode);
-
+      setupUrl(m_file.fileName());
       KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
       QVERIFY(0 != sql);
       //qDebug("Database driver is %s", qPrintable(sql->driverName()));
@@ -146,6 +158,9 @@ void MyMoneyDatabaseMgrTest::testCreateDb()
       if (0 == sql->open(m_url, QIODevice::WriteOnly, true)) {
         MyMoneyFile::instance()->attachStorage(m);
         QVERIFY(sql->writeFile());
+        sql->close();
+        copyDatabaseFile(m_file, m_emptyFile);
+        m_haveEmptyDataBase = true;
       } else {
         m_canOpen = false;
       }
@@ -158,14 +173,20 @@ void MyMoneyDatabaseMgrTest::testCreateDb()
 void MyMoneyDatabaseMgrTest::testAttachDb()
 {
   if (!m_dbAttached) {
-    testCreateDb();
+    if(!m_haveEmptyDataBase) {
+      testCreateDb();
+    } else {
+      // preload database file with empty set
+      copyDatabaseFile(m_emptyFile, m_file);
+    }
+
     if (m_canOpen) {
       try {
         MyMoneyFile::instance()->detachStorage();
         KSharedPtr <MyMoneyStorageSql> sql = m->connectToDatabase(m_url);
         QVERIFY(sql);
         int openStatus = sql->open(m_url, QIODevice::ReadWrite);
-        QVERIFY(0 == openStatus);
+        QCOMPARE(openStatus, 0);
         MyMoneyFile::instance()->attachStorage(m);
         m_dbAttached = true;
       } catch (const MyMoneyException &e) {
