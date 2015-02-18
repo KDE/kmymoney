@@ -25,12 +25,15 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QDialogButtonBox>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocale>
 #include <KSharedConfig>
+#include <KWindowConfig>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -43,25 +46,32 @@
 using namespace reports;
 
 KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent) :
-    KDialog(parent)
+    QDialog(parent)
 {
-  setCaption(i18n("Balance of %1", account.name()));
+  setWindowTitle(i18n("Balance of %1", account.name()));
   setSizeGripEnabled(true);
   setModal(true);
-  setButtons(KDialog::Close);
-  setButtonsOrientation(Qt::Horizontal);
 
   // restore the last used dialog size
   KConfigGroup grp = KSharedConfig::openConfig()->group("KBalanceChartDlg");
   if (grp.isValid()) {
-    restoreDialogSize(grp);
+    // TODO: port KF5 - this does not seem to be working
+    KWindowConfig::restoreWindowSize(windowHandle(), grp);
   }
   // let the minimum size be 700x500
   resize(QSize(700, 500).expandedTo(size()));
 
+  QVBoxLayout *mainLayout = new QVBoxLayout;
+  setLayout(mainLayout);
   //draw the chart and add it to the main layout
   KReportChartView* chartWidget = drawChart(account);
-  setMainWidget(chartWidget);
+  mainLayout->addWidget(chartWidget);
+
+  // add the buttons
+  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  mainLayout->addWidget(buttonBox);
 }
 
 
@@ -70,7 +80,7 @@ KBalanceChartDlg::~KBalanceChartDlg()
   // store the last used dialog size
   KConfigGroup grp = KSharedConfig::openConfig()->group("KBalanceChartDlg");
   if (grp.isValid()) {
-    saveDialogSize(grp);
+    KWindowConfig::saveWindowSize(windowHandle(), grp);
   }
 }
 
@@ -146,7 +156,8 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   }
 
   // always draw the y axis zero value line
-  chartWidget->drawLimitLine(0);
+  // TODO: port to KF5 - this crashes KChart
+  //chartWidget->drawLimitLine(0);
 
   //remove the legend
   chartWidget->removeLegend();

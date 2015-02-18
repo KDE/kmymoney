@@ -21,10 +21,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDialog>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <kdialog.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -38,7 +38,7 @@ class MyMoneyAccount;
  *  This dialog displays a chart with the account balance for the last 90 days.
  *  It also draws the account limit if the account has any.
  */
-class KBalanceChartDlg : public KDialog
+class KBalanceChartDlg : public QDialog
 {
   Q_OBJECT
 public:
