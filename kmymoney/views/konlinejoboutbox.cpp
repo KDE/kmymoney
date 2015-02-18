@@ -96,6 +96,24 @@ void KOnlineJobOutbox::slotRemoveJob()
   }
 }
 
+QStringList KOnlineJobOutbox::selectedOnlineJobs() const
+{
+  QModelIndexList indexes = ui->m_onlineJobView->selectionModel()->selectedRows();
+
+  if (indexes.isEmpty())
+    return QStringList();
+
+  QStringList list;
+  list.reserve(indexes.count());
+
+  const QAbstractItemModel *const model = ui->m_onlineJobView->model();
+  Q_FOREACH( const QModelIndex& index, indexes ) {
+    list.append(model->data( index, onlineJobModel::OnlineJobId ).toString());
+  }
+  return list;
+}
+
+
 void KOnlineJobOutbox::slotSendJobs()
 {
   QList<onlineJob> validJobs;
@@ -122,6 +140,15 @@ void KOnlineJobOutbox::slotEditJob(const QModelIndex &index)
 {
   QString jobId = ui->m_onlineJobView->model()->data(index, onlineJobModel::OnlineJobId).toString();
   emit editJob(jobId);
+}
+
+void KOnlineJobOutbox::contextMenuEvent(QContextMenuEvent*)
+{
+  QModelIndexList indexes = ui->m_onlineJobView->selectionModel()->selectedIndexes();
+  if (!indexes.isEmpty()) {
+    onlineJob job = ui->m_onlineJobView->model()->data(indexes.first(), onlineJobModel::OnlineJobRole).value<onlineJob>();
+    emit showContextMenu(job);
+  }
 }
 
 /**

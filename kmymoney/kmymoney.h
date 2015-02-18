@@ -491,6 +491,12 @@ protected slots:
    */
   void slotOnlineJobSend(QList<onlineJob> jobs );
 
+  /**
+   * @brief Show the log currently selected online job
+   */
+  void slotOnlineJobLog();
+  void slotOnlineJobLog(const QStringList& onlineJobIds);
+
   void slotManageGpgKeys(void);
   void slotKeySelected(int idx);
 
@@ -637,6 +643,13 @@ protected:
   /** sets up the statusbar for the main window by initialzing a statuslabel.
    */
   void initStatusBar(void);
+
+  /**
+   * @brief Establish connections between actions and views
+   *
+   * Must be called after creation of actions and views.
+   */
+  void connectActionsAndViews();
 
   /** queryClose is called by KMainWindow on each closeEvent of a window. Against the
    * default implementation (only returns true), this calls saveModified() on the document object to ask if the document shall
@@ -997,6 +1010,10 @@ public slots:
     */
   void slotShowPriceContextMenu(void);
 
+  /**
+   * Open onlineJob options menu at current cursor position.
+   */
+  void slotShowOnlineJobContextMenu();
 
   /**
     * This slot collects information for a new scheduled transaction

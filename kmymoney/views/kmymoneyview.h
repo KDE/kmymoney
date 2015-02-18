@@ -103,6 +103,8 @@ public:
     preOpen, postOpen, preSave, postSave, preClose, postClose
   };
 
+  KOnlineJobOutbox* getOnlineJobOutbox() const {return m_onlineJobOutboxView;}
+
 private:
   enum menuID {
     AccountNew = 1,

@@ -43,7 +43,7 @@ chipTanDialog::chipTanDialog(QWidget* parent)
 {
   ui = new Ui::chipTanDialog;
   ui->setupUi(this);
-  
+
   connect(ui->dialogButtonBox, SIGNAL(accepted()), SLOT(accept()));
   connect(ui->dialogButtonBox, SIGNAL(rejected()), SLOT(reject()));
   connect(ui->tanInput, SIGNAL(userTextChanged(QString)), SLOT(tanInputChanged(QString)));
@@ -52,18 +52,18 @@ chipTanDialog::chipTanDialog(QWidget* parent)
   
   setFlickerFieldWidth( KBankingSettings::width() );
   setFlickerFieldClockSetting( KBankingSettings::clocksetting() );
-  
+
   connect(ui->decelerateButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(decelerateTransmission()));
   connect(ui->accelerateButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(accelerateTransmission()));
   connect(ui->enlargeButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(enlargeFlickerField()));
   connect(ui->reduceButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(reduceFlickerField()));
-  
+
   connect(ui->declarativeView->rootObject(), SIGNAL(flickerFieldWidthChanged(int)), SLOT(flickerFieldWidthChanged(int)));
   connect(ui->declarativeView->rootObject(), SIGNAL(flickerFieldClockSettingChanged(int)), SLOT(flickerFieldClockSettingChanged(int)));
-  
+
   if (ui->declarativeView->status() == QDeclarativeView::Error)
     done(InternalError);
-  
+
   tanInputChanged(QString());
 }
 

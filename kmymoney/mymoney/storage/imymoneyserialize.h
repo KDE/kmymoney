@@ -162,9 +162,9 @@ public:
    * knowledge of.
    */
   virtual const QList<MyMoneySecurity> securityList(void) const = 0;
-  
+
   /**
-   * This method returns a list of onlineJobs the engine has 
+   * This method returns a list of onlineJobs the engine has
    */
   virtual const QList<onlineJob> onlineJobList() const = 0;
 

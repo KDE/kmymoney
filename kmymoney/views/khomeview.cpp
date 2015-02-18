@@ -588,9 +588,9 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
               KLocale::global()->formatDate(sched.adjustedNextDueDate(), KLocale::ShortDate) +
               "</td><td>";
         if (pathEnter.length() > 0)
-          tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(QUrl::fromLocalFile(pathEnter).url()) + linkend();
+          tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(QUrl::fromLocalFile(pathEnter).url()) + linkend();
         if (pathSkip.length() > 0)
-          tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(QUrl::fromLocalFile(pathSkip).url()) + linkend();
+          tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(QUrl::fromLocalFile(pathSkip).url()) + linkend();
 
         tmp += QString("&nbsp;");
         tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=edit").arg(sched.id()), i18n("Edit schedule")) + sched.name() + linkend();
@@ -609,7 +609,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         const MyMoneySecurity& currency = MyMoneyFile::instance()->currency(acc.currencyId());
         QString amount = MyMoneyUtils::formatMoney(sp.value() * cnt, acc, currency);
         amount.replace(QChar(' '), "&nbsp;");
-        tmp += showColoredAmount(amount, (sp.value() * cnt).isNegative()) ;
+        tmp += showColoredAmount(amount, (sp.value() * cnt).isNegative());
         tmp += "</td>";
         //show balance after payments
         tmp += "<td align=\"right\">";

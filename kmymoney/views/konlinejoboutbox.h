@@ -36,6 +36,8 @@ public:
   explicit KOnlineJobOutbox(QWidget *parent = 0);
   ~KOnlineJobOutbox();
 
+  QStringList selectedOnlineJobs() const;
+
   void showEvent( QShowEvent* event );
 
 signals:
@@ -44,6 +46,10 @@ signals:
   void newCreditTransfer();
 
   void aboutToShow();
+  void showContextMenu(onlineJob);
+
+protected:
+  void contextMenuEvent(QContextMenuEvent*);
 
 private slots:
   void updateNewCreditTransferButton();
