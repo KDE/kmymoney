@@ -1090,15 +1090,15 @@ void KMyMoneyApp::initActions(void)
   connect(debug_timers, SIGNAL(triggered()), this, SLOT(slotToggleTimers()));
 
   // onlineJob actions
-  KAction* onlineJob_delete = actionCollection()->addAction("onlinejob_delete");
+  QAction* onlineJob_delete = actionCollection()->addAction("onlinejob_delete");
   onlineJob_delete->setText(i18n("Remove credit transfer"));
-  onlineJob_delete->setIcon(KIcon::fromTheme("edit-delete"));
+  onlineJob_delete->setIcon(QIcon::fromTheme("edit-delete"));
 
-  KAction* onlineJob_edit = actionCollection()->addAction("onlinejob_edit");
+  QAction* onlineJob_edit = actionCollection()->addAction("onlinejob_edit");
   onlineJob_edit->setText(i18n("Edit credit transfer"));
-  onlineJob_edit->setIcon(KIcon::fromTheme("document-edit"));
+  onlineJob_edit->setIcon(QIcon::fromTheme("document-edit"));
 
-  KAction* onlineJob_log = actionCollection()->addAction("onlinejob_log");
+  QAction* onlineJob_log = actionCollection()->addAction("onlinejob_log");
   onlineJob_log->setText(i18n("Show log"));
   connect(onlineJob_log, SIGNAL(triggered()), this, SLOT(slotOnlineJobLog()));
 

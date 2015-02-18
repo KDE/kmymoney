@@ -19,7 +19,7 @@
 #ifndef ONLINEJOBMESSAGESVIEW_H
 #define ONLINEJOBMESSAGESVIEW_H
 
-#include <QtGui/qwidget.h>
+#include <QWidget>
 
 #include "kmm_widgets_export.h"
 
