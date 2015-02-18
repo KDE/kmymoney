@@ -84,7 +84,7 @@ int onlineJobMessagesModel::rowCount(const QModelIndex& parent) const
   return m_job.jobMessageList().count();
 }
 
-QModelIndex onlineJobMessagesModel::parent(const QModelIndex& child) const
+QModelIndex onlineJobMessagesModel::parent(const QModelIndex&) const
 {
   return QModelIndex();
 }
