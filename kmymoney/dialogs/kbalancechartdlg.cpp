@@ -26,6 +26,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QDialogButtonBox>
+#include <QWindow>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -53,13 +54,13 @@ KBalanceChartDlg::KBalanceChartDlg(const MyMoneyAccount& account, QWidget* paren
   setModal(true);
 
   // restore the last used dialog size
+  winId(); // needs to be called to create the QWindow
   KConfigGroup grp = KSharedConfig::openConfig()->group("KBalanceChartDlg");
   if (grp.isValid()) {
-    // TODO: port KF5 - this does not seem to be working
     KWindowConfig::restoreWindowSize(windowHandle(), grp);
   }
   // let the minimum size be 700x500
-  resize(QSize(700, 500).expandedTo(size()));
+  resize(QSize(700, 500).expandedTo(windowHandle() ? windowHandle()->size() : QSize()));
 
   QVBoxLayout *mainLayout = new QVBoxLayout;
   setLayout(mainLayout);
