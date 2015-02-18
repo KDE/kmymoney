@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KDialog>
+#include <QDialog>
 #include <ktreewidgetsearchlinewidget.h>
 
 // ----------------------------------------------------------------------------
@@ -41,10 +41,10 @@
 
 class QTreeWidgetItem;
 
-class KCurrencyEditDlgDecl : public KDialog, public Ui::KCurrencyEditDlgDecl
+class KCurrencyEditDlgDecl : public QDialog, public Ui::KCurrencyEditDlgDecl
 {
 public:
-  KCurrencyEditDlgDecl(QWidget *parent) : KDialog(parent) {
+  KCurrencyEditDlgDecl(QWidget *parent) : QDialog(parent) {
     setupUi(this);
   }
 };
@@ -88,6 +88,7 @@ private:
     * Search widget for the list
     */
   KTreeWidgetSearchLineWidget*  m_searchWidget;
+  QPushButton*                  m_selectBaseCurrencyButton;
 };
 
 #endif

@@ -36,11 +36,15 @@
 #include <QTreeWidget>
 #include <QStyledItemDelegate>
 #include <QIcon>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocale>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -74,10 +78,16 @@ QWidget *KCurrencyEditDelegate::createEditor(QWidget *parent, const QStyleOption
 KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
     KCurrencyEditDlgDecl(parent)
 {
-  setButtons(KDialog::Close | KDialog::User1);
-  button(KDialog::User1)->setText(i18n("Select as base currency"));
-  setButtonsOrientation(Qt::Horizontal);
-  setMainWidget(m_layoutWidget);
+  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+  QVBoxLayout *mainLayout = new QVBoxLayout;
+  setLayout(mainLayout);
+  mainLayout->addWidget(m_layoutWidget);
+  m_selectBaseCurrencyButton = new QPushButton;
+  buttonBox->addButton(m_selectBaseCurrencyButton, QDialogButtonBox::ActionRole);
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  mainLayout->addWidget(buttonBox);
+  m_selectBaseCurrencyButton->setText(i18n("Select as base currency"));
 
   // create the searchline widget
   // and insert it into the existing layout
@@ -93,7 +103,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadCurrencies()));
   connect(m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateCurrency(QTreeWidgetItem*)));
 
-  connect(this, SIGNAL(user1Clicked()), this, SLOT(slotSelectBaseCurrency()));
+  connect(m_selectBaseCurrencyButton, SIGNAL(clicked()), this, SLOT(slotSelectBaseCurrency()));
 
   QTimer::singleShot(10, this, SLOT(timerDone()));
 }
@@ -243,7 +253,7 @@ void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
     } catch (const MyMoneyException &) {
       m_currency = MyMoneySecurity();
     }
-    button(KDialog::User1)->setDisabled(m_currency.id() == baseId);
+    m_selectBaseCurrencyButton->setDisabled(m_currency.id() == baseId);
     emit selectObject(m_currency);
   }
 }
