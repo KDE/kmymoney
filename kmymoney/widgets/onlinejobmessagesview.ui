@@ -40,7 +40,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="KPushButton" name="closeButton">
+      <widget class="QPushButton" name="closeButton">
        <property name="text">
         <string>Close</string>
        </property>
@@ -52,7 +52,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>
