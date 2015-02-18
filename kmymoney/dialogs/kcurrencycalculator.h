@@ -37,13 +37,15 @@
 #include "ui_kcurrencycalculatordecl.h"
 #include <mymoneyfile.h>
 
+class QDialogButtonBox;
+
 /**
   * @author Thomas Baumgart
   */
-class KCurrencyCalculatorDecl : public KDialog, public Ui::KCurrencyCalculatorDecl
+class KCurrencyCalculatorDecl : public QDialog, public Ui::KCurrencyCalculatorDecl
 {
 public:
-  KCurrencyCalculatorDecl(QWidget *parent) : KDialog(parent) {
+  KCurrencyCalculatorDecl(QWidget *parent) : QDialog(parent) {
     setupUi(this);
   }
 };
@@ -100,6 +102,7 @@ private:
   MyMoneyMoney        m_result;
   MyMoneyMoney        m_value;
   signed64            m_resultFraction;
+  QDialogButtonBox   *m_buttonBox;
 };
 
 #endif

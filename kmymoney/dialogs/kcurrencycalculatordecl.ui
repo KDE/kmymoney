@@ -4,7 +4,7 @@
   <comment></comment>
   <exportmacro></exportmacro>
   <class>KCurrencyCalculatorDecl</class>
-  <widget class="KDialog" name="KCurrencyCalculatorDecl">
+  <widget class="QDialog" name="KCurrencyCalculatorDecl">
     <property name="enabled">
       <bool>true</bool>
     </property>
@@ -309,7 +309,7 @@ xx</string>
   </buttongroups>
   <customwidgets>
      <customwidget>
-      <class>KDialog</class>
+      <class>QDialog</class>
       <extends>QDialog</extends>
       <header>kdialog.h</header>
     </customwidget>

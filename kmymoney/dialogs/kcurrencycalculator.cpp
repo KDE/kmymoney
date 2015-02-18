@@ -30,11 +30,14 @@
 #include <QRadioButton>
 #include <QCheckBox>
 #include <QPushButton>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocale>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -116,14 +119,23 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
     m_toCurrency(to),
     m_result(shares.abs()),
     m_value(value.abs()),
-    m_resultFraction(resultFraction)
+    m_resultFraction(resultFraction),
+    m_buttonBox(0)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
-  //set main widget of KDialog
-  setMainWidget(m_layoutWidget);
+  //set main widget of QDialog
+  QVBoxLayout *mainLayout = new QVBoxLayout;
+  setLayout(mainLayout);
+  mainLayout->addWidget(m_layoutWidget);
 
-  setButtons(KDialog::Ok | KDialog::Cancel);
+  m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+  QPushButton *okButton = m_buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(m_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  mainLayout->addWidget(m_buttonBox);
 
   buttonGroup1->setId(m_amountButton, 0);
   buttonGroup1->setId(m_rateButton, 1);
@@ -181,7 +193,7 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
     m_amountButton->hide();
     m_toAmount->hide();
   }
-  button(KDialog::Ok)->setFocus();
+  okButton->setFocus();
 }
 
 KCurrencyCalculator::~KCurrencyCalculator()
@@ -272,7 +284,7 @@ void KCurrencyCalculator::updateExample(const MyMoneyMoney& price)
     }
   }
   m_conversionExample->setText(msg);
-  button(KDialog::Ok)->setEnabled(!price.isZero());
+  m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!price.isZero());
 }
 
 void KCurrencyCalculator::accept(void)
