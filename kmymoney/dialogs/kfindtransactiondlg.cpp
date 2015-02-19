@@ -33,6 +33,8 @@
 #include <QResizeEvent>
 #include <QEvent>
 #include <QPushButton>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -43,6 +45,9 @@
 #include <kstandardguiitem.h>
 #include <kiconloader.h>
 #include <khelpclient.h>
+#include <KGuiItem>
+#include <KStandardGuiItem>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -55,8 +60,7 @@
 #include <kmymoneyglobalsettings.h>
 #include <register.h>
 #include <transaction.h>
-#include <KGuiItem>
-#include <KStandardGuiItem>
+
 #include "ui_kfindtransactiondlgdecl.h"
 #include "ui_ksortoptiondlg.h"
 
@@ -69,7 +73,7 @@ struct KSortOptionDlg::Private {
 };
 
 KSortOptionDlg::KSortOptionDlg(QWidget *parent)
-    : KDialog(parent), d(new Private)
+    : QDialog(parent), d(new Private)
 {
   d->ui.setupUi(this);
   init();
@@ -82,7 +86,6 @@ KSortOptionDlg::~KSortOptionDlg()
 
 void KSortOptionDlg::init()
 {
-  setButtons(ButtonCodes(KDialog::None));
   KGuiItem::assign(d->ui.m_cancelButton, KStandardGuiItem::cancel());
   KGuiItem::assign(d->ui.m_okButton, KStandardGuiItem::ok());
   KGuiItem::assign(d->ui.m_helpButton, KStandardGuiItem::help());
@@ -115,12 +118,11 @@ void KSortOptionDlg::hideDefaultButton(void)
 
 
 KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
-    KDialog(parent),
+    QDialog(parent),
     m_needReload(false),
     m_ui(new Ui::KFindTransactionDlgDecl)
 {
   m_ui->setupUi(this);
-  setMainWidget(m_ui->m_tabWidget);
 
   m_ui->ButtonGroup1->setId(m_ui->m_amountButton, 0);
   m_ui->ButtonGroup1->setId(m_ui->m_amountRangeButton, 1);
@@ -168,18 +170,18 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   slotUpdateSelections();
 
   // setup the connections
-  connect(this, SIGNAL(applyClicked()), this, SLOT(slotSearch()));
-  connect(this, SIGNAL(resetClicked()), this, SLOT(slotReset()));
-  connect(this, SIGNAL(resetClicked()), m_ui->m_accountsView, SLOT(slotSelectAllAccounts()));
-  connect(this, SIGNAL(resetClicked()), m_ui->m_categoriesView, SLOT(slotSelectAllAccounts()));
-  connect(this, SIGNAL(closeClicked()), this, SLOT(deleteLater()));
-  connect(this, SIGNAL(helpClicked()), this, SLOT(slotShowHelp()));
+  connect(m_ui->buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(slotSearch()));
+  connect(m_ui->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), this, SLOT(slotReset()));
+  connect(m_ui->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), m_ui->m_accountsView, SLOT(slotSelectAllAccounts()));
+  connect(m_ui->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), m_ui->m_categoriesView, SLOT(slotSelectAllAccounts()));
+  connect(m_ui->buttonBox->button(QDialogButtonBox::Close), SIGNAL(clicked()), this, SLOT(deleteLater()));
+  connect(m_ui->buttonBox->button(QDialogButtonBox::Help), SIGNAL(clicked()), this, SLOT(slotShowHelp()));
 
   // only allow searches when a selection has been made
-  enableButtonApply(false);
-  setButtonGuiItem(KDialog::Apply, KStandardGuiItem::find());
-  setButtonToolTip(KDialog::Apply, i18nc("@info:tooltip for find transaction apply button", "Search transactions"));
-  connect(this, SIGNAL(selectionNotEmpty(bool)), this, SLOT(enableButtonApply(bool)));
+  m_ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
+  KGuiItem::assign(m_ui->buttonBox->button(QDialogButtonBox::Apply), KStandardGuiItem::find());
+  m_ui->buttonBox->button(QDialogButtonBox::Apply)->setToolTip(i18nc("@info:tooltip for find transaction apply button", "Search transactions"));
+  connect(this, SIGNAL(selectionNotEmpty(bool)), m_ui->buttonBox->button(QDialogButtonBox::Apply), SLOT(setEnabled(bool)));
 
   // get signal about engine changes
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotRefreshView()));
@@ -782,7 +784,7 @@ void KFindTransactionDlg::setupFilter(void)
 void KFindTransactionDlg::slotSearch(void)
 {
   // perform the search only if the button is enabled
-  if (!isButtonEnabled(KDialog::Apply))
+  if (!m_ui->buttonBox->button(QDialogButtonBox::Apply)->isEnabled())
     return;
 
   // setup the filter from the dialog widgets
@@ -809,7 +811,7 @@ void KFindTransactionDlg::showEvent(QShowEvent* event)
     loadView();
     m_needReload = false;
   }
-  KDialog::showEvent(event);
+  QDialog::showEvent(event);
 }
 
 void KFindTransactionDlg::loadView(void)
@@ -891,7 +893,7 @@ void KFindTransactionDlg::resizeEvent(QResizeEvent* ev)
   // 7 = Deposit
 
   // don't forget the resizer
-  KDialog::resizeEvent(ev);
+  QDialog::resizeEvent(ev);
 
   if (!m_ui->m_register->isVisible())
     return;

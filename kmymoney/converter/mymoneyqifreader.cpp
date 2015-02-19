@@ -2092,6 +2092,7 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
             case KMessageBox::Yes:
               break;
             case KMessageBox::No:
+            default:
               delete accountSelect;
               return;
           }

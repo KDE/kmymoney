@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KDialog>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -43,7 +43,7 @@ class QTreeWidgetItem;
 /**
   * @author Thomas Baumgart
   */
-class KSortOptionDlg : public KDialog
+class KSortOptionDlg : public QDialog
 {
 public:
   KSortOptionDlg(QWidget *parent);
@@ -63,7 +63,7 @@ namespace Ui
 class KFindTransactionDlgDecl;
 }
 
-class KFindTransactionDlg : public KDialog
+class KFindTransactionDlg : public QDialog
 {
   Q_OBJECT
 

@@ -24,7 +24,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kdialog.h>
 #include <klocale.h>
 #include <kstandardguiitem.h>
 #include <kmessagebox.h>

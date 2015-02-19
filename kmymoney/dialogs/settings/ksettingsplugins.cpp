@@ -29,7 +29,6 @@
 // KDE Includes
 
 #include <klocale.h>
-#include <kdialog.h>
 #include <kpluginselector.h>
 
 // ----------------------------------------------------------------------------
@@ -43,7 +42,6 @@ KSettingsPlugins::KSettingsPlugins(QWidget* parent)
   QVBoxLayout *layout = new QVBoxLayout(this);
   KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget()->setParent(this);
   layout->addWidget(KMyMoneyPlugin::PluginLoader::instance()->pluginSelectorWidget());
-  layout->setSpacing(KDialog::spacingHint());
 }
 
 KSettingsPlugins::~KSettingsPlugins()

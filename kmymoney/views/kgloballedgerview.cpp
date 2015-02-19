@@ -45,7 +45,6 @@
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <ktoolbar.h>
-#include <kdialog.h>
 #include <kpassivepopup.h>
 #include <ktoggleaction.h>
 
@@ -148,7 +147,7 @@ bool MousePressFilter::isChildOf(QWidget* child, QWidget *parent)
     // it's as if it is a child of our own because these widgets could
     // appear during transaction entry (message boxes, completer widgets)
     if (dynamic_cast<KPassivePopup*>(child) ||
-        dynamic_cast<KDialog*>(child) ||
+        dynamic_cast<QDialog*>(child) ||
         ((child->windowFlags() & Qt::Popup) && child != kmymoney))
       return true;
     child = child->parentWidget();

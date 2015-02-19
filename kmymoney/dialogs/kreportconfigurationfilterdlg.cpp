@@ -83,9 +83,9 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(
 
   // the Apply button is always enabled
   disconnect(SIGNAL(selectionNotEmpty(bool)));
-  enableButtonApply(true);
-  setButtonGuiItem(KDialog::Apply, KStandardGuiItem::ok());
-  setButtonToolTip(KDialog::Apply, i18nc("@info:tooltip for report configuration apply button", "Apply the configuration changes to the report"));
+  m_ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
+  KGuiItem::assign(m_ui->buttonBox->button(QDialogButtonBox::Apply), KStandardGuiItem::ok());
+  m_ui->buttonBox->button(QDialogButtonBox::Apply)->setToolTip(i18nc("@info:tooltip for report configuration apply button", "Apply the configuration changes to the report"));
 
   //
   // Add new tabs
