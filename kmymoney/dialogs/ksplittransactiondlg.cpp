@@ -32,6 +32,9 @@
 #include <QCursor>
 #include <QList>
 #include <QIcon>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -41,6 +44,7 @@
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
 #include <KSharedConfig>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -68,35 +72,49 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
 {
   setModal(true);
 
-  setMainWidget(horizontalLayoutWidget);
+  QHBoxLayout *mainLayout = new QHBoxLayout;
+  setLayout(mainLayout);
+  mainLayout->addWidget(horizontalLayoutWidget);
 
-  setButtons(KDialog::Ok | KDialog::Cancel | KDialog::User1 | KDialog::User2 | KDialog::User3);
-  setButtonsOrientation(Qt::Vertical);
+  m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+  QPushButton *okButton = m_buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  QPushButton *user1Button = new QPushButton;
+  m_buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
+  QPushButton *user2Button = new QPushButton;
+  m_buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
+  QPushButton *user3Button = new QPushButton;
+  m_buttonBox->addButton(user3Button, QDialogButtonBox::ActionRole);
+  connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(m_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  m_buttonBox->setOrientation(Qt::Vertical);
+  mainLayout->addWidget(m_buttonBox);
 
   //set custom buttons
   //clearAll button
-  setButtonText(User1, i18n("Clear &All"));
-  setButtonToolTip(User1, i18n("Clear all splits"));
-  setButtonWhatsThis(User1, i18n("Use this to clear all splits of this transaction"));
-  setButtonIcon(User1, QIcon::fromTheme("edit-clear"));
+  user1Button->setText(i18n("Clear &All"));
+  user1Button->setToolTip(i18n("Clear all splits"));
+  user1Button->setWhatsThis(i18n("Use this to clear all splits of this transaction"));
+  user1Button->setIcon(QIcon::fromTheme("edit-clear"));
 
   //clearZero button
-  setButtonText(User2, i18n("Clear &Zero"));
-  setButtonToolTip(User2, i18n("Removes all splits that have a value of zero"));
-  setButtonIcon(User2, QIcon::fromTheme("edit-clear"));
+  user2Button->setText(i18n("Clear &Zero"));
+  user2Button->setToolTip(i18n("Removes all splits that have a value of zero"));
+  user2Button->setIcon(QIcon::fromTheme("edit-clear"));
 
   //merge button
-  setButtonText(User3, i18n("&Merge"));
-  setButtonToolTip(User3, i18n("Merges splits with the same category to one split"));
-  setButtonWhatsThis(User3, i18n("In case you have multiple split entries to the same category and you like to keep them as a single split, press this button. The amount for identical categories will be added and stored in a single split for that category."));
+  user3Button->setText(i18n("&Merge"));
+  user3Button->setToolTip(i18n("Merges splits with the same category to one split"));
+  user3Button->setWhatsThis(i18n("In case you have multiple split entries to the same category and you like to keep them as a single split"));
 
   // make finish the default
-  button(KDialog::Cancel)->setDefault(true);
+  m_buttonBox->button(QDialogButtonBox::Cancel)->setDefault(true);
 
   // setup the focus
-  button(KDialog::Cancel)->setFocusPolicy(Qt::NoFocus);
-  button(KDialog::Ok)->setFocusPolicy(Qt::NoFocus);
-  button(KDialog::User1)->setFocusPolicy(Qt::NoFocus);
+  m_buttonBox->button(QDialogButtonBox::Cancel)->setFocusPolicy(Qt::NoFocus);
+  okButton->setFocusPolicy(Qt::NoFocus);
+  user1Button->setFocusPolicy(Qt::NoFocus);
 
   // connect signals with slots
   connect(transactionsTable, SIGNAL(transactionChanged(MyMoneyTransaction)),
@@ -109,11 +127,11 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   connect(transactionsTable, SIGNAL(editStarted()), this, SLOT(slotEditStarted()));
   connect(transactionsTable, SIGNAL(editFinished()), this, SLOT(slotUpdateButtons()));
 
-  connect(button(KDialog::Cancel), SIGNAL(clicked()), this, SLOT(reject()));
-  connect(button(KDialog::Ok), SIGNAL(clicked()), this, SLOT(accept()));
-  connect(button(KDialog::User1), SIGNAL(clicked()), this, SLOT(slotClearAllSplits()));
-  connect(button(KDialog::User3), SIGNAL(clicked()), this, SLOT(slotMergeSplits()));
-  connect(button(KDialog::User2), SIGNAL(clicked()), this, SLOT(slotClearUnusedSplits()));
+  connect(m_buttonBox->button(QDialogButtonBox::Cancel), SIGNAL(clicked()), this, SLOT(reject()));
+  connect(m_buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(accept()));
+  connect(user1Button, SIGNAL(clicked()), this, SLOT(slotClearAllSplits()));
+  connect(user3Button, SIGNAL(clicked()), this, SLOT(slotMergeSplits()));
+  connect(user2Button, SIGNAL(clicked()), this, SLOT(slotClearUnusedSplits()));
 
   // setup the precision
   try {
@@ -131,7 +149,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   KConfigGroup grp = KSharedConfig::openConfig()->group("SplitTransactionEditor");
   size = grp.readEntry("Geometry", size);
   size.setHeight(size.height() - 1);
-  KDialog::resize(size.expandedTo(minimumSizeHint()));
+  QDialog::resize(size.expandedTo(minimumSizeHint()));
 
   // Trick: it seems, that the initial sizing of the dialog does
   // not work correctly. At least, the columns do not get displayed
@@ -174,7 +192,13 @@ int KSplitTransactionDlg::exec(void)
     if (rc == Accepted) {
       if (!diffAmount().isZero()) {
         KSplitCorrectionDlgDecl* corrDlg = new KSplitCorrectionDlgDecl(this);
-        corrDlg->setMainWidget(corrDlg->findChild<QWidget*>("verticalLayout"));
+        QVBoxLayout *mainLayout = new QVBoxLayout;
+        corrDlg->setLayout(mainLayout);
+        mainLayout->addWidget(corrDlg->findChild<QWidget*>("verticalLayout"));
+        QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+        connect(buttonBox, SIGNAL(accepted()), corrDlg, SLOT(accept()));
+        connect(buttonBox, SIGNAL(rejected()), corrDlg, SLOT(reject()));
+        mainLayout->addWidget(buttonBox);
         corrDlg->buttonGroup->setId(corrDlg->continueBtn, 0);
         corrDlg->buttonGroup->setId(corrDlg->changeBtn, 1);
         corrDlg->buttonGroup->setId(corrDlg->distributeBtn, 2);
@@ -254,7 +278,7 @@ int KSplitTransactionDlg::exec(void)
 
 void KSplitTransactionDlg::initSize(void)
 {
-  KDialog::resize(width(), height() + 1);
+  QDialog::resize(width(), height() + 1);
 }
 
 void KSplitTransactionDlg::accept()
@@ -374,14 +398,14 @@ void KSplitTransactionDlg::slotUpdateButtons()
     if ((*it_s) > 1)
       break;
   }
-  enableButton(KDialog::User3, it_s != splits.constEnd());
-  enableButton(KDialog::User2, haveZeroSplit);
+  m_buttonBox->buttons().at(4)->setEnabled(it_s != splits.constEnd());
+  m_buttonBox->buttons().at(3)->setEnabled(haveZeroSplit);
 }
 
 void KSplitTransactionDlg::slotEditStarted(void)
 {
-  enableButton(KDialog::User3, false);
-  enableButton(KDialog::User2, false);
+  m_buttonBox->buttons().at(4)->setEnabled(false);
+  m_buttonBox->buttons().at(3)->setEnabled(false);
 }
 
 void KSplitTransactionDlg::updateSums(void)

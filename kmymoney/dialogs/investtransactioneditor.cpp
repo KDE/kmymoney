@@ -361,7 +361,7 @@ int InvestTransactionEditor::slotEditInterestSplits(void)
 
 int InvestTransactionEditor::editSplits(const QString& categoryWidgetName, const QString& amountWidgetName, QList<MyMoneySplit>& splits, bool isIncome, const char* slotEditSplits)
 {
-  int rc = KDialog::Rejected;
+  int rc = QDialog::Rejected;
 
   if (!m_openEditSplits) {
     // only get in here in a single instance
@@ -406,7 +406,7 @@ int InvestTransactionEditor::editSplits(const QString& categoryWidgetName, const
           m_regForm);
       // connect(dlg, SIGNAL(newCategory(MyMoneyAccount&)), this, SIGNAL(newCategory(MyMoneyAccount&)));
 
-      if ((rc = dlg->exec()) == KDialog::Accepted) {
+      if ((rc = dlg->exec()) == QDialog::Accepted) {
         transaction = dlg->transaction();
         // collect splits out of the transaction
         splits.clear();
@@ -966,7 +966,7 @@ bool InvestTransactionEditor::setupPrice(const MyMoneyTransaction& t, MyMoneySpl
                                 fract,
                                 m_regForm);
 
-      if (calc->exec() == KDialog::Rejected) {
+      if (calc->exec() == QDialog::Rejected) {
         delete calc;
         return false;
       }

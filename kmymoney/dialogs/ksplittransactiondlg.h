@@ -44,12 +44,12 @@
 #include "ui_ksplittransactiondlgdecl.h"
 #include "ui_ksplitcorrectiondlg.h"
 
+class QDialogButtonBox;
 
-
-class KSplitCorrectionDlgDecl : public KDialog, public Ui::KSplitCorrectionDlgDecl
+class KSplitCorrectionDlgDecl : public QDialog, public Ui::KSplitCorrectionDlgDecl
 {
 public:
-  KSplitCorrectionDlgDecl(QWidget *parent) : KDialog(parent) {
+  KSplitCorrectionDlgDecl(QWidget *parent) : QDialog(parent) {
     setupUi(this);
   }
 };
@@ -58,13 +58,17 @@ public:
   * @author Thomas Baumgart
   */
 
-class KSplitTransactionDlgDecl : public KDialog, public Ui::KSplitTransactionDlgDecl
+class KSplitTransactionDlgDecl : public QDialog, public Ui::KSplitTransactionDlgDecl
 {
 public:
-  KSplitTransactionDlgDecl(QWidget *parent) : KDialog(parent) {
+  KSplitTransactionDlgDecl(QWidget *parent) : QDialog(parent), m_buttonBox(0) {
     setupUi(this);
   }
+
+protected:
+  QDialogButtonBox *m_buttonBox;
 };
+
 class KSplitTransactionDlg : public KSplitTransactionDlgDecl
 {
   Q_OBJECT
