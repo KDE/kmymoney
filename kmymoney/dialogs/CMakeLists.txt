@@ -81,15 +81,13 @@ add_custom_target(generate_dialogs_ui_srcs DEPENDS ${dialogs_ui_srcs})
 
 kde4_add_library(dialogs STATIC ${libdialogs_a_SOURCES} ${dialogs_ui_srcs})
 
-# @TODO: need kmm_mymoney for online banking, is this ok?
-target_link_libraries(dialogs
+# we rely on the widgets to be generated
+add_dependencies(dialogs widgets)
+target_link_libraries(dialogs LINK_PUBLIC
+  kmm_widgets
   kmm_mymoney
   onlinetask_interfaces
 )
-
-# we rely on the widgets to be generated
-add_dependencies(dialogs widgets)
-target_link_libraries(dialogs LINK_PUBLIC kmm_widgets)
 
 
 ########### install files ###############
