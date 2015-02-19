@@ -48,7 +48,7 @@ QVariant onlineJobMessagesModel::data(const QModelIndex& index, int role) const
       case Qt::ToolTipRole: switch (messages[index.row()].type()) {
         case onlineJobMessage::debug: return i18n("Information to find issues.");
         case onlineJobMessage::log: return i18n("Information stored for provability.");
-        case onlineJobMessage::information: return i18n("Informativ message without certain significance.");
+        case onlineJobMessage::information: return i18n("Informative message without certain significance.");
         case onlineJobMessage::warning: return i18n("Warning message.");
         case onlineJobMessage::error: return i18n("Error");
         }
