@@ -5,8 +5,7 @@ set (nationalAccountId_SCRS
   nationalaccount.cpp
 )
 
-kde4_add_library( payeeidentifier_nationalAccount
-  SHARED
+kde4_add_plugin( payeeidentifier_nationalAccount SHARED
   ${nationalAccountId_SCRS}
 )
 generate_export_header(payeeidentifier_nationalAccount BASE_NAME nationalaccount_identifier)
