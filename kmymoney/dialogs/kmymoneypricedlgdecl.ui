@@ -4,7 +4,7 @@
   <comment></comment>
   <exportmacro></exportmacro>
   <class>KMyMoneyPriceDlgDecl</class>
-  <widget class="KDialog" name="KMyMoneyPriceDlgDecl">
+  <widget class="QDialog" name="KMyMoneyPriceDlgDecl">
     <property name="geometry">
       <rect>
         <x>0</x>
@@ -146,7 +146,7 @@
   <layoutdefault spacing="6" margin="11"/>
   <customwidgets>
     <customwidget>
-     <class>KDialog</class>
+     <class>QDialog</class>
      <extends>QDialog</extends>
      <header>kdialog.h</header>
     </customwidget>

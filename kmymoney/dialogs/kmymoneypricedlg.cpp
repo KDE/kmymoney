@@ -28,6 +28,8 @@
 #include <QCheckBox>
 #include <QPushButton>
 #include <QIcon>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,6 +38,7 @@
 #include <kguiitem.h>
 #include <kmessagebox.h>
 #include <KSharedConfig>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -53,9 +56,13 @@
 KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
     KMyMoneyPriceDlgDecl(parent)
 {
-  setButtons(KDialog::Close);
-  setButtonsOrientation(Qt::Horizontal);
-  setMainWidget(m_layoutWidget);
+  QVBoxLayout *mainLayout = new QVBoxLayout;
+  setLayout(mainLayout);
+  mainLayout->addWidget(m_layoutWidget);
+  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  mainLayout->addWidget(buttonBox);
 
   // create the searchline widget
   // and insert it into the existing layout

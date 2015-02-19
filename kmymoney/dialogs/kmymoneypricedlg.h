@@ -41,10 +41,10 @@
 #include <mymoneyprice.h>
 
 
-class KMyMoneyPriceDlgDecl : public KDialog, public Ui::KMyMoneyPriceDlgDecl
+class KMyMoneyPriceDlgDecl : public QDialog, public Ui::KMyMoneyPriceDlgDecl
 {
 public:
-  KMyMoneyPriceDlgDecl(QWidget *parent) : KDialog(parent) {
+  KMyMoneyPriceDlgDecl(QWidget *parent) : QDialog(parent) {
     setupUi(this);
   }
 };
