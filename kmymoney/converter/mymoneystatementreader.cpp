@@ -33,6 +33,9 @@
 #include <QLabel>
 #include <QList>
 #include <QVBoxLayout>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -40,7 +43,9 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
-#include <kdialog.h>
+#include <KSharedConfig>
+#include <KConfigGroup>
+#include <KGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -51,7 +56,6 @@
 #include <transactioneditor.h>
 #include <investtransactioneditor.h>
 #include <kmymoneyedit.h>
-#include <KSharedConfig>
 #include "kaccountselectdlg.h"
 #include "transactionmatcher.h"
 #include "kenterscheduledlg.h"
@@ -985,13 +989,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           // We use a QPointer because the dialog may get deleted
           // during exec() if the parent of the dialog gets deleted.
           // In that case the guarded ptr will reset to 0.
-          QPointer<KDialog> dialog = new KDialog(0);
-          dialog->setCaption(i18n("Default Category for Payee"));
-          dialog->setButtons(KDialog::Yes | KDialog::No | KDialog::Cancel);
+          QPointer<QDialog> dialog = new QDialog(0);
+          dialog->setWindowTitle(i18n("Default Category for Payee"));
           dialog->setModal(true);
-          dialog->setButtonGuiItem(KDialog::Yes, KGuiItem(i18n("Save Category")));
-          dialog->setButtonGuiItem(KDialog::No, KGuiItem(i18n("No Category")));
-          dialog->setButtonGuiItem(KDialog::Cancel, KGuiItem(i18n("Abort")));
 
           QWidget *mainWidget = new QWidget;
           QVBoxLayout *topcontents = new QVBoxLayout(mainWidget);
@@ -1011,7 +1011,17 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(filterProxyModel, dialog);
           topcontents->addWidget(accountCombo);
           mainWidget->setLayout(topcontents);
-          dialog->setMainWidget(mainWidget);
+          QVBoxLayout *mainLayout = new QVBoxLayout;
+
+          QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Cancel|QDialogButtonBox::No|QDialogButtonBox::Yes);
+          dialog->setLayout(mainLayout);
+          mainLayout->addWidget(mainWidget);
+          dialog->connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
+          dialog->connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
+          mainLayout->addWidget(buttonBox);
+          KGuiItem::assign(buttonBox->button(QDialogButtonBox::Yes), KGuiItem(i18n("Save Category")));
+          KGuiItem::assign(buttonBox->button(QDialogButtonBox::No), KGuiItem(i18n("No Category")));
+          KGuiItem::assign(buttonBox->button(QDialogButtonBox::Cancel), KGuiItem(i18n("Abort")));
 
           int result = dialog->exec();
 
@@ -1021,9 +1031,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           }
           delete dialog;
           //if they hit yes instead of no, then grab setting of account combo
-          if (result == KDialog::Yes) {
+          if (result == QDialog::Accepted) {
             payee.setDefaultAccountId(accountId);
-          } else if (result != KDialog::No) {
+          } else if (result != QDialog::Rejected) {
             //add cancel button? and throw exception like below
             throw MYMONEYEXCEPTION("USERABORT");
           }
