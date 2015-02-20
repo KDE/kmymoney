@@ -1,6 +1,6 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager for KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright (C) 2014-2015 Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,10 @@
 
 #include "onlinejobpluginmockup.h"
 
-#include <mymoneyfile.h>
-#include <onlinejobadministration.h>
+#include <QDebug>
+
+#include "mymoneyfile.h"
+#include "onlinejobadministration.h"
 
 #include "germancredittransfersettingsmockup.h"
 
@@ -88,5 +90,7 @@ IonlineTaskSettings::ptr onlineJobPluginMockup::settings(QString accountId, QStr
 
 void onlineJobPluginMockup::sendOnlineJob(QList< onlineJob >& jobs)
 {
-  Q_UNUSED(jobs);
+  foreach(const onlineJob& job, jobs) {
+    qDebug() << "Pretend to send: " << job.taskIid() << job.id();
+  }
 }

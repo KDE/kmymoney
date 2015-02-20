@@ -68,6 +68,7 @@ public:
   {
     return true;
   }
+
   virtual bool checkPurposeCharset(const QString&) const
   {
     return true;
@@ -75,7 +76,7 @@ public:
 
   virtual QString allowedChars() const
   {
-    return QLatin1String("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\"'_-{}()[]~\\/[^!?+<>=&:@");
+    return QLatin1String("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\"'_-{}()[]~\\/^!?+<>=&:@., ");
   }
 
   virtual int payeeNameMinLength() const
