@@ -37,7 +37,6 @@
 // KDE Includes
 
 #ifdef KF5Gpgmepp_FOUND
-#include <gpg-error.h>
 #include <gpgme++/context.h>
 #include <gpgme++/encryptionresult.h>
 #include <gpgme++/decryptionresult.h>
