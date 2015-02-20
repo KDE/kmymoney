@@ -2183,7 +2183,7 @@ void KMyMoneyApp::slotQifImport(void)
 
       connect(d->m_qifReader, SIGNAL(importFinished()), this, SLOT(slotQifImportFinished()));
 
-      d->m_qifReader->setURL(dlg->filename());
+      d->m_qifReader->setURL(dlg->file());
 
       d->m_qifReader->setProfile(dlg->profile());
       d->m_qifReader->setCategoryMapping(dlg->m_typeComboBox->currentIndex() == 0);

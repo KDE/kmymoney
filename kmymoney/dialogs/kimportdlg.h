@@ -74,8 +74,8 @@ public:
 
   /**
     */
-  const QString filename(void) const {
-    return m_qlineeditFile->text();
+  const QUrl file(void) const {
+    return QUrl::fromUserInput(m_qlineeditFile->text());
   };
 
   /**
