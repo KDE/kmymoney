@@ -102,6 +102,7 @@
     <screenshot type="default">
       <caption>KMyMoney has a welcome page to help new users get off to a good start</caption>
       <caption xml:lang="ca">El KMyMoney disposa d'una pàgina de benvinguda per ajudar els nous usuaris a tenir un bon començament.</caption>
+      <caption xml:lang="da">KMyMoney har en velkomstside til at hjælpe nye brugere godt i gang</caption>
       <caption xml:lang="de">KMyMoney hat eine Willkommensseite, um neue Anwender zu Anfang zu unterstützten</caption>
       <caption xml:lang="en-GB">KMyMoney has a welcome page to help new users get off to a good start</caption>
       <caption xml:lang="es">KMyMoney dispone de una página de bienvenida para ayudar a los nuevos usuarios a tener un buen comienzo.</caption>
@@ -123,6 +124,7 @@
       <caption>The financial summary gives you an overview of your finances</caption>
       <caption xml:lang="ar">يعطيك ملخّص الماليّة لمحة عن ماليّتك</caption>
       <caption xml:lang="ca">El resum financer ofereix una visió general de les vostres finances.</caption>
+      <caption xml:lang="da">Økonomioversigten giver dig en oversigt over din økonomi</caption>
       <caption xml:lang="en-GB">The financial summary gives you an overview of your finances</caption>
       <caption xml:lang="es">El resumen financiero le ofrece una descripción general de sus finanzas</caption>
       <caption xml:lang="fi">Taloustietojen yhteenveto antaa yleiskuvan taloustilanteestasi</caption>
@@ -142,6 +144,7 @@
     <screenshot>
       <caption>In this view your accounts are organized, viewed, and managed by the institutions they are held at</caption>
       <caption xml:lang="ca">En aquesta vista s'organitzen, visualitzen i administren els vostres comptes per les institucions en les que es duen a terme.</caption>
+      <caption xml:lang="da">I denne visning er dine regnskaber organiseret, fremvist og håndteret af de institutioner de hører til</caption>
       <caption xml:lang="en-GB">In this view your accounts are organised, viewed, and managed by the institutions they are held at</caption>
       <caption xml:lang="es">En esta vista sus cuentas aparecen organizadas, visibles y gestionadas por las instituciones en las que se llevan a cabo.</caption>
       <caption xml:lang="fi">Tässä näkymässä tilit järjestellään, katsotaan ja hallitaan niihin liittyvien rahalaitosten kautta</caption>
