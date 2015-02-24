@@ -20,7 +20,7 @@
 #define IBANBICITEMEDIT_H
 
 #include <QWidget>
-#include "payeeidentifier_iban_bic_widgets_export.h"
+#include "payeeidentifier_iban_bic_delegates_export.h"
 #include <payeeidentifier/payeeidentifier.h>
 
 namespace Ui
@@ -28,7 +28,7 @@ namespace Ui
 class ibanBicItemEdit;
 }
 
-class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT ibanBicItemEdit : public QWidget
+class PAYEEIDENTIFIER_IBAN_BIC_DELEGATES_EXPORT ibanBicItemEdit : public QWidget
 {
   Q_OBJECT
   Q_PROPERTY(payeeIdentifier identifier READ identifier WRITE setIdentifier NOTIFY identifierChanged STORED true)

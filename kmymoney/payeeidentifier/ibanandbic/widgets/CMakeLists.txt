@@ -57,6 +57,7 @@ target_link_libraries( payeeidentifier_iban_bic_delegates
   Qt5::Core
   KF5::KDELibs4Support
 )
+generate_export_header( payeeidentifier_iban_bic_delegates )
 
 install(TARGETS payeeidentifier_iban_bic_delegates
         DESTINATION ${PLUGIN_INSTALL_DIR})
