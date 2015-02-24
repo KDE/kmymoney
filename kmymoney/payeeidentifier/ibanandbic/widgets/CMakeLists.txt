@@ -58,6 +58,7 @@ target_link_libraries( payeeidentifier_iban_bic_delegates
   ${QT_QTCORE_LIBRARY}
   ${KDE4_KDEUI_LIBS}
 )
+generate_export_header( payeeidentifier_iban_bic_delegates )
 
 install(TARGETS payeeidentifier_iban_bic_delegates
         DESTINATION ${PLUGIN_INSTALL_DIR})
