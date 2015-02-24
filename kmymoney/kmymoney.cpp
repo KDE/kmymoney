@@ -223,7 +223,9 @@ public:
       m_additionalKeyLabel(0),
       m_additionalKeyButton(0),
       m_recentFiles(0),
+#ifdef KF5Holidays_FOUND
       m_holidayRegion(0),
+#endif
       m_applicationIsReady(true)
   {
     // since the days of the week are from 1 to 7,
