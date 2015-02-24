@@ -177,6 +177,11 @@ public:
   bool canSendCreditTransfer();
 
   /**
+   * @brief Are all preconditions set to edit the given job?
+   */
+  bool canEditOnlineJob(const onlineJob& job);
+
+  /**
    * @brief See if a online task has a specified base
    *
    * This is usable if you want to see if e.g. taskIid is

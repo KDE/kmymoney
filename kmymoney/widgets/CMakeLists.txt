@@ -34,7 +34,10 @@ set(kmm_widgets_sources
   onlinejobmessagesview.cpp
   )
 
-kde4_add_ui_files(kmm_widgets_sources kmymoneyvalidationfeedback.ui)
+kde4_add_ui_files(kmm_widgets_sources
+  kmymoneyvalidationfeedback.ui
+  onlinejobmessagesview.ui
+)
 
 add_library(kmm_widgets SHARED ${kmm_widgets_sources})
 target_link_libraries(kmm_widgets PUBLIC KF5::ItemViews KF5::I18n KF5::KDELibs4Support Qt5::Gui Qt5::Sql Qt5::Core Alkimia::alkimia kmm_config kmm_mymoney)
@@ -146,7 +149,6 @@ set(libwidgets_a_UI
   kschedulebriefwidget.ui kmymoneyreportcontroldecl.ui
   kmymoneyreportconfigtab1decl.ui kmymoneyreportconfigtab2decl.ui
   kmymoneyreportconfigtab3decl.ui kmymoneyreportconfigtabchartdecl.ui
-  onlinejobmessagesview.ui
   )
 
 # using uic on the above UI files DEPENDS on libkmymoney.so. If uic

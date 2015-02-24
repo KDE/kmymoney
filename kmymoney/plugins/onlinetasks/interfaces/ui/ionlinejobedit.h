@@ -29,7 +29,7 @@
  *
  * @since 4.8.0
  */
-class KMM_MYMONEY_EXPORT IonlineJobEdit : public QWidget
+class IonlineJobEdit : public QWidget
 {
   Q_OBJECT
 

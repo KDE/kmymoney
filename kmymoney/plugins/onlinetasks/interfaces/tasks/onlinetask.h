@@ -106,7 +106,7 @@ friend class onlineJobAdministration
  *
  * @see onlineJob
  */
-class KMM_MYMONEY_EXPORT onlineTask : public databaseStoreableObject
+class onlineTask : public databaseStoreableObject
 {
 public:
   ONLINETASK_META(onlineTask, "org.kmymoney.onlineTask");

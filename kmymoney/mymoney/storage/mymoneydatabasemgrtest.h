@@ -34,8 +34,10 @@ protected:
   MyMoneyDatabaseMgr *m;
   bool m_dbAttached;
   bool m_canOpen;
+  bool m_haveEmptyDataBase;
   QUrl m_url;
   QTemporaryFile m_file;
+  QTemporaryFile m_emptyFile;
 
 private:
   QElapsedTimer testStepTimer;
@@ -45,7 +47,9 @@ public:
   MyMoneyDatabaseMgrTest();
 
 private:
+  void setupUrl(const QString& fname);
   void testEquality(const MyMoneyDatabaseMgr* t);
+  void copyDatabaseFile(QFile& src, QFile& dest);
 
 private slots:
   void init();

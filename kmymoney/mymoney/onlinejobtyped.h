@@ -36,7 +36,7 @@
  * onlineJobTyped::badCast or onlineJobTyped::emptyTask if they fail.
  */
 template<class T>
-class KMM_MYMONEY_EXPORT onlineJobTyped : public onlineJob
+class onlineJobTyped : public onlineJob
 {
     KMM_MYMONEY_UNIT_TESTABLE
 public:

@@ -19,6 +19,7 @@
 #include "konlinejoboutbox.h"
 #include "ui_konlinejoboutbox.h"
 
+#include <KLocalizedString>
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <KMessageBox>
@@ -69,10 +70,50 @@ KOnlineJobOutbox::~KOnlineJobOutbox()
 
 void KOnlineJobOutbox::updateButtonState() const
 {
-  const int selectedItems = ui->m_onlineJobView->selectionModel()->selectedRows().count();
+  const QModelIndexList indexes = ui->m_onlineJobView->selectionModel()->selectedRows();
+  const int selectedItems = indexes.count();
+
+  // Send button
+  //! @bug This is not correct. KMyMoney always tries to send all jobs.
   ui->m_buttonSend->setEnabled(selectedItems > 0);
-  ui->m_buttonEdit->setEnabled(selectedItems == 1);
-  ui->m_buttonRemove->setEnabled(selectedItems > 0);
+
+  // Edit button/action
+  bool editable = true;
+  QString tooltip;
+
+  if (selectedItems == 1) {
+    const onlineJob job = ui->m_onlineJobView->model()->data(indexes.first(), onlineJobModel::OnlineJobRole).value<onlineJob>();
+
+    if (!job.isEditable()) {
+      editable = false;
+      if (job.sendDate().isValid())
+        tooltip = i18n("This job cannot be edited anymore because is was sent already.");
+      else if (job.isLocked())
+        tooltip = i18n("Job is being processed at the moment.");
+      else
+        Q_ASSERT(false);
+    } else if(!onlineJobAdministration::instance()->canEditOnlineJob(job)) {
+      editable = false;
+      tooltip = i18n("The plugin to edit this job is not available.");
+    }
+  } else {
+    editable = false;
+    tooltip = i18n("You must select a single job for editing.");
+  }
+
+  QAction *const onlinejob_edit = kmymoney->action("onlinejob_edit");
+  Q_CHECK_PTR(onlinejob_edit);
+  onlinejob_edit->setEnabled(editable);
+  onlinejob_edit->setToolTip(tooltip);
+
+  ui->m_buttonEdit->setEnabled(editable);
+  ui->m_buttonEdit->setToolTip(tooltip);
+
+  // Delete button/action
+  QAction *const onlinejob_delete = kmymoney->action("onlinejob_delete");
+  Q_CHECK_PTR(onlinejob_delete);
+  onlinejob_delete->setEnabled(selectedItems > 0);
+  ui->m_buttonRemove->setEnabled(onlinejob_delete->isEnabled());
 }
 
 void KOnlineJobOutbox::updateNewCreditTransferButton()

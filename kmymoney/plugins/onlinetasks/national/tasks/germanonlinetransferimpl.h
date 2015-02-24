@@ -24,7 +24,6 @@
 
 #include <QtCore/QSharedPointer>
 
-#include "kmm_mymoney_export.h"
 #include "germanonlinetransfer.h"
 #include "../nationalstorageplugin.h"
 
