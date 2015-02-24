@@ -24,7 +24,6 @@
 
 #include <QtCore/QSharedPointer>
 
-#include "kmm_mymoney_export.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 #include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
@@ -36,7 +35,7 @@
  *
  * Right now this is a mix of national transfer and national german transfer
  */
-class KMM_MYMONEY_EXPORT germanOnlineTransfer : public onlineTask, public creditTransfer
+class germanOnlineTransfer : public onlineTask, public creditTransfer
 {
   KMM_MYMONEY_UNIT_TESTABLE
   Q_INTERFACES(creditTransfer);

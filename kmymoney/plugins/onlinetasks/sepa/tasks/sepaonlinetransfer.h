@@ -32,7 +32,7 @@
 /**
  * @brief SEPA Credit Transfer
  */
-class KMM_MYMONEY_EXPORT sepaOnlineTransfer : public onlineTask, public creditTransfer
+class sepaOnlineTransfer : public onlineTask, public creditTransfer
 {
   Q_INTERFACES(creditTransfer);
 

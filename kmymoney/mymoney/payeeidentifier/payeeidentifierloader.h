@@ -19,12 +19,10 @@
 #ifndef PAYEEIDENTIFIERLOADER_H
 #define PAYEEIDENTIFIERLOADER_H
 
-#include "mymoney/kmm_mymoney_export.h"
+#include "payeeidentifier.h"
 
 #include <QHash>
 #include <QDomElement>
-
-#include "payeeidentifier/payeeidentifier.h"
 
 class QAbstractItemDelegate;
 
@@ -32,7 +30,7 @@ class QAbstractItemDelegate;
  *
  * @todo Load delegates dynamically
  */
-class KMM_MYMONEY_EXPORT payeeIdentifierLoader
+class payeeIdentifierLoader
 {
 public:
   payeeIdentifierLoader();

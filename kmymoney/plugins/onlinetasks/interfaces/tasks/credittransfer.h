@@ -32,7 +32,7 @@ class QValidator;
  * This class is used by KMyMoney to create a MyMoneySchedule
  * after a task was sent to the bank.
  */
-class KMM_MYMONEY_EXPORT creditTransfer
+class creditTransfer
 {
 
 public:
