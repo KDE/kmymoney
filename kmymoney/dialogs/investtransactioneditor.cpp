@@ -77,6 +77,13 @@ public:
     return m_parent->haveWidget(name);
   }
 
+  void hideCategory(const QString& name) {
+    if (KMyMoneyCategory* cat = dynamic_cast<KMyMoneyCategory*>(haveWidget(name))) {
+      cat->hide();
+      cat->splitButton()->hide();
+    }
+  }
+
   InvestTransactionEditor* m_parent;
   Activity*                m_activity;
   MyMoneyAccount           m_phonyAccount;
@@ -858,17 +865,9 @@ void InvestTransactionEditor::slotUpdateActivity(MyMoneySplit::investTransaction
   // create new activity object if required
   activityFactory(activity);
 
-  KMyMoneyCategory* cat;
-
-  // hide all dynamic widgets (make sure to use the parentWidget for the
-  // category widgets)
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
-  cat->hide();
-  cat->splitButton()->hide();
-
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
-  cat->hide();
-  cat->splitButton()->hide();
+  // hide all dynamic widgets
+  d->hideCategory("interest-account");
+  d->hideCategory("fee-account");
 
   QStringList dynwidgets;
   dynwidgets << "total-label" << "asset-label" << "fee-label" << "fee-amount-label" << "interest-label" << "interest-amount-label" << "price-label" << "shares-label";
@@ -894,17 +893,19 @@ void InvestTransactionEditor::slotUpdateActivity(MyMoneySplit::investTransaction
   d->m_activity->showWidgets();
   d->m_activity->preloadAssetAccount();
 
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
-  if (cat->parentWidget()->isVisible())
-    slotUpdateInterestVisibility(cat->currentText());
-  else
-    cat->splitButton()->hide();
+  if (KMyMoneyCategory* cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"))) {
+    if (cat->parentWidget()->isVisible())
+      slotUpdateInterestVisibility(cat->currentText());
+    else
+      cat->splitButton()->hide();
+  }
 
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
-  if (cat->parentWidget()->isVisible())
-    slotUpdateFeeVisibility(cat->currentText());
-  else
-    cat->splitButton()->hide();
+  if (KMyMoneyCategory* cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"))) {
+    if (cat->parentWidget()->isVisible())
+      slotUpdateFeeVisibility(cat->currentText());
+    else
+      cat->splitButton()->hide();
+  }
 }
 
 InvestTransactionEditor::priceModeE InvestTransactionEditor::priceMode(void) const
