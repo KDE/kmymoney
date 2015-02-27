@@ -1789,8 +1789,8 @@ void MyMoneySeqAccessMgrTest::testAddOnlineJob()
   // Add a onlineJob
   onlineJob job(new dummyTask());
 
-  m->addOnlineJob( job );
-  QCOMPARE( job.id(), QString("O000001"));
+  m->addOnlineJob(job);
+  QCOMPARE(job.id(), QString("O000001"));
 
   m->commitTransaction();
   m->startTransaction();

@@ -23,5 +23,5 @@
 // TODO: port KF5
 /*K_PLUGIN_FACTORY(ibanAndBicPidDelegatesFactory,
                  registerPlugin<ibanBicItemDelegate>("ibanBicDelegate");
-)
+                )
 K_EXPORT_PLUGIN(ibanAndBicPidDelegatesFactory("payeeidentifier_iban_bic_delegates"))*/

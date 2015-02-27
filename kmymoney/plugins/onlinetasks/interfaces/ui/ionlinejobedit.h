@@ -35,9 +35,8 @@ class IonlineJobEdit : public QWidget
 
 public:
   explicit IonlineJobEdit(QWidget* parent = 0, QVariantList args = QVariantList())
-    : QWidget(parent)
-  {
-        Q_UNUSED(args);
+      : QWidget(parent) {
+    Q_UNUSED(args);
   }
 
   /**
@@ -74,26 +73,26 @@ public slots:
    *
    * @return false if setting was not possible
    */
-  virtual bool setOnlineJob( const onlineJob& ) = 0;
-  virtual void setOriginAccount( const QString& ) = 0;
+  virtual bool setOnlineJob(const onlineJob&) = 0;
+  virtual void setOriginAccount(const QString&) = 0;
 
 signals:
   /**
    * @brief Emitted if a job which transfers money changed it's value
    */
-  void transferValueChanged( MyMoneyMoney );
+  void transferValueChanged(MyMoneyMoney);
 
   /**
    * @brief Emitted if a job got valid or invalid
    *
    * @param valid status of onlineJob.isValid()
    */
-  void validityChanged( bool valid );
+  void validityChanged(bool valid);
 
   /**
    * @brief Emitted if widget was set or unset read only
    */
-  void readOnlyChanged( bool );
+  void readOnlyChanged(bool);
 
 };
 

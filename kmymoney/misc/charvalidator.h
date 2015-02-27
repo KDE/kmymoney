@@ -23,13 +23,13 @@
 
 class charValidator : public QValidator
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    charValidator(QObject* parent = 0, const QString& characters = QString());
-    virtual QValidator::State validate(QString& , int& ) const;
+  charValidator(QObject* parent = 0, const QString& characters = QString());
+  virtual QValidator::State validate(QString& , int&) const;
 
-    void setAllowedCharacters(const QString&);
+  void setAllowedCharacters(const QString&);
 
 private:
   QString m_allowedCharacters;

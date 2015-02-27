@@ -54,14 +54,14 @@ public:
    *
    * @return A QStringList with supported onlineTask::name()s as values.
    */
-  virtual QStringList availableJobs( QString accountId ) = 0;
+  virtual QStringList availableJobs(QString accountId) = 0;
 
   /**
    * @brief Get settings for onlineTask
    *
    * @see onlineTask::settings
    */
-  virtual IonlineTaskSettings::ptr settings( QString accountId, QString taskName ) = 0;
+  virtual IonlineTaskSettings::ptr settings(QString accountId, QString taskName) = 0;
 
   /**
    * @brief Send onlineJobs to bank
@@ -73,21 +73,21 @@ public:
 
 
 signals:
-/**
- * @brief Emit to make onlineJob available
- *
- * In case a onlineJob got available during runtime, emit one of these signals.
- */
-  void jobAvailable( QString accountId, QString );
-  void jobAvailable( QString accountId, QStringList );
-  void jobUnavailable( QString accountId, QString );
+  /**
+   * @brief Emit to make onlineJob available
+   *
+   * In case a onlineJob got available during runtime, emit one of these signals.
+   */
+  void jobAvailable(QString accountId, QString);
+  void jobAvailable(QString accountId, QStringList);
+  void jobUnavailable(QString accountId, QString);
   //void jobUnavailable( QString accountId );
 };
 
 class KMM_PLUGIN_EXPORT onlineTaskFactory
 {
 public:
-  virtual onlineTask* createOnlineTask( const QString& taskId ) const = 0;
+  virtual onlineTask* createOnlineTask(const QString& taskId) const = 0;
 
   // Make g++ happy
   virtual ~onlineTaskFactory() {}

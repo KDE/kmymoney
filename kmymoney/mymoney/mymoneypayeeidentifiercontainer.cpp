@@ -23,7 +23,7 @@
 #include "payeeidentifier/payeeidentifierloader.h"
 
 MyMoneyPayeeIdentifierContainer::MyMoneyPayeeIdentifierContainer()
-  : m_payeeIdentifiers( QList<payeeIdentifier>() )
+    : m_payeeIdentifiers(QList<payeeIdentifier>())
 {
 }
 
@@ -61,8 +61,8 @@ void MyMoneyPayeeIdentifierContainer::removePayeeIdentifier(const int index)
 void MyMoneyPayeeIdentifierContainer::modifyPayeeIdentifier(const payeeIdentifier& ident)
 {
   QList<payeeIdentifier>::Iterator end = m_payeeIdentifiers.end();
-  for( QList<payeeIdentifier>::Iterator iter = m_payeeIdentifiers.begin(); iter != end; ++iter) {
-    if ( iter->id() == ident.id() ) {
+  for (QList<payeeIdentifier>::Iterator iter = m_payeeIdentifiers.begin(); iter != end; ++iter) {
+    if (iter->id() == ident.id()) {
       *iter = ident;
       return;
     }
@@ -87,20 +87,20 @@ void MyMoneyPayeeIdentifierContainer::loadXML(QDomElement node)
   const uint identifierNodesLength = identifierNodes.length();
   for (uint i = 0; i < identifierNodesLength; ++i) {
     const QDomElement element = identifierNodes.item(i).toElement();
-    payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifierFromXML( element );
-    if ( ident.isNull() ) {
+    payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifierFromXML(element);
+    if (ident.isNull()) {
       qWarning() << "Could not load payee identifier" << element.attribute("type", "*no pidid set*");
       continue;
     }
-    addPayeeIdentifier( ident );
+    addPayeeIdentifier(ident);
   }
 }
 
 void MyMoneyPayeeIdentifierContainer::writeXML(QDomDocument document, QDomElement parent) const
 {
   // Add payee identifiers
-  foreach( const payeeIdentifier& ident, m_payeeIdentifiers ) {
-    if ( !ident.isNull() ) {
+  foreach (const payeeIdentifier& ident, m_payeeIdentifiers) {
+    if (!ident.isNull()) {
       ident.writeXML(document, parent);
     }
   }

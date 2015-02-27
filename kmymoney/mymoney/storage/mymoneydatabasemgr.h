@@ -209,10 +209,10 @@ public:
 
   /** @todo implement all onlineJob related functions @{ */
   void modifyOnlineJob(const onlineJob& job);
-  void addOnlineJob( onlineJob& job );
+  void addOnlineJob(onlineJob& job);
   const onlineJob getOnlineJob(const QString &jobId) const;
   const QList<onlineJob> onlineJobList() const;
-  void removeOnlineJob( const onlineJob& );
+  void removeOnlineJob(const onlineJob&);
   /** @} */
 
   /**

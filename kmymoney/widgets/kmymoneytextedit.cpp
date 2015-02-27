@@ -24,8 +24,8 @@
 /* The Higligther */
 
 KMyMoneyTextEditHighlighter::KMyMoneyTextEditHighlighter(QTextEdit * parent)
-  : Highlighter(parent),
-    m_allowedChars( QString("") ),
+    : Highlighter(parent),
+    m_allowedChars(QString("")),
     m_maxLines(-1),
     m_maxLineLength(-1),
     m_maxLength(-1)
@@ -33,25 +33,25 @@ KMyMoneyTextEditHighlighter::KMyMoneyTextEditHighlighter(QTextEdit * parent)
 
 }
 
-void KMyMoneyTextEditHighlighter::setAllowedChars( const QString& chars )
+void KMyMoneyTextEditHighlighter::setAllowedChars(const QString& chars)
 {
   m_allowedChars = chars;
   rehighlight();
 }
 
-void KMyMoneyTextEditHighlighter::setMaxLength( const int& length )
+void KMyMoneyTextEditHighlighter::setMaxLength(const int& length)
 {
   m_maxLength = length;
   rehighlight();
 }
 
-void KMyMoneyTextEditHighlighter::setMaxLines( const int& lines )
+void KMyMoneyTextEditHighlighter::setMaxLines(const int& lines)
 {
   m_maxLines = lines;
   rehighlight();
 }
 
-void KMyMoneyTextEditHighlighter::setMaxLineLength( const int& length )
+void KMyMoneyTextEditHighlighter::setMaxLineLength(const int& length)
 {
   m_maxLineLength = length;
   rehighlight();
@@ -74,30 +74,30 @@ void KMyMoneyTextEditHighlighter::highlightBlock(const QString& text)
 
   // Check used characters
   const int length = text.length();
-  for(int i = 0; i < length; ++i) {
-    if ( !m_allowedChars.contains( text.at(i) ) ) {
+  for (int i = 0; i < length; ++i) {
+    if (!m_allowedChars.contains(text.at(i))) {
       setFormat(i, 1, invalidFormat);
     }
   }
 
-  if ( m_maxLines != -1 ) {
+  if (m_maxLines != -1) {
     //! @todo Is using QTextBlock::blockNumber() as line number dangerous?
-    if ( currentBlock().blockNumber() >= m_maxLines ) {
+    if (currentBlock().blockNumber() >= m_maxLines) {
       setFormat(0, length, invalidFormat);
       return;
     }
   }
 
-  if (m_maxLength != -1 ) {
+  if (m_maxLength != -1) {
     const int blockPosition = currentBlock().position();
-    if ( m_maxLength < (length+blockPosition) ) {
-      setFormat(m_maxLength, length-m_maxLength-blockPosition, invalidFormat );
+    if (m_maxLength < (length + blockPosition)) {
+      setFormat(m_maxLength, length - m_maxLength - blockPosition, invalidFormat);
       return;
     }
   }
 
   if (m_maxLineLength != -1 && length >= m_maxLineLength) {
-    setFormat(m_maxLineLength, length-m_maxLineLength, invalidFormat);
+    setFormat(m_maxLineLength, length - m_maxLineLength, invalidFormat);
     return;
   }
 }
@@ -105,36 +105,36 @@ void KMyMoneyTextEditHighlighter::highlightBlock(const QString& text)
 /* KMyMoneyTextEdit */
 
 KMyMoneyTextEdit::KMyMoneyTextEdit(QWidget* parent)
-  : KTextEdit(parent),
-  m_maxLength(-1),
-  m_maxLineLength(-1),
-  m_maxLines(-1),
-  m_allowedChars( QString("") ),
-  m_highligther( 0 )
+    : KTextEdit(parent),
+    m_maxLength(-1),
+    m_maxLineLength(-1),
+    m_maxLines(-1),
+    m_allowedChars(QString("")),
+    m_highligther(0)
 {
   setWordWrapMode(QTextOption::ManualWrap);
-  m_highligther = new KMyMoneyTextEditHighlighter( this );
+  m_highligther = new KMyMoneyTextEditHighlighter(this);
 }
 
 bool KMyMoneyTextEdit::isEventAllowed(QKeyEvent* e) const
 {
   const QString text = e->text();
-  if (!text.isEmpty() ) {
-    if ( text.at(0).isPrint() ) {
+  if (!text.isEmpty()) {
+    if (text.at(0).isPrint()) {
       if (!m_allowedChars.contains(text))
         return false;
 
       // Do not check max lengths etc if something is replaced
-      if ( textCursor().hasSelection() )
+      if (textCursor().hasSelection())
         return true;
 
       const QString plainText = toPlainText();
 
-      if ( m_maxLength != -1 && plainText.length() >= m_maxLength )
+      if (m_maxLength != -1 && plainText.length() >= m_maxLength)
         return false;
-      if ( m_maxLineLength != -1 && textCursor().block().length()-1 >= m_maxLineLength )
+      if (m_maxLineLength != -1 && textCursor().block().length() - 1 >= m_maxLineLength)
         return false;
-    } else if ( m_maxLines != -1 && text.at(0) == '\r' && toPlainText().count('\n')+1 >= m_maxLines) {
+    } else if (m_maxLines != -1 && text.at(0) == '\r' && toPlainText().count('\n') + 1 >= m_maxLines) {
       // Does this work on non-linux OSes as well?
       return false;
     }
@@ -146,16 +146,16 @@ bool KMyMoneyTextEdit::isValid() const
 {
   const QString text = toPlainText();
 
-  if ( m_maxLength != -1 && text.length() >= m_maxLength )
+  if (m_maxLength != -1 && text.length() >= m_maxLength)
     return false;
 
   const QStringList lines = text.split('\n');
 
-  if ( m_maxLines != -1 && lines.count() >= m_maxLines ) {
+  if (m_maxLines != -1 && lines.count() >= m_maxLines) {
     return false;
   }
 
-  if ( m_maxLineLength != -1 ) {
+  if (m_maxLineLength != -1) {
     foreach (QString line, lines) {
       if (line.length() > m_maxLineLength)
         return false;
@@ -190,7 +190,7 @@ int KMyMoneyTextEdit::maxLength() const
 void KMyMoneyTextEdit::setMaxLength(const int& maxLength)
 {
   m_maxLength = maxLength;
-  m_highligther->setMaxLength( m_maxLength );
+  m_highligther->setMaxLength(m_maxLength);
 }
 
 int KMyMoneyTextEdit::maxLineLength() const
@@ -201,7 +201,7 @@ int KMyMoneyTextEdit::maxLineLength() const
 void KMyMoneyTextEdit::setMaxLineLength(const int& maxLineLength)
 {
   m_maxLineLength = maxLineLength;
-  m_highligther->setMaxLineLength( maxLineLength );
+  m_highligther->setMaxLineLength(maxLineLength);
 }
 
 int KMyMoneyTextEdit::maxLines() const
@@ -223,5 +223,5 @@ QString KMyMoneyTextEdit::allowedChars() const
 void KMyMoneyTextEdit::setAllowedChars(const QString& allowedChars)
 {
   m_allowedChars = allowedChars;
-  m_highligther->setAllowedChars( allowedChars );
+  m_highligther->setAllowedChars(allowedChars);
 }

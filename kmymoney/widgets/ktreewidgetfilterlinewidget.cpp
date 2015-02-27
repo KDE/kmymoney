@@ -24,7 +24,7 @@
 #include <klocalizedstring.h>
 
 KTreeWidgetFilterLineWidget::KTreeWidgetFilterLineWidget(QWidget* parent, QTreeWidget* treeWidget)
-  : KTreeWidgetSearchLineWidget(parent, treeWidget)
+    : KTreeWidgetSearchLineWidget(parent, treeWidget)
 {
 }
 

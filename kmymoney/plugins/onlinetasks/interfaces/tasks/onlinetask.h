@@ -67,16 +67,16 @@ class onlineJob;
  * Activate the meta system using ONLINETASK_META() in your classes public section.
  */
 #define ONLINETASK_META(onlineTaskClass, IID) \
-/** @brief Returns the iid of onlineTask type (part of @ref onlineTaskMeta) */ \
-static const QString& name() { \
-  static const QString _name = IID; \
-  return _name; \
-} \
-/** @brief Returns the iid of onlineTask type (part of @ref onlineTaskMeta) */ \
-virtual QString taskName() const { \
-  return onlineTaskClass::name(); \
-} \
-friend class onlineJobAdministration
+  /** @brief Returns the iid of onlineTask type (part of @ref onlineTaskMeta) */ \
+  static const QString& name() { \
+    static const QString _name = IID; \
+    return _name; \
+  } \
+  /** @brief Returns the iid of onlineTask type (part of @ref onlineTaskMeta) */ \
+  virtual QString taskName() const { \
+    return onlineTaskClass::name(); \
+  } \
+  friend class onlineJobAdministration
 
 /**
  * @brief Base class for tasks which can be proceeded by online banking plugins
@@ -125,7 +125,7 @@ public:
   virtual QString jobTypeName() const = 0;
 
 protected:
-  onlineTask( const onlineTask& other );
+  onlineTask(const onlineTask& other);
 
   /**
    * @brief Copy this instance including inherited information
@@ -156,7 +156,7 @@ protected:
    *
    * Equivalent to createFromXml()
    */
-  virtual onlineTask* createFromSqlDatabase( QSqlDatabase connection, const QString& onlineJobId ) const = 0;
+  virtual onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const = 0;
 
   /**
    * @brief Account this job is related to

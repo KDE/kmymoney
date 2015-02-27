@@ -37,9 +37,9 @@
 K_EXPORT_PLUGIN(NationalOnlineTaskFactory("nationalOnlineTasksLoader"))*/
 
 nationalOnlineTasksLoader::nationalOnlineTasksLoader(QObject* parent, const QVariantList&)
-: KMyMoneyPlugin::Plugin::Plugin(parent, "nationalOnlineTasksLoader")
+    : KMyMoneyPlugin::Plugin::Plugin(parent, "nationalOnlineTasksLoader")
 {
-  onlineJobAdministration::instance()->registerOnlineTask( new germanOnlineTransferImpl );
-  onlineJobAdministration::instance()->registerOnlineTaskConverter( new taskConverterSepaToGerman );
-  onlineJobAdministration::instance()->registerOnlineTaskConverter( new taskConverterGermanToSepa);
+  onlineJobAdministration::instance()->registerOnlineTask(new germanOnlineTransferImpl);
+  onlineJobAdministration::instance()->registerOnlineTaskConverter(new taskConverterSepaToGerman);
+  onlineJobAdministration::instance()->registerOnlineTaskConverter(new taskConverterGermanToSepa);
 }

@@ -26,7 +26,7 @@
 
 namespace Ui
 {
-  class KPayeeIdentifierView;
+class KPayeeIdentifierView;
 };
 
 class KPayeeIdentifierView : public QWidget
@@ -41,7 +41,7 @@ signals:
   void dataChanged();
 
 public slots:
-  void setSource( MyMoneyPayeeIdentifierContainer data );
+  void setSource(MyMoneyPayeeIdentifierContainer data);
 
 private slots:
   void removeSelected();

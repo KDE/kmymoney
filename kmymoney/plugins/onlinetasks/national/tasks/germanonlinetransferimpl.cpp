@@ -30,44 +30,80 @@ class germanOnlineTransferSettingsFallback : public germanOnlineTransfer::settin
 {
 public:
   // Limits getter
-  virtual int purposeMaxLines() const { return 0; }
-  virtual int purposeLineLength() const { return 0; }
-  virtual int purposeMinLength() const { return 0; }
+  virtual int purposeMaxLines() const {
+    return 0;
+  }
+  virtual int purposeLineLength() const {
+    return 0;
+  }
+  virtual int purposeMinLength() const {
+    return 0;
+  }
 
-  virtual int recipientNameLineLength() const { return 0; }
-  virtual int recipientNameMinLength() const { return 0; }
+  virtual int recipientNameLineLength() const {
+    return 0;
+  }
+  virtual int recipientNameMinLength() const {
+    return 0;
+  }
 
-  virtual int payeeNameLineLength() const { return 0; }
-  virtual int payeeNameMinLength() const { return 0; }
+  virtual int payeeNameLineLength() const {
+    return 0;
+  }
+  virtual int payeeNameMinLength() const {
+    return 0;
+  }
 
-  virtual QString allowedChars() const { return QString(); }
+  virtual QString allowedChars() const {
+    return QString();
+  }
 
   // Limits validators
-  virtual bool checkPurposeCharset( const QString& ) const { return false; }
-  virtual bool checkPurposeLineLength(const QString& ) const { return false; }
-  virtual validators::lengthStatus checkPurposeLength(const QString&) const { return validators::tooLong; }
-  virtual bool checkPurposeMaxLines(const QString&) const { return false; }
+  virtual bool checkPurposeCharset(const QString&) const {
+    return false;
+  }
+  virtual bool checkPurposeLineLength(const QString&) const {
+    return false;
+  }
+  virtual validators::lengthStatus checkPurposeLength(const QString&) const {
+    return validators::tooLong;
+  }
+  virtual bool checkPurposeMaxLines(const QString&) const {
+    return false;
+  }
 
-  virtual validators::lengthStatus checkNameLength(const QString&) const { return validators::tooLong; }
-  virtual bool checkNameCharset( const QString& ) const { return false; }
+  virtual validators::lengthStatus checkNameLength(const QString&) const {
+    return validators::tooLong;
+  }
+  virtual bool checkNameCharset(const QString&) const {
+    return false;
+  }
 
-  virtual validators::lengthStatus checkRecipientLength(const QString&) const { return validators::tooLong; }
-  virtual bool checkRecipientCharset( const QString& ) const { return false; }
+  virtual validators::lengthStatus checkRecipientLength(const QString&) const {
+    return validators::tooLong;
+  }
+  virtual bool checkRecipientCharset(const QString&) const {
+    return false;
+  }
 
-  virtual validators::lengthStatus checkRecipientAccountNumber( const QString& ) const { return validators::tooLong; }
-  virtual validators::lengthStatus checkRecipientBankCode( const QString& ) const { return validators::tooLong; }
+  virtual validators::lengthStatus checkRecipientAccountNumber(const QString&) const {
+    return validators::tooLong;
+  }
+  virtual validators::lengthStatus checkRecipientBankCode(const QString&) const {
+    return validators::tooLong;
+  }
 };
 
 static const unsigned short defaultTextKey = 51;
 static const unsigned short defaultSubTextKey = 0;
 
 germanOnlineTransferImpl::germanOnlineTransferImpl()
-  : germanOnlineTransfer(),
-    _settings( QSharedPointer<const settings>() ),
+    : germanOnlineTransfer(),
+    _settings(QSharedPointer<const settings>()),
     _value(0),
     _purpose(QString()),
-    _originAccount( QString() ),
-    _beneficiaryAccount( payeeIdentifiers::nationalAccount() ),
+    _originAccount(QString()),
+    _beneficiaryAccount(payeeIdentifiers::nationalAccount()),
     _textKey(defaultTextKey),
     _subTextKey(defaultSubTextKey)
 {
@@ -75,21 +111,21 @@ germanOnlineTransferImpl::germanOnlineTransferImpl()
 }
 
 germanOnlineTransferImpl::germanOnlineTransferImpl(const germanOnlineTransferImpl& other)
-  : germanOnlineTransfer( other ),
-    _settings( other._settings ),
-    _value( other._value ),
-    _purpose( other._purpose ),
-    _originAccount( other._originAccount ),
-    _beneficiaryAccount( other._beneficiaryAccount ),
-    _textKey( other._textKey ),
-    _subTextKey( other._subTextKey )
+    : germanOnlineTransfer(other),
+    _settings(other._settings),
+    _value(other._value),
+    _purpose(other._purpose),
+    _originAccount(other._originAccount),
+    _beneficiaryAccount(other._beneficiaryAccount),
+    _textKey(other._textKey),
+    _subTextKey(other._subTextKey)
 {
 
 }
 
 germanOnlineTransfer *germanOnlineTransferImpl::clone() const
 {
-  germanOnlineTransfer *transfer = new germanOnlineTransferImpl( *this );
+  germanOnlineTransfer *transfer = new germanOnlineTransferImpl(*this);
   return transfer;
 }
 
@@ -97,16 +133,16 @@ bool germanOnlineTransferImpl::isValid() const
 {
   QSharedPointer<const germanOnlineTransfer::settings> settings = getSettings();
 
-  if ( settings->checkPurposeLength( _purpose ) == validators::ok
-    && settings->checkPurposeMaxLines( _purpose )
-    && settings->checkPurposeLineLength( _purpose )
-    && settings->checkPurposeCharset( _purpose )
-    //&& settings->checkRecipientCharset( _beneficiaryAccount.ownerName() )
-    //&& settings->checkRecipientLength( _beneficiaryAccount.ownerName() ) == validators::ok
-    && settings->checkRecipientAccountNumber( _beneficiaryAccount.accountNumber() ) == validators::ok
-    && settings->checkRecipientBankCode( _beneficiaryAccount.bankCode() ) == validators::ok
-    && value().isPositive()
-  )
+  if (settings->checkPurposeLength(_purpose) == validators::ok
+      && settings->checkPurposeMaxLines(_purpose)
+      && settings->checkPurposeLineLength(_purpose)
+      && settings->checkPurposeCharset(_purpose)
+      //&& settings->checkRecipientCharset( _beneficiaryAccount.ownerName() )
+      //&& settings->checkRecipientLength( _beneficiaryAccount.ownerName() ) == validators::ok
+      && settings->checkRecipientAccountNumber(_beneficiaryAccount.accountNumber()) == validators::ok
+      && settings->checkRecipientBankCode(_beneficiaryAccount.bankCode()) == validators::ok
+      && value().isPositive()
+     )
     return true;
   return false;
 }
@@ -114,12 +150,12 @@ bool germanOnlineTransferImpl::isValid() const
 payeeIdentifier germanOnlineTransferImpl::originAccountIdentifier() const
 {
   QList< payeeIdentifierTyped<payeeIdentifiers::nationalAccount> > idents = MyMoneyFile::instance()->account(_originAccount).payeeIdentifiersByType<payeeIdentifiers::nationalAccount>();
-  if ( !idents.isEmpty() ) {
+  if (!idents.isEmpty()) {
     payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = idents[0];
     ident->setOwnerName(MyMoneyFile::instance()->user().name());
     return ident;
   }
-  return payeeIdentifier( new payeeIdentifiers::nationalAccount );
+  return payeeIdentifier(new payeeIdentifiers::nationalAccount);
 }
 
 /** @todo make alive */
@@ -134,15 +170,15 @@ MyMoneySecurity germanOnlineTransferImpl::currency() const
 QSharedPointer<const germanOnlineTransfer::settings> germanOnlineTransferImpl::getSettings() const
 {
   if (_settings.isNull()) {
-    _settings = onlineJobAdministration::instance()->taskSettings<germanOnlineTransfer::settings>( name(), _originAccount );
-    if ( _settings.isNull() )
-      _settings = QSharedPointer<const germanOnlineTransfer::settings>( new germanOnlineTransferSettingsFallback );
+    _settings = onlineJobAdministration::instance()->taskSettings<germanOnlineTransfer::settings>(name(), _originAccount);
+    if (_settings.isNull())
+      _settings = QSharedPointer<const germanOnlineTransfer::settings>(new germanOnlineTransferSettingsFallback);
   }
-  Q_ASSERT( !_settings.isNull() );
+  Q_ASSERT(!_settings.isNull());
   return _settings;
 }
 
-void germanOnlineTransferImpl::setOriginAccount( const QString& accountId )
+void germanOnlineTransferImpl::setOriginAccount(const QString& accountId)
 {
   if (accountId != _originAccount) {
     _originAccount = accountId;
@@ -171,20 +207,20 @@ void germanOnlineTransferImpl::writeXML(QDomDocument& document, QDomElement& par
 germanOnlineTransferImpl* germanOnlineTransferImpl::createFromXml(const QDomElement& element) const
 {
   germanOnlineTransferImpl* task = new germanOnlineTransferImpl();
-  task->setOriginAccount( element.attribute("originAccount", QString()) );
-  task->setValue( MyMoneyMoney( QStringEmpty(element.attribute("value", QString())) ) );
+  task->setOriginAccount(element.attribute("originAccount", QString()));
+  task->setValue(MyMoneyMoney(QStringEmpty(element.attribute("value", QString()))));
   task->_textKey = element.attribute("textKey", QString().setNum(defaultTextKey)).toUShort();
   task->_subTextKey = element.attribute("subTextKey", QString().setNum(defaultSubTextKey)).toUShort();
-  task->setPurpose( element.attribute("purpose", QString()) );
+  task->setPurpose(element.attribute("purpose", QString()));
 
   payeeIdentifiers::nationalAccount beneficiary;
   payeeIdentifiers::nationalAccount* beneficiaryPtr = 0;
   QDomElement beneficiaryEl = element.firstChildElement("beneficiary");
-  if ( !beneficiaryEl.isNull() ) {
+  if (!beneficiaryEl.isNull()) {
     beneficiaryPtr = beneficiary.createFromXml(beneficiaryEl);
   }
 
-  if ( beneficiaryPtr == 0 ) {
+  if (beneficiaryPtr == 0) {
     task->_beneficiaryAccount = beneficiary;
   } else {
     task->_beneficiaryAccount = *beneficiaryPtr;
@@ -195,28 +231,28 @@ germanOnlineTransferImpl* germanOnlineTransferImpl::createFromXml(const QDomElem
 
 onlineTask* germanOnlineTransferImpl::createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const
 {
-  Q_ASSERT( !onlineJobId.isEmpty() );
-  Q_ASSERT( connection.isOpen() );
+  Q_ASSERT(!onlineJobId.isEmpty());
+  Q_ASSERT(connection.isOpen());
 
   QSqlQuery query = QSqlQuery(
-    "SELECT originAccount, value, purpose, beneficiaryName, beneficiaryAccountNumber, "
-    " beneficiaryBankCode, textKey, subTextKey FROM kmmNationalOrders WHERE id = ?",
-    connection
-  );
+                      "SELECT originAccount, value, purpose, beneficiaryName, beneficiaryAccountNumber, "
+                      " beneficiaryBankCode, textKey, subTextKey FROM kmmNationalOrders WHERE id = ?",
+                      connection
+                    );
   query.bindValue(0, onlineJobId);
 
-  if ( query.exec() && query.next() ) {
+  if (query.exec() && query.next()) {
     germanOnlineTransferImpl* task = new germanOnlineTransferImpl();
-    task->setOriginAccount( query.value(0).toString() );
-    task->setValue( MyMoneyMoney( query.value(1).toString() ) );
-    task->setPurpose( query.value(2).toString() );
+    task->setOriginAccount(query.value(0).toString());
+    task->setValue(MyMoneyMoney(query.value(1).toString()));
+    task->setPurpose(query.value(2).toString());
     task->_textKey = query.value(6).toUInt();
     task->_subTextKey = query.value(7).toUInt();
 
     payeeIdentifiers::nationalAccount beneficiary;
-    beneficiary.setOwnerName( query.value(3).toString() );
-    beneficiary.setAccountNumber( query.value(4).toString() );
-    beneficiary.setBankCode( query.value(5).toString() );
+    beneficiary.setOwnerName(query.value(3).toString());
+    beneficiary.setAccountNumber(query.value(4).toString());
+    beneficiary.setBankCode(query.value(5).toString());
     task->_beneficiaryAccount = beneficiary;
     return task;
   }
@@ -228,13 +264,13 @@ bool germanOnlineTransferImpl::sqlSave(QSqlDatabase databaseConnection, const QS
 {
   QSqlQuery query = QSqlQuery(databaseConnection);
   query.prepare("INSERT INTO kmmNationalOrders ("
-  " id, originAccount, value, purpose, beneficiaryName, beneficiaryAccountNumber, "
-  " beneficiaryBankCode, textKey, subTextKey) "
-  " VALUES( :id, :originAccount, :value, :purpose, :beneficiaryName, :beneficiaryAccountNumber, "
-  "         :beneficiaryBankCode, :textKey, :subTextKey ) "
-  );
-  bindValuesToQuery( query, onlineJobId );
-  if ( !query.exec() ) {
+                " id, originAccount, value, purpose, beneficiaryName, beneficiaryAccountNumber, "
+                " beneficiaryBankCode, textKey, subTextKey) "
+                " VALUES( :id, :originAccount, :value, :purpose, :beneficiaryName, :beneficiaryAccountNumber, "
+                "         :beneficiaryBankCode, :textKey, :subTextKey ) "
+               );
+  bindValuesToQuery(query, onlineJobId);
+  if (!query.exec()) {
     qWarning("Error while inserting national order '%s': %s", qPrintable(onlineJobId), qPrintable(query.lastError().text()));
     return false;
   }
@@ -255,8 +291,8 @@ bool germanOnlineTransferImpl::sqlModify(QSqlDatabase databaseConnection, const 
     " textKey = :textKey,"
     " subTextKey = :subTextKey "
     " WHERE id = :id");
-  bindValuesToQuery( query, onlineJobId );
-  if ( !query.exec() ) {
+  bindValuesToQuery(query, onlineJobId);
+  if (!query.exec()) {
     qWarning("Could not modify national order: %s", qPrintable(query.lastError().text()));
     return false;
   }

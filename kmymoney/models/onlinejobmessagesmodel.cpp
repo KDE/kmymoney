@@ -23,8 +23,8 @@
 #include <klocalizedstring.h>
 
 onlineJobMessagesModel::onlineJobMessagesModel(QObject* parent)
-  : QAbstractTableModel(parent),
-  m_job()
+    : QAbstractTableModel(parent),
+    m_job()
 {
 
 }
@@ -36,36 +36,36 @@ QVariant onlineJobMessagesModel::data(const QModelIndex& index, int role) const
     return QVariant();
 
   switch (index.column()) {
-    case 0: switch(role) { // Status/Date column
-      case Qt::DisplayRole: return messages[index.row()].timestamp();
-      case Qt::DecorationRole: switch (messages[index.row()].type()) {
-        case onlineJobMessage::debug:
-        case onlineJobMessage::log:
-        case onlineJobMessage::information: return QIcon::fromTheme("dialog-information");
-        case onlineJobMessage::warning: return QIcon::fromTheme("dialog-warning");
-        case onlineJobMessage::error: return QIcon::fromTheme("dialog-error");
+    case 0: switch (role) { // Status/Date column
+        case Qt::DisplayRole: return messages[index.row()].timestamp();
+        case Qt::DecorationRole: switch (messages[index.row()].type()) {
+            case onlineJobMessage::debug:
+            case onlineJobMessage::log:
+            case onlineJobMessage::information: return QIcon::fromTheme("dialog-information");
+            case onlineJobMessage::warning: return QIcon::fromTheme("dialog-warning");
+            case onlineJobMessage::error: return QIcon::fromTheme("dialog-error");
+          }
+        case Qt::ToolTipRole: switch (messages[index.row()].type()) {
+            case onlineJobMessage::debug: return i18n("Information to find issues.");
+            case onlineJobMessage::log: return i18n("Information stored for provability.");
+            case onlineJobMessage::information: return i18n("Informative message without certain significance.");
+            case onlineJobMessage::warning: return i18n("Warning message.");
+            case onlineJobMessage::error: return i18n("Error");
+          }
+        default: return QVariant();
       }
-      case Qt::ToolTipRole: switch (messages[index.row()].type()) {
-        case onlineJobMessage::debug: return i18n("Information to find issues.");
-        case onlineJobMessage::log: return i18n("Information stored for provability.");
-        case onlineJobMessage::information: return i18n("Informative message without certain significance.");
-        case onlineJobMessage::warning: return i18n("Warning message.");
-        case onlineJobMessage::error: return i18n("Error");
-        }
-      default: return QVariant();
-    }
     case 1: switch (role) { // Origin column
-      case Qt::DisplayRole: return messages[index.row()].sender();
-      default: return QVariant();
-    }
+        case Qt::DisplayRole: return messages[index.row()].sender();
+        default: return QVariant();
+      }
     case 2: switch (role) { // Message column
-      case Qt::DisplayRole: return messages[index.row()].message();
-      default: return QVariant();
-    }
+        case Qt::DisplayRole: return messages[index.row()].message();
+        default: return QVariant();
+      }
   }
 
-    // Actually we should never get here. But let's make this model bullet proof.
-    return QVariant();
+  // Actually we should never get here. But let's make this model bullet proof.
+  return QVariant();
 }
 
 int onlineJobMessagesModel::columnCount(const QModelIndex& parent) const
@@ -91,19 +91,19 @@ QModelIndex onlineJobMessagesModel::parent(const QModelIndex&) const
 
 QVariant onlineJobMessagesModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-  if ( orientation == Qt::Horizontal ) {
+  if (orientation == Qt::Horizontal) {
     switch (section) {
-      case 0: switch(role) {
-        case Qt::DisplayRole: return i18n("Date");
-        default: return QVariant();
-      }
-      case 1: switch(role) {
-        case Qt::DisplayRole: return i18n("Origin");
-        default: return QVariant();
+      case 0: switch (role) {
+          case Qt::DisplayRole: return i18n("Date");
+          default: return QVariant();
         }
-      case 2: switch(role) {
-        case Qt::DisplayRole: return i18n("Description");
-        default: return QVariant();
+      case 1: switch (role) {
+          case Qt::DisplayRole: return i18n("Origin");
+          default: return QVariant();
+        }
+      case 2: switch (role) {
+          case Qt::DisplayRole: return i18n("Description");
+          default: return QVariant();
         }
     }
   }

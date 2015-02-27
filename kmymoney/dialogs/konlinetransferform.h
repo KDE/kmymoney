@@ -38,8 +38,9 @@
 class IonlineJobEdit;
 class kMandatoryFieldGroup;
 
-namespace Ui {
-  class kOnlineTransferFormDecl;
+namespace Ui
+{
+class kOnlineTransferFormDecl;
 }
 
 /**
@@ -59,24 +60,24 @@ public:
 
 signals:
   /** @brief The user wants this job to be saved */
-  void acceptedForSave( onlineJob );
+  void acceptedForSave(onlineJob);
 
   /** @brief User wants to send the onlineJob directly */
-  void acceptedForSend( onlineJob );
+  void acceptedForSend(onlineJob);
 
 public slots:
   virtual void accept();
   virtual void reject();
 
   /** @brief sets the current origin account */
-  virtual void setCurrentAccount( const QString& accountId );
+  virtual void setCurrentAccount(const QString& accountId);
 
   /**
    * @brief Sets an onlineTransfer to edit
    *
    * @return true if there is widget which supports editing this onlineJob
    */
-  virtual bool setOnlineJob( const onlineJob );
+  virtual bool setOnlineJob(const onlineJob);
 
   void duplicateCurrentJob();
 
@@ -88,7 +89,7 @@ private slots:
    * @brief Slot to change job type
    * @param index of KComboBox (== index of selected widget in m_onlineJobEditWidgets)
    */
-  void convertCurrentJob( const int& index );
+  void convertCurrentJob(const int& index);
 
   /** @brief Slot for send button */
   void sendJob();
@@ -98,14 +99,14 @@ private slots:
    *
    * Caller gives away ownership.
    */
-  void addOnlineJobEditWidget( KService::Ptr widget );
+  void addOnlineJobEditWidget(KService::Ptr widget);
 
   /** @{ */
   /**
    * @brief Activates the onlineJobEdit widget
    */
-  bool showEditWidget( const QString& onlineTaskName );
-  void showEditWidget( IonlineJobEdit* widget );
+  bool showEditWidget(const QString& onlineTaskName);
+  void showEditWidget(IonlineJobEdit* widget);
 
   /** @} */
 
@@ -114,7 +115,7 @@ private slots:
    */
   void checkNotSupportedWidget();
 
-  void setJobReadOnly( const bool& );
+  void setJobReadOnly(const bool&);
 
 private:
   /**
@@ -131,7 +132,7 @@ private:
   /**
    * @brief Checks if widget can edit any task the selected account supports
    */
-  bool checkEditWidget( IonlineJobEdit* widget );
+  bool checkEditWidget(IonlineJobEdit* widget);
   /**
    * @brief Checks current widget
    * @see checkEditWidget( IonlineJobEdit* widget )

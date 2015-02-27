@@ -43,14 +43,14 @@ public:
   QString bic() const;
 
 public slots:
-  void setIdentifier( const payeeIdentifier& );
-  void setIban( const QString& );
-  void setBic( const QString& );
+  void setIdentifier(const payeeIdentifier&);
+  void setIban(const QString&);
+  void setBic(const QString&);
 
 signals:
-  void identifierChanged( payeeIdentifier );
-  void ibanChanged( QString );
-  void bicChanged( QString );
+  void identifierChanged(payeeIdentifier);
+  void ibanChanged(QString);
+  void bicChanged(QString);
 
 private slots:
   void updateIdentifier();

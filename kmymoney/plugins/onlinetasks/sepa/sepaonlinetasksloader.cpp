@@ -34,7 +34,7 @@
 K_EXPORT_PLUGIN(SepaOnlineTaskFactory("sepaOnlineTasksLoader"))*/
 
 sepaOnlineTasksLoader::sepaOnlineTasksLoader(QObject* parent, const QVariantList&)
-: KMyMoneyPlugin::Plugin::Plugin(parent, "sepaOnlineTasksLoader")
+    : KMyMoneyPlugin::Plugin::Plugin(parent, "sepaOnlineTasksLoader")
 {
-  onlineJobAdministration::instance()->registerOnlineTask( new sepaOnlineTransferImpl );
+  onlineJobAdministration::instance()->registerOnlineTask(new sepaOnlineTransferImpl);
 }

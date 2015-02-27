@@ -22,26 +22,26 @@
 
 validators::lengthStatus creditTransferSettingsBase::checkNameLength(const QString& name) const
 {
-    if (name.length() > _payeeNameLength)
-      return validators::tooLong;
-    else if ( name.length() < _payeeNameMinLength )
-      return validators::tooShort;
-    return validators::ok;
+  if (name.length() > _payeeNameLength)
+    return validators::tooLong;
+  else if (name.length() < _payeeNameMinLength)
+    return validators::tooShort;
+  return validators::ok;
 }
 
 bool creditTransferSettingsBase::checkPurposeMaxLines(const QString& purpose) const
 {
-    return (purpose.split('\n').count() <= _purposeMaxLines);
+  return (purpose.split('\n').count() <= _purposeMaxLines);
 }
 
 validators::lengthStatus creditTransferSettingsBase::checkPurposeLength(const QString& purpose) const
 {
-    const int length = purpose.length();
-    if ( length > (_purposeMaxLines*_purposeLineLength) )
-      return validators::tooLong;
-    else if ( length < _purposeMinLength )
-      return validators::tooShort;
-    return validators::ok;
+  const int length = purpose.length();
+  if (length > (_purposeMaxLines*_purposeLineLength))
+    return validators::tooLong;
+  else if (length < _purposeMinLength)
+    return validators::tooShort;
+  return validators::ok;
 }
 
 bool creditTransferSettingsBase::checkPurposeLineLength(const QString& purpose) const
@@ -52,17 +52,17 @@ bool creditTransferSettingsBase::checkPurposeLineLength(const QString& purpose) 
 bool creditTransferSettingsBase::checkPurposeCharset(const QString& string) const
 {
   const QString chars = _allowedChars + QChar('\n');
-  return validators::checkCharset( string, chars );
+  return validators::checkCharset(string, chars);
 }
 
 validators::lengthStatus creditTransferSettingsBase::checkRecipientLength(const QString& name) const
 {
-    const int length = name.length();
-    if (length > _recipientNameLength)
-      return validators::tooLong;
-    else if ( length == 0 || length < _recipientNameMinLength)
-      return validators::tooShort;
-    return validators::ok;
+  const int length = name.length();
+  if (length > _recipientNameLength)
+    return validators::tooLong;
+  else if (length == 0 || length < _recipientNameMinLength)
+    return validators::tooShort;
+  return validators::ok;
 }
 
 bool creditTransferSettingsBase::checkNameCharset(const QString& name) const
@@ -94,10 +94,10 @@ bool creditTransferSettingsBase::isBicMandatory(const QString& payeeIban, const 
 
   // Starting form 1st Febuary 2016 no bic is needed between sepa countries
   if (QDate::currentDate() >= QDate(2016, 2, 1))
-    return ( !sepaParticipants.contains(payeeContryCode, Qt::CaseInsensitive) || !sepaParticipants.contains(beneficaryCountryCode, Qt::CaseInsensitive) );
+    return (!sepaParticipants.contains(payeeContryCode, Qt::CaseInsensitive) || !sepaParticipants.contains(beneficaryCountryCode, Qt::CaseInsensitive));
 
   // Before that date the bic is needed except for transfers within a single sepa country
-  return ( payeeContryCode.compare(beneficaryCountryCode, Qt::CaseInsensitive) != 0 || !sepaParticipants.contains(payeeContryCode, Qt::CaseInsensitive) );
+  return (payeeContryCode.compare(beneficaryCountryCode, Qt::CaseInsensitive) != 0 || !sepaParticipants.contains(payeeContryCode, Qt::CaseInsensitive));
 }
 
 bool creditTransferSettingsBase::checkRecipientBic(const QString& bic) const

@@ -27,8 +27,8 @@
 
 /**
  * @brief Gwenhywfar Gui for KDE
- * 
- * 
+ *
+ *
  * @author Christian David
  */
 class gwenKdeGui : public QT4_Gui
@@ -36,7 +36,7 @@ class gwenKdeGui : public QT4_Gui
 public:
   gwenKdeGui();
   ~gwenKdeGui();
-  
+
   virtual int getPassword(uint32_t flags,
                           const char *token,
                           const char *title,
@@ -54,22 +54,29 @@ public:
 class gwenKdeGuiTanResult : public QObject
 {
   Q_OBJECT
-  
+
 public:
   gwenKdeGuiTanResult(QObject* parent = 0)
-  : QObject(parent),
-  m_tan( QString() ),
-  m_aborted( false )
-  {}
-  
+      : QObject(parent),
+      m_tan(QString()),
+      m_aborted(false) {}
+
   virtual ~gwenKdeGuiTanResult() {}
-  
-  QString tan() { return m_tan; }
-  bool aborted() { return m_aborted; }
+
+  QString tan() {
+    return m_tan;
+  }
+  bool aborted() {
+    return m_aborted;
+  }
 public slots:
-  void abort() { m_aborted = true; }
-  void acceptTan(QString tan) { m_tan = tan; m_aborted = false; }
-  
+  void abort() {
+    m_aborted = true;
+  }
+  void acceptTan(QString tan) {
+    m_tan = tan; m_aborted = false;
+  }
+
 private:
   QString m_tan;
   bool m_aborted;

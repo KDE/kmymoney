@@ -24,7 +24,8 @@
 
 #include "onlinejob.h"
 
-namespace Ui {
+namespace Ui
+{
 class KOnlineJobOutbox;
 }
 
@@ -38,11 +39,11 @@ public:
 
   QStringList selectedOnlineJobs() const;
 
-  void showEvent( QShowEvent* event );
+  void showEvent(QShowEvent* event);
 
 signals:
-  void sendJobs( QList<onlineJob> );
-  void editJob( QString );
+  void sendJobs(QList<onlineJob>);
+  void editJob(QString);
   void newCreditTransfer();
 
   void aboutToShow();
@@ -62,7 +63,7 @@ private slots:
   void slotRemoveJob();
   void slotSendJobs();
   void slotEditJob();
-  void slotEditJob( const QModelIndex& );
+  void slotEditJob(const QModelIndex&);
 };
 
 #endif // KONLINEJOBOUTBOX_H

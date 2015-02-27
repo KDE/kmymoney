@@ -25,16 +25,16 @@
 
 #include <KLocalizedString>
 
-payeeIdentifierModel::payeeIdentifierModel( QObject* parent )
-  : QAbstractListModel(parent),
-  m_data(QSharedPointer<MyMoneyPayeeIdentifierContainer>())
+payeeIdentifierModel::payeeIdentifierModel(QObject* parent)
+    : QAbstractListModel(parent),
+    m_data(QSharedPointer<MyMoneyPayeeIdentifierContainer>())
 {
 }
 
 QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 {
   // Needed for the selection box and it prevents a crash if index is out of range
-  if ( m_data.isNull() || index.row() >= rowCount(index.parent())-1 )
+  if (m_data.isNull() || index.row() >= rowCount(index.parent()) - 1)
     return QVariant();
 
   const ::payeeIdentifier ident = m_data->payeeIdentifiers().at(index.row());
@@ -47,18 +47,18 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
     return ident.iid();
   } else if (role == Qt::DisplayRole) {
     // The custom delegates won't ask for this role
-    return QVariant::fromValue( i18n("The plugin to show this information could not be found.") );
+    return QVariant::fromValue(i18n("The plugin to show this information could not be found."));
   }
   return QVariant();
 }
 
 bool payeeIdentifierModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-  if ( !m_data.isNull() && role == payeeIdentifier ) {
+  if (!m_data.isNull() && role == payeeIdentifier) {
     ::payeeIdentifier ident = value.value< ::payeeIdentifier >();
-    if ( index.row() == rowCount(index.parent())-1 ) {
+    if (index.row() == rowCount(index.parent()) - 1) {
       // The new row will be the last but one
-      beginInsertRows(index.parent(), index.row()-1, index.row()-1);
+      beginInsertRows(index.parent(), index.row() - 1, index.row() - 1);
       m_data->addPayeeIdentifier(ident);
       endInsertRows();
     } else {
@@ -75,7 +75,7 @@ Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex& index) const
   Qt::ItemFlags flags = QAbstractItemModel::flags(index) | Qt::ItemIsDragEnabled;
   const QString type = data(index, payeeIdentifierType).toString();
   // type.isEmpty() means the type selection can be shown
-  if ( !type.isEmpty() && payeeIdentifierLoader::instance()->hasItemEditDelegate(type) )
+  if (!type.isEmpty() && payeeIdentifierLoader::instance()->hasItemEditDelegate(type))
     flags |= Qt::ItemIsEditable;
   return flags;
 }
@@ -86,7 +86,7 @@ int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
   if (m_data.isNull())
     return 0;
   // Always a row more which creates new entries
-  return m_data->payeeIdentifiers().count()+1;
+  return m_data->payeeIdentifiers().count() + 1;
 }
 
 /** @brief unused at the moment */
@@ -103,18 +103,18 @@ bool payeeIdentifierModel::removeRows(int row, int count, const QModelIndex& par
   if (m_data.isNull())
     return false;
 
-  if (count < 1 || row+count >= rowCount(parent))
+  if (count < 1 || row + count >= rowCount(parent))
     return false;
 
-  beginRemoveRows(parent, row, row+count-1);
-  for( int i = row; i < row+count; ++i) {
+  beginRemoveRows(parent, row, row + count - 1);
+  for (int i = row; i < row + count; ++i) {
     m_data->removePayeeIdentifier(i);
   }
   endRemoveRows();
   return true;
 }
 
-void payeeIdentifierModel::setSource( const MyMoneyPayeeIdentifierContainer data)
+void payeeIdentifierModel::setSource(const MyMoneyPayeeIdentifierContainer data)
 {
   beginResetModel();
   m_data = QSharedPointer<MyMoneyPayeeIdentifierContainer>(new MyMoneyPayeeIdentifierContainer(data));
@@ -130,7 +130,7 @@ void payeeIdentifierModel::closeSource()
 
 QList< ::payeeIdentifier > payeeIdentifierModel::identifiers() const
 {
-  if ( m_data.isNull() )
+  if (m_data.isNull())
     return QList< ::payeeIdentifier >();
   return m_data->payeeIdentifiers();
 }

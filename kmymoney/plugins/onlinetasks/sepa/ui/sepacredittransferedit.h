@@ -27,7 +27,8 @@
 
 class kMandatoryFieldGroup;
 
-namespace Ui {
+namespace Ui
+{
 class sepaCreditTransferEdit;
 }
 
@@ -38,20 +39,30 @@ class sepaCreditTransferEdit : public IonlineJobEdit
 {
   Q_OBJECT
   Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly NOTIFY readOnlyChanged);
-  Q_PROPERTY(onlineJob job READ getOnlineJob WRITE setOnlineJob );
+  Q_PROPERTY(onlineJob job READ getOnlineJob WRITE setOnlineJob);
   Q_INTERFACES(IonlineJobEdit);
 
 public:
   explicit sepaCreditTransferEdit(QWidget *parent = 0, QVariantList args = QVariantList());
   ~sepaCreditTransferEdit();
   onlineJobTyped<sepaOnlineTransfer> getOnlineJobTyped() const;
-  onlineJob getOnlineJob() const { return getOnlineJobTyped(); }
+  onlineJob getOnlineJob() const {
+    return getOnlineJobTyped();
+  }
 
-  QStringList supportedOnlineTasks() const { return QStringList( sepaOnlineTransfer::name() ); }
-  QString label() const { return i18n("SEPA Credit Transfer"); };
+  QStringList supportedOnlineTasks() const {
+    return QStringList(sepaOnlineTransfer::name());
+  }
+  QString label() const {
+    return i18n("SEPA Credit Transfer");
+  };
 
-  bool isValid() const { return getOnlineJobTyped().isValid(); };
-  bool isReadOnly() const { return m_readOnly; }
+  bool isValid() const {
+    return getOnlineJobTyped().isValid();
+  };
+  bool isReadOnly() const {
+    return m_readOnly;
+  }
 
   virtual void showEvent(QShowEvent*);
 
@@ -60,10 +71,10 @@ signals:
   void readOnlyChanged(bool);
 
 public slots:
-  void setOnlineJob( const onlineJobTyped<sepaOnlineTransfer> &job );
-  bool setOnlineJob( const onlineJob& job );
-  void setOriginAccount(const QString& accountId );
-  void setReadOnly( const bool& );
+  void setOnlineJob(const onlineJobTyped<sepaOnlineTransfer> &job);
+  bool setOnlineJob(const onlineJob& job);
+  void setOriginAccount(const QString& accountId);
+  void setReadOnly(const bool&);
 
 private slots:
   void updateSettings();
@@ -74,11 +85,11 @@ private slots:
    * to start the validation.
    */
   void purposeChanged();
-  void beneficiaryIbanChanged( const QString& iban );
-  void beneficiaryBicChanged( const QString& bic );
-  void beneficiaryNameChanged( const QString& name );
+  void beneficiaryIbanChanged(const QString& iban);
+  void beneficiaryBicChanged(const QString& bic);
+  void beneficiaryNameChanged(const QString& name);
   void valueChanged();
-  void endToEndReferenceChanged( const QString& reference );
+  void endToEndReferenceChanged(const QString& reference);
   /** @} */
 
 
@@ -91,12 +102,11 @@ private slots:
    *
    * @param status if false, validityChanged(false) is emitted without further checks.
    */
-  void requiredFieldsCompleted( const bool& status = true )
-  {
-    if ( status ) {
-      emit validityChanged( getOnlineJobTyped().isValid() );
+  void requiredFieldsCompleted(const bool& status = true) {
+    if (status) {
+      emit validityChanged(getOnlineJobTyped().isValid());
     } else {
-      emit validityChanged( false );
+      emit validityChanged(false);
     }
   }
 

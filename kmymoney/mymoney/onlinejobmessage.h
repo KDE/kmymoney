@@ -44,46 +44,69 @@ public:
     error /**< Important for the user - he must be warned. E.g. a task could unexpectedly not be executed */
   };
 
-  onlineJobMessage( messageType type, QString sender, QString message, QDateTime timestamp = QDateTime::currentDateTime() )
-    : m_type( type ),
-      m_sender( sender ),
-      m_message( message ),
-      m_timestamp( timestamp )
-  {}
+  onlineJobMessage(messageType type, QString sender, QString message, QDateTime timestamp = QDateTime::currentDateTime())
+      : m_type(type),
+      m_sender(sender),
+      m_message(message),
+      m_timestamp(timestamp) {}
 
   ~onlineJobMessage() {}
 
-  bool isDebug() const { return (m_type == debug); }
-  bool isLog() const { return (m_type == log); }
-  bool isInformation() const { return (m_type == information); }
-  bool isWarning() const { return (m_type == warning); }
-  bool isError() const { return ( m_type == error ); }
+  bool isDebug() const {
+    return (m_type == debug);
+  }
+  bool isLog() const {
+    return (m_type == log);
+  }
+  bool isInformation() const {
+    return (m_type == information);
+  }
+  bool isWarning() const {
+    return (m_type == warning);
+  }
+  bool isError() const {
+    return (m_type == error);
+  }
 
-  bool isPersistant() const { return (m_type != debug); }
+  bool isPersistant() const {
+    return (m_type != debug);
+  }
 
   /** @see messageType */
-  messageType type() const { return m_type; }
+  messageType type() const {
+    return m_type;
+  }
 
   /**
    * @brief Who "wrote" this message?
    *
    * Could be "OnlinePlugin" or "Bank"
    */
-  QString sender() const { return m_sender; }
+  QString sender() const {
+    return m_sender;
+  }
 
   /**
    * @brief What happend?
    */
-  QString message() const { return m_message; }
+  QString message() const {
+    return m_message;
+  }
 
   /** @brief DateTime of message */
-  QDateTime timestamp() const { return m_timestamp; }
+  QDateTime timestamp() const {
+    return m_timestamp;
+  }
 
   /**
    * @brief Set an error code of the plugin
    */
-  void setSenderErrorCode( const QString& errorCode ) { m_senderErrorCode = errorCode; }
-  QString senderErrorCode() { return m_senderErrorCode; }
+  void setSenderErrorCode(const QString& errorCode) {
+    m_senderErrorCode = errorCode;
+  }
+  QString senderErrorCode() {
+    return m_senderErrorCode;
+  }
 
 private:
   messageType m_type;

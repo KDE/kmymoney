@@ -21,15 +21,14 @@
 #include <payeeidentifier/payeeidentifiertyped.h>
 #include "ui_ibanbicitemedit.h"
 
-struct ibanBicItemEdit::Private
-{
+struct ibanBicItemEdit::Private {
   Ui::ibanBicItemEdit* ui;
   payeeIdentifier m_identifier;
 };
 
 ibanBicItemEdit::ibanBicItemEdit(QWidget* parent)
-  : QWidget(parent),
-  d( new Private )
+    : QWidget(parent),
+    d(new Private)
 {
   d->ui = new Ui::ibanBicItemEdit;
   d->ui->setupUi(this);
@@ -63,41 +62,41 @@ void ibanBicItemEdit::setIdentifier(const payeeIdentifier& ident)
     d->ui->bicEdit->setText(identTyped->storedBic());
     d->ui->ibanEdit->setText(identTyped->paperformatIban());
     d->m_identifier = ident;
-  } catch ( payeeIdentifier::exception& ) {
+  } catch (payeeIdentifier::exception&) {
   }
 }
 
 void ibanBicItemEdit::setBic(const QString& bic)
 {
-  d->ui->bicEdit->setText( bic );
+  d->ui->bicEdit->setText(bic);
 }
 
 void ibanBicItemEdit::setIban(const QString& iban)
 {
-  d->ui->ibanEdit->setText( payeeIdentifiers::ibanBic::ibanToPaperformat(iban) );
+  d->ui->ibanEdit->setText(payeeIdentifiers::ibanBic::ibanToPaperformat(iban));
 }
 
 void ibanBicItemEdit::updateIdentifier()
 {
-  if ( d->m_identifier.isNull() )
-    d->m_identifier = payeeIdentifier(d->m_identifier.id(), new payeeIdentifiers::ibanBic );
+  if (d->m_identifier.isNull())
+    d->m_identifier = payeeIdentifier(d->m_identifier.id(), new payeeIdentifiers::ibanBic);
 
   const QString iban = payeeIdentifiers::ibanBic::ibanToElectronic(d->ui->ibanEdit->text());
   const QString bic = d->ui->bicEdit->text();
   bool changed = false;
 
-  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident( d->m_identifier );
-  if ( ident->storedBic() != bic ) {
-    ident->setBic( bic );
+  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident(d->m_identifier);
+  if (ident->storedBic() != bic) {
+    ident->setBic(bic);
     changed = true;
   }
 
-  if (ident->electronicIban() != iban ) {
-    ident->setElectronicIban( iban );
+  if (ident->electronicIban() != iban) {
+    ident->setElectronicIban(iban);
     changed = true;
   }
   d->m_identifier = ident;
 
   if (changed)
-    emit identifierChanged( d->m_identifier );
+    emit identifierChanged(d->m_identifier);
 }

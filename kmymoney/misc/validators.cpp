@@ -20,7 +20,7 @@
 
 #include <QtCore/QStringList>
 
-bool validators::checkLineLength( const QString& text, const int& length )
+bool validators::checkLineLength(const QString& text, const int& length)
 {
   const QStringList lines = text.split('\n');
   foreach (QString line, lines) {

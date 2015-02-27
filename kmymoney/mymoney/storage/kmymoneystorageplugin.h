@@ -50,12 +50,12 @@ public:
    * usage. A higher number means a more recent version.
    * Use a transaction!
    */
-  virtual bool setupDatabase( QSqlDatabase connection ) = 0;
+  virtual bool setupDatabase(QSqlDatabase connection) = 0;
 
   /**
    * @brief Remove all data belonging to the plugin from the database
    */
-  virtual bool removePluginData( QSqlDatabase connection ) = 0;
+  virtual bool removePluginData(QSqlDatabase connection) = 0;
 
   virtual ~storagePlugin();
 };

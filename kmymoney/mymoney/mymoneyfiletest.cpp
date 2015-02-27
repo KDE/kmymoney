@@ -2268,8 +2268,8 @@ void MyMoneyFileTest::testAddOnlineJob()
   onlineJob job(new germanOnlineTransfer());
 
   MyMoneyFileTransaction ft;
-  m->addOnlineJob( job );
-  QCOMPARE( job.id(), QString("O000001"));
+  m->addOnlineJob(job);
+  QCOMPARE(job.id(), QString("O000001"));
   ft.commit();
 
   QVERIFY(m_objectsRemoved.count() == 0);
@@ -2285,9 +2285,9 @@ void MyMoneyFileTest::testGetOnlineJob()
   QSKIP("Need dummy task for this test", SkipAll);
   testAddOnlineJob();
 
-  const onlineJob requestedJob = m->getOnlineJob( "O000001" );
-  QVERIFY( !requestedJob.isNull() );
-  QCOMPARE( requestedJob.id(), QString("O000001") );
+  const onlineJob requestedJob = m->getOnlineJob("O000001");
+  QVERIFY(!requestedJob.isNull());
+  QCOMPARE(requestedJob.id(), QString("O000001"));
 }
 
 void MyMoneyFileTest::testRemoveOnlineJob()
@@ -2301,16 +2301,16 @@ void MyMoneyFileTest::testRemoveOnlineJob()
 
 
   MyMoneyFileTransaction ft;
-  m->addOnlineJob( job );
-  m->addOnlineJob( job2 );
-  m->addOnlineJob( job3 );
+  m->addOnlineJob(job);
+  m->addOnlineJob(job2);
+  m->addOnlineJob(job3);
   ft.commit();
 
   clearObjectLists();
 
   ft.restart();
-  m->removeOnlineJob( job );
-  m->removeOnlineJob( job2 );
+  m->removeOnlineJob(job);
+  m->removeOnlineJob(job2);
   ft.commit();
 
   QCOMPARE(m_objectsRemoved.count(), 2);
@@ -2331,9 +2331,9 @@ void MyMoneyFileTest::testOnlineJobRollback()
   onlineJob job3(new germanOnlineTransfer());
 
   MyMoneyFileTransaction ft;
-  m->addOnlineJob( job );
-  m->addOnlineJob( job2 );
-  m->addOnlineJob( job3 );
+  m->addOnlineJob(job);
+  m->addOnlineJob(job2);
+  m->addOnlineJob(job3);
   ft.rollback();
 
   QCOMPARE(m_objectsRemoved.count(), 0);
@@ -2351,17 +2351,17 @@ void MyMoneyFileTest::testRemoveLockedOnlineJob()
   // Add a onlineJob
   onlineJob job(new germanOnlineTransfer());
   job.setLock(true);
-  QVERIFY( job.isLocked() );
+  QVERIFY(job.isLocked());
 
   MyMoneyFileTransaction ft;
-  m->addOnlineJob( job );
+  m->addOnlineJob(job);
   ft.commit();
 
   clearObjectLists();
 
   // Try removing locked transfer
   ft.restart();
-  m->removeOnlineJob( job );
+  m->removeOnlineJob(job);
   ft.commit();
   QVERIFY2(m_objectsRemoved.count() == 0, "Online Job was locked, removing is not allowed");
   QVERIFY(m_objectsAdded.count() == 0);
@@ -2380,7 +2380,7 @@ void MyMoneyFileTest::testModifyOnlineJob()
   // Add a onlineJob
   onlineJob job(new germanOnlineTransfer());
   MyMoneyFileTransaction ft;
-  m->addOnlineJob( job );
+  m->addOnlineJob(job);
   ft.commit();
 
   clearObjectLists();

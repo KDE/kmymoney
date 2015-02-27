@@ -23,27 +23,27 @@
 
 onlineTask* taskConverterSepaToGerman::convert(const onlineTask& source, onlineTaskConverter::convertType& convertResult, QString& userInformation) const
 {
-  Q_ASSERT( source.taskName() == sepaOnlineTransfer::name() );
+  Q_ASSERT(source.taskName() == sepaOnlineTransfer::name());
 
   convertResult = convertionLoseless;
   userInformation = QString();
-  
+
   germanOnlineTransferImpl* convert = new germanOnlineTransferImpl;
   Q_CHECK_PTR(convert);
-  
+
   const sepaOnlineTransfer& sepaTask = static_cast<const sepaOnlineTransfer&>(source);
-  convert->setOriginAccount( sepaTask.responsibleAccount() );
-  convert->setValue( sepaTask.value() );
-  
+  convert->setOriginAccount(sepaTask.responsibleAccount());
+  convert->setValue(sepaTask.value());
+
   // Purpose: add end-to-end reference if if is given
   QString purpose = sepaTask.purpose();
 
-  if ( !sepaTask.endToEndReference().isEmpty() ) {
+  if (!sepaTask.endToEndReference().isEmpty()) {
     userInformation = i18n("The SEPA credit-transfer had an end-to-end reference which is not supported in national transfers. It was added to the purpose instead.");
-    purpose.append( QChar('\n') + sepaTask.endToEndReference() );
+    purpose.append(QChar('\n') + sepaTask.endToEndReference());
     convertResult = convertionLossyMinor;
   }
-  convert->setPurpose( purpose );
+  convert->setPurpose(purpose);
   return convert;
 }
 

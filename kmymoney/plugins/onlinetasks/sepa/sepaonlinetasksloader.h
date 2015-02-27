@@ -26,7 +26,7 @@ class sepaOnlineTasksLoader : public KMyMoneyPlugin::Plugin
   Q_OBJECT
 
 public:
-  sepaOnlineTasksLoader(QObject* parent, const QVariantList& );
+  sepaOnlineTasksLoader(QObject* parent, const QVariantList&);
 
 };
 

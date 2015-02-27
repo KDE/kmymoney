@@ -23,15 +23,14 @@
 
 #include "ui_nationaaccountedit.h"
 
-struct nationalAccountEdit::Private
-{
+struct nationalAccountEdit::Private {
   Ui::nationalAccountEdit ui;
   payeeIdentifier m_identifier;
 };
 
 nationalAccountEdit::nationalAccountEdit(QWidget* parent)
-  : QWidget(parent),
-  d( new Private )
+    : QWidget(parent),
+    d(new Private)
 {
   d->ui.setupUi(this);
 
@@ -41,12 +40,12 @@ nationalAccountEdit::nationalAccountEdit(QWidget* parent)
 
 payeeIdentifier nationalAccountEdit::identifier() const
 {
-  if ( !d->m_identifier.isNull() ) {
+  if (!d->m_identifier.isNull()) {
     try {
       payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident(d->m_identifier);
-      ident->setAccountNumber( d->ui.accountNumberEdit->text() );
-      ident->setBankCode( d->ui.institutionCodeEdit->text() );
-    } catch ( payeeIdentifier::exception& ) {
+      ident->setAccountNumber(d->ui.accountNumberEdit->text());
+      ident->setBankCode(d->ui.institutionCodeEdit->text());
+    } catch (payeeIdentifier::exception&) {
     }
   }
   return d->m_identifier;
@@ -66,19 +65,19 @@ void nationalAccountEdit::setIdentifier(const payeeIdentifier& ident)
 {
   try {
     payeeIdentifierTyped<payeeIdentifiers::nationalAccount> identTyped(ident);
-    d->ui.accountNumberEdit->setText( identTyped->accountNumber() );
-    d->ui.institutionCodeEdit->setText( identTyped->bankCode() );
+    d->ui.accountNumberEdit->setText(identTyped->accountNumber());
+    d->ui.institutionCodeEdit->setText(identTyped->bankCode());
     d->m_identifier = ident;
-  } catch ( payeeIdentifier::exception&  ) {
+  } catch (payeeIdentifier::exception&) {
   }
 }
 
 void nationalAccountEdit::setAccountNumber(const QString& accountNumber)
 {
-  d->ui.accountNumberEdit->setText( accountNumber );
+  d->ui.accountNumberEdit->setText(accountNumber);
 }
 
 void nationalAccountEdit::setInstitutionCode(const QString& institutionCode)
 {
-  d->ui.institutionCodeEdit->setText( institutionCode );
+  d->ui.institutionCodeEdit->setText(institutionCode);
 }

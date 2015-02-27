@@ -26,7 +26,7 @@ class nationalOnlineTasksLoader : public KMyMoneyPlugin::Plugin
   Q_OBJECT
 
 public:
-  nationalOnlineTasksLoader(QObject* parent, const QVariantList& );
+  nationalOnlineTasksLoader(QObject* parent, const QVariantList&);
 
 };
 

@@ -23,8 +23,8 @@
 #include <KStandardDirs>
 
 onlineJobMessagesView::onlineJobMessagesView(QWidget* parent)
-  : QWidget(parent),
-  ui( new Ui::onlineJobMessageView )
+    : QWidget(parent),
+    ui(new Ui::onlineJobMessageView)
 {
   ui->setupUi(this);
   connect(ui->closeButton, SIGNAL(pressed()), this, SLOT(close()));

@@ -19,50 +19,50 @@
 #include "payeeidentifier.h"
 
 payeeIdentifier::payeeIdentifier()
-  : m_id(0),
-  m_payeeIdentifier(0)
+    : m_id(0),
+    m_payeeIdentifier(0)
 {
 }
 
 payeeIdentifier::payeeIdentifier(const payeeIdentifier& other)
-  : m_id( other.m_id ),
+    : m_id(other.m_id),
     m_payeeIdentifier(0)
 {
-  if ( other.m_payeeIdentifier != 0 )
+  if (other.m_payeeIdentifier != 0)
     m_payeeIdentifier = other.m_payeeIdentifier->clone();
 }
 
 payeeIdentifier::payeeIdentifier(payeeIdentifierData*const data)
-  : m_id(0),
-    m_payeeIdentifier( data )
+    : m_id(0),
+    m_payeeIdentifier(data)
 {
 }
 
 payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, payeeIdentifierData*const data)
-  : m_id(id),
-  m_payeeIdentifier( data )
+    : m_id(id),
+    m_payeeIdentifier(data)
 {
 }
 
 payeeIdentifier::payeeIdentifier(const QString& id, payeeIdentifierData*const data)
-  : m_id(id.mid(5).toUInt()),
-  m_payeeIdentifier(data)
+    : m_id(id.mid(5).toUInt()),
+    m_payeeIdentifier(data)
 {
   bool ok = false; // hopefully the compiler optimizes this away if compiled in non-debug mode
   Q_ASSERT(id.mid(5).toUInt(&ok) && ok);
 }
 
 payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, const payeeIdentifier& other)
-  : m_id(id),
-  m_payeeIdentifier(0)
+    : m_id(id),
+    m_payeeIdentifier(0)
 {
-  if ( other.m_payeeIdentifier != 0 )
+  if (other.m_payeeIdentifier != 0)
     m_payeeIdentifier = other.m_payeeIdentifier->clone();
 }
 
 QString payeeIdentifier::idString() const
 {
-  if ( m_id == 0 )
+  if (m_id == 0)
     return QString();
   return QLatin1String("IDENT") + QString::number(m_id).rightJustified(6, '0');
 }
@@ -74,14 +74,14 @@ payeeIdentifier::~payeeIdentifier()
 
 payeeIdentifierData* payeeIdentifier::operator->()
 {
-  if ( m_payeeIdentifier == 0 )
+  if (m_payeeIdentifier == 0)
     throw empty(__FILE__, __LINE__);
   return m_payeeIdentifier;
 }
 
 const payeeIdentifierData* payeeIdentifier::operator->() const
 {
-  if ( m_payeeIdentifier == 0 )
+  if (m_payeeIdentifier == 0)
     throw empty(__FILE__, __LINE__);
   return m_payeeIdentifier;
 }
@@ -98,21 +98,21 @@ const payeeIdentifierData* payeeIdentifier::data() const
 
 bool payeeIdentifier::isValid() const
 {
-  if( m_payeeIdentifier != 0 )
+  if (m_payeeIdentifier != 0)
     return m_payeeIdentifier->isValid();
   return false;
 }
 
 QString payeeIdentifier::iid() const
 {
-  if ( m_payeeIdentifier != 0 )
+  if (m_payeeIdentifier != 0)
     return m_payeeIdentifier->payeeIdentifierId();
   return QString();
 }
 
-payeeIdentifier& payeeIdentifier::operator=(const payeeIdentifier& other)
+payeeIdentifier& payeeIdentifier::operator=(const payeeIdentifier & other)
 {
-  if ( this == &other )
+  if (this == &other)
     return *this;
 
   m_id = other.m_id;
@@ -126,11 +126,11 @@ payeeIdentifier& payeeIdentifier::operator=(const payeeIdentifier& other)
 
 bool payeeIdentifier::operator==(const payeeIdentifier& other)
 {
-  if ( m_id != other.m_id )
+  if (m_id != other.m_id)
     return false;
 
-  if ( isNull() || other.isNull() ) {
-    if ( !isNull() ||  !other.isNull() )
+  if (isNull() || other.isNull()) {
+    if (!isNull() ||  !other.isNull())
       return false;
     return true;
   }
@@ -142,10 +142,10 @@ void payeeIdentifier::writeXML(QDomDocument& document, QDomElement& parent, cons
   // Important: type must be set before calling m_payeeIdentifier->writeXML()
   // the plugin for unavailable plugins must be able to set type itself
   QDomElement elem = document.createElement(elemenName);
-  if ( m_id != 0 )
+  if (m_id != 0)
     elem.setAttribute("id", m_id);
 
-  if ( !isNull() ) {
+  if (!isNull()) {
     elem.setAttribute("type", m_payeeIdentifier->payeeIdentifierId());
     m_payeeIdentifier->writeXML(document, elem);
   }

@@ -56,37 +56,37 @@ onlineJobAdministration::~onlineJobAdministration()
   qDeleteAll(m_onlineTaskConverter);
 }
 
-KMyMoneyPlugin::OnlinePluginExtended* onlineJobAdministration::getOnlinePlugin( const QString& accountId ) const
+KMyMoneyPlugin::OnlinePluginExtended* onlineJobAdministration::getOnlinePlugin(const QString& accountId) const
 {
-    MyMoneyAccount acc = MyMoneyFile::instance()->account( accountId );
+  MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
 
-    QMap<QString, KMyMoneyPlugin::OnlinePluginExtended*>::const_iterator it_p;
-    it_p = m_onlinePlugins.constFind(acc.onlineBankingSettings().value("provider"));
+  QMap<QString, KMyMoneyPlugin::OnlinePluginExtended*>::const_iterator it_p;
+  it_p = m_onlinePlugins.constFind(acc.onlineBankingSettings().value("provider"));
 
-    if (it_p != m_onlinePlugins.constEnd() ) {
-      // plugin found, use it
-      return *it_p;
-    }
-    return 0;
+  if (it_p != m_onlinePlugins.constEnd()) {
+    // plugin found, use it
+    return *it_p;
+  }
+  return 0;
 }
 
-void onlineJobAdministration::addPlugin(const QString& pluginName, KMyMoneyPlugin::OnlinePluginExtended *plugin )
+void onlineJobAdministration::addPlugin(const QString& pluginName, KMyMoneyPlugin::OnlinePluginExtended *plugin)
 {
   const bool sendAnyTask = canSendAnyTask();
   const bool sendCreditTransfer = canSendCreditTransfer();
 
   m_onlinePlugins.insert(pluginName, plugin);
 
-  if ( !sendAnyTask && canSendAnyTask() )
-    emit canSendAnyTaskChanged( true );
-  if ( !sendCreditTransfer && canSendCreditTransfer() )
-    emit canSendCreditTransferChanged( true );
+  if (!sendAnyTask && canSendAnyTask())
+    emit canSendAnyTaskChanged(true);
+  if (!sendCreditTransfer && canSendCreditTransfer())
+    emit canSendCreditTransferChanged(true);
 }
 
 QStringList onlineJobAdministration::availableOnlineTasks()
 {
   QStringList list;
-  foreach ( onlineTask* task, m_onlineTasks ) {
+  foreach (onlineTask* task, m_onlineTasks) {
     list.append(task->taskName());
   }
   return list;
@@ -106,8 +106,8 @@ bool onlineJobAdministration::isJobSupported(const QString& accountId, const QSt
 
 bool onlineJobAdministration::isJobSupported(const QString& accountId, const QStringList& names) const
 {
-  foreach ( QString name, names ) {
-    if ( isJobSupported(accountId, name) )
+  foreach (QString name, names) {
+    if (isJobSupported(accountId, name))
       return true;
   }
   return false;
@@ -125,9 +125,9 @@ bool onlineJobAdministration::isAnyJobSupported(const QString& accountId) const
   return false;
 }
 
-onlineJob onlineJobAdministration::createOnlineJob( const QString& name, const QString& id ) const
+onlineJob onlineJobAdministration::createOnlineJob(const QString& name, const QString& id) const
 {
-  return ( onlineJob( createOnlineTask(name), id ) );
+  return (onlineJob(createOnlineTask(name), id));
 }
 
 onlineTask* onlineJobAdministration::createOnlineTask(const QString& name) const
@@ -149,7 +149,7 @@ onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, c
     return task->createFromXml(element);
   }
   qWarning("In the file is a onlineTask for which I could not find the plugin ('%s')", qPrintable(iid));
-  return new unavailableTask( element );
+  return new unavailableTask(element);
 }
 
 onlineTask* onlineJobAdministration::createOnlineTaskFromSqlDatabase(const QString& iid, const QString& onlineTaskId, QSqlDatabase connection) const
@@ -167,9 +167,9 @@ onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
   return m_onlineTasks.value(name);
 }
 
-onlineTaskConverter::convertType onlineJobAdministration::canConvert(const QString& originalTaskIid, const QString& convertTaskIid ) const
+onlineTaskConverter::convertType onlineJobAdministration::canConvert(const QString& originalTaskIid, const QString& convertTaskIid) const
 {
-  return canConvert( originalTaskIid, QStringList(convertTaskIid) );
+  return canConvert(originalTaskIid, QStringList(convertTaskIid));
 }
 
 onlineTaskConverter::convertType onlineJobAdministration::canConvert(const QString& originalTaskIid, const QStringList& convertTaskIids) const
@@ -179,10 +179,10 @@ onlineTaskConverter::convertType onlineJobAdministration::canConvert(const QStri
   onlineTaskConverter::convertType bestConvertType = onlineTaskConverter::convertImpossible;
 #if 0
   foreach (QString destinationName, destinationNames) {
-    onlineTask::convertType type = canConvert( original, destinationName );
-    if ( type == onlineTask::convertionLossy )
+    onlineTask::convertType type = canConvert(original, destinationName);
+    if (type == onlineTask::convertionLossy)
       bestConvertType = onlineTask::convertionLossy;
-    else if ( type == onlineTask::convertionLoseless )
+    else if (type == onlineTask::convertionLoseless)
       return onlineTask::convertionLoseless;
   }
 #else
@@ -200,11 +200,11 @@ onlineJob onlineJobAdministration::convert(const onlineJob& original, const QStr
   onlineJob newJob;
 
   QList<onlineTaskConverter*> converterList = m_onlineTaskConverter.values(convertTaskIid);
-  foreach( onlineTaskConverter* converter, converterList ) {
-    if ( converter->convertibleTasks().contains(original.taskIid()) ) {
+  foreach (onlineTaskConverter* converter, converterList) {
+    if (converter->convertibleTasks().contains(original.taskIid())) {
       onlineTask* task = converter->convert(*original.task(), convertType, userInformation);
       Q_ASSERT_X(convertType != onlineTaskConverter::convertImpossible || task != 0, qPrintable("converter for " + converter->convertedTask()), "Converter returned convertType 'impossible' but return was not null_ptr.");
-      if ( task != 0 ) {
+      if (task != 0) {
         newJob = onlineJob(task, onlineJobId);
         break;
       }
@@ -219,7 +219,7 @@ onlineJob onlineJobAdministration::convertBest(const onlineJob& original, const 
   return convertBest(original, convertTaskIids, convertType, userInformation, original.id());
 }
 
-onlineJob onlineJobAdministration::convertBest( const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& bestConvertType, QString& bestUserInformation, const QString& onlineJobId ) const
+onlineJob onlineJobAdministration::convertBest(const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& bestConvertType, QString& bestUserInformation, const QString& onlineJobId) const
 {
   onlineJob bestConvert;
   bestConvertType = onlineTaskConverter::convertImpossible;
@@ -229,14 +229,14 @@ onlineJob onlineJobAdministration::convertBest( const onlineJob& original, const
     // Try convert
     onlineTaskConverter::convertType convertType = onlineTaskConverter::convertImpossible;
     QString userInformation;
-    onlineJob convertJob = convert( original, taskIid, convertType, userInformation, onlineJobId );
+    onlineJob convertJob = convert(original, taskIid, convertType, userInformation, onlineJobId);
 
     // Check if it was successful
-    if ( bestConvertType < convertType) {
+    if (bestConvertType < convertType) {
       bestConvert = convertJob;
       bestUserInformation = userInformation;
       bestConvertType = convertType;
-      if ( convertType == onlineTaskConverter::convertionLoseless )
+      if (convertType == onlineTaskConverter::convertionLoseless)
         break;
     }
   }
@@ -246,7 +246,7 @@ onlineJob onlineJobAdministration::convertBest( const onlineJob& original, const
 
 void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
 {
-  if (Q_UNLIKELY( task == 0 ))
+  if (Q_UNLIKELY(task == 0))
     return;
 
   const bool sendAnyTask = canSendAnyTask();
@@ -255,15 +255,15 @@ void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
   m_onlineTasks.insert(task->taskName(), task);
   qDebug() << "onlineTask available" << task->taskName();
 
-  if ( sendAnyTask != canSendAnyTask() )
-    emit canSendAnyTaskChanged( !sendAnyTask );
-  if ( sendCreditTransfer != canSendCreditTransfer() )
-    emit canSendCreditTransferChanged( !sendCreditTransfer );
+  if (sendAnyTask != canSendAnyTask())
+    emit canSendAnyTaskChanged(!sendAnyTask);
+  if (sendCreditTransfer != canSendCreditTransfer())
+    emit canSendCreditTransferChanged(!sendCreditTransfer);
 }
 
 void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* const converter)
 {
-  if (Q_UNLIKELY( converter == 0 ))
+  if (Q_UNLIKELY(converter == 0))
     return;
 
   m_onlineTaskConverter.insertMulti(converter->convertedTask(), converter);
@@ -275,23 +275,23 @@ onlineJobAdministration::onlineJobEditOffers onlineJobAdministration::onlineJobE
   return KServiceTypeTrader::self()->query(QLatin1String("KMyMoney/OnlineTaskUi"));
 }
 
-IonlineTaskSettings::ptr onlineJobAdministration::taskSettings( const QString& taskName, const QString& accountId ) const
+IonlineTaskSettings::ptr onlineJobAdministration::taskSettings(const QString& taskName, const QString& accountId) const
 {
   KMyMoneyPlugin::OnlinePluginExtended* plugin = getOnlinePlugin(accountId);
   if (plugin != 0)
-    return ( plugin->settings(accountId, taskName) );
+    return (plugin->settings(accountId, taskName));
   return IonlineTaskSettings::ptr();
 }
 
 bool onlineJobAdministration::canSendAnyTask()
 {
   // Check if any plugin supports a loaded online task
-  foreach(KMyMoneyPlugin::OnlinePluginExtended* plugin, m_onlinePlugins ) {
+  foreach (KMyMoneyPlugin::OnlinePluginExtended* plugin, m_onlinePlugins) {
     QList<MyMoneyAccount> accounts;
     MyMoneyFile::instance()->accountList(accounts, QStringList(), true);
-    foreach( MyMoneyAccount account, accounts ) {
-      foreach( QString onlineTaskIid, plugin->availableJobs( account.id() ) ) {
-        if (m_onlineTasks.contains( onlineTaskIid ))
+    foreach (MyMoneyAccount account, accounts) {
+      foreach (QString onlineTaskIid, plugin->availableJobs(account.id())) {
+        if (m_onlineTasks.contains(onlineTaskIid))
           return true;
       }
     }
@@ -301,15 +301,15 @@ bool onlineJobAdministration::canSendAnyTask()
 
 bool onlineJobAdministration::canSendCreditTransfer()
 {
-  foreach( onlineTask* task, m_onlineTasks ) {
+  foreach (onlineTask* task, m_onlineTasks) {
     // Check if a online task has the correct type
-    if ( dynamic_cast<creditTransfer*>( task ) != 0) {
-      foreach(KMyMoneyPlugin::OnlinePluginExtended* plugin, m_onlinePlugins ) {
+    if (dynamic_cast<creditTransfer*>(task) != 0) {
+      foreach (KMyMoneyPlugin::OnlinePluginExtended* plugin, m_onlinePlugins) {
         QList<MyMoneyAccount> accounts;
         MyMoneyFile::instance()->accountList(accounts, QStringList(), true);
-        foreach( MyMoneyAccount account, accounts ) {
-          if ( plugin->availableJobs(account.id()).contains(task->taskName()) )
-              return true;
+        foreach (MyMoneyAccount account, accounts) {
+          if (plugin->availableJobs(account.id()).contains(task->taskName()))
+            return true;
         }
       }
     }
@@ -324,6 +324,6 @@ bool onlineJobAdministration::canEditOnlineJob(const onlineJob& job)
 
 void onlineJobAdministration::updateOnlineTaskProperties()
 {
-  emit canSendAnyTaskChanged( canSendAnyTask() );
-  emit canSendCreditTransferChanged( canSendCreditTransfer() );
+  emit canSendAnyTaskChanged(canSendAnyTask());
+  emit canSendCreditTransferChanged(canSendCreditTransfer());
 }

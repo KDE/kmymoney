@@ -24,7 +24,7 @@
 
 namespace Ui
 {
-  class nationalAccountEdit;
+class nationalAccountEdit;
 }
 
 class nationalAccountEdit : public QWidget
@@ -42,13 +42,13 @@ public:
   QString institutionCode() const;
 
 public slots:
-  void setIdentifier( const payeeIdentifier& );
-  void setAccountNumber( const QString& );
-  void setInstitutionCode( const QString& );
+  void setIdentifier(const payeeIdentifier&);
+  void setAccountNumber(const QString&);
+  void setInstitutionCode(const QString&);
 
 signals:
-  void institutionCodeChanged( QString );
-  void accountNumberChannged( QString );
+  void institutionCodeChanged(QString);
+  void accountNumberChannged(QString);
 
 private:
   struct Private;

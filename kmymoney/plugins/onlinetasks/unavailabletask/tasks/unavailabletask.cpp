@@ -20,7 +20,7 @@
 #include <KLocalizedString>
 
 unavailableTask::unavailableTask(const QDomElement& element)
-  : m_data( element )
+    : m_data(element)
 {
 }
 
@@ -77,7 +77,7 @@ unavailableTask* unavailableTask::createFromXml(const QDomElement& element) cons
 
 void unavailableTask::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  Q_UNUSED( document );
+  Q_UNUSED(document);
   parent = m_data;
 }
 
@@ -89,7 +89,7 @@ bool unavailableTask::hasReferenceTo(const QString& id) const
 
 unavailableTask* unavailableTask::clone() const
 {
-  return new unavailableTask( m_data );
+  return new unavailableTask(m_data);
 }
 
 bool unavailableTask::isValid() const

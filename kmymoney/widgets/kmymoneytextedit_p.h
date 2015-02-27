@@ -26,10 +26,10 @@ class KMyMoneyTextEditHighlighter : public Sonnet::Highlighter
 public:
   KMyMoneyTextEditHighlighter(QTextEdit* parent = 0);
 
-  void setAllowedChars( const QString& chars );
-  void setMaxLength( const int& length );
-  void setMaxLines( const int& lines );
-  void setMaxLineLength( const int& length );
+  void setAllowedChars(const QString& chars);
+  void setMaxLength(const int& length);
+  void setMaxLines(const int& lines);
+  void setMaxLineLength(const int& length);
 
 protected:
   virtual void highlightBlock(const QString& text);

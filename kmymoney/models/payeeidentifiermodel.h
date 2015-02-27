@@ -35,10 +35,10 @@ class payeeIdentifierModel : public QAbstractListModel
 public:
   enum roles {
     payeeIdentifierType = Qt::UserRole, /**< type of payeeIdentifier */
-    payeeIdentifier = Qt::UserRole+1 /**< actual payeeIdentifier */
+    payeeIdentifier = Qt::UserRole + 1 /**< actual payeeIdentifier */
   };
 
-  payeeIdentifierModel( QObject* parent = 0 );
+  payeeIdentifierModel(QObject* parent = 0);
 
   virtual QVariant data(const QModelIndex& index, int role) const;
 
@@ -60,7 +60,7 @@ public:
    *
    * This makes the model editable.
    */
-  void setSource( MyMoneyPayeeIdentifierContainer data );
+  void setSource(MyMoneyPayeeIdentifierContainer data);
 
   /** @brief Get stored data */
   QList< ::payeeIdentifier > identifiers() const;

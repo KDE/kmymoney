@@ -36,10 +36,10 @@ public:
   typedef unsigned int id_t;
 
   explicit payeeIdentifier();
-  explicit payeeIdentifier( payeeIdentifierData *const data );
-  explicit payeeIdentifier( const id_t& id, payeeIdentifierData *const data );
-  explicit payeeIdentifier( const QString& id, payeeIdentifierData *const data );
-  explicit payeeIdentifier( const id_t& id, const payeeIdentifier& other );
+  explicit payeeIdentifier(payeeIdentifierData *const data);
+  explicit payeeIdentifier(const id_t& id, payeeIdentifierData *const data);
+  explicit payeeIdentifier(const QString& id, payeeIdentifierData *const data);
+  explicit payeeIdentifier(const id_t& id, const payeeIdentifier& other);
 
   payeeIdentifier(const payeeIdentifier& other);
   ~payeeIdentifier();
@@ -47,7 +47,9 @@ public:
   bool operator==(const payeeIdentifier& other);
 
   /** @brief Check if any data is associated */
-  bool isNull() const { return (m_payeeIdentifier == 0); }
+  bool isNull() const {
+    return (m_payeeIdentifier == 0);
+  }
 
   /**
    * @brief create xml to save this payeeIdentifier
@@ -56,7 +58,7 @@ public:
    *
    * The counter part to load a payee identifier again is payeeIdentifierLoader::createPayeeIdentifierFromXML().
    */
-  void writeXML(QDomDocument &document, QDomElement &parent, const QString& elementName = QLatin1String("payeeIdentifier") ) const;
+  void writeXML(QDomDocument &document, QDomElement &parent, const QString& elementName = QLatin1String("payeeIdentifier")) const;
 
   /**
    * @throws payeeIdentifier::empty
@@ -81,9 +83,13 @@ public:
   bool isValid() const;
 
 
-  id_t id() const { return m_id; }
+  id_t id() const {
+    return m_id;
+  }
   QString idString() const;
-  void clearId() { m_id = 0; }
+  void clearId() {
+    m_id = 0;
+  }
 
   /**
    * @brief Get payeeIdentifier Iid which identifiers the type
@@ -101,7 +107,7 @@ public:
    * powered.
    */
   class exception
-  {};
+    {};
 
   /**
    * @brief Thrown if a cast of a payeeIdentifier fails
@@ -114,7 +120,9 @@ public:
   public:
     badCast(const QString& file = "", const long unsigned int& line = 0)
     //: MyMoneyException("Casted payeeIdentifier with wrong type", file, line)
-    { Q_UNUSED(file); Q_UNUSED(line); }
+    {
+      Q_UNUSED(file); Q_UNUSED(line);
+    }
   };
 
   /**
@@ -126,7 +134,9 @@ public:
   public:
     empty(const QString& file = "", const long unsigned int& line = 0)
     //: MyMoneyException("Requested payeeIdentifierData of empty payeeIdentifier", file, line)
-    { Q_UNUSED(file); Q_UNUSED(line); }
+    {
+      Q_UNUSED(file); Q_UNUSED(line);
+    }
   };
 
 private:
@@ -146,7 +156,7 @@ template<class T>
 T* payeeIdentifier::data()
 {
   T *const ident = dynamic_cast<T*>(m_payeeIdentifier);
-  if ( ident == 0 )
+  if (ident == 0)
     throw badCast(__FILE__, __LINE__);
   return ident;
 }
@@ -155,11 +165,11 @@ template<class T>
 const T* payeeIdentifier::data() const
 {
   const T *const ident = dynamic_cast<const T*>(m_payeeIdentifier);
-  if ( ident == 0 )
+  if (ident == 0)
     throw badCast(__FILE__, __LINE__);
   return ident;
 }
 
-Q_DECLARE_METATYPE( payeeIdentifier )
+Q_DECLARE_METATYPE(payeeIdentifier)
 
 #endif // PAYEEIDENTIFIER_H

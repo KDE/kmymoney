@@ -1509,20 +1509,20 @@ public:
    * @brief Saves a new onlineJob
    * @param job you stay owner of the object (a copy will be created)
    */
-  void addOnlineJob( onlineJob& job );
+  void addOnlineJob(onlineJob& job);
 
   /**
    * @brief Saves a onlineJob
    * @param job you stay owner of the object (a copy will be created)
    */
-  void modifyOnlineJob(const onlineJob job );
+  void modifyOnlineJob(const onlineJob job);
 
   /**
    * @brief Returns onlineJob identified by jobId
    * @param jobId
    * @return
    */
-  const onlineJob getOnlineJob( const QString &jobId ) const;
+  const onlineJob getOnlineJob(const QString &jobId) const;
 
   /**
    * @brief Returns all onlineJobs

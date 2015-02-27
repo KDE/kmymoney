@@ -24,93 +24,75 @@
 class germanCreditTransferSettingsMockup : public germanOnlineTransfer::settings
 {
 public:
-  virtual validators::lengthStatus checkRecipientBankCode(const QString&) const
-  {
+  virtual validators::lengthStatus checkRecipientBankCode(const QString&) const {
     return validators::ok;
   }
 
-  virtual validators::lengthStatus checkRecipientAccountNumber(const QString&) const
-  {
+  virtual validators::lengthStatus checkRecipientAccountNumber(const QString&) const {
     return validators::ok;
   }
 
-  virtual bool checkRecipientCharset(const QString&) const
-  {
+  virtual bool checkRecipientCharset(const QString&) const {
     return true;
   }
 
-  virtual validators::lengthStatus checkRecipientLength(const QString&) const
-  {
+  virtual validators::lengthStatus checkRecipientLength(const QString&) const {
     return validators::ok;
   }
 
-  virtual bool checkNameCharset(const QString&) const
-  {
+  virtual bool checkNameCharset(const QString&) const {
     return true;
   }
 
-  virtual validators::lengthStatus checkNameLength(const QString&) const
-  {
+  virtual validators::lengthStatus checkNameLength(const QString&) const {
     return validators::ok;
   }
 
-  virtual bool checkPurposeMaxLines(const QString&) const
-  {
+  virtual bool checkPurposeMaxLines(const QString&) const {
     return true;
   }
 
-  virtual validators::lengthStatus checkPurposeLength(const QString&) const
-  {
+  virtual validators::lengthStatus checkPurposeLength(const QString&) const {
     return validators::ok;
   }
 
-  virtual bool checkPurposeLineLength(const QString&) const
-  {
+  virtual bool checkPurposeLineLength(const QString&) const {
     return true;
   }
 
-  virtual bool checkPurposeCharset(const QString&) const
-  {
+  virtual bool checkPurposeCharset(const QString&) const {
     return true;
   }
 
-  virtual QString allowedChars() const
-  {
+  virtual QString allowedChars() const {
     return QLatin1String("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\"'_-{}()[]~\\/^!?+<>=&:@., ");
   }
 
-  virtual int payeeNameMinLength() const
-  {
+  virtual int payeeNameMinLength() const {
     return 0;
   }
 
-  virtual int payeeNameLineLength() const
-  {
+  virtual int payeeNameLineLength() const {
     return 27;
   }
 
-  virtual int recipientNameMinLength() const
-  {
+  virtual int recipientNameMinLength() const {
     return 0;
   }
 
-  virtual int recipientNameLineLength() const
-  {
+  virtual int recipientNameLineLength() const {
     return 27;
   }
 
-  virtual int purposeMinLength() const
-  {
+  virtual int purposeMinLength() const {
     return 0;
   }
 
-  virtual int purposeLineLength() const
-  {
+  virtual int purposeLineLength() const {
     return 27;
   }
 
-  virtual int purposeMaxLines() const
-  {
+  virtual int purposeMaxLines() const {
     return 50;
   }
 };

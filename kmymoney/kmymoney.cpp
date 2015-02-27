@@ -226,8 +226,7 @@ public:
 #ifdef KF5Holidays_FOUND
       m_holidayRegion(0),
 #endif
-      m_applicationIsReady(true)
-  {
+      m_applicationIsReady(true) {
     // since the days of the week are from 1 to 7,
     // and a day of the week is used to index this bit array,
     // resize the array to 8 elements (element 0 is left unused)
@@ -5894,8 +5893,8 @@ void KMyMoneyApp::slotTransactionCopySplits()
     int singleSplitTransactions = 0;
     int multipleSplitTransactions = 0;
     KMyMoneyRegister::SelectedTransaction selectedSourceTransaction;
-    foreach(const KMyMoneyRegister::SelectedTransaction& st, d->m_selectedTransactions) {
-      switch(st.transaction().splitCount()) {
+    foreach (const KMyMoneyRegister::SelectedTransaction& st, d->m_selectedTransactions) {
+      switch (st.transaction().splitCount()) {
         case 0:
           break;
         case 1:
@@ -5907,26 +5906,26 @@ void KMyMoneyApp::slotTransactionCopySplits()
           break;
       }
     }
-    if(singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
+    if (singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
       MyMoneyFileTransaction ft;
       try {
         const MyMoneyTransaction& sourceTransaction = selectedSourceTransaction.transaction();
         const MyMoneySplit& sourceSplit = selectedSourceTransaction.split();
-        foreach(const KMyMoneyRegister::SelectedTransaction& st, d->m_selectedTransactions) {
+        foreach (const KMyMoneyRegister::SelectedTransaction& st, d->m_selectedTransactions) {
           MyMoneyTransaction t = st.transaction();
 
           // don't process the source transaction
-          if(sourceTransaction.id() == t.id()) {
+          if (sourceTransaction.id() == t.id()) {
             continue;
           }
 
           const MyMoneySplit& baseSplit = st.split();
 
-          if(t.splitCount() == 1) {
-            foreach(const MyMoneySplit& split, sourceTransaction.splits()) {
+          if (t.splitCount() == 1) {
+            foreach (const MyMoneySplit& split, sourceTransaction.splits()) {
               // Don't copy the source split, as we already have that
               // as part of the destination transaction
-              if(split.id() == sourceSplit.id()) {
+              if (split.id() == sourceSplit.id()) {
                 continue;
               }
 
@@ -5940,7 +5939,7 @@ void KMyMoneyApp::slotTransactionCopySplits()
               // we can adjust the share and value part of the second split we
               // just created. We need to keep a possible price in mind in case
               // of different currencies
-              if(sourceTransaction.splitCount() == 2) {
+              if (sourceTransaction.splitCount() == 2) {
                 sp.setValue(-baseSplit.value());
                 sp.setShares(-(baseSplit.shares() * baseSplit.price()));
               }
@@ -6351,7 +6350,7 @@ void KMyMoneyApp::slotUpdateActions(void)
   action("account_online_update")->setEnabled(false);
   action("account_online_update_all")->setEnabled(false);
   action("account_online_unmap")->setEnabled(false);
-  action("account_online_new_credit_transfer")->setEnabled( onlineJobAdministration::instance()->canSendCreditTransfer() );
+  action("account_online_new_credit_transfer")->setEnabled(onlineJobAdministration::instance()->canSendCreditTransfer());
   action("account_chart")->setEnabled(false);
 
   action("category_new")->setEnabled(fileOpen);
@@ -6526,8 +6525,8 @@ void KMyMoneyApp::slotUpdateActions(void)
       if (d->m_selectedTransactions.count() >= 2) {
         int singleSplitTransactions = 0;
         int multipleSplitTransactions = 0;
-        foreach(const KMyMoneyRegister::SelectedTransaction& st, d->m_selectedTransactions) {
-          switch(st.transaction().splitCount()) {
+        foreach (const KMyMoneyRegister::SelectedTransaction& st, d->m_selectedTransactions) {
+          switch (st.transaction().splitCount()) {
             case 0:
               break;
             case 1:
@@ -6538,7 +6537,7 @@ void KMyMoneyApp::slotUpdateActions(void)
               break;
           }
         }
-        if(singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
+        if (singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
           action("transaction_copy_splits")->setEnabled(true);
         }
       }
@@ -7531,19 +7530,19 @@ void KMyMoneyApp::slotNewOnlineTransfer(void)
   if (!d->m_selectedAccount.id().isEmpty()) {
     transferForm->setCurrentAccount(d->m_selectedAccount.id());
   }
-  connect( transferForm, SIGNAL(rejected()), transferForm, SLOT(deleteLater()));
-  connect( transferForm, SIGNAL(acceptedForSave(onlineJob)), this, SLOT(slotOnlineJobSave(onlineJob)));
-  connect( transferForm, SIGNAL(acceptedForSend(onlineJob)), this, SLOT(slotOnlineJobSend(onlineJob)));
-  connect( transferForm, SIGNAL(accepted()), transferForm, SLOT(deleteLater()));
+  connect(transferForm, SIGNAL(rejected()), transferForm, SLOT(deleteLater()));
+  connect(transferForm, SIGNAL(acceptedForSave(onlineJob)), this, SLOT(slotOnlineJobSave(onlineJob)));
+  connect(transferForm, SIGNAL(acceptedForSend(onlineJob)), this, SLOT(slotOnlineJobSend(onlineJob)));
+  connect(transferForm, SIGNAL(accepted()), transferForm, SLOT(deleteLater()));
   transferForm->show();
 }
 
 void KMyMoneyApp::slotEditOnlineJob(const QString jobId)
 {
   try {
-    const onlineJob constJob = MyMoneyFile::instance()->getOnlineJob( jobId );
-    slotEditOnlineJob( constJob );
-  } catch ( MyMoneyException& ) {
+    const onlineJob constJob = MyMoneyFile::instance()->getOnlineJob(jobId);
+    slotEditOnlineJob(constJob);
+  } catch (MyMoneyException&) {
     // Prevent a crash in very rare cases
   }
 }
@@ -7551,45 +7550,45 @@ void KMyMoneyApp::slotEditOnlineJob(const QString jobId)
 void KMyMoneyApp::slotEditOnlineJob(onlineJob job)
 {
   try {
-    slotEditOnlineJob( onlineJobTyped<creditTransfer>(job) );
-  } catch ( MyMoneyException& ) {
+    slotEditOnlineJob(onlineJobTyped<creditTransfer>(job));
+  } catch (MyMoneyException&) {
   }
 }
 
-void KMyMoneyApp::slotEditOnlineJob(const onlineJobTyped<creditTransfer> job )
+void KMyMoneyApp::slotEditOnlineJob(const onlineJobTyped<creditTransfer> job)
 {
   kOnlineTransferForm *transferForm = new kOnlineTransferForm(this);
-  transferForm->setOnlineJob( job );
-  connect( transferForm, SIGNAL(rejected()), transferForm, SLOT(deleteLater()));
-  connect( transferForm, SIGNAL(acceptedForSave(onlineJob)), this, SLOT(slotOnlineJobSave(onlineJob)));
-  connect( transferForm, SIGNAL(acceptedForSend(onlineJob)), this, SLOT(slotOnlineJobSend(onlineJob)));
-  connect( transferForm, SIGNAL(accepted()), transferForm, SLOT(deleteLater()));
+  transferForm->setOnlineJob(job);
+  connect(transferForm, SIGNAL(rejected()), transferForm, SLOT(deleteLater()));
+  connect(transferForm, SIGNAL(acceptedForSave(onlineJob)), this, SLOT(slotOnlineJobSave(onlineJob)));
+  connect(transferForm, SIGNAL(acceptedForSend(onlineJob)), this, SLOT(slotOnlineJobSend(onlineJob)));
+  connect(transferForm, SIGNAL(accepted()), transferForm, SLOT(deleteLater()));
   transferForm->show();
 }
 
 void KMyMoneyApp::slotOnlineJobSave(onlineJob job)
 {
   MyMoneyFileTransaction fileTransaction;
-  if ( job.id() == MyMoneyObject::emptyId() )
-      MyMoneyFile::instance()->addOnlineJob( job );
+  if (job.id() == MyMoneyObject::emptyId())
+    MyMoneyFile::instance()->addOnlineJob(job);
   else
-    MyMoneyFile::instance()->modifyOnlineJob( job );
+    MyMoneyFile::instance()->modifyOnlineJob(job);
   fileTransaction.commit();
 }
 
 /** @todo when onlineJob queue is used, continue here */
-void KMyMoneyApp::slotOnlineJobSend( onlineJob job )
+void KMyMoneyApp::slotOnlineJobSend(onlineJob job)
 {
-    MyMoneyFileTransaction fileTransaction;
-    if ( job.id() == MyMoneyObject::emptyId() )
-        MyMoneyFile::instance()->addOnlineJob( job );
-    else
-        MyMoneyFile::instance()->modifyOnlineJob( job );
-    fileTransaction.commit();
+  MyMoneyFileTransaction fileTransaction;
+  if (job.id() == MyMoneyObject::emptyId())
+    MyMoneyFile::instance()->addOnlineJob(job);
+  else
+    MyMoneyFile::instance()->modifyOnlineJob(job);
+  fileTransaction.commit();
 
-    QList<onlineJob> jobList;
-    jobList.append(job);
-    slotOnlineJobSend( jobList );
+  QList<onlineJob> jobList;
+  jobList.append(job);
+  slotOnlineJobSend(jobList);
 }
 
 void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
@@ -7598,14 +7597,14 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
   QMultiMap<QString, onlineJob> jobsByPlugin;
 
   // Sort jobs by online plugin & lock them
-  foreach(onlineJob job, jobs) {
+  foreach (onlineJob job, jobs) {
     Q_ASSERT(job.id() != MyMoneyObject::emptyId());
     // find the provider
     const MyMoneyAccount originAcc = job.responsibleMyMoneyAccount();
     job.setLock();
-    job.addJobMessage( onlineJobMessage(onlineJobMessage::debug, "KMyMoneyApp::slotOnlineJobSend", "Added to queue for plugin '"+originAcc.onlineBankingSettings().value("provider")+'\'') );
+    job.addJobMessage(onlineJobMessage(onlineJobMessage::debug, "KMyMoneyApp::slotOnlineJobSend", "Added to queue for plugin '" + originAcc.onlineBankingSettings().value("provider") + '\''));
     MyMoneyFileTransaction fileTransaction;
-    kmmFile->modifyOnlineJob( job );
+    kmmFile->modifyOnlineJob(job);
     fileTransaction.commit();
     jobsByPlugin.insert(originAcc.onlineBankingSettings().value("provider"), job);
   }
@@ -7616,10 +7615,10 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
   const QList<QString>::iterator newEnd = std::unique(usedPlugins.begin(), usedPlugins.end());
   usedPlugins.erase(newEnd, usedPlugins.end());
 
-  foreach(const QString& pluginKey, usedPlugins) {
+  foreach (const QString& pluginKey, usedPlugins) {
     QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_onlinePlugins.constFind(pluginKey);
 
-    if (it_p != d->m_onlinePlugins.constEnd() ) {
+    if (it_p != d->m_onlinePlugins.constEnd()) {
       // plugin found, call it
       KMyMoneyPlugin::OnlinePluginExtended *pluginExt = dynamic_cast< KMyMoneyPlugin::OnlinePluginExtended* >(*it_p);
       if (pluginExt == 0) {
@@ -7634,14 +7633,14 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
 
       // Save possible changes of the online job and remove lock
       MyMoneyFileTransaction fileTransaction;
-      foreach( onlineJob job, executedJobs ) {
+      foreach (onlineJob job, executedJobs) {
         fileTransaction.restart();
-        job.setLock( false );
-        kmmFile->modifyOnlineJob( job );
+        job.setLock(false);
+        kmmFile->modifyOnlineJob(job);
         fileTransaction.commit();
       }
 
-      if (  Q_UNLIKELY( executedJobs.size() != jobsToExecute.size() ) ) {
+      if (Q_UNLIKELY(executedJobs.size() != jobsToExecute.size())) {
         // OnlinePlugin did not return all jobs
         qWarning() << "Error saving send online tasks. After restart you should see at minimum all successfully executed jobs marked send. Imperfect plugin: " << pluginExt->objectName();
       }
@@ -7663,7 +7662,7 @@ void KMyMoneyApp::slotOnlineJobLog(const QStringList& onlineJobIds)
 {
   onlineJobMessagesView *const dialog = new onlineJobMessagesView();
   onlineJobMessagesModel *const model = new onlineJobMessagesModel(dialog);
-  model->setOnlineJob( MyMoneyFile::instance()->getOnlineJob(onlineJobIds.first()) );
+  model->setOnlineJob(MyMoneyFile::instance()->getOnlineJob(onlineJobIds.first()));
   dialog->setModel(model);
   dialog->setAttribute(Qt::WA_DeleteOnClose);
   dialog->show();

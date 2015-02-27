@@ -548,7 +548,8 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
   return rc;
 }
 
-void KBankingPlugin::executeQueue(void) {
+void KBankingPlugin::executeQueue(void)
+{
   if (m_kbanking && m_kbanking->getEnqueuedJobs().size() > 0) {
     AB_IMEXPORTER_CONTEXT *ctx;
     ctx = AB_ImExporterContext_new();
@@ -567,21 +568,21 @@ void KBankingPlugin::executeQueue(void) {
  */
 void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
 {
-  Q_CHECK_PTR( m_kbanking );
+  Q_CHECK_PTR(m_kbanking);
   QList<onlineJob> unhandledJobs;
 
   if (jobs.size()) {
     foreach (onlineJob job, jobs) {
-      if ( germanOnlineTransfer::name() == job.task()->taskName() ) {
+      if (germanOnlineTransfer::name() == job.task()->taskName()) {
         onlineJobTyped<germanOnlineTransfer> typedJob(job);
-        enqueTransaction( typedJob );
+        enqueTransaction(typedJob);
         job = typedJob;
-      } else if ( sepaOnlineTransfer::name() == job.task()->taskName() ) {
+      } else if (sepaOnlineTransfer::name() == job.task()->taskName()) {
         onlineJobTyped<sepaOnlineTransfer> typedJob(job);
-        enqueTransaction( typedJob );
+        enqueTransaction(typedJob);
         job = typedJob;
       } else {
-        job.addJobMessage( onlineJobMessage(onlineJobMessage::error, "KBanking", "Cannot handle this request" ) );
+        job.addJobMessage(onlineJobMessage(onlineJobMessage::error, "KBanking", "Cannot handle this request"));
         unhandledJobs.append(job);
       }
       m_onlineJobQueue.insert(m_kbanking->mappingId(job), job);
@@ -594,7 +595,7 @@ void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
   m_onlineJobQueue.clear();
 }
 
-QStringList KBankingPlugin::availableJobs( QString accountId )
+QStringList KBankingPlugin::availableJobs(QString accountId)
 {
   QStringList list = QStringList();
 
@@ -605,7 +606,7 @@ QStringList KBankingPlugin::availableJobs( QString accountId )
     return QStringList();
   }
 
-  AB_ACCOUNT* abAccount = aqbAccount( accountId );
+  AB_ACCOUNT* abAccount = aqbAccount(accountId);
 
   if (!abAccount) {
     return list;
@@ -615,33 +616,33 @@ QStringList KBankingPlugin::availableJobs( QString accountId )
 
   // national transfer
   AB_JOB *abJob = AB_JobSingleTransfer_new(abAccount);
-  if( AB_Job_CheckAvailability(abJob) == 0 )
-    list.append( germanOnlineTransfer::name() );
-  AB_Job_free( abJob );
+  if (AB_Job_CheckAvailability(abJob) == 0)
+    list.append(germanOnlineTransfer::name());
+  AB_Job_free(abJob);
 
   // sepa transfer
   abJob = AB_JobSepaTransfer_new(abAccount);
-  if( AB_Job_CheckAvailability(abJob) == 0 )
-    list.append( sepaOnlineTransfer::name() );
-  AB_Job_free( abJob );
+  if (AB_Job_CheckAvailability(abJob) == 0)
+    list.append(sepaOnlineTransfer::name());
+  AB_Job_free(abJob);
 
   return list;
 }
 
 /** @brief experimenting with QScopedPointer and aqBanking pointers */
-class QScopedPointerAbJobDeleter {
+class QScopedPointerAbJobDeleter
+{
 public:
-  static void cleanup(AB_JOB* job)
-  {
+  static void cleanup(AB_JOB* job) {
     AB_Job_free(job);
   }
 };
 
 /** @brief experimenting with QScopedPointer and aqBanking pointers */
-class QScopedPointerAbAccountDeleter {
+class QScopedPointerAbAccountDeleter
+{
 public:
-  static void cleanup(AB_ACCOUNT* account)
-  {
+  static void cleanup(AB_ACCOUNT* account) {
     AB_Account_free(account);
   }
 };
@@ -649,26 +650,26 @@ public:
 IonlineTaskSettings::ptr KBankingPlugin::settings(QString accountId, QString taskName)
 {
   AB_ACCOUNT* abAcc = aqbAccount(accountId);
-  if ( abAcc == 0 )
+  if (abAcc == 0)
     return IonlineTaskSettings::ptr();
 
-  if ( germanOnlineTransfer::name() == taskName ) {
+  if (germanOnlineTransfer::name() == taskName) {
     // Get Limits for germanOnlineTransfer
-    QScopedPointer<AB_JOB, QScopedPointerAbJobDeleter> abJob( AB_JobSingleTransfer_new(abAcc) );
-    if ( AB_Job_CheckAvailability( abJob.data() ) != 0 )
+    QScopedPointer<AB_JOB, QScopedPointerAbJobDeleter> abJob(AB_JobSingleTransfer_new(abAcc));
+    if (AB_Job_CheckAvailability(abJob.data()) != 0)
       return IonlineTaskSettings::ptr();
 
-    const AB_TRANSACTION_LIMITS* limits = AB_Job_GetFieldLimits( abJob.data() );
-    return AB_TransactionLimits_toGermanOnlineTaskSettings( limits ).dynamicCast<IonlineTaskSettings>();
+    const AB_TRANSACTION_LIMITS* limits = AB_Job_GetFieldLimits(abJob.data());
+    return AB_TransactionLimits_toGermanOnlineTaskSettings(limits).dynamicCast<IonlineTaskSettings>();
     //! @todo needs free? because that is not possible with const AB_TRANSACTION_LIMITS*
     // AB_TransactionLimits_free( limits );
-  } else if ( sepaOnlineTransfer::name() == taskName ) {
+  } else if (sepaOnlineTransfer::name() == taskName) {
     // Get limits for sepaonlinetransfer
-    QScopedPointer<AB_JOB, QScopedPointerAbJobDeleter> abJob( AB_JobSepaTransfer_new(abAcc) );
-    if ( AB_Job_CheckAvailability( abJob.data() ) != 0 )
+    QScopedPointer<AB_JOB, QScopedPointerAbJobDeleter> abJob(AB_JobSepaTransfer_new(abAcc));
+    if (AB_Job_CheckAvailability(abJob.data()) != 0)
       return IonlineTaskSettings::ptr();
-    const AB_TRANSACTION_LIMITS* limits = AB_Job_GetFieldLimits( abJob.data() );
-    return AB_TransactionLimits_toSepaOnlineTaskSettings( limits ).dynamicCast<IonlineTaskSettings>();
+    const AB_TRANSACTION_LIMITS* limits = AB_Job_GetFieldLimits(abJob.data());
+    return AB_TransactionLimits_toSepaOnlineTaskSettings(limits).dynamicCast<IonlineTaskSettings>();
   }
   return IonlineTaskSettings::ptr();
 }
@@ -679,12 +680,12 @@ bool KBankingPlugin::enqueTransaction(onlineJobTyped<germanOnlineTransfer>& job)
   QString accId = job.constTask()->responsibleAccount();
   AB_ACCOUNT *abAccount = aqbAccount(accId);
   if (!abAccount) {
-    job.addJobMessage( onlineJobMessage(onlineJobMessage::warning, "KBanking", i18n("<qt>"
+    job.addJobMessage(onlineJobMessage(onlineJobMessage::warning, "KBanking", i18n("<qt>"
                                                                                     "The given application account <b>%1</b> "
                                                                                     "has not been mapped to an online "
                                                                                     "account."
                                                                                     "</qt>",
-                                                                                    MyMoneyFile::instance()->account(accId).name())) );
+                                       MyMoneyFile::instance()->account(accId).name())));
     return false;
   }
   //setupAccountReference(acc, ba); // needed?
@@ -736,12 +737,12 @@ bool KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
 
   AB_ACCOUNT *abAccount = aqbAccount(accId);
   if (!abAccount) {
-    job.addJobMessage( onlineJobMessage(onlineJobMessage::warning, "KBanking", i18n("<qt>"
+    job.addJobMessage(onlineJobMessage(onlineJobMessage::warning, "KBanking", i18n("<qt>"
                                                                                     "The given application account <b>%1</b> "
                                                                                     "has not been mapped to an online "
                                                                                     "account."
                                                                                     "</qt>",
-                                                                                    MyMoneyFile::instance()->account(accId).name())) );
+                                       MyMoneyFile::instance()->account(accId).name())));
     return false;
   }
   //setupAccountReference(acc, ba); // needed?
@@ -760,9 +761,9 @@ bool KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
 
   // Recipient
   payeeIdentifiers::ibanBic beneficiaryAcc = job.constTask()->beneficiaryTyped();
-  AB_Transaction_SetRemoteName( AbTransaction, GWEN_StringList_fromQString(beneficiaryAcc.ownerName()) );
-  AB_Transaction_SetRemoteIban( AbTransaction, beneficiaryAcc.electronicIban().toUtf8().constData() );
-  AB_Transaction_SetRemoteBic(  AbTransaction, beneficiaryAcc.fullStoredBic().toUtf8().constData() );
+  AB_Transaction_SetRemoteName(AbTransaction, GWEN_StringList_fromQString(beneficiaryAcc.ownerName()));
+  AB_Transaction_SetRemoteIban(AbTransaction, beneficiaryAcc.electronicIban().toUtf8().constData());
+  AB_Transaction_SetRemoteBic(AbTransaction, beneficiaryAcc.fullStoredBic().toUtf8().constData());
 
   // Origin Account
   AB_Transaction_SetLocalAccount(AbTransaction, abAccount);
@@ -883,11 +884,11 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
   }
 
   /** check result of each job */
-  AB_JOB_LIST2_ITERATOR* jobIter = AB_Job_List2_First( _jobQueue );
+  AB_JOB_LIST2_ITERATOR* jobIter = AB_Job_List2_First(_jobQueue);
   if (jobIter) {
     AB_JOB* abJob = AB_Job_List2Iterator_Data(jobIter);
 
-    while(abJob) {
+    while (abJob) {
       GWEN_DB_NODE* gwenNode = AB_Job_GetAppData(abJob);
       if (gwenNode == 0) {
         qWarning("Executed AB_Job without KMyMoney id");
@@ -911,13 +912,13 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
           || abStatus == AB_Job_StatusPending
           || abStatus == AB_Job_StatusFinished
           || abStatus == AB_Job_StatusError
-          || abStatus == AB_Job_StatusUnknown )
+          || abStatus == AB_Job_StatusUnknown)
         job.setJobSend();
 
       if (abStatus == AB_Job_StatusFinished)
-        job.setBankAnswer( onlineJob::acceptedByBank );
-      else if ( abStatus == AB_Job_StatusError || abStatus == AB_Job_StatusUnknown)
-        job.setBankAnswer( onlineJob::sendingError );
+        job.setBankAnswer(onlineJob::acceptedByBank);
+      else if (abStatus == AB_Job_StatusError || abStatus == AB_Job_StatusUnknown)
+        job.setBankAnswer(onlineJob::sendingError);
 
       job.addJobMessage(onlineJobMessage(onlineJobMessage::debug, "KBanking", "Job was processed"));
       m_parent->m_onlineJobQueue.insert(jobIdent, job);

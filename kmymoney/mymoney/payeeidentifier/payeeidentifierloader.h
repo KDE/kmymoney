@@ -35,9 +35,9 @@ class payeeIdentifierLoader
 public:
   payeeIdentifierLoader();
 
-  payeeIdentifier createPayeeIdentifier( const QString& payeeIdentifierId );
-  payeeIdentifier createPayeeIdentifierFromXML( const QDomElement& element );
-  payeeIdentifier createPayeeIdentifierFromSqlDatabase( QSqlDatabase db, const QString& identifierType, const QString& identifierId );
+  payeeIdentifier createPayeeIdentifier(const QString& payeeIdentifierId);
+  payeeIdentifier createPayeeIdentifierFromXML(const QDomElement& element);
+  payeeIdentifier createPayeeIdentifierFromSqlDatabase(QSqlDatabase db, const QString& identifierType, const QString& identifierId);
 
   /**
    * @brief Create a delegate to show/edit
@@ -47,12 +47,12 @@ public:
    *
    * @return a pointer to a delegate or null_ptr. Caller takes ownership.
    */
-  QAbstractItemDelegate* createItemDelegate( const QString& payeeIdentifierId, QObject* parent = 0 );
+  QAbstractItemDelegate* createItemDelegate(const QString& payeeIdentifierId, QObject* parent = 0);
 
   /**
    * @brief Test if a delegate for editing is available
    */
-  bool hasItemEditDelegate( const QString& payeeIdentifierId );
+  bool hasItemEditDelegate(const QString& payeeIdentifierId);
 
   /**
    * @brief List availableDelegates delegates
@@ -65,12 +65,14 @@ public:
   /**
    * @brief Human readable name of a delegate for a given payeeIdentifierId
    */
-  QString translatedDelegateName( const QString& payeeIdentifierId );
+  QString translatedDelegateName(const QString& payeeIdentifierId);
 
   /** I take ownership */
-  void addPayeeIdentifier( payeeIdentifierData *const identifier );
+  void addPayeeIdentifier(payeeIdentifierData *const identifier);
 
-  static payeeIdentifierLoader* instance() { return &m_self; }
+  static payeeIdentifierLoader* instance() {
+    return &m_self;
+  }
 
 private:
   QHash<QString, payeeIdentifierData*> m_identifiers;

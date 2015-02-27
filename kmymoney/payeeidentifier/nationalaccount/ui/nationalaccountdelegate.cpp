@@ -28,7 +28,7 @@
 #include "nationaaccountedit.h"
 
 nationalAccountDelegate::nationalAccountDelegate(QObject* parent, const QVariantList&)
-  : QStyledItemDelegate(parent)
+    : QStyledItemDelegate(parent)
 {
 
 }
@@ -44,7 +44,7 @@ void nationalAccountDelegate::paint(QPainter* painter, const QStyleOptionViewIte
   style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
   const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
-  const QRect textArea = QRect(opt.rect.x()+margin, opt.rect.y()+margin, opt.rect.width()-2*margin, opt.rect.height()-2*margin);
+  const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
 
   // Do not paint text if the edit widget is shown
   const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(opt.widget);
@@ -52,33 +52,33 @@ void nationalAccountDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     return;
 
   // Get data
-  payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = identByIndex( index );
+  payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = identByIndex(index);
 
   // Paint bank code
   painter->save();
   const QFont smallFont = painter->font();
-  const QFontMetrics metrics( opt.font );
-  const QFontMetrics smallMetrics( smallFont );
+  const QFontMetrics metrics(opt.font);
+  const QFontMetrics smallMetrics(smallFont);
   const QRect bicRect = style->alignedRect(opt.direction, Qt::AlignTop, QSize(textArea.width(), smallMetrics.lineSpacing()),
-                                           QRect(textArea.left(), metrics.lineSpacing()+textArea.top(), textArea.width(), smallMetrics.lineSpacing())
+                        QRect(textArea.left(), metrics.lineSpacing() + textArea.top(), textArea.width(), smallMetrics.lineSpacing())
                                           );
-  painter->setFont( smallFont );
-  style->drawItemText( painter, bicRect, Qt::AlignBottom, QApplication::palette(), true, ident->bankCode(), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text );
+  painter->setFont(smallFont);
+  style->drawItemText(painter, bicRect, Qt::AlignBottom, QApplication::palette(), true, ident->bankCode(), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text);
   painter->restore();
 
   // Paint bank name
   painter->save();
   const QRect nameRect = style->alignedRect(opt.direction, Qt::AlignTop, QSize(textArea.width(), smallMetrics.lineSpacing()),
-                                           QRect(textArea.left(), metrics.lineSpacing()+smallMetrics.lineSpacing()+textArea.top(), textArea.width(), smallMetrics.lineSpacing())
-  );
-  style->drawItemText( painter, nameRect, Qt::AlignBottom, QApplication::palette(), true, ident->bankName(), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text );
+                         QRect(textArea.left(), metrics.lineSpacing() + smallMetrics.lineSpacing() + textArea.top(), textArea.width(), smallMetrics.lineSpacing())
+                                           );
+  style->drawItemText(painter, nameRect, Qt::AlignBottom, QApplication::palette(), true, ident->bankName(), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text);
   painter->restore();
 
   // Paint account number
   painter->save();
   QFont normal = painter->font();
   normal.setBold(true);
-  painter->setFont( normal );
+  painter->setFont(normal);
   const QRect ibanRect = style->alignedRect(opt.direction, Qt::AlignTop, QSize(textArea.width(), metrics.lineSpacing()), textArea);
   const QString bic = index.model()->data(index, Qt::DisplayRole).toString();
   style->drawItemText(painter, ibanRect, Qt::AlignTop, QApplication::palette(), true, ident->accountNumber(), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text);
@@ -86,8 +86,8 @@ void nationalAccountDelegate::paint(QPainter* painter, const QStyleOptionViewIte
 
   // Paint type
   painter->save();
-  QRect typeRect = style->alignedRect( opt.direction, Qt::AlignTop | Qt::AlignRight, QSize(textArea.width()/5, metrics.lineSpacing()), textArea);
-  style->drawItemText( painter, typeRect, Qt::AlignTop | Qt::AlignRight, QApplication::palette(), true, i18n("National Account"), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text);
+  QRect typeRect = style->alignedRect(opt.direction, Qt::AlignTop | Qt::AlignRight, QSize(textArea.width() / 5, metrics.lineSpacing()), textArea);
+  style->drawItemText(painter, typeRect, Qt::AlignTop | Qt::AlignRight, QApplication::palette(), true, i18n("National Account"), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text);
   painter->restore();
 }
 
@@ -106,7 +106,7 @@ QSize nationalAccountDelegate::sizeHint(const QStyleOptionViewItem& option, cons
   const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
 
   // An iban has maximal 32 characters, so national accounts should be shorter than 28
-  return QSize( (28)*metrics.width(QLatin1Char('X')) + 2*margin, 3*metrics.lineSpacing() + metrics.leading() + 2*margin );
+  return QSize((28)*metrics.width(QLatin1Char('X')) + 2*margin, 3*metrics.lineSpacing() + metrics.leading() + 2*margin);
 }
 
 QWidget* nationalAccountDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -120,30 +120,30 @@ QWidget* nationalAccountDelegate::createEditor(QWidget* parent, const QStyleOpti
 void nationalAccountDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
 {
   nationalAccountEdit* nationalEditor = qobject_cast< nationalAccountEdit* >(editor);
-  Q_CHECK_PTR( nationalEditor );
+  Q_CHECK_PTR(nationalEditor);
 
-  nationalEditor->setIdentifier( identByIndex(index) );
+  nationalEditor->setIdentifier(identByIndex(index));
 }
 
 void nationalAccountDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
 {
-  Q_CHECK_PTR( editor );
-  Q_CHECK_PTR( model );
-  Q_ASSERT( index.isValid() );
+  Q_CHECK_PTR(editor);
+  Q_CHECK_PTR(model);
+  Q_ASSERT(index.isValid());
 
   nationalAccountEdit* nationalEditor = qobject_cast< nationalAccountEdit* >(editor);
-  Q_CHECK_PTR( nationalEditor );
+  Q_CHECK_PTR(nationalEditor);
 
   payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = identByIndex(index);
-  ident->setAccountNumber( nationalEditor->accountNumber() );
-  ident->setBankCode( nationalEditor->institutionCode() );
-  model->setData(index, QVariant::fromValue<payeeIdentifier>( ident ), payeeIdentifierModel::payeeIdentifier);
+  ident->setAccountNumber(nationalEditor->accountNumber());
+  ident->setBankCode(nationalEditor->institutionCode());
+  model->setData(index, QVariant::fromValue<payeeIdentifier>(ident), payeeIdentifierModel::payeeIdentifier);
 }
 
 void nationalAccountDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-  Q_UNUSED( index );
-  editor->setGeometry( option.rect );
+  Q_UNUSED(index);
+  editor->setGeometry(option.rect);
 }
 
 /**
@@ -152,9 +152,9 @@ void nationalAccountDelegate::updateEditorGeometry(QWidget* editor, const QStyle
 payeeIdentifierTyped<payeeIdentifiers::nationalAccount> nationalAccountDelegate::identByIndex(const QModelIndex& index) const
 {
   payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = payeeIdentifierTyped<payeeIdentifiers::nationalAccount>(
-    index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
-  );
+        index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
+      );
 
-  Q_ASSERT( !ident.isNull() );
+  Q_ASSERT(!ident.isNull());
   return ident;
 }

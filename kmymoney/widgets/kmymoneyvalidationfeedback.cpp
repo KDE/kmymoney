@@ -29,16 +29,16 @@ public:
 
 KMyMoneyValidationFeedback::KMyMoneyValidationFeedback(QWidget *parent) :
     QWidget(parent),
-    ui( new Ui::KMyMoneyValidationFeedback ),
-    d_ptr( new KMyMoneyValidationFeedbackPrivate )
+    ui(new Ui::KMyMoneyValidationFeedback),
+    d_ptr(new KMyMoneyValidationFeedbackPrivate)
 {
   ui->setupUi(this);
-  setHidden( true );
+  setHidden(true);
   QSizePolicy newSizePolicy = sizePolicy();
-  newSizePolicy.setControlType( QSizePolicy::Label );
+  newSizePolicy.setControlType(QSizePolicy::Label);
   newSizePolicy.setHorizontalPolicy(QSizePolicy::MinimumExpanding);
   newSizePolicy.setVerticalPolicy(QSizePolicy::Fixed);
-  setSizePolicy( newSizePolicy );
+  setSizePolicy(newSizePolicy);
 }
 
 KMyMoneyValidationFeedback::~KMyMoneyValidationFeedback()
@@ -76,7 +76,7 @@ void KMyMoneyValidationFeedback::setFeedback(KMyMoneyValidationFeedback::Message
       default:
         icon = QIcon::fromTheme("dialog-warning");
     }
-    ui->icon->setPixmap( icon.pixmap(24) );
+    ui->icon->setPixmap(icon.pixmap(24));
   }
 }
 
@@ -89,7 +89,7 @@ void KMyMoneyValidationFeedback::removeFeedback(KMyMoneyValidationFeedback::Mess
 {
   Q_D(KMyMoneyValidationFeedback);
 
-  if ( d->type == type && ui->label->text() == message )
+  if (d->type == type && ui->label->text() == message)
     removeFeedback();
 }
 

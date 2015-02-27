@@ -38,8 +38,8 @@
 
 chipTanDialog::chipTanDialog(QWidget* parent)
   : QDialog(parent),
-  m_tan( "" ),
-  m_accepted( true )
+    m_tan(""),
+    m_accepted(true)
 {
   ui = new Ui::chipTanDialog;
   ui->setupUi(this);
@@ -50,8 +50,8 @@ chipTanDialog::chipTanDialog(QWidget* parent)
   
   ui->declarativeView->setSource(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kmm_kbanking/qml/chipTan/ChipTan.qml")));
   
-  setFlickerFieldWidth( KBankingSettings::width() );
-  setFlickerFieldClockSetting( KBankingSettings::clocksetting() );
+  setFlickerFieldWidth(KBankingSettings::width());
+  setFlickerFieldClockSetting(KBankingSettings::clocksetting());
 
   connect(ui->decelerateButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(decelerateTransmission()));
   connect(ui->accelerateButton, SIGNAL(clicked(bool)), ui->declarativeView->rootObject(), SLOT(accelerateTransmission()));
@@ -115,14 +115,14 @@ QString chipTanDialog::tan()
 
 void chipTanDialog::setTanLimits(const int& minLength, const int& maxLength)
 {
-  ui->tanInput->setValidator( new QRegExpValidator(QRegExp(QString("\\d{%1,%2}").arg(minLength).arg(maxLength)), ui->tanInput) );
+  ui->tanInput->setValidator(new QRegExpValidator(QRegExp(QString("\\d{%1,%2}").arg(minLength).arg(maxLength)), ui->tanInput));
 }
 
 void chipTanDialog::setFlickerFieldWidth(const int& width)
 {
   QQuickItem* rootObject = ui->declarativeView->rootObject();
   if (rootObject)
-    QMetaObject::invokeMethod(rootObject, "setFlickerFieldWidth", Q_ARG(QVariant, QVariant(width)) );
+    QMetaObject::invokeMethod(rootObject, "setFlickerFieldWidth", Q_ARG(QVariant, QVariant(width)));
 }
 
 int chipTanDialog::flickerFieldWidth()
@@ -139,12 +139,12 @@ void chipTanDialog::setFlickerFieldClockSetting(const int& width)
 {
   QQuickItem* rootObject = ui->declarativeView->rootObject();
   if (rootObject)
-    QMetaObject::invokeMethod(rootObject, "setFlickerClockSetting", Q_ARG(QVariant, QVariant(width)) );
+    QMetaObject::invokeMethod(rootObject, "setFlickerClockSetting", Q_ARG(QVariant, QVariant(width)));
 }
 
 void chipTanDialog::flickerFieldClockSettingChanged(const int& takt)
 {
-  KBankingSettings::setClocksetting( takt );
+  KBankingSettings::setClocksetting(takt);
   KBankingSettings::self()->writeConfig();
 }
 

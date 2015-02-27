@@ -24,7 +24,8 @@
 
 class payeeIdentifierLoader;
 
-namespace payeeIdentifiers {
+namespace payeeIdentifiers
+{
 
 /**
  * @brief A payeeIdentifier which is used to store the plain xml data
@@ -46,7 +47,7 @@ public:
 
   friend class payeeIdentifierLoader;
   /** @todo make private */
-  payeeIdentifierUnavailable( QDomElement data );
+  payeeIdentifierUnavailable(QDomElement data);
 
   /**
    * @name SqlMethods

@@ -46,7 +46,7 @@ KOnlineJobOutbox::KOnlineJobOutbox(QWidget *parent) :
     columns = configGroup.readEntry("HeaderState", columns);
     ui->m_onlineJobView->header()->restoreState(columns);
 
-    ui->m_onlineJobView->setModel( Models::instance()->onlineJobsModel() );
+  ui->m_onlineJobView->setModel(Models::instance()->onlineJobsModel());
     connect(ui->m_buttonSend, SIGNAL(clicked()), this, SLOT(slotSendJobs()));
     connect(ui->m_buttonRemove, SIGNAL(clicked()), this, SLOT(slotRemoveJob()));
     connect(ui->m_buttonEdit, SIGNAL(clicked()), this, SLOT(slotEditJob()));
@@ -92,7 +92,7 @@ void KOnlineJobOutbox::updateButtonState() const
         tooltip = i18n("Job is being processed at the moment.");
       else
         Q_ASSERT(false);
-    } else if(!onlineJobAdministration::instance()->canEditOnlineJob(job)) {
+    } else if (!onlineJobAdministration::instance()->canEditOnlineJob(job)) {
       editable = false;
       tooltip = i18n("The plugin to edit this job is not available.");
     }
@@ -119,8 +119,8 @@ void KOnlineJobOutbox::updateButtonState() const
 void KOnlineJobOutbox::updateNewCreditTransferButton()
 {
   QAction* action = kmymoney->action("account_online_new_credit_transfer");
-  Q_CHECK_PTR( action );
-  ui->m_buttonNewCreditTransfer->setEnabled( action->isEnabled() );
+  Q_CHECK_PTR(action);
+  ui->m_buttonNewCreditTransfer->setEnabled(action->isEnabled());
 }
 
 void KOnlineJobOutbox::slotRemoveJob()
@@ -132,8 +132,8 @@ void KOnlineJobOutbox::slotRemoveJob()
 
   QAbstractItemModel* model = ui->m_onlineJobView->model();
   const int count = indexes.count();
-  for ( int i = count-1; i >= 0; --i ) {
-    model->removeRow( indexes.at(i).row() );
+  for (int i = count - 1; i >= 0; --i) {
+    model->removeRow(indexes.at(i).row());
   }
 }
 
@@ -148,8 +148,8 @@ QStringList KOnlineJobOutbox::selectedOnlineJobs() const
   list.reserve(indexes.count());
 
   const QAbstractItemModel *const model = ui->m_onlineJobView->model();
-  Q_FOREACH( const QModelIndex& index, indexes ) {
-    list.append(model->data( index, onlineJobModel::OnlineJobId ).toString());
+  Q_FOREACH(const QModelIndex& index, indexes) {
+    list.append(model->data(index, onlineJobModel::OnlineJobId).toString());
   }
   return list;
 }
@@ -158,13 +158,13 @@ QStringList KOnlineJobOutbox::selectedOnlineJobs() const
 void KOnlineJobOutbox::slotSendJobs()
 {
   QList<onlineJob> validJobs;
-  foreach( onlineJob job, MyMoneyFile::instance()->onlineJobList()) {
+  foreach (onlineJob job, MyMoneyFile::instance()->onlineJobList()) {
     if (job.isValid())
       validJobs.append(job);
   }
   qDebug() << "I shall send " << validJobs.count() << "/" << MyMoneyFile::instance()->onlineJobList().count() << " onlineJobs";
-  if ( !validJobs.isEmpty() )
-    emit sendJobs( validJobs );
+  if (!validJobs.isEmpty())
+    emit sendJobs(validJobs);
 }
 
 void KOnlineJobOutbox::slotEditJob()
@@ -172,7 +172,7 @@ void KOnlineJobOutbox::slotEditJob()
   QModelIndexList indexes = ui->m_onlineJobView->selectionModel()->selectedIndexes();
   if (!indexes.isEmpty()) {
     QString jobId = ui->m_onlineJobView->model()->data(indexes.first(), onlineJobModel::OnlineJobId).toString();
-    Q_ASSERT( !jobId.isEmpty() );
+    Q_ASSERT(!jobId.isEmpty());
     emit editJob(jobId);
   }
 }

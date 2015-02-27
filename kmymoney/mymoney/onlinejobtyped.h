@@ -38,7 +38,7 @@
 template<class T>
 class onlineJobTyped : public onlineJob
 {
-    KMM_MYMONEY_UNIT_TESTABLE
+  KMM_MYMONEY_UNIT_TESTABLE
 public:
   /**
    * @brief create new task
@@ -52,10 +52,10 @@ public:
     *
     * @throws emptyTask if task == 0
     */
-  explicit onlineJobTyped( T* task, const QString& id = MyMoneyObject::m_emptyId );
+  explicit onlineJobTyped(T* task, const QString& id = MyMoneyObject::m_emptyId);
 
   /** @brief Copy constructor */
-  onlineJobTyped( onlineJobTyped<T> const& other );
+  onlineJobTyped(onlineJobTyped<T> const& other);
 
   /**
     * @brief Copy from onlineJob
@@ -66,7 +66,7 @@ public:
   explicit onlineJobTyped(const onlineJob &other);
 
   /** @brief Copy constructor with new id */
-  explicit onlineJobTyped( const QString &id, const onlineJobTyped<T>& other );
+  explicit onlineJobTyped(const QString &id, const onlineJobTyped<T>& other);
 
   /** Does not throw */
   inline T* task();
@@ -75,54 +75,56 @@ public:
   inline const T* task() const;
 
   /** Does not throw */
-  inline const T* constTask() const { return task(); }
+  inline const T* constTask() const {
+    return task();
+  }
 
   /** Does not throw */
-  onlineJobTyped<T> operator =( onlineJobTyped<T> const& other );
+  onlineJobTyped<T> operator =(onlineJobTyped<T> const& other);
 
 private:
   T* m_taskTyped;
 };
 
 template<class T>
-onlineJobTyped<T>::onlineJobTyped( )
-  : onlineJob( onlineJobAdministration::instance()->createOnlineTask( T::name() ) )
+onlineJobTyped<T>::onlineJobTyped()
+    : onlineJob(onlineJobAdministration::instance()->createOnlineTask(T::name()))
 {
-  m_taskTyped = static_cast<T*>( onlineJob::task() ); // this can throw emptyTask
+  m_taskTyped = static_cast<T*>(onlineJob::task());   // this can throw emptyTask
 
   // Just be safe: an onlineTask developer could have done something wrong
-  Q_CHECK_PTR( dynamic_cast<T*>(onlineJob::task()) );
+  Q_CHECK_PTR(dynamic_cast<T*>(onlineJob::task()));
 }
 
 template<class T>
-onlineJobTyped<T>::onlineJobTyped( T* task, const QString& id )
-  : onlineJob(task, id),
-  m_taskTyped( task )
+onlineJobTyped<T>::onlineJobTyped(T* task, const QString& id)
+    : onlineJob(task, id),
+    m_taskTyped(task)
 {
   if (task == 0)
     throw emptyTask(__FILE__, __LINE__);
 }
 
 template<class T>
-onlineJobTyped<T>::onlineJobTyped( onlineJobTyped<T> const& other )
-  : onlineJob(other)
+onlineJobTyped<T>::onlineJobTyped(onlineJobTyped<T> const& other)
+    : onlineJob(other)
 {
   m_taskTyped = dynamic_cast<T*>(onlineJob::task());
-  Q_CHECK_PTR( m_taskTyped );
+  Q_CHECK_PTR(m_taskTyped);
 }
 
 template<class T>
-onlineJobTyped<T> onlineJobTyped<T>::operator =( onlineJobTyped<T> const& other )
+onlineJobTyped<T> onlineJobTyped<T>::operator =(onlineJobTyped<T> const & other)
 {
   onlineJob::operator =(other);
   m_taskTyped = dynamic_cast<T*>(onlineJob::task());
-  Q_CHECK_PTR( m_taskTyped );
+  Q_CHECK_PTR(m_taskTyped);
   return (*this);
 }
 
 template<class T>
 onlineJobTyped<T>::onlineJobTyped(const onlineJob &other)
-    : onlineJob( other )
+    : onlineJob(other)
 {
   m_taskTyped = dynamic_cast<T*>(onlineJob::task()); // can throw emptyTask
   if (m_taskTyped == 0)
@@ -132,15 +134,15 @@ onlineJobTyped<T>::onlineJobTyped(const onlineJob &other)
 template<class T>
 T* onlineJobTyped<T>::task()
 {
-    Q_CHECK_PTR(m_taskTyped);
-    return m_taskTyped;
+  Q_CHECK_PTR(m_taskTyped);
+  return m_taskTyped;
 }
 
 template<class T>
 const T* onlineJobTyped<T>::task() const
 {
-    Q_CHECK_PTR(m_taskTyped);
-    return m_taskTyped;
+  Q_CHECK_PTR(m_taskTyped);
+  return m_taskTyped;
 }
 
 #endif // ONLINEJOBTYPED_H

@@ -31,7 +31,7 @@
 #include "payeeidentifierselectiondelegate.h"
 
 payeeIdentifierDelegate::payeeIdentifierDelegate(QObject* parent)
-  : StyledItemDelegateForwarder(parent)
+    : StyledItemDelegateForwarder(parent)
 {
 }
 
@@ -40,7 +40,7 @@ QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelInde
   static QAbstractItemDelegate* defaultDelegate = 0;
   const QString type = (index.isValid()) ? index.model()->data(index, payeeIdentifierModel::payeeIdentifierType).toString() : QString();
 
-  if ( type.isEmpty() ) {
+  if (type.isEmpty()) {
     QAbstractItemDelegate* delegate = new payeeIdentifierSelectionDelegate(this->parent());
     connectSignals(delegate);
     return delegate;
@@ -51,7 +51,7 @@ QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelInde
 
   if (delegate == 0) {
     if (defaultDelegate == 0)
-      defaultDelegate = new QStyledItemDelegate( this->parent() );
+      defaultDelegate = new QStyledItemDelegate(this->parent());
     delegate = defaultDelegate;
   }
   connectSignals(delegate, Qt::UniqueConnection);
@@ -59,33 +59,33 @@ QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelInde
 }
 
 KPayeeIdentifierView::KPayeeIdentifierView(QWidget* parent)
-  : QWidget(parent)
+    : QWidget(parent)
 {
   ui = new Ui::KPayeeIdentifierView;
   ui->setupUi(this);
-  ui->view->setItemDelegate( new payeeIdentifierDelegate(ui->view) );
+  ui->view->setItemDelegate(new payeeIdentifierDelegate(ui->view));
 }
 
 void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
 {
-  if ( ui->view->model() == 0 ) {
-    payeeIdentifierModel* model = new payeeIdentifierModel( ui->view );
+  if (ui->view->model() == 0) {
+    payeeIdentifierModel* model = new payeeIdentifierModel(ui->view);
     connect(kmymoney, SIGNAL(fileLoaded(KUrl)), model, SLOT(closeSource()));
     connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SIGNAL(dataChanged()));
-    ui->view->setModel( model );
+    ui->view->setModel(model);
   }
 
-  Q_CHECK_PTR( qobject_cast<payeeIdentifierModel*>(ui->view->model()) );  // this should never fail but may help during debugging
+  Q_CHECK_PTR(qobject_cast<payeeIdentifierModel*>(ui->view->model()));    // this should never fail but may help during debugging
   static_cast<payeeIdentifierModel*>(ui->view->model())->setSource(container);
 
   // Open persistent editor for last row
-  ui->view->openPersistentEditor(ui->view->model()->index( ui->view->model()->rowCount(QModelIndex())-1, 0 ));
+  ui->view->openPersistentEditor(ui->view->model()->index(ui->view->model()->rowCount(QModelIndex()) - 1, 0));
 }
 
 QList< payeeIdentifier > KPayeeIdentifierView::identifiers() const
 {
   const QAbstractItemModel* model = ui->view->model();
-  if ( model != 0 )
+  if (model != 0)
     return static_cast<const payeeIdentifierModel*>(model)->identifiers();
   return QList< payeeIdentifier >();
 }
@@ -110,9 +110,9 @@ void KPayeeIdentifierView::removeSelected()
   std::sort(selectedRows.begin(), selectedRows.end(), QModelIndexRowComparison);
 
   QAbstractItemModel* model = ui->view->model();
-  Q_CHECK_PTR( model );
+  Q_CHECK_PTR(model);
 
   QModelIndexList::const_iterator end = selectedRows.constEnd();
-  for(QModelIndexList::const_iterator iter = selectedRows.constBegin(); iter != end; ++iter)
+  for (QModelIndexList::const_iterator iter = selectedRows.constBegin(); iter != end; ++iter)
     model->removeRow(iter->row(), iter->parent());
 }

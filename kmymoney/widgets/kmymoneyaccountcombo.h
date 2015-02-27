@@ -84,8 +84,7 @@ class AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<Acco
   Q_OBJECT
 public:
   AccountNamesFilterProxyModel(QObject* parent = 0)
-  : AccountNamesFilterProxyModelTpl< AccountsFilterProxyModel >(parent)
-  {}
+      : AccountNamesFilterProxyModelTpl< AccountsFilterProxyModel >(parent) {}
 };
 
 /**
@@ -133,7 +132,7 @@ private:
 
 template <class baseProxyModel>
 AccountNamesFilterProxyModelTpl<baseProxyModel>::AccountNamesFilterProxyModelTpl(QObject *parent)
-: baseProxyModel(parent)
+    : baseProxyModel(parent)
 {
 }
 

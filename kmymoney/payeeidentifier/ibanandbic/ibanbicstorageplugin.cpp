@@ -25,7 +25,7 @@
 // TODO: port KF5
 /*K_PLUGIN_FACTORY(ibanBicStoragePluginFactory,
                  registerPlugin<ibanBicStoragePlugin>();
-)
+                )
 K_EXPORT_PLUGIN(ibanBicStoragePluginFactory("ibanBicStoragePlugin"))*/
 
 QString ibanBicStoragePlugin::iid()
@@ -34,7 +34,7 @@ QString ibanBicStoragePlugin::iid()
 }
 
 ibanBicStoragePlugin::ibanBicStoragePlugin(QObject* parent, const QVariantList& options)
-  : storagePlugin(parent, options)
+    : storagePlugin(parent, options)
 {
 
 }
@@ -58,20 +58,20 @@ bool ibanBicStoragePlugin::setupDatabase(QSqlDatabase connection)
   }
 
   int currentVersion = 0;
-  if ( query.next() )
+  if (query.next())
     currentVersion = query.value(0).toInt();
 
   // Create database in it's most recent version if version is 0
   // (version 0 means the database was not installed)
-  if ( currentVersion == 0 ) {
+  if (currentVersion == 0) {
     if (!query.exec(
-      "CREATE TABLE kmmIbanBic ("
-      "  id varchar(32) NOT NULL PRIMARY KEY REFERENCES kmmPayeeIdentifier( id ) ON DELETE CASCADE ON UPDATE CASCADE,"
-      "  iban varchar(32),"
-      "  bic char(11) CHECK(length(bic) = 11 OR bic IS NULL),"
-      "  name text"
-      " );"
-    )) {
+          "CREATE TABLE kmmIbanBic ("
+          "  id varchar(32) NOT NULL PRIMARY KEY REFERENCES kmmPayeeIdentifier( id ) ON DELETE CASCADE ON UPDATE CASCADE,"
+          "  iban varchar(32),"
+          "  bic char(11) CHECK(length(bic) = 11 OR bic IS NULL),"
+          "  name text"
+          " );"
+        )) {
       qWarning("Could not create table for ibanBicStoragePlugin: %s", qPrintable(query.lastError().text()));
       return false;
     }
@@ -81,14 +81,14 @@ bool ibanBicStoragePlugin::setupDatabase(QSqlDatabase connection)
     query.bindValue(1, 1);
     query.bindValue(2, 0);
     query.bindValue(3, "DROP TABLE kmmIbanBic;");
-    if ( query.exec() )
+    if (query.exec())
       return true;
     qWarning("Could not save plugin info for ibanBicStoragePlugin (%s): %s", qPrintable(iid()), qPrintable(query.lastError().text()));
     return false;
   }
 
   // Check if version is valid with this plugin
-  switch( currentVersion ) {
+  switch (currentVersion) {
     case 1: return true;
   }
 

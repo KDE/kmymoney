@@ -58,7 +58,7 @@ class KMM_WIDGETS_EXPORT KMyMoneyTextEdit : public KTextEdit
   Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly);
 
 public:
-  KMyMoneyTextEdit( QWidget* parent = 0);
+  KMyMoneyTextEdit(QWidget* parent = 0);
 
   int maxLength() const;
   int maxLineLength() const;
@@ -77,10 +77,10 @@ public Q_SLOTS:
 
 protected:
   virtual void keyReleaseEvent(QKeyEvent* e);
-  virtual void keyPressEvent( QKeyEvent* e );
+  virtual void keyPressEvent(QKeyEvent* e);
 
 private:
-  bool isEventAllowed( QKeyEvent* e ) const;
+  bool isEventAllowed(QKeyEvent* e) const;
   int m_maxLength;
   int m_maxLineLength;
   int m_maxLines;

@@ -22,7 +22,7 @@
 #include "mymoney/onlinejobadministration.h"
 
 OnlineBankingAccountsFilterProxyModel::OnlineBankingAccountsFilterProxyModel(QObject* parent)
-  :QSortFilterProxyModel(parent)
+    : QSortFilterProxyModel(parent)
 {
 }
 
@@ -47,12 +47,12 @@ Qt::ItemFlags OnlineBankingAccountsFilterProxyModel::flags(const QModelIndex& in
 }
 
 
-bool OnlineBankingAccountsFilterProxyModel::filterAcceptsParent( const QModelIndex& index ) const
+bool OnlineBankingAccountsFilterProxyModel::filterAcceptsParent(const QModelIndex& index) const
 {
   const int rowCount = sourceModel()->rowCount(index);
   for (int i = 0; i < rowCount; i++) {
-    const QModelIndex childIndex = sourceModel()->index(i,0,index);
-    if (onlineJobAdministration::instance()->isAnyJobSupported(sourceModel()->data(childIndex, AccountsModel::AccountIdRole).toString() ))
+    const QModelIndex childIndex = sourceModel()->index(i, 0, index);
+    if (onlineJobAdministration::instance()->isAnyJobSupported(sourceModel()->data(childIndex, AccountsModel::AccountIdRole).toString()))
       return true;
     if (filterAcceptsParent(childIndex))
       return true;

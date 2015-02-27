@@ -20,17 +20,18 @@
 
 #include <typeinfo>
 
-namespace payeeIdentifiers {
+namespace payeeIdentifiers
+{
 
 payeeIdentifierUnavailable::payeeIdentifierUnavailable()
-  : payeeIdentifierData(),
-    m_data( QDomElement() )
+    : payeeIdentifierData(),
+    m_data(QDomElement())
 {
 }
 
 payeeIdentifierUnavailable::payeeIdentifierUnavailable(QDomElement data)
-  : payeeIdentifierData(),
-    m_data( data )
+    : payeeIdentifierData(),
+    m_data(data)
 {
 
 }
@@ -91,11 +92,11 @@ bool payeeIdentifierUnavailable::isValid() const
 
 bool payeeIdentifierUnavailable::operator==(const payeeIdentifierData& other) const
 {
-  if ( payeeIdentifierId() == other.payeeIdentifierId()) {
+  if (payeeIdentifierId() == other.payeeIdentifierId()) {
     try {
       const payeeIdentifierUnavailable& otherCasted = dynamic_cast<const payeeIdentifierUnavailable&>(other);
       return operator==(otherCasted);
-    } catch ( const std::bad_cast& ) {
+    } catch (const std::bad_cast&) {
     }
   }
   return false;

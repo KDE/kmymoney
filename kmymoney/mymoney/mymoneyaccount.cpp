@@ -288,15 +288,15 @@ bool MyMoneyAccount::isLiquidAsset(void) const
 template<>
 QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const
 {
-  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = payeeIdentifierTyped<payeeIdentifiers::ibanBic>( new payeeIdentifiers::ibanBic );
-  ident->setIban( value(QLatin1String("iban")) );
+  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(new payeeIdentifiers::ibanBic);
+  ident->setIban(value(QLatin1String("iban")));
 
-  if ( !institutionId().isEmpty() ) {
-    const MyMoneyInstitution institution = MyMoneyFile::instance()->institution( institutionId() );
-    ident->setBic( institution.value("bic") );
+  if (!institutionId().isEmpty()) {
+    const MyMoneyInstitution institution = MyMoneyFile::instance()->institution(institutionId());
+    ident->setBic(institution.value("bic"));
   }
 
-  ident->setOwnerName( MyMoneyFile::instance()->user().name() );
+  ident->setOwnerName(MyMoneyFile::instance()->user().name());
 
   QList< payeeIdentifierTyped<payeeIdentifiers::ibanBic> > typedList;
   typedList << ident;
@@ -828,22 +828,22 @@ QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
   MyMoneyFile* file = MyMoneyFile::instance();
 
   // Iban & Bic
-  if ( !value( QLatin1String("iban") ).isEmpty() ) {
-    payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban( new payeeIdentifiers::ibanBic );
-    iban->setIban( value("iban") );
-    iban->setBic( file->institution( institutionId() ).value("bic") );
-    iban->setOwnerName( file->user().name() );
+  if (!value(QLatin1String("iban")).isEmpty()) {
+    payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban(new payeeIdentifiers::ibanBic);
+    iban->setIban(value("iban"));
+    iban->setBic(file->institution(institutionId()).value("bic"));
+    iban->setOwnerName(file->user().name());
     list.append(iban);
   }
 
   // National Account number
-  if ( !number().isEmpty() ) {
-    payeeIdentifierTyped<payeeIdentifiers::nationalAccount> national( new payeeIdentifiers::nationalAccount );
-    national->setAccountNumber( number() );
-    national->setBankCode( file->institution( institutionId() ).sortcode() );
-    if ( file->user().state().length() == 2 )
-      national->setCountry( file->user().state() );
-    national->setOwnerName( file->user().name() );
+  if (!number().isEmpty()) {
+    payeeIdentifierTyped<payeeIdentifiers::nationalAccount> national(new payeeIdentifiers::nationalAccount);
+    national->setAccountNumber(number());
+    national->setBankCode(file->institution(institutionId()).sortcode());
+    if (file->user().state().length() == 2)
+      national->setCountry(file->user().state());
+    national->setOwnerName(file->user().name());
     list.append(national);
   }
 

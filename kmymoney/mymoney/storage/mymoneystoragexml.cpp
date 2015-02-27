@@ -169,7 +169,7 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
         || s == "fileinfo"
         || s == "user"
         || s == "scheduled_tx"
-        || s == "onlinejob" ) {
+        || s == "onlinejob") {
       m_baseNode = m_doc.createElement(qName);
       for (int i = 0; i < atts.count(); ++i) {
         m_baseNode.setAttribute(atts.qName(i), atts.value(i));

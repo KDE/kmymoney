@@ -227,12 +227,12 @@ public:
   void addBudget(const MyMoneyBudget& bud);
   void modifyBudget(const MyMoneyBudget& bud);
   void removeBudget(const MyMoneyBudget& bud);
-  void addOnlineJob( const onlineJob& job );
-  void modifyOnlineJob( const onlineJob& job);
-  void removeOnlineJob( const onlineJob& job);
-  void addPayeeIdentifier( payeeIdentifier& ident );
-  void modifyPayeeIdentifier( const payeeIdentifier& ident );
-  void removePayeeIdentifier( const payeeIdentifier& ident );
+  void addOnlineJob(const onlineJob& job);
+  void modifyOnlineJob(const onlineJob& job);
+  void removeOnlineJob(const onlineJob& job);
+  void addPayeeIdentifier(payeeIdentifier& ident);
+  void modifyPayeeIdentifier(const payeeIdentifier& ident);
+  void removePayeeIdentifier(const payeeIdentifier& ident);
 
   unsigned long transactionCount(const QString& aid = QString()) const;
   inline const QHash<QString, unsigned long> transactionCountMap() const {
@@ -470,11 +470,11 @@ private:
    * @throws MyMoneyException in case of an error which makes the use
    * of the plugin unavailable.
    */
-  bool setupStoragePlugin( QString iid );
+  bool setupStoragePlugin(QString iid);
 
-  void insertStorableObject( const databaseStoreableObject& obj, const QString& id );
-  void updateStorableObject( const databaseStoreableObject& obj, const QString& id );
-  void deleteStorableObject( const databaseStoreableObject& obj, const QString& id );
+  void insertStorableObject(const databaseStoreableObject& obj, const QString& id);
+  void updateStorableObject(const databaseStoreableObject& obj, const QString& id);
+  void deleteStorableObject(const databaseStoreableObject& obj, const QString& id);
 
   // data
   QExplicitlySharedDataPointer<MyMoneyDbDriver> m_driver;

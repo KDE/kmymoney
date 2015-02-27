@@ -40,7 +40,7 @@ private:
   /**
    * @brief Has parent at least one visible child?
    */
-  bool filterAcceptsParent( const QModelIndex& index ) const;
+  bool filterAcceptsParent(const QModelIndex& index) const;
 };
 
 #endif // ONLINEBANKINGACCOUNTSFILTERPROXYMODEL_H

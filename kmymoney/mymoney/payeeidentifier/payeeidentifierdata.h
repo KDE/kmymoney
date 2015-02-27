@@ -44,10 +44,10 @@ class payeeIdentifierLoader;
  * types and for type casting (there must not be more than one class which uses that pidid).
  */
 #define PAYEEIDENTIFIER_IID(className, iid) \
-/** @brief Returns the payeeIdentifier Iid */ \
-static const QString& staticPayeeIdentifierIid() { \
-  static const QString _pidid = QLatin1String( iid ); \
-  return _pidid; \
+  /** @brief Returns the payeeIdentifier Iid */ \
+  static const QString& staticPayeeIdentifierIid() { \
+    static const QString _pidid = QLatin1String( iid ); \
+    return _pidid; \
   } \
   /** @brief Returns the payeeIdentifier Id */ \
   virtual QString payeeIdentifierId() const { \
@@ -95,7 +95,9 @@ public:
    * @brief Comparison operator
    */
   virtual bool operator==(const payeeIdentifierData& other) const = 0;
-  virtual bool operator!=(const payeeIdentifierData& other) const { return (!operator==(other)); }
+  virtual bool operator!=(const payeeIdentifierData& other) const {
+    return (!operator==(other));
+  }
 
   /**
    * @brief Check if this payeeIdentifier contains correct data

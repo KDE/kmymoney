@@ -22,25 +22,24 @@
 
 #include "ibanvalidator.h"
 
-struct KIbanLineEdit::Private
-{
+struct KIbanLineEdit::Private {
   QTimer* timer;
   KMyMoneyValidationFeedback::MessageType delayedMessageType;
   QString delayedMessage;
 };
 
 KIbanLineEdit::KIbanLineEdit(QWidget* parent)
-  : KLineEdit(parent),
-  d_ptr( new KIbanLineEdit::Private )
+    : KLineEdit(parent),
+    d_ptr(new KIbanLineEdit::Private)
 {
   Q_D();
 
   ibanValidator *const validatorPtr = new ibanValidator;
-  setValidator( validatorPtr );
+  setValidator(validatorPtr);
 
-  d->timer = new QTimer( this );
-  d->timer->setSingleShot( true );
-  d->timer->setInterval( 2000 );
+  d->timer = new QTimer(this);
+  d->timer->setSingleShot(true);
+  d->timer->setInterval(2000);
 
   connect(validatorPtr, SIGNAL(feedback(KMyMoneyValidationFeedback::MessageType,QString)), this, SLOT(delayFeedback(KMyMoneyValidationFeedback::MessageType,QString)));
   connect(this, SIGNAL(returnPressed()), SLOT(emitFeedback()));
@@ -57,7 +56,7 @@ void KIbanLineEdit::delayFeedback(KMyMoneyValidationFeedback::MessageType type, 
   Q_D();
   d->timer->stop();
 
-  if  ( type < d->delayedMessageType ) {
+  if (type < d->delayedMessageType) {
     // Directly show feedback if something got better
     emit validatorFeedback(type, message);
   } else {

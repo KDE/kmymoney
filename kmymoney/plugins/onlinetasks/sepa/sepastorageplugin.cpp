@@ -23,7 +23,7 @@
 const QString sepaStoragePlugin::iid = QLatin1String("org.kmymoney.creditTransfer.sepa.sqlStoragePlugin");
 
 sepaStoragePlugin::sepaStoragePlugin(QObject* parent, const QVariantList& options)
-  : storagePlugin( parent )
+    : storagePlugin(parent)
 {
   Q_UNUSED(options);
 }
@@ -47,26 +47,26 @@ bool sepaStoragePlugin::setupDatabase(QSqlDatabase connection)
   }
 
   int currentVersion = 0;
-  if ( query.next() )
+  if (query.next())
     currentVersion = query.value(0).toInt();
 
   // Create database in it's most recent version if version is 0
   // (version 0 means the database was not installed)
-  if ( currentVersion == 0 ) {
+  if (currentVersion == 0) {
     if (!query.exec(
-      "CREATE TABLE kmmSepaOrders ("
-      "  id varchar(32) NOT NULL PRIMARY KEY REFERENCES kmmOnlineJobs( id ),"
-      "  originAccount varchar(32) REFERENCES kmmAccounts( id ) ON UPDATE CASCADE ON DELETE SET NULL,"
-      "  value text DEFAULT '0',"
-      "  purpose text,"
-      "  endToEndReference varchar(35),"
-      "  beneficiaryName varchar(27),"
-      "  beneficiaryIban varchar(32),"
-      "  beneficiaryBic char(11),"
-      "  textKey int,"
-      "  subTextKey int"
-      " );"
-    )) {
+          "CREATE TABLE kmmSepaOrders ("
+          "  id varchar(32) NOT NULL PRIMARY KEY REFERENCES kmmOnlineJobs( id ),"
+          "  originAccount varchar(32) REFERENCES kmmAccounts( id ) ON UPDATE CASCADE ON DELETE SET NULL,"
+          "  value text DEFAULT '0',"
+          "  purpose text,"
+          "  endToEndReference varchar(35),"
+          "  beneficiaryName varchar(27),"
+          "  beneficiaryIban varchar(32),"
+          "  beneficiaryBic char(11),"
+          "  textKey int,"
+          "  subTextKey int"
+          " );"
+        )) {
       qWarning("Error while creating table kmmSepaOrders: %s", qPrintable(query.lastError().text()));
       return false;
     }
@@ -76,14 +76,14 @@ bool sepaStoragePlugin::setupDatabase(QSqlDatabase connection)
     query.bindValue(1, 1);
     query.bindValue(2, 0);
     query.bindValue(3, "DROP TABLE kmmSepaOrders;");
-    if ( query.exec() )
+    if (query.exec())
       return true;
     qWarning("Error while inserting kmmPluginInfo for '%s': %s", qPrintable(iid), qPrintable(query.lastError().text()));
     return false;
   }
 
   // Check if version is valid with this plugin
-  switch( currentVersion ) {
+  switch (currentVersion) {
     case 1: return true;
   }
 
