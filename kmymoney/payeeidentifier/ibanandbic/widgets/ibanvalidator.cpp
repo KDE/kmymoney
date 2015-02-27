@@ -22,7 +22,7 @@
 #include <KLocalizedString>
 
 ibanValidator::ibanValidator(QObject* parent)
-  : QValidator(parent)
+    : QValidator(parent)
 {
 
 }
@@ -30,15 +30,15 @@ ibanValidator::ibanValidator(QObject* parent)
 QValidator::State ibanValidator::validate(QString& string, int&) const
 {
   // Check country code and set it uppercase
-  if( string.length() >= 1 ) {
-    if( !string.at(0).isLetter() )
+  if (string.length() >= 1) {
+    if (!string.at(0).isLetter())
       return Invalid;
-    if ( string.at(0).isLower() )
+    if (string.at(0).isLower())
       string[0] = string.at(0).toUpper();
   }
 
-  if ( string.length() >= 2 ) {
-    if ( !string.at(1).isLetterOrNumber() )
+  if (string.length() >= 2) {
+    if (!string.at(1).isLetterOrNumber())
       return Invalid;
     if (string.at(1).isLower())
       string[1] = string.at(1).toUpper();
@@ -46,10 +46,10 @@ QValidator::State ibanValidator::validate(QString& string, int&) const
 
   // Check rest of the iban
   int characterCount = qMin(string.length(), 2);
-  for(int i = 2; i < string.length(); ++i) {
+  for (int i = 2; i < string.length(); ++i) {
     if (string.at(i).isLetterOrNumber()) {
       ++characterCount;
-    } else if ( !string.at(i).isSpace() ) {
+    } else if (!string.at(i).isSpace()) {
       return Invalid;
     }
   }
@@ -58,7 +58,7 @@ QValidator::State ibanValidator::validate(QString& string, int&) const
     return Invalid;
 
   if (characterCount > 5) {
-    if ( !payeeIdentifiers::ibanBic::validateIbanChecksum( payeeIdentifiers::ibanBic::ibanToElectronic(string) ) ) {
+    if (!payeeIdentifiers::ibanBic::validateIbanChecksum(payeeIdentifiers::ibanBic::ibanToElectronic(string))) {
       emit feedback(KMyMoneyValidationFeedback::Warning, i18n("This IBAN is invalid."));
       return Intermediate;
     } else {

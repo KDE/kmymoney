@@ -25,8 +25,9 @@
 
 class KMyMoneyValidationFeedbackPrivate;
 
-namespace Ui {
-  class KMyMoneyValidationFeedback;
+namespace Ui
+{
+class KMyMoneyValidationFeedback;
 }
 
 class KMM_WIDGETS_EXPORT KMyMoneyValidationFeedback : public QWidget

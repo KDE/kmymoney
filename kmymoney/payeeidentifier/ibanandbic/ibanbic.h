@@ -28,7 +28,8 @@
 
 class ibanBicData;
 
-namespace payeeIdentifiers {
+namespace payeeIdentifiers
+{
 /**
  * @brief Plugin to handle IBANs and BICs
  *
@@ -57,29 +58,37 @@ public:
   /**
    * @brief Set an owner name for this account
    */
-  void setOwnerName( const QString& ownerName ) { m_ownerName  = ownerName; }
-  QString ownerName() const { return m_ownerName; }
+  void setOwnerName(const QString& ownerName) {
+    m_ownerName  = ownerName;
+  }
+  QString ownerName() const {
+    return m_ownerName;
+  }
 
   /**
    * @brief Set a IBAN
    *
    * The IBAN can contain spaces and other special chars.
    */
-  void setIban( const QString& iban );
+  void setIban(const QString& iban);
 
   /** @copydoc m_iban
    * Use this method if you know that iban is in electronic format already. No futher checks are done.
    */
-  void setElectronicIban( const QString& iban ) { Q_ASSERT( iban == ibanToElectronic(iban) ); m_iban = iban; }
+  void setElectronicIban(const QString& iban) {
+    Q_ASSERT(iban == ibanToElectronic(iban)); m_iban = iban;
+  }
 
   /** @copydoc m_iban */
-  QString electronicIban() const { return m_iban; }
+  QString electronicIban() const {
+    return m_iban;
+  }
 
   /**
    * @brief Returns iban in human readable format
    * @see toPaperformatIban()
    */
-  QString paperformatIban( const QString& separator = QLatin1String(" ") ) const;
+  QString paperformatIban(const QString& separator = QLatin1String(" ")) const;
 
   /**
    * @brief Set Business Identifier Code
@@ -88,7 +97,7 @@ public:
    *
    * @param bic will be normalized
    */
-  void setBic( const QString& bic = QString() );
+  void setBic(const QString& bic = QString());
 
   /**
    * @brief Business Identifier Code
@@ -97,7 +106,9 @@ public:
    * The returned bic is normalized:
    * A tailing XXX is omitted, all characters are uppercase.
    */
-  QString storedBic() const { return m_bic; }
+  QString storedBic() const {
+    return m_bic;
+  }
 
   /**
    * @copydoc storedBic()
@@ -125,7 +136,9 @@ public:
    *
    * Uses any available information to return an institutionName
    */
-  QString institutionName() const { return institutionNameByBic(bic()); }
+  QString institutionName() const {
+    return institutionNameByBic(bic());
+  }
 
   virtual bool operator==(const payeeIdentifierData& other) const;
   bool operator==(const ibanBic& other) const;
@@ -136,14 +149,14 @@ public:
    *
    * Also all characters are made upper case.
    */
-  static QString bicToFullFormat( QString bic );
+  static QString bicToFullFormat(QString bic);
 
   /**
    * @brief Converts an iban to canonical format for machines
    *
    * Will remove all white spaces.
    */
-  static QString ibanToElectronic( const QString& iban );
+  static QString ibanToElectronic(const QString& iban);
 
   /**
    * @brief Converts an iban to human readable format
@@ -153,7 +166,7 @@ public:
    * @param iban an iban, not needed to be canonical, valid or completed
    * @param separator Overwrite the default separator (e.g. a smaller space)
    */
-  static QString ibanToPaperformat( const QString& iban, const QString& seperator = QLatin1String(" ") );
+  static QString ibanToPaperformat(const QString& iban, const QString& seperator = QLatin1String(" "));
 
   /**
    * @brief Extract Basic Bank Account Number
@@ -161,15 +174,15 @@ public:
    * Returns the Basic Bank Account Number (BBAN) from the IBAN.
    * The BBAN is the IBAN without country code and the two digit checksum.
    */
-  static QString bban( const QString& iban );
+  static QString bban(const QString& iban);
 
-  static int ibanLengthByCountry( const QString& countryCode );
+  static int ibanLengthByCountry(const QString& countryCode);
 
-  static QString institutionNameByBic( const QString& bic );
+  static QString institutionNameByBic(const QString& bic);
 
-  static QString bicByIban( const QString& iban );
+  static QString bicByIban(const QString& iban);
 
-  static QString localBankCodeByIban( const QString& iban );
+  static QString localBankCodeByIban(const QString& iban);
 
   /**
    * @brief Check if this IBAN can be valid
@@ -180,7 +193,7 @@ public:
    *
    * @todo Implement local aware checks
    */
-  static bool isIbanValid( const QString& iban );
+  static bool isIbanValid(const QString& iban);
 
 
   /**
@@ -193,13 +206,13 @@ public:
    * @param bic BIC to test in canonical format (always 11 characters long, all characters uppercase)
    * @see isBicAllocated()
    */
-  static bicAllocationStatus isCanonicalBicAllocated( const QString& bic );
+  static bicAllocationStatus isCanonicalBicAllocated(const QString& bic);
 
   /** @brief Check if this BIC is assigned to an bank
    *
    * @param bic BIC to test.
    */
-  static bicAllocationStatus isBicAllocated( const QString& bic );
+  static bicAllocationStatus isBicAllocated(const QString& bic);
 
   /**
    * @brief Check the checksum
@@ -208,11 +221,13 @@ public:
    *
    * @param iban An IBAN in electronic format (important!)
    */
-  static bool validateIbanChecksum( const QString& iban );
+  static bool validateIbanChecksum(const QString& iban);
 
   static const int ibanMaxLength;
 
-  QString storagePluginIid() const { return QLatin1String("org.kmymoney.payeeIdentifier.ibanbic.sqlStoragePlugin"); }
+  QString storagePluginIid() const {
+    return QLatin1String("org.kmymoney.payeeIdentifier.ibanbic.sqlStoragePlugin");
+  }
   bool sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const;
   bool sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const;
   bool sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const;

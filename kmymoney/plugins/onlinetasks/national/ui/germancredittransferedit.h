@@ -27,16 +27,17 @@
 
 class kMandatoryFieldGroup;
 
-namespace Ui {
+namespace Ui
+{
 class germanCreditTransferEdit;
 }
 
 class germanCreditTransferEdit : public IonlineJobEdit
 {
-    Q_OBJECT
-    Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly NOTIFY readOnlyChanged);
-    Q_PROPERTY(onlineJob job READ getOnlineJob WRITE setOnlineJob STORED false );
-    Q_INTERFACES( IonlineJobEdit )
+  Q_OBJECT
+  Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly NOTIFY readOnlyChanged);
+  Q_PROPERTY(onlineJob job READ getOnlineJob WRITE setOnlineJob STORED false);
+  Q_INTERFACES(IonlineJobEdit)
 
 public:
   explicit germanCreditTransferEdit(QWidget *parent = 0, QVariantList args = QVariantList());
@@ -44,59 +45,68 @@ public:
 
   /** @brief Reads interface and creates an onlineJob */
   onlineJobTyped<germanOnlineTransfer> getOnlineJobTyped() const;
-  onlineJob getOnlineJob() const { return getOnlineJobTyped(); }
+  onlineJob getOnlineJob() const {
+    return getOnlineJobTyped();
+  }
 
-  QStringList supportedOnlineTasks() const { return QStringList(germanOnlineTransfer::name()); }
-  QString label() const { return i18n("German Credit Transfer"); }
-  bool isValid() const { return getOnlineJobTyped().isValid(); }
+  QStringList supportedOnlineTasks() const {
+    return QStringList(germanOnlineTransfer::name());
+  }
+  QString label() const {
+    return i18n("German Credit Transfer");
+  }
+  bool isValid() const {
+    return getOnlineJobTyped().isValid();
+  }
 
-  bool isReadOnly() const { return m_readOnly; }
+  bool isReadOnly() const {
+    return m_readOnly;
+  }
 
   virtual void showEvent(QShowEvent*);
 
 signals:
-  void readOnlyChanged( bool );
+  void readOnlyChanged(bool);
 
 public slots:
-    bool setOnlineJob( const onlineJob& );
-    bool setOnlineJob( const onlineJobTyped<germanOnlineTransfer>& );
-    void setOriginAccount( const QString& );
-    void setReadOnly( const bool& );
+  bool setOnlineJob(const onlineJob&);
+  bool setOnlineJob(const onlineJobTyped<germanOnlineTransfer>&);
+  void setOriginAccount(const QString&);
+  void setReadOnly(const bool&);
 
 private:
-    Ui::germanCreditTransferEdit* ui;
-    QString m_originAccount;
-    onlineJobTyped<germanOnlineTransfer> m_germanCreditTransfer;
-    kMandatoryFieldGroup* m_requiredFields;
-    bool m_readOnly;
+  Ui::germanCreditTransferEdit* ui;
+  QString m_originAccount;
+  onlineJobTyped<germanOnlineTransfer> m_germanCreditTransfer;
+  kMandatoryFieldGroup* m_requiredFields;
+  bool m_readOnly;
 
 private slots:
-    void beneficiaryNameChanged( const QString& );
-    void beneficiaryAccountChanged( const QString& );
-    void beneficiaryBankCodeChanged( QString );
-    void valueChanged();
-    void purposeChanged();
+  void beneficiaryNameChanged(const QString&);
+  void beneficiaryAccountChanged(const QString&);
+  void beneficiaryBankCodeChanged(QString);
+  void valueChanged();
+  void purposeChanged();
 
-    void updateEveryStatus();
-    void updateTaskSettings();
+  void updateEveryStatus();
+  void updateTaskSettings();
 
-    /**
-     * @brief Convenient slot to emit validityChanged()
-     *
-     * A default implementation to emit validityChanged() based on getOnlineJob().isValid().
-     * This is useful if you use @a kMandatoryFieldsGroup in your widget. Just connect kMandatoryFieldsGroup::stateChanged(bool)
-     * to this slot.
-     *
-     * @param status if false, validityChanged(false) is emitted without further checks.
-     */
-    void requiredFieldsCompleted( const bool& status = true )
-    {
-      if ( status ) {
-        emit validityChanged( getOnlineJobTyped().isValid() );
-      } else {
-        emit validityChanged( false );
-      }
+  /**
+   * @brief Convenient slot to emit validityChanged()
+   *
+   * A default implementation to emit validityChanged() based on getOnlineJob().isValid().
+   * This is useful if you use @a kMandatoryFieldsGroup in your widget. Just connect kMandatoryFieldsGroup::stateChanged(bool)
+   * to this slot.
+   *
+   * @param status if false, validityChanged(false) is emitted without further checks.
+   */
+  void requiredFieldsCompleted(const bool& status = true) {
+    if (status) {
+      emit validityChanged(getOnlineJobTyped().isValid());
+    } else {
+      emit validityChanged(false);
     }
+  }
 };
 
 #endif // GERMANCREDITTRANSFEREDIT_H

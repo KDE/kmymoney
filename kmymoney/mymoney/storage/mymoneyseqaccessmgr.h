@@ -386,9 +386,11 @@ public:
 
   const onlineJob getOnlineJob(const QString &id) const;
   /** @todo implement */
-  long unsigned int onlineJobId() const { return 1; }
+  long unsigned int onlineJobId() const {
+    return 1;
+  }
 
-  void removeOnlineJob(const onlineJob & );
+  void removeOnlineJob(const onlineJob &);
 
   /**
     * This method is used to extract a transaction from the file global

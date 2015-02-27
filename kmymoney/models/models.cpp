@@ -42,8 +42,7 @@ struct Models::Private {
   Private() :
       m_accountsModel(0),
       m_institutionsModel(0),
-      m_onlineJobModel(0)
-  {}
+      m_onlineJobModel(0) {}
 
   AccountsModel *m_accountsModel;
   InstitutionsModel *m_institutionsModel;

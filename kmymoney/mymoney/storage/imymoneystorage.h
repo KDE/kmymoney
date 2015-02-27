@@ -923,13 +923,13 @@ public:
     *
     * @param job The onlineJob, caller remains owner of it. Id might be updated.
     */
-  virtual void addOnlineJob( onlineJob& job ) = 0;
+  virtual void addOnlineJob(onlineJob& job) = 0;
 
   /**
    * @brief Saves a onlineJob
    * @param job
    */
-  virtual void modifyOnlineJob(const onlineJob& job ) = 0;
+  virtual void modifyOnlineJob(const onlineJob& job) = 0;
 
   /**
    * @brief Get onlineJob by id
@@ -937,7 +937,7 @@ public:
    * @return onlineJob you are not the owner nor allowed to delete it.
    * @throw MyMoneyException if jobId was not found
    */
-  virtual const onlineJob getOnlineJob( const QString& jobId ) const = 0;
+  virtual const onlineJob getOnlineJob(const QString& jobId) const = 0;
 
   /**
    * @brief Return all onlineJobs
@@ -947,7 +947,7 @@ public:
   /**
    * @brief Remove an onlineJobs
    */
-  virtual void removeOnlineJob( const onlineJob& ) = 0;
+  virtual void removeOnlineJob(const onlineJob&) = 0;
 
   /**
     * This method checks, if the given @p object is referenced

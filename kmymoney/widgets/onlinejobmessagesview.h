@@ -24,13 +24,14 @@
 #include "kmm_widgets_export.h"
 
 class QAbstractItemModel;
-namespace Ui {
-  class onlineJobMessageView;
+namespace Ui
+{
+class onlineJobMessageView;
 }
 
 class KMM_WIDGETS_EXPORT onlineJobMessagesView : public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
   onlineJobMessagesView(QWidget* parent = 0);

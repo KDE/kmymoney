@@ -57,7 +57,7 @@ protected:
   virtual unavailableTask* clone() const;
 
 private:
-  explicit unavailableTask( const QDomElement& element );
+  explicit unavailableTask(const QDomElement& element);
 
   /**
    * The data received by createFromXml(). Written back by writeXML().

@@ -26,50 +26,54 @@ class payeeIdentifierTyped : public payeeIdentifier
 {
 public:
   payeeIdentifierTyped(const payeeIdentifierTyped& other);
-  payeeIdentifierTyped( T* pid );
+  payeeIdentifierTyped(T* pid);
   //explicit payeeIdentifierTyped();
   explicit payeeIdentifierTyped(const payeeIdentifier& other);
 
   T* operator->();
   const T* operator->() const;
 
-  T* data() { return operator->(); }
-  const T* data() const { return operator->(); }
+  T* data() {
+    return operator->();
+  }
+  const T* data() const {
+    return operator->();
+  }
 
   payeeIdentifierTyped& operator=(const payeeIdentifierTyped& other);
   bool operator==(const payeeIdentifierTyped& other);
 
 private:
   /** this method is not save in this class, so deactivate it */
-  void setData( payeeIdentifierData* dataPtr );
+  void setData(payeeIdentifierData* dataPtr);
   T* m_payeeIdentifierTyped;
 };
 
 #if 0
 template< class T >
 payeeIdentifierTyped<T>::payeeIdentifierTyped()
-  : payeeIdentifier()
+    : payeeIdentifier()
 {
-  Q_ASSERT( false && "This method is not implemented yet" );
+  Q_ASSERT(false && "This method is not implemented yet");
   throw payeeIdentifier::empty();
 }
 #endif
 
 template< class T >
 payeeIdentifierTyped<T>::payeeIdentifierTyped(T* pid)
-  : payeeIdentifier( pid ),
-  m_payeeIdentifierTyped(pid)
+    : payeeIdentifier(pid),
+    m_payeeIdentifierTyped(pid)
 {
-  if ( m_payeeIdentifierTyped == 0 )
+  if (m_payeeIdentifierTyped == 0)
     throw payeeIdentifier::empty(__FILE__, __LINE__);
 }
 
 template< class T >
 payeeIdentifierTyped<T>::payeeIdentifierTyped(const payeeIdentifierTyped& other)
-  : payeeIdentifier(other)
+    : payeeIdentifier(other)
 {
   m_payeeIdentifierTyped = dynamic_cast<T*>(payeeIdentifier::data());
-  Q_CHECK_PTR( m_payeeIdentifierTyped );
+  Q_CHECK_PTR(m_payeeIdentifierTyped);
 }
 
 template< class T >
@@ -89,11 +93,11 @@ bool payeeIdentifierTyped<T>::operator==(const payeeIdentifierTyped& other)
 
 template< class T >
 payeeIdentifierTyped<T>::payeeIdentifierTyped(const payeeIdentifier& other)
-  : payeeIdentifier(other)
+    : payeeIdentifier(other)
 {
   m_payeeIdentifierTyped = dynamic_cast<T*>(payeeIdentifier::data());
-  if ( m_payeeIdentifierTyped == 0 ) {
-    if ( payeeIdentifier::data() == 0 )
+  if (m_payeeIdentifierTyped == 0) {
+    if (payeeIdentifier::data() == 0)
       throw payeeIdentifier::empty(__FILE__, __LINE__);
     throw payeeIdentifier::badCast(__FILE__, __LINE__);
   }

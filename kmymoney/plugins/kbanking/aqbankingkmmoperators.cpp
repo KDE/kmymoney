@@ -49,14 +49,14 @@ static const QString dtausChars = QString::fromUtf8("0123456789ABCDEFGHIJKLMNOPQ
  */
 static const QString sepaChars = QString("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':?.,- (+)/");
 
-QSharedPointer<germanOnlineTransfer::settings> AB_TransactionLimits_toGermanOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits )
+QSharedPointer<germanOnlineTransfer::settings> AB_TransactionLimits_toGermanOnlineTaskSettings(const AB_TRANSACTION_LIMITS* aqlimits)
 {
-  Q_CHECK_PTR( aqlimits );
+  Q_CHECK_PTR(aqlimits);
 
-  QSharedPointer<creditTransferSettingsBase> settings( new creditTransferSettingsBase );
+  QSharedPointer<creditTransferSettingsBase> settings(new creditTransferSettingsBase);
 
   // AqBanking returns 0 as min length even if it requires one
-  int minLength = AB_TransactionLimits_GetMinLenPurpose( aqlimits );
+  int minLength = AB_TransactionLimits_GetMinLenPurpose(aqlimits);
   if (minLength == 0)
     minLength = 1;
   settings->setPurposeLimits(AB_TransactionLimits_GetMaxLinesPurpose(aqlimits),
@@ -65,7 +65,7 @@ QSharedPointer<germanOnlineTransfer::settings> AB_TransactionLimits_toGermanOnli
                             );
 
   // AqBanking returns 0 as min length even if it requires one
-  minLength = AB_TransactionLimits_GetMinLenRemoteName( aqlimits );
+  minLength = AB_TransactionLimits_GetMinLenRemoteName(aqlimits);
   if (minLength == 0)
     minLength = 1;
   settings->setRecipientNameLimits(AB_TransactionLimits_GetMaxLinesRemoteName(aqlimits),
@@ -73,54 +73,54 @@ QSharedPointer<germanOnlineTransfer::settings> AB_TransactionLimits_toGermanOnli
                                    minLength
                                   );
 
-  minLength = AB_TransactionLimits_GetMinLenLocalName( aqlimits );
+  minLength = AB_TransactionLimits_GetMinLenLocalName(aqlimits);
   if (minLength == 0)
     minLength = 1;
-  settings->setPayeeNameLimits( 1, AB_TransactionLimits_GetMaxLenLocalName( aqlimits ), minLength);
+  settings->setPayeeNameLimits(1, AB_TransactionLimits_GetMaxLenLocalName(aqlimits), minLength);
 
-  settings->setAllowedChars( dtausChars );
+  settings->setAllowedChars(dtausChars);
 
   return settings.dynamicCast<germanOnlineTransfer::settings>();
 }
 
 /** @todo Check if AB_TransactionLimits_GetMaxLenCustomerReference really is the limit for the sepa reference */
-QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits )
+QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTaskSettings(const AB_TRANSACTION_LIMITS* aqlimits)
 {
-  Q_CHECK_PTR( aqlimits );
+  Q_CHECK_PTR(aqlimits);
 
-  QSharedPointer<creditTransferSettingsBase> settings( new creditTransferSettingsBase );
+  QSharedPointer<creditTransferSettingsBase> settings(new creditTransferSettingsBase);
 
   settings->setPurposeLimits(AB_TransactionLimits_GetMaxLinesPurpose(aqlimits),
                              AB_TransactionLimits_GetMaxLenPurpose(aqlimits),
                              AB_TransactionLimits_GetMinLenPurpose(aqlimits)
-  );
+                            );
 
   // AqBanking returns 0 as min length even if it requires one
-  int minLength = AB_TransactionLimits_GetMinLenRemoteName( aqlimits );
+  int minLength = AB_TransactionLimits_GetMinLenRemoteName(aqlimits);
   if (minLength == 0)
     minLength = 1;
   settings->setRecipientNameLimits(AB_TransactionLimits_GetMaxLinesRemoteName(aqlimits),
                                    AB_TransactionLimits_GetMaxLenRemoteName(aqlimits),
                                    minLength
-  );
+                                  );
 
   // AqBanking returns 0 as min length even if it requires one
-  minLength = AB_TransactionLimits_GetMinLenLocalName( aqlimits );
+  minLength = AB_TransactionLimits_GetMinLenLocalName(aqlimits);
   if (minLength == 0)
     minLength = 1;
-  settings->setPayeeNameLimits( 1, AB_TransactionLimits_GetMaxLenLocalName( aqlimits ), minLength);
+  settings->setPayeeNameLimits(1, AB_TransactionLimits_GetMaxLenLocalName(aqlimits), minLength);
 
   //settings->referenceLength = AB_TransactionLimits_GetMax( aqlimits );
-  settings->setEndToEndReferenceLength( 32 );
+  settings->setEndToEndReferenceLength(32);
 
-  settings->setAllowedChars( sepaChars );
+  settings->setAllowedChars(sepaChars);
 
   return settings.dynamicCast<sepaOnlineTransfer::settings>();
 }
 
 void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident)
 {
-  Q_CHECK_PTR( transaction );
+  Q_CHECK_PTR(transaction);
 
   AB_Transaction_SetRemoteAccountNumber(transaction, ident.accountNumber().toUtf8().constData());
   AB_Transaction_SetRemoteBankCode(transaction, ident.bankCode().toUtf8().constData());
@@ -129,7 +129,7 @@ void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIde
 
 void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::ibanBic& ident)
 {
-  Q_CHECK_PTR( transaction );
+  Q_CHECK_PTR(transaction);
 
   AB_Transaction_SetRemoteAccountNumber(transaction, ident.electronicIban().toUtf8().constData());
   AB_Transaction_SetRemoteBankCode(transaction, ident.fullStoredBic().toUtf8().constData());
@@ -138,8 +138,8 @@ void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIde
 
 void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const AB_ACCOUNT* account)
 {
-  Q_CHECK_PTR( transaction );
-  Q_CHECK_PTR( account );
+  Q_CHECK_PTR(transaction);
+  Q_CHECK_PTR(account);
 
   AB_Transaction_SetLocalName(transaction, AB_Account_GetOwnerName(account));
   AB_Transaction_SetLocalAccountNumber(transaction, AB_Account_GetAccountNumber(account));
@@ -149,9 +149,9 @@ void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const AB_ACCOUN
   AB_Transaction_SetLocalBic(transaction, AB_Account_GetBIC(account));
 }
 
-void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident )
+void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident)
 {
-  Q_CHECK_PTR( transaction );
+  Q_CHECK_PTR(transaction);
 
   AB_Transaction_SetLocalName(transaction, ident.ownerName().toUtf8().constData());
   AB_Transaction_SetLocalAccountNumber(transaction, ident.accountNumber().toUtf8().constData());
@@ -160,25 +160,25 @@ void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const payeeIde
 
 bool AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const QList<payeeIdentifier>& accountNumbers)
 {
-  Q_CHECK_PTR( transaction );
+  Q_CHECK_PTR(transaction);
 
   bool validOriginAccountSet = false;
-  foreach( payeeIdentifier accountNumber, accountNumbers ) {
-    if ( !accountNumber.isValid() )
+  foreach (payeeIdentifier accountNumber, accountNumbers) {
+    if (!accountNumber.isValid())
       continue;
 
     try {
-      payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban( accountNumber );
-      AB_Transaction_SetLocalIban( transaction, iban->electronicIban().toUtf8().constData() );
-      AB_Transaction_SetLocalBic( transaction, iban->fullStoredBic().toUtf8().constData() );
-    } catch  ( ... ) {
+      payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban(accountNumber);
+      AB_Transaction_SetLocalIban(transaction, iban->electronicIban().toUtf8().constData());
+      AB_Transaction_SetLocalBic(transaction, iban->fullStoredBic().toUtf8().constData());
+    } catch (...) {
     }
 
     try {
-      payeeIdentifierTyped<payeeIdentifiers::nationalAccount> national( accountNumber );
-      AB_Transaction_SetLocalAccount( transaction, *(national.data()) );
+      payeeIdentifierTyped<payeeIdentifiers::nationalAccount> national(accountNumber);
+      AB_Transaction_SetLocalAccount(transaction, *(national.data()));
       validOriginAccountSet = true;
-    } catch ( ... ) {
+    } catch (...) {
     }
   }
   return validOriginAccountSet;

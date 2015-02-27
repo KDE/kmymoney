@@ -23,7 +23,7 @@
 
 class ibanBicStoragePlugin : public KMyMoneyPlugin::storagePlugin
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
   explicit ibanBicStoragePlugin(QObject* parent = 0, const QVariantList& options = QVariantList());

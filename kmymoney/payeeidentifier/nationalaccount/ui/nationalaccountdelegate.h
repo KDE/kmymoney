@@ -38,10 +38,10 @@ public:
   virtual void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const;
 
 signals:
-  void sizeHintChanged( const QModelIndex& ) const;
+  void sizeHintChanged(const QModelIndex&) const;
 
 private:
-  inline payeeIdentifierTyped<payeeIdentifiers::nationalAccount> identByIndex( const QModelIndex& index ) const;
+  inline payeeIdentifierTyped<payeeIdentifiers::nationalAccount> identByIndex(const QModelIndex& index) const;
 
 };
 

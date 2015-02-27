@@ -34,7 +34,7 @@
 #include "widgets/chiptandialog.h"
 
 gwenKdeGui::gwenKdeGui()
- : QT4_Gui()
+    : QT4_Gui()
 {
 
 }
@@ -71,9 +71,9 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
       return GWEN_ERROR_INTERNAL;
 
     QString tan = dialog->tan();
-    if ( tan.length() >= minLen && tan.length() <= maxLen ) {
+    if (tan.length() >= minLen && tan.length() <= maxLen) {
       strncpy(buffer, tan.toUtf8().constData() , tan.length());
-      buffer[tan.length()]=0;
+      buffer[tan.length()] = 0;
       return 0;
     }
     qDebug("Received Tan with incorrect length by ui.");

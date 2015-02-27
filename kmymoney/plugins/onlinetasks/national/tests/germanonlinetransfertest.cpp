@@ -53,53 +53,89 @@ class germanOnlineTransferSettings : public germanOnlineTransfer::settings
 {
 public:
   // Limits getter
-  virtual int purposeMaxLines() const { return 1; }
-  virtual int purposeLineLength() const { return 27; }
-  virtual int purposeMinLength() const { return 1; }
+  virtual int purposeMaxLines() const {
+    return 1;
+  }
+  virtual int purposeLineLength() const {
+    return 27;
+  }
+  virtual int purposeMinLength() const {
+    return 1;
+  }
 
-  virtual int recipientNameLineLength() const { return 27; }
-  virtual int recipientNameMinLength() const { return 1; }
+  virtual int recipientNameLineLength() const {
+    return 27;
+  }
+  virtual int recipientNameMinLength() const {
+    return 1;
+  }
 
-  virtual int payeeNameLineLength() const { return 27; }
-  virtual int payeeNameMinLength() const { return 1; }
+  virtual int payeeNameLineLength() const {
+    return 27;
+  }
+  virtual int payeeNameMinLength() const {
+    return 1;
+  }
 
-  virtual QString allowedChars() const { return QString("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvw "); }
+  virtual QString allowedChars() const {
+    return QString("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvw ");
+  }
 
   // Limits validators
-  virtual bool checkPurposeCharset( const QString& ) const { return true; }
-  virtual bool checkPurposeLineLength(const QString& ) const { return true; }
-  virtual validators::lengthStatus checkPurposeLength(const QString&) const { return validators::ok; }
-  virtual bool checkPurposeMaxLines(const QString&) const { return true; }
+  virtual bool checkPurposeCharset(const QString&) const {
+    return true;
+  }
+  virtual bool checkPurposeLineLength(const QString&) const {
+    return true;
+  }
+  virtual validators::lengthStatus checkPurposeLength(const QString&) const {
+    return validators::ok;
+  }
+  virtual bool checkPurposeMaxLines(const QString&) const {
+    return true;
+  }
 
-  virtual validators::lengthStatus checkNameLength(const QString&) const { return validators::ok; }
-  virtual bool checkNameCharset( const QString& ) const { return true; }
+  virtual validators::lengthStatus checkNameLength(const QString&) const {
+    return validators::ok;
+  }
+  virtual bool checkNameCharset(const QString&) const {
+    return true;
+  }
 
-  virtual validators::lengthStatus checkRecipientLength(const QString&) const { return validators::ok; }
-  virtual bool checkRecipientCharset( const QString& ) const { return true; }
+  virtual validators::lengthStatus checkRecipientLength(const QString&) const {
+    return validators::ok;
+  }
+  virtual bool checkRecipientCharset(const QString&) const {
+    return true;
+  }
 
-  virtual validators::lengthStatus checkRecipientAccountNumber( const QString& ) const { return validators::ok; }
-  virtual validators::lengthStatus checkRecipientBankCode( const QString& ) const { return validators::ok; }
+  virtual validators::lengthStatus checkRecipientAccountNumber(const QString&) const {
+    return validators::ok;
+  }
+  virtual validators::lengthStatus checkRecipientBankCode(const QString&) const {
+    return validators::ok;
+  }
 };
 
 void germanOnlineTransferTest::arbitraryValidTask()
 {
   germanOnlineTransferImpl* taskImpl = new germanOnlineTransferImpl;
-  QSharedPointer<germanOnlineTransfer::settings> settings( new germanOnlineTransferSettings );
+  QSharedPointer<germanOnlineTransfer::settings> settings(new germanOnlineTransferSettings);
 
   taskImpl->_settings = settings;
   germanOnlineTransfer* task = taskImpl;
 
-  task->setValue( MyMoneyMoney(1, 1) );
-  task->setPurpose( "Test" );
+  task->setValue(MyMoneyMoney(1, 1));
+  task->setPurpose("Test");
 
   payeeIdentifiers::nationalAccount ident;
-  ident.setBankCode( "37020500" );
-  ident.setAccountNumber( "300000" );
+  ident.setBankCode("37020500");
+  ident.setAccountNumber("300000");
   /** @todo enable setOwnerName */
   //ident.setOwnerName( "UNICEF Deutschland" );
-  task->setBeneficiary( ident );
+  task->setBeneficiary(ident);
 
-  QVERIFY( task->isValid() );
+  QVERIFY(task->isValid());
 
   delete task;
 }

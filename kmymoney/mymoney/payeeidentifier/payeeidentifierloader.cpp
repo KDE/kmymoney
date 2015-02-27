@@ -32,10 +32,10 @@
 payeeIdentifierLoader payeeIdentifierLoader::m_self;
 
 payeeIdentifierLoader::payeeIdentifierLoader()
-  : m_identifiers( QHash<QString, payeeIdentifierData*>() )
+    : m_identifiers(QHash<QString, payeeIdentifierData*>())
 {
-  addPayeeIdentifier( new payeeIdentifiers::ibanBic() );
-  addPayeeIdentifier( new payeeIdentifiers::nationalAccount() );
+  addPayeeIdentifier(new payeeIdentifiers::ibanBic());
+  addPayeeIdentifier(new payeeIdentifiers::nationalAccount());
 }
 
 void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifierData* const identifier)
@@ -45,9 +45,9 @@ void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifierData* const identi
 
 payeeIdentifier payeeIdentifierLoader::createPayeeIdentifier(const QString& payeeIdentifierId)
 {
-  const payeeIdentifierData* ident = m_identifiers.value( payeeIdentifierId );
-  if ( ident != 0 ) {
-    return payeeIdentifier( ident->clone() );
+  const payeeIdentifierData* ident = m_identifiers.value(payeeIdentifierId);
+  if (ident != 0) {
+    return payeeIdentifier(ident->clone());
   }
 
   return payeeIdentifier();
@@ -56,26 +56,26 @@ payeeIdentifier payeeIdentifierLoader::createPayeeIdentifier(const QString& paye
 payeeIdentifier payeeIdentifierLoader::createPayeeIdentifierFromXML(const QDomElement& element)
 {
   const QString payeeIdentifierId = element.attribute("type");
-  const payeeIdentifierData* identData = m_identifiers.value( payeeIdentifierId );
+  const payeeIdentifierData* identData = m_identifiers.value(payeeIdentifierId);
   payeeIdentifier ident;
 
-  if ( identData != 0 ) {
-    payeeIdentifierData* newIdent = identData->createFromXml( element );
+  if (identData != 0) {
+    payeeIdentifierData* newIdent = identData->createFromXml(element);
     ident = payeeIdentifier(newIdent);
   } else {
-    ident = payeeIdentifier( new payeeIdentifiers::payeeIdentifierUnavailable(element) );
+    ident = payeeIdentifier(new payeeIdentifiers::payeeIdentifierUnavailable(element));
   }
 
   ident.m_id = element.attribute("id", 0).toUInt();
   return ident;
 }
 
-payeeIdentifier payeeIdentifierLoader::createPayeeIdentifierFromSqlDatabase( QSqlDatabase db, const QString& identifierType, const QString& identifierId)
+payeeIdentifier payeeIdentifierLoader::createPayeeIdentifierFromSqlDatabase(QSqlDatabase db, const QString& identifierType, const QString& identifierId)
 {
-  const payeeIdentifierData* identData = m_identifiers.value( identifierType );
+  const payeeIdentifierData* identData = m_identifiers.value(identifierType);
 
-  if ( identData != 0 ) {
-    payeeIdentifierData* data = identData->createFromSqlDatabase( db, identifierId );
+  if (identData != 0) {
+    payeeIdentifierData* data = identData->createFromSqlDatabase(db, identifierId);
     return payeeIdentifier(identifierId, data);
   }
 
@@ -89,10 +89,10 @@ QAbstractItemDelegate* payeeIdentifierLoader::createItemDelegate(const QString& 
 {
   /** @todo escape ' in  payeeIdentifierId */
   KService::List offers = KServiceTypeTrader::self()->query(QLatin1String("KMyMoney/PayeeIdentifierDelegate"), QString("'%1' ~in [X-KMyMoney-payeeIdentifierIds]").arg(payeeIdentifierId));
-  if ( !offers.isEmpty() ) {
+  if (!offers.isEmpty()) {
     QString error;
     QAbstractItemDelegate* ptr = offers.at(0)->createInstance<QAbstractItemDelegate>(parent, QVariantList(), &error);
-    if ( ptr == 0 ) {
+    if (ptr == 0) {
       qWarning() << "could not load delegate" << error << payeeIdentifierId;
     }
     return ptr;
@@ -103,7 +103,7 @@ QAbstractItemDelegate* payeeIdentifierLoader::createItemDelegate(const QString& 
 bool payeeIdentifierLoader::hasItemEditDelegate(const QString& payeeIdentifierId)
 {
   QAbstractItemDelegate* delegate = createItemDelegate(payeeIdentifierId);
-  const bool ret = ( delegate != 0 );
+  const bool ret = (delegate != 0);
   delete delegate;
   return ret;
 }
@@ -113,16 +113,16 @@ QStringList payeeIdentifierLoader::availableDelegates()
   QStringList list;
   KService::List offers = KServiceTypeTrader::self()->query(QLatin1String("KMyMoney/PayeeIdentifierDelegate"));
   foreach (KService::Ptr offer, offers) {
-    list.append( offer->property("X-KMyMoney-payeeIdentifierIds", QVariant::StringList).toStringList() );
+    list.append(offer->property("X-KMyMoney-payeeIdentifierIds", QVariant::StringList).toStringList());
   }
   return list;
 }
 
 QString payeeIdentifierLoader::translatedDelegateName(const QString& payeeIdentifierId)
 {
-  if ( payeeIdentifierId == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid() )
+  if (payeeIdentifierId == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid())
     return i18n("IBAN and BIC");
-  else if ( payeeIdentifierId == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid() )
+  else if (payeeIdentifierId == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid())
     return i18n("National Account Number");
 
   return QString();

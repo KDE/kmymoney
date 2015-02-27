@@ -89,7 +89,7 @@ public:
    *
    * You must not throw exceptions.
    */
-  virtual onlineTask* convert( const onlineTask& source, convertType &convertResult, QString& userInformation ) const = 0;
+  virtual onlineTask* convert(const onlineTask& source, convertType &convertResult, QString& userInformation) const = 0;
 };
 
 Q_DECLARE_INTERFACE(onlineTaskConverter, "org.kmymoney.plugin.onlinetaskconverter");

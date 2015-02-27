@@ -27,7 +27,7 @@ class OnlineBankingAccountsFilterProxyModel : public QSortFilterProxyModel
 
 public:
   OnlineBankingAccountsFilterProxyModel(QObject* parent = 0);
-  
+
   /**
    * @brief Makes accounts which do not support any onlineJob non-selectable
    */
@@ -40,7 +40,7 @@ private:
   /**
    * @brief Has parent at least one visible child?
    */
-  bool filterAcceptsParent( const QModelIndex& index ) const;
+  bool filterAcceptsParent(const QModelIndex& index) const;
 };
 
 #endif // ONLINEBANKINGACCOUNTSFILTERPROXYMODEL_H

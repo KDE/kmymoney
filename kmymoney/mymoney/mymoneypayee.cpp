@@ -65,7 +65,7 @@ MyMoneyPayee::MyMoneyPayee(const QString& name, const QString& address,
 }
 
 MyMoneyPayee::MyMoneyPayee(const QDomElement& node)
-  : MyMoneyObject(node)
+    : MyMoneyObject(node)
 {
   if ("PAYEE" != node.tagName()) {
     throw MYMONEYEXCEPTION("Node was not PAYEE");
@@ -112,7 +112,7 @@ MyMoneyPayee::~MyMoneyPayee()
 }
 
 MyMoneyPayee::MyMoneyPayee(const MyMoneyPayee& right)
-  : MyMoneyObject(right)
+    : MyMoneyObject(right)
 {
   *this = right;
 }

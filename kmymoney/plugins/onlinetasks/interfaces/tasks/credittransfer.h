@@ -58,7 +58,9 @@ public:
    * @return
    * @todo Move (logic) to a utils class?
    */
-  virtual QString jobTypeName() const { return "Credit Transfer"; }
+  virtual QString jobTypeName() const {
+    return "Credit Transfer";
+  }
 };
 
 Q_DECLARE_INTERFACE(creditTransfer, "org.kmymoney.onlineTasks.creditTransfer");

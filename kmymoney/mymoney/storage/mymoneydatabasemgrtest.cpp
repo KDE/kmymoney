@@ -116,8 +116,8 @@ void MyMoneyDatabaseMgrTest::setupUrl(const QString& fname)
 
 void MyMoneyDatabaseMgrTest::copyDatabaseFile(QFile& src, QFile& dest)
 {
-  if(src.open(QIODevice::ReadOnly)) {
-    if(dest.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+  if (src.open(QIODevice::ReadOnly)) {
+    if (dest.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
       dest.write(src.readAll());
       dest.close();
     }
@@ -173,7 +173,7 @@ void MyMoneyDatabaseMgrTest::testCreateDb()
 void MyMoneyDatabaseMgrTest::testAttachDb()
 {
   if (!m_dbAttached) {
-    if(!m_haveEmptyDataBase) {
+    if (!m_haveEmptyDataBase) {
       testCreateDb();
     } else {
       // preload database file with empty set

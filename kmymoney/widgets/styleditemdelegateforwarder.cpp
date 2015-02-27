@@ -19,7 +19,7 @@
 #include "styleditemdelegateforwarder.h"
 
 StyledItemDelegateForwarder::StyledItemDelegateForwarder(QObject* parent)
-  : QAbstractItemDelegate(parent)
+    : QAbstractItemDelegate(parent)
 {
 }
 

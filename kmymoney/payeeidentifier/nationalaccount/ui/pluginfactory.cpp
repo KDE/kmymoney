@@ -22,5 +22,5 @@
 
 K_PLUGIN_FACTORY(ibanAndBicPidWidgetsFactory,
                  registerPlugin<nationalAccountDelegate>("delegate");
-)
+                )
 K_EXPORT_PLUGIN(ibanAndBicPidWidgetsFactory("payeeidentifier_nationalaccount_ui"))

@@ -32,29 +32,35 @@
 class onlineJobFolder
 {
 public:
-    inline onlineJobFolder( const onlineJobFolder &other )
-        : m_folder( other.m_folder )
-    {}
+  inline onlineJobFolder(const onlineJobFolder &other)
+      : m_folder(other.m_folder) {}
 
-    static onlineJobFolder outbox() { return onlineJobFolder(folderOutbox); }
-    static onlineJobFolder drafts() { return onlineJobFolder(folderDrafts); }
-    static onlineJobFolder templates() { return onlineJobFolder(folderTemplates); }
-    static onlineJobFolder historic() { return onlineJobFolder(folderHistoric); }
+  static onlineJobFolder outbox() {
+    return onlineJobFolder(folderOutbox);
+  }
+  static onlineJobFolder drafts() {
+    return onlineJobFolder(folderDrafts);
+  }
+  static onlineJobFolder templates() {
+    return onlineJobFolder(folderTemplates);
+  }
+  static onlineJobFolder historic() {
+    return onlineJobFolder(folderHistoric);
+  }
 
 private:
-    enum onlineJobFolders {
-        folderOutbox,
-        folderDrafts,
-        folderTemplates,
-        folderHistoric
-    };
+  enum onlineJobFolders {
+    folderOutbox,
+    folderDrafts,
+    folderTemplates,
+    folderHistoric
+  };
 
-    onlineJobFolder();
-    onlineJobFolder( const onlineJobFolders& folder )
-        :m_folder( folder )
-    {}
+  onlineJobFolder();
+  onlineJobFolder(const onlineJobFolders& folder)
+      : m_folder(folder) {}
 
-    onlineJobFolders m_folder;
+  onlineJobFolders m_folder;
 };
 
 #endif // ONLINEJOBFOLDER_H

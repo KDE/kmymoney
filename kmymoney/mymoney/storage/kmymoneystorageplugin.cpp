@@ -19,7 +19,7 @@
 #include "kmymoneystorageplugin.h"
 
 KMyMoneyPlugin::storagePlugin::storagePlugin(QObject* parent, const QVariantList& options)
-  : QObject(parent)
+    : QObject(parent)
 {
   Q_UNUSED(options);
 }

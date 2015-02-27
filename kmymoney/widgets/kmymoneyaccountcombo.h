@@ -72,9 +72,9 @@ protected:
 
 /**
  * @brief "typedef" for AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel>
- * 
+ *
  * To create valid Qt moc data this class inherits the template and uses Q_OBJECT.
- * 
+ *
  * @code typedef AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel> AccountNamesFilterProxyModel;
  * sould work as well
  */
@@ -83,13 +83,12 @@ class AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<Acco
   Q_OBJECT
 public:
   AccountNamesFilterProxyModel(QObject* parent = 0)
-  : AccountNamesFilterProxyModelTpl< AccountsFilterProxyModel >(parent)
-  {}
+      : AccountNamesFilterProxyModelTpl< AccountsFilterProxyModel >(parent) {}
 };
 
 /**
  * @brief OnlineBankingAccountFilterProxyModel showing only the name column
- * 
+ *
  * Is equivalent to AccountNamesFilterProxyModel using OnlineBankingAccountFilterProxyModel as base.
  */
 typedef AccountNamesFilterProxyModelTpl<OnlineBankingAccountsFilterProxyModel> OnlineBankingAccountNamesFilterProxyModel;
@@ -132,7 +131,7 @@ private:
 
 template <class baseProxyModel>
 AccountNamesFilterProxyModelTpl<baseProxyModel>::AccountNamesFilterProxyModelTpl(QObject *parent)
-: baseProxyModel(parent)
+    : baseProxyModel(parent)
 {
 }
 

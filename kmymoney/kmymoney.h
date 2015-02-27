@@ -465,17 +465,17 @@ protected slots:
    * @brief Start dialog to edit onlineJob if possible
    * @param onlineJob id to edit
    */
-  void slotEditOnlineJob( const QString );
+  void slotEditOnlineJob(const QString);
 
   /**
    * @brief Start dialog to edit onlineJob if possible
    */
-  void slotEditOnlineJob( const onlineJob );
+  void slotEditOnlineJob(const onlineJob);
 
   /**
    * @brief Start dialog to edit onlineJob if possible
    */
-  void slotEditOnlineJob( const onlineJobTyped<creditTransfer> );
+  void slotEditOnlineJob(const onlineJobTyped<creditTransfer>);
 
   /**
    * @brief Saves an online banking job
@@ -490,7 +490,7 @@ protected slots:
   /**
    * @brief Send a list of onlineJobs
    */
-  void slotOnlineJobSend(QList<onlineJob> jobs );
+  void slotOnlineJobSend(QList<onlineJob> jobs);
 
   /**
    * @brief Show the log currently selected online job

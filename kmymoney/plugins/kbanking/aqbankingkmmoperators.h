@@ -36,43 +36,44 @@ class AB_TRANSACTION_LIMITS;
 class AB_TRANSACTION;
 class AB_VALUE;
 
-namespace payeeIdentifiers {
-  class ibanBic;
-  class nationalAccount;
+namespace payeeIdentifiers
+{
+class ibanBic;
+class nationalAccount;
 }
 
 /**
  * @brief AB_TransactionLimits_toGermanOnlineTaskSettings
  * @param aqlimits IN
  */
-QSharedPointer<germanOnlineTransfer::settings> AB_TransactionLimits_toGermanOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits );
+QSharedPointer<germanOnlineTransfer::settings> AB_TransactionLimits_toGermanOnlineTaskSettings(const AB_TRANSACTION_LIMITS* aqlimits);
 
 /**
  * @brief AB_TransactionLimits_toSepaOnlineTaskSettings
  * @param aqlimits IN
  */
-QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTaskSettings( const AB_TRANSACTION_LIMITS* aqlimits );
+QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTaskSettings(const AB_TRANSACTION_LIMITS* aqlimits);
 
 /**
  * @brief AB_Transaction_SetRemoteAccount
  * @param transaction
  * @param ident
  */
-void AB_Transaction_SetRemoteAccount( AB_TRANSACTION* transaction, const payeeIdentifiers::ibanBic& ident );
+void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::ibanBic& ident);
 
-void AB_Transaction_SetRemoteAccount( AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident );
+void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident);
 
 /**
  * @brief Set local account of transaction by aqBanking account ptr
  */
-void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const AB_ACCOUNT* account );
+void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const AB_ACCOUNT* account);
 
 /**
  * @brief AB_Transaction_SetLocalAccount
  * @param transaction
  * @param ident
  */
-void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident );
+void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident);
 
 /**
  * @brief Set local account of transaction from list
@@ -82,7 +83,7 @@ void AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const payeeIde
  *
  * @return true if a valid payeeIdentifiers::natinalAccount was set
  */
-bool AB_Transaction_SetLocalAccount( AB_TRANSACTION* transaction, const QList<payeeIdentifier>& accountNumbers );
+bool AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const QList<payeeIdentifier>& accountNumbers);
 
 /**
  * @brief Create AB_VALUE from MyMoneyMoney

@@ -23,17 +23,17 @@
 
 namespace validators
 {
-  enum lengthStatus {
-    ok = 0,
-    tooShort  = -1,
-    tooLong = 1
-  };
-  
-  /** @brief checks if all lines in text are shorter than length */
-  bool checkLineLength( const QString& text, const int& length );
-  
-  /** @brief checks if text uses only charactes in allowedChars */
-  bool checkCharset( const QString& text, const QString& allowedChars );
+enum lengthStatus {
+  ok = 0,
+  tooShort  = -1,
+  tooLong = 1
+};
+
+/** @brief checks if all lines in text are shorter than length */
+bool checkLineLength(const QString& text, const int& length);
+
+/** @brief checks if text uses only charactes in allowedChars */
+bool checkCharset(const QString& text, const QString& allowedChars);
 
 };
 

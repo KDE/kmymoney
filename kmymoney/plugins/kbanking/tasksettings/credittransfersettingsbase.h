@@ -31,48 +31,65 @@ class creditTransferSettingsBase : public sepaOnlineTransfer::settings, public g
 {
 public:
   creditTransferSettingsBase()
-  : _purposeMaxLines(0),
-  _purposeLineLength(0),
-  _purposeMinLength(0),
-  _recipientNameMaxLines(0),
-  _recipientNameLength(0),
-  _recipientNameMinLength(0),
-  _payeeNameMaxLines(0),
-  _payeeNameLength(0),
-  _payeeNameMinLength(0),
-  _allowedChars( QString("") )
-  {}
+      : _purposeMaxLines(0),
+      _purposeLineLength(0),
+      _purposeMinLength(0),
+      _recipientNameMaxLines(0),
+      _recipientNameLength(0),
+      _recipientNameMinLength(0),
+      _payeeNameMaxLines(0),
+      _payeeNameLength(0),
+      _payeeNameMinLength(0),
+      _allowedChars(QString("")) {}
 
   // Limits getter
-  int purposeMaxLines() const { return _purposeMaxLines; }
-  int purposeLineLength() const { return _purposeLineLength; }
-  int purposeMinLength() const { return _purposeMinLength; }
+  int purposeMaxLines() const {
+    return _purposeMaxLines;
+  }
+  int purposeLineLength() const {
+    return _purposeLineLength;
+  }
+  int purposeMinLength() const {
+    return _purposeMinLength;
+  }
 
-  int recipientNameLineLength() const { return _recipientNameLength; }
-  int recipientNameMinLength() const { return _recipientNameMinLength; }
+  int recipientNameLineLength() const {
+    return _recipientNameLength;
+  }
+  int recipientNameMinLength() const {
+    return _recipientNameMinLength;
+  }
 
-  int payeeNameLineLength() const { return _payeeNameLength; }
-  int payeeNameMinLength() const { return _payeeNameMinLength; }
+  int payeeNameLineLength() const {
+    return _payeeNameLength;
+  }
+  int payeeNameMinLength() const {
+    return _payeeNameMinLength;
+  }
 
-  QString allowedChars() const { return _allowedChars; }
+  QString allowedChars() const {
+    return _allowedChars;
+  }
 
-  virtual int endToEndReferenceLength() const { return m_endToEndReferenceLength; }
+  virtual int endToEndReferenceLength() const {
+    return m_endToEndReferenceLength;
+  }
 
   // Checker
-  bool checkPurposeCharset( const QString& string ) const;
+  bool checkPurposeCharset(const QString& string) const;
   bool checkPurposeLineLength(const QString& purpose) const;
   validators::lengthStatus checkPurposeLength(const QString& purpose) const;
   bool checkPurposeMaxLines(const QString& purpose) const;
 
   validators::lengthStatus checkNameLength(const QString& name) const;
-  bool checkNameCharset( const QString& name ) const;
+  bool checkNameCharset(const QString& name) const;
 
   validators::lengthStatus checkRecipientLength(const QString& name) const;
-  bool checkRecipientCharset( const QString& name ) const;
+  bool checkRecipientCharset(const QString& name) const;
 
   virtual validators::lengthStatus checkEndToEndReferenceLength(const QString& reference) const;
 
-  virtual bool checkRecipientBic( const QString& bic ) const;
+  virtual bool checkRecipientBic(const QString& bic) const;
 
   /**
    * @brief Checks if the bic is mandatory for the given iban
@@ -82,38 +99,36 @@ public:
    *
    * There is no need to format fromIban or toIban in any way (it is trimmed automatically).
    */
-  virtual bool isBicMandatory( const QString& fromIban, const QString& toIban ) const;
+  virtual bool isBicMandatory(const QString& fromIban, const QString& toIban) const;
 
-  validators::lengthStatus checkRecipientAccountNumber( const QString& accountNumber ) const;
+  validators::lengthStatus checkRecipientAccountNumber(const QString& accountNumber) const;
 
-  validators::lengthStatus checkRecipientBankCode( const QString& bankCode ) const;
+  validators::lengthStatus checkRecipientBankCode(const QString& bankCode) const;
 
   // Limits setter
-  void setEndToEndReferenceLength(const int& length) { m_endToEndReferenceLength = length; }
+  void setEndToEndReferenceLength(const int& length) {
+    m_endToEndReferenceLength = length;
+  }
 
-  void setPurposeLimits( const int& lines, const int& lineLength, const int& minLength )
-  {
+  void setPurposeLimits(const int& lines, const int& lineLength, const int& minLength) {
     _purposeMaxLines = lines;
     _purposeLineLength = lineLength;
     _purposeMinLength = minLength;
   }
 
-  void setRecipientNameLimits( const int& lines, const int& lineLength, const int& minLength )
-  {
+  void setRecipientNameLimits(const int& lines, const int& lineLength, const int& minLength) {
     _recipientNameMaxLines = lines;
     _recipientNameLength = lineLength;
     _recipientNameMinLength = minLength;
   }
 
-  void setPayeeNameLimits( const int& lines, const int& lineLength, const int& minLength )
-  {
+  void setPayeeNameLimits(const int& lines, const int& lineLength, const int& minLength) {
     _payeeNameMaxLines = lines;
     _payeeNameLength = lineLength;
     _payeeNameMinLength = minLength;
   }
 
-  void setAllowedChars(QString characters)
-  {
+  void setAllowedChars(QString characters) {
     _allowedChars = characters;
   }
 

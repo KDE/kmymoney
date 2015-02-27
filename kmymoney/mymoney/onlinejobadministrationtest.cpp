@@ -29,28 +29,28 @@ QTEST_MAIN(onlineJobAdministrationTest)
 
 void onlineJobAdministrationTest::initTestCase()
 {
-    file = MyMoneyFile::instance();
-    storage = new MyMoneySeqAccessMgr;
-    file->attachStorage(storage);
+  file = MyMoneyFile::instance();
+  storage = new MyMoneySeqAccessMgr;
+  file->attachStorage(storage);
 
-    try {
-        MyMoneyAccount account = MyMoneyAccount();
-        account.setName( "Test Account" );
-        account.setAccountType( MyMoneyAccount::Savings );
-        MyMoneyAccount asset = file->asset();
-        MyMoneyFileTransaction transaction;
-        file->addAccount(account , asset );
-        accountId = account.id();
-        transaction.commit();
-    } catch (const MyMoneyException& ex) {
-        QFAIL( qPrintable("Unexpected exception " + ex.what()) );
-    }
+  try {
+    MyMoneyAccount account = MyMoneyAccount();
+    account.setName("Test Account");
+    account.setAccountType(MyMoneyAccount::Savings);
+    MyMoneyAccount asset = file->asset();
+    MyMoneyFileTransaction transaction;
+    file->addAccount(account , asset);
+    accountId = account.id();
+    transaction.commit();
+  } catch (const MyMoneyException& ex) {
+    QFAIL(qPrintable("Unexpected exception " + ex.what()));
+  }
 }
 
 void onlineJobAdministrationTest::cleanupTestCase()
 {
-    file->detachStorage(storage);
-    delete storage;
+  file->detachStorage(storage);
+  delete storage;
 }
 
 void onlineJobAdministrationTest::init()
@@ -68,5 +68,5 @@ void onlineJobAdministrationTest::registerOnlineTask()
   dummyTask *task = new dummyTask;
   onlineJobAdministration::instance()->registerOnlineTask(task);
   QCOMPARE(onlineJobAdministration::instance()->m_onlineTasks.count(), 1);
-  QVERIFY(onlineJobAdministration::instance()->m_onlineTasks.value( task->taskName() ));
+  QVERIFY(onlineJobAdministration::instance()->m_onlineTasks.value(task->taskName()));
 }

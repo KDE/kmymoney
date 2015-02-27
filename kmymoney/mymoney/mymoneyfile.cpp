@@ -241,10 +241,10 @@ public:
 
   bool                   m_inTransaction;
   MyMoneySecurity        m_baseCurrency;
-  
+
   /**
    * @brief Cache for MyMoneyObjects
-   * 
+   *
    * It is also used to emit the objectAdded() and objectModified() signals.
    * => If one of these signals is used, you must use this cache.
    */
@@ -2788,29 +2788,29 @@ void MyMoneyFile::removeBudget(const MyMoneyBudget& budget)
   d->addCacheNotification(budget.id(), false);
 }
 
-void MyMoneyFile::addOnlineJob( onlineJob& job )
+void MyMoneyFile::addOnlineJob(onlineJob& job)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
   // clear all changed objects from cache
   MyMoneyNotifier notifier(d);
-  d->m_storage->addOnlineJob( job );
-  d->m_cache.preloadOnlineJob( job );
+  d->m_storage->addOnlineJob(job);
+  d->m_cache.preloadOnlineJob(job);
   d->m_changeSet += MyMoneyNotification(notifyAdd, job);
 }
 
-void MyMoneyFile::modifyOnlineJob( const onlineJob job )
+void MyMoneyFile::modifyOnlineJob(const onlineJob job)
 {
   d->checkTransaction(Q_FUNC_INFO);
-  d->m_storage->modifyOnlineJob( job );
+  d->m_storage->modifyOnlineJob(job);
   d->m_changeSet += MyMoneyNotification(notifyModify, job);
   d->addCacheNotification(job.id());
 }
 
-const onlineJob MyMoneyFile::getOnlineJob( const QString &jobId ) const
+const onlineJob MyMoneyFile::getOnlineJob(const QString &jobId) const
 {
   d->checkStorage();
-  return d->m_storage->getOnlineJob( jobId );
+  return d->m_storage->getOnlineJob(jobId);
 }
 
 const QList<onlineJob> MyMoneyFile::onlineJobList() const
@@ -2835,22 +2835,22 @@ void MyMoneyFile::removeOnlineJob(const onlineJob& job)
 
   // clear all changed objects from cache
   MyMoneyNotifier notifier(d);
-  if ( job.isLocked() ) {
+  if (job.isLocked()) {
     return;
   }
   d->addCacheNotification(job.id(), false);
   d->m_cache.clear(job.id());
   d->m_changeSet += MyMoneyNotification(notifyRemove, job);
-  d->m_storage->removeOnlineJob( job );
+  d->m_storage->removeOnlineJob(job);
 }
 
 void MyMoneyFile::removeOnlineJob(const QStringList onlineJobIds)
 {
-  foreach(QString jobId, onlineJobIds) {
+  foreach (QString jobId, onlineJobIds) {
     removeOnlineJob(getOnlineJob(jobId));
   }
 }
- 
+
 bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAccount& account, const MyMoneyAccount& category, const MyMoneyMoney& amount)
 {
   bool rc = false;

@@ -25,7 +25,7 @@
 
 
 payeeIdentifierTypeSelectionWidget::payeeIdentifierTypeSelectionWidget(QWidget* parent)
-  : QComboBox(parent)
+    : QComboBox(parent)
 {
   connect(this, SIGNAL(activated(int)), this, SLOT(itemSelected(int)));
 }
@@ -39,7 +39,7 @@ void payeeIdentifierTypeSelectionWidget::itemSelected(int index)
 }
 
 payeeIdentifierSelectionDelegate::payeeIdentifierSelectionDelegate(QObject* parent)
-  : QStyledItemDelegate(parent)
+    : QStyledItemDelegate(parent)
 {
 }
 
@@ -50,13 +50,13 @@ QWidget* payeeIdentifierSelectionDelegate::createEditor(QWidget* parent, const Q
 
   payeeIdentifierTypeSelectionWidget* comboBox = new payeeIdentifierTypeSelectionWidget(parent);
   comboBox->setFrame(false);
-  connect( comboBox, SIGNAL(commitData(QWidget*)), this, SIGNAL(commitData(QWidget*)));
+  connect(comboBox, SIGNAL(commitData(QWidget*)), this, SIGNAL(commitData(QWidget*)));
 
   comboBox->addItem(i18n("Please select the account number type"));
   payeeIdentifierLoader *const loader = payeeIdentifierLoader::instance();
   QStringList pidids = loader->availableDelegates();
   Q_FOREACH(QString pidid, pidids) {
-    comboBox->addItem(loader->translatedDelegateName(pidid), QVariant( pidid ));
+    comboBox->addItem(loader->translatedDelegateName(pidid), QVariant(pidid));
   }
   return comboBox;
 }
@@ -64,9 +64,9 @@ QWidget* payeeIdentifierSelectionDelegate::createEditor(QWidget* parent, const Q
 void payeeIdentifierSelectionDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
 {
   QComboBox *const comboBox = qobject_cast<QComboBox*>(editor);
-  const QString selectedPidType = comboBox->model()->data(comboBox->model()->index(comboBox->currentIndex(), 0 ), Qt::UserRole).toString();
+  const QString selectedPidType = comboBox->model()->data(comboBox->model()->index(comboBox->currentIndex(), 0), Qt::UserRole).toString();
   payeeIdentifier orig = model->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>();
-  payeeIdentifier ident( orig.id(), payeeIdentifierLoader::instance()->createPayeeIdentifier(selectedPidType) );
+  payeeIdentifier ident(orig.id(), payeeIdentifierLoader::instance()->createPayeeIdentifier(selectedPidType));
   model->setData(index, QVariant::fromValue<payeeIdentifier>(ident), payeeIdentifierModel::payeeIdentifier);
 }
 
@@ -77,5 +77,5 @@ void payeeIdentifierSelectionDelegate::updateEditorGeometry(QWidget* editor, con
 
 QSize payeeIdentifierSelectionDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-    return QStyledItemDelegate::sizeHint(option, index);
+  return QStyledItemDelegate::sizeHint(option, index);
 }

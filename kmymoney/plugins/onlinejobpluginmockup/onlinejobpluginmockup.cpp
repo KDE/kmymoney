@@ -29,7 +29,7 @@ K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<onlineJobPluginMockup>();)
 K_EXPORT_PLUGIN(KBankingFactory("onlinejobpluginmockup"))
 
 onlineJobPluginMockup::onlineJobPluginMockup(QObject* parent, const QVariantList&)
-: OnlinePluginExtended(parent, "onlinejobpluginmockup")
+    : OnlinePluginExtended(parent, "onlinejobpluginmockup")
 {
   qDebug("onlineTaskDebugger should be used during development only!");
 }
@@ -54,7 +54,7 @@ bool onlineJobPluginMockup::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValu
 
 MyMoneyKeyValueContainer onlineJobPluginMockup::onlineBankingSettings(const MyMoneyKeyValueContainer& current)
 {
-  MyMoneyKeyValueContainer nextKvp( current );
+  MyMoneyKeyValueContainer nextKvp(current);
   nextKvp.setValue("provider", objectName());
   return nextKvp;
 }
@@ -72,7 +72,7 @@ QStringList onlineJobPluginMockup::availableJobs(QString accountId)
   try {
     if (MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider") == objectName())
       return onlineJobAdministration::instance()->availableOnlineTasks();
-  } catch ( MyMoneyException& ) {
+  } catch (MyMoneyException&) {
   }
 
   return QStringList();
@@ -82,15 +82,15 @@ IonlineTaskSettings::ptr onlineJobPluginMockup::settings(QString accountId, QStr
 {
   try {
     if (taskName == germanOnlineTransfer::name() && MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider") == objectName())
-      return IonlineTaskSettings::ptr( new germanCreditTransferSettingsMockup );
-  } catch ( MyMoneyException& ) {
+      return IonlineTaskSettings::ptr(new germanCreditTransferSettingsMockup);
+  } catch (MyMoneyException&) {
   }
   return IonlineTaskSettings::ptr();
 }
 
 void onlineJobPluginMockup::sendOnlineJob(QList< onlineJob >& jobs)
 {
-  foreach(const onlineJob& job, jobs) {
+  foreach (const onlineJob& job, jobs) {
     qDebug() << "Pretend to send: " << job.taskIid() << job.id();
   }
 }

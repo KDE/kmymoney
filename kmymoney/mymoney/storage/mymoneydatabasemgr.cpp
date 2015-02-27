@@ -390,7 +390,7 @@ void MyMoneyDatabaseMgr::modifyOnlineJob(const onlineJob& job)
   m_sql->modifyOnlineJob(job);
 }
 
-void MyMoneyDatabaseMgr::addOnlineJob( onlineJob& job )
+void MyMoneyDatabaseMgr::addOnlineJob(onlineJob& job)
 {
   job = onlineJob(nextOnlineJobID(), job);
   m_sql->addOnlineJob(job);
@@ -422,14 +422,14 @@ const onlineJob MyMoneyDatabaseMgr::getOnlineJob(const QString &jobId) const
 const QList<onlineJob> MyMoneyDatabaseMgr::onlineJobList() const
 {
   if (m_sql) {
-    if ( !m_sql->isOpen() )
+    if (!m_sql->isOpen())
       ((QSqlDatabase*)(m_sql.data()))->open();
     return m_sql->fetchOnlineJobs().values();
   }
   return QList<onlineJob>();
 }
 
-void MyMoneyDatabaseMgr::removeOnlineJob( const onlineJob& job )
+void MyMoneyDatabaseMgr::removeOnlineJob(const onlineJob& job)
 {
   if (job.id().isEmpty())
     throw MYMONEYEXCEPTION("Empty online job id during remove.");
@@ -2107,57 +2107,57 @@ void MyMoneyDatabaseMgr::loadOnlineJobs(const QMap< QString, onlineJob >& online
 
 unsigned long MyMoneyDatabaseMgr::accountId() const
 {
-  return m_sql->getNextAccountId()-1;
+  return m_sql->getNextAccountId() - 1;
 }
 
 unsigned long MyMoneyDatabaseMgr::transactionId() const
 {
-  return m_sql->getNextTransactionId()-1;
+  return m_sql->getNextTransactionId() - 1;
 }
 
 unsigned long MyMoneyDatabaseMgr::payeeId() const
 {
-  return m_sql->getNextPayeeId()-1;
+  return m_sql->getNextPayeeId() - 1;
 }
 
 unsigned long MyMoneyDatabaseMgr::tagId() const
 {
-  return m_sql->getNextTagId()-1;
+  return m_sql->getNextTagId() - 1;
 }
 
 unsigned long MyMoneyDatabaseMgr::institutionId() const
 {
-  return m_sql->getNextInstitutionId()-1;
+  return m_sql->getNextInstitutionId() - 1;
 }
 
 unsigned long MyMoneyDatabaseMgr::scheduleId() const
 {
-  return m_sql->getNextScheduleId()-1;
+  return m_sql->getNextScheduleId() - 1;
 }
 
 unsigned long MyMoneyDatabaseMgr::securityId() const
 {
-  return m_sql->getNextSecurityId()-1;
+  return m_sql->getNextSecurityId() - 1;
 }
 
 unsigned long MyMoneyDatabaseMgr::reportId() const
 {
-  return m_sql->getNextReportId()-1;
+  return m_sql->getNextReportId() - 1;
 }
 
 unsigned long MyMoneyDatabaseMgr::budgetId() const
 {
-  return m_sql->getNextBudgetId()-1;
+  return m_sql->getNextBudgetId() - 1;
 }
 
 long unsigned int MyMoneyDatabaseMgr::onlineJobId() const
 {
-  return m_sql->getNextOnlineJobId()-1;
+  return m_sql->getNextOnlineJobId() - 1;
 }
 
 long unsigned int MyMoneyDatabaseMgr::payeeIdentifierId() const
 {
-  return m_sql->getNextPayeeIdentifierId()-1;
+  return m_sql->getNextPayeeIdentifierId() - 1;
 }
 
 void MyMoneyDatabaseMgr::loadAccountId(const unsigned long id)

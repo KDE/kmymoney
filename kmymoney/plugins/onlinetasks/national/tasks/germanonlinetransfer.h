@@ -44,25 +44,23 @@ public:
   ONLINETASK_META(germanOnlineTransfer, "org.kmymoney.creditTransfer.germany");
 
   germanOnlineTransfer()
-  : onlineTask(),
-    creditTransfer()
-    {}
+      : onlineTask(),
+      creditTransfer() {}
 
-  germanOnlineTransfer(const germanOnlineTransfer &other )
-    : onlineTask(other),
-      creditTransfer(other)
-      {}
+  germanOnlineTransfer(const germanOnlineTransfer &other)
+      : onlineTask(other),
+      creditTransfer(other) {}
 
   virtual QString responsibleAccount() const = 0;
-  virtual void setOriginAccount( const QString& accountId ) = 0;
+  virtual void setOriginAccount(const QString& accountId) = 0;
 
   virtual MyMoneyMoney value() const = 0;
   virtual void setValue(MyMoneyMoney value) = 0;
 
-  virtual void setBeneficiary ( const payeeIdentifiers::nationalAccount& accountIdentifier ) = 0;
+  virtual void setBeneficiary(const payeeIdentifiers::nationalAccount& accountIdentifier) = 0;
   virtual payeeIdentifiers::nationalAccount beneficiaryTyped() const = 0;
 
-  virtual void setPurpose( const QString purpose ) = 0;
+  virtual void setPurpose(const QString purpose) = 0;
   virtual QString purpose() const = 0;
 
   virtual QString jobTypeName() const = 0;
@@ -102,19 +100,19 @@ public:
     virtual QString allowedChars() const = 0;
 
     // Limits validators
-    virtual bool checkPurposeCharset( const QString& string ) const = 0;
+    virtual bool checkPurposeCharset(const QString& string) const = 0;
     virtual bool checkPurposeLineLength(const QString& purpose) const = 0;
     virtual validators::lengthStatus checkPurposeLength(const QString& purpose) const = 0;
     virtual bool checkPurposeMaxLines(const QString& purpose) const = 0;
 
     virtual validators::lengthStatus checkNameLength(const QString& name) const = 0;
-    virtual bool checkNameCharset( const QString& name ) const = 0;
+    virtual bool checkNameCharset(const QString& name) const = 0;
 
     virtual validators::lengthStatus checkRecipientLength(const QString& name) const = 0;
-    virtual bool checkRecipientCharset( const QString& name ) const = 0;
+    virtual bool checkRecipientCharset(const QString& name) const = 0;
 
-    virtual validators::lengthStatus checkRecipientAccountNumber( const QString& accountNumber ) const = 0;
-    virtual validators::lengthStatus checkRecipientBankCode( const QString& bankCode ) const = 0;
+    virtual validators::lengthStatus checkRecipientAccountNumber(const QString& accountNumber) const = 0;
+    virtual validators::lengthStatus checkRecipientBankCode(const QString& bankCode) const = 0;
   };
 
   virtual QSharedPointer<const settings> getSettings() const = 0;

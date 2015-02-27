@@ -36,9 +36,9 @@ public:
    */
   virtual QString storagePluginIid() const = 0;
 
-  virtual bool sqlSave( QSqlDatabase databaseConnection, const QString& objectId ) const = 0;
-  virtual bool sqlModify( QSqlDatabase databaseConnection, const QString& objectId ) const = 0;
-  virtual bool sqlRemove( QSqlDatabase databaseConnection, const QString& objectId ) const = 0;
+  virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& objectId) const = 0;
+  virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& objectId) const = 0;
+  virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& objectId) const = 0;
 
   virtual ~databaseStoreableObject() {}
 };

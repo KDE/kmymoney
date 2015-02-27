@@ -97,8 +97,8 @@ void internationalAccountIdentifierTest::paperformatIban_data()
   QTest::newRow("NO5194556")                    << "NO5194556"                    << "NO51 9455 6";
 
   // Non canonical ibans
-  QTest::newRow("VG33 NRCC 0371 8957 2076 3593")<< "VG33 NRCC 0371 8957 2076 3593"<< "VG33 NRCC 0371 8957 2076 3593";
-  QTest::newRow(" SI 4523 946 27 23 327 14 9  ")<< " SI 4523 946 27 23 327 14 9  "<< "SI45 2394 6272 3327 149";
+  QTest::newRow("VG33 NRCC 0371 8957 2076 3593") << "VG33 NRCC 0371 8957 2076 3593" << "VG33 NRCC 0371 8957 2076 3593";
+  QTest::newRow(" SI 4523 946 27 23 327 14 9  ") << " SI 4523 946 27 23 327 14 9  " << "SI45 2394 6272 3327 149";
   QTest::newRow("MK 3-27/3287/612--98207//26")  << "MK 3-27/3287/612--98207//26"  << "MK32 7328 7612 9820 726";
 }
 
@@ -175,7 +175,7 @@ void internationalAccountIdentifierTest::setBic()
   QFETCH(QString, full);
 
   payeeIdentifiers::ibanBic ident;
-  ident.setBic( input );
+  ident.setBic(input);
   QCOMPARE(ident.bic(), normalized);
   QCOMPARE(ident.fullBic(), full);
 }
@@ -209,10 +209,10 @@ void internationalAccountIdentifierTest::equalOperator()
   ident2.setBic(bic2);
   ident2.setIban(iban2);
 
-  if ( equals )
+  if (equals)
     QCOMPARE(ident1, ident2);
   else
-    QVERIFY( !(ident1 == ident2) );
+    QVERIFY(!(ident1 == ident2));
 }
 
 void internationalAccountIdentifierTest::uneqalOperator_data()
@@ -236,10 +236,10 @@ void internationalAccountIdentifierTest::uneqalOperator()
   ident2.setBic(bic2);
   ident2.setIban(iban2);
 
-  if ( equals )
-    QVERIFY( !(ident1 != ident2) );
+  if (equals)
+    QVERIFY(!(ident1 != ident2));
   else
-    QVERIFY( ident1 != ident2 );
+    QVERIFY(ident1 != ident2);
 }
 
 void internationalAccountIdentifierTest::getProperties_data()
@@ -258,10 +258,10 @@ void internationalAccountIdentifierTest::getProperties()
   QFETCH(QString, countryCode);
   QFETCH(int, bbanLength);
 
-  if ( !dataInstalled(countryCode) )
+  if (!dataInstalled(countryCode))
     QSKIP(qPrintable(QString("Could not find ibanBicData service for this country (was looking for \"%1\"). Did you install the services?").arg(countryCode)), SkipSingle);
 
-  QCOMPARE(payeeIdentifiers::ibanBic::ibanLengthByCountry( countryCode ), bbanLength+4);
+  QCOMPARE(payeeIdentifiers::ibanBic::ibanLengthByCountry(countryCode), bbanLength + 4);
 }
 
 void internationalAccountIdentifierTest::iban2bic_data()
@@ -278,7 +278,7 @@ void internationalAccountIdentifierTest::iban2bic()
   QFETCH(QString, iban);
   QFETCH(QString, bic);
 
-  if ( !dataInstalled(iban.left(2)) )
+  if (!dataInstalled(iban.left(2)))
     QSKIP(qPrintable(QString("Could not find ibanBicData service for this country (was looking for \"%1\"). Did you install the services?").arg(iban)), SkipSingle);
 
   QCOMPARE(payeeIdentifiers::ibanBic::bicByIban(iban), bic);
@@ -297,7 +297,7 @@ void internationalAccountIdentifierTest::nameByBic()
   QFETCH(QString, bic);
   QFETCH(QString, name);
 
-  if ( !dataInstalled(bic.mid(4, 2)) )
+  if (!dataInstalled(bic.mid(4, 2)))
     QSKIP(qPrintable(QString("Could not find ibanBicData service for this country (was looking for \"%1\"). Did you install the services?").arg(bic)), SkipSingle);
 
   QCOMPARE(payeeIdentifiers::ibanBic::institutionNameByBic(bic), name);
@@ -325,16 +325,16 @@ void internationalAccountIdentifierTest::bicAndNameByIban()
 void internationalAccountIdentifierTest::qStringNullAndEmpty()
 {
   const QString nullStr1;
-  QVERIFY( nullStr1.isNull() );
-  QVERIFY( nullStr1.isEmpty() );
+  QVERIFY(nullStr1.isNull());
+  QVERIFY(nullStr1.isEmpty());
 
   const QString nullStr2 = QString();
-  QVERIFY( nullStr2.isEmpty() );
-  QVERIFY( nullStr2.isNull() );
+  QVERIFY(nullStr2.isEmpty());
+  QVERIFY(nullStr2.isNull());
 
   const QString empty = QString("");
-  QVERIFY( empty.isEmpty() );
-  QVERIFY( !empty.isNull() );
+  QVERIFY(empty.isEmpty());
+  QVERIFY(!empty.isNull());
 }
 
 Q_DECLARE_METATYPE(payeeIdentifiers::ibanBic::bicAllocationStatus);
@@ -354,8 +354,8 @@ void internationalAccountIdentifierTest::bicAllocated()
   QFETCH(QString, bic);
   QFETCH(payeeIdentifiers::ibanBic::bicAllocationStatus, allocated);
 
-  if ( !dataInstalled(bic.mid(4, 2)) )
+  if (!dataInstalled(bic.mid(4, 2)))
     QSKIP(qPrintable(QString("Could not find ibanBicData service for this country (was looking for \"%1\"). Did you install the services?").arg(bic)), SkipSingle);
 
-  QCOMPARE( payeeIdentifiers::ibanBic::isBicAllocated(bic), allocated);
+  QCOMPARE(payeeIdentifiers::ibanBic::isBicAllocated(bic), allocated);
 }

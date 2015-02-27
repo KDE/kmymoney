@@ -34,33 +34,33 @@
  * @todo Make thread safe.
  */
 bicModel::bicModel(QObject* parent)
-  : QSqlQueryModel(parent)
+    : QSqlQueryModel(parent)
 {
 
   QSqlDatabase db = QSqlDatabase::database("bicModel", true);
   // Save if the database was opened before
   bool attachDatabases = false;
 
-  if ( !db.isValid() ) {
+  if (!db.isValid()) {
     db = QSqlDatabase::addDatabase("QSQLITE", "bicModel");
-    db.setDatabaseName( ":memory:" );
+    db.setDatabaseName(":memory:");
     db.setConnectOptions("QSQLITE_OPEN_READONLY=1;QSQLITE_ENABLE_SHARED_CACHE=1;");
     db.open();
     // Database was not opened before
     attachDatabases = true;
   }
 
-  if ( !db.isOpen() ) {
+  if (!db.isOpen()) {
     kWarning() << QString("Could not open in-memory database for bic data.");
   }
   QSqlQuery query(db);
 
   // Get services which support iban2bic and have a database entry
   KService::List services = KServiceTypeTrader::self()->query("KMyMoney/IbanBicData",
-    QString("exist [X-KMyMoney-Bankdata-Database]")
-  );
+                            QString("exist [X-KMyMoney-Bankdata-Database]")
+                                                             );
 
-  if ( services.isEmpty() ) {
+  if (services.isEmpty()) {
     // Set a valid query
     query.exec("SELECT null;");
     setQuery(query);
@@ -72,12 +72,12 @@ bicModel::bicModel(QObject* parent)
 
   unsigned int databaseCount = 0;
 
-  foreach( KService::Ptr service, services ) {
+  foreach (KService::Ptr service, services) {
     QString database = service->property(QLatin1String("X-KMyMoney-Bankdata-Database")).toString();
 
     // Locate database
     QString path = KGlobal::dirs()->locate("data", QLatin1String("kmymoney/ibanbicdata/") + database);
-    if ( path.isEmpty() ) {
+    if (path.isEmpty()) {
       kWarning() << QString("Could not locate database file \"%1\" to receive BIC data.").arg(database);
     } else {
       databases << path;
@@ -85,7 +85,7 @@ bicModel::bicModel(QObject* parent)
     }
   }
 
-  if ( attachDatabases ) {
+  if (attachDatabases) {
     query.prepare("ATTACH DATABASE ? AS ?");
     query.addBindValue(databases);
     query.addBindValue(dbNames);
@@ -100,13 +100,13 @@ bicModel::bicModel(QObject* parent)
     queries.append(QString("SELECT bic, name FROM %1.institutions").arg(dbName));
   }
 
-  query.exec(queries.join( QLatin1String(" UNION ") ));
+  query.exec(queries.join(QLatin1String(" UNION ")));
   setQuery(query);
 }
 
 QVariant bicModel::data(const QModelIndex& item, int role) const
 {
-  if ( role == InstitutionNameRole )
+  if (role == InstitutionNameRole)
     return QSqlQueryModel::data(createIndex(item.row(), 1), Qt::DisplayRole);
   return QSqlQueryModel::data(item, role);
 }

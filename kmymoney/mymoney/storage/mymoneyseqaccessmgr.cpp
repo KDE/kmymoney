@@ -180,15 +180,15 @@ void MyMoneySeqAccessMgr::addPayee(MyMoneyPayee& payee)
  */
 void MyMoneySeqAccessMgr::addOnlineJob(onlineJob &job)
 {
-  onlineJob newJob = onlineJob( nextOnlineJobID(), job );
+  onlineJob newJob = onlineJob(nextOnlineJobID(), job);
   m_onlineJobList.insert(newJob.id(), newJob);
   job = newJob;
 }
 
 void MyMoneySeqAccessMgr::removeOnlineJob(const onlineJob& job)
 {
-  if ( !m_onlineJobList.contains( job.id() ) ) {
-    throw MYMONEYEXCEPTION("Unknown onlineJob '"+ job.id() + "' should be removed.");
+  if (!m_onlineJobList.contains(job.id())) {
+    throw MYMONEYEXCEPTION("Unknown onlineJob '" + job.id() + "' should be removed.");
   }
   m_onlineJobList.remove(job.id());
 }
@@ -197,7 +197,7 @@ void MyMoneySeqAccessMgr::modifyOnlineJob(const onlineJob &job)
 {
   QMap<QString, onlineJob>::ConstIterator iter = m_onlineJobList.find(job.id());
   if (iter == m_onlineJobList.end()) {
-    throw MYMONEYEXCEPTION("Got unknown onlineJob '"+job.id()+"' for modifying");
+    throw MYMONEYEXCEPTION("Got unknown onlineJob '" + job.id() + "' for modifying");
   }
   onlineJob oldJob = iter.value();
   m_onlineJobList.modify((*iter).id(), job);
@@ -205,7 +205,7 @@ void MyMoneySeqAccessMgr::modifyOnlineJob(const onlineJob &job)
 
 const onlineJob MyMoneySeqAccessMgr::getOnlineJob(const QString &id) const
 {
-  if (m_onlineJobList.contains( id )) {
+  if (m_onlineJobList.contains(id)) {
     return m_onlineJobList[id];
   }
   throw MYMONEYEXCEPTION("Unknown online Job '" + id + "'");

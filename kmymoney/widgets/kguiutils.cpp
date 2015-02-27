@@ -207,7 +207,7 @@ void kMandatoryFieldGroup::changed(void)
         continue;
     }
     if (qobject_cast<KMyMoneyTextEdit*>(widget)) {
-      if ( !(qobject_cast<KMyMoneyTextEdit*>(widget))->isValid() ) {
+      if (!(qobject_cast<KMyMoneyTextEdit*>(widget))->isValid()) {
         enable = false;
         break;
       } else {
@@ -215,7 +215,7 @@ void kMandatoryFieldGroup::changed(void)
       }
     }
     if (qobject_cast<IonlineJobEdit*>(widget)) {
-      if ( !(qobject_cast<IonlineJobEdit*>(widget))->isValid() ) {
+      if (!(qobject_cast<IonlineJobEdit*>(widget))->isValid()) {
         enable = false;
         break;
       } else {

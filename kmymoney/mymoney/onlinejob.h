@@ -64,20 +64,20 @@ public:
    *
    * The onlineJob takes ownership of the task. The task is deleted in the destructor.
    */
-  onlineJob( onlineTask* task, const QString& id = MyMoneyObject::m_emptyId );
+  onlineJob(onlineTask* task, const QString& id = MyMoneyObject::m_emptyId);
 
   /** @brief Copy constructor */
-  onlineJob( onlineJob const& other );
+  onlineJob(onlineJob const& other);
 
   /**
    * @brief Create new onlineJob as copy of other
    *
    * This constructor does not copy the status information but the task only.
    */
-  onlineJob( const QString &id, const onlineJob& other );
+  onlineJob(const QString &id, const onlineJob& other);
 
   /** @brief Contruct from xml */
-  onlineJob( const QDomElement& );
+  onlineJob(const QDomElement&);
 
   virtual ~onlineJob();
 
@@ -101,7 +101,9 @@ public:
    * @brief Returns task attached to this onlineJob as const
    * @throws emptyTask if isNull()
    */
-  const onlineTask* constTask() const { return task(); }
+  const onlineTask* constTask() const {
+    return task();
+  }
 
   /**
    * @brief Returns task of type T attached to this onlineJob
@@ -115,7 +117,9 @@ public:
 
   /** @copydoc task() */
   template<class T> const T* task() const;
-  template<class T> const T* constTask() const { return task<T>(); }
+  template<class T> const T* constTask() const {
+    return task<T>();
+  }
 
   template<class T> bool canTaskCast() const;
 
@@ -169,7 +173,9 @@ public:
    *
    * @return true if no task is attached to this job
    */
-  virtual bool isNull() const { return (m_task == 0); }
+  virtual bool isNull() const {
+    return (m_task == 0);
+  }
 
   /**
    * @brief Checks if an valid onlineTask is attached
@@ -185,7 +191,9 @@ public:
    *
    * @return A valid QDateTime if send to bank, an QDateTime() if not send.
    */
-  virtual QDateTime sendDate() const { return m_jobSend; }
+  virtual QDateTime sendDate() const {
+    return m_jobSend;
+  }
 
   /**
    * @brief Mark this job as send
@@ -194,7 +202,7 @@ public:
    *
    * Set dateTime to QDateTime to mark unsend.
    */
-  virtual void setJobSend( const QDateTime &dateTime = QDateTime::currentDateTime() );
+  virtual void setJobSend(const QDateTime &dateTime = QDateTime::currentDateTime());
 
   /**
    * @brief The bank's answer to this job
@@ -203,19 +211,23 @@ public:
    *
    * Set dateTime to QDateTime() and bankAnswer to noState to mark unsend. If bankAnswer == noState dateTime.isNull() must be true!
    */
-  void setBankAnswer( const sendingState sendingState, const QDateTime &dateTime = QDateTime::currentDateTime() );
+  void setBankAnswer(const sendingState sendingState, const QDateTime &dateTime = QDateTime::currentDateTime());
 
   /**
    * @brief DateTime of the last status update by the bank
    *
    */
-  QDateTime bankAnswerDate() const { return m_jobBankAnswerDate; }
+  QDateTime bankAnswerDate() const {
+    return m_jobBankAnswerDate;
+  }
 
   /**
    * @brief Returns last status sand by bank
    * @return
    */
-  sendingState bankAnswerState() const { return m_jobBankAnswerState; }
+  sendingState bankAnswerState() const {
+    return m_jobBankAnswerState;
+  }
 
   /**
    * @brief locks the onlineJob for sending it
@@ -232,12 +244,14 @@ public:
    *
    * @param enable true locks the job, false unlocks the job
    */
-  virtual bool setLock( bool enable = true );
+  virtual bool setLock(bool enable = true);
 
   /**
    * @brief Get lock status
    */
-  virtual bool isLocked() const { return m_locked; }
+  virtual bool isLocked() const {
+    return m_locked;
+  }
 
   /**
    * @brief Make this onlineJob a "new" onlineJob
@@ -275,10 +289,9 @@ public:
    */
   class badTaskCast : public MyMoneyException
   {
-      public:
-      badTaskCast(const QString& file = "", const long unsigned int& line = 0)
-          : MyMoneyException("Casted onlineTask with wrong type", file, line)
-      {}
+  public:
+    badTaskCast(const QString& file = "", const long unsigned int& line = 0)
+        : MyMoneyException("Casted onlineTask with wrong type", file, line) {}
   };
 
   /**
@@ -288,8 +301,7 @@ public:
   {
   public:
     emptyTask(const QString& file = "", const long unsigned int& line = 0)
-      : MyMoneyException("Requested onlineTask of onlineJob without any task", file, line)
-    {}
+        : MyMoneyException("Requested onlineTask of onlineJob without any task", file, line) {}
   };
 
   /** @brief onlineTask attatched to this job */
@@ -329,7 +341,7 @@ private:
   bool m_locked;
 
   /** @brief Copies stored pointers (used by copy constructors) */
-  inline void copyPointerFromOtherJob( const onlineJob& other );
+  inline void copyPointerFromOtherJob(const onlineJob& other);
 };
 
 template<class T>

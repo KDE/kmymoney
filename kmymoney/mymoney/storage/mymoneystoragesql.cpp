@@ -1141,14 +1141,14 @@ void MyMoneyStorageSql::addPayee(const MyMoneyPayee& payee)
   QVariantList identIds;
   QList<payeeIdentifier> idents = payee.payeeIdentifiers();
   // Store ids which have to be stored in the map table
-  identIds.reserve( idents.count() );
-  foreach(payeeIdentifier ident, idents) {
-      try {
-        // note: this changes ident
-        addPayeeIdentifier(ident);
-        identIds.append( ident.idString() );
-      } catch ( payeeIdentifier::empty& ) {
-      }
+  identIds.reserve(idents.count());
+  foreach (payeeIdentifier ident, idents) {
+    try {
+      // note: this changes ident
+      addPayeeIdentifier(ident);
+      identIds.append(ident.idString());
+    } catch (payeeIdentifier::empty&) {
+    }
   }
 
   if (!identIds.isEmpty()) {
@@ -1158,7 +1158,7 @@ void MyMoneyStorageSql::addPayee(const MyMoneyPayee& payee)
     order.reserve(identIds.size());
     payeeIdList.reserve(identIds.size());
 
-    for( int i = 0; i<identIds.size(); ++i ) {
+    for (int i = 0; i < identIds.size(); ++i) {
       order << i;
       payeeIdList << payee.id();
     }
@@ -1189,11 +1189,11 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
 
   QStringList oldIdentIds;
   oldIdentIds.reserve(q.numRowsAffected());
-  while( q.next() )
+  while (q.next())
     oldIdentIds << q.value(0).toString();
 
   // Add new and modify old payeeIdentifiers
-  foreach(payeeIdentifier ident, payee.payeeIdentifiers()) {
+  foreach (payeeIdentifier ident, payee.payeeIdentifiers()) {
     if (ident.idString().isEmpty()) {
       payeeIdentifier oldIdent(ident);
       addPayeeIdentifier(ident);
@@ -1209,7 +1209,7 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
   }
 
   // Remove identifiers which are not used anymore
-  foreach(QString idToRemove, oldIdentIds) {
+  foreach (QString idToRemove, oldIdentIds) {
     payeeIdentifier ident(fetchPayeeIdentifier(idToRemove));
     removePayeeIdentifier(ident);
   }
@@ -1221,7 +1221,7 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
     throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("modifying payee's identifiers (delete from mapping table)"))); // krazy:exclude=crashy
 
   // Get list again because modifiyPayeeIdentifier which is used above may change the id
-  QList<payeeIdentifier> idents( payee.payeeIdentifiers() );
+  QList<payeeIdentifier> idents(payee.payeeIdentifiers());
 
   QVariantList order;
   QVariantList payeeIdList;
@@ -1233,7 +1233,7 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
   {
     QList<payeeIdentifier>::const_iterator end = idents.constEnd();
     int i = 0;
-    for( QList<payeeIdentifier>::const_iterator iter = idents.constBegin(); iter != end; ++iter, ++i ) {
+    for (QList<payeeIdentifier>::const_iterator iter = idents.constBegin(); iter != end; ++iter, ++i) {
       order << i;
       payeeIdList << payee.id();
       identIdList << iter->idString();
@@ -1273,11 +1273,11 @@ void MyMoneyStorageSql::removePayee(const MyMoneyPayee& payee)
     throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("removing payee's identifiers (getting old values failed)"))); // krazy:exclude=crashy
 
   QStringList identIds;
-  while( q.next() )
+  while (q.next())
     identIds << q.value(0).toString();
 
   QMap<QString, payeeIdentifier> idents = fetchPayeeIdentifiers(identIds);
-  foreach(payeeIdentifier ident, idents) {
+  foreach (payeeIdentifier ident, idents) {
     removePayeeIdentifier(ident);
   }
 
@@ -2644,48 +2644,48 @@ bool MyMoneyStorageSql::setupStoragePlugin(QString iid)
   // setupDatabase has to be called every time because this simple technique to check if was updated already
   // does not work if a user opens another file
   // also the setup is removed if the current database transaction is rolled back
-  if ( iid.isEmpty() /*|| m_loadedStoragePlugins.contains(iid)*/ )
+  if (iid.isEmpty() /*|| m_loadedStoragePlugins.contains(iid)*/)
     return false;
 
   QString errorMsg;
   KMyMoneyPlugin::storagePlugin* plugin = KServiceTypeTrader::createInstanceFromQuery<KMyMoneyPlugin::storagePlugin>(
-    QLatin1String("KMyMoney/sqlStoragePlugin"),
-    QString("'%1' ~in [X-KMyMoney-PluginIid]").arg(iid.replace(QLatin1Char('\''), QLatin1String("\\'"))),
-    0,
-    QVariantList(),
-    &errorMsg
-  );
+                                            QLatin1String("KMyMoney/sqlStoragePlugin"),
+                                            QString("'%1' ~in [X-KMyMoney-PluginIid]").arg(iid.replace(QLatin1Char('\''), QLatin1String("\\'"))),
+                                            0,
+                                            QVariantList(),
+                                            &errorMsg
+                                          );
 
-  if ( plugin == 0 )
+  if (plugin == 0)
     throw MYMONEYEXCEPTION(QString("Could not load sqlStoragePlugin '%1', (error: %2)").arg(iid, errorMsg));
 
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
-  if ( plugin->setupDatabase(*this) ) {
+  if (plugin->setupDatabase(*this)) {
     m_loadedStoragePlugins.insert(iid);
     return true;
   }
 
-  throw MYMONEYEXCEPTION( QString("Could not install sqlStoragePlugin '%1' in database.").arg(iid) );
+  throw MYMONEYEXCEPTION(QString("Could not install sqlStoragePlugin '%1' in database.").arg(iid));
 }
 
 void MyMoneyStorageSql::insertStorableObject(const databaseStoreableObject& obj, const QString& id)
 {
   setupStoragePlugin(obj.storagePluginIid());
-  if ( !obj.sqlSave(*this, id) )
+  if (!obj.sqlSave(*this, id))
     throw MYMONEYEXCEPTION(QString("Could not save object with id '%1' in database (plugin failed).").arg(id));
 }
 
 void MyMoneyStorageSql::updateStorableObject(const databaseStoreableObject& obj, const QString& id)
 {
   setupStoragePlugin(obj.storagePluginIid());
-  if ( !obj.sqlModify(*this, id) )
+  if (!obj.sqlModify(*this, id))
     throw MYMONEYEXCEPTION(QString("Could not modify object with id '%1' in database (plugin failed).").arg(id));
 }
 
 void MyMoneyStorageSql::deleteStorableObject(const databaseStoreableObject& obj, const QString& id)
 {
   setupStoragePlugin(obj.storagePluginIid());
-  if ( !obj.sqlRemove(*this, id) )
+  if (!obj.sqlRemove(*this, id))
     throw MYMONEYEXCEPTION(QString("Could not remove object with id '%1' from database (plugin failed).").arg(id));
 }
 
@@ -2703,25 +2703,25 @@ void MyMoneyStorageSql::addOnlineJob(const onlineJob& job)
   try {
     // Save online task
     insertStorableObject(*job.constTask(), job.id());
-  } catch ( onlineJob::emptyTask& ) {
+  } catch (onlineJob::emptyTask&) {
   }
 }
 
 void MyMoneyStorageSql::modifyOnlineJob(const onlineJob& job)
 {
-  Q_ASSERT( !job.id().isEmpty() );
+  Q_ASSERT(!job.id().isEmpty());
 
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
   QSqlQuery query(*this);
-  query.prepare( QLatin1String(
-    "UPDATE kmmOnlineJobs SET "
-    " type = :type, "
-    " jobSend = :jobSend, "
-    " bankAnswerDate = :bankAnswerDate, "
-    " state = :state, "
-    " locked = :locked "
-    " WHERE id = :id"
-  ));
+  query.prepare(QLatin1String(
+                  "UPDATE kmmOnlineJobs SET "
+                  " type = :type, "
+                  " jobSend = :jobSend, "
+                  " bankAnswerDate = :bankAnswerDate, "
+                  " state = :state, "
+                  " locked = :locked "
+                  " WHERE id = :id"
+                ));
 
   writeOnlineJob(job, query);
   if (!query.exec())
@@ -2730,20 +2730,20 @@ void MyMoneyStorageSql::modifyOnlineJob(const onlineJob& job)
   try {
     // Modify online task
     updateStorableObject(*job.constTask(), job.id());
-  } catch ( onlineJob::emptyTask& ) {
+  } catch (onlineJob::emptyTask&) {
     // If there is no task attached this is fine as well
   }
 }
 
 void MyMoneyStorageSql::writeOnlineJob(const onlineJob& job, QSqlQuery& query)
 {
-  Q_ASSERT( job.id().startsWith('O') );
+  Q_ASSERT(job.id().startsWith('O'));
 
   query.bindValue(":id", job.id());
   query.bindValue(":type", job.taskIid());
   query.bindValue(":jobSend", job.sendDate());
   query.bindValue(":bankAnswerDate", job.bankAnswerDate());
-  switch(job.bankAnswerState()) {
+  switch (job.bankAnswerState()) {
     case onlineJob::acceptedByBank: query.bindValue(":state", QLatin1String("acceptedByBank")); break;
     case onlineJob::rejectedByBank: query.bindValue(":state", QLatin1String("rejectedByBank")); break;
     case onlineJob::abortedByUser: query.bindValue(":state", QLatin1String("abortedByUser")); break;
@@ -2751,7 +2751,7 @@ void MyMoneyStorageSql::writeOnlineJob(const onlineJob& job, QSqlQuery& query)
     case onlineJob::noBankAnswer:
     default: query.bindValue(":state", QLatin1String("noBankAnswer"));
   }
-  query.bindValue(":locked", QVariant::fromValue<QString>( job.isLocked() ? QLatin1String("Y") : QLatin1String("N") ));
+  query.bindValue(":locked", QVariant::fromValue<QString>(job.isLocked() ? QLatin1String("Y") : QLatin1String("N")));
 }
 
 void MyMoneyStorageSql::removeOnlineJob(const onlineJob& job)
@@ -2765,7 +2765,7 @@ void MyMoneyStorageSql::removeOnlineJob(const onlineJob& job)
   try {
     // Remove task
     deleteStorableObject(*job.constTask(), job.id());
-  } catch ( onlineJob::emptyTask& ) {
+  } catch (onlineJob::emptyTask&) {
   }
 
   QSqlQuery q(*this);
@@ -2789,7 +2789,7 @@ void MyMoneyStorageSql::addPayeeIdentifier(payeeIdentifier& ident)
 
   try {
     insertStorableObject(*ident.data(), ident.idString());
-  } catch ( payeeIdentifier::empty& ) {
+  } catch (payeeIdentifier::empty&) {
   }
 }
 
@@ -2810,13 +2810,13 @@ void MyMoneyStorageSql::modifyPayeeIdentifier(const payeeIdentifier& ident)
     const payeeIdentifier oldIdent(fetchPayeeIdentifier(ident.idString()));
     try {
       deleteStorableObject(*oldIdent.data(), ident.idString());
-    } catch ( payeeIdentifier::empty& ) {
+    } catch (payeeIdentifier::empty&) {
       // Note: this should not happen because the ui does not offer a way to change
       // the type of an payeeIdentifier if it was not correctly loaded.
       throw MYMONEYEXCEPTION(QLatin1String("Could not modify payeeIdentifier '")
-        + ident.idString()
-        + QLatin1String("' because type changed and could not remove identifier of old type. Maybe a plugin is missing?")
-      ); // krazy:exclude=crashy
+                             + ident.idString()
+                             + QLatin1String("' because type changed and could not remove identifier of old type. Maybe a plugin is missing?")
+                            ); // krazy:exclude=crashy
     }
   }
 
@@ -2824,11 +2824,11 @@ void MyMoneyStorageSql::modifyPayeeIdentifier(const payeeIdentifier& ident)
   writePayeeIdentifier(ident, q);
 
   try {
-    if ( typeChanged )
+    if (typeChanged)
       insertStorableObject(*ident.data(), ident.idString());
     else
       updateStorableObject(*ident.data(), ident.idString());
-  } catch ( payeeIdentifier::empty& ) {
+  } catch (payeeIdentifier::empty&) {
   }
 }
 
@@ -2840,7 +2840,7 @@ void MyMoneyStorageSql::removePayeeIdentifier(const payeeIdentifier& ident)
   // of row in kmmPayeeIdentifier
   try {
     deleteStorableObject(*ident.data(), ident.idString());
-  } catch ( payeeIdentifier::empty& ) {
+  } catch (payeeIdentifier::empty&) {
   }
 
   QSqlQuery q(*this);
@@ -2883,47 +2883,47 @@ void MyMoneyStorageSql::writeFileInfo()
     if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "inserting fileinfo")); // krazy:exclude=crashy
   }
 
-  q.prepare( QLatin1String(
-    "UPDATE kmmFileInfo SET "
-      "version = :version, "
-      "fixLevel = :fixLevel, "
-      "created = :created, "
-      "lastModified = :lastModified, "
-      "baseCurrency = :baseCurrency, "
-      "dateRangeStart = :dateRangeStart, "
-      "dateRangeEnd = :dateRangeEnd, "
-      "hiInstitutionId = :hiInstitutionId, "
-      "hiPayeeId = :hiPayeeId, "
-      "hiTagId = :hiTagId, "
-      "hiAccountId = :hiAccountId, "
-      "hiTransactionId = :hiTransactionId, "
-      "hiScheduleId = :hiScheduleId, "
-      "hiSecurityId = :hiSecurityId, "
-      "hiReportId = :hiReportId, "
-      "hiBudgetId = :hiBudgetId, "
-      "hiOnlineJobId = :hiOnlineJobId, "
-      "hiPayeeIdentifierId = :hiPayeeIdentifierId, "
-      "encryptData = :encryptData, "
-      "updateInProgress = :updateInProgress, "
-      "logonUser = :logonUser, "
-      "logonAt = :logonAt, "
-      //! @todo The following updates are for backwards compatibility only
-      //! remove backwards compatibility in a later version
-      "institutions = :institutions, "
-      "accounts = :accounts, "
-      "payees = :payees, "
-      "tags = :tags, "
-      "transactions = :transactions, "
-      "splits = :splits, "
-      "securities = :securities, "
-      "prices = :prices, "
-      "currencies = :currencies, "
-      "schedules = :schedules, "
-      "reports = :reports, "
-      "kvps = :kvps, "
-      "budgets = :budgets; "
-    )
-  );
+  q.prepare(QLatin1String(
+              "UPDATE kmmFileInfo SET "
+              "version = :version, "
+              "fixLevel = :fixLevel, "
+              "created = :created, "
+              "lastModified = :lastModified, "
+              "baseCurrency = :baseCurrency, "
+              "dateRangeStart = :dateRangeStart, "
+              "dateRangeEnd = :dateRangeEnd, "
+              "hiInstitutionId = :hiInstitutionId, "
+              "hiPayeeId = :hiPayeeId, "
+              "hiTagId = :hiTagId, "
+              "hiAccountId = :hiAccountId, "
+              "hiTransactionId = :hiTransactionId, "
+              "hiScheduleId = :hiScheduleId, "
+              "hiSecurityId = :hiSecurityId, "
+              "hiReportId = :hiReportId, "
+              "hiBudgetId = :hiBudgetId, "
+              "hiOnlineJobId = :hiOnlineJobId, "
+              "hiPayeeIdentifierId = :hiPayeeIdentifierId, "
+              "encryptData = :encryptData, "
+              "updateInProgress = :updateInProgress, "
+              "logonUser = :logonUser, "
+              "logonAt = :logonAt, "
+              //! @todo The following updates are for backwards compatibility only
+              //! remove backwards compatibility in a later version
+              "institutions = :institutions, "
+              "accounts = :accounts, "
+              "payees = :payees, "
+              "tags = :tags, "
+              "transactions = :transactions, "
+              "splits = :splits, "
+              "securities = :securities, "
+              "prices = :prices, "
+              "currencies = :currencies, "
+              "schedules = :schedules, "
+              "reports = :reports, "
+              "kvps = :kvps, "
+              "budgets = :budgets; "
+            )
+           );
 
   q.bindValue(":version", m_dbVersion);
   q.bindValue(":fixLevel", m_storage->fileFixVersion());
@@ -3244,34 +3244,34 @@ const QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringLi
 
   QSqlQuery q(*const_cast <MyMoneyStorageSql*>(this));
   QString queryString = QLatin1String("SELECT kmmPayees.id AS id, kmmPayees.name AS name, kmmPayees.reference AS reference, "
-    " kmmPayees.email AS email, kmmPayees.addressStreet AS addressStreet, kmmPayees.addressCity AS addressCity, kmmPayees.addressZipcode AS addressZipcode, "
-    " kmmPayees.addressState AS addressState, kmmPayees.telephone AS  telephone, kmmPayees.notes AS notes, "
-    " kmmPayees.defaultAccountId AS defaultAccountId, kmmPayees.matchData AS matchData, kmmPayees.matchIgnoreCase AS matchIgnoreCase, "
-    " kmmPayees.matchKeys AS matchKeys, "
-    " kmmPayeesPayeeIdentifier.identifierId AS identId "
-    " FROM ( SELECT * FROM kmmPayees ");
+                                      " kmmPayees.email AS email, kmmPayees.addressStreet AS addressStreet, kmmPayees.addressCity AS addressCity, kmmPayees.addressZipcode AS addressZipcode, "
+                                      " kmmPayees.addressState AS addressState, kmmPayees.telephone AS  telephone, kmmPayees.notes AS notes, "
+                                      " kmmPayees.defaultAccountId AS defaultAccountId, kmmPayees.matchData AS matchData, kmmPayees.matchIgnoreCase AS matchIgnoreCase, "
+                                      " kmmPayees.matchKeys AS matchKeys, "
+                                      " kmmPayeesPayeeIdentifier.identifierId AS identId "
+                                      " FROM ( SELECT * FROM kmmPayees ");
 
-  if ( !idList.isEmpty() ) {
+  if (!idList.isEmpty()) {
     // Create WHERE clause if needed
     queryString += QLatin1String(" WHERE id IN (");
     queryString += QString("?, ").repeated(idList.length());
-    queryString.chop( 2 ); // remove ", " from end
+    queryString.chop(2);   // remove ", " from end
     queryString += QLatin1Char(')');
   }
 
   queryString += QLatin1String(
-    " ) kmmPayees "
-    " LEFT OUTER JOIN kmmPayeesPayeeIdentifier ON kmmPayees.Id = kmmPayeesPayeeIdentifier.payeeId "
-    // The order is used below
-    " ORDER BY kmmPayees.id, kmmPayeesPayeeIdentifier.\"order\";");
+                   " ) kmmPayees "
+                   " LEFT OUTER JOIN kmmPayeesPayeeIdentifier ON kmmPayees.Id = kmmPayeesPayeeIdentifier.payeeId "
+                   // The order is used below
+                   " ORDER BY kmmPayees.id, kmmPayeesPayeeIdentifier.\"order\";");
 
   q.prepare(queryString);
 
-  if ( !idList.isEmpty() ) {
+  if (!idList.isEmpty()) {
     // Bind values
     QStringList::const_iterator end = idList.constEnd();
-    for(QStringList::const_iterator iter = idList.constBegin(); iter != end; ++iter) {
-      q.addBindValue( *iter );
+    for (QStringList::const_iterator iter = idList.constBegin(); iter != end; ++iter) {
+      q.addBindValue(*iter);
     }
   }
 
@@ -3323,10 +3323,10 @@ const QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringLi
     QStringList identifierIds;
     do {
       identifierIds.append(GETSTRING(identIdCol));
-    } while ( q.next() && GETSTRING(idCol) == pid ); // as long as the payeeId is unchanged
+    } while (q.next() && GETSTRING(idCol) == pid);   // as long as the payeeId is unchanged
 
     // Fetch and save payeeIdentifier
-    if ( !identifierIds.isEmpty() ) {
+    if (!identifierIds.isEmpty()) {
       QList< ::payeeIdentifier > identifier = fetchPayeeIdentifiers(identifierIds).values();
       payee.resetPayeeIdentifiers(identifier);
     }
@@ -3376,12 +3376,12 @@ const QMap<QString, onlineJob> MyMoneyStorageSql::fetchOnlineJobs(const QStringL
     query.prepare("SELECT id, type, jobSend, bankAnswerDate, state, locked FROM kmmOnlineJobs;");
   } else {
     QString queryIdSet = QString("?, ").repeated(idList.length());
-    queryIdSet.chop( 2 );
-    query.prepare(QLatin1String("SELECT id, type, jobSend, bankAnswerDate, state, locked FROM kmmOnlineJobs WHERE id IN (") + queryIdSet + QLatin1String(");") );
+    queryIdSet.chop(2);
+    query.prepare(QLatin1String("SELECT id, type, jobSend, bankAnswerDate, state, locked FROM kmmOnlineJobs WHERE id IN (") + queryIdSet + QLatin1String(");"));
 
     QStringList::const_iterator end = idList.constEnd();
-    for(QStringList::const_iterator iter = idList.constBegin(); iter != end; ++iter) {
-      query.addBindValue( *iter );
+    for (QStringList::const_iterator iter = idList.constBegin(); iter != end; ++iter) {
+      query.addBindValue(*iter);
     }
   }
   if (!query.exec())
@@ -3395,7 +3395,7 @@ const QMap<QString, onlineJob> MyMoneyStorageSql::fetchOnlineJobs(const QStringL
     const QString& id = query.value(0).toString();
     onlineTask *const task = onlineJobAdministration::instance()->createOnlineTaskFromSqlDatabase(query.value(1).toString(), id, *this);
     onlineJob job = onlineJob(task, id);
-    job.setJobSend( query.value(2).toDateTime() );
+    job.setJobSend(query.value(2).toDateTime());
     onlineJob::sendingState state;
     const QString stateString = query.value(4).toString();
     if (stateString == "acceptedByBank")
@@ -3410,7 +3410,7 @@ const QMap<QString, onlineJob> MyMoneyStorageSql::fetchOnlineJobs(const QStringL
       state = onlineJob::noBankAnswer;
 
     job.setBankAnswer(state, query.value(4).toDateTime());
-    job.setLock( query.value(5).toString() == QLatin1String("Y") ? true : false );
+    job.setLock(query.value(5).toString() == QLatin1String("Y") ? true : false);
     jobList.insert(job.id(), job);
     if (m_displayStatus)
       signalProgress(++progress, 0);
@@ -3422,7 +3422,7 @@ payeeIdentifier MyMoneyStorageSql::fetchPayeeIdentifier(const QString& id) const
 {
   QMap<QString, payeeIdentifier> list = fetchPayeeIdentifiers(QStringList(id));
   QMap<QString, payeeIdentifier>::const_iterator iter = list.constFind(id);
-  if ( iter == list.constEnd() )
+  if (iter == list.constEnd())
     throw MYMONEYEXCEPTION(QLatin1String("payeeIdentifier with id '") + id + QLatin1String("' not found.")); // krazy:exclude=crashy
   return *iter;
 }
@@ -3436,12 +3436,12 @@ const QMap< QString, payeeIdentifier > MyMoneyStorageSql::fetchPayeeIdentifiers(
     query.prepare("SELECT id, type FROM kmmPayeeIdentifier;");
   } else {
     QString queryIdSet = QString("?, ").repeated(idList.length());
-    queryIdSet.chop( 2 ); // remove ", " from end
-    query.prepare(QLatin1String("SELECT id, type FROM kmmPayeeIdentifier WHERE id IN (") + queryIdSet + QLatin1String(");") );
+    queryIdSet.chop(2);   // remove ", " from end
+    query.prepare(QLatin1String("SELECT id, type FROM kmmPayeeIdentifier WHERE id IN (") + queryIdSet + QLatin1String(");"));
 
     QStringList::const_iterator end = idList.constEnd();
-    for(QStringList::const_iterator iter = idList.constBegin(); iter != end; ++iter) {
-      query.addBindValue( *iter );
+    for (QStringList::const_iterator iter = idList.constBegin(); iter != end; ++iter) {
+      query.addBindValue(*iter);
     }
   }
   if (!query.exec())
@@ -4758,7 +4758,7 @@ long unsigned MyMoneyStorageSql::getNextPayeeIdentifierId() const
 long unsigned MyMoneyStorageSql::incrementBudgetId()
 {
   m_hiIdBudgets = getNextBudgetId() + 1;
-  return (m_hiIdBudgets-1);
+  return (m_hiIdBudgets - 1);
 }
 
 /**
@@ -4770,61 +4770,61 @@ long unsigned MyMoneyStorageSql::incrementBudgetId()
 long unsigned MyMoneyStorageSql::incrementAccountId()
 {
   m_hiIdAccounts = getNextAccountId() + 1;
-  return (m_hiIdAccounts-1);
+  return (m_hiIdAccounts - 1);
 }
 
 long unsigned MyMoneyStorageSql::incrementInstitutionId()
 {
   m_hiIdInstitutions = getNextInstitutionId() + 1;
-  return (m_hiIdInstitutions-1);
+  return (m_hiIdInstitutions - 1);
 }
 
 long unsigned MyMoneyStorageSql::incrementPayeeId()
 {
   m_hiIdPayees = getNextPayeeId() + 1;
-  return (m_hiIdPayees-1);
+  return (m_hiIdPayees - 1);
 }
 
 long unsigned MyMoneyStorageSql::incrementTagId()
 {
   m_hiIdTags = getNextTagId() + 1;
-  return (m_hiIdTags-1);
+  return (m_hiIdTags - 1);
 }
 
 long unsigned MyMoneyStorageSql::incrementReportId()
 {
   m_hiIdReports = getNextReportId() + 1;
-  return (m_hiIdReports-1);
+  return (m_hiIdReports - 1);
 }
 
 long unsigned MyMoneyStorageSql::incrementScheduleId()
 {
   m_hiIdSchedules = getNextScheduleId() + 1;
-  return (m_hiIdSchedules-1);
+  return (m_hiIdSchedules - 1);
 }
 
 long unsigned MyMoneyStorageSql::incrementSecurityId()
 {
   m_hiIdSecurities = getNextSecurityId() + 1;
-  return (m_hiIdSecurities-1);
+  return (m_hiIdSecurities - 1);
 }
 
 long unsigned MyMoneyStorageSql::incrementTransactionId()
 {
   m_hiIdTransactions = getNextTransactionId() + 1;
-  return (m_hiIdTransactions-1);
+  return (m_hiIdTransactions - 1);
 }
 
 long unsigned int MyMoneyStorageSql::incrementOnlineJobId()
 {
   m_hiIdOnlineJobs = getNextOnlineJobId() + 1;
-  return (m_hiIdOnlineJobs-1);
+  return (m_hiIdOnlineJobs - 1);
 }
 
 long unsigned int MyMoneyStorageSql::incrementPayeeIdentfierId()
 {
   m_hiIdPayeeIdentifier = getNextPayeeIdentifierId() + 1;
-  return (m_hiIdPayeeIdentifier-1);
+  return (m_hiIdPayeeIdentifier - 1);
 }
 
 void MyMoneyStorageSql::loadAccountId(const unsigned long& id)

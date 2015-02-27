@@ -49,9 +49,9 @@ public:
     bicAllocationUncertain
   };
 
-  int bbanLength( const QString& countryCode );
-  int bankIdentifierPosition( const QString& countryCode );
-  int bankIdentifierLength( const QString& countryCode );
+  int bbanLength(const QString& countryCode);
+  int bankIdentifierPosition(const QString& countryCode);
+  int bankIdentifierLength(const QString& countryCode);
 
   /**
    * @brief Create a BIC from a given IBAN
@@ -60,9 +60,9 @@ public:
    *
    * @return QString::isNull() == true means an internal error occurred, QString::isEmpty() == true means there is no BIC
    */
-  QString iban2Bic( const QString& iban );
+  QString iban2Bic(const QString& iban);
 
-  QString bankNameByBic( QString bic );
+  QString bankNameByBic(QString bic);
 
   /**
    * @brief Create a BIC from a IBAN and get the institutes name
@@ -72,11 +72,11 @@ public:
    *
    * QString::isNull() == true means an internal error occurred, QString::isEmpty() == true means there is no data
    */
-  QPair<QString, QString> bankNameAndBic( const QString& iban );
+  QPair<QString, QString> bankNameAndBic(const QString& iban);
 
-  QString extractBankIdentifier( const QString& iban );
+  QString extractBankIdentifier(const QString& iban);
 
-  bicAllocationStatus isBicAllocated( const QString& bic );
+  bicAllocationStatus isBicAllocated(const QString& bic);
 
 private:
   QVariant findPropertyByCountry(const QString& countryCode, const QString& property, const QVariant::Type type);
@@ -88,7 +88,7 @@ private:
    *
    * @param database This string is used to locate the database in the data dir
    */
-  QSqlDatabase createDatabaseConnection( const QString& database );
+  QSqlDatabase createDatabaseConnection(const QString& database);
 };
 
 #endif // IBANBICDATA_H

@@ -25,7 +25,7 @@
 
 class onlineJobMessagesModel : public QAbstractTableModel
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
   explicit onlineJobMessagesModel(QObject* parent = 0);

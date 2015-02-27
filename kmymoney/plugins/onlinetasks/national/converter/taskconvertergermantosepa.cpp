@@ -26,9 +26,9 @@ onlineTask* taskConverterGermanToSepa::convert(const onlineTask& source, onlineT
 {
   userInformation = QString();
   convertResult = convertionLoseless;
-  
-  Q_ASSERT( source.taskName() == germanOnlineTransfer::name() );
-  
+
+  Q_ASSERT(source.taskName() == germanOnlineTransfer::name());
+
   onlineTask* convertBase = onlineJobAdministration::instance()->createOnlineTask(sepaOnlineTransfer::name());
   sepaOnlineTransfer* convert = dynamic_cast<sepaOnlineTransfer*>(convertBase);
   if (convert == 0) {
@@ -36,18 +36,18 @@ onlineTask* taskConverterGermanToSepa::convert(const onlineTask& source, onlineT
     delete convertBase;
     return 0;
   }
-  
+
   const germanOnlineTransfer& origTask = static_cast<const germanOnlineTransfer&>(source);
-  convert->setOriginAccount( origTask.responsibleAccount() );
-  convert->setValue( origTask.value() );
-  convert->setPurpose( origTask.purpose() );
-  if ( !origTask.purpose().isEmpty() ) {
+  convert->setOriginAccount(origTask.responsibleAccount());
+  convert->setValue(origTask.value());
+  convert->setPurpose(origTask.purpose());
+  if (!origTask.purpose().isEmpty()) {
     QSharedPointer<const sepaOnlineTransfer::settings> settings = convert->getSettings();
-    if ( !settings->checkPurposeCharset(convert->purpose()) ) {
+    if (!settings->checkPurposeCharset(convert->purpose())) {
       userInformation = i18n("Due to the convert the purpose contains characters which are not available in SEPA credit-transfers.");
     }
   }
-  convert->setEndToEndReference( QString() );
+  convert->setEndToEndReference(QString());
   return convert;
 }
 
@@ -58,5 +58,5 @@ QString taskConverterGermanToSepa::convertedTask() const
 
 QStringList taskConverterGermanToSepa::convertibleTasks() const
 {
-  return QStringList( germanOnlineTransfer::name() );
+  return QStringList(germanOnlineTransfer::name());
 }

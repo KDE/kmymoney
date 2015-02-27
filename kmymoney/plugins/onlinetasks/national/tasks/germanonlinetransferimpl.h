@@ -40,23 +40,43 @@ class germanOnlineTransferImpl : public germanOnlineTransfer
 public:
 
   germanOnlineTransferImpl();
-  germanOnlineTransferImpl(const germanOnlineTransferImpl &other );
+  germanOnlineTransferImpl(const germanOnlineTransferImpl &other);
 
-  QString responsibleAccount() const { return _originAccount; };
-  void setOriginAccount( const QString& accountId );
+  QString responsibleAccount() const {
+    return _originAccount;
+  };
+  void setOriginAccount(const QString& accountId);
 
-  MyMoneyMoney value() const { return _value; }
-  virtual void setValue(MyMoneyMoney value) { _value = value; }
+  MyMoneyMoney value() const {
+    return _value;
+  }
+  virtual void setValue(MyMoneyMoney value) {
+    _value = value;
+  }
 
-  void setBeneficiary ( const payeeIdentifiers::nationalAccount& accountIdentifier ) { _beneficiaryAccount = accountIdentifier; }
-  payeeIdentifier beneficiary() const { return payeeIdentifier(_beneficiaryAccount.clone()); }
-  virtual payeeIdentifiers::nationalAccount beneficiaryTyped() const { return _beneficiaryAccount; };
+  void setBeneficiary(const payeeIdentifiers::nationalAccount& accountIdentifier) {
+    _beneficiaryAccount = accountIdentifier;
+  }
+  payeeIdentifier beneficiary() const {
+    return payeeIdentifier(_beneficiaryAccount.clone());
+  }
+  virtual payeeIdentifiers::nationalAccount beneficiaryTyped() const {
+    return _beneficiaryAccount;
+  };
 
-  virtual void setPurpose( const QString purpose ) { _purpose = purpose; }
-  QString purpose() const { return _purpose; }
+  virtual void setPurpose(const QString purpose) {
+    _purpose = purpose;
+  }
+  QString purpose() const {
+    return _purpose;
+  }
 
-  virtual QString jobTypeName() const { return creditTransfer::jobTypeName(); }
-  virtual QString storagePluginIid() const { return nationalStoragePlugin::iid; }
+  virtual QString jobTypeName() const {
+    return creditTransfer::jobTypeName();
+  }
+  virtual QString storagePluginIid() const {
+    return nationalStoragePlugin::iid;
+  }
 
   virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
   virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const;
@@ -77,8 +97,12 @@ public:
 
   germanOnlineTransfer* clone() const;
 
-  unsigned short int textKey() const { return _textKey; }
-  unsigned short int subTextKey() const { return _subTextKey; }
+  unsigned short int textKey() const {
+    return _textKey;
+  }
+  unsigned short int subTextKey() const {
+    return _subTextKey;
+  }
 
   QSharedPointer<const germanOnlineTransfer::settings> getSettings() const;
 

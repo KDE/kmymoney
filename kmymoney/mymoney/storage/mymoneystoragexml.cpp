@@ -171,7 +171,7 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
         || s == "fileinfo"
         || s == "user"
         || s == "scheduled_tx"
-        || s == "onlinejob" ) {
+        || s == "onlinejob") {
       m_baseNode = m_doc.createElement(qName);
       for (int i = 0; i < atts.count(); ++i) {
         m_baseNode.setAttribute(atts.qName(i), atts.value(i));
@@ -549,7 +549,7 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, IMyMoneySerialize* storage)
   QDomElement onlineJobs = m_doc->createElement("ONLINEJOBS");
   writeOnlineJobs(onlineJobs);
   mainElement.appendChild(onlineJobs);
-  
+
   QTextStream stream(qf);
   stream.setCodec("UTF-8");
   stream << m_doc->toString();

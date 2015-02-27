@@ -27,7 +27,7 @@
 class Models;
 class onlineJobModel : public QAbstractTableModel
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
   /**
    * @brief Item Data roles for onlineJobs
@@ -50,9 +50,9 @@ public:
   QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
   QVariant headerData(int section, Qt::Orientation orientation , int role = Qt::DisplayRole) const;
   /** @brief Remove onlineJob identified by row */
-  bool removeRow( int row, const QModelIndex & parent = QModelIndex() );
+  bool removeRow(int row, const QModelIndex & parent = QModelIndex());
   /** @brief Remove onlineJobs identified by row and count */
-  bool removeRows ( int row, int count, const QModelIndex & parent = QModelIndex() );
+  bool removeRows(int row, int count, const QModelIndex & parent = QModelIndex());
 
 signals:
 
