@@ -88,6 +88,16 @@ private slots:
     */
   void slotObjectDestroyed(QObject* o);
 
+  /**
+    * Add a context menu to the list used by KMessageBox::informationList to display the consistency check results.
+    */
+  void slotInstallConsistencyCheckContextMenu();
+
+  /**
+    * Handle the context menu of the list used by KMessageBox::informationList to display the consistency check results.
+    */
+  void slotShowContextMenuForConsistencyCheck(const QPoint &);
+
 protected slots:
   void slotFileSaveAsFilterChanged(const QString& filter);
 
