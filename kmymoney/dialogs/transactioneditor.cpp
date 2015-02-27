@@ -675,7 +675,6 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
       QList<MyMoneySplit>::const_iterator it_t;
       for (it_t = t.splits().constBegin(); it_t != t.splits().constEnd(); ++it_t) {
         if (((*it_t).action() != "Buy") &&
-            ((*it_t).action() != "Sell") &&
             ((*it_t).action() != "Reinvest")) {
           continue;
         }
@@ -1827,7 +1826,22 @@ bool StdTransactionEditor::isComplete(QString& reason) const
 
   kMyMoneyDateInput* postDate = dynamic_cast<kMyMoneyDateInput*>(m_editWidgets["postdate"]);
   if (postDate) {
-    if (postDate->date().isValid() && (postDate->date() < m_account.openingDate())) {
+    QDate accountOpeningDate = m_account.openingDate();
+    for (QList<MyMoneySplit>::const_iterator it_s = m_splits.constBegin(); it_s != m_splits.constEnd(); ++it_s) {
+      const MyMoneyAccount& acc = MyMoneyFile::instance()->account((*it_s).accountId());
+      // compute the newest opening date of all accounts involved in the transaction
+      if (acc.openingDate() > accountOpeningDate)
+        accountOpeningDate = acc.openingDate();
+    }
+    // check the selected category in case m_splits hasn't been updated yet
+    KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(m_editWidgets["category"]);
+    if (category && !category->selectedItem().isEmpty()) {
+      MyMoneyAccount cat = MyMoneyFile::instance()->account(category->selectedItem());
+      if (cat.openingDate() > accountOpeningDate)
+        accountOpeningDate = cat.openingDate();
+    }
+
+    if (postDate->date().isValid() && (postDate->date() < accountOpeningDate)) {
       postDate->markAsBadDate(true, KMyMoneyGlobalSettings::listNegativeValueColor());
       reason = i18n("Cannot enter transaction with postdate prior to account's opening date.");
       postDate->setToolTip(reason);

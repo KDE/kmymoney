@@ -58,6 +58,7 @@
 #include <KMenu>
 #include <QProgressBar>
 #include <QList>
+#include <QClipboard>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -337,12 +338,14 @@ public:
   KHolidays::HolidayRegion* m_holidayRegion;
   QBitArray             m_processingDays;
   QMap<QDate, bool>     m_holidayMap;
-
-  bool          m_applicationIsReady;
+  QStringList           m_consistencyCheckResult;
+  bool                  m_applicationIsReady;
 
   // methods
   void consistencyCheck(bool alwaysDisplayResults);
   void setCustomColors();
+  void copyConsistencyCheckResults();
+  void saveConsistencyCheckResults();
 };
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
@@ -459,6 +462,41 @@ void KMyMoneyApp::slotObjectDestroyed(QObject* o)
 {
   if (o == d->m_moveToAccountSelector) {
     d->m_moveToAccountSelector = 0;
+  }
+}
+
+void KMyMoneyApp::slotInstallConsistencyCheckContextMenu()
+{
+  // this code relies on the implementation of KMessageBox::informationList to add a context menu to that list,
+  // please adjust it if it's necessary or rewrite the way the consistency check results are displayed
+  if (QWidget* dialog = QApplication::activeModalWidget()) {
+    if (QListWidget* widget = dialog->findChild<QListWidget *>()) {
+      // give the user a hint that the data can be saved
+      widget->setToolTip(i18n("This is the consistency check log, use the context menu to copy or save it."));
+      widget->setWhatsThis(widget->toolTip());
+      widget->setContextMenuPolicy(Qt::CustomContextMenu);
+      connect(widget, SIGNAL(customContextMenuRequested(QPoint)), SLOT(slotShowContextMenuForConsistencyCheck(QPoint)));
+    }
+  }
+}
+
+void KMyMoneyApp::slotShowContextMenuForConsistencyCheck(const QPoint &pos)
+{
+  // allow the user to save the consistency check results
+  if (QWidget* widget = qobject_cast< QWidget* >(sender())) {
+    QMenu contextMenu(widget);
+    QAction* copy = new QAction(i18n("Copy to clipboard"), widget);
+    QAction* save = new QAction(i18n("Save to file"), widget);
+    contextMenu.addAction(copy);
+    contextMenu.addAction(save);
+    QAction *result = contextMenu.exec(widget->mapToGlobal(pos));
+    if (result == copy) {
+      // copy the consistency check results to the clipboard
+      d->copyConsistencyCheckResults();
+    } else if (result == save) {
+      // save the consistency check results to a file
+      d->saveConsistencyCheckResults();
+    }
   }
 }
 
@@ -6786,23 +6824,49 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
 {
   KMSTATUS(i18n("Running consistency check..."));
 
-  QStringList msg;
   MyMoneyFileTransaction ft;
   try {
-    msg = MyMoneyFile::instance()->consistencyCheck();
+    m_consistencyCheckResult = MyMoneyFile::instance()->consistencyCheck();
     ft.commit();
   } catch (const MyMoneyException &e) {
-    msg.append(i18n("Consistency check failed: %1", e.what()));
+    m_consistencyCheckResult.append(i18n("Consistency check failed: %1", e.what()));
+    // always display the result if the check failed
+    alwaysDisplayResult = true;
   }
 
   // in case the consistency check was OK, we get a single line as result
   // in all errneous cases, we get more than one line and force the
   // display of them.
 
-  if (msg.size() > 1) {
-    KMessageBox::informationList(0, i18n("The consistency check has found some issues in your data. Details are presented below. Those issues that could not be corrected automatically need to be solved by the user."), msg, i18n("Consistency check result"));
-  } else if (alwaysDisplayResult) {
-    KMessageBox::informationList(0, i18n("The consistency check has found no issues in your data. Details are presented below."), msg, i18n("Consistency check result"));
+  if (alwaysDisplayResult || m_consistencyCheckResult.size() > 1) {
+    QString msg = i18n("The consistency check has found no issues in your data. Details are presented below.");
+    if (m_consistencyCheckResult.size() > 1)
+      msg = i18n("The consistency check has found some issues in your data. Details are presented below. Those issues that could not be corrected automatically need to be solved by the user.");
+    // install a context menu for the list after the dialog is displayed
+    QTimer::singleShot(500, q, SLOT(slotInstallConsistencyCheckContextMenu()));
+    KMessageBox::informationList(0, msg, m_consistencyCheckResult, i18n("Consistency check result"));
+  }
+  // this data is no longer needed
+  m_consistencyCheckResult.clear();
+}
+
+void KMyMoneyApp::Private::copyConsistencyCheckResults() {
+  QClipboard *clipboard = QApplication::clipboard();
+  clipboard->setText(m_consistencyCheckResult.join(QLatin1String("\n")));
+}
+
+void KMyMoneyApp::Private::saveConsistencyCheckResults() {
+  QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-consistency-check"), QString(), q);
+  dialog->setMode(KFile::File);
+  dialog->setOperationMode(KFileDialog::Saving);
+
+  if (dialog->exec() == QDialog::Accepted && dialog != 0) {
+    QFile file(dialog->selectedUrl().toLocalFile());
+    if (file.open(QFile::WriteOnly | QFile::Append | QFile::Text)) {
+      QTextStream out(&file);
+      out << m_consistencyCheckResult.join(QLatin1String("\n"));
+      file.close();
+    }
   }
 }
 

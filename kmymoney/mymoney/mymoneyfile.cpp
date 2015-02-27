@@ -2053,6 +2053,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
     QList<MyMoneySplit> splits = t.splits();
     QList<MyMoneySplit>::const_iterator it_s;
     bool tChanged = false;
+    QDate accountOpeningDate;
     for (it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
       bool sChanged = false;
       MyMoneySplit s = (*it_s);
@@ -2067,8 +2068,10 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       // represent the same currency.
       try {
         const MyMoneyAccount& acc = this->account(s.accountId());
-        if (t.commodity() == acc.currencyId()
-            && s.shares().reduce() != s.value().reduce()) {
+        // compute the newest opening date of all accounts involved in the transaction
+        if (!accountOpeningDate.isValid() || acc.openingDate() > accountOpeningDate)
+          accountOpeningDate = acc.openingDate();
+        if (t.commodity() == acc.currencyId() && s.shares().reduce() != s.value().reduce()) {
           // use the value as master if the transaction is balanced
           if (t.splitSum().isZero()) {
             s.setShares(s.value());
@@ -2106,6 +2109,32 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       tChanged = true;
       t.setPostDate(t.entryDate().isValid() ? t.entryDate() : QDate::currentDate());
       rc << i18n("  * Transaction '%1' has an invalid post date.", t.id());
+      rc << i18n("    The post date was updated to '%1'.", KGlobal::locale()->formatDate(t.postDate(), KLocale::ShortDate));
+      ++problemCount;
+    }
+    // make sure that the transaction's post date is after the opening date of all accounts involved in the transaction
+    if (accountOpeningDate.isValid() && t.postDate() < accountOpeningDate) {
+      tChanged = true;
+      QDate originalPostDate = t.postDate();
+      t.setPostDate(accountOpeningDate);
+      // copy the price information for investments to the new date
+      QList<MyMoneySplit>::const_iterator it_t;
+      for (it_t = t.splits().constBegin(); it_t != t.splits().constEnd(); ++it_t) {
+        if (((*it_t).action() != "Buy") &&
+            ((*it_t).action() != "Reinvest")) {
+          continue;
+        }
+        QString id = (*it_t).accountId();
+        MyMoneyAccount acc = this->account(id);
+        MyMoneySecurity sec = this->security(acc.currencyId());
+        MyMoneyPrice price(acc.currencyId(),
+                           sec.tradingCurrency(),
+                           t.postDate(),
+                           (*it_t).price(), "Transaction");
+        this->addPrice(price);
+        break;
+      }
+      rc << i18n("  * Transaction '%1' has a post date '%2' before one of the referenced account's opening date.", t.id(), KGlobal::locale()->formatDate(originalPostDate, KLocale::ShortDate));
       rc << i18n("    The post date was updated to '%1'.", KGlobal::locale()->formatDate(t.postDate(), KLocale::ShortDate));
       ++problemCount;
     }
