@@ -23,9 +23,7 @@
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 
-#include "payeeidentifier_iban_bic_delegates_export.h"
-
-class PAYEEIDENTIFIER_IBAN_BIC_DELEGATES_EXPORT ibanBicItemDelegate : public QStyledItemDelegate
+class ibanBicItemDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
 public:
