@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=KMyMoney/OnlineTaskUi
 Name=Form to edit online orders/tasks
 Name[bs]=Formular za uređivan je narudžbi i zadataka na mreži
+Name[ca]=Formulari per editar ordres/tasques en línia
 Name[da]=Formular til at redigere online ordre/opgaver
 Name[en_GB]=Form to edit online orders/tasks
 Name[es]=Formulario para editar ordenes/tareas en línea
