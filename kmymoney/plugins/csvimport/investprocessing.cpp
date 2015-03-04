@@ -1574,7 +1574,7 @@ int InvestProcessing::processActionType(QString& type)
     } else if (m_securityName.isEmpty()){
         KMessageBox::information(0, i18n("<center>No Detail field specified</center>"
                                      "<center>and no security name supplied.</center>"
-                                     "<Please check the parameters given)</center>"));
+                                     "<center>(Please check the parameters given)</center>"));
       return KMessageBox::Cancel;
     }
   }
