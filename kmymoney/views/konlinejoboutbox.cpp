@@ -155,7 +155,7 @@ QStringList KOnlineJobOutbox::selectedOnlineJobs() const
 void KOnlineJobOutbox::slotSendJobs()
 {
   QList<onlineJob> validJobs;
-  foreach (onlineJob job, MyMoneyFile::instance()->onlineJobList()) {
+  foreach(const onlineJob& job, MyMoneyFile::instance()->onlineJobList()) {
     if (job.isValid())
       validJobs.append(job);
   }

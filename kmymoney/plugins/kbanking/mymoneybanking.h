@@ -206,7 +206,7 @@ private:
   KBAccountSettings* m_accountSettings;
 
   /**
-   * @brief @ref onlineJob "onlineJobs" which are executed right
+   * @brief @ref onlineJob "onlineJobs" which are executed at the moment
    * Key is onlineJob->id(). This container is used during execution of jobs.
    */
   QMap<QString, onlineJob> m_onlineJobQueue;
