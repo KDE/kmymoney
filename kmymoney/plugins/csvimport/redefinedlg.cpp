@@ -163,6 +163,8 @@ void RedefineDlg::slotNewActionSelected(const int& index)
 
 void RedefineDlg::slotRejected()
 {
+  KMessageBox::information(0, i18n("<center>No valid activity type found for this transaction.</center>"
+                                   "<center>Please check the parameters supplied.</center>"));
   m_ret = KMessageBox::Cancel;
   reject();
 }

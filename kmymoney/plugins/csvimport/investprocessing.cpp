@@ -716,11 +716,17 @@ void InvestProcessing::symbolColumnSelected(int col)
 {
   QString type = "symbol";
   m_symbolColumn = col;
-  if (col < 0) {      //                              it is unset
+  if (col < 0) {
+    //  it is not set so remove any prior settings
+    int indx = m_columnTypeList.indexOf(type);
+    m_symbolSelected = false;
+    if (indx > -1) {
+      m_columnTypeList[indx].clear();
+    }
     return;
   }
   m_redefine->setSymbolColumn(col);
-// A new column has been selected for this field so clear old one
+  // A new column has been selected for this field so clear old one
   if ((m_columnTypeList[m_symbolColumn] == type)  && (m_symbolColumn != col)) {
     m_columnTypeList[m_symbolColumn].clear();
   }
@@ -729,7 +735,7 @@ void InvestProcessing::symbolColumnSelected(int col)
     m_csvDialog->m_pageInvestment->ui->comboBoxInv_symbolCol->setCurrentIndex(col);  // accept new column
     m_symbolSelected = true;
     if (m_symbolColumn != -1) {
-//          if a previous symbol column is detected, but in a different column...
+    //          if a previous symbol column is detected, but in a different column...
       if ((m_columnTypeList[m_symbolColumn] == type)  && (m_symbolColumn != col)) {
         m_columnTypeList[m_symbolColumn].clear();// ...clear it
       }
@@ -747,11 +753,17 @@ void InvestProcessing::detailColumnSelected(int col)
 {
   QString type = "detail";
   m_detailColumn = col;
-  if (col < 0) {      //                              it is unset
+  if (col < 0) {
+    //  it is not set so remove any prior settings
+    int indx = m_columnTypeList.indexOf(type);
+    m_detailSelected = false;
+    if (indx > -1) {
+      m_columnTypeList[indx].clear();
+    }
     return;
   }
   m_redefine->setDetailColumn(col);
-// A new column has been selected for this field so clear old one
+  // A new column has been selected for this field so clear old one
   if ((m_columnTypeList[m_detailColumn] == type)  && (m_detailColumn != col)) {
     m_columnTypeList[m_detailColumn].clear();
   }
@@ -760,7 +772,7 @@ void InvestProcessing::detailColumnSelected(int col)
     m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol->setCurrentIndex(col);  // accept new column
     m_detailSelected = true;
     if (m_detailColumn != -1) {
-//          if a previous detail column is detected, but in a different column...
+    //          if a previous detail column is detected, but in a different column...
       if ((m_columnTypeList[m_detailSelected] == type)  && (m_detailColumn != col)) {
         m_columnTypeList[m_detailColumn].clear();// ...clear it
       }
@@ -1391,6 +1403,9 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     else if (m_columnTypeList[i] == "symbol") { //                Symbol Col
       txt = m_columnList[i];
       QString name;
+      if (m_symbolColumn == -1) {
+        return KMessageBox::Cancel;
+      }
       QString symbol = m_columnList[m_symbolColumn].toLower().trimmed();
       if (!symbol.isEmpty()) {
         name = m_map.value(symbol);
@@ -1556,11 +1571,17 @@ int InvestProcessing::processActionType(QString& type)
     } else if (m_payeeColumn == -1) {
       return KMessageBox::Cancel;
     }
-
-    m_columnTypeList[m_detailColumn] = "detail";
-    m_trInvestData.type = '0';
-    m_csvSplit.m_strCategoryName = m_columnList[m_payeeColumn];
-    return KMessageBox::Ok;
+    if (m_detailColumn > -1) {
+      m_columnTypeList[m_detailColumn] = "detail";
+      m_trInvestData.type = '0';
+      m_csvSplit.m_strCategoryName = m_columnList[m_payeeColumn];
+      return KMessageBox::Ok;
+    } else if (m_securityName.isEmpty()){
+        KMessageBox::information(0, i18n("<center>No Detail field specified</center>"
+                                     "<center>and no security name supplied.</center>"
+                                     "<center>(Please check the parameters given)</center>"));
+      return KMessageBox::Cancel;
+    }
   }
   //
   //  If not brokerage, look for genuine investment type.
@@ -1630,7 +1651,9 @@ int InvestProcessing::processActionType(QString& type)
   }
   //   no valid type found
   m_redefine->setInBuffer(m_inBuffer);  //                      Ask user to choose valid type.
-  int ret = m_redefine->suspectType(i18n("The transaction below has an unrecognised type/action.\nPlease select an appropriate entry."));
+  int ret = m_redefine->suspectType(i18n("<center>The transaction below has an unrecognised type or action.</center>"
+                                         "<center>Please select an appropriate entry, if available.</center>"
+                                         "<center>Otherwise, click Cancel to abort.</center>"));
   return ret;
 }//   end of Type Col
 
