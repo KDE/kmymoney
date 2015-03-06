@@ -193,7 +193,7 @@ void KOnlineJobOutbox::slotSendSelectedJobs()
   if (validJobs.count() != indexes.count()) {
     QMessageBox::information(this, i18nc("The user selected credit transfers to send. But they cannot be sent.",
                                          "Cannot send selection"),
-                             i18n("Not all selected credit transfers can be sent because some of them are invalid or were sent alread."));
+                             i18n("Not all selected credit transfers can be sent because some of them are invalid or were already sent."));
     return;
   }
 
