@@ -231,7 +231,8 @@ bool MyMoneyTransactionFilter::matchText(const MyMoneySplit * const sp) const
     if (sp->memo().contains(m_text)
         || sp->shares().formatMoney(acc.fraction(sec)).contains(m_text)
         || sp->value().formatMoney(acc.fraction(sec)).contains(m_text)
-        || sp->number().contains(m_text))
+        || sp->number().contains(m_text)
+        || (m_text.pattern() ==  sp->transactionId()))
       return !m_invertText;
 
     if (acc.name().contains(m_text))
