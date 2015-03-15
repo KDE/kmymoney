@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 #include "transactionmatcher.h"
-
+#include <QDebug>///
 #include <QList>
 #include <klocale.h>
 
@@ -82,11 +82,6 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
       if (sm.bankID().isEmpty()) {
         sm.setBankID(bankID);
         tm.modifySplit(sm);
-      } else if (sm.bankID() != bankID) {
-        if(!allowImportedTransactions && tm.isImported()) {
-            //TODO: maybe we should ask the user confirmation here.
-            throw MYMONEYEXCEPTION(i18n("Both of these transactions have been imported into %1.  Therefore they cannot be matched.  Matching works with one imported transaction and one non-imported transaction.", m_account.name()));
-          }
       }
     } catch (const MyMoneyException &e) {
       QString estr = e.what();
