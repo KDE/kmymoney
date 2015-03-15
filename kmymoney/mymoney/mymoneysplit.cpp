@@ -261,7 +261,8 @@ bool MyMoneySplit::isMatched(void) const
 
 void MyMoneySplit::addMatch(const MyMoneyTransaction& _t)
 {
-  if (_t.isImported() && !isMatched()) {
+  //  now we allow matching of two manual transactions
+  if (!isMatched()) {
     MyMoneyTransaction t(_t);
     t.clearId();
     QDomDocument doc("MATCH");
