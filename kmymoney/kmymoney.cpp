@@ -6152,10 +6152,10 @@ void KMyMoneyApp::transactionMatch(void)
   {
     MyMoneyFileTransaction ft;
     try {
-      if (startMatchTransaction.id().isEmpty()) {
-        throw MYMONEYEXCEPTION(i18n("No manually entered transaction selected for matching")); }
-      if (endMatchTransaction.id().isEmpty()) {
-        throw MYMONEYEXCEPTION(i18n("No imported transaction selected for matching")); }
+      if (startMatchTransaction.id().isEmpty())
+        throw MYMONEYEXCEPTION(i18n("No manually entered transaction selected for matching"));
+      if (endMatchTransaction.id().isEmpty())
+        throw MYMONEYEXCEPTION(i18n("No imported transaction selected for matching"));
 
       TransactionMatcher matcher(d->m_selectedAccount);
       matcher.match(startMatchTransaction, startSplit, endMatchTransaction, endSplit, true);
