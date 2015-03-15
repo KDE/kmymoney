@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 #include "transactionmatcher.h"
-#include <QDebug>///
+
 #include <QList>
 #include <klocale.h>
 
