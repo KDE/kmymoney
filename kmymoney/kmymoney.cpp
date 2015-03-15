@@ -6122,12 +6122,24 @@ void KMyMoneyApp::transactionMatch(void)
   KMyMoneyRegister::SelectedTransactions toBeDeleted;
   for (it = d->m_selectedTransactions.constBegin(); it != d->m_selectedTransactions.constEnd(); ++it) {
     if ((*it).transaction().isImported()) {
-      endMatchTransaction = (*it).transaction();
-      endSplit = (*it).split();
-      toBeDeleted << *it;
+      if (endMatchTransaction.id().isEmpty()){
+        endMatchTransaction = (*it).transaction();
+        endSplit = (*it).split();
+        toBeDeleted << *it;
+      } else {
+        //This is a second imported transaction, we still want to merge
+        startMatchTransaction = (*it).transaction();
+        startSplit = (*it).split();
+      }
     } else if (!(*it).split().isMatched()) {
-      startMatchTransaction = (*it).transaction();
-      startSplit = (*it).split();
+      if (startMatchTransaction.id().isEmpty()) {
+        startMatchTransaction = (*it).transaction();
+        startSplit = (*it).split();
+      } else {
+        endMatchTransaction = (*it).transaction();
+        endSplit = (*it).split();
+        toBeDeleted << *it;
+      }
     }
   }
 
@@ -6140,20 +6152,19 @@ void KMyMoneyApp::transactionMatch(void)
   {
     MyMoneyFileTransaction ft;
     try {
-      if (startMatchTransaction.id().isEmpty())
-        throw MYMONEYEXCEPTION(i18n("No manually entered transaction selected for matching"));
-      if (endMatchTransaction.id().isEmpty())
-        throw MYMONEYEXCEPTION(i18n("No imported transaction selected for matching"));
+      if (startMatchTransaction.id().isEmpty()) {
+        throw MYMONEYEXCEPTION(i18n("No manually entered transaction selected for matching")); }
+      if (endMatchTransaction.id().isEmpty()) {
+        throw MYMONEYEXCEPTION(i18n("No imported transaction selected for matching")); }
 
       TransactionMatcher matcher(d->m_selectedAccount);
-      matcher.match(startMatchTransaction, startSplit, endMatchTransaction, endSplit);
+      matcher.match(startMatchTransaction, startSplit, endMatchTransaction, endSplit, true);
       ft.commit();
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(0, i18n("Unable to match the selected transactions"), e.what());
     }
   }
 }
-
 
 void KMyMoneyApp::showContextMenu(const QString& containerName)
 {
@@ -6484,9 +6495,7 @@ void KMyMoneyApp::slotUpdateActions(void)
       }
 
       if (d->m_selectedTransactions.count() == 2 /* && action("transaction_edit")->isEnabled() */) {
-        if (importedCount == 1 && matchedCount == 0) {
           action("transaction_match")->setEnabled(true);
-        }
       }
       if (importedCount != 0 || matchedCount != 0)
         action("transaction_accept")->setEnabled(true);
