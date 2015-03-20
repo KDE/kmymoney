@@ -264,7 +264,7 @@ void TransactionEditor::slotNumberChanged(const QString& txt)
   kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
   QString schedInfo;
   if (!m_scheduleInfo.isEmpty()) {
-    schedInfo = i18n("<center>Processing schedule for ") + m_scheduleInfo + ".</center>";
+    schedInfo = i18n("<center>Processing schedule for %1.</center>", m_scheduleInfo);
   }
 
   while (MyMoneyFile::instance()->checkNoUsed(m_account.id(), next)) {
@@ -454,7 +454,7 @@ void TransactionEditor::assignNextNumber(void)
     int rc = KMessageBox::No;
     QString schedInfo;
     if (!m_scheduleInfo.isEmpty()) {
-      schedInfo = i18n("<center>Processing schedule for") + m_scheduleInfo +".</center>";
+      schedInfo = i18n("<center>Processing schedule for %1.</center>", m_scheduleInfo);
     }
     while (MyMoneyFile::instance()->checkNoUsed(m_account.id(), num)) {
       if (showMessage) {
