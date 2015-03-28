@@ -114,8 +114,8 @@ public:
   void           clearSelectedFlags();
 
   /**
-  * This method is called when the user clicks 'Clear selections', in order to
-  * clear incorrect column number entries.
+  * This method is called when the user clicks 'Clear', in order to
+  * clear incorrect column number entries.  Also called on initialisation.
   */
   void           clearColumnNumbers();
 
@@ -136,13 +136,6 @@ public:
   void           clearComboBoxText();
 
   void           setInFileName(const QString& val);
-
-  /**
-  * This method ensures the rows and columns are correctly aligned
-  * when a diffent set of lines is displayed, as, among other things,
-  * the horizontal scroll-bar needs to be taken into account.
-  */
-  void           redrawWindow(int startLine);
 
   /**
    * Recalculates column widths for the visible rows
