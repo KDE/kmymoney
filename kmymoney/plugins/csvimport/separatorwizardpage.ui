@@ -6,28 +6,47 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>388</width>
-    <height>165</height>
+    <width>660</width>
+    <height>230</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>640</width>
+    <height>230</height>
+   </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>16777215</width>
-    <height>210</height>
+    <width>700</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Separator Wizard Page</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0">
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="8,1,1,1,20">
+  <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="5,400,5">
+   <item>
+    <spacer name="horizontalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="15,1,1,1,15,2">
      <item>
       <widget class="QLabel" name="label">
        <property name="font">
         <font>
-         <weight>75</weight>
-         <bold>true</bold>
+         <weight>50</weight>
+         <bold>false</bold>
         </font>
        </property>
        <property name="text">
@@ -49,7 +68,7 @@ changed, except possibly when within a field.</string>
        <property name="sizeHint" stdset="0">
         <size>
          <width>371</width>
-         <height>13</height>
+         <height>3</height>
         </size>
        </property>
       </spacer>
@@ -69,13 +88,13 @@ changed, except possibly when within a field.</string>
        <property name="sizeHint" stdset="0">
         <size>
          <width>371</width>
-         <height>13</height>
+         <height>3</height>
         </size>
        </property>
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="20,50,25">
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -90,13 +109,19 @@ changed, except possibly when within a field.</string>
         </spacer>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout">
+        <layout class="QGridLayout" name="gridLayout" columnstretch="10,10">
          <item row="0" column="0">
           <widget class="QLabel" name="labelSet_fieldDelim">
            <property name="minimumSize">
             <size>
              <width>0</width>
              <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
             </size>
            </property>
            <property name="text">
@@ -111,8 +136,14 @@ changed, except possibly when within a field.</string>
           <widget class="KComboBox" name="comboBox_fieldDelimiter">
            <property name="minimumSize">
             <size>
-             <width>0</width>
-             <height>25</height>
+             <width>160</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>175</width>
+             <height>16777215</height>
             </size>
            </property>
            <item>
@@ -169,8 +200,14 @@ changed, except possibly when within a field.</string>
           <widget class="KComboBox" name="comboBox_textDelimiter">
            <property name="minimumSize">
             <size>
-             <width>0</width>
-             <height>25</height>
+             <width>154</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
             </size>
            </property>
            <property name="toolTip">
@@ -206,7 +243,33 @@ This will reset any existing field choices.</string>
        </item>
       </layout>
      </item>
+     <item>
+      <spacer name="verticalSpacer_low">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
     </layout>
+   </item>
+   <item>
+    <spacer name="horizontalSpacer_4">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
