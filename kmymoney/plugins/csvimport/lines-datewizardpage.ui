@@ -60,7 +60,7 @@
        <property name="text">
         <string>Please select the start and end lines.
 Ensure you drop any trailer lines.
-Also, select the correct date formal.</string>
+Also, select the correct date format.</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
