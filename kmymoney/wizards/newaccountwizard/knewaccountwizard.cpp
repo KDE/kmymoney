@@ -483,7 +483,6 @@ AccountTypePage::AccountTypePage(Wizard* wizard) :
   slotUpdateCurrency();
 
   connect(m_typeSelection, SIGNAL(itemSelected(int)), this, SLOT(slotUpdateType(int)));
-  connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
   connect(m_currencyComboBox, SIGNAL(activated(int)), this, SLOT(slotUpdateCurrency()));
   connect(m_conversionRate, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateConversionRate(QString)));
   connect(m_conversionRate, SIGNAL(valueChanged(QString)), this, SLOT(slotPriceWarning()));
@@ -572,11 +571,6 @@ void AccountTypePage::priceWarning(bool always)
 void AccountTypePage::slotUpdateConversionRate(const QString& txt)
 {
   m_conversionExample->setText(i18n("1 %1 equals %2", MyMoneyFile::instance()->baseCurrency().tradingSymbol(), MyMoneyMoney(txt).formatMoney(m_currencyComboBox->security().tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision())));
-}
-
-void AccountTypePage::slotLoadWidgets(void)
-{
-  m_currencyComboBox->update(QString("x"));
 }
 
 bool AccountTypePage::isComplete(void) const
