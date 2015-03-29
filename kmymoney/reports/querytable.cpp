@@ -695,7 +695,7 @@ void QueryTable::constructTransactionTable(void)
               if (splitAcc.isIncomeExpense()) {
                 // if the currency of the split is different from the currency of the main split, then convert to the currency of the main split
                 MyMoneyMoney ieXr(xr);
-                if (splitAcc.currency().id() != myBeginCurrency) {
+                if (!m_config.isConvertCurrency() && splitAcc.currency().id() != myBeginCurrency) {
                   ieXr = (xr * splitAcc.foreignCurrencyPrice(myBeginCurrency, (*it_transaction).postDate())).reduce();
                 }
                 qA["value"] = ((-(*it_split).shares()) * ieXr).convert(fraction).toString();
