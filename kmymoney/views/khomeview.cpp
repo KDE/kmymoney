@@ -609,13 +609,13 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
         tmp += "</td><td align=\"right\">";
 
         const MyMoneySecurity& currency = MyMoneyFile::instance()->currency(acc.currencyId());
-        QString amount = MyMoneyUtils::formatMoney(sp.value() * cnt, acc, currency);
+        MyMoneyMoney payment = MyMoneyMoney(sp.value(t.commodity(), acc.currencyId()) * cnt);
+        QString amount = MyMoneyUtils::formatMoney(payment, acc, currency);
         amount.replace(QChar(' '), "&nbsp;");
-        tmp += showColoredAmount(amount, (sp.value() * cnt).isNegative());
+        tmp += showColoredAmount(amount, payment.isNegative());
         tmp += "</td>";
         //show balance after payments
         tmp += "<td align=\"right\">";
-        MyMoneyMoney payment = MyMoneyMoney((sp.value() * cnt));
         QDate paymentDate = QDate(sched.adjustedNextDueDate());
         MyMoneyMoney balanceAfter = forecastPaymentBalance(acc, payment, paymentDate);
         QString balance = MyMoneyUtils::formatMoney(balanceAfter, acc, currency);

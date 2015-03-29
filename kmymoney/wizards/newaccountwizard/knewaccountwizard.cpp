@@ -269,17 +269,23 @@ const MyMoneySchedule& Wizard::schedule(void)
       m_schedule.setOccurrence(m_generalLoanInfoPage->m_paymentFrequency->currentItem());
 
       MyMoneyTransaction t;
+      t.setCommodity(m_account.currencyId());
       MyMoneySplit s;
       // payment split
       s.setPayeeId(m_generalLoanInfoPage->m_payee->selectedItem());
       s.setAccountId(m_loanSchedulePage->m_paymentAccount->selectedItem());
       s.setMemo(i18n("Loan payment"));
+      s.setValue(m_loanPaymentPage->basePayment() + m_loanPaymentPage->additionalFees());
       if (moneyBorrowed()) {
-        s.setShares(-(m_loanPaymentPage->basePayment() + m_loanPaymentPage->additionalFees()));
-      } else {
-        s.setShares(m_loanPaymentPage->basePayment() + m_loanPaymentPage->additionalFees());
+        s.setValue(-s.value());
       }
-      s.setValue(s.shares());
+      s.setShares(s.value());
+      if (m_account.id() != QLatin1String("Phony-ID")) {
+        // if the real account is already set perform the currency conversion if it's necessary
+        MyMoneyMoney paymentShares;
+        KCurrencyCalculator::setupSplitPrice(paymentShares, t, s, QMap<QString, MyMoneyMoney>(), this);
+        s.setShares(paymentShares);
+      }
       t.addSplit(s);
 
       // principal split
@@ -1209,7 +1215,7 @@ LoanPaymentPage::LoanPaymentPage(Wizard* wizard) :
     WizardPage<Wizard>(StepFees, this, wizard),
     d(new Private)
 {
-  d->phonyAccount = MyMoneyAccount(QString("Phony-ID"), MyMoneyAccount());
+  d->phonyAccount = MyMoneyAccount(QLatin1String("Phony-ID"), MyMoneyAccount());
 
   d->phonySplit.setAccountId(d->phonyAccount.id());
   d->phonySplit.setValue(MyMoneyMoney());
@@ -1545,7 +1551,7 @@ void AccountSummaryPage::enterPage(void)
 
   // assign an id to the account inside the wizard which is required for a schedule
   // get the schedule and clear the id again in the wizards object.
-  MyMoneyAccount tmp(QString("Phony-ID"), acc);
+  MyMoneyAccount tmp(QLatin1String("Phony-ID"), acc);
   m_wizard->setAccount(tmp);
   MyMoneySchedule sch = m_wizard->schedule();
   m_wizard->setAccount(acc);
