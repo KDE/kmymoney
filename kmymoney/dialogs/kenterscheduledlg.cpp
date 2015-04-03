@@ -249,10 +249,24 @@ TransactionEditor* KEnterScheduleDlg::startEdit(void)
     }
     editor->setup(d->m_tabOrderWidgets, d->m_schedule.account(), action);
 
-    // if it's not a check, then we need to clear
-    // a possibly assigned check number
-    if (d->m_schedule.paymentType() != MyMoneySchedule::STYPE_WRITECHEQUE) {
-      QWidget* w = editor->haveWidget("number");
+    MyMoneyTransaction t = d->m_schedule.transaction();
+    QString num = t.splits().first().number();
+    QWidget* w = editor->haveWidget("number");
+    if (d->m_schedule.paymentType() == MyMoneySchedule::STYPE_WRITECHEQUE) {
+      MyMoneyFile* file = MyMoneyFile::instance();
+      if (file->checkNoUsed(d->m_schedule.account().id(), num)) {
+        //  increment and try again
+        num = KMyMoneyUtils::getAdjacentNumber(num);
+      }
+      num = KMyMoneyUtils::nextCheckNumber(d->m_schedule.account());
+      KMyMoneyUtils::updateLastNumberUsed(d->m_schedule.account(), num);
+      d->m_schedule.account().setValue("lastNumberUsed", num);
+      if (w) {
+        dynamic_cast<kMyMoneyLineEdit*>(w)->loadText(num);
+      }
+    } else {
+      // if it's not a check, then we need to clear
+      // a possibly assigned check number
       if (w)
         dynamic_cast<kMyMoneyLineEdit*>(w)->loadText(QString());
     }
@@ -261,7 +275,7 @@ TransactionEditor* KEnterScheduleDlg::startEdit(void)
 
     // editor->setup() leaves the tabbar as the last widget in the stack, but we
     // need it as first here. So we move it around.
-    QWidget* w = editor->haveWidget("tabbar");
+    w = editor->haveWidget("tabbar");
     if (w) {
       int idx = d->m_tabOrderWidgets.indexOf(w);
       if (idx != -1) {
