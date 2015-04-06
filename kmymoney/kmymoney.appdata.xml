@@ -5,7 +5,6 @@
   <project_license>GPL-2.0+</project_license>
   <name>KMyMoney</name>
   <name xml:lang="ar">أموالك</name>
-  <name xml:lang="ast">KMyMoney</name>
   <name xml:lang="bs">KMyMoney</name>
   <name xml:lang="ca">KMyMoney</name>
   <name xml:lang="cs">KMyMoney</name>
@@ -32,7 +31,6 @@
   <name xml:lang="zh-CN">KMyMoney</name>
   <summary>Personal Finance Manager</summary>
   <summary xml:lang="ar">مدير ماليّة شخصيّ</summary>
-  <summary xml:lang="ast">Xestor de finances personal</summary>
   <summary xml:lang="bs">Lični upravnik finansijama</summary>
   <summary xml:lang="ca">Gestor per a les finances personals</summary>
   <summary xml:lang="cs">Osobní správce financí</summary>
@@ -62,7 +60,6 @@
       KMyMoney is a personal finance manager for KDE.
     </p>
     <p xml:lang="ar">أموالك هو مدير ماليّة شخصيّ لِكدي.</p>
-    <p xml:lang="ast">KMyMoney ye un xestor de finances personal pa KDE.</p>
     <p xml:lang="bs">KMyMoney je personalni finansijski menadžer za KDE.</p>
     <p xml:lang="ca">El KMyMoney és un gestor de les finances personals pel KDE.</p>
     <p xml:lang="da">KMyMoney er styring af privatøkonomien til KDE</p>
@@ -136,7 +133,6 @@
     <screenshot>
       <caption>The financial summary gives you an overview of your finances</caption>
       <caption xml:lang="ar">يعطيك ملخّص الماليّة لمحة عن ماليّتك</caption>
-      <caption xml:lang="ast">El sumariu financieru date una vista previa de les tos finances</caption>
       <caption xml:lang="bs">Finansijski rezime daje vam pregled vaših finansija</caption>
       <caption xml:lang="ca">El resum financer ofereix una visió general de les vostres finances.</caption>
       <caption xml:lang="da">Økonomioversigten giver dig en oversigt over din økonomi</caption>
