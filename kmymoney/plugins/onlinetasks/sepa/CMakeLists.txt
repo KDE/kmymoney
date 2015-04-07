@@ -41,6 +41,7 @@ target_link_libraries( konlinetasks_sepa
   ${KDE4_KDEUI_LIBS}
   ${KDE4_KIO_LIBS}
   Qt5::Xml
+  KF5::I18n
   ${LIBALKIMIA_LIBRARY}
   Alkimia::alkimia # TODO: remove when alkimia cmake config file got fixed
 )

@@ -60,7 +60,7 @@ include(GenerateExportHeader)
 include(KMyMoneyMacros)
 
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
-find_package(KF5 REQUIRED COMPONENTS CoreAddons Config KHtml KDELibs4Support Completion KCMUtils ItemViews Service Wallet)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n KHtml KDELibs4Support Completion KCMUtils ItemViews Service Wallet)
 find_package(KF5 COMPONENTS Holidays Gpgmepp Contacts Akonadi IdentityManagement Activities)
 find_package(LibAlkimia 4.100.0 REQUIRED)
 find_package(KChart 2.6.0 REQUIRED)
