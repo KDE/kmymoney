@@ -214,6 +214,11 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
 
   bool haveMinBalance = false;
   bool haveMaxCredit = false;
+  if (!m_account.openingDate().isValid()) {
+    m_account.setOpeningDate(KMyMoneyGlobalSettings::firstFiscalDate());
+  }
+  startDateEdit->setDate(m_account.openingDate());
+
   if (categoryEditor) {
     // get rid of the tabs that are not used for categories
     int tab = m_tab->indexOf(m_institutionTab);
@@ -224,7 +229,6 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
       m_tab->removeTab(tab);
 
     //m_qlistviewParentAccounts->setEnabled(true);
-    startDateEdit->setEnabled(false);
     accountNoEdit->setEnabled(false);
 
     m_institutionBox->hide();
@@ -349,10 +353,6 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     if (account.isInvest())
       m_institutionBox->hide();
 
-    if (!m_account.openingDate().isValid())
-      m_account.setOpeningDate(QDate::currentDate());
-
-    startDateEdit->setDate(m_account.openingDate());
     accountNoEdit->setText(account.number());
     m_qcheckboxPreferred->setChecked(account.value("PreferredAccount") == "Yes");
     m_qcheckboxNoVat->setChecked(account.value("NoVat") == "Yes");
@@ -578,8 +578,9 @@ void KNewAccountDlg::okClicked()
 
   m_account.setDescription(descriptionEdit->toPlainText());
 
+  m_account.setOpeningDate(startDateEdit->date());
+
   if (!m_categoryEditor) {
-    m_account.setOpeningDate(startDateEdit->date());
     m_account.setCurrencyId(m_currency->security().id());
 
     if (m_qcheckboxPreferred->isChecked())
