@@ -2092,7 +2092,7 @@ const QStringList MyMoneyFile::consistencyCheck(void)
             accountList << this->accountToCategory(acc.id());
             if(!supportedAccountTypes.contains(acc.accountType())
             && !reportedUnsupportedAccounts.contains(acc.id())) {
-              rc << i18n("  * Opening data of Account '%1' cannot be changed to support transaction '%2' post date.",
+              rc << i18n("  * Opening date of Account '%1' cannot be changed to support transaction '%2' post date.",
                             this->accountToCategory(acc.id()), t.id());
               reportedUnsupportedAccounts << acc.id();
               ++unfixedCount;
