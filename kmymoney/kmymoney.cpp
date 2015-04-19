@@ -2630,7 +2630,7 @@ void KMyMoneyApp::slotFileBackup(void)
       // If we don't have to mount a device, we just issue
       // a dummy command to start the copy operation
       progressCallback(0, 300, "");
-      d->m_proc.setProgram("echo");
+      d->m_proc.setProgram("true");
       d->m_proc.start();
     }
 
