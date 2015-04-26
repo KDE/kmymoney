@@ -52,7 +52,7 @@
             <string>Details</string>
           </property>
           <property name="whatsThis" stdset="0">
-            <string>&lt;i&gt;Enter regular expressions which can be used to parse the data returned from the URL entered above.  The symbol, price, and date must be found in the quote data to be usable. You may also try the KMyMoney user's mailinglist at &lt;a href=&quot;mailto:kmymoney2-user@lists.sourceforge.net&quot;&gt;kmymoney2-user@lists.sourceforge.net&lt;/a&gt; to find what settings work for other users in your country.&lt;/i&gt;</string>
+            <string>&lt;i&gt;Enter regular expressions which can be used to parse the data returned from the URL entered above.  The symbol, price, and date must be found in the quote data to be usable. You may also try the KMyMoney user's mailinglist at &lt;a href=&quot;mailto:kmymoney@kde.org&quot;&gt;kmymoney@kde.org&lt;/a&gt; to find what settings work for other users in your country.&lt;/i&gt;</string>
           </property>
           <layout class="QGridLayout">
             <item row="3" column="0">
