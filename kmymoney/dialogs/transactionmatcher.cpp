@@ -19,6 +19,7 @@
 
 #include <QList>
 #include <klocale.h>
+#include <KMessageBox>
 
 #include "mymoneyfile.h"
 #include "kmymoneyglobalsettings.h"
@@ -76,7 +77,12 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
 
   // check that dates are within user's setting
   if (abs(tm.postDate().toJulianDay() - ti.postDate().toJulianDay()) > KMyMoneyGlobalSettings::matchInterval()) {
-    throw MYMONEYEXCEPTION(i18n("The transaction post-dates are not within the 'matchInterval' setting."));
+    int rc = KMessageBox::Yes;
+    rc = KMessageBox::questionYesNo(0, i18n("<center>The transaction post-dates are not within the 'matchInterval' setting.</center>"
+                                              "<center>If you wish to import the transaction, click 'Yes'.</center>"));
+    if (rc == KMessageBox::No) {
+      return;
+    }
   }
 
   // ipwizard: I took over the code to keep the bank id found in the endMatchTransaction
@@ -132,6 +138,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
   sm.addMatch(ti);
   tm.modifySplit(sm);
 
+  ti.modifySplit(si);///
   MyMoneyFile::instance()->modifyTransaction(tm);
   // Delete the end transaction if it was stored in the engine
   if (!ti.id().isEmpty())
