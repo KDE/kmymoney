@@ -417,6 +417,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                               acc.name()),
                          i18n("Account Not Mapped"));
     } else {
+      bool enqueJob = true;
       if (acc.onlineBankingSettings().value("kbanking-txn-download") != "no") {
         /* create getTransactions job */
         job = AB_JobGetTransactions_new(ba);
@@ -455,7 +456,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           }
 
           // get last statement request date from application account object
-          // and start from the next day if the date is valid
+          // and start from a few days before if the date is valid
           QDate lastUpdate = QDate::fromString(acc.value("lastImportedTransactionDate"), Qt::ISODate);
           if (lastUpdate.isValid())
             lastUpdate = lastUpdate.addDays(-3);
@@ -478,15 +479,13 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           // the pick start date option dialog is needed in
           // case the dateOption is 0 or the date option is > 1
           // and the qd is invalid
-          bool enqueJob = false;
           if (dateOption == 0 || (dateOption > 1 && !qd.isValid())) {
             QPointer<KBPickStartDate> psd = new KBPickStartDate(m_kbanking, qd, lastUpdate, acc.name(),
                 lastUpdate.isValid() ? 2 : 3, 0, true);
             if (psd->exec() == QDialog::Accepted) {
-              enqueJob = true;
               qd = psd->date();
             } else {
-              qd = QDate();
+              enqueJob = false;
             }
             delete psd;
           }
@@ -514,25 +513,27 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
         }
       }
 
-      /* create getBalance job */
-      job = AB_JobGetBalance_new(ba);
-      rv = AB_Job_CheckAvailability(job);
-      if (!rv)
-        rv = m_kbanking->enqueueJob(job);
-      else
-        rv = 0;
+      if (enqueJob) {
+        /* create getBalance job */
+        job = AB_JobGetBalance_new(ba);
+        rv = AB_Job_CheckAvailability(job);
+        if (!rv)
+          rv = m_kbanking->enqueueJob(job);
+        else
+          rv = 0;
 
-      AB_Job_free(job);
-      if (rv) {
-        DBG_ERROR(0, "Error %d", rv);
-        KMessageBox::error(0,
-                           i18n("<qt>"
-                                "Could not enqueue the job.\n"
-                                "</qt>"),
-                           i18n("Error"));
-      } else {
-        rc = true;
-        emit queueChanged();
+        AB_Job_free(job);
+        if (rv) {
+          DBG_ERROR(0, "Error %d", rv);
+          KMessageBox::error(0,
+                            i18n("<qt>"
+                                  "Could not enqueue the job.\n"
+                                  "</qt>"),
+                            i18n("Error"));
+        } else {
+          rc = true;
+          emit queueChanged();
+        }
       }
     }
   }
