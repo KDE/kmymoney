@@ -129,6 +129,22 @@ public:
     }
   }
 
+  /**
+   * KMyMoney asks for accounts over and over again which causes a lot of "Job not supported with this account" error messages.
+   * This function filters messages with that string.
+   */
+  static int gwenLogHook(GWEN_GUI* gui, const char* domain, GWEN_LOGGER_LEVEL level, const char* message)
+  {
+    Q_UNUSED(gui);
+    Q_UNUSED(domain);
+    Q_UNUSED(level);
+
+    const char* messageToFilter = "Job not supported with this account";
+    if (strstr(message, messageToFilter) != 0)
+      return 1;
+    return 0;
+  }
+
   QTimer *passwordCacheTimer;
 };
 
@@ -162,7 +178,7 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
     //! @todo when is gwenKdeGui deleted?
     gwenKdeGui *gui = new gwenKdeGui();
     GWEN_Gui_SetGui(gui->getCInterface());
-    GWEN_Logger_SetLevel(0, GWEN_LoggerLevel_Critical);
+    GWEN_Logger_SetLevel(0, GWEN_LoggerLevel_Warning);
 
     if (m_kbanking->init() == 0) {
       // Tell the host application to load my GUI component
@@ -178,7 +194,8 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
 
       // load protocol conversion list
       loadProtocolConversion();
-      GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Critical);
+      GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Warning);
+      GWEN_Gui_SetLogHookFn(GWEN_Gui_GetGui(), &KBankingPlugin::Private::gwenLogHook);
 
     } else {
       qWarning("Could not initialize KBanking online banking interface");
