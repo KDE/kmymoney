@@ -78,6 +78,14 @@ void sepaCreditTransferEdit::showEvent(QShowEvent* event)
   QWidget::showEvent(event);
 }
 
+void sepaCreditTransferEdit::showAllErrorMessages(const bool state)
+{
+  if (m_showAllErrors != state) {
+    m_showAllErrors = state;
+    updateEveryStatus();
+  }
+}
+
 onlineJobTyped<sepaOnlineTransfer> sepaCreditTransferEdit::getOnlineJobTyped() const
 {
   onlineJobTyped<sepaOnlineTransfer> sepaJob(m_onlineJob);

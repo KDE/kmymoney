@@ -64,6 +64,8 @@ public:
     return m_readOnly;
   }
 
+  virtual void showAllErrorMessages(const bool);
+
   virtual void showEvent(QShowEvent*);
 
 signals:
