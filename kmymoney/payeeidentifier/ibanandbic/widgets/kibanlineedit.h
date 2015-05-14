@@ -27,7 +27,6 @@
 
 class ibanValidator;
 
-
 class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT KIbanLineEdit : public KLineEdit
 {
   Q_OBJECT
@@ -35,21 +34,6 @@ class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT KIbanLineEdit : public KLineEdit
 public:
   KIbanLineEdit(QWidget* parent);
   const ibanValidator* validator() const;
-
-signals:
-  void validatorFeedback(KMyMoneyValidationFeedback::MessageType type, QString message);
-
-protected:
-  virtual void focusOutEvent(QFocusEvent* ev);
-
-private slots:
-  void delayFeedback(KMyMoneyValidationFeedback::MessageType type, QString message);
-  void emitFeedback();
-
-private:
-  class Private;
-  Private* d_ptr;
-  Q_DECLARE_PRIVATE();
 };
 
 #endif // KIBANLINEEDIT_H

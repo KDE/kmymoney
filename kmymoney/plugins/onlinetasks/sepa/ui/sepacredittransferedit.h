@@ -115,6 +115,7 @@ private:
   onlineJobTyped<sepaOnlineTransfer> m_onlineJob;
   kMandatoryFieldGroup* m_requiredFields;
   bool m_readOnly;
+  bool m_showAllErrors;
 
   QSharedPointer<const sepaOnlineTransfer::settings> taskSettings();
 };

@@ -23,8 +23,6 @@
 
 #include "kmm_widgets_export.h"
 
-class KMyMoneyValidationFeedbackPrivate;
-
 namespace Ui
 {
 class KMyMoneyValidationFeedback;
@@ -71,8 +69,9 @@ public slots:
 private:
   Ui::KMyMoneyValidationFeedback* ui;
 
-  KMyMoneyValidationFeedbackPrivate* d_ptr;
-  Q_DECLARE_PRIVATE(KMyMoneyValidationFeedback);
+  class Private;
+  Private* d_ptr;
+  Q_DECLARE_PRIVATE();
 };
 
 #endif // KMYMONEYVALIDATIONFEEDBACK_H

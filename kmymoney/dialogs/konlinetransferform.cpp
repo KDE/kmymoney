@@ -44,6 +44,9 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
 {
   ui->setupUi(this);
   ui->unsupportedIcon->setPixmap(QIcon::fromTheme("dialog-information").pixmap(style()->pixelMetric(QStyle::PM_MessageBoxIconSize)));
+  // The ui designer fills the QScrollArea with a QWidget. Remove it so we can simply check for .widget() == nullptr
+  // if it contains a valid widget
+  delete ui->creditTransferEdit->takeWidget();
 
   OnlineBankingAccountNamesFilterProxyModel* accountsModel = new OnlineBankingAccountNamesFilterProxyModel(this);
   accountsModel->setSourceModel(Models::instance()->accountsModel());
