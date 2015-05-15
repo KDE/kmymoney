@@ -284,7 +284,7 @@ void MyMoneySchedule::setNextDueDate(const QDate& date)
 {
   if (date.isValid()) {
     m_transaction.setPostDate(date);
-    m_startDate = date;
+    // m_startDate = date;
   }
 }
 

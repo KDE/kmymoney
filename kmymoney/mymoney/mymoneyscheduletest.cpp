@@ -212,6 +212,54 @@ void MyMoneyScheduleTest::testNextPayment()
   }
 }
 
+void MyMoneyScheduleTest::testNextPaymentOnLastDayOfMonth()
+{
+  MyMoneySchedule sch;
+  QString future_sched = QString(
+                           "<!DOCTYPE TEST>\n"
+                           "<SCHEDULE-CONTAINER>\n"
+                           "<SCHEDULED_TX startDate=\"2014-10-31\" autoEnter=\"1\" weekendOption=\"2\" lastPayment=\"\" paymentType=\"1\" endDate=\"\" type=\"1\" id=\"SCH000058\" name=\"Car Tax\" fixed=\"1\" occurenceMultiplier=\"1\" occurence=\"32\" >\n" // krazy:exclude=spelling
+                           "  <PAYMENTS/>\n"
+                           "  <TRANSACTION postdate=\"\" memo=\"\" id=\"\" commodity=\"GBP\" entrydate=\"\" >\n"
+                           "  <SPLITS>\n"
+                           "    <SPLIT payee=\"P000044\" reconciledate=\"\" shares=\"-15000/100\" action=\"Withdrawal\" bankid=\"\" number=\"\" reconcileflag=\"0\" memo=\"\" value=\"-15000/100\" account=\"A000155\" />\n"
+                           "    <SPLIT payee=\"\" reconciledate=\"\" shares=\"15000/100\" action=\"Withdrawal\" bankid=\"\" number=\"\" reconcileflag=\"0\" memo=\"\" value=\"15000/100\" account=\"A000182\" />\n"
+                           "  </SPLITS>\n"
+                           "  <KEYVALUEPAIRS/>\n"
+                           "  </TRANSACTION>\n"
+                           "</SCHEDULED_TX>\n"
+                           "</SCHEDULE-CONTAINER>\n"
+                         );
+
+  QDomDocument doc;
+  QDomElement node;
+  doc.setContent(future_sched);
+  node = doc.documentElement().firstChild().toElement();
+
+  try {
+    sch = MyMoneySchedule(node);
+    QDate nextPayment;
+
+    // check for the first payment to happen
+    nextPayment = sch.nextPayment(QDate(2014, 10, 1));
+    QCOMPARE(nextPayment, QDate(2014, 10, 31));
+    sch.setLastPayment(nextPayment);
+
+    QCOMPARE(sch.nextPayment(QDate(2014, 11, 1)), QDate(2014, 11, 30));
+    QCOMPARE(sch.nextPayment(QDate(2014, 12, 1)), QDate(2014, 12, 31));
+    QCOMPARE(sch.nextPayment(QDate(2015, 1, 1)), QDate(2015, 1, 31));
+    QCOMPARE(sch.nextPayment(QDate(2015, 2, 1)), QDate(2015, 2, 28));
+    QCOMPARE(sch.nextPayment(QDate(2015, 3, 1)), QDate(2015, 3, 31));
+
+    // now check that we also cover leap years
+    QCOMPARE(sch.nextPayment(QDate(2016, 2, 1)), QDate(2016, 2, 29));
+    QCOMPARE(sch.nextPayment(QDate(2016, 3, 1)), QDate(2016, 3, 31));
+
+  } catch (const MyMoneyException &) {
+    QFAIL("Unexpected exception");
+  }
+}
+
 void MyMoneyScheduleTest::testAddHalfMonths()
 {
   // addHalfMonths is private
