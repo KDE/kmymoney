@@ -913,7 +913,7 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
         //! @todo correct exception text
         qWarning("Executed a job which was not in queue. Please inform the KMyMoney developers.");
         abJob = AB_Job_List2Iterator_Next(jobIter);
-        break;
+        continue;
       }
 
       AB_JOB_STATUS abStatus = AB_Job_GetStatus(abJob);
