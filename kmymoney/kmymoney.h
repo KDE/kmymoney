@@ -689,7 +689,16 @@ protected:
     * @retval true account can be closed
     * @retval false account cannot be closed
     */
-  bool canCloseAccount(const MyMoneyAccount& acc) const;
+  KMyMoneyUtils::CanCloseAccountCodeE canCloseAccount(const MyMoneyAccount& acc) const;
+
+  /**
+   * This method checks if an account can be closed and enables/disables
+   * the close account action
+   * If disabled, it sets a tooltip explaning why it cannot be closed
+   * @brief enableCloseAccountAction
+   * @param acc reference to MyMoneyAccount object in question
+   */
+  void enableCloseAccountAction(const MyMoneyAccount& acc);
 
   /**
     * Check if a list contains a payee with a given id

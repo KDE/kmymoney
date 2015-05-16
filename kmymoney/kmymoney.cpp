@@ -4135,18 +4135,43 @@ void KMyMoneyApp::slotAccountOpen(const MyMoneyObject& obj)
   }
 }
 
-bool KMyMoneyApp::canCloseAccount(const MyMoneyAccount& acc) const
+void KMyMoneyApp::enableCloseAccountAction(const MyMoneyAccount& acc) {
+    switch (canCloseAccount(d->m_selectedAccount)) {
+        case KMyMoneyUtils::AccountCanClose: {
+            action("account_close")->setEnabled(true);
+            break;
+        }
+        case KMyMoneyUtils::AccountBalanceNonZero: {
+            action("account_close")->setEnabled(false);
+            action("account_close")->setToolTip(i18n("The balance of the account must be zero before the account can be closed"));
+            break;
+        }
+        case KMyMoneyUtils::AccountChildrenOpen: {
+            action("account_close")->setEnabled(false);
+            action("account_close")->setToolTip(i18n("All subaccounts must be closed before the account can be closed"));
+            break;
+        }
+        case KMyMoneyUtils::AccountScheduleReference: {
+            action("account_close")->setEnabled(false);
+            action("account_close")->setToolTip(i18n("This account is still included in an active schedule"));
+            break;
+        }
+    }
+}
+
+
+KMyMoneyUtils::CanCloseAccountCodeE KMyMoneyApp::canCloseAccount(const MyMoneyAccount& acc) const
 {
   // balance must be zero
   if (!acc.balance().isZero())
-    return false;
+    return KMyMoneyUtils::AccountBalanceNonZero;
 
   // all children must be already closed
   QStringList::const_iterator it_a;
   for (it_a = acc.accountList().constBegin(); it_a != acc.accountList().constEnd(); ++it_a) {
     MyMoneyAccount a = MyMoneyFile::instance()->account(*it_a);
     if (!a.isClosed()) {
-      return false;
+      return KMyMoneyUtils::AccountChildrenOpen;
     }
   }
 
@@ -4157,9 +4182,9 @@ bool KMyMoneyApp::canCloseAccount(const MyMoneyAccount& acc) const
     if ((*it_l).isFinished())
       continue;
     if ((*it_l).hasReferenceTo(acc.id()))
-      return false;
+      return KMyMoneyUtils::AccountScheduleReference;
   }
-  return true;
+  return KMyMoneyUtils::AccountCanClose;
 }
 
 void KMyMoneyApp::slotAccountClose(void)
@@ -6631,8 +6656,7 @@ void KMyMoneyApp::slotUpdateActions(void)
 
           if (d->m_selectedAccount.isClosed())
             action("account_reopen")->setEnabled(true);
-          else if (canCloseAccount(d->m_selectedAccount))
-            action("account_close")->setEnabled(true);
+          else enableCloseAccountAction(d->m_selectedAccount);
 
           if (!d->m_selectedAccount.onlineBankingSettings().value("provider").isEmpty()) {
             action("account_online_unmap")->setEnabled(true);
@@ -6695,8 +6719,7 @@ void KMyMoneyApp::slotUpdateActions(void)
     }
     if (d->m_selectedInvestment.isClosed())
       action("account_reopen")->setEnabled(true);
-    else if (canCloseAccount(d->m_selectedInvestment))
-      action("account_close")->setEnabled(true);
+    else enableCloseAccountAction(d->m_selectedInvestment);
   }
 
   if (!d->m_selectedSchedule.id().isEmpty()) {
