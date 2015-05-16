@@ -947,6 +947,12 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
     account.setOpeningDate(QDate::currentDate());
   }
 
+  // make sure to set the opening date for categories to a
+  // fixed date (1900-1-1). See #313793 on b.k.o for details
+  if(account.isIncomeExpense()) {
+    account.setOpeningDate(QDate(1900,1,1));
+  }
+
   // if we don't have a currency assigned use the base currency
   if (account.currencyId().isEmpty()) {
     account.setCurrencyId(baseCurrency().id());
@@ -1961,6 +1967,13 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         rc << i18n("    The payee will be removed.");
         // remove the payee - the account will be modified in the engine later
         (*it_a).deletePair("payee");
+      }
+    }
+
+    // check if it is a category and set the date to 1900-01-01 if different
+    if ((*it_a).isIncomeExpense()) {
+      if(((*it_a).openingDate().isValid() == false) || ((*it_a).openingDate() != QDate(1900,1,1))) {
+        (*it_a).setOpeningDate(QDate(1900,1,1));
       }
     }
 

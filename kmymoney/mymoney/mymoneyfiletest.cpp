@@ -579,6 +579,77 @@ void MyMoneyFileTest::testAddAccounts()
   QCOMPARE(p.currencyId(), QLatin1String("EUR"));
 }
 
+void MyMoneyFileTest::testAddCategories()
+{
+  MyMoneyAccount  a, b, c;
+  a.setAccountType(MyMoneyAccount::Income);
+  a.setOpeningDate(QDate::currentDate());
+  b.setAccountType(MyMoneyAccount::Expense);
+
+  storage->m_dirty = false;
+
+  QCOMPARE(m->accountCount(), static_cast<unsigned>(5));
+  QCOMPARE(a.openingDate(), QDate::currentDate());
+  QVERIFY(!b.openingDate().isValid());
+
+  a.setName("Account1");
+  a.setCurrencyId("EUR");
+
+  clearObjectLists();
+  MyMoneyFileTransaction ft;
+  try {
+    MyMoneyAccount parent = m->income();
+    m->addAccount(a, parent);
+    ft.commit();
+    QCOMPARE(m->accountCount(), static_cast<unsigned>(6));
+    QCOMPARE(a.parentAccountId(), QLatin1String("AStd::Income"));
+    QCOMPARE(a.id(), QLatin1String("A000001"));
+    QCOMPARE(a.institutionId(), QString());
+    QCOMPARE(a.currencyId(), QLatin1String("EUR"));
+    QCOMPARE(a.openingDate(), QDate(1900,1,1));
+    QCOMPARE(m->dirty(), true);
+    QCOMPARE(m->income().accountList().count(), 1);
+    QCOMPARE(m->income().accountList()[0], QLatin1String("A000001"));
+
+  } catch (const MyMoneyException &) {
+    QFAIL("Unexpected exception!");
+  }
+
+  // add a second category, expense this time
+  b.setName("Account2");
+  b.setCurrencyId("EUR");
+  clearObjectLists();
+  ft.restart();
+  try {
+    MyMoneyAccount parent = m->expense();
+    m->addAccount(b, parent);
+    ft.commit();
+    QCOMPARE(m->dirty(), true);
+    QCOMPARE(b.id(), QLatin1String("A000002"));
+    QCOMPARE(a.institutionId(), QString());
+    QCOMPARE(b.currencyId(), QLatin1String("EUR"));
+    QCOMPARE(b.openingDate(), QDate(1900,1,1));
+    QCOMPARE(b.parentAccountId(), QLatin1String("AStd::Expense"));
+    QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
+
+    QCOMPARE(m->income().accountList().count(), 1);
+    QCOMPARE(m->expense().accountList().count(), 1);
+    QCOMPARE(m->income().accountList()[0], QLatin1String("A000001"));
+    QCOMPARE(m->expense().accountList()[0], QLatin1String("A000002"));
+
+    QCOMPARE(m_objectsRemoved.count(), 0);
+    QCOMPARE(m_objectsAdded.count(), 1);
+    QCOMPARE(m_objectsModified.count(), 1);
+    QCOMPARE(m_balanceChanged.count(), 0);
+    QCOMPARE(m_valueChanged.count(), 0);
+    QVERIFY(m_objectsAdded.contains(QLatin1String("A000002")));
+    QVERIFY(m_objectsModified.contains(QLatin1String("AStd::Expense")));
+
+  } catch (const MyMoneyException &) {
+    QFAIL("Unexpected exception!");
+  }
+}
+
 void MyMoneyFileTest::testModifyAccount()
 {
   testAddAccounts();

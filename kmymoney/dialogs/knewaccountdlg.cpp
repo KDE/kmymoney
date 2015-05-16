@@ -217,7 +217,7 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   if (!m_account.openingDate().isValid()) {
     m_account.setOpeningDate(KMyMoneyGlobalSettings::firstFiscalDate());
   }
-  startDateEdit->setDate(m_account.openingDate());
+  m_openingDateEdit->setDate(m_account.openingDate());
 
   if (categoryEditor) {
     // get rid of the tabs that are not used for categories
@@ -494,6 +494,12 @@ void KNewAccountDlg::setOpeningBalanceShown(bool shown)
   m_openingBalanceEdit->setVisible(shown);
 }
 
+void KNewAccountDlg::setOpeningDateShown(bool shown)
+{
+  m_openingDateLabel->setVisible(shown);
+  m_openingDateEdit->setVisible(shown);
+}
+
 void KNewAccountDlg::okClicked()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -578,7 +584,7 @@ void KNewAccountDlg::okClicked()
 
   m_account.setDescription(descriptionEdit->toPlainText());
 
-  m_account.setOpeningDate(startDateEdit->date());
+  m_account.setOpeningDate(m_openingDateEdit->date());
 
   if (!m_categoryEditor) {
     m_account.setCurrencyId(m_currency->security().id());
