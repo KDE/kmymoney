@@ -4136,7 +4136,7 @@ void KMyMoneyApp::slotAccountOpen(const MyMoneyObject& obj)
 }
 
 void KMyMoneyApp::enableCloseAccountAction(const MyMoneyAccount& acc) {
-    switch (canCloseAccount(d->m_selectedAccount)) {
+    switch (canCloseAccount(acc)) {
         case KMyMoneyUtils::AccountCanClose: {
             action("account_close")->setEnabled(true);
             break;
