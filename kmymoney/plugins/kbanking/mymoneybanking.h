@@ -28,6 +28,7 @@
 
 #include <aqbanking/version.h>
 #include <aqbanking/banking.h>
+#include <QSet>
 #include "banking.hpp"
 
 #ifndef AQB_MAKE_VERSION
@@ -251,7 +252,7 @@ private:
   KBankingPlugin* m_parent;
   QMap<QString, bool> m_hashMap;
   AB_JOB_LIST2 *_jobQueue;
-
+  QSet<QString>   m_sepaKeywords;
 };
 
 #endif

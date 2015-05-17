@@ -850,6 +850,8 @@ KMyMoneyBanking::KMyMoneyBanking(KBankingPlugin* parent, const char* appname, co
     , m_parent(parent)
     , _jobQueue(0)
 {
+  m_sepaKeywords  << QString("SEPA-BASISLASTSCHRIFT")
+                  << QString::fromUtf8("SEPA-ÜBERWEISUNG");
 }
 
 int KMyMoneyBanking::init()
@@ -1179,7 +1181,6 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     } // while
   }
   kt.m_strPayee = s;
-  h = MyMoneyTransaction::hash(s.trimmed());
 
   // memo
   s.truncate(0);
@@ -1198,9 +1199,59 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
       s += QString::fromUtf8(p).trimmed();
       se = GWEN_StringListEntry_Next(se);
     } // while
+
+    // Sparda / Netbank hack: the software these banks use store
+    // parts of the payee name in the beginning of the purpose field
+    // in case the payee name exceeds the 27 character limit. This is
+    // the case, when one the strings listed in m_sepaKeywords is part
+    // of the purpose fields but does not start at the beginning. In this
+    // case, the part leading up to the keyword is to be treated as the
+    // tail of the payee. Also, a blank is inserted after the keyword.
+    QSet<QString>::const_iterator itk;
+    for(itk = m_sepaKeywords.constBegin(); itk != m_sepaKeywords.constEnd(); ++itk) {
+      int idx = s.indexOf(*itk);
+      if(idx >= 0) {
+        if(idx > 0) {
+          // re-add a possibly removed blank to name
+          if(kt.m_strPayee.length() < 27)
+            kt.m_strPayee += ' ';
+          kt.m_strPayee += s.left(idx);
+          s = s.mid(idx);
+        }
+        s = QString("%1 %2").arg(*itk).arg(s.mid((*itk).length()));
+        break;
+      }
+    }
+
+    // in case we have some SEPA fields filled with information
+    // we add them to the memo field
+    p = AB_Transaction_GetEndToEndReference(t);
+    if(p) {
+      s += QString(", EREF: %1").arg(p);
+    }
+    p = AB_Transaction_GetCustomerReference(t);
+    if(p) {
+      s += QString(", CREF: %1").arg(p);
+    }
+    p = AB_Transaction_GetMandateId(t);
+    if(p) {
+      s += QString(", MREF: %1").arg(p);
+    }
+    p = AB_Transaction_GetCreditorSchemeId(t);
+    if(p) {
+      s += QString(", CRED: %1").arg(p);
+    }
+    p = AB_Transaction_GetOriginatorIdentifier(t);
+    if(p) {
+      s += QString(", DEBT: %1").arg(p);
+    }
   }
   kt.m_strMemo = s;
-  h = MyMoneyTransaction::hash(s, h);
+
+  // calculate the hash code and start with the payee info
+  // and append the memo field
+  h = MyMoneyTransaction::hash(kt.m_strPayee.trimmed());
+  h = MyMoneyTransaction::hash(kt.m_strMemo, h);
 
   // see, if we need to extract the payee from the memo field
   const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
@@ -1229,7 +1280,6 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     }
   }
 
-  kt.m_strMemo = kt.m_strMemo;
   kt.m_strPayee = kt.m_strPayee.trimmed();
 
   // date
