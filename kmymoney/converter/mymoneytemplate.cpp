@@ -41,12 +41,14 @@
 #include "kmymoneyutils.h"
 
 MyMoneyTemplate::MyMoneyTemplate() :
-    m_progressCallback(0)
+    m_progressCallback(0),
+    m_accountsRead(0)
 {
 }
 
 MyMoneyTemplate::MyMoneyTemplate(const KUrl& url) :
-    m_progressCallback(0)
+    m_progressCallback(0),
+    m_accountsRead(0)
 {
   loadTemplate(url);
 }
