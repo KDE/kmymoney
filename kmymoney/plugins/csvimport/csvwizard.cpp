@@ -1682,7 +1682,7 @@ bool LinesDatePage::validatePage()
       // Check if we already have the security on file.
       // Just use the symbol for matching, because the security name
       // field is unstandardised and very variable.
-      bool exists;
+      bool exists = false;
       QString name;
       QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
       while (it != list.constEnd()) {
