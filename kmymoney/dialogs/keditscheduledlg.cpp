@@ -346,8 +346,10 @@ const MyMoneySchedule& KEditScheduleDlg::schedule(void) const
 {
   if (d->m_editor) {
     MyMoneyTransaction t = transaction();
-    if (d->m_schedule.nextDueDate() != t.postDate())
+    if (d->m_schedule.nextDueDate() != t.postDate()) {
       d->m_schedule.setNextDueDate(t.postDate());
+      d->m_schedule.setStartDate(t.postDate());
+    }
     d->m_schedule.setTransaction(t);
     d->m_schedule.setName(m_nameEdit->text());
     d->m_schedule.setFixed(!m_estimateEdit->isChecked());
