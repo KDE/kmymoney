@@ -41,17 +41,18 @@ public:
   QString iban() const;
   QString bic() const;
 
-public slots:
+public Q_SLOTS:
   void setIdentifier(const payeeIdentifier&);
   void setIban(const QString&);
   void setBic(const QString&);
 
-signals:
+Q_SIGNALS:
+  void commitData(QWidget*);
   void identifierChanged(payeeIdentifier);
   void ibanChanged(QString);
   void bicChanged(QString);
 
-private slots:
+private Q_SLOTS:
   void updateIdentifier();
 
 private:

@@ -97,6 +97,8 @@ void ibanBicItemEdit::updateIdentifier()
   }
   d->m_identifier = ident;
 
-  if (changed)
+  if (changed) {
     emit identifierChanged(d->m_identifier);
+    emit commitData(this);
+  }
 }
