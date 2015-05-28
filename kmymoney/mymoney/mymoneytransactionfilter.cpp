@@ -444,10 +444,15 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
               removeSplit = true;
             else {
               bool found = false;
-              for (int i = 0; i < s->tagIdList().size(); i++)
-                if (m_tags.end() != m_tags.find(s->tagIdList()[i]))
+              for (int i = 0; i < s->tagIdList().size(); i++) {
+                if (m_tags.end() != m_tags.find(s->tagIdList()[i])) {
                   found = true;
-              if (!found) removeSplit = true;
+                  break;
+                }
+              }
+              if (!found) {
+                removeSplit = true;
+              }
             }
           } else if (!s->tagIdList().isEmpty())
             removeSplit = true;
