@@ -16,6 +16,8 @@
 
 #include "mymoneycategory.h"
 
+#include <QDataStream>
+
 MyMoneyCategory::MyMoneyCategory()
 {
   m_income = true;

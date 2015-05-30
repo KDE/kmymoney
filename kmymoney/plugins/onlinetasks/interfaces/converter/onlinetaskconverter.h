@@ -20,6 +20,7 @@
 #define ONLINETASKCONVERTER_H
 
 #include <QStringList>
+#include <QtPlugin>
 
 class onlineTask;
 
