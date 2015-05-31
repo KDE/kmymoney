@@ -10,8 +10,8 @@
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Conta de Investimentos</title>
- <shortdesc>Conta de corretagem com contas de investimentos relacionados (ações, obrigações, fundos de investimento, fundos de índices, juros, dividendos)</shortdesc>
- <longdesc>Deverá selecionar este conjunto de contas caso possua investimentos (ações, obrigações, fundos de investimento, fundos de índices, juros, dividendos).</longdesc>
+ <shortdesc>Conta de corretagem com contas de investimentos relacionados (ações, obrigações, fundos de investimento, juros, dividendos)</shortdesc>
+ <longdesc>Deverá selecionar este conjunto de contas caso possua investimentos (ações, obrigações, fundos de investimento, juros, dividendos).</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="Comissões"/>
