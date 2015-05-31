@@ -1,5 +1,5 @@
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoneynationalaccountnumberplugin.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoneynationalaccountnumberplugin.desktop)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-nationalaccountnumberplugin.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalaccountnumberplugin.desktop)
 
 set (nationalAccountId_SCRS
   nationalaccount.cpp
@@ -20,7 +20,7 @@ install(TARGETS payeeidentifier_nationalAccount
     ${INSTALL_TARGETS_DEFAULT_ARGS}
 )
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmymoneynationalaccountnumberplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalaccountnumberplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 
 #if( KDE4_BUILD_TESTS )
 #  add_subdirectory(tests)
