@@ -245,6 +245,11 @@ bool ibanBic::isValid() const
   return true;
 }
 
+bool ibanBic::isIbanValid() const
+{
+  return isIbanValid(m_iban);
+}
+
 bool ibanBic::isIbanValid(const QString& iban)
 {
   return validateIbanChecksum(ibanToElectronic(iban));

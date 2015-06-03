@@ -162,8 +162,8 @@ bool sepaOnlineTransferImpl::isValid() const
       && settings->checkEndToEndReferenceLength(_endToEndReference) == validators::ok
       //&& settings->checkRecipientCharset( _beneficiaryAccount.ownerName() )
       //&& settings->checkRecipientLength( _beneficiaryAccount.ownerName()) == validators::ok
-      && _beneficiaryAccount.isValid()
-      && (!settings->isBicMandatory(iban, _beneficiaryAccount.electronicIban()) || settings->checkRecipientBic(_beneficiaryAccount.bic()))
+      && _beneficiaryAccount.isIbanValid() // do not check the BIC, maybe it is not needed
+      && (!settings->isBicMandatory(iban, _beneficiaryAccount.electronicIban()) || (settings->checkRecipientBic(_beneficiaryAccount.bic()) && _beneficiaryAccount.isValid() /** @todo double check of BIC here, fix that */))
       && value().isPositive()
      )
     return true;
