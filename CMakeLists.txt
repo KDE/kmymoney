@@ -58,6 +58,13 @@ endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
 find_package(KDE4 4.6.0 REQUIRED)
 
+if(NOT TARGET Qt4::moc)
+  add_executable(Qt4::moc IMPORTED)
+  set_target_properties(Qt4::moc PROPERTIES
+    IMPORTED_LOCATION "${QT_MOC_EXECUTABLE}"
+  )
+endif(NOT TARGET Qt4::moc)
+
 include( KDE4Defaults )
 include( MacroLibrary )
 include( KMyMoneyMacros )
