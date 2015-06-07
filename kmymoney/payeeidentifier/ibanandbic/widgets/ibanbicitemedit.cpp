@@ -38,6 +38,15 @@ ibanBicItemEdit::ibanBicItemEdit(QWidget* parent)
 
   connect(d->ui->ibanEdit, SIGNAL(textChanged(QString)), this, SIGNAL(ibanChanged(QString)));
   connect(d->ui->bicEdit, SIGNAL(textChanged(QString)), this, SIGNAL(bicChanged(QString)));
+
+  connect(d->ui->ibanEdit, SIGNAL(returnPressed()), this, SLOT(editFinished()));
+  connect(d->ui->bicEdit, SIGNAL(returnPressed()), this, SLOT(editFinished()));
+}
+
+void ibanBicItemEdit::editFinished()
+{
+  emit commitData(this);
+  emit closeEditor(this);
 }
 
 payeeIdentifier ibanBicItemEdit::identifier() const

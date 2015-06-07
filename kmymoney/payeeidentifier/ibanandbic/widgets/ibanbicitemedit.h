@@ -48,12 +48,16 @@ public Q_SLOTS:
 
 Q_SIGNALS:
   void commitData(QWidget*);
+  void closeEditor(QWidget* editor);
   void identifierChanged(payeeIdentifier);
   void ibanChanged(QString);
   void bicChanged(QString);
 
 private Q_SLOTS:
   void updateIdentifier();
+
+  /** @brief emits commitData(this) and closeEditor(this) */
+  void editFinished();
 
 private:
   struct Private;
