@@ -33,9 +33,13 @@ nationalAccountEdit::nationalAccountEdit(QWidget* parent)
     d(new Private)
 {
   d->ui.setupUi(this);
+  setFocusProxy(d->ui.accountNumberEdit);
 
   connect(d->ui.accountNumberEdit, SIGNAL(textChanged(QString)), this, SIGNAL(accountNumberChannged(QString)));
   connect(d->ui.institutionCodeEdit, SIGNAL(textChanged(QString)), this, SIGNAL(institutionCodeChanged(QString)));
+
+  connect(d->ui.accountNumberEdit, SIGNAL(returnPressed()), this, SLOT(editFinished()));
+  connect(d->ui.institutionCodeEdit, SIGNAL(returnPressed()), this, SLOT(editFinished()));
 }
 
 payeeIdentifier nationalAccountEdit::identifier() const
@@ -49,6 +53,12 @@ payeeIdentifier nationalAccountEdit::identifier() const
     }
   }
   return d->m_identifier;
+}
+
+void nationalAccountEdit::editFinished()
+{
+  emit commitData(this);
+  emit closeEditor(this);
 }
 
 QString nationalAccountEdit::accountNumber() const
