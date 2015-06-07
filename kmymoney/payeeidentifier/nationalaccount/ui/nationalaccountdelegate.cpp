@@ -25,7 +25,7 @@
 #include <KLocalizedString>
 
 #include "models/payeeidentifiermodel.h"
-#include "nationaaccountedit.h"
+#include "nationalaccountedit.h"
 
 nationalAccountDelegate::nationalAccountDelegate(QObject* parent, const QVariantList&)
     : QStyledItemDelegate(parent)

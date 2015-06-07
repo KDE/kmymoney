@@ -1,14 +1,14 @@
 configure_file(kmymoney-nationalaccount-delegate.desktop.in kmymoney-nationalaccount-delegate.desktop)
 
 set ( PAYEEIDENTIFIER_NATIONALACCOUNT_UI_SCRS
-  nationaaccountedit.cpp
+  nationalaccountedit.cpp
   nationalaccountdelegate.cpp
   pluginfactory.cpp
 )
 
 kde4_add_ui_files(
   PAYEEIDENTIFIER_NATIONALACCOUNT_UI_SCRS
-  nationaaccountedit.ui
+  nationalaccountedit.ui
 )
 
 kde4_add_plugin( payeeidentifier_nationalAccount_ui
