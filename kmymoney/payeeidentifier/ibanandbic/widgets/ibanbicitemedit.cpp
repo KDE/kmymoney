@@ -32,6 +32,7 @@ ibanBicItemEdit::ibanBicItemEdit(QWidget* parent)
 {
   d->ui = new Ui::ibanBicItemEdit;
   d->ui->setupUi(this);
+  setFocusProxy(d->ui->ibanEdit);
 
   connect(d->ui->ibanEdit, SIGNAL(textChanged(QString)), this, SLOT(updateIdentifier()));
   connect(d->ui->bicEdit, SIGNAL(textChanged(QString)), this, SLOT(updateIdentifier()));
