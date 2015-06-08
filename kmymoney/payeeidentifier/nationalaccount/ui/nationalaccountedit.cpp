@@ -21,7 +21,7 @@
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 
-#include "ui_nationaaccountedit.h"
+#include "ui_nationalaccountedit.h"
 
 struct nationalAccountEdit::Private {
   Ui::nationalAccountEdit ui;
