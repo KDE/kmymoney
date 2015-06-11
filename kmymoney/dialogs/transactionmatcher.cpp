@@ -78,7 +78,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
   // check that dates are within user's setting
   if (abs(tm.postDate().toJulianDay() - ti.postDate().toJulianDay()) > KMyMoneyGlobalSettings::matchInterval()) {
     int rc = KMessageBox::questionYesNo(0, i18n("<center>The transaction post-dates are not within the 'matchInterval' setting.</center>"
-                                              "<center>If you wish to import the transaction, click 'Yes'.</center>"));
+                                              "<center>If you wish to continue with this matching, click 'Yes'.</center>"));
     if (rc == KMessageBox::No) {
       return;
     }
