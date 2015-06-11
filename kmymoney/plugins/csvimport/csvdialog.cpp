@@ -848,7 +848,7 @@ void CSVDialog::readFile(const QString& fname)
     if ((m_importNow) && (line >= m_startLine - 1) && (line <= m_wiz->m_pageLinesDate->ui->spinBox_skipToLast->value() - 1)) {
       reloadUISettings();
       //  Need to reload column settings
-      int ret = processQifLine(m_inBuffer);  //        parse a line
+      int ret = processQifLine(m_outBuffer);  //        parse a line
       if (ret == KMessageBox::Ok) {
         csvImportTransaction(st);
       } else {
@@ -1159,10 +1159,14 @@ int CSVDialog::processQifLine(QString& iBuff)
     } else if (m_columnTypeList[i] == "payee") {
       ++neededFieldsCount;
       txt = m_columnList[i];
+      if (txt.trimmed() == QString()) {  //             just blanks would confuse any matching
+        txt = QString();
+        m_columnList[m_payeeColumn] = txt;
+      }
       txt.remove('~');  //                              replace NL which was substituted
       txt = txt.remove('\'');
       if ((!m_firstPass) && (m_memoColCopied)) {
-        m_columnList[m_payeeColumn] = txt ;
+        m_columnList[m_payeeColumn] = txt;
       }
       m_trData.payee = txt;
       m_qifBuffer = m_qifBuffer + 'P' + txt + '\n';  //  Detail column
@@ -1244,6 +1248,7 @@ int CSVDialog::processQifLine(QString& iBuff)
       m_csvSplit.m_amount = m_trData.amount;
       m_qifBuffer = m_qifBuffer + 'L' + txt + '\n';  //       Category column
     }//end of category field
+    m_outBuffer += m_columnList[i];  //                       keep any changes
   }//end of col loop
   m_trData.memo = memo;
 
