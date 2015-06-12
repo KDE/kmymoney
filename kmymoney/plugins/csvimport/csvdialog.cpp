@@ -1159,8 +1159,8 @@ int CSVDialog::processQifLine(QString& iBuff)
     } else if (m_columnTypeList[i] == "payee") {
       ++neededFieldsCount;
       txt = m_columnList[i];
-      if (txt.trimmed() == QString()) {  //             just blanks would confuse any matching
-        txt = QString();
+      if (txt.trimmed().isEmpty()) {  //             just blanks would confuse any matching
+        txt.clear();
         m_columnList[m_payeeColumn] = txt;
       }
       txt.remove('~');  //                              replace NL which was substituted
