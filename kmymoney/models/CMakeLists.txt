@@ -3,7 +3,7 @@ set(libmodels_a_SOURCES
     onlinejobmodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
     models.cpp
-    payeeidentifiermodel.cpp
+    payeeidentifiercontainermodel.cpp
     onlinejobmessagesmodel.cpp
    )
 

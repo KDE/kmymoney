@@ -21,7 +21,7 @@
 #include <KLocalizedString>
 
 #include "payeeidentifier/payeeidentifierloader.h"
-#include "models/payeeidentifiermodel.h"
+#include "models/payeeidentifiercontainermodel.h"
 
 
 payeeIdentifierTypeSelectionWidget::payeeIdentifierTypeSelectionWidget(QWidget* parent)
@@ -65,9 +65,9 @@ void payeeIdentifierSelectionDelegate::setModelData(QWidget* editor, QAbstractIt
 {
   QComboBox *const comboBox = qobject_cast<QComboBox*>(editor);
   const QString selectedPidType = comboBox->model()->data(comboBox->model()->index(comboBox->currentIndex(), 0), Qt::UserRole).toString();
-  payeeIdentifier orig = model->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>();
+  payeeIdentifier orig = model->data(index, payeeIdentifierContainerModel::payeeIdentifier).value<payeeIdentifier>();
   payeeIdentifier ident(orig.id(), payeeIdentifierLoader::instance()->createPayeeIdentifier(selectedPidType));
-  model->setData(index, QVariant::fromValue<payeeIdentifier>(ident), payeeIdentifierModel::payeeIdentifier);
+  model->setData(index, QVariant::fromValue<payeeIdentifier>(ident), payeeIdentifierContainerModel::payeeIdentifier);
 }
 
 void payeeIdentifierSelectionDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& /*index*/) const

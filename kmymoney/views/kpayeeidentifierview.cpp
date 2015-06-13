@@ -27,7 +27,7 @@
 
 #include "kmymoney.h"
 #include "payeeidentifier/payeeidentifierloader.h"
-#include "payeeidentifiermodel.h"
+#include "payeeidentifiercontainermodel.h"
 #include "payeeidentifierselectiondelegate.h"
 
 payeeIdentifierDelegate::payeeIdentifierDelegate(QObject* parent)
@@ -38,7 +38,7 @@ payeeIdentifierDelegate::payeeIdentifierDelegate(QObject* parent)
 QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelIndex& index) const
 {
   static QAbstractItemDelegate* defaultDelegate = 0;
-  const QString type = (index.isValid()) ? index.model()->data(index, payeeIdentifierModel::payeeIdentifierType).toString() : QString();
+  const QString type = (index.isValid()) ? index.model()->data(index, payeeIdentifierContainerModel::payeeIdentifierType).toString() : QString();
 
   if (type.isEmpty()) {
     QAbstractItemDelegate* delegate = new payeeIdentifierSelectionDelegate(this->parent());
@@ -69,14 +69,14 @@ KPayeeIdentifierView::KPayeeIdentifierView(QWidget* parent)
 void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
 {
   if (ui->view->model() == 0) {
-    payeeIdentifierModel* model = new payeeIdentifierModel(ui->view);
+    payeeIdentifierContainerModel* model = new payeeIdentifierContainerModel(ui->view);
     connect(kmymoney, SIGNAL(fileLoaded(KUrl)), model, SLOT(closeSource()));
     connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SIGNAL(dataChanged()));
     ui->view->setModel(model);
   }
 
-  Q_CHECK_PTR(qobject_cast<payeeIdentifierModel*>(ui->view->model()));    // this should never fail but may help during debugging
-  static_cast<payeeIdentifierModel*>(ui->view->model())->setSource(container);
+  Q_CHECK_PTR(qobject_cast<payeeIdentifierContainerModel*>(ui->view->model()));    // this should never fail but may help during debugging
+  static_cast<payeeIdentifierContainerModel*>(ui->view->model())->setSource(container);
 
   // Open persistent editor for last row
   ui->view->openPersistentEditor(ui->view->model()->index(ui->view->model()->rowCount(QModelIndex()) - 1, 0));
@@ -86,7 +86,7 @@ QList< payeeIdentifier > KPayeeIdentifierView::identifiers() const
 {
   const QAbstractItemModel* model = ui->view->model();
   if (model != 0)
-    return static_cast<const payeeIdentifierModel*>(model)->identifiers();
+    return static_cast<const payeeIdentifierContainerModel*>(model)->identifiers();
   return QList< payeeIdentifier >();
 }
 

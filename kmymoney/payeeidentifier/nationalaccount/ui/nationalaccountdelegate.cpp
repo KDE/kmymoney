@@ -24,7 +24,7 @@
 
 #include <KLocalizedString>
 
-#include "models/payeeidentifiermodel.h"
+#include "models/payeeidentifiercontainermodel.h"
 #include "nationalaccountedit.h"
 
 nationalAccountDelegate::nationalAccountDelegate(QObject* parent, const QVariantList&)
@@ -139,7 +139,7 @@ void nationalAccountDelegate::setModelData(QWidget* editor, QAbstractItemModel* 
   payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = identByIndex(index);
   ident->setAccountNumber(nationalEditor->accountNumber());
   ident->setBankCode(nationalEditor->institutionCode());
-  model->setData(index, QVariant::fromValue<payeeIdentifier>(ident), payeeIdentifierModel::payeeIdentifier);
+  model->setData(index, QVariant::fromValue<payeeIdentifier>(ident), payeeIdentifierContainerModel::payeeIdentifier);
 }
 
 void nationalAccountDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -154,7 +154,7 @@ void nationalAccountDelegate::updateEditorGeometry(QWidget* editor, const QStyle
 payeeIdentifierTyped<payeeIdentifiers::nationalAccount> nationalAccountDelegate::identByIndex(const QModelIndex& index) const
 {
   payeeIdentifierTyped<payeeIdentifiers::nationalAccount> ident = payeeIdentifierTyped<payeeIdentifiers::nationalAccount>(
-        index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
+        index.model()->data(index, payeeIdentifierContainerModel::payeeIdentifier).value<payeeIdentifier>()
       );
 
   Q_ASSERT(!ident.isNull());
