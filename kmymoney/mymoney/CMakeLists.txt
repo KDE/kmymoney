@@ -69,6 +69,7 @@ target_link_libraries(kmm_mymoney LINK_PUBLIC
                       kmm_payeeidentifier
                       payeeidentifier_iban_bic
                       payeeidentifier_nationalAccount
+                      kmm_config
 )
 
 set_target_properties(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
