@@ -100,7 +100,7 @@
     <screenshot type="default">
       <caption>KMyMoney has a welcome page to help new users get off to a good start</caption>
       <caption xml:lang="bs">KMyMoney ima stranicu dobrodošlice da pomogne novim korisnicima da imaju dobar start</caption>
-      <caption xml:lang="ca">El KMyMoney disposa d'una pàgina de benvinguda per ajudar els nous usuaris a començar amb bon peu.</caption>
+      <caption xml:lang="ca">El KMyMoney disposa d'una pàgina de benvinguda per ajudar els nous usuaris a començar amb bon peu</caption>
       <caption xml:lang="da">KMyMoney har en velkomstside til at hjælpe nye brugere godt i gang</caption>
       <caption xml:lang="de">KMyMoney hat eine Willkommensseite, um neue Anwender zu Anfang zu unterstützen</caption>
       <caption xml:lang="en-GB">KMyMoney has a welcome page to help new users get off to a good start</caption>
@@ -123,7 +123,7 @@
     <screenshot>
       <caption>The financial summary gives you an overview of your finances</caption>
       <caption xml:lang="bs">Finansijski rezime daje vam pregled vaših finansija</caption>
-      <caption xml:lang="ca">El resum financer us ofereix una visió general de les vostres finances</caption>
+      <caption xml:lang="ca">El resum financer ofereix una visió general de les vostres finances</caption>
       <caption xml:lang="da">Økonomioversigten giver dig en oversigt over din økonomi</caption>
       <caption xml:lang="en-GB">The financial summary gives you an overview of your finances</caption>
       <caption xml:lang="es">El resumen financiero le ofrece una descripción general de sus finanzas</caption>
