@@ -29,12 +29,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneymoney.h>
-#include <mymoneyobject.h>
-#include <mymoneykeyvaluecontainer.h>
-#include <mymoneysecurity.h>
-#include <kmm_mymoney_export.h>
-#include <mymoneyunittestable.h>
+#include "mymoneymoney.h"
+#include "mymoneyobject.h"
+#include "mymoneykeyvaluecontainer.h"
+#include "mymoneysecurity.h"
+#include "kmm_mymoney_export.h"
+#include "mymoneyunittestable.h"
 #include "mymoneyutils.h"
 
 #include "payeeidentifier/payeeidentifier.h"
