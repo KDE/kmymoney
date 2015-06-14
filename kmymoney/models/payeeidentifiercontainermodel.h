@@ -16,10 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PAYEEIDENTIFIERMODEL_H
-#define PAYEEIDENTIFIERMODEL_H
+#ifndef PAYEEIDENTIFIERCONTAINERMODEL_H
+#define PAYEEIDENTIFIERCONTAINERMODEL_H
 
 #include <QtCore/QModelIndex>
+#include "mymoney/payeeidentifiermodel.h"
 #include "mymoney/mymoneypayeeidentifiercontainer.h"
 #include "payeeidentifier/payeeidentifier.h"
 
@@ -35,9 +36,14 @@ class payeeIdentifierContainerModel : public QAbstractListModel
   Q_OBJECT
 
 public:
+  /**
+   * @brief Roles for this model
+   *
+   * They are equal to payeeIdentifierModel::roles
+   */
   enum roles {
-    payeeIdentifierType = Qt::UserRole, /**< type of payeeIdentifier */
-    payeeIdentifier = Qt::UserRole + 1 /**< actual payeeIdentifier */
+    payeeIdentifierType = payeeIdentifierModel::payeeIdentifierType, /**< type of payeeIdentifier */
+    payeeIdentifier = payeeIdentifierModel::payeeIdentifier /**< actual payeeIdentifier */
   };
 
   payeeIdentifierContainerModel(QObject* parent = 0);
@@ -83,4 +89,4 @@ private:
   QSharedPointer<MyMoneyPayeeIdentifierContainer> m_data;
 };
 
-#endif // PAYEEIDENTIFIERMODEL_H
+#endif // PAYEEIDENTIFIERCONTAINERMODEL_H

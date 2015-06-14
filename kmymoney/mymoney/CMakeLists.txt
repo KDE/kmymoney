@@ -25,6 +25,7 @@ set(kmm_mymoney_LIB_SRCS
   onlinejobmessage.cpp
   onlinejobfolder.cpp
   mymoneycontact.cpp
+  payeeidentifiermodel.cpp
   )
 
 

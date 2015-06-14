@@ -18,13 +18,78 @@
 
 #include "sepacredittransferedit.h"
 #include "ui_sepacredittransferedit.h"
+
+#include <QCompleter>
+#include <QSortFilterProxyModel>
+#include <QTreeView>
+#include <QDebug>
+
+#include <KDescendantsProxyModel>
+
 #include "kguiutils.h"
 
+#include "mymoney/payeeidentifiermodel.h"
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 #include "payeeidentifier/ibanandbic/widgets/ibanvalidator.h"
 #include "payeeidentifier/ibanandbic/widgets/bicvalidator.h"
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "misc/charvalidator.h"
+#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "styleditemdelegateforwarder.h"
+#include "payeeidentifier/ibanandbic/widgets/ibanbicitemdelegate.h"
+
+class ibanBicCompleterDelegate : public StyledItemDelegateForwarder
+{
+public:
+  ibanBicCompleterDelegate(QObject *parent)
+    : StyledItemDelegateForwarder(parent)
+  {}
+
+protected:
+  virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex &index) const
+  {
+    static QAbstractItemDelegate* defaultDelegate = 0;
+    static QAbstractItemDelegate* ibanBicDelegate = 0;
+
+    const bool ibanBicRequested = index.model()->data(index, payeeIdentifierModel::isPayeeIdentifier).toBool();
+
+    QAbstractItemDelegate* delegate = (ibanBicRequested)
+        ? ibanBicDelegate
+        : defaultDelegate;
+
+    if (delegate == 0) {
+      if (ibanBicRequested) {
+        // Use this->parent() as parent because "this" is const
+        ibanBicDelegate = new ibanBicItemDelegate(this->parent());
+        delegate = ibanBicDelegate;
+      } else {
+        // Use this->parent() as parent because "this" is const
+        defaultDelegate = new QStyledItemDelegate(this->parent());
+        delegate = defaultDelegate;
+      }
+      connectSignals(delegate, Qt::UniqueConnection);
+    }
+    Q_CHECK_PTR(delegate);
+    return delegate;
+  }
+};
+
+class ibanBicFilterProxyModel : public QSortFilterProxyModel
+{
+public:
+    ibanBicFilterProxyModel(QObject* parent = 0)
+      : QSortFilterProxyModel(parent)
+    {}
+
+    virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
+    {
+      if (!source_parent.isValid())
+        return true;
+
+      QModelIndex index = source_parent.model()->index(source_row, 0, source_parent);
+      return (source_parent.model()->data(index, payeeIdentifierModel::payeeIdentifierType).toString() == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
+    }
+};
 
 sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList args) :
     IonlineJobEdit(parent, args),
@@ -65,6 +130,36 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
   connect(this, SIGNAL(readOnlyChanged(bool)), ui->value, SLOT(setReadOnly(bool)));
   connect(this, SIGNAL(readOnlyChanged(bool)), ui->sepaReference, SLOT(setReadOnly(bool)));
   connect(this, SIGNAL(readOnlyChanged(bool)), ui->purpose, SLOT(setReadOnly(bool)));
+
+  // Create and set completer
+  QCompleter* completer = new QCompleter(this);
+  QTreeView* itemView = new QTreeView(this);
+
+  payeeIdentifierModel* identModel = new payeeIdentifierModel(this);
+  identModel->setTypeFilter(payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
+
+  ibanBicFilterProxyModel* filterModel = new ibanBicFilterProxyModel(this);
+  filterModel->setSourceModel(identModel);
+
+  KDescendantsProxyModel* descendantsModel = new KDescendantsProxyModel(this);
+  descendantsModel->setSourceModel(filterModel);
+
+  completer->setModel(descendantsModel);
+  completer->setCompletionRole(payeeIdentifierModel::payeeName);
+  completer->setCaseSensitivity(Qt::CaseInsensitive);
+
+  ui->beneficiaryName->setCompleter(completer);
+  completer->setPopup(itemView);
+
+  // setPopup() seems to reset the delegate
+  itemView->setItemDelegate(new ibanBicCompleterDelegate(itemView));
+
+  itemView->setRootIsDecorated(false);
+  itemView->setAlternatingRowColors(true);
+  itemView->setAnimated(true);
+  itemView->setHeaderHidden(true);
+  itemView->setUniformRowHeights(false);
+  itemView->expandAll();
 }
 
 sepaCreditTransferEdit::~sepaCreditTransferEdit()

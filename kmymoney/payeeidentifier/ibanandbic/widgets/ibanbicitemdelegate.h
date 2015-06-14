@@ -19,11 +19,13 @@
 #ifndef IBANBICITEMDELEGATE_H
 #define IBANBICITEMDELEGATE_H
 
+#include "payeeidentifier_iban_bic_widgets_export.h"
+
 #include <QStyledItemDelegate>
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/ibanandbic/ibanbic.h"
 
-class ibanBicItemDelegate : public QStyledItemDelegate
+class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT ibanBicItemDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
 public:

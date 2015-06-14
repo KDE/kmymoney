@@ -5,6 +5,8 @@ set ( IBAN_BIC_WIDGETS_SCRS
   kbicedit.cpp
   ibanvalidator.cpp
   bicvalidator.cpp
+  ibanbicitemdelegate.cpp
+  ibanbicitemedit.cpp
 )
 
 set( IBAN_BIC_WIDGETS_HEADERS
@@ -12,6 +14,7 @@ set( IBAN_BIC_WIDGETS_HEADERS
   kbicedit.h
   ibanvalidator.h
   bicvalidator.h
+  ibanbicitemdelegate.h
   ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier_iban_bic_widgets_export.h
 )
 
@@ -28,6 +31,7 @@ target_link_libraries( payeeidentifier_iban_bic_widgets LINK_PUBLIC
   ${QT_QTCORE_LIBRARY}
   ${KDE4_KDECORE_LIBS}
   ${KDE4_KDEUI_LIBS}
+  kmm_mymoney
   kmm_widgets
 )
 
@@ -38,8 +42,6 @@ install(TARGETS payeeidentifier_iban_bic_widgets
 
 ## Delegate plugin
 set (IBAN_BIC_UI_SCRS
-  ibanbicitemdelegate.cpp
-  ibanbicitemedit.cpp
   pluginfactory.cpp
 )
 
