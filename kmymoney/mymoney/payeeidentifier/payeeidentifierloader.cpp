@@ -38,6 +38,11 @@ payeeIdentifierLoader::payeeIdentifierLoader()
   addPayeeIdentifier(new payeeIdentifiers::nationalAccount());
 }
 
+payeeIdentifierLoader::~payeeIdentifierLoader()
+{
+    qDeleteAll(m_identifiers);
+}
+
 void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifierData* const identifier)
 {
   m_identifiers.insert(identifier->payeeIdentifierId(), identifier);

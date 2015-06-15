@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>340</width>
-    <height>361</height>
+    <height>411</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -170,15 +170,15 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
    <class>kMyMoneyEdit</class>
    <extends>QFrame</extends>
    <header>kmymoneyedit.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyTextEdit</class>
@@ -216,38 +216,5 @@
   <tabstop>purpose</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>beneficiaryIban</sender>
-   <signal>validatorFeedback(KMyMoneyValidationFeedback::MessageType,QString)</signal>
-   <receiver>feedbackIban</receiver>
-   <slot>setFeedback(KMyMoneyValidationFeedback::MessageType,QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>58</x>
-     <y>96</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>58</x>
-     <y>107</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>beneficiaryBankCode</sender>
-   <signal>validatorFeedback(KMyMoneyValidationFeedback::MessageType,QString)</signal>
-   <receiver>feedbackBic</receiver>
-   <slot>setFeedback(KMyMoneyValidationFeedback::MessageType,QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>93</x>
-     <y>143</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>117</x>
-     <y>172</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

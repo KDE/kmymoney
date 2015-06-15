@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include "stdtransactionmatched.h"
+#include "transaction.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -98,7 +99,7 @@ void StdTransactionMatched::registerCellText(QString& txt, Qt::Alignment& align,
     switch (row) {
       case 0:
         if (painter && col == DetailColumn)
-          txt = QString(" ") + i18n("KMyMoney has matched a downloaded transaction with a manually entered one (result above)");
+          txt = QString(" ") + i18n("KMyMoney has matched the two selected transactions (result above)");
         // return true for the first visible column only
         break;
 

@@ -692,7 +692,12 @@ void QueryTable::constructTransactionTable(void)
               // but only for income and expense
               // transfers are dealt with somewhere else below
               if (splitAcc.isIncomeExpense()) {
-                qA["value"] = ((-(*it_split).shares()) * xr).convert(fraction).toString();
+                // if the currency of the split is different from the currency of the main split, then convert to the currency of the main split
+                MyMoneyMoney ieXr(xr);
+                if (!m_config.isConvertCurrency() && splitAcc.currency().id() != myBeginCurrency) {
+                  ieXr = (xr * splitAcc.foreignCurrencyPrice(myBeginCurrency, (*it_transaction).postDate())).reduce();
+                }
+                qA["value"] = ((-(*it_split).shares()) * ieXr).convert(fraction).toString();
               }
               qA["rank"] = '0';
             }

@@ -50,6 +50,7 @@
 
 #include "convdate.h"
 #include "csvdialog.h"
+#include "csvwizard.h"
 #include "mymoneystatement.h"
 #include "redefinedlg.h"
 
@@ -74,11 +75,11 @@ void InvestmentDlg::init()
   m_csvDialog->m_investProcessing->init();
   m_csvDialog->m_investProcessing->m_investDlg = this;
   m_csvDialog->ui->tableWidget->setWordWrap(false);
-  m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
+  m_csvDialog->m_wiz->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
 
-  connect(m_csvDialog->m_wizard->button(QWizard::CustomButton1), SIGNAL(clicked()), m_investProcessing, SLOT(slotFileDialogClicked()));
+  connect(m_csvDialog->m_wiz->m_wizard->button(QWizard::CustomButton1), SIGNAL(clicked()), m_investProcessing, SLOT(slotFileDialogClicked()));
 
-  connect(m_csvDialog->m_pageInvestment->ui->comboBoxInv_securityName, SIGNAL(currentIndexChanged(int)), m_csvDialog->m_pageInvestment, SLOT(slotsecurityNameChanged(int)));
+  connect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_securityName, SIGNAL(currentIndexChanged(int)), m_csvDialog->m_wiz->m_pageInvestment, SLOT(slotsecurityNameChanged(int)));
 
   connect(m_investProcessing, SIGNAL(statementReady(MyMoneyStatement&)), this, SIGNAL(statementReady(MyMoneyStatement&)));
 }
@@ -99,7 +100,7 @@ void InvestmentDlg::saveSettings()
   KConfigGroup bankProfilesGroup(config, "BankProfiles");
 
   bankProfilesGroup.writeEntry("BankNames", m_csvDialog->m_profileList);
-  int indx = m_csvDialog->m_pageIntro->ui->combobox_source->findText(m_csvDialog->m_priorInvProfile, Qt::MatchExactly);
+  int indx = m_csvDialog->m_wiz->m_pageIntro->ui->combobox_source->findText(m_csvDialog->m_priorInvProfile, Qt::MatchExactly);
   if (indx > 0) {
     str = m_csvDialog->m_priorInvProfile;
   }
@@ -115,14 +116,14 @@ void InvestmentDlg::saveSettings()
 
     KConfigGroup profilesGroup(config, txt);
     profilesGroup.writeEntry("FileType", m_csvDialog->m_fileType);
-    profilesGroup.writeEntry("DateFormat", m_csvDialog->m_pageLinesDate->ui->comboBox_dateFormat->currentIndex());
-    profilesGroup.writeEntry("FieldDelimiter", m_csvDialog->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex());
-    profilesGroup.writeEntry("DecimalSymbol", m_csvDialog->m_pageCompletion->ui->comboBox_decimalSymbol->currentIndex());
+    profilesGroup.writeEntry("DateFormat", m_csvDialog->m_wiz->m_pageLinesDate->ui->comboBox_dateFormat->currentIndex());
+    profilesGroup.writeEntry("FieldDelimiter", m_csvDialog->m_wiz->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex());
+    profilesGroup.writeEntry("DecimalSymbol", m_csvDialog->m_wiz->m_pageCompletion->ui->comboBox_decimalSymbol->currentIndex());
     profilesGroup.writeEntry("ProfileName", m_csvDialog->m_profileName);
-    profilesGroup.writeEntry("PriceFraction", m_csvDialog->m_pageInvestment->ui->comboBoxInv_priceFraction->currentIndex());
-    profilesGroup.writeEntry("StartLine", m_csvDialog->m_pageLinesDate->ui->spinBox_skip->value() - 1);
-    profilesGroup.writeEntry("SecurityName", m_csvDialog->m_pageInvestment->ui->comboBoxInv_securityName->currentIndex());
-    profilesGroup.writeEntry("TrailerLines", m_csvDialog->m_pageLinesDate->m_trailerLines);
+    profilesGroup.writeEntry("PriceFraction", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_priceFraction->currentIndex());
+    profilesGroup.writeEntry("StartLine", m_csvDialog->m_wiz->m_pageLinesDate->ui->spinBox_skip->value() - 1);
+    profilesGroup.writeEntry("SecurityName", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->currentIndex());
+    profilesGroup.writeEntry("TrailerLines", m_csvDialog->m_wiz->m_pageLinesDate->m_trailerLines);
 
     m_investProcessing->inFileName().clear();
 
@@ -138,7 +139,7 @@ void InvestmentDlg::saveSettings()
     profilesGroup.writeEntry("SellParam", m_investProcessing->m_sellList);
     profilesGroup.writeEntry("RemoveParam", m_investProcessing->m_removeList);
 
-    str = m_csvDialog->m_pageInvestment->ui->lineEdit_filter->text();
+    str = m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_filter->text();
     if (str.endsWith(' ')) {
       str.append('#');  //  Terminate trailing blank
     }
@@ -146,8 +147,8 @@ void InvestmentDlg::saveSettings()
 
     QString pth = "~/" + m_investProcessing->invPath().section('/', 3);
     profilesGroup.writeEntry("InvDirectory", pth);
-    profilesGroup.writeEntry("DateCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_dateCol->currentIndex());
-    profilesGroup.writeEntry("PayeeCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_typeCol->currentIndex());
+    profilesGroup.writeEntry("DateCol", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_dateCol->currentIndex());
+    profilesGroup.writeEntry("PayeeCol", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_typeCol->currentIndex());
 
     QList<int> list = m_investProcessing->m_memoColList;
     int posn = 0;
@@ -155,12 +156,12 @@ void InvestmentDlg::saveSettings()
       list.removeOne(-1);
     }
     profilesGroup.writeEntry("MemoCol", list);
-    profilesGroup.writeEntry("QuantityCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_quantityCol->currentIndex());
-    profilesGroup.writeEntry("AmountCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_amountCol->currentIndex());
-    profilesGroup.writeEntry("PriceCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_priceCol->currentIndex());
-    profilesGroup.writeEntry("FeeCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_feeCol->currentIndex());
-    profilesGroup.writeEntry("SymbolCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex());
-    profilesGroup.writeEntry("DetailCol", m_csvDialog->m_pageInvestment->ui->comboBoxInv_detailCol->currentIndex());
+    profilesGroup.writeEntry("QuantityCol", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_quantityCol->currentIndex());
+    profilesGroup.writeEntry("AmountCol", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_amountCol->currentIndex());
+    profilesGroup.writeEntry("PriceCol", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_priceCol->currentIndex());
+    profilesGroup.writeEntry("FeeCol", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->currentIndex());
+    profilesGroup.writeEntry("SymbolCol", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex());
+    profilesGroup.writeEntry("DetailCol", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_detailCol->currentIndex());
     profilesGroup.config()->sync();
 
     KConfigGroup securitiesGroup(config, "Securities");

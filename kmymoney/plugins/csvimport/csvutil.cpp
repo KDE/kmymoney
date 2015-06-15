@@ -29,7 +29,6 @@
 #include "transactioneditor.h"
 #include "mymoneyaccount.h"
 
-
 Parse::Parse() : m_fieldDelimiterIndex(0), m_textDelimiterIndex(0)
 {
   m_fieldDelimiterCharList << "," << ";" << ":" << "\t";
@@ -53,7 +52,6 @@ QStringList Parse::parseLine(const QString& data)
   QString txt1;
   m_fieldDelimiterCharacter = m_fieldDelimiterCharList[m_fieldDelimiterIndex];
   m_inBuffer = data;
-
   listIn = m_inBuffer.split(m_fieldDelimiterCharacter);  // firstly, split on m_fieldDelimiterCharacter
 
   QStringList::const_iterator constIterator;
@@ -75,7 +73,6 @@ QStringList Parse::parseLine(const QString& data)
   }
   return listOut;
 }
-
 
 QStringList Parse::parseFile(const QString& buf, int strt, int end)
 {

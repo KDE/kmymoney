@@ -456,11 +456,11 @@ void KPayeesView::slotSelectPayee(void)
     checkEnableDefaultCategory->setChecked(m_payee.defaultAccountEnabled());
     comboDefaultCategory->setSelected(m_payee.defaultAccountId());
 
+    payeeIdentifiers->setSource(m_payee);
+
     slotPayeeDataChanged();
 
     showTransactions();
-
-    payeeIdentifiers->setSource(m_payee);
 
   } catch (const MyMoneyException &e) {
     qDebug("exception during display of payee: %s at %s:%ld", qPrintable(e.what()), qPrintable(e.file()), e.line());

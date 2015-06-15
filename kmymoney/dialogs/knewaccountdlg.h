@@ -129,6 +129,7 @@ public:
   };
 
   void setOpeningBalanceShown(bool shown);
+  void setOpeningDateShown(bool shown);
 
   /**
    * This method adds an additional tab pointed to with @a w to the tab widget.

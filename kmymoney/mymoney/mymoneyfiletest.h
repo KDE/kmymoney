@@ -46,6 +46,7 @@ private slots:
   void testInstitutionModify();
   void testSetFunctions();
   void testAddAccounts();
+  void testAddCategories();
   void testModifyAccount();
   void testModifyStdAccount();
   void testReparentAccount();

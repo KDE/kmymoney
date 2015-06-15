@@ -41,14 +41,19 @@ public:
   QString accountNumber() const;
   QString institutionCode() const;
 
-public slots:
+public Q_SLOTS:
   void setIdentifier(const payeeIdentifier&);
   void setAccountNumber(const QString&);
   void setInstitutionCode(const QString&);
 
-signals:
+Q_SIGNALS:
   void institutionCodeChanged(QString);
   void accountNumberChannged(QString);
+  void commitData(QWidget*);
+  void closeEditor(QWidget*);
+
+private Q_SLOTS:
+  void editFinished();
 
 private:
   struct Private;

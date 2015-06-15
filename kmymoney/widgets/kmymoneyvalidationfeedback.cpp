@@ -21,16 +21,17 @@
 
 #include <QIcon>
 
-class KMyMoneyValidationFeedbackPrivate
+class KMyMoneyValidationFeedback::Private
 {
 public:
   KMyMoneyValidationFeedback::MessageType type;
 };
 
+
 KMyMoneyValidationFeedback::KMyMoneyValidationFeedback(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::KMyMoneyValidationFeedback),
-    d_ptr(new KMyMoneyValidationFeedbackPrivate)
+    d_ptr(new Private)
 {
   ui->setupUi(this);
   setHidden(true);
@@ -43,7 +44,7 @@ KMyMoneyValidationFeedback::KMyMoneyValidationFeedback(QWidget *parent) :
 
 KMyMoneyValidationFeedback::~KMyMoneyValidationFeedback()
 {
-  Q_D(KMyMoneyValidationFeedback);
+  Q_D();
 
   delete ui;
   delete d;
@@ -54,7 +55,7 @@ KMyMoneyValidationFeedback::~KMyMoneyValidationFeedback()
  */
 void KMyMoneyValidationFeedback::setFeedback(KMyMoneyValidationFeedback::MessageType type, QString message)
 {
-  Q_D(KMyMoneyValidationFeedback);
+  Q_D();
   d->type = type;
 
   if (type == None) {
@@ -87,7 +88,7 @@ void KMyMoneyValidationFeedback::removeFeedback()
 
 void KMyMoneyValidationFeedback::removeFeedback(KMyMoneyValidationFeedback::MessageType type, QString message)
 {
-  Q_D(KMyMoneyValidationFeedback);
+  Q_D();
 
   if (d->type == type && ui->label->text() == message)
     removeFeedback();

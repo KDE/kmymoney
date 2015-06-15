@@ -55,7 +55,7 @@ void onlineJobModel::load()
 
 void onlineJobModel::unload()
 {
-  if (rowCount() != 0) {
+  if (!m_jobIdList.isEmpty()) {
     beginResetModel();
     m_jobIdList.clear();
     endResetModel();

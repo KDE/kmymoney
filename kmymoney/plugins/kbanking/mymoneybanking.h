@@ -28,6 +28,7 @@
 
 #include <aqbanking/version.h>
 #include <aqbanking/banking.h>
+#include <QSet>
 #include "banking.hpp"
 
 #ifndef AQB_MAKE_VERSION
@@ -206,7 +207,7 @@ private:
   KBAccountSettings* m_accountSettings;
 
   /**
-   * @brief @ref onlineJob "onlineJobs" which are executed right
+   * @brief @ref onlineJob "onlineJobs" which are executed at the moment
    * Key is onlineJob->id(). This container is used during execution of jobs.
    */
   QMap<QString, onlineJob> m_onlineJobQueue;
@@ -251,7 +252,7 @@ private:
   KBankingPlugin* m_parent;
   QMap<QString, bool> m_hashMap;
   AB_JOB_LIST2 *_jobQueue;
-
+  QSet<QString>   m_sepaKeywords;
 };
 
 #endif

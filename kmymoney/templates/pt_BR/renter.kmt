@@ -10,12 +10,13 @@
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Despesas de Aluguel</title>
- <shortdesc>Despesas associadas com uma casa alugada</shortdesc>
+ <shortdesc>Despesas associadas com um imóvel alugado</shortdesc>
  <longdesc>Deverá selecionar este conjunto de contas caso tenha uma casa alugada (renda).</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="Renda"/>
    <account type="13" name="Seguro"/>
+   <account type="13" name="IPTU"/>
   </account>
  </accounts>
 </kmymoney-account-template>

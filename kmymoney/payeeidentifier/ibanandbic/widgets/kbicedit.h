@@ -35,9 +35,6 @@ public:
   KBicEdit(QWidget* parent = 0);
   virtual ~KBicEdit();
 
-signals:
-  void validatorFeedback(KMyMoneyValidationFeedback::MessageType type, QString message);
-
 private:
   QAbstractItemDelegate* m_popupDelegate;
 };

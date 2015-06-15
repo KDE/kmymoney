@@ -6,14 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>662</width>
-    <height>266</height>
+    <height>324</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
-    <height>190</height>
+    <width>850</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -25,598 +30,635 @@
   <property name="windowTitle">
    <string>Investment Wizard Page</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,500,1">
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,500,5">
+   <item>
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="10,3,50">
      <item>
-      <spacer name="horizontalSpacer">
+      <widget class="QLabel" name="label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Please select the appropriate columns to use, corresponding to your data.
+If there is just a single security in the file, enter its name below.
+Otherwise, select the column for the symbol, and for the description or detail.</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line_3">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>13</width>
-         <height>243</height>
-        </size>
-       </property>
-      </spacer>
+      </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="10,80">
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+      <layout class="QGridLayout" name="gridLayout" rowstretch="10,0,0,0,0,0" columnstretch="15,6,1,8,6,13,10,14">
+       <item row="5" column="0">
+        <widget class="QLabel" name="labelInv_security">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>28</height>
+          </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>50</height>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="accessibleName">
+          <string comment="name of security"/>
+         </property>
+         <property name="text">
+          <string>or Security Name</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="5">
+        <widget class="QLabel" name="labelInv_FilterText">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Filter text</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="KComboBox" name="comboBoxInv_typeCol">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing investment type field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="KComboBox" name="comboBoxInv_memoCol">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing memo field.
+More than one column may be entered successively.
+May also be selected to contain a copy of the type or detail column.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="4">
+        <widget class="KComboBox" name="comboBoxInv_detailCol">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>If a descriptive column contains an activity type, select it here.
+See also Filter text field.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" rowspan="3">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="6">
+        <widget class="KComboBox" name="comboBoxInv_feeCol">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>If necessary, select column containing fee.
+Caution. This might already have been
+incorporated into the price.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="3">
+        <widget class="QLabel" name="labelInv_detailCol">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Detail</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLabel" name="labelInv_quantity">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="accessibleName">
+          <string comment="column containing quantity field"/>
+         </property>
+         <property name="text">
+          <string>Quantity</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="KComboBox" name="comboBoxInv_amountCol">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing amount field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="KComboBox" name="comboBoxInv_symbolCol">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>If more than one stock is present in the file,
+and if the stock symbols are shown in one of the columns,
+select it here.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6">
+        <widget class="KComboBox" name="comboBoxInv_priceFraction">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>If necessary, select a fraction/multiplier for compatibility
+between imported and stored prices. For instance, if the
+import price is in cents but the file is priced in dollars, select 0.01.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>5</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>0.01</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>0.10</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>10</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>100</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="labelInv_date">
+         <property name="toolTip">
+          <string comment="verb, Select column containing date field">Select column containing date field</string>
+         </property>
+         <property name="accessibleName">
+          <string comment="column containing date field"/>
+         </property>
+         <property name="text">
+          <string>Date</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="6">
+        <widget class="KLineEdit" name="lineEdit_filter">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>If the Detail column has an activity type prefixed by a standard text,
+enter the text here. For instance, if a field contains, say, 'type: dividend',
+enter 'type: '.</string>
+         </property>
+         <property name="trapEnterKeyEvent" stdset="0">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="labelInv_price">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="accessibleName">
+          <string comment="column containing price field"/>
+         </property>
+         <property name="text">
+          <string>Price</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" colspan="6">
+        <widget class="KComboBox" name="comboBoxInv_securityName">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>545</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="font">
           <font>
-           <weight>75</weight>
-           <bold>true</bold>
+           <pointsize>11</pointsize>
           </font>
          </property>
-         <property name="text">
-          <string>Please select the appropriate columns to use, corresponding to your data. 
-If there is just a single security in the file, enter its name below.
-Otherwise, select the column for the symbol, and for the description or detail.</string>
+         <property name="toolTip">
+          <string>Alternatively, if the file contains just a single security, enter its name here.
+The names are retained and may be selected from the list here.</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::InsertAlphabetically</enum>
+         </property>
+         <property name="autoCompletion">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
-       <item>
-        <layout class="QGridLayout" name="gridLayout" rowstretch="9,9,9,1,9,5,9" columnstretch="23,10,10,10,15,15,20">
-         <item row="4" column="2">
-          <widget class="QLabel" name="labelInv_detailCol">
-           <property name="text">
-            <string>Detail</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QLabel" name="labelInv_amount">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="text">
-            <string comment="column for monetary value">Amount</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="3">
-          <widget class="KComboBox" name="comboBoxInv_quantityCol">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing quantity field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="3">
-          <widget class="KComboBox" name="comboBoxInv_amountCol">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing amount field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="5">
-          <widget class="KComboBox" name="comboBoxInv_feeCol">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>&lt;p align=&quot;center&quot;&gt;If necessary, select column containing fee.  
-Caution. This might already have been 
-incorporated into the price.&lt;/span&gt;&lt;/p&gt;</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="KComboBox" name="comboBoxInv_dateCol">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing date field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QLabel" name="labelInv_quantity">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing quantity field"/>
-           </property>
-           <property name="text">
-            <string>Quantity</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="4">
-          <widget class="QLabel" name="labelInv_feeCol">
-           <property name="accessibleName">
-            <string comment="column containing fee field"/>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="text">
-            <string comment="column containing fee field">Fee Column</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="KComboBox" name="comboBoxInv_memoCol">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>&lt;p align=&quot;center&quot;&gt;Select column containing memo field. More than one column may be entered successively. &lt;br /&gt;May also be selected to contain a copy of the type or detail column.&lt;/p&gt;</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="5">
-          <widget class="KComboBox" name="comboBoxInv_priceFraction">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>&lt;p align=&quot;center&quot;&gt;If necessary, select a fraction/multiplier for compatibility between imported and stored prices. For instance, if the import price is in cents but the file is priced in dollars, select 0.01.&lt;/p&gt;&lt;/body&gt;</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>5</number>
-           </property>
-           <item>
-            <property name="text">
-             <string>0.01</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>0.10</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>1</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>10</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>100</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="0" column="3">
-          <widget class="KComboBox" name="comboBoxInv_priceCol">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing price field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0" colspan="7">
-          <widget class="Line" name="line_2">
-           <property name="minimumSize">
-            <size>
-             <width>620</width>
-             <height>2</height>
-            </size>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="6">
-          <widget class="QPushButton" name="buttonInv_hideSecurity">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>&lt;p align=&quot;center&quot;&gt;Remove security name from selection list. &lt;br&gt; It does not affect the underlying security itself.</string>
-           </property>
-           <property name="statusTip">
-            <string/>
-           </property>
-           <property name="text">
-            <string>Hide security</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0" colspan="6">
-          <widget class="Line" name="line">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="labelInv_type">
-           <property name="accessibleName">
-            <string comment="column containing investment type/action field"/>
-           </property>
-           <property name="text">
-            <string comment="column containing investment type/action field">Type/Action</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="5">
-          <widget class="KLineEdit" name="lineEdit_filter">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>&lt;p align=&quot;center&quot;&gt;If the Detail column has an activity type prefixed by a standard text, enter the text here. For instance, if a field contains, say,&lt;br/&gt; 'type: dividend', enter 'type: '.&lt;/p&gt;</string>
-           </property>
-           <property name="trapEnterKeyEvent" stdset="0">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="6">
-          <widget class="QPushButton" name="button_clear">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Clear selected column entries.</string>
-           </property>
-           <property name="text">
-            <string comment="verb, to clear selected columns">Clear selections</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1" colspan="5">
-          <widget class="KComboBox" name="comboBoxInv_securityName">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>375</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>9</pointsize>
-            </font>
-           </property>
-           <property name="toolTip">
-            <string>&lt;p align=&quot;center&quot;&gt;Alternatively, if the file contains just a single security, enter its name here. 
-The names are retained and may be selected from the list here.&lt;/p&gt;</string>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-           <property name="insertPolicy">
-            <enum>QComboBox::InsertAlphabetically</enum>
-           </property>
-           <property name="autoCompletion">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="KComboBox" name="comboBoxInv_symbolCol">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>&lt;p align=&quot;center&quot; &gt;If more than one stock is present in the file, and if the stock symbols&lt;br/&gt; are shown in one of the columns, select it here. &lt;/p&gt;</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="4">
-          <widget class="QLabel" name="labelInv_priceFraction">
-           <property name="minimumSize">
-            <size>
-             <width>85</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="accessibleName">
-            <string comment="noun, conversion factor to align pricing in the imported file with KMM's internal prices."/>
-           </property>
-           <property name="text">
-            <string comment="noun, conversion fraction/multiplier to use to make compatible the csv pricing with KMM pricing.">Price Fraction</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QLabel" name="labelInv_price">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing price field"/>
-           </property>
-           <property name="text">
-            <string>Price</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="labelInv_symbolCol">
-           <property name="text">
-            <string>Symbol</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="3">
-          <widget class="KComboBox" name="comboBoxInv_detailCol">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>&lt;p align=&quot;center&quot; &gt;If a descriptive column contains an activity type, select it here.&lt;br /&gt; See also Filter text field.&lt;/p&gt;</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="labelInv_date">
-           <property name="toolTip">
-            <string comment="verb, Select column containing date field">Select column containing date field</string>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing date field"/>
-           </property>
-           <property name="text">
-            <string>Date</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="4">
-          <widget class="QLabel" name="labelInv_FilterText">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Filter text</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="labelInv_security">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>115</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="accessibleName">
-            <string comment="name of security"/>
-           </property>
-           <property name="text">
-            <string>or Security Name</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="labelInv_memo">
-           <property name="accessibleName">
-            <string comment="column containing memo field"/>
-           </property>
-           <property name="text">
-            <string>Memo</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="KComboBox" name="comboBoxInv_typeCol">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing investment type field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="4" colspan="2">
-          <widget class="QCheckBox" name="checkBoxInv_feeType">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Check box if any fee is a percentage figure rather than a value.</string>
-           </property>
-           <property name="accessibleName">
-            <string comment="select if fee is a percentage (not value)"/>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::RightToLeft</enum>
-           </property>
-           <property name="text">
-            <string comment="select if fee is a percentage (not value)">Fee is  Percentage </string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="2" column="3">
+        <widget class="QLabel" name="labelInv_amount">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="text">
+          <string comment="column for monetary value">Amount</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="KComboBox" name="comboBoxInv_quantityCol">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing quantity field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="5" colspan="2">
+        <widget class="QCheckBox" name="checkBoxInv_feeType">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Check box if any fee is a percentage figure rather than a value.</string>
+         </property>
+         <property name="accessibleName">
+          <string comment="select if fee is a percentage (not value)"/>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string comment="select if fee is a percentage (not value)">Fee is  Percentage </string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="7">
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="labelInv_memo">
+         <property name="accessibleName">
+          <string comment="column containing memo field"/>
+         </property>
+         <property name="text">
+          <string>Memo</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="5">
+        <widget class="QLabel" name="labelInv_feeCol">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="accessibleName">
+          <string comment="column containing fee field"/>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string comment="column containing fee field">Fee Column</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="KComboBox" name="comboBoxInv_dateCol">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing date field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="labelInv_symbolCol">
+         <property name="text">
+          <string>Symbol</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="KComboBox" name="comboBoxInv_priceCol">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing price field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelInv_type">
+         <property name="accessibleName">
+          <string comment="column containing investment type/action field"/>
+         </property>
+         <property name="text">
+          <string comment="column containing investment type/action field">Type/Action</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="7">
+        <widget class="KPushButton" name="buttonInv_hideSecurity">
+         <property name="minimumSize">
+          <size>
+           <width>130</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Remove security name from selection list.
+It does not affect the underlying security itself.</string>
+         </property>
+         <property name="statusTip">
+          <string/>
+         </property>
+         <property name="text">
+          <string>Hide security</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="7">
+        <widget class="KPushButton" name="button_clear">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Clear selected column entries.</string>
+         </property>
+         <property name="text">
+          <string comment="verb, to clear selected columns">Clear</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QLabel" name="labelInv_priceFraction">
+         <property name="minimumSize">
+          <size>
+           <width>90</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="accessibleName">
+          <string comment="noun, conversion factor to align pricing in the imported file with KMM's internal prices."/>
+         </property>
+         <property name="text">
+          <string comment="noun, conversion fraction/multiplier to use to make compatible the csv pricing with KMM pricing.">Price Fraction</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>13</width>
-         <height>243</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
     </layout>
+   </item>
+   <item>
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>

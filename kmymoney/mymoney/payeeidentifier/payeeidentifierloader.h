@@ -34,6 +34,7 @@ class payeeIdentifierLoader
 {
 public:
   payeeIdentifierLoader();
+  ~payeeIdentifierLoader();
 
   payeeIdentifier createPayeeIdentifier(const QString& payeeIdentifierId);
   payeeIdentifier createPayeeIdentifierFromXML(const QDomElement& element);

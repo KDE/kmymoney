@@ -54,7 +54,6 @@ KBicEdit::KBicEdit(QWidget* parent)
 
   bicValidator *const validator = new bicValidator(this);
   setValidator(validator);
-  connect(validator, SIGNAL(feedback(KMyMoneyValidationFeedback::MessageType,QString)), this, SIGNAL(validatorFeedback(KMyMoneyValidationFeedback::MessageType,QString)));
 }
 
 KBicEdit::~KBicEdit()

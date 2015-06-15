@@ -110,7 +110,7 @@ install(PROGRAMS kmymoney.desktop
   DESTINATION ${XDG_APPS_INSTALL_DIR}
   )
 install(PROGRAMS kmymoney.appdata.xml
-  DESTINATION share/appdata/
+  DESTINATION ${DATA_INSTALL_DIR}/appdata/
   )
 
 install(FILES x-kmymoney.xml

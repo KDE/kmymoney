@@ -105,7 +105,7 @@
            </widget>
           </item>
           <item row="0" column="2">
-           <widget class="QLabel" name="TextLabel1_2">
+           <widget class="QLabel" name="m_openingDateLabel">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -121,7 +121,7 @@
            </widget>
           </item>
           <item row="0" column="3">
-           <widget class="kMyMoneyDateInput" name="startDateEdit"/>
+           <widget class="kMyMoneyDateInput" name="m_openingDateEdit"/>
           </item>
           <item row="1" column="2">
            <widget class="QLabel" name="m_openingBalanceLabel">
@@ -691,7 +691,7 @@
                         <bool>true</bool>
                        </property>
                        <attribute name="buttonGroup">
-                        <string>m_amountGroup</string>
+                        <string notr="true">m_amountGroup</string>
                        </attribute>
                       </widget>
                      </item>
@@ -701,7 +701,7 @@
                         <string>Net amount</string>
                        </property>
                        <attribute name="buttonGroup">
-                        <string>m_amountGroup</string>
+                        <string notr="true">m_amountGroup</string>
                        </attribute>
                       </widget>
                      </item>
@@ -813,9 +813,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>QPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
+   <class>QComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
    <class>KLineEdit</class>
@@ -823,20 +823,20 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>ktextedit.h</header>
   </customwidget>
   <customwidget>
    <class>QTabWidget</class>
    <extends>QTabWidget</extends>
    <header>ktabwidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>KTextEdit</class>
-   <extends>QTextEdit</extends>
-   <header>ktextedit.h</header>
   </customwidget>
   <customwidget>
    <class>kMyMoneyDateInput</class>
@@ -877,8 +877,8 @@
   <tabstop>m_tab</tabstop>
   <tabstop>accountNameEdit</tabstop>
   <tabstop>typeCombo</tabstop>
-  <tabstop>startDateEdit</tabstop>
   <tabstop>m_currency</tabstop>
+  <tabstop>m_openingDateEdit</tabstop>
   <tabstop>m_openingBalanceEdit</tabstop>
   <tabstop>m_lastCheckNumberUsed</tabstop>
   <tabstop>descriptionEdit</tabstop>

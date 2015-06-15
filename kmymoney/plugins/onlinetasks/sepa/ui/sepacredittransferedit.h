@@ -64,6 +64,8 @@ public:
     return m_readOnly;
   }
 
+  virtual void showAllErrorMessages(const bool);
+
   virtual void showEvent(QShowEvent*);
 
 signals:
@@ -115,6 +117,7 @@ private:
   onlineJobTyped<sepaOnlineTransfer> m_onlineJob;
   kMandatoryFieldGroup* m_requiredFields;
   bool m_readOnly;
+  bool m_showAllErrors;
 
   QSharedPointer<const sepaOnlineTransfer::settings> taskSettings();
 };

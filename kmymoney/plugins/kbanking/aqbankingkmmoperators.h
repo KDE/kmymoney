@@ -92,4 +92,9 @@ bool AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const QList<pay
  */
 AB_VALUE* AB_Value_fromMyMoneyMoney(const MyMoneyMoney& input);
 
+/**
+ * @brief Convert AB_VALUE to MyMoneyMoney
+ */
+MyMoneyMoney AB_Value_toMyMoneyMoney(const AB_VALUE *const value);
+
 #endif // AQBANKINGKMMOPERATORS_H

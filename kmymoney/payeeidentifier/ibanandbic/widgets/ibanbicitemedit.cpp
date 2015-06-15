@@ -32,12 +32,22 @@ ibanBicItemEdit::ibanBicItemEdit(QWidget* parent)
 {
   d->ui = new Ui::ibanBicItemEdit;
   d->ui->setupUi(this);
+  setFocusProxy(d->ui->ibanEdit);
 
   connect(d->ui->ibanEdit, SIGNAL(textChanged(QString)), this, SLOT(updateIdentifier()));
   connect(d->ui->bicEdit, SIGNAL(textChanged(QString)), this, SLOT(updateIdentifier()));
 
   connect(d->ui->ibanEdit, SIGNAL(textChanged(QString)), this, SIGNAL(ibanChanged(QString)));
   connect(d->ui->bicEdit, SIGNAL(textChanged(QString)), this, SIGNAL(bicChanged(QString)));
+
+  connect(d->ui->ibanEdit, SIGNAL(returnPressed()), this, SLOT(editFinished()));
+  connect(d->ui->bicEdit, SIGNAL(returnPressed()), this, SLOT(editFinished()));
+}
+
+void ibanBicItemEdit::editFinished()
+{
+  emit commitData(this);
+  emit closeEditor(this);
 }
 
 payeeIdentifier ibanBicItemEdit::identifier() const
@@ -97,6 +107,8 @@ void ibanBicItemEdit::updateIdentifier()
   }
   d->m_identifier = ident;
 
-  if (changed)
+  if (changed) {
     emit identifierChanged(d->m_identifier);
+    emit commitData(this);
+  }
 }

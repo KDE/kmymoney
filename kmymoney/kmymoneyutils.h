@@ -120,6 +120,13 @@ public:
     Ignore         // ignore the schedule
   };
 
+  enum CanCloseAccountCodeE {
+    AccountCanClose = 0,    // can close the account
+    AccountBalanceNonZero,         // balance is non zero
+    AccountChildrenOpen,          // account has open children account
+    AccountScheduleReference         // account is referenced in a schedule
+  };
+
   static const int maxHomePageItems = 5;
 
   KMyMoneyUtils();

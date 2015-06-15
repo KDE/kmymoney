@@ -42,6 +42,7 @@ class InvestmentDlg;
 class InvestProcessing;
 class CsvImporterPlugin;
 class SymbolTableDlg;
+class CSVWizard;
 
 namespace Ui
 {
@@ -63,11 +64,7 @@ public:
   explicit CSVDialog();
   ~CSVDialog();
 
-  enum { Page_Intro, Page_Separator, Page_Banking, Page_Investment,
-         Page_LinesDate, Page_Completion
-       };
-
-  QWizard*            m_wizard;
+  CSVWizard*          m_wiz;
   CsvImporterPlugin*  m_plugin;
   CSVDialog*          m_csvDlg;
   InvestmentDlg*      m_investmentDlg;
@@ -80,13 +77,6 @@ public:
   Ui::CSVDialog*      ui;
   QVBoxLayout*        m_wizardLayout;
   QScrollBar*         m_vScrollBar;
-
-  IntroPage*       m_pageIntro;
-  SeparatorPage*   m_pageSeparator;
-  BankingPage*     m_pageBanking;
-  InvestmentPage*  m_pageInvestment;
-  LinesDatePage*   m_pageLinesDate;
-  CompletionPage*  m_pageCompletion;
 
   struct qifData {
     QString number;
@@ -101,6 +91,7 @@ public:
   QList<MyMoneyStatement> statements;
   QList<QTextCodec *>     m_codecs;
   QList<int>     m_columnCountList;
+  QList<int>     m_memoColList;
 
   QStringList    m_shrsinList;
   QStringList    m_divXList;
@@ -114,6 +105,7 @@ public:
   QStringList    m_securityList;
   QStringList    m_typeOfFile;
   QStringList    m_profileList;
+  QStringList    m_columnTypeList;  //  holds field types - date, payee, etc.
 
   QString        m_csvPath;
   QString        m_profileName;
@@ -157,6 +149,18 @@ public:
   bool           m_errorFoundAlready;
   bool           m_rowWidthsDone;
   bool           m_widthResized;
+  bool           m_amountSelected;
+  bool           m_creditSelected;
+  bool           m_dateSelected;
+  bool           m_debitSelected;
+  bool           m_memoSelected;
+  bool           m_memoColCopied;
+  bool           m_payeeColAdded;
+  bool           m_payeeColCopied;
+  bool           m_payeeSelected;
+  bool           m_numberSelected;
+  bool           m_categorySelected;
+  bool           m_closing;
 
   int            m_dateFormatIndex;
   int            m_debitFlag;
@@ -183,6 +187,8 @@ public:
   int            m_pluginWidth;
   int            m_pluginHeight;
   int            m_windowHeight;
+  int            m_maxColumnCount;
+  int            m_dpiDiff;
 
   QUrl           m_url;
   KComboBox*     m_comboBoxEncode;
@@ -196,34 +202,29 @@ public:
   int              decimalSymbolIndex();
   void             setDecimalSymbol(int val);
   QString          currentUI();
-  QStringList      columnTypeList();
 
   void             clearPreviousColumn();
-  bool             amountSelected();
-  void             setAmountSelected(bool val);
-  bool             creditSelected();
-  void             setCreditSelected(bool val);
-  bool             debitSelected();
-  void             setDebitSelected(bool val);
-  bool             dateSelected();
-  void             setDateSelected(bool val);
-  bool             payeeSelected();
-  void             setPayeeSelected(bool val);
-  void             setMemoSelected(bool val);
-  void             setNumberSelected(bool val);
-  void             setCurrentUI(QString val);
+  void             setPreviousColumn(int);
+  void             setCurrentUI(QString);
 
-  int              maxColumnCount();
-  void             setMaxColumnCount(int val);
-
-  int              amountColumn();
-  int              debitColumn();
-  int              creditColumn();
-  int              dateColumn();
-  int              payeeColumn();
-  int              numberColumn();
-  int              memoColumn();
-  int              categoryColumn();
+  int              maxColumnCount() const;
+  int              amountColumn() const;
+  void             setAmountColumn(int);
+  int              debitColumn() const;
+  void             setDebitColumn(int);
+  int              creditColumn() const;
+  void             setCreditColumn(int);
+  int              dateColumn() const;
+  void             setDateColumn(int);
+  int              payeeColumn() const;
+  void             setPayeeColumn(int);
+  int              numberColumn() const;
+  void             setNumberColumn(int);
+  int              memoColumn() const;
+  void             setMemoColumn(int);
+  int              categoryColumn() const;
+  void             setCategoryColumn(int);
+  int              validateColumn(const int& col, QString& type);
 
   /**
   * This method is called when the user clicks 'Clear selections', in order to
@@ -359,20 +360,12 @@ public:
 
   int            endColumn();
   int            fieldDelimiterIndex();
-  int            lastLine();
-  int            fileLastLine();
-  int            startLine();
+  int            lastLine() const;
+  int            fileLastLine() const;
+  int            startLine() const;
   void           setStartLine(int);
 
   bool           importNow();
-
-  QPixmap        m_iconBack;
-  QPixmap        m_iconCancel;
-  QPixmap        m_iconCSV;
-  QPixmap        m_iconFinish;
-  QPixmap        m_iconImport;
-  QPixmap        m_iconNext;
-  QPixmap        m_iconQIF;
 
 signals:
   /**
@@ -385,7 +378,6 @@ signals:
   void           valueChanged(int);
 
 public slots:
-  void           slotIdChanged(int id);
   void           slotNamesEdited();
   void           slotBackButtonClicked();
   void           slotVertScrollBarMoved(int val);
@@ -397,10 +389,16 @@ public slots:
   void           slotFileDialogClicked();
 
   /**
-  * This method is called when the user selects a new field or text delimiter.  The
+  * This method is called when a field or text delimiter is changed.  The
   * input file is reread using the new delimiter.
   */
   void           delimiterChanged();
+
+  /**
+  * This method is called when the user selects a new field or text delimiter.  The
+  * input file is reread using the new delimiter.
+  */
+  void           delimiterActivated();
 
   /**
   * This method is called when the user clicks 'import'. It performs further
@@ -431,8 +429,6 @@ public slots:
   void           markUnwantedRows();
 
 private:
-  QStringList      m_columnTypeList;  //  holds field types - date, payee, etc.
-
   /**
   * Clear an invalid debit or credit field and return
   * pointer to the valid field.
@@ -448,18 +444,7 @@ private:
   QString          m_secondType;
   QStringList      m_lineList;
 
-  bool             m_amountSelected;
-  bool             m_creditSelected;
-  bool             m_dateSelected;
-  bool             m_debitSelected;
   bool             m_duplicate;
-  bool             m_memoSelected;
-  bool             m_numberSelected;
-  bool             m_payeeSelected;
-  bool             m_memoColCopied;
-  bool             m_payeeColCopied;
-  bool             m_payeeColAdded;
-  bool             m_categorySelected;
   bool             m_clearAll;
   bool             m_firstIsValid;
   bool             m_secondIsValid;
@@ -476,7 +461,6 @@ private:
   int              m_payeeColumn;
   int              m_categoryColumn;
   int              m_previousColumn;
-  int              m_maxColumnCount;
   int              m_maxRowWidth;
   int              m_rowWidth;
   int              m_decimalSymbolIndex;
@@ -502,11 +486,9 @@ private:
   QBrush           m_errorBrush;
   QBrush           m_errorBrushText;
 
-  QList<QLabel*>   m_stageLabels;
-  QList<int>       m_memoColList;
-
   void             closeEvent(QCloseEvent *event);
   bool             eventFilter(QObject *object, QEvent *event);
+
   void             restoreBackground();
   void             resizeEvent(QResizeEvent* ev);
 
@@ -527,7 +509,6 @@ private:
   * is valid.
   */
   int              ensureBothFieldsValid(int);
-  int              validateColumn(const int& col, QString& type);
 
 private slots:
   /**
@@ -535,48 +516,6 @@ private slots:
   * encoding setting.  The file is re-read with the corresponding codec.
   */
   void           encodingChanged(int index);
-
-  /**
-  * This method is called when the user clicks 'Clear selections'.
-  * All column selections are cleared.
-  */
-  void           clearColumnsSelected();
-
-  /**
-  * This method is called when the amountRadio button is clicked.
-  * It will disable all elements of the alternate, debit/credit ui.
-  */
-  void           amountRadioClicked(bool checked);
-
-  /**
-  * This method is called when the Amount column is activated.
-  * It will validate the column selection.
-  */
-  void           amountColumnSelected(int);
-
-  /**
-  * This method is called when the Date column is activated.
-  * It will validate the column selection.
-  */
-  void           dateColumnSelected(int col);
-
-  /**
-  * This method is called when the debitCreditRadio button is clicked.
-  * It will disable all elements of the alternate, amount ui.
-  */
-  void           debitCreditRadioClicked(bool checked);
-
-  /**
-  * This method is called when the Credit column is activated.
-  * It will validate the column selection.
-  */
-  void           creditColumnSelected(int);
-
-  /**
-  * This method is called when the Debit column is activated.
-  * It will validate the column selection.
-  */
-  void           debitColumnSelected(int);
 
   /**
   * This method is called when the user edits the lastLine setting.
@@ -588,307 +527,7 @@ private slots:
   */
   void           startLineChanged(int val);
 
-  /**
-  * This method is called when the Memo column is activated.
-  * Multiple columns may be selected sequentially.
-  */
-  void           memoColumnSelected(int);
-
-  /**
-  * This method is called when the Number column is activated.
-  * It will validate the column selection.
-  */
-  void           numberColumnSelected(int);
-
-  /**
-  * This method is called when the Payee column is activated.
-  * It will validate the column selection.
-  */
-  void           payeeColumnSelected(int);
-
-  /**
-  * This method is called when the Category column is activated.
-  * It will validate the column selection.
-  */
-  void           categoryColumnSelected(int);
-
-  /**
-  * This method is called when 'Exit' is clicked.  The plugin settings will
-  * be saved and the plugin will be terminated.
-  */
-  void           slotClose();
-
-  /**
-  * This method is called when the user selects a new thousands separator.  The
-  * UI is updated using the new symbol.
-  */
   void           thousandsSeparatorChanged();
-
-  /**
-  * This method is called when it is detected that the user has selected the
-  * same column for two different fields.  The column detecting the error
-  * has to reset the other column.
-  */
-  void           resetComboBox(const QString& comboBox, const int& col);
-};
-
-//----------------------------------------------------------------------------------------------------------------------
-
-namespace Ui
-{
-class IntroPage;
-}
-
-class IntroPage : public QWizardPage
-{
-  Q_OBJECT
-
-public:
-  explicit IntroPage(QWidget *parent = 0);
-  ~IntroPage();
-
-  void                initializePage();
-  void                setParent(CSVDialog* dlg);
-
-  QVBoxLayout*        m_pageLayout;
-
-  QString             m_activity;
-
-  Ui::IntroPage       *ui;
-  CSVDialog           *m_dlg;
-  QStringList         m_sourceList;
-
-  bool                m_set;
-
-  int                 addItem(QString txt);
-  int                 m_index;
-
-  QMap<QString, int>  m_map;
-  QMap<QString, QString>  m_mapFileType;
-
-signals:
-  void             signalBankClicked(bool);
-  void             activated(int);
-  void             returnPressed();
-  bool             isSet();
-
-private:
-  bool             validatePage();
-  bool             m_messageBoxJustCancelled;
-  bool             m_firstEdit;
-  bool             m_editAccepted;
-  bool             m_addRequested;
-  bool             m_firstLineEdit;
-
-  int              m_priorIndex;
-  int              editProfileName(QString& fromName, QString& toName);
-
-  QString          m_name;
-  QString          m_priorName;
-  QString          m_action;
-  QString          m_newProfileCreated;
-  QString          m_lastRadioButton;
-
-  void             addProfileName();
-
-private slots:
-  void             slotComboEditTextChanged(QString txt);
-  void             slotComboSourceClicked(int index);
-  void             slotLineEditingFinished();
-  void             slotRadioButton_bankClicked();
-  void             slotRadioButton_investClicked();
-};
-
-
-namespace Ui
-{
-class SeparatorPage;
-}
-
-class SeparatorPage : public QWizardPage
-{
-  Q_OBJECT
-
-public:
-  explicit SeparatorPage(QWidget *parent = 0);
-  ~SeparatorPage();
-
-  QVBoxLayout         *m_pageLayout;
-  Ui::SeparatorPage   *ui;
-  CSVDialog*          m_dlg;
-  void                setParent(CSVDialog* dlg);
-  void                initializePage();
-  bool                isComplete() const;
-
-public slots:
-  void                delimiterActivated();
-
-signals:
-  void                completeChanged();
-
-private:
-  void                cleanupPage();
-  bool                validatePage();
-  int                 nextId() const;
-
-private slots:
-
-signals:
-};
-
-namespace Ui
-{
-class BankingPage;
-}
-
-class BankingPage : public QWizardPage
-{
-  Q_OBJECT
-
-public:
-  explicit BankingPage(QWidget *parent = 0);
-  ~BankingPage();
-
-  Ui::BankingPage     *ui;
-  QVBoxLayout         *m_pageLayout;
-
-  bool                m_bankingPageInitialized;
-  void                setParent(CSVDialog* dlg);
-
-signals:
-  void                clicked();
-
-private:
-  CSVDialog*          m_dlg;
-
-  void                initializePage();
-  void                cleanupPage();
-  int                 nextId() const;
-  bool                isComplete() const;
-  bool                m_reloadNeeded;
-
-private slots:
-  void                slotDateColChanged(int col);
-  void                slotPayeeColChanged(int col);
-  void                slotDebitColChanged(int col);
-  void                slotCreditColChanged(int col);
-  void                slotAmountColChanged(int col);
-  void                slotCategoryColChanged(int col);
-};
-
-namespace Ui
-{
-class InvestmentPage;
-}
-
-class InvestmentPage : public QWizardPage
-{
-  Q_OBJECT
-
-public:
-  explicit InvestmentPage(QWidget *parent = 0);
-  ~InvestmentPage();
-
-  QVBoxLayout         *m_pageLayout;
-  Ui::InvestmentPage  *ui;
-
-  bool                m_investPageInitialized;
-  void                setParent(CSVDialog* dlg);
-
-signals:
-
-public slots:
-  void                slotsecurityNameChanged(int index);
-private:
-  CSVDialog*          m_dlg;
-
-  bool                isComplete() const;
-  void                initializePage();
-  void                cleanupPage();
-
-private slots:
-  void                slotDateColChanged(int col);
-  void                slotTypeColChanged(int col);
-  void                slotQuantityColChanged(int col);
-  void                slotPriceColChanged(int col);
-  void                slotAmountColChanged(int col);
-  void                slotSymbolColChanged(int col);
-  void                slotDetailColChanged(int col);
-  void                slotFilterEditingFinished();
-};
-
-namespace Ui
-{
-class LinesDatePage;
-}
-
-class LinesDatePage : public QWizardPage
-{
-  Q_OBJECT
-
-public:
-  explicit LinesDatePage(QWidget *parent = 0);
-  ~LinesDatePage();
-
-  QVBoxLayout         *m_pageLayout;
-
-  Ui::LinesDatePage   *ui;
-
-  void                initializePage();
-  void                setParent(CSVDialog* dlg);
-  bool                validatePage();
-  int                 nextId() const;
-  bool                m_isColumnSelectionComplete;
-
-  int                 m_trailerLines;
-
-signals:
-  bool                isImportable();
-private:
-  CSVDialog           *m_dlg;
-
-};
-
-namespace Ui
-{
-class CompletionPage;
-}
-
-class CompletionPage : public QWizardPage
-{
-  Q_OBJECT
-
-public:
-  explicit CompletionPage(QWidget *parent = 0);
-  ~CompletionPage();
-
-  QVBoxLayout*        m_pageLayout;
-  Ui::CompletionPage  *ui;
-  void                setParent(CSVDialog* dlg);
-  void                initializePage();
-
-signals:
-  void                completeChanged();
-  void                importBanking();
-  void                importInvestment();
-
-public slots:
-  /**
-  * This method is called when the user clicks the 'Import CSV' button.
-  */
-  void                slotImportClicked();
-  void                slotImportValid();
-
-private:
-
-  void                cleanupPage();
-
-  bool                validatePage();
-  CSVDialog           *m_dlg;
-
-
-private slots:
-
 };
 
 #endif // CSVDIALOG_H

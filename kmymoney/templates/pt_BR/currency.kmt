@@ -11,7 +11,7 @@
 <kmymoney-account-template>
  <title>Conta de Conversão Monetária</title>
  <shortdesc>Conta para converter e transacionar em moeda estrangeira</shortdesc>
- <longdesc>Deverá selecionar este conjunto de contas se converter em moedas estrangeiras. Nota: conta encontra-se em BRL; edite a conta para alterar a moeda.</longdesc>
+ <longdesc>Deverá selecionar este conjunto de contas se converter em moedas estrangeiras. Nota: A conta está em BRL. Edite-a para alterar a moeda.</longdesc>
  <accounts>
   <account type="9" name="">
    <account type="9" name="Investimentos"/>

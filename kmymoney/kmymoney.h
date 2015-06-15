@@ -87,6 +87,16 @@ private slots:
     */
   void slotObjectDestroyed(QObject* o);
 
+  /**
+    * Add a context menu to the list used by KMessageBox::informationList to display the consistency check results.
+    */
+  void slotInstallConsistencyCheckContextMenu();
+
+  /**
+    * Handle the context menu of the list used by KMessageBox::informationList to display the consistency check results.
+    */
+  void slotShowContextMenuForConsistencyCheck(const QPoint &);
+
 protected slots:
   void slotFileSaveAsFilterChanged(const QString& filter);
 
@@ -678,7 +688,16 @@ protected:
     * @retval true account can be closed
     * @retval false account cannot be closed
     */
-  bool canCloseAccount(const MyMoneyAccount& acc) const;
+  KMyMoneyUtils::CanCloseAccountCodeE canCloseAccount(const MyMoneyAccount& acc) const;
+
+  /**
+   * This method checks if an account can be closed and enables/disables
+   * the close account action
+   * If disabled, it sets a tooltip explaning why it cannot be closed
+   * @brief enableCloseAccountAction
+   * @param acc reference to MyMoneyAccount object in question
+   */
+  void enableCloseAccountAction(const MyMoneyAccount& acc);
 
   /**
     * Check if a list contains a payee with a given id

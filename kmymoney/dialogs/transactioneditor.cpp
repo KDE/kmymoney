@@ -263,9 +263,14 @@ void TransactionEditor::slotNumberChanged(const QString& txt)
 {
   QString next = txt;
   kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
+  QString schedInfo;
+  if (!m_scheduleInfo.isEmpty()) {
+    schedInfo = i18n("<center>Processing schedule for %1.</center>", m_scheduleInfo);
+  }
 
   while (MyMoneyFile::instance()->checkNoUsed(m_account.id(), next)) {
-    if (KMessageBox::questionYesNo(m_regForm, QString("<qt>") + i18n("The number <b>%1</b> has already been used in account <b>%2</b>.""<center>Do you want to replace it with the next available number?</center>", next, m_account.name()) + QString("</qt>"), i18n("Duplicate number")) == KMessageBox::Yes) {
+    if (KMessageBox::questionYesNo(m_regForm, QString("<qt>") + schedInfo + i18n("<center>Check number <b>%1</b> has already been used in account <b>%2</b>.</center>"
+                                                                     "<center>Do you want to replace it with the next available number?</center>", next, m_account.name()) + QString("</qt>"), i18n("Duplicate number")) == KMessageBox::Yes) {
       assignNextNumber();
       next = KMyMoneyUtils::nextCheckNumber(m_account);
     } else {
@@ -448,10 +453,15 @@ void TransactionEditor::assignNextNumber(void)
     QString num = KMyMoneyUtils::nextCheckNumber(m_account);
     bool showMessage = true;
     int rc = KMessageBox::No;
+    QString schedInfo;
+    if (!m_scheduleInfo.isEmpty()) {
+      schedInfo = i18n("<center>Processing schedule for %1.</center>", m_scheduleInfo);
+    }
     while (MyMoneyFile::instance()->checkNoUsed(m_account.id(), num)) {
       if (showMessage) {
-        rc = KMessageBox::questionYesNo(m_regForm, QString("<qt>") + i18n("The expected next check number <b>%1</b> has already been used in account <b>%2</b>." "<center>Do you want to replace it with the next available number?</center>", num, m_account.name()) + QString("</qt>"), i18n("Duplicate number"));
-        showMessage = false;
+        rc = KMessageBox::questionYesNo(m_regForm, QString("<qt>") + schedInfo + i18n("Check number <b>%1</b> has already been used in account <b>%2</b>."
+                                                                     "<center>Do you want to replace it with the next available number?</center>", num, m_account.name()) + QString("</qt>"), i18n("Duplicate number"));
+       showMessage = false;
       }
       if (rc == KMessageBox::Yes) {
         num = KMyMoneyUtils::nextCheckNumber(m_account);
@@ -666,7 +676,6 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
       QList<MyMoneySplit>::const_iterator it_t;
       for (it_t = t.splits().constBegin(); it_t != t.splits().constEnd(); ++it_t) {
         if (((*it_t).action() != "Buy") &&
-            ((*it_t).action() != "Sell") &&
             ((*it_t).action() != "Reinvest")) {
           continue;
         }
@@ -1051,7 +1060,8 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
           && dynamic_cast<kMyMoneyLineEdit*>(w)->text().isEmpty()   // no number filled in
           && m_account.accountType() == MyMoneyAccount::Checkings   // checkings account
           && KMyMoneyGlobalSettings::autoIncCheckNumber()           // and auto inc number turned on?
-          && action != KMyMoneyRegister::ActionDeposit) {           // only transfers or withdrawals
+          && action != KMyMoneyRegister::ActionDeposit              // only transfers or withdrawals
+          && m_paymentMethod == MyMoneySchedule::STYPE_WRITECHEQUE) {// only for STYPE_WRITECHEQUE
         assignNextNumber();
       }
     }
@@ -1817,7 +1827,22 @@ bool StdTransactionEditor::isComplete(QString& reason) const
 
   kMyMoneyDateInput* postDate = dynamic_cast<kMyMoneyDateInput*>(m_editWidgets["postdate"]);
   if (postDate) {
-    if (postDate->date().isValid() && (postDate->date() < m_account.openingDate())) {
+    QDate accountOpeningDate = m_account.openingDate();
+    for (QList<MyMoneySplit>::const_iterator it_s = m_splits.constBegin(); it_s != m_splits.constEnd(); ++it_s) {
+      const MyMoneyAccount& acc = MyMoneyFile::instance()->account((*it_s).accountId());
+      // compute the newest opening date of all accounts involved in the transaction
+      if (acc.openingDate() > accountOpeningDate)
+        accountOpeningDate = acc.openingDate();
+    }
+    // check the selected category in case m_splits hasn't been updated yet
+    KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(m_editWidgets["category"]);
+    if (category && !category->selectedItem().isEmpty()) {
+      MyMoneyAccount cat = MyMoneyFile::instance()->account(category->selectedItem());
+      if (cat.openingDate() > accountOpeningDate)
+        accountOpeningDate = cat.openingDate();
+    }
+
+    if (postDate->date().isValid() && (postDate->date() < accountOpeningDate)) {
       postDate->markAsBadDate(true, KMyMoneyGlobalSettings::listNegativeValueColor());
       reason = i18n("Cannot enter transaction with postdate prior to account's opening date.");
       postDate->setToolTip(reason);

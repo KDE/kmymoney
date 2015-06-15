@@ -74,8 +74,8 @@ void KOnlineJobOutbox::updateButtonState() const
   const int selectedItems = indexes.count();
 
   // Send button
-  //! @bug This is not correct. KMyMoney always tries to send all jobs.
-  ui->m_buttonSend->setEnabled(selectedItems > 0);
+  //! @todo Enable button if it is useful
+  //ui->m_buttonSend->setEnabled(selectedItems > 0);
 
   // Edit button/action
   bool editable = true;
@@ -154,17 +154,53 @@ QStringList KOnlineJobOutbox::selectedOnlineJobs() const
   return list;
 }
 
-
 void KOnlineJobOutbox::slotSendJobs()
 {
+  if (ui->m_onlineJobView->selectionModel()->hasSelection())
+    slotSendSelectedJobs();
+  else
+    slotSendAllSendableJobs();
+}
+
+void KOnlineJobOutbox::slotSendAllSendableJobs()
+{
   QList<onlineJob> validJobs;
-  foreach (onlineJob job, MyMoneyFile::instance()->onlineJobList()) {
-    if (job.isValid())
+  foreach(const onlineJob& job, MyMoneyFile::instance()->onlineJobList()) {
+    if (job.isValid() && job.isEditable())
       validJobs.append(job);
   }
   qDebug() << "I shall send " << validJobs.count() << "/" << MyMoneyFile::instance()->onlineJobList().count() << " onlineJobs";
   if (!validJobs.isEmpty())
     emit sendJobs(validJobs);
+}
+
+void KOnlineJobOutbox::slotSendSelectedJobs()
+{
+  QModelIndexList indexes = ui->m_onlineJobView->selectionModel()->selectedRows();
+  if (indexes.isEmpty())
+    return;
+
+  // Valid jobs to send
+  QList<onlineJob> validJobs;
+  validJobs.reserve(indexes.count());
+
+  // Get valid jobs
+  const QAbstractItemModel *const model = ui->m_onlineJobView->model();
+  foreach(const QModelIndex& index, indexes) {
+    onlineJob job = model->data(index, onlineJobModel::OnlineJobRole).value<onlineJob>();
+    if (job.isValid() && job.isEditable())
+      validJobs.append(job);
+  }
+
+  // Abort if not all jobs can be sent
+  if (validJobs.count() != indexes.count()) {
+    QMessageBox::information(this, i18nc("The user selected credit transfers to send. But they cannot be sent.",
+                                         "Cannot send selection"),
+                             i18n("Not all selected credit transfers can be sent because some of them are invalid or were already sent."));
+    return;
+  }
+
+  emit sendJobs(validJobs);
 }
 
 void KOnlineJobOutbox::slotEditJob()

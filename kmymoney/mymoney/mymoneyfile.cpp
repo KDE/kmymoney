@@ -945,6 +945,12 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
     account.setOpeningDate(QDate::currentDate());
   }
 
+  // make sure to set the opening date for categories to a
+  // fixed date (1900-1-1). See #313793 on b.k.o for details
+  if(account.isIncomeExpense()) {
+    account.setOpeningDate(QDate(1900,1,1));
+  }
+
   // if we don't have a currency assigned use the base currency
   if (account.currencyId().isEmpty()) {
     account.setCurrencyId(baseCurrency().id());
@@ -1962,6 +1968,13 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       }
     }
 
+    // check if it is a category and set the date to 1900-01-01 if different
+    if ((*it_a).isIncomeExpense()) {
+      if(((*it_a).openingDate().isValid() == false) || ((*it_a).openingDate() != QDate(1900,1,1))) {
+        (*it_a).setOpeningDate(QDate(1900,1,1));
+      }
+    }
+
     // check for clear text online password in the online settings
     if (!(*it_a).onlineBankingSettings().value("password").isEmpty()) {
       if (problemAccount != (*it_a).name()) {
@@ -2060,11 +2073,22 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         interestAccounts[(*it_s).accountId()] = true;
     }
   }
+  QSet<MyMoneyAccount::accountTypeE> supportedAccountTypes;
+  supportedAccountTypes << MyMoneyAccount::Checkings
+                        << MyMoneyAccount::Savings
+                        << MyMoneyAccount::Cash
+                        << MyMoneyAccount::CreditCard
+                        << MyMoneyAccount::Asset
+                        << MyMoneyAccount::Liability;
+  QSet<QString> reportedUnsupportedAccounts;
+
   for (it_t = tList.begin(); it_t != tList.end(); ++it_t) {
     MyMoneyTransaction t = (*it_t);
     QList<MyMoneySplit> splits = t.splits();
     QList<MyMoneySplit>::const_iterator it_s;
     bool tChanged = false;
+    QDate accountOpeningDate;
+    QStringList accountList;
     for (it_s = splits.constBegin(); it_s != splits.constEnd(); ++it_s) {
       bool sChanged = false;
       MyMoneySplit s = (*it_s);
@@ -2075,12 +2099,46 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         ++problemCount;
       }
 
-      // make sure, that shares and value have the same number if they
-      // represent the same currency.
       try {
         const MyMoneyAccount& acc = this->account(s.accountId());
-        if (t.commodity() == acc.currencyId()
-            && s.shares().reduce() != s.value().reduce()) {
+        // compute the newest opening date of all accounts involved in the transaction
+        // in case the newest opening date is newer than the transaction post date, do one
+        // of the following:
+        //
+        // a) for category and stock accounts: update the opening date of the account
+        // b) for account types where the user cannot modify the opening date through
+        //    the UI issue a warning (for each account only once)
+        // c) others will be caught later
+        if(!acc.isIncomeExpense() && !acc.isInvest()) {
+          if(acc.openingDate() > t.postDate()) {
+            if (!accountOpeningDate.isValid() || acc.openingDate() > accountOpeningDate) {
+              accountOpeningDate = acc.openingDate();
+            }
+            accountList << this->accountToCategory(acc.id());
+            if(!supportedAccountTypes.contains(acc.accountType())
+            && !reportedUnsupportedAccounts.contains(acc.id())) {
+              rc << i18n("  * Opening date of Account '%1' cannot be changed to support transaction '%2' post date.",
+                            this->accountToCategory(acc.id()), t.id());
+              reportedUnsupportedAccounts << acc.id();
+              ++unfixedCount;
+            }
+          }
+        } else {
+          if(acc.openingDate() > t.postDate()) {
+            rc << i18n("  * Transaction '%1' post date '%2' is older than opening date '%4' of account '%3'.",
+                            t.id(), t.postDate().toString(Qt::ISODate), this->accountToCategory(acc.id()), acc.openingDate().toString(Qt::ISODate));
+
+            rc << i18n("    Account opening date updated.");
+            MyMoneyAccount newAcc = acc;
+            newAcc.setOpeningDate(t.postDate());
+            this->modifyAccount(newAcc);
+            ++problemCount;
+          }
+        }
+
+        // make sure, that shares and value have the same number if they
+        // represent the same currency.
+        if (t.commodity() == acc.currencyId() && s.shares().reduce() != s.value().reduce()) {
           // use the value as master if the transaction is balanced
           if (t.splitSum().isZero()) {
             s.setShares(s.value());
@@ -2094,7 +2152,6 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         }
       } catch (const MyMoneyException &) {
         rc << i18n("  * Split %2 in transaction '%1' contains a reference to invalid account %3. Please fix manually.", t.id(), (*it_s).id(), (*it_s).accountId());
-        ++problemCount;
         ++unfixedCount;
       }
 
@@ -2120,6 +2177,42 @@ const QStringList MyMoneyFile::consistencyCheck(void)
       rc << i18n("  * Transaction '%1' has an invalid post date.", t.id());
       rc << i18n("    The post date was updated to '%1'.", QLocale().toString(t.postDate(), QLocale::ShortFormat));
       ++problemCount;
+    }
+    // check if the transaction's post date is after the opening date
+    // of all accounts involved in the transaction. In case it is not,
+    // issue a warning with the details about the transaction incl.
+    // the account names and dates involved
+    if (accountOpeningDate.isValid() && t.postDate() < accountOpeningDate) {
+      QDate originalPostDate = t.postDate();
+#if 0
+      // for now we do not activate the logic to move the post date to a later
+      // point in time. This could cause some severe trouble if you have lots
+      // of ancient data collected with older versions of KMyMoney that did not
+      // enforce certain conditions like we do now.
+      t.setPostDate(accountOpeningDate);
+      tChanged = true;
+      // copy the price information for investments to the new date
+      QList<MyMoneySplit>::const_iterator it_t;
+      for (it_t = t.splits().constBegin(); it_t != t.splits().constEnd(); ++it_t) {
+        if (((*it_t).action() != "Buy") &&
+            ((*it_t).action() != "Reinvest")) {
+          continue;
+        }
+        QString id = (*it_t).accountId();
+        MyMoneyAccount acc = this->account(id);
+        MyMoneySecurity sec = this->security(acc.currencyId());
+        MyMoneyPrice price(acc.currencyId(),
+                           sec.tradingCurrency(),
+                           t.postDate(),
+                           (*it_t).price(), "Transaction");
+        this->addPrice(price);
+        break;
+      }
+#endif
+      rc << i18n("  * Transaction '%1' has a post date '%2' before one of the referenced account's opening date.", t.id(), QLocale().toString(originalPostDate, QLocale::ShortFormat));
+      rc << i18n("    Referenced accounts: %1", accountList.join(","));
+      rc << i18n("    The post date was not updated to '%1'.", QLocale().toString(accountOpeningDate, QLocale::ShortFormat));
+      ++unfixedCount;
     }
 
     if (tChanged) {
@@ -2179,7 +2272,6 @@ const QStringList MyMoneyFile::consistencyCheck(void)
         }
       } catch (const MyMoneyException &) {
         rc << i18n("  * Split %2 in schedule '%1' contains a reference to invalid account %3. Please fix manually.", (*it_sch).name(), (*it_s).id(), (*it_s).accountId());
-        ++problemCount;
         ++unfixedCount;
       }
       if (sChanged) {

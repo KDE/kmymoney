@@ -22,6 +22,7 @@
 
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 #include "payeeidentifier/ibanandbic/widgets/ibanvalidator.h"
+#include "payeeidentifier/ibanandbic/widgets/bicvalidator.h"
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "misc/charvalidator.h"
 
@@ -30,7 +31,8 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
     ui(new Ui::sepaCreditTransferEdit),
     m_onlineJob(onlineJobTyped<sepaOnlineTransfer>()),
     m_requiredFields(new kMandatoryFieldGroup(this)),
-    m_readOnly(false)
+    m_readOnly(false),
+    m_showAllErrors(false)
 {
   ui->setupUi(this);
 
@@ -46,6 +48,8 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
   connect(ui->value, SIGNAL(valueChanged(QString)), this, SLOT(valueChanged()));
   connect(ui->sepaReference, SIGNAL(textChanged(QString)), this, SLOT(endToEndReferenceChanged(QString)));
   connect(ui->purpose, SIGNAL(textChanged()), this, SLOT(purposeChanged()));
+
+  connect(qApp, SIGNAL(focusChanged(QWidget*,QWidget*)), this, SLOT(updateEveryStatus()));
 
   connect(ui->beneficiaryName, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
   connect(ui->beneficiaryIban, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
@@ -72,6 +76,14 @@ void sepaCreditTransferEdit::showEvent(QShowEvent* event)
 {
   updateEveryStatus();
   QWidget::showEvent(event);
+}
+
+void sepaCreditTransferEdit::showAllErrorMessages(const bool state)
+{
+  if (m_showAllErrors != state) {
+    m_showAllErrors = state;
+    updateEveryStatus();
+  }
 }
 
 onlineJobTyped<sepaOnlineTransfer> sepaCreditTransferEdit::getOnlineJobTyped() const
@@ -172,6 +184,14 @@ void sepaCreditTransferEdit::updateSettings()
 
 void sepaCreditTransferEdit::beneficiaryIbanChanged(const QString& iban)
 {
+  // Check IBAN
+  QPair<KMyMoneyValidationFeedback::MessageType, QString> answer = ibanValidator::validateWithMessage(iban);
+  if (m_showAllErrors || iban.length() > 5 || (!ui->beneficiaryIban->hasFocus() && !iban.isEmpty()))
+    ui->feedbackIban->setFeedback(answer.first, answer.second);
+  else
+    ui->feedbackIban->removeFeedback();
+
+  // Check if BIC is mandatory
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
 
   QString payeeIban;
@@ -207,29 +227,35 @@ void sepaCreditTransferEdit::beneficiaryBicChanged(const QString& bic)
       return;
     }
   }
-  ui->feedbackBic->removeFeedback(KMyMoneyValidationFeedback::Error, i18n("For this beneficiary's country the BIC is mandatory."));
+
+  QPair<KMyMoneyValidationFeedback::MessageType, QString> answer = bicValidator::validateWithMessage(bic);
+  if (m_showAllErrors || bic.length() >= 8 || (!ui->beneficiaryBankCode->hasFocus() && !bic.isEmpty()))
+    ui->feedbackBic->setFeedback(answer.first, answer.second);
+  else
+    ui->feedbackBic->removeFeedback();
 }
 
 void sepaCreditTransferEdit::beneficiaryNameChanged(const QString& name)
 {
   QSharedPointer<const sepaOnlineTransfer::settings> settings = taskSettings();
-  if (name.length() < settings->recipientNameMinLength()) {
+  if (name.length() < settings->recipientNameMinLength() && (m_showAllErrors || (!ui->beneficiaryName->hasFocus() && !name.isEmpty()))) {
     ui->feedbackName->setFeedback(KMyMoneyValidationFeedback::Error, i18np("A beneficiary name is needed.", "The beneficiary name must be at least %1 characters long",
                                   settings->recipientNameMinLength()
                                                                           ));
   } else {
-    ui->feedbackName->removeFeedback(KMyMoneyValidationFeedback::Error, i18np("A beneficiary name is needed.", "The beneficiary name must be at least %1 characters long",
-                                     settings->recipientNameMinLength()
-                                                                             ));
+    ui->feedbackName->removeFeedback();
   }
 }
 
 void sepaCreditTransferEdit::valueChanged()
 {
-  if (!ui->value->isValid() || !ui->value->value().isPositive()) {
+  if ((!ui->value->isValid() && (m_showAllErrors || (!ui->value->hasFocus() && ui->value->value().toDouble() != 0))) || (!ui->value->value().isPositive() && ui->value->value().toDouble() != 0)) {
     ui->feedbackAmount->setFeedback(KMyMoneyValidationFeedback::Error, i18n("A positive amount to transfer is needed."));
     return;
   }
+
+  if (!ui->value->isValid())
+    return;
 
   const MyMoneyAccount account = getOnlineJob().responsibleMyMoneyAccount();
   const MyMoneyMoney expectedBalance = account.balance() - ui->value->value();

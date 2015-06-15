@@ -185,7 +185,12 @@ public:
   static QString localBankCodeByIban(const QString& iban);
 
   /**
-   * @brief Check if this IBAN can be valid
+   * @brief Chech if IBAN is valid
+   */
+  bool isIbanValid() const;
+
+  /**
+   * @brief Check if IBAN can be valid
    *
    * This method also checks if the given country code is valid.
    *

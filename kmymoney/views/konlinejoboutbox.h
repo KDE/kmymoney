@@ -61,7 +61,16 @@ private:
 
 private slots:
   void slotRemoveJob();
+
+  /** @brief If any job is selected, send it. Send all valid jobs otherwise. */
   void slotSendJobs();
+
+  /** @brief Send all sendable online jobs */
+  void slotSendAllSendableJobs();
+
+  /** @brief Send only the selected jobs */
+  void slotSendSelectedJobs();
+
   void slotEditJob();
   void slotEditJob(const QModelIndex&);
 };

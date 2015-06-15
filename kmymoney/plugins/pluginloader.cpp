@@ -89,6 +89,10 @@ void PluginLoader::loadPlugins()
 void PluginLoader::loadPlugin(KPluginInfo* info)
 {
   if (info->isPluginEnabled()) {
+    if (info->pluginName() == QLatin1String("KBanking")) {
+      qDebug("Skip loading KBanking until ported to Qt5");
+      return;
+    }
     Plugin* plugin = getPluginFromInfo(info);
 
     if (!plugin) {

@@ -231,7 +231,8 @@ bool MyMoneyTransactionFilter::matchText(const MyMoneySplit * const sp) const
     if (sp->memo().contains(m_text)
         || sp->shares().formatMoney(acc.fraction(sec)).contains(m_text)
         || sp->value().formatMoney(acc.fraction(sec)).contains(m_text)
-        || sp->number().contains(m_text))
+        || sp->number().contains(m_text)
+        || (m_text.pattern() ==  sp->transactionId()))
       return !m_invertText;
 
     if (acc.name().contains(m_text))
@@ -443,10 +444,15 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
               removeSplit = true;
             else {
               bool found = false;
-              for (int i = 0; i < s->tagIdList().size(); i++)
-                if (m_tags.end() != m_tags.find(s->tagIdList()[i]))
+              for (int i = 0; i < s->tagIdList().size(); i++) {
+                if (m_tags.end() != m_tags.find(s->tagIdList()[i])) {
                   found = true;
-              if (!found) removeSplit = true;
+                  break;
+                }
+              }
+              if (!found) {
+                removeSplit = true;
+              }
             }
           } else if (!s->tagIdList().isEmpty())
             removeSplit = true;

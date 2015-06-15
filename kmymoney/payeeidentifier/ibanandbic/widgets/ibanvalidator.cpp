@@ -58,16 +58,22 @@ QValidator::State ibanValidator::validate(QString& string, int&) const
     return Invalid;
 
   if (characterCount > 5) {
-    if (!payeeIdentifiers::ibanBic::validateIbanChecksum(payeeIdentifiers::ibanBic::ibanToElectronic(string))) {
-      emit feedback(KMyMoneyValidationFeedback::Warning, i18n("This IBAN is invalid."));
-      return Intermediate;
-    } else {
-      emit feedback(KMyMoneyValidationFeedback::None, i18n("This IBAN is invalid."));
-    }
     return Acceptable;
   }
 
   return Intermediate;
+}
+
+QPair< KMyMoneyValidationFeedback::MessageType, QString > ibanValidator::validateWithMessage(const QString& string)
+{
+  // string.length() > 32 should not happen because all line edits should have this validator installed
+  if (string.length() < 5)
+    return QPair< KMyMoneyValidationFeedback::MessageType, QString >(KMyMoneyValidationFeedback::Error, i18n("This IBAN is too short."));
+
+  if (!payeeIdentifiers::ibanBic::validateIbanChecksum(payeeIdentifiers::ibanBic::ibanToElectronic(string)))
+    return QPair< KMyMoneyValidationFeedback::MessageType, QString >(KMyMoneyValidationFeedback::Warning, i18n("This IBAN is invalid."));
+
+  return QPair< KMyMoneyValidationFeedback::MessageType, QString >(KMyMoneyValidationFeedback::None, QString());
 }
 
 void ibanValidator::fixup(QString& string) const

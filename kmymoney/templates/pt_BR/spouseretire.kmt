@@ -10,7 +10,7 @@
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Contas de Aposentadoria do Cônjuge</title>
- <shortdesc>Conta de aposentadoria com contas de investimentos relacionadas para o cônjuge</shortdesc>
+ <shortdesc>Conta de aposentadoria com contas de investimentos relacionadas ao cônjuge</shortdesc>
  <longdesc>Deverá selecionar este conjunto de contas se tiver investimentos em nome do cônjuge (ações, obrigações, fundos de investimento, fundos de índices, juros, dividendos).</longdesc>
  <accounts>
   <account type="9" name="">

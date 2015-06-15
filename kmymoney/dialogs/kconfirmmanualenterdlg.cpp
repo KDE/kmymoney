@@ -145,6 +145,18 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
       messageDetail += i18n("<p>Memo changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>", mo, mn);
     }
 
+    QString no, nn;
+    no = to.splits().front().number();
+    nn = tn.splits().front().number();
+    if (no.isEmpty())
+      no = QString("<i>") + i18nc("No number", "empty") + QString("</i>");
+    if (nn.isEmpty())
+      nn = QString("<i>") + i18nc("No number", "empty") + QString("</i>");
+    if (no != nn) {
+      noItemsChanged++;
+      messageDetail += i18n("<p>Number changed.<br/>&nbsp;&nbsp;&nbsp;Old: <b>%1</b>, New: <b>%2</b></p>", no, nn);
+    }
+
     const MyMoneySecurity& sec = MyMoneyFile::instance()->security(to.commodity());
     MyMoneyMoney ao, an;
     ao = to.splits().front().value();

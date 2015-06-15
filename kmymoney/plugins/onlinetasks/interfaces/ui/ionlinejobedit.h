@@ -75,6 +75,7 @@ public slots:
    */
   virtual bool setOnlineJob(const onlineJob&) = 0;
   virtual void setOriginAccount(const QString&) = 0;
+  virtual void showAllErrorMessages(const bool) {}
 
 signals:
   /**

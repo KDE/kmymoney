@@ -25,7 +25,7 @@
 #include <KLocalizedString>
 
 #include "models/payeeidentifiermodel.h"
-#include "nationaaccountedit.h"
+#include "nationalaccountedit.h"
 
 nationalAccountDelegate::nationalAccountDelegate(QObject* parent, const QVariantList&)
     : QStyledItemDelegate(parent)
@@ -113,6 +113,8 @@ QWidget* nationalAccountDelegate::createEditor(QWidget* parent, const QStyleOpti
 {
   Q_UNUSED(option);
   nationalAccountEdit* edit = new nationalAccountEdit(parent);
+  connect(edit, SIGNAL(commitData(QWidget*)), this, SIGNAL(commitData(QWidget*)));
+  connect(edit, SIGNAL(closeEditor(QWidget*)), this, SIGNAL(closeEditor(QWidget*)));
   emit sizeHintChanged(index);
   return edit;
 }

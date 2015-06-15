@@ -31,8 +31,7 @@ public:
   explicit bicValidator(QObject* parent = 0);
   virtual QValidator::State validate(QString& , int&) const;
 
-signals:
-  void feedback(KMyMoneyValidationFeedback::MessageType type, QString message) const;
+  static QPair<KMyMoneyValidationFeedback::MessageType, QString> validateWithMessage(const QString&);
 };
 
 #endif // BICVALIDATOR_H

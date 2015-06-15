@@ -58,6 +58,7 @@
 #include <QProgressBar>
 #include <QList>
 #include <QUrl>
+#include <QClipboard>
 #include <QKeySequence>
 #include <QIcon>
 #include <QInputDialog>
@@ -354,12 +355,14 @@ public:
 #endif
   QBitArray             m_processingDays;
   QMap<QDate, bool>     m_holidayMap;
-
-  bool          m_applicationIsReady;
+  QStringList           m_consistencyCheckResult;
+  bool                  m_applicationIsReady;
 
   // methods
   void consistencyCheck(bool alwaysDisplayResults);
   void setCustomColors();
+  void copyConsistencyCheckResults();
+  void saveConsistencyCheckResults();
 };
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
@@ -482,6 +485,41 @@ void KMyMoneyApp::slotObjectDestroyed(QObject* o)
 {
   if (o == d->m_moveToAccountSelector) {
     d->m_moveToAccountSelector = 0;
+  }
+}
+
+void KMyMoneyApp::slotInstallConsistencyCheckContextMenu()
+{
+  // this code relies on the implementation of KMessageBox::informationList to add a context menu to that list,
+  // please adjust it if it's necessary or rewrite the way the consistency check results are displayed
+  if (QWidget* dialog = QApplication::activeModalWidget()) {
+    if (QListWidget* widget = dialog->findChild<QListWidget *>()) {
+      // give the user a hint that the data can be saved
+      widget->setToolTip(i18n("This is the consistency check log, use the context menu to copy or save it."));
+      widget->setWhatsThis(widget->toolTip());
+      widget->setContextMenuPolicy(Qt::CustomContextMenu);
+      connect(widget, SIGNAL(customContextMenuRequested(QPoint)), SLOT(slotShowContextMenuForConsistencyCheck(QPoint)));
+    }
+  }
+}
+
+void KMyMoneyApp::slotShowContextMenuForConsistencyCheck(const QPoint &pos)
+{
+  // allow the user to save the consistency check results
+  if (QWidget* widget = qobject_cast< QWidget* >(sender())) {
+    QMenu contextMenu(widget);
+    QAction* copy = new QAction(i18n("Copy to clipboard"), widget);
+    QAction* save = new QAction(i18n("Save to file"), widget);
+    contextMenu.addAction(copy);
+    contextMenu.addAction(save);
+    QAction *result = contextMenu.exec(widget->mapToGlobal(pos));
+    if (result == copy) {
+      // copy the consistency check results to the clipboard
+      d->copyConsistencyCheckResults();
+    } else if (result == save) {
+      // save the consistency check results to a file
+      d->saveConsistencyCheckResults();
+    }
   }
 }
 
@@ -2614,7 +2652,7 @@ void KMyMoneyApp::slotFileBackup(void)
       // If we don't have to mount a device, we just issue
       // a dummy command to start the copy operation
       progressCallback(0, 300, "");
-      d->m_proc.setProgram("echo");
+      d->m_proc.setProgram("true");
       d->m_proc.start();
     }
 
@@ -3121,6 +3159,7 @@ void KMyMoneyApp::createCategory(MyMoneyAccount& account, const MyMoneyAccount& 
     new KNewAccountDlg(account, false, true, 0, i18n("Create a new Category"));
 
   dialog->setOpeningBalanceShown(false);
+  dialog->setOpeningDateShown(false);
 
   if (dialog->exec() == QDialog::Accepted && dialog != 0) {
     MyMoneyAccount parentAccount, brokerageAccount;
@@ -3602,6 +3641,7 @@ void KMyMoneyApp::slotAccountEdit(void)
 
         if (category || d->m_selectedAccount.accountType() == MyMoneyAccount::Investment) {
           dlg->setOpeningBalanceShown(false);
+          dlg->setOpeningDateShown(false);
           tid.clear();
         } else {
           if (!tid.isEmpty()) {
@@ -4117,18 +4157,43 @@ void KMyMoneyApp::slotAccountOpen(const MyMoneyObject& obj)
   }
 }
 
-bool KMyMoneyApp::canCloseAccount(const MyMoneyAccount& acc) const
+void KMyMoneyApp::enableCloseAccountAction(const MyMoneyAccount& acc) {
+    switch (canCloseAccount(acc)) {
+        case KMyMoneyUtils::AccountCanClose: {
+            action("account_close")->setEnabled(true);
+            break;
+        }
+        case KMyMoneyUtils::AccountBalanceNonZero: {
+            action("account_close")->setEnabled(false);
+            action("account_close")->setToolTip(i18n("The balance of the account must be zero before the account can be closed"));
+            break;
+        }
+        case KMyMoneyUtils::AccountChildrenOpen: {
+            action("account_close")->setEnabled(false);
+            action("account_close")->setToolTip(i18n("All subaccounts must be closed before the account can be closed"));
+            break;
+        }
+        case KMyMoneyUtils::AccountScheduleReference: {
+            action("account_close")->setEnabled(false);
+            action("account_close")->setToolTip(i18n("This account is still included in an active schedule"));
+            break;
+        }
+    }
+}
+
+
+KMyMoneyUtils::CanCloseAccountCodeE KMyMoneyApp::canCloseAccount(const MyMoneyAccount& acc) const
 {
   // balance must be zero
   if (!acc.balance().isZero())
-    return false;
+    return KMyMoneyUtils::AccountBalanceNonZero;
 
   // all children must be already closed
   QStringList::const_iterator it_a;
   for (it_a = acc.accountList().constBegin(); it_a != acc.accountList().constEnd(); ++it_a) {
     MyMoneyAccount a = MyMoneyFile::instance()->account(*it_a);
     if (!a.isClosed()) {
-      return false;
+      return KMyMoneyUtils::AccountChildrenOpen;
     }
   }
 
@@ -4139,9 +4204,9 @@ bool KMyMoneyApp::canCloseAccount(const MyMoneyAccount& acc) const
     if ((*it_l).isFinished())
       continue;
     if ((*it_l).hasReferenceTo(acc.id()))
-      return false;
+      return KMyMoneyUtils::AccountScheduleReference;
   }
-  return true;
+  return KMyMoneyUtils::AccountCanClose;
 }
 
 void KMyMoneyApp::slotAccountClose(void)
@@ -4283,7 +4348,6 @@ void KMyMoneyApp::slotScheduleEdit(void)
 
       KEditScheduleDlg* sched_dlg = 0;
       KEditLoanWizard* loan_wiz = 0;
-
 
       switch (schedule.type()) {
         case MyMoneySchedule::TYPE_BILL:
@@ -6145,12 +6209,24 @@ void KMyMoneyApp::transactionMatch(void)
   KMyMoneyRegister::SelectedTransactions toBeDeleted;
   for (it = d->m_selectedTransactions.constBegin(); it != d->m_selectedTransactions.constEnd(); ++it) {
     if ((*it).transaction().isImported()) {
-      endMatchTransaction = (*it).transaction();
-      endSplit = (*it).split();
-      toBeDeleted << *it;
+      if (endMatchTransaction.id().isEmpty()){
+        endMatchTransaction = (*it).transaction();
+        endSplit = (*it).split();
+        toBeDeleted << *it;
+      } else {
+        //This is a second imported transaction, we still want to merge
+        startMatchTransaction = (*it).transaction();
+        startSplit = (*it).split();
+      }
     } else if (!(*it).split().isMatched()) {
-      startMatchTransaction = (*it).transaction();
-      startSplit = (*it).split();
+      if (startMatchTransaction.id().isEmpty()) {
+        startMatchTransaction = (*it).transaction();
+        startSplit = (*it).split();
+      } else {
+        endMatchTransaction = (*it).transaction();
+        endSplit = (*it).split();
+        toBeDeleted << *it;
+      }
     }
   }
 
@@ -6169,14 +6245,13 @@ void KMyMoneyApp::transactionMatch(void)
         throw MYMONEYEXCEPTION(i18n("No imported transaction selected for matching"));
 
       TransactionMatcher matcher(d->m_selectedAccount);
-      matcher.match(startMatchTransaction, startSplit, endMatchTransaction, endSplit);
+      matcher.match(startMatchTransaction, startSplit, endMatchTransaction, endSplit, true);
       ft.commit();
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(0, i18n("Unable to match the selected transactions"), e.what());
     }
   }
 }
-
 
 void KMyMoneyApp::showContextMenu(const QString& containerName)
 {
@@ -6507,9 +6582,7 @@ void KMyMoneyApp::slotUpdateActions(void)
       }
 
       if (d->m_selectedTransactions.count() == 2 /* && action("transaction_edit")->isEnabled() */) {
-        if (importedCount == 1 && matchedCount == 0) {
           action("transaction_match")->setEnabled(true);
-        }
       }
       if (importedCount != 0 || matchedCount != 0)
         action("transaction_accept")->setEnabled(true);
@@ -6624,8 +6697,7 @@ void KMyMoneyApp::slotUpdateActions(void)
 
           if (d->m_selectedAccount.isClosed())
             action("account_reopen")->setEnabled(true);
-          else if (canCloseAccount(d->m_selectedAccount))
-            action("account_close")->setEnabled(true);
+          else enableCloseAccountAction(d->m_selectedAccount);
 
           if (!d->m_selectedAccount.onlineBankingSettings().value("provider").isEmpty()) {
             action("account_online_unmap")->setEnabled(true);
@@ -6688,8 +6760,7 @@ void KMyMoneyApp::slotUpdateActions(void)
     }
     if (d->m_selectedInvestment.isClosed())
       action("account_reopen")->setEnabled(true);
-    else if (canCloseAccount(d->m_selectedInvestment))
-      action("account_close")->setEnabled(true);
+    else enableCloseAccountAction(d->m_selectedInvestment);
   }
 
   if (!d->m_selectedSchedule.id().isEmpty()) {
@@ -6965,23 +7036,49 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
 {
   KMSTATUS(i18n("Running consistency check..."));
 
-  QStringList msg;
   MyMoneyFileTransaction ft;
   try {
-    msg = MyMoneyFile::instance()->consistencyCheck();
+    m_consistencyCheckResult = MyMoneyFile::instance()->consistencyCheck();
     ft.commit();
   } catch (const MyMoneyException &e) {
-    msg.append(i18n("Consistency check failed: %1", e.what()));
+    m_consistencyCheckResult.append(i18n("Consistency check failed: %1", e.what()));
+    // always display the result if the check failed
+    alwaysDisplayResult = true;
   }
 
   // in case the consistency check was OK, we get a single line as result
   // in all errneous cases, we get more than one line and force the
   // display of them.
 
-  if (msg.size() > 1) {
-    KMessageBox::informationList(0, i18n("The consistency check has found some issues in your data. Details are presented below. Those issues that could not be corrected automatically need to be solved by the user."), msg, i18n("Consistency check result"));
-  } else if (alwaysDisplayResult) {
-    KMessageBox::informationList(0, i18n("The consistency check has found no issues in your data. Details are presented below."), msg, i18n("Consistency check result"));
+  if (alwaysDisplayResult || m_consistencyCheckResult.size() > 1) {
+    QString msg = i18n("The consistency check has found no issues in your data. Details are presented below.");
+    if (m_consistencyCheckResult.size() > 1)
+      msg = i18n("The consistency check has found some issues in your data. Details are presented below. Those issues that could not be corrected automatically need to be solved by the user.");
+    // install a context menu for the list after the dialog is displayed
+    QTimer::singleShot(500, q, SLOT(slotInstallConsistencyCheckContextMenu()));
+    KMessageBox::informationList(0, msg, m_consistencyCheckResult, i18n("Consistency check result"));
+  }
+  // this data is no longer needed
+  m_consistencyCheckResult.clear();
+}
+
+void KMyMoneyApp::Private::copyConsistencyCheckResults() {
+  QClipboard *clipboard = QApplication::clipboard();
+  clipboard->setText(m_consistencyCheckResult.join(QLatin1String("\n")));
+}
+
+void KMyMoneyApp::Private::saveConsistencyCheckResults() {
+  QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-consistency-check"), QString(), q);
+  dialog->setMode(KFile::File);
+  dialog->setOperationMode(KFileDialog::Saving);
+
+  if (dialog->exec() == QDialog::Accepted && dialog != 0) {
+    QFile file(dialog->selectedUrl().toLocalFile());
+    if (file.open(QFile::WriteOnly | QFile::Append | QFile::Text)) {
+      QTextStream out(&file);
+      out << m_consistencyCheckResult.join(QLatin1String("\n"));
+      file.close();
+    }
   }
 }
 
@@ -7646,7 +7743,7 @@ void KMyMoneyApp::slotOnlineJobSend(QList<onlineJob> jobs)
       }
 
     } else {
-      qWarning() << "Error, got onlineJob for a account without online plugin.";
+      qWarning() << "Error, got onlineJob for an account without online plugin.";
       /** @FIXME can this actually happen? */
     }
   }

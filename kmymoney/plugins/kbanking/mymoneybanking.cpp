@@ -128,6 +128,22 @@ public:
     }
   }
 
+  /**
+   * KMyMoney asks for accounts over and over again which causes a lot of "Job not supported with this account" error messages.
+   * This function filters messages with that string.
+   */
+  static int gwenLogHook(GWEN_GUI* gui, const char* domain, GWEN_LOGGER_LEVEL level, const char* message)
+  {
+    Q_UNUSED(gui);
+    Q_UNUSED(domain);
+    Q_UNUSED(level);
+
+    const char* messageToFilter = "Job not supported with this account";
+    if (strstr(message, messageToFilter) != 0)
+      return 1;
+    return 0;
+  }
+
   QTimer *passwordCacheTimer;
 };
 
@@ -161,7 +177,7 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
     //! @todo when is gwenKdeGui deleted?
     gwenKdeGui *gui = new gwenKdeGui();
     GWEN_Gui_SetGui(gui->getCInterface());
-    GWEN_Logger_SetLevel(0, GWEN_LoggerLevel_Critical);
+    GWEN_Logger_SetLevel(0, GWEN_LoggerLevel_Warning);
 
     if (m_kbanking->init() == 0) {
       // Tell the host application to load my GUI component
@@ -177,7 +193,8 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
 
       // load protocol conversion list
       loadProtocolConversion();
-      GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Critical);
+      GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Warning);
+      GWEN_Gui_SetLogHookFn(GWEN_Gui_GetGui(), &KBankingPlugin::Private::gwenLogHook);
 
     } else {
       qWarning("Could not initialize KBanking online banking interface");
@@ -270,17 +287,13 @@ void KBankingPlugin::createActions(void)
 void KBankingPlugin::slotSettings(void)
 {
   if (m_kbanking) {
-    GWEN_DIALOG *dlg;
-    int rv;
-
-    dlg = AB_SetupDialog_new(m_kbanking->getCInterface());
+    GWEN_DIALOG* dlg = AB_SetupDialog_new(m_kbanking->getCInterface());
     if (dlg == NULL) {
       DBG_ERROR(0, "Could not create setup dialog.");
       return;
     }
 
-    rv = GWEN_Gui_ExecDialog(dlg, 0);
-    if (rv == 0) {
+    if (GWEN_Gui_ExecDialog(dlg, 0) == 0) {
       DBG_ERROR(0, "Aborted by user");
       GWEN_Dialog_free(dlg);
       return;
@@ -403,8 +416,6 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
   if (!acc.id().isEmpty()) {
     AB_JOB *job = 0;
     int rv;
-    int days;
-    int year, month, day;
 
     /* get AqBanking account */
     AB_ACCOUNT *ba = aqbAccount(acc);
@@ -422,6 +433,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                               acc.name()),
                          i18n("Account Not Mapped"));
     } else {
+      bool enqueJob = true;
       if (acc.onlineBankingSettings().value("kbanking-txn-download") != "no") {
         /* create getTransactions job */
         job = AB_JobGetTransactions_new(ba);
@@ -439,7 +451,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
         }
 
         if (job) {
-          days = AB_JobGetTransactions_GetMaxStoreDays(job);
+          int days = AB_JobGetTransactions_GetMaxStoreDays(job);
           QDate qd;
           if (days > 0) {
             GWEN_TIME *ti1;
@@ -450,6 +462,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
             GWEN_Time_free(ti1);
             ti1 = ti2;
 
+            int year, month, day;
             if (GWEN_Time_GetBrokenDownDate(ti1, &day, &month, &year)) {
               DBG_ERROR(0, "Bad date");
               qd = QDate();
@@ -459,7 +472,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           }
 
           // get last statement request date from application account object
-          // and start from the next day if the date is valid
+          // and start from a few days before if the date is valid
           QDate lastUpdate = QDate::fromString(acc.value("lastImportedTransactionDate"), Qt::ISODate);
           if (lastUpdate.isValid())
             lastUpdate = lastUpdate.addDays(-3);
@@ -482,15 +495,13 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           // the pick start date option dialog is needed in
           // case the dateOption is 0 or the date option is > 1
           // and the qd is invalid
-          bool enqueJob = false;
           if (dateOption == 0 || (dateOption > 1 && !qd.isValid())) {
             QPointer<KBPickStartDate> psd = new KBPickStartDate(m_kbanking, qd, lastUpdate, acc.name(),
                 lastUpdate.isValid() ? 2 : 3, 0, true);
             if (psd->exec() == QDialog::Accepted) {
-              enqueJob = true;
               qd = psd->date();
             } else {
-              qd = QDate();
+              enqueJob = false;
             }
             delete psd;
           }
@@ -518,25 +529,27 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
         }
       }
 
-      /* create getBalance job */
-      job = AB_JobGetBalance_new(ba);
-      rv = AB_Job_CheckAvailability(job);
-      if (!rv)
-        rv = m_kbanking->enqueueJob(job);
-      else
-        rv = 0;
+      if (enqueJob) {
+        /* create getBalance job */
+        job = AB_JobGetBalance_new(ba);
+        rv = AB_Job_CheckAvailability(job);
+        if (!rv)
+          rv = m_kbanking->enqueueJob(job);
+        else
+          rv = 0;
 
-      AB_Job_free(job);
-      if (rv) {
-        DBG_ERROR(0, "Error %d", rv);
-        KMessageBox::error(0,
-                           i18n("<qt>"
-                                "Could not enqueue the job.\n"
-                                "</qt>"),
-                           i18n("Error"));
-      } else {
-        rc = true;
-        emit queueChanged();
+        AB_Job_free(job);
+        if (rv) {
+          DBG_ERROR(0, "Error %d", rv);
+          KMessageBox::error(0,
+                            i18n("<qt>"
+                                  "Could not enqueue the job.\n"
+                                  "</qt>"),
+                            i18n("Error"));
+        } else {
+          rc = true;
+          emit queueChanged();
+        }
       }
     }
   }
@@ -548,7 +561,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
   return rc;
 }
 
-void KBankingPlugin::executeQueue(void)
+void KBankingPlugin::executeQueue()
 {
   if (m_kbanking && m_kbanking->getEnqueuedJobs().size() > 0) {
     AB_IMEXPORTER_CONTEXT *ctx;
@@ -569,9 +582,11 @@ void KBankingPlugin::executeQueue(void)
 void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
 {
   Q_CHECK_PTR(m_kbanking);
+
+  m_onlineJobQueue.clear();
   QList<onlineJob> unhandledJobs;
 
-  if (jobs.size()) {
+  if (!jobs.isEmpty()) {
     foreach (onlineJob job, jobs) {
       if (germanOnlineTransfer::name() == job.task()->taskName()) {
         onlineJobTyped<germanOnlineTransfer> typedJob(job);
@@ -588,7 +603,6 @@ void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
       m_onlineJobQueue.insert(m_kbanking->mappingId(job), job);
     }
 
-    //emit queueChanged();
     executeQueue();
   }
   jobs = m_onlineJobQueue.values() + unhandledJobs;
@@ -835,13 +849,13 @@ KMyMoneyBanking::KMyMoneyBanking(KBankingPlugin* parent, const char* appname, co
     , m_parent(parent)
     , _jobQueue(0)
 {
+  m_sepaKeywords  << QString("SEPA-BASISLASTSCHRIFT")
+                  << QString::fromUtf8("SEPA-ÜBERWEISUNG");
 }
 
 int KMyMoneyBanking::init()
 {
-  int rv;
-
-  rv = AB_Banking::init();
+  int rv = AB_Banking::init();
   if (rv < 0)
     return rv;
 
@@ -853,20 +867,17 @@ int KMyMoneyBanking::init()
   }
 
   _jobQueue = AB_Job_List2_new();
-
   return 0;
 }
 
 int KMyMoneyBanking::fini()
 {
-  int rv;
-
   if (_jobQueue) {
     AB_Job_List2_FreeAll(_jobQueue);
     _jobQueue = 0;
   }
 
-  rv = onlineFini();
+  const int rv = onlineFini();
   if (rv) {
     AB_Banking::fini();
     return rv;
@@ -903,7 +914,7 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
         //! @todo correct exception text
         qWarning("Executed a job which was not in queue. Please inform the KMyMoney developers.");
         abJob = AB_Job_List2Iterator_Next(jobIter);
-        break;
+        continue;
       }
 
       AB_JOB_STATUS abStatus = AB_Job_GetStatus(abJob);
@@ -1169,7 +1180,6 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     } // while
   }
   kt.m_strPayee = s;
-  h = MyMoneyTransaction::hash(s.trimmed());
 
   // memo
   s.truncate(0);
@@ -1188,9 +1198,59 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
       s += QString::fromUtf8(p).trimmed();
       se = GWEN_StringListEntry_Next(se);
     } // while
+
+    // Sparda / Netbank hack: the software these banks use store
+    // parts of the payee name in the beginning of the purpose field
+    // in case the payee name exceeds the 27 character limit. This is
+    // the case, when one the strings listed in m_sepaKeywords is part
+    // of the purpose fields but does not start at the beginning. In this
+    // case, the part leading up to the keyword is to be treated as the
+    // tail of the payee. Also, a blank is inserted after the keyword.
+    QSet<QString>::const_iterator itk;
+    for(itk = m_sepaKeywords.constBegin(); itk != m_sepaKeywords.constEnd(); ++itk) {
+      int idx = s.indexOf(*itk);
+      if(idx >= 0) {
+        if(idx > 0) {
+          // re-add a possibly removed blank to name
+          if(kt.m_strPayee.length() < 27)
+            kt.m_strPayee += ' ';
+          kt.m_strPayee += s.left(idx);
+          s = s.mid(idx);
+        }
+        s = QString("%1 %2").arg(*itk).arg(s.mid((*itk).length()));
+        break;
+      }
+    }
+
+    // in case we have some SEPA fields filled with information
+    // we add them to the memo field
+    p = AB_Transaction_GetEndToEndReference(t);
+    if(p) {
+      s += QString(", EREF: %1").arg(p);
+    }
+    p = AB_Transaction_GetCustomerReference(t);
+    if(p) {
+      s += QString(", CREF: %1").arg(p);
+    }
+    p = AB_Transaction_GetMandateId(t);
+    if(p) {
+      s += QString(", MREF: %1").arg(p);
+    }
+    p = AB_Transaction_GetCreditorSchemeId(t);
+    if(p) {
+      s += QString(", CRED: %1").arg(p);
+    }
+    p = AB_Transaction_GetOriginatorIdentifier(t);
+    if(p) {
+      s += QString(", DEBT: %1").arg(p);
+    }
   }
   kt.m_strMemo = s;
-  h = MyMoneyTransaction::hash(s, h);
+
+  // calculate the hash code and start with the payee info
+  // and append the memo field
+  h = MyMoneyTransaction::hash(kt.m_strPayee.trimmed());
+  h = MyMoneyTransaction::hash(kt.m_strMemo, h);
 
   // see, if we need to extract the payee from the memo field
   const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
@@ -1219,7 +1279,6 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     }
   }
 
-  kt.m_strMemo = kt.m_strMemo;
   kt.m_strPayee = kt.m_strPayee.trimmed();
 
   // date
@@ -1328,18 +1387,12 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
 bool KMyMoneyBanking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
                                         uint32_t /*flags*/)
 {
-  QString s;
   const char *p;
-  const AB_TRANSACTION *t;
-  MyMoneyStatement ks;
-  MyMoneyAccount kacc;
-  const AB_ACCOUNT_STATUS *ast;
-  const AB_VALUE *val;
-  const GWEN_TIME *ti;
 
   DBG_INFO(0, "Importing account...");
 
   // account number
+  MyMoneyStatement ks;
   p = AB_ImExporterAccountInfo_GetAccountNumber(ai);
   if (p) {
     ks.m_strAccountNumber = m_parent->stripLeadingZeroes(p);
@@ -1350,7 +1403,7 @@ bool KMyMoneyBanking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
     ks.m_strRoutingNumber = m_parent->stripLeadingZeroes(p);
   }
 
-  kacc = m_parent->account("kbanking-acc-ref", QString("%1-%2").arg(ks.m_strRoutingNumber, ks.m_strAccountNumber));
+  MyMoneyAccount kacc = m_parent->account("kbanking-acc-ref", QString("%1-%2").arg(ks.m_strRoutingNumber, ks.m_strAccountNumber));
   ks.m_accountId = kacc.id();
 
   // account name
@@ -1383,7 +1436,7 @@ bool KMyMoneyBanking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
   }
 
   // account status
-  ast = _getAccountStatus(ai);
+  const AB_ACCOUNT_STATUS* ast = _getAccountStatus(ai);
   if (ast) {
     const AB_BALANCE *bal;
 
@@ -1391,15 +1444,15 @@ bool KMyMoneyBanking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
     if (!bal)
       bal = AB_AccountStatus_GetNotedBalance(ast);
     if (bal) {
-      val = AB_Balance_GetValue(bal);
+      const AB_VALUE* val = AB_Balance_GetValue(bal);
       if (val) {
         DBG_INFO(0, "Importing balance");
-        ks.m_closingBalance = MyMoneyMoney(AB_Value_GetValueAsDouble(val));
+        ks.m_closingBalance = AB_Value_toMyMoneyMoney(val);
         p = AB_Value_GetCurrency(val);
         if (p)
           ks.m_strCurrency = p;
       }
-      ti = AB_Balance_GetTime(bal);
+      const GWEN_TIME* ti = AB_Balance_GetTime(bal);
       if (ti) {
         int year, month, day;
 
@@ -1419,7 +1472,7 @@ bool KMyMoneyBanking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
   m_hashMap.clear();
 
   // get all transactions
-  t = AB_ImExporterAccountInfo_GetFirstTransaction(ai);
+  const AB_TRANSACTION* t = AB_ImExporterAccountInfo_GetFirstTransaction(ai);
   while (t) {
     _xaToStatement(ks, kacc, t);
     t = AB_ImExporterAccountInfo_GetNextTransaction(ai);

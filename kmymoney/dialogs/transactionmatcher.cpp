@@ -19,8 +19,10 @@
 
 #include <QList>
 #include <klocale.h>
+#include <KMessageBox>
 
 #include "mymoneyfile.h"
+#include "kmymoneyglobalsettings.h"
 
 TransactionMatcher::TransactionMatcher(const MyMoneyAccount& acc) :
     m_account(acc)
@@ -62,15 +64,24 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
   // is to just base the match on the splits referencing the same (currently
   // selected) account.
 
-  // verify, that tm is a manually (non-matched) transaction and ti an imported one
-  if (sm.isMatched() || (!allowImportedTransactions && tm.isImported()))
+  // verify, that tm is a manual (non-matched) transaction
+  // allow matching two manual transactions
+
+  if ((!allowImportedTransactions && tm.isImported()) || sm.isMatched())
     throw MYMONEYEXCEPTION(i18n("First transaction does not match requirement for matching"));
-  if (!ti.isImported())
-    throw MYMONEYEXCEPTION(i18n("Second transaction does not match requirement for matching"));
 
   // verify that the amounts are the same, otherwise we should not be matching!
   if (sm.shares() != si.shares()) {
     throw MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)", m_account.name(), MyMoneyUtils::formatMoney(sm.shares(), m_account, sec), MyMoneyUtils::formatMoney(si.shares(), m_account, sec)));
+  }
+
+  // check that dates are within user's setting
+  if (abs(tm.postDate().toJulianDay() - ti.postDate().toJulianDay()) > KMyMoneyGlobalSettings::matchInterval()) {
+    int rc = KMessageBox::questionYesNo(0, i18n("<center>The transaction post-dates are not within the 'matchInterval' setting.</center>"
+                                              "<center>If you wish to continue with this matching, click 'Yes'.</center>"));
+    if (rc == KMessageBox::No) {
+      return;
+    }
   }
 
   // ipwizard: I took over the code to keep the bank id found in the endMatchTransaction
@@ -82,14 +93,15 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
       if (sm.bankID().isEmpty()) {
         sm.setBankID(bankID);
         tm.modifySplit(sm);
-      } else if (sm.bankID() != bankID) {
-        throw MYMONEYEXCEPTION(i18n("Both of these transactions have been imported into %1.  Therefore they cannot be matched.  Matching works with one imported transaction and one non-imported transaction.", m_account.name()));
       }
     } catch (const MyMoneyException &e) {
       QString estr = e.what();
       throw MYMONEYEXCEPTION(i18n("Unable to match all splits (%1)", estr));
     }
   }
+  //
+  //  we now allow matching of two non-imported transactions
+  //
 
   // mark the split as cleared if it does not have a reconciliation information yet
   if (sm.reconcileFlag() == MyMoneySplit::NotReconciled) {
@@ -125,6 +137,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
   sm.addMatch(ti);
   tm.modifySplit(sm);
 
+  ti.modifySplit(si);///
   MyMoneyFile::instance()->modifyTransaction(tm);
   // Delete the end transaction if it was stored in the engine
   if (!ti.id().isEmpty())

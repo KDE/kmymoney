@@ -153,6 +153,9 @@ public:
   void addFinalWidget(const QWidget*);
 
   QString  m_memoText;
+  QString  m_scheduleInfo;
+
+  MyMoneySchedule::paymentTypeE m_paymentMethod;
 
 public slots:
   void slotReloadEditWidgets(void);
