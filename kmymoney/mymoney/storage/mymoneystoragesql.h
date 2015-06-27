@@ -363,6 +363,7 @@ private:
   void writeFileInfo(void);
   void writeReports(void);
   void writeBudgets(void);
+  void writeOnlineJobs();
 
   /**
    * @name writeMethods

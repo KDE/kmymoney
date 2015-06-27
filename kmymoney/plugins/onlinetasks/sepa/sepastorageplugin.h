@@ -26,6 +26,7 @@
 class sepaStoragePlugin : public KMyMoneyPlugin::storagePlugin
 {
   Q_OBJECT
+  Q_INTERFACES(KMyMoneyPlugin::storagePlugin)
 
 public:
   sepaStoragePlugin(QObject* parent = 0, const QVariantList& options = QVariantList());

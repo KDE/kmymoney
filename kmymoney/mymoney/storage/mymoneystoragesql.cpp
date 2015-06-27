@@ -870,6 +870,7 @@ bool MyMoneyStorageSql::writeFile()
     writeCurrencies();
     writeReports();
     writeBudgets();
+    writeOnlineJobs();
     writeFileInfo();
     // this seems to be nonsense, but it clears the dirty flag
     // as a side-effect.
@@ -2562,8 +2563,10 @@ void MyMoneyStorageSql::writeBudgets()
   QSqlQuery q(*this);
   QSqlQuery q2(*this);
   q.prepare("SELECT name FROM kmmBudgetConfig;");
-  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "building Budget list")); // krazy:exclude=crashy
-  while (q.next()) dbList.append(q.value(0).toString());
+  if (!q.exec())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "building Budget list")); // krazy:exclude=crashy
+  while (q.next())
+    dbList.append(q.value(0).toString());
 
   QList<MyMoneyBudget> list = m_storage->budgetList();
   signalProgress(0, list.count(), "Writing Budgets...");
@@ -2588,7 +2591,8 @@ void MyMoneyStorageSql::writeBudgets()
     }
 
     q.bindValue(":name", idList);
-    if (!q.execBatch()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Budget"));
+    if (!q.execBatch())
+      throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Budget"));
   }
 }
 
@@ -2636,7 +2640,8 @@ void MyMoneyStorageSql::writeBudget(const MyMoneyBudget& bud, QSqlQuery& q)
   q.bindValue(":name", bud.name());
   q.bindValue(":start", bud.budgetStart());
   q.bindValue(":XML", d.toString());
-  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Budgets"))); // krazy:exclude=crashy
+  if (!q.exec())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Budgets"))); // krazy:exclude=crashy
 }
 
 bool MyMoneyStorageSql::setupStoragePlugin(QString iid)
@@ -2752,6 +2757,35 @@ void MyMoneyStorageSql::writeOnlineJob(const onlineJob& job, QSqlQuery& query)
     default: query.bindValue(":state", QLatin1String("noBankAnswer"));
   }
   query.bindValue(":locked", QVariant::fromValue<QString>(job.isLocked() ? QLatin1String("Y") : QLatin1String("N")));
+}
+
+void MyMoneyStorageSql::writeOnlineJobs()
+{
+  QSqlQuery query(*this);
+  if(!query.exec("DELETE FROM kmmOnlineJobs;"))
+    throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QLatin1String("Clean kmmOnlineJobs table")));
+
+  const QList<onlineJob> jobs(m_storage->onlineJobList());
+  signalProgress(0, jobs.count(), i18n("Inserting online jobs."));
+  // Create list for onlineJobs which failed and the reason therefor
+  QList<QPair<onlineJob, QString> > failedJobs;
+  int jobCount = 0;
+  foreach(const onlineJob& job, jobs) {
+    try {
+      addOnlineJob(job);
+    } catch (MyMoneyException& e) {
+      // Do not save e as this may point to an inherited class
+      failedJobs.append( QPair<onlineJob, QString>(job, e.what()) );
+      qDebug() << "Failed to save onlineJob" << job.id() << "Reson:" << e.what();
+    }
+
+    signalProgress(++jobCount, 0);
+  }
+
+  if (!failedJobs.isEmpty()) {
+    /** @todo Improve error message */
+    throw MYMONEYEXCEPTION(i18np("Could not save one onlineJob.", "Could not save %1 onlineJobs.", failedJobs.count()));
+  }
 }
 
 void MyMoneyStorageSql::removeOnlineJob(const onlineJob& job)
