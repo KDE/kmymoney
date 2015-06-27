@@ -72,6 +72,9 @@ MyMoneyPayee payeeIdentifierModel::payeeByIndex(const QModelIndex& index) const
 
 QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 {
+  if (!index.isValid())
+    return QVariant();
+
   const bool isPayeeIdentifier = index.parent().isValid();
   if (role == payeeIdentifierModel::isPayeeIdentifier)
     return isPayeeIdentifier;
@@ -105,10 +108,14 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
 
 Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex &index) const
 {
+  Q_UNUSED(index)
+#if 0
   if (!index.parent().isValid()) {
     if (payeeByIndex(index).payeeIdentifierCount() > 0)
       return Qt::ItemIsEnabled;
   }
+#endif
+
   return (Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 }
 

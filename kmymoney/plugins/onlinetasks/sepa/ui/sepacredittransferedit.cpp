@@ -40,6 +40,8 @@
 
 class ibanBicCompleterDelegate : public StyledItemDelegateForwarder
 {
+  Q_OBJECT
+
 public:
   ibanBicCompleterDelegate(QObject *parent)
     : StyledItemDelegateForwarder(parent)
@@ -74,22 +76,125 @@ protected:
   }
 };
 
+class payeeIdentifierCompleterPopup : public QTreeView
+{
+  Q_OBJECT
+
+public:
+  payeeIdentifierCompleterPopup(QWidget* parent = 0)
+    : QTreeView(parent)
+  {
+    setRootIsDecorated(false);
+    setAlternatingRowColors(true);
+    setAnimated(true);
+    setHeaderHidden(true);
+    setUniformRowHeights(false);
+    expandAll();
+  }
+};
+
 class ibanBicFilterProxyModel : public QSortFilterProxyModel
 {
+  Q_OBJECT
+
 public:
-    ibanBicFilterProxyModel(QObject* parent = 0)
-      : QSortFilterProxyModel(parent)
-    {}
+  enum roles {
+    payeeIban = payeeIdentifierModel::payeeIdentifierUserRole, /**< electornic IBAN of payee */
+  };
 
-    virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
-    {
-      if (!source_parent.isValid())
-        return true;
+  ibanBicFilterProxyModel(QObject* parent = 0)
+    : QSortFilterProxyModel(parent)
+  {}
 
-      QModelIndex index = source_parent.model()->index(source_row, 0, source_parent);
-      return (source_parent.model()->data(index, payeeIdentifierModel::payeeIdentifierType).toString() == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
+  virtual QVariant data(const QModelIndex &index, int role) const
+  {
+    if (role == payeeIban) {
+      if (!index.isValid())
+        return QVariant();
+
+      try {
+        payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
+              index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
+              );
+        return iban->electronicIban();
+      } catch (payeeIdentifier::exception&) {
+        return QVariant();
+      }
     }
+
+    return QSortFilterProxyModel::data(index, role);
+  }
+
+  virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
+  {
+    if (!source_parent.isValid())
+      return true;
+
+    QModelIndex index = source_parent.model()->index(source_row, 0, source_parent);
+    return (source_parent.model()->data(index, payeeIdentifierModel::payeeIdentifierType).toString() == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
+  }
 };
+
+class ibanBicCompleter : public QCompleter
+{
+  Q_OBJECT
+
+public:
+  ibanBicCompleter(QObject* parent = 0);
+
+Q_SIGNALS:
+  void activatedName(const QString& name) const;
+  void highlightedName(const QString& name) const;
+
+  void activatedBic(const QString& bic) const;
+  void highlightedBic(const QString& bic) const;
+
+  void activatedIban(const QString& iban) const;
+  void highlightedIban(const QString& iban) const;
+
+private Q_SLOTS:
+  void slotActivated(const QModelIndex& index) const;
+  void slotHighlighted(const QModelIndex& index) const;
+};
+
+ibanBicCompleter::ibanBicCompleter(QObject *parent)
+  : QCompleter(parent)
+{
+  connect(this, SIGNAL(activated(QModelIndex)), SLOT(slotActivated(QModelIndex)));
+  connect(this, SIGNAL(highlighted(QModelIndex)), SLOT(slotHighlighted(QModelIndex)));
+}
+
+void ibanBicCompleter::slotActivated(const QModelIndex &index) const
+{
+  if (!index.isValid())
+    return;
+
+  emit activatedName(index.model()->data(index, payeeIdentifierModel::payeeName).toString());
+  try {
+    payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
+          index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
+          );
+    emit activatedIban(iban->electronicIban());
+    emit activatedBic(iban->storedBic());
+  } catch (payeeIdentifier::exception&) {
+  }
+}
+
+void ibanBicCompleter::slotHighlighted(const QModelIndex &index) const
+{
+  if (!index.isValid())
+    return;
+
+  emit highlightedName(index.model()->data(index, payeeIdentifierModel::payeeName).toString());
+  try {
+    payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
+          index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
+          );
+    emit highlightedIban(iban->electronicIban());
+    emit highlightedBic(iban->storedBic());
+  } catch (payeeIdentifier::exception&) {
+  }
+}
 
 sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList args) :
     IonlineJobEdit(parent, args),
@@ -131,10 +236,7 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
   connect(this, SIGNAL(readOnlyChanged(bool)), ui->sepaReference, SLOT(setReadOnly(bool)));
   connect(this, SIGNAL(readOnlyChanged(bool)), ui->purpose, SLOT(setReadOnly(bool)));
 
-  // Create and set completer
-  QCompleter* completer = new QCompleter(this);
-  QTreeView* itemView = new QTreeView(this);
-
+  // Create models for completers
   payeeIdentifierModel* identModel = new payeeIdentifierModel(this);
   identModel->setTypeFilter(payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
 
@@ -144,22 +246,43 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
   KDescendantsProxyModel* descendantsModel = new KDescendantsProxyModel(this);
   descendantsModel->setSourceModel(filterModel);
 
-  completer->setModel(descendantsModel);
-  completer->setCompletionRole(payeeIdentifierModel::payeeName);
-  completer->setCaseSensitivity(Qt::CaseInsensitive);
+  // Set completers popup and bind them to the corresponding fields
+  {
+    // Beneficiary name field
+    ibanBicCompleter* completer = new ibanBicCompleter(this);
+    completer->setModel(descendantsModel);
+    completer->setCompletionRole(payeeIdentifierModel::payeeName);
+    completer->setCaseSensitivity(Qt::CaseInsensitive);
 
-  ui->beneficiaryName->setCompleter(completer);
-  completer->setPopup(itemView);
+    connect(completer, SIGNAL(activatedIban(QString)), ui->beneficiaryIban, SLOT(setText(QString)));
+    connect(completer, SIGNAL(activatedBic(QString)), ui->beneficiaryBankCode, SLOT(setText(QString)));
 
-  // setPopup() seems to reset the delegate
-  itemView->setItemDelegate(new ibanBicCompleterDelegate(itemView));
+    ui->beneficiaryName->setCompleter(completer);
 
-  itemView->setRootIsDecorated(false);
-  itemView->setAlternatingRowColors(true);
-  itemView->setAnimated(true);
-  itemView->setHeaderHidden(true);
-  itemView->setUniformRowHeights(false);
-  itemView->expandAll();
+    QAbstractItemView *itemView = new payeeIdentifierCompleterPopup();
+    completer->setPopup(itemView);
+
+    // setPopup() resets the delegate
+    itemView->setItemDelegate(new ibanBicCompleterDelegate(this));
+  }
+  {
+    // IBAN field
+    ibanBicCompleter* ibanCompleter = new ibanBicCompleter(this);
+    ibanCompleter->setModel(descendantsModel);
+    ibanCompleter->setCompletionRole(ibanBicFilterProxyModel::payeeIban);
+    ibanCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+
+    connect(ibanCompleter, SIGNAL(activatedName(QString)), ui->beneficiaryName, SLOT(setText(QString)));
+    connect(ibanCompleter, SIGNAL(activatedBic(QString)), ui->beneficiaryBankCode, SLOT(setText(QString)));
+
+    ui->beneficiaryIban->setCompleter(ibanCompleter);
+
+    QAbstractItemView *itemView = new payeeIdentifierCompleterPopup();
+    ibanCompleter->setPopup(itemView);
+
+    // setPopup() resets the delegate
+    itemView->setItemDelegate(new ibanBicCompleterDelegate(this));
+  }
 }
 
 sepaCreditTransferEdit::~sepaCreditTransferEdit()
@@ -412,3 +535,5 @@ QSharedPointer< const sepaOnlineTransfer::settings > sepaCreditTransferEdit::tas
 {
   return getOnlineJobTyped().constTask()->getSettings();
 }
+
+#include "sepacredittransferedit.moc"
