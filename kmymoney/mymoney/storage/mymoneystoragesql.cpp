@@ -1089,44 +1089,41 @@ void MyMoneyStorageSql::writeInstitutionList(const QList<MyMoneyInstitution>& iL
   m_hiIdInstitutions = 0;
 }
 
-// **** Payees ****
 void MyMoneyStorageSql::writePayees()
 {
   DBG("*** Entering MyMoneyStorageSql::writePayees");
   // first, get a list of what's on the database (see writeInstitutions)
-  QList<QString> dbList;
+
   QSqlQuery q(*this);
   q.prepare("SELECT id FROM kmmPayees;");
-  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "building Payee list")); // krazy:exclude=crashy
-  while (q.next()) dbList.append(q.value(0).toString());
+  if (!q.exec())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "building Payee list")); // krazy:exclude=crashy
+
+  QList<QString> dbList;
+  dbList.reserve(q.numRowsAffected());
+  while (q.next())
+    dbList.append(q.value(0).toString());
 
   QList<MyMoneyPayee> list = m_storage->payeeList();
   MyMoneyPayee user(QString("USER"), m_storage->user());
   list.prepend(user);
   signalProgress(0, list.count(), "Writing Payees...");
-  QSqlQuery q2(*this);
-  q.prepare(m_db.m_tables["kmmPayees"].updateString());
-  q2.prepare(m_db.m_tables["kmmPayees"].insertString());
-  foreach (const MyMoneyPayee& it, list) {
+
+  Q_FOREACH (const MyMoneyPayee& it, list) {
     if (dbList.contains(it.id())) {
       dbList.removeAll(it.id());
-      writePayee(it, q);
+      modifyPayee(it);
     } else {
-      writePayee(it, q2);
+      addPayee(it);
     }
     signalProgress(++m_payees, 0);
   }
 
   if (!dbList.isEmpty()) {
-    QVariantList deleteList;
-    // qCopy segfaults here, so do it with a hand-rolled loop
-    foreach (const QString& it, dbList) {
-      deleteList << it;
+    QMap<QString, MyMoneyPayee> payeesToDelete = fetchPayees(dbList, true);
+    Q_FOREACH (const MyMoneyPayee& payee, payeesToDelete) {
+      removePayee(payee);
     }
-    q.prepare(m_db.m_tables["kmmPayees"].deleteString());
-    q.bindValue(":id", deleteList);
-    if (!q.execBatch()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Payee"));
-    m_payees -= q.numRowsAffected();
   }
 }
 
@@ -1800,7 +1797,8 @@ void MyMoneyStorageSql::deleteTransaction(const QString& id)
   deleteKeyValuePairs("TRANSACTION", idList);
   q.prepare(m_db.m_tables["kmmTransactions"].deleteString());
   q.bindValue(":id", idList);
-  if (!q.execBatch()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Transaction"));
+  if (!q.execBatch())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, "deleting Transaction"));
 }
 
 void MyMoneyStorageSql::writeTransaction(const QString& txId, const MyMoneyTransaction& tx, QSqlQuery& q, const QString& type)
@@ -1814,7 +1812,8 @@ void MyMoneyStorageSql::writeTransaction(const QString& txId, const MyMoneyTrans
   q.bindValue(":currencyId", tx.commodity());
   q.bindValue(":bankId", tx.bankID());
 
-  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Transaction"))); // krazy:exclude=crashy
+  if (!q.exec())
+    throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Transaction"))); // krazy:exclude=crashy
 
   m_txPostDate = tx.postDate(); // FIXME: TEMP till Tom puts date in split object
   QList<MyMoneySplit> splitList = tx.splits();
