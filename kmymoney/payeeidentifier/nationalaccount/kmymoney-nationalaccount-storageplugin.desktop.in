@@ -4,8 +4,8 @@ ServiceTypes=KMyMoney/sqlStoragePlugin
 
 X-KMyMoney-PluginIid=org.kmymoney.payeeIdentifier.nationalAccount.sqlStoragePlugin
 
-Name=nationalaccount_ibanbic_storageplugin
-X-KDE-Library=nationalaccount_ibanbic_storageplugin
+Name=payeeidentifier_nationalaccount_storageplugin
+X-KDE-Library=payeeidentifier_nationalaccount_storageplugin
 
 X-KDE-PluginInfo-Author=Christian David
 X-KDE-PluginInfo-Email=christian-david@web.de

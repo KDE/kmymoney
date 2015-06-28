@@ -31,17 +31,17 @@ set ( nationalAccount_STORAGE_PLUGIN_SCRS
   nationalaccountstorageplugin.cpp
 )
 
-kde4_add_plugin( nationalaccount_ibanbic_storageplugin
+kde4_add_plugin( payeeidentifier_nationalaccount_storageplugin
   ${nationalAccount_STORAGE_PLUGIN_SCRS}
 )
 
-target_link_libraries( nationalaccount_ibanbic_storageplugin
+target_link_libraries( payeeidentifier_nationalaccount_storageplugin
   ${QT_QTCORE_LIBRARY}
   ${QT_QTSQL_LIBRARY}
   kmm_mymoney
 )
 
-install(TARGETS nationalaccount_ibanbic_storageplugin
+install(TARGETS payeeidentifier_nationalaccount_storageplugin
   DESTINATION ${PLUGIN_INSTALL_DIR})
 
 install(FILES
