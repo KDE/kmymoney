@@ -72,6 +72,7 @@ void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
     payeeIdentifierContainerModel* model = new payeeIdentifierContainerModel(ui->view);
     connect(kmymoney, SIGNAL(fileLoaded(KUrl)), model, SLOT(closeSource()));
     connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SIGNAL(dataChanged()));
+    connect(model, SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SIGNAL(dataChanged()));
     ui->view->setModel(model);
   }
 
