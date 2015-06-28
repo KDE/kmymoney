@@ -37,7 +37,7 @@ payeeIdentifierDelegate::payeeIdentifierDelegate(QObject* parent)
 
 QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelIndex& index) const
 {
-  static QAbstractItemDelegate* defaultDelegate = 0;
+  static QPointer<QAbstractItemDelegate> defaultDelegate = 0;
   const QString type = (index.isValid()) ? index.model()->data(index, payeeIdentifierContainerModel::payeeIdentifierType).toString() : QString();
 
   if (type.isEmpty()) {
