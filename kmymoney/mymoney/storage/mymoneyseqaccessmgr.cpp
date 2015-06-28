@@ -102,7 +102,7 @@ MyMoneySeqAccessMgr::~MyMoneySeqAccessMgr()
 {
 }
 
-MyMoneySeqAccessMgr const * MyMoneySeqAccessMgr::duplicate(void)
+MyMoneySeqAccessMgr const * MyMoneySeqAccessMgr::duplicate()
 {
   MyMoneySeqAccessMgr* that = new MyMoneySeqAccessMgr();
   *that = *this;
@@ -281,7 +281,7 @@ void MyMoneySeqAccessMgr::removePayee(const MyMoneyPayee& payee)
   m_payeeList.remove((*it_p).id());
 }
 
-const QList<MyMoneyPayee> MyMoneySeqAccessMgr::payeeList(void) const
+const QList<MyMoneyPayee> MyMoneySeqAccessMgr::payeeList() const
 {
   return m_payeeList.values();
 }
@@ -364,7 +364,7 @@ void MyMoneySeqAccessMgr::removeTag(const MyMoneyTag& tag)
   m_tagList.remove((*it_ta).id());
 }
 
-const QList<MyMoneyTag> MyMoneySeqAccessMgr::tagList(void) const
+const QList<MyMoneyTag> MyMoneySeqAccessMgr::tagList() const
 {
   return m_tagList.values();
 }
@@ -445,7 +445,7 @@ unsigned int MyMoneySeqAccessMgr::transactionCount(const QString& account) const
   return cnt;
 }
 
-const QMap<QString, unsigned long> MyMoneySeqAccessMgr::transactionCountMap(void) const
+const QMap<QString, unsigned long> MyMoneySeqAccessMgr::transactionCountMap() const
 {
   QMap<QString, unsigned long> map;
   QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
@@ -461,17 +461,17 @@ const QMap<QString, unsigned long> MyMoneySeqAccessMgr::transactionCountMap(void
   return map;
 }
 
-unsigned int MyMoneySeqAccessMgr::institutionCount(void) const
+unsigned int MyMoneySeqAccessMgr::institutionCount() const
 {
   return m_institutionList.count();
 }
 
-unsigned int MyMoneySeqAccessMgr::accountCount(void) const
+unsigned int MyMoneySeqAccessMgr::accountCount() const
 {
   return m_accountList.count();
 }
 
-QString MyMoneySeqAccessMgr::nextPayeeID(void)
+QString MyMoneySeqAccessMgr::nextPayeeID()
 {
   QString id;
   id.setNum(++m_nextPayeeID);
@@ -479,7 +479,7 @@ QString MyMoneySeqAccessMgr::nextPayeeID(void)
   return id;
 }
 
-QString MyMoneySeqAccessMgr::nextTagID(void)
+QString MyMoneySeqAccessMgr::nextTagID()
 {
   QString id;
   id.setNum(++m_nextTagID);
@@ -487,7 +487,7 @@ QString MyMoneySeqAccessMgr::nextTagID(void)
   return id;
 }
 
-QString MyMoneySeqAccessMgr::nextInstitutionID(void)
+QString MyMoneySeqAccessMgr::nextInstitutionID()
 {
   QString id;
   id.setNum(++m_nextInstitutionID);
@@ -495,7 +495,7 @@ QString MyMoneySeqAccessMgr::nextInstitutionID(void)
   return id;
 }
 
-QString MyMoneySeqAccessMgr::nextAccountID(void)
+QString MyMoneySeqAccessMgr::nextAccountID()
 {
   QString id;
   id.setNum(++m_nextAccountID);
@@ -503,7 +503,7 @@ QString MyMoneySeqAccessMgr::nextAccountID(void)
   return id;
 }
 
-QString MyMoneySeqAccessMgr::nextTransactionID(void)
+QString MyMoneySeqAccessMgr::nextTransactionID()
 {
   QString id;
   id.setNum(++m_nextTransactionID);
@@ -511,7 +511,7 @@ QString MyMoneySeqAccessMgr::nextTransactionID(void)
   return id;
 }
 
-QString MyMoneySeqAccessMgr::nextScheduleID(void)
+QString MyMoneySeqAccessMgr::nextScheduleID()
 {
   QString id;
   id.setNum(++m_nextScheduleID);
@@ -519,7 +519,7 @@ QString MyMoneySeqAccessMgr::nextScheduleID(void)
   return id;
 }
 
-QString MyMoneySeqAccessMgr::nextSecurityID(void)
+QString MyMoneySeqAccessMgr::nextSecurityID()
 {
   QString id;
   id.setNum(++m_nextSecurityID);
@@ -527,7 +527,7 @@ QString MyMoneySeqAccessMgr::nextSecurityID(void)
   return id;
 }
 
-QString MyMoneySeqAccessMgr::nextOnlineJobID(void)
+QString MyMoneySeqAccessMgr::nextOnlineJobID()
 {
   QString id;
   id.setNum(++m_nextOnlineJobID);
@@ -590,7 +590,7 @@ void MyMoneySeqAccessMgr::adjustBalance(MyMoneyAccount& acc, const MyMoneySplit&
   }
 }
 
-void MyMoneySeqAccessMgr::touch(void)
+void MyMoneySeqAccessMgr::touch()
 {
   m_dirty = true;
   m_lastModificationDate = QDate::currentDate();
@@ -618,7 +618,7 @@ const MyMoneyInstitution MyMoneySeqAccessMgr::institution(const QString& id) con
   throw MYMONEYEXCEPTION("unknown institution");
 }
 
-const QList<MyMoneyInstitution> MyMoneySeqAccessMgr::institutionList(void) const
+const QList<MyMoneyInstitution> MyMoneySeqAccessMgr::institutionList() const
 {
   return m_institutionList.values();
 }
@@ -1290,7 +1290,7 @@ void MyMoneySeqAccessMgr::deletePair(const QString& key)
   touch();
 }
 
-const QMap<QString, QString> MyMoneySeqAccessMgr::pairs(void) const
+const QMap<QString, QString> MyMoneySeqAccessMgr::pairs() const
 {
   return MyMoneyKeyValueContainer::pairs();
 }
@@ -1552,7 +1552,7 @@ const MyMoneySecurity MyMoneySeqAccessMgr::security(const QString& id) const
   return MyMoneySecurity();
 }
 
-const QList<MyMoneySecurity> MyMoneySeqAccessMgr::securityList(void) const
+const QList<MyMoneySecurity> MyMoneySeqAccessMgr::securityList() const
 {
   //qDebug("securityList: Security list size is %d, this=%8p", m_equitiesList.size(), (void*)this);
   return m_securitiesList.values();
@@ -1611,12 +1611,12 @@ const MyMoneySecurity MyMoneySeqAccessMgr::currency(const QString& id) const
   return *it;
 }
 
-const QList<MyMoneySecurity> MyMoneySeqAccessMgr::currencyList(void) const
+const QList<MyMoneySecurity> MyMoneySeqAccessMgr::currencyList() const
 {
   return m_currencyList.values();
 }
 
-const QList<MyMoneyReport> MyMoneySeqAccessMgr::reportList(void) const
+const QList<MyMoneyReport> MyMoneySeqAccessMgr::reportList() const
 {
   return m_reportList.values();
 }
@@ -1661,7 +1661,7 @@ void MyMoneySeqAccessMgr::modifyReport(const MyMoneyReport& report)
   m_reportList.modify(report.id(), report);
 }
 
-QString MyMoneySeqAccessMgr::nextReportID(void)
+QString MyMoneySeqAccessMgr::nextReportID()
 {
   QString id;
   id.setNum(++m_nextReportID);
@@ -1669,7 +1669,7 @@ QString MyMoneySeqAccessMgr::nextReportID(void)
   return id;
 }
 
-unsigned MyMoneySeqAccessMgr::countReports(void) const
+unsigned MyMoneySeqAccessMgr::countReports() const
 {
   return m_reportList.count();
 }
@@ -1692,7 +1692,7 @@ void MyMoneySeqAccessMgr::removeReport(const MyMoneyReport& report)
   m_reportList.remove(report.id());
 }
 
-const QList<MyMoneyBudget> MyMoneySeqAccessMgr::budgetList(void) const
+const QList<MyMoneyBudget> MyMoneySeqAccessMgr::budgetList() const
 {
   return m_budgetList.values();
 }
@@ -1748,7 +1748,7 @@ void MyMoneySeqAccessMgr::modifyBudget(const MyMoneyBudget& budget)
   m_budgetList.modify(budget.id(), budget);
 }
 
-QString MyMoneySeqAccessMgr::nextBudgetID(void)
+QString MyMoneySeqAccessMgr::nextBudgetID()
 {
   QString id;
   id.setNum(++m_nextBudgetID);
@@ -1756,7 +1756,7 @@ QString MyMoneySeqAccessMgr::nextBudgetID(void)
   return id;
 }
 
-unsigned MyMoneySeqAccessMgr::countBudgets(void) const
+unsigned MyMoneySeqAccessMgr::countBudgets() const
 {
   return m_budgetList.count();
 }
@@ -1834,7 +1834,7 @@ void MyMoneySeqAccessMgr::removePrice(const MyMoneyPrice& price)
   }
 }
 
-const MyMoneyPriceList MyMoneySeqAccessMgr::priceList(void) const
+const MyMoneyPriceList MyMoneySeqAccessMgr::priceList() const
 {
   MyMoneyPriceList list;
   m_priceList.map(list);
@@ -1868,7 +1868,7 @@ MyMoneyPrice MyMoneySeqAccessMgr::price(const QString& fromId, const QString& to
   return MyMoneyPrice();
 }
 
-void MyMoneySeqAccessMgr::rebuildAccountBalances(void)
+void MyMoneySeqAccessMgr::rebuildAccountBalances()
 {
   // reset the balance of all accounts to 0
   QMap<QString, MyMoneyAccount> map;
@@ -1981,7 +1981,7 @@ bool MyMoneySeqAccessMgr::isReferenced(const MyMoneyObject& obj, const MyMoneyFi
   return rc;
 }
 
-void MyMoneySeqAccessMgr::startTransaction(void)
+void MyMoneySeqAccessMgr::startTransaction()
 {
   m_payeeList.startTransaction(&m_nextPayeeID);
   m_tagList.startTransaction(&m_nextTagID);
@@ -1998,7 +1998,7 @@ void MyMoneySeqAccessMgr::startTransaction(void)
   m_onlineJobList.startTransaction(&m_nextOnlineJobID);
 }
 
-bool MyMoneySeqAccessMgr::commitTransaction(void)
+bool MyMoneySeqAccessMgr::commitTransaction()
 {
   bool rc = false;
   rc |= m_payeeList.commitTransaction();
@@ -2022,7 +2022,7 @@ bool MyMoneySeqAccessMgr::commitTransaction(void)
   return rc;
 }
 
-void MyMoneySeqAccessMgr::rollbackTransaction(void)
+void MyMoneySeqAccessMgr::rollbackTransaction()
 {
   m_payeeList.rollbackTransaction();
   m_tagList.rollbackTransaction();

@@ -93,7 +93,7 @@ public:
     *
     * @return QString containing the id of the selected account
     */
-  const QString& selectedAccount(void) const;
+  const QString& selectedAccount() const;
 
   /**
     * This method is used to set the mode of the dialog. Two modes
@@ -121,7 +121,7 @@ public:
     * @retval false Dialog was left using the 'Skip' button
     * @retval true Dialog was left using the 'Abort' button
     */
-  bool aborted(void) const {
+  bool aborted() const {
     return m_aborted;
   };
 
@@ -137,22 +137,22 @@ protected slots:
     * with the values found in m_account. If an account was created using
     * the wizard, this will be the selected account.
     */
-  void slotCreateAccount(void);
+  void slotCreateAccount();
 
   /**
     * This slot is used to fire up the new institution dialog
     */
-  void slotCreateInstitution(void);
+  void slotCreateInstitution();
 
   /**
     * This slot is used to react on the abort button
     */
-  void abort(void);
+  void abort();
 
   /**
     * This is the slot which will be called if the engine data is changed.
     */
-  void slotReloadWidget(void);
+  void slotReloadWidget();
 
 private:
   QString         m_purpose;

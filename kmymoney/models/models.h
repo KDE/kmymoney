@@ -77,13 +77,13 @@ public slots:
     * This slot is used to notify the models that the data has been loaded and ready to use.
     * @ref MyMoneyFile.
     */
-  void fileOpened(void);
+  void fileOpened();
 
   /**
     * This slot is used to notify the models that the data has been unloaded.
     * @ref MyMoneyFile.
     */
-  void fileClosed(void);
+  void fileClosed();
 
 private:
 

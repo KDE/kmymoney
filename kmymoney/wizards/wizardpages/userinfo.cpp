@@ -38,7 +38,7 @@ UserInfo::UserInfo(QWidget* parent) :
   m_userNameEdit->setFocus();
 }
 
-MyMoneyPayee UserInfo::user(void) const
+MyMoneyPayee UserInfo::user() const
 {
   MyMoneyPayee user;
   user.setName(m_userNameEdit->text());

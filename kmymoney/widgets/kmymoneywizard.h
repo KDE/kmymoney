@@ -102,8 +102,8 @@ class kMandatoryFieldGroup;
   *   Q_OBJECT
   * public:
   *   KNewUserGeneral(KNewUserWizard* parent, const char* name = 0);
-  *   KMyMoneyWizardPage* nextPage(void);
-  *   bool isLastPage(void) { return false; }
+  *   KMyMoneyWizardPage* nextPage();
+  *   bool isLastPage() { return false; }
   *
   * protected:
   *   KNewUserWizard*    m_wizard;
@@ -123,7 +123,7 @@ class kMandatoryFieldGroup;
   *   connect(m_mandatoryGroup, SIGNAL(stateChanged()), object(), SIGNAL(completeStateChanged()));
   * }
   *
-  * KMyMoneyWizardPage* KNewUserGeneral::nextPage(void)
+  * KMyMoneyWizardPage* KNewUserGeneral::nextPage()
   * {
   *   return m_wizard->m_personalPage;
   * }
@@ -145,20 +145,20 @@ public:
     * This method is called by the wizard when the page is entered from
     * the previous page. The default implementation does nothing.
     */
-  virtual void enterPage(void);
+  virtual void enterPage();
 
   /**
     * This method is called by the wizard when the page is left to return to
     * the previous page. The default implementation does nothing.
     */
-  virtual void leavePage(void);
+  virtual void leavePage();
 
   /**
     * This method is called by the wizard whenever a page is entered
     * (either in forward or backward direction). The default
     * implementation does nothing.
     */
-  virtual void resetPage(void);
+  virtual void resetPage();
 
   /**
     * This method returns a pointer to the next page that should be
@@ -166,7 +166,7 @@ public:
     *
     * @return pointer to next wizard page
     */
-  virtual KMyMoneyWizardPage* nextPage(void) const;
+  virtual KMyMoneyWizardPage* nextPage() const;
 
   /**
     * This returns, if the current page is the last page of the wizard.
@@ -176,7 +176,7 @@ public:
     * @retval false more pages follow
     * @retval true this is the last page of the wizard
     */
-  virtual bool isLastPage(void) const;
+  virtual bool isLastPage() const;
 
   /**
     * This returns, if all necessary data for this page has been
@@ -187,7 +187,7 @@ public:
     * @retval false more data required from the user before we can proceed
     * @retval true all data available, we allow to switch to the next page
     */
-  virtual bool isComplete(void) const;
+  virtual bool isComplete() const;
 
   /**
     * This method returns the step to which this page belongs.
@@ -196,7 +196,7 @@ public:
     *
     * @return step of wizard this page belongs to
     */
-  unsigned int step(void) const {
+  unsigned int step() const {
     return m_step;
   }
 
@@ -207,7 +207,7 @@ public:
     *
     * @return pointer to widget of page
     */
-  QWidget* widget(void) const {
+  QWidget* widget() const {
     return m_widget;
   }
 
@@ -218,7 +218,7 @@ public:
     * by application code for signal/slot connections as well.
     * Other use is not foreseen.
     */
-  QObject* object(void) const;
+  QObject* object() const;
 
   /**
     * This method returns a pointer to the widget which should
@@ -227,17 +227,17 @@ public:
     * @return pointer to widget or 0 if none is to be selected
     *         The default implementation returns 0
     */
-  virtual QWidget* initialFocusWidget(void) const {
+  virtual QWidget* initialFocusWidget() const {
     return 0;
   }
 
-  virtual KMyMoneyWizard* wizard(void) const = 0;
+  virtual KMyMoneyWizard* wizard() const = 0;
 
   /**
    * This method returns a specific help context for the page shown
    * The default returns an empty string.
    */
-  virtual QString helpContext(void) const;
+  virtual QString helpContext() const;
 
   virtual ~KMyMoneyWizardPage() {}
 protected:
@@ -254,7 +254,7 @@ protected:
     * @note If you do not override isComplete() then there is no need
     * to call this method.
     */
-  void completeStateChanged(void) const;
+  void completeStateChanged() const;
 
 protected:
   kMandatoryFieldGroup* m_mandatoryGroup;
@@ -281,7 +281,7 @@ public:
       m_wizardBase(parent) {
   }
   virtual ~WizardPage() {}
-  virtual KMyMoneyWizard* wizard(void) const {
+  virtual KMyMoneyWizard* wizard() const {
     return m_wizardBase;
   }
 
@@ -411,7 +411,7 @@ public:
     */
   void addStep(const QString& text);
 
-  QList<KMyMoneyWizardPage*> historyPages(void) const {
+  QList<KMyMoneyWizardPage*> historyPages() const {
     return m_history;
   }
 
@@ -421,7 +421,7 @@ public:
     * This is used to allow changes made to showing and hiding
     * pages to immediately to be reflected in the step frame
     */
-  void reselectStep(void);
+  void reselectStep();
 
   /**
    * Setup a global help context for the wizard. It will be used whenever
@@ -476,16 +476,16 @@ protected:
   void setStepHidden(int step, bool hidden = true);
 
 protected slots:
-  virtual void accept(void);
-  void completeStateChanged(void);
+  virtual void accept();
+  void completeStateChanged();
 
 private:
-  void updateStepCount(void);
+  void updateStepCount();
 
 private slots:
-  void backButtonClicked(void);
-  void nextButtonClicked(void);
-  void helpButtonClicked(void);
+  void backButtonClicked();
+  void nextButtonClicked();
+  void helpButtonClicked();
 
 protected:
   /*

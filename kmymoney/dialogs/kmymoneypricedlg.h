@@ -60,11 +60,11 @@ private:
 
 protected slots:
   void slotSelectPrice();
-  void slotNewPrice(void);
-  void slotDeletePrice(void);
-  int slotEditPrice(void);
-  void slotLoadWidgets(void);
-  void slotOnlinePriceUpdate(void);
+  void slotNewPrice();
+  void slotDeletePrice();
+  int slotEditPrice();
+  void slotLoadWidgets();
+  void slotOnlinePriceUpdate();
   void slotOpenContextMenu(const QPoint& p);
 
 signals:

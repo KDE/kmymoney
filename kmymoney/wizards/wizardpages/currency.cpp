@@ -57,7 +57,7 @@ void Currency::selectCurrency(const MyMoneySecurity& sec)
 }
 
 
-QString Currency::selectedCurrency(void) const
+QString Currency::selectedCurrency() const
 {
   QString id;
 

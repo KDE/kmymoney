@@ -56,7 +56,7 @@ public:
   /**
     * reimplemented from kMyMoneyCompletion
     */
-  kMyMoneyAccountSelector* selector(void) const {
+  kMyMoneyAccountSelector* selector() const {
     return dynamic_cast<kMyMoneyAccountSelector*>(m_selector);
   }
 

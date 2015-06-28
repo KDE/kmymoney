@@ -103,14 +103,14 @@ void TransactionEditor::slotUpdateAccount(const QString& id)
   setupPrecision();
 }
 
-void TransactionEditor::slotUpdateAccount(void)
+void TransactionEditor::slotUpdateAccount()
 {
   // reload m_account as it might have been changed
   m_account = MyMoneyFile::instance()->account(m_account.id());
   setupPrecision();
 }
 
-void TransactionEditor::setupPrecision(void)
+void TransactionEditor::setupPrecision()
 {
   const int prec = (m_account.id().isEmpty()) ? 2 : MyMoneyMoney::denomToPrec(m_account.fraction());
   QStringList widgets = QString("amount,deposit,payment").split(',');
@@ -173,7 +173,7 @@ void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount
   slotUpdateButtonState();
 }
 
-void TransactionEditor::clearFinalWidgets(void)
+void TransactionEditor::clearFinalWidgets()
 {
   m_finalEditWidgets.clear();
 }
@@ -185,7 +185,7 @@ void TransactionEditor::addFinalWidget(const QWidget* w)
   }
 }
 
-void TransactionEditor::slotReloadEditWidgets(void)
+void TransactionEditor::slotReloadEditWidgets()
 {
 }
 
@@ -279,7 +279,7 @@ void TransactionEditor::slotNumberChanged(const QString& txt)
   }
 }
 
-void TransactionEditor::slotUpdateMemoState(void)
+void TransactionEditor::slotUpdateMemoState()
 {
   KTextEdit* memo = dynamic_cast<KTextEdit*>(m_editWidgets["memo"]);
   if (memo) {
@@ -287,7 +287,7 @@ void TransactionEditor::slotUpdateMemoState(void)
   }
 }
 
-void TransactionEditor::slotUpdateButtonState(void)
+void TransactionEditor::slotUpdateButtonState()
 {
   QString reason;
   emit transactionDataSufficient(isComplete(reason));
@@ -298,7 +298,7 @@ QWidget* TransactionEditor::haveWidget(const QString& name) const
   return m_editWidgets.haveWidget(name);
 }
 
-int TransactionEditor::slotEditSplits(void)
+int TransactionEditor::slotEditSplits()
 {
   return KDialog::Rejected;
 }
@@ -445,7 +445,7 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
   return rc;
 }
 
-void TransactionEditor::assignNextNumber(void)
+void TransactionEditor::assignNextNumber()
 {
   if (canAssignNumber()) {
     kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
@@ -476,7 +476,7 @@ void TransactionEditor::assignNextNumber(void)
   }
 }
 
-bool TransactionEditor::canAssignNumber(void) const
+bool TransactionEditor::canAssignNumber() const
 {
   kMyMoneyLineEdit* number = dynamic_cast<kMyMoneyLineEdit*>(haveWidget("number"));
   return (number != 0);
@@ -765,7 +765,7 @@ void TransactionEditor::keepNewNumber(const MyMoneyTransaction& tr)
   }
 }
 
-void TransactionEditor::resizeForm(void)
+void TransactionEditor::resizeForm()
 {
   // force resizeing of the columns in the form
   KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_regForm);
@@ -789,7 +789,7 @@ StdTransactionEditor::~StdTransactionEditor()
 }
 
 
-void StdTransactionEditor::createEditWidgets(void)
+void StdTransactionEditor::createEditWidgets()
 {
   // we only create the account widget in case it is needed
   // to avoid confusion in the tab order later on.
@@ -1189,7 +1189,7 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
   m_inUpdateVat = false;
 }
 
-QWidget* StdTransactionEditor::firstWidget(void) const
+QWidget* StdTransactionEditor::firstWidget() const
 {
   QWidget* w = 0;
   if (m_initialAction != KMyMoneyRegister::ActionNone) {
@@ -1198,7 +1198,7 @@ QWidget* StdTransactionEditor::firstWidget(void) const
   return w;
 }
 
-void StdTransactionEditor::slotReloadEditWidgets(void)
+void StdTransactionEditor::slotReloadEditWidgets()
 {
   // reload category widget
   KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(m_editWidgets["category"]);
@@ -1770,7 +1770,7 @@ bool StdTransactionEditor::addVatSplit(MyMoneyTransaction& tr, const MyMoneyMone
   return file->addVATSplit(tr, m_account, category, amount);
 }
 
-MyMoneyMoney StdTransactionEditor::removeVatSplit(void)
+MyMoneyMoney StdTransactionEditor::removeVatSplit()
 {
   // we only deal with splits that have three splits
   if (m_splits.count() != 2)
@@ -1928,7 +1928,7 @@ void StdTransactionEditor::slotCreateCategory(const QString& name, QString& id)
   id = acc.id();
 }
 
-int StdTransactionEditor::slotEditSplits(void)
+int StdTransactionEditor::slotEditSplits()
 {
   int rc = KDialog::Rejected;
 
@@ -2253,7 +2253,7 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   return true;
 }
 
-void StdTransactionEditor::setupFinalWidgets(void)
+void StdTransactionEditor::setupFinalWidgets()
 {
   addFinalWidget(haveWidget("deposit"));
   addFinalWidget(haveWidget("payment"));

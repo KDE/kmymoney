@@ -62,19 +62,19 @@ public:
   ~MyMoneySeqAccessMgr();
 
   // general get functions
-  const MyMoneyPayee& user(void) const {
+  const MyMoneyPayee& user() const {
     return m_user;
   };
-  const QDate creationDate(void) const {
+  const QDate creationDate() const {
     return m_creationDate;
   };
-  const QDate lastModificationDate(void) const {
+  const QDate lastModificationDate() const {
     return m_lastModificationDate;
   };
-  unsigned int currentFixVersion(void) const {
+  unsigned int currentFixVersion() const {
     return m_currentFixVersion;
   };
-  unsigned int fileFixVersion(void) const {
+  unsigned int fileFixVersion() const {
     return m_fileFixVersion;
   };
 
@@ -109,7 +109,7 @@ public:
     * a pointer to the newly created copy. The caller of this method is the
     * new owner of the object and must destroy it.
     */
-  MyMoneySeqAccessMgr const * duplicate(void);
+  MyMoneySeqAccessMgr const * duplicate();
 
   /**
     * Returns the account addressed by it's id.
@@ -216,7 +216,7 @@ public:
     *
     * @return QList<MyMoneyPayee> containing the payee information
     */
-  const QList<MyMoneyPayee> payeeList(void) const;
+  const QList<MyMoneyPayee> payeeList() const;
 
   /**
     * This method is used to create a new tag
@@ -272,7 +272,7 @@ public:
     *
     * @return QList<MyMoneyTag> containing the tag information
     */
-  const QList<MyMoneyTag> tagList(void) const;
+  const QList<MyMoneyTag> tagList() const;
 
   /**
     * This method is used to add one account as sub-ordinate to another
@@ -462,7 +462,7 @@ public:
     *
     * @return true if changed, false if not
     */
-  bool dirty(void) const {
+  bool dirty() const {
     return m_dirty;
   }
 
@@ -472,7 +472,7 @@ public:
     * to an external destination failed but the previous storage
     * to a local disk was ok.
     */
-  void setDirty(void) {
+  void setDirty() {
     m_dirty = true;
   };
 
@@ -482,7 +482,7 @@ public:
     *
     * @return QMap containing the institution information
     */
-  const QList<MyMoneyInstitution> institutionList(void) const;
+  const QList<MyMoneyInstitution> institutionList() const;
 
   /**
     * This method returns a list of accounts inside the storage object.
@@ -560,7 +560,7 @@ public:
     */
   unsigned int transactionCount(const QString& account = QString()) const;
 
-  const QMap<QString, unsigned long> transactionCountMap(void) const;
+  const QMap<QString, unsigned long> transactionCountMap() const;
 
   /**
     * This method returns the number of institutions currently known to file
@@ -568,7 +568,7 @@ public:
     *
     * @return number of institutions known to file
     */
-  unsigned int institutionCount(void) const;
+  unsigned int institutionCount() const;
 
   /**
     * This method returns the number of accounts currently known to file
@@ -576,13 +576,13 @@ public:
     *
     * @return number of accounts currently known inside a MyMoneyFile object
     */
-  unsigned int accountCount(void) const;
+  unsigned int accountCount() const;
 
   /**
     * This method is used to return the standard liability account
     * @return MyMoneyAccount liability account(group)
     */
-  const MyMoneyAccount liability(void) const {
+  const MyMoneyAccount liability() const {
     return account(STD_ACC_LIABILITY);
   };
 
@@ -590,7 +590,7 @@ public:
     * This method is used to return the standard asset account
     * @return MyMoneyAccount asset account(group)
     */
-  const MyMoneyAccount asset(void) const {
+  const MyMoneyAccount asset() const {
     return account(STD_ACC_ASSET);
   };
 
@@ -598,7 +598,7 @@ public:
     * This method is used to return the standard expense account
     * @return MyMoneyAccount expense account(group)
     */
-  const MyMoneyAccount expense(void) const {
+  const MyMoneyAccount expense() const {
     return account(STD_ACC_EXPENSE);
   };
 
@@ -606,7 +606,7 @@ public:
     * This method is used to return the standard income account
     * @return MyMoneyAccount income account(group)
     */
-  const MyMoneyAccount income(void) const {
+  const MyMoneyAccount income() const {
     return account(STD_ACC_INCOME);
   };
 
@@ -614,7 +614,7 @@ public:
     * This method is used to return the standard equity account
     * @return MyMoneyAccount equity account(group)
     */
-  const MyMoneyAccount equity(void) const {
+  const MyMoneyAccount equity() const {
     return account(STD_ACC_EQUITY);
   };
 
@@ -640,31 +640,31 @@ public:
   virtual void loadBudgetId(const unsigned long id);
   virtual void loadOnlineJobId(const unsigned long id);
 
-  virtual unsigned long accountId(void) const {
+  virtual unsigned long accountId() const {
     return m_nextAccountID;
   };
-  virtual unsigned long transactionId(void) const {
+  virtual unsigned long transactionId() const {
     return m_nextTransactionID;
   };
-  virtual unsigned long payeeId(void) const {
+  virtual unsigned long payeeId() const {
     return m_nextPayeeID;
   };
-  virtual unsigned long tagId(void) const {
+  virtual unsigned long tagId() const {
     return m_nextTagID;
   };
-  virtual unsigned long institutionId(void) const {
+  virtual unsigned long institutionId() const {
     return m_nextInstitutionID;
   };
-  virtual unsigned long scheduleId(void) const {
+  virtual unsigned long scheduleId() const {
     return m_nextScheduleID;
   };
-  virtual unsigned long securityId(void) const {
+  virtual unsigned long securityId() const {
     return m_nextSecurityID;
   };
-  virtual unsigned long reportId(void) const {
+  virtual unsigned long reportId() const {
     return m_nextReportID;
   };
-  virtual unsigned long budgetId(void) const {
+  virtual unsigned long budgetId() const {
     return m_nextBudgetID;
   };
 
@@ -697,7 +697,7 @@ public:
   void deletePair(const QString& key);
 
   // documented in IMyMoneySerialize base class
-  const QMap<QString, QString> pairs(void) const;
+  const QMap<QString, QString> pairs() const;
 
   // documented in IMyMoneySerialize base class
   void setPairs(const QMap<QString, QString>& list);
@@ -792,7 +792,7 @@ public:
     * This method returns a list of security objects that the engine has
     * knowledge of.
     */
-  const QList<MyMoneySecurity> securityList(void) const;
+  const QList<MyMoneySecurity> securityList() const;
 
   /**
     * This method is used to add a new currency object to the engine.
@@ -844,7 +844,7 @@ public:
     *
     * @return QList of all MyMoneyCurrency objects.
     */
-  const QList<MyMoneySecurity> currencyList(void) const;
+  const QList<MyMoneySecurity> currencyList() const;
 
   /**
     * This method is used to extract a list of scheduled transactions
@@ -894,7 +894,7 @@ public:
     *
     * @return QList of all MyMoneyReport objects.
     */
-  const QList<MyMoneyReport> reportList(void) const;
+  const QList<MyMoneyReport> reportList() const;
 
   /**
     * This method is used to add a new report to the engine.
@@ -934,7 +934,7 @@ public:
     *
     * @return number of reports known to file
     */
-  unsigned countReports(void) const;
+  unsigned countReports() const;
 
   /**
     * This method is used to retrieve a single MyMoneyReport object.
@@ -965,7 +965,7 @@ public:
     *
     * @return QList of all MyMoneyBudget objects.
     */
-  const QList<MyMoneyBudget> budgetList(void) const;
+  const QList<MyMoneyBudget> budgetList() const;
 
   /**
     * This method is used to add a new budget to the engine.
@@ -1016,7 +1016,7 @@ public:
     *
     * @return number of budgets known to file
     */
-  unsigned countBudgets(void) const;
+  unsigned countBudgets() const;
 
   /**
     * This method is used to retrieve a single MyMoneyBudget object.
@@ -1059,7 +1059,7 @@ public:
   /**
     * This method returns a list of all price entries.
     */
-  const MyMoneyPriceList priceList(void) const;
+  const MyMoneyPriceList priceList() const;
 
   /**
     * This method checks, if the given @p object is referenced
@@ -1078,11 +1078,11 @@ public:
     * This method recalculates the balances of all accounts
     * based on the transactions stored in the engine.
     */
-  void rebuildAccountBalances(void);
+  void rebuildAccountBalances();
 
-  virtual void startTransaction(void);
-  virtual bool commitTransaction(void);
-  virtual void rollbackTransaction(void);
+  virtual void startTransaction();
+  virtual bool commitTransaction();
+  virtual void rollbackTransaction();
 
 protected:
   void removeReferences(const QString& id);
@@ -1117,7 +1117,7 @@ private:
     * This method is used to set the dirty flag and update the
     * date of the last modification.
     */
-  void touch(void);
+  void touch();
 
   /**
     * Adjust the balance for account @a acc by the amount of shares in split @a split.
@@ -1296,56 +1296,56 @@ private:
     * This method is used to get the next valid ID for a institution
     * @return id for a institution
     */
-  QString nextInstitutionID(void);
+  QString nextInstitutionID();
 
   /**
     * This method is used to get the next valid ID for an account
     * @return id for an account
     */
-  QString nextAccountID(void);
+  QString nextAccountID();
 
   /**
     * This method is used to get the next valid ID for a transaction
     * @return id for a transaction
     */
-  QString nextTransactionID(void);
+  QString nextTransactionID();
 
   /**
     * This method is used to get the next valid ID for a payee
     * @return id for a payee
     */
-  QString nextPayeeID(void);
+  QString nextPayeeID();
 
   /**
     * This method is used to get the next valid ID for a tag
     * @return id for a tag
     */
-  QString nextTagID(void);
+  QString nextTagID();
 
   /**
     * This method is used to get the next valid ID for a scheduled transaction
     * @return id for a scheduled transaction
     */
-  QString nextScheduleID(void);
+  QString nextScheduleID();
 
   /**
     * This method is used to get the next valid ID for an security object.
     * @return id for an security object
     */
-  QString nextSecurityID(void);
+  QString nextSecurityID();
 
-  QString nextReportID(void);
+  QString nextReportID();
 
   /**
     * This method is used to get the next valid ID for a budget object.
     * @return id for an budget object
     */
-  QString nextBudgetID(void);
+  QString nextBudgetID();
 
   /**
     * This method is used to get the next valid ID for an onlineJob object.
     */
-  QString nextOnlineJobID(void);
+  QString nextOnlineJobID();
 
   /**
     * This method re-parents an existing account
@@ -1361,7 +1361,7 @@ private:
   /**
    * This method will close a database and log the use roff
    */
-  void close(void) {}
+  void close() {}
 
   /**
     * This member variable is set when all transactions have been read from the database.

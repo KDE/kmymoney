@@ -135,7 +135,7 @@ TransactionHelper::~TransactionHelper()
   ft.commit();
 }
 
-void TransactionHelper::update(void)
+void TransactionHelper::update()
 {
   MyMoneyFileTransaction ft;
   MyMoneyFile::instance()->modifyTransaction(*this);

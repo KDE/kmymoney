@@ -96,7 +96,7 @@ public:
     *
     * @return MyMoneySchedule object for payments
     */
-  MyMoneySchedule schedule(void) const;
+  MyMoneySchedule schedule() const;
 
   /**
     * This method returns the id of the account to/from which
@@ -106,7 +106,7 @@ public:
     *
     * @return id of account or empty QString
     */
-  QString initialPaymentAccount(void) const;
+  QString initialPaymentAccount() const;
 
   /**
     * This method returns the date of the payout transaction.
@@ -115,7 +115,7 @@ public:
     *
     * @return selected date or invalid QDate if checkbox is selected.
     */
-  QDate initialPaymentDate(void) const;
+  QDate initialPaymentDate() const;
 
   bool validateCurrentPage();
 
@@ -136,23 +136,23 @@ protected:
     *
     * @return MyMoneyTransaction object to be used within the schedule
     */
-  MyMoneyTransaction transaction(void) const;
+  MyMoneyTransaction transaction() const;
 
 protected slots:
 
   // void slotNewPayee(const QString&);
-  void slotReloadEditWidgets(void);
+  void slotReloadEditWidgets();
 
 protected:
-  void loadAccountList(void);
-  void resetCalculator(void);
-  void updateLoanAmount(void);
-  void updateInterestRate(void);
-  void updateDuration(void);
-  void updatePayment(void);
-  void updateFinalPayment(void);
-  void updateLoanInfo(void);
-  int calculateLoan(void);
+  void loadAccountList();
+  void resetCalculator();
+  void updateLoanAmount();
+  void updateInterestRate();
+  void updateDuration();
+  void updatePayment();
+  void updateFinalPayment();
+  void updateLoanInfo();
+  int calculateLoan();
 
 signals:
   /**

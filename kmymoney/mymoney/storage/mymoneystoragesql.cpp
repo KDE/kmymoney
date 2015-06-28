@@ -803,7 +803,7 @@ void MyMoneyStorageSql::clean()
 
 //////////////////////////////////////////////////////////////////
 
-bool MyMoneyStorageSql::readFile(void)
+bool MyMoneyStorageSql::readFile()
 {
   DBG("*** Entering MyMoneyStorageSql::readFile");
   m_displayStatus = true;
@@ -3084,7 +3084,7 @@ void MyMoneyStorageSql::deleteKeyValuePairs(const QString& kvpType, const QVaria
 #define GETINT(a) q.value(a).toInt()
 #define GETULL(a) q.value(a).toULongLong()
 
-void MyMoneyStorageSql::readFileInfo(void)
+void MyMoneyStorageSql::readFileInfo()
 {
   DBG("*** Entering MyMoneyStorageSql::readFileInfo");
   signalProgress(0, 1, QObject::tr("Loading file information..."));
@@ -3158,7 +3158,7 @@ void MyMoneyStorageSql::readFileInfo(void)
   m_storage->setFileFixVersion( m_minorVersion - 1);
 }*/
 
-void MyMoneyStorageSql::readInstitutions(void)
+void MyMoneyStorageSql::readInstitutions()
 {
   try {
     QMap<QString, MyMoneyInstitution> iList = fetchInstitutions();
@@ -3679,7 +3679,7 @@ const QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStri
   return accList;
 }
 
-void MyMoneyStorageSql::readAccounts(void)
+void MyMoneyStorageSql::readAccounts()
 {
   m_storage->loadAccounts(fetchAccounts());
   m_storage->loadAccountId(m_hiIdAccounts);
@@ -4159,7 +4159,7 @@ bool MyMoneyStorageSql::isReferencedByTransaction(const QString& id) const
   return (0 != q.value(0).toULongLong());
 }
 
-void MyMoneyStorageSql::readSchedules(void)
+void MyMoneyStorageSql::readSchedules()
 {
 
   try {
@@ -4312,7 +4312,7 @@ const QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QSt
   return sList;
 }
 
-void MyMoneyStorageSql::readSecurities(void)
+void MyMoneyStorageSql::readSecurities()
 {
   try {
     m_storage->loadSecurities(fetchSecurities());
@@ -4378,7 +4378,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities(const QS
   return sList;
 }
 
-void MyMoneyStorageSql::readPrices(void)
+void MyMoneyStorageSql::readPrices()
 {
 //  try {
 //    m_storage->addPrice(MyMoneyPrice(from, to,  date, rate, source));
@@ -4506,7 +4506,7 @@ const MyMoneyPriceList MyMoneyStorageSql::fetchPrices(const QStringList& fromIdL
   return pList;
 }
 
-void MyMoneyStorageSql::readCurrencies(void)
+void MyMoneyStorageSql::readCurrencies()
 {
   try {
     m_storage->loadCurrencies(fetchCurrencies());
@@ -4585,7 +4585,7 @@ const QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies(const QS
   return cList;
 }
 
-void MyMoneyStorageSql::readReports(void)
+void MyMoneyStorageSql::readReports()
 {
   try {
     m_storage->loadReports(fetchReports());
@@ -4656,7 +4656,7 @@ const QMap<QString, MyMoneyBudget> MyMoneyStorageSql::fetchBudgets(const QString
   return budgets;
 }
 
-void MyMoneyStorageSql::readBudgets(void)
+void MyMoneyStorageSql::readBudgets()
 {
   m_storage->loadBudgets(fetchBudgets());
 }

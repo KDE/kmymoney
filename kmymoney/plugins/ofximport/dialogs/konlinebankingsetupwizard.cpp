@@ -146,7 +146,7 @@ void KOnlineBankingSetupWizard::walletOpened(bool ok)
   m_storePassword->setEnabled(d->m_walletIsOpen);
 }
 
-void KOnlineBankingSetupWizard::checkNextButton(void)
+void KOnlineBankingSetupWizard::checkNextButton()
 {
   bool enableButton = false;
   switch (currentId()) {
@@ -222,7 +222,7 @@ void KOnlineBankingSetupWizard::newPage(int id)
     d->m_prevPage = id;
 }
 
-bool KOnlineBankingSetupWizard::finishFiPage(void)
+bool KOnlineBankingSetupWizard::finishFiPage()
 {
   bool result = false;
 
@@ -309,7 +309,7 @@ bool KOnlineBankingSetupWizard::finishFiPage(void)
   return result;
 }
 
-bool KOnlineBankingSetupWizard::finishLoginPage(void)
+bool KOnlineBankingSetupWizard::finishLoginPage()
 {
   bool result = true;
 
@@ -382,7 +382,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage(void)
   return result;
 }
 
-bool KOnlineBankingSetupWizard::finishAccountPage(void)
+bool KOnlineBankingSetupWizard::finishAccountPage()
 {
   bool result = true;
 

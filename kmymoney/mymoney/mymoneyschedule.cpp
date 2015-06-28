@@ -149,7 +149,7 @@ MyMoneySchedule::MyMoneySchedule(const QString& id, const MyMoneySchedule& right
   setId(id);
 }
 
-MyMoneySchedule::occurrenceE MyMoneySchedule::occurrence(void) const
+MyMoneySchedule::occurrenceE MyMoneySchedule::occurrence() const
 {
   MyMoneySchedule::occurrenceE occ = m_occurrence;
   int mult = m_occurrenceMultiplier;
@@ -245,19 +245,19 @@ void MyMoneySchedule::setAutoEnter(bool autoenter)
   m_autoEnter = autoenter;
 }
 
-const QDate& MyMoneySchedule::startDate(void) const
+const QDate& MyMoneySchedule::startDate() const
 {
   if (m_startDate.isValid())
     return m_startDate;
   return nextDueDate();
 }
 
-const QDate& MyMoneySchedule::nextDueDate(void) const
+const QDate& MyMoneySchedule::nextDueDate() const
 {
   return m_transaction.postDate();
 }
 
-QDate MyMoneySchedule::adjustedNextDueDate(void) const
+QDate MyMoneySchedule::adjustedNextDueDate() const
 {
   if (isFinished())
     return QDate();
@@ -601,7 +601,7 @@ bool MyMoneySchedule::operator ==(const MyMoneySchedule& right) const
   return false;
 }
 
-int MyMoneySchedule::transactionsRemaining(void) const
+int MyMoneySchedule::transactionsRemaining() const
 {
   return transactionsRemainingUntil(adjustedDate(m_endDate, weekendOption()));
 }
@@ -1035,7 +1035,7 @@ QString MyMoneySchedule::weekendOptionToString(MyMoneySchedule::weekendOptionE w
 //
 // ipwizard 2009-04-18
 
-int MyMoneySchedule::variation(void) const
+int MyMoneySchedule::variation() const
 {
   int rc = 0;
   if (!isFixed()) {
@@ -1364,7 +1364,7 @@ bool MyMoneySchedule::isProcessingDate(const QDate& date) const
   return date.dayOfWeek() < Qt::Saturday;
 }
 
-IMyMoneyProcessingCalendar* MyMoneySchedule::processingCalendar(void) const
+IMyMoneyProcessingCalendar* MyMoneySchedule::processingCalendar() const
 {
   return processingCalendarPtr;
 }

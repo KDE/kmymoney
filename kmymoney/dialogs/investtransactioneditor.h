@@ -65,7 +65,7 @@ public:
     */
   virtual bool isComplete(QString& reason) const;
 
-  virtual QWidget* firstWidget(void) const;
+  virtual QWidget* firstWidget() const;
 
   virtual bool fixTransactionCommodity(const MyMoneyAccount& /* account */) {
     return true;
@@ -98,9 +98,9 @@ public:
     */
   bool createTransaction(MyMoneyTransaction& t, const MyMoneyTransaction& torig, const MyMoneySplit& sorig, bool skipPriceDialog = false);
 
-  priceModeE priceMode(void) const;
+  priceModeE priceMode() const;
 
-  const MyMoneySecurity& security(void) const {
+  const MyMoneySecurity& security() const {
     return m_security;
   }
 
@@ -109,9 +109,9 @@ protected slots:
   void slotCreateFeeCategory(const QString& name, QString& id);
   void slotCreateInterestCategory(const QString& name, QString& id);
 
-  int slotEditInterestSplits(void);
-  int slotEditFeeSplits(void);
-  void slotReloadEditWidgets(void);
+  int slotEditInterestSplits();
+  int slotEditFeeSplits();
+  void slotReloadEditWidgets();
 
   void slotUpdateActivity(MyMoneySplit::investTransactionTypeE);
   void slotUpdateSecurity(const QString& stockId);
@@ -119,16 +119,16 @@ protected slots:
   void slotUpdateInterestVisibility(const QString&);
   void slotUpdateFeeCategory(const QString& id);
   void slotUpdateFeeVisibility(const QString&);
-  void slotUpdateTotalAmount(void);
+  void slotUpdateTotalAmount();
   void slotTransactionContainerGeometriesUpdated();
-  void slotUpdateInvestMemoState(void);
+  void slotUpdateInvestMemoState();
 
 protected:
   /**
     * This method creates all necessary widgets for this transaction editor.
     * All signals will be connected to the relevant slots.
     */
-  void createEditWidgets(void);
+  void createEditWidgets();
 
   /**
     * This method (re-)loads the widgets with the transaction information
@@ -164,7 +164,7 @@ protected:
 
   void updatePriceMode(const MyMoneySplit& split = MyMoneySplit());
 
-  void setupFinalWidgets(void);
+  void setupFinalWidgets();
 
 private:
   MyMoneySplit                              m_assetAccountSplit;

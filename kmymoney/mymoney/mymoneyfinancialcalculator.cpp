@@ -132,7 +132,7 @@ void MyMoneyFinancialCalculator::setFv(const double fv)
   m_mask |= FV_SET;
 }
 
-double MyMoneyFinancialCalculator::numPayments(void)
+double MyMoneyFinancialCalculator::numPayments()
 {
   const unsigned short mask = PV_SET | IR_SET | PMT_SET | FV_SET;
 
@@ -156,7 +156,7 @@ double MyMoneyFinancialCalculator::numPayments(void)
   return m_npp;
 }
 
-double MyMoneyFinancialCalculator::payment(void)
+double MyMoneyFinancialCalculator::payment()
 {
   const unsigned short mask = PV_SET | IR_SET | NPP_SET | FV_SET;
 
@@ -179,7 +179,7 @@ double MyMoneyFinancialCalculator::payment(void)
   return m_pmt;
 }
 
-double MyMoneyFinancialCalculator::presentValue(void)
+double MyMoneyFinancialCalculator::presentValue()
 {
   const unsigned short mask = PMT_SET | IR_SET | NPP_SET | FV_SET;
 
@@ -203,7 +203,7 @@ double MyMoneyFinancialCalculator::presentValue(void)
   return m_pv;
 }
 
-double MyMoneyFinancialCalculator::futureValue(void)
+double MyMoneyFinancialCalculator::futureValue()
 {
   const unsigned short mask = PMT_SET | IR_SET | NPP_SET | PV_SET;
 
@@ -225,7 +225,7 @@ double MyMoneyFinancialCalculator::futureValue(void)
   return m_fv;
 }
 
-double MyMoneyFinancialCalculator::interestRate(void)
+double MyMoneyFinancialCalculator::interestRate()
 {
   double eint = 0.0;
   double a = 0.0;
@@ -306,7 +306,7 @@ double MyMoneyFinancialCalculator::_Cx(const double eint) const
   return m_pmt * _Bx(eint);
 }
 
-double MyMoneyFinancialCalculator::eff_int(void) const
+double MyMoneyFinancialCalculator::eff_int() const
 {
   double nint = m_ir / 100.0;
   double eint;
@@ -345,7 +345,7 @@ double MyMoneyFinancialCalculator::nom_int(const double eint) const
   return nint;
 }
 
-double MyMoneyFinancialCalculator::interestDue(void) const
+double MyMoneyFinancialCalculator::interestDue() const
 {
   double eint = eff_int();
 

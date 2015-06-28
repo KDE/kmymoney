@@ -417,7 +417,7 @@ bool KEditLoanWizard::validateCurrentPage()
   return ! dontLeavePage;
 }
 
-void KEditLoanWizard::updateEditSummary(void)
+void KEditLoanWizard::updateEditSummary()
 {
   // calculate the number of affected transactions
   MyMoneyTransactionFilter filter(m_account.id());
@@ -444,7 +444,7 @@ void KEditLoanWizard::updateEditSummary(void)
   setField("affectedPayments", QString().sprintf("%d", count));
 }
 
-const MyMoneySchedule KEditLoanWizard::schedule(void) const
+const MyMoneySchedule KEditLoanWizard::schedule() const
 {
   MyMoneySchedule sched = m_schedule;
   sched.setTransaction(transaction());
@@ -455,7 +455,7 @@ const MyMoneySchedule KEditLoanWizard::schedule(void) const
   return sched;
 }
 
-const MyMoneyAccount KEditLoanWizard::account(void) const
+const MyMoneyAccount KEditLoanWizard::account() const
 {
   MyMoneyAccountLoan acc(m_account);
 

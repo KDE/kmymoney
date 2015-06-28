@@ -374,7 +374,7 @@ void MyMoneySplitTest::testReadXML()
 
 }
 
-void MyMoneySplitTest::testReplaceId(void)
+void MyMoneySplitTest::testReplaceId()
 {
   MyMoneySplit s;
   bool changed;

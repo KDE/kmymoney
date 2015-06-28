@@ -58,7 +58,7 @@ void DurationWizardPage::resetCalculator()
   m_balloon3->setText(QString());
 }
 
-int DurationWizardPage::term(void) const
+int DurationWizardPage::term() const
 {
   int factor = 0;
 

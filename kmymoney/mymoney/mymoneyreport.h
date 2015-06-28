@@ -75,7 +75,7 @@ public:
   static const EReportType kTypeArray[];
 
 public:
-  MyMoneyReport(void);
+  MyMoneyReport();
   MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetailLevel _ss, const QString& _name, const QString& _comment);
   MyMoneyReport(const QString& id, const MyMoneyReport& right);
 
@@ -87,121 +87,121 @@ public:
   MyMoneyReport(const QDomElement& node);
 
   // Simple get operations
-  const QString& name(void) const {
+  const QString& name() const {
     return m_name;
   }
-  bool isShowingRowTotals(void) const {
+  bool isShowingRowTotals() const {
     return (m_showRowTotals);
   }
-  EReportType reportType(void) const {
+  EReportType reportType() const {
     return m_reportType;
   }
-  ERowType rowType(void) const {
+  ERowType rowType() const {
     return m_rowType;
   }
-  EColumnType columnType(void) const {
+  EColumnType columnType() const {
     return m_columnType;
   }
-  bool isRunningSum(void) const {
+  bool isRunningSum() const {
     return (m_rowType == eAssetLiability);
   }
-  bool isConvertCurrency(void) const {
+  bool isConvertCurrency() const {
     return m_convertCurrency;
   }
-  unsigned columnPitch(void) const {
+  unsigned columnPitch() const {
     return static_cast<unsigned>(m_columnType);
   }
-  bool isShowingColumnTotals(void) const {
+  bool isShowingColumnTotals() const {
     return m_convertCurrency;
   }
-  const QString& comment(void) const {
+  const QString& comment() const {
     return m_comment;
   }
-  EQueryColumns queryColumns(void) const {
+  EQueryColumns queryColumns() const {
     return m_queryColumns;
   }
-  const QString& group(void) const {
+  const QString& group() const {
     return m_group;
   }
-  bool isFavorite(void) const {
+  bool isFavorite() const {
     return m_favorite;
   }
-  bool isTax(void) const {
+  bool isTax() const {
     return m_tax;
   }
-  bool isInvestmentsOnly(void) const {
+  bool isInvestmentsOnly() const {
     return m_investments;
   }
-  bool isLoansOnly(void) const {
+  bool isLoansOnly() const {
     return m_loans;
   }
-  EDetailLevel detailLevel(void) const {
+  EDetailLevel detailLevel() const {
     return m_detailLevel;
   }
-  EChartType chartType(void) const {
+  EChartType chartType() const {
     return m_chartType;
   }
-  bool isChartDataLabels(void) const {
+  bool isChartDataLabels() const {
     return m_chartDataLabels;
   }
-  bool isChartGridLines(void) const {
+  bool isChartGridLines() const {
     return m_chartGridLines;
   }
-  bool isChartByDefault(void) const {
+  bool isChartByDefault() const {
     return m_chartByDefault;
   }
-  uint chartLineWidth(void) const {
+  uint chartLineWidth() const {
     return m_chartLineWidth;
   }
-  bool isIncludingSchedules(void) const {
+  bool isIncludingSchedules() const {
     return m_includeSchedules;
   }
-  bool isColumnsAreDays(void) const {
+  bool isColumnsAreDays() const {
     return m_columnsAreDays;
   }
-  bool isIncludingTransfers(void) const {
+  bool isIncludingTransfers() const {
     return m_includeTransfers;
   }
-  bool isIncludingUnusedAccounts(void) const {
+  bool isIncludingUnusedAccounts() const {
     return m_includeUnusedAccounts;
   }
-  bool hasBudget(void) const {
+  bool hasBudget() const {
     return !m_budgetId.isEmpty();
   }
-  const QString& budget(void) const {
+  const QString& budget() const {
     return m_budgetId;
   }
-  bool isIncludingBudgetActuals(void) const {
+  bool isIncludingBudgetActuals() const {
     return m_includeBudgetActuals;
   }
-  bool isIncludingForecast(void) const {
+  bool isIncludingForecast() const {
     return m_includeForecast;
   }
-  bool isIncludingMovingAverage(void) const {
+  bool isIncludingMovingAverage() const {
     return m_includeMovingAverage;
   }
-  int movingAverageDays(void) const {
+  int movingAverageDays() const {
     return m_movingAverageDays;
   }
-  bool isIncludingPrice(void) const {
+  bool isIncludingPrice() const {
     return m_includePrice;
   }
-  bool isIncludingAveragePrice(void) const {
+  bool isIncludingAveragePrice() const {
     return m_includeAveragePrice;
   }
-  bool isUserDefined(void) const {
+  bool isUserDefined() const {
     return m_dateLock == userDefined;
   }
-  bool isMixedTime(void) const {
+  bool isMixedTime() const {
     return m_mixedTime;
   }
-  int currentDateColumn(void) const {
+  int currentDateColumn() const {
     return m_currentDateColumn;
   }
   /**
    * @see #m_skipZero
    */
-  bool isSkippingZero(void) const {
+  bool isSkippingZero() const {
     return m_skipZero;
   }
 
@@ -319,7 +319,7 @@ public:
   /**
     * This method allows you to clear the underlying transaction filter
     */
-  void clear(void);
+  void clear();
 
   /**
     * This method allows you to set the underlying transaction filter
@@ -374,7 +374,7 @@ public:
     * September, this function will update the date range to be September,
     * as is proper.
     */
-  void updateDateFilter(void) {
+  void updateDateFilter() {
     if (m_dateLock != userDefined) MyMoneyTransactionFilter::setDateFilter(m_dateLock);
   }
 

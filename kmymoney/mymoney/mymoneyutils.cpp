@@ -130,12 +130,12 @@ void MyMoneyTracer::onOff(int onOff)
   m_onoff = onOff;
 }
 
-void MyMoneyTracer::on(void)
+void MyMoneyTracer::on()
 {
   m_onoff = 1;
 }
 
-void MyMoneyTracer::off(void)
+void MyMoneyTracer::off()
 {
   m_onoff = 0;
 }

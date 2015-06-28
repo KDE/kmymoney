@@ -43,7 +43,7 @@ TocItemReport::TocItemReport(QTreeWidgetItem* parent, MyMoneyReport& report):
   this->setData(0, Qt::UserRole, data);
 }
 
-MyMoneyReport& TocItemReport::getReport(void)
+MyMoneyReport& TocItemReport::getReport()
 {
   return m_report;
 }

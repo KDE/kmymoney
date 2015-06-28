@@ -111,7 +111,7 @@ void KGPGFile::setFileName(const QString& fn)
   // qDebug("setName: '%s'", d->m_fn.toLatin1().data());
 }
 
-void KGPGFile::flush(void)
+void KGPGFile::flush()
 {
   // no functionality
 }
@@ -206,7 +206,7 @@ bool KGPGFile::open(OpenMode mode)
   return true;
 }
 
-void KGPGFile::close(void)
+void KGPGFile::close()
 {
   if (!isOpen()) {
     return;
@@ -287,7 +287,7 @@ QString KGPGFile::errorToString() const
   return QString::fromUtf8(d->m_lastError.asString());
 }
 
-bool KGPGFile::GPGAvailable(void)
+bool KGPGFile::GPGAvailable()
 {
   GpgME::initializeLibrary();
   bool rc = (GpgME::checkEngine(GpgME::OpenPGP) == 0);

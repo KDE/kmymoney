@@ -64,7 +64,7 @@ TabBar::SignalEmissionE TabBar::setSignalEmission(TabBar::SignalEmissionE type)
   return _type;
 }
 
-int TabBar::currentIndex(void) const
+int TabBar::currentIndex() const
 {
   QMap<int, int>::const_iterator it;
   int id = KTabBar::currentIndex();
@@ -217,7 +217,7 @@ bool TransactionForm::focusNextPrevChild(bool next)
   return QFrame::focusNextPrevChild(next);
 }
 
-void TransactionForm::clear(void)
+void TransactionForm::clear()
 {
   slotSetTransaction(0);
 }

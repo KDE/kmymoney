@@ -240,7 +240,7 @@ public:
   bool hideEquityAccounts() const;
 
   void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
-  bool hideUnusedIncomeExpenseAccounts(void) const;
+  bool hideUnusedIncomeExpenseAccounts() const;
 
 protected:
   virtual bool lessThan(const QModelIndex &left, const QModelIndex &right) const;

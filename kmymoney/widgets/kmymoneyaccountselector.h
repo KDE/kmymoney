@@ -103,14 +103,14 @@ public:
   /**
     * This method removes all the buttons of the widget
     */
-  void removeButtons(void);
+  void removeButtons();
 
 public slots:
   /**
     * This slot selects all items that are currently in
     * the account list of the widget.
     */
-  void slotSelectAllAccounts(void) {
+  void slotSelectAllAccounts() {
     selectAllItems(true);
   };
 
@@ -118,7 +118,7 @@ public slots:
     * This slot deselects all items that are currently in
     * the account list of the widget.
     */
-  void slotDeselectAllAccounts(void) {
+  void slotDeselectAllAccounts() {
     selectAllItems(false);
   };
 
@@ -143,14 +143,14 @@ protected slots:
   /**
     * This slot selects all income categories
     */
-  void slotSelectIncomeCategories(void) {
+  void slotSelectIncomeCategories() {
     selectCategories(true, false);
   };
 
   /**
     * This slot selects all expense categories
     */
-  void slotSelectExpenseCategories(void) {
+  void slotSelectExpenseCategories() {
     selectCategories(false, true);
   };
 
@@ -173,19 +173,19 @@ public:
   void addAccountGroup(MyMoneyAccount::accountTypeE type);
   void removeAccountType(MyMoneyAccount::accountTypeE type);
 
-  void clear(void);
+  void clear();
 
   int load(kMyMoneyAccountSelector* selector);
   int load(kMyMoneyAccountSelector* selector, const QString& baseName, const QList<QString>& accountIdList, const bool clear = false);
 
-  int count(void) const {
+  int count() const {
     return m_count;
   }
 
   void setHideClosedAccounts(bool _bool) {
     m_hideClosedAccounts = _bool;
   }
-  bool isHidingClosedAccounts(void) const {
+  bool isHidingClosedAccounts() const {
     return m_hideClosedAccounts;
   }
 

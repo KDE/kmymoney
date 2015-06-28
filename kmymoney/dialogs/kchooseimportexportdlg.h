@@ -39,8 +39,8 @@ class KChooseImportExportDlg : public QDialog
 {
   Q_OBJECT
 private:
-  void readConfig(void);
-  void writeConfig(void);
+  void readConfig();
+  void writeConfig();
   QString m_lastType;
 
 protected slots:
@@ -49,7 +49,7 @@ protected slots:
 public:
   explicit KChooseImportExportDlg(int type, QWidget *parent = 0);
   ~KChooseImportExportDlg();
-  QString importExportType(void);
+  QString importExportType();
 
 private:
   /// \internal d-pointer class.

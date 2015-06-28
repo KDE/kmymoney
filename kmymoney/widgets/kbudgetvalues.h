@@ -57,11 +57,11 @@ public:
 
   void setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBudget::AccountGroup& budgetAccount);
   void budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::AccountGroup& budgetAccount);
-  void clear(void);
+  void clear();
 
 private:
   void enableMonths(bool enabled);
-  void fillMonthLabels(void);
+  void fillMonthLabels();
 
 protected slots:
   void slotChangePeriod(int id);
@@ -70,14 +70,14 @@ protected slots:
    * This slot clears the value in the value widgets of the selected budget type.
    * Values of the other types are unaffected.
    */
-  void slotClearAllValues(void);
+  void slotClearAllValues();
 
   /**
    * Helper slot used to postpone sending the valuesChanged() signal.
    */
-  void slotNeedUpdate(void);
+  void slotNeedUpdate();
 
-  void slotUpdateClearButton(void);
+  void slotUpdateClearButton();
 
 protected:
   bool eventFilter(QObject* o, QEvent* e);
@@ -89,7 +89,7 @@ private:
   QDate           m_budgetDate;
 
 signals:
-  void valuesChanged(void);
+  void valuesChanged();
 };
 
 #endif

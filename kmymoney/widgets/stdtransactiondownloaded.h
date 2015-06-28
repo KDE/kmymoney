@@ -43,7 +43,7 @@ public:
   StdTransactionDownloaded(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~StdTransactionDownloaded() {}
 
-  virtual const char* className(void) {
+  virtual const char* className() {
     return "StdTransactionDownloaded";
   }
 
@@ -56,7 +56,7 @@ public:
   InvestTransactionDownloaded(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~InvestTransactionDownloaded() {}
 
-  virtual const char* className(void) {
+  virtual const char* className() {
     return "InvestTransactionDownloaded";
   }
 

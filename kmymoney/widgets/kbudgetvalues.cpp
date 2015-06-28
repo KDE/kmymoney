@@ -139,7 +139,7 @@ bool KBudgetValues::eventFilter(QObject* o, QEvent* e)
   return rc;
 }
 
-void KBudgetValues::clear(void)
+void KBudgetValues::clear()
 {
   blockSignals(true);
   for (int i = 0; i < 12; ++i)
@@ -149,7 +149,7 @@ void KBudgetValues::clear(void)
   blockSignals(false);
 }
 
-void KBudgetValues::slotClearAllValues(void)
+void KBudgetValues::slotClearAllValues()
 {
   int tab = m_periodGroup->checkedId();
   if (tab == m_periodGroup->id(m_monthlyButton)) {
@@ -241,7 +241,7 @@ void KBudgetValues::slotChangePeriod(int id)
   inside = false;
 }
 
-void KBudgetValues::slotNeedUpdate(void)
+void KBudgetValues::slotNeedUpdate()
 {
   if (!signalsBlocked())
     QTimer::singleShot(0, this, SIGNAL(valuesChanged()));
@@ -255,7 +255,7 @@ void KBudgetValues::enableMonths(bool enabled)
   }
 }
 
-void KBudgetValues::fillMonthLabels(void)
+void KBudgetValues::fillMonthLabels()
 {
   QDate date(m_budgetDate);
   for (int i = 0; i < 12; ++i) {
@@ -330,7 +330,7 @@ void KBudgetValues::budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::Acc
   }
 }
 
-void KBudgetValues::slotUpdateClearButton(void)
+void KBudgetValues::slotUpdateClearButton()
 {
   bool rc = false;
   int tab = m_periodGroup->checkedId();

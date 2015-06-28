@@ -72,14 +72,14 @@ public:
 
 public slots:
   void slotSelectSchedule(const QString& schedule);
-  void slotReloadView(void);
+  void slotReloadView();
 
 signals:
   void scheduleSelected(const MyMoneySchedule& schedule);
-  void openContextMenu(void);
-  void skipSchedule(void);
-  void enterSchedule(void);
-  void editSchedule(void);
+  void openContextMenu();
+  void skipSchedule();
+  void enterSchedule();
+  void editSchedule();
 
   /**
     * This signal is emitted whenever the view is about to be shown.
@@ -106,11 +106,11 @@ protected slots:
   void slotBriefSkipClicked(const MyMoneySchedule& schedule, const QDate&);
   void slotBriefEnterClicked(const MyMoneySchedule& schedule, const QDate&);
 
-  void slotTimerDone(void);
+  void slotTimerDone();
 
   void slotSetSelectedItem();
 
-  void slotRearrange(void);
+  void slotRearrange();
 
 protected:
 
@@ -122,10 +122,10 @@ private:
   QString m_selectedSchedule;
 
   /// Read config file
-  void readConfig(void);
+  void readConfig();
 
   /// Write config file
-  void writeConfig(void);
+  void writeConfig();
 
   /**
     * Refresh the view.
@@ -135,7 +135,7 @@ private:
   /**
     * Loads the accounts into the combo box.
     */
-//  void loadAccounts(void);
+//  void loadAccounts();
 
   KMenu *m_kaccPopup;
   QStringList m_filterAccounts;

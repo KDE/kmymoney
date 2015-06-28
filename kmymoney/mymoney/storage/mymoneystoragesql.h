@@ -162,14 +162,14 @@ public:
    * @return void
    *
    */
-  bool readFile(void);
+  bool readFile();
   /**
    * MyMoneyStorageSql write/update the database from storage
    *
    * @return void
    *
    */
-  bool writeFile(void);
+  bool writeFile();
 
   /**
    * MyMoneyStorageSql generalized error routine
@@ -357,19 +357,19 @@ private:
    * These method write all data from m_storage to the database. Data which is
    * stored in the database is deleted.
    */
-  void writeUserInformation(void);
-  void writeInstitutions(void);
-  void writePayees(void);
-  void writeTags(void);
-  void writeAccounts(void);
-  void writeTransactions(void);
-  void writeSchedules(void);
-  void writeSecurities(void);
-  void writePrices(void);
-  void writeCurrencies(void);
-  void writeFileInfo(void);
-  void writeReports(void);
-  void writeBudgets(void);
+  void writeUserInformation();
+  void writeInstitutions();
+  void writePayees();
+  void writeTags();
+  void writeAccounts();
+  void writeTransactions();
+  void writeSchedules();
+  void writeSecurities();
+  void writePrices();
+  void writeCurrencies();
+  void writeFileInfo();
+  void writeReports();
+  void writeBudgets();
   void writeOnlineJobs();
   /** @} */
 
@@ -403,21 +403,21 @@ private:
    * @name readMethods
    * @{
    */
-  void readFileInfo(void);
-  void readLogonData(void);
-  void readUserInformation(void);
-  void readInstitutions(void);
-  void readAccounts(void);
+  void readFileInfo();
+  void readLogonData();
+  void readUserInformation();
+  void readInstitutions();
+  void readAccounts();
   void readTransactions(const QString& tidList = QString(), const QString& dateClause = QString());
   void readSplit(MyMoneySplit& s, const QSqlQuery& q) const;
   const MyMoneyKeyValueContainer readKeyValuePairs(const QString& kvpType, const QString& kvpId) const;
   const QHash<QString, MyMoneyKeyValueContainer> readKeyValuePairs(const QString& kvpType, const QStringList& kvpIdList) const;
-  void readSchedules(void);
-  void readSecurities(void);
-  void readPrices(void);
-  void readCurrencies(void);
-  void readReports(void);
-  void readBudgets(void);
+  void readSchedules();
+  void readSecurities();
+  void readPrices();
+  void readCurrencies();
+  void readReports();
+  void readBudgets();
   /** @} */
 
   template<long unsigned MyMoneyStorageSql::* cache>

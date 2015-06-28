@@ -49,7 +49,7 @@ void MyMoneyFileTest::objectModified(MyMoneyFile::notificationObjectT type, cons
   m_objectsModified += obj->id();
 }
 
-void MyMoneyFileTest::clearObjectLists(void)
+void MyMoneyFileTest::clearObjectLists()
 {
   m_objectsAdded.clear();
   m_objectsModified.clear();
@@ -1815,7 +1815,7 @@ void MyMoneyFileTest::testReparentEquity(QList<MyMoneyAccount::accountTypeE>& li
   }
 }
 
-void MyMoneyFileTest::testBaseCurrency(void)
+void MyMoneyFileTest::testBaseCurrency()
 {
   MyMoneySecurity base("EUR", "Euro", QChar(0x20ac));
   MyMoneySecurity ref;
@@ -1875,7 +1875,7 @@ void MyMoneyFileTest::testBaseCurrency(void)
   QVERIFY(ref.tradingSymbol() == QChar(0x20ac));
 }
 
-void MyMoneyFileTest::testOpeningBalanceNoBase(void)
+void MyMoneyFileTest::testOpeningBalanceNoBase()
 {
   MyMoneyAccount openingAcc;
   MyMoneySecurity base;
@@ -1888,7 +1888,7 @@ void MyMoneyFileTest::testOpeningBalanceNoBase(void)
   }
 }
 
-void MyMoneyFileTest::testOpeningBalance(void)
+void MyMoneyFileTest::testOpeningBalance()
 {
   MyMoneyAccount openingAcc;
   MyMoneySecurity second("USD", "US Dollar", "$");

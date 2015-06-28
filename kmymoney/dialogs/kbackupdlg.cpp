@@ -74,7 +74,7 @@ void KBackupDlg::chooseButtonClicked()
     txtMountPoint->setText(newDir.path());
 }
 
-void KBackupDlg::readConfig(void)
+void KBackupDlg::readConfig()
 {
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Last Use Settings");
@@ -82,7 +82,7 @@ void KBackupDlg::readConfig(void)
   txtMountPoint->setText(grp.readEntry("KBackupDlg_BackupMountPoint", "/mnt/floppy"));
 }
 
-void KBackupDlg::writeConfig(void)
+void KBackupDlg::writeConfig()
 {
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Last Use Settings");

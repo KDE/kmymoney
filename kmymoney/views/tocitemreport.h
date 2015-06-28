@@ -51,7 +51,7 @@ public:
   TocItemReport(QTreeWidgetItem* parent, MyMoneyReport& report);
 
   /** Returns the report associated with this TOC-entry. */
-  MyMoneyReport& getReport(void);
+  MyMoneyReport& getReport();
 };
 
 #endif

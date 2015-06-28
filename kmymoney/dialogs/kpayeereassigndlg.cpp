@@ -79,7 +79,7 @@ QString KPayeeReassignDlg::show(const QList<MyMoneyPayee>& payeeslist)
 }
 
 
-void KPayeeReassignDlg::accept(void)
+void KPayeeReassignDlg::accept()
 {
   // force update of payeeCombo
   buttonOk->setFocus();

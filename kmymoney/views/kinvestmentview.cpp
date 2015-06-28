@@ -212,7 +212,7 @@ void KInvestmentView::slotInvestmentContextMenu(const QPoint& /*point*/)
   emit investmentRightMouseClick();
 }
 
-void KInvestmentView::slotLoadView(void)
+void KInvestmentView::slotLoadView()
 {
   d->m_needReload[EquitiesTab] = true;
   d->m_needReload[SecuritiesTab] = true;
@@ -227,7 +227,7 @@ void KInvestmentView::slotTabCurrentChanged(int index)
   loadView(tab);
 }
 
-void KInvestmentView::loadAccounts(void)
+void KInvestmentView::loadAccounts()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -331,7 +331,7 @@ bool KInvestmentView::slotSelectAccount(const QString& id, const QString& transa
   return rc;
 }
 
-void KInvestmentView::clear(void)
+void KInvestmentView::clear()
 {
   // setup header font
   QFont font = KMyMoneyGlobalSettings::listHeaderFont();
@@ -357,7 +357,7 @@ void KInvestmentView::clear(void)
   }
 }
 
-void KInvestmentView::loadInvestmentTab(void)
+void KInvestmentView::loadInvestmentTab()
 {
   // no account selected
   emit accountSelected(MyMoneyAccount());
@@ -466,7 +466,7 @@ void KInvestmentView::showEvent(QShowEvent* event)
   QWidget::showEvent(event);
 }
 
-void KInvestmentView::loadSecuritiesList(void)
+void KInvestmentView::loadSecuritiesList()
 {
   m_securitiesList->setColumnWidth(eIdColumn, 0);
   m_securitiesList->setSortingEnabled(false);
@@ -510,7 +510,7 @@ void KInvestmentView::loadSecurityItem(QTreeWidgetItem* item, const MyMoneySecur
     item->setText(eCashFractionColumn, QString::number(security.smallestCashFraction()));
 }
 
-void KInvestmentView::slotUpdateSecuritiesButtons(void)
+void KInvestmentView::slotUpdateSecuritiesButtons()
 {
   QTreeWidgetItem* item = m_securitiesList->currentItem();
 
@@ -525,7 +525,7 @@ void KInvestmentView::slotUpdateSecuritiesButtons(void)
   }
 }
 
-void KInvestmentView::slotEditSecurity(void)
+void KInvestmentView::slotEditSecurity()
 {
   QTreeWidgetItem* item = m_securitiesList->currentItem();
   if (item) {
@@ -552,7 +552,7 @@ void KInvestmentView::slotEditSecurity(void)
   }
 }
 
-void KInvestmentView::slotDeleteSecurity(void)
+void KInvestmentView::slotDeleteSecurity()
 {
   QTreeWidgetItem* item = m_securitiesList->currentItem();
   if (item) {

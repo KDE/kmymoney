@@ -200,7 +200,7 @@ void MyMoneyAccount::addAccountId(const QString& account)
     m_accountList += account;
 }
 
-void MyMoneyAccount::removeAccountIds(void)
+void MyMoneyAccount::removeAccountIds()
 {
   m_accountList.clear();
 }
@@ -259,27 +259,27 @@ void MyMoneyAccount::setCurrencyId(const QString& id)
   m_currencyId = id;
 }
 
-bool MyMoneyAccount::isAssetLiability(void) const
+bool MyMoneyAccount::isAssetLiability() const
 {
   return accountGroup() == Asset || accountGroup() == Liability;
 }
 
-bool MyMoneyAccount::isIncomeExpense(void) const
+bool MyMoneyAccount::isIncomeExpense() const
 {
   return accountGroup() == Income || accountGroup() == Expense;
 }
 
-bool MyMoneyAccount::isLoan(void) const
+bool MyMoneyAccount::isLoan() const
 {
   return accountType() == Loan || accountType() == AssetLoan;
 }
 
-bool MyMoneyAccount::isInvest(void) const
+bool MyMoneyAccount::isInvest() const
 {
   return accountType() == Stock;
 }
 
-bool MyMoneyAccount::isLiquidAsset(void) const
+bool MyMoneyAccount::isLiquidAsset() const
 {
   return accountType() == Checkings ||
          accountType() == Savings ||
@@ -309,7 +309,7 @@ MyMoneyAccountLoan::MyMoneyAccountLoan(const MyMoneyAccount& acc)
 {
 }
 
-const MyMoneyMoney MyMoneyAccountLoan::loanAmount(void) const
+const MyMoneyMoney MyMoneyAccountLoan::loanAmount() const
 {
   return MyMoneyMoney(value("loan-amount"));
 }
@@ -360,7 +360,7 @@ void MyMoneyAccountLoan::setInterestRate(const QDate& date, const MyMoneyMoney& 
   setValue(key, value.toString());
 }
 
-MyMoneyAccountLoan::interestDueE MyMoneyAccountLoan::interestCalculation(void) const
+MyMoneyAccountLoan::interestDueE MyMoneyAccountLoan::interestCalculation() const
 {
   QString payTime(value("interest-calculation"));
   if (payTime == "paymentDue")
@@ -376,7 +376,7 @@ void MyMoneyAccountLoan::setInterestCalculation(const MyMoneyAccountLoan::intere
     setValue("interest-calculation", "paymentReceived");
 }
 
-const QDate MyMoneyAccountLoan::nextInterestChange(void) const
+const QDate MyMoneyAccountLoan::nextInterestChange() const
 {
   QDate rc;
 
@@ -416,7 +416,7 @@ void MyMoneyAccountLoan::setInterestChangeFrequency(const int amount, const int 
   setValue("interest-changeFrequency", val);
 }
 
-const QString MyMoneyAccountLoan::schedule(void) const
+const QString MyMoneyAccountLoan::schedule() const
 {
   return QString(value("schedule").toLatin1());
 }
@@ -426,7 +426,7 @@ void MyMoneyAccountLoan::setSchedule(const QString& sched)
   setValue("schedule", sched);
 }
 
-bool MyMoneyAccountLoan::fixedInterestRate(void) const
+bool MyMoneyAccountLoan::fixedInterestRate() const
 {
   // make sure, that an empty kvp element returns true
   return !(value("fixed-interest") == "no");
@@ -441,7 +441,7 @@ void MyMoneyAccountLoan::setFixedInterestRate(const bool fixed)
   }
 }
 
-const MyMoneyMoney MyMoneyAccountLoan::finalPayment(void) const
+const MyMoneyMoney MyMoneyAccountLoan::finalPayment() const
 {
   return MyMoneyMoney(value("final-payment"));
 }
@@ -451,7 +451,7 @@ void MyMoneyAccountLoan::setFinalPayment(const MyMoneyMoney& finalPayment)
   setValue("final-payment", finalPayment.toString());
 }
 
-unsigned int MyMoneyAccountLoan::term(void) const
+unsigned int MyMoneyAccountLoan::term() const
 {
   return value("term").toUInt();
 }
@@ -461,7 +461,7 @@ void MyMoneyAccountLoan::setTerm(const unsigned int payments)
   setValue("term", QString::number(payments));
 }
 
-const MyMoneyMoney MyMoneyAccountLoan::periodicPayment(void) const
+const MyMoneyMoney MyMoneyAccountLoan::periodicPayment() const
 {
   return MyMoneyMoney(value("periodic-payment"));
 }
@@ -471,7 +471,7 @@ void MyMoneyAccountLoan::setPeriodicPayment(const MyMoneyMoney& payment)
   setValue("periodic-payment", payment.toString());
 }
 
-const QString MyMoneyAccountLoan::payee(void) const
+const QString MyMoneyAccountLoan::payee() const
 {
   return value("payee");
 }
@@ -481,7 +481,7 @@ void MyMoneyAccountLoan::setPayee(const QString& payee)
   setValue("payee", payee);
 }
 
-const QString MyMoneyAccountLoan::interestAccountId(void) const
+const QString MyMoneyAccountLoan::interestAccountId() const
 {
   return QString();
 }
@@ -503,7 +503,7 @@ void MyMoneyAccountLoan::setInterestCompounding(int frequency)
   setValue("compoundingFrequency", QString("%1").arg(frequency));
 }
 
-int MyMoneyAccountLoan::interestCompounding(void) const
+int MyMoneyAccountLoan::interestCompounding() const
 {
   return value("compoundingFrequency").toInt();
 }
@@ -573,7 +573,7 @@ void MyMoneyAccount::setOnlineBankingSettings(const MyMoneyKeyValueContainer& va
   m_onlineBankingSettings = values;
 }
 
-const MyMoneyKeyValueContainer& MyMoneyAccount::onlineBankingSettings(void) const
+const MyMoneyKeyValueContainer& MyMoneyAccount::onlineBankingSettings() const
 {
   return m_onlineBankingSettings;
 }
@@ -586,7 +586,7 @@ void MyMoneyAccount::setClosed(bool closed)
     deletePair("mm-closed");
 }
 
-bool MyMoneyAccount::isClosed(void) const
+bool MyMoneyAccount::isClosed() const
 {
   return !(value("mm-closed").isEmpty());
 }
@@ -610,17 +610,17 @@ int MyMoneyAccount::fraction(const MyMoneySecurity& sec)
   return m_fraction;
 }
 
-int MyMoneyAccount::fraction(void) const
+int MyMoneyAccount::fraction() const
 {
   return m_fraction;
 }
 
-bool MyMoneyAccount::isCategory(void) const
+bool MyMoneyAccount::isCategory() const
 {
   return m_accountType == Income || m_accountType == Expense;
 }
 
-QString MyMoneyAccount::brokerageName(void) const
+QString MyMoneyAccount::brokerageName() const
 {
   if (m_accountType == Investment)
     return QString("%1 (%2)").arg(m_name, i18nc("Brokerage (suffix for account names)", "Brokerage"));

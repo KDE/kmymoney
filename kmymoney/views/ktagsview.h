@@ -59,7 +59,7 @@ public:
   KTagListItem(QListWidget *parent, const MyMoneyTag& tag);
   ~KTagListItem();
 
-  const MyMoneyTag& tag(void) const {
+  const MyMoneyTag& tag() const {
     return m_tag;
   };
 
@@ -86,15 +86,15 @@ public:
 
 public slots:
   void slotSelectTagAndTransaction(const QString& tagId, const QString& accountId = QString(), const QString& transactionId = QString());
-  void slotLoadTags(void);
+  void slotLoadTags();
   void slotStartRename(QListWidgetItem*);
-  void slotHelp(void);
+  void slotHelp();
 
 protected:
-  void loadTags(void);
+  void loadTags();
   void selectedTags(QList<MyMoneyTag>& tagsList) const;
   void ensureTagVisible(const QString& id);
-  void clearItemData(void);
+  void clearItemData();
 
 protected slots:
   /**
@@ -103,7 +103,7 @@ protected slots:
     * it according to the current settings. Then it
     * loads the m_transactionView with the transaction data.
     */
-  void showTransactions(void);
+  void showTransactions();
 
   /**
     * This slot is called whenever the selection in m_tagsList
@@ -115,12 +115,12 @@ protected slots:
     * This slot is called whenever the selection in m_tagsList
     * has been changed.
     */
-  void slotSelectTag(void);
+  void slotSelectTag();
 
   /**
     * This slot marks the current selected tag as modified (dirty).
     */
-  void slotTagDataChanged(void);
+  void slotTagDataChanged();
 
   /**
     * This slot is called when the name of a tag is changed inside
@@ -132,13 +132,13 @@ protected slots:
     * Updates the tag data in m_tag from the information in the
     * tag information widget.
     */
-  void slotUpdateTag(void);
+  void slotUpdateTag();
 
-  void slotSelectTransaction(void);
+  void slotSelectTransaction();
 
-  void slotTagNew(void);
+  void slotTagNew();
 
-  void slotRenameButtonCliked(void);
+  void slotRenameButtonCliked();
 
   void slotChangeFilter(int index);
 

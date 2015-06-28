@@ -93,7 +93,7 @@ void KNewBankDlg::okClicked()
   accept();
 }
 
-const MyMoneyInstitution& KNewBankDlg::institution(void)
+const MyMoneyInstitution& KNewBankDlg::institution()
 {
   return m_institution;
 }

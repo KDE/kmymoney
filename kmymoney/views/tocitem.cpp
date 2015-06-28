@@ -34,7 +34,7 @@ TocItem::TocItem(QTreeWidgetItem* parent, QStringList columns):
     QTreeWidgetItem(parent, columns)
 {}
 
-bool TocItem::isReport(void)
+bool TocItem::isReport()
 {
   return (type == REPORT ? true : false);
 }

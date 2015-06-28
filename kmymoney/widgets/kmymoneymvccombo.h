@@ -70,7 +70,7 @@ public:
     * @return reference to QString containing the id. If no item
     *         is selected the QString will be empty.
     */
-  const QString& selectedItem(void) const;
+  const QString& selectedItem() const;
 
   /**
     * This method selects the item with the respective @a id.
@@ -124,7 +124,7 @@ protected:
   /**
    * check if the current text is contained in the internal list, if not ask the user if want to create a new item.
    */
-  virtual void checkCurrentText(void);
+  virtual void checkCurrentText();
 
   /**
     * set the widgets text area based on the item with the given @a id.
@@ -152,7 +152,7 @@ signals:
   void itemSelected(const QString& id);
   void objectCreation(bool);
   void createItem(const QString&, QString&);
-  void lostFocus(void);
+  void lostFocus();
 
 private:
   /// \internal d-pointer class.
@@ -217,7 +217,7 @@ protected:
   /**
     * check if the current text is contained in the internal list, if not ask the user if want to create a new item.
     */
-  virtual void checkCurrentText(void);
+  virtual void checkCurrentText();
 
 private:
   QList<QString> m_usedIdList;
@@ -262,13 +262,13 @@ public:
   KMyMoneyTagCombo* tagCombo() {
     return m_tagCombo;
   }
-  const QList<QString> selectedTags(void);
+  const QList<QString> selectedTags();
   void addTagWidget(const QString& id);
-  void RemoveAllTagWidgets(void);
+  void RemoveAllTagWidgets();
 
 protected slots:
-  void slotRemoveTagWidget(void);
-  void slotAddTagWidget(void);
+  void slotRemoveTagWidget();
+  void slotAddTagWidget();
 
 private:
   KMyMoneyTagCombo *m_tagCombo;
@@ -292,8 +292,8 @@ public:
   KMyMoneyReconcileCombo(QWidget *w = 0);
 
   void setState(MyMoneySplit::reconcileFlagE state);
-  MyMoneySplit::reconcileFlagE state(void) const;
-  void removeDontCare(void);
+  MyMoneySplit::reconcileFlagE state() const;
+  void removeDontCare();
 
 protected slots:
   void slotSetState(const QString&);
@@ -315,10 +315,10 @@ public:
   explicit KMyMoneyCashFlowCombo(QWidget *w = 0, MyMoneyAccount::accountTypeE type = MyMoneyAccount::Asset);
 
   void setDirection(KMyMoneyRegister::CashFlowDirection dir);
-  KMyMoneyRegister::CashFlowDirection direction(void) const {
+  KMyMoneyRegister::CashFlowDirection direction() const {
     return m_dir;
   }
-  void removeDontCare(void);
+  void removeDontCare();
 
 protected slots:
   void slotSetDirection(const QString& id);
@@ -345,7 +345,7 @@ public:
   KMyMoneyActivityCombo(QWidget *w = 0);
 
   void setActivity(MyMoneySplit::investTransactionTypeE activity);
-  MyMoneySplit::investTransactionTypeE activity(void) const {
+  MyMoneySplit::investTransactionTypeE activity() const {
     return m_activity;
   }
 
@@ -370,12 +370,12 @@ public:
   void insertItem(const QString& txt, int id, int idx = -1);
 
   void setCurrentItem(int id);
-  int currentItem(void) const;
+  int currentItem() const;
 
   void removeItem(int id);
 
 public slots:
-  void clear(void);
+  void clear();
 
 signals:
   void itemSelected(int id);
@@ -399,7 +399,7 @@ class KMM_WIDGETS_EXPORT KMyMoneyPeriodCombo : public KMyMoneyGeneralCombo
 public:
   KMyMoneyPeriodCombo(QWidget* parent = 0);
 
-  MyMoneyTransactionFilter::dateOptionE currentItem(void) const;
+  MyMoneyTransactionFilter::dateOptionE currentItem() const;
   void setCurrentItem(MyMoneyTransactionFilter::dateOptionE id);
 
   /**
@@ -431,7 +431,7 @@ class KMM_WIDGETS_EXPORT KMyMoneyOccurrenceCombo : public KMyMoneyGeneralCombo
 public:
   KMyMoneyOccurrenceCombo(QWidget* parent = 0);
 
-  MyMoneySchedule::occurrenceE currentItem(void) const;
+  MyMoneySchedule::occurrenceE currentItem() const;
 };
 
 /**
@@ -466,15 +466,15 @@ public:
    * is 12). In case, the frequency cannot be converted (once, every other year, etc.)
    * the method returns 0.
    */
-  int eventsPerYear(void) const;
+  int eventsPerYear() const;
   /**
    * This method returns the number of days between two events of
    * the selected frequency. The return value for months is based
    * on 30 days and the year is 360 days long.
    */
-  int daysBetweenEvents(void) const;
+  int daysBetweenEvents() const;
 
-  QVariant currentData(void) const;
+  QVariant currentData() const;
 
   void setCurrentData(QVariant data);
 

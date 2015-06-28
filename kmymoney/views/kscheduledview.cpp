@@ -402,7 +402,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
   return item;
 }
 
-void KScheduledView::slotTimerDone(void)
+void KScheduledView::slotTimerDone()
 {
   QTreeWidgetItem* item;
 
@@ -418,7 +418,7 @@ void KScheduledView::slotTimerDone(void)
   resize(width(), height() + 1);*/
 }
 
-void KScheduledView::slotReloadView(void)
+void KScheduledView::slotReloadView()
 {
   m_needReload = true;
   if (isVisible()) {
@@ -442,12 +442,12 @@ void KScheduledView::showEvent(QShowEvent* event)
   QWidget::showEvent(event);
 }
 
-void KScheduledView::slotRearrange(void)
+void KScheduledView::slotRearrange()
 {
   resizeEvent(0);
 }
 
-void KScheduledView::readConfig(void)
+void KScheduledView::readConfig()
 {
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Last Use Settings");
@@ -462,7 +462,7 @@ void KScheduledView::readConfig(void)
   m_scheduleTree->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
 }
 
-void KScheduledView::writeConfig(void)
+void KScheduledView::writeConfig()
 {
   KSharedConfigPtr config = KGlobal::config();
   KConfigGroup grp = config->group("Last Use Settings");

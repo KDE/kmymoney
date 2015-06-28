@@ -83,9 +83,9 @@ private:
 public:
   TransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _value, const QString& _accountid, const QString& _categoryid, const QString& _currencyid = QString(), const QString& _payee = "Test Payee");
   ~TransactionHelper();
-  void update(void);
+  void update();
 protected:
-  TransactionHelper(void) {}
+  TransactionHelper() {}
 };
 
 class InvTransactionHelper: public TransactionHelper
@@ -104,7 +104,7 @@ private:
   MyMoneyMoney m_amount;
 
 public:
-  BudgetEntryHelper(void): m_applytosub(false) {}
+  BudgetEntryHelper(): m_applytosub(false) {}
   BudgetEntryHelper(const QDate& _date, const QString& _categoryid, bool _applytosub, const MyMoneyMoney& _amount): m_date(_date), m_categoryid(_categoryid), m_applytosub(_applytosub), m_amount(_amount) {}
 };
 

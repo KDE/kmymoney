@@ -70,35 +70,35 @@ public:
     *
     * @return QString with filename
     */
-  const QString filename(void) const {
+  const QString filename() const {
     return ui->m_qlineeditFile->text();
   };
 
   /**
     * This method returns the start date of the export dialog
     */
-  QDate startDate(void) const {
+  QDate startDate() const {
     return ui->m_kmymoneydateStart->date();
   };
 
   /**
     * This method returns the end date of the export dialog
     */
-  QDate endDate(void) const {
+  QDate endDate() const {
     return ui->m_kmymoneydateEnd->date();
   };
 
   /**
     * This method returns the state of the account radioButton
     */
-  bool accountSelected(void) const {
+  bool accountSelected() const {
     return ui->m_radioButtonAccount->isChecked();
   };
 
   /**
     * This method returns the state of the category radioButton
     */
-  bool categorySelected(void) const {
+  bool categorySelected() const {
     return ui->m_radioButtonCategories->isChecked();
   };
 
@@ -159,14 +159,14 @@ public slots:
 
 private:
 
-  void readConfig(void);
-  void writeConfig(void);
+  void readConfig();
+  void writeConfig();
 
   /**
     * This method is used to load the available accounts into the
     * combo box for selection.
     */
-  void loadAccounts(void);
+  void loadAccounts();
 
   Ui::CsvExportDlg* ui;
   QString           m_accountId;

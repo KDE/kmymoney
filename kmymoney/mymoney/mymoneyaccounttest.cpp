@@ -444,7 +444,7 @@ void MyMoneyAccountTest::testReadXML()
   }
 }
 
-void MyMoneyAccountTest::testHasReferenceTo(void)
+void MyMoneyAccountTest::testHasReferenceTo()
 {
   MyMoneyAccount a;
 
@@ -461,7 +461,7 @@ void MyMoneyAccountTest::testHasReferenceTo(void)
   QVERIFY(a.hasReferenceTo("Currency") == true);
 }
 
-void MyMoneyAccountTest::testSetClosed(void)
+void MyMoneyAccountTest::testSetClosed()
 {
   MyMoneyAccount a;
 
@@ -472,7 +472,7 @@ void MyMoneyAccountTest::testSetClosed(void)
   QVERIFY(a.isClosed() == false);
 }
 
-void MyMoneyAccountTest::testIsIncomeExpense(void)
+void MyMoneyAccountTest::testIsIncomeExpense()
 {
   MyMoneyAccount a;
 
@@ -528,7 +528,7 @@ void MyMoneyAccountTest::testIsIncomeExpense(void)
   QVERIFY(a.isIncomeExpense() == false);
 }
 
-void MyMoneyAccountTest::testIsAssetLiability(void)
+void MyMoneyAccountTest::testIsAssetLiability()
 {
   MyMoneyAccount a;
 
@@ -584,7 +584,7 @@ void MyMoneyAccountTest::testIsAssetLiability(void)
   QVERIFY(a.isAssetLiability() == false);
 }
 
-void MyMoneyAccountTest::testIsLoan(void)
+void MyMoneyAccountTest::testIsLoan()
 {
   MyMoneyAccount a;
 

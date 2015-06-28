@@ -146,7 +146,7 @@ void KForecastView::showEvent(QShowEvent* event)
   QWidget::showEvent(event);
 }
 
-void KForecastView::slotLoadForecast(void)
+void KForecastView::slotLoadForecast()
 {
   m_needReload[SummaryView] = true;
   m_needReload[ListView] = true;
@@ -161,7 +161,7 @@ void KForecastView::slotLoadForecast(void)
     slotTabChanged(m_tab->currentIndex());
 }
 
-void KForecastView::slotManualForecast(void)
+void KForecastView::slotManualForecast()
 {
   m_needReload[SummaryView] = true;
   m_needReload[ListView] = true;
@@ -173,7 +173,7 @@ void KForecastView::slotManualForecast(void)
     slotTabChanged(m_tab->currentIndex());
 }
 
-void KForecastView::loadForecastSettings(void)
+void KForecastView::loadForecastSettings()
 {
   //fill the settings controls
   m_forecastDays->setValue(KMyMoneyGlobalSettings::forecastDays());
@@ -201,7 +201,7 @@ void KForecastView::loadForecastSettings(void)
   }
 }
 
-void KForecastView::loadListView(void)
+void KForecastView::loadListView()
 {
   MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -252,7 +252,7 @@ void KForecastView::loadListView(void)
   m_fixedColumnView.reset(m_forecastList->horizontalScrollBar()->isVisible() ? new FixedColumnTreeView(m_forecastList) : 0);
 }
 
-void KForecastView::loadSummaryView(void)
+void KForecastView::loadSummaryView()
 {
   MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
   QList<MyMoneyAccount> accList;
@@ -428,7 +428,7 @@ void KForecastView::loadSummaryView(void)
   m_adviceText->show();
 }
 
-void KForecastView::loadAdvancedView(void)
+void KForecastView::loadAdvancedView()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneyAccount> accList;
@@ -571,7 +571,7 @@ void KForecastView::loadAdvancedView(void)
   m_advancedList->show();
 }
 
-void KForecastView::loadBudgetView(void)
+void KForecastView::loadBudgetView()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
@@ -1003,7 +1003,7 @@ void KForecastView::itemCollapsed(QTreeWidgetItem *item)
   }
 }
 
-void KForecastView::loadChartView(void)
+void KForecastView::loadChartView()
 {
   MyMoneyReport::EDetailLevel detailLevel[4] = { MyMoneyReport::eDetailAll, MyMoneyReport::eDetailTop, MyMoneyReport::eDetailGroup, MyMoneyReport::eDetailTotal };
 

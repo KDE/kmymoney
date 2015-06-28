@@ -74,7 +74,7 @@ public:
     *
     * @return reference to QString containing the message
     */
-  const QString& what(void) const {
+  const QString& what() const {
     return m_msg;
   };
 
@@ -84,7 +84,7 @@ public:
     *
     * @return reference to QString containing the filename
     */
-  const QString& file(void) const {
+  const QString& file() const {
     return m_file;
   };
 
@@ -94,7 +94,7 @@ public:
     *
     * @return long integer containing the line number
     */
-  unsigned long line(void) const {
+  unsigned long line() const {
     return m_line;
   };
 

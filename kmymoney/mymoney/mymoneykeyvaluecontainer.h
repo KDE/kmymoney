@@ -87,7 +87,7 @@ public:
   /**
     * This method clears all pairs currently in the container.
     */
-  void clear(void);
+  void clear();
 
   /**
     * This method is used to retrieve the whole set of key/value pairs
@@ -97,7 +97,7 @@ public:
     * @return QMap<QString, QString> containing all key/value pairs of
     *         this container.
     */
-  const QMap<QString, QString>& pairs(void) const {
+  const QMap<QString, QString>& pairs() const {
     return m_kvp;
   };
 

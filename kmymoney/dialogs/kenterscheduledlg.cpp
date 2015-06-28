@@ -117,7 +117,7 @@ KEnterScheduleDlg::~KEnterScheduleDlg()
   delete d;
 }
 
-KMyMoneyUtils::EnterScheduleResultCodeE KEnterScheduleDlg::resultCode(void) const
+KMyMoneyUtils::EnterScheduleResultCodeE KEnterScheduleDlg::resultCode() const
 {
   if (result() == QDialog::Accepted)
     return d->m_extendedReturnCode;
@@ -130,19 +130,19 @@ void KEnterScheduleDlg::showExtendedKeys(bool visible)
   buttonSkip->setVisible(visible);
 }
 
-void KEnterScheduleDlg::slotIgnore(void)
+void KEnterScheduleDlg::slotIgnore()
 {
   d->m_extendedReturnCode = KMyMoneyUtils::Ignore;
   accept();
 }
 
-void KEnterScheduleDlg::slotSkip(void)
+void KEnterScheduleDlg::slotSkip()
 {
   d->m_extendedReturnCode = KMyMoneyUtils::Skip;
   accept();
 }
 
-MyMoneyTransaction KEnterScheduleDlg::transaction(void)
+MyMoneyTransaction KEnterScheduleDlg::transaction()
 {
   MyMoneyTransaction t = d->m_schedule.transaction();
 
@@ -173,12 +173,12 @@ void KEnterScheduleDlg::resizeEvent(QResizeEvent* ev)
 }
 
 
-void KEnterScheduleDlg::slotSetupSize(void)
+void KEnterScheduleDlg::slotSetupSize()
 {
   resize(width(), minimumSizeHint().height());
 }
 
-int KEnterScheduleDlg::exec(void)
+int KEnterScheduleDlg::exec()
 {
   if (d->m_showWarningOnce) {
     d->m_showWarningOnce = false;
@@ -191,7 +191,7 @@ int KEnterScheduleDlg::exec(void)
   return KEnterScheduleDlgDecl::exec();
 }
 
-TransactionEditor* KEnterScheduleDlg::startEdit(void)
+TransactionEditor* KEnterScheduleDlg::startEdit()
 {
   KMyMoneyRegister::SelectedTransactions list(m_register);
   TransactionEditor* editor = d->m_item->createEditor(m_form, list, QDate());
@@ -346,7 +346,7 @@ bool KEnterScheduleDlg::focusNextPrevChild(bool next)
   return rc;
 }
 
-void KEnterScheduleDlg::slotShowHelp(void)
+void KEnterScheduleDlg::slotShowHelp()
 {
   KToolInvocation::invokeHelp("details.schedules.entering");
 }

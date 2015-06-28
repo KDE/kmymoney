@@ -64,7 +64,7 @@ public:
    * and version (eg. "QWIN:1700").  If current value is the
    * default, an empty string is returned.
    */
-  const QString appId(void) const;
+  const QString appId() const;
 
   /**
    * This method returns @c true in case the current selected application
@@ -85,7 +85,7 @@ class OfxHeaderVersion
 {
 public:
   OfxHeaderVersion(KComboBox* combo, const QString& headerVersion);
-  QString headerVersion(void) const;
+  QString headerVersion() const;
 
 private:
   KComboBox*             m_combo;
@@ -98,26 +98,26 @@ class MyMoneyOfxConnector
 {
 public:
   MyMoneyOfxConnector(const MyMoneyAccount& _account);
-  QString url(void) const;
+  QString url() const;
 
   /**
    * Constructs the request for a statement. The first date
    * for which transactions will be requested is determined
    * by statementStartDate()
    */
-  const QByteArray statementRequest(void) const;
+  const QByteArray statementRequest() const;
   const QByteArray statementResponse(const QDate& _dtstart) const;
 
 private:
   void initRequest(OfxFiLogin* fi) const;
-  QDate statementStartDate(void) const;
-  QString iban(void) const;
-  QString fiorg(void) const;
-  QString fiid(void) const;
-  QString username(void) const;
-  QString password(void) const;
-  QString accountnum(void) const;
-  OfxAccountData::AccountType accounttype(void) const;
+  QDate statementStartDate() const;
+  QString iban() const;
+  QString fiorg() const;
+  QString fiid() const;
+  QString username() const;
+  QString password() const;
+  QString accountnum() const;
+  OfxAccountData::AccountType accounttype() const;
 
 private:
   const MyMoneyAccount& m_account;

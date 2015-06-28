@@ -206,7 +206,7 @@ static const uchar resetButtonImage[] = {
   0x45, 0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82
 };
 
-void kMyMoneyEdit::init(void)
+void kMyMoneyEdit::init()
 {
   allowEmpty = false;
   m_edit = new kMyMoneyLineEdit(this, true);
@@ -257,7 +257,7 @@ kMyMoneyEdit::~kMyMoneyEdit()
   delete m_calculatorFrame;
 }
 
-KLineEdit* kMyMoneyEdit::lineedit(void) const
+KLineEdit* kMyMoneyEdit::lineedit() const
 {
   return m_edit;
 }
@@ -273,12 +273,12 @@ void kMyMoneyEdit::setPrecision(const int prec)
   }
 }
 
-bool kMyMoneyEdit::isValid(void) const
+bool kMyMoneyEdit::isValid() const
 {
   return !(m_edit->text().isEmpty());
 }
 
-MyMoneyMoney kMyMoneyEdit::value(void) const
+MyMoneyMoney kMyMoneyEdit::value() const
 {
   QString txt = m_edit->text();
   ensureFractionalPart(txt);
@@ -304,13 +304,13 @@ void kMyMoneyEdit::loadText(const QString& txt)
   m_resetButton->setEnabled(false);
 }
 
-void kMyMoneyEdit::clearText(void)
+void kMyMoneyEdit::clearText()
 {
   m_text.clear();
   m_edit->setText(m_text);
 }
 
-void kMyMoneyEdit::resetText(void)
+void kMyMoneyEdit::resetText()
 {
   m_edit->setText(m_text);
   m_resetButton->setEnabled(false);
@@ -349,7 +349,7 @@ void kMyMoneyEdit::theTextChanged(const QString & theText)
   }
 }
 
-void kMyMoneyEdit::ensureFractionalPart(void)
+void kMyMoneyEdit::ensureFractionalPart()
 {
   QString s(m_edit->text());
   ensureFractionalPart(s);
@@ -455,7 +455,7 @@ bool kMyMoneyEdit::eventFilter(QObject * /* o */ , QEvent *e)
   return rc;
 }
 
-void kMyMoneyEdit::slotCalculatorOpen(void)
+void kMyMoneyEdit::slotCalculatorOpen()
 {
   calculatorOpen(0);
 }
@@ -487,7 +487,7 @@ void kMyMoneyEdit::calculatorOpen(QKeyEvent* k)
   m_calculator->setFocus();
 }
 
-void kMyMoneyEdit::slotCalculatorResult(void)
+void kMyMoneyEdit::slotCalculatorResult()
 {
   QString result;
   if (m_calculator != 0) {
@@ -499,7 +499,7 @@ void kMyMoneyEdit::slotCalculatorResult(void)
   }
 }
 
-QWidget* kMyMoneyEdit::focusWidget(void) const
+QWidget* kMyMoneyEdit::focusWidget() const
 {
   QWidget* w = m_edit;
   while (w->focusProxy())
@@ -522,17 +522,17 @@ void kMyMoneyEdit::setAllowEmpty(bool allowed)
   allowEmpty = allowed;
 }
 
-bool kMyMoneyEdit::isCalculatorButtonVisible(void) const
+bool kMyMoneyEdit::isCalculatorButtonVisible() const
 {
   return m_calcButton->isVisible();
 }
 
-bool kMyMoneyEdit::isResetButtonVisible(void) const
+bool kMyMoneyEdit::isResetButtonVisible() const
 {
   return m_resetButton->isVisible();
 }
 
-bool kMyMoneyEdit::isEmptyAllowed(void) const
+bool kMyMoneyEdit::isEmptyAllowed() const
 {
   return allowEmpty;
 }
@@ -543,7 +543,7 @@ void kMyMoneyEdit::setClickMessage(const QString& hint) const
     m_edit->setClickMessage(hint);
 }
 
-bool kMyMoneyEdit::isReadOnly(void) const
+bool kMyMoneyEdit::isReadOnly() const
 {
   if (m_edit)
     return m_edit->isReadOnly();

@@ -72,7 +72,7 @@ KOfxDirectConnectDlg::~KOfxDirectConnectDlg()
   delete d;
 }
 
-bool KOfxDirectConnectDlg::init(void)
+bool KOfxDirectConnectDlg::init()
 {
   show();
 
@@ -219,7 +219,7 @@ void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
   qDebug("Finishing slotOfxFinished");
 }
 
-void KOfxDirectConnectDlg::reject(void)
+void KOfxDirectConnectDlg::reject()
 {
   if (m_job)
     m_job->kill();

@@ -66,7 +66,7 @@ void MyMoneyMoney::setNegativeMonetarySignPosition(const signPosition pos)
   _negativeMonetarySignPosition = pos;
 }
 
-MyMoneyMoney::signPosition MyMoneyMoney::negativeMonetarySignPosition(void)
+MyMoneyMoney::signPosition MyMoneyMoney::negativeMonetarySignPosition()
 {
   return _negativeMonetarySignPosition;
 }
@@ -76,7 +76,7 @@ void MyMoneyMoney::setPositiveMonetarySignPosition(const signPosition pos)
   _positiveMonetarySignPosition = pos;
 }
 
-MyMoneyMoney::signPosition MyMoneyMoney::positiveMonetarySignPosition(void)
+MyMoneyMoney::signPosition MyMoneyMoney::positiveMonetarySignPosition()
 {
   return _positiveMonetarySignPosition;
 }
@@ -89,7 +89,7 @@ void MyMoneyMoney::setThousandSeparator(const QChar &separator)
     _thousandSeparator = 0;
 }
 
-const QChar MyMoneyMoney::thousandSeparator(void)
+const QChar MyMoneyMoney::thousandSeparator()
 {
   return _thousandSeparator;
 }
@@ -102,7 +102,7 @@ void MyMoneyMoney::setDecimalSeparator(const QChar &separator)
     _decimalSeparator = 0;
 }
 
-const QChar MyMoneyMoney::decimalSeparator(void)
+const QChar MyMoneyMoney::decimalSeparator()
 {
   return _decimalSeparator;
 }
@@ -294,7 +294,7 @@ MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const roundingMethod h
   return convertDenominator(_denom, static_cast<RoundingMethod>(how));
 }
 
-MyMoneyMoney MyMoneyMoney::reduce(void) const
+MyMoneyMoney MyMoneyMoney::reduce() const
 {
   MyMoneyMoney out(*this);
   out.canonicalize();
@@ -311,7 +311,7 @@ signed64 MyMoneyMoney::precToDenom(int prec)
   return denom;
 }
 
-double MyMoneyMoney::toDouble(void) const
+double MyMoneyMoney::toDouble() const
 {
   return valueRef().get_d();
 }

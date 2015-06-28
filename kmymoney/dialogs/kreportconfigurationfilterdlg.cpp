@@ -140,7 +140,7 @@ KReportConfigurationFilterDlg::~KReportConfigurationFilterDlg()
 {
 }
 
-void KReportConfigurationFilterDlg::slotSearch(void)
+void KReportConfigurationFilterDlg::slotSearch()
 {
   // setup the filter from the dialog widgets
   setupFilter();
@@ -265,7 +265,7 @@ void KReportConfigurationFilterDlg::slotColumnTypeChanged(int row)
   }
 }
 
-void KReportConfigurationFilterDlg::slotUpdateColumnsCombo(void)
+void KReportConfigurationFilterDlg::slotUpdateColumnsCombo()
 {
   const int monthlyIndex = 2;
   const int incomeExpenseIndex = 0;
@@ -275,7 +275,7 @@ void KReportConfigurationFilterDlg::slotUpdateColumnsCombo(void)
   }
 }
 
-void KReportConfigurationFilterDlg::slotReset(void)
+void KReportConfigurationFilterDlg::slotReset()
 {
   //
   // Set up the widget from the initial filter
@@ -641,7 +641,7 @@ void KReportConfigurationFilterDlg::slotReset(void)
   slotRightSize();
 }
 
-void KReportConfigurationFilterDlg::slotDateChanged(void)
+void KReportConfigurationFilterDlg::slotDateChanged()
 {
   if (m_ui->m_dateRange->currentItem() != MyMoneyTransactionFilter::userDefined) {
     KFindTransactionDlg::slotDateChanged();
@@ -649,13 +649,13 @@ void KReportConfigurationFilterDlg::slotDateChanged(void)
   slotUpdateSelections();
 }
 
-void KReportConfigurationFilterDlg::slotShowHelp(void)
+void KReportConfigurationFilterDlg::slotShowHelp()
 {
   KToolInvocation::invokeHelp("details.reports.config");
 }
 
 //TODO Fix the reports and engine to include transfers even if categories are filtered - bug #1523508
-void KReportConfigurationFilterDlg::slotUpdateCheckTransfers(void)
+void KReportConfigurationFilterDlg::slotUpdateCheckTransfers()
 {
   QCheckBox* cb = m_tab2->findChild<QCheckBox*>("m_checkTransfers");
   if (!m_ui->m_categoriesView->allItemsSelected()) {

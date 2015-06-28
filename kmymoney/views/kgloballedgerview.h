@@ -132,7 +132,7 @@ public:
     * This method returns the id of the currently selected account
     * or QString() if none is selected.
     */
-  const QString accountId(void) const {
+  const QString accountId() const {
     return m_account.id();
   }
 
@@ -184,7 +184,7 @@ public:
     * retval true Emtpy transaction selected.
     * retval false Not successful (e.g. already editing a transaction)
     */
-  bool selectEmptyTransaction(void);
+  bool selectEmptyTransaction();
 
 public slots:
   void showEvent(QShowEvent* event);
@@ -192,7 +192,7 @@ public slots:
   /**
     * This method loads the view with data from the MyMoney engine.
     */
-  void slotLoadView(void);
+  void slotLoadView();
 
   /**
     * This slot is used to select the correct ledger view type for
@@ -229,7 +229,7 @@ public slots:
   /**
     * Select all transactions in the ledger that are not hidden.
     */
-  void slotSelectAllTransactions(void);
+  void slotSelectAllTransactions();
 
 private:
   void showTooltip(const QString msg) const;
@@ -242,15 +242,15 @@ protected:
     * empty or if the referenced account does not exist in the engine,
     * the first account found in the list will be made the current account.
     */
-  void loadAccounts(void);
+  void loadAccounts();
 
   /**
     * This method clears the register, form, transaction list. See @sa m_register,
     * @sa m_transactionList
     */
-  void clear(void);
+  void clear();
 
-  void loadView(void);
+  void loadView();
 
   void resizeEvent(QResizeEvent*);
 
@@ -276,7 +276,7 @@ protected:
     * @retval true current account is in reconciliation mode
     * @retval false current account is not in reconciliation mode
     */
-  bool isReconciliationAccount(void) const;
+  bool isReconciliationAccount() const;
 
   /**
     * Updates the values on the summary line beneath the register with
@@ -291,14 +291,14 @@ protected:
   /**
     * setup the default action according to the current account type
     */
-  void setupDefaultAction(void);
+  void setupDefaultAction();
 
 protected slots:
   void slotLeaveEditMode(const KMyMoneyRegister::SelectedTransactions& list);
-  void slotNewTransaction(void);
+  void slotNewTransaction();
   void slotNewTransaction(KMyMoneyRegister::Action);
 
-  void slotSortOptions(void);
+  void slotSortOptions();
   void slotToggleTransactionMark(KMyMoneyRegister::Transaction* t);
 
   void slotKeepPostDate(const QDate&);
@@ -359,9 +359,9 @@ private:
 signals:
   void accountSelected(const MyMoneyObject&);
   void transactionsSelected(const KMyMoneyRegister::SelectedTransactions&);
-  void newTransaction(void);
-  void startEdit(void);
-  void endEdit(void);
+  void newTransaction();
+  void startEdit();
+  void endEdit();
   void cancelOrEndEdit(bool&);
 
   /**
@@ -382,13 +382,13 @@ signals:
     */
   void reportGenerated(const MyMoneyReport& report);
 
-  void openContextMenu(void);
+  void openContextMenu();
 
   /**
     * This signal is sent out, when the current selected transaction should
     * be marked different
     */
-  void toggleReconciliationFlag(void);
+  void toggleReconciliationFlag();
 
 private:
   bool canProcessTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const;

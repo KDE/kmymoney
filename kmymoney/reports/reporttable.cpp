@@ -28,7 +28,7 @@
 
 #include "kmymoneyglobalsettings.h"
 
-reports::ReportTable::ReportTable(void):
+reports::ReportTable::ReportTable():
     m_resourceHtml("html"),
     m_reportStyleSheet("reportstylesheet"),
     m_cssFileDefault("kmymoney.css")
@@ -38,7 +38,7 @@ reports::ReportTable::ReportTable(void):
   m_resourceType = QLatin1String("appdata").latin1();
 }
 
-QString reports::ReportTable::cssFileNameGet(void)
+QString reports::ReportTable::cssFileNameGet()
 {
   QString cssfilename;
 
@@ -104,7 +104,7 @@ QString reports::ReportTable::renderHeader(const QString& title, bool includeCSS
   return header;
 }
 
-QString reports::ReportTable::renderFooter(void)
+QString reports::ReportTable::renderFooter()
 {
   return "</body>\n</html>\n";
 }

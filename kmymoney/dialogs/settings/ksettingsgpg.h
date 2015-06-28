@@ -52,8 +52,8 @@ public slots:
 
 protected slots:
   void slotStatusChanged(bool state);
-  void slotIdChanged(void);
-  void slotKeyListChanged(void);
+  void slotIdChanged();
+  void slotKeyListChanged();
 
 private:
   int        m_checkCount;

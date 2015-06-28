@@ -82,7 +82,7 @@ public:
   KBudgetListItem(QTreeWidget *parent, const MyMoneyBudget& budget);
   ~KBudgetListItem();
 
-  const MyMoneyBudget& budget(void) {
+  const MyMoneyBudget& budget() {
     return m_budget;
   };
   void setBudget(const MyMoneyBudget& budget) {
@@ -448,7 +448,7 @@ void KBudgetView::showEvent(QShowEvent * event)
   QWidget::showEvent(event);
 }
 
-void KBudgetView::loadBudgets(void)
+void KBudgetView::loadBudgets()
 {
   m_filterProxyModel->invalidate();
 
@@ -512,7 +512,7 @@ void KBudgetView::ensureBudgetVisible(const QString& id)
   }
 }
 
-void KBudgetView::slotRefreshView(void)
+void KBudgetView::slotRefreshView()
 {
   if (isVisible()) {
     if (m_inSelection)
@@ -526,7 +526,7 @@ void KBudgetView::slotRefreshView(void)
   }
 }
 
-void KBudgetView::loadAccounts(void)
+void KBudgetView::loadAccounts()
 {
   // if no budgets are selected, don't load the accounts
   // and clear out the previously shown list
@@ -548,7 +548,7 @@ void KBudgetView::loadAccounts(void)
 
 }
 
-void KBudgetView::askSave(void)
+void KBudgetView::askSave()
 {
   // check if the content of a currently selected budget was modified
   // and ask to store the data
@@ -563,12 +563,12 @@ void KBudgetView::askSave(void)
   }
 }
 
-void KBudgetView::slotRefreshHideUnusedButton(void)
+void KBudgetView::slotRefreshHideUnusedButton()
 {
   m_hideUnusedButton->setDisabled(m_budget.getaccounts().isEmpty());
 }
 
-void KBudgetView::slotSelectBudget(void)
+void KBudgetView::slotSelectBudget()
 {
   askSave();
   KBudgetListItem* item;
@@ -619,7 +619,7 @@ void KBudgetView::slotHideUnused(bool toggled)
     m_filterProxyModel->setHideUnusedIncomeExpenseAccounts(m_hideUnusedButton->isChecked());
 }
 
-const MyMoneyBudget& KBudgetView::selectedBudget(void) const
+const MyMoneyBudget& KBudgetView::selectedBudget() const
 {
   static MyMoneyBudget nullBudget;
 
@@ -640,7 +640,7 @@ void KBudgetView::slotOpenContextMenu(const QPoint& p)
     emit openContextMenu(MyMoneyBudget());
 }
 
-void KBudgetView::slotStartRename(void)
+void KBudgetView::slotStartRename()
 {
   QTreeWidgetItemIterator it_l(m_budgetList, QTreeWidgetItemIterator::Selected);
   QTreeWidgetItem* it_v;
@@ -724,14 +724,14 @@ void KBudgetView::slotSelectAccount(const MyMoneyObject &obj)
   m_budgetValue->setBudgetValues(m_budget, budgetAccount);
 }
 
-void KBudgetView::slotExpandCollapse(void)
+void KBudgetView::slotExpandCollapse()
 {
   if (sender()) {
     KMyMoneyGlobalSettings::setShowAccountsExpanded(sender() == m_expandButton);
   }
 }
 
-void KBudgetView::slotBudgetedAmountChanged(void)
+void KBudgetView::slotBudgetedAmountChanged()
 {
   if (m_budget.id().isEmpty())
     return;
@@ -837,13 +837,13 @@ bool KBudgetView::collectSubBudgets(MyMoneyBudget::AccountGroup &destination, co
   return rc;
 }
 
-void KBudgetView::slotNewBudget(void)
+void KBudgetView::slotNewBudget()
 {
   askSave();
   kmymoney->action("budget_new")->trigger();
 }
 
-void KBudgetView::slotResetBudget(void)
+void KBudgetView::slotResetBudget()
 {
   try {
     m_budget = MyMoneyFile::instance()->budget(m_budget.id());
@@ -862,7 +862,7 @@ void KBudgetView::slotResetBudget(void)
   }
 }
 
-void KBudgetView::slotUpdateBudget(void)
+void KBudgetView::slotUpdateBudget()
 {
   MyMoneyFileTransaction ft;
   try {
@@ -875,7 +875,7 @@ void KBudgetView::slotUpdateBudget(void)
   }
 }
 
-void KBudgetView::languageChange(void)
+void KBudgetView::languageChange()
 {
   QWidget::languageChange();
 

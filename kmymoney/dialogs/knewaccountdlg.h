@@ -87,7 +87,7 @@ private:
   int m_idPropMaxCredit;
   int m_idPropMinBalance;
 
-  void loadVatAccounts(void);
+  void loadVatAccounts();
   void storeKVP(const QString& key, kMyMoneyEdit* widget);
   void storeKVP(const QString& key, KLineEdit* widget);
   void storeKVP(const QString& key, const QString& text, const QString& value);
@@ -115,16 +115,16 @@ public:
   /**
     * This method returns the edited account object.
     */
-  const MyMoneyAccount& account(void);
+  const MyMoneyAccount& account();
 
   /**
     * This method returns the parent account of the edited account object.
     */
-  const MyMoneyAccount& parentAccount(void);
+  const MyMoneyAccount& parentAccount();
 
   void setOpeningBalance(const MyMoneyMoney& balance);
 
-  const MyMoneyMoney openingBalance(void) const {
+  const MyMoneyMoney openingBalance() const {
     return m_openingBalanceEdit->value();
   };
 
@@ -139,7 +139,7 @@ public:
   void addTab(QWidget* w, const QString& name);
 
 protected:
-  void displayOnlineBankingStatus(void);
+  void displayOnlineBankingStatus();
   void adjustEditWidgets(kMyMoneyEdit* dst, kMyMoneyEdit* src, char mode, int corr);
 
 protected slots:
@@ -148,8 +148,8 @@ protected slots:
   void slotAccountTypeChanged(const QString& type);
   void slotVatChanged(bool);
   void slotVatAssignmentChanged(bool);
-  void slotNewClicked(void);
-  void slotCheckFinished(void);
+  void slotNewClicked();
+  void slotCheckFinished();
   void slotLoadInstitutions(const QString&);
   void slotAdjustMinBalanceAbsoluteEdit(const QString&);
   void slotAdjustMinBalanceEarlyEdit(const QString&);

@@ -186,7 +186,7 @@ public:
     *         an internal account
     * @see setInstitution
     */
-  const QString& institutionId(void) const {
+  const QString& institutionId() const {
     return m_institution;
   }
 
@@ -195,7 +195,7 @@ public:
     * @return name of account
     * @see setName()
     */
-  const QString& name(void) const {
+  const QString& name() const {
     return m_name;
   }
 
@@ -204,7 +204,7 @@ public:
     * @return number of account at the institution
     * @see setNumber
     */
-  const QString& number(void) const {
+  const QString& number() const {
     return m_number;
   }
 
@@ -213,7 +213,7 @@ public:
     * @return description of account
     * @see setDescription
     */
-  const QString& description(void) const {
+  const QString& description() const {
     return m_description;
   }
 
@@ -222,7 +222,7 @@ public:
     * @return date of opening of this account as const QDate value
     * @see setOpeningDate()
     */
-  const QDate& openingDate(void) const {
+  const QDate& openingDate() const {
     return m_openingDate;
   }
 
@@ -231,7 +231,7 @@ public:
     * @return date of last reconciliation as const QDate value
     * @see setLastReconciliationDate
     */
-  const QDate& lastReconciliationDate(void) const {
+  const QDate& lastReconciliationDate() const {
     return m_lastReconciliationDate;
   }
 
@@ -240,7 +240,7 @@ public:
     * @return date of last modification as const QDate value
     * @see setLastModified
     */
-  const QDate& lastModified(void) const {
+  const QDate& lastModified() const {
     return m_lastModified;
   }
 
@@ -248,7 +248,7 @@ public:
     * This method is used to return the ID of the parent account
     * @return QString with the ID of the parent of this account
     */
-  const QString& parentAccountId(void) const {
+  const QString& parentAccountId() const {
     return m_parentAccount;
   };
 
@@ -257,7 +257,7 @@ public:
     * subordinate accounts
     * @return QStringList account ids
     */
-  const QStringList& accountList(void) const {
+  const QStringList& accountList() const {
     return m_accountList;
   };
 
@@ -265,7 +265,7 @@ public:
     * This method returns the number of entries in the m_accountList
     * @return number of entries in the accountList
     */
-  int accountCount(void) const {
+  int accountCount() const {
     return m_accountList.count();
   };
 
@@ -286,7 +286,7 @@ public:
     * This method is used to remove all accounts from the list of
     * sub-ordinate accounts.
     */
-  void removeAccountIds(void);
+  void removeAccountIds();
 
   /**
     * This method is used to modify the date of the last
@@ -376,14 +376,14 @@ public:
   /**
     * This method is used to update m_lastModified to the current date
     */
-  void touch(void) {
+  void touch() {
     setLastModified(QDate::currentDate());
   }
 
   /**
     * This method returns the type of the account.
     */
-  accountTypeE accountType(void) const {
+  accountTypeE accountType() const {
     return m_accountType;
   }
 
@@ -393,7 +393,7 @@ public:
     *
     * @return id of currency
     */
-  const QString& currencyId(void) const {
+  const QString& currencyId() const {
     return m_currencyId;
   };
 
@@ -421,7 +421,7 @@ public:
     * This member returns the balance of this account based on
     * all transactions stored in the journal.
     */
-  const MyMoneyMoney& balance(void) const {
+  const MyMoneyMoney& balance() const {
     return m_balance;
   }
 
@@ -461,7 +461,7 @@ public:
     *
     * @return The container of kvp's needed when connecting to this account
     */
-  const MyMoneyKeyValueContainer& onlineBankingSettings(void) const;
+  const MyMoneyKeyValueContainer& onlineBankingSettings() const;
 
   /**
     * This method sets the closed flag for the account. This is just
@@ -479,7 +479,7 @@ public:
     * @retval false account is marked open (the default for new accounts)
     * @retval true account is marked closed
     */
-  bool isClosed(void) const;
+  bool isClosed() const;
 
   /**
     * returns the applicable smallest fraction for this account
@@ -506,7 +506,7 @@ public:
     * @note Don't use this method outside of KMyMoney application context (eg. testcases).
     * Use the above method instead.
     */
-  int fraction(void) const;
+  int fraction() const;
 
   /**
     * This method returns @a true if the account type is
@@ -517,7 +517,7 @@ public:
     *
     * @deprecated use isIncomeExpense() instead
     */
-  KMM_MYMONEY_DEPRECATED bool isCategory(void) const;
+  KMM_MYMONEY_DEPRECATED bool isCategory() const;
 
   /**
     * This method returns @a true if the account type is
@@ -526,7 +526,7 @@ public:
     * @retval true account is of type income or expense
     * @retval false for all other account types
     */
-  bool isIncomeExpense(void) const;
+  bool isIncomeExpense() const;
 
   /**
     * This method returns @a true if the account type is
@@ -535,7 +535,7 @@ public:
     * @retval true account is of type asset or liability
     * @retval false for all other account types
     */
-  bool isAssetLiability(void) const;
+  bool isAssetLiability() const;
 
   /**
     * This method returns @a true if the account type is
@@ -544,7 +544,7 @@ public:
     * @retval true account is of type Loan or AssetLoan
     * @retval false for all other account types
     */
-  bool isLoan(void) const;
+  bool isLoan() const;
 
   /**
     * This method returns @a true if the account type is
@@ -553,7 +553,7 @@ public:
     * @retval true account is of type Stock
     * @retval false for all other account types
     */
-  bool isInvest(void) const;
+  bool isInvest() const;
 
   /**
     * This method returns @a true if the account type is
@@ -562,14 +562,14 @@ public:
     * @retval true account is of type Checkings, Savings or Cash
     * @retval false for all other account types
     */
-  bool isLiquidAsset(void) const;
+  bool isLiquidAsset() const;
 
   /**
    * This method returns a name that has a brokerage suffix of
    * the current name. It only works on investment accounts and
    * returns the name for all other cases.
    */
-  QString brokerageName(void) const;
+  QString brokerageName() const;
 
   /**
    * @param reconcileFlag if set to @a true a reconcile overlay will be
@@ -725,31 +725,31 @@ public:
   MyMoneyAccountLoan(const MyMoneyAccount&);
   ~MyMoneyAccountLoan() {}
 
-  const MyMoneyMoney loanAmount(void) const;
+  const MyMoneyMoney loanAmount() const;
   void setLoanAmount(const MyMoneyMoney& amount);
   const MyMoneyMoney interestRate(const QDate& date) const;
   void setInterestRate(const QDate& date, const MyMoneyMoney& rate);
-  interestDueE interestCalculation(void) const;
+  interestDueE interestCalculation() const;
   void setInterestCalculation(const interestDueE onReception);
-  const QDate nextInterestChange(void) const;
+  const QDate nextInterestChange() const;
   void setNextInterestChange(const QDate& date);
-  const QString schedule(void) const;
+  const QString schedule() const;
   void setSchedule(const QString& sched);
-  bool fixedInterestRate(void) const;
+  bool fixedInterestRate() const;
   void setFixedInterestRate(const bool fixed);
-  const MyMoneyMoney finalPayment(void) const;
+  const MyMoneyMoney finalPayment() const;
   void setFinalPayment(const MyMoneyMoney& finalPayment);
-  unsigned int term(void) const;
+  unsigned int term() const;
   void setTerm(const unsigned int payments);
   int interestChangeFrequency(int* unit = 0) const;
   void setInterestChangeFrequency(const int amount, const int unit);
-  const MyMoneyMoney periodicPayment(void) const;
+  const MyMoneyMoney periodicPayment() const;
   void setPeriodicPayment(const MyMoneyMoney& payment);
-  int interestCompounding(void) const;
+  int interestCompounding() const;
   void setInterestCompounding(int frequency);
-  const QString payee(void) const;
+  const QString payee() const;
   void setPayee(const QString& payee);
-  const QString interestAccountId(void) const;
+  const QString interestAccountId() const;
   void setInterestAccountId(const QString& id);
 
   /**

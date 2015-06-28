@@ -97,7 +97,7 @@ void KGncImportOptionsDlg::buildCodecList()
 }
 
 // return selected codec or 0
-QTextCodec* KGncImportOptionsDlg::decodeOption(void)
+QTextCodec* KGncImportOptionsDlg::decodeOption()
 {
   if (!m_widget->checkDecode->isChecked()) {
     return (0);
@@ -106,7 +106,7 @@ QTextCodec* KGncImportOptionsDlg::decodeOption(void)
   }
 }
 
-void KGncImportOptionsDlg::slotHelp(void)
+void KGncImportOptionsDlg::slotHelp()
 {
   KToolInvocation::invokeHelp("details.impexp.gncoptions");
 }

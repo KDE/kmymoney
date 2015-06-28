@@ -67,7 +67,7 @@ public:
   {
   public:
     ListViewItem(QTreeWidget* parent, const MyMoneyKeyValueContainer& kvps);
-    // virtual void x(void);
+    // virtual void x();
   };
 
   KOnlineBankingSetupWizard(QWidget *parent = 0);
@@ -75,20 +75,20 @@ public:
 
   bool chosenSettings(MyMoneyKeyValueContainer& settings);
 
-  bool isInit(void) const {
+  bool isInit() const {
     return m_fInit;
   }
 
 protected slots:
-  void checkNextButton(void);
+  void checkNextButton();
   void newPage(int id);
   void walletOpened(bool ok);
   void applicationSelectionChanged();
 
 protected:
-  bool finishAccountPage(void);
-  bool finishLoginPage(void);
-  bool finishFiPage(void);
+  bool finishAccountPage();
+  bool finishLoginPage();
+  bool finishFiPage();
   bool post(const char* request, const char* url, const char* filename);
 
   static int ofxAccountCallback(struct OfxAccountData data, void * pv);

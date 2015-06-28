@@ -56,7 +56,7 @@ MyMoneyTransactionFilter::~MyMoneyTransactionFilter()
 {
 }
 
-void MyMoneyTransactionFilter::clear(void)
+void MyMoneyTransactionFilter::clear()
 {
   m_filterSet.allFilter = 0;
   m_invertText = false;
@@ -72,7 +72,7 @@ void MyMoneyTransactionFilter::clear(void)
   m_toDate = QDate();
 }
 
-void MyMoneyTransactionFilter::clearAccountFilter(void)
+void MyMoneyTransactionFilter::clearAccountFilter()
 {
   m_filterSet.singleFilter.accountFilter = 0;
   m_accounts.clear();
@@ -215,7 +215,7 @@ void MyMoneyTransactionFilter::setConsiderCategory(const bool check)
   m_considerCategory = check;
 }
 
-const QList<MyMoneySplit>& MyMoneyTransactionFilter::matchingSplits(void) const
+const QList<MyMoneySplit>& MyMoneyTransactionFilter::matchingSplits() const
 {
   return m_matchingSplits;
 }

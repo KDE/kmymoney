@@ -33,31 +33,31 @@ class MyMoneyForecast;
 class KMyMoneyGlobalSettings : public KMyMoneySettings
 {
 public:
-  static QFont listCellFont(void);
-  static QFont listHeaderFont(void);
-  static QColor listColor(void);
-  static QColor listBGColor(void);
-  static QStringList itemList(void);
+  static QFont listCellFont();
+  static QFont listHeaderFont();
+  static QColor listColor();
+  static QColor listBGColor();
+  static QStringList itemList();
 
   /**
     * returns the number of the first month in the fiscal year
     */
-  static int firstFiscalMonth(void);
+  static int firstFiscalMonth();
 
   /**
     * returns the number of the first day of the fiscal year
     */
-  static int firstFiscalDay(void);
+  static int firstFiscalDay();
 
   /**
     * returns the date of the first day in the current fiscal year
     */
-  static QDate firstFiscalDate(void);
+  static QDate firstFiscalDate();
 
   /**
     * Construct a MyMoneyForecast object setup with all KMyMoneySettings
     */
-  static MyMoneyForecast forecast(void);
+  static MyMoneyForecast forecast();
 
   /**
     * Call the setSubstringSearch() method of all children of
@@ -71,6 +71,6 @@ public:
     * Returns the name of the icon to be used for the 'enter schedule'
     * action depending on the underlying KDE version
     */
-  static QString enterScheduleIcon(void);
+  static QString enterScheduleIcon();
 };
 #endif

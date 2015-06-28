@@ -58,14 +58,14 @@ public:
     *
     * @return ID of object
     */
-  const QString& id(void) const {
+  const QString& id() const {
     return m_id;
   };
 
   /**
     * This method clears the id of the object
     */
-  void clearId(void);
+  void clearId();
 
   /**
     * This method must be provided by all derived objects. It returns,
@@ -89,7 +89,7 @@ public:
 
   bool operator == (const MyMoneyObject& right) const;
 
-  static const QString& emptyId(void);
+  static const QString& emptyId();
 
 protected:
   /**

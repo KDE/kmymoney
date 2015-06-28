@@ -108,7 +108,7 @@ void KInstitutionsView::showEvent(QShowEvent * event)
   QWidget::showEvent(event);
 }
 
-void KInstitutionsView::slotLoadAccounts(void)
+void KInstitutionsView::slotLoadAccounts()
 {
   if (isVisible()) {
     loadAccounts();
@@ -117,7 +117,7 @@ void KInstitutionsView::slotLoadAccounts(void)
   }
 }
 
-void KInstitutionsView::loadAccounts(void)
+void KInstitutionsView::loadAccounts()
 {
   m_filterProxyModel->invalidate();
   m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
@@ -147,7 +147,7 @@ void KInstitutionsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
   m_totalProfitsLabel->setText(s);
 }
 
-void KInstitutionsView::slotExpandCollapse(void)
+void KInstitutionsView::slotExpandCollapse()
 {
   if (sender()) {
     KMyMoneyGlobalSettings::setShowAccountsExpanded(sender() == m_expandButton);

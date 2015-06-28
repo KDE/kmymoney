@@ -66,7 +66,7 @@ public:
 
   void setTabEnabled(int id, bool enabled);
 
-  int currentIndex(void) const;
+  int currentIndex() const;
 
 public slots:
 
@@ -149,7 +149,7 @@ public:
   void paintFocus(QPainter* /*p*/, const QRect& /*cr*/) {}
 
   void adjustColumn(Column col);
-  void clear(void);
+  void clear();
 
   void paintCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index);
 

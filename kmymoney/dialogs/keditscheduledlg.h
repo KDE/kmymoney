@@ -59,17 +59,17 @@ public:
     **/
   ~KEditScheduleDlg();
 
-  TransactionEditor* startEdit(void);
+  TransactionEditor* startEdit();
 
   /**
     * Returns the edited schedule.
     *
     * @return MyMoneySchedule The schedule details.
     **/
-  const MyMoneySchedule& schedule(void) const;
+  const MyMoneySchedule& schedule() const;
 
 protected:
-  MyMoneyTransaction transaction(void) const;
+  MyMoneyTransaction transaction() const;
   /**
     * This method adjusts @a _date according to the rules specified by
     * the schedule's weekend option.
@@ -83,25 +83,25 @@ protected:
   void resizeEvent(QResizeEvent* ev);
 
 private slots:
-  void slotSetupSize(void);
+  void slotSetupSize();
   void slotRemainingChanged(int);
   void slotEndDateChanged(const QDate& date);
   void slotPostDateChanged(const QDate& date);
   void slotSetPaymentMethod(int);
   void slotFrequencyChanged(int item);
-  void slotShowHelp(void);
+  void slotShowHelp();
   void slotOccurrenceMultiplierChanged(int mult);
   void slotFilterPaymentType(int index);
 
   /// Overridden for internal reasons. No API changes.
-  void accept(void);
+  void accept();
 
 private:
   /**
     * Helper method to recalculate and update Transactions Remaining
     * when other values are changed
     */
-  void updateTransactionsRemaining(void);
+  void updateTransactionsRemaining();
 
   /// \internal d-pointer class.
   class Private;

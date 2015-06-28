@@ -170,12 +170,12 @@ KEditScheduleDlg::~KEditScheduleDlg()
   delete d;
 }
 
-void KEditScheduleDlg::slotSetupSize(void)
+void KEditScheduleDlg::slotSetupSize()
 {
   resize(width(), minimumSizeHint().height());
 }
 
-TransactionEditor* KEditScheduleDlg::startEdit(void)
+TransactionEditor* KEditScheduleDlg::startEdit()
 {
   KMyMoneyRegister::SelectedTransactions list(m_register);
   TransactionEditor* editor = d->m_item->createEditor(m_form, list, QDate());
@@ -326,7 +326,7 @@ TransactionEditor* KEditScheduleDlg::startEdit(void)
   return editor;
 }
 
-void KEditScheduleDlg::accept(void)
+void KEditScheduleDlg::accept()
 {
   // Force the focus to be on the OK button. This will trigger creation
   // of any unknown objects (payees, categories etc.)
@@ -342,7 +342,7 @@ void KEditScheduleDlg::accept(void)
     KEditScheduleDlgDecl::accept();
 }
 
-const MyMoneySchedule& KEditScheduleDlg::schedule(void) const
+const MyMoneySchedule& KEditScheduleDlg::schedule() const
 {
   if (d->m_editor) {
     MyMoneyTransaction t = transaction();
@@ -399,7 +399,7 @@ const MyMoneySchedule& KEditScheduleDlg::schedule(void) const
   return d->m_schedule;
 }
 
-MyMoneyTransaction KEditScheduleDlg::transaction(void) const
+MyMoneyTransaction KEditScheduleDlg::transaction() const
 {
   MyMoneyTransaction t = d->m_schedule.transaction();
 
@@ -561,7 +561,7 @@ void KEditScheduleDlg::slotOccurrenceMultiplierChanged(int multiplier)
   }
 }
 
-void KEditScheduleDlg::updateTransactionsRemaining(void)
+void KEditScheduleDlg::updateTransactionsRemaining()
 {
   int remain = d->m_schedule.transactionsRemaining();
   if (remain != m_RemainingEdit->value()) {
@@ -571,7 +571,7 @@ void KEditScheduleDlg::updateTransactionsRemaining(void)
   }
 }
 
-void KEditScheduleDlg::slotShowHelp(void)
+void KEditScheduleDlg::slotShowHelp()
 {
   KToolInvocation::invokeHelp("details.schedules.intro");
 }

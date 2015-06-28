@@ -193,7 +193,7 @@ public:
   MyMoneyFile(IMyMoneyStorage *storage);
 
   // general get functions
-  const MyMoneyPayee& user(void) const;
+  const MyMoneyPayee& user() const;
 
   // general set functions
   void setUser(const MyMoneyPayee& user);
@@ -237,7 +237,7 @@ public:
     *
     * @return true if storage object is attached, false otherwise
     */
-  bool storageAttached(void) const;
+  bool storageAttached() const;
 
   /**
     * This method returns a pointer to the storage object
@@ -245,7 +245,7 @@ public:
     * @return const pointer to the current attached storage object.
     *         If no object is attached, returns 0.
     */
-  IMyMoneyStorage* storage(void) const;
+  IMyMoneyStorage* storage() const;
 
   /**
     * This method must be called before any single change or a series of changes
@@ -255,53 +255,53 @@ public:
     * during the processing of the changes call rollbackTransaction() to undo the
     * changes done so far.
     */
-  void startTransaction(void);
+  void startTransaction();
 
   /**
     * This method returns whether a transaction has been started (@a true)
     * or not (@a false).
     */
-  bool hasTransaction(void) const;
+  bool hasTransaction() const;
 
   /**
     * @sa startTransaction()
     */
-  void commitTransaction(void);
+  void commitTransaction();
 
   /**
     * @sa startTransaction()
     */
-  void rollbackTransaction(void);
+  void rollbackTransaction();
 
   /**
     * This method is used to return the standard liability account
     * @return MyMoneyAccount liability account(group)
     */
-  const MyMoneyAccount& liability(void) const;
+  const MyMoneyAccount& liability() const;
 
   /**
     * This method is used to return the standard asset account
     * @return MyMoneyAccount asset account(group)
     */
-  const MyMoneyAccount& asset(void) const;
+  const MyMoneyAccount& asset() const;
 
   /**
     * This method is used to return the standard expense account
     * @return MyMoneyAccount expense account(group)
     */
-  const MyMoneyAccount& expense(void) const;
+  const MyMoneyAccount& expense() const;
 
   /**
     * This method is used to return the standard income account
     * @return MyMoneyAccount income account(group)
     */
-  const MyMoneyAccount& income(void) const;
+  const MyMoneyAccount& income() const;
 
   /**
     * This method is used to return the standard equity account
     * @return MyMoneyAccount equity account(group)
     */
-  const MyMoneyAccount& equity(void) const;
+  const MyMoneyAccount& equity() const;
 
   /**
     * This method returns the account information for the opening
@@ -365,7 +365,7 @@ public:
     *
     * @return true if changed, false if not
     */
-  bool dirty(void) const;
+  bool dirty() const;
 
   /**
     * This method is used to force the attached storage object to
@@ -373,7 +373,7 @@ public:
     * flag after a failed upload to a server when the save operation
     * to a local temp file was OK.
     */
-  void setDirty(void) const;
+  void setDirty() const;
 
   /**
     * Adds an institution to the file-global institution pool. A
@@ -677,7 +677,7 @@ public:
     *
     * @return QMap with numbers of transactions per account
     */
-  const QMap<QString, unsigned long> transactionCountMap(void) const;
+  const QMap<QString, unsigned long> transactionCountMap() const;
 
   /**
     * This method returns the number of institutions currently known to file
@@ -685,7 +685,7 @@ public:
     *
     * @return number of institutions known to file
     */
-  unsigned int institutionCount(void) const;
+  unsigned int institutionCount() const;
 
   /**
     * This method returns the number of accounts currently known to file
@@ -693,7 +693,7 @@ public:
     *
     * @return number of accounts currently known inside a MyMoneyFile object
     */
-  unsigned int accountCount(void) const;
+  unsigned int accountCount() const;
 
   /**
     * Returns the institution of a given ID
@@ -719,7 +719,7 @@ public:
     *
     * @return QList containing the institution objects
     */
-  const QList<MyMoneyInstitution> institutionList(void) const;
+  const QList<MyMoneyInstitution> institutionList() const;
 
   /**
     * Returns the account addressed by its id.
@@ -928,7 +928,7 @@ public:
     *
     * @return QList<MyMoneyTag> containing the tag information
     */
-  const QList<MyMoneyTag> tagList(void) const;
+  const QList<MyMoneyTag> tagList() const;
 
   /**
     * This method is used to extract a value from the storage's
@@ -962,7 +962,7 @@ public:
    *
    * An exception is thrown if no storage object is attached.
    */
-  QString storageId(void);
+  QString storageId();
 
   /**
     * This method is used to delete a key-value-pair from the
@@ -1050,7 +1050,7 @@ public:
       const QDate& endDate = QDate(),
       const bool overdue = false) const;
 
-  const QStringList consistencyCheck(void);
+  const QStringList consistencyCheck();
 
   /**
     * MyMoneyFile::OpeningBalancesPrefix is a special string used
@@ -1138,7 +1138,7 @@ public:
   /**
     * This method is used to retrieve a list of all MyMoneySecurity objects.
     */
-  const QList<MyMoneySecurity> securityList(void) const;
+  const QList<MyMoneySecurity> securityList() const;
 
   /**
     * This method is used to add a new currency object to the engine.
@@ -1191,7 +1191,7 @@ public:
     *
     * @return QList of all MyMoneySecurity objects.
     */
-  const QList<MyMoneySecurity> currencyList(void) const;
+  const QList<MyMoneySecurity> currencyList() const;
 
   /**
     * This method retrieves a MyMoneySecurity object representing
@@ -1204,7 +1204,7 @@ public:
     *
     * @return MyMoneySecurity describing base currency
     */
-  const MyMoneySecurity& baseCurrency(void) const;
+  const MyMoneySecurity& baseCurrency() const;
 
   /**
     * This method returns the foreign currency of the given two
@@ -1257,7 +1257,7 @@ public:
     *
     * @return MyMoneyPriceList of all MyMoneyPrice objects.
     */
-  const MyMoneyPriceList priceList(void) const;
+  const MyMoneyPriceList priceList() const;
 
   /**
     * This method allows to interrogate the engine, if a known account
@@ -1278,7 +1278,7 @@ public:
     *
     * @return QList of all MyMoneyReport objects.
     */
-  const QList<MyMoneyReport> reportList(void) const;
+  const QList<MyMoneyReport> reportList() const;
 
   /**
     * Adds a report to the file-global institution pool. A
@@ -1308,7 +1308,7 @@ public:
     *
     * @return number of reports known to file
     */
-  unsigned countReports(void) const;
+  unsigned countReports() const;
 
   /**
     * This method is used to retrieve a single MyMoneyReport object.
@@ -1339,7 +1339,7 @@ public:
     *
     * @return QList of all MyMoneyBudget objects.
     */
-  const QList<MyMoneyBudget> budgetList(void) const;
+  const QList<MyMoneyBudget> budgetList() const;
 
   /**
     * Adds a budget to the file-global institution pool. A
@@ -1382,7 +1382,7 @@ public:
     *
     * @return number of budgets known to file
     */
-  unsigned countBudgets(void) const;
+  unsigned countBudgets() const;
 
   /**
     * This method is used to retrieve a single MyMoneyBudget object.
@@ -1478,13 +1478,13 @@ public:
   /**
     * Clear all internal caches (used internally for performance measurements)
     */
-  void clearCache(void);
+  void clearCache();
 
-  void forceDataChanged(void) {
+  void forceDataChanged() {
     emit dataChanged();
   }
 
-  void preloadCache(void);
+  void preloadCache();
 
   /**
     * This returns @p true if file and online balance of a specific
@@ -1560,7 +1560,7 @@ signals:
     * This signal is emitted whenever any data has been changed in the engine
     * via any of the methods of this object
     */
-  void dataChanged(void);
+  void dataChanged();
 
   /**
     * This signal is emitted by the engine whenever a new object
@@ -1646,9 +1646,9 @@ public:
    *          can also affect account objects. If you still need those variables
    *          just reload them from the engine.
    */
-  void commit(void);
-  void rollback(void);
-  void restart(void);
+  void commit();
+  void rollback();
+  void restart();
 
 private:
   bool m_isNested;

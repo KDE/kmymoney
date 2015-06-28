@@ -120,20 +120,20 @@ public:
     * @retval false only a single transaction was selected when the editor was started
     * @retval true multiple transactions were selected when the editor was started
     */
-  virtual bool isMultiSelection(void) const {
+  virtual bool isMultiSelection() const {
     return m_transactions.count() > 1;
   }
 
   virtual bool fixTransactionCommodity(const MyMoneyAccount& account);
 
-  virtual bool canAssignNumber(void) const;
-  virtual void assignNextNumber(void);
+  virtual bool canAssignNumber() const;
+  virtual void assignNextNumber();
 
   /**
     * Returns a pointer to the widget that should receive
     * the focus after the editor has been started.
     */
-  virtual QWidget* firstWidget(void) const = 0;
+  virtual QWidget* firstWidget() const = 0;
 
   /**
     * Returns a pointer to a widget by name
@@ -144,11 +144,11 @@ public:
 
   bool eventFilter(QObject* o, QEvent* e);
 
-  const MyMoneyAccount& account(void) const {
+  const MyMoneyAccount& account() const {
     return m_account;
   }
 
-  void clearFinalWidgets(void);
+  void clearFinalWidgets();
 
   void addFinalWidget(const QWidget*);
 
@@ -158,12 +158,12 @@ public:
   MyMoneySchedule::paymentTypeE m_paymentMethod;
 
 public slots:
-  void slotReloadEditWidgets(void);
+  void slotReloadEditWidgets();
 
   /**
     * The default implementation returns QDialog::Rejected
     */
-  virtual int slotEditSplits(void);
+  virtual int slotEditSplits();
 
   /**
     * Modify the account which the transaction should be based on. The
@@ -174,23 +174,23 @@ public slots:
   virtual void slotUpdateAccount(const QString& id);
 
 protected:
-  virtual void createEditWidgets(void) = 0;
-  virtual void setupFinalWidgets(void) = 0;
+  virtual void createEditWidgets() = 0;
+  virtual void setupFinalWidgets() = 0;
   virtual void loadEditWidgets(KMyMoneyRegister::Action action = KMyMoneyRegister::ActionNone) = 0;
   void setupCategoryWidget(KMyMoneyCategory* category, const QList<MyMoneySplit>& splits, QString& categoryId, const char* splitEditSlot, bool allowObjectCreation = true);
-  void resizeForm(void);
+  void resizeForm();
 
   /**
    * This method sets the precision of the value widgets to reflect
    * the account in m_account. If m_account has no id, the precision
    * defaults to 2.
    */
-  void setupPrecision(void);
+  void setupPrecision();
 
 protected slots:
-  void slotUpdateButtonState(void);
-  void slotUpdateMemoState(void);
-  void slotUpdateAccount(void);
+  void slotUpdateButtonState();
+  void slotUpdateMemoState();
+  void slotUpdateAccount();
   void slotNumberChanged(const QString&);
 
 signals:
@@ -276,18 +276,18 @@ signals:
   /**
    * This signal is sent out, if the user double clicks the number field
    */
-  void assignNumber(void);
+  void assignNumber();
 
   /**
    * This signal is sent out, if the user has pressed the ESC key.
    */
-  void escapePressed(void);
+  void escapePressed();
 
   /**
    * This signal is sent out, if the user has pressed the Return or Enter
    * key and asks to end editing the transaction
    */
-  void returnPressed(void);
+  void returnPressed();
 
   /**
    * This signal is sent out, if any of the balance warning levels
@@ -331,7 +331,7 @@ public:
   ~StdTransactionEditor();
 
   bool isComplete(QString& reason) const;
-  QWidget* firstWidget(void) const;
+  QWidget* firstWidget() const;
 
   /**
     * This method creates a transaction based on the contents of the current widgets,
@@ -354,11 +354,11 @@ public:
   bool createTransaction(MyMoneyTransaction& t, const MyMoneyTransaction& torig, const MyMoneySplit& sorig, bool skipPriceDialog = false);
 
 public slots:
-  int slotEditSplits(void);
+  int slotEditSplits();
   void slotUpdateAmount(const QString&);
 
 protected slots:
-  void slotReloadEditWidgets(void);
+  void slotReloadEditWidgets();
   void slotUpdatePayment(const QString&);
   void slotUpdateDeposit(const QString&);
   void slotUpdateCategory(const QString&);
@@ -374,7 +374,7 @@ protected:
     * This method creates all necessary widgets for this transaction editor.
     * All signals will be connected to the relevant slots.
     */
-  void createEditWidgets(void);
+  void createEditWidgets();
 
   /**
     * This method (re-)loads the widgets with the transaction information
@@ -412,7 +412,7 @@ protected:
     */
   void updateVAT(bool amountChanged = true);
 
-  MyMoneyMoney removeVatSplit(void);
+  MyMoneyMoney removeVatSplit();
 
   /**
     * This method adds a VAT split to transaction @a tr if necessary.
@@ -426,7 +426,7 @@ protected:
     */
   bool addVatSplit(MyMoneyTransaction& tr, const MyMoneyMoney& amount);
 
-  void setupFinalWidgets(void);
+  void setupFinalWidgets();
 
   /**
    * This method returns the sum of all splits of transaction @a t that

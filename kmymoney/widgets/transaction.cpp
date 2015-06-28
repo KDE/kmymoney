@@ -384,7 +384,7 @@ int Transaction::formRowHeight(int /*row*/)
   return m_formRowHeight;
 }
 
-int Transaction::formRowHeight(void) const
+int Transaction::formRowHeight() const
 {
   if (m_formRowHeight < 0) {
     // determine the height of the objects in the table
@@ -493,7 +493,7 @@ void Transaction::arrangeWidget(QTableWidget* tbl, int row, int col, QWidget* w)
   }
 }
 
-bool Transaction::haveNumberField(void) const
+bool Transaction::haveNumberField() const
 {
   bool rc = true;
   switch (m_account.accountType()) {
@@ -582,7 +582,7 @@ QString Transaction::reconcileState(bool text) const
   return txt;
 }
 
-void Transaction::startEditMode(void)
+void Transaction::startEditMode()
 {
   m_inEdit = true;
 
@@ -595,7 +595,7 @@ void Transaction::startEditMode(void)
     setNumRowsRegister(numRowsRegister(true));
 }
 
-void Transaction::leaveEditMode(void)
+void Transaction::leaveEditMode()
 {
   // show the original tabbar since the edit tabbar was removed
   KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(m_form);
@@ -621,7 +621,7 @@ void Transaction::singleLineMemo(QString& txt, const MyMoneySplit& split) const
   txt.replace('\n', ", ");
 }
 
-int Transaction::rowHeightHint(void) const
+int Transaction::rowHeightHint() const
 {
   return m_inEdit ? formRowHeight() : RegisterItem::rowHeightHint();
 }
@@ -836,7 +836,7 @@ void StdTransaction::setupFormHeader(const QString& id)
   }
 }
 
-KMyMoneyRegister::Action StdTransaction::actionType(void) const
+KMyMoneyRegister::Action StdTransaction::actionType() const
 {
   KMyMoneyRegister::Action action = ActionNone;
 
@@ -2065,7 +2065,7 @@ int InvestTransaction::numRowsRegister(bool expanded) const
   return numRows;
 }
 
-bool InvestTransaction::haveShares(void) const
+bool InvestTransaction::haveShares() const
 {
   bool rc = true;
   switch (m_transactionType) {
@@ -2082,82 +2082,82 @@ bool InvestTransaction::haveShares(void) const
   return rc;
 }
 
-bool InvestTransaction::haveFees(void) const
-{
-  bool rc = true;
-  switch (m_transactionType) {
-    case MyMoneySplit::AddShares:
-    case MyMoneySplit::RemoveShares:
-    case MyMoneySplit::SplitShares:
-      rc = false;
-      break;
-
-    default:
-      break;
-  }
-  return rc;
-}
-
-bool InvestTransaction::haveInterest(void) const
-{
-  bool rc = false;
-  switch (m_transactionType) {
-    case MyMoneySplit::BuyShares:
-    case MyMoneySplit::SellShares:
-    case MyMoneySplit::Dividend:
-    case MyMoneySplit::ReinvestDividend:
-    case MyMoneySplit::Yield:
-    case MyMoneySplit::InterestIncome:
-      rc = true;
-      break;
-
-    default:
-      break;
-  }
-  return rc;
-}
-
-bool InvestTransaction::havePrice(void) const
-{
-  bool rc = false;
-  switch (m_transactionType) {
-    case MyMoneySplit::BuyShares:
-    case MyMoneySplit::SellShares:
-    case MyMoneySplit::ReinvestDividend:
-      rc = true;
-      break;
-
-    default:
-      break;
-  }
-  return rc;
-}
-
-bool InvestTransaction::haveAmount(void) const
-{
-  bool rc = false;
-  switch (m_transactionType) {
-    case MyMoneySplit::BuyShares:
-    case MyMoneySplit::SellShares:
-    case MyMoneySplit::Dividend:
-    case MyMoneySplit::Yield:
-    case MyMoneySplit::InterestIncome:
-      rc = true;
-      break;
-
-    default:
-      break;
-  }
-  return rc;
-}
-
-bool InvestTransaction::haveAssetAccount(void) const
+bool InvestTransaction::haveFees() const
 {
   bool rc = true;
   switch (m_transactionType) {
     case MyMoneySplit::AddShares:
     case MyMoneySplit::RemoveShares:
     case MyMoneySplit::SplitShares:
+      rc = false;
+      break;
+
+    default:
+      break;
+  }
+  return rc;
+}
+
+bool InvestTransaction::haveInterest() const
+{
+  bool rc = false;
+  switch (m_transactionType) {
+    case MyMoneySplit::BuyShares:
+    case MyMoneySplit::SellShares:
+    case MyMoneySplit::Dividend:
+    case MyMoneySplit::ReinvestDividend:
+    case MyMoneySplit::Yield:
+    case MyMoneySplit::InterestIncome:
+      rc = true;
+      break;
+
+    default:
+      break;
+  }
+  return rc;
+}
+
+bool InvestTransaction::havePrice() const
+{
+  bool rc = false;
+  switch (m_transactionType) {
+    case MyMoneySplit::BuyShares:
+    case MyMoneySplit::SellShares:
+    case MyMoneySplit::ReinvestDividend:
+      rc = true;
+      break;
+
+    default:
+      break;
+  }
+  return rc;
+}
+
+bool InvestTransaction::haveAmount() const
+{
+  bool rc = false;
+  switch (m_transactionType) {
+    case MyMoneySplit::BuyShares:
+    case MyMoneySplit::SellShares:
+    case MyMoneySplit::Dividend:
+    case MyMoneySplit::Yield:
+    case MyMoneySplit::InterestIncome:
+      rc = true;
+      break;
+
+    default:
+      break;
+  }
+  return rc;
+}
+
+bool InvestTransaction::haveAssetAccount() const
+{
+  bool rc = true;
+  switch (m_transactionType) {
+    case MyMoneySplit::AddShares:
+    case MyMoneySplit::RemoveShares:
+    case MyMoneySplit::SplitShares:
     case MyMoneySplit::ReinvestDividend:
       rc = false;
       break;
@@ -2168,7 +2168,7 @@ bool InvestTransaction::haveAssetAccount(void) const
   return rc;
 }
 
-bool InvestTransaction::haveSplitRatio(void) const
+bool InvestTransaction::haveSplitRatio() const
 {
   return m_transactionType == MyMoneySplit::SplitShares;
 }

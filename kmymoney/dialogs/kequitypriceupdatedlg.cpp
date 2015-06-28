@@ -319,7 +319,7 @@ MyMoneyPrice KEquityPriceUpdateDlg::price(const QString& id) const
   return price;
 }
 
-void KEquityPriceUpdateDlg::storePrices(void)
+void KEquityPriceUpdateDlg::storePrices()
 {
   // update the new prices into the equities
 
@@ -370,7 +370,7 @@ void KEquityPriceUpdateDlg::storePrices(void)
   }
 }
 
-void KEquityPriceUpdateDlg::slotUpdateSelection(void)
+void KEquityPriceUpdateDlg::slotUpdateSelection()
 {
   // Only enable the update button if there is a selection
   btnUpdateSelected->setEnabled(false);
@@ -379,7 +379,7 @@ void KEquityPriceUpdateDlg::slotUpdateSelection(void)
     btnUpdateSelected->setEnabled(true);
 }
 
-void KEquityPriceUpdateDlg::slotUpdateSelectedClicked(void)
+void KEquityPriceUpdateDlg::slotUpdateSelectedClicked()
 {
   // disable sorting while the update is running to maintain the current order of items on which
   // the update process depends and which could be changed with sorting enabled due to the updated values
@@ -401,7 +401,7 @@ void KEquityPriceUpdateDlg::slotUpdateSelectedClicked(void)
   }
 }
 
-void KEquityPriceUpdateDlg::slotUpdateAllClicked(void)
+void KEquityPriceUpdateDlg::slotUpdateAllClicked()
 {
   // disable sorting while the update is running to maintain the current order of items on which
   // the update process depends and which could be changed with sorting enabled due to the updated values
@@ -553,7 +553,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
   }
 }
 
-void KEquityPriceUpdateDlg::finishUpdate(void)
+void KEquityPriceUpdateDlg::finishUpdate()
 {
   // we've run past the end, reset to the default value.
   m_fUpdateAll = false;

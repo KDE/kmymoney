@@ -32,9 +32,9 @@ protected:
 private slots:
   void init();
   void cleanup();
-  void testArrayOperator(void);
-  void testModifyKey(void);
-  void testModifyKeyTwice(void);
+  void testArrayOperator();
+  void testModifyKey();
+  void testModifyKeyTwice();
 };
 
 #endif

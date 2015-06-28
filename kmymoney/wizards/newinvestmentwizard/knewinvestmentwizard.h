@@ -79,17 +79,17 @@ public:
     */
   void createObjects(const QString& parentId);
 
-  const MyMoneyAccount& account(void) const {
+  const MyMoneyAccount& account() const {
     return m_account;
   }
 
 protected slots:
   void slotCheckForExistingSymbol(const QString&);
-  void slotHelp(void);
+  void slotHelp();
 
 private:
-  void init1(void);
-  void init2(void);
+  void init1();
+  void init2();
 
 private:
   MyMoneyAccount    m_account;

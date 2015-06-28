@@ -50,13 +50,13 @@ public:
   /**
    * Returns the list of keys currently listed in the KEditListBox
    */
-  const QStringList keys(void) const {
+  const QStringList keys() const {
     return m_listBox->items();
   }
 
 protected slots:
-  void slotIdChanged(void);
-  void slotKeyListChanged(void);
+  void slotIdChanged();
+  void slotKeyListChanged();
 
 private:
   KEditListBox*   m_listBox;

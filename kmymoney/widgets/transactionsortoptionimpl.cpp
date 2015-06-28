@@ -164,7 +164,7 @@ void TransactionSortOption::setDirectionIcon(QListWidgetItem* item)
   }
 }
 
-QString TransactionSortOption::settings(void) const
+QString TransactionSortOption::settings() const
 {
   QString rc;
   QListWidgetItem* item = dynamic_cast<QListWidgetItem*>(ui->m_selectedList->item(0));
@@ -216,7 +216,7 @@ void TransactionSortOption::slotSelectedSelected()
   }
 }
 
-void TransactionSortOption::slotAddItem(void)
+void TransactionSortOption::slotAddItem()
 {
   QListWidgetItem* item;
   if ((item = ui->m_availableList->currentItem()) != 0) {
@@ -233,7 +233,7 @@ void TransactionSortOption::slotAddItem(void)
   }
 }
 
-void TransactionSortOption::slotRemoveItem(void)
+void TransactionSortOption::slotRemoveItem()
 {
   QListWidgetItem* item;
   if ((item = ui->m_selectedList->currentItem()) != 0) {
@@ -250,7 +250,7 @@ void TransactionSortOption::slotRemoveItem(void)
   }
 }
 
-void TransactionSortOption::slotUpItem(void)
+void TransactionSortOption::slotUpItem()
 {
   QListWidgetItem *item = ui->m_selectedList->currentItem();
   QListWidgetItem *prev = ui->m_selectedList->item(ui->m_selectedList->row(item) - 1);
@@ -265,7 +265,7 @@ void TransactionSortOption::slotUpItem(void)
   }
 }
 
-void TransactionSortOption::slotDownItem(void)
+void TransactionSortOption::slotDownItem()
 {
   QListWidgetItem *item = ui->m_selectedList->currentItem();
   QListWidgetItem *next = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);

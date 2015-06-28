@@ -57,12 +57,12 @@ bool MyMoneyObject::operator == (const MyMoneyObject& right) const
   return m_id == right.m_id;
 }
 
-void MyMoneyObject::clearId(void)
+void MyMoneyObject::clearId()
 {
   m_id.clear();
 }
 
-const QString& MyMoneyObject::emptyId(void)
+const QString& MyMoneyObject::emptyId()
 {
   return m_emptyId;
 }

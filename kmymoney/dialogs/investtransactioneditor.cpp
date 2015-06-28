@@ -204,7 +204,7 @@ void InvestTransactionEditor::dissectTransaction(const MyMoneyTransaction& trans
   }
 }
 
-void InvestTransactionEditor::createEditWidgets(void)
+void InvestTransactionEditor::createEditWidgets()
 {
   KMyMoneyActivityCombo* activity = new KMyMoneyActivityCombo();
   m_editWidgets["activity"] = activity;
@@ -355,12 +355,12 @@ void InvestTransactionEditor::createEditWidgets(void)
   }
 }
 
-int InvestTransactionEditor::slotEditFeeSplits(void)
+int InvestTransactionEditor::slotEditFeeSplits()
 {
   return editSplits("fee-account", "fee-amount", m_feeSplits, false, SLOT(slotEditFeeSplits()));
 }
 
-int InvestTransactionEditor::slotEditInterestSplits(void)
+int InvestTransactionEditor::slotEditInterestSplits()
 {
   return editSplits("interest-account", "interest-amount", m_interestSplits, true, SLOT(slotEditInterestSplits()));
 }
@@ -568,7 +568,7 @@ void InvestTransactionEditor::slotCreateInterestCategory(const QString& name, QS
   id = acc.id();
 }
 
-void InvestTransactionEditor::slotReloadEditWidgets(void)
+void InvestTransactionEditor::slotReloadEditWidgets()
 {
   KMyMoneyCategory* interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
   KMyMoneyCategory* fees = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
@@ -746,7 +746,7 @@ void InvestTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action /* action
   }
 }
 
-QWidget* InvestTransactionEditor::firstWidget(void) const
+QWidget* InvestTransactionEditor::firstWidget() const
 {
   return 0; // let the creator use the first widget in the tab order
 }
@@ -840,7 +840,7 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
   }
 }
 
-void InvestTransactionEditor::slotUpdateTotalAmount(void)
+void InvestTransactionEditor::slotUpdateTotalAmount()
 {
   QLabel* total = dynamic_cast<QLabel*>(haveWidget("total"));
 
@@ -908,7 +908,7 @@ void InvestTransactionEditor::slotUpdateActivity(MyMoneySplit::investTransaction
   }
 }
 
-InvestTransactionEditor::priceModeE InvestTransactionEditor::priceMode(void) const
+InvestTransactionEditor::priceModeE InvestTransactionEditor::priceMode() const
 {
   priceModeE mode = static_cast<priceModeE>(0);
   KMyMoneySecurity* sec = dynamic_cast<KMyMoneySecurity*>(m_editWidgets["security"]);
@@ -1151,12 +1151,12 @@ void InvestTransactionEditor::updatePriceMode(const MyMoneySplit& split)
   }
 }
 
-void InvestTransactionEditor::setupFinalWidgets(void)
+void InvestTransactionEditor::setupFinalWidgets()
 {
   addFinalWidget(haveWidget("memo"));
 }
 
-void InvestTransactionEditor::slotUpdateInvestMemoState(void)
+void InvestTransactionEditor::slotUpdateInvestMemoState()
 {
   KTextEdit* memo = dynamic_cast<KTextEdit*>(m_editWidgets["memo"]);
   if (memo) {

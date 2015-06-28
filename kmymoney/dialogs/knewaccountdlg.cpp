@@ -667,7 +667,7 @@ void KNewAccountDlg::storeKVP(const QString& key, KLineEdit* widget)
   storeKVP(key, widget->text(), widget->text());
 }
 
-const MyMoneyAccount& KNewAccountDlg::account(void)
+const MyMoneyAccount& KNewAccountDlg::account()
 {
   // assign the right currency to the account
   m_account.setCurrencyId(m_currency->security().id());
@@ -686,7 +686,7 @@ const MyMoneyAccount& KNewAccountDlg::account(void)
   return m_account;
 }
 
-const MyMoneyAccount& KNewAccountDlg::parentAccount(void)
+const MyMoneyAccount& KNewAccountDlg::parentAccount()
 {
   return m_parentAccount;
 }
@@ -703,7 +703,7 @@ void KNewAccountDlg::slotSelectionChanged(const QItemSelection &current, const Q
   }
 }
 
-void KNewAccountDlg::loadVatAccounts(void)
+void KNewAccountDlg::loadVatAccounts()
 {
   QList<MyMoneyAccount> list;
   MyMoneyFile::instance()->accountList(list);
@@ -804,7 +804,7 @@ void KNewAccountDlg::slotAccountTypeChanged(const QString& typeStr)
   }
 }
 
-void KNewAccountDlg::slotCheckFinished(void)
+void KNewAccountDlg::slotCheckFinished()
 {
   bool showButton = true;
 

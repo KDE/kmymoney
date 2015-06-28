@@ -148,7 +148,7 @@ KSplitTransactionDlg::~KSplitTransactionDlg()
   grp.writeEntry("Geometry", size());
 }
 
-int KSplitTransactionDlg::exec(void)
+int KSplitTransactionDlg::exec()
 {
   // for deposits, we invert the sign of all splits.
   // don't forget to revert when we're done ;-)
@@ -252,7 +252,7 @@ int KSplitTransactionDlg::exec(void)
   return rc;
 }
 
-void KSplitTransactionDlg::initSize(void)
+void KSplitTransactionDlg::initSize()
 {
   KDialog::resize(width(), height() + 1);
 }
@@ -270,7 +270,7 @@ void KSplitTransactionDlg::reject()
   KSplitTransactionDlgDecl::reject();
 }
 
-void KSplitTransactionDlg::slotClearAllSplits(void)
+void KSplitTransactionDlg::slotClearAllSplits()
 {
   int answer;
   answer = KMessageBox::warningContinueCancel(this,
@@ -295,7 +295,7 @@ void KSplitTransactionDlg::slotClearAllSplits(void)
   }
 }
 
-void KSplitTransactionDlg::slotClearUnusedSplits(void)
+void KSplitTransactionDlg::slotClearUnusedSplits()
 {
   QList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
   QList<MyMoneySplit>::ConstIterator it;
@@ -314,7 +314,7 @@ void KSplitTransactionDlg::slotClearUnusedSplits(void)
   }
 }
 
-void KSplitTransactionDlg::slotMergeSplits(void)
+void KSplitTransactionDlg::slotMergeSplits()
 {
   QList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
   QList<MyMoneySplit>::ConstIterator it;
@@ -378,13 +378,13 @@ void KSplitTransactionDlg::slotUpdateButtons()
   enableButton(KDialog::User2, haveZeroSplit);
 }
 
-void KSplitTransactionDlg::slotEditStarted(void)
+void KSplitTransactionDlg::slotEditStarted()
 {
   enableButton(KDialog::User3, false);
   enableButton(KDialog::User2, false);
 }
 
-void KSplitTransactionDlg::updateSums(void)
+void KSplitTransactionDlg::updateSums()
 {
   MyMoneyMoney splits(splitsValue());
 
@@ -398,7 +398,7 @@ void KSplitTransactionDlg::updateSums(void)
   transactionAmount->setText("<b>" + (-m_split.value()).formatMoney("", m_precision) + ' ');
 }
 
-MyMoneyMoney KSplitTransactionDlg::splitsValue(void)
+MyMoneyMoney KSplitTransactionDlg::splitsValue()
 {
   MyMoneyMoney splitsValue(m_calculatedValue);
   QList<MyMoneySplit> list = transactionsTable->getSplits(m_transaction);
@@ -413,7 +413,7 @@ MyMoneyMoney KSplitTransactionDlg::splitsValue(void)
   return splitsValue;
 }
 
-MyMoneyMoney KSplitTransactionDlg::diffAmount(void)
+MyMoneyMoney KSplitTransactionDlg::diffAmount()
 {
   MyMoneyMoney diff;
 

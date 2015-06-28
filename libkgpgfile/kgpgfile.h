@@ -81,8 +81,8 @@ public:
   ~KGPGFile();
 
   virtual bool open(OpenMode mode);
-  virtual void close(void);
-  virtual void flush(void);
+  virtual void close();
+  virtual void flush();
 
   virtual qint64 readData(char *data, qint64 maxlen);
   virtual qint64 writeData(const char *data, qint64 maxlen);
@@ -122,7 +122,7 @@ public:
     * @retval true GPG can be started and returns a version number
     * @retval false GPG is not available
     */
-  static bool GPGAvailable(void);
+  static bool GPGAvailable();
 
   /**
     * Checks whether a key for a given user-id @p name exists.

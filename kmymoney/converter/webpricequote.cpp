@@ -64,7 +64,7 @@ public:
   double m_price;
   WebPriceQuoteSource m_source;
 
-  static int dbgArea(void) {
+  static int dbgArea() {
     static int s_area = KDebug::registerArea("KMyMoney (WebPriceQuote)");
     return s_area;
   }
@@ -303,7 +303,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
   }
 }
 
-const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources(void)
+const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
 {
   QMap<QString, WebPriceQuoteSource> result;
 
@@ -616,7 +616,7 @@ WebPriceQuoteSource::WebPriceQuoteSource(const QString& name)
   m_skipStripping = grp.readEntry("SkipStripping", false);
 }
 
-void WebPriceQuoteSource::write(void) const
+void WebPriceQuoteSource::write() const
 {
   KSharedConfigPtr kconfig = KGlobal::config();
   KConfigGroup grp = kconfig->group(QString("Online-Quote-Source-%1").arg(m_name));
@@ -638,7 +638,7 @@ void WebPriceQuoteSource::rename(const QString& name)
   write();
 }
 
-void WebPriceQuoteSource::remove(void) const
+void WebPriceQuoteSource::remove() const
 {
   KSharedConfigPtr kconfig = KGlobal::config();
   kconfig->deleteGroup(QString("Online-Quote-Source-%1").arg(m_name));
@@ -648,7 +648,7 @@ void WebPriceQuoteSource::remove(void) const
 // Helper class to babysit the KProcess used for running the local script in that case
 //
 
-WebPriceQuoteProcess::WebPriceQuoteProcess(void)
+WebPriceQuoteProcess::WebPriceQuoteProcess()
 {
   connect(this, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedDataFromFilter()));
   connect(this, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotProcessExited(int,QProcess::ExitStatus)));
@@ -671,7 +671,7 @@ void WebPriceQuoteProcess::slotProcessExited(int /*exitCode*/, QProcess::ExitSta
 // Helper class to babysit the KProcess used for running the Finance Quote sources script
 //
 
-FinanceQuoteProcess::FinanceQuoteProcess(void)
+FinanceQuoteProcess::FinanceQuoteProcess()
 {
   m_isDone = false;
   m_string = "";

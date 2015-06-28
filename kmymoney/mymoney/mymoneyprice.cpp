@@ -93,7 +93,7 @@ const MyMoneyMoney& MyMoneyPrice::rate(const QString& id) const
   throw MYMONEYEXCEPTION(msg);
 }
 
-bool MyMoneyPrice::isValid(void) const
+bool MyMoneyPrice::isValid() const
 {
   return (m_date.isValid() && !m_fromSecurity.isEmpty() && !m_toSecurity.isEmpty());
 }

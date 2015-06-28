@@ -682,7 +682,7 @@ void MyMoneyTransactionTest::testModifyMissingAccountId()
   }
 }
 
-void MyMoneyTransactionTest::testReplaceId(void)
+void MyMoneyTransactionTest::testReplaceId()
 {
   testAddSplits();
 

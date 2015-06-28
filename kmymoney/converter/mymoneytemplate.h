@@ -61,14 +61,14 @@ public:
   bool importTemplate(void(*callback)(int, int, const QString&));
   bool exportTemplate(void(*callback)(int, int, const QString&));
 
-  const QString& title(void) const;
-  const QString& shortDescription(void) const;
-  const QString& longDescription(void) const;
+  const QString& title() const;
+  const QString& shortDescription() const;
+  const QString& longDescription() const;
 
   void hierarchy(QMap<QString, QTreeWidgetItem*>& list);
 
 protected:
-  bool loadDescription(void);
+  bool loadDescription();
   bool createAccounts(MyMoneyAccount& parent, QDomNode account);
   bool setFlags(MyMoneyAccount& acc, QDomNode flags);
   bool saveToLocalFile(KSaveFile* qfile);

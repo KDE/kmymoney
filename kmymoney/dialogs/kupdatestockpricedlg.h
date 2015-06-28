@@ -66,13 +66,13 @@ public:
   const QDate date() const {
     return m_date->date();
   };
-  const MyMoneyMoney price(void) const;
+  const MyMoneyMoney price() const;
 
 public slots:
-  int exec(void);
+  int exec();
 
 protected slots:
-  void slotCheckData(void);
+  void slotCheckData();
 
 private:
   void init();

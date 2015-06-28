@@ -47,10 +47,10 @@ class KLoadTemplateDlg : public KLoadTemplateDlgDecl
 public:
   KLoadTemplateDlg(QWidget *parent = 0);
 
-  QList<MyMoneyTemplate> templates(void) const;
+  QList<MyMoneyTemplate> templates() const;
 
 private slots:
-  void slotHelp(void);
+  void slotHelp();
 };
 
 #endif

@@ -76,7 +76,7 @@ public:
   const QString formatMoney(const QString& currency, const int prec, bool showThousandSeparator = true) const;
   MyMoneyMoney calculateRunningSum(const MyMoneyMoney& runningSum);
   MyMoneyMoney cellBalance(const MyMoneyMoney& _balance);
-  bool isUsed(void) const {
+  bool isUsed() const {
     return m_cellUsed;
   }
 private:

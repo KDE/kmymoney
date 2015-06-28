@@ -71,7 +71,7 @@ void LoanAmountWizardPage::initializePage()
   }
 }
 
-void LoanAmountWizardPage::resetCalculator(void)
+void LoanAmountWizardPage::resetCalculator()
 {
   m_loanAmount1->setText(QString());
   m_interestRate1->setText(QString());

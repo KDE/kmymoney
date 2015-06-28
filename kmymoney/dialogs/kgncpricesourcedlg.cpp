@@ -136,7 +136,7 @@ bool KGncPriceSourceDlg::alwaysUse() const
   return d->widget->checkAlwaysUse->isChecked();
 }
 
-void KGncPriceSourceDlg::slotHelp(void)
+void KGncPriceSourceDlg::slotHelp()
 {
   KToolInvocation::invokeHelp("details.impexp.gncquotes");
 }

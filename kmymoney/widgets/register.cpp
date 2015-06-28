@@ -114,7 +114,7 @@ static unsigned char fancymarker_bg_image[] = {
 QPixmap* GroupMarker::m_bg = 0;
 int GroupMarker::m_bgRefCnt = 0;
 
-void ItemPtrVector::sort(void)
+void ItemPtrVector::sort()
 {
   if (count() > 0) {
     // get rid of 0 pointers in the list
@@ -321,7 +321,7 @@ void GroupMarker::paintFormCell(QPainter *painter, const QStyleOptionViewItem &o
   Q_UNUSED(index);
 }
 
-int GroupMarker::rowHeightHint(void) const
+int GroupMarker::rowHeightHint() const
 {
   if (!m_visible)
     return 0;
@@ -352,7 +352,7 @@ SimpleDateGroupMarker::SimpleDateGroupMarker(Register* parent, const QDate& date
 {
 }
 
-int SimpleDateGroupMarker::rowHeightHint(void) const
+int SimpleDateGroupMarker::rowHeightHint() const
 {
   if (!m_visible)
     return 0;
@@ -692,7 +692,7 @@ void Register::setSortOrder(const QString& order)
   }
 }
 
-void Register::sortItems(void)
+void Register::sortItems()
 {
   if (m_items.count() == 0)
     return;
@@ -737,7 +737,7 @@ void Register::sortItems(void)
   m_listsDirty = true;
 }
 
-TransactionSortField Register::primarySortKey(void) const
+TransactionSortField Register::primarySortKey() const
 {
   if (!m_sortOrder.isEmpty())
     return static_cast<KMyMoneyRegister::TransactionSortField>(abs(m_sortOrder.first()));
@@ -745,7 +745,7 @@ TransactionSortField Register::primarySortKey(void) const
 }
 
 
-void Register::clear(void)
+void Register::clear()
 {
   m_firstErroneous = m_lastErroneous = 0;
   m_ensureVisibleItem = 0;
@@ -846,7 +846,7 @@ void Register::removeItem(RegisterItem* p)
   m_needResize = true;
 }
 
-RegisterItem* Register::firstItem(void) const
+RegisterItem* Register::firstItem() const
 {
   return m_firstItem;
 }
@@ -856,7 +856,7 @@ RegisterItem* Register::nextItem(RegisterItem* item) const
   return item->nextItem();
 }
 
-RegisterItem* Register::lastItem(void) const
+RegisterItem* Register::lastItem() const
 {
   return m_lastItem;
 }
@@ -889,7 +889,7 @@ void Register::setupItemIndex(int rowCount)
   }
 }
 
-void Register::updateAlternate(void) const
+void Register::updateAlternate() const
 {
   bool alternate = false;
   for (QVector<RegisterItem*>::size_type i = 0; i < m_items.size(); ++i) {
@@ -903,7 +903,7 @@ void Register::updateAlternate(void) const
   }
 }
 
-void Register::suppressAdjacentMarkers(void)
+void Register::suppressAdjacentMarkers()
 {
   bool lastWasGroupMarker = false;
   KMyMoneyRegister::RegisterItem* p = lastItem();
@@ -990,7 +990,7 @@ void Register::updateRegister(bool forceUpdateRowHeight)
   }
 }
 
-int Register::rowHeightHint(void) const
+int Register::rowHeightHint() const
 {
   if (!m_rowHeightHint) {
     qDebug("Register::rowHeightHint(): m_rowHeightHint is zero!!");
@@ -1055,7 +1055,7 @@ void Register::resizeEvent(QResizeEvent* ev)
   resize(DetailColumn, true);
 }
 
-void Register::resize(void)
+void Register::resize()
 {
   resize(DetailColumn);
 }
@@ -1248,7 +1248,7 @@ void Register::adjustColumn(int col)
   setColumnWidth(col, minimumColumnWidth(col));
 }
 
-void Register::clearSelection(void)
+void Register::clearSelection()
 {
   unselectItems();
   TransactionEditorContainer::clearSelection();
@@ -1338,7 +1338,7 @@ void Register::selectedTransactions(SelectedTransactions& list) const
   }
 }
 
-QList<RegisterItem*> Register::selectedItems(void) const
+QList<RegisterItem*> Register::selectedItems() const
 {
   QList<RegisterItem*> list;
 
@@ -1352,7 +1352,7 @@ QList<RegisterItem*> Register::selectedItems(void) const
   return list;
 }
 
-int Register::selectedItemsCount(void) const
+int Register::selectedItemsCount() const
 {
   int cnt = 0;
   RegisterItem* item = m_firstItem;
@@ -1453,7 +1453,7 @@ bool Register::setFocusItem(RegisterItem* focusItem)
     return false;
 }
 
-bool Register::setFocusToTop(void)
+bool Register::setFocusToTop()
 {
   RegisterItem* rgItem = m_firstItem;
   while (rgItem) {
@@ -1581,7 +1581,7 @@ void Register::slotDoubleClicked(int row, int)
   }
 }
 
-void Register::slotEnsureItemVisible(void)
+void Register::slotEnsureItemVisible()
 {
   // if clear() has been called since the timer was
   // started, we just ignore the call
@@ -1936,7 +1936,7 @@ Transaction* Register::transactionFactory(Register *parent, const MyMoneyTransac
   return t;
 }
 
-void Register::addGroupMarkers(void)
+void Register::addGroupMarkers()
 {
   QMap<QString, int> list;
   QMap<QString, int>::const_iterator it;
@@ -2084,7 +2084,7 @@ void Register::addGroupMarkers(void)
   }
 }
 
-void Register::removeUnwantedGroupMarkers(void)
+void Register::removeUnwantedGroupMarkers()
 {
   // remove all trailing group markers except statement markers
   KMyMoneyRegister::RegisterItem* q;

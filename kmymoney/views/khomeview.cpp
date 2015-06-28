@@ -147,7 +147,7 @@ KHomeView::~KHomeView()
   delete d;
 }
 
-void KHomeView::slotLoadView(void)
+void KHomeView::slotLoadView()
 {
   d->m_needReload = true;
   if (isVisible()) {
@@ -168,7 +168,7 @@ void KHomeView::showEvent(QShowEvent* event)
   QWidget::showEvent(event);
 }
 
-void KHomeView::slotPrintView(void)
+void KHomeView::slotPrintView()
 {
   if (d->m_part && d->m_part->view())
     d->m_part->view()->print();
@@ -183,7 +183,7 @@ void KHomeView::slotZoomView(int delta)
     d->m_part->setFontScaleFactor(d->m_part->fontScaleFactor() - fontScaleStepping);
 }
 
-void KHomeView::loadView(void)
+void KHomeView::loadView()
 {
   d->m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
@@ -273,7 +273,7 @@ void KHomeView::loadView(void)
   }
 }
 
-void KHomeView::showNetWorthGraph(void)
+void KHomeView::showNetWorthGraph()
 {
   d->m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Net Worth Forecast"));
 
@@ -328,7 +328,7 @@ void KHomeView::showNetWorthGraph(void)
   delete chartWidget;
 }
 
-void KHomeView::showPayments(void)
+void KHomeView::showPayments()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneySchedule> overdues;
@@ -935,7 +935,7 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
   return value;
 }
 
-void KHomeView::showFavoriteReports(void)
+void KHomeView::showFavoriteReports()
 {
   QList<MyMoneyReport> reports = MyMoneyFile::instance()->reportList();
 
@@ -971,7 +971,7 @@ void KHomeView::showFavoriteReports(void)
   }
 }
 
-void KHomeView::showForecast(void)
+void KHomeView::showForecast()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneyAccount> accList;
@@ -1135,7 +1135,7 @@ const QString KHomeView::link(const QString& view, const QString& query, const Q
   return QString("<a href=\"/%1%2\"%3>").arg(view, query, titlePart);
 }
 
-const QString KHomeView::linkend(void) const
+const QString KHomeView::linkend() const
 {
   return "</a>";
 }
@@ -1206,7 +1206,7 @@ void KHomeView::slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments&, co
   }
 }
 
-void KHomeView::showAssetsLiabilities(void)
+void KHomeView::showAssetsLiabilities()
 {
   QList<MyMoneyAccount> accounts;
   QList<MyMoneyAccount>::ConstIterator it;
@@ -1429,7 +1429,7 @@ void KHomeView::showAssetsLiabilities(void)
   }
 }
 
-void KHomeView::showBudget(void)
+void KHomeView::showBudget()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -1581,7 +1581,7 @@ QString KHomeView::showColoredAmount(const QString& amount, bool isNegative)
   return amount;
 }
 
-void KHomeView::doForecast(void)
+void KHomeView::doForecast()
 {
   //clear m_accountList because forecast is about to changed
   d->m_accountList.clear();

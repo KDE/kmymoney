@@ -46,9 +46,9 @@ public:
     m_parent = p;
   }
 #ifndef KMM_DESIGNER
-  QList<MyMoneyTemplate> selectedTemplates(void) const;
+  QList<MyMoneyTemplate> selectedTemplates() const;
   QTreeWidgetItem* hierarchyItem(const QString& parent, const QString& name);
-  void loadHierarchy(void);
+  void loadHierarchy();
 #endif
 
 public:
@@ -78,7 +78,7 @@ QTreeWidgetItem* KAccountTemplateSelector::Private::hierarchyItem(const QString&
   return item;
 }
 
-void KAccountTemplateSelector::Private::loadHierarchy(void)
+void KAccountTemplateSelector::Private::loadHierarchy()
 {
   m_templateHierarchy.clear();
   QTreeWidgetItemIterator it(m_parent->m_groupList, QTreeWidgetItemIterator::Selected);
@@ -131,7 +131,7 @@ void KAccountTemplateSelector::Private::loadHierarchy(void)
   }
 }
 
-QList<MyMoneyTemplate> KAccountTemplateSelector::Private::selectedTemplates(void) const
+QList<MyMoneyTemplate> KAccountTemplateSelector::Private::selectedTemplates() const
 {
   QList<MyMoneyTemplate> list;
   QTreeWidgetItemIterator it(m_parent->m_groupList, QTreeWidgetItemIterator::Selected);
@@ -162,7 +162,7 @@ KAccountTemplateSelector::~KAccountTemplateSelector()
   delete d;
 }
 
-void KAccountTemplateSelector::slotLoadTemplateList(void)
+void KAccountTemplateSelector::slotLoadTemplateList()
 {
 #ifndef KMM_DESIGNER
   QStringList dirs;
@@ -221,7 +221,7 @@ void KAccountTemplateSelector::slotLoadTemplateList(void)
 #endif
 }
 
-void KAccountTemplateSelector::slotLoadCountry(void)
+void KAccountTemplateSelector::slotLoadCountry()
 {
 #ifndef KMM_DESIGNER
   QTreeWidgetItem *parent = new QTreeWidgetItem(m_groupList);
@@ -255,14 +255,14 @@ void KAccountTemplateSelector::slotLoadCountry(void)
 
 }
 
-void KAccountTemplateSelector::slotLoadHierarchy(void)
+void KAccountTemplateSelector::slotLoadHierarchy()
 {
 #ifndef KMM_DESIGNER
   d->loadHierarchy();
 #endif
 }
 
-QList<MyMoneyTemplate> KAccountTemplateSelector::selectedTemplates(void) const
+QList<MyMoneyTemplate> KAccountTemplateSelector::selectedTemplates() const
 {
 #ifndef KMM_DESIGNER
   return d->selectedTemplates();

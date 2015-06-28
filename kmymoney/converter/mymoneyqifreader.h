@@ -121,7 +121,7 @@ public:
     * @retval true the import was started successfully
     * @retval false the import could not be started.
     */
-  bool startImport(void);
+  bool startImport();
 
   /**
     * This method must be called once the signal importFinished() has
@@ -132,7 +132,7 @@ public:
     * @retval false Import failed because the filter program terminated
     *               abnormally or the user aborted the import process.
     */
-  bool finishImport(void);
+  bool finishImport();
 
   void setCategoryMapping(bool map);
 
@@ -167,7 +167,7 @@ private:
   /**
    * This method scans the m_qifEntry object as a payee record specified by Quicken
    */
-  void processPayeeEntry(void);
+  void processPayeeEntry();
 
   /**
     * This method scans the m_qifEntry object as an account record specified
@@ -182,31 +182,31 @@ private:
     * This method scans the m_qifEntry object as a category record specified
     * by Quicken.
     */
-  void processCategoryEntry(void);
+  void processCategoryEntry();
 
   /**
     * This method scans the m_qifEntry object as a transaction record specified
     * by Quicken.
     */
-  void processTransactionEntry(void);
+  void processTransactionEntry();
 
   /**
     * This method scans the m_qifEntry object as an investment transaction
     * record specified by Quicken.
     */
-  void processInvestmentTransactionEntry(void);
+  void processInvestmentTransactionEntry();
 
   /**
     * This method scans the m_qifEntry object as a price record specified
     * by Quicken.
     */
-  void processPriceEntry(void);
+  void processPriceEntry();
 
   /**
     * This method scans the m_qifEntry object as a security record specified
     * by Quicken.
     */
-  void processSecurityEntry(void);
+  void processSecurityEntry();
 
   /**
     * This method processes the lines previously collected in
@@ -214,7 +214,7 @@ private:
     * by the user is required to process the entry it will
     * be collected.
     */
-  void processQifEntry(void);
+  void processQifEntry();
 
   /**
    * This method process a line starting with an exclamation mark
@@ -329,26 +329,26 @@ private:
    */
   const QString transferAccount(const QString& name, bool useBrokerage = true);
 
-  // void processQifLine(void);
+  // void processQifLine();
   void createOpeningBalance(MyMoneyAccount::_accountTypeE accType = MyMoneyAccount::Checkings);
 
 signals:
   /**
     * This signal will be emitted when the import is finished.
     */
-  void importFinished(void);
+  void importFinished();
 
 private slots:
-  void slotSendDataToFilter(void);
-  void slotReceivedDataFromFilter(void);
-  void slotReceivedErrorFromFilter(void);
-  void slotProcessData(void);
+  void slotSendDataToFilter();
+  void slotReceivedDataFromFilter();
+  void slotReceivedErrorFromFilter();
+  void slotProcessData();
 
   /**
     * This slot is used to be informed about the end of the filtering process.
     * It emits the signal importFinished()
     */
-  void slotImportFinished(void);
+  void slotImportFinished();
 
 
 private:

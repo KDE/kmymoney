@@ -108,10 +108,10 @@ public:
     */
   virtual bool hasReferenceTo(const QString& id) const;
 
-  const MyMoneyMoney& shares(void) const {
+  const MyMoneyMoney& shares() const {
     return m_shares;
   }
-  const MyMoneyMoney& value(void) const {
+  const MyMoneyMoney& value() const {
     return m_value;
   }
 
@@ -121,11 +121,11 @@ public:
    * of m_value / m_shares is returned. If m_values equals to zero, 1
    * will be returned.
    */
-  MyMoneyMoney price(void) const;
+  MyMoneyMoney price() const;
   /** This method just returns what is in m_price, so when we write to the
    *  database, we don't just generate prices
   */
-  MyMoneyMoney actualPrice(void) const {
+  MyMoneyMoney actualPrice() const {
     return m_price;
   }
 
@@ -145,43 +145,43 @@ public:
     MyMoneyKeyValueContainer::setValue(key, value);
   }
 
-  const QString& accountId(void) const {
+  const QString& accountId() const {
     return m_account;
   }
-  const QString& memo(void) const {
+  const QString& memo() const {
     return m_memo;
   }
-  reconcileFlagE reconcileFlag(void) const {
+  reconcileFlagE reconcileFlag() const {
     return m_reconcileFlag;
   }
-  const QDate& reconcileDate(void) const {
+  const QDate& reconcileDate() const {
     return m_reconcileDate;
   }
-  const QString& payeeId(void) const {
+  const QString& payeeId() const {
     return m_payee;
   }
-  const QList<QString>& tagIdList(void) const {
+  const QList<QString>& tagIdList() const {
     return m_tagList;
   }
-  const QString& action(void) const {
+  const QString& action() const {
     return m_action;
   }
-  const QString& number(void) const {
+  const QString& number() const {
     return m_number;
   }
-  bool isAmortizationSplit(void) const {
+  bool isAmortizationSplit() const {
     return m_action == ActionAmortization;
   }
-  bool isInterestSplit(void) const {
+  bool isInterestSplit() const {
     return m_action == ActionInterest;
   }
-  bool isAutoCalc(void) const {
+  bool isAutoCalc() const {
     return (m_shares == MyMoneyMoney::autoCalc) || (m_value == MyMoneyMoney::autoCalc);
   }
-  const QString& bankID(void) const {
+  const QString& bankID() const {
     return m_bankID;
   }
-  const QString& transactionId(void) const {
+  const QString& transactionId() const {
     return m_transactionId;
   }
 
@@ -225,7 +225,7 @@ public:
   * transaction. The imported and matched transaction can be extracted
   * using matchedTransaction() and can be removed using removeMatch().
    */
-  bool isMatched(void) const;
+  bool isMatched() const;
 
   /**
    * add an imported transaction @p t as matching transaction. Any previously
@@ -237,13 +237,13 @@ public:
   /**
    * remove the data of the imported transaction added with addMatch().
    */
-  void removeMatch(void);
+  void removeMatch();
 
   /**
    * Return the matching imported transaction. If no such transaction
    * is available (isMatched() returns false) an empty transaction is returned.
    */
-  MyMoneyTransaction matchedTransaction(void) const;
+  MyMoneyTransaction matchedTransaction() const;
 
   /**
    * This method replaces all occurrences of id @a oldId with

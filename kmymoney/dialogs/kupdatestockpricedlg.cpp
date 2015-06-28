@@ -65,13 +65,13 @@ void KUpdateStockPriceDlg::init()
   slotCheckData();
 }
 
-int KUpdateStockPriceDlg::exec(void)
+int KUpdateStockPriceDlg::exec()
 {
   slotCheckData();
   return kUpdateStockPriceDecl::exec();
 }
 
-void KUpdateStockPriceDlg::slotCheckData(void)
+void KUpdateStockPriceDlg::slotCheckData()
 {
   QString from = m_security->security().id();
   QString to   = m_currency->security().id();

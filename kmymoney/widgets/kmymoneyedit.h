@@ -111,7 +111,7 @@ private:
 
 private:
   /**
-    * Internal helper function for value() and ensureFractionalPart(void).
+    * Internal helper function for value() and ensureFractionalPart().
     */
   void ensureFractionalPart(QString& txt) const;
 
@@ -120,7 +120,7 @@ protected:
     * This method ensures that the text version contains a
     * fractional part.
     */
-  void ensureFractionalPart(void);
+  void ensureFractionalPart();
 
   /**
     * This method opens the calculator and replays the key
@@ -134,23 +134,23 @@ protected:
   /**
     * Helper method for constructors.
     */
-  void init(void);
+  void init();
 
 protected slots:
   void theTextChanged(const QString & text);
-  void slotCalculatorResult(void);
-  void slotCalculatorOpen(void);
+  void slotCalculatorResult();
+  void slotCalculatorOpen();
 
 public:
   explicit kMyMoneyEdit(QWidget *parent = 0, const int prec = -2);
   explicit kMyMoneyEdit(const MyMoneySecurity& eq, QWidget *parent = 0);
   ~kMyMoneyEdit();
 
-  MyMoneyMoney value(void) const;
+  MyMoneyMoney value() const;
 
   void setValue(const MyMoneyMoney& value);
 
-  bool isValid(void) const;
+  bool isValid() const;
 
   virtual bool eventFilter(QObject * , QEvent *);
 
@@ -158,7 +158,7 @@ public:
     * This method returns the value of the edit field in "numerator/denominator" format.
     * If you want to get the text of the edit field, use lineedit()->text() instead.
     */
-  QString text(void) const {
+  QString text() const {
     return value().toString();
   };
 
@@ -180,11 +180,11 @@ public:
     * return the number of fractional digits
     * @sa setPrecision
     */
-  int precision(void) {
+  int precision() {
     return m_prec;
   };
 
-  QWidget* focusWidget(void) const;
+  QWidget* focusWidget() const;
 
   /**
     * This method allows to modify the behavior of the widget
@@ -200,22 +200,22 @@ public:
   /** Overloaded for internal reasons. The API is not affected. */
   void setValidator(const QValidator* v);
 
-  bool isCalculatorButtonVisible(void) const;
+  bool isCalculatorButtonVisible() const;
 
-  bool isResetButtonVisible(void) const;
+  bool isResetButtonVisible() const;
 
-  bool isEmptyAllowed(void) const;
+  bool isEmptyAllowed() const;
 
-  KLineEdit* lineedit(void) const;
+  KLineEdit* lineedit() const;
 
   void setClickMessage(const QString& hint) const;
 
-  bool isReadOnly(void) const;
+  bool isReadOnly() const;
 
 public slots:
   void loadText(const QString& text);
-  void resetText(void);
-  void clearText(void);
+  void resetText();
+  void clearText();
 
   void setText(const QString& txt) {
     setValue(MyMoneyMoney(txt));

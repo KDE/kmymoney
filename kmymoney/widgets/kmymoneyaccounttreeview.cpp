@@ -144,13 +144,13 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
   emit selectObject(MyMoneyInstitution());
 }
 
-void KMyMoneyAccountTreeView::collapseAll(void)
+void KMyMoneyAccountTreeView::collapseAll()
 {
   QTreeView::collapseAll();
   emit collapsedAll();
 }
 
-void KMyMoneyAccountTreeView::expandAll(void)
+void KMyMoneyAccountTreeView::expandAll()
 {
   QTreeView::expandAll();
   emit expandedAll();

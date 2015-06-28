@@ -60,11 +60,11 @@ public:
   virtual ~IMyMoneySerialize();
 
   // general get functions
-  virtual const MyMoneyPayee& user(void) const = 0;
-  virtual const QDate creationDate(void) const = 0;
-  virtual const QDate lastModificationDate(void) const = 0;
-  virtual unsigned int currentFixVersion(void) const = 0;
-  virtual unsigned int fileFixVersion(void) const = 0;
+  virtual const MyMoneyPayee& user() const = 0;
+  virtual const QDate creationDate() const = 0;
+  virtual const QDate lastModificationDate() const = 0;
+  virtual unsigned int currentFixVersion() const = 0;
+  virtual unsigned int fileFixVersion() const = 0;
 
   // general set functions
   virtual void setUser(const MyMoneyPayee& val) = 0;
@@ -107,7 +107,7 @@ public:
     *
     * @return QMap containing the institution information
     */
-  virtual const QList<MyMoneyInstitution> institutionList(void) const = 0;
+  virtual const QList<MyMoneyInstitution> institutionList() const = 0;
 
   /**
     * This method is used to pull a list of transactions from the file
@@ -133,7 +133,7 @@ public:
     *
     * @return QList<MyMoneyPayee> containing the payee information
     */
-  virtual const QList<MyMoneyPayee> payeeList(void) const = 0;
+  virtual const QList<MyMoneyPayee> payeeList() const = 0;
 
   /**
     * This method returns a list of the tags
@@ -141,7 +141,7 @@ public:
     *
     * @return QList<MyMoneyTag> containing the tag information
     */
-  virtual const QList<MyMoneyTag> tagList(void) const = 0;
+  virtual const QList<MyMoneyTag> tagList() const = 0;
 
   /**
     * This method returns a list of the scheduled transactions
@@ -161,7 +161,7 @@ public:
    * This method returns a list of security objects that the engine has
    * knowledge of.
    */
-  virtual const QList<MyMoneySecurity> securityList(void) const = 0;
+  virtual const QList<MyMoneySecurity> securityList() const = 0;
 
   /**
    * This method returns a list of onlineJobs the engine has
@@ -172,31 +172,31 @@ public:
     * This method is used to return the standard liability account
     * @return MyMoneyAccount liability account(group)
     */
-  virtual const MyMoneyAccount liability(void) const = 0;
+  virtual const MyMoneyAccount liability() const = 0;
 
   /**
     * This method is used to return the standard asset account
     * @return MyMoneyAccount asset account(group)
     */
-  virtual const MyMoneyAccount asset(void) const = 0;
+  virtual const MyMoneyAccount asset() const = 0;
 
   /**
     * This method is used to return the standard expense account
     * @return MyMoneyAccount expense account(group)
     */
-  virtual const MyMoneyAccount expense(void) const = 0;
+  virtual const MyMoneyAccount expense() const = 0;
 
   /**
     * This method is used to return the standard income account
     * @return MyMoneyAccount income account(group)
     */
-  virtual const MyMoneyAccount income(void) const = 0;
+  virtual const MyMoneyAccount income() const = 0;
 
   /**
     * This method is used to return the standard equity account
     * @return MyMoneyAccount equity account(group)
     */
-  virtual const MyMoneyAccount equity(void) const = 0;
+  virtual const MyMoneyAccount equity() const = 0;
 
   /**
     * This method is used to create a new account
@@ -290,16 +290,16 @@ public:
   virtual void loadPrices(const MyMoneyPriceList& list) = 0;
   virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs) = 0;
 
-  virtual unsigned long accountId(void) const = 0;
-  virtual unsigned long transactionId(void) const = 0;
-  virtual unsigned long payeeId(void) const = 0;
-  virtual unsigned long tagId(void) const = 0;
-  virtual unsigned long institutionId(void) const = 0;
-  virtual unsigned long scheduleId(void) const = 0;
-  virtual unsigned long securityId(void) const = 0;
-  virtual unsigned long reportId(void) const = 0;
-  virtual unsigned long budgetId(void) const = 0;
-  virtual unsigned long onlineJobId(void) const = 0;
+  virtual unsigned long accountId() const = 0;
+  virtual unsigned long transactionId() const = 0;
+  virtual unsigned long payeeId() const = 0;
+  virtual unsigned long tagId() const = 0;
+  virtual unsigned long institutionId() const = 0;
+  virtual unsigned long scheduleId() const = 0;
+  virtual unsigned long securityId() const = 0;
+  virtual unsigned long reportId() const = 0;
+  virtual unsigned long budgetId() const = 0;
+  virtual unsigned long onlineJobId() const = 0;
 
   virtual void loadAccountId(const unsigned long id) = 0;
   virtual void loadTransactionId(const unsigned long id) = 0;
@@ -320,7 +320,7 @@ public:
     * @return QMap<QString, QString> containing all key/value pairs of
     *         this container.
     */
-  virtual const QMap<QString, QString> pairs(void) const = 0;
+  virtual const QMap<QString, QString> pairs() const = 0;
 
   /**
     * This method is used to initially store a set of key/value pairs
@@ -349,7 +349,7 @@ public:
     *
     * @return QList of all MyMoneySecurity objects representing a currency.
     */
-  virtual const QList<MyMoneySecurity> currencyList(void) const = 0;
+  virtual const QList<MyMoneySecurity> currencyList() const = 0;
 
   /**
     * This method is used to retrieve the list of all reports
@@ -359,7 +359,7 @@ public:
     *
     * @return QList of all MyMoneyReport objects.
     */
-  virtual const QList<MyMoneyReport> reportList(void) const = 0;
+  virtual const QList<MyMoneyReport> reportList() const = 0;
 
   /**
     * This method is used to retrieve the list of all budgets
@@ -369,7 +369,7 @@ public:
     *
     * @return QList of all MyMoneyBudget objects.
     */
-  virtual const QList<MyMoneyBudget> budgetList(void) const = 0;
+  virtual const QList<MyMoneyBudget> budgetList() const = 0;
 
 
   /**
@@ -382,13 +382,13 @@ public:
     *
     * @return MyMoneyPriceList of all MyMoneyPrice objects.
     */
-  virtual const MyMoneyPriceList priceList(void) const = 0;
+  virtual const MyMoneyPriceList priceList() const = 0;
 
   /**
     * This method recalculates the balances of all accounts
     * based on the transactions stored in the engine.
     */
-  virtual void rebuildAccountBalances(void) = 0;
+  virtual void rebuildAccountBalances() = 0;
 
 };
 

@@ -50,7 +50,7 @@ public:
   explicit DurationWizardPage(QWidget *parent = 0);
 
   QString updateTermWidgets(const double val);
-  int term(void) const;
+  int term() const;
 
 public slots:
   void resetCalculator();

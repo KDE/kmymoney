@@ -67,7 +67,7 @@ public:
   QString show(const QList<MyMoneyTag>& tagslist);
 
 protected:
-  void accept(void);
+  void accept();
 
 };
 

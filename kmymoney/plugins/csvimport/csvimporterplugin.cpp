@@ -62,14 +62,14 @@ CsvImporterPlugin::~CsvImporterPlugin()
 {
 }
 
-void CsvImporterPlugin::createActions(void)
+void CsvImporterPlugin::createActions()
 {
   m_action = actionCollection()->addAction("file_import_csv");
   m_action->setText(i18n("CSV..."));
   connect(m_action, SIGNAL(triggered(bool)), this, SLOT(slotImportFile()));
 }
 
-void CsvImporterPlugin::slotImportFile(void)
+void CsvImporterPlugin::slotImportFile()
 {
   m_action->setEnabled(false);
   CSVDialog *csvImporter = new CSVDialog;

@@ -95,7 +95,7 @@ KNewInvestmentWizard::KNewInvestmentWizard(const MyMoneySecurity& security, QWid
   m_investmentDetailsPage->setPriceModeEnabled(false);
 }
 
-void KNewInvestmentWizard::init1(void)
+void KNewInvestmentWizard::init1()
 {
   m_onlineUpdatePage->slotSourceChanged(false);
 
@@ -119,7 +119,7 @@ void KNewInvestmentWizard::init1(void)
   KMyMoneyUtils::updateWizardButtons(this);
 }
 
-void KNewInvestmentWizard::init2(void)
+void KNewInvestmentWizard::init2()
 {
   m_investmentTypePage->init2(m_security);
   m_investmentDetailsPage->init2(m_security);
@@ -159,7 +159,7 @@ void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
   }
 }
 
-void KNewInvestmentWizard::slotHelp(void)
+void KNewInvestmentWizard::slotHelp()
 {
   KToolInvocation::invokeHelp("details.investments.newinvestmentwizard");
 }

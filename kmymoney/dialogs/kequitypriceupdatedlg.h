@@ -58,13 +58,13 @@ class KEquityPriceUpdateDlg : public KEquityPriceUpdateDlgDecl
 public:
   explicit KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId = QString());
   ~KEquityPriceUpdateDlg();
-  void storePrices(void);
+  void storePrices();
   MyMoneyPrice price(const QString& id) const;
 
 protected slots:
-  void slotUpdateSelectedClicked(void);
-  void slotUpdateAllClicked(void);
-  void slotUpdateSelection(void);
+  void slotUpdateSelectedClicked();
+  void slotUpdateAllClicked();
+  void slotUpdateSelection();
 
   void logStatusMessage(const QString&);
   void logErrorMessage(const QString&);
@@ -74,7 +74,7 @@ protected slots:
 protected:
   void addPricePair(const MyMoneySecurityPair& pair, bool dontCheckExistance = false);
   void addInvestment(const MyMoneySecurity& inv);
-  void finishUpdate(void);
+  void finishUpdate();
 
 private:
   bool m_fUpdateAll;

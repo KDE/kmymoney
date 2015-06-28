@@ -100,7 +100,7 @@ public:
     return 0;
   }
 
-  void removeOrphans(void) {
+  void removeOrphans() {
     QWidgetContainer::iterator it_w;
     for (it_w = begin(); it_w != end();) {
       if ((*it_w) && (*it_w)->parent())
@@ -123,36 +123,36 @@ public:
   void setText(const QString& txt) {
     m_txt = txt;
   }
-  const QString& text(void) const {
+  const QString& text() const {
     return m_txt;
   }
-  bool isSelectable(void) const {
+  bool isSelectable() const {
     return false;
   }
-  bool canHaveFocus(void) const {
+  bool canHaveFocus() const {
     return false;
   }
-  int numRows(void) const {
+  int numRows() const {
     return 1;
   }
 
-  virtual const char* className(void) {
+  virtual const char* className() {
     return "GroupMarker";
   }
 
-  bool isErroneous(void) const {
+  bool isErroneous() const {
     return m_erroneous;
   }
 
   void paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
   void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index);
 
-  int rowHeightHint(void) const;
+  int rowHeightHint() const;
 
   bool matches(const RegisterFilter&) const {
     return true;
   }
-  virtual int sortSamePostDate(void) const {
+  virtual int sortSamePostDate() const {
     return 0;
   }
 
@@ -176,13 +176,13 @@ class FancyDateGroupMarker : public GroupMarker
 public:
   FancyDateGroupMarker(Register* parent, const QDate& date, const QString& txt);
 
-  virtual const QDate& sortPostDate(void) const {
+  virtual const QDate& sortPostDate() const {
     return m_date;
   }
-  virtual const QDate& sortEntryDate(void) const {
+  virtual const QDate& sortEntryDate() const {
     return m_date;
   }
-  virtual const char* className(void) {
+  virtual const char* className() {
     return "FancyDateGroupMarker";
   }
 private:
@@ -193,10 +193,10 @@ class StatementGroupMarker : public FancyDateGroupMarker
 {
 public:
   StatementGroupMarker(Register* parent, CashFlowDirection dir, const QDate& date, const QString& txt);
-  CashFlowDirection sortType(void) const {
+  CashFlowDirection sortType() const {
     return m_dir;
   }
-  virtual int sortSamePostDate(void) const {
+  virtual int sortSamePostDate() const {
     return 3;
   }
 private:
@@ -208,8 +208,8 @@ class SimpleDateGroupMarker : public FancyDateGroupMarker
 public:
   SimpleDateGroupMarker(Register* parent, const QDate& date, const QString& txt);
   void paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
-  int rowHeightHint(void) const;
-  virtual const char* className(void) {
+  int rowHeightHint() const;
+  virtual const char* className() {
     return "SimpleDateGroupMarker";
   }
 };
@@ -218,7 +218,7 @@ class TypeGroupMarker : public GroupMarker
 {
 public:
   TypeGroupMarker(Register* parent, CashFlowDirection dir, MyMoneyAccount::accountTypeE accType);
-  CashFlowDirection sortType(void) const {
+  CashFlowDirection sortType() const {
     return m_dir;
   }
 private:
@@ -229,10 +229,10 @@ class FiscalYearGroupMarker : public FancyDateGroupMarker
 {
 public:
   FiscalYearGroupMarker(Register* parent, const QDate& date, const QString& txt);
-  virtual const char* className(void) {
+  virtual const char* className() {
     return "FiscalYearGroupMarker";
   }
-  virtual int sortSamePostDate(void) const {
+  virtual int sortSamePostDate() const {
     return 1;
   }
 };
@@ -241,7 +241,7 @@ class PayeeGroupMarker : public GroupMarker
 {
 public:
   PayeeGroupMarker(Register* parent, const QString& name);
-  const QString& sortPayee(void) const {
+  const QString& sortPayee() const {
     return m_txt;
   }
 };
@@ -250,14 +250,14 @@ class CategoryGroupMarker : public GroupMarker
 {
 public:
   CategoryGroupMarker(Register* parent, const QString& category);
-  const QString& sortCategory(void) const {
+  const QString& sortCategory() const {
     return m_txt;
   }
-  const QString& sortSecurity(void) const {
+  const QString& sortSecurity() const {
     return m_txt;
   }
 
-  virtual const char* className(void) {
+  virtual const char* className() {
     return "CategoryGroupMarker";
   }
 };
@@ -266,7 +266,7 @@ class ReconcileGroupMarker : public GroupMarker
 {
 public:
   ReconcileGroupMarker(Register* parent, MyMoneySplit::reconcileFlagE state);
-  virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const {
+  virtual MyMoneySplit::reconcileFlagE sortReconcileState() const {
     return m_state;
   }
 private:
@@ -279,7 +279,7 @@ class ItemPtrVector : public QVector<RegisterItem *>
 public:
   ItemPtrVector() {}
 
-  void sort(void);
+  void sort();
 
 protected:
   /**
@@ -336,7 +336,7 @@ public:
     *
     * @retval QList<RegisterItem*>
     */
-  QList<RegisterItem*> selectedItems(void) const;
+  QList<RegisterItem*> selectedItems() const;
 
   /**
     * Construct a list of all currently selected transactions in the register.
@@ -352,10 +352,10 @@ public:
   void setCellContentFromEditor(int row, int col);
   void endEdit(int row, int col, bool accept, bool replace);
 
-  RegisterItem* focusItem(void) const {
+  RegisterItem* focusItem() const {
     return m_focusItem;
   }
-  RegisterItem* anchorItem(void) const {
+  RegisterItem* anchorItem() const {
     return m_selectAnchor;
   }
 
@@ -371,7 +371,7 @@ public:
     * Set focus to the first focussable item
     * @return true if a focussable item was found
     */
-  bool setFocusToTop(void);
+  bool setFocusToTop();
 
   /**
     * Select @a item and unselect all others if @a dontChangeSelections
@@ -385,20 +385,20 @@ public:
     * Clears all items in the register. All objects
     * added to the register will be deleted.
     */
-  void clear(void);
+  void clear();
 
   void updateRegister(bool forceUpdateRowHeight = false);
 
   /**
     * Assign all visible items an alternate background color
     */
-  void updateAlternate(void) const;
+  void updateAlternate() const;
 
   /**
     * make sure, we only show a single marker in a row
     * through hiding unused ones
     */
-  void suppressAdjacentMarkers(void);
+  void suppressAdjacentMarkers();
 
   /**
     * Adjusts column @a col so that all data fits in width.
@@ -421,11 +421,11 @@ public:
   void setupRegister(const MyMoneyAccount& account, const QList<Column>& cols);
 
   void setSortOrder(const QString& order);
-  const QList<TransactionSortField>& sortOrder(void) const {
+  const QList<TransactionSortField>& sortOrder() const {
     return m_sortOrder;
   }
-  TransactionSortField primarySortKey(void) const;
-  void sortItems(void);
+  TransactionSortField primarySortKey() const;
+  void sortItems();
 
   /**
     * This member returns the last visible column that is used by the register
@@ -433,21 +433,21 @@ public:
     *
     * @return last actively used column (base 0)
     */
-  Column lastCol(void) const {
+  Column lastCol() const {
     return m_lastCol;
   }
 
-  RegisterItem* firstItem(void) const;
-  RegisterItem* firstVisibleItem(void) const;
+  RegisterItem* firstItem() const;
+  RegisterItem* firstVisibleItem() const;
   RegisterItem* nextItem(RegisterItem*) const;
-  RegisterItem* lastItem(void) const;
-  RegisterItem* lastVisibleItem(void) const;
+  RegisterItem* lastItem() const;
+  RegisterItem* lastVisibleItem() const;
   RegisterItem* prevItem(RegisterItem*) const;
   RegisterItem* itemAtRow(int row) const;
 
   void resize(int col, bool force = false);
 
-  void forceUpdateLists(void) {
+  void forceUpdateLists() {
     m_listsDirty = true;
   }
 
@@ -457,9 +457,9 @@ public:
   void removeEditWidgets(QMap<QString, QWidget*>& editWidgets);
   void tabOrder(QWidgetList& tabOrderWidgets, KMyMoneyRegister::Transaction* t) const;
 
-  int rowHeightHint(void) const;
+  int rowHeightHint() const;
 
-  void clearSelection(void);
+  void clearSelection();
 
   /**
     * This method creates a specific transaction according to the
@@ -474,21 +474,21 @@ public:
     */
   static Transaction* transactionFactory(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
 
-  const MyMoneyAccount& account(void) const {
+  const MyMoneyAccount& account() const {
     return m_account;
   }
 
   /**
     * This method creates group marker items and adds them to the register
     */
-  void addGroupMarkers(void);
+  void addGroupMarkers();
 
   /**
     * This method removes all trailing group markers and in a second
     * run reduces all adjacent group markers to show only one. In that
     * case the last one will remain.
     */
-  void removeUnwantedGroupMarkers(void);
+  void removeUnwantedGroupMarkers();
 
   void setLedgerLensForced(bool forced = true) {
     m_ledgerLensForced = forced;
@@ -527,7 +527,7 @@ protected:
     doSelectItems(from, to, true);
   }
   void doSelectItems(int from, int to, bool selected);
-  int selectedItemsCount(void) const;
+  int selectedItemsCount() const;
 
   bool event(QEvent*);
   void focusOutEvent(QFocusEvent*);
@@ -576,10 +576,10 @@ protected:
   int minimumColumnWidth(int col);
 
 protected slots:
-  void resize(void);
+  void resize();
 
   void selectItem(int row, int col);
-  void slotEnsureItemVisible(void);
+  void slotEnsureItemVisible();
   void slotDoubleClicked(int row, int);
 
 signals:
@@ -595,7 +595,7 @@ signals:
     * This signal is emitted when the focus changes but the selection remains
     * the same. This usually happens when the focus is changed using the keyboard.
     */
-  void focusChanged(void);
+  void focusChanged();
 
   /**
    * This signal is emitted when an @p item is about to be selected. The boolean
@@ -605,7 +605,7 @@ signals:
    */
   void aboutToSelectItem(KMyMoneyRegister::RegisterItem* item, bool& okToSelect);
 
-  void editTransaction(void);
+  void editTransaction();
 
   /**
     * This signal is sent out when the user clicks on the ReconcileStateColumn and
@@ -616,12 +616,12 @@ signals:
   /**
     * This signal is sent out, if an item without a transaction id has been selected.
     */
-  void emptyItemSelected(void);
+  void emptyItemSelected();
 
   /**
     * This signal is sent out, if the user selects an item with the right mouse button
     */
-  void openContextMenu(void);
+  void openContextMenu();
 
   /**
     * This signal is sent out when a new item has been added to the register

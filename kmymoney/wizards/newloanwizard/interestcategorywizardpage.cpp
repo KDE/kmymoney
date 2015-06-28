@@ -60,7 +60,7 @@ bool InterestCategoryWizardPage::isComplete() const
   return m_interestAccountEdit->selectedItems().count() > 0;
 }
 
-void InterestCategoryWizardPage::slotCreateCategory(void)
+void InterestCategoryWizardPage::slotCreateCategory()
 {
   MyMoneyAccount acc, base;
   MyMoneyFile* file = MyMoneyFile::instance();

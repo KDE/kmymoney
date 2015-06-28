@@ -136,7 +136,7 @@ public:
     *
     * @return the interest amount
     */
-  double interestDue(void) const;
+  double interestDue() const;
 
   /**
     * This method sets the rounding precision to @p prec fractional
@@ -156,7 +156,7 @@ public:
     */
   void setNpp(const double npp);
 
-  double npp(void) const {
+  double npp() const {
     return m_npp;
   };
 
@@ -226,7 +226,7 @@ public:
     */
   void setIr(const double ir);
 
-  double ir(void) const {
+  double ir() const {
     return m_ir;
   };
 
@@ -238,7 +238,7 @@ public:
     */
   void setPv(const double pv);
 
-  double pv(void) const {
+  double pv() const {
     return m_pv;
   };
 
@@ -250,7 +250,7 @@ public:
     */
   void setPmt(const double pmt);
 
-  double pmt(void) const {
+  double pmt() const {
     return m_pmt;
   };
 
@@ -262,12 +262,12 @@ public:
     */
   void setFv(const double fv);
 
-  double fv(void) const {
+  double fv() const {
     return m_fv;
   };
 
 private:
-  double eff_int(void) const;
+  double eff_int() const;
   double nom_int(const double eint) const;
   double rnd(const double x) const;
 

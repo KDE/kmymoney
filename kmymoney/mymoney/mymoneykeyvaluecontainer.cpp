@@ -83,7 +83,7 @@ void MyMoneyKeyValueContainer::deletePair(const QString& key)
     m_kvp.erase(it);
 }
 
-void MyMoneyKeyValueContainer::clear(void)
+void MyMoneyKeyValueContainer::clear()
 {
   m_kvp.clear();
 }

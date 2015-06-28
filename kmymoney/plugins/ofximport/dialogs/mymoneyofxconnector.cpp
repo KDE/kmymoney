@@ -67,7 +67,7 @@ OfxHeaderVersion::OfxHeaderVersion(KComboBox* combo, const QString& headerVersio
   }
 }
 
-QString OfxHeaderVersion::headerVersion(void) const
+QString OfxHeaderVersion::headerVersion() const
 {
   return m_combo->currentText();
 }
@@ -146,7 +146,7 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QSt
   }
 }
 
-const QString OfxAppVersion::appId(void) const
+const QString OfxAppVersion::appId() const
 {
   static QString defaultAppId("QWIN:1700");
 
@@ -186,23 +186,23 @@ MyMoneyOfxConnector::MyMoneyOfxConnector(const MyMoneyAccount& _account):
   m_fiSettings = m_account.onlineBankingSettings();
 }
 
-QString MyMoneyOfxConnector::iban(void) const
+QString MyMoneyOfxConnector::iban() const
 {
   return m_fiSettings.value("bankid");
 }
-QString MyMoneyOfxConnector::fiorg(void) const
+QString MyMoneyOfxConnector::fiorg() const
 {
   return m_fiSettings.value("org");
 }
-QString MyMoneyOfxConnector::fiid(void) const
+QString MyMoneyOfxConnector::fiid() const
 {
   return m_fiSettings.value("fid");
 }
-QString MyMoneyOfxConnector::username(void) const
+QString MyMoneyOfxConnector::username() const
 {
   return m_fiSettings.value("username");
 }
-QString MyMoneyOfxConnector::password(void) const
+QString MyMoneyOfxConnector::password() const
 {
   // if we don't find a password in the wallet, we use the old method
   // and retrieve it from the settings stored in the KMyMoney data storage.
@@ -227,16 +227,16 @@ QString MyMoneyOfxConnector::password(void) const
   }
   return pwd;
 }
-QString MyMoneyOfxConnector::accountnum(void) const
+QString MyMoneyOfxConnector::accountnum() const
 {
   return m_fiSettings.value("accountid");
 }
-QString MyMoneyOfxConnector::url(void) const
+QString MyMoneyOfxConnector::url() const
 {
   return m_fiSettings.value("url");
 }
 
-QDate MyMoneyOfxConnector::statementStartDate(void) const
+QDate MyMoneyOfxConnector::statementStartDate() const
 {
   if ((m_fiSettings.value("kmmofx-todayMinus").toInt() != 0) && !m_fiSettings.value("kmmofx-numRequestDays").isEmpty()) {
     return QDate::currentDate().addDays(-m_fiSettings.value("kmmofx-numRequestDays").toInt());
@@ -248,7 +248,7 @@ QDate MyMoneyOfxConnector::statementStartDate(void) const
   return QDate::currentDate().addMonths(-2);
 }
 
-OfxAccountData::AccountType MyMoneyOfxConnector::accounttype(void) const
+OfxAccountData::AccountType MyMoneyOfxConnector::accounttype() const
 {
   OfxAccountData::AccountType result = OfxAccountData::OFX_CHECKING;
 
@@ -331,7 +331,7 @@ void MyMoneyOfxConnector::initRequest(OfxFiLogin* fi) const
   }
 }
 
-const QByteArray MyMoneyOfxConnector::statementRequest(void) const
+const QByteArray MyMoneyOfxConnector::statementRequest() const
 {
   OfxFiLogin fi;
   initRequest(&fi);
@@ -371,7 +371,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::message(const QString& _msgType, c
                  .subtag(_request));
 }
 
-MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentRequest(void) const
+MyMoneyOfxConnector::Tag MyMoneyOfxConnector::investmentRequest() const
 {
   QString dtnow_string = QDateTime::currentDateTime().toString(Qt::ISODate).remove(QRegExp("[^0-9]"));
   QString dtstart_string = _dtstart.toString(Qt::ISODate).remove(QRegExp("[^0-9]"));
@@ -402,7 +402,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::creditCardRequest(const QDate& _dt
                  .subtag(Tag("INCTRAN").element("DTSTART", dtstart_string).element("INCLUDE", "Y")));
 }
 
-MyMoneyOfxConnector::Tag MyMoneyOfxConnector::signOn(void) const
+MyMoneyOfxConnector::Tag MyMoneyOfxConnector::signOn() const
 {
   QString dtnow_string = QDateTime::currentDateTime().toString(Qt::ISODate).remove(QRegExp("[^0-9]"));
 
@@ -422,7 +422,7 @@ MyMoneyOfxConnector::Tag MyMoneyOfxConnector::signOn(void) const
                  .element("APPVER", "1100"));
 }
 
-QString MyMoneyOfxConnector::header(void)
+QString MyMoneyOfxConnector::header()
 {
   return QString("OFXHEADER:100\r\n"
                  "DATA:OFXSGML\r\n"
@@ -436,7 +436,7 @@ QString MyMoneyOfxConnector::header(void)
                  "\r\n").arg(uuid());
 }
 
-QString MyMoneyOfxConnector::uuid(void)
+QString MyMoneyOfxConnector::uuid()
 {
   static int id = 1;
   return QDateTime::currentDateTime().toString("yyyyMMdd-hhmmsszzz-") + QString::number(id++);
@@ -471,7 +471,7 @@ const QByteArray MyMoneyOfxConnector::statementResponse(const QDate& _dtstart) c
   return result;
 }
 
-MyMoneyOfxConnector::Tag MyMoneyOfxConnector::signOnResponse(void) const
+MyMoneyOfxConnector::Tag MyMoneyOfxConnector::signOnResponse() const
 {
   QString dtnow_string = QDateTime::currentDateTime().toString(Qt::ISODate).remove(QRegExp("[^0-9]"));
 

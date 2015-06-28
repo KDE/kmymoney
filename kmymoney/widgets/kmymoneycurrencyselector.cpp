@@ -158,12 +158,12 @@ void KMyMoneySecuritySelector::setDisplayOnly(const bool disp)
   m_displayOnly = disp;
 }
 
-void KMyMoneySecuritySelector::slotSetInitialSecurity(void)
+void KMyMoneySecuritySelector::slotSetInitialSecurity()
 {
   setCurrentIndex(m_selectedItemId);
 }
 
-const MyMoneySecurity& KMyMoneySecuritySelector::security(void) const
+const MyMoneySecurity& KMyMoneySecuritySelector::security() const
 {
   int index = currentIndex();
   if ((0 <= index) && (index < m_list.size()))

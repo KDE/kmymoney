@@ -73,20 +73,20 @@ public:
     * This method returns if all requirements for the mandatory group
     * have been fulfilled (@p true) or not (@p false).
     */
-  bool isEnabled(void) const {
+  bool isEnabled() const {
     return m_enabled;
   }
 
 public slots:
-  void clear(void);
+  void clear();
 
   /**
     * Force update of ok button
     */
-  void changed(void);
+  void changed();
 
 signals:
-  void stateChanged(void);
+  void stateChanged();
   void stateChanged(bool state);
 
 private:

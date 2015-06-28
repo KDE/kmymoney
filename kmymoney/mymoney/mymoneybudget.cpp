@@ -31,12 +31,12 @@
 const QStringList MyMoneyBudget::AccountGroup::kBudgetLevelText = QString("none,monthly,monthbymonth,yearly,invalid").split(',');
 const int BUDGET_VERSION = 2;
 
-bool MyMoneyBudget::AccountGroup::isZero(void) const
+bool MyMoneyBudget::AccountGroup::isZero() const
 {
   return (!m_budgetsubaccounts && m_budgetlevel == eMonthly && balance().isZero());
 }
 
-void MyMoneyBudget::AccountGroup::convertToMonthly(void)
+void MyMoneyBudget::AccountGroup::convertToMonthly()
 {
   MyMoneyBudget::PeriodGroup period;
 
@@ -54,7 +54,7 @@ void MyMoneyBudget::AccountGroup::convertToMonthly(void)
   m_budgetlevel = eMonthly;
 }
 
-void MyMoneyBudget::AccountGroup::convertToYearly(void)
+void MyMoneyBudget::AccountGroup::convertToYearly()
 {
   MyMoneyBudget::PeriodGroup period;
 
@@ -72,7 +72,7 @@ void MyMoneyBudget::AccountGroup::convertToYearly(void)
   m_budgetlevel = eYearly;
 }
 
-void MyMoneyBudget::AccountGroup::convertToMonthByMonth(void)
+void MyMoneyBudget::AccountGroup::convertToMonthByMonth()
 {
   MyMoneyBudget::PeriodGroup period;
   QDate date;
@@ -172,7 +172,7 @@ bool MyMoneyBudget::AccountGroup::operator == (const AccountGroup &r) const
           && m_periods.values() == r.m_periods.values());
 }
 
-MyMoneyBudget::MyMoneyBudget(void) :
+MyMoneyBudget::MyMoneyBudget() :
     m_name("Unconfigured Budget")
 {
 }

@@ -88,7 +88,7 @@ void KGpgKeySelectionDlg::setKeys(const QStringList& list)
 }
 
 #if 0
-void KGpgKeySelectionDlg::slotShowHelp(void)
+void KGpgKeySelectionDlg::slotShowHelp()
 {
   QString anchor = m_helpAnchor[m_criteriaTab->currentPage()];
   if (anchor.isEmpty())
@@ -98,13 +98,13 @@ void KGpgKeySelectionDlg::slotShowHelp(void)
 }
 #endif
 
-void KGpgKeySelectionDlg::slotKeyListChanged(void)
+void KGpgKeySelectionDlg::slotKeyListChanged()
 {
   m_needCheckList = true;
   slotIdChanged();
 }
 
-void KGpgKeySelectionDlg::slotIdChanged(void)
+void KGpgKeySelectionDlg::slotIdChanged()
 {
   // this looks a bit awkward. Here's why: KGPGFile::keyAvailable() starts
   // an external task and processes UI events while it waits for the external

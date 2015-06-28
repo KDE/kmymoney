@@ -42,7 +42,7 @@
 namespace reports
 {
 
-ReportAccount::ReportAccount(void)
+ReportAccount::ReportAccount()
 {
 }
 
@@ -70,7 +70,7 @@ ReportAccount::ReportAccount(const MyMoneyAccount& account):
   calculateAccountHierarchy();
 }
 
-void ReportAccount::calculateAccountHierarchy(void)
+void ReportAccount::calculateAccountHierarchy()
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -195,7 +195,7 @@ MyMoneyMoney ReportAccount::foreignCurrencyPrice(const QString foreignCurrency, 
   *
   * @return The account's currency trading currency
   */
-MyMoneySecurity ReportAccount::currency(void) const
+MyMoneySecurity ReportAccount::currency() const
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -214,7 +214,7 @@ MyMoneySecurity ReportAccount::currency(void) const
   *
   * @return bool True if this account is in a foreign currency
   */
-bool ReportAccount::isForeignCurrency(void) const
+bool ReportAccount::isForeignCurrency() const
 {
   return (currency().id() != MyMoneyFile::instance()->baseCurrency().id());
 }
@@ -264,41 +264,41 @@ bool ReportAccount::operator<(const ReportAccount& second) const
   *
   * @return QString The account's name
   */
-QString ReportAccount::name(void) const
+QString ReportAccount::name() const
 {
   return m_nameHierarchy.back();
 }
 
 // MyMoneyAccount:fullHierarchyDebug()
-QString ReportAccount::debugName(void) const
+QString ReportAccount::debugName() const
 {
   return m_nameHierarchy.join("|");
 }
 
 // MyMoneyAccount:fullHierarchy()
-QString ReportAccount::fullName(void) const
+QString ReportAccount::fullName() const
 {
   return m_nameHierarchy.join(": ");
 }
 
 // MyMoneyAccount:isTopCategory()
-bool ReportAccount::isTopLevel(void) const
+bool ReportAccount::isTopLevel() const
 {
   return (m_nameHierarchy.size() == 1);
 }
 
 // MyMoneyAccount:hierarchyDepth()
-unsigned ReportAccount::hierarchyDepth(void) const
+unsigned ReportAccount::hierarchyDepth() const
 {
   return (m_nameHierarchy.size());
 }
 
-ReportAccount ReportAccount::parent(void) const
+ReportAccount ReportAccount::parent() const
 {
   return ReportAccount(parentAccountId());
 }
 
-ReportAccount ReportAccount::topParent(void) const
+ReportAccount ReportAccount::topParent() const
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -317,12 +317,12 @@ ReportAccount ReportAccount::topParent(void) const
   return ReportAccount(resultid);
 }
 
-QString ReportAccount::topParentName(void) const
+QString ReportAccount::topParentName() const
 {
   return m_nameHierarchy.first();
 }
 
-bool ReportAccount::isLiquidLiability(void) const
+bool ReportAccount::isLiquidLiability() const
 {
   return accountType() == MyMoneyAccount::CreditCard;
 

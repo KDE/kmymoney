@@ -52,7 +52,7 @@ RegisterItem::RegisterItem(Register* parent) :
   parent->addItem(this);
 }
 
-void RegisterItem::init(void)
+void RegisterItem::init()
 {
   m_startRow = 0;
   m_rowsRegister = 1;
@@ -108,7 +108,7 @@ void RegisterItem::setVisible(bool visible)
   }
 }
 
-int RegisterItem::rowHeightHint(void) const
+int RegisterItem::rowHeightHint() const
 {
   if (!m_visible)
     return 0;

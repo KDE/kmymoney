@@ -55,7 +55,7 @@ public:
     *
     * @return QString Name of the format
     */
-  virtual QString formatName(void) const;
+  virtual QString formatName() const;
 
   /**
     * This method returns the filename filter suitable for passing to
@@ -64,7 +64,7 @@ public:
     *
     * @return QString Filename filter string
     */
-  virtual QString formatFilenameFilter(void) const;
+  virtual QString formatFilenameFilter() const;
 
   /**
     * This method returns whether this plugin is able to import
@@ -92,7 +92,7 @@ public:
     *  last import, or QString() if it was successful.
     *
     */
-  virtual QString lastError(void) const;
+  virtual QString lastError() const;
 
   /**
     * Returns a pointer to a widget that will be added as tab to
@@ -117,21 +117,21 @@ public:
   bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts);
 
 protected slots:
-  void slotImportFile(void);
+  void slotImportFile();
   void slotImportFile(const QString& url);
 
 protected:
-  void createActions(void);
-  void addnew(void);
-  MyMoneyStatement& back(void);
-  bool isValid(void) const;
-  void setValid(void);
+  void createActions();
+  void addnew();
+  MyMoneyStatement& back();
+  bool isValid() const;
+  void setValid();
   void addInfo(const QString& _msg);
   void addWarning(const QString& _msg);
   void addError(const QString& _msg);
-  const QStringList& infos(void) const;       // krazy:exclude=spelling
-  const QStringList& warnings(void) const;
-  const QStringList& errors(void) const;
+  const QStringList& infos() const;       // krazy:exclude=spelling
+  const QStringList& warnings() const;
+  const QStringList& errors() const;
 
   bool storeStatements(QList<MyMoneyStatement>& statements);
   bool importStatement(const MyMoneyStatement& s);

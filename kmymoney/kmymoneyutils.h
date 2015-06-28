@@ -255,14 +255,14 @@ public:
     *
     * @return The KGuiItem that can be used to display the icon and text
     */
-  static KGuiItem scheduleNewGuiItem(void);
+  static KGuiItem scheduleNewGuiItem();
 
   /**
     * Retrieve a KDE KGuiItem for the account filter button
     *
     * @return The KGuiItem that can be used to display the icon and text
     */
-  static KGuiItem accountsFilterGuiItem(void);
+  static KGuiItem accountsFilterGuiItem();
 
   /**
     * This method adds the file extension passed as argument @p extension
@@ -281,9 +281,9 @@ public:
     * Check that internal MyMoney engine constants use the same
     * values as the KDE constants.
     */
-  static void checkConstants(void);
+  static void checkConstants();
 
-  static QString variableCSS(void);
+  static QString variableCSS();
 
   /**
     * This method searches a KDE specific resource and applies country and

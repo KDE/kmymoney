@@ -81,7 +81,7 @@ MyMoneyMoney CashFlowListItem::NPV(double _rate) const
 //
 // ****************************************************************************
 
-CashFlowListItem CashFlowList::mostRecent(void) const
+CashFlowListItem CashFlowList::mostRecent() const
 {
   CashFlowList dupe(*this);
 
@@ -107,7 +107,7 @@ MyMoneyMoney CashFlowList::NPV(double _rate) const
   return result;
 }
 
-double CashFlowList::calculateXIRR(void) const
+double CashFlowList::calculateXIRR() const
 {
   double resultRate = 0.00001;
 
@@ -199,7 +199,7 @@ double CashFlowList::xirrResultDerive(double& rate) const
   return res;
 }
 
-double CashFlowList::IRR(void) const
+double CashFlowList::IRR() const
 {
   double result = 0.0;
 
@@ -210,7 +210,7 @@ double CashFlowList::IRR(void) const
   return result;
 }
 
-MyMoneyMoney CashFlowList::total(void) const
+MyMoneyMoney CashFlowList::total() const
 {
   MyMoneyMoney result;
 
@@ -223,7 +223,7 @@ MyMoneyMoney CashFlowList::total(void) const
   return result;
 }
 
-void CashFlowList::dumpDebug(void) const
+void CashFlowList::dumpDebug() const
 {
   const_iterator it_item = begin();
   while (it_item != end()) {
@@ -256,7 +256,7 @@ QueryTable::QueryTable(const MyMoneyReport& _report): ListTable(_report)
   init();
 }
 
-void QueryTable::init(void)
+void QueryTable::init()
 {
   switch (m_config.rowType()) {
     case MyMoneyReport::eAccountByTopAccount:
@@ -388,7 +388,7 @@ void QueryTable::init(void)
   qSort(m_rows);
 }
 
-void QueryTable::constructTransactionTable(void)
+void QueryTable::constructTransactionTable()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -1119,7 +1119,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
   result["endingbal"] = (endingBal).toString();
 }
 
-void QueryTable::constructAccountTable(void)
+void QueryTable::constructAccountTable()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -1206,7 +1206,7 @@ void QueryTable::constructAccountTable(void)
   }
 }
 
-void QueryTable::constructSplitsTable(void)
+void QueryTable::constructSplitsTable()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 

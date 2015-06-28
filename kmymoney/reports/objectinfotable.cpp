@@ -69,7 +69,7 @@ ObjectInfoTable::ObjectInfoTable(const MyMoneyReport& _report): ListTable(_repor
   init();
 }
 
-void ObjectInfoTable::init(void)
+void ObjectInfoTable::init()
 {
   switch (m_config.rowType()) {
     case MyMoneyReport::eSchedule:
@@ -129,7 +129,7 @@ void ObjectInfoTable::init(void)
   qSort(m_rows);
 }
 
-void ObjectInfoTable::constructScheduleTable(void)
+void ObjectInfoTable::constructScheduleTable()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -225,7 +225,7 @@ void ObjectInfoTable::constructScheduleTable(void)
   }
 }
 
-void ObjectInfoTable::constructAccountTable(void)
+void ObjectInfoTable::constructAccountTable()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -280,7 +280,7 @@ void ObjectInfoTable::constructAccountTable(void)
   }
 }
 
-void ObjectInfoTable::constructAccountLoanTable(void)
+void ObjectInfoTable::constructAccountLoanTable()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 

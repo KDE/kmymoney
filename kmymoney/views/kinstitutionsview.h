@@ -50,17 +50,17 @@ public:
   virtual ~KInstitutionsView();
 
 public slots:
-  void slotLoadAccounts(void);
+  void slotLoadAccounts();
 
 protected:
-  void loadAccounts(void);
+  void loadAccounts();
 
   // for now it contains the implementation from show()
   virtual void showEvent(QShowEvent * event);
 
 protected slots:
   void slotNetWorthChanged(const MyMoneyMoney &);
-  void slotExpandCollapse(void);
+  void slotExpandCollapse();
 
 private:
   /**

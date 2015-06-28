@@ -94,7 +94,7 @@ PivotTable::PivotTable(const MyMoneyReport& _config_f):
   init();
 }
 
-void PivotTable::init(void)
+void PivotTable::init()
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -415,7 +415,7 @@ void PivotTable::init(void)
   m_config_f.setCurrentDateColumn(currentDateColumn());
 }
 
-void PivotTable::collapseColumns(void)
+void PivotTable::collapseColumns()
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -505,7 +505,7 @@ void PivotTable::clearColumn(int column)
   }
 }
 
-void PivotTable::calculateColumnHeadings(void)
+void PivotTable::calculateColumnHeadings()
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -580,7 +580,7 @@ void PivotTable::calculateColumnHeadings(void)
   }
 }
 
-void PivotTable::createAccountRows(void)
+void PivotTable::createAccountRows()
 {
   DEBUG_ENTER(Q_FUNC_INFO);
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -607,7 +607,7 @@ void PivotTable::createAccountRows(void)
   }
 }
 
-void PivotTable::calculateOpeningBalances(void)
+void PivotTable::calculateOpeningBalances()
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -686,7 +686,7 @@ void PivotTable::calculateRunningSums(PivotInnerGroup::iterator& it_row)
   }
 }
 
-void PivotTable::calculateRunningSums(void)
+void PivotTable::calculateRunningSums()
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -771,7 +771,7 @@ MyMoneyMoney PivotTable::cellBalance(const QString& outergroup, const ReportAcco
 }
 
 
-void PivotTable::calculateBudgetMapping(void)
+void PivotTable::calculateBudgetMapping()
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -960,7 +960,7 @@ void PivotTable::calculateBudgetMapping(void)
   } // end if there was a budget
 }
 
-void PivotTable::convertToBaseCurrency(void)
+void PivotTable::convertToBaseCurrency()
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -1006,7 +1006,7 @@ void PivotTable::convertToBaseCurrency(void)
   }
 }
 
-void PivotTable::convertToDeepCurrency(void)
+void PivotTable::convertToDeepCurrency()
 {
   DEBUG_ENTER(Q_FUNC_INFO);
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -1059,7 +1059,7 @@ void PivotTable::convertToDeepCurrency(void)
   }
 }
 
-void PivotTable::calculateTotals(void)
+void PivotTable::calculateTotals()
 {
   //insert the row type that is going to be used
   for (int i = 0; i < m_rowTypeList.size(); ++i) {
@@ -1292,7 +1292,7 @@ QDate PivotTable::columnDate(int column) const
     return m_beginDate.addMonths(m_config_f.columnPitch() * column).addDays(-1);
 }
 
-QString PivotTable::renderCSV(void) const
+QString PivotTable::renderCSV() const
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -1535,7 +1535,7 @@ QString PivotTable::renderCSV(void) const
   return result;
 }
 
-QString PivotTable::renderBody(void) const
+QString PivotTable::renderBody() const
 {
   DEBUG_ENTER(Q_FUNC_INFO);
 
@@ -1910,7 +1910,7 @@ QString PivotTable::coloredAmount(const MyMoneyMoney& amount, const QString& cur
   return result;
 }
 
-void PivotTable::calculateBudgetDiff(void)
+void PivotTable::calculateBudgetDiff()
 {
   PivotGrid::iterator it_outergroup = m_grid.begin();
   while (it_outergroup != m_grid.end()) {
@@ -1946,7 +1946,7 @@ void PivotTable::calculateBudgetDiff(void)
 
 }
 
-void PivotTable::calculateForecast(void)
+void PivotTable::calculateForecast()
 {
   //setup forecast
   MyMoneyForecast forecast = KMyMoneyGlobalSettings::forecast();
@@ -2065,7 +2065,7 @@ void PivotTable::loadRowTypeList()
 }
 
 
-void PivotTable::calculateMovingAverage(void)
+void PivotTable::calculateMovingAverage()
 {
   int delta = m_config_f.movingAverageDays() / 2;
 
@@ -2265,7 +2265,7 @@ void PivotTable::includeInvestmentSubAccounts()
   }
 }
 
-int PivotTable::currentDateColumn(void)
+int PivotTable::currentDateColumn()
 {
 
   //return -1 if the columns do not include the current date

@@ -50,7 +50,7 @@ KMyMoneyWizardPagePrivate::KMyMoneyWizardPagePrivate(QObject* parent) :
 {
 }
 
-void KMyMoneyWizardPagePrivate::emitCompleteStateChanged(void)
+void KMyMoneyWizardPagePrivate::emitCompleteStateChanged()
 {
   emit completeStateChanged();
 }
@@ -66,39 +66,39 @@ KMyMoneyWizardPage::KMyMoneyWizardPage(unsigned int step, QWidget* widget) :
   widget->hide();
 }
 
-QObject* KMyMoneyWizardPage::object(void) const
+QObject* KMyMoneyWizardPage::object() const
 {
   return d;
 }
 
-void KMyMoneyWizardPage::completeStateChanged(void) const
+void KMyMoneyWizardPage::completeStateChanged() const
 {
   d->emitCompleteStateChanged();
 }
 
-void KMyMoneyWizardPage::resetPage(void)
+void KMyMoneyWizardPage::resetPage()
 {
 }
 
-void KMyMoneyWizardPage::enterPage(void)
+void KMyMoneyWizardPage::enterPage()
 {
 }
 
-void KMyMoneyWizardPage::leavePage(void)
+void KMyMoneyWizardPage::leavePage()
 {
 }
 
-KMyMoneyWizardPage* KMyMoneyWizardPage::nextPage(void) const
+KMyMoneyWizardPage* KMyMoneyWizardPage::nextPage() const
 {
   return 0;
 }
 
-bool KMyMoneyWizardPage::isLastPage(void) const
+bool KMyMoneyWizardPage::isLastPage() const
 {
   return nextPage() == 0;
 }
 
-bool KMyMoneyWizardPage::isComplete(void) const
+bool KMyMoneyWizardPage::isComplete() const
 {
   if (!isLastPage())
     wizard()->m_nextButton->setToolTip(i18n("Continue with next page"));
@@ -107,7 +107,7 @@ bool KMyMoneyWizardPage::isComplete(void) const
   return m_mandatoryGroup->isEnabled();
 }
 
-QString KMyMoneyWizardPage::helpContext(void) const
+QString KMyMoneyWizardPage::helpContext() const
 {
   return QString();
 }
@@ -272,12 +272,12 @@ void KMyMoneyWizard::selectStep(int step)
   updateStepCount();
 }
 
-void KMyMoneyWizard::reselectStep(void)
+void KMyMoneyWizard::reselectStep()
 {
   selectStep(m_step);
 }
 
-void KMyMoneyWizard::updateStepCount(void)
+void KMyMoneyWizard::updateStepCount()
 {
   QList<QLabel*>::iterator it_l;
   int stepCount = 0;
@@ -328,7 +328,7 @@ void KMyMoneyWizard::switchPage(KMyMoneyWizardPage* oldPage)
   completeStateChanged();
 }
 
-void KMyMoneyWizard::backButtonClicked(void)
+void KMyMoneyWizard::backButtonClicked()
 {
   KMyMoneyWizardPage* oldPage = m_history.back();
   m_history.pop_back();
@@ -337,7 +337,7 @@ void KMyMoneyWizard::backButtonClicked(void)
   switchPage(oldPage);
 }
 
-void KMyMoneyWizard::nextButtonClicked(void)
+void KMyMoneyWizard::nextButtonClicked()
 {
   // make sure it is really complete. Some widgets only change state during focusOutEvent,
   // so we just create such an animal by changing the focus to the next button and
@@ -353,7 +353,7 @@ void KMyMoneyWizard::nextButtonClicked(void)
   }
 }
 
-void KMyMoneyWizard::helpButtonClicked(void)
+void KMyMoneyWizard::helpButtonClicked()
 {
   KMyMoneyWizardPage* currentPage = m_history.back();
   QString ctx = currentPage->helpContext();
@@ -362,7 +362,7 @@ void KMyMoneyWizard::helpButtonClicked(void)
   KToolInvocation::invokeHelp(ctx);
 }
 
-void KMyMoneyWizard::completeStateChanged(void)
+void KMyMoneyWizard::completeStateChanged()
 {
   KMyMoneyWizardPage* currentPage = m_history.back();
   bool lastPage = currentPage->isLastPage();
@@ -380,7 +380,7 @@ void KMyMoneyWizard::completeStateChanged(void)
   m_backButton->setEnabled(m_history.count() > 1);
 }
 
-void KMyMoneyWizard::accept(void)
+void KMyMoneyWizard::accept()
 {
   // make sure it is really complete. Some widgets only change state during focusOutEvent,
   // so we just create such an animal by changing the focus to the finish button and

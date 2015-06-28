@@ -120,22 +120,22 @@ void Wizard::setAccount(const MyMoneyAccount& acc)
   }
 }
 
-const MyMoneySecurity& Wizard::currency(void) const
+const MyMoneySecurity& Wizard::currency() const
 {
   return m_accountTypePage->currency();
 }
 
-MyMoneyMoney Wizard::interestRate(void) const
+MyMoneyMoney Wizard::interestRate() const
 {
   return m_loanDetailsPage->m_interestRate->value() / MyMoneyMoney(100, 1);
 }
 
-int Wizard::precision(void) const
+int Wizard::precision() const
 {
   return MyMoneyMoney::denomToPrec(currency().smallestAccountFraction());
 }
 
-const MyMoneyAccount& Wizard::account(void)
+const MyMoneyAccount& Wizard::account()
 {
   m_account = MyMoneyAccountLoan();
   m_account.setName(m_accountTypePage->m_accountName->text());
@@ -172,7 +172,7 @@ const MyMoneyAccount& Wizard::account(void)
   return m_account;
 }
 
-MyMoneyTransaction Wizard::payoutTransaction(void)
+MyMoneyTransaction Wizard::payoutTransaction()
 {
   MyMoneyTransaction t;
   if (m_account.isLoan()                                      // we're creating a loan
@@ -199,7 +199,7 @@ MyMoneyTransaction Wizard::payoutTransaction(void)
   return t;
 }
 
-const MyMoneyAccount& Wizard::parentAccount(void)
+const MyMoneyAccount& Wizard::parentAccount()
 {
   return m_accountTypePage->allowsParentAccount()
          ? m_hierarchyPage->parentAccount()
@@ -208,7 +208,7 @@ const MyMoneyAccount& Wizard::parentAccount(void)
             : m_accountTypePage->parentAccount());
 }
 
-MyMoneyAccount Wizard::brokerageAccount(void) const
+MyMoneyAccount Wizard::brokerageAccount() const
 {
   MyMoneyAccount account;
   if (m_account.accountType() == MyMoneyAccount::Investment
@@ -226,7 +226,7 @@ MyMoneyAccount Wizard::brokerageAccount(void) const
   return account;
 }
 
-const MyMoneySchedule& Wizard::schedule(void)
+const MyMoneySchedule& Wizard::schedule()
 {
   m_schedule = MyMoneySchedule();
 
@@ -331,7 +331,7 @@ const MyMoneySchedule& Wizard::schedule(void)
   return m_schedule;
 }
 
-MyMoneyMoney Wizard::openingBalance(void) const
+MyMoneyMoney Wizard::openingBalance() const
 {
   // equity accounts don't have an opening balance
   if (m_accountTypePage->accountType() == MyMoneyAccount::Equity)
@@ -347,7 +347,7 @@ MyMoneyMoney Wizard::openingBalance(void) const
   return m_accountTypePage->m_openingBalance->value();
 }
 
-MyMoneyPrice Wizard::conversionRate(void) const
+MyMoneyPrice Wizard::conversionRate() const
 {
   if (MyMoneyFile::instance()->baseCurrency().id() == m_accountTypePage->m_currencyComboBox->security().id())
     return MyMoneyPrice(MyMoneyFile::instance()->baseCurrency().id(),
@@ -362,7 +362,7 @@ MyMoneyPrice Wizard::conversionRate(void) const
                       i18n("User"));
 }
 
-bool Wizard::moneyBorrowed(void) const
+bool Wizard::moneyBorrowed() const
 {
   return m_generalLoanInfoPage->m_loanDirection->currentIndex() == 0;
 }
@@ -392,7 +392,7 @@ InstitutionPage::~InstitutionPage()
   delete d;
 }
 
-void InstitutionPage::slotLoadWidgets(void)
+void InstitutionPage::slotLoadWidgets()
 {
   m_institutionComboBox->clear();
 
@@ -407,7 +407,7 @@ void InstitutionPage::slotLoadWidgets(void)
   }
 }
 
-void InstitutionPage::slotNewInstitution(void)
+void InstitutionPage::slotNewInstitution()
 {
   MyMoneyInstitution institution;
 
@@ -446,7 +446,7 @@ void InstitutionPage::selectExistingInstitution(const QString& id)
   }
 }
 
-const MyMoneyInstitution& InstitutionPage::institution(void) const
+const MyMoneyInstitution& InstitutionPage::institution() const
 {
   static MyMoneyInstitution emptyInstitution;
   if (m_institutionComboBox->currentIndex() == 0)
@@ -455,7 +455,7 @@ const MyMoneyInstitution& InstitutionPage::institution(void) const
   return d->m_list[m_institutionComboBox->currentIndex()-1];
 }
 
-KMyMoneyWizardPage* InstitutionPage::nextPage(void) const
+KMyMoneyWizardPage* InstitutionPage::nextPage() const
 {
   return m_wizard->m_accountTypePage;
 }
@@ -517,7 +517,7 @@ void AccountTypePage::hideShowPages(MyMoneyAccount::accountTypeE accountType) co
   m_wizard->reselectStep();
 }
 
-KMyMoneyWizardPage* AccountTypePage::nextPage(void) const
+KMyMoneyWizardPage* AccountTypePage::nextPage() const
 {
   if (accountType() == MyMoneyAccount::Loan)
     return m_wizard->m_generalLoanInfoPage;
@@ -528,7 +528,7 @@ KMyMoneyWizardPage* AccountTypePage::nextPage(void) const
   return m_wizard->m_hierarchyPage;
 }
 
-void AccountTypePage::slotUpdateCurrency(void)
+void AccountTypePage::slotUpdateCurrency()
 {
   MyMoneyAccount acc;
   acc.setAccountType(accountType());
@@ -545,7 +545,7 @@ void AccountTypePage::slotUpdateCurrency(void)
   slotUpdateConversionRate(m_conversionRate->lineedit()->text());
 }
 
-void AccountTypePage::slotGetOnlineQuote(void)
+void AccountTypePage::slotGetOnlineQuote()
 {
   QString id = MyMoneyFile::instance()->baseCurrency().id() + ' ' + m_currencyComboBox->security().id();
   QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, id);
@@ -561,7 +561,7 @@ void AccountTypePage::slotGetOnlineQuote(void)
   delete dlg;
 }
 
-void AccountTypePage::slotPriceWarning(void)
+void AccountTypePage::slotPriceWarning()
 {
   priceWarning(false);
 }
@@ -579,7 +579,7 @@ void AccountTypePage::slotUpdateConversionRate(const QString& txt)
   m_conversionExample->setText(i18n("1 %1 equals %2", MyMoneyFile::instance()->baseCurrency().tradingSymbol(), MyMoneyMoney(txt).formatMoney(m_currencyComboBox->security().tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision())));
 }
 
-bool AccountTypePage::isComplete(void) const
+bool AccountTypePage::isComplete() const
 {
   // check that the conversion rate is positive if enabled
   bool rc = !m_conversionRate->isVisible() || (!m_conversionRate->value().isZero() && !m_conversionRate->value().isNegative());
@@ -597,12 +597,12 @@ bool AccountTypePage::isComplete(void) const
   return rc;
 }
 
-MyMoneyAccount::accountTypeE AccountTypePage::accountType(void) const
+MyMoneyAccount::accountTypeE AccountTypePage::accountType() const
 {
   return static_cast<MyMoneyAccount::accountTypeE>(m_typeSelection->currentItem());
 }
 
-const MyMoneySecurity& AccountTypePage::currency(void) const
+const MyMoneySecurity& AccountTypePage::currency() const
 {
   return m_currencyComboBox->security();
 }
@@ -620,7 +620,7 @@ void AccountTypePage::setAccount(const MyMoneyAccount& acc)
   m_accountName->setText(acc.name());
 }
 
-const MyMoneyAccount& AccountTypePage::parentAccount(void)
+const MyMoneyAccount& AccountTypePage::parentAccount()
 {
   switch (accountType()) {
     case MyMoneyAccount::CreditCard:
@@ -636,7 +636,7 @@ const MyMoneyAccount& AccountTypePage::parentAccount(void)
   return MyMoneyFile::instance()->asset();
 }
 
-bool AccountTypePage::allowsParentAccount(void) const
+bool AccountTypePage::allowsParentAccount() const
 {
   return accountType() != MyMoneyAccount::Loan;
 }
@@ -648,12 +648,12 @@ BrokeragePage::BrokeragePage(Wizard* wizard) :
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
 }
 
-void BrokeragePage::slotLoadWidgets(void)
+void BrokeragePage::slotLoadWidgets()
 {
   m_brokerageCurrency->update(QString("x"));
 }
 
-void BrokeragePage::enterPage(void)
+void BrokeragePage::enterPage()
 {
   // assign the currency of the investment account to the
   // brokerage account if nothing else has ever been selected
@@ -669,7 +669,7 @@ void BrokeragePage::enterPage(void)
   m_iban->setEnabled(enabled);
 }
 
-KMyMoneyWizardPage* BrokeragePage::nextPage(void) const
+KMyMoneyWizardPage* BrokeragePage::nextPage() const
 {
   return m_wizard->m_hierarchyPage;
 }
@@ -707,13 +707,13 @@ CreditCardSchedulePage::CreditCardSchedulePage(Wizard* wizard) :
   slotLoadWidgets();
 }
 
-void CreditCardSchedulePage::enterPage(void)
+void CreditCardSchedulePage::enterPage()
 {
   if (m_name->text().isEmpty())
     m_name->setText(i18n("Credit Card %1 monthly payment", m_wizard->m_accountTypePage->m_accountName->text()));
 }
 
-bool CreditCardSchedulePage::isComplete(void) const
+bool CreditCardSchedulePage::isComplete() const
 {
   bool rc = true;
   QString msg = i18n("Finish entry and create account");
@@ -745,7 +745,7 @@ bool CreditCardSchedulePage::isComplete(void) const
   return rc;
 }
 
-void CreditCardSchedulePage::slotLoadWidgets(void)
+void CreditCardSchedulePage::slotLoadWidgets()
 {
   AccountSet set;
   set.addAccountGroup(MyMoneyAccount::Asset);
@@ -754,7 +754,7 @@ void CreditCardSchedulePage::slotLoadWidgets(void)
   m_payee->loadPayees(MyMoneyFile::instance()->payeeList());
 }
 
-KMyMoneyWizardPage* CreditCardSchedulePage::nextPage(void) const
+KMyMoneyWizardPage* CreditCardSchedulePage::nextPage() const
 {
   return m_wizard->m_hierarchyPage;
 }
@@ -787,12 +787,12 @@ GeneralLoanInfoPage::GeneralLoanInfoPage(Wizard* wizard) :
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadWidgets()));
 }
 
-KMyMoneyWizardPage* GeneralLoanInfoPage::nextPage(void) const
+KMyMoneyWizardPage* GeneralLoanInfoPage::nextPage() const
 {
   return m_wizard->m_loanDetailsPage;
 }
 
-bool GeneralLoanInfoPage::recordAllPayments(void) const
+bool GeneralLoanInfoPage::recordAllPayments() const
 {
   bool rc = true;     // all payments
   if (m_recordings->isEnabled()) {
@@ -802,7 +802,7 @@ bool GeneralLoanInfoPage::recordAllPayments(void) const
   return rc;
 }
 
-void GeneralLoanInfoPage::enterPage(void)
+void GeneralLoanInfoPage::enterPage()
 {
   if (m_firstTime) {
     // setup default dates to last of this month and one year on top
@@ -813,7 +813,7 @@ void GeneralLoanInfoPage::enterPage(void)
   }
 }
 
-bool GeneralLoanInfoPage::isComplete(void) const
+bool GeneralLoanInfoPage::isComplete() const
 {
   m_wizard->setStepHidden(StepPayout, !m_wizard->openingBalance().isZero());
   bool rc = KMyMoneyWizardPage::isComplete();
@@ -844,14 +844,14 @@ bool GeneralLoanInfoPage::isComplete(void) const
   return rc;
 }
 
-const MyMoneyAccount& GeneralLoanInfoPage::parentAccount(void)
+const MyMoneyAccount& GeneralLoanInfoPage::parentAccount()
 {
   return (m_loanDirection->currentIndex() == 0)
          ? MyMoneyFile::instance()->liability()
          : MyMoneyFile::instance()->asset();
 }
 
-void GeneralLoanInfoPage::slotLoadWidgets(void)
+void GeneralLoanInfoPage::slotLoadWidgets()
 {
   m_payee->loadPayees(MyMoneyFile::instance()->payeeList());
 }
@@ -878,7 +878,7 @@ LoanDetailsPage::LoanDetailsPage(Wizard* wizard) :
   connect(m_calculateButton, SIGNAL(clicked()), this, SLOT(slotCalculate()));
 }
 
-void LoanDetailsPage::enterPage(void)
+void LoanDetailsPage::enterPage()
 {
   // we need to remove a bunch of entries of the payment frequencies
   m_termUnit->clear();
@@ -908,13 +908,13 @@ void LoanDetailsPage::enterPage(void)
   }
 }
 
-void LoanDetailsPage::slotValuesChanged(void)
+void LoanDetailsPage::slotValuesChanged()
 {
   m_needCalculate = true;
   m_wizard->completeStateChanged();
 }
 
-void LoanDetailsPage::slotCalculate(void)
+void LoanDetailsPage::slotCalculate()
 {
   MyMoneyFinancialCalculator calc;
   double val;
@@ -1088,7 +1088,7 @@ void LoanDetailsPage::slotCalculate(void)
   m_wizard->completeStateChanged();
 }
 
-int LoanDetailsPage::term(void) const
+int LoanDetailsPage::term() const
 {
   int factor = 0;
 
@@ -1150,7 +1150,7 @@ QString LoanDetailsPage::updateTermWidgets(const double val)
   return valString;
 }
 
-bool LoanDetailsPage::isComplete(void) const
+bool LoanDetailsPage::isComplete() const
 {
   // bool rc = KMyMoneyWizardPage::isComplete();
 
@@ -1195,7 +1195,7 @@ bool LoanDetailsPage::isComplete(void) const
   return (fieldCnt == 5) && !m_needCalculate;
 }
 
-KMyMoneyWizardPage* LoanDetailsPage::nextPage(void) const
+KMyMoneyWizardPage* LoanDetailsPage::nextPage() const
 {
   return m_wizard->m_loanPaymentPage;
 }
@@ -1231,12 +1231,12 @@ LoanPaymentPage::~LoanPaymentPage()
   delete d;
 }
 
-MyMoneyMoney LoanPaymentPage::basePayment(void) const
+MyMoneyMoney LoanPaymentPage::basePayment() const
 {
   return m_wizard->m_loanDetailsPage->m_paymentAmount->value();
 }
 
-MyMoneyMoney LoanPaymentPage::additionalFees(void) const
+MyMoneyMoney LoanPaymentPage::additionalFees() const
 {
   return d->additionalFees;
 }
@@ -1253,13 +1253,13 @@ void LoanPaymentPage::additionalFeesSplits(QList<MyMoneySplit>& list)
   }
 }
 
-void LoanPaymentPage::updateAmounts(void)
+void LoanPaymentPage::updateAmounts()
 {
   m_additionalFees->setText(d->additionalFees.formatMoney(m_wizard->currency().tradingSymbol(), m_wizard->precision()));
   m_totalPayment->setText((basePayment() + d->additionalFees).formatMoney(m_wizard->currency().tradingSymbol(), m_wizard->precision()));
 }
 
-void LoanPaymentPage::enterPage(void)
+void LoanPaymentPage::enterPage()
 {
   const MyMoneySecurity& currency = m_wizard->currency();
 
@@ -1270,7 +1270,7 @@ void LoanPaymentPage::enterPage(void)
   updateAmounts();
 }
 
-void LoanPaymentPage::slotAdditionalFees(void)
+void LoanPaymentPage::slotAdditionalFees()
 {
   QMap<QString, MyMoneyMoney> priceInfo;
   QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(d->additionalFeesTransaction, d->phonySplit, d->phonyAccount, false, !m_wizard->moneyBorrowed(), MyMoneyMoney(), priceInfo);
@@ -1294,7 +1294,7 @@ void LoanPaymentPage::slotAdditionalFees(void)
   delete dlg;
 }
 
-KMyMoneyWizardPage* LoanPaymentPage::nextPage(void) const
+KMyMoneyWizardPage* LoanPaymentPage::nextPage() const
 {
   return m_wizard->m_loanSchedulePage;
 }
@@ -1326,21 +1326,21 @@ void LoanSchedulePage::slotCreateCategory(const QString& name, QString& id)
   id = acc.id();
 }
 
-QDate LoanSchedulePage::firstPaymentDueDate(void) const
+QDate LoanSchedulePage::firstPaymentDueDate() const
 {
   if (m_firstPaymentDueDate->isEnabled())
     return m_firstPaymentDueDate->date();
   return m_wizard->m_generalLoanInfoPage->m_firstPaymentDate->date();
 }
 
-void LoanSchedulePage::enterPage(void)
+void LoanSchedulePage::enterPage()
 {
   m_interestCategory->setFocus();
   m_firstPaymentDueDate->setDisabled(m_wizard->m_generalLoanInfoPage->recordAllPayments());
   slotLoadWidgets();
 }
 
-void LoanSchedulePage::slotLoadWidgets(void)
+void LoanSchedulePage::slotLoadWidgets()
 {
   AccountSet set;
   if (m_wizard->moneyBorrowed())
@@ -1354,7 +1354,7 @@ void LoanSchedulePage::slotLoadWidgets(void)
   set.load(m_paymentAccount->selector());
 }
 
-KMyMoneyWizardPage* LoanSchedulePage::nextPage(void) const
+KMyMoneyWizardPage* LoanSchedulePage::nextPage() const
 {
   // if the balance widget of the general loan info page is enabled and
   // the value is not zero, then the payout already happened and we don't
@@ -1387,7 +1387,7 @@ LoanPayoutPage::LoanPayoutPage(Wizard* wizard) :
   slotLoadWidgets();
 }
 
-void LoanPayoutPage::slotButtonsToggled(void)
+void LoanPayoutPage::slotButtonsToggled()
 {
   // we don't go directly, as the order of the emission of signals to slots is
   // not defined. Using a single shot timer postpones the call of m_mandatoryGroup::changed()
@@ -1396,7 +1396,7 @@ void LoanPayoutPage::slotButtonsToggled(void)
   QTimer::singleShot(0, m_mandatoryGroup, SLOT(changed()));
 }
 
-void LoanPayoutPage::slotCreateAssetAccount(void)
+void LoanPayoutPage::slotCreateAssetAccount()
 {
   MyMoneyAccount acc;
   acc.setAccountType(MyMoneyAccount::Asset);
@@ -1409,7 +1409,7 @@ void LoanPayoutPage::slotCreateAssetAccount(void)
   }
 }
 
-void LoanPayoutPage::slotLoadWidgets(void)
+void LoanPayoutPage::slotLoadWidgets()
 {
   AccountSet set;
   set.addAccountGroup(MyMoneyAccount::Asset);
@@ -1420,7 +1420,7 @@ void LoanPayoutPage::slotLoadWidgets(void)
   set.load(m_loanAccount->selector());
 }
 
-void LoanPayoutPage::enterPage(void)
+void LoanPayoutPage::enterPage()
 {
   // only allow to create new asset accounts for liability loans
   m_createAssetButton->setEnabled(m_wizard->moneyBorrowed());
@@ -1431,17 +1431,17 @@ void LoanPayoutPage::enterPage(void)
   m_payoutDetailFrame->setDisabled(m_noPayoutTransaction->isChecked());
 }
 
-KMyMoneyWizardPage* LoanPayoutPage::nextPage(void) const
+KMyMoneyWizardPage* LoanPayoutPage::nextPage() const
 {
   return m_wizard->m_accountSummaryPage;
 }
 
-bool LoanPayoutPage::isComplete(void) const
+bool LoanPayoutPage::isComplete() const
 {
   return KMyMoneyWizardPage::isComplete() | m_noPayoutTransaction->isChecked();
 }
 
-const QString& LoanPayoutPage::payoutAccountId(void) const
+const QString& LoanPayoutPage::payoutAccountId() const
 {
   if (m_refinanceLoan->isChecked()) {
     return m_loanAccount->selectedItem();
@@ -1502,7 +1502,7 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
   connect(m_parentAccounts->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(parentAccountChanged()));
 }
 
-void HierarchyPage::enterPage(void)
+void HierarchyPage::enterPage()
 {
   // Ensure that the list reflects the Account Type
   MyMoneyAccount topAccount = m_wizard->m_accountTypePage->parentAccount();
@@ -1511,12 +1511,12 @@ void HierarchyPage::enterPage(void)
   m_parentAccounts->expandAll();
 }
 
-KMyMoneyWizardPage* HierarchyPage::nextPage(void) const
+KMyMoneyWizardPage* HierarchyPage::nextPage() const
 {
   return m_wizard->m_accountSummaryPage;
 }
 
-const MyMoneyAccount& HierarchyPage::parentAccount(void)
+const MyMoneyAccount& HierarchyPage::parentAccount()
 {
   QVariant data = m_parentAccounts->model()->data(m_parentAccounts->currentIndex(), AccountsModel::AccountRole);
   if (data.isValid()) {
@@ -1527,7 +1527,7 @@ const MyMoneyAccount& HierarchyPage::parentAccount(void)
   return m_parentAccount;
 }
 
-bool HierarchyPage::isComplete(void) const
+bool HierarchyPage::isComplete() const
 {
   return m_parentAccounts->currentIndex().isValid();
 }
@@ -1543,7 +1543,7 @@ AccountSummaryPage::AccountSummaryPage(Wizard* wizard) :
 {
 }
 
-void AccountSummaryPage::enterPage(void)
+void AccountSummaryPage::enterPage()
 {
   MyMoneyAccount acc = m_wizard->account();
   MyMoneySecurity sec = m_wizard->currency();

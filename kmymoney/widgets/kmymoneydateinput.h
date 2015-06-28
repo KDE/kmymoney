@@ -83,7 +83,7 @@ public:
     * Returns the selected date in the widget. If the widget is not
     * showing a date, a QDate() object is returned which has an invalid date.
     */
-  QDate date(void) const;
+  QDate date() const;
 
   /**
     * Set the date shown in the widget to @a date. If @a date is invalid,
@@ -109,9 +109,9 @@ public:
     *
     *  @sa loadDate
     */
-  void resetDate(void);
+  void resetDate();
 
-  QWidget* focusWidget(void) const;
+  QWidget* focusWidget() const;
   void setRange(const QDate & min, const QDate & max);
   void markAsBadDate(bool bad = false, const QColor& = QColor());
 
@@ -139,7 +139,7 @@ protected slots:
 
 private slots:
   void slotDateChosenRef(const QDate& date);
-  void fixSize(void);
+  void fixSize();
 
 private:
   struct Private;

@@ -124,7 +124,7 @@ public:
     *
     * @return occurrenceE The instance frequency.
     */
-  occurrenceE occurrence(void) const;
+  occurrenceE occurrence() const;
 
   /**
     * Simple get method that returns the occurrence period
@@ -133,7 +133,7 @@ public:
     * @return occurrenceE The instance period
     *
     */
-  occurrenceE occurrencePeriod(void) const {
+  occurrenceE occurrencePeriod() const {
     return m_occurrence;
   }
 
@@ -142,7 +142,7 @@ public:
     *
     * @return int The frequency multiplier
     */
-  int occurrenceMultiplier(void) const {
+  int occurrenceMultiplier() const {
     return m_occurrenceMultiplier;
   }
 
@@ -151,7 +151,7 @@ public:
     *
     * @return typeE The instance type.
     */
-  typeE type(void) const {
+  typeE type() const {
     return m_type;
   }
 
@@ -163,14 +163,14 @@ public:
     *
     * @return reference to QDate containing the start date.
     */
-  const QDate& startDate(void) const;
+  const QDate& startDate() const;
 
   /**
     * Simple get method that returns the schedule paymentType.
     *
     * @return paymentTypeE The instance paymentType.
     */
-  paymentTypeE paymentType(void) const {
+  paymentTypeE paymentType() const {
     return m_paymentType;
   }
 
@@ -179,7 +179,7 @@ public:
     *
     * @return bool To indicate whether the instance is fixed.
     */
-  bool isFixed(void) const {
+  bool isFixed() const {
     return m_fixed;
   }
 
@@ -189,7 +189,7 @@ public:
     *
     * @return bool Indicates whether the instance will end.
     */
-  bool willEnd(void) const {
+  bool willEnd() const {
     return m_endDate.isValid();
   }
 
@@ -198,7 +198,7 @@ public:
     *
     * @return int The number of transactions remaining for the instance.
     */
-  int transactionsRemaining(void) const;
+  int transactionsRemaining() const;
 
   /**
     * Simple method that returns the number of transactions remaining
@@ -214,7 +214,7 @@ public:
     *
     * @return QDate The end date for the instance.
     */
-  const QDate& endDate(void) const {
+  const QDate& endDate() const {
     return m_endDate;
   }
 
@@ -224,7 +224,7 @@ public:
     *
     * @return bool Indicates whether the instance will be automatically entered.
     */
-  bool autoEnter(void) const {
+  bool autoEnter() const {
     return m_autoEnter;
   }
 
@@ -233,7 +233,7 @@ public:
     *
     * @return MyMoneyTransaction The transaction data for the instance.
     */
-  const MyMoneyTransaction& transaction(void) const {
+  const MyMoneyTransaction& transaction() const {
     return m_transaction;
   }
 
@@ -243,7 +243,7 @@ public:
     *
     * @return QDate The last payment for the schedule.
     */
-  const QDate& lastPayment(void) const {
+  const QDate& lastPayment() const {
     return m_lastPayment;
   }
 
@@ -256,7 +256,7 @@ public:
     *       a possible end of the schedule. Make sure to consider
     *       the return value of isFinished() when using the value returned.
     */
-  const QDate& nextDueDate(void) const;
+  const QDate& nextDueDate() const;
 
   /**
     * This method returns the next due date adjusted
@@ -269,7 +269,7 @@ public:
     * @sa weekendOption()
     * @sa adjustedDate()
     */
-  QDate adjustedNextDueDate(void) const;
+  QDate adjustedNextDueDate() const;
 
   /**
     * This method adjusts returns the date adjusted according to the
@@ -287,7 +287,7 @@ public:
     *
     * This not used by MyMoneySchedule but by the support code.
   **/
-  weekendOptionE weekendOption(void) const {
+  weekendOptionE weekendOption() const {
     return m_weekendOption;
   }
 
@@ -489,7 +489,7 @@ public:
     *
     * @return The name
     */
-  const QString& name(void) const {
+  const QString& name() const {
     return m_name;
   }
 
@@ -509,7 +509,7 @@ public:
   bool operator <(const MyMoneySchedule& right) const;
 
   MyMoneyAccount account(int cnt = 1) const;
-  MyMoneyAccount transferAccount(void) const {
+  MyMoneyAccount transferAccount() const {
     return account(2);
   };
   QDate dateAfter(int transactions) const;
@@ -518,7 +518,7 @@ public:
   bool isFinished() const;
   bool hasRecordedPayment(const QDate&) const;
   void recordPayment(const QDate&);
-  QList<QDate> recordedPayments(void) const {
+  QList<QDate> recordedPayments() const {
     return m_recordedPayments;
   }
 
@@ -619,7 +619,7 @@ public:
    */
   static QString scheduleTypeToString(MyMoneySchedule::typeE type);
 
-  int variation(void) const;
+  int variation() const;
   void setVariation(int var);
 
   /**
@@ -675,7 +675,7 @@ private:
     * @return const pointer to the current attached processing calendar object.
     *         If no object is attached, returns 0.
     */
-  IMyMoneyProcessingCalendar* processingCalendar(void) const;
+  IMyMoneyProcessingCalendar* processingCalendar() const;
 
   /**
     * This method forces the day of the passed @p date to

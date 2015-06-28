@@ -58,8 +58,8 @@ public:
   void showEvent(QShowEvent* event);
 
 public slots:
-  void slotLoadForecast(void);
-  void slotManualForecast(void);
+  void slotLoadForecast();
+  void slotManualForecast();
 
 protected:
   typedef enum {
@@ -90,32 +90,32 @@ protected:
   /**
     * This method loads the detailed view
     */
-  void loadListView(void);
+  void loadListView();
 
   /**
    * This method loads the summary view
    */
-  void loadSummaryView(void);
+  void loadSummaryView();
 
   /**
    * This method loads the advanced view
    */
-  void loadAdvancedView(void);
+  void loadAdvancedView();
 
   /**
    * This method loads the budget view
    */
-  void loadBudgetView(void);
+  void loadBudgetView();
 
   /**
    * This method loads the budget view
    */
-  void loadChartView(void);
+  void loadChartView();
 
   /**
    * This method loads the settings from user configuration
    */
-  void loadForecastSettings(void);
+  void loadForecastSettings();
 
 protected slots:
   void slotTabChanged(int index);

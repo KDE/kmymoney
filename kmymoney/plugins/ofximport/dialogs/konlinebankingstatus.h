@@ -55,8 +55,8 @@ class KOnlineBankingStatus : public KOnlineBankingStatusDecl
 public:
   explicit KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent = 0);
   ~KOnlineBankingStatus();
-  const QString appId(void) const;
-  QString headerVersion(void) const;
+  const QString appId() const;
+  QString headerVersion() const;
 protected Q_SLOTS:
   void applicationSelectionChanged();
 

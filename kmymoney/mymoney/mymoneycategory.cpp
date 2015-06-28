@@ -95,13 +95,13 @@ bool MyMoneyCategory::setMinorCategories(QStringList values)
   return addMinorCategory(values);
 }
 
-bool MyMoneyCategory::removeAllMinors(void)
+bool MyMoneyCategory::removeAllMinors()
 {
   m_minorCategories.clear();
   return true;
 }
 
-QString MyMoneyCategory::firstMinor(void)
+QString MyMoneyCategory::firstMinor()
 {
   return m_minorCategories.first();
 }
@@ -164,7 +164,7 @@ QDataStream &operator>>(QDataStream &s, MyMoneyCategory &category)
   return s;
 }
 
-void MyMoneyCategory::clear(void)
+void MyMoneyCategory::clear()
 {
   m_minorCategories.clear();
 }

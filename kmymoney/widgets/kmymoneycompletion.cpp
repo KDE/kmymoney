@@ -75,7 +75,7 @@ kMyMoneyCompletion::~kMyMoneyCompletion()
 {
 }
 
-void kMyMoneyCompletion::adjustSize(void)
+void kMyMoneyCompletion::adjustSize()
 {
   QTreeWidgetItemIterator it(m_lv, QTreeWidgetItemIterator::NotHidden);
   int count = 0;
@@ -160,7 +160,7 @@ void kMyMoneyCompletion::show(bool presetSelected)
     qApp->inputContext()->setFocusWidget(m_parent);
 }
 
-void kMyMoneyCompletion::hide(void)
+void kMyMoneyCompletion::hide()
 {
   if (m_parent) {
     m_parent->removeEventFilter(this);

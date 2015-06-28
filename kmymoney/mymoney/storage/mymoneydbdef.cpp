@@ -73,7 +73,7 @@ MyMoneyDbDef::MyMoneyDbDef()
 //#define ISKEY true
 
 #define appendField(a) fields.append(KSharedPtr<MyMoneyDbColumn>(new a))
-void MyMoneyDbDef::FileInfo(void)
+void MyMoneyDbDef::FileInfo()
 {
   QList< KSharedPtr<MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("version", "varchar(16)"));
@@ -117,7 +117,7 @@ void MyMoneyDbDef::FileInfo(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Institutions(void)
+void MyMoneyDbDef::Institutions()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
@@ -133,7 +133,7 @@ void MyMoneyDbDef::Institutions(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Payees(void)
+void MyMoneyDbDef::Payees()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)",  PRIMARYKEY, NOTNULL));
@@ -166,7 +166,7 @@ void MyMoneyDbDef::PayeesPayeeIdentifier()
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Tags(void)
+void MyMoneyDbDef::Tags()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)",  PRIMARYKEY, NOTNULL));
@@ -179,7 +179,7 @@ void MyMoneyDbDef::Tags(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::TagSplits(void)
+void MyMoneyDbDef::TagSplits()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("transactionId", "varchar(32)", PRIMARYKEY, NOTNULL));
@@ -190,7 +190,7 @@ void MyMoneyDbDef::TagSplits(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Accounts(void)
+void MyMoneyDbDef::Accounts()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)",  PRIMARYKEY, NOTNULL));
@@ -225,7 +225,7 @@ void MyMoneyDbDef::AccountsPayeeIdentifier()
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Transactions(void)
+void MyMoneyDbDef::Transactions()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
@@ -240,7 +240,7 @@ void MyMoneyDbDef::Transactions(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Splits(void)
+void MyMoneyDbDef::Splits()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("transactionId", "varchar(32)",  PRIMARYKEY, NOTNULL));
@@ -269,7 +269,7 @@ void MyMoneyDbDef::Splits(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::KeyValuePairs(void)
+void MyMoneyDbDef::KeyValuePairs()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("kvpType", "varchar(16)", false, NOTNULL));
@@ -284,7 +284,7 @@ void MyMoneyDbDef::KeyValuePairs(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Schedules(void)
+void MyMoneyDbDef::Schedules()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
@@ -312,7 +312,7 @@ void MyMoneyDbDef::Schedules(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::SchedulePaymentHistory(void)
+void MyMoneyDbDef::SchedulePaymentHistory()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("schedId", "varchar(32)", PRIMARYKEY, NOTNULL));
@@ -322,7 +322,7 @@ void MyMoneyDbDef::SchedulePaymentHistory(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Securities(void)
+void MyMoneyDbDef::Securities()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
@@ -338,7 +338,7 @@ void MyMoneyDbDef::Securities(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Prices(void)
+void MyMoneyDbDef::Prices()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("fromId", "varchar(32)", PRIMARYKEY, NOTNULL));
@@ -352,7 +352,7 @@ void MyMoneyDbDef::Prices(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Currencies(void)
+void MyMoneyDbDef::Currencies()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("ISOcode", "char(3)", PRIMARYKEY, NOTNULL));
@@ -371,7 +371,7 @@ void MyMoneyDbDef::Currencies(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Reports(void)
+void MyMoneyDbDef::Reports()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("name", "varchar(255)", false, NOTNULL));
@@ -382,7 +382,7 @@ void MyMoneyDbDef::Reports(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::OnlineJobs(void)
+void MyMoneyDbDef::OnlineJobs()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
 
@@ -424,7 +424,7 @@ void MyMoneyDbDef::PluginInfo()
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Budgets(void)
+void MyMoneyDbDef::Budgets()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
@@ -436,7 +436,7 @@ void MyMoneyDbDef::Budgets(void)
   m_tables[t.name()] = t;
 }
 
-void MyMoneyDbDef::Balances(void)
+void MyMoneyDbDef::Balances()
 {
   MyMoneyDbView v("kmmBalances", "CREATE VIEW kmmBalances AS "
                   "SELECT kmmAccounts.id AS id, kmmAccounts.currencyId, "
@@ -544,7 +544,7 @@ void MyMoneyDbTable::addIndex(const QString& name, const QStringList& columns, b
   m_indices.push_back(MyMoneyDbIndex(m_name, name, columns, unique));
 }
 
-void MyMoneyDbTable::buildSQLStrings(void)
+void MyMoneyDbTable::buildSQLStrings()
 {
   // build fixed SQL strings for this table
   // build the insert string with placeholders for each field

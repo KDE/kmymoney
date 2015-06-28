@@ -112,7 +112,7 @@ bool MyMoneyTemplate::loadTemplate(const KUrl& url)
   return rc;
 }
 
-bool MyMoneyTemplate::loadDescription(void)
+bool MyMoneyTemplate::loadDescription()
 {
   int validMask = 0x00;
   const int validAccount = 0x01;
@@ -357,17 +357,17 @@ bool MyMoneyTemplate::exportTemplate(void(*callback)(int, int, const QString&))
   return true;
 }
 
-const QString& MyMoneyTemplate::title(void) const
+const QString& MyMoneyTemplate::title() const
 {
   return m_title;
 }
 
-const QString& MyMoneyTemplate::shortDescription(void) const
+const QString& MyMoneyTemplate::shortDescription() const
 {
   return m_shortDesc;
 }
 
-const QString& MyMoneyTemplate::longDescription(void) const
+const QString& MyMoneyTemplate::longDescription() const
 {
   return m_longDesc;
 }

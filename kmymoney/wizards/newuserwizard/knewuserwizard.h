@@ -72,46 +72,46 @@ public:
   /**
     * Returns the personal information of the user (e.g. name, address, etc.)
     */
-  MyMoneyPayee user(void) const;
+  MyMoneyPayee user() const;
 
   /**
     * Returns the URL that the user has chosen to store the file
     */
-  QString url(void) const;
+  QString url() const;
 
   /**
     * Returns the information about an institution if entered by
     * the user. If the name field is empty, then he did not enter
     * such information.
     */
-  MyMoneyInstitution institution(void) const;
+  MyMoneyInstitution institution() const;
 
   /**
     * Returns the information about a checking account if entered by
     * the user. If the name field is empty, then he did not enter
     * such information.
     */
-  MyMoneyAccount account(void) const;
+  MyMoneyAccount account() const;
 
   /**
     * Returns the opening balance value provided by the user. not enter
     */
-  MyMoneyMoney openingBalance(void) const;
+  MyMoneyMoney openingBalance() const;
 
   /**
     * Returns the security to be used as base currency.
     */
-  MyMoneySecurity baseCurrency(void) const;
+  MyMoneySecurity baseCurrency() const;
 
   /**
     * Returns a list of templates including accounts to be created
     */
-  QList<MyMoneyTemplate> templates(void) const;
+  QList<MyMoneyTemplate> templates() const;
 
   /**
     * True if the settings dialog should be launched after the wizard is finished.
     */
-  bool startSettingsAfterFinished(void) const;
+  bool startSettingsAfterFinished() const;
 
 private:
   MyMoneySecurity   m_baseCurrency;

@@ -75,7 +75,7 @@ KMyMoneySelector::~KMyMoneySelector()
 {
 }
 
-void KMyMoneySelector::clear(void)
+void KMyMoneySelector::clear()
 {
   m_treeWidget->clear();
 }
@@ -206,7 +206,7 @@ QTreeWidgetItem* KMyMoneySelector::item(const QString& id) const
   return it_v;
 }
 
-bool KMyMoneySelector::allItemsSelected(void) const
+bool KMyMoneySelector::allItemsSelected() const
 {
   QTreeWidgetItem* rootItem = m_treeWidget->invisibleRootItem();
 
@@ -512,14 +512,14 @@ void KMyMoneySelector::slotItemPressed(QTreeWidgetItem* item, int /* col */)
   }
 }
 
-QStringList KMyMoneySelector::selectedItems(void) const
+QStringList KMyMoneySelector::selectedItems() const
 {
   QStringList list;
   selectedItems(list);
   return list;
 }
 
-QStringList KMyMoneySelector::itemList(void) const
+QStringList KMyMoneySelector::itemList() const
 {
   QStringList list;
   itemList(list);

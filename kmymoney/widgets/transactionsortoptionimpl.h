@@ -41,7 +41,7 @@ class TransactionSortOption : public QWidget
 public:
   TransactionSortOption(QWidget *parent);
   ~TransactionSortOption();
-  QString settings(void) const;
+  QString settings() const;
 public slots:
   void setSettings(const QString& settings);
   void toggleDirection(QListWidgetItem * item);
@@ -50,12 +50,12 @@ protected:
   QListWidgetItem * addEntry(KListWidget * p, QListWidgetItem * after, int idx);
   void setDirectionIcon(QListWidgetItem* item);
 protected slots:
-  void slotAvailableSelected(void);
-  void slotSelectedSelected(void);
-  void slotAddItem(void);
-  void slotRemoveItem(void);
-  void slotUpItem(void);
-  void slotDownItem(void);
+  void slotAvailableSelected();
+  void slotSelectedSelected();
+  void slotAddItem();
+  void slotRemoveItem();
+  void slotUpItem();
+  void slotDownItem();
   void slotFocusChanged(QWidget *o, QWidget *n);
 private:
   void init();

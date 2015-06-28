@@ -116,11 +116,11 @@ public:
   void suspendUpdate(const bool suspend);
 
 public slots:
-  void slotRefreshView(void);
-  void slotSelectBudget(void);
+  void slotRefreshView();
+  void slotSelectBudget();
   void slotHideUnused(bool);
   void slotRefreshHideUnusedButton();
-  void slotStartRename(void);
+  void slotStartRename();
 
   /**
     *This is to update the information about the checkbox "budget amount integrates subaccounts" into the file, when the user clicks the check box
@@ -128,16 +128,16 @@ public slots:
   void cb_includesSubaccounts_clicked();
 
 protected:
-  void loadAccounts(void);
+  void loadAccounts();
 
   /**
    * This method loads all available budgets into the budget list widget. If a budget is
    * currently selected it remains selected if it is still present.
    */
-  void loadBudgets(void);
+  void loadBudgets();
   void ensureBudgetVisible(const QString& id);
-  const MyMoneyBudget& selectedBudget(void) const;
-  void askSave(void);
+  const MyMoneyBudget& selectedBudget() const;
+  void askSave();
 
   bool collectSubBudgets(MyMoneyBudget::AccountGroup &destination, const QModelIndex &index) const;
   void clearSubBudgets(const QModelIndex &index);
@@ -157,23 +157,23 @@ protected slots:
     * This slot is called when the amount of a budget is changed. It
     * updates the budget and stores it in the engine
     */
-  void slotBudgetedAmountChanged(void);
+  void slotBudgetedAmountChanged();
 
   /**
     */
   void slotSelectAccount(const MyMoneyObject &);
 
-  void slotExpandCollapse(void);
+  void slotExpandCollapse();
 
   void AccountEnter();
 
-  void slotUpdateBudget(void);
+  void slotUpdateBudget();
 
-  void slotResetBudget(void);
+  void slotResetBudget();
 
-  void slotNewBudget(void);
+  void slotNewBudget();
 
-  void languageChange(void);
+  void languageChange();
 
   void slotBudgetBalanceChanged(const MyMoneyMoney &);
 
@@ -222,7 +222,7 @@ private:
     **/
   bool                                m_inSelection;
 
-  void adaptHideUnusedButton(void);
+  void adaptHideUnusedButton();
 
   static const int m_iBudgetYearsAhead;
   static const int m_iBudgetYearsBack;

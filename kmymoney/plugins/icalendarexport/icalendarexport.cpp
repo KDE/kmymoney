@@ -96,7 +96,7 @@ KMMiCalendarExportPlugin::~KMMiCalendarExportPlugin()
   delete d;
 }
 
-void KMMiCalendarExportPlugin::slotFirstExport(void)
+void KMMiCalendarExportPlugin::slotFirstExport()
 {
   QPointer<KFileDialog> fileDialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-export"), QString("%1|%2\n").arg("*.ics").arg(i18nc("ICS (Filefilter)", "iCalendar files")), d->m_action->parentWidget());
 
@@ -114,7 +114,7 @@ void KMMiCalendarExportPlugin::slotFirstExport(void)
   delete fileDialog;
 }
 
-void KMMiCalendarExportPlugin::slotExport(void)
+void KMMiCalendarExportPlugin::slotExport()
 {
   QString icalFilePath = PluginSettings::icalendarFile();
   if (!icalFilePath.isEmpty())
@@ -135,7 +135,7 @@ void KMMiCalendarExportPlugin::slotUnplug(KPluginInfo* info)
   }
 }
 
-void KMMiCalendarExportPlugin::slotUpdateConfig(void)
+void KMMiCalendarExportPlugin::slotUpdateConfig()
 {
   PluginSettings::self()->readConfig();
   // export the schedules because the configuration has changed

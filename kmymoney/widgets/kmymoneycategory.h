@@ -97,13 +97,13 @@ public:
     *
     * @return pointer to completion's selector object
     */
-  kMyMoneyAccountSelector* selector(void) const;
+  kMyMoneyAccountSelector* selector() const;
 
   /**
     * This member returns a pointer to the split button. In case the @a splitButton parameter
     * of the constructor was @a false, this method prints a warning to stderr and returns 0.
     */
-  KPushButton* splitButton(void) const;
+  KPushButton* splitButton() const;
 
   /**
     * Reimplemented for internal reasons. No API change
@@ -118,12 +118,12 @@ public:
   /**
     * Force the text field to show the text for split transaction.
     */
-  void setSplitTransaction(void);
+  void setSplitTransaction();
 
   /**
     * Check if the text field contains the text for a split transaction
     */
-  bool isSplitTransaction(void) const;
+  bool isSplitTransaction() const;
 
   /**
     * overridden for internal reasons, no API change
@@ -163,7 +163,7 @@ signals:
     *
     * @sa focusInEvent()
     */
-  void focusIn(void);
+  void focusIn();
 
 private:
   /// \internal d-pointer class.

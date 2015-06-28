@@ -62,13 +62,13 @@ class QueryTable : public ListTable
 {
 public:
   QueryTable(const MyMoneyReport&);
-  void init(void);
+  void init();
 
 protected:
-  void constructAccountTable(void);
-  void constructTransactionTable(void);
+  void constructAccountTable();
+  void constructTransactionTable();
   void constructPerformanceRow(const ReportAccount& account, TableRow& result) const;
-  void constructSplitsTable(void);
+  void constructSplitsTable();
 
 };
 
@@ -79,7 +79,7 @@ protected:
 class CashFlowListItem
 {
 public:
-  CashFlowListItem(void) {}
+  CashFlowListItem() {}
   CashFlowListItem(const QDate& _date, const MyMoneyMoney& _value): m_date(_date), m_value(_value) {}
   bool operator<(const CashFlowListItem& _second) const {
     return m_date < _second.m_date;
@@ -90,10 +90,10 @@ public:
   bool operator>(const CashFlowListItem& _second) const {
     return m_date > _second.m_date;
   }
-  const QDate& date(void) const {
+  const QDate& date() const {
     return m_date;
   }
-  const MyMoneyMoney& value(void) const {
+  const MyMoneyMoney& value() const {
     return m_value;
   }
   MyMoneyMoney NPV(double _rate) const;
@@ -101,7 +101,7 @@ public:
   static void setToday(const QDate& _today) {
     m_sToday = _today;
   }
-  const QDate& today(void) const {
+  const QDate& today() const {
     return m_sToday;
   }
 
@@ -115,11 +115,11 @@ private:
 class CashFlowList: public QList<CashFlowListItem>
 {
 public:
-  CashFlowList(void) {}
+  CashFlowList() {}
   MyMoneyMoney NPV(double rate) const;
-  double IRR(void) const;
-  MyMoneyMoney total(void) const;
-  void dumpDebug(void) const;
+  double IRR() const;
+  MyMoneyMoney total() const;
+  void dumpDebug() const;
 
   /**
    * Function: XIRR
@@ -128,10 +128,10 @@ public:
    *
    * XIRR ( Values; Dates; [ Guess = 0.1 ] )
    **/
-  double calculateXIRR(void) const;
+  double calculateXIRR() const;
 
 protected:
-  CashFlowListItem mostRecent(void) const;
+  CashFlowListItem mostRecent() const;
 
 private:
   /**

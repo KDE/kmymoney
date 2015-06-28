@@ -165,7 +165,7 @@ void KMyMoneyMVCCombo::setClickMessage(const QString& hint) const
   }
 }
 
-const QString& KMyMoneyMVCCombo::selectedItem(void) const
+const QString& KMyMoneyMVCCombo::selectedItem() const
 {
   QVariant data = itemData(currentIndex());
   if (data.isValid())
@@ -291,7 +291,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
   emit lostFocus();
 }
 
-void KMyMoneyMVCCombo::checkCurrentText(void)
+void KMyMoneyMVCCombo::checkCurrentText()
 {
   if (!contains(currentText())) {
     QString id;
@@ -397,7 +397,7 @@ void KMyMoneyTagCombo::setUsedTagList(QList<QString>& usedIdList, QList<QString>
   }
 }
 
-void KMyMoneyTagCombo::checkCurrentText(void)
+void KMyMoneyTagCombo::checkCurrentText()
 {
   if (!contains(currentText())) {
     if (m_closedTagNameList.contains(currentText())) {
@@ -466,7 +466,7 @@ void KTagContainer::loadTags(const QList<MyMoneyTag>& list)
   m_tagCombo->loadTags(list);
 }
 
-const QList<QString> KTagContainer::selectedTags(void)
+const QList<QString> KTagContainer::selectedTags()
 {
   return m_tagIdList;
 }
@@ -488,7 +488,7 @@ void KTagContainer::addTagWidget(const QString& id)
   m_tagCombo->setFocus();
 }
 
-void KTagContainer::RemoveAllTagWidgets(void)
+void KTagContainer::RemoveAllTagWidgets()
 {
   m_tagIdList.clear();
   m_tagNameList.clear();
@@ -499,12 +499,12 @@ void KTagContainer::RemoveAllTagWidgets(void)
   m_tagCombo->setCurrentIndex(0);
 }
 
-void KTagContainer::slotAddTagWidget(void)
+void KTagContainer::slotAddTagWidget()
 {
   addTagWidget(m_tagCombo->selectedItem());
 }
 
-void KTagContainer::slotRemoveTagWidget(void)
+void KTagContainer::slotRemoveTagWidget()
 {
   this->tagCombo()->setFocus();
   KTagLabel *t = (KTagLabel *)sender();
@@ -535,7 +535,7 @@ void KMyMoneyReconcileCombo::slotSetState(const QString& state)
   setSelectedItem(state);
 }
 
-void KMyMoneyReconcileCombo::removeDontCare(void)
+void KMyMoneyReconcileCombo::removeDontCare()
 {
   //Remove unknown state
   removeItem(3);
@@ -568,7 +568,7 @@ void KMyMoneyReconcileCombo::setState(MyMoneySplit::reconcileFlagE state)
   setSelectedItem(id);
 }
 
-MyMoneySplit::reconcileFlagE KMyMoneyReconcileCombo::state(void) const
+MyMoneySplit::reconcileFlagE KMyMoneyReconcileCombo::state() const
 {
   MyMoneySplit::reconcileFlagE state = MyMoneySplit::NotReconciled;
 
@@ -629,7 +629,7 @@ void KMyMoneyCashFlowCombo::slotSetDirection(const QString& id)
   update();
 }
 
-void KMyMoneyCashFlowCombo::removeDontCare(void)
+void KMyMoneyCashFlowCombo::removeDontCare()
 {
   removeItem(findData(QVariant(KMyMoneyRegister::Unknown), Qt::UserRole, Qt::MatchExactly));
 }
@@ -688,12 +688,12 @@ void KMyMoneyGeneralCombo::setCurrentItem(int id)
   setCurrentIndex(findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
 }
 
-int KMyMoneyGeneralCombo::currentItem(void) const
+int KMyMoneyGeneralCombo::currentItem() const
 {
   return itemData(currentIndex()).toInt();
 }
 
-void KMyMoneyGeneralCombo::clear(void)
+void KMyMoneyGeneralCombo::clear()
 {
   KComboBox::clear();
 }
@@ -755,7 +755,7 @@ void KMyMoneyPeriodCombo::setCurrentItem(MyMoneyTransactionFilter::dateOptionE i
   KMyMoneyGeneralCombo::setCurrentItem(id);
 }
 
-MyMoneyTransactionFilter::dateOptionE KMyMoneyPeriodCombo::currentItem(void) const
+MyMoneyTransactionFilter::dateOptionE KMyMoneyPeriodCombo::currentItem() const
 {
   return static_cast<MyMoneyTransactionFilter::dateOptionE>(KMyMoneyGeneralCombo::currentItem());
 }
@@ -785,7 +785,7 @@ KMyMoneyOccurrenceCombo::KMyMoneyOccurrenceCombo(QWidget* parent) :
 {
 }
 
-MyMoneySchedule::occurrenceE KMyMoneyOccurrenceCombo::currentItem(void) const
+MyMoneySchedule::occurrenceE KMyMoneyOccurrenceCombo::currentItem() const
 {
   return static_cast<MyMoneySchedule::occurrenceE>(KMyMoneyGeneralCombo::currentItem());
 }
@@ -824,17 +824,17 @@ KMyMoneyFrequencyCombo::KMyMoneyFrequencyCombo(QWidget* parent) :
   connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(slotCurrentDataChanged()));
 }
 
-int KMyMoneyFrequencyCombo::daysBetweenEvents(void) const
+int KMyMoneyFrequencyCombo::daysBetweenEvents() const
 {
   return MyMoneySchedule::daysBetweenEvents(currentItem());
 }
 
-int KMyMoneyFrequencyCombo::eventsPerYear(void) const
+int KMyMoneyFrequencyCombo::eventsPerYear() const
 {
   return MyMoneySchedule::eventsPerYear(currentItem());
 }
 
-QVariant KMyMoneyFrequencyCombo::currentData(void) const
+QVariant KMyMoneyFrequencyCombo::currentData() const
 {
   return itemData(currentIndex(), Qt::UserRole);
 }

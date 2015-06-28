@@ -601,7 +601,7 @@ void MyMoneyMoneyTest::testToString()
   //QVERIFY(m3.toString() == QString("0"));
 }
 
-void MyMoneyMoneyTest::testNegativeSignPos(void)
+void MyMoneyMoneyTest::testNegativeSignPos()
 {
   MyMoneyMoney m("-123456/100");
 
@@ -634,7 +634,7 @@ void MyMoneyMoneyTest::testNegativeSignPos(void)
   MyMoneyMoney::setNegativeMonetarySignPosition(pos);
 }
 
-void MyMoneyMoneyTest::testPositiveSignPos(void)
+void MyMoneyMoneyTest::testPositiveSignPos()
 {
   MyMoneyMoney m("123456/100");
 
@@ -667,7 +667,7 @@ void MyMoneyMoneyTest::testPositiveSignPos(void)
   MyMoneyMoney::setPositiveMonetarySignPosition(pos);
 }
 
-void MyMoneyMoneyTest::testNegativeStringConstructor(void)
+void MyMoneyMoneyTest::testNegativeStringConstructor()
 {
   MyMoneyMoney *m1;
   MyMoneyMoney::setDecimalSeparator(',');
@@ -698,7 +698,7 @@ void MyMoneyMoneyTest::testNegativeStringConstructor(void)
   delete m1;
 }
 
-void MyMoneyMoneyTest::testReduce(void)
+void MyMoneyMoneyTest::testReduce()
 {
   MyMoneyMoney a(36488100, 1267390000);
   MyMoneyMoney b(-a);

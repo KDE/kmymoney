@@ -55,9 +55,9 @@ public:
    * Adds the transaction @a t to the dialog
    */
   void addTransaction(const MyMoneyTransaction& t);
-  int exec(void);
+  int exec();
 
-  MyMoneyTransaction transaction(void) const;
+  MyMoneyTransaction transaction() const;
 
   bool eventFilter(QObject* o, QEvent* e);
 

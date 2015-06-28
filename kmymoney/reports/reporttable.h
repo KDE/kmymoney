@@ -64,7 +64,7 @@ private:
    * @retval css-filename  if a css-file was found
    * @retval empty-string  if no css-file was found
    */
-  QString cssFileNameGet(void);
+  QString cssFileNameGet();
 
   /**
    * Name of application resource type.
@@ -99,7 +99,7 @@ private:
   QByteArray m_encoding;
 
 protected:
-  ReportTable(void);
+  ReportTable();
 
   /**
    * Constructs html header.
@@ -116,7 +116,7 @@ protected:
    *
    * @return  html footer
    */
-  QString renderFooter(void);
+  QString renderFooter();
 
   /**
    * Constructs the body of the report. Implemented by the concrete classes
@@ -124,7 +124,7 @@ protected:
    * @see ListTable
    * @return QString with the html body of the report
    */
-  virtual QString renderBody(void) const = 0;
+  virtual QString renderBody() const = 0;
 
 public:
   virtual ~ReportTable() {}
@@ -134,7 +134,7 @@ public:
    * @see PivotTable
    * @see ListTable
    */
-  virtual QString renderCSV(void) const = 0;
+  virtual QString renderCSV() const = 0;
 
   /**
    * Renders a graph from the report. Implemented by the concrete classes

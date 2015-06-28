@@ -256,7 +256,7 @@ void KGenerateSqlDlg::slotdriverSelected()
   connect(button(createTables), SIGNAL(clicked()), this, SLOT(slotcreateTables()));
 }
 
-void KGenerateSqlDlg::slotHelp(void)
+void KGenerateSqlDlg::slotHelp()
 {
   KToolInvocation::invokeHelp("details.database.generatesql");
 }

@@ -90,7 +90,7 @@ QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
 }
 
 
-void KCategoryReassignDlg::accept(void)
+void KCategoryReassignDlg::accept()
 {
   // force update of payeeCombo
   buttonOk->setFocus();

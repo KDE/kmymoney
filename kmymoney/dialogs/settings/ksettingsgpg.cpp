@@ -65,13 +65,13 @@ KSettingsGpg::~KSettingsGpg()
 {
 }
 
-void KSettingsGpg::slotKeyListChanged(void)
+void KSettingsGpg::slotKeyListChanged()
 {
   m_needCheckList = true;
   slotIdChanged();
 }
 
-void KSettingsGpg::slotIdChanged(void)
+void KSettingsGpg::slotIdChanged()
 {
   // this looks a bit awkward. Here's why: KGPGFile::keyAvailable() starts
   // an external task and processes UI events while it waits for the external

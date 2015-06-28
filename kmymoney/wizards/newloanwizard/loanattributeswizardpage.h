@@ -66,7 +66,7 @@ public:
   void setInstitution(const QString &institutionName);
 
 protected slots:
-  void slotNewClicked(void);
+  void slotNewClicked();
 
 };
 
