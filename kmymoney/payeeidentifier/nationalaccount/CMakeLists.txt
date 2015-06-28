@@ -14,6 +14,7 @@ target_link_libraries( payeeidentifier_nationalAccount
   kmm_payeeidentifier
   ${QT_QTCORE_LIBRARY}
   ${QT_QTXML_LIBRARY}
+  ${QT_QTSQL_LIBRARY}
 )
 
 install(TARGETS payeeidentifier_nationalAccount
@@ -21,6 +22,32 @@ install(TARGETS payeeidentifier_nationalAccount
 )
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalaccountnumberplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
+
+# Storage plugin
+
+configure_file(kmymoney-nationalaccount-storageplugin.desktop.in kmymoney-nationalaccount-storageplugin.desktop)
+
+set ( nationalAccount_STORAGE_PLUGIN_SCRS
+  nationalaccountstorageplugin.cpp
+)
+
+kde4_add_plugin( nationalaccount_ibanbic_storageplugin
+  ${nationalAccount_STORAGE_PLUGIN_SCRS}
+)
+
+target_link_libraries( nationalaccount_ibanbic_storageplugin
+  ${QT_QTCORE_LIBRARY}
+  ${QT_QTSQL_LIBRARY}
+  kmm_mymoney
+)
+
+install(TARGETS nationalaccount_ibanbic_storageplugin
+  DESTINATION ${PLUGIN_INSTALL_DIR})
+
+install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalaccount-storageplugin.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}
+  )
 
 #if( KDE4_BUILD_TESTS )
 #  add_subdirectory(tests)
