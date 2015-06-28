@@ -115,6 +115,24 @@ public:
   QMap<QString, dailyBalances> m_accountList;
 };
 
+/**
+ * @brief Converts a QPixmap to an data URI scheme
+ *
+ * According to RFC 2397
+ *
+ * @param pixmap Source to convert
+ * @return full data URI
+ */
+QString QPixmapToDataUri(const QPixmap& pixmap)
+{
+  QImage image(pixmap.toImage());
+  QByteArray byteArray;
+  QBuffer buffer(&byteArray);
+  buffer.open(QIODevice::WriteOnly);
+  image.save(&buffer, "PNG"); // writes the image in PNG format inside the buffer
+  return QLatin1String("data:image/png;base64,") + QString(byteArray.toBase64());
+}
+
 KHomeView::KHomeView(QWidget *parent, const char *name) :
     KMyMoneyViewBase(parent, name, i18n("Home")),
     d(new Private)
@@ -312,15 +330,11 @@ void KHomeView::showNetWorthGraph()
   chartWidget->resize(d->m_netWorthGraphLastValidSize);
 
   //save the chart to an image
-  QPixmap pixmap = QPixmap::grabWidget(chartWidget->coordinatePlane()->parent());
-  QByteArray bytes;
-  QBuffer buffer(&bytes);
-  buffer.open(QIODevice::WriteOnly);
-  pixmap.save(&buffer, "PNG"); // writes pixmap into bytes in PNG format
+  QString chart = QPixmapToDataUri(QPixmap::grabWidget(chartWidget->coordinatePlane()->parent()));
 
   d->m_html += QString("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
   d->m_html += QString("<tr>");
-  d->m_html += QString("<td><center><IMG SRC=\"data:image/png;base64,%1\" ALT=\"Networth\" width=\"100%\" ></center></td>").arg(buffer.data().toBase64().data());
+  d->m_html += QString("<td><center><img src=\"%1\" ALT=\"Networth\" width=\"100%\" ></center></td>").arg(chart);
   d->m_html += QString("</tr>");
   d->m_html += QString("</table></div></div>");
 
@@ -581,17 +595,16 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
       if (!sched.isFinished()) {
         MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
-        QString pathEnter, pathSkip;
-        KIconLoader::global()->loadIcon(KMyMoneyGlobalSettings::enterScheduleIcon(), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathEnter, false);
-        KIconLoader::global()->loadIcon(QString("media-seek-forward"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathSkip);
+        QString pathEnter = QPixmapToDataUri(KIconLoader::global()->loadIcon(KMyMoneyGlobalSettings::enterScheduleIcon(), KIconLoader::Small, KIconLoader::SizeSmall));
+        QString pathSkip = QPixmapToDataUri(KIconLoader::global()->loadIcon(QString("media-seek-forward"), KIconLoader::Small, KIconLoader::SizeSmall));
 
         //show payment date
         tmp = QString("<td>") +
               KGlobal::locale()->formatDate(sched.adjustedNextDueDate(), KLocale::ShortDate) +
               "</td><td>";
-        if (pathEnter.length() > 0)
+        if (!pathEnter.isEmpty())
           tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathEnter) + linkend();
-        if (pathSkip.length() > 0)
+        if (!pathSkip.isEmpty())
           tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathSkip) + linkend();
 
         tmp += QString("&nbsp;");
