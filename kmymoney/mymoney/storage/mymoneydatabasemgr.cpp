@@ -175,7 +175,8 @@ void MyMoneyDatabaseMgr::addAccount(MyMoneyAccount& parent, MyMoneyAccount& acco
 void MyMoneyDatabaseMgr::addPayee(MyMoneyPayee& payee)
 {
   if (m_sql) {
-    if (! m_sql->isOpen())((QSqlDatabase*)(m_sql.data()))->open();
+    if (! m_sql->isOpen())
+      static_cast<QSqlDatabase*>(m_sql.data())->open();
     // create the payee
     MyMoneyPayee newPayee(nextPayeeID(), payee);
 

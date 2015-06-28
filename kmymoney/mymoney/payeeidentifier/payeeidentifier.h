@@ -86,7 +86,9 @@ public:
   id_t id() const {
     return m_id;
   }
+
   QString idString() const;
+
   void clearId() {
     m_id = 0;
   }

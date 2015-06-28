@@ -147,7 +147,7 @@ void kMandatoryFieldGroup::setOkButton(QPushButton *button)
   changed();
 }
 
-void kMandatoryFieldGroup::changed(void)
+void kMandatoryFieldGroup::changed()
 {
   bool enable = true;
   QList<QWidget *>::ConstIterator i;
@@ -232,7 +232,7 @@ void kMandatoryFieldGroup::changed(void)
   emit stateChanged(enable);
 }
 
-void kMandatoryFieldGroup::clear(void)
+void kMandatoryFieldGroup::clear()
 {
   QList<QWidget *>::Iterator i;
   for (i = m_widgets.begin(); i != m_widgets.end(); ++i)

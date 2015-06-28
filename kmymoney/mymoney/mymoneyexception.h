@@ -49,7 +49,7 @@ public:
     *
     * It is equivilant to MyMoneyException(text, __FILE__, __LINE__)
     */
-#define MYMONEYEXCEPTION(a) MyMoneyException(a, __FILE__, __LINE__)
+#define MYMONEYEXCEPTION(what) MyMoneyException(what, __FILE__, __LINE__)
 
   /**
     * The constructor to create a new MyMoneyException object.

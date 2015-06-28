@@ -343,13 +343,20 @@ public:
   static void setStartDate(const QDate &startDate);
 
 private:
-  //void init(void);
   bool fileExists(const QString& dbName);
-  // a function to build a comprehensive error message
+  /** @brief a function to build a comprehensive error message for an SQL error */
   QString& buildError(const QSqlQuery& q, const QString& function, const QString& message) const;
+
+  /** @copydoc buildError */
   QString& buildError(const QSqlQuery& q, const QString& function, const QString& message,
                       const QSqlDatabase*) const;
-  // write routines
+
+  /**
+   * @name writeFromStorageMethods
+   * @{
+   * These method write all data from m_storage to the database. Data which is
+   * stored in the database is deleted.
+   */
   void writeUserInformation(void);
   void writeInstitutions(void);
   void writePayees(void);
@@ -364,11 +371,12 @@ private:
   void writeReports(void);
   void writeBudgets(void);
   void writeOnlineJobs();
+  /** @} */
 
   /**
    * @name writeMethods
    * @{
-   * These methods bind the data fields of MyMoneyObjects to a given query.
+   * These methods bind the data fields of MyMoneyObjects to a given query and execute the query.
    * This is helpfull as the query has usually an update and a insert format.
    */
   void writeInstitutionList(const QList<MyMoneyInstitution>& iList, QSqlQuery& q);

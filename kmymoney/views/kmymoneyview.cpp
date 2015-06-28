@@ -1307,7 +1307,8 @@ bool KMyMoneyView::saveAsDatabase(const KUrl& url)
       if (KMessageBox::warningContinueCancel(0,
                                              i18n("Database contains data which must be removed before using Save As.\n"
                                                   "Do you wish to continue?"), "Database not empty") == KMessageBox::Continue) {
-        if (writer->open(url, QIODevice::WriteOnly, true) == 0) canWrite = true;
+        if (writer->open(url, QIODevice::WriteOnly, true) == 0)
+          canWrite = true;
       } else {
         delete writer;
         return false;

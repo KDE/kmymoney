@@ -60,10 +60,6 @@ class KPluginInfo;
  * for KMyMoney developers and users who wish to see how KMyMoney works.  This
  * documentation will be kept up-to-date as development progresses and should be
  * read for new features that have been developed in KMyMoney.
- *
- * The latest version of this document is available from the project's web-site
- * at http://kmymoney.org/ and is generated daily by doxygen reading
- * the header files found in the CVS main branch.
  */
 
 /**
@@ -609,8 +605,6 @@ public:
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
-  // Note: Don't use e.g. filename(void) but use filename() because
-  // otherwise the kidl compiler produces uncompilable results.
   const QString filename() const;
 
   void webConnect(const QString& sourceUrl, const QByteArray& asn_id);

@@ -1570,14 +1570,14 @@ const QList<MyMoneyTransaction> MyMoneyFile::transactionList(MyMoneyTransactionF
   return list;
 }
 
-const QList<MyMoneyPayee> MyMoneyFile::payeeList(void) const
+const QList<MyMoneyPayee> MyMoneyFile::payeeList() const
 {
   QList<MyMoneyPayee> list;
   d->m_cache.payee(list);
   return list;
 }
 
-const QList<MyMoneyTag> MyMoneyFile::tagList(void) const
+const QList<MyMoneyTag> MyMoneyFile::tagList() const
 {
   QList<MyMoneyTag> list;
   d->m_cache.tag(list);

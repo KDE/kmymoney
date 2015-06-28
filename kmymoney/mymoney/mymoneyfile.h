@@ -47,7 +47,7 @@
 #include <mymoneyunittestable.h>
 
 /**
-  * @author Thomas Baumgart, Michael Edwardes, Kevin Tambascio
+  * @author Thomas Baumgart, Michael Edwardes, Kevin Tambascio, Christian Dávid
   */
 
 class IMyMoneyStorage;
@@ -870,7 +870,7 @@ public:
     *
     * @return QList<MyMoneyPayee> containing the payee information
     */
-  const QList<MyMoneyPayee> payeeList(void) const;
+  const QList<MyMoneyPayee> payeeList() const;
 
   /**
     * This method is used to create a new tag
