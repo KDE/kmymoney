@@ -229,7 +229,7 @@ KPayeesView::~KPayeesView()
   grp.sync();
 }
 
-void KPayeesView::slotChooseDefaultAccount(void)
+void KPayeesView::slotChooseDefaultAccount()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   QMap<QString, int> account_count;
@@ -375,7 +375,7 @@ void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
   m_allowEditing = false;
 }
 
-void KPayeesView::slotSelectPayee(void)
+void KPayeesView::slotSelectPayee()
 {
   // check if the content of a currently selected payee was modified
   // and ask to store the data
@@ -471,7 +471,7 @@ void KPayeesView::slotSelectPayee(void)
   m_allowEditing = true;
 }
 
-void KPayeesView::clearItemData(void)
+void KPayeesView::clearItemData()
 {
   addressEdit->setText(QString());
   postcodeEdit->setText(QString());
@@ -481,7 +481,7 @@ void KPayeesView::clearItemData(void)
   showTransactions();
 }
 
-void KPayeesView::showTransactions(void)
+void KPayeesView::showTransactions()
 {
   MyMoneyMoney balance;
   MyMoneyFile *file = MyMoneyFile::instance();
@@ -566,7 +566,7 @@ void KPayeesView::showTransactions(void)
                                balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
 }
 
-void KPayeesView::slotKeyListChanged(void)
+void KPayeesView::slotKeyListChanged()
 {
   bool rc = false;
   bool ignorecase = false;
@@ -579,7 +579,7 @@ void KPayeesView::slotKeyListChanged(void)
   setDirty(rc);
 }
 
-void KPayeesView::slotPayeeDataChanged(void)
+void KPayeesView::slotPayeeDataChanged()
 {
   bool rc = false;
 
@@ -641,7 +641,7 @@ void KPayeesView::slotPayeeDataChanged(void)
   setDirty(rc);
 }
 
-void KPayeesView::slotUpdatePayee(void)
+void KPayeesView::slotUpdatePayee()
 {
   if (isDirty()) {
     MyMoneyFileTransaction ft;
@@ -692,7 +692,7 @@ void KPayeesView::showEvent(QShowEvent* event)
   emit selectObjects(list);
 }
 
-void KPayeesView::slotLoadPayees(void)
+void KPayeesView::slotLoadPayees()
 {
   if (isVisible()) {
     if (m_inSelection)
@@ -704,7 +704,7 @@ void KPayeesView::slotLoadPayees(void)
   }
 }
 
-void KPayeesView::loadPayees(void)
+void KPayeesView::loadPayees()
 {
   if (m_inSelection)
     return;
@@ -765,7 +765,7 @@ void KPayeesView::loadPayees(void)
   m_allowEditing = true;
 }
 
-void KPayeesView::slotSelectTransaction(void)
+void KPayeesView::slotSelectTransaction()
 {
   QList<KMyMoneyRegister::RegisterItem*> list = m_register->selectedItems();
   if (!list.isEmpty()) {
@@ -839,12 +839,12 @@ void KPayeesView::slotOpenContextMenu(const QPoint& /*p*/)
   }
 }
 
-void KPayeesView::slotPayeeNew(void)
+void KPayeesView::slotPayeeNew()
 {
   kmymoney->action("payee_new")->trigger();
 }
 
-void KPayeesView::slotHelp(void)
+void KPayeesView::slotHelp()
 {
   KHelpClient::invokeHelp("details.payees");
 }

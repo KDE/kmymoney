@@ -17,8 +17,8 @@
  */
 
 
-#ifndef KBTRANSFERFORM_H
-#define KBTRANSFERFORM_H
+#ifndef KONLINETRANSFERFORM_H
+#define KONLINETRANSFERFORM_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -142,4 +142,4 @@ private:
   void editWidgetChanged();
 };
 
-#endif // KBTRANSFERFORM_H
+#endif // KONLINETRANSFERFORM_H

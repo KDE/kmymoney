@@ -106,7 +106,7 @@ void KSelectTransactionsDlg::addTransaction(const MyMoneyTransaction& t)
   }
 }
 
-int KSelectTransactionsDlg::exec(void)
+int KSelectTransactionsDlg::exec()
 {
   m_register->updateRegister(true);
   m_register->update();
@@ -116,7 +116,7 @@ int KSelectTransactionsDlg::exec(void)
   return KSelectTransactionsDlgDecl::exec();
 }
 
-void KSelectTransactionsDlg::slotHelp(void)
+void KSelectTransactionsDlg::slotHelp()
 {
   // KHelpClient::invokeHelp("details.ledgers.match");
 }
@@ -136,7 +136,7 @@ void KSelectTransactionsDlg::resizeEvent(QResizeEvent* ev)
   m_register->resize(KMyMoneyRegister::DetailColumn, true);
 }
 
-MyMoneyTransaction KSelectTransactionsDlg::transaction(void) const
+MyMoneyTransaction KSelectTransactionsDlg::transaction() const
 {
   MyMoneyTransaction t;
 

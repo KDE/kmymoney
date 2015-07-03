@@ -127,14 +127,14 @@ void KOnlineBankingStatus::applicationSelectionChanged()
 }
 
 
-const QString KOnlineBankingStatus::appId(void) const
+const QString KOnlineBankingStatus::appId() const
 {
   if (m_appId)
     return m_appId->appId();
   return QString();
 }
 
-QString KOnlineBankingStatus::headerVersion(void) const
+QString KOnlineBankingStatus::headerVersion() const
 {
   if (m_headerVersion)
     return m_headerVersion->headerVersion();

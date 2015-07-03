@@ -55,7 +55,7 @@ public:
     *
     * @return MyMoneySchedule object for payments
     */
-  const MyMoneySchedule schedule(void) const;
+  const MyMoneySchedule schedule() const;
 
   /**
     * This method returns a MyMoneyAccount object with all data
@@ -63,7 +63,7 @@ public:
     *
     * @return updated MyMoneyAccount object
     */
-  const MyMoneyAccount account(void) const;
+  const MyMoneyAccount account() const;
 
 
   void loadWidgets(const MyMoneyAccount& acc);
@@ -73,7 +73,7 @@ public:
   bool validateCurrentPage();
 
 protected:
-  void updateEditSummary(void);
+  void updateEditSummary();
 
 private:
   //MyMoneyAccountLoan  m_account;

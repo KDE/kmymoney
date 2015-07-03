@@ -42,28 +42,29 @@ public:
   MyMoneyPayeeIdentifierContainer();
 
   unsigned int payeeIdentifierCount() const;
-  QList< payeeIdentifier > payeeIdentifiers() const;
+  ::payeeIdentifier payeeIdentifier(unsigned int) const;
+  QList< ::payeeIdentifier > payeeIdentifiers() const;
 
   template< class type >
   QList< ::payeeIdentifierTyped<type> > payeeIdentifiersByType() const;
 
-  void addPayeeIdentifier(const payeeIdentifier& ident);
-  void addPayeeIdentifier(const unsigned int position, const payeeIdentifier& ident);
+  void addPayeeIdentifier(const ::payeeIdentifier& ident);
+  void addPayeeIdentifier(const unsigned int position, const ::payeeIdentifier& ident);
 
-  void removePayeeIdentifier(const payeeIdentifier& ident);
+  void removePayeeIdentifier(const ::payeeIdentifier& ident);
   void removePayeeIdentifier(const int index);
 
-  void modifyPayeeIdentifier(const payeeIdentifier& ident);
-  void modifyPayeeIdentifier(const int index, const payeeIdentifier& ident);
+  void modifyPayeeIdentifier(const ::payeeIdentifier& ident);
+  void modifyPayeeIdentifier(const int index, const ::payeeIdentifier& ident);
 
-  void resetPayeeIdentifiers(const QList< payeeIdentifier > list);
+  void resetPayeeIdentifiers(const QList< ::payeeIdentifier > list);
 
 protected:
   void loadXML(QDomElement node);
   void writeXML(QDomDocument document, QDomElement parent) const;
 
 private:
-  QList<payeeIdentifier> m_payeeIdentifiers;
+  QList< ::payeeIdentifier > m_payeeIdentifiers;
 };
 
 template< class type >

@@ -162,7 +162,7 @@ public:
     *
     * @return QString Name of the format
     */
-  virtual QString formatName(void) const = 0;
+  virtual QString formatName() const = 0;
 
   /**
     * This method returns the filename filter suitable for passing to
@@ -171,7 +171,7 @@ public:
     *
     * @return QString Filename filter string
     */
-  virtual QString formatFilenameFilter(void) const = 0;
+  virtual QString formatFilenameFilter() const = 0;
 
   /**
     * This method returns whether this plugin is able to import
@@ -199,7 +199,7 @@ public:
     *  last import, or QString() if it was successful.
     *
     */
-  virtual QString lastError(void) const = 0;
+  virtual QString lastError() const = 0;
 
 };
 

@@ -55,7 +55,7 @@ public:
   /**
     * Returns information about what to do with the transaction
     */
-  Action action(void) const;
+  Action action() const;
 
 private:
   /// \internal d-pointer class.

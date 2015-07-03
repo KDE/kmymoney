@@ -99,14 +99,14 @@ OfxImporterPlugin::~OfxImporterPlugin()
   delete d;
 }
 
-void OfxImporterPlugin::createActions(void)
+void OfxImporterPlugin::createActions()
 {
   QAction *action = actionCollection()->addAction("file_import_ofx");
   action->setText(i18n("OFX..."));
   connect(action, SIGNAL(triggered(bool)), this, SLOT(slotImportFile()));
 }
 
-void OfxImporterPlugin::slotImportFile(void)
+void OfxImporterPlugin::slotImportFile()
 {
   QWidget * widget = new QWidget;
   Ui_ImportOption* option = new Ui_ImportOption;
@@ -131,12 +131,12 @@ void OfxImporterPlugin::slotImportFile(void)
   delete widget;
 }
 
-QString OfxImporterPlugin::formatName(void) const
+QString OfxImporterPlugin::formatName() const
 {
   return "OFX";
 }
 
-QString OfxImporterPlugin::formatFilenameFilter(void) const
+QString OfxImporterPlugin::formatFilenameFilter() const
 {
   return "*.ofx *.qfx *.ofc";
 }
@@ -203,7 +203,7 @@ bool OfxImporterPlugin::import(const QString& filename)
   return d->m_valid;
 }
 
-QString OfxImporterPlugin::lastError(void) const
+QString OfxImporterPlugin::lastError() const
 {
   if (d->m_errors.count() == 0)
     return d->m_fatalerror;
@@ -744,19 +744,19 @@ bool OfxImporterPlugin::storeStatements(QList<MyMoneyStatement>& statements)
   return (!hasstatements || ok);
 }
 
-void OfxImporterPlugin::addnew(void)
+void OfxImporterPlugin::addnew()
 {
   d->m_statementlist.push_back(MyMoneyStatement());
 }
-MyMoneyStatement& OfxImporterPlugin::back(void)
+MyMoneyStatement& OfxImporterPlugin::back()
 {
   return d->m_statementlist.back();
 }
-bool OfxImporterPlugin::isValid(void) const
+bool OfxImporterPlugin::isValid() const
 {
   return d->m_valid;
 }
-void OfxImporterPlugin::setValid(void)
+void OfxImporterPlugin::setValid()
 {
   d->m_valid = true;
 }
@@ -772,15 +772,15 @@ void OfxImporterPlugin::addError(const QString& _msg)
 {
   d->m_errors += _msg;
 }
-const QStringList& OfxImporterPlugin::infos(void) const          // krazy:exclude=spelling
+const QStringList& OfxImporterPlugin::infos() const          // krazy:exclude=spelling
 {
   return d->m_infos;
 }
-const QStringList& OfxImporterPlugin::warnings(void) const
+const QStringList& OfxImporterPlugin::warnings() const
 {
   return d->m_warnings;
 }
-const QStringList& OfxImporterPlugin::errors(void) const
+const QStringList& OfxImporterPlugin::errors() const
 {
   return d->m_errors;
 }

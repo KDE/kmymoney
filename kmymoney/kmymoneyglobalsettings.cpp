@@ -33,7 +33,7 @@
 
 #include "mymoneyforecast.h"
 
-QFont KMyMoneyGlobalSettings::listCellFont(void)
+QFont KMyMoneyGlobalSettings::listCellFont()
 {
   if (useSystemFont()) {
     return QFontDatabase::systemFont(QFontDatabase::GeneralFont);
@@ -42,7 +42,7 @@ QFont KMyMoneyGlobalSettings::listCellFont(void)
   }
 }
 
-QFont KMyMoneyGlobalSettings::listHeaderFont(void)
+QFont KMyMoneyGlobalSettings::listHeaderFont()
 {
   if (useSystemFont()) {
     QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
@@ -53,7 +53,7 @@ QFont KMyMoneyGlobalSettings::listHeaderFont(void)
   }
 }
 
-QColor KMyMoneyGlobalSettings::listColor(void)
+QColor KMyMoneyGlobalSettings::listColor()
 {
   if (useSystemColors()) {
     KColorScheme scheme(QPalette::Normal);
@@ -63,7 +63,7 @@ QColor KMyMoneyGlobalSettings::listColor(void)
   }
 }
 
-QColor KMyMoneyGlobalSettings::listBGColor(void)
+QColor KMyMoneyGlobalSettings::listBGColor()
 {
   if (useSystemColors()) {
     KColorScheme scheme(QPalette::Normal);
@@ -73,7 +73,7 @@ QColor KMyMoneyGlobalSettings::listBGColor(void)
   }
 }
 
-QStringList KMyMoneyGlobalSettings::itemList(void)
+QStringList KMyMoneyGlobalSettings::itemList()
 {
   bool prevValue = self()->useDefaults(true);
   QStringList all = KMyMoneySettings::itemList().split(',', QString::SkipEmptyParts);
@@ -92,17 +92,17 @@ QStringList KMyMoneyGlobalSettings::itemList(void)
   return list;
 }
 
-int KMyMoneyGlobalSettings::firstFiscalMonth(void)
+int KMyMoneyGlobalSettings::firstFiscalMonth()
 {
   return KMyMoneySettings::fiscalYearBegin() + 1;
 }
 
-int KMyMoneyGlobalSettings::firstFiscalDay(void)
+int KMyMoneyGlobalSettings::firstFiscalDay()
 {
   return KMyMoneySettings::fiscalYearBeginDay();
 }
 
-QDate KMyMoneyGlobalSettings::firstFiscalDate(void)
+QDate KMyMoneyGlobalSettings::firstFiscalDate()
 {
   QDate date = QDate(QDate::currentDate().year(), firstFiscalMonth(), firstFiscalDay());
   if (date > QDate::currentDate())
@@ -110,7 +110,7 @@ QDate KMyMoneyGlobalSettings::firstFiscalDate(void)
   return date;
 }
 
-MyMoneyForecast KMyMoneyGlobalSettings::forecast(void)
+MyMoneyForecast KMyMoneyGlobalSettings::forecast()
 {
   MyMoneyForecast forecast;
 

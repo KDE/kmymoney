@@ -103,13 +103,13 @@ public:
       m_id(job.id()) {
   }
 
-  MyMoneyFile::notificationObjectT objectType(void) const {
+  MyMoneyFile::notificationObjectT objectType() const {
     return m_objType;
   }
-  MyMoneyFile::notificationModeT notificationMode(void) const {
+  MyMoneyFile::notificationModeT notificationMode() const {
     return m_notificationMode;
   }
-  const QString& id(void) const {
+  const QString& id() const {
     return m_id;
   }
 
@@ -174,7 +174,7 @@ public:
     * This method is used to clear all
     * objects mentioned in m_notificationList from the cache.
     */
-  void notify(void) {
+  void notify() {
     QMap<QString, bool>::ConstIterator it = m_notificationList.constBegin();
     while (it != m_notificationList.constEnd()) {
       if (*it)
@@ -200,7 +200,7 @@ public:
     * This method checks if a storage object is attached and
     * throws and exception if not.
     */
-  inline void checkStorage(void) const {
+  inline void checkStorage() const {
     if (m_storage == 0)
       throw MYMONEYEXCEPTION("No storage object attached to MyMoneyFile");
   }
@@ -358,17 +358,17 @@ void MyMoneyFile::detachStorage(IMyMoneyStorage* const /* storage */)
   d->m_storage = 0;
 }
 
-IMyMoneyStorage* MyMoneyFile::storage(void) const
+IMyMoneyStorage* MyMoneyFile::storage() const
 {
   return d->m_storage;
 }
 
-bool MyMoneyFile::storageAttached(void) const
+bool MyMoneyFile::storageAttached() const
 {
   return d->m_storage != 0;
 }
 
-void MyMoneyFile::startTransaction(void)
+void MyMoneyFile::startTransaction()
 {
   d->checkStorage();
   if (d->m_inTransaction) {
@@ -380,12 +380,12 @@ void MyMoneyFile::startTransaction(void)
   d->m_changeSet.clear();
 }
 
-bool MyMoneyFile::hasTransaction(void) const
+bool MyMoneyFile::hasTransaction() const
 {
   return d->m_inTransaction;
 }
 
-void MyMoneyFile::commitTransaction(void)
+void MyMoneyFile::commitTransaction()
 {
   d->checkTransaction(Q_FUNC_INFO);
 
@@ -445,7 +445,7 @@ void MyMoneyFile::commitTransaction(void)
   }
 }
 
-void MyMoneyFile::rollbackTransaction(void)
+void MyMoneyFile::rollbackTransaction()
 {
   d->checkTransaction(Q_FUNC_INFO);
 
@@ -1368,7 +1368,7 @@ void MyMoneyFile::institutionList(QList<MyMoneyInstitution>& list) const
   d->m_cache.institution(list);
 }
 
-const QList<MyMoneyInstitution> MyMoneyFile::institutionList(void) const
+const QList<MyMoneyInstitution> MyMoneyFile::institutionList() const
 {
   QList<MyMoneyInstitution> list;
   institutionList(list);
@@ -1376,7 +1376,7 @@ const QList<MyMoneyInstitution> MyMoneyFile::institutionList(void) const
 }
 
 // general get functions
-const MyMoneyPayee& MyMoneyFile::user(void) const
+const MyMoneyPayee& MyMoneyFile::user() const
 {
   d->checkStorage();
   return d->m_storage->user();
@@ -1393,7 +1393,7 @@ void MyMoneyFile::setUser(const MyMoneyPayee& user)
   d->m_storage->setUser(user);
 }
 
-bool MyMoneyFile::dirty(void) const
+bool MyMoneyFile::dirty() const
 {
   if (!d->m_storage)
     return false;
@@ -1401,14 +1401,14 @@ bool MyMoneyFile::dirty(void) const
   return d->m_storage->dirty();
 }
 
-void MyMoneyFile::setDirty(void) const
+void MyMoneyFile::setDirty() const
 {
   d->checkStorage();
 
   d->m_storage->setDirty();
 }
 
-unsigned int MyMoneyFile::accountCount(void) const
+unsigned int MyMoneyFile::accountCount() const
 {
   d->checkStorage();
 
@@ -1423,35 +1423,35 @@ void MyMoneyFile::ensureDefaultCurrency(MyMoneyAccount& acc) const
   }
 }
 
-const MyMoneyAccount& MyMoneyFile::liability(void) const
+const MyMoneyAccount& MyMoneyFile::liability() const
 {
   d->checkStorage();
 
   return d->m_cache.account(STD_ACC_LIABILITY);
 }
 
-const MyMoneyAccount& MyMoneyFile::asset(void) const
+const MyMoneyAccount& MyMoneyFile::asset() const
 {
   d->checkStorage();
 
   return d->m_cache.account(STD_ACC_ASSET);
 }
 
-const MyMoneyAccount& MyMoneyFile::expense(void) const
+const MyMoneyAccount& MyMoneyFile::expense() const
 {
   d->checkStorage();
 
   return d->m_cache.account(STD_ACC_EXPENSE);
 }
 
-const MyMoneyAccount& MyMoneyFile::income(void) const
+const MyMoneyAccount& MyMoneyFile::income() const
 {
   d->checkStorage();
 
   return d->m_cache.account(STD_ACC_INCOME);
 }
 
-const MyMoneyAccount& MyMoneyFile::equity(void) const
+const MyMoneyAccount& MyMoneyFile::equity() const
 {
   d->checkStorage();
 
@@ -1465,14 +1465,14 @@ unsigned int MyMoneyFile::transactionCount(const QString& account) const
   return d->m_storage->transactionCount(account);
 }
 
-const QMap<QString, unsigned long> MyMoneyFile::transactionCountMap(void) const
+const QMap<QString, unsigned long> MyMoneyFile::transactionCountMap() const
 {
   d->checkStorage();
 
   return d->m_storage->transactionCountMap();
 }
 
-unsigned int MyMoneyFile::institutionCount(void) const
+unsigned int MyMoneyFile::institutionCount() const
 {
   d->checkStorage();
 
@@ -1568,14 +1568,14 @@ const QList<MyMoneyTransaction> MyMoneyFile::transactionList(MyMoneyTransactionF
   return list;
 }
 
-const QList<MyMoneyPayee> MyMoneyFile::payeeList(void) const
+const QList<MyMoneyPayee> MyMoneyFile::payeeList() const
 {
   QList<MyMoneyPayee> list;
   d->m_cache.payee(list);
   return list;
 }
 
-const QList<MyMoneyTag> MyMoneyFile::tagList(void) const
+const QList<MyMoneyTag> MyMoneyFile::tagList() const
 {
   QList<MyMoneyTag> list;
   d->m_cache.tag(list);
@@ -1771,7 +1771,7 @@ const QList<MyMoneySchedule> MyMoneyFile::scheduleList(
 }
 
 
-const QStringList MyMoneyFile::consistencyCheck(void)
+const QStringList MyMoneyFile::consistencyCheck()
 {
   QList<MyMoneyAccount> list;
   QList<MyMoneyAccount>::Iterator it_a;
@@ -2548,7 +2548,7 @@ const MyMoneySecurity& MyMoneyFile::security(const QString& id) const
   return d->m_cache.security(id);
 }
 
-const QList<MyMoneySecurity> MyMoneyFile::securityList(void) const
+const QList<MyMoneySecurity> MyMoneyFile::securityList() const
 {
   d->checkStorage();
 
@@ -2623,7 +2623,7 @@ const MyMoneySecurity& MyMoneyFile::currency(const QString& id) const
   return curr;
 }
 
-const QList<MyMoneySecurity> MyMoneyFile::currencyList(void) const
+const QList<MyMoneySecurity> MyMoneyFile::currencyList() const
 {
   d->checkStorage();
 
@@ -2637,7 +2637,7 @@ const QString& MyMoneyFile::foreignCurrency(const QString& first, const QString&
   return second;
 }
 
-const MyMoneySecurity& MyMoneyFile::baseCurrency(void) const
+const MyMoneySecurity& MyMoneyFile::baseCurrency() const
 {
   if (d->m_baseCurrency.id().isEmpty()) {
     QString id = QString(value("kmm-baseCurrency"));
@@ -2741,7 +2741,7 @@ MyMoneyPrice MyMoneyFile::price(const QString& fromId, const QString& toId, cons
   return rc;
 }
 
-const MyMoneyPriceList MyMoneyFile::priceList(void) const
+const MyMoneyPriceList MyMoneyFile::priceList() const
 {
   d->checkStorage();
 
@@ -2762,7 +2762,7 @@ bool MyMoneyFile::hasAccount(const QString& id, const QString& name) const
   return rc;
 }
 
-const QList<MyMoneyReport> MyMoneyFile::reportList(void) const
+const QList<MyMoneyReport> MyMoneyFile::reportList() const
 {
   d->checkStorage();
 
@@ -2791,7 +2791,7 @@ void MyMoneyFile::modifyReport(const MyMoneyReport& report)
   d->addCacheNotification(report.id());
 }
 
-unsigned MyMoneyFile::countReports(void) const
+unsigned MyMoneyFile::countReports() const
 {
   d->checkStorage();
 
@@ -2816,7 +2816,7 @@ void MyMoneyFile::removeReport(const MyMoneyReport& report)
 }
 
 
-const QList<MyMoneyBudget> MyMoneyFile::budgetList(void) const
+const QList<MyMoneyBudget> MyMoneyFile::budgetList() const
 {
   d->checkStorage();
 
@@ -2852,7 +2852,7 @@ void MyMoneyFile::modifyBudget(const MyMoneyBudget& budget)
   d->addCacheNotification(budget.id());
 }
 
-unsigned MyMoneyFile::countBudgets(void) const
+unsigned MyMoneyFile::countBudgets() const
 {
   d->checkStorage();
 
@@ -3067,14 +3067,14 @@ bool MyMoneyFile::hasNewerTransaction(const QString& accId, const QDate& date) c
   return transactions.count() > 0;
 }
 
-void MyMoneyFile::clearCache(void)
+void MyMoneyFile::clearCache()
 {
   d->checkStorage();
   d->m_cache.clear();
   d->m_balanceCache.clear();
 }
 
-void MyMoneyFile::preloadCache(void)
+void MyMoneyFile::preloadCache()
 {
   d->checkStorage();
 
@@ -3129,7 +3129,7 @@ bool MyMoneyFile::referencesClosedAccount(const MyMoneySplit& s) const
   return false;
 }
 
-QString MyMoneyFile::storageId(void)
+QString MyMoneyFile::storageId()
 {
   QString id = value("kmm-id");
   if (id.isEmpty()) {
@@ -3184,7 +3184,7 @@ MyMoneyFileTransaction::~MyMoneyFileTransaction()
   rollback();
 }
 
-void MyMoneyFileTransaction::restart(void)
+void MyMoneyFileTransaction::restart()
 {
   rollback();
 
@@ -3193,14 +3193,14 @@ void MyMoneyFileTransaction::restart(void)
     MyMoneyFile::instance()->startTransaction();
 }
 
-void MyMoneyFileTransaction::commit(void)
+void MyMoneyFileTransaction::commit()
 {
   if (!m_isNested)
     MyMoneyFile::instance()->commitTransaction();
   m_needRollback = false;
 }
 
-void MyMoneyFileTransaction::rollback(void)
+void MyMoneyFileTransaction::rollback()
 {
   if (m_needRollback)
     MyMoneyFile::instance()->rollbackTransaction();

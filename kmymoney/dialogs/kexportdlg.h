@@ -74,7 +74,7 @@ public:
     *
     * @return QString with filename
     */
-  const QString filename(void) const {
+  const QString filename() const {
     return m_qlineeditFile->text();
   };
 
@@ -83,7 +83,7 @@ public:
     *
     * @return QString with account id
     */
-  QString accountId(void) const;
+  QString accountId() const;
 
   /**
     * This method returns the name of the profile that has been selected
@@ -91,35 +91,35 @@ public:
     *
     * @return QString with profile name
     */
-  const QString profile(void) const {
+  const QString profile() const {
     return m_profileComboBox->currentText();
   };
 
   /**
     * This method returns the start date of the export dialog
     */
-  const QDate startDate(void) const {
+  const QDate startDate() const {
     return m_kmymoneydateStart->date();
   };
 
   /**
     * This method returns the end date of the export dialog
     */
-  const QDate endDate(void) const {
+  const QDate endDate() const {
     return m_kmymoneydateEnd->date();
   };
 
   /**
     * This method returns the state of the account checkbox
     */
-  bool accountSelected(void) const {
+  bool accountSelected() const {
     return m_qcheckboxAccount->isChecked();
   };
 
   /**
     * This method returns the state of the account checkbox
     */
-  bool categorySelected(void) const {
+  bool categorySelected() const {
     return m_qcheckboxCategories->isChecked();
   };
 
@@ -137,7 +137,7 @@ protected slots:
   /**
     * Called when the user needs a new profile
     */
-  void slotNewProfile(void);
+  void slotNewProfile();
 
   /**
     * This slot checks whether all data is correct to enable
@@ -154,8 +154,8 @@ protected slots:
   void checkData(const QString& account = QString());
 
 private:
-  void readConfig(void);
-  void writeConfig(void);
+  void readConfig();
+  void writeConfig();
 
   /**
     * This method loads the available profiles into
@@ -174,7 +174,7 @@ private:
     * This method is used to load the available accounts into the
     * combo box for selection.
     */
-  void loadAccounts(void);
+  void loadAccounts();
 
   /**
     * This method is used to load an account hierarchy into a string list

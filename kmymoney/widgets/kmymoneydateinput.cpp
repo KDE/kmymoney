@@ -225,7 +225,7 @@ void kMyMoneyDateInput::showEvent(QShowEvent* event)
   QTimer::singleShot(50, this, SLOT(fixSize()));
 }
 
-void kMyMoneyDateInput::fixSize(void)
+void kMyMoneyDateInput::fixSize()
 {
   // According to a hint in the documentation of KDatePicker::sizeHint()
   // 28 pixels should be added in each direction to obtain a better
@@ -360,7 +360,7 @@ void kMyMoneyDateInput::slotDateChosen(QDate date)
   }
 }
 
-QDate kMyMoneyDateInput::date(void) const
+QDate kMyMoneyDateInput::date() const
 {
   QDate rc = d->m_dateEdit->date();
   if (rc == INVALID_DATE)
@@ -382,7 +382,7 @@ void kMyMoneyDateInput::loadDate(const QDate& date)
   blockSignals(false);
 }
 
-void kMyMoneyDateInput::resetDate(void)
+void kMyMoneyDateInput::resetDate()
 {
   setDate(d->m_prevDate);
 }
@@ -392,7 +392,7 @@ void kMyMoneyDateInput::setMaximumDate(const QDate& max)
   d->m_dateEdit->setMaximumDate(max);
 }
 
-QWidget* kMyMoneyDateInput::focusWidget(void) const
+QWidget* kMyMoneyDateInput::focusWidget() const
 {
   QWidget* w = d->m_dateEdit;
   while (w->focusProxy())

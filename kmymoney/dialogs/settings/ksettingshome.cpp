@@ -75,7 +75,7 @@ KSettingsHome::~KSettingsHome()
 {
 }
 
-void KSettingsHome::slotLoadItems(void)
+void KSettingsHome::slotLoadItems()
 {
   if (m_noNeedToUpdateList)
     return;
@@ -113,7 +113,7 @@ void KSettingsHome::slotLoadItems(void)
   }
 }
 
-void KSettingsHome::slotUpdateItemList(void)
+void KSettingsHome::slotUpdateItemList()
 {
   QString list;
   QListWidgetItem *it;
@@ -146,7 +146,7 @@ void KSettingsHome::slotSelectHomePageItem()
   m_downButton->setEnabled(m_homePageList->count() > (m_homePageList->row(item) + 1));
 }
 
-void KSettingsHome::slotMoveUp(void)
+void KSettingsHome::slotMoveUp()
 {
   QListWidgetItem *item = m_homePageList->currentItem();
   QListWidgetItem *prev = m_homePageList->item(m_homePageList->row(item) - 1);
@@ -160,7 +160,7 @@ void KSettingsHome::slotMoveUp(void)
   }
 }
 
-void KSettingsHome::slotMoveDown(void)
+void KSettingsHome::slotMoveDown()
 {
   QListWidgetItem *item = m_homePageList->currentItem();
   QListWidgetItem *next = m_homePageList->item(m_homePageList->row(item) + 1);

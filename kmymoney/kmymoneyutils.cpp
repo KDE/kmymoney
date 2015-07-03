@@ -146,7 +146,7 @@ const QString KMyMoneyUtils::scheduleTypeToString(MyMoneySchedule::typeE type)
   return i18nc("Scheduled transaction type", MyMoneySchedule::scheduleTypeToString(type).toLatin1());
 }
 
-KGuiItem KMyMoneyUtils::scheduleNewGuiItem(void)
+KGuiItem KMyMoneyUtils::scheduleNewGuiItem()
 {
   KGuiItem splitGuiItem(i18n("&New Schedule..."),
                         QIcon::fromTheme("document-new"),
@@ -156,7 +156,7 @@ KGuiItem KMyMoneyUtils::scheduleNewGuiItem(void)
   return splitGuiItem;
 }
 
-KGuiItem KMyMoneyUtils::accountsFilterGuiItem(void)
+KGuiItem KMyMoneyUtils::accountsFilterGuiItem()
 {
   KGuiItem splitGuiItem(i18n("&Filter"),
                         QIcon::fromTheme("view-filter"),
@@ -229,7 +229,7 @@ bool KMyMoneyUtils::appendCorrectFileExt(QString& str, const QString& strExtToUs
   return rc;
 }
 
-void KMyMoneyUtils::checkConstants(void)
+void KMyMoneyUtils::checkConstants()
 {
   Q_ASSERT(static_cast<int>(KLocale::ParensAround) == static_cast<int>(MyMoneyMoney::ParensAround));
   Q_ASSERT(static_cast<int>(KLocale::BeforeQuantityMoney) == static_cast<int>(MyMoneyMoney::BeforeQuantityMoney));
@@ -238,7 +238,7 @@ void KMyMoneyUtils::checkConstants(void)
   Q_ASSERT(static_cast<int>(KLocale::AfterMoney) == static_cast<int>(MyMoneyMoney::AfterMoney));
 }
 
-QString KMyMoneyUtils::variableCSS(void)
+QString KMyMoneyUtils::variableCSS()
 {
   QColor tcolor = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
   QColor link = KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color();

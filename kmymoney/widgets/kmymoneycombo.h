@@ -74,14 +74,14 @@ public:
     *
     * @return pointer to kMyMoneyCompletion or derivative.
     */
-  kMyMoneyCompletion* completion(void) const;
+  kMyMoneyCompletion* completion() const;
 
   /**
     * This method returns a pointer to the completion object's selector.
     *
     * @return pointer to KMyMoneySelector or derivative.
     */
-  KMyMoneySelector* selector(void) const;
+  KMyMoneySelector* selector() const;
 
   /**
     * This method returns the ids of the currently selected items
@@ -98,7 +98,7 @@ public:
     * @return reference to QString containing the id. If no item
     *         is selected the QString will be empty.
     */
-  const QString& selectedItem(void) const {
+  const QString& selectedItem() const {
     return m_id;
   }
 

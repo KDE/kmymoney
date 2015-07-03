@@ -55,12 +55,12 @@ class ObjectInfoTable : public ListTable
 {
 public:
   ObjectInfoTable(const MyMoneyReport&);
-  void init(void);
+  void init();
 
 protected:
-  void constructScheduleTable(void);
-  void constructAccountTable(void);
-  void constructAccountLoanTable(void);
+  void constructScheduleTable();
+  void constructAccountTable();
+  void constructAccountLoanTable();
 
 private:
   /**

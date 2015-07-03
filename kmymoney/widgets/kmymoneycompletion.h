@@ -56,7 +56,7 @@ public:
   /**
     * Re-implemented for internal reasons.  API is unaffected.
     */
-  virtual void hide(void);
+  virtual void hide();
 
   /**
     * This method sets the current account with id @p id as
@@ -66,7 +66,7 @@ public:
     */
   void setSelected(const QString& id);
 
-  virtual KMyMoneySelector* selector(void) const {
+  virtual KMyMoneySelector* selector() const {
     return m_selector;
   }
 
@@ -99,7 +99,7 @@ protected:
     * This method counts the number of items currently visible and
     * calls adjustSize(count).
     */
-  void adjustSize(void);
+  void adjustSize();
 
   void connectSignals(QWidget *widget, QTreeWidget* lv);
 

@@ -8,7 +8,7 @@
  * Please see toplevel file COPYING of that project for license details.   *
  ***************************************************************************/
 
-/** @file 
+/** @file
  * @short A C++ wrapper of the main aqbanking interface
  */
 

@@ -52,7 +52,7 @@ KSettingsSchedules::KSettingsSchedules(QWidget* parent) :
   connect(m_holidayRegion, SIGNAL(currentIndexChanged(QString)), this, SLOT(slotSetRegion(QString)));
 }
 
-void KSettingsSchedules::loadList(void)
+void KSettingsSchedules::loadList()
 {
   QStringList regions;
 #ifdef KF5Holidays_FOUND

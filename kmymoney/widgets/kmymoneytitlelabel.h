@@ -53,16 +53,16 @@ public:
   void setLeftImageFile(const QString& _file);
   void setRightImageFile(const QString& _file);
 
-  const QString& leftImageFile(void) const {
+  const QString& leftImageFile() const {
     return m_leftImageFile;
   }
-  const QString& rightImageFile(void) const {
+  const QString& rightImageFile() const {
     return m_rightImageFile;
   }
-  QColor bgColor(void) const {
+  QColor bgColor() const {
     return m_bgColor;
   }
-  QString text(void) const {
+  QString text() const {
     return m_text;
   }
 
@@ -70,7 +70,7 @@ public slots:
   virtual void setText(const QString& txt);
 
 protected:
-  void updatePixmap(void);
+  void updatePixmap();
   void paintEvent(QPaintEvent *);
 
 private:

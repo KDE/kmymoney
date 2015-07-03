@@ -200,7 +200,7 @@ void MyMoneySplit::setPrice(const MyMoneyMoney& price)
   m_price = price;
 }
 
-MyMoneyMoney MyMoneySplit::price(void) const
+MyMoneyMoney MyMoneySplit::price() const
 {
   if (!m_price.isZero())
     return m_price;
@@ -254,7 +254,7 @@ bool MyMoneySplit::hasReferenceTo(const QString& id) const
   return rc || (id == m_account) || (id == m_payee);
 }
 
-bool MyMoneySplit::isMatched(void) const
+bool MyMoneySplit::isMatched() const
 {
   return !(value("kmm-matched-tx").isEmpty());
 }
@@ -275,12 +275,12 @@ void MyMoneySplit::addMatch(const MyMoneyTransaction& _t)
   }
 }
 
-void MyMoneySplit::removeMatch(void)
+void MyMoneySplit::removeMatch()
 {
   deletePair("kmm-matched-tx");
 }
 
-MyMoneyTransaction MyMoneySplit::matchedTransaction(void) const
+MyMoneyTransaction MyMoneySplit::matchedTransaction() const
 {
   QString xml = value("kmm-matched-tx");
   if (!xml.isEmpty()) {

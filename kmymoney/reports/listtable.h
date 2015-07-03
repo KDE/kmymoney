@@ -54,11 +54,11 @@ class ListTable : public ReportTable
 {
 public:
   ListTable(const MyMoneyReport&);
-  QString renderBody(void) const;
-  QString renderCSV(void) const;
+  QString renderBody() const;
+  QString renderCSV() const;
   void drawChart(KReportChartView&) const {}
   void dump(const QString& file, const QString& context = QString()) const;
-  void init(void);
+  void init();
 
 public:
   /**
@@ -96,7 +96,7 @@ protected:
    * For investment-only reports, it will also exclude the subaccounts
    * that have a zero balance
    */
-  void includeInvestmentSubAccounts(void);
+  void includeInvestmentSubAccounts();
 
   QList<TableRow> m_rows;
 

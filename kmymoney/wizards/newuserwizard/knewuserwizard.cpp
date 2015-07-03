@@ -101,17 +101,17 @@ Wizard::Wizard(QWidget *parent, bool modal, Qt::WFlags flags) :
   setHelpContext("firsttime-3");
 }
 
-MyMoneyPayee Wizard::user(void) const
+MyMoneyPayee Wizard::user() const
 {
   return m_generalPage->user();
 }
 
-QString Wizard::url(void) const
+QString Wizard::url() const
 {
   return m_filePage->m_dataFileEdit->url().path();
 }
 
-MyMoneyInstitution Wizard::institution(void) const
+MyMoneyInstitution Wizard::institution() const
 {
   MyMoneyInstitution inst;
   if (m_accountPage->m_haveCheckingAccountButton->isChecked()) {
@@ -124,7 +124,7 @@ MyMoneyInstitution Wizard::institution(void) const
   return inst;
 }
 
-MyMoneyAccount Wizard::account(void) const
+MyMoneyAccount Wizard::account() const
 {
   MyMoneyAccount acc;
   if (m_accountPage->m_haveCheckingAccountButton->isChecked()) {
@@ -138,22 +138,22 @@ MyMoneyAccount Wizard::account(void) const
   return acc;
 }
 
-MyMoneyMoney Wizard::openingBalance(void) const
+MyMoneyMoney Wizard::openingBalance() const
 {
   return m_accountPage->m_openingBalanceEdit->value();
 }
 
-MyMoneySecurity Wizard::baseCurrency(void) const
+MyMoneySecurity Wizard::baseCurrency() const
 {
   return m_baseCurrency;
 }
 
-QList<MyMoneyTemplate> Wizard::templates(void) const
+QList<MyMoneyTemplate> Wizard::templates() const
 {
   return m_categoriesPage->selectedTemplates();
 }
 
-bool Wizard::startSettingsAfterFinished(void) const
+bool Wizard::startSettingsAfterFinished() const
 {
   return m_preferencePage->m_openConfigAfterFinished->checkState() == Qt::Checked;
 }
@@ -164,7 +164,7 @@ IntroPage::IntroPage(Wizard* wizard) :
 {
 }
 
-KMyMoneyWizardPage* IntroPage::nextPage(void) const
+KMyMoneyWizardPage* IntroPage::nextPage() const
 {
   return m_wizard->m_generalPage;
 }
@@ -180,7 +180,7 @@ GeneralPage::GeneralPage(Wizard* wizard) :
   connect(m_loadAddressButton, SIGNAL(clicked()), this, SLOT(slotLoadFromAddressBook()));
 }
 
-void GeneralPage::slotLoadFromAddressBook(void)
+void GeneralPage::slotLoadFromAddressBook()
 {
   m_userNameEdit->setText(m_contact->ownerFullName());
   m_emailEdit->setText(m_contact->ownerEmail());
@@ -206,7 +206,7 @@ void GeneralPage::slotContactFetched(const ContactData &identity)
   m_loadAddressButton->setEnabled(true);
 }
 
-KMyMoneyWizardPage* GeneralPage::nextPage(void) const
+KMyMoneyWizardPage* GeneralPage::nextPage() const
 {
   return m_wizard->m_currencyPage;
 }
@@ -250,13 +250,13 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
   }
 }
 
-void CurrencyPage::enterPage(void)
+void CurrencyPage::enterPage()
 {
   m_currencyList->setFocus();
 }
 
 
-KMyMoneyWizardPage* CurrencyPage::nextPage(void) const
+KMyMoneyWizardPage* CurrencyPage::nextPage() const
 {
   m_wizard->m_baseCurrency = MyMoneyFile::instance()->security(selectedCurrency());
   m_wizard->m_accountPage->m_accountCurrencyLabel->setText(m_wizard->m_baseCurrency.tradingSymbol());
@@ -274,12 +274,12 @@ AccountPage::AccountPage(Wizard* wizard) :
   m_openingDateEdit->setDate(QDate(QDate::currentDate().year(), 1, 1));
 }
 
-KMyMoneyWizardPage* AccountPage::nextPage(void) const
+KMyMoneyWizardPage* AccountPage::nextPage() const
 {
   return m_wizard->m_categoriesPage;
 }
 
-bool AccountPage::isComplete(void) const
+bool AccountPage::isComplete() const
 {
   return !m_haveCheckingAccountButton->isChecked() || m_mandatoryGroup->isEnabled();
 }
@@ -290,12 +290,12 @@ CategoriesPage::CategoriesPage(Wizard* wizard) :
 {
 }
 
-KMyMoneyWizardPage* CategoriesPage::nextPage(void) const
+KMyMoneyWizardPage* CategoriesPage::nextPage() const
 {
   return m_wizard->m_preferencePage;
 }
 
-QList<MyMoneyTemplate> CategoriesPage::selectedTemplates(void) const
+QList<MyMoneyTemplate> CategoriesPage::selectedTemplates() const
 {
   return m_templateSelector->selectedTemplates();
 }
@@ -306,7 +306,7 @@ PreferencePage::PreferencePage(Wizard* wizard) :
 {
 }
 
-KMyMoneyWizardPage* PreferencePage::nextPage(void) const
+KMyMoneyWizardPage* PreferencePage::nextPage() const
 {
   return m_wizard->m_filePage;
 }
@@ -326,7 +326,7 @@ FilePage::FilePage(Wizard* wizard) :
   m_dataFileEdit->setMode(KFile::File);
 }
 
-bool FilePage::isComplete(void) const
+bool FilePage::isComplete() const
 {
   bool rc = m_mandatoryGroup->isEnabled();
   m_existingFileLabel->hide();

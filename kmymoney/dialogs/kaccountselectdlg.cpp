@@ -94,7 +94,7 @@ KAccountSelectDlg::~KAccountSelectDlg()
 {
 }
 
-void KAccountSelectDlg::slotReloadWidget(void)
+void KAccountSelectDlg::slotReloadWidget()
 {
   AccountSet set;
   if (m_accountType & KMyMoneyUtils::asset)
@@ -127,12 +127,12 @@ void KAccountSelectDlg::setAccount(const MyMoneyAccount& account, const QString&
   m_accountSelector->setSelectedItem(id);
 }
 
-void KAccountSelectDlg::slotCreateInstitution(void)
+void KAccountSelectDlg::slotCreateInstitution()
 {
   kmymoney->slotInstitutionNew();
 }
 
-void KAccountSelectDlg::slotCreateAccount(void)
+void KAccountSelectDlg::slotCreateAccount()
 {
   if (!(m_accountType & (KMyMoneyUtils::expense | KMyMoneyUtils::income))) {
     kmymoney->slotAccountNew(m_account);
@@ -154,7 +154,7 @@ void KAccountSelectDlg::slotCreateAccount(void)
   }
 }
 
-void KAccountSelectDlg::abort(void)
+void KAccountSelectDlg::abort()
 {
   m_aborted = true;
   reject();
@@ -170,7 +170,7 @@ void KAccountSelectDlg::showAbortButton(const bool visible)
   m_kButtonAbort->setVisible(visible);
 }
 
-int KAccountSelectDlg::exec(void)
+int KAccountSelectDlg::exec()
 {
   int rc = Rejected;
 
@@ -185,7 +185,7 @@ int KAccountSelectDlg::exec(void)
   return rc;
 }
 
-const QString& KAccountSelectDlg::selectedAccount(void) const
+const QString& KAccountSelectDlg::selectedAccount() const
 {
   return m_accountSelector->selectedItem();
 }

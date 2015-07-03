@@ -4,6 +4,7 @@
     begin                : Tue Jul 08 2008
     copyright            : (C) 2008 by Thomas Baumgart
     email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
+                         : Christian David <christian-david@web.de>
  ***************************************************************************/
 
 /***************************************************************************
@@ -76,9 +77,10 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
   }
 
   // check that dates are within user's setting
-  if (abs(tm.postDate().toJulianDay() - ti.postDate().toJulianDay()) > KMyMoneyGlobalSettings::matchInterval()) {
-    int rc = KMessageBox::questionYesNo(0, i18n("<center>The transaction post-dates are not within the 'matchInterval' setting.</center>"
-                                              "<center>If you wish to continue with this matching, click 'Yes'.</center>"));
+  const int gap = abs(tm.postDate().toJulianDay() - ti.postDate().toJulianDay());
+  if (gap > KMyMoneyGlobalSettings::matchInterval()) {
+    int rc = KMessageBox::questionYesNo(0, i18np("The transaction dates are one day apart. Do you want to match them anyway?",
+                                                 "The transaction dates are %1 days apart. Do you want to match them anyway?", gap));
     if (rc == KMessageBox::No) {
       return;
     }

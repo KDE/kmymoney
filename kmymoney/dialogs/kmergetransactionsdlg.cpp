@@ -46,7 +46,7 @@ KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWid
   buttonOk->setEnabled(true);
 }
 
-void KMergeTransactionsDlg::slotHelp(void)
+void KMergeTransactionsDlg::slotHelp()
 {
   KHelpClient::invokeHelp("details.ledgers.match");
 }

@@ -93,7 +93,7 @@ public:
     *         the construction of this object and modified using the
     *         dialog.
     */
-  const MyMoneyTransaction& transaction(void) const {
+  const MyMoneyTransaction& transaction() const {
     return m_transaction;
   };
 
@@ -104,7 +104,7 @@ public:
     *
     * @return difference as MyMoneyMoney object
     */
-  MyMoneyMoney diffAmount(void);
+  MyMoneyMoney diffAmount();
 
   /**
     * This method calculates the sum of the splits shown in the register
@@ -112,30 +112,30 @@ public:
     *
     * @return sum of splits as MyMoneyMoney object
     */
-  MyMoneyMoney splitsValue(void);
+  MyMoneyMoney splitsValue();
 
 private:
   /**
     * This method updates the display of the sums below the register
     */
-  void updateSums(void);
+  void updateSums();
 
 public slots:
-  int exec(void);
+  int exec();
 
 protected slots:
   void accept();
   void reject();
-  void slotClearAllSplits(void);
-  void slotClearUnusedSplits(void);
+  void slotClearAllSplits();
+  void slotClearUnusedSplits();
   void slotSetTransaction(const MyMoneyTransaction& t);
   void slotCreateCategory(const QString& txt, QString& id);
   void slotUpdateButtons();
-  void slotMergeSplits(void);
-  void slotEditStarted(void);
+  void slotMergeSplits();
+  void slotEditStarted();
 
   /// used internally to setup the initial size of all widgets
-  void initSize(void);
+  void initSize();
 
 signals:
   /**

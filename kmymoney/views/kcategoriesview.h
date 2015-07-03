@@ -71,7 +71,7 @@ protected:
   void loadAccounts();
 
 public slots:
-  void slotLoadAccounts(void);
+  void slotLoadAccounts();
 
   /**
     * Override the base class behaviour to include all updates that
@@ -81,8 +81,8 @@ public slots:
 
 protected slots:
   void slotProfitChanged(const MyMoneyMoney &);
-  void slotExpandCollapse(void);
-  void slotUnusedIncomeExpenseAccountHidden(void);
+  void slotExpandCollapse();
+  void slotUnusedIncomeExpenseAccountHidden();
 
 private:
   /**

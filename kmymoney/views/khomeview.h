@@ -62,23 +62,23 @@ public:
   ~KHomeView();
 
 protected:
-  void showPayments(void);
+  void showPayments();
   void showPaymentEntry(const MyMoneySchedule&, int cnt = 1);
   void showAccounts(paymentTypeE type, const QString& hdr);
   void showAccountEntry(const MyMoneyAccount&);
-  void showFavoriteReports(void);
-  void showForecast(void);
-  void showNetWorthGraph(void);
-  void showSummary(void);
-  void showAssetsLiabilities(void);
-  void showIncomeExpenseSummary(void);
-  void showSchedulesSummary(void);
-  void showBudget(void);
-  void showCashFlowSummary(void);
+  void showFavoriteReports();
+  void showForecast();
+  void showNetWorthGraph();
+  void showSummary();
+  void showAssetsLiabilities();
+  void showIncomeExpenseSummary();
+  void showSchedulesSummary();
+  void showBudget();
+  void showCashFlowSummary();
 
   const QString link(const QString& view, const QString& query, const QString& title = QString()) const;
-  const QString linkend(void) const;
-  void loadView(void);
+  const QString linkend() const;
+  void loadView();
 
   /**
     * Overridden so we can emit the activated signal.
@@ -90,12 +90,12 @@ protected:
 public slots:
 
   void slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments &args, const KParts::BrowserArguments &browArgs);
-  void slotLoadView(void);
+  void slotLoadView();
 
   /**
     * Print the current view
     */
-  void slotPrintView(void);
+  void slotPrintView();
 
   void slotZoomView(int);
 
@@ -130,7 +130,7 @@ private:
   /**
    * Run the forecast
    */
-  void doForecast(void);
+  void doForecast();
 
   /**
    * Calculate the forecast balance after a payment has been made

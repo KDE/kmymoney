@@ -165,12 +165,12 @@ public:
     * This method is used to clear the filter. All settings will be
     * removed.
     */
-  void clear(void);
+  void clear();
 
   /**
     * This method is used to clear the accounts filter only.
     */
-  void clearAccountFilter(void);
+  void clearAccountFilter();
 
   /**
     * This method is used to set the regular expression filter to the value specified
@@ -363,7 +363,7 @@ public:
     *       see the documentation of the constructors MyMoneyTransactionFilter()
     *       and MyMoneyTransactionFilter(const QString&) for details.
     */
-  const QList<MyMoneySplit>& matchingSplits(void) const;
+  const QList<MyMoneySplit>& matchingSplits() const;
 
   /**
     * This method returns the from date set in the filter. If
@@ -372,7 +372,7 @@ public:
     *
     * @return returns m_fromDate
     */
-  const QDate fromDate(void) const {
+  const QDate fromDate() const {
     return m_fromDate;
   };
 
@@ -383,7 +383,7 @@ public:
     *
     * @return returns m_toDate
     */
-  const QDate toDate(void) const {
+  const QDate toDate() const {
     return m_toDate;
   };
 
@@ -531,7 +531,7 @@ public:
    * This method returns whether the text filter should return
    * that DO NOT contain the text
    */
-  bool isInvertingText(void) const {
+  bool isInvertingText() const {
     return m_invertText;
   };
 
@@ -548,7 +548,7 @@ public:
 
   static void setFiscalYearStart(int firstMonth, int firstDay);
 
-  FilterSet filterSet(void) const {
+  FilterSet filterSet() const {
     return m_filterSet;
   };
 

@@ -65,7 +65,7 @@ public:
   QString show(const MyMoneyAccount& category);
 
 protected:
-  void accept(void);
+  void accept();
 
 };
 

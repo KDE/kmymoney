@@ -74,13 +74,13 @@ public:
 
   /**
     */
-  const QUrl file(void) const {
+  const QUrl file() const {
     return QUrl::fromUserInput(m_qlineeditFile->text());
   };
 
   /**
     */
-  const QString profile(void) const {
+  const QString profile() const {
     return m_profileComboBox->currentText();
   };
 
@@ -94,9 +94,9 @@ protected slots:
   /**
     * Called when the user needs a new profile
     */
-  void slotNewProfile(void);
+  void slotNewProfile();
 
-  void slotOkClicked(void);
+  void slotOkClicked();
 
 private:
   /**
@@ -121,8 +121,8 @@ private:
     */
   void addCategories(QStringList& strList, const QString& id, const QString& leadIn) const;
 
-  void readConfig(void);
-  void writeConfig(void);
+  void readConfig();
+  void writeConfig();
 };
 
 #endif

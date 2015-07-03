@@ -205,7 +205,7 @@ private:
   /**
     * if no base currency is defined, start the dialog and force it to be set
     */
-  void selectBaseCurrency(void);
+  void selectBaseCurrency();
 
   /**
     * This method attaches an empty storage object to the MyMoneyFile
@@ -218,7 +218,7 @@ private:
     * This method removes an attached storage from the MyMoneyFile
     * object.
     */
-  void removeStorage(void);
+  void removeStorage();
 
   void viewAccountList(const QString& selectAccount); // Show the accounts view
 
@@ -226,10 +226,10 @@ private:
 
   /**
     */
-  void fixFile_0(void);
-  void fixFile_1(void);
-  void fixFile_2(void);
-  void fixFile_3(void);
+  void fixFile_0();
+  void fixFile_1();
+  void fixFile_2();
+  void fixFile_3();
 
   /**
     */
@@ -237,7 +237,7 @@ private:
 
   /**
     */
-  void fixTransactions_0(void);
+  void fixTransactions_0();
   void fixSchedule_0(MyMoneySchedule sched);
   void fixDuplicateAccounts_0(MyMoneyTransaction& t);
 
@@ -262,12 +262,12 @@ public:
     *
     * @return Whether the file is open and initialised
     */
-  bool fileOpen(void);
+  bool fileOpen();
 
   /**
     * Closes the open MyMoneyFile and frees all the allocated memory, I hope !
     */
-  void closeFile(void);
+  void closeFile();
 
 
   /**
@@ -340,14 +340,14 @@ public:
     * @retval true if any data has been modified but not saved
     * @retval false otherwise
     */
-  bool dirty(void);
+  bool dirty();
 
   /**
     * Close the currently opened file and create an empty new file.
     *
     * @see MyMoneyFile
     */
-  void newFile(void);
+  void newFile();
 
   /**
     * This method enables the state of all views (except home view) according
@@ -408,11 +408,11 @@ public:
     * @retval true Yes, view allows to print
     * @retval false No, view cannot print
     */
-  bool canPrint(void);
+  bool canPrint();
 
   TransactionEditor* startEdit(const KMyMoneyRegister::SelectedTransactions&);
 
-  bool createNewTransaction(void);
+  bool createNewTransaction();
 
   /**
     * Used to start reconciliation of account @a account. It switches the
@@ -438,16 +438,16 @@ public:
   /**
     * This method preloads all known currencies into the engine.
     */
-  void loadDefaultCurrencies(void);
+  void loadDefaultCurrencies();
 
-  void loadAncientCurrencies(void);
+  void loadAncientCurrencies();
 
   void showTitleBar(bool show);
 
   /**
     * This method changes the view type according to the settings.
     */
-  void updateViewType(void);
+  void updateViewType();
 
 protected:
   /**
@@ -534,12 +534,12 @@ public slots:
   /**
     * This slot prints the current view.
     */
-  void slotPrintView(void);
+  void slotPrintView();
 
   /**
     * This slot switches the view to present the home page
     */
-  void slotShowHomePage(void) {
+  void slotShowHomePage() {
     setCurrentPage(m_homeViewFrame);
   }
 
@@ -553,7 +553,7 @@ protected slots:
   void slotShowTransactionDetail(bool detailed);
 
   /**
-   * eventually replace this with KMyMoneyApp::slotCurrencySetBase(void).
+   * eventually replace this with KMyMoneyApp::slotCurrencySetBase().
    * it contains the same code
    *
    * @deprecated
@@ -648,7 +648,7 @@ public:
   virtual ~KMyMoneyViewBase();
 
   void setTitle(const QString& title);
-  QVBoxLayout* layout(void) const;
+  QVBoxLayout* layout() const;
   void addWidget(QWidget* w);
 
   /**

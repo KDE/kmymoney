@@ -43,14 +43,14 @@ private:
   void markAsPrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction);
 
 protected slots:
-  void slotPrintCheck(void);
+  void slotPrintCheck();
   void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
   // the plugin loader plugs in a plugin
   void slotPlug(KPluginInfo*);
   // the plugin loader unplugs a plugin
   void slotUnplug(KPluginInfo*);
   // the plugin's configurations has changed
-  void slotUpdateConfig(void);
+  void slotUpdateConfig();
 
 private:
   struct Private;

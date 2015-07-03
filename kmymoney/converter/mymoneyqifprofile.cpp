@@ -59,7 +59,7 @@ public:
       m_lastValue(3, 0),
       m_largestValue(3, 0) { }
 
-  void getThirdPosition(void);
+  void getThirdPosition();
   void dissectDate(QVector<QString>& parts, const QString& txt) const;
 
   QVector<int>    m_changeCount;
@@ -112,7 +112,7 @@ void MyMoneyQifProfile::Private::dissectDate(QVector<QString>& parts, const QStr
 }
 
 
-void MyMoneyQifProfile::Private::getThirdPosition(void)
+void MyMoneyQifProfile::Private::getThirdPosition()
 {
   // if we have detected two parts we can calculate the third and its position
   if (m_partPos.count() == 2) {
@@ -152,7 +152,7 @@ MyMoneyQifProfile::~MyMoneyQifProfile()
   delete d;
 }
 
-void MyMoneyQifProfile::clear(void)
+void MyMoneyQifProfile::clear()
 {
   m_dateFormat = "%d.%m.%yyyy";
   m_apostropheFormat = "2000-2099";
@@ -231,7 +231,7 @@ void MyMoneyQifProfile::loadProfile(const QString& name)
   m_isDirty = false;
 }
 
-void MyMoneyQifProfile::saveProfile(void)
+void MyMoneyQifProfile::saveProfile()
 {
   if (m_isDirty == true) {
     KSharedConfigPtr config = KSharedConfig::openConfig();
@@ -376,7 +376,7 @@ void MyMoneyQifProfile::setVoidMark(const QString& txt)
   m_voidMark = txt;
 }
 
-const QString MyMoneyQifProfile::accountDelimiter(void) const
+const QString MyMoneyQifProfile::accountDelimiter() const
 {
   QString rc;
   if (m_accountDelimiter[0] == ' ')
@@ -749,7 +749,7 @@ void MyMoneyQifProfile::setAttemptMatchDuplicates(bool f)
   m_attemptMatchDuplicates = f;
 }
 
-const QString MyMoneyQifProfile::inputDateFormat(void) const
+const QString MyMoneyQifProfile::inputDateFormat() const
 {
   QStringList list;
   possibleDateFormats(list);

@@ -96,12 +96,12 @@ private:
   /**
     * creates the action objects available through the application menus
     */
-  void createActions(void);
+  void createActions();
 
   /**
     * creates the context menu
     */
-  void createContextMenu(void);
+  void createContextMenu();
 
   /**
     * checks whether a given KMyMoney account with id @p id is
@@ -128,7 +128,7 @@ private:
    * Prefills the protocol conversion list to allow mapping
    * of AqBanking internal names to external names
    */
-  void loadProtocolConversion(void);
+  void loadProtocolConversion();
 
   /**
    * Creates an additional tab widget for the account edit dialog
@@ -182,20 +182,20 @@ private:
   /**
     * Trigger the password cache timer
     */
-  void startPasswordTimer(void);
+  void startPasswordTimer();
 
   bool enqueTransaction(onlineJobTyped<germanOnlineTransfer>& job);
   bool enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job);
 
 
 protected slots:
-  void slotSettings(void);
-  void slotImport(void);
-  void slotClearPasswordCache(void);
-  void executeQueue(void);
+  void slotSettings();
+  void slotImport();
+  void slotClearPasswordCache();
+  void executeQueue();
 
 signals:
-  void queueChanged(void);
+  void queueChanged();
 
 private:
   class Private;
@@ -246,7 +246,7 @@ protected:
   void _xaToStatement(MyMoneyStatement &ks,
                       const MyMoneyAccount&,
                       const AB_TRANSACTION *t);
-  void clearPasswordCache(void);
+  void clearPasswordCache();
 
 private:
   KBankingPlugin* m_parent;

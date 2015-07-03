@@ -283,12 +283,12 @@ void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
   m_inFocusOutEvent = false;
 }
 
-KMyMoneySelector* KMyMoneyCombo::selector(void) const
+KMyMoneySelector* KMyMoneyCombo::selector() const
 {
   return m_completion->selector();
 }
 
-kMyMoneyCompletion* KMyMoneyCombo::completion(void) const
+kMyMoneyCompletion* KMyMoneyCombo::completion() const
 {
   return m_completion;
 }

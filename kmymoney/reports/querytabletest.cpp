@@ -410,7 +410,7 @@ void QueryTableTest::testAccountQuery()
   }
 }
 
-void QueryTableTest::testInvestment(void)
+void QueryTableTest::testInvestment()
 {
   try {
     // Equities

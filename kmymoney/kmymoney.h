@@ -59,10 +59,6 @@ class KPluginInfo;
  * for KMyMoney developers and users who wish to see how KMyMoney works.  This
  * documentation will be kept up-to-date as development progresses and should be
  * read for new features that have been developed in KMyMoney.
- *
- * The latest version of this document is available from the project's web-site
- * at http://kmymoney.org/ and is generated daily by doxygen reading
- * the header files found in the CVS main branch.
  */
 
 /**
@@ -108,43 +104,43 @@ protected slots:
     * @author mvillarino 2005
     * @see KMyMoneyApp::slotDataChanged()
     */
-  void slotAutoSave(void);
+  void slotAutoSave();
 
   /**
     * This slot re-enables all message for which the "Don't show again"
     * option had been selected.
     */
-  void slotEnableMessages(void);
+  void slotEnableMessages();
 
   /**
     * Called when the user asks for file information.
     */
-  void slotFileFileInfo(void);
+  void slotFileFileInfo();
 
   /**
     * Called to run performance test.
     */
-  void slotPerformanceTest(void);
+  void slotPerformanceTest();
 
   /**
     * Called to generate the sql to create kmymoney database tables etc.
     */
-  void slotGenerateSql(void);
+  void slotGenerateSql();
 
   /**
     * Debugging only: turn on/off traces
     */
-  void slotToggleTraces(void);
+  void slotToggleTraces();
 
   /**
     * Debugging only: turn on/off timers
     */
-  void slotToggleTimers(void);
+  void slotToggleTimers();
 
   /**
     * Called when the user asks for the personal information.
     */
-  void slotFileViewPersonal(void);
+  void slotFileViewPersonal();
 
   /**
     * Called when the user wishes to import tab delimeted transactions
@@ -153,72 +149,72 @@ protected slots:
     *
     * @see MyMoneyAccount
     */
-  void slotQifImport(void);
+  void slotQifImport();
 
   /**
     * Called when a QIF import is finished.
     */
-  void slotQifImportFinished(void);
+  void slotQifImportFinished();
 
   /**
     * Opens a file selector dialog for the user to choose an existing OFX
     * file from the file system to be imported.  This slot is expected to
     * be called from the UI.
     */
-  void slotGncImport(void);
+  void slotGncImport();
 
   /**
    * Open a dialog with a chart of the balance for the currently selected
    * account (m_selectedAccount). Return once the dialog is closed. Don't do
    * anything if no account is selected or charts are not available.
    */
-  void slotAccountChart(void);
+  void slotAccountChart();
 
   /**
     * Opens a file selector dialog for the user to choose an existing KMM
     * statement file from the file system to be imported.  This is for testing
     * only.  KMM statement files are not designed to be exposed to the user.
     */
-  void slotStatementImport(void);
+  void slotStatementImport();
 
-  void slotLoadAccountTemplates(void);
-  void slotSaveAccountTemplates(void);
+  void slotLoadAccountTemplates();
+  void slotSaveAccountTemplates();
 
   /**
     * Called when the user wishes to export some transaction to a
     * QIF formatted file. An account must be open for this to work.
     * Uses MyMoneyQifWriter() for the actual output.
     */
-  void slotQifExport(void);
+  void slotQifExport();
 
   /**
     * Open up the application wide settings dialog.
     *
     * @see KSettingsDlg
     */
-  void slotSettings(void);
+  void slotSettings();
 
   /** No descriptions */
-  void slotFileBackup(void);
+  void slotFileBackup();
 
-  void slotShowTipOfTheDay(void);
+  void slotShowTipOfTheDay();
 
-  void slotQifProfileEditor(void);
+  void slotQifProfileEditor();
 
-  void slotShowPreviousView(void);
+  void slotShowPreviousView();
 
-  void slotShowNextView(void);
+  void slotShowNextView();
 
   /**
     * Brings up a dialog to let the user search for specific transaction(s).  It then
     * opens a results window to display those transactions.
     */
-  void slotFindTransaction(void);
+  void slotFindTransaction();
 
   /**
     * Destroys a possibly open the search dialog
     */
-  void slotCloseSearchDialog(void);
+  void slotCloseSearchDialog();
 
   /**
     * Preloads the input dialog with the data of the current
@@ -230,7 +226,7 @@ protected slots:
   /**
     * Deletes the current selected institution.
     */
-  void slotInstitutionDelete(void);
+  void slotInstitutionDelete();
 
   /**
     * Brings up the new category editor and saves the information.
@@ -249,12 +245,12 @@ protected slots:
   /**
     * Calls the print logic for the current view
     */
-  void slotPrintView(void);
+  void slotPrintView();
 
   /**
     * Create a new investment
     */
-  void slotInvestmentNew(void);
+  void slotInvestmentNew();
 
   /**
     * Create a new investment in a given @p parent investment account
@@ -265,74 +261,74 @@ protected slots:
     * This slot opens the investment editor to edit the currently
     * selected investment if possible
     */
-  void slotInvestmentEdit(void);
+  void slotInvestmentEdit();
 
   /**
     * Deletes the current selected investment.
     */
-  void slotInvestmentDelete(void);
+  void slotInvestmentDelete();
 
   /**
     * Performs online update for currently selected investment
     */
-  void slotOnlinePriceUpdate(void);
+  void slotOnlinePriceUpdate();
 
   /**
     * Performs manual update for currently selected investment
     */
-  void slotManualPriceUpdate(void);
+  void slotManualPriceUpdate();
 
   /**
     * Call this slot, if any configuration parameter has changed
     */
-  void slotUpdateConfiguration(void);
+  void slotUpdateConfiguration();
 
   /**
     */
   bool slotPayeeNew(const QString& newnameBase, QString& id);
-  void slotPayeeNew(void);
+  void slotPayeeNew();
 
   /**
     */
-  void slotPayeeDelete(void);
+  void slotPayeeDelete();
 
   /**
     * Slot that merges two or more selected payess into a new payee
     */
-  void slotPayeeMerge(void);
+  void slotPayeeMerge();
 
   /**
     */
   void slotTagNew(const QString& newnameBase, QString& id);
-  void slotTagNew(void);
+  void slotTagNew();
 
   /**
     */
-  void slotTagDelete(void);
+  void slotTagDelete();
 
   /**
     */
-  void slotBudgetNew(void);
+  void slotBudgetNew();
 
   /**
     */
-  void slotBudgetDelete(void);
+  void slotBudgetDelete();
 
   /**
    */
-  void slotBudgetCopy(void);
+  void slotBudgetCopy();
 
   /**
     */
-  void slotBudgetChangeYear(void);
+  void slotBudgetChangeYear();
 
   /**
     */
-  void slotBudgetForecast(void);
+  void slotBudgetForecast();
 
   /**
     */
-  void slotCurrencyNew(void);
+  void slotCurrencyNew();
 
   /**
     */
@@ -340,40 +336,40 @@ protected slots:
 
   /**
     */
-  void slotCurrencyDelete(void);
+  void slotCurrencyDelete();
 
   /**
     */
-  void slotCurrencySetBase(void);
+  void slotCurrencySetBase();
 
   /**
     * This slot is used to start new features during the development cycle
     */
-  void slotNewFeature(void);
+  void slotNewFeature();
 
   /**
     */
-  void slotTransactionsNew(void);
+  void slotTransactionsNew();
 
   /**
     */
-  void slotTransactionsEdit(void);
+  void slotTransactionsEdit();
 
   /**
     */
-  void slotTransactionsEditSplits(void);
+  void slotTransactionsEditSplits();
 
   /**
     */
-  void slotTransactionsDelete(void);
+  void slotTransactionsDelete();
 
   /**
     */
-  void slotTransactionsEnter(void);
+  void slotTransactionsEnter();
 
   /**
     */
-  void slotTransactionsCancel(void);
+  void slotTransactionsCancel();
 
   /**
     */
@@ -381,43 +377,43 @@ protected slots:
 
   /**
     */
-  void slotTransactionDuplicate(void);
+  void slotTransactionDuplicate();
 
   /**
     */
-  void slotToggleReconciliationFlag(void);
+  void slotToggleReconciliationFlag();
 
   /**
     */
-  void slotMarkTransactionCleared(void);
+  void slotMarkTransactionCleared();
 
   /**
     */
-  void slotMarkTransactionReconciled(void);
+  void slotMarkTransactionReconciled();
 
   /**
     */
-  void slotMarkTransactionNotReconciled(void);
+  void slotMarkTransactionNotReconciled();
 
   /**
     */
-  void slotTransactionGotoAccount(void);
+  void slotTransactionGotoAccount();
 
   /**
     */
-  void slotTransactionGotoPayee(void);
+  void slotTransactionGotoPayee();
 
   /**
     */
-  void slotTransactionCreateSchedule(void);
+  void slotTransactionCreateSchedule();
 
   /**
     */
-  void slotTransactionAssignNumber(void);
+  void slotTransactionAssignNumber();
 
   /**
     */
-  void slotTransactionCombine(void);
+  void slotTransactionCombine();
 
   /**
    * This method takes the selected splits and checks that only one transaction (src)
@@ -429,24 +425,24 @@ protected slots:
   /**
     * Accept the selected transactions that are marked as 'imported' and remove the flag
     */
-  void slotTransactionsAccept(void);
+  void slotTransactionsAccept();
 
   /**
     * This slot triggers an update of all views and restarts
     * a single shot timer to call itself again at beginning of
     * the next day.
     */
-  void slotDateChanged(void);
+  void slotDateChanged();
 
   /**
     * This slot will be called when the engine data changed
     * and the application object needs to update its state.
     */
-  void slotDataChanged(void);
+  void slotDataChanged();
 
   void slotMoveToAccount(const QString& id);
 
-  void slotUpdateMoveToAccountMenu(void);
+  void slotUpdateMoveToAccountMenu();
 
   /**
     * This slot collects information for a new scheduled transaction
@@ -456,19 +452,19 @@ protected slots:
 
   /**
     */
-  void slotScheduleDuplicate(void);
+  void slotScheduleDuplicate();
 
-  void slotKDELanguageSettings(void);
+  void slotKDELanguageSettings();
 
-  void slotAccountMapOnline(void);
-  void slotAccountUnmapOnline(void);
-  void slotAccountUpdateOnline(void);
-  void slotAccountUpdateOnlineAll(void);
+  void slotAccountMapOnline();
+  void slotAccountUnmapOnline();
+  void slotAccountUpdateOnline();
+  void slotAccountUpdateOnlineAll();
 
   /**
    * @brief Start dialog for an online banking transfer
    */
-  void slotNewOnlineTransfer(void);
+  void slotNewOnlineTransfer();
 
   /**
    * @brief Start dialog to edit onlineJob if possible
@@ -507,17 +503,17 @@ protected slots:
   void slotOnlineJobLog();
   void slotOnlineJobLog(const QStringList& onlineJobIds);
 
-  void slotManageGpgKeys(void);
+  void slotManageGpgKeys();
   void slotKeySelected(int idx);
 
-  void slotStatusProgressDone(void);
+  void slotStatusProgressDone();
 
 public:
   /**
     * This method checks if there is at least one asset or liability account
     * in the current storage object. If not, it starts the new account wizard.
     */
-  void createInitialAccount(void);
+  void createInitialAccount();
 
   /**
     * This method returns the last URL used or an empty URL
@@ -528,7 +524,7 @@ public:
     * @return URL of last opened file or empty if the program
     *         should start with the open file dialog
     */
-  const QUrl lastOpenedURL(void);
+  const QUrl lastOpenedURL();
 
   /**
     * construtor of KMyMoneyApp, calls all init functions to create the application.
@@ -543,9 +539,9 @@ public:
   static void progressCallback(int current, int total, const QString&);
 
   void writeLastUsedDir(const QString& directory);
-  QString readLastUsedDir(void) const;
+  QString readLastUsedDir() const;
   void writeLastUsedFile(const QString& fileName);
-  QString readLastUsedFile(void) const;
+  QString readLastUsedFile() const;
 
   /**
     * Returns whether there is an importer available that can handle this file
@@ -568,12 +564,12 @@ public:
     *
     * @retval QStringList of process ids
     */
-  const QList<QString> instanceList(void) const;
+  const QList<QString> instanceList() const;
 
   /**
     * Dump a list of the names of all defined KActions to stdout.
     */
-  void dumpActions(void) const;
+  void dumpActions() const;
 
   /**
     * Popup the context menu with the respective @p containerName.
@@ -608,8 +604,6 @@ public:
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
-  // Note: Don't use e.g. filename(void) but use filename() because
-  // otherwise the kidl compiler produces uncompilable results.
   const QString filename() const;
 
   void webConnect(const QString& sourceUrl, const QByteArray& asn_id);
@@ -626,33 +620,33 @@ protected:
   /** save general Options like all bar positions and status as well as the geometry and the recent file list to the configuration
    * file
    */
-  void saveOptions(void);
+  void saveOptions();
 
   /**
     * Creates the interfaces necessary for the plugins to work. Therefore,
     * this method must be called prior to loadPlugins().
     */
-  void createInterfaces(void);
+  void createInterfaces();
 
   /**
     * load all available plugins. Make sure you have called createInterfaces()
     * before you call this one.
     */
-  void loadPlugins(void);
+  void loadPlugins();
 
   /** read general Options again and initialize all variables like the recent file list
    */
-  void readOptions(void);
+  void readOptions();
 
   /** initializes the KActions of the application */
-  void initActions(void);
+  void initActions();
 
   /** initializes the dynamic menus (account selectors) */
-  void initDynamicMenus(void);
+  void initDynamicMenus();
 
   /** sets up the statusbar for the main window by initialzing a statuslabel.
    */
-  void initStatusBar(void);
+  void initStatusBar();
 
   /**
    * @brief Establish connections between actions and views
@@ -668,9 +662,9 @@ protected:
    * @see KMainWindow#queryClose
    * @see QWidget#closeEvent
    */
-  virtual bool queryClose(void);
+  virtual bool queryClose();
 
-  void slotCheckSchedules(void);
+  void slotCheckSchedules();
 
   virtual void resizeEvent(QResizeEvent*);
 
@@ -766,33 +760,33 @@ protected:
   /**
    * This method unmatches the currently selected transactions
    */
-  void transactionUnmatch(void);
+  void transactionUnmatch();
 
   /**
    * This method matches the currently selected transactions
    */
-  void transactionMatch(void);
+  void transactionMatch();
 
   /**
     * This method preloads the holidays for the duration of the default forecast period
     */
-  void preloadHolidays(void);
+  void preloadHolidays();
 
 public slots:
-  void slotFileInfoDialog(void);
+  void slotFileInfoDialog();
 
   /** */
-  void slotFileNew(void);
+  void slotFileNew();
 
   /** open a file and load it into the document*/
-  void slotFileOpen(void);
+  void slotFileOpen();
 
   /** opens a file from the recent files menu */
 
   void slotFileOpenRecent(const QUrl &url);
 
   /** open a SQL database */
-  void slotOpenDatabase(void);
+  void slotOpenDatabase();
 
   /**
     * saves the current document. If it has no name yet, the user
@@ -801,7 +795,7 @@ public slots:
     * @retval false save operation failed
     * @retval true save operation was successful
     */
-  bool slotFileSave(void);
+  bool slotFileSave();
 
   /**
     * ask the user for the filename and save the current document
@@ -809,7 +803,7 @@ public slots:
     * @retval false save operation failed
     * @retval true save operation was successful
     */
-  bool slotFileSaveAs(void);
+  bool slotFileSaveAs();
 
   /**
    * ask the user to select a database and save the current document
@@ -817,13 +811,13 @@ public slots:
    * @retval false save operation failed
    * @retval true save operation was successful
    */
-  bool slotSaveAsDatabase(void);
+  bool slotSaveAsDatabase();
 
   /** asks for saving if the file is modified, then closes the actual file and window */
-  void slotFileCloseWindow(void);
+  void slotFileCloseWindow();
 
   /** asks for saving if the file is modified, then closes the actual file */
-  void slotFileClose(void);
+  void slotFileClose();
 
   /**
     * closes all open windows by calling close() on each memberList item
@@ -831,34 +825,34 @@ public slots:
     * If queryClose() returns false because the user canceled the
     * saveModified() dialog, the closing breaks.
     */
-  void slotFileQuit(void);
+  void slotFileQuit();
 
-  void slotFileConsistencyCheck(void);
+  void slotFileConsistencyCheck();
 
   /**
     * fires up the price table editor
     */
-  void slotPriceDialog(void);
+  void slotPriceDialog();
 
   /**
     * fires up the currency table editor
     */
-  void slotCurrencyDialog(void);
+  void slotCurrencyDialog();
 
   /**
     * Toggles the hide reconciled transactions setting
     */
-  void slotHideReconciledTransactions(void);
+  void slotHideReconciledTransactions();
 
   /**
     * Toggles the hide unused categories setting
     */
-  void slotHideUnusedCategories(void);
+  void slotHideUnusedCategories();
 
   /**
     * Toggles the show all accounts setting
     */
-  void slotShowAllAccounts(void);
+  void slotShowAllAccounts();
 
 
   /**
@@ -886,12 +880,12 @@ public slots:
   void slotStatusProgressBar(int current, int total = 0);
 
   /** No descriptions */
-  void slotProcessExited(void);
+  void slotProcessExited();
 
   /**
     * Called to update stock and currency prices from the user menu
     */
-  void slotEquityPriceUpdate(void);
+  void slotEquityPriceUpdate();
 
   /**
     * Imports a KMM statement into the engine, triggering the appropriate
@@ -909,28 +903,28 @@ public slots:
   /**
     * This slot starts the reconciliation of the currently selected account
     */
-  void slotAccountReconcileStart(void);
+  void slotAccountReconcileStart();
 
   /**
     * This slot finishes a previously started reconciliation
     */
-  void slotAccountReconcileFinish(void);
+  void slotAccountReconcileFinish();
 
   /**
     * This slot postpones a previously started reconciliations
     */
-  void slotAccountReconcilePostpone(void);
+  void slotAccountReconcilePostpone();
 
   /**
     * This slot deletes the currently selected account if possible
     */
-  void slotAccountDelete(void);
+  void slotAccountDelete();
 
   /**
     * This slot opens the account editor to edit the currently
     * selected account if possible
     */
-  void slotAccountEdit(void);
+  void slotAccountEdit();
 
   /**
     * This slot opens the selected account in the ledger view
@@ -940,12 +934,12 @@ public slots:
   /**
     * This slot closes the currently selected account if possible
     */
-  void slotAccountClose(void);
+  void slotAccountClose();
 
   /**
     * This slot re-openes the currently selected account if possible
     */
-  void slotAccountReopen(void);
+  void slotAccountReopen();
 
   /**
     * This slot reparents account @p src to be a child of account @p dest
@@ -967,7 +961,7 @@ public slots:
     * This slot creates a transaction report for the selected account
     * and opens it in the reports view.
     */
-  void slotAccountTransactionReport(void);
+  void slotAccountTransactionReport();
 
   /**
     * This slot opens the account options menu at the current cursor
@@ -979,7 +973,7 @@ public slots:
     * This slot opens the schedule options menu at the current cursor
     * position.
     */
-  void slotShowScheduleContextMenu(void);
+  void slotShowScheduleContextMenu();
 
   /**
     * This slot opens the institution options menu at the current cursor
@@ -991,43 +985,43 @@ public slots:
     * This slot opens the investment options menu at the current cursor
     * position.
     */
-  void slotShowInvestmentContextMenu(void);
+  void slotShowInvestmentContextMenu();
 
   /**
     * This slot opens the payee options menu at the current cursor
     * position.
     */
-  void slotShowPayeeContextMenu(void);
+  void slotShowPayeeContextMenu();
 
   /**
     * This slot opens the tag options menu at the current cursor
     * position.
     */
-  void slotShowTagContextMenu(void);
+  void slotShowTagContextMenu();
 
   /**
     * This slot opens the budget options menu at the current cursor
     * position.
     */
-  void slotShowBudgetContextMenu(void);
+  void slotShowBudgetContextMenu();
 
   /**
     * This slot opens the transaction options menu at the current cursor
     * position.
     */
-  void slotShowTransactionContextMenu(void);
+  void slotShowTransactionContextMenu();
 
   /**
     * This slot opens the currency options menu at the current cursor
     * position.
     */
-  void slotShowCurrencyContextMenu(void);
+  void slotShowCurrencyContextMenu();
 
   /**
     * This slot opens the price options menu at the current cursor
     * position.
     */
-  void slotShowPriceContextMenu(void);
+  void slotShowPriceContextMenu();
 
   /**
    * Open onlineJob options menu at current cursor position.
@@ -1038,36 +1032,36 @@ public slots:
     * This slot collects information for a new scheduled transaction
     * and saves it in the engine. @sa slotScheduleNew(const MyMoneyTransaction&)
     */
-  void slotScheduleNew(void);
+  void slotScheduleNew();
 
   /**
     * This slot allows to edit information the currently selected schedule
     */
-  void slotScheduleEdit(void);
+  void slotScheduleEdit();
 
   /**
     * This slot allows to delete the currently selected schedule
     */
-  void slotScheduleDelete(void);
+  void slotScheduleDelete();
 
   /**
     * This slot allows to enter the next scheduled transaction of
     * the currently selected schedule
     */
-  void slotScheduleEnter(void);
+  void slotScheduleEnter();
 
   /**
    * This slot allows to skip the next scheduled transaction of
    * the currently selected schedule
    */
-  void slotScheduleSkip(void);
+  void slotScheduleSkip();
 
   /**
     * This slot fires up the KCalc application
     */
-  void slotToolsStartKCalc(void);
+  void slotToolsStartKCalc();
 
-  void slotResetSelections(void);
+  void slotResetSelections();
 
   void slotSelectAccount(const MyMoneyObject& account = MyMoneyAccount());
 
@@ -1089,18 +1083,18 @@ public slots:
 
   void slotSelectPrice(const MyMoneyPrice& price = MyMoneyPrice());
 
-  void slotTransactionMatch(void);
+  void slotTransactionMatch();
 
   /**
     * Brings up the new account wizard and saves the information.
     */
-  void slotAccountNew(void);
+  void slotAccountNew();
   void slotAccountNew(MyMoneyAccount&);
 
   /**
     * Brings up the new category editor and saves the information.
     */
-  void slotCategoryNew(void);
+  void slotCategoryNew();
 
   /**
     * Brings up the new category editor and saves the information.
@@ -1117,12 +1111,12 @@ public slots:
   /**
     * This method updates all KAction items to the current state.
     */
-  void slotUpdateActions(void);
+  void slotUpdateActions();
 
   /**
     * Brings up the input dialog and saves the information.
     */
-  void slotInstitutionNew(void);
+  void slotInstitutionNew();
 
   /**
     * Brings up the input dialog and saves the information. If
@@ -1148,7 +1142,7 @@ private:
   /**
     * Create the transaction move menu and setup necessary connections.
     */
-  void createTransactionMoveMenu(void);
+  void createTransactionMoveMenu();
 
   /**
     * This method sets the holidayRegion for use by the processing calendar.
@@ -1159,7 +1153,7 @@ private:
     * Load the status bar with the 'ready' message. This is hold in a single
     * place, so that is consistent with isReady().
     */
-  void ready(void);
+  void ready();
 
   /**
     * Check if the status bar contains the 'ready' message. The return
@@ -1168,18 +1162,18 @@ private:
     * @retval true application is idle
     * @retval false application is active working on a longer operation
     */
-  bool isReady(void);
+  bool isReady();
 
   /**
     * Delete a possibly existing transaction editor but make sure to remove
     * any reference to it so that we avoid using a half-dead object
     */
-  void deleteTransactionEditor(void);
+  void deleteTransactionEditor();
 
   /**
     * delete all selected transactions w/o further questions
     */
-  void doDeleteTransactions(void);
+  void doDeleteTransactions();
 
   /**
     * Re-implemented from IMyMoneyProcessingCalendar
@@ -1192,7 +1186,7 @@ private:
     *
     * @returns see return values of KMessageBox::warningYesNoCancel()
     */
-  int askSaveOnClose(void);
+  int askSaveOnClose();
 
   /**
     * Implement common task when deleting or merging payees
@@ -1234,7 +1228,7 @@ signals:
     * This signal is sent out, when the user presses Ctrl+A or activates
     * the Select all transactions action.
     */
-  void selectAllTransactions(void);
+  void selectAllTransactions();
 
   /**
     * This signal is emitted when a list of budgets has been selected by
@@ -1243,7 +1237,7 @@ signals:
     * by plugins to get information about changes.
     */
   void budgetSelected(const QList<MyMoneyBudget>& budget);
-  void budgetRename(void);
+  void budgetRename();
 
   /**
     * This signal is emitted when a new account has been selected by
@@ -1285,22 +1279,22 @@ signals:
     */
   void priceSelected(const MyMoneyPrice& price);
 
-  void payeeRename(void);
+  void payeeRename();
   void payeeCreated(const QString& id);
 
-  void tagRename(void);
+  void tagRename();
   void tagCreated(const QString& id);
 
-  void currencyRename(void);
+  void currencyRename();
   void currencyCreated(const QString& id);
 
-  void priceEdit(void);
-  void priceNew(void);
-  void priceDelete(void);
-  void priceOnlineUpdate(void);
+  void priceEdit();
+  void priceNew();
+  void priceDelete();
+  void priceOnlineUpdate();
 
   void startMatchTransaction(const MyMoneyTransaction& t);
-  void cancelMatchTransaction(void);
+  void cancelMatchTransaction();
 
   /**
     * This signal is emitted when an account has been successfully reconciled

@@ -220,7 +220,7 @@ void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
   m_widget->textPassword->setEnabled(dbDriver->isPasswordSupported());
 }
 
-void KSelectDatabaseDlg::slotHelp(void)
+void KSelectDatabaseDlg::slotHelp()
 {
   KHelpClient::invokeHelp("details.database.selectdatabase");
 }

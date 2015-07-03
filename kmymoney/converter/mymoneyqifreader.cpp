@@ -78,7 +78,7 @@ public:
   /**
    * finalize the current statement and add it to the statement list
    */
-  void finishStatement(void);
+  void finishStatement();
 
   bool isTransfer(QString& name, const QString& leftDelim, const QString& rightDelim);
 
@@ -125,7 +125,7 @@ void MyMoneyQifReader::Private::fixMultiLineMemo(QString& memo) const
   memo.replace("\\n", "\n");
 }
 
-void MyMoneyQifReader::Private::finishStatement(void)
+void MyMoneyQifReader::Private::finishStatement()
 {
   // in case we have collected any data in the statement, we keep it
   if ((st.m_listTransactions.count() + st.m_listPrices.count() + st.m_listSecurities.count()) > 0) {
@@ -278,7 +278,7 @@ void MyMoneyQifReader::setProfile(const QString& profile)
   m_qifProfile.loadProfile("Profile-" + profile);
 }
 
-void MyMoneyQifReader::slotSendDataToFilter(void)
+void MyMoneyQifReader::slotSendDataToFilter()
 {
   long len;
 
@@ -331,7 +331,7 @@ void MyMoneyQifReader::parseReceivedData(const QByteArray& data)
   }
 }
 
-void MyMoneyQifReader::slotImportFinished(void)
+void MyMoneyQifReader::slotImportFinished()
 {
   // check if the last EOL char was missing and add the trailing line
   if (!m_lineBuffer.isEmpty()) {
@@ -341,7 +341,7 @@ void MyMoneyQifReader::slotImportFinished(void)
   QTimer::singleShot(0, this, SLOT(slotProcessData()));
 }
 
-void MyMoneyQifReader::slotProcessData(void)
+void MyMoneyQifReader::slotProcessData()
 {
   signalProgress(-1, -1);
 
@@ -397,7 +397,7 @@ void MyMoneyQifReader::slotProcessData(void)
   emit importFinished();
 }
 
-bool MyMoneyQifReader::startImport(void)
+bool MyMoneyQifReader::startImport()
 {
   bool rc = false;
   d->st = MyMoneyStatement();
@@ -470,7 +470,7 @@ bool MyMoneyQifReader::startImport(void)
   return rc;
 }
 
-bool MyMoneyQifReader::finishImport(void)
+bool MyMoneyQifReader::finishImport()
 {
   bool  rc = false;
 
@@ -618,7 +618,7 @@ void MyMoneyQifReader::processQifSpecial(const QString& _line)
   }
 }
 
-void MyMoneyQifReader::processQifEntry(void)
+void MyMoneyQifReader::processQifEntry()
 {
   // This method processes a 'QIF Entry' which is everything between two caret
   // signs
@@ -850,12 +850,12 @@ void MyMoneyQifReader::processMSAccountEntry(const MyMoneyAccount::accountTypeE 
 }
 #endif
 
-void MyMoneyQifReader::processPayeeEntry(void)
+void MyMoneyQifReader::processPayeeEntry()
 {
   // TODO
 }
 
-void MyMoneyQifReader::processCategoryEntry(void)
+void MyMoneyQifReader::processCategoryEntry()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyAccount account = MyMoneyAccount();
@@ -983,7 +983,7 @@ void MyMoneyQifReader::createOpeningBalance(MyMoneyAccount::_accountTypeE accTyp
   }
 }
 
-void MyMoneyQifReader::processTransactionEntry(void)
+void MyMoneyQifReader::processTransactionEntry()
 {
   ++m_transactionsProcessed;
   // in case the user selected to skip the account or the account
@@ -1231,7 +1231,7 @@ void MyMoneyQifReader::processTransactionEntry(void)
   d->st.m_listTransactions += tr;
 }
 
-void MyMoneyQifReader::processInvestmentTransactionEntry(void)
+void MyMoneyQifReader::processInvestmentTransactionEntry()
 {
 //   qDebug() << "Investment Transaction:" << m_qifEntry.count() << " lines";
   /*
@@ -1468,8 +1468,6 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
 
     // For historic reasons (coming from the OFX importer) the statement
     // reader expects the dividend with a reverse sign. So we just do that.
-    /*  not needed anymore */
-    //  tr.m_amount = -(amount - tr.m_fees);
     tr.m_amount -= tr.m_fees;
 
     // We need an extra split which will be the zero-amount investment split
@@ -1492,8 +1490,6 @@ void MyMoneyQifReader::processInvestmentTransactionEntry(void)
 
     if (action == "intinc") {
       MyMoneyMoney price = m_qifProfile.value('I', extractLine('I'));
-      /*  not needed anymore */
-//      tr.m_amount = -(amount - tr.m_fees);
       tr.m_amount -= tr.m_fees;
       if ((!quantity.isZero()) && (!price.isZero()))
         tr.m_amount = -(quantity * price);
@@ -2197,7 +2193,7 @@ void MyMoneyQifReader::signalProgress(int current, int total, const QString& msg
     (*m_progressCallback)(current, total, msg);
 }
 
-void MyMoneyQifReader::processPriceEntry(void)
+void MyMoneyQifReader::processPriceEntry()
 {
   /*
     !Type:Prices
@@ -2244,7 +2240,7 @@ void MyMoneyQifReader::processPriceEntry(void)
   }
 }
 
-void MyMoneyQifReader::processSecurityEntry(void)
+void MyMoneyQifReader::processSecurityEntry()
 {
   /*
   !Type:Security

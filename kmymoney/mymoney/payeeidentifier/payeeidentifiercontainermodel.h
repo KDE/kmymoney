@@ -28,7 +28,7 @@
  *
  * Changes the user does have initernal effect only.
  */
-class payeeIdentifierModel : public QAbstractListModel
+class payeeIdentifierContainerModel : public QAbstractListModel
 {
   Q_OBJECT
 
@@ -38,7 +38,7 @@ public:
     payeeIdentifier = Qt::UserRole + 1 /**< actual payeeIdentifier */
   };
 
-  payeeIdentifierModel(QObject* parent = 0);
+  payeeIdentifierContainerModel(QObject* parent = 0);
 
   virtual QVariant data(const QModelIndex& index, int role) const;
 

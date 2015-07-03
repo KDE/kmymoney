@@ -130,7 +130,7 @@ int KNewLoanWizard::nextId() const
   return -1;
 }
 
-void KNewLoanWizard::resetCalculator(void)
+void KNewLoanWizard::resetCalculator()
 {
   m_loanAmountPage->resetCalculator();
   m_interestPage->resetCalculator();
@@ -141,7 +141,7 @@ void KNewLoanWizard::resetCalculator(void)
   setField("additionalCost", MyMoneyMoney().formatMoney(m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()))));
 }
 
-void KNewLoanWizard::updateLoanAmount(void)
+void KNewLoanWizard::updateLoanAmount()
 {
   QString txt;
   //FIXME: port
@@ -157,7 +157,7 @@ void KNewLoanWizard::updateLoanAmount(void)
   setField("loanAmount5", txt);
 }
 
-void KNewLoanWizard::updateInterestRate(void)
+void KNewLoanWizard::updateInterestRate()
 {
   QString txt;
   //FIXME: port
@@ -173,7 +173,7 @@ void KNewLoanWizard::updateInterestRate(void)
   setField("interestRate5", txt);
 }
 
-void KNewLoanWizard::updateDuration(void)
+void KNewLoanWizard::updateDuration()
 {
   QString txt;
   //FIXME: port
@@ -190,7 +190,7 @@ void KNewLoanWizard::updateDuration(void)
   setField("duration5", txt);
 }
 
-void KNewLoanWizard::updatePayment(void)
+void KNewLoanWizard::updatePayment()
 {
   QString txt;
   //FIXME: port
@@ -207,7 +207,7 @@ void KNewLoanWizard::updatePayment(void)
   setField("basePayment", txt);
 }
 
-void KNewLoanWizard::updateFinalPayment(void)
+void KNewLoanWizard::updateFinalPayment()
 {
   QString txt;
   //FIXME: port
@@ -223,7 +223,7 @@ void KNewLoanWizard::updateFinalPayment(void)
   setField("balloon5", txt);
 }
 
-void KNewLoanWizard::updateLoanInfo(void)
+void KNewLoanWizard::updateLoanInfo()
 {
   updateLoanAmount();
   updateInterestRate();
@@ -348,7 +348,7 @@ bool KNewLoanWizard::validateCurrentPage()
     return false;
 }
 
-int KNewLoanWizard::calculateLoan(void)
+int KNewLoanWizard::calculateLoan()
 {
   MyMoneyFinancialCalculator calc;
   double val;
@@ -519,7 +519,7 @@ int KNewLoanWizard::calculateLoan(void)
   return 1;
 }
 
-void KNewLoanWizard::loadAccountList(void)
+void KNewLoanWizard::loadAccountList()
 {
   AccountSet interestSet, assetSet;
 
@@ -617,7 +617,7 @@ MyMoneyTransaction KNewLoanWizard::transaction() const
   return t;
 }
 
-MyMoneySchedule KNewLoanWizard::schedule(void) const
+MyMoneySchedule KNewLoanWizard::schedule() const
 {
   MyMoneySchedule sched(field("nameEdit").toString(),
                         MyMoneySchedule::TYPE_LOANPAYMENT,
@@ -635,7 +635,7 @@ MyMoneySchedule KNewLoanWizard::schedule(void) const
   return sched;
 }
 
-void KNewLoanWizard::slotReloadEditWidgets(void)
+void KNewLoanWizard::slotReloadEditWidgets()
 {
   // load the various account widgets
   loadAccountList();
@@ -651,7 +651,7 @@ void KNewLoanWizard::slotReloadEditWidgets(void)
   }
 }
 
-QString KNewLoanWizard::initialPaymentAccount(void) const
+QString KNewLoanWizard::initialPaymentAccount() const
 {
   if (field("dontCreatePayoutCheckBox").toBool()) {
     return QString();
@@ -659,7 +659,7 @@ QString KNewLoanWizard::initialPaymentAccount(void) const
   return field("assetAccountEdit").toStringList().first();
 }
 
-QDate KNewLoanWizard::initialPaymentDate(void) const
+QDate KNewLoanWizard::initialPaymentDate() const
 {
   if (field("dontCreatePayoutCheckBox").toBool()) {
     return QDate();

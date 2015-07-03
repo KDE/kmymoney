@@ -57,7 +57,7 @@ class GroupIterator
 {
 public:
   GroupIterator(const QString& _group, const QString& _subtotal, unsigned _depth) : m_depth(_depth), m_groupField(_group), m_subtotalField(_subtotal) {}
-  GroupIterator(void) {}
+  GroupIterator() {}
   void update(const ListTable::TableRow& _row) {
     m_previousGroup = m_currentGroup;
     m_currentGroup = _row[m_groupField];
@@ -68,35 +68,35 @@ public:
     m_currentSubtotal += MyMoneyMoney(_row[m_subtotalField]);
   }
 
-  bool isNewHeader(void) const {
+  bool isNewHeader() const {
     return (m_currentGroup != m_previousGroup);
   }
-  bool isSubtotal(void) const {
+  bool isSubtotal() const {
     return (m_currentGroup != m_previousGroup) && (!m_previousGroup.isEmpty());
   }
-  const MyMoneyMoney& subtotal(void) const {
+  const MyMoneyMoney& subtotal() const {
     return m_previousSubtotal;
   }
-  const MyMoneyMoney& currenttotal(void) const {
+  const MyMoneyMoney& currenttotal() const {
     return m_currentSubtotal;
   }
-  unsigned depth(void) const {
+  unsigned depth() const {
     return m_depth;
   }
-  const QString& name(void) const {
+  const QString& name() const {
     return m_currentGroup;
   }
-  const QString& oldName(void) const {
+  const QString& oldName() const {
     return m_previousGroup;
   }
-  const QString& groupField(void) const {
+  const QString& groupField() const {
     return m_groupField;
   }
-  const QString& subtotalField(void) const {
+  const QString& subtotalField() const {
     return m_subtotalField;
   }
   // ***DV*** HACK make the currentGroup test different but look the same
-  void force(void) {
+  void force() {
     m_currentGroup += ' ';
   }
 private:
@@ -604,14 +604,14 @@ void ListTable::render(QString& result, QString& csv) const
   result += "</table>\n";
 }
 
-QString ListTable::renderBody(void) const
+QString ListTable::renderBody() const
 {
   QString html, csv;
   render(html, csv);
   return html;
 }
 
-QString ListTable::renderCSV(void) const
+QString ListTable::renderCSV() const
 {
   QString html, csv;
   render(html, csv);

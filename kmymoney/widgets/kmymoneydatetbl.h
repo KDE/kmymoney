@@ -108,7 +108,7 @@ public:
   virtual const QDate& getDate() const;
 
   virtual void setType(calendarType type);
-  virtual calendarType type(void) const {
+  virtual calendarType type() const {
     return m_type;
   }
 

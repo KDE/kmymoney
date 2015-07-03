@@ -98,19 +98,19 @@ void KChooseImportExportDlg::slotTypeActivated(const QString& text)
   }
 }
 
-QString KChooseImportExportDlg::importExportType(void)
+QString KChooseImportExportDlg::importExportType()
 {
   return d->ui.typeCombo->currentText();
 }
 
-void KChooseImportExportDlg::readConfig(void)
+void KChooseImportExportDlg::readConfig()
 {
   KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");
   m_lastType = grp.readEntry("KChooseImportExportDlg_LastType");
 }
 
-void KChooseImportExportDlg::writeConfig(void)
+void KChooseImportExportDlg::writeConfig()
 {
   KSharedConfigPtr config = KSharedConfig::openConfig();
   KConfigGroup grp = config->group("Last Use Settings");

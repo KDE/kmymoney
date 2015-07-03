@@ -38,15 +38,15 @@ public:
 
 protected slots:
   // this is the export function called when the user selects the interface menu
-  void slotFirstExport(void);
+  void slotFirstExport();
   // this is the export method called automatically
-  void slotExport(void);
+  void slotExport();
   // the plugin loader plugs in a plugin
   void slotPlug(KPluginInfo*);
   // the plugin loader unplugs a plugin
   void slotUnplug(KPluginInfo*);
   // the plugin's configurations has changed
-  void slotUpdateConfig(void);
+  void slotUpdateConfig();
 
 private:
   struct Private;

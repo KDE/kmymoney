@@ -85,28 +85,28 @@ public:
     */
   MyMoneyInstitution(const QDomElement& el);
 
-  const QString& manager(void) const {
+  const QString& manager() const {
     return m_manager;
   }
-  const QString& name(void) const {
+  const QString& name() const {
     return m_name;
   }
-  const QString& postcode(void) const {
+  const QString& postcode() const {
     return m_postcode;
   }
-  const QString& street(void) const {
+  const QString& street() const {
     return m_street;
   }
-  const QString& telephone(void) const {
+  const QString& telephone() const {
     return m_telephone;
   }
-  const QString& town(void) const {
+  const QString& town() const {
     return m_town;
   }
-  const QString& city(void) const {
+  const QString& city() const {
     return town();
   }
-  const QString& sortcode(void) const {
+  const QString& sortcode() const {
     return m_sortcode;
   }
 
@@ -158,7 +158,7 @@ public:
     * this institution
     * return QStringList of account ids
     */
-  const QStringList& accountList(void) const {
+  const QStringList& accountList() const {
     return m_accountList;
   }
 
@@ -167,7 +167,7 @@ public:
     * this institution
     * @return number of accounts
     */
-  unsigned int accountCount(void) const {
+  unsigned int accountCount() const {
     return m_accountList.count();
   }
 

@@ -67,7 +67,7 @@ QString KTagReassignDlg::show(const QList<MyMoneyTag>& tagslist)
 }
 
 
-void KTagReassignDlg::accept(void)
+void KTagReassignDlg::accept()
 {
   // force update of tagCombo
   buttonOk->setFocus();

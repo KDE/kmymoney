@@ -51,7 +51,7 @@ AdditionalFeesWizardPage::AdditionalFeesWizardPage(QWidget *parent)
   connect(m_additionalFeeButton, SIGNAL(clicked()), this, SLOT(slotAdditionalFees()));
 }
 
-void AdditionalFeesWizardPage::slotAdditionalFees(void)
+void AdditionalFeesWizardPage::slotAdditionalFees()
 {
   // KMessageBox::information(0, QString("Not yet implemented ... if you want to help, contact kmymoney-devel@kde.org"), QString("Development notice"));
   MyMoneyAccount account("Phony-ID", MyMoneyAccount());

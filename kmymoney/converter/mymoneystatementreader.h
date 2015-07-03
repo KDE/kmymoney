@@ -86,7 +86,7 @@ public:
    * during the import of the statement. Only returns useful result
    * after import() has been called.
    */
-  bool anyTransactionAdded(void) const;
+  bool anyTransactionAdded() const;
 
 private:
   /**

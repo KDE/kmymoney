@@ -43,23 +43,23 @@ public:
   SelectedTransaction(const MyMoneyTransaction& t, const MyMoneySplit& s, const QString& scheduleId = QString()) :
       m_transaction(t), m_split(s), m_scheduleId(scheduleId) {}
 
-  MyMoneyTransaction& transaction(void) {
+  MyMoneyTransaction& transaction() {
     return m_transaction;
   }
-  const MyMoneyTransaction& transaction(void) const {
+  const MyMoneyTransaction& transaction() const {
     return m_transaction;
   }
-  MyMoneySplit& split(void) {
+  MyMoneySplit& split() {
     return m_split;
   }
-  const MyMoneySplit& split(void) const {
+  const MyMoneySplit& split() const {
     return m_split;
   }
 
-  bool isScheduled(void) const {
+  bool isScheduled() const {
     return !m_scheduleId.isEmpty();
   }
-  const QString& scheduleId(void) const {
+  const QString& scheduleId() const {
     return m_scheduleId;
   }
 

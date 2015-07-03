@@ -1156,7 +1156,7 @@ void AccountsFilterProxyModel::removeAccountType(MyMoneyAccount::accountTypeE ty
 /**
   * Use this to reset the filter.
   */
-void AccountsFilterProxyModel::clear(void)
+void AccountsFilterProxyModel::clear()
 {
   d->m_typeList.clear();
   invalidate();
@@ -1228,7 +1228,7 @@ void AccountsFilterProxyModel::setHideClosedAccounts(bool hideClosedAccounts)
 /**
   * Check if closed accounts are hidden or not.
   */
-bool AccountsFilterProxyModel::hideClosedAccounts(void) const
+bool AccountsFilterProxyModel::hideClosedAccounts() const
 {
   return d->m_hideClosedAccounts;
 }
@@ -1248,7 +1248,7 @@ void AccountsFilterProxyModel::setHideEquityAccounts(bool hideEquityAccounts)
 /**
   * Check if equity and investment accounts are hidden or not.
   */
-bool AccountsFilterProxyModel::hideEquityAccounts(void) const
+bool AccountsFilterProxyModel::hideEquityAccounts() const
 {
   return d->m_hideEquityAccounts;
 }
@@ -1268,7 +1268,7 @@ void AccountsFilterProxyModel::setHideUnusedIncomeExpenseAccounts(bool hideUnuse
 /**
   * Check if empty categories are hidden or not.
   */
-bool AccountsFilterProxyModel::hideUnusedIncomeExpenseAccounts(void) const
+bool AccountsFilterProxyModel::hideUnusedIncomeExpenseAccounts() const
 {
   return d->m_hideUnusedIncomeExpenseAccounts;
 }

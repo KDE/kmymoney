@@ -107,35 +107,35 @@ public:
   ~MyMoneyPayee();
 
   // Simple get operations
-  QString name(void) const            {
+  QString name() const            {
     return m_name;
   }
-  QString address(void) const         {
+  QString address() const         {
     return m_address;
   }
-  QString city(void) const            {
+  QString city() const            {
     return m_city;
   }
-  QString state(void) const           {
+  QString state() const           {
     return m_state;
   }
-  QString postcode(void) const        {
+  QString postcode() const        {
     return m_postcode;
   }
-  QString telephone(void) const       {
+  QString telephone() const       {
     return m_telephone;
   }
-  QString email(void) const           {
+  QString email() const           {
     return m_email;
   }
-  QString notes(void) const           {
+  QString notes() const           {
     return m_notes;
   }
 
-  const QString id(void) const        {
+  const QString id() const        {
     return m_id;
   };
-  const QString reference(void) const {
+  const QString reference() const {
     return m_reference;
   };
 

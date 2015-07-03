@@ -71,16 +71,16 @@ public:
 
 public slots:
   virtual void updateSearch(const QString& s = QString());
-  virtual void reset(void);
+  virtual void reset();
 
 protected slots:
   void queueSearch(const QString& search);
-  void activateSearch(void);
+  void activateSearch();
   void slotStatusChanged(int);
 
 private slots:
   void itemAdded(RegisterItem* item) const;
-  void registerDestroyed(void);
+  void registerDestroyed();
 
 private:
   void init(Register* reg);
@@ -129,7 +129,7 @@ protected slots:
     * after construction is complete.  This makes it suitable for overriding in
     * subclasses.
     */
-  virtual void createWidgets(void);
+  virtual void createWidgets();
 
 private:
   class RegisterSearchLineWidgetPrivate;

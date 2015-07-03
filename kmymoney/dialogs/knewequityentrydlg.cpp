@@ -88,7 +88,7 @@ void KNewEquityEntryDlg::setName(const QString& str)
   edtEquityName->setText(m_strName);
 }
 
-void KNewEquityEntryDlg::slotDataChanged(void)
+void KNewEquityEntryDlg::slotDataChanged()
 {
   bool okEnabled = true;
 

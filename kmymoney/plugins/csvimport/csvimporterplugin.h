@@ -47,10 +47,10 @@ public slots:
   bool slotGetStatement(MyMoneyStatement& s);
 
 protected slots:
-  void slotImportFile(void);
+  void slotImportFile();
 
 protected:
-  void createActions(void);
+  void createActions();
   bool importStatement(const MyMoneyStatement& s);
   void processStatement(const MyMoneyStatement& s);
 };

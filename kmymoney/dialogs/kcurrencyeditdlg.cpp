@@ -108,7 +108,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
   QTimer::singleShot(10, this, SLOT(timerDone()));
 }
 
-void KCurrencyEditDlg::timerDone(void)
+void KCurrencyEditDlg::timerDone()
 {
   slotLoadCurrencies();
 
@@ -134,7 +134,7 @@ KCurrencyEditDlg::~KCurrencyEditDlg()
 {
 }
 
-void KCurrencyEditDlg::slotLoadCurrencies(void)
+void KCurrencyEditDlg::slotLoadCurrencies()
 {
   disconnect(m_currencyList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(slotSelectCurrency(QTreeWidgetItem*)));
   disconnect(m_currencyList, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateCurrency(QTreeWidgetItem*)));
@@ -258,7 +258,7 @@ void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
   }
 }
 
-void KCurrencyEditDlg::slotStartRename(void)
+void KCurrencyEditDlg::slotStartRename()
 {
   QTreeWidgetItemIterator it_l(m_currencyList, QTreeWidgetItemIterator::Selected);
   QTreeWidgetItem* it_v;
@@ -274,7 +274,7 @@ void KCurrencyEditDlg::slotOpenContextMenu(const QPoint& p)
     emit openContextMenu(item->data(0, Qt::UserRole).value<MyMoneySecurity>());
 }
 
-void KCurrencyEditDlg::slotSelectBaseCurrency(void)
+void KCurrencyEditDlg::slotSelectBaseCurrency()
 {
   if (!m_currency.id().isEmpty()) {
     QTreeWidgetItem* p = m_currencyList->currentItem();

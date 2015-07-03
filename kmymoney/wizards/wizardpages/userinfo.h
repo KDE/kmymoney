@@ -43,7 +43,7 @@ class UserInfo : public UserInfoDecl
   Q_OBJECT
 public:
   UserInfo(QWidget* parent = 0);
-  MyMoneyPayee user(void) const;
+  MyMoneyPayee user() const;
 
 private:
 };

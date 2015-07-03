@@ -103,19 +103,19 @@ public:
   public:
     KReportTab(QTabWidget* parent, const MyMoneyReport& report);
     ~KReportTab();
-    const MyMoneyReport& report(void) const {
+    const MyMoneyReport& report() const {
       return m_report;
     }
-    void print(void);
-    void toggleChart(void);
-    void copyToClipboard(void);
+    void print();
+    void toggleChart();
+    void copyToClipboard();
     void saveAs(const QString& filename, bool includeCSS = false);
-    void updateReport(void);
+    void updateReport();
     QString createTable(const QString& links = QString());
-    const kMyMoneyReportControlDecl* control(void) const {
+    const kMyMoneyReportControlDecl* control() const {
       return m_control;
     }
-    bool isReadyToDelete(void) const {
+    bool isReadyToDelete() const {
       return m_deleteMe;
     }
     void setReadyToDelete(bool f) {
@@ -125,8 +125,8 @@ public:
       m_report = report;
     }
     void showEvent(QShowEvent * event);
-    void loadTab(void);
-    KParts::BrowserExtension* browserExtenstion(void) const {
+    void loadTab();
+    KParts::BrowserExtension* browserExtenstion() const {
       return m_part->browserExtension();
     }
   };
@@ -145,12 +145,12 @@ public:
     QString m_name;     ///< the title of the group in non-translated form
     QString m_title;    ///< the title of the group in i18n-ed form
   public:
-    ReportGroup(void) {}
+    ReportGroup() {}
     ReportGroup(const QString& name, const QString& title): m_name(name), m_title(title) {}
-    const QString& name(void) const {
+    const QString& name() const {
       return m_name;
     }
-    const QString& title(void) const {
+    const QString& title() const {
       return m_title;
     }
   };
@@ -205,33 +205,33 @@ public:
 
 protected:
   void addReportTab(const MyMoneyReport&);
-  void loadView(void);
+  void loadView();
   static void defaultReports(QList<ReportGroup>&);
-  bool columnsAlreadyAdjusted(void);
+  bool columnsAlreadyAdjusted();
   void setColumnsAlreadyAdjusted(bool adjusted);
 
 public slots:
   void slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments& args, const KParts::BrowserArguments& browArgs);
 
-  void slotLoadView(void);
-  void slotPrintView(void);
-  void slotCopyView(void);
-  void slotSaveView(void);
-  void slotConfigure(void);
-  void slotDuplicate(void);
-  void slotToggleChart(void);
+  void slotLoadView();
+  void slotPrintView();
+  void slotCopyView();
+  void slotSaveView();
+  void slotConfigure();
+  void slotDuplicate();
+  void slotToggleChart();
   void slotItemDoubleClicked(QTreeWidgetItem* item, int);
   void slotOpenReport(const QString&);
   void slotOpenReport(const MyMoneyReport&);
-  void slotCloseCurrent(void);
+  void slotCloseCurrent();
   void slotClose(int index);
-  void slotCloseAll(void);
-  void slotDelete(void);
+  void slotCloseAll();
+  void slotDelete();
   void slotListContextMenu(const QPoint &);
-  void slotOpenFromList(void);
-  void slotConfigureFromList(void);
-  void slotNewFromList(void);
-  void slotDeleteFromList(void);
+  void slotOpenFromList();
+  void slotConfigureFromList();
+  void slotNewFromList();
+  void slotDeleteFromList();
 
 protected slots:
   void slotSaveFilterChanged(const QString&);

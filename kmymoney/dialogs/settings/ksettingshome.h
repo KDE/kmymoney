@@ -46,11 +46,11 @@ public:
   ~KSettingsHome();
 
 protected slots:
-  void slotLoadItems(void);
-  void slotUpdateItemList(void);
+  void slotLoadItems();
+  void slotUpdateItemList();
   void slotSelectHomePageItem();
-  void slotMoveUp(void);
-  void slotMoveDown(void);
+  void slotMoveUp();
+  void slotMoveDown();
 
 private:
   bool m_noNeedToUpdateList;

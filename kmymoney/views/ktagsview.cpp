@@ -293,7 +293,7 @@ void KTagsView::slotSelectTag(QListWidgetItem* cur, QListWidgetItem* prev)
   m_allowEditing = false;
 }
 
-void KTagsView::slotSelectTag(void)
+void KTagsView::slotSelectTag()
 {
   // check if the content of a currently selected tag was modified
   // and ask to store the data
@@ -362,7 +362,7 @@ void KTagsView::slotSelectTag(void)
   m_allowEditing = true;
 }
 
-void KTagsView::clearItemData(void)
+void KTagsView::clearItemData()
 {
   m_colorbutton->setColor(QColor());
   m_closed->setChecked(false);
@@ -370,7 +370,7 @@ void KTagsView::clearItemData(void)
   showTransactions();
 }
 
-void KTagsView::showTransactions(void)
+void KTagsView::showTransactions()
 {
   MyMoneyMoney balance;
   MyMoneyFile *file = MyMoneyFile::instance();
@@ -450,7 +450,7 @@ void KTagsView::showTransactions(void)
                                balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
 }
 
-void KTagsView::slotTagDataChanged(void)
+void KTagsView::slotTagDataChanged()
 {
   bool rc = false;
 
@@ -464,7 +464,7 @@ void KTagsView::slotTagDataChanged(void)
   m_updateButton->setEnabled(rc);
 }
 
-void KTagsView::slotUpdateTag(void)
+void KTagsView::slotUpdateTag()
 {
   if (m_updateButton->isEnabled()) {
     MyMoneyFileTransaction ft;
@@ -502,7 +502,7 @@ void KTagsView::showEvent(QShowEvent* event)
   emit selectObjects(list);
 }
 
-void KTagsView::slotLoadTags(void)
+void KTagsView::slotLoadTags()
 {
   if (isVisible()) {
     if (m_inSelection)
@@ -514,7 +514,7 @@ void KTagsView::slotLoadTags(void)
   }
 }
 
-void KTagsView::loadTags(void)
+void KTagsView::loadTags()
 {
   if (m_inSelection)
     return;
@@ -576,7 +576,7 @@ void KTagsView::loadTags(void)
   m_allowEditing = true;
 }
 
-void KTagsView::slotSelectTransaction(void)
+void KTagsView::slotSelectTransaction()
 {
   QList<KMyMoneyRegister::RegisterItem*> list = m_register->selectedItems();
   if (!list.isEmpty()) {
@@ -650,12 +650,12 @@ void KTagsView::slotOpenContextMenu(const QPoint& /*ta*/)
   }
 }
 
-void KTagsView::slotTagNew(void)
+void KTagsView::slotTagNew()
 {
   kmymoney->action("tag_new")->trigger();
 }
 
-void KTagsView::slotHelp(void)
+void KTagsView::slotHelp()
 {
   KHelpClient::invokeHelp("details.tags.attributes");
   //FIXME-ALEX update help file

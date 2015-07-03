@@ -62,7 +62,7 @@ public:
   explicit KMyMoneySecuritySelector(QWidget *parent = 0);
   virtual ~KMyMoneySecuritySelector();
 
-  const MyMoneySecurity& security(void) const;
+  const MyMoneySecurity& security() const;
   void setSecurity(const MyMoneySecurity& currency);
   void selectDisplayItem(KMyMoneySecuritySelector::displayItemE item);
   void setDisplayOnly(const bool disp);
@@ -72,7 +72,7 @@ public:
   void update(const QString& id);
 
 public slots:
-  void slotSetInitialSecurity(void);
+  void slotSetInitialSecurity();
 
 private:
   MyMoneySecurity m_currency;

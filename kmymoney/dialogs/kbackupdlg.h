@@ -40,8 +40,8 @@ class KBackupDlg : public kbackupdlgdecl
 {
   Q_OBJECT
 private:
-  void readConfig(void);
-  void writeConfig(void);
+  void readConfig();
+  void writeConfig();
 
 protected slots:
   void chooseButtonClicked();

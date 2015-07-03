@@ -106,7 +106,7 @@ KMyMoneyCategory::~KMyMoneyCategory()
   delete d;
 }
 
-QPushButton* KMyMoneyCategory::splitButton(void) const
+QPushButton* KMyMoneyCategory::splitButton() const
 {
   return d->splitButton;
 }
@@ -131,7 +131,7 @@ void KMyMoneyCategory::reparent(QWidget *parent, Qt::WFlags w, const QPoint&, bo
   }
 }
 
-kMyMoneyAccountSelector* KMyMoneyCategory::selector(void) const
+kMyMoneyAccountSelector* KMyMoneyCategory::selector() const
 {
   return dynamic_cast<kMyMoneyAccountSelector*>(KMyMoneyCombo::selector());
 }
@@ -180,14 +180,14 @@ void KMyMoneyCategory::focusInEvent(QFocusEvent *ev)
   QTimer::singleShot(0, this, SIGNAL(focusIn()));
 }
 
-void KMyMoneyCategory::setSplitTransaction(void)
+void KMyMoneyCategory::setSplitTransaction()
 {
   d->isSplit = true;
   setEditText(i18nc("Split transaction (category replacement)", "Split transaction"));
   setSuppressObjectCreation(true);
 }
 
-bool KMyMoneyCategory::isSplitTransaction(void) const
+bool KMyMoneyCategory::isSplitTransaction() const
 {
   return d->isSplit;
 }

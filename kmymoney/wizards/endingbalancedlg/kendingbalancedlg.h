@@ -66,14 +66,14 @@ public:
   explicit KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent = 0);
   ~KEndingBalanceDlg();
 
-  const MyMoneyMoney endingBalance(void) const;
-  const MyMoneyMoney previousBalance(void) const;
-  const QDate statementDate(void) const {
+  const MyMoneyMoney endingBalance() const;
+  const MyMoneyMoney previousBalance() const;
+  const QDate statementDate() const {
     return field("statementDate").toDate();
   };
 
-  const MyMoneyTransaction interestTransaction(void);
-  const MyMoneyTransaction chargeTransaction(void);
+  const MyMoneyTransaction interestTransaction();
+  const MyMoneyTransaction chargeTransaction();
 
   /**
    * This method returns the id of the next page in the wizard.
@@ -89,12 +89,12 @@ protected:
   void createCategory(const QString& txt, QString& id, const MyMoneyAccount& parent);
 
 protected slots:
-  void slotReloadEditWidgets(void);
-  void help(void);
+  void slotReloadEditWidgets();
+  void help();
   void slotCreateInterestCategory(const QString& txt, QString& id);
   void slotCreateChargesCategory(const QString& txt, QString& id);
-  void accept(void);
-  void slotUpdateBalances(void);
+  void accept();
+  void slotUpdateBalances();
 
 signals:
   /**

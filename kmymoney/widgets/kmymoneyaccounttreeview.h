@@ -49,12 +49,12 @@ public slots:
   /**
     * Overridden for internal reasons. @sa collapsedAll().
     */
-  void collapseAll(void);
+  void collapseAll();
 
   /**
     * Overridden for internal reasons. @sa expandedAll().
     */
-  void expandAll(void);
+  void expandAll();
 
   void setConfigGroupName(const QString& group);
 
@@ -96,8 +96,8 @@ signals:
     * base functionality of QTreeView::collapseAll()/QTreeView::expandAll()
     * has been finished.
     */
-  void collapsedAll(void);
-  void expandedAll(void);
+  void collapsedAll();
+  void expandedAll();
 
 private:
   void openIndex(const QModelIndex &index);
@@ -121,8 +121,8 @@ public:
   virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
 public slots:
-  void collapseAll(void);
-  void expandAll(void);
+  void collapseAll();
+  void expandAll();
 
 protected:
   bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;

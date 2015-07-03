@@ -109,7 +109,7 @@ KCategoriesView::~KCategoriesView()
 {
 }
 
-void KCategoriesView::slotExpandCollapse(void)
+void KCategoriesView::slotExpandCollapse()
 {
   if (sender()) {
     KMyMoneyGlobalSettings::setShowAccountsExpanded(sender() == m_expandButton);
@@ -129,7 +129,7 @@ void KCategoriesView::showEvent(QShowEvent * event)
   QWidget::showEvent(event);
 }
 
-void KCategoriesView::slotLoadAccounts(void)
+void KCategoriesView::slotLoadAccounts()
 {
   if (isVisible()) {
     loadAccounts();
@@ -138,7 +138,7 @@ void KCategoriesView::slotLoadAccounts(void)
   }
 }
 
-void KCategoriesView::loadAccounts(void)
+void KCategoriesView::loadAccounts()
 {
   m_filterProxyModel->invalidate();
   m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !kmymoney->toggleAction("view_show_all_accounts")->isChecked());
@@ -157,7 +157,7 @@ void KCategoriesView::loadAccounts(void)
 /**
   * The view is notified that an unused income expense account has been hidden.
   */
-void KCategoriesView::slotUnusedIncomeExpenseAccountHidden(void)
+void KCategoriesView::slotUnusedIncomeExpenseAccountHidden()
 {
   m_haveUnusedCategories = true;
   m_hiddenCategories->setVisible(m_haveUnusedCategories);

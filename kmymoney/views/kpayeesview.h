@@ -65,7 +65,7 @@ public:
   KPayeeListItem(QListWidget *parent, const MyMoneyPayee& payee);
   ~KPayeeListItem();
 
-  const MyMoneyPayee& payee(void) const {
+  const MyMoneyPayee& payee() const {
     return m_payee;
   };
 
@@ -86,15 +86,15 @@ public:
 
 public slots:
   void slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& transactionId = QString());
-  void slotLoadPayees(void);
+  void slotLoadPayees();
   void slotStartRename(QListWidgetItem*);
-  void slotHelp(void);
+  void slotHelp();
 
 protected:
-  void loadPayees(void);
+  void loadPayees();
   void selectedPayees(QList<MyMoneyPayee>& payeesList) const;
   void ensurePayeeVisible(const QString& id);
-  void clearItemData(void);
+  void clearItemData();
 
 protected slots:
   /**
@@ -103,7 +103,7 @@ protected slots:
     * it according to the current settings. Then it
     * loads the m_transactionView with the transaction data.
     */
-  void showTransactions(void);
+  void showTransactions();
 
   /**
     * This slot is called whenever the selection in m_payeesList
@@ -115,13 +115,13 @@ protected slots:
     * This slot is called whenever the selection in m_payeesList
     * has been changed.
     */
-  void slotSelectPayee(void);
+  void slotSelectPayee();
 
   /**
     * This slot marks the current selected payee as modified (dirty).
     */
-  void slotPayeeDataChanged(void);
-  void slotKeyListChanged(void);
+  void slotPayeeDataChanged();
+  void slotKeyListChanged();
 
   /**
     * This slot is called when the name of a payee is changed inside
@@ -133,13 +133,13 @@ protected slots:
     * Updates the payee data in m_payee from the information in the
     * payee information widget.
     */
-  void slotUpdatePayee(void);
+  void slotUpdatePayee();
 
-  void slotSelectTransaction(void);
+  void slotSelectTransaction();
 
-  void slotPayeeNew(void);
+  void slotPayeeNew();
 
-  void slotRenameButtonCliked(void);
+  void slotRenameButtonCliked();
 
   void slotChangeFilter(int index);
 
@@ -152,7 +152,7 @@ private slots:
     */
   void slotOpenContextMenu(const QPoint& p);
 
-  void slotChooseDefaultAccount(void);
+  void slotChooseDefaultAccount();
 
 signals:
   void transactionSelected(const QString& accountId, const QString& transactionId);

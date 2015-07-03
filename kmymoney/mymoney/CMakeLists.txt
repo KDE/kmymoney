@@ -25,6 +25,7 @@ set(kmm_mymoney_LIB_SRCS
   onlinejobmessage.cpp
   onlinejobfolder.cpp
   mymoneycontact.cpp
+  payeeidentifiermodel.cpp
   )
 
 
@@ -65,6 +66,7 @@ target_link_libraries(kmm_mymoney PUBLIC
                       kmm_payeeidentifier
                       payeeidentifier_iban_bic
                       payeeidentifier_nationalAccount
+                      kmm_config
 )
 
 if(KMM_ADDRESSBOOK_FOUND)

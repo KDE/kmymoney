@@ -111,7 +111,7 @@ void KSettingsOnlineQuotes::loadList(const bool updateResetList)
   connect(m_quoteSourceList, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotEntryRenamed(QListWidgetItem*)));
 }
 
-void KSettingsOnlineQuotes::resetConfig(void)
+void KSettingsOnlineQuotes::resetConfig()
 {
   QStringList::ConstIterator it;
   QStringList groups = WebPriceQuote::quoteSources();
@@ -168,7 +168,7 @@ void KSettingsOnlineQuotes::slotLoadWidgets()
 
 }
 
-void KSettingsOnlineQuotes::slotEntryChanged(void)
+void KSettingsOnlineQuotes::slotEntryChanged()
 {
   bool modified = m_editURL->text() != m_currentItem.m_url
                   || m_editSymbol->text() != m_currentItem.m_sym
@@ -180,7 +180,7 @@ void KSettingsOnlineQuotes::slotEntryChanged(void)
   m_updateButton->setEnabled(modified);
 }
 
-void KSettingsOnlineQuotes::slotUpdateEntry(void)
+void KSettingsOnlineQuotes::slotUpdateEntry()
 {
   m_currentItem.m_url = m_editURL->text();
   m_currentItem.m_sym = m_editSymbol->text();
@@ -192,7 +192,7 @@ void KSettingsOnlineQuotes::slotUpdateEntry(void)
   slotEntryChanged();
 }
 
-void KSettingsOnlineQuotes::slotNewEntry(void)
+void KSettingsOnlineQuotes::slotNewEntry()
 {
   WebPriceQuoteSource newSource(i18n("New Quote Source"));
   newSource.write();

@@ -113,7 +113,7 @@ void KMMPrintCheckPlugin::markAsPrinted(const KMyMoneyRegister::SelectedTransact
   d->m_printedTransactionIdList.append(selectedTransaction.transaction().id());
 }
 
-void KMMPrintCheckPlugin::slotPrintCheck(void)
+void KMMPrintCheckPlugin::slotPrintCheck()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyMoneyToWordsConverter converter;
@@ -201,7 +201,7 @@ void KMMPrintCheckPlugin::slotUnplug(KPluginInfo *info)
 }
 
 // the plugin's configurations has changed
-void KMMPrintCheckPlugin::slotUpdateConfig(void)
+void KMMPrintCheckPlugin::slotUpdateConfig()
 {
   PluginSettings::self()->load();
   // re-read the data because the configuration has changed

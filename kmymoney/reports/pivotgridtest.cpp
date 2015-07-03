@@ -73,7 +73,7 @@ void PivotGridTest::cleanup()
   delete storage;
 }
 
-void PivotGridTest::testCellAddValue(void)
+void PivotGridTest::testCellAddValue()
 {
   PivotCell a;
   QVERIFY(a == MyMoneyMoney());
@@ -120,7 +120,7 @@ void PivotGridTest::testCellAddValue(void)
   QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(75, 10).formatMoney("", 2));
 }
 
-void PivotGridTest::testCellAddCell(void)
+void PivotGridTest::testCellAddCell()
 {
   PivotCell a, b;
 
@@ -150,7 +150,7 @@ void PivotGridTest::testCellAddCell(void)
   QVERIFY(a.formatMoney("", 2) == MyMoneyMoney(72, 1).formatMoney("", 2));
 }
 
-void PivotGridTest::testCellRunningSum(void)
+void PivotGridTest::testCellRunningSum()
 {
   PivotCell a;
   MyMoneyMoney runningSum(12, 10);

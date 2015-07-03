@@ -625,7 +625,7 @@ void KReportChartView::drawLimitLine(const double limit)
 //TODO: add format to the line
 }
 
-void KReportChartView::removeLegend(void)
+void KReportChartView::removeLegend()
 {
   Legend* chartLegend = Chart::legend();
   delete chartLegend;

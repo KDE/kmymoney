@@ -112,8 +112,8 @@ private slots:
 private:
   void testRemoveStdAccount(const MyMoneyAccount& acc);
   void testReparentEquity(QList<MyMoneyAccount::accountTypeE>& list, MyMoneyAccount& parent);
-  void clearObjectLists(void);
-  void AddOneAccount(void);
+  void clearObjectLists();
+  void AddOneAccount();
 
 private:
   QStringList m_objectsAdded;

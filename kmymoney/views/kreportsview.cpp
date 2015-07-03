@@ -110,13 +110,13 @@ KReportsView::KReportTab::~KReportTab()
   delete m_part;
 }
 
-void KReportsView::KReportTab::print(void)
+void KReportsView::KReportTab::print()
 {
   if (m_part && m_part->view())
     m_part->view()->print();
 }
 
-void KReportsView::KReportTab::copyToClipboard(void)
+void KReportsView::KReportTab::copyToClipboard()
 {
   QMimeData* pMimeData =  new QMimeData();
   pMimeData->setHtml(m_table->renderHTML(qobject_cast<QWidget*>(this),
@@ -142,7 +142,7 @@ void KReportsView::KReportTab::saveAs(const QString& filename, bool includeCSS)
   }
 }
 
-void KReportsView::KReportTab::loadTab(void)
+void KReportsView::KReportTab::loadTab()
 {
   m_needReload = true;
   if (isVisible()) {
@@ -160,7 +160,7 @@ void KReportsView::KReportTab::showEvent(QShowEvent * event)
   QWidget::showEvent(event);
 }
 
-void KReportsView::KReportTab::updateReport(void)
+void KReportsView::KReportTab::updateReport()
 {
   // reload the report from the engine. It might have
   // been changed by the user
@@ -198,7 +198,7 @@ void KReportsView::KReportTab::updateReport(void)
     toggleChart();
 }
 
-void KReportsView::KReportTab::toggleChart(void)
+void KReportsView::KReportTab::toggleChart()
 {
   // for now it will just SHOW the chart.  In the future it actually has to toggle it.
 
@@ -363,7 +363,7 @@ void KReportsView::showEvent(QShowEvent * event)
   KMyMoneyViewBase::showEvent(event);
 }
 
-void KReportsView::slotLoadView(void)
+void KReportsView::slotLoadView()
 {
   m_needReload = true;
   if (isVisible()) {
@@ -372,7 +372,7 @@ void KReportsView::slotLoadView(void)
   }
 }
 
-void KReportsView::loadView(void)
+void KReportsView::loadView()
 {
   // remember the id of the current selected item
   QTreeWidgetItem* item = m_tocTreeWidget->currentItem();
@@ -661,21 +661,21 @@ void KReportsView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&,
   }
 }
 
-void KReportsView::slotPrintView(void)
+void KReportsView::slotPrintView()
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
   if (tab)
     tab->print();
 }
 
-void KReportsView::slotCopyView(void)
+void KReportsView::slotCopyView()
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
   if (tab)
     tab->copyToClipboard();
 }
 
-void KReportsView::slotSaveView(void)
+void KReportsView::slotSaveView()
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
   if (tab) {
@@ -739,7 +739,7 @@ void KReportsView::slotSaveFilterChanged(const QString& filter)
   }
 }
 
-void KReportsView::slotConfigure(void)
+void KReportsView::slotConfigure()
 {
   QString cm = "KReportsView::slotConfigure";
 
@@ -806,7 +806,7 @@ void KReportsView::slotConfigure(void)
   delete dlg;
 }
 
-void KReportsView::slotDuplicate(void)
+void KReportsView::slotDuplicate()
 {
   QString cm = "KReportsView::slotDuplicate";
 
@@ -867,7 +867,7 @@ void KReportsView::slotDuplicate(void)
   delete dlg;
 }
 
-void KReportsView::slotDelete(void)
+void KReportsView::slotDelete()
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
   if (!tab) {
@@ -1004,7 +1004,7 @@ void KReportsView::slotItemDoubleClicked(QTreeWidgetItem* item, int)
     addReportTab(report);
 }
 
-void KReportsView::slotToggleChart(void)
+void KReportsView::slotToggleChart()
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
 
@@ -1012,7 +1012,7 @@ void KReportsView::slotToggleChart(void)
     tab->toggleChart();
 }
 
-void KReportsView::slotCloseCurrent(void)
+void KReportsView::slotCloseCurrent()
 {
   slotClose(m_reportTabWidget->currentIndex());
 }
@@ -1027,7 +1027,7 @@ void KReportsView::slotClose(int index)
 }
 
 
-void KReportsView::slotCloseAll(void)
+void KReportsView::slotCloseAll()
 {
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(1));
   while (tab) {
@@ -1110,7 +1110,7 @@ void KReportsView::slotListContextMenu(const QPoint & p)
   contextmenu->popup(m_tocTreeWidget->mapToGlobal(p));
 }
 
-void KReportsView::slotOpenFromList(void)
+void KReportsView::slotOpenFromList()
 {
   TocItem* tocItem = dynamic_cast<TocItem*>(m_tocTreeWidget->currentItem());
 
@@ -1118,7 +1118,7 @@ void KReportsView::slotOpenFromList(void)
     slotItemDoubleClicked(tocItem, 0);
 }
 
-void KReportsView::slotConfigureFromList(void)
+void KReportsView::slotConfigureFromList()
 {
   TocItem* tocItem = dynamic_cast<TocItem*>(m_tocTreeWidget->currentItem());
 
@@ -1128,7 +1128,7 @@ void KReportsView::slotConfigureFromList(void)
   }
 }
 
-void KReportsView::slotNewFromList(void)
+void KReportsView::slotNewFromList()
 {
   TocItem* tocItem = dynamic_cast<TocItem*>(m_tocTreeWidget->currentItem());
 
@@ -1138,7 +1138,7 @@ void KReportsView::slotNewFromList(void)
   }
 }
 
-void KReportsView::slotDeleteFromList(void)
+void KReportsView::slotDeleteFromList()
 {
   TocItem* tocItem = dynamic_cast<TocItem*>(m_tocTreeWidget->currentItem());
 
@@ -1735,7 +1735,7 @@ void KReportsView::defaultReports(QList<ReportGroup>& groups)
   }
 }
 
-bool KReportsView::columnsAlreadyAdjusted(void)
+bool KReportsView::columnsAlreadyAdjusted()
 {
   return m_columnsAlreadyAdjusted;
 }

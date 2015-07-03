@@ -324,7 +324,7 @@ void KGlobalLedgerView::slotAboutToSelectItem(KMyMoneyRegister::RegisterItem* it
   emit cancelOrEndEdit(okToSelect);
 }
 
-void KGlobalLedgerView::slotLoadView(void)
+void KGlobalLedgerView::slotLoadView()
 {
   m_needReload = true;
   if (isVisible()) {
@@ -339,7 +339,7 @@ void KGlobalLedgerView::slotLoadView(void)
   }
 }
 
-void KGlobalLedgerView::clear(void)
+void KGlobalLedgerView::clear()
 {
   // clear current register contents
   m_register->clear();
@@ -369,7 +369,7 @@ void KGlobalLedgerView::clear(void)
   d->m_precision = 2;
 }
 
-void KGlobalLedgerView::loadView(void)
+void KGlobalLedgerView::loadView()
 {
   MYMONEYTRACER(tracer);
 
@@ -856,7 +856,7 @@ void KGlobalLedgerView::resizeEvent(QResizeEvent* ev)
   KMyMoneyViewBase::resizeEvent(ev);
 }
 
-void KGlobalLedgerView::loadAccounts(void)
+void KGlobalLedgerView::loadAccounts()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -942,7 +942,7 @@ void KGlobalLedgerView::selectTransaction(const QString& id)
   }
 }
 
-void KGlobalLedgerView::slotSelectAllTransactions(void)
+void KGlobalLedgerView::slotSelectAllTransactions()
 {
   m_register->clearSelection();
   KMyMoneyRegister::RegisterItem* p = m_register->firstItem();
@@ -993,7 +993,7 @@ void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const
   }
 }
 
-bool KGlobalLedgerView::isReconciliationAccount(void) const
+bool KGlobalLedgerView::isReconciliationAccount() const
 {
   return m_account.id() == d->m_reconciliationAccount;
 }
@@ -1050,12 +1050,12 @@ void KGlobalLedgerView::slotNewTransaction(KMyMoneyRegister::Action id)
   }
 }
 
-void KGlobalLedgerView::slotNewTransaction(void)
+void KGlobalLedgerView::slotNewTransaction()
 {
   slotNewTransaction(KMyMoneyRegister::ActionNone);
 }
 
-void KGlobalLedgerView::setupDefaultAction(void)
+void KGlobalLedgerView::setupDefaultAction()
 {
   switch (m_account.accountType()) {
     case MyMoneyAccount::Asset:
@@ -1068,7 +1068,7 @@ void KGlobalLedgerView::setupDefaultAction(void)
   }
 }
 
-bool KGlobalLedgerView::selectEmptyTransaction(void)
+bool KGlobalLedgerView::selectEmptyTransaction()
 {
   bool rc = false;
 
@@ -1375,7 +1375,7 @@ void KGlobalLedgerView::showTooltip(const QString msg) const
   QToolTip::showText(m_tooltipPosn, msg);
 }
 
-void KGlobalLedgerView::slotSortOptions(void)
+void KGlobalLedgerView::slotSortOptions()
 {
   QPointer<KSortOptionDlg> dlg = new KSortOptionDlg(this);
 

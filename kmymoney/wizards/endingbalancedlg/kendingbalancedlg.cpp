@@ -155,7 +155,7 @@ KEndingBalanceDlg::~KEndingBalanceDlg()
   delete d;
 }
 
-void KEndingBalanceDlg::slotUpdateBalances(void)
+void KEndingBalanceDlg::slotUpdateBalances()
 {
   MYMONEYTRACER(tracer);
 
@@ -234,7 +234,7 @@ void KEndingBalanceDlg::slotUpdateBalances(void)
   setField("chargesDateEdit", field("statementDate").toDate());
 }
 
-void KEndingBalanceDlg::accept(void)
+void KEndingBalanceDlg::accept()
 {
   if ((!field("interestEditValid").toBool() || createTransaction(d->m_tInterest, -1, field("interestEdit").value<MyMoneyMoney>(), field("interestCategoryEdit").toString(), field("interestDateEdit").toDate()))
       && (!field("chargesEditValid").toBool() || createTransaction(d->m_tCharges, 1, field("chargesEdit").value<MyMoneyMoney>(), field("chargesCategoryEdit").toString(), field("chargesDateEdit").toDate())))
@@ -261,12 +261,12 @@ void KEndingBalanceDlg::createCategory(const QString& txt, QString& id, const My
   id = acc.id();
 }
 
-const MyMoneyMoney KEndingBalanceDlg::endingBalance(void) const
+const MyMoneyMoney KEndingBalanceDlg::endingBalance() const
 {
   return adjustedReturnValue(m_statementInfoPageCheckings->m_endingBalance->value());
 }
 
-const MyMoneyMoney KEndingBalanceDlg::previousBalance(void) const
+const MyMoneyMoney KEndingBalanceDlg::previousBalance() const
 {
   return adjustedReturnValue(m_statementInfoPageCheckings->m_previousBalance->value());
 }
@@ -276,7 +276,7 @@ const MyMoneyMoney KEndingBalanceDlg::adjustedReturnValue(const MyMoneyMoney& v)
   return d->m_account.accountGroup() == MyMoneyAccount::Liability ? -v : v;
 }
 
-void KEndingBalanceDlg::slotReloadEditWidgets(void)
+void KEndingBalanceDlg::slotReloadEditWidgets()
 {
   QString payeeId, interestId, chargesId;
 
@@ -306,12 +306,12 @@ void KEndingBalanceDlg::slotReloadEditWidgets(void)
     setField("chargesCategoryEdit", chargesId);
 }
 
-const MyMoneyTransaction KEndingBalanceDlg::interestTransaction(void)
+const MyMoneyTransaction KEndingBalanceDlg::interestTransaction()
 {
   return d->m_tInterest;
 }
 
-const MyMoneyTransaction KEndingBalanceDlg::chargeTransaction(void)
+const MyMoneyTransaction KEndingBalanceDlg::chargeTransaction()
 {
   return d->m_tCharges;
 }
@@ -361,7 +361,7 @@ bool KEndingBalanceDlg::createTransaction(MyMoneyTransaction &t, const int sign,
   return true;
 }
 
-void KEndingBalanceDlg::help(void)
+void KEndingBalanceDlg::help()
 {
   QString anchor = d->m_helpAnchor[currentPage()];
   if (anchor.isEmpty())

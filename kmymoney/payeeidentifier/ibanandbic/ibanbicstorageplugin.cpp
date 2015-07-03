@@ -64,6 +64,10 @@ bool ibanBicStoragePlugin::setupDatabase(QSqlDatabase connection)
   // Create database in it's most recent version if version is 0
   // (version 0 means the database was not installed)
   if (currentVersion == 0) {
+    // If the database is recreated the table may be still there. So drop it if needed. No error handling needed
+    // as this step is not necessary - only the creation is important.
+    query.exec("DROP TABLE IF EXISTS kmmIbanBic;");
+
     if (!query.exec(
           "CREATE TABLE kmmIbanBic ("
           "  id varchar(32) NOT NULL PRIMARY KEY REFERENCES kmmPayeeIdentifier( id ) ON DELETE CASCADE ON UPDATE CASCADE,"

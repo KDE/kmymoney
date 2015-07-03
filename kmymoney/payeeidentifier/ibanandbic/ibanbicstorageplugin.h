@@ -24,6 +24,7 @@
 class ibanBicStoragePlugin : public KMyMoneyPlugin::storagePlugin
 {
   Q_OBJECT
+  Q_INTERFACES(KMyMoneyPlugin::storagePlugin)
 
 public:
   explicit ibanBicStoragePlugin(QObject* parent = 0, const QVariantList& options = QVariantList());

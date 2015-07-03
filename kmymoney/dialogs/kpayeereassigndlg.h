@@ -78,12 +78,12 @@ public:
    * Returns true, if the names of the payees to be deleted should be copied
    * to the selected payee's match list.
    */
-  bool addToMatchList(void) const {
+  bool addToMatchList() const {
     return m_copyToMatchList->isChecked();
   }
 
 protected:
-  void accept(void);
+  void accept();
 
 private:
   OperationType m_type;

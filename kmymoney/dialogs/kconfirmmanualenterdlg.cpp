@@ -182,7 +182,7 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
   return;
 }
 
-KConfirmManualEnterDlg::Action KConfirmManualEnterDlg::action(void) const
+KConfirmManualEnterDlg::Action KConfirmManualEnterDlg::action() const
 {
   if (d->ui.m_discardRadio->isChecked())
     return UseOriginal;

@@ -102,7 +102,7 @@ void KSortOptionDlg::setSortOption(const QString& option, const QString& def)
   }
 }
 
-QString KSortOptionDlg::sortOption(void) const
+QString KSortOptionDlg::sortOption() const
 {
   QString rc;
   if (!d->ui.m_useDefault->isChecked()) {
@@ -111,7 +111,7 @@ QString KSortOptionDlg::sortOption(void) const
   return rc;
 }
 
-void KSortOptionDlg::hideDefaultButton(void)
+void KSortOptionDlg::hideDefaultButton()
 {
   d->ui.m_useDefault->hide();
 }
@@ -196,7 +196,7 @@ KFindTransactionDlg::~KFindTransactionDlg()
   delete m_ui;
 }
 
-void KFindTransactionDlg::slotReset(void)
+void KFindTransactionDlg::slotReset()
 {
   m_ui->m_textEdit->setText(QString());
   m_ui->m_regExp->setChecked(false);
@@ -240,7 +240,7 @@ void KFindTransactionDlg::slotReset(void)
   slotDateRangeChanged(MyMoneyTransactionFilter::allDates);
 }
 
-void KFindTransactionDlg::slotUpdateSelections(void)
+void KFindTransactionDlg::slotUpdateSelections()
 {
   QString txt;
 
@@ -363,7 +363,7 @@ bool KFindTransactionDlg::allItemsSelected(const QTreeWidget* view) const
   return true;
 }
 
-void KFindTransactionDlg::setupAccountsPage(void)
+void KFindTransactionDlg::setupAccountsPage()
 {
   m_ui->m_accountsView->setSelectionMode(QTreeWidget::MultiSelection);
   AccountSet accountSet;
@@ -405,7 +405,7 @@ void KFindTransactionDlg::selectItems(QTreeWidget* view, const QStringList& list
   slotUpdateSelections();
 }
 
-void KFindTransactionDlg::setupCategoriesPage(void)
+void KFindTransactionDlg::setupCategoriesPage()
 {
   m_ui->m_categoriesView->setSelectionMode(QTreeWidget::MultiSelection);
   AccountSet categorySet;
@@ -439,7 +439,7 @@ void KFindTransactionDlg::selectSubItems(QTreeWidgetItem* item, const QStringLis
   }
 }
 
-void KFindTransactionDlg::setupDatePage(void)
+void KFindTransactionDlg::setupDatePage()
 {
   int i;
   for (i = MyMoneyTransactionFilter::allDates; i < MyMoneyTransactionFilter::dateOptionCount; ++i) {
@@ -469,7 +469,7 @@ void KFindTransactionDlg::slotDateRangeChanged(int idx)
   slotUpdateSelections();
 }
 
-void KFindTransactionDlg::slotDateChanged(void)
+void KFindTransactionDlg::slotDateChanged()
 {
   int idx;
   for (idx = MyMoneyTransactionFilter::asOfToday; idx < MyMoneyTransactionFilter::dateOptionCount; ++idx) {
@@ -488,7 +488,7 @@ void KFindTransactionDlg::slotDateChanged(void)
   slotUpdateSelections();
 }
 
-void KFindTransactionDlg::setupAmountPage(void)
+void KFindTransactionDlg::setupAmountPage()
 {
   connect(m_ui->m_amountButton, SIGNAL(clicked()), this, SLOT(slotAmountSelected()));
   connect(m_ui->m_amountRangeButton, SIGNAL(clicked()), this, SLOT(slotAmountRangeSelected()));
@@ -501,7 +501,7 @@ void KFindTransactionDlg::setupAmountPage(void)
   slotAmountSelected();
 }
 
-void KFindTransactionDlg::slotAmountSelected(void)
+void KFindTransactionDlg::slotAmountSelected()
 {
   m_ui->m_amountEdit->setEnabled(true);
   m_ui->m_amountFromEdit->setEnabled(false);
@@ -509,7 +509,7 @@ void KFindTransactionDlg::slotAmountSelected(void)
   slotUpdateSelections();
 }
 
-void KFindTransactionDlg::slotAmountRangeSelected(void)
+void KFindTransactionDlg::slotAmountRangeSelected()
 {
   m_ui->m_amountEdit->setEnabled(false);
   m_ui->m_amountFromEdit->setEnabled(true);
@@ -517,7 +517,7 @@ void KFindTransactionDlg::slotAmountRangeSelected(void)
   slotUpdateSelections();
 }
 
-void KFindTransactionDlg::setupPayeesPage(void)
+void KFindTransactionDlg::setupPayeesPage()
 {
   m_ui->m_payeesView->setSelectionMode(QAbstractItemView::SingleSelection);
   m_ui->m_payeesView->header()->hide();
@@ -534,7 +534,7 @@ void KFindTransactionDlg::setupPayeesPage(void)
   connect(m_ui->m_payeesView, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateSelections()));
 }
 
-void KFindTransactionDlg::loadPayees(void)
+void KFindTransactionDlg::loadPayees()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneyPayee> list;
@@ -549,17 +549,17 @@ void KFindTransactionDlg::loadPayees(void)
     item->setCheckState(0, Qt::Checked);
   }
 }
-void KFindTransactionDlg::slotSelectAllPayees(void)
+void KFindTransactionDlg::slotSelectAllPayees()
 {
   selectAllItems(m_ui->m_payeesView, true);
 }
 
-void KFindTransactionDlg::slotDeselectAllPayees(void)
+void KFindTransactionDlg::slotDeselectAllPayees()
 {
   selectAllItems(m_ui->m_payeesView, false);
 }
 
-void KFindTransactionDlg::setupTagsPage(void)
+void KFindTransactionDlg::setupTagsPage()
 {
   m_ui->m_tagsView->setSelectionMode(QAbstractItemView::SingleSelection);
   m_ui->m_tagsView->header()->hide();
@@ -576,7 +576,7 @@ void KFindTransactionDlg::setupTagsPage(void)
   connect(m_ui->m_tagsView, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotUpdateSelections()));
 }
 
-void KFindTransactionDlg::loadTags(void)
+void KFindTransactionDlg::loadTags()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneyTag> list;
@@ -591,17 +591,17 @@ void KFindTransactionDlg::loadTags(void)
     item->setCheckState(0, Qt::Checked);
   }
 }
-void KFindTransactionDlg::slotSelectAllTags(void)
+void KFindTransactionDlg::slotSelectAllTags()
 {
   selectAllItems(m_ui->m_tagsView, true);
 }
 
-void KFindTransactionDlg::slotDeselectAllTags(void)
+void KFindTransactionDlg::slotDeselectAllTags()
 {
   selectAllItems(m_ui->m_tagsView, false);
 }
 
-void KFindTransactionDlg::setupDetailsPage(void)
+void KFindTransactionDlg::setupDetailsPage()
 {
   connect(m_ui->m_typeBox, SIGNAL(activated(int)), this, SLOT(slotUpdateSelections()));
   connect(m_ui->m_stateBox, SIGNAL(activated(int)), this, SLOT(slotUpdateSelections()));
@@ -617,7 +617,7 @@ void KFindTransactionDlg::setupDetailsPage(void)
   slotNrSelected();
 }
 
-void KFindTransactionDlg::slotNrSelected(void)
+void KFindTransactionDlg::slotNrSelected()
 {
   m_ui->m_nrEdit->setEnabled(true);
   m_ui->m_nrFromEdit->setEnabled(false);
@@ -625,7 +625,7 @@ void KFindTransactionDlg::slotNrSelected(void)
   slotUpdateSelections();
 }
 
-void KFindTransactionDlg::slotNrRangeSelected(void)
+void KFindTransactionDlg::slotNrRangeSelected()
 {
   m_ui->m_nrEdit->setEnabled(false);
   m_ui->m_nrFromEdit->setEnabled(true);
@@ -682,7 +682,7 @@ void KFindTransactionDlg::scanCheckListItems(const QTreeWidget* view, const opTy
   }
 }
 
-void KFindTransactionDlg::setupFilter(void)
+void KFindTransactionDlg::setupFilter()
 {
   m_filter.clear();
 
@@ -781,7 +781,7 @@ void KFindTransactionDlg::setupFilter(void)
   }
 }
 
-void KFindTransactionDlg::slotSearch(void)
+void KFindTransactionDlg::slotSearch()
 {
   // perform the search only if the button is enabled
   if (!m_ui->buttonBox->button(QDialogButtonBox::Apply)->isEnabled())
@@ -796,7 +796,7 @@ void KFindTransactionDlg::slotSearch(void)
   m_ui->m_register->setFocus();
 }
 
-void KFindTransactionDlg::slotRefreshView(void)
+void KFindTransactionDlg::slotRefreshView()
 {
   m_needReload = true;
   if (isVisible()) {
@@ -814,7 +814,7 @@ void KFindTransactionDlg::showEvent(QShowEvent* event)
   QDialog::showEvent(event);
 }
 
-void KFindTransactionDlg::loadView(void)
+void KFindTransactionDlg::loadView()
 {
   // setup sort order
   m_ui->m_register->setSortOrder(KMyMoneyGlobalSettings::sortSearchView());
@@ -877,7 +877,7 @@ void KFindTransactionDlg::loadView(void)
   QTimer::singleShot(10, this, SLOT(slotRightSize()));
 }
 
-void KFindTransactionDlg::slotRightSize(void)
+void KFindTransactionDlg::slotRightSize()
 {
   m_ui->m_register->update();
 }
@@ -925,7 +925,7 @@ void KFindTransactionDlg::resizeEvent(QResizeEvent* ev)
 }
 
 
-void KFindTransactionDlg::slotSelectTransaction(void)
+void KFindTransactionDlg::slotSelectTransaction()
 {
   QList<KMyMoneyRegister::RegisterItem*> list = m_ui->m_register->selectedItems();
   if (!list.isEmpty()) {
@@ -962,7 +962,7 @@ bool KFindTransactionDlg::eventFilter(QObject* o, QEvent* e)
   return rc;
 }
 
-void KFindTransactionDlg::slotShowHelp(void)
+void KFindTransactionDlg::slotShowHelp()
 {
   QString anchor = m_helpAnchor[m_ui->m_criteriaTab->currentWidget()];
   if (anchor.isEmpty())
@@ -971,7 +971,7 @@ void KFindTransactionDlg::slotShowHelp(void)
   KHelpClient::invokeHelp(anchor);
 }
 
-void KFindTransactionDlg::slotSortOptions(void)
+void KFindTransactionDlg::slotSortOptions()
 {
   QPointer<KSortOptionDlg> dlg = new KSortOptionDlg(this);
 

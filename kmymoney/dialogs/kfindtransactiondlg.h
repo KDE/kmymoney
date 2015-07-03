@@ -110,44 +110,44 @@ protected:
   void showEvent(QShowEvent* event);
 
 protected slots:
-  virtual void slotReset(void);
-  virtual void slotSearch(void);
+  virtual void slotReset();
+  virtual void slotSearch();
 
   /**
     * This slot opens the detailed help page in khelpcenter. The
     * anchor for the information is taken from m_helpAnchor.
     */
-  virtual void slotShowHelp(void);
+  virtual void slotShowHelp();
 
 
-  void slotUpdateSelections(void);
+  void slotUpdateSelections();
 
   virtual void slotDateRangeChanged(int);
-  virtual void slotDateChanged(void);
+  virtual void slotDateChanged();
 
-  virtual void slotAmountSelected(void);
-  virtual void slotAmountRangeSelected(void);
+  virtual void slotAmountSelected();
+  virtual void slotAmountRangeSelected();
 
-  virtual void slotSelectAllPayees(void);
-  virtual void slotDeselectAllPayees(void);
+  virtual void slotSelectAllPayees();
+  virtual void slotDeselectAllPayees();
 
-  virtual void slotSelectAllTags(void);
-  virtual void slotDeselectAllTags(void);
+  virtual void slotSelectAllTags();
+  virtual void slotDeselectAllTags();
 
-  virtual void slotNrSelected(void);
-  virtual void slotNrRangeSelected(void);
+  virtual void slotNrSelected();
+  virtual void slotNrRangeSelected();
 
-  void slotRefreshView(void);
+  void slotRefreshView();
 
   /**
     * This slot selects the current selected transaction/split and emits
     * the signal @a transactionSelected(const QString& accountId, const QString& transactionId)
     */
-  void slotSelectTransaction(void);
+  void slotSelectTransaction();
 
-  void slotRightSize(void);
+  void slotRightSize();
 
-  void slotSortOptions(void);
+  void slotSortOptions();
 
 signals:
   void transactionSelected(const QString& accountId, const QString& transactionId);
@@ -168,15 +168,15 @@ protected:
     addTagToFilter
   };
 
-  void setupCategoriesPage(void);
-  void setupDatePage(void);
-  void setupAccountsPage(void);
-  void setupAmountPage(void);
-  void setupPayeesPage(void);
-  void setupTagsPage(void);
-  void setupDetailsPage(void);
+  void setupCategoriesPage();
+  void setupDatePage();
+  void setupAccountsPage();
+  void setupAmountPage();
+  void setupPayeesPage();
+  void setupTagsPage();
+  void setupDetailsPage();
 
-  void setupFilter(void);
+  void setupFilter();
 
   void selectAllItems(QTreeWidget* view, const bool state);
   void selectAllSubItems(QTreeWidgetItem* item, const bool state);
@@ -187,18 +187,18 @@ protected:
     * This method loads the m_payeesView with the payees name
     * found in the engine.
     */
-  void loadPayees(void);
+  void loadPayees();
 
   /**
     * This method loads the m_tagsView with the tags name
     * found in the engine.
     */
-  void loadTags(void);
+  void loadTags();
 
   /**
     * This method loads the register with the matching transactions
     */
-  void loadView(void);
+  void loadView();
 
   /**
     * This method returns information about the selection state

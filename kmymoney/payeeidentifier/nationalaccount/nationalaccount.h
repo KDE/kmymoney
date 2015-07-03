@@ -83,6 +83,8 @@ public:
   }
 
 private:
+  bool writeQuery(QSqlQuery& query, const QString& id) const;
+
   QString m_ownerName;
   QString m_country;
   QString m_bankCode;

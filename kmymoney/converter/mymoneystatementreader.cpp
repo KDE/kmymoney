@@ -309,7 +309,7 @@ MyMoneyStatementReader::~MyMoneyStatementReader()
   delete d;
 }
 
-bool MyMoneyStatementReader::anyTransactionAdded(void) const
+bool MyMoneyStatementReader::anyTransactionAdded() const
 {
   return (d->transactionsAdded != 0) ? true : false;
 }

@@ -1046,7 +1046,7 @@ void MyMoneyScheduleTest::testAdjustedNextDueDate()
   }
 }
 
-void MyMoneyScheduleTest::testModifyNextDueDate(void)
+void MyMoneyScheduleTest::testModifyNextDueDate()
 {
   MyMoneySchedule s;
   s.setStartDate(QDate(2007, 1, 2));

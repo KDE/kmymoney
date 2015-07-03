@@ -97,7 +97,7 @@ kMyMoneyAccountSelector::~kMyMoneyAccountSelector()
 {
 }
 
-void kMyMoneyAccountSelector::removeButtons(void)
+void kMyMoneyAccountSelector::removeButtons()
 {
   delete m_allAccountsButton;
   delete m_incomeCategoriesButton;
@@ -220,7 +220,7 @@ void AccountSet::removeAccountType(MyMoneyAccount::accountTypeE type)
   }
 }
 
-void AccountSet::clear(void)
+void AccountSet::clear()
 {
   m_typeList.clear();
 }

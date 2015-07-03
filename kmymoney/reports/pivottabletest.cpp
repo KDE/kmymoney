@@ -853,7 +853,7 @@ void PivotTableTest::testColumnType()
 
 }
 
-void PivotTableTest::testInvestment(void)
+void PivotTableTest::testInvestment()
 {
   try {
     // Equities
@@ -929,7 +929,7 @@ void PivotTableTest::testInvestment(void)
   }
 }
 
-void PivotTableTest::testBudget(void)
+void PivotTableTest::testBudget()
 {
 
   // 1. Budget on A, transactions on A
@@ -1008,7 +1008,7 @@ void PivotTableTest::testBudget(void)
   }
 }
 
-void PivotTableTest::testHtmlEncoding(void)
+void PivotTableTest::testHtmlEncoding()
 {
   MyMoneyReport filter;
   filter.setRowType(MyMoneyReport::eAssetLiability);

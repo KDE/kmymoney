@@ -83,7 +83,7 @@ public:
     *
     * @sa setSelectionMode()
     */
-  QTreeWidget::SelectionMode selectionMode(void) const {
+  QTreeWidget::SelectionMode selectionMode() const {
     return m_selMode;
   }
 
@@ -102,7 +102,7 @@ public:
     *
     * @todo Deprecated after 1.0
     */
-  QStringList selectedItems(void) const;
+  QStringList selectedItems() const;
 
   /**
     * This method returns the list of all item ids.
@@ -118,7 +118,7 @@ public:
     *
     * @todo Deprecated after 1.0
     */
-  QStringList itemList(void) const;
+  QStringList itemList() const;
 
   /**
     * This method returns an information if all items
@@ -130,7 +130,7 @@ public:
     * @note If the selection mode is set to Single, this
     *       method always returns false.
     */
-  bool allItemsSelected(void) const;
+  bool allItemsSelected() const;
 
   /**
     * This method sets the current selected item and marks the
@@ -146,7 +146,7 @@ public:
   /**
     * Return a pointer to the QTreeWidget object
     */
-  QTreeWidget* listView(void) const {
+  QTreeWidget* listView() const {
     return m_treeWidget;
   };
 
@@ -266,7 +266,7 @@ public:
   /**
     * Clears all items of the selector and the associated listview.
     */
-  virtual void clear(void);
+  virtual void clear();
 
   /**
     * Sets the give item's selectable state.
@@ -278,7 +278,7 @@ public slots:
     * This slot selects all items that are currently in
     * the item list of the widget.
     */
-  void slotSelectAllItems(void) {
+  void slotSelectAllItems() {
     selectAllItems(true);
   };
 
@@ -286,12 +286,12 @@ public slots:
     * This slot deselects all items that are currently in
     * the item list of the widget.
     */
-  void slotDeselectAllItems(void) {
+  void slotDeselectAllItems() {
     selectAllItems(false);
   };
 
 signals:
-  void stateChanged(void);
+  void stateChanged();
 
   void itemSelected(const QString& id);
 

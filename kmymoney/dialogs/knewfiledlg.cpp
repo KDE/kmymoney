@@ -104,7 +104,7 @@ void KNewFileDlg::okClicked()
   accept();
 }
 
-void KNewFileDlg::loadFromAddressBook(void)
+void KNewFileDlg::loadFromAddressBook()
 {
   d->ui.userNameEdit->setText(d->m_contact->ownerFullName());
   d->ui.emailEdit->setText(d->m_contact->ownerEmail());
@@ -130,7 +130,7 @@ void KNewFileDlg::slotContactFetched(const ContactData &identity)
   d->ui.kabcBtn->setEnabled(true);
 }
 
-QPushButton* KNewFileDlg::cancelButton(void)
+QPushButton* KNewFileDlg::cancelButton()
 {
   return d->ui.cancelBtn;
 }

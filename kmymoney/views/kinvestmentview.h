@@ -56,7 +56,7 @@ public:
   /**
     * Start reconciliation for the account in the current view
     */
-  void reconcileAccount(void);
+  void reconcileAccount();
 
 public slots:
   /**
@@ -64,7 +64,7 @@ public slots:
     * All existing data in the view will be discarded.
     * Call this e.g. if a new file has been loaded.
     */
-  void slotLoadView(void);
+  void slotLoadView();
 
   /**
     * This slot is used to select the correct ledger view type for
@@ -112,18 +112,18 @@ protected:
     * empty or if the referenced account does not exist in the engine,
     * the first account found in the list will be made the current account.
     */
-  void loadAccounts(void);
+  void loadAccounts();
 
   /**
     * clear the view
     */
-  void clear(void);
+  void clear();
 
-  void loadInvestmentTab(void);
+  void loadInvestmentTab();
 
   void loadInvestmentItem(const MyMoneyAccount& account);
 
-  void loadSecuritiesList(void);
+  void loadSecuritiesList();
 
   void loadSecurityItem(QTreeWidgetItem* item, const MyMoneySecurity& security);
 
@@ -137,9 +137,9 @@ protected slots:
 
   void slotInvestmentSelectionChanged();
 
-  void slotUpdateSecuritiesButtons(void);
-  void slotEditSecurity(void);
-  void slotDeleteSecurity(void);
+  void slotUpdateSecuritiesButtons();
+  void slotEditSecurity();
+  void slotDeleteSecurity();
 
 
 signals:
@@ -151,7 +151,7 @@ signals:
 
   void accountSelected(const MyMoneyObject&);
 
-  void investmentRightMouseClick(void);
+  void investmentRightMouseClick();
 
   /**
     * This signal is emitted whenever the view is about to be shown.

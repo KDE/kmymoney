@@ -558,7 +558,7 @@ void kMyMoneySplitTable::slotUpdateData(const MyMoneyTransaction& t)
   }
 }
 
-void kMyMoneySplitTable::updateTransactionTableSize(void)
+void kMyMoneySplitTable::updateTransactionTableSize()
 {
   // get current size of transactions table
   int tableHeight = height();
@@ -586,7 +586,7 @@ void kMyMoneySplitTable::resizeEvent(QResizeEvent* ev)
   }
 }
 
-void kMyMoneySplitTable::slotDuplicateSplit(void)
+void kMyMoneySplitTable::slotDuplicateSplit()
 {
   MYMONEYTRACER(tracer);
   QList<MyMoneySplit> list = getSplits(m_transaction);
@@ -602,7 +602,7 @@ void kMyMoneySplitTable::slotDuplicateSplit(void)
   }
 }
 
-void kMyMoneySplitTable::slotDeleteSplit(void)
+void kMyMoneySplitTable::slotDeleteSplit()
 {
   MYMONEYTRACER(tracer);
   QList<MyMoneySplit> list = getSplits(m_transaction);
@@ -628,18 +628,18 @@ void kMyMoneySplitTable::slotDeleteSplit(void)
   }
 }
 
-KMyMoneyCategory* kMyMoneySplitTable::slotStartEdit(void)
+KMyMoneyCategory* kMyMoneySplitTable::slotStartEdit()
 {
   MYMONEYTRACER(tracer);
   return createEditWidgets(true);
 }
 
-void kMyMoneySplitTable::slotEndEdit(void)
+void kMyMoneySplitTable::slotEndEdit()
 {
   endEdit(false);
 }
 
-void kMyMoneySplitTable::slotEndEditKeyboard(void)
+void kMyMoneySplitTable::slotEndEditKeyboard()
 {
   endEdit(true);
 }
@@ -758,7 +758,7 @@ void kMyMoneySplitTable::endEdit(bool keyboardDriven, bool setFocusToNextRow)
 
 }
 
-void kMyMoneySplitTable::slotCancelEdit(void)
+void kMyMoneySplitTable::slotCancelEdit()
 {
   MYMONEYTRACER(tracer);
   if (isEditMode()) {
@@ -767,7 +767,7 @@ void kMyMoneySplitTable::slotCancelEdit(void)
   }
 }
 
-bool kMyMoneySplitTable::isEditMode(void) const
+bool kMyMoneySplitTable::isEditMode() const
 {
   // while the edit widgets exist we're in edit mode
   return m_editAmount || m_editMemo || m_editCategory;
@@ -778,7 +778,7 @@ bool kMyMoneySplitTable::isEditSplitValid() const
   return isEditMode() && !m_editCategory->selectedItem().isEmpty();
 }
 
-void kMyMoneySplitTable::destroyEditWidgets(void)
+void kMyMoneySplitTable::destroyEditWidgets()
 {
   MYMONEYTRACER(tracer);
 
@@ -898,7 +898,7 @@ KMyMoneyCategory* kMyMoneySplitTable::createEditWidgets(bool setFocus)
   return m_editCategory;
 }
 
-void kMyMoneySplitTable::slotLoadEditWidgets(void)
+void kMyMoneySplitTable::slotLoadEditWidgets()
 {
   // reload category widget
   QString categoryId = m_editCategory->selectedItem();

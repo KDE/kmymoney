@@ -72,23 +72,23 @@ public:
   const QString selectedProfile() const;
 
 public slots:
-  void slotOk(void);
+  void slotOk();
 
 protected slots:
   void slotLoadProfileFromConfig(const QString& name);
-  void slotReset(void);
-  void slotRename(void);
-  void slotDelete(void);
-  void slotNew(void);
-  void slotAmountTypeSelected(void);
+  void slotReset();
+  void slotRename();
+  void slotDelete();
+  void slotNew();
+  void slotAmountTypeSelected();
   void slotDecimalChanged(const QString& val);
   void slotThousandsChanged(const QString& val);
-  void slotHelp(void);
+  void slotHelp();
 
 private:
-  void loadProfileListFromConfig(void);
-  void loadWidgets(void);
-  void showProfile(void);
+  void loadProfileListFromConfig();
+  void loadWidgets();
+  void showProfile();
   void addProfile(const QString& name);
   void deleteProfile(const QString& name);
   const QString enterName(bool& ok);

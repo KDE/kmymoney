@@ -47,7 +47,7 @@ public:
   virtual ~KAccountsView();
 
 public slots:
-  void slotLoadAccounts(void);
+  void slotLoadAccounts();
 
   /**
     * Override the base class behaviour to include all updates that
@@ -90,8 +90,8 @@ protected:
     * @param tab which tab should be loaded
     */
   void loadAccounts(AccountsViewTab tab);
-  void loadListView(void);
-  void loadIconGroups(void);
+  void loadListView();
+  void loadIconGroups();
 
   /**
     * This method loads all the subaccounts recursively of a given root account
@@ -103,22 +103,22 @@ protected:
     * This method returns a pointer to the currently selected
     * account icon or 0 if no icon is selected.
     */
-  QListWidgetItem* selectedIcon(void) const;
+  QListWidgetItem* selectedIcon() const;
 
 protected slots:
   void slotNetWorthChanged(const MyMoneyMoney &);
   void slotTabCurrentChanged(int index);
   void slotSelectIcon(QListWidgetItem* item);
   void slotOpenContextMenu(MyMoneyAccount account);
-  void slotAssetsSelectIcon(void);
+  void slotAssetsSelectIcon();
   void slotAssetsOpenContextMenu(const QPoint& point);
-  void slotLiabilitiesSelectIcon(void);
+  void slotLiabilitiesSelectIcon();
   void slotLiabilitiesOpenContextMenu(const QPoint& point);
-  void slotEquitiesSelectIcon(void);
+  void slotEquitiesSelectIcon();
   void slotEquitiesOpenContextMenu(const QPoint& point);
   void slotOpenObject(QListWidgetItem* item);
-  void slotExpandCollapse(void);
-  void slotUnusedIncomeExpenseAccountHidden(void);
+  void slotExpandCollapse();
+  void slotUnusedIncomeExpenseAccountHidden();
   void slotReconcileAccount(QListWidget* list, const MyMoneyAccount& acc);
 
 signals:

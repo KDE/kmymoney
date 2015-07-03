@@ -65,7 +65,7 @@ public:
   unsigned long     m_nextTransactionID;
   static const int  TRANSACTION_ID_SIZE = 18;
 
-  QString nextTransactionID(void) {
+  QString nextTransactionID() {
     QString id;
     id.setNum(++m_nextTransactionID);
     id = 'T' + id.rightJustified(TRANSACTION_ID_SIZE, '0');
@@ -83,8 +83,8 @@ public:
   virtual void setDocumentLocator(QXmlLocator * locator) {
     m_loc = locator;
   }
-  virtual bool startDocument(void);
-  virtual bool endDocument(void);
+  virtual bool startDocument();
+  virtual bool endDocument();
   virtual bool startPrefixMapping(const QString & prefix, const QString & uri);
   virtual bool endPrefixMapping(const QString & prefix);
   virtual bool startElement(const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts);
@@ -121,13 +121,13 @@ MyMoneyXmlContentHandler::MyMoneyXmlContentHandler(MyMoneyStorageXML* reader) :
 {
 }
 
-bool MyMoneyXmlContentHandler::startDocument(void)
+bool MyMoneyXmlContentHandler::startDocument()
 {
   qDebug("startDocument");
   return true;
 }
 
-bool MyMoneyXmlContentHandler::endDocument(void)
+bool MyMoneyXmlContentHandler::endDocument()
 {
   qDebug("endDocument");
   return true;

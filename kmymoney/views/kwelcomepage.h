@@ -43,13 +43,13 @@ public:
   KWelcomePage();
   ~KWelcomePage();
 
-  static const QString welcomePage(void);
+  static const QString welcomePage();
 
-  static const QString whatsNewPage(void);
+  static const QString whatsNewPage();
 
 protected:
 
-  static const QStringList featuresList(void);
+  static const QStringList featuresList();
 };
 
 #endif

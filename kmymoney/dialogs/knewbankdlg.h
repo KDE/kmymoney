@@ -52,7 +52,7 @@ class KNewBankDlg : public KNewBankDlgDecl
 public:
   explicit KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent = 0);
   ~KNewBankDlg();
-  const MyMoneyInstitution& institution(void);
+  const MyMoneyInstitution& institution();
 
 protected slots:
   void okClicked();

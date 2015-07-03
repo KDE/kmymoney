@@ -69,7 +69,7 @@ signals:
   void newCategory(MyMoneyAccount& acc);
 
 protected slots:
-  virtual void slotAdditionalFees(void);
+  virtual void slotAdditionalFees();
 };
 
 #endif

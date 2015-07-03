@@ -44,8 +44,6 @@
 #include "accountsmodel.h"
 #include "models/onlinebankingaccountsfilterproxymodel.h"
 
-class kMyMoneyAccountCompletion;
-
 /**
   * A proxy model used to filter all the data from the core accounts model leaving
   * only the name of the accounts so this model can be used in the account

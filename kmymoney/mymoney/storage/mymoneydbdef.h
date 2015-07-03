@@ -59,7 +59,7 @@ public:
       m_isPrimary(iprimary),
       m_isNotNull(inotnull),
       m_initVersion(initVersion) {}
-  MyMoneyDbColumn(void) {}
+  MyMoneyDbColumn() {}
   virtual ~MyMoneyDbColumn() {}
 
   /**
@@ -77,19 +77,19 @@ public:
     */
   virtual const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
 
-  const QString& name(void) const {
+  const QString& name() const {
     return (m_name);
   }
-  const QString& type(void) const {
+  const QString& type() const {
     return (m_type);
   }
-  bool isPrimaryKey(void) const {
+  bool isPrimaryKey() const {
     return (m_isPrimary);
   }
-  bool isNotNull(void) const {
+  bool isNotNull() const {
     return (m_isNotNull);
   }
-  int initVersion(void) const {
+  int initVersion() const {
     return (m_initVersion);
   }
 private:
@@ -115,7 +115,7 @@ public:
   virtual const QString generateDDL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
   virtual MyMoneyDbDatetimeColumn* clone() const;
 private:
-  static const QString calcType(void);
+  static const QString calcType();
 };
 
 /**
@@ -233,21 +233,21 @@ public:
       m_name(iname),
       m_fields(ifields),
       m_initVersion(initVersion) {}
-  MyMoneyDbTable(void) {}
+  MyMoneyDbTable() {}
 
-  inline const QString& name(void) const {
+  inline const QString& name() const {
     return (m_name);
   }
-  inline const QString& insertString(void) const {
+  inline const QString& insertString() const {
     return (m_insertString);
   };
   inline const QString selectAllString(bool terminate = true) const {
     return (terminate ? QString(m_selectAllString + ";") : m_selectAllString);
   };
-  inline const QString& updateString(void) const {
+  inline const QString& updateString() const {
     return (m_updateString);
   };
-  inline const QString& deleteString(void) const {
+  inline const QString& deleteString() const {
     return (m_deleteString);
   };
   /**
@@ -291,7 +291,7 @@ public:
   /**
     * This method builds all of the SQL strings for common operations.
     */
-  void buildSQLStrings(void);
+  void buildSQLStrings();
 
   /**
     * This method generates the DDL required to create the table.
@@ -312,20 +312,20 @@ public:
   void addIndex(const QString& name, const QStringList& columns, bool unique = false);
 
   typedef QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> >::const_iterator field_iterator;
-  inline field_iterator begin(void) const {
+  inline field_iterator begin() const {
     return m_fields.constBegin();
   }
-  inline field_iterator end(void) const {
+  inline field_iterator end() const {
     return m_fields.constEnd();
   }
 
   int fieldNumber(const QString& name) const;
 
   typedef QList<MyMoneyDbIndex>::const_iterator index_iterator;
-  inline index_iterator indexBegin(void) const {
+  inline index_iterator indexBegin() const {
     return m_indices.constBegin();
   }
-  inline index_iterator indexEnd(void) const {
+  inline index_iterator indexEnd() const {
     return m_indices.constEnd();
   }
 private:
@@ -356,12 +356,12 @@ public:
                 const QString& initVersion = "0.1")
       : m_name(name), m_createString(createString), m_initVersion(initVersion) {}
 
-  MyMoneyDbView(void) {}
+  MyMoneyDbView() {}
 
-  inline const QString& name(void) const {
+  inline const QString& name() const {
     return (m_name);
   }
-  inline const QString createString(void) const {
+  inline const QString createString() const {
     return (m_createString);
   };
 
@@ -384,18 +384,18 @@ public:
   const QString generateSQL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const;
 
   typedef QMap<QString, MyMoneyDbTable>::const_iterator table_iterator;
-  inline table_iterator tableBegin(void) const {
+  inline table_iterator tableBegin() const {
     return m_tables.constBegin();
   }
-  inline table_iterator tableEnd(void) const {
+  inline table_iterator tableEnd() const {
     return m_tables.constEnd();
   }
 
   typedef QMap<QString, MyMoneyDbView>::const_iterator view_iterator;
-  inline view_iterator viewBegin(void) const {
+  inline view_iterator viewBegin() const {
     return m_views.constBegin();
   }
-  inline view_iterator viewEnd(void) const {
+  inline view_iterator viewEnd() const {
     return m_views.constEnd();
   }
 

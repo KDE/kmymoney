@@ -126,7 +126,7 @@ void KImportDlg::slotOkClicked()
   accept();
 }
 
-void KImportDlg::readConfig(void)
+void KImportDlg::readConfig()
 {
   KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup kgrp = kconfig->group("Last Use Settings");
@@ -134,7 +134,7 @@ void KImportDlg::readConfig(void)
 
 }
 
-void KImportDlg::writeConfig(void)
+void KImportDlg::writeConfig()
 {
   KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup grp = kconfig->group("Last Use Settings");
@@ -156,7 +156,7 @@ void KImportDlg::slotFileTextChanged(const QString& text)
   }
 }
 
-void KImportDlg::slotNewProfile(void)
+void KImportDlg::slotNewProfile()
 {
   QPointer<MyMoneyQifProfileEditor> editor = new MyMoneyQifProfileEditor(true, this);
   editor->setObjectName("QIF Profile Editor");

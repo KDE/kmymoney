@@ -54,7 +54,7 @@ protected slots:
   void slotSetRegion(const QString &region);
 
 protected:
-  void loadList(void);
+  void loadList();
 
 private:
   QMap<QString, QString> m_regionMap;

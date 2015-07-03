@@ -55,7 +55,7 @@ public:
   bool isComplete() const;
 
 protected slots:
-  void slotCreateCategory(void);
+  void slotCreateCategory();
 };
 
 #endif

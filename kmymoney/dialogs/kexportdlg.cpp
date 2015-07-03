@@ -112,7 +112,7 @@ void KExportDlg::slotBrowse()
     m_qlineeditFile->setText(newName);
 }
 
-void KExportDlg::slotNewProfile(void)
+void KExportDlg::slotNewProfile()
 {
   QPointer<MyMoneyQifProfileEditor> editor = new MyMoneyQifProfileEditor(true, this);
   editor->setObjectName("QIF Profile Editor");
@@ -160,7 +160,7 @@ void KExportDlg::slotOkClicked()
   accept();
 }
 
-void KExportDlg::readConfig(void)
+void KExportDlg::readConfig()
 {
   KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup kgrp = kconfig->group("Last Use Settings");
@@ -173,7 +173,7 @@ void KExportDlg::readConfig(void)
   // m_accountComboBox is loaded in loadAccounts(), so we don't worry here
 }
 
-void KExportDlg::writeConfig(void)
+void KExportDlg::writeConfig()
 {
   KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup grp = kconfig->group("Last Use Settings");
@@ -227,7 +227,7 @@ void KExportDlg::checkData(const QString& accountId)
   m_qbuttonOk->setEnabled(okEnabled);
 }
 
-void KExportDlg::loadAccounts(void)
+void KExportDlg::loadAccounts()
 {
   AccountNamesFilterProxyModel *filterProxyModel = new AccountNamesFilterProxyModel(this);
   filterProxyModel->addAccountGroup(MyMoneyAccount::Asset);

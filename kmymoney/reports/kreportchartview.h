@@ -53,7 +53,7 @@ public:
     * Returns the labels for the X axis
     * @see m_abscissaNames
     */
-  QStringList& abscissaNames(void) {
+  QStringList& abscissaNames() {
     return m_abscissaNames;
   }
 
@@ -71,7 +71,7 @@ public:
   /**
     * Remove the chart legend
     */
-  void removeLegend(void);
+  void removeLegend();
 
 private:
 
@@ -112,7 +112,7 @@ private:
     * Returns accountSeries
     * @see m_accountSeries
     */
-  bool accountSeries(void) {
+  bool accountSeries() {
     return m_accountSeries;
   }
 
@@ -128,7 +128,7 @@ private:
     * Returns accountSeries
     * @see m_seriesTotals
     */
-  bool seriesTotals(void) {
+  bool seriesTotals() {
     return m_seriesTotals;
   }
 
@@ -144,7 +144,7 @@ private:
     * Returns number of columns
     * @see m_numColumns
     */
-  int numColumns(void) {
+  int numColumns() {
     return m_numColumns;
   }
 

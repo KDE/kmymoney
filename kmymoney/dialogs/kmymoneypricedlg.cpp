@@ -112,7 +112,7 @@ KMyMoneyPriceDlg::~KMyMoneyPriceDlg()
 {
 }
 
-void KMyMoneyPriceDlg::slotLoadWidgets(void)
+void KMyMoneyPriceDlg::slotLoadWidgets()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -229,7 +229,7 @@ void KMyMoneyPriceDlg::slotSelectPrice()
   }
 }
 
-void KMyMoneyPriceDlg::slotNewPrice(void)
+void KMyMoneyPriceDlg::slotNewPrice()
 {
   QPointer<KUpdateStockPriceDlg> dlg = new KUpdateStockPriceDlg(this);
   try {
@@ -261,7 +261,7 @@ void KMyMoneyPriceDlg::slotNewPrice(void)
   delete dlg;
 }
 
-int KMyMoneyPriceDlg::slotEditPrice(void)
+int KMyMoneyPriceDlg::slotEditPrice()
 {
   int rc = Rejected;
   QTreeWidgetItem* item = m_priceList->currentItem();
@@ -287,7 +287,7 @@ int KMyMoneyPriceDlg::slotEditPrice(void)
 }
 
 
-void KMyMoneyPriceDlg::slotDeletePrice(void)
+void KMyMoneyPriceDlg::slotDeletePrice()
 {
   QList<QTreeWidgetItem*> listItems = m_priceList->selectedItems();
   if (listItems.count() > 0) {
@@ -306,7 +306,7 @@ void KMyMoneyPriceDlg::slotDeletePrice(void)
   }
 }
 
-void KMyMoneyPriceDlg::slotOnlinePriceUpdate(void)
+void KMyMoneyPriceDlg::slotOnlinePriceUpdate()
 {
   QList<QTreeWidgetItem*> itemList = m_priceList->selectedItems();
   QTreeWidgetItem* item;

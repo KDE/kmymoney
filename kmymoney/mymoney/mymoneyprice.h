@@ -105,16 +105,16 @@ public:
     */
   const MyMoneyMoney& rate(const QString& id) const;
 
-  const QDate& date(void) const {
+  const QDate& date() const {
     return m_date;
   };
-  const QString& source(void) const {
+  const QString& source() const {
     return m_source;
   };
-  const QString& from(void) const {
+  const QString& from() const {
     return m_fromSecurity;
   };
-  const QString& to(void) const {
+  const QString& to() const {
     return m_toSecurity;
   };
 
@@ -126,7 +126,7 @@ public:
     * @retval true if price object is valid
     * @retval false if price object is not valid
     */
-  bool isValid(void) const;
+  bool isValid() const;
 
   // Equality operator
   bool operator == (const MyMoneyPrice &) const;

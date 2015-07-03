@@ -52,8 +52,8 @@ public:
   KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& schedule);
   ~KEnterScheduleDlg();
 
-  TransactionEditor* startEdit(void);
-  MyMoneyTransaction transaction(void);
+  TransactionEditor* startEdit();
+  MyMoneyTransaction transaction();
 
   /**
    * Show (or hide) the extended dialog keys for 'Skip' and 'Ignore'
@@ -67,7 +67,7 @@ public:
    * value only makes sense, once the dialog has been executed.
    * Before execution it returns @a Cancel.
    */
-  KMyMoneyUtils::EnterScheduleResultCodeE resultCode(void) const;
+  KMyMoneyUtils::EnterScheduleResultCodeE resultCode() const;
 
 protected:
   /// Overridden for internal reasons. No API changes.
@@ -82,13 +82,13 @@ protected:
   void resizeEvent(QResizeEvent* ev);
 
 public slots:
-  int exec(void);
+  int exec();
 
 private slots:
-  void slotSetupSize(void);
-  void slotShowHelp(void);
-  void slotIgnore(void);
-  void slotSkip(void);
+  void slotSetupSize();
+  void slotShowHelp();
+  void slotIgnore();
+  void slotSkip();
 
 private:
   /// \internal d-pointer class.

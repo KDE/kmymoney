@@ -64,7 +64,7 @@ public:
     * @returns true if download was initialized
     * @returns false if download was not started
     */
-  bool init(void);
+  bool init();
 
 signals:
   /**
@@ -76,7 +76,7 @@ signals:
 protected slots:
   void slotOfxFinished(KJob*);
   void slotOfxData(KIO::Job*, const QByteArray&);
-  virtual void reject(void);
+  virtual void reject();
 
 protected:
   void setStatus(const QString& _status);

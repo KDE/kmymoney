@@ -77,9 +77,9 @@ namespace OfxPartner
   */
 void setDirectory(const QString& dir);
 
-void ValidateIndexCache(void);
+void ValidateIndexCache();
 OfxFiServiceInfo ServiceInfo(const QString& fipid);
-QStringList BankNames(void);
+QStringList BankNames();
 QStringList FipidForBank(const QString& bank);
 
 }
@@ -91,7 +91,7 @@ public:
   OfxHttpRequest(const QString& method, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo = true);
   virtual ~OfxHttpRequest();
 
-  QHttp::Error error(void) const {
+  QHttp::Error error() const {
     return m_error;
   }
 
@@ -112,7 +112,7 @@ public:
   OfxHttpsRequest(const QString& method, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo = true);
   virtual ~OfxHttpsRequest();
 
-  QHttp::Error error(void) const {
+  QHttp::Error error() const {
     return m_error;
   }
 

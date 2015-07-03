@@ -80,9 +80,9 @@ public:
    * of the amount entered by the user and the @a value passed as argument.
    * In case b) it is returned with the selected global price precision.
    */
-  MyMoneyMoney price(void) const;
+  MyMoneyMoney price() const;
 
-  void setupPriceEditor(void);
+  void setupPriceEditor();
 
   static bool setupSplitPrice(MyMoneyMoney& shares, const MyMoneyTransaction& t, const MyMoneySplit& s, const QMap<QString, MyMoneyMoney>& priceInfo, QWidget* parentWidget);
 
@@ -90,11 +90,11 @@ protected:
   void updateExample(const MyMoneyMoney& price);
 
 protected slots:
-  void slotSetToAmount(void);
-  void slotSetExchangeRate(void);
+  void slotSetToAmount();
+  void slotSetExchangeRate();
   void slotUpdateResult(const QString& txt);
   void slotUpdateRate(const QString& txt);
-  virtual void accept(void);
+  virtual void accept();
 
 private:
   MyMoneySecurity     m_fromCurrency;

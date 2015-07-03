@@ -43,23 +43,23 @@ public:
   StdTransactionScheduled(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~StdTransactionScheduled() {}
 
-  virtual const char* className(void) {
+  virtual const char* className() {
     return "StdTransactionScheduled";
   }
 
   virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
 
-  bool isSelectable(void) const {
+  bool isSelectable() const {
     return true;
   }
-  bool canHaveFocus(void) const {
+  bool canHaveFocus() const {
     return true;
   }
-  virtual bool isScheduled(void) const {
+  virtual bool isScheduled() const {
     return true;
   }
 
-  virtual int sortSamePostDate(void) const {
+  virtual int sortSamePostDate() const {
     return 4;
   }
 

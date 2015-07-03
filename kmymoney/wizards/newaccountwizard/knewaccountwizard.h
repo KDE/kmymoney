@@ -77,7 +77,7 @@ public:
     * Returns the information about the account as entered by
     * the user.
     */
-  const MyMoneyAccount& account(void);
+  const MyMoneyAccount& account();
 
   /**
    * Method to load the generated account information back into the widget
@@ -90,26 +90,26 @@ public:
     * @note For now it's either fixed as Asset or Liability. We will provide
     * user selected parent accounts later.
     */
-  const MyMoneyAccount& parentAccount(void);
+  const MyMoneyAccount& parentAccount();
 
   /**
    * Returns information about the schedule. If the returned value
    * equals MyMoneySchedule() then the user did not select to create
    * a schedule.
    */
-  const MyMoneySchedule& schedule(void);
+  const MyMoneySchedule& schedule();
 
   /**
    * This method returns the value of the opening balance
    * entered by the user
    */
-  MyMoneyMoney openingBalance(void) const;
+  MyMoneyMoney openingBalance() const;
 
   /**
    * This method returns the interest rate as factor, ie an
    * interest rate of 6.5% will be returned as 0.065
    */
-  MyMoneyMoney interestRate(void) const;
+  MyMoneyMoney interestRate() const;
 
   /**
    * This method returns the payout transaction for loans.
@@ -117,7 +117,7 @@ public:
    * payout transaction should be generated, this method
    * returns an emtpy transaction.
    */
-  MyMoneyTransaction payoutTransaction(void);
+  MyMoneyTransaction payoutTransaction();
 
   /**
    * This method returns a MyMoneyAccount() object filled
@@ -129,24 +129,24 @@ public:
    * @note Make sure to call the account() method before you call this method.
    * Otherwise the returned object might contain unexpected results.
    */
-  MyMoneyAccount brokerageAccount(void) const;
+  MyMoneyAccount brokerageAccount() const;
 
   /**
    * This method returns the conversion rate
    */
-  MyMoneyPrice conversionRate(void) const;
+  MyMoneyPrice conversionRate() const;
 
 protected:
   /**
    * This method returns the currently selected currency for the account
    */
-  const MyMoneySecurity& currency(void) const;
+  const MyMoneySecurity& currency() const;
 
   /**
    * This method returns the precision in digits for the selected currency.
    * @sa currency()
    */
-  int precision(void) const;
+  int precision() const;
 
   /**
    * This method returns information about the selection of the user

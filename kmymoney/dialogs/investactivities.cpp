@@ -54,7 +54,7 @@ bool Activity::isComplete(QString& reason) const
   return rc;
 }
 
-bool Activity::haveAssetAccount(void) const
+bool Activity::haveAssetAccount() const
 {
   KMyMoneyCategory* cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("asset-account"));
 
@@ -87,7 +87,7 @@ bool Activity::haveCategoryAndAmount(const QString& category, const QString& amo
   return rc;
 }
 
-bool Activity::haveShares(void) const
+bool Activity::haveShares() const
 {
   kMyMoneyEdit* amount = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
   if (isMultiSelection() && amount->value().isZero())
@@ -96,7 +96,7 @@ bool Activity::haveShares(void) const
   return !amount->value().isZero();
 }
 
-bool Activity::havePrice(void) const
+bool Activity::havePrice() const
 {
   kMyMoneyEdit* amount = dynamic_cast<kMyMoneyEdit*>(haveWidget("price"));
   if (isMultiSelection() && amount->value().isZero())
@@ -167,7 +167,7 @@ void Activity::setLabelText(const QString& idx, const QString& txt) const
   }
 }
 
-void Activity::preloadAssetAccount(void)
+void Activity::preloadAssetAccount()
 {
   KMyMoneyCategory* cat;
   cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("asset-account"));
@@ -200,7 +200,7 @@ void Activity::setWidgetVisibility(const QStringList& widgetIds, bool visible) c
   }
 }
 
-void Buy::showWidgets(void) const
+void Buy::showWidgets() const
 {
   static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "shares" << "price" << "total" << "interest-account" << "fee-account";
   setWidgetVisibility(visibleWidgetIds, true);
@@ -281,7 +281,7 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   return true;
 }
 
-void Sell::showWidgets(void) const
+void Sell::showWidgets() const
 {
   static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "shares" << "price" << "total" << "interest-account" << "fee-account";
   setWidgetVisibility(visibleWidgetIds, true);
@@ -365,7 +365,7 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
   return true;
 }
 
-void Div::showWidgets(void) const
+void Div::showWidgets() const
 {
   static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "total" << "interest-account" << "fee-account";
   setWidgetVisibility(visibleWidgetIds, true);
@@ -425,7 +425,7 @@ bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   return true;
 }
 
-void Reinvest::showWidgets(void) const
+void Reinvest::showWidgets() const
 {
   static const QStringList visibleWidgetIds = QStringList() << "price" << "fee-account" << "interest-account";
   setWidgetVisibility(visibleWidgetIds, true);
@@ -517,7 +517,7 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
   return true;
 }
 
-void Add::showWidgets(void) const
+void Add::showWidgets() const
 {
   kMyMoneyEdit* shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
   shareEdit->show();
@@ -561,7 +561,7 @@ bool Add::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   return true;
 }
 
-void Remove::showWidgets(void) const
+void Remove::showWidgets() const
 {
   kMyMoneyEdit* shareEdit = dynamic_cast<kMyMoneyEdit*>(haveWidget("shares"));
   shareEdit->show();
@@ -604,7 +604,7 @@ bool Remove::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneyS
   return true;
 }
 
-void Split::showWidgets(void) const
+void Split::showWidgets() const
 {
   // TODO do we need a special split ratio widget?
   // TODO maybe yes, currently the precision is the one of the fraction and might differ from it
@@ -649,7 +649,7 @@ bool Split::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySp
   return true;
 }
 
-void IntInc::showWidgets(void) const
+void IntInc::showWidgets() const
 {
   static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "total" << "interest-account" << "fee-account";
   setWidgetVisibility(visibleWidgetIds, true);

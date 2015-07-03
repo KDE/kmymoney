@@ -69,7 +69,7 @@ public:
    * @retval true  the item represents a report
    * @retval false the item represents a reportgroup
    */
-  bool isReport(void);
+  bool isReport();
 
 private:
 

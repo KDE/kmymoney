@@ -332,7 +332,7 @@ void KMyMoneyView::showTitleBar(bool show)
     m_header->setVisible(show);
 }
 
-void KMyMoneyView::updateViewType(void)
+void KMyMoneyView::updateViewType()
 {
   // set the face type
   KPageView::FaceType faceType = KPageView::List;
@@ -394,7 +394,7 @@ void KMyMoneyView::showPage(KPageWidgetItem* pageItem)
   }
 }
 
-bool KMyMoneyView::canPrint(void)
+bool KMyMoneyView::canPrint()
 {
   bool rc = (
               m_reportsViewFrame == currentPage()
@@ -457,7 +457,7 @@ bool KMyMoneyView::canEditTransactions(const KMyMoneyRegister::SelectedTransacti
   return rc;
 }
 
-bool KMyMoneyView::createNewTransaction(void)
+bool KMyMoneyView::createNewTransaction()
 {
   bool rc = false;
   KMyMoneyRegister::SelectedTransactions list;
@@ -489,7 +489,7 @@ void KMyMoneyView::newStorage(storageTypeE t)
 
 }
 
-void KMyMoneyView::removeStorage(void)
+void KMyMoneyView::removeStorage()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   IMyMoneyStorage* p = file->storage();
@@ -600,12 +600,12 @@ void KMyMoneyView::slotShowReport(const MyMoneyReport& report)
   m_reportsView->slotOpenReport(report);
 }
 
-bool KMyMoneyView::fileOpen(void)
+bool KMyMoneyView::fileOpen()
 {
   return m_fileOpen;
 }
 
-void KMyMoneyView::closeFile(void)
+void KMyMoneyView::closeFile()
 {
   if (m_reportsView)
     m_reportsView->slotCloseAll();
@@ -1307,7 +1307,8 @@ bool KMyMoneyView::saveAsDatabase(const QUrl &url)
       if (KMessageBox::warningContinueCancel(0,
                                              i18n("Database contains data which must be removed before using Save As.\n"
                                                   "Do you wish to continue?"), "Database not empty") == KMessageBox::Continue) {
-        if (writer->open(url, QIODevice::WriteOnly, true) == 0) canWrite = true;
+        if (writer->open(url, QIODevice::WriteOnly, true) == 0)
+          canWrite = true;
       } else {
         delete writer;
         return false;
@@ -1336,7 +1337,7 @@ bool KMyMoneyView::saveAsDatabase(const QUrl &url)
   return (rc);
 }
 
-bool KMyMoneyView::dirty(void)
+bool KMyMoneyView::dirty()
 {
   if (!fileOpen())
     return false;
@@ -1372,7 +1373,7 @@ void KMyMoneyView::finishReconciliation(const MyMoneyAccount& /* account */)
   emit reconciliationStarts(MyMoneyAccount(), QDate(), MyMoneyMoney());
 }
 
-void KMyMoneyView::newFile(void)
+void KMyMoneyView::newFile()
 {
   closeFile();
   m_fileType = KmmXML; // assume native type until saved
@@ -1401,7 +1402,7 @@ void KMyMoneyView::slotSetBaseCurrency(const MyMoneySecurity& baseCurrency)
   }
 }
 
-void KMyMoneyView::selectBaseCurrency(void)
+void KMyMoneyView::selectBaseCurrency()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -1486,7 +1487,7 @@ void KMyMoneyView::loadDefaultCurrency(const MyMoneySecurity& currency, const bo
   }
 }
 
-void KMyMoneyView::loadDefaultCurrencies(void)
+void KMyMoneyView::loadDefaultCurrencies()
 {
   // more information can be obtained from http://en.wikipedia.org/wiki/Currency_codes
 
@@ -1682,7 +1683,7 @@ void KMyMoneyView::loadAncientCurrency(const QString& id, const QString& name, c
   }
 }
 
-void KMyMoneyView::loadAncientCurrencies(void)
+void KMyMoneyView::loadAncientCurrencies()
 {
   loadAncientCurrency("ATS", i18n("Austrian Schilling"), "ÖS", QDate(1998, 12, 31), MyMoneyMoney(10000, 137603), "EUR");
   loadAncientCurrency("DEM", i18n("German Mark"), "DM", QDate(1998, 12, 31), MyMoneyMoney(100000, 195583), "EUR");
@@ -1787,13 +1788,13 @@ void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QMode
    Instead, create a new function, fixFile_n, and modify the initializeStorage()
    logic above to call it */
 
-void KMyMoneyView::fixFile_3(void)
+void KMyMoneyView::fixFile_3()
 {
   // make sure each storage object contains a (unique) id
   MyMoneyFile::instance()->storageId();
 }
 
-void KMyMoneyView::fixFile_2(void)
+void KMyMoneyView::fixFile_2()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyTransactionFilter filter;
@@ -1839,7 +1840,7 @@ void KMyMoneyView::fixFile_2(void)
   qDebug("%d transactions fixed in fixFile_2", count);
 }
 
-void KMyMoneyView::fixFile_1(void)
+void KMyMoneyView::fixFile_1()
 {
   // we need to fix reports. If the account filter list contains
   // investment accounts, we need to add the stock accounts to the list
@@ -1908,7 +1909,7 @@ if (!m_accountsView->allItemsSelected())
 
 
 
-void KMyMoneyView::fixFile_0(void)
+void KMyMoneyView::fixFile_0()
 {
   /* (Ace) I am on a crusade against file fixups.  Whenever we have to fix the
    * file, it is really a warning.  So I'm going to print a debug warning, and
@@ -2077,7 +2078,7 @@ void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
   }
 }
 
-void KMyMoneyView::fixTransactions_0(void)
+void KMyMoneyView::fixTransactions_0()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -2282,7 +2283,7 @@ void KMyMoneyView::fixDuplicateAccounts_0(MyMoneyTransaction& t)
   qDebug("Duplicate account in transaction %s", qPrintable(t.id()));
 }
 
-void KMyMoneyView::slotPrintView(void)
+void KMyMoneyView::slotPrintView()
 {
   if (m_reportsViewFrame == currentPage())
     m_reportsView->slotPrintView();
@@ -2342,7 +2343,7 @@ void KMyMoneyViewBase::addWidget(QWidget* w)
   d->m_viewLayout->addWidget(w);
 }
 
-QVBoxLayout* KMyMoneyViewBase::layout(void) const
+QVBoxLayout* KMyMoneyViewBase::layout() const
 {
   return d->m_viewLayout;
 }

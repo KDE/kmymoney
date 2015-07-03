@@ -63,16 +63,16 @@ public:
   ~MyMoneyTag();
 
   // Simple get operations
-  const QString& name(void) const            {
+  const QString& name() const            {
     return m_name;
   }
-  bool isClosed(void) const {
+  bool isClosed() const {
     return m_closed;
   }
-  const QColor& tagColor(void) const         {
+  const QColor& tagColor() const         {
     return m_tag_color;
   }
-  const QString& notes(void) const           {
+  const QString& notes() const           {
     return m_notes;
   }
 

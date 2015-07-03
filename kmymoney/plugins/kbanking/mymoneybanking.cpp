@@ -216,7 +216,7 @@ KBankingPlugin::~KBankingPlugin()
 }
 
 
-void KBankingPlugin::loadProtocolConversion(void)
+void KBankingPlugin::loadProtocolConversion()
 {
   if (m_kbanking) {
     m_protocolConversionMap.clear();
@@ -271,7 +271,7 @@ MyMoneyKeyValueContainer KBankingPlugin::onlineBankingSettings(const MyMoneyKeyV
   return kvp;
 }
 
-void KBankingPlugin::createActions(void)
+void KBankingPlugin::createActions()
 {
   QAction *settings_aqbanking  = actionCollection()->addAction("settings_aqbanking");
   settings_aqbanking->setText(i18n("Configure Aq&Banking..."));
@@ -284,7 +284,7 @@ void KBankingPlugin::createActions(void)
   connect(viewInterface(), SIGNAL(viewStateChanged(bool)), action("file_import_aqbanking"), SLOT(setEnabled(bool)));
 }
 
-void KBankingPlugin::slotSettings(void)
+void KBankingPlugin::slotSettings()
 {
   if (m_kbanking) {
     GWEN_DIALOG* dlg = AB_SetupDialog_new(m_kbanking->getCInterface());
@@ -808,19 +808,19 @@ bool KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
   return true;
 }
 
-void KBankingPlugin::startPasswordTimer(void)
+void KBankingPlugin::startPasswordTimer()
 {
   if (d->passwordCacheTimer->isActive())
     d->passwordCacheTimer->stop();
   d->passwordCacheTimer->start();
 }
 
-void KBankingPlugin::slotClearPasswordCache(void)
+void KBankingPlugin::slotClearPasswordCache()
 {
   m_kbanking->clearPasswordCache();
 }
 
-void KBankingPlugin::slotImport(void)
+void KBankingPlugin::slotImport()
 {
   if (!m_kbanking->interactiveImport())
     qWarning("Error on import dialog");
@@ -948,7 +948,7 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
   return rv;
 }
 
-void KMyMoneyBanking::clearPasswordCache(void)
+void KMyMoneyBanking::clearPasswordCache()
 {
   /* clear password DB */
   GWEN_Gui_SetPasswordStatus(NULL, NULL, GWEN_Gui_PasswordStatus_Remove, 0);

@@ -75,90 +75,90 @@ public:
   Transaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~Transaction() {}
 
-  virtual const char* className(void) {
+  virtual const char* className() {
     return "Transaction";
   }
 
-  bool isSelectable(void) const {
+  bool isSelectable() const {
     return true;
   }
-  bool isSelected(void) const {
+  bool isSelected() const {
     return m_selected;
   }
   void setSelected(bool selected);
 
-  bool canHaveFocus(void) const {
+  bool canHaveFocus() const {
     return true;
   }
-  bool hasFocus(void) const {
+  bool hasFocus() const {
     return m_focus;
   }
-  bool hasEditorOpen(void) const {
+  bool hasEditorOpen() const {
     return m_inEdit;
   }
 
-  virtual bool isScheduled(void) const {
+  virtual bool isScheduled() const {
     return false;
   }
 
   void setFocus(bool focus, bool updateLens = true);
 
-  bool isErroneous(void) const {
+  bool isErroneous() const {
     return m_erroneous;
   }
 
-  virtual const QDate& sortPostDate(void) const {
+  virtual const QDate& sortPostDate() const {
     return m_transaction.postDate();
   }
-  virtual int sortSamePostDate(void) const {
+  virtual int sortSamePostDate() const {
     return 2;
   }
-  virtual const QDate& sortEntryDate(void) const {
+  virtual const QDate& sortEntryDate() const {
     return m_transaction.entryDate();
   }
-  virtual const QString& sortPayee(void) const {
+  virtual const QString& sortPayee() const {
     return m_payee;
   }
-  virtual const QList<QString>& sortTagList(void) const {
+  virtual const QList<QString>& sortTagList() const {
     return m_tagList;
   }
-  virtual const MyMoneyMoney& sortValue(void) const {
+  virtual const MyMoneyMoney& sortValue() const {
     return m_split.shares();
   }
-  virtual const QString& sortNumber(void) const {
+  virtual const QString& sortNumber() const {
     return m_split.number();
   }
-  virtual const QString& sortEntryOrder(void) const {
+  virtual const QString& sortEntryOrder() const {
     return m_uniqueId;
   }
-  virtual CashFlowDirection sortType(void) const {
+  virtual CashFlowDirection sortType() const {
     return m_split.shares().isNegative() ? Payment : Deposit;
   }
-  virtual const QString& sortCategory(void) const {
+  virtual const QString& sortCategory() const {
     return m_category;
   }
-  virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const {
+  virtual MyMoneySplit::reconcileFlagE sortReconcileState() const {
     return m_split.reconcileFlag();
   }
 
-  virtual const QString& id(void) const {
+  virtual const QString& id() const {
     return m_uniqueId;
   }
-  const MyMoneyTransaction& transaction(void) const {
+  const MyMoneyTransaction& transaction() const {
     return m_transaction;
   }
-  const MyMoneySplit& split(void) const {
+  const MyMoneySplit& split() const {
     return m_split;
   }
 
   void setBalance(const MyMoneyMoney& balance) {
     m_balance = balance;
   }
-  const MyMoneyMoney& balance(void) const {
+  const MyMoneyMoney& balance() const {
     return m_balance;
   }
 
-  virtual int rowHeightHint(void) const;
+  virtual int rowHeightHint() const;
 
   virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
   virtual void paintRegisterCell(QPainter* painter, QStyleOptionViewItemV4& option, const QModelIndex& index);
@@ -178,7 +178,7 @@ public:
   void registerCellText(QString& txt, int row, int col);
 
   virtual int formRowHeight(int row);
-  virtual int formRowHeight(void) const;
+  virtual int formRowHeight() const;
 
   virtual void setupForm(KMyMoneyTransactionForm::TransactionForm* form);
   virtual void setupFormPalette(QMap<QString, QWidget*>& editWidgets);
@@ -190,12 +190,12 @@ public:
   virtual void tabOrderInForm(QWidgetList& tabOrderWidgets) const = 0;
   virtual void tabOrderInRegister(QWidgetList& tabOrderWidgets) const = 0;
 
-  virtual KMyMoneyRegister::Action actionType(void) const = 0;
+  virtual KMyMoneyRegister::Action actionType() const = 0;
 
   QWidget* focusWidget(QWidget*) const;
   void arrangeWidget(QTableWidget* tbl, int row, int col, QWidget* w) const;
 
-  bool haveNumberField(void) const;
+  bool haveNumberField() const;
 
   bool matches(const RegisterFilter&) const;
 
@@ -224,10 +224,10 @@ public:
     */
   virtual int numRowsRegister(bool expanded) const = 0;
 
-  virtual int numRowsRegister(void) const = 0;
+  virtual int numRowsRegister() const = 0;
 
-  void leaveEditMode(void);
-  void startEditMode(void);
+  void leaveEditMode();
+  void startEditMode();
 
   /**
     * This method creates an editor for the transaction
@@ -309,7 +309,7 @@ public:
   StdTransaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~StdTransaction() {}
 
-  virtual const char* className(void) {
+  virtual const char* className() {
     return "StdTransaction";
   }
 
@@ -320,7 +320,7 @@ public:
   void setupForm(KMyMoneyTransactionForm::TransactionForm* form);
   void loadTab(KMyMoneyTransactionForm::TransactionForm* form);
 
-  int numColsForm(void) const {
+  int numColsForm() const {
     return 4;
   }
 
@@ -328,14 +328,14 @@ public:
   void arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidgets);
   void tabOrderInForm(QWidgetList& tabOrderWidgets) const;
   void tabOrderInRegister(QWidgetList& tabOrderWidgets) const;
-  KMyMoneyRegister::Action actionType(void) const;
+  KMyMoneyRegister::Action actionType() const;
 
   int numRowsRegister(bool expanded) const;
 
   /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
     */
-  int numRowsRegister(void) const {
+  int numRowsRegister() const {
     return RegisterItem::numRowsRegister();
   }
 
@@ -366,10 +366,10 @@ public:
   InvestTransaction(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~InvestTransaction() {}
 
-  virtual const QString& sortSecurity(void) const {
+  virtual const QString& sortSecurity() const {
     return m_security.name();
   }
-  virtual const char* className(void) {
+  virtual const char* className() {
     return "InvestTransaction";
   }
 
@@ -384,7 +384,7 @@ public:
     */
   void loadTab(KMyMoneyTransactionForm::TransactionForm* /* form */) {}
 
-  int numColsForm(void) const {
+  int numColsForm() const {
     return 4;
   }
 
@@ -392,7 +392,7 @@ public:
   void arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidgets);
   void tabOrderInForm(QWidgetList& tabOrderWidgets) const;
   void tabOrderInRegister(QWidgetList& tabOrderWidgets) const;
-  KMyMoneyRegister::Action actionType(void) const {
+  KMyMoneyRegister::Action actionType() const {
     return KMyMoneyRegister::ActionNone;
   }
 
@@ -401,7 +401,7 @@ public:
   /**
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
     */
-  int numRowsRegister(void) const {
+  int numRowsRegister() const {
     return RegisterItem::numRowsRegister();
   }
 
@@ -410,13 +410,13 @@ public:
   void splits(MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& feeSplits) const;
 
 protected:
-  bool haveShares(void) const;
-  bool haveFees(void) const;
-  bool haveInterest(void) const;
-  bool havePrice(void) const;
-  bool haveAmount(void) const;
-  bool haveAssetAccount(void) const;
-  bool haveSplitRatio(void) const;
+  bool haveShares() const;
+  bool haveFees() const;
+  bool haveInterest() const;
+  bool havePrice() const;
+  bool haveAmount() const;
+  bool haveAssetAccount() const;
+  bool haveSplitRatio() const;
 
   /**
     * Returns textual representation of the activity identified

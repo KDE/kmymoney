@@ -62,4 +62,6 @@ public:
 
 } // end namespace KMyMoneyPlugin
 
+Q_DECLARE_INTERFACE(KMyMoneyPlugin::storagePlugin, "org.kmymoney.plugin.storageplugin")
+
 #endif // KMYMONEYPLUGIN_STORAGEPLUGIN_H

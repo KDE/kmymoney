@@ -118,7 +118,7 @@ void CsvExportDlg::separator(int separatorIndex)
   m_separator = m_fieldDelimiterCharList[separatorIndex];
 }
 
-void CsvExportDlg::readConfig(void)
+void CsvExportDlg::readConfig()
 {
   KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, QLatin1String("csvexporterrc")));
   KConfigGroup conf = config->group("Last Use Settings");
@@ -129,7 +129,7 @@ void CsvExportDlg::readConfig(void)
   ui->m_kmymoneydateEnd->setDate(conf.readEntry("CsvExportDlg_EndDate", QDate()));
 }
 
-void CsvExportDlg::writeConfig(void)
+void CsvExportDlg::writeConfig()
 {
   KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1String("/csvexporterrc"));
   KConfigGroup grp = config->group("Last Use Settings");
@@ -207,7 +207,7 @@ void CsvExportDlg::checkData(const QString& accountName)
   ui->m_qbuttonOk->setEnabled(okEnabled);
 }
 
-void CsvExportDlg::loadAccounts(void)
+void CsvExportDlg::loadAccounts()
 {
   QStringList lst = getAccounts();
   for (int i = 0; i < lst.count(); i++) {

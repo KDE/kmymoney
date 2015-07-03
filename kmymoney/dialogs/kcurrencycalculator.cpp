@@ -200,7 +200,7 @@ KCurrencyCalculator::~KCurrencyCalculator()
 {
 }
 
-void KCurrencyCalculator::setupPriceEditor(void)
+void KCurrencyCalculator::setupPriceEditor()
 {
   m_dateFrame->show();
   m_amountDateFrame->hide();
@@ -208,14 +208,14 @@ void KCurrencyCalculator::setupPriceEditor(void)
   m_updateButton->hide();
 }
 
-void KCurrencyCalculator::slotSetToAmount(void)
+void KCurrencyCalculator::slotSetToAmount()
 {
   m_rateButton->setChecked(false);
   m_toAmount->setEnabled(true);
   m_conversionRate->setEnabled(false);
 }
 
-void KCurrencyCalculator::slotSetExchangeRate(void)
+void KCurrencyCalculator::slotSetExchangeRate()
 {
   m_amountButton->setChecked(false);
   m_toAmount->setEnabled(false);
@@ -287,7 +287,7 @@ void KCurrencyCalculator::updateExample(const MyMoneyMoney& price)
   m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!price.isZero());
 }
 
-void KCurrencyCalculator::accept(void)
+void KCurrencyCalculator::accept()
 {
   if (m_conversionRate->isEnabled())
     slotUpdateRate(QString());
@@ -316,7 +316,7 @@ void KCurrencyCalculator::accept(void)
   KCurrencyCalculatorDecl::accept();
 }
 
-MyMoneyMoney KCurrencyCalculator::price(void) const
+MyMoneyMoney KCurrencyCalculator::price() const
 {
   // This should fix https://bugs.kde.org/show_bug.cgi?id=205254 and
   // https://bugs.kde.org/show_bug.cgi?id=325953 as well as

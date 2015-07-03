@@ -103,7 +103,7 @@ public:
   MyMoneyMoney(const MyMoneyMoney& Amount);
   MyMoneyMoney(const AlkValue& Amount);
 
-  const MyMoneyMoney abs(void) const {
+  const MyMoneyMoney abs() const {
     return AlkValue::abs();
   };
 
@@ -144,7 +144,7 @@ public:
 
   MyMoneyMoney convert(const signed64 denom = 100, const roundingMethod how = RndRound) const;
   static signed64 precToDenom(int prec);
-  double toDouble(void) const;
+  double toDouble() const;
 
   static void setThousandSeparator(const QChar &);
   static void setDecimalSeparator(const QChar &);
@@ -153,10 +153,10 @@ public:
   static void setNegativePrefixCurrencySymbol(const bool flags);
   static void setPositivePrefixCurrencySymbol(const bool flags);
 
-  static const QChar thousandSeparator(void);
-  static const QChar decimalSeparator(void);
-  static signPosition negativeMonetarySignPosition(void);
-  static signPosition positiveMonetarySignPosition(void);
+  static const QChar thousandSeparator();
+  static const QChar decimalSeparator();
+  static signPosition negativeMonetarySignPosition();
+  static signPosition positiveMonetarySignPosition();
   static void setFileVersion(const fileVersionE version);
 
   const MyMoneyMoney& operator=(const QString& pszAmount);
@@ -198,11 +198,11 @@ public:
   bool isZero() const {
     return valueRef() == 0;
   }
-  bool isAutoCalc(void) const {
+  bool isAutoCalc() const {
     return (*this == autoCalc);
   }
 
-  MyMoneyMoney reduce(void) const;
+  MyMoneyMoney reduce() const;
 
   static const MyMoneyMoney ONE;
   static const MyMoneyMoney MINUS_ONE;

@@ -44,7 +44,7 @@ public:
                        QString userEmail, QWidget *parent = 0, const QString& title = QString());
   ~KNewFileDlg();
 
-  QPushButton* cancelButton(void);
+  QPushButton* cancelButton();
 
 public:
   QString userNameText;
@@ -61,7 +61,7 @@ protected:
 
 protected slots:
   void okClicked();
-  void loadFromAddressBook(void);
+  void loadFromAddressBook();
   /** Gets the result of searching for the contact details of the current user */
   void slotContactFetched(const ContactData &identity);
 

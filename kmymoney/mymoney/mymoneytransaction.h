@@ -64,28 +64,28 @@ public:
   friend QDataStream &operator>>(QDataStream &, MyMoneyTransaction &);
 
   // Simple get operations
-  const QDate& entryDate(void) const {
+  const QDate& entryDate() const {
     return m_entryDate;
   };
-  const QDate& postDate(void) const {
+  const QDate& postDate() const {
     return m_postDate;
   };
-  const QString& memo(void) const {
+  const QString& memo() const {
     return m_memo;
   };
-  const QList<MyMoneySplit>& splits(void) const {
+  const QList<MyMoneySplit>& splits() const {
     return m_splits;
   };
-  QList<MyMoneySplit>& splits(void) {
+  QList<MyMoneySplit>& splits() {
     return m_splits;
   };
-  unsigned int splitCount(void) const {
+  unsigned int splitCount() const {
     return m_splits.count();
   };
-  const QString& commodity(void) const {
+  const QString& commodity() const {
     return m_commodity;
   };
-  const QString& bankID(void) const {
+  const QString& bankID() const {
     return m_bankID;
   };
 
@@ -190,14 +190,14 @@ public:
   /**
     * This method is used to remove all splits from a transaction
     */
-  void removeSplits(void);
+  void removeSplits();
 
   /**
     * This method is used to return the sum of all splits of this transaction
     *
     * @return MyMoneyMoney value of sum of all splits
     */
-  const MyMoneyMoney splitSum(void) const;
+  const MyMoneyMoney splitSum() const;
 
   /**
     * This method returns information if the transaction
@@ -211,19 +211,19 @@ public:
     *
     * @note Upon internal failures, the return value @p false will be used.
     */
-  bool isLoanPayment(void) const;
+  bool isLoanPayment() const;
 
   /**
     * This method returns a const reference to the amortization split.
     * In case none is found, a reference to an empty split will be returned.
     */
-  const MyMoneySplit& amortizationSplit(void) const;
+  const MyMoneySplit& amortizationSplit() const;
 
   /**
    * This method returns a const reference to the interest split.
    * In case none is found, a reference to an empty split will be returned.
    */
-  const MyMoneySplit& interestSplit(void) const;
+  const MyMoneySplit& interestSplit() const;
 
   /**
     * This method is used to check if two transactions are identical.
@@ -244,12 +244,12 @@ public:
   /**
     * returns @a true if this is a stock split transaction
     */
-  bool isStockSplit(void) const;
+  bool isStockSplit() const;
 
   /**
     * returns @a true if this is an imported transaction
     */
-  bool isImported(void) const;
+  bool isImported() const;
 
   /**
    * Sets the imported state of this transaction to be the value of @a state .
@@ -265,7 +265,7 @@ public:
     *
     * @return QString with ID of the first split of transactions
     */
-  static const QString firstSplitID(void);
+  static const QString firstSplitID();
 
   void writeXML(QDomDocument& document, QDomElement& parent) const;
 
@@ -286,7 +286,7 @@ public:
     * @retval true at least one split has an autocalc value
     * @retval false all splits have fixed values
     */
-  bool hasAutoCalcSplit(void) const;
+  bool hasAutoCalcSplit() const;
 
   /**
     * Returns a signature consisting of the account ids and the
@@ -305,7 +305,7 @@ public:
     */
   QString accountSignature(bool includeSplitCount = false) const;
 
-  QString uniqueSortKey(void) const;
+  QString uniqueSortKey() const;
 
   /**
    * This module implements an algorithm used by P.J. Weinberger
@@ -335,7 +335,7 @@ private:
   /**
     * This method returns the next id to be used for a split
     */
-  const QString nextSplitID(void);
+  const QString nextSplitID();
 
 private:
   static const int SPLIT_ID_SIZE = 4;

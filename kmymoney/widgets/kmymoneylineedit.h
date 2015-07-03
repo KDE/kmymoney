@@ -63,7 +63,7 @@ public:
     * This method is used to set the value of the widget back to
     * the one passed using loadText().
     */
-  void resetText(void);
+  void resetText();
 
   /**
     * Do not select the text upon the next focus in event if

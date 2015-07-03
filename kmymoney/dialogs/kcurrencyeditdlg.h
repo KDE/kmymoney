@@ -67,14 +67,14 @@ protected:
 
 protected slots:
   void slotSelectCurrency(QTreeWidgetItem *);
-  void slotStartRename(void);
+  void slotStartRename();
   void slotOpenContextMenu(const QPoint& p);
-  void slotLoadCurrencies(void);
+  void slotLoadCurrencies();
   void slotUpdateCurrency(QTreeWidgetItem *item);
 
 private slots:
-  void timerDone(void);
-  void slotSelectBaseCurrency(void);
+  void timerDone();
+  void slotSelectBaseCurrency();
 
 signals:
   void selectObject(const MyMoneySecurity& currency);

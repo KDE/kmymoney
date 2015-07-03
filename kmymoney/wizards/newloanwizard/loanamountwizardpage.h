@@ -61,7 +61,7 @@ public:
   void initializePage();
 
 public slots:
-  void resetCalculator(void);
+  void resetCalculator();
 };
 
 #endif

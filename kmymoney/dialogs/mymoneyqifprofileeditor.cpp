@@ -142,7 +142,7 @@ MyMoneyQifProfileEditor::~MyMoneyQifProfileEditor()
   delete tabDate;
 }
 
-void MyMoneyQifProfileEditor::loadWidgets(void)
+void MyMoneyQifProfileEditor::loadWidgets()
 {
   if (m_inEdit)
     setWindowTitle(i18n("QIF Profile Editor"));
@@ -208,7 +208,7 @@ void MyMoneyQifProfileEditor::loadWidgets(void)
   }
 }
 
-void MyMoneyQifProfileEditor::loadProfileListFromConfig(void)
+void MyMoneyQifProfileEditor::loadProfileListFromConfig()
 {
   QFontMetrics fontMetrics(m_profileListBox->font());
   int w = 100;      // minimum is 100 pixels width for the list box
@@ -272,7 +272,7 @@ void MyMoneyQifProfileEditor::slotLoadProfileFromConfig(const QString& profile)
   showProfile();
 }
 
-void MyMoneyQifProfileEditor::showProfile(void)
+void MyMoneyQifProfileEditor::showProfile()
 {
   m_editDescription->setText(m_profile.profileDescription());
   m_editType->setText(m_profile.profileType());
@@ -345,7 +345,7 @@ void MyMoneyQifProfileEditor::addProfile(const QString& name)
   m_isDirty = true;
 }
 
-void MyMoneyQifProfileEditor::slotOk(void)
+void MyMoneyQifProfileEditor::slotOk()
 {
   if (m_profile.isDirty())
     m_isDirty = true;
@@ -359,7 +359,7 @@ void MyMoneyQifProfileEditor::slotOk(void)
   accept();
 }
 
-void MyMoneyQifProfileEditor::slotReset(void)
+void MyMoneyQifProfileEditor::slotReset()
 {
   // first flush any changes
   m_profile.saveProfile();
@@ -373,7 +373,7 @@ void MyMoneyQifProfileEditor::slotReset(void)
   m_isDirty = false;
 }
 
-void MyMoneyQifProfileEditor::slotRename(void)
+void MyMoneyQifProfileEditor::slotRename()
 {
   bool ok;
   QString newName = enterName(ok);
@@ -386,7 +386,7 @@ void MyMoneyQifProfileEditor::slotRename(void)
   }
 }
 
-void MyMoneyQifProfileEditor::slotNew(void)
+void MyMoneyQifProfileEditor::slotNew()
 {
   bool ok;
   QString newName = enterName(ok);
@@ -410,7 +410,7 @@ const QString MyMoneyQifProfileEditor::enterName(bool& ok)
                                &ok);
 }
 
-void MyMoneyQifProfileEditor::slotDelete(void)
+void MyMoneyQifProfileEditor::slotDelete()
 {
   QString profile = m_profile.profileName().mid(8);
 
@@ -428,7 +428,7 @@ void MyMoneyQifProfileEditor::slotDelete(void)
   }
 }
 
-void MyMoneyQifProfileEditor::slotHelp(void)
+void MyMoneyQifProfileEditor::slotHelp()
 {
   KHelpClient::invokeHelp("details.impexp.qifimp.profile");
 }

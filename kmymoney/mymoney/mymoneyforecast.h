@@ -71,7 +71,7 @@ public:
   /**
    * Returns the list of accounts to be forecast.
    */
-  QList<MyMoneyAccount> accountList(void);
+  QList<MyMoneyAccount> accountList();
 
   /**
    * Returns the balance trend for account @a acc based on a number of days @p forecastDays
@@ -143,7 +143,7 @@ public:
   /**
    * number of days to go back in history to calculate forecast
    */
-  int historyDays(void) const {
+  int historyDays() const {
     return (m_historyStartDate.daysTo(m_historyEndDate) + 1);
   }
 
@@ -202,52 +202,52 @@ public:
     m_includeScheduledTransactions = _bool;
   }
 
-  int accountsCycle(void) const   {
+  int accountsCycle() const   {
     return m_accountsCycle;
   }
-  int forecastCycles(void) const   {
+  int forecastCycles() const   {
     return m_forecastCycles;
   }
-  int forecastDays(void) const {
+  int forecastDays() const {
     return m_forecastDays;
   }
-  const QDate& beginForecastDate(void) const   {
+  const QDate& beginForecastDate() const   {
     return m_beginForecastDate;
   }
-  int beginForecastDay(void) const   {
+  int beginForecastDay() const   {
     return m_beginForecastDay;
   }
-  int forecastMethod(void) const   {
+  int forecastMethod() const   {
     return m_forecastMethod;
   }
-  const QDate& historyStartDate(void) const {
+  const QDate& historyStartDate() const {
     return m_historyStartDate;
   }
-  const QDate& historyEndDate(void) const {
+  const QDate& historyEndDate() const {
     return m_historyEndDate;
   }
-  const QDate& forecastStartDate(void) const {
+  const QDate& forecastStartDate() const {
     return m_forecastStartDate;
   }
-  const QDate& forecastEndDate(void) const {
+  const QDate& forecastEndDate() const {
     return m_forecastEndDate;
   }
-  bool skipOpeningDate(void) const {
+  bool skipOpeningDate() const {
     return m_skipOpeningDate;
   }
-  int historyMethod(void) const   {
+  int historyMethod() const   {
     return m_historyMethod;
   }
-  bool isIncludingUnusedAccounts(void) const {
+  bool isIncludingUnusedAccounts() const {
     return m_includeUnusedAccounts;
   }
-  bool isForecastDone(void) const {
+  bool isForecastDone() const {
     return m_forecastDone;
   }
-  bool isIncludingFutureTransactions(void) const {
+  bool isIncludingFutureTransactions() const {
     return m_includeFutureTransactions;
   }
-  bool isIncludingScheduledTransactions(void) const {
+  bool isIncludingScheduledTransactions() const {
     return m_includeScheduledTransactions;
   }
 
@@ -280,17 +280,17 @@ private:
   /**
    * Returns the list of accounts to be forecast. Only Asset and Liability are returned.
    */
-  static QList<MyMoneyAccount> forecastAccountList(void);
+  static QList<MyMoneyAccount> forecastAccountList();
 
   /**
    * Returns the list of accounts to create a budget. Only Income and Expenses are returned.
    */
-  QList<MyMoneyAccount> budgetAccountList(void);
+  QList<MyMoneyAccount> budgetAccountList();
 
   /**
    * calculate daily forecast balance based on historic transactions
    */
-  void calculateHistoricDailyBalances(void);
+  void calculateHistoricDailyBalances();
 
   /**
    * calculate monthly budget balance based on historic transactions
@@ -305,22 +305,22 @@ private:
   /**
    * calculate forecast based on future and scheduled transactions
    */
-  void doFutureScheduledForecast(void);
+  void doFutureScheduledForecast();
 
   /**
    * add future transactions to forecast
    */
-  void addFutureTransactions(void);
+  void addFutureTransactions();
 
   /**
    * add scheduled transactions to forecast
    */
-  void addScheduledTransactions(void);
+  void addScheduledTransactions();
 
   /**
    * calculate daily forecast balance based on future and scheduled transactions
    */
-  void calculateScheduledDailyBalances(void);
+  void calculateScheduledDailyBalances();
 
   /**
    * set the starting balance for an accounts
@@ -348,22 +348,22 @@ private:
   /**
    * calculate daily forecast trend based on historic transactions
    */
-  void calculateAccountTrendList(void);
+  void calculateAccountTrendList();
 
   /**
    * set the internal list of accounts to be forecast
    */
-  void setForecastAccountList(void);
+  void setForecastAccountList();
 
   /**
    * set the internal list of accounts to create a budget
    */
-  void setBudgetAccountList(void);
+  void setBudgetAccountList();
 
   /**
    * get past transactions for the accounts to be forecast
    */
-  void pastTransactions(void);
+  void pastTransactions();
 
   /**
    * calculate the day to start forecast and sets the begin date

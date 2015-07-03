@@ -155,7 +155,7 @@ void kMyMoneyCalculator::digitClicked(int button)
   changeDisplay(operand);
 }
 
-void kMyMoneyCalculator::commaClicked(void)
+void kMyMoneyCalculator::commaClicked()
 {
   if (operand.length() == 0)
     operand = '0';
@@ -167,7 +167,7 @@ void kMyMoneyCalculator::commaClicked(void)
   changeDisplay(operand);
 }
 
-void kMyMoneyCalculator::plusminusClicked(void)
+void kMyMoneyCalculator::plusminusClicked()
 {
   if (operand.length() == 0 && m_result.length() > 0)
     operand = m_result;
@@ -276,7 +276,7 @@ QString kMyMoneyCalculator::normalizeString(const double& val)
   return str;
 }
 
-void kMyMoneyCalculator::clearClicked(void)
+void kMyMoneyCalculator::clearClicked()
 {
   if (operand.length() > 0) {
     operand = operand.left(operand.length() - 1);
@@ -287,14 +287,14 @@ void kMyMoneyCalculator::clearClicked(void)
     changeDisplay(operand);
 }
 
-void kMyMoneyCalculator::clearAllClicked(void)
+void kMyMoneyCalculator::clearAllClicked()
 {
   operand.clear();
   op = 0;
   changeDisplay("0");
 }
 
-void kMyMoneyCalculator::percentClicked(void)
+void kMyMoneyCalculator::percentClicked()
 {
   if (op != 0) {
     double op2 = operand.toDouble();
@@ -314,7 +314,7 @@ void kMyMoneyCalculator::percentClicked(void)
   }
 }
 
-const QString kMyMoneyCalculator::result(void) const
+const QString kMyMoneyCalculator::result() const
 {
   QString txt = m_result;
   txt.replace(QRegExp("\\."), m_comma);

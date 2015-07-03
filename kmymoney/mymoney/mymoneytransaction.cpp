@@ -160,7 +160,7 @@ void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
     throw MYMONEYEXCEPTION(QString("Invalid split id '%1'").arg(split.id()));
 }
 
-void MyMoneyTransaction::removeSplits(void)
+void MyMoneyTransaction::removeSplits()
 {
   m_splits.clear();
   m_nextSplitID = 1;
@@ -228,7 +228,7 @@ const QString MyMoneyTransaction::firstSplitID()
   return id;
 }
 
-const MyMoneyMoney MyMoneyTransaction::splitSum(void) const
+const MyMoneyMoney MyMoneyTransaction::splitSum() const
 {
   MyMoneyMoney result;
   QList<MyMoneySplit>::ConstIterator it;
@@ -252,7 +252,7 @@ void MyMoneyTransaction::setMemo(const QString& memo)
   m_memo = memo;
 }
 
-bool MyMoneyTransaction::isLoanPayment(void) const
+bool MyMoneyTransaction::isLoanPayment() const
 {
   try {
     QList<MyMoneySplit>::ConstIterator it;
@@ -266,7 +266,7 @@ bool MyMoneyTransaction::isLoanPayment(void) const
   return false;
 }
 
-const MyMoneySplit& MyMoneyTransaction::amortizationSplit(void) const
+const MyMoneySplit& MyMoneyTransaction::amortizationSplit() const
 {
   static MyMoneySplit nullSplit;
 
@@ -279,7 +279,7 @@ const MyMoneySplit& MyMoneyTransaction::amortizationSplit(void) const
   return nullSplit;
 }
 
-const MyMoneySplit& MyMoneyTransaction::interestSplit(void) const
+const MyMoneySplit& MyMoneyTransaction::interestSplit() const
 {
   static MyMoneySplit nullSplit;
 
@@ -314,12 +314,12 @@ unsigned long MyMoneyTransaction::hash(const QString& txt, unsigned long h)
   return h;
 }
 
-bool MyMoneyTransaction::isStockSplit(void) const
+bool MyMoneyTransaction::isStockSplit() const
 {
   return (m_splits.count() == 1 && m_splits[0].action() == MyMoneySplit::ActionSplitShares);
 }
 
-bool MyMoneyTransaction::isImported(void) const
+bool MyMoneyTransaction::isImported() const
 {
   return value("Imported").toLower() == QString("true");
 }
@@ -404,7 +404,7 @@ bool MyMoneyTransaction::hasReferenceTo(const QString& id) const
   return rc;
 }
 
-bool MyMoneyTransaction::hasAutoCalcSplit(void) const
+bool MyMoneyTransaction::hasAutoCalcSplit() const
 {
   QList<MyMoneySplit>::ConstIterator it;
 
@@ -435,7 +435,7 @@ QString MyMoneyTransaction::accountSignature(bool includeSplitCount) const
   return rc;
 }
 
-QString MyMoneyTransaction::uniqueSortKey(void) const
+QString MyMoneyTransaction::uniqueSortKey() const
 {
   QString year, month, day, key;
   const QDate& postdate = postDate();

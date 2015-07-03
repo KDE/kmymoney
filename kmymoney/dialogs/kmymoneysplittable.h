@@ -74,7 +74,7 @@ public:
   /**
     * This method is used to retrieve the transaction from the widget.
     */
-  const MyMoneyTransaction& transaction(void) const {
+  const MyMoneyTransaction& transaction() const {
     return m_transaction;
   }
 
@@ -99,7 +99,7 @@ protected:
 
   void resizeEvent(QResizeEvent*);
   KMyMoneyCategory* createEditWidgets(bool setFocus);
-  void destroyEditWidgets(void);
+  void destroyEditWidgets();
   void destroyEditWidget(int r, int c);
 
   /**
@@ -114,14 +114,14 @@ protected:
   virtual bool focusNextPrevChild(bool next);
   void addToTabOrder(QWidget* w);
 
-  void updateTransactionTableSize(void);
+  void updateTransactionTableSize();
 
   /**
     * This method returns the current state of the inline editing mode
     *
     * @return true if inline edit mode is on, false otherwise
     */
-  bool isEditMode(void) const;
+  bool isEditMode() const;
 
   /**
     * This method returns true if the currently edited split is valid
@@ -139,12 +139,12 @@ public slots:
 
   void selectRow(int row);
 
-  KMyMoneyCategory* slotStartEdit(void);
-  void slotEndEdit(void);
-  void slotEndEditKeyboard(void);
-  void slotDeleteSplit(void);
-  void slotCancelEdit(void);
-  void slotDuplicateSplit(void);
+  KMyMoneyCategory* slotStartEdit();
+  void slotEndEdit();
+  void slotEndEditKeyboard();
+  void slotDeleteSplit();
+  void slotCancelEdit();
+  void slotDuplicateSplit();
 
 protected slots:
   /// move the focus to the selected @p row.
@@ -158,30 +158,30 @@ protected slots:
     */
   void slotUpdateData(const MyMoneyTransaction& t);
 
-  void slotLoadEditWidgets(void);
+  void slotLoadEditWidgets();
 
 signals:
   /**
     * This signal is emitted whenever the widget goes into edit mode.
     */
-  void editStarted(void);
+  void editStarted();
 
   /**
     * This signal is emitted whenever the widget ends edit mode.
     */
-  void editFinished(void);
+  void editFinished();
 
   /**
     * This signal is emitted whenever the return key is pressed
     * and the widget is not in edit mode.
     */
-  void escapePressed(void);
+  void escapePressed();
 
   /**
     * This signal is emitted whenever the return key is pressed
     * and the widget is not in edit mode.
     */
-  void returnPressed(void);
+  void returnPressed();
 
   /**
     * This signal is emitted whenever the transaction data has been changed

@@ -69,7 +69,7 @@ public:
     * @return QString representing the result of the
     *         last operation
     */
-  const QString result(void) const;
+  const QString result() const;
 
   /**
     * This method is used to set the character to be used
@@ -133,27 +133,27 @@ protected slots:
     * This method appends a period (comma) to initialize the fractional
     * part of an operand. The period is only appended once.
     */
-  void commaClicked(void);
+  void commaClicked();
 
   /**
     * This method reverses the sign of the current operand
     */
-  void plusminusClicked(void);
+  void plusminusClicked();
 
   /**
     * This method clears the current operand
     */
-  void clearClicked(void);
+  void clearClicked();
 
   /**
     * This method clears all registers
     */
-  void clearAllClicked(void);
+  void clearAllClicked();
 
   /**
     * This method executes the percent operation
     */
-  void percentClicked(void);
+  void percentClicked();
 
   /**
     * This method updates the display of the calculator with

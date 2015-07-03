@@ -25,7 +25,7 @@
 #include <QDebug>
 #include <KLocalizedString>
 
-#include "models/payeeidentifiermodel.h"
+#include "models/payeeidentifiercontainermodel.h"
 #include "ibanbicitemedit.h"
 
 ibanBicItemDelegate::ibanBicItemDelegate(QObject* parent, const QVariantList&)
@@ -138,7 +138,7 @@ void ibanBicItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* mode
   ibanBicItemEdit* ibanEditor = qobject_cast< ibanBicItemEdit* >(editor);
   Q_CHECK_PTR(ibanEditor);
 
-  model->setData(index, QVariant::fromValue<payeeIdentifier>(ibanEditor->identifier()), payeeIdentifierModel::payeeIdentifier);
+  model->setData(index, QVariant::fromValue<payeeIdentifier>(ibanEditor->identifier()), payeeIdentifierContainerModel::payeeIdentifier);
 }
 
 void ibanBicItemDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -153,7 +153,7 @@ void ibanBicItemDelegate::updateEditorGeometry(QWidget* editor, const QStyleOpti
 payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBicItemDelegate::ibanBicByIndex(const QModelIndex& index) const
 {
   payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
-        index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
+        index.model()->data(index, payeeIdentifierContainerModel::payeeIdentifier).value<payeeIdentifier>()
       );
   Q_ASSERT(!ibanBic.isNull());
   return ibanBic;

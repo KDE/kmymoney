@@ -17,9 +17,10 @@
  */
 
 #include "ibanbicitemedit.h"
-#include "payeeidentifier/ibanandbic/ibanbic.h"
-#include <payeeidentifier/payeeidentifiertyped.h>
 #include "ui_ibanbicitemedit.h"
+
+#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "payeeidentifier/payeeidentifiertyped.h"
 
 struct ibanBicItemEdit::Private {
   Ui::ibanBicItemEdit* ui;

@@ -62,14 +62,14 @@ CsvExporterPlugin::~CsvExporterPlugin()
 {
 }
 
-void CsvExporterPlugin::createActions(void)
+void CsvExporterPlugin::createActions()
 {
   m_action = actionCollection()->addAction("file_export_csv");
   m_action->setText(i18n("&CSV..."));
   connect(m_action, SIGNAL(triggered(bool)), this, SLOT(slotCsvExport()));
 }
 
-void CsvExporterPlugin::slotCsvExport(void)
+void CsvExporterPlugin::slotCsvExport()
 {
   m_dlg = new CsvExportDlg();
   if (m_dlg->exec()) {

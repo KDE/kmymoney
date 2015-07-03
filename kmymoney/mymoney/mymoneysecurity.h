@@ -104,7 +104,7 @@ public:
   void          setSecurityType(const eSECURITYTYPE& s)   {
     m_securityType = s;
   }
-  bool    isCurrency(void) const {
+  bool    isCurrency() const {
     return m_securityType == SECURITY_CURRENCY;
   };
 
@@ -115,24 +115,24 @@ public:
     m_tradingMarket = str;
   }
 
-  const QString& tradingCurrency(void) const {
+  const QString& tradingCurrency() const {
     return m_tradingCurrency;
   };
   void           setTradingCurrency(const QString& str) {
     m_tradingCurrency = str;
   };
 
-  int smallestAccountFraction(void) const {
+  int smallestAccountFraction() const {
     return m_smallestAccountFraction;
   };
   void setSmallestAccountFraction(const int sf) {
     m_smallestAccountFraction = sf;
   };
 
-  int partsPerUnit(void) const {
+  int partsPerUnit() const {
     return m_partsPerUnit;
   };
-  int smallestCashFraction(void) const {
+  int smallestCashFraction() const {
     return m_smallestCashFraction;
   };
 

@@ -112,6 +112,24 @@ public:
   QMap<QString, dailyBalances> m_accountList;
 };
 
+/**
+ * @brief Converts a QPixmap to an data URI scheme
+ *
+ * According to RFC 2397
+ *
+ * @param pixmap Source to convert
+ * @return full data URI
+ */
+QString QPixmapToDataUri(const QPixmap& pixmap)
+{
+  QImage image(pixmap.toImage());
+  QByteArray byteArray;
+  QBuffer buffer(&byteArray);
+  buffer.open(QIODevice::WriteOnly);
+  image.save(&buffer, "PNG"); // writes the image in PNG format inside the buffer
+  return QLatin1String("data:image/png;base64,") + QString(byteArray.toBase64());
+}
+
 KHomeView::KHomeView(QWidget *parent, const char *name) :
     KMyMoneyViewBase(parent, name, i18n("Home")),
     d(new Private)
@@ -145,7 +163,7 @@ KHomeView::~KHomeView()
   delete d;
 }
 
-void KHomeView::slotLoadView(void)
+void KHomeView::slotLoadView()
 {
   d->m_needReload = true;
   if (isVisible()) {
@@ -166,7 +184,7 @@ void KHomeView::showEvent(QShowEvent* event)
   QWidget::showEvent(event);
 }
 
-void KHomeView::slotPrintView(void)
+void KHomeView::slotPrintView()
 {
   if (d->m_part && d->m_part->view())
     d->m_part->view()->print();
@@ -181,7 +199,7 @@ void KHomeView::slotZoomView(int delta)
     d->m_part->setFontScaleFactor(d->m_part->fontScaleFactor() - fontScaleStepping);
 }
 
-void KHomeView::loadView(void)
+void KHomeView::loadView()
 {
   d->m_part->setFontScaleFactor(KMyMoneyGlobalSettings::fontSizePercentage());
 
@@ -271,7 +289,7 @@ void KHomeView::loadView(void)
   }
 }
 
-void KHomeView::showNetWorthGraph(void)
+void KHomeView::showNetWorthGraph()
 {
   d->m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Net Worth Forecast"));
 
@@ -310,15 +328,11 @@ void KHomeView::showNetWorthGraph(void)
   chartWidget->resize(d->m_netWorthGraphLastValidSize);
 
   //save the chart to an image
-  QPixmap pixmap = QPixmap::grabWidget(chartWidget->coordinatePlane()->parent());
-  QByteArray bytes;
-  QBuffer buffer(&bytes);
-  buffer.open(QIODevice::WriteOnly);
-  pixmap.save(&buffer, "PNG"); // writes pixmap into bytes in PNG format
+  QString chart = QPixmapToDataUri(QPixmap::grabWidget(chartWidget->coordinatePlane()->parent()));
 
   d->m_html += QString("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
   d->m_html += QString("<tr>");
-  d->m_html += QString("<td><center><IMG SRC=\"data:image/png;base64,%1\" ALT=\"Networth\" width=\"100%\" ></center></td>").arg(buffer.data().toBase64().data());
+  d->m_html += QString("<td><center><img src=\"%1\" ALT=\"Networth\" width=\"100%\" ></center></td>").arg(chart);
   d->m_html += QString("</tr>");
   d->m_html += QString("</table></div></div>");
 
@@ -326,7 +340,7 @@ void KHomeView::showNetWorthGraph(void)
   delete chartWidget;
 }
 
-void KHomeView::showPayments(void)
+void KHomeView::showPayments()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneySchedule> overdues;
@@ -579,17 +593,16 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
       if (!sched.isFinished()) {
         MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
-        QString pathEnter, pathSkip;
-        KIconLoader::global()->loadIcon(QString("key-enter"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathEnter, false);
-        KIconLoader::global()->loadIcon(QString("media-seek-forward"), KIconLoader::Small, KIconLoader::SizeSmall, KIconLoader::DefaultState, QStringList(), &pathSkip);
+        QString pathEnter = QPixmapToDataUri(KIconLoader::global()->loadIcon(QString("key-enter"), KIconLoader::Small, KIconLoader::SizeSmall));
+        QString pathSkip = QPixmapToDataUri(KIconLoader::global()->loadIcon(QString("media-seek-forward"), KIconLoader::Small, KIconLoader::SizeSmall));
 
         //show payment date
         tmp = QString("<td>") +
               KLocale::global()->formatDate(sched.adjustedNextDueDate(), KLocale::ShortDate) +
               "</td><td>";
-        if (pathEnter.length() > 0)
+        if (!pathEnter.isEmpty())
           tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(QUrl::fromLocalFile(pathEnter).url()) + linkend();
-        if (pathSkip.length() > 0)
+        if (!pathSkip.isEmpty())
           tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(QUrl::fromLocalFile(pathSkip).url()) + linkend();
 
         tmp += QString("&nbsp;");
@@ -933,7 +946,7 @@ MyMoneyMoney KHomeView::investmentBalance(const MyMoneyAccount& acc)
   return value;
 }
 
-void KHomeView::showFavoriteReports(void)
+void KHomeView::showFavoriteReports()
 {
   QList<MyMoneyReport> reports = MyMoneyFile::instance()->reportList();
 
@@ -969,7 +982,7 @@ void KHomeView::showFavoriteReports(void)
   }
 }
 
-void KHomeView::showForecast(void)
+void KHomeView::showForecast()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
   QList<MyMoneyAccount> accList;
@@ -1133,7 +1146,7 @@ const QString KHomeView::link(const QString& view, const QString& query, const Q
   return QString("<a href=\"/%1%2\"%3>").arg(view, query, titlePart);
 }
 
-const QString KHomeView::linkend(void) const
+const QString KHomeView::linkend() const
 {
   return "</a>";
 }
@@ -1205,7 +1218,7 @@ void KHomeView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&, co
   }
 }
 
-void KHomeView::showAssetsLiabilities(void)
+void KHomeView::showAssetsLiabilities()
 {
   QList<MyMoneyAccount> accounts;
   QList<MyMoneyAccount>::ConstIterator it;
@@ -1428,7 +1441,7 @@ void KHomeView::showAssetsLiabilities(void)
   }
 }
 
-void KHomeView::showBudget(void)
+void KHomeView::showBudget()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -1580,7 +1593,7 @@ QString KHomeView::showColoredAmount(const QString& amount, bool isNegative)
   return amount;
 }
 
-void KHomeView::doForecast(void)
+void KHomeView::doForecast()
 {
   //clear m_accountList because forecast is about to changed
   d->m_accountList.clear();

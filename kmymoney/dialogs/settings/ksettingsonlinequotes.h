@@ -48,15 +48,15 @@ public:
   KSettingsOnlineQuotes(QWidget* parent = 0);
   virtual ~KSettingsOnlineQuotes() {}
 
-  void writeConfig(void) {}
-  void readConfig(void) {}
-  void resetConfig(void);
+  void writeConfig() {}
+  void readConfig() {}
+  void resetConfig();
 
 protected slots:
-  void slotUpdateEntry(void);
+  void slotUpdateEntry();
   void slotLoadWidgets();
-  void slotEntryChanged(void);
-  void slotNewEntry(void);
+  void slotEntryChanged();
+  void slotNewEntry();
   void slotEntryRenamed(QListWidgetItem* item);
   void slotStartRename(QListWidgetItem* item);
 

@@ -43,11 +43,11 @@ KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
   connect(buttonHelp, SIGNAL(clicked()), this, SLOT(slotHelp()));
 }
 
-QList<MyMoneyTemplate> KLoadTemplateDlg::templates(void) const
+QList<MyMoneyTemplate> KLoadTemplateDlg::templates() const
 {
   return m_templateSelector->selectedTemplates();
 }
 
-void KLoadTemplateDlg::slotHelp(void)
+void KLoadTemplateDlg::slotHelp()
 {
 }

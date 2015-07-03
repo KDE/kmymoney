@@ -52,10 +52,10 @@ private:
   CsvExportDlg*     m_dlg;
 
 protected slots:
-  void slotCsvExport(void);
+  void slotCsvExport();
 
 protected:
-  void createActions(void);
+  void createActions();
 };
 
 #endif

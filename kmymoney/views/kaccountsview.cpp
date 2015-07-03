@@ -145,7 +145,7 @@ KAccountsView::~KAccountsView()
 {
 }
 
-void KAccountsView::slotExpandCollapse(void)
+void KAccountsView::slotExpandCollapse()
 {
   if (sender()) {
     KMyMoneyGlobalSettings::setShowAccountsExpanded(sender() == m_expandButton);
@@ -155,13 +155,13 @@ void KAccountsView::slotExpandCollapse(void)
 /**
   * The view is notified that an unused income expense account has been hidden.
   */
-void KAccountsView::slotUnusedIncomeExpenseAccountHidden(void)
+void KAccountsView::slotUnusedIncomeExpenseAccountHidden()
 {
   m_haveUnusedCategories = true;
   m_hiddenCategories->setVisible(m_haveUnusedCategories);
 }
 
-void KAccountsView::slotLoadAccounts(void)
+void KAccountsView::slotLoadAccounts()
 {
   m_needReload[ListView] = true;
   m_needReload[IconView] = true;
@@ -246,7 +246,7 @@ void KAccountsView::loadAccounts(AccountsViewTab tab)
   }
 }
 
-void KAccountsView::loadListView(void)
+void KAccountsView::loadListView()
 {
   // TODO: check why the invalidate is needed here
   m_filterProxyModel->invalidate();
@@ -320,7 +320,7 @@ void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
   m_totalProfitsLabel->setText(s);
 }
 
-QListWidgetItem* KAccountsView::selectedIcon(void) const
+QListWidgetItem* KAccountsView::selectedIcon() const
 {
   if (m_assetsList->currentItem())
     return m_assetsList->currentItem();

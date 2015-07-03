@@ -52,7 +52,7 @@ class KMM_MYMONEY_EXPORT MyMoneyBudget: public MyMoneyObject
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  MyMoneyBudget(void);
+  MyMoneyBudget();
   ~MyMoneyBudget();
   MyMoneyBudget(const QString& _name);
   /**
@@ -79,10 +79,10 @@ public:
   {
   public:
     // get functions
-    const QDate&    startDate(void) const {
+    const QDate&    startDate() const {
       return m_start;
     }
-    const MyMoneyMoney& amount(void) const {
+    const MyMoneyMoney& amount() const {
       return m_amount;
     }
 
@@ -127,25 +127,25 @@ public:
     AccountGroup() : m_budgetlevel(eNone), m_budgetsubaccounts(false) {}
 
     // get functions
-    const QString& id(void) const {
+    const QString& id() const {
       return m_id;
     }
-    bool budgetSubaccounts(void) const {
+    bool budgetSubaccounts() const {
       return m_budgetsubaccounts;
     }
-    eBudgetLevel budgetLevel(void) const {
+    eBudgetLevel budgetLevel() const {
       return m_budgetlevel;
     }
     PeriodGroup period(const QDate &_date) const {
       return m_periods[_date];
     }
-    const QMap<QDate, PeriodGroup>& getPeriods(void) const {
+    const QMap<QDate, PeriodGroup>& getPeriods() const {
       return m_periods;
     }
-    void clearPeriods(void) {
+    void clearPeriods() {
       m_periods.clear();
     }
-    MyMoneyMoney balance(void) const {
+    MyMoneyMoney balance() const {
       MyMoneyMoney balance;
 
       QMap<QDate, PeriodGroup>::const_iterator it;
@@ -155,7 +155,7 @@ public:
       return balance;
     };
 
-    MyMoneyMoney totalBalance(void) const {
+    MyMoneyMoney totalBalance() const {
       MyMoneyMoney bal = balance();
       switch (m_budgetlevel) {
         default:
@@ -188,12 +188,12 @@ public:
 
     bool operator == (const AccountGroup &r) const;
 
-    bool isZero(void) const;
+    bool isZero() const;
 
   protected:
-    void convertToMonthly(void);
-    void convertToYearly(void);
-    void convertToMonthByMonth(void);
+    void convertToMonthly();
+    void convertToYearly();
+    void convertToMonthByMonth();
 
   private:
     QString m_id;
@@ -209,20 +209,20 @@ public:
   bool operator == (const MyMoneyBudget &) const;
 
   // Simple get operations
-  const QString& name(void) const {
+  const QString& name() const {
     return m_name;
   }
-  const QDate& budgetStart(void) const {
+  const QDate& budgetStart() const {
     return m_start;
   }
-  QString id(void) const {
+  QString id() const {
     return m_id;
   }
   const AccountGroup & account(const QString &_id) const;
   bool contains(const QString &_id) const {
     return m_accounts.contains(_id);
   }
-  QList<AccountGroup> getaccounts(void) const {
+  QList<AccountGroup> getaccounts() const {
     return m_accounts.values();
   }
 

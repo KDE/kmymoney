@@ -176,7 +176,7 @@ MyMoneyReport::MyMoneyReport(const QDomElement& node) :
     clearId();
 }
 
-void MyMoneyReport::clear(void)
+void MyMoneyReport::clear()
 {
   m_accountGroupFilter = false;
   m_accountGroups.clear();

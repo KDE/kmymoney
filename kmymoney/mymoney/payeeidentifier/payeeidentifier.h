@@ -86,7 +86,9 @@ public:
   id_t id() const {
     return m_id;
   }
+
   QString idString() const;
+
   void clearId() {
     m_id = 0;
   }
@@ -155,7 +157,7 @@ private:
 template<class T>
 T* payeeIdentifier::data()
 {
-  T *const ident = dynamic_cast<T*>(m_payeeIdentifier);
+  T *const ident = dynamic_cast<T*>(operator->());
   if (ident == 0)
     throw badCast(__FILE__, __LINE__);
   return ident;
@@ -164,7 +166,7 @@ T* payeeIdentifier::data()
 template<class T>
 const T* payeeIdentifier::data() const
 {
-  const T *const ident = dynamic_cast<const T*>(m_payeeIdentifier);
+  const T *const ident = dynamic_cast<const T*>(operator->());
   if (ident == 0)
     throw badCast(__FILE__, __LINE__);
   return ident;

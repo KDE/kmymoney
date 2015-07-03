@@ -74,7 +74,7 @@ void kMyMoneyLineEdit::skipSelectAll(bool skipIt)
   d->skipSelectAll = skipIt;
 }
 
-void kMyMoneyLineEdit::resetText(void)
+void kMyMoneyLineEdit::resetText()
 {
   setText(d->m_text);
 }

@@ -63,7 +63,7 @@ public:
     *
     * Needed to allow this object to be stored in a QMap.
     */
-  ReportAccount(void);
+  ReportAccount();
 
   /**
     * Copy constructor
@@ -146,7 +146,7 @@ public:
     *
     * @return  The account's currency trading currency object
     */
-  MyMoneySecurity currency(void) const;
+  MyMoneySecurity currency() const;
 
   /**
     * Determine if this account's deep currency is different from the file's
@@ -154,7 +154,7 @@ public:
     *
     * @return bool True if this account is in a foreign currency
     */
-  bool isForeignCurrency(void) const;
+  bool isForeignCurrency() const;
 
   /**
     * The name of only this account.  No matter how deep the hierarchy, this
@@ -163,7 +163,7 @@ public:
     *
     * @return QString The account's name
     */
-  QString name(void) const;
+  QString name() const;
 
   /**
     * The entire hierarchy of this account descriptor
@@ -173,7 +173,7 @@ public:
     *
     * @return QString The account's full hierarchy
     */
-  QString fullName(void) const;
+  QString fullName() const;
 
   /**
     * The entire hierarchy of this account descriptor, suitable for displaying
@@ -181,7 +181,7 @@ public:
     *
     * @return QString The account's full hierarchy (suitable for debugging)
     */
-  QString debugName(void) const;
+  QString debugName() const;
 
   /**
     * Whether this account is a 'top level' parent account.  This means that
@@ -189,7 +189,7 @@ public:
     *
     * @return bool True if this account is a top level parent account
     */
-  /*inline*/ bool isTopLevel(void) const;
+  /*inline*/ bool isTopLevel() const;
 
   /**
     * Returns the name of the top level parent account
@@ -198,21 +198,21 @@ public:
     *
     * @return QString The name of the top level parent account
     */
-  /*inline*/ QString topParentName(void) const;
+  /*inline*/ QString topParentName() const;
 
   /**
     * Returns a report account containing the top parent account
     *
     * @return ReportAccount The account of the top parent
     */
-  ReportAccount topParent(void) const;
+  ReportAccount topParent() const;
 
   /**
     * Returns a report account containing the immediate parent account
     *
     * @return ReportAccount The account of the immediate parent
     */
-  ReportAccount parent(void) const;
+  ReportAccount parent() const;
 
   /**
     * Returns the number of accounts in this account's hierarchy.  If this is a
@@ -221,19 +221,19 @@ public:
     *
     * @return unsigned Hierarchy depth
     */
-  unsigned hierarchyDepth(void) const;
+  unsigned hierarchyDepth() const;
 
   /**
    * Returns whether this account is a liquid liability
    *
    */
-  bool isLiquidLiability(void) const;
+  bool isLiquidLiability() const;
 
 protected:
   /**
     * Calculates the full account hierarchy of this account
     */
-  void calculateAccountHierarchy(void);
+  void calculateAccountHierarchy();
 
 };
 

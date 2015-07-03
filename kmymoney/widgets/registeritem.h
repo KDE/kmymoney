@@ -91,19 +91,19 @@ public:
   RegisterItem(Register* parent);
   virtual ~RegisterItem();
 
-  virtual const char* className(void) = 0;
+  virtual const char* className() = 0;
 
-  virtual bool isSelectable(void) const = 0;
-  virtual bool isSelected(void) const {
+  virtual bool isSelectable() const = 0;
+  virtual bool isSelected() const {
     return false;
   }
   virtual void setSelected(bool /* selected*/) {}
 
-  virtual bool canHaveFocus(void) const = 0;
-  virtual bool hasFocus(void) const {
+  virtual bool canHaveFocus() const = 0;
+  virtual bool hasFocus() const {
     return false;
   }
-  virtual bool hasEditorOpen(void) const {
+  virtual bool hasEditorOpen() const {
     return false;
   }
 
@@ -111,38 +111,38 @@ public:
     Q_UNUSED(updateLens);
   }
 
-  virtual bool isErroneous(void) const = 0;
+  virtual bool isErroneous() const = 0;
 
   // helper functions used for sorting
-  virtual const QDate& sortPostDate(void) const {
+  virtual const QDate& sortPostDate() const {
     return nullDate;
   }
-  virtual int sortSamePostDate(void) const = 0;
-  virtual const QDate& sortEntryDate(void) const {
+  virtual int sortSamePostDate() const = 0;
+  virtual const QDate& sortEntryDate() const {
     return nullDate;
   }
-  virtual const QString& sortPayee(void) const {
+  virtual const QString& sortPayee() const {
     return nullString;
   }
-  virtual const MyMoneyMoney& sortValue(void) const {
+  virtual const MyMoneyMoney& sortValue() const {
     return nullValue;
   }
-  virtual const QString& sortNumber(void) const {
+  virtual const QString& sortNumber() const {
     return nullString;
   }
-  virtual const QString& sortEntryOrder(void) const {
+  virtual const QString& sortEntryOrder() const {
     return nullString;
   }
-  virtual CashFlowDirection sortType(void) const {
+  virtual CashFlowDirection sortType() const {
     return Deposit;
   }
-  virtual const QString& sortCategory(void) const {
+  virtual const QString& sortCategory() const {
     return nullString;
   }
-  virtual MyMoneySplit::reconcileFlagE sortReconcileState(void) const {
+  virtual MyMoneySplit::reconcileFlagE sortReconcileState() const {
     return MyMoneySplit::MaxReconcileState;
   }
-  virtual const QString& sortSecurity(void) const {
+  virtual const QString& sortSecurity() const {
     return nullString;
   }
 
@@ -158,10 +158,10 @@ public:
   virtual void setStartRow(int row) {
     m_startRow = row;
   }
-  int startRow(void) const {
+  int startRow() const {
     return m_startRow;
   }
-  virtual int rowHeightHint(void) const;
+  virtual int rowHeightHint() const;
 
   /**
     * This method modifies the number of rows required to display this item
@@ -182,7 +182,7 @@ public:
     * This method returns the number of rows required to display this item
     * in a Register
     */
-  virtual int numRowsRegister(void) const {
+  virtual int numRowsRegister() const {
     return m_rowsRegister;
   }
 
@@ -190,10 +190,10 @@ public:
     * This method returns the number of rows required to display this item
     * in a Form
     */
-  virtual int numRowsForm(void) const {
+  virtual int numRowsForm() const {
     return m_rowsForm;
   }
-  virtual int numColsForm(void) const {
+  virtual int numColsForm() const {
     return 1;
   }
 
@@ -210,7 +210,7 @@ public:
   virtual void paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index) = 0;
   virtual void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) = 0;
 
-  virtual const QString& id(void) const {
+  virtual const QString& id() const {
     return MyMoneyObject::emptyId();
   }
 
@@ -226,15 +226,15 @@ public:
     *
     * @retval pointer to Register
     */
-  Register* parent(void) const {
+  Register* parent() const {
     return m_parent;
   }
 
-  void setNeedResize(void) {
+  void setNeedResize() {
     m_needResize = true;
   }
 
-  bool isVisible(void) const {
+  bool isVisible() const {
     return m_visible;
   }
 
@@ -257,10 +257,10 @@ public:
   void setPrevItem(RegisterItem* p) {
     m_prev = p;
   }
-  RegisterItem* nextItem(void) const {
+  RegisterItem* nextItem() const {
     return m_next;
   }
-  RegisterItem* prevItem(void) const {
+  RegisterItem* prevItem() const {
     return m_prev;
   }
 
@@ -283,7 +283,7 @@ public:
 
 protected:
   /// This method serves as helper for all constructors
-  void init(void);
+  void init();
 
 protected:
   Register*                m_parent;

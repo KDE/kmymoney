@@ -110,11 +110,11 @@ public:
   virtual ~IMyMoneyStorage();
 
   // general get functions
-  virtual const MyMoneyPayee& user(void) const = 0;
-  virtual const QDate creationDate(void) const = 0;
-  virtual const QDate lastModificationDate(void) const = 0;
-  virtual unsigned int currentFixVersion(void) const = 0;
-  virtual unsigned int fileFixVersion(void) const = 0;
+  virtual const MyMoneyPayee& user() const = 0;
+  virtual const QDate creationDate() const = 0;
+  virtual const QDate lastModificationDate() const = 0;
+  virtual unsigned int currentFixVersion() const = 0;
+  virtual unsigned int fileFixVersion() const = 0;
 
   // general set functions
   virtual void setUser(const MyMoneyPayee& user) = 0;
@@ -130,7 +130,7 @@ public:
     * a pointer to the newly created copy. The caller of this method is the
     * new owner of the object and must destroy it.
     */
-  virtual IMyMoneyStorage const * duplicate(void) = 0;
+  virtual IMyMoneyStorage const * duplicate() = 0;
 
   /**
     * This method is used to create a new account
@@ -207,7 +207,7 @@ public:
     *
     * @return QList<MyMoneyPayee> containing the payee information
     */
-  virtual const QList<MyMoneyPayee> payeeList(void) const = 0;
+  virtual const QList<MyMoneyPayee> payeeList() const = 0;
 
   /**
     * This method is used to create a new tag
@@ -263,7 +263,7 @@ public:
     *
     * @return QList<MyMoneyTag> containing the tag information
     */
-  virtual const QList<MyMoneyTag> tagList(void) const = 0;
+  virtual const QList<MyMoneyTag> tagList() const = 0;
 
   /**
     * Returns the account addressed by it's id.
@@ -376,7 +376,7 @@ public:
     *
     * @return true if changed, false if not
     */
-  virtual bool dirty(void) const = 0;
+  virtual bool dirty() const = 0;
 
   /**
     * This method can be used by an external object to force the
@@ -384,7 +384,7 @@ public:
     * to an external destination failed but the previous storage
     * to a local disk was ok.
     */
-  virtual void setDirty(void) = 0;
+  virtual void setDirty() = 0;
 
   /**
     * This method returns the number of accounts currently known to this storage
@@ -392,7 +392,7 @@ public:
     *
     * @return number of accounts currently known inside a MyMoneyFile object
     */
-  virtual unsigned int accountCount(void) const = 0;
+  virtual unsigned int accountCount() const = 0;
 
   /**
     * This method returns a list of the institutions
@@ -401,7 +401,7 @@ public:
     * @return QList<MyMoneyInstitution> containing the
     *         institution information
     */
-  virtual const QList<MyMoneyInstitution> institutionList(void) const = 0;
+  virtual const QList<MyMoneyInstitution> institutionList() const = 0;
 
   /**
     * Modifies an already existing account in the file global account pool.
@@ -475,7 +475,7 @@ public:
     *
     * @return QMap with numbers of transactions per account
     */
-  virtual const QMap<QString, unsigned long> transactionCountMap(void) const = 0;
+  virtual const QMap<QString, unsigned long> transactionCountMap() const = 0;
 
   /**
     * This method is used to pull a list of transactions from the file
@@ -544,7 +544,7 @@ public:
     *
     * @return number of institutions known to file
     */
-  virtual unsigned int institutionCount(void) const = 0;
+  virtual unsigned int institutionCount() const = 0;
 
   /**
     * This method returns a list of accounts inside the storage object.
@@ -559,31 +559,31 @@ public:
     * This method is used to return the standard liability account
     * @return MyMoneyAccount liability account(group)
     */
-  virtual const MyMoneyAccount liability(void) const = 0;
+  virtual const MyMoneyAccount liability() const = 0;
 
   /**
     * This method is used to return the standard asset account
     * @return MyMoneyAccount asset account(group)
     */
-  virtual const MyMoneyAccount asset(void) const = 0;
+  virtual const MyMoneyAccount asset() const = 0;
 
   /**
     * This method is used to return the standard expense account
     * @return MyMoneyAccount expense account(group)
     */
-  virtual const MyMoneyAccount expense(void) const = 0;
+  virtual const MyMoneyAccount expense() const = 0;
 
   /**
     * This method is used to return the standard income account
     * @return MyMoneyAccount income account(group)
     */
-  virtual const MyMoneyAccount income(void) const = 0;
+  virtual const MyMoneyAccount income() const = 0;
 
   /**
     * This method is used to return the standard equity account
     * @return MyMoneyAccount equity account(group)
     */
-  virtual const MyMoneyAccount equity(void) const = 0;
+  virtual const MyMoneyAccount equity() const = 0;
 
   /**
     * This method is used to create a new security object.  The ID will be created
@@ -633,7 +633,7 @@ public:
     *
     * @return QList<MyMoneySecurity> containing objects
     */
-  virtual const QList<MyMoneySecurity> securityList(void) const = 0;
+  virtual const QList<MyMoneySecurity> securityList() const = 0;
 
   virtual void addPrice(const MyMoneyPrice& price) = 0;
   virtual void removePrice(const MyMoneyPrice& price) = 0;
@@ -644,7 +644,7 @@ public:
     *
     * @return MyMoneyPriceList of all MyMoneyPrice objects.
     */
-  virtual const MyMoneyPriceList priceList(void) const = 0;
+  virtual const MyMoneyPriceList priceList() const = 0;
 
   /**
     * This method is used to add a scheduled transaction to the engine.
@@ -779,7 +779,7 @@ public:
     *
     * @return QList of all MyMoneySecurity objects representing a currency.
     */
-  virtual const QList<MyMoneySecurity> currencyList(void) const = 0;
+  virtual const QList<MyMoneySecurity> currencyList() const = 0;
 
   /**
     * This method is used to retrieve the list of all reports
@@ -789,7 +789,7 @@ public:
     *
     * @return QList of all MyMoneyReport objects.
     */
-  virtual const QList<MyMoneyReport> reportList(void) const = 0;
+  virtual const QList<MyMoneyReport> reportList() const = 0;
 
   /**
     * This method is used to add a new report to the engine.
@@ -819,7 +819,7 @@ public:
     *
     * @return number of reports known to file
     */
-  virtual unsigned countReports(void) const = 0;
+  virtual unsigned countReports() const = 0;
 
   /**
     * This method is used to retrieve a single MyMoneyReport object.
@@ -850,7 +850,7 @@ public:
     *
     * @return QList of all MyMoneyBudget objects.
     */
-  virtual const QList<MyMoneyBudget> budgetList(void) const = 0;
+  virtual const QList<MyMoneyBudget> budgetList() const = 0;
 
   /**
     * This method is used to add a new budget to the engine.
@@ -891,7 +891,7 @@ public:
     *
     * @return number of budgets known to file
     */
-  virtual unsigned countBudgets(void) const = 0;
+  virtual unsigned countBudgets() const = 0;
 
   /**
     * This method is used to retrieve a single MyMoneyBudget object.
@@ -965,14 +965,14 @@ public:
   /**
     * This method is provided to allow closing of the database before logoff
     */
-  virtual void close(void) = 0;
+  virtual void close() = 0;
 
   /**
     * These methods have to be provided to allow transaction safe data handling.
     */
-  virtual void startTransaction(void) = 0;
-  virtual bool commitTransaction(void) = 0;
-  virtual void rollbackTransaction(void) = 0;
+  virtual void startTransaction() = 0;
+  virtual bool commitTransaction() = 0;
+  virtual void rollbackTransaction() = 0;
 };
 
 #endif

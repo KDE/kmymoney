@@ -46,7 +46,7 @@ public:
   Currency(QWidget* parent = 0);
   QTreeWidgetItem* insertCurrency(const MyMoneySecurity& sec);
   void selectCurrency(const MyMoneySecurity& sec);
-  QString selectedCurrency(void) const;
+  QString selectedCurrency() const;
 };
 
 #endif

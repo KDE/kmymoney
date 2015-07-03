@@ -43,7 +43,7 @@ KWelcomePage::~KWelcomePage()
 {
 }
 
-const QString KWelcomePage::welcomePage(void)
+const QString KWelcomePage::welcomePage()
 {
   QString header;
   QString footer;
@@ -133,7 +133,7 @@ const QString KWelcomePage::welcomePage(void)
   return header + body + footer;
 }
 
-const QString KWelcomePage::whatsNewPage(void)
+const QString KWelcomePage::whatsNewPage()
 {
   QString header;
   QString footer;
@@ -205,7 +205,7 @@ const QString KWelcomePage::whatsNewPage(void)
   return header + body + footer;
 }
 
-const QStringList KWelcomePage::featuresList(void)
+const QStringList KWelcomePage::featuresList()
 {
   QStringList featuresList;
 

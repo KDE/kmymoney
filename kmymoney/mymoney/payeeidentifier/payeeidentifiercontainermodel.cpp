@@ -25,13 +25,13 @@
 
 #include <KLocalizedString>
 
-payeeIdentifierModel::payeeIdentifierModel(QObject* parent)
+payeeIdentifierContainerModel::payeeIdentifierModel(QObject* parent)
     : QAbstractListModel(parent),
     m_data(QSharedPointer<MyMoneyPayeeIdentifierContainer>())
 {
 }
 
-QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
+QVariant payeeIdentifierContainerModel::data(const QModelIndex& index, int role) const
 {
   // Needed for the selection box and it prevents a crash if index is out of range
   if (m_data.isNull() || index.row() >= rowCount(index.parent()) - 1)
@@ -52,7 +52,7 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
   return QVariant();
 }
 
-bool payeeIdentifierModel::setData(const QModelIndex& index, const QVariant& value, int role)
+bool payeeIdentifierContainerModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
   if (!m_data.isNull() && role == payeeIdentifier) {
     ::payeeIdentifier ident = value.value< ::payeeIdentifier >();
@@ -70,7 +70,7 @@ bool payeeIdentifierModel::setData(const QModelIndex& index, const QVariant& val
   return QAbstractItemModel::setData(index, value, role);
 }
 
-Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex& index) const
+Qt::ItemFlags payeeIdentifierContainerModel::flags(const QModelIndex& index) const
 {
   Qt::ItemFlags flags = QAbstractItemModel::flags(index) | Qt::ItemIsDragEnabled;
   const QString type = data(index, payeeIdentifierType).toString();
@@ -80,7 +80,7 @@ Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex& index) const
   return flags;
 }
 
-int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
+int payeeIdentifierContainerModel::rowCount(const QModelIndex& parent) const
 {
   Q_UNUSED(parent);
   if (m_data.isNull())
@@ -90,7 +90,7 @@ int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
 }
 
 /** @brief unused at the moment */
-bool payeeIdentifierModel::insertRows(int row, int count, const QModelIndex& parent)
+bool payeeIdentifierContainerModel::insertRows(int row, int count, const QModelIndex& parent)
 {
   Q_UNUSED(row);
   Q_UNUSED(count);
@@ -98,7 +98,7 @@ bool payeeIdentifierModel::insertRows(int row, int count, const QModelIndex& par
   return false;
 }
 
-bool payeeIdentifierModel::removeRows(int row, int count, const QModelIndex& parent)
+bool payeeIdentifierContainerModel::removeRows(int row, int count, const QModelIndex& parent)
 {
   if (m_data.isNull())
     return false;
@@ -114,21 +114,21 @@ bool payeeIdentifierModel::removeRows(int row, int count, const QModelIndex& par
   return true;
 }
 
-void payeeIdentifierModel::setSource(const MyMoneyPayeeIdentifierContainer data)
+void payeeIdentifierContainerModel::setSource(const MyMoneyPayeeIdentifierContainer data)
 {
   beginResetModel();
   m_data = QSharedPointer<MyMoneyPayeeIdentifierContainer>(new MyMoneyPayeeIdentifierContainer(data));
   endResetModel();
 }
 
-void payeeIdentifierModel::closeSource()
+void payeeIdentifierContainerModel::closeSource()
 {
   beginResetModel();
   m_data = QSharedPointer<MyMoneyPayeeIdentifierContainer>();
   endResetModel();
 }
 
-QList< ::payeeIdentifier > payeeIdentifierModel::identifiers() const
+QList< ::payeeIdentifier > payeeIdentifierContainerModel::identifiers() const
 {
   if (m_data.isNull())
     return QList< ::payeeIdentifier >();

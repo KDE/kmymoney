@@ -264,7 +264,7 @@ void MyMoneyForecast::calculateAccountTrendList()
   }
 }
 
-QList<MyMoneyAccount> MyMoneyForecast::forecastAccountList(void)
+QList<MyMoneyAccount> MyMoneyForecast::forecastAccountList()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -286,7 +286,7 @@ QList<MyMoneyAccount> MyMoneyForecast::forecastAccountList(void)
   return accList;
 }
 
-QList<MyMoneyAccount> MyMoneyForecast::accountList(void)
+QList<MyMoneyAccount> MyMoneyForecast::accountList()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -510,7 +510,7 @@ MyMoneyMoney MyMoneyForecast::forecastBalance(const MyMoneyAccount& acc, int off
   return forecastBalance(acc, forecastDate);
 }
 
-void MyMoneyForecast::doFutureScheduledForecast(void)
+void MyMoneyForecast::doFutureScheduledForecast()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -553,7 +553,7 @@ void MyMoneyForecast::doFutureScheduledForecast(void)
   }
 }
 
-void MyMoneyForecast::addFutureTransactions(void)
+void MyMoneyForecast::addFutureTransactions()
 {
   MyMoneyTransactionFilter filter;
   MyMoneyFile* file = MyMoneyFile::instance();
@@ -610,7 +610,7 @@ void MyMoneyForecast::addFutureTransactions(void)
 
 }
 
-void MyMoneyForecast::addScheduledTransactions(void)
+void MyMoneyForecast::addScheduledTransactions()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -739,7 +739,7 @@ void MyMoneyForecast::addScheduledTransactions(void)
 #endif
 }
 
-void MyMoneyForecast::calculateScheduledDailyBalances(void)
+void MyMoneyForecast::calculateScheduledDailyBalances()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 
@@ -812,7 +812,7 @@ int MyMoneyForecast::daysToZeroBalance(const MyMoneyAccount& acc)
   return -1;
 }
 
-void MyMoneyForecast::setForecastAccountList(void)
+void MyMoneyForecast::setForecastAccountList()
 {
 
   //get forecast accounts
@@ -1051,7 +1051,7 @@ void MyMoneyForecast::createBudget(MyMoneyBudget& budget, QDate historyStart, QD
   }
 }
 
-void MyMoneyForecast::setBudgetAccountList(void)
+void MyMoneyForecast::setBudgetAccountList()
 {
   //get budget accounts
   QList<MyMoneyAccount> accList;
@@ -1063,7 +1063,7 @@ void MyMoneyForecast::setBudgetAccountList(void)
   }
 }
 
-QList<MyMoneyAccount> MyMoneyForecast::budgetAccountList(void)
+QList<MyMoneyAccount> MyMoneyForecast::budgetAccountList()
 {
   MyMoneyFile* file = MyMoneyFile::instance();
 

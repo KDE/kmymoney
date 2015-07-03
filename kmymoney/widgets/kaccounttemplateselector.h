@@ -57,12 +57,12 @@ public:
   KAccountTemplateSelector(QWidget* parent = 0);
   ~KAccountTemplateSelector();
 
-  QList<MyMoneyTemplate> selectedTemplates(void) const;
+  QList<MyMoneyTemplate> selectedTemplates() const;
 
 private slots:
-  void slotLoadHierarchy(void);
-  void slotLoadCountry(void);
-  void slotLoadTemplateList(void);
+  void slotLoadHierarchy();
+  void slotLoadCountry();
+  void slotLoadTemplateList();
 
 private:
   /// \internal d-pointer class.

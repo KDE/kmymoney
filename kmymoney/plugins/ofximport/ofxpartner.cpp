@@ -83,7 +83,7 @@ bool needReload(const QFileInfo& i)
           || (i.size() < 1024));
 }
 
-void ValidateIndexCache(void)
+void ValidateIndexCache()
 {
   // TODO (Ace) Check whether these files exist and are recent enough before getting them again
 
@@ -183,7 +183,7 @@ static void ParseFile(QMap<QString, QString>& result, const QString& fileName, c
   }
 }
 
-QStringList BankNames(void)
+QStringList BankNames()
 {
   QMap<QString, QString> result;
 

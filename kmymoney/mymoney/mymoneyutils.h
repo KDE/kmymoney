@@ -89,8 +89,8 @@ public:
     */
   void printf(const char *format, ...) const KMM_PRINTF_FORMAT(2, 3);
 
-  static void off(void);
-  static void on(void);
+  static void off();
+  static void on();
   static void onOff(int onOff);
 
 private:

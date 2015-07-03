@@ -157,14 +157,14 @@ public:
    * @return void
    *
    */
-  bool readFile(void);
+  bool readFile();
   /**
    * MyMoneyStorageSql write/update the database from storage
    *
    * @return void
    *
    */
-  bool writeFile(void);
+  bool writeFile();
 
   /**
    * MyMoneyStorageSql generalized error routine
@@ -338,31 +338,40 @@ public:
   static void setStartDate(const QDate &startDate);
 
 private:
-  //void init(void);
   bool fileExists(const QString& dbName);
-  // a function to build a comprehensive error message
+  /** @brief a function to build a comprehensive error message for an SQL error */
   QString& buildError(const QSqlQuery& q, const QString& function, const QString& message) const;
+
+  /** @copydoc buildError */
   QString& buildError(const QSqlQuery& q, const QString& function, const QString& message,
                       const QSqlDatabase*) const;
-  // write routines
-  void writeUserInformation(void);
-  void writeInstitutions(void);
-  void writePayees(void);
-  void writeTags(void);
-  void writeAccounts(void);
-  void writeTransactions(void);
-  void writeSchedules(void);
-  void writeSecurities(void);
-  void writePrices(void);
-  void writeCurrencies(void);
-  void writeFileInfo(void);
-  void writeReports(void);
-  void writeBudgets(void);
+
+  /**
+   * @name writeFromStorageMethods
+   * @{
+   * These method write all data from m_storage to the database. Data which is
+   * stored in the database is deleted.
+   */
+  void writeUserInformation();
+  void writeInstitutions();
+  void writePayees();
+  void writeTags();
+  void writeAccounts();
+  void writeTransactions();
+  void writeSchedules();
+  void writeSecurities();
+  void writePrices();
+  void writeCurrencies();
+  void writeFileInfo();
+  void writeReports();
+  void writeBudgets();
+  void writeOnlineJobs();
+  /** @} */
 
   /**
    * @name writeMethods
    * @{
-   * These methods bind the data fields of MyMoneyObjects to a given query.
+   * These methods bind the data fields of MyMoneyObjects to a given query and execute the query.
    * This is helpfull as the query has usually an update and a insert format.
    */
   void writeInstitutionList(const QList<MyMoneyInstitution>& iList, QSqlQuery& q);
@@ -389,21 +398,21 @@ private:
    * @name readMethods
    * @{
    */
-  void readFileInfo(void);
-  void readLogonData(void);
-  void readUserInformation(void);
-  void readInstitutions(void);
-  void readAccounts(void);
+  void readFileInfo();
+  void readLogonData();
+  void readUserInformation();
+  void readInstitutions();
+  void readAccounts();
   void readTransactions(const QString& tidList = QString(), const QString& dateClause = QString());
   void readSplit(MyMoneySplit& s, const QSqlQuery& q) const;
   const MyMoneyKeyValueContainer readKeyValuePairs(const QString& kvpType, const QString& kvpId) const;
   const QHash<QString, MyMoneyKeyValueContainer> readKeyValuePairs(const QString& kvpType, const QStringList& kvpIdList) const;
-  void readSchedules(void);
-  void readSecurities(void);
-  void readPrices(void);
-  void readCurrencies(void);
-  void readReports(void);
-  void readBudgets(void);
+  void readSchedules();
+  void readSecurities();
+  void readPrices();
+  void readCurrencies();
+  void readReports();
+  void readBudgets();
   /** @} */
 
   template<long unsigned MyMoneyStorageSql::* cache>

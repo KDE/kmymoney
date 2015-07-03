@@ -231,16 +231,16 @@ public:
   void addAccountGroup(MyMoneyAccount::accountTypeE type);
   void removeAccountType(MyMoneyAccount::accountTypeE type);
 
-  void clear(void);
+  void clear();
 
   void setHideClosedAccounts(bool hideClosedAccounts);
-  bool hideClosedAccounts(void) const;
+  bool hideClosedAccounts() const;
 
   void setHideEquityAccounts(bool hideEquityAccounts);
-  bool hideEquityAccounts(void) const;
+  bool hideEquityAccounts() const;
 
   void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
-  bool hideUnusedIncomeExpenseAccounts(void) const;
+  bool hideUnusedIncomeExpenseAccounts() const;
 
 protected:
   virtual bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
@@ -250,7 +250,7 @@ protected:
   bool filterAcceptsRowOrChildRows(int source_row, const QModelIndex &source_parent) const;
 
 signals:
-  void unusedIncomeExpenseAccountHidden(void) const;
+  void unusedIncomeExpenseAccountHidden() const;
 
 private:
   class Private;

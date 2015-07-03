@@ -91,14 +91,14 @@ onlineJobModel* Models::onlineJobsModel()
   return d->m_onlineJobModel;
 }
 
-void Models::fileOpened(void)
+void Models::fileOpened()
 {
   accountsModel()->load();
   institutionsModel()->load();
   onlineJobsModel()->load();
 }
 
-void Models::fileClosed(void)
+void Models::fileClosed()
 {
   // TODO: make this cleaner in the future, for now just clear the accounts model before the file is closed
   // to avoid any uncaught KMyMoneyExceptions while using the account objects from this model after the file has been closed

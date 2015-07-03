@@ -46,7 +46,7 @@ public:
   StdTransactionMatched(Register* parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
   virtual ~StdTransactionMatched() {}
 
-  virtual const char* className(void) {
+  virtual const char* className() {
     return "StdTransactionMatched";
   }
 

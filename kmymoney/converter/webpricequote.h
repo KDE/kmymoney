@@ -48,7 +48,7 @@ class WebPriceQuoteProcess: public KProcess
 {
   Q_OBJECT
 public:
-  WebPriceQuoteProcess(void);
+  WebPriceQuoteProcess();
   inline void setSymbol(const QString& _symbol) {
     m_symbol = _symbol; m_string.truncate(0);
   }
@@ -77,7 +77,7 @@ class FinanceQuoteProcess: public KProcess
 {
   Q_OBJECT
 public:
-  FinanceQuoteProcess(void);
+  FinanceQuoteProcess();
   void launch(const QString& scriptPath);
   bool isFinished() const {
     return(m_isDone);
@@ -109,9 +109,9 @@ struct WebPriceQuoteSource {
   WebPriceQuoteSource(const QString& name, const QString& url, const QString& sym, const QString& price, const QString& date, const QString& dateformat, bool skipStripping = false);
   ~WebPriceQuoteSource() {}
 
-  void write(void) const;
+  void write() const;
   void rename(const QString& name);
-  void remove(void) const;
+  void remove() const;
 
   QString    m_name;
   QString    m_url;
@@ -174,12 +174,12 @@ protected slots:
   void slotParseQuote(const QString&);
 
 protected:
-  static const QMap<QString, WebPriceQuoteSource> defaultQuoteSources(void);
+  static const QMap<QString, WebPriceQuoteSource> defaultQuoteSources();
 
 private:
   bool launchNative(const QString& _symbol, const QString& _id, const QString& _source = QString());
   bool launchFinanceQuote(const QString& _symbol, const QString& _id, const QString& _source = QString());
-  void enter_loop(void);
+  void enter_loop();
 
   static const QStringList quoteSourcesNative();
   static const QStringList quoteSourcesFinanceQuote();
@@ -201,7 +201,7 @@ public:
   explicit MyMoneyDateFormat(const QString& _format): m_format(_format) {}
   const QString convertDate(const QDate& _in) const;
   const QDate convertString(const QString& _in, bool _strict = true, unsigned _centurymidpoint = QDate::currentDate().year()) const;
-  const QString& format(void) const {
+  const QString& format() const {
     return m_format;
   }
 private:

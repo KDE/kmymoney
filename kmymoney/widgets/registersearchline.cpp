@@ -135,7 +135,7 @@ void RegisterSearchLine::queueSearch(const QString& search)
   QTimer::singleShot(200, this, SLOT(activateSearch()));
 }
 
-void RegisterSearchLine::activateSearch(void)
+void RegisterSearchLine::activateSearch()
 {
   --(d->queuedSearches);
   if (d->queuedSearches == 0)
@@ -178,7 +178,7 @@ void RegisterSearchLine::updateSearch(const QString& s)
   }
 }
 
-void RegisterSearchLine::reset(void)
+void RegisterSearchLine::reset()
 {
   clear();
   d->combo->setCurrentIndex(RegisterFilter::Any);
@@ -190,7 +190,7 @@ void RegisterSearchLine::itemAdded(RegisterItem* item) const
   item->setVisible(item->matches(RegisterFilter(text(), d->status)));
 }
 
-void RegisterSearchLine::registerDestroyed(void)
+void RegisterSearchLine::registerDestroyed()
 {
   d->reg = 0;
   setEnabled(false);
@@ -229,7 +229,7 @@ RegisterSearchLine* RegisterSearchLineWidget::createSearchLine(Register* reg)
   return d->searchLine;
 }
 
-void RegisterSearchLineWidget::createWidgets(void)
+void RegisterSearchLineWidget::createWidgets()
 {
   QHBoxLayout *searchLineLayout = new QHBoxLayout(this);
   searchLineLayout->setSpacing(0);
@@ -245,7 +245,7 @@ void RegisterSearchLineWidget::createWidgets(void)
 }
 
 
-RegisterSearchLine* RegisterSearchLineWidget::searchLine(void) const
+RegisterSearchLine* RegisterSearchLineWidget::searchLine() const
 {
   return d->searchLine;
 }

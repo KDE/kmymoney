@@ -25,6 +25,7 @@ target_link_libraries( germanonlinetransfertest
   payeeidentifier_nationalAccount
   payeeidentifier_iban_bic
   payeeidentifier_iban_bic_widgets
+  payeeidentifier_iban_bic_delegates
   ${QT_QTCORE_LIBRARIES}
   ${QT_QTGUI_LIBRARIES}
   ${QT_QTTEST_LIBRARY}

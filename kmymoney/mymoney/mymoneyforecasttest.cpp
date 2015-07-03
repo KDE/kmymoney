@@ -832,7 +832,7 @@ void MyMoneyForecastTest::testBeginForecastDate()
   }
 }
 
-void MyMoneyForecastTest::testHistoryDays(void)
+void MyMoneyForecastTest::testHistoryDays()
 {
   MyMoneyForecast a;
 

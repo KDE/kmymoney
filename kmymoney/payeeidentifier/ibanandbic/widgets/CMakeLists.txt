@@ -5,6 +5,8 @@ set ( IBAN_BIC_WIDGETS_SCRS
   kbicedit.cpp
   ibanvalidator.cpp
   bicvalidator.cpp
+  ibanbicitemdelegate.cpp
+  ibanbicitemedit.cpp
 )
 
 set( IBAN_BIC_WIDGETS_HEADERS
@@ -12,7 +14,12 @@ set( IBAN_BIC_WIDGETS_HEADERS
   kbicedit.h
   ibanvalidator.h
   bicvalidator.h
+  ibanbicitemdelegate.h
   ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier_iban_bic_widgets_export.h
+)
+
+kde4_add_ui_files(IBAN_BIC_WIDGETS_SCRS
+  ibanbicitemedit.ui
 )
 
 kde4_add_library( payeeidentifier_iban_bic_widgets SHARED
@@ -27,6 +34,7 @@ target_link_libraries( payeeidentifier_iban_bic_widgets LINK_PUBLIC
   payeeidentifier_iban_bic
   Qt5::Core
   KF5::KDELibs4Support
+  kmm_mymoney
   kmm_widgets
 )
 
@@ -37,13 +45,7 @@ install(TARGETS payeeidentifier_iban_bic_widgets
 
 ## Delegate plugin
 set (IBAN_BIC_UI_SCRS
-  ibanbicitemdelegate.cpp
-  ibanbicitemedit.cpp
   pluginfactory.cpp
-)
-
-kde4_add_ui_files(IBAN_BIC_UI_SCRS
-  ibanbicitemedit.ui
 )
 
 kde4_add_plugin( payeeidentifier_iban_bic_delegates

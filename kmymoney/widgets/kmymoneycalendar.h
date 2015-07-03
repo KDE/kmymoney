@@ -102,7 +102,7 @@ public:
   /**
     * Get the calendar type.
   **/
-  kMyMoneyDateTbl::calendarType type(void) const {
+  kMyMoneyDateTbl::calendarType type() const {
     return table->type();
   }
 
