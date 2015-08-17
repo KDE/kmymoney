@@ -797,6 +797,7 @@ void InvestTransactionEditor::slotUpdateSecurity(const QString& stockId)
 
   slotUpdateTotalAmount();
   slotUpdateButtonState();
+  resizeForm();
 }
 
 void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
@@ -910,7 +911,7 @@ void InvestTransactionEditor::slotUpdateActivity(MyMoneySplit::investTransaction
 
 InvestTransactionEditor::priceModeE InvestTransactionEditor::priceMode() const
 {
-  priceModeE mode = static_cast<priceModeE>(0);
+  priceModeE mode = static_cast<priceModeE>(Price);
   KMyMoneySecurity* sec = dynamic_cast<KMyMoneySecurity*>(m_editWidgets["security"]);
   QString accId;
   if (!sec->currentText().isEmpty()) {
@@ -918,7 +919,7 @@ InvestTransactionEditor::priceModeE InvestTransactionEditor::priceMode() const
     if (accId.isEmpty())
       accId = m_account.id();
   }
-  while (!accId.isEmpty() && mode == 0) {
+  while (!accId.isEmpty() && mode == Price) {
     MyMoneyAccount acc = MyMoneyFile::instance()->account(accId);
     if (acc.value("priceMode").isEmpty())
       accId = acc.parentAccountId();
@@ -926,8 +927,8 @@ InvestTransactionEditor::priceModeE InvestTransactionEditor::priceMode() const
       mode = static_cast<priceModeE>(acc.value("priceMode").toInt());
   }
 
-  // if it's still <default> then use that default
-  if (mode == 0)
+  // if mode is still <Price> then use that
+  if (mode == Price)
     mode = PricePerShare;
   return mode;
 }
@@ -1133,18 +1134,14 @@ void InvestTransactionEditor::updatePriceMode(const MyMoneySplit& split)
     else
       price = priceEdit->value().abs();
 
-    if (priceMode() == PricePerTransaction && label->text() != i18n("Price")) {
-      label->setText(i18n("Price"));
+    if (priceMode() == PricePerTransaction) {
+      label->setText(i18n("Transaction amount"));
       if (!sharesEdit->value().isZero())
         priceEdit->setValue(sharesEdit->value().abs() * price);
 
-    } else if (priceMode() == PricePerShare && label->text() == i18n("Price")) {
+    } else if (priceMode() == PricePerShare) {
       label->setText(i18n("Price/Share"));
-      if (!sharesEdit->value().isZero())
-        priceEdit->setValue(price / sharesEdit->value().abs());
-
-    } else if (priceMode() == PricePerTransaction) {
-      priceEdit->setValue(sharesEdit->value().abs() * price);
+      priceEdit->setValue(price);
 
     } else
       priceEdit->setValue(price);

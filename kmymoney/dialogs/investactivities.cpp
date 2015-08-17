@@ -200,6 +200,19 @@ void Activity::setWidgetVisibility(const QStringList& widgetIds, bool visible) c
   }
 }
 
+QString Activity::priceLabel() const
+{
+  QString label;
+  if (priceMode() == InvestTransactionEditor::Price) {
+    label = i18n("Price");
+  } else if (priceMode() == InvestTransactionEditor::PricePerShare) {
+    label = i18n("Price/share");
+  } else if (priceMode() == InvestTransactionEditor::PricePerTransaction) {
+    label = i18n("Transaction amount");
+  }
+  return label;
+}
+
 void Buy::showWidgets() const
 {
   static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "shares" << "price" << "total" << "interest-account" << "fee-account";
@@ -210,7 +223,9 @@ void Buy::showWidgets() const
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
   setLabelText("shares-label", i18n("Shares"));
-  setLabelText("price-label", i18n("Price/share"));
+  if (havePrice()) {
+    setLabelText("price-label", priceLabel());
+  }
   setLabelText("total-label", i18nc("Total value", "Total"));
 }
 
@@ -294,7 +309,9 @@ void Sell::showWidgets() const
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
   setLabelText("shares-label", i18n("Shares"));
-  setLabelText("price-label", i18n("Price/share"));
+  if (havePrice()) {
+    setLabelText("price-label", priceLabel());
+  }
   setLabelText("total-label", i18nc("Total value", "Total"));
 }
 
@@ -442,7 +459,9 @@ void Reinvest::showWidgets() const
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("interest-label", i18n("Interest"));
   setLabelText("shares-label", i18n("Shares"));
-  setLabelText("price-label", i18n("Price/share"));
+  if (havePrice()) {
+    setLabelText("price-label", priceLabel());
+  }
   setLabelText("total-label", i18nc("Total value", "Total"));
 }
 
@@ -706,5 +725,3 @@ bool IntInc::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneyS
 
   return true;
 }
-
-
