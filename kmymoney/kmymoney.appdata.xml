@@ -12,6 +12,7 @@
   <name xml:lang="de">KMyMoney</name>
   <name xml:lang="en-GB">KMyMoney</name>
   <name xml:lang="es">KMyMoney</name>
+  <name xml:lang="et">KMyMoney</name>
   <name xml:lang="fi">KMyMoney</name>
   <name xml:lang="fr">KMyMoney</name>
   <name xml:lang="gl">KMyMoney</name>
@@ -34,6 +35,7 @@
   <summary xml:lang="de">Persönliche Finanzenverwaltung</summary>
   <summary xml:lang="en-GB">Personal Finance Manager</summary>
   <summary xml:lang="es">Gestor de finanzas personales</summary>
+  <summary xml:lang="et">Isiklike rahaasjade haldur</summary>
   <summary xml:lang="fi">Henkilökohtainen talouskirjanpito</summary>
   <summary xml:lang="fr">Gestionnaire de finances personnelles</summary>
   <summary xml:lang="gl">Xestor das finanzas persoais</summary>
@@ -58,6 +60,7 @@
     <p xml:lang="de">KMyMoney ist eine persönliche Finanzverwaltung für KDE.</p>
     <p xml:lang="en-GB">KMyMoney is a personal finance manager for KDE.</p>
     <p xml:lang="es">KMyMoney es un gestor de finanzas personales para KDE.</p>
+    <p xml:lang="et">KMyMoney on KDE isiklike rahaasjade haldur.</p>
     <p xml:lang="fi">KMyMoney on henkilökohtainen talouskirjanpito-ohjelma KDE:lle.</p>
     <p xml:lang="fr">KMyMoney est un gestionnaire de finances personnelles pour KDE.</p>
     <p xml:lang="gl">KMyMoney é un xestor de finanzas persoais para KDE.</p>
@@ -82,6 +85,7 @@
     <p xml:lang="da">Den understøtter forskellige kontotyper, kategorisering af udgifter og indtægter, afstemning af bankkonti og import/eksport af filformatet "QIF". Direkte download med brug af af formaterne OFX og HBCI er også muligt via plugins. Netbankunderstøttelse (download af kontoudtog) leveres også for protokollerne OFX og HBCI.</p>
     <p xml:lang="en-GB">It supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format. Direct download using the OFX and HBCI formats is also possible via plugins. Online banking support (statement download) is also provided for the OFX and HBCI protocols.</p>
     <p xml:lang="es">Soporta diferentes tipos de cuentas, categorización de gastos e ingresos, reconciliación de cuentas bancarias e importación/exportación del formato de archivo «QIF». Posibilita la descarga directa usando los formatos OFX y HBCI a través de complementos. También incluye soporte para la banca electrónica (descarga de estados de cuenta) para los protocolos OFX y HBCI</p>
+    <p xml:lang="et">See toetab eri kontotüüpe, kulude ja tulude liigitamist, pangakontode konsolideerimist ning importi ja eksporti QIF-failivormingusse/failivormingust. Pluginate abil on võimalik ka otseallalaadimine OFX- ja HBCI-vormingus. Samuti on toetatud internetipangandus (väljavõtete allalaadimine) OFX ja HBCI protokolli vahendusel.</p>
     <p xml:lang="fi">Se tukee erilaisia tilityyppejä, tulojen ja menojen kategorisointia, tiliotteiden yhteensovittamista kirjanpidon kanssa ja tuontia ja vientiä QIF-tiedostomuodossa. Suoralataus OFX ja HBCI-muodoissa on myös mahdollista liitännäisten avulla. OFX- ja HBCI-protokollille on tarjolla myös online-pankkituki (tiliotteiden lataaminen).</p>
     <p xml:lang="fr">Il prend en charge différents types de comptes, une catégorisation des dépenses et des revenus, une réconciliation des comptes en banque et l'importation/exportation du format de fichier « QIF ».Le téléchargement direct des formats « OFX » et « HBCI » est également possible à l'aide de modules d'extension. La prise en charge des relevés de compte en ligne est également fournie pour les protocoles OFX et HBCI.</p>
     <p xml:lang="gl">Permite definir distintos tipos de contas, organizar por categorías os gastos e ingresos, conciliar contas do banco e importar e exportar datos no formato QIF. Existen ademais complementos que permiten descargar datos directamente en formato OFX ou HBCI. Para os protocolos OFX e HBCI tamén se permite usar a banca por internet (descargar o extracto).</p>
@@ -105,6 +109,7 @@
       <caption xml:lang="de">KMyMoney hat eine Willkommensseite, um neue Anwender zu Anfang zu unterstützen</caption>
       <caption xml:lang="en-GB">KMyMoney has a welcome page to help new users get off to a good start</caption>
       <caption xml:lang="es">KMyMoney dispone de una página de bienvenida para ayudar a los nuevos usuarios a tener un comienzo cómodo.</caption>
+      <caption xml:lang="et">KMyMoney avalehekülg aitab uutel kasutajatel vähese vaevaga alustada</caption>
       <caption xml:lang="fi">KMyMoneyssa on tervetulosivu auttamaan uusia käyttäjiä</caption>
       <caption xml:lang="fr">KMyMoney a une page d'accueil pour aider les nouveaux utilisateurs à démarrer facilement</caption>
       <caption xml:lang="gl">KMyMoney dispón dunha páxina de benvida para axudar aos novos usuarios a empezar a usalo correctamente.</caption>
@@ -127,6 +132,7 @@
       <caption xml:lang="da">Økonomioversigten giver dig en oversigt over din økonomi</caption>
       <caption xml:lang="en-GB">The financial summary gives you an overview of your finances</caption>
       <caption xml:lang="es">El resumen financiero le ofrece una descripción general de sus finanzas</caption>
+      <caption xml:lang="et">Finantskokkuvõte annab ilusa ülevaate rahaasjade seisust</caption>
       <caption xml:lang="fi">Taloustietojen yhteenveto antaa yleiskuvan taloustilanteestasi</caption>
       <caption xml:lang="fr">Le résumé financier vous offre une vue d'ensemble de vos finances</caption>
       <caption xml:lang="gl">O resumo financeiro ofrece unha vista xeral das fianzas persoais.</caption>
@@ -149,6 +155,7 @@
       <caption xml:lang="da">I denne visning er dine regnskaber organiseret, fremvist og håndteret af de institutioner de hører til</caption>
       <caption xml:lang="en-GB">In this view your accounts are organised, viewed, and managed by the institutions they are held at</caption>
       <caption xml:lang="es">En esta vista sus cuentas aparecen organizadas, visibles y gestionadas por las instituciones en las que se llevan a cabo</caption>
+      <caption xml:lang="et">Selles vaates saab kontosid korraldada, näha ja hallata rahaasutuste kaupa, millele nad kuuluvad</caption>
       <caption xml:lang="fi">Tässä näkymässä tilit järjestellään, katsotaan ja hallitaan niihin liittyvien rahalaitosten kautta</caption>
       <caption xml:lang="fr">Dans cette vue, vos comptes sont organisés, affichés et gérés par les institutions qui les détiennent</caption>
       <caption xml:lang="gl">Nesta vista as contas están organizadas, vistas e xestionadas polas institucións correspondentes.</caption>
