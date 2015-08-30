@@ -23,7 +23,7 @@ target_link_libraries( germanonlinetransfertest
   kmm_utils_validators
   onlinetask_interfaces
   payeeidentifier_nationalAccount
-  payeeidentifier_iban_bic
+  kmm_payeeidentifier_iban_bic
   payeeidentifier_iban_bic_widgets
   payeeidentifier_iban_bic_delegates
   ${QT_QTCORE_LIBRARIES}

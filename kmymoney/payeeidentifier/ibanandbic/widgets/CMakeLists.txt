@@ -31,7 +31,7 @@ target_include_directories(payeeidentifier_iban_bic_widgets
 )
 
 target_link_libraries( payeeidentifier_iban_bic_widgets LINK_PUBLIC
-  payeeidentifier_iban_bic
+  kmm_payeeidentifier_iban_bic
   ${QT_QTCORE_LIBRARY}
   ${KDE4_KDECORE_LIBS}
   ${KDE4_KDEUI_LIBS}
@@ -54,7 +54,7 @@ kde4_add_plugin( payeeidentifier_iban_bic_delegates
 )
 
 target_link_libraries( payeeidentifier_iban_bic_delegates
-  payeeidentifier_iban_bic
+  kmm_payeeidentifier_iban_bic
   payeeidentifier_iban_bic_widgets
   kmm_widgets
   ${QT_QTCORE_LIBRARY}

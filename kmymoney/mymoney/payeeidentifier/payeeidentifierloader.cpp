@@ -45,6 +45,7 @@ payeeIdentifierLoader::~payeeIdentifierLoader()
 
 void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifierData* const identifier)
 {
+  Q_CHECK_PTR(identifier);
   m_identifiers.insert(identifier->payeeIdentifierId(), identifier);
 }
 

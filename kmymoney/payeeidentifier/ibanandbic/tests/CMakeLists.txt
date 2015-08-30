@@ -9,6 +9,6 @@ kde4_add_unit_test( payeeidentifier_iban_bic-test
 )
 
 target_link_libraries( payeeidentifier_iban_bic-test
-  payeeidentifier_iban_bic
   ${QT_QTTEST_LIBRARY}
+  kmm_payeeidentifier_iban_bic
 )
