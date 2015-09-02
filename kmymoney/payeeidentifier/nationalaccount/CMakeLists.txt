@@ -11,6 +11,7 @@ kde4_add_library( payeeidentifier_nationalAccount SHARED
 generate_export_header(payeeidentifier_nationalAccount BASE_NAME nationalaccount_identifier)
 
 target_link_libraries( payeeidentifier_nationalAccount
+  LINK_PUBLIC
   kmm_payeeidentifier
   ${QT_QTCORE_LIBRARY}
   ${QT_QTXML_LIBRARY}
