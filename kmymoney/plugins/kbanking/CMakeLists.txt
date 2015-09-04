@@ -44,7 +44,7 @@ target_link_libraries(kmm_kbanking
                       kmm_mymoney
                       kmm_widgets
                       kmm_plugin
-                      kmm_payeeidentifier_iban_bic
+                      payeeidentifier_iban_bic
                       payeeidentifier_nationalAccount
                       ${KDE4_KDEUI_LIBS}
                       ${QT_QTDECLARATIVE_LIBRARY}

@@ -51,7 +51,7 @@ kde4_add_library(views STATIC ${libviews_a_SOURCES})
 # TODO: Remove this dependency. But it is needed as long as the payee editor uses these objects directly
 # This should be replaced by virtual methods in a pure abstract object.
 target_link_libraries( views
-  kmm_payeeidentifier_iban_bic
+  payeeidentifier_iban_bic
   payeeidentifier_nationalAccount
   kmm_mymoney # needed to load payeeIdentifier
 )

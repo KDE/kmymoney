@@ -26,12 +26,14 @@ kde4_add_library( payeeidentifier_iban_bic_widgets SHARED
   ${IBAN_BIC_WIDGETS_SCRS}
 )
 
+set_target_properties(payeeidentifier_iban_bic_widgets PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+
 target_include_directories(payeeidentifier_iban_bic_widgets
   PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 target_link_libraries( payeeidentifier_iban_bic_widgets LINK_PUBLIC
-  kmm_payeeidentifier_iban_bic
+  payeeidentifier_iban_bic
   ${QT_QTCORE_LIBRARY}
   ${KDE4_KDECORE_LIBS}
   ${KDE4_KDEUI_LIBS}
@@ -54,7 +56,7 @@ kde4_add_plugin( payeeidentifier_iban_bic_delegates
 )
 
 target_link_libraries( payeeidentifier_iban_bic_delegates
-  kmm_payeeidentifier_iban_bic
+  payeeidentifier_iban_bic
   payeeidentifier_iban_bic_widgets
   kmm_widgets
   ${QT_QTCORE_LIBRARY}

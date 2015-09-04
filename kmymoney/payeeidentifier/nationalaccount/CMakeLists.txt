@@ -18,6 +18,8 @@ target_link_libraries( payeeidentifier_nationalAccount
   ${QT_QTSQL_LIBRARY}
 )
 
+set_target_properties(payeeidentifier_nationalAccount PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+
 install(TARGETS payeeidentifier_nationalAccount
     ${INSTALL_TARGETS_DEFAULT_ARGS}
 )
