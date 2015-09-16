@@ -220,7 +220,7 @@ QString MyMoneyOfxConnector::password() const
 
   if (pwd.isEmpty()) {
     QPointer<KPasswordDialog> dlg = new KPasswordDialog(0);
-    dlg->setPrompt(i18n("Enter your password"));
+    dlg->setPrompt(i18n("Enter your password for account <b>%1</b>").arg(m_account.name()));
     if (dlg->exec())
       pwd = dlg->password();
     delete dlg;
