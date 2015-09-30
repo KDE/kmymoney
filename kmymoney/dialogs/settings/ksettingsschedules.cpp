@@ -28,7 +28,7 @@
 #include <klocale.h>
 #include <klocalizedstring.h>
 #ifdef KF5Holidays_FOUND
-#include <KHolidays/Holidays>
+#include <KHolidays/Holiday>
 using namespace KHolidays;
 #endif
 

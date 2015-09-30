@@ -90,7 +90,7 @@
 #include <ktoolinvocation.h>
 #include <KSharedConfig>
 #ifdef KF5Holidays_FOUND
-#include <KHolidays/Holidays>
+#include <KHolidays/Holiday>
 #endif
 
 // ----------------------------------------------------------------------------
