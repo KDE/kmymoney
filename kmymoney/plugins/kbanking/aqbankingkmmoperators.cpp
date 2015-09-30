@@ -193,6 +193,7 @@ MyMoneyMoney AB_Value_toMyMoneyMoney(const AB_VALUE *const value)
 {
   // I've read somewhere that in M1 were about 12 trillion dollar in 2013. So the buffer length of 32 should be sufficient.
   char buffer[32];
+  memset(buffer, 0, sizeof(buffer));
   AB_Value_GetNumDenomString(value, static_cast<char*>(buffer), 32);
-  return MyMoneyMoney(QString::fromUtf8(buffer, 32));
+  return MyMoneyMoney(QString::fromUtf8(buffer));
 }

@@ -26,6 +26,8 @@ kde4_add_library( payeeidentifier_iban_bic_widgets SHARED
   ${IBAN_BIC_WIDGETS_SCRS}
 )
 
+set_target_properties(payeeidentifier_iban_bic_widgets PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+
 target_include_directories(payeeidentifier_iban_bic_widgets
   PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
 )

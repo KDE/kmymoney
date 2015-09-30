@@ -40,7 +40,8 @@ class InvestTransactionEditor : public TransactionEditor
 
 public:
   typedef enum {
-    PricePerShare = 1,
+    Price = 0,
+    PricePerShare,
     PricePerTransaction
   } priceModeE;
 

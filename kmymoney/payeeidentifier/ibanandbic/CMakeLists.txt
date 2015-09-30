@@ -6,12 +6,12 @@ set ( PAYEEIDENTIFIER_IBAN_BIC_SCRS
   ibanbic.cpp
 )
 
-kde4_add_plugin( payeeidentifier_iban_bic SHARED
+kde4_add_library( payeeidentifier_iban_bic SHARED
   ${PAYEEIDENTIFIER_IBAN_BIC_SCRS}
 )
 generate_export_header(payeeidentifier_iban_bic BASE_NAME iban_bic_identifier)
 
-target_link_libraries( payeeidentifier_iban_bic
+target_link_libraries( payeeidentifier_iban_bic PUBLIC
   kmm_payeeidentifier
   Qt5::Core
   Qt5::Sql
@@ -19,6 +19,8 @@ target_link_libraries( payeeidentifier_iban_bic
   KF5::KDELibs4Support
   Alkimia::alkimia
 )
+
+set_target_properties(payeeidentifier_iban_bic PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 
 install(TARGETS payeeidentifier_iban_bic
         ${INSTALL_TARGETS_DEFAULT_ARGS}

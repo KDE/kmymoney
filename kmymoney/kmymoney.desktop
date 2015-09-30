@@ -115,3 +115,4 @@ Type=Application
 X-DocPath=kmymoney/index.html
 Icon=kmymoney
 Categories=Office;Finance;
+StartupWMClass=Kmymoney

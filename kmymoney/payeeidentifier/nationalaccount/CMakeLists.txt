@@ -5,17 +5,20 @@ set (nationalAccountId_SCRS
   nationalaccount.cpp
 )
 
-kde4_add_plugin( payeeidentifier_nationalAccount SHARED
+kde4_add_library( payeeidentifier_nationalAccount SHARED
   ${nationalAccountId_SCRS}
 )
 generate_export_header(payeeidentifier_nationalAccount BASE_NAME nationalaccount_identifier)
 
 target_link_libraries( payeeidentifier_nationalAccount
+  LINK_PUBLIC
   kmm_payeeidentifier
   Qt5::Core
   Qt5::Xml
   ${QT_QTSQL_LIBRARY}
 )
+
+set_target_properties(payeeidentifier_nationalAccount PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 
 install(TARGETS payeeidentifier_nationalAccount
     ${INSTALL_TARGETS_DEFAULT_ARGS}
