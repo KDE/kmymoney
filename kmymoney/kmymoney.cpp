@@ -7825,7 +7825,8 @@ void KMyMoneyApp::preloadHolidays()
     KHolidays::Holiday::List holidayList = d->m_holidayRegion->holidays(QDate::currentDate(), endDate);
     KHolidays::Holiday::List::const_iterator holiday_it;
     for (holiday_it = holidayList.constBegin(); holiday_it != holidayList.constEnd(); ++holiday_it) {
-      d->m_holidayMap.insert((*holiday_it).date(), false);
+      for (QDate holidayDate = (*holiday_it).observedStartDate(); holidayDate <= (*holiday_it).observedEndDate(); holidayDate.addDays(1))
+        d->m_holidayMap.insert(holidayDate, false);
     }
 
     for (QDate date = QDate::currentDate(); date <= endDate; date = date.addDays(1)) {
