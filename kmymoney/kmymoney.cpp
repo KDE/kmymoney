@@ -91,6 +91,7 @@
 #include <KSharedConfig>
 #ifdef KF5Holidays_FOUND
 #include <KHolidays/Holiday>
+#include <KHolidays/HolidayRegion>
 #endif
 
 // ----------------------------------------------------------------------------

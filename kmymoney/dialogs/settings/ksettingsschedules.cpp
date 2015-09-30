@@ -29,6 +29,7 @@
 #include <klocalizedstring.h>
 #ifdef KF5Holidays_FOUND
 #include <KHolidays/Holiday>
+#include <KHolidays/HolidayRegion>
 using namespace KHolidays;
 #endif
 
