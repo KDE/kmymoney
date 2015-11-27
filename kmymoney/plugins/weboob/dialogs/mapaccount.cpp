@@ -84,41 +84,39 @@ void WbMapAccountDialog::checkNextButton(void)
 
 void WbMapAccountDialog::newPage(int id)
 {
-  switch(id) {
-    case BACKENDS_PAGE:
-    {
-      backendsList->clear();
-      d2->progress = new KProgressDialog(this, i18n("Load Weboob backend..."), i18n("Getting list of backends."));
-      d2->progress->setModal(true);
-      d2->progress->setAllowCancel(false);
-      d2->progress->progressBar()->setMinimum(0);
-      d2->progress->progressBar()->setMaximum(0);
-      d2->progress->setMinimumDuration(0);
-      kapp->processEvents();
+  switch (id) {
+    case BACKENDS_PAGE: {
+        backendsList->clear();
+        d2->progress = new KProgressDialog(this, i18n("Load Weboob backend..."), i18n("Getting list of backends."));
+        d2->progress->setModal(true);
+        d2->progress->setAllowCancel(false);
+        d2->progress->progressBar()->setMinimum(0);
+        d2->progress->progressBar()->setMaximum(0);
+        d2->progress->setMinimumDuration(0);
+        kapp->processEvents();
 
-      QFuture<QList<Weboob::Backend> > future = QtConcurrent::run(weboob, &Weboob::getBackends);
-      d2->watcher2.setFuture(future);
+        QFuture<QList<Weboob::Backend> > future = QtConcurrent::run(weboob, &Weboob::getBackends);
+        d2->watcher2.setFuture(future);
 
-      break;
-    }
-    case ACCOUNTS_PAGE:
-    {
-      accountsList->clear();
-      d->progress = new KProgressDialog(this, i18n("Connecting to bank..."), i18n("Getting list of accounts list from your bank."));
-      d->progress->setModal(true);
-      d->progress->setAllowCancel(false);
-      d->progress->progressBar()->setMinimum(0);
-      d->progress->progressBar()->setMaximum(0);
-      d->progress->setMinimumDuration(0);
-      kapp->processEvents();
+        break;
+      }
+    case ACCOUNTS_PAGE: {
+        accountsList->clear();
+        d->progress = new KProgressDialog(this, i18n("Connecting to bank..."), i18n("Getting list of accounts list from your bank."));
+        d->progress->setModal(true);
+        d->progress->setAllowCancel(false);
+        d->progress->progressBar()->setMinimum(0);
+        d->progress->progressBar()->setMaximum(0);
+        d->progress->setMinimumDuration(0);
+        kapp->processEvents();
 
-      QFuture<QList<Weboob::Account> > future = QtConcurrent::run(weboob, &Weboob::getAccounts, backendsList->currentItem()->text(0));
-      d->watcher.setFuture(future);
-      button(QWizard::BackButton)->setEnabled(false);
-      accountsList->setEnabled(false);
+        QFuture<QList<Weboob::Account> > future = QtConcurrent::run(weboob, &Weboob::getAccounts, backendsList->currentItem()->text(0));
+        d->watcher.setFuture(future);
+        button(QWizard::BackButton)->setEnabled(false);
+        accountsList->setEnabled(false);
 
-      break;
-    }
+        break;
+      }
   }
 }
 
@@ -126,8 +124,7 @@ void WbMapAccountDialog::gotBackends()
 {
   QList<Weboob::Backend> backends = d2->watcher2.result();
 
-  for(QListIterator<Weboob::Backend> it(backends); it.hasNext(); )
-  {
+  for (QListIterator<Weboob::Backend> it(backends); it.hasNext();) {
     Weboob::Backend backend = it.next();
     QStringList headers;
     headers << backend.name << backend.module;
@@ -142,8 +139,7 @@ void WbMapAccountDialog::gotAccounts()
 {
   QList<Weboob::Account> accounts = d->watcher.result();
 
-  for(QListIterator<Weboob::Account> it(accounts); it.hasNext(); )
-  {
+  for (QListIterator<Weboob::Account> it(accounts); it.hasNext();) {
     Weboob::Account account = it.next();
     QStringList headers;
     headers << account.id << account.name << account.balance.formatMoney(QString(), 2);

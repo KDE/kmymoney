@@ -606,7 +606,7 @@ void MyMoneyFileTest::testAddCategories()
     QCOMPARE(a.id(), QLatin1String("A000001"));
     QCOMPARE(a.institutionId(), QString());
     QCOMPARE(a.currencyId(), QLatin1String("EUR"));
-    QCOMPARE(a.openingDate(), QDate(1900,1,1));
+    QCOMPARE(a.openingDate(), QDate(1900, 1, 1));
     QCOMPARE(m->dirty(), true);
     QCOMPARE(m->income().accountList().count(), 1);
     QCOMPARE(m->income().accountList()[0], QLatin1String("A000001"));
@@ -628,7 +628,7 @@ void MyMoneyFileTest::testAddCategories()
     QCOMPARE(b.id(), QLatin1String("A000002"));
     QCOMPARE(a.institutionId(), QString());
     QCOMPARE(b.currencyId(), QLatin1String("EUR"));
-    QCOMPARE(b.openingDate(), QDate(1900,1,1));
+    QCOMPARE(b.openingDate(), QDate(1900, 1, 1));
     QCOMPARE(b.parentAccountId(), QLatin1String("AStd::Expense"));
     QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
 

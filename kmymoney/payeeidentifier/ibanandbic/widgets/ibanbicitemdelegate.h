@@ -44,8 +44,8 @@ private:
   inline payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBicByIndex(const QModelIndex& index) const;
 
 private Q_SLOTS:
-    // void edit(payeeIdentifier);
-    // void id(payeeIdentifier);
+  // void edit(payeeIdentifier);
+  // void id(payeeIdentifier);
 };
 
 #endif // IBANBICITEMDELEGATE_H

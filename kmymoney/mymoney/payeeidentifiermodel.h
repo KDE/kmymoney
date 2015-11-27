@@ -35,7 +35,7 @@
  */
 class KMM_MYMONEY_EXPORT payeeIdentifierModel : public QAbstractItemModel
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
   enum roles {

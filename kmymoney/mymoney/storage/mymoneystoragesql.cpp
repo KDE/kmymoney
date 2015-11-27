@@ -1109,7 +1109,7 @@ void MyMoneyStorageSql::writePayees()
   list.prepend(user);
   signalProgress(0, list.count(), "Writing Payees...");
 
-  Q_FOREACH (const MyMoneyPayee& it, list) {
+  Q_FOREACH(const MyMoneyPayee& it, list) {
     if (dbList.contains(it.id())) {
       dbList.removeAll(it.id());
       modifyPayee(it);
@@ -1121,7 +1121,7 @@ void MyMoneyStorageSql::writePayees()
 
   if (!dbList.isEmpty()) {
     QMap<QString, MyMoneyPayee> payeesToDelete = fetchPayees(dbList, true);
-    Q_FOREACH (const MyMoneyPayee& payee, payeesToDelete) {
+    Q_FOREACH(const MyMoneyPayee& payee, payeesToDelete) {
       removePayee(payee);
     }
   }
@@ -2761,7 +2761,7 @@ void MyMoneyStorageSql::writeOnlineJob(const onlineJob& job, QSqlQuery& query)
 void MyMoneyStorageSql::writeOnlineJobs()
 {
   QSqlQuery query(*this);
-  if(!query.exec("DELETE FROM kmmOnlineJobs;"))
+  if (!query.exec("DELETE FROM kmmOnlineJobs;"))
     throw MYMONEYEXCEPTION(buildError(query, Q_FUNC_INFO, QLatin1String("Clean kmmOnlineJobs table")));
 
   const QList<onlineJob> jobs(m_storage->onlineJobList());
@@ -2769,12 +2769,12 @@ void MyMoneyStorageSql::writeOnlineJobs()
   // Create list for onlineJobs which failed and the reason therefor
   QList<QPair<onlineJob, QString> > failedJobs;
   int jobCount = 0;
-  foreach(const onlineJob& job, jobs) {
+  foreach (const onlineJob& job, jobs) {
     try {
       addOnlineJob(job);
     } catch (MyMoneyException& e) {
       // Do not save e as this may point to an inherited class
-      failedJobs.append( QPair<onlineJob, QString>(job, e.what()) );
+      failedJobs.append(QPair<onlineJob, QString>(job, e.what()));
       qDebug() << "Failed to save onlineJob" << job.id() << "Reson:" << e.what();
     }
 

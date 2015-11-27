@@ -31,7 +31,7 @@ struct WebAccountSettings::Private {
 };
 
 WebAccountSettings::WebAccountSettings(const MyMoneyAccount& /*acc*/,
-		                                     QWidget* parent) :
+                                       QWidget* parent) :
     QWidget(parent),
     d(new Private)
 {

@@ -661,7 +661,7 @@ void InvestProcessing::priceColumnSelected(int col)
     m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_priceCol->setCurrentIndex(col);  // accept new column
     m_priceSelected = true;
     if (m_priceColumn != -1) {
-    //          if a previous price column is detected, but in a different column...
+      //          if a previous price column is detected, but in a different column...
       if ((m_columnTypeList[m_priceColumn] == type)  && (m_priceColumn != col)) {
         m_columnTypeList[m_priceColumn].clear();//  ...clear it
       }
@@ -854,39 +854,39 @@ void InvestProcessing::readFile(const QString& fname)
   //  Check all lines to find maximum column count.
   //  Also disable column combobox connects till later
   //
-    int totalDelimiterCount[4] = {0};  //  Total in file for each delimiter
-    int thisDelimiterCount[4] = {0};   //  Total in this line for each delimiter
-    int colCount = 0;                  //  Total delimiters in this line
-    m_csvDialog->m_possibleDelimiter = 0;
-    m_symbolRow = 0;
+  int totalDelimiterCount[4] = {0};  //  Total in file for each delimiter
+  int thisDelimiterCount[4] = {0};   //  Total in this line for each delimiter
+  int colCount = 0;                  //  Total delimiters in this line
+  m_csvDialog->m_possibleDelimiter = 0;
+  m_symbolRow = 0;
 
-    m_csvDialog->m_delimiterError = false;
-    for (int i = 0; i < m_lineList.count(); i++) {
-      data = m_lineList[i];
-      m_columnList = m_parse->parseLine(data);
+  m_csvDialog->m_delimiterError = false;
+  for (int i = 0; i < m_lineList.count(); i++) {
+    data = m_lineList[i];
+    m_columnList = m_parse->parseLine(data);
 
-      for (int count = 0; count < 4; count++) {  //  Four possible delimiters
-        //  Count each delimiter to find most likely one to use .
-        //  Changed to sum total file, not just individual lines.
-        colCount = data.count(m_parse->m_fieldDelimiterCharList[count]) + 1;
+    for (int count = 0; count < 4; count++) {  //  Four possible delimiters
+      //  Count each delimiter to find most likely one to use .
+      //  Changed to sum total file, not just individual lines.
+      colCount = data.count(m_parse->m_fieldDelimiterCharList[count]) + 1;
 
-        if (colCount > thisDelimiterCount[count]) {
-          thisDelimiterCount[count] = colCount;
-        }
-        if (thisDelimiterCount[count] > m_maxColumnCount) {
-          m_maxColumnCount = thisDelimiterCount[count];
-        }
-        m_columnCountList << colCount;  // Number of columns in each line.
-        totalDelimiterCount[count] += data.count(m_parse->m_fieldDelimiterCharList[count]);
-        if (totalDelimiterCount[count] > totalDelimiterCount[m_csvDialog->m_possibleDelimiter]) {
-          m_csvDialog->m_possibleDelimiter = count;
-        }
+      if (colCount > thisDelimiterCount[count]) {
+        thisDelimiterCount[count] = colCount;
+      }
+      if (thisDelimiterCount[count] > m_maxColumnCount) {
+        m_maxColumnCount = thisDelimiterCount[count];
+      }
+      m_columnCountList << colCount;  // Number of columns in each line.
+      totalDelimiterCount[count] += data.count(m_parse->m_fieldDelimiterCharList[count]);
+      if (totalDelimiterCount[count] > totalDelimiterCount[m_csvDialog->m_possibleDelimiter]) {
+        m_csvDialog->m_possibleDelimiter = count;
       }
     }
-    m_csvDialog->ui->tableWidget->setColumnCount(m_maxColumnCount);
-    if ((columnCount < 5) || (m_csvDialog->m_possibleDelimiter != m_fieldDelimiterIndex)) {
-      m_csvDialog->m_delimiterError = true;
-    }
+  }
+  m_csvDialog->ui->tableWidget->setColumnCount(m_maxColumnCount);
+  if ((columnCount < 5) || (m_csvDialog->m_possibleDelimiter != m_fieldDelimiterIndex)) {
+    m_csvDialog->m_delimiterError = true;
+  }
   if (m_fileEndLine == 0) { // copy from later
     m_fileEndLine = m_parse->lastLine();
   }
@@ -1074,7 +1074,7 @@ void InvestProcessing::setWindowSize(int firstLine, int lastLine)
     m_csvDialog->m_vScrollBarWidth = 0;
   }
   int scrollbarWidth = 17;  //  scrollbar space for when needed
-  int wd = m_rowWidth + m_csvDialog->m_vHeaderWidth+  2 *(vLayoutMargin.left() + 1) + 12 + hLayout_MainMargin.left() + hLayout_MainMargin.right() + scrollbarWidth;
+  int wd = m_rowWidth + m_csvDialog->m_vHeaderWidth +  2 * (vLayoutMargin.left() + 1) + 12 + hLayout_MainMargin.left() + hLayout_MainMargin.right() + scrollbarWidth;
   if (wd > QApplication::desktop()->width()) {
     //
     //  if set to full desktop()->width(), causes a spontaneous resize event
@@ -1542,10 +1542,10 @@ int InvestProcessing::processActionType(QString& type)
       m_trInvestData.type = '0';
       m_csvSplit.m_strCategoryName = m_columnList[m_payeeColumn];
       return KMessageBox::Ok;
-    } else if (m_securityName.isEmpty()){
-        KMessageBox::information(0, i18n("<center>No Detail field specified</center>"
-                                     "<center>and no security name supplied.</center>"
-                                     "<center>(Please check the parameters given)</center>"));
+    } else if (m_securityName.isEmpty()) {
+      KMessageBox::information(0, i18n("<center>No Detail field specified</center>"
+                                       "<center>and no security name supplied.</center>"
+                                       "<center>(Please check the parameters given)</center>"));
       return KMessageBox::Cancel;
     }
   }

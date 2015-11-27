@@ -52,7 +52,7 @@ class CSVWizard : public QWidget
 
 public:
   explicit CSVWizard();
-    virtual ~CSVWizard();
+  virtual ~CSVWizard();
 
   enum { Page_Intro, Page_Separator, Page_Banking, Page_Investment,
          Page_LinesDate, Page_Completion

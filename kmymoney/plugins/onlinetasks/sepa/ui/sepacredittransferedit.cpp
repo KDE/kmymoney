@@ -44,20 +44,18 @@ class ibanBicCompleterDelegate : public StyledItemDelegateForwarder
 
 public:
   ibanBicCompleterDelegate(QObject *parent)
-    : StyledItemDelegateForwarder(parent)
-  {}
+      : StyledItemDelegateForwarder(parent) {}
 
 protected:
-  virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex &index) const
-  {
+  virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex &index) const {
     static QPointer<QAbstractItemDelegate> defaultDelegate;
     static QPointer<QAbstractItemDelegate> ibanBicDelegate ;
 
     const bool ibanBicRequested = index.model()->data(index, payeeIdentifierModel::isPayeeIdentifier).toBool();
 
     QAbstractItemDelegate* delegate = (ibanBicRequested)
-        ? ibanBicDelegate
-        : defaultDelegate;
+                                      ? ibanBicDelegate
+                                      : defaultDelegate;
 
     if (delegate == 0) {
       if (ibanBicRequested) {
@@ -82,8 +80,7 @@ class payeeIdentifierCompleterPopup : public QTreeView
 
 public:
   payeeIdentifierCompleterPopup(QWidget* parent = 0)
-    : QTreeView(parent)
-  {
+      : QTreeView(parent) {
     setRootIsDecorated(false);
     setAlternatingRowColors(true);
     setAnimated(true);
@@ -103,11 +100,9 @@ public:
   };
 
   ibanBicFilterProxyModel(QObject* parent = 0)
-    : QSortFilterProxyModel(parent)
-  {}
+      : QSortFilterProxyModel(parent) {}
 
-  virtual QVariant data(const QModelIndex &index, int role) const
-  {
+  virtual QVariant data(const QModelIndex &index, int role) const {
     if (role == payeeIban) {
       if (!index.isValid())
         return QVariant();
@@ -115,7 +110,7 @@ public:
       try {
         payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
               index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
-              );
+            );
         return iban->electronicIban();
       } catch (payeeIdentifier::exception&) {
         return QVariant();
@@ -125,8 +120,7 @@ public:
     return QSortFilterProxyModel::data(index, role);
   }
 
-  virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
-  {
+  virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const {
     if (!source_parent.isValid())
       return true;
 
@@ -158,7 +152,7 @@ private Q_SLOTS:
 };
 
 ibanBicCompleter::ibanBicCompleter(QObject *parent)
-  : QCompleter(parent)
+    : QCompleter(parent)
 {
   connect(this, SIGNAL(activated(QModelIndex)), SLOT(slotActivated(QModelIndex)));
   connect(this, SIGNAL(highlighted(QModelIndex)), SLOT(slotHighlighted(QModelIndex)));
@@ -173,7 +167,7 @@ void ibanBicCompleter::slotActivated(const QModelIndex &index) const
   try {
     payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
           index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
-          );
+        );
     emit activatedIban(iban->electronicIban());
     emit activatedBic(iban->storedBic());
   } catch (payeeIdentifier::exception&) {
@@ -189,7 +183,7 @@ void ibanBicCompleter::slotHighlighted(const QModelIndex &index) const
   try {
     payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
           index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
-          );
+        );
     emit highlightedIban(iban->electronicIban());
     emit highlightedBic(iban->storedBic());
   } catch (payeeIdentifier::exception&) {

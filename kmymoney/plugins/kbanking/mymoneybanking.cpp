@@ -133,8 +133,7 @@ public:
    * KMyMoney asks for accounts over and over again which causes a lot of "Job not supported with this account" error messages.
    * This function filters messages with that string.
    */
-  static int gwenLogHook(GWEN_GUI* gui, const char* domain, GWEN_LOGGER_LEVEL level, const char* message)
-  {
+  static int gwenLogHook(GWEN_GUI* gui, const char* domain, GWEN_LOGGER_LEVEL level, const char* message) {
     Q_UNUSED(gui);
     Q_UNUSED(domain);
     Q_UNUSED(level);
@@ -543,10 +542,10 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
         if (rv) {
           DBG_ERROR(0, "Error %d", rv);
           KMessageBox::error(0,
-                            i18n("<qt>"
+                             i18n("<qt>"
                                   "Could not enqueue the job.\n"
                                   "</qt>"),
-                            i18n("Error"));
+                             i18n("Error"));
         } else {
           rc = true;
           emit queueChanged();
@@ -851,7 +850,7 @@ KMyMoneyBanking::KMyMoneyBanking(KBankingPlugin* parent, const char* appname, co
     , _jobQueue(0)
 {
   m_sepaKeywords  << QString("SEPA-BASISLASTSCHRIFT")
-                  << QString::fromUtf8("SEPA-ÜBERWEISUNG");
+  << QString::fromUtf8("SEPA-ÜBERWEISUNG");
 }
 
 int KMyMoneyBanking::init()
@@ -1208,12 +1207,12 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     // case, the part leading up to the keyword is to be treated as the
     // tail of the payee. Also, a blank is inserted after the keyword.
     QSet<QString>::const_iterator itk;
-    for(itk = m_sepaKeywords.constBegin(); itk != m_sepaKeywords.constEnd(); ++itk) {
+    for (itk = m_sepaKeywords.constBegin(); itk != m_sepaKeywords.constEnd(); ++itk) {
       int idx = s.indexOf(*itk);
-      if(idx >= 0) {
-        if(idx > 0) {
+      if (idx >= 0) {
+        if (idx > 0) {
           // re-add a possibly removed blank to name
-          if(kt.m_strPayee.length() < 27)
+          if (kt.m_strPayee.length() < 27)
             kt.m_strPayee += ' ';
           kt.m_strPayee += s.left(idx);
           s = s.mid(idx);
@@ -1226,23 +1225,23 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     // in case we have some SEPA fields filled with information
     // we add them to the memo field
     p = AB_Transaction_GetEndToEndReference(t);
-    if(p) {
+    if (p) {
       s += QString(", EREF: %1").arg(p);
     }
     p = AB_Transaction_GetCustomerReference(t);
-    if(p) {
+    if (p) {
       s += QString(", CREF: %1").arg(p);
     }
     p = AB_Transaction_GetMandateId(t);
-    if(p) {
+    if (p) {
       s += QString(", MREF: %1").arg(p);
     }
     p = AB_Transaction_GetCreditorSchemeId(t);
-    if(p) {
+    if (p) {
       s += QString(", CRED: %1").arg(p);
     }
     p = AB_Transaction_GetOriginatorIdentifier(t);
-    if(p) {
+    if (p) {
       s += QString(", DEBT: %1").arg(p);
     }
   }

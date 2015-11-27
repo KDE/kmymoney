@@ -94,7 +94,7 @@ bool WeboobPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContaine
   if (w.exec() == QDialog::Accepted) {
     onlineBankingSettings.setValue("wb-backend", w.backendsList->currentItem()->text(0));
     onlineBankingSettings.setValue("wb-id", w.accountsList->currentItem()->text(0));
-	onlineBankingSettings.setValue("wb-max", "0");
+    onlineBankingSettings.setValue("wb-max", "0");
     return true;
   }
   return false;
@@ -140,8 +140,7 @@ void WeboobPlugin::gotAccount()
     ks.m_dateEnd = acc.transactions.front().date;
 
 #if 0
-  switch(acc.type)
-  {
+  switch (acc.type) {
     case Weboob::Account::TYPE_CHECKING:
       ks.m_eType = MyMoneyStatement::etCheckings;
       break;
@@ -159,8 +158,7 @@ void WeboobPlugin::gotAccount()
   }
 #endif
 
-  for (QListIterator<Weboob::Transaction> it(acc.transactions); it.hasNext(); )
-  {
+  for (QListIterator<Weboob::Transaction> it(acc.transactions); it.hasNext();) {
     Weboob::Transaction tr = it.next();
     MyMoneyStatement::Transaction kt;
 

@@ -24,7 +24,7 @@
 #include "weboob.h"
 
 Weboob::Weboob(QObject* parent)
-  : QObject(parent)
+    : QObject(parent)
 {
   mutex = new QMutex();
   path = KGlobal::dirs()->findResource("data", "kmm_weboob/weboob.py");
@@ -41,13 +41,13 @@ Weboob::~Weboob()
 
 QVariant Weboob::execute(QString method, QVariantList args)
 {
-	QVariant result;
+  QVariant result;
 
-	mutex->lock();
-	result = action->callFunction(method, args);
-	mutex->unlock();
+  mutex->lock();
+  result = action->callFunction(method, args);
+  mutex->unlock();
 
-	return result;
+  return result;
 }
 
 QList<Weboob::Backend> Weboob::getBackends()
@@ -61,7 +61,7 @@ QList<Weboob::Backend> Weboob::getBackends()
   QMap<QString, QVariant> list = result.toMap();
   QMapIterator<QString, QVariant> it(list);
 
-  while(it.hasNext()) {
+  while (it.hasNext()) {
     it.next();
     QMap<QString, QVariant> params = it.value().toMap();
 
@@ -85,8 +85,7 @@ QList<Weboob::Account> Weboob::getAccounts(QString backend)
   QVariant result = this->execute("get_accounts", args);
 
   QMap<QString, QVariant> list = result.toMap();
-  for(QMapIterator<QString, QVariant> it(list); it.hasNext();)
-  {
+  for (QMapIterator<QString, QVariant> it(list); it.hasNext();) {
     it.next();
     QMap<QString, QVariant> params = it.value().toMap();
 
@@ -118,8 +117,7 @@ Weboob::Account Weboob::getAccount(QString backend, QString accid, QString max)
   acc.type = (Weboob::Account::type_t)result["type"].toInt();
 
   QList<QVariant> list = result["transactions"].toList();
-  for(QListIterator<QVariant> it(list); it.hasNext(); )
-  {
+  for (QListIterator<QVariant> it(list); it.hasNext();) {
     QMap<QString, QVariant> params = it.next().toMap();
     Weboob::Transaction tr;
 

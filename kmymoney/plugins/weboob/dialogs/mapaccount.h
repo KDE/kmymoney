@@ -48,8 +48,8 @@ protected:
 private:
 
   enum {
-      BACKENDS_PAGE = 0,
-      ACCOUNTS_PAGE
+    BACKENDS_PAGE = 0,
+    ACCOUNTS_PAGE
   };
 
   class Private;
