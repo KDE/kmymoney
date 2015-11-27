@@ -33,6 +33,10 @@ if (ENABLE_ONLINEJOBPLUGINMOCKUP)
   add_subdirectory(onlinejobpluginmockup)
 endif()
 
+IF (WEBOOB_FOUND)
+  ADD_SUBDIRECTORY( weboob )
+ENDIF (WEBOOB_FOUND)
+
 ########### next target ###############
 
 set(kmm_plugin_LIB_SRCS

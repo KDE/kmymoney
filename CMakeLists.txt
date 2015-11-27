@@ -190,6 +190,17 @@ if(ENABLE_KBANKING)
   endif (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
 endif(ENABLE_KBANKING)
 
+# check for optional Weboob support
+SET(WEBOOB_FOUND "AUTO")
+MARK_AS_ADVANCED(WEBOOB_FOUND)
+IF(DEFINED ENABLE_WEBOOB)
+  SET(WEBOOB_FOUND OFF)
+ENDIF(DEFINED ENABLE_WEBOOB)
+OPTION(ENABLE_WEBOOB "Enable weboob plugin" ON)
+IF(ENABLE_WEBOOB)
+  SET(WEBOOB_FOUND ON)
+ENDIF(ENABLE_WEBOOB)
+
 # check for optional ical support
 set(LIBICAL_DEFAULT "AUTO")
 if(DEFINED ENABLE_LIBICAL)
@@ -381,6 +392,7 @@ endmacro(nice_yesno _varname)
 
 nice_yesno("LIBOFX_FOUND")
 nice_yesno("KBANKING_FOUND")
+nice_yesno("WEBOOB_FOUND")
 nice_yesno("LIBICAL_FOUND")
 nice_yesno("ENABLE_SQLCIPHER")
 nice_yesno("USE_QT_DESIGNER")
@@ -396,6 +408,8 @@ Configure results (user options):
 OFX plugin:                              ${nice_LIBOFX_FOUND}
 
 KBanking plugin:                         ${nice_KBANKING_FOUND}
+
+weboob plugin:                           ${nice_WEBOOB_FOUND}
 
 iCalendar export plugin:                 ${nice_LIBICAL_FOUND}
 
