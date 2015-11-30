@@ -62,7 +62,7 @@ include(KMyMoneyMacros)
 
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
 find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n KHtml KDELibs4Support Completion KCMUtils ItemViews Service Wallet)
-find_package(KF5 COMPONENTS Holidays Gpgmepp Contacts Akonadi IdentityManagement Activities)
+find_package(KF5 COMPONENTS Holidays Gpgmepp Contacts Akonadi IdentityManagement Activities Kross)
 find_package(LibAlkimia 4.100.0 REQUIRED)
 find_package(KChart 2.6.0 REQUIRED)
 
@@ -164,6 +164,25 @@ if(ENABLE_KBANKING)
     set(ENABLE_KBANKING OFF CACHE BOOL "Enable KBanking plugin" FORCE)
   endif (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
 endif(ENABLE_KBANKING)
+
+# check for optional Weboob support
+set(WEBOOB_FOUND "AUTO")
+mark_as_advanced(WEBOOB_FOUND)
+if(DEFINED ENABLE_WEBOOB)
+  set(WEBOOB_FOUND OFF)
+endif(DEFINED ENABLE_WEBOOB)
+option(ENABLE_WEBOOB "Enable weboob plugin" ON)
+if(ENABLE_WEBOOB)
+  if(KF5Kross_FOUND)
+    set(WEBOOB_FOUND ON)
+  else(KF5Kross_FOUND)
+    if(NOT WEBOOB_FOUND STREQUAL "AUTO")
+      message(FATAL_ERROR "Weboob requirements not met")
+    endif(NOT WEBOOB_FOUND STREQUAL "AUTO")
+    set(WEBOOB_FOUND OFF)
+    set(ENABLE_WEBOOB OFF CACHE BOOL "Enable weboob plugin" FORCE)
+  endif(KF5Kross_FOUND)
+endif(ENABLE_WEBOOB)
 
 # check for optional ical support
 set(LIBICAL_DEFAULT "AUTO")
@@ -355,6 +374,7 @@ nice_yesno("KF5Gpgmepp_FOUND")
 nice_yesno("KMM_ADDRESSBOOK_FOUND")
 nice_yesno("LIBOFX_FOUND")
 nice_yesno("KBANKING_FOUND")
+nice_yesno("WEBOOB_FOUND")
 nice_yesno("LIBICAL_FOUND")
 nice_yesno("ENABLE_SQLCIPHER")
 nice_yesno("USE_QT_DESIGNER")
@@ -376,6 +396,8 @@ KDE PIM addressbook:                     ${nice_KMM_ADDRESSBOOK_FOUND}
 OFX plugin:                              ${nice_LIBOFX_FOUND}
 
 KBanking plugin:                         ${nice_KBANKING_FOUND}
+
+weboob plugin:                           ${nice_WEBOOB_FOUND}
 
 iCalendar export plugin:                 ${nice_LIBICAL_FOUND}
 

@@ -80,7 +80,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
   const int gap = abs(tm.postDate().toJulianDay() - ti.postDate().toJulianDay());
   if (gap > KMyMoneyGlobalSettings::matchInterval()) {
     int rc = KMessageBox::questionYesNo(0, i18np("The transaction dates are one day apart. Do you want to match them anyway?",
-                                                 "The transaction dates are %1 days apart. Do you want to match them anyway?", gap));
+                                        "The transaction dates are %1 days apart. Do you want to match them anyway?", gap));
     if (rc == KMessageBox::No) {
       return;
     }

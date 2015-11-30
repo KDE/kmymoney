@@ -947,8 +947,8 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
 
   // make sure to set the opening date for categories to a
   // fixed date (1900-1-1). See #313793 on b.k.o for details
-  if(account.isIncomeExpense()) {
-    account.setOpeningDate(QDate(1900,1,1));
+  if (account.isIncomeExpense()) {
+    account.setOpeningDate(QDate(1900, 1, 1));
   }
 
   // if we don't have a currency assigned use the base currency
@@ -1970,8 +1970,8 @@ const QStringList MyMoneyFile::consistencyCheck()
 
     // check if it is a category and set the date to 1900-01-01 if different
     if ((*it_a).isIncomeExpense()) {
-      if(((*it_a).openingDate().isValid() == false) || ((*it_a).openingDate() != QDate(1900,1,1))) {
-        (*it_a).setOpeningDate(QDate(1900,1,1));
+      if (((*it_a).openingDate().isValid() == false) || ((*it_a).openingDate() != QDate(1900, 1, 1))) {
+        (*it_a).setOpeningDate(QDate(1900, 1, 1));
       }
     }
 
@@ -2075,11 +2075,11 @@ const QStringList MyMoneyFile::consistencyCheck()
   }
   QSet<MyMoneyAccount::accountTypeE> supportedAccountTypes;
   supportedAccountTypes << MyMoneyAccount::Checkings
-                        << MyMoneyAccount::Savings
-                        << MyMoneyAccount::Cash
-                        << MyMoneyAccount::CreditCard
-                        << MyMoneyAccount::Asset
-                        << MyMoneyAccount::Liability;
+  << MyMoneyAccount::Savings
+  << MyMoneyAccount::Cash
+  << MyMoneyAccount::CreditCard
+  << MyMoneyAccount::Asset
+  << MyMoneyAccount::Liability;
   QSet<QString> reportedUnsupportedAccounts;
 
   for (it_t = tList.begin(); it_t != tList.end(); ++it_t) {
@@ -2109,24 +2109,24 @@ const QStringList MyMoneyFile::consistencyCheck()
         // b) for account types where the user cannot modify the opening date through
         //    the UI issue a warning (for each account only once)
         // c) others will be caught later
-        if(!acc.isIncomeExpense() && !acc.isInvest()) {
-          if(acc.openingDate() > t.postDate()) {
+        if (!acc.isIncomeExpense() && !acc.isInvest()) {
+          if (acc.openingDate() > t.postDate()) {
             if (!accountOpeningDate.isValid() || acc.openingDate() > accountOpeningDate) {
               accountOpeningDate = acc.openingDate();
             }
             accountList << this->accountToCategory(acc.id());
-            if(!supportedAccountTypes.contains(acc.accountType())
-            && !reportedUnsupportedAccounts.contains(acc.id())) {
+            if (!supportedAccountTypes.contains(acc.accountType())
+                && !reportedUnsupportedAccounts.contains(acc.id())) {
               rc << i18n("  * Opening date of Account '%1' cannot be changed to support transaction '%2' post date.",
-                            this->accountToCategory(acc.id()), t.id());
+                         this->accountToCategory(acc.id()), t.id());
               reportedUnsupportedAccounts << acc.id();
               ++unfixedCount;
             }
           }
         } else {
-          if(acc.openingDate() > t.postDate()) {
+          if (acc.openingDate() > t.postDate()) {
             rc << i18n("  * Transaction '%1' post date '%2' is older than opening date '%4' of account '%3'.",
-                            t.id(), t.postDate().toString(Qt::ISODate), this->accountToCategory(acc.id()), acc.openingDate().toString(Qt::ISODate));
+                       t.id(), t.postDate().toString(Qt::ISODate), this->accountToCategory(acc.id()), acc.openingDate().toString(Qt::ISODate));
 
             rc << i18n("    Account opening date updated.");
             MyMoneyAccount newAcc = acc;

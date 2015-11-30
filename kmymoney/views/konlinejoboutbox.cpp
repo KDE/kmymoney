@@ -165,7 +165,7 @@ void KOnlineJobOutbox::slotSendJobs()
 void KOnlineJobOutbox::slotSendAllSendableJobs()
 {
   QList<onlineJob> validJobs;
-  foreach(const onlineJob& job, MyMoneyFile::instance()->onlineJobList()) {
+  foreach (const onlineJob& job, MyMoneyFile::instance()->onlineJobList()) {
     if (job.isValid() && job.isEditable())
       validJobs.append(job);
   }
@@ -186,7 +186,7 @@ void KOnlineJobOutbox::slotSendSelectedJobs()
 
   // Get valid jobs
   const QAbstractItemModel *const model = ui->m_onlineJobView->model();
-  foreach(const QModelIndex& index, indexes) {
+  foreach (const QModelIndex& index, indexes) {
     onlineJob job = model->data(index, onlineJobModel::OnlineJobRole).value<onlineJob>();
     if (job.isValid() && job.isEditable())
       validJobs.append(job);

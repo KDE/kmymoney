@@ -360,7 +360,7 @@ void CSVWizard::memoColumnSelected(int col)
     return;
   } else if (m_csvDialog->m_columnTypeList[col] == "payee") {
     if ((m_csvDialog->m_memoColList.contains(col)) && (m_csvDialog->m_payeeColAdded)) {
-     return;  //                          This copypayee column has been added already, probably from resource file
+      return;  //                          This copypayee column has been added already, probably from resource file
     }
     int rc = KMessageBox::Yes;
     if (m_pageBanking->isVisible()) {  //  Don't show msg. if we got here from resource file load
@@ -560,13 +560,12 @@ bool CSVWizard::eventFilter(QObject *object, QEvent *event)
     if (keyEvent->key() == Qt::Key_Escape) {
       close();
     }
-   return true;
-  } else
-    if (event->spontaneous()) {
-      if (event->type() == 19) {
-        slotClose();
-      }
+    return true;
+  } else if (event->spontaneous()) {
+    if (event->type() == 19) {
+      slotClose();
     }
+  }
   return false;
 }
 
@@ -730,60 +729,60 @@ void IntroPage::slotComboSourceClicked(int index)
         addProfileName();
         return;
       } else {
-      //
-      //  Not adding so must be editing name, or selecting an existing profile.
-      //
-      QString txt = ui->combobox_source->currentText();
-      m_priorName = m_wizDlg->m_csvDialog->m_profileName;
-      m_priorIndex = m_index;
-      if (!m_wizDlg->m_csvDialog->m_profileList.contains(txt)) {
-        //  But this profile name does not exist.
-        int indx = ui->combobox_source->findText(txt);
-        if (m_priorName.isEmpty()) {
-          disconnect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-          //  Add it perhaps.
-          QString question = i18n("<center>The name you have entered does not exist,</center>"
-                                  "<center>but you have not elected to add a new profile</center>"
-                                  "<center>If you wish to add '%1' as a new profile,</center>"
-                                  "<center> click 'Yes'.  Otherwise, click 'No'</center>", txt);
-          if (KMessageBox::questionYesNo(0, question, i18n("Adding profile name.")) == KMessageBox::Yes) {
-            addProfileName();
-            m_index = indx;
-            m_priorIndex = indx;
-            connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-          } else {
-            ui->combobox_source->removeItem(indx);
-            ui->combobox_source->setCurrentIndex(-1);
-            connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-            return;
+        //
+        //  Not adding so must be editing name, or selecting an existing profile.
+        //
+        QString txt = ui->combobox_source->currentText();
+        m_priorName = m_wizDlg->m_csvDialog->m_profileName;
+        m_priorIndex = m_index;
+        if (!m_wizDlg->m_csvDialog->m_profileList.contains(txt)) {
+          //  But this profile name does not exist.
+          int indx = ui->combobox_source->findText(txt);
+          if (m_priorName.isEmpty()) {
+            disconnect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
+            //  Add it perhaps.
+            QString question = i18n("<center>The name you have entered does not exist,</center>"
+                                    "<center>but you have not elected to add a new profile</center>"
+                                    "<center>If you wish to add '%1' as a new profile,</center>"
+                                    "<center> click 'Yes'.  Otherwise, click 'No'</center>", txt);
+            if (KMessageBox::questionYesNo(0, question, i18n("Adding profile name.")) == KMessageBox::Yes) {
+              addProfileName();
+              m_index = indx;
+              m_priorIndex = indx;
+              connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
+            } else {
+              ui->combobox_source->removeItem(indx);
+              ui->combobox_source->setCurrentIndex(-1);
+              connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
+              return;
+            }
           }
+          //  Otherwise maybe edit the present name.
+          int ret = editProfileName(m_priorName, txt);
+          if (ret == KMessageBox::No) {
+            txt = m_priorName;
+          } else {
+            //  Use new name.
+          }
+          int index = ui->combobox_source->findText(txt, Qt::MatchExactly);
+          ui->combobox_source->setCurrentIndex(index);
+          return;
         }
-        //  Otherwise maybe edit the present name.
-        int ret = editProfileName(m_priorName, txt);
-        if (ret == KMessageBox::No) {
-          txt = m_priorName;
-        } else {
-          //  Use new name.
-        }
-        int index = ui->combobox_source->findText(txt, Qt::MatchExactly);
-        ui->combobox_source->setCurrentIndex(index);
-        return;
-      }
-      //  This profile is known so use it.
-      m_priorName = ui->combobox_source->currentText();
-      m_priorIndex = ui->combobox_source->currentIndex();
+        //  This profile is known so use it.
+        m_priorName = ui->combobox_source->currentText();
+        m_priorIndex = ui->combobox_source->currentIndex();
 
-      m_wizDlg->m_csvDialog->m_profileName = ui->combobox_source->currentText();
-      if (m_wizDlg->m_csvDialog->m_fileType == "Banking") {
-        m_wizDlg->m_csvDialog->m_priorCsvProfile = m_wizDlg->m_csvDialog->m_profileName;
-      } else {
-        m_wizDlg->m_csvDialog->m_priorInvProfile = m_wizDlg->m_csvDialog->m_profileName;
+        m_wizDlg->m_csvDialog->m_profileName = ui->combobox_source->currentText();
+        if (m_wizDlg->m_csvDialog->m_fileType == "Banking") {
+          m_wizDlg->m_csvDialog->m_priorCsvProfile = m_wizDlg->m_csvDialog->m_profileName;
+        } else {
+          m_wizDlg->m_csvDialog->m_priorInvProfile = m_wizDlg->m_csvDialog->m_profileName;
+        }
+        if (m_wizDlg->m_csvDialog->m_profileList.contains(m_wizDlg->m_csvDialog->m_profileName)) {
+          return;
+        }
+        editProfileName(m_priorName, m_wizDlg->m_csvDialog->m_profileName);
       }
-      if (m_wizDlg->m_csvDialog->m_profileList.contains(m_wizDlg->m_csvDialog->m_profileName)) {
-        return;
-      }
-      editProfileName(m_priorName, m_wizDlg->m_csvDialog->m_profileName);
-    }
   }
 }
 
@@ -1092,7 +1091,7 @@ void IntroPage::slotLineEditingFinished()
   m_wizDlg->m_csvDialog->createProfile(m_wizDlg->m_csvDialog->m_profileName);
   m_newProfileCreated = m_wizDlg->m_csvDialog->m_profileName;
   m_priorName = m_wizDlg->m_csvDialog->m_profileName;
-  m_mapFileType.insert(m_wizDlg->m_csvDialog->m_profileName,m_wizDlg->m_csvDialog->m_fileType);
+  m_mapFileType.insert(m_wizDlg->m_csvDialog->m_profileName, m_wizDlg->m_csvDialog->m_fileType);
   m_priorIndex = ui->combobox_source->findText(m_wizDlg->m_csvDialog->m_profileName);
   if (m_priorIndex == -1) {
     ui->combobox_source->addItem(m_wizDlg->m_csvDialog->m_profileName);
@@ -1851,7 +1850,7 @@ void CompletionPage::cleanupPage()
   if (QApplication::desktop()->fontInfo().pixelSize() < 20) {
     //
   } else {
-   m_wizDlg->resize(m_wizDlg->width() + 150, m_wizDlg->height());
+    m_wizDlg->resize(m_wizDlg->width() + 150, m_wizDlg->height());
   }
   m_wizDlg->m_pageLinesDate->initializePage();
 }

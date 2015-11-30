@@ -226,7 +226,7 @@ void CSVDialog::init()
   connect(m_wiz->m_pageCompletion->ui->comboBox_decimalSymbol, SIGNAL(currentIndexChanged(int)), m_parse, SLOT(decimalSymbolSelected(int)));
 
   m_investmentDlg->init();
-  Qt::WindowFlags eFlags = windowFlags ();
+  Qt::WindowFlags eFlags = windowFlags();
   eFlags |= Qt::WindowStaysOnTopHint;
   m_wiz->setWindowFlags(eFlags);
   m_wiz->show();
@@ -946,7 +946,7 @@ void CSVDialog::setWindowSize(int firstLine, int lastLine)
   QMargins vLayoutMargin = ui->verticalLayout->layout()->contentsMargins();              //  window margins
 
   int scrollbarWidth = 17;  //  scrollbar space for when needed
-  int wd = m_rowWidth + m_vHeaderWidth+  2 *(vLayoutMargin.left() + 1) + 12 + hLayout_MainMargin.left() + hLayout_MainMargin.right() + scrollbarWidth;
+  int wd = m_rowWidth + m_vHeaderWidth +  2 * (vLayoutMargin.left() + 1) + 12 + hLayout_MainMargin.left() + hLayout_MainMargin.right() + scrollbarWidth;
   if (wd > QApplication::desktop()->width()) {
     //
     //  if set to full desktop()->width(), causes a spontaneous resize event
@@ -1817,11 +1817,11 @@ bool CSVDialog::eventFilter(QObject *object, QEvent *event)
     if (keyEvent->key() == Qt::Key_Escape) {
       close();
     }
-   return true;
+    return true;
   } else {
     //  raise wizard above table window
     if (event->type() == QEvent::ContextMenu) {
-      Qt::WindowFlags eFlags = windowFlags ();
+      Qt::WindowFlags eFlags = windowFlags();
       eFlags |= Qt::WindowStaysOnTopHint;
       m_wiz->setWindowFlags(eFlags);
       m_wiz->show();
@@ -1830,7 +1830,7 @@ bool CSVDialog::eventFilter(QObject *object, QEvent *event)
       m_wiz->show();
       return true;
     }
-  return false;
+    return false;
   }
 }
 
@@ -1895,7 +1895,7 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
           //                                                    if importing, this is error
           KMessageBox::sorry(this, i18n("Row number %1 may be a header line, as it has an incomplete set of entries."
                                         "<center>It may be that the start line is incorrectly set.</center>",
-                                        row + 1),i18n("CSV import"));
+                                        row + 1), i18n("CSV import"));
           return;
         }
         //                                                      if not importing, query

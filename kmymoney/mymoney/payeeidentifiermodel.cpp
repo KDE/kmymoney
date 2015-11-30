@@ -26,9 +26,9 @@
 #include "mymoneyfile.h"
 
 payeeIdentifierModel::payeeIdentifierModel(QObject* parent)
-  : QAbstractItemModel(parent),
-  m_payeeIdentifierIds(),
-  m_typeFilter()
+    : QAbstractItemModel(parent),
+    m_payeeIdentifierIds(),
+    m_typeFilter()
 {
 
 }

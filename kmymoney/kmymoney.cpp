@@ -4158,28 +4158,29 @@ void KMyMoneyApp::slotAccountOpen(const MyMoneyObject& obj)
   }
 }
 
-void KMyMoneyApp::enableCloseAccountAction(const MyMoneyAccount& acc) {
-    switch (canCloseAccount(acc)) {
-        case KMyMoneyUtils::AccountCanClose: {
-            action("account_close")->setEnabled(true);
-            break;
-        }
-        case KMyMoneyUtils::AccountBalanceNonZero: {
-            action("account_close")->setEnabled(false);
-            action("account_close")->setToolTip(i18n("The balance of the account must be zero before the account can be closed"));
-            break;
-        }
-        case KMyMoneyUtils::AccountChildrenOpen: {
-            action("account_close")->setEnabled(false);
-            action("account_close")->setToolTip(i18n("All subaccounts must be closed before the account can be closed"));
-            break;
-        }
-        case KMyMoneyUtils::AccountScheduleReference: {
-            action("account_close")->setEnabled(false);
-            action("account_close")->setToolTip(i18n("This account is still included in an active schedule"));
-            break;
-        }
-    }
+void KMyMoneyApp::enableCloseAccountAction(const MyMoneyAccount& acc)
+{
+  switch (canCloseAccount(acc)) {
+    case KMyMoneyUtils::AccountCanClose: {
+        action("account_close")->setEnabled(true);
+        break;
+      }
+    case KMyMoneyUtils::AccountBalanceNonZero: {
+        action("account_close")->setEnabled(false);
+        action("account_close")->setToolTip(i18n("The balance of the account must be zero before the account can be closed"));
+        break;
+      }
+    case KMyMoneyUtils::AccountChildrenOpen: {
+        action("account_close")->setEnabled(false);
+        action("account_close")->setToolTip(i18n("All subaccounts must be closed before the account can be closed"));
+        break;
+      }
+    case KMyMoneyUtils::AccountScheduleReference: {
+        action("account_close")->setEnabled(false);
+        action("account_close")->setToolTip(i18n("This account is still included in an active schedule"));
+        break;
+      }
+  }
 }
 
 
@@ -6210,7 +6211,7 @@ void KMyMoneyApp::transactionMatch()
   KMyMoneyRegister::SelectedTransactions toBeDeleted;
   for (it = d->m_selectedTransactions.constBegin(); it != d->m_selectedTransactions.constEnd(); ++it) {
     if ((*it).transaction().isImported()) {
-      if (endMatchTransaction.id().isEmpty()){
+      if (endMatchTransaction.id().isEmpty()) {
         endMatchTransaction = (*it).transaction();
         endSplit = (*it).split();
         toBeDeleted << *it;
@@ -6583,7 +6584,7 @@ void KMyMoneyApp::slotUpdateActions()
       }
 
       if (d->m_selectedTransactions.count() == 2 /* && action("transaction_edit")->isEnabled() */) {
-          action("transaction_match")->setEnabled(true);
+        action("transaction_match")->setEnabled(true);
       }
       if (importedCount != 0 || matchedCount != 0)
         action("transaction_accept")->setEnabled(true);
@@ -7063,12 +7064,14 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
   m_consistencyCheckResult.clear();
 }
 
-void KMyMoneyApp::Private::copyConsistencyCheckResults() {
+void KMyMoneyApp::Private::copyConsistencyCheckResults()
+{
   QClipboard *clipboard = QApplication::clipboard();
   clipboard->setText(m_consistencyCheckResult.join(QLatin1String("\n")));
 }
 
-void KMyMoneyApp::Private::saveConsistencyCheckResults() {
+void KMyMoneyApp::Private::saveConsistencyCheckResults()
+{
   QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-consistency-check"), QString(), q);
   dialog->setMode(KFile::File);
   dialog->setOperationMode(KFileDialog::Saving);

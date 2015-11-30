@@ -40,7 +40,7 @@ payeeIdentifierLoader::payeeIdentifierLoader()
 
 payeeIdentifierLoader::~payeeIdentifierLoader()
 {
-    qDeleteAll(m_identifiers);
+  qDeleteAll(m_identifiers);
 }
 
 void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifierData* const identifier)
