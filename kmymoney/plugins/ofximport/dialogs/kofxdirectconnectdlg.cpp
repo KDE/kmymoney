@@ -157,8 +157,7 @@ void KOfxDirectConnectDlg::slotOfxData(KIO::Job*, const QByteArray& _ba)
     kProgress1->setValue(kProgress1->value() + 1);
     d->m_firstData = false;
   }
-  QTextStream out(m_tmpfile);
-  out << QString(_ba);
+  m_tmpfile->write(_ba);
 
   setDetails(QString("Got %1 bytes").arg(_ba.size()));
 

@@ -431,11 +431,10 @@ void OfxHttpsRequest::slotOfxConnected(KIO::Job*)
 void OfxHttpsRequest::slotOfxData(KIO::Job*, const QByteArray& _ba)
 {
   if (m_file.isOpen()) {
-    QTextStream ts(&m_file);
-    ts << QString(_ba);
+    m_file.write(_ba);
 
     if (d->m_fpTrace.isOpen()) {
-      d->m_fpTrace.write(_ba, _ba.size());
+      d->m_fpTrace.write(_ba);
     }
   }
 }
