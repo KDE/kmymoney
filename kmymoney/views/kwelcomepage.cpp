@@ -209,6 +209,10 @@ const QStringList KWelcomePage::featuresList()
 {
   QStringList featuresList;
 
+  featuresList.append(i18n("Added support for online SEPA transactions"));
+  featuresList.append(i18n("A plugin to import data using Weboob was added"));
+  featuresList.append(i18n("Improved payee matching when importing transactions"));
+  featuresList.append(i18n("When an account cannot be closed, a tooltip explains the reason"));
   featuresList.append(i18n("Transaction tags were added"));
   featuresList.append(i18n("Proper input methods support was added"));
   featuresList.append(i18n("Improved the transaction form"));
