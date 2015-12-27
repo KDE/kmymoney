@@ -61,7 +61,7 @@ chipTanDialog::chipTanDialog(QWidget* parent)
   connect(ui->declarativeView->rootObject(), SIGNAL(flickerFieldWidthChanged(int)), SLOT(flickerFieldWidthChanged(int)));
   connect(ui->declarativeView->rootObject(), SIGNAL(flickerFieldClockSettingChanged(int)), SLOT(flickerFieldClockSettingChanged(int)));
 
-  if (ui->declarativeView->status() == QDeclarativeView::Error)
+  if (ui->declarativeView->status() == QQuickWidget::Error)
     done(InternalError);
 
   tanInputChanged(QString());

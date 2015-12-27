@@ -187,11 +187,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QDeclarativeView</class>
-   <extends>QGraphicsView</extends>
-   <header>QtDeclarative/QDeclarativeView</header>
-  </customwidget>
-  <customwidget>
    <class>KDialogButtonBox</class>
    <extends>QDialogButtonBox</extends>
    <header>kdialogbuttonbox.h</header>
