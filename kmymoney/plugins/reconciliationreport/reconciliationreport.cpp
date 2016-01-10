@@ -69,9 +69,9 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   QString css;
   css += "<style type=\"text/css\">\n<!--\n";
   css += QString(".row-even, .item0 { background-color: %1; color: %2 }\n")
-         .arg((KColorScheme(QPalette::Normal).background(KColorScheme::AlternateBackground).color()).name()).arg(tcolor.name());
+         .arg((KColorScheme(QPalette::Normal).background(KColorScheme::AlternateBackground).color()).name(), tcolor.name());
   css += QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
-         .arg((KColorScheme(QPalette::Normal).background(KColorScheme::NormalBackground).color()).name()).arg(tcolor.name());
+         .arg((KColorScheme(QPalette::Normal).background(KColorScheme::NormalBackground).color()).name(), tcolor.name());
   css += "-->\n</style>\n";
   header += css;
 
