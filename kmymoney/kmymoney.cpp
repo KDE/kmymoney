@@ -1506,7 +1506,6 @@ void KMyMoneyApp::slotFileNew()
 
 QUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, const QString& mask, KFile::Mode mode, QWidget* widget)
 {
-  QUrl url;
   QString path(_path);
 
   // if the path is not specified open the file dialog in the last used directory
@@ -1517,6 +1516,7 @@ QUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, con
   QPointer<KFileDialog> dialog = new KFileDialog(QUrl(path), mask, this, widget);
   dialog->setMode(mode);
 
+  QUrl url;
   if (dialog->exec() == QDialog::Accepted && dialog != 0) {
     url = dialog->selectedUrl();
   }
@@ -2317,22 +2317,17 @@ void KMyMoneyApp::slotGncImport()
 
   KMSTATUS(i18n("Importing a GnuCash file."));
 
-  QPointer<KFileDialog> dialog = new KFileDialog(QUrl("kfiledialog:///kmymoney-import"),
-      i18n("*|GnuCash files\n*|All files"),
-      this);
-  dialog->setMode(KFile::File | KFile::ExistingOnly);
+  QUrl fileToRead = QFileDialog::getOpenFileUrl(this, QString(), QUrl("kfiledialog:///kmymoney-import"), i18n("GnuCash file (*)"));
 
-  if (dialog->exec() == QDialog::Accepted && dialog != 0) {
+  if (!fileToRead.isEmpty()) {
     // call the importer
-    d->m_myMoneyView->readFile(dialog->selectedUrl());
+    d->m_myMoneyView->readFile(fileToRead);
     // imported files don't have a name
     d->m_fileName = QUrl();
 
     updateCaption();
     emit fileLoaded(d->m_fileName);
   }
-  delete dialog;
-
 }
 
 void KMyMoneyApp::slotAccountChart()
@@ -2355,13 +2350,10 @@ void KMyMoneyApp::slotStatementImport()
   bool result = false;
   KMSTATUS(i18n("Importing an XML Statement."));
 
-  QPointer<KFileDialog> dialog = new KFileDialog(QUrl("kfiledialog:///kmymoney-import"),
-      i18n("*.xml|XML files\n*|All files"),
-      this);
-  dialog->setMode(KFile::Files | KFile::ExistingOnly);
+  QList<QUrl> files{QFileDialog::getOpenFileUrls(this, QString(), QUrl("kfiledialog:///kmymoney-import"),
+      i18n("XML files (*.xml);;All files (*)"))};
 
-  if (dialog->exec() == QDialog::Accepted && dialog != 0) {
-    QList<QUrl> files = dialog->selectedUrls();
+  if (!files.isEmpty()) {
     d->m_collectingStatements = (files.count() > 1);
 
     foreach (const QUrl &url, files) {
@@ -2401,7 +2393,6 @@ void KMyMoneyApp::slotStatementImport()
 
         }*/
   }
-  delete dialog;
 
   if (!result) {
     // re-enable all standard widgets
@@ -7072,12 +7063,10 @@ void KMyMoneyApp::Private::copyConsistencyCheckResults()
 
 void KMyMoneyApp::Private::saveConsistencyCheckResults()
 {
-  QPointer<KFileDialog> dialog = new KFileDialog(KUrl("kfiledialog:///kmymoney-consistency-check"), QString(), q);
-  dialog->setMode(KFile::File);
-  dialog->setOperationMode(KFileDialog::Saving);
+  QUrl fileUrl = QFileDialog::getSaveFileUrl(q, QString(), QUrl("kfiledialog:///kmymoney-consistency-check"));
 
-  if (dialog->exec() == QDialog::Accepted && dialog != 0) {
-    QFile file(dialog->selectedUrl().toLocalFile());
+  if (!fileUrl.isEmpty()) {
+    QFile file(fileUrl.toLocalFile());
     if (file.open(QFile::WriteOnly | QFile::Append | QFile::Text)) {
       QTextStream out(&file);
       out << m_consistencyCheckResult.join(QLatin1String("\n"));

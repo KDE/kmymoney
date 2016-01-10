@@ -106,16 +106,13 @@ void KImportDlg::slotBrowse()
   MyMoneyQifProfile tmpprofile;
   tmpprofile.loadProfile("Profile-" + profile());
 
-  QPointer<KFileDialog> dialog = new KFileDialog(QUrl("kfiledialog:///kmymoney-import"),
-      i18n("%1|Import files\n%2|All files", tmpprofile.filterFileType(), "*"),
-      this);
-  dialog->setWindowTitle(i18n("Import File..."));
-  dialog->setMode(KFile::File | KFile::ExistingOnly);
+  QUrl file = QFileDialog::getOpenFileUrl(this, i18n("Import File..."), QUrl("kfiledialog:///kmymoney-import"),
+      i18n("Import files (%1);;All files (%2)", tmpprofile.filterFileType(), "*")
+  );
 
-  if (dialog->exec() == QDialog::Accepted) {
-    m_qlineeditFile->setText(QUrl(dialog->selectedUrl()).toDisplayString(QUrl::PreferLocalFile));
+  if (!file.isEmpty()) {
+    m_qlineeditFile->setText(file.toDisplayString(QUrl::PreferLocalFile));
   }
-  delete dialog;
 }
 
 void KImportDlg::slotOkClicked()
