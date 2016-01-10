@@ -61,13 +61,14 @@ include(GenerateExportHeader)
 include(KMyMoneyMacros)
 
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
-find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n KHtml KDELibs4Support Completion KCMUtils ItemViews Service Wallet)
-find_package(KF5 COMPONENTS Holidays Gpgmepp Contacts Akonadi IdentityManagement Activities Kross)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n KHtml KDELibs4Support Completion KCMUtils ItemViews Service Wallet
+                          OPTIONAL_COMPONENTS Holidays Gpgmepp Contacts Akonadi IdentityManagement Activities Kross)
 find_package(LibAlkimia 6.0.0 REQUIRED)
 find_package(KChart 2.6.0 REQUIRED)
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+add_definitions(-std=c++11) # TODO make system independent, easily done with cmake 3
 
 string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
 if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)

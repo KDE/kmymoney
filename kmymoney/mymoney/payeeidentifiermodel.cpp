@@ -19,11 +19,17 @@
 #include "payeeidentifiermodel.h"
 
 #include <algorithm>
+#include <limits>
 
 #include <klocalizedstring.h>
 #include <QDebug>
 
 #include "mymoneyfile.h"
+
+/**
+ * @brief create unique value for QModelIndex::internalId() to indicate "not set"
+ */
+static constexpr decltype(reinterpret_cast<QModelIndex*>(0)->internalId()) invalidParent = std::numeric_limits<decltype(reinterpret_cast<QModelIndex*>(0)->internalId())>::max();
 
 payeeIdentifierModel::payeeIdentifierModel(QObject* parent)
     : QAbstractItemModel(parent),
@@ -120,7 +126,7 @@ Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex &index) const
 }
 
 /**
- * @intenal The internalId of QModelIndex is set to the row of the parent or -1 if there is no
+ * @intenal The internalId of QModelIndex is set to the row of the parent or invalidParent if there is no
  * parent.
  *
  * @todo Qt5: the type of the internal id changed!
@@ -129,7 +135,7 @@ QModelIndex payeeIdentifierModel::index(int row, int column, const QModelIndex &
 {
   if (parent.isValid())
     return createIndex(row, column, parent.row());
-  return createIndex(row, column, -1);
+  return createIndex(row, column, invalidParent);
 }
 
 int payeeIdentifierModel::columnCount(const QModelIndex& parent) const
@@ -141,7 +147,7 @@ int payeeIdentifierModel::columnCount(const QModelIndex& parent) const
 int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
 {
   if (parent.isValid()) {
-    if (parent.internalId() != -1)
+    if (parent.internalId() != invalidParent)
       return 0;
     return payeeByIndex(parent).payeeIdentifierCount();
   }
@@ -150,7 +156,7 @@ int payeeIdentifierModel::rowCount(const QModelIndex& parent) const
 
 QModelIndex payeeIdentifierModel::parent(const QModelIndex& child) const
 {
-  if (child.internalId() != -1)
-    return createIndex(child.internalId(), 0, -1);
+  if (child.internalId() != invalidParent)
+    return createIndex(child.internalId(), 0, invalidParent);
   return QModelIndex();
 }
