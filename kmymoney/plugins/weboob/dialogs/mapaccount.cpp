@@ -19,8 +19,8 @@
 
 #include <QtConcurrentRun>
 #include <QFutureWatcher>
+#include <QProgressDialog>
 
-#include <kprogressdialog.h>
 #include <kapplication.h>
 #include <kmessagebox.h>
 #include <klocalizedstring.h>
@@ -28,17 +28,11 @@
 #include "mapaccount.h"
 #include "weboob.h"
 
-class WbMapAccountDialog::Private
+struct WbMapAccountDialog::Private
 {
-public:
-  Private() : progress(0) {}
-  ~Private() {
-    delete progress;
-  }
-
   QFutureWatcher<QList<Weboob::Account> > watcher;
   QFutureWatcher<QList<Weboob::Backend> > watcher2;
-  KProgressDialog* progress;
+  std::unique_ptr<QProgressDialog> progress;
 };
 
 WbMapAccountDialog::WbMapAccountDialog(QWidget *parent):
@@ -64,9 +58,11 @@ WbMapAccountDialog::WbMapAccountDialog(QWidget *parent):
   button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
 }
 
+/**
+ * @internal Deconstructer stub needed to delete unique_ptrs with type Private
+ */
 WbMapAccountDialog::~WbMapAccountDialog()
 {
-  delete d;
 }
 
 void WbMapAccountDialog::checkNextButton(void)
@@ -85,15 +81,21 @@ void WbMapAccountDialog::checkNextButton(void)
 
 void WbMapAccountDialog::newPage(int id)
 {
+  //! @Todo C++14: this should be make_unique
+  d2->progress = std::unique_ptr<QProgressDialog>(new QProgressDialog(this));
+  d2->progress->setModal(true);
+  d2->progress->setCancelButton(nullptr);
+  d2->progress->setMinimum(0);
+  d2->progress->setMaximum(0);
+  d2->progress->setMinimumDuration(0);
+
   switch (id) {
     case BACKENDS_PAGE: {
         backendsList->clear();
-        d2->progress = new KProgressDialog(this, i18n("Load Weboob backend..."), i18n("Getting list of backends."));
-        d2->progress->setModal(true);
-        d2->progress->setAllowCancel(false);
-        d2->progress->progressBar()->setMinimum(0);
-        d2->progress->progressBar()->setMaximum(0);
-        d2->progress->setMinimumDuration(0);
+
+        d2->progress->setWindowTitle(i18n("Load Weboob backend..."));
+        d2->progress->setLabelText(i18n("Getting list of backends."));
+
         kapp->processEvents();
 
         QFuture<QList<Weboob::Backend> > future = QtConcurrent::run(weboob, &Weboob::getBackends);
@@ -103,12 +105,9 @@ void WbMapAccountDialog::newPage(int id)
       }
     case ACCOUNTS_PAGE: {
         accountsList->clear();
-        d->progress = new KProgressDialog(this, i18n("Connecting to bank..."), i18n("Getting list of accounts list from your bank."));
-        d->progress->setModal(true);
-        d->progress->setAllowCancel(false);
-        d->progress->progressBar()->setMinimum(0);
-        d->progress->progressBar()->setMaximum(0);
-        d->progress->setMinimumDuration(0);
+        d2->progress->setWindowTitle(i18n("Connecting to bank..."));
+        d2->progress->setLabelText(i18n("Getting list of accounts list from your bank."));
+
         kapp->processEvents();
 
         QFuture<QList<Weboob::Account> > future = QtConcurrent::run(weboob, &Weboob::getAccounts, backendsList->currentItem()->text(0));
@@ -118,6 +117,10 @@ void WbMapAccountDialog::newPage(int id)
 
         break;
       }
+
+    default:
+      // I do not know if this can actually happen. But to be safe:
+      d2->progress.reset();
   }
 }
 
@@ -132,8 +135,7 @@ void WbMapAccountDialog::gotBackends()
     backendsList->addTopLevelItem(new QTreeWidgetItem(headers));
   }
 
-  delete d2->progress;
-  d2->progress = 0;
+  d2->progress.reset();
 }
 
 void WbMapAccountDialog::gotAccounts()
@@ -147,8 +149,7 @@ void WbMapAccountDialog::gotAccounts()
     accountsList->addTopLevelItem(new QTreeWidgetItem(headers));
   }
 
-  delete d->progress;
-  d->progress = 0;
+  d->progress.reset();
 
   button(QWizard::BackButton)->setEnabled(true);
   accountsList->setEnabled(true);

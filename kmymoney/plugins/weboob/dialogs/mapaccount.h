@@ -20,6 +20,8 @@
 #ifndef WEBOOB_MAPACCOUNT_HPP
 #define WEBOOB_MAPACCOUNT_HPP
 
+#include <memory>
+
 #include <QWizard>
 
 #include "weboob.h"
@@ -32,7 +34,7 @@ public:
 
   Weboob *weboob;
   WbMapAccountDialog(QWidget *parent = 0);
-  ~WbMapAccountDialog();
+  virtual ~WbMapAccountDialog();
 
 protected slots:
   void checkNextButton(void);
@@ -54,8 +56,8 @@ private:
 
   class Private;
   /// \internal d-pointer instance.
-  Private* const d;
-  Private* const d2;
+  const std::unique_ptr<Private> d;
+  const std::unique_ptr<Private> d2;
 };
 
 

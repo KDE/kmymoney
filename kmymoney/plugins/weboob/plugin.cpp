@@ -19,24 +19,19 @@
 
 #include <QtConcurrentRun>
 #include <QFutureWatcher>
+#include <QProgressDialog>
+
 #include <KGenericFactory>
-#include <kprogressdialog.h>
 
 #include "dialogs/mapaccount.h"
 #include "dialogs/webaccount.h"
 #include "plugin.h"
 #include "weboob.h"
 
-class WeboobPlugin::Private
+struct WeboobPlugin::Private
 {
-public:
-  Private() : progress(0) {}
-  ~Private() {
-    delete progress;
-  }
-
   QFutureWatcher<Weboob::Account> watcher;
-  KProgressDialog* progress;
+  std::unique_ptr<QProgressDialog> progress;
   WebAccountSettings* accountSettings;
 };
 
@@ -55,7 +50,6 @@ WeboobPlugin::WeboobPlugin(QObject *parent, const QVariantList&) :
 
 WeboobPlugin::~WeboobPlugin()
 {
-  delete d;
 }
 
 void WeboobPlugin::protocols(QStringList& protocolList) const
@@ -107,20 +101,21 @@ bool WeboobPlugin::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)
   QString id = kacc.onlineBankingSettings().value("wb-id");
   QString max = kacc.onlineBankingSettings().value("wb-max");
 
-  d->progress = new KProgressDialog(0, i18n("Connecting to bank..."), i18n("Retrieving transactions..."));
+  //! @todo C++14 use make_unique()
+  d->progress = std::unique_ptr<QProgressDialog>(new QProgressDialog());
+  d->progress->setWindowTitle(i18n("Connecting to bank..."));
+  d->progress->setLabelText(i18n("Retrieving transactions..."));
   d->progress->setModal(true);
-  d->progress->setAllowCancel(false);
-  d->progress->progressBar()->setMinimum(0);
-  d->progress->progressBar()->setMaximum(0);
+  d->progress->setCancelButton(nullptr);
+  d->progress->setMinimum(0);
+  d->progress->setMaximum(0);
   d->progress->setMinimumDuration(0);
 
   QFuture<Weboob::Account> future = QtConcurrent::run(&weboob, &Weboob::getAccount, bname, id, max);
   d->watcher.setFuture(future);
 
   d->progress->exec();
-
-  delete d->progress;
-  d->progress = 0;
+  d->progress.reset();
 
   return true;
 }

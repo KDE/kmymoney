@@ -28,6 +28,9 @@ target_link_libraries(kmm_weboob
                       Alkimia::alkimia
                       )
 
+# Needs this C++ features: TODO: CMake 3
+# Public: unique_ptr
+
 ########### install files ###############
 
 install(FILES weboob.py kmm_weboob.rc

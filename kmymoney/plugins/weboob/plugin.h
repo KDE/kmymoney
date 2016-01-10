@@ -20,6 +20,8 @@
 #ifndef WEBOOB_PLUGIN_HPP
 #define WEBOOB_PLUGIN_HPP
 
+#include <memory>
+
 #ifdef HAVE_CONFIG_H
 #include <config-kmymoney.h>
 #endif
@@ -56,7 +58,7 @@ private:
 
   class Private;
   /// \internal d-pointer instance.
-  Private* const d;
+  const std::unique_ptr<Private> d;
 };
 
 #endif /* WEBOOB_PLUGIN_HPP */
