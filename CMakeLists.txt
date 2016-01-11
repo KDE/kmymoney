@@ -69,6 +69,8 @@ find_package(KChart 2.6.0 REQUIRED)
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 add_definitions(-std=c++11) # TODO make system independent, easily done with cmake 3
+# Used so far:
+# PRIVATE: decltype
 
 string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
 if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
@@ -151,10 +153,11 @@ endif(DEFINED ENABLE_KBANKING)
 option(ENABLE_KBANKING "Enable KBanking plugin" ON)
 if(ENABLE_KBANKING)
   find_package(Qt5 COMPONENTS QuickWidgets)
-  find_package(Gwenhywfar)
+  # Must look for aqbanking first because it overwrites GWENHYWFAR_LIBRARIES
+  find_package(AQBANKING "5.5.0")
+  message(STATUS "AqBanking ${AQBANKING_VERSION} found at ${AQBANKING_INCLUDE_DIRS} (${AQBANKING_LIBRARIES}) ${Aqbanking_FOUND}")
+  find_package(GWENHYWFAR COMPONENTS qt4 cpp)
   message(STATUS "Gwenhywfar ${GWENHYWFAR_VERSION} found at ${GWENHYWFAR_INCLUDE_DIRS} (${GWENHYWFAR_LIBRARIES})")
-  find_package(AqBanking "5.5.0")
-  message(STATUS "AqBanking ${AQBANKING_VERSION} found at ${AQBANKING_INCLUDE_DIRS} (${AQBANKING_LIBRARIES})")
   if (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
     set(KBANKING_FOUND ON)
   else (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
