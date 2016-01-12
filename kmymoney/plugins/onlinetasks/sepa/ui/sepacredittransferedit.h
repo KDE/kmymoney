@@ -19,7 +19,7 @@
 #ifndef SEPACREDITTRANSFEREDIT_H
 #define SEPACREDITTRANSFEREDIT_H
 
-#include <KLocale>
+#include <KLocalizedString>
 
 #include "mymoney/onlinejobtyped.h"
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"

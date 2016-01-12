@@ -21,7 +21,7 @@
 
 #include <algorithm>
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 #include "misc/validators.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"

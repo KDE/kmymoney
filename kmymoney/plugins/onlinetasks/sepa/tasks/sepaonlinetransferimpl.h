@@ -19,7 +19,7 @@
 #ifndef SEPAONLINETRANSFERIMPL_H
 #define SEPAONLINETRANSFERIMPL_H
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <QSqlQuery>
 
 #include "sepaonlinetransfer.h"

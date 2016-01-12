@@ -25,16 +25,18 @@
 #include "ui/sepacredittransferedit.h"
 #include "sepastorageplugin.h"
 
-// TODO: port KF5
-/*K_PLUGIN_FACTORY(SepaOnlineTaskFactory,
-                 registerPlugin<sepaOnlineTasksLoader>();
-                 registerPlugin<sepaCreditTransferEdit>("sepaCreditTransferUi");
-                 registerPlugin<sepaStoragePlugin>("sepaSqlStoragePlugin");
-                )
-K_EXPORT_PLUGIN(SepaOnlineTaskFactory("sepaOnlineTasksLoader"))*/
+K_PLUGIN_FACTORY_WITH_JSON(sepaOnlineTasksFactory,
+                           "kmymoney-sepaorders.json",
+                           registerPlugin<sepaOnlineTasksLoader>();
+                           registerPlugin<sepaCreditTransferEdit>("sepaCreditTransferUi");
+                           registerPlugin<sepaStoragePlugin>("sepaSqlStoragePlugin");
+                          )
 
 sepaOnlineTasksLoader::sepaOnlineTasksLoader(QObject* parent, const QVariantList&)
     : KMyMoneyPlugin::Plugin::Plugin(parent, "sepaOnlineTasksLoader")
 {
   onlineJobAdministration::instance()->registerOnlineTask(new sepaOnlineTransferImpl);
 }
+
+// Needed for K_PLUGIN_FACTORY...
+#include "sepaonlinetasksloader.moc"
