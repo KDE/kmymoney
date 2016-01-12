@@ -33,8 +33,11 @@ target_link_libraries(kmm_weboob
 
 ########### install files ###############
 
-install(FILES weboob.py kmm_weboob.rc
+install(FILES weboob.py
         DESTINATION  ${DATA_INSTALL_DIR}/kmm_weboob)
+
+install(FILES kmm_weboob.rc
+        DESTINATION ${KXMLGUI_INSTALL_DIR}/kmm_weboob)
 
 install(TARGETS kmm_weboob
         DESTINATION ${PLUGIN_INSTALL_DIR})
