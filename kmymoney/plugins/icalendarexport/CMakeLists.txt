@@ -15,10 +15,10 @@ add_library(kmm_icalendarexport MODULE ${kmm_icalendarexport_PART_SRCS})
 kcoreaddons_desktop_to_json(kmm_icalendarexport kmm_icalendarexport.desktop)
 
 target_link_libraries(kmm_icalendarexport
-                      ${KDE4_KDEUI_LIBS}
                       KF5::KIOWidgets
                       Alkimia::alkimia
-                      kmm_mymoney kmm_plugin
+                      kmm_mymoney
+                      kmm_plugin
                       ${LIBICAL_LIBRARIES}
                       )
 

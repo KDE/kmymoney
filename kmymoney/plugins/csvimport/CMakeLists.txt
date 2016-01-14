@@ -33,7 +33,7 @@ qt5_wrap_ui(kmm_csvimport_PART_SRCS
   symboltabledlg.ui
 )
 
-add_library(kmm_csvimport
+add_library(kmm_csvimport MODULE
   ${kmm_csvimport_PART_SRCS}
 )
 

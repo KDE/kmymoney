@@ -18,7 +18,7 @@ qt5_wrap_ui(kmm_csvexport_PART_SRCS
   csvexportdlg.ui
 )
 
-add_library(kmm_csvexport
+add_library(kmm_csvexport MODULE
   ${kmm_csvexport_PART_SRCS}
 )
 

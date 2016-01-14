@@ -483,7 +483,7 @@ void OfxHttpsRequest::slotOfxFinished(KJob* /* e */)
 OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo)
 {
   Q_UNUSED(showProgressInfo);
-// TODO: port to KF5
+//! @TODO port to KF5
 #if 0
   m_eventLoop = new QEventLoop(qApp->activeWindow());
   QFile f(dst.path());
