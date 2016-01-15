@@ -14,10 +14,9 @@ To do so, just type
 
 $ cmake --version
 
-on your command line. Version 2.6.4 is required, the most recent
-stable version of cmake is preferred.
+on your command line.
 
-For debian/ubuntu user the following command will check for 
+For debian/ubuntu user the following command will check for
 required packages to build KMyMoney:
 
   sudo apt-get build-dep kmymoney
@@ -37,7 +36,7 @@ $ cd build
 $ cmake .. -DCMAKE_INSTALL_PREFIX=/usr
     to generate the Makefiles.
 $ ccmake .
-    to change the configuration of the build process. (optional) 
+    to change the configuration of the build process. (optional)
 
 Congratulations, your Makefiles were generated!
 Now you could just type
@@ -49,7 +48,7 @@ Note that 'make' automatically checks whether any CMakeLists.txt file
 has changed and reruns cmake if necessary.
 
 $ make install
-    to install the project. You have to install KMyMoney to run it. 
+    to install the project. You have to install KMyMoney to run it.
 Use sudo or switch to a superuser to run this command.
 
 Congratulations, you will never have a chaos of generated files

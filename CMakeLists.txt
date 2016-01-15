@@ -7,19 +7,15 @@ project(KMyMoney)
 # Automoc all sources
 set(CMAKE_AUTOMOC TRUE)
 
-# cmake 2.6 proposed to add this policy
-if(COMMAND cmake_policy)
-  if(POLICY CMP0017)
-    cmake_policy(SET CMP0017 NEW)
-  endif(POLICY CMP0017)
-  cmake_policy(SET CMP0003 NEW)
-  # until the createtarball script generates different custom targets
-  # for the various translations, we need to keep the following setting
-  # http://www.vtkedge.org/Wiki/CMake_Policies#Setting_Policies_Individually
-  # has an explanation of the problem
-  cmake_policy(SET CMP0002 OLD)
-  cmake_policy(SET CMP0026 OLD)
-endif(COMMAND cmake_policy)
+cmake_policy(SET CMP0028 NEW)
+cmake_policy(SET CMP0063 NEW) # Policy introduced in CMake version 3.3
+
+# until the createtarball script generates different custom targets
+# for the various translations, we need to keep the following setting
+# http://www.vtkedge.org/Wiki/CMake_Policies#Setting_Policies_Individually
+# has an explanation of the problem
+cmake_policy(SET CMP0002 OLD)
+cmake_policy(SET CMP0026 OLD)
 
 # Our modules reside in the subdirectory cmake/modules/
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
@@ -33,19 +29,9 @@ set(VERSION_PATCH "0")
 
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git AND CMAKE_SYSTEM_NAME MATCHES Linux)
-  # make sure we don't use translated messages here
-  set(LANG $ENV{LANG})
-  set(ENV{LANG} "C")
-  execute_process(COMMAND git log -1 COMMAND head -n 1 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} OUTPUT_VARIABLE BRANCH)
-  # extract branch name
-  string(REGEX MATCH "commit ([^$]+)" BRANCH "${BRANCH}")
-  set(BRANCH ${CMAKE_MATCH_1})
-  # and use the first 10 chars of the commit id
-  string(SUBSTRING ${BRANCH} 0 10 BRANCH)
-  set(VERSION_SUFFIX "-${BRANCH}")
-  # switch back to the original language setting
-  set(ENV{LANG} ${LANG})
-endif(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git AND CMAKE_SYSTEM_NAME MATCHES Linux)
+  execute_process(COMMAND git rev-parse --short HEAD WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} OUTPUT_VARIABLE VERSION_SUFFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
+  set(VERSION_SUFFIX "-${VERSION_SUFFIX}")
+endif()
 
 ######################### General Requirements ##########################
 
@@ -54,7 +40,6 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_S
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
-include(KDECompilerSettings)
 include(FeatureSummary)
 
 include(GenerateExportHeader)
@@ -66,11 +51,15 @@ find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n KHtml KDELibs4Suppor
 find_package(LibAlkimia 6.0.0 REQUIRED)
 find_package(KChart 2.6.0 REQUIRED)
 
-add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS})
-add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-std=c++11) # TODO make system independent, easily done with cmake 3
 # Used so far:
+<<<<<<< a2c284dc762ac117c2063ee07a5496ba8a9dee9a
 # PRIVATE: decltype, nullptr
+=======
+# PUBLIC: nullptr
+# PRIVATE: decltype
+>>>>>>> Some clean up on CMakeLists.txt and base directory
 
 string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
 if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
@@ -92,9 +81,6 @@ if(DOXYGEN_FOUND)
   add_custom_target(apidoc ${DOXYGEN} ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen)
 endif(DOXYGEN_FOUND)
 
-# check for PkgConfig
-find_package(PkgConfig)
-
 # check some functions
 include (CheckFunctionExists)
 
@@ -112,8 +98,6 @@ check_include_file("unistd.h" HAVE_UNISTD_H)
 include(CheckTypeSize)
 check_type_size(long SIZEOF_LONG)
 
-mark_as_advanced(
-  KDE4_KCFGC_EXECUTABLE KDE4_KDECORE_LIBRARY KDECONFIG_EXECUTABLE)
 
 ######################### Special Requirements ##########################
 
@@ -156,17 +140,27 @@ if(ENABLE_KBANKING)
   # Must look for aqbanking first because it overwrites GWENHYWFAR_LIBRARIES
   find_package(AQBANKING "5.5.0")
   message(STATUS "AqBanking ${AQBANKING_VERSION} found at ${AQBANKING_INCLUDE_DIRS} (${AQBANKING_LIBRARIES}) ${Aqbanking_FOUND}")
-  find_package(GWENHYWFAR COMPONENTS qt4 cpp)
+  find_package(GWENHYWFAR)
   message(STATUS "Gwenhywfar ${GWENHYWFAR_VERSION} found at ${GWENHYWFAR_INCLUDE_DIRS} (${GWENHYWFAR_LIBRARIES})")
-  if (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
+  find_package(gwengui-cpp)
+  get_property(incl TARGET gwenhywfar::core PROPERTY INTERFACE_LINK_LIBRARIES)
+  message(STATUS "gwen core: ${incl}")
+  get_property(incl TARGET gwenhywfar::gui-cpp PROPERTY INTERFACE_LINK_LIBRARIES)
+  message(STATUS "gwengui-cpp: ${incl}")
+  get_property(incl TARGET aqbanking::aqbanking PROPERTY INTERFACE_LINK_LIBRARIES)
+  message(STATUS "aqbanking: ${incl}")
+  find_package(gwengui-qt5)
+  get_property(incl TARGET gwenhywfar::gui-qt5 PROPERTY INTERFACE_LINK_LIBRARIES)
+  message(STATUS "gwengui-qt5: ${incl}")
+  if (AQBANKING_FOUND AND GWENHYWFAR_FOUND AND gwengui-cpp_FOUND AND gwengui-qt5_FOUND)
     set(KBANKING_FOUND ON)
-  else (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
+  else()
     if(NOT KBANKING_FOUND STREQUAL "AUTO")
       message(FATAL_ERROR "KBanking requirements not met")
     endif(NOT KBANKING_FOUND STREQUAL "AUTO")
     set(KBANKING_FOUND OFF)
     set(ENABLE_KBANKING OFF CACHE BOOL "Enable KBanking plugin" FORCE)
-  endif (AQBANKING_FOUND AND GWENHYWFAR_FOUND)
+  endif()
 endif(ENABLE_KBANKING)
 
 # check for optional Weboob support
@@ -222,8 +216,6 @@ set(CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}" CACHE STRING
 Possible values are: 'Release' 'RelWithDebInfo' 'Debug' 'Debugfull' 'Profile'
 The default value is: 'RelWithDebInfo'" FORCE)
 
-add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-
 # tell the KMyMoney sources that a config.h is present:
 add_definitions( -DHAVE_CONFIG_H )
 
@@ -234,6 +226,7 @@ if(${CMAKE_BUILD_TYPE_TOLOWER} MATCHES "^debug(full)?$|^profile$")
 endif()
 
 # tells gcc to enable exception handling
+include(KDECompilerSettings)
 kde_enable_exceptions()
 
 if(CMAKE_SYSTEM_NAME MATCHES Linux)
@@ -275,15 +268,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
     "Generate KMyMoney manual in HTML format (default=OFF)" OFF)
 endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
 
-# remark: these directories are used to find libs and .h files.
-# they are set globally after this point. no need to add everywhere.
-link_directories( ${KDE4_LIB_DIR} )
-include_directories(
-  ${CMAKE_CURRENT_SOURCE_DIR}
-  ${CMAKE_CURRENT_BINARY_DIR}
-  ${KDE4_INCLUDE_DIR}
-  ${QT_INCLUDE_DIR}
-  ${PKGS_INCLUDE_DIRS})
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 
 # Generation of the HTML version of the manual
@@ -300,15 +285,6 @@ add_subdirectory( doc )
 if (USE_DEVELOPER_DOC)
   add_subdirectory( developer-doc )
 endif (USE_DEVELOPER_DOC)
-
-#CONFIGURE_FILE(
-#  "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
-#  "${CMAKE_BINARY_DIR}/cmake_uninstall.cmake"
-#  IMMEDIATE @ONLY)
-
-#ADD_CUSTOM_TARGET(uninstall
-#  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
-
 
 # by default, the package name is kmymoney
 set(CPACK_PACKAGE_NAME "kmymoney")
