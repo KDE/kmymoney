@@ -16,4 +16,9 @@ kconfig_add_kcfg_files(kmm_kbanking_widgets_la_SOURCES ../kbankingsettings.kcfgc
 qt5_wrap_ui(kmm_kbanking_widgets_la_SOURCES ${kmm_kbanking_widgets_UI})
 
 add_library(kmm_kbanking_widgets STATIC ${kmm_kbanking_widgets_la_SOURCES})
-target_link_libraries(kmm_kbanking_widgets KF5::KDELibs4Support Qt5::QuickWidgets)
+
+target_link_libraries(kmm_kbanking_widgets
+  KF5::KDELibs4Support
+  Qt5::Widgets
+  Qt5::QuickWidgets
+)

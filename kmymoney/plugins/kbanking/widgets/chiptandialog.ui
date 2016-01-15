@@ -126,7 +126,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QQuickWidget" name="declarativeView">
+      <widget class="QQuickWidget" name="declarativeView" native="true">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -172,12 +172,12 @@
       </spacer>
      </item>
      <item>
-      <widget class="KLineEdit" name="tanInput"/>
+      <widget class="QLineEdit" name="tanInput"/>
      </item>
     </layout>
    </item>
    <item>
-    <widget class="KDialogButtonBox" name="dialogButtonBox">
+    <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
@@ -187,21 +187,19 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KDialogButtonBox</class>
-   <extends>QDialogButtonBox</extends>
-   <header>kdialogbuttonbox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
+   <class>QQuickWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">QQuickWidget</header>
   </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>tanInput</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>reduceButton</tabstop>
+  <tabstop>enlargeButton</tabstop>
+  <tabstop>decelerateButton</tabstop>
+  <tabstop>accelerateButton</tabstop>
   <tabstop>infoText</tabstop>
-  <tabstop>declarativeView</tabstop>
-  <tabstop>dialogButtonBox</tabstop>
  </tabstops>
  <resources/>
  <connections/>

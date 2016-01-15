@@ -42,7 +42,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <KPluginFactory>
 #include <KAction>
@@ -89,6 +89,11 @@
 #include "gwenkdegui.h"
 #include "gwenhywfarqtoperators.h"
 #include "aqbankingkmmoperators.h"
+
+#ifdef KMM_DEBUG
+// Added an option to open the chipTanDialog from the menu for debugging purposes
+#include "chiptandialog.h"
+#endif
 
 K_PLUGIN_FACTORY_WITH_JSON(KBankingFactory, "kmm_kbanking.json", registerPlugin<KBankingPlugin>();)
 
@@ -146,17 +151,18 @@ public:
   QTimer *passwordCacheTimer;
 };
 
+
 KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
     KMyMoneyPlugin::OnlinePluginExtended(parent, "KBanking"/*must be the same as X-KDE-PluginInfo-Name*/),
     d(new Private),
-    m_accountSettings(0)
+    m_accountSettings(nullptr)
 {
   m_kbanking = new KMyMoneyBanking(this, "KMyMoney");
 
   d->passwordCacheTimer = new QTimer(this);
   d->passwordCacheTimer->setSingleShot(true);
   d->passwordCacheTimer->setInterval(60000);
-  connect(d->passwordCacheTimer, SIGNAL(timeout()), this, SLOT(slotClearPasswordCache()));
+  connect(d->passwordCacheTimer, &QTimer::timeout, this, &KBankingPlugin::slotClearPasswordCache);
 
   if (m_kbanking) {
     if (AB_Banking_HasConf4(m_kbanking->getCInterface())) {
@@ -204,7 +210,6 @@ KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
 }
 
 
-
 KBankingPlugin::~KBankingPlugin()
 {
   if (m_kbanking) {
@@ -227,6 +232,7 @@ void KBankingPlugin::loadProtocolConversion()
   }
 }
 
+
 void KBankingPlugin::protocols(QStringList& protocolList) const
 {
   if (m_kbanking) {
@@ -246,6 +252,7 @@ void KBankingPlugin::protocols(QStringList& protocolList) const
   }
 }
 
+
 QWidget* KBankingPlugin::accountConfigTab(const MyMoneyAccount& acc, QString& name)
 {
   const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
@@ -260,6 +267,7 @@ QWidget* KBankingPlugin::accountConfigTab(const MyMoneyAccount& acc, QString& na
   return label;
 }
 
+
 MyMoneyKeyValueContainer KBankingPlugin::onlineBankingSettings(const MyMoneyKeyValueContainer& current)
 {
   MyMoneyKeyValueContainer kvp(current);
@@ -270,17 +278,31 @@ MyMoneyKeyValueContainer KBankingPlugin::onlineBankingSettings(const MyMoneyKeyV
   return kvp;
 }
 
+
 void KBankingPlugin::createActions()
 {
-  QAction *settings_aqbanking  = actionCollection()->addAction("settings_aqbanking");
+  QAction *settings_aqbanking = actionCollection()->addAction("settings_aqbanking");
   settings_aqbanking->setText(i18n("Configure Aq&Banking..."));
-  connect(settings_aqbanking, SIGNAL(triggered()), this, SLOT(slotSettings()));
+  connect(settings_aqbanking, &QAction::triggered, this, &KBankingPlugin::slotSettings);
 
-  QAction *file_import_aqbanking  = actionCollection()->addAction("file_import_aqbanking");
+  QAction *file_import_aqbanking = actionCollection()->addAction("file_import_aqbanking");
   file_import_aqbanking->setText(i18n("AqBanking importer..."));
-  connect(file_import_aqbanking, SIGNAL(triggered()), this, SLOT(slotImport()));
+  connect(file_import_aqbanking, &QAction::triggered, this, &KBankingPlugin::slotImport);
 
   connect(viewInterface(), SIGNAL(viewStateChanged(bool)), action("file_import_aqbanking"), SLOT(setEnabled(bool)));
+
+#if KMM_DEBUG
+  QAction *openChipTanDialog = actionCollection()->addAction("open_chiptan_dialog");
+  openChipTanDialog->setText("Open ChipTan Dialog");
+  connect(openChipTanDialog, &QAction::triggered, [&](){
+    auto dlg = new chipTanDialog();
+    dlg->setHhdCode("0F04871100030333555414312C32331D");
+    dlg->setInfoText("<html><h1>Test Graphic for debugging</h1><p>The encoded data is</p><p>Account Number: <b>335554</b><br/>Amount: <b>1,23</b></p></html>");
+    connect(dlg, &QDialog::accepted, dlg, &chipTanDialog::deleteLater);
+    connect(dlg, &QDialog::rejected, dlg, &chipTanDialog::deleteLater);
+    dlg->show();
+  });
+#endif
 }
 
 void KBankingPlugin::slotSettings()
@@ -301,6 +323,7 @@ void KBankingPlugin::slotSettings()
   }
 }
 
+
 bool KBankingPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& settings)
 {
   bool rc = false;
@@ -320,6 +343,7 @@ bool KBankingPlugin::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContai
   }
   return rc;
 }
+
 
 AB_ACCOUNT* KBankingPlugin::aqbAccount(const MyMoneyAccount& acc) const
 {
@@ -347,6 +371,7 @@ AB_ACCOUNT* KBankingPlugin::aqbAccount(const MyMoneyAccount& acc) const
   return ab_acc;
 }
 
+
 AB_ACCOUNT* KBankingPlugin::aqbAccount(const QString& accountId) const
 {
   MyMoneyAccount account = MyMoneyFile::instance()->account(accountId);
@@ -363,6 +388,7 @@ QString KBankingPlugin::stripLeadingZeroes(const QString& s) const
   }
   return rc;
 }
+
 
 void KBankingPlugin::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT* ab_acc)
 {
@@ -395,15 +421,18 @@ void KBankingPlugin::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT
   }
 }
 
+
 bool KBankingPlugin::accountIsMapped(const MyMoneyAccount& acc)
 {
   return aqbAccount(acc) != 0;
 }
 
+
 bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc)
 {
   return updateAccount(acc, false);
 }
+
 
 bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 {
@@ -560,6 +589,7 @@ bool KBankingPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
   return rc;
 }
 
+
 void KBankingPlugin::executeQueue()
 {
   if (m_kbanking && m_kbanking->getEnqueuedJobs().size() > 0) {
@@ -574,6 +604,7 @@ void KBankingPlugin::executeQueue()
     AB_ImExporterContext_free(ctx);
   }
 }
+
 
 /** @todo improve error handling, e.g. by adding a .isValid to nationalTransfer
  * @todo use new onlineJob system
@@ -607,6 +638,7 @@ void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
   jobs = m_onlineJobQueue.values() + unhandledJobs;
   m_onlineJobQueue.clear();
 }
+
 
 QStringList KBankingPlugin::availableJobs(QString accountId)
 {
@@ -642,6 +674,7 @@ QStringList KBankingPlugin::availableJobs(QString accountId)
   return list;
 }
 
+
 /** @brief experimenting with QScopedPointer and aqBanking pointers */
 class QScopedPointerAbJobDeleter
 {
@@ -651,6 +684,7 @@ public:
   }
 };
 
+
 /** @brief experimenting with QScopedPointer and aqBanking pointers */
 class QScopedPointerAbAccountDeleter
 {
@@ -659,6 +693,7 @@ public:
     AB_Account_free(account);
   }
 };
+
 
 IonlineTaskSettings::ptr KBankingPlugin::settings(QString accountId, QString taskName)
 {
@@ -686,6 +721,7 @@ IonlineTaskSettings::ptr KBankingPlugin::settings(QString accountId, QString tas
   }
   return IonlineTaskSettings::ptr();
 }
+
 
 bool KBankingPlugin::enqueTransaction(onlineJobTyped<germanOnlineTransfer>& job)
 {
@@ -742,6 +778,7 @@ bool KBankingPlugin::enqueTransaction(onlineJobTyped<germanOnlineTransfer>& job)
   //delete localAcc;
   return true;
 }
+
 
 bool KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
 {
@@ -807,6 +844,7 @@ bool KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)
   return true;
 }
 
+
 void KBankingPlugin::startPasswordTimer()
 {
   if (d->passwordCacheTimer->isActive())
@@ -814,10 +852,12 @@ void KBankingPlugin::startPasswordTimer()
   d->passwordCacheTimer->start();
 }
 
+
 void KBankingPlugin::slotClearPasswordCache()
 {
   m_kbanking->clearPasswordCache();
 }
+
 
 void KBankingPlugin::slotImport()
 {
@@ -826,16 +866,17 @@ void KBankingPlugin::slotImport()
 }
 
 
-
 bool KBankingPlugin::importStatement(const MyMoneyStatement& s)
 {
   return statementInterface()->import(s);
 }
 
+
 const MyMoneyAccount& KBankingPlugin::account(const QString& key, const QString& value) const
 {
   return statementInterface()->account(key, value);
 }
+
 
 void KBankingPlugin::setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps) const
 {
@@ -848,9 +889,9 @@ KMyMoneyBanking::KMyMoneyBanking(KBankingPlugin* parent, const char* appname, co
     , m_parent(parent)
     , _jobQueue(0)
 {
-  m_sepaKeywords  << QString("SEPA-BASISLASTSCHRIFT")
-  << QString::fromUtf8("SEPA-ÜBERWEISUNG");
+  m_sepaKeywords = {QString::fromUtf8("SEPA-BASISLASTSCHRIFT"), QString::fromUtf8("SEPA-ÜBERWEISUNG")};
 }
+
 
 int KMyMoneyBanking::init()
 {
@@ -869,6 +910,7 @@ int KMyMoneyBanking::init()
   return 0;
 }
 
+
 int KMyMoneyBanking::fini()
 {
   if (_jobQueue) {
@@ -883,6 +925,7 @@ int KMyMoneyBanking::fini()
   }
   return AB_Banking::fini();
 }
+
 
 int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
 {
@@ -947,11 +990,13 @@ int KMyMoneyBanking::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
   return rv;
 }
 
+
 void KMyMoneyBanking::clearPasswordCache()
 {
   /* clear password DB */
   GWEN_Gui_SetPasswordStatus(NULL, NULL, GWEN_Gui_PasswordStatus_Remove, 0);
 }
+
 
 std::list<AB_JOB*> KMyMoneyBanking::getEnqueuedJobs()
 {
@@ -995,6 +1040,7 @@ int KMyMoneyBanking::dequeueJob(AB_JOB *j)
   emit m_parent->queueChanged();
   return 0;
 }
+
 
 void KMyMoneyBanking::transfer()
 {
@@ -1061,6 +1107,7 @@ bool KMyMoneyBanking::askMapAccount(const MyMoneyAccount& acc)
   return false;
 }
 
+
 QString KMyMoneyBanking::mappingId(const MyMoneyObject& object) const
 {
   QString id = MyMoneyFile::instance()->storageId() + QLatin1Char('-') + object.id();
@@ -1070,6 +1117,7 @@ QString KMyMoneyBanking::mappingId(const MyMoneyObject& object) const
   id.remove('}');
   return id;
 }
+
 
 bool KMyMoneyBanking::interactiveImport()
 {
@@ -1141,7 +1189,6 @@ const AB_ACCOUNT_STATUS* KMyMoneyBanking::_getAccountStatus(AB_IMEXPORTER_ACCOUN
   } /* while */
   return best;
 }
-
 
 
 void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
@@ -1380,7 +1427,6 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
   // store transaction
   ks.m_listTransactions += kt;
 }
-
 
 
 bool KMyMoneyBanking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,

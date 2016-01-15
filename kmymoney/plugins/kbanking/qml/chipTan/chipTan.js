@@ -51,13 +51,10 @@ function timerStarted( data, parentItem )
  */
 function timerTriggered( parentItem )
 {
-  var colorOn = parentItem.children[0].children[1].colorOn
-  var colorOff = parentItem.children[0].children[1].colorOff
-
   if (currentIntervalStarted == true) {
-      parentItem.children[0].children[1].color = colorOff
+      parentItem.children[0].bitState = false
       currentIntervalStarted = false;
-      return;
+      return
   }
 
   ++currentIndex
@@ -65,9 +62,9 @@ function timerTriggered( parentItem )
   if (currentIndex >= transmitCode.length)
       currentIndex = 0
 
-  parentItem.children[0].children[1].color = colorOn
-  parentItem.children[1].children[1].color = (transmitCode[currentIndex] & 1) ? colorOn : colorOff
-  parentItem.children[2].children[1].color = (transmitCode[currentIndex] & 2) ? colorOn : colorOff
-  parentItem.children[3].children[1].color = (transmitCode[currentIndex] & 4) ? colorOn : colorOff
-  parentItem.children[4].children[1].color = (transmitCode[currentIndex] & 8) ? colorOn : colorOff
+  parentItem.children[0].bitState = true
+  parentItem.children[1].bitState = transmitCode[currentIndex] & 1
+  parentItem.children[2].bitState = transmitCode[currentIndex] & 2
+  parentItem.children[3].bitState = transmitCode[currentIndex] & 4
+  parentItem.children[4].bitState = transmitCode[currentIndex] & 8
 }

@@ -1,6 +1,6 @@
 /*
  * A gwenhywfar gui for aqbanking using KDE widgets
- * Copyright 2014  Christian David <christian-david@web.de>
+ * Copyright 2014 - 2016 Christian David <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -23,7 +23,9 @@
 #ifndef GWENKDEGUI_H
 #define GWENKDEGUI_H
 
-#include "gwen-gui-qt4/qt4_gui.hpp"
+#include <QObject>
+
+#include "gwen-gui-qt5/qt5_gui.hpp"
 
 /**
  * @brief Gwenhywfar Gui for KDE
@@ -31,7 +33,7 @@
  *
  * @author Christian David
  */
-class gwenKdeGui : public QT4_Gui
+class gwenKdeGui : public QT5_Gui
 {
 public:
   gwenKdeGui();
@@ -47,7 +49,6 @@ public:
                           uint32_t guiid);
 };
 
-#include <QObject>
 /**
  * @brief Helper class which is receiver for several signals
  */
@@ -56,25 +57,30 @@ class gwenKdeGuiTanResult : public QObject
   Q_OBJECT
 
 public:
-  gwenKdeGuiTanResult(QObject* parent = 0)
+  gwenKdeGuiTanResult(QObject* parent = nullptr)
       : QObject(parent),
       m_tan(QString()),
-      m_aborted(false) {}
+      m_aborted(false)
+      {}
 
   virtual ~gwenKdeGuiTanResult() {}
 
   QString tan() {
     return m_tan;
   }
+
   bool aborted() {
     return m_aborted;
   }
+
 public slots:
   void abort() {
     m_aborted = true;
   }
+
   void acceptTan(QString tan) {
-    m_tan = tan; m_aborted = false;
+    m_tan = tan;
+    m_aborted = false;
   }
 
 private:

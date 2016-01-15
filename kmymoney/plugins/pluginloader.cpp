@@ -89,10 +89,6 @@ void PluginLoader::loadPlugins()
 void PluginLoader::loadPlugin(KPluginInfo* info)
 {
   if (info->isPluginEnabled()) {
-    if (info->pluginName() == QLatin1String("KBanking")) {
-      qDebug("Skip loading KBanking until ported to Qt5");
-      return;
-    }
     Plugin* plugin = getPluginFromInfo(info);
 
     if (!plugin) {
@@ -104,11 +100,11 @@ void PluginLoader::loadPlugin(KPluginInfo* info)
         d->m_loadedPlugins.insert(info->name(), plugin);
         emit PluginLoader::instance()->plug(info);
       } else {
-        qDebug("KMyMoneyPlugin::PluginLoader:: createInstanceFromService returned 0 for %s with error %s", qPrintable(info->name()), qPrintable(error));
+        qDebug("KMyMoneyPlugin::PluginLoader:: createInstanceFromService returned nullptr for %s with error %s", qPrintable(info->name()), qPrintable(error));
       }
     }
   } else {
-    if (getPluginFromInfo(info) != 0) {
+    if (getPluginFromInfo(info) != nullptr) {
       // everybody interested should say goodbye to the plugin
       emit PluginLoader::instance()->unplug(info);
       d->m_loadedPlugins.remove(info->name());

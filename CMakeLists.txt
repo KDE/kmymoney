@@ -54,12 +54,8 @@ find_package(KChart 2.6.0 REQUIRED)
 add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-std=c++11) # TODO make system independent, easily done with cmake 3
 # Used so far:
-<<<<<<< a2c284dc762ac117c2063ee07a5496ba8a9dee9a
-# PRIVATE: decltype, nullptr
-=======
 # PUBLIC: nullptr
 # PRIVATE: decltype
->>>>>>> Some clean up on CMakeLists.txt and base directory
 
 string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
 if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
@@ -136,23 +132,14 @@ if(DEFINED ENABLE_KBANKING)
 endif(DEFINED ENABLE_KBANKING)
 option(ENABLE_KBANKING "Enable KBanking plugin" ON)
 if(ENABLE_KBANKING)
-  find_package(Qt5 COMPONENTS QuickWidgets)
-  # Must look for aqbanking first because it overwrites GWENHYWFAR_LIBRARIES
-  find_package(AQBANKING "5.5.0")
-  message(STATUS "AqBanking ${AQBANKING_VERSION} found at ${AQBANKING_INCLUDE_DIRS} (${AQBANKING_LIBRARIES}) ${Aqbanking_FOUND}")
-  find_package(GWENHYWFAR)
-  message(STATUS "Gwenhywfar ${GWENHYWFAR_VERSION} found at ${GWENHYWFAR_INCLUDE_DIRS} (${GWENHYWFAR_LIBRARIES})")
+  find_package(Qt5QuickWidgets) # Includes Qt5Qml
+
+  # The required verions are not correct. At time of writing the required patches to AqBanking and GWENHYWFAR were not upstream, yet.
+  find_package(AQBANKING "5.6.4") # Should be "5.6.5"
+  find_package(GWENHYWFAR "4.15.2") # Should be "4.15.3"
   find_package(gwengui-cpp)
-  get_property(incl TARGET gwenhywfar::core PROPERTY INTERFACE_LINK_LIBRARIES)
-  message(STATUS "gwen core: ${incl}")
-  get_property(incl TARGET gwenhywfar::gui-cpp PROPERTY INTERFACE_LINK_LIBRARIES)
-  message(STATUS "gwengui-cpp: ${incl}")
-  get_property(incl TARGET aqbanking::aqbanking PROPERTY INTERFACE_LINK_LIBRARIES)
-  message(STATUS "aqbanking: ${incl}")
   find_package(gwengui-qt5)
-  get_property(incl TARGET gwenhywfar::gui-qt5 PROPERTY INTERFACE_LINK_LIBRARIES)
-  message(STATUS "gwengui-qt5: ${incl}")
-  if (AQBANKING_FOUND AND GWENHYWFAR_FOUND AND gwengui-cpp_FOUND AND gwengui-qt5_FOUND)
+  if (AQBANKING_FOUND AND gwengui-cpp_FOUND AND gwengui-qt5_FOUND AND Qt5QuickWidgets_FOUND)
     set(KBANKING_FOUND ON)
   else()
     if(NOT KBANKING_FOUND STREQUAL "AUTO")

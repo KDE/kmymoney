@@ -1,6 +1,6 @@
 /*
  * A gwenhywfar gui for aqbanking using KDE widgets
- * Copyright 2014  Christian David <christian-david@web.de>
+ * Copyright 2014 - 2016 Christian David <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -27,14 +27,12 @@
 #include <QtCore/QRegExp>
 
 #include <QDebug>
-#include <QEventLoop>
 #include <QPointer>
-#include <KUrl>
 
 #include "widgets/chiptandialog.h"
 
 gwenKdeGui::gwenKdeGui()
-    : QT4_Gui()
+    : QT5_Gui()
 {
 
 }
@@ -58,6 +56,7 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
     QString hhdCode = captured.at(2);
     infoText = captured.at(1) + captured.at(3);
 
+    //! @todo: Memory leak?
     QPointer<chipTanDialog> dialog = new chipTanDialog(getParentWidget());
     dialog->setInfoText(infoText);
     dialog->setHhdCode(hhdCode);
@@ -80,5 +79,5 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
     return GWEN_ERROR_INTERNAL;
   }
 
-  return QT4_Gui::getPassword(flags, token, title, text, buffer, minLen, maxLen, guiid);
+  return QT5_Gui::getPassword(flags, token, title, text, buffer, minLen, maxLen, guiid);
 }

@@ -26,7 +26,7 @@ set(kmm_kbanking_PART_SRCS
 
 kconfig_add_kcfg_files(kmm_kbanking_PART_SRCS kbankingsettings.kcfgc)
 
-add_library(kmm_kbanking ${kmm_kbanking_PART_SRCS})
+add_library(kmm_kbanking MODULE ${kmm_kbanking_PART_SRCS})
 
 kcoreaddons_desktop_to_json(kmm_kbanking kmm_kbanking.desktop)
 
@@ -37,18 +37,32 @@ target_link_libraries(kmm_kbanking
                       kmm_mymoney
                       kmm_widgets
                       kmm_plugin
+                      payeeidentifier_nationalAccount
                       KF5::ConfigCore
                       KF5::KDELibs4Support
-                      payeeidentifier_nationalAccount
-                      ${GWENHYWFAR_LIBRARIES}
-                      ${AQBANKING_LIBRARIES}
+                      Qt5::Core
+                      Qt5::Widgets
                       Alkimia::alkimia
+                      gwenhywfar::core
+                      gwenhywfar::gui-cpp
+                      gwenhywfar::gui-qt5
+                      aqbanking::aqbanking
 )
+# C++11 features:
+# intitializer list
 
+# Add new menu entries if debugging is enabled
+set(KMM_BANKING_DEBUG_OPTIONS)
+# preprocessor definitions in case this is a debug build
+string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
+if(${CMAKE_BUILD_TYPE_TOLOWER} MATCHES "^debug(full)?$")
+  file(READ kmm_kbanking_debug.rc KMM_BANKING_DEBUG_OPTIONS)
+endif()
+configure_file(kmm_kbanking.rc "${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.rc" @ONLY)
 
 ########### install files ###############
 
-install(FILES kmm_kbanking.rc
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.rc
         DESTINATION  ${KXMLGUI_INSTALL_DIR}/kmm_kbanking)
 
 install(TARGETS kmm_kbanking

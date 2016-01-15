@@ -2,6 +2,7 @@
  *   Copyright 2004  Martin Preuss aquamaniac@users.sourceforge.net        *
  *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
  *   Copyright 2010  Thomas Baumgart ipwizard@users.sourceforge.net        *
+ *   Copyright 2016  Christian David christian-david@web.de                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -26,33 +27,20 @@
 #include <config-kmymoney.h>
 #endif
 
-#include <aqbanking/version.h>
-#include <aqbanking/banking.h>
-#include <QSet>
-#include "banking.hpp"
-
-#ifndef AQB_MAKE_VERSION
-#define AQB_MAKE_VERSION(a,b,c,d) (((a)<<24) | ((b)<<16) | (c<<8) | (d))
-#endif
-
-#ifndef AQBANKING_VERSION
-#define AQBANKING_VERSION AQB_MAKE_VERSION(AQBANKING_VERSION_MAJOR,AQBANKING_VERSION_MINOR,AQBANKING_VERSION_PATCHLEVEL,AQBANKING_VERSION_BUILD)
-#endif
-
-#ifndef AQB_IS_VERSION
-#define AQB_IS_VERSION(a,b,c,d) (AQBANKING_VERSION >= AQB_MAKE_VERSION(a,b,c,d))
-#endif
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QSet>
+
 // ----------------------------------------------------------------------------
-// KDE Includes
+// KDE & Library Includes
 
 class KAction;
 class QBanking;
 class KMyMoneyBanking;
 class KBAccountSettings;
+
+#include <aqbanking/banking.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -66,6 +54,8 @@ class KBAccountSettings;
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 #include "onlinetasks/national/tasks/germanonlinetransfer.h"
 
+#include "banking.hpp"
+
 /**
   * This class represents the KBanking plugin towards KMymoney.
   * All GUI related issues are handled in this object.
@@ -75,6 +65,8 @@ class KBankingPlugin : public KMyMoneyPlugin::OnlinePluginExtended
   friend class KMyMoneyBanking;
 
   Q_OBJECT
+  Q_INTERFACES(KMyMoneyPlugin::OnlinePluginExtended)
+
 public:
   KBankingPlugin(QObject *parent, const QVariantList&);
   virtual ~KBankingPlugin();

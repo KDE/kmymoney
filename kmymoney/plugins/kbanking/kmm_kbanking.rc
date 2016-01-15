@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui name="kmymoneyplugin-kbanking" version="3">
+<kpartgui name="kmymoneyplugin-kbanking" version="4">
   <MenuBar>
     <Menu name="file">
       <Menu name="import" append="merge_import">
@@ -10,5 +10,6 @@
     <Menu name="settings">
       <Action name="settings_aqbanking" append="configure_merge"/>
     </Menu>
+@KMM_BANKING_DEBUG_OPTIONS@
   </MenuBar>
 </kpartgui>
