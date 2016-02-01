@@ -138,6 +138,7 @@ private:
       MyMoneyTransaction & importedTransaction,
       const MyMoneySplit & importedSplit,
       const TransactionMatchFinder::MatchResult & matchResult);
+
   void handleMatchingOfScheduledTransaction(TransactionMatcher & matcher,
       MyMoneySchedule matchedSchedule,
       MyMoneySplit matchedSplit,
@@ -150,7 +151,7 @@ private:
    * @param importedSplit the split of the imported transaction which matches the split of the schedule
    * @return true, if user confirmed to enter the schedule to match it with imported transaction; false otherwise
    */
-  bool askUserToEnterScheduleForMatching(const MyMoneySchedule& matchedSchedule, const MyMoneySplit& importedSplit) const;
+  bool askUserToEnterScheduleForMatching(const MyMoneySchedule& matchedSchedule, const MyMoneySplit& importedSplit, const MyMoneyTransaction & importedTransaction) const;
 };
 
 #endif

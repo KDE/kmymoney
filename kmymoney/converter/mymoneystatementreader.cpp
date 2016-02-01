@@ -1331,7 +1331,7 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
         //throw MYMONEYEXCEPTION("USERABORT");
         done = true;
       else
-        KMessageBox::error(0, QString("<qt>%1</qt>").arg(i18n("You must select an account, create a new one, or press the <b>Abort</b> button.")));
+        KMessageBox::error(0, QLatin1String("<html>") + i18n("You must select an account, create a new one, or press the <b>Abort</b> button.") + QLatin1String("</html>"));
     }
   }
   delete accountSelect;
@@ -1382,7 +1382,7 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
 {
   QPointer<TransactionEditor> editor;
 
-  if (askUserToEnterScheduleForMatching(matchedSchedule, importedSplit)) {
+  if (askUserToEnterScheduleForMatching(matchedSchedule, importedSplit, importedTransaction)) {
     KEnterScheduleDlg dlg(0, matchedSchedule);
     editor = dlg.startEdit();
     if (editor) {
@@ -1451,7 +1451,7 @@ void MyMoneyStatementReader::addTransaction(MyMoneyTransaction& transaction)
   d->transactionsAdded++;
 }
 
-bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySchedule& matchedSchedule, const MyMoneySplit& importedSplit) const
+bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySchedule& matchedSchedule, const MyMoneySplit& importedSplit, const MyMoneyTransaction & importedTransaction) const
 {
   QString scheduleName = matchedSchedule.name();
   int currencyDenom = m_account.fraction(MyMoneyFile::instance()->currency(m_account.currencyId()));
@@ -1461,9 +1461,25 @@ bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySche
   QString questionMsg = i18n("KMyMoney has found a scheduled transaction which matches an imported transaction.<br/>"
                              "Schedule name: <b>%1</b><br/>"
                              "Transaction: <i>%2 %3</i><br/>"
-                             "Do you want KMyMoney to enter this schedule now so that the transaction can be matched? ",
+                             "Do you want KMyMoney to enter this schedule now so that the transaction can be matched?",
                              scheduleName, splitValue, payeeName);
-  int userAnswer = KMessageBox::questionYesNo(0, QString("<qt>%1</qt>").arg(questionMsg), i18n("Schedule found"));
+
+  // check that dates are within user's setting
+  const int gap = abs(matchedSchedule.transaction().postDate().toJulianDay() - importedTransaction.postDate().toJulianDay());
+  if (gap > KMyMoneyGlobalSettings::matchInterval())
+    questionMsg = i18np("KMyMoney has found a scheduled transaction which matches an imported transaction.<br/>"
+                        "Schedule name: <b>%2</b><br/>"
+                        "Transaction: <i>%3 %4</i><br/>"
+                        "The transaction dates are one day apart.<br/>"
+                        "Do you want KMyMoney to enter this schedule now so that the transaction can be matched?",
+                        "KMyMoney has found a scheduled transaction which matches an imported transaction.<br/>"
+                        "Schedule name: <b>%2</b><br/>"
+                        "Transaction: <i>%3 %4</i><br/>"
+                        "The transaction dates are %1 days apart.<br/>"
+                        "Do you want KMyMoney to enter this schedule now so that the transaction can be matched?",
+                        gap ,scheduleName, splitValue, payeeName);
+
+  const int userAnswer = KMessageBox::questionYesNo(0, QLatin1String("<html>") + questionMsg + QLatin1String("</html>"), i18n("Schedule found"));
 
   return (userAnswer == KMessageBox::Yes);
 }

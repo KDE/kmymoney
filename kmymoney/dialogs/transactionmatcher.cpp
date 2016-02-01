@@ -76,16 +76,6 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
     throw MYMONEYEXCEPTION(i18n("Splits for %1 have conflicting values (%2,%3)", m_account.name(), MyMoneyUtils::formatMoney(sm.shares(), m_account, sec), MyMoneyUtils::formatMoney(si.shares(), m_account, sec)));
   }
 
-  // check that dates are within user's setting
-  const int gap = abs(tm.postDate().toJulianDay() - ti.postDate().toJulianDay());
-  if (gap > KMyMoneyGlobalSettings::matchInterval()) {
-    int rc = KMessageBox::questionYesNo(0, i18np("The transaction dates are one day apart. Do you want to match them anyway?",
-                                        "The transaction dates are %1 days apart. Do you want to match them anyway?", gap));
-    if (rc == KMessageBox::No) {
-      return;
-    }
-  }
-
   // ipwizard: I took over the code to keep the bank id found in the endMatchTransaction
   // This might not work for QIF imports as they don't setup this information. It sure
   // makes sense for OFX and HBCI.
