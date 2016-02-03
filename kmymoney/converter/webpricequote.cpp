@@ -26,6 +26,9 @@
 #include <QTextCodec>
 #include <QByteArray>
 #include <QLoggingCategory>
+#include <QFileInfo>
+#include <QString>
+#include <QTemporaryFile>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -93,7 +96,6 @@ bool WebPriceQuote::launch(const QString& _symbol, const QString& _id, const QSt
 
 bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, const QString& _sourcename)
 {
-  bool result = true;
   d->m_symbol = _symbol;
   d->m_id = _id;
 
@@ -135,42 +137,60 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
     d->m_filter.setOutputChannelMode(KProcess::MergedChannels);
     d->m_filter.start();
 
-    if (d->m_filter.waitForStarted()) {
-      result = true;
-    } else {
+    if (!d->m_filter.waitForStarted()) {
       emit error(i18n("Unable to launch: %1", url.toLocalFile()));
       slotParseQuote(QString());
     }
   } else {
+    //silent download
     emit status(i18n("Fetching URL %1...", url.toDisplayString()));
-
     QString tmpFile;
-    if (KIO::NetAccess::download(url, tmpFile, 0)) {
-      qCDebug(WEBPRICEQUOTE) << "Downloaded" << tmpFile << "from" << url;
-      QFile f(tmpFile);
-      if (f.open(QIODevice::ReadOnly)) {
-        result = true;
-        // Find out the page encoding and convert it to unicode
-        QByteArray page = f.readAll();
-        KEncodingProber prober(KEncodingProber::Universal);
-        prober.feed(page);
-        QTextCodec* codec = QTextCodec::codecForName(prober.encoding());
-        if (!codec)
-          codec = QTextCodec::codecForLocale();
-        QString quote = codec->toUnicode(page);
-        f.close();
-        slotParseQuote(quote);
-      } else {
-        emit error(i18n("Failed to open downloaded file"));
-        slotParseQuote(QString());
-      }
-      KIO::NetAccess::removeTempFile(tmpFile);
-    } else {
-      emit error(KIO::NetAccess::lastErrorString());
-      slotParseQuote(QString());
+    {
+      QTemporaryFile tmpFileFile;
+      tmpFileFile.setAutoRemove(false);
+      if (tmpFileFile.open())
+          qDebug() << "created tmpfile";
+
+      tmpFile = tmpFileFile.fileName();
     }
+    QFile::remove(tmpFile);
+    const QUrl dest = QUrl::fromLocalFile(tmpFile);
+    KIO::Scheduler::checkSlaveOnHold(true);
+    KIO::Job *job = KIO::file_copy(url, dest, -1, KIO::HideProgressInfo);
+    connect(job, SIGNAL(result(KJob*)),
+            this, SLOT(downloadResult(KJob*)));
   }
-  return result;
+  return true;
+}
+
+void WebPriceQuote::downloadResult(KJob* job)
+{
+  QString tmpFile = dynamic_cast<KIO::FileCopyJob*>(job)->destUrl().toLocalFile();
+  QUrl url = dynamic_cast<KIO::FileCopyJob*>(job)->srcUrl();
+  if (!job->error())
+  {
+    qDebug() << "Downloaded" << tmpFile << "from" << url;
+    QFile f(tmpFile);
+    if (f.open(QIODevice::ReadOnly)) {
+    // Find out the page encoding and convert it to unicode
+    QByteArray page = f.readAll();
+    KEncodingProber prober(KEncodingProber::Universal);
+    prober.feed(page);
+    QTextCodec* codec = QTextCodec::codecForName(prober.encoding());
+    if (!codec)
+        codec = QTextCodec::codecForLocale();
+    QString quote = codec->toUnicode(page);
+    f.close();
+    slotParseQuote(quote);
+    } else {
+    emit error(i18n("Failed to open downloaded file"));
+    slotParseQuote(QString());
+    }
+    QFile::remove(tmpFile);
+  } else {
+    emit error(job->errorString());
+    slotParseQuote(QString());
+  }
 }
 
 bool WebPriceQuote::launchFinanceQuote(const QString& _symbol, const QString& _id,

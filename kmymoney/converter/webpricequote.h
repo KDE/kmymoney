@@ -37,7 +37,7 @@
 // Project Headers
 
 #include "mymoneymoney.h"
-
+class KJob;
 /**
 Helper class to attend the process which is running the script, in the case
 of a local script being used to fetch the quote.
@@ -172,6 +172,7 @@ signals:
 
 protected slots:
   void slotParseQuote(const QString&);
+  void downloadResult(KJob* job);
 
 protected:
   static const QMap<QString, WebPriceQuoteSource> defaultQuoteSources();
