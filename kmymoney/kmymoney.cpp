@@ -1851,7 +1851,7 @@ bool KMyMoneyApp::slotFileSaveAs()
         newName.append(".kmy");
       }
 
-      if (okToWriteFile(newName)) {
+      if (okToWriteFile(QUrl::fromUserInput(newName))) {
         //KRecentFilesAction *p = dynamic_cast<KRecentFilesAction*>(action("file_open_recent"));
         //if(p)
         d->m_recentFiles->addUrl(QUrl::fromUserInput(newName));
@@ -1860,10 +1860,10 @@ bool KMyMoneyApp::slotFileSaveAs()
         // If this is the anonymous file export, just save it, don't actually take the
         // name, or remember it! Don't even try to encrypt it
         if (newName.right(9).toLower() == ".anon.xml") {
-          rc = d->m_myMoneyView->saveFile(newName);
+          rc = d->m_myMoneyView->saveFile(QUrl::fromUserInput(newName));
         } else {
 
-          d->m_fileName = newName;
+          d->m_fileName = QUrl::fromUserInput(newName);
           QString encryptionKeys;
           QRegExp keyExp(".* \\((.*)\\)");
           if (keyExp.indexIn(selectedKeyName) != -1) {
@@ -1874,7 +1874,7 @@ bool KMyMoneyApp::slotFileSaveAs()
               encryptionKeys += ',';
             encryptionKeys += d->m_additionalGpgKeys.join(",");
           }
-          rc = d->m_myMoneyView->saveFile(newName, encryptionKeys);
+          rc = d->m_myMoneyView->saveFile(d->m_fileName, encryptionKeys);
           //write the directory used for this file as the default one for next time.
           writeLastUsedDir(newName);
           writeLastUsedFile(newName);
