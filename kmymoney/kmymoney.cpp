@@ -1841,7 +1841,7 @@ bool KMyMoneyApp::slotFileSaveAs()
         QString strExt, strTemp;
         strTemp = newName.left(nLoc + 1);
         strExt = newName.right(newName.length() - (nLoc + 1));
-        if ((strExt.indexOf("kmy", 0, Qt::CaseInsensitive) == -1) && (strExt.indexOf("xml", 0, Qt::CaseInsensitive) == -1)) {
+        if (!strExt.contains("kmy", Qt::CaseInsensitive) && !strExt.contains("xml", Qt::CaseInsensitive)) {
 
           strTemp.append("kmy");
           //append to make complete file name

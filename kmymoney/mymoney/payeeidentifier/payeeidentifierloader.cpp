@@ -52,7 +52,7 @@ void payeeIdentifierLoader::addPayeeIdentifier(payeeIdentifierData* const identi
 payeeIdentifier payeeIdentifierLoader::createPayeeIdentifier(const QString& payeeIdentifierId)
 {
   const payeeIdentifierData* ident = m_identifiers.value(payeeIdentifierId);
-  if (ident != 0) {
+  if (ident != nullptr) {
     return payeeIdentifier(ident->clone());
   }
 
@@ -65,7 +65,7 @@ payeeIdentifier payeeIdentifierLoader::createPayeeIdentifierFromXML(const QDomEl
   const payeeIdentifierData* identData = m_identifiers.value(payeeIdentifierId);
   payeeIdentifier ident;
 
-  if (identData != 0) {
+  if (identData != nullptr) {
     payeeIdentifierData* newIdent = identData->createFromXml(element);
     ident = payeeIdentifier(newIdent);
   } else {
@@ -80,12 +80,12 @@ payeeIdentifier payeeIdentifierLoader::createPayeeIdentifierFromSqlDatabase(QSql
 {
   const payeeIdentifierData* identData = m_identifiers.value(identifierType);
 
-  if (identData != 0) {
+  if (identData != nullptr) {
     payeeIdentifierData* data = identData->createFromSqlDatabase(db, identifierId);
     return payeeIdentifier(identifierId, data);
   }
 
-  return payeeIdentifier(identifierId, 0);
+  return payeeIdentifier(identifierId, nullptr);
 }
 
 /**
@@ -98,18 +98,18 @@ QAbstractItemDelegate* payeeIdentifierLoader::createItemDelegate(const QString& 
   if (!offers.isEmpty()) {
     QString error;
     QAbstractItemDelegate* ptr = offers.at(0)->createInstance<QAbstractItemDelegate>(parent, QVariantList(), &error);
-    if (ptr == 0) {
+    if (ptr == nullptr) {
       qWarning() << "could not load delegate" << error << payeeIdentifierId;
     }
     return ptr;
   }
-  return 0;
+  return nullptr;
 }
 
 bool payeeIdentifierLoader::hasItemEditDelegate(const QString& payeeIdentifierId)
 {
   QAbstractItemDelegate* delegate = createItemDelegate(payeeIdentifierId);
-  const bool ret = (delegate != 0);
+  const bool ret = (delegate != nullptr);
   delete delegate;
   return ret;
 }

@@ -1122,7 +1122,7 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
 {
   QSaveFile qfile(localFile);
   QIODevice *dev = &qfile;
-  KFilterBase *base = 0;
+  KFilterBase *base = nullptr;
   QIODevice *statusDevice = dev;
 
   bool encryptedOk = true;
@@ -1165,7 +1165,7 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
   MyMoneyFileTransaction ft;
   MyMoneyFile::instance()->deletePair("kmm-encryption-key");
   if (!keyList.isEmpty() && encryptedOk == true && !plaintext) {
-    base++;
+    ++base;
     KGPGFile *kgpg = new KGPGFile(localFile);
     if (kgpg) {
       QStringList keys = keyList.split(',', QString::SkipEmptyParts);
@@ -1226,8 +1226,9 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
       throw MYMONEYEXCEPTION(i18n("Failure while writing to '%1'", localFile));
     }
     delete dev;
-  } else
+  } else {
     qfile.commit();
+  }
 }
 
 bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)

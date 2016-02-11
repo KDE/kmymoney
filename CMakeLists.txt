@@ -70,7 +70,7 @@ add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 add_definitions(-std=c++11) # TODO make system independent, easily done with cmake 3
 # Used so far:
-# PRIVATE: decltype
+# PRIVATE: decltype, nullptr
 
 string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
 if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
