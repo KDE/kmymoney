@@ -37,7 +37,7 @@ var currentIntervalStarted = true
 function timerStarted( data, parentItem )
 {
   // Startcode
-  transmitCode = [ 0xF, 0x0, 0xF, 0xF ]
+  transmitCode = [ 0x0, 0xF, 0xF ]
 
   // Set Code (half-bytes are switched)
   for (var i = 0; i < data.length; i+=2) {
@@ -57,14 +57,14 @@ function timerTriggered( parentItem )
       return
   }
 
-  ++currentIndex
-  currentIntervalStarted = true
-  if (currentIndex >= transmitCode.length)
-      currentIndex = 0
-
   parentItem.children[0].bitState = true
   parentItem.children[1].bitState = transmitCode[currentIndex] & 1
   parentItem.children[2].bitState = transmitCode[currentIndex] & 2
   parentItem.children[3].bitState = transmitCode[currentIndex] & 4
   parentItem.children[4].bitState = transmitCode[currentIndex] & 8
+
+  ++currentIndex
+  currentIntervalStarted = true
+  if (currentIndex >= transmitCode.length)
+      currentIndex = 0
 }
