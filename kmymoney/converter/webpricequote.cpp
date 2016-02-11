@@ -119,13 +119,15 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
     // characters are: 0-9, A-Z and the dot.  anything else is a separator
     QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
     // if we've truly found 2 symbols delimited this way...
-    if (splitrx.indexIn(d->m_symbol) != -1)
+    if (splitrx.indexIn(d->m_symbol) != -1) {
       url = QUrl(d->m_source.m_url.arg(splitrx.cap(1), splitrx.cap(2)));
-    else
+    } else {
       qCDebug(WEBPRICEQUOTE) << "WebPriceQuote::launch() did not find 2 symbols";
-  } else
+    }
+  } else {
     // a regular one-symbol quote
     url = QUrl(d->m_source.m_url.arg(d->m_symbol));
+  }
 
   if (url.isLocalFile()) {
     emit status(i18nc("The process x is executing", "Executing %1...", url.toLocalFile()));
@@ -172,19 +174,19 @@ void WebPriceQuote::downloadResult(KJob* job)
     qDebug() << "Downloaded" << tmpFile << "from" << url;
     QFile f(tmpFile);
     if (f.open(QIODevice::ReadOnly)) {
-    // Find out the page encoding and convert it to unicode
-    QByteArray page = f.readAll();
-    KEncodingProber prober(KEncodingProber::Universal);
-    prober.feed(page);
-    QTextCodec* codec = QTextCodec::codecForName(prober.encoding());
-    if (!codec)
-        codec = QTextCodec::codecForLocale();
-    QString quote = codec->toUnicode(page);
-    f.close();
-    slotParseQuote(quote);
+      // Find out the page encoding and convert it to unicode
+      QByteArray page = f.readAll();
+      KEncodingProber prober(KEncodingProber::Universal);
+      prober.feed(page);
+      QTextCodec* codec = QTextCodec::codecForName(prober.encoding());
+      if (!codec)
+          codec = QTextCodec::codecForLocale();
+      QString quote = codec->toUnicode(page);
+      f.close();
+      slotParseQuote(quote);
     } else {
-    emit error(i18n("Failed to open downloaded file"));
-    slotParseQuote(QString());
+      emit error(i18n("Failed to open downloaded file"));
+      slotParseQuote(QString());
     }
     QFile::remove(tmpFile);
   } else {
@@ -238,9 +240,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
 
   if (! quotedata.isEmpty()) {
     if (!d->m_source.m_skipStripping) {
-      //
       // First, remove extranous non-data elements
-      //
 
       // HTML tags
       quotedata.remove(QRegExp("<[^>]*>"));
