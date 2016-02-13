@@ -93,7 +93,7 @@ void WbMapAccountDialog::newPage(int id)
     case BACKENDS_PAGE: {
         backendsList->clear();
 
-        d2->progress->setWindowTitle(i18n("Load Weboob backend..."));
+        d2->progress->setWindowTitle(i18n("Loading Weboob backend..."));
         d2->progress->setLabelText(i18n("Getting list of backends."));
 
         kapp->processEvents();
@@ -106,7 +106,7 @@ void WbMapAccountDialog::newPage(int id)
     case ACCOUNTS_PAGE: {
         accountsList->clear();
         d2->progress->setWindowTitle(i18n("Connecting to bank..."));
-        d2->progress->setLabelText(i18n("Getting list of accounts list from your bank."));
+        d2->progress->setLabelText(i18n("Getting list of accounts from your bank."));
 
         kapp->processEvents();
 
