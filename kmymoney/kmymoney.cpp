@@ -2178,7 +2178,7 @@ void KMyMoneyApp::slotSaveAccountTemplates()
   KMSTATUS(i18n("Exporting account templates."));
 
   QString newName = QFileDialog::getSaveFileName(this, i18n("Save as..."), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
-                    i18n("*.kmt|KMyMoney template files\n*|All files"));
+                    i18n("KMyMoney template files (*.kmt);;All files (*)"));
   //
   // If there is no file extension, then append a .kmt at the end of the file name.
   // If there is a file extension, make sure it is .kmt, delete any others.
@@ -2317,7 +2317,7 @@ void KMyMoneyApp::slotGncImport()
 
   KMSTATUS(i18n("Importing a GnuCash file."));
 
-  QUrl fileToRead = QFileDialog::getOpenFileUrl(this, QString(), QUrl("kfiledialog:///kmymoney-import"), i18n("GnuCash file (*)"));
+  QUrl fileToRead = QFileDialog::getOpenFileUrl(this, QString(), QUrl("kfiledialog:///kmymoney-import"), i18n("GnuCash files (*.gnucash *.xac *.gnc);;All files (*)"));
 
   if (!fileToRead.isEmpty()) {
     // call the importer
