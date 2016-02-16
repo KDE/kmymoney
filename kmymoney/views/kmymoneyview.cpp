@@ -19,6 +19,11 @@
 #include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
+// Std Includes
+
+#include <memory>
+
+// ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QLabel>
@@ -1241,16 +1246,17 @@ bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
   }
 
   emit kmmFilePlugin(preSave);
-  IMyMoneyStorageFormat* pWriter = 0;
+  std::unique_ptr<IMyMoneyStorageFormat> storageWriter;
 
   // If this file ends in ".ANON.XML" then this should be written using the
   // anonymous writer.
   bool plaintext = filename.right(4).toLower() == ".xml";
   if (filename.right(9).toLower() == ".anon.xml") {
-    pWriter = new MyMoneyStorageANON;
+    //! @todo C++14: use std::make_unique, also some lines below
+    storageWriter = std::unique_ptr<IMyMoneyStorageFormat>(new MyMoneyStorageANON);
   } else {
     // only use XML writer. The binary format will be deprecated after 0.8
-    pWriter = new MyMoneyStorageXML;
+    storageWriter = std::unique_ptr<IMyMoneyStorageFormat>(new MyMoneyStorageXML);
   }
 
   // actually, url should be the parameter to this function
@@ -1268,14 +1274,14 @@ bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
         if (nbak) {
           KBackup::numberedBackupFile(filename, QString(), QString::fromLatin1("~"), nbak);
         }
-        saveToLocalFile(filename, pWriter, plaintext, keyList);
+        saveToLocalFile(filename, storageWriter.get(), plaintext, keyList);
       } catch (const MyMoneyException &) {
         throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
       }
     } else {
       QTemporaryFile tmpfile;
       tmpfile.open(); // to obtain the name
-      saveToLocalFile(tmpfile.fileName(), pWriter, plaintext, keyList);
+      saveToLocalFile(tmpfile.fileName(), storageWriter.get(), plaintext, keyList);
       if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))
         throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.toDisplayString()));
       tmpfile.close();
@@ -1286,7 +1292,6 @@ bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
     MyMoneyFile::instance()->setDirty();
     rc = false;
   }
-  delete pWriter;
   emit kmmFilePlugin(postSave);
   return rc;
 }
