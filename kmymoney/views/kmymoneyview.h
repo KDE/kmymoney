@@ -156,13 +156,9 @@ private:
   KPageWidgetItem* m_onlineJobOutboxViewFrame;
 
   KMyMoneyTitleLabel* m_header;
-
   bool m_inConstructor;
-
   bool m_fileOpen;
-
-  int  m_fmode;
-
+  mode_t m_fmode;
   int m_lastViewSelected;
 
   // Keep a note of the file type

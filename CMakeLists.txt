@@ -56,8 +56,8 @@ find_package(KChart 2.6.0 REQUIRED)
 add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-std=c++11) # TODO make system independent, easily done with cmake 3
 # Used so far:
-# PUBLIC: nullptr
-# PRIVATE: decltype
+# PUBLIC: cxx_nullptr
+# PRIVATE: cxx_decltype, cxx_lambdas, cxx_constexpr, cxx_range_for
 
 string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
 if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
