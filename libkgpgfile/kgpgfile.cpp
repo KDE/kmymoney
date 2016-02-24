@@ -154,7 +154,7 @@ bool KGPGFile::open(OpenMode mode)
   if (isWritable()) {
 
     // qDebug("check recipient count");
-    if (d->m_recipients.size() == 0) {
+    if (d->m_recipients.empty()) {
       setOpenMode(NotOpen);
       return false;
     }
@@ -408,11 +408,11 @@ bool KGPGFile::open(OpenMode mode)
   return false;
 }
 
-void KGPGFile::close(void)
+void KGPGFile::close()
 {
 }
 
-void KGPGFile::flush(void)
+void KGPGFile::flush()
 {
 }
 
@@ -464,7 +464,7 @@ void KGPGFile::publicKeyList(QStringList& list)
 QDateTime KGPGFile::keyExpires(const QString& name)
 {
   Q_UNUSED(name);
-	return QDateTime();
+  return QDateTime();
 }
 
 #endif

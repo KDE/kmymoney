@@ -33,9 +33,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyaccount.h>
-#include <mymoneyobject.h>
-#include <register.h>
+#include "mymoneyaccount.h"
+#include "mymoneyobject.h"
+#include "register.h"
 
 namespace KMyMoneyTransactionForm
 {

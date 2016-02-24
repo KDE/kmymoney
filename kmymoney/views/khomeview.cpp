@@ -606,7 +606,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
           tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathSkip) + linkend();
 
         tmp += QString("&nbsp;");
-        tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=edit").arg(sched.id()), i18n("Edit schedule")) + sched.name() + linkend();
+        tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=edit").arg(sched.id()), i18n("Edit schedule")) + sched.name() + linkend();
 
         //show quantity of payments overdue if any
         if (cnt > 1)
@@ -1160,7 +1160,7 @@ void KHomeView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&, co
   QString mode = query.queryItemValue("mode");
 
   if (protocol == "http") {
-    QDesktopServices::openUrl(url.toDisplayString());
+    QDesktopServices::openUrl(url);
   } else if (protocol == "mailto") {
     QDesktopServices::openUrl(url);
   } else {

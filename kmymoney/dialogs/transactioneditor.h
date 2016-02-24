@@ -34,8 +34,8 @@
 // Project Includes
 
 #include "mymoneyschedule.h"
-#include <transactioneditorcontainer.h>
-#include <register.h>
+#include "transactioneditorcontainer.h"
+#include "register.h"
 
 class KMyMoneyCategory;
 

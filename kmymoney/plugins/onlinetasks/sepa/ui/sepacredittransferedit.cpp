@@ -49,7 +49,7 @@ public:
 protected:
   virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex &index) const {
     static QPointer<QAbstractItemDelegate> defaultDelegate;
-    static QPointer<QAbstractItemDelegate> ibanBicDelegate ;
+    static QPointer<QAbstractItemDelegate> ibanBicDelegate;
 
     const bool ibanBicRequested = index.model()->data(index, payeeIdentifierModel::isPayeeIdentifier).toBool();
 

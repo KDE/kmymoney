@@ -2,3 +2,4 @@ REVIEWBOARD_URL = "https://git.reviewboard.kde.org"
 TARGET_GROUPS = "kmymoney"
 GUESS_FIELDS = True
 REPOSITORY = "kmymoney"
+BRANCH = "frameworks"

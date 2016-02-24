@@ -3032,7 +3032,8 @@ bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const
 
 QString MyMoneyFile::highestCheckNo(const QString& accId) const
 {
-  unsigned64 lno = 0, cno;
+  unsigned64 lno = 0;
+  unsigned64 cno;
   QString no;
   MyMoneyTransactionFilter filter;
   filter.addAccount(accId);

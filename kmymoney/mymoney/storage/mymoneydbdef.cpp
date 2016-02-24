@@ -67,10 +67,9 @@ MyMoneyDbDef::MyMoneyDbDef()
    ?ISKEY - where there is no primary key, these fields can be used to uniquely identify a record
   Default is that a field is not a part of a primary key, nullable, and if numeric, signed */
 
-#define PRIMARYKEY true
-#define NOTNULL true
-#define UNSIGNED false
-//#define ISKEY true
+static const bool PRIMARYKEY = true; //!< @todo KF5: Replace const by constexpr
+static const bool NOTNULL = true;
+static const bool UNSIGNED = false;
 
 #define appendField(a) fields.append(QExplicitlySharedDataPointer<MyMoneyDbColumn>(new a))
 void MyMoneyDbDef::FileInfo()

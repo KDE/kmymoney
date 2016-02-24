@@ -37,7 +37,7 @@ payeeIdentifierDelegate::payeeIdentifierDelegate(QObject* parent)
 
 QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelIndex& index) const
 {
-  static QPointer<QAbstractItemDelegate> defaultDelegate = 0;
+  static QPointer<QAbstractItemDelegate> defaultDelegate;
   const QString type = (index.isValid()) ? index.model()->data(index, payeeIdentifierContainerModel::payeeIdentifierType).toString() : QString();
 
   if (type.isEmpty()) {
@@ -55,6 +55,7 @@ QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelInde
     delegate = defaultDelegate;
   }
   connectSignals(delegate, Qt::UniqueConnection);
+  Q_CHECK_PTR(delegate);
   return delegate;
 }
 

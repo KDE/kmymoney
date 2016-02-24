@@ -24,7 +24,6 @@
 #include <QMap>
 #include <QString>
 #include <QTableWidget>
-class QWidget;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -48,6 +47,7 @@ typedef enum {
 class TransactionEditorContainer : public QTableWidget
 {
   Q_OBJECT
+
 public:
   TransactionEditorContainer(QWidget* parent) : QTableWidget(parent) {}
 

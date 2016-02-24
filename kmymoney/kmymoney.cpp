@@ -4650,7 +4650,7 @@ bool KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
 
   if (newnameBase != i18n("New Payee")) {
     // Ask the user if that is what he intended to do?
-    QString msg = QString("<qt>") + i18n("Do you want to add <b>%1</b> as payer/receiver?", newnameBase) + QString("</qt>");
+    QString msg = QLatin1String("<qt>") + i18n("Do you want to add <b>%1</b> as payer/receiver?", newnameBase) + QLatin1String("</qt>");
 
     if (KMessageBox::questionYesNo(this, msg, i18n("New payee/receiver"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "NewPayee") == KMessageBox::No) {
       doit = false;
