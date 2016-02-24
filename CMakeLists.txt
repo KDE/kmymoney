@@ -8,7 +8,9 @@ project(KMyMoney)
 set(CMAKE_AUTOMOC TRUE)
 
 cmake_policy(SET CMP0028 NEW)
-cmake_policy(SET CMP0063 NEW) # Policy introduced in CMake version 3.3
+if (POLICY CMP0063)
+  cmake_policy(SET CMP0063 NEW) # Policy introduced in CMake version 3.3
+endif()
 
 # until the createtarball script generates different custom targets
 # for the various translations, we need to keep the following setting
