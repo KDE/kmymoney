@@ -52,12 +52,14 @@
 kMyMoneyMoneyValidator::kMyMoneyMoneyValidator(QObject * parent) :
     QDoubleValidator(parent)
 {
+  setLocale(QLocale::c());
 }
 
 kMyMoneyMoneyValidator::kMyMoneyMoneyValidator(double bottom, double top, int decimals,
     QObject * parent) :
     QDoubleValidator(bottom, top, decimals, parent)
 {
+  setLocale(QLocale::c());
 }
 
 /*
