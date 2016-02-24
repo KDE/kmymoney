@@ -45,6 +45,7 @@ add_subdirectory( html )
 add_subdirectory( templates )
 add_subdirectory( misc )
 add_subdirectory( payeeidentifier )
+add_subdirectory( icons )
 
 set( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 
@@ -117,35 +118,6 @@ install(FILES x-kmymoney.xml
   DESTINATION ${XDG_MIME_INSTALL_DIR})
 
 #UPDATE_XDG_MIMETYPES(${XDG_MIME_INSTALL_DIR})
-
-include(ECMInstallIcons)
-
-########## Application Icons #############
-install(DIRECTORY icons/hicolor
-  DESTINATION ${DATA_INSTALL_DIR}/kmymoney/icons
-  PATTERN "*Make*" EXCLUDE
-  PATTERN ".svn" EXCLUDE
-  )
-install(DIRECTORY icons/oxygen
-  DESTINATION ${DATA_INSTALL_DIR}/kmymoney/icons
-  PATTERN "*Make*" EXCLUDE
-  PATTERN ".svn" EXCLUDE
-  )
-ecm_install_icons(ICONS
-  hi128-mimetypes-application-x-kmymoney.png
-  hi64-mimetypes-application-x-kmymoney.png
-  hi48-mimetypes-application-x-kmymoney.png
-  hi32-mimetypes-application-x-kmymoney.png
-  hi22-mimetypes-application-x-kmymoney.png
-  hi16-mimetypes-application-x-kmymoney.png
-  hi128-apps-kmymoney.png
-  hi64-apps-kmymoney.png
-  hi48-apps-kmymoney.png
-  hi32-apps-kmymoney.png
-  hi16-apps-kmymoney.png
-  lo32-apps-kmymoney.png
-  lo16-apps-kmymoney.png
-  DESTINATION ${ICON_INSTALL_DIR})
 
 ############## tests ####################
 include(ECMMarkAsTest)
