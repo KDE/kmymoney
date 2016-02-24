@@ -593,17 +593,17 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
       if (!sched.isFinished()) {
         MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
-        QString pathEnter = QPixmapToDataUri(KIconLoader::global()->loadIcon(QString("key-enter"), KIconLoader::Small, KIconLoader::SizeSmall));
-        QString pathSkip = QPixmapToDataUri(KIconLoader::global()->loadIcon(QString("media-seek-forward"), KIconLoader::Small, KIconLoader::SizeSmall));
+        QString pathEnter = QPixmapToDataUri(KIconLoader::global()->loadIcon(QStringLiteral("key-enter"), KIconLoader::Group::Small));
+        QString pathSkip = QPixmapToDataUri(KIconLoader::global()->loadIcon(QStringLiteral("media-seek-forward"), KIconLoader::Group::Small));
 
         //show payment date
         tmp = QString("<td>") +
               KLocale::global()->formatDate(sched.adjustedNextDueDate(), KLocale::ShortDate) +
               "</td><td>";
         if (!pathEnter.isEmpty())
-          tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(QUrl::fromLocalFile(pathEnter).url()) + linkend();
+          tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathEnter) + linkend();
         if (!pathSkip.isEmpty())
-          tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(QUrl::fromLocalFile(pathSkip).url()) + linkend();
+          tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathSkip) + linkend();
 
         tmp += QString("&nbsp;");
         tmp += link(VIEW_SCHEDULE, QString("?id=%1&mode=edit").arg(sched.id()), i18n("Edit schedule")) + sched.name() + linkend();
@@ -1136,19 +1136,19 @@ void KHomeView::showForecast()
   }
 }
 
-const QString KHomeView::link(const QString& view, const QString& query, const QString& _title) const
+QString KHomeView::link(const QString& view, const QString& query, const QString& _title) const
 {
   QString titlePart;
   QString title(_title);
   if (!title.isEmpty())
-    titlePart = QString(" title=\"%1\"").arg(title.replace(QChar(' '), "&nbsp;"));
+    titlePart = QString(" title=\"%1\"").arg(title.replace(QLatin1Char(' '), "&nbsp;"));
 
   return QString("<a href=\"/%1%2\"%3>").arg(view, query, titlePart);
 }
 
-const QString KHomeView::linkend() const
+QString KHomeView::linkend() const
 {
-  return "</a>";
+  return QStringLiteral("</a>");
 }
 
 void KHomeView::slotOpenUrl(const QUrl &url, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)
