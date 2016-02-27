@@ -36,6 +36,10 @@ add_dependencies(kmm_kbanking_widgets kmm_kbanking_settings)
 
 kde4_add_plugin(kmm_kbanking ${kmm_kbanking_PART_SRCS})
 
+# newer version of Gwenhywfar provide the variables GWENHYWFAR_QT4GUI_LDFLAGS
+# and GWENHYWFAR_CORE_LDFLAGS, older ones use GWENHYWFAR_LIBRARIES instead
+# we add both here for some time. At a later point simply remove
+# GWENHYWFAR_LIBRARIES.
 target_link_libraries(kmm_kbanking
                       kmm_kbanking_dialogs
                       kmm_kbanking_widgets
@@ -49,6 +53,8 @@ target_link_libraries(kmm_kbanking
                       ${KDE4_KDEUI_LIBS}
                       ${QT_QTDECLARATIVE_LIBRARY}
                       ${GWENHYWFAR_LIBRARIES}
+                      ${GWENHYWFAR_QT4GUI_LDFLAGS}
+                      ${GWENHYWFAR_CORE_LDFLAGS}
                       ${AQBANKING_LIBRARIES}
                       ${LIBALKIMIA_LIBRARIES}
 )
