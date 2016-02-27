@@ -1151,6 +1151,7 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
 {
   const GWEN_STRINGLIST *sl;
   QString s;
+  QString memo;
   const char *p;
   const AB_VALUE *val;
   const GWEN_TIME *ti;
@@ -1182,6 +1183,11 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
   kt.m_strPayee = s;
 
   // memo
+  // The variable 's' contains the old method of extracting
+  // the memo which added a linefeed after each part received
+  // from AqBanking. The new variable 'memo' does not have
+  // this inserted linefeed. We keep the variable 's' to
+  // construct the hash-value to retrieve the reference
   s.truncate(0);
   sl = AB_Transaction_GetPurpose(t);
   if (sl) {
@@ -1196,13 +1202,14 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
         s += '\n';
       insertLineSep = true;
       s += QString::fromUtf8(p).trimmed();
+      memo += QString::fromUtf8(p).trimmed();
       se = GWEN_StringListEntry_Next(se);
     } // while
 
-    // Sparda / Netbank hack: the software these banks use store
+    // Sparda / Netbank hack: the software these banks use stores
     // parts of the payee name in the beginning of the purpose field
     // in case the payee name exceeds the 27 character limit. This is
-    // the case, when one the strings listed in m_sepaKeywords is part
+    // the case, when one of the strings listed in m_sepaKeywords is part
     // of the purpose fields but does not start at the beginning. In this
     // case, the part leading up to the keyword is to be treated as the
     // tail of the payee. Also, a blank is inserted after the keyword.
@@ -1218,6 +1225,15 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
           s = s.mid(idx);
         }
         s = QString("%1 %2").arg(*itk).arg(s.mid((*itk).length()));
+
+        // now do the same for 'memo' except for updating the payee
+        idx = memo.indexOf(*itk);
+        if (idx >= 0) {
+          if (idx > 0) {
+            memo = memo.mid(idx);
+          }
+        }
+        memo = QString("%1 %2").arg(*itk).arg(memo.mid((*itk).length()));
         break;
       }
     }
@@ -1227,30 +1243,45 @@ void KMyMoneyBanking::_xaToStatement(MyMoneyStatement &ks,
     p = AB_Transaction_GetEndToEndReference(t);
     if (p) {
       s += QString(", EREF: %1").arg(p);
+      if(memo.length())
+        memo.append('\n');
+      memo.append(QString("EREF: %1").arg(p));
     }
     p = AB_Transaction_GetCustomerReference(t);
     if (p) {
       s += QString(", CREF: %1").arg(p);
+      if(memo.length())
+        memo.append('\n');
+      memo.append(QString("CREF: %1").arg(p));
     }
     p = AB_Transaction_GetMandateId(t);
     if (p) {
       s += QString(", MREF: %1").arg(p);
+      if(memo.length())
+        memo.append('\n');
+      memo.append(QString("MREF: %1").arg(p));
     }
     p = AB_Transaction_GetCreditorSchemeId(t);
     if (p) {
       s += QString(", CRED: %1").arg(p);
+      if(memo.length())
+        memo.append('\n');
+      memo.append(QString("CRED: %1").arg(p));
     }
     p = AB_Transaction_GetOriginatorIdentifier(t);
     if (p) {
       s += QString(", DEBT: %1").arg(p);
+      if(memo.length())
+        memo.append('\n');
+      memo.append(QString("DEBT: %1").arg(p));
     }
   }
-  kt.m_strMemo = s;
+  kt.m_strMemo = memo;
 
   // calculate the hash code and start with the payee info
   // and append the memo field
   h = MyMoneyTransaction::hash(kt.m_strPayee.trimmed());
-  h = MyMoneyTransaction::hash(kt.m_strMemo, h);
+  h = MyMoneyTransaction::hash(s, h);
 
   // see, if we need to extract the payee from the memo field
   const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
