@@ -7,7 +7,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/widgets
                     ${CMAKE_CURRENT_BINARY_DIR}/widgets
                     ${GWENHYWFAR_INCLUDE_DIRS}
-                    ${AQBANKING_INCLUDE_DIRS})
+                    ${AQBANKING_INCLUDE_DIRS}
+                    ${gwengui-cpp_INCLUDE_DIRS}
+                    ${gwengui-qt4_INCLUDE_DIRS}
+)
 
 add_subdirectory( dialogs )
 add_subdirectory( widgets )
@@ -53,8 +56,8 @@ target_link_libraries(kmm_kbanking
                       ${KDE4_KDEUI_LIBS}
                       ${QT_QTDECLARATIVE_LIBRARY}
                       ${GWENHYWFAR_LIBRARIES}
-                      ${GWENHYWFAR_QT4GUI_LDFLAGS}
-                      ${GWENHYWFAR_CORE_LDFLAGS}
+                      ${gwengui-qt4_LIBRARIES}
+                      ${gwengui-cpp_LIBRARIES}
                       ${AQBANKING_LIBRARIES}
                       ${LIBALKIMIA_LIBRARIES}
 )
