@@ -128,7 +128,6 @@ void KGPGFile::addRecipient(const QString& recipient)
 
 bool KGPGFile::open(OpenMode mode)
 {
-  // qDebug("KGPGFile::open(%d)", (int)mode);
   if (isOpen()) {
     return false;
   }
@@ -145,7 +144,6 @@ bool KGPGFile::open(OpenMode mode)
 
   setOpenMode(mode);
 
-  // qDebug("check valid access mode");
   if (!(isReadable() || isWritable())) {
     setOpenMode(NotOpen);
     return false;
@@ -153,15 +151,7 @@ bool KGPGFile::open(OpenMode mode)
 
   if (isWritable()) {
 
-    // qDebug("check recipient count");
     if (d->m_recipients.empty()) {
-      setOpenMode(NotOpen);
-      return false;
-    }
-
-    // qDebug("check access rights");
-    QFileInfo file(d->m_fn);
-    if (!file.isWritable()) {
       setOpenMode(NotOpen);
       return false;
     }
@@ -175,7 +165,6 @@ bool KGPGFile::open(OpenMode mode)
   }
 
   // open the 'physical' file
-  // qDebug("open physical file");
   // Since some of the methods in QFile are not virtual, we need to
   // differentiate here between the QFile* and the QSaveFile* case
   if (isReadable()) {
@@ -199,7 +188,6 @@ bool KGPGFile::open(OpenMode mode)
     }
   }
 
-  // qDebug("KGPGFile: file is open");
   return true;
 }
 
@@ -217,11 +205,13 @@ void KGPGFile::close()
     GpgME::Data dcipher(d->m_fileWrite->handle());
     d->m_lastError = d->ctx->encrypt(d->m_recipients, d->m_data, dcipher, GpgME::Context::AlwaysTrust).error();
     if (d->m_lastError.encodedError()) {
-      qDebug("Failure while writing file: '%s'", d->m_lastError.asString());
+      setErrorString(QLatin1String("Failure while writing temporary file for file: '") + QLatin1String(d->m_lastError.asString()) + QLatin1String("'"));
+    } else if (!d->m_fileWrite->commit()) {
+      setErrorString("Failure while commiting file changes.");
     }
   }
 
-  delete d->m_fileWrite; // this will do the actual write to the target file
+  delete d->m_fileWrite;
   delete d->m_fileRead;
   d->m_fileWrite = 0;
   d->m_fileRead = 0;
