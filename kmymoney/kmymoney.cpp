@@ -1469,7 +1469,7 @@ void KMyMoneyApp::slotFileNew()
           (*it_t).importTemplate(&progressCallback);
         }
 
-        d->m_fileName = QUrl(wizard->url());
+        d->m_fileName = wizard->url();
         ft.commit();
         KMyMoneyGlobalSettings::setFirstTimeRun(false);
 

@@ -106,9 +106,9 @@ MyMoneyPayee Wizard::user() const
   return m_generalPage->user();
 }
 
-QString Wizard::url() const
+QUrl Wizard::url() const
 {
-  return m_filePage->m_dataFileEdit->url().path();
+  return m_filePage->m_dataFileEdit->url();
 }
 
 MyMoneyInstitution Wizard::institution() const
@@ -319,10 +319,15 @@ FilePage::FilePage(Wizard* wizard) :
   connect(m_mandatoryGroup, SIGNAL(stateChanged()), object(), SIGNAL(completeStateChanged()));
 
   KUser user;
-  m_dataFileEdit->setUrl(QString("%1/%2.kmy").arg(QDir::homePath(), user.loginName()));
-  // TODO: port KF5
-  //m_dataFileEdit->fileDialog()->setFilter(i18n("*.kmy *.xml|KMyMoney files\n*|All files"));
-  //m_dataFileEdit->fileDialog()->setOperationMode(KFileDialog::Saving);
+  QString folder = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+  if (folder.isEmpty())
+    folder = QDir::homePath();
+  m_dataFileEdit->setStartDir(QUrl::fromLocalFile(folder));
+  m_dataFileEdit->setUrl(QUrl::fromLocalFile(folder + QLatin1Char('/') + user.loginName() + QLatin1String(".kmy")));
+
+  //! FIXME: Currently we cannot prevent the file dialog from selecting existing files (without using deprecated functions)
+  m_dataFileEdit->setFilter(i18n("*.kmy *.xml|KMyMoney files\n*|All files"));
+  //m_dataFileEdit->fileDialog()->setFilter(); ?
   m_dataFileEdit->setMode(KFile::File);
 }
 
@@ -335,16 +340,12 @@ bool FilePage::isComplete() const
     // if a filename is present, check that
     // a) the file does not exist
     // b) the directory does exist
-    rc = !KIO::NetAccess::exists(m_dataFileEdit->url(), KIO::NetAccess::DestinationSide, m_wizard);
-    if (rc) {
-      QRegExp exp("(.*)/(.*)");
-      rc = false;
-      if (exp.indexIn(m_dataFileEdit->url().path()) != -1) {
-        if (exp.cap(2).length() > 0) {
-          rc = KIO::NetAccess::exists(exp.cap(1), KIO::NetAccess::SourceSide, m_wizard);
-        }
-      }
-    }
+    const QUrl fullPath = m_dataFileEdit->url();
+    const QUrl directory = fullPath.adjusted(QUrl::RemoveFilename);
+    rc = fullPath.isValid()
+         && !KIO::NetAccess::exists(fullPath, KIO::NetAccess::DestinationSide, m_wizard)
+         && directory.isValid()
+         && KIO::NetAccess::exists(directory, KIO::NetAccess::SourceSide, m_wizard);
     m_existingFileLabel->setHidden(rc);
     m_finishLabel->setVisible(rc);
   }

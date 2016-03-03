@@ -22,13 +22,13 @@
 // QT Includes
 
 #include <QList>
-class QString;
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <kmymoneywizard.h>
-#include <mymoneysecurity.h>
+#include "kmymoneywizard.h"
+#include "mymoneysecurity.h"
 class MyMoneyPayee;
 class MyMoneyInstitution;
 class MyMoneyAccount;
@@ -77,7 +77,7 @@ public:
   /**
     * Returns the URL that the user has chosen to store the file
     */
-  QString url() const;
+  QUrl url() const;
 
   /**
     * Returns the information about an institution if entered by
