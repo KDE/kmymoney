@@ -469,7 +469,7 @@ KMyMoneyApp::~KMyMoneyApp()
   delete d;
 }
 
-const QUrl KMyMoneyApp::lastOpenedURL()
+QUrl KMyMoneyApp::lastOpenedURL()
 {
   QUrl url = d->m_startDialog ? QUrl() : d->m_fileName;
 
@@ -1631,10 +1631,10 @@ void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
       }
       // if we need to supply a password, then show the dialog
       // otherwise it isn't needed
-      if ((QUrlQuery(newurl).queryItemValue("secure") == "yes") && newurl.password().isEmpty()) {
-        if (dialog->exec() == QDialog::Accepted && dialog != 0)
+      if ((QUrlQuery(newurl).queryItemValue("secure").toLower() == "yes") && newurl.password().isEmpty()) {
+        if (dialog->exec() == QDialog::Accepted && dialog != nullptr) {
           newurl = dialog->selectedURL();
-        else {
+        } else {
           delete dialog;
           return;
         }
@@ -2031,7 +2031,7 @@ void KMyMoneyApp::slotToggleTimers()
   timersOn = toggleAction("debug_timers")->isChecked();
 }
 
-const QString KMyMoneyApp::slotStatusMsg(const QString &text)
+QString KMyMoneyApp::slotStatusMsg(const QString &text)
 {
   ///////////////////////////////////////////////////////////////////
   // change status message permanently
@@ -2478,7 +2478,7 @@ bool KMyMoneyApp::okToWriteFile(const QUrl &url)
   bool reallySaveFile = true;
 
   if (KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this)) {
-    if (KMessageBox::warningYesNo(this, QString("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile)) + QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
+    if (KMessageBox::warningYesNo(this, QLatin1String("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile)) + QLatin1String("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
       reallySaveFile = false;
   }
   return reallySaveFile;
@@ -7185,12 +7185,12 @@ QString KMyMoneyApp::readLastUsedFile() const
   return str;
 }
 
-const QString KMyMoneyApp::filename() const
+QString KMyMoneyApp::filename() const
 {
   return d->m_fileName.url();
 }
 
-const QList<QString> KMyMoneyApp::instanceList() const
+QList<QString> KMyMoneyApp::instanceList() const
 {
   QList<QString> list;
   QDBusReply<QStringList> reply = QDBusConnection::sessionBus().interface()->registeredServiceNames();

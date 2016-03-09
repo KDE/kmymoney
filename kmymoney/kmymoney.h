@@ -524,7 +524,7 @@ public:
     * @return URL of last opened file or empty if the program
     *         should start with the open file dialog
     */
-  const QUrl lastOpenedURL();
+  QUrl lastOpenedURL();
 
   /**
     * construtor of KMyMoneyApp, calls all init functions to create the application.
@@ -564,7 +564,7 @@ public:
     *
     * @retval QStringList of process ids
     */
-  const QList<QString> instanceList() const;
+  QList<QString> instanceList() const;
 
   /**
     * Dump a list of the names of all defined KActions to stdout.
@@ -604,7 +604,7 @@ public:
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
-  const QString filename() const;
+  QString filename() const;
 
   void webConnect(const QString& sourceUrl, const QByteArray& asn_id);
 
@@ -862,7 +862,7 @@ public slots:
     *
     * @param text the text that is displayed in the statusbar
     */
-  const QString slotStatusMsg(const QString &text);
+  QString slotStatusMsg(const QString &text);
 
   /**
     * This method changes the progress bar in the status line according

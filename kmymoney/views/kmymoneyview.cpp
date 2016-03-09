@@ -678,7 +678,7 @@ bool KMyMoneyView::readFile(const QUrl &url)
     m_fileType = KmmDb;
     // get rid of the mode parameter which is now redundant
     QUrl newUrl(url);
-    if (!QUrlQuery(url).queryItemValue("mode").isNull()) {
+    if (QUrlQuery(url).hasQueryItem("mode")) {
       newUrl.removeQueryItem("mode");
     }
     return (openDatabase(newUrl)); // on error, any message will have been displayed
