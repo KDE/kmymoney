@@ -2317,7 +2317,7 @@ void KMyMoneyApp::slotGncImport()
 
   KMSTATUS(i18n("Importing a GnuCash file."));
 
-  QUrl fileToRead = QFileDialog::getOpenFileUrl(this, QString(), QUrl("kfiledialog:///kmymoney-import"), i18n("GnuCash files (*.gnucash *.xac *.gnc);;All files (*)"));
+  QUrl fileToRead = QFileDialog::getOpenFileUrl(this, QString(), QUrl(), i18n("GnuCash files (*.gnucash *.xac *.gnc);;All files (*)"));
 
   if (!fileToRead.isEmpty()) {
     // call the importer
@@ -2350,7 +2350,7 @@ void KMyMoneyApp::slotStatementImport()
   bool result = false;
   KMSTATUS(i18n("Importing an XML Statement."));
 
-  QList<QUrl> files{QFileDialog::getOpenFileUrls(this, QString(), QUrl("kfiledialog:///kmymoney-import"),
+  QList<QUrl> files{QFileDialog::getOpenFileUrls(this, QString(), QUrl(),
       i18n("XML files (*.xml);;All files (*)"))};
 
   if (!files.isEmpty()) {
@@ -7063,7 +7063,7 @@ void KMyMoneyApp::Private::copyConsistencyCheckResults()
 
 void KMyMoneyApp::Private::saveConsistencyCheckResults()
 {
-  QUrl fileUrl = QFileDialog::getSaveFileUrl(q, QString(), QUrl("kfiledialog:///kmymoney-consistency-check"));
+  QUrl fileUrl = QFileDialog::getSaveFileUrl(q);
 
   if (!fileUrl.isEmpty()) {
     QFile file(fileUrl.toLocalFile());
