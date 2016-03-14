@@ -15,6 +15,5 @@ qt5_wrap_ui(kmm_kbanking_views_la_SOURCES
 add_library(kmm_kbanking_views STATIC ${kmm_kbanking_views_la_SOURCES})
 
 target_link_libraries(kmm_kbanking_views
-  KF5::KDELibs4Support
   Qt5::Widgets
 )

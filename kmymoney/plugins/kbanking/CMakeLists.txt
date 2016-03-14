@@ -1,13 +1,5 @@
 # patch the version with the version defined in the build system
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmm_kbanking.desktop ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}
-                    ${CMAKE_CURRENT_BINARY_DIR}
-                    ${CMAKE_CURRENT_SOURCE_DIR}/dialogs
-                    ${CMAKE_CURRENT_BINARY_DIR}/dialogs
-                    ${CMAKE_CURRENT_SOURCE_DIR}/widgets
-                    ${CMAKE_CURRENT_BINARY_DIR}/widgets
-                    ${GWENHYWFAR_INCLUDE_DIRS}
-                    ${AQBANKING_INCLUDE_DIRS})
 
 add_subdirectory( dialogs )
 add_subdirectory( widgets )
@@ -39,9 +31,7 @@ target_link_libraries(kmm_kbanking
                       kmm_plugin
                       payeeidentifier_nationalAccount
                       KF5::ConfigCore
-                      KF5::KDELibs4Support
                       Qt5::Core
-                      Qt5::Widgets
                       Alkimia::alkimia
                       gwenhywfar::core
                       gwenhywfar::gui-cpp

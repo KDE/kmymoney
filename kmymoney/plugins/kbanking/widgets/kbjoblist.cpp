@@ -31,8 +31,7 @@
 #include <QWidget>
 #include <QHeaderView>
 
-#include <KLocale>
-
+#include <KLocalizedString>
 
 
 KBJobListViewItem::KBJobListViewItem(KBJobListView *parent,

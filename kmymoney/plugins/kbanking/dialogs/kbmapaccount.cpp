@@ -20,15 +20,15 @@
 
 // QBanking includes
 #include "kbmapaccount.h"
-#include "kbaccountlist.h"
-#include "mymoneybanking.h"
+#include "../widgets/kbaccountlist.h"
+#include "../mymoneybanking.h"
 
 // QT includes
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qmessagebox.h>
-#include <qlayout.h>
-#include <qlineedit.h>
+#include <QLabel>
+#include <QPushButton>
+#include <QMessageBox>
+#include <QLayout>
+#include <QLineEdit>
 
 
 #include "ui_kbmapaccount.h"

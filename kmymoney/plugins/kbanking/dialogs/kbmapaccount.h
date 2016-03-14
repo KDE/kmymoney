@@ -17,9 +17,6 @@
 
 #include <QDialog>
 
-#include "mymoneybanking.h"
-#include "kbaccountlist.h"
-
 #include <aqbanking/account.h>
 
 class KMyMoneyBanking;

@@ -23,6 +23,8 @@
 #ifndef CHIPTANDIALOG_H
 #define CHIPTANDIALOG_H
 
+#include <memory>
+
 #include <QDialog>
 
 namespace Ui
@@ -65,7 +67,7 @@ private slots:
   void flickerFieldClockSettingChanged(const int& takt);
 
 private:
-  Ui::chipTanDialog* ui;
+  std::unique_ptr<Ui::chipTanDialog> ui;
   QString m_tan;
   bool m_accepted;
 

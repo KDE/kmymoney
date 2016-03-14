@@ -28,9 +28,8 @@
 #include <QQuickView>
 #include <QQuickItem>
 #include <QPushButton>
+#include <QStandardPaths>
 
-// KDE Includes
-#include <KStandardDirs>
 #include <KLocalizedString>
 
 // Prject Includes
@@ -41,7 +40,7 @@ chipTanDialog::chipTanDialog(QWidget* parent)
     m_tan(""),
     m_accepted(true)
 {
-  ui = new Ui::chipTanDialog;
+  ui.reset(new Ui::chipTanDialog);
   ui->setupUi(this);
 
   connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &chipTanDialog::accept);
@@ -69,7 +68,6 @@ chipTanDialog::chipTanDialog(QWidget* parent)
 
 chipTanDialog::~chipTanDialog()
 {
-  delete ui;
 }
 
 void chipTanDialog::accept()

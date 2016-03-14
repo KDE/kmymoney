@@ -24,7 +24,7 @@
 #include <QDateTime>
 #include <QDialog>
 
-#include "mymoneybanking.h"
+class KMyMoneyBanking;
 
 /**
   * Class derived from QBPickStartDate and modified to
