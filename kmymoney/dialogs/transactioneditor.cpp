@@ -286,7 +286,7 @@ void TransactionEditor::slotNumberChanged(const QString& txt)
       assignNextNumber();
       next = KMyMoneyUtils::nextCheckNumber(m_account);
     } else {
-      number->setText(QString());
+      number->loadText(txt);
       break;
     }
   }
@@ -481,7 +481,7 @@ void TransactionEditor::assignNextNumber()
         m_account.setValue("lastNumberUsed", num);
         number->loadText(num);
       } else {
-        num = QString();
+        number->loadText(num);
         break;
       }
     }
