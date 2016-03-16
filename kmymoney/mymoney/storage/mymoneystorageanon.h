@@ -86,6 +86,9 @@ protected:
 
   void writeSecurity(QDomElement& securityElement, const MyMoneySecurity& security);
 
+  /** Cannot remove prive data from plugins, yet. It is simply doing nothing. */
+  void writeOnlineJob(QDomElement& onlineJobs, const onlineJob& job);
+
   QDomElement findChildElement(const QString& name, const QDomElement& root);
 
 
