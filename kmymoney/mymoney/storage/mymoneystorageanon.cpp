@@ -121,6 +121,9 @@ void MyMoneyStorageANON::writePayee(QDomElement& payee, const MyMoneyPayee& _p)
   QRegExp exp("[A-Za-z]");
   p.setMatchData(matchType, ignoreCase, keys.join(";").replace(exp, "x").split(';'));
 
+  // Data from plugins cannot be estranged, yet.
+  p.resetPayeeIdentifiers();
+
   MyMoneyStorageXML::writePayee(payee, p);
 }
 
@@ -306,3 +309,8 @@ void MyMoneyStorageANON::writeReport(QDomElement& reports, const MyMoneyReport& 
 
   MyMoneyStorageXML::writeReport(reports, rn);
 }
+
+void MyMoneyStorageANON::writeOnlineJob(QDomElement& onlineJobs, const onlineJob& job)
+{
+}
+
