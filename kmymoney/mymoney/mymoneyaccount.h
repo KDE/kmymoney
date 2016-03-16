@@ -320,8 +320,6 @@ public:
 
   /**
    * @see MyMoneyPayeeIdentifierContainer::payeeIdentifiersByType()
-   *
-   * @copydoc payeeIdentifiers();
    */
   template< class type >
   QList< ::payeeIdentifierTyped<type> > payeeIdentifiersByType() const;
@@ -781,5 +779,3 @@ QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::paye
 Q_DECLARE_METATYPE(MyMoneyAccount)
 
 #endif
-
-

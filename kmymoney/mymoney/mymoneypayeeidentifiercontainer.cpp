@@ -80,7 +80,7 @@ void MyMoneyPayeeIdentifierContainer::modifyPayeeIdentifier(const int index, con
   m_payeeIdentifiers[index] = ident;
 }
 
-void MyMoneyPayeeIdentifierContainer::resetPayeeIdentifiers(const QList< ::payeeIdentifier > list)
+void MyMoneyPayeeIdentifierContainer::resetPayeeIdentifiers(const QList< ::payeeIdentifier >& list)
 {
   m_payeeIdentifiers = list;
 }

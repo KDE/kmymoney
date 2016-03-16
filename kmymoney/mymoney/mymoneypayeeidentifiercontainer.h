@@ -57,7 +57,7 @@ public:
   void modifyPayeeIdentifier(const ::payeeIdentifier& ident);
   void modifyPayeeIdentifier(const int index, const ::payeeIdentifier& ident);
 
-  void resetPayeeIdentifiers(const QList< ::payeeIdentifier > list);
+  void resetPayeeIdentifiers(const QList< ::payeeIdentifier >& list = QList< ::payeeIdentifier >());
 
 protected:
   void loadXML(QDomElement node);
