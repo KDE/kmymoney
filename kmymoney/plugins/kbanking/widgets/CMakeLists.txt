@@ -23,4 +23,5 @@ target_link_libraries(kmm_kbanking_widgets
   aqbanking::aqbanking
   KF5::I18n
   KF5::ConfigCore
+  KF5::ConfigGui
 )

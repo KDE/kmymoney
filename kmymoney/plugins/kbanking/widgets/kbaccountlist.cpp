@@ -20,7 +20,7 @@
 #include "kbaccountlist.h"
 #include <assert.h>
 #include <QtCore/qstring.h>
-#include <klocale.h>
+#include <KLocalizedString>
 
 
 KBAccountListViewItem::KBAccountListViewItem(KBAccountListView *parent,
