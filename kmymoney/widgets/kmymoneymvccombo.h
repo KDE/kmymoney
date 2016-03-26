@@ -106,14 +106,8 @@ public:
     */
   static void setSubstringSearchForChildren(QWidget *const widget, bool enabled = false);
 
-  /**
-    * Reimplemented for internal reasons, no API change
-    */
-  void setModel(QAbstractItemModel *model);
-
 protected slots:
   void activated(int index);
-  void editTextChanged(const QString &text);
 
 protected:
   /**

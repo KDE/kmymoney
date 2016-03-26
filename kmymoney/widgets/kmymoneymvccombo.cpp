@@ -51,8 +51,7 @@ public:
   Private() :
       m_canCreateObjects(false),
       m_inFocusOutEvent(false),
-      m_completer(0),
-      m_filterProxyModel(0) {}
+      m_completer(0) {}
 
   /**
     * Flag to control object creation. Use
@@ -67,11 +66,6 @@ public:
   bool                  m_inFocusOutEvent;
 
   QCompleter            *m_completer;
-
-  /**
-    * Filter model used to make the completion.
-    */
-  QSortFilterProxyModel *m_filterProxyModel;
 };
 
 
@@ -106,34 +100,9 @@ KMyMoneyMVCCombo::~KMyMoneyMVCCombo()
 
 void KMyMoneyMVCCombo::setSubstringSearch(bool enabled)
 {
-  if (enabled) {
-    // if substring search should be turned on and
-    // is already on, we can quit right away
-    if (d->m_completer->model() == d->m_filterProxyModel)
-      return;
-
-    // make sure we have a proxy model
-    if (!d->m_filterProxyModel) {
-      d->m_filterProxyModel = new QSortFilterProxyModel(this);
-      d->m_filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-      d->m_filterProxyModel->setSourceModel(model());
-    }
-    connect(this, SIGNAL(editTextChanged(QString)), this, SLOT(editTextChanged(QString)));
-    d->m_completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-    d->m_completer->setModel(d->m_filterProxyModel);
-
-  } else {
-    // if substring search should be turned off, we check
-    // for it being turned on. In case the current completer
-    // model is different from m_filterProxyModel it is not
-    // active and we can quit right away
-    if (d->m_completer->model() != d->m_filterProxyModel)
-      return;
-
-    disconnect(this, SIGNAL(editTextChanged(QString)), this, SLOT(editTextChanged(QString)));
-    d->m_completer->setCompletionMode(QCompleter::PopupCompletion);
-    d->m_completer->setModel(model());
-  }
+  d->m_completer->setCompletionMode(QCompleter::PopupCompletion);
+  d->m_completer->setModel(model());
+  d->m_completer->setFilterMode(enabled ? Qt::MatchContains : Qt::MatchStartsWith);
 }
 
 void KMyMoneyMVCCombo::setSubstringSearchForChildren(QWidget*const widget, bool enabled)
@@ -143,18 +112,6 @@ void KMyMoneyMVCCombo::setSubstringSearchForChildren(QWidget*const widget, bool 
   comboList = widget->findChildren<KMyMoneyMVCCombo *>();
   foreach (KMyMoneyMVCCombo *combo, comboList) {
     combo->setSubstringSearch(enabled);
-  }
-}
-
-void KMyMoneyMVCCombo::setModel(QAbstractItemModel *model)
-{
-  if (!model)
-    return;
-
-  KComboBox::setModel(model);
-  d->m_filterProxyModel->setSourceModel(model);
-  if (d->m_completer->model() != d->m_filterProxyModel) {
-    d->m_completer->setModel(model);
   }
 }
 
@@ -188,20 +145,6 @@ void KMyMoneyMVCCombo::activated(int index)
   if (data.isValid()) {
     m_id = data.toString();
     emit itemSelected(m_id);
-  }
-}
-
-/**
-  * Use the completion prefix of the completer for filtering instead of the
-  * edit text since when navigating between the completions the edit text
-  * changes to the current completion making all other completions disappear.
-  */
-void KMyMoneyMVCCombo::editTextChanged(const QString &text)
-{
-  if (text.isEmpty()) {
-    setCurrentIndex(0);
-  } else if (d->m_filterProxyModel && completer()) {
-    d->m_filterProxyModel->setFilterFixedString(completer()->completionPrefix());
   }
 }
 
