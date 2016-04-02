@@ -1979,8 +1979,7 @@ void KMyMoneyApp::slotFileQuit()
   // don't modify the status message here as this will prevent quit from working!!
   // See the beginning of queryClose() and isReady() why. Thomas Baumgart 2005-10-17
 
-  KMainWindow* w = 0;
-
+  bool quitApplication = true;
 
   QList<KMainWindow*> memberList = KMainWindow::memberList();
   if (!memberList.isEmpty()) {
@@ -1988,18 +1987,16 @@ void KMyMoneyApp::slotFileQuit()
     QList<KMainWindow*>::const_iterator w_it = memberList.constBegin();
     for (; w_it != memberList.constEnd(); ++w_it) {
       // only close the window if the closeEvent is accepted. If the user presses Cancel on the saveModified() dialog,
-
       // the window and the application stay open.
       if (!(*w_it)->close()) {
-        w = (*w_it);
+        quitApplication = false;
         break;
       }
     }
-    // We will only quit if all windows were processed and not cancelled
-    if (w == 0)
-      QCoreApplication::quit();
+  }
 
-  } else
+  // We will only quit if all windows were processed and not cancelled
+  if (quitApplication)
     QCoreApplication::quit();
 }
 
