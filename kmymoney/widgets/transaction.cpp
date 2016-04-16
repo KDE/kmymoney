@@ -1365,13 +1365,18 @@ int StdTransaction::numRowsRegister(bool expanded) const
 
 TransactionEditor* StdTransaction::createEditor(TransactionEditorContainer* regForm, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate)
 {
+#ifndef KMM_DESIGNER
   m_inRegisterEdit = regForm == m_parent;
   return new StdTransactionEditor(regForm, this, list, lastPostDate);
+#else
+  return NULL;
+#endif
 }
 
 InvestTransaction::InvestTransaction(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId) :
     Transaction(parent, transaction, split, uniqueId)
 {
+#ifndef KMM_DESIGNER
   // dissect the transaction into its type, splits, currency, security etc.
   InvestTransactionEditor::dissectTransaction(m_transaction, m_split,
       m_assetAccountSplit,
@@ -1380,6 +1385,7 @@ InvestTransaction::InvestTransaction(Register *parent, const MyMoneyTransaction&
       m_security,
       m_currency,
       m_transactionType);
+#endif
 
   QList<MyMoneySplit>::ConstIterator it_s;
   for (it_s = m_feeSplits.constBegin(); it_s != m_feeSplits.constEnd(); ++it_s) {
@@ -2182,7 +2188,11 @@ void InvestTransaction::splits(MyMoneySplit& assetAccountSplit, QList<MyMoneySpl
 
 TransactionEditor* InvestTransaction::createEditor(TransactionEditorContainer* regForm, const KMyMoneyRegister::SelectedTransactions& list, const QDate& lastPostDate)
 {
+#ifndef KMM_DESIGNER
   m_inRegisterEdit = regForm == m_parent;
   return new InvestTransactionEditor(regForm, this, list, lastPostDate);
+#else
+  return NULL;
+#endif
 }
 
