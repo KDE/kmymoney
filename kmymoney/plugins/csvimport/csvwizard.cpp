@@ -1678,20 +1678,21 @@ bool LinesDatePage::validatePage()
       if (m_wizDlg->m_csvDialog->ui->tableWidget->item(row, col) == 0) {  //  This cell does not exist
         continue;
       }
-      symbl = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, col)->text().toUpper().trimmed();
+      symbl = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, col)->text().toLower().trimmed();
       int detail = m_wizDlg->m_pageInvestment->ui->comboBoxInv_detailCol->currentIndex();
-      securityName = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, detail)->text().trimmed();
+      securityName = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, detail)->text().toLower();
       // Check if we already have the security on file.
       // Just use the symbol for matching, because the security name
       // field is unstandardised and very variable.
-      bool exists = false;
+      bool exists;
       QString name;
       QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
       while (it != list.constEnd()) {
+        exists = false;
         if (!symbl.isEmpty())  {     //  symbol already exists
           sec = *it;
           name.clear();
-	  if (symbl.compare(sec.tradingSymbol(), Qt::CaseInsensitive) == 0) {
+          if (sec.tradingSymbol() == symbl) {
             exists = true;
             name = sec.name();
             break;
