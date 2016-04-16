@@ -4,7 +4,7 @@
   <comment></comment>
   <exportmacro></exportmacro>
   <class>KCurrencyCalculatorDecl</class>
-  <widget class="KDialog" name="KCurrencyCalculatorDecl">
+  <widget class="QDialog" name="KCurrencyCalculatorDecl">
     <property name="enabled">
       <bool>true</bool>
     </property>

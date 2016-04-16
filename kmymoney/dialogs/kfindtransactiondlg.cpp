@@ -122,6 +122,8 @@ KFindTransactionDlg::KFindTransactionDlg(QWidget *parent) :
   m_ui->setupUi(this);
   setMainWidget(m_ui->m_tabWidget);
 
+  setButtons(KDialog::Help | KDialog::Close | KDialog::Reset | KDialog::Apply);
+
   m_ui->ButtonGroup1->setId(m_ui->m_amountButton, 0);
   m_ui->ButtonGroup1->setId(m_ui->m_amountRangeButton, 1);
 

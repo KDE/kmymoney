@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>KCurrencyEditDlgDecl</class>
- <widget class="KDialog" name="KCurrencyEditDlgDecl">
+ <widget class="QDialog" name="KCurrencyEditDlgDecl">
   <property name="windowTitle">
    <string>Currencies</string>
   </property>

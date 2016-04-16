@@ -4,7 +4,7 @@
   <comment></comment>
   <exportmacro></exportmacro>
   <class>KMyMoneyPriceDlgDecl</class>
-  <widget class="KDialog" name="KMyMoneyPriceDlgDecl">
+  <widget class="QDialog" name="KMyMoneyPriceDlgDecl">
     <property name="geometry">
       <rect>
         <x>0</x>

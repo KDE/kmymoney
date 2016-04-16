@@ -4,7 +4,7 @@
   <comment></comment>
   <exportmacro></exportmacro>
   <class>KFindTransactionDlgDecl</class>
-  <widget class="KDialog" name="KFindTransactionDlgDecl">
+  <widget class="QDialog" name="KFindTransactionDlgDecl">
     <property name="geometry">
       <rect>
         <x>0</x>
@@ -18,9 +18,6 @@
     </property>
     <property name="sizeGripEnabled">
       <bool>true</bool>
-    </property>
-    <property name="buttons">
-      <enum>KDialog::Help | KDialog::Close | KDialog::Reset | KDialog::Apply</enum>
     </property>
     <widget class="KTabWidget" name="m_tabWidget">
       <widget class="QWidget" name="m_criteriaPage">
