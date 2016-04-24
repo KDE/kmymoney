@@ -2062,7 +2062,7 @@ void InvestProcessing::readSettings()
       m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_symbolCol->setCurrentIndex(tmp);
       m_csvDialog->m_wiz->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
 
-      tmp = profilesGroup.readEntry("", 0);
+      tmp = profilesGroup.readEntry("DecimalSymbol", 0);
       m_csvDialog->setDecimalSymbol(tmp);
       m_parse->setDecimalSymbolIndex(tmp);
       m_csvDialog->m_wiz->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(tmp);
