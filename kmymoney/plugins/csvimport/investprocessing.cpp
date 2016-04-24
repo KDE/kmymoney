@@ -1376,12 +1376,12 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       if (m_symbolColumn == -1) {
         return KMessageBox::Cancel;
       }
-      QString symbol = m_columnList[m_symbolColumn].toLower().trimmed();
+      QString symbol = m_columnList[m_symbolColumn].toUpper().trimmed();
       if (!symbol.isEmpty()) {
         name = m_map.value(symbol);
         m_columnList[i] = symbol;
       } else {
-        name = m_columnList[m_detailColumn].toLower();
+        name = m_columnList[m_detailColumn].trimmed();
       }
 
       m_trInvestData.symbol = symbol;
@@ -1391,11 +1391,11 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     else if (m_columnTypeList[i] == "detail") { //                Detail Col
       QString str = m_csvDialog->m_detailFilter;
       QString name;
-      QString symbol = m_columnList[m_symbolColumn].toLower().trimmed();
+      QString symbol = m_columnList[m_symbolColumn].toUpper().trimmed();
       if (!symbol.isEmpty()) {
         name = m_map.value(symbol);
       } else {
-        name = m_columnList[m_detailColumn].toLower();
+        name = m_columnList[m_detailColumn].trimmed();
       }
       txt = m_columnList[i];
       if (m_csvDialog->m_symbolTableDlg->m_widget->tableWidget->item(m_symbolRow, 2) != 0) {   //  If this item exists...
