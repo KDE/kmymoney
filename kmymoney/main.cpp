@@ -81,13 +81,13 @@ int main(int argc, char *argv[])
    * construct about data
    */
   QStringList features;
-#if KF5Gpgmepp_FOUND
+#ifdef KF5Gpgmepp_FOUND
   features << i18n("GPG encryption");
 #endif
-#if KMM_ADDRESSBOOK_FOUND
+#ifdef KMM_ADDRESSBOOK_FOUND
   features << i18n("Addressbook integration");
 #endif
-#if KF5Holidays_FOUND
+#ifdef KF5Holidays_FOUND
   features << i18n("Holiday regions integration");
 #endif
   QString featuresDescription;
