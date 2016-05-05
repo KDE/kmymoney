@@ -68,19 +68,6 @@ target_link_libraries(kmymoney_common
 add_dependencies(kmymoney_common generate_base_ui_srcs kmm_config)
 add_dependencies(wizardpages widgets)
 
-set( kmymoney_common_LIBS
-  views reports kmymoney_base kmymoney_common
-  newuserwizard newaccountwizard newinvestmentwizard newloanwizard
-  endingbalancedlg wizardpages
-  dialogs widgets settings converter models kmm_config
-  kmm_widgets
-  kmm_storage kmm_mymoney kgpgfile interfaces kmm_plugin dialogs
-  Qt5::Core Qt5::Sql
-  KF5::KHtml KF5::Archive KF5::ConfigGui KF5::WidgetsAddons KChart)
-
-if(KF5Holidays_FOUND)
-  list(APPEND kmymoney_common_LIBS KF5::Holidays)
-endif()
 
 ########### kmymoney executable ###############
 
@@ -89,7 +76,39 @@ set( kmymoney_SRCS main.cpp kmymoney.cpp )
 qt5_add_dbus_adaptor(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
 
 add_executable( kmymoney ${kmymoney_SRCS} )
-target_link_libraries( kmymoney ${kmymoney_common_LIBS} )
+target_link_libraries(kmymoney
+  views
+  reports
+  kmymoney_base
+  kmymoney_common
+  newuserwizard
+  newaccountwizard
+  newinvestmentwizard
+  newloanwizard
+  endingbalancedlg
+  wizardpages
+  dialogs
+  widgets
+  settings
+  converter
+  models
+  kmm_config
+  kmm_widgets
+  kmm_storage
+  kmm_mymoney
+  kgpgfile
+  interfaces
+  kmm_plugin
+  Qt5::Core
+  Qt5::Sql
+  KF5::KHtml
+  KF5::Archive
+  KF5::ConfigGui
+  KF5::WidgetsAddons
+  KF5::CoreAddons
+  KChart
+  $<$<BOOL:${KF5Holidays_FOUND}>:KF5::Holidays>
+)
 
 ########### install files ###############
 

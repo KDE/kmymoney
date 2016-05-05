@@ -38,9 +38,10 @@
 
 #include <KAboutData>
 #include <KStartupInfo>
-#include <klocale.h>
+#include <KLocale>
 #include <ktip.h>
-#include <kmessagebox.h>
+#include <KMessageBox>
+#include <Kdelibs4ConfigMigrator>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -59,10 +60,17 @@ KMyMoneyApp* kmymoney;
 
 static int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, const QUrl & file, bool noFile);
 
-//! @todo use https://community.kde.org/Frameworks/Porting_Notes#Migrating_configuration
 int main(int argc, char *argv[])
 {
   timer.start();
+
+  {
+    // Copy KDE 4 config files to the KF5 location
+    Kdelibs4ConfigMigrator migrator(QStringLiteral("kmymoney"));
+    migrator.setConfigFiles(QStringList{"kmymoneyrc"});
+    migrator.setUiFiles(QStringList{"kmymoneyui.rc"});
+    migrator.migrate();
+  }
 
   /**
    * Create application first

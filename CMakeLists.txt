@@ -48,13 +48,13 @@ include(GenerateExportHeader)
 include(KMyMoneyMacros)
 
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
-find_package(KF5 REQUIRED COMPONENTS CoreAddons Config I18n KHtml KDELibs4Support Completion KCMUtils ItemViews Service Wallet
+find_package(KF5 5.2 REQUIRED COMPONENTS CoreAddons Config I18n KHtml KDELibs4Support Completion KCMUtils ItemViews Service Wallet
                           OPTIONAL_COMPONENTS Holidays Gpgmepp Contacts Akonadi IdentityManagement Activities Kross)
 find_package(LibAlkimia 6.0.0 REQUIRED)
 find_package(KChart 2.6.0 REQUIRED)
 
 add_definitions(-DQT_USE_QSTRINGBUILDER)
-add_definitions(-std=c++11) # TODO make system independent, easily done with cmake 3
+add_compile_options(-std=c++11) # TODO make system independent, easily done with cmake 3
 # Used so far:
 # PUBLIC: cxx_nullptr
 # PRIVATE: cxx_decltype, cxx_lambdas, cxx_constexpr, cxx_range_for
