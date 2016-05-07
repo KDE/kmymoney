@@ -158,14 +158,32 @@ void InvestProcessing::init()
   //  activity types.  Each of the lists may also contain alternative descriptions,
   //  added by the user to the resource file, to suit his needs.
 
-  m_buyList += i18nc("verb", "buy");  //                       some basic entries in case rc file missing
-  m_sellList += i18nc("verb", "sell");
-  m_divXList += i18nc("noun, cash dividend", "dividend");
-  m_intIncList += i18nc("noun, interest income", "interest");
-  m_reinvdivList += i18nc("verb, to reinvest", "reinvest");
-  m_shrsinList += i18nc("verb", "add");
-  m_removeList += i18nc("verb, to delete", "remove");
-  m_brokerageList << i18nc("noun, cheque, check", "check") << i18nc("noun", "payment");
+  QString text = "Type of operation as in financial statement";
+  m_buyList += i18nc("%1", "buy", "%1", text);  //                       some basic entries in case rc file missing
+  m_sellList << i18nc("%1", "sell", text)
+             << i18nc("%1", "repurchase", text);
+  m_divXList += i18nc("%1", "dividend", text);
+  m_intIncList << i18nc("%1", "interest", text)
+               << i18nc("%1", "income", text);
+  m_reinvdivList << i18nc("%1", "reinvest", text)
+                 << i18nc("%1", "reinv", text)
+                 << i18nc("%1", "re-inv", text);
+  m_shrsinList << i18nc("%1", "add", text)
+               << i18nc("%1", "stock dividend", text)
+               << i18nc("%1", "divd reinv", text)
+               << i18nc("%1", "transfer in", text)
+               << i18nc("%1", "re-registration in", text)
+               << i18nc("%1", "journal entry", text);
+  m_removeList += i18nc("%1", "remove", text);
+  text = "Brokerage type";
+  m_brokerageList << i18nc("%1", "check", text)
+                  << i18nc("%1", "payment", text)
+                  << i18nc("%1", "bill payment", text)
+                  << i18nc("%1", "dividend", text)
+                  << i18nc("%1", "interest", text)
+                  << i18nc("%1", "qualified div", text)
+                  << i18nc("%1", "foreign tax paid", text)
+                  << i18nc("%1", "adr mgmt fee", text);
 
   findCodecs();//                             returns m_codecs = codecMap.values();
 }
