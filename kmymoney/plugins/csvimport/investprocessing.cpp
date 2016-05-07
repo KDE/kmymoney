@@ -1969,16 +1969,34 @@ void InvestProcessing::readSettings()
     if (!list.isEmpty()) {
       m_buyList = list;
     }
-    m_shrsinList = profilesGroup.readEntry("ShrsinParam", QStringList());
-    m_divXList = profilesGroup.readEntry("DivXParam", QStringList());
-    m_intIncList = profilesGroup.readEntry("IntIncParam", QStringList());
-    m_brokerageList = profilesGroup.readEntry("BrokerageParam", QStringList());
+    list = profilesGroup.readEntry("ShrsinParam", QStringList());
+    if (!list.isEmpty()) {
+      m_shrsinList = list;
+    }
+    list = profilesGroup.readEntry("DivXParam", QStringList());
+    if (!list.isEmpty()) {
+      m_divXList = list;
+    }
+    list = profilesGroup.readEntry("IntIncParam", QStringList());
+    if (!list.isEmpty()) {
+      m_intIncList = list;
+    }
+    list = profilesGroup.readEntry("BrokerageParam", QStringList());
+    if (!list.isEmpty()) {
+      m_brokerageList = list;
+    }
     list = profilesGroup.readEntry("ReinvdivParam", QStringList());
     if (!list.isEmpty()) {
       m_reinvdivList = list;
     }
-    m_sellList = profilesGroup.readEntry("SellParam", QStringList());
-    m_removeList = profilesGroup.readEntry("RemoveParam", QStringList());
+    list = profilesGroup.readEntry("SellParam", QStringList());
+    if (!list.isEmpty()) {
+      m_sellList = list;
+    }
+    list = profilesGroup.readEntry("RemoveParam", QStringList());
+    if (!list.isEmpty()) {
+      m_removeList = list;
+    }
     //    m_invPath  = profilesGroup.readEntry("InvDirectory", QString());  //  Read earlier in fileDialog()
 
     int tmp = profilesGroup.readEntry("SecurityName", 0);
