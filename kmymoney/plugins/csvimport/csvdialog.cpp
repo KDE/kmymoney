@@ -464,30 +464,16 @@ void CSVDialog::createProfile(QString newName)
   KConfigGroup bankGroup(config, "BankProfiles");
   QString txt = "Profiles-" + newName;
 
-  KConfigGroup profilesGroup(config, "Profiles-New Profile###");
-
-  KSharedConfigPtr  configBackup = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, "csvimporterrc"));
-  KConfigGroup bkprofilesGroup(configBackup, "Profiles-New Profile###");
-
   KConfigGroup newProfilesGroup(config, txt);
-  bkprofilesGroup.copyTo(&newProfilesGroup);
   newProfilesGroup.writeEntry("FileType", m_fileType);
   if (m_fileType == "Invest") {
-    m_investProcessing->m_shrsinList = bkprofilesGroup.readEntry("ShrsinParam", QStringList());
     newProfilesGroup.writeEntry("ShrsinParam", m_investProcessing->m_shrsinList);
-    m_investProcessing->m_divXList = bkprofilesGroup.readEntry("DivXParam", QStringList());
     newProfilesGroup.writeEntry("DivXParam", m_investProcessing->m_divXList);
-    m_investProcessing->m_intIncList = bkprofilesGroup.readEntry("IntIncParam", QStringList());
     newProfilesGroup.writeEntry("IntIncParam", m_investProcessing->m_intIncList);
-    m_investProcessing->m_brokerageList = bkprofilesGroup.readEntry("BrokerageParam", QStringList());
     newProfilesGroup.writeEntry("BrokerageParam", m_investProcessing->m_brokerageList);
-    m_investProcessing->m_reinvdivList = bkprofilesGroup.readEntry("ReinvdivParam", QStringList());
     newProfilesGroup.writeEntry("ReinvdivParam", m_investProcessing->m_reinvdivList);
-    m_investProcessing->m_buyList = bkprofilesGroup.readEntry("BuyParam", QStringList());
     newProfilesGroup.writeEntry("BuyParam", m_investProcessing->m_buyList);
-    m_investProcessing->m_sellList = bkprofilesGroup.readEntry("SellParam", QStringList());
     newProfilesGroup.writeEntry("SellParam", m_investProcessing->m_sellList);
-    m_investProcessing->m_removeList = bkprofilesGroup.readEntry("RemoveParam", QStringList());
     newProfilesGroup.writeEntry("RemoveParam", m_investProcessing->m_removeList);
   }
   newProfilesGroup.config()->sync();
