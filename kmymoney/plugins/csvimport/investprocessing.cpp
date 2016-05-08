@@ -881,12 +881,12 @@ void InvestProcessing::readFile(const QString& fname)
   m_csvDialog->m_delimiterError = false;
   for (int i = 0; i < m_lineList.count(); i++) {
     data = m_lineList[i];
-    m_columnList = m_parse->parseLine(data);
 
     for (int count = 0; count < 4; count++) {  //  Four possible delimiters
       //  Count each delimiter to find most likely one to use .
       //  Changed to sum total file, not just individual lines.
-      colCount = data.count(m_parse->m_fieldDelimiterCharList[count]) + 1;
+      m_parse->setFieldDelimiterIndex(count);
+      colCount = m_parse->parseLine(data).count();
 
       if (colCount > thisDelimiterCount[count]) {
         thisDelimiterCount[count] = colCount;
@@ -895,7 +895,7 @@ void InvestProcessing::readFile(const QString& fname)
         m_maxColumnCount = thisDelimiterCount[count];
       }
       m_columnCountList << colCount;  // Number of columns in each line.
-      totalDelimiterCount[count] += data.count(m_parse->m_fieldDelimiterCharList[count]);
+      totalDelimiterCount[count] += colCount;
       if (totalDelimiterCount[count] > totalDelimiterCount[m_csvDialog->m_possibleDelimiter]) {
         m_csvDialog->m_possibleDelimiter = count;
       }
