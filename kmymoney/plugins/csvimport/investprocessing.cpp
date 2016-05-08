@@ -1638,6 +1638,24 @@ int InvestProcessing::processActionType(QString& type)
   int ret = m_redefine->suspectType(i18n("<center>The transaction below has an unrecognised type or action.</center>"
                                          "<center>Please select an appropriate entry, if available.</center>"
                                          "<center>Otherwise, click Cancel to abort.</center>"));
+  //   remember the selection for further transactions
+  if (!type.isEmpty() && !m_trInvestData.type.isEmpty() && type.compare(m_trInvestData.type,Qt::CaseInsensitive) != 0) {
+      if (m_trInvestData.type == "shrsin") {
+        m_shrsinList << type;
+      } else if (m_trInvestData.type == "reinvdiv") {
+        m_reinvdivList << type;
+      } else if (m_trInvestData.type == "divx") {
+        m_divXList << type;
+      } else if (m_trInvestData.type == "buy") {
+        m_buyList << type;
+      } else if (m_trInvestData.type == "sell") {
+        m_sellList << type;
+      } else if (m_trInvestData.type == "shrsout") {
+        m_removeList << type;
+      } else if (m_trInvestData.type == "intinc") {
+        m_intIncList << type;
+      }
+  }
   return ret;
 }//   end of Type Col
 
