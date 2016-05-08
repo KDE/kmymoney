@@ -671,10 +671,12 @@ void IntroPage::slotComboEditTextChanged(QString txt)
     ui->combobox_source->removeItem(indx);
     m_map.take(m_wizDlg->m_csvDialog->m_profileName);
     ui->combobox_source->setCurrentIndex(-1);
-    m_wizDlg->m_csvDialog->m_profileName.clear();
     m_priorName.clear();
     KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
     KConfigGroup bankProfilesGroup(config, "BankProfiles");
+    KConfigGroup deletedProfilesGroup(config, "Profiles-" + m_wizDlg->m_csvDialog->m_profileName);
+    m_wizDlg->m_csvDialog->m_profileName.clear();
+    deletedProfilesGroup.deleteGroup();
     if (m_wizDlg->m_csvDialog->m_fileType == "Banking") {
       m_wizDlg->m_csvDialog->m_priorCsvProfile.clear();
       bankProfilesGroup.writeEntry("PriorCsvProfile", m_wizDlg->m_csvDialog->m_priorCsvProfile);
