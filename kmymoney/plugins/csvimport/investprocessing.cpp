@@ -1694,19 +1694,21 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
   tr.m_strSymbol = m_trInvestData.symbol;
 
   s2.m_accountId = m_csvUtil->checkCategory(m_csvSplit.m_strCategoryName, s1.m_amount, s2.m_amount);
+  tr.m_strBrokerageAccount = m_trInvestData.brokerageAccnt;
   if ((tr.m_eAction == (MyMoneyStatement::Transaction::eaCashDividend)) ||
-      (tr.m_eAction == (MyMoneyStatement::Transaction::eaBuy)) ||
       (tr.m_eAction == (MyMoneyStatement::Transaction::eaSell)) ||
       (tr.m_eAction == (MyMoneyStatement::Transaction::eaInterest))) {
-    tr.m_strBrokerageAccount = m_trInvestData.brokerageAccnt;
     /*
      *  need to deduct fees here
      */
-    tr.m_amount -= m_trInvestData.fee;
+    tr.m_amount = tr.m_amount.abs() - m_trInvestData.fee.abs();
+  }
+
+  else if (tr.m_eAction == (MyMoneyStatement::Transaction::eaBuy)) {
+      tr.m_amount = tr.m_amount.abs() + m_trInvestData.fee.abs();
   }
 
   else if (tr.m_eAction == (MyMoneyStatement::Transaction::eaNone)) {
-    tr.m_strBrokerageAccount = m_trInvestData.brokerageAccnt;
     tr.m_listSplits += s2;
   }
 
