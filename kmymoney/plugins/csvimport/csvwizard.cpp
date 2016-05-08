@@ -640,7 +640,7 @@ void IntroPage::slotComboEditTextChanged(QString txt)
     m_firstLineEdit = false;
     connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
   }
-  if ((txt.isEmpty()) && (!m_priorName.isEmpty()) && (m_messageBoxJustCancelled == false)) {
+  if ((txt.isEmpty()) && (!m_priorName.isEmpty()) && (m_messageBoxJustCancelled == false) && (ui->combobox_source->lineEdit()->text().isEmpty())) {
     //
     //  The disconnects are to avoid another messagebox appearing before the response for this one is processed.
     //
