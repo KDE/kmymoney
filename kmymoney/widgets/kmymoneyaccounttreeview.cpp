@@ -212,13 +212,21 @@ QVariant AccountsViewFilterProxyModel::data(const QModelIndex &index, int role) 
   if (index.isValid() && role == Qt::DisplayRole) {
     int sourceColumn = mapToSource(index).column();
     if (sourceColumn == AccountsModel::TotalValue) {
-      QVariant accountId = mapToSource(AccountsViewFilterProxyModel::index(index.row(), 0, index.parent())).data(AccountsModel::AccountIdRole);
-      if (d->isAccountExpanded(accountId.toString()) && index.parent().isValid()) {
-        // if an account is not a top-level account and it is expanded display it's value
-        return data(index, AccountsModel::AccountValueDisplayRole);
-      } else {
-        // if an account is a top-level account or it is collapsed display it's total value
+      MyMoneyAccount account = mapToSource(AccountsViewFilterProxyModel::index(index.row(), 0, index.parent()))
+                                      .data(AccountsModel::AccountRole).value<MyMoneyAccount>();
+
+      // show the accounts value incl. the value of sub-accounts
+      // if the account is not expanded or,
+      bool showTotalValue = !d->isAccountExpanded(account.id());
+      // the account is a top-level account or
+      showTotalValue |= !index.parent().isValid();
+      // the account is an investment account and equity accounts are hidden
+      showTotalValue |= (account.accountType() == MyMoneyAccount::Investment && hideEquityAccounts());
+
+      if (showTotalValue) {
         return data(index, AccountsModel::AccountTotalValueDisplayRole);
+      } else {
+        return data(index, AccountsModel::AccountValueDisplayRole);
       }
     }
     if (sourceColumn == AccountsModel::TotalBalance) {
