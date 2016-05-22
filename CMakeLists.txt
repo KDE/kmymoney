@@ -53,7 +53,7 @@ find_package(KF5 5.2 REQUIRED COMPONENTS CoreAddons Config I18n KHtml KDELibs4Su
 find_package(LibAlkimia 6.0.0 REQUIRED)
 find_package(KChart 2.6.0 REQUIRED)
 
-add_definitions(-DQT_USE_QSTRINGBUILDER)
+add_definitions(-DQT_USE_QSTRINGBUILDER -DQT_NO_CAST_TO_ASCII)
 add_compile_options(-std=c++11) # TODO make system independent, easily done with cmake 3
 # Used so far:
 # PUBLIC: cxx_nullptr
