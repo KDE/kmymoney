@@ -1020,7 +1020,7 @@ void PivotTableTest::testHtmlEncoding()
 
   QString html = networth_f.renderHTML(0, encoding, filter.name(), false);
 
-  QRegExp rx("*<meta * charset=" + encoding + "*>*");
+  QRegExp rx(QString::fromLatin1("*<meta * charset=" + encoding + "*>*"));
   rx.setPatternSyntax(QRegExp::Wildcard);
   rx.setCaseSensitivity(Qt::CaseInsensitive);
   QVERIFY(rx.exactMatch(html));
