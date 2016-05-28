@@ -1559,12 +1559,15 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
     tr.m_listSplits.append(s2);
   } else if (action == "buy") {
     d->st.m_listPrices += price;
+    tr.m_price = m_qifProfile.value('I', extractLine('I'));
     tr.m_shares = quantity;
+    tr.m_amount = -amount;
     tr.m_eAction = (MyMoneyStatement::Transaction::eaBuy);
   } else if (action == "sell") {
     d->st.m_listPrices += price;
+    tr.m_price = m_qifProfile.value('I', extractLine('I'));
     tr.m_shares = -quantity;
-    tr.m_amount = -amount;
+    tr.m_amount = amount;
     tr.m_eAction = (MyMoneyStatement::Transaction::eaSell);
   } else if (action == "shrsin") {
     tr.m_shares = quantity;
