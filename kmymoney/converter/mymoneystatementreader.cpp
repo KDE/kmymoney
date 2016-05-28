@@ -372,7 +372,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
         m_account.setAccountType(MyMoneyAccount::CreditCard);
         break;
       default:
-        m_account.setAccountType(MyMoneyAccount::Checkings);
+        m_account.setAccountType(MyMoneyAccount::UnknownAccountType);
         break;
     }
 
@@ -1291,7 +1291,19 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
                 "create a new account by pressing the <b>Create</b> button.");
   }
 
-  KMyMoneyUtils::categoryTypeE type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::asset | KMyMoneyUtils::liability);
+  KMyMoneyUtils::categoryTypeE type;
+  if (account.accountType() == MyMoneyAccount::Checkings) {
+    type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::checking);
+  } else if (account.accountType() == MyMoneyAccount::Savings) {
+    type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::savings);
+  } else if (account.accountType() == MyMoneyAccount::Investment) {
+    type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::investment);
+  } else if (account.accountType() == MyMoneyAccount::CreditCard) {
+    type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::creditCard);
+  } else {
+    type = static_cast<KMyMoneyUtils::categoryTypeE>(KMyMoneyUtils::asset | KMyMoneyUtils::liability);
+  }
+  
   QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "StatementImport", kmymoney);
   accountSelect->setHeader(i18n("Import transactions"));
   accountSelect->setDescription(msg);
