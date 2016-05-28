@@ -61,13 +61,17 @@ public:
     * bitmask to determine the end of processing.
     */
   enum categoryTypeE {
-    none =       0x00,          ///< no account class selected
-    liability =  0x01,          ///< liability accounts selected
-    asset =      0x02,          ///< asset accounts selected
-    expense =    0x04,          ///< expense accounts selected
-    income =     0x08,          ///< income accounts selected
-    equity =     0x10,          ///< equity accounts selected
-    last =       0x20           ///< the leftmost bit in the mask
+    none =       0x000,         ///< no account class selected
+    liability =  0x001,         ///< liability accounts selected
+    asset =      0x002,         ///< asset accounts selected
+    expense =    0x004,         ///< expense accounts selected
+    income =     0x008,         ///< income accounts selected
+    equity =     0x010,         ///< equity accounts selected
+    checking =   0x020,         ///< checking accounts selected
+    savings =    0x040,         ///< savings accounts selected
+    investment = 0x080,         ///< investment accounts selected
+    creditCard = 0x100,         ///< credit card accounts selected
+    last =       0x200          ///< the leftmost bit in the mask
   };
 
   enum transactionTypeE {

@@ -105,6 +105,14 @@ void KAccountSelectDlg::slotReloadWidget()
     set.addAccountGroup(MyMoneyAccount::Expense);
   if (m_accountType & KMyMoneyUtils::equity)
     set.addAccountGroup(MyMoneyAccount::Equity);
+  if (m_accountType & KMyMoneyUtils::checking)
+    set.addAccountType(MyMoneyAccount::Checkings);
+  if (m_accountType & KMyMoneyUtils::savings)
+    set.addAccountType(MyMoneyAccount::Savings);
+  if (m_accountType & KMyMoneyUtils::investment)
+    set.addAccountType(MyMoneyAccount::Investment);
+  if (m_accountType & KMyMoneyUtils::creditCard)
+    set.addAccountType(MyMoneyAccount::CreditCard);
 
   set.load(m_accountSelector->selector());
 }
