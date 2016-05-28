@@ -1719,11 +1719,13 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
     /*
      *  need to deduct fees here
      */
-    tr.m_amount = tr.m_amount.abs() - m_trInvestData.fee.abs();
+    tr.m_amount = tr.m_amount - m_trInvestData.fee.abs();
   }
 
   else if (tr.m_eAction == (MyMoneyStatement::Transaction::eaBuy)) {
-      tr.m_amount = tr.m_amount.abs() + m_trInvestData.fee.abs();
+      if (tr.m_amount.isPositive())
+          tr.m_amount = -tr.m_amount; //if broker doesn't use minus sings for buy transactions, set it manually here
+      tr.m_amount = tr.m_amount - m_trInvestData.fee.abs();
   }
 
   else if (tr.m_eAction == (MyMoneyStatement::Transaction::eaNone)) {
