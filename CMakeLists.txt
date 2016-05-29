@@ -59,7 +59,7 @@ add_compile_options(-std=c++11) # TODO make system independent, easily done with
 # PUBLIC: cxx_nullptr
 # PRIVATE: cxx_decltype, cxx_lambdas, cxx_constexpr, cxx_range_for
 
-string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
+string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
 if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
   add_definitions (-DQT_STRICT_ITERATORS)
   set(KMM_DEBUG 1)
