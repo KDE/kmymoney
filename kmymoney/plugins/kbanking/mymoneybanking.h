@@ -64,7 +64,6 @@ class KBAccountSettings;
 
 #include "mymoney/onlinejobtyped.h"
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
-#include "onlinetasks/national/tasks/germanonlinetransfer.h"
 
 /**
   * This class represents the KBanking plugin towards KMymoney.
@@ -184,7 +183,6 @@ private:
     */
   void startPasswordTimer();
 
-  bool enqueTransaction(onlineJobTyped<germanOnlineTransfer>& job);
   bool enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job);
 
 

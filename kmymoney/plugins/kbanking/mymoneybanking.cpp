@@ -598,11 +598,7 @@ void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
 
   if (!jobs.isEmpty()) {
     foreach (onlineJob job, jobs) {
-      if (germanOnlineTransfer::name() == job.task()->taskName()) {
-        onlineJobTyped<germanOnlineTransfer> typedJob(job);
-        enqueTransaction(typedJob);
-        job = typedJob;
-      } else if (sepaOnlineTransfer::name() == job.task()->taskName()) {
+      if (sepaOnlineTransfer::name() == job.task()->taskName()) {
         onlineJobTyped<sepaOnlineTransfer> typedJob(job);
         enqueTransaction(typedJob);
         job = typedJob;
@@ -646,14 +642,8 @@ QStringList KBankingPlugin::availableJobs(QString accountId)
 
   // Check availableJobs
 
-  // national transfer
-  AB_JOB *abJob = AB_JobSingleTransfer_new(abAccount);
-  if (AB_Job_CheckAvailability(abJob) == 0)
-    list.append(germanOnlineTransfer::name());
-  AB_Job_free(abJob);
-
   // sepa transfer
-  abJob = AB_JobSepaTransfer_new(abAccount);
+  AB_JOB* abJob = AB_JobSepaTransfer_new(abAccount);
   if (AB_Job_CheckAvailability(abJob) == 0)
     list.append(sepaOnlineTransfer::name());
   AB_Job_free(abJob);
@@ -686,17 +676,7 @@ IonlineTaskSettings::ptr KBankingPlugin::settings(QString accountId, QString tas
   if (abAcc == 0)
     return IonlineTaskSettings::ptr();
 
-  if (germanOnlineTransfer::name() == taskName) {
-    // Get Limits for germanOnlineTransfer
-    QScopedPointer<AB_JOB, QScopedPointerAbJobDeleter> abJob(AB_JobSingleTransfer_new(abAcc));
-    if (AB_Job_CheckAvailability(abJob.data()) != 0)
-      return IonlineTaskSettings::ptr();
-
-    const AB_TRANSACTION_LIMITS* limits = AB_Job_GetFieldLimits(abJob.data());
-    return AB_TransactionLimits_toGermanOnlineTaskSettings(limits).dynamicCast<IonlineTaskSettings>();
-    //! @todo needs free? because that is not possible with const AB_TRANSACTION_LIMITS*
-    // AB_TransactionLimits_free( limits );
-  } else if (sepaOnlineTransfer::name() == taskName) {
+  if (sepaOnlineTransfer::name() == taskName) {
     // Get limits for sepaonlinetransfer
     QScopedPointer<AB_JOB, QScopedPointerAbJobDeleter> abJob(AB_JobSepaTransfer_new(abAcc));
     if (AB_Job_CheckAvailability(abJob.data()) != 0)
@@ -705,62 +685,6 @@ IonlineTaskSettings::ptr KBankingPlugin::settings(QString accountId, QString tas
     return AB_TransactionLimits_toSepaOnlineTaskSettings(limits).dynamicCast<IonlineTaskSettings>();
   }
   return IonlineTaskSettings::ptr();
-}
-
-bool KBankingPlugin::enqueTransaction(onlineJobTyped<germanOnlineTransfer>& job)
-{
-  /* get AqBanking account */
-  QString accId = job.constTask()->responsibleAccount();
-  AB_ACCOUNT *abAccount = aqbAccount(accId);
-  if (!abAccount) {
-    job.addJobMessage(onlineJobMessage(onlineJobMessage::warning, "KBanking", i18n("<qt>"
-                                       "The given application account <b>%1</b> "
-                                       "has not been mapped to an online "
-                                       "account."
-                                       "</qt>",
-                                       MyMoneyFile::instance()->account(accId).name())));
-    return false;
-  }
-  //setupAccountReference(acc, ba); // needed?
-
-  AB_JOB *abJob = AB_JobSingleTransfer_new(abAccount);
-  int rv = AB_Job_CheckAvailability(abJob);
-  if (rv) {
-    qDebug("AB_ERROR_OFFSET is %i", AB_ERROR_OFFSET);
-    job.addJobMessage(onlineJobMessage::error, "AqBanking",
-                      QString("National credit transfers for account \"%1\" are not available, error code %2.").arg(MyMoneyFile::instance()->account(accId).name(), rv),
-                      QString::number(rv)
-                     );
-    return false;
-  }
-  AB_TRANSACTION *abTransaction = AB_Transaction_new();
-
-  // Recipient
-  payeeIdentifiers::nationalAccount beneficiaryAcc = job.task()->beneficiaryTyped();
-  AB_Transaction_SetRemoteAccount(abTransaction, beneficiaryAcc);
-
-  // Origin Account
-  AB_Transaction_SetLocalAccount(abTransaction, abAccount);
-
-  // Purpose
-  QStringList qPurpose = job.task()->purpose().split('\n', QString::SkipEmptyParts);
-  GWEN_STRINGLIST *purpose = GWEN_StringList_fromQStringList(qPurpose);
-  AB_Transaction_SetPurpose(abTransaction, purpose);
-  GWEN_StringList_free(purpose);
-
-  // Other
-  AB_Transaction_SetTextKey(abTransaction, job.task()->textKey());
-  AB_Transaction_SetValue(abTransaction, AB_Value_fromMyMoneyMoney(job.task()->value()));
-
-  /** @todo LOW remove Debug info */
-  qDebug() << "SetTransaction: " << AB_Job_SetTransaction(abJob, abTransaction);
-
-  GWEN_DB_NODE *gwenNode = AB_Job_GetAppData(abJob);
-  GWEN_DB_SetCharValue(gwenNode, GWEN_DB_FLAGS_DEFAULT, "kmmOnlineJobId", m_kbanking->mappingId(job).toLatin1().constData());
-
-  qDebug() << "Enqueue: " << m_kbanking->enqueueJob(abJob);
-  //delete localAcc;
-  return true;
 }
 
 bool KBankingPlugin::enqueTransaction(onlineJobTyped<sepaOnlineTransfer>& job)

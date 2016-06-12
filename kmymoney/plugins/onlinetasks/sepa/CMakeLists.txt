@@ -2,6 +2,7 @@ set( sepaOnlineTasks_SRCS
   tasks/sepaonlinetransferimpl.cpp
   ui/sepacredittransferedit.cpp
   sepastorageplugin.cpp
+  sepaonlinetasksloader.cpp
 )
 
 set( sepaOnlineTasks_HEADER
@@ -12,13 +13,8 @@ kde4_add_ui_files( sepaOnlineTasks_SRCS
   ui/sepacredittransferedit.ui
 )
 
-add_library( konlinetasks_sepa_OBJECTS OBJECT ${sepaOnlineTasks_SRCS} )
-
-# Add actual plugin here it is not part of the objects
-# needed if multiple plugins are linked (needed for unit tests)
-kde4_add_plugin(konlinetasks_sepa
-  $<TARGET_OBJECTS:konlinetasks_sepa_OBJECTS>
-  sepaonlinetasksloader.cpp
+add_library(konlinetasks_sepa MODULE
+  ${sepaOnlineTasks_SRCS}
 )
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepaorders.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaorders.desktop)
