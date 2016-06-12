@@ -20,14 +20,13 @@
 #define CREDITTRANSFERSETTINGSBASE_H
 
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
-#include "onlinetasks/national/tasks/germanonlinetransfer.h"
 
 /**
  * @brief Base class for sepaCreditTransfer and germanCreditTransfer settings
  *
  * @internal Both credit transfers have similar fields
  */
-class creditTransferSettingsBase : public sepaOnlineTransfer::settings, public germanOnlineTransfer::settings
+class creditTransferSettingsBase : public sepaOnlineTransfer::settings
 {
 public:
   creditTransferSettingsBase()

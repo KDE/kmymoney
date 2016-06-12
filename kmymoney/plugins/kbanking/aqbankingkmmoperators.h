@@ -29,7 +29,6 @@
 
 #include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
 #include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
-#include "onlinetasks/national/tasks/germanonlinetransfer.h"
 
 class AB_ACCOUNT;
 class AB_TRANSACTION_LIMITS;
@@ -41,12 +40,6 @@ namespace payeeIdentifiers
 class ibanBic;
 class nationalAccount;
 }
-
-/**
- * @brief AB_TransactionLimits_toGermanOnlineTaskSettings
- * @param aqlimits IN
- */
-QSharedPointer<germanOnlineTransfer::settings> AB_TransactionLimits_toGermanOnlineTaskSettings(const AB_TRANSACTION_LIMITS* aqlimits);
 
 /**
  * @brief AB_TransactionLimits_toSepaOnlineTaskSettings
