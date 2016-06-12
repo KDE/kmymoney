@@ -22,6 +22,10 @@ add_library(kmm_kbanking MODULE ${kmm_kbanking_PART_SRCS})
 
 kcoreaddons_desktop_to_json(kmm_kbanking kmm_kbanking.desktop)
 
+# newer version of Gwenhywfar provide the variables GWENHYWFAR_QT4GUI_LDFLAGS
+# and GWENHYWFAR_CORE_LDFLAGS, older ones use GWENHYWFAR_LIBRARIES instead
+# we add both here for some time. At a later point simply remove
+# GWENHYWFAR_LIBRARIES.
 target_link_libraries(kmm_kbanking
                       kmm_kbanking_dialogs
                       kmm_kbanking_widgets

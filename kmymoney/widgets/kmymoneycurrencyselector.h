@@ -85,6 +85,7 @@ private:
 
 class KMyMoneyCurrencySelector : public KMyMoneySecuritySelector
 {
+  Q_OBJECT
 public:
   KMyMoneyCurrencySelector(QWidget *parent = 0);
   virtual ~KMyMoneyCurrencySelector() {}

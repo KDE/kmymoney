@@ -149,7 +149,7 @@ if(ENABLE_KBANKING)
     endif(NOT KBANKING_FOUND STREQUAL "AUTO")
     set(KBANKING_FOUND OFF)
     set(ENABLE_KBANKING OFF CACHE BOOL "Enable KBanking plugin" FORCE)
-  endif()
+  endif ()
 endif(ENABLE_KBANKING)
 
 # check for optional Weboob support
