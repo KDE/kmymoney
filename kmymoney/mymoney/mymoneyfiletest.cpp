@@ -1365,7 +1365,7 @@ void MyMoneyFileTest::testSetAccountName()
   ft.restart();
   clearObjectLists();
   try {
-    m->setAccountName(STD_ACC_ASSET, "Vermögen");
+    m->setAccountName(STD_ACC_ASSET, QString::fromUtf8("Vermögen"));
     ft.commit();
     QCOMPARE(m_objectsRemoved.count(), 0);
     QCOMPARE(m_objectsModified.count(), 1);
@@ -1410,7 +1410,7 @@ void MyMoneyFileTest::testSetAccountName()
   ft.restart();
 
   QCOMPARE(m->liability().name(), QLatin1String("Verbindlichkeiten"));
-  QCOMPARE(m->asset().name(), QLatin1String("Vermögen"));
+  QCOMPARE(m->asset().name(), QString::fromUtf8("Vermögen"));
   QCOMPARE(m->expense().name(), QLatin1String("Ausgaben"));
   QCOMPARE(m->income().name(), QLatin1String("Einnahmen"));
 
