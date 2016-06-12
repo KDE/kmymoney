@@ -54,10 +54,12 @@ find_package(LibAlkimia 6.0.0 REQUIRED)
 find_package(KChart 2.6.0 REQUIRED)
 
 add_definitions(-DQT_USE_QSTRINGBUILDER -DQT_NO_CAST_TO_ASCII)
-add_compile_options(-std=c++11) # TODO make system independent, easily done with cmake 3
-# Used so far:
-# PUBLIC: cxx_nullptr
-# PRIVATE: cxx_decltype, cxx_lambdas, cxx_constexpr, cxx_range_for
+if(NOT MSVC)
+  add_compile_options(-std=c++11) # TODO make system independent, easily done with cmake 3
+  # Used so far:
+  # PUBLIC: cxx_nullptr
+  # PRIVATE: cxx_decltype, cxx_lambdas, cxx_constexpr, cxx_range_for
+endif()
 
 string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
 if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
@@ -218,15 +220,15 @@ endif()
 include(KDECompilerSettings)
 kde_enable_exceptions()
 
-if(CMAKE_SYSTEM_NAME MATCHES Linux)
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,--as-needed")
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--as-needed")
-endif(CMAKE_SYSTEM_NAME MATCHES Linux)
+endif(CMAKE_SYSTEM_NAME MATCHES "Linux")
 
-if(NOT WIN32)
+if(NOT MSVC)
   # use position independent code
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
-endif(NOT WIN32)
+endif(NOT MSVC)
 if(CMAKE_COMPILER_IS_GNUCXX)
   # be more pedantic about common symbols
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wlogical-op")
