@@ -243,9 +243,9 @@ if(CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op")
 
   # be pedantic about undefined symbols when linking shared libraries
-  if(CMAKE_SYSTEM_NAME MATCHES Linux OR CMAKE_SYSTEM_NAME MATCHES kFreeBSD OR CMAKE_SYSTEM_NAME STREQUAL GNU)
+  if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "kFreeBSD" OR CMAKE_SYSTEM_NAME STREQUAL "GNU")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined -Wl,--as-needed")
-  endif(CMAKE_SYSTEM_NAME MATCHES Linux OR CMAKE_SYSTEM_NAME MATCHES kFreeBSD OR CMAKE_SYSTEM_NAME STREQUAL GNU)
+  endif(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "kFreeBSD" OR CMAKE_SYSTEM_NAME STREQUAL "GNU")
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
 option(USE_QT_DESIGNER
@@ -276,53 +276,6 @@ add_subdirectory( doc )
 if (USE_DEVELOPER_DOC)
   add_subdirectory( developer-doc )
 endif (USE_DEVELOPER_DOC)
-
-# by default, the package name is kmymoney
-set(CPACK_PACKAGE_NAME "kmymoney")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A Personal Finance Manager")
-set(CPACK_PACKAGE_VERSION_MAJOR  ${VERSION_MAJOR})
-set(CPACK_PACKAGE_VERSION_MINOR  ${VERSION_MINOR})
-set(CPACK_PACKAGE_VERSION_PATCH  ${VERSION_PATCH})
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "/opt/kde4")
-
-# When building with 'make package', use these cpack generators
-set(CPACK_GENERATOR "TGZ" "TBZ2")
-# When building with 'make package_source', use these cpack generators
-set(CPACK_SOURCE_GENERATOR "TGZ" "TBZ2")
-
-# don't include files matching these into the source packages
-# (Note: all other files in the source directory will be included)
-set(CPACK_SOURCE_IGNORE_FILES
-  "${CMAKE_CURRENT_BINARY_DIR}" # the build directory. MUST build out-of-source!
-  "/CVS/"      # cvs directories
-  "/\\\\."     # all files starting with '.' (this includes .cvsignore files)
-  "~$"         # all files ending in '~'
-  "\\\\.m4$"   # since this is a cmake dist, we remove automake files
-  "\\\\.m4\\\\.in$" "\\\\.am$" "Makefile\\\\.dist" "configure\\\\.in"
-  )
-# This will create the cpack configuration files.
-include(CPack)
-
-##### RPM Setup (.rpm and .srpm) #####
-# We use cmake/modules/UseRPMTools.cmake for RPM creation
-include(UseRPMTools)
-if(RPMTools_FOUND)
-  set(RPM_VERSION_SUFFIX  ${VERSION_SUFFIX})
-  if(${RPM_VERSION_SUFFIX} MATCHES "-.*")
-    # remove the leading dash from the version suffix
-    string(LENGTH ${RPM_VERSION_SUFFIX} LEN)
-    math(EXPR LEN ${LEN}-1)
-    string(SUBSTRING ${RPM_VERSION_SUFFIX} 1 ${LEN} RPM_VERSION_SUFFIX)
-  endif(${RPM_VERSION_SUFFIX} MATCHES "-.*")
-
-  # kmymoney conflicts with kmymoney-unstable
-  set(RPM_CONFLICTING kmymoney-unstable)
-  rpmtools_add_rpm_targets(kmymoney          kmymoney.spec.in)
-
-  # kmymoney-unstable conflicts with kmymoney
-  set(RPM_CONFLICTING kmymoney)
-  rpmtools_add_rpm_targets(kmymoney-unstable kmymoney.spec.in)
-endif(RPMTools_FOUND)
 
 ######################### Output Results #############################
 
