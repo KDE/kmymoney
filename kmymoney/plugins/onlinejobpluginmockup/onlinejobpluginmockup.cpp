@@ -23,7 +23,8 @@
 #include "mymoneyfile.h"
 #include "onlinejobadministration.h"
 
-#include "germancredittransfersettingsmockup.h"
+#include "plugins/onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "sepacredittransfersettingsmockup.h"
 
 K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<onlineJobPluginMockup>();)
 K_EXPORT_PLUGIN(KBankingFactory("onlinejobpluginmockup"))
@@ -31,7 +32,7 @@ K_EXPORT_PLUGIN(KBankingFactory("onlinejobpluginmockup"))
 onlineJobPluginMockup::onlineJobPluginMockup(QObject* parent, const QVariantList&)
     : OnlinePluginExtended(parent, "onlinejobpluginmockup")
 {
-  qDebug("onlineTaskDebugger should be used during development only!");
+  qDebug("onlineJobPluginMockup should be used during development only!");
 }
 
 void onlineJobPluginMockup::protocols(QStringList& protocolList) const
@@ -81,8 +82,8 @@ QStringList onlineJobPluginMockup::availableJobs(QString accountId)
 IonlineTaskSettings::ptr onlineJobPluginMockup::settings(QString accountId, QString taskName)
 {
   try {
-    if (taskName == germanOnlineTransfer::name() && MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider") == objectName())
-      return IonlineTaskSettings::ptr(new germanCreditTransferSettingsMockup);
+    if (taskName == sepaOnlineTransfer::name() && MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider") == objectName())
+      return IonlineTaskSettings::ptr(new sepaCreditTransferSettingsMockup);
   } catch (MyMoneyException&) {
   }
   return IonlineTaskSettings::ptr();
