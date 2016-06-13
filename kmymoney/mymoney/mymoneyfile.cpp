@@ -500,8 +500,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  const MyMoneyTransaction* t = &transaction;
-  MyMoneyTransaction tCopy;
+  MyMoneyTransaction tCopy(transaction);
 
   // now check the splits
   bool loanAccountAffected = false;
@@ -521,7 +520,6 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   // change transfer splits between asset/liability and loan accounts
   // into amortization splits
   if (loanAccountAffected) {
-    tCopy = transaction;
     QList<MyMoneySplit> list = transaction.splits();
     for (it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
       if ((*it_s).action() == MyMoneySplit::ActionTransfer) {
@@ -531,7 +529,6 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
           MyMoneySplit s = (*it_s);
           s.setAction(MyMoneySplit::ActionAmortization);
           tCopy.modifySplit(s);
-          t = &tCopy;
         }
       }
     }
@@ -551,12 +548,15 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
     //FIXME-ALEX Do I need to add d->addCacheNotification((*it_s).tagList()); ??
   }
 
+  // make sure the value is rounded to the accounts precision
+  fixSplitPrecision(tCopy);
+
   // perform modification
-  d->m_storage->modifyTransaction(*t);
+  d->m_storage->modifyTransaction(tCopy);
 
   // and mark all accounts that are referenced
-  for (it_s = t->splits().constBegin(); it_s != t->splits().constEnd(); ++it_s) {
-    d->addCacheNotification((*it_s).accountId(), t->postDate());
+  for (it_s = tCopy.splits().constBegin(); it_s != tCopy.splits().constEnd(); ++it_s) {
+    d->addCacheNotification((*it_s).accountId(), tCopy.postDate());
     d->addCacheNotification((*it_s).payeeId());
     //FIXME-ALEX Do I need to add d->addCacheNotification((*it_s).tagList()); ??
   }
@@ -1183,6 +1183,9 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
   if (transaction.commodity().isEmpty()) {
     transaction.setCommodity(baseCurrency().id());
   }
+
+  // make sure the value is rounded to the accounts precision
+  fixSplitPrecision(transaction);
 
   // then add the transaction to the file global pool
   d->m_storage->addTransaction(transaction);
@@ -3173,6 +3176,28 @@ int MyMoneyFile::countTransactionsWithSpecificReconciliationState(const QString&
   filter.addState(state);
   return transactionList(filter).count();
 }
+
+  /**
+   * Make sure that the splits value has the precision of the corresponding account
+   */
+void MyMoneyFile::fixSplitPrecision(MyMoneyTransaction& t) const
+{
+  QList<MyMoneySplit>::iterator its;
+  MyMoneySecurity transactionSecurity = security(t.commodity());
+  int transactionFraction = transactionSecurity.smallestAccountFraction();
+
+  for(its = t.splits().begin(); its != t.splits().end(); ++its) {
+    MyMoneyAccount acc = account((*its).accountId());
+    int fraction = acc.fraction();
+    if(fraction == -1) {
+      MyMoneySecurity sec = security(acc.currencyId());
+      fraction = acc.fraction(sec);
+    }
+    (*its).setShares((*its).shares().convertDenominator(fraction).canonicalize());
+    (*its).setValue((*its).value().convertDenominator(transactionFraction).canonicalize());
+  }
+}
+
 
 MyMoneyFileTransaction::MyMoneyFileTransaction() :
     m_isNested(MyMoneyFile::instance()->hasTransaction()),
