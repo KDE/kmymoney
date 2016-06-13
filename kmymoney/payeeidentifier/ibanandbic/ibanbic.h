@@ -76,7 +76,8 @@ public:
    * Use this method if you know that iban is in electronic format already. No futher checks are done.
    */
   void setElectronicIban(const QString& iban) {
-    Q_ASSERT(iban == ibanToElectronic(iban)); m_iban = iban;
+    Q_ASSERT(iban == ibanToElectronic(iban));
+    m_iban = iban;
   }
 
   /** @copydoc m_iban */

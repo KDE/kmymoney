@@ -28,7 +28,7 @@
 #include "models/payeeidentifiercontainermodel.h"
 #include "ibanbicitemedit.h"
 
-ibanBicItemDelegate::ibanBicItemDelegate(QObject* parent, const QVariantList&)
+ibanBicItemDelegate::ibanBicItemDelegate(QObject* parent)
     : QStyledItemDelegate(parent)
 {
 

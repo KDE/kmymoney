@@ -1,15 +1,16 @@
-configure_file(ibanbicdata.desktop.in ibanbicdata.desktop)
-
 set ( PAYEEIDENTIFIER_IBAN_BIC_SCRS
   bicmodel.cpp
   ibanbicdata.cpp
   ibanbic.cpp
 )
 
-kde4_add_library( payeeidentifier_iban_bic SHARED
+add_library( payeeidentifier_iban_bic SHARED
   ${PAYEEIDENTIFIER_IBAN_BIC_SCRS}
 )
 generate_export_header(payeeidentifier_iban_bic BASE_NAME iban_bic_identifier)
+
+configure_file(ibanbicdata.desktop.in ibanbicdata.desktop)
+kcoreaddons_desktop_to_json(payeeidentifier_iban_bic "${CMAKE_CURRENT_BINARY_DIR}/ibanbicdata.desktop")
 
 target_link_libraries( payeeidentifier_iban_bic PUBLIC
   kmm_payeeidentifier
@@ -38,7 +39,7 @@ set ( IBAN_BIC_STORAGE_PLUGIN_SCRS
   ibanbicstorageplugin.cpp
 )
 
-kde4_add_plugin( payeeidentifier_ibanbic_storageplugin
+add_library( payeeidentifier_ibanbic_storageplugin MODULE
   ${IBAN_BIC_STORAGE_PLUGIN_SCRS}
 )
 
@@ -47,6 +48,10 @@ target_link_libraries( payeeidentifier_ibanbic_storageplugin
   Qt5::Sql
   kmm_mymoney
 )
+
+kcoreaddons_desktop_to_json(payeeidentifier_ibanbic_storageplugin
+  ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-storageplugin.desktop
+  )
 
 install(TARGETS payeeidentifier_ibanbic_storageplugin
   DESTINATION ${PLUGIN_INSTALL_DIR})

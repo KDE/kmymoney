@@ -28,8 +28,10 @@
 class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT ibanBicItemDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kmymoney.payeeIdentifier.ibanbic.delegate" FILE "kmymoney-ibanbic-delegate.json")
+
 public:
-  ibanBicItemDelegate(QObject* parent, const QVariantList& options = QVariantList());
+  ibanBicItemDelegate(QObject* parent = nullptr);
   virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
   virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
   virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
@@ -43,9 +45,6 @@ Q_SIGNALS:
 private:
   inline payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBicByIndex(const QModelIndex& index) const;
 
-private Q_SLOTS:
-  // void edit(payeeIdentifier);
-  // void id(payeeIdentifier);
 };
 
 #endif // IBANBICITEMDELEGATE_H

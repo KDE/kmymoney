@@ -22,11 +22,8 @@
 
 #include <QSqlQuery>
 #include <QSqlError>
-// TODO: port KF5
-/*K_PLUGIN_FACTORY(ibanBicStoragePluginFactory,
-                 registerPlugin<ibanBicStoragePlugin>();
-                )
-K_EXPORT_PLUGIN(ibanBicStoragePluginFactory("ibanBicStoragePlugin"))*/
+
+K_PLUGIN_FACTORY_WITH_JSON(ibanBicStoragePluginFactory, "ibanbicdata.json", registerPlugin<ibanBicStoragePlugin>();)
 
 QString ibanBicStoragePlugin::iid()
 {
@@ -98,3 +95,5 @@ bool ibanBicStoragePlugin::setupDatabase(QSqlDatabase connection)
 
   return false;
 }
+
+#include "ibanbicstorageplugin.moc"

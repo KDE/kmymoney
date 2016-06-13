@@ -4,7 +4,7 @@ ServiceTypes=KMyMoney/PayeeIdentifierDelegate
 
 X-KMyMoney-payeeIdentifierIds=org.kmymoney.payeeIdentifier.ibanbic
 
-X-KDE-Library=payeeidentifier_iban_bic_delegates
+X-KDE-Library=payeeidentifier_iban_bic_delegate
 X-KDE-PluginKeyword=ibanBicDelegate
 
 X-KDE-PluginInfo-Name=IBAN and BIC support
@@ -15,5 +15,5 @@ X-KDE-PluginInfo-Website=http://kmymoney.org/plugins.html
 X-KDE-PluginInfo-License=GPLv2+
 X-KDE-PluginInfo-EnabledByDefault=true
 
-Name=payeeidentifier_iban_bic_delegates
+Name=payeeidentifier_iban_bic_widgets
 Comment=Plugin to store international bank account number and business identifier code

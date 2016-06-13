@@ -1,4 +1,5 @@
-## Shared library for widgets
+## Shared library for widgets and modulue for delegate
+# Note: all "real" code is in ..._widgets, ..._delegate is only used to load the shared library
 
 set ( IBAN_BIC_WIDGETS_SCRS
   kibanlineedit.cpp
@@ -18,21 +19,24 @@ set( IBAN_BIC_WIDGETS_HEADERS
   ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier_iban_bic_widgets_export.h
 )
 
-kde4_add_ui_files(IBAN_BIC_WIDGETS_SCRS
+qt5_wrap_ui(IBAN_BIC_WIDGETS_SCRS
   ibanbicitemedit.ui
 )
 
-kde4_add_library( payeeidentifier_iban_bic_widgets SHARED
+add_library( payeeidentifier_iban_bic_widgets SHARED
   ${IBAN_BIC_WIDGETS_SCRS}
 )
 
-set_target_properties(payeeidentifier_iban_bic_widgets PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+set_target_properties(payeeidentifier_iban_bic_widgets
+  PROPERTIES VERSION ${GENERIC_LIB_VERSION}
+  SOVERSION ${GENERIC_LIB_SOVERSION}
+)
 
 target_include_directories(payeeidentifier_iban_bic_widgets
   PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-target_link_libraries( payeeidentifier_iban_bic_widgets LINK_PUBLIC
+target_link_libraries( payeeidentifier_iban_bic_widgets PUBLIC
   payeeidentifier_iban_bic
   Qt5::Core
   KF5::KDELibs4Support
@@ -43,14 +47,15 @@ target_link_libraries( payeeidentifier_iban_bic_widgets LINK_PUBLIC
 generate_export_header( payeeidentifier_iban_bic_widgets )
 
 install(TARGETS payeeidentifier_iban_bic_widgets
-        ${INSTALL_TARGETS_DEFAULT_ARGS})
+        ${INSTALL_TARGETS_DEFAULT_ARGS}
+)
 
 ## Delegate plugin
 set (IBAN_BIC_UI_SCRS
   pluginfactory.cpp
 )
 
-kde4_add_plugin( payeeidentifier_iban_bic_delegates
+add_library( payeeidentifier_iban_bic_delegates MODULE
   ${IBAN_BIC_UI_SCRS}
 )
 
@@ -62,10 +67,13 @@ target_link_libraries( payeeidentifier_iban_bic_delegates
   KF5::KDELibs4Support
 )
 
-install(TARGETS payeeidentifier_iban_bic_delegates
-        DESTINATION ${PLUGIN_INSTALL_DIR})
-
 configure_file(kmymoney-ibanbic-delegate.desktop.in kmymoney-ibanbic-delegate.desktop)
+kcoreaddons_desktop_to_json(payeeidentifier_iban_bic_widgets "${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-delegate.desktop")
+
+install(TARGETS payeeidentifier_iban_bic_delegates
+        DESTINATION ${PLUGIN_INSTALL_DIR}
+)
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-delegate.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})
+        DESTINATION ${SERVICES_INSTALL_DIR}
+)
