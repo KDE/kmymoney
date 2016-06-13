@@ -18,8 +18,6 @@ kde4_add_plugin(kmm_onlinejobpluginmockup ${kmm_onlinejobpluginmockup_PART_SRCS}
 target_link_libraries(kmm_onlinejobpluginmockup
                       kmm_mymoney
                       kmm_plugin
-                      ${KDE4_KDEUI_LIBS}
-                      ${LIBALKIMIA_LIBRARIES}
 )
 
 

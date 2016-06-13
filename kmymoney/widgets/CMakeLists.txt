@@ -131,7 +131,7 @@ if( USE_QT_DESIGNER )
   # dialogs and converter libraries.  If a widget references something
   # from one of these libraries it is most likely due to code that needs
   # to be excluded with a KMM_DESIGNER ifndef.
-  target_link_libraries(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_config models ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+  target_link_libraries(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_config models)
 
   install(TARGETS kmymoneywidgets DESTINATION ${QT_PLUGINS_DIR}/designer )
 endif( USE_QT_DESIGNER )
