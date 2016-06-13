@@ -40,6 +40,7 @@ target_link_libraries( konlinetasks_sepa
   kmm_utils_validators
   payeeidentifier_iban_bic_widgets
   KF5::KDELibs4Support
+  KF5::ItemModels
   #KF5::KIO TODO: Really not needed?!
 )
 
