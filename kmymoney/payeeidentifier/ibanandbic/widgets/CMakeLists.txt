@@ -28,8 +28,8 @@ add_library( payeeidentifier_iban_bic_widgets SHARED
 )
 
 set_target_properties(payeeidentifier_iban_bic_widgets
-  PROPERTIES VERSION ${GENERIC_LIB_VERSION}
-  SOVERSION ${GENERIC_LIB_SOVERSION}
+  PROPERTIES VERSION ${PROJECT_VERSION}
+  SOVERSION ${PROJECT_VERSION_MAJOR}
 )
 
 target_include_directories(payeeidentifier_iban_bic_widgets

@@ -21,7 +21,7 @@ target_link_libraries( payeeidentifier_iban_bic PUBLIC
   Alkimia::alkimia
 )
 
-set_target_properties(payeeidentifier_iban_bic PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+set_target_properties(payeeidentifier_iban_bic PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
 
 install(TARGETS payeeidentifier_iban_bic
         ${INSTALL_TARGETS_DEFAULT_ARGS}
