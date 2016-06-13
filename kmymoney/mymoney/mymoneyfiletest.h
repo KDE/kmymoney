@@ -101,6 +101,7 @@ private slots:
   void testOnlineJobRollback();
   void testModifyOnlineJob();
   void testClearedBalance();
+  void testAdjustedValues();
 
 private slots:
   void objectAdded(MyMoneyFile::notificationObjectT type, const MyMoneyObject * const obj);

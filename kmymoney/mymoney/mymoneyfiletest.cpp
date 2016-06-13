@@ -2537,3 +2537,130 @@ void MyMoneyFileTest::testClearedBalance()
     QFAIL("Unexpected exception!");
   }
 }
+
+void MyMoneyFileTest::testAdjustedValues()
+{
+  // create a checking account, an expeense, an investment account and a stock
+  AddOneAccount();
+
+  MyMoneyAccount exp1;
+  exp1.setAccountType(MyMoneyAccount::Expense);
+  exp1.setName("Expense1");
+  exp1.setCurrencyId("EUR");
+
+  MyMoneyFileTransaction ft;
+  try {
+    MyMoneyAccount parent = m->expense();
+    m->addAccount(exp1, parent);
+    ft.commit();
+  } catch (const MyMoneyException &) {
+    QFAIL("Unexpected exception!");
+  }
+
+  testAddEquityAccount();
+
+  testBaseCurrency();
+  MyMoneySecurity stockSecurity(QLatin1String("Blubber"), QLatin1String("TestsockSecurity"), QLatin1String("BLUB"), 1000, 1000, 1000);
+  stockSecurity.setTradingCurrency(QLatin1String("BLUB"));
+  // add the security
+  ft.restart();
+  try {
+    m->addSecurity(stockSecurity);
+    ft.commit();
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  MyMoneyAccount i = m->accountByName("Investment");
+  MyMoneyAccount stock;
+  ft.restart();
+  try {
+    stock.setName("Teststock");
+    stock.setCurrencyId(stockSecurity.id());
+    stock.setAccountType(MyMoneyAccount::Stock);
+    m->addAccount(stock, i);
+    ft.commit();
+  } catch (const MyMoneyException &e) {
+    unexpectedException(e);
+  }
+
+  // values taken from real example on https://bugs.kde.org/show_bug.cgi?id=345655
+  MyMoneySplit s1, s2, s3;
+  s1.setAccountId(QLatin1String("A000001"));
+  s1.setShares(MyMoneyMoney(QLatin1String("-99901/1000")));
+  s1.setValue(MyMoneyMoney(QLatin1String("-999/10")));
+
+  s2.setAccountId(exp1.id());
+  s2.setShares(MyMoneyMoney(QLatin1String("-611/250")));
+  s2.setValue(MyMoneyMoney(QLatin1String("-61/25")));
+
+  s3.setAccountId(stock.id());
+  s3.setAction(MyMoneySplit::BuyShares);
+  s3.setShares(MyMoneyMoney(QLatin1String("64901/100000")));
+  s3.setPrice(MyMoneyMoney(QLatin1String("157689/1000")));
+  s3.setValue(MyMoneyMoney(QLatin1String("102340161/1000000")));
+
+  MyMoneyTransaction t;
+  t.setCommodity(QLatin1String("EUR"));
+  t.setPostDate(QDate::currentDate());
+  t.addSplit(s1);
+  t.addSplit(s2);
+  t.addSplit(s3);
+
+  // make sure the split sum is not zero
+  QVERIFY(!t.splitSum().isZero());
+
+  ft.restart();
+  try {
+    m->addTransaction(t);
+    ft.commit();
+  } catch (const MyMoneyException &) {
+    QFAIL("Unexpected exception!");
+  }
+
+  QCOMPARE(t.splitById(s1.id()).shares(), MyMoneyMoney(QLatin1String("-999/10")));
+  QCOMPARE(t.splitById(s1.id()).value(), MyMoneyMoney(QLatin1String("-999/10")));
+
+  QCOMPARE(t.splitById(s2.id()).shares(), MyMoneyMoney(QLatin1String("-61/25")));
+  QCOMPARE(t.splitById(s2.id()).value(), MyMoneyMoney(QLatin1String("-61/25")));
+
+  QCOMPARE(t.splitById(s3.id()).shares(), MyMoneyMoney(QLatin1String("649/1000")));
+  QCOMPARE(t.splitById(s3.id()).value(), MyMoneyMoney(QLatin1String("10234/100")));
+  QCOMPARE(t.splitById(s3.id()).price(), MyMoneyMoney(QLatin1String("157689/1000")));
+  QCOMPARE(t.splitSum(), MyMoneyMoney());
+
+  // now reset and check if modify also works
+  s1.setShares(MyMoneyMoney(QLatin1String("-999/10")));
+  s1.setValue(MyMoneyMoney(QLatin1String("-999/10")));
+
+  s2.setShares(MyMoneyMoney(QLatin1String("-61/25")));
+  s2.setValue(MyMoneyMoney(QLatin1String("-61/25")));
+
+  s3.setShares(MyMoneyMoney(QLatin1String("649/1000")));
+  s3.setPrice(MyMoneyMoney(QLatin1String("157689/1000")));
+  s3.setValue(MyMoneyMoney(QLatin1String("102340161/1000000")));
+
+  t.modifySplit(s1);
+  t.modifySplit(s2);
+  t.modifySplit(s3);
+
+  // make sure the split sum is not zero
+  QVERIFY(!t.splitSum().isZero());
+
+  ft.restart();
+  try {
+    m->modifyTransaction(t);
+    ft.commit();
+  } catch (const MyMoneyException &) {
+    QFAIL("Unexpected exception!");
+  }
+
+  // we need to get the transaction from the engine, as modifyTransaction does
+  // not return the modified values
+  MyMoneyTransaction t2 = m->transaction(t.id());
+
+  QCOMPARE(t2.splitById(s3.id()).shares(), MyMoneyMoney(QLatin1String("649/1000")));
+  QCOMPARE(t2.splitById(s3.id()).value(), MyMoneyMoney(QLatin1String("10234/100")));
+  QCOMPARE(t2.splitById(s3.id()).price(), MyMoneyMoney(QLatin1String("157689/1000")));
+  QCOMPARE(t2.splitSum(), MyMoneyMoney());
+}

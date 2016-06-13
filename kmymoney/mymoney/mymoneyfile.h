@@ -1625,6 +1625,11 @@ private:
 
   const MyMoneyAccount openingBalanceAccount_internal(const MyMoneySecurity& security) const;
 
+  /**
+   * Make sure that the splits value has the precision of the corresponding account
+   */
+  void fixSplitPrecision(MyMoneyTransaction& t) const;
+
 private:
   /// \internal d-pointer class.
   class Private;
