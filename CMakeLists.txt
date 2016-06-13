@@ -1,39 +1,34 @@
 # The CMake version we require
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.1)
 
 # Setting the name of the main project
-project(KMyMoney)
+project(KMyMoney VERSION "4.100.0")
+
+# The current version of KMyMoney (used for backwards compitibility, depricated since 5.0)
+set(VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(VERSION_PATCH ${PROJECT_VERSION_PATCH})
+
+# Determine the GIT reference (if we're based on GIT)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
+  execute_process(COMMAND git rev-parse --short HEAD WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" OUTPUT_VARIABLE VERSION_SUFFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
+  set(VERSION_SUFFIX "-${VERSION_SUFFIX}")
+  # Add variables which are similar to the build in names of cmake
+  set(PROJECT_VERSION_SUFFIX "${VERSION_SUFFIX}")
+  set(${PROJECT_NAME}_VERSION_SUFFIX "${VERSION_SUFFIX}")
+endif()
 
 # Automoc all sources
 set(CMAKE_AUTOMOC TRUE)
 
-cmake_policy(SET CMP0028 NEW)
 if (POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW) # Policy introduced in CMake version 3.3
 endif()
 
-# until the createtarball script generates different custom targets
-# for the various translations, we need to keep the following setting
-# http://www.vtkedge.org/Wiki/CMake_Policies#Setting_Policies_Individually
-# has an explanation of the problem
-cmake_policy(SET CMP0002 OLD)
-cmake_policy(SET CMP0026 OLD)
 
 # Our modules reside in the subdirectory cmake/modules/
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
-######################### KMyMoney Version ##########################
-
-# The current version of KMyMoney (used for packages and config.h)
-set(VERSION_MAJOR "4")
-set(VERSION_MINOR "100")
-set(VERSION_PATCH "0")
-
-# Determine the GIT reference (if we're based on GIT)
-if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git AND CMAKE_SYSTEM_NAME MATCHES Linux)
-  execute_process(COMMAND git rev-parse --short HEAD WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} OUTPUT_VARIABLE VERSION_SUFFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
-  set(VERSION_SUFFIX "-${VERSION_SUFFIX}")
-endif()
 
 ######################### General Requirements ##########################
 
@@ -53,20 +48,19 @@ find_package(KF5 5.2 REQUIRED COMPONENTS CoreAddons Config I18n KHtml KDELibs4Su
 find_package(LibAlkimia 6.0.0 REQUIRED)
 find_package(KChart 2.6.0 REQUIRED)
 
-add_definitions(-DQT_USE_QSTRINGBUILDER -DQT_NO_CAST_TO_ASCII)
+add_definitions("-DQT_USE_QSTRINGBUILDER" "-DQT_NO_CAST_TO_ASCII")
 if(NOT MSVC)
-  add_compile_options(-std=c++11) # TODO make system independent, easily done with cmake 3
-  # Used so far:
-  # PUBLIC: cxx_nullptr
-  # PRIVATE: cxx_decltype, cxx_lambdas, cxx_constexpr, cxx_range_for
+  # Temporary solution until all targets have compile features set
+  add_compile_options(-std=c++11)
 endif()
 
 string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
-if(CMAKE_BUILD_TYPE_TOLOWER MATCHES debugfull)
-  add_definitions (-DQT_STRICT_ITERATORS)
+if(CMAKE_BUILD_TYPE_TOLOWER MATCHES "debugfull")
+  add_definitions("-DQT_STRICT_ITERATORS")
   set(KMM_DEBUG 1)
 endif()
 
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
 
 # check for Doxygen
@@ -103,13 +97,13 @@ check_type_size(long SIZEOF_LONG)
 
 # This is needed for QtSqlite and QtDesigner
 # (they'll install files to ${QT_INSTALL_DIR}/plugins/)
-get_filename_component(QT_BIN_DIR ${QT_MOC_EXECUTABLE} PATH)
+get_filename_component(QT_BIN_DIR "${QT_MOC_EXECUTABLE}" PATH)
 get_filename_component(QT_DIR     ${QT_BIN_DIR}        PATH)
 set(QT_INSTALL_DIR ${QT_DIR} CACHE PATH
   "Qt install prefix defaults to the Qt prefix: ${QT_DIR}")
 
 if(KF5IdentityManagement_FOUND AND KF5Akonadi_FOUND AND KF5Contacts_FOUND)
-  set(KMM_ADDRESSBOOK_FOUND 1)
+  set(KMM_ADDRESSBOOK_FOUND true)
 endif()
 
 # check for optional OFX support
@@ -138,9 +132,8 @@ option(ENABLE_KBANKING "Enable KBanking plugin" ON)
 if(ENABLE_KBANKING)
   find_package(Qt5QuickWidgets) # Includes Qt5Qml
 
-  # The required verions are not correct. At time of writing the required patches to AqBanking and GWENHYWFAR were not upstream, yet.
-  find_package(AQBANKING "5.6.4") # Should be "5.6.5"
-  find_package(GWENHYWFAR "4.15.2") # Should be "4.15.3"
+  find_package(AQBANKING 5.6.5)
+  find_package(GWENHYWFAR 4.15.3)
   find_package(gwengui-cpp)
   find_package(gwengui-qt5)
   if (AQBANKING_FOUND AND gwengui-cpp_FOUND AND gwengui-qt5_FOUND AND Qt5QuickWidgets_FOUND)
@@ -225,10 +218,9 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--as-needed")
 endif(CMAKE_SYSTEM_NAME MATCHES "Linux")
 
-if(NOT MSVC)
-  # use position independent code
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
-endif(NOT MSVC)
+# IDEA: Set on a per target base
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 if(CMAKE_COMPILER_IS_GNUCXX)
   # be more pedantic about common symbols
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wlogical-op")
@@ -245,8 +237,8 @@ if(CMAKE_COMPILER_IS_GNUCXX)
   # be pedantic about undefined symbols when linking shared libraries
   if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "kFreeBSD" OR CMAKE_SYSTEM_NAME STREQUAL "GNU")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined -Wl,--as-needed")
-  endif(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "kFreeBSD" OR CMAKE_SYSTEM_NAME STREQUAL "GNU")
-endif(CMAKE_COMPILER_IS_GNUCXX)
+  endif()
+endif()
 
 option(USE_QT_DESIGNER
   "Install KMyMoney specific widget library for Qt-Designer (default=OFF)" OFF)
@@ -257,9 +249,7 @@ option(USE_DEVELOPER_DOC
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
   option(USE_HTML_HANDBOOK
     "Generate KMyMoney manual in HTML format (default=OFF)" OFF)
-endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
-
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+endif()
 
 
 # Generation of the HTML version of the manual
@@ -280,8 +270,8 @@ endif (USE_DEVELOPER_DOC)
 ######################### Output Results #############################
 
 # create the config.h file out of the config.h.cmake
-configure_file  (config-kmymoney.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney.h )
-configure_file  (config-kmymoney-version.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney-version.h )
+configure_file("config-kmymoney.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney.h")
+configure_file("config-kmymoney-version.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney-version.h")
 
 # this macro maps the boolean variable ${_varname} to "yes"/"no"
 # and writes the output to the variable nice_${_varname}
