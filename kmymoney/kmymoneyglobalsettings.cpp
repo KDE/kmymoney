@@ -106,7 +106,7 @@ QDate KMyMoneyGlobalSettings::firstFiscalDate()
 {
   QDate date = QDate(QDate::currentDate().year(), firstFiscalMonth(), firstFiscalDay());
   if (date > QDate::currentDate())
-    date.addYears(-1);
+    date = date.addYears(-1);
   return date;
 }
 
