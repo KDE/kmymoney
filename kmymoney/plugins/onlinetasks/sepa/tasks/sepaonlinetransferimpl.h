@@ -19,9 +19,6 @@
 #ifndef SEPAONLINETRANSFERIMPL_H
 #define SEPAONLINETRANSFERIMPL_H
 
-#include <KLocalizedString>
-#include <QSqlQuery>
-
 #include "sepaonlinetransfer.h"
 #include "../sepastorageplugin.h"
 
@@ -79,9 +76,7 @@ public:
 
   bool isValid() const;
 
-  QString jobTypeName() const {
-    return i18n("SEPA Credit Transfer");
-  }
+  QString jobTypeName() const;
   virtual QString storagePluginIid() const {
     return sepaStoragePlugin::iid;
   }

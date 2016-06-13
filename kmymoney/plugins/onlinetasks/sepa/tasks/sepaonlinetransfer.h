@@ -19,10 +19,6 @@
 #ifndef SEPAONLINETRANSFER_H
 #define SEPAONLINETRANSFER_H
 
-#include <algorithm>
-
-#include <KLocalizedString>
-
 #include "misc/validators.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"

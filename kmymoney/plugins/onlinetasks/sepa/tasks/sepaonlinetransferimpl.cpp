@@ -20,6 +20,9 @@
 
 #include <QtCore/QString>
 #include <QSqlError>
+#include <QSqlQuery>
+
+#include <KLocalizedString>
 
 #include "mymoney/mymoneyfile.h"
 #include "mymoney/onlinejobadministration.h"
@@ -358,4 +361,9 @@ bool sepaOnlineTransferImpl::sqlRemove(QSqlDatabase databaseConnection, const QS
 bool sepaOnlineTransferImpl::hasReferenceTo(const QString& id) const
 {
   return (id == _originAccount);
+}
+
+QString sepaOnlineTransferImpl::jobTypeName() const
+{
+   return QLatin1String("SEPA Credit Transfer");
 }
