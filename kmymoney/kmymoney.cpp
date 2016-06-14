@@ -125,7 +125,7 @@
 #include "dialogs/knewbankdlg.h"
 #include "wizards/newinvestmentwizard/knewinvestmentwizard.h"
 #include "dialogs/knewaccountdlg.h"
-#include "dialogs/knewfiledlg.h"
+#include "dialogs/editpersonaldatadlg.h"
 #include "dialogs/kselectdatabasedlg.h"
 #include "dialogs/kcurrencycalculator.h"
 #include "dialogs/keditscheduledlg.h"
@@ -2109,18 +2109,18 @@ void KMyMoneyApp::slotFileViewPersonal()
   MyMoneyFile* file = MyMoneyFile::instance();
   MyMoneyPayee user = file->user();
 
-  QPointer<KNewFileDlg> newFileDlg = new KNewFileDlg(user.name(), user.address(),
+  QPointer<EditPersonalDataDlg> editPersonalDataDlg = new EditPersonalDataDlg(user.name(), user.address(),
       user.city(), user.state(), user.postcode(), user.telephone(),
       user.email(), this, i18n("Edit Personal Data"));
 
-  if (newFileDlg->exec() == QDialog::Accepted && newFileDlg != 0) {
-    user.setName(newFileDlg->userNameText);
-    user.setAddress(newFileDlg->userStreetText);
-    user.setCity(newFileDlg->userTownText);
-    user.setState(newFileDlg->userCountyText);
-    user.setPostcode(newFileDlg->userPostcodeText);
-    user.setTelephone(newFileDlg->userTelephoneText);
-    user.setEmail(newFileDlg->userEmailText);
+  if (editPersonalDataDlg->exec() == QDialog::Accepted && editPersonalDataDlg != 0) {
+    user.setName(editPersonalDataDlg->userNameText);
+    user.setAddress(editPersonalDataDlg->userStreetText);
+    user.setCity(editPersonalDataDlg->userTownText);
+    user.setState(editPersonalDataDlg->userCountyText);
+    user.setPostcode(editPersonalDataDlg->userPostcodeText);
+    user.setTelephone(editPersonalDataDlg->userTelephoneText);
+    user.setEmail(editPersonalDataDlg->userEmailText);
     MyMoneyFileTransaction ft;
     try {
       file->setUser(user);
@@ -2129,7 +2129,7 @@ void KMyMoneyApp::slotFileViewPersonal()
       KMessageBox::information(this, i18n("Unable to store user information: %1", e.what()));
     }
   }
-  delete newFileDlg;
+  delete editPersonalDataDlg;
 }
 
 void KMyMoneyApp::slotFileFileInfo()

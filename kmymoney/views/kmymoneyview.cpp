@@ -77,7 +77,6 @@
 #include "kcurrencyeditdlg.h"
 #include "kfindtransactiondlg.h"
 #include "knewbankdlg.h"
-#include "knewfiledlg.h"
 #include "mymoneyseqaccessmgr.h"
 #include "mymoneydatabasemgr.h"
 #include "imymoneystorageformat.h"

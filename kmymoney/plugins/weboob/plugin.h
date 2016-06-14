@@ -56,7 +56,7 @@ protected slots:
 
 private:
 
-  class Private;
+  struct Private;
   /// \internal d-pointer instance.
   const std::unique_ptr<Private> d;
 };

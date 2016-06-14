@@ -3,8 +3,8 @@
   <author></author>
   <comment></comment>
   <exportmacro></exportmacro>
-  <class>KNewFileDlgDecl</class>
-  <widget class="QDialog" name="kNewFileDlgDecl">
+  <class>EditPersonalDataDlgDecl</class>
+  <widget class="QDialog" name="EditPersonalDataDlgDecl">
     <property name="geometry">
       <rect>
         <x>0</x>

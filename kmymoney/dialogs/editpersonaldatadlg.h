@@ -34,17 +34,15 @@ struct ContactData;
 
 // This dialog lets the user create/edit a file.
 // Use the second constructor to edit a file.
-class KNewFileDlg : public QDialog
+class EditPersonalDataDlg : public QDialog
 {
   Q_OBJECT
 public:
-  explicit KNewFileDlg(QWidget *parent = 0, const QString& title = QString());
-  explicit KNewFileDlg(QString userName, QString userStreet,
+  explicit EditPersonalDataDlg(QWidget *parent = 0, const QString& title = QString());
+  explicit EditPersonalDataDlg(QString userName, QString userStreet,
                        QString userTown, QString userCounty, QString userPostcode, QString userTelephone,
                        QString userEmail, QWidget *parent = 0, const QString& title = QString());
-  ~KNewFileDlg();
-
-  QPushButton* cancelButton();
+  ~EditPersonalDataDlg();
 
 public:
   QString userNameText;

@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "knewfiledlg.h"
+#include "editpersonaldatadlg.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -35,13 +35,13 @@
 #include "mymoneycontact.h"
 #include "ui_knewfiledlgdecl.h"
 
-struct KNewFileDlg::Private {
+struct EditPersonalDataDlg::Private {
   Private() : m_contact(0) {}
   Ui::KNewFileDlgDecl ui;
   MyMoneyContact *m_contact;
 };
 
-KNewFileDlg::KNewFileDlg(QWidget *parent, const QString& title)
+EditPersonalDataDlg::EditPersonalDataDlg(QWidget *parent, const QString& title)
     : QDialog(parent), d(new Private)
 {
   d->m_contact = new MyMoneyContact(this);
@@ -50,7 +50,7 @@ KNewFileDlg::KNewFileDlg(QWidget *parent, const QString& title)
   init(title);
 }
 
-KNewFileDlg::KNewFileDlg(QString userName, QString userStreet,
+EditPersonalDataDlg::EditPersonalDataDlg(QString userName, QString userStreet,
                          QString userTown, QString userCounty, QString userPostcode, QString userTelephone,
                          QString userEmail, QWidget *parent, const QString& title)
     : QDialog(parent), d(new Private)
@@ -69,11 +69,10 @@ KNewFileDlg::KNewFileDlg(QString userName, QString userStreet,
   init(title);
 }
 
-void KNewFileDlg::init(const QString& title)
+void EditPersonalDataDlg::init(const QString& title)
 {
-    // TODO: port KF5
-  //d->ui.okBtn->setGuiItem(KStandardGuiItem::ok());
-  //d->ui.cancelBtn->setGuiItem(KStandardGuiItem::cancel());
+  KGuiItem::assign(d->ui.okBtn, KStandardGuiItem::ok());
+  KGuiItem::assign(d->ui.cancelBtn, KStandardGuiItem::cancel());
 
   if (!title.isEmpty())
     setWindowTitle(title);
@@ -86,12 +85,12 @@ void KNewFileDlg::init(const QString& title)
   connect(d->ui.kabcBtn, SIGNAL(clicked()), this, SLOT(loadFromAddressBook()));
 }
 
-KNewFileDlg::~KNewFileDlg()
+EditPersonalDataDlg::~EditPersonalDataDlg()
 {
   delete d;
 }
 
-void KNewFileDlg::okClicked()
+void EditPersonalDataDlg::okClicked()
 {
   userNameText = d->ui.userNameEdit->text();
   userStreetText = d->ui.streetEdit->text();
@@ -104,7 +103,7 @@ void KNewFileDlg::okClicked()
   accept();
 }
 
-void KNewFileDlg::loadFromAddressBook()
+void EditPersonalDataDlg::loadFromAddressBook()
 {
   d->ui.userNameEdit->setText(d->m_contact->ownerFullName());
   d->ui.emailEdit->setText(d->m_contact->ownerEmail());
@@ -117,7 +116,7 @@ void KNewFileDlg::loadFromAddressBook()
   d->m_contact->fetchContact(d->ui.emailEdit->text());
 }
 
-void KNewFileDlg::slotContactFetched(const ContactData &identity)
+void EditPersonalDataDlg::slotContactFetched(const ContactData &identity)
 {
   d->ui.telephoneEdit->setText(identity.phoneNumber);
   QString sep;
@@ -130,7 +129,3 @@ void KNewFileDlg::slotContactFetched(const ContactData &identity)
   d->ui.kabcBtn->setEnabled(true);
 }
 
-QPushButton* KNewFileDlg::cancelButton()
-{
-  return d->ui.cancelBtn;
-}

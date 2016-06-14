@@ -33,7 +33,7 @@ set(libdialogs_a_SOURCES
   knewbankdlg.cpp
   knewbudgetdlg.cpp
   knewequityentrydlg.cpp
-  knewfiledlg.cpp
+  editpersonaldatadlg.cpp
   kpayeereassigndlg.cpp
   ktagreassigndlg.cpp
   kreportconfigurationfilterdlg.cpp
@@ -63,7 +63,7 @@ set(dialogs_UI
   kgncpricesourcedlgdecl.ui kimportdlgdecl.ui kloadtemplatedlgdecl.ui
   kmymoneyfileinfodlgdecl.ui kmymoneypricedlgdecl.ui
   knewaccountdlgdecl.ui knewbankdlgdecl.ui knewbudgetdlgdecl.ui
-  knewequityentrydecl.ui knewfiledlgdecl.ui kpayeereassigndlgdecl.ui
+  knewequityentrydecl.ui editpersonaldatadlgdecl.ui kpayeereassigndlgdecl.ui
   ktagreassigndlgdecl.ui
   kselectdatabasedlgdecl.ui kselecttransactionsdlgdecl.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlgdecl.ui
