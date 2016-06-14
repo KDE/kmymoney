@@ -44,3 +44,5 @@ target_link_libraries( kmm_payeeidentifier_loader
   payeeidentifier_unavailable
   Qt5::Core
 )
+
+add_subdirectory(tests)

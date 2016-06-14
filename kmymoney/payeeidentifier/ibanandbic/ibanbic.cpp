@@ -36,9 +36,9 @@ ibanBicData* ibanBic::m_ibanBicData = 0;
 const int ibanBic::ibanMaxLength = 30;
 
 ibanBic::ibanBic()
-    : m_bic(QLatin1String("")),
-    m_iban(QLatin1String("")),
-    m_ownerName(QLatin1String(""))
+    : m_bic(QString()),
+    m_iban(QString()),
+    m_ownerName(QString())
 {
 
 }

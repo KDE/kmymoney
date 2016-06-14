@@ -81,7 +81,7 @@ payeeIdentifierTyped<T>& payeeIdentifierTyped<T>::operator=(const payeeIdentifie
 {
   payeeIdentifierTyped<T>& ret = static_cast<payeeIdentifierTyped<T>&>(payeeIdentifier::operator=(other));
   // This operation is save even if this == &other
-  ret.m_payeeIdentifierTyped = other.m_payeeIdentifierTyped;
+  ret.m_payeeIdentifierTyped = dynamic_cast<T*>(ret.payeeIdentifier::data());
   return ret;
 }
 
