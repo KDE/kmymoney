@@ -1,5 +1,3 @@
-include_directories( ${LIBALKIMIA_INCLUDE_DIR} )
-
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     ${KDEPIMLIBS_INCLUDE_DIRS}

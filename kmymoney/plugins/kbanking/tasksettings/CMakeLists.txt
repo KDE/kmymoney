@@ -10,4 +10,5 @@ target_link_libraries( kmm_kbanking_tasksettings
   Qt5::Xml
   Qt5::Sql
   KF5::I18n
+  konlinetasks_sepa_interface
 )

@@ -13,6 +13,8 @@ qt5_wrap_ui( sepaOnlineTasks_SRCS
   ui/sepacredittransferedit.ui
 )
 
+add_library(konlinetasks_sepa_interface INTERFACE)
+
 add_library(konlinetasks_sepa MODULE
   ${sepaOnlineTasks_SRCS}
 )
@@ -22,9 +24,9 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepaordersui.desktop.in ${CM
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepastorageplugin.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepastorageplugin.desktop)
 kcoreaddons_desktop_to_json(konlinetasks_sepa ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaorders.desktop ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaordersui.desktop)
 
-
-target_link_libraries( konlinetasks_sepa
-  PUBLIC
+# TODO some dependencies can be moved to konlinetasks_sepa
+target_link_libraries( konlinetasks_sepa_interface
+  INTERFACE
   kmm_mymoney
   kmm_widgets
   kmm_plugin
@@ -33,15 +35,20 @@ target_link_libraries( konlinetasks_sepa
   Qt5::Core
   Qt5::Gui
   Qt5::Sql
-  KF5::I18n
-  KF5::Service
+)
+
+target_link_libraries(konlinetasks_sepa
+  PUBLIC
+    konlinetasks_sepa_interface
   PRIVATE
-  kmm_config
-  kmm_utils_validators
-  payeeidentifier_iban_bic_widgets
-  KF5::KDELibs4Support
-  KF5::ItemModels
-  #KF5::KIO TODO: Really not needed?!
+    KF5::I18n
+    KF5::Service
+    kmm_config
+    kmm_utils_validators
+    payeeidentifier_iban_bic_widgets
+    KF5::KDELibs4Support
+    KF5::ItemModels
+    #KF5::KIO TODO: Really not needed?!
 )
 
 install(TARGETS konlinetasks_sepa
