@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "matchfindertest.h"
+#include "matchfinder-test.h"
 #include "existingtransactionmatchfinder.h"
 
 #include <QTest>

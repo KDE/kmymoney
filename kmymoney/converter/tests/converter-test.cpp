@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "convertertest.h"
+#include "converter-test.h"
 
 #include <QtTest/QtTest>
 #include <QFile>
