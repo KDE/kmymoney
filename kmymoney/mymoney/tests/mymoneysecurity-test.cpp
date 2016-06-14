@@ -22,12 +22,7 @@ QTEST_MAIN(MyMoneySecurityTest)
 
 void MyMoneySecurityTest::init()
 {
-  m = new MyMoneySecurity();
-}
-
-void MyMoneySecurityTest::cleanup()
-{
-  delete m;
+  m.reset(new MyMoneySecurity());
 }
 
 void MyMoneySecurityTest::testEmptyConstructor()

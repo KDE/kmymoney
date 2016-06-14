@@ -17,6 +17,7 @@
 #ifndef MYMONEYSECURITYTEST_H
 #define MYMONEYSECURITYTEST_H
 
+#include <memory>
 #include <QtCore/QObject>
 
 #include "mymoneysecurity.h"
@@ -26,11 +27,10 @@ class MyMoneySecurityTest : public QObject
   Q_OBJECT
 
 protected:
-  MyMoneySecurity *m;
+  std::unique_ptr<MyMoneySecurity> m;
 
 private slots:
   void init();
-  void cleanup();
   void testEmptyConstructor();
   void testNonemptyConstructor();
   void testCopyConstructor();
