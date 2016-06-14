@@ -11,11 +11,11 @@ add_subdirectory( dialogs )
 ########### next target ###############
 
 set(kmm_weboob_PART_SRCS
-    weboob.cpp
-    plugin.cpp
-    )
+  weboob.cpp
+  plugin.cpp
+)
 
-add_library(kmm_weboob ${kmm_weboob_PART_SRCS})
+add_library(kmm_weboob MODULE ${kmm_weboob_PART_SRCS})
 kcoreaddons_desktop_to_json(kmm_weboob kmm_weboob.desktop)
 
 target_link_libraries(kmm_weboob
