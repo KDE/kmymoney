@@ -44,6 +44,7 @@ add_subdirectory( templates )
 add_subdirectory( misc )
 add_subdirectory( payeeidentifier )
 add_subdirectory( icons )
+add_subdirectory( tests )
 
 set( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
 
@@ -59,7 +60,14 @@ target_link_libraries(kmm_config KF5::KDELibs4Support Qt5::Sql Alkimia::alkimia)
 set( kmymoney_common_SRCS kmymoneyutils.cpp kstartuplogo.cpp )
 add_library(kmymoney_common STATIC ${kmymoney_common_SRCS})
 target_link_libraries(kmymoney_common
-  Qt5::Core KF5::ConfigGui KF5::WidgetsAddons Alkimia::alkimia kmm_widgets kmm_mymoney)
+  PUBLIC
+    Qt5::Core
+    KF5::ConfigGui
+    KF5::WidgetsAddons
+    Alkimia::alkimia
+    kmm_widgets
+    kmm_mymoney
+)
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
@@ -136,33 +144,4 @@ install(FILES x-kmymoney.xml
 
 #UPDATE_XDG_MIMETYPES(${XDG_MIME_INSTALL_DIR})
 
-############## tests ####################
-include(ECMMarkAsTest)
-
-if( KDE4_BUILD_TESTS )
-
-  set(target_link_libraries_test
-        kmm_mymoney
-        kmymoney_common
-        kmm_config
-        widgets
-        KF5::KHtml KF5::Archive KF5::ConfigGui KF5::WidgetsAddons
-        Qt5::Core Qt5::Sql Qt5::Test
-        Alkimia::alkimia)
-
-  if(KF5Holidays_FOUND)
-    list(APPEND target_link_libraries_test KF5::Holidays)
-  endif()
-
-  # KMyMoneyUtils
-  set( kmymoneyutilstest_SRCS kmymoneyutilstest.cpp )
-
-  add_executable( kmymoneyutilstest ${kmymoneyutilstest_SRCS} )
-  ecm_mark_as_test(kmymoneyutilstest)
-  add_test(kmymoney-utilstest kmymoneyutilstest)
-
-  add_dependencies( kmymoneyutilstest kmymoney_common kmm_mymoney )
-  target_link_libraries( kmymoneyutilstest ${target_link_libraries_test})
-
-endif( KDE4_BUILD_TESTS )
 

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "kmymoneyutilstest.h"
+#include "kmymoneyutils-test.h"
 
 #include <QtTest/QtTest>
 
