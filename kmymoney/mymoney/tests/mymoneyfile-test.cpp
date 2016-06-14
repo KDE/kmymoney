@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "mymoneyfiletest.h"
+#include "mymoneyfile-test.h"
 #include <iostream>
 
 #include <memory>

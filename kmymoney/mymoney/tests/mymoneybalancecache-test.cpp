@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "mymoneybalancecachetest.h"
+#include "mymoneybalancecache-test.h"
 
 #include <QtCore/QDebug>
 

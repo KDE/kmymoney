@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "mymoneybudgettest.h"
+#include "mymoneybudget-test.h"
 
 #include <QtTest/QtTest>
 

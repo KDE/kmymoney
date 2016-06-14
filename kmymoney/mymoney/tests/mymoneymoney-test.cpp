@@ -19,7 +19,7 @@
 #define __STDC_LIMIT_MACROS         // force definition of min and max values
 #endif
 
-#include "mymoneymoneytest.h"
+#include "mymoneymoney-test.h"
 
 #include <QtTest/QtTest>
 

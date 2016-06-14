@@ -182,11 +182,8 @@ if(ENABLE_LIBICAL)
   endif(NOT LIBICAL_FOUND)
 endif(ENABLE_LIBICAL)
 
-# do we build the tests?
-if( KDE4_BUILD_TESTS )
-  # INCLUDE(CTest) # (makes sense only with a ctest online dashboard)
-  enable_testing()
-endif( KDE4_BUILD_TESTS )
+# TODO: this should be removed
+enable_testing()
 
 ######################### Settings ##########################
 
@@ -338,9 +335,3 @@ endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
 message("
 Build type: ${CMAKE_BUILD_TYPE}")
 
-message("--------------------------------------------
-")
-
-message("Good - your configure finished.
-Now type 'make' to build KMyMoney. For more help, consult README.cmake
-")

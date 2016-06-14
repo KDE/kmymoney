@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "mymoneyscheduletest.h"
+#include "mymoneyschedule-test.h"
 
 #include <QList>
 #include <QtTest/QtTest>

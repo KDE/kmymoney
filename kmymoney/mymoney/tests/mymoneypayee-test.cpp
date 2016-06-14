@@ -11,7 +11,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "mymoneypayeetest.h"
+#include "mymoneypayee-test.h"
 
 #include <QDomDocument>
 #include <QDomElement>

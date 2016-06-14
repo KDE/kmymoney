@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "onlinejobtest.h"
+#include "onlinejob-test.h"
 
 #include <QtTest/QTest>
 #include "onlinejob.h"

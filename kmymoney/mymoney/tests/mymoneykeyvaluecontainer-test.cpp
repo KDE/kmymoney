@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "mymoneykeyvaluecontainertest.h"
+#include "mymoneykeyvaluecontainer-test.h"
 
 #include <QtTest/QtTest>
 

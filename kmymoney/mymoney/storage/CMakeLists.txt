@@ -20,7 +20,16 @@ set(storage_a_SOURCES
 add_library( kmm_storage STATIC ${storage_a_SOURCES} )
 kde_target_enable_exceptions(kmm_storage PUBLIC)
 
-target_link_libraries( kmm_storage PUBLIC KF5::Service KF5::I18n Qt5::Core Qt5::Xml Qt5::Sql Qt5::Gui Alkimia::alkimia)
+target_link_libraries( kmm_storage
+  PUBLIC
+    KF5::Service
+    KF5::I18n
+    Qt5::Core
+    Qt5::Xml
+    Qt5::Sql
+    Qt5::Gui
+    Alkimia::alkimia
+)
 
 ########### install files ###############
 
@@ -67,4 +76,4 @@ if( KDE4_BUILD_TESTS )
 
   target_link_libraries( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage onlinetask_interfaces ${target_link_libraries_test} )
 
-endif( KDE4_BUILD_TESTS )
+endif()

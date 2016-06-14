@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "mymoneytransactiontest.h"
+#include "mymoneytransaction-test.h"
 
 #include <QtCore/QDebug>
 

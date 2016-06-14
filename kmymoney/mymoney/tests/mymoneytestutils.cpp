@@ -1,5 +1,8 @@
 /***************************************************************************
-                          mymoneytagtest.cpp
+                          mymoneytestutils.cpp
+                             -------------------
+    copyright            : (C) 2002 by Thomas Baumgart
+    email                : ipwizard@users.sourceforge.net
  ***************************************************************************/
 
 /***************************************************************************
@@ -11,30 +14,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "mymoneytagtest.h"
+#include "mymoneyutils.h"
 
-#include <QDomDocument>
-#include <QDomElement>
+#include "mymoneyexception.h"
 
-#include <QtTest/QtTest>
-
-#define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyTagTest;
-
-#include "mymoneytag.h"
-
-using namespace std;
-
-QTEST_MAIN(MyMoneyTagTest)
-
-void MyMoneyTagTest::testXml()
+QString unexpectedExceptionString(const MyMoneyException &e)
 {
-  QDomDocument doc;
-  QDomElement parent = doc.createElement("Test");
-  doc.appendChild(parent);
-  MyMoneyTag tag1;
-  tag1.m_id = "some random id";//if the ID isn't set, w ethrow an exception
-  tag1.writeXML(doc, parent);
-  QDomElement el = parent.firstChild().toElement();
-  QVERIFY(!el.isNull());
-  MyMoneyTag tag2(el);
+  return QString("Unexpected exception: %1 thrown in %2:%3")
+         .arg(e.what())
+         .arg(e.file())
+         .arg(e.line());
 }
+

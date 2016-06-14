@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "mymoneysplittest.h"
+#include "mymoneysplit-test.h"
 
 #include <QtTest/QtTest>
 

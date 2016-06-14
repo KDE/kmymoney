@@ -15,6 +15,15 @@ target_link_libraries(reports KChart KF5::KDELibs4Support Alkimia::alkimia Qt5::
 
 add_dependencies(reports kmm_config)
 
+add_library(reports_testcommon STATIC
+  reportstestcommon.cpp
+)
+target_link_libraries(reports_testcommon
+  PUBLIC
+  Qt5::Core
+  reports
+)
+
 ############## tests ####################
 if( KDE4_BUILD_TESTS )
 
