@@ -17,7 +17,7 @@
 #ifndef PARSEDATATEST_H
 #define PARSEDATATEST_H
 
-#include "csvutil.h"
+#include "../csvutil.h"
 
 #include <QtCore/QObject>
 

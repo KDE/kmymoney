@@ -14,8 +14,8 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include "symboltest.h"
-#include "csvutil.h"
+#include "symbol-test.h"
+#include "../csvutil.h"
 
 #include <QtTest/QtTest>
 #include <QtCore/QString>

@@ -14,15 +14,13 @@ email                : agander93@gmail.com
 *   (at your option) any later version.                                   *
 *                                                                         *
 ***************************************************************************/
-#include "csvdatetest.h"
+#include "csvdate-test.h"
 
 #include <QtTest/QtTest>
 #include <QtCore/QString>
 #include <QtCore/QDebug>
 
-#include <KLocalizedString>
-
-#include "convdate.h"
+#include "../convdate.h"
 
 QTEST_MAIN(CsvDateTest);
 

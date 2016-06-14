@@ -14,12 +14,12 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include "parsedatatest.h"
+#include "parsedata-test.h"
 
 #include <QtTest/QtTest>
 #include <QtCore/QString>
 
-#include "csvutil.h"
+#include "../csvutil.h"
 
 QTEST_MAIN(ParseDataTest);
 
