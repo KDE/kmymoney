@@ -133,19 +133,19 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
       return QVariant::fromValue(job.responsibleMyMoneyAccount().name());
     } else if (role == Qt::DecorationRole) {
       if (job.isLocked())
-        return KIcon("task-ongoing");
+        return QIcon::fromTheme("task-ongoing");
 
       switch (job.bankAnswerState()) {
-        case onlineJob::acceptedByBank: return KIcon("task-complete");
+        case onlineJob::acceptedByBank: return QIcon::fromTheme("task-complete");
         case onlineJob::sendingError:
         case onlineJob::abortedByUser:
-        case onlineJob::rejectedByBank: return KIcon("task-reject");
+        case onlineJob::rejectedByBank: return QIcon::fromTheme("task-reject");
         case onlineJob::noBankAnswer: break;
       }
       if (job.sendDate().isValid()) {
-        return KIcon("task-accepted");
+        return QIcon::fromTheme("task-accepted");
       } else if (!job.isValid()) {
-        return KIcon("task-attention");
+        return QIcon::fromTheme("task-attention");
       }
     } else if (role == Qt::ToolTipRole) {
       if (job.isLocked())
