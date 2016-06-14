@@ -1333,7 +1333,7 @@ private:
   Private* d;
 };
 
-extern  KMyMoneyApp *kmymoney;
+extern KMyMoneyApp *kmymoney;
 
 class KMStatus
 {

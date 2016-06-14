@@ -75,14 +75,9 @@ if(DOXYGEN_FOUND)
   add_custom_target(apidoc ${DOXYGEN} ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen)
 endif(DOXYGEN_FOUND)
 
-# check some functions
-include (CheckFunctionExists)
-
-# check for function in header
-include(CheckSymbolExists)
-set(CMAKE_REQUIRED_DEFINITIONS -D_XOPEN_SOURCE=500 -D_BSD_SOURCE)
 
 # check some include files exists
+set(CMAKE_REQUIRED_DEFINITIONS -D_XOPEN_SOURCE=500 -D_BSD_SOURCE)
 include (CheckIncludeFile)
 check_include_file("stdint.h" HAVE_STDINT_H)
 check_include_file("sys/types.h" HAVE_SYS_TYPES_H)
@@ -209,7 +204,7 @@ kde_enable_exceptions()
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,--as-needed")
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--as-needed")
-endif(CMAKE_SYSTEM_NAME MATCHES "Linux")
+endif()
 
 # IDEA: Set on a per target base
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -258,7 +253,7 @@ add_subdirectory( kmymoney )
 add_subdirectory( doc )
 if (USE_DEVELOPER_DOC)
   add_subdirectory( developer-doc )
-endif (USE_DEVELOPER_DOC)
+endif()
 
 ######################### Output Results #############################
 
@@ -274,7 +269,7 @@ macro(nice_yesno _varname)
   else(${_varname})
     set("nice_${_varname}" "no")
   endif(${_varname})
-endmacro(nice_yesno _varname)
+endmacro()
 
 nice_yesno("KF5Holidays_FOUND")
 nice_yesno("KF5Gpgmepp_FOUND")
@@ -286,11 +281,10 @@ nice_yesno("LIBICAL_FOUND")
 nice_yesno("ENABLE_SQLCIPHER")
 nice_yesno("USE_QT_DESIGNER")
 nice_yesno("USE_DEVELOPER_DOC")
-nice_yesno("KDE4_BUILD_TESTS")
 nice_yesno("DOXYGEN_FOUND")
 nice_yesno("USE_HTML_HANDBOOK")
 message("
--------- KMyMoney ${CPACK_PACKAGE_VERSION}${VERSION_SUFFIX} --------
+-------- KMyMoney ${PROJECT_VERSION}${PROJECT_VERSION_SUFFIX} --------
 
 Configure results (user options):
 --------------------------------------------
@@ -318,15 +312,12 @@ Qt-Designer library support:             ${nice_USE_QT_DESIGNER}
 
 Generate developer documentation:        ${nice_USE_DEVELOPER_DOC}
 
-Build unit tests:                        ${nice_KDE4_BUILD_TESTS}
-
 Generate API documentation with Doxygen: ${nice_DOXYGEN_FOUND}")
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
   message("
 Generate HTML documentation:             ${nice_USE_HTML_HANDBOOK}")
-
-endif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
+endif()
 
 message("
 Build type: ${CMAKE_BUILD_TYPE}")
