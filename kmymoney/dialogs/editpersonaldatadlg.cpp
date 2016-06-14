@@ -33,11 +33,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "mymoneycontact.h"
-#include "ui_knewfiledlgdecl.h"
+#include "ui_editpersonaldatadlgdecl.h"
 
 struct EditPersonalDataDlg::Private {
   Private() : m_contact(0) {}
-  Ui::KNewFileDlgDecl ui;
+  Ui::EditPersonalDataDlgDecl ui;
   MyMoneyContact *m_contact;
 };
 
