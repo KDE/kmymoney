@@ -39,7 +39,6 @@
 #include "ui_kscheduledviewdecl.h"
 #include <mymoneyfile.h>
 #include <mymoneyaccount.h>
-#include "kmymoneyscheduledcalendar.h"
 
 /**
   * Contains all the scheduled transactions be they bills, deposits or transfers.

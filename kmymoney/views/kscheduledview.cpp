@@ -49,7 +49,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyscheduleddatetbl.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 #include "kscheduletreeitem.h"
@@ -68,8 +67,8 @@ KScheduledView::KScheduledView(QWidget *parent) :
 
   // create the searchline widget
   // and insert it into the existing layout
-  m_searchWidget = new KTreeWidgetFilterLineWidget(m_listTab, m_scheduleTree);
-  m_listTabLayout->insertWidget(0, m_searchWidget);
+  m_searchWidget = new KTreeWidgetFilterLineWidget(this, m_scheduleTree);
+  vboxLayout->insertWidget(1, m_searchWidget);
 
   //enable custom context menu
   m_scheduleTree->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -87,9 +86,6 @@ KScheduledView::KScheduledView(QWidget *parent) :
   KGuiItem::assign(m_qbuttonNew, KMyMoneyUtils::scheduleNewGuiItem());
   KGuiItem::assign(m_accountsCombo, KMyMoneyUtils::accountsFilterGuiItem());
 
-  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_listTab), QIcon::fromTheme("view-calendar-list"));
-  m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_calendarTab), QIcon::fromTheme("view-calendar-timeline"));
-
   connect(m_scheduleTree, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotListViewContextMenu(QPoint)));
   connect(m_scheduleTree, SIGNAL(itemSelectionChanged()),
           this, SLOT(slotSetSelectedItem()));
@@ -100,9 +96,6 @@ KScheduledView::KScheduledView(QWidget *parent) :
           this, SLOT(slotListViewExpanded(QTreeWidgetItem*)));
   connect(m_scheduleTree, SIGNAL(itemCollapsed(QTreeWidgetItem*)),
           this, SLOT(slotListViewCollapsed(QTreeWidgetItem*)));
-
-  connect(m_calendar, SIGNAL(enterClicked(MyMoneySchedule,QDate)), this, SLOT(slotBriefEnterClicked(MyMoneySchedule,QDate)));
-  connect(m_calendar, SIGNAL(skipClicked(MyMoneySchedule,QDate)), this, SLOT(slotBriefSkipClicked(MyMoneySchedule,QDate)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotReloadView()));
 }
@@ -152,9 +145,6 @@ void KScheduledView::refresh(bool full, const QString& schedId)
         KMessageBox::detailedError(this, i18n("Unable to load accounts: "), e.what());
       }
     }
-
-    // Refresh the calendar view first
-    m_calendar->refresh();
 
     MyMoneyFile *file = MyMoneyFile::instance();
     QList<MyMoneySchedule> scheduledItems = file->scheduleList();
@@ -424,7 +414,6 @@ void KScheduledView::slotReloadView()
   m_needReload = true;
   if (isVisible()) {
     m_qbuttonNew->setEnabled(true);
-    m_tabWidget->setEnabled(true);
 
     refresh(true, m_selectedSchedule);
 
@@ -456,7 +445,6 @@ void KScheduledView::readConfig()
   m_openDeposits = grp.readEntry("KScheduleView_openDeposits", true);
   m_openTransfers = grp.readEntry("KScheduleView_openTransfers", true);
   m_openLoans = grp.readEntry("KScheduleView_openLoans", true);
-  m_tabWidget->setCurrentIndex(grp.readEntry("KScheduleView_tab", 0));
   QByteArray columns;
   columns = grp.readEntry("KScheduleView_treeState", columns);
   m_scheduleTree->header()->restoreState(columns);
@@ -471,7 +459,6 @@ void KScheduledView::writeConfig()
   grp.writeEntry("KScheduleView_openDeposits", m_openDeposits);
   grp.writeEntry("KScheduleView_openTransfers", m_openTransfers);
   grp.writeEntry("KScheduleView_openLoans", m_openLoans);
-  grp.writeEntry("KScheduleView_tab", m_tabWidget->currentIndex());
   QByteArray columns = m_scheduleTree->header()->saveState();
   grp.writeEntry("KScheduleView_treeState", columns);
 
@@ -535,8 +522,6 @@ void KScheduledView::slotAccountActivated()
         ++accountCount;
       }
     }
-
-    m_calendar->setFilterAccounts(m_filterAccounts);
 
     refresh(false, m_selectedSchedule);
   } catch (const MyMoneyException &e) {

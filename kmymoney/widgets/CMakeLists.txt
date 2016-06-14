@@ -72,7 +72,6 @@ set(_uncritial_common_sources
   kmymoneyaccounttreeview.cpp
   kmymoneycombo.cpp
   kmymoneycompletion.cpp
-  kmymoneydatetbl.cpp
   kmymoneytitlelabel.cpp
   kmymoneywizard.cpp
   kpricetreeitem.cpp
@@ -152,9 +151,6 @@ endif( USE_QT_DESIGNER )
 set(libwidgets_a_SOURCES
   ${_critial_common_sources}
   kmymoneybriefschedule.cpp
-  kmymoneycalendar.cpp
-  kmymoneyscheduledcalendar.cpp
-  kmymoneyscheduleddatetbl.cpp
   registersearchline.cpp
   transactioneditorcontainer.cpp
   kmymoneyreportconfigtabimpl.cpp
