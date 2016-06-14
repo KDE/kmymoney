@@ -6,8 +6,6 @@ add_subdirectory( widgets )
 add_subdirectory( qml )
 add_subdirectory( tasksettings )
 
-########### next target ###############
-
 set(kmm_kbanking_PART_SRCS
     mymoneybanking.cpp
     banking.cpp
@@ -22,10 +20,6 @@ add_library(kmm_kbanking MODULE ${kmm_kbanking_PART_SRCS})
 
 kcoreaddons_desktop_to_json(kmm_kbanking kmm_kbanking.desktop)
 
-# newer version of Gwenhywfar provide the variables GWENHYWFAR_QT4GUI_LDFLAGS
-# and GWENHYWFAR_CORE_LDFLAGS, older ones use GWENHYWFAR_LIBRARIES instead
-# we add both here for some time. At a later point simply remove
-# GWENHYWFAR_LIBRARIES.
 target_link_libraries(kmm_kbanking
                       kmm_kbanking_dialogs
                       kmm_kbanking_widgets
@@ -50,7 +44,7 @@ target_link_libraries(kmm_kbanking
 set(KMM_BANKING_DEBUG_OPTIONS)
 # preprocessor definitions in case this is a debug build
 string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
-if(${CMAKE_BUILD_TYPE_TOLOWER} MATCHES "^debug(full)?$")
+if("${CMAKE_BUILD_TYPE_TOLOWER}" MATCHES "^debug(full)?$")
   file(READ kmm_kbanking_debug.rc KMM_BANKING_DEBUG_OPTIONS)
 endif()
 configure_file(kmm_kbanking.rc "${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.rc" @ONLY)
@@ -58,7 +52,7 @@ configure_file(kmm_kbanking.rc "${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.rc" @ON
 ########### install files ###############
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.rc
-        DESTINATION  ${KXMLGUI_INSTALL_DIR}/kmm_kbanking)
+        DESTINATION ${KXMLGUI_INSTALL_DIR}/kmm_kbanking)
 
 install(TARGETS kmm_kbanking
         DESTINATION ${PLUGIN_INSTALL_DIR})

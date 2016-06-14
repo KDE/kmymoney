@@ -33,7 +33,7 @@ set(kmm_widgets_sources
   onlinejobmessagesview.cpp
   )
 
-kde4_add_ui_files(kmm_widgets_sources
+qt5_wrap_ui(kmm_widgets_sources
   kmymoneyvalidationfeedback.ui
   onlinejobmessagesview.ui
 )
