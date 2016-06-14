@@ -1,3 +1,5 @@
+add_subdirectory(tests)
+
 set(storage_HEADERS
   imymoneystorage.h imymoneyserialize.h imymoneystorageformat.h
   kmymoneystorageplugin.h
@@ -39,41 +41,3 @@ install(FILES ${storage_HEADERS}
 install(FILES kmymoney-sqlstorageplugin.desktop
   DESTINATION ${SERVICETYPES_INSTALL_DIR}
 )
-
-############## tests ####################
-if( KDE4_BUILD_TESTS )
-
-  set(target_link_libraries_test
-    Alkimia::alkimia
-    KF5::KIOWidgets
-    Qt5::Gui
-    Qt5::Xml
-    Qt5::Test
-    Qt5::Sql
-    Qt5::Core)
-
-  # MyMoneyDatabaseMgr
-  set( mymoneydatabasemgrtest_SRCS mymoneydatabasemgrtest.cpp ../mymoneytestutils.cpp )
-
-  kde4_add_unit_test( mymoneydatabasemgrtest TESTNAME kmymoney-mymoneydatabasemgrtest ${mymoneydatabasemgrtest_SRCS} )
-  add_dependencies( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage )
-
-  target_link_libraries( mymoneydatabasemgrtest kmymoney_base kmymoney_common kmm_storage onlinetask_interfaces ${target_link_libraries_test} )
-
-  # MyMoneyMap
-  set( mymoneymaptest_SRCS mymoneymaptest.cpp ../mymoneytestutils.cpp )
-
-  kde4_add_unit_test( mymoneymaptest TESTNAME kmymoney-mymoneymaptest ${mymoneymaptest_SRCS} )
-  add_dependencies( mymoneymaptest kmymoney_base kmymoney_common kmm_storage )
-
-  target_link_libraries( mymoneymaptest kmymoney_base kmymoney_common kmm_storage ${target_link_libraries_test} )
-
-  # MyMoneySeqAccessMgr
-  set( mymoneyseqaccessmgrtest_SRCS mymoneyseqaccessmgrtest.cpp ../mymoneytestutils.cpp )
-
-  kde4_add_unit_test( mymoneyseqaccessmgrtest TESTNAME kmymoney-mymoneyseqaccessmgrtest ${mymoneyseqaccessmgrtest_SRCS} )
-  add_dependencies( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage )
-
-  target_link_libraries( mymoneyseqaccessmgrtest kmymoney_base kmymoney_common kmm_storage onlinetask_interfaces ${target_link_libraries_test} )
-
-endif()

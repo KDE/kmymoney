@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "pivotgridtest.h"
+#include "pivotgrid-test.h"
 
 #include <QtTest/QtTest>
 

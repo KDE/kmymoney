@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "querytabletest.h"
+#include "querytable-test.h"
 
 #include <QFile>
 

@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "pivottabletest.h"
+#include "pivottable-test.h"
 
 #include <QList>
 #include <QFile>

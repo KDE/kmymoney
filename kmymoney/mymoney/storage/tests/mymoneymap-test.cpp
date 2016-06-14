@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "mymoneymaptest.h"
+#include "mymoneymap-test.h"
 #include <iostream>
 #include <QtTest/QtTest>
 
