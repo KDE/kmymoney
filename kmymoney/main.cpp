@@ -335,7 +335,6 @@ int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, const QUr
   kmymoney->centralWidget()->setEnabled(true);
 
   const int rc = a->exec();
-  delete kmymoney;
   return rc;
 }
 
