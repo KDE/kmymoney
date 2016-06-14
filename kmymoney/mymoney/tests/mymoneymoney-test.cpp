@@ -14,42 +14,21 @@
  *                                                                         *
  ***************************************************************************/
 
-// make sure, that this is defined before we even include any other header file
-#ifndef __STDC_LIMIT_MACROS
-#define __STDC_LIMIT_MACROS         // force definition of min and max values
-#endif
-
 #include "mymoneymoney-test.h"
+
+#include <limits>
+#include <cstdint>
 
 #include <QtTest/QtTest>
 
-#include <config-kmymoney.h>
-
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyMoneyTest;
 
-// Check for standard definitions
-#ifdef HAVE_STDINT_H
-#ifndef __STDC_LIMIT_MACROS
-#define __STDC_LIMIT_MACROS         // force definition of min and max values
-#endif
-#include <stdint.h>
-#else
-#include <limits.h>
-#define INT64_MAX LLONG_MAX
-#define INT64_MIN LLONG_MIN
-#endif
-
+#include "config-kmymoney.h"
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"
 
-QTEST_MAIN(MyMoneyMoneyTest)
 
-// make sure, we have the correct suffix
-#if SIZEOF_LONG == 8
-#define LLCONST(a) a ## L
-#else
-#define LLCONST(a) a ## LL
-#endif
+QTEST_MAIN(MyMoneyMoneyTest)
 
 void MyMoneyMoneyTest::init()
 {
@@ -277,12 +256,12 @@ void MyMoneyMoneyTest::testEquality()
   QVERIFY(*m_1 == *m_1);
   QVERIFY(!(*m_1 == *m_0));
 
-  MyMoneyMoney m1(LLCONST(999666555444), 100);
-  MyMoneyMoney m2(LLCONST(999666555444), 100);
+  MyMoneyMoney m1(std::int64_t(999666555444), 100);
+  MyMoneyMoney m2(std::int64_t(999666555444), 100);
   QVERIFY(m1 == m2);
 
-  MyMoneyMoney m3(LLCONST(-999666555444), 100);
-  MyMoneyMoney m4(LLCONST(-999666555444), 100);
+  MyMoneyMoney m3(std::int64_t(-999666555444), 100);
+  MyMoneyMoney m4(std::int64_t(-999666555444), 100);
   QVERIFY(m3 == m4);
 
   MyMoneyMoney m5(1230, 100);
@@ -313,12 +292,12 @@ void MyMoneyMoneyTest::testInequality()
   QVERIFY(*m_1 != *m_0);
   QVERIFY(!(*m_1 != *m_1));
 
-  MyMoneyMoney m1(LLCONST(999666555444), 100);
-  MyMoneyMoney m2(LLCONST(-999666555444), 100);
+  MyMoneyMoney m1(std::int64_t(999666555444), 100);
+  MyMoneyMoney m2(std::int64_t(-999666555444), 100);
   QVERIFY(m1 != m2);
 
-  MyMoneyMoney m3(LLCONST(-999666555444), 100);
-  MyMoneyMoney m4(LLCONST(999666555444), 100);
+  MyMoneyMoney m3(std::int64_t(-999666555444), 100);
+  MyMoneyMoney m4(std::int64_t(999666555444), 100);
   QVERIFY(m3 != m4);
 
   QVERIFY(m4 != QString("999666555444"));
@@ -482,21 +461,21 @@ void MyMoneyMoneyTest::testFormatMoney()
   QVERIFY(m1.formatMoney("", -1, false) == QString("1000"));
   QVERIFY(m1.formatMoney("", 3, false) == QString("1000.000"));
 
-  m1 = MyMoneyMoney(INT64_MAX, 100);
+  m1 = MyMoneyMoney(std::numeric_limits<std::int64_t>::max(), 100);
 
   QVERIFY(m1.formatMoney("", 2) == QString("92,233,720,368,547,758.07"));
   QVERIFY(m1.formatMoney(100) == QString("92,233,720,368,547,758.07"));
   QVERIFY(m1.formatMoney("", 2, false) == QString("92233720368547758.07"));
   QVERIFY(m1.formatMoney(100, false) == QString("92233720368547758.07"));
 
-  m1 = MyMoneyMoney(INT64_MIN, 100);
+  m1 = MyMoneyMoney(std::numeric_limits<std::int64_t>::min(), 100);
   QVERIFY(m1.formatMoney("", 2) == QString("-92,233,720,368,547,758.08"));
   QVERIFY(m1.formatMoney(100) == QString("-92,233,720,368,547,758.08"));
   QVERIFY(m1.formatMoney("", 2, false) == QString("-92233720368547758.08"));
   QVERIFY(m1.formatMoney(100, false) == QString("-92233720368547758.08"));
 
   // make sure we support numbers that need more than 64 bit
-  m1 = MyMoneyMoney(321, 100) * MyMoneyMoney(INT64_MAX, 100);
+  m1 = MyMoneyMoney(321, 100) * MyMoneyMoney(std::numeric_limits<std::int64_t>::max(), 100);
   QVERIFY(m1.formatMoney("", 2) == QString("296,070,242,383,038,303.40"));
   QVERIFY(m1.formatMoney("", 4) == QString("296,070,242,383,038,303.4047"));
   QVERIFY(m1.formatMoney("", 6) == QString("296,070,242,383,038,303.404700"));

@@ -88,10 +88,6 @@ check_include_file("stdint.h" HAVE_STDINT_H)
 check_include_file("sys/types.h" HAVE_SYS_TYPES_H)
 check_include_file("unistd.h" HAVE_UNISTD_H)
 
-#check sizes. Will be written to config.h
-include(CheckTypeSize)
-check_type_size(long SIZEOF_LONG)
-
 
 ######################### Special Requirements ##########################
 
