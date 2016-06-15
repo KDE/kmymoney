@@ -105,9 +105,8 @@
 #include "kmymoneyutils.h"
 #include "models.h"
 
-constexpr KCompressionDevice::CompressionType COMPRESSION_TYPE = KCompressionDevice::GZip;
-#define RECOVER_KEY_ID        "0xD2B08440"
-
+static constexpr KCompressionDevice::CompressionType COMPRESSION_TYPE = KCompressionDevice::GZip;
+static constexpr char recoveryKeyId[] = "0xD2B08440";
 
 KMyMoneyView::KMyMoneyView(QWidget *parent)
     : KPageWidget(parent),
@@ -1142,8 +1141,8 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
     } else {
       if (KMyMoneyGlobalSettings::encryptRecover()) {
         encryptRecover = true;
-        if (!KGPGFile::keyAvailable(QString(RECOVER_KEY_ID))) {
-          KMessageBox::sorry(this, i18n("<p>You have selected to encrypt your data also with the KMyMoney recover key, but the key with id</p><p><center><b>%1</b></center></p><p>has not been found in your keyring at this time. Please make sure to import this key into your keyring. You can find it on the <a href=\"http://kmymoney.org/\">KMyMoney web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.</p>", QString(RECOVER_KEY_ID)), i18n("GPG Key not found"));
+        if (!KGPGFile::keyAvailable(QString(recoveryKeyId))) {
+          KMessageBox::sorry(this, i18n("<p>You have selected to encrypt your data also with the KMyMoney recover key, but the key with id</p><p><center><b>%1</b></center></p><p>has not been found in your keyring at this time. Please make sure to import this key into your keyring. You can find it on the <a href=\"http://kmymoney.org/\">KMyMoney web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.</p>", QString(recoveryKeyId)), i18n("GPG Key not found"));
           encryptRecover = false;
         }
       }
@@ -1207,7 +1206,7 @@ void KMyMoneyView::saveToLocalFile(const QString& localFile, IMyMoneyStorageForm
       }
 
       if (encryptRecover) {
-        kgpg->addRecipient(RECOVER_KEY_ID);
+        kgpg->addRecipient(recoveryKeyId);
       }
       MyMoneyFile::instance()->setValue("kmm-encryption-key", keyList);
       device = std::unique_ptr<decltype(device)::element_type>(kgpg.release());

@@ -183,7 +183,7 @@
 #include "kmymoneyutils.h"
 
 
-#define RECOVER_KEY_ID        "59B0F826D2B08440"
+static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 
 // define the default period to warn about an expiring recoverkey to 30 days
 // but allows to override this setting during build time
@@ -1785,7 +1785,7 @@ bool KMyMoneyApp::slotFileSaveAs()
 
     for (QStringList::iterator it = keyList.begin(); it != keyList.end(); ++it) {
       QStringList fields = (*it).split(':', QString::SkipEmptyParts);
-      if (fields[0] != RECOVER_KEY_ID) {
+      if (fields[0] != recoveryKeyId) {
         // replace parenthesis in name field with brackets
         QString name = fields[1];
         name.replace('(', "[");
@@ -2570,7 +2570,7 @@ void KMyMoneyApp::slotUpdateConfiguration()
   if (KMyMoneySettings::writeDataEncrypted() && KMyMoneySettings::encryptRecover()) {
     if (KGPGFile::GPGAvailable()) {
       KGPGFile file;
-      QDateTime expirationDate = file.keyExpires(QLatin1String(RECOVER_KEY_ID));
+      QDateTime expirationDate = file.keyExpires(QLatin1String(recoveryKeyId));
       if (expirationDate.isValid() && QDateTime::currentDateTime().daysTo(expirationDate) <= RECOVER_KEY_EXPIRATION_WARNING) {
         bool skipMessage = false;
 
