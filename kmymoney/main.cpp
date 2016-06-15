@@ -142,6 +142,11 @@ int main(int argc, char *argv[])
   app.setApplicationVersion(aboutData.version());
 
   /**
+   * enable high dpi icons
+   */
+  app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+
+  /**
    * Create command line parser and feed it with known options
    */
   QCommandLineParser parser;
