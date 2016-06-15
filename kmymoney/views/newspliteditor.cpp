@@ -59,6 +59,9 @@ struct NewSplitEditor::Private
     costCenterModel->setObjectName("SortedCostCenterModel");
     statusModel.setObjectName("StatusModel");
 
+    costCenterModel->setSortLocaleAware(true);
+    costCenterModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+
     createStatusEntry(MyMoneySplit::NotReconciled);
     createStatusEntry(MyMoneySplit::Cleared);
     createStatusEntry(MyMoneySplit::Reconciled);
@@ -208,12 +211,9 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& accountId)
 
   /// @todo Replace with substring search of widget in KF5
   d->ui->costCenterCombo->setEditable(true);
-  d->ui->costCenterCombo->setSubstringSearch(true);
   d->ui->costCenterCombo->setModel(d->costCenterModel);
   d->ui->costCenterCombo->setModelColumn(0);
-  // d->ui->costCenterCombo->completer()->setCompletionMode(QCompleter::PopupCompletion);
-  // for a cost center completion see http://www.qtcentre.org/archive/index.php/t-23518.html
-  // or http://stackoverflow.com/questions/5129211/qcompleter-custom-completion-rules
+  d->ui->costCenterCombo->completer()->setFilterMode(Qt::MatchContains);
 
   WidgetHintFrameCollection* frameCollection = new WidgetHintFrameCollection(this);
   frameCollection->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));
@@ -336,12 +336,15 @@ void NewSplitEditor::setAmount(MyMoneyMoney value)
 
 QString NewSplitEditor::costCenterId() const
 {
-  return d->ui->costCenterCombo->selectedItem();
+  /// @todo KF5
+  // return d->ui->costCenterCombo->selectedItem();
+  return QString();
 }
 
 void NewSplitEditor::setCostCenterId(const QString& id)
 {
-  return d->ui->costCenterCombo->setSelectedItem(id);
+  /// @todo KF5
+  // return d->ui->costCenterCombo->setSelectedItem(id);
 }
 
 

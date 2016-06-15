@@ -137,7 +137,7 @@
       </widget>
      </item>
      <item row="1" column="3">
-      <widget class="KMyMoneyMVCCombo" name="costCenterCombo">
+      <widget class="QComboBox" name="costCenterCombo">
        <property name="editable">
         <bool>true</bool>
        </property>
@@ -285,11 +285,6 @@
    <class>AmountEdit</class>
    <extends>QLineEdit</extends>
    <header>amountedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyMVCCombo</class>
-   <extends>QComboBox</extends>
-   <header>kmymoneymvccombo.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

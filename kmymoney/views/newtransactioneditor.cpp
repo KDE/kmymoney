@@ -60,6 +60,9 @@ public:
     statusModel.setObjectName("StatusModel");
     splitModel.setObjectName("SplitModel");
 
+    costCenterModel->setSortLocaleAware(true);
+    costCenterModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+
     createStatusEntry(MyMoneySplit::NotReconciled);
     createStatusEntry(MyMoneySplit::Cleared);
     createStatusEntry(MyMoneySplit::Reconciled);
@@ -290,14 +293,10 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   d->costCenterModel->setSourceModel(Models::instance()->costCenterModel());
   d->costCenterModel->sort(0);
 
-  /// @todo Replace with substring search of widget in KF5
   d->ui->costCenterCombo->setEditable(true);
-  d->ui->costCenterCombo->setSubstringSearch(true);
   d->ui->costCenterCombo->setModel(d->costCenterModel);
   d->ui->costCenterCombo->setModelColumn(0);
-  // d->ui->costCenterCombo->completer()->setCompletionMode(QCompleter::PopupCompletion);
-  // for a cost center completion see http://www.qtcentre.org/archive/index.php/t-23518.html
-  // or http://stackoverflow.com/questions/5129211/qcompleter-custom-completion-rules
+  d->ui->costCenterCombo->completer()->setFilterMode(Qt::MatchContains);
 
   d->ui->statusCombo->setModel(&d->statusModel);
 
