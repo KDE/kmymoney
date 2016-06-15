@@ -110,6 +110,8 @@ QVariant CostCenterModel::data(const QModelIndex& index, int role) const
       // make sure to never return any displayable text for the dummy entry
       if(!d->m_costCenterItems[index.row()]->id().isEmpty()) {
         rc = d->m_costCenterItems[index.row()]->name();
+      } else {
+	rc = QString();
       }
       break;
 
