@@ -298,6 +298,9 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   d->ui->costCenterCombo->setModelColumn(0);
   d->ui->costCenterCombo->completer()->setFilterMode(Qt::MatchContains);
 
+  d->ui->enterButton->setIcon(QIcon::fromTheme("dialog-ok"));
+  d->ui->cancelButton->setIcon(QIcon::fromTheme("dialog-cancel"));
+
   d->ui->statusCombo->setModel(&d->statusModel);
 
   d->ui->dateEdit->setDateFormat(KLocale::global()->dateFormatShort());

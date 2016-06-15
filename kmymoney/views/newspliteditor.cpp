@@ -195,6 +195,8 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& accountId)
 
   d->accountId = accountId;
   d->ui->setupUi(this);
+  d->ui->enterButton->setIcon(QIcon::fromTheme("dialog-ok"));
+  d->ui->cancelButton->setIcon(QIcon::fromTheme("dialog-cancel"));
   d->accountsModel->addAccountGroup(MyMoneyAccount::Asset);
   d->accountsModel->addAccountGroup(MyMoneyAccount::Liability);
   d->accountsModel->addAccountGroup(MyMoneyAccount::Income);

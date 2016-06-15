@@ -89,6 +89,9 @@ SplitDialog::SplitDialog(const MyMoneyAccount& account, NewTransactionEditor* pa
   d->splitDelegate = new SplitDelegate(d->ui->splitView);
   d->ui->splitView->setItemDelegate(d->splitDelegate);
 
+  d->ui->okButton->setIcon(QIcon::fromTheme("dialog-ok"));
+  d->ui->cancelButton->setIcon(QIcon::fromTheme("dialog-cancel"));
+
   // setup some connections
   connect(d->ui->splitView, SIGNAL(aboutToStartEdit()), this, SLOT(disableButtons()));
   connect(d->ui->splitView, SIGNAL(aboutToFinishEdit()), this, SLOT(enableButtons()));
