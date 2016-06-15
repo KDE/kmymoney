@@ -34,13 +34,13 @@ onlineJobModel::onlineJobModel(QObject *parent) :
     QAbstractTableModel(parent),
     m_jobIdList(QStringList())
 {
-  MyMoneyFile *file = MyMoneyFile::instance();
-  connect(file, SIGNAL(objectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-          this, SLOT(slotObjectAdded(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(file, SIGNAL(objectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)),
-          this, SLOT(slotObjectModified(MyMoneyFile::notificationObjectT,MyMoneyObject*const)));
-  connect(file, SIGNAL(objectRemoved(MyMoneyFile::notificationObjectT,QString)),
-          this, SLOT(slotObjectRemoved(MyMoneyFile::notificationObjectT,QString)));
+  MyMoneyFile *const file = MyMoneyFile::instance();
+  connect(file, &MyMoneyFile::objectAdded,
+          this, &onlineJobModel::slotObjectAdded);
+  connect(file, &MyMoneyFile::objectModified,
+          this, &onlineJobModel::slotObjectModified);
+  connect(file, &MyMoneyFile::objectRemoved,
+          this, &onlineJobModel::slotObjectRemoved);
 }
 
 void onlineJobModel::load()
@@ -82,10 +82,10 @@ QVariant onlineJobModel::headerData(int section, Qt::Orientation orientation, in
     return QVariant();
   if (orientation == Qt::Horizontal) {
     switch (section) {
-      case ColAccount: return i18n("Account");
-      case ColAction: return i18n("Action");
-      case ColDestination: return i18n("Destination");
-      case ColValue: return i18n("Value");
+      case columns::ColAccount: return i18n("Account");
+      case columns::ColAction: return i18n("Action");
+      case columns::ColDestination: return i18n("Destination");
+      case columns::ColValue: return i18n("Value");
     }
   }
   return QVariant();
@@ -110,14 +110,14 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
   }
 
   // id of MyMoneyObject
-  if (role == OnlineJobId)
+  if (role == roles::OnlineJobId)
     return QVariant::fromValue(job.id());
-  else if (role == OnlineJobRole)
+  else if (role == roles::OnlineJobRole)
     return QVariant::fromValue(job);
 
   // If job is null, display an error message and exit
   if (job.isNull()) {
-    if (index.column() == ColAction) {
+    if (index.column() == columns::ColAction) {
       switch (role) {
         case Qt::DisplayRole: return i18n("Not able to display this job.");
         case Qt::ToolTipRole: return i18n("Could not find a plugin to display this job or it does not contain any data.");
@@ -127,7 +127,7 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
   }
 
   // Show general information
-  if (index.column() == ColAccount) {
+  if (index.column() == columns::ColAccount) {
     // Account column
     if (role == Qt::DisplayRole) {
       return QVariant::fromValue(job.responsibleMyMoneyAccount().name());
@@ -167,7 +167,7 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
     }
 
     return QVariant();
-  } else if (index.column() == ColAction) {
+  } else if (index.column() == columns::ColAction) {
     if (role == Qt::DisplayRole)
       return QVariant::fromValue(job.task()->jobTypeName());
     return QVariant();
@@ -177,10 +177,10 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
   try {
     onlineJobTyped<creditTransfer> transfer(job);
 
-    if (index.column() == ColValue) {
+    if (index.column() == columns::ColValue) {
       if (role == Qt::DisplayRole)
         return QVariant::fromValue(MyMoneyUtils::formatMoney(transfer.task()->value(), transfer.task()->currency()));
-    } else if (index.column() == ColDestination) {
+    } else if (index.column() == columns::ColDestination) {
       if (role == Qt::DisplayRole) {
         const payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic(transfer.constTask()->beneficiary());
         return QVariant(ibanBic->ownerName());
