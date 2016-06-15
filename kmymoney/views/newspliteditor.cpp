@@ -209,7 +209,6 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& accountId)
   d->costCenterModel->setSourceModel(Models::instance()->costCenterModel());
   d->costCenterModel->sort(0);
 
-  /// @todo Replace with substring search of widget in KF5
   d->ui->costCenterCombo->setEditable(true);
   d->ui->costCenterCombo->setModel(d->costCenterModel);
   d->ui->costCenterCombo->setModelColumn(0);
@@ -336,15 +335,17 @@ void NewSplitEditor::setAmount(MyMoneyMoney value)
 
 QString NewSplitEditor::costCenterId() const
 {
-  /// @todo KF5
-  // return d->ui->costCenterCombo->selectedItem();
-  return QString();
+  const int row = d->ui->costCenterCombo->currentIndex();
+  QModelIndex index = d->ui->costCenterCombo->model()->index(row, 0);
+  return d->ui->costCenterCombo->model()->data(index, CostCenterModel::CostCenterIdRole).toString();
 }
 
 void NewSplitEditor::setCostCenterId(const QString& id)
 {
-  /// @todo KF5
-  // return d->ui->costCenterCombo->setSelectedItem(id);
+  QModelIndex index = Models::indexById(d->costCenterModel, CostCenterModel::CostCenterIdRole, id);
+  if(index.isValid()) {
+    d->ui->costCenterCombo->setCurrentIndex(index.row());
+  }
 }
 
 
