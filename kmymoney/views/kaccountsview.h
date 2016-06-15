@@ -49,77 +49,21 @@ public:
 public slots:
   void slotLoadAccounts();
 
-  /**
-    * Override the base class behaviour to include all updates that
-    * happened in the meantime and restore the layout.
-    */
-  void showEvent(QShowEvent * event);
-
-  /**
-    * update the account objects if their icon position has changed since
-    * the last time.
-    *
-    * @ param action must be KMyMoneyView::preSave, otherwise this slot is a NOP.
-    */
-  //void slotUpdateIconPos(unsigned int action);
-
-  /**
-    * Reconcile an account
-    *
-    * @param acc reference to the account that is to be reconciled
-    * @param reconciliationDate the date of the statement
-    * @param endingBalance the ending balance noted on the statement
-    */
-  void slotReconcileAccount(const MyMoneyAccount& acc, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
-
 protected:
-  typedef enum {
-    ListView = 0,
-    IconView,
-    // insert new values above this line
-    MaxViewTabs
-  } AccountsViewTab;
-
   enum accountViewRole {
     reconcileRole = Qt::UserRole + 1
   };
 
-  /**
-    * This method loads the accounts for the respective tab.
-    *
-    * @param tab which tab should be loaded
-    */
-  void loadAccounts(AccountsViewTab tab);
+  void loadAccounts();
   void loadListView();
   void loadIconGroups();
 
-  /**
-    * This method loads all the subaccounts recursively of a given root account
-    *
-    */
-  void loadAccountIconsIntoList(const MyMoneyAccount& parentAccount, QListWidget* listWidget);
-
-  /**
-    * This method returns a pointer to the currently selected
-    * account icon or 0 if no icon is selected.
-    */
-  QListWidgetItem* selectedIcon() const;
-
 protected slots:
   void slotNetWorthChanged(const MyMoneyMoney &);
-  void slotTabCurrentChanged(int index);
-  void slotSelectIcon(QListWidgetItem* item);
   void slotOpenContextMenu(MyMoneyAccount account);
-  void slotAssetsSelectIcon();
-  void slotAssetsOpenContextMenu(const QPoint& point);
-  void slotLiabilitiesSelectIcon();
-  void slotLiabilitiesOpenContextMenu(const QPoint& point);
-  void slotEquitiesSelectIcon();
-  void slotEquitiesOpenContextMenu(const QPoint& point);
   void slotOpenObject(QListWidgetItem* item);
   void slotExpandCollapse();
   void slotUnusedIncomeExpenseAccountHidden();
-  void slotReconcileAccount(QListWidget* list, const MyMoneyAccount& acc);
 
 signals:
   /**
@@ -151,10 +95,8 @@ signals:
   void aboutToShow();
 
 private:
-  MyMoneyAccount                      m_reconciliationAccount;
-
   /// set if a view needs to be reloaded during show()
-  bool                                m_needReload[MaxViewTabs];
+  bool                                m_needReload;
   bool                                m_haveUnusedCategories;
 
   AccountsViewFilterProxyModel        *m_filterProxyModel;

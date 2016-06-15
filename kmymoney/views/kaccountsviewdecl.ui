@@ -15,10 +15,6 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QTabWidget" name="m_tab">
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
      <widget class="QWidget" name="list">
       <attribute name="title">
        <string>List</string>
@@ -63,71 +59,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="icons">
-      <attribute name="title">
-       <string>Icons</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="m_iconGroupLayout">
-       <item>
-        <widget class="QGroupBox" name="m_assetsGroup">
-         <property name="title">
-          <string>Assets</string>
-         </property>
-         <layout class="QVBoxLayout" name="m_assetsListLayout">
-          <item>
-           <widget class="QListWidget" name="m_assetsList">
-            <property name="dragDropMode">
-             <enum>QAbstractItemView::InternalMove</enum>
-            </property>
-            <property name="viewMode">
-             <enum>QListView::IconMode</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="m_liabilitiesGroup">
-         <property name="title">
-          <string>Liabilities</string>
-         </property>
-         <layout class="QVBoxLayout" name="m_liabilitiesListLayout">
-          <item>
-           <widget class="QListWidget" name="m_liabilitiesList">
-            <property name="dragDropMode">
-             <enum>QAbstractItemView::InternalMove</enum>
-            </property>
-            <property name="viewMode">
-             <enum>QListView::IconMode</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="m_equitiesGroup">
-         <property name="title">
-          <string>Equities</string>
-         </property>
-         <layout class="QVBoxLayout" name="m_equitiesListLayout">
-          <item>
-           <widget class="QListWidget" name="m_equitiesList">
-            <property name="dragDropMode">
-             <enum>QAbstractItemView::InternalMove</enum>
-            </property>
-            <property name="viewMode">
-             <enum>QListView::IconMode</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
    </item>
    <item>
     <widget class="QLabel" name="m_hiddenCategories">

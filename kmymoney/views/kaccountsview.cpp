@@ -66,14 +66,7 @@ KAccountsView::KAccountsView(QWidget *parent) :
   KGuiItem::assign(m_collapseButton, collapseGuiItem);
   KGuiItem::assign(m_expandButton, expandGuiItem);
 
-  for (int i = 0; i < MaxViewTabs; ++i)
-    m_needReload[i] = false;
-
-  KSharedConfigPtr config = KSharedConfig::openConfig();
-  KConfigGroup grp = config->group("Last Use Settings");
-  m_tab->setCurrentIndex(grp.readEntry("KAccountsView_LastType", 0));
-
-  connect(m_tab, SIGNAL(currentChanged(int)), this, SLOT(slotTabCurrentChanged(int)));
+  m_needReload = false;
 
   connect(Models::instance()->accountsModel(), SIGNAL(netWorthChanged(MyMoneyMoney)), this, SLOT(slotNetWorthChanged(MyMoneyMoney)));
 
@@ -97,16 +90,6 @@ KAccountsView::KAccountsView(QWidget *parent) :
   m_accountTree->setIconSize(QSize(22, 22));
   m_accountTree->setSortingEnabled(true);
 
-  m_assetsGroup->setLayout(m_assetsListLayout);
-  m_liabilitiesGroup->setLayout(m_liabilitiesListLayout);
-  m_equitiesGroup->setLayout(m_equitiesListLayout);
-
-  m_assetsList->setContextMenuPolicy(Qt::CustomContextMenu);
-  m_assetsList->setWordWrap(true);
-  m_liabilitiesList->setContextMenuPolicy(Qt::CustomContextMenu);
-  m_liabilitiesList->setWordWrap(true);
-  m_equitiesList->setContextMenuPolicy(Qt::CustomContextMenu);
-  m_equitiesList->setWordWrap(true);
 
   connect(m_searchWidget, SIGNAL(textChanged(QString)), m_filterProxyModel, SLOT(setFilterFixedString(QString)));
 
@@ -117,18 +100,6 @@ KAccountsView::KAccountsView(QWidget *parent) :
   connect(m_accountTree, SIGNAL(selectObject(MyMoneyObject)), this, SIGNAL(selectObject(MyMoneyObject)));
   connect(m_accountTree, SIGNAL(openContextMenu(MyMoneyObject)), this, SIGNAL(openContextMenu(MyMoneyObject)));
   connect(m_accountTree, SIGNAL(openObject(MyMoneyObject)), this, SIGNAL(openObject(MyMoneyObject)));
-
-  connect(m_assetsList, SIGNAL(itemSelectionChanged()), this, SLOT(slotAssetsSelectIcon()));
-  connect(m_assetsList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotAssetsOpenContextMenu(QPoint)));
-  connect(m_assetsList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotOpenObject(QListWidgetItem*)));
-
-  connect(m_liabilitiesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotLiabilitiesSelectIcon()));
-  connect(m_liabilitiesList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotLiabilitiesOpenContextMenu(QPoint)));
-  connect(m_liabilitiesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotOpenObject(QListWidgetItem*)));
-
-  connect(m_equitiesList, SIGNAL(itemSelectionChanged()), this, SLOT(slotEquitiesSelectIcon()));
-  connect(m_equitiesList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotEquitiesOpenContextMenu(QPoint)));
-  connect(m_equitiesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotOpenObject(QListWidgetItem*)));
 
   connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotLoadAccounts()));
 
@@ -163,86 +134,14 @@ void KAccountsView::slotUnusedIncomeExpenseAccountHidden()
 
 void KAccountsView::slotLoadAccounts()
 {
-  m_needReload[ListView] = true;
-  m_needReload[IconView] = true;
-  if (isVisible())
-    slotTabCurrentChanged(m_tab->currentIndex());
+  m_needReload = true;
 }
 
-void KAccountsView::slotTabCurrentChanged(int index)
+void KAccountsView::loadAccounts()
 {
-  AccountsViewTab tab = static_cast<AccountsViewTab>(index);
-
-  // remember this setting for startup
-  KSharedConfigPtr config = KSharedConfig::openConfig();
-  KConfigGroup grp = config->group("Last Use Settings");
-  grp.writeEntry("KAccountsView_LastType", QVariant(tab).toString());
-
-  loadAccounts(tab);
-
-  switch (tab) {
-    case ListView:
-      // update the hint if categories are hidden
-      m_hiddenCategories->setVisible(m_haveUnusedCategories);
-      break;
-
-    case IconView:
-      m_hiddenCategories->hide();
-      break;
-
-    default:
-      break;
-  }
-
-  QListWidgetItem* iconItem = selectedIcon();
-
-  emit selectObject(MyMoneyAccount());
-  switch (static_cast<AccountsViewTab>(m_tab->currentIndex())) {
-    case ListView: {
-        QModelIndexList selectedIndexes = m_accountTree->selectionModel()->selectedIndexes();
-        if (!selectedIndexes.empty()) {
-          QVariant data = m_accountTree->model()->data(selectedIndexes.front(), AccountsModel::AccountRole);
-          if (data.isValid()) {
-            emit selectObject(data.value<MyMoneyAccount>());
-          }
-        }
-      }
-      break;
-
-    case IconView:
-      if (iconItem) {
-        emit selectObject((iconItem->data(Qt::UserRole)).value<MyMoneyAccount>());
-      }
-      break;
-
-    default:
-      break;
-  }
-}
-
-void KAccountsView::showEvent(QShowEvent * event)
-{
-  emit aboutToShow();
-
-  slotTabCurrentChanged(m_tab->currentIndex());
-
-  QWidget::showEvent(event);
-}
-
-void KAccountsView::loadAccounts(AccountsViewTab tab)
-{
-  if (m_needReload[tab]) {
-    switch (tab) {
-      case ListView:
-        loadListView();
-        break;
-      case IconView:
-        loadIconGroups();
-        break;
-      default:
-        break;
-    }
-    m_needReload[tab] = false;
+  if (m_needReload) {
+    loadListView();
+    m_needReload = false;
   }
 }
 
@@ -272,31 +171,6 @@ void KAccountsView::loadListView()
   }
 }
 
-//FIXME: This will be deprecated once the lists use the accounts model
-void KAccountsView::slotReconcileAccount(const MyMoneyAccount& acc, const QDate& /*reconciliationDate*/, const MyMoneyMoney& /*endingBalance*/)
-{
-  //call all lists
-  slotReconcileAccount(m_assetsList, acc);
-  slotReconcileAccount(m_liabilitiesList, acc);
-  if (KMyMoneyGlobalSettings::expertMode()) {
-    slotReconcileAccount(m_equitiesList, acc);
-  }
-
-}
-
-void KAccountsView::slotReconcileAccount(QListWidget* list, const MyMoneyAccount& acc)
-{
-  //scan all the items in the list and set the flag
-  for (int i = 0; i < list->count(); ++i) {
-    //compare the id of the account to the items and set the reconcile flag accordingly
-    QListWidgetItem* item = list->item(i);
-    MyMoneyAccount itemAccount = (item->data(Qt::UserRole)).value<MyMoneyAccount>();
-    item->setIcon(QIcon(itemAccount.accountPixmap(itemAccount.id() == acc.id())));
-    item->setData(reconcileRole, QVariant(itemAccount.id() == acc.id()));
-  }
-  m_reconciliationAccount = acc;
-}
-
 void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
 {
   QString s(i18n("Net Worth: "));
@@ -320,66 +194,6 @@ void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
   m_totalProfitsLabel->setText(s);
 }
 
-QListWidgetItem* KAccountsView::selectedIcon() const
-{
-  if (m_assetsList->currentItem())
-    return m_assetsList->currentItem();
-  else if (m_liabilitiesList->currentItem())
-    return m_liabilitiesList->currentItem();
-  else
-    return m_equitiesList->currentItem();
-}
-
-void KAccountsView::slotAssetsSelectIcon()
-{
-  QList<QListWidgetItem*> selectedItems = m_assetsList->selectedItems();
-  if (selectedItems.count() > 0) {
-    slotSelectIcon(selectedItems.at(0));
-  }
-}
-
-void KAccountsView::slotLiabilitiesSelectIcon()
-{
-  QList<QListWidgetItem*> selectedItems = m_liabilitiesList->selectedItems();
-  if (selectedItems.count() > 0) {
-    slotSelectIcon(selectedItems.at(0));
-  }
-}
-
-void KAccountsView::slotEquitiesSelectIcon()
-{
-  QList<QListWidgetItem*> selectedItems = m_equitiesList->selectedItems();
-  if (selectedItems.count() > 0) {
-    slotSelectIcon(selectedItems.at(0));
-  }
-}
-
-void KAccountsView::slotSelectIcon(QListWidgetItem* item)
-{
-  emit selectObject((item->data(Qt::UserRole)).value<MyMoneyAccount>());
-}
-
-void KAccountsView::slotAssetsOpenContextMenu(const QPoint& point)
-{
-  QListWidgetItem* item = m_assetsList->itemAt(point);
-  if (item)
-    slotOpenContextMenu((item->data(Qt::UserRole)).value<MyMoneyAccount>());
-}
-
-void KAccountsView::slotLiabilitiesOpenContextMenu(const QPoint& point)
-{
-  QListWidgetItem* item = m_liabilitiesList->itemAt(point);
-  if (item)
-    slotOpenContextMenu((item->data(Qt::UserRole)).value<MyMoneyAccount>());
-}
-
-void KAccountsView::slotEquitiesOpenContextMenu(const QPoint& point)
-{
-  QListWidgetItem* item = m_equitiesList->itemAt(point);
-  if (item)
-    slotOpenContextMenu((item->data(Qt::UserRole)).value<MyMoneyAccount>());
-}
-
 void KAccountsView::slotOpenContextMenu(MyMoneyAccount account)
 {
   emit openContextMenu(account);
@@ -389,101 +203,4 @@ void KAccountsView::slotOpenObject(QListWidgetItem* item)
 {
   if (item)
     emit openObject((item->data(Qt::UserRole)).value<MyMoneyAccount>());
-}
-
-
-/*void KAccountsView::slotUpdateIconPos(unsigned int action)
-{
-  if (action != KMyMoneyView::preSave)
-    return;
-
-  MyMoneyFileTransaction ft;
-  KMyMoneyAccountIconItem* p = dynamic_cast<KMyMoneyAccountIconItem*>(m_accountIcons->firstItem());
-  for (; p; p = dynamic_cast<KMyMoneyAccountIconItem*>(p->nextItem())) {
-    const MyMoneyAccount& acc = dynamic_cast<const MyMoneyAccount&>(p->itemObject());
-    if (acc.value("kmm-iconpos") != point(p->pos())) {
-      MyMoneyAccount a(acc);
-      a.setValue("kmm-iconpos", point(p->pos()));
-      try {
-        MyMoneyFile::instance()->modifyAccount(a);
-      } catch (const MyMoneyException &e) {
-        qDebug() << "Unable to update icon pos: " << e.what();
-      }
-    }
-  }
-  ft.commit();
-}*/
-
-void KAccountsView::loadIconGroups()
-{
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  //load list of asset accounts
-  MyMoneyAccount assetAccount = file->asset();
-  m_assetsList->clear();
-  loadAccountIconsIntoList(assetAccount, m_assetsList);
-
-  //load list of liability accounts
-  MyMoneyAccount liabilityAccount = file->liability();
-  m_liabilitiesList->clear();
-  loadAccountIconsIntoList(liabilityAccount, m_liabilitiesList);
-
-  //load list of equity accounts only if in expert mode
-  if (KMyMoneyGlobalSettings::expertMode()) {
-    MyMoneyAccount equityAccount = file->equity();
-    m_equitiesList->clear();
-    loadAccountIconsIntoList(equityAccount, m_equitiesList);
-  } else {
-    m_equitiesGroup->hide();
-  }
-}
-
-void KAccountsView::loadAccountIconsIntoList(const MyMoneyAccount& parentAccount, QListWidget* listWidget)
-{
-  MyMoneyFile* file = MyMoneyFile::instance();
-  bool showClosedAccounts = kmymoney->toggleAction("view_show_all_accounts")->isChecked()
-                            || !KMyMoneyGlobalSettings::hideClosedAccounts();
-
-  //get the subaccounts
-  QStringList subAccountsId = parentAccount.accountList();
-  QList<MyMoneyAccount> subAccountsList;
-
-  //go over each subaccount and add it and get subaccounts if it has any
-  QStringList::const_iterator it_string;
-  for (it_string = subAccountsId.constBegin(); it_string != subAccountsId.constEnd(); ++it_string) {
-    MyMoneyAccount account = file->account((*it_string));
-
-    //if it is already on the list continue with the next one
-    if (subAccountsList.contains(account))
-      continue;
-
-    //add the account to the list and check if it has subaccounts
-    subAccountsList.append(account);
-    QStringList subAccounts = account.accountList();
-
-    //if it has subaccounts, add them and then start from scratch
-    if (subAccounts.size() > 0) {
-      subAccountsId.append(subAccounts);
-      it_string = subAccountsId.constBegin();
-    }
-  }
-
-  //once all accounts are on the list, add them to listWidget
-  QList<MyMoneyAccount>::const_iterator it_a;
-  for (it_a = subAccountsList.constBegin(); it_a != subAccountsList.constEnd(); ++it_a) {
-    //do not add investment accounts
-    if ((*it_a).isInvest())
-      continue;
-
-    //check whether it is a closed account and it should be shown
-    if ((*it_a).isClosed() && !showClosedAccounts)
-      continue;
-
-    QListWidgetItem* accountItem = new QListWidgetItem;
-    accountItem->setText((*it_a).name());
-    accountItem->setData(Qt::UserRole, QVariant::fromValue((*it_a)));
-    accountItem->setIcon(QIcon((*it_a).accountPixmap()));
-    accountItem->setData(reconcileRole, QVariant(false));
-    listWidget->addItem(accountItem);
-  }
 }
