@@ -1,3 +1,5 @@
+include(ECMAddAppIcon)
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     ${KDEPIMLIBS_INCLUDE_DIRS}
@@ -86,6 +88,11 @@ set( kmymoney_SRCS main.cpp kmymoney.cpp )
 qt5_add_dbus_adaptor(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
 qt5_add_resources(kmymoney_SRCS kmymoney.qrc)
 
+# collect application icons
+file(GLOB_RECURSE KMYMONEY_APP_ICONS "${CMAKE_CURRENT_SOURCE_DIR}/icons/kmymoney/apps/*.png")
+# add icons to application sources, to have them bundled
+ecm_add_app_icon(kmymoney_SRCS ICONS ${KMYMONEY_APP_ICONS})
+
 add_executable( kmymoney ${kmymoney_SRCS} )
 target_link_libraries(kmymoney
   views
@@ -133,7 +140,6 @@ if(APPLE)
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "KMyMoney")
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_DISPLAY_NAME "KMyMoney")
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_INFO_STRING "KMyMoney - Personal Finances Manager")
-    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_ICON_FILE "kmymoney.png")
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_LONG_VERSION_STRING "KMyMoney ${KDE_APPLICATIONS_VERSION}")
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_SHORT_VERSION_STRING "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATIONS_VERSION_MINOR}")
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_BUNDLE_VERSION "${KDE_APPLICATIONS_VERSION}")
