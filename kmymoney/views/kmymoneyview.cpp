@@ -95,6 +95,7 @@
 #include "ktagsview.h"
 #include "kscheduledview.h"
 #include "kgloballedgerview.h"
+#include "simpleledgerview.h"
 #include "kinvestmentview.h"
 #include "kreportsview.h"
 #include "kbudgetview.h"
@@ -303,6 +304,12 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_onlineJobOutboxView, SIGNAL(newCreditTransfer()), kmymoney, SLOT(slotNewOnlineTransfer()));
   connect(m_onlineJobOutboxView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
   connect(m_onlineJobOutboxView, SIGNAL(showContextMenu(onlineJob)), kmymoney, SLOT(slotShowOnlineJobContextMenu()));
+
+  SimpleLedgerView* view = new SimpleLedgerView;
+  KPageWidgetItem* frame = m_model->addPage(view, i18n("New ledger"));
+  frame->setIcon(QIcon::fromTheme("document-properties"));
+  connect(this, SIGNAL(fileClosed()), view, SLOT(closeLedgers()));
+  connect(this, SIGNAL(fileOpened()), view, SLOT(openFavoriteLedgers()));
 
   //set the model
   setModel(m_model);
@@ -650,6 +657,8 @@ void KMyMoneyView::closeFile()
 
   emit kmmFilePlugin(postClose);
   m_fileOpen = false;
+
+  emit fileClosed();
 }
 
 void KMyMoneyView::ungetString(QIODevice *qfile, char *buf, int len)
@@ -1118,6 +1127,7 @@ bool KMyMoneyView::initializeStorage()
     showPage(page);
   }
 
+  emit fileOpened();
   return true;
 }
 

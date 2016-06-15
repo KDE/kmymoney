@@ -253,6 +253,13 @@
               </property>
              </widget>
             </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="m_costCenterRequiredCheckBox">
+              <property name="text">
+               <string>Cost Center assignment required</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>

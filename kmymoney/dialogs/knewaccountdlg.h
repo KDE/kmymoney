@@ -91,6 +91,7 @@ private:
   void storeKVP(const QString& key, kMyMoneyEdit* widget);
   void storeKVP(const QString& key, KLineEdit* widget);
   void storeKVP(const QString& key, const QString& text, const QString& value);
+  void storeKVP(const QString& key, QCheckBox* widget);
   void loadKVP(const QString& key, kMyMoneyEdit* widget);
   void loadKVP(const QString& key, KLineEdit* widget);
 

@@ -15,6 +15,8 @@ set(kmymoney_STAT_HEADERS
   kmymoneyreportconfigtabimpl.h kmymoneyreportcontrolimpl.h
   kmymoneyvalidationfeedback.h
   onlinejobmessagesview.h
+  kmymoneydateedit.h
+  amountedit.h
   )
 
 ########### Shared widget library ###########
@@ -31,6 +33,8 @@ set(kmm_widgets_sources
   ktreewidgetfilterlinewidget.cpp
   kguiutils.cpp
   onlinejobmessagesview.cpp
+  kmymoneydateedit.cpp
+  amountedit.cpp
   )
 
 qt5_wrap_ui(kmm_widgets_sources
@@ -73,6 +77,7 @@ set(_uncritial_common_sources
   kmymoneycombo.cpp
   kmymoneycompletion.cpp
   kmymoneytitlelabel.cpp
+  kmymoneydateedit.cpp
   kmymoneywizard.cpp
   kpricetreeitem.cpp
   registeritem.cpp

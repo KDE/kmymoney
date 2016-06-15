@@ -57,7 +57,7 @@ const int DATE_POPUP_TIMEOUT = 1500;
 const QDate INVALID_DATE = QDate(1800, 1, 1);
 }
 
-void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* k)
+void KMyMoney::OldDateEdit::keyPressEvent(QKeyEvent* k)
 {
   if ((lineEdit()->text().isEmpty() || lineEdit()->selectedText() == lineEdit()->text()) && QChar(k->key()).isDigit()) {
     // the line edit is empty which means that the date was cleared
@@ -70,13 +70,13 @@ void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* k)
   QDateEdit::keyPressEvent(k);
 }
 
-void KMyMoneyDateEdit::focusInEvent(QFocusEvent * event)
+void KMyMoney::OldDateEdit::focusInEvent(QFocusEvent * event)
 {
   QDateEdit::focusInEvent(event);
   setSelectedSection(QDateTimeEdit::DaySection);
 }
 
-bool KMyMoneyDateEdit::event(QEvent* e)
+bool KMyMoney::OldDateEdit::event(QEvent* e)
 {
   // make sure that we keep the current date setting of a kMyMoneyDateInput object
   // across the QDateEdit::event(FocusOutEvent)
@@ -95,7 +95,7 @@ bool KMyMoneyDateEdit::event(QEvent* e)
   return rc;
 }
 
-bool KMyMoneyDateEdit::focusNextPrevChild(bool next)
+bool KMyMoney::OldDateEdit::focusNextPrevChild(bool next)
 {
   Q_UNUSED(next)
   return true;
@@ -121,7 +121,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   QHBoxLayout *dateInputLayout = new QHBoxLayout(this);
   dateInputLayout->setSpacing(0);
   dateInputLayout->setContentsMargins(0, 0, 0, 0);
-  d->m_dateEdit = new KMyMoneyDateEdit(d->m_date, this);
+  d->m_dateEdit = new KMyMoney::OldDateEdit(d->m_date, this);
   dateInputLayout->addWidget(d->m_dateEdit, 3);
   setFocusProxy(d->m_dateEdit);
   d->m_dateEdit->installEventFilter(this); // To get d->m_dateEdit's FocusIn/Out and some KeyPress events

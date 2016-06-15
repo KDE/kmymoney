@@ -1016,7 +1016,7 @@ void MyMoneyFileTest::testAddTransaction()
     ft.commit();
     QCOMPARE(m_objectsRemoved.count(), 0);
     QCOMPARE(m_objectsModified.count(), 0);
-    QCOMPARE(m_objectsAdded.count(), 0);
+    QCOMPARE(m_objectsAdded.count(), 1);
     QCOMPARE(m_balanceChanged.count(), 2);
     QCOMPARE(m_balanceChanged.count("A000001"), 1);
     QCOMPARE(m_balanceChanged.count("A000003"), 1);
@@ -1119,7 +1119,7 @@ void MyMoneyFileTest::testModifyTransactionSimple()
     m->modifyTransaction(t);
     ft.commit();
     QCOMPARE(m_objectsRemoved.count(), 0);
-    QCOMPARE(m_objectsModified.count(), 0);
+    QCOMPARE(m_objectsModified.count(), 1);
     QCOMPARE(m_objectsAdded.count(), 0);
     QCOMPARE(m_balanceChanged.count(), 2);
     QCOMPARE(m_balanceChanged.count(QLatin1String("A000001")), 1);
@@ -1156,7 +1156,7 @@ void MyMoneyFileTest::testModifyTransactionNewPostDate()
     QCOMPARE(m->dirty(), true);
 
     QCOMPARE(m_objectsRemoved.count(), 0);
-    QCOMPARE(m_objectsModified.count(), 0);
+    QCOMPARE(m_objectsModified.count(), 1);
     QCOMPARE(m_objectsAdded.count(), 0);
     QCOMPARE(m_balanceChanged.count(), 2);
     QCOMPARE(m_balanceChanged.count(QLatin1String("A000001")), 1);
@@ -1201,7 +1201,7 @@ void MyMoneyFileTest::testModifyTransactionNewAccount()
     QCOMPARE(m->transactionList(f3).count(), 1);
 
     QCOMPARE(m_objectsRemoved.count(), 0);
-    QCOMPARE(m_objectsModified.count(), 0);
+    QCOMPARE(m_objectsModified.count(), 1);
     QCOMPARE(m_objectsAdded.count(), 0);
     QCOMPARE(m_balanceChanged.count(), 3);
     QCOMPARE(m_balanceChanged.count(QLatin1String("A000001")), 1);
@@ -1237,7 +1237,7 @@ void MyMoneyFileTest::testRemoveTransaction()
     QCOMPARE(m->transactionList(f2).count(), 0);
     QCOMPARE(m->transactionList(f3).count(), 0);
 
-    QCOMPARE(m_objectsRemoved.count(), 0);
+    QCOMPARE(m_objectsRemoved.count(), 1);
     QCOMPARE(m_objectsModified.count(), 0);
     QCOMPARE(m_objectsAdded.count(), 0);
     QCOMPARE(m_balanceChanged.count(), 2);

@@ -46,6 +46,7 @@
 #include <mymoneyreport.h>
 #include <mymoneybudget.h>
 #include <onlinejob.h>
+#include <mymoneycostcenter.h>
 
 /**
   * @author Thomas Baumgart
@@ -948,6 +949,16 @@ public:
    * @brief Remove an onlineJobs
    */
   virtual void removeOnlineJob(const onlineJob&) = 0;
+
+  /**
+   * @brief Returns a cost center by id
+   */
+  virtual const MyMoneyCostCenter costCenter(const QString& id) const = 0;
+
+  /**
+   * @brief Retruns a list of all costcenters
+   */
+  virtual const QList<MyMoneyCostCenter> costCenterList() const = 0;
 
   /**
     * This method checks, if the given @p object is referenced

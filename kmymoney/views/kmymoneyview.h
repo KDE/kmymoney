@@ -630,6 +630,16 @@ signals:
     */
   void reconciliationStarts(const MyMoneyAccount& account, const QDate& reconciliationDate, const MyMoneyMoney& endingBalance);
 
+  /**
+   * This signal is emitted after a data source has been closed
+   */
+  void fileClosed();
+
+  /**
+   * This signal is emitted after a data source has been opened
+   */
+  void fileOpened();
+
 };
 
 /**

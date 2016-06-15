@@ -37,7 +37,8 @@ class MyMoneyMoney;
 class MyMoneySecurity;
 class MyMoneyAccount;
 
-void timestamp(const char *);
+void timestamp(const char* txt);
+void timestamp_reset();
 
 //class that has utility functions to use throughout the application.
 class KMM_MYMONEY_EXPORT MyMoneyUtils

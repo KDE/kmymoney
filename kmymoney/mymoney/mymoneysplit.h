@@ -148,6 +148,9 @@ public:
   const QString& accountId() const {
     return m_account;
   }
+  const QString& costCenterId() const {
+    return m_costCenter;
+  }
   const QString& memo() const {
     return m_memo;
   }
@@ -205,6 +208,7 @@ public:
   void setValue(const MyMoneyMoney& value, const QString& transactionCurrencyId, const QString& splitCurrencyId);
 
   void setAccountId(const QString& account);
+  void setCostCenterId(const QString& costCenter);
   void setMemo(const QString& memo);
   void setReconcileFlag(const reconcileFlagE flag);
   void setReconcileDate(const QDate& date);
@@ -290,7 +294,12 @@ private:
   /**
     * This member contains the ID of the account
     */
-  QString      m_account;
+  QString       m_account;
+
+  /**
+   * This member contains the ID of the cost center
+   */
+  QString       m_costCenter;
 
   /**
     */

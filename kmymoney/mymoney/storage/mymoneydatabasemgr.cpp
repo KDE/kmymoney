@@ -620,6 +620,17 @@ const QString MyMoneyDatabaseMgr::nextPayeeIdentifierID()
   return id;
 }
 
+const QString MyMoneyDatabaseMgr::nextCostCenterID()
+{
+  QString id;
+  if (m_sql) {
+    if (! m_sql->isOpen())((QSqlDatabase*)(m_sql.data()))->open();
+    id.setNum(m_sql->incrementCostCenterId());
+    id = QLatin1Char('C') + id.rightJustified(COSTCENTER_ID_SIZE, '0');
+  }
+  return id;
+}
+
 void MyMoneyDatabaseMgr::addTransaction(MyMoneyTransaction& transaction, const bool skipAccountUpdate)
 {
   // perform some checks to see that the transaction stuff is OK. For
@@ -2216,6 +2227,11 @@ void MyMoneyDatabaseMgr::loadPayeeIdentifierId(const long unsigned int id)
   m_sql->loadPayeeIdentifierId(id);
 }
 
+void MyMoneyDatabaseMgr::loadCostCenterId(const long unsigned int id)
+{
+  m_sql->loadAccountId(id);
+}
+
 void MyMoneyDatabaseMgr::rebuildAccountBalances()
 {
   startTransaction();
@@ -2258,4 +2274,34 @@ void MyMoneyDatabaseMgr::removeReferences(const QString& id)
     b.removeReference(id);
 //    budgetList.modify(b.id(), b);
   }
+}
+
+const QList< MyMoneyCostCenter > MyMoneyDatabaseMgr::costCenterList() const
+{
+  if (m_sql) {
+    if (! m_sql->isOpen())((QSqlDatabase*)(m_sql.data()))->open();
+    return m_sql->fetchCostCenters().values();
+  }
+  return QList<MyMoneyCostCenter> ();
+}
+
+void MyMoneyDatabaseMgr::loadCostCenters(const QMap< QString, MyMoneyCostCenter >& costCenters)
+{
+  Q_UNUSED(costCenters);
+}
+
+long unsigned int MyMoneyDatabaseMgr::costCenterId() const
+{
+  return m_sql->getNextCostCenterId() - 1;
+}
+
+const MyMoneyCostCenter MyMoneyDatabaseMgr::costCenter(const QString& id) const
+{
+  QMap<QString, MyMoneyCostCenter>::ConstIterator it;
+  QMap<QString, MyMoneyCostCenter> costCenterList = m_sql->fetchCostCenters(QStringList(id));
+  it = costCenterList.constFind(id);
+  if (it == costCenterList.constEnd())
+    throw MYMONEYEXCEPTION("Unknown costcenter '" + id + '\'');
+
+  return *it;
 }

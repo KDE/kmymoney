@@ -285,6 +285,20 @@ bool MyMoneyAccount::isLiquidAsset() const
          accountType() == Cash;
 }
 
+bool MyMoneyAccount::isCostCenterRequired() const
+{
+  return value("CostCenter").toLower() == QLatin1String("yes");
+}
+
+void MyMoneyAccount::setCostCenterRequired(bool required)
+{
+  if(required) {
+    setValue("CostCenter", "yes");
+  } else {
+    deletePair("CostCenter");
+  }
+}
+
 template<>
 QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const
 {

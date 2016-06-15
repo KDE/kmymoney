@@ -109,6 +109,7 @@ public:
     model->setData(index, QVariant(account.id()), AccountIdRole);
     model->setData(index, QVariant(account.value("PreferredAccount") == "Yes"), AccountFavoriteRole);
     model->setData(index, QVariant(QIcon(account.accountPixmap(account.id() == m_reconciledAccount.id()))), Qt::DecorationRole);
+    model->setData(index, MyMoneyFile::instance()->accountToCategory(account.id(), true), FullNameRole);
 
     QFont font = model->data(index, Qt::FontRole).value<QFont>();
 
@@ -154,6 +155,14 @@ public:
 
         } else {
           model->setData(newIndex, QString(), Qt::DisplayRole);
+        }
+
+        // CostCenter
+        newIndex = model->index(index.row(), index.column() + CostCenter, index.parent());
+        if (account.isCostCenterRequired()) {
+          model->setData(newIndex, checkMark, Qt::DecorationRole);
+        } else {
+          model->setData(newIndex, QPixmap(), Qt::DecorationRole);
         }
         break;
       default:
@@ -408,6 +417,9 @@ void AccountsModel::init()
       case VAT:
         headerLabels << i18nc("Column heading for VAT category", "VAT");
         break;
+      case CostCenter:
+        headerLabels << i18nc("Column heading for Cost Center", "CC");
+        break;
       case TotalBalance:
         headerLabels << i18n("Total Balance");
         break;
@@ -437,6 +449,8 @@ void AccountsModel::load()
   // Favorite accounts
   QStandardItem *favoriteAccountsItem = new QStandardItem(i18n("Favorites"));
   rootItem->appendRow(favoriteAccountsItem);
+  setData(favoriteAccountsItem->index(), i18n("Favorites"), FullNameRole);
+  setData(favoriteAccountsItem->index(), i18n("Favorites"), Qt::EditRole);
   setData(favoriteAccountsItem->index(), favoritesAccountId, AccountIdRole);
   setData(favoriteAccountsItem->index(), 0, DisplayOrderRole);
   favoriteAccountsItem->setColumnCount(columnCount());
@@ -487,6 +501,8 @@ void AccountsModel::load()
     QStandardItem *accountsItem = new QStandardItem(accountName);
     rootItem->appendRow(accountsItem);
     setData(accountsItem->index(), QVariant(displayOrder), DisplayOrderRole);
+    setData(accountsItem->index(), MyMoneyFile::instance()->accountToCategory(account.id(), true), FullNameRole);
+    setData(accountsItem->index(), MyMoneyFile::instance()->accountToCategory(account.id(), true), Qt::EditRole);
     accountsItem->setColumnCount(columnCount());
     accountsItem->setFont(font);
     accountsItem->setEditable(false);
@@ -519,6 +535,20 @@ void AccountsModel::load()
 
   checkNetWorth();
   checkProfit();
+}
+
+QModelIndex AccountsModel::accountById(const QString& id) const
+{
+  QModelIndexList accountList = match(index(0, 0),
+                                    AccountsModel::AccountIdRole,
+                                    id,
+                                    1,
+                                    Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
+
+  if(accountList.count() == 1) {
+    return accountList.first();
+  }
+  return QModelIndex();
 }
 
 /**
@@ -1087,8 +1117,9 @@ bool AccountsFilterProxyModel::filterAcceptsRow(int source_row, const QModelInde
   */
 bool AccountsFilterProxyModel::filterAcceptsRowOrChildRows(int source_row, const QModelIndex &source_parent) const
 {
-  if (QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent))
+  if (QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent)) {
     return true;
+  }
 
   QModelIndex index = sourceModel()->index(source_row, 0, source_parent);
   for (int i = 0; i < sourceModel()->rowCount(index); ++i) {
@@ -1271,4 +1302,45 @@ void AccountsFilterProxyModel::setHideUnusedIncomeExpenseAccounts(bool hideUnuse
 bool AccountsFilterProxyModel::hideUnusedIncomeExpenseAccounts() const
 {
   return d->m_hideUnusedIncomeExpenseAccounts;
+}
+
+/**
+  * Returns the number of visible items after filtering. In case @a includeBaseAccounts
+  * is set to @c true, the 5 base accounts (asset, liability, income, expense and equity)
+  * will also be counted. The default is @c false.
+  */
+int AccountsFilterProxyModel::visibleItems(bool includeBaseAccounts) const
+{
+  int rows = 0;
+  for (int i = 0; i < rowCount(QModelIndex()); ++i) {
+    if(includeBaseAccounts) {
+      ++rows;
+    }
+    QModelIndex childIndex = index(i, 0);
+    if (hasChildren(childIndex)) {
+      rows += visibleItems(childIndex);
+    }
+  }
+  return rows;
+}
+
+/**
+  * Returns the number of visible items under the given @a index.
+  * The column of the @a index must be 0, otherwise no count will
+  * be returned (returns 0).
+  */
+int AccountsFilterProxyModel::visibleItems(const QModelIndex& index) const
+{
+  int rows = 0;
+  if (index.isValid() && index.column() == 0) {
+    const QAbstractItemModel *model = index.model();
+    for (int i = 0; i < model->rowCount(index); ++i) {
+      ++rows;
+      QModelIndex childIndex = model->index(i, index.column(), index);
+      if (model->hasChildren(childIndex)) {
+        rows += visibleItems(childIndex);
+      }
+    }
+  }
+  return rows;
 }

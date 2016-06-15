@@ -433,6 +433,7 @@ private:
   TABLE(OnlineJobs)
   TABLE(PayeeIdentifier)
   TABLE(PluginInfo)
+  TABLE(CostCenter)
 
   VIEW(Balances)
 protected:

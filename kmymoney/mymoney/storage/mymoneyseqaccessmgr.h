@@ -540,6 +540,16 @@ public:
   const QList<onlineJob> onlineJobList() const;
 
   /**
+   * @brief Return all cost center objects
+   */
+  const QList< MyMoneyCostCenter > costCenterList() const;
+
+  /**
+   * @brief Return cost center object by id
+   */
+  const MyMoneyCostCenter costCenter(const QString& id) const;
+
+  /**
     * This method returns whether a given transaction is already in memory, to avoid
     * reloading it from the database
     */
@@ -628,6 +638,7 @@ public:
   virtual void loadCurrencies(const QMap<QString, MyMoneySecurity>& map);
   virtual void loadPrices(const MyMoneyPriceList& list);
   virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs);
+  virtual void loadCostCenters(const QMap<QString, MyMoneyCostCenter>& costCenters);
 
   virtual void loadAccountId(const unsigned long id);
   virtual void loadTransactionId(const unsigned long id);
@@ -639,6 +650,7 @@ public:
   virtual void loadReportId(const unsigned long id);
   virtual void loadBudgetId(const unsigned long id);
   virtual void loadOnlineJobId(const unsigned long id);
+  virtual void loadCostCenterId(const unsigned long id);
 
   virtual unsigned long accountId() const {
     return m_nextAccountID;
@@ -667,7 +679,9 @@ public:
   virtual unsigned long budgetId() const {
     return m_nextBudgetID;
   };
-
+  virtual unsigned long costCenterId() const {
+    return m_nextCostCenterID;
+  }
 
   /**
     * This method is used to extract a value from
@@ -1112,6 +1126,7 @@ private:
   static const int REPORT_ID_SIZE = 6;
   static const int BUDGET_ID_SIZE = 6;
   static const int ONLINE_JOB_ID_SIZE = 6;
+  static const int COSTCENTER_ID_SIZE = 6;
 
   /**
     * This method is used to set the dirty flag and update the
@@ -1196,6 +1211,12 @@ private:
   unsigned long m_nextOnlineJobID;
 
   /**
+    * This member variable keeps the number that will be assigned to the
+    * next cost center object created. It is maintained by nextCostCenterID()
+    */
+  unsigned long m_nextCostCenterID;
+
+  /**
     * The member variable m_institutionList is the container for the
     * institutions known within this file.
     */
@@ -1263,6 +1284,11 @@ private:
     * A list containing all the onlineJob information objects.
     */
   MyMoneyMap<QString, onlineJob> m_onlineJobList;
+
+  /**
+   * A list containing all the cost center information objects
+   */
+  MyMoneyMap<QString, MyMoneyCostCenter> m_costCenterList;
 
   /**
     * This member signals if the file has been modified or not

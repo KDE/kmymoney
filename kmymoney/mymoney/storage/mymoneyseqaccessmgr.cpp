@@ -52,6 +52,7 @@ MyMoneySeqAccessMgr::MyMoneySeqAccessMgr()
   m_nextReportID = 0;
   m_nextBudgetID = 0;
   m_nextOnlineJobID = 0;
+  m_nextCostCenterID = 0;
   m_user = MyMoneyPayee();
   m_dirty = false;
   m_creationDate = QDate::currentDate();
@@ -969,6 +970,20 @@ const QList<onlineJob> MyMoneySeqAccessMgr::onlineJobList() const
   return m_onlineJobList.values();
 }
 
+const QList< MyMoneyCostCenter > MyMoneySeqAccessMgr::costCenterList() const
+{
+  return m_costCenterList.values();
+}
+
+const MyMoneyCostCenter MyMoneySeqAccessMgr::costCenter(const QString& id) const
+{
+  if (!m_costCenterList.contains(id)) {
+    QString msg = QString("Invalid cost center id '%1'").arg(id);
+    throw MYMONEYEXCEPTION(msg);
+  }
+  return m_costCenterList[id];
+}
+
 const MyMoneyTransaction MyMoneySeqAccessMgr::transaction(const QString& id) const
 {
   // get the full key of this transaction, throw exception
@@ -1228,6 +1243,24 @@ void MyMoneySeqAccessMgr::loadOnlineJobs(const QMap< QString, onlineJob >& onlin
   }
 }
 
+void MyMoneySeqAccessMgr::loadCostCenters(const QMap< QString, MyMoneyCostCenter >& costCenters)
+{
+  m_costCenterList = costCenters;
+
+  // scan the map to identify the last used id
+  QMap<QString, MyMoneyCostCenter>::const_iterator it_s;
+  QString lastId;
+  for (it_s = costCenters.constBegin(); it_s != costCenters.constEnd(); ++it_s) {
+    if ((*it_s).id() > lastId)
+      lastId = (*it_s).id();
+  }
+
+  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
+  if (pos != -1) {
+    m_nextCostCenterID = lastId.mid(pos).toInt();
+  }
+}
+
 void MyMoneySeqAccessMgr::loadAccountId(const unsigned long id)
 {
   m_nextAccountID = id;
@@ -1271,6 +1304,11 @@ void MyMoneySeqAccessMgr::loadBudgetId(const unsigned long id)
 void MyMoneySeqAccessMgr::loadOnlineJobId(const long unsigned int id)
 {
   m_nextOnlineJobID = id;
+}
+
+void MyMoneySeqAccessMgr::loadCostCenterId(const long unsigned int id)
+{
+  m_nextCostCenterID = id;
 }
 
 const QString MyMoneySeqAccessMgr::value(const QString& key) const

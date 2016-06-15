@@ -44,6 +44,7 @@
 #include "accountsmodel.h"
 #include "models/onlinebankingaccountsfilterproxymodel.h"
 
+
 /**
   * A proxy model used to filter all the data from the core accounts model leaving
   * only the name of the accounts so this model can be used in the account
@@ -75,7 +76,7 @@ protected:
  * To create valid Qt moc data this class inherits the template and uses Q_OBJECT.
  * 
  * @code typedef AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel> AccountNamesFilterProxyModel;
- * sould work as well
+ * should work as well
  */
 class AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel>
 {
@@ -91,6 +92,7 @@ public:
  * Is equivalent to AccountNamesFilterProxyModel using OnlineBankingAccountFilterProxyModel as base.
  */
 typedef AccountNamesFilterProxyModelTpl<OnlineBankingAccountsFilterProxyModel> OnlineBankingAccountNamesFilterProxyModel;
+
 
 /**
   *
@@ -110,14 +112,24 @@ public:
 
   void setModel(QAbstractItemModel *model);
 
+  /**
+   * Overridden to get specific behavior
+   */
+  void setEditable(bool isEditable);
+
+  virtual bool eventFilter(QObject* o, QEvent* e);
+
 public slots:
   void expandAll();
+  void collapseAll();
 
 protected:
   virtual void wheelEvent(QWheelEvent *ev);
 
 protected slots:
   void activated();
+  void makeCompletion(const QString& txt);
+  void selectItem(const QModelIndex& index);
 
 signals:
   void accountSelected(const QString&);

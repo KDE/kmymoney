@@ -70,6 +70,7 @@ public:
     AccountValueDisplayRole = Qt::UserRole + 7,       /**< The account value (the balance converted to base currency) is stored in this role in column TotalValue as a formated string for the user.*/
     AccountTotalValueDisplayRole = Qt::UserRole + 8,  /**< The account total value is stored in this role in column TotalValue as a formatted string for the user.*/
     DisplayOrderRole = Qt::UserRole + 9,              /**< This role is used by the filtering proxies to order the accounts for displaying.*/
+    FullNameRole = Qt::UserRole + 10,                 /**< This role is used to provide the full pathname of the account */
   };
 
   /**
@@ -81,6 +82,7 @@ public:
     Type,
     Tax,
     VAT,
+    CostCenter,
     TotalBalance,
     TotalValue,
     LastColumnMarker
@@ -108,6 +110,12 @@ public:
     * @todo Make this a static or a global function since the object's state has nothing to do with this computation
     */
   MyMoneyMoney accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance);
+
+  /**
+   * This method returns the QModelIndex of the account specified by its @a id. If the
+   * account was not found, an invalid QModelIndex is returned.
+   */
+  QModelIndex accountById(const QString& id) const;
 
 public slots:
 
@@ -242,12 +250,16 @@ public:
   void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
   bool hideUnusedIncomeExpenseAccounts() const;
 
+  int visibleItems(bool includeBaseAccounts = false) const;
+
 protected:
   virtual bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
   virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
   virtual bool acceptSourceItem(const QModelIndex &source) const;
 
   bool filterAcceptsRowOrChildRows(int source_row, const QModelIndex &source_parent) const;
+
+  int visibleItems(const QModelIndex& index) const;
 
 signals:
   void unusedIncomeExpenseAccountHidden() const;

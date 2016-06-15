@@ -32,7 +32,7 @@
 #include "mymoneyfile.h"
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
-unsigned int MyMoneyDbDef::m_currentVersion = 8;
+unsigned int MyMoneyDbDef::m_currentVersion = 9;
 
 // ************************* Build table descriptions ****************************
 MyMoneyDbDef::MyMoneyDbDef()
@@ -59,6 +59,7 @@ MyMoneyDbDef::MyMoneyDbDef()
   Balances();
   OnlineJobs();
   PayeeIdentifier();
+  CostCenter();
 }
 
 /* PRIMARYKEY - these fields combine to form a unique key field on which the db will create an index
@@ -257,6 +258,7 @@ void MyMoneyDbDef::Splits()
   appendField(MyMoneyDbTextColumn("priceFormatted", MyMoneyDbTextColumn::MEDIUM, false, false, 2));
   appendField(MyMoneyDbTextColumn("memo"));
   appendField(MyMoneyDbColumn("accountId", "varchar(32)", false, NOTNULL));
+  appendField(MyMoneyDbColumn("costCenterId", "varchar(32)", false, false, 9));
   appendField(MyMoneyDbColumn("checkNumber", "varchar(32)"));
   appendField(MyMoneyDbDatetimeColumn("postDate", false, false, 1));
   appendField(MyMoneyDbTextColumn("bankId", MyMoneyDbTextColumn::MEDIUM, false, false, 5));
@@ -435,6 +437,16 @@ void MyMoneyDbDef::Budgets()
   m_tables[t.name()] = t;
 }
 
+void MyMoneyDbDef::CostCenter()
+{
+  QList<QExplicitlySharedDataPointer<MyMoneyDbColumn> > fields;
+  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
+  appendField(MyMoneyDbColumn("name", "text", false, NOTNULL));
+  MyMoneyDbTable t("kmmCostCenter", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
 void MyMoneyDbDef::Balances()
 {
   MyMoneyDbView v("kmmBalances", "CREATE VIEW kmmBalances AS "
@@ -448,6 +460,7 @@ void MyMoneyDbDef::Balances()
                   "AND kmmSplits.transactionId = kmmTransactions.id;");
   m_views[v.name()] = v;
 }
+
 
 // function to write create SQL to a stream
 const QString MyMoneyDbDef::generateSQL(const QExplicitlySharedDataPointer<MyMoneyDbDriver>& driver) const

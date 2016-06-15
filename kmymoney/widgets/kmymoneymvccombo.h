@@ -106,6 +106,11 @@ public:
     */
   static void setSubstringSearchForChildren(QWidget *const widget, bool enabled = false);
 
+  /**
+    * Reimplemented for internal reasons, no API change
+    */
+  void setEditable(bool editable);
+
 protected slots:
   void activated(int index);
 

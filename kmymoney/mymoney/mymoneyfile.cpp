@@ -58,9 +58,16 @@ MyMoneyFile MyMoneyFile::file;
 typedef QList<std::pair<QString, QDate> > BalanceNotifyList;
 typedef QMap<QString, bool> CacheNotifyList;
 
+/// @todo make this template based
 class MyMoneyNotification
 {
 public:
+  MyMoneyNotification(MyMoneyFile::notificationModeT mode, const MyMoneyTransaction& t) :
+      m_objType(MyMoneyFile::notifyTransaction),
+      m_notificationMode(mode),
+      m_id(t.id()) {
+  }
+
   MyMoneyNotification(MyMoneyFile::notificationModeT mode, const MyMoneyAccount& acc) :
       m_objType(MyMoneyFile::notifyAccount),
       m_notificationMode(mode),
@@ -347,7 +354,9 @@ void MyMoneyFile::attachStorage(IMyMoneyStorage* const storage)
   preloadCache();
 
   // notify application about new data availability
+  emit beginChangeNotification();
   emit dataChanged();
+  emit endChangeNotification();
 }
 
 void MyMoneyFile::detachStorage(IMyMoneyStorage* const /* storage */)
@@ -393,6 +402,9 @@ void MyMoneyFile::commitTransaction()
   bool changed = d->m_storage->commitTransaction();
   d->m_inTransaction = false;
 
+  // inform the outside world about the beginning of notifications
+  emit beginChangeNotification();
+
   // Now it's time to send out some signals to the outside world
   // First we go through the d->m_changeSet and emit respective
   // signals about addition, modification and removal of engine objects
@@ -404,7 +416,19 @@ void MyMoneyFile::commitTransaction()
       // this can happen when deleting categories that have transactions and the reassign category feature was used
       d->m_balanceChangedSet.remove((*it).id());
     } else {
-      const MyMoneyObject * const obj = d->m_cache.object((*it).id());
+      const MyMoneyObject * obj = 0;
+      MyMoneyTransaction tr;
+
+      switch((*it).objectType()) {
+        case MyMoneyFile::notifyTransaction:
+          tr = transaction((*it).id());
+          obj = &tr;
+          break;
+
+        default:
+          obj = d->m_cache.object((*it).id());
+          break;
+      }
       if (obj) {
         if ((*it).notificationMode() == notifyAdd) {
           emit objectAdded((*it).objectType(), obj);
@@ -443,6 +467,9 @@ void MyMoneyFile::commitTransaction()
   if (changed) {
     emit dataChanged();
   }
+
+  // inform the outside world about the end of notifications
+  emit endChangeNotification();
 }
 
 void MyMoneyFile::rollbackTransaction()
@@ -558,6 +585,8 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
     d->addCacheNotification((*it_s).payeeId());
     //FIXME-ALEX Do I need to add d->addCacheNotification((*it_s).tagList()); ??
   }
+
+  d->m_changeSet += MyMoneyNotification(notifyModify, transaction);
 }
 
 void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
@@ -705,6 +734,18 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
   }
 
   d->m_storage->removeTransaction(transaction);
+
+  // remove a possible notification of that same object from the changeSet
+  QList<MyMoneyNotification>::iterator it;
+  for(it = d->m_changeSet.begin(); it != d->m_changeSet.end();) {
+    if((*it).id() == transaction.id()) {
+      it = d->m_changeSet.erase(it);
+    } else {
+      ++it;
+    }
+  }
+
+  d->m_changeSet += MyMoneyNotification(notifyRemove, transaction);
 }
 
 
@@ -1194,6 +1235,8 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
     d->addCacheNotification((*it_s).payeeId());
     //FIXME-ALEX Do I need to add d->addCacheNotification((*it_s).tagList()); ??
   }
+
+  d->m_changeSet += MyMoneyNotification(notifyAdd, transaction);
 }
 
 const MyMoneyTransaction MyMoneyFile::transaction(const QString& id) const
@@ -2942,6 +2985,12 @@ void MyMoneyFile::removeOnlineJob(const QStringList onlineJobIds)
   foreach (QString jobId, onlineJobIds) {
     removeOnlineJob(getOnlineJob(jobId));
   }
+}
+
+void MyMoneyFile::costCenterList(QList< MyMoneyCostCenter >& list) const
+{
+  d->checkStorage();
+  list = d->m_storage->costCenterList();
 }
  
 bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAccount& account, const MyMoneyAccount& category, const MyMoneyMoney& amount)

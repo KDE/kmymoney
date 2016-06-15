@@ -38,15 +38,16 @@ void MyMoneySplitTest::cleanup()
 
 void MyMoneySplitTest::testEmptyConstructor()
 {
-  QVERIFY(m->accountId().isEmpty());
-  QVERIFY(m->id().isEmpty());
-  QVERIFY(m->memo().isEmpty());
-  QVERIFY(m->action().isEmpty());
-  QVERIFY(m->shares().isZero());
-  QVERIFY(m->value().isZero());
-  QVERIFY(m->reconcileFlag() == MyMoneySplit::NotReconciled);
-  QVERIFY(m->reconcileDate() == QDate());
-  QVERIFY(m->transactionId().isEmpty());
+  QCOMPARE(m->accountId().isEmpty(), true);
+  QCOMPARE(m->id().isEmpty(), true);
+  QCOMPARE(m->memo().isEmpty(), true);
+  QCOMPARE(m->action().isEmpty(), true);
+  QCOMPARE(m->shares().isZero(), true);
+  QCOMPARE(m->value().isZero(), true);
+  QCOMPARE(m->reconcileFlag(), MyMoneySplit::NotReconciled);
+  QCOMPARE(m->reconcileDate(), QDate());
+  QCOMPARE(m->transactionId().isEmpty(), true);
+  QCOMPARE(m->costCenterId().isEmpty(), true);
 }
 
 void MyMoneySplitTest::testSetFunctions()
@@ -59,6 +60,7 @@ void MyMoneySplitTest::testSetFunctions()
   m->setValue(MyMoneyMoney(3456, 100));
   m->setId("MyID");
   m->setPayeeId("Payee");
+  m->setCostCenterId("CostCenter");
   QList<QString> tagIdList;
   tagIdList << "Tag";
   m->setTagIdList(tagIdList);
@@ -66,18 +68,19 @@ void MyMoneySplitTest::testSetFunctions()
   m->setTransactionId("TestTransaction");
   m->setValue("Key", "Value");
 
-  QVERIFY(m->accountId() == "Account");
-  QVERIFY(m->memo() == "Memo");
-  QVERIFY(m->reconcileDate() == QDate(1, 2, 3));
-  QVERIFY(m->reconcileFlag() == MyMoneySplit::Cleared);
-  QVERIFY(m->shares() == MyMoneyMoney(1234, 100));
-  QVERIFY(m->value() == MyMoneyMoney(3456, 100));
-  QVERIFY(m->id() == "MyID");
-  QVERIFY(m->payeeId() == "Payee");
-  QVERIFY(m->tagIdList() == tagIdList);
-  QVERIFY(m->action() == "Action");
-  QVERIFY(m->transactionId() == "TestTransaction");
-  QVERIFY(m->value("Key") == "Value");
+  QCOMPARE(m->accountId(), QLatin1String("Account"));
+  QCOMPARE(m->memo(), QLatin1String("Memo"));
+  QCOMPARE(m->reconcileDate(), QDate(1, 2, 3));
+  QCOMPARE(m->reconcileFlag(), MyMoneySplit::Cleared);
+  QCOMPARE(m->shares(), MyMoneyMoney(1234, 100));
+  QCOMPARE(m->value(), MyMoneyMoney(3456, 100));
+  QCOMPARE(m->id(), QLatin1String("MyID"));
+  QCOMPARE(m->payeeId(), QLatin1String("Payee"));
+  QCOMPARE(m->tagIdList(), tagIdList);
+  QCOMPARE(m->action(), QLatin1String("Action"));
+  QCOMPARE(m->transactionId(), QLatin1String("TestTransaction"));
+  QCOMPARE(m->value("Key"), QLatin1String("Value"));
+  QCOMPARE(m->costCenterId(), QLatin1String("CostCenter"));
 }
 
 
@@ -87,20 +90,21 @@ void MyMoneySplitTest::testCopyConstructor()
 
   MyMoneySplit n(*m);
 
-  QVERIFY(n.accountId() == "Account");
-  QVERIFY(n.memo() == "Memo");
-  QVERIFY(n.reconcileDate() == QDate(1, 2, 3));
-  QVERIFY(n.reconcileFlag() == MyMoneySplit::Cleared);
-  QVERIFY(n.shares() == MyMoneyMoney(1234, 100));
-  QVERIFY(n.value() == MyMoneyMoney(3456, 100));
-  QVERIFY(n.id() == "MyID");
-  QVERIFY(n.payeeId() == "Payee");
+  QCOMPARE(n.accountId(), QLatin1String("Account"));
+  QCOMPARE(n.memo(), QLatin1String("Memo"));
+  QCOMPARE(n.reconcileDate(), QDate(1, 2, 3));
+  QCOMPARE(n.reconcileFlag(), MyMoneySplit::Cleared);
+  QCOMPARE(n.shares(), MyMoneyMoney(1234, 100));
+  QCOMPARE(n.value(), MyMoneyMoney(3456, 100));
+  QCOMPARE(n.id(), QLatin1String("MyID"));
+  QCOMPARE(n.payeeId(), QLatin1String("Payee"));
   QList<QString> tagIdList;
   tagIdList << "Tag";
-  QVERIFY(m->tagIdList() == tagIdList);
-  QVERIFY(n.action() == "Action");
-  QVERIFY(n.transactionId() == "TestTransaction");
-  QVERIFY(n.value("Key") == "Value");
+  QCOMPARE(n.tagIdList(), tagIdList);
+  QCOMPARE(n.action(), QLatin1String("Action"));
+  QCOMPARE(n.transactionId(), QLatin1String("TestTransaction"));
+  QCOMPARE(n.value("Key"), QLatin1String("Value"));
+  QCOMPARE(n.costCenterId(), QLatin1String("CostCenter"));
 }
 
 void MyMoneySplitTest::testAssignmentConstructor()
@@ -111,20 +115,21 @@ void MyMoneySplitTest::testAssignmentConstructor()
 
   n = *m;
 
-  QVERIFY(n.accountId() == "Account");
-  QVERIFY(n.memo() == "Memo");
-  QVERIFY(n.reconcileDate() == QDate(1, 2, 3));
-  QVERIFY(n.reconcileFlag() == MyMoneySplit::Cleared);
-  QVERIFY(n.shares() == MyMoneyMoney(1234, 100));
-  QVERIFY(n.value() == MyMoneyMoney(3456, 100));
-  QVERIFY(n.id() == "MyID");
-  QVERIFY(n.payeeId() == "Payee");
+  QCOMPARE(n.accountId(), QLatin1String("Account"));
+  QCOMPARE(n.memo(), QLatin1String("Memo"));
+  QCOMPARE(n.reconcileDate(), QDate(1, 2, 3));
+  QCOMPARE(n.reconcileFlag(), MyMoneySplit::Cleared);
+  QCOMPARE(n.shares(), MyMoneyMoney(1234, 100));
+  QCOMPARE(n.value(), MyMoneyMoney(3456, 100));
+  QCOMPARE(n.id(), QLatin1String("MyID"));
+  QCOMPARE(n.payeeId(), QLatin1String("Payee"));
   QList<QString> tagIdList;
-  tagIdList << "Tag";
-  QVERIFY(m->tagIdList() == tagIdList);
-  QVERIFY(n.action() == "Action");
-  QVERIFY(n.transactionId() == "TestTransaction");
-  QVERIFY(n.value("Key") == "Value");
+  tagIdList << QLatin1String("Tag");
+  QCOMPARE(n.tagIdList(), tagIdList);
+  QCOMPARE(n.action(), QLatin1String("Action"));
+  QCOMPARE(n.transactionId(), QLatin1String("TestTransaction"));
+  QCOMPARE(n.value("Key"), QLatin1String("Value"));
+  QCOMPARE(n.costCenterId(), QLatin1String("CostCenter"));
 }
 
 void MyMoneySplitTest::testEquality()
@@ -133,7 +138,7 @@ void MyMoneySplitTest::testEquality()
 
   MyMoneySplit n(*m);
 
-  QVERIFY(n == *m);
+  QCOMPARE(n, *m);
 }
 
 void MyMoneySplitTest::testInequality()
@@ -198,70 +203,74 @@ void MyMoneySplitTest::testInequality()
   n = *m;
   n.setValue("Key", "NoValue");
   QVERIFY(!(n == *m));
+
+  n = *m;
+  n.setCostCenterId("NoCostCenter");
+  QVERIFY(!(n == *m));
 }
 
 
 void MyMoneySplitTest::testAmortization()
 {
-  QVERIFY(m->isAmortizationSplit() == false);
+  QCOMPARE(m->isAmortizationSplit(), false);
   testSetFunctions();
-  QVERIFY(m->isAmortizationSplit() == false);
+  QCOMPARE(m->isAmortizationSplit(), false);
   m->setAction(MyMoneySplit::ActionAmortization);
-  QVERIFY(m->isAmortizationSplit() == true);
+  QCOMPARE(m->isAmortizationSplit(), true);
 }
 
 void MyMoneySplitTest::testValue()
 {
   m->setValue(MyMoneyMoney(1, 100));
   m->setShares(MyMoneyMoney(2, 100));
-  QVERIFY(m->value("EUR", "EUR") == MyMoneyMoney(1, 100));
-  QVERIFY(m->value("EUR", "USD") == MyMoneyMoney(2, 100));
+  QCOMPARE(m->value("EUR", "EUR"), MyMoneyMoney(1, 100));
+  QCOMPARE(m->value("EUR", "USD"), MyMoneyMoney(2, 100));
 }
 
 void MyMoneySplitTest::testSetValue()
 {
-  QVERIFY(m->value().isZero());
-  QVERIFY(m->shares().isZero());
+  QCOMPARE(m->value().isZero(), true);
+  QCOMPARE(m->shares().isZero(), true);
   m->setValue(MyMoneyMoney(1, 100), "EUR", "EUR");
-  QVERIFY(m->value() == MyMoneyMoney(1, 100));
-  QVERIFY(m->shares().isZero());
+  QCOMPARE(m->value(), MyMoneyMoney(1, 100));
+  QCOMPARE(m->shares().isZero(), true);
   m->setValue(MyMoneyMoney(3, 100), "EUR", "USD");
-  QVERIFY(m->value() == MyMoneyMoney(1, 100));
-  QVERIFY(m->shares() == MyMoneyMoney(3, 100));
+  QCOMPARE(m->value(), MyMoneyMoney(1, 100));
+  QCOMPARE(m->shares(), MyMoneyMoney(3, 100));
 }
 
 void MyMoneySplitTest::testSetAction()
 {
-  QVERIFY(m->action().isEmpty());
+  QCOMPARE(m->action().isEmpty(), true);
   m->setAction(MyMoneySplit::BuyShares);
-  QVERIFY(m->action() == MyMoneySplit::ActionBuyShares);
+  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionBuyShares));
   m->setAction(MyMoneySplit::SellShares);
-  QVERIFY(m->action() == MyMoneySplit::ActionBuyShares);
+  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionBuyShares));
   m->setAction(MyMoneySplit::Dividend);
-  QVERIFY(m->action() == MyMoneySplit::ActionDividend);
+  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionDividend));
   m->setAction(MyMoneySplit::Yield);
-  QVERIFY(m->action() == MyMoneySplit::ActionYield);
+  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionYield));
   m->setAction(MyMoneySplit::ReinvestDividend);
-  QVERIFY(m->action() == MyMoneySplit::ActionReinvestDividend);
+  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionReinvestDividend));
   m->setAction(MyMoneySplit::AddShares);
-  QVERIFY(m->action() == MyMoneySplit::ActionAddShares);
+  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionAddShares));
   m->setAction(MyMoneySplit::RemoveShares);
-  QVERIFY(m->action() == MyMoneySplit::ActionAddShares);
+  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionAddShares));
   m->setAction(MyMoneySplit::SplitShares);
-  QVERIFY(m->action() == MyMoneySplit::ActionSplitShares);
+  QCOMPARE(m->action(), QLatin1String(MyMoneySplit::ActionSplitShares));
 }
 
 void MyMoneySplitTest::testIsAutoCalc()
 {
-  QVERIFY(m->isAutoCalc() == false);
+  QCOMPARE(m->isAutoCalc(), false);
   m->setValue(MyMoneyMoney::autoCalc);
-  QVERIFY(m->isAutoCalc() == true);
+  QCOMPARE(m->isAutoCalc(), true);
   m->setShares(MyMoneyMoney::autoCalc);
-  QVERIFY(m->isAutoCalc() == true);
+  QCOMPARE(m->isAutoCalc(), true);
   m->setValue(MyMoneyMoney());
-  QVERIFY(m->isAutoCalc() == true);
+  QCOMPARE(m->isAutoCalc(), true);
   m->setShares(MyMoneyMoney(1, 100));
-  QVERIFY(m->isAutoCalc() == false);
+  QCOMPARE(m->isAutoCalc(), false);
 }
 
 void MyMoneySplitTest::testWriteXML()
@@ -275,6 +284,7 @@ void MyMoneySplitTest::testWriteXML()
   s.setShares(MyMoneyMoney(96379, 100));
   s.setValue(MyMoneyMoney(96379, 1000));
   s.setAccountId("A000076");
+  s.setCostCenterId("C000005");
   s.setNumber("124");
   s.setBankID("SPID");
   s.setAction(MyMoneySplit::ActionDeposit);
@@ -290,7 +300,7 @@ void MyMoneySplitTest::testWriteXML()
   QCOMPARE(splitContainer.tagName(), QLatin1String("SPLIT-CONTAINER"));
   QCOMPARE(splitContainer.childNodes().size(), 1);
 
-  QVERIFY(splitContainer.childNodes().at(0).isElement());
+  QCOMPARE(splitContainer.childNodes().at(0).isElement(), true);
   QDomElement split = splitContainer.childNodes().at(0).toElement();
   QCOMPARE(split.tagName(), QLatin1String("SPLIT"));
   QCOMPARE(split.attribute("payee"), QLatin1String("P000001"));
@@ -300,13 +310,14 @@ void MyMoneySplitTest::testWriteXML()
   QCOMPARE(split.attribute("action"), QLatin1String("Deposit"));
   QCOMPARE(split.attribute("bankid"), QLatin1String("SPID"));
   QCOMPARE(split.attribute("account"), QLatin1String("A000076"));
+  QCOMPARE(split.attribute("costcenter"), QLatin1String("C000005"));
   QCOMPARE(split.attribute("number"), QLatin1String("124"));
   QCOMPARE(split.attribute("value"), QLatin1String("96379/1000"));
   QCOMPARE(split.attribute("memo"), QString());
   QCOMPARE(split.attribute("id"), QString());
   QCOMPARE(split.childNodes().size(), 1);
 
-  QVERIFY(split.childNodes().at(0).isElement());
+  QCOMPARE(split.childNodes().at(0).isElement(), true);
   QDomElement tag = split.childNodes().at(0).toElement();
   QCOMPARE(tag.tagName(), QLatin1String("TAG"));
   QCOMPARE(tag.attribute("id"), QLatin1String("G000001"));
@@ -327,7 +338,7 @@ void MyMoneySplitTest::testReadXML()
   QString ref_ok = QString(
                      "<!DOCTYPE TEST>\n"
                      "<SPLIT-CONTAINER>\n"
-                     " <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"96379/100\" action=\"Deposit\" bankid=\"SPID\" number=\"124\" reconcileflag=\"2\" memo=\"MyMemo\" value=\"96379/1000\" account=\"A000076\">\n"
+                     " <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"96379/100\" action=\"Deposit\" bankid=\"SPID\" number=\"124\" reconcileflag=\"2\" memo=\"MyMemo\" value=\"96379/1000\" account=\"A000076\" costcenter=\"C000005\">\n"
                      "  <TAG id=\"G000001\"/>\n"
                      " </SPLIT>\n"
                      "</SPLIT-CONTAINER>\n");
@@ -355,20 +366,21 @@ void MyMoneySplitTest::testReadXML()
 
   try {
     s = MyMoneySplit(node);
-    QVERIFY(s.id().isEmpty());
-    QVERIFY(s.payeeId() == "P000001");
+    QCOMPARE(s.id().isEmpty(), true);
+    QCOMPARE(s.payeeId(), QLatin1String("P000001"));
     QList<QString> tagIdList;
-    tagIdList << "G000001";
-    QVERIFY(s.tagIdList() == tagIdList);
-    QVERIFY(s.reconcileDate() == QDate());
-    QVERIFY(s.shares() == MyMoneyMoney(96379, 100));
-    QVERIFY(s.value() == MyMoneyMoney(96379, 1000));
-    QVERIFY(s.number() == "124");
-    QVERIFY(s.bankID() == "SPID");
-    QVERIFY(s.reconcileFlag() == MyMoneySplit::Reconciled);
-    QVERIFY(s.action() == MyMoneySplit::ActionDeposit);
-    QVERIFY(s.accountId() == "A000076");
-    QVERIFY(s.memo() == "MyMemo");
+    tagIdList << QLatin1String("G000001");
+    QCOMPARE(s.tagIdList(), tagIdList);
+    QCOMPARE(s.reconcileDate(), QDate());
+    QCOMPARE(s.shares(), MyMoneyMoney(96379, 100));
+    QCOMPARE(s.value(), MyMoneyMoney(96379, 1000));
+    QCOMPARE(s.number(), QLatin1String("124"));
+    QCOMPARE(s.bankID(), QLatin1String("SPID"));
+    QCOMPARE(s.reconcileFlag(), MyMoneySplit::Reconciled);
+    QCOMPARE(s.action(), QLatin1String(MyMoneySplit::ActionDeposit));
+    QCOMPARE(s.accountId(), QLatin1String("A000076"));
+    QCOMPARE(s.costCenterId(), QLatin1String("C000005"));
+    QCOMPARE(s.memo(), QLatin1String("MyMemo"));
   } catch (const MyMoneyException &) {
   }
 
@@ -381,21 +393,31 @@ void MyMoneySplitTest::testReplaceId()
 
   s.setPayeeId("P000001");
   s.setAccountId("A000076");
+  s.setCostCenterId("C000005");
 
   changed = s.replaceId("X0001", "Y00001");
-  QVERIFY(changed == false);
-  QVERIFY(s.payeeId() == "P000001");
-  QVERIFY(s.accountId() == "A000076");
+  QCOMPARE(changed, false);
+  QCOMPARE(s.payeeId(), QLatin1String("P000001"));
+  QCOMPARE(s.accountId(), QLatin1String("A000076"));
+  QCOMPARE(s.costCenterId(), QLatin1String("C000005"));
 
   changed = s.replaceId("P000002", "P000001");
-  QVERIFY(changed == true);
-  QVERIFY(s.payeeId() == "P000002");
-  QVERIFY(s.accountId() == "A000076");
+  QCOMPARE(changed, true);
+  QCOMPARE(s.payeeId(), QLatin1String("P000002"));
+  QCOMPARE(s.accountId(), QLatin1String("A000076"));
+  QCOMPARE(s.costCenterId(), QLatin1String("C000005"));
 
   changed = s.replaceId("A000079", "A000076");
-  QVERIFY(changed == true);
-  QVERIFY(s.payeeId() == "P000002");
-  QVERIFY(s.accountId() == "A000079");
+  QCOMPARE(changed, true);
+  QCOMPARE(s.payeeId(), QLatin1String("P000002"));
+  QCOMPARE(s.accountId(), QLatin1String("A000079"));
+  QCOMPARE(s.costCenterId(), QLatin1String("C000005"));
+
+  changed = s.replaceId("C000006", "C000005");
+  QCOMPARE(changed, true);
+  QCOMPARE(s.payeeId(), QLatin1String("P000002"));
+  QCOMPARE(s.accountId(), QLatin1String("A000079"));
+  QCOMPARE(s.costCenterId(), QLatin1String("C000006"));
 
   QString ref_ok = QString(
                      "<!DOCTYPE TEST>\n"
@@ -428,16 +450,16 @@ void MyMoneySplitTest::testReplaceId()
 
   try {
     s = MyMoneySplit(node);
-    QVERIFY(s.payeeId() == "P000001");
-    QVERIFY(s.replaceId("P2", "P1") == false);
-    QVERIFY(s.matchedTransaction().splits()[0].payeeId() == "P000010");
-    QVERIFY(s.matchedTransaction().splits()[1].payeeId() == "P000011");
-    QVERIFY(s.replaceId("P0010", "P000010") == true);
-    QVERIFY(s.matchedTransaction().splits()[0].payeeId() == "P0010");
-    QVERIFY(s.matchedTransaction().splits()[1].payeeId() == "P000011");
-    QVERIFY(s.replaceId("P0011", "P000011") == true);
-    QVERIFY(s.matchedTransaction().splits()[0].payeeId() == "P0010");
-    QVERIFY(s.matchedTransaction().splits()[1].payeeId() == "P0011");
+    QCOMPARE(s.payeeId(), QLatin1String("P000001"));
+    QCOMPARE(s.replaceId("P2", "P1"), false);
+    QCOMPARE(s.matchedTransaction().splits()[0].payeeId(), QLatin1String("P000010"));
+    QCOMPARE(s.matchedTransaction().splits()[1].payeeId(), QLatin1String("P000011"));
+    QCOMPARE(s.replaceId("P0010", "P000010"), true);
+    QCOMPARE(s.matchedTransaction().splits()[0].payeeId(), QLatin1String("P0010"));
+    QCOMPARE(s.matchedTransaction().splits()[1].payeeId(), QLatin1String("P000011"));
+    QCOMPARE(s.replaceId("P0011", "P000011"), true);
+    QCOMPARE(s.matchedTransaction().splits()[0].payeeId(), QLatin1String("P0010"));
+    QCOMPARE(s.matchedTransaction().splits()[1].payeeId(), QLatin1String("P0011"));
 
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");

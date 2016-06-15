@@ -1,11 +1,18 @@
 set(libmodels_a_SOURCES
+    ledgermodel.cpp
+    costcentermodel.cpp
     accountsmodel.cpp
     onlinejobmodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
     models.cpp
     payeeidentifiercontainermodel.cpp
     onlinejobmessagesmodel.cpp
-   )
+)
+
+if (USE_MODELTEST)
+  add_definitions( -DKMM_MODELTEST )
+  set(libmodels_a_SOURCES ${libmodels_a_SOURCES} modeltest.cpp)
+endif(USE_MODELTEST)
 
 add_library(models STATIC ${libmodels_a_SOURCES})
 

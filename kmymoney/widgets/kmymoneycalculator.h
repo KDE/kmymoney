@@ -100,6 +100,11 @@ signals:
     */
   void signalResultAvailable();
 
+  /**
+    * This signal is emitted, when the user pressed the ESC key
+    */
+  void signalQuit();
+
 protected:
   void keyPressEvent(QKeyEvent* ev);
 

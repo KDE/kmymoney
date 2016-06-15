@@ -152,6 +152,7 @@ public:
     notifyAccount = 1,
     notifyInstitution,
     notifyPayee,
+    notifyTransaction,
     notifyTag,
     notifySchedule,
     notifySecurity,
@@ -931,6 +932,14 @@ public:
   const QList<MyMoneyTag> tagList() const;
 
   /**
+    * This method returns a list of the cost centers
+    * inside a MyMoneyStorage object
+    *
+    * @return QList<MyMoneyCostCenter> containing the cost center information
+    */
+    void costCenterList(QList< MyMoneyCostCenter >& list) const;
+
+  /**
     * This method is used to extract a value from the storage's
     * KeyValueContainer. For details see MyMoneyKeyValueContainer::value().
     * @note Do not use this method to return the value of the key @p kmm-id. Use
@@ -1555,7 +1564,19 @@ protected:
     */
   MyMoneyFile();
 
-signals:
+Q_SIGNALS:
+  /**
+   * This signal is emitted when a transaction has been committed and
+   * the notifications are about to be sent out.
+   */
+  void beginChangeNotification();
+
+  /**
+   * This signal is emitted when a transaction has been committed and
+   * all notifications have been sent out.
+   */
+  void endChangeNotification();
+
   /**
     * This signal is emitted whenever any data has been changed in the engine
     * via any of the methods of this object

@@ -112,6 +112,9 @@ protected:
   virtual void writeSecurities(QDomElement& securities);
   virtual void writeSecurity(QDomElement& securityElement, const MyMoneySecurity& security);
 
+  virtual void writeCostCenters(QDomElement& parent);
+  virtual void writeCostCenter(QDomElement& costCenters, const MyMoneyCostCenter& costCenter);
+
   virtual void writeCurrencies(QDomElement& currencies);
 
   virtual QDomElement writeKeyValuePairs(const QMap<QString, QString> pairs);

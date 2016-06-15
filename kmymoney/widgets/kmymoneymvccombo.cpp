@@ -98,6 +98,20 @@ KMyMoneyMVCCombo::~KMyMoneyMVCCombo()
   delete d;
 }
 
+void KMyMoneyMVCCombo::setEditable(bool editable)
+{
+  KComboBox::setEditable(editable);
+
+  if(editable) {
+    if(!d->m_completer) {
+      d->m_completer = new QCompleter(this);
+      d->m_completer->setCaseSensitivity(Qt::CaseInsensitive);
+      d->m_completer->setModel(model());
+    }
+    setCompleter(d->m_completer);
+  }
+}
+
 void KMyMoneyMVCCombo::setSubstringSearch(bool enabled)
 {
   d->m_completer->setCompletionMode(QCompleter::PopupCompletion);

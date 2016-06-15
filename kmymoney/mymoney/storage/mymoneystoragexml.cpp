@@ -59,6 +59,7 @@ public:
   QMap<QString, MyMoneyBudget> bList;
   QMap<QString, onlineJob> onlineJobList;
   QMap<MyMoneySecurityPair, MyMoneyPriceEntries> prList;
+  QMap<QString, MyMoneyCostCenter> ccList;
 
   QString           m_fromSecurity;
   QString           m_toSecurity;
@@ -160,6 +161,7 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
         || s == "price"
         || s == "payee"
         || s == "tag"
+        || s == "costcenter"
         || s == "currency"
         || s == "security"
         || s == "keyvaluepairs"
@@ -178,14 +180,12 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
       m_level = 1;
 
     } else if (s == "transactions") {
-      qDebug("reading transactions");
       if (atts.count()) {
         int count = atts.value(QLatin1String("count")).toInt();
         m_reader->signalProgress(0, count, i18n("Loading transactions..."));
         m_elementCount = 0;
       }
     } else if (s == "accounts") {
-      qDebug("reading accounts");
       if (atts.count()) {
         int count = atts.value(QLatin1String("count")).toInt();
         m_reader->signalProgress(0, count, i18n("Loading accounts..."));
@@ -199,21 +199,18 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
         m_elementCount = 0;
       }
     } else if (s == "currencies") {
-      qDebug("reading currencies");
       if (atts.count()) {
         int count = atts.value(QLatin1String("count")).toInt();
         m_reader->signalProgress(0, count, i18n("Loading currencies..."));
         m_elementCount = 0;
       }
     } else if (s == "reports") {
-      qDebug("reading reports");
       if (atts.count()) {
         int count = atts.value(QLatin1String("count")).toInt();
         m_reader->signalProgress(0, count, i18n("Loading reports..."));
         m_elementCount = 0;
       }
     } else if (s == "prices") {
-      qDebug("reading prices");
       if (atts.count()) {
         int count = atts.value(QLatin1String("count")).toInt();
         m_reader->signalProgress(0, count, i18n("Loading prices..."));
@@ -223,6 +220,12 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
       if (atts.count()) {
         m_reader->d->m_fromSecurity = atts.value(QLatin1String("from"));
         m_reader->d->m_toSecurity = atts.value(QLatin1String("to"));
+      }
+    } else if (s == "costcenters") {
+      if(atts.count()) {
+        int count = atts.value(QLatin1String("count")).toInt();
+        m_reader->signalProgress(0, count, i18n("Loading cost center..."));
+        m_elementCount = 0;
       }
     }
 
@@ -264,10 +267,12 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           MyMoneyPayee p(m_baseNode);
           if (!p.id().isEmpty())
             m_reader->d->pList[p.id()] = p;
+          m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == "tag") {
           MyMoneyTag ta(m_baseNode);
           if (!ta.id().isEmpty())
             m_reader->d->taList[ta.id()] = ta;
+          m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == "currency") {
           MyMoneySecurity s(m_baseNode);
           if (!s.id().isEmpty())
@@ -312,6 +317,12 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           onlineJob job(m_baseNode);
           if (!job.id().isEmpty())
             m_reader->d->onlineJobList[job.id()] = job;
+        } else if (s == "costcenter") {
+          MyMoneyCostCenter c(m_baseNode);
+          if(!c.id().isEmpty()) {
+            m_reader->d->ccList[c.id()] = c;
+          }
+          m_reader->signalProgress(++m_elementCount, 0);
         } else {
           m_errMsg = i18n("Unknown XML tag %1 found in line %2", qName, m_loc->lineNumber());
           qWarning() << m_errMsg;
@@ -378,6 +389,10 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
     } else if (s == "onlinejobs") {
       m_reader->m_storage->loadOnlineJobs(m_reader->d->onlineJobList);
       m_reader->d->onlineJobList.clear();
+    } else if (s == "costcenters") {
+      m_reader->m_storage->loadCostCenters(m_reader->d->ccList);
+      m_reader->d->ccList.clear();
+      m_reader->signalProgress(-1, -1);
     }
   }
   return rc;
@@ -504,6 +519,10 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, IMyMoneySerialize* storage)
   QDomElement payees = m_doc->createElement("PAYEES");
   writePayees(payees);
   mainElement.appendChild(payees);
+
+  QDomElement costCenters = m_doc->createElement("COSTCENTERS");
+  writeCostCenters(costCenters);
+  mainElement.appendChild(costCenters);
 
   QDomElement tags = m_doc->createElement("TAGS");
   writeTags(tags);
@@ -864,6 +883,22 @@ void MyMoneyStorageXML::writeOnlineJob(QDomElement& onlineJobs, const onlineJob&
   job.writeXML(*m_doc, onlineJobs);
 }
 
+void MyMoneyStorageXML::writeCostCenters(QDomElement& parent)
+{
+  const QList<MyMoneyCostCenter> list = m_storage->costCenterList();
+  parent.setAttribute("count", list.count());
+  signalProgress(0, list.count(), i18n("Saving costcenters..."));
+  unsigned i = 0;
+  Q_FOREACH(MyMoneyCostCenter costCenter, list) {
+    writeCostCenter(parent, costCenter);
+    signalProgress(++i, 0);
+  }
+}
+
+void MyMoneyStorageXML::writeCostCenter(QDomElement& costCenters, const MyMoneyCostCenter& costCenter)
+{
+  costCenter.writeXML(*m_doc, costCenters);
+}
 
 QDomElement MyMoneyStorageXML::findChildElement(const QString& name, const QDomElement& root)
 {

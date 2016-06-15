@@ -228,6 +228,9 @@ if(CMAKE_COMPILER_IS_GNUCXX)
   endif()
 endif()
 
+option(USE_MODELTEST
+  "Compile with ModelTest code (default=OFF)" OFF)
+
 option(USE_QT_DESIGNER
   "Install KMyMoney specific widget library for Qt-Designer (default=OFF)" OFF)
 
@@ -280,6 +283,7 @@ nice_yesno("WEBOOB_FOUND")
 nice_yesno("LIBICAL_FOUND")
 nice_yesno("ENABLE_SQLCIPHER")
 nice_yesno("USE_QT_DESIGNER")
+nice_yesno("USE_MODELTEST")
 nice_yesno("USE_DEVELOPER_DOC")
 nice_yesno("DOXYGEN_FOUND")
 nice_yesno("USE_HTML_HANDBOOK")
@@ -309,6 +313,8 @@ SQLCipher plugin:                        ${nice_ENABLE_SQLCIPHER}
 Configure results (developer options):
 --------------------------------------------
 Qt-Designer library support:             ${nice_USE_QT_DESIGNER}
+
+Generate modeltest code:                 ${nice_USE_MODELTEST}
 
 Generate developer documentation:        ${nice_USE_DEVELOPER_DOC}
 

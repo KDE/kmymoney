@@ -68,6 +68,7 @@ MyMoneySplit::MyMoneySplit(const QDomElement& node) :
   m_shares = MyMoneyMoney(QStringEmpty(node.attribute("shares")));
   m_price = MyMoneyMoney(QStringEmpty(node.attribute("price")));
   m_account = QStringEmpty(node.attribute("account"));
+  m_costCenter = QStringEmpty(node.attribute("costcenter"));
   m_number = QStringEmpty(node.attribute("number"));
   m_bankID = QStringEmpty(node.attribute("bankid"));
 }
@@ -88,6 +89,7 @@ bool MyMoneySplit::operator == (const MyMoneySplit& right) const
   return MyMoneyObject::operator==(right) &&
          MyMoneyKeyValueContainer::operator==(right) &&
          m_account == right.m_account &&
+         m_costCenter == right.m_costCenter &&
          m_payee == right.m_payee &&
          m_tagList == right.m_tagList &&
          m_memo == right.m_memo &&
@@ -104,6 +106,11 @@ bool MyMoneySplit::operator == (const MyMoneySplit& right) const
 void MyMoneySplit::setAccountId(const QString& account)
 {
   m_account = account;
+}
+
+void MyMoneySplit::setCostCenterId(const QString& costCenter)
+{
+  m_costCenter = costCenter;
 }
 
 void MyMoneySplit::setMemo(const QString& memo)
@@ -230,6 +237,8 @@ void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const
   el.setAttribute("account", m_account);
   el.setAttribute("number", m_number);
   el.setAttribute("bankid", m_bankID);
+  if(!m_costCenter.isEmpty())
+    el.setAttribute("costcenter", m_costCenter);
 
   for (int i = 0; i < m_tagList.count(); i++) {
     QDomElement sel = document.createElement("TAG");
@@ -251,7 +260,7 @@ bool MyMoneySplit::hasReferenceTo(const QString& id) const
   for (int i = 0; i < m_tagList.size(); i++)
     if (id == m_tagList[i])
       return true;
-  return rc || (id == m_account) || (id == m_payee);
+  return rc || (id == m_account) || (id == m_payee) || (id == m_costCenter);
 }
 
 bool MyMoneySplit::isMatched() const
@@ -304,6 +313,9 @@ bool MyMoneySplit::replaceId(const QString& newId, const QString& oldId)
     changed = true;
   } else if (m_account == oldId) {
     m_account = newId;
+    changed = true;
+  } else if (m_costCenter == oldId) {
+    m_costCenter = newId;
     changed = true;
   }
 

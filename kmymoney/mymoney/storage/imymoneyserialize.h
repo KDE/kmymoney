@@ -44,6 +44,7 @@
 #include <mymoneyprice.h>
 #include <mymoneyreport.h>
 #include <mymoneybudget.h>
+#include <mymoneycostcenter.h>
 #include "mymoneystoragesql.h"
 
 /**
@@ -169,6 +170,11 @@ public:
   virtual const QList<onlineJob> onlineJobList() const = 0;
 
   /**
+   * This method returns a list of cost center objects the engine knows about
+   */
+  virtual const QList<MyMoneyCostCenter> costCenterList() const = 0;
+
+  /**
     * This method is used to return the standard liability account
     * @return MyMoneyAccount liability account(group)
     */
@@ -289,6 +295,7 @@ public:
   virtual void loadBudgets(const QMap<QString, MyMoneyBudget>& budgets) = 0;
   virtual void loadPrices(const MyMoneyPriceList& list) = 0;
   virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs) = 0;
+  virtual void loadCostCenters(const QMap<QString, MyMoneyCostCenter>& costCenters) = 0;
 
   virtual unsigned long accountId() const = 0;
   virtual unsigned long transactionId() const = 0;
@@ -300,6 +307,7 @@ public:
   virtual unsigned long reportId() const = 0;
   virtual unsigned long budgetId() const = 0;
   virtual unsigned long onlineJobId() const = 0;
+  virtual unsigned long costCenterId() const = 0;
 
   virtual void loadAccountId(const unsigned long id) = 0;
   virtual void loadTransactionId(const unsigned long id) = 0;
@@ -311,6 +319,7 @@ public:
   virtual void loadReportId(const unsigned long id) = 0;
   virtual void loadBudgetId(const unsigned long id) = 0;
   virtual void loadOnlineJobId(const unsigned long id) = 0;
+  virtual void loadCostCenterId(const unsigned long id) = 0;
 
   /**
     * This method is used to retrieve the whole set of key/value pairs

@@ -338,8 +338,12 @@ int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, const QUr
   return rc;
 }
 
+void timestamp_reset()
+{
+  timer.restart();
+}
 
-void timestamp(char *txt)
+void timestamp(char const *txt)
 {
   if (timersOn) {
     qDebug("Time(%s): %d", txt, timer.elapsed());

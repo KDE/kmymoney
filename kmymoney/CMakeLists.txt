@@ -75,6 +75,10 @@ add_dependencies(kmymoney_common generate_base_ui_srcs kmm_config)
 add_dependencies(wizardpages widgets)
 
 
+if(USE_MODELTEST)
+  set( kmymoney_common_LIBS ${kmymoney_common_LIBS} ${QT_QTTEST_LIBRARY})
+endif(USE_MODELTEST)
+
 ########### kmymoney executable ###############
 
 set( kmymoney_SRCS main.cpp kmymoney.cpp )

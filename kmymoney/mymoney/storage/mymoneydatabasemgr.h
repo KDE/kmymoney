@@ -883,7 +883,15 @@ public:
     */
   virtual void removeBudget(const MyMoneyBudget& budget);
 
+  /**
+   * This method returns a list of all cost center objects
+   */
+  virtual const QList<MyMoneyCostCenter> costCenterList() const;
 
+  /**
+   * @brief Return cost center object by id
+   */
+  const MyMoneyCostCenter costCenter(const QString& id) const;
 
   /**
     * Clear all internal caches (used internally for performance measurements)
@@ -958,6 +966,8 @@ public:
   virtual void loadBudgets(const QMap<QString, MyMoneyBudget>& budgets);
   virtual void loadPrices(const MyMoneyPriceList& list);
   virtual void loadOnlineJobs(const QMap<QString, onlineJob>& onlineJobs);
+  virtual void loadCostCenters(const QMap<QString, MyMoneyCostCenter>& costCenters);
+
   //virtual void loadPayeeIdentifier(const QMap<QString, payeeIdentifier>& idents);
 
   virtual unsigned long accountId() const;
@@ -971,6 +981,7 @@ public:
   virtual unsigned long budgetId() const;
   virtual unsigned long onlineJobId() const;
   virtual unsigned long payeeIdentifierId() const;
+  virtual unsigned long costCenterId() const;
 
   virtual void loadAccountId(const unsigned long id);
   virtual void loadTransactionId(const unsigned long id);
@@ -983,6 +994,7 @@ public:
   virtual void loadBudgetId(const unsigned long id);
   virtual void loadOnlineJobId(const unsigned long id);
   virtual void loadPayeeIdentifierId(const unsigned long id);
+  virtual void loadCostCenterId(const unsigned long id);
 
   /**
     * This method is used to retrieve the whole set of key/value pairs
@@ -1100,6 +1112,9 @@ private:
   /** @brief get next valid id for payeeIdentifier */
   const QString nextPayeeIdentifierID();
 
+  /** @brief get next valid id for a cost center */
+  const QString nextCostCenterID();
+
   /**
     * This method is used to get the next valid ID for a budget object.
     * @return id for an budget object
@@ -1118,6 +1133,7 @@ private:
   static const int BUDGET_ID_SIZE = 6;
   static const int ONLINEJOB_ID_SIZE = 8;
   static const int PAYEEIDENTIFIER_ID_SIZE = 6;
+  static const int COSTCENTER_ID_SIZE = 6;
 
   // Increment this to force an update in KMMView.
   // This is different from the db schema version stored in

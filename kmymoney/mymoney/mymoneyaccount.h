@@ -1,3 +1,4 @@
+
 /***************************************************************************
                           mymoneyaccount.h
                           -------------------
@@ -311,6 +312,12 @@ public:
   void setNumber(const QString& number);
 
   /**
+   * This method allows to control if a cost center assignment is required
+   * for this account. It is if @a required is @c true (the default).
+   */
+  void setCostCenterRequired(bool required = true);
+
+  /**
    * Return the stored account identifiers
    *
    * @internal This method is temporary until MyMoneyAccount is a MyMoneyPayeeIdentifierContainer. But before this
@@ -561,6 +568,11 @@ public:
     * @retval false for all other account types
     */
   bool isLiquidAsset() const;
+
+  /**
+   * This method returns true if a costcenter assignment is required for this account
+   */
+  bool isCostCenterRequired() const;
 
   /**
    * This method returns a name that has a brokerage suffix of

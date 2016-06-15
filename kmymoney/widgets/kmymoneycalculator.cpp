@@ -388,6 +388,9 @@ void kMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
       break;
     case Qt::Key_Backspace:
       button = CLEAR;
+      if(ev->modifiers() & Qt::ShiftModifier) {
+        button = CLEARALL;
+      }
       break;
     case Qt::Key_Asterisk:
       button = STAR;
@@ -398,7 +401,7 @@ void kMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
       button = EQUAL;
       break;
     case Qt::Key_Escape:
-      button = CLEARALL;
+      emit signalQuit();
       break;
     case Qt::Key_Percent:
       button = PERCENT;

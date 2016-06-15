@@ -120,6 +120,7 @@ struct MyMoneyObjectContainer::Private {
   QHash<QString, MyMoneyInstitution const *> institutionCache;
   QHash<QString, MyMoneySchedule const *> scheduleCache;
   QHash<QString, onlineJob const *> onlineJobCache;
+  QHash<QString, MyMoneyCostCenter const*> costCenterCache;
 
   IMyMoneyStorage* storage;
   MyMoneyObjectContainer *pub;
@@ -144,6 +145,7 @@ void MyMoneyObjectContainer::clear(IMyMoneyStorage* storage)
   d->clearCache(d->institutionCache);
   d->clearCache(d->scheduleCache);
   d->clearCache(d->onlineJobCache);
+  d->clearCache(d->costCenterCache);
 
   if (storage)
     d->storage = storage;
@@ -165,6 +167,8 @@ void MyMoneyObjectContainer::clear(const QString& id)
     return;
   if (d->clearObject(d->onlineJobCache, id))
     return;
+  if (d->clearObject(d->costCenterCache, id))
+    return;
   qWarning("Ooops, should clear an unknown object with id '%s'", qPrintable(id));
 }
 
@@ -184,6 +188,8 @@ const MyMoneyObject * MyMoneyObjectContainer::object(const QString& id) const
   if ((obj = d->getObject(d->scheduleCache, id)))
     return obj;
   if ((obj = d->getObject(d->onlineJobCache, id)))
+    return obj;
+  if ((obj = d->getObject(d->costCenterCache, id)))
     return obj;
   qWarning("Ooops, should get an unknown object with id '%s'", qPrintable(id));
   return 0;
@@ -250,6 +256,8 @@ void MyMoneyObjectContainer::refresh(const QString& id)
   if (d->refreshObject(id, d->scheduleCache, &IMyMoneyStorage::schedule))
     return;
   if (d->refreshObject(id, d->onlineJobCache, &IMyMoneyStorage::getOnlineJob))
+    return;
+  if (d->refreshObject(id, d->costCenterCache, &IMyMoneyStorage::costCenter))
     return;
 
   // special handling of securities

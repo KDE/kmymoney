@@ -5,6 +5,7 @@ set(libviews_a_SOURCES
   kcategoriesview.cpp
   kforecastview.cpp
   kgloballedgerview.cpp
+  ledgerview.cpp
   kwelcomepage.cpp
   khomeview.cpp
   kinstitutionsview.cpp
@@ -22,6 +23,16 @@ set(libviews_a_SOURCES
   konlinejoboutbox.cpp
   kpayeeidentifierview.cpp
   payeeidentifierselectiondelegate.cpp
+  simpleledgerview.cpp
+  ledgerviewpage.cpp
+  ledgerview.cpp
+  ledgerdelegate.cpp
+  newspliteditor.cpp
+  newtransactioneditor.cpp
+  newtransactionform.cpp
+  splitdialog.cpp
+  splitdelegate.cpp
+  widgethintframe.cpp
   )
 
 set(libviews_a_HEADER kmymoneyview.h)
@@ -38,6 +49,14 @@ set(libviews_a_UI
   ktagsviewdecl.ui
   konlinejoboutbox.ui
   kpayeeidentifierview.ui
+  simpleledgerview.ui
+  ledgerview.ui
+  ledgerviewpage.ui
+  simpleledgerview.ui
+  splitdialog.ui
+  newspliteditor.ui
+  newtransactioneditor.ui
+  newtransactionform.ui
   )
 
 # The handling of these ui files depends

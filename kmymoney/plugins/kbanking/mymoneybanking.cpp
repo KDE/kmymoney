@@ -36,6 +36,7 @@
 #include <QCheckBox>
 #include <QLabel>
 #include <QTimer>
+#include <QDebug>
 
 #include <QDebug> //! @todo remove @c #include <QDebug>
 

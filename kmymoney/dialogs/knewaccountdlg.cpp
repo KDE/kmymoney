@@ -252,7 +252,9 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     }
     m_qcheckboxPreferred->hide();
 
-    m_qcheckboxTax->setChecked(account.value("Tax") == "Yes");
+    m_qcheckboxTax->setChecked(account.value("Tax").toLower() == "yes");
+    m_costCenterRequiredCheckBox->setChecked(account.isCostCenterRequired());
+
     loadVatAccounts();
   } else {
     // get rid of the tabs that are not used for accounts
@@ -266,6 +268,8 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
         m_tab->removeTab(taxtab);
       }
     }
+
+    m_costCenterRequiredCheckBox->hide();
 
     switch (m_account.accountType()) {
       case MyMoneyAccount::Savings:
@@ -586,14 +590,8 @@ void KNewAccountDlg::okClicked()
   if (!m_categoryEditor) {
     m_account.setCurrencyId(m_currency->security().id());
 
-    if (m_qcheckboxPreferred->isChecked())
-      m_account.setValue("PreferredAccount", "Yes");
-    else
-      m_account.deletePair("PreferredAccount");
-    if (m_qcheckboxNoVat->isChecked())
-      m_account.setValue("NoVat", "Yes");
-    else
-      m_account.deletePair("NoVat");
+    storeKVP("PreferredAccount", m_qcheckboxPreferred);
+    storeKVP("NoVat", m_qcheckboxNoVat);
 
     if (m_minBalanceAbsoluteEdit->isVisible()) {
       m_account.setValue("minimumBalance", m_minBalanceAbsoluteEdit->value().toString());
@@ -602,12 +600,10 @@ void KNewAccountDlg::okClicked()
     if (KMyMoneyGlobalSettings::hideUnusedCategory() && !m_isEditing) {
       KMessageBox::information(this, i18n("You have selected to suppress the display of unused categories in the KMyMoney configuration dialog. The category you just created will therefore only be shown if it is used. Otherwise, it will be hidden in the accounts/categories view."), i18n("Hidden categories"), "NewHiddenCategory");
     }
+    m_account.setCostCenterRequired(m_costCenterRequiredCheckBox->isChecked());
   }
 
-  if (m_qcheckboxTax->isChecked())
-    m_account.setValue("Tax", "Yes");
-  else
-    m_account.deletePair("Tax");
+  storeKVP("Tax", m_qcheckboxTax);
 
   m_account.deletePair("VatAccount");
   m_account.deletePair("VatAmount");
@@ -652,6 +648,17 @@ void KNewAccountDlg::storeKVP(const QString& key, const QString& text, const QSt
     m_account.deletePair(key);
   else
     m_account.setValue(key, value);
+}
+
+void KNewAccountDlg::storeKVP(const QString& key, QCheckBox* widget)
+{
+  if (widget) {
+    if(widget->isChecked()) {
+      m_account.setValue(key, "Yes");;
+    } else {
+      m_account.deletePair(key);
+    }
+  }
 }
 
 void KNewAccountDlg::storeKVP(const QString& key, kMyMoneyEdit* widget)

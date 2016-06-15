@@ -24,6 +24,7 @@
 // QT Includes
 
 #include <QObject>
+#include <QModelIndex>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,6 +38,8 @@
 class AccountsModel;
 class InstitutionsModel;
 class onlineJobModel;
+class LedgerModel;
+class CostCenterModel;
 
 /**
   * This object is the owner and maintainer of all the core models of KMyMoney.
@@ -71,6 +74,13 @@ public:
   AccountsModel* accountsModel();
   InstitutionsModel* institutionsModel();
   onlineJobModel* onlineJobsModel();
+  LedgerModel* ledgerModel();
+  CostCenterModel* costCenterModel();
+
+  /**
+   * returns the index of an item the @a model based on the @a id of role @a role.
+   */
+  static QModelIndex indexById(QAbstractItemModel* model, int role, const QString& id);
 
 public slots:
   /**
@@ -84,6 +94,9 @@ public slots:
     * @ref MyMoneyFile.
     */
   void fileClosed();
+
+Q_SIGNALS:
+  void modelsLoaded();
 
 private:
 

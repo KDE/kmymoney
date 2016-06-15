@@ -385,6 +385,10 @@ int MyMoneyStorageSql::upgradeDb()
         if ((rc = upgradeToV8()) != 0) return (1);
         ++m_dbVersion;
         break;
+      case 8:
+        if ((rc = upgradeToV9()) != 0) return (1);
+        ++m_dbVersion;
+        break;
       default:
         qWarning("Unknown version number in database - %d", m_dbVersion);
     }
@@ -668,6 +672,19 @@ int MyMoneyStorageSql::upgradeToV8()
 
   // Added onlineJobs and payeeIdentifier
   if (!alterTable(m_db.m_tables["kmmFileInfo"], m_dbVersion))
+    return (1);
+
+  return 0;
+}
+
+int MyMoneyStorageSql::upgradeToV9()
+{
+  DBG("*** Entering MyMoneyStorageSql::upgradeToV9");
+  MyMoneyDbTransaction dbtrans(*this, Q_FUNC_INFO);
+
+  QSqlQuery q(*this);
+  // kmmSplits - add bankId
+  if (!alterTable(m_db.m_tables["kmmSplits"], m_dbVersion))
     return (1);
 
   return 0;
@@ -1967,6 +1984,7 @@ void MyMoneyStorageSql::writeSplitList
   QVariantList priceFormattedList;
   QVariantList memoList;
   QVariantList accountIdList;
+  QVariantList costCenterIdList;
   QVariantList checkNumberList;
   QVariantList postDateList;
   QVariantList bankIdList;
@@ -2004,6 +2022,7 @@ void MyMoneyStorageSql::writeSplitList
     }
     memoList << s.memo();
     accountIdList << s.accountId();
+    costCenterIdList << s.costCenterId();
     checkNumberList << s.number();
     postDateList << m_txPostDate.toString(Qt::ISODate); // FIXME: when Tom puts date into split object
     bankIdList << s.bankID();
@@ -2034,6 +2053,7 @@ void MyMoneyStorageSql::writeSplitList
   q.bindValue(":priceFormatted", priceFormattedList);
   q.bindValue(":memo", memoList);
   q.bindValue(":accountId", accountIdList);
+  q.bindValue(":costCenterId", costCenterIdList);
   q.bindValue(":checkNumber", checkNumberList);
   q.bindValue(":postDate", postDateList);
   q.bindValue(":bankId", bankIdList);
@@ -4124,6 +4144,7 @@ void MyMoneyStorageSql::readSplit(MyMoneySplit& s, const QSqlQuery& q) const
   static const int priceCol = t.fieldNumber("price");
   static const int memoCol = t.fieldNumber("memo");
   static const int accountIdCol = t.fieldNumber("accountId");
+  static const int costCenterIdCol = t.fieldNumber("costCenterId");
   static const int checkNumberCol = t.fieldNumber("checkNumber");
 //  static const int postDateCol = t.fieldNumber("postDate"); // FIXME - when Tom puts date into split object
   static const int bankIdCol = t.fieldNumber("bankId");
@@ -4149,6 +4170,7 @@ void MyMoneyStorageSql::readSplit(MyMoneySplit& s, const QSqlQuery& q) const
   s.setPrice(MyMoneyMoney(QStringEmpty(GETSTRING(priceCol))));
   s.setMemo(GETSTRING(memoCol));
   s.setAccountId(GETSTRING(accountIdCol));
+  s.setCostCenterId(GETSTRING(costCenterIdCol));
   s.setNumber(GETSTRING(checkNumberCol));
   //s.setPostDate(GETDATETIME(postDateCol)); // FIXME - when Tom puts date into split object
   s.setBankID(GETSTRING(bankIdCol));
@@ -4164,7 +4186,7 @@ bool MyMoneyStorageSql::isReferencedByTransaction(const QString& id) const
   q.prepare("SELECT COUNT(*) FROM kmmTransactions "
             "INNER JOIN kmmSplits ON kmmTransactions.id = kmmSplits.transactionId "
             "WHERE kmmTransactions.currencyId = :ID OR kmmSplits.payeeId = :ID "
-            "OR kmmSplits.accountId = :ID");
+            "OR kmmSplits.accountId = :ID OR kmmSplits.costCenterId = :ID");
   q.bindValue(":ID", id);
   if ((!q.exec()) || (!q.next())) { // krazy:exclude=crashy
     buildError(q, Q_FUNC_INFO, "error retrieving reference count");
@@ -4802,6 +4824,11 @@ long unsigned MyMoneyStorageSql::getNextPayeeIdentifierId() const
   return getNextId<&MyMoneyStorageSql::m_hiIdPayeeIdentifier>(QLatin1String("kmmPayeeIdentifier"), QLatin1String("id"), 5);
 }
 
+long unsigned int MyMoneyStorageSql::getNextCostCenterId() const
+{
+  return getNextId<&MyMoneyStorageSql::m_hiIdCostCenter>(QLatin1String("kmmCostCenterIdentifier"), QLatin1String("id"), 5);
+}
+
 long unsigned MyMoneyStorageSql::incrementBudgetId()
 {
   m_hiIdBudgets = getNextBudgetId() + 1;
@@ -4872,6 +4899,12 @@ long unsigned int MyMoneyStorageSql::incrementPayeeIdentfierId()
 {
   m_hiIdPayeeIdentifier = getNextPayeeIdentifierId() + 1;
   return (m_hiIdPayeeIdentifier - 1);
+}
+
+long unsigned int MyMoneyStorageSql::incrementCostCenterId()
+{
+  m_hiIdCostCenter = getNextCostCenterId() + 1;
+  return (m_hiIdCostCenter - 1);
 }
 
 void MyMoneyStorageSql::loadAccountId(const unsigned long& id)
@@ -5000,4 +5033,45 @@ void MyMoneyStorageSql::setPrecision(int prec)
 void MyMoneyStorageSql::setStartDate(const QDate& startDate)
 {
   m_startDate = startDate;
+}
+
+const QMap< QString, MyMoneyCostCenter > MyMoneyStorageSql::fetchCostCenters(const QStringList& idList, bool forUpdate) const
+{
+  Q_UNUSED(forUpdate);
+
+  DBG("*** Entering MyMoneyStorageSql::fetchCostCenters");
+  MyMoneyDbTransaction trans(const_cast <MyMoneyStorageSql&>(*this), Q_FUNC_INFO);
+  if (m_displayStatus) {
+    int costCenterNb = (idList.isEmpty() ? 100 : idList.size());
+    signalProgress(0, costCenterNb, QObject::tr("Loading cost center..."));
+  }
+  int progress = 0;
+  QMap<QString, MyMoneyCostCenter> costCenterList;
+  //unsigned long lastId;
+  const MyMoneyDbTable& t = m_db.m_tables["kmmCostCenter"];
+  QSqlQuery q(*const_cast <MyMoneyStorageSql*>(this));
+  if (idList.isEmpty()) {
+    q.prepare(t.selectAllString());
+  } else {
+    QString whereClause = " where (";
+    QString itemConnector = "";
+    foreach (const QString& it, idList) {
+      whereClause.append(QString("%1id = '%2'").arg(itemConnector).arg(it));
+      itemConnector = " or ";
+    }
+    whereClause += ')';
+    q.prepare(t.selectAllString(false) + whereClause);
+  }
+  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("reading CostCenter"))); // krazy:exclude=crashy
+  const int idCol = t.fieldNumber("id");
+  const int nameCol = t.fieldNumber("name");
+
+  while (q.next()) {
+    MyMoneyCostCenter costCenter;
+    QString pid = GETSTRING(idCol);
+    costCenter.setName(GETSTRING(nameCol));
+    costCenterList[pid] = MyMoneyCostCenter(pid, costCenter);
+    if (m_displayStatus) signalProgress(++progress, 0);
+  }
+  return costCenterList;
 }

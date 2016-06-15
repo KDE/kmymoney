@@ -33,19 +33,31 @@
 
 #include "accountsmodel.h"
 #include "onlinejobmodel.h"
+#include "ledgermodel.h"
+#include "costcentermodel.h"
+
+#ifdef KMM_MODELTEST
+  #include "modeltest.h"
+#endif
 
 Q_GLOBAL_STATIC(Models, models);
 
 struct Models::Private {
-  Private() :
-      m_accountsModel(0),
-      m_institutionsModel(0),
-      m_onlineJobModel(0) {}
+  Private()
+  : m_accountsModel(0)
+  , m_institutionsModel(0)
+  , m_onlineJobModel(0)
+  , m_ledgerModel(0)
+  , m_costCenterModel(0)
+  {}
 
   AccountsModel *m_accountsModel;
   InstitutionsModel *m_institutionsModel;
   onlineJobModel *m_onlineJobModel;
+  LedgerModel *m_ledgerModel;
+  CostCenterModel *m_costCenterModel;
 };
+
 
 /**
   * This object is a singleton so it will be created very early in the application's life
@@ -72,23 +84,73 @@ Models* Models::instance()
   */
 AccountsModel* Models::accountsModel()
 {
-  if (!d->m_accountsModel)
+  if (!d->m_accountsModel) {
     d->m_accountsModel = new AccountsModel(this);
+#ifdef KMM_MODELTEST
+    new ModelTest(d->m_accountsModel, Models::instance());
+#endif
+  }
   return d->m_accountsModel;
 }
 
 InstitutionsModel* Models::institutionsModel()
 {
-  if (!d->m_institutionsModel)
+  if (!d->m_institutionsModel) {
     d->m_institutionsModel = new InstitutionsModel(this);
+#ifdef KMM_MODELTEST
+    new ModelTest(d->m_institutionsModel, Models::instance());
+#endif
+  }
   return d->m_institutionsModel;
 }
 
 onlineJobModel* Models::onlineJobsModel()
 {
-  if (!d->m_onlineJobModel)
+  if (!d->m_onlineJobModel) {
     d->m_onlineJobModel = new onlineJobModel(this);
+#ifdef KMM_MODELTEST
+    /// @todo using the ModelTest feature on the onlineJobModel crashes. Need to fix.
+    // new ModelTest(d->m_onlineJobModel, Models::instance());
+#endif
+  }
   return d->m_onlineJobModel;
+}
+
+LedgerModel* Models::ledgerModel()
+{
+  if (!d->m_ledgerModel) {
+    d->m_ledgerModel = new LedgerModel(this);
+#ifdef KMM_MODELTEST
+    new ModelTest(d->m_ledgerModel, Models::instance());
+#endif
+  }
+  return d->m_ledgerModel;
+}
+
+CostCenterModel* Models::costCenterModel()
+{
+  if (!d->m_costCenterModel) {
+    d->m_costCenterModel = new CostCenterModel(this);
+#ifdef KMM_MODELTEST
+    new ModelTest(d->m_costCenterModel, Models::instance());
+#endif
+  }
+  return d->m_costCenterModel;
+}
+
+QModelIndex Models::indexById(QAbstractItemModel* model, int role, const QString& id)
+{
+  QModelIndexList indexList = model->match(model->index(0, 0),
+                                    role,
+                                    id,
+                                    1,
+                                    Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive));
+
+  if(indexList.count() == 1) {
+    return indexList.first();
+  }
+  return QModelIndex();
+
 }
 
 void Models::fileOpened()
@@ -96,6 +158,10 @@ void Models::fileOpened()
   accountsModel()->load();
   institutionsModel()->load();
   onlineJobsModel()->load();
+  costCenterModel()->load();
+  ledgerModel()->load();
+
+  emit modelsLoaded();
 }
 
 void Models::fileClosed()
@@ -105,4 +171,5 @@ void Models::fileClosed()
   accountsModel()->removeRows(0, accountsModel()->rowCount());
   institutionsModel()->removeRows(0, institutionsModel()->rowCount());
   onlineJobsModel()->unload();
+  ledgerModel()->unload();
 }

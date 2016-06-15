@@ -258,6 +258,7 @@ public:
   const QMap<QString, MyMoneyPayee> fetchPayees(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, MyMoneyTag> fetchTags(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const QMap<QString, onlineJob> fetchOnlineJobs(const QStringList& idList = QStringList(), bool forUpdate = false) const;
+  const QMap<QString, MyMoneyCostCenter> fetchCostCenters(const QStringList& idList = QStringList(), bool forUpdate = false) const;
   const MyMoneyPriceList fetchPrices(const QStringList& fromIdList = QStringList(), const QStringList& toIdList = QStringList(), bool forUpdate = false) const;
   MyMoneyPrice fetchSinglePrice(const QString& fromId, const QString& toId, const QDate& date_, bool exactDate, bool = false) const;
   const QMap<QString, MyMoneyReport> fetchReports(const QStringList& idList = QStringList(), bool forUpdate = false) const;
@@ -300,6 +301,7 @@ public:
   long unsigned getNextScheduleId() const;
   long unsigned getNextSecurityId() const;
   long unsigned getNextTransactionId() const;
+  long unsigned getNextCostCenterId() const;
 
   long unsigned incrementBudgetId();
   long unsigned incrementAccountId();
@@ -312,6 +314,7 @@ public:
   long unsigned incrementTransactionId();
   long unsigned incrementOnlineJobId();
   long unsigned incrementPayeeIdentfierId();
+  long unsigned incrementCostCenterId();
 
   void loadAccountId(const unsigned long& id);
   void loadTransactionId(const unsigned long& id);
@@ -324,6 +327,7 @@ public:
   void loadBudgetId(const unsigned long& id);
   void loadOnlineJobId(const unsigned long& id);
   void loadPayeeIdentifierId(const unsigned long& id);
+  void loadCostCenterId(const unsigned long& id);
 
   /**
     * This method allows to modify the precision with which prices
@@ -462,6 +466,7 @@ private:
   int upgradeToV6();
   int upgradeToV7();
   int upgradeToV8();
+  int upgradeToV9();
 
   int createTables();
   void createTable(const MyMoneyDbTable& t, int version = std::numeric_limits<int>::max());
@@ -527,6 +532,7 @@ private:
   long unsigned m_hiIdBudgets;
   long unsigned m_hiIdOnlineJobs;
   long unsigned m_hiIdPayeeIdentifier;
+  long unsigned m_hiIdCostCenter;
 
   // encrypt option - usage TBD
   QString m_encryptData;
