@@ -21,6 +21,7 @@
 
 #include <QDomElement>
 #include <QStringList>
+#include <QCollator>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -72,7 +73,8 @@ bool MyMoneyCostCenter::operator == (const MyMoneyCostCenter& right) const
 
 bool MyMoneyCostCenter::operator < (const MyMoneyCostCenter& right) const
 {
-  return m_name < right.name();
+  QCollator col;
+  return col.compare(m_name, right.m_name);
 }
 
 void MyMoneyCostCenter::writeXML(QDomDocument& document, QDomElement& parent) const
