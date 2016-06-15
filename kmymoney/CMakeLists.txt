@@ -84,6 +84,7 @@ endif(USE_MODELTEST)
 set( kmymoney_SRCS main.cpp kmymoney.cpp )
 
 qt5_add_dbus_adaptor(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
+qt5_add_resources(kmymoney_SRCS kmymoney.qrc)
 
 add_executable( kmymoney ${kmymoney_SRCS} )
 target_link_libraries(kmymoney
@@ -120,6 +121,25 @@ target_link_libraries(kmymoney
   $<$<BOOL:${KF5Holidays_FOUND}>:KF5::Holidays>
 )
 
+# own plist magic for mac os
+if(APPLE)
+    # own plist template
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/MacOSXBundleInfo.plist.in)
+
+    # the MacOSX bundle display name property (CFBundleDisplayName) is not currently supported by cmake,
+    # so has to be set for all targets in this cmake file
+    set(MACOSX_BUNDLE_DISPLAY_NAME KMyMoney)
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_GUI_IDENTIFIER "org.kde.KMyMoney")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "KMyMoney")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_DISPLAY_NAME "KMyMoney")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_INFO_STRING "KMyMoney - Personal Finances Manager")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_ICON_FILE "kmymoney.png")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_LONG_VERSION_STRING "KMyMoney ${KDE_APPLICATIONS_VERSION}")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_SHORT_VERSION_STRING "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATIONS_VERSION_MINOR}")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_BUNDLE_VERSION "${KDE_APPLICATIONS_VERSION}")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_COPYRIGHT "2000-2016 The KMyMoney Authors")
+endif()
+
 ########### install files ###############
 
 install(TARGETS kmymoney ${INSTALL_TARGETS_DEFAULT_ARGS})
@@ -129,9 +149,6 @@ install(FILES kmymoney.kcfg
   )
 install(FILES kmymoney.upd
   DESTINATION ${KCONF_UPDATE_INSTALL_DIR}
-  )
-install(FILES kmymoneyui.rc tips
-  DESTINATION ${KXMLGUI_INSTALL_DIR}/kmymoney
   )
 install(FILES ${_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney

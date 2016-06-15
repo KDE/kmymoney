@@ -22,6 +22,8 @@
 
 #cmakedefine KMM_DESIGNER 1
 
+#cmakedefine KMM_DBUS 1
+
 #cmakedefine KF5Holidays_FOUND 1
 
 #cmakedefine KF5Gpgmepp_FOUND 1

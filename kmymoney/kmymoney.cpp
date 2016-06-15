@@ -370,11 +370,12 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     KXmlGuiWindow(parent),
     d(new Private(this))
 {
+#ifdef KMM_DBUS
   new KmymoneyAdaptor(this);
   QDBusConnection::sessionBus().registerObject("/KMymoney", this);
   QDBusConnection::sessionBus().interface()->registerService(
     "org.kde.kmymoney", QDBusConnectionInterface::DontQueueService);
-
+#endif
   // Register the main engine types used as meta-objects
   qRegisterMetaType<MyMoneyMoney>("MyMoneyMoney");
   qRegisterMetaType<MyMoneySecurity>("MyMoneySecurity");
@@ -1601,6 +1602,7 @@ void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
   QList<QString> list = instanceList();
   QList<QString>::ConstIterator it;
   bool duplicate = false;
+#ifdef KMM_DBUS
   for (it = list.constBegin(); duplicate == false && it != list.constEnd(); ++it) {
     QDBusInterface remoteApp(*it, "/KMymoney", "org.kde.kmymoney");
     QDBusReply<QString> reply = remoteApp.call("filename");
@@ -1612,6 +1614,7 @@ void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
       }
     }
   }
+#endif
   if (!duplicate) {
     QUrl newurl = url;
     if ((newurl.scheme() == "sql")) {
@@ -7190,6 +7193,7 @@ QString KMyMoneyApp::filename() const
 QList<QString> KMyMoneyApp::instanceList() const
 {
   QList<QString> list;
+#ifdef KMM_DBUS
   QDBusReply<QStringList> reply = QDBusConnection::sessionBus().interface()->registeredServiceNames();
 
   if (reply.isValid()) {
@@ -7213,6 +7217,7 @@ QList<QString> KMyMoneyApp::instanceList() const
   } else {
     qDebug("D-Bus returned the following error while obtaining instances: %s", qPrintable(reply.error().message()));
   }
+#endif
   return list;
 }
 

@@ -60,6 +60,11 @@ if(CMAKE_BUILD_TYPE_TOLOWER MATCHES "debugfull")
   set(KMM_DEBUG 1)
 endif()
 
+# use DBus only on Linux
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+  set(KMM_DBUS 1)
+endif()
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
 
