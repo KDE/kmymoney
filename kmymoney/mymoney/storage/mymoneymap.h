@@ -195,7 +195,7 @@ public:
     that = *(dynamic_cast<QMap<Key, T>* >(const_cast<MyMoneyMap<Key, T>* >(this)));
   }
 
-  inline size_t count(void) const {
+  inline int count(void) const {
     return QMap<Key, T>::count();
   }
 
