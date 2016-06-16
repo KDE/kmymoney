@@ -33,7 +33,7 @@ set(libviews_a_SOURCES
   splitdialog.cpp
   splitdelegate.cpp
   widgethintframe.cpp
-  )
+)
 
 set(libviews_a_HEADER kmymoneyview.h)
 
@@ -57,7 +57,7 @@ set(libviews_a_UI
   newspliteditor.ui
   newtransactioneditor.ui
   newtransactionform.ui
-  )
+)
 
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)

@@ -20,7 +20,6 @@ target_link_libraries(models LINK_PUBLIC
     kmm_mymoney
     kmymoney_common
     KF5::KDELibs4Support
-    Alkimia::alkimia
 )
 
 add_dependencies(models kmm_config)

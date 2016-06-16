@@ -152,9 +152,9 @@ void ibanBicItemDelegate::updateEditorGeometry(QWidget* editor, const QStyleOpti
  */
 payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBicItemDelegate::ibanBicByIndex(const QModelIndex& index) const
 {
-  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
+  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic{
         index.model()->data(index, payeeIdentifierContainerModel::payeeIdentifier).value<payeeIdentifier>()
-      );
+      };
   Q_ASSERT(!ibanBic.isNull());
   return ibanBic;
 }

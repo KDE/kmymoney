@@ -64,8 +64,6 @@ KOnlineJobOutbox::~KOnlineJobOutbox()
     // Save column state
     KConfigGroup configGroup = KSharedConfig::openConfig()->group("KOnlineJobOutbox");
     configGroup.writeEntry("HeaderState", ui->m_onlineJobView->header()->saveState());
-
-    delete ui;
 }
 
 void KOnlineJobOutbox::updateButtonState() const

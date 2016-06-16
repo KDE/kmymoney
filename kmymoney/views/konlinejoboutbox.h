@@ -19,6 +19,8 @@
 #ifndef KONLINEJOBOUTBOX_H
 #define KONLINEJOBOUTBOX_H
 
+#include <memory>
+
 #include <QWidget>
 #include <QModelIndex>
 
@@ -57,7 +59,7 @@ private slots:
   void updateButtonState() const;
 
 private:
-  Ui::KOnlineJobOutbox *ui;
+  std::unique_ptr<Ui::KOnlineJobOutbox> ui;
 
 private slots:
   void slotRemoveJob();
