@@ -188,7 +188,6 @@ KMyMoneyView::KMyMoneyView(QWidget *parent)
   connect(m_accountsView, SIGNAL(selectObject(MyMoneyObject)), kmymoney, SLOT(slotSelectInvestment(MyMoneyObject)));
   connect(m_accountsView, SIGNAL(openContextMenu(MyMoneyObject)), kmymoney, SLOT(slotShowAccountContextMenu(MyMoneyObject)));
   connect(m_accountsView, SIGNAL(openObject(MyMoneyObject)), kmymoney, SLOT(slotAccountOpen(MyMoneyObject)));
-  connect(this, SIGNAL(reconciliationStarts(MyMoneyAccount,QDate,MyMoneyMoney)), m_accountsView, SLOT(slotReconcileAccount(MyMoneyAccount,QDate,MyMoneyMoney)));
   connect(m_accountsView, SIGNAL(aboutToShow()), this, SIGNAL(aboutToChangeView()));
 
   // Page 3
