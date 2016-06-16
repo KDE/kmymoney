@@ -50,19 +50,17 @@ target_link_libraries( payeeidentifier_ibanbic_storageplugin
 )
 
 kcoreaddons_desktop_to_json(payeeidentifier_ibanbic_storageplugin
-  ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-storageplugin.desktop
+  "${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-storageplugin.desktop"
+  SERVICE_TYPES "${KMyMoney_SOURCE_DIR}/mymoney/storage/kmymoney-sqlstorageplugin.desktop"
   )
 
 install(TARGETS payeeidentifier_ibanbic_storageplugin
   DESTINATION ${PLUGIN_INSTALL_DIR})
 
 install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-storageplugin.desktop
+  "${CMAKE_CURRENT_BINARY_DIR}/kmymoney-ibanbic-storageplugin.desktop"
   DESTINATION ${SERVICES_INSTALL_DIR}
   )
 
-if( KDE4_BUILD_TESTS )
-  add_subdirectory(tests)
-endif()
-
+add_subdirectory(tests)
 add_subdirectory(widgets)

@@ -273,8 +273,6 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
   AccountNamesFilterProxyModel* filterModel = qobject_cast<AccountNamesFilterProxyModel*>(model());
 
   if(filterModel) {
-    int cnt = 0;
-    qDebug() << "Account text" << txt;
     if (txt.contains(MyMoneyFile::AccountSeperator) == 0) {
       // for some reason it helps to avoid internal errors if we
       // clear the filter before setting it to a new value
