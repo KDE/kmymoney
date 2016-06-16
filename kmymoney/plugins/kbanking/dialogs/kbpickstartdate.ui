@@ -160,11 +160,6 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>QPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
-  <customwidget>
    <class>kMyMoneyDateInput</class>
    <extends>QFrame</extends>
    <header>kmymoneydateinput.h</header>

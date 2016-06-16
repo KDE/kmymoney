@@ -62,16 +62,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
-    <customwidget>
-     <class>QDialog</class>
-     <extends>QDialog</extends>
-     <header>kdialog.h</header>
-   </customwidget>
-  <customwidget>
-   <class>QPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
  </customwidgets>
  <resources/>
  <connections/>

@@ -285,11 +285,6 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>QPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
-  <customwidget>
    <class>KMessageWidget</class>
    <extends>QWidget</extends>
    <header location="global">KMessageWidget</header>

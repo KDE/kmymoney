@@ -269,11 +269,6 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>QPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
-  <customwidget>
    <class>KMyMoneyAccountTreeView</class>
    <extends>QTreeView</extends>
    <header>kmymoneyaccounttreeview.h</header>
