@@ -21,7 +21,6 @@
 #include <QFutureWatcher>
 #include <QProgressDialog>
 
-#include <kapplication.h>
 #include <kmessagebox.h>
 #include <klocalizedstring.h>
 
@@ -96,7 +95,7 @@ void WbMapAccountDialog::newPage(int id)
         d2->progress->setWindowTitle(i18n("Loading Weboob backend..."));
         d2->progress->setLabelText(i18n("Getting list of backends."));
 
-        kapp->processEvents();
+        QCoreApplication::processEvents();
 
         QFuture<QList<Weboob::Backend> > future = QtConcurrent::run(weboob, &Weboob::getBackends);
         d2->watcher2.setFuture(future);
@@ -108,7 +107,7 @@ void WbMapAccountDialog::newPage(int id)
         d2->progress->setWindowTitle(i18n("Connecting to bank..."));
         d2->progress->setLabelText(i18n("Getting list of accounts from your bank."));
 
-        kapp->processEvents();
+        QCoreApplication::processEvents();
 
         QFuture<QList<Weboob::Account> > future = QtConcurrent::run(weboob, &Weboob::getAccounts, backendsList->currentItem()->text(0));
         d->watcher.setFuture(future);

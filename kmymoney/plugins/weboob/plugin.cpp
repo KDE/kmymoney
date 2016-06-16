@@ -21,7 +21,8 @@
 #include <QFutureWatcher>
 #include <QProgressDialog>
 
-#include <KGenericFactory>
+#include <KPluginFactory>
+#include <KLocalizedString>
 
 #include "dialogs/mapaccount.h"
 #include "dialogs/webaccount.h"

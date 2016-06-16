@@ -32,10 +32,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kled.h>
 #include <kcombobox.h>
-#include <KWallet/Wallet>
+#include <KWallet>
 
 // ----------------------------------------------------------------------------
 // Project Includes

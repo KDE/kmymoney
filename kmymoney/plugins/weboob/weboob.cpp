@@ -17,17 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <KGlobal>
 #include <QDebug>
-#include <KStandardDirs>
 #include <QMutex>
+#include <QStandardPaths>
+
 #include "weboob.h"
 
 Weboob::Weboob(QObject* parent)
     : QObject(parent)
 {
   mutex = new QMutex();
-  path = KGlobal::dirs()->findResource("data", "kmm_weboob/weboob.py");
+  path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "kmm_weboob/weboob.py");
   action = new Kross::Action(0, path);
   action->setFile(path);
 }

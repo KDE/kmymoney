@@ -31,15 +31,14 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 
 #include <QProgressDialog>
-#include <kapplication.h>
 #include <klistwidgetsearchline.h>
 #include <kcombobox.h>
 #include <kurlrequester.h>
-#include <KWallet/Wallet>
+#include <KWallet>
 #include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
@@ -85,7 +84,7 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   // force to show immediately as the call to OfxPartner::BankNames()
   // does not call the processEvents() loop
   dlg->setMinimumDuration(0);
-  kapp->processEvents();
+  QCoreApplication::processEvents();
 
   //set password field according to KDE preferences
   m_editPassword->setPasswordMode(true);

@@ -54,7 +54,7 @@ private:
     ACCOUNTS_PAGE
   };
 
-  class Private;
+  struct Private;
   /// \internal d-pointer instance.
   const std::unique_ptr<Private> d;
   const std::unique_ptr<Private> d2;

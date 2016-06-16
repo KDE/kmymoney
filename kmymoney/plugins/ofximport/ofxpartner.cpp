@@ -42,7 +42,7 @@
 #include <kjob.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 
 // ----------------------------------------------------------------------------

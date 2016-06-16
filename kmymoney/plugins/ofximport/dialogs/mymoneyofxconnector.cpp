@@ -30,14 +30,15 @@
 #include <QByteArray>
 #include <QList>
 #include <QApplication>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kcombobox.h>
 #include <kpassworddialog.h>
-#include <KWallet/Wallet>
+#include <KWallet>
 #include <KMainWindow>
 #include <KLineEdit>
 
@@ -48,7 +49,6 @@
 #include <mymoneyaccount.h>
 #include <mymoneyinstitution.h>
 #include <mymoneykeyvaluecontainer.h>
-#include <kdeversion.h>
 
 using KWallet::Wallet;
 
@@ -288,7 +288,7 @@ OfxAccountData::AccountType MyMoneyOfxConnector::accounttype() const
   QRegExp rexp("OFXTYPE:([A-Z]*)");
   if (rexp.indexIn(m_account.description()) != -1) {
     QString override = rexp.cap(1);
-    qDebug(2) << "MyMoneyOfxConnector::accounttype() overriding to " << result;
+    qDebug() << "MyMoneyOfxConnector::accounttype() overriding to " << result;
 
     if (override == "BANK")
       result = OfxAccountData::OFX_CHECKING;

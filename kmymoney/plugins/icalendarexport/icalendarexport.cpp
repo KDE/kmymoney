@@ -20,16 +20,15 @@
 
 #include "icalendarexport.h"
 
+#include <QFileDialog>
+#include <QUrl>
+
 // KDE includes
 #include <KPluginFactory>
-#include <KAction>
-#include <KFileDialog>
 #include <KPluginInfo>
-#include <QUrl>
 #include <KActionCollection>
 #include <KSharedConfig>
 #include <KLocalizedString>
-#include <KAboutData>
 
 // KMyMoney includes
 #include "mymoneyfile.h"
@@ -100,13 +99,13 @@ KMMiCalendarExportPlugin::~KMMiCalendarExportPlugin()
 
 void KMMiCalendarExportPlugin::slotFirstExport()
 {
-  QPointer<KFileDialog> fileDialog = new KFileDialog(QUrl("kfiledialog:///kmymoney-export"), QString("%1|%2\n").arg("*.ics").arg(i18nc("ICS (Filefilter)", "iCalendar files")), d->m_action->parentWidget());
+  QPointer<QFileDialog> fileDialog = new QFileDialog(d->m_action->parentWidget(), QString(), QString(), QString("%1|%2\n").arg("*.ics").arg(i18nc("ICS (Filefilter)", "iCalendar files")));
 
-  fileDialog->setOperationMode(KFileDialog::Saving);
+  fileDialog->setAcceptMode(QFileDialog::AcceptSave);
   fileDialog->setWindowTitle(i18n("Export as"));
 
   if (fileDialog->exec() == QDialog::Accepted) {
-    QUrl newURL = fileDialog->selectedUrl();
+    QUrl newURL = fileDialog->selectedUrls().front();
     if (newURL.isLocalFile()) {
       PluginSettings::setIcalendarFile(newURL.toLocalFile());
       PluginSettings::self()->save();

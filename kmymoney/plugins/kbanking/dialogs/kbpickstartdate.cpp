@@ -33,12 +33,11 @@
 #include <QRadioButton>
 #include <QLabel>
 #include <QDateTime>
+#include <QPushButton>
 
 // KDE includes
-#include <QPushButton>
-#include <kdatewidget.h>
 #include <kguiitem.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KGuiItem>
 #include <KStandardGuiItem>
 

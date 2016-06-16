@@ -22,8 +22,7 @@
 
 // KDE includes
 #include <KPluginFactory>
-#include <KGlobal>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KFile>
 
 // libical includes
@@ -96,7 +95,7 @@ struct icalrecurrencetype scheduleToRecurenceRule(const MyMoneySchedule& schedul
   icalrecurrencetype_clear(&recurrence);
   if (schedule.willEnd())
     recurrence.until = qdateToIcalTimeType(schedule.endDate());
-  recurrence.week_start = icalrecurrencetype_day_day_of_week(KLocale::global()->weekStartDay());
+  recurrence.week_start = icalrecurrencetype_day_day_of_week(QLocale().firstDayOfWeek());
   int frequencyFactor = 1; // used to translate kmymoney frequency to icalendar frequency
 
   switch (schedule.occurrence()) {

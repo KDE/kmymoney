@@ -30,13 +30,11 @@
 // KDE Includes
 
 #include <KPluginFactory>
-#include <KFile>
 #include <QUrl>
-#include <KAction>
 #include <KMessageBox>
 #include <KActionCollection>
 #include <KLocalizedString>
-#include <KWallet/Wallet>
+#include <KWallet>
 
 // ----------------------------------------------------------------------------
 // Project Includes

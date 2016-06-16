@@ -89,15 +89,16 @@
            <widget class="KLineEdit" name="m_payeeRegExpEdit"/>
           </item>
           <item row="4" column="1">
-           <widget class="KEditListBox" name="m_payeeExceptions">
+           <widget class="KEditListWidget" name="m_payeeExceptions">
             <property name="enabled">
              <bool>true</bool>
             </property>
-            <property name="title">
+            <!-- TODO: port to kf5 -->
+            <!--property name="title">
              <string>Exceptions</string>
-            </property>
+            </property-->
             <property name="buttons">
-             <set>KEditListBox::All</set>
+             <set>KEditListWidget::All</set>
             </property>
            </widget>
           </item>
@@ -213,9 +214,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KEditListBox</class>
-   <extends>QGroupBox</extends>
-   <header>keditlistbox.h</header>
+   <class>KEditListWidget</class>
+   <extends>QWidget</extends>
+   <header>KEditListWidget</header>
   </customwidget>
   <customwidget>
    <class>KComboBox</class>

@@ -46,15 +46,11 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KPluginFactory>
-#include <KAction>
 #include <KActionCollection>
-#include <KGlobal>
-#include <KStandardDirs>
 #include <QMenu>
 #include <KIconLoader>
 #include <KGuiItem>
 #include <KLineEdit>
-#include <KEditListBox>
 #include <KComboBox>
 #include <KConfig>
 #include <KConfigGroup>
