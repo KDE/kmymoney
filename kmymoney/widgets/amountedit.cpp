@@ -25,17 +25,15 @@
 #include <QStyle>
 #include <QPixmap>
 #include <QToolButton>
+#include <QFrame>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KConfigGroup>
-
-#include <KDebug>
-#include <KVBox>
 #include <KIconLoader>
-#include <KIcon>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -60,6 +58,8 @@ AmountValidator::AmountValidator(double bottom, double top, int decimals,
  */
 QValidator::State AmountValidator::validate(QString & input, int & _p) const
 {
+  // TODO: port KF5
+#if 0
   QString s = input;
   KLocale * l = KLocale::global();
   // ok, we have to re-format the number to have:
@@ -152,6 +152,9 @@ QValidator::State AmountValidator::validate(QString & input, int & _p) const
     }
   }
   return rc;
+#else
+  return Acceptable;
+#endif
 }
 
 
@@ -166,7 +169,7 @@ struct AmountEdit::Private
   : m_q(q)
   , m_allowEmpty(false)
   {
-    m_calculatorFrame = new KVBox(m_q);
+    m_calculatorFrame = new QFrame(m_q);
     m_calculatorFrame->setWindowFlags(Qt::Popup);
 
     m_calculatorFrame->setFrameStyle(QFrame::Panel | QFrame::Raised);
@@ -177,7 +180,7 @@ struct AmountEdit::Private
   }
 
   AmountEdit*           m_q;
-  KVBox*                m_calculatorFrame;
+  QFrame*               m_calculatorFrame;
   kMyMoneyCalculator*   m_calculator;
   QToolButton*          m_calculatorButton;
   int                   m_prec;
@@ -197,8 +200,9 @@ AmountEdit::AmountEdit(QWidget *parent, const int prec)
   , d(new Private(this))
 {
   d->m_prec = prec;
+  // TODO: port KF5
   if (prec < -1 || prec > 20)
-    d->m_prec = KLocale::global()->monetaryDecimalPlaces();
+    d->m_prec = 2;//KLocale::global()->monetaryDecimalPlaces();
   init();
 }
 
@@ -226,7 +230,7 @@ void AmountEdit::init()
 
   d->m_calculatorButton = new QToolButton(this);
   KIconLoader* il = KIconLoader::global();
-  d->m_calculatorButton->setIcon(KIcon(il->loadIcon("accessories-calculator.png", KIconLoader::Small, KIconLoader::SizeSmall)));
+  d->m_calculatorButton->setIcon(QIcon(il->loadIcon("accessories-calculator.png", KIconLoader::Small, KIconLoader::SizeSmall)));
   d->m_calculatorButton->setCursor(Qt::ArrowCursor);
   d->m_calculatorButton->setStyleSheet("QToolButton { border: none; padding: 2px}");
   d->m_calculatorButton->setFixedSize(btnSize, btnSize);
@@ -239,7 +243,7 @@ void AmountEdit::init()
 
   connect(d->m_calculatorButton, SIGNAL(clicked()), this, SLOT(slotCalculatorOpen()));
 
-  KSharedConfigPtr kconfig = KSharedConfig::openConfig();
+  KSharedConfig::Ptr kconfig = KSharedConfig::openConfig();
   KConfigGroup grp = kconfig->group("General Options");
   if (grp.readEntry("DontShowCalculatorButton", false) == true)
     setCalculatorButtonVisible(false);
@@ -374,6 +378,8 @@ void AmountEdit::resetText()
 
 void AmountEdit::theTextChanged(const QString & theText)
 {
+  // TODO: port KF5
+#if 0
   KLocale * l = KLocale::global();
   QString dec = l->monetaryDecimalSymbol();
   QString l_text = theText;
@@ -402,6 +408,7 @@ void AmountEdit::theTextChanged(const QString & theText)
       emit textChanged(text());
     }
   }
+#endif
 }
 
 void AmountEdit::ensureFractionalPart()

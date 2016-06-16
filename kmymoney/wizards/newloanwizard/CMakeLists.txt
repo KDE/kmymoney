@@ -44,7 +44,8 @@ set (libnewloanwizard_a_UI
 qt5_wrap_ui(libnewloanwizard_a_SOURCES ${libnewloanwizard_a_UI} )
 
 add_library(newloanwizard STATIC ${libnewloanwizard_a_SOURCES})
-target_link_libraries(newloanwizard KF5::KDELibs4Support Qt5::Sql Alkimia::alkimia)
+# TODO: clean dependencies
+target_link_libraries(newloanwizard KF5::XmlGui KF5::IconThemes KF5::Service KF5::I18n KF5::Completion KF5::WidgetsAddons KF5::TextWidgets Qt5::Widgets Qt5::Xml Qt5::Sql Alkimia::alkimia)
 
 # we rely on some dialogs to be generated
 add_dependencies(newloanwizard dialogs)

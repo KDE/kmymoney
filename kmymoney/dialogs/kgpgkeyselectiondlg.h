@@ -20,10 +20,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDialog>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KDialog>
 #include <KEditListWidget>
 
 class KLed;
@@ -34,7 +35,7 @@ class KLed;
 /**
   * @author Thomas Baumgart
   */
-class KGpgKeySelectionDlg : public KDialog
+class KGpgKeySelectionDlg : public QDialog
 {
   Q_OBJECT
 public:

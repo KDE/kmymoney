@@ -20,8 +20,7 @@
 #include <QtCore/QStringList>
 #include <QtCore/QDebug>
 
-#include <KGlobal>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <mymoneyfile.h>
 #include "kmymoneyutils.h"
@@ -216,7 +215,7 @@ void Parse::thousandsSeparatorChanged(int val)
 {
   m_thousandsSeparatorIndex = val;
   m_thousandsSeparator = m_thousandsSeparatorList[val];
-  if (m_thousandsSeparator == KLocale::global()->thousandsSeparator()) {
+  if (m_thousandsSeparator == ""/* TODO: port to kf5 - KLocale::global()->thousandsSeparator()*/) {
     return;
   }
 }
@@ -274,7 +273,7 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
     m_symbolFound = false;
     if ((thouIndex == -1) || (thouIndex == length - 4))  {      //no separator || correct format
       txt.remove(m_thousandsSeparator);
-      QString tmp = txt + KLocale::global()->decimalSymbol() + "00";
+      QString tmp = txt + QLocale().decimalPoint() + "00";
       return tmp;
     } else
       m_invalidConversion = true;
@@ -296,7 +295,7 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
   }//  thouIndex = -1                            no thousands separator
 
   //  m_symbolFound = true                      found genuine decimal
-  txt.replace(m_decimalSymbol, KLocale::global()->decimalSymbol());  // so swap it
+  txt.replace(m_decimalSymbol, QLocale().decimalPoint());  // so swap it
   return txt;
 }
 

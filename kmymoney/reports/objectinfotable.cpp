@@ -26,10 +26,8 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-// This is just needed for i18n().  Once I figure out how to handle i18n
-// without using this macro directly, I'll be freed of KDE dependency.
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

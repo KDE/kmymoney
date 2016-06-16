@@ -26,7 +26,6 @@
 // KDE Includes
 
 #include <KColorScheme>
-#include <kdeversion.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes

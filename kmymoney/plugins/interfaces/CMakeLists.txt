@@ -4,4 +4,5 @@ set (libinterfaces_a_SOURCES
   )
 
 add_library(interfaces STATIC ${libinterfaces_a_SOURCES})
-target_link_libraries(interfaces KF5::XmlGui KF5::KDELibs4Support Alkimia::alkimia Qt5::Sql)
+# TODO: fix dependencies
+target_link_libraries(interfaces KF5::Service KF5::XmlGui Alkimia::alkimia Qt5::Sql Qt5::Xml)

@@ -18,12 +18,11 @@
 
 #include "ibanbicdata.h"
 
-#include <KDebug>
 #include <KServiceTypeTrader>
-#include <KStandardDirs>
 #include <QtSql/QSqlQuery>
 #include <QSqlError>
 #include <QtCore/QStandardPaths>
+#include <QtCore/QDebug>
 
 #include "ibanbic.h"
 
@@ -260,7 +259,7 @@ QSqlDatabase ibanBicData::createDatabaseConnection(const QString& database)
   // Need to create new connection, locate database
   QString path = QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("kmymoney/ibanbicdata/") + database);
   if (path.isEmpty()) {
-    kWarning() << QString("Could not locate database file \"%1\" to receive IBAN and BIC data.").arg(database);
+    qWarning() << QString("Could not locate database file \"%1\" to receive IBAN and BIC data.").arg(database);
     return QSqlDatabase();
   }
 
@@ -270,7 +269,7 @@ QSqlDatabase ibanBicData::createDatabaseConnection(const QString& database)
   db.setConnectOptions("QSQLITE_OPEN_READONLY=1;QSQLITE_ENABLE_SHARED_CACHE=1;");
   const bool opened = db.open();
   if (!opened) {
-    kWarning() << QString("Could not open database \"%1\" to receive IBAN and BIC data.").arg(path);
+    qWarning() << QString("Could not open database \"%1\" to receive IBAN and BIC data.").arg(path);
   }
 
   return db;

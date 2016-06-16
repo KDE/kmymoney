@@ -76,14 +76,11 @@
  <customwidgets>
   <customwidget>
    <class>QTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>ktabwidget.h</header>
+   <extends>QWidget</extends>
+   <header>QTabWidget</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <includes>
-  <include location="local">ktabwidget.h</include>
- </includes>
  <resources/>
  <connections>
   <connection>

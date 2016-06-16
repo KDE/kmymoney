@@ -22,13 +22,9 @@
 
 // KDE includes
 #include <KPluginFactory>
-#include <KAction>
-#include <KGlobal>
-#include <KGlobalSettings>
-#include <KLocale>
-#include <KStandardDirs>
 #include <KPluginInfo>
 #include <KColorScheme>
+#include <KLocalizedString>
 
 // KMyMoney includes
 #include "mymoneyfile.h"
@@ -57,9 +53,9 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
 
   QString filename;
   if (!MyMoneyFile::instance()->value("reportstylesheet").isEmpty())
-    filename = KStandardDirs::locate("apps/kmymoney", QString("html/%1").arg(MyMoneyFile::instance()->value("reportstylesheet")));
+    filename = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString("html/%1").arg(MyMoneyFile::instance()->value("reportstylesheet")));
   if (filename.isEmpty())
-    filename = KStandardDirs::locate("apps/kmymoney", "html/kmymoney.css");
+    filename = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "html/kmymoney.css");
   QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n") +
                    QString("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">").arg(QUrl::fromLocalFile(filename).url());
 
@@ -112,7 +108,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   QString reportName = i18n("Reconciliation report of account %1", account.name());
   QString report = QString("<h2 class=\"report\">%1</h2>\n").arg(reportName);
   report += QString("<div class=\"subtitle\">");
-  report += QString("%1").arg(KLocale::global()->formatDate(date, KLocale::ShortDate));
+  report += QString("%1").arg(QLocale().toString(date, QLocale::ShortFormat));
   report += QString("</div>\n");
   report += QString("<div class=\"gap\">&nbsp;</div>\n");
   report += QString("<div class=\"subtitle\">");
@@ -172,7 +168,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
   report += "</td></tr>";
   // row 8
   report += "<tr class=\"row-even\"><td class=\"left\">";
-  report += i18n("Register balance as of %1", KLocale::global()->formatDate(date, KLocale::ShortDate));
+  report += i18n("Register balance as of %1", QLocale().toString(date, QLocale::ShortFormat));
   report += "</td><td>";
   report += MyMoneyUtils::formatMoney(MyMoneyFile::instance()->balance(account.id(), date), currency);
   report += "</td></tr>";
@@ -205,13 +201,13 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
 
   // row 9
   report += "<tr class=\"row-odd\"><td class=\"left\">";
-  report += i18np("%1 payment after %2", "%1 payments after %2", afterPayments, KLocale::global()->formatDate(date, KLocale::ShortDate));
+  report += i18np("%1 payment after %2", "%1 payments after %2", afterPayments, QLocale().toString(date, QLocale::ShortFormat));
   report += "</td><td>";
   report += MyMoneyUtils::formatMoney(afterPaymentAmount, currency);
   report += "</td></tr>";
   // row 10
   report += "<tr class=\"row-even\"><td class=\"left\">";
-  report += i18np("%1 deposit after %2", "%1 deposits after %2", afterDeposits, KLocale::global()->formatDate(date, KLocale::ShortDate));
+  report += i18np("%1 deposit after %2", "%1 deposits after %2", afterDeposits, QLocale().toString(date, QLocale::ShortFormat));
   report += "</td><td>";
   report += MyMoneyUtils::formatMoney(afterDepositAmount, currency);
   report += "</td></tr>";
@@ -253,7 +249,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
       }
 
       detailsReport += QString("<tr class=\"%1\"><td>").arg((index++ % 2 == 1) ? "row-odd" : "row-even");
-      detailsReport += QString("%1").arg(KLocale::global()->formatDate((*it).first.entryDate(), KLocale::ShortDate));
+      detailsReport += QString("%1").arg(QLocale().toString((*it).first.entryDate(), QLocale::ShortFormat));
       detailsReport += "</td><td>";
       detailsReport += QString("%1").arg((*it).second.number());
       detailsReport += "</td><td>";
@@ -289,7 +285,7 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
       }
 
       detailsReport += QString("<tr class=\"%1\"><td>").arg((index++ % 2 == 1) ? "row-odd" : "row-even");
-      detailsReport += QString("%1").arg(KLocale::global()->formatDate((*it).first.entryDate(), KLocale::ShortDate));
+      detailsReport += QString("%1").arg(QLocale().toString((*it).first.entryDate(), QLocale::ShortFormat));
       detailsReport += "</td><td>";
       detailsReport += QString("%1").arg((*it).second.number());
       detailsReport += "</td><td>";

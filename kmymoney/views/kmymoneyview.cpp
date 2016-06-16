@@ -41,19 +41,17 @@
 #include <QPushButton>
 #include <QIcon>
 #include <QTemporaryFile>
+#include <QUrlQuery>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kfiledialog.h>
 #include <kicontheme.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
-#include <kio/netaccess.h>
 #include <kfilterdev.h>
 #include <kfilterbase.h>
 #include <kfileitem.h>
-#include <kdeversion.h>
 #include <ktitlewidget.h>
 #include <kcompressiondevice.h>
 #include <KSharedConfig>
@@ -688,9 +686,12 @@ bool KMyMoneyView::readFile(const QUrl &url)
     m_fileType = KmmDb;
     // get rid of the mode parameter which is now redundant
     QUrl newUrl(url);
+    // TODO: port to kf5
+#if 0
     if (QUrlQuery(url).hasQueryItem("mode")) {
       newUrl.removeQueryItem("mode");
     }
+#endif
     return (openDatabase(newUrl)); // on error, any message will have been displayed
   }
 
@@ -699,6 +700,8 @@ bool KMyMoneyView::readFile(const QUrl &url)
   if (url.isLocalFile()) {
     filename = url.toLocalFile();
   } else {
+    // TODO: port to kf5
+#if 0
     if (!KIO::NetAccess::download(url, filename, 0)) {
       KMessageBox::detailedError(this,
                                  i18n("Error while loading file '%1'.", url.url()),
@@ -706,6 +709,7 @@ bool KMyMoneyView::readFile(const QUrl &url)
                                  i18n("File access error"));
       return false;
     }
+#endif
   }
 
   // let's glimps into the file to figure out, if it's one
@@ -893,7 +897,8 @@ bool KMyMoneyView::readFile(const QUrl &url)
   // if a temporary file was constructed by NetAccess::download,
   // then it will be removed with the next call. Otherwise, it
   // stays untouched on the local filesystem
-  KIO::NetAccess::removeTempFile(filename);
+  // TODO: port to kf5
+  //KIO::NetAccess::removeTempFile(filename);
   return initializeStorage();
 }
 
@@ -941,10 +946,13 @@ bool KMyMoneyView::openDatabase(const QUrl &url)
           }
           return false;
         } else {
+          // TODO: port to kf5
+#if 0
           QString options = QUrlQuery(dbURL).queryItemValue("options") + ",override";
           dbURL.removeQueryItem("mode"); // now redundant
           dbURL.removeQueryItem("options");
           dbURL.addQueryItem("options", options);
+#endif
         }
     }
   }
@@ -1289,8 +1297,9 @@ bool KMyMoneyView::saveFile(const QUrl &url, const QString& keyList)
       tmpfile.open(); // to obtain the name
       tmpfile.close();
       saveToLocalFile(tmpfile.fileName(), storageWriter.get(), plaintext, keyList);
-      if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))
-        throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.toDisplayString()));
+      // TODO: port to kf5
+      //if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))
+      //  throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.toDisplayString()));
     }
     m_fileType = KmmXML;
   } catch (const MyMoneyException &e) {

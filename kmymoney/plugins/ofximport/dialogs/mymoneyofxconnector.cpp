@@ -35,7 +35,6 @@
 // KDE Includes
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kcombobox.h>
 #include <kpassworddialog.h>
 #include <KWallet/Wallet>
@@ -289,7 +288,7 @@ OfxAccountData::AccountType MyMoneyOfxConnector::accounttype() const
   QRegExp rexp("OFXTYPE:([A-Z]*)");
   if (rexp.indexIn(m_account.description()) != -1) {
     QString override = rexp.cap(1);
-    kDebug(2) << "MyMoneyOfxConnector::accounttype() overriding to " << result;
+    qDebug(2) << "MyMoneyOfxConnector::accounttype() overriding to " << result;
 
     if (override == "BANK")
       result = OfxAccountData::OFX_CHECKING;

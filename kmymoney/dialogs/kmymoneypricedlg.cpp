@@ -39,6 +39,7 @@
 #include <kmessagebox.h>
 #include <KSharedConfig>
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -189,7 +190,7 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
     priceTreeItem->setText(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : m_stockNameMap.value(from.id()));
     priceTreeItem->setToolTip(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : m_stockNameMap.value(from.id()));
     priceTreeItem->setText(KPriceTreeItem::ePriceCurrency, to.id());
-    priceTreeItem->setText(KPriceTreeItem::ePriceDate, KLocale::global()->formatDate(price.date(), KLocale::ShortDate));
+    priceTreeItem->setText(KPriceTreeItem::ePriceDate, QLocale().toString(price.date(), QLocale::ShortFormat));
     priceTreeItem->setData(KPriceTreeItem::ePriceDate, KPriceTreeItem::OrderRole, QVariant(price.date()));
     priceTreeItem->setText(KPriceTreeItem::ePricePrice, price.rate(priceBase).formatMoney("", KMyMoneyGlobalSettings::pricePrecision()));
     priceTreeItem->setTextAlignment(KPriceTreeItem::ePricePrice, Qt::AlignRight | Qt::AlignVCenter);

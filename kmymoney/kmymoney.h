@@ -598,7 +598,7 @@ public:
    */
   void setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps);
 
-  QUrl selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode, QWidget *widget);
+  QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode, QWidget *widget);
 
   const MyMoneyAccount& findAccount(const MyMoneyAccount& acc, const MyMoneyAccount& parent) const;
 

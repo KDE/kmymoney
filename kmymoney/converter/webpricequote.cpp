@@ -29,20 +29,19 @@
 #include <QFileInfo>
 #include <QString>
 #include <QTemporaryFile>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kio/netaccess.h>
-#include <kio/scheduler.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kconfig.h>
-#include <kcalendarsystem.h>
 #include <kshell.h>
 #include <KConfigGroup>
 #include <kprocess.h>
 #include <kencodingprober.h>
 #include <KSharedConfig>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -132,13 +131,15 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
   if (url.isLocalFile()) {
     emit status(i18nc("The process x is executing", "Executing %1...", url.toLocalFile()));
 
+    // TODO: prot to kf5
+#if 0
     d->m_filter.clearProgram();
     d->m_filter << url.toLocalFile().split(' ', QString::SkipEmptyParts);
     d->m_filter.setSymbol(d->m_symbol);
 
     d->m_filter.setOutputChannelMode(KProcess::MergedChannels);
     d->m_filter.start();
-
+#endif
     if (!d->m_filter.waitForStarted()) {
       emit error(i18n("Unable to launch: %1", url.toLocalFile()));
       slotParseQuote(QString());
@@ -157,16 +158,19 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
     }
     QFile::remove(tmpFile);
     const QUrl dest = QUrl::fromLocalFile(tmpFile);
-    KIO::Scheduler::checkSlaveOnHold(true);
-    KIO::Job *job = KIO::file_copy(url, dest, -1, KIO::HideProgressInfo);
-    connect(job, SIGNAL(result(KJob*)),
-            this, SLOT(downloadResult(KJob*)));
+    // TODO: port to kf5
+    //KIO::Scheduler::checkSlaveOnHold(true);
+    //KIO::Job *job = KIO::file_copy(url, dest, -1, KIO::HideProgressInfo);
+    //connect(job, SIGNAL(result(KJob*)),
+    //        this, SLOT(downloadResult(KJob*)));
   }
   return true;
 }
 
 void WebPriceQuote::downloadResult(KJob* job)
 {
+  // TODO: port to kf5
+#if 0
   QString tmpFile = dynamic_cast<KIO::FileCopyJob*>(job)->destUrl().toLocalFile();
   QUrl url = dynamic_cast<KIO::FileCopyJob*>(job)->srcUrl();
   if (!job->error())
@@ -193,6 +197,7 @@ void WebPriceQuote::downloadResult(KJob* job)
     emit error(job->errorString());
     slotParseQuote(QString());
   }
+#endif
 }
 
 bool WebPriceQuote::launchFinanceQuote(const QString& _symbol, const QString& _id,
@@ -210,6 +215,8 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _symbol, const QString& _i
 
   //emit status(QString("(Debug) symbol=%1 id=%2...").arg(_symbol,_id));
 
+  // TODO: port to kf5
+#if 0
   d->m_filter.clearProgram();
   d->m_filter << "perl" << m_financeQuoteScriptPath << FQSource << KShell::quoteArg(_symbol);
   d->m_filter.setSymbol(d->m_symbol);
@@ -217,7 +224,7 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _symbol, const QString& _i
 
   d->m_filter.setOutputChannelMode(KProcess::MergedChannels);
   d->m_filter.start();
-
+#endif
   // This seems to work best if we just block until done.
   if (d->m_filter.waitForFinished()) {
     result = true;
@@ -763,6 +770,8 @@ void FinanceQuoteProcess::slotProcessExited()
 
 void FinanceQuoteProcess::launch(const QString& scriptPath)
 {
+  // TODO: port to kf5
+#if 0
   clearProgram();
 
   *this << "perl" << scriptPath << "-l";
@@ -770,6 +779,7 @@ void FinanceQuoteProcess::launch(const QString& scriptPath)
   start();
   if (! waitForStarted()) qWarning("Unable to start FQ script");
   return;
+#endif
 }
 
 const QStringList FinanceQuoteProcess::getSourceList() const
@@ -882,8 +892,8 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
           // maybe it's a textual date
           unsigned i = 1;
           while (i <= 12) {
-            if (KLocale::global()->calendar()->monthName(i, 2000).toLower() == *it_scanned
-                || KLocale::global()->calendar()->monthName(i, 2000, KCalendarSystem::ShortName).toLower() == *it_scanned)
+            if (QLocale().monthName(i).toLower() == *it_scanned
+                || QLocale().monthName(i, QLocale::ShortFormat).toLower() == *it_scanned)
               month = i;
             ++i;
           }

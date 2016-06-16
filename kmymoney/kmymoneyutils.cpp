@@ -36,11 +36,12 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <klocale.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <KColorScheme>
+#include <KLocalizedString>
+#include <KXmlGuiWindow>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -231,11 +232,14 @@ bool KMyMoneyUtils::appendCorrectFileExt(QString& str, const QString& strExtToUs
 
 void KMyMoneyUtils::checkConstants()
 {
+  // TODO: port to kf5
+#if 0
   Q_ASSERT(static_cast<int>(KLocale::ParensAround) == static_cast<int>(MyMoneyMoney::ParensAround));
   Q_ASSERT(static_cast<int>(KLocale::BeforeQuantityMoney) == static_cast<int>(MyMoneyMoney::BeforeQuantityMoney));
   Q_ASSERT(static_cast<int>(KLocale::AfterQuantityMoney) == static_cast<int>(MyMoneyMoney::AfterQuantityMoney));
   Q_ASSERT(static_cast<int>(KLocale::BeforeMoney) == static_cast<int>(MyMoneyMoney::BeforeMoney));
   Q_ASSERT(static_cast<int>(KLocale::AfterMoney) == static_cast<int>(MyMoneyMoney::AfterMoney));
+#endif
 }
 
 QString KMyMoneyUtils::variableCSS()
@@ -256,8 +260,9 @@ QString KMyMoneyUtils::variableCSS()
 
 QString KMyMoneyUtils::findResource(QStandardPaths::StandardLocation type, const QString& filename)
 {
-  QString language = KLocale::global()->language();
-  QString country = KLocale::global()->country();
+  // TODO: port to kf5
+  QString language = "en";//KLocale::global()->language();
+  QString country = "US";//KLocale::global()->country();
   QString rc, mask;
 
   // check that the placeholder is present

@@ -31,10 +31,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <klineedit.h>
 #include <kmessagebox.h>
-#include <knuminput.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -70,7 +69,7 @@ enum steps {
   StepFinish
 };
 
-Wizard::Wizard(QWidget *parent, bool modal, Qt::WFlags flags)
+Wizard::Wizard(QWidget *parent, bool modal, Qt::WindowFlags flags)
     : KMyMoneyWizard(parent, modal, flags)
 {
   setTitle(i18n("KMyMoney New Account Setup"));
@@ -1576,7 +1575,7 @@ void AccountSummaryPage::enterPage()
   m_dataList->append(i18n("Type: %1", accTypeText));
 
   m_dataList->append(i18n("Currency: %1", m_wizard->currency().name()));
-  m_dataList->append(i18n("Opening date: %1", KLocale::global()->formatDate(acc.openingDate())));
+  m_dataList->append(i18n("Opening date: %1", QLocale().toString(acc.openingDate())));
   if (m_wizard->currency().id() != MyMoneyFile::instance()->baseCurrency().id()) {
     m_dataList->append(i18n("Conversion rate: %1", m_wizard->conversionRate().rate(QString()).formatMoney("", KMyMoneyGlobalSettings::pricePrecision())));
   }
@@ -1637,7 +1636,7 @@ void AccountSummaryPage::enterPage()
         else
           m_dataList->append(i18n("Transfer amount from %1", m_wizard->m_loanPayoutPage->m_assetAccount->currentText()));
       }
-      m_dataList->append(i18n("Payment date: %1 ", KLocale::global()->formatDate(m_wizard->m_loanPayoutPage->m_payoutDate->date())));
+      m_dataList->append(i18n("Payment date: %1 ", QLocale().toString(m_wizard->m_loanPayoutPage->m_payoutDate->date())));
     }
   }
 
@@ -1653,13 +1652,13 @@ void AccountSummaryPage::enterPage()
       m_dataList->append(i18n("Paid from %1", paymentAccount.name()));
       m_dataList->append(i18n("Pay to %1", m_wizard->m_schedulePage->m_payee->currentText()));
       m_dataList->append(i18n("Amount: %1", MyMoneyUtils::formatMoney(m_wizard->m_schedulePage->m_amount->value(), acc, sec)));
-      m_dataList->append(i18n("First payment due on %1", KLocale::global()->formatDate(sch.nextDueDate())));
+      m_dataList->append(i18n("First payment due on %1", QLocale().toString(sch.nextDueDate())));
       m_dataList->append(i18n("Payment method: %1", m_wizard->m_schedulePage->m_method->currentText()));
     }
     if (acc.isLoan()) {
       m_dataList->append(i18n("Occurrence: %1", m_wizard->m_generalLoanInfoPage->m_paymentFrequency->currentText()));
       m_dataList->append(i18n("Amount: %1", MyMoneyUtils::formatMoney(m_wizard->m_loanPaymentPage->basePayment() + m_wizard->m_loanPaymentPage->additionalFees(), acc, sec)));
-      m_dataList->append(i18n("First payment due on %1", KLocale::global()->formatDate(m_wizard->m_loanSchedulePage->firstPaymentDueDate())));
+      m_dataList->append(i18n("First payment due on %1", QLocale().toString(m_wizard->m_loanSchedulePage->firstPaymentDueDate())));
     }
   }
 }

@@ -62,6 +62,9 @@
 #include <QKeySequence>
 #include <QIcon>
 #include <QInputDialog>
+#include <QProgressDialog>
+#include <QProcess>
+#include <QStatusBar>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -69,24 +72,17 @@
 #include <ktoolbar.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
-#include <kfiledialog.h>
-#include <kmenubar.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kconfig.h>
 #include <kstandardaction.h>
 #include <ktoggleaction.h>
 #include <kactioncollection.h>
 #include <kactionmenu.h>
-#include <kstatusbar.h>
 #include <ktip.h>
-#include <QProgressDialog>
-#include <kio/netaccess.h>
-#include <kstartupinfo.h>
 #include <krun.h>
 #include <kconfigdialog.h>
 #include <kxmlguifactory.h>
 #include <krecentfilesaction.h>
-#include <kaction.h>
 #include <ktoolinvocation.h>
 #include <KSharedConfig>
 #ifdef KF5Holidays_FOUND
@@ -290,7 +286,7 @@ public:
     */
   bool    m_backupMount;
 
-  KProcess m_proc;
+  QProcess m_proc;
 
   /// A pointer to the view holding the tabs.
   KMyMoneyView *m_myMoneyView;
@@ -427,8 +423,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   d->m_backupState = BACKUP_IDLE;
 
-  int weekStart = KLocale::global()->workingWeekStartDay();
-  int weekEnd = KLocale::global()->workingWeekEndDay();
+  // TODO: port kf5
+  int weekStart = 1;//KLocale::global()->workingWeekStartDay();
+  int weekEnd = 7;//KLocale::global()->workingWeekEndDay();
   bool startFirst = (weekStart < weekEnd);
   for (int i = 0; i < 8; i++) {
     if (startFirst)
@@ -1505,7 +1502,7 @@ void KMyMoneyApp::slotFileNew()
   }
 }
 
-QUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, const QString& mask, KFile::Mode mode, QWidget* widget)
+QUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, const QString& mask, QFileDialog::FileMode mode, QWidget* widget)
 {
   QString path(_path);
 
@@ -1514,12 +1511,14 @@ QUrl KMyMoneyApp::selectFile(const QString& /*title*/, const QString& _path, con
   if (path.isEmpty())
     path = "kfiledialog:///kmymoney-import";
 
-  QPointer<KFileDialog> dialog = new KFileDialog(QUrl(path), mask, this, widget);
-  dialog->setMode(mode);
+  // TODO: port KF5
+  QPointer<QFileDialog> dialog = new QFileDialog(this, QString(), path);
+  //dialog->setMode(mode);
 
   QUrl url;
   if (dialog->exec() == QDialog::Accepted && dialog != 0) {
-    url = dialog->selectedUrl();
+    // TODO: port KF5
+    //url = dialog->selectedUrl();
   }
 
   // in case we have an additional widget, we remove it from the
@@ -1619,12 +1618,14 @@ void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
     QUrl newurl = url;
     if ((newurl.scheme() == "sql")) {
       if (QUrlQuery(newurl).queryItemValue("driver") == "QMYSQL3") { // fix any old urls
-        newurl.removeQueryItem("driver");
-        newurl.addQueryItem("driver", "QMYSQL");
+        // TODO: port KF5
+        //newurl.removeQueryItem("driver");
+        //newurl.addQueryItem("driver", "QMYSQL");
       }
       if (QUrlQuery(newurl).queryItemValue("driver") == "QSQLITE3") {
-        newurl.removeQueryItem("driver");
-        newurl.addQueryItem("driver", "QSQLITE");
+        // TODO: port KF5
+        //newurl.removeQueryItem("driver");
+        //newurl.addQueryItem("driver", "QSQLITE");
       }
       // check if a password is needed. it may be if the URL came from the last/recent file list
       QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::ReadWrite, newurl);
@@ -1644,7 +1645,8 @@ void KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
       }
       delete dialog;
     }
-    if ((newurl.scheme() == "sql") || (newurl.isValid() && KIO::NetAccess::exists(newurl, KIO::NetAccess::SourceSide, this))) {
+    // TODO: port KF5
+    if ((newurl.scheme() == "sql") || (newurl.isValid() /*&& KIO::NetAccess::exists(newurl, KIO::NetAccess::SourceSide, this)*/)) {
       slotFileClose();
       if (!d->m_myMoneyView->fileOpen()) {
         try {
@@ -1803,26 +1805,25 @@ bool KMyMoneyApp::slotFileSaveAs()
   // adjust to our local needs (filetypes etc.) and
   // enhanced to show the d->m_saveEncrypted combo box
   bool specialDir = !prevDir.isEmpty() && prevDir.at(0) == QLatin1Char(':');
-  QPointer<KFileDialog> dlg =
-    new KFileDialog(specialDir ? prevDir : QString(),
+  // TODO: port KF5
+  QPointer<QFileDialog> dlg =
+    new QFileDialog(this, i18n("Save As"), specialDir ? prevDir : QString(),
                     QString("%1|%2\n").arg("*.kmy").arg(i18nc("KMyMoney (Filefilter)", "KMyMoney files")) +
                     QString("%1|%2\n").arg("*.xml").arg(i18nc("XML (Filefilter)", "XML files")) +
                     QString("%1|%2\n").arg("*.anon.xml").arg(i18nc("Anonymous (Filefilter)", "Anonymous files")) +
-                    QString("%1|%2\n").arg("*").arg(i18nc("All files (Filefilter)", "All files")),
-                    this, vbox);
-  dlg->setOperationMode(KFileDialog::Saving);
+                    QString("%1|%2\n").arg("*").arg(i18nc("All files (Filefilter)", "All files")));
+  dlg->setAcceptMode(QFileDialog::AcceptSave);
   connect(dlg, SIGNAL(filterChanged(QString)), this, SLOT(slotFileSaveAsFilterChanged(QString)));
 
-  if (!specialDir)
-    dlg->setSelection(prevDir);   // may also be a filename
-
-  dlg->setWindowTitle(i18n("Save As"));
+  // TODO: port KF5
+  //if (!specialDir)
+  //  dlg->setSelection(prevDir);   // may also be a filename
 
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
 
     d->consistencyCheck(false);
 
-    QUrl newURL = dlg->selectedUrl();
+    QUrl newURL = dlg->selectedUrls().isEmpty() ? QUrl() : dlg->selectedUrls().first();
 
     // deleting the dialog will delete the combobox pointed to by d->m_saveEncrypted so get the key name here
     QString selectedKeyName;
@@ -2477,10 +2478,11 @@ bool KMyMoneyApp::okToWriteFile(const QUrl &url)
   // check if the file exists and warn the user
   bool reallySaveFile = true;
 
-  if (KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this)) {
-    if (KMessageBox::warningYesNo(this, QLatin1String("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile)) + QLatin1String("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
-      reallySaveFile = false;
-  }
+  // TODO: port KF5
+  //if (KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this)) {
+  //  if (KMessageBox::warningYesNo(this, QLatin1String("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile)) + QLatin1String("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
+  //    reallySaveFile = false;
+  //}
   return reallySaveFile;
 }
 
@@ -2624,7 +2626,8 @@ void KMyMoneyApp::slotFileBackup()
                        i18n("Local files only"));
     return;
   }
-
+  // TODO: port KF5
+#if 0
   QPointer<KBackupDlg> backupDlg = new KBackupDlg(this);
   int returncode = backupDlg->exec();
   if (returncode == QDialog::Accepted && backupDlg != 0) {
@@ -2651,12 +2654,15 @@ void KMyMoneyApp::slotFileBackup()
   }
 
   delete backupDlg;
+#endif
 }
 
 
 /** No descriptions */
 void KMyMoneyApp::slotProcessExited()
 {
+  // TODO: port KF5
+#if 0
   switch (d->m_backupState) {
     case BACKUP_MOUNTING:
 
@@ -2780,6 +2786,7 @@ void KMyMoneyApp::slotProcessExited()
       ready();
       break;
   }
+#endif
 }
 
 void KMyMoneyApp::slotShowTipOfTheDay()
@@ -4365,7 +4372,7 @@ void KMyMoneyApp::slotScheduleEdit()
                   // than previous payment.  Date would be
                   // updated automatically so we probably
                   // want to clear it.  Let's ask the user.
-                  if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered a scheduled transaction date of <b>%1</b>.  Because the scheduled transaction was last paid on <b>%2</b>, KMyMoney will automatically adjust the scheduled transaction date to the next date unless the last payment date is reset.  Do you want to reset the last payment date?", KLocale::global()->formatDate(next, KLocale::ShortDate), KLocale::global()->formatDate(last, KLocale::ShortDate)) + QString("</qt>"), i18n("Reset Last Payment Date"), KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::Yes) {
+                  if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered a scheduled transaction date of <b>%1</b>.  Because the scheduled transaction was last paid on <b>%2</b>, KMyMoney will automatically adjust the scheduled transaction date to the next date unless the last payment date is reset.  Do you want to reset the last payment date?", QLocale().toString(next, QLocale::ShortFormat), QLocale().toString(last, QLocale::ShortFormat)) + QString("</qt>"), i18n("Reset Last Payment Date"), KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::Yes) {
                     sched.setLastPayment(QDate());
                   }
                 }
@@ -4481,7 +4488,7 @@ void KMyMoneyApp::skipSchedule(MyMoneySchedule& schedule)
       if (!schedule.isFinished()) {
         if (schedule.occurrence() != MyMoneySchedule::OCCUR_ONCE) {
           QDate next = schedule.nextDueDate();
-          if (!schedule.isFinished() && (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?", schedule.name(), KLocale::global()->formatDate(next, KLocale::ShortDate)) + QString("</qt>"))) == KMessageBox::Yes) {
+          if (!schedule.isFinished() && (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?", schedule.name(), QLocale().toString(next, QLocale::ShortFormat)) + QString("</qt>"))) == KMessageBox::Yes) {
             MyMoneyFileTransaction ft;
             schedule.setLastPayment(next);
             schedule.setNextDueDate(schedule.nextPayment(next));
@@ -5269,7 +5276,7 @@ void KMyMoneyApp::slotCurrencySetBase()
 void KMyMoneyApp::slotBudgetNew()
 {
   QDate date = QDate::currentDate();
-  date.setYMD(date.year(), 1, 1);
+  date.setDate(date.year(), 1, 1);
   QString newname = i18n("Budget <numid>%1</numid>", date.year());
 
   MyMoneyBudget budget;
@@ -7248,7 +7255,8 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
 
       // Bring this window to the forefront.  This method was suggested by
       // Lubos Lunak <l.lunak@suse.cz> of the KDE core development team.
-      KStartupInfo::setNewStartupId(this, asn_id);
+      // TODO: port KF5
+      //KStartupInfo::setNewStartupId(this, asn_id);
 
       // Make sure we have an open file
       if (! d->m_myMoneyView->fileOpen() &&
@@ -7820,7 +7828,7 @@ void KMyMoneyApp::preloadHolidays()
     KHolidays::Holiday::List holidayList = d->m_holidayRegion->holidays(QDate::currentDate(), endDate);
     KHolidays::Holiday::List::const_iterator holiday_it;
     for (holiday_it = holidayList.constBegin(); holiday_it != holidayList.constEnd(); ++holiday_it) {
-      for (QDate holidayDate = (*holiday_it).observedStartDate(); holidayDate <= (*holiday_it).observedEndDate(); holidayDate.addDays(1))
+      for (QDate holidayDate = (*holiday_it).observedStartDate(); holidayDate <= (*holiday_it).observedEndDate(); holidayDate = holidayDate.addDays(1))
         d->m_holidayMap.insert(holidayDate, false);
     }
 

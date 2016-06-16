@@ -30,11 +30,11 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
 #include <kiconloader.h>
 #include <khelpclient.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

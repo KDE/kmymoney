@@ -45,7 +45,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <kguiitem.h>

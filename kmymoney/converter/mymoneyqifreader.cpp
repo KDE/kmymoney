@@ -37,12 +37,11 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
-#include <kio/netaccess.h>
 #include <KConfigGroup>
 #include <KSharedConfig>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -410,6 +409,8 @@ bool MyMoneyQifReader::startImport()
   m_filename.clear();
   m_data.clear();
 
+  // TODO: port to kf5
+#if 0
   if (!KIO::NetAccess::download(m_url, m_filename, 0)) {
     KMessageBox::detailedError(0,
                                i18n("Error while loading file '%1'.", m_url.toDisplayString()),
@@ -417,7 +418,6 @@ bool MyMoneyQifReader::startImport()
                                i18n("File access error"));
     return false;
   }
-
   m_file = new QFile(m_filename);
   if (m_file->open(QIODevice::ReadOnly)) {
 
@@ -467,6 +467,7 @@ bool MyMoneyQifReader::startImport()
     }
 #endif
   }
+#endif
   return rc;
 }
 
@@ -511,7 +512,8 @@ bool MyMoneyQifReader::finishImport()
     m_accountTranslation.clear();
 
     signalProgress(-1, -1);
-    rc = !m_userAbort && KProcess::NormalExit == m_filter.exitStatus();
+    // TODO: port to kf5
+    //rc = !m_userAbort && KProcess::NormalExit == m_filter.exitStatus();
   } else {
     qWarning("MyMoneyQifReader::finishImport() must not be called while the filter\n\tprocess is still running.");
   }
@@ -520,7 +522,8 @@ bool MyMoneyQifReader::finishImport()
   // if a temporary file was constructed by NetAccess::download,
   // then it will be removed with the next call. Otherwise, it
   // stays untouched on the local filesystem
-  KIO::NetAccess::removeTempFile(m_filename);
+  // TODO: port to kf5
+  //KIO::NetAccess::removeTempFile(m_filename);
 
   // Now to import the statements
   QList<MyMoneyStatement>::const_iterator it_st;

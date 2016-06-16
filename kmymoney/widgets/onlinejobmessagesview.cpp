@@ -20,8 +20,6 @@
 
 #include "ui_onlinejobmessagesview.h"
 
-#include <KStandardDirs>
-
 onlineJobMessagesView::onlineJobMessagesView(QWidget* parent)
     : QWidget(parent),
     ui(new Ui::onlineJobMessageView)

@@ -18,13 +18,10 @@
 #include "existingtransactionmatchfinder.h"
 
 #include <QTest>
-#include <qtest_kde.h>
 
 #include "mymoneyfile.h"
 
-QTEST_KDEMAIN_CORE_WITH_COMPONENTNAME(MatchFinderTest, "kmymoney")
-
-
+QTEST_MAIN(MatchFinderTest)
 
 void MatchFinderTest::init()
 {

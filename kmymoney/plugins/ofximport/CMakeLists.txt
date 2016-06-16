@@ -22,7 +22,6 @@ target_link_libraries(kmm_ofximport
                       kmm_mymoney
                       kmm_widgets
                       kmm_plugin
-                      KF5::KDELibs4Support
                       KF5::Wallet
                       Alkimia::alkimia
                       ${LIBOFX_LIBRARIES})

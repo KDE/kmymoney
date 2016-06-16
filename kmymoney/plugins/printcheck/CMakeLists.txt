@@ -16,7 +16,6 @@ add_library(kmm_printcheck MODULE ${kmm_printcheck_PART_SRCS})
 kcoreaddons_desktop_to_json(kmm_printcheck kmm_printcheck.desktop)
 
 target_link_libraries(kmm_printcheck
-                      KF5::KDELibs4Support
                       KF5::KHtml
                       Alkimia::alkimia
                       kmm_mymoney kmm_plugin
@@ -53,7 +52,6 @@ add_library(kcm_kmm_printcheck MODULE ${kcm_kmm_printcheck_PART_SRCS})
 kcoreaddons_desktop_to_json(kcm_kmm_printcheck kcm_kmm_printcheck.desktop)
 
 target_link_libraries(kcm_kmm_printcheck
-                      KF5::KDELibs4Support
                       KF5::KHtml
                       KF5::CoreAddons
                       Alkimia::alkimia

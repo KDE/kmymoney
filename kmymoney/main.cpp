@@ -39,8 +39,7 @@
 // KDE Includes
 
 #include <KAboutData>
-#include <KStartupInfo>
-#include <KLocale>
+#include <KLocalizedString>
 #include <ktip.h>
 #include <KMessageBox>
 #include <Kdelibs4ConfigMigrator>
@@ -196,28 +195,31 @@ int main(int argc, char *argv[])
 
   KMyMoneyUtils::checkConstants();
 
+  // TODO: port to kf5
+#if 0
   if (KLocale::global()->monetaryDecimalSymbol().isEmpty()) {
     KMessageBox::error(0, i18n("The monetary decimal symbol is not correctly set in the KDE System Settings module Country/Region & Language. Please set it to a reasonable value and start KMyMoney again."), i18n("Invalid settings"));
     exit(1);
   }
-
+#endif
   // show startup logo
   std::unique_ptr<KStartupLogo> splash = std::unique_ptr<KStartupLogo>(new KStartupLogo());
   app.processEvents();
 
   // setup the MyMoneyMoney locale settings according to the KDE settings
-  MyMoneyMoney::setThousandSeparator(KLocale::global()->monetaryThousandsSeparator()[0]);
-  MyMoneyMoney::setDecimalSeparator(KLocale::global()->monetaryDecimalSymbol()[0]);
-  MyMoneyMoney::setNegativeMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->negativeMonetarySignPosition()));
-  MyMoneyMoney::setPositiveMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->positiveMonetarySignPosition()));
-  MyMoneyMoney::setNegativePrefixCurrencySymbol(KLocale::global()->negativePrefixCurrencySymbol());
-  MyMoneyMoney::setPositivePrefixCurrencySymbol(KLocale::global()->positivePrefixCurrencySymbol());
+  // TODO: port to kf5
+  //MyMoneyMoney::setThousandSeparator(KLocale::global()->monetaryThousandsSeparator()[0]);
+  MyMoneyMoney::setDecimalSeparator(QLocale().decimalPoint());
+  //MyMoneyMoney::setNegativeMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->negativeMonetarySignPosition()));
+  //MyMoneyMoney::setPositiveMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->positiveMonetarySignPosition()));
+  //MyMoneyMoney::setNegativePrefixCurrencySymbol(KLocale::global()->negativePrefixCurrencySymbol());
+  //MyMoneyMoney::setPositivePrefixCurrencySymbol(KLocale::global()->positivePrefixCurrencySymbol());
 
   QString language = parser.value(langOption);
   if (!language.isEmpty()) {
-    if (!KLocale::global()->setLanguage(QStringList() << language)) {
-      qWarning("Unable to select language '%s'. This has one of two reasons:\n\ta) the standard KDE message catalog is not installed\n\tb) the KMyMoney message catalog is not installed", qPrintable(language));
-    }
+    //if (!KLocale::global()->setLanguage(QStringList() << language)) {
+    //  qWarning("Unable to select language '%s'. This has one of two reasons:\n\ta) the standard KDE message catalog is not installed\n\tb) the KMyMoney message catalog is not installed", qPrintable(language));
+    //}
   }
 
 #ifdef KMM_DEBUG
@@ -339,8 +341,9 @@ int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, const QUr
   }
   KMyMoneyGlobalSettings::setFirstTimeRun(false);
 
-  if (!importfile.isEmpty())
-    kmymoney->webConnect(importfile, KStartupInfo::startupId());
+  // TODO: port to kf5
+  //if (!importfile.isEmpty())
+  //  kmymoney->webConnect(importfile, KStartupInfo::startupId());
 
   kmymoney->updateCaption();
   kmymoney->centralWidget()->setEnabled(true);

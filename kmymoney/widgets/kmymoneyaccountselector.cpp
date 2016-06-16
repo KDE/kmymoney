@@ -50,7 +50,7 @@
 #include "kmymoneyutils.h"
 #include "kmymoneyglobalsettings.h"
 
-kMyMoneyAccountSelector::kMyMoneyAccountSelector(QWidget *parent, Qt::WFlags flags, const bool createButtons) :
+kMyMoneyAccountSelector::kMyMoneyAccountSelector(QWidget *parent, Qt::WindowFlags flags, const bool createButtons) :
     KMyMoneySelector(parent, flags),
     m_allAccountsButton(0),
     m_noAccountButton(0),

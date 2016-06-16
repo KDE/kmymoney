@@ -60,7 +60,7 @@ set(plugins_HEADERS
 
 add_library(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
 generate_export_header(kmm_plugin BASE_NAME kmm_plugin)
-target_link_libraries(kmm_plugin PUBLIC KF5::KCMUtils KF5::KIOWidgets KF5::XmlGui KF5::KDELibs4Support Qt5::Gui kmm_mymoney Alkimia::alkimia)
+target_link_libraries(kmm_plugin PUBLIC KF5::XmlGui KF5::KCMUtils KF5::KIOWidgets KF5::XmlGui Qt5::Gui Qt5::Widgets kmm_mymoney Alkimia::alkimia)
 set_target_properties(kmm_plugin PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
 
 ########### install files ###############

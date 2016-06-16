@@ -577,7 +577,7 @@ The names are retained and may be selected from the list here.</string>
         </widget>
        </item>
        <item row="5" column="7">
-        <widget class="KPushButton" name="buttonInv_hideSecurity">
+        <widget class="QPushButton" name="buttonInv_hideSecurity">
          <property name="minimumSize">
           <size>
            <width>130</width>
@@ -603,7 +603,7 @@ It does not affect the underlying security itself.</string>
         </widget>
        </item>
        <item row="2" column="7">
-        <widget class="KPushButton" name="button_clear">
+        <widget class="QPushButton" name="button_clear">
          <property name="minimumSize">
           <size>
            <width>100</width>
@@ -676,7 +676,7 @@ It does not affect the underlying security itself.</string>
   <customwidget>
    <class>QPushButton</class>
    <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
+   <header>QPushButton</header>
   </customwidget>
  </customwidgets>
  <resources/>

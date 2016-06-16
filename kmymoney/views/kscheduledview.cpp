@@ -40,7 +40,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kconfig.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
@@ -381,7 +381,7 @@ QTreeWidgetItem* KScheduledView::addScheduleItem(QTreeWidgetItem* parent, MyMone
       item->setText(4, i18nc("Finished schedule", "Finished"));
     } else {
       nextDueDate = schedule.adjustedNextDueDate();
-      item->setText(4, KLocale::global()->formatDate(schedule.adjustedNextDueDate(), KLocale::ShortDate));
+      item->setText(4, QLocale().toString(schedule.adjustedNextDueDate(), QLocale::ShortFormat));
     }
     item->setData(4, KScheduleTreeItem::OrderRole, QVariant(nextDueDate));
     item->setText(5, i18nc("Frequency of schedule", schedule.occurrenceToString().toLatin1()));

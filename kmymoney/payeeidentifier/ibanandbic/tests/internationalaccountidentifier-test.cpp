@@ -21,8 +21,6 @@
 #include "../ibanbicdata.h"
 
 #include <QtTest>
-#include <KGlobal>
-#include <KStandardDirs>
 
 QTEST_MAIN(internationalAccountIdentifierTest);
 

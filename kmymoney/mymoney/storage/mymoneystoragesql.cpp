@@ -30,6 +30,7 @@
 #include <QDateTime>
 #include <QStringList>
 #include <QIODevice>
+#include <QUrlQuery>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QList>

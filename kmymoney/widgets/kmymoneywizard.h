@@ -342,7 +342,7 @@ protected:
   * {
   *   Q_OBJECT
   * public:
-  *   KNewUserWizard(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags flags = 0);
+  *   KNewUserWizard(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags flags = 0);
   *
   * private:
   *   KNewUserGeneral*  m_generalPage;
@@ -360,7 +360,7 @@ protected:
   * The implementation is also easy and looks like this:
   *
   * @code
-  * KNewUserWizard::KNewUserWizard(QWidget* parent, const char* name, bool modal, Qt::WFlags flags) :
+  * KNewUserWizard::KNewUserWizard(QWidget* parent, const char* name, bool modal, Qt::WindowFlags flags) :
   *   KMyMoneyWizard(parent, name, modal, flags)
   * {
   *   setTitle("KMyMoney New User Setup");
@@ -458,7 +458,7 @@ protected:
   /**
     * Constructor (kept protected, so that one cannot create such an object directly)
     */
-  KMyMoneyWizard(QWidget *parent = 0, bool modal = false, Qt::WFlags f = 0);
+  KMyMoneyWizard(QWidget *parent = 0, bool modal = false, Qt::WindowFlags f = 0);
 
   /**
     * This method sets up the first page after creation of the object

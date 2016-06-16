@@ -37,7 +37,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <ktextedit.h>
 #include <QProgressDialog>
@@ -45,6 +44,7 @@
 #include <KGuiItem>
 #include <KStandardGuiItem>
 #include <KSharedConfig>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -495,14 +495,14 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
       if (date > QDate::currentDate())
         date = QDate::currentDate();
 
-      double price = _price;
+      MyMoneyMoney price = MyMoneyMoney(_price);
       QString id = _id.toUtf8();
       MyMoneySecurity sec;
       if (_id.contains(" ") == 0) {
         MyMoneySecurity security = MyMoneyFile::instance()->security(id);
         QString factor = security.value("kmm-online-factor");
         if (!factor.isEmpty()) {
-          price *= MyMoneyMoney(factor).toDouble();
+          price = price * MyMoneyMoney(factor);
         }
         try {
           sec = MyMoneyFile::instance()->security(id);
@@ -521,7 +521,7 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _id, const QString&
           }
         }
       }
-      item->setText(PRICE_COL, KLocale::global()->formatMoney(price, sec.tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision()));
+      item->setText(PRICE_COL, price.formatMoney(sec.tradingSymbol(), KMyMoneyGlobalSettings::pricePrecision()));
       item->setText(DATE_COL, date.toString(Qt::ISODate));
       logStatusMessage(i18n("Price for %1 updated (id %2)", _symbol, _id));
       // make sure to make OK button available

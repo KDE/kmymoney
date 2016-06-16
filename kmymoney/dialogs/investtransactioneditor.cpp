@@ -33,10 +33,10 @@
 // KDE Includes
 
 #include <ktextedit.h>
-#include <klocale.h>
 #include <kcombobox.h>
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

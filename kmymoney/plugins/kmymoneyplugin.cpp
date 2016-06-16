@@ -23,9 +23,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kcomponentdata.h>
 #include <kaboutdata.h>
-#include <kaction.h>
 #include <KToggleAction>
 #include <KActionCollection>
 // ----------------------------------------------------------------------------

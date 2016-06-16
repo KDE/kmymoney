@@ -30,9 +30,9 @@
 
 #include <kcombobox.h>
 #include <kurlrequester.h>
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <khelpclient.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

@@ -61,7 +61,7 @@ class kMyMoneyAccountSelector : public KMyMoneySelector
 public:
   friend class AccountSet;
 
-  explicit kMyMoneyAccountSelector(QWidget *parent = 0, Qt::WFlags flags = 0, const bool createButtons = true);
+  explicit kMyMoneyAccountSelector(QWidget *parent = 0, Qt::WindowFlags flags = 0, const bool createButtons = true);
   virtual ~kMyMoneyAccountSelector();
 
   /**

@@ -44,7 +44,6 @@ add_library(kcm_kmm_icalendarexport MODULE ${kcm_kmm_icalendarexport_PART_SRCS})
 kcoreaddons_desktop_to_json(kcm_kmm_icalendarexport kcm_kmm_icalendarexport.desktop)
 
 target_link_libraries(kcm_kmm_icalendarexport
-                      KF5::KDELibs4Support
                       KF5::KIOWidgets
                       )
 

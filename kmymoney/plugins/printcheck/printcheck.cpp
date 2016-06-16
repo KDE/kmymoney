@@ -22,9 +22,6 @@
 
 // KDE includes
 #include <KPluginFactory>
-#include <KAction>
-#include <KStandardDirs>
-#include <KLocale>
 #include <KActionCollection>
 #include <KPluginInfo>
 #include <khtmlview.h>
@@ -142,7 +139,7 @@ void KMMPrintCheckPlugin::slotPrintCheck()
     checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
     checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
     // data about the transaction
-    checkHTML.replace("$DATE", KLocale::global()->formatDate((*it).transaction().postDate(), KLocale::LongDate));
+    checkHTML.replace("$DATE", QLocale().toString((*it).transaction().postDate(), QLocale::ShortFormat));
     checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
     checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
     checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());

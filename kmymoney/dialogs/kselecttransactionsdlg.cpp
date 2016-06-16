@@ -30,7 +30,7 @@
 // KDE Includes
 
 #include <kstandardguiitem.h>
-#include <klocale.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

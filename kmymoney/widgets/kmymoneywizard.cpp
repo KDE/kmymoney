@@ -33,9 +33,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kstandardguiitem.h>
-#include <kiconloader.h>
 #include <KColorScheme>
 #include <khelpclient.h>
 
@@ -112,7 +111,7 @@ QString KMyMoneyWizardPage::helpContext() const
   return QString();
 }
 
-KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WFlags f) :
+KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WindowFlags f) :
     QDialog(parent, f),
     m_step(0)
 {

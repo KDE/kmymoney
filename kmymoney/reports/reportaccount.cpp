@@ -30,8 +30,6 @@
 // (e.g. MyMoneyAccount::Checkings) into their text representation.  We also
 // use that text representation in the core data structure of the report. (Ace)
 
-#include <klocale.h>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 

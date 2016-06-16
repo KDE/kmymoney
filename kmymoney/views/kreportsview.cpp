@@ -35,13 +35,14 @@
 #include <QCheckBox>
 #include <QMimeData>
 #include <QIcon>
+#include <QUrlQuery>
+#include <QFileInfo>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <khtmlview.h>
 #include <kconfig.h>
-#include <kfiledialog.h>
 #include <kmessagebox.h>
 
 // ----------------------------------------------------------------------------
@@ -100,7 +101,8 @@ KReportsView::KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& re
   parent->setTabEnabled(parent->indexOf(this), true);
 
   // get users character set encoding
-  m_encoding = KLocale::global()->encoding();
+  // TODO: port to kf5
+  //m_encoding = KLocale::global()->encoding();
 }
 
 KReportsView::KReportTab::~KReportTab()
@@ -684,6 +686,8 @@ void KReportsView::slotSaveView()
     d->fSavProps->includeCssCheckBox->setChecked(d->fSavProps->cbIsChecked);
 
     QString filterList = d->fSavProps->filtCsv + '\n' + d->fSavProps->filtHtml;
+    // TODO: port to kf5
+#if 0
     QPointer<KFileDialog> dlg =
       new KFileDialog(QUrl("kfiledialog:///kmymoney-export"), filterList, this,
                       qobject_cast<QWidget*>(d->fSavProps->includeCssCheckBox));
@@ -725,6 +729,7 @@ void KReportsView::slotSaveView()
     }
     delete d->fSavProps->includeCssCheckBox;
     delete dlg;
+#endif
   }
 }
 

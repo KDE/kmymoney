@@ -26,7 +26,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kdialog.h>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -43,7 +43,7 @@ public:
   }
 };
 
-class KSelectDatabaseDlg : public KDialog
+class KSelectDatabaseDlg : public QDialog
 {
   Q_OBJECT
 public:

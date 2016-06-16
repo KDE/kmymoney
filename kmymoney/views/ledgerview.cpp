@@ -92,7 +92,7 @@ LedgerView::LedgerView(QWidget* parent)
   : QTableView(parent)
   , d(new Private(this))
 {
-  verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+  verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
   verticalHeader()->hide();
 
   // since we don't have a vertical header, it does not make sense

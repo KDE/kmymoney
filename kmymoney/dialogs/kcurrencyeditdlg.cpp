@@ -43,8 +43,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocale>
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

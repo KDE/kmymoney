@@ -25,8 +25,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <kmessagebox.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

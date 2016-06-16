@@ -40,12 +40,12 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <KGuiItem>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Headers

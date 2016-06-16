@@ -31,11 +31,10 @@
 #include <QGridLayout>
 #include <QFrame>
 #include <QKeyEvent>
+#include <QLocale>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <klocale.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -43,7 +42,7 @@
 kMyMoneyCalculator::kMyMoneyCalculator(QWidget* parent)
     : QFrame(parent)
 {
-  m_comma = KLocale::global()->monetaryDecimalSymbol()[0];
+  m_comma = QLocale().decimalPoint();
   m_clearOperandOnDigit = false;
 
   QGridLayout* grid = new QGridLayout(this);
@@ -321,6 +320,8 @@ const QString kMyMoneyCalculator::result() const
   if (txt[0] == '-') {
     txt = txt.mid(1); // get rid of the minus sign
     QString mask;
+    // TODO: port this to kf5
+#if 0
     switch (KLocale::global()->negativeMonetarySignPosition()) {
       case KLocale::ParensAround:
         mask = "(%1)";
@@ -336,6 +337,9 @@ const QString kMyMoneyCalculator::result() const
         mask = "-%1";
         break;
     }
+#else
+    mask = "-%1";
+#endif
     txt = QString(mask).arg(txt);
   }
   return txt;
@@ -421,7 +425,8 @@ void kMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
   bool negative = false;
   // setup operand
   operand = value;
-  operand.replace(QRegExp(QString('\\') + KLocale::global()->thousandsSeparator()), QChar());
+  // TODO: port this to kf5
+  //operand.replace(QRegExp(QString('\\') + ""/* TODO: port to kf5 - KLocale::global()->thousandsSeparator()*/), QChar());
   operand.replace(QRegExp(QString('\\') + m_comma), ".");
   if (operand.contains('(')) {
     negative = true;

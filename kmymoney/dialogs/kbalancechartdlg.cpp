@@ -31,10 +31,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocale>
 #include <KSharedConfig>
 #include <KWindowConfig>
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

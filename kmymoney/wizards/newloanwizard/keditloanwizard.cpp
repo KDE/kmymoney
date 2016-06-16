@@ -34,9 +34,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
-#include <knuminput.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -70,7 +69,7 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent)
     //FIXME: port
     m_effectiveDatePage->m_effectiveDateNoteLabel->setText(QString("\n") + i18n(
           "Note: you will not be able to modify this account today, because the opening date \"%1\" is in the future. "
-          "Please revisit this dialog when the time has come.", KLocale::global()->formatDate(m_account.openingDate())));
+          "Please revisit this dialog when the time has come.", QLocale().toString(m_account.openingDate())));
   } else {
     m_effectiveDatePage->m_effectiveDateNoteLabel->hide();
   }

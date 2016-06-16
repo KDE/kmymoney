@@ -31,8 +31,11 @@
 
 #include <kurlrequester.h>
 #include <QTextBrowser>
-#include <klocale.h>
 #include <khelpclient.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -40,9 +43,18 @@
 // dialog constructor
 KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *)
 {
-  setButtons(Ok | Help);
+  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Help);
+  QWidget *mainWidget = new QWidget(this);
+  QVBoxLayout *mainLayout = new QVBoxLayout;
+  setLayout(mainLayout);
+  mainLayout->addWidget(mainWidget);
+  QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
   m_widget = new KGncImportOptionsDlgDecl();
-  setMainWidget(m_widget);
+  mainLayout->addWidget(m_widget);
 
   m_widget->buttonInvestGroup->setId(m_widget->radioInvest1, 0); // one invest acct per stock
   m_widget->buttonInvestGroup->setId(m_widget->radioInvest2, 1); // one invest acct for all stocks
@@ -70,6 +82,8 @@ KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *)
 
   connect(m_widget->checkDecode, SIGNAL(toggled(bool)), this, SLOT(slotDecodeOptionChanged(bool)));
   connect(this, SIGNAL(helpClicked()), this, SLOT(slotHelp()));
+
+  mainLayout->addWidget(buttonBox);
 }
 
 KGncImportOptionsDlg::~KGncImportOptionsDlg() {}

@@ -28,9 +28,9 @@
 // KDE Includes
 
 #include <kconfig.h>
-#include <klocale.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

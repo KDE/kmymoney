@@ -28,8 +28,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-#include <kglobal.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -502,7 +501,7 @@ QVariant LedgerModel::data(const QModelIndex& index, int role) const
             rc = d->m_ledgerItems[index.row()]->transactionNumber();
             break;
           case DateColumn:
-            rc = KGlobal::locale()->formatDate(d->m_ledgerItems[index.row()]->postDate(), KLocale::ShortDate);
+            rc = QLocale().toString(d->m_ledgerItems[index.row()]->postDate(), QLocale::ShortFormat);
             break;
           case DetailColumn:
             rc = d->m_ledgerItems[index.row()]->counterAccount();

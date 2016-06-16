@@ -31,29 +31,24 @@
 #include <QTableWidget>
 #include <QTextCodec>
 #include <QTimer>
+#include <QStandardPaths>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QPushButton>
+#include <QInputDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kdeversion.h>
 #include <kmessagebox.h>
-#include <QPushButton>
 #include <kguiitem.h>
-#include <QVBoxLayout>
-#include <KAction>
 #include <KSharedConfig>
-#include <KComponentData>
-#include <QInputDialog>
-#include <KFileDialog>
-#include <KFileWidget>
-#include <KStandardDirs>
-#include <KLocale>
-#include <KIO/NetAccess>
 #include "KAboutApplicationDialog"
 #include <KAboutData>
-#include <QStandardPaths>
-#include <QHBoxLayout>
 #include <KIconLoader>
+#include <KConfig>
+#include <KConfigGroup>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -142,7 +137,7 @@ CSVDialog::CSVDialog() : ui(new Ui::CSVDialog)
   m_wiz->init();
   m_wiz->m_investProcessing = m_investProcessing;
 
-  ui->tableWidget->horizontalHeader()->setResizeMode(QHeaderView::Interactive);
+  ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
 
   QFont font(QApplication::font());
   QFontMetrics cellFontMetrics(font);
@@ -575,8 +570,8 @@ void CSVDialog::slotFileDialogClicked()
   if (m_csvPath.isEmpty()) {
     m_csvPath = "~/";
   }
-  QPointer<KFileDialog> dialog = new KFileDialog(QUrl(m_csvPath),
-      i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"), 0);
+  QPointer<QFileDialog> dialog = new QFileDialog(this, QString(), m_csvPath,
+      i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"));
 
   //  Add encoding selection to FileDialog
   QWidget* encodeBox = new QWidget();
@@ -588,12 +583,15 @@ void CSVDialog::slotFileDialogClicked()
   setCodecList(m_codecs);
   connect(m_comboBoxEncode, SIGNAL(activated(int)), this, SLOT(encodingChanged(int)));
 
+  // TODO: port to kf5
+#if 0
   dialog->fileWidget()->setCustomWidget("Encoding", m_comboBoxEncode);
   m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
   dialog->setMode(KFile::File | KFile::ExistingOnly);
   if (dialog->exec() == QDialog::Accepted) {
     m_url = dialog->selectedUrl();
   }
+#endif
   delete dialog;
 
   if (m_url.isEmpty()) {
@@ -601,12 +599,15 @@ void CSVDialog::slotFileDialogClicked()
   }
   m_inFileName.clear();
 
+  // TODO: port to kf5
+#if 0
   if (!KIO::NetAccess::download(m_url, m_inFileName, 0)) {
     KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.toDisplayString()),
                                KIO::NetAccess::lastErrorString(),
                                i18n("File access error"));
     return;
   }
+#endif
   if (m_inFileName.isEmpty()) {
     return;
   }
@@ -1507,14 +1508,9 @@ void CSVDialog::slotSaveAsQIF()
 {
   if (m_fileType == QLatin1String("Banking")) {
     QStringList outFile = m_inFileName.split('.');
-    const QUrl &name = QString((outFile.isEmpty() ? "CsvProcessing" : outFile[0]) + ".qif");
+    const QString &name = QString((outFile.isEmpty() ? "CsvProcessing" : outFile[0]) + ".qif");
 
-    QString outFileName = KFileDialog::getSaveFileName(name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")), 0, i18n("Save QIF")
-#if KDE_IS_VERSION(4,4,0)
-                          , KFileDialog::ConfirmOverwrite
-#endif
-                                                      );
-
+    QString outFileName = QFileDialog::getSaveFileName(this, i18n("Save QIF"), name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")));
     QFile oFile(outFileName);
     oFile.open(QIODevice::WriteOnly);
     QTextStream out(&oFile);
@@ -1539,7 +1535,7 @@ int CSVDialog::columnNumber(const QString& msg)
   //  indicating the sign of the value column. ie a debit or a credit.
   bool ok;
   static int ret;
-  ret = QInputDialog::getInteger(0, i18n("Enter column number of debit/credit code"), msg, 0, 1, m_endColumn, 1, &ok);
+  ret = QInputDialog::getInt(0, i18n("Enter column number of debit/credit code"), msg, 0, 1, m_endColumn, 1, &ok);
   if (ok && ret > 0)
     return ret;
   return 0;

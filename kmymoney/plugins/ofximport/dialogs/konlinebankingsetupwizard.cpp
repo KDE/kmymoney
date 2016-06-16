@@ -32,7 +32,6 @@
 // KDE Includes
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kmessagebox.h>
 
 #include <QProgressDialog>

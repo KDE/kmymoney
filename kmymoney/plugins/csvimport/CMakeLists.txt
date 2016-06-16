@@ -41,7 +41,6 @@ target_link_libraries(kmm_csvimport_static
   PUBLIC
     kmm_mymoney
     kmm_plugin
-    KF5::KDELibs4Support
     dialogs
 )
 

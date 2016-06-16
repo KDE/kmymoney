@@ -23,7 +23,6 @@
 #include <QtCore/QtDebug>
 #include <QtCore/QSharedPointer>
 
-#include <KAction>
 #include <KStandardAction>
 #include <KLocalizedString>
 

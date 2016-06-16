@@ -23,12 +23,12 @@
 #include <QList>
 #include <QRegExp>
 #include <QVector>
+#include <QLocale>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-#include <kcalendarsystem.h>
+#include <KLocalizedString>
 #include <KConfigGroup>
 #include <KSharedConfig>
 
@@ -166,14 +166,14 @@ void MyMoneyQifProfile::clear()
     m_decimal['Q'] =
       m_decimal['T'] =
         m_decimal['O'] =
-          m_decimal['I'] = KLocale::global()->monetaryDecimalSymbol()[0];
-
+          m_decimal['I'] = QLocale().decimalPoint();
+  // TODO: port to kf5
   m_thousands.clear();
   m_thousands['$'] =
     m_thousands['Q'] =
       m_thousands['T'] =
         m_thousands['O'] =
-          m_thousands['I'] = KLocale::global()->monetaryThousandsSeparator()[0];
+          m_thousands['I'] = QChar();//KLocale::global()->monetaryThousandsSeparator()[0];
 
   m_openingBalanceText = "Opening Balance";
   m_voidMark = "VOID ";
@@ -412,7 +412,7 @@ const QString MyMoneyQifProfile::date(const QDate& datein) const
         if (! delim.isNull())
           buffer += delim;
         if (maskLen == 3)
-          buffer += KLocale::global()->calendar()->monthName(datein.month(), datein.year(), KCalendarSystem::ShortName);
+          buffer += QLocale().monthName(datein.month(), QLocale::ShortFormat);
         else
           buffer += QString::number(datein.month()).rightJustified(2, '0');
       } else if (maskChar == 'y') {
@@ -454,7 +454,7 @@ const QDate MyMoneyQifProfile::date(const QString& datein) const
     QStringList monthNames = QString("jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec").split(',');
     int j;
     for (j = 1; j <= 12; ++j) {
-      if ((KLocale::global()->calendar()->monthName(j, 2000, KCalendarSystem::ShortName).toLower() == scannedParts[d->m_partPos['m']].toLower())
+      if ((QLocale().monthName(j, QLocale::ShortFormat).toLower() == scannedParts[d->m_partPos['m']].toLower())
           || (monthNames[j-1] == scannedParts[d->m_partPos['m']].toLower())) {
         mon = j;
         break;
@@ -578,7 +578,7 @@ const QDate MyMoneyQifProfile::date(const QString& datein) const
             msg = "Invalid numeric character in month string";
         } else {
           for (j = 1; j <= 12; ++j) {
-            if (KLocale::global()->calendar()->monthName(j, 2000, true).toLower() == formatParts[i].toLower()) {
+            if (QLocale().monthName(j, 2000, true).toLower() == formatParts[i].toLower()) {
               mon = j;
               ok = true;
               break;
@@ -682,8 +682,8 @@ const QString MyMoneyQifProfile::value(const QChar& def, const MyMoneyMoney& val
   _thousandsSeparator = MyMoneyMoney::thousandSeparator();
   MyMoneyMoney::signPosition _signPosition = MyMoneyMoney::negativeMonetarySignPosition();
 
-  MyMoneyMoney::setDecimalSeparator(amountDecimal(def).toAscii());
-  MyMoneyMoney::setThousandSeparator(amountThousands(def).toAscii());
+  MyMoneyMoney::setDecimalSeparator(amountDecimal(def).toLatin1());
+  MyMoneyMoney::setThousandSeparator(amountThousands(def).toLatin1());
   MyMoneyMoney::setNegativeMonetarySignPosition(MyMoneyMoney::BeforeQuantityMoney);
   res = valuein.formatMoney("", 2);
 
@@ -704,8 +704,8 @@ const MyMoneyMoney MyMoneyQifProfile::value(const QChar& def, const QString& val
   _thousandsSeparator = MyMoneyMoney::thousandSeparator();
   MyMoneyMoney::signPosition _signPosition = MyMoneyMoney::negativeMonetarySignPosition();
 
-  MyMoneyMoney::setDecimalSeparator(amountDecimal(def).toAscii());
-  MyMoneyMoney::setThousandSeparator(amountThousands(def).toAscii());
+  MyMoneyMoney::setDecimalSeparator(amountDecimal(def).toLatin1());
+  MyMoneyMoney::setThousandSeparator(amountThousands(def).toLatin1());
   MyMoneyMoney::setNegativeMonetarySignPosition(MyMoneyMoney::BeforeQuantityMoney);
 
   res = MyMoneyMoney(valuein);

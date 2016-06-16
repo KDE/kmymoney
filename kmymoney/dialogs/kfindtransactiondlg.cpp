@@ -39,7 +39,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kstandardguiitem.h>
@@ -48,6 +47,7 @@
 #include <KGuiItem>
 #include <KStandardGuiItem>
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

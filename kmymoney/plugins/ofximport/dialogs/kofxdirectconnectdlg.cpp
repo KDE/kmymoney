@@ -33,7 +33,6 @@
 #include <kio/job.h>
 #include <kio/jobclasses.h>
 #include <kio/jobuidelegate.h>
-#include <kdebug.h>
 #include <ktemporaryfile.h>
 #include <QProgressDialog>
 #include <kmessagebox.h>
@@ -114,7 +113,7 @@ bool KOfxDirectConnectDlg::init()
 
   // open the temp file. We come around here twice if init() is called twice
   if (m_tmpfile) {
-    kDebug(0) << "Already connected, using " << m_tmpfile->fileName();
+    qDebug(0) << "Already connected, using " << m_tmpfile->fileName();
     delete m_tmpfile; //delete otherwise we mem leak
   }
   m_tmpfile = new QTemporaryFile();
@@ -140,12 +139,12 @@ bool KOfxDirectConnectDlg::init()
 void KOfxDirectConnectDlg::setStatus(const QString& _status)
 {
   textLabel1->setText(_status);
-  kDebug(0) << "STATUS:" << _status;
+  qDebug(0) << "STATUS:" << _status;
 }
 
 void KOfxDirectConnectDlg::setDetails(const QString& _details)
 {
-  kDebug(0) << "DETAILS: " << _details;
+  qDebug(0) << "DETAILS: " << _details;
 }
 
 void KOfxDirectConnectDlg::slotOfxData(KIO::Job*, const QByteArray& _ba)
@@ -202,7 +201,7 @@ void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
         }
         f.close();
 
-        kDebug(0) << "The HTTP request failed: " << details;
+        qDebug(0) << "The HTTP request failed: " << details;
       }
     }
     KMessageBox::detailedSorry(this, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));

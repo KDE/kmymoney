@@ -31,15 +31,15 @@ email                : mte@users.sourceforge.net
 #include <QUrl>
 #include <QIcon>
 #include <QInputDialog>
+#include <QFileDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <kfiledialog.h>
 #ifndef _GNCFILEANON
-#include <klocale.h>
 #include <kconfig.h>
 #include <kmessagebox.h>
 #endif
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Third party Includes
@@ -2307,11 +2307,10 @@ bool MyMoneyGncReader::writeReportToFile(const QList<QString>& sectionsToReport)
 {
   TRY {
     int i;
-    QString fd = KFileDialog::getSaveFileName(QUrl(), QString(),
-                 0, i18n("Save report as"));
+    QString fd = QFileDialog::getSaveFileName(0, QString(), QString(),
+                 i18n("Save report as"));
     if (fd.isEmpty()) return (false);
     QFile reportFile(fd);
-    QFileInfo fi(reportFile);
     if (!reportFile.open(QIODevice::WriteOnly))  {
       return (false);
     }

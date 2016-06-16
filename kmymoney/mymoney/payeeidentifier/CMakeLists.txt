@@ -42,6 +42,8 @@ target_link_libraries( kmm_payeeidentifier_loader
   payeeidentifier_iban_bic
   payeeidentifier_nationalAccount
   payeeidentifier_unavailable
+  KF5::I18n
+  Qt5::Widgets
   Qt5::Core
 )
 

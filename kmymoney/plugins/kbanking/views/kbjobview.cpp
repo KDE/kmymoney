@@ -52,7 +52,7 @@ struct KBJobView::Private {
 KBJobView::KBJobView(KMyMoneyBanking *kb,
                      QWidget* parent,
                      const char* name,
-                     Qt::WFlags fl) :
+                     Qt::WindowFlags fl) :
     QWidget(parent, fl),
     d(new Private),
     m_app(kb)

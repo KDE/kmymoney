@@ -830,9 +830,9 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
+   <header>QPushButton</header>
   </customwidget>
   <customwidget>
    <class>KTextEdit</class>

@@ -24,14 +24,18 @@
 #include <QApplication>
 #include <QButtonGroup>
 #include <QListWidget>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QTextBrowser>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <kurlrequester.h>
-#include <QTextBrowser>
-#include <klocale.h>
 #include <khelpclient.h>
+#include <KConfigGroup>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -55,15 +59,24 @@ struct KGncPriceSourceDlg::Private {
   KGncPriceSourceDlgDecl* widget;
 };
 
-KGncPriceSourceDlg::KGncPriceSourceDlg(QWidget *parent) : KDialog(parent), d(new Private)
+KGncPriceSourceDlg::KGncPriceSourceDlg(QWidget *parent) : QDialog(parent), d(new Private)
 {
 }
 
-KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString& gncSource, QWidget * parent) : KDialog(parent), d(new Private)
+KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString& gncSource, QWidget * parent) : QDialog(parent), d(new Private)
 {
-  setButtons(Ok | Help);
+  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Help);
+  QWidget *mainWidget = new QWidget(this);
+  QVBoxLayout *mainLayout = new QVBoxLayout;
+  setLayout(mainLayout);
+  mainLayout->addWidget(mainWidget);
+  QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
   d->widget = new KGncPriceSourceDlgDecl();
-  setMainWidget(d->widget);
+  mainLayout->addWidget(d->widget);
   // signals and slots connections
   connect(d->widget->buttonsSource, SIGNAL(buttonClicked(int)), this, SLOT(buttonPressed(int)));
   connect(this, SIGNAL(helpClicked()), this, SLOT(slotHelp()));
@@ -78,6 +91,7 @@ KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString& 
   d->widget->buttonsSource->setId(d->widget->buttonSelectSource, 1);
   d->widget->buttonsSource->setId(d->widget->buttonUserSource, 2);
   d->widget->buttonsSource->button(0)->setChecked(true);
+  mainLayout->addWidget(buttonBox);
   buttonPressed(0);
   return;
 }

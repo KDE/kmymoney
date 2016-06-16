@@ -27,15 +27,12 @@
 // KDE Includes
 
 #include <KPluginFactory>
-#include <KDebug>
 #include <KFile>
 #include <QUrl>
-#include <KAction>
 #include <KMessageBox>
 #include <KActionCollection>
-#include <KStandardDirs>
 #include <KSharedConfig>
-#include <KLocale>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

@@ -35,7 +35,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <klineedit.h>
 #include <kiconloader.h>
 #include <kconfig.h>
@@ -69,6 +68,8 @@ kMyMoneyMoneyValidator::kMyMoneyMoneyValidator(double bottom, double top, int de
 QValidator::State kMyMoneyMoneyValidator::validate(QString & input, int & _p) const
 {
   QString s = input;
+  // TODO: port this to kf5
+#if 0
   KLocale * l = KLocale::global();
   // ok, we have to re-format the number to have:
   // 1. decimalSymbol == '.'
@@ -160,14 +161,18 @@ QValidator::State kMyMoneyMoneyValidator::validate(QString & input, int & _p) co
     }
   }
   return rc;
+#else
+  return Acceptable;
+#endif
 }
 
 kMyMoneyEdit::kMyMoneyEdit(QWidget *parent, const int prec)
     : QWidget(parent)
 {
   m_prec = prec;
+  // TODO: port this to kf5
   if (prec < -1 || prec > 20)
-    m_prec = KLocale::global()->monetaryDecimalPlaces();
+    m_prec = 2;//KLocale::global()->monetaryDecimalPlaces();
   init();
 }
 
@@ -329,10 +334,11 @@ void kMyMoneyEdit::resetText()
 
 void kMyMoneyEdit::theTextChanged(const QString & theText)
 {
-  KLocale * l = KLocale::global();
-  QString d = l->monetaryDecimalSymbol();
+  QString d = QLocale().decimalPoint();
   QString l_text = theText;
   QString nsign, psign;
+#if 0
+  KLocale * l = KLocale::global();
   if (l->negativeMonetarySignPosition() == KLocale::ParensAround
       || l->positiveMonetarySignPosition() == KLocale::ParensAround) {
     nsign = psign = '(';
@@ -340,7 +346,10 @@ void kMyMoneyEdit::theTextChanged(const QString & theText)
     nsign = l->negativeSign();
     psign = l->positiveSign();
   }
-
+#else
+  nsign = "-";
+  psign = "";
+#endif
   int i = 0;
   if (isEnabled()) {
     QValidator::State state =  m_edit->validator()->validate(l_text, i);
@@ -373,8 +382,7 @@ void kMyMoneyEdit::ensureFractionalPart()
 
 void kMyMoneyEdit::ensureFractionalPart(QString& s) const
 {
-  KLocale* locale = KLocale::global();
-  QString decimalSymbol = locale->monetaryDecimalSymbol();
+  QString decimalSymbol = QLocale().decimalPoint();
   if (decimalSymbol.isEmpty())
     decimalSymbol = '.';
 

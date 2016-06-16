@@ -27,12 +27,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <kstandardguiitem.h>
 #include <kmessagebox.h>
 #include <kguiutils.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

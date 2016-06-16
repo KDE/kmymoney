@@ -32,7 +32,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KAboutData>
 
 KWelcomePage::KWelcomePage()

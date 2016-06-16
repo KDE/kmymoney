@@ -14,10 +14,10 @@ kcoreaddons_desktop_to_json(payeeidentifier_iban_bic "${CMAKE_CURRENT_BINARY_DIR
 
 target_link_libraries( payeeidentifier_iban_bic PUBLIC
   kmm_payeeidentifier
+  KF5::Service
   Qt5::Core
   Qt5::Sql
   Qt5::Xml
-  KF5::KDELibs4Support
   Alkimia::alkimia
 )
 

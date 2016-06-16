@@ -39,7 +39,7 @@
 
 #include "kmymoneyglobalsettings.h"
 
-KMyMoneySelector::KMyMoneySelector(QWidget *parent, Qt::WFlags flags) :
+KMyMoneySelector::KMyMoneySelector(QWidget *parent, Qt::WindowFlags flags) :
     QWidget(parent, flags)
 {
   setAutoFillBackground(true);

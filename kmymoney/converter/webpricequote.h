@@ -26,12 +26,10 @@
 #include <QString>
 #include <QStringList>
 #include <QMap>
+#include <QProcess>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
-
-#include <kprocess.h>
-#include <kurl.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -44,7 +42,7 @@ of a local script being used to fetch the quote.
 
 @author Thomas Baumgart <thb@net-bembel.de> & Ace Jones <acejones@users.sourceforge.net>
 */
-class WebPriceQuoteProcess: public KProcess
+class WebPriceQuoteProcess: public QProcess
 {
   Q_OBJECT
 public:
@@ -73,7 +71,7 @@ by the Finance::Quote package, and more user-friendly names.
 
 @author Thomas Baumgart <thb@net-bembel.de> & Ace Jones <acejones@users.sourceforge.net>, Tony B<tonybloom@users.sourceforge.net>
  */
-class FinanceQuoteProcess: public KProcess
+class FinanceQuoteProcess: public QProcess
 {
   Q_OBJECT
 public:

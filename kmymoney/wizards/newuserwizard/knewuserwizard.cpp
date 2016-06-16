@@ -34,15 +34,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <klineedit.h>
 #include <ktextedit.h>
 #include <kuser.h>
 #include <kurlrequester.h>
-#include <kio/netaccess.h>
-#include <kurl.h>
 #include <kmessagebox.h>
-#include <kfiledialog.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -58,7 +55,6 @@
 #include <kmymoneyedit.h>
 #include <kaccounttemplateselector.h>
 
-#include "kmymoney.h"
 #include "kmymoneyglobalsettings.h"
 
 namespace NewUserWizard
@@ -66,7 +62,7 @@ namespace NewUserWizard
 
 static int stepCount;
 
-Wizard::Wizard(QWidget *parent, bool modal, Qt::WFlags flags) :
+Wizard::Wizard(QWidget *parent, bool modal, Qt::WindowFlags flags) :
     KMyMoneyWizard(parent, modal, flags),
     m_introPage(0)
 {
@@ -342,10 +338,11 @@ bool FilePage::isComplete() const
     // b) the directory does exist
     const QUrl fullPath = m_dataFileEdit->url();
     const QUrl directory = fullPath.adjusted(QUrl::RemoveFilename);
+    // TODO: port to kf5
     rc = fullPath.isValid()
-         && !KIO::NetAccess::exists(fullPath, KIO::NetAccess::DestinationSide, m_wizard)
-         && directory.isValid()
-         && KIO::NetAccess::exists(directory, KIO::NetAccess::SourceSide, m_wizard);
+         //&& !KIO::NetAccess::exists(fullPath, KIO::NetAccess::DestinationSide, m_wizard)
+         && directory.isValid();
+         //&& KIO::NetAccess::exists(directory, KIO::NetAccess::SourceSide, m_wizard);
     m_existingFileLabel->setHidden(rc);
     m_finishLabel->setVisible(rc);
   }

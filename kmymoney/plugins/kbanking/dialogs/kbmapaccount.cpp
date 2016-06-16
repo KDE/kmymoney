@@ -43,7 +43,7 @@ KBMapAccount::KBMapAccount(KMyMoneyBanking *kb,
                            const char *bankCode,
                            const char *accountId,
                            QWidget* parent,
-                           Qt::WFlags fl) :
+                           Qt::WindowFlags fl) :
     QDialog(parent, fl),
     d(new Private)
 {

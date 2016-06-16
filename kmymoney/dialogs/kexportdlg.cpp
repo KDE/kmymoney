@@ -32,14 +32,13 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <klocale.h>
 #include <kmessagebox.h>
-#include <kfiledialog.h>
 #include <kiconloader.h>
 #include <kconfiggroup.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
 #include <KSharedConfig>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -106,8 +105,8 @@ KExportDlg::~KExportDlg()
 
 void KExportDlg::slotBrowse()
 {
-  QString newName(KFileDialog::getSaveFileName(QUrl(), "*.QIF", this));
-  KMyMoneyUtils::appendCorrectFileExt(newName, QString("qif"));
+  QString newName(QFileDialog::getSaveFileName(this, QString(), QString(), QLatin1String("*.QIF")));
+  KMyMoneyUtils::appendCorrectFileExt(newName, QLatin1String("qif"));
   if (!newName.isEmpty())
     m_qlineeditFile->setText(newName);
 }

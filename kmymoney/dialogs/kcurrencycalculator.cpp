@@ -36,8 +36,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocale>
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -159,7 +159,7 @@ KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from, const MyMo
 
   m_fromAmount->setText(m_value.formatMoney("", MyMoneyMoney::denomToPrec(m_fromCurrency.smallestAccountFraction())));
 
-  m_dateText->setText(KLocale::global()->formatDate(date));
+  m_dateText->setText(QLocale().toString(date));
 
   m_updateButton->setChecked(KMyMoneyGlobalSettings::priceHistoryUpdate());
 

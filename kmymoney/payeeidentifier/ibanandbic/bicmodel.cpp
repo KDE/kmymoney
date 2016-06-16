@@ -18,14 +18,13 @@
 
 #include "bicmodel.h"
 
-#include <KDebug>
 #include <KServiceTypeTrader>
-#include <KStandardDirs>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QStandardPaths>
+#include <QtCore/QDebug>
 
 /**
  * @warning At the moment the completion may fail if bicModel was created in more than one thread
@@ -52,7 +51,7 @@ bicModel::bicModel(QObject* parent)
   }
 
   if (!db.isOpen()) {
-    kWarning() << QString("Could not open in-memory database for bic data.");
+    qWarning() << QString("Could not open in-memory database for bic data.");
   }
   QSqlQuery query(db);
 
@@ -79,7 +78,7 @@ bicModel::bicModel(QObject* parent)
     // Locate database
     QString path = QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("kmymoney/ibanbicdata/") + database);
     if (path.isEmpty()) {
-      kWarning() << QString("Could not locate database file \"%1\" to receive BIC data.").arg(database);
+      qWarning() << QString("Could not locate database file \"%1\" to receive BIC data.").arg(database);
     } else {
       databases << path;
       dbNames << QString("db%1").arg(++databaseCount);

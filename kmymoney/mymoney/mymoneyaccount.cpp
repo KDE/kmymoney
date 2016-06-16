@@ -395,7 +395,7 @@ const QDate MyMoneyAccountLoan::nextInterestChange() const
 
   QRegExp regExp("(\\d{4})-(\\d{2})-(\\d{2})");
   if (regExp.indexIn(value("interest-nextchange")) != -1) {
-    rc.setYMD(regExp.cap(1).toInt(), regExp.cap(2).toInt(), regExp.cap(3).toInt());
+    rc.setDate(regExp.cap(1).toInt(), regExp.cap(2).toInt(), regExp.cap(3).toInt());
   }
   return rc;
 }

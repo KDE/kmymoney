@@ -26,22 +26,22 @@
 #include <QList>
 #include <QDebug>
 #include <QProgressBar>
+#include <QPushButton>
+#include <QStandardPaths>
+#include <QFileDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kglobal.h>
-#include <klocale.h>
-
 #include <kmessagebox.h>
-#include <kfiledialog.h>
-#include <QPushButton>
 #include <kiconloader.h>
 #include <kmymoneydateinput.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
-#include <QStandardPaths>
 #include <KConfigGroup>
+#include <KLocalizedString>
+#include <KSharedConfig>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -100,7 +100,7 @@ CsvExportDlg::~CsvExportDlg()
 
 void CsvExportDlg::slotBrowse()
 {
-  QString newName(KFileDialog::getSaveFileName(QUrl(), QLatin1String("*.CSV"), this));
+  QString newName(QFileDialog::getSaveFileName(this, QString(), QString(), QLatin1String("*.CSV")));
   newName += QLatin1String("csv");
   if (!newName.isEmpty())
     ui->m_qlineeditFile->setText(newName);
@@ -120,7 +120,7 @@ void CsvExportDlg::separator(int separatorIndex)
 
 void CsvExportDlg::readConfig()
 {
-  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, QLatin1String("csvexporterrc")));
+  KSharedConfig::Ptr config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, QLatin1String("csvexporterrc")));
   KConfigGroup conf = config->group("Last Use Settings");
   ui->m_qlineeditFile->setText(conf.readEntry("CsvExportDlg_LastFile"));
   ui->m_radioButtonAccount->setChecked(conf.readEntry("CsvExportDlg_AccountOpt", true));

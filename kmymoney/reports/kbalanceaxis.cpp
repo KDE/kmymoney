@@ -25,8 +25,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -47,5 +45,5 @@ const QString KBalanceAxis::customizedLabel(const QString& label) const
   int precision = 2;
 
   //format as money using base currency or the included accounts
-  return KLocale::global()->formatNumber(label.toDouble(), precision);
+  return QLocale().toString(label.toDouble(), precision);
 }

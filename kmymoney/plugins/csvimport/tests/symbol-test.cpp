@@ -19,9 +19,7 @@
 
 #include <QtTest/QtTest>
 #include <QtCore/QString>
-
-#include <KGlobal>
-#include <KLocale>
+#include <QtCore/QLocale>
 
 QTEST_MAIN(SymbolTest);
 
@@ -35,8 +33,8 @@ void SymbolTest::init()
 {
   m_parse = new Parse;
   m_parse->setDecimalSymbol(0);
-  m_localeDecimal = KLocale::global()->decimalSymbol();
-  m_localeThousands = KLocale::global()->thousandsSeparator();
+  m_localeDecimal = QLocale().decimalPoint();
+  m_localeThousands = ""/* TODO: port to kf5 - KLocale::global()->thousandsSeparator()*/;
 }
 
 void SymbolTest::cleanup()

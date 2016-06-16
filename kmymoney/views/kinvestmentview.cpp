@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KToggleAction>
 #include <KMessageBox>
 #include <KSharedConfig>

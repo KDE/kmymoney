@@ -26,9 +26,10 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <klocale.h>
 #include <kstandardguiitem.h>
 #include <kmessagebox.h>
+#include <KLocalizedString>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

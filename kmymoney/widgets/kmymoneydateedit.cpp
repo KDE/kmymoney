@@ -23,9 +23,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KGlobal>
-#include <KLocale>
-
 namespace
 {
 const int DATE_POPUP_TIMEOUT = 1500;

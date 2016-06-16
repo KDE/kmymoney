@@ -31,17 +31,20 @@
 #include <QCheckBox>
 #include <QColor>
 #include <QTextStream>
+#include <QUrlQuery>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <kurlrequester.h>
 #include <QTextBrowser>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 #include <khelpclient.h>
-#include <kfiledialog.h>
 #include <khelpclient.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -49,8 +52,18 @@
 KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, QUrl openURL, QWidget *)
 {
   m_widget = new KSelectDatabaseDlgDecl();
-  setMainWidget(m_widget);
-  setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Help);
+  QVBoxLayout *mainLayout = new QVBoxLayout;
+  setLayout(mainLayout);
+  mainLayout->addWidget(m_widget);
+  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+  QWidget *mainWidget = new QWidget(this);
+  mainLayout->addWidget(mainWidget);
+  QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  mainLayout->addWidget(buttonBox);
   connect(this, SIGNAL(helpClicked()), this, SLOT(slotHelp()));
   m_requiredFields = 0;
   m_url = openURL;
@@ -117,7 +130,8 @@ int KSelectDatabaseDlg::exec()
       m_widget->textUserName->setText(QString(pwd->pw_name));
     m_widget->textPassword->setText("");
     m_requiredFields = new kMandatoryFieldGroup(this);
-    m_requiredFields->setOkButton(button(KDialog::Ok));
+    // TODO: port to kf5
+    //m_requiredFields->setOkButton(button(QDialogButtonBox::Ok));
     m_requiredFields->add(m_widget->listDrivers);
     m_requiredFields->add(m_widget->textDbName);
     connect(m_widget->listDrivers, SIGNAL(itemClicked(QListWidgetItem*)),
@@ -148,13 +162,14 @@ int KSelectDatabaseDlg::exec()
     // set password required
     m_requiredFields = new kMandatoryFieldGroup(this);
     m_requiredFields->add(m_widget->textPassword);
-    m_requiredFields->setOkButton(button(KDialog::Ok));
+    // TODO: port to kf5
+    //m_requiredFields->setOkButton(button(QDialog::Ok));
 
     m_widget->checkPreLoad->setChecked(false);
     m_sqliteSelected = !m_widget->urlSqlite->text().isEmpty();
   }
 
-  return (KDialog::exec());
+  return (QDialog::exec());
 }
 
 const QUrl KSelectDatabaseDlg::selectedURL()

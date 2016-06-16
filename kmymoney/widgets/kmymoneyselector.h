@@ -55,7 +55,7 @@ class KMM_WIDGETS_EXPORT KMyMoneySelector : public QWidget
   Q_OBJECT
   Q_PROPERTY(QStringList selectedItems READ selectedItems DESIGNABLE false STORED false)
 public:
-  explicit KMyMoneySelector(QWidget *parent = 0, Qt::WFlags flags = 0);
+  explicit KMyMoneySelector(QWidget *parent = 0, Qt::WindowFlags flags = 0);
   virtual ~KMyMoneySelector();
 
   enum KMyMoneySelectorItemRoles {

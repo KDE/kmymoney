@@ -70,6 +70,8 @@ target_link_libraries(kmm_mymoney
                       payeeidentifier_iban_bic
                       payeeidentifier_nationalAccount
                       kmm_config
+                      # TODO: fix this
+                      KF5::XmlGui
 )
 
 if(KMM_ADDRESSBOOK_FOUND)

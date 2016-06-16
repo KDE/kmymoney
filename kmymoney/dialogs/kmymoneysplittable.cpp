@@ -45,12 +45,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kcompletionbox.h>
 #include <kstandardshortcut.h>
 #include <KSharedConfig>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -96,7 +96,7 @@ kMyMoneySplitTable::kMyMoneySplitTable(QWidget *parent) :
   setAlternatingRowColors(true);
 
   verticalHeader()->hide();
-  horizontalHeader()->setMovable(false);
+  horizontalHeader()->setSectionsMovable(false);
   horizontalHeader()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
 
   KConfigGroup grp = KSharedConfig::openConfig()->group("SplitTable");

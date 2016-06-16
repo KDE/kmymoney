@@ -30,7 +30,6 @@
 // KDE Includes
 
 #include <KPluginFactory>
-#include <KDebug>
 #include <KFile>
 #include <QUrl>
 #include <KAction>
@@ -115,7 +114,7 @@ void OfxImporterPlugin::slotImportFile()
   QUrl url = importInterface()->selectFile(i18n("OFX import file selection"),
              "",
              "*.ofx *.qfx *.ofc|OFX files (*.ofx, *.qfx, *.ofc)\n*|All files",
-             static_cast<KFile::Mode>((int)(KFile::File | KFile::ExistingOnly)),
+             QFileDialog::ExistingFile,
              widget);
 
   d->m_preferName = static_cast<OfxImporterPlugin::Private::NamePreference>(option->m_preferName->currentIndex());

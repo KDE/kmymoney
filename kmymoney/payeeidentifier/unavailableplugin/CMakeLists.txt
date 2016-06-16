@@ -6,7 +6,7 @@ set ( UNAVIALABLE_IDENTIFIER_SCRS
   unavailableplugin.cpp
 )
 
-kde4_add_plugin( payeeidentifier_unavailable STATIC
+add_library( payeeidentifier_unavailable STATIC
   ${UNAVIALABLE_IDENTIFIER_SCRS}
 )
 

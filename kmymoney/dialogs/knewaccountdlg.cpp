@@ -36,7 +36,6 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <kcombobox.h>
 #include <kiconloader.h>
@@ -44,6 +43,7 @@
 #include <kguiutils.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

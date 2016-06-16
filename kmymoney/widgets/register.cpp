@@ -45,7 +45,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -306,7 +306,7 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
     cellRect.setX(m_parent->horizontalHeader()->sectionPosition(DateColumn));
     cellRect.setWidth(m_parent->horizontalHeader()->sectionSize(DateColumn));
     painter->setFont(font);
-    painter->drawText(cellRect, Qt::AlignVCenter | Qt::AlignCenter, KLocale::global()->formatDate(sortPostDate(), KLocale::ShortDate));
+    painter->drawText(cellRect, Qt::AlignVCenter | Qt::AlignCenter, QLocale().toString(sortPostDate(), QLocale::ShortFormat));
   }
 
   painter->restore();
@@ -512,10 +512,10 @@ Register::Register(QWidget *parent) :
 
   verticalHeader()->hide();
 
-  horizontalHeader()->setResizeMode(QHeaderView::Fixed);
+  horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
   horizontalHeader()->setSortIndicatorShown(false);
-  horizontalHeader()->setMovable(false);
-  horizontalHeader()->setClickable(false);
+  horizontalHeader()->setSectionsMovable(false);
+  horizontalHeader()->setSectionsClickable(false);
   horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
 
   connect(this, SIGNAL(cellClicked(int,int)), this, SLOT(selectItem(int,int)));
@@ -1198,7 +1198,7 @@ int Register::minimumColumnWidth(int col)
   QFontMetrics cellFontMetrics(KMyMoneyGlobalSettings::listCellFont());
   switch (col) {
     case DateColumn:
-      minWidth = cellFontMetrics.width(KLocale::global()->formatDate(QDate(6999, 12, 29), KLocale::ShortDate) + "  ");
+      minWidth = cellFontMetrics.width(QLocale().toString(QDate(6999, 12, 29), QLocale::ShortFormat) + "  ");
       break;
     default:
       break;
@@ -1951,18 +1951,19 @@ void Register::addGroupMarkers()
     case KMyMoneyRegister::PostDateSort:
     case KMyMoneyRegister::EntryDateSort:
       today = QDate::currentDate();
-      thisMonth.setYMD(today.year(), today.month(), 1);
+      thisMonth.setDate(today.year(), today.month(), 1);
       lastMonth = thisMonth.addMonths(-1);
       yesterday = today.addDays(-1);
       // a = QDate::dayOfWeek()      todays weekday (1 = Monday, 7 = Sunday)
       // b = KLocale::weekStartDay() first day of week (1 = Monday, 7 = Sunday)
-      weekStartOfs = today.dayOfWeek() - KLocale::global()->weekStartDay();
+      // TODO: prt this to kf5
+      weekStartOfs = today.dayOfWeek() - 1;//KLocale::global()->weekStartDay();
       if (weekStartOfs < 0) {
         weekStartOfs = 7 + weekStartOfs;
       }
       thisWeek = today.addDays(-weekStartOfs);
       lastWeek = thisWeek.addDays(-7);
-      thisYear.setYMD(today.year(), 1, 1);
+      thisYear.setDate(today.year(), 1, 1);
       if (KMyMoneyGlobalSettings::startDate().date() != QDate(1900, 1, 1))
         new KMyMoneyRegister::FancyDateGroupMarker(this, KMyMoneyGlobalSettings::startDate().date(), i18n("Prior transactions possibly filtered"));
 

@@ -19,7 +19,7 @@
 #include "transactionmatcher.h"
 
 #include <QList>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KMessageBox>
 
 #include "mymoneyfile.h"

@@ -32,10 +32,9 @@
 // KDE Includes
 
 #include <kconfig.h>
-#include <klocale.h>
-
 #include <kconfiggroup.h>
 #include <KSharedConfig>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

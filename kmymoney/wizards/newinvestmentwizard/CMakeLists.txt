@@ -17,7 +17,8 @@ set (libnewinvestmentwizard_a_UI
 qt5_wrap_ui(libnewinvestmentwizard_a_SOURCES ${libnewinvestmentwizard_a_UI} )
 
 add_library(newinvestmentwizard STATIC ${libnewinvestmentwizard_a_SOURCES})
-target_link_libraries(newinvestmentwizard KF5::KDELibs4Support Alkimia::alkimia Qt5::Sql)
+# TODO: cleanup dependencies
+target_link_libraries(newinvestmentwizard KF5::I18n KF5::ConfigWidgets KF5::Completion KF5::KIOWidgets KF5::WidgetsAddons Alkimia::alkimia Qt5::Widgets Qt5::Sql Qt5::Xml)
 
 # we rely on some widgets to be generated
 add_dependencies(newinvestmentwizard widgets)

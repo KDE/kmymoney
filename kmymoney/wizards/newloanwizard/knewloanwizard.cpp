@@ -36,8 +36,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-#include <knuminput.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 #include <kguiitem.h>
 

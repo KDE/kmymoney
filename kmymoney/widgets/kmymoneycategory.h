@@ -108,7 +108,7 @@ public:
   /**
     * Reimplemented for internal reasons. No API change
     */
-  virtual void reparent(QWidget *parent, Qt::WFlags, const QPoint &, bool showIt = false);
+  virtual void reparent(QWidget *parent, Qt::WindowFlags, const QPoint &, bool showIt = false);
 
   /**
     * Reimplemented for internal reasons. No API change.

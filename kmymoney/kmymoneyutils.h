@@ -35,7 +35,7 @@
 // KDE Headers
 
 #include <kguiitem.h>
-#include <kxmlguiwindow.h>
+class KXmlGuiWindow;
 
 // ----------------------------------------------------------------------------
 // Project Includes

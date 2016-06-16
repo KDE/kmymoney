@@ -34,9 +34,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -118,7 +118,7 @@ void KMyMoneyCategory::setPalette(const QPalette& palette)
   KMyMoneyCombo::setPalette(palette);
 }
 
-void KMyMoneyCategory::reparent(QWidget *parent, Qt::WFlags w, const QPoint&, bool showIt)
+void KMyMoneyCategory::reparent(QWidget *parent, Qt::WindowFlags w, const QPoint&, bool showIt)
 {
   if (d->frame) {
     d->frame->setParent(parent, w);

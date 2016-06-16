@@ -30,15 +30,18 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-#include <kfiledialog.h>
 #include <kmessagebox.h>
 #include <kurlrequester.h>
 #include <khelpclient.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -49,10 +52,23 @@
 KGenerateSqlDlg::KGenerateSqlDlg(QWidget *)
 {
   m_widget = new KGenerateSqlDlgDecl();
-  setMainWidget(m_widget);
-  setButtons(createTables | saveSQL | Ok | Cancel | Help);
-  button(createTables)->setText(i18n("Create Tables"));
-  button(saveSQL)->setText(i18n("Save SQL"));
+  QVBoxLayout *mainLayout = new QVBoxLayout;
+  setLayout(mainLayout);
+  mainLayout->addWidget(m_widget);
+  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+  QWidget *mainWidget = new QWidget(this);
+  setLayout(mainLayout);
+  mainLayout->addWidget(mainWidget);
+  QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  // TODO: check and port to kf5
+  //button(createTables)->setText(i18n("Create Tables"));
+  //button(saveSQL)->setText(i18n("Save SQL"));
+  //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+  mainLayout->addWidget(buttonBox);
   m_requiredFields = 0;
   initializeForm();
 }
@@ -66,11 +82,13 @@ void KGenerateSqlDlg::initializeForm()
 {
   delete m_requiredFields;
   m_requiredFields = 0;
-
+  // TODO: port to kf5
+#if 0
   // at this point, we don't know which fields are required, so disable everything but the list
   button(saveSQL)->setEnabled(false);
   button(createTables)->setEnabled(false);
-  enableButtonOk(false);
+  okButton->setEnabled(false);
+#endif
   m_widget->urlSqlite->clear();
   m_widget->textDbName->clear();
   m_widget->textHostName->clear();
@@ -83,7 +101,8 @@ void KGenerateSqlDlg::initializeForm()
   m_widget->textPassword->setEnabled(false);
   m_widget->textUserName->setEnabled(false);
   m_widget->textSQL->setEnabled(false);
-  connect(button(Help), SIGNAL(clicked()), this, SLOT(slotHelp()));
+  // TODO: port to kf5
+  // connect(button(Help), SIGNAL(clicked()), this, SLOT(slotHelp()));
 }
 
 int  KGenerateSqlDlg::exec()
@@ -117,7 +136,7 @@ int  KGenerateSqlDlg::exec()
   m_widget->listDrivers->addItems(m_supportedDrivers);
   connect(m_widget->listDrivers, SIGNAL(itemSelectionChanged()),
           this, SLOT(slotdriverSelected()));
-  return (KDialog::exec());
+  return (QDialog::exec());
 }
 
 void KGenerateSqlDlg::slotcreateTables()
@@ -163,16 +182,17 @@ void KGenerateSqlDlg::slotcreateTables()
     KMessageBox::information(this, message);
   }
   QSqlDatabase::removeDatabase("creation");
-  enableButtonOk(true);
+  // TODO: port to kf5
+  //okButton->setEnabled(true);
 }
 
 void KGenerateSqlDlg::slotsaveSQL()
 {
-  QString fileName = KFileDialog::getSaveFileName(
-                       QUrl(),
-                       QString(),
+  QString fileName = QFileDialog::getSaveFileName(
                        this,
-                       i18n("Select output file"));
+                       i18n("Select output file"),
+                       QString(),
+                       QString());
   if (fileName.isEmpty()) return;
   QFile out(fileName);
   if (!out.open(QIODevice::WriteOnly)) return;
@@ -180,7 +200,8 @@ void KGenerateSqlDlg::slotsaveSQL()
   MyMoneyDbDef db;
   s << m_widget->textSQL->toPlainText();
   out.close();
-  enableButtonOk(true);
+  // TODO: port to kf5
+  //okButton->setEnabled(true);
 }
 
 void KGenerateSqlDlg::slotdriverSelected()
@@ -232,7 +253,8 @@ void KGenerateSqlDlg::slotdriverSelected()
   }
 
   m_widget->textPassword->setEnabled(m_dbDriver->isPasswordSupported());
-  m_requiredFields->setOkButton(button(createTables));
+  // TODO: port to kf5
+  //m_requiredFields->setOkButton(button(createTables));
   m_widget->textSQL->setEnabled(true);
   // check if we have a storage; if not, create a skeleton one
   // we need a storage for MyMoneyDbDef to generate standard accounts
@@ -250,9 +272,10 @@ void KGenerateSqlDlg::slotdriverSelected()
     MyMoneyFile::instance()->detachStorage();
   }
   delete m_storage;
-  button(saveSQL)->setEnabled(true);
-  connect(button(saveSQL), SIGNAL(clicked()), this, SLOT(slotsaveSQL()));
-  connect(button(createTables), SIGNAL(clicked()), this, SLOT(slotcreateTables()));
+  // TODO: port to kf5
+  //button(saveSQL)->setEnabled(true);
+  //connect(button(saveSQL), SIGNAL(clicked()), this, SLOT(slotsaveSQL()));
+  //connect(button(createTables), SIGNAL(clicked()), this, SLOT(slotcreateTables()));
 }
 
 void KGenerateSqlDlg::slotHelp()

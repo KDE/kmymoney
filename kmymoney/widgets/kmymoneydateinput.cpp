@@ -44,7 +44,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kpassivepopup.h>
 #include <kdatepicker.h>
 
@@ -133,7 +133,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_datePopup = new KPassivePopup(d->m_dateEdit);
   d->m_datePopup->setObjectName("datePopup");
   d->m_datePopup->setTimeout(DATE_POPUP_TIMEOUT);
-  d->m_datePopup->setView(new QLabel(KLocale::global()->formatDate(d->m_date), d->m_datePopup));
+  d->m_datePopup->setView(new QLabel(QLocale().toString(d->m_date), d->m_datePopup));
 
   d->m_dateFrame = new QWidget(this);
   dateInputLayout->addWidget(d->m_dateFrame);
@@ -143,7 +143,7 @@ kMyMoneyDateInput::kMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_dateFrame->setWindowFlags(Qt::Popup);
   d->m_dateFrame->hide();
 
-  QString dateFormat = KLocale::global()->dateFormatShort().toLower();
+  QString dateFormat = QLocale().dateFormat(QLocale::ShortFormat);
   QString order, separator;
   bool lastWasPercent = false;
   for (int i = 0; i < dateFormat.length(); ++i) {
@@ -342,7 +342,7 @@ void kMyMoneyDateInput::slotDateChosenRef(const QDate& date)
 
 #ifndef Q_OS_MAC
     QLabel *lbl = static_cast<QLabel*>(d->m_datePopup->view());
-    lbl->setText(KLocale::global()->formatDate(date));
+    lbl->setText(QLocale().toString(date));
     lbl->adjustSize();
     if (d->m_datePopup->isVisible() || hasFocus())
       d->m_datePopup->show(mapToGlobal(QPoint(0, height()))); // Repaint

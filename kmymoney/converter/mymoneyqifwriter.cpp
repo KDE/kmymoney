@@ -33,8 +33,8 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <klocale.h>
 #include <kmessagebox.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Headers

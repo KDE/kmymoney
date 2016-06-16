@@ -29,26 +29,39 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
-#include <KGlobal>
 #include <QPushButton>
 #include <ui_csvdialog.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
 
 
 SymbolTableDlg::SymbolTableDlg()
 {
   m_widget = new SymbolTableDlgDecl;
-  setMainWidget(m_widget);
+  QVBoxLayout *mainLayout = new QVBoxLayout;
+  setLayout(mainLayout);
+  mainLayout->addWidget(m_widget);
   m_widget->tableWidget->setToolTip(i18n("Symbols and Security Names present"));
   m_firstPass = true;
 
-  setButtons(KDialog::Cancel | KDialog::Ok);
-  setButtonsOrientation(Qt::Horizontal);
-  enableButtonOk(true);
+  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+  QWidget *mainWidget = new QWidget(this);
+  mainLayout->addWidget(mainWidget);
+  QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+  mainLayout->addWidget(buttonBox);
+  setOrientation(Qt::Horizontal);
+  okButton->setEnabled(true);
 
-  connect(this, SIGNAL(cancelClicked()), this, SLOT(slotRejected()));
-  connect(this, SIGNAL(okClicked()), this, SLOT(slotEditSecurityCompleted()));
+  connect(buttonBox->button(QDialogButtonBox::Cancel), SIGNAL(clicked()), this, SLOT(slotRejected()));
+  connect(okButton, SIGNAL(clicked()), this, SLOT(slotEditSecurityCompleted()));
   connect(this->m_widget->tableWidget,  SIGNAL(itemChanged(QTableWidgetItem*)), this,  SLOT(slotItemChanged(QTableWidgetItem*)));
   connect(this->m_widget->tableWidget,  SIGNAL(itemClicked(QTableWidgetItem*)), this,  SLOT(slotItemClicked(QTableWidgetItem*)));
 }

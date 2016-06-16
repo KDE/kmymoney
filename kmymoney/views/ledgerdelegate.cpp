@@ -328,7 +328,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
       opt.rect.setLeft(opt.rect.left()+ofs);
       opt.rect.setTop(opt.rect.top()+margin);
       opt.rect.setWidth(horizontalHeader->sectionSize(LedgerModel::DateColumn));
-      opt.text = KGlobal::locale()->formatDate(postDate, KLocale::ShortDate);
+      opt.text = KGlobal::locale()->formatDate(postDate, QLocale::ShortFormat);
       style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, opt.widget);
       opt.rect = oRect;
     }

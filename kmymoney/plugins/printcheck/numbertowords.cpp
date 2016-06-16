@@ -21,8 +21,7 @@
 #include "numbertowords.h"
 
 // KDE includes
-#include <klocale.h>
-#include <kglobal.h>
+#include <KLocalizedString>
 
 MyMoneyMoneyToWordsConverter::MyMoneyMoneyToWordsConverter()
 {
@@ -79,7 +78,8 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money)
   // hold three-digit groups
   QList<int> digitGroups;
 
-  int precision = KLocale::global()->monetaryDecimalPlaces();
+  // TODO: prot this to KF5
+  int precision = 2;//KLocale::global()->monetaryDecimalPlaces();
   int integer = static_cast<int>(money.toDouble()); // retain the integer part
   int fraction = qRound((money.toDouble() - integer) * MyMoneyMoney::precToDenom(precision));
 

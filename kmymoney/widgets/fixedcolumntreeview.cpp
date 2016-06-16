@@ -134,7 +134,7 @@ FixedColumnTreeView::FixedColumnTreeView(QTreeView *parent)
   d->parent->viewport()->stackUnder(this);
 
   // the resize mode of the fixed view needs to be fixed to allow a user resize only from the parent tree
-  header()->setResizeMode(QHeaderView::Fixed);
+  header()->sectionResizeMode(QHeaderView::Fixed);
 
   // connect the scroll bars to keep the two views in sync
   connect(verticalScrollBar(), SIGNAL(valueChanged(int)), d->parent->verticalScrollBar(), SLOT(setValue(int)));

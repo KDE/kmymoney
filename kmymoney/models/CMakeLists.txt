@@ -19,7 +19,6 @@ add_library(models STATIC ${libmodels_a_SOURCES})
 target_link_libraries(models LINK_PUBLIC
     kmm_mymoney
     kmymoney_common
-    KF5::KDELibs4Support
 )
 
 add_dependencies(models kmm_config)

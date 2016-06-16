@@ -15,8 +15,8 @@ add_library(kmm_reconciliationreport MODULE ${kmm_reconciliationreport_PART_SRCS
 kcoreaddons_desktop_to_json(kmm_reconciliationreport kmm_reconciliationreport.desktop)
 
 target_link_libraries(kmm_reconciliationreport
-                      KF5::KDELibs4Support
                       KF5::KHtml
+                      Qt5::PrintSupport
                       Alkimia::alkimia
                       kmm_mymoney kmm_plugin
                       )

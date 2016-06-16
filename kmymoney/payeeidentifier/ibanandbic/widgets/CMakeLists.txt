@@ -39,7 +39,6 @@ target_include_directories(payeeidentifier_iban_bic_widgets
 target_link_libraries( payeeidentifier_iban_bic_widgets PUBLIC
   payeeidentifier_iban_bic
   Qt5::Core
-  KF5::KDELibs4Support
   kmm_mymoney
   kmm_widgets
 )
@@ -64,7 +63,6 @@ target_link_libraries( payeeidentifier_iban_bic_delegates
   payeeidentifier_iban_bic_widgets
   kmm_widgets
   Qt5::Core
-  KF5::KDELibs4Support
 )
 
 configure_file(kmymoney-ibanbic-delegate.desktop.in kmymoney-ibanbic-delegate.desktop)

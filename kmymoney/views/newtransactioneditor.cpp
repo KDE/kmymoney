@@ -30,7 +30,6 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KLocale>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -303,7 +302,8 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
   d->ui->statusCombo->setModel(&d->statusModel);
 
-  d->ui->dateEdit->setDateFormat(KLocale::global()->dateFormatShort());
+  // TODO: port to kf5
+  //d->ui->dateEdit->setDateFormat(KLocale::global()->dateFormatShort());
 
   WidgetHintFrameCollection* frameCollection = new WidgetHintFrameCollection(this);
   frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));

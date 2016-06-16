@@ -18,7 +18,7 @@ email                 : agander93@gmail.com
 #ifndef SYMBOLTABLEDLG_H
 #define SYMBOLTABLEDLG_H
 
-#include <KDialog>
+#include <QDialog>
 
 #include "ui_symboltabledlg.h"
 
@@ -33,7 +33,7 @@ public:
   }
 };
 
-class SymbolTableDlg : public KDialog
+class SymbolTableDlg : public QDialog
 {
   Q_OBJECT
 

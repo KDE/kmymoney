@@ -28,40 +28,51 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <KEditListWidget>
-#include <kled.h>
+#include <KLed>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include <kgpgfile.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
-    KDialog(parent),
+    QDialog(parent),
     m_needCheckList(true),
     m_listOk(false),
     m_checkCount(0)
 {
-  setCaption(i18n("Select additional keys"));
-  setButtons(KDialog::Ok | KDialog::Cancel);
-  setDefaultButton(KDialog::Ok);
+  // TODO: check port to kf5
+  setWindowTitle(i18n("Select additional keys"));
+  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+  QWidget *mainWidget = new QWidget(this);
+  QVBoxLayout *mainLayout = new QVBoxLayout;
+  setLayout(mainLayout);
+  mainLayout->addWidget(mainWidget);
+  QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
   setModal(true);
   QWidget* page = new QWidget(this);
-  setMainWidget(page);
-  QVBoxLayout* topLayout = new QVBoxLayout(page);
-  topLayout->setSpacing(spacingHint());
+  mainLayout->addWidget(page);
+  mainLayout->addWidget(buttonBox);
 
   QGroupBox *listBox = new QGroupBox(i18n("User identification"), page);
   QVBoxLayout *verticalLayout = new QVBoxLayout(listBox);
   verticalLayout->setSpacing(6);
   verticalLayout->setContentsMargins(0, 0, 0, 0);
   m_listWidget = new KEditListWidget(listBox);
-  m_listWidget->setButtons((KEditListWidget::Remove | KEditListWidget::Add));
+  m_listWidget->connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  m_listWidget->connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
   m_listWidget->setWhatsThis(i18n("Enter the id of the key you want to use for data encryption. This can either be an e-mail address or the hexadecimal key id. In case of the key id, do not forget the leading 0x."));
   verticalLayout->addWidget(m_listWidget);
-
-  topLayout->addWidget(listBox);
 
   // add a LED for the availability of all keys
   QHBoxLayout* ledBox = new QHBoxLayout();
@@ -70,6 +81,7 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
   ledBox->setObjectName("ledBoxLayout");
 
   m_keyLed = new KLed(page);
+  mainLayout->addWidget(m_keyLed);
   m_keyLed->setShape(KLed::Circular);
   m_keyLed->setLook(KLed::Sunken);
 
@@ -77,7 +89,7 @@ KGpgKeySelectionDlg::KGpgKeySelectionDlg(QWidget *parent) :
   ledBox->addWidget(new QLabel(i18n("Keys for all of the above user ids found"), page));
   ledBox->addItem(new QSpacerItem(50, 20, QSizePolicy::Expanding, QSizePolicy::Minimum));
 
-  topLayout->addLayout(ledBox);
+  verticalLayout->addLayout(ledBox);
 
   connect(m_listWidget, SIGNAL(changed()), this, SLOT(slotIdChanged()));
   connect(m_listWidget, SIGNAL(added(QString)), this, SLOT(slotKeyListChanged()));
@@ -151,7 +163,8 @@ void KGpgKeySelectionDlg::slotIdChanged()
       }
 
       m_keyLed->setState(static_cast<KLed::State>(keysOk && (m_listWidget->items().count() != 0) ? KLed::On : KLed::Off));
-      enableButtonOk((m_listWidget->items().count() == 0) || (m_keyLed->state() == KLed::On));
+      // TODO: port to kf5
+      // okButton->setEnabled((m_listWidget->items().count() == 0) || (m_keyLed->state() == KLed::On));
       break;
     }
 

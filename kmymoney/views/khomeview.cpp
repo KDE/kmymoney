@@ -37,11 +37,12 @@
 #include <QBuffer>
 #include <QStandardPaths>
 #include <QDesktopServices>
+#include <QUrlQuery>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <khtmlview.h>
 #include <kconfig.h>
 #include <kstandardaction.h>
@@ -598,7 +599,7 @@ void KHomeView::showPaymentEntry(const MyMoneySchedule& sched, int cnt)
 
         //show payment date
         tmp = QString("<td>") +
-              KLocale::global()->formatDate(sched.adjustedNextDueDate(), KLocale::ShortDate) +
+              QLocale().toString(sched.adjustedNextDueDate(), QLocale::ShortFormat) +
               "</td><td>";
         if (!pathEnter.isEmpty())
           tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathEnter) + linkend();

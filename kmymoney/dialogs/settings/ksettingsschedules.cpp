@@ -24,8 +24,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kdeversion.h>
-#include <klocale.h>
 #include <klocalizedstring.h>
 #ifdef KF5Holidays_FOUND
 #include <KHolidays/Holiday>
@@ -61,7 +59,8 @@ void KSettingsSchedules::loadList()
 
   foreach (const QString &regionCode, regionCodes) {
     QString regionName = HolidayRegion::name(regionCode);
-    QString languageName = KLocale::global()->languageCodeToName(HolidayRegion::languageCode(regionCode));
+    // TODO: port kf5
+    QString languageName = "";//KLocale::global()->languageCodeToName(HolidayRegion::languageCode(regionCode));
     QString region;
     if (languageName.isEmpty())
       region = regionName;

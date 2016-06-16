@@ -40,11 +40,11 @@
 // KDE Includes
 
 #include <kconfig.h>
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
 #include <KSharedConfig>
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

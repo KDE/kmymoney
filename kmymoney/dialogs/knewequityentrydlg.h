@@ -24,7 +24,6 @@
 #define KNEWEQUITYENTRY_H
 
 #include <QDialog>
-#include <klocale.h>
 
 #include "ui_knewequityentrydecl.h"
 

@@ -26,7 +26,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocale>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -80,8 +80,8 @@ void NewTransactionForm::showTransaction(const QString& transactionSplitId)
 
   QModelIndex index = d->filterModel->index(0, 0);
   if(index.isValid()) {
-    d->ui->dateEdit->setText(KLocale::global()->formatDate(d->filterModel->data(index, LedgerModel::PostDateRole).toDate(),
-                                                           KLocale::ShortDate));
+    d->ui->dateEdit->setText(QLocale().toString(d->filterModel->data(index, LedgerModel::PostDateRole).toDate(),
+                                                           QLocale::ShortFormat));
     d->ui->payeeEdit->setText(d->filterModel->data(index, LedgerModel::PayeeNameRole).toString());
     d->ui->memoEdit->clear();
     d->ui->memoEdit->insertPlainText(d->filterModel->data(index, LedgerModel::MemoRole).toString());

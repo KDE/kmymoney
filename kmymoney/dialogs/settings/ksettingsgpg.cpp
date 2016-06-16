@@ -29,7 +29,7 @@
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kmessagebox.h>
-#include <klocale.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

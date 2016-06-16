@@ -19,13 +19,14 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QButtonGroup>
 #include <QCheckBox>
 #include <QTextCodec>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <kdialog.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -39,7 +40,7 @@ public:
   }
 };
 
-class KGncImportOptionsDlg : public KDialog
+class KGncImportOptionsDlg : public QDialog
 {
   Q_OBJECT
 public:

@@ -35,7 +35,7 @@
 // KDE Includes
 
 #include <ktextedit.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kcombobox.h>
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>

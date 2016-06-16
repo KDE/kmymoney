@@ -20,12 +20,6 @@
 #include <QtTest/QtTest>
 #include <QFile>
 
-#include <kaboutdata.h>
-#include <kcomponentdata.h>
-#include <kdeversion.h>
-
-#include <qtest_kde.h>
-
 // uses helper functions from reports tests
 #include "reportstestcommon.h"
 using namespace test;
@@ -38,7 +32,7 @@ using namespace test;
 #include "storage/mymoneystoragedump.h"
 #include "webpricequote.h"
 
-QTEST_KDEMAIN_CORE_WITH_COMPONENTNAME(ConverterTest, "kmymoney")
+QTEST_MAIN(ConverterTest)
 
 using namespace convertertest;
 

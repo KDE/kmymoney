@@ -28,19 +28,19 @@
 #include <QUrl>
 #include <QPushButton>
 #include <QIcon>
+#include <QFileDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
-#include <kfiledialog.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
 #include <KSharedConfig>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -72,7 +72,7 @@ KBackupDlg::~KBackupDlg()
 
 void KBackupDlg::chooseButtonClicked()
 {
-  QUrl newDir = KFileDialog::getExistingDirectoryUrl(QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)));
+  QUrl newDir = QFileDialog::getExistingDirectoryUrl(this, QString(), QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)));
   if (!newDir.path().isEmpty())
     txtMountPoint->setText(newDir.path());
 }

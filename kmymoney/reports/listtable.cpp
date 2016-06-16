@@ -24,13 +24,12 @@
 #include <QList>
 #include <QFile>
 #include <QTextStream>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 // This is just needed for i18n().  Once I figure out how to handle i18n
 // without using this macro directly, I'll be freed of KDE dependency.
-
-#include <klocale.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -176,11 +175,11 @@ void ListTable::render(QString& result, QString& csv) const
   //actual dates of the report
   result += QString("<div class=\"subtitle\">");
   if (!m_config.fromDate().isNull()) {
-    result += i18nc("Report date range", "%1 through %2", KLocale::global()->formatDate(m_config.fromDate(), KLocale::ShortDate), KLocale::global()->formatDate(m_config.toDate(), KLocale::ShortDate));
+    result += i18nc("Report date range", "%1 through %2", QLocale().toString(m_config.fromDate(), QLocale::ShortFormat), QLocale().toString(m_config.toDate(), QLocale::ShortFormat));
     result += QString("</div>\n");
     result += QString("<div class=\"gap\">&nbsp;</div>\n");
 
-    csv += i18nc("Report date range", "%1 through %2", KLocale::global()->formatDate(m_config.fromDate(), KLocale::ShortDate), KLocale::global()->formatDate(m_config.toDate(), KLocale::ShortDate));
+    csv += i18nc("Report date range", "%1 through %2", QLocale().toString(m_config.fromDate(), QLocale::ShortFormat), QLocale().toString(m_config.toDate(), QLocale::ShortFormat));
     csv += QString("\n");
   }
 
@@ -531,9 +530,9 @@ void ListTable::render(QString& result, QString& csv) const
         csv += "\"" + data + "\",";
 
         // if we have a locale() then use its date formatter
-        if (KLocale::global() && ! data.isEmpty()) {
+        if (!data.isEmpty()) {
           QDate qd = QDate::fromString(data, Qt::ISODate);
-          data = KLocale::global()->formatDate(qd, KLocale::ShortDate);
+          data = QLocale().toString(qd, QLocale::ShortFormat);
         }
         result += QString("<td class=\"left\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd);
       } else {

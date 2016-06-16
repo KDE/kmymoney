@@ -1,17 +1,17 @@
 configure_file(kmymoney-nationalaccount-delegate.desktop.in kmymoney-nationalaccount-delegate.desktop)
 
-set ( PAYEEIDENTIFIER_NATIONALACCOUNT_UI_SCRS
+set( PAYEEIDENTIFIER_NATIONALACCOUNT_UI_SCRS
   nationalaccountedit.cpp
   nationalaccountdelegate.cpp
   pluginfactory.cpp
 )
 
-kde4_add_ui_files(
+qt5_wrap_ui(
   PAYEEIDENTIFIER_NATIONALACCOUNT_UI_SCRS
   nationalaccountedit.ui
 )
 
-kde4_add_plugin( payeeidentifier_nationalAccount_ui
+add_library( payeeidentifier_nationalAccount_ui MODULE
   ${PAYEEIDENTIFIER_NATIONALACCOUNT_UI_SCRS}
 )
 

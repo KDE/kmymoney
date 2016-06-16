@@ -18,7 +18,7 @@ email                 : agander93@gmail.com
 #ifndef REDEFINEDLG_H
 #define REDEFINEDLG_H
 
-#include <KDialog>
+#include <QDialog>
 
 #include "mymoneymoney.h"
 #include "ui_redefinedlgdecl.h"
@@ -34,7 +34,7 @@ public:
   }
 };
 
-class RedefineDlg : public KDialog
+class RedefineDlg : public QDialog
 {
   Q_OBJECT
 

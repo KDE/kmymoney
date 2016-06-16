@@ -29,7 +29,7 @@ public:
                const char *bankCode,
                const char *accountId,
                QWidget* parent = 0,
-               Qt::WFlags fl = 0);
+               Qt::WindowFlags fl = 0);
   ~KBMapAccount();
 
   AB_ACCOUNT *getAccount();

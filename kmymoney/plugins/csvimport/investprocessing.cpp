@@ -31,22 +31,19 @@
 #include <QtCore/QTextCodec>
 #include <QtCore/QTextStream>
 #include <QtCore/QDebug>
+
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <kdeversion.h>
-#include <KFileDialog>
-#include <KFileWidget>
 #include <KSharedConfig>
 #include <kmessagebox.h>
-#include <KStandardDirs>
-#include <KLocale>
-#include <KIO/NetAccess>
 #include <KAboutData>
 #include <KAboutApplicationDialog>
 #include <QVBoxLayout>
 #include <QStandardPaths>
 #include <QHBoxLayout>
+#include <KLocalizedString>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -261,8 +258,8 @@ void InvestProcessing::slotFileDialogClicked()
     m_invPath  = "~/";
   }
 
-  QPointer<KFileDialog> dialog = new KFileDialog(QUrl(m_invPath),
-      i18n("*.csv *.PRN *.txt|CSV Files\n*|All files"), 0);
+  QPointer<QFileDialog> dialog = new QFileDialog(0, QString(), m_invPath,
+      i18n("*.csv *.PRN *.txt|CSV Files\n*|All files"));
 
   //  Add encoding selection to FileDialog
   QWidget* encodeBox = new QWidget();
@@ -273,23 +270,26 @@ void InvestProcessing::slotFileDialogClicked()
   m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
   setCodecList(m_codecs);
   connect(m_comboBoxEncode, SIGNAL(activated(int)), this, SLOT(encodingChanged(int)));
-  dialog->fileWidget()->setCustomWidget("Encoding", m_comboBoxEncode);
-  m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
-  dialog->setMode(KFile::File | KFile::ExistingOnly);
-  if (dialog->exec() == QDialog::Accepted) {
-    m_url = dialog->selectedUrl();
-  }
+  // TODO: port to kf5
+  //dialog->fileWidget()->setCustomWidget("Encoding", m_comboBoxEncode);
+  //m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
+  //dialog->setMode(KFile::File | KFile::ExistingOnly);
+  //if (dialog->exec() == QDialog::Accepted) {
+  //  m_url = dialog->selectedUrl();
+  //}
   delete dialog;
   if (m_url.isEmpty())
     return;
   m_csvDialog->m_inFileName.clear();
-
+  // TODO: port to kf5
+#if 0
   if (!KIO::NetAccess::download(m_url,  m_csvDialog->m_inFileName, 0)) {
     KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.toDisplayString()),
                                KIO::NetAccess::lastErrorString(),
                                i18n("File access error"));
     return;
   }
+#endif
   if (m_csvDialog->m_inFileName.isEmpty())
     return;
   clearComboBoxText();//                        To clear any '*' in memo combo text
@@ -1346,7 +1346,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     else if (m_columnTypeList[i] == "price") {      //              Price Col
       ++neededFieldsCount;
       txt = m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_priceFraction->currentText(); //fraction
-      txt = txt.replace(m_csvDialog->decimalSymbol(), KLocale::global()->decimalSymbol());
+      txt = txt.replace(m_csvDialog->decimalSymbol(), QLocale().decimalPoint());
       MyMoneyMoney fraction = MyMoneyMoney(txt);
       txt = m_columnList[i].remove('"');  //                     price
       newTxt = m_parse->possiblyReplaceSymbol(txt);
@@ -1844,13 +1844,9 @@ void InvestProcessing::saveAs()
 {
   if (m_csvDialog->m_fileType == "Invest") {
     QStringList outFile = m_inFileName .split('.');
-    const QUrl &name = QString((outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif");
+    const QString &name = QString((outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif");
 
-    QString outFileName = KFileDialog::getSaveFileName(name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")), 0, i18n("Save QIF")
-#if KDE_IS_VERSION(4,4,0)
-                          , KFileDialog::ConfirmOverwrite
-#endif
-                                                      );
+    QString outFileName = QFileDialog::getSaveFileName(0, i18n("Save QIF"), name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")));
     QFile oFile(outFileName);
     oFile.open(QIODevice::WriteOnly);
     QTextStream out(&oFile);
@@ -1935,7 +1931,7 @@ int InvestProcessing::columnNumber(const QString& column)
 {
   bool ok;
   static int ret;
-  ret = QInputDialog::getInteger(0, i18n("Brokerage Item"), column, 0, 1, m_endColumn, 1, &ok);
+  ret = QInputDialog::getInt(0, i18n("Brokerage Item"), column, 0, 1, m_endColumn, 1, &ok);
   if (ok && ret > 0)
     return ret;
   return 0;

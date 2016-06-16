@@ -17,7 +17,8 @@
 #include "transactionmatchfinder.h"
 
 #include <QDebug>
-#include <klocale.h>
+
+#include <KLocalizedString>
 
 #include "mymoneyfile.h"
 

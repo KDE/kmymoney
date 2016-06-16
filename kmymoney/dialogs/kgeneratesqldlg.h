@@ -21,12 +21,10 @@
 // QT Includes
 
 #include <QLabel>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <kurl.h>
-#include <kdialog.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -44,7 +42,7 @@ public:
   }
 };
 
-class KGenerateSqlDlg : public KDialog
+class KGenerateSqlDlg : public QDialog
 {
   Q_OBJECT
 public:

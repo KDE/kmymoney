@@ -20,8 +20,8 @@
 
 #include <QDebug>
 #include <QTimer>
+#include <QIcon>
 
-#include <KIcon>
 #include <KLocalizedString>
 
 #include "mymoneyutils.h"

@@ -40,7 +40,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kcombobox.h>
 #include <kmessagebox.h>
 #include <kiconloader.h>
@@ -767,7 +767,7 @@ void KGlobalLedgerView::updateSummaryLine(const QMap<QString, MyMoneyMoney>& act
     QDate reconcileDate = m_account.lastReconciliationDate();
 
     if (reconcileDate.isValid()) {
-      m_leftSummaryLabel->setText(i18n("Last reconciled: %1", KLocale::global()->formatDate(reconcileDate, KLocale::ShortDate)));
+      m_leftSummaryLabel->setText(i18n("Last reconciled: %1", QLocale().toString(reconcileDate, QLocale::ShortFormat)));
     } else {
       m_leftSummaryLabel->setText(i18n("Never reconciled"));
     }

@@ -31,19 +31,17 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QPointer>
 #include <QtCore/QDebug>
+#include <QStandardPaths>
+
 // ----------------------------------------------------------------------------
 // KDE Headers
 
-#include <KFileDialog>
 #include <KSharedConfig>
 #include <KMessageBox>
-#include <KStandardDirs>
-#include <KLocale>
-#include <KIO/NetAccess>
+#include <KLocalizedString>
 #include <KAboutData>
-#include <KAction>
 #include <KAboutApplicationDialog>
-#include <QStandardPaths>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Headers

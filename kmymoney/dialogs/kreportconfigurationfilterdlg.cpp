@@ -47,8 +47,8 @@
 #include <kguiitem.h>
 #include <kiconloader.h>
 #include <kstandardguiitem.h>
-#include <klocale.h>
 #include <khelpclient.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

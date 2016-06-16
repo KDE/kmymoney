@@ -39,12 +39,11 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kconfig.h>
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <kguiitem.h>
-#include <kcalendarsystem.h>
 #include <kcombobox.h>
 #include <KSharedConfig>
 

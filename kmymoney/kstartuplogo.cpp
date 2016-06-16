@@ -27,10 +27,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <kcolorscheme.h>
-#include <ksplashscreen.h>
 #include <KAboutData>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

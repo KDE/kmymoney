@@ -27,11 +27,10 @@
 #include <QKeyEvent>
 #include <QFocusEvent>
 #include <QTimer>
+#include <QLocale>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <klocale.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -123,14 +122,14 @@ void kMyMoneyLineEdit::keyReleaseEvent(QKeyEvent* k)
     if (k->modifiers() & Qt::KeypadModifier) {
       if (k->key() == Qt::Key_Comma
           || k->key() == Qt::Key_Period) {
-        if (KLocale::global()->monetaryDecimalSymbol() == ",") {
+        if (QLocale().decimalPoint() == QLatin1Char(',')) {
           QKeyEvent newk(k->type(), Qt::Key_Comma, k->modifiers(), ",", k->isAutoRepeat(), k->count());
           KLineEdit::keyReleaseEvent(&newk);
           k->accept();
           return;
         }
 
-        if (KLocale::global()->monetaryDecimalSymbol() == ".") {
+        if (QLocale().decimalPoint() == QLatin1Char('.')) {
           QKeyEvent newk(k->type(), Qt::Key_Comma, k->modifiers(), ".", k->isAutoRepeat(), k->count());
           KLineEdit::keyReleaseEvent(&newk);
           k->accept();
@@ -148,14 +147,14 @@ void kMyMoneyLineEdit::keyPressEvent(QKeyEvent* k)
     if (k->modifiers() & Qt::KeypadModifier) {
       if (k->key() == Qt::Key_Comma
           || k->key() == Qt::Key_Period) {
-        if (KLocale::global()->monetaryDecimalSymbol() == ",") {
+        if (QLocale().decimalPoint() == QLatin1Char(',')) {
           QKeyEvent newk(k->type(), Qt::Key_Comma, k->modifiers(), ",", k->isAutoRepeat(), k->count());
           KLineEdit::keyPressEvent(&newk);
           k->accept();
           return;
         }
 
-        if (KLocale::global()->monetaryDecimalSymbol() == ".") {
+        if (QLocale().decimalPoint() == QLatin1Char('.')) {
           QKeyEvent newk(k->type(), Qt::Key_Period, k->modifiers(), ".", k->isAutoRepeat(), k->count());
           KLineEdit::keyPressEvent(&newk);
           k->accept();

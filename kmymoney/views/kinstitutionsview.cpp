@@ -27,9 +27,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-
+#include <KLocalizedString>
 #include <KToggleAction>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 

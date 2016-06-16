@@ -26,7 +26,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kfile.h>
 class KMyMoneyApp;
 
 // ----------------------------------------------------------------------------
@@ -49,7 +48,7 @@ public:
   KMMImportInterface(KMyMoneyApp* app, QObject* parent, const char* name = 0);
   ~KMMImportInterface() {}
 
-  QUrl selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode, QWidget *widget) const;
+  QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode mode, QWidget *widget) const;
 
 private:
   KMyMoneyApp*    m_app;

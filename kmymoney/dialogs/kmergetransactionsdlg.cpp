@@ -25,8 +25,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <khelpclient.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

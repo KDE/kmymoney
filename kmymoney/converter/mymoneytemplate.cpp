@@ -30,10 +30,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <QTemporaryFile>
-#include <kio/netaccess.h>
+#include <KXmlGuiWindow>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -70,11 +70,13 @@ bool MyMoneyTemplate::loadTemplate(const QUrl &url)
 
   } else {
     bool rc;
-    rc = KIO::NetAccess::download(url, filename, KMyMoneyUtils::mainWindow());
+    // TODO: port to kf5
+    //rc = KIO::NetAccess::download(url, filename, KMyMoneyUtils::mainWindow());
     if (!rc) {
       KMessageBox::detailedError(KMyMoneyUtils::mainWindow(),
                                  i18n("Error while loading file '%1'.", url.url()),
-                                 KIO::NetAccess::lastErrorString(),
+                                 // TODO: port to kf5
+                                 QString(),//KIO::NetAccess::lastErrorString(),
                                  i18n("File access error"));
       return false;
     }
@@ -108,7 +110,8 @@ bool MyMoneyTemplate::loadTemplate(const QUrl &url)
   // if a temporary file was constructed by NetAccess::download,
   // then it will be removed with the next call. Otherwise, it
   // stays untouched on the local filesystem
-  KIO::NetAccess::removeTempFile(filename);
+  // TODO: port to kf5
+  //KIO::NetAccess::removeTempFile(filename);
   return rc;
 }
 
@@ -428,8 +431,9 @@ bool MyMoneyTemplate::saveTemplate(const QUrl &url)
     } else {
       throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
     }
-    if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))
-      throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
+    // TODO: port to kf5
+    //if (!KIO::NetAccess::upload(tmpfile.fileName(), url, 0))
+    //  throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.url()));
   }
   return true;
 }

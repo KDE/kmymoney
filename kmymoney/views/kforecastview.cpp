@@ -28,7 +28,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KTextEdit>
 #include <KSharedConfig>
 
@@ -233,7 +233,7 @@ void KForecastView::loadListView()
 
   for (int i = 1; i <= forecast.forecastDays(); ++i) {
     QDate forecastDate = QDate::currentDate().addDays(i);
-    headerLabels << KLocale::global()->formatDate(forecastDate, KLocale::LongDate);
+    headerLabels << QLocale().toString(forecastDate, QLocale::LongFormat);
   }
 
   //add variation columns
@@ -526,7 +526,7 @@ void KForecastView::loadAdvancedView()
       }
       it_c++;
 
-      QString dateString = KLocale::global()->formatDate(minDate, KLocale::ShortDate);
+      QString dateString = QLocale().toString(minDate, QLocale::ShortFormat);
       advancedItem->setText(it_c, dateString);
       advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {
@@ -550,7 +550,7 @@ void KForecastView::loadAdvancedView()
       }
       it_c++;
 
-      QString dateString = KLocale::global()->formatDate(maxDate, KLocale::ShortDate);
+      QString dateString = QLocale().toString(maxDate, QLocale::ShortFormat);
       advancedItem->setText(it_c, dateString);
       advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
       if (amountMM.isNegative()) {

@@ -35,7 +35,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <klineedit.h>
 #include <KIconLoader>
 #include <kmessagebox.h>

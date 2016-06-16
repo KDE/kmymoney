@@ -65,7 +65,7 @@ qt5_wrap_ui(libviews_a_SOURCES ${libviews_a_UI})
 
 add_library(views STATIC ${libviews_a_SOURCES})
 
-target_link_libraries(views PUBLIC KChart KF5::Archive KF5::KHtml KF5::KDELibs4Support Qt5::Sql Alkimia::alkimia)
+target_link_libraries(views PUBLIC KChart KF5::KIOFileWidgets KF5::Notifications KF5::Archive KF5::KHtml Qt5::Sql Alkimia::alkimia)
 
 if(KF5Activities_FOUND)
   target_link_libraries(views PRIVATE KF5::Activities)

@@ -23,7 +23,6 @@ target_link_libraries(kmm_weboob
                       kmm_mymoney
                       kmm_widgets
                       kmm_plugin
-                      KF5::KDELibs4Support
                       KF5::KrossCore
                       Alkimia::alkimia
                       )

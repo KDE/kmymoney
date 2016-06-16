@@ -34,13 +34,11 @@
 
 #include <kcombobox.h>
 #include <kmessagebox.h>
-#include <kfiledialog.h>
-#include <klocale.h>
 #include <kiconloader.h>
-#include <kio/netaccess.h>
 #include <kconfiggroup.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -143,6 +141,8 @@ void KImportDlg::writeConfig()
 /** Make sure the text input is ok */
 void KImportDlg::slotFileTextChanged(const QString& text)
 {
+  // TODO: port to kf5
+#if 0
   if (!text.isEmpty() && KIO::NetAccess::exists(file(), KIO::NetAccess::SourceSide, KMyMoneyUtils::mainWindow())) {
     // m_qcomboboxDateFormat->setEnabled(true);
     m_qbuttonOk->setEnabled(true);
@@ -151,6 +151,7 @@ void KImportDlg::slotFileTextChanged(const QString& text)
     // m_qcomboboxDateFormat->setEnabled(false);
     m_qbuttonOk->setEnabled(false);
   }
+#endif
 }
 
 void KImportDlg::slotNewProfile()

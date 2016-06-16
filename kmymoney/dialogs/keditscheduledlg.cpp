@@ -31,14 +31,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
-#include <knuminput.h>
 #include <klineedit.h>
 #include <khelpclient.h>
 #include <KGuiItem>
 #include <KStandardGuiItem>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

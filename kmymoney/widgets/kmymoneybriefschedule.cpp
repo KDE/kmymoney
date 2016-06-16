@@ -34,9 +34,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <kiconloader.h>
-#include <kdeversion.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -103,12 +102,12 @@ void KMyMoneyBriefSchedule::loadSchedule()
         text = i18np("Payment on %2 for %3 with %1 transaction remaining occurring %4.",
                      "Payment on %2 for %3 with %1 transactions remaining occurring %4.",
                      transactions,
-                     KLocale::global()->formatDate(m_date),
+                     QLocale().toString(m_date, QLocale::ShortFormat),
                      amount.formatMoney(sched.account().fraction()),
                      i18n(sched.occurrenceToString().toLatin1()));
       } else {
         text = i18n("Payment on %1 for %2 occurring %3.",
-                    KLocale::global()->formatDate(m_date),
+                    QLocale().toString(m_date, QLocale::ShortFormat),
                     amount.formatMoney(sched.account().fraction()),
                     i18n(sched.occurrenceToString().toLatin1()));
       }

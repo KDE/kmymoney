@@ -20,14 +20,15 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDialog>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <kdialog.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class KGncPriceSourceDlg : public KDialog
+class KGncPriceSourceDlg : public QDialog
 {
   Q_OBJECT
 public:

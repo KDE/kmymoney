@@ -33,11 +33,10 @@
 #include <QByteArray>
 #include <QUrl>
 #include <QFile>
+#include <QProcess>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
-
-#include <kprocess.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -361,7 +360,7 @@ private:
   /// \internal d-pointer instance.
   Private* const d;
 
-  KProcess                m_filter;
+  QProcess                m_filter;
   QString                 m_filename;
   QUrl                    m_url;
   MyMoneyQifProfile       m_qifProfile;

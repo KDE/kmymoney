@@ -17,5 +17,6 @@ add_custom_target(generate_wizardpages_ui_srcs DEPENDS
 
 add_library(wizardpages STATIC
   ${libwizardpages_a_SOURCES} ${wizardpages_ui_srcs})
-target_link_libraries(wizardpages KF5::KDELibs4Support Alkimia::alkimia Qt5::Sql)
+# TODO: fix widgets library public dependencies
+target_link_libraries(wizardpages KF5::KIOWidgets KF5::TextWidgets KF5::Completion Alkimia::alkimia Qt5::Sql Qt5::Xml)
 

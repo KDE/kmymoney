@@ -42,9 +42,9 @@ include(FeatureSummary)
 include(GenerateExportHeader)
 include(KMyMoneyMacros)
 
-find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test)
-find_package(KF5 5.2 REQUIRED COMPONENTS CoreAddons Config I18n KHtml KDELibs4Support Completion KCMUtils ItemViews Service Wallet
-                          OPTIONAL_COMPONENTS Holidays Gpgmepp Contacts Akonadi IdentityManagement Activities Kross)
+find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test PrintSupport)
+find_package(KF5 5.2 REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets I18n KHtml Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO
+                          OPTIONAL_COMPONENTS DocTools Holidays Gpgmepp Contacts Akonadi IdentityManagement Activities Kross)
 find_package(LibAlkimia 6.0.0 REQUIRED)
 find_package(KChart 2.6.0 REQUIRED)
 
@@ -239,27 +239,17 @@ option(USE_MODELTEST
 option(USE_QT_DESIGNER
   "Install KMyMoney specific widget library for Qt-Designer (default=OFF)" OFF)
 
-option(USE_DEVELOPER_DOC
-  "Install KMyMoney specific developer documentation (default=OFF)" OFF)
-
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
-  option(USE_HTML_HANDBOOK
-    "Generate KMyMoney manual in HTML format (default=OFF)" OFF)
-endif()
-
-
-# Generation of the HTML version of the manual
-if(USE_HTML_HANDBOOK)
-  # to be done. See KDE4Macros.cmake for custom target "htmlhandbook"
-  # and kmymoney2/doc/en/Makefile.am on how one could do that
-endif(USE_HTML_HANDBOOK)
+option(USE_DEVELOPER_
+  "Install KMyMoney specific developer umentation (default=OFF)" OFF)
 
 ######################### The Actual Targets ##########################
 add_subdirectory( libkgpgfile )
 add_subdirectory( tools )
 add_subdirectory( kmymoney )
-add_subdirectory( doc )
-if (USE_DEVELOPER_DOC)
+if(KF5DocTools_FOUND)
+  add_subdirectory( doc )
+endif()
+if (KF5DocTools_FOUND AND USE_DEVELOPER_DOC)
   add_subdirectory( developer-doc )
 endif()
 

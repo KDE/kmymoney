@@ -457,8 +457,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     // Build a list of expected dates and compare
     // MyMoneySchedule::OCCUR_ONCE
     sch.setOccurrence(MyMoneySchedule::OCCUR_ONCE);
-    startDate.setYMD(2009, 1, 1);
-    endDate.setYMD(2009, 12, 31);
+    startDate.setDate(2009, 1, 1);
+    endDate.setDate(2009, 12, 31);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -466,8 +466,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[0] == QDate(2009, 1, 1));
     // MyMoneySchedule::OCCUR_DAILY
     sch.setOccurrence(MyMoneySchedule::OCCUR_DAILY);
-    startDate.setYMD(2009, 1, 1);
-    endDate.setYMD(2009, 1, 5);
+    startDate.setDate(2009, 1, 1);
+    endDate.setDate(2009, 1, 5);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -489,8 +489,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     sch.setOccurrenceMultiplier(1);
     // MyMoneySchedule::OCCUR_WEEKLY
     sch.setOccurrence(MyMoneySchedule::OCCUR_WEEKLY);
-    startDate.setYMD(2009, 1, 6);
-    endDate.setYMD(2009, 2, 4);
+    startDate.setDate(2009, 1, 6);
+    endDate.setDate(2009, 2, 4);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -502,8 +502,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[4] == QDate(2009, 2, 3));
     // MyMoneySchedule::OCCUR_EVERYOTHERWEEK
     sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYOTHERWEEK);
-    startDate.setYMD(2009, 2, 5);
-    endDate.setYMD(2009, 4, 3);
+    startDate.setDate(2009, 2, 5);
+    endDate.setDate(2009, 4, 3);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -515,8 +515,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[4] == QDate(2009, 4, 2));
     // MyMoneySchedule::OCCUR_FORTNIGHTLY
     sch.setOccurrence(MyMoneySchedule::OCCUR_FORTNIGHTLY);
-    startDate.setYMD(2009, 4, 4);
-    endDate.setYMD(2009, 5, 31);
+    startDate.setDate(2009, 4, 4);
+    endDate.setDate(2009, 5, 31);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -533,8 +533,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[3] == QDate(2009, 5, 29));
     // MyMoneySchedule::OCCUR_EVERYHALFMONTH
     sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYHALFMONTH);
-    startDate.setYMD(2009, 6, 1);
-    endDate.setYMD(2009, 8, 11);
+    startDate.setDate(2009, 6, 1);
+    endDate.setDate(2009, 8, 11);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -547,8 +547,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[4] == QDate(2009, 7, 31));
     // MyMoneySchedule::OCCUR_EVERYTHREEWEEKS
     sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYTHREEWEEKS);
-    startDate.setYMD(2009, 8, 12);
-    endDate.setYMD(2009, 11, 12);
+    startDate.setDate(2009, 8, 12);
+    endDate.setDate(2009, 11, 12);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -560,8 +560,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[4] == QDate(2009, 11, 4));
     // MyMoneySchedule::OCCUR_EVERYFOURWEEKS
     sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYFOURWEEKS);
-    startDate.setYMD(2009, 11, 13);
-    endDate.setYMD(2010, 3, 13);
+    startDate.setDate(2009, 11, 13);
+    endDate.setDate(2010, 3, 13);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -573,8 +573,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[4] == QDate(2010, 3, 5));
     // MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS
     sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYTHIRTYDAYS);
-    startDate.setYMD(2010, 3, 19);
-    endDate.setYMD(2010, 7, 19);
+    startDate.setDate(2010, 3, 19);
+    endDate.setDate(2010, 7, 19);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -588,8 +588,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[4] == QDate(2010, 7, 16));
     // MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS
     sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYEIGHTWEEKS);
-    startDate.setYMD(2010, 7, 26);
-    endDate.setYMD(2011, 3, 26);
+    startDate.setDate(2010, 7, 26);
+    endDate.setDate(2011, 3, 26);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -601,8 +601,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[4] == QDate(2011, 3, 7));
     // MyMoneySchedule::OCCUR_EVERYOTHERMONTH
     sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYOTHERMONTH);
-    startDate.setYMD(2011, 3, 14);
-    endDate.setYMD(2011, 11, 20);
+    startDate.setDate(2011, 3, 14);
+    endDate.setDate(2011, 11, 20);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -615,8 +615,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[4] == QDate(2011, 11, 14));
     // MyMoneySchedule::OCCUR_EVERYTHREEMONTHS
     sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYTHREEMONTHS);
-    startDate.setYMD(2011, 11, 15);
-    endDate.setYMD(2012, 11, 19);
+    startDate.setDate(2011, 11, 15);
+    endDate.setDate(2012, 11, 19);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -628,8 +628,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[4] == QDate(2012, 11, 15));
     // MyMoneySchedule::OCCUR_QUARTERLY
     sch.setOccurrence(MyMoneySchedule::OCCUR_QUARTERLY);
-    startDate.setYMD(2012, 11, 20);
-    endDate.setYMD(2013, 11, 23);
+    startDate.setDate(2012, 11, 20);
+    endDate.setDate(2013, 11, 23);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -641,8 +641,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[4] == QDate(2013, 11, 20));
     // MyMoneySchedule::OCCUR_EVERYFOURMONTHS
     sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYFOURMONTHS);
-    startDate.setYMD(2013, 11, 21);
-    endDate.setYMD(2015, 3, 23);
+    startDate.setDate(2013, 11, 21);
+    endDate.setDate(2015, 3, 23);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -655,8 +655,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[4] == QDate(2015, 3, 20));
     // MyMoneySchedule::OCCUR_TWICEYEARLY
     sch.setOccurrence(MyMoneySchedule::OCCUR_TWICEYEARLY);
-    startDate.setYMD(2015, 3, 22);
-    endDate.setYMD(2017, 3, 29);
+    startDate.setDate(2015, 3, 22);
+    endDate.setDate(2017, 3, 29);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -669,8 +669,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[3] == QDate(2017, 3, 22));
     // MyMoneySchedule::OCCUR_YEARLY
     sch.setOccurrence(MyMoneySchedule::OCCUR_YEARLY);
-    startDate.setYMD(2017, 3, 23);
-    endDate.setYMD(2021, 3, 29);
+    startDate.setDate(2017, 3, 23);
+    endDate.setDate(2021, 3, 29);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);
@@ -683,8 +683,8 @@ void MyMoneyScheduleTest::testPaymentDates()
     QVERIFY(list[4] == QDate(2021, 3, 23));
     // MyMoneySchedule::OCCUR_EVERYOTHERYEAR
     sch.setOccurrence(MyMoneySchedule::OCCUR_EVERYOTHERYEAR);
-    startDate.setYMD(2021, 3, 24);
-    endDate.setYMD(2029, 3, 30);
+    startDate.setDate(2021, 3, 24);
+    endDate.setDate(2029, 3, 30);
     sch.setStartDate(startDate);
     sch.setNextDueDate(startDate);
     list = sch.paymentDates(startDate, endDate);

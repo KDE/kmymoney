@@ -24,11 +24,10 @@
 #include <QObject>
 #include <QString>
 #include <QUrl>
+#include <QFileDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <kfile.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -63,7 +62,7 @@ public:
    * you are responsible to delete the widget. It will not be deleted
    * automatically during the destruction of the dialog.
    */
-  virtual QUrl selectFile(const QString& title, const QString& path, const QString& mask, KFile::Mode mode, QWidget *widget) const = 0;
+  virtual QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode mode, QWidget *widget) const = 0;
 
 signals:
 };

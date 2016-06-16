@@ -71,7 +71,7 @@ class Wizard : public KMyMoneyWizard
 
   Q_OBJECT
 public:
-  explicit Wizard(QWidget* parent = 0, bool modal = false, Qt::WFlags flags = 0);
+  explicit Wizard(QWidget* parent = 0, bool modal = false, Qt::WindowFlags flags = 0);
 
   /**
     * Returns the information about the account as entered by

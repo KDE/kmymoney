@@ -117,7 +117,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
   //FIXME: port
   m_statementInfoPageCheckings->m_lastStatementDate->setText(QString());
   if (account.lastReconciliationDate().isValid()) {
-    m_statementInfoPageCheckings->m_lastStatementDate->setText(i18n("Last reconciled statement: %1", KLocale::global()->formatDate(account.lastReconciliationDate())));
+    m_statementInfoPageCheckings->m_lastStatementDate->setText(i18n("Last reconciled statement: %1", QLocale().toString(account.lastReconciliationDate())));
   }
 
   // connect the signals with the slots
@@ -182,7 +182,7 @@ void KEndingBalanceDlg::slotUpdateBalances()
   it = transactionList.constBegin();
   if (it != transactionList.constEnd()) {
     oldestTransactionDate = (*it).first.postDate();
-    m_statementInfoPageCheckings->m_oldestTransactionDate->setText(i18n("Oldest unmarked transaction: %1", KLocale::global()->formatDate(oldestTransactionDate)));
+    m_statementInfoPageCheckings->m_oldestTransactionDate->setText(i18n("Oldest unmarked transaction: %1", QLocale().toString(oldestTransactionDate)));
   }
 
   filter.addState(MyMoneyTransactionFilter::cleared);

@@ -27,10 +27,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
 #include <ktextedit.h>
 #include <kstandardguiitem.h>
 #include <kmessagebox.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

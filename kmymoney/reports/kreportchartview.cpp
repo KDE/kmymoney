@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <kcolorscheme.h>
-#include <klocale.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes

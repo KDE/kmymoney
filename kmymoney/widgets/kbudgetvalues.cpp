@@ -31,12 +31,12 @@
 #include <QKeyEvent>
 #include <QEvent>
 #include <QPushButton>
+#include <QLocale>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-#include <kcalendarsystem.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 #include <kstandardguiitem.h>
 
@@ -259,7 +259,7 @@ void KBudgetValues::fillMonthLabels()
 {
   QDate date(m_budgetDate);
   for (int i = 0; i < 12; ++i) {
-    m_label[i]->setText(KLocale::global()->calendar()->monthName(date, KCalendarSystem::ShortName));
+    m_label[i]->setText(QLocale().standaloneMonthName(date.month(), QLocale::ShortFormat));
     date = date.addMonths(1);
   }
 }
@@ -290,7 +290,7 @@ void KBudgetValues::setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBu
     case MyMoneyBudget::AccountGroup::eMonthByMonth:
       m_individualButton->setChecked(true);
       slotChangePeriod(m_periodGroup->id(m_individualButton));
-      date.setYMD(m_budgetDate.year(), 1, 1);
+      date.setDate(m_budgetDate.year(), 1, 1);
       for (int i = 0; i < 12; ++i) {
         m_field[i]->setValue(budgetAccount.period(date).amount());
         date = date.addMonths(1);
@@ -320,7 +320,7 @@ void KBudgetValues::budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::Acc
     budgetAccount.addPeriod(m_budgetDate, period);
   } else if (tab == m_periodGroup->id(m_individualButton)) {
     budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthByMonth);
-    date.setYMD(m_budgetDate.year(), 1, 1);
+    date.setDate(m_budgetDate.year(), 1, 1);
     for (int i = 0; i < 12; ++i) {
       period.setStartDate(date);
       period.setAmount(m_field[i]->value());

@@ -34,8 +34,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <klocale.h>
-#include <kcalendarsystem.h>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -419,9 +418,10 @@ void PivotTable::collapseColumns()
 
   int columnpitch = m_config_f.columnPitch();
   if (columnpitch != 1) {
+    // TODO: port to kf5
     int sourcemonth = (m_config_f.isColumnsAreDays())
                       // use the user's locale to determine the week's start
-                      ? (m_beginDate.dayOfWeek() + 8 - KLocale::global()->weekStartDay()) % 7
+                      ? (m_beginDate.dayOfWeek() + 8 - 1/*KLocale::global()->weekStartDay()*/) % 7
                       : m_beginDate.month();
     int sourcecolumn = 1;
     int destcolumn = 1;
@@ -524,7 +524,7 @@ void PivotTable::calculateColumnHeadings()
       QDate columnDate = m_beginDate;
       int column = 1;
       while (column++ < m_numColumns) {
-        QString heading = KLocale::global()->calendar()->monthName(columnDate.month(), columnDate.year(), KCalendarSystem::ShortName) + ' ' + QString::number(columnDate.day());
+        QString heading = QLocale().monthName(columnDate.month(), QLocale::ShortFormat) + ' ' + QString::number(columnDate.day());
         columnDate = columnDate.addDays(1);
         m_columnHeadings.append(heading);
       }
@@ -533,14 +533,15 @@ void PivotTable::calculateColumnHeadings()
       QDate prv = m_beginDate;
 
       // use the user's locale to determine the week's start
-      int dow = (day.dayOfWeek() + 8 - KLocale::global()->weekStartDay()) % 7;
+      // TODO: port to kf5
+      int dow = (day.dayOfWeek() + 8 - 1/*KLocale::global()->weekStartDay()*/) % 7;
 
       while (day <= m_endDate) {
         if (((dow % columnpitch) == 0) || (day == m_endDate)) {
           m_columnHeadings.append(QString("%1&nbsp;%2 - %3&nbsp;%4")
-                                  .arg(KLocale::global()->calendar()->monthName(prv.month(), prv.year(), KCalendarSystem::ShortName))
+                                  .arg(QLocale().monthName(prv.month(), QLocale::ShortFormat))
                                   .arg(prv.day())
-                                  .arg(KLocale::global()->calendar()->monthName(day.month(), day.year(), KCalendarSystem::ShortName))
+                                  .arg(QLocale().monthName(day.month(), QLocale::ShortFormat))
                                   .arg(day.day()));
           prv = day.addDays(1);
         }
@@ -563,9 +564,9 @@ void PivotTable::calculateColumnHeadings()
       int segment = (m_beginDate.month() - 1) / columnpitch;
       int column = 1;
       while (column++ < m_numColumns) {
-        QString heading = KLocale::global()->calendar()->monthName(1 + segment * columnpitch, 2000, KCalendarSystem::ShortName);
+        QString heading = QLocale().monthName(1 + segment * columnpitch, QLocale::ShortFormat);
         if (columnpitch != 1)
-          heading += '-' + KLocale::global()->calendar()->monthName((1 + segment) * columnpitch, 2000, KCalendarSystem::ShortName);
+          heading += '-' + QLocale().monthName((1 + segment) * columnpitch, QLocale::ShortFormat);
         if (includeyear)
           heading += ' ' + QString::number(year);
         m_columnHeadings.append(heading);
@@ -1299,7 +1300,7 @@ QString PivotTable::renderCSV() const
   //
 
   QString result = QString("\"Report: %1\"\n").arg(m_config_f.name());
-  result += i18nc("Report date range", "%1 through %2\n", KLocale::global()->formatDate(m_config_f.fromDate(), KLocale::ShortDate), KLocale::global()->formatDate(m_config_f.toDate(), KLocale::ShortDate));
+  result += i18nc("Report date range", "%1 through %2\n", QLocale().toString(m_config_f.fromDate(), QLocale::ShortFormat), QLocale().toString(m_config_f.toDate(), QLocale::ShortFormat));
   if (m_config_f.isConvertCurrency())
     result += i18n("All currencies converted to %1\n", MyMoneyFile::instance()->baseCurrency().name());
   else
@@ -1547,7 +1548,7 @@ QString PivotTable::renderBody() const
 
   //actual dates of the report
   result += QString("<div class=\"subtitle\">");
-  result += i18nc("Report date range", "%1 through %2", KLocale::global()->formatDate(m_config_f.fromDate(), KLocale::ShortDate), KLocale::global()->formatDate(m_config_f.toDate(), KLocale::ShortDate));
+  result += i18nc("Report date range", "%1 through %2", QLocale().toString(m_config_f.fromDate(), QLocale::ShortFormat), QLocale().toString(m_config_f.toDate(), QLocale::ShortFormat));
   result += QString("</div>\n");
   result += QString("<div class=\"gap\">&nbsp;</div>\n");
 
