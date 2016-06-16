@@ -105,13 +105,14 @@ int main(int argc, char *argv[])
 
   aboutData.addAuthor(i18n("Michael Edwardes."), i18n("Initial idea, much initial source code, Project admin"), "mte@users.sourceforge.net");
   aboutData.addAuthor(i18n("Thomas Baumgart"), i18n("Core engine, Release Manager, Project admin"), "ipwizard@users.sourceforge.net");
+  aboutData.addAuthor(i18n("Alvaro Soliverez"), i18n("Forecast, Reports"), "asoliverez@gmail.com");
+  aboutData.addAuthor(i18n("Cristian Oneț"), i18n("Developer"), "onet.cristian@gmail.com");
+  aboutData.addAuthor(i18n("Christian Dávid"), i18n("Developer"), "christian-david@web.de");
   aboutData.addAuthor(i18n("Ace Jones"), i18n("Reporting logic, OFX Import"), "acejones@users.sourceforge.net");
   aboutData.addAuthor(i18n("Tony Bloomfield"), i18n("Database backend, maintainer stable branch"), "tonybloom@users.sourceforge.net");
-  aboutData.addAuthor(i18n("Alvaro Soliverez"), i18n("Forecast, Reports"), "asoliverez@gmail.com");
   aboutData.addAuthor(i18n("Felix Rodriguez"), i18n("Project Admin"), "frodriguez@users.sourceforge.net");
   aboutData.addAuthor(i18n("John C"), i18n("Developer"), "tacoturtle@users.sourceforge.net");
   aboutData.addAuthor(i18n("Fernando Vilas"), i18n("Database backend"), "fvilas@iname.com");
-  aboutData.addAuthor(i18n("Cristian Oneț"), i18n("Developer"), "onet.cristian@gmail.com");
 
   aboutData.addCredit(i18n("Kevin Tambascio"), i18n("Initial investment support"), "ktambascio@users.sourceforge.net");
   aboutData.addCredit(i18n("Javier Campos Morales"), i18n("Developer & Artist"), "javi_c@users.sourceforge.net");
@@ -119,6 +120,8 @@ int main(int argc, char *argv[])
   aboutData.addCredit(i18n("Laurent Montel"), i18n("Patches and port to kde4"), "montel@kde.org");
   aboutData.addCredit(i18n("Wolfgang Rohdewald"), i18n("Patches"), "woro@users.sourceforge.net");
   aboutData.addCredit(i18n("Marko Käning"), i18n("Patches, packaging and KF5-CI for OS X"), "mk-lists@email.de");
+  aboutData.addCredit(i18n("Allan Anderson"), i18n("CSV import/export"), "agander93@gmail.com");
+  aboutData.addCredit(i18n("Jack Ostroff"), i18n("Documentation and user support"), "ostroffjh@users.sourceforge.net");
   aboutData.setOrganizationDomain("kde.org");
 
   /**
