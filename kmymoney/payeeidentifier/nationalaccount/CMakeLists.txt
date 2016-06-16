@@ -46,7 +46,7 @@ target_link_libraries( payeeidentifier_nationalaccount_storageplugin
 configure_file(kmymoney-nationalaccount-storageplugin.desktop.in kmymoney-nationalaccount-storageplugin.desktop)
 kcoreaddons_desktop_to_json(payeeidentifier_nationalaccount_storageplugin
   "${CMAKE_CURRENT_BINARY_DIR}/kmymoney-nationalaccount-storageplugin.desktop"
-  SERVICE_TYPES "${KMyMoney_SOURCE_DIR}/mymoney/storage/kmymoney-sqlstorageplugin.desktop"
+  SERVICE_TYPES "${KMyMoney_SOURCE_DIR}/kmymoney/mymoney/storage/kmymoney-sqlstorageplugin.desktop"
 )
 
 install(TARGETS payeeidentifier_nationalaccount_storageplugin

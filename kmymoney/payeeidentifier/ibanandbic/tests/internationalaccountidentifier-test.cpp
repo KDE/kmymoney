@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "internationalaccountidentifiertest.h"
+#include "internationalaccountidentifier-test.h"
 #include "../ibanbic.h"
 #include "../ibanbicdata.h"
 
