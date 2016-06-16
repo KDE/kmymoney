@@ -1,6 +1,5 @@
 [Desktop Entry]
 Name=Print check
-Name[ar]=اطبع شيكًا
 Name[bs]=Provjera štampe
 Name[ca]=Imprimeix el xec
 Name[ca@valencia]=Imprimeix el xec
@@ -18,7 +17,6 @@ Name[gl]=Imprimir cheque
 Name[hu]=Nyomtatás-ellenőrzés
 Name[it]=Stampa assegno
 Name[kk]=Чекті басып шығару
-Name[lt]=Spausdinti čekį
 Name[mr]=चेक छापा
 Name[nds]=Scheck drucken
 Name[nl]=Cheque afdrukken
@@ -35,7 +33,6 @@ Name[x-test]=xxPrint checkxx
 Name[zh_CN]=打印支票
 Name[zh_TW]=列印支票
 Comment=Provides the capability to print checks
-Comment[ar]=توفّر إمكانيّة طباعة الشّيكات
 Comment[bs]=Daje mogućnost štampanja čekova
 Comment[ca]=Aporta la capacitat d'imprimir xecs
 Comment[ca@valencia]=Aporta la capacitat d'imprimir xecs
