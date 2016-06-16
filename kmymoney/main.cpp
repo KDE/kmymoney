@@ -61,7 +61,6 @@ bool timersOn = false;
 KMyMoneyApp* kmymoney;
 
 static int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, const QUrl & file, bool noFile);
-static void setupIconTheme();
 
 int main(int argc, char *argv[])
 {
@@ -79,11 +78,6 @@ int main(int argc, char *argv[])
    * Create application first
    */
   QApplication app(argc, argv);
-
-  /**
-   * if we have some local breeze icon resource, prefer it
-   */
-  setupIconTheme();
 
   /**
    * construct about data
@@ -353,24 +347,6 @@ int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, const QUr
 
   const int rc = a->exec();
   return rc;
-}
-
-void setupIconTheme() {
-  /**
-   * let QStandardPaths handle this, it will look for app local stuff
-   * this means e.g. for mac: "<APPDIR>/../Resources" and for win: "<APPDIR>/data"
-   */
-  const QString breezeIcons = QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("breeze-icons.rcc"));
-  if (!breezeIcons.isEmpty() && QFile::exists(breezeIcons) && QResource::registerResource(breezeIcons, QStringLiteral("/icons/breeze"))) {
-    // tell qt about the theme
-    QIcon::setThemeSearchPaths(QStringList() << QStringLiteral(":/icons"));
-    QIcon::setThemeName(QStringLiteral("breeze"));
-   
-    // tell KIconLoader an co. about the theme
-    KConfigGroup cg(KSharedConfig::openConfig(), "Icons");
-    cg.writeEntry("Theme", "breeze");
-    cg.sync();
-  }
 }
 
 void timestamp_reset()
