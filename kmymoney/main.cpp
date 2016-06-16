@@ -282,7 +282,8 @@ int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, const QUr
 
           // send a message to the primary client to import this file
           QDBusInterface remoteApp(primary, "/KMymoney", "org.kde.kmymoney");
-          remoteApp.call("webConnect", file.path(), KStartupInfo::startupId());
+          // TODO: port ot kf5
+          //remoteApp.call("webConnect", file.path(), KStartupInfo::startupId());
 
           // Before we delete the application, we make sure that we destroy all
           // widgets by running the event loop for some time to catch all those
