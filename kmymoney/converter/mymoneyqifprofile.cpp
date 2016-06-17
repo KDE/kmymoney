@@ -167,13 +167,13 @@ void MyMoneyQifProfile::clear()
       m_decimal['T'] =
         m_decimal['O'] =
           m_decimal['I'] = QLocale().decimalPoint();
-  // TODO: port to kf5
+
   m_thousands.clear();
   m_thousands['$'] =
     m_thousands['Q'] =
       m_thousands['T'] =
         m_thousands['O'] =
-          m_thousands['I'] = QChar();//KLocale::global()->monetaryThousandsSeparator()[0];
+          m_thousands['I'] = QLocale().groupSeparator();
 
   m_openingBalanceText = "Opening Balance";
   m_voidMark = "VOID ";

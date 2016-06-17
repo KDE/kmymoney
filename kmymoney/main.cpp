@@ -198,21 +198,14 @@ int main(int argc, char *argv[])
 
   KMyMoneyUtils::checkConstants();
 
-  // TODO: port to kf5
-#if 0
-  if (KLocale::global()->monetaryDecimalSymbol().isEmpty()) {
-    KMessageBox::error(0, i18n("The monetary decimal symbol is not correctly set in the KDE System Settings module Country/Region & Language. Please set it to a reasonable value and start KMyMoney again."), i18n("Invalid settings"));
-    exit(1);
-  }
-#endif
   // show startup logo
   std::unique_ptr<KStartupLogo> splash = std::unique_ptr<KStartupLogo>(new KStartupLogo());
   app.processEvents();
 
   // setup the MyMoneyMoney locale settings according to the KDE settings
-  // TODO: port to kf5
-  //MyMoneyMoney::setThousandSeparator(KLocale::global()->monetaryThousandsSeparator()[0]);
+  MyMoneyMoney::setThousandSeparator(QLocale().groupSeparator());
   MyMoneyMoney::setDecimalSeparator(QLocale().decimalPoint());
+  // TODO: port to kf5
   //MyMoneyMoney::setNegativeMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->negativeMonetarySignPosition()));
   //MyMoneyMoney::setPositiveMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->positiveMonetarySignPosition()));
   //MyMoneyMoney::setNegativePrefixCurrencySymbol(KLocale::global()->negativePrefixCurrencySymbol());
