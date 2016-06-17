@@ -20,6 +20,9 @@
 
 #include "printcheck.h"
 
+// QT includes
+#include <QAction>
+
 // KDE includes
 #include <KPluginFactory>
 #include <KActionCollection>

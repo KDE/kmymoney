@@ -360,7 +360,7 @@ bool get(const QString& request, const QMap<QString, QString>& attr, const QUrl 
 
 bool post(const QString& request, const QMap<QString, QString>& attr, const QUrl &url, const QUrl& filename)
 {
-  QByteArray req(request.toAscii());
+  QByteArray req(request.toUtf8());
 
   OfxHttpRequest job("POST", url, req, attr, filename, true);
   return job.error() == QHttp::NoError;

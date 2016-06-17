@@ -22,6 +22,7 @@
 
 #include <QFileDialog>
 #include <QUrl>
+#include <QAction>
 
 // KDE includes
 #include <KPluginFactory>

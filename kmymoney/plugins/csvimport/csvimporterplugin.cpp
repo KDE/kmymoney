@@ -22,6 +22,7 @@
 // QT Includes
 
 #include <QFile>
+#include <QAction>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
