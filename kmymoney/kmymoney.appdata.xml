@@ -127,7 +127,7 @@
       <caption xml:lang="tr">KMyMoney yeni kullanıcıların iyi bir başlangıç yapmalarına yardımcı olmak için bir hoş geldiniz sayfasına sahiptir</caption>
       <caption xml:lang="uk">У KMyMoney передбачено сторінку вітання, за допомогою якої новим користувачам буде простіше розпочати користування програмою.</caption>
       <caption xml:lang="x-test">xxKMyMoney has a welcome page to help new users get off to a good startxx</caption>
-      <image>http://www.kmymoney.org/images/screenshots/large/kmm1.png</image>
+      <image>https://kmymoney.org/images/screenshots/large/kmm1.png</image>
     </screenshot>
     <screenshot>
       <caption>The financial summary gives you an overview of your finances</caption>
@@ -151,7 +151,7 @@
       <caption xml:lang="tr">Mali durumunuzu gözden geçirmeniz için bir özet sunar</caption>
       <caption xml:lang="uk">За допомогою сторінки фінансового резюме вам буде простіше розібратися з поточним фінансовим станом.</caption>
       <caption xml:lang="x-test">xxThe financial summary gives you an overview of your financesxx</caption>
-      <image>http://www.kmymoney.org/images/screenshots/large/kmm2.png</image>
+      <image>https://kmymoney.org/images/screenshots/large/kmm2.png</image>
     </screenshot>
     <screenshot>
       <caption>In this view your accounts are organized, viewed, and managed by the institutions they are held at</caption>
@@ -175,12 +175,12 @@
       <caption xml:lang="tr">Bu görünümde hesaplarınız onları yöneten kurumlara göre düzenlenmiş şekilde görüntülenirler</caption>
       <caption xml:lang="uk">Рахунки на сторінці резюме упорядковано за установами, з якими ці рахунки пов’язано.</caption>
       <caption xml:lang="x-test">xxIn this view your accounts are organized, viewed, and managed by the institutions they are held atxx</caption>
-      <image>http://www.kmymoney.org/images/screenshots/large/kmm3.png</image>
+      <image>https://kmymoney.org/images/screenshots/large/kmm3.png</image>
     </screenshot>
   </screenshots>
-  <url type="homepage">http://www.kmymoney.org</url>
+  <url type="homepage">https://kmymoney.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?product=kmymoney4&amp;format=guided</url>
-  <url type="help">http://docs.kde.org/stable/en/extragear-office/kmymoney/index.html</url>
+  <url type="help">https://docs.kde.org/stable/en/extragear-office/kmymoney/index.html</url>
   <project_group>KDE</project_group>
   <provides>
     <binary>kmymoney</binary>
