@@ -9,7 +9,7 @@ set( sepaOnlineTasks_HEADER
   tasks/sepaonlinetransfer.h
 )
 
-qt5_wrap_ui( sepaOnlineTasks_SRCS
+ki18n_wrap_ui( sepaOnlineTasks_SRCS
   ui/sepacredittransferedit.ui
 )
 

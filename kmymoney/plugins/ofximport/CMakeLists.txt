@@ -11,7 +11,7 @@ set(kmm_ofximport_PART_SRCS ofximporterplugin.cpp ofxpartner.cpp)
 
 set(kmm_ofximport_PART_UI importoption.ui)
 
-qt5_wrap_ui(kmm_ofximport_PART_SRCS ${kmm_ofximport_PART_UI})
+ki18n_wrap_ui(kmm_ofximport_PART_SRCS ${kmm_ofximport_PART_UI})
 
 add_library(kmm_ofximport MODULE ${kmm_ofximport_PART_SRCS})
 

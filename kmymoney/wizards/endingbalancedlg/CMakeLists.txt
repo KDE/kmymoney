@@ -16,7 +16,7 @@ set (libendingbalancedlg_a_UI
   previouspostponewizardpagedecl.ui
   )
 
-qt5_wrap_ui(libendingbalancedlg_a_SOURCES ${libendingbalancedlg_a_UI} )
+ki18n_wrap_ui(libendingbalancedlg_a_SOURCES ${libendingbalancedlg_a_UI} )
 
 add_library(endingbalancedlg STATIC ${libendingbalancedlg_a_SOURCES})
 target_link_libraries(endingbalancedlg KF5::ConfigWidgets KF5::WidgetsAddons KF5::I18n KF5::Completion Qt5::Widgets Qt5::Sql Qt5::Xml Alkimia::alkimia)

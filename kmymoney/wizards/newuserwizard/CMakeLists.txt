@@ -12,7 +12,7 @@ set (libnewuserwizard_a_UI
 
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
-qt5_wrap_ui(libnewuserwizard_a_SOURCES ${libnewuserwizard_a_UI})
+ki18n_wrap_ui(libnewuserwizard_a_SOURCES ${libnewuserwizard_a_UI})
 
 add_library(newuserwizard STATIC ${libnewuserwizard_a_SOURCES})
 # TODO: clean dependencies

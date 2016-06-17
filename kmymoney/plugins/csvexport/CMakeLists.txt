@@ -14,7 +14,7 @@ set(kmm_csvexport_PART_SRCS
   csvexportdlg.cpp
 )
 
-qt5_wrap_ui(kmm_csvexport_PART_SRCS
+ki18n_wrap_ui(kmm_csvexport_PART_SRCS
   csvexportdlg.ui
 )
 

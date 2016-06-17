@@ -13,7 +13,7 @@ set(kmm_kbanking_widgets_UI
 
 kconfig_add_kcfg_files(kmm_kbanking_widgets_la_SOURCES ../kbankingsettings.kcfgc)
 
-qt5_wrap_ui(kmm_kbanking_widgets_la_SOURCES ${kmm_kbanking_widgets_UI})
+ki18n_wrap_ui(kmm_kbanking_widgets_la_SOURCES ${kmm_kbanking_widgets_UI})
 
 add_library(kmm_kbanking_widgets STATIC ${kmm_kbanking_widgets_la_SOURCES})
 

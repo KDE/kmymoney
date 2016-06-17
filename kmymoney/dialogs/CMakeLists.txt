@@ -72,7 +72,7 @@ set(dialogs_UI
   konlinetransferformdecl.ui
 )
 
-qt5_wrap_ui(libdialogs_a_SOURCES ${dialogs_UI} )
+ki18n_wrap_ui(libdialogs_a_SOURCES ${dialogs_UI} )
 
 # in order to use add_dependencies, we need to add this custom target
 # for all generated header files.

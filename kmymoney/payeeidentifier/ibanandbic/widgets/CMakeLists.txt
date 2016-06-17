@@ -19,7 +19,7 @@ set( IBAN_BIC_WIDGETS_HEADERS
   ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier_iban_bic_widgets_export.h
 )
 
-qt5_wrap_ui(IBAN_BIC_WIDGETS_SCRS
+ki18n_wrap_ui(IBAN_BIC_WIDGETS_SCRS
   ibanbicitemedit.ui
 )
 

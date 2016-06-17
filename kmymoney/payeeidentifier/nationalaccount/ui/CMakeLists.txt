@@ -6,7 +6,7 @@ set( PAYEEIDENTIFIER_NATIONALACCOUNT_UI_SCRS
   pluginfactory.cpp
 )
 
-qt5_wrap_ui(
+ki18n_wrap_ui(
   PAYEEIDENTIFIER_NATIONALACCOUNT_UI_SCRS
   nationalaccountedit.ui
 )

@@ -61,7 +61,7 @@ set(libviews_a_UI
 
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
-qt5_wrap_ui(libviews_a_SOURCES ${libviews_a_UI})
+ki18n_wrap_ui(libviews_a_SOURCES ${libviews_a_UI})
 
 add_library(views STATIC ${libviews_a_SOURCES})
 

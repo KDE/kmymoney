@@ -14,7 +14,7 @@ set (libnewinvestmentwizard_a_UI
   konlineupdatewizardpagedecl.ui
   )
 
-qt5_wrap_ui(libnewinvestmentwizard_a_SOURCES ${libnewinvestmentwizard_a_UI} )
+ki18n_wrap_ui(libnewinvestmentwizard_a_SOURCES ${libnewinvestmentwizard_a_UI} )
 
 add_library(newinvestmentwizard STATIC ${libnewinvestmentwizard_a_SOURCES})
 # TODO: cleanup dependencies

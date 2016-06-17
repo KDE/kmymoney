@@ -12,7 +12,7 @@ set (libnewaccountwizard_a_UI
   kloanpayoutpagedecl.ui kloanschedulepagedecl.ui kschedulepagedecl.ui
   )
 
-qt5_wrap_ui(libnewaccountwizard_a_SOURCES ${libnewaccountwizard_a_UI} )
+ki18n_wrap_ui(libnewaccountwizard_a_SOURCES ${libnewaccountwizard_a_UI} )
 
 add_library(newaccountwizard STATIC ${libnewaccountwizard_a_SOURCES})
 # TODO: clean dependencies

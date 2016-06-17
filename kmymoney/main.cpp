@@ -63,6 +63,7 @@ static int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, co
 
 int main(int argc, char *argv[])
 {
+  KLocalizedString::setApplicationDomain("kmymoney");
   timer.start();
 
   {

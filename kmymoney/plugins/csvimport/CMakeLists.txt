@@ -18,7 +18,7 @@ set(kmm_csvimport_PART_SRCS
   symboltabledlg.cpp
 )
 
-qt5_wrap_ui(kmm_csvimport_PART_SRCS
+ki18n_wrap_ui(kmm_csvimport_PART_SRCS
   csvdialog.ui
   csvwizard.ui
   redefinedlgdecl.ui

@@ -9,7 +9,7 @@ set (libwizardpages_a_UI
   accountsdecl.ui currencydecl.ui userinfodecl.ui
   )
 
-qt5_wrap_ui(wizardpages_ui_srcs ${libwizardpages_a_UI} )
+ki18n_wrap_ui(wizardpages_ui_srcs ${libwizardpages_a_UI} )
 # in order to use add_dependencies, we need to add this custom target
 # for all generated header files.
 add_custom_target(generate_wizardpages_ui_srcs DEPENDS

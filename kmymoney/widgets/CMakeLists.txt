@@ -37,7 +37,7 @@ set(kmm_widgets_sources
   amountedit.cpp
   )
 
-qt5_wrap_ui(kmm_widgets_sources
+ki18n_wrap_ui(kmm_widgets_sources
   kmymoneyvalidationfeedback.ui
   onlinejobmessagesview.ui
 )
@@ -108,7 +108,7 @@ set (kmymoney_base_UI
   kbudgetvaluesdecl.ui transactionsortoptiondecl.ui kaccounttemplateselectordecl.ui
   )
 
-qt5_wrap_ui(kmymoney_base_ui_srcs ${kmymoney_base_UI})
+ki18n_wrap_ui(kmymoney_base_ui_srcs ${kmymoney_base_UI})
 set(_uncritial_common_sources ${_uncritial_common_sources}
   ${kmymoney_base_ui_srcs})
 
@@ -178,7 +178,7 @@ set(libwidgets_a_UI
 # of undefined type `struct KMyMoneyGeneralCombo'"
 
 
-qt5_wrap_ui(widgets_ui_srcs ${libwidgets_a_UI})
+ki18n_wrap_ui(widgets_ui_srcs ${libwidgets_a_UI})
 add_custom_target(generate_widgets_ui_srcs DEPENDS ${widgets_ui_srcs})
 
 add_library(widgets STATIC

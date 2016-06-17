@@ -41,7 +41,7 @@ set (libnewloanwizard_a_UI
   lendborrowwizardpagedecl.ui
   )
 
-qt5_wrap_ui(libnewloanwizard_a_SOURCES ${libnewloanwizard_a_UI} )
+ki18n_wrap_ui(libnewloanwizard_a_SOURCES ${libnewloanwizard_a_UI} )
 
 add_library(newloanwizard STATIC ${libnewloanwizard_a_SOURCES})
 # TODO: clean dependencies

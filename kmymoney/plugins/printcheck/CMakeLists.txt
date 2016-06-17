@@ -45,7 +45,7 @@ set(kcm_kmm_printcheck_PART_SRCS
 
 kconfig_add_kcfg_files(kcm_kmm_printcheck_PART_SRCS pluginsettings.kcfgc)
 
-qt5_wrap_ui(kcm_kmm_printcheck_PART_SRCS pluginsettingsdecl.ui)
+ki18n_wrap_ui(kcm_kmm_printcheck_PART_SRCS pluginsettingsdecl.ui)
 
 add_library(kcm_kmm_printcheck MODULE ${kcm_kmm_printcheck_PART_SRCS})
 

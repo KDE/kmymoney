@@ -28,7 +28,7 @@ set (libsettings_a_UI
   ksettingsreportsdecl.ui
   )
 
-qt5_wrap_ui(libsettings_a_SOURCES ${libsettings_a_UI} )
+ki18n_wrap_ui(libsettings_a_SOURCES ${libsettings_a_UI} )
 
 add_library(settings STATIC ${libsettings_a_SOURCES})
 

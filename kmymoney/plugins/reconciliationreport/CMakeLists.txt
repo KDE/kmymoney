@@ -9,7 +9,7 @@ set(kmm_reconciliationreport_PART_SRCS
     reconciliationreport.cpp
    )
 
-qt5_wrap_ui(kmm_reconciliationreport_PART_SRCS kreconciliationreportdlgdecl.ui )
+ki18n_wrap_ui(kmm_reconciliationreport_PART_SRCS kreconciliationreportdlgdecl.ui )
 
 add_library(kmm_reconciliationreport MODULE ${kmm_reconciliationreport_PART_SRCS})
 kcoreaddons_desktop_to_json(kmm_reconciliationreport kmm_reconciliationreport.desktop)
