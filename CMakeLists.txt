@@ -239,18 +239,12 @@ option(USE_MODELTEST
 option(USE_QT_DESIGNER
   "Install KMyMoney specific widget library for Qt-Designer (default=OFF)" OFF)
 
-option(USE_DEVELOPER_
-  "Install KMyMoney specific developer umentation (default=OFF)" OFF)
-
 ######################### The Actual Targets ##########################
 add_subdirectory( libkgpgfile )
 add_subdirectory( tools )
 add_subdirectory( kmymoney )
 if(KF5DocTools_FOUND)
   add_subdirectory( doc )
-endif()
-if (KF5DocTools_FOUND AND USE_DEVELOPER_DOC)
-  add_subdirectory( developer-doc )
 endif()
 
 ######################### Output Results #############################
@@ -279,9 +273,7 @@ nice_yesno("LIBICAL_FOUND")
 nice_yesno("ENABLE_SQLCIPHER")
 nice_yesno("USE_QT_DESIGNER")
 nice_yesno("USE_MODELTEST")
-nice_yesno("USE_DEVELOPER_DOC")
 nice_yesno("DOXYGEN_FOUND")
-nice_yesno("USE_HTML_HANDBOOK")
 message("
 -------- KMyMoney ${PROJECT_VERSION}${PROJECT_VERSION_SUFFIX} --------
 
@@ -311,14 +303,7 @@ Qt-Designer library support:             ${nice_USE_QT_DESIGNER}
 
 Generate modeltest code:                 ${nice_USE_MODELTEST}
 
-Generate developer documentation:        ${nice_USE_DEVELOPER_DOC}
-
 Generate API documentation with Doxygen: ${nice_DOXYGEN_FOUND}")
-
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc")
-  message("
-Generate HTML documentation:             ${nice_USE_HTML_HANDBOOK}")
-endif()
 
 message("
 Build type: ${CMAKE_BUILD_TYPE}")
