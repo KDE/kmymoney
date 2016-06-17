@@ -1,10 +1,11 @@
 [Desktop Entry]
 Name=Configure the print check plugin
+Name[ar]=اضبط ملحقة طبع الشّيكات
 Name[bs]=Konfiguriši dodatak za provjeru štampe
 Name[ca]=Configura el connector d'impressió de xecs
 Name[ca@valencia]=Configura el connector d'impressió de xecs
 Name[da]=Indstil plugin til udskrift af checks
-Name[de]=Das Modul zum Drucken von Schecks konfigurieren
+Name[de]=Einrichtung des Moduls zum Drucken von Schecks
 Name[el]=Ρύθμιση του πρόσθετου εκτύπωσης επιταγών
 Name[en_GB]=Configure the print cheque plugin
 Name[es]=Configurar el complemento de impresión de cheques
@@ -44,11 +45,11 @@ Keywords[de]=printcheck;kmymoney;
 Keywords[el]=printcheck;kmymoney;
 Keywords[en_GB]=printcheque;kmymoney;
 Keywords[es]=printcheck;kmymoney;
-Keywords[et]=tšeki trükkimine;kmymoney;
+Keywords[et]=tšeki trükkimine,kmymoney;
 Keywords[eu]=printcheck;kmymoney;
 Keywords[fi]=printcheck;kmymoney;
 Keywords[fr]=printcheck;kmymoney;
-Keywords[gl]=printcheck;kmymoney;cheque;
+Keywords[gl]=printcheck;kmymoney;cheque
 Keywords[hu]=printcheck;kmymoney;
 Keywords[it]=printcheck;kmymoney;
 Keywords[kk]=printcheck;kmymoney;

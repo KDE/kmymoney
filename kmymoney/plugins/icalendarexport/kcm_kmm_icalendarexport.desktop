@@ -1,8 +1,9 @@
 [Desktop Entry]
 Name=Configure icalendar export plugin
+Name[ar]=اضبط ملحقة تصدير icalendar
 Name[bs]=Konfiguriši izvozni dodatak za icalendar
-Name[ca]=Configura el connector d'exportació de l'iCalendar
-Name[ca@valencia]=Configura el connector d'exportació de l'iCalendar
+Name[ca]=Configura el connector d'exportació de l'icalendar
+Name[ca@valencia]=Configura el connector d'exportació de l'icalendar
 Name[da]=Indstil plugin til iCalendar-eksport
 Name[de]=iCalendar-Export-Modul konfigurieren
 Name[el]=Ρύθμιση πρόσθετου εξαγωγής icalendar
@@ -16,6 +17,7 @@ Name[gl]=Configurar o engadido de exportación a icalendar
 Name[hu]=icalendar export bővítmény beállítása
 Name[it]=Configura l'estensione di esportazione iCalendar
 Name[kk]=icalendar-ға экспортау плагинің баптау
+Name[lt]=Derinti icalendar eksportavimo papildinį
 Name[nds]=Exportmoduul för ICalendar instellen
 Name[nl]=Plugin voor exporteren van icalendar instellen
 Name[pl]=Ustawienia wtyczki eksportu icalendar
@@ -52,6 +54,7 @@ Keywords[gl]=icalendar;kmymoney;
 Keywords[hu]=icalendar;kmymoney;
 Keywords[it]=icalendar;kmymoney;
 Keywords[kk]=icalendar;kmymoney;
+Keywords[lt]=icalendar;kmymoney;
 Keywords[nl]=icalendar;kmymoney;
 Keywords[pl]=icalendar;kmymoney;
 Keywords[pt]=icalendar;kmymoney;
