@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>KMyMoney</name>
+  <name xml:lang="ar">أموالك</name>
   <name xml:lang="ast">KMyMoney</name>
   <name xml:lang="bs">KMyMoney</name>
   <name xml:lang="ca">KMyMoney</name>
@@ -19,16 +20,21 @@
   <name xml:lang="gl">KMyMoney</name>
   <name xml:lang="hu">KMyMoney</name>
   <name xml:lang="it">KMyMoney</name>
+  <name xml:lang="lt">KMyMoney</name>
   <name xml:lang="nl">KMyMoney</name>
   <name xml:lang="pl">KMyMoney</name>
   <name xml:lang="pt">KMyMoney</name>
   <name xml:lang="pt-BR">KMyMoney</name>
+  <name xml:lang="ro">KMyMoney</name>
   <name xml:lang="sk">KMyMoney</name>
   <name xml:lang="sv">KMyMoney</name>
   <name xml:lang="tr">KMyMoney</name>
   <name xml:lang="uk">KMyMoney</name>
   <name xml:lang="x-test">xxKMyMoneyxx</name>
+  <name xml:lang="zh-CN">KMyMoney</name>
   <summary>Personal Finance Manager</summary>
+  <summary xml:lang="ar">مدير ماليّة شخصيّ</summary>
+  <summary xml:lang="ast">Xestor de finances personal</summary>
   <summary xml:lang="bs">Lični upravnik finansijama</summary>
   <summary xml:lang="ca">Gestor per a les finances personals</summary>
   <summary xml:lang="ca-valencia">Gestor per a les finances personals</summary>
@@ -43,19 +49,24 @@
   <summary xml:lang="gl">Xestor das finanzas persoais</summary>
   <summary xml:lang="hu">Személyes pénzügyi kezelő</summary>
   <summary xml:lang="it">Gestore delle finanze personali</summary>
+  <summary xml:lang="lt">Asmeninių finansų tvarkytuvė</summary>
   <summary xml:lang="nl">Persoonlijk financieel beheer</summary>
   <summary xml:lang="pl">Zarządzanie finansami osobistymi</summary>
   <summary xml:lang="pt">Gestor de Finanças Pessoais</summary>
   <summary xml:lang="pt-BR">Gerenciador de Finanças Pessoais</summary>
+  <summary xml:lang="ro">Gestionar de finanțe personale</summary>
   <summary xml:lang="sk">Osobný manažér financií</summary>
   <summary xml:lang="sv">Hemekonomihanterare</summary>
-  <summary xml:lang="tr">Kişisel Finans Yönetici</summary>
+  <summary xml:lang="tr">Kişisel Finans Yöneticisi</summary>
   <summary xml:lang="uk">Програма для керування особистими фінансами</summary>
   <summary xml:lang="x-test">xxPersonal Finance Managerxx</summary>
+  <summary xml:lang="zh-CN">个人金融管理器</summary>
   <description>
     <p>
       KMyMoney is a personal finance manager for KDE.
     </p>
+    <p xml:lang="ar">أموالك هو مدير ماليّة شخصيّ لِكدي.</p>
+    <p xml:lang="ast">KMyMoney ye un xestor de finances personal pa KDE.</p>
     <p xml:lang="bs">KMyMoney je personalni finansijski menadžer za KDE.</p>
     <p xml:lang="ca">El KMyMoney és un gestor de les finances personals pel KDE.</p>
     <p xml:lang="ca-valencia">El KMyMoney és un gestor de les finances personals pel KDE.</p>
@@ -69,13 +80,15 @@
     <p xml:lang="gl">KMyMoney é un xestor de finanzas persoais para KDE.</p>
     <p xml:lang="hu">A KMyMoney egy személyes pénzügyi kezelő KDE felülethez.</p>
     <p xml:lang="it">KMyMoney è un gestore delle finanze personali per KDE.</p>
+    <p xml:lang="lt">KMyMoney yra asmeninių finansų tvarkymo programa skirta KDE.</p>
     <p xml:lang="nl">KMyMoney is een persoonlijke financieelbeheerder voor KDE.</p>
     <p xml:lang="pl">KMyMoney służy do zarządzania finansami osobistymi w KDE.</p>
     <p xml:lang="pt">O KMyMoney é um gestor de finanças pessoais para o KDE.</p>
     <p xml:lang="pt-BR">KMyMoney é um gerenciador de finanças pessoais para o KDE.</p>
+    <p xml:lang="ro">KMyMoney este un gestionar de finanțe personale pentru KDE.</p>
     <p xml:lang="sk">KMyMoney je osobný správca financií pre KDE.</p>
     <p xml:lang="sv">KMyMoney är en hemekonomihanterare för KDE.</p>
-    <p xml:lang="tr">KMyMoney, KDE için kişisel finans yöneticisidir.</p>
+    <p xml:lang="tr">KMyMoney, KDE için bir kişisel finans yöneticisidir.</p>
     <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами для KDE.</p>
     <p xml:lang="x-test">xxKMyMoney is a personal finance manager for KDE.xx</p>
     <p>
@@ -84,8 +97,8 @@
       Online banking support (statement download) is also provided for the OFX and HBCI protocols.
     </p>
     <p xml:lang="bs">On podržava različite vrste računa, kategorizaciju troškova i prihoda, pomirenje bankovnih računa i uvoz / izvoz na "KIF" formatu. Direktno preuzimanje koristeći Ofk i HBCI formate je moguće i putem dodataka. Online banking podrška (izjava preuzmi) se takođe pruža za Ofk i HBCI protokola.</p>
-    <p xml:lang="ca">És compatible amb diferents tipus de comptes, la categorització de les despeses i els ingressos, la conciliació dels comptes bancaris i importa/exporta al format de fitxer «QIF». La baixada directa usant els formats OFX i HBCI també és possible a través de connectors. També admet la banca en línia (baixada dels extractes) per als protocols OFX i HBCI.</p>
-    <p xml:lang="ca-valencia">És compatible amb diferents tipus de comptes, la categorització de les despeses i els ingressos, la conciliació dels comptes bancaris i importa/exporta al format de fitxer «QIF». La baixada directa usant els formats OFX i HBCI també és possible a través de connectors. També admet la banca en línia (baixada dels extractes) per als protocols OFX i HBCI.</p>
+    <p xml:lang="ca">És compatible amb diferents tipus de comptes, la categorització de les despeses i els ingressos, la conciliació dels comptes bancaris i importa/exporta al format de fitxer «QIF». La baixada directa usant els formats OFX i HBCI també és possible a través de connectors. També implementa la banca en línia (baixada dels extractes) per als protocols OFX i HBCI.</p>
+    <p xml:lang="ca-valencia">És compatible amb diferents tipus de comptes, la categorització de les despeses i els ingressos, la conciliació dels comptes bancaris i importa/exporta al format de fitxer «QIF». La baixada directa usant els formats OFX i HBCI també és possible a través de connectors. També implementa la banca en línia (baixada dels extractes) per als protocols OFX i HBCI.</p>
     <p xml:lang="da">Den understøtter forskellige kontotyper, kategorisering af udgifter og indtægter, afstemning af bankkonti og import/eksport af filformatet "QIF". Direkte download med brug af af formaterne OFX og HBCI er også muligt via plugins. Netbankunderstøttelse (download af kontoudtog) leveres også for protokollerne OFX og HBCI.</p>
     <p xml:lang="en-GB">It supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format. Direct download using the OFX and HBCI formats is also possible via plugins. Online banking support (statement download) is also provided for the OFX and HBCI protocols.</p>
     <p xml:lang="es">Soporta diferentes tipos de cuentas, categorización de gastos e ingresos, reconciliación de cuentas bancarias e importación/exportación del formato de archivo «QIF». Posibilita la descarga directa usando los formatos OFX y HBCI a través de complementos. También incluye soporte para la banca electrónica (descarga de estados de cuenta) para los protocolos OFX y HBCI</p>
@@ -94,19 +107,20 @@
     <p xml:lang="fr">Il prend en charge différents types de comptes, une catégorisation des dépenses et des revenus, une réconciliation des comptes en banque et l'importation/exportation du format de fichier « QIF ». Le téléchargement direct des formats « OFX » et « HBCI » est également possible à l'aide de modules d'extension. La prise en charge des relevés de compte en ligne est également fournie pour les protocoles OFX et HBCI.</p>
     <p xml:lang="gl">Permite definir distintos tipos de contas, organizar por categorías os gastos e ingresos, conciliar contas do banco e importar e exportar datos no formato QIF. Existen ademais complementos que permiten descargar datos directamente en formato OFX ou HBCI. Para os protocolos OFX e HBCI tamén se permite usar a banca por internet (descargar o extracto).</p>
     <p xml:lang="it">Supporta diversi tipi di conti, categorie di spese ed entrate, riconciliazione dei conti correnti e importazione/esportazione del formato di file "QIF". Lo scaricamento diretto utilizzando i formati OFX e HBCI è inoltre possibile tramite estensioni. Il supporto ai servizi bancari in linea (scaricamento dell'estratto conto) è fornito per i protocolli OFX e HBCI.</p>
-    <p xml:lang="nl">Het ondersteunt verschillende typen rekeningen, in categorieën indelen van uitgaven en inkomsten, controle op bankrekeningen en importeren/exporteren naar het “QIF” bestandsformaat. Direct downloaden met de OFX en HBCI formaten is ook mogelijk via plug-ins. Onderstuening voor online bankieren (downloaden van afschriften) wordt ook geleverd voor de OFX en HBCI protocollen.</p>
+    <p xml:lang="nl">Het ondersteunt verschillende typen rekeningen, in categorieën indelen van uitgaven en inkomsten, controle op bankrekeningen en importeren/exporteren naar het “QIF” bestandsformaat. Direct downloaden met de OFX en HBCI formaten is ook mogelijk via plug-ins. Ondersteuning voor online bankieren (downloaden van afschriften) wordt ook geleverd voor de OFX en HBCI protocollen.</p>
     <p xml:lang="pl">Obsługuje różne rodzaj kont, kategoryzacje rozchodów i przychodów, uzgadnianie kont bankowych oraz importowanie/eksportowanie do formatu plików “QIF”. Bezpośrednie pobieranie przy użyciu formatów OFX oraz HBCI również jest możliwe poprzez wtyczki. Obsługa bankowości w sieci (pobieranie wyciągów) jest również zapewniona przez protokoły OFX oraz HBCI.</p>
-    <p xml:lang="pt">Suporta diferentes tipos de contas, a classificação de despesas e receitas, a consolidação das contas dos bancos e a importação/exportação para o formato de ficheiros "QIF". Também é possível a transferência directa dos formatos OFX e HBCI, através de 'plugins'. O suporte para a banca 'online' (com a transferência de extractos) também está disponível para os protocolos OFX e HBCI.</p>
+    <p xml:lang="pt">Suporta diferentes tipos de contas, a classificação das despesas e receitas, a reconciliação de contas bancárias e a importação/exportação para o formato de ficheiros "QIF". A transferência directa com os formatos OFX e HBCI também é possível através de 'plugins'. O suporte para a banca 'online' (transferência de extractos) também é permitida para os protocolos OFX e HBCI.</p>
     <p xml:lang="pt-BR">Tem suporte a diferentes tipos de contas, a classificação de despesas e receitas por categoria, a conciliação das contas bancárias e a importação/exportação para o formato de arquivos "QIF". Por meio de plugins, também é possível baixar diretamente usando os formatos OFX e HBCI. Também há suporte para banco online (baixar extratos) através dos protocolos OFX e HBCI.</p>
-    <p xml:lang="sk">Podporuje rôzne typy účtov, kategorizáciu výdavkov a príjmov, súlad bankových účtov a import/export do formátu "QIF". Priame sťahovanie pomocou formátov OFX a HBCI je možné cez pluginy. Podpora online bankingu je možná pre protokoly OFX a HBCI.</p>
+    <p xml:lang="sk">Podporuje rôzne typy účtov, kategorizáciu výdavkov a príjmov, súlad bankových účtov a import/export do súborového formátu "QIF". Priame sťahovanie pomocou formátov OFX a HBCI je tiež možné pomocou pluginov. Podpora online bankingu (sťahovanie prehľadov) je tiež možná cez protokoly OFX a HBCI.</p>
     <p xml:lang="sv">Den stöder olika kontotyper, kategorisering av utgifter och inkomster, avstämning av bankkonton samt import från och export till filformatet "QIF". Direkt nerladdning med användning av formaten OFX och HBCI är också möjlig via insticksprogram. Stöd för internetbank (nerladdning av kontoutdrag) tillhandahålls också för protokollen OFX och HBCI.</p>
-    <p xml:lang="tr">Farklı hesap türlerini, gelir ve giderlerin sınıflandırmasını, banka hesaplarının uzlaştırılmasını ve "QIF" biçiminde içe/dışa aktarmayı destekler. Eklentilerle OFX ve HBCI biçimlerinde doğrudan indirme mümkündür. OFX ve HBCI protokolleri için çevrimiçi bankacılık desteği de mevcuttur.</p>
+    <p xml:lang="tr">Değişik hesap türlerini, gider ve gelirlerin kategorilenmesi, banka hesaplarının anlaşmaları ve “QIF” dosya biçiminin içe/dışa aktarımını destekler. Eklentiler vasıtasıyla OFX ve HBCI biçimleri kullanarak doğrudan indirme de mümkündür. Çevrimiçi bankacılık desteği (rapor indirme) de OFX ve HBCI protokolleriyle sağlanmıştır.</p>
     <p xml:lang="uk">У програмі передбачено різні типи рахунків, категоризацію за витратами та надходженнями коштів, звірення банківських рахунків, а також імпортування та експортування даних у форматі QIF. Крім того, можливе безпосереднє отримання банківських даних (виписок) з інтернету у форматах OFX та HBCI за допомогою додатків.</p>
     <p xml:lang="x-test">xxIt supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format. Direct download using the OFX and HBCI formats is also possible via plugins. Online banking support (statement download) is also provided for the OFX and HBCI protocols.xx</p>
   </description>
   <screenshots>
     <screenshot type="default">
       <caption>KMyMoney has a welcome page to help new users get off to a good start</caption>
+      <caption xml:lang="ast">KMyMoney tien una páxina d'acoyida p'ayudar a los usuarios nuevos a tener un bon entamu</caption>
       <caption xml:lang="bs">KMyMoney ima stranicu dobrodošlice da pomogne novim korisnicima da imaju dobar start</caption>
       <caption xml:lang="ca">El KMyMoney disposa d'una pàgina de benvinguda per ajudar els nous usuaris a començar amb bon peu</caption>
       <caption xml:lang="ca-valencia">El KMyMoney disposa d'una pàgina de benvinguda per ajudar els nous usuaris a començar amb bon peu</caption>
@@ -121,17 +135,19 @@
       <caption xml:lang="it">KMyMoney ha una pagina di benvenuto per aiutare i nuovi utenti a iniziare a utilizzarlo nel modo giusto</caption>
       <caption xml:lang="nl">KMyMoney heeft een welkomstpagina om nieuwe gebruikers bij een goede start te helpen</caption>
       <caption xml:lang="pl">KMyMoney zawiera stronę powitalną, aby pomoc nowym użytkownikom w szybkim rozpoczęciu pracy</caption>
-      <caption xml:lang="pt">O KMyMoney tem uma página de boas-vindas para ajudar os utilizadores novos a terem um bom início</caption>
+      <caption xml:lang="pt">O KMyMoney tem uma página de boas-vindas para ajudar os novos utilizadores a terem um bom ponto de partida</caption>
       <caption xml:lang="pt-BR">O KMyMoney tem uma página de boas-vindas para ajudar os novos usuários a terem um bom começo</caption>
       <caption xml:lang="sk">KMyMoney má uvítaciu stránku na pomoc novým používateľom na dobrý začiatok</caption>
       <caption xml:lang="sv">KMyMoney har en välkomstsida för att hjälpa nya användare att komma igång</caption>
-      <caption xml:lang="tr">KMyMoney yeni kullanıcıların iyi bir başlangıç yapmalarına yardımcı olmak için bir hoş geldiniz sayfasına sahiptir</caption>
+      <caption xml:lang="tr">KMyMoney iyi bir başlangıç yapması için bir hoş geldiniz sayfası vardır</caption>
       <caption xml:lang="uk">У KMyMoney передбачено сторінку вітання, за допомогою якої новим користувачам буде простіше розпочати користування програмою.</caption>
       <caption xml:lang="x-test">xxKMyMoney has a welcome page to help new users get off to a good startxx</caption>
       <image>http://www.kmymoney.org/images/screenshots/large/kmm1.png</image>
     </screenshot>
     <screenshot>
       <caption>The financial summary gives you an overview of your finances</caption>
+      <caption xml:lang="ar">يعطيك ملخّص الماليّة لمحة عن ماليّتك</caption>
+      <caption xml:lang="ast">El sumariu financieru date una vista previa de les tos finances</caption>
       <caption xml:lang="bs">Finansijski rezime daje vam pregled vaših finansija</caption>
       <caption xml:lang="ca">El resum financer ofereix una visió general de les vostres finances</caption>
       <caption xml:lang="ca-valencia">El resum financer ofereix una visió general de les vostres finances</caption>
@@ -149,13 +165,14 @@
       <caption xml:lang="pt-BR">O resumo financeiro lhe apresenta uma visão geral das suas finanças</caption>
       <caption xml:lang="sk">Finančný sumár vám poskytne prehľad vašich financií</caption>
       <caption xml:lang="sv">Den ekonomiska sammanfattningen ger en översikt av ekonomin</caption>
-      <caption xml:lang="tr">Mali durumunuzu gözden geçirmeniz için bir özet sunar</caption>
+      <caption xml:lang="tr">Finansal özet mali durumunuzun genel görünümünü verir</caption>
       <caption xml:lang="uk">За допомогою сторінки фінансового резюме вам буде простіше розібратися з поточним фінансовим станом.</caption>
       <caption xml:lang="x-test">xxThe financial summary gives you an overview of your financesxx</caption>
       <image>http://www.kmymoney.org/images/screenshots/large/kmm2.png</image>
     </screenshot>
     <screenshot>
       <caption>In this view your accounts are organized, viewed, and managed by the institutions they are held at</caption>
+      <caption xml:lang="ast">Nesta vista les tos cuentes organícense, vense y xestiónense poles instituciones nes que tán</caption>
       <caption xml:lang="bs">U ovom pogledu vaši računi su organizovani, pregledani i upravljani od strane institucija koja ih drži</caption>
       <caption xml:lang="ca">En aquesta vista s'organitzen, visualitzen i administren els vostres comptes per les institucions que els gestionen</caption>
       <caption xml:lang="ca-valencia">En esta vista s'organitzen, visualitzen i administren els vostres comptes per les institucions que els gestionen</caption>
@@ -169,11 +186,11 @@
       <caption xml:lang="it">In questa vista i tuoi conti sono organizzati, visualizzati e gestiti in base agli istituti presso i quali sono stati accesi.</caption>
       <caption xml:lang="nl">In deze weergave zijn uw rekeningen georganiseerd, getoond en beheerd door de banken waar ze berusten</caption>
       <caption xml:lang="pl">W tym widoku konta są urządzane, oglądane i zarządzane przez instytucje, w których się je obsługuje</caption>
-      <caption xml:lang="pt">Nesta janela, poderá organizar, ver e gerir as suas contas, com base nas instituições em que estas estão guardadas</caption>
+      <caption xml:lang="pt">Nesta janela são organizadas as suas contas, visualizadas e geridas pelas instituições a que dizem respeito</caption>
       <caption xml:lang="pt-BR">Nesta janela as suas contas podem ser organizadas, visualizadas e gerenciadas, com base nas instituições em que estão guardadas</caption>
       <caption xml:lang="sk">V tomto pohľade sú vaše účty usporiadané, zobrazené a spravované inštitúciami, ktoré ich držia</caption>
       <caption xml:lang="sv">I den här vyn organiseras, granskas och hanteras konton enligt institution som de hör till</caption>
-      <caption xml:lang="tr">Bu görünümde hesaplarınız onları yöneten kurumlara göre düzenlenmiş şekilde görüntülenirler</caption>
+      <caption xml:lang="tr">Bu görünümde hesaplarınız düzenlenir, görüntülenir, ve bulundukları kurumca yönetilirler</caption>
       <caption xml:lang="uk">Рахунки на сторінці резюме упорядковано за установами, з якими ці рахунки пов’язано.</caption>
       <caption xml:lang="x-test">xxIn this view your accounts are organized, viewed, and managed by the institutions they are held atxx</caption>
       <image>http://www.kmymoney.org/images/screenshots/large/kmm3.png</image>
