@@ -103,7 +103,7 @@ InvestProcessing::InvestProcessing()
   m_detailColumn = -1;
   m_endLine = 0;
   m_fileEndLine = 0;
-  m_startLine = 0;
+  m_startLine = 1;
   m_topLine = 0;
   m_row = 0;
   m_endColumn = 0;
@@ -2049,7 +2049,7 @@ void InvestProcessing::readSettings()
     m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->setCurrentIndex(tmp);
 
     tmp = m_startLine;
-    m_startLine = profilesGroup.readEntry("StartLine", -1) + 1;
+    m_startLine = profilesGroup.readEntry("StartLine", 0) + 1;
     if (m_startLine > m_endLine) {
       m_startLine = tmp;
     }
