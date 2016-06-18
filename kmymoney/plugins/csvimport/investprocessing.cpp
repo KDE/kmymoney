@@ -1373,19 +1373,29 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
     }
 
     else if (m_columnTypeList[i] == "fee") {      //                Fee Col
-      MyMoneyMoney amount;
-      double percent = m_columnList[i].toDouble();// fee val or percent
-      if (percent > 0.00) {
-        if (m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeType->isChecked()) {      //   fee is percent
-          //have to use amountCol as amount field may not yet have been processed
-          txt = inBuffer.section(m_fieldDelimiterCharacter, m_amountColumn, m_amountColumn);
-          amount = MyMoneyMoney(txt);
-          percent *= amount.toDouble() / 100;//               as percentage
-        }
-        txt.setNum(percent, 'f', 4);
-        m_trInvestData.fee = MyMoneyMoney(percent);
-        m_tempBuffer +=  'O' + txt + '\n';//                  fee amount
+      txt = m_columnList[i];
+      txt = txt.remove('"');
+      if (txt.contains(')')) {
+        txt = '-' + txt.remove(QRegExp("[()]"));   //            Mark as -ve
       }
+      newTxt = m_parse->possiblyReplaceSymbol(txt);
+      MyMoneyMoney fee = MyMoneyMoney(newTxt);
+      if (m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeType->isChecked() &&
+        fee.toDouble() > 0.00 ) {      //   fee is percent
+        txt = m_columnList[m_amountColumn];
+        txt = txt.remove('"');
+        if (txt.contains(')')) {
+          txt = '-' +  txt.remove(QRegExp("[()]"));   //            Mark as -ve
+        }
+        newTxt = m_parse->possiblyReplaceSymbol(txt);
+        MyMoneyMoney amount = MyMoneyMoney(newTxt);
+        fee *= amount / MyMoneyMoney(100) ;//               as percentage
+      }
+      fee.abs();
+      m_trInvestData.fee =  fee;
+      txt.setNum(fee.toDouble(), 'f', 4);
+      newTxt = m_parse->possiblyReplaceSymbol(txt);
+      m_tempBuffer +=  'O' + newTxt + '\n';//                  fee amount
     }
 
     else if (m_columnTypeList[i] == "symbol") { //                Symbol Col
