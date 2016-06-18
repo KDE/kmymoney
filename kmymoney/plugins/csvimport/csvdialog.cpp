@@ -828,7 +828,7 @@ void CSVDialog::readFile(const QString& fname)
   m_screenUpdated = false;
 
   //  Display the buffer
-
+  st.m_eType = MyMoneyStatement::etNone;
   for (int line = 0; line < m_lineList.count(); line++) {
     m_inBuffer = m_lineList[line];
 
@@ -1405,7 +1405,6 @@ void CSVDialog::csvImportTransaction(MyMoneyStatement& st)
   QString payee = m_trData.payee;//                              extractLine('P')
   // Process transaction data
   tr.m_strBankID = m_trData.id;
-  st.m_eType = MyMoneyStatement::etCheckings;
   tr.m_datePosted = m_trData.date;
   if (!tr.m_datePosted.isValid()) {
     int rc = KMessageBox::warningContinueCancel(0, i18n("The date entry \"%1\" read from the file cannot be interpreted through the current "
