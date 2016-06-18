@@ -27,6 +27,7 @@
 #include <QList>
 #include <QTreeWidget>
 #include <QStandardPaths>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -53,8 +54,10 @@ public:
   KAccountTemplateSelector*        m_parent;
   QMap<QString, QTreeWidgetItem*>  m_templateHierarchy;
 #ifndef KMM_DESIGNER
-  QMap<QString, MyMoneyTemplate>   m_templates;
+  QMap<int, MyMoneyTemplate>       m_templates;
+  // a map of country name or country name (language name) -> localeId (lang_country) so be careful how you use it
   QMap<QString, QString>           countries;
+  QString                          currentLocaleId;
   QMap<QString, QString>::iterator it_m;
   QStringList                      dirlist;
   int                              id;
@@ -82,7 +85,7 @@ void KAccountTemplateSelector::Private::loadHierarchy()
   QTreeWidgetItemIterator it(m_parent->m_groupList, QTreeWidgetItemIterator::Selected);
   QTreeWidgetItem* it_v;
   while ((it_v = *it) != 0) {
-    m_templates[it_v->data(0, IdRole).toString()].hierarchy(m_templateHierarchy);
+    m_templates[it_v->data(0, IdRole).toInt()].hierarchy(m_templateHierarchy);
     ++it;
   }
 
@@ -110,10 +113,9 @@ void KAccountTemplateSelector::Private::loadHierarchy()
 #endif
 
   m_parent->m_accountList->clear();
-  QMap<QString, QTreeWidgetItem*>::iterator it_m;
 
   QRegExp exp("(.*):(.*)");
-  for (it_m = m_templateHierarchy.begin(); it_m != m_templateHierarchy.end(); ++it_m) {
+  for (QMap<QString, QTreeWidgetItem*>::iterator it_m = m_templateHierarchy.begin(); it_m != m_templateHierarchy.end(); ++it_m) {
     if (exp.indexIn(it_m.key()) == -1) {
       (*it_m) = new QTreeWidgetItem(m_parent->m_accountList);
       (*it_m)->setText(0, it_m.key());
@@ -125,7 +127,7 @@ void KAccountTemplateSelector::Private::loadHierarchy()
 
   m_parent->m_description->clear();
   if (m_parent->m_groupList->currentItem()) {
-    m_parent->m_description->setText(m_templates[m_parent->m_groupList->currentItem()->data(0, IdRole).toString()].longDescription());
+    m_parent->m_description->setText(m_templates[m_parent->m_groupList->currentItem()->data(0, IdRole).toInt()].longDescription());
   }
 }
 
@@ -135,7 +137,7 @@ QList<MyMoneyTemplate> KAccountTemplateSelector::Private::selectedTemplates() co
   QTreeWidgetItemIterator it(m_parent->m_groupList, QTreeWidgetItemIterator::Selected);
   QTreeWidgetItem* it_v;
   while ((it_v = *it) != 0) {
-    list << m_templates[it_v->data(0, IdRole).toString()];
+    list << m_templates[it_v->data(0, IdRole).toInt()];
     ++it;
   }
   return list;
@@ -165,43 +167,41 @@ void KAccountTemplateSelector::slotLoadTemplateList()
 #ifndef KMM_DESIGNER
   QStringList dirs;
   // get list of template subdirs and scan them for the list of subdirs
-  d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates");
+  d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates", QStandardPaths::LocateDirectory);
   QStringList::iterator it;
   for (it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
     QDir dir(*it);
-    // qDebug("Reading dir '%s' with %d entries", (*it).data(), dir.count());
     dirs = dir.entryList(QStringList("*"), QDir::Dirs);
     QStringList::iterator it_d;
     for (it_d = dirs.begin(); it_d != dirs.end(); ++it_d) {
       // we don't care about . and ..
       if ((*it_d) == ".." || (*it_d) == "." || (*it_d) == "C")
         continue;
-      QRegExp exp("(..)_(..)");
-      if (exp.indexIn(*it_d) != -1) {
-        // TODO: port this to KF5
-        QString country = "";//KLocale::global()->countryCodeToName(exp.cap(2));
-        if (country.isEmpty())
-          country = exp.cap(2);
-        // TODO: port this to KF5
-        QString lang = "en";//KLocale::global()->languageCodeToName(exp.cap(1));
+      QLocale templateLocale(*it_d);
+      if (templateLocale.language() != QLocale::C) {
+        QString country = QLocale().countryToString(templateLocale.country());
+        QString lang = QLocale().languageToString(templateLocale.language());
         if (d->countries.contains(country)) {
           if (d->countries[country] != *it_d) {
-            QString oName = d->countries[country];
-            exp.indexIn(oName);
-            // TODO: port this to KF5
-            QString oCountry = "";//KLocale::global()->countryCodeToName(exp.cap(2));
-            QString oLang = "en";//KLocale::global()->languageCodeToName(exp.cap(1));
+            QString otherName = d->countries[country];
+            QLocale otherTemplateLocale(otherName);
+            QString otherCountry = QLocale().countryToString(otherTemplateLocale.country());
+            QString otherLang = QLocale().languageToString(otherTemplateLocale.language());
             d->countries.remove(country);
-            d->countries[QString("%1 (%2)").arg(oCountry).arg(oLang)] = oName;
-            d->countries[QString("%1 (%2)").arg(country).arg(lang)] = *it_d;
+            d->countries[QString("%1 (%2)").arg(otherCountry, otherLang)] = otherName;
+            d->countries[QString("%1 (%2)").arg(country, lang)] = *it_d;
+            // retain the item corresponding to the current locale
+            if (QLocale().country() == templateLocale.country()) {
+              d->currentLocaleId = *it_d;
+            }
           }
         } else {
           d->countries[country] = *it_d;
+            // retain the item corresponding to the current locale
+          if (QLocale().country() == templateLocale.country()) {
+              d->currentLocaleId = *it_d;
+          }
         }
-      } else if ((*it_d).length() == 2) {
-          // TODO: port this to KF5
-        QString country = *it_d;//KLocale::global()->countryCodeToName((*it_d).toUpper());
-        d->countries[country] = *it_d;
       } else {
         qDebug("'%s/%s' not scanned", qPrintable(*it), qPrintable(*it_d));
       }
@@ -228,15 +228,13 @@ void KAccountTemplateSelector::slotLoadCountry()
   QTreeWidgetItem *parent = new QTreeWidgetItem(m_groupList);
   parent->setText(0, d->it_m.key());
   parent->setFlags(parent->flags() & ~Qt::ItemIsSelectable);
-  QStringList::iterator it;
-  for (it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
-    QStringList::iterator it_f;
-    QDir dir(QString("%1%2").arg(*it).arg(*(d->it_m)));
+  for (QStringList::iterator it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
+    QDir dir(QString("%1/%2").arg(*it).arg(*(d->it_m)));
     if (dir.exists()) {
       QStringList files = dir.entryList(QStringList("*"), QDir::Files);
-      for (it_f = files.begin(); it_f != files.end(); ++it_f) {
-        MyMoneyTemplate templ(QUrl::fromUserInput(QString("%1/%2").arg(dir.canonicalPath()).arg(*it_f)));
-        d->m_templates[QString("%1").arg(d->id)] = templ;
+      for (QStringList::iterator it_f = files.begin(); it_f != files.end(); ++it_f) {
+        MyMoneyTemplate templ(QUrl::fromUserInput(QString("%1/%2").arg(dir.canonicalPath(), *it_f)));
+        d->m_templates[d->id] = templ;
         QTreeWidgetItem *item = new QTreeWidgetItem(parent);
         item->setText(0, templ.title());
         item->setText(1, templ.shortDescription());
@@ -245,7 +243,12 @@ void KAccountTemplateSelector::slotLoadCountry()
       }
     }
   }
-
+  // make visible the templates of the current locale
+  if (d->it_m.value() == d->currentLocaleId) {
+    m_groupList->setCurrentItem(parent);
+    m_groupList->expandItem(parent);
+    m_groupList->scrollToItem(parent, QTreeView::PositionAtTop);
+  }
   ++d->it_m;
   if (d->it_m != d->countries.end())
     QTimer::singleShot(0, this, SLOT(slotLoadCountry()));
