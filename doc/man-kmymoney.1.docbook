@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-<!ENTITY kmymoney "<application>KMyMoney</application>">
-<!ENTITY kappname "&kmymoney;">
 <!ENTITY % English "INCLUDE">
 ]>
 
@@ -90,6 +88,8 @@
 
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
+<date>2016-06-17</date>
+<releaseinfo>KMyMoney 5.0</releaseinfo>
 </refentryinfo>
 
 <refmeta>
@@ -101,26 +101,27 @@
 
 <refnamediv>
 <refname><command>kmymoney</command></refname>
-<refpurpose>the personal finances manager for &kde;</refpurpose>
+<refpurpose>the personal finances manager by &kde;</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
 <cmdsynopsis>
 <command>kmymoney</command>
-
-<group><option>Generic Options</option></group>
-<group><option>Qt Options</option></group>
-<group><option>KDE Options</option></group>
-<group><option>Options</option></group>
-<group><option>File</option></group>
-
+<group choice="opt"><option>--lang</option></group>
+<group choice="opt"><option>-n</option></group>
+<group choice="opt"><option>--timers</option>
+<replaceable> column</replaceable></group>
+<group choice="opt"><option>--nocatch</option></group>
+<group choice="opt"><option>--trace</option></group>
+<group choice="opt"><option><replaceable>file</replaceable></option></group>
 </cmdsynopsis>
+
 </refsynopsisdiv>
 
 <refsect1>
 <title>Description</title>
 
-<para>&kmymoney; is the Personal Finance Manager for the &kde; environment.  It
+<para>&kmymoney; is the Personal Finance Manager by &kde;.  It
 provides the functions required to balance your checkbooks, manage your personal
 loans and categories your incomes and expenses using a checkbook style graphical
 user interface.</para>
@@ -133,10 +134,10 @@ user interface.</para>
 <variablelist>
 
 <varlistentry>
-<term><replaceable>File</replaceable></term>
+<term><option>--lang</option></term>
 <listitem>
 <para>
-file to open
+Language to be used
 </para>
 </listitem>
 </varlistentry>
@@ -145,7 +146,7 @@ file to open
 <term><option>-n</option></term>
 <listitem>
 <para>
-Start without opening a file
+Do not open last used file
 </para>
 </listitem>
 </varlistentry>
@@ -181,70 +182,7 @@ Turn on program traces. This option is only available when &kmymoney; is compile
 <term><option>--dump-actions</option></term>
 <listitem>
 <para>
-Dump the names of all defined KAction objects to stdout and quit. This option is only available when &kmymoney; is compiled in debug mode.
-</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><option>--help</option></term>
-<listitem>
-<para>
-Show help about options
-</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><option>--help-qt</option></term>
-<listitem>
-<para>
-Show Qt specific options
-</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><option>--help-kde</option></term>
-<listitem>
-<para>
-Show KDE specific options
-</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><option>--help-all</option></term>
-<listitem>
-<para>
-Show all options
-</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><option>--author</option></term>
-<listitem>
-<para>
-Show author information
-</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><option>-v, --version</option></term>
-<listitem>
-<para>
-Show version information
-</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><option>--license</option></term>
-<listitem>
-<para>
-Show license information
+Dump the names of all defined QAction objects to stdout and quit. This option is only available when &kmymoney; is compiled in debug mode.
 </para>
 </listitem>
 </varlistentry>
@@ -253,82 +191,21 @@ Show license information
 
 </refsect1>
 
-<refsect1>
-<title>Environment</title>
-<variablelist>
-
-<varlistentry>
-<term>$<envar>KDE_LANG</envar></term>
-<listitem>
-<para>Language locale setting to use. This option makes it possible to set
-another language environment for a program than what is the default. The correct
-language pack for this language has to be installed for this option to work. The
-default language when there is none set is en_US. When deciding upon a language,
-the following resources are looked up, in order: <envar>KDE_LANG</envar>,
-configuration file, <envar>LC_CTYPE</envar>, <envar>LC_MESSAGES</envar>,
-<envar>LC_ALL</envar>, <envar>LANG</envar>.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>$<envar>KDE_UTF8_FILENAMES</envar></term>
-<listitem>
-<para>Assume that all filenames are in UTF-8 format regardless of the current
-language setting. Otherwise the filename format is defined by the
-language.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>$<envar>KDE_MULTIHEAD</envar></term>
-<listitem>
-<para>If this variable has the value true multihead multiple display mode is
-enabled.  The KDE display will be shared over more than one screen.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>$<envar>DISPLAY</envar></term>
-<listitem>
-<para>Specifies the X display to run KDE on.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>$<envar>SESSION_MANAGER</envar></term>
-<listitem>
-<para>The session manager to use. This option is set automatically by KDE and is
-a network path to the session manager socket.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>$<envar>HOME</envar></term>
-<listitem>
-<para>Path to the home directory for the current user.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>$<envar>KDEHOME</envar></term>
-<listitem>
-<para>The KDE per-user setting directory.</para>
-</listitem>
-</varlistentry>
-
-</variablelist>
-</refsect1>
 
 <refsect1>
 <title>See Also</title>
 
-<para>The full documentation for &kmymoney; is maintained as a docbook manual.
+<simplelist>
+<member>The full documentation for &kmymoney; is maintained as a docbook manual.
 If the &khelpcenter; program is properly installed at your site, the command
 <userinput><command>khelpcenter</command>
 <parameter>help:/kmymoney</parameter></userinput> should give you access to the
 complete manual.  Alternatively the manual can be browsed in &konqueror; giving
 it the <acronym>URL</acronym> <ulink
-url="help:/kmymoney">help:/kmymoney</ulink></para>
+url="help:/kmymoney">help:/kmymoney</ulink></member>
+<member>kf5options(7)</member>
+<member>qt5options(7)</member>
+</simplelist>
 
 </refsect1>
 
