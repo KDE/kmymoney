@@ -65,14 +65,10 @@ public:
   const MyMoneySecurity& security() const;
   void setSecurity(const MyMoneySecurity& currency);
   void selectDisplayItem(KMyMoneySecuritySelector::displayItemE item);
-  void setDisplayOnly(const bool disp);
 
   void setDisplayType(displayTypeE type);
 
   void update(const QString& id);
-
-public slots:
-  void slotSetInitialSecurity();
 
 private:
   MyMoneySecurity m_currency;

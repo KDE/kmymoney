@@ -144,24 +144,6 @@ void KMyMoneySecuritySelector::update(const QString& id)
   setCurrentIndex(m_selectedItemId);
 }
 
-void KMyMoneySecuritySelector::setDisplayOnly(const bool disp)
-{
-  if (disp == m_displayOnly)
-    return;
-
-  if (disp) {
-    connect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
-  } else {
-    disconnect(this, SIGNAL(activated(int)), this, SLOT(slotSetInitialCurrency()));
-  }
-  m_displayOnly = disp;
-}
-
-void KMyMoneySecuritySelector::slotSetInitialSecurity()
-{
-  setCurrentIndex(m_selectedItemId);
-}
-
 const MyMoneySecurity& KMyMoneySecuritySelector::security() const
 {
   int index = currentIndex();

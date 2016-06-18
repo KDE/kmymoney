@@ -18,8 +18,6 @@
 #include "knewuserwizard.h"
 #include "knewuserwizard_p.h"
 
-#include <locale.h>
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -215,9 +213,7 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
   QList<MyMoneySecurity> list = MyMoneyFile::instance()->currencyList();
   QList<MyMoneySecurity>::const_iterator it;
 
-  QString localCurrency(localeconv()->int_curr_symbol);
-  localCurrency.truncate(3);
-
+  QString localCurrency(QLocale().currencySymbol(QLocale::CurrencyIsoCode));
   QString baseCurrency = MyMoneyFile::instance()->baseCurrency().id();
 
 
@@ -241,8 +237,8 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
     first = *itemsIt;
   if (first != 0) {
     m_currencyList->setCurrentItem(first);
-    //m_currencyList->setSelected(first, true);
-    //m_currencyList->ensureItemVisible(first);
+    m_currencyList->setItemSelected(first, true);
+    m_currencyList->scrollToItem(first, QTreeView::PositionAtTop);
   }
 }
 
