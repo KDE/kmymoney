@@ -10,8 +10,8 @@
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Credit ipotecar</title>
- <shortdesc>Conturi pentru un credit ipotecar şi dobânzile aferente</shortdesc>
- <longdesc>Aţi avea nevoie de acest set de conturi dacă aveţi un credit ipotecar (creditul ipotecar, dobânda).</longdesc>
+ <shortdesc>Conturi pentru un credit ipotecar și dobânzile aferente</shortdesc>
+ <longdesc>Ați avea nevoie de acest set de conturi dacă aveți un credit ipotecar (creditul ipotecar, dobânda).</longdesc>
  <accounts>
   <account type="10" name="">
    <account type="10" name="Credit ipotecar"/>

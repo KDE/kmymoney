@@ -11,7 +11,7 @@
 <kmymoney-account-template>
  <title>Conturi comune</title>
  <shortdesc>Un set de bază de conturi folosite de obicei</shortdesc>
- <longdesc>Majoritatea utilizatorilor vor alege acest set de conturi. El conţine conturi frecvent folosite (cont curent, de economii, numerar, card de credit, venituri, cheltuieli obişnuite).</longdesc>
+ <longdesc>Majoritatea utilizatorilor vor alege acest set de conturi. El conține conturi frecvent folosite (cont curent, de economii, numerar, card de credit, venituri, cheltuieli obișnuite).</longdesc>
  <accounts>
   <account type="12" name="">
    <account type="12" name="Sporuri"/>
@@ -40,7 +40,7 @@
     <account type="13" name="Calătorii"/>
     <account type="13" name="Recreere"/>
    </account>
-   <account type="13" name="Cărţi"/>
+   <account type="13" name="Cărți"/>
    <account type="13" name="Servirea mesei la restaurant"/>
    <account type="13" name="Cadouri"/>
    <account type="13" name="Cheltuieli medicale"/>
@@ -49,23 +49,23 @@
    <account type="13" name="Automobil">
     <account type="13" name="Combustibil"/>
     <account type="13" name="Parcare"/>
-    <account type="13" name="Reparaţii şi întreţinere"/>
+    <account type="13" name="Reparații și întreținere"/>
     <account type="13" name="Taxe"/>
    </account>
    <account type="13" name="Cheltuieli bancare"/>
-   <account type="13" name="Educaţie"/>
-   <account type="13" name="Utilităţi">
+   <account type="13" name="Educație"/>
+   <account type="13" name="Utilități">
     <account type="13" name="Apa"/>
     <account type="13" name="Gaz"/>
     <account type="13" name="Salubrizare"/>
     <account type="13" name="Energie electrică"/>
    </account>
    <account type="13" name="Îmbrăcăminte"/>
-   <account type="13" name="Reţete medicale"/>
+   <account type="13" name="Rețete medicale"/>
    <account type="13" name="Telefon"/>
    <account type="13" name="Asigurări">
     <account type="13" name="Asigurare auto"/>
-    <account type="13" name="Asigurare de viaţă"/>
+    <account type="13" name="Asigurare de viață"/>
     <account type="13" name="Asigurare de sănătate"/>
    </account>
    <account type="13" name="Servicii online"/>

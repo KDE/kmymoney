@@ -3,19 +3,19 @@
 <kmymoney-account-template>
  <title>Categorii implicite KMyMoney 0.8</title>
  <shortdesc>Un set de categorii de uz comun</shortdesc>
- <longdesc>Folosiţi acest set de categorii pentru a evita creerea manuală unor categorii obişnuite.</longdesc>
+ <longdesc>Folosiți acest set de categorii pentru a evita creerea manuală unor categorii obișnuite.</longdesc>
  <accounts>
   <account type="12" name="" >
    <account type="12" name="Venituri ca angajat" >
-    <account type="12" name="Compensaţii" />
+    <account type="12" name="Compensații" />
     <account type="12" name="Sporuri" />
     <account type="12" name="Alte venituri ca angajat" />
     <account type="12" name="Pensie" />
     <account type="12" name="Salar" />
    </account>
-   <account type="12" name="Venituri din investiţii" >
-    <account type="12" name="Câştiguri de capital de termen scurt" />
-    <account type="12" name="Câştiguri de capital de termen lung" />
+   <account type="12" name="Venituri din investiții" >
+    <account type="12" name="Câștiguri de capital de termen scurt" />
+    <account type="12" name="Câștiguri de capital de termen lung" />
     <account type="12" name="Dividende" />
     <account type="12" name="Dobândă" />
     <account type="12" name="Dobândă neimpozitabilă" />
@@ -26,26 +26,26 @@
    </account>
    <account type="12" name="Alte venituri" >
     <account type="12" name="Pensie alimentară" />
-    <account type="12" name="Alocaţii" />
+    <account type="12" name="Alocații" />
     <account type="12" name="Ajutor social" />
     <account type="12" name="Cadouri primite" />
-    <account type="12" name="Câştiguri din jocuri de noroc" />
+    <account type="12" name="Câștiguri din jocuri de noroc" />
     <account type="12" name="Taxe returnate" />
-    <account type="12" name="Ajutor de şomaj" />
+    <account type="12" name="Ajutor de șomaj" />
    </account>
    <account type="12" name="Bonus de pensionare" />
   </account>
   <account type="13" name="" >
-   <account type="13" name="Facturi şi plăţi lunare" >
-    <account type="13" name="Utilităţi" >
+   <account type="13" name="Facturi și plăți lunare" >
+    <account type="13" name="Utilități" >
      <account type="13" name="Energie electrică" />
      <account type="13" name="Gaz" />
-     <account type="13" name="Apa şi canalizare" />
-     <account type="13" name="Ssalubrizare şi reciclare" />
+     <account type="13" name="Apa și canalizare" />
+     <account type="13" name="Ssalubrizare și reciclare" />
     </account>
     <account type="13" name="Telefon" >
      <account type="13" name="Apeluri locale" />
-     <account type="13" name="Apeluri internaţionale" />
+     <account type="13" name="Apeluri internaționale" />
      <account type="13" name="Mobil" />
     </account>
     <account type="13" name="Chirie" />
@@ -64,35 +64,35 @@
    <account type="13" name="Retragere numerar" />
    <account type="13" name="Îngrijirea copilului" />
    <account type="13" name="Îmbrăcăminte" />
-   <account type="13" name="Educaţie" >
-    <account type="13" name="Cărţi" />
+   <account type="13" name="Educație" >
+    <account type="13" name="Cărți" />
     <account type="13" name="Taxe" />
-    <account type="13" name="Taxe de şcolarizare" />
+    <account type="13" name="Taxe de școlarizare" />
     <account type="13" name="Împrumuturi" />
    </account>
    <account type="13" name="Mâncare" >
-    <account type="13" name="Masă servită în oraş" />
+    <account type="13" name="Masă servită în oraș" />
     <account type="13" name="Alimente" />
    </account>
-   <account type="13" name="Întreţinerea locuinţei" >
-    <account type="13" name="Reparaţii" />
-    <account type="13" name="Îmbunătăţiri" />
-    <account type="13" name="Curte şi grădină" />
+   <account type="13" name="Întreținerea locuinței" >
+    <account type="13" name="Reparații" />
+    <account type="13" name="Îmbunătățiri" />
+    <account type="13" name="Curte și grădină" />
    </account>
-   <account type="13" name="Interiorul locuinţei" >
+   <account type="13" name="Interiorul locuinței" >
     <account type="13" name="Mobilă" />
-    <account type="13" name="Decoraţii" />
+    <account type="13" name="Decorații" />
    </account>
    <account type="13" name="Cadouri" />
    <account type="13" name="Sănătate" >
     <account type="13" name="Stomatolog" />
     <account type="13" name="Doctor" />
     <account type="13" name="Spitalizare" />
-    <account type="13" name="Reţete" />
+    <account type="13" name="Rețete" />
     <account type="13" name="Altele" />
    </account>
    <account type="13" name="Îngrijire personală" />
-   <account type="13" name="Concedii şi vacanţe" >
+   <account type="13" name="Concedii și vacanțe" >
     <account type="13" name="Cazare" />
     <account type="13" name="Calătoria" />
     <account type="13" name="Altele" />

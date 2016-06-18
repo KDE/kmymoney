@@ -10,8 +10,8 @@
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Credit auto</title>
- <shortdesc>Conturi pentru un credid auto şi dobânda aferentăs</shortdesc>
- <longdesc>Aţi avea nevoie de acest set de conturi dacă aveţi un credit auto (creditul auto, dobânda).</longdesc>
+ <shortdesc>Conturi pentru un credid auto și dobânda aferentă</shortdesc>
+ <longdesc>Ați avea nevoie de acest set de conturi dacă aveți un credit auto (creditul auto, dobânda).</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="Dobândă">
