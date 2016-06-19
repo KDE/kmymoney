@@ -2,6 +2,13 @@
 Type=ServiceType
 X-KDE-ServiceType=KMyMoney/PayeeIdentifierDelegate
 Name=Painter of payee identifier
+Name[ca]=Pintor de la identificació del beneficiari
+Name[es]=Pintor del identificador del beneficiario
+Name[nl]=Tonen van identificatie van begunstigde
+Name[pl]=Malarz identyfikatora odbiorcy
+Name[pt]=Pintor do identificador do beneficiário
+Name[sv]=Uppritning av betalningsmottagarens identifierare
+Name[x-test]=xxPainter of payee identifierxx
 
 [PropertyDef::X-KMyMoney-payeeIdentifierIds]
 Type=QStringList
