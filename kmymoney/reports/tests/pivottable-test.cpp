@@ -799,7 +799,7 @@ void PivotTableTest::testColumnType()
 
   TransactionHelper t1d1(QDate(2004, 7, 1), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
   TransactionHelper t2d1(QDate(2004, 7, 1), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
-  TransactionHelper t3d1(QDate(2004, 7, 5), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
+  TransactionHelper t3d1(QDate(2004, 7, 4), MyMoneySplit::ActionWithdrawal, moParent2, acCredit, acParent);
 
   TransactionHelper t1d2(QDate(2004, 7, 14), MyMoneySplit::ActionWithdrawal, moSolo, acChecking, acSolo);
   TransactionHelper t2d2(QDate(2004, 7, 15), MyMoneySplit::ActionWithdrawal, moParent1, acCredit, acParent);
@@ -819,14 +819,12 @@ void PivotTableTest::testColumnType()
   PivotTable spending_days(filter);
   writeTabletoHTML(spending_days, "Spending by Days.html");
 
-  QVERIFY(spending_days.m_grid.m_total[eActual][4] == -moParent2);
+  QVERIFY(spending_days.m_grid.m_total[eActual][3] == -moParent2);
   QVERIFY(spending_days.m_grid.m_total[eActual][13] == -moSolo);
   QVERIFY(spending_days.m_grid.m_total[eActual].m_total == -moSolo - moParent2);
 
-  // TODO: port to kf5
-#if 0
-  unsigned save_dayweekstart = KLocale::global()->weekStartDay();
-  KLocale::global()->setWeekStartDay(2);
+  // set the first day of the week to 1
+  QLocale::setDefault(QLocale(QLocale::English, QLocale::UnitedKingdom));
 
   filter.setDateFilter(QDate(2004, 7, 2), QDate(2004, 8, 1));
   filter.setRowType(MyMoneyReport::eExpenseIncome);
@@ -838,7 +836,8 @@ void PivotTableTest::testColumnType()
   PivotTable spending_weeks(filter);
   writeTabletoHTML(spending_weeks, "Spending by Weeks.html");
 
-  KLocale::global()->setWeekStartDay(save_dayweekstart);
+  // restore the locale
+  QLocale::setDefault(QLocale::system());
 
   QVERIFY(spending_weeks.m_grid.m_total[eActual][0] == moZero);
   QVERIFY(spending_weeks.m_grid.m_total[eActual][1] == -moParent2);
@@ -847,7 +846,6 @@ void PivotTableTest::testColumnType()
   QVERIFY(spending_weeks.m_grid.m_total[eActual][4] == -moParent2);
   QVERIFY(spending_weeks.m_grid.m_total[eActual][5] == moZero);
   QVERIFY(spending_weeks.m_grid.m_total[eActual].m_total == -moSolo - moParent - moParent2);
-#endif
 
 }
 
