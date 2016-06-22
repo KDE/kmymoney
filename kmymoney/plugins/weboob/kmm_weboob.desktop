@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Weboob
 Name[ca]=Weboob
+Name[ca@valencia]=Weboob
 Name[es]=Weboob
 Name[nl]=Weboob
 Name[pl]=Weboob
@@ -9,6 +10,7 @@ Name[sv]=Weboob
 Name[x-test]=xxWeboobxx
 Comment=Plugin for weboob
 Comment[ca]=Connector pel Weboob
+Comment[ca@valencia]=Connector pel Weboob
 Comment[es]=Complemento para weboob
 Comment[nl]=Plug-in voor weboob
 Comment[pl]=Wtyczka do weboob

@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=KMyMoney/OnlineTaskUi
 Name=Form to edit online orders/tasks
 Name[ca]=Formulari per editar ordres/tasques en línia
+Name[ca@valencia]=Formulari per editar ordes/tasques en línia
 Name[es]=Formulario para editar ordenes/tareas en línea
 Name[it]=Modulo per modificare in linea ordini/operazioni
 Name[nl]=Formulier om online orders/taken te bewerken
