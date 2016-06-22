@@ -1954,10 +1954,9 @@ void Register::addGroupMarkers()
       thisMonth.setDate(today.year(), today.month(), 1);
       lastMonth = thisMonth.addMonths(-1);
       yesterday = today.addDays(-1);
-      // a = QDate::dayOfWeek()      todays weekday (1 = Monday, 7 = Sunday)
-      // b = KLocale::weekStartDay() first day of week (1 = Monday, 7 = Sunday)
-      // TODO: prt this to kf5
-      weekStartOfs = today.dayOfWeek() - 1;//KLocale::global()->weekStartDay();
+      // a = QDate::dayOfWeek()         todays weekday (1 = Monday, 7 = Sunday)
+      // b = QLocale().firstDayOfWeek() first day of week (1 = Monday, 7 = Sunday)
+      weekStartOfs = today.dayOfWeek() - QLocale().firstDayOfWeek();
       if (weekStartOfs < 0) {
         weekStartOfs = 7 + weekStartOfs;
       }

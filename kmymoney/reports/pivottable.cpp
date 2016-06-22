@@ -418,10 +418,9 @@ void PivotTable::collapseColumns()
 
   int columnpitch = m_config_f.columnPitch();
   if (columnpitch != 1) {
-    // TODO: port to kf5
     int sourcemonth = (m_config_f.isColumnsAreDays())
                       // use the user's locale to determine the week's start
-                      ? (m_beginDate.dayOfWeek() + 8 - 1/*KLocale::global()->weekStartDay()*/) % 7
+                      ? (m_beginDate.dayOfWeek() + 8 - QLocale().firstDayOfWeek()) % 7
                       : m_beginDate.month();
     int sourcecolumn = 1;
     int destcolumn = 1;
@@ -533,8 +532,7 @@ void PivotTable::calculateColumnHeadings()
       QDate prv = m_beginDate;
 
       // use the user's locale to determine the week's start
-      // TODO: port to kf5
-      int dow = (day.dayOfWeek() + 8 - 1/*KLocale::global()->weekStartDay()*/) % 7;
+      int dow = (day.dayOfWeek() + 8 - QLocale().firstDayOfWeek()) % 7;
 
       while (day <= m_endDate) {
         if (((dow % columnpitch) == 0) || (day == m_endDate)) {
