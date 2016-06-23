@@ -22,6 +22,7 @@
 
 #include <QDateEdit>
 
+// TODO: check if this class is really necessary
 class KMyMoneyDateEdit : public QDateEdit
 {
   Q_OBJECT
@@ -29,9 +30,5 @@ class KMyMoneyDateEdit : public QDateEdit
 public:
   explicit KMyMoneyDateEdit(QWidget* parent = 0);
 
-  void setDateFormat(const QString& dateFormat);
-
-private:
-  void init();
 };
 #endif // KMYMONEYDATEEDIT_H

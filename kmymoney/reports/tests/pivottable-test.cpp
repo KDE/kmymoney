@@ -20,6 +20,7 @@
 #include <QList>
 #include <QFile>
 #include <QTest>
+#include <QTextCodec>
 
 // DOH, mmreport.h uses this without including it!!
 #include "mymoneyaccount.h"
@@ -1011,9 +1012,8 @@ void PivotTableTest::testHtmlEncoding()
   filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
   XMLandback(filter);
   PivotTable networth_f(filter);
-  // TODO: port to kf5
-#if 0
-  QByteArray encoding = KLocale::global()->encoding();
+
+  QByteArray encoding = QTextCodec::codecForLocale()->name();
 
   QString html = networth_f.renderHTML(0, encoding, filter.name(), false);
 
@@ -1021,5 +1021,4 @@ void PivotTableTest::testHtmlEncoding()
   rx.setPatternSyntax(QRegExp::Wildcard);
   rx.setCaseSensitivity(Qt::CaseInsensitive);
   QVERIFY(rx.exactMatch(html));
-#endif
 }

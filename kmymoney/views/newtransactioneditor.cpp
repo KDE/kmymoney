@@ -302,8 +302,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
   d->ui->statusCombo->setModel(&d->statusModel);
 
-  // TODO: port to kf5
-  //d->ui->dateEdit->setDateFormat(KLocale::global()->dateFormatShort());
+  d->ui->dateEdit->setDisplayFormat(QLocale().dateFormat(QLocale::ShortFormat));
 
   WidgetHintFrameCollection* frameCollection = new WidgetHintFrameCollection(this);
   frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));
