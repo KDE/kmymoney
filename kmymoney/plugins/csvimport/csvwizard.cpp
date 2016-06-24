@@ -26,6 +26,7 @@
 #include <KMessageBox>
 #include <KIconLoader>
 #include <KLocalizedString>
+#include <KConfigGroup>
 
 #include "csvdialog.h"
 #include "convdate.h"
@@ -673,9 +674,7 @@ void IntroPage::slotComboEditTextChanged(QString txt)
     m_map.take(m_wizDlg->m_csvDialog->m_profileName);
     ui->combobox_source->setCurrentIndex(-1);
     m_priorName.clear();
-    // TODO: port to kf5
-#if 0
-    KSharedConfigPtr config = KSharedConfig::openConfig(KStandardDirs::locateLocal("config", "csvimporterrc"));
+    KSharedConfigPtr  config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QDir::separator() + "csvimporterrc");
     KConfigGroup bankProfilesGroup(config, "BankProfiles");
     KConfigGroup deletedProfilesGroup(config, "Profiles-" + m_wizDlg->m_csvDialog->m_profileName);
     m_wizDlg->m_csvDialog->m_profileName.clear();
@@ -691,7 +690,6 @@ void IntroPage::slotComboEditTextChanged(QString txt)
     bankProfilesGroup.config()->sync();
     connect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
     connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-#endif
     return;
   }
   connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
