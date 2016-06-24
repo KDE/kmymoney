@@ -105,6 +105,13 @@ private:
     Create = 0,
     Select
   };
+
+  /**
+    * This method is used to select or create brokerage account if
+    * it isn't specified in statement transaction.
+    */
+  QString SelectBrokerageAccount();
+
   /**
     * This method is used to find an account using the account's name
     * stored in @p account in the current MyMoneyFile object. If it does not
@@ -124,6 +131,7 @@ private:
   /// \internal d-pointer instance.
   Private* const d;
   MyMoneyAccount          m_account;
+  MyMoneyAccount          m_brokerageAccount;
   QStringList             m_dontAskAgain;
   bool                    m_userAbort;
   bool                    m_autoCreatePayee;

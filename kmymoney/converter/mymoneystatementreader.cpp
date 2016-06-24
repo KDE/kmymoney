@@ -337,6 +337,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   //
 
   m_account = MyMoneyAccount();
+  m_brokerageAccount = MyMoneyAccount();
 
   m_ft = new MyMoneyFileTransaction();
   d->m_skipCategoryMatching = s.m_skipCategoryMatching;
@@ -641,6 +642,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     }
     if (brokerageactid.isEmpty()) {
       brokerageactid = file->nameToAccount(thisaccount.brokerageName());
+    }
+    if (brokerageactid.isEmpty()) {
+      brokerageactid = SelectBrokerageAccount();
     }
 
     // find the security transacted, UNLESS this transaction didn't
@@ -1232,6 +1236,16 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     if (result == KMessageBox::Cancel)
       throw MYMONEYEXCEPTION("USERABORT");
   }
+}
+
+QString MyMoneyStatementReader::SelectBrokerageAccount()
+{
+  if (m_brokerageAccount.id().isEmpty()) {
+    m_brokerageAccount.setAccountType(MyMoneyAccount::Checkings);
+    if (!m_userAbort)
+      m_userAbort = ! selectOrCreateAccount(Select, m_brokerageAccount);
+  }
+  return m_brokerageAccount.id();
 }
 
 bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode*/, MyMoneyAccount& account)
