@@ -28,6 +28,7 @@ email                 : agander93@gmail.com
 #include <QtCore/QStringList>
 #include <QtCore/QList>
 #include <QCompleter>
+#include <QComboBox>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -48,7 +49,6 @@ class CsvUtil;
 class MyMoneyStatement;
 class KAbstractFileWidget;
 
-class KComboBox;
 
 class InvestProcessing : public QObject
 {
@@ -72,7 +72,7 @@ public:
   RedefineDlg*      m_redefine;
   CsvUtil*          m_csvUtil;
 
-  KComboBox*        m_comboBoxEncode;
+  QComboBox*        m_comboBoxEncode;
 
   void           setTrInvestDataType(const QString& val);
 

@@ -31,6 +31,8 @@
 #include <QtCore/QTextCodec>
 #include <QtCore/QTextStream>
 #include <QtCore/QDebug>
+#include <QUrl>
+#include <QFileDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -44,6 +46,8 @@
 #include <QHBoxLayout>
 #include <KLocalizedString>
 #include <KConfigGroup>
+#include <kjobwidgets.h>
+#include <kio/job.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -255,41 +259,50 @@ void InvestProcessing::slotFileDialogClicked()
   int position = 0;
 
   if (m_invPath.isEmpty()) {
-    m_invPath  = "~/";
+    m_invPath = QDir::home().absolutePath();
   }
 
-  QPointer<QFileDialog> dialog = new QFileDialog(0, QString(), m_invPath,
-      i18n("*.csv *.PRN *.txt|CSV Files\n*|All files"));
+  if(m_invPath.startsWith("~/"))  //expand Linux home directory
+    m_invPath.replace(0, 1, QDir::home().absolutePath());
 
-  //  Add encoding selection to FileDialog
-  QWidget* encodeBox = new QWidget();
-  QHBoxLayout *encodeBoxHBoxLayout = new QHBoxLayout(encodeBox);
-  encodeBoxHBoxLayout->setMargin(0);
-  m_comboBoxEncode = new KComboBox(encodeBox);
-  encodeBoxHBoxLayout->addWidget(m_comboBoxEncode);
-  m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
+  QPointer<QFileDialog> dialog = new QFileDialog(m_csvDialog->m_wiz->m_wizard, QString(), m_invPath,
+                                                 i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"));
+  dialog->setOption(QFileDialog::DontUseNativeDialog, true);  //otherwise we cannot add custom QComboBox
+  dialog->setFileMode(QFileDialog::ExistingFile);
+  QLabel* label = new QLabel(i18n("Encoding"));
+  dialog->layout()->addWidget(label);
+  //    Add encoding selection to FileDialog
+  m_comboBoxEncode = new QComboBox();
   setCodecList(m_codecs);
+  m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
   connect(m_comboBoxEncode, SIGNAL(activated(int)), this, SLOT(encodingChanged(int)));
-  // TODO: port to kf5
-  //dialog->fileWidget()->setCustomWidget("Encoding", m_comboBoxEncode);
-  //m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
-  //dialog->setMode(KFile::File | KFile::ExistingOnly);
-  //if (dialog->exec() == QDialog::Accepted) {
-  //  m_url = dialog->selectedUrl();
-  //}
-  delete dialog;
-  if (m_url.isEmpty())
-    return;
-  m_csvDialog->m_inFileName.clear();
-  // TODO: port to kf5
-#if 0
-  if (!KIO::NetAccess::download(m_url,  m_csvDialog->m_inFileName, 0)) {
-    KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.toDisplayString()),
-                               KIO::NetAccess::lastErrorString(),
-                               i18n("File access error"));
-    return;
+  dialog->layout()->addWidget(m_comboBoxEncode);
+  if(dialog->exec() == QDialog::Accepted) {
+    m_url = dialog->selectedUrls().first();
   }
-#endif
+  delete dialog;
+
+  if (m_url.isEmpty()) {
+    return;
+  } else if (m_url.isLocalFile()) {
+    m_csvDialog->m_inFileName = m_url.toLocalFile();
+  } else {
+    m_csvDialog->m_inFileName = QDir::tempPath();
+    if(!m_csvDialog->m_inFileName.endsWith(QDir::separator()))
+      m_csvDialog->m_inFileName += QDir::separator();
+    m_csvDialog->m_inFileName += m_url.fileName();
+    qDebug() << "Source:" << m_url.toDisplayString() << "Destination:" << m_csvDialog->m_inFileName;
+    KIO::FileCopyJob *job = KIO::file_copy(m_url, QUrl::fromUserInput(m_csvDialog->m_inFileName), -1,KIO::Overwrite);
+    KJobWidgets::setWindow(job, m_csvDialog->m_wiz->m_wizard);
+    job->exec();
+    if (job->error()) {
+      KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.toDisplayString()),
+                                 job->errorString(),
+                                 i18n("File access error"));
+      return;
+    }
+  }
+
   if (m_csvDialog->m_inFileName.isEmpty())
     return;
   clearComboBoxText();//                        To clear any '*' in memo combo text

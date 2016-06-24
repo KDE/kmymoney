@@ -24,7 +24,7 @@
 #include <QVBoxLayout>
 #include <QScrollBar>
 
-#include <KComboBox>
+#include <QComboBox>
 #include <KColorScheme>
 
 #include "csvimporterplugin.h"
@@ -191,7 +191,7 @@ public:
   int            m_dpiDiff;
 
   QUrl           m_url;
-  KComboBox*     m_comboBoxEncode;
+  QComboBox*     m_comboBoxEncode;
 
   QFile*         m_inFile;
 
