@@ -224,6 +224,8 @@ public:
   void             setMemoColumn(int);
   int              categoryColumn() const;
   void             setCategoryColumn(int);
+  int              oppositeSignsCheckBox() const;
+  void             setOppositeSignsCheckBox(int);
   int              validateColumn(const int& col, QString& type);
 
   /**
@@ -461,6 +463,7 @@ private:
   int              m_payeeColumn;
   int              m_categoryColumn;
   int              m_previousColumn;
+  int              m_oppositeSigns;
   int              m_maxRowWidth;
   int              m_rowWidth;
   int              m_decimalSymbolIndex;

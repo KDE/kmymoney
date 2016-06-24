@@ -116,6 +116,7 @@ void CSVWizard::init()
 
   connect(m_pageBanking->ui->radioBnk_amount, SIGNAL(clicked(bool)), this, SLOT(amountRadioClicked(bool)));
   connect(m_pageBanking->ui->radioBnk_debCred, SIGNAL(clicked(bool)), this, SLOT(debitCreditRadioClicked(bool)));
+  connect(m_pageBanking->ui->checkBoxBnk_oppositeSigns, SIGNAL(clicked(bool)), this, SLOT(oppositeSignsCheckBoxClicked(bool)));
   connect(m_pageBanking->ui->button_clear, SIGNAL(clicked()), this, SLOT(clearColumnsSelected()));
 
   connect(m_pageSeparator->ui->comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), m_csvDialog->m_investProcessing, SLOT(fieldDelimiterChanged()));
@@ -253,6 +254,11 @@ void CSVWizard::debitCreditRadioClicked(bool checked)
     m_pageBanking->ui->comboBoxBnk_amountCol->setCurrentIndex(-1);  //     as credit/debit chosen
     m_pageBanking->ui->labelBnk_amount->setEnabled(false);
   }
+}
+
+void CSVWizard::oppositeSignsCheckBoxClicked(bool checked)
+{
+  m_csvDialog->setOppositeSignsCheckBox(checked);
 }
 
 void CSVWizard::creditColumnSelected(int col)

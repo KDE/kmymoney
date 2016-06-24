@@ -119,6 +119,12 @@ public slots:
   void           debitCreditRadioClicked(bool checked);
 
   /**
+  * This method is called when the oppositeSignsCheckBox checkbox is clicked.
+  * It will set m_oppositeSigns.
+  */
+  void           oppositeSignsCheckBoxClicked(bool checked);
+
+  /**
   * This method is called when the Credit column is activated.
   * It will validate the column selection.
   */

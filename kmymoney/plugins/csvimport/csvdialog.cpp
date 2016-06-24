@@ -383,6 +383,8 @@ void CSVDialog::readSettings()
     m_wiz->m_pageBanking->ui->comboBoxBnk_dateCol->setCurrentIndex(m_dateColumn);
     m_categoryColumn = profilesGroup.readEntry("CategoryCol", -1);
     m_wiz->m_pageBanking->ui->comboBoxBnk_categoryCol->setCurrentIndex(m_categoryColumn);
+    m_oppositeSigns = profilesGroup.readEntry("OppositeSigns", 0);
+    m_wiz->m_pageBanking->ui->checkBoxBnk_oppositeSigns->setChecked(m_oppositeSigns);
 
     QList<int> list = profilesGroup.readEntry("MemoCol", QList<int>());
     int posn = 0;
@@ -1212,6 +1214,14 @@ int CSVDialog::processQifLine(QString& iBuff)
       } else if (m_debitColumn == i) {
         txt = '-' + txt;  //                          Mark as -ve
       }
+      if (m_oppositeSigns) {
+        if(txt.left(1) == "-")
+          txt = txt.remove(0,1);
+        else if (txt.left(1) == "+")
+          txt = txt.replace(0,1,"-");
+        else
+          txt = '-' + txt;
+      }
       newTxt = m_parse->possiblyReplaceSymbol(txt);
       m_trData.amount = newTxt;
       m_qifBuffer = m_qifBuffer + 'T' + newTxt + '\n';
@@ -1636,6 +1646,7 @@ void CSVDialog::enableInputs()
   m_wiz->m_pageBanking->ui->button_clear->setEnabled(true);
   m_wiz->m_pageLinesDate->ui->spinBox_skipToLast->setEnabled(true);
   m_wiz->m_pageSeparator->ui->comboBox_fieldDelimiter->setEnabled(true);
+  m_wiz->m_pageBanking->ui->checkBoxBnk_oppositeSigns->setEnabled(true);
 
   if (m_wiz->m_pageBanking->ui->radioBnk_amount->isChecked()) {
     m_wiz->m_pageBanking->ui->comboBoxBnk_amountCol->setEnabled(true);
@@ -1685,6 +1696,7 @@ void CSVDialog::saveSettings()
     profilesGroup.writeEntry("CsvDirectory", pth);
     profilesGroup.writeEntry("DateFormat", m_wiz->m_pageLinesDate->ui->comboBox_dateFormat->currentIndex());
     profilesGroup.writeEntry("DebitFlag", m_debitFlag);
+    profilesGroup.writeEntry("OppositeSigns", m_oppositeSigns);
     profilesGroup.writeEntry("FieldDelimiter", m_fieldDelimiterIndex);
     profilesGroup.writeEntry("FileType", m_fileType);
     profilesGroup.writeEntry("TextDelimiter", m_textDelimiterIndex);
@@ -2326,6 +2338,16 @@ int CSVDialog::categoryColumn() const
 void CSVDialog::setCategoryColumn(int val)
 {
   m_categoryColumn = val;
+}
+
+int CSVDialog::oppositeSignsCheckBox() const
+{
+  return m_categoryColumn;
+}
+
+void CSVDialog::setOppositeSignsCheckBox(int val)
+{
+  m_oppositeSigns = val;
 }
 
 void CSVDialog::slotVertScrollBarMoved(int val)

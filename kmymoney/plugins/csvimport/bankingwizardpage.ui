@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>740</width>
-    <height>240</height>
+    <height>270</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -113,19 +113,19 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout" stretch="80,12">
        <item>
-        <layout class="QGridLayout" name="gridLayout" rowstretch="10,0,0,0" columnstretch="40,0,0,0,0,0">
-         <item row="0" column="0">
-          <widget class="QLabel" name="labelBnk_number">
+        <layout class="QGridLayout" name="gridLayout" rowstretch="10,0,0,0,0" columnstretch="40,0,0,0,0,0">
+         <item row="0" column="3">
+          <widget class="QRadioButton" name="radioBnk_amount">
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>20</height>
+             <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>16777215</height>
+             <height>25</height>
             </size>
            </property>
            <property name="font">
@@ -133,19 +133,25 @@
              <underline>false</underline>
             </font>
            </property>
+           <property name="toolTip">
+            <string>Select 'Amount' if only one value column, otherwise select 'Debit/credit'.</string>
+           </property>
+           <property name="whatsThis">
+            <string extracomment="Select 'Amount' if only one value column, otherwise select "/>
+           </property>
            <property name="accessibleName">
-            <string comment="column containing number field"/>
+            <string comment="presence of amount column"/>
            </property>
            <property name="text">
-            <string comment="column containing number field">Number</string>
+            <string comment="presence of amount column">Amount</string>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           <property name="checked">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="KComboBox" name="comboBoxBnk_numberCol">
+         <item row="0" column="5">
+          <widget class="KComboBox" name="comboBoxBnk_amountCol">
            <property name="minimumSize">
             <size>
              <width>80</width>
@@ -159,10 +165,7 @@
             </size>
            </property>
            <property name="toolTip">
-            <string>Select column containing number field.</string>
-           </property>
-           <property name="editable">
-            <bool>false</bool>
+            <string>Select column containing amount field.</string>
            </property>
            <property name="maxVisibleItems">
             <number>12</number>
@@ -279,6 +282,61 @@
            </property>
           </widget>
          </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="labelBnk_number">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="accessibleName">
+            <string comment="column containing number field"/>
+           </property>
+           <property name="text">
+            <string comment="column containing number field">Number</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="KComboBox" name="comboBoxBnk_numberCol">
+           <property name="minimumSize">
+            <size>
+             <width>80</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Select column containing number field.</string>
+           </property>
+           <property name="editable">
+            <bool>false</bool>
+           </property>
+           <property name="maxVisibleItems">
+            <number>12</number>
+           </property>
+          </widget>
+         </item>
          <item row="2" column="5">
           <widget class="KComboBox" name="comboBoxBnk_creditCol">
            <property name="minimumSize">
@@ -377,122 +435,6 @@
            </property>
           </spacer>
          </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="labelBnk_category">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing number field"/>
-           </property>
-           <property name="text">
-            <string comment="column containing number field">Category</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="3">
-          <widget class="QRadioButton" name="radioBnk_amount">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="toolTip">
-            <string>Select 'Amount' if only one value column, otherwise select 'Debit/credit'.</string>
-           </property>
-           <property name="whatsThis">
-            <string extracomment="Select 'Amount' if only one value column, otherwise select "/>
-           </property>
-           <property name="accessibleName">
-            <string comment="presence of amount column"/>
-           </property>
-           <property name="text">
-            <string comment="presence of amount column">Amount</string>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="5">
-          <widget class="KComboBox" name="comboBoxBnk_amountCol">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing amount field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="5">
-          <widget class="KComboBox" name="comboBoxBnk_memoCol">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing memo field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
          <item row="2" column="0">
           <widget class="QLabel" name="labelBnk_payee">
            <property name="minimumSize">
@@ -545,8 +487,11 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="4">
-          <widget class="QLabel" name="labelBnk_memo">
+         <item row="2" column="4">
+          <widget class="QLabel" name="labelBnk_credits">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -565,10 +510,10 @@
             </font>
            </property>
            <property name="accessibleName">
-            <string comment="column containing date field"/>
+            <string comment="column containing credits field"/>
            </property>
            <property name="text">
-            <string>Memo</string>
+            <string comment="location of credit column">Credit</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -603,11 +548,66 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="4">
-          <widget class="QLabel" name="labelBnk_credits">
-           <property name="enabled">
-            <bool>false</bool>
+         <item row="3" column="0">
+          <widget class="QLabel" name="labelBnk_category">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="accessibleName">
+            <string comment="column containing number field"/>
+           </property>
+           <property name="text">
+            <string comment="column containing number field">Category</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="KComboBox" name="comboBoxBnk_memoCol">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>80</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Select column containing memo field.</string>
+           </property>
+           <property name="maxVisibleItems">
+            <number>12</number>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="labelBnk_memo">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -626,13 +626,26 @@
             </font>
            </property>
            <property name="accessibleName">
-            <string comment="column containing credits field"/>
+            <string comment="column containing date field"/>
            </property>
            <property name="text">
-            <string comment="location of credit column">Credit</string>
+            <string>Memo</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3" colspan="2">
+          <widget class="QCheckBox" name="checkBoxBnk_oppositeSigns">
+           <property name="toolTip">
+            <string>Select if you amount colum has signs improperly set.</string>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string>Opposite signs</string>
            </property>
           </widget>
          </item>
