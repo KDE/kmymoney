@@ -194,11 +194,6 @@ You will need to reselect those columns.");
     m_widget->label_info->setText("OK");
     if ((m_quantity.isPositive()) && (m_price.isPositive()) && (!m_amount.isZero())) {
       m_okTypeList << "reinvdiv" << "buy" << "sell";
-      if ((m_accountName.isEmpty()) && (type != "reinvdiv")) {
-        m_accountName =  inputParameter(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:"));
-        if (m_accountName.isEmpty())
-          return KMessageBox::Cancel;
-      }
       m_newType = type;
       m_buttonOK->setEnabled(true);
       return KMessageBox::Ok;
@@ -209,10 +204,6 @@ You will need to reselect those columns.");
     m_widget->label_info->setText("OK");
     if ((m_quantity.isZero()) && (m_price.isZero()) && (!m_amount.isZero())) {
       m_okTypeList << "divx" << "intinc";
-      if (m_accountName.isEmpty())
-        m_accountName =  inputParameter(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:"));
-      if (m_accountName.isEmpty())
-        return KMessageBox::Cancel;
       m_newType = type;
       m_buttonOK->setEnabled(true);
       return KMessageBox::Ok;

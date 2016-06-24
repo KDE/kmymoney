@@ -1483,9 +1483,6 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
   //
   if ((m_trInvestData.type == "buy") || (m_trInvestData.type == "sell") ||
       (m_trInvestData.type == "divx") || (m_trInvestData.type == "intinc")) {
-    if (m_redefine->accountName().isEmpty()) {
-      m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:")));
-    }
     m_trInvestData.brokerageAccnt = m_redefine->accountName();
     m_tempBuffer +=  "L[" + m_redefine->accountName() + ']' + '\n';
     m_brokerage = false;
@@ -1495,14 +1492,9 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
 
   if (m_brokerage) {     //                                        brokerage items
     if (m_brokerBuff.isEmpty()) {      //                          start building data
-
-      if (m_redefine->accountName().isEmpty()) {
-        m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:")));
-      }
       m_brokerBuff = "!Account\n";
       m_brokerBuff += 'N' + m_redefine->accountName() + '\n';
       m_brokerBuff += "TBank\n^\n";
-
       m_brokerBuff += "!Type:Bank\n";
     }
     m_trInvestData.brokerageAccnt = m_redefine->accountName();
@@ -1568,8 +1560,6 @@ int InvestProcessing::processActionType(QString& type)
   }
   if ((brokerFound) || (type.isEmpty()))  {      //                No investment type, but may still be...
     m_brokerage = true;//                                     ...but assume these are non-investment items, until later.
-    if (m_redefine->accountName().isEmpty())
-      m_redefine->setAccountName(accountName(i18n("Enter the name of the Brokerage or Checking Account used for the transfer of funds:")));
     m_tempBuffer +=  "L[" + m_redefine->accountName() + ']' + '\n';
 
     if (m_payeeColumn < 0) {
