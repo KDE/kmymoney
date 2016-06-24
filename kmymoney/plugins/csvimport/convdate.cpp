@@ -40,7 +40,7 @@ QDate ConvertDate::convertDate(const QString& txt)
   QDate  aDate;
   QString dateFormatString = stringFormat();
 
-  QRegExp rx("[\\. -]");  //                           replace date field separators '.' ' ' '-'
+  QRegExp rx("[\\. :-]");  //                           replace date field separators '.' ' ' ':' '-'
   QString buffer = txt.trimmed();
   buffer = buffer.replace(rx, QString('/'));   //     ....with '/'
   int count = buffer.count('/', Qt::CaseSensitive);
@@ -53,27 +53,68 @@ QDate ConvertDate::convertDate(const QString& txt)
   }
 
   QStringList dateSplit = buffer.split('/');
-  if (dateSplit.count() != 3) {      //                  not a valid date
+  if (dateSplit.count() > 3) {      //                  it can be date and time
+    qDebug("ConvertDate - assuming date and time format");
+    bool dateFound = false;
+    for (int i = 0; i < dateSplit.count(); i++) {
+      if(dateSplit[i].length() == 4 && dateSplit[i].toInt() > 0) {
+        switch (m_dateFormatIndex) {
+          case(0) :   //                                 %y %m %d
+            if(i+2 < dateSplit.count()) {
+              aYear =  dateSplit[i];
+              aMonth = dateSplit[i+1];
+              aDay =   dateSplit[i+2];
+              dateFound = true;
+            }
+            break;
+          case(1) :   //                                 %m %d %y
+            if(i-2 >= 0) {
+              aMonth = dateSplit[i-2];
+              aDay =   dateSplit[i-1];
+              aYear =  dateSplit[i];
+              dateFound = true;
+            }
+            break;
+          case(2) :   //                                 %d %m %y
+            if(i-2 >= 0) {
+              aDay =   dateSplit[i-2];
+              aMonth = dateSplit[i-1];
+              aYear =  dateSplit[i];
+              dateFound = true;
+            }
+            break;
+          default:
+            qDebug("ConvertDate - not a valid date format");
+        }
+        if (dateFound)
+          break;
+      }
+    }
+    if (!dateFound) {
+      return QDate();
+    }
+  } else if(dateSplit.count() == 3) {
+    switch (m_dateFormatIndex) {
+      case(0) :   //                                 %y %m %d
+        aYear =  dateSplit[0];
+        aMonth = dateSplit[1];
+        aDay =   dateSplit[2];
+        break;
+      case(1) :   //                                 %m %d %y
+        aMonth = dateSplit[0];
+        aDay =   dateSplit[1];
+        aYear =  dateSplit[2];
+        break;
+      case(2) :   //                                 %d %m %y
+        aDay =   dateSplit[0];
+        aMonth = dateSplit[1];
+        aYear =  dateSplit[2];
+        break;
+      default:
+        qDebug("ConvertDate - not a valid date format");
+    }
+  } else {                             //                  not a valid date
     return QDate();
-  }
-  switch (m_dateFormatIndex) {
-    case(0) :   //                                 %y %m %d
-      aYear =  dateSplit[0];
-      aMonth = dateSplit[1];
-      aDay =   dateSplit[2];
-      break;
-    case(1) :   //                                 %m %d %y
-      aMonth = dateSplit[0];
-      aDay =   dateSplit[1];
-      aYear =  dateSplit[2];
-      break;
-    case(2) :   //                                 %d %m %y
-      aDay =   dateSplit[0];
-      aMonth = dateSplit[1];
-      aYear =  dateSplit[2];
-      break;
-    default:
-      qDebug("ConvertDate - not a valid date format");
   }
 //                                                 Check year
   if (aYear.length() == 2) {       //                    2 digits
