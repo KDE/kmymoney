@@ -19,6 +19,7 @@ email                 : agander93@gmail.com
 #define REDEFINEDLG_H
 
 #include <QDialog>
+#include <QPushButton>
 
 #include "mymoneymoney.h"
 #include "ui_redefinedlgdecl.h"
@@ -84,6 +85,9 @@ private:
 
   QPixmap          m_iconYes;
   QPixmap          m_iconNo;
+
+  QPushButton*      m_buttonOK;
+  QPushButton*      m_buttonCancel;
 
   QString          m_accountName;
   QString          m_inBuffer;

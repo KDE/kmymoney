@@ -66,14 +66,15 @@ RedefineDlg::RedefineDlg()
   m_mainWidth = m_widget->tableWidget->size().width();
   m_mainHeight = m_widget->tableWidget->size().height();
 
-  // TODO: port to kf5
-  //this->okButton->setEnabled(false);
+  m_buttonOK = m_widget->buttonBox->button(QDialogButtonBox::Ok);
+  m_buttonCancel = m_widget->buttonBox->button(QDialogButtonBox::Cancel);
+
+  m_buttonOK->setEnabled(false);
   m_widget->kcombobox_Actions->setCurrentIndex(-1);
 
   connect(m_widget->kcombobox_Actions, SIGNAL(activated(int)), this, SLOT(slotNewActionSelected(int)));
-  // TODO: port to kf5
-  //connect(okButton, SIGNAL(clicked()), this, SLOT(slotAccepted()));
-  //connect(buttonBox->button(QDialogButtonBox::Cancel), SIGNAL(clicked()), this, SLOT(slotRejected()));
+  connect(m_buttonOK, SIGNAL(clicked()), this, SLOT(slotAccepted()));
+  connect(m_buttonCancel, SIGNAL(clicked()), this, SLOT(slotRejected()));
 }
 
 RedefineDlg::~RedefineDlg()
@@ -83,8 +84,7 @@ RedefineDlg::~RedefineDlg()
 
 void RedefineDlg::displayLine(const QString& info)
 {
-  // TODO: port to kf5
-  //this->okButton->setEnabled(false);
+  m_buttonOK->setEnabled(false);
   QString txt;
   txt.setNum(m_typeColumn + 1);
   m_widget->label_actionCol->setText(i18n("Column ") + txt);
@@ -162,8 +162,7 @@ void RedefineDlg::slotNewActionSelected(const int& index)
     QTableWidgetItem *item = new QTableWidgetItem;//        add new type to UI
     item->setText(m_newType);
     m_widget->tableWidget->setItem(1, m_typeColumn, item);
-    // TODO: port to kf5
-    //this->okButton->setEnabled(true);
+    m_buttonOK->setEnabled(true);
   }
 }
 
@@ -181,8 +180,7 @@ int RedefineDlg::checkValid(const QString& type, QString info)
   int ret = -1;
   m_okTypeList.clear();
   m_maxCol = m_columnList.count();
-  // TODO: port to kf5
-  //this->okButton->setEnabled(false);
+  m_buttonOK->setEnabled(false);
   convertValues();
   if ((m_priceColumn < 1) || (m_priceColumn >= m_maxCol) ||
       (m_quantityColumn < 1) || (m_quantityColumn >= m_maxCol) ||
@@ -202,8 +200,7 @@ You will need to reselect those columns.");
           return KMessageBox::Cancel;
       }
       m_newType = type;
-      // TODO: port to kf5
-      //this->okButton->setEnabled(true);
+      m_buttonOK->setEnabled(true);
       return KMessageBox::Ok;
     }
     ret = suspectType(info);
@@ -217,8 +214,7 @@ You will need to reselect those columns.");
       if (m_accountName.isEmpty())
         return KMessageBox::Cancel;
       m_newType = type;
-      // TODO: port to kf5
-      //this->okButton->setEnabled(true);
+      m_buttonOK->setEnabled(true);
       return KMessageBox::Ok;
     }
     //                    validity suspect
@@ -229,8 +225,7 @@ You will need to reselect those columns.");
     if ((m_quantity.isPositive()) && (m_price.isZero()) && (m_amount.isZero())) {
       m_okTypeList << "shrsin" << "shrsout";
       m_newType = type;
-      // TODO: port to kf5
-      //this->okButton->setEnabled(true);
+      m_buttonOK->setEnabled(true);
       return KMessageBox::Ok;
     }
     m_okTypeList.clear();

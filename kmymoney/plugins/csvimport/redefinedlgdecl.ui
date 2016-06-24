@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>828</width>
-    <height>267</height>
+    <height>299</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -170,6 +170,13 @@ Please select an appropriate entry.</string>
     <widget class="QLabel" name="label">
      <property name="text">
       <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
