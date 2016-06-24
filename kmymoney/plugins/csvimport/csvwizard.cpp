@@ -1564,8 +1564,7 @@ bool LinesDatePage::validatePage()
 {
   bool ok;
   QString value;
-  // TODO: port to kf5
-  QString pattern = QString("[%1(), $]").arg(QString()/*KGlobal::locale()->currencySymbol()*/);
+  QString pattern = QString("[%1(), $]").arg(QLocale().currencySymbol());
   //
   //  Ensure numeric columns do contain valid numeric values
   //
@@ -1582,8 +1581,7 @@ bool LinesDatePage::validatePage()
           }
           value.toDouble(&ok); // Test validity.
           if ((!ok) && (!m_wizDlg->m_csvDialog->m_acceptAllInvalid)) {
-              // TODO: port to kf5
-            QString str = QString();//KGlobal::locale()->currencySymbol();
+            QString str = QLocale().currencySymbol();
             int rc = KMessageBox::questionYesNoCancel(this, i18n("<center>An invalid value has been detected in column %1 on row %2.</center>"
                      "Please check that you have selected the correct columns."
                      "<center>You may accept all similar items, or just this one, or cancel.</center>",
@@ -1621,8 +1619,7 @@ bool LinesDatePage::validatePage()
           }
           value.toDouble(&ok); // Test validity.
           if ((!ok) && (!m_wizDlg->m_csvDialog->m_acceptAllInvalid)) {
-            // TODO: port to kf5
-            QString str = QString();//KGlobal::locale()->currencySymbol();
+            QString str = QLocale().currencySymbol();
             int rc = KMessageBox::questionYesNoCancel(this, i18n("<center>An invalid value has been detected in column %1 on row %2.</center>"
                      "Please check that you have selected the correct columns."
                      "<center>You may accept all similar items, or just this one, or cancel.</center>",

@@ -215,7 +215,7 @@ void Parse::thousandsSeparatorChanged(int val)
 {
   m_thousandsSeparatorIndex = val;
   m_thousandsSeparator = m_thousandsSeparatorList[val];
-  if (m_thousandsSeparator == ""/* TODO: port to kf5 - KLocale::global()->thousandsSeparator()*/) {
+  if (m_thousandsSeparator == QLocale().groupSeparator()) {
     return;
   }
 }

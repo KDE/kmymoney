@@ -34,7 +34,7 @@ void SymbolTest::init()
   m_parse = new Parse;
   m_parse->setDecimalSymbol(0);
   m_localeDecimal = QLocale().decimalPoint();
-  m_localeThousands = ""/* TODO: port to kf5 - KLocale::global()->thousandsSeparator()*/;
+  m_localeThousands = QLocale().groupSeparator();
 }
 
 void SymbolTest::cleanup()
