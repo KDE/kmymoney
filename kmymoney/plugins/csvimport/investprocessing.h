@@ -190,6 +190,7 @@ public:
   int            symbolColumn();
   int            typeColumn();
   int            memoColumn();
+  int            feeIsPercentage();
 
   bool           importNow();
   bool           m_symbolTableScanned;
@@ -287,6 +288,12 @@ public slots:
   * It will validate the column selection.
   */
   void           detailColumnSelected(int);
+
+  /**
+  * This method is called when the feeIsPercentageCheckBox checkbox is clicked.
+  * It will set m_feeIsPercentage.
+  */
+  void           feeIsPercentageCheckBoxClicked(bool checked);
 
   /**
   * This method is called when the user clicks Accept. It performs further
@@ -465,6 +472,7 @@ private:
   int            m_quantityColumn;
   int            m_symbolColumn;
   int            m_detailColumn;
+  int            m_feeIsPercentage;
   int            m_textDelimiterIndex;
   int            m_typeColumn;
   int            m_symbolRow;

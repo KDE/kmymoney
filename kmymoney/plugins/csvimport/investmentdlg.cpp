@@ -160,6 +160,7 @@ void InvestmentDlg::saveSettings()
     profilesGroup.writeEntry("FeeCol", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->currentIndex());
     profilesGroup.writeEntry("SymbolCol", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex());
     profilesGroup.writeEntry("DetailCol", m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_detailCol->currentIndex());
+    profilesGroup.writeEntry("FeeIsPercentage", int(m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->isChecked()));
     profilesGroup.config()->sync();
 
     KConfigGroup securitiesGroup(config, "Securities");

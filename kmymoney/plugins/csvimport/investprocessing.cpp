@@ -366,7 +366,7 @@ void InvestProcessing::enableInputs()
   m_csvDialog->m_wiz->m_pageInvestment->ui->button_clear->setEnabled(true);
   m_csvDialog->m_wiz->m_pageLinesDate->ui->spinBox_skipToLast->setEnabled(true);
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->setEnabled(true);
-  m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeType->setEnabled(true);
+  m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setEnabled(true);
 }
 
 void InvestProcessing::clearColumnsSelected()
@@ -817,6 +817,11 @@ void InvestProcessing::detailColumnSelected(int col)
   }
 }
 
+void InvestProcessing::feeIsPercentageCheckBoxClicked(bool checked)
+{
+  m_feeIsPercentage = checked;
+}
+
 void InvestProcessing::fieldDelimiterChanged()
 {
   if ((m_csvDialog->m_fileType != "Invest") || (m_csvDialog->m_wiz->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex() == -1)) {
@@ -950,6 +955,7 @@ void InvestProcessing::readFile(const QString& fname)
     disconnect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(feeColumnSelected(int)));
     disconnect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_symbolCol, SIGNAL(currentIndexChanged(int)), this, SLOT(symbolColumnSelected(int)));
     disconnect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_detailCol, SIGNAL(currentIndexChanged(int)), this, SLOT(detailColumnSelected(int)));
+    disconnect(m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage, SIGNAL(clicked(bool)), this, SLOT(feeIsPercentageCheckBoxClicked(bool)));
 
     for (int i = 0; i < m_maxColumnCount; i++) {  //  populate comboboxes with col # values
       //  Start to build m_columnTypeList before comboBox stuff below
@@ -980,6 +986,7 @@ void InvestProcessing::readFile(const QString& fname)
     connect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(feeColumnSelected(int)));
     connect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_symbolCol, SIGNAL(currentIndexChanged(int)), this, SLOT(symbolColumnSelected(int)));
     connect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_detailCol, SIGNAL(currentIndexChanged(int)), this, SLOT(detailColumnSelected(int)));
+    connect(m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage, SIGNAL(clicked(bool)), this, SLOT(feeIsPercentageCheckBoxClicked(bool)));
 
     //  Display the buffer
 
@@ -1393,8 +1400,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       }
       newTxt = m_parse->possiblyReplaceSymbol(txt);
       MyMoneyMoney fee = MyMoneyMoney(newTxt);
-      if (m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeType->isChecked() &&
-        fee.toDouble() > 0.00 ) {      //   fee is percent
+      if (m_feeIsPercentage && fee.toDouble() > 0.00 ) {      //   fee is percent
         txt = m_columnList[m_amountColumn];
         txt = txt.remove('"');
         if (txt.contains(')')) {
@@ -2095,6 +2101,9 @@ void InvestProcessing::readSettings()
       tmp = profilesGroup.readEntry("DetailCol", -1);
       m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_detailCol->setCurrentIndex(tmp);
 
+      tmp = profilesGroup.readEntry("FeeIsPercentage", 0);
+      m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setChecked(tmp);
+
       QList<int> list = profilesGroup.readEntry("MemoCol", QList<int>());
       int posn = 0;
       if ((posn = list.indexOf(-1)) > -1) {  //  Look for -1, meaning no memo col
@@ -2145,6 +2154,7 @@ void InvestProcessing::readSettings()
       m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setCurrentIndex(-1);
       m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_symbolCol->setCurrentIndex(-1);
       m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_detailCol->setCurrentIndex(-1);
+      m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setChecked(false);
     }
   }
   KConfigGroup mainGroup(config, "MainWindow");
@@ -2166,6 +2176,7 @@ void InvestProcessing::reloadUISettings()
   m_amountColumn = m_columnTypeList.indexOf("amount");
   m_feeColumn = m_columnTypeList.indexOf("fee");
   m_detailColumn = m_columnTypeList.indexOf("detail");
+  m_feeIsPercentage = m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->isChecked();
   m_startLine = m_csvDialog->m_wiz->m_pageLinesDate->ui->spinBox_skip->value();
   m_endLine = m_csvDialog->m_wiz->m_pageLinesDate->ui->spinBox_skipToLast->value();
 }
@@ -2298,6 +2309,11 @@ int InvestProcessing::priceColumn()
 int InvestProcessing::detailColumn()
 {
   return m_detailColumn;
+}
+
+int InvestProcessing::feeIsPercentage()
+{
+  return m_feeIsPercentage;
 }
 
 int InvestProcessing::symbolColumn()

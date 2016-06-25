@@ -6,6 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
+    <width>850</width>
     <height>324</height>
    </rect>
   </property>
@@ -455,7 +456,7 @@ The names are retained and may be selected from the list here.</string>
         </widget>
        </item>
        <item row="2" column="5" colspan="2">
-        <widget class="QCheckBox" name="checkBoxInv_feeType">
+        <widget class="QCheckBox" name="checkBoxInv_feeIsPercentage">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -475,7 +476,7 @@ The names are retained and may be selected from the list here.</string>
           <enum>Qt::RightToLeft</enum>
          </property>
          <property name="text">
-          <string comment="select if fee is a percentage (not value)">Fee is  Percentage </string>
+          <string comment="select if fee is a percentage (not value)">Fee is Percentage </string>
          </property>
         </widget>
        </item>
@@ -664,19 +665,14 @@ It does not affect the underlying security itself.</string>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>QPushButton</class>
-   <extends>QPushButton</extends>
-   <header>QPushButton</header>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
