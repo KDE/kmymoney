@@ -339,6 +339,7 @@ void InvestProcessing::slotFileDialogClicked()
   profileGroup.config()->sync();
 
   enableInputs();
+  calculateFee();
 
   if (m_csvDialog->m_wiz->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
     m_csvDialog->m_wiz->m_pageCompletion->initializePage();//  Using a profile so skip setup and go to Completion.
@@ -356,6 +357,8 @@ void InvestProcessing::enableInputs()
 {
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_amountCol->setEnabled(true);
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_dateCol->setEnabled(true);
+  m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_feeRate->setEnabled(true);
+  m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_minFee->setEnabled(true);
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setEnabled(true);
   m_csvDialog->m_wiz->m_pageSeparator->ui->comboBox_fieldDelimiter->setEnabled(true);
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_memoCol->setEnabled(true);
@@ -364,9 +367,34 @@ void InvestProcessing::enableInputs()
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_quantityCol->setEnabled(true);
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_typeCol->setEnabled(true);
   m_csvDialog->m_wiz->m_pageInvestment->ui->button_clear->setEnabled(true);
+  m_csvDialog->m_wiz->m_pageInvestment->ui->buttonInv_clearFee->setEnabled(true);
   m_csvDialog->m_wiz->m_pageLinesDate->ui->spinBox_skipToLast->setEnabled(true);
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->setEnabled(true);
   m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setEnabled(true);
+}
+
+void InvestProcessing::clearFeesSelected()
+{
+  int i;
+  if (!m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_feeRate->text().isEmpty() && !(m_feeColumn<0)) //delete fee colum, but only if it was generated
+  {
+    m_maxColumnCount-=1;
+    m_endColumn=m_maxColumnCount;
+    m_csvDialog->ui->tableWidget->setColumnCount(m_maxColumnCount);
+    i=m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->currentIndex();
+    m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setCurrentIndex(-1);
+    m_feeSelected = false;
+    m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->removeItem(i);
+  }
+  m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setEnabled(true);
+  m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_feeRate->setEnabled(true);
+  m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_minFee->setEnabled(true);
+  m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setEnabled(true);
+  m_csvDialog->m_wiz->m_pageInvestment->ui->buttonInv_calculateFee->setEnabled(false);
+  m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setCurrentIndex(-1);
+  m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_feeRate->clear();
+  m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_minFee->clear();
+  m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setChecked(false);
 }
 
 void InvestProcessing::clearColumnsSelected()
@@ -402,7 +430,6 @@ void InvestProcessing::clearColumnNumbers()
 {
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_amountCol->setCurrentIndex(-1);
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_dateCol->setCurrentIndex(-1);
-  m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setCurrentIndex(-1);
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_priceCol->setCurrentIndex(-1);
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_quantityCol->setCurrentIndex(-1);
   m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_memoCol->setCurrentIndex(-1);
@@ -502,6 +529,7 @@ int InvestProcessing::validateNewColumn(const int& col, const QString& type)
     resetComboBox(type, col);  //                   ... both comboboxes
     m_previousType.clear();
     m_columnTypeList[col].clear();
+    feeInputsChanged();
     return KMessageBox::Cancel;
   }
   //                                                is this type already in use
@@ -517,6 +545,26 @@ int InvestProcessing::validateNewColumn(const int& col, const QString& type)
   }
   m_previousType = type;
   return KMessageBox::Ok; //                        accept new type
+}
+
+void InvestProcessing::feeInputsChanged()
+{
+  m_csvDialog->m_wiz->m_pageInvestment->ui->buttonInv_calculateFee->setEnabled(false);
+  if(m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_feeRate->text().isEmpty())
+    {
+      m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setEnabled(true);
+      m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setEnabled(true);
+      m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_minFee->setEnabled(false);
+    }
+  else
+    {
+      m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setEnabled(false);
+      m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setEnabled(false);
+      m_csvDialog->m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setChecked(true);
+      m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_minFee->setEnabled(true);
+      if (m_amountColumn!=-1)
+        m_csvDialog->m_wiz->m_pageInvestment->ui->buttonInv_calculateFee->setEnabled(true);
+    }
 }
 
 void InvestProcessing::feeColumnSelected(int col)
@@ -542,11 +590,11 @@ void InvestProcessing::feeColumnSelected(int col)
     }
     m_feeColumn = col;
     m_columnTypeList[m_feeColumn] = type;
-    return;
   }
   if (ret == KMessageBox::No) {
     m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setCurrentIndex(-1);
   }
+  feeInputsChanged();
 }
 
 void InvestProcessing::typeColumnSelected(int col)
@@ -736,11 +784,11 @@ void InvestProcessing::amountColumnSelected(int col)
     }
     m_amountColumn = col;
     m_columnTypeList[m_amountColumn] = type;
-    return;
   }
   if (ret == KMessageBox::No) {
     m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_amountCol->setCurrentIndex(-1);
   }
+  feeInputsChanged();
 }
 
 void InvestProcessing::symbolColumnSelected(int col)
@@ -942,6 +990,8 @@ void InvestProcessing::readFile(const QString& fname)
     m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_priceCol->clear();
     m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_quantityCol->clear();
     m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_typeCol->clear();
+    m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_feeRate->clear();
+    m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_minFee->clear();
     m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->clear();
     m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_symbolCol->clear();
     m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_nameCol->clear();
@@ -952,6 +1002,7 @@ void InvestProcessing::readFile(const QString& fname)
     disconnect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_quantityCol, SIGNAL(currentIndexChanged(int)), this, SLOT(quantityColumnSelected(int)));
     disconnect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_priceCol, SIGNAL(currentIndexChanged(int)), this, SLOT(priceColumnSelected(int)));
     disconnect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_amountCol, SIGNAL(currentIndexChanged(int)), this, SLOT(amountColumnSelected(int)));
+    disconnect(m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_feeRate, SIGNAL(editingFinished()), this, SLOT(feeInputsChanged()));
     disconnect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(feeColumnSelected(int)));
     disconnect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_symbolCol, SIGNAL(currentIndexChanged(int)), this, SLOT(symbolColumnSelected(int)));
     disconnect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_nameCol, SIGNAL(currentIndexChanged(int)), this, SLOT(nameColumnSelected(int)));
@@ -974,6 +1025,8 @@ void InvestProcessing::readFile(const QString& fname)
       m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_nameCol->addItem(t);
     }
 
+    m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_feeRate->setValidator(new QRegExpValidator(QRegExp("[0-9]{1,2}[" + QLocale().decimalPoint() + "]{0,1}[0-9]{0,2}"),this) );
+    m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_minFee->setValidator( new QRegExpValidator(QRegExp("[0-9]{1,}[" + QLocale().decimalPoint() + "]{0,1}[0-9]{0,}"),this) );
     m_firstPass = false;
     m_screenUpdated = false;
 
@@ -983,6 +1036,7 @@ void InvestProcessing::readFile(const QString& fname)
     connect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_quantityCol, SIGNAL(currentIndexChanged(int)), this, SLOT(quantityColumnSelected(int)));
     connect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_priceCol, SIGNAL(currentIndexChanged(int)), this, SLOT(priceColumnSelected(int)));
     connect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_amountCol, SIGNAL(currentIndexChanged(int)), this, SLOT(amountColumnSelected(int)));
+    connect(m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_feeRate, SIGNAL(editingFinished()), this, SLOT(feeInputsChanged()));
     connect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(feeColumnSelected(int)));
     connect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_symbolCol, SIGNAL(currentIndexChanged(int)), this, SLOT(symbolColumnSelected(int)));
     connect(m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_nameCol, SIGNAL(currentIndexChanged(int)), this, SLOT(nameColumnSelected(int)));
@@ -1011,6 +1065,9 @@ void InvestProcessing::readFile(const QString& fname)
   m_csvDialog->ui->tableWidget->setRowCount(m_endLine);
   connect(m_csvDialog->m_wiz->m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startLineChanged(int)));
   connect(m_csvDialog->m_wiz->m_pageLinesDate->ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), this, SLOT(endLineChanged(int)));
+
+  if(m_importNow)
+      calculateFee();
 
   //  Display the buffer
   for (int line = 0; line < m_lineList.count(); line++) {
@@ -1400,7 +1457,8 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       }
       newTxt = m_parse->possiblyReplaceSymbol(txt);
       MyMoneyMoney fee = MyMoneyMoney(newTxt);
-      if (m_feeIsPercentage && fee.toDouble() > 0.00 ) {      //   fee is percent
+      if (m_feeIsPercentage && fee.toDouble() > 0.00 &&
+          m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_feeRate->text().isEmpty()) {      //   fee is percent
         txt = m_columnList[m_amountColumn];
         txt = txt.remove('"');
         if (txt.contains(')')) {
@@ -1481,6 +1539,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       m_trInvestData.payee = txt;//                           ... and use rest as payee.
     }
   }   //end of col loop
+
   m_redefine->setInBuffer(inBuffer);
   if (m_trInvestData.type != "0") {       //                       Don't need to do this check on checking items.
     int ret = (m_redefine->checkValid(m_trInvestData.type, i18n("The quantity, price and amount parameters in the\ncurrent transaction do not match with the action type.\nPlease select another action type\n")));
@@ -2135,6 +2194,12 @@ void InvestProcessing::readSettings()
           m_memoColumn = tmp;
         }
       }
+      str = profilesGroup.readEntry("FeeRate", QString());
+      m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_feeRate->setText(str);
+
+      str = profilesGroup.readEntry("MinFee", QString());
+      m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_minFee->setText(str);
+
       tmp = profilesGroup.readEntry("FeeCol", -1);
       m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setCurrentIndex(tmp);
 
@@ -2387,6 +2452,85 @@ void InvestProcessing::securityNameEdited()
 QStringList InvestProcessing::securityList()
 {
   return m_securityList;
+}
+
+void InvestProcessing::calculateFee()
+{
+  QString txt;
+  QString newTxt;
+  MyMoneyMoney amount;
+  MyMoneyMoney fee;
+  MyMoneyMoney minFee;
+  MyMoneyMoney percent;
+  double d;
+  bool ok;
+
+  txt = m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_feeRate->text();
+  if (txt.isEmpty() || m_amountColumn == -1) //check if required inputs are in place
+    return;
+  m_parse->setFieldDelimiterIndex(m_fieldDelimiterIndex);
+  m_parse->setFieldDelimiterCharacter(m_fieldDelimiterIndex);
+  newTxt = m_parse->possiblyReplaceSymbol(txt);
+  percent = MyMoneyMoney(newTxt);
+
+  txt=m_csvDialog->m_wiz->m_pageInvestment->ui->lineEdit_minFee->text();
+  if (txt.isEmpty())
+    minFee = MyMoneyMoney(0);
+  else
+    {
+      newTxt = m_parse->possiblyReplaceSymbol(txt);
+      minFee = MyMoneyMoney(newTxt);
+    }
+
+  if (m_feeColumn == -1) //check if fee column is already present
+    {
+      m_feeColumn = m_maxColumnCount;
+      m_maxColumnCount += 1;
+      m_endColumn = m_maxColumnCount;
+      m_csvDialog->ui->tableWidget->setColumnCount(m_maxColumnCount);
+      if (m_columnTypeList.count() <= m_feeColumn)
+        m_columnTypeList << "fee";
+      else
+        m_columnTypeList[m_feeColumn] = "fee";
+      txt.setNum(m_feeColumn + 1);
+      m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->addItem(txt); //add generated column to fee combobox...
+      m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setCurrentIndex(m_feeColumn); // ...and select it by default
+      m_feeSelected = true;
+    }
+
+  for (int i = 0; i < m_lineList.count(); i++)
+    {
+      m_columnList = m_parse->parseLine(m_lineList[i]);
+      txt = m_columnList[m_amountColumn];
+      txt.replace(QRegExp("[,. ]"),"").toInt(&ok);
+      if (!ok) //if the line is in statement's header, skip
+        {
+          m_lineList[i] = m_lineList[i] + m_fieldDelimiterCharacter;
+          continue;
+        }
+      txt = m_columnList[m_amountColumn];
+      txt = txt.remove('"');
+      if (txt.contains(')')) {
+          txt = '-' + txt.remove(QRegExp("[()]"));   //            Mark as -ve
+        }
+      newTxt = m_parse->possiblyReplaceSymbol(txt);
+      MyMoneyMoney amount = MyMoneyMoney(newTxt);
+      fee = percent * amount / MyMoneyMoney(100);
+      if (fee < minFee)
+        fee = minFee;
+      d = fee.toDouble();
+      txt.setNum(d, 'f', 4);
+      txt.replace('.',m_parse->decimalSymbol(m_parse->decimalSymbolIndex())); //make sure decimal symbol is uniform in whole line
+
+      if (m_parse->decimalSymbol(m_parse->decimalSymbolIndex()) == m_fieldDelimiterCharacter) //make sure fee has the same notation as the line it's being attached to
+        m_lineList[i] = m_lineList[i] + m_fieldDelimiterCharacter + m_textDelimiterCharacter + txt + m_textDelimiterCharacter;
+      else
+        m_lineList[i] = m_lineList[i] + m_fieldDelimiterCharacter + txt;
+
+      QTableWidgetItem *item = new QTableWidgetItem;
+      item->setText(txt + "  ");
+      m_csvDialog->ui->tableWidget->setItem(i,m_feeColumn,item);
+    }
 }
 
 void InvestProcessing::hideSecurity()

@@ -127,6 +127,7 @@ void CSVWizard::init()
 
   connect(m_pageInvestment->ui->comboBoxInv_securityName, SIGNAL(activated(int)), m_pageInvestment, SLOT(slotsecurityNameChanged(int)));
   connect(m_pageInvestment->ui->button_clear, SIGNAL(clicked()), m_csvDialog->m_investProcessing, SLOT(clearColumnsSelected()));
+  connect(m_pageInvestment->ui->buttonInv_clearFee, SIGNAL(clicked()), m_csvDialog->m_investProcessing, SLOT(clearFeesSelected()));
 
   connect(m_pageLinesDate->ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), m_csvDialog, SLOT(endLineChanged(int)));
   connect(m_pageLinesDate->ui->comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), m_csvDialog, SLOT(dateFormatSelected(int)));
@@ -1421,7 +1422,9 @@ void InvestmentPage::initializePage()
   m_investPageInitialized = true;
   connect(m_wizDlg->m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), m_wizDlg->m_investProcessing, SLOT(startLineChanged(int)));
   wizard()->button(QWizard::NextButton)->setEnabled(false);
+  m_wizDlg->m_investProcessing->feeInputsChanged();
   connect(ui->comboBoxInv_securityName, SIGNAL(currentIndexChanged(int)), this, SLOT(slotsecurityNameChanged(int)));
+  connect(ui->buttonInv_calculateFee, SIGNAL(clicked()), m_wizDlg->m_investProcessing, SLOT(calculateFee()));
   connect(ui->buttonInv_hideSecurity, SIGNAL(clicked()), m_wizDlg->m_investProcessing, SLOT(hideSecurity()));
   m_wizDlg->m_csvDialog->m_isTableTrimmed = false;
   m_wizDlg->m_csvDialog->m_nameFilter = ui->lineEdit_filter->text();//    Load setting from config file.

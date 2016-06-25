@@ -246,6 +246,12 @@ public slots:
   void           fieldDelimiterChanged();
 
   /**
+  * This method is called if any of the inputs (i.e Amount/Fee column selected or Fee rate entered)
+  * has changed. The method enables and disables appropriate controls on Investment page
+  */
+  void           feeInputsChanged();
+
+  /**
   * This method is called if the Fee column is activated.  The fee column may
   * contain either a value or a percentage. The user needs to set the 'Fee is
   * percentage' check box appropriately.  Caution may be needed here, as the fee
@@ -332,6 +338,12 @@ public slots:
   * It will validate the column selection.
   */
   void           typeColumnSelected(int);
+
+  /**
+  * This method is called when the user clicks 'Clear fees'.
+  * All fees selections are cleared. Generated fees colum is removed.
+  */
+  void           clearFeesSelected();
 
   /**
   * This method is called when the user clicks 'Clear selections'.
@@ -511,10 +523,17 @@ private slots:
   void           changedType(const QString& newType);
 
   /**
+  * This method is called to calculate fee based on fee rate and amount.
+  * The method generates column with fees in importer's window afterwards.
+  */
+  void           calculateFee();
+
+  /**
   * This method is called to remove a security name from the combobox list.
   * It does not affect the underlying security.
   */
   void           hideSecurity();
+
 
   void           securityNameSelected(const QString& name);
   void           securityNameEdited();
