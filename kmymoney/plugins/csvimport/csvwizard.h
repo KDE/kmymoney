@@ -367,7 +367,7 @@ private slots:
   void                slotPriceColChanged(int col);
   void                slotAmountColChanged(int col);
   void                slotSymbolColChanged(int col);
-  void                slotDetailColChanged(int col);
+  void                slotNameColChanged(int col);
   void                slotFilterEditingFinished();
 };
 

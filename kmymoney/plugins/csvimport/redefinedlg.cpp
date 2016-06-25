@@ -129,9 +129,9 @@ void RedefineDlg::displayLine(const QString& info)
       QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
       item->setText(i18n("Type"));
       m_widget->tableWidget->setItem(row, col, item);
-    } else if (col == m_detailColumn) {
+    } else if (col == m_nameColumn) {
       QTableWidgetItem *item = new QTableWidgetItem;//        add items to UI
-      item->setText(i18n("Detail"));
+      item->setText(i18n("Name"));
       m_widget->tableWidget->setItem(row, col, item);
     }
   }
@@ -338,9 +338,9 @@ void RedefineDlg::setSymbolColumn(int col)
   m_symbolColumn = col;
 }
 
-void RedefineDlg::setDetailColumn(int col)
+void RedefineDlg::setNameColumn(int col)
 {
-  m_detailColumn = col;
+  m_nameColumn = col;
 }
 
 QString RedefineDlg::accountName()

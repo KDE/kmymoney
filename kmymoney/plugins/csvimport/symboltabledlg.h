@@ -63,6 +63,9 @@ private:
   int              m_mainHeight;
   int              m_tableHeight;
   bool             m_firstPass;
+  int              m_validRowCount;
+  QPushButton*     m_buttonOK;
+  QPushButton*     m_buttonCancel;
 
   QList<QTableWidgetItem*>  m_selectedItems;
 

@@ -46,22 +46,24 @@ SymbolTableDlg::SymbolTableDlg()
   mainLayout->addWidget(m_widget);
   m_widget->tableWidget->setToolTip(i18n("Symbols and Security Names present"));
   m_firstPass = true;
+  m_validRowCount = 0;
 
   QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
   QWidget *mainWidget = new QWidget(this);
   mainLayout->addWidget(mainWidget);
-  QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-  okButton->setDefault(true);
-  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  m_buttonOK = buttonBox->button(QDialogButtonBox::Ok);
+  m_buttonCancel = buttonBox->button(QDialogButtonBox::Cancel);
+  m_buttonOK->setDefault(true);
+  m_buttonOK->setShortcut(Qt::CTRL | Qt::Key_Return);
   connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
   connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
   //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
   mainLayout->addWidget(buttonBox);
   setOrientation(Qt::Horizontal);
-  okButton->setEnabled(true);
+  m_buttonOK->setEnabled(false);
 
-  connect(buttonBox->button(QDialogButtonBox::Cancel), SIGNAL(clicked()), this, SLOT(slotRejected()));
-  connect(okButton, SIGNAL(clicked()), this, SLOT(slotEditSecurityCompleted()));
+  connect(m_buttonCancel, SIGNAL(clicked()), this, SLOT(slotRejected()));
+  connect(m_buttonOK, SIGNAL(clicked()), this, SLOT(slotEditSecurityCompleted()));
   connect(this->m_widget->tableWidget,  SIGNAL(itemChanged(QTableWidgetItem*)), this,  SLOT(slotItemChanged(QTableWidgetItem*)));
   connect(this->m_widget->tableWidget,  SIGNAL(itemClicked(QTableWidgetItem*)), this,  SLOT(slotItemClicked(QTableWidgetItem*)));
 }
@@ -89,11 +91,23 @@ void SymbolTableDlg::displayLine(int& row, QString& symbol, const QString& name,
   QTableWidgetItem* item2 = new QTableWidgetItem;  //   security name for UI
   item2->setText(name);
   if (exists) {  //                                     already exists in KMM
-    item1->setText(i18nc("Confirm", "Yes"));
-    item->setFlags(Qt::NoItemFlags);  //                ...so no editing allowed
-    item2->setFlags(Qt::NoItemFlags);
+    item1->setText(i18nc("Security exists", "Exists"));
+    item->setFlags(Qt::NoItemFlags); //                 \\ no editing of symbol allowed
+    item2->setFlags(Qt::NoItemFlags); //                 \\ no editing of name allowed
+  } else if (name.isEmpty()) {
+    item1->setText(i18nc("Security has no name", "No name"));
+    item->setFlags(Qt::NoItemFlags); //                 \\ no editing of symbol allowed
+    item2->setText(QString());
+    m_validRowCount += 1;
+  } else if (symbol.isEmpty()) {
+    item1->setText(i18nc("Security has no symbol", "No symbol"));
+    item->setText(QString());
+    item2->setFlags(Qt::NoItemFlags); //                 \\ no editing of name allowed
+    m_validRowCount += 1;
   } else {
-    item1->setText(QString());
+    item1->setText(i18n("OK"));
+    item->setFlags(Qt::NoItemFlags); //                 \\ no editing of symbol allowed
+    item2->setFlags(Qt::NoItemFlags); //                 \\ no editing of name allowed
   }
   item->setTextAlignment(Qt::AlignLeft);
   item1->setTextAlignment(Qt::AlignLeft);
@@ -120,36 +134,69 @@ void SymbolTableDlg::slotRejected()
 void SymbolTableDlg::slotItemChanged(QTableWidgetItem* item)
 {
   QString name;
+  QString text;
   QString symbol;
 
+  m_selectedItems = m_widget->tableWidget->selectedItems();
   switch (item->column()) {
     case 0:
       symbol = item->text();  //  Edit the ticker symbol
+      if (m_selectedItems.count() > 1) {
+        //  Allow multiple selections only in symbol column
+        foreach (QTableWidgetItem *  selectItem, m_selectedItems) {
+          //  Each item clicked causes a pass through here
+          selectItem->setText(symbol);
+        }
+      } else if (m_selectedItems.count() == 1) {
+        QString name = m_widget->tableWidget->item(item->row(), 2)->text();
+        for (int i = 0; i < m_widget->tableWidget->rowCount(); i ++) {
+          //    Look for entry with same name as selected item
+          if ((!name.isEmpty()) && (m_widget->tableWidget->item(i, 2)->text()) == name) {
+            //  and apply the same security name
+            m_widget->tableWidget->item(i, 0)->setText(symbol);
+            if (!symbol.isEmpty())
+              m_widget->tableWidget->item(i, 1)->setText(i18n("OK"));
+            else
+              m_widget->tableWidget->item(i, 1)->setText(i18nc("Security has no symbol", "No symbol"));
+          }
+       }
+      }
       break;
     case 1:
+      text = item->text();
+      if (text.compare(i18n("OK"),Qt::CaseInsensitive) == 0 ||
+          text.compare(i18nc("Security exists", "Exists"),Qt::CaseInsensitive) == 0)
+        m_validRowCount += 1;
+      else
+        m_validRowCount -= 1;
+      if (m_validRowCount == m_widget->tableWidget->rowCount())
+        m_buttonOK->setEnabled(true);
+      else
+        m_buttonOK->setEnabled(false);
       return;
     case 2:
       name = item->text();  //    Edit the security name
-      break;
-  }
-
-  m_selectedItems = m_widget->tableWidget->selectedItems();
-  if ((m_selectedItems.count() > 1) && (item->column() == 0)) {
-    //  Allow multiple selections only in symbol column
-    foreach (QTableWidgetItem *  selectItem, m_selectedItems) {
-      //  Each item clicked causes a pass through here
-      selectItem->setText(symbol);
-    }
-  }
-  if ((m_selectedItems.count() == 1)  && (!name.isEmpty())) {
-    QString symbol = m_widget->tableWidget->item(item->row(), 0)->text();
-    for (int i = 0; i < m_widget->tableWidget->rowCount(); i ++) {
-      //    Look for entry with same symbol as selected item
-      if ((!symbol.isEmpty()) && (m_widget->tableWidget->item(i, 0)->text()) == symbol) {
-        //  and apply the same security name
-        m_widget->tableWidget->item(i, 2)->setText(name);
+      if (m_selectedItems.count() > 1) {
+        //  Allow multiple selections only in name column
+        foreach (QTableWidgetItem *  selectItem, m_selectedItems) {
+          //  Each item clicked causes a pass through here
+          selectItem->setText(name);
+        }
+      } else if (m_selectedItems.count() == 1) {
+        QString symbol = m_widget->tableWidget->item(item->row(), 0)->text();
+        for (int i = 0; i < m_widget->tableWidget->rowCount(); i ++) {
+          //    Look for entry with same symbol as selected item
+          if ((!symbol.isEmpty()) && (m_widget->tableWidget->item(i, 0)->text()) == symbol) {
+            //  and apply the same security name
+            m_widget->tableWidget->item(i, 2)->setText(name);
+            if (!name.isEmpty())
+              m_widget->tableWidget->item(i, 1)->setText(i18n("OK"));
+            else
+              m_widget->tableWidget->item(i, 1)->setText(i18nc("Security has no name", "No name"));
+          }
+       }
       }
-    }
+      break;
   }
 }
 
@@ -192,8 +239,6 @@ void SymbolTableDlg::slotEditSecurityCompleted()
     QTableWidgetItem *item = new QTableWidgetItem;
     item->setText(symbol);
     item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    //  Apply any added symbols to main UI
-    m_csvDialog->ui->tableWidget->setItem(m_csvDialog->m_investProcessing->m_startLine + row - 1, m_csvDialog->m_investProcessing->symbolColumn(), item);
   }
   slotAccepted();
   return;

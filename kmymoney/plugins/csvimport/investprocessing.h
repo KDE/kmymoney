@@ -185,7 +185,7 @@ public:
   int            priceColumn();
   int            quantityColumn();
   int            dateColumn();
-  int            detailColumn();
+  int            nameColumn();
   int            feeColumn();
   int            symbolColumn();
   int            typeColumn();
@@ -284,10 +284,10 @@ public slots:
   void           symbolColumnSelected(int);
 
   /**
-  * This method is called when the Detail column is activated.
+  * This method is called when the Name column is activated.
   * It will validate the column selection.
   */
-  void           detailColumnSelected(int);
+  void           nameColumnSelected(int);
 
   /**
   * This method is called when the feeIsPercentageCheckBox checkbox is clicked.
@@ -454,9 +454,9 @@ private:
   bool           m_typeSelected;
   bool           m_memoColCopied;
   bool           m_typeColCopied;
-  bool           m_detailColCopied;
+  bool           m_nameColCopied;
   bool           m_symbolSelected;
-  bool           m_detailSelected;
+  bool           m_nameSelected;
   bool           m_needFieldDelimiter;
 
   int            m_dateFormatIndex;
@@ -471,7 +471,7 @@ private:
   int            m_previousColumn;
   int            m_quantityColumn;
   int            m_symbolColumn;
-  int            m_detailColumn;
+  int            m_nameColumn;
   int            m_feeIsPercentage;
   int            m_textDelimiterIndex;
   int            m_typeColumn;

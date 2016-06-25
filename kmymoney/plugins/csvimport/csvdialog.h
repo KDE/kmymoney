@@ -121,7 +121,7 @@ public:
   QString        m_fileType;
   QString        m_priorCsvProfile;
   QString        m_priorInvProfile;
-  QString        m_detailFilter;
+  QString        m_nameFilter;
 
   /**
    * a list of already used hashes in this file

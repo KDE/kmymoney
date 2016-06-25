@@ -50,7 +50,7 @@ public:
   void             setQuantityColumn(int col);
   void             setTypeColumn(int col);
   void             setSymbolColumn(int col);
-  void             setDetailColumn(int col);
+  void             setNameColumn(int col);
   void             setAccountName(const QString& val);
   void             clearAccountName();
   void             setInBuffer(const QString& val);
@@ -108,7 +108,7 @@ private:
   int              m_ret;
   int              m_typeColumn;
   int              m_symbolColumn;
-  int              m_detailColumn;
+  int              m_nameColumn;
 
   MyMoneyMoney     m_price;
   MyMoneyMoney     m_quantity;

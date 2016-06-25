@@ -70,7 +70,7 @@
        <property name="text">
         <string>Please select the appropriate columns to use, corresponding to your data.
 If there is just a single security in the file, enter its name below.
-Otherwise, select the column for the symbol, and for the description or detail.</string>
+Otherwise, select the column for the symbol, and for the description or name.</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -154,7 +154,7 @@ Otherwise, select the column for the symbol, and for the description or detail.<
          <property name="toolTip">
           <string>Select column containing memo field.
 More than one column may be entered successively.
-May also be selected to contain a copy of the type or detail column.</string>
+May also be selected to contain a copy of the type or name column.</string>
          </property>
          <property name="maxVisibleItems">
           <number>12</number>
@@ -162,7 +162,7 @@ May also be selected to contain a copy of the type or detail column.</string>
         </widget>
        </item>
        <item row="4" column="4">
-        <widget class="KComboBox" name="comboBoxInv_detailCol">
+        <widget class="KComboBox" name="comboBoxInv_nameCol">
          <property name="minimumSize">
           <size>
            <width>75</width>
@@ -170,7 +170,7 @@ May also be selected to contain a copy of the type or detail column.</string>
           </size>
          </property>
          <property name="toolTip">
-          <string>If a descriptive column contains an activity type, select it here.
+          <string>If a descriptive column also contains an activity type, select it here.
 See also Filter text field.</string>
          </property>
         </widget>
@@ -207,7 +207,7 @@ incorporated into the price.</string>
         </widget>
        </item>
        <item row="4" column="3">
-        <widget class="QLabel" name="labelInv_detailCol">
+        <widget class="QLabel" name="labelInv_nameCol">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -215,7 +215,7 @@ incorporated into the price.</string>
           </size>
          </property>
          <property name="text">
-          <string>Detail</string>
+          <string>Name</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -343,7 +343,7 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
           </size>
          </property>
          <property name="toolTip">
-          <string>If the Detail column has an activity type prefixed by a standard text,
+          <string>If the Name column has an activity type prefixed by a standard text,
 enter the text here. For instance, if a field contains, say, 'type: dividend',
 enter 'type: '.</string>
          </property>

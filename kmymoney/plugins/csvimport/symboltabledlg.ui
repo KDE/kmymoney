@@ -40,9 +40,8 @@
     <widget class="QLabel" name="label_info">
      <property name="text">
       <string>The following symbols and securities are present in the import file.
-Existing securities will be flagged in the 'Exists' column.
-If necessary, edit security names to match your existing File,
-and add missing symbols, which are necessary for import.
+Existing securities will be flagged in the 'Status' column.
+If necessary, add security names, and missing symbols, which are necessary for import.
 For new securities, edit the name in one of its rows, and that name will apply to its other rows, if any.</string>
      </property>
      <property name="alignment">
@@ -89,7 +88,7 @@ For new securities, edit the name in one of its rows, and that name will apply t
      </column>
      <column>
       <property name="text">
-       <string>Exists</string>
+       <string>Status</string>
       </property>
      </column>
      <column>

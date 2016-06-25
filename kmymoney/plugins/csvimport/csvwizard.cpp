@@ -1382,7 +1382,7 @@ InvestmentPage::InvestmentPage(QWidget *parent) : QWizardPage(parent), ui(new Ui
   registerField("amountCol", ui->comboBoxInv_amountCol, "currentIndex", SIGNAL(currentIndexChanged()));
 
   registerField("symbolCol", ui->comboBoxInv_symbolCol, "currentIndex", SIGNAL(currentIndexChanged()));
-  registerField("detailCol", ui->comboBoxInv_detailCol, "currentIndex", SIGNAL(currentIndexChanged()));
+  registerField("nameCol", ui->comboBoxInv_nameCol, "currentIndex", SIGNAL(currentIndexChanged()));
   registerField("securityNameIndex", ui->comboBoxInv_securityName, "currentIndex", SIGNAL(currentIndexChanged()));
 
   connect(ui->comboBoxInv_dateCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotDateColChanged(int)));
@@ -1391,7 +1391,7 @@ InvestmentPage::InvestmentPage(QWidget *parent) : QWizardPage(parent), ui(new Ui
   connect(ui->comboBoxInv_priceCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotPriceColChanged(int)));
   connect(ui->comboBoxInv_amountCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotAmountColChanged(int)));
   connect(ui->comboBoxInv_symbolCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSymbolColChanged(int)));
-  connect(ui->comboBoxInv_detailCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotDetailColChanged(int)));
+  connect(ui->comboBoxInv_nameCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotNameColChanged(int)));
 
   connect(ui->lineEdit_filter, SIGNAL(returnPressed()), this, SLOT(slotFilterEditingFinished()));
   connect(ui->lineEdit_filter, SIGNAL(editingFinished()), this, SLOT(slotFilterEditingFinished()));
@@ -1424,7 +1424,7 @@ void InvestmentPage::initializePage()
   connect(ui->comboBoxInv_securityName, SIGNAL(currentIndexChanged(int)), this, SLOT(slotsecurityNameChanged(int)));
   connect(ui->buttonInv_hideSecurity, SIGNAL(clicked()), m_wizDlg->m_investProcessing, SLOT(hideSecurity()));
   m_wizDlg->m_csvDialog->m_isTableTrimmed = false;
-  m_wizDlg->m_csvDialog->m_detailFilter = ui->lineEdit_filter->text();//    Load setting from config file.
+  m_wizDlg->m_csvDialog->m_nameFilter = ui->lineEdit_filter->text();//    Load setting from config file.
 }
 
 void InvestmentPage::cleanupPage()
@@ -1474,9 +1474,9 @@ void InvestmentPage::slotSymbolColChanged(int col)
   emit completeChanged();
 }
 
-void InvestmentPage::slotDetailColChanged(int col)
+void InvestmentPage::slotNameColChanged(int col)
 {
-  setField("detailCol", col);
+  setField("nameCol", col);
   if (col != -1) {
     setField("securityNameIndex", -1);
     ui->comboBoxInv_securityName->setCurrentIndex(-1);
@@ -1488,15 +1488,15 @@ void InvestmentPage::slotsecurityNameChanged(int index)
 {
   setField("securityNameIndex", index);
   int symbolCol = ui->comboBoxInv_symbolCol->currentIndex();
-  int detailCol = ui->comboBoxInv_detailCol->currentIndex();
+  int nameCol = ui->comboBoxInv_nameCol->currentIndex();
   if (index != -1) {  //  There is a security name
     setField("symbolCol", -1);
-    setField("detailCol", -1);
+    setField("nameCol", -1);
     ui->comboBoxInv_symbolCol->setCurrentIndex(-1);
-    ui->comboBoxInv_detailCol->setCurrentIndex(-1);
-    if ((symbolCol != -1) && (detailCol != -1)) {
+    ui->comboBoxInv_nameCol->setCurrentIndex(-1);
+    if ((symbolCol != -1) && (nameCol != -1)) {
       m_wizDlg->m_csvDialog->m_investProcessing->clearColumnType(symbolCol);
-      m_wizDlg->m_csvDialog->m_investProcessing->clearColumnType(detailCol);
+      m_wizDlg->m_csvDialog->m_investProcessing->clearColumnType(nameCol);
     }
   }
   emit completeChanged();
@@ -1504,7 +1504,7 @@ void InvestmentPage::slotsecurityNameChanged(int index)
 
 void InvestmentPage::slotFilterEditingFinished()
 {
-  m_wizDlg->m_csvDialog->m_detailFilter = ui->lineEdit_filter->text();
+  m_wizDlg->m_csvDialog->m_nameFilter = ui->lineEdit_filter->text();
 }
 
 void InvestmentPage::setParent(CSVWizard* dlg)
@@ -1513,8 +1513,8 @@ void InvestmentPage::setParent(CSVWizard* dlg)
 }
 
 bool InvestmentPage::isComplete() const
-{
-  bool ret = (((field("symbolCol").toInt() > -1) && (field("detailCol").toInt() > -1)) || ((field("securityNameIndex").toInt()) > -1)) &&
+{  
+  bool ret = ((field("symbolCol").toInt() > -1) || (field("nameCol").toInt() > -1) || (field("securityNameIndex").toInt() > -1)) &&
              (field("dateCol").toInt() > -1) && (field("typeCol").toInt() > -1) &&
              (field("quantityCol").toInt() > -1) && (field("priceCol").toInt() > -1) && (field("amountCol").toInt() > -1);
   return ret;
@@ -1652,7 +1652,7 @@ bool LinesDatePage::validatePage()
   }
 
   int symTableRow = -1;
-  if ((m_wizDlg->m_csvDialog->m_fileType == "Banking") || (field("symbolCol").toInt() == -1)) {  //  Only check symbols if that field is set, and not Banking.
+  if (m_wizDlg->m_csvDialog->m_fileType == "Banking") {  //  Only check symbols if it is not not Banking.
     if ((m_wizDlg->m_pageIntro->ui->checkBoxSkipSetup->isChecked())) {
       if (m_wizDlg->m_csvDialog->m_importError) {
         wizard()->next();
@@ -1681,46 +1681,70 @@ bool LinesDatePage::validatePage()
       if (row >= m_wizDlg->m_csvDialog->m_investProcessing->m_endLine) {  //  No need to scan further lines
         break;
       }
-      int col = m_wizDlg->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex();
-      if (m_wizDlg->m_csvDialog->ui->tableWidget->item(row, col) == 0) {  //  This cell does not exist
+      int symbolCol = m_wizDlg->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex();
+      int nameCol = m_wizDlg->m_pageInvestment->ui->comboBoxInv_nameCol->currentIndex();
+
+      if (m_wizDlg->m_csvDialog->ui->tableWidget->item(row, symbolCol) == 0 &&
+          m_wizDlg->m_csvDialog->ui->tableWidget->item(row, nameCol) == 0) {  //  This cell does not exist
         continue;
       }
-      symbl = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, col)->text().toUpper().trimmed();
-      int detail = m_wizDlg->m_pageInvestment->ui->comboBoxInv_detailCol->currentIndex();
-      securityName = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, detail)->text().trimmed();
-      // Check if we already have the security on file.
-      // Just use the symbol for matching, because the security name
-      // field is unstandardised and very variable.
+
       bool exists = false;
       QString name;
       QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
-      while (it != list.constEnd()) {
-        if (!symbl.isEmpty())  {     //  symbol already exists
-          sec = *it;
-          name.clear();
-          if (symbl.compare(sec.tradingSymbol(), Qt::CaseInsensitive) == 0) {
-            exists = true;
-            name = sec.name();
-            break;
+      if (symbolCol > -1) {
+        name.clear();
+        symbl = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, symbolCol)->text().toUpper().trimmed();
+        // Check if we already have the security on file.
+        if (!symbl.isEmpty())  {
+          while (it != list.constEnd()) {
+            sec = *it;
+            if (symbl.compare(sec.tradingSymbol(), Qt::CaseInsensitive) == 0) {  // symbol already exists
+              exists = true;
+              name = sec.name();
+              break;
+            }
+            ++it;
           }
         }
-        ++it;
-      }
-      if (!exists) {
-        name = securityName;
-      }
+        if (!exists && nameCol > -1) {
+          name = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, nameCol)->text().trimmed();
+        }
+      } else if (nameCol > -1) {
+        name = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, nameCol)->text().trimmed();
+        symbl.clear();
+        // Check if we already have the security on file.
+        if (!name.isEmpty())  {
+          while (it != list.constEnd()) {
+            sec = *it;
+            if (name.compare(sec.name(), Qt::CaseInsensitive) == 0) { //  name already exists
+              exists = true;
+              symbl = sec.tradingSymbol();
+              break;
+            }
+            ++it;
+          }
+        }
+      } else
+        continue;
+
       symTableRow ++;
       m_wizDlg->m_csvDialog->m_symbolTableDlg->displayLine(symTableRow, symbl, name, exists);
-      m_wizDlg->m_investProcessing->m_symbolsList << symbl;
-      m_wizDlg->m_investProcessing->m_map.insert(symbl, name);
+      if (!symbl.isEmpty()) {
+        m_wizDlg->m_investProcessing->m_symbolsList << symbl;
+        if (!name.isEmpty())
+          m_wizDlg->m_investProcessing->m_map.insert(symbl, name);
+      }
     }
+
     if (symTableRow > -1) {
-      m_wizDlg->m_investProcessing->m_symbolTableScanned = true;
       int ret = m_wizDlg->m_csvDialog->m_symbolTableDlg->exec();
       if (ret == QDialog::Rejected) {
         m_wizDlg->m_csvDialog->m_importIsValid = false;
         m_wizDlg->m_csvDialog->m_importError = true;
         return false;
+      } else {
+        m_wizDlg->m_investProcessing->m_symbolTableScanned = true;
       }
     }
   }
@@ -1792,7 +1816,7 @@ void CompletionPage::initializePage()
   }
   m_wizDlg->m_csvDialog->m_isTableTrimmed = true;
   if (m_wizDlg->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
-    m_wizDlg->m_csvDialog->m_detailFilter = m_wizDlg->m_pageInvestment->ui->lineEdit_filter->text();//  Load setting from config file.
+    m_wizDlg->m_csvDialog->m_nameFilter = m_wizDlg->m_pageInvestment->ui->lineEdit_filter->text();//  Load setting from config file.
     m_wizDlg->m_pageLinesDate->validatePage();  //  Need to validate amounts
 
     if (!m_wizDlg->m_investProcessing->m_importCompleted) {

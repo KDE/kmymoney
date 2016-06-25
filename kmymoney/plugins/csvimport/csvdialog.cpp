@@ -2245,10 +2245,12 @@ void CSVDialog::slotNamesEdited()
     }
     //  Replace detail with edited security name.
     QString securityName = m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 2)->text();
-    ui->tableWidget->item(row, m_investProcessing->detailColumn())->setText(securityName);
+    if (m_investProcessing->nameColumn() > -1)
+      ui->tableWidget->item(row, m_investProcessing->nameColumn())->setText(securityName);
     //  Replace symbol with edited symbol.
     QString securitySymbol = m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 0)->text();
-    ui->tableWidget->item(row, m_investProcessing->symbolColumn())->setText(securitySymbol);
+    if (m_investProcessing->symbolColumn() > -1)
+      ui->tableWidget->item(row, m_investProcessing->symbolColumn())->setText(securitySymbol);
     m_investProcessing->m_map.insert(securitySymbol, securityName);
   }
 
