@@ -639,7 +639,7 @@
          <item row="3" column="3" colspan="2">
           <widget class="QCheckBox" name="checkBoxBnk_oppositeSigns">
            <property name="toolTip">
-            <string>Select if you amount colum has signs improperly set.</string>
+            <string>Select if your amount column has signs improperly set.</string>
            </property>
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
