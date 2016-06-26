@@ -160,8 +160,8 @@ public:
 
   virtual int rowHeightHint() const;
 
-  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
-  virtual void paintRegisterCell(QPainter* painter, QStyleOptionViewItemV4& option, const QModelIndex& index);
+  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
+  virtual void paintRegisterCell(QPainter* painter, QStyleOptionViewItem& option, const QModelIndex& index);
 
   virtual void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index);
   virtual bool formCellText(QString& /* txt */, Qt::Alignment& /* align */, int /* row */, int /* col */, QPainter* /* painter */) {

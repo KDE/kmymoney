@@ -36,7 +36,7 @@ nationalAccountDelegate::nationalAccountDelegate(QObject* parent, const QVariant
 /** @todo elide texts */
 void nationalAccountDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-  QStyleOptionViewItemV4 opt = option;
+  QStyleOptionViewItem opt = option;
   initStyleOption(&opt, index);
 
   // Background
@@ -93,7 +93,7 @@ void nationalAccountDelegate::paint(QPainter* painter, const QStyleOptionViewIte
 
 QSize nationalAccountDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-  QStyleOptionViewItemV4 opt = option;
+  QStyleOptionViewItem opt = option;
   initStyleOption(&opt, index);
 
   // QStyle::State_Editing is never set (seems to be a bug in Qt)! This code is here only because it was written already

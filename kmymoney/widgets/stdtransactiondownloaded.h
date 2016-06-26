@@ -47,7 +47,7 @@ public:
     return "StdTransactionDownloaded";
   }
 
-  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
+  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
 };
 
 class InvestTransactionDownloaded : public InvestTransaction
@@ -60,7 +60,7 @@ public:
     return "InvestTransactionDownloaded";
   }
 
-  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
+  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
 };
 
 

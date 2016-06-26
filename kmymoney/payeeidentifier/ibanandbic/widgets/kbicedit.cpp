@@ -70,7 +70,7 @@ QFont bicItemDelegate::getSmallFont(const QStyleOptionViewItem& option) const
 
 QSize bicItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-  QStyleOptionViewItemV4 opt = option;
+  QStyleOptionViewItem opt = option;
   initStyleOption(&opt, index);
 
   QFontMetrics metrics(option.font);
@@ -87,7 +87,7 @@ QSize bicItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
  */
 void bicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-  QStyleOptionViewItemV4 opt = option;
+  QStyleOptionViewItem opt = option;
   initStyleOption(&opt, index);
 
   // Background

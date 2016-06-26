@@ -116,7 +116,7 @@ int SplitDelegate::editorRow() const
 
 void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-  QStyleOptionViewItemV4 opt = option;
+  QStyleOptionViewItem opt = option;
   initStyleOption(&opt, index);
 
   // never change the background of the cell the mouse is hovering over
@@ -313,7 +313,7 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
   }
 
   QSize size;
-  QStyleOptionViewItemV4 opt = option;
+  QStyleOptionViewItem opt = option;
   if(index.isValid()) {
     // check if we are showing the edit widget
     const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(opt.widget);
@@ -351,7 +351,7 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
 void SplitDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
   Q_UNUSED(index);
-  QStyleOptionViewItemV4 opt = option;
+  QStyleOptionViewItem opt = option;
   int ofs = 8;
   const LedgerView* view = qobject_cast<const LedgerView*>(opt.widget);
   if(view) {

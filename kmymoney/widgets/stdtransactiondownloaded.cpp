@@ -37,7 +37,7 @@ StdTransactionDownloaded::StdTransactionDownloaded(Register *parent, const MyMon
 {
 }
 
-bool StdTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
+bool StdTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
 
 {
   bool rc = Transaction::paintRegisterCellSetup(painter, option, index);
@@ -54,7 +54,7 @@ InvestTransactionDownloaded::InvestTransactionDownloaded(Register *parent, const
 {
 }
 
-bool InvestTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
+bool InvestTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
 
 {
   bool rc = Transaction::paintRegisterCellSetup(painter, option, index);

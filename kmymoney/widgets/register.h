@@ -144,7 +144,7 @@ public:
     return m_erroneous;
   }
 
-  void paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
+  void paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
   void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index);
 
   int rowHeightHint() const;
@@ -207,7 +207,7 @@ class SimpleDateGroupMarker : public FancyDateGroupMarker
 {
 public:
   SimpleDateGroupMarker(Register* parent, const QDate& date, const QString& txt);
-  void paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
+  void paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
   int rowHeightHint() const;
   virtual const char* className() {
     return "SimpleDateGroupMarker";

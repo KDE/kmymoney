@@ -45,7 +45,7 @@ StdTransactionMatched::StdTransactionMatched(Register *parent, const MyMoneyTran
   setNumRowsRegister(numRowsRegister(KMyMoneyGlobalSettings::showRegisterDetailed()));
 }
 
-bool StdTransactionMatched::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
+bool StdTransactionMatched::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
 {
   bool rc = Transaction::paintRegisterCellSetup(painter, option, index);
 

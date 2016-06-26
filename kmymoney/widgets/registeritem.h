@@ -207,7 +207,7 @@ public:
     m_alternate = alternate;
   }
 
-  virtual void paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index) = 0;
+  virtual void paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) = 0;
   virtual void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) = 0;
 
   virtual const QString& id() const {

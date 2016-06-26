@@ -39,7 +39,7 @@ StdTransactionScheduled::StdTransactionScheduled(Register *parent, const MyMoney
   setNumRowsRegister(numRowsRegister(KMyMoneyGlobalSettings::showRegisterDetailed()));
 }
 
-bool StdTransactionScheduled::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
+bool StdTransactionScheduled::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
 {
   bool rc = Transaction::paintRegisterCellSetup(painter, option, index);
   option.palette.setCurrentColorGroup(QPalette::Disabled);

@@ -50,7 +50,7 @@ public:
     return "StdTransactionMatched";
   }
 
-  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
+  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
 
   void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
 

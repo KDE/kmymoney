@@ -264,7 +264,7 @@ GroupMarker::~GroupMarker()
   }
 }
 
-void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
+void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
 {
   QRect r(option.rect);
   painter->save();
@@ -358,7 +358,7 @@ int SimpleDateGroupMarker::rowHeightHint() const
   return RegisterItem::rowHeightHint() / 2;
 }
 
-void SimpleDateGroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
+void SimpleDateGroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
 {
   QRect cellRect = option.rect;
   painter->save();
@@ -446,7 +446,7 @@ void RegisterItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
 {
   RegisterItem* const item = m_register->itemAtRow(index.row());
   if (item && m_register->updatesEnabled()) {
-    QStyleOptionViewItemV4 opt = option;
+    QStyleOptionViewItem opt = option;
     initStyleOption(&opt, index);
     item->paintRegisterCell(painter, opt, index);
   }

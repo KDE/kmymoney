@@ -37,7 +37,7 @@ ibanBicItemDelegate::ibanBicItemDelegate(QObject* parent)
 /** @todo elide texts */
 void ibanBicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-  QStyleOptionViewItemV4 opt = option;
+  QStyleOptionViewItem opt = option;
   initStyleOption(&opt, index);
 
   // Background
@@ -94,7 +94,7 @@ void ibanBicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 
 QSize ibanBicItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-  QStyleOptionViewItemV4 opt = option;
+  QStyleOptionViewItem opt = option;
   initStyleOption(&opt, index);
 
   // Test if current index is edited at the moment

@@ -216,7 +216,7 @@ void Transaction::setFocus(bool focus, bool updateLens)
   }
 }
 
-bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
+bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
 {
   Q_UNUSED(painter)
 
@@ -243,11 +243,11 @@ bool Transaction::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem
   }
 
   if (index.column() == 0) {
-    option.viewItemPosition = QStyleOptionViewItemV4::Beginning;
+    option.viewItemPosition = QStyleOptionViewItem::Beginning;
   } else if (index.column() == MaxColumns - 1) {
-    option.viewItemPosition = QStyleOptionViewItemV4::End;
+    option.viewItemPosition = QStyleOptionViewItem::End;
   } else {
-    option.viewItemPosition = QStyleOptionViewItemV4::Middle;
+    option.viewItemPosition = QStyleOptionViewItem::Middle;
   }
 
   // do we need to switch to the error color?
@@ -272,7 +272,7 @@ void Transaction::registerCellText(QString& txt, int row, int col)
   registerCellText(txt, align, row, col, 0);
 }
 
-void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index)
+void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
 {
   painter->save();
   if (paintRegisterCellSetup(painter, option, index)) {
@@ -286,7 +286,7 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItemV4 &o
       // if this is not the first row of the transaction paint the previous rows
       // since the selection background is painted from the first row of the transaction
       if (index.row() > startRow()) {
-        QStyleOptionViewItemV4 optionSibling = option;
+        QStyleOptionViewItem optionSibling = option;
         QModelIndex previousRowItem = index.sibling(index.row() - 1, index.column());
         optionSibling.rect = m_parent->visualRect(previousRowItem);
         paintRegisterCell(painter, optionSibling, previousRowItem);

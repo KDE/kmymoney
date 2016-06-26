@@ -49,10 +49,10 @@ public:
   }
 
   virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const {
-    QStyleOptionViewItemV4 optV4 = option;
+    QStyleOptionViewItem optV4 = option;
     initStyleOption(&optV4, index);
     // the fixed column's position has always this value
-    optV4.viewItemPosition = QStyleOptionViewItemV4::Beginning;
+    optV4.viewItemPosition = QStyleOptionViewItem::Beginning;
     if (m_sourceView->hasFocus()) {
       // draw the current row as active if the source list has focus
       QModelIndex currentIndex = m_sourceView->currentIndex();

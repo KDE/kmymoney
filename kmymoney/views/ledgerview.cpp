@@ -360,7 +360,7 @@ int LedgerView::sizeHintForRow(int row) const
   QModelIndex index = d->filterModel->index(row, 0);
   LedgerDelegate* delegate = qobject_cast<LedgerDelegate*>(itemDelegate(index));
   if(delegate && (delegate->editorRow() != row)) {
-    QStyleOptionViewItemV4 opt;
+    QStyleOptionViewItem opt;
     int hint = delegate->sizeHint(opt, index).height();
     if(showGrid())
       hint += 1;

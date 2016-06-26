@@ -47,7 +47,7 @@ public:
     return "StdTransactionScheduled";
   }
 
-  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItemV4 &option, const QModelIndex &index);
+  virtual bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index);
 
   bool isSelectable() const {
     return true;
