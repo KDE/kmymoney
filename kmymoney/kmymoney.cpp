@@ -2200,10 +2200,10 @@ void KMyMoneyApp::slotSaveAccountTemplates()
       newName.append(".kmt");
     }
 
-    if (okToWriteFile(newName)) {
+    if (okToWriteFile(QUrl::fromLocalFile(newName))) {
       MyMoneyTemplate templ;
       templ.exportTemplate(&progressCallback);
-      templ.saveTemplate(newName);
+      templ.saveTemplate(QUrl::fromLocalFile(newName));
     }
   }
 }
@@ -2461,7 +2461,7 @@ void KMyMoneyApp::slotQifExport()
   QPointer<KExportDlg> dlg = new KExportDlg(0);
 
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
-    if (okToWriteFile(dlg->filename())) {
+    if (okToWriteFile(QUrl::fromLocalFile(dlg->filename()))) {
       MyMoneyQifWriter writer;
       connect(&writer, SIGNAL(signalProgress(int,int)), this, SLOT(slotStatusProgressBar(int,int)));
 

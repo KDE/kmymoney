@@ -69,7 +69,7 @@ void CsvExporterPlugin::slotCsvExport()
 {
   m_dlg = new CsvExportDlg();
   if (m_dlg->exec()) {
-    if (okToWriteFile(m_dlg->filename())) {
+    if (okToWriteFile(QUrl::fromUserInput(m_dlg->filename()))) {
       m_dlg->setWindowTitle(i18nc("CSV Exporter dialog title", "CSV Exporter"));
       CsvWriter* writer = new CsvWriter;
       writer->m_plugin = this;

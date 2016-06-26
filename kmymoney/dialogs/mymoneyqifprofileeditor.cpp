@@ -279,8 +279,8 @@ void MyMoneyQifProfileEditor::showProfile()
   m_editOpeningBalance->setText(m_profile.openingBalanceText());
   m_editAccountDelimiter->setText(m_profile.accountDelimiter());
   m_editVoidMark->setText(m_profile.voidMark());
-  m_editInputFilterLocation->setUrl(m_profile.filterScriptImport());
-  m_editOutputFilterLocation->setUrl(m_profile.filterScriptExport());
+  m_editInputFilterLocation->setUrl(QUrl::fromLocalFile(m_profile.filterScriptImport()));
+  m_editOutputFilterLocation->setUrl(QUrl::fromLocalFile(m_profile.filterScriptExport()));
   m_editInputFilterFileType->setText(m_profile.filterFileType());
 
   // load combo boxes

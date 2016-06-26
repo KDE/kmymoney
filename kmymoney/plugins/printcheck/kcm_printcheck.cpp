@@ -58,7 +58,7 @@ void PluginSettingsWidget::urlSelected(const QUrl &url)
 void PluginSettingsWidget::returnPressed(const QString& url)
 {
   if (!url.isEmpty())
-    m_checkTemplatePreviewHTMLPart->openUrl(url);
+    m_checkTemplatePreviewHTMLPart->openUrl(QUrl::fromUserInput(url));
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(KCMPrintCheckFactory, "kcm_kmm_printcheck.json", registerPlugin<KCMPrintCheck>();)
@@ -72,7 +72,7 @@ KCMPrintCheck::KCMPrintCheck(QWidget *parent, const QVariantList& args) : KCModu
   setLayout(layout);
   layout->addWidget(w);
   load();
-  w->urlSelected(PluginSettings::checkTemplateFile());
+  w->urlSelected(QUrl::fromUserInput(PluginSettings::checkTemplateFile()));
 }
 
 KCMPrintCheck::~KCMPrintCheck()

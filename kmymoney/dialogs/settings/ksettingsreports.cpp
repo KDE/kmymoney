@@ -121,7 +121,7 @@ KSettingsReports::KSettingsReports(QWidget* parent) :
   d->m_cssFileOld = KMyMoneyGlobalSettings::cssFileDefault();
 
   // set default css file in ksettingsreports dialog
-  kcfg_CssFileDefault->setUrl(KMyMoneyGlobalSettings::cssFileDefault());
+  kcfg_CssFileDefault->setUrl(QUrl::fromLocalFile(KMyMoneyGlobalSettings::cssFileDefault()));
 
   d->m_fileKLineEdit = kcfg_CssFileDefault->lineEdit();
 
@@ -149,7 +149,7 @@ KSettingsReports::~KSettingsReports()
  */
 void KSettingsReports::slotCssUrlSelected(const QUrl &cssUrl)
 {
-  QString css = cssUrl.isLocalFile() ? cssUrl.toLocalFile() : cssUrl.url();
+  QString css = cssUrl.toLocalFile();
   d->checkCssFile(css);
 }
 

@@ -114,7 +114,7 @@ void MyMoneyDatabaseMgrTest::setupUrl(const QString& fname)
     //"QMYSQL&mode=single";
     "QSQLITE&mode=single";
 
-  m_url = QString("sql://%1@localhost/%2?driver=%3").arg(m_userName, fname, m_mode);
+  m_url = QUrl(QString("sql://%1@localhost/%2?driver=%3").arg(m_userName, fname, m_mode));
 }
 
 void MyMoneyDatabaseMgrTest::copyDatabaseFile(QFile& src, QFile& dest)

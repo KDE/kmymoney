@@ -243,13 +243,14 @@ int main(int argc, char *argv[])
 #endif
 
   const QStringList urls = parser.positionalArguments();
+  const QUrl url = urls.isEmpty() ? QUrl() : QUrl::fromUserInput(urls.front());
   int rc = 0;
   if (parser.isSet(noCatchOption)) {
     qDebug("Running w/o global try/catch block");
-    rc = runKMyMoney(&app, std::move(splash), urls.isEmpty() ? QUrl() : urls.front(), parser.isSet(noFileOption));
+    rc = runKMyMoney(&app, std::move(splash), url, parser.isSet(noFileOption));
   } else {
     try {
-      rc = runKMyMoney(&app, std::move(splash), urls.isEmpty() ? QUrl() : urls.front(), parser.isSet(noFileOption));
+      rc = runKMyMoney(&app, std::move(splash), url, parser.isSet(noFileOption));
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"),
                                  i18n("%1 in file %2 line %3", e.what(), e.file(), e.line()));
@@ -273,7 +274,7 @@ int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, const QUr
       // notify the primary instance of the file and kill ourselves.
 
       if (file.isValid()) {
-        if (kmymoney->isImportableFile(file.path())) {
+        if (kmymoney->isImportableFile(file)) {
           // if there are multiple instances, we'll send this to the first one
           QString primary = instances[0];
 
@@ -322,7 +323,7 @@ int runKMyMoney(QApplication *a, std::unique_ptr<KStartupLogo> splash, const QUr
     // implements a "web connect" session where there is not already an
     // instance of the program running.
 
-    if (kmymoney->isImportableFile(file.path())) {
+    if (kmymoney->isImportableFile(file)) {
       importfile = file.path();
       url = QUrl::fromUserInput(kmymoney->readLastUsedFile());
     }
