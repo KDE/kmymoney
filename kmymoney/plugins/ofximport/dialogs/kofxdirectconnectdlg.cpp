@@ -109,7 +109,7 @@ bool KOfxDirectConnectDlg::init()
   }
 
   qDebug("creating job");
-  m_job = KIO::http_post(m_connector.url(), request, KIO::HideProgressInfo);
+  m_job = KIO::http_post(QUrl(m_connector.url()), request, KIO::HideProgressInfo);
 
   // open the temp file. We come around here twice if init() is called twice
   if (m_tmpfile) {

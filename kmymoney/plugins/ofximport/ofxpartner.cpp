@@ -92,10 +92,10 @@ void ValidateIndexCache()
   QMap<QString, QString> attr;
 
 #if OFXHOME
-  fname = directory + kBankFilename;
+  fname = QUrl(directory + kBankFilename);
   QFileInfo i(fname.path());
   if (needReload(i))
-    get("", attr, QUrl("http://www.ofxhome.com/api.php?all=yes"), fname);
+    get("", attr, QUrl(QStringLiteral("http://www.ofxhome.com/api.php?all=yes")), fname);
 #endif
 
 #if MSN
