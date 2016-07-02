@@ -42,6 +42,8 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 #include <KLocalizedString>
+#include "kjobwidgets.h"
+#include "kio/job.h"
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -410,15 +412,27 @@ bool MyMoneyQifReader::startImport()
   m_filename.clear();
   m_data.clear();
 
-  // TODO: port to kf5
-#if 0
-  if (!KIO::NetAccess::download(m_url, m_filename, 0)) {
-    KMessageBox::detailedError(0,
-                               i18n("Error while loading file '%1'.", m_url.toDisplayString()),
-                               KIO::NetAccess::lastErrorString(),
-                               i18n("File access error"));
-    return false;
+  if (m_url.isEmpty()) {
+    return rc;
+  } else if (m_url.isLocalFile()) {
+    m_filename = m_url.toLocalFile();
+  } else {
+    m_filename = QDir::tempPath();
+    if(!m_filename.endsWith(QDir::separator()))
+      m_filename += QDir::separator();
+    m_filename += m_url.fileName();
+    qDebug() << "Source:" << m_url.toDisplayString() << "Destination:" << m_filename;
+    KIO::FileCopyJob *job = KIO::file_copy(m_url, QUrl::fromUserInput(m_filename), -1, KIO::Overwrite);
+    KJobWidgets::setWindow(job, kmymoney);
+    job->exec();
+    if (job->error()) {
+      KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.toDisplayString()),
+                                 job->errorString(),
+                                 i18n("File access error"));
+      return rc;
+    }
   }
+
   m_file = new QFile(m_filename);
   if (m_file->open(QIODevice::ReadOnly)) {
 
@@ -436,39 +450,41 @@ bool MyMoneyQifReader::startImport()
     slotImportFinished();
 
 #else
+    QString program;
+    QStringList arguments;
+    program.clear();
+    arguments.clear();
     // start filter process, use 'cat -' as the default filter
-    m_filter.clearProgram();
     if (m_qifProfile.filterScriptImport().isEmpty()) {
 #ifdef Q_OS_WIN32                   //krazy:exclude=cpp
-      // this is the Windows equivalent of 'cat -' but since 'type' does not work with stdin
-      // we pass the filename converted to native separators as a parameter
-      m_filter << "cmd.exe";
-      m_filter << "/c";
-      m_filter << "type";
-      m_filter << QDir::toNativeSeparators(m_filename);
+    // this is the Windows equivalent of 'cat -' but since 'type' does not work with stdin
+    // we pass the filename converted to native separators as a parameter
+    program = "cmd.exe";
+    arguments << "/c";
+    arguments << "type";
+    arguments << QDir::toNativeSeparators(m_filename);
 #else
-    m_filter << "cat";
-    m_filter << "-";
+    program = "cat";
+    arguments << "-";
 #endif
     } else {
-      m_filter << m_qifProfile.filterScriptImport().split(' ', QString::KeepEmptyParts);
+      arguments << m_qifProfile.filterScriptImport().split(' ', QString::KeepEmptyParts);
     }
     m_entryType = EntryUnknown;
 
-    m_filter.setOutputChannelMode(KProcess::MergedChannels);
-    m_filter.start();
+    m_filter.setProcessChannelMode(QProcess::MergedChannels);
+    m_filter.start(program, arguments);
     if (m_filter.waitForStarted()) {
       signalProgress(0, m_file->size(), i18n("Reading QIF..."));
       slotSendDataToFilter();
       rc = true;
     } else {
-      KMessageBox::detailedError(0, i18n("Error while running the filter '%1'.", m_filter.program().join(QLatin1String(" "))),
+      KMessageBox::detailedError(0, i18n("Error while running the filter '%1'.", m_filter.program()),
                                  m_filter.errorString(),
                                  i18n("Filter error"));
     }
 #endif
   }
-#endif
   return rc;
 }
 
@@ -513,8 +529,7 @@ bool MyMoneyQifReader::finishImport()
     m_accountTranslation.clear();
 
     signalProgress(-1, -1);
-    // TODO: port to kf5
-    //rc = !m_userAbort && KProcess::NormalExit == m_filter.exitStatus();
+    rc = !m_userAbort && QProcess::NormalExit == m_filter.exitStatus();
   } else {
     qWarning("MyMoneyQifReader::finishImport() must not be called while the filter\n\tprocess is still running.");
   }
@@ -523,8 +538,8 @@ bool MyMoneyQifReader::finishImport()
   // if a temporary file was constructed by NetAccess::download,
   // then it will be removed with the next call. Otherwise, it
   // stays untouched on the local filesystem
-  // TODO: port to kf5
-  //KIO::NetAccess::removeTempFile(m_filename);
+  if(!m_url.isLocalFile())
+    KIO::file_delete(QUrl::fromUserInput(m_filename));
 
   // Now to import the statements
   QList<MyMoneyStatement>::const_iterator it_st;
