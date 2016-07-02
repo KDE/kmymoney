@@ -133,10 +133,11 @@ void MyMoneyQifReader::Private::finishStatement()
     qDebug("Statement with %d transactions, %d prices and %d securities added to the statement list",
            st.m_listTransactions.count(), st.m_listPrices.count(), st.m_listSecurities.count());
   }
+  MyMoneyStatement::EType type = st.m_eType; //stash type and...
   // start with a fresh statement
   st = MyMoneyStatement();
   st.m_skipCategoryMatching = !mapCategories;
-  st.m_eType = (transactionType == MyMoneyQifReader::EntryTransaction) ? MyMoneyStatement::etCheckings : MyMoneyStatement::etInvestment;
+  st.m_eType = type;
 }
 
 const QString MyMoneyQifReader::Private::accountTypeToQif(MyMoneyAccount::accountTypeE type) const
@@ -593,6 +594,7 @@ void MyMoneyQifReader::processQifSpecial(const QString& _line)
       d->transactionType = m_entryType = EntryTransaction;
 
     } else if (line.toLower() == "invst" || line.toLower() == i18nc("QIF tag for investment account", "Invst").toLower()) {
+      d->accountType = MyMoneyAccount::Investment;
       d->transactionType = m_entryType = EntryInvestmentTransaction;
 
     } else if (line.toLower() == "invoice" || KMyMoneyGlobalSettings::qifInvoice().toLower().contains(line.toLower())) {
@@ -1067,8 +1069,24 @@ void MyMoneyQifReader::processTransactionEntry()
     d->st.m_accountId = m_account.id();
 
   s1.m_accountId = d->st.m_accountId;
+  switch (d->accountType) {
+  case MyMoneyAccount::Checkings:
+    d->st.m_eType=MyMoneyStatement::etCheckings;
+    break;
+  case MyMoneyAccount::Savings:
+    d->st.m_eType=MyMoneyStatement::etSavings;
+    break;
+  case MyMoneyAccount::Investment:
+    d->st.m_eType=MyMoneyStatement::etInvestment;
+    break;
+  case MyMoneyAccount::CreditCard:
+    d->st.m_eType=MyMoneyStatement::etCreditCard;
+    break;
+  default:
+    d->st.m_eType=MyMoneyStatement::etNone;
+    break;
+  }
 
-  d->st.m_eType = MyMoneyStatement::etCheckings;
   tr.m_datePosted = (m_qifProfile.date(extractLine('D')));
   if (!tr.m_datePosted.isValid()) {
     int rc = KMessageBox::warningContinueCancel(0,
