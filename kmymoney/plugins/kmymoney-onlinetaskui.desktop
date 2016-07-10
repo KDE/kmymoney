@@ -12,6 +12,7 @@ Name[nl]=Formulier om online orders/taken te bewerken
 Name[pl]=Formularz do edytowania w sieci zamówień/zadań
 Name[pt]=Formulário para editar as encomendas/tarefas 'online'
 Name[sv]=Formulär för att redigera nätbeställningar och uppgifter
+Name[uk]=Форма для редагування інтернет-векселів або завдань
 Name[x-test]=xxForm to edit online orders/tasksxx
 
 [PropertyDef::X-KMyMoney-onlineTaskIds]

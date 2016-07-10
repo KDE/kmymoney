@@ -11,6 +11,7 @@ Name[nl]=Tonen van identificatie van begunstigde
 Name[pl]=Malarz identyfikatora odbiorcy
 Name[pt]=Pintor do identificador do beneficiário
 Name[sv]=Uppritning av betalningsmottagarens identifierare
+Name[uk]=Засіб малювання для ідентифікатора отримувача
 Name[x-test]=xxPainter of payee identifierxx
 
 [PropertyDef::X-KMyMoney-payeeIdentifierIds]
