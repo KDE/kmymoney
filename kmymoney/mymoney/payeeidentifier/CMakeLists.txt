@@ -12,6 +12,8 @@ add_library( kmm_payeeidentifier SHARED
   ${PAYEEIDENTIFIER_SCRS}
 )
 
+set_target_properties(kmm_payeeidentifier PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
+
 generate_export_header( kmm_payeeidentifier )
 
 target_link_libraries( kmm_payeeidentifier
