@@ -26,6 +26,8 @@
 
 #include "mymoneybanking.h"
 
+#include <memory>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -100,7 +102,7 @@ public:
   Private() : passwordCacheTimer(0) {
     QString gwenProxy = QString::fromLocal8Bit(qgetenv("GWEN_PROXY"));
     if (gwenProxy.isEmpty()) {
-      KConfig *cfg = new KConfig("kioslaverc");
+      std::unique_ptr<KConfig> cfg = std::unique_ptr<KConfig>(new KConfig("kioslaverc"));
       QRegExp exp("(\\w+://)?([^/]{2}.+:\\d+)");
       QString proxy;
 
@@ -126,7 +128,6 @@ public:
           qDebug("KDE proxy setting of type %d not supported", type);
           break;
       }
-      delete cfg;
     }
   }
 
@@ -220,12 +221,13 @@ KBankingPlugin::~KBankingPlugin()
 void KBankingPlugin::loadProtocolConversion()
 {
   if (m_kbanking) {
-    m_protocolConversionMap.clear();
-    m_protocolConversionMap["aqhbci"] = "HBCI";
-    m_protocolConversionMap["aqofxconnect"] = "OFX";
-    m_protocolConversionMap["aqyellownet"] = "YellowNet";
-    m_protocolConversionMap["aqgeldkarte"] = "Geldkarte";
-    m_protocolConversionMap["aqdtaus"] = "DTAUS";
+    m_protocolConversionMap = {
+      {"aqhbci", "HBCI"},
+      {"aqofxconnect", "OFX"},
+      {"aqyellownet", "YellowNet"},
+      {"aqgeldkarte", "Geldkarte"},
+      {"aqdtaus", "DTAUS"}
+    };
   }
 }
 
