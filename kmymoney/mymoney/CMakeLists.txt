@@ -83,7 +83,7 @@ set_target_properties(kmm_mymoney PROPERTIES VERSION ${PROJECT_VERSION} SOVERSIO
 ########### install files ###############
 
 install(TARGETS kmm_mymoney
-  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES ${mymoney_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)

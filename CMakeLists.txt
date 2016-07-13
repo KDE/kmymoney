@@ -4,10 +4,6 @@ cmake_minimum_required(VERSION 3.1)
 # Setting the name of the main project
 project(KMyMoney VERSION "4.100.0")
 
-# The current version of KMyMoney (used for backwards compitibility, depricated since 5.0)
-set(VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
-set(VERSION_MINOR ${PROJECT_VERSION_MINOR})
-set(VERSION_PATCH ${PROJECT_VERSION_PATCH})
 
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")

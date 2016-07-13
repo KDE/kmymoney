@@ -27,7 +27,7 @@ target_include_directories( kmm_payeeidentifier PUBLIC
 )
 
 install( TARGETS kmm_payeeidentifier
-  ${INSTALL_TARGETS_DEFAULT_ARGS})
+  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ## Plugin loader
 

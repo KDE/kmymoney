@@ -2,7 +2,6 @@ include(ECMAddAppIcon)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
-                    ${KDEPIMLIBS_INCLUDE_DIRS}
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs/
                     ${CMAKE_CURRENT_SOURCE_DIR}/widgets/
                     ${CMAKE_CURRENT_BINARY_DIR}/widgets/
