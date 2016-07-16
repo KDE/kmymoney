@@ -223,6 +223,7 @@ signals:
 private:
   CSVWizard*       m_wizDlg;
   bool             validatePage();
+  int              nextId() const;
   bool             m_messageBoxJustCancelled;
   bool             m_firstEdit;
   bool             m_editAccepted;

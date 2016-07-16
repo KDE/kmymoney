@@ -340,16 +340,10 @@ void InvestProcessing::slotFileDialogClicked()
 
   enableInputs();
   calculateFee();
-
-  if (m_csvDialog->m_wiz->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
-    m_csvDialog->m_wiz->m_pageCompletion->initializePage();//  Using a profile so skip setup and go to Completion.
-    m_csvDialog->m_wiz->m_pageSeparator->initializePage();
-  } else {
-    m_csvDialog->m_wiz->m_wizard->next();
-    if (m_csvDialog->m_possibleDelimiter == -1) {
-      m_csvDialog->m_delimiterError = true;
-      m_csvDialog->m_possibleDelimiter = m_fieldDelimiterIndex;
-    }
+  m_csvDialog->m_wiz->m_wizard->next();  //go to separator or completion page
+  if (m_csvDialog->m_possibleDelimiter == -1) {
+    m_csvDialog->m_delimiterError = true;
+    m_csvDialog->m_possibleDelimiter = m_fieldDelimiterIndex;
   }
 }
 

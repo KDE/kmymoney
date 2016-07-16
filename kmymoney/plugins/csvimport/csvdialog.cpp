@@ -647,19 +647,10 @@ void CSVDialog::slotFileDialogClicked()
   }
   enableInputs();
 
-  int index = m_wiz->m_pageCompletion->ui->comboBox_decimalSymbol->currentIndex();
-  decimalSymbolSelected(index);
-
   //The following two items do not *Require* an entry so old values must be cleared.
   m_trData.number.clear();  //                 this needs to be cleared or gets added to next transaction
   m_trData.memo.clear();  //                   this too, as neither might be overwritten by new data.
-
-  if (m_wiz->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
-    m_wiz->m_pageCompletion->initializePage();//      Skip setup and go to Completion.
-    m_wiz->m_pageIntro->initializePage();
-  } else {
-    m_wiz->m_wizard->next();
-  }
+  m_wiz->m_wizard->next();  //go to separator or completion page
 }
 
 void CSVDialog::readFile(const QString& fname)
@@ -2050,9 +2041,8 @@ void CSVDialog::decimalSymbolSelected(int index)
       ui->tableWidget->horizontalScrollBar()->setValue(m_errorColumn);  //                     ensure col visible
     }
   }
-  if (!m_wiz->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
+  if (!m_importError)
     emit isImportable();
-  }
 }
 
 void CSVDialog::decimalSymbolSelected()

@@ -74,7 +74,7 @@ CSVWizard::CSVWizard() : ui(new Ui::CSVWizard)
 
   m_wizard->setDefaultProperty("QComboBox", "source", SIGNAL(currentIndexChanged(int)));
   m_wizard->setDefaultProperty("QComboBox", "symbolCol", SIGNAL(currentIndexChanged(int)));
-  m_wizard->setDefaultProperty("KComboBox", "dateCol", SIGNAL(currentIndexChanged(int)));
+  m_wizard->setDefaultProperty("QComboBox", "dateCol", SIGNAL(currentIndexChanged(int)));
   m_wizard->setDefaultProperty("QComboBox", "dateCol", SIGNAL(currentIndexChanged(int)));
 }
 
@@ -1034,6 +1034,17 @@ bool IntroPage::validatePage()
   return true;
 }
 
+int IntroPage::nextId() const
+{
+  int ret;
+  if (m_wizDlg->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
+    ret = CSVWizard::Page_Completion;
+  } else {
+    ret = CSVWizard::Page_Separator;
+  }
+  return ret;
+}
+
 void IntroPage::slotLineEditingFinished()
 {
   if ((ui->combobox_source->currentIndex() == -1) && (m_firstEdit == true)) {
@@ -1608,12 +1619,14 @@ bool LinesDatePage::validatePage()
                 continue;
 
               case KMessageBox::Cancel:
+                m_wizDlg->m_csvDialog->m_importIsValid = false;
                 return false;
             }
           }
         }
       }
     }
+    m_wizDlg->m_csvDialog->m_importIsValid = true;
   } else {  //  "Invest"
     for (int row = m_wizDlg->m_investProcessing->m_startLine - 1; row < m_wizDlg->m_csvDialog->m_investProcessing->m_endLine; row++) {
       for (int col = 0; col < m_wizDlg->m_csvDialog->ui->tableWidget->columnCount(); col++) {
@@ -1646,112 +1659,103 @@ bool LinesDatePage::validatePage()
                 continue;
 
               case KMessageBox::Cancel:
+                m_wizDlg->m_csvDialog->m_importIsValid = false;
                 return false;
             }
           }
         }
       }
     }
-  }
-
-  int symTableRow = -1;
-  if (m_wizDlg->m_csvDialog->m_fileType == "Banking") {  //  Only check symbols if it is not not Banking.
-    if ((m_wizDlg->m_pageIntro->ui->checkBoxSkipSetup->isChecked())) {
-      if (m_wizDlg->m_csvDialog->m_importError) {
-        wizard()->next();
-      } else {
-        m_wizDlg->m_pageCompletion->slotImportClicked();
-      }
+    m_wizDlg->m_csvDialog->m_importIsValid = true;
+    int symTableRow = -1;
+    if (m_wizDlg->m_csvDialog->m_investProcessing->m_symbolTableScanned) {
+      return true;
     }
-    return true;
-  }
-  if (m_wizDlg->m_csvDialog->m_investProcessing->m_symbolTableScanned) {
-    return true;
-  }
-  disconnect(m_wizDlg->m_csvDialog->m_symbolTableDlg->m_widget->tableWidget, SIGNAL(cellChanged(int,int)), 0, 0);
+    disconnect(m_wizDlg->m_csvDialog->m_symbolTableDlg->m_widget->tableWidget, SIGNAL(cellChanged(int,int)), 0, 0);
 
-  MyMoneyStatement::Security security;
-  MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneySecurity sec;
-  QList<MyMoneySecurity> list = file->securityList();
+    MyMoneyStatement::Security security;
+    MyMoneyFile* file = MyMoneyFile::instance();
+    MyMoneySecurity sec;
+    QList<MyMoneySecurity> list = file->securityList();
 
-  //  No security name chosen so scan entries...if not already checked,
-  //  to save user having to re-edit security names if having to re-import.
-  if ((field("securityNameIndex").toInt() == -1)  && (!m_wizDlg->m_csvDialog->m_investProcessing->m_symbolTableScanned)) {
-    QString symbl;
-    QString securityName;
-    for (int row = m_wizDlg->m_csvDialog->m_investProcessing->m_startLine - 1; row < m_wizDlg->m_csvDialog->ui->tableWidget->rowCount(); row++) {
-      if (row >= m_wizDlg->m_csvDialog->m_investProcessing->m_endLine) {  //  No need to scan further lines
-        break;
-      }
-      int symbolCol = m_wizDlg->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex();
-      int nameCol = m_wizDlg->m_pageInvestment->ui->comboBoxInv_nameCol->currentIndex();
-
-      if (m_wizDlg->m_csvDialog->ui->tableWidget->item(row, symbolCol) == 0 &&
-          m_wizDlg->m_csvDialog->ui->tableWidget->item(row, nameCol) == 0) {  //  This cell does not exist
-        continue;
-      }
-
-      bool exists = false;
-      QString name;
-      QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
-      if (symbolCol > -1) {
-        name.clear();
-        symbl = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, symbolCol)->text().toUpper().trimmed();
-        // Check if we already have the security on file.
-        if (!symbl.isEmpty())  {
-          while (it != list.constEnd()) {
-            sec = *it;
-            if (symbl.compare(sec.tradingSymbol(), Qt::CaseInsensitive) == 0) {  // symbol already exists
-              exists = true;
-              name = sec.name();
-              break;
-            }
-            ++it;
-          }
+    //  No security name chosen so scan entries...if not already checked,
+    //  to save user having to re-edit security names if having to re-import.
+    if ((field("securityNameIndex").toInt() == -1)  && (!m_wizDlg->m_csvDialog->m_investProcessing->m_symbolTableScanned)) {
+      QString symbl;
+      QString securityName;
+      for (int row = m_wizDlg->m_csvDialog->m_investProcessing->m_startLine - 1; row < m_wizDlg->m_csvDialog->ui->tableWidget->rowCount(); row++) {
+        if (row >= m_wizDlg->m_csvDialog->m_investProcessing->m_endLine) {  //  No need to scan further lines
+          break;
         }
-        if (!exists && nameCol > -1) {
+        int symbolCol = m_wizDlg->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex();
+        int nameCol = m_wizDlg->m_pageInvestment->ui->comboBoxInv_nameCol->currentIndex();
+
+        if (m_wizDlg->m_csvDialog->ui->tableWidget->item(row, symbolCol) == 0 &&
+            m_wizDlg->m_csvDialog->ui->tableWidget->item(row, nameCol) == 0) {  //  This cell does not exist
+          continue;
+        }
+
+        bool exists = false;
+        QString name;
+        QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
+        if (symbolCol > -1) {
+          name.clear();
+          symbl = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, symbolCol)->text().toUpper().trimmed();
+          // Check if we already have the security on file.
+          if (!symbl.isEmpty())  {
+            while (it != list.constEnd()) {
+              sec = *it;
+              if (symbl.compare(sec.tradingSymbol(), Qt::CaseInsensitive) == 0) {  // symbol already exists
+                exists = true;
+                name = sec.name();
+                break;
+              }
+              ++it;
+            }
+          }
+          if (!exists && nameCol > -1) {
+            name = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, nameCol)->text().trimmed();
+          }
+        } else if (nameCol > -1) {
           name = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, nameCol)->text().trimmed();
-        }
-      } else if (nameCol > -1) {
-        name = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, nameCol)->text().trimmed();
-        symbl.clear();
-        // Check if we already have the security on file.
-        if (!name.isEmpty())  {
-          while (it != list.constEnd()) {
-            sec = *it;
-            if (name.compare(sec.name(), Qt::CaseInsensitive) == 0) { //  name already exists
-              exists = true;
-              symbl = sec.tradingSymbol();
-              break;
+          symbl.clear();
+          // Check if we already have the security on file.
+          if (!name.isEmpty())  {
+            while (it != list.constEnd()) {
+              sec = *it;
+              if (name.compare(sec.name(), Qt::CaseInsensitive) == 0) { //  name already exists
+                exists = true;
+                symbl = sec.tradingSymbol();
+                break;
+              }
+              ++it;
             }
-            ++it;
           }
+        } else
+          continue;
+
+        symTableRow ++;
+        m_wizDlg->m_csvDialog->m_symbolTableDlg->displayLine(symTableRow, symbl, name, exists);
+        if (!symbl.isEmpty()) {
+          m_wizDlg->m_investProcessing->m_symbolsList << symbl;
+          if (!name.isEmpty())
+            m_wizDlg->m_investProcessing->m_map.insert(symbl, name);
         }
-      } else
-        continue;
+      }
 
-      symTableRow ++;
-      m_wizDlg->m_csvDialog->m_symbolTableDlg->displayLine(symTableRow, symbl, name, exists);
-      if (!symbl.isEmpty()) {
-        m_wizDlg->m_investProcessing->m_symbolsList << symbl;
-        if (!name.isEmpty())
-          m_wizDlg->m_investProcessing->m_map.insert(symbl, name);
+      if (symTableRow > -1) {
+        int ret = m_wizDlg->m_csvDialog->m_symbolTableDlg->exec();
+        if (ret == QDialog::Rejected) {
+          m_wizDlg->m_csvDialog->m_importIsValid = false;
+          m_wizDlg->m_csvDialog->m_importError = true;
+          return false;
+        } else {
+          m_wizDlg->m_investProcessing->m_symbolTableScanned = true;
+        }
       }
     }
-
-    if (symTableRow > -1) {
-      int ret = m_wizDlg->m_csvDialog->m_symbolTableDlg->exec();
-      if (ret == QDialog::Rejected) {
-        m_wizDlg->m_csvDialog->m_importIsValid = false;
-        m_wizDlg->m_csvDialog->m_importError = true;
-        return false;
-      } else {
-        m_wizDlg->m_investProcessing->m_symbolTableScanned = true;
-      }
-    }
+    connect(m_wizDlg->m_csvDialog->m_symbolTableDlg->m_widget->tableWidget,  SIGNAL(itemChanged(QTableWidgetItem*)), m_wizDlg->m_csvDialog->m_symbolTableDlg,  SLOT(slotItemChanged(QTableWidgetItem*)));
   }
-  connect(m_wizDlg->m_csvDialog->m_symbolTableDlg->m_widget->tableWidget,  SIGNAL(itemChanged(QTableWidgetItem*)), m_wizDlg->m_csvDialog->m_symbolTableDlg,  SLOT(slotItemChanged(QTableWidgetItem*)));
 
   return true;
 }
@@ -1801,78 +1805,50 @@ void CompletionPage::initializePage()
   }
   m_wizDlg->m_csvDialog->m_firstPass = false;  //  Needs to be here when skipping setup.
   QList<QWizard::WizardButton> layout;
-  if (m_wizDlg->m_csvDialog->m_importError) {
-    layout << QWizard::Stretch << QWizard::BackButton << QWizard::CancelButton;
-    wizard()->setButtonLayout(layout);
-    return;
-  }
-  if (!m_wizDlg->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
-    layout.clear();
-    layout << QWizard::Stretch << QWizard::CustomButton3 << QWizard::CustomButton2 << QWizard::BackButton
-    <<  QWizard::FinishButton <<  QWizard::CancelButton;
-    wizard()->setOption(QWizard::HaveCustomButton2, true);
-    wizard()->setButtonText(QWizard::CustomButton2, i18n("Import CSV"));
-    wizard()->setOption(QWizard::HaveCustomButton3, false);
-    wizard()->setButtonText(QWizard::CustomButton3, i18n("Make QIF File"));
-    wizard()->button(QWizard::CustomButton3)->setEnabled(false);
-    wizard()->setButtonLayout(layout);
-  }
-  m_wizDlg->m_csvDialog->m_isTableTrimmed = true;
+  layout << QWizard::Stretch
+         << QWizard::CustomButton3
+         << QWizard::CustomButton2
+         << QWizard::BackButton
+         << QWizard::FinishButton
+         << QWizard::CancelButton;
+  wizard()->setOption(QWizard::HaveCustomButton2, true);
+  wizard()->setButtonText(QWizard::CustomButton2, i18n("Import CSV"));
+  wizard()->setOption(QWizard::HaveCustomButton3, true);
+  wizard()->setButtonText(QWizard::CustomButton3, i18n("Make QIF File"));
+  wizard()->setButtonLayout(layout);
+  wizard()->button(QWizard::CustomButton2)->setVisible(false);
+  wizard()->button(QWizard::CustomButton3)->setVisible(false);
+  wizard()->button(QWizard::FinishButton)->setVisible(false);
+  m_wizDlg->m_csvDialog->decimalSymbolSelected();
   if (m_wizDlg->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
     m_wizDlg->m_csvDialog->m_nameFilter = m_wizDlg->m_pageInvestment->ui->lineEdit_filter->text();//  Load setting from config file.
-    m_wizDlg->m_pageLinesDate->validatePage();  //  Need to validate amounts
-
-    if (!m_wizDlg->m_investProcessing->m_importCompleted) {
-      if (m_wizDlg->m_csvDialog->m_importIsValid) {
+    if (m_wizDlg->m_pageLinesDate->validatePage()) //  Need to validate amounts
+    {
+      if (!m_wizDlg->m_investProcessing->m_importCompleted && !m_wizDlg->m_csvDialog->m_importError)
         slotImportClicked();
-      }
     }
   }
-  //  use saved value of index to trigger validity test
-  QTimer::singleShot(200, m_wizDlg->m_csvDialog, SLOT(decimalSymbolSelected()));
 }
 
 void CompletionPage::slotImportValid()
 {
   m_wizDlg->m_csvDialog->m_importIsValid = true;
-  QList<QWizard::WizardButton> layout;
-  if (!m_wizDlg->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
-    layout << QWizard::Stretch << QWizard:: CustomButton2 << QWizard::BackButton << QWizard::FinishButton << QWizard::CancelButton;
-    wizard()->setOption(QWizard::HaveCustomButton2, true);
-    wizard()->setButtonText(QWizard::CustomButton2, i18n("Import  CSV"));
-    wizard()->setButtonText(QWizard::FinishButton, i18n("Exit"));
-    wizard()->setButtonLayout(layout);
-  }  else {
-    initializePage();
-  }
+  wizard()->button(QWizard::CustomButton2)->setVisible(true);
+  wizard()->button(QWizard::CustomButton3)->setVisible(true);
+  wizard()->button(QWizard::FinishButton)->setVisible(true);
 }
 
 void CompletionPage::slotImportClicked()
 {
-  QList<QWizard::WizardButton> layout;
-  if (!m_wizDlg->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
-    layout << QWizard::Stretch << QWizard::CustomButton3 << QWizard::CustomButton2 << QWizard::BackButton
-    <<  QWizard::FinishButton <<  QWizard::CancelButton;
-    wizard()->setOption(QWizard::HaveCustomButton2, true);
-    wizard()->setButtonText(QWizard::CustomButton2, i18n("Import CSV"));
-    wizard()->setOption(QWizard::HaveCustomButton3, true);
-    wizard()->setButtonText(QWizard::CustomButton3, i18n("Make QIF File"));
-    wizard()->button(QWizard::CustomButton3)->setEnabled(true);
-  } else {
-    wizard()->next();
-    layout.clear();
-    layout << QWizard::Stretch << QWizard::BackButton << QWizard::NextButton <<  QWizard::CancelButton;
-  }
-  wizard()->setButtonLayout(layout);
-
   m_wizDlg->m_csvDialog->m_isTableTrimmed = true;
-  if (m_wizDlg->m_csvDialog->m_fileType == "Banking") {
+  m_wizDlg->hide(); //hide wizard so it will not cover accountselector
+  m_wizDlg->m_csvDialog->hide();
+  if (m_wizDlg->m_csvDialog->m_fileType == "Banking")
     emit importBanking();
-    setFinalPage(true);
-  }  else {
+  else
     emit importInvestment();
-    setFinalPage(true);
-  }
+  setFinalPage(true);
+  m_wizDlg->slotClose(); //close hidden window as it isn't needed anymore
 }
 
 void CompletionPage::cleanupPage()
