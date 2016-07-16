@@ -479,7 +479,6 @@ private:
   int              m_round;
   int              m_minimumHeight;
   int              m_windowWidth;
-  int              m_initialHeight;
   int              m_rectWidth;
 
   QBrush           m_clearBrush;

@@ -205,12 +205,6 @@ void InvestProcessing::slotFileDialogClicked()
     return;
   }
   m_columnTypeList.clear();//  Needs to be here in case user selects new profile after cancelling prior one.clearColumnTypes()
-  //  remove all column widths left-over from previous file
-  //  which can screw up row width calculation.
-  for (int i = 0; i < m_csvDialog->ui->tableWidget->columnCount(); i++) {
-    m_csvDialog->ui->tableWidget->setColumnWidth(i, 0);
-  }
-
   m_inFileName.clear();
   m_url.clear();
   m_csvDialog->m_wiz->m_pageLinesDate->m_isColumnSelectionComplete = false;
@@ -305,6 +299,17 @@ void InvestProcessing::slotFileDialogClicked()
 
   if (m_csvDialog->m_inFileName.isEmpty())
     return;
+
+  //resize wizard to its initial size and center it
+  m_csvDialog->m_wiz->setGeometry(
+        QStyle::alignedRect(
+          Qt::LeftToRight,
+          Qt::AlignCenter,
+          QSize(m_csvDialog->m_wiz->m_initialWidth, m_csvDialog->m_wiz->m_initialHeight),
+          QApplication::desktop()->availableGeometry()
+          )
+        );
+
   clearComboBoxText();//                        To clear any '*' in memo combo text
   m_importNow = false;//                        Avoid attempting date formatting on headers
   m_csvDialog->m_acceptAllInvalid = false;  //  Don't accept further invalid values.
@@ -1238,7 +1243,6 @@ void InvestProcessing::displayLine(const QString& data)
     item->setText(txt);
     m_csvDialog->ui->tableWidget->setRowCount(m_row + 1);
     m_csvDialog->ui->tableWidget->setItem(m_row, col, item);  //   add items to UI here
-    m_csvDialog->ui->tableWidget->setRowHeight(m_row, 30);
     m_csvDialog->ui->tableWidget->resizeColumnToContents(col);
     col ++;
   }

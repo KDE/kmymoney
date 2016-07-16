@@ -79,6 +79,9 @@ public:
 
   QList<QLabel*>   m_stageLabels;
 
+  int              m_initialHeight;
+  int              m_initialWidth;
+
   /**
   * This method is called after startup, to initialise some parameters.
   */

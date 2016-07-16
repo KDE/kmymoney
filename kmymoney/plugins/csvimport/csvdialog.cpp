@@ -488,15 +488,6 @@ void CSVDialog::slotFileDialogClicked()
     }
     return;
   }
-  //  remove all column widths left-over from previous file
-  //  which can screw up row width calculation.
-  for (int i = 0; i < ui->tableWidget->columnCount(); i++) {
-    ui->tableWidget->setColumnWidth(i, 0);
-    //  Needs to be here in case user selects new profile after cancelling prior one,
-    //  or after selecting a file, reverses and does another select,
-    //  but keep m_columnTypeList structure.
-    m_columnTypeList << QString();
-  }
   m_columnTypeList.clear();//  Needs to be here in case user selects new profile after cancelling prior one.
 
   m_inFileName.clear();
@@ -621,6 +612,17 @@ void CSVDialog::slotFileDialogClicked()
   if (m_inFileName.isEmpty()) {
     return;
   }
+
+  //resize wizard to its initial size and center it
+  m_wiz->setGeometry(
+        QStyle::alignedRect(
+          Qt::LeftToRight,
+          Qt::AlignCenter,
+          QSize(m_wiz->m_initialWidth, m_wiz->m_initialHeight),
+          QApplication::desktop()->availableGeometry()
+          )
+        );
+
   m_importNow = false;//                       Avoid attempting date formatting on headers
   m_acceptAllInvalid = false;  //              Don't accept further invalid values.
   clearComboBoxText();//                       to clear any '*' in memo combo text
@@ -1050,6 +1052,7 @@ void CSVDialog::displayLine(const QString& data)
     }
     ui->tableWidget->setRowCount(m_row + 1);
     ui->tableWidget->setItem(m_row, col, item);  //        add items to UI here
+    ui->tableWidget->resizeColumnToContents(col);
     m_inBuffer += txt + m_fieldDelimiterCharacter;
 
     col ++;

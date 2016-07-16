@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>SymbolTableDlgDecl</class>
  <widget class="QWidget" name="SymbolTableDlgDecl">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>798</width>
-    <height>464</height>
-   </rect>
-  </property>
   <property name="minimumSize">
    <size>
     <width>0</width>
@@ -47,22 +39,13 @@ For new securities, edit the name in one of its rows, and that name will apply t
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item>
     <widget class="QTableWidget" name="tableWidget">
-     <property name="minimumSize">
-      <size>
-       <width>720</width>
-       <height>120</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>16777215</height>
-      </size>
-     </property>
      <property name="font">
       <font/>
      </property>

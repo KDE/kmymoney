@@ -52,10 +52,12 @@ CSVWizard::CSVWizard() : ui(new Ui::CSVWizard)
 
   m_curId = -1;
   m_lastId = -1;
+  m_initialHeight = -1;
+  m_initialWidth = -1;
 
   m_wizard = new QWizard;
   m_wizard->setWizardStyle(QWizard::ClassicStyle);
-  ui->horizontalLayout->addWidget(m_wizard, 100);
+  ui->horizontalLayout->addWidget(m_wizard);
 
   m_iconBack = QPixmap(KIconLoader::global()->loadIcon("go-previous", KIconLoader::Small, KIconLoader::DefaultState));
   m_iconFinish = QPixmap(KIconLoader::global()->loadIcon("dialog-ok-apply", KIconLoader::Small, KIconLoader::DefaultState));
@@ -611,10 +613,6 @@ void IntroPage::setParent(CSVWizard* dlg)
 {
   m_wizDlg = dlg;
   m_set = true;
-
-  if (QApplication::desktop()->fontInfo().pixelSize() < 20) {
-    m_wizDlg->resize(m_wizDlg->width() - 100, m_wizDlg->height() - 80);
-  }
   registerField("csvdialog", m_wizDlg, "m_set", SIGNAL(isSet()));
   m_wizDlg->showStage();
 
@@ -667,7 +665,9 @@ void IntroPage::slotComboEditTextChanged(QString txt)
       //
       //  Keep
       //
-      ui->combobox_source->setCurrentItem(m_priorName);
+      int indx = ui->combobox_source->findText(m_priorName);
+      if (indx != -1)
+        ui->combobox_source->setCurrentIndex(indx);
       connect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
       connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
       return;
@@ -869,7 +869,9 @@ int  IntroPage::editProfileName(QString& fromName, QString& toName)
         m_wizDlg->m_csvDialog->m_priorInvProfile = from;
       }
       m_wizDlg->m_csvDialog->m_profileName = from;
-      ui->combobox_source->setCurrentItem(from);
+      indx = ui->combobox_source->findText(from);
+      if (indx != -1)
+        ui->combobox_source->setCurrentIndex(indx);
       m_editAccepted = false;
       connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
       connect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
@@ -967,8 +969,9 @@ int IntroPage::addItem(QString txt)
       }
     }
     m_addRequested = false;
-    ui->combobox_source->setCurrentItem(txt, true);
+    ui->combobox_source->addItem(txt);
     indx = ui->combobox_source->findText(txt);
+    ui->combobox_source->setCurrentIndex(indx);
     m_index = indx;
     ret = 0;
   }  else {  //  Already exists.
@@ -996,14 +999,6 @@ void IntroPage::initializePage()
 {
   m_wizDlg->m_pageInvestment->m_investPageInitialized = false;
   m_wizDlg->m_pageBanking->m_bankingPageInitialized = false;
-  //  ensure starting size is correct
-  if (QApplication::desktop()->fontInfo().pixelSize() < 20) {
-    QSize sizeLow(840, 320);
-    m_wizDlg->resize(sizeLow);
-  } else {
-    QSize sizeHigh(900, 390);
-    m_wizDlg->resize(sizeHigh);
-  }
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton1
   <<  QWizard::CancelButton;
@@ -1011,6 +1006,7 @@ void IntroPage::initializePage()
   wizard()->setOption(QWizard::HaveCustomButton1, false);
   wizard()->setButtonLayout(layout);
   wizard()->button(QWizard::CustomButton1)->setToolTip(i18n("A profile must be selected before selecting a file."));
+
   m_firstEdit = false;
   m_editAccepted = false;
   m_newProfileCreated  = QString();
@@ -1023,6 +1019,12 @@ void IntroPage::initializePage()
   }
   connect(ui->combobox_source, SIGNAL(activated(int)), this, SLOT(slotComboSourceClicked(int)));
   connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
+  if (m_wizDlg->m_initialHeight == -1 || m_wizDlg->m_initialWidth == -1)
+  {
+    m_wizDlg->m_initialHeight = m_wizDlg->geometry().height();
+    m_wizDlg->m_initialWidth = m_wizDlg->geometry().width();
+  }
+
 }
 
 bool IntroPage::validatePage()
@@ -1074,7 +1076,8 @@ void IntroPage::slotLineEditingFinished()
       ui->combobox_source->setCurrentIndex(m_priorIndex);
       return;
     } else {
-      ui->combobox_source->setCurrentItem(newName);
+      int indx = ui->combobox_source->findText(newName);
+      ui->combobox_source->setCurrentIndex(indx);
     }
   }
   m_index = ui->combobox_source->currentIndex();
@@ -1116,7 +1119,8 @@ void IntroPage::slotLineEditingFinished()
     ui->combobox_source->addItem(m_wizDlg->m_csvDialog->m_profileName);
   }
   m_priorIndex = ui->combobox_source->findText(m_wizDlg->m_csvDialog->m_profileName);
-  ui->combobox_source->setCurrentItem(m_wizDlg->m_csvDialog->m_profileName, false);
+  if (m_priorIndex != -1)
+    ui->combobox_source->setCurrentIndex(m_priorIndex);
   m_action.clear();
 }
 
@@ -1140,54 +1144,6 @@ void SeparatorPage::setParent(CSVWizard* dlg)
 
 void SeparatorPage::initializePage()
 {
-  ui->horizontalLayout->setStretch(1, 2);
-  ui->horizontalLayout->setStretch(2, 50);
-  QSize sizeLow(m_wizDlg->width() - 100, m_wizDlg->height());
-  QSize sizeHigh(m_wizDlg->width(), m_wizDlg->height() - 30);
-  //  resize the wizard,
-  //  depending on DPI setting
-  if (QApplication::desktop()->fontInfo().pixelSize() < 20) {
-    ui->comboBox_fieldDelimiter->setMaximumWidth(120);
-    ui->horizontalLayout->setStretch(0, 2);
-    if (m_wizDlg->m_pageInvestment->m_investPageInitialized) {
-      sizeLow.setWidth(sizeLow.width() - 200);
-      sizeLow.setHeight(sizeLow.height() - 150);
-    }
-    m_wizDlg->resize(sizeLow);
-  } else {
-    ui->horizontalLayout->setStretch(0, 20);
-    if (m_wizDlg->m_pageInvestment->m_investPageInitialized  || m_wizDlg->m_pageBanking->m_bankingPageInitialized) {
-      sizeHigh.setWidth(sizeHigh.width() - 50);
-      sizeHigh.setHeight(sizeHigh.height() - 100);
-    }
-    ui->comboBox_fieldDelimiter->setMaximumWidth(200);
-    m_wizDlg->resize(sizeHigh);
-  }
-  //  ...and need to adjust preview table for the file now loaded
-  int x, y;
-  if (m_wizDlg->m_csvDialog->m_fileType == "Banking") {
-    y = (QApplication::desktop()->height() - m_wizDlg->m_csvDialog->height()) / 2;
-    x = (QApplication::desktop()->width() - m_wizDlg->m_csvDialog->width()) / 2;
-    if (x < 0) {
-      x = 0;
-    }
-  } else {  // Investment
-    y = (QApplication::desktop()->height() - m_wizDlg->m_csvDialog->height()) / 2;
-    x = (QApplication::desktop()->width() - m_wizDlg->m_csvDialog->width()) / 2;
-    if (x < 0) {
-      x = 0;
-    }
-  }
-  m_wizDlg->m_csvDialog->resize(m_wizDlg->m_csvDialog->width(), m_wizDlg->m_csvDialog->height() + 2);
-  m_wizDlg->m_csvDialog->move(x, y);
-
-  //  above move() leaves 'shadow' so
-  m_wizDlg->m_csvDialog->hide();
-  m_wizDlg->m_csvDialog->show();
-  //  and ensure wizard is visible
-  m_wizDlg->hide();
-  m_wizDlg->show();
-
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch << QWizard::BackButton << QWizard::NextButton << QWizard::CancelButton;
   wizard()->setButtonLayout(layout);
@@ -1305,16 +1261,6 @@ void BankingPage::setParent(CSVWizard* dlg)
 
 void BankingPage::initializePage()
 {
-  QSize sizeLow(m_wizDlg->width() - 100, m_wizDlg->height() - 80);
-  QSize sizeHigh(m_wizDlg->width() + 100, m_wizDlg->height() + 30);
-  //  resize the wizard,
-  //  depending on DPI setting
-  if (QApplication::desktop()->fontInfo().pixelSize() < 20) {
-    m_wizDlg->resize(sizeLow);
-  } else {
-    m_wizDlg->resize(sizeHigh);
-  }
-
   connect(m_wizDlg->m_pageLinesDate->ui->spinBox_skip, SIGNAL(valueChanged(int)), m_wizDlg->m_csvDialog, SLOT(startLineChanged(int)));
   int index = m_wizDlg->m_pageIntro->ui->combobox_source->currentIndex();
   setField("source", index);
@@ -1330,10 +1276,6 @@ int BankingPage::nextId() const
 
 void BankingPage::cleanupPage()
 {
-  //  Need to keep this or lose settings on backing out
-  if (QApplication::desktop()->fontInfo().pixelSize() < 20) {
-    m_wizDlg->resize(m_wizDlg->width() - 70, m_wizDlg->height() - 100);
-  }
   m_wizDlg->m_pageSeparator->initializePage();
 }
 
@@ -1416,16 +1358,6 @@ InvestmentPage::~InvestmentPage()
 
 void InvestmentPage::initializePage()
 {
-  QSize sizeLow(m_wizDlg->width() + 200, m_wizDlg->height() + 50);
-  QSize sizeHigh(m_wizDlg->width() + 255, m_wizDlg->height() + 60);
-  //  resize the wizard,
-  //  depending on DPI setting
-  if (QApplication::desktop()->fontInfo().pixelSize() < 20) {
-    m_wizDlg->resize(sizeLow);
-  } else {
-    m_wizDlg->resize(sizeHigh);
-  }
-
   int index = m_wizDlg->m_pageIntro->ui->combobox_source->currentIndex();
   setField("source", index);
   m_wizDlg->m_csvDialog->m_fileType = "Invest";
@@ -1443,8 +1375,6 @@ void InvestmentPage::initializePage()
 
 void InvestmentPage::cleanupPage()
 {
-  //  Need to keep this or lose settings on backing out
-  m_wizDlg->resize(m_wizDlg->width() - 140, m_wizDlg->height());
   m_wizDlg->m_pageSeparator->initializePage();
 }
 
@@ -1550,12 +1480,6 @@ LinesDatePage::~LinesDatePage()
 
 void LinesDatePage::initializePage()
 {
-  if (QApplication::desktop()->fontInfo().pixelSize() < 20) {
-    m_wizDlg->resize(m_wizDlg->width() - 180, m_wizDlg->height() - 100);
-  } else {
-    m_wizDlg->resize(m_wizDlg->width() - 240, m_wizDlg->height() - 50);
-  }
-
   m_wizDlg->m_csvDialog->markUnwantedRows();
   m_wizDlg->m_csvDialog->m_goBack = false;
   QList<QWizard::WizardButton> layout;
@@ -1763,10 +1687,8 @@ bool LinesDatePage::validatePage()
 void LinesDatePage::cleanupPage()
 {
   if (m_wizDlg->m_csvDialog->m_fileType == "Banking") {
-    m_wizDlg->resize(m_wizDlg->width() + 50, m_wizDlg->height() + 20);
     m_wizDlg->m_pageBanking->initializePage();
   } else {
-    m_wizDlg->resize(m_wizDlg->width() + 50, m_wizDlg->height() + 20);
     m_wizDlg->m_pageInvestment->initializePage();
   }
 }
@@ -1798,11 +1720,6 @@ void CompletionPage::setParent(CSVWizard* dlg)
 
 void CompletionPage::initializePage()
 {
-  if (QApplication::desktop()->fontInfo().pixelSize() < 20) {
-    m_wizDlg->resize(m_wizDlg->width() - 180, m_wizDlg->height() - 100);
-  } else {
-    m_wizDlg->resize(m_wizDlg->width() + 90, m_wizDlg->height());
-  }
   m_wizDlg->m_csvDialog->m_firstPass = false;  //  Needs to be here when skipping setup.
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch
@@ -1856,11 +1773,6 @@ void CompletionPage::cleanupPage()
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch << QWizard::BackButton << QWizard::NextButton <<  QWizard::CancelButton;
   wizard()->setButtonLayout(layout);
-  if (QApplication::desktop()->fontInfo().pixelSize() < 20) {
-    //
-  } else {
-    m_wizDlg->resize(m_wizDlg->width() + 150, m_wizDlg->height());
-  }
   m_wizDlg->m_pageLinesDate->initializePage();
 }
 

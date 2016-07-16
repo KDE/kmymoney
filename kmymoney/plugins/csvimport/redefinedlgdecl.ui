@@ -6,15 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>828</width>
-    <height>299</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>0</width>
-    <height>0</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>Redefine Transaction Type</string>
@@ -45,13 +39,13 @@ Please select an appropriate entry.</string>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="label_actionCol">
-     <property name="accessibleName">
-      <string notr="true"/>
-     </property>
      <property name="text">
       <string comment="the number of the column containing error">Type/action column</string>
      </property>
@@ -62,18 +56,6 @@ Please select an appropriate entry.</string>
    </item>
    <item>
     <widget class="QTableWidget" name="tableWidget">
-     <property name="minimumSize">
-      <size>
-       <width>640</width>
-       <height>67</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>67</height>
-      </size>
-     </property>
      <property name="rowCount">
       <number>2</number>
      </property>
@@ -104,15 +86,15 @@ Please select an appropriate entry.</string>
       </widget>
      </item>
      <item>
-      <widget class="KComboBox" name="kcombobox_Actions">
+      <widget class="QComboBox" name="kcombobox_Actions">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="toolTip">
         <string>Select new investment type</string>
-       </property>
-       <property name="accessibleName">
-        <string comment="description of investment activity" extracomment="don't translate part after '-'"/>
-       </property>
-       <property name="accessibleDescription">
-        <string comment="shares bought" extracomment="don't translate part after '-'"/>
        </property>
        <item>
         <property name="text">
@@ -175,6 +157,12 @@ Please select an appropriate entry.</string>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
@@ -183,13 +171,6 @@ Please select an appropriate entry.</string>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
  <designerdata>

@@ -6,28 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>660</width>
-    <height>230</height>
+    <width>477</width>
+    <height>239</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>640</width>
-    <height>230</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>700</width>
-    <height>16777215</height>
-   </size>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Separator Wizard Page</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="5,400,5">
+  <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,10,1">
    <item>
-    <spacer name="horizontalSpacer_3">
+    <spacer name="leftSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -40,15 +34,9 @@
     </spacer>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="15,1,1,1,15,2">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="30,1,1,1,1,2">
      <item>
       <widget class="QLabel" name="label">
-       <property name="font">
-        <font>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
        <property name="text">
         <string>The field delimiter should be detected automatically.
 Attempting to change it will reset any field choices.
@@ -57,6 +45,9 @@ changed, except possibly when within a field.</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -94,7 +85,7 @@ changed, except possibly when within a field.</string>
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout" stretch="20,50,25">
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="20,50,35">
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -112,18 +103,6 @@ changed, except possibly when within a field.</string>
         <layout class="QGridLayout" name="gridLayout" columnstretch="10,10">
          <item row="0" column="0">
           <widget class="QLabel" name="labelSet_fieldDelim">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
            <property name="text">
             <string>Field Delimiter</string>
            </property>
@@ -133,18 +112,12 @@ changed, except possibly when within a field.</string>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="KComboBox" name="comboBox_fieldDelimiter">
-           <property name="minimumSize">
-            <size>
-             <width>160</width>
-             <height>33</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>175</width>
-             <height>16777215</height>
-            </size>
+          <widget class="QComboBox" name="comboBox_fieldDelimiter">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
            <item>
             <property name="text">
@@ -170,21 +143,6 @@ changed, except possibly when within a field.</string>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="labelSet_textDelim">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
            <property name="accessibleName">
             <string comment="punctuation mark used as field delimiter" extracomment="punctuation mark used as field delimiter"/>
            </property>
@@ -197,18 +155,12 @@ changed, except possibly when within a field.</string>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="KComboBox" name="comboBox_textDelimiter">
-           <property name="minimumSize">
-            <size>
-             <width>154</width>
-             <height>33</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
+          <widget class="QComboBox" name="comboBox_textDelimiter">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
            <property name="toolTip">
             <string>Select field delimiter/separator character.
@@ -259,7 +211,7 @@ This will reset any existing field choices.</string>
     </layout>
    </item>
    <item>
-    <spacer name="horizontalSpacer_4">
+    <spacer name="rightSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -273,13 +225,6 @@ This will reset any existing field choices.</string>
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

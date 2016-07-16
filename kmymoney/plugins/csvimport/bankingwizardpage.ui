@@ -2,32 +2,18 @@
 <ui version="4.0">
  <class>BankingPage</class>
  <widget class="QWidget" name="BankingPage">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>740</width>
-    <height>270</height>
-   </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>640</width>
-    <height>190</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>16777215</width>
-    <height>16777215</height>
-   </size>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Banking Wizard Page</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,500,1">
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,10,1">
    <item>
-    <spacer name="horizontalSpacer_2">
+    <spacer name="leftSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -40,33 +26,14 @@
     </spacer>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="1,10,1,1,1,200,1">
-     <item>
-      <spacer name="verticalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
+    <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QLabel" name="label">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="font">
-        <font>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
        </property>
        <property name="text">
         <string>Please select the appropriate columns to use,
@@ -75,595 +42,207 @@
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="Line" name="line_4">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout" stretch="80,12">
-       <item>
-        <layout class="QGridLayout" name="gridLayout" rowstretch="10,0,0,0,0" columnstretch="40,0,0,0,0,0">
-         <item row="0" column="3">
-          <widget class="QRadioButton" name="radioBnk_amount">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="toolTip">
-            <string>Select 'Amount' if only one value column, otherwise select 'Debit/credit'.</string>
-           </property>
-           <property name="whatsThis">
-            <string extracomment="Select 'Amount' if only one value column, otherwise select "/>
-           </property>
-           <property name="accessibleName">
-            <string comment="presence of amount column"/>
-           </property>
-           <property name="text">
-            <string comment="presence of amount column">Amount</string>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="5">
-          <widget class="KComboBox" name="comboBoxBnk_amountCol">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing amount field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="KComboBox" name="comboBoxBnk_dateCol">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing date field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="4">
-          <widget class="QLabel" name="labelBnk_debits">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing debits field"/>
-           </property>
-           <property name="text">
-            <string comment="location of debit column">Debit</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="KComboBox" name="comboBoxBnk_payeeCol">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing payee or description field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="3" rowspan="2">
-          <widget class="QRadioButton" name="radioBnk_debCred">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="toolTip">
-            <string>Select 'Debit/credit' if both columns exist, otherwise select 'Amount'.</string>
-           </property>
-           <property name="accessibleName">
-            <string comment="presence of debit and credit column"/>
-           </property>
-           <property name="text">
-            <string comment="presence of debit/credit columns">Debit/credit</string>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="labelBnk_number">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing number field"/>
-           </property>
-           <property name="text">
-            <string comment="column containing number field">Number</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="KComboBox" name="comboBoxBnk_numberCol">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing number field.</string>
-           </property>
-           <property name="editable">
-            <bool>false</bool>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="5">
-          <widget class="KComboBox" name="comboBoxBnk_creditCol">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing credit field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="labelBnk_date">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing date field"/>
-           </property>
-           <property name="text">
-            <string>Date</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="4">
-          <widget class="QLabel" name="labelBnk_amount">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="accessibleName">
-            <string comment="presence of amount column"/>
-           </property>
-           <property name="text">
-            <string comment="location of amount column">Amount</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="labelBnk_payee">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing payee or description field"/>
-           </property>
-           <property name="text">
-            <string comment="column containing payee or description field">Payee/Description</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="5">
-          <widget class="KComboBox" name="comboBoxBnk_debitCol">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing debit field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="4">
-          <widget class="QLabel" name="labelBnk_credits">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing credits field"/>
-           </property>
-           <property name="text">
-            <string comment="location of credit column">Credit</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="KComboBox" name="comboBoxBnk_categoryCol">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing category field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="labelBnk_category">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing number field"/>
-           </property>
-           <property name="text">
-            <string comment="column containing number field">Category</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="KComboBox" name="comboBoxBnk_memoCol">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Select column containing memo field.</string>
-           </property>
-           <property name="maxVisibleItems">
-            <number>12</number>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="labelBnk_memo">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="accessibleName">
-            <string comment="column containing date field"/>
-           </property>
-           <property name="text">
-            <string>Memo</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="3" colspan="2">
-          <widget class="QCheckBox" name="checkBoxBnk_oppositeSigns">
-           <property name="toolTip">
-            <string>Select if your amount column has signs improperly set.</string>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="text">
-            <string>Opposite signs</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QPushButton" name="button_clear">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
+      <layout class="QGridLayout" name="gridLayout" columnstretch="0,5,0,0,0,5,5">
+       <item row="3" column="4">
+        <widget class="QLabel" name="labelBnk_debits">
+         <property name="enabled">
+          <bool>false</bool>
          </property>
+         <property name="accessibleName">
+          <string comment="column containing debits field"/>
+         </property>
+         <property name="text">
+          <string comment="location of debit column">Debit</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="labelBnk_category">
          <property name="maximumSize">
           <size>
            <width>16777215</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="accessibleName">
+          <string comment="column containing number field"/>
+         </property>
+         <property name="text">
+          <string comment="column containing number field">Category</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="comboBoxBnk_dateCol">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing date field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QComboBox" name="comboBoxBnk_categoryCol">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing category field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="4">
+        <widget class="QLabel" name="labelBnk_credits">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="accessibleName">
+          <string comment="column containing credits field"/>
+         </property>
+         <property name="text">
+          <string comment="location of credit column">Credit</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="5">
+        <widget class="QComboBox" name="comboBoxBnk_creditCol">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing credit field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Minimum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>6</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="3">
+        <widget class="QRadioButton" name="radioBnk_debCred">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <underline>false</underline>
+          </font>
+         </property>
+         <property name="toolTip">
+          <string>Select 'Debit/credit' if both columns exist, otherwise select 'Amount'.</string>
+         </property>
+         <property name="accessibleName">
+          <string comment="presence of debit and credit column"/>
+         </property>
+         <property name="text">
+          <string comment="presence of debit/credit columns">De&amp;bit/credit</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="labelBnk_date">
+         <property name="accessibleName">
+          <string comment="column containing date field"/>
+         </property>
+         <property name="text">
+          <string>Date</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="5">
+        <widget class="QComboBox" name="comboBoxBnk_amountCol">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing amount field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="5">
+        <widget class="QComboBox" name="comboBoxBnk_debitCol">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing debit field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="6">
+        <widget class="QPushButton" name="button_clear">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
          <property name="toolTip">
           <string>Clear selected column entries</string>
@@ -673,25 +252,172 @@
          </property>
         </widget>
        </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="labelBnk_payee">
+         <property name="accessibleName">
+          <string comment="column containing payee or description field"/>
+         </property>
+         <property name="text">
+          <string comment="column containing payee or description field">Payee/Description</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QComboBox" name="comboBoxBnk_memoCol">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing memo field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QComboBox" name="comboBoxBnk_payeeCol">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing payee or description field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="labelBnk_memo">
+         <property name="accessibleName">
+          <string comment="column containing date field"/>
+         </property>
+         <property name="text">
+          <string>Memo</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="3">
+        <widget class="QCheckBox" name="checkBoxBnk_oppositeSigns">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Select if your amount column has signs improperly set.</string>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>Opposite signs</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="comboBoxBnk_numberCol">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing number field.</string>
+         </property>
+         <property name="editable">
+          <bool>false</bool>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="labelBnk_number">
+         <property name="accessibleName">
+          <string comment="column containing number field"/>
+         </property>
+         <property name="text">
+          <string comment="column containing number field">Number</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QLabel" name="labelBnk_amount">
+         <property name="accessibleName">
+          <string comment="presence of amount column"/>
+         </property>
+         <property name="text">
+          <string comment="location of amount column">Amount</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QRadioButton" name="radioBnk_amount">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Select 'Amount' if only one value column, otherwise select 'Debit/credit'.</string>
+         </property>
+         <property name="whatsThis">
+          <string extracomment="Select 'Amount' if only one value column, otherwise select "/>
+         </property>
+         <property name="accessibleName">
+          <string comment="presence of amount column"/>
+         </property>
+         <property name="text">
+          <string comment="presence of amount column">A&amp;mount</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="7">
+        <widget class="Line" name="line_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
       </layout>
-     </item>
-     <item>
-      <spacer name="verticalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
    <item>
-    <spacer name="horizontalSpacer_3">
+    <spacer name="rightSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -705,13 +431,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
