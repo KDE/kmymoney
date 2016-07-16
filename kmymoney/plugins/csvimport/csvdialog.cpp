@@ -22,7 +22,6 @@
 
 #include <QWizard>
 #include <QWizardPage>
-#include <QCloseEvent>
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QVBoxLayout>
@@ -64,7 +63,6 @@
 #include "symboltabledlg.h"
 #include "csvwizard.h"
 
-#include "ui_csvdialog.h"
 #include "ui_introwizardpage.h"
 #include "ui_separatorwizardpage.h"
 #include "ui_bankingwizardpage.h"
@@ -76,11 +74,8 @@
 #include "mymoneyfile.h"
 
 // ----------------------------------------------------------------------------
-
-CSVDialog::CSVDialog() : ui(new Ui::CSVDialog)
+CSVDialog::CSVDialog()
 {
-  ui->setupUi(this);
-
   m_amountSelected = false;
   m_creditSelected = false;
   m_debitSelected = false;
@@ -141,7 +136,7 @@ CSVDialog::CSVDialog() : ui(new Ui::CSVDialog)
   m_wiz->init();
   m_wiz->m_investProcessing = m_investProcessing;
 
-  ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
+  m_wiz->ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
 
   QFont font(QApplication::font());
   QFontMetrics cellFontMetrics(font);
@@ -155,13 +150,10 @@ CSVDialog::CSVDialog() : ui(new Ui::CSVDialog)
 void CSVDialog::init()
 {
   readSettingsProfiles();
-
-  m_hScrollBarHeight = ui->tableWidget->horizontalScrollBar()->height();
+  m_hScrollBarHeight = m_wiz->ui->tableWidget->horizontalScrollBar()->height();
   if (m_hScrollBarHeight < 17) {
     m_hScrollBarHeight = 17;  // for compatibility
   }
-
-  installEventFilter(this);
 
   m_parse = new Parse;
   m_parse->m_csvDialog = this;
@@ -177,9 +169,7 @@ void CSVDialog::init()
 
   m_investProcessing->m_parse = m_parse;
 
-  this->setAttribute(Qt::WA_DeleteOnClose, true);
-
-  ui->tableWidget->setWordWrap(false);
+  m_wiz->ui->tableWidget->setWordWrap(false);
   m_wiz->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
   m_wiz->m_pageCompletion->ui->comboBox_thousandsDelimiter->setEnabled(false);
 
@@ -202,11 +192,10 @@ void CSVDialog::init()
   m_wiz->m_pageBanking->ui->comboBoxBnk_debitCol->setMaxVisibleItems(12);
   m_wiz->m_pageBanking->ui->comboBoxBnk_categoryCol->setMaxVisibleItems(12);
 
-  m_vScrollBar = ui->tableWidget->verticalScrollBar();
+  m_vScrollBar = m_wiz->ui->tableWidget->verticalScrollBar();
   m_vScrollBar->setTracking(false);
 
   m_vHeaderWidth = 26;
-  m_rectWidth = this->width() - 24;
 
   m_dateFormats << "yyyy/MM/dd" << "MM/dd/yyyy" << "dd/MM/yyyy";
 
@@ -218,22 +207,18 @@ void CSVDialog::init()
 
   findCodecs();//                             returns m_codecs = codecMap.values();
 
-  connect(m_vScrollBar, SIGNAL(valueChanged(int)), this, SLOT(slotVertScrollBarMoved(int)));
-
   connect(m_wiz->m_pageLinesDate->ui->comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), m_convertDate, SLOT(dateFormatSelected(int)));
 
   connect(m_wiz->m_pageCompletion->ui->comboBox_decimalSymbol, SIGNAL(currentIndexChanged(int)), m_parse, SLOT(decimalSymbolSelected(int)));
 
+  connect(this, SIGNAL(statementReady(MyMoneyStatement&)), m_plugin, SLOT(slotGetStatement(MyMoneyStatement&)));
+
   m_investmentDlg->init();
-  Qt::WindowFlags eFlags = windowFlags();
-  eFlags |= Qt::WindowStaysOnTopHint;
-  m_wiz->setWindowFlags(eFlags);
   m_wiz->show();
 }//  CSVDialog
 
 CSVDialog::~CSVDialog()
 {
-  delete ui;
   delete m_symbolTableDlg;
   delete m_wiz;
 }
@@ -507,7 +492,7 @@ void CSVDialog::slotFileDialogClicked()
   m_decimalSymbolIndex = 0;
   m_maxColumnCount = 0;
   m_fileEndLine = 0;
-  ui->tableWidget->verticalScrollBar()->setValue(0);
+  m_wiz->ui->tableWidget->verticalScrollBar()->setValue(0);
   m_lastDelimiterIndex = 0;
   m_errorColumn = -1;
   m_accept = false;
@@ -652,6 +637,7 @@ void CSVDialog::slotFileDialogClicked()
   //The following two items do not *Require* an entry so old values must be cleared.
   m_trData.number.clear();  //                 this needs to be cleared or gets added to next transaction
   m_trData.memo.clear();  //                   this too, as neither might be overwritten by new data.
+  m_wiz->updateWindowSize();
   m_wiz->m_wizard->next();  //go to separator or completion page
 }
 
@@ -678,7 +664,7 @@ void CSVDialog::readFile(const QString& fname)
   if (!fname.isEmpty()) {
     m_inFileName = fname;
   }
-  ui->tableWidget->clear();//         including vert headers
+  m_wiz->ui->tableWidget->clear();//         including vert headers
   m_inBuffer.clear();
   m_outBuffer.clear();
 
@@ -759,7 +745,7 @@ void CSVDialog::readFile(const QString& fname)
       }
     }
   }
-  ui->tableWidget->setColumnCount(m_maxColumnCount);
+  m_wiz->ui->tableWidget->setColumnCount(m_maxColumnCount);
   if ((columnCount < 5) || (m_possibleDelimiter != m_fieldDelimiterIndex)) {
     m_delimiterError = true;
   }
@@ -825,9 +811,6 @@ void CSVDialog::readFile(const QString& fname)
     m_startLine = m_endLine;
   }
   m_wiz->m_pageLinesDate->ui->spinBox_skip->setValue(m_startLine);
-  for (int i = 0; i < ui->tableWidget->columnCount(); i++) {
-    ui->tableWidget->setColumnWidth(i, 0);
-  }
   m_screenUpdated = false;
 
   //  Display the buffer
@@ -854,13 +837,11 @@ void CSVDialog::readFile(const QString& fname)
     }
   }  //  reached end of buffer
 
-  if (ui->tableWidget->verticalScrollBar()->isVisible()) {
+  if (m_wiz->ui->tableWidget->verticalScrollBar()->isVisible()) {
     m_vScrollBarWidth = 17;
   } else {
     m_vScrollBarWidth = 0;
   }
-
-  setWindowSize(-1, -1);
 
   m_wiz->m_pageLinesDate->ui->labelSet_skip->setEnabled(true);
   m_wiz->m_pageLinesDate->ui->spinBox_skip->setEnabled(true);
@@ -899,109 +880,11 @@ void CSVDialog::readFile(const QString& fname)
   m_columnsNotSet = false;  //            Allow checking of columns now.
 }
 
-void CSVDialog::setWindowSize(int firstLine, int lastLine)
-{
-  int screenHeight = QApplication::desktop()->height();
-  int launcherHeight = 41;      //  allow for horizontal app launch bar - approx
-  int variousMarginsEtc = 120;  //  all margins, hscrollbar, title, gap between frames, etc.
-  int maxLines = (screenHeight - launcherHeight - variousMarginsEtc) / m_rowHeight;
-
-  if (QApplication::desktop()->fontInfo().pixelSize() < 20) {
-    m_dpiDiff = 0;
-  } else {
-    m_dpiDiff = 5;
-  }
-  if (m_initWindow) {
-    m_visibleRows = qMin(m_lineList.count(), maxLines);
-    m_initWindow = false;
-  }
-  m_tableHeight = m_visibleRows * m_rowHeight + m_header + m_hScrollBarHeight + m_dpiDiff;
-  if (firstLine == - 1 || lastLine == -1) {
-    updateColumnWidths(0, m_lineList.count() - 1);
-  } else {
-    updateColumnWidths(firstLine, lastLine);
-  }
-  QRect rect;
-  rect = ui->frame_main->frameRect();
-  ui->frame_main->setMinimumHeight(120);
-
-  //  scrollbar.isVisible() is unreliable so ..
-  if (m_visibleRows < m_fileEndLine) {
-    //  vert scrollbar is visible
-    m_vScrollBarWidth = ui->tableWidget->verticalScrollBar()->width();
-  } else {
-    m_vScrollBarWidth = 0;
-  }
-  QMargins hLayout_MainMargin = ui->horizontalLayout_Main->layout()->contentsMargins();  //  table frame margins
-  QMargins vLayoutMargin = ui->verticalLayout->layout()->contentsMargins();              //  window margins
-
-  int scrollbarWidth = 17;  //  scrollbar space for when needed
-  int wd = m_rowWidth + m_vHeaderWidth +  2 * (vLayoutMargin.left() + 1) + 12 + hLayout_MainMargin.left() + hLayout_MainMargin.right() + scrollbarWidth;
-  if (wd > QApplication::desktop()->width()) {
-    //
-    //  if set to full desktop()->width(), causes a spontaneous resize event
-    //  and upsets wanted resizes,  so ...
-    //
-    wd = QApplication::desktop()->width() - 5;
-  }
-  //
-  //  resize
-  //
-  resize(wd , m_tableHeight + 4 *(vLayoutMargin.top() + 1) + 15);
-
-  rect.setHeight(m_tableHeight + 2 *(vLayoutMargin.left() + 1) + 2 + 1);
-  rect.setWidth(width() - hLayout_MainMargin.left() - hLayout_MainMargin.right());
-  ui->frame_main->setFrameRect(rect);
-}
-
-void CSVDialog::updateColumnWidths(int firstLine, int lastLine)
-{
-  m_rowWidth = 0;
-  m_fileEndLine = m_parse->lastLine();
-
-  QFont font(QApplication::font());
-  QFontMetrics cellFontMetrics(font);
-  //
-  //  Need to recalculate column widths in the visible rows,
-  //  to allow shrinking or expanding with the data.
-  //
-  for (int col = 0; col < ui->tableWidget->columnCount(); col++) {
-    int maxColWidth = 0;
-
-    for (int row = firstLine; row <= lastLine; row++) {
-      if ((row >= m_lineList.count()) || (row >= m_fileEndLine)) {
-        break;
-      }
-      if (ui->tableWidget->item(row, col) == 0) {  //  cell does not exist
-        continue;
-      }
-      //
-      //  Ensure colwidth is wide enough for true data width.
-      //
-      int colWidth = 0;
-      QLabel label;
-      label.setText(ui->tableWidget->item(row, col)->text() + "  ");
-      int wd = 1.05 * cellFontMetrics.width(label.text() + "  ");  //  *1.05 for distro compatibility
-      if (wd > colWidth) {
-        colWidth = wd;
-      }
-      if (colWidth > maxColWidth) {
-        maxColWidth = colWidth;
-      }
-    }  //  end rows
-
-    ui->tableWidget->setColumnWidth(col, maxColWidth);
-
-    m_rowWidth += maxColWidth;
-  }  //  end cols
-  return;
-}
-
 void CSVDialog::displayLine(const QString& data)
 {
   QString str = data;
   QFont font(QApplication::font());
-  ui->tableWidget->setFont(font);
+  m_wiz->ui->tableWidget->setFont(font);
 
   if (m_wiz->m_pageBanking->ui->radioBnk_amount->isChecked()) {
     m_amountColumn = m_wiz->m_pageBanking->ui->comboBoxBnk_amountCol->currentIndex();
@@ -1050,9 +933,9 @@ void CSVDialog::displayLine(const QString& data)
     } else {
       item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     }
-    ui->tableWidget->setRowCount(m_row + 1);
-    ui->tableWidget->setItem(m_row, col, item);  //        add items to UI here
-    ui->tableWidget->resizeColumnToContents(col);
+    m_wiz->ui->tableWidget->setRowCount(m_row + 1);
+    m_wiz->ui->tableWidget->setItem(m_row, col, item);  //        add items to UI here
+    m_wiz->ui->tableWidget->resizeColumnToContents(col);
     m_inBuffer += txt + m_fieldDelimiterCharacter;
 
     col ++;
@@ -1084,7 +967,7 @@ void CSVDialog::markUnwantedRows()
   //
   QBrush brush;
   QBrush brushText;
-  for (int row = 0; row < ui->tableWidget->rowCount(); row++) {
+  for (int row = 0; row < m_wiz->ui->tableWidget->rowCount(); row++) {
     if ((row < first) || (row > last)) {
       brush = m_errorBrush;
       brushText = m_errorBrushText;
@@ -1092,10 +975,10 @@ void CSVDialog::markUnwantedRows()
       brush = m_clearBrush;
       brushText = m_clearBrushText;
     }
-    for (int col = 0; col < ui->tableWidget->columnCount(); col ++) {
-      if (ui->tableWidget->item(row, col) != 0) {
-        ui->tableWidget->item(row, col)->setBackground(brush);
-        ui->tableWidget->item(row, col)->setForeground(brushText);
+    for (int col = 0; col < m_wiz->ui->tableWidget->columnCount(); col ++) {
+      if (m_wiz->ui->tableWidget->item(row, col) != 0) {
+        m_wiz->ui->tableWidget->item(row, col)->setBackground(brush);
+        m_wiz->ui->tableWidget->item(row, col)->setForeground(brushText);
       }
     }
   }
@@ -1109,7 +992,7 @@ int CSVDialog::processQifLine(QString& iBuff)
   if (m_columnList.count() < m_endColumn) {
     if (!m_accept) {
       QString row = QString::number(m_row);
-      int ret = KMessageBox::questionYesNoCancel(this, i18n("<center>Row number %1 does not have the expected number of columns.</center>"
+      int ret = KMessageBox::questionYesNoCancel(m_wiz, i18n("<center>Row number %1 does not have the expected number of columns.</center>"
                 "<center>This might not be a problem, but it may be a header line.</center>"
                 "<center>You may accept all similar items, or just this one, or cancel.</center>",
                 row), i18n("CSV import"),
@@ -1142,7 +1025,7 @@ int CSVDialog::processQifLine(QString& iBuff)
       txt = txt.remove(m_textDelimiterCharacter);       //   "16/09/2009
       QDate dat = m_convertDate->convertDate(txt);      //  Date column
       if (dat == QDate()) {
-        KMessageBox::sorry(this, i18n("<center>An invalid date has been detected during import.</center>"
+        KMessageBox::sorry(m_wiz, i18n("<center>An invalid date has been detected during import.</center>"
                                       "<center><b>'%1'</b></center>"
                                       "Please check that you have set the correct date format,\n"
                                       "<center>and start and end lines.</center>"
@@ -1348,7 +1231,7 @@ int CSVDialog::ensureBothFieldsValid(int col)
     if ((firstTemp == zero || secondTemp == zero) && (m_clearAll == false)) {
       //  Warn user if either field is zero - so needs to be cleared
       // user may opt to clear just this or all similar
-      int ret = KMessageBox::questionYesNoCancel(this, i18n("<center>On row '%5', the '%1' field contains '%2', and the '%3' field contains '%4'.</center>"
+      int ret = KMessageBox::questionYesNoCancel(m_wiz, i18n("<center>On row '%5', the '%1' field contains '%2', and the '%3' field contains '%4'.</center>"
                 "<center>This combination is not valid.</center>"
                 "<center>If you wish for just this zero field to be cleared, click 'Clear this'.</center>"
                 "<center>Or, if you wish for all such zero fields to be cleared, click 'Clear all'.</center>"
@@ -1376,7 +1259,7 @@ int CSVDialog::ensureBothFieldsValid(int col)
     else if (bothFieldsNotZero && !m_firstValue.isEmpty() && !m_secondValue.isEmpty()) {  //  credit and debit contain values - not good
       //  both debit and credit have entries so ask user how to proceed.
       //  if just one field is empty, that's OK - bypass this message
-      ret = KMessageBox::questionYesNoCancel(this, i18n("<center>The %1 field contains '%2'</center>"
+      ret = KMessageBox::questionYesNoCancel(m_wiz, i18n("<center>The %1 field contains '%2'</center>"
                                              "<center>and the %3 field contains '%4'.</center>"
                                              "<center>Please choose which you wish to accept.</center>",
                                              m_columnTypeList[m_debitColumn], m_columnList[m_debitColumn], m_columnTypeList[m_creditColumn], m_columnList[m_creditColumn]), i18n("CSV invalid field values"),
@@ -1521,7 +1404,7 @@ void CSVDialog::slotSaveAsQIF()
     QStringList outFile = m_inFileName.split('.');
     const QString &name = QString((outFile.isEmpty() ? "CsvProcessing" : outFile[0]) + ".qif");
 
-    QString outFileName = QFileDialog::getSaveFileName(this, i18n("Save QIF"), name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")));
+    QString outFileName = QFileDialog::getSaveFileName(m_wiz, i18n("Save QIF"), name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")));
     QFile oFile(outFileName);
     oFile.open(QIODevice::WriteOnly);
     QTextStream out(&oFile);
@@ -1662,8 +1545,8 @@ void CSVDialog::saveSettings()
   KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
 
   KConfigGroup mainGroup(config, "MainWindow");
-  mainGroup.writeEntry("Height", height());
-  mainGroup.writeEntry("Width", width());
+  mainGroup.writeEntry("Height", m_wiz->height());
+  mainGroup.writeEntry("Width", m_wiz->width());
   mainGroup.config()->sync();
 
   KConfigGroup bankProfilesGroup(config, "BankProfiles");
@@ -1716,7 +1599,7 @@ void CSVDialog::saveSettings()
     profilesGroup.config()->sync();
   }
   m_inFileName.clear();
-  ui->tableWidget->clear();//     in case later reopening window, clear old contents now
+  m_wiz->ui->tableWidget->clear();//     in case later reopening window, clear old contents now
 }
 
 
@@ -1797,38 +1680,6 @@ int CSVDialog::validateColumn(const int& col, QString& type)
   return KMessageBox::Cancel;
 }
 
-void CSVDialog::closeEvent(QCloseEvent *event)
-{
-  m_plugin->m_action->setEnabled(true);
-  m_closing = true;
-  event->accept();
-}
-
-bool CSVDialog::eventFilter(QObject *object, QEvent *event)
-{
-  // prevent the wizard from closing on escape leaving the importer empty
-  if (object == m_wiz && event->type() == QEvent::KeyPress) {
-    QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-    if (keyEvent->key() == Qt::Key_Escape) {
-      close();
-    }
-    return true;
-  } else {
-    //  raise wizard above table window
-    if (event->type() == QEvent::ContextMenu) {
-      Qt::WindowFlags eFlags = windowFlags();
-      eFlags |= Qt::WindowStaysOnTopHint;
-      m_wiz->setWindowFlags(eFlags);
-      m_wiz->show();
-      eFlags &= ~Qt::WindowStaysOnTopHint;
-      m_wiz->setWindowFlags(eFlags);
-      m_wiz->show();
-      return true;
-    }
-    return false;
-  }
-}
-
 QString CSVDialog::columnType(int column)
 {
   if (column >= m_columnTypeList.count()) {
@@ -1864,10 +1715,10 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
   }
   //  Clear background
 
-  for (int row = 0; row < ui->tableWidget->rowCount(); row++) {
-    if (ui->tableWidget->item(row, col) != 0) {
-      ui->tableWidget->item(row, col)->setBackground(m_clearBrush);
-      ui->tableWidget->item(row, col)->setForeground(m_clearBrushText);
+  for (int row = 0; row < m_wiz->ui->tableWidget->rowCount(); row++) {
+    if (m_wiz->ui->tableWidget->item(row, col) != 0) {
+      m_wiz->ui->tableWidget->item(row, col)->setBackground(m_clearBrush);
+      m_wiz->ui->tableWidget->item(row, col)->setForeground(m_clearBrushText);
     }
   }
 
@@ -1881,21 +1732,21 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
     QString newTxt;
     QTableWidgetItem* errorItem(0);
     //  Check if this col contains empty cells
-    for (int row = startLine - 1; row < ui->tableWidget->rowCount(); row++) {
+    for (int row = startLine - 1; row < m_wiz->ui->tableWidget->rowCount(); row++) {
       if (row > endLine - 1) {
         break;
       }
-      if (ui->tableWidget->item(row, col) == 0) {      //       empty cell
+      if (m_wiz->ui->tableWidget->item(row, col) == 0) {      //       empty cell
         if (importNow()) {
           //                                                    if importing, this is error
-          KMessageBox::sorry(this, i18n("Row number %1 may be a header line, as it has an incomplete set of entries."
+          KMessageBox::sorry(m_wiz, i18n("Row number %1 may be a header line, as it has an incomplete set of entries."
                                         "<center>It may be that the start line is incorrectly set.</center>",
                                         row + 1), i18n("CSV import"));
           return;
         }
         //                                                      if not importing, query
 
-        int ret = KMessageBox::warningContinueCancel(this, i18n("<center>The cell in column '%1' on row %2 is empty.</center>"
+        int ret = KMessageBox::warningContinueCancel(m_wiz, i18n("<center>The cell in column '%1' on row %2 is empty.</center>"
                   "<center>Please check your selections.</center><center>Continue or Cancel?</center>",
                   col + 1, row + 1), i18n("Selections Warning"), KStandardGuiItem::cont(),
                   KStandardGuiItem::cancel());
@@ -1906,23 +1757,23 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
       } else {
         //  Check if this col contains decimal symbol
 
-        txt = ui->tableWidget->item(row, col)->text(); //       get data
+        txt = m_wiz->ui->tableWidget->item(row, col)->text(); //       get data
         newTxt = m_parse->possiblyReplaceSymbol(txt);  //       update data
-        ui->tableWidget->item(row, col)->setText(newTxt);   //  highlight selection
-        ui->tableWidget->item(row, col)->setBackground(m_colorBrush);
-        ui->tableWidget->item(row, col)->setForeground(m_colorBrushText);
+        m_wiz->ui->tableWidget->item(row, col)->setText(newTxt);   //  highlight selection
+        m_wiz->ui->tableWidget->item(row, col)->setBackground(m_colorBrush);
+        m_wiz->ui->tableWidget->item(row, col)->setForeground(m_colorBrushText);
         if (m_parse->invalidConversion()) {
           invalidResult = true;
-          errorItem = ui->tableWidget->item(row, col);
+          errorItem = m_wiz->ui->tableWidget->item(row, col);
           errorItem->setBackground(m_errorBrush);
           errorItem->setForeground(m_errorBrushText);
-          ui->tableWidget->scrollToItem(errorItem, QAbstractItemView::EnsureVisible);
+          m_wiz->ui->tableWidget->scrollToItem(errorItem, QAbstractItemView::EnsureVisible);
           if (errorRow == 0) {
             errorRow = row;
           }
         }
         if (m_wiz->m_pageIntro->isVisible() || m_wiz->m_pageLinesDate->isVisible()) {
-          ui->tableWidget->horizontalScrollBar()->setValue(col);  //                   ensure col visible
+          m_wiz->ui->tableWidget->horizontalScrollBar()->setValue(col);  //                   ensure col visible
         }
         if (m_parse->symbolFound()) {
           symbolFound = true;
@@ -1932,15 +1783,15 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
         }
       }
       if (!symbolFound) {
-        errorItem = ui->tableWidget->item(row, col);
+        errorItem = m_wiz->ui->tableWidget->item(row, col);
         errorItem->setBackground(m_errorBrush);
         errorItem->setForeground(m_errorBrushText);
       }
     }//  last row
 
     if (!symbolFound && !m_wiz->m_pageIntro->ui->checkBoxSkipSetup->isChecked() && !m_errorFoundAlready) {  //  no symbol found
-      ui->tableWidget->horizontalScrollBar()->setValue(col);  //                     ensure col visible
-      KMessageBox::sorry(this, i18n("<center>The selected decimal symbol was not present in column %1,</center>"
+      m_wiz->ui->tableWidget->horizontalScrollBar()->setValue(col);  //                     ensure col visible
+      KMessageBox::sorry(m_wiz, i18n("<center>The selected decimal symbol was not present in column %1,</center>"
                                     "<center>- but may now have been added.</center>"
                                     "<center>If the <b>decimal</b> symbol displayed does not match your system setting</center>"
                                     "<center>your data is unlikely to import correctly.</center>"
@@ -1951,8 +1802,8 @@ void CSVDialog::updateDecimalSymbol(const QString& type, int col)
     }
 
     if (invalidResult && !m_errorFoundAlready) {
-      ui->tableWidget->verticalScrollBar()->setValue(errorRow - 1);  //              ensure row visible
-      KMessageBox::sorry(this, i18n("<center>The selected decimal symbol ('%1') was not present</center>"
+      m_wiz->ui->tableWidget->verticalScrollBar()->setValue(errorRow - 1);  //              ensure row visible
+      KMessageBox::sorry(m_wiz, i18n("<center>The selected decimal symbol ('%1') was not present</center>"
                                     "<center>or has produced invalid results in row %2, and possibly more.</center>"
                                     "<center>Please try again.</center>", decimalSymbol(), errorRow + 1), i18n("Invalid Conversion"));
       m_importError = true;
@@ -2004,7 +1855,7 @@ void CSVDialog::decimalSymbolSelected(int index)
     endLine = m_investProcessing->m_endLine;
   }
   if (startLine > endLine) {
-    KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
+    KMessageBox::sorry(m_wiz, i18n("<center>The start line is greater than the end line.\n</center>"
                                "<center>Please correct your settings.</center>"), i18n("CSV import"));
     m_importError = true;
     m_wiz->m_pageIntro->ui->checkBoxSkipSetup->setChecked(false);
@@ -2041,7 +1892,7 @@ void CSVDialog::decimalSymbolSelected(int index)
       if (m_errorColumn == -1) {
         m_errorColumn = m_investProcessing->amountColumn();
       }
-      ui->tableWidget->horizontalScrollBar()->setValue(m_errorColumn);  //                     ensure col visible
+      m_wiz->ui->tableWidget->horizontalScrollBar()->setValue(m_errorColumn);  //                     ensure col visible
     }
   }
   if (!m_importError)
@@ -2153,7 +2004,7 @@ void CSVDialog::endLineChanged(int val)
   if (tmp < m_startLine) {
     return;
   }
-  ui->tableWidget->verticalScrollBar()->setValue(val - m_visibleRows);
+  m_wiz->ui->tableWidget->verticalScrollBar()->setValue(val - m_visibleRows);
   m_wiz->m_pageLinesDate->m_trailerLines = m_fileEndLine - val;
   m_endLine = val;
   if (!m_inFileName.isEmpty()) {
@@ -2194,9 +2045,9 @@ void CSVDialog::restoreBackground()
 
   for (int row = 0; row < lastRow; row++) {
     for (int col = 0; col < lastCol; col++) {
-      if (ui->tableWidget->item(row, col) != 0) {
-        ui->tableWidget->item(row, col)->setBackground(m_clearBrush);
-        ui->tableWidget->item(row, col)->setForeground(m_clearBrushText);
+      if (m_wiz->ui->tableWidget->item(row, col) != 0) {
+        m_wiz->ui->tableWidget->item(row, col)->setBackground(m_clearBrush);
+        m_wiz->ui->tableWidget->item(row, col)->setForeground(m_clearBrushText);
       }
     }
   }
@@ -2229,21 +2080,21 @@ void CSVDialog::slotNamesEdited()
   int symTableRow = -1;
 
   for (row = m_investProcessing->m_startLine - 1; row < m_investProcessing->m_endLine; row ++) {
-    if (ui->tableWidget->item(row, m_investProcessing->symbolColumn()) == 0) {  //  Item does not exist
+    if (m_wiz->ui->tableWidget->item(row, m_investProcessing->symbolColumn()) == 0) {  //  Item does not exist
       continue;
     }
     symTableRow++;
-    if (ui->tableWidget->item(row, m_investProcessing->symbolColumn())->text().trimmed().isEmpty()) {
+    if (m_wiz->ui->tableWidget->item(row, m_investProcessing->symbolColumn())->text().trimmed().isEmpty()) {
       continue;
     }
     //  Replace detail with edited security name.
     QString securityName = m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 2)->text();
     if (m_investProcessing->nameColumn() > -1)
-      ui->tableWidget->item(row, m_investProcessing->nameColumn())->setText(securityName);
+      m_wiz->ui->tableWidget->item(row, m_investProcessing->nameColumn())->setText(securityName);
     //  Replace symbol with edited symbol.
     QString securitySymbol = m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 0)->text();
     if (m_investProcessing->symbolColumn() > -1)
-      ui->tableWidget->item(row, m_investProcessing->symbolColumn())->setText(securitySymbol);
+      m_wiz->ui->tableWidget->item(row, m_investProcessing->symbolColumn())->setText(securitySymbol);
     m_investProcessing->m_map.insert(securitySymbol, securityName);
   }
 
@@ -2345,41 +2196,16 @@ void CSVDialog::setOppositeSignsCheckBox(int val)
   m_oppositeSigns = val;
 }
 
-void CSVDialog::slotVertScrollBarMoved(int val)
-{
-  int top = val;
-  int bottom = val + m_visibleRows - 1;
-  if (m_fileType == "Banking") {
-    if (m_fileEndLine == 0) {  // file not read yet
-      return;
-    }
-    if (bottom > m_fileEndLine) {
-      bottom = m_fileEndLine;
-    }
-    updateColumnWidths(top, bottom);
-    setWindowSize(top, bottom);
-  } else {
-    if (m_investProcessing->m_fileEndLine == 0) {  // file not read yet
-      return;
-    }
-    if (bottom > m_investProcessing->m_fileEndLine) {
-      bottom = m_investProcessing->m_fileEndLine;
-    }
-    m_investProcessing->updateColumnWidths(top, bottom);
-    m_investProcessing->setWindowSize(top, bottom);
-  }
-}
-
 void CSVDialog::clearCellsBackground()
 {
   //
   //  Clear cells background.
   //
-  for (int row = 0; row < ui->tableWidget->rowCount(); row++) {
-    for (int col = 0; col < ui->tableWidget->columnCount(); col ++) {
-      if (ui->tableWidget->item(row, col) != 0) {
-        ui->tableWidget->item(row, col)->setBackground(m_clearBrush);
-        ui->tableWidget->item(row, col)->setForeground(m_clearBrushText);
+  for (int row = 0; row < m_wiz->ui->tableWidget->rowCount(); row++) {
+    for (int col = 0; col < m_wiz->ui->tableWidget->columnCount(); col ++) {
+      if (m_wiz->ui->tableWidget->item(row, col) != 0) {
+        m_wiz->ui->tableWidget->item(row, col)->setBackground(m_clearBrush);
+        m_wiz->ui->tableWidget->item(row, col)->setForeground(m_clearBrushText);
       }
     }
   }
@@ -2389,35 +2215,3 @@ void CSVDialog::clearColumnTypeList()
 {
   m_columnTypeList.clear();
 }
-
-void CSVDialog::resizeEvent(QResizeEvent* ev)
-{
-  QRect rect = ui->frame_main->frameRect();
-  if (m_fileType.isEmpty() || m_resizing || ev->spontaneous()) {
-    ev->ignore();
-    return;
-  }
-  QMargins margn = ui->verticalLayout->layout()->contentsMargins();
-  int height = ev->size().height() - m_hScrollBarHeight - m_header - 2 * margn.top() + 4;
-
-  m_visibleRows = (height - m_hScrollBarHeight - m_header  + 14) / m_rowHeight;
-  height = m_visibleRows * m_rowHeight + m_hScrollBarHeight + m_header + 2 * (margn.top() + m_dpiDiff);
-
-  int top = ui->tableWidget->rowAt(ui->tableWidget->geometry().top() + m_rowHeight / 2);
-  int bottom = top + m_visibleRows - 1;
-  if (bottom < 0) {
-    bottom = top + m_visibleRows;
-  }
-  m_vScrollBarVisible = false;
-  m_resizing = true;
-
-  rect.setHeight(height + 4);
-
-  QMargins vLayoutMargin = ui->verticalLayout->layout()->contentsMargins();
-  int widt = ev->size().width() - vLayoutMargin.left() - vLayoutMargin.right() - 2;
-  rect.setWidth(widt);
-  ui->frame_main->setFrameRect(rect);
-  ev->accept();
-  m_resizing = false;
-}
-

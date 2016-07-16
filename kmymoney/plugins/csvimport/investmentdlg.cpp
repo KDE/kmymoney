@@ -52,13 +52,13 @@
 #include "mymoneystatement.h"
 #include "redefinedlg.h"
 
-#include "ui_csvdialog.h"
 #include "ui_introwizardpage.h"
 #include "ui_separatorwizardpage.h"
 #include "ui_bankingwizardpage.h"
 #include "ui_lines-datewizardpage.h"
 #include "ui_completionwizardpage.h"
 #include "ui_investmentwizardpage.h"
+#include "ui_csvwizard.h"
 
 InvestmentDlg::InvestmentDlg()
 {
@@ -72,7 +72,7 @@ void InvestmentDlg::init()
 {
   m_csvDialog->m_investProcessing->init();
   m_csvDialog->m_investProcessing->m_investDlg = this;
-  m_csvDialog->ui->tableWidget->setWordWrap(false);
+  m_csvDialog->m_wiz->ui->tableWidget->setWordWrap(false);
   m_csvDialog->m_wiz->m_pageCompletion->ui->comboBox_decimalSymbol->setCurrentIndex(-1);
 
   connect(m_csvDialog->m_wiz->m_wizard->button(QWizard::CustomButton1), SIGNAL(clicked()), m_investProcessing, SLOT(slotFileDialogClicked()));
@@ -91,8 +91,8 @@ void InvestmentDlg::saveSettings()
   KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
 
   KConfigGroup mainGroup(config, "MainWindow");
-  mainGroup.writeEntry("Height", m_csvDialog->height());
-  mainGroup.writeEntry("Width", m_csvDialog->width());
+  mainGroup.writeEntry("Height", m_csvDialog->m_wiz->height());
+  mainGroup.writeEntry("Width", m_csvDialog->m_wiz->width());
   mainGroup.config()->sync();
 
   KConfigGroup bankProfilesGroup(config, "BankProfiles");
@@ -169,6 +169,6 @@ void InvestmentDlg::saveSettings()
     securitiesGroup.writeEntry("SecurityNameList", m_investProcessing->securityList());
     securitiesGroup.config()->sync();
   }
-  m_csvDialog->ui->tableWidget->clear();//     in case later reopening window, clear old contents now
+  m_csvDialog->m_wiz->ui->tableWidget->clear();//     in case later reopening window, clear old contents now
 }
 

@@ -170,6 +170,11 @@ public slots:
   void           slotClose();
 
   /**
+  * Called in order to adjust window size to suit the file,
+  */
+  void           updateWindowSize();
+
+  /**
   * This method is called when it is detected that the user has selected the
   * same column for two different fields.  The column detecting the error
   * has to reset the other column.
@@ -183,6 +188,7 @@ private:
   int              m_lastId;
 
   bool             eventFilter(QObject *object, QEvent *event);
+  void             closeEvent(QCloseEvent *event);
   void             resizeEvent(QResizeEvent* ev);
 }
 ;

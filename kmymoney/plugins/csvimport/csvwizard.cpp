@@ -19,6 +19,7 @@
 
 #include <QWizard>
 #include <QWizardPage>
+#include <QCloseEvent>
 #include <QTimer>
 #include <QDebug>
 #include <QDesktopWidget>
@@ -37,7 +38,6 @@
 
 #include "mymoneyfile.h"
 
-#include "ui_csvdialog.h"
 #include "ui_csvwizard.h"
 #include "ui_introwizardpage.h"
 #include "ui_separatorwizardpage.h"
@@ -150,14 +150,8 @@ void CSVWizard::init()
   connect(m_wizard, SIGNAL(currentIdChanged(int)), this, SLOT(slotIdChanged(int)));
 
   connect(m_csvDialog, SIGNAL(isImportable()), m_pageCompletion, SLOT(slotImportValid()));
-
-  int y = (QApplication::desktop()->height() - m_csvDialog->height()) / 2;
-  int x = (QApplication::desktop()->width() - m_csvDialog->width()) / 2;
-  m_csvDialog->move(x, y);
-  m_csvDialog->show();
-
-  y = (QApplication::desktop()->height() - this->height()) / 2;
-  x = (QApplication::desktop()->width() - this->width()) / 2;
+  int y = (QApplication::desktop()->height() - this->height()) / 2;
+  int x = (QApplication::desktop()->width() - this->width()) / 2;
   move(x, y);
 }
 
@@ -508,9 +502,49 @@ void CSVWizard::slotClose()
     m_csvDialog->saveSettings();
     m_csvDialog->m_investmentDlg->saveSettings();
     m_csvDialog->m_wiz = 0;
-    m_csvDialog->close();
   }
   close();
+}
+
+void CSVWizard::updateWindowSize()
+{
+  QTableWidget *table = this->ui->tableWidget;
+  int newWidth = table->verticalHeader()->width() + table->verticalScrollBar()->width();      //take header and scrollbar into account
+  int newHeight = table->horizontalHeader()->height() + table->horizontalScrollBar()->height();
+  table->horizontalHeader()->setStretchLastSection(false);
+  table->resizeColumnsToContents();
+
+  QRect screen = QApplication::desktop()->availableGeometry();    //get available screen size
+  QRect view = table->contentsRect();                             //get current tableview size
+  QRect wizard = this->geometry();                               //get current wizard size
+
+  for(int i = 0; i < table->columnCount(); i++ )
+    newWidth += table->columnWidth(i);                            //add up required column widths
+
+  if( this->ui->tableWidget->rowCount() > 0)
+    newHeight += this->ui->tableWidget->rowCount() * table->rowHeight(0); //add up estimated row heights
+
+  newWidth = wizard.width() + (newWidth - view.width());
+  newHeight = wizard.height() + (newHeight - view.height());
+
+  if (newWidth > screen.width())  //limit wizard size to screen size
+    newWidth = screen.width();
+  if (newHeight > screen.height())
+    newHeight = screen.height();
+
+  if (newWidth < this->m_initialWidth) //don't shrink wizard if required size is less than initial
+  {
+    table->horizontalHeader()->setStretchLastSection(true);
+    newWidth = this->m_initialWidth;
+  }
+  if (newHeight < this->m_initialHeight)
+    newHeight = this->m_initialHeight;
+
+  wizard.setWidth(newWidth);
+  wizard.setHeight(newHeight);
+  this->setGeometry(wizard);
+  wizard.moveTo((screen.width() - wizard.width()) / 2,
+                (screen.height() - wizard.height()) / 2);
 }
 
 void CSVWizard::resetComboBox(const QString& comboBox, const int& col)
@@ -700,6 +734,12 @@ void IntroPage::slotComboEditTextChanged(QString txt)
     return;
   }
   connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
+  if (m_wizDlg->m_initialHeight == -1 || m_wizDlg->m_initialWidth == -1)
+  {
+    m_wizDlg->m_initialHeight = m_wizDlg->geometry().height();
+    m_wizDlg->m_initialWidth = m_wizDlg->geometry().width();
+  }
+
 }
 
 void IntroPage::slotComboSourceClicked(int index)
@@ -1514,12 +1554,12 @@ bool LinesDatePage::validatePage()
   //
   if (m_wizDlg->m_csvDialog->m_fileType == "Banking") {
     for (int row = m_wizDlg->m_csvDialog->startLine() - 1; row < m_wizDlg->m_csvDialog->lastLine(); row++) {
-      for (int col = 0; col < m_wizDlg->m_csvDialog->ui->tableWidget->columnCount(); col++) {
-        if (m_wizDlg->m_csvDialog->ui->tableWidget->item(row, col) == 0) {  //  Does cell exist?
+      for (int col = 0; col < m_wizDlg->ui->tableWidget->columnCount(); col++) {
+        if (m_wizDlg->ui->tableWidget->item(row, col) == 0) {  //  Does cell exist?
           break;  //  No.
         }
         if ((m_wizDlg->m_csvDialog->columnType(col) == "amount") || (m_wizDlg->m_csvDialog->columnType(col) == "debit") || (m_wizDlg->m_csvDialog->columnType(col) == "credit")) {
-          value = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, col)->text().remove(QRegExp(pattern));
+          value = m_wizDlg->ui->tableWidget->item(row, col)->text().remove(QRegExp(pattern));
           if (value.isEmpty()) {  //  An empty cell is OK, probably.
             continue;
           }
@@ -1553,12 +1593,12 @@ bool LinesDatePage::validatePage()
     m_wizDlg->m_csvDialog->m_importIsValid = true;
   } else {  //  "Invest"
     for (int row = m_wizDlg->m_investProcessing->m_startLine - 1; row < m_wizDlg->m_csvDialog->m_investProcessing->m_endLine; row++) {
-      for (int col = 0; col < m_wizDlg->m_csvDialog->ui->tableWidget->columnCount(); col++) {
+      for (int col = 0; col < m_wizDlg->ui->tableWidget->columnCount(); col++) {
         if ((m_wizDlg->m_investProcessing->columnType(col) == "amount") || (m_wizDlg->m_investProcessing->columnType(col) == "quantity") || (m_wizDlg->m_csvDialog->m_investProcessing->columnType(col) == "price")) {
-          if (m_wizDlg->m_csvDialog->ui->tableWidget->item(row, col) == 0) {  //  Does cell exist?
+          if (m_wizDlg->ui->tableWidget->item(row, col) == 0) {  //  Does cell exist?
             break;  //  No.
           }
-          value = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, col)->text().remove(QRegExp(pattern));
+          value = m_wizDlg->ui->tableWidget->item(row, col)->text().remove(QRegExp(pattern));
           value = value.remove("--");  //  Possible blank marker.
           if (value.isEmpty()) {  //       An empty cell is OK, probably.
             continue;
@@ -1607,15 +1647,15 @@ bool LinesDatePage::validatePage()
     if ((field("securityNameIndex").toInt() == -1)  && (!m_wizDlg->m_csvDialog->m_investProcessing->m_symbolTableScanned)) {
       QString symbl;
       QString securityName;
-      for (int row = m_wizDlg->m_csvDialog->m_investProcessing->m_startLine - 1; row < m_wizDlg->m_csvDialog->ui->tableWidget->rowCount(); row++) {
+      for (int row = m_wizDlg->m_csvDialog->m_investProcessing->m_startLine - 1; row < m_wizDlg->ui->tableWidget->rowCount(); row++) {
         if (row >= m_wizDlg->m_csvDialog->m_investProcessing->m_endLine) {  //  No need to scan further lines
           break;
         }
         int symbolCol = m_wizDlg->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex();
         int nameCol = m_wizDlg->m_pageInvestment->ui->comboBoxInv_nameCol->currentIndex();
 
-        if (m_wizDlg->m_csvDialog->ui->tableWidget->item(row, symbolCol) == 0 &&
-            m_wizDlg->m_csvDialog->ui->tableWidget->item(row, nameCol) == 0) {  //  This cell does not exist
+        if (m_wizDlg->ui->tableWidget->item(row, symbolCol) == 0 &&
+            m_wizDlg->ui->tableWidget->item(row, nameCol) == 0) {  //  This cell does not exist
           continue;
         }
 
@@ -1624,7 +1664,7 @@ bool LinesDatePage::validatePage()
         QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
         if (symbolCol > -1) {
           name.clear();
-          symbl = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, symbolCol)->text().toUpper().trimmed();
+          symbl = m_wizDlg->ui->tableWidget->item(row, symbolCol)->text().toUpper().trimmed();
           // Check if we already have the security on file.
           if (!symbl.isEmpty())  {
             while (it != list.constEnd()) {
@@ -1638,10 +1678,10 @@ bool LinesDatePage::validatePage()
             }
           }
           if (!exists && nameCol > -1) {
-            name = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, nameCol)->text().trimmed();
+            name = m_wizDlg->ui->tableWidget->item(row, nameCol)->text().trimmed();
           }
         } else if (nameCol > -1) {
-          name = m_wizDlg->m_csvDialog->ui->tableWidget->item(row, nameCol)->text().trimmed();
+          name = m_wizDlg->ui->tableWidget->item(row, nameCol)->text().trimmed();
           symbl.clear();
           // Check if we already have the security on file.
           if (!name.isEmpty())  {
@@ -1759,7 +1799,6 @@ void CompletionPage::slotImportClicked()
 {
   m_wizDlg->m_csvDialog->m_isTableTrimmed = true;
   m_wizDlg->hide(); //hide wizard so it will not cover accountselector
-  m_wizDlg->m_csvDialog->hide();
   if (m_wizDlg->m_csvDialog->m_fileType == "Banking")
     emit importBanking();
   else
@@ -1782,3 +1821,9 @@ bool CompletionPage::validatePage()
   return true;
 }
 
+void CSVWizard::closeEvent(QCloseEvent *event)
+{
+  this->m_csvDialog->m_plugin->m_action->setEnabled(true);
+  this->m_csvDialog->m_closing = true;
+  event->accept();
+}

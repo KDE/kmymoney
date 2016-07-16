@@ -42,6 +42,7 @@
 #include "mymoneystatement.h"
 #include "csvdialog.h"
 #include "investprocessing.h"
+#include "csvwizard.h"
 
 K_PLUGIN_FACTORY_WITH_JSON(CsvImporterFactory, "kmm_csvimport.json", registerPlugin<CsvImporterPlugin>();)
 
@@ -73,10 +74,7 @@ void CsvImporterPlugin::slotImportFile()
   csvImporter->m_plugin = this;
   csvImporter->init();
 
-  csvImporter->setWindowTitle(i18nc("CSV Importer dialog title", "CSV Importer"));
-
-  connect(csvImporter, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
-  csvImporter->show();
+  connect(csvImporter->m_wiz, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
   m_action->setEnabled(false);//  don't allow further plugins to start while this is open
 }
 

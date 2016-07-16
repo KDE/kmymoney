@@ -137,17 +137,6 @@ public:
 
   void           setInFileName(const QString& val);
 
-  /**
-   * Recalculates column widths for the visible rows
-  */
-  void           updateColumnWidths(int firstLine, int lastLine);
-
-  /**
-  * Called on reading a file in order to
-  * adjust window size to suit the file.
-  */
-  void           setWindowSize(int firstLine, int lastLine);
-
   QString        columnType(int column);
   QString        invPath();
   QString        inFileName();

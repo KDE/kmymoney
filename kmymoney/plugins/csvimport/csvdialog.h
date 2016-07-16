@@ -49,7 +49,7 @@ namespace Ui
 class CSVDialog;
 }
 
-class CSVDialog : public QWidget
+class CSVDialog : public QObject
 {
   Q_OBJECT
 
@@ -382,7 +382,6 @@ signals:
 public slots:
   void           slotNamesEdited();
   void           slotBackButtonClicked();
-  void           slotVertScrollBarMoved(int val);
 
   /**
   * This method is called when the user clicks 'Open File', and opens
@@ -489,22 +488,8 @@ private:
   QBrush           m_errorBrushText;
 
   void             closeEvent(QCloseEvent *event);
-  bool             eventFilter(QObject *object, QEvent *event);
 
   void             restoreBackground();
-  void             resizeEvent(QResizeEvent* ev);
-
-  /**
-  * Recalculates column widths for the visible rows
-  */
-  void             updateColumnWidths(int firstLine, int lastLine);
-
-  /**
-  * Called in order to adjust window size to suit the file,
-  * depending upon column data width between current firstLine and lastLine
-  * and also the number of rows.
-  */
-  void             setWindowSize(int firstLine, int lastLine);
 
   /**
   * Check that the debit and credit field combination
