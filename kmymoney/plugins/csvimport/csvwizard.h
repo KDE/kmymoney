@@ -4,6 +4,8 @@
 * begin                       : Thur Jan 01 2015
 * copyright                   : (C) 2015 by Allan Anderson
 * email                       : agander93@gmail.com
+* copyright                   : (C) 2016 by Łukasz Wojniłowicz
+* email                       : lukasz.wojnilowicz@gmail.com
 ********************************************************************************/
 
 /*******************************************************************************
@@ -37,7 +39,6 @@ class LinesDatePage;
 class IntroPage;
 class CompletionPage;
 class SeparatorPage;
-class InvestmentDlg;
 class InvestProcessing;
 class CsvImporterPlugin;
 
@@ -59,15 +60,19 @@ public:
        };
 
   Ui::CSVWizard*   ui;
+  QWizard*            m_wizard;
+  IntroPage*          m_pageIntro;
+  SeparatorPage*      m_pageSeparator;
+  BankingPage*        m_pageBanking;
+  InvestmentPage*     m_pageInvestment;
+  LinesDatePage*      m_pageLinesDate;
+  CompletionPage*     m_pageCompletion;
+  CSVDialog*          m_csvDialog;
   InvestProcessing*   m_investProcessing;
-  QWizard*         m_wizard;
-  IntroPage*       m_pageIntro;
-  SeparatorPage*   m_pageSeparator;
-  BankingPage*     m_pageBanking;
-  InvestmentPage*  m_pageInvestment;
-  LinesDatePage*   m_pageLinesDate;
-  CompletionPage*  m_pageCompletion;
-  CSVDialog*       m_csvDialog;
+  ConvertDate*        m_convertDate;
+  CsvUtil*            m_csvUtil;
+  Parse*              m_parse;
+  CsvImporterPlugin*  m_plugin;
 
   QPixmap        m_iconBack;
   QPixmap        m_iconCancel;
@@ -78,9 +83,59 @@ public:
   QPixmap        m_iconQIF;
 
   QList<QLabel*>   m_stageLabels;
+  QScrollBar*      m_vScrollBar;
+  QList<QTextCodec *>   m_codecs;
+  QComboBox*     m_comboBoxEncode;
+
+  QBrush           m_clearBrush;
+  QBrush           m_clearBrushText;
+  QBrush           m_colorBrush;
+  QBrush           m_colorBrushText;
+  QBrush           m_errorBrush;
+  QBrush           m_errorBrushText;
+
+  QString          m_fieldDelimiterCharacter;
+  QString          m_textDelimiterCharacter;
+  QString          m_decimalSymbol;
+  QString          m_thousandsSeparator;
+  QString          m_inFileName;
+  QString          m_fileType;
+  QString          m_date;
+  QString          m_profileName;
+  QString          m_priorCsvProfile;
+  QString          m_priorInvProfile;
+  QStringList      m_lineList;
+  QStringList      m_dateFormats;
+  QStringList      m_profileList;
+  QList<int>       m_memoColList;
 
   int              m_initialHeight;
   int              m_initialWidth;
+  int              m_pluginHeight;
+  int              m_pluginWidth;
+  int              m_fieldDelimiterIndex;
+  int              m_textDelimiterIndex;
+  int              m_decimalSymbolIndex;
+  int              m_ThousandsSeparatorIndex;
+  int              m_row;
+  int              m_maxColumnCount;
+  int              m_endColumn;
+  int              m_encodeIndex;
+  int              m_startLine;
+  int              m_endLine;
+  int              m_fileEndLine;
+  int              m_dateFormatIndex;
+  int              m_memoColumn;
+  int              m_dateColumn;
+
+  bool             m_accept;
+  bool             m_importError;
+  bool             m_importIsValid;
+  bool             m_errorFoundAlready;
+  bool             m_importNow;
+  bool             m_columnsNotSet;
+  bool             m_skipSetup;
+  bool             m_acceptAllInvalid;
 
   /**
   * This method is called after startup, to initialise some parameters.
@@ -89,7 +144,64 @@ public:
 
   void           showStage();
 
+  /**
+  * This method is called when the user chooses to add a new profile, It achieves this by copying
+  * the necessary basic parameters from an existing profile called "Profiles-New Profile###"
+  * in the resource file,
+  */
+  void           createProfile(QString newName);
+
+  /**
+  * This method is called when one of the radiobuttons is checked, to populate
+  * the sourceNames combobox from the resource file.
+  */
+  void           readSettingsInit();
+
+  /**
+  * Immediately after installation, there is no local config file.
+  * This method is called to copy the default version into the user's
+  * local folder.
+  */
+  void           readSettingsProfiles();
+
+  /**
+  * This method is called on opening the plugin.
+  * It will add all codec names to the encoding combobox.
+  */
+  void           setCodecList(const QList<QTextCodec *> &list);
+
+  /**
+  * This method is called on opening the plugin.
+  * It will populate a list with all available codecs.
+  */
+  void           findCodecs();
+
 public slots:
+
+  void           clearBackground();
+  void           markUnwantedRows();
+
+  /**
+  * This method is called when the user selects a new decimal symbol.  The
+  * UI is updated using the new symbol.
+  */
+  void           decimalSymbolSelected(int);
+  void           decimalSymbolSelected();
+
+  /**
+  * This method is called when the user selects a new decimal symbol.  The
+  * UI is updated using the new symbol, and on importing, the new symbol
+  * also will be used.
+  */
+  void           updateDecimalSymbol(int col);
+
+  void           thousandsSeparatorChanged();
+
+  /**
+  * This method is called when a field or text delimiter is changed.  The
+  * input file is reread using the new delimiter.
+  */
+  void           delimiterChanged(int index);
 
   /**
   * This method is called when the user clicks 'Clear selections'.
@@ -170,9 +282,37 @@ public slots:
   void           slotClose();
 
   /**
+  * This method checks if all dates in date column are valid.
+  */
+  bool            validateDateFormat(int dF);
+
+  /**
+  * If delimiter = -1 this method tries different fild
+  * delimiters to get the one with which file has the most columns.
+  * Otherwise it gets only column count for specified delimiter.
+  */
+  int            getMaxColumnCount(QStringList &lineList, int &delimiter);
+
+  /**
+  * This method gets file into buffer
+  * It will laso store file's end column and row.
+  */
+  void           readFile(const QString& fname);
+
+  /**
+  * It will display lines list in the UI table widget.
+  */
+  void           displayLines(const QStringList &lineList, Parse *parse);
+
+  /**
   * Called in order to adjust window size to suit the file,
   */
   void           updateWindowSize();
+
+  /**
+  * Appends memo field in lines buffer,
+  */
+  void           createMemoField(QStringList &columnTypeList);
 
   /**
   * This method is called when it is detected that the user has selected the
@@ -187,7 +327,6 @@ private:
   int              m_curId;
   int              m_lastId;
 
-  bool             eventFilter(QObject *object, QEvent *event);
   void             closeEvent(QCloseEvent *event);
   void             resizeEvent(QResizeEvent* ev);
 }
@@ -400,15 +539,31 @@ public:
 
   void                initializePage();
   void                setParent(CSVWizard* dlg);
+  bool                isComplete() const;
   bool                validatePage();
   int                 nextId() const;
-  bool                m_isColumnSelectionComplete;
 
   int                 m_trailerLines;
 
 signals:
   bool                isImportable();
 
+public slots:
+  /**
+  * This method is called when the user clicks 'Date format' and selects a
+  * format, which is used by convertDate().
+  */
+  void           dateFormatSelected(int dF);
+
+  /**
+  * This method is called when the user edits the startLine setting.
+  */
+  void           startLineChanged(int val);
+
+  /**
+  * This method is called when the user edits the lastLine setting.
+  */
+  void           endLineChanged(int val);
 private:
   CSVWizard*          m_wizDlg;
 

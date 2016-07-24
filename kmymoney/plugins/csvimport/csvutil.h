@@ -26,7 +26,7 @@ email                : agander93@gmail.com
 
 #include "investtransactioneditor.h"
 
-class CSVDialog;
+//class CSVDialog;
 class MyMoneyAccount;
 class InvestTransactionEditor;
 class TransactionEditor;
@@ -39,7 +39,7 @@ public:
   Parse();
   ~Parse();
 
-  CSVDialog*     m_csvDialog;
+//  CSVDialog*     m_csvDialog;
 
   /**
    * This method is used to parse each line of data, splitting it into
@@ -99,7 +99,6 @@ private :
   QString          m_fieldDelimiterCharacter;
   QString          m_textDelimiterCharacter;
   QString          m_thousandsSeparator;
-  QString          m_inBuffer;
 
   int              m_decimalSymbolIndex;
   int              m_fieldDelimiterIndex;

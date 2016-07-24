@@ -70,11 +70,11 @@ void CsvImporterPlugin::createActions()
 void CsvImporterPlugin::slotImportFile()
 {
   m_action->setEnabled(false);
-  CSVDialog *csvImporter = new CSVDialog;
+  CSVWizard *csvImporter = new CSVWizard;
   csvImporter->m_plugin = this;
   csvImporter->init();
 
-  connect(csvImporter->m_wiz, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
+  connect(csvImporter, SIGNAL(statementReady(MyMoneyStatement&)), this, SLOT(slotGetStatement(MyMoneyStatement&)));
   m_action->setEnabled(false);//  don't allow further plugins to start while this is open
 }
 

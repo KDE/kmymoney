@@ -50,8 +50,7 @@ QStringList Parse::parseLine(const QString& data)
   QString txt;
   QString txt1;
   m_fieldDelimiterCharacter = m_fieldDelimiterCharList[m_fieldDelimiterIndex];
-  m_inBuffer = data;
-  listIn = m_inBuffer.split(m_fieldDelimiterCharacter);  // firstly, split on m_fieldDelimiterCharacter
+  listIn = data.split(m_fieldDelimiterCharacter);  // firstly, split on m_fieldDelimiterCharacter
 
   QStringList::const_iterator constIterator;
 

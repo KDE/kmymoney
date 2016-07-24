@@ -10,7 +10,6 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmm_csvimport.desktop
 set(kmm_csvimport_PART_SRCS
   csvdialog.cpp
   csvwizard.cpp
-  investmentdlg.cpp
   investprocessing.cpp
   redefinedlg.cpp
   convdate.cpp
@@ -19,7 +18,6 @@ set(kmm_csvimport_PART_SRCS
 )
 
 ki18n_wrap_ui(kmm_csvimport_PART_SRCS
-  csvdialog.ui
   csvwizard.ui
   redefinedlgdecl.ui
   introwizardpage.ui

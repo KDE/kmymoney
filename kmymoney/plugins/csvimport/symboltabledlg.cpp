@@ -121,7 +121,7 @@ void SymbolTableDlg::displayLine(int& row, QString& symbol, const QString& name,
 void SymbolTableDlg::slotAccepted()
 {
   accept();
-  connect(this, SIGNAL(namesEdited()), m_csvDialog, SLOT(slotNamesEdited()));
+  connect(this, SIGNAL(namesEdited()), m_investProcessing, SLOT(slotNamesEdited()));
 
   emit namesEdited();
 }
@@ -235,10 +235,7 @@ void SymbolTableDlg::slotEditSecurityCompleted()
     security.m_strName = name;
     m_securityName = name;
     security.m_strSymbol = symbol;
-    m_csvDialog->m_investProcessing->m_listSecurities << security;
-    QTableWidgetItem *item = new QTableWidgetItem;
-    item->setText(symbol);
-    item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    m_investProcessing->m_listSecurities << security;
   }
   slotAccepted();
   return;

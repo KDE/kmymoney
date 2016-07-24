@@ -4,6 +4,8 @@
 begin                 : Sat Jan 01 2010
 copyright             : (C) 2010 by Allan Anderson
 email                 : agander93@gmail.com
+copyright             : (C) 2016 by Łukasz Wojniłowicz
+email                 : lukasz.wojnilowicz@gmail.com
 ****************************************************************************/
 
 /***************************************************************************
@@ -29,26 +31,13 @@ email                 : agander93@gmail.com
 #include <QtCore/QList>
 #include <QCompleter>
 #include <QComboBox>
-
-// ----------------------------------------------------------------------------
-// KDE Headers
-
 #include <QUrl>
-
-// ----------------------------------------------------------------------------
-// Project Headers
 
 #include <mymoneystatement.h>
 
-class ConvertDate;
-class CSVDialog;
-class InvestmentDlg;
 class RedefineDlg;
-class Parse;
-class CsvUtil;
-class MyMoneyStatement;
-class KAbstractFileWidget;
-
+class SymbolTableDlg;
+class CSVWizard;
 
 class InvestProcessing : public QObject
 {
@@ -65,14 +54,28 @@ public:
   InvestProcessing();
   ~InvestProcessing();
 
-  CSVDialog*        m_csvDialog;
-  InvestmentDlg*    m_investDlg;
-  Parse*            m_parse;
-  ConvertDate*      m_convertDat;
+  CSVWizard*        m_wiz;
   RedefineDlg*      m_redefine;
-  CsvUtil*          m_csvUtil;
+  SymbolTableDlg*   m_symbolTableDlg;
 
-  QComboBox*        m_comboBoxEncode;
+  int            m_payeeColumn;
+  int            m_amountColumn;
+  int            m_feeColumn;
+  int            m_priceColumn;
+  int            m_quantityColumn;
+  int            m_symbolColumn;
+  int            m_nameColumn;
+  int            m_feeIsPercentage;
+  int            m_typeColumn;
+  int            m_symbolRow;
+  int            m_securityNameIndex;
+  int            m_priceFraction;
+
+  QString        m_feeRate;
+  QString        m_minFee;
+  QString        m_nameFilter;
+
+  void           saveSettings();
 
   void           setTrInvestDataType(const QString& val);
 
@@ -100,12 +103,9 @@ public:
   void           setPreviousType(const QString& type);
 
   /**
-    * This method is called initially after an input file has been selected.
-    * It will call other routines to display file content and to complete the
-    * statement import. It will also be called to reposition the file after row
-    * selection, or to reread following encoding or delimiter change.
-    */
-  void           readFile(const QString& fname);
+  * This method feeds file buffer in investment lines parser.
+  */
+  void           createStatement();
 
   /**
   * This method is called when the user clicks 'Clear selections', in order to
@@ -135,18 +135,14 @@ public:
   */
   void           clearComboBoxText();
 
-  void           setInFileName(const QString& val);
-
   QString        columnType(int column);
   QString        invPath();
-  QString        inFileName();
-  QString        m_inFileName;
-  QString        m_buf;
   QString        m_invPath;
 
   QStringList    securityList();
   QStringList    m_symbolsList;
   QStringList    m_namesList;
+  QStringList    m_columnTypeList;  //  holds field types - date, payee, etc.
 
   QMap<QString, QString> m_map;
 
@@ -160,16 +156,11 @@ public:
   QStringList    m_buyList;
   QStringList    m_sellList;
   QStringList    m_removeList;
-  QStringList    m_dateFormats;
   QStringList    m_columnList;
   QStringList    m_securityList;
-  QStringList    m_lineList;
 
   QList<MyMoneyStatement::Security> m_listSecurities;
-  QList<int>     m_memoColList;
-  QList<int>     m_columnCountList;
 
-  int            lastLine();
   int            amountColumn();
   int            priceColumn();
   int            quantityColumn();
@@ -183,25 +174,14 @@ public:
 
   bool           importNow();
   bool           m_symbolTableScanned;
-  bool           m_firstRead;
 
   void           setSecurityName(QString name);
 
-  int            m_endColumn;
-  int            m_endLine;
-  int            m_fileEndLine;
-  int            m_startLine;
-  int            m_topLine;
-  int            m_row;
-  int            m_rowWidth;
-  int            m_fieldDelimiterIndex;
-
-  bool           m_screenUpdated;
-  bool           m_moreCommas;
-  bool           m_importCompleted;
+//  bool           m_importCompleted;
 
 public:
 signals:
+  bool           isImportable();
   /**
   * This signal is raised when the plugin has completed a transaction.  This
   * then needs to be processed by MyMoneyStatement.
@@ -209,6 +189,8 @@ signals:
   void           statementReady(MyMoneyStatement&);
 
 public slots:
+
+  void           slotNamesEdited();
 
   /**
   * This method is called when the user clicks 'Open File', and opens
@@ -227,12 +209,6 @@ public slots:
   * encoding setting.  The file is re-read with the corresponding codec.
   */
   void           encodingChanged(int);
-
-  /**
-  * This method is called when the user selects a new field delimiter.  The
-  * input file is reread using the current delimiter.
-  */
-  void           fieldDelimiterChanged();
 
   /**
   * This method is called if any of the inputs (i.e Amount/Fee column selected or Fee rate entered)
@@ -299,28 +275,10 @@ public slots:
   void           slotImportClicked();
 
   /**
-  * This method is called when the user clicks the Date button and selects
-  * the date format for the input file.
-  */
-  void           dateFormatSelected(int dF);
-
-  /**
   * This method is called should the user click 'Save as QIF'. A File Selection
   * dialog is presented and the data is output in QIF format.
   */
   void           saveAs();
-
-  /**
-  * This method is called when the user selects the start line.  The requested
-  * start line  value is saved.
-  */
-  void           startLineChanged(int);
-  void           startLineChanged();
-  /**
-  * This method is called when the user selects the end line.  The requested
-  * end line  value is saved, to be used on import.
-  */
-  void           endLineChanged(int val);
 
   /**
   * This method is called when the activity 'Type/Action' column is activated.
@@ -360,12 +318,6 @@ private:
   void           disableInputs();
 
   /**
-  * This method is called on opening the input file.
-  * It will display a line in the UI table widget.
-  */
-  void           displayLine(const QString&);
-
-  /**
   * This method is called when an input file has been selected.
   * It will enable the UI elements for column selection.
   */
@@ -376,12 +328,6 @@ private:
   * MyMoneyStatement, ready for importing.
   */
   void           investCsvImport(MyMoneyStatement&);
-
-  /**
-  * This method is called on opening the plugin.
-  * It will populate a list with all available codecs.
-  */
-  void           findCodecs();
 
   /**
   * This method is called during input.  It validates the action types
@@ -410,12 +356,6 @@ private:
   int            columnNumber(const QString& column);
 
   /**
-  * This method is called on opening the plugin.
-  * It will add all codec names to the encoding combobox.
-  */
-  void           setCodecList(const QList<QTextCodec *> &list);
-
-  /**
     * This method is used to get the account id of the split for
     * a transaction from the text found in the QIF $ or L record.
     * If an account with the name is not found, the user is asked
@@ -439,64 +379,29 @@ private:
     QDate        date;
   }              m_trInvestData;
 
-  QList<csvSplit> m_csvSplitsList;
-  QList<QTextCodec *>   m_codecs;
-
   bool           m_amountSelected;
   bool           m_brokerage;
   bool           m_brokerageItems;
   bool           m_importNow;
   bool           m_dateSelected;
   bool           m_feeSelected;
-  bool           m_firstPass;
   bool           m_memoSelected;
   bool           m_priceSelected;
   bool           m_quantitySelected;
   bool           m_typeSelected;
-  bool           m_memoColCopied;
-  bool           m_typeColCopied;
-  bool           m_nameColCopied;
   bool           m_symbolSelected;
   bool           m_nameSelected;
   bool           m_needFieldDelimiter;
 
-  int            m_dateFormatIndex;
-  int            m_maxColumnCount;
-  int            m_encodeIndex;
-  int            m_payeeColumn;
-  int            m_amountColumn;
-  int            m_dateColumn;
-  int            m_feeColumn;
-  int            m_memoColumn;
-  int            m_priceColumn;
-  int            m_previousColumn;
-  int            m_quantityColumn;
-  int            m_symbolColumn;
-  int            m_nameColumn;
-  int            m_feeIsPercentage;
-  int            m_textDelimiterIndex;
-  int            m_typeColumn;
-  int            m_symbolRow;
-  int            m_maxRowWidth;
-  int            m_initWindow;
-  int            m_screenWidth;
-
   QString        m_accountName;
   QString        m_brokerBuff;
-  QString        m_dateFormat;
-  QString        m_fieldDelimiterCharacter;
-  QString        m_textDelimiterCharacter;
   QString        m_inBuffer;
-
   QString        m_outBuffer;
   QString        m_previousType;
   QString        m_securityName;
   QString        m_tempBuffer;
 
-  QStringList    m_columnTypeList;  //  holds field types - date, payee, etc.
-
   QUrl           m_url;
-  QFile*         m_inFile;
 
   QCompleter*     m_completer;
 

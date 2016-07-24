@@ -22,7 +22,7 @@ email                 : agander93@gmail.com
 
 #include "ui_symboltabledlg.h"
 
-class InvestmentProcessing;
+class InvestProcessing;
 class CSVDialog;
 
 class SymbolTableDlgDecl : public QWidget, public Ui::SymbolTableDlgDecl
@@ -42,10 +42,10 @@ public:
   ~SymbolTableDlg();
 
   SymbolTableDlgDecl* m_widget;
-  CSVDialog*       m_csvDialog;
+  InvestProcessing*   m_investProcessing;
+  QString             m_securityName;
 
-  QString          m_securityName;
-
+  int              m_validRowCount;
   /**
   * This method displays the investment symbol and name.  If it already exists, this is flagged.
   * If not, the user may edit the name.
@@ -63,7 +63,6 @@ private:
   int              m_mainHeight;
   int              m_tableHeight;
   bool             m_firstPass;
-  int              m_validRowCount;
   QPushButton*     m_buttonOK;
   QPushButton*     m_buttonCancel;
 
