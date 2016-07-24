@@ -48,6 +48,8 @@ private slots:
   void testIsLoan();
   void addReconciliation();
   void reconciliationHistory();
+  void amountType();
+  void amountType_data();
 };
 
 #endif

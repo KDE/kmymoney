@@ -864,3 +864,29 @@ QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
   return list;
 }
 
+MyMoneyAccount::amountTypeE MyMoneyAccount::amountType(MyMoneyMoney value) const
+{
+  amountTypeE rc = amountTypeCredit;
+  switch(accountGroup()) {
+    default:
+    case MyMoneyAccount::Asset:
+    case MyMoneyAccount::Expense:
+      if(value.isNegative()) {
+        rc = amountTypeCredit;
+      } else {
+        rc = amountTypeDebit;
+      }
+      break;
+
+    case MyMoneyAccount::Liability:
+    case MyMoneyAccount::Income:
+    case MyMoneyAccount::Equity:
+      if(value.isNegative()) {
+        rc = amountTypeDebit;
+      } else {
+        rc = amountTypeCredit;
+      }
+      break;
+  }
+  return rc;
+}
