@@ -43,9 +43,8 @@ private slots:
   void testHasReferenceTo();
   void testAdjustBalance();
   void testSetClosed();
-  void testIsIncomeExpense();
-  void testIsAssetLiability();
-  void testIsLoan();
+  void specialAccountTypes();
+  void specialAccountTypes_data();
   void addReconciliation();
   void reconciliationHistory();
   void amountType();

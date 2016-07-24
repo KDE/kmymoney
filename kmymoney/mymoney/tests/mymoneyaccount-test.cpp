@@ -472,172 +472,45 @@ void MyMoneyAccountTest::testSetClosed()
   QVERIFY(a.isClosed() == false);
 }
 
-void MyMoneyAccountTest::testIsIncomeExpense()
+void MyMoneyAccountTest::specialAccountTypes_data()
 {
-  MyMoneyAccount a;
+  QTest::addColumn<MyMoneyAccount::accountTypeE>("accountType");
+  QTest::addColumn<bool>("incomeExpense");
+  QTest::addColumn<bool>("assetLibility");
+  QTest::addColumn<bool>("loan");
 
-  a.setAccountType(MyMoneyAccount::UnknownAccountType);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::Checkings);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::Savings);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::Cash);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::CreditCard);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::Loan);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::CertificateDep);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::Investment);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::MoneyMarket);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::Asset);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::Liability);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::Currency);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::Income);
-  QVERIFY(a.isIncomeExpense() == true);
-
-  a.setAccountType(MyMoneyAccount::Expense);
-  QVERIFY(a.isIncomeExpense() == true);
-
-  a.setAccountType(MyMoneyAccount::AssetLoan);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::Stock);
-  QVERIFY(a.isIncomeExpense() == false);
-
-  a.setAccountType(MyMoneyAccount::Equity);
-  QVERIFY(a.isIncomeExpense() == false);
+  // positive and null is debit
+  QTest::newRow("unknown") << MyMoneyAccount::UnknownAccountType << false << false << false;
+  QTest::newRow("checking") << MyMoneyAccount::Checkings << false << true << false;
+  QTest::newRow("savings") << MyMoneyAccount::Savings << false << true << false;
+  QTest::newRow("cash") << MyMoneyAccount::Cash << false << true << false;
+  QTest::newRow("investment") << MyMoneyAccount::Investment << false << true << false;
+  QTest::newRow("asset") << MyMoneyAccount::Asset << false << true << false;
+  QTest::newRow("currency") << MyMoneyAccount::Currency << false << true << false;
+  QTest::newRow("expense") << MyMoneyAccount::Expense << true << false << false;
+  QTest::newRow("moneymarket") << MyMoneyAccount::MoneyMarket << false << true << false;
+  QTest::newRow("certificatedeposit") << MyMoneyAccount::CertificateDep << false << true << false;
+  QTest::newRow("assetloan") << MyMoneyAccount::AssetLoan << false << true << true;
+  QTest::newRow("stock") << MyMoneyAccount::Stock << false << true << false;
+  QTest::newRow("creditcard") << MyMoneyAccount::CreditCard << false << true << false;
+  QTest::newRow("loan") << MyMoneyAccount::Loan << false << true << true;
+  QTest::newRow("liability") << MyMoneyAccount::Liability << false << true << false;
+  QTest::newRow("income") << MyMoneyAccount::Income << true << false << false;
+  QTest::newRow("equity") << MyMoneyAccount::Equity << false << false << false;
 }
 
-void MyMoneyAccountTest::testIsAssetLiability()
+void MyMoneyAccountTest::specialAccountTypes()
 {
+  QFETCH(MyMoneyAccount::accountTypeE, accountType);
+  QFETCH(bool, incomeExpense);
+  QFETCH(bool, assetLibility);
+  QFETCH(bool, loan);
+
   MyMoneyAccount a;
-
-  a.setAccountType(MyMoneyAccount::UnknownAccountType);
-  QVERIFY(a.isAssetLiability() == false);
-
-  a.setAccountType(MyMoneyAccount::Checkings);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::Savings);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::Cash);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::CreditCard);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::Loan);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::CertificateDep);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::Investment);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::MoneyMarket);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::Asset);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::Liability);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::Currency);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::Income);
-  QVERIFY(a.isAssetLiability() == false);
-
-  a.setAccountType(MyMoneyAccount::Expense);
-  QVERIFY(a.isAssetLiability() == false);
-
-  a.setAccountType(MyMoneyAccount::AssetLoan);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::Stock);
-  QVERIFY(a.isAssetLiability() == true);
-
-  a.setAccountType(MyMoneyAccount::Equity);
-  QVERIFY(a.isAssetLiability() == false);
-}
-
-void MyMoneyAccountTest::testIsLoan()
-{
-  MyMoneyAccount a;
-
-  a.setAccountType(MyMoneyAccount::UnknownAccountType);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::Checkings);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::Savings);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::Cash);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::CreditCard);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::Loan);
-  QVERIFY(a.isLoan() == true);
-
-  a.setAccountType(MyMoneyAccount::CertificateDep);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::Investment);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::MoneyMarket);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::Asset);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::Liability);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::Currency);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::Income);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::Expense);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::AssetLoan);
-  QVERIFY(a.isLoan() == true);
-
-  a.setAccountType(MyMoneyAccount::Stock);
-  QVERIFY(a.isLoan() == false);
-
-  a.setAccountType(MyMoneyAccount::Equity);
-  QVERIFY(a.isLoan() == false);
+  a.setAccountType(accountType);
+  QCOMPARE(a.isIncomeExpense(), incomeExpense);
+  QCOMPARE(a.isAssetLiability(), assetLibility);
+  QCOMPARE(a.isLoan(), loan);
 }
 
 void MyMoneyAccountTest::addReconciliation()
