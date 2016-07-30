@@ -70,11 +70,10 @@ find_package(Doxygen)
 if(DOXYGEN_FOUND)
   set(APIDOC_DIR ${CMAKE_CURRENT_BINARY_DIR}/apidocs)
 
-  make_directory(${APIDOC_DIR})
-
+  make_directory("${APIDOC_DIR}")
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney.doxygen.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen IMMEDIATE)
 
-  add_custom_target(apidoc ${DOXYGEN} ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen)
+  add_custom_target(apidoc "${DOXYGEN}" "${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen")
 endif(DOXYGEN_FOUND)
 
 
