@@ -44,7 +44,7 @@ target_link_libraries(kmm_kbanking
 set(KMM_BANKING_DEBUG_OPTIONS)
 # preprocessor definitions in case this is a debug build
 string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
-if("${CMAKE_BUILD_TYPE_TOLOWER}" MATCHES "^debug(full)?$")
+if("${CMAKE_BUILD_TYPE_TOLOWER}" MATCHES "debug")
   file(READ kmm_kbanking_debug.rc KMM_BANKING_DEBUG_OPTIONS)
 endif()
 configure_file(kmm_kbanking.rc "${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.rc" @ONLY)
