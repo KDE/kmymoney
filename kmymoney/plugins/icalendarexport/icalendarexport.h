@@ -31,9 +31,10 @@ class KPluginInfo;
 class KMMiCalendarExportPlugin: public KMyMoneyPlugin::Plugin
 {
   Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kmymoney.plugins.icalendarexport" FILE "kmm_icalendarexport.json")
 
 public:
-  KMMiCalendarExportPlugin(QObject *parent, const QVariantList&);
+  KMMiCalendarExportPlugin();
   ~KMMiCalendarExportPlugin();
 
 protected slots:

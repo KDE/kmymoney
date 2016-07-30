@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 #include "csvimporterplugin.h"
-#include <assert.h>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -29,7 +29,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KActionCollection>
 #include <KLocalizedString>
 
@@ -40,10 +39,8 @@
 #include "mymoneystatement.h"
 #include "csvwizard.h"
 
-K_PLUGIN_FACTORY_WITH_JSON(CsvImporterFactory, "kmm_csvimport.json", registerPlugin<CsvImporterPlugin>();)
-
-CsvImporterPlugin::CsvImporterPlugin(QObject *parent, const QVariantList&) :
-    KMyMoneyPlugin::Plugin(parent, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
+CsvImporterPlugin::CsvImporterPlugin() :
+    KMyMoneyPlugin::Plugin(nullptr, "csvimport"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   setComponentName("kmm_csvimport", i18n("CSV importer"));
   setXMLFile("kmm_csvimport.rc");

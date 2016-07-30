@@ -38,8 +38,6 @@
 #include "schedulestoicalendar.h"
 #include "pluginsettings.h"
 
-K_PLUGIN_FACTORY_WITH_JSON(ICalendarExportFactory, "kmm_icalendarexport.json", registerPlugin<KMMiCalendarExportPlugin>();)
-
 struct KMMiCalendarExportPlugin::Private {
   QAction* m_action;
   QString  m_profileName;
@@ -47,8 +45,8 @@ struct KMMiCalendarExportPlugin::Private {
   KMMSchedulesToiCalendar m_exporter;
 };
 
-KMMiCalendarExportPlugin::KMMiCalendarExportPlugin(QObject *parent, const QVariantList&)
-    : KMyMoneyPlugin::Plugin(parent, "iCalendar"/*must be the same as X-KDE-PluginInfo-Name*/),
+KMMiCalendarExportPlugin::KMMiCalendarExportPlugin()
+    : KMyMoneyPlugin::Plugin(nullptr, "iCalendar"/*must be the same as X-KDE-PluginInfo-Name*/),
     d(new Private)
 {
   d->m_profileName = "iCalendarPlugin";

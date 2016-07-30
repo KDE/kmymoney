@@ -2,6 +2,7 @@
  * This file is part of KMyMoney, A Personal Finance Manager for KDE
  * Copyright (C) 2014-2015 Romain Bignon <romain@symlink.me>
  * Copyright (C) 2014-2015 Florent Fourcot <weboob@flo.fourcot.fr>
+ * Copyright (C) 2016 Christian David <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,17 +37,15 @@ struct WeboobPlugin::Private
   WebAccountSettings* accountSettings;
 };
 
-K_PLUGIN_FACTORY_WITH_JSON(WeboobFactory, "kmm_weboob.json", registerPlugin<WeboobPlugin>();)
-
-WeboobPlugin::WeboobPlugin(QObject *parent, const QVariantList&) :
-    KMyMoneyPlugin::Plugin(parent, "Weboob"/*must be the same as X-KDE-PluginInfo-Name*/),
+WeboobPlugin::WeboobPlugin() :
+    KMyMoneyPlugin::Plugin(),
     KMyMoneyPlugin::OnlinePlugin(),
     d(new Private())
 {
   setComponentName("kmm_weboob", i18n("Weboob"));
   setXMLFile("kmm_weboob.rc");
 
-  connect(&d->watcher, SIGNAL(finished()), this, SLOT(gotAccount()));
+  connect(&d->watcher, &QFutureWatcher<Weboob::Account>::finished, this, &WeboobPlugin::gotAccount);
 }
 
 WeboobPlugin::~WeboobPlugin()
@@ -157,7 +156,7 @@ void WeboobPlugin::gotAccount()
     Weboob::Transaction tr = it.next();
     MyMoneyStatement::Transaction kt;
 
-    kt.m_strBankID = QString("ID ") + tr.id;
+    kt.m_strBankID = QLatin1String("ID ") + tr.id;
     kt.m_datePosted = tr.rdate;
     kt.m_amount = tr.amount;
     kt.m_strMemo = tr.raw;
@@ -171,4 +170,3 @@ void WeboobPlugin::gotAccount()
   d->progress->hide();
 }
 
-#include "plugin.moc"

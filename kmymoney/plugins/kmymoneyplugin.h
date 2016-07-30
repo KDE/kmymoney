@@ -1,19 +1,21 @@
-/***************************************************************************
-                          kmymoneyplugin.h
-                             -------------------
-    begin                : Wed Jan 5 2005
-    copyright            : (C) 2005 Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * This file is part of KMyMoney, A Personal Finance Manager for KDE
+ * Copyright (C) 2005 Thomas Baumgart <ipwizard@users.sourceforge.net>
+ * Copyright (C) 2015 Christian Dávid <christian-david@web.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef KMYMONEYPLUGIN_H
 #define KMYMONEYPLUGIN_H
@@ -26,7 +28,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kxmlguiclient.h>
+#include <KXMLGUIClient>
 class KAction;
 class KToggleAction;
 
@@ -38,25 +40,34 @@ class KToggleAction;
 #include <importinterface.h>
 #include <kmm_plugin_export.h>
 
+/**
+ * @defgroup KMyMoneyPlugin
+ *
+ * KMyMoney knows several types of plugins. The most common and generic one is KMyMoneyPlugin::Plugin. There are seveal other classes a plugin can inherit from
+ * to create a native integration into KMyMoney.
+ *
+ * Another group of plugins are just loaded on demand and offer special functions with a tight integration into KMyMoney. Whenever possible you should use this kind of plugins.
+ * At the moment this are the onlineTask and payeeIdentifierData.
+ *
+ * @{
+ */
 
 namespace KMyMoneyPlugin
 {
 
 /**
-  * This class describes the interface between the KMyMoney
-  * application and it's plugins. All plugins must be derived
-  * from this class.
-  *
-  * A good tutorial on how to design and develop a plugin
-  * structure for a KDE application (e.g. KMyMoney) can be found at
-  * http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
-  *
-  */
+ * This class describes the interface between KMyMoney and it's plugins.
+ *
+ * The plugins are based on Qt 5's plugin system. So you must compile json information into the plugin.
+ * KMyMoney looks into the folder "${PLUGIN_INSTALL_DIR}/kmymoney/" and loads all plugins found there (if the user did not deactivate the plugin).
+ *
+ * @see http://doc.qt.io/qt-5/plugins-howto.html
+ */
 class KMM_PLUGIN_EXPORT Plugin : public QObject, public KXMLGUIClient
 {
   Q_OBJECT
 public:
-  Plugin(QObject* parent, const char* name);
+  Plugin(QObject* parent = nullptr, const char* name = "");
   virtual ~Plugin();
 
 protected:
@@ -204,4 +215,11 @@ public:
 };
 
 } // end of namespace
+
+Q_DECLARE_INTERFACE(KMyMoneyPlugin::OnlinePlugin, "org.kmymoney.plugin.onlineplugin")
+Q_DECLARE_INTERFACE(KMyMoneyPlugin::ImporterPlugin, "org.kmymoney.plugin.importerplugin")
+
+
+/** @} */
+
 #endif

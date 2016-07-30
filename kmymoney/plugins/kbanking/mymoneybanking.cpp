@@ -47,7 +47,6 @@
 
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KPluginFactory>
 #include <KActionCollection>
 #include <QMenu>
 #include <KIconLoader>
@@ -93,8 +92,6 @@
 // Added an option to open the chipTanDialog from the menu for debugging purposes
 #include "chiptandialog.h"
 #endif
-
-K_PLUGIN_FACTORY_WITH_JSON(KBankingFactory, "kmm_kbanking.json", registerPlugin<KBankingPlugin>();)
 
 class KBankingPlugin::Private
 {
@@ -156,8 +153,8 @@ public:
 };
 
 
-KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
-    KMyMoneyPlugin::OnlinePluginExtended(parent, "KBanking"/*must be the same as X-KDE-PluginInfo-Name*/),
+KBankingPlugin::KBankingPlugin() :
+    KMyMoneyPlugin::OnlinePluginExtended(nullptr, "KBanking"/*must be the same as X-KDE-PluginInfo-Name*/),
     d(new Private),
     m_configAction(nullptr),
     m_importAction(nullptr),

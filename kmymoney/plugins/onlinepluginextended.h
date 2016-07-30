@@ -93,9 +93,18 @@ public:
   virtual ~onlineTaskFactory() {}
 };
 
+class KMM_PLUGIN_EXPORT payeeIdentifierDataFactory
+{
+public:
+  virtual payeeIdentifierData* createPayeeIdentifier(const QString& payeeIdentifierIid) const = 0;
+  // Make g+ happy
+  virtual ~payeeIdentifierDataFactory() {}
+};
+
 } // namespace KMyMoneyPlugin
 
 Q_DECLARE_INTERFACE(KMyMoneyPlugin::OnlinePluginExtended, "org.kmymoney.plugin.onlinepluginextended");
 Q_DECLARE_INTERFACE(KMyMoneyPlugin::onlineTaskFactory, "org.kmymoney.plugin.onlinetaskfactory");
+Q_DECLARE_INTERFACE(KMyMoneyPlugin::payeeIdentifierDataFactory, "org.kmymoney.plugin.payeeidentifierfactory");
 
 #endif // ONLINEPLUGINEXTENDED_H

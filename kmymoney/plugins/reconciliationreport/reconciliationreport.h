@@ -31,9 +31,10 @@ class KPluginInfo;
 class KMMReconciliationReportPlugin: public KMyMoneyPlugin::Plugin
 {
   Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kmymoney.plugins.reconcilationreport" FILE "kmm_reconciliationreport.json")
 
 public:
-  KMMReconciliationReportPlugin(QObject* parent, const QVariantList& name);
+  KMMReconciliationReportPlugin();
 
 protected slots:
   // reconciliation of an account has finished

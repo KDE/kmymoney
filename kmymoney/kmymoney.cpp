@@ -7322,16 +7322,14 @@ void KMyMoneyApp::loadPlugins()
 {
   d->m_pluginLoader = new KMyMoneyPlugin::PluginLoader(this);
 
-  connect(d->m_pluginLoader, SIGNAL(plug(KPluginInfo*)), this, SLOT(slotPluginPlug(KPluginInfo*)));
-  connect(d->m_pluginLoader, SIGNAL(unplug(KPluginInfo*)), this, SLOT(slotPluginUnplug(KPluginInfo*)));
+  connect(d->m_pluginLoader, &KMyMoneyPlugin::PluginLoader::plug, this, &KMyMoneyApp::slotPluginPlug);
+  connect(d->m_pluginLoader, &KMyMoneyPlugin::PluginLoader::unplug, this, &KMyMoneyApp::slotPluginUnplug);
 
   d->m_pluginLoader->loadPlugins();
 }
 
-void KMyMoneyApp::slotPluginPlug(KPluginInfo* info)
+void KMyMoneyApp::slotPluginPlug(KMyMoneyPlugin::Plugin* plugin)
 {
-  KMyMoneyPlugin::Plugin* plugin = d->m_pluginLoader->getPluginFromInfo(info);
-
   // check for online plugin
   KMyMoneyPlugin::OnlinePlugin* op = dynamic_cast<KMyMoneyPlugin::OnlinePlugin *>(plugin);
   // check for extended online plugin
@@ -7356,6 +7354,9 @@ void KMyMoneyApp::slotPluginPlug(KPluginInfo* info)
 
 void KMyMoneyApp::slotPluginUnplug(KPluginInfo* info)
 {
+  qWarning("Unplugging plugins is not supported. Please restart KMyMoney.");
+  //! @todo Enable pluugin unloading
+#if 0
   KMyMoneyPlugin::Plugin* plugin = d->m_pluginLoader->getPluginFromInfo(info);
 
   // check for online plugin
@@ -7373,6 +7374,8 @@ void KMyMoneyApp::slotPluginUnplug(KPluginInfo* info)
     d->m_importerPlugins.remove(plugin->objectName());
 
   slotUpdateActions();
+  
+#endif
 }
 
 void KMyMoneyApp::slotAutoSave()

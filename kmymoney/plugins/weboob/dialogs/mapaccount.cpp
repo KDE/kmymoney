@@ -25,7 +25,7 @@
 #include <klocalizedstring.h>
 
 #include "mapaccount.h"
-#include "weboob.h"
+#include "../weboob.h"
 
 struct WbMapAccountDialog::Private
 {

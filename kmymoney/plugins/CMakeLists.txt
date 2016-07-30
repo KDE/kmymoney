@@ -1,11 +1,7 @@
 add_subdirectory( onlinetasks )
-
 add_subdirectory( ibanbicdata )
-
 add_subdirectory( interfaces )
-
 add_subdirectory( csvimport )
-
 add_subdirectory( csvexport )
 
 if(LIBOFX_FOUND)
@@ -72,7 +68,6 @@ install(FILES ${plugins_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney  COMPONENT Devel)
 
 install(FILES
-  kmymoney-plugin.desktop
   kmymoney-importerplugin.desktop
   kmymoney-onlinetaskui.desktop
   kmymoney-payeeidentifierdelegate.desktop

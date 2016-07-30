@@ -19,14 +19,15 @@
 #ifndef SEPAONLINETASKSLOADER_H
 #define SEPAONLINETASKSLOADER_H
 
-#include <kmymoney/plugins/kmymoneyplugin.h>
+#include <kmymoney/plugins/onlinepluginextended.h>
 
-class sepaOnlineTasksLoader : public KMyMoneyPlugin::Plugin
+class sepaOnlineTasksLoader : public QObject, public KMyMoneyPlugin::onlineTaskFactory
 {
   Q_OBJECT
-
+  Q_INTERFACES(KMyMoneyPlugin::onlineTaskFactory)
 public:
-  sepaOnlineTasksLoader(QObject* parent, const QVariantList&);
+  sepaOnlineTasksLoader(QObject* parent = nullptr, const QVariantList& options = QVariantList{});
+  virtual onlineTask* createOnlineTask(const QString& taskId) const;
 
 };
 

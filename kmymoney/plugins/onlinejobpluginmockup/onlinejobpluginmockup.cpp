@@ -26,12 +26,8 @@
 #include "plugins/onlinetasks/sepa/tasks/sepaonlinetransfer.h"
 #include "sepacredittransfersettingsmockup.h"
 
-// TODO: port KF5
-//K_PLUGIN_FACTORY(KBankingFactory, registerPlugin<onlineJobPluginMockup>();)
-//K_EXPORT_PLUGIN(KBankingFactory("onlinejobpluginmockup"))
-
-onlineJobPluginMockup::onlineJobPluginMockup(QObject* parent, const QVariantList&)
-    : OnlinePluginExtended(parent, "onlinejobpluginmockup")
+onlineJobPluginMockup::onlineJobPluginMockup()
+    : OnlinePluginExtended(nullptr, "onlinejobpluginmockup")
 {
   qDebug("onlineJobPluginMockup should be used during development only!");
 }

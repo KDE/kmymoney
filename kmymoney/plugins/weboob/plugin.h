@@ -34,10 +34,12 @@
 class WeboobPlugin : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::OnlinePlugin
 {
   Q_OBJECT
+  Q_INTERFACES(KMyMoneyPlugin::OnlinePlugin)
+  Q_PLUGIN_METADATA(IID "org.kmymoney.plugins.weboob" FILE "kmm_weboob.json")
 
 public:
   Weboob weboob;
-  WeboobPlugin(QObject *parent, const QVariantList&);
+  WeboobPlugin();
   virtual ~WeboobPlugin();
 
   void protocols(QStringList& protocolList) const;

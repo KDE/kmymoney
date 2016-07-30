@@ -41,9 +41,11 @@
 class onlineJobPluginMockup : public KMyMoneyPlugin::OnlinePluginExtended
 {
   Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kmymoney.plugins.onlineJobPluginMockup" FILE "kmm_onlinejobpluginmockup.json")
+
 public:
 
-  onlineJobPluginMockup(QObject *parent, const QVariantList&);
+  onlineJobPluginMockup();
 
   void protocols(QStringList& protocolList) const;
   QWidget* accountConfigTab(const MyMoneyAccount& account, QString& tabName);

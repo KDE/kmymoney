@@ -31,9 +31,10 @@ class KPluginInfo;
 class KMMPrintCheckPlugin: public KMyMoneyPlugin::Plugin
 {
   Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kmymoney.plugins.printcheck" FILE "kmm_printcheck.json")
 
 public:
-  KMMPrintCheckPlugin(QObject *parent, const QVariantList&);
+  KMMPrintCheckPlugin();
   ~KMMPrintCheckPlugin();
 
 private:

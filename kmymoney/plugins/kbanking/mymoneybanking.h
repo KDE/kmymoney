@@ -64,10 +64,10 @@ class KBankingPlugin : public KMyMoneyPlugin::OnlinePluginExtended
   friend class KMyMoneyBanking;
 
   Q_OBJECT
-  Q_INTERFACES(KMyMoneyPlugin::OnlinePluginExtended)
+  Q_PLUGIN_METADATA(IID "org.kmymoney.plugins.kbanking" FILE "kbanking.json")
 
 public:
-  KBankingPlugin(QObject *parent, const QVariantList&);
+  KBankingPlugin();
   virtual ~KBankingPlugin();
 
   bool importStatement(const MyMoneyStatement& s);

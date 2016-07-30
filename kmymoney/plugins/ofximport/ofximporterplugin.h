@@ -44,9 +44,12 @@ class KOnlineBankingStatus;
 class OfxImporterPlugin : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::ImporterPlugin, public KMyMoneyPlugin::OnlinePlugin
 {
   Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kmymoney.plugins.ofximport" FILE "ofximport.json")
+  Q_INTERFACES(KMyMoneyPlugin::ImporterPlugin)
+  Q_INTERFACES(KMyMoneyPlugin::OnlinePlugin)
+  
 public:
-  explicit OfxImporterPlugin(QObject *parent, const QVariantList&);
-
+  explicit OfxImporterPlugin();
   ~OfxImporterPlugin();
 
   /**

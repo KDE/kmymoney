@@ -29,8 +29,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-KMyMoneyPlugin::Plugin::Plugin(QObject* o, const char* name) :
-    QObject(o)
+KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const char* name) :
+    QObject(),
+    KXMLGUIClient()
 {
   setObjectName(name);
 }

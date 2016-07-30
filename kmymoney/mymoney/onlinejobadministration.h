@@ -262,9 +262,6 @@ private:
   template<class T>
   friend class onlineJobTyped;
 
-  // Must be able to call task creators
-  friend class taskConverterGermanToSepa;
-
   // Must be able to call createOnlineTaskFromSqlDatabase()
   friend class MyMoneyStorageSql;
 
@@ -278,7 +275,7 @@ private:
    *
    * @return A pointer, you do *not* gain ownership! Can be 0 if something went wrong.
    *
-   * @internal Made to be forward compatible whan onlineTask are loaded as plugins.
+   * @internal Made to be forward compatible when onlineTask are loaded as plugins.
    */
   inline onlineTask* rootOnlineTask(const QString& name) const;
 

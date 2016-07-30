@@ -27,16 +27,24 @@
 
 K_PLUGIN_FACTORY_WITH_JSON(sepaOnlineTasksFactory,
                            "kmymoney-sepaorders.json",
-                           registerPlugin<sepaOnlineTasksLoader>();
+                           registerPlugin<sepaOnlineTasksLoader>("sepaOnlineTasks");
                            registerPlugin<sepaCreditTransferEdit>("sepaCreditTransferUi");
                            registerPlugin<sepaStoragePlugin>("sepaSqlStoragePlugin");
                           )
 
-sepaOnlineTasksLoader::sepaOnlineTasksLoader(QObject* parent, const QVariantList&)
-    : KMyMoneyPlugin::Plugin::Plugin(parent, "sepaOnlineTasksLoader")
+sepaOnlineTasksLoader::sepaOnlineTasksLoader(QObject* parent, const QVariantList& /*options*/)
+  : QObject(parent),
+  onlineTaskFactory()
 {
-  onlineJobAdministration::instance()->registerOnlineTask(new sepaOnlineTransferImpl);
 }
 
-// Needed for K_PLUGIN_FACTORY...
+onlineTask* sepaOnlineTasksLoader::createOnlineTask(const QString& taskId) const
+{
+  if (taskId == sepaOnlineTransferImpl::name())
+    return new sepaOnlineTransferImpl;
+  
+  return nullptr;
+}
+
+// Needed for K_PLUGIN_FACTORY
 #include "sepaonlinetasksloader.moc"

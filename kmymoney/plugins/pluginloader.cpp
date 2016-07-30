@@ -17,6 +17,8 @@
 
 #include "pluginloader.h"
 
+#include <memory>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -24,14 +26,14 @@
 #include <QCheckBox>
 #include <QLayout>
 #include <QByteArray>
+#include <QPluginLoader>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginInfo>
+#include <KLocalizedString>
+#include <KPluginLoader>
 #include <KPluginSelector>
-#include <KServiceTypeTrader>
-#include <KService>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -46,102 +48,83 @@ namespace KMyMoneyPlugin
 // PluginLoader
 //
 //---------------------------------------------------------------------
-static PluginLoader* s_instance = 0;
+static PluginLoader* s_instance = nullptr;
 
-typedef QMap<QString, Plugin*> PluginsMap;
-
-struct PluginLoader::Private {
-  QObject*          m_parent;
-  KPluginInfo::List m_pluginList;
-  KPluginSelector*  m_pluginSelector;
-  PluginsMap        m_loadedPlugins;
-};
-
-PluginLoader::PluginLoader(QObject* parent) : d(new Private)
+PluginLoader::PluginLoader(QObject* parent)
+  : QObject(parent)
 {
-  Q_ASSERT(s_instance == 0);
+  Q_ASSERT(s_instance == nullptr);
   s_instance = this;
 
-  d->m_parent = parent;
+  // Initialize the PluginSelector
+  auto plugins = KPluginLoader::findPlugins("kmymoney");
+  
+  QList< KPluginInfo > pluginInfo;
+  pluginInfo.reserve(plugins.count());
+  auto end = plugins.cend();
+  for (auto iter = plugins.cbegin(); iter != end; ++iter) {
+    pluginInfo.append(KPluginInfo{*iter});
+  }
+  
+  m_pluginSelector = new KPluginSelector();
+  //! @todo is this category name ok?
+  m_pluginSelector->addPlugins(pluginInfo, KPluginSelector::PluginLoadMethod::ReadConfigFile, i18n("KMyMoney Plugins"));
+  m_pluginSelector->load();
 
-  KService::List offers = KServiceTypeTrader::self()->query("KMyMoneyPlugin");
-  d->m_pluginList = KPluginInfo::fromServices(offers);
-
-  d->m_pluginSelector = new KPluginSelector(0);
-  d->m_pluginSelector->addPlugins(d->m_pluginList);
-  d->m_pluginSelector->load();
-
-  connect(d->m_pluginSelector, SIGNAL(changed(bool)), this, SLOT(changed()));
-  connect(d->m_pluginSelector, SIGNAL(configCommitted(QByteArray)), this, SLOT(changedConfigOfPlugin(QByteArray)));
+  connect(m_pluginSelector, &KPluginSelector::changed, this, &PluginLoader::changed);
 }
-
+ 
 PluginLoader::~PluginLoader()
 {
-  delete d;
 }
 
 void PluginLoader::loadPlugins()
 {
-  for (KPluginInfo::List::Iterator it = d->m_pluginList.begin(); it != d->m_pluginList.end(); ++it)
-    loadPlugin(&(*it));
+  const auto plugins = KPluginLoader::findPlugins("kmymoney");
+  for(const KPluginMetaData& pluginData: plugins) {
+    loadPlugin(pluginData);
+  }
 }
 
-void PluginLoader::loadPlugin(KPluginInfo* info)
+void PluginLoader::loadPlugin(const KPluginMetaData& metaData)
 {
-  if (info->isPluginEnabled()) {
-    Plugin* plugin = getPluginFromInfo(info);
+  KPluginInfo info{metaData};
+  // Add plugin to selector, just in case it was not found on construction time already.
+  // Duplicates should be detected by KPluginSelector.
+  m_pluginSelector->addPlugins(QList<KPluginInfo>{info}, KPluginSelector::PluginLoadMethod::ReadConfigFile, i18n("KMyMoney Plugins"));
+  if (!info.isPluginEnabled())
+    return;
 
-    if (!plugin) {
-      // the plugin is enabled but it is not loaded
-      KService::Ptr service = info->service();
-      QString error;
-      Plugin* plugin = service->createInstance<Plugin>(d->m_parent, QVariantList(), &error);
-      if (plugin) {
-        d->m_loadedPlugins.insert(info->name(), plugin);
-        emit PluginLoader::instance()->plug(info);
-      } else {
-        qDebug("KMyMoneyPlugin::PluginLoader:: createInstanceFromService returned nullptr for %s with error %s", qPrintable(info->name()), qPrintable(error));
-      }
-    }
-  } else {
-    if (getPluginFromInfo(info) != nullptr) {
-      // everybody interested should say goodbye to the plugin
-      emit PluginLoader::instance()->unplug(info);
-      d->m_loadedPlugins.remove(info->name());
-    }
+  std::unique_ptr<QPluginLoader> loader = std::unique_ptr<QPluginLoader>(new QPluginLoader{metaData.fileName()});
+  QObject* plugin = loader->instance();
+  if (!plugin) {
+    qWarning("Could not load plugin '%s', error: %s", qPrintable(metaData.fileName()), qPrintable(loader->errorString()));
+    return;
   }
+  KMyMoneyPlugin::Plugin* kmmPlugin = qobject_cast<KMyMoneyPlugin::Plugin*>(plugin);
+  if (!kmmPlugin) {
+    qWarning("Could not load plugin '%s'.", qPrintable(metaData.fileName()));
+    return;
+  }
+
+  emit plug(kmmPlugin);
 }
 
 void PluginLoader::changed()
 {
-  loadPlugins();
-}
-
-void PluginLoader::changedConfigOfPlugin(const QByteArray & name)
-{
-  PluginsMap::iterator itPlugin = d->m_loadedPlugins.find(QString(name));
-  if (itPlugin != d->m_loadedPlugins.end())
-    configChanged(*itPlugin);
-}
-
-Plugin* PluginLoader::getPluginFromInfo(KPluginInfo* info)
-{
-  PluginsMap::iterator itPlugin = d->m_loadedPlugins.find(info->name());
-  if (itPlugin != d->m_loadedPlugins.end())
-    return *itPlugin;
-  else
-    return 0;
+    qWarning("Plugins cannot be unloaded currently.");
+//  loadPlugins();
 }
 
 PluginLoader* PluginLoader::instance()
 {
-  Q_ASSERT(s_instance != 0);
+  Q_ASSERT(s_instance);
   return s_instance;
 }
 
 KPluginSelector* PluginLoader::pluginSelectorWidget()
 {
-  return d->m_pluginSelector;
+  return m_pluginSelector;
 }
 
 } // namespace

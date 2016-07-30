@@ -24,7 +24,7 @@
 
 #include <QWizard>
 
-#include "weboob.h"
+#include "../weboob.h"
 #include "ui_mapaccount.h"
 
 class WbMapAccountDialog : public QWizard, public Ui::WbMapAccountDialog

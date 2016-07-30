@@ -32,18 +32,12 @@
 
 #include "kreconciliationreportdlg.h"
 
-K_PLUGIN_FACTORY_WITH_JSON(ReconciliationReportFactory, "kmm_reconciliationreport.json", registerPlugin<KMMReconciliationReportPlugin>();)
-
-KMMReconciliationReportPlugin::KMMReconciliationReportPlugin(QObject *parent, const QVariantList&)
-    : KMyMoneyPlugin::Plugin(parent, "Reconciliation report"/*must be the same as X-KDE-PluginInfo-Name*/)
+KMMReconciliationReportPlugin::KMMReconciliationReportPlugin()
+    : KMyMoneyPlugin::Plugin(nullptr, "Reconciliation report"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
-  // For ease announce that we have been loaded.
-  qDebug("KMyMoney reconciliation report plugin loaded");
-
   // connect to the pluginloader's relevant signals
   connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(plug(KPluginInfo*)), this, SLOT(slotPlug(KPluginInfo*)));
   connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(unplug(KPluginInfo*)), this, SLOT(slotUnplug(KPluginInfo*)));
-
 }
 
 void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList)

@@ -37,9 +37,10 @@ class CsvWriter;
 class CsvExporterPlugin : public KMyMoneyPlugin::Plugin
 {
   Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kmymoney.plugins.csvexport" FILE "csvexport.json")
 
 public:
-  explicit CsvExporterPlugin(QObject* parent, const QVariantList&);
+  explicit CsvExporterPlugin();
   ~CsvExporterPlugin();
 
   QAction*          m_action;

@@ -24,7 +24,6 @@
 #include <QAction>
 
 // KDE includes
-#include <KPluginFactory>
 #include <KActionCollection>
 #include <KPluginInfo>
 #include <khtmlview.h>
@@ -38,8 +37,6 @@
 #include "numbertowords.h"
 #include "pluginsettings.h"
 
-K_PLUGIN_FACTORY_WITH_JSON(PrintCheckFactory, "kmm_printcheck.json", registerPlugin<KMMPrintCheckPlugin>();)
-
 struct KMMPrintCheckPlugin::Private {
   QAction* m_action;
   QString  m_checkTemplateHTML;
@@ -47,8 +44,8 @@ struct KMMPrintCheckPlugin::Private {
   KMyMoneyRegister::SelectedTransactions m_transactions;
 };
 
-KMMPrintCheckPlugin::KMMPrintCheckPlugin(QObject *parent, const QVariantList&)
-    : KMyMoneyPlugin::Plugin(parent, "Print check"/*must be the same as X-KDE-PluginInfo-Name*/)
+KMMPrintCheckPlugin::KMMPrintCheckPlugin()
+    : KMyMoneyPlugin::Plugin(nullptr, "Print check"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   // Tell the host application to load my GUI component
   setComponentName("kmm_printcheck", i18n("Print check"));

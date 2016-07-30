@@ -30,7 +30,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KFile>
 #include <KMessageBox>
 #include <KActionCollection>
@@ -42,10 +41,8 @@
 
 #include "kmymoney.h"
 
-K_PLUGIN_FACTORY_WITH_JSON(CsvExporterFactory, "kmm_csvexport.json", registerPlugin<CsvExporterPlugin>();)
-
-CsvExporterPlugin::CsvExporterPlugin(QObject *parent, const QVariantList&) :
-    KMyMoneyPlugin::Plugin(parent, "csvexport"/*must be the same as X-KDE-PluginInfo-Name*/)
+CsvExporterPlugin::CsvExporterPlugin() :
+    KMyMoneyPlugin::Plugin(nullptr, "csvexport"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   setComponentName("kmm_csvexport", i18n("CSV exporter"));
   setXMLFile("kmm_csvexport.rc");

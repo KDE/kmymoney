@@ -3,9 +3,7 @@ if (KDE4_BUILD_TESTS)
 endif(KDE4_BUILD_TESTS)
 
 # patch the version with the version defined in the build system
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmm_csvimport.desktop
-  ${CMAKE_CURRENT_BINARY_DIR}/kmm_csvimport.desktop
-)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimport.json.in ${CMAKE_CURRENT_BINARY_DIR}/csvimport.json @ONLY)
 
 ########### next target ###############
 
@@ -37,9 +35,9 @@ ki18n_wrap_ui(kmm_csvimport_PART_SRCS
 # Use static library for tests only
 add_library(kmm_csvimport MODULE ${kmm_csvimport_PART_SRCS})
 
-kcoreaddons_desktop_to_json(kmm_csvimport kmm_csvimport.desktop)
-
 target_link_libraries(kmm_csvimport
+  PUBLIC
+    kmm_mymoney
     kmm_plugin
     Qt5::Core
     Qt5::Widgets
@@ -56,13 +54,10 @@ target_link_libraries(kmm_csvimport_static
 ########### install files ###############
 
 install(FILES kmm_csvimport.rc
-        DESTINATION  ${KXMLGUI_INSTALL_DIR}/kmm_csvimport)
+        DESTINATION "${KXMLGUI_INSTALL_DIR}/kmm_csvimport")
 
 install(TARGETS kmm_csvimport
-        DESTINATION ${PLUGIN_INSTALL_DIR})
-
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_csvimport.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})
+        DESTINATION "${PLUGIN_INSTALL_DIR}/kmymoney/")
 
 # the KCM module
 set(kcm_kmm_csvimport_PART_SRCS

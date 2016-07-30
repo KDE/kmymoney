@@ -1131,7 +1131,7 @@ public slots:
   /**
     * Called whenever a plugin is plugged in
     */
-  void slotPluginPlug(KPluginInfo*);
+  void slotPluginPlug(KMyMoneyPlugin::Plugin* plugin);
 
   /**
     * Called whenever a plugin is unplugged

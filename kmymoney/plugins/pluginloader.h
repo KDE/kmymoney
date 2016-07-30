@@ -18,19 +18,12 @@
 #ifndef PLUGINLOADER_H
 #define PLUGINLOADER_H
 
-// ----------------------------------------------------------------------------
-// QT Includes
-
 #include <QObject>
 #include <QByteArray>
+#include <KPluginMetaData>
+#include <KPluginInfo>
 
-// ----------------------------------------------------------------------------
-// KDE Includes
-
-// ----------------------------------------------------------------------------
-// Project Includes
-
-#include <kmm_plugin_export.h>
+#include "kmm_plugin_export.h"
 
 class KPluginSelector;
 class KPluginInfo;
@@ -44,28 +37,30 @@ class KMM_PLUGIN_EXPORT PluginLoader : public QObject
   Q_OBJECT
 public:
   PluginLoader(QObject* parent);
+
+
+  /**
+   * Needed to delete the unique_ptr which is of incomplete type in the header file
+   */
   virtual ~PluginLoader();
   static PluginLoader* instance();
 
   void loadPlugins();
-  Plugin* getPluginFromInfo(KPluginInfo*);
   KPluginSelector* pluginSelectorWidget();
 
 private:
-  void loadPlugin(KPluginInfo*);
+  void loadPlugin(const KPluginMetaData& metaData);
 
 signals:
-  void plug(KPluginInfo*);
+  void plug(KMyMoneyPlugin::Plugin*);
   void unplug(KPluginInfo*);
   void configChanged(Plugin*);  // consfiguration of the plugin has changed not the enabled/disabled state
 
 private slots:
   void changed();
-  void changedConfigOfPlugin(const QByteArray &);
 
 private:
-  struct Private;
-  Private* const d;
+  KPluginSelector*  m_pluginSelector;
 };
 }
 

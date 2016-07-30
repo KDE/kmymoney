@@ -1,5 +1,5 @@
 # patch the version with the version defined in the build system
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmm_kbanking.desktop ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kbanking.json.in ${CMAKE_CURRENT_BINARY_DIR}/kbanking.json @ONLY)
 
 add_subdirectory( dialogs )
 add_subdirectory( widgets )
@@ -18,8 +18,6 @@ kconfig_add_kcfg_files(kmm_kbanking_PART_SRCS kbankingsettings.kcfgc)
 
 add_library(kmm_kbanking MODULE ${kmm_kbanking_PART_SRCS})
 
-kcoreaddons_desktop_to_json(kmm_kbanking kmm_kbanking.desktop)
-
 target_link_libraries(kmm_kbanking
                       kmm_kbanking_dialogs
                       kmm_kbanking_widgets
@@ -37,8 +35,9 @@ target_link_libraries(kmm_kbanking
                       gwenhywfar::gui-qt5
                       aqbanking::aqbanking
 )
-# C++11 features:
-# intitializer list
+
+# List might not be complete
+target_compile_features(kmm_kbanking PRIVATE cxx_generalized_initializers cxx_nullptr)
 
 # Add new menu entries if debugging is enabled
 set(KMM_BANKING_DEBUG_OPTIONS)
@@ -55,10 +54,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.rc
         DESTINATION ${KXMLGUI_INSTALL_DIR}/kmm_kbanking)
 
 install(TARGETS kmm_kbanking
-        DESTINATION ${PLUGIN_INSTALL_DIR})
-
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_kbanking.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})
+        DESTINATION "${PLUGIN_INSTALL_DIR}/kmymoney/")
 
 install(FILES kbanking.kcfg
         DESTINATION ${KCFG_INSTALL_DIR})

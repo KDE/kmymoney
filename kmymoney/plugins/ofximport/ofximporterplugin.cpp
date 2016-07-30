@@ -29,7 +29,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <QUrl>
 #include <KMessageBox>
 #include <KActionCollection>
@@ -43,8 +42,6 @@
 #include "konlinebankingsetupwizard.h"
 #include "kofxdirectconnectdlg.h"
 #include "ui_importoption.h"
-
-K_PLUGIN_FACTORY_WITH_JSON(OfxImportFactory, "kmm_ofximport.json", registerPlugin<OfxImporterPlugin>();)
 
 using KWallet::Wallet;
 
@@ -73,8 +70,8 @@ public:
 
 
 
-OfxImporterPlugin::OfxImporterPlugin(QObject *parent, const QVariantList&) :
-    KMyMoneyPlugin::Plugin(parent, "KMyMoney OFX"),
+OfxImporterPlugin::OfxImporterPlugin() :
+    KMyMoneyPlugin::Plugin(nullptr, "KMyMoney OFX"),
     /*
      * the string in the line above must be the same as
      * X-KDE-PluginInfo-Name and the provider name assigned in
