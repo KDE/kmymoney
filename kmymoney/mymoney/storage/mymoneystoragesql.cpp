@@ -1187,7 +1187,7 @@ void MyMoneyStorageSql::addPayee(const MyMoneyPayee& payee)
       order << i;
       payeeIdList << payee.id();
     }
-    q.prepare("INSERT INTO kmmPayeesPayeeIdentifier (payeeId, identifierId, \"order\") VALUES(?, ?, ?)");
+    q.prepare("INSERT INTO kmmPayeesPayeeIdentifier (payeeId, identifierId, userOrder) VALUES(?, ?, ?)");
     q.bindValue(0, payeeIdList);
     q.bindValue(1, identIds);
     q.bindValue(2, order);
@@ -1265,7 +1265,7 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
     }
   }
 
-  q.prepare("INSERT INTO kmmPayeesPayeeIdentifier (payeeId, \"order\", identifierId) VALUES(?, ?, ?)");
+  q.prepare("INSERT INTO kmmPayeesPayeeIdentifier (payeeId, userOrder, identifierId) VALUES(?, ?, ?)");
   q.bindValue(0, payeeIdList);
   q.bindValue(1, order);
   q.bindValue(2, identIdList);
@@ -3331,7 +3331,7 @@ const QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringLi
     " ) kmmPayees "
     " LEFT OUTER JOIN kmmPayeesPayeeIdentifier ON kmmPayees.Id = kmmPayeesPayeeIdentifier.payeeId "
     // The order is used below
-    " ORDER BY kmmPayees.id, kmmPayeesPayeeIdentifier.\"order\";");
+    " ORDER BY kmmPayees.id, kmmPayeesPayeeIdentifier.userOrder;");
 
   q.prepare(queryString);
 

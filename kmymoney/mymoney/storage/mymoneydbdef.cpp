@@ -32,7 +32,7 @@
 #include "mymoneyfile.h"
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
-unsigned int MyMoneyDbDef::m_currentVersion = 9;
+unsigned int MyMoneyDbDef::m_currentVersion = 10;
 
 // ************************* Build table descriptions ****************************
 MyMoneyDbDef::MyMoneyDbDef()
@@ -159,7 +159,7 @@ void MyMoneyDbDef::PayeesPayeeIdentifier()
 {
   QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("payeeId", "varchar(32)",  PRIMARYKEY, NOTNULL, 8));
-  appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbIntColumn("userOrder", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8));
   appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
   MyMoneyDbTable t("kmmPayeesPayeeIdentifier", fields);
   t.buildSQLStrings();
@@ -218,7 +218,7 @@ void MyMoneyDbDef::AccountsPayeeIdentifier()
 {
   QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("accountId", "varchar(32)",  PRIMARYKEY, NOTNULL, 8));
-  appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbIntColumn("userOrder", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8));
   appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
   MyMoneyDbTable t("kmmAccountsPayeeIdentifier", fields);
   t.buildSQLStrings();
