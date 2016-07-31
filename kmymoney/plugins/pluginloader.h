@@ -61,6 +61,12 @@ private slots:
 
 private:
   KPluginSelector*  m_pluginSelector;
+
+  QString categoryKMyMoneyPlugin;
+  QString categoryOnlineTask;
+  QString categoryPayeeIdentifier;
+
+  QString categoryByPluginType(const KPluginMetaData& mataData);
 };
 }
 

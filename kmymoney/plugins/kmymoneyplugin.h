@@ -43,8 +43,7 @@ class KToggleAction;
 /**
  * @defgroup KMyMoneyPlugin
  *
- * KMyMoney knows several types of plugins. The most common and generic one is KMyMoneyPlugin::Plugin. There are seveal other classes a plugin can inherit from
- * to create a native integration into KMyMoney.
+ * KMyMoney knows several types of plugins. The most common and generic one is KMyMoneyPlugin::Plugin.
  *
  * Another group of plugins are just loaded on demand and offer special functions with a tight integration into KMyMoney. Whenever possible you should use this kind of plugins.
  * At the moment this are the onlineTask and payeeIdentifierData.
@@ -61,7 +60,44 @@ namespace KMyMoneyPlugin
  * The plugins are based on Qt 5's plugin system. So you must compile json information into the plugin.
  * KMyMoney looks into the folder "${PLUGIN_INSTALL_DIR}/kmymoney/" and loads all plugins found there (if the user did not deactivate the plugin).
  *
+ * The json header of the plugin must comply with the requirements of KCoreAddon's KPluginMetaData class.
+ * To load the plugin at start up the service type "KMyMoney/Plugin" must be set.
+ *
+ * @warning The plugin system is still in development. Especially the loading of the on-demand plugins (mainly undocumented :( ) will change.
+ *
+ * A basic json header is shown below.
+ * @code{.json}
+   {
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Author's Names, Second Author",
+                "Email": "E-Mail 1, E-Mail 2"
+            }
+        ],
+        "Description": "Short description for plugin list (translateable)",
+        "EnabledByDefault": true,
+        "Icon": "icon to be shown in plugin list",
+        "Id": "a unique identifier",
+        "License": "see KPluginMetaData for list of predefined licenses (translateable)",
+        "Name": "Name of the plugin (translateable)",
+        "ServiceTypes": [
+            "KMyMoney/Plugin"
+        ],
+        "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
+     }
+   }
+ * @endcode
+ *
+ * This example assumes you are using
+ * @code{.cmake}
+   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/... ${CMAKE_CURRENT_BINARY_DIR}/... @ONLY)
+   @endcode
+ * to replace the version variables using cmake.
+ *
  * @see http://doc.qt.io/qt-5/plugins-howto.html
+ * @see https://api.kde.org/frameworks/kcoreaddons/html/classKPluginMetaData.html
+ *
  */
 class KMM_PLUGIN_EXPORT Plugin : public QObject, public KXMLGUIClient
 {

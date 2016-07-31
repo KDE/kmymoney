@@ -19,12 +19,16 @@
 #include "konlinetransferform.h"
 #include "ui_konlinetransferformdecl.h"
 
+#include <memory>
+
 #include <QtCore/QList>
 #include <QtCore/QtDebug>
 #include <QtCore/QSharedPointer>
+#include <QPluginLoader>
 
 #include <KStandardAction>
 #include <KLocalizedString>
+#include <KPluginFactory>
 
 #include "kguiutils.h"
 #include "kmymoneylineedit.h"
@@ -55,9 +59,8 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   ui->convertMessage->hide();
   ui->convertMessage->setWordWrap(true);
 
-  foreach (KService::Ptr service, onlineJobAdministration::instance()->onlineJobEdits()) {
-    addOnlineJobEditWidget(service);
-  }
+  auto edits = onlineJobAdministration::instance()->onlineJobEdits();
+  std::for_each(edits.constBegin(), edits.constEnd(), [this](onlineJobAdministration::onlineJobEditOffer in) {this->loadOnlineJobEditPlugin(in);});
 
   // Message Widget for read only jobs
   m_duplicateJob = KStandardAction::copy(this);
@@ -83,15 +86,26 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   m_requiredFields->setOkButton(ui->buttonSend);
 }
 
-/**
- * @internal Only add IonlineJobEdit* to ui->creditTransferEdit, static_casts are used!
- */
-void kOnlineTransferForm::addOnlineJobEditWidget(KService::Ptr service)
+void kOnlineTransferForm::loadOnlineJobEditPlugin(const onlineJobAdministration::onlineJobEditOffer& pluginDesc)
 {
   try {
-    IonlineJobEdit *const widget = service->createInstance<IonlineJobEdit>();
-    if (widget == 0) {
-      qWarning() << "Error while loading user interface for online task" << service->name() << service->library();
+    std::unique_ptr<QPluginLoader> loader{new QPluginLoader(pluginDesc.fileName, this)};
+    QObject* plugin = loader->instance();
+    if (!plugin) {
+      qWarning() << "Could not load plugin for online job editor from file \"" << pluginDesc.fileName << "\".";
+      return;
+    }
+
+    // Cast to KPluginFactory
+    KPluginFactory* pluginFactory = qobject_cast< KPluginFactory* >(plugin);
+    if (!pluginFactory) {
+      qWarning() << "Could not create plugin factory for online job editor in file \"" << pluginDesc.fileName << "\".";
+      return;
+    }
+
+    IonlineJobEdit* widget = pluginFactory->create<IonlineJobEdit>(pluginDesc.pluginKeyword, this);
+    if (!widget) {
+      qWarning() << "Could not create online job editor in file \"" << pluginDesc.fileName << "\".";
       return;
     }
 
@@ -103,7 +117,7 @@ void kOnlineTransferForm::addOnlineJobEditWidget(KService::Ptr service)
     }
 
     m_onlineJobEditWidgets.append(widget);
-    ui->transferTypeSelection->addItem(service->name());
+    ui->transferTypeSelection->addItem(pluginDesc.name);
     m_requiredFields->add(widget);
 
     if (showWidget)

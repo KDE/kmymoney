@@ -71,8 +71,12 @@ public:
   explicit onlineJobAdministration(QObject *parent = 0);
   ~onlineJobAdministration();
 
-  typedef KService::Ptr onlineJobEditOffer;
-  typedef KService::List onlineJobEditOffers;
+  struct onlineJobEditOffer {
+    QString fileName;
+    QString pluginKeyword;
+    QString name;
+  };
+  using onlineJobEditOffers = QVector<onlineJobEditOffer>;
 
   /**
    * @brief List all available onlineTasks

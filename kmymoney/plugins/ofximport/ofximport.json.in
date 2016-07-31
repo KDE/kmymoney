@@ -78,7 +78,7 @@
         "ServiceTypes": [
             "KMyMoneyPlugin"
         ],
-        "Version": "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX}",
+        "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "http://kmymoney.org/plugins.html"
     }
 }

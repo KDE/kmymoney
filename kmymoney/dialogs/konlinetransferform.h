@@ -26,14 +26,10 @@
 #include <QDialog>
 
 // ----------------------------------------------------------------------------
-// KDE Includes
-
-#include <KService>
-
-// ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoney/onlinejob.h"
+#include "mymoney/onlinejobadministration.h"
 
 class IonlineJobEdit;
 class kMandatoryFieldGroup;
@@ -95,11 +91,9 @@ private slots:
   void sendJob();
 
   /**
-   * @brief add a widget
-   *
-   * Caller gives away ownership.
+   * @brief Load a plugin
    */
-  void addOnlineJobEditWidget(KService::Ptr widget);
+  void loadOnlineJobEditPlugin(const onlineJobAdministration::onlineJobEditOffer& plugin);
 
   /** @{ */
   /**

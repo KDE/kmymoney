@@ -19,16 +19,23 @@
 #include "onlinejobadministration.h"
 
 // ----------------------------------------------------------------------------
+// Std Includes
+
+#include <memory>
+
+// ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QtCore/QList>
-#include <QtCore/QDebug>
-#include <QtCore/QScopedPointer>
+#include <QList>
+#include <QDebug>
+#include <QPluginLoader>
+#include <QJsonArray>
 
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <KServiceTypeTrader>
+#include <KPluginMetaData>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -83,9 +90,15 @@ void onlineJobAdministration::addPlugin(const QString& pluginName, KMyMoneyPlugi
 
 QStringList onlineJobAdministration::availableOnlineTasks()
 {
+  auto plugins = KPluginLoader::findPlugins("kmymoney", [](const KPluginMetaData& data) {
+    return !(data.rawData()["KMyMoney"].toObject()["OnlineTask"].isNull());
+  });
+
   QStringList list;
-  foreach (onlineTask* task, m_onlineTasks) {
-    list.append(task->taskName());
+  for(const KPluginMetaData& plugin: plugins) {
+    QJsonValue array = plugin.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Iid"];
+    if (array.isArray())
+      list.append(array.toVariant().toStringList());
   }
   return list;
 }
@@ -136,10 +149,6 @@ onlineTask* onlineJobAdministration::createOnlineTask(const QString& name) const
   return 0;
 }
 
-/**
- * @TODO Need a technique to handle tasks were the plugin was not loaded.
- * There could be a new dummy task which is linked statically. If the original task could not be loaded the dummy is used.
- */
 onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, const QDomElement& element) const
 {
   onlineTask* task = rootOnlineTask(iid);
@@ -160,9 +169,59 @@ onlineTask* onlineJobAdministration::createOnlineTaskFromSqlDatabase(const QStri
   return 0;
 }
 
+/**
+ * @interanl Using KPluginFactory to create the plugins seemed to be good idea. The drawback is that it does not support to create non QObjects directly.
+ * This made this function way longer than needed and adds many checks.
+ *
+ * @fixme Delete created tasks
+ */
 onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
 {
-  return m_onlineTasks.value(name);
+  auto plugins = KPluginLoader::findPlugins("kmymoney", [&name](const KPluginMetaData& data) {
+    QJsonValue array = data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Iids"];
+    if (array.isArray())
+      return (array.toVariant().toStringList().contains(name));
+    return false;
+  });
+
+  if (plugins.isEmpty())
+    return nullptr;
+
+  if (plugins.length() != 1)
+    qWarning() << "Multiple plugins which offer the online task \"" << name << "\" were found. Loading a random one.";
+
+  // Load plugin
+  std::unique_ptr<QPluginLoader> loader = std::unique_ptr<QPluginLoader>(new QPluginLoader{plugins.first().fileName()});
+  QObject* plugin = loader->instance();
+  if (!plugin) {
+    qWarning() << "Could not load plugin for online task \"" << name << "\", file name \"" << plugins.first().fileName() << "\".";
+    return nullptr;
+  }
+
+  // Cast to KPluginFactory
+  KPluginFactory* pluginFactory = qobject_cast< KPluginFactory* >(plugin);
+  if (!pluginFactory) {
+    qWarning() << "Could not create plugin factory for online task \"" << name << "\", file name \"" << plugins.first().fileName() << "\".";
+    return nullptr;
+  }
+
+  // Create onlineTaskFactory
+  const QString pluginKeyword = plugins.first().rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["PluginKeyword"].toString();
+  // Can create only objects which inherit from QObject directly
+  QObject* taskFactoryObject = pluginFactory->create<QObject>(pluginKeyword, onlineJobAdministration::instance());
+  KMyMoneyPlugin::onlineTaskFactory* taskFactory = qobject_cast< KMyMoneyPlugin::onlineTaskFactory* >(taskFactoryObject);
+  if (!taskFactory) {
+    qWarning() << "Could not create online task factory for online task \"" << name << "\", file name \"" << plugins.first().fileName() << "\".";
+    return nullptr;
+  }
+
+  // Finally create task
+  onlineTask* task = taskFactory->createOnlineTask(name);
+  if (task)
+    // Add to our cache as this is still used in several places
+    onlineJobAdministration::instance()->registerOnlineTask(taskFactory->createOnlineTask(name));
+
+  return task;
 }
 
 onlineTaskConverter::convertType onlineJobAdministration::canConvert(const QString& originalTaskIid, const QString& convertTaskIid) const
@@ -270,7 +329,25 @@ void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* c
 
 onlineJobAdministration::onlineJobEditOffers onlineJobAdministration::onlineJobEdits()
 {
-  return KServiceTypeTrader::self()->query(QLatin1String("KMyMoney/OnlineTaskUi"));
+  auto plugins = KPluginLoader::findPlugins("kmymoney", [](const KPluginMetaData& data) {
+    return !(data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Editors"].isNull());
+  });
+
+  onlineJobAdministration::onlineJobEditOffers list;
+  list.reserve(plugins.size());
+  for(const KPluginMetaData& data: plugins) {
+    QJsonArray editorsArray = data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Editors"].toArray();
+    for(QJsonValue entry: editorsArray) {
+      if (!entry.toObject()["OnlineTaskIds"].isNull()) {
+        list.append(onlineJobAdministration::onlineJobEditOffer{
+            data.fileName(),
+            entry.toObject()["PluginKeyword"].toString(),
+            KPluginMetaData::readTranslatedString(entry.toObject(), "Name")
+          });
+      }
+    }
+  }
+  return list;
 }
 
 IonlineTaskSettings::ptr onlineJobAdministration::taskSettings(const QString& taskName, const QString& accountId) const
@@ -315,6 +392,7 @@ bool onlineJobAdministration::canSendCreditTransfer()
   return false;
 }
 
+//! @fixme plugin query
 bool onlineJobAdministration::canEditOnlineJob(const onlineJob& job)
 {
   return (!job.taskIid().isEmpty() && !KServiceTypeTrader::self()->query(QLatin1String("KMyMoney/OnlineTaskUi"), QString("'%1' ~in [X-KMyMoney-onlineTaskIds]").arg(job.taskIid())).isEmpty());

@@ -56,6 +56,11 @@ PluginLoader::PluginLoader(QObject* parent)
   Q_ASSERT(s_instance == nullptr);
   s_instance = this;
 
+  categoryKMyMoneyPlugin = i18n("KMyMoney Plugins");
+  categoryOnlineTask = i18n("Online Banking Operations");
+  categoryPayeeIdentifier = i18n("Payee Identifier");
+
+#if 0
   // Initialize the PluginSelector
   auto plugins = KPluginLoader::findPlugins("kmymoney");
   
@@ -66,9 +71,9 @@ PluginLoader::PluginLoader(QObject* parent)
     pluginInfo.append(KPluginInfo{*iter});
   }
   
+  //m_pluginSelector->addPlugins(pluginInfo, KPluginSelector::PluginLoadMethod::ReadConfigFile, categoryByPluginType(pluginInfo));
+#endif
   m_pluginSelector = new KPluginSelector();
-  //! @todo is this category name ok?
-  m_pluginSelector->addPlugins(pluginInfo, KPluginSelector::PluginLoadMethod::ReadConfigFile, i18n("KMyMoney Plugins"));
   m_pluginSelector->load();
 
   connect(m_pluginSelector, &KPluginSelector::changed, this, &PluginLoader::changed);
@@ -78,23 +83,35 @@ PluginLoader::~PluginLoader()
 {
 }
 
+QString PluginLoader::categoryByPluginType(const KPluginMetaData& mataData)
+{
+  if (!mataData.serviceTypes().contains("KMyMoney/Plugin")) {
+    QJsonObject jsonKMyMoneyData = mataData.rawData()["KMyMoney"].toObject();
+    if (!jsonKMyMoneyData["OnlineTask"].isNull())
+      return categoryOnlineTask;
+    else if (!jsonKMyMoneyData["PayeeIdentifier"].isNull())
+      return categoryPayeeIdentifier;
+  }
+  return categoryKMyMoneyPlugin;
+}
+
 void PluginLoader::loadPlugins()
 {
-  const auto plugins = KPluginLoader::findPlugins("kmymoney");
-  for(const KPluginMetaData& pluginData: plugins) {
-    loadPlugin(pluginData);
-  }
+    const auto plugins = KPluginLoader::findPlugins("kmymoney");
+    for(const KPluginMetaData& pluginData: plugins) {
+        KPluginInfo info {pluginData};
+        // Add plugin to selector, just in case it was not found on construction time already.
+        // Duplicates should be detected by KPluginSelector.
+        m_pluginSelector->addPlugins(QList<KPluginInfo> {info}, KPluginSelector::PluginLoadMethod::ReadConfigFile, categoryByPluginType(pluginData));
+
+        // Only load plugins which are enabled and have the right serviceType. Other serviceTypes are loaded on demand.
+        if (info.isPluginEnabled() && pluginData.serviceTypes().contains("KMyMoney/Plugin"))
+          loadPlugin(pluginData);
+    }
 }
 
 void PluginLoader::loadPlugin(const KPluginMetaData& metaData)
 {
-  KPluginInfo info{metaData};
-  // Add plugin to selector, just in case it was not found on construction time already.
-  // Duplicates should be detected by KPluginSelector.
-  m_pluginSelector->addPlugins(QList<KPluginInfo>{info}, KPluginSelector::PluginLoadMethod::ReadConfigFile, i18n("KMyMoney Plugins"));
-  if (!info.isPluginEnabled())
-    return;
-
   std::unique_ptr<QPluginLoader> loader = std::unique_ptr<QPluginLoader>(new QPluginLoader{metaData.fileName()});
   QObject* plugin = loader->instance();
   if (!plugin) {
