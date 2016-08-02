@@ -68,12 +68,12 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
 
   QColor tcolor = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
   QString css;
-  css += "<style type=\"text/css\">\n<!--\n";
-  css += QString(".row-even, .item0 { background-color: %1; color: %2 }\n")
-         .arg((KColorScheme(QPalette::Normal).background(KColorScheme::AlternateBackground).color()).name()).arg(tcolor.name());
-  css += QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
-         .arg((KColorScheme(QPalette::Normal).background(KColorScheme::NormalBackground).color()).name()).arg(tcolor.name());
-  css += "-->\n</style>\n";
+  css += "<style type=\"text/css\">\n<!--\n"
+      +  QString(".row-even, .item0 { background-color: %1; color: %2 }\n")
+         .arg((KColorScheme(QPalette::Normal).background(KColorScheme::AlternateBackground).color()).name()).arg(tcolor.name())
+      +  QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
+         .arg((KColorScheme(QPalette::Normal).background(KColorScheme::NormalBackground).color()).name()).arg(tcolor.name())
+      +  "-->\n</style>\n";
   header += css;
 
   header += "</head><body>\n";
