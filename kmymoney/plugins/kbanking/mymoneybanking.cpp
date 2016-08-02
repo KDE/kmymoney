@@ -99,7 +99,7 @@ public:
   Private() : passwordCacheTimer(0) {
     QString gwenProxy = QString::fromLocal8Bit(qgetenv("GWEN_PROXY"));
     if (gwenProxy.isEmpty()) {
-      KConfig *cfg = new KConfig("kioslaverc");
+      QScopedPointer<KConfig> cfg(new KConfig("kioslaverc"));
       QRegExp exp("(\\w+://)?([^/]{2}.+:\\d+)");
       QString proxy;
 
@@ -125,7 +125,6 @@ public:
           qDebug("KDE proxy setting of type %d not supported", type);
           break;
       }
-      delete cfg;
     }
   }
 
