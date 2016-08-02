@@ -80,6 +80,7 @@ public:
   QStringList availableOnlineTasks();
 
   static onlineJobAdministration* instance() {
+    static onlineJobAdministration m_instance;
     return &m_instance;
   }
 
@@ -229,8 +230,6 @@ public slots:
   void updateOnlineTaskProperties();
 
 private:
-  static onlineJobAdministration m_instance;
-
   /**
    * @brief Find onlinePlugin which is responsible for accountId
    * @param accountId

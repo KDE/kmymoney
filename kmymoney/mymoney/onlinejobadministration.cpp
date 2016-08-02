@@ -41,8 +41,6 @@
 #include "onlinetasks/unavailabletask/tasks/unavailabletask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 
-onlineJobAdministration onlineJobAdministration::m_instance;
-
 onlineJobAdministration::onlineJobAdministration(QObject *parent) :
     QObject(parent)
 {
