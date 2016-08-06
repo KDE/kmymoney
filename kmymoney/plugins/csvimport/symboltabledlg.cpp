@@ -32,7 +32,6 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <QPushButton>
-#include <ui_csvdialog.h>
 #include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QVBoxLayout>
