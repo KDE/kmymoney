@@ -224,7 +224,6 @@ void CSVDialog::init()
 
   m_investmentDlg->init();
   Qt::WindowFlags eFlags = windowFlags();
-  eFlags |= Qt::WindowStaysOnTopHint;
   m_wiz->setWindowFlags(eFlags);
   m_wiz->show();
 }//  CSVDialog
