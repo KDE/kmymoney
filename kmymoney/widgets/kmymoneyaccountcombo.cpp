@@ -126,7 +126,6 @@ KMyMoneyAccountCombo::KMyMoneyAccountCombo(QWidget *parent)
 
 KMyMoneyAccountCombo::~KMyMoneyAccountCombo()
 {
-  delete d;
 }
 
 void KMyMoneyAccountCombo::setEditable(bool isEditable)
