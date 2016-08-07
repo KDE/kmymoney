@@ -95,6 +95,12 @@ public:
 
   bool operator == (const MyMoneySplit&) const;
 
+  /**
+   * Returns a copy of the MyMoneySplit where the sign of
+   * shares and value is inverted.
+   */
+  MyMoneySplit operator-() const;
+
   void writeXML(QDomDocument& document, QDomElement& parent) const;
 
   /**

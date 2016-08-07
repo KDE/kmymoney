@@ -209,6 +209,28 @@ void MyMoneySplitTest::testInequality()
   QVERIFY(!(n == *m));
 }
 
+void MyMoneySplitTest::testUnaryMinus()
+{
+  testSetFunctions();
+
+  MyMoneySplit n = -*m;
+
+  QCOMPARE(n.accountId(), QLatin1String("Account"));
+  QCOMPARE(n.memo(), QLatin1String("Memo"));
+  QCOMPARE(n.reconcileDate(), QDate(1, 2, 3));
+  QCOMPARE(n.reconcileFlag(), MyMoneySplit::Cleared);
+  QCOMPARE(n.shares(), MyMoneyMoney(-1234, 100));
+  QCOMPARE(n.value(), MyMoneyMoney(-3456, 100));
+  QCOMPARE(n.id(), QLatin1String("MyID"));
+  QCOMPARE(n.payeeId(), QLatin1String("Payee"));
+  QList<QString> tagIdList;
+  tagIdList << "Tag";
+  QCOMPARE(n.tagIdList(), tagIdList);
+  QCOMPARE(n.action(), QLatin1String("Action"));
+  QCOMPARE(n.transactionId(), QLatin1String("TestTransaction"));
+  QCOMPARE(n.value("Key"), QLatin1String("Value"));
+  QCOMPARE(n.costCenterId(), QLatin1String("CostCenter"));
+}
 
 void MyMoneySplitTest::testAmortization()
 {

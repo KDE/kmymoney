@@ -103,6 +103,14 @@ bool MyMoneySplit::operator == (const MyMoneySplit& right) const
          m_transactionId == right.m_transactionId;
 }
 
+MyMoneySplit MyMoneySplit::operator-() const
+{
+  MyMoneySplit rc(*this);
+  rc.m_shares = -rc.m_shares;
+  rc.m_value = -rc.m_value;
+  return rc;
+}
+
 void MyMoneySplit::setAccountId(const QString& account)
 {
   m_account = account;
