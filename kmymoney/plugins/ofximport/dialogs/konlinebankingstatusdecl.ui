@@ -232,6 +232,23 @@
          <item row="0" column="2">
           <widget class="KLineEdit" name="m_applicationEdit"/>
          </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="m_clientUidEdit">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="whatsThis">
+            <string>OFX &lt;CLIENTUID&gt; for institutions that require it</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="textLabel1_4">
+           <property name="text">
+            <string>Client UID</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>

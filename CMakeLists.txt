@@ -130,6 +130,10 @@ include (CheckFunctionExists)
 
 # check for function in header
 include(CheckSymbolExists)
+
+# check for struct members
+include(CheckStructHasMember)
+
 set(CMAKE_REQUIRED_DEFINITIONS -D_XOPEN_SOURCE=500 -D_BSD_SOURCE)
 
 # check some include files exists
@@ -168,6 +172,8 @@ if(ENABLE_LIBOFX)
       message(FATAL_ERROR "LibOFX not found")
     endif(NOT LIBOFX_DEFAULT STREQUAL "AUTO")
     set(ENABLE_LIBOFX OFF CACHE BOOL "Enable OFX plugin" FORCE)
+  else(NOT LIBOFX_FOUND)
+    check_struct_has_member("struct OfxFiLogin" "clientuid" "libofx/libofx.h" LIBOFX_HAVE_CLIENTUID)
   endif(NOT LIBOFX_FOUND)
 endif(ENABLE_LIBOFX)
 
@@ -397,6 +403,7 @@ macro(nice_yesno _varname)
 endmacro(nice_yesno _varname)
 
 nice_yesno("LIBOFX_FOUND")
+nice_yesno("LIBOFX_HAVE_CLIENTUID")
 nice_yesno("KBANKING_FOUND")
 nice_yesno("WEBOOB_FOUND")
 nice_yesno("LIBICAL_FOUND")
@@ -412,6 +419,7 @@ message("
 Configure results (user options):
 --------------------------------------------
 OFX plugin:                              ${nice_LIBOFX_FOUND}
+OFX clientuid support                    ${nice_LIBOFX_HAVE_CLIENTUID}
 
 KBanking plugin:                         ${nice_KBANKING_FOUND}
 
