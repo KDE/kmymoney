@@ -919,13 +919,13 @@ bool CSVWizard::validateDateFormat(int dF)
 int CSVWizard::getMaxColumnCount(QStringList &lineList, int &delimiter)
 {
   if (lineList.isEmpty())
-    return NULL;
+    return 0;
 
   QList<int> delimiterIndexes;
   if (delimiter == -1)
-    delimiterIndexes = QList<int>() << 0 << 1 << 2 << 3; // include all delimiters to test or ...
+    delimiterIndexes = QList<int>{0, 1, 2, 3}; // include all delimiters to test or ...
   else
-    delimiterIndexes = QList<int>() << delimiter; // ... only the one specified
+    delimiterIndexes = QList<int>{delimiter}; // ... only the one specified
 
   int totalDelimiterCount[4] = {0}; //  Total in file for each delimiter
   int thisDelimiterCount[4] = {0};  //  Total in this line for each delimiter
@@ -936,7 +936,7 @@ int CSVWizard::getMaxColumnCount(QStringList &lineList, int &delimiter)
   for (int i = 0; i < lineList.count(); i++) {
     QString data = lineList[i];
 
-    for (QList<int>::ConstIterator it = delimiterIndexes.begin();  it != delimiterIndexes.end() ; it++) {
+    for (QList<int>::ConstIterator it = delimiterIndexes.constBegin(); it != delimiterIndexes.constEnd(); it++) {
       m_parse->setFieldDelimiterIndex(*it);
       colCount = m_parse->parseLine(data).count(); //  parse each line using each delimiter
 
