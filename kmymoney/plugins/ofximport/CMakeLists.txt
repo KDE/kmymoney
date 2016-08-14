@@ -5,6 +5,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dialogs
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs
                     ${LIBOFX_INCLUDE_DIR})
 
+if(${LIBOFX_HAVE_CLIENTUID})
+  add_definitions(-DLIBOFX_HAVE_CLIENTUID)
+endif(${LIBOFX_HAVE_CLIENTUID})
+
 ########### next target ###############
 
 set(kmm_ofximport_PART_SRCS ofximporterplugin.cpp ofxpartner.cpp)

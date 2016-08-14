@@ -114,6 +114,7 @@ private:
   QString iban() const;
   QString fiorg() const;
   QString fiid() const;
+  QString clientUid() const;
   QString username() const;
   QString password() const;
   QString accountnum() const;

@@ -652,8 +652,12 @@ MyMoneyKeyValueContainer OfxImporterPlugin::onlineBankingSettings(const MyMoneyK
     kvp.setValue("kmmofx-pickDate", QString::number(d->m_statusDlg->m_pickDateRB->isChecked()));
     kvp.setValue("kmmofx-specificDate", d->m_statusDlg->m_specificDate->date().toString());
     kvp.setValue("kmmofx-preferName", QString::number(d->m_statusDlg->m_preferredPayee->currentIndex()));
-    // TODO get rid of pre 4.6 values
-    // kvp.deletePair("kmmofx-preferPayeeid");
+    if (!d->m_statusDlg->m_clientUidEdit->text().isEmpty())
+      kvp.setValue("clientUid", d->m_statusDlg->m_clientUidEdit->text());
+    else
+      kvp.deletePair("clientUid");
+    // get rid of pre 4.6 values
+    kvp.deletePair("kmmofx-preferPayeeid");
   }
   return kvp;
 }

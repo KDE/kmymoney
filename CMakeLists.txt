@@ -84,6 +84,8 @@ check_include_file("stdint.h" HAVE_STDINT_H)
 check_include_file("sys/types.h" HAVE_SYS_TYPES_H)
 check_include_file("unistd.h" HAVE_UNISTD_H)
 
+# include check for members in structs
+include (CheckStructHasMember)
 
 ######################### Special Requirements ##########################
 
@@ -111,6 +113,8 @@ if(ENABLE_LIBOFX)
       message(FATAL_ERROR "LibOFX not found")
     endif(NOT LIBOFX_DEFAULT STREQUAL "AUTO")
     set(ENABLE_LIBOFX OFF CACHE BOOL "Enable OFX plugin" FORCE)
+  else(NOT LIBOFX_FOUND)
+    check_struct_has_member("struct OfxFiLogin" "clientuid" "libofx/libofx.h" LIBOFX_HAVE_CLIENTUID)
   endif(NOT LIBOFX_FOUND)
 endif(ENABLE_LIBOFX)
 
@@ -263,6 +267,7 @@ nice_yesno("KF5Holidays_FOUND")
 nice_yesno("KF5Gpgmepp_FOUND")
 nice_yesno("KMM_ADDRESSBOOK_FOUND")
 nice_yesno("LIBOFX_FOUND")
+nice_yesno("LIBOFX_HAVE_CLIENTUID")
 nice_yesno("KBANKING_FOUND")
 nice_yesno("WEBOOB_FOUND")
 nice_yesno("LIBICAL_FOUND")
@@ -282,6 +287,7 @@ KDE PIM encryption:                      ${nice_KF5Gpgmepp_FOUND}
 KDE PIM addressbook:                     ${nice_KMM_ADDRESSBOOK_FOUND}
 
 OFX plugin:                              ${nice_LIBOFX_FOUND}
+  OFX supports CLIENTUID:                ${nice_LIBOFX_HAVE_CLIENTUID}
 
 KBanking plugin:                         ${nice_KBANKING_FOUND}
 

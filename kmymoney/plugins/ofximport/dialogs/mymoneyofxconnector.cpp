@@ -197,6 +197,10 @@ QString MyMoneyOfxConnector::fiid() const
 {
   return m_fiSettings.value("fid");
 }
+QString MyMoneyOfxConnector::clientUid() const
+{
+  return m_fiSettings.value("clientUid");
+}
 QString MyMoneyOfxConnector::username() const
 {
   return m_fiSettings.value("username");
@@ -310,6 +314,9 @@ void MyMoneyOfxConnector::initRequest(OfxFiLogin* fi) const
   strncpy(fi->org, fiorg().toLatin1(), OFX_ORG_LENGTH - 1);
   strncpy(fi->userid, username().toLatin1(), OFX_USERID_LENGTH - 1);
   strncpy(fi->userpass, password().toLatin1(), OFX_USERPASS_LENGTH - 1);
+#ifdef LIBOFX_HAVE_CLIENTUID
+  strncpy(fi->clientuid, clientUid().toLatin1(), OFX_CLIENTUID_LENGTH - 1);
+#endif
 
   // If we don't know better, we pretend to be Quicken 2008
   // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
@@ -351,7 +358,8 @@ const QByteArray MyMoneyOfxConnector::statementRequest() const
     QString request = szrequest;
     // remove the trailing zero
     result = request.toUtf8();
-    result.truncate(result.size() - 1);
+    if(result.at(result.size()-1) == 0)
+      result.truncate(result.size() - 1);
     free(szrequest);
   }
 
