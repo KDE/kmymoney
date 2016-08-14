@@ -210,10 +210,12 @@ void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
   if (dbDriver->requiresExternalFile()) {
     // currently, only sqlite requres an external file
     m_sqliteSelected = true;
-    if (m_mode == QIODevice::WriteOnly)
-      m_widget->urlSqlite->setMode(KFile::Modes(KFile::Files));
-    else
-      m_widget->urlSqlite->setMode(KFile::Modes(KFile::Files | KFile::ExistingOnly));
+    if (m_mode == QIODevice::WriteOnly) {
+      /// @fixme KFile::Files not supported on KF5
+      m_widget->urlSqlite->setMode(KFile::Modes(KFile::File));
+    } else {
+      m_widget->urlSqlite->setMode(KFile::Modes(KFile::File | KFile::ExistingOnly));
+    }
 
     m_requiredFields->remove(m_widget->textDbName);
     m_requiredFields->add(m_widget->urlSqlite);

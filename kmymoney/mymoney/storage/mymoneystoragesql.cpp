@@ -155,7 +155,9 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
     m_override = options.contains("override");
 
     // create the database connection
-    QString dbName = url.path().right(url.path().length() - 1); // remove separator slash
+    /// @FIXME KF5
+    /// old version QString dbName = url.path().right(url.path().length() - 1); // remove separator slash
+    QString dbName = url.path();
     setDatabaseName(dbName);
     setHostName(url.host());
     setUserName(url.userName());
