@@ -159,7 +159,8 @@ void MyMoneyDbDef::PayeesPayeeIdentifier()
 {
   QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("payeeId", "varchar(32)",  PRIMARYKEY, NOTNULL, 8));
-  appendField(MyMoneyDbIntColumn("userOrder", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8, 9));
+  appendField(MyMoneyDbIntColumn("userOrder", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 10));
   appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
   MyMoneyDbTable t("kmmPayeesPayeeIdentifier", fields);
   t.buildSQLStrings();
@@ -218,7 +219,8 @@ void MyMoneyDbDef::AccountsPayeeIdentifier()
 {
   QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("accountId", "varchar(32)",  PRIMARYKEY, NOTNULL, 8));
-  appendField(MyMoneyDbIntColumn("userOrder", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8, 9));
+  appendField(MyMoneyDbIntColumn("userOrder", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 10));
   appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
   MyMoneyDbTable t("kmmAccountsPayeeIdentifier", fields);
   t.buildSQLStrings();
@@ -612,7 +614,7 @@ const QString MyMoneyDbTable::columnList(const int version) const
   QString qs;
   ft = m_fields.begin();
   while (ft != m_fields.end()) {
-    if ((*ft)->initVersion() <= version)
+    if ((*ft)->initVersion() <= version && (*ft)->lastVersion() >= version)
       qs += QString("%1, ").arg((*ft)->name());
     ++ft;
   }
@@ -624,7 +626,7 @@ const QString MyMoneyDbTable::generateCreateSQL(const QExplicitlySharedDataPoint
   QString qs = QString("CREATE TABLE %1 (").arg(name());
   QString pkey;
   for (field_iterator it = m_fields.begin(); it != m_fields.end(); ++it) {
-    if ((*it)->initVersion() <= version) {
+    if ((*it)->initVersion() <= version && (*it)->lastVersion() >= version) {
       qs += (*it)->generateDDL(driver) + ", ";
       if ((*it)->isPrimaryKey())
         pkey += (*it)->name() + ", ";
@@ -656,7 +658,7 @@ bool MyMoneyDbTable::hasPrimaryKey(int version) const
 {
   field_iterator ft = m_fields.constBegin();
   while (ft != m_fields.constEnd()) {
-    if ((*ft)->initVersion() <= version) {
+    if ((*ft)->initVersion() <= version && (*ft)->lastVersion() >= version) {
       if ((*ft)->isPrimaryKey())
         return (true);
     }

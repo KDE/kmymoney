@@ -53,12 +53,14 @@ public:
                            const QString& itype = QString(),
                            const bool iprimary = false,
                            const bool inotnull = false,
-                           const int initVersion = 0):
+                           const int initVersion = 0,
+                           const int lastVersion = std::numeric_limits<int>::max()):
       m_name(iname),
       m_type(itype),
       m_isPrimary(iprimary),
       m_isNotNull(inotnull),
-      m_initVersion(initVersion) {}
+      m_initVersion(initVersion),
+      m_lastVersion(lastVersion) {}
   MyMoneyDbColumn() {}
   virtual ~MyMoneyDbColumn() {}
 
@@ -92,12 +94,16 @@ public:
   int initVersion() const {
     return (m_initVersion);
   }
+  int lastVersion() const {
+    return (m_lastVersion);
+  }
 private:
   QString m_name;
   QString m_type;
   bool m_isPrimary;
   bool m_isNotNull;
   int m_initVersion;
+  int m_lastVersion;
 };
 
 /**
@@ -130,8 +136,9 @@ public:
                               const bool isigned = true,
                               const bool iprimary = false,
                               const bool inotnull = false,
-                              const int initVersion = 0):
-      MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion),
+                              const int initVersion = 0,
+                              const int lastVersion = std::numeric_limits<int>::max()):
+      MyMoneyDbColumn(iname, "", iprimary, inotnull, initVersion, lastVersion),
       m_type(type),
       m_isSigned(isigned) {}
   virtual ~MyMoneyDbIntColumn() {}

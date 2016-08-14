@@ -390,6 +390,10 @@ int MyMoneyStorageSql::upgradeDb()
         if ((rc = upgradeToV9()) != 0) return (1);
         ++m_dbVersion;
         break;
+      case 9:
+        if ((rc = upgradeToV10()) != 0) return (1);
+        ++m_dbVersion;
+        break;
       default:
         qWarning("Unknown version number in database - %d", m_dbVersion);
     }
@@ -691,9 +695,27 @@ int MyMoneyStorageSql::upgradeToV9()
   return 0;
 }
 
+int MyMoneyStorageSql::upgradeToV10()
+{
+  DBG("*** Entering MyMoneyStorageSql::upgradeToV10");
+  MyMoneyDbTransaction dbtrans(*this, Q_FUNC_INFO);
+
+  QSqlQuery q(*this);
+  if (!alterTable(m_db.m_tables["kmmPayeesPayeeIdentifier"], m_dbVersion))
+    return (1);
+  if (!alterTable(m_db.m_tables["kmmAccountsPayeeIdentifier"], m_dbVersion))
+    return (1);
+
+  return 0;
+}
+
+
 bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion)
 {
   DBG("*** Entering MyMoneyStorageSql::alterTable");
+
+  const int toVersion = fromVersion + 1;
+
   QString tempTableName = t.name();
   tempTableName.replace("kmm", "kmmtmp");
   QSqlQuery q(*this);
@@ -718,8 +740,8 @@ bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion)
     buildError(q, Q_FUNC_INFO, QString("Error renaming table %1").arg(t.name()));
     return false;
   }
-  createTable(t, fromVersion + 1);
-  q.prepare(QString("INSERT INTO " + t.name() + " (" + t.columnList(fromVersion) +
+  createTable(t, toVersion);
+  q.prepare(QString("INSERT INTO " + t.name() + " (" + t.columnList(toVersion) +
                     ") SELECT " + t.columnList(fromVersion) + " FROM " + tempTableName + ';'));
   if (!q.exec()) { // krazy:exclude=crashy
     buildError(q, Q_FUNC_INFO, QString("Error inserting into new table %1").arg(t.name()));
