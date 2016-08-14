@@ -655,34 +655,14 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       bool found = false;
       QStringList accounts = thisaccount.accountList();
       QStringList::const_iterator it_account = accounts.constBegin();
+      QString currencyid;
       while (!found && it_account != accounts.constEnd()) {
-        QString currencyid = file->account(*it_account).currencyId();
+        currencyid = file->account(*it_account).currencyId();
         MyMoneySecurity security = file->security(currencyid);
         if (matchNotEmpty(statementTransactionUnderImport.m_strSymbol, security.tradingSymbol()) ||
             matchNotEmpty(statementTransactionUnderImport.m_strSecurity, security.name())) {
           thisaccount = file->account(*it_account);
           found = true;
-
-          // Don't update price if there is no price information contained in the transaction
-          if (statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaCashDividend
-              && statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaShrsin
-              && statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaShrsout) {
-            // update the price, while we're here.  in the future, this should be
-            // an option
-            QString basecurrencyid = file->baseCurrency().id();
-            const MyMoneyPrice &price = file->price(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted, true);
-            if (!price.isValid()  && ((!statementTransactionUnderImport.m_amount.isZero() && !statementTransactionUnderImport.m_shares.isZero()) || !statementTransactionUnderImport.m_price.isZero())) {
-              MyMoneyPrice newprice;
-              if (!statementTransactionUnderImport.m_price.isZero()) {
-                newprice = MyMoneyPrice(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted,
-                                        statementTransactionUnderImport.m_price.abs(), i18n("Statement Importer"));
-              } else {
-                newprice = MyMoneyPrice(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted,
-                                        (statementTransactionUnderImport.m_amount / statementTransactionUnderImport.m_shares).abs(), i18n("Statement Importer"));
-              }
-              file->addPrice(newprice);
-            }
-          }
         }
 
         ++it_account;
@@ -714,6 +694,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             thisaccount.setName(security.name());
             thisaccount.setAccountType(MyMoneyAccount::Stock);
             thisaccount.setCurrencyId(security.id());
+            currencyid = thisaccount.currencyId();
 
             file->addAccount(thisaccount, m_account);
             kDebug(0) << Q_FUNC_INFO << ": created account " << thisaccount.id() << " for security " << statementTransactionUnderImport.m_strSecurity << " under account " << m_account.id();
@@ -731,6 +712,26 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             }
             return;
           }
+        }
+      }
+      // Don't update price if there is no price information contained in the transaction
+      if (statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaCashDividend
+          && statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaShrsin
+          && statementTransactionUnderImport.m_eAction != MyMoneyStatement::Transaction::eaShrsout) {
+        // update the price, while we're here.  in the future, this should be
+        // an option
+        QString basecurrencyid = file->baseCurrency().id();
+        const MyMoneyPrice &price = file->price(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted, true);
+        if (!price.isValid()  && ((!statementTransactionUnderImport.m_amount.isZero() && !statementTransactionUnderImport.m_shares.isZero()) || !statementTransactionUnderImport.m_price.isZero())) {
+          MyMoneyPrice newprice;
+          if (!statementTransactionUnderImport.m_price.isZero()) {
+            newprice = MyMoneyPrice(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted,
+                                    statementTransactionUnderImport.m_price.abs(), i18n("Statement Importer"));
+          } else {
+            newprice = MyMoneyPrice(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted,
+                                    (statementTransactionUnderImport.m_amount / statementTransactionUnderImport.m_shares).abs(), i18n("Statement Importer"));
+          }
+          file->addPrice(newprice);
         }
       }
     }
