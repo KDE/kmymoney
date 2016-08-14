@@ -53,7 +53,7 @@
 #include "payeeidentifier/payeeidentifierloader.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 
-#define DBG(a) //qDebug (a)
+#define DBG(a) // qDebug() << a
 
 // subclass QSqlQuery for performance tracing
 MyMoneySqlQuery::MyMoneySqlQuery(MyMoneyStorageSql*  db)
@@ -376,6 +376,14 @@ int MyMoneyStorageSql::upgradeDb()
         if ((rc = upgradeToV8()) != 0) return (1);
         ++m_dbVersion;
         break;
+      case 8:
+        if ((rc = upgradeToV9()) != 0) return (1);
+        ++m_dbVersion;
+        break;
+      case 9:
+        if ((rc = upgradeToV10()) != 0) return (1);
+        ++m_dbVersion;
+        break;
       default:
         qWarning("Unknown version number in database - %d", m_dbVersion);
     }
@@ -664,9 +672,39 @@ int MyMoneyStorageSql::upgradeToV8()
   return 0;
 }
 
+int MyMoneyStorageSql::upgradeToV9()
+{
+  DBG("*** Entering MyMoneyStorageSql::upgradeToV9");
+  MyMoneyDbTransaction dbtrans(*this, Q_FUNC_INFO);
+
+  QSqlQuery q(*this);
+  // kmmSplits - add bankId
+  if (!alterTable(m_db.m_tables["kmmSplits"], m_dbVersion))
+    return (1);
+
+  return 0;
+}
+
+int MyMoneyStorageSql::upgradeToV10()
+{
+  DBG("*** Entering MyMoneyStorageSql::upgradeToV10");
+  MyMoneyDbTransaction dbtrans(*this, Q_FUNC_INFO);
+
+  QSqlQuery q(*this);
+  if (!alterTable(m_db.m_tables["kmmPayeesPayeeIdentifier"], m_dbVersion))
+    return (1);
+  if (!alterTable(m_db.m_tables["kmmAccountsPayeeIdentifier"], m_dbVersion))
+    return (1);
+
+  return 0;
+}
+
 bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion)
 {
   DBG("*** Entering MyMoneyStorageSql::alterTable");
+
+  const int toVersion = fromVersion + 1;
+
   QString tempTableName = t.name();
   tempTableName.replace("kmm", "kmmtmp");
   QSqlQuery q(*this);
@@ -691,8 +729,8 @@ bool MyMoneyStorageSql::alterTable(const MyMoneyDbTable& t, int fromVersion)
     buildError(q, Q_FUNC_INFO, QString("Error renaming table %1").arg(t.name()));
     return false;
   }
-  createTable(t, fromVersion + 1);
-  q.prepare(QString("INSERT INTO " + t.name() + " (" + t.columnList(fromVersion) +
+  createTable(t, toVersion);
+  q.prepare(QString("INSERT INTO " + t.name() + " (" + t.columnList(toVersion) +
                     ") SELECT " + t.columnList(fromVersion) + " FROM " + tempTableName + ';'));
   if (!q.exec()) { // krazy:exclude=crashy
     buildError(q, Q_FUNC_INFO, QString("Error inserting into new table %1").arg(t.name()));
@@ -1160,7 +1198,7 @@ void MyMoneyStorageSql::addPayee(const MyMoneyPayee& payee)
       order << i;
       payeeIdList << payee.id();
     }
-    q.prepare("INSERT INTO kmmPayeesPayeeIdentifier (payeeId, identifierId, \"order\") VALUES(?, ?, ?)");
+    q.prepare("INSERT INTO kmmPayeesPayeeIdentifier (payeeId, identifierId, userorder) VALUES(?, ?, ?)");
     q.bindValue(0, payeeIdList);
     q.bindValue(1, identIds);
     q.bindValue(2, order);
@@ -1238,7 +1276,7 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
     }
   }
 
-  q.prepare("INSERT INTO kmmPayeesPayeeIdentifier (payeeId, \"order\", identifierId) VALUES(?, ?, ?)");
+  q.prepare("INSERT INTO kmmPayeesPayeeIdentifier (payeeId, userorder, identifierId) VALUES(?, ?, ?)");
   q.bindValue(0, payeeIdList);
   q.bindValue(1, order);
   q.bindValue(2, identIdList);
@@ -1962,6 +2000,7 @@ void MyMoneyStorageSql::writeSplitList
   QVariantList postDateList;
   QVariantList bankIdList;
   QVariantList kvpIdList;
+  QVariantList costCenterIdList;
   QList<QMap<QString, QString> > kvpPairsList;
 
   int i = 0;
@@ -1998,7 +2037,7 @@ void MyMoneyStorageSql::writeSplitList
     checkNumberList << s.number();
     postDateList << m_txPostDate.toString(Qt::ISODate); // FIXME: when Tom puts date into split object
     bankIdList << s.bankID();
-
+    costCenterIdList << QString();
     kvpIdList << QString(txId + QString::number(splitIdList[i]));
     kvpPairsList << s.pairs();
     ++i;
@@ -2028,6 +2067,7 @@ void MyMoneyStorageSql::writeSplitList
   q.bindValue(":checkNumber", checkNumberList);
   q.bindValue(":postDate", postDateList);
   q.bindValue(":bankId", bankIdList);
+  q.bindValue(":costCenterId", costCenterIdList);
   if (!q.execBatch()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("writing Split")));
   deleteKeyValuePairs("SPLIT", kvpIdList);
   writeKeyValuePairs("SPLIT", kvpIdList, kvpPairsList);
@@ -3296,7 +3336,7 @@ const QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringLi
                    " ) kmmPayees "
                    " LEFT OUTER JOIN kmmPayeesPayeeIdentifier ON kmmPayees.Id = kmmPayeesPayeeIdentifier.payeeId "
                    // The order is used below
-                   " ORDER BY kmmPayees.id, kmmPayeesPayeeIdentifier.\"order\";");
+                   " ORDER BY kmmPayees.id, kmmPayeesPayeeIdentifier.userorder;");
 
   q.prepare(queryString);
 

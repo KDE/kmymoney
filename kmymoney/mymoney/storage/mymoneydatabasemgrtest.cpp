@@ -61,7 +61,7 @@ void MyMoneyDatabaseMgrTest::cleanup()
     m_dbAttached = false;
   }
   delete m;
-  qDebug() << "teststep" << testStepTimer.elapsed() << "seconds, total" << testCaseTimer.elapsed() << "sec";
+  qDebug() << "teststep" << testStepTimer.elapsed() << "msec, total" << testCaseTimer.elapsed() << "msec";
 }
 
 void MyMoneyDatabaseMgrTest::testEmptyConstructor()

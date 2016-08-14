@@ -32,7 +32,7 @@
 #include "mymoneyfile.h"
 
 //***************** THE CURRENT VERSION OF THE DATABASE LAYOUT ****************
-unsigned int MyMoneyDbDef::m_currentVersion = 8;
+unsigned int MyMoneyDbDef::m_currentVersion = 10;
 
 // ************************* Build table descriptions ****************************
 MyMoneyDbDef::MyMoneyDbDef()
@@ -59,6 +59,7 @@ MyMoneyDbDef::MyMoneyDbDef()
   Balances();
   OnlineJobs();
   PayeeIdentifier();
+  CostCenter();
 }
 
 /* PRIMARYKEY - these fields combine to form a unique key field on which the db will create an index
@@ -158,7 +159,8 @@ void MyMoneyDbDef::PayeesPayeeIdentifier()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("payeeId", "varchar(32)",  PRIMARYKEY, NOTNULL, 8));
-  appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8, 9));
+  appendField(MyMoneyDbIntColumn("userorder", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 10));
   appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
   MyMoneyDbTable t("kmmPayeesPayeeIdentifier", fields);
   t.buildSQLStrings();
@@ -217,7 +219,8 @@ void MyMoneyDbDef::AccountsPayeeIdentifier()
 {
   QList<KSharedPtr <MyMoneyDbColumn> > fields;
   appendField(MyMoneyDbColumn("accountId", "varchar(32)",  PRIMARYKEY, NOTNULL, 8));
-  appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8));
+  appendField(MyMoneyDbIntColumn("\"order\"", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 8, 9));
+  appendField(MyMoneyDbIntColumn("userorder", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 10));
   appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
   MyMoneyDbTable t("kmmAccountsPayeeIdentifier", fields);
   t.buildSQLStrings();
@@ -257,6 +260,7 @@ void MyMoneyDbDef::Splits()
   appendField(MyMoneyDbTextColumn("priceFormatted", MyMoneyDbTextColumn::MEDIUM, false, false, 2));
   appendField(MyMoneyDbTextColumn("memo"));
   appendField(MyMoneyDbColumn("accountId", "varchar(32)", false, NOTNULL));
+  appendField(MyMoneyDbColumn("costCenterId", "varchar(32)", false, false, 9));
   appendField(MyMoneyDbColumn("checkNumber", "varchar(32)"));
   appendField(MyMoneyDbDatetimeColumn("postDate", false, false, 1));
   appendField(MyMoneyDbTextColumn("bankId", MyMoneyDbTextColumn::MEDIUM, false, false, 5));
@@ -435,6 +439,16 @@ void MyMoneyDbDef::Budgets()
   m_tables[t.name()] = t;
 }
 
+void MyMoneyDbDef::CostCenter()
+{
+  QList<KSharedPtr <MyMoneyDbColumn> > fields;
+  appendField(MyMoneyDbColumn("id", "varchar(32)", PRIMARYKEY, NOTNULL));
+  appendField(MyMoneyDbColumn("name", "text", false, NOTNULL));
+  MyMoneyDbTable t("kmmCostCenter", fields);
+  t.buildSQLStrings();
+  m_tables[t.name()] = t;
+}
+
 void MyMoneyDbDef::Balances()
 {
   MyMoneyDbView v("kmmBalances", "CREATE VIEW kmmBalances AS "
@@ -599,7 +613,7 @@ const QString MyMoneyDbTable::columnList(const int version) const
   QString qs;
   ft = m_fields.begin();
   while (ft != m_fields.end()) {
-    if ((*ft)->initVersion() <= version)
+    if ((*ft)->initVersion() <= version && (*ft)->lastVersion() >= version)
       qs += QString("%1, ").arg((*ft)->name());
     ++ft;
   }
@@ -611,7 +625,7 @@ const QString MyMoneyDbTable::generateCreateSQL(const KSharedPtr<MyMoneyDbDriver
   QString qs = QString("CREATE TABLE %1 (").arg(name());
   QString pkey;
   for (field_iterator it = m_fields.begin(); it != m_fields.end(); ++it) {
-    if ((*it)->initVersion() <= version) {
+    if ((*it)->initVersion() <= version && (*it)->lastVersion() >= version) {
       qs += (*it)->generateDDL(driver) + ", ";
       if ((*it)->isPrimaryKey())
         pkey += (*it)->name() + ", ";
@@ -643,7 +657,7 @@ bool MyMoneyDbTable::hasPrimaryKey(int version) const
 {
   field_iterator ft = m_fields.constBegin();
   while (ft != m_fields.constEnd()) {
-    if ((*ft)->initVersion() <= version) {
+    if ((*ft)->initVersion() <= version && (*ft)->lastVersion() >= version) {
       if ((*ft)->isPrimaryKey())
         return (true);
     }
