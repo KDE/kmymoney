@@ -32,6 +32,7 @@ email                 : lukasz.wojnilowicz@gmail.com
 #include <QCompleter>
 #include <QComboBox>
 #include <QUrl>
+#include <QMap>
 
 #include <mymoneystatement.h>
 
@@ -44,11 +45,6 @@ class InvestProcessing : public QObject
   Q_OBJECT
 
 private:
-  struct csvSplit {
-    QString      m_strCategoryName;
-    QString      m_strMemo;
-    QString      m_amount;
-  } m_csvSplit;
 
 public:
   InvestProcessing();
@@ -58,26 +54,26 @@ public:
   RedefineDlg*      m_redefine;
   SymbolTableDlg*   m_symbolTableDlg;
 
-  int            m_payeeColumn;
-  int            m_amountColumn;
-  int            m_feeColumn;
-  int            m_priceColumn;
-  int            m_quantityColumn;
-  int            m_symbolColumn;
-  int            m_nameColumn;
+  typedef enum:uchar { ColumnDate, ColumnType, ColumnAmount,
+         ColumnPrice, ColumnQuantity, ColumnFee,
+         ColumnSymbol, ColumnName, ColumnMemo,
+         ColumnEmpty = 0xFE, ColumnInvalid = 0xFF
+       } columnTypeE;
+
+  QMap<columnTypeE, int>   m_colTypeNum;
+  QMap<int ,columnTypeE>   m_colNumType;
+  QMap<columnTypeE, QString> m_colTypeName;
+
   int            m_feeIsPercentage;
-  int            m_typeColumn;
-  int            m_symbolRow;
   int            m_securityNameIndex;
   int            m_priceFraction;
 
+  QString        m_priceFractionValue;
   QString        m_feeRate;
   QString        m_minFee;
   QString        m_nameFilter;
 
   void           saveSettings();
-
-  void           setTrInvestDataType(const QString& val);
 
   /**
   * This method is called after startup, to initialise some parameters.
@@ -89,18 +85,6 @@ public:
   */
 
   void           readSettings();
-
-  /**
-  * This method is called to reload column settings from the UI.
-  */
-  void           reloadUISettings();
-
-  void           clearColumnType(int column);
-  void           setColumnType(int column, const QString& type);
-
-  QString        previousType();
-  void           clearPreviousType();
-  void           setPreviousType(const QString& type);
 
   /**
   * This method feeds file buffer in investment lines parser.
@@ -120,12 +104,6 @@ public:
   void           clearColumnNumbers();
 
   /**
-  * This method is called when an input file has been selected, to clear
-  * previous column selections.
-  */
-  void           clearColumnTypes();
-
-  /**
   * Because the memo field allows multiple selections, it helps to be able
   * to see which columns are selected already, particularly if a column
   * selection gets deleted. This is achieved by adding a '*' character
@@ -135,14 +113,12 @@ public:
   */
   void           clearComboBoxText();
 
-  QString        columnType(int column);
   QString        invPath();
   QString        m_invPath;
 
   QStringList    securityList();
   QStringList    m_symbolsList;
   QStringList    m_namesList;
-  QStringList    m_columnTypeList;  //  holds field types - date, payee, etc.
 
   QMap<QString, QString> m_map;
 
@@ -155,29 +131,16 @@ public:
   QStringList    m_reinvdivList;
   QStringList    m_buyList;
   QStringList    m_sellList;
-  QStringList    m_removeList;
+  QStringList    m_shrsoutList;
   QStringList    m_columnList;
   QStringList    m_securityList;
 
+  QList<MyMoneyStatement::Transaction::EAction> m_validActionTypes;
   QList<MyMoneyStatement::Security> m_listSecurities;
 
-  int            amountColumn();
-  int            priceColumn();
-  int            quantityColumn();
-  int            dateColumn();
-  int            nameColumn();
-  int            feeColumn();
-  int            symbolColumn();
-  int            typeColumn();
-  int            memoColumn();
-  int            feeIsPercentage();
-
-  bool           importNow();
   bool           m_symbolTableScanned;
 
   void           setSecurityName(QString name);
-
-//  bool           m_importCompleted;
 
 public:
 signals:
@@ -199,12 +162,6 @@ public slots:
   void           slotFileDialogClicked();
 
   /**
-  * This method is called when the Date column is activated.
-  * It will validate the column selection.
-  */
-  void           dateColumnSelected(int);
-
-  /**
   * This method is called when the user clicks 'Encoding' and selects an
   * encoding setting.  The file is re-read with the corresponding codec.
   */
@@ -217,6 +174,36 @@ public slots:
   void           feeInputsChanged();
 
   /**
+  * This method will check whether memo combobox is still valid
+  * after changing name or type column.
+  */
+  bool           validateMemoComboBox();
+
+  /**
+  * This method is called when the Fraction column is activated.
+  * It will update m_priceFractionValue variable.
+  */
+  void           fractionColumnChanged(int col);
+
+  /**
+  * This method is called column on investment page is selected.
+  * It sets m_colTypeNum, m_colNumType and runs column validation.
+  */
+  bool           validateSelectedColumn(int col, columnTypeE type);
+
+  /**
+  * This method is called when the Memo column is activated.
+  * Multiple columns may be selected sequentially.
+  */
+  void           memoColumnSelected(int col);
+
+  /**
+  * This method is called when the Date column is activated.
+  * It will validate the column selection.
+  */
+  void           dateColumnSelected(int);
+
+  /**
   * This method is called if the Fee column is activated.  The fee column may
   * contain either a value or a percentage. The user needs to set the 'Fee is
   * percentage' check box appropriately.  Caution may be needed here, as the fee
@@ -225,10 +212,10 @@ public slots:
   void           feeColumnSelected(int);
 
   /**
-  * This method is called when the Memo column is activated.
-  * Multiple columns may be selected sequentially.
+  * This method is called when the activity 'Type/Action' column is activated.
+  * It will validate the column selection.
   */
-  void           memoColumnSelected(int col);
+  void           typeColumnSelected(int);
 
   /**
   * This method is called when the Quantity column is activated.
@@ -281,12 +268,6 @@ public slots:
   void           saveAs();
 
   /**
-  * This method is called when the activity 'Type/Action' column is activated.
-  * It will validate the column selection.
-  */
-  void           typeColumnSelected(int);
-
-  /**
   * This method is called when the user clicks 'Clear fees'.
   * All fees selections are cleared. Generated fees colum is removed.
   */
@@ -298,17 +279,17 @@ public slots:
   */
   void           clearColumnsSelected();
 
+  /**
+  * This method is called to calculate fee based on fee rate and amount.
+  * The method generates column with fees in importer's window afterwards.
+  */
+  void           calculateFee();
+
 private:
 signals:
   void           slotGetStatement();
 
 private:
-  /**
-  * This method is called during import, to convert the QString activity type
-  * to a MyMoneyStatement::Transaction::EAction& convType, which is added to
-  * the transaction about to be imported.
-  */
-  void           convertType(const QString&, MyMoneyStatement::Transaction::EAction&);
 
   /**
   * This method is called when a date cannot be recognised  and the user
@@ -324,36 +305,35 @@ private:
   void           enableInputs();
 
   /**
-  * This method is called during input.  It builds the
-  * MyMoneyStatement, ready for importing.
+  * This method creates valid set of possible transactions
+  * according to quantity, amount and price
   */
-  void           investCsvImport(MyMoneyStatement&);
+  bool createValidActionTypes(QList<MyMoneyStatement::Transaction::EAction> &validActionTypes, MyMoneyStatement::Transaction &tr);
+
+  /**
+  * This method stores user selection of action type so it will not ask
+  * for the same action type twice.
+  */
+  void storeActionType(MyMoneyStatement::Transaction::EAction &actionType, const QString &userType);
+
+  /**
+  * This method validates the column numbers entered by the user.  It then
+  * checks the values in those columns for compatibility with the input
+  * investment activity type.
+  */
+  bool  validateActionType(MyMoneyStatement::Transaction::EAction &actionType, const QString &userType);
 
   /**
   * This method is called during input.  It validates the action types
   * in the input file, and assigns appropriate QString types.
   */
-  int            processActionType(QString& type);
+  MyMoneyStatement::Transaction::EAction processActionType(QString& type);
 
   /**
-  * This method is called when the user clicks 'Accept'.
-  * It will evaluate an input line and prepare it to be added to a statement,
-  * and to a QIF file, if required.
+  * This method is called when the user clicks 'Import'.
+  * It will evaluate an input line and append it to a statement.
   */
-  int            processInvestLine(const QString& inBuffer);
-
-  /**
-  * This method is called during input if a brokerage type activity is found.
-  * It will request user input of the brokerage/current account to be used, and
-  * also of the column defining the payee/detail.
-  */
-  QString        accountName(const QString& aName);
-
-  /**
-  * This method is called during input if a brokerage type activity is found.
-  * It will request user input of the column defining the payee/detail.
-  */
-  int            columnNumber(const QString& column);
+  bool processInvestLine(const QString& line, MyMoneyStatement& st);
 
   /**
     * This method is used to get the account id of the split for
@@ -365,32 +345,7 @@ private:
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
-  struct qifInvestData {
-    QString      memo;
-    MyMoneyMoney price;
-    MyMoneyMoney quantity;
-    MyMoneyMoney amount;
-    MyMoneyMoney fee;
-    QString      payee;
-    QString      security;
-    QString      symbol;
-    QString      brokerageAccnt;
-    QString      type;
-    QDate        date;
-  }              m_trInvestData;
-
-  bool           m_amountSelected;
-  bool           m_brokerage;
-  bool           m_brokerageItems;
   bool           m_importNow;
-  bool           m_dateSelected;
-  bool           m_feeSelected;
-  bool           m_memoSelected;
-  bool           m_priceSelected;
-  bool           m_quantitySelected;
-  bool           m_typeSelected;
-  bool           m_symbolSelected;
-  bool           m_nameSelected;
   bool           m_needFieldDelimiter;
 
   QString        m_accountName;
@@ -412,15 +367,7 @@ private slots:
   * same column for two different fields.  The column detecting the error
   * has to reset the other column.
   */
-  void           resetComboBox(const QString& comboBox, const int& col);
-
-  void           changedType(const QString& newType);
-
-  /**
-  * This method is called to calculate fee based on fee rate and amount.
-  * The method generates column with fees in importer's window afterwards.
-  */
-  void           calculateFee();
+  void           resetComboBox(columnTypeE comboBox);
 
   /**
   * This method is called to remove a security name from the combobox list.
@@ -428,11 +375,7 @@ private slots:
   */
   void           hideSecurity();
 
-
   void           securityNameSelected(const QString& name);
   void           securityNameEdited();
-
-  int            validateNewColumn(const int& col, const QString& type);
-
 };
 #endif // INVESTPROCESSING_H

@@ -22,6 +22,8 @@ email                 : agander93@gmail.com
 #include <QPushButton>
 
 #include "mymoneymoney.h"
+#include "investprocessing.h"
+#include "mymoneystatement.h"
 #include "ui_redefinedlgdecl.h"
 
 class InvestmentDlg;
@@ -43,42 +45,26 @@ public:
   RedefineDlg();
   ~RedefineDlg();
 
-  QString          accountName();
+  QBrush           m_colorBrush;
+  QBrush           m_colorBrushText;
+  QBrush           m_errorBrush;
+  QBrush           m_errorBrushText;
+  QMap<InvestProcessing::columnTypeE, int>   m_colTypeNum;
+  QMap<InvestProcessing::columnTypeE, QString> m_colTypeName;
 
-  void             setAmountColumn(int col);
-  void             setPriceColumn(int col);
-  void             setQuantityColumn(int col);
-  void             setTypeColumn(int col);
-  void             setSymbolColumn(int col);
-  void             setNameColumn(int col);
-  void             setAccountName(const QString& val);
-  void             clearAccountName();
-  void             setInBuffer(const QString& val);
-
+  void             setColumnTypeNumber(QMap<InvestProcessing::columnTypeE, int> &colTypeNum);
+  void             setColumnTypeName(QMap<InvestProcessing::columnTypeE, QString> &colTypeName);
+  void             setValidActionTypes(const QList<MyMoneyStatement::Transaction::EAction> &validActionTypes);
   void             setColumnList(const QStringList& list);
-
-  /**
-  * This method validates the column numbers entered by the user.  It then
-  * checks the values in those columns for compatibility with the input
-  * investment activity type.  If an error is detected, suspectType() is called.
-  */
-  int              checkValid(const QString& type, QString info);
 
   /**
   * This method calls buildOkTypeList() to identify the likely valid type,
   * based on the input values.  It then displays the transaction, allowing
   * the user to select the proper activity type.  This selection also is validated.
   */
-  int              suspectType(const QString& info);
+  MyMoneyStatement::Transaction::EAction askActionType(const QString& info);
 
 signals:
-  /**
-  * This method calls buildOkTypeList() to help identify the likely valid type,
-  * based on the input values.  It then displays the transaction, allowing
-  * the user to select the proper activity type.  This selection also is
-  * validated, or, rather, controlled.
-  */
-  void             changedType(const QString&);
 
 private:
   RedefineDlgDecl* m_widget;
@@ -89,52 +75,21 @@ private:
   QPushButton*      m_buttonOK;
   QPushButton*      m_buttonCancel;
 
-  QString          m_accountName;
-  QString          m_inBuffer;
-  QString          m_newType;
+  MyMoneyStatement::Transaction::EAction  m_newType;
 
-  QStringList      m_okTypeList;
+  QList<MyMoneyStatement::Transaction::EAction> m_validActionTypes;
+  QList<MyMoneyStatement::Transaction::EAction> m_typesList;
   QStringList      m_columnList;
-  QStringList      m_typesList;
 
-  int              m_amountColumn;
-  int              m_columnTotalWidth;
-  int              m_maxWidth;
-  int              m_mainHeight;
-  int              m_mainWidth;
   int              m_maxCol;
-  int              m_priceColumn;
-  int              m_quantityColumn;
   int              m_ret;
-  int              m_typeColumn;
-  int              m_symbolColumn;
-  int              m_nameColumn;
-
-  MyMoneyMoney     m_price;
-  MyMoneyMoney     m_quantity;
-  MyMoneyMoney     m_amount;
-
-
 
   /**
   * This method displays the transaction, highlighting the column containing the
   * dubious invewstment transaction type.  It displays a combobox, allowing the
-  * user to select the proper type, based on m_okTypeList.
+  * user to select the proper type, based on m_validActionTypes.
   */
   void             displayLine(const QString& info);
-
-  /**
-  * This method displays a dialog box, requiring the user to enter a checking/brokerage
-  * account name for transfer of funds for buy, sell or dividend transactions.
-  */
-  QString          inputParameter(const QString& aName);
-
-  void             resizeEvent(QResizeEvent * event);
-
-  /**
-  * This method is called to redraw the window following input, or resizing.
-  */
-  void             updateWindow();
 
 private slots:
   /**
@@ -155,17 +110,6 @@ private slots:
   * (This return is used for compatibility with other InvestProcessing routine returns.)
   */
   void             slotRejected();
-
-  /**
-  * This method is called to identify suitable investment types, based on the combination of
-  * investment parameters in the transaction.
-  */
-  void             buildOkTypeList();
-
-  /**
-  * This method extracts the transaction values from the columns selected by the user.
-  */
-  void             convertValues();
 };
 
 #endif // REDEFINEDLG_H
