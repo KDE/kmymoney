@@ -74,6 +74,8 @@ public:
   Parse*              m_parse;
   CsvImporterPlugin*  m_plugin;
 
+  MyMoneyStatement st;
+
   QPixmap        m_iconBack;
   QPixmap        m_iconCancel;
   QPixmap        m_iconCSV;
@@ -216,18 +218,6 @@ public slots:
   void           amountRadioClicked(bool checked);
 
   /**
-  * This method is called when the Amount column is activated.
-  * It will validate the column selection.
-  */
-  void           amountColumnSelected(int);
-
-  /**
-  * This method is called when the Date column is activated.
-  * It will validate the column selection.
-  */
-  void           dateColumnSelected(int col);
-
-  /**
   * This method is called when the debitCreditRadio button is clicked.
   * It will disable all elements of the alternate, amount ui.
   */
@@ -238,42 +228,6 @@ public slots:
   * It will set m_oppositeSigns.
   */
   void           oppositeSignsCheckBoxClicked(bool checked);
-
-  /**
-  * This method is called when the Credit column is activated.
-  * It will validate the column selection.
-  */
-  void           creditColumnSelected(int);
-
-  /**
-  * This method is called when the Debit column is activated.
-  * It will validate the column selection.
-  */
-  void           debitColumnSelected(int);
-
-  /**
-  * This method is called when the Memo column is activated.
-  * Multiple columns may be selected sequentially.
-  */
-  void           memoColumnSelected(int);
-
-  /**
-  * This method is called when the Number column is activated.
-  * It will validate the column selection.
-  */
-  void           numberColumnSelected(int);
-
-  /**
-  * This method is called when the Payee column is activated.
-  * It will validate the column selection.
-  */
-  void           payeeColumnSelected(int);
-
-  /**
-  * This method is called when the Category column is activated.
-  * It will validate the column selection.
-  */
-  void           categoryColumnSelected(int);
 
   /**
   * This method is called when 'Exit' is clicked.  The plugin settings will
@@ -313,13 +267,6 @@ public slots:
   * Appends memo field in lines buffer,
   */
   void           createMemoField(QStringList &columnTypeList);
-
-  /**
-  * This method is called when it is detected that the user has selected the
-  * same column for two different fields.  The column detecting the error
-  * has to reset the other column.
-  */
-  void           resetComboBox(const QString& comboBox, const int& col);
 
   void           slotIdChanged(int id);
 
