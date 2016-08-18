@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
       featuresDescription = i18n("Compiled with the following optional features:\n%1", features.join(QLatin1Char('\n')));
   KAboutData aboutData(QStringLiteral("kmymoney"), i18n("KMyMoney"), QStringLiteral(VERSION),
                        i18n("\nKMyMoney, the Personal Finance Manager for KDE.\n\nPlease consider contributing to this project with code and/or suggestions."), KAboutLicense::GPL,
-                       i18n("(c) 2000-2014 The KMyMoney development team"),
+                       i18n("(c) 2000-2016 The KMyMoney development team"),
                        featuresDescription,
                        QStringLiteral("http://kmymoney.org/"));
 
