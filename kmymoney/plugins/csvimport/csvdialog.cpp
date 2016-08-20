@@ -52,8 +52,6 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
-#include <kjobwidgets.h>
-#include <kio/job.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -101,9 +99,8 @@ void CSVDialog::readSettings()
   for (int i = 0; i < m_wiz->m_profileList.count(); i++) {
     if (m_wiz->m_profileList[i] != m_wiz->m_profileName)
       continue;
-    KConfigGroup profilesGroup(config, "Profiles-" + m_wiz->m_profileList[i]);
-    m_csvPath = profilesGroup.readEntry("CsvDirectory", QString());
-    m_debitFlag = profilesGroup.readEntry("DebitFlag", -1);
+    KConfigGroup profilesGroup(config, "Bank-" + m_wiz->m_profileList[i]);
+    m_wiz->m_inFileName = profilesGroup.readEntry("Directory", QString());
     m_colTypeNum[ColumnPayee] = profilesGroup.readEntry("PayeeCol", -1);
     m_colTypeNum[ColumnNumber] = profilesGroup.readEntry("NumberCol", -1);
     m_colTypeNum[ColumnAmount] = profilesGroup.readEntry("AmountCol", -1);
@@ -146,93 +143,9 @@ void CSVDialog::readSettings()
     m_wiz->m_encodeIndex = profilesGroup.readEntry("Encoding", 0);
     break;
   }
-  KConfigGroup mainGroup(config, "MainWindow");
-  m_wiz->m_pluginHeight = mainGroup.readEntry("Height", 640);
-  m_wiz->m_pluginWidth = mainGroup.readEntry("Width", 800);
-}
-
-void CSVDialog::slotFileDialogClicked()
-{
-  if ((m_wiz->m_fileType != "Banking") || (m_wiz->m_profileName.isEmpty())) {
-    if (m_wiz->m_fileType == "Banking") {
-      KMessageBox::information(0, i18n("Please select a profile type and enter a profile name."));
-    }
-    return;
-  }
-  clearColumnsSelected();
-  m_wiz->m_skipSetup = m_wiz->m_pageIntro->ui->checkBoxSkipSetup->isChecked();
-  m_wiz->m_columnsNotSet = true;  //  Don't check columns until they've been selected.
-  m_wiz->m_inFileName.clear();
-  m_url.clear();
-  m_wiz->m_accept = false;
-
-  //  The "DebitFlag" setting is used to indicate whether or not to allow the user,
-  //  via a dialog, to specify a column which contains a flag to indicate if the
-  //  amount field is a debit ('a' or 'af'), a credit ('bij') (ING - Netherlands),
-  //   or ignore ('-1').
-  m_debitFlag = -1;
-  m_wiz->m_importNow = false;//                       Avoid attempting date formatting on headers
-  m_wiz->m_acceptAllInvalid = false;  //              Don't accept further invalid values.
-  m_wiz->m_parse->setSymbolFound(false);
-  readSettings();
-
-  if (m_csvPath.isEmpty()) {
-    m_csvPath = QDir::home().absolutePath();
-  }
-
-  if(m_csvPath.startsWith("~/"))  //expand Linux home directory
-    m_csvPath.replace(0, 1, QDir::home().absolutePath());
-
-  QPointer<QFileDialog> dialog = new QFileDialog(m_wiz->m_wizard, QString(), m_csvPath,
-                                                 i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"));
-  dialog->setOption(QFileDialog::DontUseNativeDialog, true);  //otherwise we cannot add custom QComboBox
-  dialog->setFileMode(QFileDialog::ExistingFile);
-  QLabel* label = new QLabel(i18n("Encoding"));
-  dialog->layout()->addWidget(label);
-  //    Add encoding selection to FileDialog
-  m_wiz->m_comboBoxEncode = new QComboBox();
-  m_wiz->setCodecList(m_wiz->m_codecs);
-  m_wiz->m_comboBoxEncode->setCurrentIndex(m_wiz->m_encodeIndex);
-  connect(m_wiz->m_comboBoxEncode, SIGNAL(activated(int)), this, SLOT(encodingChanged(int)));
-  dialog->layout()->addWidget(m_wiz->m_comboBoxEncode);
-  if(dialog->exec() == QDialog::Accepted) {
-    m_url = dialog->selectedUrls().first();
-  }
-  delete dialog;
-
-  if (m_url.isEmpty()) {
-    return;
-  } else if (m_url.isLocalFile()) {
-    m_wiz->m_inFileName = m_url.toLocalFile();
-  } else {
-    m_wiz->m_inFileName = QDir::tempPath();
-    if(!m_wiz->m_inFileName.endsWith(QDir::separator()))
-      m_wiz->m_inFileName += QDir::separator();
-    m_wiz->m_inFileName += m_url.fileName();
-    qDebug() << "Source:" << m_url.toDisplayString() << "Destination:" << m_wiz->m_inFileName;
-    KIO::FileCopyJob *job = KIO::file_copy(m_url, QUrl::fromUserInput(m_wiz->m_inFileName), -1,KIO::Overwrite);
-    KJobWidgets::setWindow(job, m_wiz->m_wizard);
-    job->exec();
-    if (job->error()) {
-      KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.toDisplayString()),
-                                 job->errorString(),
-                                 i18n("File access error"));
-      return;
-    }
-  }
-
-  if (m_wiz->m_inFileName.isEmpty())
-    return;
-
-  m_wiz->readFile(m_wiz->m_inFileName);
-  m_wiz->displayLines(m_wiz->m_lineList, m_wiz->m_parse);
-  enableInputs();
-
-  m_wiz->updateWindowSize();
-  m_wiz->m_wizard->next();  //go to separator page
-  if (m_wiz->m_skipSetup)
-    for (int i = 0; i < 4; i++) //programmaticaly go through separator-, banking-, linesdate-, completionpage
-      m_wiz->m_wizard->next();
+  KConfigGroup miscGroup(config, "Misc");
+  m_wiz->m_pluginHeight = miscGroup.readEntry("Height", 640);
+  m_wiz->m_pluginWidth = miscGroup.readEntry("Width", 800);
 }
 
 void CSVDialog::createStatement()
@@ -458,9 +371,6 @@ bool CSVDialog::processBankLine(const QString &line, MyMoneyStatement &st)
 
 void CSVDialog::slotImportClicked()
 {
-  if (m_wiz->m_fileType != "Banking") {
-    return;
-  }
     m_wiz->m_importNow = true; //                  all necessary data is present
 
     if (m_wiz->m_startLine -1 > m_wiz->m_endLine) {
@@ -482,34 +392,32 @@ void CSVDialog::slotSaveAsQIF()
   createStatement();
   if (m_wiz->st.m_listTransactions.isEmpty())
     return;
-  if (m_wiz->m_fileType == QLatin1String("Banking")) {
-    QStringList outFile = m_wiz->m_inFileName.split('.');
-    const QString &name = QString((outFile.isEmpty() ? "CsvProcessing" : outFile[0]) + ".qif");
+  QStringList outFile = m_wiz->m_inFileName.split('.');
+  const QString &name = QString((outFile.isEmpty() ? "CsvProcessing" : outFile[0]) + ".qif");
 
-    QString outFileName = QFileDialog::getSaveFileName(m_wiz, i18n("Save QIF"), name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")));
-    QFile oFile(outFileName);
-    oFile.open(QIODevice::WriteOnly);
-    QTextStream out(&oFile);
+  QString outFileName = QFileDialog::getSaveFileName(m_wiz, i18n("Save QIF"), name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")));
+  QFile oFile(outFileName);
+  oFile.open(QIODevice::WriteOnly);
+  QTextStream out(&oFile);
 
-    m_qifBuffer = "!Type:Bank\n";
-    QList<MyMoneyStatement::Transaction>::const_iterator it;
-    for( it = m_wiz->st.m_listTransactions.constBegin() ; it != m_wiz->st.m_listTransactions.constEnd(); it++)
-    {
-      m_qifBuffer += 'D' + it->m_datePosted.toString(m_wiz->m_dateFormats[m_wiz->m_dateFormatIndex]) + '\n';
-      double d = it->m_amount.toDouble();
-      QString txt;
-      txt.setNum(d, 'f', 4);
-      m_qifBuffer += 'T' + txt + '\n';
-      m_qifBuffer += 'P' + it->m_strPayee + '\n';
-      if (!it->m_listSplits.isEmpty())
-        m_qifBuffer += 'L' + it->m_listSplits.first().m_strCategoryName + '\n';
-      m_qifBuffer += 'N' + it->m_strNumber + '\n';
-      m_qifBuffer += 'M' + it->m_strMemo + '\n' + "^\n";
-      out << m_qifBuffer;// output qif file
-      m_qifBuffer.clear();
-    }
-    oFile.close();
+  m_qifBuffer = "!Type:Bank\n";
+  QList<MyMoneyStatement::Transaction>::const_iterator it;
+  for( it = m_wiz->st.m_listTransactions.constBegin() ; it != m_wiz->st.m_listTransactions.constEnd(); it++)
+  {
+    m_qifBuffer += 'D' + it->m_datePosted.toString(m_wiz->m_dateFormats[m_wiz->m_dateFormatIndex]) + '\n';
+    double d = it->m_amount.toDouble();
+    QString txt;
+    txt.setNum(d, 'f', 4);
+    m_qifBuffer += 'T' + txt + '\n';
+    m_qifBuffer += 'P' + it->m_strPayee + '\n';
+    if (!it->m_listSplits.isEmpty())
+      m_qifBuffer += 'L' + it->m_listSplits.first().m_strCategoryName + '\n';
+    m_qifBuffer += 'N' + it->m_strNumber + '\n';
+    m_qifBuffer += 'M' + it->m_strMemo + '\n' + "^\n";
+    out << m_qifBuffer;// output qif file
+    m_qifBuffer.clear();
   }
+  oFile.close();
 }
 
 void CSVDialog::clearColumnsSelected()
@@ -544,86 +452,53 @@ void CSVDialog::encodingChanged(int index)
   m_wiz->m_encodeIndex = index;
 }
 
-void CSVDialog::enableInputs()
-{
-  m_wiz->m_pageLinesDate->ui->spinBox_skip->setEnabled(true);
-  m_wiz->m_pageBanking->ui->comboBoxBnk_numberCol->setEnabled(true);
-  m_wiz->m_pageBanking->ui->comboBoxBnk_dateCol->setEnabled(true);
-  m_wiz->m_pageBanking->ui->comboBoxBnk_payeeCol->setEnabled(true);
-  m_wiz->m_pageBanking->ui->comboBoxBnk_memoCol->setEnabled(true);
-  m_wiz->m_pageBanking->ui->button_clear->setEnabled(true);
-  m_wiz->m_pageLinesDate->ui->spinBox_skipToLast->setEnabled(true);
-  m_wiz->m_pageSeparator->ui->comboBox_fieldDelimiter->setEnabled(true);
-  m_wiz->m_pageBanking->ui->checkBoxBnk_oppositeSigns->setEnabled(true);
-  m_wiz->m_pageBanking->ui->radioBnk_amount->setEnabled(true);
-  m_wiz->m_pageBanking->ui->radioBnk_debCred->setEnabled(true);
-}
-
 void CSVDialog::saveSettings()
 {
-  if ((m_wiz->m_fileType != "Banking") || (m_wiz->m_inFileName.isEmpty())) {      //  don't save if no file loaded
-    return;
+  KConfigGroup miscGroup(m_wiz->m_config, "Misc");
+  miscGroup.writeEntry("Height", m_wiz->height());
+  miscGroup.writeEntry("Width", m_wiz->width());
+  miscGroup.config()->sync();
+
+  KConfigGroup profileNamesGroup(m_wiz->m_config, "ProfileNames");
+  profileNamesGroup.writeEntry("Bank", m_wiz->m_profileList);
+  profileNamesGroup.writeEntry("PriorBank", m_wiz->m_profileList.indexOf(m_wiz->m_profileName));
+  profileNamesGroup.config()->sync();
+
+  KConfigGroup profilesGroup(m_wiz->m_config, "Bank-" + m_wiz->m_profileName);
+  if (m_wiz->m_inFileName.startsWith("/home/")) // replace /home/user with ~/ for brevity
+  {
+    QFileInfo fileInfo = QFileInfo(m_wiz->m_inFileName);
+    if (fileInfo.isFile())
+      m_wiz->m_inFileName = fileInfo.absolutePath();
+    m_wiz->m_inFileName = "~/" + m_wiz->m_inFileName.section('/',3);
   }
 
-  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
+  profilesGroup.writeEntry("Directory", m_wiz->m_inFileName);
+  profilesGroup.writeEntry("Encoding", m_wiz->m_encodeIndex);
+  profilesGroup.writeEntry("DateFormat", m_wiz->m_dateFormatIndex);
+  profilesGroup.writeEntry("OppositeSigns", m_oppositeSigns);
+  profilesGroup.writeEntry("FieldDelimiter", m_wiz->m_fieldDelimiterIndex);
+  profilesGroup.writeEntry("TextDelimiter", m_wiz->m_textDelimiterIndex);
+  profilesGroup.writeEntry("DecimalSymbol", m_wiz->m_decimalSymbolIndex);
+  profilesGroup.writeEntry("StartLine", m_wiz->m_pageLinesDate->ui->spinBox_skip->value() - 1);
+  profilesGroup.writeEntry("TrailerLines", m_wiz->m_pageLinesDate->m_trailerLines);
 
-  KConfigGroup mainGroup(config, "MainWindow");
-  mainGroup.writeEntry("Height", m_wiz->height());
-  mainGroup.writeEntry("Width", m_wiz->width());
-  mainGroup.config()->sync();
+  profilesGroup.writeEntry("DateCol", m_colTypeNum.value(ColumnDate));
+  profilesGroup.writeEntry("PayeeCol", m_colTypeNum.value(ColumnPayee));
 
-  KConfigGroup bankProfilesGroup(config, "BankProfiles");
-
-  bankProfilesGroup.writeEntry("BankNames", m_wiz->m_profileList);
-  int indx = m_wiz->m_pageIntro->ui->combobox_source->findText(m_wiz->m_priorCsvProfile, Qt::MatchExactly);
-  QString str;
-  if (indx > 0) {
-    str = m_wiz->m_priorCsvProfile;
+  QList<int> list = m_wiz->m_memoColList;
+  int posn = 0;
+  if ((posn = list.indexOf(-1)) > -1) {
+    list.removeOne(-1);
   }
-  bankProfilesGroup.writeEntry("PriorCsvProfile", str);
-  bankProfilesGroup.config()->sync();
+  profilesGroup.writeEntry("MemoCol", list);
 
-  for (int i = 0; i < m_wiz->m_profileList.count(); i++) {
-    if (m_wiz->m_profileList[i] != m_wiz->m_profileName) {
-      continue;
-    }
-
-    QString txt = "Profiles-" + m_wiz->m_profileList[i];
-    KConfigGroup profilesGroup(config, txt);
-    profilesGroup.writeEntry("ProfileName", m_wiz->m_profileList[i]);
-    m_csvPath = m_wiz->m_inFileName;
-    int posn = m_csvPath.lastIndexOf("/");
-    m_csvPath.truncate(posn + 1);   //           keep last "/"
-    QString pth = "~/" + m_csvPath.section('/', 3);
-    profilesGroup.writeEntry("CsvDirectory", pth);
-    profilesGroup.writeEntry("Encoding", m_wiz->m_encodeIndex);
-    profilesGroup.writeEntry("DateFormat", m_wiz->m_dateFormatIndex);
-    profilesGroup.writeEntry("DebitFlag", m_debitFlag);
-    profilesGroup.writeEntry("OppositeSigns", m_oppositeSigns);
-    profilesGroup.writeEntry("FileType", m_wiz->m_fileType);
-    profilesGroup.writeEntry("FieldDelimiter", m_wiz->m_fieldDelimiterIndex);
-    profilesGroup.writeEntry("TextDelimiter", m_wiz->m_textDelimiterIndex);
-    profilesGroup.writeEntry("DecimalSymbol", m_wiz->m_decimalSymbolIndex);
-    profilesGroup.writeEntry("StartLine", m_wiz->m_pageLinesDate->ui->spinBox_skip->value() - 1);
-    profilesGroup.writeEntry("TrailerLines", m_wiz->m_pageLinesDate->m_trailerLines);
-
-    profilesGroup.writeEntry("DateCol", m_colTypeNum.value(ColumnDate));
-    profilesGroup.writeEntry("PayeeCol", m_colTypeNum.value(ColumnPayee));
-
-    QList<int> list = m_wiz->m_memoColList;
-    posn = 0;
-    if ((posn = list.indexOf(-1)) > -1) {
-      list.removeOne(-1);
-    }
-    profilesGroup.writeEntry("MemoCol", list);
-
-    profilesGroup.writeEntry("NumberCol", m_wiz->m_pageBanking->ui->comboBoxBnk_numberCol->currentIndex());
-    profilesGroup.writeEntry("AmountCol", m_wiz->m_pageBanking->ui->comboBoxBnk_amountCol->currentIndex());
-    profilesGroup.writeEntry("DebitCol", m_wiz->m_pageBanking->ui->comboBoxBnk_debitCol->currentIndex());
-    profilesGroup.writeEntry("CreditCol", m_wiz->m_pageBanking->ui->comboBoxBnk_creditCol->currentIndex());
-    profilesGroup.writeEntry("CategoryCol", m_wiz->m_pageBanking->ui->comboBoxBnk_categoryCol->currentIndex());
-    profilesGroup.config()->sync();
-  }
+  profilesGroup.writeEntry("NumberCol", m_wiz->m_pageBanking->ui->comboBoxBnk_numberCol->currentIndex());
+  profilesGroup.writeEntry("AmountCol", m_wiz->m_pageBanking->ui->comboBoxBnk_amountCol->currentIndex());
+  profilesGroup.writeEntry("DebitCol", m_wiz->m_pageBanking->ui->comboBoxBnk_debitCol->currentIndex());
+  profilesGroup.writeEntry("CreditCol", m_wiz->m_pageBanking->ui->comboBoxBnk_creditCol->currentIndex());
+  profilesGroup.writeEntry("CategoryCol", m_wiz->m_pageBanking->ui->comboBoxBnk_categoryCol->currentIndex());
+  profilesGroup.config()->sync();
 }
 
 bool CSVDialog::validateMemoComboBox()
@@ -637,8 +512,6 @@ bool CSVDialog::validateMemoComboBox()
       if (m_colNumType.value(i) != ColumnPayee) {
         m_wiz->m_pageBanking->ui->comboBoxBnk_memoCol->setItemText(i, QString().setNum(i + 1));
         m_wiz->m_memoColList.removeOne(i);
-//        if (m_wiz->m_pageBanking->ui->comboBoxBnk_memoCol->currentIndex() == i)
-//          m_wiz->m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(-1);
         return false;
       }
   }

@@ -25,8 +25,10 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QScrollBar>
+#include <QUrl>
 
 #include <KComboBox>
+#include <KSharedConfig>
 
 #include "csvimporterplugin.h"
 
@@ -59,6 +61,9 @@ public:
          Page_LinesDate, Page_Completion
        };
 
+  typedef enum:int { ProfileInvest, ProfileBank, ProfileNone = 0xFF,
+       } profileTypeE;
+
   Ui::CSVWizard*   ui;
   QWizard*            m_wizard;
   IntroPage*          m_pageIntro;
@@ -75,6 +80,8 @@ public:
   CsvImporterPlugin*  m_plugin;
 
   MyMoneyStatement st;
+
+  KSharedConfigPtr m_config;
 
   QPixmap        m_iconBack;
   QPixmap        m_iconCancel;
@@ -101,15 +108,14 @@ public:
   QString          m_decimalSymbol;
   QString          m_thousandsSeparator;
   QString          m_inFileName;
-  QString          m_fileType;
+  int              m_profileType;
   QString          m_date;
   QString          m_profileName;
-  QString          m_priorCsvProfile;
-  QString          m_priorInvProfile;
   QStringList      m_lineList;
   QStringList      m_dateFormats;
   QStringList      m_profileList;
   QList<int>       m_memoColList;
+  QUrl             m_url;
 
   int              m_initialHeight;
   int              m_initialWidth;
@@ -135,7 +141,6 @@ public:
   bool             m_importIsValid;
   bool             m_errorFoundAlready;
   bool             m_importNow;
-  bool             m_columnsNotSet;
   bool             m_skipSetup;
   bool             m_acceptAllInvalid;
 
@@ -147,24 +152,16 @@ public:
   void           showStage();
 
   /**
-  * This method is called when the user chooses to add a new profile, It achieves this by copying
-  * the necessary basic parameters from an existing profile called "Profiles-New Profile###"
-  * in the resource file,
+  * This method contains routines to update configuration file
+  * from kmmVer to latest.
   */
-  void           createProfile(QString newName);
+  bool           updateConfigFile(const KSharedConfigPtr &config, const QList<int> &kmmVer);
 
   /**
-  * This method is called when one of the radiobuttons is checked, to populate
-  * the sourceNames combobox from the resource file.
+  * This method ensures that configuration file contains all neccesary fields
+  * and that it is up to date.
   */
-  void           readSettingsInit();
-
-  /**
-  * Immediately after installation, there is no local config file.
-  * This method is called to copy the default version into the user's
-  * local folder.
-  */
-  void           readSettingsProfiles();
+  void           validateConfigFile(const KSharedConfigPtr &config);
 
   /**
   * This method is called on opening the plugin.
@@ -182,6 +179,12 @@ public slots:
 
   void           clearBackground();
   void           markUnwantedRows();
+
+  /**
+  * This method is called when the user clicks 'Encoding' and selects an
+  * encoding setting.  The file is re-read with the corresponding codec.
+  */
+  void           encodingChanged(int);
 
   /**
   * This method is called when the user selects a new decimal symbol.  The
@@ -248,6 +251,12 @@ public slots:
   int            getMaxColumnCount(QStringList &lineList, int &delimiter);
 
   /**
+  * This method gets the filename of
+  * the financial statement.
+  */
+  bool getInFileName(QString &startDir);
+
+  /**
   * This method gets file into buffer
   * It will laso store file's end column and row.
   */
@@ -262,6 +271,12 @@ public slots:
   * Called in order to adjust window size to suit the file,
   */
   void           updateWindowSize();
+
+  /**
+  * This method is called when the user clicks 'Open File'. It ends
+  * in importing ready bank statement.
+  */
+  void           slotFileDialogClicked();
 
   /**
   * Appends memo field in lines buffer,
@@ -298,50 +313,29 @@ public:
 
   QVBoxLayout*        m_pageLayout;
 
-  QString             m_activity;
-  QStringList         m_sourceList;
-
-  bool                m_set;
-
-  int                 addItem(QString txt);
-  int                 m_index;
-
-  QMap<QString, int>  m_map;
-  QMap<QString, QString>  m_mapFileType;
-
 signals:
   void             signalBankClicked(bool);
   void             activated(int);
   void             returnPressed();
-  bool             isSet();
 
 private:
   CSVWizard*       m_wizDlg;
   bool             validatePage();
   int              nextId() const;
-  bool             m_messageBoxJustCancelled;
-  bool             m_firstEdit;
-  bool             m_editAccepted;
-  bool             m_addRequested;
-  bool             m_firstLineEdit;
 
-  int              m_priorIndex;
-  int              editProfileName(QString& fromName, QString& toName);
+  typedef enum:uchar { ProfileAdd, ProfileRemove, ProfileRename,
+       } profileActionsE;
 
-  QString          m_name;
-  QString          m_priorName;
-  QString          m_action;
-  QString          m_newProfileCreated;
-  QString          m_lastRadioButton;
-
-  void             addProfileName();
+  void             profileChanged(const profileActionsE& action);
+  void             profileTypeChanged(const CSVWizard::profileTypeE profileType, bool toggled);
 
 private slots:
-  void             slotComboEditTextChanged(QString txt);
-  void             slotComboSourceClicked(int index);
-  void             slotLineEditingFinished();
-  void             slotRadioButton_bankClicked();
-  void             slotRadioButton_investClicked();
+  void             slotAddProfile();
+  void             slotRemoveProfile();
+  void             slotRenameProfile();
+  void             slotComboSourceIndexChanged(int idx);
+  void             slotBankRadioToggled(bool toggled);
+  void             slotInvestRadioToggled(bool toggled);
 };
 
 
@@ -399,7 +393,6 @@ public:
   Ui::BankingPage     *ui;
   QVBoxLayout         *m_pageLayout;
 
-  bool                m_bankingPageInitialized;
   void                setParent(CSVWizard* dlg);
 
   void                initializePage();
@@ -442,7 +435,6 @@ public:
 
   QVBoxLayout         *m_pageLayout;
 
-  bool                m_investPageInitialized;
   void                setParent(CSVWizard* dlg);
   void                initializePage();
 

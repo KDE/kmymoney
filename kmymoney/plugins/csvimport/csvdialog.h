@@ -26,7 +26,6 @@
 #include <QVBoxLayout>
 #include <QScrollBar>
 #include <QComboBox>
-#include <QUrl>
 #include <QSet>
 
 #include <mymoneystatement.h>
@@ -61,7 +60,6 @@ public:
 
   QStringList    m_columnList;
 
-  QString        m_csvPath;
   QString        m_qifBuffer;
 
   /**
@@ -71,9 +69,6 @@ public:
   bool           m_closing;
 
   int            m_oppositeSigns;
-  int            m_debitFlag;
-
-  QUrl           m_url;
 
   void             saveSettings();
   int              validateColumn(const int& col, columnTypeE type);
@@ -116,19 +111,6 @@ public:
   * This method feeds file buffer in banking lines parser.
   */
   void           createStatement();
-
-  /**
-  * This method is called when an input file has been selected.
-  * It will enable the UI elements for column selection.
-  */
-  void           enableInputs();
-
-  /**
-  * This method is called when a date cannot be recognised  and the user
-  * cancels the statement import. It will disable the UI elements for column
-  * selection.
-  */
-  void           disableInputs();
 
   /**
   * This method is called during processing. It ensures that processed credit/debit
@@ -198,12 +180,6 @@ public slots:
   void           debitColumnSelected(int col);
   void           creditColumnSelected(int col);
   void           amountColumnSelected(int col);
-
-  /**
-  * This method is called when the user clicks 'Open File', and opens
-  * a file selector dialog.
-  */
-  void           slotFileDialogClicked();
 
   /**
   * This method is called when the user clicks 'import'. It performs further

@@ -48,8 +48,6 @@
 #include <QHBoxLayout>
 #include <KLocalizedString>
 #include <KConfigGroup>
-#include <kjobwidgets.h>
-#include <kio/job.h>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -106,9 +104,6 @@ void InvestProcessing::init()
   m_symbolTableDlg  = new SymbolTableDlg;
   m_symbolTableDlg->m_investProcessing = this;
 
-  m_brokerBuff.clear();
-  m_accountName.clear();
-
   m_securityName = m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->currentText();
 
   QLineEdit* securityLineEdit = m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->lineEdit();//krazy:exclude=<qclasses>
@@ -151,190 +146,76 @@ void InvestProcessing::init()
                   << i18nc("%1", "adr mgmt fee", text);
 }
 
-void InvestProcessing::slotFileDialogClicked()
-{
-  if ((m_wiz->m_fileType != "Invest") || (m_wiz->m_profileName.isEmpty()))
-    return;
-  clearColumnsSelected();
-  m_wiz->m_skipSetup = m_wiz->m_pageIntro->ui->checkBoxSkipSetup->isChecked();
-  m_url.clear();
-  m_symbolTableScanned = false;
-  m_listSecurities.clear();
-  m_wiz->m_accept = false;
-  m_importNow = false;//                        Avoid attempting date formatting on headers
-  m_wiz->m_acceptAllInvalid = false;  //  Don't accept further invalid values.
-
-  readSettings();
-
-  if (m_invPath.isEmpty()) {
-    m_invPath = QDir::home().absolutePath();
-  }
-
-  if(m_invPath.startsWith("~/"))  //expand Linux home directory
-    m_invPath.replace(0, 1, QDir::home().absolutePath());
-
-  QPointer<QFileDialog> dialog = new QFileDialog(m_wiz->m_wizard, QString(), m_invPath,
-                                                 i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"));
-  dialog->setOption(QFileDialog::DontUseNativeDialog, true);  //otherwise we cannot add custom QComboBox
-  dialog->setFileMode(QFileDialog::ExistingFile);
-  QLabel* label = new QLabel(i18n("Encoding"));
-  dialog->layout()->addWidget(label);
-  //    Add encoding selection to FileDialog
-  m_wiz->m_comboBoxEncode = new QComboBox();
-  m_wiz->setCodecList(m_wiz->m_codecs);
-  m_wiz->m_comboBoxEncode->setCurrentIndex(m_wiz->m_encodeIndex);
-  connect(m_wiz->m_comboBoxEncode, SIGNAL(activated(int)), this, SLOT(encodingChanged(int)));
-  dialog->layout()->addWidget(m_wiz->m_comboBoxEncode);
-  if(dialog->exec() == QDialog::Accepted) {
-    m_url = dialog->selectedUrls().first();
-  }
-  delete dialog;
-
-  if (m_url.isEmpty()) {
-    return;
-  } else if (m_url.isLocalFile()) {
-    m_wiz->m_inFileName = m_url.toLocalFile();
-  } else {
-    m_wiz->m_inFileName = QDir::tempPath();
-    if(!m_wiz->m_inFileName.endsWith(QDir::separator()))
-      m_wiz->m_inFileName += QDir::separator();
-    m_wiz->m_inFileName += m_url.fileName();
-    qDebug() << "Source:" << m_url.toDisplayString() << "Destination:" << m_wiz->m_inFileName;
-    KIO::FileCopyJob *job = KIO::file_copy(m_url, QUrl::fromUserInput(m_wiz->m_inFileName), -1,KIO::Overwrite);
-    KJobWidgets::setWindow(job, m_wiz->m_wizard);
-    job->exec();
-    if (job->error()) {
-      KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.toDisplayString()),
-                                 job->errorString(),
-                                 i18n("File access error"));
-      return;
-    }
-  }
-
-  if (m_wiz->m_inFileName.isEmpty())
-    return;
-
-  m_accountName.clear();
-
-  m_wiz->readFile(m_wiz->m_inFileName);
-  m_wiz->displayLines(m_wiz->m_lineList, m_wiz->m_parse);
-  enableInputs();
-
-  m_wiz->updateWindowSize();
-  m_wiz->m_wizard->next();  //go to separator page
-
-  if (m_wiz->m_skipSetup)
-    for (int i = 0; i < 4; i++) //programmaticaly go through separator-, investment-, linesdate-, completionpage
-      m_wiz->m_wizard->next();
-}
-
 void InvestProcessing::saveSettings()
 {
-  if ((m_wiz->m_fileType != "Invest") || (m_wiz->m_inFileName.isEmpty())) {  // don't save if no file loaded
-    return;
+  KConfigGroup miscGroup(m_wiz->m_config, "Misc");
+  miscGroup.writeEntry("Height", m_wiz->height());
+  miscGroup.writeEntry("Width", m_wiz->width());
+  miscGroup.config()->sync();
+
+  KConfigGroup profileNamesGroup(m_wiz->m_config, "ProfileNames");
+  profileNamesGroup.writeEntry("Invest", m_wiz->m_profileList);
+  profileNamesGroup.writeEntry("PriorInvest", m_wiz->m_profileList.indexOf(m_wiz->m_profileName));
+  profileNamesGroup.config()->sync();
+
+  KConfigGroup profilesGroup(m_wiz->m_config, "Invest-" + m_wiz->m_profileName);
+  profilesGroup.writeEntry("DateFormat", m_wiz->m_pageLinesDate->ui->comboBox_dateFormat->currentIndex());
+  profilesGroup.writeEntry("FieldDelimiter", m_wiz->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex());
+  profilesGroup.writeEntry("DecimalSymbol", m_wiz->m_pageCompletion->ui->comboBox_decimalSymbol->currentIndex());
+  profilesGroup.writeEntry("PriceFraction", m_wiz->m_pageInvestment->ui->comboBoxInv_priceFraction->currentIndex());
+  profilesGroup.writeEntry("StartLine", m_wiz->m_pageLinesDate->ui->spinBox_skip->value() - 1);
+  profilesGroup.writeEntry("SecurityName", m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->currentIndex());
+  profilesGroup.writeEntry("TrailerLines", m_wiz->m_pageLinesDate->m_trailerLines);
+  //    The strings in these resource file lists may be edited,
+  //    or expanded in the file by the user, to suit his needs.
+
+  profilesGroup.writeEntry("ShrsinParam", m_shrsinList);
+  profilesGroup.writeEntry("DivXParam", m_divXList);
+  profilesGroup.writeEntry("IntIncParam", m_intIncList);
+  profilesGroup.writeEntry("BrokerageParam", m_brokerageList);
+  profilesGroup.writeEntry("ReinvdivParam", m_reinvdivList);
+  profilesGroup.writeEntry("BuyParam", m_buyList);
+  profilesGroup.writeEntry("SellParam", m_sellList);
+  profilesGroup.writeEntry("RemoveParam", m_shrsoutList);
+
+  QString str = m_wiz->m_pageInvestment->ui->lineEdit_filter->text();
+  if (str.endsWith(' ')) {
+    str.append('#');  //  Terminate trailing blank
   }
-  QString str;
-  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
-
-  KConfigGroup mainGroup(config, "MainWindow");
-  mainGroup.writeEntry("Height", m_wiz->height());
-  mainGroup.writeEntry("Width", m_wiz->width());
-  mainGroup.config()->sync();
-
-  KConfigGroup bankProfilesGroup(config, "BankProfiles");
-
-  bankProfilesGroup.writeEntry("BankNames", m_wiz->m_profileList);
-  int indx = m_wiz->m_pageIntro->ui->combobox_source->findText(m_wiz->m_priorInvProfile, Qt::MatchExactly);
-  if (indx > 0) {
-    str = m_wiz->m_priorInvProfile;
+  profilesGroup.writeEntry("Filter", str);
+  if (m_wiz->m_inFileName.startsWith("/home/")) // replace /home/user with ~/ for brevity
+  {
+    QFileInfo fileInfo = QFileInfo(m_wiz->m_inFileName);
+    if (fileInfo.isFile())
+      m_wiz->m_inFileName = fileInfo.absolutePath();
+    m_wiz->m_inFileName = "~/" + m_wiz->m_inFileName.section('/',3);
   }
-  bankProfilesGroup.writeEntry("PriorInvProfile", str);
-  bankProfilesGroup.config()->sync();
 
-  for (int i = 0; i < m_wiz->m_profileList.count(); i++) {
-    if (m_wiz->m_profileList[i] != m_wiz->m_profileName) {
-      continue;
-    }
+  profilesGroup.writeEntry("Directory", m_wiz->m_inFileName);
+  profilesGroup.writeEntry("Encoding", m_wiz->m_encodeIndex);
+  profilesGroup.writeEntry("DateCol", m_wiz->m_pageInvestment->ui->comboBoxInv_dateCol->currentIndex());
+  profilesGroup.writeEntry("PayeeCol", m_wiz->m_pageInvestment->ui->comboBoxInv_typeCol->currentIndex());
 
-    QString txt = "Profiles-" + m_wiz->m_profileList[i];
-
-    KConfigGroup profilesGroup(config, txt);
-    profilesGroup.writeEntry("FileType", m_wiz->m_fileType);
-    profilesGroup.writeEntry("DateFormat", m_wiz->m_pageLinesDate->ui->comboBox_dateFormat->currentIndex());
-    profilesGroup.writeEntry("FieldDelimiter", m_wiz->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex());
-    profilesGroup.writeEntry("DecimalSymbol", m_wiz->m_pageCompletion->ui->comboBox_decimalSymbol->currentIndex());
-    profilesGroup.writeEntry("ProfileName", m_wiz->m_profileName);
-    profilesGroup.writeEntry("PriceFraction", m_wiz->m_pageInvestment->ui->comboBoxInv_priceFraction->currentIndex());
-    profilesGroup.writeEntry("StartLine", m_wiz->m_pageLinesDate->ui->spinBox_skip->value() - 1);
-    profilesGroup.writeEntry("SecurityName", m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->currentIndex());
-    profilesGroup.writeEntry("TrailerLines", m_wiz->m_pageLinesDate->m_trailerLines);
-    //    The strings in these resource file lists may be edited,
-    //    or expanded in the file by the user, to suit his needs.
-
-    profilesGroup.writeEntry("ShrsinParam", m_shrsinList);
-    profilesGroup.writeEntry("DivXParam", m_divXList);
-    profilesGroup.writeEntry("IntIncParam", m_intIncList);
-    profilesGroup.writeEntry("BrokerageParam", m_brokerageList);
-    profilesGroup.writeEntry("ReinvdivParam", m_reinvdivList);
-    profilesGroup.writeEntry("BuyParam", m_buyList);
-    profilesGroup.writeEntry("SellParam", m_sellList);
-    profilesGroup.writeEntry("RemoveParam", m_shrsoutList);
-
-    str = m_wiz->m_pageInvestment->ui->lineEdit_filter->text();
-    if (str.endsWith(' ')) {
-      str.append('#');  //  Terminate trailing blank
-    }
-    profilesGroup.writeEntry("Filter", str);
-    m_invPath = m_wiz->m_inFileName;
-    int posn = m_invPath.lastIndexOf("/");
-    m_invPath.truncate(posn + 1);   //           keep last "/"
-    QString pth = "~/" + invPath().section('/', 3);
-    profilesGroup.writeEntry("InvDirectory", pth);
-    profilesGroup.writeEntry("Encoding", m_wiz->m_encodeIndex);
-    profilesGroup.writeEntry("DateCol", m_wiz->m_pageInvestment->ui->comboBoxInv_dateCol->currentIndex());
-    profilesGroup.writeEntry("PayeeCol", m_wiz->m_pageInvestment->ui->comboBoxInv_typeCol->currentIndex());
-
-    QList<int> list = m_wiz->m_memoColList;
-    posn = 0;
-    if ((posn = list.indexOf(-1)) > -1) {
-      list.removeOne(-1);
-    }
-    profilesGroup.writeEntry("MemoCol", list);
-    profilesGroup.writeEntry("QuantityCol", m_wiz->m_pageInvestment->ui->comboBoxInv_quantityCol->currentIndex());
-    profilesGroup.writeEntry("AmountCol", m_wiz->m_pageInvestment->ui->comboBoxInv_amountCol->currentIndex());
-    profilesGroup.writeEntry("PriceCol", m_wiz->m_pageInvestment->ui->comboBoxInv_priceCol->currentIndex());
-    profilesGroup.writeEntry("FeeCol", m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->currentIndex());
-    profilesGroup.writeEntry("SymbolCol", m_wiz->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex());
-    profilesGroup.writeEntry("NameCol", m_wiz->m_pageInvestment->ui->comboBoxInv_nameCol->currentIndex());
-    profilesGroup.writeEntry("FeeIsPercentage", int(m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->isChecked()));
-    profilesGroup.writeEntry("FeeRate", m_wiz->m_pageInvestment->ui->lineEdit_feeRate->text());
-    profilesGroup.writeEntry("MinFee", m_wiz->m_pageInvestment->ui->lineEdit_minFee->text());
-    profilesGroup.config()->sync();
-
-    KConfigGroup securitiesGroup(config, "Securities");
-    securitiesGroup.writeEntry("SecurityNameList", securityList());
-    securitiesGroup.config()->sync();
+  QList<int> list = m_wiz->m_memoColList;
+  int posn = 0;
+  if ((posn = list.indexOf(-1)) > -1) {
+    list.removeOne(-1);
   }
-}
+  profilesGroup.writeEntry("MemoCol", list);
+  profilesGroup.writeEntry("QuantityCol", m_wiz->m_pageInvestment->ui->comboBoxInv_quantityCol->currentIndex());
+  profilesGroup.writeEntry("AmountCol", m_wiz->m_pageInvestment->ui->comboBoxInv_amountCol->currentIndex());
+  profilesGroup.writeEntry("PriceCol", m_wiz->m_pageInvestment->ui->comboBoxInv_priceCol->currentIndex());
+  profilesGroup.writeEntry("FeeCol", m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->currentIndex());
+  profilesGroup.writeEntry("SymbolCol", m_wiz->m_pageInvestment->ui->comboBoxInv_symbolCol->currentIndex());
+  profilesGroup.writeEntry("NameCol", m_wiz->m_pageInvestment->ui->comboBoxInv_nameCol->currentIndex());
+  profilesGroup.writeEntry("FeeIsPercentage", int(m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->isChecked()));
+  profilesGroup.writeEntry("FeeRate", m_wiz->m_pageInvestment->ui->lineEdit_feeRate->text());
+  profilesGroup.writeEntry("MinFee", m_wiz->m_pageInvestment->ui->lineEdit_minFee->text());
+  profilesGroup.config()->sync();
 
-void InvestProcessing::enableInputs()
-{
-  m_wiz->m_pageInvestment->ui->comboBoxInv_amountCol->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_dateCol->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->lineEdit_feeRate->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->lineEdit_minFee->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setEnabled(true);
-  m_wiz->m_pageSeparator->ui->comboBox_fieldDelimiter->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_memoCol->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_priceCol->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_priceFraction->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_quantityCol->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_typeCol->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->button_clear->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->buttonInv_clearFee->setEnabled(true);
-  m_wiz->m_pageLinesDate->ui->spinBox_skipToLast->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->setEnabled(true);
-  m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setEnabled(true);
+  KConfigGroup securitiesGroup(m_wiz->m_config, "Securities");
+  securitiesGroup.writeEntry("SecurityNameList", securityList());
+  securitiesGroup.config()->sync();
 }
 
 void InvestProcessing::clearFeesSelected()
@@ -386,10 +267,7 @@ void InvestProcessing::clearComboBoxText()
     m_wiz->m_pageInvestment->ui->comboBoxInv_memoCol->setItemText(i, QString().setNum(i + 1));
 }
 
-void InvestProcessing::encodingChanged(int index)
-{
-  m_wiz->m_encodeIndex = index;
-}
+
 
 void InvestProcessing::feeInputsChanged()
 {
@@ -566,8 +444,6 @@ void InvestProcessing::createStatement()
 
   emit statementReady(m_wiz->st);  // investment statement ready
   m_wiz->m_importNow = false;
-  if (!m_symbolTableScanned)
-    m_listSecurities.clear();
 }
 
 bool InvestProcessing::processInvestLine(const QString &line, MyMoneyStatement &st)
@@ -874,9 +750,6 @@ MyMoneyStatement::Transaction::EAction InvestProcessing::processActionType(QStri
 void InvestProcessing::slotImportClicked()
 {
   m_wiz->m_importError = false;
-  if (m_wiz->m_fileType != "Invest") {
-    return;
-  }
 
   if (m_wiz->m_decimalSymbol.isEmpty()) {
     KMessageBox::sorry(0, i18n("<center>Please select the decimal symbol used in your file.\n</center>"), i18n("Investment import"));
@@ -900,8 +773,6 @@ void InvestProcessing::slotImportClicked()
     m_securityList << m_securityName;
   }
 
-    m_importNow = true;
-
     //  all necessary data is present
 
     m_wiz->m_endLine = m_wiz->m_pageLinesDate->ui->spinBox_skipToLast->value();
@@ -918,7 +789,6 @@ void InvestProcessing::slotImportClicked()
 
 void InvestProcessing::saveAs()
 {
-  if (m_wiz->m_fileType == "Invest") {
     QStringList outFile = m_wiz->m_inFileName .split('.');
     const QString &name = QString((outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif");
 
@@ -926,10 +796,7 @@ void InvestProcessing::saveAs()
     QFile oFile(outFileName);
     oFile.open(QIODevice::WriteOnly);
     QTextStream out(&oFile);
-    out << m_outBuffer;//                 output investments to qif file
-    out << m_brokerBuff;//                ...also broker type items
     oFile.close();
-  }
 }
 
 void InvestProcessing::readSettings()
@@ -937,13 +804,15 @@ void InvestProcessing::readSettings()
   KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, "csvimporterrc"));
   KConfigGroup securitiesGroup(config, "Securities");
   m_securityList.clear();
+  m_listSecurities.clear();
+  m_symbolTableScanned = false;
   m_securityList = securitiesGroup.readEntry("SecurityNameList", QStringList());
   for (int i = 0; i < m_wiz->m_profileList.count(); i++) {
     if (m_wiz->m_profileList[i] != m_wiz->m_profileName)
       continue;
-    KConfigGroup profilesGroup(config, "Profiles-" + m_wiz->m_profileList[i]);
+    KConfigGroup profilesGroup(config, "Invest-" + m_wiz->m_profileList[i]);
 
-    m_invPath = profilesGroup.readEntry("InvDirectory", QString());
+    m_wiz->m_inFileName = profilesGroup.readEntry("Directory", QString());
 
     QStringList list = profilesGroup.readEntry("BuyParam", QStringList());
     if (!list.isEmpty())
@@ -1021,14 +890,9 @@ void InvestProcessing::readSettings()
     m_wiz->m_encodeIndex = profilesGroup.readEntry("Encoding", 0);
     break;
   }
-  KConfigGroup mainGroup(config, "MainWindow");
-  m_wiz->m_pluginHeight = mainGroup.readEntry("Height", 640);
-  m_wiz->m_pluginWidth = mainGroup.readEntry("Width", 800);
-}
-
-QString InvestProcessing::invPath()
-{
-  return m_invPath;
+  KConfigGroup miscGroup(config, "Misc");
+  m_wiz->m_pluginHeight = miscGroup.readEntry("Height", 640);
+  m_wiz->m_pluginWidth = miscGroup.readEntry("Width", 800);
 }
 
 void InvestProcessing::resetComboBox(columnTypeE comboBox)

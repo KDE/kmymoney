@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>IntroPage</class>
  <widget class="QWidget" name="IntroPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>417</width>
+    <height>275</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
@@ -124,9 +132,9 @@ Or, select an existing profile, to use saved settings.</string>
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_combo" stretch="100,5">
-       <item>
-        <widget class="QComboBox" name="combobox_source">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="2" column="0">
+        <widget class="QPushButton" name="buttonAdd">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -137,19 +145,14 @@ Or, select an existing profile, to use saved settings.</string>
           </sizepolicy>
          </property>
          <property name="toolTip">
-          <string>To add a new profile, enter its name then click Return.
-Or, select an existing profile.
-An existing name may be edited, which will produce a new profile.</string>
+          <string>After entering new profile name, press this button to add it.</string>
          </property>
-         <property name="editable">
-          <bool>true</bool>
-         </property>
-         <property name="currentIndex">
-          <number>-1</number>
+         <property name="text">
+          <string>Add</string>
          </property>
         </widget>
        </item>
-       <item>
+       <item row="1" column="3">
         <widget class="QCheckBox" name="checkBoxSkipSetup">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -163,6 +166,69 @@ Only useful if a profile has already been setup.</string>
          </property>
          <property name="text">
           <string>Skip setup</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="buttonRemove">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Press this button to remove selected profile.</string>
+         </property>
+         <property name="text">
+          <string>Remove</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPushButton" name="buttonRename">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Press this button after renaming your profile.</string>
+         </property>
+         <property name="text">
+          <string>Rename</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="3">
+        <widget class="QComboBox" name="combobox_source">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Select your importing profile here.</string>
+         </property>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::InsertAtCurrent</enum>
          </property>
         </widget>
        </item>

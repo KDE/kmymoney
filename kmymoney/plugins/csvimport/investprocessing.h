@@ -31,7 +31,6 @@ email                 : lukasz.wojnilowicz@gmail.com
 #include <QtCore/QList>
 #include <QCompleter>
 #include <QComboBox>
-#include <QUrl>
 #include <QMap>
 
 #include <mymoneystatement.h>
@@ -113,9 +112,6 @@ public:
   */
   void           clearComboBoxText();
 
-  QString        invPath();
-  QString        m_invPath;
-
   QStringList    securityList();
   QStringList    m_symbolsList;
   QStringList    m_namesList;
@@ -154,18 +150,6 @@ signals:
 public slots:
 
   void           slotNamesEdited();
-
-  /**
-  * This method is called when the user clicks 'Open File', and opens
-  * a file selector dialog.
-  */
-  void           slotFileDialogClicked();
-
-  /**
-  * This method is called when the user clicks 'Encoding' and selects an
-  * encoding setting.  The file is re-read with the corresponding codec.
-  */
-  void           encodingChanged(int);
 
   /**
   * This method is called if any of the inputs (i.e Amount/Fee column selected or Fee rate entered)
@@ -292,19 +276,6 @@ signals:
 private:
 
   /**
-  * This method is called when a date cannot be recognised  and the user
-  * cancels the statement import. It will disable the UI elements for column
-  * selection, neccessitating file reselection.
-  */
-  void           disableInputs();
-
-  /**
-  * This method is called when an input file has been selected.
-  * It will enable the UI elements for column selection.
-  */
-  void           enableInputs();
-
-  /**
   * This method creates valid set of possible transactions
   * according to quantity, amount and price
   */
@@ -345,18 +316,7 @@ private:
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
-  bool           m_importNow;
-  bool           m_needFieldDelimiter;
-
-  QString        m_accountName;
-  QString        m_brokerBuff;
-  QString        m_inBuffer;
-  QString        m_outBuffer;
-  QString        m_previousType;
   QString        m_securityName;
-  QString        m_tempBuffer;
-
-  QUrl           m_url;
 
   QCompleter*     m_completer;
 

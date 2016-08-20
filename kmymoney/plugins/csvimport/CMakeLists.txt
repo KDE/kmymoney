@@ -54,6 +54,3 @@ install(TARGETS kmm_csvimport
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_csvimport.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
-
-install(FILES csvimporterrc
-  DESTINATION ${CONFIG_INSTALL_DIR})

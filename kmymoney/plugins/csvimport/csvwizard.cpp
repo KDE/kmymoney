@@ -32,6 +32,8 @@
 #include <KLocalizedString>
 #include <KConfigGroup>
 #include <KColorScheme>
+#include <kjobwidgets.h>
+#include <kio/job.h>
 
 #include "csvdialog.h"
 #include "convdate.h"
@@ -90,11 +92,6 @@ CSVWizard::CSVWizard() : ui(new Ui::CSVWizard)
   m_wizard->button(QWizard::CustomButton1)->setIcon(m_iconImport);
   m_wizard->button(QWizard::CustomButton3)->setIcon(m_iconQIF);
   m_wizard->button(QWizard::NextButton)->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
-
-  m_wizard->setDefaultProperty("QComboBox", "source", SIGNAL(currentIndexChanged(int)));
-  m_wizard->setDefaultProperty("QComboBox", "symbolCol", SIGNAL(currentIndexChanged(int)));
-  m_wizard->setDefaultProperty("QComboBox", "dateCol", SIGNAL(currentIndexChanged(int)));
-  m_wizard->setDefaultProperty("QComboBox", "dateCol", SIGNAL(currentIndexChanged(int)));
 }
 
 void CSVWizard::init()
@@ -128,17 +125,15 @@ void CSVWizard::init()
   this->setAttribute(Qt::WA_DeleteOnClose, true);
 
   m_profileList.clear();
-  m_priorCsvProfile.clear();
-  m_priorInvProfile.clear();
   findCodecs();
-  readSettingsProfiles();
+  m_config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) +
+                                       QDir::separator() +
+                                       "csvimporterrc");
+  validateConfigFile(m_config);
   m_csvDialog->init();
   m_investProcessing->init();
 
   connect(m_wizard->button(QWizard::CancelButton), SIGNAL(clicked()), this, SLOT(slotClose()));
-
-  connect(m_pageIntro->ui->radioButton_bank, SIGNAL(clicked()), m_pageIntro, SLOT(slotRadioButton_bankClicked()));
-  connect(m_pageIntro->ui->radioButton_invest, SIGNAL(clicked()), m_pageIntro, SLOT(slotRadioButton_investClicked()));
 
   connect(m_pageBanking->ui->radioBnk_amount, SIGNAL(toggled(bool)), this, SLOT(amountRadioClicked(bool)));
   connect(m_pageBanking->ui->radioBnk_debCred, SIGNAL(toggled(bool)), this, SLOT(debitCreditRadioClicked(bool)));
@@ -150,8 +145,7 @@ void CSVWizard::init()
   connect(m_pageCompletion, SIGNAL(importInvestment()), m_investProcessing, SLOT(slotImportClicked()));
   connect(m_pageCompletion, SIGNAL(completeChanged()), this, SLOT(slotClose()));
 
-  connect(m_wizard->button(QWizard::CustomButton1), SIGNAL(clicked()), m_csvDialog, SLOT(slotFileDialogClicked()));
-  connect(m_wizard->button(QWizard::CustomButton1), SIGNAL(clicked()), m_investProcessing, SLOT(slotFileDialogClicked()));
+  connect(m_wizard->button(QWizard::CustomButton1), SIGNAL(clicked()), this, SLOT(slotFileDialogClicked()));
   connect(m_wizard->button(QWizard::BackButton), SIGNAL(clicked()), m_csvDialog, SLOT(slotBackButtonClicked()));
   connect(m_wizard->button(QWizard::CustomButton2), SIGNAL(clicked()), m_pageCompletion, SLOT(slotImportClicked()));
   connect(m_wizard->button(QWizard::CustomButton3), SIGNAL(clicked()), m_csvDialog, SLOT(slotSaveAsQIF()));
@@ -160,7 +154,6 @@ void CSVWizard::init()
 
   ui->tableWidget->setWordWrap(false);
   m_pageCompletion->ui->comboBox_thousandsDelimiter->setEnabled(false);
-  m_pageSeparator->ui->comboBox_fieldDelimiter->setEnabled(false);
 
   m_vScrollBar = ui->tableWidget->verticalScrollBar();
   m_vScrollBar->setTracking(false);
@@ -198,109 +191,163 @@ void CSVWizard::showStage()
   ui->label_intro->setText("<b>" + str + "</b>");
 }
 
-void CSVWizard::createProfile(QString newName)
+bool CSVWizard::updateConfigFile(const KSharedConfigPtr& config, const QList<int>& kmmVer)
 {
-  KSharedConfigPtr  config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
-  KConfigGroup bankProfilesGroup(config, "BankProfiles");
+  QString configFilePath = config.constData()->name();
+  QFile::copy(configFilePath, configFilePath + ".bak");
 
-  bankProfilesGroup.writeEntry("BankNames", m_profileList);
-  bankProfilesGroup.config()->sync();
+  KConfigGroup profileNamesGroup(config, "ProfileNames");
+  QStringList bankProfiles = profileNamesGroup.readEntry("Bank", QStringList());
+  QStringList investProfiles = profileNamesGroup.readEntry("Invest", QStringList());
+  QStringList invalidBankProfiles = profileNamesGroup.readEntry("InvalidBank", QStringList());     // get profiles that was marked invalid during last update
+  QStringList invalidInvestProfiles = profileNamesGroup.readEntry("InvalidInvest", QStringList());
+  QString bankPrefix = "Bank-";
+  QString investPrefix = "Invest-";
 
-  KConfigGroup bankGroup(config, "BankProfiles");
-  QString txt = "Profiles-" + newName;
+  uint version = kmmVer[0]*100 + kmmVer[1]*10 + kmmVer[2];
 
-  KConfigGroup newProfilesGroup(config, txt);
-  newProfilesGroup.writeEntry("FileType", m_fileType);
-  if (m_fileType == "Invest") {
-    newProfilesGroup.writeEntry("ShrsinParam", m_investProcessing->m_shrsinList);
-    newProfilesGroup.writeEntry("DivXParam", m_investProcessing->m_divXList);
-    newProfilesGroup.writeEntry("IntIncParam", m_investProcessing->m_intIncList);
-    newProfilesGroup.writeEntry("BrokerageParam", m_investProcessing->m_brokerageList);
-    newProfilesGroup.writeEntry("ReinvdivParam", m_investProcessing->m_reinvdivList);
-    newProfilesGroup.writeEntry("BuyParam", m_investProcessing->m_buyList);
-    newProfilesGroup.writeEntry("SellParam", m_investProcessing->m_sellList);
-    newProfilesGroup.writeEntry("RemoveParam", m_investProcessing->m_shrsoutList);
+  // for kmm < 5.0.0 change 'BankNames' to 'ProfileNames' and remove 'MainWindow' group
+  if (version < 500 && bankProfiles.isEmpty()) {
+    KConfigGroup oldProfileNamesGroup(config, "BankProfiles");
+    bankProfiles = oldProfileNamesGroup.readEntry("BankNames", QStringList()); // profile names are under 'BankNames' entry for kmm < 5.0.0
+    bankPrefix = "Profiles-";   // needed to remove non-existent profiles in first run
+    oldProfileNamesGroup.deleteGroup();
+    KConfigGroup oldMainWindowGroup(config, "MainWindow");
+    oldMainWindowGroup.deleteGroup();
   }
-  newProfilesGroup.config()->sync();
-}
 
-void CSVWizard::readSettingsProfiles()
-{
-  KSharedConfigPtr  newConfig = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
-  KConfigGroup newBankGroup(newConfig, "BankProfiles");
-  if (newBankGroup.exists()) {     //  If local config file exists, exit
-    return;
-  }
-  KSharedConfigPtr  config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, "csvimporterrc"));
-  KConfigGroup bankGroup(config, "BankProfiles");
+  bool firstTry = false;
+  if (invalidBankProfiles.isEmpty() && invalidInvestProfiles.isEmpty())  // if there is no invalid profiles then this might be first update try
+    firstTry = true;
 
-  QStringList lst = bankGroup.readEntry("BankNames", QStringList());
-  foreach (const QString & group, lst) {
-    bankGroup.copyTo(&newBankGroup);
-    newBankGroup.config()->sync();
+  bool ret = true;
+  int invalidProfileResponse = QMessageBox::No;
 
-    QString txt = "Profiles-" + group;
-    KConfigGroup profilesGroup(config, txt);
-    KConfigGroup newProfilesGroup(newConfig, txt);
-    profilesGroup.copyTo(&newProfilesGroup);
-    newProfilesGroup.config()->sync();
-  }
-  KConfigGroup securitiesGroup(config, "Securities");
-  KConfigGroup newSecuritiesGroup(newConfig, "Securities");
-  securitiesGroup.copyTo(&newSecuritiesGroup);
-  newSecuritiesGroup.config()->sync();
-}
+  for (QStringList::Iterator profileName = bankProfiles.begin(); profileName != bankProfiles.end(); ++profileName) {
 
-void CSVWizard::readSettingsInit()
-{
-  m_pageIntro->m_index = 0;
-  KSharedConfigPtr  myconfig = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QLatin1Char('/') + "csvimporterrc");
-  KConfigGroup bankProfilesGroup(myconfig, "BankProfiles");
+    KConfigGroup bankProfile(config, bankPrefix + *profileName);
+    if (!bankProfile.exists() && !invalidBankProfiles.contains(*profileName)) { // if there is reference to profile but no profile then remove this reference
+      profileName = bankProfiles.erase(profileName);
+      profileName--;
+      continue;
+    }
 
-  m_profileList.clear();
-  m_pageIntro->ui->combobox_source->clear();
-  m_pageIntro->ui->combobox_source->addItem(i18n("Add New Profile"));
-  QStringList list = bankProfilesGroup.readEntry("BankNames", QStringList());
-  if (!list.isEmpty()) {
-    for (int i = 0; i < list.count(); i++) {
-      m_profileList.append(list[i]);
-      QString txt = "Profiles-" + list[i];
-      KConfigGroup profilesGroup(myconfig, txt);
-
-      if (profilesGroup.exists()) {
-        txt = profilesGroup.readEntry("FileType", QString());
-        m_pageIntro->m_mapFileType.insert(list[i], txt);
-        if (txt == m_fileType) {
-          m_pageIntro->ui->combobox_source->addItem(list[i]);
-          m_pageIntro->m_map.insert(list[i], m_pageIntro->m_index++);
-        }
+    // for kmm < 5.0.0 remove 'FileType' and 'ProfileName' and assign them to either "Bank=" or "Invest="
+    if (version < 500) {
+      KConfigGroup oldBankProfile(config, "Profiles-" + *profileName);  // if half of configuration is updated and the other one untouched this is needed
+      QString oldProfileType = oldBankProfile.readEntry("FileType", QString());
+      KConfigGroup newProfile;
+      if (oldProfileType == "Invest") {
+        newProfile = KConfigGroup(config, "Invest-" + *profileName);
+        investProfiles.append(*profileName);
+        profileName = bankProfiles.erase(profileName);
+        profileName--;
       }
+      else if (oldProfileType == "Banking")
+        newProfile = KConfigGroup(config, "Bank-" + *profileName);
+      else {
+        if (invalidProfileResponse != QMessageBox::YesToAll && invalidProfileResponse != QMessageBox::NoToAll) {
+          if (!firstTry &&
+              !invalidBankProfiles.contains(*profileName)) // if it isn't first update run and profile isn't on the list of invalid ones then don't bother
+            continue;
+        invalidProfileResponse = QMessageBox::warning(m_wizard, i18n("CSV import"),
+                                       i18n("<center>During update of <b>%1</b><br>"
+                                            "the profile type for <b>%2</b> couldn't be recognized.<br>"
+                                            "The profile cannot be used because of that.<br>"
+                                            "Do you want to delete it?</center>",
+                                            configFilePath, *profileName),
+                                       QMessageBox::Yes | QMessageBox::YesToAll |
+                                       QMessageBox::No | QMessageBox::NoToAll, QMessageBox::No );
+        }
+
+        switch (invalidProfileResponse) {
+        case QMessageBox::YesToAll:
+        case QMessageBox::Yes:
+          oldBankProfile.deleteGroup();
+          invalidBankProfiles.removeOne(*profileName);
+          profileName = bankProfiles.erase(profileName);
+          --profileName;
+          break;
+        case QMessageBox::NoToAll:
+        case QMessageBox::No:
+          if (!invalidBankProfiles.contains(*profileName))  // on user request: don't delete profile but keep eye on it
+            invalidBankProfiles.append(*profileName);
+          ret = false;
+          break;
+        }
+        continue;
+      }
+      oldBankProfile.deleteEntry("FileType");
+      oldBankProfile.deleteEntry("ProfileName");
+      oldBankProfile.deleteEntry("DebitFlag");
+      oldBankProfile.deleteEntry("InvDirectory");
+      oldBankProfile.deleteEntry("CsvDirectory");
+      oldBankProfile.copyTo(&newProfile);
+      oldBankProfile.deleteGroup();
+      newProfile.sync();
+      oldBankProfile.sync();
     }
   }
-  if (m_fileType == "Banking") {
-    m_priorCsvProfile = bankProfilesGroup.readEntry("PriorCsvProfile", QString());
-    if (m_priorCsvProfile.isEmpty()) {
-      m_pageIntro->ui->combobox_source->setCurrentIndex(0);
-    } else {
-      m_profileName = m_priorCsvProfile;
-      int indx = m_pageIntro->ui->combobox_source->findText(m_priorCsvProfile);
-      m_pageIntro->ui->combobox_source->setCurrentIndex(indx);
-      m_pageIntro->m_index = indx;
-    }
-  } else if (m_fileType == "Invest") {
-    m_priorInvProfile = bankProfilesGroup.readEntry("PriorInvProfile", QString());
-    if (m_priorInvProfile.isEmpty()) {
-      m_pageIntro->ui->combobox_source->setCurrentIndex(0);
-    } else {
-      int indx = m_pageIntro->ui->combobox_source->findText(m_priorInvProfile);
-      m_pageIntro->ui->combobox_source->setCurrentIndex(indx);
-      m_pageIntro->m_index = indx;
-      m_profileName = m_priorInvProfile;
+
+  for (QStringList::Iterator profileName = investProfiles.begin(); profileName != investProfiles.end(); ++profileName) {
+
+    KConfigGroup investProfile(config, investPrefix + *profileName);
+    if (!investProfile.exists() && !invalidInvestProfiles.contains(*profileName)) { // if there is reference to profile but no profile then remove this reference
+      investProfiles.erase(profileName);
+      continue;
     }
   }
-  disconnect(m_pageIntro->ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), m_pageIntro, SLOT(slotLineEditingFinished()));
+
+  profileNamesGroup.writeEntry("Bank", bankProfiles); // update profile names as some of them might have been changed
+  profileNamesGroup.writeEntry("Invest", investProfiles);
+
+  if (invalidBankProfiles.isEmpty())  // if no invalid profiles then we don't need this variable anymore
+    profileNamesGroup.deleteEntry("InvalidBank");
+  else
+    profileNamesGroup.writeEntry("InvalidBank", invalidBankProfiles);
+
+  if (invalidInvestProfiles.isEmpty())
+    profileNamesGroup.deleteEntry("InvalidInvest");
+  else
+    profileNamesGroup.writeEntry("InvalidInvest", invalidInvestProfiles);
+
+  if (ret)
+    QFile::remove(configFilePath + ".bak"); // remove backup if all is ok
+
+  return ret;
 }
 
+void CSVWizard::validateConfigFile(const KSharedConfigPtr& config)
+{
+  KConfigGroup profileNamesGroup(config, "ProfileNames");
+  if (!profileNamesGroup.exists()) {
+    profileNamesGroup.writeEntry("Bank", QStringList());
+    profileNamesGroup.writeEntry("Invest", QStringList());
+    profileNamesGroup.writeEntry("PriorBank", int());
+    profileNamesGroup.writeEntry("PriorInvest", int());
+    profileNamesGroup.sync();
+  }
+
+  KConfigGroup miscGroup(config, "Misc");
+  if (!miscGroup.exists()) {
+    miscGroup.writeEntry("Height", "400");
+    miscGroup.writeEntry("Width", "800");
+    miscGroup.sync();
+  }
+
+  QList<int> kmmVer = miscGroup.readEntry("KMMVer", QList<int> {0, 0, 0});
+  QList<int> curKmmVer =  QList<int> {5, 0, 0};
+  if (curKmmVer != kmmVer) {
+    if (updateConfigFile(config, kmmVer)) // write kmmVer only if there were no errors
+      miscGroup.writeEntry("KMMVer", curKmmVer);
+  }
+
+  KConfigGroup securitiesGroup(config, "Securities");
+  if (!securitiesGroup.exists()) {
+    securitiesGroup.writeEntry("SecurityNameList", QStringList());
+    securitiesGroup.sync();
+  }
+}
 
 void CSVWizard::setCodecList(const QList<QTextCodec *> &list)
 {
@@ -393,7 +440,7 @@ void CSVWizard::oppositeSignsCheckBoxClicked(bool checked)
 void CSVWizard::clearColumnsSelected()
 {
   //  User has clicked clear button
-  if (m_fileType == "Banking") {
+  if (m_profileType == CSVWizard::ProfileBank) {
     m_csvDialog->clearColumnNumbers();
     m_csvDialog->clearComboBoxText();
     m_memoColList.clear();
@@ -403,8 +450,10 @@ void CSVWizard::clearColumnsSelected()
 void CSVWizard::slotClose()
 {
   if (!m_csvDialog->m_closing) {
-    m_csvDialog->saveSettings();
-    m_investProcessing->saveSettings();
+    if (m_profileType == ProfileBank)
+      m_csvDialog->saveSettings();
+    else if (m_profileType == ProfileInvest)
+      m_investProcessing->saveSettings();
   }
   close();
 }
@@ -423,15 +472,6 @@ void CSVWizard::clearBackground()
 
 void CSVWizard::markUnwantedRows()
 {
-  if (m_fileType == "Banking") {
-    if (!m_pageBanking->m_bankingPageInitialized) {
-      return;
-    }
-  } else if (m_fileType == "Invest") {
-    if (!m_pageInvestment->m_investPageInitialized) {
-      return;
-    }
-  }
   int first = m_startLine - 1;
   int last = m_endLine - 1;
   //
@@ -476,14 +516,14 @@ void CSVWizard::decimalSymbolSelected(int index)
   if (!(m_wizard->currentId() == Page_Completion)) // do not update tableWidget unless on completion page
     return;
 
-  if (m_fileType == "Banking") {
+  if (m_profileType == CSVWizard::ProfileBank) {
     if (m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnAmount) >= 0)
       updateDecimalSymbol(m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnAmount));
     else {
       updateDecimalSymbol(m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnDebit));
       updateDecimalSymbol(m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnCredit));
     }
-  } else if (m_fileType == "Invest") {
+  } else if (m_profileType == CSVWizard::ProfileInvest) {
     updateDecimalSymbol(m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnAmount));
     updateDecimalSymbol(m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnPrice));
     updateDecimalSymbol(m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnQuantity));
@@ -603,9 +643,6 @@ void CSVWizard::thousandsSeparatorChanged()
 
 void CSVWizard::delimiterChanged(int index)
 {
-  m_pageBanking->m_bankingPageInitialized  = false;
-  m_pageInvestment->m_investPageInitialized  = false;
-
   m_fieldDelimiterIndex = index;
   m_maxColumnCount = getMaxColumnCount(m_lineList, m_fieldDelimiterIndex); // get column count, we get with this fieldDelimiter
   m_endColumn = m_maxColumnCount;
@@ -695,6 +732,73 @@ int CSVWizard::getMaxColumnCount(QStringList &lineList, int &delimiter)
   delimiter = possibleDelimiter;
   m_parse->setFieldDelimiterIndex(delimiter);
   return maxColumnCount;
+}
+
+bool CSVWizard::getInFileName(QString& inFileName)
+{
+  if (inFileName.isEmpty())
+    inFileName = QDir::homePath();
+
+  if(inFileName.startsWith("~/"))  //expand Linux home directory
+    inFileName.replace(0, 1, QDir::home().absolutePath());
+
+  QFileInfo fileInfo = QFileInfo(inFileName);
+  if (fileInfo.isFile()) {    // if it is file...
+    if (fileInfo.exists())  // ...and exists...
+      return true;          // ...then all is OK...
+    else {                  // ...but if not...
+      fileInfo.setFile(fileInfo.absolutePath()); //...then set start directory to directory of that file...
+      if (!fileInfo.exists())                    //...and if it doesn't exist too...
+        fileInfo.setFile(QDir::homePath());      //...then set start directory to home path
+    }
+  }
+
+  QPointer<QFileDialog> dialog = new QFileDialog(m_wizard, QString(),
+                                                 fileInfo.absoluteFilePath(),
+                                                 i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"));
+  dialog->setOption(QFileDialog::DontUseNativeDialog, true);  //otherwise we cannot add custom QComboBox
+  dialog->setFileMode(QFileDialog::ExistingFile);
+  QLabel* label = new QLabel(i18n("Encoding"));
+  dialog->layout()->addWidget(label);
+  //    Add encoding selection to FileDialog
+  m_comboBoxEncode = new QComboBox();
+  setCodecList(m_codecs);
+  m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
+  connect(m_comboBoxEncode, SIGNAL(activated(int)), this, SLOT(encodingChanged(int)));
+  dialog->layout()->addWidget(m_comboBoxEncode);
+  if (dialog->exec() != QDialog::Accepted)
+    return false;
+
+  QUrl url = dialog->selectedUrls().first();
+  if (url.isLocalFile())
+    inFileName = url.toLocalFile();
+  else {
+    inFileName = QDir::tempPath();
+    if (!inFileName.endsWith(QDir::separator()))
+      inFileName += QDir::separator();
+    inFileName += url.fileName();
+    qDebug() << "Source:" << url.toDisplayString() << "Destination:" << inFileName;
+    KIO::FileCopyJob *job = KIO::file_copy(url, QUrl::fromUserInput(inFileName),
+                                           -1, KIO::Overwrite);
+    KJobWidgets::setWindow(job, m_wizard);
+    job->exec();
+    if (job->error()) {
+      KMessageBox::detailedError(m_wizard,
+                                 i18n("Error while loading file '%1'.", url.toDisplayString()),
+                                 job->errorString(),
+                                 i18n("File access error"));
+      return false;
+    }
+  }
+
+  if (inFileName.isEmpty())
+    return false;
+  return true;
+}
+
+void CSVWizard::encodingChanged(int index)
+{
+  m_encodeIndex = index;
 }
 
 void CSVWizard::readFile(const QString& fname)
@@ -792,6 +896,35 @@ void CSVWizard::updateWindowSize()
                 (screen.height() - wizard.height()) / 2);
 }
 
+void CSVWizard::slotFileDialogClicked()
+{
+  m_profileName = m_pageIntro->ui->combobox_source->currentText();
+  m_skipSetup = m_pageIntro->ui->checkBoxSkipSetup->isChecked();
+  m_accept = false;
+  m_acceptAllInvalid = false;  //  Don't accept further invalid values.
+
+  if (m_profileType == CSVWizard::ProfileInvest) {
+    m_investProcessing->clearColumnsSelected();
+    m_investProcessing->readSettings();
+  }
+  else if (m_profileType == CSVWizard::ProfileBank) {
+    m_csvDialog->clearColumnsSelected();
+    m_csvDialog->readSettings();
+  }
+
+  if (!getInFileName(m_inFileName))
+    return;
+  readFile(m_inFileName);
+  displayLines(m_lineList, m_parse);
+
+  updateWindowSize();
+  m_wizard->next();  //go to separator page
+
+  if (m_skipSetup)
+    for (int i = 0; i < 4; i++) //programmaticaly go through separator-, investment-/bank-, linesdate-, completionpage
+      m_wizard->next();
+}
+
 void CSVWizard::createMemoField(QStringList &columnTypeList)
 {
   if (m_memoColList.count() == 0)
@@ -828,19 +961,6 @@ void CSVWizard::resizeEvent(QResizeEvent* ev)
 IntroPage::IntroPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::IntroPage)
 {
   ui->setupUi(this);
-  m_priorIndex = 0;
-  m_priorName = QString();
-  m_addRequested = false;
-  m_lastRadioButton.clear();
-  m_firstLineEdit = true;
-  m_messageBoxJustCancelled = false;
-  registerField("source", ui->combobox_source, "currentIndex", SIGNAL(currentIndexChanged()));
-  disconnect(ui->combobox_source, 0, 0, 0);
-
-  m_index = 1;
-
-  ui->radioButton_bank->show();
-  ui->radioButton_invest->show();
 }
 
 IntroPage::~IntroPage()
@@ -851,531 +971,190 @@ IntroPage::~IntroPage()
 void IntroPage::setParent(CSVWizard* dlg)
 {
   m_wizDlg = dlg;
-  m_set = true;
-  registerField("csvdialog", m_wizDlg, "m_set", SIGNAL(isSet()));
   m_wizDlg->showStage();
 
   wizard()->button(QWizard::CustomButton1)->setEnabled(false);
 }
 
-void IntroPage::slotComboEditTextChanged(QString txt)
+void IntroPage::slotAddProfile()
 {
-  if ((ui->combobox_source->isHidden()) || (m_messageBoxJustCancelled) || (field("source").toInt() < 0)) {
-    return;
-  }
-  m_index = field("source").toInt();
-  m_messageBoxJustCancelled = false;
-  if ((field("source").toInt() == 0) && (txt.isEmpty())) {
-    ui->combobox_source->setCurrentIndex(-1);
-    return;
-  }
-  if (m_priorName.isEmpty()) {
-    m_priorName = m_wizDlg->m_profileName;
-  }
-  if (txt == m_priorName) {
-    int indx = ui->combobox_source->findText(txt);
-    ui->combobox_source->setCurrentIndex(indx);
-    m_messageBoxJustCancelled = false;
-    return;
-  }
-  if ((ui->combobox_source->count() == m_index) && (!txt.isEmpty())) {
-    //  Not finished entering text.
-    return;
-  }
-  if (m_firstLineEdit) {
-    m_firstLineEdit = false;
-    connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-  }
-  if ((txt.isEmpty()) && (!m_priorName.isEmpty()) && (m_messageBoxJustCancelled == false) && (ui->combobox_source->lineEdit()->text().isEmpty())) {
-    //
-    //  The disconnects are to avoid another messagebox appearing before the response for this one is processed.
-    //
-    disconnect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
-    disconnect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-    m_messageBoxJustCancelled = false;
+  profileChanged(ProfileAdd);
+}
 
-    int rc = KMessageBox::warningYesNo(0, i18n("<center>You have cleared the profile name '%1'.</center>\n"
-                                       "<center>If you wish to delete the entry, click 'Delete'.</center>\n"
-                                       "<center>Otherwise, click 'Keep'.</center>", m_wizDlg->m_profileName),
-                                       i18n("Delete or Edit Profile Name"),
-                                       KGuiItem(i18n("Delete")),
-                                       KGuiItem(i18n("Keep")), "");
-    if (rc == KMessageBox::No) {
-      //
-      //  Keep
-      //
-      int indx = ui->combobox_source->findText(m_priorName);
-      if (indx != -1)
-        ui->combobox_source->setCurrentIndex(indx);
-      connect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
-      connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
+void IntroPage::slotRemoveProfile()
+{
+  profileChanged(ProfileRemove);
+}
+
+void IntroPage::slotRenameProfile()
+{
+  profileChanged(ProfileRename);
+}
+
+void IntroPage::profileChanged(const profileActionsE& action)
+{
+  int cbIndex = ui->combobox_source->currentIndex();
+  QString cbText = ui->combobox_source->currentText();
+  if (cbText.isEmpty()) // you cannot neither add nor remove empty name profile or rename to empty name
+    return;
+
+  QString profileTypeStr;
+  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
+    profileTypeStr = "Bank";
+  else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
+    profileTypeStr = "Invest";
+
+  KConfigGroup profileNamesGroup(m_wizDlg->m_config, "ProfileNames");
+  KConfigGroup currentProfileName(m_wizDlg->m_config, profileTypeStr + '-' + cbText);
+  if (action == ProfileRemove) {
+    if (m_wizDlg->m_profileList.value(cbIndex) != cbText)
+      return;
+    m_wizDlg->m_profileList.removeAt(cbIndex);
+    currentProfileName.deleteGroup();
+    ui->combobox_source->removeItem(cbIndex);
+    KMessageBox::information(m_wizDlg->m_wizard,
+                             i18n("<center>Profile <b>%1</b> has been removed.</center>",
+                                  cbText));
+  }
+
+  if (action == ProfileAdd || action == ProfileRename) {
+    int dupIndex = m_wizDlg->m_profileList.indexOf(cbText, Qt::CaseInsensitive);
+    if (dupIndex == cbIndex && cbIndex != -1)  // if profile name wasn't changed then return
+      return;
+    else if (dupIndex != -1) {    // profile with the same name already exists
+      ui->combobox_source->setItemText(cbIndex, m_wizDlg->m_profileList.value(cbIndex));
+      KMessageBox::information(m_wizDlg->m_wizard,
+                               i18n("<center>Profile <b>%1</b> already exists.<br>"
+                                    "Please enter another name</center>", cbText));
       return;
     }
-    //
-    //  Delete, just clear to allow new text entry.
-    //
-    m_wizDlg->m_profileList.removeOne(m_wizDlg->m_profileName);
-    int indx = ui->combobox_source->findText(m_wizDlg->m_profileName);
-    ui->combobox_source->removeItem(indx);
-    m_map.take(m_wizDlg->m_profileName);
-    ui->combobox_source->setCurrentIndex(-1);
-    m_priorName.clear();
-    KSharedConfigPtr  config = KSharedConfig::openConfig(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QDir::separator() + "csvimporterrc");
-    KConfigGroup bankProfilesGroup(config, "BankProfiles");
-    KConfigGroup deletedProfilesGroup(config, "Profiles-" + m_wizDlg->m_profileName);
-    m_wizDlg->m_profileName.clear();
-    deletedProfilesGroup.deleteGroup();
-    if (m_wizDlg->m_fileType == "Banking") {
-      m_wizDlg->m_priorCsvProfile.clear();
-      bankProfilesGroup.writeEntry("PriorCsvProfile", m_wizDlg->m_priorCsvProfile);
-    } else {
-      m_wizDlg->m_priorInvProfile.clear();
-      bankProfilesGroup.writeEntry("PriorInvProfile", m_wizDlg->m_priorInvProfile);
-    }
-    bankProfilesGroup.writeEntry("BankNames", m_wizDlg->m_profileList);
-    bankProfilesGroup.config()->sync();
-    connect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
-    connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-    return;
-  }
-  connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-  if (m_wizDlg->m_initialHeight == -1 || m_wizDlg->m_initialWidth == -1)
-  {
-    m_wizDlg->m_initialHeight = m_wizDlg->geometry().height();
-    m_wizDlg->m_initialWidth = m_wizDlg->geometry().width();
-  }
 
-}
-
-void IntroPage::slotComboSourceClicked(int index)
-{
-  m_messageBoxJustCancelled = false;
-  connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-  switch (index) {   //  Add New Profile selected.
-    case 0:
-      ui->combobox_source->setCurrentIndex(-1);
-      m_action = "add";
-      m_addRequested = true;
-      break;
-    default:
-      wizard()->button(QWizard::CustomButton1)->setEnabled(true);
-      if (m_action == "add") {
-        m_action.clear();
-        QString txt = ui->combobox_source->currentText();
-        if ((txt.isEmpty())) {
-          return;
-        }
-        if (addItem(txt) == -1) {    //  Name already known.
-          m_wizDlg->m_profileName = ui->combobox_source->currentText();
-          if (m_wizDlg->m_fileType == "Banking") {
-            m_wizDlg->m_priorCsvProfile = m_wizDlg->m_profileName;
-          } else {
-            m_wizDlg->m_priorInvProfile = m_wizDlg->m_profileName;
-          }
-          m_priorName = m_wizDlg->m_profileName;
-          return;
-        }
-        //
-        //  Adding new profile.
-        //
-        m_addRequested = false;
-        addProfileName();
-        return;
-      } else {
-        //
-        //  Not adding so must be editing name, or selecting an existing profile.
-        //
-        QString txt = ui->combobox_source->currentText();
-        m_priorName = m_wizDlg->m_profileName;
-        m_priorIndex = m_index;
-        if (!m_wizDlg->m_profileList.contains(txt)) {
-          //  But this profile name does not exist.
-          int indx = ui->combobox_source->findText(txt);
-          if (m_priorName.isEmpty()) {
-            disconnect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-            //  Add it perhaps.
-            QString question = i18n("<center>The name you have entered does not exist,</center>"
-                                    "<center>but you have not elected to add a new profile</center>"
-                                    "<center>If you wish to add '%1' as a new profile,</center>"
-                                    "<center> click 'Yes'.  Otherwise, click 'No'</center>", txt);
-            if (KMessageBox::questionYesNo(0, question, i18n("Adding profile name.")) == KMessageBox::Yes) {
-              addProfileName();
-              m_index = indx;
-              m_priorIndex = indx;
-              connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-            } else {
-              ui->combobox_source->removeItem(indx);
-              ui->combobox_source->setCurrentIndex(-1);
-              connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-              return;
-            }
-          }
-          //  Otherwise maybe edit the present name.
-          int ret = editProfileName(m_priorName, txt);
-          if (ret == KMessageBox::No) {
-            txt = m_priorName;
-          } else {
-            //  Use new name.
-          }
-          int index = ui->combobox_source->findText(txt, Qt::MatchExactly);
-          ui->combobox_source->setCurrentIndex(index);
-          return;
-        }
-        //  This profile is known so use it.
-        m_priorName = ui->combobox_source->currentText();
-        m_priorIndex = ui->combobox_source->currentIndex();
-
-        m_wizDlg->m_profileName = ui->combobox_source->currentText();
-        if (m_wizDlg->m_fileType == "Banking") {
-          m_wizDlg->m_priorCsvProfile = m_wizDlg->m_profileName;
-        } else {
-          m_wizDlg->m_priorInvProfile = m_wizDlg->m_profileName;
-        }
-        if (m_wizDlg->m_profileList.contains(m_wizDlg->m_profileName)) {
-          return;
-        }
-        editProfileName(m_priorName, m_wizDlg->m_profileName);
-      }
-  }
-}
-
-void  IntroPage::addProfileName()
-{
-  m_wizDlg->m_profileName = ui->combobox_source->currentText();
-  if (m_wizDlg->m_fileType == "Banking") {
-    m_wizDlg->m_priorCsvProfile = m_wizDlg->m_profileName;
-  } else {
-    m_wizDlg->m_priorInvProfile = m_wizDlg->m_profileName;
-  }
-  m_priorName = m_wizDlg->m_profileName;
-  m_mapFileType.insert(m_wizDlg->m_profileName, m_wizDlg->m_fileType);
-  m_wizDlg->m_profileList << m_wizDlg->m_profileName;
-  m_wizDlg->createProfile(m_wizDlg->m_profileName);
-  int indx = ui->combobox_source->findText(m_wizDlg->m_profileName);
-  if (indx == -1) {
-    ui->combobox_source->addItem(m_wizDlg->m_profileName);
-  }
-  indx = ui->combobox_source->findText(m_wizDlg->m_profileName);
-  setField("source", indx);
-}
-
-int  IntroPage::editProfileName(QString& fromName, QString& toName)
-{
-  QString from = fromName;
-  if (from == toName) {
-    return  KMessageBox::No;
-  }
-  if (from.isEmpty()) {
-    return  KMessageBox::Yes;
-  }
-  m_editAccepted = true;
-
-  disconnect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-  int fromIndx = ui->combobox_source->findText(from, Qt::MatchExactly);
-  if (fromIndx != -1) {//  From name is in combobox.
-    QString question = i18n("<center>You have edited the name of a profile</center>"
-                            "<center>from '%1' to '%2'.</center>"
-                            "<center>If you wish to accept the new name, click 'Yes'.</center>"
-                            "<center>Otherwise, click 'No'</center>", from, toName);
-    if (KMessageBox::questionYesNo(0, question, i18n("Edit a profile name or create new one.")) == KMessageBox::Yes) {
-      disconnect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
-      //  Accept new name.
-      m_map.take(from);
-      m_wizDlg->m_profileList.removeOne(from);
-      ui->combobox_source->removeItem(ui->combobox_source->findText(from, Qt::MatchExactly));
-      int toIndx = ui->combobox_source->findText(toName, Qt::MatchExactly);
-      if ((toIndx == -1) && (m_messageBoxJustCancelled == false)) {
-        ui->combobox_source->addItem(toName);
-      }
-      m_index = ui->combobox_source->findText(toName, Qt::MatchExactly);
-      m_wizDlg->m_profileName = toName;
-      if (m_wizDlg->m_fileType == "Banking") {
-        m_wizDlg->m_priorCsvProfile = m_wizDlg->m_profileName;
-      } else {
-        m_wizDlg->m_priorInvProfile = m_wizDlg->m_profileName;
-      }
-      m_wizDlg->createProfile(m_wizDlg->m_profileName);
-      m_editAccepted = true;
-      m_wizDlg->m_profileList << toName;
-      m_priorName = toName;
-      m_priorIndex = m_index;
-      m_messageBoxJustCancelled = false;
-      connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-      connect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
-      return KMessageBox::Yes;
-    } else {
-      //  Don't accept new name so remove.
-      int indx = ui->combobox_source->findText(toName);
-      ui->combobox_source->removeItem(indx);
-      m_wizDlg->m_profileList.removeOne(toName);
-      if (m_wizDlg->m_fileType == "Banking") {
-        m_wizDlg->m_priorCsvProfile = from;
-      } else {
-        m_wizDlg->m_priorInvProfile = from;
-      }
-      m_wizDlg->m_profileName = from;
-      indx = ui->combobox_source->findText(from);
-      if (indx != -1)
-        ui->combobox_source->setCurrentIndex(indx);
-      m_editAccepted = false;
-      connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-      connect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
-      return KMessageBox::No;
-    }
-  } else {//  Old entry was deleted from combobox, and we then accepted new name.
-    return KMessageBox::Yes;
-  }
-}
-
-void IntroPage::slotRadioButton_bankClicked()
-{
-  if ((m_lastRadioButton != "Bank") && (!m_lastRadioButton.isEmpty())) {
-    int rc = KMessageBox::warningContinueCancel(this, i18n("<center>If you continue, you will lose any recent profile edits.</center>"
-             "<center>Continue or Cancel?</center>"), i18n("Radio button Banking clicked"), KStandardGuiItem::cont(),
-             KStandardGuiItem::cancel());
-    if (rc == KMessageBox::Cancel) {
-      ui->radioButton_invest->setChecked(true);
-      return;
+    if (action == ProfileAdd) {
+      m_wizDlg->m_profileList.append(cbText);
+      ui->combobox_source->addItem(cbText);
+      ui->combobox_source->setCurrentIndex(m_wizDlg->m_profileList.count() - 1);
+      currentProfileName.writeEntry("Directory", QString());
+      KMessageBox::information(m_wizDlg->m_wizard,
+                               i18n("<center>Profile <b>%1</b> has been added.</center>", cbText));
+    } else if (action == ProfileRename) {
+      KConfigGroup oldProfileName(m_wizDlg->m_config, profileTypeStr + '-' + m_wizDlg->m_profileList.value(cbIndex));
+      oldProfileName.copyTo(&currentProfileName);
+      oldProfileName.deleteGroup();
+      ui->combobox_source->setItemText(cbIndex, cbText);
+      oldProfileName.sync();
+      KMessageBox::information(m_wizDlg->m_wizard,
+                               i18n("<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>",
+                                    m_wizDlg->m_profileList.value(cbIndex), cbText));
+      m_wizDlg->m_profileList[cbIndex] = cbText;
     }
   }
-  m_wizDlg->m_fileType = "Banking";
-  ui->combobox_source->setEnabled(true);
-  ui->combobox_source->show();
+  currentProfileName.sync();
+  profileNamesGroup.writeEntry(profileTypeStr, m_wizDlg->m_profileList);  // update profiles list
+  profileNamesGroup.sync();
+}
 
-  m_wizDlg->readSettingsInit();
-  m_priorName.clear();
-
-  if ((!ui->combobox_source->currentText().isEmpty()) && (ui->combobox_source->currentIndex() >= 0)) {
+void IntroPage::slotComboSourceIndexChanged(int idx)
+{
+  if (idx == -1) {
+    wizard()->button(QWizard::CustomButton1)->setEnabled(false);
+    ui->checkBoxSkipSetup->setEnabled(false);
+    ui->buttonRemove->setEnabled(false);
+    ui->buttonRename->setEnabled(false);
+  }
+  else {
     wizard()->button(QWizard::CustomButton1)->setEnabled(true);
+    ui->checkBoxSkipSetup->setEnabled(true);
+    ui->buttonRemove->setEnabled(true);
+    ui->buttonRename->setEnabled(true);
   }
-  ui->checkBoxSkipSetup->setEnabled(true);
-  m_wizDlg->m_skipSetup = true;
-  m_lastRadioButton = "Bank";
-  //
-  //  This below looks strange, but is necessary (I think, anyway), because if the alternate radio button
-  //  is checked, multiple connects occur.  So, disconnect any existing connection then re-enable.
-  //
-  disconnect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
-  connect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
 }
 
-void IntroPage::slotRadioButton_investClicked()
+void IntroPage::profileTypeChanged(const CSVWizard::profileTypeE profileType, bool toggled)
 {
-  if ((m_lastRadioButton != "Invest") && (!m_lastRadioButton.isEmpty())) {
-    int rc = KMessageBox::warningContinueCancel(this, i18n("<center>If you continue, you will lose any recent profile edits.</center>"
-             "<center>Continue or Cancel?</center>"), i18n("Radio button Investment clicked"), KStandardGuiItem::cont(),
-             KStandardGuiItem::cancel());
-    if (rc == KMessageBox::Cancel) {
-      ui->radioButton_bank->setChecked(true);
-      return;
-    }
+  if (!toggled)
+    return;
+
+  KConfigGroup profilesGroup(m_wizDlg->m_config, "ProfileNames");
+  m_wizDlg->m_profileType = profileType;
+  QString profileTypeStr;
+  int priorProfile;
+  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank) {
+    ui->radioButton_invest->setChecked(false);
+    profileTypeStr = "Bank";
+  } else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest) {
+    ui->radioButton_bank->setChecked(false);
+    profileTypeStr = "Invest";
   }
-  m_wizDlg->m_fileType = "Invest";
+
+  m_wizDlg->m_profileList = profilesGroup.readEntry(profileTypeStr, QStringList());
+  priorProfile = profilesGroup.readEntry("Prior" + profileTypeStr, 0);
+  ui->combobox_source->clear();
+  ui->combobox_source->addItems(m_wizDlg->m_profileList);
+  ui->combobox_source->setCurrentIndex(priorProfile);
   ui->combobox_source->setEnabled(true);
-  ui->combobox_source->show();
-
-  m_wizDlg->readSettingsInit();
-  m_priorName.clear();
-
-  if ((!ui->combobox_source->currentText().isEmpty()) && (ui->combobox_source->currentIndex() >= 0)) {
-    wizard()->button(QWizard::CustomButton1)->setEnabled(true);
-  }
-  ui->checkBoxSkipSetup->setEnabled(true);
-  m_wizDlg->m_skipSetup = true;
-  m_lastRadioButton = "Invest";
-  //
-  //  This below looks strange, but is necessary (I think, anyway), because if the alternate radio button
-  //  is checked, multiple connects occur.  So, disconnect any existing connection then re-enable.
-  //
-  disconnect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
-  connect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
+  ui->buttonAdd->setEnabled(true);
 }
 
-int IntroPage::addItem(QString txt)
+void IntroPage::slotBankRadioToggled(bool toggled)
 {
-  if (txt.isEmpty()) {
-    return -1;
-  }
-  disconnect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-  int ret = -1;
-  int indx = ui->combobox_source->findText(txt);
+  profileTypeChanged(CSVWizard::ProfileBank, toggled);
+}
 
-  QString question1 = i18n("<center>The name you have entered does not exist,</center>"
-                           "<center>but you have not elected to add a new profile.</center>");
-  QString question2 = i18n("<center>If you wish to add '%1'as a new profile,</center>"
-                           "<center> click 'Yes'.  Otherwise, click 'No'</center>", txt);
-  if (indx == -1) {
-    //  Not found.
-
-    if (!m_addRequested) {
-      question2 = question1 + question2;
-      if (KMessageBox::questionYesNo(0, question2, i18n("Adding profile name.")) == KMessageBox::No) {
-        ui->combobox_source->lineEdit()->clear();
-        connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-        return ret;
-      }
-    }
-    m_addRequested = false;
-    ui->combobox_source->addItem(txt);
-    indx = ui->combobox_source->findText(txt);
-    ui->combobox_source->setCurrentIndex(indx);
-    m_index = indx;
-    ret = 0;
-  }  else {  //  Already exists.
-
-    if ((!m_addRequested) && (!m_editAccepted)) {
-      if (KMessageBox::questionYesNo(0, question2, i18n("Adding profile name.")) == KMessageBox::No) {
-        int indx = ui->combobox_source->findText(txt);
-        ui->combobox_source->removeItem(indx);
-        return ret;
-      }
-      m_index = indx;
-    }
-    if (!m_wizDlg->m_profileList.contains(txt)) {
-      m_wizDlg->m_profileList << txt;
-      m_wizDlg->createProfile(txt);
-    }
-    m_addRequested = false;
-  }
-  m_wizDlg->m_profileName = txt;
-  connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-  return ret;
+void IntroPage::slotInvestRadioToggled(bool toggled)
+{
+  profileTypeChanged(CSVWizard::ProfileInvest, toggled);
 }
 
 void IntroPage::initializePage()
 {
-  m_wizDlg->m_pageInvestment->m_investPageInitialized = false;
-  m_wizDlg->m_pageBanking->m_bankingPageInitialized = false;
   m_wizDlg->ui->tableWidget->clear();
   m_wizDlg->ui->tableWidget->setColumnCount(0);
   m_wizDlg->ui->tableWidget->setRowCount(0);
   m_wizDlg->ui->tableWidget->verticalScrollBar()->setValue(0);
   m_wizDlg->ui->tableWidget->horizontalScrollBar()->setValue(0);
 
-  QList<QWizard::WizardButton> layout;
-  layout << QWizard::Stretch << QWizard::BackButton << QWizard::CustomButton1
-  <<  QWizard::CancelButton;
   wizard()->setButtonText(QWizard::CustomButton1, i18n("Select File"));
-  wizard()->setOption(QWizard::HaveCustomButton1, false);
-  wizard()->setButtonLayout(layout);
   wizard()->button(QWizard::CustomButton1)->setToolTip(i18n("A profile must be selected before selecting a file."));
+  QList<QWizard::WizardButton> layout;
+  layout << QWizard::Stretch <<
+            QWizard::CustomButton1 <<
+            QWizard::CancelButton;
+  wizard()->setButtonLayout(layout);
 
-  m_firstEdit = false;
-  m_editAccepted = false;
-  m_newProfileCreated  = QString();
 
   m_wizDlg->m_importError = false;
-  if (m_wizDlg->m_profileName.isEmpty() || m_wizDlg->m_profileName == "Add New Profile") {
-    wizard()->button(QWizard::CustomButton1)->setEnabled(false);  // disable 'Select file' if no profile selected
-  } else {
-    wizard()->button(QWizard::CustomButton1)->setEnabled(true);  //  enable 'Select file' when profile selected
-  }
-  connect(ui->combobox_source, SIGNAL(activated(int)), this, SLOT(slotComboSourceClicked(int)));
-  connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
-  if (m_wizDlg->m_initialHeight == -1 || m_wizDlg->m_initialWidth == -1)
-  {
+  ui->combobox_source->lineEdit()->setClearButtonEnabled(true);
+
+  connect(ui->combobox_source, SIGNAL(currentIndexChanged(int)), this, SLOT(slotComboSourceIndexChanged(int)));
+  connect(ui->buttonAdd, SIGNAL(clicked()), this, SLOT(slotAddProfile()));
+  connect(ui->buttonRemove, SIGNAL(clicked()), this, SLOT(slotRemoveProfile()));
+  connect(ui->buttonRename, SIGNAL(clicked()), this, SLOT(slotRenameProfile()));
+  connect(ui->radioButton_bank, SIGNAL(toggled(bool)), this, SLOT(slotBankRadioToggled(bool)));
+  connect(ui->radioButton_invest, SIGNAL(toggled(bool)), this, SLOT(slotInvestRadioToggled(bool)));
+  if (m_wizDlg->m_initialHeight == -1 || m_wizDlg->m_initialWidth == -1) {
     m_wizDlg->m_initialHeight = m_wizDlg->geometry().height();
     m_wizDlg->m_initialWidth = m_wizDlg->geometry().width();
+  } else {
+    //resize wizard to its initial size and center it
+    m_wizDlg->setGeometry(
+          QStyle::alignedRect(
+            Qt::LeftToRight,
+            Qt::AlignCenter,
+            QSize(m_wizDlg->m_initialWidth, m_wizDlg->m_initialHeight),
+            QApplication::desktop()->availableGeometry()
+            )
+          );
   }
-  //resize wizard to its initial size and center it
-  m_wizDlg->setGeometry(
-        QStyle::alignedRect(
-          Qt::LeftToRight,
-          Qt::AlignCenter,
-          QSize(m_wizDlg->m_initialWidth, m_wizDlg->m_initialHeight),
-          QApplication::desktop()->availableGeometry()
-          )
-        );
 }
 
 bool IntroPage::validatePage()
 {
-  if (!m_newProfileCreated.isEmpty()) {
-    m_wizDlg->createProfile(m_newProfileCreated);
-  }
   return true;
 }
 
 int IntroPage::nextId() const
 {
   return CSVWizard::Page_Separator;
-}
-
-void IntroPage::slotLineEditingFinished()
-{
-  if ((ui->combobox_source->currentIndex() == -1) && (m_firstEdit == true)) {
-    m_firstEdit = false;
-  }
-  QString newName = ui->combobox_source->lineEdit()->text();
-  if ((newName.isEmpty()) || (newName == m_priorName)) {
-    return;
-  }
-  m_priorName = m_wizDlg->m_profileName;
-  m_priorIndex = m_index;
-  m_wizDlg->m_profileName = newName;
-  if (m_wizDlg->m_fileType == "Banking") {
-    m_wizDlg->m_priorCsvProfile = m_wizDlg->m_profileName;
-  } else {
-    m_wizDlg->m_priorInvProfile = m_wizDlg->m_profileName;
-  }
-  if (ui->combobox_source->currentIndex() < 1) {
-    m_action = "add";
-    if ((newName == "Add New Profile") || (newName.isEmpty())) {
-      return;
-    }
-  }
-  if ((ui->combobox_source->currentIndex() == m_priorIndex) && (m_action != "add")) {  //  Editing current selection.
-    int rc = editProfileName(m_priorName, newName);
-    if (rc == KMessageBox::No) {
-      ui->combobox_source->setCurrentIndex(m_priorIndex);
-      return;
-    } else {
-      int indx = ui->combobox_source->findText(newName);
-      ui->combobox_source->setCurrentIndex(indx);
-    }
-  }
-  m_index = ui->combobox_source->currentIndex();
-  m_priorIndex = m_index;
-  if ((m_messageBoxJustCancelled == false) && (m_firstEdit == true) && (m_editAccepted == true)) {
-    m_firstEdit = true;
-    return;
-  }
-  m_firstEdit = true;
-  int itmIndx = 0;
-  itmIndx = addItem(newName);
-  if (itmIndx == -1) {//  Already exists.
-    m_priorName = newName;
-    return;
-  }
-  //
-  //  Adding new profile.
-  //
-  setField("source", m_index);
-  if (m_wizDlg->m_profileList.contains(newName)) {
-    return;
-  }
-  if (m_action != "add") {
-    editProfileName(m_priorName, newName);
-  }
-  m_wizDlg->m_profileName = newName;
-  if (m_wizDlg->m_fileType == "Banking") {
-    m_wizDlg->m_priorCsvProfile = m_wizDlg->m_profileName;
-  } else {
-    m_wizDlg->m_priorInvProfile = m_wizDlg->m_profileName;
-  }
-  m_wizDlg->m_profileList.append(m_wizDlg->m_profileName);
-  m_wizDlg->createProfile(m_wizDlg->m_profileName);
-  m_newProfileCreated = m_wizDlg->m_profileName;
-  m_priorName = m_wizDlg->m_profileName;
-  m_mapFileType.insert(m_wizDlg->m_profileName, m_wizDlg->m_fileType);
-  m_priorIndex = ui->combobox_source->findText(m_wizDlg->m_profileName);
-  if (m_priorIndex == -1) {
-    ui->combobox_source->addItem(m_wizDlg->m_profileName);
-  }
-  m_priorIndex = ui->combobox_source->findText(m_wizDlg->m_profileName);
-  if (m_priorIndex != -1)
-    ui->combobox_source->setCurrentIndex(m_priorIndex);
-  m_action.clear();
 }
 
 SeparatorPage::SeparatorPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::SeparatorPage)
@@ -1423,21 +1202,18 @@ bool SeparatorPage::isComplete() const
   //
   bool ret1;
   bool ret2;
-  bool ret3;
   bool ret = false;
 
-  if (m_wizDlg->m_fileType == "Banking") {
+  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank) {
     ret1 = ((m_wizDlg->m_endColumn > 2) && (!m_wizDlg->m_importError));
     ret2 = ((field("dateColumn").toInt() > -1) && (field("payeeColumn").toInt() > -1)  &&
             ((field("amountColumn").toInt() > -1) || ((field("debitColumn").toInt() > -1)  && (field("creditColumn").toInt() > -1))));
-    ret3 = m_wizDlg->m_pageBanking->m_bankingPageInitialized;
-    ret = (ret1 || (ret2 && ret3));
-  } else if (m_wizDlg->m_fileType == "Invest") {
+    ret = (ret1 || ret2);
+  } else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest) {
     ret1 = (m_wizDlg->m_endColumn > 3);
     ret2 = ((field("dateCol").toInt() > -1)  && ((field("amountCol").toInt() > -1) || ((field("quantityCol").toInt() > -1)))  &&
             ((field("symbolCol").toInt() > -1) || (field("securityNameIndex").toInt() > -1)));
-    ret3 = m_wizDlg->m_pageInvestment->m_investPageInitialized;
-    ret = (ret1 || (ret2 && ret3));
+    ret = (ret1 || ret2);
   }
   if (!ret) {
     wizard()->button(QWizard::NextButton)->setToolTip(i18n("Incorrect number or type of fields.  Check the field delimiter."));
@@ -1464,7 +1240,7 @@ void SeparatorPage::cleanupPage()
 int SeparatorPage::nextId() const
 {
   int ret;
-  if (m_wizDlg->m_fileType == "Banking") {
+  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank) {
     ret = CSVWizard::Page_Banking;
   } else {
     ret = CSVWizard::Page_Investment;
@@ -1549,7 +1325,6 @@ void BankingPage::initializePage()
   connect(ui->comboBoxBnk_payeeCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(payeeColumnSelected(int)));
   connect(ui->comboBoxBnk_categoryCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(categoryColumnSelected(int)));
 
-  m_wizDlg->m_columnsNotSet = false;  // allow checking of columns now
   ui->comboBoxBnk_payeeCol->setCurrentIndex(m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnPayee));
   ui->comboBoxBnk_numberCol->setCurrentIndex(m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnNumber));
   ui->comboBoxBnk_amountCol->setCurrentIndex(m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnAmount));
@@ -1570,11 +1345,6 @@ void BankingPage::initializePage()
     ui->radioBnk_amount->setChecked(true);
   else                                     // ...else set check radio_debCred to clear amount col
     ui->radioBnk_debCred->setChecked(true);
-
-  int index = m_wizDlg->m_pageIntro->ui->combobox_source->currentIndex();
-  setField("source", index);
-  m_wizDlg->m_fileType = "Banking";
-  m_bankingPageInitialized = true;  //            Allow checking of columns now.
 }
 
 int BankingPage::nextId() const
@@ -1584,7 +1354,6 @@ int BankingPage::nextId() const
 
 void BankingPage::cleanupPage()
 {
-  m_wizDlg->m_columnsNotSet = true;  // disallow checking of columns now
   disconnect(ui->comboBoxBnk_amountCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(amountColumnSelected(int)));
   disconnect(ui->comboBoxBnk_debitCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(debitColumnSelected(int)));
   disconnect(ui->comboBoxBnk_creditCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(creditColumnSelected(int)));
@@ -1762,11 +1531,6 @@ void InvestmentPage::initializePage()
       ui->comboBoxInv_memoCol->setCurrentIndex(tmp);
   }
 
-  int index = m_wizDlg->m_pageIntro->ui->combobox_source->currentIndex();
-  setField("source", index);
-  m_wizDlg->m_fileType = "Invest";
-
-  m_investPageInitialized = true;
   m_wizDlg->m_investProcessing->feeInputsChanged();
   connect(ui->buttonInv_calculateFee, SIGNAL(clicked()), m_wizDlg->m_investProcessing, SLOT(calculateFee()));
   connect(ui->buttonInv_hideSecurity, SIGNAL(clicked()), m_wizDlg->m_investProcessing, SLOT(hideSecurity()));
@@ -1891,9 +1655,9 @@ void LinesDatePage::initializePage()
   disconnect(ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), this, SLOT(endLineChanged(int)));
   disconnect(ui->comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), this, SLOT(dateFormatSelected(int)));
 
-  if( m_wizDlg->m_fileType == "Banking")
+  if( m_wizDlg->m_profileType == CSVWizard::ProfileBank)
     m_wizDlg->m_dateColumn = m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnDate);
-  else if( m_wizDlg->m_fileType == "Invest")
+  else if( m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
     m_wizDlg->m_dateColumn = m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnDate);
 
   ui->spinBox_skip->setMaximum(m_wizDlg->m_fileEndLine);
@@ -1983,7 +1747,7 @@ bool LinesDatePage::validatePage()
   //
   //  Ensure numeric columns do contain valid numeric values
   //
-  if (m_wizDlg->m_fileType == "Banking") {
+  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank) {
     for (int row = m_wizDlg->m_startLine - 1; row < m_wizDlg->m_endLine; row++) {
       for (int col = 0; col < m_wizDlg->ui->tableWidget->columnCount(); col++) {
         if (m_wizDlg->ui->tableWidget->item(row, col) == 0) {  //  Does cell exist?
@@ -2024,7 +1788,7 @@ bool LinesDatePage::validatePage()
       }
     }
     m_wizDlg->m_importIsValid = true;
-  } else {  //  "Invest"
+  } else {  //  CSVWizard::ProfileInvest
     m_wizDlg->m_investProcessing->m_symbolTableDlg->m_validRowCount = 0;
     for (int row = m_wizDlg->m_startLine - 1; row < m_wizDlg->m_endLine; row++) {
       for (int col = 0; col < m_wizDlg->ui->tableWidget->columnCount(); col++) {
@@ -2164,7 +1928,7 @@ void LinesDatePage::cleanupPage()
   disconnect(ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), this, SLOT(endLineChanged(int)));
   disconnect(ui->comboBox_dateFormat, SIGNAL(currentIndexChanged(int)), this, SLOT(dateFormatSelected(int)));
   m_wizDlg->clearBackground();
-  if (m_wizDlg->m_fileType == "Banking")
+  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
     m_wizDlg->m_pageBanking->initializePage();
   else
     m_wizDlg->m_pageInvestment->initializePage();
@@ -2232,7 +1996,7 @@ void CompletionPage::slotImportValid()
 void CompletionPage::slotImportClicked()
 {
   m_wizDlg->hide(); //hide wizard so it will not cover accountselector
-  if (m_wizDlg->m_fileType == "Banking")
+  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
     emit importBanking();
   else
     emit importInvestment();
