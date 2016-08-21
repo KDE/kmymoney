@@ -23,11 +23,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kaboutdata.h>
+#include <KAboutData>
 #include <KToggleAction>
 #include <KActionCollection>
+
 // ----------------------------------------------------------------------------
 // Project Includes
+#include "interfaceloader.h"
 
 KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const char* name) :
     QObject(),
@@ -37,6 +39,18 @@ KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const char* name) :
 }
 
 KMyMoneyPlugin::Plugin::~Plugin()
+{
+}
+
+void KMyMoneyPlugin::Plugin::plug()
+{
+}
+
+void KMyMoneyPlugin::Plugin::unplug()
+{
+}
+
+void KMyMoneyPlugin::Plugin::configurationChanged()
 {
 }
 
@@ -56,15 +70,18 @@ KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) c
 
 KMyMoneyPlugin::ViewInterface* KMyMoneyPlugin::Plugin::viewInterface() const
 {
-  return parent()->findChild<ViewInterface*>();
+  Q_CHECK_PTR(KMyMoneyPlugin::pluginInterfaces().viewInterface);
+  return KMyMoneyPlugin::pluginInterfaces().viewInterface;
 }
 
 KMyMoneyPlugin::StatementInterface* KMyMoneyPlugin::Plugin::statementInterface() const
 {
-  return parent()->findChild<StatementInterface*>();
+  Q_CHECK_PTR(KMyMoneyPlugin::pluginInterfaces().statementInterface);
+  return KMyMoneyPlugin::pluginInterfaces().statementInterface;
 }
 
 KMyMoneyPlugin::ImportInterface* KMyMoneyPlugin::Plugin::importInterface() const
 {
-  return parent()->findChild<ImportInterface*>();
+  Q_CHECK_PTR(KMyMoneyPlugin::pluginInterfaces().importInterface);
+  return KMyMoneyPlugin::pluginInterfaces().importInterface;
 }

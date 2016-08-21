@@ -54,7 +54,7 @@ KMMPrintCheckPlugin::KMMPrintCheckPlugin()
   // For ease announce that we have been loaded.
   qDebug("KMyMoney printcheck plugin loaded");
 
-  d = new Private;
+  d = std::unique_ptr<Private>(new Private);
 
   // Create the actions of this plugin
   QString actionName = i18n("Print check");
@@ -67,15 +67,18 @@ KMMPrintCheckPlugin::KMMPrintCheckPlugin()
   d->m_printedTransactionIdList = PluginSettings::printedChecks();
   readCheckTemplate();
 
+  //! @todo Christian: Replace
+#if 0
   connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(plug(KPluginInfo*)), this, SLOT(slotPlug(KPluginInfo*)));
-  connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(unplug(KPluginInfo*)), this, SLOT(slotUnplug(KPluginInfo*)));
   connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(configChanged(Plugin*)), this, SLOT(slotUpdateConfig()));
-
+#endif
 }
 
+/**
+ * @internal Destructor is needed because destructor call of unique_ptr must be in this compile unit
+ */
 KMMPrintCheckPlugin::~KMMPrintCheckPlugin()
 {
-  delete d;
 }
 
 void KMMPrintCheckPlugin::readCheckTemplate()
@@ -188,15 +191,6 @@ void KMMPrintCheckPlugin::slotPlug(KPluginInfo *info)
   }
 }
 
-// the plugin loader unplugs a plugin
-void KMMPrintCheckPlugin::slotUnplug(KPluginInfo *info)
-{
-  if (info->name() == objectName()) {
-    disconnect(viewInterface(), SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)),
-               this, SLOT(slotTransactionsSelected(KMyMoneyRegister::SelectedTransactions)));
-  }
-}
-
 // the plugin's configurations has changed
 void KMMPrintCheckPlugin::slotUpdateConfig()
 {
@@ -205,5 +199,3 @@ void KMMPrintCheckPlugin::slotUpdateConfig()
   readCheckTemplate();
   d->m_printedTransactionIdList = PluginSettings::printedChecks();
 }
-
-#include "printcheck.moc"

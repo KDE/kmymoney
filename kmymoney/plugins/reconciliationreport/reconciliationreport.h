@@ -36,13 +36,13 @@ class KMMReconciliationReportPlugin: public KMyMoneyPlugin::Plugin
 public:
   KMMReconciliationReportPlugin();
 
+public slots:
+  void plug() override;
+  void unplug() override;
+
 protected slots:
   // reconciliation of an account has finished
   void slotGenerateReconciliationReport(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
-  // the plugin loader plugs in a plugin
-  void slotPlug(KPluginInfo*);
-  // the plugin loader unplugs a plugin
-  void slotUnplug(KPluginInfo*);
 };
 
 #endif // RECONCILIATIONREPORT_H

@@ -28,12 +28,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kpluginselector.h>
+#include <KPluginSelector>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoney/plugins/pluginloader.h"
+#include "kmymoney/pluginloader.h"
 
 KSettingsPlugins::KSettingsPlugins(QWidget* parent)
     : QWidget(parent)

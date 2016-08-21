@@ -38,6 +38,7 @@
 #include <typeinfo>
 #include <cstdio>
 #include <iostream>
+#include <memory>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -166,8 +167,9 @@
 #include "plugins/interfaces/kmmviewinterface.h"
 #include "plugins/interfaces/kmmstatementinterface.h"
 #include "plugins/interfaces/kmmimportinterface.h"
-#include "plugins/pluginloader.h"
+#include "plugins/interfaceloader.h"
 #include "plugins/onlinepluginextended.h"
+#include "pluginloader.h"
 
 #include <libkgpgfile/kgpgfile.h>
 
@@ -258,8 +260,25 @@ public:
   /** the configuration object of the application */
   KSharedConfigPtr m_config;
 
+  /**
+   * @brief List of all plugged plugins
+   *
+   * The key is the file name of the plugin.
+   */
+  QMap<QString, KMyMoneyPlugin::Plugin*> m_plugins;
+
+  /**
+   * @brief List of plugged importer plugins
+   *
+   * The key is the objectName of the plugin.
+   */
   QMap<QString, KMyMoneyPlugin::ImporterPlugin*> m_importerPlugins;
 
+  /**
+   * @brief List of plugged online plugins
+   *
+   * The key is the objectName of the plugin.
+   */
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*> m_onlinePlugins;
 
   /**
@@ -2527,10 +2546,11 @@ void KMyMoneyApp::slotSettings()
   // TODO: port KF5
   //dlg->setHelp("details.settings", "kmymoney");
 
-  connect(dlg, SIGNAL(settingsChanged(QString)), this, SLOT(slotUpdateConfiguration()));
-  connect(dlg, SIGNAL(cancelClicked()), schedulesPage, SLOT(slotResetRegion()));
-  connect(dlg, SIGNAL(okClicked()), pluginsPage, SLOT(slotSavePlugins()));
-  connect(dlg, SIGNAL(defaultClicked()), pluginsPage, SLOT(slotDefaultsPlugins()));
+  connect(dlg, &KConfigDialog::settingsChanged, this, &KMyMoneyApp::slotUpdateConfiguration);
+  connect(dlg, &KConfigDialog::rejected, schedulesPage, &KSettingsSchedules::slotResetRegion);
+  connect(dlg, &KConfigDialog::accepted, pluginsPage, &KSettingsPlugins::slotSavePlugins);
+  //! @todo: Port KF5
+  //connect(dlg, &KConfigDialog::defaultClicked, pluginsPage, &KSettingsPlugins::slotDefaultsPlugins);
 
   dlg->show();
 }
@@ -7307,12 +7327,10 @@ void KMyMoneyApp::slotEnableMessages()
 
 void KMyMoneyApp::createInterfaces()
 {
-  // Sets up the plugin interface, and load the plugins
-  d->m_pluginInterface = new QObject(this);
-
-  new KMyMoneyPlugin::KMMViewInterface(this, d->m_myMoneyView, d->m_pluginInterface);
-  new KMyMoneyPlugin::KMMStatementInterface(this, d->m_pluginInterface);
-  new KMyMoneyPlugin::KMMImportInterface(this, d->m_pluginInterface);
+  // Sets up the plugin interface
+  KMyMoneyPlugin::pluginInterfaces().importInterface = new KMyMoneyPlugin::KMMImportInterface(this, this);
+  KMyMoneyPlugin::pluginInterfaces().statementInterface = new KMyMoneyPlugin::KMMStatementInterface(this, this);
+  KMyMoneyPlugin::pluginInterfaces().viewInterface = new KMyMoneyPlugin::KMMViewInterface(this, d->m_myMoneyView, this);
 
   // setup the calendar interface for schedules
   MyMoneySchedule::setProcessingCalendar(this);
@@ -7320,16 +7338,63 @@ void KMyMoneyApp::createInterfaces()
 
 void KMyMoneyApp::loadPlugins()
 {
+  Q_ASSERT(!d->m_pluginLoader);
   d->m_pluginLoader = new KMyMoneyPlugin::PluginLoader(this);
 
-  connect(d->m_pluginLoader, &KMyMoneyPlugin::PluginLoader::plug, this, &KMyMoneyApp::slotPluginPlug);
-  connect(d->m_pluginLoader, &KMyMoneyPlugin::PluginLoader::unplug, this, &KMyMoneyApp::slotPluginUnplug);
+  //! @todo Junior Job: Improve the config read system
+  KSharedConfigPtr config = KSharedConfig::openConfig();
+  KConfigGroup group{ config->group("Plugins") };
 
-  d->m_pluginLoader->loadPlugins();
+  const auto plugins = KPluginLoader::findPlugins("kmymoney");
+  d->m_pluginLoader->addPluginInfo(plugins);
+
+  for (const KPluginMetaData & pluginData : plugins) {
+    // Only load plugins which are enabled and have the right serviceType. Other serviceTypes are loaded on demand.
+    if (isPluginEnabled(pluginData, group))
+      slotPluginLoad(pluginData);
+  }
+
+  connect(d->m_pluginLoader, &KMyMoneyPlugin::PluginLoader::pluginEnabled, this, &KMyMoneyApp::slotPluginLoad);
+  connect(d->m_pluginLoader, &KMyMoneyPlugin::PluginLoader::pluginDisabled, this, &KMyMoneyApp::slotPluginUnload);
 }
 
-void KMyMoneyApp::slotPluginPlug(KMyMoneyPlugin::Plugin* plugin)
+inline bool KMyMoneyApp::isPluginEnabled(const KPluginMetaData& metaData, const KConfigGroup& configGroup)
 {
+  //! @fixme: there is a function in KMyMoneyPlugin::PluginLoader which has to have the same content
+  if (metaData.serviceTypes().contains("KMyMoney/Plugin")) {
+    const QString keyName{metaData.name() + "Enabled"};
+    if (configGroup.hasKey(keyName))
+      return configGroup.readEntry(keyName, true);
+    return metaData.isEnabledByDefault();
+  }
+  return false;
+}
+
+void KMyMoneyApp::slotPluginLoad(const KPluginMetaData& metaData)
+{
+  std::unique_ptr<QPluginLoader> loader{new QPluginLoader{metaData.fileName()}};
+  QObject* plugin = loader->instance();
+  if (!plugin) {
+    qWarning("Could not load plugin '%s', error: %s", qPrintable(metaData.fileName()), qPrintable(loader->errorString()));
+    return;
+  }
+
+  if ( d->m_plugins.contains(metaData.fileName()) ) {
+    /** @fixme Handle a reload e.g. objectNames are equal but the object are different (plugin != d->m_plugins[plugin->objectName()])
+     *  Also it could be usefull to drop the dependence on objectName()
+     */
+
+    /* Note: there is nothing to delete here because if the plugin was loaded already,
+       plugin points to the same object as the previously loaded one. */
+    return;
+  }
+
+  KMyMoneyPlugin::Plugin* kmmPlugin = qobject_cast<KMyMoneyPlugin::Plugin*>(plugin);
+  if (!kmmPlugin) {
+    qWarning("Could not load plugin '%s'.", qPrintable(metaData.fileName()));
+    return;
+  }
+
   // check for online plugin
   KMyMoneyPlugin::OnlinePlugin* op = dynamic_cast<KMyMoneyPlugin::OnlinePlugin *>(plugin);
   // check for extended online plugin
@@ -7337,8 +7402,13 @@ void KMyMoneyApp::slotPluginPlug(KMyMoneyPlugin::Plugin* plugin)
   // check for importer plugin
   KMyMoneyPlugin::ImporterPlugin* ip = dynamic_cast<KMyMoneyPlugin::ImporterPlugin *>(plugin);
 
+  // Tell the plugin it is about to get plugged
+  kmmPlugin->plug();
+
   // plug the plugin
-  guiFactory()->addClient(plugin);
+  guiFactory()->addClient(kmmPlugin);
+
+  d->m_plugins[metaData.fileName()] = kmmPlugin;
 
   if (op)
     d->m_onlinePlugins[plugin->objectName()] = op;
@@ -7352,12 +7422,13 @@ void KMyMoneyApp::slotPluginPlug(KMyMoneyPlugin::Plugin* plugin)
   slotUpdateActions();
 }
 
-void KMyMoneyApp::slotPluginUnplug(KPluginInfo* info)
+void KMyMoneyApp::slotPluginUnload(const KPluginMetaData& metaData)
 {
-  qWarning("Unplugging plugins is not supported. Please restart KMyMoney.");
-  //! @todo Enable pluugin unloading
-#if 0
-  KMyMoneyPlugin::Plugin* plugin = d->m_pluginLoader->getPluginFromInfo(info);
+  KMyMoneyPlugin::Plugin* plugin = d->m_plugins[metaData.fileName()];
+
+  // Remove and test if the plugin was actually loaded
+  if (!d->m_plugins.remove(metaData.fileName()) || plugin == nullptr)
+    return;
 
   // check for online plugin
   KMyMoneyPlugin::OnlinePlugin* op = dynamic_cast<KMyMoneyPlugin::OnlinePlugin *>(plugin);
@@ -7373,9 +7444,8 @@ void KMyMoneyApp::slotPluginUnplug(KPluginInfo* info)
   if (ip)
     d->m_importerPlugins.remove(plugin->objectName());
 
+  plugin->unplug();
   slotUpdateActions();
-  
-#endif
 }
 
 void KMyMoneyApp::slotAutoSave()

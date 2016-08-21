@@ -634,7 +634,16 @@ protected:
     */
   void loadPlugins();
 
-  /** read general Options again and initialize all variables like the recent file list
+  /**
+   * @brief Checks if the given plugin is loaded on start up
+   *
+   * This filters plugins which are loaded on demand only and deactivated plugins.
+   * The configGroup must point to the correct group already.
+   */
+  bool isPluginEnabled(const KPluginMetaData& metaData, const KConfigGroup& configGroup);
+
+  /**
+   * read general options again and initialize all variables like the recent file list
    */
   void readOptions();
 
@@ -644,7 +653,8 @@ protected:
   /** initializes the dynamic menus (account selectors) */
   void initDynamicMenus();
 
-  /** sets up the statusbar for the main window by initialzing a statuslabel.
+  /**
+   * sets up the statusbar for the main window by initialzing a statuslabel.
    */
   void initStatusBar();
 
@@ -1129,14 +1139,14 @@ public slots:
   void slotInstitutionNew(MyMoneyInstitution& institution);
 
   /**
-    * Called whenever a plugin is plugged in
-    */
-  void slotPluginPlug(KMyMoneyPlugin::Plugin* plugin);
+   * Loads a plugin
+   */
+  void slotPluginLoad(const KPluginMetaData& metaData);
 
   /**
-    * Called whenever a plugin is unplugged
-    */
-  void slotPluginUnplug(KPluginInfo*);
+   * Unloads a plugin
+   */
+  void slotPluginUnload(const KPluginMetaData& metaData);
 
 private:
   /**

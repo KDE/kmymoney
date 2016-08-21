@@ -63,7 +63,7 @@ namespace KMyMoneyPlugin
  * The json header of the plugin must comply with the requirements of KCoreAddon's KPluginMetaData class.
  * To load the plugin at start up the service type "KMyMoney/Plugin" must be set.
  *
- * @warning The plugin system is still in development. Especially the loading of the on-demand plugins (mainly undocumented :( ) will change.
+ * @warning The plugin system for KMyMoney 5 is still in development. Especially the loading of the on-demand plugins (mainly undocumented :( ) will change.
  *
  * A basic json header is shown below.
  * @code{.json}
@@ -106,6 +106,23 @@ public:
   Plugin(QObject* parent = nullptr, const char* name = "");
   virtual ~Plugin();
 
+public slots:
+  /**
+   * @brief Called during plug in process
+   */
+  virtual void plug();
+
+  /**
+   * @brief Called before unloading
+   */
+  virtual void unplug();
+
+  /**
+   * @brief Called if the configuration of the plugin was changed
+   * @todo Implement
+   */
+  virtual void configurationChanged() ;
+
 protected:
   /** See KMyMoneyApp::toggleAction() for a description */
   KToggleAction* toggleAction(const QString& name) const;
@@ -116,9 +133,9 @@ protected:
   // named Xxx:
   //
   // XxxInterface* xxxInterface();
-  ViewInterface*          viewInterface() const;
-  StatementInterface*     statementInterface() const;
-  ImportInterface*        importInterface() const;
+  ViewInterface* viewInterface() const;
+  StatementInterface* statementInterface() const;
+  ImportInterface* importInterface() const;
 };
 
 /**

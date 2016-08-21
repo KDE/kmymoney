@@ -20,10 +20,9 @@
 
 #include <QObject>
 #include <QByteArray>
+#include <QSet>
 #include <KPluginMetaData>
 #include <KPluginInfo>
-
-#include "kmm_plugin_export.h"
 
 class KPluginSelector;
 class KPluginInfo;
@@ -32,7 +31,12 @@ namespace KMyMoneyPlugin
 {
 class Plugin;
 
-class KMM_PLUGIN_EXPORT PluginLoader : public QObject
+/**
+ * @brief User Interface for plugins
+ *
+ * For historic reasons it is still called plugin loader even though it does not load any plugin anymore.
+ */
+class PluginLoader : public QObject
 {
   Q_OBJECT
 public:
@@ -45,26 +49,46 @@ public:
   virtual ~PluginLoader();
   static PluginLoader* instance();
 
-  void loadPlugins();
   KPluginSelector* pluginSelectorWidget();
+  static inline bool isPluginEnabled(const KPluginMetaData& metaData, const KConfigGroup& configGroup);
 
-private:
-  void loadPlugin(const KPluginMetaData& metaData);
+public slots:
+  /** @brief Adds the given plugins to the plugin selection ui */
+  void addPluginInfo(const QVector<KPluginMetaData>& metaData);
+
+  /** @brief Find all available plugins */
+  void detectPlugins();
 
 signals:
-  void plug(KMyMoneyPlugin::Plugin*);
-  void unplug(KPluginInfo*);
-  void configChanged(Plugin*);  // consfiguration of the plugin has changed not the enabled/disabled state
+  /** Load the shared module and emits plug() */
+  void pluginEnabled(const KPluginMetaData& metaData);
+  void pluginDisabled(const KPluginMetaData& metaData);
+  void configChanged(Plugin*);  // configuration of the plugin has changed not the enabled/disabled state
 
 private slots:
   void changed();
 
 private:
-  KPluginSelector*  m_pluginSelector;
+  KPluginSelector* m_pluginSelector;
 
-  QString categoryKMyMoneyPlugin;
-  QString categoryOnlineTask;
-  QString categoryPayeeIdentifier;
+  /**
+   * @{
+   * Translated strings
+   *
+   * They are created on creation time because they are used as identifiers.
+   */
+  QString m_categoryKMyMoneyPlugin;
+  QString m_categoryOnlineTask;
+  QString m_categoryPayeeIdentifier;
+  /** @} */
+
+  /**
+   * @brief All plugins which are listed in the UI
+   *
+   * The set contains the plugin file name.
+   * Maybe it can/should be replaced by something different.
+   */
+  QSet<QString> m_displayedPlugins;
 
   QString categoryByPluginType(const KPluginMetaData& mataData);
 };

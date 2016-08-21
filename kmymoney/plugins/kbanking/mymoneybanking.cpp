@@ -296,7 +296,8 @@ void KBankingPlugin::createActions()
   file_import_aqbanking->setText(i18n("AqBanking importer..."));
   connect(file_import_aqbanking, &QAction::triggered, this, &KBankingPlugin::slotImport);
 
-  connect(viewInterface(), SIGNAL(viewStateChanged(bool)), action("file_import_aqbanking"), SLOT(setEnabled(bool)));
+  Q_CHECK_PTR(viewInterface());
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action("file_import_aqbanking"), &QAction::setEnabled);
 
 #ifdef KMM_DEBUG
   QAction *openChipTanDialog = actionCollection()->addAction("open_chiptan_dialog");
@@ -395,7 +396,6 @@ QString KBankingPlugin::stripLeadingZeroes(const QString& s) const
   }
   return rc;
 }
-
 
 void KBankingPlugin::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT* ab_acc)
 {

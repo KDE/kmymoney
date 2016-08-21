@@ -38,16 +38,15 @@ endif (WEBOOB_FOUND)
 set(kmm_plugin_LIB_SRCS
   importinterface.cpp
   kmymoneyplugin.cpp
-  pluginloader.cpp
   statementinterface.cpp
   viewinterface.cpp
   onlinepluginextended.cpp
+  interfaceloader.cpp
 )
 
 set(plugins_HEADERS
   importinterface.h
   kmymoneyplugin.h
-  pluginloader.h
   statementinterface.h
   viewinterface.h
   ${CMAKE_CURRENT_BINARY_DIR}/kmm_plugin_export.h
@@ -56,7 +55,18 @@ set(plugins_HEADERS
 
 add_library(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
 generate_export_header(kmm_plugin BASE_NAME kmm_plugin)
-target_link_libraries(kmm_plugin PUBLIC KF5::XmlGui KF5::KCMUtils KF5::KIOWidgets KF5::XmlGui Qt5::Gui Qt5::Widgets kmm_mymoney Alkimia::alkimia)
+target_link_libraries(kmm_plugin
+  PUBLIC
+  KF5::XmlGui
+  KF5::KCMUtils
+  KF5::KIOWidgets
+  KF5::XmlGui
+  Qt5::Gui
+  Qt5::Widgets
+  kmm_mymoney
+  Alkimia::alkimia
+)
+
 set_target_properties(kmm_plugin PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
 
 ########### install files ###############
@@ -69,7 +79,5 @@ install(FILES ${plugins_HEADERS}
 
 install(FILES
   kmymoney-importerplugin.desktop
-  kmymoney-onlinetaskui.desktop
-  kmymoney-payeeidentifierdelegate.desktop
   DESTINATION ${SERVICETYPES_INSTALL_DIR}
 )

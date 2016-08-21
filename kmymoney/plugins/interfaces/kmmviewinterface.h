@@ -69,7 +69,7 @@ public:
   void addWidget(KMyMoneyViewBase* view, QWidget* w);
 
 private:
-  KMyMoneyView*    m_view;
+  KMyMoneyView* m_view;
 };
 
 } // namespace

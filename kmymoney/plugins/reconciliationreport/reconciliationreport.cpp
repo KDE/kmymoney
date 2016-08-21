@@ -20,6 +20,9 @@
 
 #include "reconciliationreport.h"
 
+//! @todo remove
+#include <QDebug>
+
 // KDE includes
 #include <KPluginFactory>
 #include <KPluginInfo>
@@ -28,16 +31,23 @@
 
 // KMyMoney includes
 #include "mymoneyfile.h"
-#include "pluginloader.h"
 
 #include "kreconciliationreportdlg.h"
 
 KMMReconciliationReportPlugin::KMMReconciliationReportPlugin()
     : KMyMoneyPlugin::Plugin(nullptr, "Reconciliation report"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
-  // connect to the pluginloader's relevant signals
-  connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(plug(KPluginInfo*)), this, SLOT(slotPlug(KPluginInfo*)));
-  connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(unplug(KPluginInfo*)), this, SLOT(slotUnplug(KPluginInfo*)));
+}
+
+void KMMReconciliationReportPlugin::plug()
+{
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::accountReconciled, this, &KMMReconciliationReportPlugin::slotGenerateReconciliationReport);
+  qDebug() << "Connect was done" << viewInterface();
+}
+
+void KMMReconciliationReportPlugin::unplug()
+{
+  disconnect(viewInterface(), &KMyMoneyPlugin::ViewInterface::accountReconciled, this, &KMMReconciliationReportPlugin::slotGenerateReconciliationReport);
 }
 
 void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList)
@@ -278,45 +288,29 @@ void KMMReconciliationReportPlugin::slotGenerateReconciliationReport(const MyMon
         }
       }
 
-      detailsReport += QString("<tr class=\"%1\"><td>").arg((index++ % 2 == 1) ? "row-odd" : "row-even");
-      detailsReport += QString("%1").arg(QLocale().toString((*it).first.entryDate(), QLocale::ShortFormat));
-      detailsReport += "</td><td>";
-      detailsReport += QString("%1").arg((*it).second.number());
-      detailsReport += "</td><td>";
-      detailsReport += QString("%1").arg(file->payee((*it).second.payeeId()).name());
-      detailsReport += "</td><td>";
-      detailsReport += QString("%1").arg((*it).first.memo());
-      detailsReport += "</td><td>";
-      detailsReport += QString("%1").arg(category);
-      detailsReport += "</td><td>";
-      detailsReport += QString("%1").arg(MyMoneyUtils::formatMoney((*it).second.shares(), file->currency(account.currencyId())));
-      detailsReport += "</td></tr>";
+      detailsReport += QString("<tr class=\"%1\"><td>").arg((index++ % 2 == 1) ? "row-odd" : "row-even")
+                    + QString("%1").arg(QLocale().toString((*it).first.entryDate(), QLocale::ShortFormat))
+                    + "</td><td>"
+                    + QString("%1").arg((*it).second.number())
+                    + "</td><td>"
+                    + QString("%1").arg(file->payee((*it).second.payeeId()).name())
+                    + "</td><td>"
+                    + QString("%1").arg((*it).first.memo())
+                    + "</td><td>"
+                    + QString("%1").arg(category)
+                    + "</td><td>"
+                    + QString("%1").arg(MyMoneyUtils::formatMoney((*it).second.shares(), file->currency(account.currencyId())))
+                    + "</td></tr>";
     }
   }
 
-  detailsReport += "<tr class=\"sectionfooter\">";
-  detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18np("One outstanding deposit of", "Total of %1 outstanding deposits amounting to", outstandingDeposits)).arg(MyMoneyUtils::formatMoney(outstandingDepositAmount, currency));
+  detailsReport += "<tr class=\"sectionfooter\">"
+                + QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18np("One outstanding deposit of", "Total of %1 outstanding deposits amounting to", outstandingDeposits)).arg(MyMoneyUtils::formatMoney(outstandingDepositAmount, currency))
 
   // end of the table
-  detailsReport += "</table>\n";
+                + "</table>\n";
 
   QPointer<KReportDlg> dlg = new KReportDlg(0, header + report + footer, header + detailsReport + footer);
   dlg->exec();
   delete dlg;
 }
-
-void KMMReconciliationReportPlugin::slotPlug(KPluginInfo* info)
-{
-  if (info->pluginName() == objectName()) {
-    connect(viewInterface(), SIGNAL(accountReconciled(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)), this, SLOT(slotGenerateReconciliationReport(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)));
-  }
-}
-
-void KMMReconciliationReportPlugin::slotUnplug(KPluginInfo* info)
-{
-  if (info->pluginName() == objectName()) {
-    disconnect(viewInterface(), SIGNAL(accountReconciled(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)), this, SLOT(slotGenerateReconciliationReport(MyMoneyAccount,QDate,MyMoneyMoney,MyMoneyMoney,QList<QPair<MyMoneyTransaction,MyMoneySplit> >)));
-  }
-}
-
-#include "reconciliationreport.moc"

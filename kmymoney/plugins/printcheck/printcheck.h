@@ -20,6 +20,8 @@
 #ifndef PRINTCHECK_H
 #define PRINTCHECK_H
 
+#include <memory>
+
 #include "kmymoneyplugin.h"
 #include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
@@ -48,14 +50,12 @@ protected slots:
   void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
   // the plugin loader plugs in a plugin
   void slotPlug(KPluginInfo*);
-  // the plugin loader unplugs a plugin
-  void slotUnplug(KPluginInfo*);
   // the plugin's configurations has changed
   void slotUpdateConfig();
 
 private:
   struct Private;
-  Private *d;
+  std::unique_ptr<Private> d;
 };
 
 #endif // PRINTCHECK_H

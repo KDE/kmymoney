@@ -21,6 +21,8 @@
 #ifndef ICALENDAREXPORT_H
 #define ICALENDAREXPORT_H
 
+#include <memory>
+
 #include "kmymoneyplugin.h"
 #include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
@@ -40,18 +42,22 @@ public:
 protected slots:
   // this is the export function called when the user selects the interface menu
   void slotFirstExport();
+
   // this is the export method called automatically
   void slotExport();
+
   // the plugin loader plugs in a plugin
-  void slotPlug(KPluginInfo*);
+  void plug() override;
+
   // the plugin loader unplugs a plugin
-  void slotUnplug(KPluginInfo*);
+  void unplug() override;
+
   // the plugin's configurations has changed
-  void slotUpdateConfig();
+  void configurationChanged() override;
 
 private:
   struct Private;
-  Private *d;
+  std::unique_ptr<Private> d;
 };
 
 #endif // ICALENDAREXPORT_H

@@ -47,7 +47,7 @@ struct KMMiCalendarExportPlugin::Private {
 
 KMMiCalendarExportPlugin::KMMiCalendarExportPlugin()
     : KMyMoneyPlugin::Plugin(nullptr, "iCalendar"/*must be the same as X-KDE-PluginInfo-Name*/),
-    d(new Private)
+    d(std::unique_ptr<Private>(new Private))
 {
   d->m_profileName = "iCalendarPlugin";
   d->m_iCalendarFileEntryName = "iCalendarFile";
@@ -84,16 +84,11 @@ KMMiCalendarExportPlugin::KMMiCalendarExportPlugin()
 
   d->m_action = actionCollection()->addAction("file_export_icalendar");
   d->m_action->setText(actionName);
-  connect(d->m_action, SIGNAL(triggered(bool)), this, SLOT(slotFirstExport()));
-
-  connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(plug(KPluginInfo*)), this, SLOT(slotPlug(KPluginInfo*)));
-  connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(unplug(KPluginInfo*)), this, SLOT(slotUnplug(KPluginInfo*)));
-  connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(configChanged(Plugin*)), this, SLOT(slotUpdateConfig()));
+  connect(d->m_action, &QAction::triggered, this, &KMMiCalendarExportPlugin::slotFirstExport);
 }
 
 KMMiCalendarExportPlugin::~KMMiCalendarExportPlugin()
 {
-  delete d;
 }
 
 void KMMiCalendarExportPlugin::slotFirstExport()
@@ -121,21 +116,17 @@ void KMMiCalendarExportPlugin::slotExport()
     d->m_exporter.exportToFile(icalFilePath);
 }
 
-void KMMiCalendarExportPlugin::slotPlug(KPluginInfo* info)
+void KMMiCalendarExportPlugin::plug()
 {
-  if (info->pluginName() == objectName()) {
-    connect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotExport()));
-  }
+  connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &KMMiCalendarExportPlugin::slotExport);
 }
 
-void KMMiCalendarExportPlugin::slotUnplug(KPluginInfo* info)
+void KMMiCalendarExportPlugin::unplug()
 {
-  if (info->pluginName() == objectName()) {
-    disconnect(MyMoneyFile::instance(), SIGNAL(dataChanged()), this, SLOT(slotExport()));
-  }
+  disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &KMMiCalendarExportPlugin::slotExport);
 }
 
-void KMMiCalendarExportPlugin::slotUpdateConfig()
+void KMMiCalendarExportPlugin::configurationChanged()
 {
   PluginSettings::self()->load();
   // export the schedules because the configuration has changed
@@ -144,4 +135,3 @@ void KMMiCalendarExportPlugin::slotUpdateConfig()
     d->m_exporter.exportToFile(icalFilePath);
 }
 
-#include "icalendarexport.moc"
