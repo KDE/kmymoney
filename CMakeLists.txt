@@ -4,7 +4,6 @@ cmake_minimum_required(VERSION 3.1)
 # Setting the name of the main project
 project(KMyMoney VERSION "4.100.0")
 
-
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
   execute_process(COMMAND git rev-parse --short HEAD WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" OUTPUT_VARIABLE VERSION_SUFFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -196,16 +195,6 @@ The default value is: 'RelWithDebInfo'" FORCE)
 # tell the KMyMoney sources that a config.h is present:
 add_definitions( -DHAVE_CONFIG_H )
 
-if(LIBOFX_HAVE_CLIENTUID)
-  add_definitions( -DLIBOFX_HAVE_CLIENTUID )
-endif(LIBOFX_HAVE_CLIENTUID)
-
-# preprocessor definitions in case this is a debug build
-string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
-if(${CMAKE_BUILD_TYPE_TOLOWER} MATCHES "^debug(full)?$|^profile$")
-  add_definitions( -DKMM_DEBUG )
-endif()
-
 # tells gcc to enable exception handling
 include(KDECompilerSettings)
 kde_enable_exceptions()
@@ -236,6 +225,11 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined -Wl,--as-needed")
   endif()
 endif()
+
+# preprocessor definitions in case this is a debug build
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DKMM_DEBUG")
+set(CMAKE_CXX_FLAGS_DEBUGFULL "${CMAKE_CXX_FLAGS_DEBUGFULL} -DKMM_DEBUG")
+set(CMAKE_CXX_FLAGS_PROFILE "${CMAKE_CXX_FLAGS_PROFILE} -DKMM_DEBUG")
 
 option(USE_MODELTEST
   "Compile with ModelTest code (default=OFF)" OFF)
