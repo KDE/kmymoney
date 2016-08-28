@@ -96,27 +96,6 @@ public:
   }
 
 protected slots:
-  void slotOfxFinished(int, bool);
-
-private:
-  QHttp*        m_job;
-  QUrl          m_dst;
-  QHttp::Error  m_error;
-  QPointer<QEventLoop> m_eventLoop;
-};
-
-class OfxHttpsRequest : public QObject
-{
-  Q_OBJECT
-public:
-  OfxHttpsRequest(const QString& method, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo = true);
-  virtual ~OfxHttpsRequest();
-
-  QHttp::Error error() const {
-    return m_error;
-  }
-
-protected slots:
   void slotOfxFinished(KJob*);
   void slotOfxData(KIO::Job*, const QByteArray&);
   void slotOfxConnected(KIO::Job*);
@@ -127,7 +106,8 @@ private:
   QUrl              m_dst;
   QFile             m_file;
   QHttp::Error      m_error;
-  KIO::TransferJob* m_job;
+  KIO::TransferJob* m_postJob;
+  KIO::Job*         m_getJob;
   QPointer<QEventLoop> m_eventLoop;
 };
 #endif // OFXPARTNER_H
