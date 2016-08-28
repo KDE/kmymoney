@@ -13,7 +13,7 @@ set(kmm_onlinejobpluginmockup_PART_SRCS
   onlinejobpluginmockup.cpp
 )
 
-kde4_add_plugin(kmm_onlinejobpluginmockup ${kmm_onlinejobpluginmockup_PART_SRCS})
+add_library(kmm_onlinejobpluginmockup ${kmm_onlinejobpluginmockup_PART_SRCS})
 
 target_link_libraries(kmm_onlinejobpluginmockup
                       kmm_mymoney
