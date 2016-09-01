@@ -187,8 +187,6 @@ static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 #define RECOVER_KEY_EXPIRATION_WARNING 30
 #endif
 
-#define ID_STATUS_MSG 1
-
 enum backupStateE {
   BACKUP_IDLE = 0,
   BACKUP_MOUNTING,
@@ -299,6 +297,7 @@ public:
 
   QProgressBar* m_progressBar;
   QTime         m_lastUpdate;
+  QLabel*       m_statusLabel;
 
   MyMoneyQifReader* m_qifReader;
   MyMoneyStatementReader* m_smtReader;
@@ -1202,8 +1201,8 @@ void KMyMoneyApp::initStatusBar()
   ///////////////////////////////////////////////////////////////////
   // STATUSBAR
 
-  // TODO: port KF5
-  //statusBar()->insertItem("", ID_STATUS_MSG);
+  d->m_statusLabel = new QLabel(statusBar());
+  statusBar()->addWidget(d->m_statusLabel);
   ready();
 
   // Initialization of progress bar taken from KDevelop ;-)
@@ -2036,8 +2035,7 @@ QString KMyMoneyApp::slotStatusMsg(const QString &text)
 {
   ///////////////////////////////////////////////////////////////////
   // change status message permanently
-  // TODO: port KF5
-  QString previousMessage/* = statusBar()->itemText(ID_STATUS_MSG)*/;
+  QString previousMessage = d->m_statusLabel->text();
   d->m_applicationIsReady = false;
 
   QString currentMessage = text;
@@ -2046,8 +2044,7 @@ QString KMyMoneyApp::slotStatusMsg(const QString &text)
     currentMessage = i18nc("Application is ready to use", "Ready.");
   }
   statusBar()->clearMessage();
-  // TODO: port KF5
-  //statusBar()->changeItem(currentMessage, ID_STATUS_MSG);
+  d->m_statusLabel->setText(currentMessage);
   return previousMessage;
 }
 
