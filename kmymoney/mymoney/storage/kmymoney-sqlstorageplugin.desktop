@@ -12,6 +12,7 @@ Name[it]=Abilita le estensioni per archiviare i dati nella banca dati sql
 Name[nl]=Schakelt plug-ins in om gegevens in de sql-database op te slaan
 Name[pl]=Włącza wtyczki do przechowywania danych w bazach danych sql
 Name[pt]=Activa os 'plugins' para armazenar dados na base de dados SQL
+Name[pt_BR]=Permite que os plugins armazenem dados no banco de dados SQL
 Name[sk]=Umožní pluginom uložiť údaje v sql databáze
 Name[sv]=Gör det möjligt för insticksprogram att lagra data i SQL-databasen
 Name[uk]=Надає змогу додаткам зберігати дані у базі даних SQL
