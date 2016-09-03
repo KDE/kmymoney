@@ -40,7 +40,7 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="6,10,10,10,10,10,10,40">
+       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="6,10,10,0,10,10,40">
         <item>
          <spacer name="verticalSpacer_2">
           <property name="orientation">
@@ -63,12 +63,12 @@
            </size>
           </property>
           <property name="text">
-           <string comment="Noun, the introduction." extracomment="Noun, the introduction.">1. Start</string>
+           <string comment="Noun, the introduction." extracomment="Noun, the introduction.">1. File</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_separator">
+         <widget class="QLabel" name="label_separators">
           <property name="minimumSize">
            <size>
             <width>90</width>
@@ -81,30 +81,29 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_banking">
+         <widget class="QLabel" name="label_rows">
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="text">
-           <string>3. Banking</string>
+           <string>3. Rows</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_investing">
+         <widget class="QLabel" name="label_columns">
           <property name="text">
-           <string>4. Investing</string>
+           <string>4. Columns</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_lines">
+         <widget class="QLabel" name="label_formats">
           <property name="text">
-           <string>5. Lines</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_finish">
-          <property name="text">
-           <string comment="Noun, the end." extracomment="Noun, the end.">6. Finish</string>
+           <string>5. Formats</string>
           </property>
          </widget>
         </item>

@@ -67,7 +67,6 @@ public:
    * a list of already used hashes in this file
    */
   QSet<QString> m_hashSet;
-  bool           m_closing;
 
   int            m_oppositeSigns;
 
@@ -109,22 +108,22 @@ public:
   void           clearColumnTypesList();
 
   /**
-  * This method feeds file buffer in banking lines parser.
-  */
-  void           createStatement();
-
-  /**
   * This method is called during processing. It ensures that processed credit/debit
   * are valid.
   */
-  bool processCreditDebit(QString& credit, QString& debit , MyMoneyMoney& amount);
+  bool           processCreditDebit(QString& credit, QString& debit , MyMoneyMoney& amount);
+
+  /**
+  * This method feeds file buffer in banking lines parser.
+  */
+  bool           createStatement(MyMoneyStatement& st);
 
   /**
   * This method is called when the user clicks 'import'.
   * or 'Make QIF' It will evaluate a line and prepare it to be added to a statement,
   * and to a QIF file, if required.
   */
-  bool processBankLine(const QString &line, MyMoneyStatement &st);
+  bool           processBankLine(const QString &line, MyMoneyStatement &st);
 
   /**
   * This method is called after processQifLine, to add a transaction to a
@@ -147,10 +146,6 @@ public:
   */
   void           reloadUISettings();
 
-  void           showStage();
-
-  int            endColumn();
-  bool           importNow();
   /**
   * This method is called when it is detected that the user has selected the
   * same column for two different fields.  The column detecting the error
@@ -181,14 +176,6 @@ public slots:
   void           debitColumnSelected(int col);
   void           creditColumnSelected(int col);
   void           amountColumnSelected(int col);
-
-  /**
-  * This method is called when the user clicks 'import'. It performs further
-  * validity checks on the user's choices, then redraws the required rows.
-  * Finally, it rereads the file, which this time will result in the import
-  * actually taking place.
-  */
-  void           slotImportClicked();
 
   /**
   * This method is called when the user clicks 'Save as QIF'. A file selector

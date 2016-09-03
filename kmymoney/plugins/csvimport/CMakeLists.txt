@@ -24,10 +24,10 @@ ki18n_wrap_ui(kmm_csvimport_PART_SRCS
   redefinedlgdecl.ui
   introwizardpage.ui
   separatorwizardpage.ui
+  rowswizardpage.ui
   bankingwizardpage.ui
   investmentwizardpage.ui
-  lines-datewizardpage.ui
-  completionwizardpage.ui
+  formatswizardpage.ui
   symboltabledlg.ui
 )
 

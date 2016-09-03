@@ -87,11 +87,6 @@ public:
   void           readSettings(const KSharedConfigPtr &config);
 
   /**
-  * This method feeds file buffer in investment lines parser.
-  */
-  void           createStatement();
-
-  /**
   * This method is called when the user clicks 'Clear selections', in order to
   * clear incorrect column number entries.  Also called on initialisation.
   */
@@ -239,14 +234,6 @@ public slots:
   void           feeIsPercentageCheckBoxClicked(bool checked);
 
   /**
-  * This method is called when the user clicks Accept. It performs further
-  * validity checks on the user's choices, then redraws the required rows.
-  * Finally, it rereads the file, which this time will result in the import
-  * actually taking place.
-  */
-  void           slotImportClicked();
-
-  /**
   * This method is called should the user click 'Save as QIF'. A File Selection
   * dialog is presented and the data is output in QIF format.
   */
@@ -269,6 +256,17 @@ public slots:
   * The method generates column with fees in importer's window afterwards.
   */
   void           calculateFee();
+
+  /**
+  * This method feeds file buffer in investment lines parser.
+  */
+  bool           createStatement(MyMoneyStatement& st);
+
+  /**
+  * This method is called when the user clicks 'Import'.
+  * It will evaluate an input line and append it to a statement.
+  */
+  bool processInvestLine(const QString& line, MyMoneyStatement& st);
 
 private:
 signals:
@@ -300,12 +298,6 @@ private:
   * in the input file, and assigns appropriate QString types.
   */
   MyMoneyStatement::Transaction::EAction processActionType(QString& type);
-
-  /**
-  * This method is called when the user clicks 'Import'.
-  * It will evaluate an input line and append it to a statement.
-  */
-  bool processInvestLine(const QString& line, MyMoneyStatement& st);
 
   /**
     * This method is used to get the account id of the split for

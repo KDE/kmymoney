@@ -62,9 +62,9 @@
 
 #include "ui_introwizardpage.h"
 #include "ui_separatorwizardpage.h"
+#include "ui_rowswizardpage.h"
 #include "ui_bankingwizardpage.h"
-#include "ui_lines-datewizardpage.h"
-#include "ui_completionwizardpage.h"
+#include "ui_formatswizardpage.h"
 #include "ui_investmentwizardpage.h"
 #include "ui_csvwizard.h"
 
@@ -73,7 +73,6 @@
 // ----------------------------------------------------------------------------
 CSVDialog::CSVDialog()
 {
-  m_closing = false;
   m_colTypeName.insert(ColumnPayee,i18n("Payee"));
   m_colTypeName.insert(ColumnNumber,i18n("Number"));
   m_colTypeName.insert(ColumnDebit,i18n("Debit"));
@@ -86,8 +85,7 @@ CSVDialog::CSVDialog()
 
 void CSVDialog::init()
 {
-  connect(this, SIGNAL(statementReady(MyMoneyStatement&)), m_wiz->m_plugin, SLOT(slotGetStatement(MyMoneyStatement&)));
-}//  CSVDialog
+}
 
 CSVDialog::~CSVDialog()
 {
@@ -115,57 +113,39 @@ void CSVDialog::readSettings(const KSharedConfigPtr& config)
     m_wiz->m_fieldDelimiterIndex = profilesGroup.readEntry("FieldDelimiter", -1);
     m_wiz->m_decimalSymbolIndex = profilesGroup.readEntry("DecimalSymbol", -1);
 
-    if (m_wiz->m_decimalSymbolIndex == -1) { // if no decimal symbol in config, then get one from locale settings
-      if (QLocale().decimalPoint() == '.')
-        m_wiz->m_decimalSymbolIndex = 0;
-      else
-        m_wiz->m_decimalSymbolIndex = 1;
-    }
-    if (m_wiz->m_decimalSymbolIndex == 0)
-      m_wiz->m_ThousandsSeparatorIndex = 1;
-    else
-      m_wiz->m_ThousandsSeparatorIndex = 0;
+    if (m_wiz->m_decimalSymbolIndex != -1 && m_wiz->m_decimalSymbolIndex != 2) {
+      m_wiz->m_parse->setDecimalSymbolIndex(m_wiz->m_decimalSymbolIndex);
+      m_wiz->m_parse->setDecimalSymbol(m_wiz->m_decimalSymbolIndex);
 
-    m_wiz->m_parse->setDecimalSymbolIndex(m_wiz->m_decimalSymbolIndex);
-    m_wiz->m_parse->setDecimalSymbol(m_wiz->m_decimalSymbolIndex);
-    m_wiz->m_parse->setThousandsSeparatorIndex(m_wiz->m_decimalSymbolIndex);
-    m_wiz->m_parse->setThousandsSeparator(m_wiz->m_decimalSymbolIndex);
-    m_wiz->m_decimalSymbol = m_wiz->m_parse->decimalSymbol(m_wiz->m_decimalSymbolIndex);
+      m_wiz->m_parse->setThousandsSeparatorIndex(m_wiz->m_decimalSymbolIndex);
+      m_wiz->m_parse->setThousandsSeparator(m_wiz->m_decimalSymbolIndex);
+
+      m_wiz->m_decimalSymbol = m_wiz->m_parse->decimalSymbol(m_wiz->m_decimalSymbolIndex);
+
+    } else
+      m_wiz->m_decimalSymbol.clear();
 
     m_wiz->m_parse->setFieldDelimiterIndex(m_wiz->m_fieldDelimiterIndex);
     m_wiz->m_parse->setTextDelimiterIndex(m_wiz->m_textDelimiterIndex);
     m_wiz->m_fieldDelimiterCharacter = m_wiz->m_parse->fieldDelimiterCharacter(m_wiz->m_fieldDelimiterIndex);
     m_wiz->m_textDelimiterCharacter = m_wiz->m_parse->textDelimiterCharacter(m_wiz->m_textDelimiterIndex);
-    m_wiz->m_decimalSymbol = m_wiz->m_parse->decimalSymbol(m_wiz->m_decimalSymbolIndex);
     m_wiz->m_startLine = profilesGroup.readEntry("StartLine", 0) + 1;
-    m_wiz->m_pageLinesDate->m_trailerLines = profilesGroup.readEntry("TrailerLines", 0);
+    m_wiz->m_trailerLines = profilesGroup.readEntry("TrailerLines", 0);
     m_wiz->m_encodeIndex = profilesGroup.readEntry("Encoding", 0);
     break;
   }
 }
 
-void CSVDialog::createStatement()
-{
-  m_wiz->st = MyMoneyStatement();
-  m_wiz->st.m_eType = MyMoneyStatement::etNone;
-
-  m_hashSet.clear();
-  for (int line = m_wiz->m_startLine - 1; line < m_wiz->m_endLine; line++) {
-    if (!processBankLine(m_wiz->m_lineList[line], m_wiz->st)) { // parse fields
-      m_wiz->m_importNow = false;
-      m_wiz->m_wizard->back();  // have another try at the import
-      break;
-    }
-  }
-  if (!m_wiz->m_importNow)
-    return;
-
-  emit statementReady(m_wiz->st);  // bank statement ready
-  m_wiz->m_importNow = false;
-}
-
 bool CSVDialog::processCreditDebit(QString& credit, QString& debit , MyMoneyMoney& amount)
 {
+  QString decimalSymbol = m_wiz->m_decimalSymbol;
+  if (m_wiz->m_decimalSymbolIndex == 2) {
+    int decimalSymbolIndex = m_wiz->m_decimalSymbolIndexMap.value(m_colTypeNum[ColumnCredit]);
+    decimalSymbol = m_wiz->m_parse->decimalSymbol(decimalSymbolIndex);
+    m_wiz->m_parse->setDecimalSymbol(decimalSymbolIndex);
+    m_wiz->m_parse->setThousandsSeparator(decimalSymbolIndex);
+  }
+
   if (credit.startsWith('(') || credit.startsWith('[')) { // check if brackets notation is used for negative numbers
     credit.remove(QRegularExpression("[()]"));
     credit = '-' + credit;
@@ -208,9 +188,24 @@ bool CSVDialog::processCreditDebit(QString& credit, QString& debit , MyMoneyMone
       amount = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(debit));
     else if (ret == KMessageBox::No)
       amount = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(credit));
-  } else
-    amount = MyMoneyMoney("0" + m_wiz->m_decimalSymbol + "00");    // both fields are empty and zero so set amount to zero
+  } else {
+    amount = MyMoneyMoney();    // both fields are empty and zero so set amount to zero
 
+  }
+
+  return true;
+}
+
+bool CSVDialog::createStatement(MyMoneyStatement& st)
+{
+  if (!st.m_listTransactions.isEmpty()) // don't create statement if there is one
+    return true;
+
+  st.m_eType = MyMoneyStatement::etNone;
+  m_hashSet.clear();
+  for (int line = m_wiz->m_startLine - 1; line < m_wiz->m_endLine; ++line)
+    if (!processBankLine(m_wiz->m_lineList[line], st)) // parse fields
+      return false;
   return true;
 }
 
@@ -284,11 +279,13 @@ bool CSVDialog::processBankLine(const QString &line, MyMoneyStatement &st)
   // process amount field
   if (m_colTypeNum.value(ColumnAmount) != -1) {
     ++neededFieldsCount;
+    if (m_wiz->m_decimalSymbolIndex == 2) {
+      int decimalSymbolIndex = m_wiz->m_decimalSymbolIndexMap.value(m_colTypeNum[ColumnAmount]);
+      m_wiz->m_parse->setDecimalSymbol(decimalSymbolIndex);
+      m_wiz->m_parse->setThousandsSeparator(decimalSymbolIndex);
+    }
+
     txt = m_columnList[m_colTypeNum[ColumnAmount]];
-
-    if (txt.isEmpty())
-      txt = "0" + m_wiz->m_decimalSymbol + "00";
-
     if (txt.startsWith('(') || txt.startsWith('[')) { // check if brackets notation is used for negative numbers
       txt.remove(QRegularExpression("[()]"));
       txt = '-' + txt;
@@ -302,7 +299,10 @@ bool CSVDialog::processBankLine(const QString &line, MyMoneyStatement &st)
       else
         txt = '-' + txt;
     }
-    tr.m_amount = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(txt));
+    if (txt.isEmpty())
+      tr.m_amount = MyMoneyMoney();
+    else
+      tr.m_amount = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(txt));
   }
 
   // process credit/debit field
@@ -314,7 +314,6 @@ bool CSVDialog::processBankLine(const QString &line, MyMoneyStatement &st)
                             m_columnList[m_colTypeNum[ColumnDebit]],
                             tr.m_amount))
       return false;
-
   }
 
   MyMoneyStatement::Split s1;
@@ -365,27 +364,9 @@ bool CSVDialog::processBankLine(const QString &line, MyMoneyStatement &st)
   return true;
 }
 
-void CSVDialog::slotImportClicked()
-{
-    m_wiz->m_importNow = true; //                  all necessary data is present
-
-    if (m_wiz->m_startLine -1 > m_wiz->m_endLine) {
-      KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
-                                 "<center>Please correct your settings.</center>"), i18n("CSV import"));
-      m_wiz->m_importError = true;
-      return;
-    }
-    if (m_wiz->m_importError) {  //                possibly from wrong decimal symbol or date format
-      return;
-    }
-    m_wiz->m_parse->setSymbolFound(false);
-    createStatement();
-}
-
 void CSVDialog::slotSaveAsQIF()
 {
-  m_wiz->m_importNow = false;
-  createStatement();
+  createStatement(m_wiz->st);
   if (m_wiz->st.m_listTransactions.isEmpty())
     return;
   QStringList outFile = m_wiz->m_inFileName.split('.');
@@ -471,8 +452,8 @@ void CSVDialog::saveSettings()
   profilesGroup.writeEntry("FieldDelimiter", m_wiz->m_fieldDelimiterIndex);
   profilesGroup.writeEntry("TextDelimiter", m_wiz->m_textDelimiterIndex);
   profilesGroup.writeEntry("DecimalSymbol", m_wiz->m_decimalSymbolIndex);
-  profilesGroup.writeEntry("StartLine", m_wiz->m_pageLinesDate->ui->spinBox_skip->value() - 1);
-  profilesGroup.writeEntry("TrailerLines", m_wiz->m_pageLinesDate->m_trailerLines);
+  profilesGroup.writeEntry("StartLine", m_wiz->m_startLine - 1);
+  profilesGroup.writeEntry("TrailerLines", m_wiz->m_trailerLines);
 
   profilesGroup.writeEntry("DateCol", m_colTypeNum.value(ColumnDate));
   profilesGroup.writeEntry("PayeeCol", m_colTypeNum.value(ColumnPayee));
@@ -634,15 +615,4 @@ void CSVDialog::resetComboBox(columnTypeE comboBox)
       KMessageBox::sorry(m_wiz, i18n("<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> Please re-enter your column selections."
                                     , comboBox), i18n("CSV import"));
   }
-}
-
-bool CSVDialog::importNow()
-{
-  return m_wiz->m_importNow;
-}
-
-void CSVDialog::showStage()
-{
-  QString str = m_wiz->ui->label_intro->text();
-  m_wiz->ui->label_intro->setText(QLatin1String("<b>") + str + QLatin1String("</b>"));
 }

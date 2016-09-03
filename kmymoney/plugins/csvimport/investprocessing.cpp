@@ -66,9 +66,9 @@
 
 #include "ui_introwizardpage.h"
 #include "ui_separatorwizardpage.h"
+#include "ui_rowswizardpage.h"
 #include "ui_bankingwizardpage.h"
-#include "ui_lines-datewizardpage.h"
-#include "ui_completionwizardpage.h"
+#include "ui_formatswizardpage.h"
 #include "ui_investmentwizardpage.h"
 #include "ui_csvwizard.h"
 #include "symboltabledlg.h"
@@ -112,7 +112,6 @@ void InvestProcessing::init()
   m_completer->setCaseSensitivity(Qt::CaseInsensitive);
   securityLineEdit->setCompleter(m_completer);
   connect(securityLineEdit, SIGNAL(editingFinished()), this, SLOT(securityNameEdited()));
-  connect(this, SIGNAL(statementReady(MyMoneyStatement&)), m_wiz->m_plugin, SLOT(slotGetStatement(MyMoneyStatement&)));
 
   //  The following string list strings are descriptions of possible investment
   //  activity types.  Each of the lists may also contain alternative descriptions,
@@ -154,13 +153,13 @@ void InvestProcessing::saveSettings()
   profileNamesGroup.config()->sync();
 
   KConfigGroup profilesGroup(m_wiz->m_config, "Invest-" + m_wiz->m_profileName);
-  profilesGroup.writeEntry("DateFormat", m_wiz->m_pageLinesDate->ui->comboBox_dateFormat->currentIndex());
+  profilesGroup.writeEntry("DateFormat", m_wiz->m_dateFormatIndex);
   profilesGroup.writeEntry("FieldDelimiter", m_wiz->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex());
-  profilesGroup.writeEntry("DecimalSymbol", m_wiz->m_pageCompletion->ui->comboBox_decimalSymbol->currentIndex());
+  profilesGroup.writeEntry("DecimalSymbol", m_wiz->m_decimalSymbolIndex);
   profilesGroup.writeEntry("PriceFraction", m_wiz->m_pageInvestment->ui->comboBoxInv_priceFraction->currentIndex());
-  profilesGroup.writeEntry("StartLine", m_wiz->m_pageLinesDate->ui->spinBox_skip->value() - 1);
+  profilesGroup.writeEntry("StartLine", m_wiz->m_startLine - 1);
   profilesGroup.writeEntry("SecurityName", m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->currentIndex());
-  profilesGroup.writeEntry("TrailerLines", m_wiz->m_pageLinesDate->m_trailerLines);
+  profilesGroup.writeEntry("TrailerLines", m_wiz->m_trailerLines);
   //    The strings in these resource file lists may be edited,
   //    or expanded in the file by the user, to suit his needs.
 
@@ -268,6 +267,13 @@ void InvestProcessing::feeInputsChanged()
 {
   m_wiz->m_pageInvestment->ui->buttonInv_calculateFee->setEnabled(false);
   m_feeRate = m_wiz->m_pageInvestment->ui->lineEdit_feeRate->text();
+  if (m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->isEnabled() &&
+      m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->currentIndex() < m_wiz->m_endColumn &&
+      m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->currentIndex() > -1) {
+    m_wiz->m_pageInvestment->ui->lineEdit_minFee->setEnabled(false);
+    m_wiz->m_pageInvestment->ui->lineEdit_feeRate->setEnabled(false);
+  }
+
   if(m_feeRate.isEmpty()) {
     m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setEnabled(true);
     m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setEnabled(true);
@@ -277,6 +283,7 @@ void InvestProcessing::feeInputsChanged()
     m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setEnabled(false);
     m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setChecked(true);
     m_wiz->m_pageInvestment->ui->lineEdit_minFee->setEnabled(true);
+    m_wiz->m_pageInvestment->ui->lineEdit_feeRate->setEnabled(true);
     if (m_colTypeNum.value(ColumnAmount) != -1)
       m_wiz->m_pageInvestment->ui->buttonInv_calculateFee->setEnabled(true);
   }
@@ -414,31 +421,25 @@ void InvestProcessing::feeIsPercentageCheckBoxClicked(bool checked)
   m_feeIsPercentage = checked;
 }
 
-void InvestProcessing::createStatement()
+bool InvestProcessing::createStatement(MyMoneyStatement& st)
 {
-  m_wiz->st = MyMoneyStatement();
-  m_wiz->st.m_eType = MyMoneyStatement::etInvestment;
-  if (m_colTypeNum.value(ColumnFee) >= m_wiz->m_endColumn) // fee column has not been calculated so do it now
+  if (!st.m_listTransactions.isEmpty()) // don't create statement if there is one
+    return true;
+  st.m_eType = MyMoneyStatement::etInvestment;
+  if (m_colTypeNum.value(InvestProcessing::ColumnFee) >= m_wiz->m_endColumn) // fee column has not been calculated so do it now
     calculateFee();
 
-  for (int line = m_wiz->m_startLine - 1; line < m_wiz->m_endLine; line++) {
-    if (!processInvestLine(m_wiz->m_lineList[line], m_wiz->st)) { // parse fields
-      m_wiz->m_importNow = false;
-      m_wiz->m_wizard->back();  //               have another try at the import
-      break;
-    }
-  }  
-  if (!m_wiz->m_importNow)
-    return;
+  for (int line = m_wiz->m_startLine - 1; line < m_wiz->m_endLine; ++line)
+    if (!processInvestLine(m_wiz->m_lineList[line], st)) // parse fields
+      return false;
 
+  st.m_listSecurities.clear();
   QList<MyMoneyStatement::Security>::const_iterator it_s = m_listSecurities.constBegin();
   while (it_s != m_listSecurities.constEnd()) {
-    m_wiz->st.m_listSecurities << (*it_s);
+    st.m_listSecurities << (*it_s);
     ++it_s;
   }
-
-  emit statementReady(m_wiz->st);  // investment statement ready
-  m_wiz->m_importNow = false;
+  return true;
 }
 
 bool InvestProcessing::processInvestLine(const QString &line, MyMoneyStatement &st)
@@ -489,39 +490,58 @@ bool InvestProcessing::processInvestLine(const QString &line, MyMoneyStatement &
     // process quantity field
     if (m_colTypeNum.value(ColumnQuantity) != -1) {
       ++neededFieldsCount;
-      txt = m_columnList[m_colTypeNum[ColumnQuantity]];
-      if (txt.isEmpty())
-        txt = "0" + m_wiz->m_decimalSymbol + "00";
+      if (m_wiz->m_decimalSymbolIndex == 2) {
+        int decimalSymbolIndex = m_wiz->m_decimalSymbolIndexMap.value(m_colTypeNum[ColumnQuantity]);
+        m_wiz->m_parse->setDecimalSymbol(decimalSymbolIndex);
+        m_wiz->m_parse->setThousandsSeparator(decimalSymbolIndex);
+      }
 
+      txt = m_columnList[m_colTypeNum[ColumnQuantity]];
       txt.remove(QRegularExpression("+-")); // remove unwanted sings in quantity
-      tr.m_shares = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(txt));
+
+      if (txt.isEmpty())
+        tr.m_shares = MyMoneyMoney();
+      else
+        tr.m_shares = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(txt));
     }
 
     // process price field
     if (m_colTypeNum.value(ColumnPrice) != -1) {
       ++neededFieldsCount;
+      if (m_wiz->m_decimalSymbolIndex == 2) {
+        int decimalSymbolIndex = m_wiz->m_decimalSymbolIndexMap.value(m_colTypeNum[ColumnPrice]);
+        m_wiz->m_parse->setDecimalSymbol(decimalSymbolIndex);
+        m_wiz->m_parse->setThousandsSeparator(decimalSymbolIndex);
+      }
+
       txt = m_columnList[m_colTypeNum[ColumnPrice]];
       if (txt.isEmpty())
-        txt = "0" + m_wiz->m_decimalSymbol + "00";
-
-      MyMoneyMoney price = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(txt));
-      price *= MyMoneyMoney(m_priceFractionValue);
-      tr.m_price = price;
+        tr.m_price = MyMoneyMoney();
+      else {
+        tr.m_price = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(txt));
+        tr.m_price *= MyMoneyMoney(m_priceFractionValue);
+      }
     }
 
     // process amount field
     if (m_colTypeNum.value(ColumnAmount) != -1) {
       ++neededFieldsCount;
-      txt = m_columnList[m_colTypeNum[ColumnAmount]];
-      if (txt.isEmpty())
-        txt = "0" + m_wiz->m_decimalSymbol + "00";
+      if (m_wiz->m_decimalSymbolIndex == 2) {
+        int decimalSymbolIndex = m_wiz->m_decimalSymbolIndexMap.value(m_colTypeNum[ColumnAmount]);
+        m_wiz->m_parse->setDecimalSymbol(decimalSymbolIndex);
+        m_wiz->m_parse->setThousandsSeparator(decimalSymbolIndex);
+      }
 
+      txt = m_columnList[m_colTypeNum[ColumnAmount]];
       if (txt.startsWith('(') || txt.startsWith('[')) { // check if brackets notation is used for negative numbers
         txt.remove(QRegularExpression("[()]"));
         txt = '-' + txt;
       }
 
-      tr.m_amount = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(txt));
+      if (txt.isEmpty())
+        tr.m_amount = MyMoneyMoney();
+      else
+        tr.m_amount = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(txt));
     }
 
     // process type field
@@ -540,18 +560,25 @@ bool InvestProcessing::processInvestLine(const QString &line, MyMoneyStatement &
 
     // process fee field
     if (m_colTypeNum.value(ColumnFee) != -1) {
-      txt = m_columnList[m_colTypeNum[ColumnFee]];
-      if (txt.isEmpty())
-        txt = "0" + m_wiz->m_decimalSymbol + "00";
+      if (m_wiz->m_decimalSymbolIndex == 2) {
+        int decimalSymbolIndex = m_wiz->m_decimalSymbolIndexMap.value(m_colTypeNum[ColumnFee]);
+        m_wiz->m_parse->setDecimalSymbol(decimalSymbolIndex);
+        m_wiz->m_parse->setThousandsSeparator(decimalSymbolIndex);
+      }
 
+      txt = m_columnList[m_colTypeNum[ColumnFee]];
       if (txt.startsWith('(') || txt.startsWith('[')) // check if brackets notation is used for negative numbers
         txt.remove(QRegularExpression("[()]"));
 
-      MyMoneyMoney fee = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(txt));
-      if (m_feeIsPercentage && m_feeRate.isEmpty())      //   fee is percent
-        fee *= tr.m_amount / MyMoneyMoney(100); // as percentage
-      fee.abs();
-      tr.m_fees = fee;
+      if (txt.isEmpty())
+        tr.m_fees = MyMoneyMoney();
+      else {
+        MyMoneyMoney fee = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(txt));
+        if (m_feeIsPercentage && m_feeRate.isEmpty())      //   fee is percent
+          fee *= tr.m_amount / MyMoneyMoney(100); // as percentage
+        fee.abs();
+        tr.m_fees = fee;
+      }
     }
 
     // process name field
@@ -742,46 +769,6 @@ MyMoneyStatement::Transaction::EAction InvestProcessing::processActionType(QStri
   return MyMoneyStatement::Transaction::eaNone;
 }
 
-void InvestProcessing::slotImportClicked()
-{
-  m_wiz->m_importError = false;
-
-  if (m_wiz->m_decimalSymbol.isEmpty()) {
-    KMessageBox::sorry(0, i18n("<center>Please select the decimal symbol used in your file.\n</center>"), i18n("Investment import"));
-    m_wiz->m_importError = true;
-    return;
-  }
-
-  m_securityName = m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->currentText();
-  if (m_securityName.isEmpty())
-    m_securityName = m_symbolTableDlg->m_securityName;
-
-  if (m_securityName.isEmpty() &&
-      m_colTypeNum.value(ColumnSymbol) < 1 &&
-      m_colTypeNum.value(ColumnName) < 1) {
-    KMessageBox::sorry(0, i18n("<center>Please enter a name or symbol for the security.\n</center>"), i18n("CSV import"));
-    m_wiz->m_importError = true;
-    return;
-  }
-
-  if (!m_securityList.contains(m_securityName)){
-    m_securityList << m_securityName;
-  }
-
-    //  all necessary data is present
-
-    m_wiz->m_endLine = m_wiz->m_pageLinesDate->ui->spinBox_skipToLast->value();
-    int skp = m_wiz->m_pageLinesDate->ui->spinBox_skip->value(); //         skip all headers
-    if (skp > m_wiz->m_endLine) {
-      KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
-                                 "<center>Please correct your settings.</center>"), i18n("CSV import"));
-      m_wiz->m_importError = true;
-      return;
-    }
-
-    createStatement();
-}
-
 void InvestProcessing::saveAs()
 {
     QStringList outFile = m_wiz->m_inFileName .split('.');
@@ -858,29 +845,23 @@ void InvestProcessing::readSettings(const KSharedConfigPtr& config)
     m_wiz->m_fieldDelimiterIndex = profilesGroup.readEntry("FieldDelimiter", -1);
     m_wiz->m_decimalSymbolIndex = profilesGroup.readEntry("DecimalSymbol", -1);
 
-    if (m_wiz->m_decimalSymbolIndex == -1) { // if no decimal symbol in config, then get one from locale settings
-      if (QLocale().decimalPoint() == '.')
-        m_wiz->m_decimalSymbolIndex = 0;
-      else
-        m_wiz->m_decimalSymbolIndex = 1;
-    }
-    if (m_wiz->m_decimalSymbolIndex == 0)
-      m_wiz->m_ThousandsSeparatorIndex = 1;
-    else
-      m_wiz->m_ThousandsSeparatorIndex = 0;
+    if (m_wiz->m_decimalSymbolIndex != -1 && m_wiz->m_decimalSymbolIndex != 2) {
+      m_wiz->m_parse->setDecimalSymbolIndex(m_wiz->m_decimalSymbolIndex);
+      m_wiz->m_parse->setDecimalSymbol(m_wiz->m_decimalSymbolIndex);
 
-    m_wiz->m_parse->setDecimalSymbolIndex(m_wiz->m_decimalSymbolIndex);
-    m_wiz->m_parse->setDecimalSymbol(m_wiz->m_decimalSymbolIndex);
-    m_wiz->m_parse->setThousandsSeparatorIndex(m_wiz->m_decimalSymbolIndex);
-    m_wiz->m_parse->setThousandsSeparator(m_wiz->m_decimalSymbolIndex);
-    m_wiz->m_decimalSymbol = m_wiz->m_parse->decimalSymbol(m_wiz->m_decimalSymbolIndex);
+      m_wiz->m_parse->setThousandsSeparatorIndex(m_wiz->m_decimalSymbolIndex);
+      m_wiz->m_parse->setThousandsSeparator(m_wiz->m_decimalSymbolIndex);
+
+      m_wiz->m_decimalSymbol = m_wiz->m_parse->decimalSymbol(m_wiz->m_decimalSymbolIndex);
+    } else
+      m_wiz->m_decimalSymbol.clear();
 
     m_wiz->m_parse->setFieldDelimiterIndex(m_wiz->m_fieldDelimiterIndex);
     m_wiz->m_parse->setTextDelimiterIndex(m_wiz->m_textDelimiterIndex);
     m_wiz->m_fieldDelimiterCharacter = m_wiz->m_parse->fieldDelimiterCharacter(m_wiz->m_fieldDelimiterIndex);
     m_wiz->m_textDelimiterCharacter = m_wiz->m_parse->textDelimiterCharacter(m_wiz->m_textDelimiterIndex);
     m_wiz->m_startLine = profilesGroup.readEntry("StartLine", 0) + 1;
-    m_wiz->m_pageLinesDate->m_trailerLines = profilesGroup.readEntry("TrailerLines", 0);
+    m_wiz->m_trailerLines = profilesGroup.readEntry("TrailerLines", 0);
     m_wiz->m_encodeIndex = profilesGroup.readEntry("Encoding", 0);
     break;
   }
@@ -1001,6 +982,7 @@ void InvestProcessing::calculateFee()
 {
   QString txt;
   QString newTxt;
+  QString decimalSymbol;
   MyMoneyMoney minFee;
   MyMoneyMoney percent;
   double d;
@@ -1010,11 +992,21 @@ void InvestProcessing::calculateFee()
   if (m_feeRate.isEmpty() || m_colTypeNum.value(ColumnAmount) == -1) //check if feeRate is in place
     return;
 
+  decimalSymbol = m_wiz->m_decimalSymbol;
+  if (m_wiz->m_decimalSymbolIndex == 2 || m_wiz->m_decimalSymbolIndex == -1) {
+    int detectedSymbol = 2;
+    if (!m_wiz->detectDecimalSymbol(m_colTypeNum.value(ColumnAmount), detectedSymbol))
+      return;
+    m_wiz->m_parse->setDecimalSymbol(detectedSymbol);
+    m_wiz->m_parse->setThousandsSeparator(detectedSymbol); // separator list is in reverse so it's ok
+    decimalSymbol = m_wiz->m_parse->decimalSymbol(detectedSymbol);
+  }
+
   percent = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(m_feeRate));
 
   m_minFee = m_wiz->m_pageInvestment->ui->lineEdit_minFee->text();
   if (m_minFee.isEmpty())
-    m_minFee = "0" + m_wiz->m_decimalSymbol + "00";
+    m_minFee = "0" + QLocale().decimalPoint() + "00";
 
   minFee = MyMoneyMoney(m_wiz->m_parse->possiblyReplaceSymbol(m_minFee));
 
@@ -1028,11 +1020,23 @@ void InvestProcessing::calculateFee()
 
   m_wiz->ui->tableWidget->setColumnCount(m_wiz->m_maxColumnCount);
   txt.setNum(m_colTypeNum.value(ColumnFee) + 1);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->addItem(txt); //add generated column to fee combobox...
+  if (m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->itemText(m_colTypeNum.value(ColumnFee)) != txt)
+    m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->insertItem(m_colTypeNum.value(ColumnFee), txt);
   m_wiz->m_pageInvestment->ui->comboBoxInv_feeCol->setCurrentIndex(m_colTypeNum.value(ColumnFee)); // ...and select it by default
 
-  for (int i = m_wiz->m_startLine - 1; i < m_wiz->m_endLine; i++)
-    {
+  for (int i = 0; i <  m_wiz->m_startLine - 1; ++i) { // fill rows above with whitespace for nice effect with markUnwantedRows
+    QTableWidgetItem *item = new QTableWidgetItem;
+    item->setText("");
+    m_wiz->ui->tableWidget->setItem(i, m_colTypeNum.value(ColumnFee), item);
+  }
+
+  for (int i = m_wiz->m_endLine; i <  m_wiz->ui->tableWidget->rowCount(); ++i) { // fill rows below with whitespace for nice effect with markUnwantedRows
+    QTableWidgetItem *item = new QTableWidgetItem;
+    item->setText("");
+    m_wiz->ui->tableWidget->setItem(i, m_colTypeNum.value(ColumnFee), item);
+  }
+
+  for (int i = m_wiz->m_startLine - 1; i < m_wiz->m_endLine; ++i) {
       m_columnList = m_wiz->m_parse->parseLine(m_wiz->m_lineList[i]);
       txt = m_columnList[m_colTypeNum.value(ColumnAmount)];
       txt.replace(QRegExp("[,. ]"),"").toInt(&ok);
@@ -1053,9 +1057,9 @@ void InvestProcessing::calculateFee()
         fee = minFee;
       d = fee.toDouble();
       txt.setNum(d, 'f', 4);
-      txt.replace('.', m_wiz->m_decimalSymbol); //make sure decimal symbol is uniform in whole line
+      txt.replace('.', decimalSymbol); //make sure decimal symbol is uniform in whole line
 
-      if (m_wiz->m_decimalSymbol == m_wiz->m_fieldDelimiterCharacter) { //make sure fee has the same notation as the line it's being attached to
+      if (decimalSymbol == m_wiz->m_fieldDelimiterCharacter) { //make sure fee has the same notation as the line it's being attached to
         if (m_columnList.count() == m_wiz->m_maxColumnCount)
           m_wiz->m_lineList[i] = m_wiz->m_lineList[i].left(m_wiz->m_lineList[i].length() - txt.length() - 2 * m_wiz->m_textDelimiterCharacter.length() - m_wiz->m_fieldDelimiterCharacter.length());
         m_wiz->m_lineList[i] = m_wiz->m_lineList[i] + m_wiz->m_fieldDelimiterCharacter + m_wiz->m_textDelimiterCharacter + txt + m_wiz->m_textDelimiterCharacter;
@@ -1067,10 +1071,11 @@ void InvestProcessing::calculateFee()
       }
 
       QTableWidgetItem *item = new QTableWidgetItem;
-      item->setText(txt + "  ");
+      item->setText(txt);
       m_wiz->ui->tableWidget->setItem(i, m_colTypeNum.value(ColumnFee), item);
     }
-    m_wiz->updateWindowSize();
+  m_wiz->markUnwantedRows();
+  m_wiz->updateWindowSize();
 }
 
 void InvestProcessing::hideSecurity()

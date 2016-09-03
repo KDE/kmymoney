@@ -52,6 +52,12 @@ public:
   */
   void             displayLine(int& row, QString& symbol, const QString& name, bool& exists);
 
+public slots:
+  /**
+  * This method is called to enable the user to edit the name of an imported security.
+  * On exit, the names are available for return to csvDialog().
+  */
+  void             slotEditSecurityCompleted();
 signals:
   /**
   * This signal is emitted when security names have been edited.
@@ -83,12 +89,6 @@ private slots:
 
   void             slotItemChanged(QTableWidgetItem* item);
   void             slotItemClicked(QTableWidgetItem* item);
-
-  /**
-  * This method is called to enable the user to edit the name of an imported security.
-  * On exit, the names are available for return to csvDialog().
-  */
-  void             slotEditSecurityCompleted();
 };
 
 #endif // SYMBOLTABLEDLG_H

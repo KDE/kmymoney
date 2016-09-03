@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SeparatorPage</class>
- <widget class="QWidget" name="SeparatorPage">
+ <class>FormatsPage</class>
+ <widget class="QWidget" name="FormatsPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Separator Wizard Page</string>
+   <string>Formats Wizard Page</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,10,1">
    <item>
@@ -38,10 +38,10 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>The field delimiter should be detected automatically.
-Attempting to change it will reset any field choices.
-The text delimiter does not normally need to be
-changed, except possibly when within a field.</string>
+        <string>Please select the decimal symbol used in your file.
+The thousands separator changes automatically.
+If all is OK, you'll be able to click import.
+If required, a QIF file may then be produced.</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -101,18 +101,11 @@ changed, except possibly when within a field.</string>
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout" columnstretch="10,10">
-         <item row="0" column="0">
-          <widget class="QLabel" name="labelSet_fieldDelim">
-           <property name="text">
-            <string>Field Delimiter</string>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="comboBox_thousandsDelimiter">
+           <property name="enabled">
+            <bool>false</bool>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QComboBox" name="comboBox_fieldDelimiter">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -129,36 +122,28 @@ changed, except possibly when within a field.</string>
            </item>
            <item>
             <property name="text">
-             <string>semiColon (;)</string>
+             <string>dot (.)</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>colon (:)</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>tab (\t)</string>
+             <string>auto</string>
             </property>
            </item>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="labelSet_textDelim">
-           <property name="accessibleName">
-            <string comment="punctuation mark used as field delimiter" extracomment="punctuation mark used as field delimiter"/>
-           </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="labelSet_decimal">
            <property name="text">
-            <string comment="punctuation mark used as field delimiter">Text Delimiter</string>
+            <string>Decimal Symbol</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="QComboBox" name="comboBox_textDelimiter">
+         <item row="0" column="1">
+          <widget class="QComboBox" name="comboBox_decimalSymbol">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -166,20 +151,73 @@ changed, except possibly when within a field.</string>
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>Select field delimiter/separator character.
-This will reset any existing field choices.</string>
+            <string>Click to select the required decimal symbol, and to
+check that the selected symbol matches the data.</string>
            </property>
            <property name="currentIndex">
             <number>-1</number>
            </property>
            <item>
             <property name="text">
-             <string>quote (&quot;)</string>
+             <string>dot (.)</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>apostrophe (')</string>
+             <string>comma (,)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>auto</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="labelSet_thousands">
+           <property name="text">
+            <string>Thousands Symbol</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="labelSet_dateFormat">
+           <property name="text">
+            <string comment="date format to use">Date format</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QComboBox" name="comboBox_dateFormat">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+           <item>
+            <property name="text">
+             <string comment="abbreviation of 'year', 'month', 'day'.">y m d</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string comment="abbreviation of 'month', 'day', 'year',">m d y</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string comment="abbreviation of  'day', 'month', 'year',">d m y</string>
             </property>
            </item>
           </widget>

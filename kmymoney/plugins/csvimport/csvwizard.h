@@ -37,10 +37,10 @@ class Parse;
 class CsvUtil;
 class BankingPage;
 class InvestmentPage;
-class LinesDatePage;
+class FormatsPage;
 class IntroPage;
-class CompletionPage;
 class SeparatorPage;
+class RowsPage;
 class InvestProcessing;
 class CsvImporterPlugin;
 
@@ -57,8 +57,8 @@ public:
   explicit CSVWizard();
   virtual ~CSVWizard();
 
-  enum { Page_Intro, Page_Separator, Page_Banking, Page_Investment,
-         Page_LinesDate, Page_Completion
+  enum { PageIntro, PageSeparator, PageRows,
+         PageBanking, PageInvestment, PageFormats
        };
 
   typedef enum:int { ProfileInvest, ProfileBank, ProfileNone = 0xFF,
@@ -72,10 +72,10 @@ public:
   QWizard*            m_wizard;
   IntroPage*          m_pageIntro;
   SeparatorPage*      m_pageSeparator;
+  RowsPage*           m_pageRows;
   BankingPage*        m_pageBanking;
   InvestmentPage*     m_pageInvestment;
-  LinesDatePage*      m_pageLinesDate;
-  CompletionPage*     m_pageCompletion;
+  FormatsPage*        m_pageFormats;
   CSVDialog*          m_csvDialog;
   InvestProcessing*   m_investProcessing;
   ConvertDate*        m_convertDate;
@@ -110,7 +110,6 @@ public:
   QString          m_fieldDelimiterCharacter;
   QString          m_textDelimiterCharacter;
   QString          m_decimalSymbol;
-  QString          m_thousandsSeparator;
   QString          m_inFileName;
   int              m_profileType;
   QString          m_date;
@@ -126,13 +125,14 @@ public:
   int              m_fieldDelimiterIndex;
   int              m_textDelimiterIndex;
   int              m_decimalSymbolIndex;
-  int              m_ThousandsSeparatorIndex;
+  QMap<int, int>   m_decimalSymbolIndexMap;
   int              m_row;
   int              m_maxColumnCount;
   int              m_endColumn;
   int              m_encodeIndex;
   int              m_startLine;
   int              m_endLine;
+  int              m_trailerLines;
   int              m_fileEndLine;
   int              m_dateFormatIndex;
   int              m_memoColumn;
@@ -142,9 +142,6 @@ public:
 
   bool             m_accept;
   bool             m_importError;
-  bool             m_importIsValid;
-  bool             m_errorFoundAlready;
-  bool             m_importNow;
   bool             m_skipSetup;
   bool             m_acceptAllInvalid;
 
@@ -181,10 +178,14 @@ public:
   */
   void           findCodecs();
 
-public slots:
-
+  void           clearColumnsBackground(int col);
+  void           clearColumnsBackground(QList<int>& columnList);
   void           clearBackground();
   void           markUnwantedRows();
+
+signals:
+  void           statementReady(MyMoneyStatement&);
+public slots:
 
   /**
   * This method is called when the user clicks 'Encoding' and selects an
@@ -193,26 +194,12 @@ public slots:
   void           encodingChanged(int);
 
   /**
-  * This method is called when the user selects a new decimal symbol.  The
-  * UI is updated using the new symbol.
-  */
-  void           decimalSymbolSelected(int);
-  void           decimalSymbolSelected();
-
-  /**
-  * This method is called when the user selects a new decimal symbol.  The
-  * UI is updated using the new symbol, and on importing, the new symbol
-  * also will be used.
-  */
-  void           updateDecimalSymbol(int col);
-
-  void           thousandsSeparatorChanged();
-
-  /**
   * This method is called when a field or text delimiter is changed.  The
   * input file is reread using the new delimiter.
   */
   void           delimiterChanged(int index);
+  void           slotImportClicked();
+  bool           detectDecimalSymbol(const int col, int& symbol);
 
   /**
   * This method is called when the user clicks 'Clear selections'.
@@ -243,11 +230,6 @@ public slots:
   * be saved and the plugin will be terminated.
   */
   void           slotClose();
-
-  /**
-  * This method checks if all dates in date column are valid.
-  */
-  bool            validateDateFormat(int dF);
 
   /**
   * If delimiter = -1 this method tries different fild
@@ -283,11 +265,6 @@ public slots:
   * in importing ready bank statement.
   */
   void           slotFileDialogClicked();
-
-  /**
-  * Appends memo field in lines buffer,
-  */
-  void           createMemoField(QStringList &columnTypeList);
 
   void           slotIdChanged(int id);
 
@@ -376,11 +353,49 @@ private:
   CSVWizard*          m_wizDlg;
   void                cleanupPage();
   bool                validatePage();
-  int                 nextId() const;
 
 private slots:
 
 signals:
+};
+
+namespace Ui
+{
+class RowsPage;
+}
+
+class RowsPage : public QWizardPage
+{
+  Q_OBJECT
+
+public:
+  explicit RowsPage(QWidget *parent = 0);
+  ~RowsPage();
+
+  Ui::RowsPage   *ui;
+
+  QVBoxLayout         *m_pageLayout;
+
+  void                initializePage();
+  void                setParent(CSVWizard* dlg);
+  int                 nextId() const;
+
+signals:
+
+public slots:
+  /**
+  * This method is called when the user edits the startLine setting.
+  */
+  void           startRowChanged(int val);
+
+  /**
+  * This method is called when the user edits the lastLine setting.
+  */
+  void           endRowChanged(int val);
+private:
+  CSVWizard*          m_wizDlg;
+
+  void                cleanupPage();
 };
 
 namespace Ui
@@ -453,6 +468,7 @@ private:
 
   bool                isComplete() const;
   void                cleanupPage();
+  bool                validatePage();
 
 private slots:
   void                slotDateColChanged(int col);
@@ -467,92 +483,57 @@ private slots:
 
 namespace Ui
 {
-class LinesDatePage;
+class FormatsPage;
 }
 
-class LinesDatePage : public QWizardPage
+class FormatsPage : public QWizardPage
 {
   Q_OBJECT
 
 public:
-  explicit LinesDatePage(QWidget *parent = 0);
-  ~LinesDatePage();
+  explicit FormatsPage(QWidget *parent = 0);
+  ~FormatsPage();
 
-  Ui::LinesDatePage   *ui;
+  Ui::FormatsPage   *ui;
 
   QVBoxLayout         *m_pageLayout;
 
   void                initializePage();
   void                setParent(CSVWizard* dlg);
-  bool                isComplete() const;
-  bool                validatePage();
-  int                 nextId() const;
 
-  int                 m_trailerLines;
+  /**
+  * This method is called when the user selects a new decimal symbol.  The
+  * UI is updated using the new symbol, and on importing, the new symbol
+  * also will be used.
+  */
+  bool           validateDecimalSymbol(int col);
+
+  /**
+  * This method checks if all dates in date column are valid.
+  */
+  bool            validateDateFormat(int index);
 
 signals:
-  bool                isImportable();
-
+void                completeChanged();
 public slots:
+  /**
+  * This method is called when the user selects a new decimal symbol.  The
+  * UI is updated using the new symbol.
+  */
+  void           decimalSymbolChanged(int);
+
   /**
   * This method is called when the user clicks 'Date format' and selects a
   * format, which is used by convertDate().
   */
-  void           dateFormatSelected(int dF);
-
-  /**
-  * This method is called when the user edits the startLine setting.
-  */
-  void           startLineChanged(int val);
-
-  /**
-  * This method is called when the user edits the lastLine setting.
-  */
-  void           endLineChanged(int val);
+  void           dateFormatChanged(int index);
 private:
   CSVWizard*          m_wizDlg;
+  bool                m_isDecimalSymbolOK;
+  bool                m_isDateFormatOK;
 
+  bool                isComplete() const;
   void                cleanupPage();
-
-};
-
-namespace Ui
-{
-class CompletionPage;
-}
-
-class CompletionPage : public QWizardPage
-{
-  Q_OBJECT
-
-public:
-  explicit CompletionPage(QWidget *parent = 0);
-  ~CompletionPage();
-
-  Ui::CompletionPage  *ui;
-
-  QVBoxLayout*        m_pageLayout;
-
-  void                setParent(CSVWizard* dlg);
-  void                initializePage();
-
-signals:
-  void                completeChanged();
-  void                importBanking();
-  void                importInvestment();
-
-public slots:
-  /**
-  * This method is called when the user clicks the 'Import CSV' button.
-  */
-  void                slotImportClicked();
-  void                slotImportValid();
-
-private:
-  void                cleanupPage();
-
-  bool                validatePage();
-  CSVWizard*          m_wizDlg;
 };
 
 #endif // CSVWIZARD_H

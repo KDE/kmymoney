@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SeparatorPage</class>
- <widget class="QWidget" name="SeparatorPage">
+ <class>RowsPage</class>
+ <widget class="QWidget" name="RowsPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Separator Wizard Page</string>
+   <string>Rows Wizard Page</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,10,1">
    <item>
@@ -38,10 +38,8 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>The field delimiter should be detected automatically.
-Attempting to change it will reset any field choices.
-The text delimiter does not normally need to be
-changed, except possibly when within a field.</string>
+        <string>Please set your data range.
+Ensure that statement header and footer is excluded.</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -100,11 +98,21 @@ changed, except possibly when within a field.</string>
         </spacer>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout" columnstretch="10,10">
+        <layout class="QGridLayout" name="gridLayout" columnstretch="10,0">
          <item row="0" column="0">
-          <widget class="QLabel" name="labelSet_fieldDelim">
+          <widget class="QLabel" name="labelSet_skip">
            <property name="text">
-            <string>Field Delimiter</string>
+            <string>Start line</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="labelSet_skipToLast">
+           <property name="text">
+            <string>End line</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -112,53 +120,7 @@ changed, except possibly when within a field.</string>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QComboBox" name="comboBox_fieldDelimiter">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-           <item>
-            <property name="text">
-             <string>comma (,)</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>semiColon (;)</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>colon (:)</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>tab (\t)</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="labelSet_textDelim">
-           <property name="accessibleName">
-            <string comment="punctuation mark used as field delimiter" extracomment="punctuation mark used as field delimiter"/>
-           </property>
-           <property name="text">
-            <string comment="punctuation mark used as field delimiter">Text Delimiter</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QComboBox" name="comboBox_textDelimiter">
+          <widget class="QSpinBox" name="spinBox_skip">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -166,22 +128,29 @@ changed, except possibly when within a field.</string>
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>Select field delimiter/separator character.
-This will reset any existing field choices.</string>
+            <string>Enter the number of the first transaction line.
+Will not accept value greater than the End Line value.</string>
            </property>
-           <property name="currentIndex">
-            <number>-1</number>
+           <property name="minimum">
+            <number>1</number>
            </property>
-           <item>
-            <property name="text">
-             <string>quote (&quot;)</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>apostrophe (')</string>
-            </property>
-           </item>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="spinBox_skipToLast">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Enter the number of the last transaction line.
+Will not accept value less than Start Line value.</string>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
           </widget>
          </item>
         </layout>
