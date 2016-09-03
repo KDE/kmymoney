@@ -841,12 +841,19 @@ void CSVWizard::displayLines(const QStringList &lineList, Parse* parse)
   ui->tableWidget->setRowCount(lineList.count());
   ui->tableWidget->setColumnCount(m_maxColumnCount);
 
-  for (int line = 0; line < lineList.count(); line++) {
+  for (int line = 0; line < lineList.count(); ++line) {
     QStringList columnList = parse->parseLine(lineList[line]);
-    for (int col = 0; col < columnList.count(); col ++) {
+    for (int col = 0; col < columnList.count(); ++col) {
       QTableWidgetItem *item = new QTableWidgetItem;  // new item for tableWidget
       item->setText(columnList[col]);
       ui->tableWidget->setItem(m_row, col, item);  // add item to tableWidget
+    }
+    if (columnList.count() < m_maxColumnCount) {  // if 'header' area has less columns than 'data' area, then fill this area with whitespaces for nice effect with markUnwantedRows
+      for (int col = columnList.count(); col < m_maxColumnCount; ++col) {
+        QTableWidgetItem *item = new QTableWidgetItem; // new item for tableWidget
+        item->setText(" ");
+        ui->tableWidget->setItem(m_row, col, item);  // add item to tableWidget
+      }
     }
     m_row ++;
   }
