@@ -812,7 +812,7 @@ void CSVWizard::readFile(const QString& fname)
   QFile  inFile(m_inFileName);
   inFile.open(QIODevice::ReadOnly);  // allow a Carriage return -// QIODevice::Text
   QTextStream inStream(&inFile);
-  QTextCodec* codec = QTextCodec::codecForMib(m_encodeIndex);
+  QTextCodec* codec = QTextCodec::codecForMib(m_codecs.value(m_encodeIndex)->mibEnum());
   inStream.setCodec(codec);
 
   QString buf = inStream.readAll();
