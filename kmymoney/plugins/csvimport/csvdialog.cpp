@@ -202,6 +202,9 @@ bool CSVDialog::createStatement(MyMoneyStatement& st)
     return true;
 
   st.m_eType = MyMoneyStatement::etNone;
+  if (m_wiz->m_autodetect.value(CSVWizard::AutoAccountBank))
+    m_wiz->detectAccount(st);
+
   m_hashSet.clear();
   for (int line = m_wiz->m_startLine - 1; line < m_wiz->m_endLine; ++line)
     if (!processBankLine(m_wiz->m_lineList[line], st)) // parse fields

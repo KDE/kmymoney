@@ -182,6 +182,8 @@ public:
   void           clearColumnsBackground(QList<int>& columnList);
   void           clearBackground();
   void           markUnwantedRows();
+  QList<MyMoneyAccount> findAccounts(QList<MyMoneyAccount::accountTypeE> &accountTypes, QString& statementHeader);
+  bool                detectAccount(MyMoneyStatement& st);
 
 signals:
   void           statementReady(MyMoneyStatement&);

@@ -515,6 +515,112 @@ void CSVWizard::markUnwantedRows()
   }
 }
 
+QList<MyMoneyAccount> CSVWizard::findAccounts(QList<MyMoneyAccount::accountTypeE> &accountTypes, QString& statementHeader)
+{
+  MyMoneyFile* file = MyMoneyFile::instance();
+  QList<MyMoneyAccount> accountList;
+  file->accountList(accountList);
+  QList<MyMoneyAccount> filteredTypes;
+  QList<MyMoneyAccount> filteredAccounts;
+  QList<MyMoneyAccount>::iterator account;
+  QRegExp filterOutChars = QRegExp("-., ");
+
+  for (account = accountList.begin(); account != accountList.end(); ++account) {
+    if (accountTypes.contains((*account).accountType()))
+        filteredTypes << *account;
+  }
+
+  // filter out accounts whose names aren't in statements header
+  for (account = filteredTypes.begin(); account != filteredTypes.end(); ++account) {
+    QString txt = (*account).name();
+    txt = txt.replace(filterOutChars, "");
+    if (statementHeader.contains(txt, Qt::CaseInsensitive))
+      filteredAccounts << *account;
+  }
+
+  // if filtering returned more results, filter out accounts whose numbers aren't in statements header
+  if (filteredAccounts.count() > 1) {
+    for (account = filteredAccounts.begin(); account != filteredAccounts.end();) {
+      QString txt = (*account).number();
+      txt = txt.replace(filterOutChars, "");
+      if (txt.isEmpty() || txt.length() < 3) {
+        ++account;
+        continue;
+      }
+      if (statementHeader.contains(txt, Qt::CaseInsensitive))
+        ++account;
+      else
+        account = filteredAccounts.erase(account);
+    }
+  }
+
+  // if filtering by name and number didn't return nothing, then try filtering by number only
+  if (filteredAccounts.isEmpty()) {
+    for (account = filteredTypes.begin(); account != filteredTypes.end(); ++account) {
+      QString txt = (*account).number();
+      txt = txt.replace(filterOutChars, "");
+      if (statementHeader.contains(txt, Qt::CaseInsensitive))
+        filteredAccounts << *account;
+    }
+  }
+  return filteredAccounts;
+}
+
+bool CSVWizard::detectAccount(MyMoneyStatement& st)
+{
+  QString statementHeader;
+  for (int row = 0; row < m_startLine - 1; ++row) // concatenate header for better search
+    statementHeader +=  m_lineList.value(row);
+
+  QRegExp filterOutChars = QRegExp("-., ");
+  statementHeader.replace(filterOutChars, "");
+
+  QList<MyMoneyAccount> accounts;
+  QList<MyMoneyAccount::accountTypeE> accountTypes;
+
+  if (m_profileType == CSVWizard::ProfileBank) {
+    accountTypes << MyMoneyAccount::Checkings <<
+                    MyMoneyAccount::Savings <<
+                    MyMoneyAccount::Liability <<
+                    MyMoneyAccount::Checkings <<
+                    MyMoneyAccount::Savings <<
+                    MyMoneyAccount::Cash <<
+                    MyMoneyAccount::CreditCard <<
+                    MyMoneyAccount::Loan <<
+                    MyMoneyAccount::Asset <<
+                    MyMoneyAccount::Liability;
+    accounts = findAccounts(accountTypes, statementHeader);
+  } else if (m_profileType == CSVWizard::ProfileInvest) {
+    accountTypes << MyMoneyAccount::Investment; // take investment accounts...
+    accounts = findAccounts(accountTypes, statementHeader); //...and search them in statement header
+  }
+
+  if (accounts.count() == 1) { // set account in statement, if it was the only one match
+    st.m_strAccountName = accounts.first().name();
+    st.m_strAccountNumber = accounts.first().number();
+    st.m_accountId = accounts.first().id();
+
+    switch (accounts.first().accountType()) {
+    case MyMoneyAccount::Checkings:
+      st.m_eType=MyMoneyStatement::etCheckings;
+      break;
+    case MyMoneyAccount::Savings:
+      st.m_eType=MyMoneyStatement::etSavings;
+      break;
+    case MyMoneyAccount::Investment:
+      st.m_eType=MyMoneyStatement::etInvestment;
+      break;
+    case MyMoneyAccount::CreditCard:
+      st.m_eType=MyMoneyStatement::etCreditCard;
+      break;
+    default:
+      st.m_eType=MyMoneyStatement::etNone;
+    }
+    return true;
+  }
+  return false;
+}
+
 void CSVWizard::slotImportClicked()
 {
   bool isOK = true;

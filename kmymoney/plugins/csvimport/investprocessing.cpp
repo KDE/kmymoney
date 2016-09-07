@@ -426,6 +426,9 @@ bool InvestProcessing::createStatement(MyMoneyStatement& st)
   if (!st.m_listTransactions.isEmpty()) // don't create statement if there is one
     return true;
   st.m_eType = MyMoneyStatement::etInvestment;
+  if (m_wiz->m_autodetect.value(CSVWizard::AutoAccountInvest))
+    m_wiz->detectAccount(st);
+
   if (m_colTypeNum.value(InvestProcessing::ColumnFee) >= m_wiz->m_endColumn) // fee column has not been calculated so do it now
     calculateFee();
 
