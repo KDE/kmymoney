@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=csvimport
+Name=CSV Importer
 Name[ar]=استيراد CSV
 Name[bs]=csvimport
 Name[ca]=csvimport
@@ -71,8 +71,8 @@ Type=Service
 Icon=document-import
 X-KDE-Library=kmm_csvimport
 X-KDE-PluginInfo-Name=csvimport
-X-KDE-PluginInfo-Author=Allan Anderson
-X-KDE-PluginInfo-Email=aganders93@gmail.com
+X-KDE-PluginInfo-Author=Allan Anderson,Łukasz Wojniłowicz
+X-KDE-PluginInfo-Email=aganders93@gmail.com,lukasz.wojnilowicz@gmail.com
 X-KDE-PluginInfo-Version=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}${VERSION_SUFFIX}
 X-KDE-PluginInfo-Website=http://kmymoney.org/plugins.html
 X-KDE-PluginInfo-License=GPL
