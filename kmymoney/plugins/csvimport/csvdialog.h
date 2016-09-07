@@ -27,6 +27,7 @@
 #include <QScrollBar>
 #include <QComboBox>
 #include <QSet>
+#include <KSharedConfig>
 
 #include <mymoneystatement.h>
 
@@ -139,7 +140,7 @@ public:
   /**
   * This method is called during file selection, to load settings from the resource file.
   */
-  void           readSettings();
+  void           readSettings(const KSharedConfigPtr &config);
 
   /**
   * This method is called to reload column settings from the UI.

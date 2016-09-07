@@ -65,8 +65,6 @@ CSVWizard::CSVWizard() : ui(new Ui::CSVWizard)
 
   m_curId = -1;
   m_lastId = -1;
-  m_initialHeight = -1;
-  m_initialWidth = -1;
   m_maxColumnCount = 0;
   m_importError = false;
   m_importIsValid = false;
@@ -130,6 +128,7 @@ void CSVWizard::init()
                                        QDir::separator() +
                                        "csvimporterrc");
   validateConfigFile(m_config);
+  readMiscSettings(m_config);
   m_csvDialog->init();
   m_investProcessing->init();
 
@@ -189,6 +188,18 @@ void CSVWizard::showStage()
 {
   QString str = ui->label_intro->text();
   ui->label_intro->setText("<b>" + str + "</b>");
+}
+
+void CSVWizard::readMiscSettings(const KSharedConfigPtr& config) {
+  KConfigGroup miscGroup(config, "Misc");
+  m_initialWidth = miscGroup.readEntry("Width", 800);
+  m_initialHeight = miscGroup.readEntry("Height", 400);
+  m_autodetect.clear();
+  m_autodetect.insert(CSVWizard::AutoFieldDelimiter, miscGroup.readEntry("AutoFieldDelimiter", true));
+  m_autodetect.insert(CSVWizard::AutoDecimalSymbol, miscGroup.readEntry("AutoDecimalSymbol", true));
+  m_autodetect.insert(CSVWizard::AutoDateFormat, miscGroup.readEntry("AutoDateFormat", true));
+  m_autodetect.insert(CSVWizard::AutoAccountInvest, miscGroup.readEntry("AutoAccountInvest", true));
+  m_autodetect.insert(CSVWizard::AutoAccountBank, miscGroup.readEntry("AutoAccountBank", true));
 }
 
 bool CSVWizard::updateConfigFile(const KSharedConfigPtr& config, const QList<int>& kmmVer)
@@ -912,11 +923,11 @@ void CSVWizard::slotFileDialogClicked()
 
   if (m_profileType == CSVWizard::ProfileInvest) {
     m_investProcessing->clearColumnsSelected();
-    m_investProcessing->readSettings();
+    m_investProcessing->readSettings(m_config);
   }
   else if (m_profileType == CSVWizard::ProfileBank) {
     m_csvDialog->clearColumnsSelected();
-    m_csvDialog->readSettings();
+    m_csvDialog->readSettings(m_config);
   }
 
   if (!getInFileName(m_inFileName))

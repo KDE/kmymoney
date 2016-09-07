@@ -148,11 +148,6 @@ void InvestProcessing::init()
 
 void InvestProcessing::saveSettings()
 {
-  KConfigGroup miscGroup(m_wiz->m_config, "Misc");
-  miscGroup.writeEntry("Height", m_wiz->height());
-  miscGroup.writeEntry("Width", m_wiz->width());
-  miscGroup.config()->sync();
-
   KConfigGroup profileNamesGroup(m_wiz->m_config, "ProfileNames");
   profileNamesGroup.writeEntry("Invest", m_wiz->m_profileList);
   profileNamesGroup.writeEntry("PriorInvest", m_wiz->m_profileList.indexOf(m_wiz->m_profileName));
@@ -799,9 +794,8 @@ void InvestProcessing::saveAs()
     oFile.close();
 }
 
-void InvestProcessing::readSettings()
+void InvestProcessing::readSettings(const KSharedConfigPtr& config)
 {
-  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, "csvimporterrc"));
   KConfigGroup securitiesGroup(config, "Securities");
   m_securityList.clear();
   m_listSecurities.clear();
@@ -890,9 +884,6 @@ void InvestProcessing::readSettings()
     m_wiz->m_encodeIndex = profilesGroup.readEntry("Encoding", 0);
     break;
   }
-  KConfigGroup miscGroup(config, "Misc");
-  m_wiz->m_pluginHeight = miscGroup.readEntry("Height", 640);
-  m_wiz->m_pluginWidth = miscGroup.readEntry("Width", 800);
 }
 
 void InvestProcessing::resetComboBox(columnTypeE comboBox)

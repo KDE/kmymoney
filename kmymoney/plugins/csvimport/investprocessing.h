@@ -32,6 +32,7 @@ email                 : lukasz.wojnilowicz@gmail.com
 #include <QCompleter>
 #include <QComboBox>
 #include <QMap>
+#include <KSharedConfig>
 
 #include <mymoneystatement.h>
 
@@ -83,7 +84,7 @@ public:
   * This method is called on opening, to load settings from the resource file.
   */
 
-  void           readSettings();
+  void           readSettings(const KSharedConfigPtr &config);
 
   /**
   * This method feeds file buffer in investment lines parser.

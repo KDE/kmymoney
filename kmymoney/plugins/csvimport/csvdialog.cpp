@@ -93,9 +93,8 @@ CSVDialog::~CSVDialog()
 {
 }
 
-void CSVDialog::readSettings()
+void CSVDialog::readSettings(const KSharedConfigPtr& config)
 {
-  KSharedConfigPtr config = KSharedConfig::openConfig(QStandardPaths::locate(QStandardPaths::ConfigLocation, "csvimporterrc"));
   for (int i = 0; i < m_wiz->m_profileList.count(); i++) {
     if (m_wiz->m_profileList[i] != m_wiz->m_profileName)
       continue;
@@ -143,9 +142,6 @@ void CSVDialog::readSettings()
     m_wiz->m_encodeIndex = profilesGroup.readEntry("Encoding", 0);
     break;
   }
-  KConfigGroup miscGroup(config, "Misc");
-  m_wiz->m_pluginHeight = miscGroup.readEntry("Height", 640);
-  m_wiz->m_pluginWidth = miscGroup.readEntry("Width", 800);
 }
 
 void CSVDialog::createStatement()
@@ -454,11 +450,6 @@ void CSVDialog::encodingChanged(int index)
 
 void CSVDialog::saveSettings()
 {
-  KConfigGroup miscGroup(m_wiz->m_config, "Misc");
-  miscGroup.writeEntry("Height", m_wiz->height());
-  miscGroup.writeEntry("Width", m_wiz->width());
-  miscGroup.config()->sync();
-
   KConfigGroup profileNamesGroup(m_wiz->m_config, "ProfileNames");
   profileNamesGroup.writeEntry("Bank", m_wiz->m_profileList);
   profileNamesGroup.writeEntry("PriorBank", m_wiz->m_profileList.indexOf(m_wiz->m_profileName));

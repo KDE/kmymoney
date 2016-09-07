@@ -64,6 +64,10 @@ public:
   typedef enum:int { ProfileInvest, ProfileBank, ProfileNone = 0xFF,
        } profileTypeE;
 
+  typedef enum:uchar { AutoFieldDelimiter, AutoDecimalSymbol, AutoDateFormat,
+                       AutoAccountInvest, AutoAccountBank,
+       } autodetectTypeE;
+
   Ui::CSVWizard*   ui;
   QWizard*            m_wizard;
   IntroPage*          m_pageIntro;
@@ -119,8 +123,6 @@ public:
 
   int              m_initialHeight;
   int              m_initialWidth;
-  int              m_pluginHeight;
-  int              m_pluginWidth;
   int              m_fieldDelimiterIndex;
   int              m_textDelimiterIndex;
   int              m_decimalSymbolIndex;
@@ -136,6 +138,8 @@ public:
   int              m_memoColumn;
   int              m_dateColumn;
 
+  QMap<autodetectTypeE, bool> m_autodetect;
+
   bool             m_accept;
   bool             m_importError;
   bool             m_importIsValid;
@@ -150,6 +154,8 @@ public:
   void           init();
 
   void           showStage();
+
+  void           readMiscSettings(const KSharedConfigPtr& config);
 
   /**
   * This method contains routines to update configuration file
