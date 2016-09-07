@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=CSV Importer configuration
+Icon=document-import
+Type=Service
+ServiceTypes=KCModule
+Exec=kcmshell5 kmm_csvimport
+Categories=Qt;KDE;kmymoney;
+Keywords=csvimport;kmymoney;
+X-KDE-Library=kcm_kmm_csvimport
+X-KDE-ParentApp=csvimport
+X-KDE-ParentComponents=csvimport
+Comment=Configuration for CSV Importer plugin
