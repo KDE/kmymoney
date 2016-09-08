@@ -20,7 +20,7 @@
 #ifndef CSVWIZARD_H
 #define CSVWIZARD_H
 
-#include <QWidget>
+#include <QDialog>
 #include <QWizard>
 #include <QLabel>
 #include <QVBoxLayout>
@@ -49,7 +49,7 @@ namespace Ui
 class CSVWizard;
 }
 
-class CSVWizard : public QWidget
+class CSVWizard : public QDialog
 {
   Q_OBJECT
 
@@ -268,6 +268,7 @@ private:
   int              m_lastId;
 
   void             closeEvent(QCloseEvent *event);
+  bool             eventFilter(QObject *object, QEvent *event);
   void             resizeEvent(QResizeEvent* ev);
 }
 ;
@@ -282,7 +283,7 @@ class IntroPage : public QWizardPage
   Q_OBJECT
 
 public:
-  explicit IntroPage(QWidget *parent = 0);
+  explicit IntroPage(QDialog *parent = 0);
   ~IntroPage();
 
   Ui::IntroPage       *ui;
@@ -327,7 +328,7 @@ class SeparatorPage : public QWizardPage
   Q_OBJECT
 
 public:
-  explicit SeparatorPage(QWidget *parent = 0);
+  explicit SeparatorPage(QDialog *parent = 0);
   ~SeparatorPage();
 
   Ui::SeparatorPage   *ui;
@@ -373,7 +374,7 @@ class RowsPage : public QWizardPage
   Q_OBJECT
 
 public:
-  explicit RowsPage(QWidget *parent = 0);
+  explicit RowsPage(QDialog *parent = 0);
   ~RowsPage();
 
   Ui::RowsPage   *ui;
@@ -412,7 +413,7 @@ class BankingPage : public QWizardPage
   Q_OBJECT
 
 public:
-  explicit BankingPage(QWidget *parent = 0);
+  explicit BankingPage(QDialog *parent = 0);
   ~BankingPage();
 
   Ui::BankingPage     *ui;
@@ -453,7 +454,7 @@ class InvestmentPage : public QWizardPage
   Q_OBJECT
 
 public:
-  explicit InvestmentPage(QWidget *parent = 0);
+  explicit InvestmentPage(QDialog *parent = 0);
   ~InvestmentPage();
 
   Ui::InvestmentPage  *ui;
@@ -495,7 +496,7 @@ class FormatsPage : public QWizardPage
   Q_OBJECT
 
 public:
-  explicit FormatsPage(QWidget *parent = 0);
+  explicit FormatsPage(QDialog *parent = 0);
   ~FormatsPage();
 
   Ui::FormatsPage   *ui;

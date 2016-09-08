@@ -74,6 +74,7 @@ CSVWizard::CSVWizard() : ui(new Ui::CSVWizard)
   m_wizard = new QWizard;
   m_wizard->setWizardStyle(QWizard::ClassicStyle);
   ui->horizontalLayout->addWidget(m_wizard);
+  m_wizard->installEventFilter(this); // event filter for escape key presses
 
   m_iconBack = QPixmap(KIconLoader::global()->loadIcon("go-previous", KIconLoader::Small, KIconLoader::DefaultState));
   m_iconFinish = QPixmap(KIconLoader::global()->loadIcon("dialog-ok-apply", KIconLoader::Small, KIconLoader::DefaultState));
@@ -132,8 +133,6 @@ void CSVWizard::init()
   m_csvDialog->init();
   m_investProcessing->init();
 
-  connect(m_wizard->button(QWizard::CancelButton), SIGNAL(clicked()), this, SLOT(slotClose()));
-
   connect(m_pageBanking->ui->radioBnk_amount, SIGNAL(toggled(bool)), this, SLOT(amountRadioClicked(bool)));
   connect(m_pageBanking->ui->radioBnk_debCred, SIGNAL(toggled(bool)), this, SLOT(debitCreditRadioClicked(bool)));
   connect(m_pageBanking->ui->checkBoxBnk_oppositeSigns, SIGNAL(clicked(bool)), this, SLOT(oppositeSignsCheckBoxClicked(bool)));
@@ -143,10 +142,10 @@ void CSVWizard::init()
   connect(m_pageFormats, SIGNAL(statementReady(MyMoneyStatement&)), m_plugin, SLOT(slotGetStatement(MyMoneyStatement&)));
 
   connect(m_wizard->button(QWizard::CustomButton1), SIGNAL(clicked()), this, SLOT(slotFileDialogClicked()));
-  connect(m_wizard->button(QWizard::BackButton), SIGNAL(clicked()), m_csvDialog, SLOT(slotBackButtonClicked()));
   connect(m_wizard->button(QWizard::CustomButton2), SIGNAL(clicked()), this, SLOT(slotImportClicked()));
   connect(m_wizard->button(QWizard::CustomButton3), SIGNAL(clicked()), m_csvDialog, SLOT(slotSaveAsQIF()));
   connect(m_wizard->button(QWizard::FinishButton), SIGNAL(clicked()), this, SLOT(slotClose()));
+  connect(m_wizard->button(QWizard::CancelButton), SIGNAL(clicked()), this, SLOT(close()));
   connect(m_wizard, SIGNAL(currentIdChanged(int)), this, SLOT(slotIdChanged(int)));
 
   ui->tableWidget->setWordWrap(false);
@@ -870,7 +869,7 @@ void CSVWizard::resizeEvent(QResizeEvent* ev)
 }
 
 //-------------------------------------------------------------------------------------------------------
-IntroPage::IntroPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::IntroPage)
+IntroPage::IntroPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::IntroPage)
 {
   ui->setupUi(this);
 }
@@ -1069,7 +1068,7 @@ int IntroPage::nextId() const
   return CSVWizard::PageSeparator;
 }
 
-SeparatorPage::SeparatorPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::SeparatorPage)
+SeparatorPage::SeparatorPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::SeparatorPage)
 {
   ui->setupUi(this);
 
@@ -1174,7 +1173,7 @@ void SeparatorPage::cleanupPage()
   m_wizDlg->m_pageIntro->initializePage();  //  Need to show button(QWizard::CustomButton1) not 'NextButton'
 }
 
-RowsPage::RowsPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::RowsPage)
+RowsPage::RowsPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::RowsPage)
 {
   ui->setupUi(this);
   m_pageLayout = new QVBoxLayout;
@@ -1266,7 +1265,7 @@ int RowsPage::nextId() const
   return ret;
 }
 
-BankingPage::BankingPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::BankingPage)
+BankingPage::BankingPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::BankingPage)
 {
   ui->setupUi(this);
   m_pageLayout = new QVBoxLayout;
@@ -1426,7 +1425,7 @@ void BankingPage::slotCategoryColChanged(int col)
   emit completeChanged();
 }
 
-InvestmentPage::InvestmentPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::InvestmentPage)
+InvestmentPage::InvestmentPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::InvestmentPage)
 {
   ui->setupUi(this);
 
@@ -1725,7 +1724,7 @@ bool InvestmentPage::isComplete() const
   return ret;
 }
 
-FormatsPage::FormatsPage(QWidget *parent) : QWizardPage(parent), ui(new Ui::FormatsPage)
+FormatsPage::FormatsPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::FormatsPage)
 {
   ui->setupUi(this);
   m_pageLayout = new QVBoxLayout;
@@ -1972,4 +1971,19 @@ void CSVWizard::closeEvent(QCloseEvent *event)
 {
   this->m_plugin->m_action->setEnabled(true); // reenable File->Import->CSV
   event->accept();
+}
+
+bool CSVWizard::eventFilter(QObject *object, QEvent *event)
+{
+  // prevent the QWizard part of CSVWizard window from closing on Escape key press
+  if (object == this->m_wizard) {
+    if (event->type() == QEvent::KeyPress) {
+      QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+      if (keyEvent->key() == Qt::Key_Escape) {
+        close();
+        return true;
+      }
+    }
+  }
+  return false;
 }
