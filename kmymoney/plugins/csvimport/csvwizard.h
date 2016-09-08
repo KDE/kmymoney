@@ -98,7 +98,6 @@ public:
   QList<QLabel*>   m_stageLabels;
   QScrollBar*      m_vScrollBar;
   QList<QTextCodec *>   m_codecs;
-  QComboBox*     m_comboBoxEncode;
 
   QBrush           m_clearBrush;
   QBrush           m_clearBrushText;
@@ -170,7 +169,7 @@ public:
   * This method is called on opening the plugin.
   * It will add all codec names to the encoding combobox.
   */
-  void           setCodecList(const QList<QTextCodec *> &list);
+  void           setCodecList(const QList<QTextCodec *> &list, QComboBox *comboBoxEncode);
 
   /**
   * This method is called on opening the plugin.

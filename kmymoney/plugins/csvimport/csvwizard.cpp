@@ -354,11 +354,11 @@ void CSVWizard::validateConfigFile(const KSharedConfigPtr& config)
   }
 }
 
-void CSVWizard::setCodecList(const QList<QTextCodec *> &list)
+void CSVWizard::setCodecList(const QList<QTextCodec *> &list, QComboBox* comboBoxEncode)
 {
-  m_comboBoxEncode->clear();
+  comboBoxEncode->clear();
   foreach (QTextCodec * codec, list)
-  m_comboBoxEncode->addItem(codec->name(), codec->mibEnum());
+    comboBoxEncode->addItem(codec->name(), codec->mibEnum());
 }
 
 void CSVWizard::findCodecs()
@@ -793,24 +793,29 @@ bool CSVWizard::getInFileName(QString& inFileName)
     }
   }
 
-  QPointer<QFileDialog> dialog = new QFileDialog(m_wizard, QString(),
+  QPointer<QFileDialog> dialog = new QFileDialog(this, QString(),
                                                  fileInfo.absoluteFilePath(),
-                                                 i18n("*.csv *.PRN *.txt | CSV Files\n *|All files"));
+                                                 i18n("CSV Files (*.csv)"));
   dialog->setOption(QFileDialog::DontUseNativeDialog, true);  //otherwise we cannot add custom QComboBox
   dialog->setFileMode(QFileDialog::ExistingFile);
-  QLabel* label = new QLabel(i18n("Encoding"));
+  QPointer<QLabel> label = new QLabel(i18n("Encoding"));
   dialog->layout()->addWidget(label);
   //    Add encoding selection to FileDialog
-  m_comboBoxEncode = new QComboBox();
-  setCodecList(m_codecs);
-  m_comboBoxEncode->setCurrentIndex(m_encodeIndex);
-  connect(m_comboBoxEncode, SIGNAL(activated(int)), this, SLOT(encodingChanged(int)));
-  dialog->layout()->addWidget(m_comboBoxEncode);
-  if (dialog->exec() != QDialog::Accepted)
-    return false;
+  QPointer<QComboBox> comboBoxEncode = new QComboBox();
+  setCodecList(m_codecs, comboBoxEncode);
+  comboBoxEncode->setCurrentIndex(m_encodeIndex);
+  connect(comboBoxEncode, SIGNAL(activated(int)), this, SLOT(encodingChanged(int)));
+  dialog->layout()->addWidget(comboBoxEncode);
+  QUrl url;
+  if (dialog->exec() == QDialog::Accepted)
+    url = dialog->selectedUrls().first();
+  else
+    url.clear();
+  delete dialog;
 
-  QUrl url = dialog->selectedUrls().first();
-  if (url.isLocalFile())
+  if (url.isEmpty())
+    return false;
+  else if (url.isLocalFile())
     inFileName = url.toLocalFile();
   else {
     inFileName = QDir::tempPath();
@@ -820,10 +825,10 @@ bool CSVWizard::getInFileName(QString& inFileName)
     qDebug() << "Source:" << url.toDisplayString() << "Destination:" << inFileName;
     KIO::FileCopyJob *job = KIO::file_copy(url, QUrl::fromUserInput(inFileName),
                                            -1, KIO::Overwrite);
-    KJobWidgets::setWindow(job, m_wizard);
+    KJobWidgets::setWindow(job, this);
     job->exec();
     if (job->error()) {
-      KMessageBox::detailedError(m_wizard,
+      KMessageBox::detailedError(this,
                                  i18n("Error while loading file '%1'.", url.toDisplayString()),
                                  job->errorString(),
                                  i18n("File access error"));
