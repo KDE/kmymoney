@@ -629,23 +629,6 @@ bool CSVWizard::detectDecimalSymbol(const int col, int& symbol)
   return true;
 }
 
-void CSVWizard::delimiterChanged(int index)
-{
-  m_fieldDelimiterIndex = index;
-  m_maxColumnCount = getMaxColumnCount(m_lineList, m_fieldDelimiterIndex); // get column count, we get with this fieldDelimiter
-  m_endColumn = m_maxColumnCount;
-  if (index == -1) // set valid fieldDelimiter if it wasn't set
-  {
-    m_pageSeparator->ui->comboBox_fieldDelimiter->blockSignals(true);
-    m_pageSeparator->ui->comboBox_fieldDelimiter->setCurrentIndex(m_fieldDelimiterIndex);
-    m_pageSeparator->ui->comboBox_fieldDelimiter->blockSignals(false);
-  }
-  m_parse->setFieldDelimiterIndex(m_fieldDelimiterIndex);
-  m_fieldDelimiterCharacter = m_parse->fieldDelimiterCharacter(m_fieldDelimiterIndex);
-  displayLines(m_lineList, m_parse);  // refresh tableWidget with new fieldDelimiter set
-  return true;
-}
-
 int CSVWizard::getMaxColumnCount(QStringList &lineList, int &delimiter)
 {
   if (lineList.isEmpty())
@@ -769,10 +752,7 @@ void CSVWizard::readFile(const QString& fname)
   QString buf = inStream.readAll();
   inFile.close();
   m_lineList = m_parse->parseFile(buf, 1, 0);  // parse the buffer
-
-  m_maxColumnCount = getMaxColumnCount(m_lineList, m_fieldDelimiterIndex); // get column count, we get with this fieldDelimiter
-  m_endColumn = m_maxColumnCount;
-  m_fileEndLine = m_parse->lastLine();
+  m_fileEndLine = m_parse->lastLine(); // won't work without above line
 
   if (m_fileEndLine > m_trailerLines)
     m_endLine = m_fileEndLine - m_trailerLines;
@@ -873,9 +853,7 @@ void CSVWizard::slotFileDialogClicked()
   if (!getInFileName(m_inFileName))
     return;
   readFile(m_inFileName);
-  displayLines(m_lineList, m_parse);
 
-  updateWindowSize();
   m_wizard->next();  //go to separator page
 
   if (m_skipSetup)
@@ -1111,21 +1089,46 @@ void SeparatorPage::setParent(CSVWizard* dlg)
 
 void SeparatorPage::initializePage()
 {
-  disconnect(ui->comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), m_wizDlg, SLOT(delimiterChanged(int)));
-  disconnect(ui->comboBox_fieldDelimiter, SIGNAL(activated(int)), this, SLOT(delimiterActivated()));
   ui->comboBox_fieldDelimiter->setCurrentIndex(m_wizDlg->m_fieldDelimiterIndex);
   ui->comboBox_textDelimiter->setCurrentIndex(m_wizDlg->m_textDelimiterIndex);
-  connect(ui->comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), m_wizDlg, SLOT(delimiterChanged(int)));
-  connect(ui->comboBox_fieldDelimiter, SIGNAL(activated(int)), this, SLOT(delimiterActivated()));
+  connect(ui->comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(fieldDelimiterChanged(int)));
+  connect(ui->comboBox_textDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(textDelimiterChanged(int)));
+  emit ui->comboBox_fieldDelimiter->currentIndexChanged(m_wizDlg->m_fieldDelimiterIndex);
+  emit ui->comboBox_textDelimiter->currentIndexChanged(m_wizDlg->m_textDelimiterIndex);
 
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch << QWizard::BackButton << QWizard::NextButton << QWizard::CancelButton;
   wizard()->setButtonLayout(layout);
 }
 
-void SeparatorPage::delimiterActivated()
+void SeparatorPage::textDelimiterChanged(const int index)
 {
-  emit completeChanged();
+  if (index < 0)
+    ui->comboBox_textDelimiter->setCurrentIndex(0); // for now there is no better idea how to detect textDelimiter
+
+  m_wizDlg->m_textDelimiterIndex = index;
+  m_wizDlg->m_parse->setTextDelimiterIndex(index);
+  m_wizDlg->m_parse->setTextDelimiterCharacter(index);
+  m_wizDlg->m_textDelimiterCharacter = m_wizDlg->m_parse->textDelimiterCharacter(index);
+}
+
+void SeparatorPage::fieldDelimiterChanged(const int index)
+{
+  if (index == -1 && !m_wizDlg->m_autodetect.value(CSVWizard::AutoFieldDelimiter))
+    return;
+  m_wizDlg->m_fieldDelimiterIndex = index;
+  m_wizDlg->m_maxColumnCount = m_wizDlg->getMaxColumnCount(m_wizDlg->m_lineList, m_wizDlg->m_fieldDelimiterIndex); // get column count, we get with this fieldDelimiter
+  m_wizDlg->m_endColumn = m_wizDlg->m_maxColumnCount;
+  m_wizDlg->m_parse->setFieldDelimiterIndex(m_wizDlg->m_fieldDelimiterIndex);
+  m_wizDlg->m_parse->setFieldDelimiterCharacter(m_wizDlg->m_fieldDelimiterIndex);
+  m_wizDlg->m_fieldDelimiterCharacter = m_wizDlg->m_parse->fieldDelimiterCharacter(m_wizDlg->m_fieldDelimiterIndex);
+  if (index == -1) {
+    ui->comboBox_fieldDelimiter->blockSignals(true);
+    ui->comboBox_fieldDelimiter->setCurrentIndex(m_wizDlg->m_fieldDelimiterIndex);
+    ui->comboBox_fieldDelimiter->blockSignals(false);
+  }
+  m_wizDlg->displayLines(m_wizDlg->m_lineList, m_wizDlg->m_parse);  // refresh tableWidget with new fieldDelimiter set
+  m_wizDlg->updateWindowSize();
 }
 
 bool SeparatorPage::isComplete() const
@@ -1166,8 +1169,8 @@ void SeparatorPage::cleanupPage()
 {
   //  On completion with error force use of 'Back' button.
   //  ...to allow resetting of 'Skip setup'
-  disconnect(ui->comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), m_wizDlg, SLOT(delimiterChanged(int)));
-  disconnect(ui->comboBox_fieldDelimiter, SIGNAL(activated(int)), this, SLOT(delimiterActivated()));
+  disconnect(ui->comboBox_fieldDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(fieldDelimiterChanged(int)));
+  disconnect(ui->comboBox_textDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(textDelimiterChanged(int)));
   m_wizDlg->m_pageIntro->initializePage();  //  Need to show button(QWizard::CustomButton1) not 'NextButton'
 }
 

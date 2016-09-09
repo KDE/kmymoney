@@ -193,11 +193,6 @@ public slots:
   */
   void           encodingChanged(int);
 
-  /**
-  * This method is called when a field or text delimiter is changed.  The
-  * input file is reread using the new delimiter.
-  */
-  void           delimiterChanged(int index);
   void           slotImportClicked();
   bool           detectDecimalSymbol(const int col, int& symbol);
 
@@ -344,7 +339,16 @@ public:
   bool                isComplete() const;
 
 public slots:
-  void                delimiterActivated();
+  /**
+  * This method is called when a text delimiter is changed.
+  */
+  void           textDelimiterChanged(const int index);
+
+  /**
+  * This method is called when a field delimiter is changed.  The
+  * input file is redisplayed using the new delimiter.
+  */
+  void           fieldDelimiterChanged(const int index);
 
 signals:
   void                completeChanged();
