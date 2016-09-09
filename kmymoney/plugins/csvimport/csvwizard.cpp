@@ -141,11 +141,11 @@ void CSVWizard::init()
   connect(m_pageInvestment->ui->buttonInv_clearFee, SIGNAL(clicked()), m_investProcessing, SLOT(clearFeesSelected()));
   connect(m_pageFormats, SIGNAL(statementReady(MyMoneyStatement&)), m_plugin, SLOT(slotGetStatement(MyMoneyStatement&)));
 
-  connect(m_wizard->button(QWizard::CustomButton1), SIGNAL(clicked()), this, SLOT(slotFileDialogClicked()));
-  connect(m_wizard->button(QWizard::CustomButton2), SIGNAL(clicked()), this, SLOT(slotImportClicked()));
-  connect(m_wizard->button(QWizard::CustomButton3), SIGNAL(clicked()), m_csvDialog, SLOT(slotSaveAsQIF()));
   connect(m_wizard->button(QWizard::FinishButton), SIGNAL(clicked()), this, SLOT(slotClose()));
   connect(m_wizard->button(QWizard::CancelButton), SIGNAL(clicked()), this, SLOT(close()));
+  connect(m_wizard->button(QWizard::CustomButton1), SIGNAL(clicked()), this, SLOT(slotFileDialogClicked()));
+  connect(m_wizard->button(QWizard::CustomButton2), SIGNAL(clicked()), m_pageFormats, SLOT(slotImportClicked()));
+  connect(m_wizard->button(QWizard::CustomButton3), SIGNAL(clicked()), m_pageFormats, SLOT(slotSaveAsQIFClicked()));
   connect(m_wizard, SIGNAL(currentIdChanged(int)), this, SLOT(slotIdChanged(int)));
 
   ui->tableWidget->setWordWrap(false);
@@ -619,22 +619,6 @@ bool CSVWizard::detectAccount(MyMoneyStatement& st)
     return true;
   }
   return false;
-}
-
-void CSVWizard::slotImportClicked()
-{
-  bool isOK = true;
-  if (m_profileType == ProfileBank)
-    isOK = m_csvDialog->createStatement(st);
-  else if (m_profileType == ProfileInvest)
-    isOK = m_investProcessing->createStatement(st);
-
-  if (!isOK)
-    return;
-
-  hide(); //hide wizard so it will not cover accountselector
-  emit statementReady(st);
-  slotClose(); //close hidden window as it isn't needed anymore
 }
 
 bool CSVWizard::detectDecimalSymbol(const int col, int& symbol)
@@ -1881,7 +1865,7 @@ void FormatsPage::initializePage()
 
   if (m_wizDlg->m_skipSetup &&
       wizard()->button(QWizard::CustomButton2)->isEnabled())
-    m_wizDlg->slotImportClicked();
+    slotImportClicked();
 }
 
 void FormatsPage::setParent(CSVWizard* dlg)
@@ -2036,6 +2020,48 @@ bool FormatsPage::validateDateFormat(int col)
       }
   }
   return isOK;
+}
+
+void FormatsPage::slotImportClicked()
+{
+  bool isOK = true;
+  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
+    isOK = m_wizDlg->m_csvDialog->createStatement(m_wizDlg->st);
+  else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
+    isOK = m_wizDlg->m_investProcessing->createStatement(m_wizDlg->st);
+
+  if (!isOK)
+    return;
+
+  m_wizDlg->hide(); //hide wizard so it will not cover accountselector
+  emit m_wizDlg->statementReady(m_wizDlg->st);
+  m_wizDlg->slotClose(); //close hidden window as it isn't needed anymore
+}
+
+void FormatsPage::slotSaveAsQIFClicked()
+{
+  bool isOK = true;
+  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
+    isOK = m_wizDlg->m_csvDialog->createStatement(m_wizDlg->st);
+  else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
+    isOK = m_wizDlg->m_investProcessing->createStatement(m_wizDlg->st);
+
+  if (!isOK || m_wizDlg->st.m_listTransactions.isEmpty())
+    return;
+
+  QString outFileName = m_wizDlg->m_inFileName;
+  outFileName.truncate(m_wizDlg->m_inFileName.lastIndexOf('.'));
+  outFileName += ".qif";
+  outFileName = QFileDialog::getSaveFileName(this, i18n("Save QIF"), outFileName, i18n("QIF Files (*.qif)"));
+  if (outFileName.isEmpty())
+    return;
+  QFile oFile(outFileName);
+  oFile.open(QIODevice::WriteOnly);
+  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
+    m_wizDlg->m_csvDialog->makeQIF(m_wizDlg->st, oFile);
+  else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
+    m_wizDlg->m_investProcessing->makeQIF(m_wizDlg->st, oFile);
+  oFile.close();
 }
 
 bool FormatsPage::isComplete() const

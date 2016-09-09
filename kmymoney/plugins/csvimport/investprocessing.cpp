@@ -772,16 +772,99 @@ MyMoneyStatement::Transaction::EAction InvestProcessing::processActionType(QStri
   return MyMoneyStatement::Transaction::eaNone;
 }
 
-void InvestProcessing::saveAs()
+void InvestProcessing::makeQIF(MyMoneyStatement& st, QFile& file)
 {
-    QStringList outFile = m_wiz->m_inFileName .split('.');
-    const QString &name = QString((outFile.isEmpty() ? "InvestProcessing" : outFile[0]) + ".qif");
+  QTextStream out(&file);
 
-    QString outFileName = QFileDialog::getSaveFileName(0, i18n("Save QIF"), name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")));
-    QFile oFile(outFileName);
-    oFile.open(QIODevice::WriteOnly);
-    QTextStream out(&oFile);
-    oFile.close();
+  QString buffer;
+  QString strEType;
+  switch (st.m_eType) {
+  case MyMoneyStatement::etInvestment:
+  default:
+    strEType = "Invst";
+  }
+
+  if (!st.m_strAccountName.isEmpty()) {
+    buffer += "!Account\n";
+    buffer += 'N' + st.m_strAccountName + "\n";
+    buffer += 'T' + strEType + "\n";
+    buffer += "^\n";
+  }
+
+  for (QList<MyMoneyStatement::Security>::const_iterator it = m_listSecurities.constBegin(); it != m_listSecurities.constEnd(); ++it) {
+    buffer += "!Type:Security\n";
+    buffer += 'N' + (*it).m_strName + '\n';
+    buffer += 'S' + (*it).m_strSymbol + '\n';
+    buffer += "TStock\n^\n";
+  }
+
+  if (!st.m_strAccountName.isEmpty()) {
+    buffer += "!Account\n";
+    buffer += 'N' + st.m_strAccountName + "\n";
+    buffer += 'T' + strEType + "\n";
+    buffer += "^\n";
+  }
+
+  buffer += "!Type:" + strEType + "\n";
+
+  for (QList<MyMoneyStatement::Transaction>::const_iterator it = st.m_listTransactions.constBegin(); it != st.m_listTransactions.constEnd(); ++it) {
+    buffer += 'D' + it->m_datePosted.toString("MM/dd/yyyy") + '\n';
+    buffer += 'Y' + it->m_strSecurity + '\n';
+    QString txt;
+    switch (it->m_eAction) {
+    case MyMoneyStatement::Transaction::eaBuy:
+      txt = "Buy";
+      break;
+    case MyMoneyStatement::Transaction::eaSell:
+      txt = "Sell";
+      break;
+    case MyMoneyStatement::Transaction::eaReinvestDividend:
+      txt = "ReinvDiv";
+      break;
+    case MyMoneyStatement::Transaction::eaCashDividend:
+      txt = "Div";
+      break;
+    case MyMoneyStatement::Transaction::eaInterest:
+      txt = "IntInc";
+      break;
+    case MyMoneyStatement::Transaction::eaShrsin:
+      txt = "ShrsIn";
+      break;
+    case MyMoneyStatement::Transaction::eaShrsout:
+      txt = "ShrsOut";
+      break;
+    case MyMoneyStatement::Transaction::eaStksplit:
+      txt = "stksplit";
+      break;
+    default:
+      txt = "unknown";  // shouldn't happen
+    }
+
+    buffer += 'N' + txt + '\n';
+
+    if (it->m_eAction == MyMoneyStatement::Transaction::eaBuy)  // we added 'N' field so buy transaction should have any sign
+      txt.setNum(it->m_amount.abs().toDouble(), 'f', 4);
+    else
+      txt.setNum(it->m_amount.toDouble(), 'f', 4);
+    buffer += 'T' + txt + '\n';
+    txt.setNum(it->m_shares.toDouble(), 'f', 4);
+    buffer += 'Q' + txt + '\n';
+    txt.setNum(it->m_price.toDouble(), 'f', 4);
+    buffer += 'I' + txt + '\n';
+    if (!it->m_fees.isZero()) {
+      txt.setNum(it->m_fees.toDouble(), 'f', 4);
+      buffer += 'O' + txt + '\n';
+    }
+
+    if (!it->m_strBrokerageAccount.isEmpty())
+      buffer += 'L' + it->m_strBrokerageAccount + '\n';
+
+    if (!it->m_strMemo.isEmpty())
+      buffer += 'M' + it->m_strMemo + '\n';
+    buffer += "^\n";
+    out << buffer;// output qif file
+    buffer.clear();
+  }
 }
 
 void InvestProcessing::readSettings(const KSharedConfigPtr& config)

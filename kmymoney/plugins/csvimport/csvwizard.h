@@ -194,7 +194,6 @@ public slots:
   */
   void           encodingChanged(int);
 
-  void           slotImportClicked();
   bool           detectDecimalSymbol(const int col, int& symbol);
 
   /**
@@ -522,6 +521,8 @@ public:
 signals:
 void                completeChanged();
 public slots:
+  void           slotImportClicked();
+  void           slotSaveAsQIFClicked();
   /**
   * This method is called when the user selects a new decimal symbol.  The
   * UI is updated using the new symbol.

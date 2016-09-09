@@ -27,6 +27,7 @@
 #include <QScrollBar>
 #include <QComboBox>
 #include <QSet>
+#include <QFile>
 #include <KSharedConfig>
 
 #include <mymoneystatement.h>
@@ -60,8 +61,6 @@ public:
   QMap<columnTypeE, QString> m_colTypeName;
 
   QStringList    m_columnList;
-
-  QString        m_qifBuffer;
 
   /**
    * a list of already used hashes in this file
@@ -156,6 +155,10 @@ public:
   bool           validateMemoComboBox();
   bool           validateSelectedColumn(int col, columnTypeE type);
 
+  /**
+  * This method fills QIF file with bank/credit card data
+  */
+  void           makeQIF(MyMoneyStatement &st, QFile &file);
 
 signals:
   /**
@@ -176,12 +179,6 @@ public slots:
   void           debitColumnSelected(int col);
   void           creditColumnSelected(int col);
   void           amountColumnSelected(int col);
-
-  /**
-  * This method is called when the user clicks 'Save as QIF'. A file selector
-  * dialog is shown, where the user may select the save location.
-  */
-  void           slotSaveAsQIF();
 
 private:
 

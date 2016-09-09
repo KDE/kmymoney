@@ -367,37 +367,47 @@ bool CSVDialog::processBankLine(const QString &line, MyMoneyStatement &st)
   return true;
 }
 
-void CSVDialog::slotSaveAsQIF()
+void CSVDialog::makeQIF(MyMoneyStatement& st, QFile& file)
 {
-  createStatement(m_wiz->st);
-  if (m_wiz->st.m_listTransactions.isEmpty())
-    return;
-  QStringList outFile = m_wiz->m_inFileName.split('.');
-  const QString &name = QString((outFile.isEmpty() ? "CsvProcessing" : outFile[0]) + ".qif");
+  QTextStream out(&file);
 
-  QString outFileName = QFileDialog::getSaveFileName(m_wiz, i18n("Save QIF"), name, QString::fromLatin1("*.qif | %1").arg(i18n("QIF Files")));
-  QFile oFile(outFileName);
-  oFile.open(QIODevice::WriteOnly);
-  QTextStream out(&oFile);
+  QString buffer;
+  QString strEType;
 
-  m_qifBuffer = "!Type:Bank\n";
-  QList<MyMoneyStatement::Transaction>::const_iterator it;
-  for( it = m_wiz->st.m_listTransactions.constBegin() ; it != m_wiz->st.m_listTransactions.constEnd(); it++)
-  {
-    m_qifBuffer += 'D' + it->m_datePosted.toString(m_wiz->m_dateFormats[m_wiz->m_dateFormatIndex]) + '\n';
-    double d = it->m_amount.toDouble();
-    QString txt;
-    txt.setNum(d, 'f', 4);
-    m_qifBuffer += 'T' + txt + '\n';
-    m_qifBuffer += 'P' + it->m_strPayee + '\n';
-    if (!it->m_listSplits.isEmpty())
-      m_qifBuffer += 'L' + it->m_listSplits.first().m_strCategoryName + '\n';
-    m_qifBuffer += 'N' + it->m_strNumber + '\n';
-    m_qifBuffer += 'M' + it->m_strMemo + '\n' + "^\n";
-    out << m_qifBuffer;// output qif file
-    m_qifBuffer.clear();
+  switch (st.m_eType) {
+  case MyMoneyStatement::etCreditCard:
+    strEType = "CCard";
+  case MyMoneyStatement::etSavings:
+  case MyMoneyStatement::etCheckings:
+  default:
+    strEType = "Bank";
   }
-  oFile.close();
+
+  if (!st.m_strAccountName.isEmpty()) {
+    buffer += "!Account\n";
+    buffer += 'N' + st.m_strAccountName + "\n";
+    buffer += 'T' + strEType + "\n";
+    buffer += "^\n";
+  }
+
+  buffer += "!Type:" + strEType + "\n";
+
+  for (QList<MyMoneyStatement::Transaction>::const_iterator it = st.m_listTransactions.constBegin(); it != st.m_listTransactions.constEnd(); ++it) {
+    buffer += 'D' + it->m_datePosted.toString("MM/dd/yyyy") + '\n';
+    QString txt;
+    txt.setNum(it->m_amount.toDouble(), 'f', 4);
+    buffer += 'T' + txt + '\n';
+    buffer += 'P' + it->m_strPayee + '\n';
+    if (!it->m_listSplits.isEmpty())
+      buffer += 'L' + it->m_listSplits.first().m_strCategoryName + '\n';
+    if (!it->m_strNumber.isEmpty())
+      buffer += 'N' + it->m_strNumber + '\n';
+    if (!it->m_strMemo.isEmpty())
+      buffer += 'M' + it->m_strMemo + '\n';
+    buffer += "^\n";
+    out << buffer;// output qif file
+    buffer.clear();
+  }
 }
 
 void CSVDialog::clearColumnsSelected()

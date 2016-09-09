@@ -234,10 +234,9 @@ public slots:
   void           feeIsPercentageCheckBoxClicked(bool checked);
 
   /**
-  * This method is called should the user click 'Save as QIF'. A File Selection
-  * dialog is presented and the data is output in QIF format.
+  * This method fills QIF file with investment data
   */
-  void           saveAs();
+  void           makeQIF(MyMoneyStatement& st, QFile& file);
 
   /**
   * This method is called when the user clicks 'Clear fees'.
