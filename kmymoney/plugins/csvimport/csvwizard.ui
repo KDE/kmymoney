@@ -10,9 +10,6 @@
     <height>400</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>CSVWizard</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="200,1">
    <item>
     <widget class="QTableWidget" name="tableWidget">

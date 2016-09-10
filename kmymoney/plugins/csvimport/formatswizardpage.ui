@@ -16,9 +16,6 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="windowTitle">
-   <string>Formats Wizard Page</string>
-  </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,10,1">
    <item>
     <spacer name="leftSpacer">
