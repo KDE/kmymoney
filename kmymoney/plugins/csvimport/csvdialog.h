@@ -70,41 +70,6 @@ public:
   int            m_oppositeSigns;
 
   void             saveSettings();
-  int              validateColumn(const int& col, columnTypeE type);
-
-  /**
-  * This method is called when the user clicks 'Clear selections', in order to
-  * clear incorrect column number entries.  Also called on initialisation.
-  */
-  void           clearSelectedFlags();
-
-  /**
-  * This method is called when the user clicks 'Clear selections', in order to
-  * clear incorrect column number entries.
-  */
-  void           clearColumnNumbers();
-
-  /**
-  * This method is called when the user clicks 'Clear selections'.
-  * All column selections are cleared.
-  */
-  void           clearColumnsSelected();
-
-  /**
-  * Because the memo field allows multiple selections, it helps to be able
-  * to see which columns are selected already, particularly if a column
-  * selection gets deleted. This is achieved by adding a '*' character
-  * after the column number of each selected column in the menu combobox.
-  * This method is called to remove the '*' characters when a file is
-  * reloaded, or when the user clears his selections.
-  */
-  void           clearComboBoxText();
-
-  /**
-  * This method is called when an input file has been selected, to clear
-  * previous column selections.
-  */
-  void           clearColumnTypesList();
 
   /**
   * This method is called during processing. It ensures that processed credit/debit
@@ -125,12 +90,6 @@ public:
   bool           processBankLine(const QString &line, MyMoneyStatement &st);
 
   /**
-  * This method is called after processQifLine, to add a transaction to a
-  * list, ready to be imported.
-  */
-  void           csvImportTransaction(MyMoneyStatement& st);
-
-  /**
   * This method is called after startup, to initialise some parameters.
   */
   void           init();
@@ -139,11 +98,6 @@ public:
   * This method is called during file selection, to load settings from the resource file.
   */
   void           readSettings(const KSharedConfigPtr &config);
-
-  /**
-  * This method is called to reload column settings from the UI.
-  */
-  void           reloadUISettings();
 
   /**
   * This method is called when it is detected that the user has selected the
@@ -160,15 +114,6 @@ public:
   */
   void           makeQIF(MyMoneyStatement &st, QFile &file);
 
-signals:
-  /**
-  * This signal is raised when the plugin has completed a transaction.  This
-  * then needs to be processed by MyMoneyStatement.
-  */
-  void           statementReady(MyMoneyStatement&);
-  bool           isImportable();
-  void           namesEdited();
-
 public slots:
 
   void           memoColumnSelected(int col);
@@ -179,17 +124,6 @@ public slots:
   void           debitColumnSelected(int col);
   void           creditColumnSelected(int col);
   void           amountColumnSelected(int col);
-
-private:
-
-  void             closeEvent(QCloseEvent *event);
-
-private slots:
-  /**
-  * This method is called when the user clicks 'Encoding' and selects an
-  * encoding setting.  The file is re-read with the corresponding codec.
-  */
-  void           encodingChanged(int index);
 };
 
 #endif // CSVDIALOG_H

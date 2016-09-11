@@ -76,8 +76,8 @@ public:
   BankingPage*        m_pageBanking;
   InvestmentPage*     m_pageInvestment;
   FormatsPage*        m_pageFormats;
-  CSVDialog*          m_csvDialog;
-  InvestProcessing*   m_investProcessing;
+  QPointer<CSVDialog> m_csvDialog;
+  QPointer<InvestProcessing>   m_investProcessing;
   ConvertDate*        m_convertDate;
   CsvUtil*            m_csvUtil;
   Parse*              m_parse;
@@ -196,12 +196,6 @@ public slots:
   void           encodingChanged(int);
 
   bool           detectDecimalSymbol(const int col, int& symbol);
-
-  /**
-  * This method is called when the user clicks 'Clear selections'.
-  * All column selections are cleared.
-  */
-  void           clearColumnsSelected();
 
   /**
   * This method is called when the amountRadio button is clicked.
@@ -443,6 +437,7 @@ private slots:
   void                slotCreditColChanged(int col);
   void                slotAmountColChanged(int col);
   void                slotCategoryColChanged(int col);
+  void                clearColumnsSelected();
 };
 
 namespace Ui
@@ -485,6 +480,7 @@ private slots:
   void                slotSymbolColChanged(int col);
   void                slotNameColChanged(int col);
   void                slotFilterEditingFinished();
+  void                clearColumnsSelected();
 };
 
 namespace Ui

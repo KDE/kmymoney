@@ -20,58 +20,32 @@
 #include "investprocessing.h"
 
 // ----------------------------------------------------------------------------
-// QT Headers
+// QT Includes
 
-#include <QScrollBar>
-#include <QDesktopWidget>
-#include <QCloseEvent>
-#include <QLineEdit>
-
-#include <QtCore/QFile>
-#include <QFileDialog>
-#include <QInputDialog>
-#include <QtCore/QTextCodec>
 #include <QtCore/QTextStream>
-#include <QtCore/QDebug>
-#include <QUrl>
-#include <QFileDialog>
 
 // ----------------------------------------------------------------------------
-// KDE Headers
+// KDE Includes
 
-#include <KSharedConfig>
-#include <kmessagebox.h>
-#include <KAboutData>
-#include <KAboutApplicationDialog>
-#include <QVBoxLayout>
-#include <QStandardPaths>
-#include <QHBoxLayout>
-#include <KLocalizedString>
+#include <KMessageBox>
 #include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
-// Project Headers
+// Project Includes
 
-#include "mymoneyfile.h"
 #include "kmymoney.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
 
 #include "convdate.h"
 #include "csvutil.h"
 #include "csvwizard.h"
 
-#include "mymoneystatement.h"
-#include "mymoneystatementreader.h"
-#include "mymoneymoney.h"
 #include "redefinedlg.h"
+#include "securitiesdlg.h"
 
-#include "ui_introwizardpage.h"
-#include "ui_separatorwizardpage.h"
-#include "ui_rowswizardpage.h"
-#include "ui_bankingwizardpage.h"
-#include "ui_formatswizardpage.h"
 #include "ui_investmentwizardpage.h"
 #include "ui_csvwizard.h"
-#include "symboltabledlg.h"
 
 InvestProcessing::InvestProcessing()
 {
@@ -94,16 +68,13 @@ InvestProcessing::InvestProcessing()
 
 InvestProcessing::~InvestProcessing()
 {
-  delete m_symbolTableDlg;
+  delete m_securitiesDlg;
   delete m_completer;
   delete m_redefine;
 }
 
 void InvestProcessing::init()
 {
-  m_symbolTableDlg  = new SymbolTableDlg;
-  m_symbolTableDlg->m_investProcessing = this;
-
   m_securityName = m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->currentText();
 
   QLineEdit* securityLineEdit = m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->lineEdit();//krazy:exclude=<qclasses>
@@ -154,7 +125,7 @@ void InvestProcessing::saveSettings()
 
   KConfigGroup profilesGroup(m_wiz->m_config, "Invest-" + m_wiz->m_profileName);
   profilesGroup.writeEntry("DateFormat", m_wiz->m_dateFormatIndex);
-  profilesGroup.writeEntry("FieldDelimiter", m_wiz->m_pageSeparator->ui->comboBox_fieldDelimiter->currentIndex());
+  profilesGroup.writeEntry("FieldDelimiter", m_wiz->m_fieldDelimiterIndex);
   profilesGroup.writeEntry("DecimalSymbol", m_wiz->m_decimalSymbolIndex);
   profilesGroup.writeEntry("PriceFraction", m_wiz->m_pageInvestment->ui->comboBoxInv_priceFraction->currentIndex());
   profilesGroup.writeEntry("StartLine", m_wiz->m_startLine - 1);
@@ -208,7 +179,7 @@ void InvestProcessing::saveSettings()
   profilesGroup.config()->sync();
 
   KConfigGroup securitiesGroup(m_wiz->m_config, "Securities");
-  securitiesGroup.writeEntry("SecurityNameList", securityList());
+  securitiesGroup.writeEntry("SecurityNameList", m_securityList);
   securitiesGroup.config()->sync();
 }
 
@@ -233,35 +204,6 @@ void InvestProcessing::clearFeesSelected()
   m_wiz->m_pageInvestment->ui->checkBoxInv_feeIsPercentage->setChecked(false);
   m_wiz->updateWindowSize();
 }
-
-void InvestProcessing::clearColumnsSelected()
-{
-  clearColumnNumbers();
-  clearComboBoxText();
-  m_wiz->m_memoColList.clear();
-  m_colNumType.clear();
-}
-
-void InvestProcessing::clearColumnNumbers()
-{
-  m_wiz->m_pageInvestment->ui->comboBoxInv_amountCol->setCurrentIndex(-1);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_dateCol->setCurrentIndex(-1);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_priceCol->setCurrentIndex(-1);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_quantityCol->setCurrentIndex(-1);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_memoCol->setCurrentIndex(-1);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_typeCol->setCurrentIndex(-1);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_nameCol->setCurrentIndex(-1);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_symbolCol->setCurrentIndex(-1);
-  m_wiz->m_pageInvestment->ui->comboBoxInv_securityName->setCurrentIndex(-1);
-}
-
-void InvestProcessing::clearComboBoxText()
-{
-  for (int i = 0; i < m_wiz->m_maxColumnCount; i++)
-    m_wiz->m_pageInvestment->ui->comboBoxInv_memoCol->setItemText(i, QString().setNum(i + 1));
-}
-
-
 
 void InvestProcessing::feeInputsChanged()
 {
@@ -407,6 +349,7 @@ void InvestProcessing::amountColumnSelected(int col)
 void InvestProcessing::symbolColumnSelected(int col)
 {
   validateSelectedColumn(col, ColumnSymbol);
+  m_mapSymbolName.clear();        // new symbol column so this map is no longer valid
 }
 
 void InvestProcessing::nameColumnSelected(int col)
@@ -414,6 +357,7 @@ void InvestProcessing::nameColumnSelected(int col)
   if (validateSelectedColumn(col, ColumnName))
     if (!validateMemoComboBox())  // user could have it already in memo so...
       memoColumnSelected(col);    // ...if true set memo field again
+  m_mapSymbolName.clear();        // new name column so this map is no longer valid
 }
 
 void InvestProcessing::feeIsPercentageCheckBoxClicked(bool checked)
@@ -436,11 +380,11 @@ bool InvestProcessing::createStatement(MyMoneyStatement& st)
     if (!processInvestLine(m_wiz->m_lineList[line], st)) // parse fields
       return false;
 
-  st.m_listSecurities.clear();
-  QList<MyMoneyStatement::Security>::const_iterator it_s = m_listSecurities.constBegin();
-  while (it_s != m_listSecurities.constEnd()) {
-    st.m_listSecurities << (*it_s);
-    ++it_s;
+  for (QMap<QString, QString>::const_iterator it = m_mapSymbolName.cbegin(); it != m_mapSymbolName.cend(); ++it) {
+    MyMoneyStatement::Security security;
+    security.m_strSymbol = it.key();
+    security.m_strName = it.value();
+    st.m_listSecurities << security;
   }
   return true;
 }
@@ -584,27 +528,22 @@ bool InvestProcessing::processInvestLine(const QString &line, MyMoneyStatement &
       }
     }
 
-    // process name field
-    if (m_colTypeNum.value(ColumnName) != -1) {
+    // process symbol and name field
+    if (m_colTypeNum.value(ColumnSymbol) != -1)
+      tr.m_strSymbol = m_columnList[m_colTypeNum[ColumnSymbol]];
+    if (m_colTypeNum.value(ColumnName) != -1 &&
+        tr.m_strSymbol.isEmpty()) { // case in which symbol field is empty
       txt = m_columnList[m_colTypeNum[ColumnName]];
       if (!m_nameFilter.isEmpty()) {    //          If filter exists...
         QStringList list;
         list = txt.split(m_nameFilter);  //      ...split the name
         txt = list[1];
-      } else
-        tr.m_strSecurity = txt;
-    } else if (!tr.m_strSymbol.isEmpty())
-      tr.m_strSecurity = m_map.value(tr.m_strSymbol);
-    else if (!m_securityName.isEmpty())
-      tr.m_strSecurity = m_securityName;
+      }
+      tr.m_strSymbol = m_mapSymbolName.key(txt);   // it's all about getting the right symbol
+    } else      // single security import
+      tr.m_strSymbol = m_mapSymbolName.key(m_securityName);
+    tr.m_strSecurity = m_mapSymbolName.value(tr.m_strSymbol); // take name from prepared names to avoid potential name mismatch
     tr.m_strPayee = tr.m_strSecurity;
-
-    // process symbol field
-    if (m_colTypeNum.value(ColumnSymbol) != -1)
-      tr.m_strSymbol = m_columnList[m_colTypeNum[ColumnSymbol]].toUpper();
-    else if (!tr.m_strSecurity.isEmpty())
-      tr.m_strSymbol = m_map.key(tr.m_strSecurity);
-
 
     // process memo field
     if (m_colTypeNum.value(ColumnMemo) != -1)
@@ -872,7 +811,6 @@ void InvestProcessing::readSettings(const KSharedConfigPtr& config)
   KConfigGroup securitiesGroup(config, "Securities");
   m_securityList.clear();
   m_listSecurities.clear();
-  m_symbolTableScanned = false;
   m_securityList = securitiesGroup.readEntry("SecurityNameList", QStringList());
   for (int i = 0; i < m_wiz->m_profileList.count(); i++) {
     if (m_wiz->m_profileList[i] != m_wiz->m_profileName)
@@ -993,33 +931,6 @@ void  InvestProcessing::setSecurityName(QString name)
   m_securityName = name;
 }
 
-void InvestProcessing::slotNamesEdited()
-{
-  int row = 0;
-  int symTableRow = -1;
-
-  for (row = m_wiz->m_startLine - 1; row < m_wiz->m_endLine; row ++) {
-    if (m_wiz->ui->tableWidget->item(row, m_colTypeNum.value(ColumnSymbol)) == 0) {  //  Item does not exist
-      continue;
-    }
-    symTableRow++;
-    if (m_wiz->ui->tableWidget->item(row, m_colTypeNum.value(ColumnSymbol))->text().trimmed().isEmpty()) {
-      continue;
-    }
-    //  Replace detail with edited security name.
-    QString securityName = m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 2)->text();
-    if (m_colTypeNum.value(ColumnName) > -1)
-      m_wiz->ui->tableWidget->item(row, m_colTypeNum.value(ColumnName))->setText(securityName);
-    //  Replace symbol with edited symbol.
-    QString securitySymbol = m_symbolTableDlg->m_widget->tableWidget->item(symTableRow, 0)->text();
-    if (m_colTypeNum.value(ColumnSymbol) > -1)
-      m_wiz->ui->tableWidget->item(row, m_colTypeNum.value(ColumnSymbol))->setText(securitySymbol);
-    m_map.insert(securitySymbol, securityName);
-  }
-
-  emit isImportable();
-}
-
 void InvestProcessing::securityNameSelected(const QString& name)
 {
   if ((m_securityList.contains(name)) || (name.isEmpty())) {
@@ -1057,11 +968,6 @@ void InvestProcessing::securityNameEdited()
     m_securityList.removeDuplicates();
     m_securityList.sort();
   }
-}
-
-QStringList InvestProcessing::securityList()
-{
-  return m_securityList;
 }
 
 void InvestProcessing::calculateFee()
@@ -1162,6 +1068,106 @@ void InvestProcessing::calculateFee()
     }
   m_wiz->markUnwantedRows();
   m_wiz->updateWindowSize();
+}
+
+bool InvestProcessing::validateSecurities()
+{
+  if (m_securitiesDlg.isNull() &&
+      m_mapSymbolName.isEmpty()) {
+
+    QSet<QString> onlySymbols;
+    QSet<QString> onlyNames;
+    sortSecurities(onlySymbols, onlyNames, m_mapSymbolName);
+
+    if (!onlySymbols.isEmpty() || !onlyNames.isEmpty()) {
+      m_securitiesDlg = new SecuritiesDlg;
+      for (QSet<QString>::const_iterator symbol = onlySymbols.cbegin(); symbol != onlySymbols.cend(); ++symbol)
+        m_securitiesDlg->displayLine(*symbol, QString());
+      for (QSet<QString>::const_iterator name = onlyNames.cbegin(); name != onlyNames.cend(); ++name)
+        m_securitiesDlg->displayLine(QString(), *name);
+    }
+  }
+
+  if (!m_securitiesDlg.isNull()) {
+    QTableWidget* symbolTable = m_securitiesDlg->ui->tableWidget;
+    if (m_securitiesDlg->exec() == QDialog::Rejected) {
+      return false;
+    } else {
+      for (int row = 0; row < symbolTable->rowCount(); ++row) {
+        QString symbol = symbolTable->item(row, 0)->text();
+        QString name = symbolTable->item(row, 2)->text();
+        m_mapSymbolName.insert(symbol, name);
+      }
+      delete m_securitiesDlg;
+    }
+  }
+
+  return true;
+}
+
+bool InvestProcessing::sortSecurities(QSet<QString>& onlySymbols, QSet<QString>& onlyNames, QMap<QString, QString>& mapSymbolName)
+{
+  QList<MyMoneySecurity> securityList = MyMoneyFile::instance()->securityList();
+  int symbolCol = m_colTypeNum.value(InvestProcessing::ColumnSymbol);
+  int nameCol = m_colTypeNum.value(InvestProcessing::ColumnName);
+
+  // sort by availability of symbol and name
+  for (int row = m_wiz->m_startLine - 1; row < m_wiz->m_endLine; ++row) {
+    QString symbol;
+    QString name;
+    if (symbolCol != -1)
+      symbol = m_wiz->ui->tableWidget->item(row, symbolCol)->text().trimmed();
+    if (nameCol != -1)
+      name = m_wiz->ui->tableWidget->item(row, nameCol)->text().trimmed();
+
+    if (!symbol.isEmpty() && !name.isEmpty())
+      mapSymbolName.insert(symbol, name);
+    else if (!symbol.isEmpty())
+      onlySymbols.insert(symbol);
+    else if (!name.isEmpty())
+      onlyNames.insert(name);
+    else
+      return false;
+  }
+
+  // try to find names for symbols
+  for (QSet<QString>::iterator symbol = onlySymbols.begin(); symbol != onlySymbols.end();) {
+    QList<MyMoneySecurity> filteredSecurities;
+    for (QList<MyMoneySecurity>::ConstIterator secKMM = securityList.constBegin(); secKMM != securityList.constEnd(); ++secKMM) {
+      if ((*symbol).compare((*secKMM).tradingSymbol(), Qt::CaseInsensitive) == 0)
+        filteredSecurities << (*secKMM);      // gather all securities that by matched by symbol
+    }
+
+    if (filteredSecurities.count() == 1) {                                  // single security matched by the symbol so...
+      mapSymbolName.insert(*symbol, filteredSecurities.first().name());
+      symbol = onlySymbols.erase(symbol);                                       // ...it's no longer unknown
+    } else if (!filteredSecurities.isEmpty()) {                             // multiple securities matched by the symbol
+      // TODO: Ask user which security should we match to
+      mapSymbolName.insert(*symbol, filteredSecurities.first().name());
+      symbol = onlySymbols.erase(symbol);
+    } else                                                                  // no security matched, so leave it as unknown
+      ++symbol;
+  }
+
+  // try to find symbols for names
+  for (QSet<QString>::iterator name = onlyNames.begin(); name != onlyNames.end();) {
+    QList<MyMoneySecurity> filteredSecurities;
+    for (QList<MyMoneySecurity>::ConstIterator secKMM = securityList.constBegin(); secKMM != securityList.constEnd(); ++secKMM) {
+      if ((*name).compare((*secKMM).name(), Qt::CaseInsensitive) == 0)
+        filteredSecurities << (*secKMM);      // gather all securities that by matched by name
+    }
+
+    if (filteredSecurities.count() == 1) {                                  // single security matched by the name so...
+      mapSymbolName.insert(filteredSecurities.first().tradingSymbol(), *name);
+      name = onlyNames.erase(name);                                       // ...it's no longer unknown
+    } else if (!filteredSecurities.isEmpty()) {                             // multiple securities matched by the name
+      // TODO: Ask user which security should we match to
+      mapSymbolName.insert(filteredSecurities.first().tradingSymbol(), *name);
+      name = onlySymbols.erase(name);
+    } else                                                                  // no security matched, so leave it as unknown
+      ++name;
+  }
+  return true;
 }
 
 void InvestProcessing::hideSecurity()

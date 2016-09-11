@@ -22,22 +22,24 @@ email                 : lukasz.wojnilowicz@gmail.com
 #define INVESTPROCESSING_H
 
 // ----------------------------------------------------------------------------
-// QT Headers
+// QT Includes
 
-#include <QtCore/QDate>
-#include <QtCore/QTextStream>
 #include <QtCore/QFile>
-#include <QtCore/QStringList>
-#include <QtCore/QList>
 #include <QCompleter>
-#include <QComboBox>
-#include <QMap>
+#include <QPointer>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
 #include <KSharedConfig>
+
+// ----------------------------------------------------------------------------
+// Project Includes
 
 #include <mymoneystatement.h>
 
 class RedefineDlg;
-class SymbolTableDlg;
+class SecuritiesDlg;
 class CSVWizard;
 
 class InvestProcessing : public QObject
@@ -52,7 +54,7 @@ public:
 
   CSVWizard*        m_wiz;
   RedefineDlg*      m_redefine;
-  SymbolTableDlg*   m_symbolTableDlg;
+  QPointer<SecuritiesDlg>   m_securitiesDlg;
 
   typedef enum:uchar { ColumnDate, ColumnType, ColumnAmount,
          ColumnPrice, ColumnQuantity, ColumnFee,
@@ -86,33 +88,7 @@ public:
 
   void           readSettings(const KSharedConfigPtr &config);
 
-  /**
-  * This method is called when the user clicks 'Clear selections', in order to
-  * clear incorrect column number entries.  Also called on initialisation.
-  */
-  void           clearSelectedFlags();
-
-  /**
-  * This method is called when the user clicks 'Clear', in order to
-  * clear incorrect column number entries.  Also called on initialisation.
-  */
-  void           clearColumnNumbers();
-
-  /**
-  * Because the memo field allows multiple selections, it helps to be able
-  * to see which columns are selected already, particularly if a column
-  * selection gets deleted. This is achieved by adding a '*' character
-  * after the column number of each selected column in the menu combobox.
-  * This method is called to remove the '*' characters when a file is
-  * reloaded, or when the user clears his selections.
-  */
-  void           clearComboBoxText();
-
-  QStringList    securityList();
-  QStringList    m_symbolsList;
-  QStringList    m_namesList;
-
-  QMap<QString, QString> m_map;
+  QMap<QString, QString> m_mapSymbolName;
 
   QStringList    m_investList;
   QStringList    m_shrsinList;
@@ -129,12 +105,13 @@ public:
 
   QList<MyMoneyStatement::Transaction::EAction> m_validActionTypes;
   QList<MyMoneyStatement::Security> m_listSecurities;
-
-  bool           m_symbolTableScanned;
-
   void           setSecurityName(QString name);
 
 public:
+  /**
+  * This method ensures that every security has symbol and name.
+  */
+  bool           validateSecurities();
 signals:
   bool           isImportable();
   /**
@@ -144,8 +121,6 @@ signals:
   void           statementReady(MyMoneyStatement&);
 
 public slots:
-
-  void           slotNamesEdited();
 
   /**
   * This method is called if any of the inputs (i.e Amount/Fee column selected or Fee rate entered)
@@ -245,12 +220,6 @@ public slots:
   void           clearFeesSelected();
 
   /**
-  * This method is called when the user clicks 'Clear selections'.
-  * All column selections are cleared.
-  */
-  void           clearColumnsSelected();
-
-  /**
   * This method is called to calculate fee based on fee rate and amount.
   * The method generates column with fees in importer's window afterwards.
   */
@@ -267,7 +236,6 @@ public slots:
   */
   bool processInvestLine(const QString& line, MyMoneyStatement& st);
 
-private:
 signals:
   void           slotGetStatement();
 
@@ -305,6 +273,14 @@ private:
     * if it should be created.
   */
   const QString checkCategory(const QString& name, const MyMoneyMoney& value, const MyMoneyMoney& value2);
+
+  /**
+  * This method gets securities from investment statement and
+  * tries to get pairs of symbol and name either
+  * from KMM or from statement data.
+  * In case it's not successfull onlySymbols and onlyNames won't be empty.
+  */
+  bool sortSecurities(QSet<QString>& onlySymbols, QSet<QString>& onlyNames, QMap<QString, QString>& mapSymbolName);
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 

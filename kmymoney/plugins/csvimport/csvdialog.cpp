@@ -410,38 +410,6 @@ void CSVDialog::makeQIF(MyMoneyStatement& st, QFile& file)
   }
 }
 
-void CSVDialog::clearColumnsSelected()
-{
-  clearColumnNumbers();
-  clearComboBoxText();
-  m_wiz->m_memoColList.clear();
-  m_colNumType.clear();
-}
-
-void CSVDialog::clearColumnNumbers()
-{
-  m_wiz->m_pageBanking->ui->comboBoxBnk_dateCol->setCurrentIndex(-1);
-  m_wiz->m_pageBanking->ui->comboBoxBnk_payeeCol->setCurrentIndex(-1);
-  m_wiz->m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(-1);
-  m_wiz->m_pageBanking->ui->comboBoxBnk_numberCol->setCurrentIndex(-1);
-  m_wiz->m_pageBanking->ui->comboBoxBnk_amountCol->setCurrentIndex(-1);
-  m_wiz->m_pageBanking->ui->comboBoxBnk_debitCol->setCurrentIndex(-1);
-  m_wiz->m_pageBanking->ui->comboBoxBnk_creditCol->setCurrentIndex(-1);
-  m_wiz->m_pageBanking->ui->comboBoxBnk_categoryCol->setCurrentIndex(-1);
-}
-
-void CSVDialog::clearComboBoxText()
-{
-  for (int i = 0; i < m_wiz->m_maxColumnCount; i++) {
-    m_wiz->m_pageBanking->ui->comboBoxBnk_memoCol->setItemText(i, QString().setNum(i + 1));
-  }
-}
-
-void CSVDialog::encodingChanged(int index)
-{
-  m_wiz->m_encodeIndex = index;
-}
-
 void CSVDialog::saveSettings()
 {
   KConfigGroup profileNamesGroup(m_wiz->m_config, "ProfileNames");

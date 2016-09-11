@@ -17,7 +17,7 @@ set(kmm_csvimport_PART_SRCS
   redefinedlg.cpp
   convdate.cpp
   csvutil.cpp
-  symboltabledlg.cpp
+  securitiesdlg.cpp
 )
 
 kconfig_add_kcfg_files(kmm_csvimport_PART_SRCS pluginsettings.kcfgc)
@@ -31,7 +31,7 @@ ki18n_wrap_ui(kmm_csvimport_PART_SRCS
   bankingwizardpage.ui
   investmentwizardpage.ui
   formatswizardpage.ui
-  symboltabledlg.ui
+  securitiesdlg.ui
 )
 
 # Use static library for tests only
