@@ -196,6 +196,15 @@ void CSVWizard::readMiscSettings(const KSharedConfigPtr& config) {
   m_autodetect.insert(CSVWizard::AutoAccountBank, miscGroup.readEntry("AutoAccountBank", true));
 }
 
+void CSVWizard::saveWindowSize(const KSharedConfigPtr& config) {
+  KConfigGroup miscGroup(config, "Misc");
+  m_initialHeight = this->geometry().height();
+  m_initialWidth = this->geometry().width();
+  miscGroup.writeEntry("Width", m_initialWidth);
+  miscGroup.writeEntry("Height", m_initialHeight);
+  miscGroup.sync();
+}
+
 bool CSVWizard::updateConfigFile(const KSharedConfigPtr& config, const QList<int>& kmmVer)
 {
   QString configFilePath = config.constData()->name();
@@ -940,6 +949,7 @@ void CSVWizard::updateWindowSize()
 
 void CSVWizard::slotFileDialogClicked()
 {
+  saveWindowSize(m_config);
   m_profileName = m_pageIntro->ui->combobox_source->currentText();
   m_skipSetup = m_pageIntro->ui->checkBoxSkipSetup->isChecked();
   m_accept = false;

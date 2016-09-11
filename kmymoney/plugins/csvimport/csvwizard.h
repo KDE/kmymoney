@@ -152,6 +152,7 @@ public:
   void           showStage();
 
   void           readMiscSettings(const KSharedConfigPtr& config);
+  void           saveWindowSize(const KSharedConfigPtr& config);
 
   /**
   * This method contains routines to update configuration file
