@@ -1927,7 +1927,7 @@ void FormatsPage::decimalSymbolChanged(int index)
     if (!m_wizDlg->detectDecimalSymbol(*col, detectedSymbol)) {
       isOk = false;
       KMessageBox::sorry(this, i18n("<center>Autodetect couldn't detect your decimal symbol in column %1.</center>"
-                                    "<center>Try manuall selection to see problematic cells and correct your data.</center>", *col + 1), i18n("CSV import"));
+                                    "<center>Try manual selection to see problematic cells and correct your data.</center>", *col + 1), i18n("CSV import"));
       ui->comboBox_decimalSymbol->blockSignals(true);
       ui->comboBox_decimalSymbol->setCurrentIndex(-1);
       ui->comboBox_decimalSymbol->blockSignals(false);
