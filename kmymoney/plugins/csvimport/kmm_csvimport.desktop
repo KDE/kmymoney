@@ -1,5 +1,13 @@
 [Desktop Entry]
 Name=CSV Importer
+Name[ca]=Importador de CSV
+Name[en_GB]=CSV Importer
+Name[es]=Importador CSV
+Name[nl]=CSV-importeerprogramma
+Name[pt]=Importação de CSV
+Name[sv]=CSV-import
+Name[uk]=Імпортування CSV
+Name[x-test]=xxCSV Importerxx
 Comment=Add CSV importing to KMyMoney
 Comment[ar]=أضف استيراد CSV إلى أموالك
 Comment[bs]=Dodaj uvoz CSV za KMyMoney

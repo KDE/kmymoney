@@ -1,5 +1,13 @@
 [Desktop Entry]
 Name=CSV Exporter
+Name[ca]=Exportador a CSV
+Name[en_GB]=CSV Exporter
+Name[es]=Exportador CSV
+Name[nl]=CSV-exporteerprogramma
+Name[pt]=Exportação para CSV
+Name[sv]=CSV-export
+Name[uk]=Експортування CSV
+Name[x-test]=xxCSV Exporterxx
 Comment=Add CSV exporting to KMyMoney
 Comment[ar]=أضف تصدير CSV إلى أموالك
 Comment[bs]=Dodaje CSV izvoz KMyMoney
