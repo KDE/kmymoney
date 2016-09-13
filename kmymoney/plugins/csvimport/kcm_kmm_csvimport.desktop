@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=CSV Importer configuration
 Name[ca]=Configuració de l'importador de CSV
+Name[ca@valencia]=Configuració de l'importador de CSV
 Name[en_GB]=CSV Importer configuration
 Name[es]=Configuración del importador CSV
 Name[nl]=Instellingen van CSV importeren
@@ -15,6 +16,7 @@ Exec=kcmshell5 kmm_csvimport
 Categories=Qt;KDE;kmymoney;
 Keywords=csvimport;kmymoney;
 Keywords[ca]=csvimport;kmymoney;
+Keywords[ca@valencia]=csvimport;kmymoney;
 Keywords[en_GB]=csvimport;kmymoney;
 Keywords[es]=csvimport;kmymoney;
 Keywords[nl]=csvimport;kmymoney;
@@ -27,6 +29,7 @@ X-KDE-ParentApp=csvimport
 X-KDE-ParentComponents=csvimport
 Comment=Configuration for CSV Importer plugin
 Comment[ca]=Configuració del connector d'importació de CSV
+Comment[ca@valencia]=Configuració del connector d'importació de CSV
 Comment[en_GB]=Configuration for CSV Importer plugin
 Comment[es]=Configuración para el complemento de importación CSV
 Comment[nl]=Instellingen voor plug-in voor CSV importeren
