@@ -13,7 +13,7 @@ set(kmm_csvimport_PART_SRCS
   csvimporterplugin.cpp
   csvdialog.cpp
   csvwizard.cpp
-  investprocessing.cpp
+  investmentwizardpage.cpp
   redefinedlg.cpp
   convdate.cpp
   csvutil.cpp

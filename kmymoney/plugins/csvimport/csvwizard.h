@@ -27,21 +27,20 @@
 #include <QScrollBar>
 #include <QUrl>
 
-#include <KComboBox>
+#include <QComboBox>
 #include <KSharedConfig>
 
 #include "csvimporterplugin.h"
+#include "investmentwizardpage.h"
 
 class ConvertDate;
 class Parse;
 class CsvUtil;
 class BankingPage;
-class InvestmentPage;
 class FormatsPage;
 class IntroPage;
 class SeparatorPage;
 class RowsPage;
-class InvestProcessing;
 class CsvImporterPlugin;
 
 namespace Ui
@@ -74,10 +73,9 @@ public:
   SeparatorPage*      m_pageSeparator;
   RowsPage*           m_pageRows;
   BankingPage*        m_pageBanking;
-  InvestmentPage*     m_pageInvestment;
+  QPointer<InvestmentPage>     m_pageInvestment;
   FormatsPage*        m_pageFormats;
   QPointer<CSVDialog> m_csvDialog;
-  QPointer<InvestProcessing>   m_investProcessing;
   ConvertDate*        m_convertDate;
   CsvUtil*            m_csvUtil;
   Parse*              m_parse;
@@ -437,49 +435,6 @@ private slots:
   void                slotCreditColChanged(int col);
   void                slotAmountColChanged(int col);
   void                slotCategoryColChanged(int col);
-  void                clearColumnsSelected();
-};
-
-namespace Ui
-{
-class InvestmentPage;
-}
-
-class InvestmentPage : public QWizardPage
-{
-  Q_OBJECT
-
-public:
-  explicit InvestmentPage(QDialog *parent = 0);
-  ~InvestmentPage();
-
-  Ui::InvestmentPage  *ui;
-
-  QVBoxLayout         *m_pageLayout;
-
-  void                setParent(CSVWizard* dlg);
-  void                initializePage();
-
-signals:
-
-public slots:
-  void                slotsecurityNameChanged(int index);
-private:
-  CSVWizard*          m_wizDlg;
-
-  bool                isComplete() const;
-  void                cleanupPage();
-  bool                validatePage();
-
-private slots:
-  void                slotDateColChanged(int col);
-  void                slotTypeColChanged(int col);
-  void                slotQuantityColChanged(int col);
-  void                slotPriceColChanged(int col);
-  void                slotAmountColChanged(int col);
-  void                slotSymbolColChanged(int col);
-  void                slotNameColChanged(int col);
-  void                slotFilterEditingFinished();
   void                clearColumnsSelected();
 };
 

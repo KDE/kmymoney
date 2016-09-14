@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>InvestmentPage</class>
  <widget class="QWidget" name="InvestmentPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>846</width>
+    <height>284</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
@@ -55,7 +63,7 @@ Otherwise, select the column for the symbol, and for the description or name.</s
       </widget>
      </item>
      <item>
-      <layout class="QGridLayout" name="gridLayout" columnstretch="0,5,0,5,0,5,5">
+      <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0,0,0,0">
        <item row="0" column="0" colspan="7">
         <widget class="Line" name="line_3">
          <property name="sizePolicy">
@@ -66,23 +74,6 @@ Otherwise, select the column for the symbol, and for the description or name.</s
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="6">
-        <widget class="QPushButton" name="buttonInv_hideSecurity">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Remove security name from selection list.
-It does not affect the underlying security itself.</string>
-         </property>
-         <property name="text">
-          <string>Hide security</string>
          </property>
         </widget>
        </item>
@@ -143,9 +134,6 @@ It does not affect the underlying security itself.</string>
           <string>If necessary, select a fraction/multiplier for compatibility
 between imported and stored prices. For instance, if the
 import price is in cents but the file is priced in dollars, select 0.01.</string>
-         </property>
-         <property name="currentIndex">
-          <number>2</number>
          </property>
          <property name="maxVisibleItems">
           <number>5</number>
@@ -215,6 +203,22 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
          </property>
         </widget>
        </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBoxInv_dateCol">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Select column containing date field.</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="2">
         <widget class="QLabel" name="labelInv_amount">
          <property name="enabled">
@@ -244,22 +248,6 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QComboBox" name="comboBoxInv_dateCol">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Select column containing date field.</string>
-         </property>
-         <property name="maxVisibleItems">
-          <number>12</number>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="3">
         <widget class="QComboBox" name="comboBoxInv_priceCol">
          <property name="sizePolicy">
@@ -273,6 +261,21 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
          </property>
          <property name="maxVisibleItems">
           <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="5">
+        <widget class="QComboBox" name="comboBoxInv_symbolCol">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>If more than one stock is present in the file,
+and if the stock symbols are shown in one of the columns,
+select it here.</string>
          </property>
         </widget>
        </item>
@@ -292,6 +295,19 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
          </property>
         </widget>
        </item>
+       <item row="9" column="0" colspan="7">
+        <widget class="Line" name="line_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="4">
         <widget class="QLabel" name="labelInv_priceFraction">
          <property name="maximumSize">
@@ -308,21 +324,6 @@ import price is in cents but the file is priced in dollars, select 0.01.</string
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="5">
-        <widget class="QComboBox" name="comboBoxInv_symbolCol">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>If more than one stock is present in the file,
-and if the stock symbols are shown in one of the columns,
-select it here.</string>
          </property>
         </widget>
        </item>
@@ -360,35 +361,6 @@ See also Filter text field.</string>
          </property>
         </widget>
        </item>
-       <item row="10" column="2">
-        <widget class="QLabel" name="labelInv_security">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="accessibleName">
-          <string comment="name of security"/>
-         </property>
-         <property name="text">
-          <string>Security Name</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="0">
-        <widget class="QLabel" name="labelInv_FilterText">
-         <property name="text">
-          <string>Filter text</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
        <item row="7" column="2">
         <widget class="QLabel" name="labelInv_feeIsPercentage">
          <property name="text">
@@ -412,6 +384,22 @@ See also Filter text field.</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="3" alignment="Qt::AlignRight">
+        <widget class="QCheckBox" name="checkBoxInv_feeIsPercentage">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Check box if any fee is a percentage figure rather than a value.</string>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
          </property>
         </widget>
        </item>
@@ -449,19 +437,13 @@ incorporated into the price.</string>
          </property>
         </widget>
        </item>
-       <item row="7" column="3" alignment="Qt::AlignRight">
-        <widget class="QCheckBox" name="checkBoxInv_feeIsPercentage">
+       <item row="8" column="1">
+        <widget class="QLineEdit" name="lineEdit_feeRate">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Check box if any fee is a percentage figure rather than a value.</string>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::RightToLeft</enum>
          </property>
         </widget>
        </item>
@@ -475,8 +457,8 @@ incorporated into the price.</string>
          </property>
         </widget>
        </item>
-       <item row="8" column="1">
-        <widget class="QLineEdit" name="lineEdit_feeRate">
+       <item row="8" column="3">
+        <widget class="QLineEdit" name="lineEdit_minFee">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -516,31 +498,6 @@ May also be selected to contain a copy of the type or name column.</string>
          </property>
         </widget>
        </item>
-       <item row="10" column="1">
-        <widget class="QLineEdit" name="lineEdit_filter">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>If the Name column has an activity type prefixed by a standard text,
-enter the text here. For instance, if a field contains, say, 'type: dividend',
-enter 'type: '.</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="3">
-        <widget class="QLineEdit" name="lineEdit_minFee">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
        <item row="8" column="2">
         <widget class="QLabel" name="labelInv_feeMinValue">
          <property name="text">
@@ -548,6 +505,19 @@ enter 'type: '.</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="7">
+        <widget class="Line" name="line">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -574,58 +544,6 @@ enter 'type: '.</string>
          </property>
          <property name="text">
           <string>Calculate Fee</string>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="3" colspan="3">
-        <widget class="QComboBox" name="comboBoxInv_securityName">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Alternatively, if the file contains just a single security, enter its name here.
-The names are retained and may be selected from the list here.</string>
-         </property>
-         <property name="editable">
-          <bool>true</bool>
-         </property>
-         <property name="maxVisibleItems">
-          <number>12</number>
-         </property>
-         <property name="insertPolicy">
-          <enum>QComboBox::InsertAlphabetically</enum>
-         </property>
-         <property name="autoCompletion">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0" colspan="7">
-        <widget class="Line" name="line">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="0" colspan="7">
-        <widget class="Line" name="line_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>

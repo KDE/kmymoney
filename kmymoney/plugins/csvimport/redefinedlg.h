@@ -22,12 +22,9 @@ email                 : agander93@gmail.com
 #include <QPushButton>
 
 #include "mymoneymoney.h"
-#include "investprocessing.h"
+#include "investmentwizardpage.h"
 #include "mymoneystatement.h"
 #include "ui_redefinedlgdecl.h"
-
-class InvestmentDlg;
-class MyMoneyMoney;
 
 class RedefineDlgDecl : public QWidget, public Ui::RedefineDlgDecl
 {
@@ -49,11 +46,11 @@ public:
   QBrush           m_colorBrushText;
   QBrush           m_errorBrush;
   QBrush           m_errorBrushText;
-  QMap<InvestProcessing::columnTypeE, int>   m_colTypeNum;
-  QMap<InvestProcessing::columnTypeE, QString> m_colTypeName;
+  QMap<InvestmentPage::columnTypeE, int>   m_colTypeNum;
+  QMap<InvestmentPage::columnTypeE, QString> m_colTypeName;
 
-  void             setColumnTypeNumber(QMap<InvestProcessing::columnTypeE, int> &colTypeNum);
-  void             setColumnTypeName(QMap<InvestProcessing::columnTypeE, QString> &colTypeName);
+  void             setColumnTypeNumber(QMap<InvestmentPage::columnTypeE, int> &colTypeNum);
+  void             setColumnTypeName(QMap<InvestmentPage::columnTypeE, QString> &colTypeName);
   void             setValidActionTypes(const QList<MyMoneyStatement::Transaction::EAction> &validActionTypes);
   void             setColumnList(const QStringList& list);
 
@@ -107,7 +104,7 @@ private slots:
 
   /**
   * This method is called if the user cancels the dialog, and returns KMessageBox::Cancel
-  * (This return is used for compatibility with other InvestProcessing routine returns.)
+  * (This return is used for compatibility with other InvestmentPage routine returns.)
   */
   void             slotRejected();
 };

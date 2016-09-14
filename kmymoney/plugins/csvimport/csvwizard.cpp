@@ -38,7 +38,6 @@
 #include "csvdialog.h"
 #include "convdate.h"
 #include "csvutil.h"
-#include "investprocessing.h"
 
 #include "mymoneyfile.h"
 
@@ -105,10 +104,6 @@ void CSVWizard::init()
   m_wizard->setPage(PageBanking, m_pageBanking);
   m_pageBanking->setParent(this);
 
-  m_pageInvestment = new InvestmentPage;
-  m_wizard->setPage(PageInvestment, m_pageInvestment);
-  m_pageInvestment->setParent(this);
-
   m_pageFormats = new FormatsPage;
   m_wizard->setPage(PageFormats, m_pageFormats);
   m_pageFormats->setParent(this);
@@ -161,7 +156,6 @@ void CSVWizard::init()
 CSVWizard::~CSVWizard()
 {
   delete ui;
-  delete m_investProcessing;
   delete m_csvDialog;
   delete m_parse;
   delete m_convertDate;
@@ -447,7 +441,7 @@ void CSVWizard::slotClose()
   if (m_profileType == ProfileBank)
     m_csvDialog->saveSettings();
   else if (m_profileType == ProfileInvest)
-    m_investProcessing->saveSettings();
+    m_pageInvestment->saveSettings();
   close();
 }
 
@@ -932,7 +926,9 @@ void CSVWizard::updateWindowSize()
 void CSVWizard::slotFileDialogClicked()
 {
   saveWindowSize(m_config);
-  delete m_investProcessing;
+  if (!m_pageInvestment.isNull())
+    m_wizard->removePage(PageInvestment);
+  delete m_pageInvestment;
   delete m_csvDialog;
   m_profileName = m_pageIntro->ui->combobox_source->currentText();
   m_skipSetup = m_pageIntro->ui->checkBoxSkipSetup->isChecked();
@@ -941,10 +937,10 @@ void CSVWizard::slotFileDialogClicked()
   m_memoColList.clear();
 
   if (m_profileType == CSVWizard::ProfileInvest) {
-    m_investProcessing = new InvestProcessing;
-    m_investProcessing->m_wiz = this;
-    m_investProcessing->init();
-    m_investProcessing->readSettings(m_config);
+    m_pageInvestment = new InvestmentPage;
+    m_wizard->setPage(PageInvestment, m_pageInvestment);
+    m_pageInvestment->setParent(this);
+    m_pageInvestment->readSettings(m_config);
   }
   else if (m_profileType == CSVWizard::ProfileBank) {
     m_csvDialog = new CSVDialog;
@@ -1526,253 +1522,6 @@ void BankingPage::slotCategoryColChanged(int col)
   emit completeChanged();
 }
 
-InvestmentPage::InvestmentPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::InvestmentPage)
-{
-  ui->setupUi(this);
-
-  m_pageLayout = new QVBoxLayout;
-  ui->horizontalLayout->insertLayout(0, m_pageLayout);
-
-  registerField("dateCol", ui->comboBoxInv_dateCol, "currentIndex", SIGNAL(currentIndexChanged()));
-  registerField("typeCol", ui->comboBoxInv_typeCol, "currentIndex", SIGNAL(currentIndexChanged()));
-  registerField("quantityCol", ui->comboBoxInv_quantityCol, "currentIndex", SIGNAL(currentIndexChanged()));
-  registerField("priceCol", ui->comboBoxInv_priceCol, "currentIndex", SIGNAL(currentIndexChanged()));
-  registerField("amountCol", ui->comboBoxInv_amountCol, "currentIndex", SIGNAL(currentIndexChanged()));
-
-  registerField("symbolCol", ui->comboBoxInv_symbolCol, "currentIndex", SIGNAL(currentIndexChanged()));
-  registerField("nameCol", ui->comboBoxInv_nameCol, "currentIndex", SIGNAL(currentIndexChanged()));
-  registerField("securityNameIndex", ui->comboBoxInv_securityName, "currentIndex", SIGNAL(currentIndexChanged()));
-
-  connect(ui->comboBoxInv_dateCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotDateColChanged(int)));
-  connect(ui->comboBoxInv_typeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotTypeColChanged(int)));
-  connect(ui->comboBoxInv_quantityCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotQuantityColChanged(int)));
-  connect(ui->comboBoxInv_priceCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotPriceColChanged(int)));
-  connect(ui->comboBoxInv_amountCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotAmountColChanged(int)));
-  connect(ui->comboBoxInv_symbolCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSymbolColChanged(int)));
-  connect(ui->comboBoxInv_nameCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotNameColChanged(int)));
-  connect(ui->lineEdit_filter, SIGNAL(returnPressed()), this, SLOT(slotFilterEditingFinished()));
-  connect(ui->lineEdit_filter, SIGNAL(editingFinished()), this, SLOT(slotFilterEditingFinished()));
-  connect(ui->button_clear, SIGNAL(clicked()), this, SLOT(clearColumnsSelected()));
-}
-
-InvestmentPage::~InvestmentPage()
-{
-  delete ui;
-}
-
-void InvestmentPage::initializePage()
-{
-  // disable investment widgets allowing their initialization
-  disconnect(ui->comboBoxInv_memoCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(memoColumnSelected(int)));
-  disconnect(ui->comboBoxInv_typeCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(typeColumnSelected(int)));
-  disconnect(ui->comboBoxInv_dateCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(dateColumnSelected(int)));
-  disconnect(ui->comboBoxInv_quantityCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(quantityColumnSelected(int)));
-  disconnect(ui->comboBoxInv_priceCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(priceColumnSelected(int)));
-  disconnect(ui->comboBoxInv_priceFraction, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(fractionColumnChanged(int)));
-  disconnect(ui->comboBoxInv_amountCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(amountColumnSelected(int)));
-  disconnect(ui->lineEdit_feeRate, SIGNAL(editingFinished()), m_wizDlg->m_investProcessing, SLOT(feeInputsChanged()));
-  disconnect(ui->comboBoxInv_feeCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(feeColumnSelected(int)));
-  disconnect(ui->comboBoxInv_symbolCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(symbolColumnSelected(int)));
-  disconnect(ui->comboBoxInv_nameCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(nameColumnSelected(int)));
-  disconnect(ui->checkBoxInv_feeIsPercentage, SIGNAL(clicked(bool)), m_wizDlg->m_investProcessing, SLOT(feeIsPercentageCheckBoxClicked(bool)));
-  disconnect(ui->comboBoxInv_securityName, SIGNAL(currentIndexChanged(int)), m_wizDlg, SLOT(slotsecurityNameChanged(int)));
-  disconnect(ui->buttonInv_clearFee, SIGNAL(clicked()), m_wizDlg->m_investProcessing, SLOT(clearFeesSelected()));
-
-  // clear all existing items before adding new ones
-  ui->comboBoxInv_amountCol->clear(); // clear all existing items before adding new ones
-  ui->comboBoxInv_dateCol->clear();
-  ui->comboBoxInv_memoCol->clear();
-  ui->comboBoxInv_priceCol->clear();
-  ui->comboBoxInv_quantityCol->clear();
-  ui->comboBoxInv_typeCol->clear();
-  ui->lineEdit_feeRate->clear();
-  ui->lineEdit_minFee->clear();
-  ui->comboBoxInv_feeCol->clear();
-  ui->comboBoxInv_symbolCol->clear();
-  ui->comboBoxInv_nameCol->clear();
-  ui->comboBoxInv_securityName->clear();
-
-  QStringList columnNumbers;
-  for (int i = 0; i < m_wizDlg->m_endColumn; i++) {
-    columnNumbers << QString::number(i + 1);
-  }
-
-  // populate comboboxes with col # values
-  ui->comboBoxInv_amountCol->addItems(columnNumbers);
-  ui->comboBoxInv_dateCol->addItems(columnNumbers);
-  ui->comboBoxInv_memoCol->addItems(columnNumbers);
-  ui->comboBoxInv_priceCol->addItems(columnNumbers);
-  ui->comboBoxInv_quantityCol->addItems(columnNumbers);
-  ui->comboBoxInv_typeCol->addItems(columnNumbers);
-  ui->comboBoxInv_feeCol->addItems(columnNumbers);
-  ui->comboBoxInv_symbolCol->addItems(columnNumbers);
-  ui->comboBoxInv_nameCol->addItems(columnNumbers);
-  ui->comboBoxInv_securityName->addItems(m_wizDlg->m_investProcessing->m_securityList);
-
-  clearColumnsSelected(); // all comboboxes are set to 0 so set them to -1
-  connect(ui->comboBoxInv_memoCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(memoColumnSelected(int)));
-  connect(ui->comboBoxInv_typeCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(typeColumnSelected(int)));
-  connect(ui->comboBoxInv_dateCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(dateColumnSelected(int)));
-  connect(ui->comboBoxInv_quantityCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(quantityColumnSelected(int)));
-  connect(ui->comboBoxInv_priceCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(priceColumnSelected(int)));
-  connect(ui->comboBoxInv_priceFraction, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(fractionColumnChanged(int)));
-  connect(ui->comboBoxInv_amountCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(amountColumnSelected(int)));
-  connect(ui->lineEdit_feeRate, SIGNAL(editingFinished()), m_wizDlg->m_investProcessing, SLOT(feeInputsChanged()));
-  connect(ui->comboBoxInv_feeCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(feeColumnSelected(int)));
-  connect(ui->comboBoxInv_symbolCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(symbolColumnSelected(int)));
-  connect(ui->comboBoxInv_nameCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(nameColumnSelected(int)));
-  connect(ui->checkBoxInv_feeIsPercentage, SIGNAL(clicked(bool)), m_wizDlg->m_investProcessing, SLOT(feeIsPercentageCheckBoxClicked(bool)));
-  connect(ui->comboBoxInv_securityName, SIGNAL(currentIndexChanged(int)), m_wizDlg, SLOT(slotsecurityNameChanged(int)));
-  connect(ui->buttonInv_clearFee, SIGNAL(clicked()), m_wizDlg->m_investProcessing, SLOT(clearFeesSelected()));
-
-  ui->lineEdit_feeRate->setText(m_wizDlg->m_investProcessing->m_feeRate);
-  ui->lineEdit_minFee->setText(m_wizDlg->m_investProcessing->m_minFee);
-  ui->comboBoxInv_dateCol->setCurrentIndex(m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnDate));
-  ui->comboBoxInv_typeCol->setCurrentIndex(m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnType));
-  ui->comboBoxInv_priceCol->setCurrentIndex(m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnPrice));
-  ui->comboBoxInv_quantityCol->setCurrentIndex(m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnQuantity));
-  ui->comboBoxInv_amountCol->setCurrentIndex(m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnAmount));
-  ui->comboBoxInv_nameCol->setCurrentIndex(m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnName));
-  ui->checkBoxInv_feeIsPercentage->setChecked(m_wizDlg->m_investProcessing->m_feeIsPercentage);
-  ui->comboBoxInv_feeCol->setCurrentIndex(m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnFee));
-  ui->comboBoxInv_securityName->setCurrentIndex(m_wizDlg->m_investProcessing->m_securityNameIndex);
-  ui->lineEdit_filter->setText(QString());
-  ui->lineEdit_filter->setText(m_wizDlg->m_investProcessing->m_nameFilter);
-  ui->comboBoxInv_symbolCol->setCurrentIndex(m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnSymbol));
-  ui->lineEdit_feeRate->setValidator(new QRegExpValidator(QRegExp("[0-9]{1,2}[" + QLocale().decimalPoint() + "]{0,1}[0-9]{0,2}"), m_wizDlg->m_investProcessing) );
-  ui->lineEdit_minFee->setValidator(new QRegExpValidator(QRegExp("[0-9]{1,}[" + QLocale().decimalPoint() + "]{0,1}[0-9]{0,}"), m_wizDlg->m_investProcessing) );
-  ui->comboBoxInv_priceFraction->setCurrentIndex(m_wizDlg->m_investProcessing->m_priceFraction);
-  m_wizDlg->m_investProcessing->fractionColumnChanged(m_wizDlg->m_investProcessing->m_priceFraction);
-  m_wizDlg->m_investProcessing->calculateFee();
-
-  for (int i = 0; i < m_wizDlg->m_memoColList.count(); i++) { //  Set up all memo fields...
-    int tmp = m_wizDlg->m_memoColList[i];
-    if (tmp < m_wizDlg->m_investProcessing->m_colTypeNum.count())
-      ui->comboBoxInv_memoCol->setCurrentIndex(tmp);
-  }
-
-  m_wizDlg->m_investProcessing->feeInputsChanged();
-  connect(ui->buttonInv_calculateFee, SIGNAL(clicked()), m_wizDlg->m_investProcessing, SLOT(calculateFee()));
-  connect(ui->buttonInv_hideSecurity, SIGNAL(clicked()), m_wizDlg->m_investProcessing, SLOT(hideSecurity()));
-}
-
-void InvestmentPage::cleanupPage()
-{
-  disconnect(ui->comboBoxInv_memoCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(memoColumnSelected(int)));
-  disconnect(ui->comboBoxInv_typeCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(typeColumnSelected(int)));
-  disconnect(ui->comboBoxInv_dateCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(dateColumnSelected(int)));
-  disconnect(ui->comboBoxInv_quantityCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(quantityColumnSelected(int)));
-  disconnect(ui->comboBoxInv_priceCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(priceColumnSelected(int)));
-  disconnect(ui->comboBoxInv_amountCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(amountColumnSelected(int)));
-  disconnect(ui->lineEdit_feeRate, SIGNAL(editingFinished()), m_wizDlg->m_investProcessing, SLOT(feeInputsChanged()));
-  disconnect(ui->comboBoxInv_feeCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(feeColumnSelected(int)));
-  disconnect(ui->comboBoxInv_symbolCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(symbolColumnSelected(int)));
-  disconnect(ui->comboBoxInv_nameCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_investProcessing, SLOT(nameColumnSelected(int)));
-  disconnect(ui->checkBoxInv_feeIsPercentage, SIGNAL(clicked(bool)), m_wizDlg->m_investProcessing, SLOT(feeIsPercentageCheckBoxClicked(bool)));
-  disconnect(ui->comboBoxInv_securityName, SIGNAL(currentIndexChanged(int)), m_wizDlg, SLOT(slotsecurityNameChanged(int)));
-  disconnect(ui->buttonInv_clearFee, SIGNAL(clicked()), m_wizDlg->m_investProcessing, SLOT(clearFeesSelected()));
-  m_wizDlg->m_maxColumnCount = m_wizDlg->m_endColumn; // restore displayed columns only to physical
-  m_wizDlg->ui->tableWidget->setColumnCount(m_wizDlg->m_endColumn);
-  m_wizDlg->m_pageSeparator->initializePage();
-}
-
-void InvestmentPage::clearColumnsSelected() {
-  ui->comboBoxInv_amountCol->setCurrentIndex(-1);
-  ui->comboBoxInv_dateCol->setCurrentIndex(-1);
-  ui->comboBoxInv_priceCol->setCurrentIndex(-1);
-  ui->comboBoxInv_quantityCol->setCurrentIndex(-1);
-  ui->comboBoxInv_memoCol->setCurrentIndex(-1);
-  ui->comboBoxInv_typeCol->setCurrentIndex(-1);
-  ui->comboBoxInv_nameCol->setCurrentIndex(-1);
-  ui->comboBoxInv_symbolCol->setCurrentIndex(-1);
-  ui->comboBoxInv_securityName->setCurrentIndex(-1);
-}
-
-bool InvestmentPage::validatePage()
-{
-  return m_wizDlg->m_investProcessing->validateSecurities();
-}
-
-void InvestmentPage::slotDateColChanged(int col)
-{
-  setField("dateCol", col);
-  emit completeChanged();
-}
-
-void InvestmentPage::slotTypeColChanged(int col)
-{
-  setField("typeCol", col);
-  emit completeChanged();
-}
-
-void InvestmentPage::slotQuantityColChanged(int col)
-{
-  setField("quantityCol", col);
-  emit completeChanged();
-}
-
-void InvestmentPage::slotPriceColChanged(int col)
-{
-  setField("priceCol", col);
-  emit completeChanged();
-}
-
-void InvestmentPage::slotAmountColChanged(int col)
-{
-  setField("amountCol", col);
-  emit completeChanged();
-}
-
-void InvestmentPage::slotSymbolColChanged(int col)
-{
-  setField("symbolCol", col);
-  if (col != -1) {
-    setField("securityNameIndex", -1);
-    ui->comboBoxInv_securityName->setCurrentIndex(-1);
-  }
-  emit completeChanged();
-}
-
-void InvestmentPage::slotNameColChanged(int col)
-{
-  setField("nameCol", col);
-  if (col != -1) {
-    setField("securityNameIndex", -1);
-    ui->comboBoxInv_securityName->setCurrentIndex(-1);
-  }
-  emit completeChanged();
-}
-
-void InvestmentPage::slotsecurityNameChanged(int index)
-{
-  setField("securityNameIndex", index);
-  if (index != -1) {  //  There is a security name
-    setField("symbolCol", -1);
-    setField("nameCol", -1);
-    ui->comboBoxInv_symbolCol->setCurrentIndex(-1);
-    ui->comboBoxInv_nameCol->setCurrentIndex(-1);
-  }
-  emit completeChanged();
-}
-
-void InvestmentPage::slotFilterEditingFinished()
-{
-  m_wizDlg->m_investProcessing->m_nameFilter = ui->lineEdit_filter->text();
-}
-
-void InvestmentPage::setParent(CSVWizard* dlg)
-{
-  m_wizDlg = dlg;
-}
-
-bool InvestmentPage::isComplete() const
-{  
-  bool ret = ((field("symbolCol").toInt() > -1) || (field("nameCol").toInt() > -1) || (field("securityNameIndex").toInt() > -1)) &&
-             (field("dateCol").toInt() > -1) && (field("typeCol").toInt() > -1) &&
-             (field("quantityCol").toInt() > -1) && (field("priceCol").toInt() > -1) && (field("amountCol").toInt() > -1);
-  return ret;
-}
-
 FormatsPage::FormatsPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::FormatsPage)
 {
   ui->setupUi(this);
@@ -1858,11 +1607,11 @@ void FormatsPage::decimalSymbolChanged(int index)
       columnList << m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnCredit);
     }
   } else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest) {
-    columnList << m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnAmount);
-    columnList << m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnPrice);
-    columnList << m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnQuantity);
-    if (m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnFee) != -1)
-      columnList << m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnFee);
+    columnList << m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnAmount);
+    columnList << m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnPrice);
+    columnList << m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnQuantity);
+    if (m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnFee) != -1)
+      columnList << m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnFee);
   }
 
   for (QList<int>::const_iterator col = columnList.constBegin(); col < columnList.constEnd(); ++col) {
@@ -1943,7 +1692,7 @@ void FormatsPage::dateFormatChanged(int index)
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
     col = m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnDate);
   else
-    col = m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnDate);
+    col = m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnDate);
 
   m_wizDlg->m_convertDate->setDateFormatIndex(index);
   m_isDateFormatOK = validateDateFormat(col);
@@ -1984,7 +1733,7 @@ void FormatsPage::slotImportClicked()
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
     isOK = m_wizDlg->m_csvDialog->createStatement(m_wizDlg->st);
   else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
-    isOK = m_wizDlg->m_investProcessing->createStatement(m_wizDlg->st);
+    isOK = m_wizDlg->m_pageInvestment->createStatement(m_wizDlg->st);
 
   if (!isOK)
     return;
@@ -2000,7 +1749,7 @@ void FormatsPage::slotSaveAsQIFClicked()
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
     isOK = m_wizDlg->m_csvDialog->createStatement(m_wizDlg->st);
   else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
-    isOK = m_wizDlg->m_investProcessing->createStatement(m_wizDlg->st);
+    isOK = m_wizDlg->m_pageInvestment->createStatement(m_wizDlg->st);
 
   if (!isOK || m_wizDlg->st.m_listTransactions.isEmpty())
     return;
@@ -2016,7 +1765,7 @@ void FormatsPage::slotSaveAsQIFClicked()
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
     m_wizDlg->m_csvDialog->makeQIF(m_wizDlg->st, oFile);
   else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
-    m_wizDlg->m_investProcessing->makeQIF(m_wizDlg->st, oFile);
+    m_wizDlg->m_pageInvestment->makeQIF(m_wizDlg->st, oFile);
   oFile.close();
 }
 
@@ -2042,12 +1791,12 @@ void FormatsPage::cleanupPage()
       columnList << m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnDebit) <<
                     m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnCredit);
   } else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest) {
-    columnList << m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnAmount) <<
-                  m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnPrice) <<
-                  m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnQuantity) <<
-                  m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnDate);
-    if (m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnFee) != -1)
-      columnList << m_wizDlg->m_investProcessing->m_colTypeNum.value(InvestProcessing::ColumnFee);
+    columnList << m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnAmount) <<
+                  m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnPrice) <<
+                  m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnQuantity) <<
+                  m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnDate);
+    if (m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnFee) != -1)
+      columnList << m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnFee);
   }
   m_wizDlg->clearColumnsBackground(columnList);
   m_wizDlg->st = MyMoneyStatement();  // any change on investment/banking page invalidates created statement

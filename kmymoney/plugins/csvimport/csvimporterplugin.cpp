@@ -5,6 +5,8 @@
     begin                : Sat Jan 01 2010
     copyright            : (C) 2010 by Allan Anderson
     email                : agander93@gmail.com
+    copyright            : (C) 2016 by Łukasz Wojniłowicz
+    email                : lukasz.wojnilowicz@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,11 +30,7 @@
 // KDE Includes
 
 #include <KPluginFactory>
-#include <KFile>
-#include <QUrl>
-#include <KMessageBox>
 #include <KActionCollection>
-#include <KSharedConfig>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -40,8 +38,6 @@
 
 #include "mymoneystatementreader.h"
 #include "mymoneystatement.h"
-#include "csvdialog.h"
-#include "investprocessing.h"
 #include "csvwizard.h"
 
 K_PLUGIN_FACTORY_WITH_JSON(CsvImporterFactory, "kmm_csvimport.json", registerPlugin<CsvImporterPlugin>();)

@@ -24,9 +24,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
-#include <QStringList>
-
 // Project Includes
 
 #include "kmymoneyplugin.h"

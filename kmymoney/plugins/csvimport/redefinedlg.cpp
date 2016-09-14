@@ -20,12 +20,6 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <QtCore/QDebug>
-#include <QtCore/QPointer>
-#include <QScrollBar>
-#include <QInputDialog>
-#include <QDesktopWidget>
-
 // ----------------------------------------------------------------------------
 // KDE Headers
 
@@ -83,7 +77,7 @@ void RedefineDlg::displayLine(const QString& info)
 {
   m_buttonOK->setEnabled(false);
   QString txt;
-  txt.setNum(m_colTypeNum.value(InvestProcessing::ColumnType) + 1);
+  txt.setNum(m_colTypeNum.value(InvestmentPage::ColumnType) + 1);
   m_widget->label_actionCol->setText(i18n("Column ") + txt);
   m_widget->label_info->setText(info);
   m_maxCol = m_columnList.count();
@@ -98,22 +92,22 @@ void RedefineDlg::displayLine(const QString& info)
     QTableWidgetItem *item = new QTableWidgetItem;//  add items to UI
     item->setText(txt);
     m_widget->tableWidget->setItem(row, col, item);  // add items to UI here
-    if (m_colTypeNum.value(InvestProcessing::ColumnType) == col) {
+    if (m_colTypeNum.value(InvestmentPage::ColumnType) == col) {
       item->setBackground(m_errorBrush);
       item->setForeground(m_errorBrushText);
     }
     row = 0;
     item = new QTableWidgetItem;//        add items to UI
-    if (m_colTypeNum.value(InvestProcessing::ColumnQuantity) == col)
-      item->setText(m_colTypeName.value(InvestProcessing::ColumnQuantity));
-    else if (m_colTypeNum.value(InvestProcessing::ColumnPrice) == col)
-      item->setText(m_colTypeName.value(InvestProcessing::ColumnPrice));
-    else if (m_colTypeNum.value(InvestProcessing::ColumnAmount) == col)
-      item->setText(m_colTypeName.value(InvestProcessing::ColumnAmount));
-    else if (m_colTypeNum.value(InvestProcessing::ColumnType) == col)
-      item->setText(m_colTypeName.value(InvestProcessing::ColumnType));
-    else if (m_colTypeNum.value(InvestProcessing::ColumnName) == col)
-      item->setText(m_colTypeName.value(InvestProcessing::ColumnName));
+    if (m_colTypeNum.value(InvestmentPage::ColumnQuantity) == col)
+      item->setText(m_colTypeName.value(InvestmentPage::ColumnQuantity));
+    else if (m_colTypeNum.value(InvestmentPage::ColumnPrice) == col)
+      item->setText(m_colTypeName.value(InvestmentPage::ColumnPrice));
+    else if (m_colTypeNum.value(InvestmentPage::ColumnAmount) == col)
+      item->setText(m_colTypeName.value(InvestmentPage::ColumnAmount));
+    else if (m_colTypeNum.value(InvestmentPage::ColumnType) == col)
+      item->setText(m_colTypeName.value(InvestmentPage::ColumnType));
+    else if (m_colTypeNum.value(InvestmentPage::ColumnName) == col)
+      item->setText(m_colTypeName.value(InvestmentPage::ColumnName));
     m_widget->tableWidget->setItem(row, col, item);
   }
 }
@@ -121,7 +115,7 @@ void RedefineDlg::displayLine(const QString& info)
 void RedefineDlg::slotAccepted()
 {
   m_ret = KMessageBox::Ok;
-  m_columnList[m_colTypeNum.value(InvestProcessing::ColumnType)] = m_newType;
+  m_columnList[m_colTypeNum.value(InvestmentPage::ColumnType)] = m_newType;
   m_widget->kcombobox_Actions->setCurrentIndex(-1);
   accept();
 }
@@ -129,7 +123,7 @@ void RedefineDlg::slotAccepted()
 void RedefineDlg::slotNewActionSelected(const int& index)
 {
   m_newType = m_typesList[index];
-  QTableWidgetItem *item = m_widget->tableWidget->item(1, m_colTypeNum.value(InvestProcessing::ColumnType));
+  QTableWidgetItem *item = m_widget->tableWidget->item(1, m_colTypeNum.value(InvestmentPage::ColumnType));
   if (m_validActionTypes.contains(m_newType)) {
     item->setBackground(m_colorBrush);
     item->setForeground(m_colorBrushText);
@@ -165,12 +159,12 @@ MyMoneyStatement::Transaction::EAction RedefineDlg::askActionType(const QString&
   return MyMoneyStatement::Transaction::eaNone;
 }
 
-void RedefineDlg::setColumnTypeName(QMap<InvestProcessing::columnTypeE, QString> &colTypeName)
+void RedefineDlg::setColumnTypeName(QMap<InvestmentPage::columnTypeE, QString> &colTypeName)
 {
   m_colTypeName = colTypeName;
 }
 
-void RedefineDlg::setColumnTypeNumber(QMap<InvestProcessing::columnTypeE, int> &colTypeNum)
+void RedefineDlg::setColumnTypeNumber(QMap<InvestmentPage::columnTypeE, int> &colTypeNum)
 {
   m_colTypeNum = colTypeNum;
 }
