@@ -1243,35 +1243,18 @@ void SeparatorPage::fieldDelimiterChanged(const int index)
   }
   m_wizDlg->displayLines(m_wizDlg->m_lineList, m_wizDlg->m_parse);  // refresh tableWidget with new fieldDelimiter set
   m_wizDlg->updateWindowSize();
+  emit completeChanged();
 }
 
 bool SeparatorPage::isComplete() const
 {
-  //
-  //  Check for presence of needed columns.
-  //  This is not foolproof, but can help detect wrong delimiter choice.
-  //
-  bool ret1;
-  bool ret2;
-  bool ret = false;
-
-  if (m_wizDlg->m_profileType == CSVWizard::ProfileBank) {
-    ret1 = ((m_wizDlg->m_endColumn > 2) && (!m_wizDlg->m_importError));
-    ret2 = ((field("dateColumn").toInt() > -1) && (field("payeeColumn").toInt() > -1)  &&
-            ((field("amountColumn").toInt() > -1) || ((field("debitColumn").toInt() > -1)  && (field("creditColumn").toInt() > -1))));
-    ret = (ret1 || ret2);
-  } else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest) {
-    ret1 = (m_wizDlg->m_endColumn > 3);
-    ret2 = ((field("dateCol").toInt() > -1)  && ((field("amountCol").toInt() > -1) || ((field("quantityCol").toInt() > -1)))  &&
-            ((field("symbolCol").toInt() > -1) || (field("securityNameIndex").toInt() > -1)));
-    ret = (ret1 || ret2);
+  if (ui->comboBox_fieldDelimiter->currentIndex() != -1) {
+    if (m_wizDlg->m_profileType == CSVWizard::ProfileBank && m_wizDlg->m_endColumn > 2)
+      return true;
+    else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest && m_wizDlg->m_endColumn > 3)
+      return true;
   }
-  if (!ret) {
-    wizard()->button(QWizard::NextButton)->setToolTip(i18n("Incorrect number or type of fields.  Check the field delimiter."));
-  } else {
-    wizard()->button(QWizard::NextButton)->setToolTip(QString());
-  }
-  return ret;
+  return false;
 }
 
 bool SeparatorPage::validatePage()
@@ -1311,6 +1294,7 @@ void RowsPage::initializePage()
   ui->spinBox_skipToLast->setValue(m_wizDlg->m_endLine);
 
   m_wizDlg->markUnwantedRows();
+  m_wizDlg->m_vScrollBar->setValue(m_wizDlg->m_startLine - 1);
 
   connect(ui->spinBox_skip, SIGNAL(valueChanged(int)), this, SLOT(startRowChanged(int)));
   connect(ui->spinBox_skipToLast, SIGNAL(valueChanged(int)), this, SLOT(endRowChanged(int)));
