@@ -32,11 +32,11 @@
 
 #include "csvimporterplugin.h"
 #include "investmentwizardpage.h"
+#include "bankingwizardpage.h"
 
 class ConvertDate;
 class Parse;
 class CsvUtil;
-class BankingPage;
 class FormatsPage;
 class IntroPage;
 class SeparatorPage;
@@ -72,10 +72,9 @@ public:
   IntroPage*          m_pageIntro;
   SeparatorPage*      m_pageSeparator;
   RowsPage*           m_pageRows;
-  BankingPage*        m_pageBanking;
+  QPointer<BankingPage>        m_pageBanking;
   QPointer<InvestmentPage>     m_pageInvestment;
   FormatsPage*        m_pageFormats;
-  QPointer<CSVDialog> m_csvDialog;
   ConvertDate*        m_convertDate;
   CsvUtil*            m_csvUtil;
   Parse*              m_parse;
@@ -194,24 +193,6 @@ public slots:
   void           encodingChanged(int);
 
   bool           detectDecimalSymbol(const int col, int& symbol);
-
-  /**
-  * This method is called when the amountRadio button is clicked.
-  * It will disable all elements of the alternate, debit/credit ui.
-  */
-  void           amountRadioClicked(bool checked);
-
-  /**
-  * This method is called when the debitCreditRadio button is clicked.
-  * It will disable all elements of the alternate, amount ui.
-  */
-  void           debitCreditRadioClicked(bool checked);
-
-  /**
-  * This method is called when the oppositeSignsCheckBox checkbox is clicked.
-  * It will set m_oppositeSigns.
-  */
-  void           oppositeSignsCheckBoxClicked(bool checked);
 
   /**
   * This method is called when 'Exit' is clicked.  The plugin settings will
@@ -394,48 +375,6 @@ private:
   CSVWizard*          m_wizDlg;
 
   void                cleanupPage();
-};
-
-namespace Ui
-{
-class BankingPage;
-}
-
-class BankingPage : public QWizardPage
-{
-  Q_OBJECT
-
-public:
-  explicit BankingPage(QDialog *parent = 0);
-  ~BankingPage();
-
-  Ui::BankingPage     *ui;
-  QVBoxLayout         *m_pageLayout;
-
-  void                setParent(CSVWizard* dlg);
-
-  void                initializePage();
-
-signals:
-  void                clicked();
-
-private:
-  CSVWizard*          m_wizDlg;
-
-
-  void                cleanupPage();
-  int                 nextId() const;
-  bool                isComplete() const;
-  bool                m_reloadNeeded;
-
-private slots:
-  void                slotDateColChanged(int col);
-  void                slotPayeeColChanged(int col);
-  void                slotDebitColChanged(int col);
-  void                slotCreditColChanged(int col);
-  void                slotAmountColChanged(int col);
-  void                slotCategoryColChanged(int col);
-  void                clearColumnsSelected();
 };
 
 namespace Ui

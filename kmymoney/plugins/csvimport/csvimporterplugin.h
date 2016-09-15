@@ -28,8 +28,6 @@
 
 #include "kmymoneyplugin.h"
 
-class CSVDialog;
-
 class CsvImporterPlugin : public KMyMoneyPlugin::Plugin
 {
   Q_OBJECT

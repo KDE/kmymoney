@@ -35,7 +35,6 @@
 #include <kjobwidgets.h>
 #include <kio/job.h>
 
-#include "csvdialog.h"
 #include "convdate.h"
 #include "csvutil.h"
 
@@ -100,10 +99,6 @@ void CSVWizard::init()
   m_wizard->setPage(PageRows, m_pageRows);
   m_pageRows->setParent(this);
 
-  m_pageBanking = new BankingPage;
-  m_wizard->setPage(PageBanking, m_pageBanking);
-  m_pageBanking->setParent(this);
-
   m_pageFormats = new FormatsPage;
   m_wizard->setPage(PageFormats, m_pageFormats);
   m_pageFormats->setParent(this);
@@ -121,10 +116,6 @@ void CSVWizard::init()
   validateConfigFile(m_config);
   readMiscSettings(m_config);
 
-  connect(m_pageBanking->ui->radioBnk_amount, SIGNAL(toggled(bool)), this, SLOT(amountRadioClicked(bool)));
-  connect(m_pageBanking->ui->radioBnk_debCred, SIGNAL(toggled(bool)), this, SLOT(debitCreditRadioClicked(bool)));
-  connect(m_pageBanking->ui->checkBoxBnk_oppositeSigns, SIGNAL(clicked(bool)), this, SLOT(oppositeSignsCheckBoxClicked(bool)));
-  connect(m_pageBanking->ui->button_clear, SIGNAL(clicked()), this, SLOT(clearColumnsSelected()));
   connect(m_pageFormats, SIGNAL(statementReady(MyMoneyStatement&)), m_plugin, SLOT(slotGetStatement(MyMoneyStatement&)));
 
   connect(m_wizard->button(QWizard::FinishButton), SIGNAL(clicked()), this, SLOT(slotClose()));
@@ -156,7 +147,6 @@ void CSVWizard::init()
 CSVWizard::~CSVWizard()
 {
   delete ui;
-  delete m_csvDialog;
   delete m_parse;
   delete m_convertDate;
   delete m_csvUtil;
@@ -400,49 +390,6 @@ void CSVWizard::slotIdChanged(int id)
   txt = m_stageLabels[m_curId]->text();
   txt = "<b>" + txt + "</b>";
   m_stageLabels[m_curId]->setText(txt);
-}
-
-void CSVWizard::amountRadioClicked(bool checked)
-{
-  if (checked) {
-    m_pageBanking->ui->comboBoxBnk_amountCol->setEnabled(true);  //  disable credit & debit ui choices
-    m_pageBanking->ui->labelBnk_amount->setEnabled(true);
-    m_pageBanking->ui->labelBnk_credits->setEnabled(false);
-    m_pageBanking->ui->labelBnk_debits->setEnabled(false);
-
-    m_pageBanking->ui->comboBoxBnk_debitCol->setEnabled(false);
-    m_pageBanking->ui->comboBoxBnk_debitCol->setCurrentIndex(-1);
-    m_pageBanking->ui->comboBoxBnk_creditCol->setEnabled(false);
-    m_pageBanking->ui->comboBoxBnk_creditCol->setCurrentIndex(-1);
-  }
-}
-
-void CSVWizard::debitCreditRadioClicked(bool checked)
-{
-  if (checked) {
-    m_pageBanking->ui->comboBoxBnk_debitCol->setEnabled(true);  //         if 'debit/credit' selected
-    m_pageBanking->ui->labelBnk_debits->setEnabled(true);
-    m_pageBanking->ui->comboBoxBnk_creditCol->setEnabled(true);
-    m_pageBanking->ui->labelBnk_credits->setEnabled(true);
-
-    m_pageBanking->ui->comboBoxBnk_amountCol->setEnabled(false);  //       disable 'amount' ui choices
-    m_pageBanking->ui->comboBoxBnk_amountCol->setCurrentIndex(-1);  //     as credit/debit chosen
-    m_pageBanking->ui->labelBnk_amount->setEnabled(false);
-  }
-}
-
-void CSVWizard::oppositeSignsCheckBoxClicked(bool checked)
-{
-  m_csvDialog->m_oppositeSigns = checked;
-}
-
-void CSVWizard::slotClose()
-{
-  if (m_profileType == ProfileBank)
-    m_csvDialog->saveSettings();
-  else if (m_profileType == ProfileInvest)
-    m_pageInvestment->saveSettings();
-  close();
 }
 
 void CSVWizard::clearColumnsBackground(int col) {
@@ -929,7 +876,10 @@ void CSVWizard::slotFileDialogClicked()
   if (!m_pageInvestment.isNull())
     m_wizard->removePage(PageInvestment);
   delete m_pageInvestment;
-  delete m_csvDialog;
+  if (!m_pageBanking.isNull())
+    m_wizard->removePage(PageBanking);
+  delete m_pageBanking;
+
   m_profileName = m_pageIntro->ui->combobox_source->currentText();
   m_skipSetup = m_pageIntro->ui->checkBoxSkipSetup->isChecked();
   m_accept = false;
@@ -943,10 +893,10 @@ void CSVWizard::slotFileDialogClicked()
     m_pageInvestment->readSettings(m_config);
   }
   else if (m_profileType == CSVWizard::ProfileBank) {
-    m_csvDialog = new CSVDialog;
-    m_csvDialog->m_wiz = this;
-    m_csvDialog->init();
-    m_csvDialog->readSettings(m_config);
+    m_pageBanking = new BankingPage;
+    m_wizard->setPage(PageBanking, m_pageBanking);
+    m_pageBanking->setParent(this);
+    m_pageBanking->readSettings(m_config);
   }
 
   if (!getInFileName(m_inFileName))
@@ -1349,179 +1299,6 @@ int RowsPage::nextId() const
   return ret;
 }
 
-BankingPage::BankingPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::BankingPage)
-{
-  ui->setupUi(this);
-  m_pageLayout = new QVBoxLayout;
-  ui->horizontalLayout->insertLayout(0, m_pageLayout);
-
-  registerField("dateColumn", ui->comboBoxBnk_dateCol, "currentIndex", SIGNAL(currentIndexChanged()));
-  registerField("payeeColumn", ui->comboBoxBnk_payeeCol, "currentIndex", SIGNAL(currentIndexChanged()));
-  registerField("amountColumn", ui->comboBoxBnk_amountCol, "currentIndex", SIGNAL(currentIndexChanged()));
-  registerField("debitColumn", ui->comboBoxBnk_debitCol, "currentIndex", SIGNAL(currentIndexChanged()));
-  registerField("creditColumn", ui->comboBoxBnk_creditCol, "currentIndex", SIGNAL(currentIndexChanged()));
-  registerField("categoryColumn", ui->comboBoxBnk_categoryCol, "currentIndex", SIGNAL(currentIndexChanged()));
-
-  connect(ui->comboBoxBnk_dateCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotDateColChanged(int)));
-  connect(ui->comboBoxBnk_amountCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotAmountColChanged(int)));
-  connect(ui->comboBoxBnk_payeeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotPayeeColChanged(int)));
-  connect(ui->comboBoxBnk_debitCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotDebitColChanged(int)));
-  connect(ui->comboBoxBnk_creditCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotCreditColChanged(int)));
-  connect(ui->comboBoxBnk_categoryCol, SIGNAL(currentIndexChanged(int)), this, SLOT(slotCategoryColChanged(int)));
-  connect(ui->button_clear, SIGNAL(clicked()), this, SLOT(clearColumnsSelected()));
-}
-
-BankingPage::~BankingPage()
-{
-  delete ui;
-}
-
-void BankingPage::setParent(CSVWizard* dlg)
-{
-  m_wizDlg = dlg;
-}
-
-void BankingPage::initializePage()
-{
-  // disable banking widgets allowing their initialization
-  disconnect(ui->comboBoxBnk_amountCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(amountColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_debitCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(debitColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_creditCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(creditColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_memoCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(memoColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_numberCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(numberColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_dateCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(dateColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_payeeCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(payeeColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_categoryCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(categoryColumnSelected(int)));
-
-  // clear all existing items before adding new ones
-  ui->comboBoxBnk_numberCol->clear();
-  ui->comboBoxBnk_dateCol->clear();
-  ui->comboBoxBnk_payeeCol->clear();
-  ui->comboBoxBnk_memoCol->clear();
-  ui->comboBoxBnk_amountCol->clear();
-  ui->comboBoxBnk_creditCol->clear();
-  ui->comboBoxBnk_debitCol->clear();
-  ui->comboBoxBnk_categoryCol->clear();
-
-  QStringList columnNumbers;
-  for (int i = 0; i < m_wizDlg->m_maxColumnCount; i++)
-    columnNumbers << QString::number(i + 1);
-
-  // populate comboboxes with col # values
-  ui->comboBoxBnk_numberCol->addItems(columnNumbers);
-  ui->comboBoxBnk_dateCol->addItems(columnNumbers);
-  ui->comboBoxBnk_payeeCol->addItems(columnNumbers);
-  ui->comboBoxBnk_memoCol->addItems(columnNumbers);
-  ui->comboBoxBnk_amountCol->addItems(columnNumbers);
-  ui->comboBoxBnk_creditCol->addItems(columnNumbers);
-  ui->comboBoxBnk_debitCol->addItems(columnNumbers);
-  ui->comboBoxBnk_categoryCol->addItems(columnNumbers);
-
-  clearColumnsSelected(); // all comboboxes are set to 0 so set them to -1
-  connect(ui->comboBoxBnk_amountCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(amountColumnSelected(int)));
-  connect(ui->comboBoxBnk_debitCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(debitColumnSelected(int)));
-  connect(ui->comboBoxBnk_creditCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(creditColumnSelected(int)));
-  connect(ui->comboBoxBnk_memoCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(memoColumnSelected(int)));
-  connect(ui->comboBoxBnk_numberCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(numberColumnSelected(int)));
-  connect(ui->comboBoxBnk_dateCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(dateColumnSelected(int)));
-  connect(ui->comboBoxBnk_payeeCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(payeeColumnSelected(int)));
-  connect(ui->comboBoxBnk_categoryCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(categoryColumnSelected(int)));
-
-  ui->comboBoxBnk_payeeCol->setCurrentIndex(m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnPayee));
-  ui->comboBoxBnk_numberCol->setCurrentIndex(m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnNumber));
-  ui->comboBoxBnk_amountCol->setCurrentIndex(m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnAmount));
-  ui->comboBoxBnk_debitCol->setCurrentIndex(m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnDebit));
-  ui->comboBoxBnk_creditCol->setCurrentIndex(m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnCredit));
-  ui->comboBoxBnk_dateCol->setCurrentIndex(m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnDate));
-  ui->comboBoxBnk_categoryCol->setCurrentIndex(m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnCategory));
-  ui->checkBoxBnk_oppositeSigns->setChecked(m_wizDlg->m_csvDialog->m_oppositeSigns);
-
-  if (m_wizDlg->m_memoColList.count() > 0)
-  {
-    for (int i = 0; i < m_wizDlg->m_memoColList.count(); i++)
-      ui->comboBoxBnk_memoCol->setCurrentIndex(m_wizDlg->m_memoColList[i]);
-  } else
-    ui->comboBoxBnk_memoCol->setCurrentIndex(-1);
-
-  if (m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnDebit) == -1)     // If amount previously selected, set check radio_amount
-    ui->radioBnk_amount->setChecked(true);
-  else                                     // ...else set check radio_debCred to clear amount col
-    ui->radioBnk_debCred->setChecked(true);
-}
-
-int BankingPage::nextId() const
-{
-  return CSVWizard::PageFormats;
-}
-
-void BankingPage::cleanupPage()
-{
-  disconnect(ui->comboBoxBnk_amountCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(amountColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_debitCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(debitColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_creditCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(creditColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_memoCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(memoColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_numberCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(numberColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_dateCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(dateColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_payeeCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(payeeColumnSelected(int)));
-  disconnect(ui->comboBoxBnk_categoryCol, SIGNAL(currentIndexChanged(int)), m_wizDlg->m_csvDialog, SLOT(categoryColumnSelected(int)));
-  m_wizDlg->m_pageSeparator->initializePage();
-}
-
-bool BankingPage::isComplete() const
-{
-  bool ret = ((field("dateColumn").toInt() > -1)  && (field("payeeColumn").toInt() > -1)  && ((field("amountColumn").toInt() > -1) || ((field("debitColumn").toInt() > -1)  && (field("creditColumn").toInt() > -1))));
-  return ret;
-}
-
-void BankingPage::clearColumnsSelected()
-{
-  ui->comboBoxBnk_dateCol->setCurrentIndex(-1);
-  ui->comboBoxBnk_payeeCol->setCurrentIndex(-1);
-  ui->comboBoxBnk_memoCol->setCurrentIndex(-1);
-  ui->comboBoxBnk_numberCol->setCurrentIndex(-1);
-  ui->comboBoxBnk_amountCol->setCurrentIndex(-1);
-  ui->comboBoxBnk_debitCol->setCurrentIndex(-1);
-  ui->comboBoxBnk_creditCol->setCurrentIndex(-1);
-  ui->comboBoxBnk_categoryCol->setCurrentIndex(-1);
-}
-
-void BankingPage::slotDateColChanged(int col)
-{
-  if (col < 0) return;
-  setField("dateColumn", col);
-  emit completeChanged();
-}
-
-void BankingPage::slotPayeeColChanged(int col)
-{
-  setField("payeeColumn", col);
-  emit completeChanged();
-}
-
-void BankingPage::slotDebitColChanged(int col)
-{
-  setField("debitColumn", col);
-  emit completeChanged();
-}
-
-void BankingPage::slotCreditColChanged(int col)
-{
-  setField("creditColumn", col);
-  emit completeChanged();
-}
-
-void BankingPage::slotAmountColChanged(int col)
-{
-  setField("amountColumn", col);
-  emit completeChanged();
-}
-
-void BankingPage::slotCategoryColChanged(int col)
-{
-  setField("categoryColumn", col);
-  emit completeChanged();
-}
-
 FormatsPage::FormatsPage(QDialog *parent) : QWizardPage(parent), ui(new Ui::FormatsPage)
 {
   ui->setupUi(this);
@@ -1600,11 +1377,11 @@ void FormatsPage::decimalSymbolChanged(int index)
   bool isOk = true;
   QList<int> columnList;
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank) {
-    if (m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnAmount) >= 0) {
-      columnList << m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnAmount);
+    if (m_wizDlg->m_pageBanking->m_colTypeNum.value(BankingPage::ColumnAmount) >= 0) {
+      columnList << m_wizDlg->m_pageBanking->m_colTypeNum.value(BankingPage::ColumnAmount);
     } else {
-      columnList << m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnDebit);
-      columnList << m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnCredit);
+      columnList << m_wizDlg->m_pageBanking->m_colTypeNum.value(BankingPage::ColumnDebit);
+      columnList << m_wizDlg->m_pageBanking->m_colTypeNum.value(BankingPage::ColumnCredit);
     }
   } else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest) {
     columnList << m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnAmount);
@@ -1690,7 +1467,7 @@ void FormatsPage::dateFormatChanged(int index)
 
   int col;
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
-    col = m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnDate);
+    col = m_wizDlg->m_pageBanking->m_colTypeNum.value(BankingPage::ColumnDate);
   else
     col = m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnDate);
 
@@ -1731,7 +1508,7 @@ void FormatsPage::slotImportClicked()
 {
   bool isOK = true;
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
-    isOK = m_wizDlg->m_csvDialog->createStatement(m_wizDlg->st);
+    isOK = m_wizDlg->m_pageBanking->createStatement(m_wizDlg->st);
   else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
     isOK = m_wizDlg->m_pageInvestment->createStatement(m_wizDlg->st);
 
@@ -1747,7 +1524,7 @@ void FormatsPage::slotSaveAsQIFClicked()
 {
   bool isOK = true;
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
-    isOK = m_wizDlg->m_csvDialog->createStatement(m_wizDlg->st);
+    isOK = m_wizDlg->m_pageBanking->createStatement(m_wizDlg->st);
   else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
     isOK = m_wizDlg->m_pageInvestment->createStatement(m_wizDlg->st);
 
@@ -1763,7 +1540,7 @@ void FormatsPage::slotSaveAsQIFClicked()
   QFile oFile(outFileName);
   oFile.open(QIODevice::WriteOnly);
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank)
-    m_wizDlg->m_csvDialog->makeQIF(m_wizDlg->st, oFile);
+    m_wizDlg->m_pageBanking->makeQIF(m_wizDlg->st, oFile);
   else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
     m_wizDlg->m_pageInvestment->makeQIF(m_wizDlg->st, oFile);
   oFile.close();
@@ -1784,12 +1561,12 @@ void FormatsPage::cleanupPage()
 
   QList<int> columnList;
   if (m_wizDlg->m_profileType == CSVWizard::ProfileBank) {
-    columnList << m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnDate);
-    if (m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnAmount) >= 0)
-      columnList << m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnAmount);
+    columnList << m_wizDlg->m_pageBanking->m_colTypeNum.value(BankingPage::ColumnDate);
+    if (m_wizDlg->m_pageBanking->m_colTypeNum.value(BankingPage::ColumnAmount) >= 0)
+      columnList << m_wizDlg->m_pageBanking->m_colTypeNum.value(BankingPage::ColumnAmount);
     else
-      columnList << m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnDebit) <<
-                    m_wizDlg->m_csvDialog->m_colTypeNum.value(CSVDialog::ColumnCredit);
+      columnList << m_wizDlg->m_pageBanking->m_colTypeNum.value(BankingPage::ColumnDebit) <<
+                    m_wizDlg->m_pageBanking->m_colTypeNum.value(BankingPage::ColumnCredit);
   } else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest) {
     columnList << m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnAmount) <<
                   m_wizDlg->m_pageInvestment->m_colTypeNum.value(InvestmentPage::ColumnPrice) <<

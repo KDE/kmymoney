@@ -11,8 +11,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmm_csvimport.desktop
 
 set(kmm_csvimport_PART_SRCS
   csvimporterplugin.cpp
-  csvdialog.cpp
   csvwizard.cpp
+  bankingwizardpage.cpp
   investmentwizardpage.cpp
   redefinedlg.cpp
   convdate.cpp
