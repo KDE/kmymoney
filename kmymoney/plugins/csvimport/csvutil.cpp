@@ -272,8 +272,12 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
     m_symbolFound = false;
     if ((thouIndex == -1) || (thouIndex == length - 4))  {      //no separator || correct format
       txt.remove(m_thousandsSeparator);
-      QString tmp = txt + QLocale().decimalPoint() + "00";
-      return tmp;
+      txt.remove(QRegularExpression("[^\\d]"));     // remove all non-digits
+      if (!txt.isEmpty())                           // if no digit left, then it isn't number
+        txt = txt + QLocale().decimalPoint() + "00";
+      else
+        m_invalidConversion = true;
+      return txt;
     } else
       m_invalidConversion = true;
     return txt;

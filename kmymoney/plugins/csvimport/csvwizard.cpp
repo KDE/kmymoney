@@ -659,6 +659,8 @@ bool CSVWizard::detectDecimalSymbol(const int col, int& symbol)
     }
   }
   QString filteredCurrencies = QStringList(currencySymbols.values()).join("");
+  QString pattern = QString("%1%2").arg(QLocale().currencySymbol()).arg(filteredCurrencies);
+  QRegularExpression re("^[\\(+-]?\\d+[\\)]?$"); // matches '0' ; '+12' ; '-345' ; '(6789)'
 
   bool dotIsDecimalSeparator = false;
   bool commaIsDecimalSeparator = false;
@@ -704,10 +706,9 @@ bool CSVWizard::detectDecimalSymbol(const int col, int& symbol)
       }
 
     } else {                                   // follwing case 123
-      QString pattern = QString("-+[](),.%1%2 ").arg(QLocale().currencySymbol()).arg(filteredCurrencies); // strip of all signs, currency symbols, decimal symbols, and whitespace
-      txt.remove(QRegExp(pattern));
-      QRegExp re("\\d*");
-      if (re.exactMatch(txt)) // if string is pure numerical then go forward...
+      txt.remove(QRegularExpression("[ " + QRegularExpression::escape(pattern) + ']'));
+      QRegularExpressionMatch match = re.match(txt);
+      if (match.hasMatch()) // if string is pure numerical then go forward...
         continue;
       else    // ...if not then it's non-numerical garbage
         return false;
@@ -1963,16 +1964,18 @@ bool FormatsPage::validateDecimalSymbol(int col)
   bool isOK = true;
   for (int row = m_wizDlg->m_startLine - 1; row < m_wizDlg->m_endLine; ++row) {
       QTableWidgetItem* item = m_wizDlg->ui->tableWidget->item(row, col);
-      m_wizDlg->m_parse->possiblyReplaceSymbol(item->text());
+      QString rawNumber = item->text();
+      m_wizDlg->m_parse->possiblyReplaceSymbol(rawNumber);
 
-      if (m_wizDlg->m_parse->invalidConversion()) {
+      if (!m_wizDlg->m_parse->invalidConversion() ||
+          rawNumber.isEmpty()) {                   // empty strings are welcome
+        item->setBackground(m_wizDlg->m_colorBrush);
+        item->setForeground(m_wizDlg->m_colorBrushText);
+      } else {
         isOK = false;
         m_wizDlg->ui->tableWidget->scrollToItem(item, QAbstractItemView::EnsureVisible);
         item->setBackground(m_wizDlg->m_errorBrush);
         item->setForeground(m_wizDlg->m_errorBrushText);
-      } else {
-        item->setBackground(m_wizDlg->m_colorBrush);
-        item->setForeground(m_wizDlg->m_colorBrushText);
       }
   }
   return isOK;
