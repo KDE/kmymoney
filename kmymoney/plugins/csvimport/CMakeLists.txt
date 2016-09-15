@@ -8,6 +8,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmm_csvimport.desktop
 ########### next target ###############
 
 set(kmm_csvimport_PART_SRCS
+  csvimporterplugin.cpp
   csvdialog.cpp
   csvwizard.cpp
   investprocessing.cpp
@@ -32,19 +33,13 @@ ki18n_wrap_ui(kmm_csvimport_PART_SRCS
 )
 
 # Use static library for tests only
-add_library(kmm_csvimport_static STATIC ${kmm_csvimport_PART_SRCS})
-add_library(kmm_csvimport MODULE csvimporterplugin.cpp)
+add_library(kmm_csvimport MODULE ${kmm_csvimport_PART_SRCS})
 
 kcoreaddons_desktop_to_json(kmm_csvimport kmm_csvimport.desktop)
 
-target_link_libraries(kmm_csvimport_static
-  PUBLIC
-    kmm_mymoney
+target_link_libraries(kmm_csvimport
     kmm_plugin
-    dialogs
 )
-
-target_link_libraries(kmm_csvimport kmm_csvimport_static)
 
 ########### install files ###############
 
