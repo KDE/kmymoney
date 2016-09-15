@@ -890,23 +890,33 @@ void CSVWizard::displayLines(const QStringList &lineList, Parse* parse)
 void CSVWizard::updateWindowSize()
 {
   QTableWidget *table = this->ui->tableWidget;
-  int newWidth = table->verticalHeader()->width() + table->verticalScrollBar()->width();      //take header and scrollbar into account
-  int newHeight = table->horizontalHeader()->height() + table->horizontalScrollBar()->height();
-  table->horizontalHeader()->setStretchLastSection(false);
   table->resizeColumnsToContents();
+  layout()->invalidate();
+  layout()->activate();
 
   QRect screen = QApplication::desktop()->availableGeometry();    //get available screen size
-  QRect view = table->contentsRect();                             //get current tableview size
-  QRect wizard = this->geometry();                               //get current wizard size
+  QRect wizard = this->frameGeometry();                           //get current wizard size
 
-  for(int i = 0; i < table->columnCount(); i++ )
+  int newWidth = table->verticalHeader()->width() +               //take header, margins nad scrollbar into account
+                 table->contentsMargins().left() +
+                 table->contentsMargins().right();
+  if (table->verticalScrollBar()->isEnabled())
+    newWidth += table->verticalScrollBar()->width();
+  for(int i = 0; i < table->columnCount(); ++i)
     newWidth += table->columnWidth(i);                            //add up required column widths
+
+  int newHeight = table->horizontalHeader()->height() +
+                  table->horizontalScrollBar()->height() +
+                  table->contentsMargins().top() +
+                  table->contentsMargins().bottom();
+  if (table->horizontalScrollBar()->isEnabled())
+    newHeight += table->horizontalScrollBar()->height();
 
   if( this->ui->tableWidget->rowCount() > 0)
     newHeight += this->ui->tableWidget->rowCount() * table->rowHeight(0); //add up estimated row heights
 
-  newWidth = wizard.width() + (newWidth - view.width());
-  newHeight = wizard.height() + (newHeight - view.height());
+  newWidth = wizard.width() + (newWidth - table->width());
+  newHeight = wizard.height() + (newHeight - table->height());
 
   if (newWidth > screen.width())  //limit wizard size to screen size
     newWidth = screen.width();
@@ -914,18 +924,18 @@ void CSVWizard::updateWindowSize()
     newHeight = screen.height();
 
   if (newWidth < this->m_initialWidth) //don't shrink wizard if required size is less than initial
-  {
-    table->horizontalHeader()->setStretchLastSection(true);
     newWidth = this->m_initialWidth;
-  }
   if (newHeight < this->m_initialHeight)
     newHeight = this->m_initialHeight;
 
+  newWidth -= (wizard.width() - this->geometry().width());      // remove window frame
+  newHeight -= (wizard.height() - this->geometry().height());
+
   wizard.setWidth(newWidth);
   wizard.setHeight(newHeight);
-  this->setGeometry(wizard);
   wizard.moveTo((screen.width() - wizard.width()) / 2,
                 (screen.height() - wizard.height()) / 2);
+  this->setGeometry(wizard);
 }
 
 void CSVWizard::slotFileDialogClicked()

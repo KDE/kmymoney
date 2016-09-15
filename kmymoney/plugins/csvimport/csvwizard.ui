@@ -25,9 +25,6 @@
      <property name="selectionMode">
       <enum>QAbstractItemView::MultiSelection</enum>
      </property>
-     <attribute name="horizontalHeaderStretchLastSection">
-      <bool>true</bool>
-     </attribute>
      <attribute name="verticalHeaderStretchLastSection">
       <bool>false</bool>
      </attribute>
