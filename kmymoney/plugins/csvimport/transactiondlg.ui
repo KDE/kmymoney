@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>RedefineDlgDecl</class>
- <widget class="QWidget" name="RedefineDlgDecl">
+ <class>TransactionDlg</class>
+ <widget class="QDialog" name="TransactionDlg">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>280</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Redefine Transaction Type</string>
+   <string>Transaction Type</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -33,8 +33,9 @@
    <item>
     <widget class="QLabel" name="label_info">
      <property name="text">
-      <string>The transaction below has an unrecognised type/action.
-Please select an appropriate entry.</string>
+      <string>&lt;center&gt;The transaction below has an either unrecognised or invalid type.&lt;/center&gt;
+&lt;center&gt;Please select an appropriate entry, if available.&lt;/center&gt;
+&lt;center&gt;Otherwise, click Cancel to abort.&lt;/center&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -45,21 +46,16 @@ Please select an appropriate entry.</string>
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_actionCol">
-     <property name="text">
-      <string comment="the number of the column containing error">Type/action column</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QTableWidget" name="tableWidget">
-     <property name="rowCount">
-      <number>2</number>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <row/>
+     <property name="rowCount">
+      <number>1</number>
+     </property>
      <row/>
     </widget>
    </item>
@@ -86,7 +82,7 @@ Please select an appropriate entry.</string>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="kcombobox_Actions">
+      <widget class="QComboBox" name="cbActionTypes">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -166,13 +162,49 @@ Please select an appropriate entry.</string>
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
+     <property name="centerButtons">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>TransactionDlg</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>TransactionDlg</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <designerdata>
   <property name="gridDeltaX">
    <number>2</number>

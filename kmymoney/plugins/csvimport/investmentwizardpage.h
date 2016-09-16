@@ -40,7 +40,7 @@
 
 // ----------------------------------------------------------------------------
 
-class RedefineDlg;
+class TransactionDlg;
 class SecuritiesDlg;
 class CSVWizard;
 class InvestmentPage;
@@ -88,10 +88,8 @@ public:
   bool                createStatement(MyMoneyStatement& st);
 
 private:
-  RedefineDlg*        m_redefine;
   QPointer<SecuritiesDlg>   m_securitiesDlg;
 
-  QList<MyMoneyStatement::Transaction::EAction> m_validActionTypes;
   QMap<QString, QString> m_mapSymbolName;
 
   QStringList         m_shrsinList;
@@ -156,7 +154,7 @@ private:
   * checks the values in those columns for compatibility with the input
   * investment activity type.
   */
-  bool                validateActionType(MyMoneyStatement::Transaction::EAction &actionType, const QString &userType);
+  bool                validateActionType(MyMoneyStatement::Transaction &tr, QStringList &colList);
 
   /**
   * This method is called during input.  It validates the action types

@@ -14,7 +14,7 @@ set(kmm_csvimport_PART_SRCS
   csvwizard.cpp
   bankingwizardpage.cpp
   investmentwizardpage.cpp
-  redefinedlg.cpp
+  transactiondlg.cpp
   convdate.cpp
   csvutil.cpp
   securitiesdlg.cpp
@@ -24,7 +24,7 @@ kconfig_add_kcfg_files(kmm_csvimport_PART_SRCS pluginsettings.kcfgc)
 
 ki18n_wrap_ui(kmm_csvimport_PART_SRCS
   csvwizard.ui
-  redefinedlgdecl.ui
+  transactiondlg.ui
   introwizardpage.ui
   separatorwizardpage.ui
   rowswizardpage.ui

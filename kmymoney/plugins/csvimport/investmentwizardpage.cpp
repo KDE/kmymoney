@@ -41,7 +41,7 @@
 #include "convdate.h"
 #include "csvutil.h"
 
-#include "redefinedlg.h"
+#include "transactiondlg.h"
 #include "securitiesdlg.h"
 
 #include "ui_investmentwizardpage.h"
@@ -79,15 +79,12 @@ InvestmentPage::InvestmentPage(QDialog *parent) : QWizardPage(parent), ui(new Ui
   m_reinvdivList = QString(i18nc("Type of operation as in financial statement", "reinvest,reinv,re-inv")).split(',', QString::SkipEmptyParts);
   m_shrsinList = QString(i18nc("Type of operation as in financial statement", "add,stock dividend,divd reinv,transfer in,re-registration in,journal entry")).split(',', QString::SkipEmptyParts);
   m_shrsoutList = QString(i18nc("Type of operation as in financial statement", "remove")).split(',', QString::SkipEmptyParts);
-
-  m_redefine = new RedefineDlg;
 }
 
 InvestmentPage::~InvestmentPage()
 {
   delete ui;
   delete m_securitiesDlg;
-  delete m_redefine;
 }
 
 void InvestmentPage::setParent(CSVWizard* dlg)
@@ -555,7 +552,6 @@ bool InvestmentPage::validateMemoComboBox()
 
 bool InvestmentPage::createValidActionTypes(QList<MyMoneyStatement::Transaction::EAction> &validActionTypes, MyMoneyStatement::Transaction &tr)
 {
-  validActionTypes.clear();
   if (tr.m_shares.isPositive() &&
       tr.m_price.isPositive() &&
       !tr.m_amount.isZero())
@@ -572,11 +568,8 @@ bool InvestmentPage::createValidActionTypes(QList<MyMoneyStatement::Transaction:
            tr.m_amount.isZero())
     validActionTypes << MyMoneyStatement::Transaction::eaShrsin <<
                         MyMoneyStatement::Transaction::eaShrsout;
-  else {
-    KMessageBox::sorry(m_wiz, i18n("The values in the columns you have selected\ndo not match any expected investment type.\nPlease check the fields in the current transaction,\nand also your selections.")
-                       , i18n("CSV import"));
+  else
     return false;
-  }
   return true;
 }
 
@@ -609,27 +602,37 @@ void InvestmentPage::storeActionType(MyMoneyStatement::Transaction::EAction &act
   }
 }
 
-bool InvestmentPage::validateActionType(MyMoneyStatement::Transaction::EAction &actionType, const QString &userType)
+bool InvestmentPage::validateActionType(MyMoneyStatement::Transaction &tr, QStringList& colList)
 {
-  bool store = false;
-  if (!m_validActionTypes.contains(actionType)) {
-    QString info;
-    if (actionType == MyMoneyStatement::Transaction::eaNone) {
-      info = i18n("<center>The transaction below has an unrecognised type or action.</center>");
-      store = true;
-    }
-    else
-      info = i18n("<center>The transaction below has an invalid type or action.</center>");
-    info += i18n("<center>Please select an appropriate entry, if available.</center>"
-                 "<center>Otherwise, click Cancel to abort.</center>");
-    m_redefine->setValidActionTypes(m_validActionTypes);
-    actionType = m_redefine->askActionType(info);
+  QList<MyMoneyStatement::Transaction::EAction> validActionTypes;
+  if (!createValidActionTypes(validActionTypes, tr)) {
+    KMessageBox::sorry(m_wiz, i18n("The values in the columns you have selected\ndo not match any expected investment type.\n"
+                                   "Please check the fields in the current transaction,\nand also your selections.")
+                       , i18n("CSV import"));
+    return false;
   }
 
-  if (actionType == MyMoneyStatement::Transaction::eaNone)  // user didn't point any transaction
-    return false;
-  if (store)
-    storeActionType(actionType, userType);
+  if (!validActionTypes.contains(tr.m_eAction)) {
+    bool unknownType = false;
+    if (tr.m_eAction == MyMoneyStatement::Transaction::eaNone)
+      unknownType = true;
+
+    QStringList colHeaders;
+    for (int i = 0; i < colList.count(); ++i)
+      colHeaders << m_colTypeName.value(m_colNumType.value(i, ColumnInvalid), QString(i18nc("Unused column", "Unused")));
+
+    TransactionDlg* transactionDlg = new TransactionDlg(colList, colHeaders, m_colTypeNum.value(ColumnType), validActionTypes);
+    if (transactionDlg->exec() == QDialog::Rejected) {
+      KMessageBox::information(m_wiz, i18n("<center>No valid action type found for this transaction.</center>"
+                                       "<center>Please check the parameters supplied.</center>"));
+      return false;
+    } else
+      tr.m_eAction = transactionDlg->getActionType();
+    delete transactionDlg;
+
+    if (unknownType) // type was unknown so store it
+      storeActionType(tr.m_eAction, colList.value(m_colTypeNum[ColumnType]));
+  }
   return true;
 }
 
@@ -1129,12 +1132,7 @@ bool InvestmentPage::processInvestLine(const QString &line, MyMoneyStatement &st
       ++neededFieldsCount;
       txt = m_columnList[m_colTypeNum[ColumnType]];
       tr.m_eAction = processActionType(txt);
-      m_redefine->setColumnList(m_columnList);
-      m_redefine->setColumnTypeNumber(m_colTypeNum);
-      m_redefine->setColumnTypeName(m_colTypeName);
-      if (!createValidActionTypes(m_validActionTypes, tr))
-        return false;
-      if (!validateActionType(tr.m_eAction, txt)) // action type not recognized and user didn't give input
+      if (!validateActionType(tr, m_columnList))// check if price, amount, quantity is appropriate for action type
         return false;
     }
 

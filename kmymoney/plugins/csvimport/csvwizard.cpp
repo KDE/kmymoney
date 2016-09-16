@@ -1512,8 +1512,11 @@ void FormatsPage::slotImportClicked()
   else if (m_wizDlg->m_profileType == CSVWizard::ProfileInvest)
     isOK = m_wizDlg->m_pageInvestment->createStatement(m_wizDlg->st);
 
-  if (!isOK)
+  if (!isOK) {
+    m_wizDlg->st = MyMoneyStatement(); // statement is invalid so erase it
     return;
+  }
+
 
   m_wizDlg->hide(); //hide wizard so it will not cover accountselector
   emit m_wizDlg->statementReady(m_wizDlg->st);
