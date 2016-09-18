@@ -158,10 +158,10 @@ install(FILES kmymoney.upd
 install(FILES ${_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
   )
-install(PROGRAMS kmymoney.desktop
+install(FILES org.kde.kmymoney.desktop
   DESTINATION ${XDG_APPS_INSTALL_DIR}
   )
-install(PROGRAMS kmymoney.appdata.xml
+install(FILES org.kde.kmymoney.appdata.xml
   DESTINATION ${DATA_INSTALL_DIR}/appdata/
   )
 
