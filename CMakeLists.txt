@@ -118,8 +118,10 @@ if (NOT LIBALKIMIA_LIBRARIES AND LIBALKIMIA_LIBRARY)
   set(LIBALKIMIA_LIBRARIES ${GMP_LIBRARIES} ${LIBALKIMIA_LIBRARY} )
 endif()
 # make sure we have the matching version of LibAlkimia (not too new)
-if (NOT ${LibAlkimia_VERSION_MAJOR} VERSION_LESS "6.0.0")
-  message(FATAL_ERROR "This version of KMyMoney requires LibAlkimia 5.0 and does not work with the installed version of LibAlkimia")
+if(${LIBALKIMIA_FOUND} AND NOT ${LIBALKIMIA_VERSION} STREQUAL "")
+  if (NOT ${LIBALKIMIA_VERSION} VERSION_LESS "6.0.0")
+    message(FATAL_ERROR "This version of KMyMoney requires LibAlkimia < 6.0.0 and does not work with the installed version of LibAlkimia")
+  endif()
 endif()
 
 # check for PkgConfig
