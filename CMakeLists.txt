@@ -110,7 +110,7 @@ if(DOXYGEN_FOUND)
   add_custom_target(apidoc ${DOXYGEN} ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen)
 endif(DOXYGEN_FOUND)
 
-find_package(LibAlkimia 4.3.2 REQUIRED)
+find_package(LibAlkimia REQUIRED)
 #TODO: remove when LibAlkimia minimum version will be raised
 if (NOT LIBALKIMIA_LIBRARIES AND LIBALKIMIA_LIBRARY)
   # LibAlkimia 4.3.2 does not properly define LIBALKIMIA_LIBRARIES
@@ -118,12 +118,8 @@ if (NOT LIBALKIMIA_LIBRARIES AND LIBALKIMIA_LIBRARY)
   set(LIBALKIMIA_LIBRARIES ${GMP_LIBRARIES} ${LIBALKIMIA_LIBRARY} )
 endif()
 # make sure we have the matching version of LibAlkimia (not too new)
-if(${LibAlkimia_FOUND})
-  if(DEFINED ${LibAlkimia_VERSION})
-    if (NOT ${LibAlkimia_VERSION} VERSION_LESS "6.0.0")
-      message(FATAL_ERROR "This version of KMyMoney requires LibAlkimia < 6.0.0 and does not work with the installed version of LibAlkimia")
-    endif()
-  endif()
+if(${LibAlkimia_FOUND} AND NOT ${LibAlkimia_VERSION} VERSION_LESS "6.0.0")
+    message(FATAL_ERROR "This version of KMyMoney requires LibAlkimia < 6.0.0 and does not work with the installed version of LibAlkimia")
 endif()
 
 # check for PkgConfig
