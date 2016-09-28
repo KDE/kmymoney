@@ -1,26 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/es_MX/acctchrt_homeown.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Gastos de propietario de casa</title>
  <shortdesc>Gastos asociados a la propiedad de una casa</shortdesc>
- <longdesc>Deseará seleccionar este juego de cuentas si posee una casa. Este juego le proporciona un grupo de cuentas para controlar los gastos domésticos (seguro, impuestos, reparaciones).</longdesc>
+ <longdesc>Deseará seleccionar este juego de cuentas si posee una casa. Este
+   juego le proporciona un grupo de cuentas para controlar los
+   gastos domésticos (seguro, impuestos, reparaciones).</longdesc>
  <accounts>
   <account type="13" name="">
-   <account type="13" name="Seguros">
-    <account type="13" name="Seguro contra siniestros"/>
-   </account>
    <account type="13" name="Impuestos">
     <account type="13" name="Predial"/>
    </account>
    <account type="13" name="Reparaciones domésticas"/>
+   <account type="13" name="Seguros">
+    <account type="13" name="Seguro contra siniestros"/>
+   </account>
   </account>
  </accounts>
 </kmymoney-account-template>

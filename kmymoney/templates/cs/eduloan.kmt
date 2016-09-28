@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/cs/acctchrt_eduloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Studijní půjčka</title>
+ <shortdesc>Účty pro studijní půjčku</shortdesc>
+ <longdesc>Zvolte si tuto sadu účtů, pokud máte půjčku na studium.</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Dluhy">
+    <account type="10" name="Studijní půjčka"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Úrok">
+    <account type="13" name="Úrok ze studijní půjčky"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

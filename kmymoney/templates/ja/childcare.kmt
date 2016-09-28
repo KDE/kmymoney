@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ja/acctchrt_childcare.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>養育費用</title>
+ <shortdesc>養育費用を管理するための勘定科目</shortdesc>
+ <longdesc>養育費用を管理する場合にこの勘定科目集を選択すると良いでしょう。</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="養育費"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

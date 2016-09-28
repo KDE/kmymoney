@@ -1,0 +1,2756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/nl/acctchrt_rgs_1.1.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>RGS 1.1</title>
+ <shortdesc>Referentie GrootboekSchema, versie 1.1</shortdesc>
+ <longdesc>Een uitgebreide set van grootboekrekeningen voor bedrijven, gebaseerd op het public domain Nederlands Referentie Grootboekschema. Zie www.referentiegrootboekschema.nl voor meer informatie.</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Resultaat aandeel van derden">
+    <account type="13" name="Resultaat aandeel van derden"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Afschrijvingen immateriële vaste activa">
+    <account type="13" name="Afschrijving bouwclaims"/>
+    <account type="13" name="Afschrijving concessies en vergunningen"/>
+    <account type="13" name="Afschrijving goodwill"/>
+    <account type="13" name="Afschrijving goodwill uit eerdere overnames"/>
+    <account type="13" name="Afschrijving kosten onderzoek en ontwikkeling"/>
+    <account type="13" name="Afschrijving oprichtingskosten en kosten uitgifte van aandelen"/>
+    <account type="13" name="Afschrijving overig intellectueel eigendom"/>
+    <account type="13" name="Afschrijving overige immateriële vaste activa"/>
+    <account type="13" name="Afschrijving software"/>
+    <account type="13" name="Afschrijving vooruitbetaalde immateriële vaste activa"/>
+   </account>
+   <account type="13" name="Afschrijvingen materiële vaste activa">
+    <account type="13" name="Afschrijving bedrijfsgebouwen"/>
+    <account type="13" name="Afschrijving bedrijfsinventaris"/>
+    <account type="13" name="Afschrijving buitengebruikgestelde materiële vaste activa"/>
+    <account type="13" name="Afschrijving huurdersinvesteringen"/>
+    <account type="13" name="Afschrijving machines en installaties"/>
+    <account type="13" name="Afschrijving overige materiële vaste activa"/>
+    <account type="13" name="Afschrijving overige vaste bedrijfsmiddelen"/>
+    <account type="13" name="Afschrijving schepen en vliegtuigen"/>
+    <account type="13" name="Afschrijving transport- en vervoermiddelen"/>
+    <account type="13" name="Afschrijving vaste bedrijfsmiddelen in uitvoering en vooruitbetaalde materiële vaste activa"/>
+    <account type="13" name="Afschrijving vastgoedbeleggingen"/>
+    <account type="13" name="Afschrijving verbouwingen"/>
+   </account>
+   <account type="13" name="Doorberekende afschrijvingen en waardeveranderingen">
+    <account type="13" name="Doorberekende afschrijvingen"/>
+    <account type="13" name="Doorberekende verkoopresultaten"/>
+    <account type="13" name="Doorberekende waardeveranderingen"/>
+   </account>
+   <account type="13" name="Overige waardeveranderingen immateriële vaste activa">
+    <account type="13" name="Overige waardeverandering bouwclaims"/>
+    <account type="13" name="Overige waardeverandering concessies en vergunningen"/>
+    <account type="13" name="Overige waardeverandering goodwill"/>
+    <account type="13" name="Overige waardeverandering goodwill uit eerdere overnames"/>
+    <account type="13" name="Overige waardeverandering kosten onderzoek en ontwikkeling"/>
+    <account type="13" name="Overige waardeverandering oprichtingskosten en kosten uitgifte van aandelen"/>
+    <account type="13" name="Overige waardeverandering overig intellectueel eigendom"/>
+    <account type="13" name="Overige waardeverandering overige immateriële vaste activa"/>
+    <account type="13" name="Overige waardeverandering software"/>
+    <account type="13" name="Overige waardeverandering vooruitbetaalde immateriële vaste activa"/>
+   </account>
+   <account type="13" name="Overige waardeveranderingen materiële vaste activa">
+    <account type="13" name="Overige waardeverandering bedrijfsgebouwen"/>
+    <account type="13" name="Overige waardeverandering bedrijfsinventaris"/>
+    <account type="13" name="Overige waardeverandering buitengebruikgestelde materiële vaste activa"/>
+    <account type="13" name="Overige waardeverandering huurdersinvesteringen"/>
+    <account type="13" name="Overige waardeverandering machines en installaties"/>
+    <account type="13" name="Overige waardeverandering overige materiële vaste activa"/>
+    <account type="13" name="Overige waardeverandering overige vaste bedrijfsmiddelen"/>
+    <account type="13" name="Overige waardeverandering schepen en vliegtuigen"/>
+    <account type="13" name="Overige waardeverandering transport- en vervoermiddelen"/>
+    <account type="13" name="Overige waardeverandering vaste bedrijfsmiddelen in uitvoering en vooruitbetaalde materiële vaste activa"/>
+    <account type="13" name="Overige waardeverandering vastgoedbeleggingen"/>
+    <account type="13" name="Overige waardeverandering verbouwingen"/>
+   </account>
+   <account type="13" name="Resultaat verkoop immateriële vaste activa">
+    <account type="13" name="Resultaat verkoop bouwclaims"/>
+    <account type="13" name="Resultaat verkoop concessies en vergunningen"/>
+    <account type="13" name="Resultaat verkoop goodwill"/>
+    <account type="13" name="Resultaat verkoop goodwill uit eerdere overnames"/>
+    <account type="13" name="Resultaat verkoop kosten onderzoek en ontwikkeling"/>
+    <account type="13" name="Resultaat verkoop oprichtingskosten en kosten uitgifte van aandelen"/>
+    <account type="13" name="Resultaat verkoop overig intellectueel eigendom"/>
+    <account type="13" name="Resultaat verkoop overige immateriële vaste activa"/>
+    <account type="13" name="Resultaat verkoop software"/>
+    <account type="13" name="Resultaat verkoop vooruitbetaalde immateriële vaste activa"/>
+   </account>
+   <account type="13" name="Resultaat verkoop materiële vaste activa">
+    <account type="13" name="Resultaat verkoop bedrijfsgebouwen"/>
+    <account type="13" name="Resultaat verkoop bedrijfsinventaris"/>
+    <account type="13" name="Resultaat verkoop buitengebruikgestelde materiële vaste activa"/>
+    <account type="13" name="Resultaat verkoop huurdersinvesteringen"/>
+    <account type="13" name="Resultaat verkoop machines en installaties"/>
+    <account type="13" name="Resultaat verkoop overige materiële vaste activa"/>
+    <account type="13" name="Resultaat verkoop overige vaste bedrijfsmiddelen"/>
+    <account type="13" name="Resultaat verkoop schepen en vliegtuigen"/>
+    <account type="13" name="Resultaat verkoop transport- en vervoermiddelen"/>
+    <account type="13" name="Resultaat verkoop vaste bedrijfsmiddelen in uitvoering en vooruitbetaalde materiële vaste activa"/>
+    <account type="13" name="Resultaat verkoop vastgoedbeleggingen"/>
+    <account type="13" name="Resultaat verkoop verbouwingen"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Belastingen buitengewoon resultaat">
+    <account type="13" name="Belastingen buitengewoon resultaat"/>
+   </account>
+   <account type="13" name="Belastingen gewoon resultaat">
+    <account type="13" name="Belastingen gewoon resultaat"/>
+   </account>
+   <account type="13" name="Mutatie fiscale oudedagsreserve">
+    <account type="13" name="Mutatie fiscale oudedagsreserve"/>
+   </account>
+   <account type="13" name="Vrijval belastinglatentie">
+    <account type="13" name="Vrijval belastinglatentie"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Buitengewone baten">
+    <account type="13" name="Buitengewone baten"/>
+   </account>
+   <account type="13" name="Buitengewone lasten">
+    <account type="13" name="Buitengewone lasten"/>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Aandelen">
+    <account type="9" name="Aandelen beursgenoteerd">
+     <account type="9" name="Aankoop aandelen beursgenoteerd"/>
+     <account type="9" name="Afstempeling aandelen beursgenoteerd"/>
+     <account type="9" name="Beginbalans aandelen beursgenoteerd"/>
+     <account type="9" name="Overige mutaties aandelen beursgenoteerd"/>
+     <account type="9" name="Stockdividend aandelen beursgenoteerd"/>
+     <account type="9" name="Verkoop aandelen beursgenoteerd"/>
+     <account type="9" name="Waardeverminderingen aandelen beursgenoteerd"/>
+    </account>
+    <account type="9" name="Aandelen niet beursgenoteerd">
+     <account type="9" name="Aankoop aandelen niet beursgenoteerd"/>
+     <account type="9" name="Afstempeling aandelen niet beursgenoteerd"/>
+     <account type="9" name="Beginbalans aandelen niet beursgenoteerd"/>
+     <account type="9" name="Overige mutaties aandelen niet beursgenoteerd"/>
+     <account type="9" name="Stockdividend aandelen niet beursgenoteerd"/>
+     <account type="9" name="Verkoop aandelen niet beursgenoteerd"/>
+    </account>
+   </account>
+   <account type="9" name="Obligaties">
+    <account type="9" name="Obligaties beursgenoteerd">
+     <account type="9" name="Aankoop obligaties beursgenoteerd"/>
+     <account type="9" name="Beginbalans obligaties beursgenoteerd"/>
+     <account type="9" name="Overige mutaties obligaties beursgenoteerd"/>
+     <account type="9" name="Uitloting obligaties beursgenoteerd"/>
+     <account type="9" name="Verkoop obligaties beursgenoteerd"/>
+     <account type="9" name="Waardeverminderingen obligaties beursgenoteerd"/>
+    </account>
+    <account type="9" name="Obligaties niet beursgenoteerd">
+     <account type="9" name="Aankoop obligaties niet beursgenoteerd"/>
+     <account type="9" name="Beginbalans obligaties niet beursgenoteerd"/>
+     <account type="9" name="Overige mutaties obligaties niet beursgenoteerd"/>
+     <account type="9" name="Uitloting obligaties niet beursgenoteerd"/>
+     <account type="9" name="Verkoop obligaties niet beursgenoteerd"/>
+     <account type="9" name="Waardeverminderingen obligaties niet beursgenoteerd"/>
+    </account>
+   </account>
+   <account type="9" name="Overige effecten">
+    <account type="9" name="Overige effecten beursgenoteerd">
+     <account type="9" name="Aankoop overige effecten beursgenoteerd"/>
+     <account type="9" name="Beginbalans overige effecten beursgenoteerd"/>
+     <account type="9" name="Overige mutaties overige effecten beursgenoteerd"/>
+     <account type="9" name="Verkoop overige effecten beursgenoteerd"/>
+     <account type="9" name="Waardeverminderingen overige effecten beursgenoteerd"/>
+    </account>
+    <account type="9" name="Overige effecten niet beursgenoteerd">
+     <account type="9" name="Aankoop overige effecten niet beursgenoteerd"/>
+     <account type="9" name="Beginbalans overige effecten niet beursgenoteerd"/>
+     <account type="9" name="Overige mutaties overige effecten niet beursgenoteerd"/>
+     <account type="9" name="Verkoop overige effecten niet beursgenoteerd"/>
+     <account type="9" name="Waardeverminderingen overige effecten niet beursgenoteerd"/>
+    </account>
+   </account>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Aandeel van derden">
+    <account type="16" name="Aandeel van derden"/>
+   </account>
+   <account type="16" name="Agioreserves">
+    <account type="16" name="Agio, fiscaal niet erkend">
+     <account type="16" name="Agio in boekjaar agio, fiscaal niet erkend"/>
+     <account type="16" name="Beginbalans agio, fiscaal niet erkend"/>
+     <account type="16" name="Disagio in boekjaar agio, fiscaal niet erkend"/>
+     <account type="16" name="Overige mutaties agio, fiscaal niet erkend"/>
+     <account type="16" name="Uitdeling in boekjaar agio, fiscaal niet erkend"/>
+    </account>
+    <account type="16" name="Agioreserve">
+     <account type="16" name="Agio in boekjaar agioreserve"/>
+     <account type="16" name="Beginbalans agioreserve"/>
+     <account type="16" name="Disagio in boekjaar agioreserve"/>
+     <account type="16" name="Overige mutaties agioreserve"/>
+     <account type="16" name="Uitdeling in boekjaar agioreserve"/>
+    </account>
+   </account>
+   <account type="16" name="Fiscale reserves">
+    <account type="16" name="Exportreserve">
+     <account type="16" name="Afname ten gunste van het resultaat exportreserve"/>
+     <account type="16" name="Beginbalans exportreserve"/>
+     <account type="16" name="Dotatie exportreserve"/>
+     <account type="16" name="Kosten ten laste van reserve exportreserve"/>
+     <account type="16" name="Overboekingen exportreserve"/>
+     <account type="16" name="Overige mutaties exportreserve"/>
+     <account type="16" name="Valutaomrekeningsverschillen exportreserve"/>
+    </account>
+    <account type="16" name="Fiscale oudedagsreserve (FOR)">
+     <account type="16" name="Beginbalans fiscale oudedagsreserve (for)"/>
+     <account type="16" name="Dotatie Fiscale Oudedags Reserve fiscale oudedagsreserve (for)"/>
+     <account type="16" name="Overboekingen fiscale oudedagsreserve (for)"/>
+     <account type="16" name="Overige mutaties fiscale oudedagsreserve (for)"/>
+    </account>
+    <account type="16" name="Herinvesteringsreserve">
+     <account type="16" name="Aanwending herinvesteringsreserve"/>
+     <account type="16" name="Beginbalans herinvesteringsreserve"/>
+     <account type="16" name="Dotatie herinvesteringsreserve"/>
+     <account type="16" name="Overboekingen herinvesteringsreserve"/>
+     <account type="16" name="Overige mutaties herinvesteringsreserve"/>
+     <account type="16" name="Valutaomrekeningsverschillen herinvesteringsreserve"/>
+    </account>
+    <account type="16" name="Kostenegalisatiereserve">
+     <account type="16" name="Afname ten gunste van het resultaat kostenegalisatiereserve"/>
+     <account type="16" name="Beginbalans kostenegalisatiereserve"/>
+     <account type="16" name="Dotatie kostenegalisatiereserve"/>
+     <account type="16" name="Kosten ten laste van reserve kostenegalisatiereserve"/>
+     <account type="16" name="Overboekingen kostenegalisatiereserve"/>
+     <account type="16" name="Overige mutaties kostenegalisatiereserve"/>
+     <account type="16" name="Valutaomrekeningsverschillen kostenegalisatiereserve"/>
+    </account>
+    <account type="16" name="Opwaarderingsreserve">
+     <account type="16" name="Aanwending opwaarderingsreserve"/>
+     <account type="16" name="Beginbalans opwaarderingsreserve"/>
+     <account type="16" name="Dotatie opwaarderingsreserve"/>
+     <account type="16" name="Overboekingen opwaarderingsreserve"/>
+     <account type="16" name="Overige mutaties opwaarderingsreserve"/>
+     <account type="16" name="Valutaomrekeningsverschillen opwaarderingsreserve"/>
+    </account>
+    <account type="16" name="Overige fiscale reserves">
+     <account type="16" name="Aanwending overige fiscale reserves"/>
+     <account type="16" name="Beginbalans overige fiscale reserves"/>
+     <account type="16" name="Dotatie overige fiscale reserves"/>
+     <account type="16" name="Overboekingen overige fiscale reserves"/>
+     <account type="16" name="Overige mutaties overige fiscale reserves"/>
+     <account type="16" name="Valutaomrekeningsverschillen overige fiscale reserves"/>
+     <account type="16" name="Vrijval overige fiscale reserves"/>
+    </account>
+    <account type="16" name="Reserve assurantie eigen risico">
+     <account type="16" name="Afname ten gunste van het resultaat reserve assurantie eigen risico"/>
+     <account type="16" name="Beginbalans reserve assurantie eigen risico"/>
+     <account type="16" name="Dotatie reserve assurantie eigen risico"/>
+     <account type="16" name="Kosten ten laste van reserve reserve assurantie eigen risico"/>
+     <account type="16" name="Overboekingen reserve assurantie eigen risico"/>
+     <account type="16" name="Overige mutaties reserve assurantie eigen risico"/>
+     <account type="16" name="Valutaomrekeningsverschillen reserve assurantie eigen risico"/>
+    </account>
+    <account type="16" name="Risicoreserve">
+     <account type="16" name="Afname ten gunste van het resultaat risicoreserve"/>
+     <account type="16" name="Beginbalans risicoreserve"/>
+     <account type="16" name="Dotatie risicoreserve"/>
+     <account type="16" name="Kosten ten laste van reserve risicoreserve"/>
+     <account type="16" name="Overboekingen risicoreserve"/>
+     <account type="16" name="Overige mutaties risicoreserve"/>
+     <account type="16" name="Valutaomrekeningsverschillen risicoreserve"/>
+    </account>
+    <account type="16" name="Terugkeerreserve">
+     <account type="16" name="Aanwending terugkeerreserve"/>
+     <account type="16" name="Beginbalans terugkeerreserve"/>
+     <account type="16" name="Dotatie terugkeerreserve"/>
+     <account type="16" name="Overboekingen terugkeerreserve"/>
+     <account type="16" name="Overige mutaties terugkeerreserve"/>
+     <account type="16" name="Valutaomrekeningsverschillen terugkeerreserve"/>
+     <account type="16" name="Vrijval terugkeerreserve"/>
+    </account>
+   </account>
+   <account type="16" name="Fondsen">
+    <account type="16" name="Bestemmingsfonds">
+     <account type="16" name="Beginbalans bestemmingsfonds"/>
+     <account type="16" name="Dotatie bestemmingsfonds"/>
+     <account type="16" name="Onttrekking bestemmingsfonds"/>
+     <account type="16" name="Overige mutaties bestemmingsfonds"/>
+    </account>
+    <account type="16" name="Egalisatiefonds">
+     <account type="16" name="Beginbalans egalisatiefonds"/>
+     <account type="16" name="Dotatie egalisatiefonds"/>
+     <account type="16" name="Onttrekking egalisatiefonds"/>
+     <account type="16" name="Overige mutaties egalisatiefonds"/>
+    </account>
+   </account>
+   <account type="16" name="Gestort en opgevraagd kapitaal">
+    <account type="16" name="Aandelenkapitaal, fiscaal niet erkend"/>
+    <account type="16" name="Gewone aandelen">
+     <account type="16" name="Aanzuivering van verliezen gewone aandelen"/>
+     <account type="16" name="Beginbalans gewone aandelen"/>
+     <account type="16" name="Inkoop gewone aandelen"/>
+     <account type="16" name="Intrekking gewone aandelen"/>
+     <account type="16" name="Omzetting leningen gewone aandelen"/>
+     <account type="16" name="Omzetting reserves gewone aandelen"/>
+     <account type="16" name="Overige mutaties gewone aandelen"/>
+     <account type="16" name="Stortingen door aandeelhouders gewone aandelen"/>
+     <account type="16" name="Stortingsplicht gewone aandelen"/>
+     <account type="16" name="Uitgeoefende aandelen(optie)regelingen gewone aandelen"/>
+     <account type="16" name="Uitgifte gewone aandelen"/>
+     <account type="16" name="Verkoop gewone aandelen"/>
+     <account type="16" name="Verleende aandelen(optie)regelingen gewone aandelen"/>
+    </account>
+    <account type="16" name="Preferente aandelen">
+     <account type="16" name="Aanzuivering van verliezen preferente aandelen"/>
+     <account type="16" name="Beginbalans preferente aandelen"/>
+     <account type="16" name="Inkoop preferente aandelen"/>
+     <account type="16" name="Intrekking preferente aandelen"/>
+     <account type="16" name="Overige mutaties preferente aandelen"/>
+     <account type="16" name="Stortingen door aandeelhouders preferente aandelen"/>
+     <account type="16" name="Stortingsplicht preferente aandelen"/>
+     <account type="16" name="Uitgeoefende aandelen(optie)regelingen preferente aandelen"/>
+     <account type="16" name="Uitgifte preferente aandelen"/>
+     <account type="16" name="Verkoop preferente aandelen"/>
+     <account type="16" name="Verleende aandelen(optie)regelingen preferente aandelen"/>
+    </account>
+    <account type="16" name="Prioriteitsaandelen">
+     <account type="16" name="Aanzuivering van verliezen prioriteitsaandelen"/>
+     <account type="16" name="Beginbalans prioriteitsaandelen"/>
+     <account type="16" name="Inkoop prioriteitsaandelen"/>
+     <account type="16" name="Intrekking prioriteitsaandelen"/>
+     <account type="16" name="Overige mutaties prioriteitsaandelen"/>
+     <account type="16" name="Stortingen door aandeelhouders prioriteitsaandelen"/>
+     <account type="16" name="Stortingsplicht prioriteitsaandelen"/>
+     <account type="16" name="Uitgeoefende aandelen(optie)regelingen prioriteitsaandelen"/>
+     <account type="16" name="Uitgifte prioriteitsaandelen"/>
+     <account type="16" name="Verkoop prioriteitsaandelen"/>
+     <account type="16" name="Verleende aandelen(optie)regelingen prioriteitsaandelen"/>
+    </account>
+    <account type="16" name="Winstrechtloze aandelen">
+     <account type="16" name="Aanzuivering van verliezen winstrechtloze aandelen"/>
+     <account type="16" name="Beginbalans winstrechtloze aandelen"/>
+     <account type="16" name="Inkoop winstrechtloze aandelen"/>
+     <account type="16" name="Intrekking winstrechtloze aandelen"/>
+     <account type="16" name="Overige mutaties winstrechtloze aandelen"/>
+     <account type="16" name="Stortingen door aandeelhouders winstrechtloze aandelen"/>
+     <account type="16" name="Stortingsplicht winstrechtloze aandelen"/>
+     <account type="16" name="Uitgeoefende aandelen(optie)regelingen winstrechtloze aandelen"/>
+     <account type="16" name="Uitgifte winstrechtloze aandelen"/>
+     <account type="16" name="Verkoop winstrechtloze aandelen"/>
+     <account type="16" name="Verleende aandelen(optie)regelingen winstrechtloze aandelen"/>
+    </account>
+    <account type="16" name="Zeggenschapsrechtloze aandelen">
+     <account type="16" name="Aanzuivering van verliezen zeggenschapsrechtloze aandelen"/>
+     <account type="16" name="Beginbalans zeggenschapsrechtloze aandelen"/>
+     <account type="16" name="Inkoop zeggenschapsrechtloze aandelen"/>
+     <account type="16" name="Intrekking zeggenschapsrechtloze aandelen"/>
+     <account type="16" name="Overige mutaties zeggenschapsrechtloze aandelen"/>
+     <account type="16" name="Stortingen door aandeelhouders zeggenschapsrechtloze aandelen"/>
+     <account type="16" name="Stortingsplicht zeggenschapsrechtloze aandelen"/>
+     <account type="16" name="Uitgeoefende aandelen(optie)regelingen zeggenschapsrechtloze aandelen"/>
+     <account type="16" name="Uitgifte zeggenschapsrechtloze aandelen"/>
+     <account type="16" name="Verkoop zeggenschapsrechtloze aandelen"/>
+     <account type="16" name="Verleende aandelen(optie)regelingen zeggenschapsrechtloze aandelen"/>
+    </account>
+   </account>
+   <account type="16" name="Herwaarderingsreserves">
+    <account type="16" name="Herwaarderingsreserve">
+     <account type="16" name="Beginbalans herwaarderingsreserve"/>
+     <account type="16" name="Belastingeffect van stelselwijziging herwaarderingsreserve"/>
+     <account type="16" name="Belastingeffecten op gerealiseerde herwaarderingen herwaarderingsreserve"/>
+     <account type="16" name="Belastingeffecten op gevormde herwaarderingen herwaarderingsreserve"/>
+     <account type="16" name="Gerealiseerde herwaarderingen via afgedekt actief of passief herwaarderingsreserve"/>
+     <account type="16" name="Gerealiseerde herwaarderingen via overige reserves herwaarderingsreserve"/>
+     <account type="16" name="Gerealiseerde herwaarderingen via winst-en-verliesrekening herwaarderingsreserve"/>
+     <account type="16" name="Gevormde herwaarderingen via afgedekt actief of passief herwaarderingsreserve"/>
+     <account type="16" name="Gevormde herwaarderingen via overige reserves herwaarderingsreserve"/>
+     <account type="16" name="Gevormde herwaarderingen via winst-en-verliesrekening herwaarderingsreserve"/>
+     <account type="16" name="Herwaarderingen herwaarderingsreserve"/>
+     <account type="16" name="Overige mutaties herwaarderingsreserve"/>
+     <account type="16" name="Stelselwijziging herwaarderingsreserve"/>
+     <account type="16" name="Vrijval herwaardering herwaarderingsreserve"/>
+    </account>
+   </account>
+   <account type="16" name="Kapitaal">
+    <account type="16" name="Commanditair kapitaal">
+     <account type="16" name="Beginbalans commanditair kapitaal"/>
+     <account type="16" name="Kapitaalcorrecties commanditair kapitaal"/>
+     <account type="16" name="Kapitaalmutaties commanditair kapitaal"/>
+     <account type="16" name="Overige mutaties commanditair kapitaal"/>
+    </account>
+    <account type="16" name="Informeel kapitaal">
+     <account type="16" name="Beginbalans informeel kapitaal"/>
+     <account type="16" name="Kapitaalcorrecties informeel kapitaal"/>
+     <account type="16" name="Kapitaalmutaties informeel kapitaal"/>
+     <account type="16" name="Overige mutaties informeel kapitaal"/>
+    </account>
+    <account type="16" name="Ondernemingsvermogen">
+     <account type="16" name="Beginbalans ondernemingsvermogen"/>
+     <account type="16" name="Inbreng ondernemingsvermogen bij toetreden"/>
+     <account type="16" name="Kapitaalcorrecties ondernemingsvermogen"/>
+     <account type="16" name="Overige mutaties ondernemingsvermogen"/>
+     <account type="16" name="Uitkering ondernemingsvermogen bij uittreden"/>
+    </account>
+    <account type="16" name="Privé-opnamen">
+     <account type="16" name="Beginbalans privé-opnamen"/>
+     <account type="16" name="Dotatie Fiscale Oudedags Reserve"/>
+     <account type="16" name="Overige privé-opnamen"/>
+     <account type="16" name="Privé-aandeel in zakelijke lasten"/>
+     <account type="16" name="Privé-aflossingen en rente"/>
+     <account type="16" name="Privé-aftrekbare kosten"/>
+     <account type="16" name="Privé-belastingen"/>
+     <account type="16" name="Privé-gebruik materiële vaste activa"/>
+     <account type="16" name="Privé-opname kapitaal"/>
+     <account type="16" name="Privé-premies"/>
+     <account type="16" name="Privé-verbruik goederen"/>
+    </account>
+    <account type="16" name="Privé-stortingen">
+     <account type="16" name="Beginbalans privé-stortingen"/>
+     <account type="16" name="Ontvangen kostenvergoedingen"/>
+     <account type="16" name="Ontvangen loon, uitkeringen of pensioenen"/>
+     <account type="16" name="Ontvangen schenkingen"/>
+     <account type="16" name="Ontvangen toeslagen en toelagen"/>
+     <account type="16" name="Opname privé-financieringen"/>
+     <account type="16" name="Opname privé-spaargelden"/>
+     <account type="16" name="Overige privé-stortingen"/>
+     <account type="16" name="Privé-betaalde zakelijke lasten"/>
+     <account type="16" name="Privé-storting kapitaal"/>
+     <account type="16" name="Verkoop privé-bezittingen"/>
+    </account>
+    <account type="16" name="Resultaat van het boekjaar">
+     <account type="16" name="Aandeel in de overwinst"/>
+     <account type="16" name="Arbeidsvergoeding"/>
+     <account type="16" name="Beginbalans resultaat van het boekjaar"/>
+     <account type="16" name="Overige mutaties"/>
+     <account type="16" name="Rente geïnvesteerd  vermogen"/>
+     <account type="16" name="Vergoeding buitenvennootschappelijk vermogen"/>
+    </account>
+    <account type="16" name="Stichtingskapitaal">
+     <account type="16" name="Beginbalans stichtingskapitaal"/>
+     <account type="16" name="Kapitaalcorrecties stichtingskapitaal"/>
+     <account type="16" name="Kapitaalmutaties stichtingskapitaal"/>
+     <account type="16" name="Overige mutaties stichtingskapitaal"/>
+    </account>
+    <account type="16" name="Verenigingskapitaal">
+     <account type="16" name="Beginbalans verenigingskapitaal"/>
+     <account type="16" name="Kapitaalcorrecties verenigingskapitaal"/>
+     <account type="16" name="Kapitaalmutaties verenigingskapitaal"/>
+     <account type="16" name="Overige mutaties verenigingskapitaal"/>
+    </account>
+   </account>
+   <account type="16" name="Overige reserves">
+    <account type="16" name="Onverdeelde winst">
+     <account type="16" name="Allocatie onverdeelde winst"/>
+     <account type="16" name="Beginbalans onverdeelde winst"/>
+     <account type="16" name="Dividenduitkeringen onverdeelde winst"/>
+     <account type="16" name="Overboekingen onverdeelde winst"/>
+     <account type="16" name="Overige mutaties onverdeelde winst"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van afstotingen onverdeelde winst"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van financiële instrumenten onverdeelde winst"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van fundamentele fouten onverdeelde winst"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van goodwill onverdeelde winst"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van omrekeningsverschillen onverdeelde winst"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van overnames onverdeelde winst"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van stelselwijzigingen onverdeelde winst"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van terugneming van waardeverminderingen onverdeelde winst"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van waardeverminderingen onverdeelde winst"/>
+    </account>
+    <account type="16" name="Resultaat van het boekjaar">
+     <account type="16" name="Allocatie resultaat van het boekjaar"/>
+     <account type="16" name="Beginbalans resultaat van het boekjaar"/>
+     <account type="16" name="Dividenduitkeringen resultaat van het boekjaar"/>
+     <account type="16" name="Overboekingen resultaat van het boekjaar"/>
+     <account type="16" name="Overige mutaties resultaat van het boekjaar"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van afstotingen resultaat van het boekjaar"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van financiële instrumenten resultaat van het boekjaar"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van fundamentele fouten resultaat van het boekjaar"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van goodwill resultaat van het boekjaar"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van omrekeningsverschillen resultaat van het boekjaar"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van overnames resultaat van het boekjaar"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van stelselwijzigingen resultaat van het boekjaar"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van terugneming van waardeverminderingen resultaat van het boekjaar"/>
+     <account type="16" name="Rechtstreekse mutatie als gevolg van waardeverminderingen resultaat van het boekjaar"/>
+    </account>
+   </account>
+   <account type="16" name="Statutaire reserves">
+    <account type="16" name="Bestemmingsreserve">
+     <account type="16" name="Beginbalans bestemmingsreserve"/>
+     <account type="16" name="Dotatie bestemmingsreserve"/>
+     <account type="16" name="Onttrekking bestemmingsreserve"/>
+     <account type="16" name="Overige mutaties bestemmingsreserve"/>
+    </account>
+    <account type="16" name="Continuïteitsreserve">
+     <account type="16" name="Beginbalans continuïteitsreserve"/>
+     <account type="16" name="Dotatie continuïteitsreserve"/>
+     <account type="16" name="Onttrekking continuïteitsreserve"/>
+     <account type="16" name="Overige mutaties continuïteitsreserve"/>
+    </account>
+    <account type="16" name="Statutaire reserve">
+     <account type="16" name="Beginbalans statutaire reserve"/>
+     <account type="16" name="Dotatie statutaire reserve"/>
+     <account type="16" name="Onttrekking statutaire reserve"/>
+     <account type="16" name="Overige mutaties statutaire reserve"/>
+    </account>
+   </account>
+   <account type="16" name="Wettelijke reserves">
+    <account type="16" name="Negatieve bijschrijvingsreserve als gevolg van de omrekening van het aandelenkapitaal naar de euro">
+     <account type="16" name="Beginbalans negatieve bijschrijvingsreserve als gevolg van de omrekening van het aandelenkapitaal naar de euro"/>
+     <account type="16" name="Dotatie negatieve bijschrijvingsreserve als gevolg van de omrekening van het aandelenkapitaal naar de euro"/>
+     <account type="16" name="Onttrekking negatieve bijschrijvingsreserve als gevolg van de omrekening van het aandelenkapitaal naar de euro"/>
+     <account type="16" name="Overige mutaties negatieve bijschrijvingsreserve als gevolg van de omrekening van het aandelenkapitaal naar de euro"/>
+    </account>
+    <account type="16" name="Reserve deelnemingen">
+     <account type="16" name="Beginbalans reserve deelnemingen"/>
+     <account type="16" name="Dotatie reserve deelnemingen"/>
+     <account type="16" name="Onttrekking reserve deelnemingen"/>
+     <account type="16" name="Overige mutaties reserve deelnemingen"/>
+    </account>
+    <account type="16" name="Reserve voor geactiveerde kosten van onderzoek en ontwikkeling">
+     <account type="16" name="Beginbalans reserve voor geactiveerde kosten van onderzoek en ontwikkeling"/>
+     <account type="16" name="Dotatie reserve voor geactiveerde kosten van onderzoek en ontwikkeling"/>
+     <account type="16" name="Onttrekking reserve voor geactiveerde kosten van onderzoek en ontwikkeling"/>
+     <account type="16" name="Overige mutaties reserve voor geactiveerde kosten van onderzoek en ontwikkeling"/>
+    </account>
+    <account type="16" name="Reserve voor geactiveerde kosten van oprichting en uitgifte van aandelen">
+     <account type="16" name="Beginbalans reserve voor geactiveerde kosten van oprichting en uitgifte van aandelen"/>
+     <account type="16" name="Dotatie reserve voor geactiveerde kosten van oprichting en uitgifte van aandelen"/>
+     <account type="16" name="Onttrekking reserve voor geactiveerde kosten van oprichting en uitgifte van aandelen"/>
+     <account type="16" name="Overige mutaties reserve voor geactiveerde kosten van oprichting en uitgifte van aandelen"/>
+    </account>
+    <account type="16" name="Reserve voor inbreng anders dan in geld">
+     <account type="16" name="Beginbalans reserve voor inbreng anders dan in geld"/>
+     <account type="16" name="Dotatie reserve voor inbreng anders dan in geld"/>
+     <account type="16" name="Onttrekking reserve voor inbreng anders dan in geld"/>
+     <account type="16" name="Overige mutaties reserve voor inbreng anders dan in geld"/>
+    </account>
+    <account type="16" name="Reserve voor lager aandelenkapitaal als gevolg van de omrekening van het aandelenkapitaal naar de euro">
+     <account type="16" name="Beginbalans reserve voor lager aandelenkapitaal als gevolg van de omrekening van het aandelenkapitaal naar de euro"/>
+     <account type="16" name="Dotatie reserve voor lager aandelenkapitaal als gevolg van de omrekening van het aandelenkapitaal naar de euro"/>
+     <account type="16" name="Onttrekking reserve voor lager aandelenkapitaal als gevolg van de omrekening van het aandelenkapitaal naar de euro"/>
+     <account type="16" name="Overige mutaties reserve voor lager aandelenkapitaal als gevolg van de omrekening van het aandelenkapitaal naar de euro"/>
+    </account>
+    <account type="16" name="Reserve voor leningen verstrekt met het oog op het verkrijgen van eigen aandelen">
+     <account type="16" name="Beginbalans reserve voor leningen verstrekt met het oog op het verkrijgen van eigen aandelen"/>
+     <account type="16" name="Dotatie reserve voor leningen verstrekt met het oog op het verkrijgen van eigen aandelen"/>
+     <account type="16" name="Onttrekking reserve voor leningen verstrekt met het oog op het verkrijgen van eigen aandelen"/>
+     <account type="16" name="Overige mutaties reserve voor leningen verstrekt met het oog op het verkrijgen van eigen aandelen"/>
+    </account>
+    <account type="16" name="Reserve voor omrekeningsverschillen">
+     <account type="16" name="Beginbalans reserve voor omrekeningsverschillen"/>
+     <account type="16" name="Dotatie reserve voor omrekeningsverschillen"/>
+     <account type="16" name="Onttrekking reserve voor omrekeningsverschillen"/>
+     <account type="16" name="Overige mutaties reserve voor omrekeningsverschillen"/>
+    </account>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Bijzondere waardevermindering van financiële vaste activa en vlottende activa">
+    <account type="12" name="Deelnemingen"/>
+    <account type="12" name="Kortlopende vorderingen"/>
+    <account type="12" name="Langlopende vorderingen op deelnemingen"/>
+    <account type="12" name="Liquide middelen"/>
+    <account type="12" name="Overige effecten"/>
+    <account type="12" name="Overige vorderingen"/>
+    <account type="12" name="Rekening-courant aandeelhouder"/>
+    <account type="12" name="Rekening-courant directie"/>
+    <account type="12" name="Rekening-courant met deelnemingen"/>
+   </account>
+   <account type="12" name="Doorberekende financiële baten en lasten">
+    <account type="12" name="Doorberekende overige financiële baten en lasten"/>
+    <account type="12" name="Doorberekende rentebaten"/>
+    <account type="12" name="Doorberekende rentelasten"/>
+   </account>
+   <account type="12" name="Kosten van beheer en administratie">
+    <account type="12" name="Kosten van beheer en administratie"/>
+   </account>
+   <account type="12" name="Kosten van beleggingen">
+    <account type="12" name="Kosten van beleggingen"/>
+   </account>
+   <account type="12" name="Overige rentebaten">
+    <account type="12" name="Andere rentebaten en soortgelijke opbrengsten"/>
+    <account type="12" name="Rentebaten belastingen"/>
+   </account>
+   <account type="12" name="Overige rentelasten">
+    <account type="12" name="Rentelasten belastingen"/>
+    <account type="12" name="Rentelasten lijfrenteverplichtingen"/>
+    <account type="12" name="Rentelasten overige schulden"/>
+    <account type="12" name="Rentelasten pensioenverplichtingen"/>
+   </account>
+   <account type="12" name="Rente liquide middelen">
+    <account type="12" name="Ontvangen bankrente"/>
+    <account type="12" name="Ontvangen depositorente"/>
+   </account>
+   <account type="12" name="Rente- en soortgelijke lasten">
+    <account type="12" name="Rentelasten achtergestelde leningen"/>
+    <account type="12" name="Rentelasten financieringen"/>
+    <account type="12" name="Rentelasten hypethecaire leningen"/>
+    <account type="12" name="Rentelasten leaseverplichtingen"/>
+    <account type="12" name="Rentelasten obligatieleningen"/>
+    <account type="12" name="Rentelasten onderhandse leningen"/>
+    <account type="12" name="Rentelasten overige leningen"/>
+    <account type="12" name="Rentelasten schulden aan aandeelhouders"/>
+    <account type="12" name="Rentelasten schulden aan deelnemingen binnenland"/>
+    <account type="12" name="Rentelasten schulden aan deelnemingen buitenland"/>
+    <account type="12" name="Rentelasten schulden aan directie"/>
+    <account type="12" name="Rentelasten schulden groepsmaatschappijen binnenland"/>
+    <account type="12" name="Rentelasten schulden groepsmaatschappijen buitenland"/>
+    <account type="12" name="Rentelasten schulden participanten en overige deelnemingen"/>
+   </account>
+   <account type="12" name="Rente- en soortgelijke opbrengsten financiële activa">
+    <account type="12" name="Dividend effecten"/>
+    <account type="12" name="Opbrengst overige effecten"/>
+    <account type="12" name="Rentebaten overige rekeningen-courant"/>
+    <account type="12" name="Rentebaten overige vorderingen"/>
+    <account type="12" name="Rentebaten vorderingen groepsmaatschappijen binnenland"/>
+    <account type="12" name="Rentebaten vorderingen groepsmaatschappijen buitenland"/>
+    <account type="12" name="Rentebaten vorderingen op aandeelhouders"/>
+    <account type="12" name="Rentebaten vorderingen op deelnemingen binnenland"/>
+    <account type="12" name="Rentebaten vorderingen op deelnemingen buitenland"/>
+    <account type="12" name="Rentebaten vorderingen op directie"/>
+    <account type="12" name="Rentebaten vorderingen participanten en overige deelnemingen"/>
+   </account>
+   <account type="12" name="Resultaat deelnemingen (dividend)">
+    <account type="12" name="Aandeel in winst (verlies) bestuurders"/>
+    <account type="12" name="Aandeel in winst (verlies) van ondernemingen waarin wordt deelgenomen"/>
+    <account type="12" name="Dotatie voorziening in verband met deelnemingen"/>
+    <account type="12" name="Vrijval voorziening in verband met deelnemingen"/>
+   </account>
+   <account type="12" name="Wisselkoersverschillen">
+    <account type="12" name="Wisselkoersverschillen"/>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Andere deelnemingen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen andere deelnemingen">
+     <account type="9" name="Afschrijvingen andere deelnemingen"/>
+     <account type="9" name="Beginbalans andere deelnemingen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen andere deelnemingen"/>
+     <account type="9" name="Terugneming van waardeverminderingen andere deelnemingen"/>
+     <account type="9" name="Waardeverminderingen andere deelnemingen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen andere deelnemingen">
+     <account type="9" name="Afschrijving herwaarderingen andere deelnemingen"/>
+     <account type="9" name="Beginbalans andere deelnemingen"/>
+     <account type="9" name="Desinvestering herwaarderingen andere deelnemingen"/>
+     <account type="9" name="Herwaarderingen andere deelnemingen"/>
+    </account>
+    <account type="9" name="Kostprijs andere deelnemingen">
+     <account type="9" name="Aandeel in directe vermogenstransacties andere deelnemingen"/>
+     <account type="9" name="Aankopen door overnames andere deelnemingen"/>
+     <account type="9" name="Beginbalans andere deelnemingen"/>
+     <account type="9" name="Desinvesteringen andere deelnemingen"/>
+     <account type="9" name="Desinvesteringen door afstotingen andere deelnemingen"/>
+     <account type="9" name="Investeringen andere deelnemingen"/>
+     <account type="9" name="Omrekeningsverschillen andere deelnemingen"/>
+     <account type="9" name="Overige mutaties andere deelnemingen"/>
+    </account>
+   </account>
+   <account type="9" name="Deelnemingen in groepsmaatschappijen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen deelnemingen in groepsmaatschappijen">
+     <account type="9" name="Afschrijvingen deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Beginbalans deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Terugneming van waardeverminderingen deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Waardeverminderingen deelnemingen in groepsmaatschappijen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen deelnemingen in groepsmaatschappijen">
+     <account type="9" name="Afschrijving herwaarderingen deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Beginbalans deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Desinvestering herwaarderingen deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Herwaarderingen deelnemingen in groepsmaatschappijen"/>
+    </account>
+    <account type="9" name="Netto vermogenswaarde deelnemingen in groepsmaatschappijen">
+     <account type="9" name="Aandeel in directe vermogenstransacties deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Aandeel in resultaat deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Aankopen door overnames deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Beginbalans deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Desinvesteringen deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Desinvesteringen door afstotingen deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Dividend van deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Investeringen deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Omrekeningsverschillen deelnemingen in groepsmaatschappijen"/>
+     <account type="9" name="Overige mutaties deelnemingen in groepsmaatschappijen"/>
+    </account>
+   </account>
+   <account type="9" name="Deelnemingen in overige verbonden maatschappijen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen deelnemingen in overige verbonden maatschappijen">
+     <account type="9" name="Afschrijvingen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Beginbalans deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Terugneming van waardeverminderingen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Waardeverminderingen deelnemingen in overige verbonden maatschappijen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen deelnemingen in overige verbonden maatschappijen">
+     <account type="9" name="Afschrijving herwaarderingen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Beginbalans deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Desinvestering herwaarderingen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Herwaarderingen deelnemingen in overige verbonden maatschappijen"/>
+    </account>
+    <account type="9" name="Kostprijs deelnemingen in overige verbonden maatschappijen">
+     <account type="9" name="Aandeel in directe vermogenstransacties deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Aankopen door overnames deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Beginbalans deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Desinvesteringen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Desinvesteringen door afstotingen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Investeringen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Omrekeningsverschillen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Overige mutaties deelnemingen in overige verbonden maatschappijen"/>
+    </account>
+    <account type="9" name="Netto vermogenswaarde deelnemingen in overige verbonden maatschappijen">
+     <account type="9" name="Aandeel in directe vermogenstransacties deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Aandeel in resultaat deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Aankopen door overnames deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Beginbalans deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Desinvesteringen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Desinvesteringen door afstotingen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Dividend van deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Investeringen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Omrekeningsverschillen deelnemingen in overige verbonden maatschappijen"/>
+     <account type="9" name="Overige mutaties deelnemingen in overige verbonden maatschappijen"/>
+    </account>
+   </account>
+   <account type="9" name="Latente belastingvorderingen">
+    <account type="9" name="Latente belastingvorderingen (langlopend)">
+     <account type="9" name="Beginbalans latente belastingvorderingen (langlopend)"/>
+     <account type="9" name="Belastingeffect van stelselwijziging latente belastingvorderingen (langlopend)"/>
+     <account type="9" name="Belastingeffecten op gerealiseerde herwaarderingen latente belastingvorderingen (langlopend)"/>
+     <account type="9" name="Belastingeffecten op gevormde herwaarderingen latente belastingvorderingen (langlopend)"/>
+     <account type="9" name="Overige mutaties latente belastingvorderingen (langlopend)"/>
+    </account>
+   </account>
+   <account type="9" name="Overige effecten">
+    <account type="9" name="Cumulatieve herwaarderingen overige effecten">
+     <account type="9" name="Afschrijving herwaarderingen overige effecten"/>
+     <account type="9" name="Beginbalans overige effecten"/>
+     <account type="9" name="Desinvestering herwaarderingen overige effecten"/>
+     <account type="9" name="Herwaarderingen overige effecten"/>
+    </account>
+    <account type="9" name="Cumulatieve waardeverminderingen overige effecten">
+     <account type="9" name="Beginbalans overige effecten"/>
+     <account type="9" name="Terugneming van waardeverminderingen overige effecten"/>
+     <account type="9" name="Waardeverminderingen overige effecten"/>
+    </account>
+    <account type="9" name="Waarde overige effecten">
+     <account type="9" name="Aankoop overige effecten"/>
+     <account type="9" name="Beginbalans overige effecten"/>
+     <account type="9" name="Investeringen overige effecten"/>
+     <account type="9" name="Omrekeningsverschillen overige effecten"/>
+     <account type="9" name="Overige mutaties overige effecten"/>
+     <account type="9" name="Verkoop overige effecten"/>
+     <account type="9" name="Waardestijgingen overige effecten"/>
+    </account>
+   </account>
+   <account type="9" name="Overige vorderingen">
+    <account type="9" name="Overige vorderingen (langlopend)">
+     <account type="9" name="Aandeel in directe vermogenstransacties overige vorderingen (langlopend)"/>
+     <account type="9" name="Aankopen door overnames overige vorderingen (langlopend)"/>
+     <account type="9" name="Aflossingen overige vorderingen (langlopend)"/>
+     <account type="9" name="Beginbalans overige vorderingen (langlopend)"/>
+     <account type="9" name="Omrekeningsverschillen overige vorderingen (langlopend)"/>
+     <account type="9" name="Overige mutaties overige vorderingen (langlopend)"/>
+     <account type="9" name="Terugneming van waardeverminderingen overige vorderingen (langlopend)"/>
+     <account type="9" name="Verstrekkingen overige vorderingen (langlopend)"/>
+     <account type="9" name="Waardeverminderingen overige vorderingen (langlopend)"/>
+    </account>
+    <account type="9" name="Subsidievorderingen">
+     <account type="9" name="Aandeel in directe vermogenstransacties subsidievorderingen"/>
+     <account type="9" name="Aankopen door overnames subsidievorderingen"/>
+     <account type="9" name="Aflossingen subsidievorderingen"/>
+     <account type="9" name="Beginbalans subsidievorderingen"/>
+     <account type="9" name="Omrekeningsverschillen subsidievorderingen"/>
+     <account type="9" name="Overige mutaties subsidievorderingen"/>
+     <account type="9" name="Terugneming van waardeverminderingen subsidievorderingen"/>
+     <account type="9" name="Verstrekkingen subsidievorderingen"/>
+     <account type="9" name="Waardeverminderingen subsidievorderingen"/>
+    </account>
+    <account type="9" name="Vorderingen op bestuurders">
+     <account type="9" name="Aandeel in directe vermogenstransacties vorderingen op bestuurders"/>
+     <account type="9" name="Aankopen door overnames vorderingen op bestuurders"/>
+     <account type="9" name="Aflossingen vorderingen op bestuurders"/>
+     <account type="9" name="Beginbalans vorderingen op bestuurders"/>
+     <account type="9" name="Omrekeningsverschillen vorderingen op bestuurders"/>
+     <account type="9" name="Overige mutaties vorderingen op bestuurders"/>
+     <account type="9" name="Terugneming van waardeverminderingen vorderingen op bestuurders"/>
+     <account type="9" name="Verstrekkingen vorderingen op bestuurders"/>
+     <account type="9" name="Waardeverminderingen vorderingen op bestuurders"/>
+    </account>
+   </account>
+   <account type="9" name="Vorderingen op groepsmaatschappijen">
+    <account type="9" name="Vorderingen op groepsmaatschappijen (langlopend)">
+     <account type="9" name="Aandeel in directe vermogenstransacties vorderingen op groepsmaatschappijen (langlopend)"/>
+     <account type="9" name="Aankopen door overnames vorderingen op groepsmaatschappijen (langlopend)"/>
+     <account type="9" name="Aflossingen vorderingen op groepsmaatschappijen (langlopend)"/>
+     <account type="9" name="Beginbalans vorderingen op groepsmaatschappijen (langlopend)"/>
+     <account type="9" name="Kortlopend deel vorderingen op groepsmaatschappijen (langlopend)"/>
+     <account type="9" name="Omrekeningsverschillen vorderingen op groepsmaatschappijen (langlopend)"/>
+     <account type="9" name="Overige mutaties vorderingen op groepsmaatschappijen (langlopend)"/>
+     <account type="9" name="Terugneming van waardeverminderingen vorderingen op groepsmaatschappijen (langlopend)"/>
+     <account type="9" name="Verstrekkingen vorderingen op groepsmaatschappijen (langlopend)"/>
+     <account type="9" name="Waardeverminderingen vorderingen op groepsmaatschappijen (langlopend)"/>
+    </account>
+   </account>
+   <account type="9" name="Vorderingen op overige verbonden maatschappijen">
+    <account type="9" name="Vorderingen op overige verbonden maatschappijen (langlopend)">
+     <account type="9" name="Aandeel in directe vermogenstransacties vorderingen op overige verbonden maatschappijen (langlopend)"/>
+     <account type="9" name="Aankopen door overnames vorderingen op overige verbonden maatschappijen (langlopend)"/>
+     <account type="9" name="Aflossingen vorderingen op overige verbonden maatschappijen (langlopend)"/>
+     <account type="9" name="Beginbalans vorderingen op overige verbonden maatschappijen (langlopend)"/>
+     <account type="9" name="Kortlopend deel vorderingen op overige verbonden maatschappijen (langlopend)"/>
+     <account type="9" name="Omrekeningsverschillen vorderingen op overige verbonden maatschappijen (langlopend)"/>
+     <account type="9" name="Overige mutaties vorderingen op overige verbonden maatschappijen (langlopend)"/>
+     <account type="9" name="Terugneming van waardeverminderingen vorderingen op overige verbonden maatschappijen (langlopend)"/>
+     <account type="9" name="Verstrekkingen vorderingen op overige verbonden maatschappijen (langlopend)"/>
+     <account type="9" name="Waardeverminderingen vorderingen op overige verbonden maatschappijen (langlopend)"/>
+    </account>
+   </account>
+   <account type="9" name="Vorderingen op participanten en op maatschappijen waarin wordt deelgenomen">
+    <account type="9" name="Vorderingen op participanten en op maatschappijen waarin wordt deelgenomen (langlopend)">
+     <account type="9" name="Aandeel in directe vermogenstransacties vorderingen op participanten en op maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="9" name="Aankopen door overnames vorderingen op participanten en op maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="9" name="Aflossingen vorderingen op participanten en op maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="9" name="Beginbalans vorderingen op participanten en op maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="9" name="Kortlopend deel vorderingen op participanten en op maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="9" name="Omrekeningsverschillen vorderingen op participanten en op maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="9" name="Overige mutaties vorderingen op participanten en op maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="9" name="Terugneming van waardeverminderingen vorderingen op participanten en op maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="9" name="Verstrekkingen vorderingen op participanten en op maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="9" name="Waardeverminderingen vorderingen op participanten en op maatschappijen waarin wordt deelgenomen (langlopend)"/>
+    </account>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Bouwclaims">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen bouwclaims">
+     <account type="9" name="Afschrijvingen bouwclaims"/>
+     <account type="9" name="Beginbalans bouwclaims"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen bouwclaims"/>
+     <account type="9" name="Terugneming van waardeverminderingen bouwclaims"/>
+     <account type="9" name="Waardeverminderingen bouwclaims"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen bouwclaims">
+     <account type="9" name="Afschrijving herwaarderingen bouwclaims"/>
+     <account type="9" name="Beginbalans bouwclaims"/>
+     <account type="9" name="Desinvestering herwaarderingen bouwclaims"/>
+     <account type="9" name="Herwaarderingen bouwclaims"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs bouwclaims">
+     <account type="9" name="Aankopen door overnames bouwclaims"/>
+     <account type="9" name="Beginbalans bouwclaims"/>
+     <account type="9" name="Desinvesteringen bouwclaims"/>
+     <account type="9" name="Desinvesteringen door afstotingen bouwclaims"/>
+     <account type="9" name="Investeringen bouwclaims"/>
+     <account type="9" name="Omrekeningsverschillen bouwclaims"/>
+     <account type="9" name="Overige mutaties bouwclaims"/>
+    </account>
+   </account>
+   <account type="9" name="Concessies en vergunningen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen concessies en vergunningen">
+     <account type="9" name="Afschrijvingen concessies en vergunningen"/>
+     <account type="9" name="Beginbalans concessies en vergunningen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen concessies en vergunningen"/>
+     <account type="9" name="Terugneming van waardeverminderingen concessies en vergunningen"/>
+     <account type="9" name="Waardeverminderingen concessies en vergunningen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen concessies en vergunningen">
+     <account type="9" name="Afschrijving herwaarderingen concessies en vergunningen"/>
+     <account type="9" name="Beginbalans concessies en vergunningen"/>
+     <account type="9" name="Desinvestering herwaarderingen concessies en vergunningen"/>
+     <account type="9" name="Herwaarderingen concessies en vergunningen"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs concessies en vergunningen">
+     <account type="9" name="Aankopen door overnames concessies en vergunningen"/>
+     <account type="9" name="Beginbalans concessies en vergunningen"/>
+     <account type="9" name="Desinvesteringen concessies en vergunningen"/>
+     <account type="9" name="Desinvesteringen door afstotingen concessies en vergunningen"/>
+     <account type="9" name="Investeringen concessies en vergunningen"/>
+     <account type="9" name="Omrekeningsverschillen concessies en vergunningen"/>
+     <account type="9" name="Overige mutaties concessies en vergunningen"/>
+    </account>
+   </account>
+   <account type="9" name="Goodwill">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen goodwill">
+     <account type="9" name="Afschrijvingen goodwill"/>
+     <account type="9" name="Beginbalans goodwill"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen goodwill"/>
+     <account type="9" name="Terugneming van waardeverminderingen goodwill"/>
+     <account type="9" name="Waardeverminderingen goodwill"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen goodwill">
+     <account type="9" name="Afschrijving herwaarderingen goodwill"/>
+     <account type="9" name="Beginbalans goodwill"/>
+     <account type="9" name="Desinvestering herwaarderingen goodwill"/>
+     <account type="9" name="Herwaarderingen goodwill"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs goodwill">
+     <account type="9" name="Aankopen door overnames goodwill"/>
+     <account type="9" name="Beginbalans goodwill"/>
+     <account type="9" name="Desinvesteringen door afstotingen goodwill"/>
+     <account type="9" name="Desinvesteringen goodwill"/>
+     <account type="9" name="Investeringen goodwill"/>
+     <account type="9" name="Omrekeningsverschillen goodwill"/>
+     <account type="9" name="Overige mutaties goodwill"/>
+    </account>
+   </account>
+   <account type="9" name="Goodwill uit eerdere overnames">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen goodwill uit eerdere overnames">
+     <account type="9" name="Afschrijvingen goodwill uit eerdere overnames"/>
+     <account type="9" name="Beginbalans goodwill uit eerdere overnames"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen goodwill uit eerdere overnames"/>
+     <account type="9" name="Terugneming van waardeverminderingen goodwill uit eerdere overnames"/>
+     <account type="9" name="Waardeverminderingen goodwill uit eerdere overnames"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen goodwill uit eerdere overnames">
+     <account type="9" name="Afschrijving herwaarderingen goodwill uit eerdere overnames"/>
+     <account type="9" name="Beginbalans goodwill uit eerdere overnames"/>
+     <account type="9" name="Desinvestering herwaarderingen goodwill uit eerdere overnames"/>
+     <account type="9" name="Herwaarderingen goodwill uit eerdere overnames"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs goodwill uit eerdere overnames">
+     <account type="9" name="Aankopen door overnames goodwill uit eerdere overnames"/>
+     <account type="9" name="Beginbalans goodwill uit eerdere overnames"/>
+     <account type="9" name="Desinvesteringen door afstotingen goodwill uit eerdere overnames"/>
+     <account type="9" name="Desinvesteringen goodwill uit eerdere overnames"/>
+     <account type="9" name="Investeringen goodwill uit eerdere overnames"/>
+     <account type="9" name="Omrekeningsverschillen goodwill uit eerdere overnames"/>
+     <account type="9" name="Overige mutaties goodwill uit eerdere overnames"/>
+    </account>
+   </account>
+   <account type="9" name="Kosten van onderzoek en ontwikkeling">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen kosten van onderzoek en ontwikkeling">
+     <account type="9" name="Afschrijvingen kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Beginbalans kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Terugneming van waardeverminderingen kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Waardeverminderingen kosten van onderzoek en ontwikkeling"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen kosten van onderzoek en ontwikkeling">
+     <account type="9" name="Afschrijving herwaarderingen kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Beginbalans kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Desinvestering herwaarderingen kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Herwaarderingen kosten van onderzoek en ontwikkeling"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs kosten van onderzoek en ontwikkeling">
+     <account type="9" name="Aankopen door overnames kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Beginbalans kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Desinvesteringen door afstotingen kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Desinvesteringen kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Investeringen kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Omrekeningsverschillen kosten van onderzoek en ontwikkeling"/>
+     <account type="9" name="Overige mutaties kosten van onderzoek en ontwikkeling"/>
+    </account>
+   </account>
+   <account type="9" name="Kosten van oprichting en van uitgifte van aandelen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen kosten van oprichting en van uitgifte van aandelen">
+     <account type="9" name="Afschrijvingen kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Beginbalans kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Terugneming van waardeverminderingen kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Waardeverminderingen kosten van oprichting en van uitgifte van aandelen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen kosten van oprichting en van uitgifte van aandelen">
+     <account type="9" name="Afschrijving herwaarderingen kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Beginbalans kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Desinvestering herwaarderingen kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Herwaarderingen kosten van oprichting en van uitgifte van aandelen"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs kosten van oprichting en van uitgifte van aandelen">
+     <account type="9" name="Aankopen door overnames kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Beginbalans kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Desinvesteringen door afstotingen kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Desinvesteringen kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Investeringen kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Omrekeningsverschillen kosten van oprichting en van uitgifte van aandelen"/>
+     <account type="9" name="Overige mutaties kosten van oprichting en van uitgifte van aandelen"/>
+    </account>
+   </account>
+   <account type="9" name="Overig intellectueel eigendom">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen overig intellectueel eigendom">
+     <account type="9" name="Afschrijvingen overig intellectueel eigendom"/>
+     <account type="9" name="Beginbalans overig intellectueel eigendom"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen overig intellectueel eigendom"/>
+     <account type="9" name="Terugneming van waardeverminderingen overig intellectueel eigendom"/>
+     <account type="9" name="Waardeverminderingen overig intellectueel eigendom"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen overig intellectueel eigendom">
+     <account type="9" name="Afschrijving herwaarderingen overig intellectueel eigendom"/>
+     <account type="9" name="Beginbalans overig intellectueel eigendom"/>
+     <account type="9" name="Desinvestering herwaarderingen overig intellectueel eigendom"/>
+     <account type="9" name="Herwaarderingen overig intellectueel eigendom"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs overig intellectueel eigendom">
+     <account type="9" name="Aankopen door overnames overig intellectueel eigendom"/>
+     <account type="9" name="Beginbalans overig intellectueel eigendom"/>
+     <account type="9" name="Desinvesteringen door afstotingen overig intellectueel eigendom"/>
+     <account type="9" name="Desinvesteringen overig intellectueel eigendom"/>
+     <account type="9" name="Investeringen overig intellectueel eigendom"/>
+     <account type="9" name="Omrekeningsverschillen overig intellectueel eigendom"/>
+     <account type="9" name="Overige mutaties overig intellectueel eigendom"/>
+    </account>
+   </account>
+   <account type="9" name="Overige immateriële vaste activa">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen overige immateriële vaste activa">
+     <account type="9" name="Afschrijvingen overige immateriële vaste activa"/>
+     <account type="9" name="Beginbalans overige immateriële vaste activa"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen overige immateriële vaste activa"/>
+     <account type="9" name="Terugneming van waardeverminderingen overige immateriële vaste activa"/>
+     <account type="9" name="Waardeverminderingen overige immateriële vaste activa"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen overige immateriële vaste activa">
+     <account type="9" name="Afschrijving herwaarderingen overige immateriële vaste activa"/>
+     <account type="9" name="Beginbalans overige immateriële vaste activa"/>
+     <account type="9" name="Desinvestering herwaarderingen overige immateriële vaste activa"/>
+     <account type="9" name="Herwaarderingen overige immateriële vaste activa"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs overige immateriële vaste activa">
+     <account type="9" name="Aankopen door overnames overige immateriële vaste activa"/>
+     <account type="9" name="Beginbalans overige immateriële vaste activa"/>
+     <account type="9" name="Desinvesteringen door afstotingen overige immateriële vaste activa"/>
+     <account type="9" name="Desinvesteringen overige immateriële vaste activa"/>
+     <account type="9" name="Investeringen overige immateriële vaste activa"/>
+     <account type="9" name="Omrekeningsverschillen overige immateriële vaste activa"/>
+     <account type="9" name="Overige mutaties overige immateriële vaste activa"/>
+    </account>
+   </account>
+   <account type="9" name="Software">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen software">
+     <account type="9" name="Afschrijvingen software"/>
+     <account type="9" name="Beginbalans software"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen software"/>
+     <account type="9" name="Terugneming van waardeverminderingen software"/>
+     <account type="9" name="Waardeverminderingen software"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen software">
+     <account type="9" name="Afschrijving herwaarderingen software"/>
+     <account type="9" name="Beginbalans software"/>
+     <account type="9" name="Desinvestering herwaarderingen software"/>
+     <account type="9" name="Herwaarderingen software"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs software">
+     <account type="9" name="Aankopen door overnames software"/>
+     <account type="9" name="Beginbalans software"/>
+     <account type="9" name="Desinvesteringen door afstotingen software"/>
+     <account type="9" name="Desinvesteringen software"/>
+     <account type="9" name="Investeringen software"/>
+     <account type="9" name="Omrekeningsverschillen software"/>
+     <account type="9" name="Overige mutaties software"/>
+    </account>
+   </account>
+   <account type="9" name="Vooruitbetaald op immateriële vaste activa">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen vooruitbetaald op immateriële vaste activa">
+     <account type="9" name="Afschrijvingen vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Beginbalans vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Terugneming van waardeverminderingen vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Waardeverminderingen vooruitbetaald op immateriële vaste activa"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen vooruitbetaald op immateriële vaste activa">
+     <account type="9" name="Afschrijving herwaarderingen vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Beginbalans vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Desinvestering herwaarderingen vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Herwaarderingen vooruitbetaald op immateriële vaste activa"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs vooruitbetaald op immateriële vaste activa">
+     <account type="9" name="Aankopen door overnames vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Beginbalans vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Desinvesteringen door afstotingen vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Desinvesteringen vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Investeringen vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Omrekeningsverschillen vooruitbetaald op immateriële vaste activa"/>
+     <account type="9" name="Overige mutaties vooruitbetaald op immateriële vaste activa"/>
+    </account>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Betalingskortingen">
+    <account type="13" name="Betalingskorting crediteuren"/>
+    <account type="13" name="Betalingskorting debiteuren"/>
+   </account>
+   <account type="13" name="Inkoopkortingen en bonussen">
+    <account type="13" name="Inkoopkortingen en bonussen"/>
+   </account>
+   <account type="13" name="Inkoopwaarde handelsgoederen">
+    <account type="13" name="Inkoopwaarde handelsgoederen"/>
+   </account>
+   <account type="13" name="Inkoopwaarde productiegoederen">
+    <account type="13" name="Inkoopwaarde productiegoederen"/>
+   </account>
+   <account type="13" name="Kosten uitbesteed werk en andere externe kosten">
+    <account type="13" name="Kosten uitbesteed werk en andere externe kosten"/>
+   </account>
+   <account type="13" name="Kosten van grond- en hulpstoffen">
+    <account type="13" name="Kosten van grond- en hulpstoffen"/>
+   </account>
+   <account type="13" name="Kosten van personeel">
+    <account type="13" name="Kosten van personeel"/>
+   </account>
+   <account type="13" name="Kosten van rente en afschrijvingen">
+    <account type="13" name="Kosten van rente en afschrijvingen"/>
+   </account>
+   <account type="13" name="Kostprijs intercompany transacties">
+    <account type="13" name="Kostprijs intercompany transacties"/>
+   </account>
+   <account type="13" name="Mutatie omzetvorderingen">
+    <account type="13" name="Mutatie omzetvorderingen"/>
+   </account>
+   <account type="13" name="Privé-gebruik diensten">
+    <account type="13" name="Privé-gebruik diensten"/>
+   </account>
+   <account type="13" name="Privé-gebruik goederen">
+    <account type="13" name="Privé-gebruik goederen"/>
+   </account>
+   <account type="13" name="Voorraadmutatie">
+    <account type="13" name="Voorraadmutatie"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Crediteuren">
+    <account type="10" name="Handelscrediteuren"/>
+    <account type="10" name="Handelscrediteuren intercompany"/>
+    <account type="10" name="Kostencrediteuren"/>
+    <account type="10" name="Vooruitontvangen op bestellingen"/>
+   </account>
+   <account type="10" name="Kortlopende leningen">
+    <account type="10" name="Achtergestelde leningen (kortlopend)"/>
+    <account type="10" name="Andere obligaties en onderhandse leningen (kortlopend)"/>
+    <account type="10" name="Converteerbare leningen (kortlopend)"/>
+    <account type="10" name="Financieringen van kredietinstellingen (kortlopend)"/>
+    <account type="10" name="Financiële lease verplichtingen (kortlopend)"/>
+    <account type="10" name="Hypotheken van kredietinstellingen (kortlopend)"/>
+    <account type="10" name="Leningen van kredietinstellingen (kortlopend)"/>
+    <account type="10" name="Operationele lease verplichtingen (kortlopend)"/>
+   </account>
+   <account type="10" name="Loonheffing">
+    <account type="10" name="Af te dragen loonheffing">
+     <account type="10" name="Aangifte loonheffing"/>
+     <account type="10" name="Afgedragen Loonheffing"/>
+     <account type="10" name="Beginbalans af te dragen loonheffing"/>
+     <account type="10" name="Naheffingsaanslagen loonheffing"/>
+     <account type="10" name="Overige mutaties loonheffing"/>
+    </account>
+   </account>
+   <account type="10" name="Omzetbelasting">
+    <account type="10" name="Af te dragen omzetbelasting">
+     <account type="10" name="Afgedragen omzetbelasting"/>
+     <account type="10" name="Beginbalans af te dragen omzetbelasting"/>
+     <account type="10" name="Naheffingsaanslagen omzetbelasting"/>
+     <account type="10" name="Omzetbelasting leveringen/diensten algemeen tarief"/>
+     <account type="10" name="Omzetbelasting leveringen/diensten overige tarieven"/>
+     <account type="10" name="Omzetbelasting leveringen/diensten uit landen binnen EU"/>
+     <account type="10" name="Omzetbelasting leveringen/diensten uit landen buiten de EU"/>
+     <account type="10" name="Omzetbelasting leveringen/diensten verlaagd tarief"/>
+     <account type="10" name="Omzetbelasting leveringen/diensten waarbij heffing is verlegd"/>
+     <account type="10" name="Omzetbelasting over privégebruik"/>
+     <account type="10" name="Overige mutaties omzetbelasting"/>
+     <account type="10" name="Schatting deze aangifte"/>
+     <account type="10" name="Schatting vorige aangifte(n)"/>
+     <account type="10" name="Vermindering volgens de kleineondernemersregeling"/>
+     <account type="10" name="Voorbelasting"/>
+    </account>
+   </account>
+   <account type="10" name="Overige belastingen">
+    <account type="10" name="Binnenlandse belastingen"/>
+    <account type="10" name="Buitenlandse belastingen"/>
+    <account type="10" name="Gemeentelijke belastingen"/>
+    <account type="10" name="Provinciale belastingen"/>
+   </account>
+   <account type="10" name="Overige schulden">
+    <account type="10" name="Giftenverplichtingen"/>
+    <account type="10" name="Overige schulden"/>
+    <account type="10" name="Overige schulden aan groepsmaatschappijen"/>
+    <account type="10" name="Overige schulden aan overige verbonden maatschappijen"/>
+    <account type="10" name="Overige schulden aan participanten en aan maatschappijen waarin wordt deelgenomen"/>
+    <account type="10" name="Rekening-courant bank"/>
+    <account type="10" name="Rekening-courant bestuurders"/>
+    <account type="10" name="Schulden aan aandeelhouders"/>
+    <account type="10" name="Schulden terzake van pensioenen"/>
+    <account type="10" name="Schulden uit hoofde van projecten"/>
+    <account type="10" name="Subsidieverplichtingen"/>
+    <account type="10" name="Te betalen dividend"/>
+    <account type="10" name="Te betalen wissels en cheques"/>
+    <account type="10" name="Verplichtingen aan overheid"/>
+    <account type="10" name="Verplichtingen uit hoofde van onroerende zaken verkocht onder voorwaarden"/>
+   </account>
+   <account type="10" name="Overlopende passiva">
+    <account type="10" name="Nog te betalen kosten"/>
+    <account type="10" name="Nog te ontvangen facturen"/>
+    <account type="10" name="Overige overlopende passiva"/>
+    <account type="10" name="Te betalen rente"/>
+    <account type="10" name="Vooruitontvangen rente"/>
+   </account>
+   <account type="10" name="Salarisverwerking">
+    <account type="10" name="Bruto lonen en salarissen"/>
+    <account type="10" name="Nettolonen"/>
+    <account type="10" name="Overige netto-afdrachten"/>
+    <account type="10" name="Pensioenpremies"/>
+    <account type="10" name="Personeelsfonds"/>
+    <account type="10" name="Premies sociale verzekeringen"/>
+    <account type="10" name="Reservering vakantiedagen"/>
+    <account type="10" name="Tantièmes"/>
+    <account type="10" name="Te betalen vakantiebijslag"/>
+    <account type="10" name="Vakantiebonnen"/>
+    <account type="10" name="Voorschotten personeel"/>
+   </account>
+   <account type="10" name="Schulden aan verbonden partijen">
+    <account type="10" name="Schulden aan groepsmaatschappijen (kortlopend)"/>
+    <account type="10" name="Schulden aan overige verbonden maatschappijen (kortlopend)"/>
+    <account type="10" name="Schulden aan participanten en aan maatschappijen waarin wordt deelgenomen (kortlopend)"/>
+   </account>
+   <account type="10" name="Vennootschapsbelasting">
+    <account type="10" name="Af te dragen vennootschapsbelasting">
+     <account type="10" name="Aangifte vennootschapsbelasting"/>
+     <account type="10" name="Aanslag vennootschapsbelasting"/>
+     <account type="10" name="Afgedragen vennootschapsbelasting"/>
+     <account type="10" name="Beginbalans af te dragen vennootschapsbelasting"/>
+     <account type="10" name="Naheffingsaanslagen vennootschapsbelasting"/>
+     <account type="10" name="Overige mutaties vennootschapsbelasting"/>
+     <account type="10" name="Te verrekenen vennootschapsbelasting"/>
+    </account>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Achtergestelde leningen">
+    <account type="10" name="Achtergestelde leningen (langlopend)">
+     <account type="10" name="Aflossingen achtergestelde leningen (langlopend)"/>
+     <account type="10" name="Aflossingsverplichtingen achtergestelde leningen (langlopend)"/>
+     <account type="10" name="Beginbalans achtergestelde leningen (langlopend)"/>
+     <account type="10" name="Hoofdsom achtergestelde leningen (langlopend)"/>
+     <account type="10" name="Omrekeningsverschillen achtergestelde leningen (langlopend)"/>
+     <account type="10" name="Overige mutaties achtergestelde leningen (langlopend)"/>
+     <account type="10" name="Toename achtergestelde leningen (langlopend)"/>
+    </account>
+   </account>
+   <account type="10" name="Andere obligaties en onderhandse leningen">
+    <account type="10" name="Andere obligaties en onderhandse leningen (langlopend)">
+     <account type="10" name="Aflossingen andere obligaties en onderhandse leningen (langlopend)"/>
+     <account type="10" name="Aflossingsverplichtingen andere obligaties en onderhandse leningen (langlopend)"/>
+     <account type="10" name="Beginbalans andere obligaties en onderhandse leningen (langlopend)"/>
+     <account type="10" name="Hoofdsom andere obligaties en onderhandse leningen (langlopend)"/>
+     <account type="10" name="Omrekeningsverschillen andere obligaties en onderhandse leningen (langlopend)"/>
+     <account type="10" name="Overige mutaties andere obligaties en onderhandse leningen (langlopend)"/>
+     <account type="10" name="Toename andere obligaties en onderhandse leningen (langlopend)"/>
+    </account>
+   </account>
+   <account type="10" name="Converteerbare leningen">
+    <account type="10" name="Converteerbare leningen (langlopend)">
+     <account type="10" name="Aflossingen converteerbare leningen (langlopend)"/>
+     <account type="10" name="Aflossingsverplichtingen converteerbare leningen (langlopend)"/>
+     <account type="10" name="Beginbalans converteerbare leningen (langlopend)"/>
+     <account type="10" name="Hoofdsom converteerbare leningen (langlopend)"/>
+     <account type="10" name="Omrekeningsverschillen converteerbare leningen (langlopend)"/>
+     <account type="10" name="Overige mutaties converteerbare leningen (langlopend)"/>
+     <account type="10" name="Toename converteerbare leningen (langlopend)"/>
+    </account>
+   </account>
+   <account type="10" name="Financiële lease verplichtingen">
+    <account type="10" name="Contante waarde, looptijd korter dan een jaar"/>
+    <account type="10" name="Contante waarde, looptijd langer dan een jaar en korter dan vijf jaar"/>
+    <account type="10" name="Contante waarde, looptijd langer dan vijf jaar"/>
+    <account type="10" name="Gegarandeerde restwaarde van de leaseobjecten die de lessor economisch toekomen"/>
+    <account type="10" name="Minimale lease betalingen, looptijd korter dan een jaar"/>
+    <account type="10" name="Minimale lease betalingen, looptijd langer dan een jaar en korter dan vijf jaar"/>
+    <account type="10" name="Minimale lease betalingen, looptijd langer dan vijf jaar"/>
+    <account type="10" name="Onverdiende rentebaten"/>
+    <account type="10" name="Te ontvangen toekomstige minimale sublease betalingen met betrekking tot niet tussentijds opzegbare subleases"/>
+    <account type="10" name="Voorwaardelijke lease betalingen"/>
+   </account>
+   <account type="10" name="Overige langlopende schulden">
+    <account type="10" name="Belastingen en premies sociale verzekeringen (langlopend)"/>
+    <account type="10" name="Giftenverplichtingen (langlopend)"/>
+    <account type="10" name="Overige schulden (langlopend)"/>
+    <account type="10" name="Overlopende passiva (langlopend)"/>
+    <account type="10" name="Schulden aan groepsmaatschappijen (langlopend)">
+     <account type="10" name="Aflossingen schulden aan groepsmaatschappijen (langlopend)"/>
+     <account type="10" name="Aflossingsverplichtingen schulden aan groepsmaatschappijen (langlopend)"/>
+     <account type="10" name="Beginbalans schulden aan groepsmaatschappijen (langlopend)"/>
+     <account type="10" name="Hoofdsom schulden aan groepsmaatschappijen (langlopend)"/>
+     <account type="10" name="Omrekeningsverschillen schulden aan groepsmaatschappijen (langlopend)"/>
+     <account type="10" name="Overige mutaties schulden aan groepsmaatschappijen (langlopend)"/>
+     <account type="10" name="Toename schulden aan groepsmaatschappijen (langlopend)"/>
+    </account>
+    <account type="10" name="Schulden aan leveranciers en handelskredieten (langlopend)"/>
+    <account type="10" name="Schulden aan overige verbonden maatschappijen (langlopend)">
+     <account type="10" name="Aflossingen schulden aan overige verbonden maatschappijen (langlopend)"/>
+     <account type="10" name="Aflossingsverplichtingen schulden aan overige verbonden maatschappijen (langlopend)"/>
+     <account type="10" name="Beginbalans schulden aan overige verbonden maatschappijen (langlopend)"/>
+     <account type="10" name="Hoofdsom schulden aan overige verbonden maatschappijen (langlopend)"/>
+     <account type="10" name="Omrekeningsverschillen schulden aan overige verbonden maatschappijen (langlopend)"/>
+     <account type="10" name="Overige mutaties schulden aan overige verbonden maatschappijen (langlopend)"/>
+     <account type="10" name="Toename schulden aan overige verbonden maatschappijen (langlopend)"/>
+    </account>
+    <account type="10" name="Schulden aan participanten en aan maatschappijen waarin wordt deelgenomen (langlopend)">
+     <account type="10" name="Aflossingen schulden aan participanten en aan maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="10" name="Aflossingsverplichtingen schulden aan participanten en aan maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="10" name="Beginbalans schulden aan participanten en aan maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="10" name="Hoofdsom schulden aan participanten en aan maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="10" name="Omrekeningsverschillen schulden aan participanten en aan maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="10" name="Overige mutaties schulden aan participanten en aan maatschappijen waarin wordt deelgenomen (langlopend)"/>
+     <account type="10" name="Toename schulden aan participanten en aan maatschappijen waarin wordt deelgenomen (langlopend)"/>
+    </account>
+    <account type="10" name="Schulden ter zake van pensioenen (langlopend)"/>
+    <account type="10" name="Subsidieverplichtingen (langlopend)"/>
+    <account type="10" name="Te betalen wissels en cheques (langlopend)"/>
+    <account type="10" name="Verplichtingen aan overheid (langlopend)"/>
+    <account type="10" name="Verplichtingen uit hoofde van onroerende zaken verkocht onder voorwaarden (langlopend)"/>
+    <account type="10" name="Vooruitontvangen op bestellingen (langlopend)"/>
+   </account>
+   <account type="10" name="Schulden aan kredietinstellingen">
+    <account type="10" name="Financieringen van kredietinstellingen (langlopend)">
+     <account type="10" name="Aflossingen financieringen van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Aflossingsverplichtingen financieringen van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Beginbalans financieringen van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Hoofdsom financieringen van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Omrekeningsverschillen financieringen van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Overige mutaties financieringen van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Toename financieringen van kredietinstellingen (langlopend)"/>
+    </account>
+    <account type="10" name="Hypotheken van kredietinstellingen (langlopend)">
+     <account type="10" name="Aflossingen hypotheken van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Aflossingsverplichtingen hypotheken van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Beginbalans hypotheken van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Hoofdsom hypotheken van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Omrekeningsverschillen hypotheken van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Overige mutaties hypotheken van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Toename hypotheken van kredietinstellingen (langlopend)"/>
+    </account>
+    <account type="10" name="Leningen van kredietinstellingen (langlopend)">
+     <account type="10" name="Aflossingen leningen van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Aflossingsverplichtingen leningen van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Beginbalans leningen van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Hoofdsom leningen van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Omrekeningsverschillen leningen van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Overige mutaties leningen van kredietinstellingen (langlopend)"/>
+     <account type="10" name="Toename leningen van kredietinstellingen (langlopend)"/>
+    </account>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="1" name="Bankrekeningen">
+    <account type="1" name="Beleggingsrekening"/>
+    <account type="1" name="Depositorekening"/>
+    <account type="1" name="Depotrekening"/>
+    <account type="1" name="Internetrekening"/>
+    <account type="1" name="Rekening-courant bank"/>
+   </account>
+   <account type="3" name="Kassen">
+    <account type="3" name="Kas"/>
+    <account type="3" name="Kleine kas"/>
+   </account>
+   <account type="9" name="Kruisposten">
+    <account type="9" name="Creditcard afrekening"/>
+    <account type="9" name="PIN betalingen"/>
+    <account type="9" name="Stortingen onderweg"/>
+    <account type="9" name="Wissels en cheques"/>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Bedrijfsgebouwen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen bedrijfsgebouwen">
+     <account type="9" name="Afschrijvingen bedrijfsgebouwen"/>
+     <account type="9" name="Beginbalans bedrijfsgebouwen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen bedrijfsgebouwen"/>
+     <account type="9" name="Terugneming van waardeverminderingen bedrijfsgebouwen"/>
+     <account type="9" name="Waardeverminderingen bedrijfsgebouwen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen bedrijfsgebouwen">
+     <account type="9" name="Afschrijving herwaarderingen bedrijfsgebouwen"/>
+     <account type="9" name="Beginbalans bedrijfsgebouwen"/>
+     <account type="9" name="Desinvestering herwaarderingen bedrijfsgebouwen"/>
+     <account type="9" name="Herwaarderingen bedrijfsgebouwen"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs bedrijfsgebouwen">
+     <account type="9" name="Aankopen door overnames bedrijfsgebouwen"/>
+     <account type="9" name="Beginbalans bedrijfsgebouwen"/>
+     <account type="9" name="Desinvesteringen bedrijfsgebouwen"/>
+     <account type="9" name="Desinvesteringen door afstotingen bedrijfsgebouwen"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd bedrijfsgebouwen"/>
+     <account type="9" name="Investeringen nieuw aangeschaft bedrijfsgebouwen"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft bedrijfsgebouwen"/>
+     <account type="9" name="Omrekeningsverschillen bedrijfsgebouwen"/>
+     <account type="9" name="Overboekingen bedrijfsgebouwen"/>
+     <account type="9" name="Overige mutaties bedrijfsgebouwen"/>
+    </account>
+   </account>
+   <account type="9" name="Bedrijfsinventaris">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen bedrijfsinventaris">
+     <account type="9" name="Afschrijvingen bedrijfsinventaris"/>
+     <account type="9" name="Beginbalans bedrijfsinventaris"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen bedrijfsinventaris"/>
+     <account type="9" name="Terugneming van waardeverminderingen bedrijfsinventaris"/>
+     <account type="9" name="Waardeverminderingen bedrijfsinventaris"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen bedrijfsinventaris">
+     <account type="9" name="Afschrijving herwaarderingen bedrijfsinventaris"/>
+     <account type="9" name="Beginbalans bedrijfsinventaris"/>
+     <account type="9" name="Desinvestering herwaarderingen bedrijfsinventaris"/>
+     <account type="9" name="Herwaarderingen bedrijfsinventaris"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs bedrijfsinventaris">
+     <account type="9" name="Aankopen door overnames bedrijfsinventaris"/>
+     <account type="9" name="Beginbalans bedrijfsinventaris"/>
+     <account type="9" name="Desinvesteringen bedrijfsinventaris"/>
+     <account type="9" name="Desinvesteringen door afstotingen bedrijfsinventaris"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd bedrijfsinventaris"/>
+     <account type="9" name="Investeringen nieuw aangeschaft bedrijfsinventaris"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft bedrijfsinventaris"/>
+     <account type="9" name="Omrekeningsverschillen bedrijfsinventaris"/>
+     <account type="9" name="Overboekingen bedrijfsinventaris"/>
+     <account type="9" name="Overige mutaties bedrijfsinventaris"/>
+    </account>
+   </account>
+   <account type="9" name="Commercieel vastgoed in exploitatie">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen commercieel vastgoed in exploitatie">
+     <account type="9" name="Afschrijvingen commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Beginbalans commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Terugneming van waardeverminderingen commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Waardeverminderingen commercieel vastgoed in exploitatie"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen commercieel vastgoed in exploitatie">
+     <account type="9" name="Afschrijving herwaarderingen commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Beginbalans commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Desinvestering herwaarderingen commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Herwaarderingen commercieel vastgoed in exploitatie"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs commercieel vastgoed in exploitatie">
+     <account type="9" name="Aankopen door overnames commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Beginbalans commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Desinvesteringen commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Desinvesteringen door afstotingen commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Investeringen nieuw aangeschaft commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Omrekeningsverschillen commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Overboekingen commercieel vastgoed in exploitatie"/>
+     <account type="9" name="Overige mutaties commercieel vastgoed in exploitatie"/>
+    </account>
+   </account>
+   <account type="9" name="Huurdersinvesteringen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen huurdersinvesteringen">
+     <account type="9" name="Afschrijvingen huurdersinvesteringen"/>
+     <account type="9" name="Beginbalans huurdersinvesteringen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen huurdersinvesteringen"/>
+     <account type="9" name="Terugneming van waardeverminderingen huurdersinvesteringen"/>
+     <account type="9" name="Waardeverminderingen huurdersinvesteringen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen huurdersinvesteringen">
+     <account type="9" name="Afschrijving herwaarderingen huurdersinvesteringen"/>
+     <account type="9" name="Beginbalans huurdersinvesteringen"/>
+     <account type="9" name="Desinvestering herwaarderingen huurdersinvesteringen"/>
+     <account type="9" name="Herwaarderingen huurdersinvesteringen"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs huurdersinvesteringen">
+     <account type="9" name="Aankopen door overnames huurdersinvesteringen"/>
+     <account type="9" name="Beginbalans huurdersinvesteringen"/>
+     <account type="9" name="Desinvesteringen door afstotingen huurdersinvesteringen"/>
+     <account type="9" name="Desinvesteringen huurdersinvesteringen"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd huurdersinvesteringen"/>
+     <account type="9" name="Investeringen nieuw aangeschaft huurdersinvesteringen"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft huurdersinvesteringen"/>
+     <account type="9" name="Omrekeningsverschillen huurdersinvesteringen"/>
+     <account type="9" name="Overboekingen huurdersinvesteringen"/>
+     <account type="9" name="Overige mutaties huurdersinvesteringen"/>
+    </account>
+   </account>
+   <account type="9" name="Machines en installaties">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen machines en installaties">
+     <account type="9" name="Afschrijvingen machines en installaties"/>
+     <account type="9" name="Beginbalans machines en installaties"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen machines en installaties"/>
+     <account type="9" name="Terugneming van waardeverminderingen machines en installaties"/>
+     <account type="9" name="Waardeverminderingen machines en installaties"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen machines en installaties">
+     <account type="9" name="Afschrijving herwaarderingen machines en installaties"/>
+     <account type="9" name="Beginbalans machines en installaties"/>
+     <account type="9" name="Desinvestering herwaarderingen machines en installaties"/>
+     <account type="9" name="Herwaarderingen machines en installaties"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs machines en installaties">
+     <account type="9" name="Aankopen door overnames machines en installaties"/>
+     <account type="9" name="Beginbalans machines en installaties"/>
+     <account type="9" name="Desinvesteringen door afstotingen machines en installaties"/>
+     <account type="9" name="Desinvesteringen machines en installaties"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd machines en installaties"/>
+     <account type="9" name="Investeringen nieuw aangeschaft machines en installaties"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft machines en installaties"/>
+     <account type="9" name="Omrekeningsverschillen machines en installaties"/>
+     <account type="9" name="Overboekingen machines en installaties"/>
+     <account type="9" name="Overige mutaties machines en installaties"/>
+    </account>
+   </account>
+   <account type="9" name="Niet aan de bedrijfsuitoefening dienstbaar">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen niet aan de bedrijfsuitoefening dienstbaar">
+     <account type="9" name="Afschrijvingen niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Beginbalans niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Terugneming van waardeverminderingen niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Waardeverminderingen niet aan de bedrijfsuitoefening dienstbaar"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen niet aan de bedrijfsuitoefening dienstbaar">
+     <account type="9" name="Afschrijving herwaarderingen niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Beginbalans niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Desinvestering herwaarderingen niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Herwaarderingen niet aan de bedrijfsuitoefening dienstbaar"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs niet aan de bedrijfsuitoefening dienstbaar">
+     <account type="9" name="Aankopen door overnames niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Beginbalans niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Desinvesteringen door afstotingen niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Desinvesteringen niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Investeringen nieuw aangeschaft niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Omrekeningsverschillen niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Overboekingen niet aan de bedrijfsuitoefening dienstbaar"/>
+     <account type="9" name="Overige mutaties niet aan de bedrijfsuitoefening dienstbaar"/>
+    </account>
+   </account>
+   <account type="9" name="Onroerende zaken verkocht onder voorwaarden">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen onroerende zaken verkocht onder voorwaarden">
+     <account type="9" name="Afschrijvingen onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Beginbalans onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Terugneming van waardeverminderingen onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Waardeverminderingen onroerende zaken verkocht onder voorwaarden"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen onroerende zaken verkocht onder voorwaarden">
+     <account type="9" name="Afschrijving herwaarderingen onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Beginbalans onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Desinvestering herwaarderingen onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Herwaarderingen onroerende zaken verkocht onder voorwaarden"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs onroerende zaken verkocht onder voorwaarden">
+     <account type="9" name="Aankopen door overnames onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Beginbalans onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Desinvesteringen door afstotingen onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Desinvesteringen onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Investeringen nieuw aangeschaft onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Omrekeningsverschillen onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Overboekingen onroerende zaken verkocht onder voorwaarden"/>
+     <account type="9" name="Overige mutaties onroerende zaken verkocht onder voorwaarden"/>
+    </account>
+   </account>
+   <account type="9" name="Overige materiële vaste activa">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen overige materiële vaste activa">
+     <account type="9" name="Afschrijvingen overige materiële vaste activa"/>
+     <account type="9" name="Beginbalans overige materiële vaste activa"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen overige materiële vaste activa"/>
+     <account type="9" name="Terugneming van waardeverminderingen overige materiële vaste activa"/>
+     <account type="9" name="Waardeverminderingen overige materiële vaste activa"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen overige materiële vaste activa">
+     <account type="9" name="Afschrijving herwaarderingen overige materiële vaste activa"/>
+     <account type="9" name="Beginbalans overige materiële vaste activa"/>
+     <account type="9" name="Desinvestering herwaarderingen overige materiële vaste activa"/>
+     <account type="9" name="Herwaarderingen overige materiële vaste activa"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs overige materiële vaste activa">
+     <account type="9" name="Aankopen door overnames overige materiële vaste activa"/>
+     <account type="9" name="Beginbalans overige materiële vaste activa"/>
+     <account type="9" name="Desinvesteringen door afstotingen overige materiële vaste activa"/>
+     <account type="9" name="Desinvesteringen overige materiële vaste activa"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd overige materiële vaste activa"/>
+     <account type="9" name="Investeringen nieuw aangeschaft overige materiële vaste activa"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft overige materiële vaste activa"/>
+     <account type="9" name="Omrekeningsverschillen overige materiële vaste activa"/>
+     <account type="9" name="Overboekingen overige materiële vaste activa"/>
+     <account type="9" name="Overige mutaties overige materiële vaste activa"/>
+    </account>
+   </account>
+   <account type="9" name="Overige vaste bedrijfsmiddelen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen overige vaste bedrijfsmiddelen">
+     <account type="9" name="Afschrijvingen overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Beginbalans overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Terugneming van waardeverminderingen overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Waardeverminderingen overige vaste bedrijfsmiddelen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen overige vaste bedrijfsmiddelen">
+     <account type="9" name="Afschrijving herwaarderingen overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Beginbalans overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Desinvestering herwaarderingen overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Herwaarderingen overige vaste bedrijfsmiddelen"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs overige vaste bedrijfsmiddelen">
+     <account type="9" name="Aankopen door overnames overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Beginbalans overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Desinvesteringen door afstotingen overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Desinvesteringen overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Investeringen nieuw aangeschaft overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Omrekeningsverschillen overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Overboekingen overige vaste bedrijfsmiddelen"/>
+     <account type="9" name="Overige mutaties overige vaste bedrijfsmiddelen"/>
+    </account>
+   </account>
+   <account type="9" name="Overige vastgoedbeleggingen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen overige vastgoedbeleggingen">
+     <account type="9" name="Afschrijvingen overige vastgoedbeleggingen"/>
+     <account type="9" name="Beginbalans overige vastgoedbeleggingen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen overige vastgoedbeleggingen"/>
+     <account type="9" name="Terugneming van waardeverminderingen overige vastgoedbeleggingen"/>
+     <account type="9" name="Waardeverminderingen overige vastgoedbeleggingen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen overige vastgoedbeleggingen">
+     <account type="9" name="Afschrijving herwaarderingen overige vastgoedbeleggingen"/>
+     <account type="9" name="Beginbalans overige vastgoedbeleggingen"/>
+     <account type="9" name="Desinvestering herwaarderingen overige vastgoedbeleggingen"/>
+     <account type="9" name="Herwaarderingen overige vastgoedbeleggingen"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs overige vastgoedbeleggingen">
+     <account type="9" name="Aankopen door overnames overige vastgoedbeleggingen"/>
+     <account type="9" name="Beginbalans overige vastgoedbeleggingen"/>
+     <account type="9" name="Desinvesteringen door afstotingen overige vastgoedbeleggingen"/>
+     <account type="9" name="Desinvesteringen overige vastgoedbeleggingen"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd overige vastgoedbeleggingen"/>
+     <account type="9" name="Investeringen nieuw aangeschaft overige vastgoedbeleggingen"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft overige vastgoedbeleggingen"/>
+     <account type="9" name="Omrekeningsverschillen overige vastgoedbeleggingen"/>
+     <account type="9" name="Overboekingen overige vastgoedbeleggingen"/>
+     <account type="9" name="Overige mutaties overige vastgoedbeleggingen"/>
+    </account>
+   </account>
+   <account type="9" name="Schepen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen schepen">
+     <account type="9" name="Afschrijvingen schepen"/>
+     <account type="9" name="Beginbalans schepen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen schepen"/>
+     <account type="9" name="Terugneming van waardeverminderingen schepen"/>
+     <account type="9" name="Waardeverminderingen schepen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen schepen">
+     <account type="9" name="Afschrijving herwaarderingen schepen"/>
+     <account type="9" name="Beginbalans schepen"/>
+     <account type="9" name="Desinvestering herwaarderingen schepen"/>
+     <account type="9" name="Herwaarderingen schepen"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs schepen">
+     <account type="9" name="Aankopen door overnames schepen"/>
+     <account type="9" name="Beginbalans schepen"/>
+     <account type="9" name="Desinvesteringen door afstotingen schepen"/>
+     <account type="9" name="Desinvesteringen schepen"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd schepen"/>
+     <account type="9" name="Investeringen nieuw aangeschaft schepen"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft schepen"/>
+     <account type="9" name="Omrekeningsverschillen schepen"/>
+     <account type="9" name="Overboekingen schepen"/>
+     <account type="9" name="Overige mutaties schepen"/>
+    </account>
+   </account>
+   <account type="9" name="Sociaal vastgoed in exploitatie">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen sociaal vastgoed in exploitatie">
+     <account type="9" name="Afschrijvingen sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Beginbalans sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Terugneming van waardeverminderingen sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Waardeverminderingen sociaal vastgoed in exploitatie"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen sociaal vastgoed in exploitatie">
+     <account type="9" name="Afschrijving herwaarderingen sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Beginbalans sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Desinvestering herwaarderingen sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Herwaarderingen sociaal vastgoed in exploitatie"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs sociaal vastgoed in exploitatie">
+     <account type="9" name="Aankopen door overnames sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Beginbalans sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Desinvesteringen door afstotingen sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Desinvesteringen sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Investeringen nieuw aangeschaft sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Omrekeningsverschillen sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Overboekingen sociaal vastgoed in exploitatie"/>
+     <account type="9" name="Overige mutaties sociaal vastgoed in exploitatie"/>
+    </account>
+   </account>
+   <account type="9" name="Terreinen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen terreinen">
+     <account type="9" name="Afschrijvingen terreinen"/>
+     <account type="9" name="Beginbalans terreinen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen terreinen"/>
+     <account type="9" name="Terugneming van waardeverminderingen terreinen"/>
+     <account type="9" name="Waardeverminderingen terreinen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen terreinen">
+     <account type="9" name="Afschrijving herwaarderingen terreinen"/>
+     <account type="9" name="Beginbalans terreinen"/>
+     <account type="9" name="Desinvestering herwaarderingen terreinen"/>
+     <account type="9" name="Herwaarderingen terreinen"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs terreinen">
+     <account type="9" name="Aankopen door overnames terreinen"/>
+     <account type="9" name="Beginbalans terreinen"/>
+     <account type="9" name="Desinvesteringen door afstotingen terreinen"/>
+     <account type="9" name="Desinvesteringen terreinen"/>
+     <account type="9" name="Investeringen nieuw aangeschaft terreinen"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft terreinen"/>
+     <account type="9" name="Omrekeningsverschillen terreinen"/>
+     <account type="9" name="Overboekingen terreinen"/>
+     <account type="9" name="Overige mutaties terreinen"/>
+    </account>
+   </account>
+   <account type="9" name="Transport- en vervoermiddelen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen transport- en vervoermiddelen">
+     <account type="9" name="Afschrijvingen transport- en vervoermiddelen"/>
+     <account type="9" name="Beginbalans transport- en vervoermiddelen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen transport- en vervoermiddelen"/>
+     <account type="9" name="Terugneming van waardeverminderingen transport- en vervoermiddelen"/>
+     <account type="9" name="Waardeverminderingen transport- en vervoermiddelen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen transport- en vervoermiddelen">
+     <account type="9" name="Afschrijving herwaarderingen transport- en vervoermiddelen"/>
+     <account type="9" name="Beginbalans transport- en vervoermiddelen"/>
+     <account type="9" name="Desinvestering herwaarderingen transport- en vervoermiddelen"/>
+     <account type="9" name="Herwaarderingen transport- en vervoermiddelen"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs transport- en vervoermiddelen">
+     <account type="9" name="Aankopen door overnames transport- en vervoermiddelen"/>
+     <account type="9" name="Beginbalans transport- en vervoermiddelen"/>
+     <account type="9" name="Desinvesteringen door afstotingen transport- en vervoermiddelen"/>
+     <account type="9" name="Desinvesteringen transport- en vervoermiddelen"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd transport- en vervoermiddelen"/>
+     <account type="9" name="Investeringen nieuw aangeschaft transport- en vervoermiddelen"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft transport- en vervoermiddelen"/>
+     <account type="9" name="Omrekeningsverschillen transport- en vervoermiddelen"/>
+     <account type="9" name="Overboekingen transport- en vervoermiddelen"/>
+     <account type="9" name="Overige mutaties transport- en vervoermiddelen"/>
+    </account>
+   </account>
+   <account type="9" name="Vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa">
+     <account type="9" name="Afschrijvingen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Beginbalans vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Terugneming van waardeverminderingen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Waardeverminderingen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa">
+     <account type="9" name="Afschrijving herwaarderingen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Beginbalans vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Desinvestering herwaarderingen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Herwaarderingen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa">
+     <account type="9" name="Aankopen door overnames vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Beginbalans vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Desinvesteringen door afstotingen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Desinvesteringen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Investeringen nieuw aangeschaft vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Omrekeningsverschillen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Overboekingen vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+     <account type="9" name="Overige mutaties vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiële vaste activa"/>
+    </account>
+   </account>
+   <account type="9" name="Vastgoed in ontwikkeling bestemd voor eigen exploitatie">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen vastgoed in ontwikkeling bestemd voor eigen exploitatie">
+     <account type="9" name="Afschrijvingen vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Beginbalans vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Terugneming van waardeverminderingen vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Waardeverminderingen vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen vastgoed in ontwikkeling bestemd voor eigen exploitatie">
+     <account type="9" name="Afschrijving herwaarderingen vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Beginbalans vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Desinvestering herwaarderingen vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Herwaarderingen vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs vastgoed in ontwikkeling bestemd voor eigen exploitatie">
+     <account type="9" name="Aankopen door overnames vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Beginbalans vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Desinvesteringen door afstotingen vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Desinvesteringen vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Investeringen nieuw aangeschaft vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Omrekeningsverschillen vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Overboekingen vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+     <account type="9" name="Overige mutaties vastgoed in ontwikkeling bestemd voor eigen exploitatie"/>
+    </account>
+   </account>
+   <account type="9" name="Verbouwingen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen verbouwingen">
+     <account type="9" name="Afschrijvingen verbouwingen"/>
+     <account type="9" name="Beginbalans verbouwingen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen verbouwingen"/>
+     <account type="9" name="Terugneming van waardeverminderingen verbouwingen"/>
+     <account type="9" name="Waardeverminderingen verbouwingen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen verbouwingen">
+     <account type="9" name="Afschrijving herwaarderingen verbouwingen"/>
+     <account type="9" name="Beginbalans verbouwingen"/>
+     <account type="9" name="Desinvestering herwaarderingen verbouwingen"/>
+     <account type="9" name="Herwaarderingen verbouwingen"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs verbouwingen">
+     <account type="9" name="Aankopen door overnames verbouwingen"/>
+     <account type="9" name="Beginbalans verbouwingen"/>
+     <account type="9" name="Desinvesteringen door afstotingen verbouwingen"/>
+     <account type="9" name="Desinvesteringen verbouwingen"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd verbouwingen"/>
+     <account type="9" name="Investeringen nieuw aangeschaft verbouwingen"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft verbouwingen"/>
+     <account type="9" name="Omrekeningsverschillen verbouwingen"/>
+     <account type="9" name="Overboekingen verbouwingen"/>
+     <account type="9" name="Overige mutaties verbouwingen"/>
+    </account>
+   </account>
+   <account type="9" name="Vliegtuigen">
+    <account type="9" name="Cumulatieve afschrijvingen en waardeverminderingen vliegtuigen">
+     <account type="9" name="Afschrijvingen vliegtuigen"/>
+     <account type="9" name="Beginbalans vliegtuigen"/>
+     <account type="9" name="Desinvestering cumulatieve afschrijvingen en waardeverminderingen vliegtuigen"/>
+     <account type="9" name="Terugneming van waardeverminderingen vliegtuigen"/>
+     <account type="9" name="Waardeverminderingen vliegtuigen"/>
+    </account>
+    <account type="9" name="Cumulatieve herwaarderingen vliegtuigen">
+     <account type="9" name="Afschrijving herwaarderingen vliegtuigen"/>
+     <account type="9" name="Beginbalans vliegtuigen"/>
+     <account type="9" name="Desinvestering herwaarderingen vliegtuigen"/>
+     <account type="9" name="Herwaarderingen vliegtuigen"/>
+    </account>
+    <account type="9" name="Verkrijgings- of vervaardigingsprijs vliegtuigen">
+     <account type="9" name="Aankopen door overnames vliegtuigen"/>
+     <account type="9" name="Beginbalans vliegtuigen"/>
+     <account type="9" name="Desinvesteringen door afstotingen vliegtuigen"/>
+     <account type="9" name="Desinvesteringen vliegtuigen"/>
+     <account type="9" name="Investeringen in eigen beheer vervaardigd vliegtuigen"/>
+     <account type="9" name="Investeringen nieuw aangeschaft vliegtuigen"/>
+     <account type="9" name="Investeringen tweedehands aangeschaft vliegtuigen"/>
+     <account type="9" name="Omrekeningsverschillen vliegtuigen"/>
+     <account type="9" name="Overboekingen vliegtuigen"/>
+     <account type="9" name="Overige mutaties vliegtuigen"/>
+    </account>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Nettoresultaat na belastingen">
+    <account type="12" name="Nettoresultaat na belastingen"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Kortingen en bonussen">
+    <account type="12" name="Omzetbonificaties"/>
+    <account type="12" name="Provisies"/>
+    <account type="12" name="Verleende kortingen"/>
+   </account>
+   <account type="12" name="Netto-omzet, per opbrengstcategorie, overig">
+    <account type="12" name="Netto-omzet, overboeking naar andere rubriek"/>
+    <account type="12" name="Netto-omzet, per opbrengstcategorie, dividenden"/>
+    <account type="12" name="Netto-omzet, per opbrengstcategorie, overig"/>
+    <account type="12" name="Netto-omzet, per opbrengstcategorie, rente"/>
+    <account type="12" name="Netto-omzet, per opbrengstcategorie, royalty's"/>
+   </account>
+   <account type="12" name="Netto-omzet, per opbrengstcategorie, verkoop van geproduceerde goederen">
+    <account type="12" name="Netto-omzet, overboeking naar andere rubriek"/>
+    <account type="12" name="Omzet belaste leveringen uit landen binnen EU"/>
+    <account type="12" name="Omzet belaste leveringen uit landen buiten de EU"/>
+    <account type="12" name="Omzet leveringen belast met algemeen tarief"/>
+    <account type="12" name="Omzet leveringen belast met nultarief of niet bij u belast"/>
+    <account type="12" name="Omzet leveringen belast met overige tarieven"/>
+    <account type="12" name="Omzet leveringen belast met verlaagd tarief"/>
+    <account type="12" name="Omzet leveringen in landen binnen EU"/>
+    <account type="12" name="Omzet leveringen installatie/afstandsverkopen binnen de EU"/>
+    <account type="12" name="Omzet leveringen naar landen buiten EU"/>
+    <account type="12" name="Omzet leveringen waarbij heffing is verlegd"/>
+    <account type="12" name="Omzet privégebruik goederen"/>
+   </account>
+   <account type="12" name="Netto-omzet, per opbrengstcategorie, verkoop van handelsgoederen">
+    <account type="12" name="Netto-omzet, overboeking naar andere rubriek"/>
+    <account type="12" name="Omzet belaste leveringen uit landen binnen EU"/>
+    <account type="12" name="Omzet belaste leveringen uit landen buiten de EU"/>
+    <account type="12" name="Omzet leveringen belast met algemeen tarief"/>
+    <account type="12" name="Omzet leveringen belast met nultarief of niet bij u belast"/>
+    <account type="12" name="Omzet leveringen belast met overige tarieven"/>
+    <account type="12" name="Omzet leveringen belast met verlaagd tarief"/>
+    <account type="12" name="Omzet leveringen in landen binnen EU"/>
+    <account type="12" name="Omzet leveringen installatie/afstandsverkopen binnen de EU"/>
+    <account type="12" name="Omzet leveringen margevoorraden"/>
+    <account type="12" name="Omzet leveringen naar landen buiten EU"/>
+    <account type="12" name="Omzet leveringen waarbij heffing is verlegd"/>
+    <account type="12" name="Omzet privégebruik goederen"/>
+   </account>
+   <account type="12" name="Netto-omzet, per opbrengstcategorie, verlening van diensten">
+    <account type="12" name="Netto-omzet, overboeking naar andere rubriek"/>
+    <account type="12" name="Omzet belaste diensten uit landen binnen EU"/>
+    <account type="12" name="Omzet belaste diensten uit landen buiten de EU"/>
+    <account type="12" name="Omzet diensten  installatie/afstandsverkopen binnen de EU"/>
+    <account type="12" name="Omzet diensten belast met algemeen tarief"/>
+    <account type="12" name="Omzet diensten belast met nultarief of niet bij u belast"/>
+    <account type="12" name="Omzet diensten belast met overige tarieven"/>
+    <account type="12" name="Omzet diensten belast met verlaagd tarief"/>
+    <account type="12" name="Omzet diensten in landen binnen EU"/>
+    <account type="12" name="Omzet diensten naar landen buiten EU"/>
+    <account type="12" name="Omzet diensten waarbij heffing is verlegd"/>
+    <account type="12" name="Omzet privégebruik diensten"/>
+   </account>
+   <account type="12" name="Omzet intercompany transacties">
+    <account type="12" name="Omzet intercompany transacties"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Accountants- en advieskosten">
+    <account type="13" name="Accountantskosten, adviesdiensten op fiscaal terrein"/>
+    <account type="13" name="Accountantskosten, andere controleopdrachten"/>
+    <account type="13" name="Accountantskosten, andere niet-controlediensten"/>
+    <account type="13" name="Accountantskosten, onderzoek van de jaarrekening"/>
+    <account type="13" name="Advokaat en juridisch advies"/>
+    <account type="13" name="Doorberekende accountants- en advieskosten"/>
+    <account type="13" name="Notariskosten"/>
+    <account type="13" name="Overige advieskosten"/>
+    <account type="13" name="Privé-gedeelte accountant"/>
+   </account>
+   <account type="13" name="Administratieve lasten">
+    <account type="13" name="BTW kleine-ondernemers-regeling"/>
+    <account type="13" name="Bankkosten"/>
+    <account type="13" name="Betalingsverschillen"/>
+    <account type="13" name="Boekingsverschillen"/>
+    <account type="13" name="Boetes en verhogingen belastingen en premies sociale verzekeringen"/>
+    <account type="13" name="Doorberekende administratieve lasten"/>
+    <account type="13" name="Heffingen"/>
+    <account type="13" name="Kasverschillen"/>
+    <account type="13" name="Naheffing omzetbelasting"/>
+    <account type="13" name="Niet-verrekenbare BTW op kosten"/>
+    <account type="13" name="Overige administratieve lasten"/>
+    <account type="13" name="Overige belastingen"/>
+    <account type="13" name="Valutaomrekeningsverschillen"/>
+   </account>
+   <account type="13" name="Algemene kosten">
+    <account type="13" name="Doorberekende algemene kosten"/>
+    <account type="13" name="Overige algemene kosten"/>
+   </account>
+   <account type="13" name="Assurantiekosten">
+    <account type="13" name="Bedrijfsaansprakelijkheidsverzekering"/>
+    <account type="13" name="Doorberekende assurantiekosten"/>
+    <account type="13" name="Overige assurantiepremies"/>
+    <account type="13" name="Schadevergoedingen betaald"/>
+    <account type="13" name="Schadevergoedingen ontvangen"/>
+   </account>
+   <account type="13" name="Autokosten">
+    <account type="13" name="Assurantiepremie auto's"/>
+    <account type="13" name="BTW op privé-gebruik auto's"/>
+    <account type="13" name="Bijdrage werknemers leaseregeling"/>
+    <account type="13" name="Boetes en bekeuringen"/>
+    <account type="13" name="Brandstofkosten auto's"/>
+    <account type="13" name="Doorberekende autokosten"/>
+    <account type="13" name="Dotatie kostenegalisatiereserve groot onderhoud vervoermiddelen"/>
+    <account type="13" name="Dotatie reserve assurantie eigen risico vervoermiddelen"/>
+    <account type="13" name="Dotatie voorziening groot onderhoud vervoermiddelen"/>
+    <account type="13" name="Huur auto's"/>
+    <account type="13" name="Kilometervergoeding"/>
+    <account type="13" name="Motorrijtuigenbelasting"/>
+    <account type="13" name="Operational leasing auto's"/>
+    <account type="13" name="Overige autokosten"/>
+    <account type="13" name="Overige belastingen inzake vervoermiddelen"/>
+    <account type="13" name="Parkeerkosten"/>
+    <account type="13" name="Privé-gebruik auto's"/>
+    <account type="13" name="Reparatie en onderhoud auto's"/>
+    <account type="13" name="Vrijval kostenegalisatiereserve groot onderhoud vervoermiddelen"/>
+    <account type="13" name="Vrijval reserve assurantie eigen risico vervoermiddelen"/>
+    <account type="13" name="Vrijval voorziening groot onderhoud vervoermiddelen"/>
+   </account>
+   <account type="13" name="Doorberekende kosten">
+    <account type="13" name="Doorberekende kosten"/>
+   </account>
+   <account type="13" name="Dotaties en vrijval reserves">
+    <account type="13" name="Dotatie exportreserve"/>
+    <account type="13" name="Dotatie herinvesteringsreserve"/>
+    <account type="13" name="Dotatie kostenegalisatiereserve"/>
+    <account type="13" name="Dotatie overige fiscale reserves"/>
+    <account type="13" name="Dotatie reserve assurantie eigen risico"/>
+    <account type="13" name="Dotatie risicoreserve"/>
+    <account type="13" name="Dotatie terugkeerreserve"/>
+    <account type="13" name="Vrijval exportreserve"/>
+    <account type="13" name="Vrijval herinvesteringsreserve"/>
+    <account type="13" name="Vrijval kostenegalisatiereserve"/>
+    <account type="13" name="Vrijval overige fiscale reserves"/>
+    <account type="13" name="Vrijval reserve assurantie eigen risico"/>
+    <account type="13" name="Vrijval risicoreserve"/>
+    <account type="13" name="Vrijval terugkeerreserve"/>
+   </account>
+   <account type="13" name="Dotaties en vrijval voorzieningen">
+    <account type="13" name="Dotatie overige voorzieningen"/>
+    <account type="13" name="Dotatie voorziening uit hoofde van claims, geschillen en rechtsgedingen"/>
+    <account type="13" name="Dotatie voorziening voor herstelkosten"/>
+    <account type="13" name="Dotatie voorziening voor opruiming van aanwezige milieuvervuiling"/>
+    <account type="13" name="Dotatie voorziening voor verlieslatende contracten"/>
+    <account type="13" name="Dotatie voorziening voor verwijderingsverplichtingen"/>
+    <account type="13" name="Vrijval overige voorzieningen"/>
+    <account type="13" name="Vrijval voorziening uit hoofde van claims, geschillen en rechtsgedingen"/>
+    <account type="13" name="Vrijval voorziening voor herstelkosten"/>
+    <account type="13" name="Vrijval voorziening voor opruiming van aanwezige milieuvervuiling"/>
+    <account type="13" name="Vrijval voorziening voor verlieslatende contracten"/>
+    <account type="13" name="Vrijval voorziening voor verwijderingsverplichtingen"/>
+   </account>
+   <account type="13" name="Exploitatie- en machinekosten">
+    <account type="13" name="Assurantiepremie machines en inventaris"/>
+    <account type="13" name="Brandstof machines"/>
+    <account type="13" name="Doorberekende exploitatie- en machinekosten"/>
+    <account type="13" name="Dotatie kostenegalisatiereserve groot onderhoud inventaris"/>
+    <account type="13" name="Dotatie kostenegalisatiereserve groot onderhoud machines"/>
+    <account type="13" name="Dotatie reserve assurantie eigen risico machines"/>
+    <account type="13" name="Dotatie voorziening groot onderhoud inventaris"/>
+    <account type="13" name="Dotatie voorziening groot onderhoud machines"/>
+    <account type="13" name="Gereedschapskosten"/>
+    <account type="13" name="Huur inventaris"/>
+    <account type="13" name="Huur machines"/>
+    <account type="13" name="Kleine aanschaffingen inventaris"/>
+    <account type="13" name="Kleine aanschaffingen machines"/>
+    <account type="13" name="Onderhoud machines en installaties"/>
+    <account type="13" name="Operational leasing inventaris"/>
+    <account type="13" name="Operational leasing machines"/>
+    <account type="13" name="Overige belastingen inzake exploitatie en machines"/>
+    <account type="13" name="Overige exploitatie- en machinekosten"/>
+    <account type="13" name="Overige kosten inventaris"/>
+    <account type="13" name="Overige kosten machines"/>
+    <account type="13" name="Reparatie en onderhoud inventaris"/>
+    <account type="13" name="Reparatie en onderhoud machines"/>
+    <account type="13" name="Verpakkingsmaterialen"/>
+    <account type="13" name="Vrijval kostenegalisatiereserve groot onderhoud inventaris"/>
+    <account type="13" name="Vrijval kostenegalisatiereserve groot onderhoud machines"/>
+    <account type="13" name="Vrijval reserve assurantie eigen risico machines"/>
+    <account type="13" name="Vrijval voorziening groot onderhoud inventaris"/>
+    <account type="13" name="Vrijval voorziening groot onderhoud machines"/>
+    <account type="13" name="Werk door derden"/>
+   </account>
+   <account type="13" name="Huisvestingskosten">
+    <account type="13" name="Assurantiepremies onroerende zaak"/>
+    <account type="13" name="Betaalde huur"/>
+    <account type="13" name="Doorberekende huisvestingskosten"/>
+    <account type="13" name="Dotatie kostenegalisatiereserve groot onderhoud gebouwen"/>
+    <account type="13" name="Dotatie reserve assurantie eigen risico gebouwen"/>
+    <account type="13" name="Dotatie voorziening groot onderhoud gebouwen"/>
+    <account type="13" name="Elektra"/>
+    <account type="13" name="Erfpacht"/>
+    <account type="13" name="Gas"/>
+    <account type="13" name="Huurwaarde woongedeelte"/>
+    <account type="13" name="Lasten servicecontracten"/>
+    <account type="13" name="Leefbaarheid"/>
+    <account type="13" name="Milieuheffingen en zuiveringsleges"/>
+    <account type="13" name="Netdiensten"/>
+    <account type="13" name="Onderhoud gebouwen"/>
+    <account type="13" name="Onderhoud terreinen"/>
+    <account type="13" name="Onroerende zaakbelasting"/>
+    <account type="13" name="Ontvangen huursuppletie"/>
+    <account type="13" name="Overige belastingen inzake huisvesting"/>
+    <account type="13" name="Overige huisvestingskosten"/>
+    <account type="13" name="Overige vaste huisvestingslasten"/>
+    <account type="13" name="Privé-gebruik energie"/>
+    <account type="13" name="Schoonmaakkosten"/>
+    <account type="13" name="Servicekosten"/>
+    <account type="13" name="Vrijval kostenegalisatiereserve groot onderhoud gebouwen"/>
+    <account type="13" name="Vrijval reserve assurantie eigen risico gebouwen"/>
+    <account type="13" name="Vrijval voorziening groot onderhoud gebouwen"/>
+    <account type="13" name="Water"/>
+   </account>
+   <account type="13" name="Kantoorkosten">
+    <account type="13" name="Assurantiepremie"/>
+    <account type="13" name="Boekhouding"/>
+    <account type="13" name="Contributies en abonnementen"/>
+    <account type="13" name="Doorberekende kantoorkosten"/>
+    <account type="13" name="Drukwerk"/>
+    <account type="13" name="Incassokosten"/>
+    <account type="13" name="Kantoorbenodigdheden"/>
+    <account type="13" name="Kleine aanschaffingen kantoorinventaris"/>
+    <account type="13" name="Kosten automatisering"/>
+    <account type="13" name="Overige administratieve belastingen"/>
+    <account type="13" name="Overige kantoorkosten"/>
+    <account type="13" name="Porti"/>
+    <account type="13" name="Privé-gebruik telefoon"/>
+    <account type="13" name="Reparatie en onderhoud kantoorinventaris"/>
+    <account type="13" name="Telefoon- en faxkosten"/>
+    <account type="13" name="Vakliteratuur"/>
+   </account>
+   <account type="13" name="Kosten fondsenwerving">
+    <account type="13" name="Bestedingen aan doelstelling"/>
+    <account type="13" name="Kosten eigen fondsenwerwing"/>
+    <account type="13" name="Kosten fondsenwervingsacties van derden"/>
+    <account type="13" name="Kosten gezamenlijke fondsenwervingsacties"/>
+    <account type="13" name="Kosten verkrijging subsidies overheden"/>
+   </account>
+   <account type="13" name="Kosten stamrecht en lijfrentes">
+    <account type="13" name="Afbouw stamrechtverplichting"/>
+    <account type="13" name="Lijfrente-uitkeringen"/>
+   </account>
+   <account type="13" name="Organisatiekosten">
+    <account type="13" name="Doorberekende management fee"/>
+    <account type="13" name="Doorberekende organisatiekosten"/>
+    <account type="13" name="Holdingkosten"/>
+    <account type="13" name="Leges / vergunningen"/>
+    <account type="13" name="Octrooi en licentiekosten"/>
+    <account type="13" name="Onderzoek en ontwikkeling"/>
+    <account type="13" name="Overige organisatiekosten"/>
+   </account>
+   <account type="13" name="Transportkosten">
+    <account type="13" name="Assurantiepremie transportmiddelen"/>
+    <account type="13" name="BTW op privé-gebruik transportmiddelen"/>
+    <account type="13" name="Brandstofkosten transportmiddelen"/>
+    <account type="13" name="Doorberekende transportkosten"/>
+    <account type="13" name="Dotatie kostenegalisatiereserve groot onderhoud transportmiddelen"/>
+    <account type="13" name="Dotatie reserve assurantie eigen risico transportmiddelen"/>
+    <account type="13" name="Dotatie voorziening groot onderhoud transportmiddelen"/>
+    <account type="13" name="Huur transportmiddelen"/>
+    <account type="13" name="Motorrijtuigenbelasting"/>
+    <account type="13" name="Operational leasing transportmiddelen"/>
+    <account type="13" name="Overige belastingen inzake transportmiddelen"/>
+    <account type="13" name="Overige transportkosten"/>
+    <account type="13" name="Parkeerkosten"/>
+    <account type="13" name="Privé-gebruik transportmiddelen"/>
+    <account type="13" name="Reparatie en onderhoud transportmiddelen"/>
+    <account type="13" name="Vrijval kostenegalisatiereserve groot onderhoud transportmiddelen"/>
+    <account type="13" name="Vrijval reserve assurantie eigen risico transportmiddelen"/>
+    <account type="13" name="Vrijval voorziening groot onderhoud transportmiddelen"/>
+   </account>
+   <account type="13" name="Verkoopkosten">
+    <account type="13" name="Afboeking dubieuze debiteuren"/>
+    <account type="13" name="Beurskosten"/>
+    <account type="13" name="Commissies"/>
+    <account type="13" name="Doorberekende verkoopkosten"/>
+    <account type="13" name="Dotatie garantievoorziening"/>
+    <account type="13" name="Dotatie voorziening dubieuze debiteuren"/>
+    <account type="13" name="Etalagekosten"/>
+    <account type="13" name="Franchisekosten"/>
+    <account type="13" name="Incassokosten"/>
+    <account type="13" name="Kerstpakketten relaties"/>
+    <account type="13" name="Kilometervergoeding woon-werkverkeer"/>
+    <account type="13" name="Kilometervergoeding zakelijke reizen"/>
+    <account type="13" name="Kosten sponsoring"/>
+    <account type="13" name="Overige belastingen inzake verkoopactiviteiten"/>
+    <account type="13" name="Overige verkoopkosten"/>
+    <account type="13" name="Reclame- en advertentiekosten"/>
+    <account type="13" name="Reis- en verblijfkosten"/>
+    <account type="13" name="Relatiegeschenken"/>
+    <account type="13" name="Representatiekosten"/>
+    <account type="13" name="Verkoopprovisie"/>
+    <account type="13" name="Vrachtkosten"/>
+    <account type="13" name="Vrijval garantievoorziening"/>
+    <account type="13" name="Websitekosten"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Baten uit acties van derden">
+    <account type="12" name="Collecten"/>
+    <account type="12" name="Contributies"/>
+    <account type="12" name="Donaties en giften"/>
+    <account type="12" name="Eigen loterijen en prijsvragen"/>
+    <account type="12" name="Nalatenschappen"/>
+    <account type="12" name="Overige baten uit fondsenwerving"/>
+    <account type="12" name="Sponsoring"/>
+    <account type="12" name="Verkoop goederen"/>
+   </account>
+   <account type="12" name="Baten uit eigen fondsenwerving">
+    <account type="12" name="Collecten"/>
+    <account type="12" name="Contributies"/>
+    <account type="12" name="Donaties en giften"/>
+    <account type="12" name="Eigen loterijen en prijsvragen"/>
+    <account type="12" name="Nalatenschappen"/>
+    <account type="12" name="Overige baten uit fondsenwerving"/>
+    <account type="12" name="Sponsoring"/>
+    <account type="12" name="Verkoop goederen"/>
+   </account>
+   <account type="12" name="Baten uit gezamenlijke acties">
+    <account type="12" name="Collecten"/>
+    <account type="12" name="Contributies"/>
+    <account type="12" name="Donaties en giften"/>
+    <account type="12" name="Eigen loterijen en prijsvragen"/>
+    <account type="12" name="Nalatenschappen"/>
+    <account type="12" name="Overige baten uit fondsenwerving"/>
+    <account type="12" name="Sponsoring"/>
+    <account type="12" name="Verkoop goederen"/>
+   </account>
+   <account type="12" name="Baten werk in opdracht van derden">
+    <account type="12" name="Baten werk in opdracht van derden"/>
+   </account>
+   <account type="12" name="College-, cursus-, les- en examengelden">
+    <account type="12" name="College-, cursus-, les- en examengelden"/>
+   </account>
+   <account type="12" name="Huurontvangsten">
+    <account type="12" name="Huurontvangsten"/>
+   </account>
+   <account type="12" name="Netto verkoopresultaat vastgoedportefeuille">
+    <account type="12" name="Netto verkoopresultaat vastgoedportefeuille"/>
+   </account>
+   <account type="12" name="Ontvangen doorbelasting personeelskosten">
+    <account type="12" name="Ontvangen doorbelasting personeelskosten"/>
+   </account>
+   <account type="12" name="Ontvangen managementvergoeding">
+    <account type="12" name="Ontvangen managementvergoeding"/>
+   </account>
+   <account type="12" name="Ontvangen restituties en subsidies">
+    <account type="12" name="Export- en overige restituties en subsidies ingevolge EU-regelingen"/>
+    <account type="12" name="Ontvangen loonsubsidies en afdrachtrestituties"/>
+    <account type="12" name="Overheidssubsidies exclusief loonkostensubsidies"/>
+    <account type="12" name="Overige subsidies"/>
+   </account>
+   <account type="12" name="Opbrengsten servicecontracten">
+    <account type="12" name="Opbrengsten servicecontracten"/>
+   </account>
+   <account type="12" name="Overige opbrengsten">
+    <account type="12" name="Overige opbrengsten"/>
+   </account>
+   <account type="12" name="Verzekeringsuitkeringen">
+    <account type="12" name="Overige verzekeringsuitkeringen"/>
+    <account type="12" name="Uitkering bedrijfsschadeverzekering"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Lonen en salarissen">
+    <account type="13" name="Bezoldiging van bestuurders en gewezen bestuurders"/>
+    <account type="13" name="Bezoldiging van commissarissen en gewezen commissarissen"/>
+    <account type="13" name="Doorberekende lonen en salarissen"/>
+    <account type="13" name="Eindheffing spaarloon"/>
+    <account type="13" name="Gratificaties"/>
+    <account type="13" name="Lasten in verband met aandelen(optie)regelingen"/>
+    <account type="13" name="Lonen"/>
+    <account type="13" name="Lonen in natura"/>
+    <account type="13" name="Loonkostenreductie"/>
+    <account type="13" name="Onregelmatigheidstoeslag"/>
+    <account type="13" name="Ontslaguitkeringen"/>
+    <account type="13" name="Overige lonen en salarissen"/>
+    <account type="13" name="Overige toeslagen"/>
+    <account type="13" name="Overwerk"/>
+    <account type="13" name="Tantièmes en provisie"/>
+    <account type="13" name="Vakantiebijslag"/>
+    <account type="13" name="Vakantiedagen"/>
+   </account>
+   <account type="13" name="Overige personeelskosten">
+    <account type="13" name="Arbodienst"/>
+    <account type="13" name="Diensten door derden"/>
+    <account type="13" name="Doorberekende overige personeelskosten"/>
+    <account type="13" name="Dotatie arbeidsongeschiktheidsvoorziening"/>
+    <account type="13" name="Dotatie jubileumvoorziening"/>
+    <account type="13" name="Dotatie voorziening in verband met reorganisaties"/>
+    <account type="13" name="Management fee"/>
+    <account type="13" name="Ontvangen ziekengelden"/>
+    <account type="13" name="Overig ingeleend personeel"/>
+    <account type="13" name="Overige belastingen inzake personeel"/>
+    <account type="13" name="Overige personeelskosten"/>
+    <account type="13" name="Uitzendbedrijven"/>
+    <account type="13" name="Uitzendkrachten"/>
+    <account type="13" name="Vrijval arbeidsongeschiktheidsvoorziening"/>
+    <account type="13" name="Vrijval jubileumvoorziening"/>
+    <account type="13" name="Vrijval voorziening in verband met reorganisaties"/>
+    <account type="13" name="Wervingskosten"/>
+    <account type="13" name="Ziekengeldverzekering"/>
+   </account>
+   <account type="13" name="Pensioenlasten">
+    <account type="13" name="Doorberekende pensioenlasten"/>
+    <account type="13" name="Dotatie pensioenvoorziening directie"/>
+    <account type="13" name="Dotatie voorziening backserviceverplichting directie"/>
+    <account type="13" name="Dotatie voorziening lijfrenteverplichtingen"/>
+    <account type="13" name="Overige pensioenlasten"/>
+    <account type="13" name="Pensioenpremies"/>
+    <account type="13" name="Vrijval pensioenvoorziening directie"/>
+    <account type="13" name="Vrijval voorziening backserviceverplichting directie"/>
+    <account type="13" name="Vrijval voorziening lijfrenteverplichtingen"/>
+   </account>
+   <account type="13" name="Sociale lasten">
+    <account type="13" name="Bijdrage ziektekostenverzekering"/>
+    <account type="13" name="Doorberekende sociale lasten"/>
+    <account type="13" name="Overige premies"/>
+    <account type="13" name="Overige sociale fondsen"/>
+    <account type="13" name="Overige sociale lasten"/>
+    <account type="13" name="Premies sociale verzekeringen"/>
+   </account>
+   <account type="13" name="Werkkosten belast loon">
+    <account type="13" name="Geldboetes binnenlandse autoriteiten"/>
+    <account type="13" name="Geldboetes buitenlandse autoriteiten"/>
+    <account type="13" name="Genot dienstwoning"/>
+    <account type="13" name="Overige werkkosten belast loon"/>
+    <account type="13" name="Privé-gebruik auto's"/>
+    <account type="13" name="Vergoedingen en verstrekkingen ter zake van agressieve dieren"/>
+    <account type="13" name="Vergoedingen en verstrekkingen ter zake van misdrijven"/>
+    <account type="13" name="Vergoedingen en verstrekkingen ter zake van wapens en munitie"/>
+   </account>
+   <account type="13" name="Werkkosten geen of vrijgesteld loon">
+    <account type="13" name="Eenmalige uitkering/verstrekking bij 25/40-jarig diensttijdjubileum werknemer (tot maximaal 1 x maandloon)"/>
+    <account type="13" name="Eenmalige uitkering/verstrekking bij overlijden werknemer, zijn partner of kinderen (tot maximaal 3 x maandloon)"/>
+    <account type="13" name="Fruitmand, rouwkrans, bloemetje"/>
+    <account type="13" name="Kleine geschenken (geen geld of waardebon) maximaal € 25"/>
+    <account type="13" name="Meewerkvergoeding partner inhoudingsplichtige (indien lager dan € 5.000)"/>
+    <account type="13" name="Overige werkkosten geen of vrijgesteld loon"/>
+    <account type="13" name="Uitkering/verstrekking tot vergoeding door werknemer ivm met werk gelden schade/verlies persoonlijke zaken"/>
+    <account type="13" name="Uitkering/verstrekking uit een personeelsfonds"/>
+    <account type="13" name="Werkgeversbijdrage personeelsvereniging (als werknemers geen aanspraak hebben op uitkeringen uit de pv)"/>
+   </account>
+   <account type="13" name="Werkkosten gericht vrijgesteld">
+    <account type="13" name="(Hotel)overnachtingen in verband met werk"/>
+    <account type="13" name="Consumpties en maaltijden dienstreis"/>
+    <account type="13" name="Cursuskosten taal werkland (werknemer + gezin)"/>
+    <account type="13" name="Dubbele huisvestingskosten"/>
+    <account type="13" name="Eerste huisvestingskosten (boven 18% van het loon)"/>
+    <account type="13" name="Extra (niet-zakelijke) telefoonkosten (gesprek) met land van herkomst"/>
+    <account type="13" name="Extra kosten levensonderhoud"/>
+    <account type="13" name="Inschrijving wettelijk en door beroepsgroep opgelegde registers"/>
+    <account type="13" name="Kosten 30% regeling"/>
+    <account type="13" name="Kosten aanvragen/omzetten papieren (verblijfsvergunningen, visa, rijbewijzen)"/>
+    <account type="13" name="Kosten kennismakingsreis werkland"/>
+    <account type="13" name="Kosten medische keuringen, vaccinaties"/>
+    <account type="13" name="Maaltijden bij overwerk/werk op koopavonden"/>
+    <account type="13" name="Opleidingen, studies, cursussen, congressen, seminars, symposia, excursies, studiereizen"/>
+    <account type="13" name="Opslagkosten boedel"/>
+    <account type="13" name="Outplacementkosten"/>
+    <account type="13" name="Overige werkkosten gericht vrijgesteld"/>
+    <account type="13" name="Reiskosten naar land herkomst (familiebezoek, gezinshereniging)"/>
+    <account type="13" name="Vakliteratuur"/>
+    <account type="13" name="Vaste vergoeding voor consumpties (ambulante werknemer)"/>
+    <account type="13" name="Vergoeding reiskosten (tot € 0,19) per kilometer"/>
+    <account type="13" name="Verstrekte producten en kortingen op producten uit eigen bedrijf (voor zover vrijgesteld)"/>
+    <account type="13" name="Zakelijke verhuiskosten exclusief kosten overbrenging boedel"/>
+    <account type="13" name="Zakelijke verhuiskosten: kosten overbrenging boedel"/>
+   </account>
+   <account type="13" name="Werkkosten intermediair">
+    <account type="13" name="Maaltijden met zakelijke relaties"/>
+    <account type="13" name="Overige werkkosten intermediair"/>
+    <account type="13" name="Parkeer-, veer- en tolgelden (auto van de zaak)"/>
+    <account type="13" name="Parkeren bij werk (auto van de zaak) (geen eigen parkeerterrein, parkeervergunning)"/>
+   </account>
+   <account type="13" name="Werkkosten met nihilwaardering">
+    <account type="13" name="Arbovoorzieningen"/>
+    <account type="13" name="Bedrijfsfitness op de werkplek"/>
+    <account type="13" name="Huisvesting en inwoning (incl energie,water, bewassing) ter vervulling dienstbetrekking"/>
+    <account type="13" name="Inrichting werkplek (niet thuis)"/>
+    <account type="13" name="Inrichting werkplek arbo-voorzieningen (thuis)"/>
+    <account type="13" name="Overige werkkosten nihilwaardering"/>
+    <account type="13" name="Parkeren werkplek (niet zijnde auto van de zaak)(op parkeerterrein van werkgever)"/>
+    <account type="13" name="Personeelsfeesten (op de werkplek)"/>
+    <account type="13" name="Rentevoordeel personeelslening eigen woning en (elektrische) fiets of elektrische scooter"/>
+    <account type="13" name="Ter beschikking gestelde openbaarvervoerkaart/voordelenurenkaart (mede zakelijk gebruikt)"/>
+    <account type="13" name="Ter beschikking stellen desktop computer op werkplek"/>
+    <account type="13" name="Verstrekking van kleding die achterblijft op de werkplek"/>
+    <account type="13" name="Verstrekking van kleding met bedrijfslogo van tenminste 70 cm²"/>
+    <account type="13" name="Verstrekking van persoonlijke beschermingsmiddelen (veiligheidsbril, werkschoenen) door werkgever"/>
+    <account type="13" name="Verstrekking van werkkleding die nagenoeg uitsluitend geschikt is om in te werken door werkgever"/>
+    <account type="13" name="Verteer werknemers op werkplek (geen maaltijden)"/>
+   </account>
+   <account type="13" name="Werkkosten noodzakelijkheidscriterium">
+    <account type="13" name="Overige werkkosten noodzakelijkheidscriterium"/>
+    <account type="13" name="Vergoeding/verstrekking computerprogrammatuur (mits noodzakelijk)"/>
+    <account type="13" name="Vergoeding/verstrekking mobiele telefoon incl. abonnement (mits noodzakelijk)"/>
+    <account type="13" name="Vergoeding/verstrekking van desktop (mits noodzakelijk)"/>
+    <account type="13" name="Vergoeding/verstrekking van laptop (mits noodzakelijk)"/>
+    <account type="13" name="Vergoeding/verstrekking van tablet (mits noodzakelijk)"/>
+   </account>
+   <account type="13" name="Werkkosten overig">
+    <account type="13" name="Correctie inzake BTW"/>
+    <account type="13" name="Doorberekende werkkosten"/>
+    <account type="13" name="Overboeking werkkosten"/>
+    <account type="13" name="Werkkosten eindheffing"/>
+   </account>
+   <account type="13" name="Werkkosten vrije ruimte">
+    <account type="13" name="Andere geschenken in de vorm van een geldsom"/>
+    <account type="13" name="Andere geschenken in natura"/>
+    <account type="13" name="Bedrijfsfitness buiten de werkplek"/>
+    <account type="13" name="Door inhoudingsplichte verrichte kinderopvang op werkplek (bso)"/>
+    <account type="13" name="Door inhoudingsplichte verrichte kinderopvang op werkplek (dagopvang)"/>
+    <account type="13" name="Eerste huisvestingskosten (tot 18% van het loon)"/>
+    <account type="13" name="Eigen bijdrage werknemers voor kinderopvang buiten de werkplek"/>
+    <account type="13" name="Eigen bijdrage werknemers voor kinderopvang op werkplek (bso)"/>
+    <account type="13" name="Eigen bijdrage werknemers voor kinderopvang op werkplek (dagopvang)"/>
+    <account type="13" name="Fietsvergoeding"/>
+    <account type="13" name="Geschenken met in hoofzaak ideële waarde bij feestdagen en jubilea"/>
+    <account type="13" name="Huisvesting en inwoning (incl energie,water, bewassing) niet ter vervulling dienstbetrekking"/>
+    <account type="13" name="Inrichting werkplek thuis (exclusief arbovoorzieningen)"/>
+    <account type="13" name="Kerstpakket aan personeel en postactieven"/>
+    <account type="13" name="Kinderopvang buiten de werkplek (factuurwaarde incl. btw of WEV)"/>
+    <account type="13" name="Maaltijden op de werkplek"/>
+    <account type="13" name="Overige werkkosten vrije ruimte"/>
+    <account type="13" name="Parkeer-, veer- en tolgelden (niet zijnde auto van de zaak)"/>
+    <account type="13" name="Parkeren bij werk (niet zijnde auto van de zaak) (geen eigen parkeerterrein, parkeervergunning)"/>
+    <account type="13" name="Personeelsfeesten (buiten de werkplek)"/>
+    <account type="13" name="Personeelsreizen"/>
+    <account type="13" name="Persoonlijke verzorging"/>
+    <account type="13" name="Producten uit eigen bedrijf en kortingen voor zover niet vrijgesteld"/>
+    <account type="13" name="Rentevoordeel personeelslening (niet eigen woning of (elektrische) fiets/elektrische scooter)"/>
+    <account type="13" name="Representatievergoeding/relatiegeschenken aan werknemers"/>
+    <account type="13" name="Vaste vergoeding voor consumpties (niet-ambulante werknemer)"/>
+    <account type="13" name="Vergoeding reiskosten voorzover boven € 0,19 per kilometer"/>
+    <account type="13" name="Vergoeding telefoonabonnementen/internetabonnementen bij werknemer thuis (indien niet noodzakelijk)"/>
+    <account type="13" name="Vergoeding vakbondscontributie"/>
+    <account type="13" name="Vergoeding van kosten van kleding die achterblijft op de werkplek"/>
+    <account type="13" name="Vergoeding van kosten van persoonlijke beschermingsmiddelen aan werknemer"/>
+    <account type="13" name="Vergoeding van kosten van werkkleding die nagenoeg uitsluitend geschikt is om in te werken"/>
+    <account type="13" name="Vergoeding werknemersbijdrage personeelsvereniging"/>
+    <account type="13" name="Vergoeding/verstrekking computerprogrammatuur (indien niet noodzakelijk)"/>
+    <account type="13" name="Vergoeding/verstrekking mobiele telefoon incl. abonnement (indien niet noodzakelijk)"/>
+    <account type="13" name="Vergoeding/verstrekking van desktop (indien niet noodzakelijk)"/>
+    <account type="13" name="Vergoeding/verstrekking van laptop (indien niet noodzakelijk)"/>
+    <account type="13" name="Vergoeding/verstrekking van tablet (indien niet noodzakelijk)"/>
+    <account type="13" name="Verstrekking/vergoeding van overige kleding"/>
+    <account type="13" name="Verteer werknemers (buiten werkplek, extern)"/>
+    <account type="13" name="Werkgeversbijdrage personeelsvereniging"/>
+    <account type="13" name="Zakelijke verhuiskosten exclusief kosten overbrenging boedel (boven gerichte vrijstelling)"/>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Onderhanden projecten">
+    <account type="9" name="Gefactureerde termijnen onderhanden projecten"/>
+    <account type="9" name="Onderhanden projecten in opdracht van derden, geactiveerde kosten voor nog niet geleverde diensten"/>
+    <account type="9" name="Onderhanden projecten in opdracht van derden, inhoudingen op gedeclareerde termijnen"/>
+    <account type="9" name="Onderhanden projecten in opdracht van derden, opbrengsten uit onderhanden projecten verwerkt in de winst-en-verliesrekening"/>
+    <account type="9" name="Onderhanden projecten in opdracht van derden, voorschotten"/>
+    <account type="9" name="Voorziening verliezen onderhanden projecten"/>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Emballage">
+    <account type="9" name="Afwaardering van voorraden emballage"/>
+    <account type="9" name="Herwaardering van voorraden emballage"/>
+    <account type="9" name="Terugneming van een eerder verwerkte afwaardering emballage"/>
+    <account type="9" name="Voorraad emballage"/>
+    <account type="9" name="Voorziening incourant emballage"/>
+   </account>
+   <account type="9" name="Gereed product">
+    <account type="9" name="Afwaardering van voorraden gereed product"/>
+    <account type="9" name="Herwaardering van voorraden gereed product"/>
+    <account type="9" name="Terugneming van een eerder verwerkte afwaardering gereed product"/>
+    <account type="9" name="Voorraad gereed product"/>
+    <account type="9" name="Voorziening incourant gereed product"/>
+   </account>
+   <account type="9" name="Grond- en hulpstoffen">
+    <account type="9" name="Afwaardering van voorraden grond- en hulpstoffen"/>
+    <account type="9" name="Herwaardering van voorraden grond- en hulpstoffen"/>
+    <account type="9" name="Terugneming van een eerder verwerkte afwaardering grond- en hulpstoffen"/>
+    <account type="9" name="Voorraad grond- en hulpstoffen"/>
+    <account type="9" name="Voorziening incourant grond- en hulpstoffen"/>
+   </account>
+   <account type="9" name="Halffabrikaten">
+    <account type="9" name="Afwaardering van voorraden halffabrikaten"/>
+    <account type="9" name="Herwaardering van voorraden halffabrikaten"/>
+    <account type="9" name="Terugneming van een eerder verwerkte afwaardering halffabrikaten"/>
+    <account type="9" name="Voorraad halffabrikaten"/>
+    <account type="9" name="Voorziening incourant halffabrikaten"/>
+   </account>
+   <account type="9" name="Handelsgoederen">
+    <account type="9" name="Afwaardering van voorraden handelsgoederen"/>
+    <account type="9" name="Herwaardering van voorraden handelsgoederen"/>
+    <account type="9" name="Terugneming van een eerder verwerkte afwaardering handelsgoederen"/>
+    <account type="9" name="Voorraad handelsgoederen"/>
+    <account type="9" name="Voorziening incourant handelsgoederen"/>
+   </account>
+   <account type="9" name="Onderhanden werken">
+    <account type="9" name="Gefactureerde termijnen onderhanden werken"/>
+    <account type="9" name="Voorraad onderhanden werken"/>
+    <account type="9" name="Voorziening verliezen onderhanden werken"/>
+   </account>
+   <account type="9" name="Vastgoed">
+    <account type="9" name="Vastgoed bestemd voor de verkoop vastgoed"/>
+    <account type="9" name="Vastgoed in ontwikkeling bestemd voor de verkoop vastgoed"/>
+   </account>
+   <account type="9" name="Vooruitbetaald op voorraden">
+    <account type="9" name="Afwaardering van voorraden vooruitbetaald op voorraden"/>
+    <account type="9" name="Herwaardering van voorraden vooruitbetaald op voorraden"/>
+    <account type="9" name="Terugneming van een eerder verwerkte afwaardering vooruitbetaald op voorraden"/>
+    <account type="9" name="Vooruitbetalingen op voorraden"/>
+    <account type="9" name="Voorziening incourant vooruitbetaald op voorraden"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Negatieve goodwill">
+    <account type="10" name="Bruto waarde negatieve goodwill">
+     <account type="10" name="Aanpassing als gevolg van later geïdentificeerde activa en passiva bruto waarde negatieve goodwill"/>
+     <account type="10" name="Aanvullend opgenomen gedurende de periode bruto waarde negatieve goodwill"/>
+     <account type="10" name="Afboeking als gevolg van afstoting bruto waarde negatieve goodwill"/>
+     <account type="10" name="Beginbalans bruto waarde negatieve goodwill"/>
+     <account type="10" name="Overige mutaties bruto waarde negatieve goodwill"/>
+     <account type="10" name="Vrijval ten gunste van winst-en-verliesrekening bruto waarde negatieve goodwill"/>
+     <account type="10" name="Vrijval ten gunste van winst-en-verliesrekening, geen betrekking op toekomstige resultaten bruto waarde negatieve goodwill"/>
+    </account>
+    <account type="10" name="Cumulatief ten gunste van winst-en-verliesrekening gebrachte negatieve goodwill">
+     <account type="10" name="Aanpassing als gevolg van later geïdentificeerde activa en passiva cumulatief ten gunste van winst-en-verliesrekening gebrachte negatieve goodwill"/>
+     <account type="10" name="Aanvullend opgenomen gedurende de periode cumulatief ten gunste van winst-en-verliesrekening gebrachte negatieve goodwill"/>
+     <account type="10" name="Afboeking als gevolg van afstoting cumulatief ten gunste van winst-en-verliesrekening gebrachte negatieve goodwill"/>
+     <account type="10" name="Beginbalans cumulatief ten gunste van winst-en-verliesrekening gebrachte negatieve goodwill"/>
+     <account type="10" name="Overige mutaties cumulatief ten gunste van winst-en-verliesrekening gebrachte negatieve goodwill"/>
+     <account type="10" name="Vrijval ten gunste van winst-en-verliesrekening cumulatief ten gunste van winst-en-verliesrekening gebrachte negatieve goodwill"/>
+     <account type="10" name="Vrijval ten gunste van winst-en-verliesrekening, geen betrekking op toekomstige resultaten cumulatief ten gunste van winst-en-verliesrekening gebrachte negatieve goodwill"/>
+    </account>
+   </account>
+   <account type="10" name="Overige voorzieningen">
+    <account type="10" name="Arbeidsongeschiktheidsvoorziening">
+     <account type="10" name="Beginbalans arbeidsongeschiktheidsvoorziening"/>
+     <account type="10" name="Omrekeningsverschillen arbeidsongeschiktheidsvoorziening"/>
+     <account type="10" name="Onttrekking arbeidsongeschiktheidsvoorziening"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet arbeidsongeschiktheidsvoorziening"/>
+     <account type="10" name="Overige mutaties arbeidsongeschiktheidsvoorziening"/>
+     <account type="10" name="Toename arbeidsongeschiktheidsvoorziening"/>
+     <account type="10" name="Vrijval arbeidsongeschiktheidsvoorziening"/>
+    </account>
+    <account type="10" name="Garantievoorziening">
+     <account type="10" name="Beginbalans garantievoorziening"/>
+     <account type="10" name="Omrekeningsverschillen garantievoorziening"/>
+     <account type="10" name="Onttrekking garantievoorziening"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet garantievoorziening"/>
+     <account type="10" name="Overige mutaties garantievoorziening"/>
+     <account type="10" name="Toename garantievoorziening"/>
+     <account type="10" name="Vrijval garantievoorziening"/>
+    </account>
+    <account type="10" name="Jubileumvoorziening">
+     <account type="10" name="Beginbalans jubileumvoorziening"/>
+     <account type="10" name="Omrekeningsverschillen jubileumvoorziening"/>
+     <account type="10" name="Onttrekking jubileumvoorziening"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet jubileumvoorziening"/>
+     <account type="10" name="Overige mutaties jubileumvoorziening"/>
+     <account type="10" name="Toename jubileumvoorziening"/>
+     <account type="10" name="Vrijval jubileumvoorziening"/>
+    </account>
+    <account type="10" name="Lijfrenteverplichting">
+     <account type="10" name="Beginbalans lijfrenteverplichting"/>
+     <account type="10" name="Omrekeningsverschillen lijfrenteverplichting"/>
+     <account type="10" name="Onttrekking lijfrenteverplichting"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet lijfrenteverplichting"/>
+     <account type="10" name="Overige mutaties lijfrenteverplichting"/>
+     <account type="10" name="Toename lijfrenteverplichting"/>
+     <account type="10" name="Vrijval lijfrenteverplichting"/>
+    </account>
+    <account type="10" name="Overige voorzieningen niet operationeel">
+     <account type="10" name="Beginbalans overige voorzieningen niet operationeel"/>
+     <account type="10" name="Omrekeningsverschillen overige voorzieningen niet operationeel"/>
+     <account type="10" name="Onttrekking overige voorzieningen niet operationeel"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet overige voorzieningen niet operationeel"/>
+     <account type="10" name="Overige mutaties overige voorzieningen niet operationeel"/>
+     <account type="10" name="Toename overige voorzieningen niet operationeel"/>
+     <account type="10" name="Vrijval overige voorzieningen niet operationeel"/>
+    </account>
+    <account type="10" name="Overige voorzieningen operationeel">
+     <account type="10" name="Beginbalans overige voorzieningen operationeel"/>
+     <account type="10" name="Omrekeningsverschillen overige voorzieningen operationeel"/>
+     <account type="10" name="Onttrekking overige voorzieningen operationeel"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet overige voorzieningen operationeel"/>
+     <account type="10" name="Overige mutaties overige voorzieningen operationeel"/>
+     <account type="10" name="Toename overige voorzieningen operationeel"/>
+     <account type="10" name="Vrijval overige voorzieningen operationeel"/>
+    </account>
+    <account type="10" name="Voorziening in verband met deelnemingen">
+     <account type="10" name="Beginbalans voorziening in verband met deelnemingen"/>
+     <account type="10" name="Omrekeningsverschillen voorziening in verband met deelnemingen"/>
+     <account type="10" name="Onttrekking voorziening in verband met deelnemingen"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening in verband met deelnemingen"/>
+     <account type="10" name="Overige mutaties voorziening in verband met deelnemingen"/>
+     <account type="10" name="Toename voorziening in verband met deelnemingen"/>
+     <account type="10" name="Vrijval voorziening in verband met deelnemingen"/>
+    </account>
+    <account type="10" name="Voorziening in verband met reorganisaties">
+     <account type="10" name="Beginbalans voorziening in verband met reorganisaties"/>
+     <account type="10" name="Omrekeningsverschillen voorziening in verband met reorganisaties"/>
+     <account type="10" name="Onttrekking voorziening in verband met reorganisaties"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening in verband met reorganisaties"/>
+     <account type="10" name="Overige mutaties voorziening in verband met reorganisaties"/>
+     <account type="10" name="Toename voorziening in verband met reorganisaties"/>
+     <account type="10" name="Vrijval voorziening in verband met reorganisaties"/>
+    </account>
+    <account type="10" name="Voorziening uit hoofde van claims, geschillen en rechtsgedingen">
+     <account type="10" name="Beginbalans voorziening uit hoofde van claims, geschillen en rechtsgedingen"/>
+     <account type="10" name="Omrekeningsverschillen voorziening uit hoofde van claims, geschillen en rechtsgedingen"/>
+     <account type="10" name="Onttrekking voorziening uit hoofde van claims, geschillen en rechtsgedingen"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening uit hoofde van claims, geschillen en rechtsgedingen"/>
+     <account type="10" name="Overige mutaties voorziening uit hoofde van claims, geschillen en rechtsgedingen"/>
+     <account type="10" name="Toename voorziening uit hoofde van claims, geschillen en rechtsgedingen"/>
+     <account type="10" name="Vrijval voorziening uit hoofde van claims, geschillen en rechtsgedingen"/>
+    </account>
+    <account type="10" name="Voorziening voor herstelkosten">
+     <account type="10" name="Beginbalans voorziening voor herstelkosten"/>
+     <account type="10" name="Omrekeningsverschillen voorziening voor herstelkosten"/>
+     <account type="10" name="Onttrekking voorziening voor herstelkosten"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening voor herstelkosten"/>
+     <account type="10" name="Overige mutaties voorziening voor herstelkosten"/>
+     <account type="10" name="Toename voorziening voor herstelkosten"/>
+     <account type="10" name="Vrijval voorziening voor herstelkosten"/>
+    </account>
+    <account type="10" name="Voorziening voor opruiming van aanwezige milieuvervuiling">
+     <account type="10" name="Beginbalans voorziening voor opruiming van aanwezige milieuvervuiling"/>
+     <account type="10" name="Omrekeningsverschillen voorziening voor opruiming van aanwezige milieuvervuiling"/>
+     <account type="10" name="Onttrekking voorziening voor opruiming van aanwezige milieuvervuiling"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening voor opruiming van aanwezige milieuvervuiling"/>
+     <account type="10" name="Overige mutaties voorziening voor opruiming van aanwezige milieuvervuiling"/>
+     <account type="10" name="Toename voorziening voor opruiming van aanwezige milieuvervuiling"/>
+     <account type="10" name="Vrijval voorziening voor opruiming van aanwezige milieuvervuiling"/>
+    </account>
+    <account type="10" name="Voorziening voor verlieslatende contracten">
+     <account type="10" name="Beginbalans voorziening voor verlieslatende contracten"/>
+     <account type="10" name="Omrekeningsverschillen voorziening voor verlieslatende contracten"/>
+     <account type="10" name="Onttrekking voorziening voor verlieslatende contracten"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening voor verlieslatende contracten"/>
+     <account type="10" name="Overige mutaties voorziening voor verlieslatende contracten"/>
+     <account type="10" name="Toename voorziening voor verlieslatende contracten"/>
+     <account type="10" name="Vrijval voorziening voor verlieslatende contracten"/>
+    </account>
+    <account type="10" name="Voorziening voor verwijderingsverplichtingen">
+     <account type="10" name="Beginbalans voorziening voor verwijderingsverplichtingen"/>
+     <account type="10" name="Omrekeningsverschillen voorziening voor verwijderingsverplichtingen"/>
+     <account type="10" name="Onttrekking voorziening voor verwijderingsverplichtingen"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening voor verwijderingsverplichtingen"/>
+     <account type="10" name="Overige mutaties voorziening voor verwijderingsverplichtingen"/>
+     <account type="10" name="Toename voorziening voor verwijderingsverplichtingen"/>
+     <account type="10" name="Vrijval voorziening voor verwijderingsverplichtingen"/>
+    </account>
+   </account>
+   <account type="10" name="Voorziening groot onderhoud">
+    <account type="10" name="Voorziening voor groot onderhoud gebouwen">
+     <account type="10" name="Beginbalans voorziening voor groot onderhoud gebouwen"/>
+     <account type="10" name="Omrekeningsverschillen voorziening voor groot onderhoud gebouwen"/>
+     <account type="10" name="Onttrekking voorziening voor groot onderhoud gebouwen"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening voor groot onderhoud gebouwen"/>
+     <account type="10" name="Overige mutaties voorziening voor groot onderhoud gebouwen"/>
+     <account type="10" name="Toename voorziening voor groot onderhoud gebouwen"/>
+     <account type="10" name="Vrijval voorziening voor groot onderhoud gebouwen"/>
+    </account>
+    <account type="10" name="Voorziening voor groot onderhoud inventaris">
+     <account type="10" name="Beginbalans voorziening voor groot onderhoud inventaris"/>
+     <account type="10" name="Omrekeningsverschillen voorziening voor groot onderhoud inventaris"/>
+     <account type="10" name="Onttrekking voorziening voor groot onderhoud inventaris"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening voor groot onderhoud inventaris"/>
+     <account type="10" name="Overige mutaties voorziening voor groot onderhoud inventaris"/>
+     <account type="10" name="Toename voorziening voor groot onderhoud inventaris"/>
+     <account type="10" name="Vrijval voorziening voor groot onderhoud inventaris"/>
+    </account>
+    <account type="10" name="Voorziening voor groot onderhoud machines en installaties">
+     <account type="10" name="Beginbalans voorziening voor groot onderhoud machines en installaties"/>
+     <account type="10" name="Omrekeningsverschillen voorziening voor groot onderhoud machines en installaties"/>
+     <account type="10" name="Onttrekking voorziening voor groot onderhoud machines en installaties"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening voor groot onderhoud machines en installaties"/>
+     <account type="10" name="Overige mutaties voorziening voor groot onderhoud machines en installaties"/>
+     <account type="10" name="Toename voorziening voor groot onderhoud machines en installaties"/>
+     <account type="10" name="Vrijval voorziening voor groot onderhoud machines en installaties"/>
+    </account>
+    <account type="10" name="Voorziening voor groot onderhoud transport- en vervoermiddelen">
+     <account type="10" name="Beginbalans voorziening voor groot onderhoud transport- en vervoermiddelen"/>
+     <account type="10" name="Omrekeningsverschillen voorziening voor groot onderhoud transport- en vervoermiddelen"/>
+     <account type="10" name="Onttrekking voorziening voor groot onderhoud transport- en vervoermiddelen"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening voor groot onderhoud transport- en vervoermiddelen"/>
+     <account type="10" name="Overige mutaties voorziening voor groot onderhoud transport- en vervoermiddelen"/>
+     <account type="10" name="Toename voorziening voor groot onderhoud transport- en vervoermiddelen"/>
+     <account type="10" name="Vrijval voorziening voor groot onderhoud transport- en vervoermiddelen"/>
+    </account>
+   </account>
+   <account type="10" name="Voorziening voor belastingen">
+    <account type="10" name="Voorziening voor latente belastingverplichtingen">
+     <account type="10" name="Beginbalans voorziening voor latente belastingverplichtingen"/>
+     <account type="10" name="Omrekeningsverschillen voorziening voor latente belastingverplichtingen"/>
+     <account type="10" name="Onttrekking voorziening voor latente belastingverplichtingen"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening voor latente belastingverplichtingen"/>
+     <account type="10" name="Overige mutaties voorziening voor latente belastingverplichtingen"/>
+     <account type="10" name="Toename voorziening voor latente belastingverplichtingen"/>
+     <account type="10" name="Vrijval voorziening voor latente belastingverplichtingen"/>
+    </account>
+   </account>
+   <account type="10" name="Voorziening voor pensioenen">
+    <account type="10" name="Backserviceverplichting">
+     <account type="10" name="Beginbalans backserviceverplichting"/>
+     <account type="10" name="Omrekeningsverschillen backserviceverplichting"/>
+     <account type="10" name="Onttrekking backserviceverplichting"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet backserviceverplichting"/>
+     <account type="10" name="Overige mutaties backserviceverplichting"/>
+     <account type="10" name="Toename backserviceverplichting"/>
+     <account type="10" name="Vrijval backserviceverplichting"/>
+    </account>
+    <account type="10" name="Voorziening voor pensioenen directie in eigen beheer">
+     <account type="10" name="Beginbalans voorziening voor pensioenen directie in eigen beheer"/>
+     <account type="10" name="Omrekeningsverschillen voorziening voor pensioenen directie in eigen beheer"/>
+     <account type="10" name="Onttrekking voorziening voor pensioenen directie in eigen beheer"/>
+     <account type="10" name="Oprenting en/of verandering disconteringsvoet voorziening voor pensioenen directie in eigen beheer"/>
+     <account type="10" name="Overige mutaties voorziening voor pensioenen directie in eigen beheer"/>
+     <account type="10" name="Toename voorziening voor pensioenen directie in eigen beheer"/>
+     <account type="10" name="Vrijval voorziening voor pensioenen directie in eigen beheer"/>
+    </account>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Debiteuren">
+    <account type="9" name="Gefactureerde termijnen"/>
+    <account type="9" name="Handelsdebiteuren"/>
+    <account type="9" name="Handelsdebiteuren intercompany"/>
+    <account type="9" name="Huurdebiteuren"/>
+    <account type="9" name="Voorziening dubieuze debiteuren"/>
+   </account>
+   <account type="9" name="Omzetbelasting">
+    <account type="9" name="Terug te vorderen omzetbelasting">
+     <account type="9" name="Beginbalans terug te vorderen omzetbelasting"/>
+     <account type="9" name="Naheffingsaanslagen omzetbelasting"/>
+     <account type="9" name="Omzetbelasting leveringen/diensten algemeen tarief"/>
+     <account type="9" name="Omzetbelasting leveringen/diensten overige tarieven"/>
+     <account type="9" name="Omzetbelasting leveringen/diensten uit landen binnen EU"/>
+     <account type="9" name="Omzetbelasting leveringen/diensten uit landen buiten de EU"/>
+     <account type="9" name="Omzetbelasting leveringen/diensten verlaagd tarief"/>
+     <account type="9" name="Omzetbelasting leveringen/diensten waarbij heffing is verlegd"/>
+     <account type="9" name="Omzetbelasting over privégebruik"/>
+     <account type="9" name="Overige mutaties omzetbelasting"/>
+     <account type="9" name="Schatting deze aangifte"/>
+     <account type="9" name="Schatting vorige aangifte(n)"/>
+     <account type="9" name="Terugontvangen omzetbelasting"/>
+     <account type="9" name="Vermindering volgens de kleineondernemersregeling"/>
+     <account type="9" name="Voorbelasting"/>
+    </account>
+   </account>
+   <account type="9" name="Overige vorderingen">
+    <account type="9" name="Ingehouden dividendbelasting"/>
+    <account type="9" name="Latente belastingvorderingen (kortlopend)"/>
+    <account type="9" name="Overige vorderingen (kortlopend)"/>
+    <account type="9" name="Rekening-courant bestuurders"/>
+    <account type="9" name="Te vorderen dividend"/>
+    <account type="9" name="Te vorderen loonsubsidie"/>
+    <account type="9" name="Te vorderen overheidssubsidies"/>
+    <account type="9" name="Te vorderen overige rente"/>
+    <account type="9" name="Te vorderen overige subsidies"/>
+    <account type="9" name="Te vorderen rente lening"/>
+    <account type="9" name="Van aandeelhouders opgevraagde stortingen"/>
+    <account type="9" name="Vooruitbetalingen"/>
+    <account type="9" name="Vorderingen op groepsmaatschappijen (kortlopend)"/>
+    <account type="9" name="Vorderingen op overige verbonden maatschappijen (kortlopend)"/>
+    <account type="9" name="Vorderingen op participanten en op maatschappijen waarin wordt deelgenomen (kortlopend)"/>
+    <account type="9" name="Vorderingen uit hoofde van belastingen"/>
+    <account type="9" name="Vorderingen uit hoofde van pensioenen"/>
+    <account type="9" name="Waarborgsom"/>
+   </account>
+   <account type="9" name="Overlopende activa">
+    <account type="9" name="Nog te factureren of nog te verzenden facturen"/>
+    <account type="9" name="Overige overlopende activa"/>
+    <account type="9" name="Te ontvangen rente"/>
+    <account type="9" name="Vooruitbetaalde facturen"/>
+    <account type="9" name="Vooruitbetaalde rente"/>
+    <account type="9" name="Vooruitverzonden op bestellingen"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Vrijval egalisatierekening IPR">
+    <account type="12" name="Vrijval egalisatierekening IPR"/>
+   </account>
+   <account type="12" name="Vrijval overige egalisatierekeningen">
+    <account type="12" name="Vrijval overige egalisatierekeningen"/>
+   </account>
+   <account type="12" name="Vrijval uit herwaarderingsreserve">
+    <account type="12" name="Vrijval uit herwaarderingsreserve"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Geactiveerde productie voor het eigen bedrijf">
+    <account type="12" name="Geactiveerde productie eigen bedrijf"/>
+    <account type="12" name="Privé gebruik eigen bedrijf"/>
+   </account>
+   <account type="12" name="Wijziging in onderhanden projecten in opdracht van derden">
+    <account type="12" name="Wijziging in onderhanden projecten in opdracht van derden"/>
+   </account>
+   <account type="12" name="Wijziging in voorraden gereed product">
+    <account type="12" name="Wijziging in voorraden gereed product"/>
+   </account>
+   <account type="12" name="Wijziging in voorraden onderhanden werk">
+    <account type="12" name="Wijziging in voorraden onderhanden werk"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -1,21 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/es_ES/acctchrt_retiremt.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Cuentas de jubilación</title>
  <shortdesc>Cuenta de jubilación con subcuentas de inversiones relacionadas</shortdesc>
- <longdesc>Deseará escoger este juego de cuentas si tiene cuentas de jubilación (de acciones, bonos, fondos de inversión, fondos de índice).</longdesc>
+ <longdesc>Deseará escoger este juego de cuentas si tiene cuentas de
+   jubilación (de acciones, bonos, fondos de inversión, fondos de
+   índice).</longdesc>
  <accounts>
   <account type="9" name="">
    <account type="9" name="Inversiones">
-    <account type="7" name="Jubilación"/>
+    <account type="1" name="Jubilación">
+     <account type="15" name="Acciones"/>
+     <account type="15" name="Bonos"/>
+     <account type="15" name="Fondo de inversión"/>
+     <account type="15" name="Fondo de índice"/>
+    </account>
    </account>
   </account>
  </accounts>

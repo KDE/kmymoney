@@ -1,18 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/pt_PT/acctchrt_brokerage.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Conta de Investimentos</title>
- <shortdesc>Conta de corretagem com contas de investimentos relacionados (acções, obrigações, fundos de investimento, fundos de índices, juros, dividendos)</shortdesc>
+ <shortdesc>Conta de corretagem com contas de investimentos relacionados
+    (acções, obrigações, fundos de investimento, fundos de índices, juros, dividendos)</shortdesc>
  <longdesc>Você desejará seleccionar este conjunto de acções caso possua investimentos (acções, obrigações, fundos de investimento, fundos de índices, juros, dividendos).</longdesc>
  <accounts>
+  <account type="9" name="">
+   <account type="9" name="Investimentos">
+    <account type="1" name="Conta na Corretora">
+     <account type="9" name="Acção"/>
+     <account type="9" name="Fundo de Investimento"/>
+     <account type="9" name="Obrigação"/>
+     <account type="9" name="Índice de Mercado"/>
+    </account>
+   </account>
+  </account>
   <account type="13" name="">
    <account type="13" name="Comissões"/>
   </account>
@@ -20,11 +31,6 @@
    <account type="12" name="Receita de Dividendos"/>
    <account type="12" name="Receita de Juros">
     <account type="12" name="Juros de Obigações"/>
-   </account>
-  </account>
-  <account type="9" name="">
-   <account type="9" name="Investimentos">
-    <account type="7" name="Conta na Corretora"/>
    </account>
   </account>
  </accounts>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/pl/acctchrt_childcare.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Wydatki na dzieci</title>
+ <shortdesc>Konta pomagające śledzić wydatki związane z dziećmi</shortdesc>
+ <longdesc>Wybierzesz ten zestaw, jeśli posiadasz wydatki związane z opieką nad dziećmi.</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Wydatki na dzieci"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/lv/acctchrt_full.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Visi konti</title>
+ <shortdesc>Full chart of accounts contains all default accounts.</shortdesc>
+ <longdesc></longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Investīcijas">
+    <account type="1" name="Biržas konti">
+     <account type="15" name="Akcijas"/>
+     <account type="15" name="Kapitāla daļas"/>
+     <account type="15" name="Vērtspapīri"/>
+    </account>
+    <account type="1" name="Dzīvesbiedra pensijas fondi">
+     <account type="15" name="Akcijas"/>
+     <account type="15" name="Kapitāla daļas"/>
+     <account type="15" name="Vērtspapīri"/>
+    </account>
+    <account type="1" name="Pensijas fondi">
+     <account type="15" name="Akcijas"/>
+     <account type="15" name="Kapitāla daļas"/>
+     <account type="15" name="Vērtspapīri"/>
+    </account>
+    <account type="11" name="Valūtas"/>
+   </account>
+   <account type="9" name="Tekošie aktīvi">
+    <account type="1" name="Bankas depozīti"/>
+    <account type="1" name="Bankas konts"/>
+    <account type="3" name="Skaidra nauda"/>
+    <account type="1" name="Termiņnoguldījumi"/>
+    <account type="1" name="Uzkrājumi"/>
+   </account>
+   <account type="9" name="Īpašumi">
+    <account type="9" name="Citi īpašumi"/>
+    <account type="9" name="Mājoklis"/>
+    <account type="9" name="Transporta līdzekļi"/>
+   </account>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Sākuma bilances"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Alga"/>
+   <account type="12" name="Bonusi"/>
+   <account type="12" name="Citi ienākumi"/>
+   <account type="12" name="Dividendes"/>
+   <account type="12" name="Dzīvesbiedra alga"/>
+   <account type="12" name="Dāvinājumi"/>
+   <account type="12" name="Procenti">
+    <account type="12" name="Citi procenti"/>
+    <account type="12" name="Depozītu procenti"/>
+    <account type="12" name="Noguldījumu procenti"/>
+    <account type="12" name="Valūtu kursu peļņa"/>
+    <account type="12" name="Vērtspapīru peļņa"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Abonēšana"/>
+   <account type="13" name="Apdrošināšana">
+    <account type="13" name="Dzīvības apdrošināšana"/>
+    <account type="13" name="Mašīnas apdrošināšana"/>
+    <account type="13" name="Mājokļa apdrošināšana"/>
+    <account type="13" name="Veselības apdrošināšana"/>
+    <account type="13" name="Īres apdrošināšana"/>
+   </account>
+   <account type="13" name="Apģērba tīrīšana"/>
+   <account type="13" name="Apģērbs un apavi"/>
+   <account type="13" name="Banku pakalpojumi"/>
+   <account type="13" name="Bērni"/>
+   <account type="13" name="Dators"/>
+   <account type="13" name="Dažādi"/>
+   <account type="13" name="Dzīvesbiedra nodokļi">
+    <account type="13" name="Citi nodokļi"/>
+    <account type="13" name="Pašvaldības"/>
+    <account type="13" name="Sociālie nodokļi"/>
+    <account type="13" name="Valsts"/>
+    <account type="13" name="Veselības"/>
+   </account>
+   <account type="13" name="Dāvanas"/>
+   <account type="13" name="Grāmatas"/>
+   <account type="13" name="Internets"/>
+   <account type="13" name="Izglītība"/>
+   <account type="13" name="Izklaide">
+    <account type="13" name="Atpūta"/>
+    <account type="13" name="Ceļojumi"/>
+    <account type="13" name="Mūzika un filmas"/>
+   </account>
+   <account type="13" name="Korekcija"/>
+   <account type="13" name="Mašīna">
+    <account type="13" name="Degviela"/>
+    <account type="13" name="Nodevas"/>
+    <account type="13" name="Remonts un uzturēšana"/>
+    <account type="13" name="Stāvvieta"/>
+   </account>
+   <account type="13" name="Medicīna"/>
+   <account type="13" name="Mājokļa remonts"/>
+   <account type="13" name="Nodokļi">
+    <account type="13" name="Citi nodokļi"/>
+    <account type="13" name="Pašvaldības"/>
+    <account type="13" name="Sociālais nodoklis"/>
+    <account type="13" name="Valsts"/>
+    <account type="13" name="Veselības"/>
+    <account type="13" name="Īpašuma nodoklis"/>
+   </account>
+   <account type="13" name="Pakalpojumi">
+    <account type="13" name="Apkure"/>
+    <account type="13" name="Atkritumu savākšana"/>
+    <account type="13" name="Elektrība"/>
+    <account type="13" name="Gāze"/>
+    <account type="13" name="Ūdens un kanalizācija"/>
+   </account>
+   <account type="13" name="Piegādes"/>
+   <account type="13" name="Procenti">
+    <account type="13" name="Citi procenti"/>
+    <account type="13" name="Mašīnas līzinga procenti"/>
+    <account type="13" name="Mājokļa kredīta procenti"/>
+    <account type="13" name="Studiju kredīta procenti"/>
+   </account>
+   <account type="13" name="Pusdienas"/>
+   <account type="13" name="Pārtika"/>
+   <account type="13" name="Sabiedriskais transports"/>
+   <account type="13" name="Starpniecība"/>
+   <account type="13" name="Telefons"/>
+   <account type="13" name="Televīzija"/>
+   <account type="13" name="Vaļasprieki"/>
+   <account type="13" name="Ziedojumi"/>
+   <account type="13" name="Īre"/>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Aizņēmumi">
+    <account type="10" name="Auto līzings"/>
+    <account type="10" name="Citi aizņēmumi"/>
+    <account type="10" name="Mājokļa kredīts"/>
+    <account type="10" name="Studiju kredīts"/>
+   </account>
+   <account type="4" name="Kredītkarte"/>
+   <account type="4" name="Kredītlīnija"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/es_ES/acctchrt_otherloan.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Otros préstamos</title>
  <shortdesc>Cuentas para controlar otros préstamos, junto con su interés asociado</shortdesc>
- <longdesc>Deseará seleccionar este juego de cuentas si tiene un préstamo distinto a un préstamo hipotecario (otro préstamo, interés de otro préstamo).</longdesc>
+ <longdesc>Deseará seleccionar este juego de cuentas si tiene un préstamo
+   distinto a un préstamo hipotecario (otro préstamo, interés de
+   otro préstamo).</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="Intereses">

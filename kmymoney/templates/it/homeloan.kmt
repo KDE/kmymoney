@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/it/acctchrt_homeloan.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
@@ -13,14 +13,14 @@
  <shortdesc>Conti per il mutuo della casa e relativi interessi</shortdesc>
  <longdesc>Selezionare questo insieme di conti se si possiede un mutuo per la casa (mutuo, interessi).</longdesc>
  <accounts>
-  <account type="13" name="">
-   <account type="13" name="Interessi">
-    <account type="13" name="Interessi mutuo casa"/>
-   </account>
-  </account>
   <account type="10" name="">
    <account type="10" name="Mutui">
     <account type="10" name="Mutuo casa"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Interessi">
+    <account type="13" name="Interessi mutuo casa"/>
    </account>
   </account>
  </accounts>

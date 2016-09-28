@@ -1,26 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/zh_CN/acctchrt_homeown.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Homeowner Expenses</title>
- <shortdesc>Expenses associated with owning a home</shortdesc>
- <longdesc>You would want to select this set of accounts if you own a home. This set provides a group of accounts to track home expenses (insurance, taxes, home repair).</longdesc>
+ <title>房主费用</title>
+ <shortdesc>关于拥有一套房屋的费用</shortdesc>
+ <longdesc>如果您有一个房屋，您可能希望选择这套科目。这套科目提供了一套用于跟踪房屋费用(保险、税、房屋维修)的科目。</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="保险">
-    <account type="13" name="家庭保险"/>
+    <account type="13" name="家居保险"/>
    </account>
-   <account type="13" name="税收">
+   <account type="13" name="家居维修"/>
+   <account type="13" name="税费">
     <account type="13" name="房地产税"/>
    </account>
-   <account type="13" name="家庭修理"/>
   </account>
  </accounts>
 </kmymoney-account-template>

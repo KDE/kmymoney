@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/cs/acctchrt_homeown.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Výdaje z vlastnictví domu</title>
+ <shortdesc>Výdaje, které jsou spojené s vlastnictvím domu</shortdesc>
+ <longdesc>Zvolte si tuto sadu účtů, pokud vlastníte dům. Tato sada poskytuje skupinu účtů na sledování výdajů na dům (pojištění, daně, opravy domu).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Daně">
+    <account type="13" name="Daň z nemovitosti"/>
+   </account>
+   <account type="13" name="Opravy domu"/>
+   <account type="13" name="Pojištění">
+    <account type="13" name="Pojištění"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/C/acctchrt_retiremt.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
@@ -14,8 +14,14 @@
  <longdesc>You would want to select this set of accounts if you have retirement accounts (stock, bond, mutual fund, index fund).</longdesc>
  <accounts>
   <account type="9" name="">
-   <account type="7" name="Retirement"/>
+   <account type="9" name="Investments">
+    <account type="1" name="Retirement">
+     <account type="15" name="Bond"/>
+     <account type="15" name="Market Index"/>
+     <account type="15" name="Mutual Fund"/>
+     <account type="15" name="Stock"/>
+    </account>
+   </account>
   </account>
-  <account type="9" name=""/>
  </accounts>
 </kmymoney-account-template>

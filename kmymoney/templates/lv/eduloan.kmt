@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/lv/acctchrt_eduloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Studiju kredīts</title>
+ <shortdesc>Konti studiju kredīta izdevumu uzskaitei</shortdesc>
+ <longdesc>Izmantojiet šos kontus, lai uzskaitītu studiju kredīta izdevumus (studiju kredītu un kredīta procentus).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Procenti">
+    <account type="13" name="Studiju kredīta procenti"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Kredīti">
+    <account type="10" name="Studiju kredīts"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

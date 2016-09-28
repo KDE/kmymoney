@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/nl/acctchrt_full.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Alle rekeningen</title>
+ <shortdesc>Volledig overzicht van alle rekeningen.</shortdesc>
+ <longdesc></longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Huidige Activa">
+    <account type="1" name="Deposito"/>
+    <account type="1" name="Geldmarkt"/>
+    <account type="3" name="Kas"/>
+    <account type="1" name="Lopende Rekening"/>
+    <account type="1" name="Spaarrekening"/>
+   </account>
+   <account type="9" name="Investeringen">
+    <account type="1" name="Beleggingsrekening">
+     <account type="15" name="Aandelen"/>
+     <account type="15" name="Fondsen"/>
+     <account type="15" name="Marktindex"/>
+     <account type="15" name="Obligaties"/>
+    </account>
+    <account type="11" name="Buitenlandse Geldmarkt"/>
+    <account type="1" name="Pensioen">
+     <account type="15" name="Aandelen"/>
+     <account type="15" name="Fondsen"/>
+     <account type="15" name="Marktindex"/>
+     <account type="15" name="Obligaties"/>
+    </account>
+    <account type="1" name="Pensioen Echtgenoot/Partner">
+     <account type="15" name="Aandelen"/>
+     <account type="15" name="Fondsen"/>
+     <account type="15" name="Marktindex"/>
+     <account type="15" name="Obligaties"/>
+    </account>
+   </account>
+   <account type="9" name="Vaste Activa">
+    <account type="9" name="Overige Activa"/>
+    <account type="9" name="Vaste Activa"/>
+    <account type="9" name="Wagenpark"/>
+   </account>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Openingsbalans"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Bonus"/>
+   <account type="12" name="Dividenduitkering"/>
+   <account type="12" name="Ontvangen Giften"/>
+   <account type="12" name="Overig Inkomsten"/>
+   <account type="12" name="Rente">
+    <account type="12" name="Deposito Rente"/>
+    <account type="12" name="Geldmarktrente"/>
+    <account type="12" name="Obligatierente"/>
+    <account type="12" name="Overige Rente"/>
+    <account type="12" name="Rente Lopende Rekening"/>
+    <account type="12" name="Spaarrente"/>
+   </account>
+   <account type="12" name="Salaris"/>
+   <account type="12" name="Salaris (Echtgenoot/Partner)"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Abonnementen"/>
+   <account type="13" name="Afschrijving Wagenpark">
+    <account type="13" name="Brandstof"/>
+    <account type="13" name="Parkeren"/>
+    <account type="13" name="Reparaties/Onderhoud"/>
+    <account type="13" name="Toeslagen"/>
+   </account>
+   <account type="13" name="Amusement">
+    <account type="13" name="Muziek/Film"/>
+    <account type="13" name="Recreatie"/>
+    <account type="13" name="Reizen"/>
+   </account>
+   <account type="13" name="Bankkosten"/>
+   <account type="13" name="Belasting (Echtgenoot/Partner)">
+    <account type="13" name="Federaal"/>
+    <account type="13" name="Overige Belastingen"/>
+    <account type="13" name="Provincie"/>
+    <account type="13" name="Sociale Zekerheid"/>
+    <account type="13" name="Zorgverzekeringen"/>
+   </account>
+   <account type="13" name="Belastingen">
+    <account type="13" name="Federaal"/>
+    <account type="13" name="Onroerendgoedbelasting"/>
+    <account type="13" name="Overige Belastingen"/>
+    <account type="13" name="Provincie"/>
+    <account type="13" name="Sociale Zekerheid"/>
+    <account type="13" name="Zorgverzekeringen"/>
+   </account>
+   <account type="13" name="Boeken"/>
+   <account type="13" name="Boodschappen"/>
+   <account type="13" name="Centrale Antenne Inrichting"/>
+   <account type="13" name="Commissies"/>
+   <account type="13" name="Computer"/>
+   <account type="13" name="Correcties"/>
+   <account type="13" name="Dineren"/>
+   <account type="13" name="Diversen"/>
+   <account type="13" name="Geschenken"/>
+   <account type="13" name="Giften"/>
+   <account type="13" name="Hobby's"/>
+   <account type="13" name="Huur"/>
+   <account type="13" name="Kinderopvang"/>
+   <account type="13" name="Kleding"/>
+   <account type="13" name="Nutsbedrijven">
+    <account type="13" name="Elektriciteit"/>
+    <account type="13" name="Gemeentereiniging"/>
+    <account type="13" name="Stookkosten"/>
+    <account type="13" name="Water"/>
+   </account>
+   <account type="13" name="Onderhoud Vaste Activa"/>
+   <account type="13" name="Online-diensten"/>
+   <account type="13" name="Openbaar Vervoer"/>
+   <account type="13" name="Opleidingen"/>
+   <account type="13" name="Rente">
+    <account type="13" name="Autoleaserente"/>
+    <account type="13" name="Hypotheekrente"/>
+    <account type="13" name="Overige Rente"/>
+    <account type="13" name="Rente Studiefinanciering"/>
+   </account>
+   <account type="13" name="Telefoon"/>
+   <account type="13" name="Verzekeringen">
+    <account type="13" name="Autoverzekering"/>
+    <account type="13" name="Gezondheidsverzekering"/>
+    <account type="13" name="Inboedelverzekering"/>
+    <account type="13" name="Inboedelverzekering"/>
+    <account type="13" name="Levensverzekering"/>
+   </account>
+   <account type="13" name="Voorraad"/>
+   <account type="13" name="Was/Stomerij"/>
+   <account type="13" name="Zorgverzekeringskosten"/>
+  </account>
+  <account type="10" name="">
+   <account type="4" name="Creditkaart"/>
+   <account type="4" name="Kredietlijn"/>
+   <account type="10" name="Leningen">
+    <account type="10" name="Hypotheek"/>
+    <account type="10" name="Overige Leningen"/>
+    <account type="10" name="Studiefinanciering"/>
+    <account type="10" name="Wagenparklening"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

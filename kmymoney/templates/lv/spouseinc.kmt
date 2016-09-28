@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/lv/acctchrt_spouseinc.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Dzīvesbiedra ienākumi</title>
+ <shortdesc>Konti dzīvesbiedra/draudzenes ienākumu atsevišķai uzskaitei</shortdesc>
+ <longdesc>Izmantojiet šos kontus, lai atsevišķi uzskaitītu sava dzīvesbiedra vai draudzenes ienākumus un izdevumus viņa/viņas vietā.</longdesc>
+ <accounts>
+  <account type="12" name="">
+   <account type="12" name="Dzīvesbiedra alga"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Dzīvesbiedra nodokļi">
+    <account type="13" name="Citi nodokļi"/>
+    <account type="13" name="Pašvaldības"/>
+    <account type="13" name="Sociālie"/>
+    <account type="13" name="Valsts"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

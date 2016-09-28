@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/fr_CA/acctchrt_proprietaire.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
@@ -13,26 +13,26 @@
  <shortdesc>Dépenses du propriétaire d'une résidence.</shortdesc>
  <longdesc>Sélectionnez ce groupe de comptes si vous êtes propriétaire d'une résidence, et voulez en suivre les frais associés (hypothèque, intérêts, entretien et réparations, taxes, ...).</longdesc>
  <accounts>
-  <account type="10" name="">
-   <account type="10" name="Emprunts">
-    <account type="10" name="Hypothèque"/>
+  <account type="9" name="">
+   <account type="9" name="Actifs fixes">
+    <account type="9" name="Résidence"/>
    </account>
   </account>
   <account type="13" name="">
    <account type="13" name="Assurances">
     <account type="13" name="Résidence"/>
    </account>
-   <account type="13" name="Taxes et impôts">
-    <account type="13" name="Impôt foncier"/>
-   </account>
+   <account type="13" name="Entretien de la résidence"/>
    <account type="13" name="Intérêts">
     <account type="13" name="Hypothèque"/>
    </account>
-   <account type="13" name="Entretien de la résidence"/>
+   <account type="13" name="Taxes et impôts">
+    <account type="13" name="Impôt foncier"/>
+   </account>
   </account>
-  <account type="9" name="">
-   <account type="9" name="Actifs fixes">
-    <account type="9" name="Résidence"/>
+  <account type="10" name="">
+   <account type="10" name="Emprunts">
+    <account type="10" name="Hypothèque"/>
    </account>
   </account>
  </accounts>

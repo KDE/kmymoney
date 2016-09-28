@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ko/acctchrt_renter.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>렌트 지출</title>
+ <shortdesc>집 렌트와 관련된 지출</shortdesc>
+ <longdesc>집 또는 아파트 렌트와 관련된 계정을 선택합니다.(렌트, 렌트자 보험).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="렌트비"/>
+   <account type="13" name="보험">
+    <account type="13" name="렌탈 보험"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

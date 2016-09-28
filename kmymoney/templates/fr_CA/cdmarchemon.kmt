@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/fr_CA/acctchrt_cdmarchemon.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
@@ -15,8 +15,8 @@
  <accounts>
   <account type="9" name="">
    <account type="9" name="Liquidités">
-    <account type="1" name="Marché monétaire"/>
     <account type="1" name="CD/CPG bancaires"/>
+    <account type="1" name="Marché monétaire"/>
    </account>
   </account>
   <account type="12" name="">

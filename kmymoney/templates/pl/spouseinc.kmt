@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/pl/acctchrt_spouseinc.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Dochody współmałżonka</title>
+ <shortdesc>Konta przeznaczone na dochody współmałżonka</shortdesc>
+ <longdesc>Tego zestawu użyjesz, jeśli twój współmałżonek pracuje (pensja (małżonka), podatki (małżonka)).</longdesc>
+ <accounts>
+  <account type="12" name="">
+   <account type="12" name="Pensja (małżonka)"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Podatki (małżonka)">
+    <account type="13" name="Inne"/>
+    <account type="13" name="Krajowe"/>
+    <account type="13" name="Medyczne"/>
+    <account type="13" name="Socjalne"/>
+    <account type="13" name="Wojewódzkie/gminne"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

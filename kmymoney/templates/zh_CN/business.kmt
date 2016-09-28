@@ -1,102 +1,104 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/zh_CN/acctchrt_business.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>商业帐户</title>
- <shortdesc>Full chart of accounts for a business.</shortdesc>
- <longdesc>Users running a business want to select this instead of other choices. This includes all the accounts you need to run a most businesses, including Payables, Receivables, Income, and Expenses.</longdesc>
+ <title>企业科目</title>
+ <shortdesc>关于企业的科目</shortdesc>
+ <longdesc>经营一个企业的用户会希望使用这套科目。这包含了在大多数情况下您经营一个企业所需要的所有的科目，包括应付账、应收账、收入和支出。</longdesc>
  <accounts>
-  <account type="10" name="">
-   <account type="4" name="信用卡"/>
-  </account>
   <account type="16" name="">
-   <account type="16" name="留存收益"/>
    <account type="16" name="期初余额"/>
+   <account type="16" name="留存收益"/>
   </account>
   <account type="13" name="">
-   <account type="13" name="设备租赁"/>
-   <account type="13" name="杂项"/>
-   <account type="13" name="修理">
-    <account type="13" name="设备维修"/>
-    <account type="13" name="建筑修复"/>
-    <account type="13" name="电脑维修"/>
-    <account type="13" name="清洁卫生费"/>
-   </account>
-   <account type="13" name="邮资及运送"/>
-   <account type="13" name="教育"/>
-   <account type="13" name="折旧"/>
-   <account type="13" name="办公用品"/>
    <account type="13" name="专业费用">
-    <account type="13" name="律师费"/>
     <account type="13" name="会计"/>
-   </account>
-   <account type="13" name="印刷和复印"/>
-   <account type="13" name="用餐"/>
-   <account type="13" name="应得物和捐款"/>
-   <account type="13" name="执照和许可证"/>
-   <account type="13" name="现金折扣"/>
-   <account type="13" name="薪金支出"/>
-   <account type="13" name="境外服务"/>
-   <account type="13" name="调整"/>
-   <account type="13" name="旅行和娱乐">
-    <account type="13" name="用餐"/>
-    <account type="13" name="旅行"/>
-    <account type="13" name="娱乐"/>
-   </account>
-   <account type="13" name="慈善"/>
-   <account type="13" name="汽车">
-    <account type="13" name="维修和保养"/>
-    <account type="13" name="燃气"/>
-    <account type="13" name="停车"/>
-    <account type="13" name="收费"/>
-   </account>
-   <account type="13" name="租金"/>
-   <account type="13" name="水电费">
-    <account type="13" name="燃气"/>
-    <account type="13" name="垃圾收集"/>
-    <account type="13" name="因特网"/>
-    <account type="13" name="手机"/>
-    <account type="13" name="电报"/>
-    <account type="13" name="电"/>
-    <account type="13" name="水"/>
-    <account type="13" name="电话"/>
-   </account>
-   <account type="13" name="保险">
-    <account type="13" name="残疾保险金"/>
-    <account type="13" name="工作者Comp"/>
-    <account type="13" name="责任保险"/>
-   </account>
-   <account type="13" name="银行服务收费"/>
-   <account type="13" name="税收">
-    <account type="13" name="联邦"/>
-    <account type="13" name="FICA"/>
-    <account type="13" name="财产"/>
-    <account type="13" name="本地"/>
-    <account type="13" name="Emp-FICA"/>
-    <account type="13" name="其它税"/>
-    <account type="13" name="州/省"/>
-    <account type="13" name="FUTA"/>
+    <account type="13" name="律师费"/>
    </account>
    <account type="13" name="书籍"/>
+   <account type="13" name="会员费和订阅费"/>
+   <account type="13" name="保险">
+    <account type="13" name="残疾保险金"/>
+    <account type="13" name="职工工伤赔偿保险"/>
+    <account type="13" name="责任保险"/>
+   </account>
+   <account type="13" name="修理">
+    <account type="13" name="建筑修复"/>
+    <account type="13" name="清洁卫生费"/>
+    <account type="13" name="电脑维修"/>
+    <account type="13" name="设备维修"/>
+   </account>
+   <account type="13" name="办公用品"/>
+   <account type="13" name="印刷和复印"/>
+   <account type="13" name="境外服务"/>
+   <account type="13" name="慈善"/>
+   <account type="13" name="执照和许可证"/>
+   <account type="13" name="折旧"/>
+   <account type="13" name="教育"/>
+   <account type="13" name="旅行和娱乐">
+    <account type="13" name="娱乐"/>
+    <account type="13" name="旅行"/>
+    <account type="13" name="用餐"/>
+   </account>
+   <account type="13" name="杂项"/>
+   <account type="13" name="水电费">
+    <account type="13" name="互联网"/>
+    <account type="13" name="垃圾收集"/>
+    <account type="13" name="手机"/>
+    <account type="13" name="水"/>
+    <account type="13" name="燃气"/>
+    <account type="13" name="电"/>
+    <account type="13" name="电报"/>
+    <account type="13" name="电话"/>
+   </account>
+   <account type="13" name="汽车">
+    <account type="13" name="停车"/>
+    <account type="13" name="收费"/>
+    <account type="13" name="燃气"/>
+    <account type="13" name="维修和保养"/>
+   </account>
+   <account type="13" name="现金折扣"/>
+   <account type="13" name="用餐"/>
+   <account type="13" name="租金"/>
+   <account type="13" name="税费">
+    <account type="13" name="其它税"/>
+    <account type="13" name="国税"/>
+    <account type="13" name="地税"/>
+    <account type="13" name="失业税"/>
+    <account type="13" name="省"/>
+    <account type="13" name="社会保障"/>
+    <account type="13" name="财产"/>
+    <account type="13" name="雇主社会保障"/>
+   </account>
+   <account type="13" name="薪金支出"/>
+   <account type="13" name="设备租赁"/>
+   <account type="13" name="调整"/>
+   <account type="13" name="邮资及运送"/>
+   <account type="13" name="银行服务收费"/>
   </account>
   <account type="12" name="">
+   <account type="12" name="其它收入"/>
    <account type="12" name="利息收入"/>
-   <account type="12" name="销售"/>
-   <account type="12" name="其他收入"/>
    <account type="12" name="报销的费用"/>
+   <account type="12" name="销售"/>
+  </account>
+  <account type="10" name="">
+   <account type="4" name="信用卡"/>
+   <account type="10" name="应付账款"/>
   </account>
   <account type="9" name="">
+   <account type="9" name="应收账款"/>
    <account type="9" name="流动资产">
-    <account type="1" name="储蓄帐户"/>
-    <account type="3" name="零用金"/>
-    <account type="1" name="支票帐户"/>
+    <account type="1" name="储蓄存款"/>
+    <account type="3" name="小额现金"/>
+    <account type="1" name="活期存款"/>
    </account>
   </account>
  </accounts>

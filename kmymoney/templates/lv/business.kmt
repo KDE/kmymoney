@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/lv/acctchrt_business.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Uzņēmējdarbības konti</title>
+ <shortdesc>Kontu plāns uzņēmējdarbībai saskaņā ar Latvijas likumdošanu.</shortdesc>
+ <longdesc>Izmantojiet šo kontu plānu, ja vēlaties veikt finanšu uzskaiti uzņēmējdarbībā. Šis kontu plāns ir veidots saskaņā ar Latvijas likumdošanu.</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="1.2. Pamatlīdzekļi">
+    <account type="9" name="1220 Tehnoloģiskās iekārtas un mašīnas"/>
+    <account type="9" name="1230 Pārējie pamatlīdzekļi un inventārs"/>
+    <account type="9" name="1260 Avansa maksājumi par pamatlīdzekļiem"/>
+    <account type="9" name="1290 Pamatlīdzekļu nolietojums (pasīvā)"/>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="2.1 Krājumi">
+    <account type="9" name="2150 Uzņēmuma rīcībā esošais  mazvērtīgais inventārs"/>
+    <account type="9" name="2190 Avansa maksājumi par precēm"/>
+   </account>
+   <account type="9" name="2.3. Norēķini par prasībām (ar debitoriem)">
+    <account type="9" name="2310 Norēķini ar pircējiem un pasūtītājiem"/>
+    <account type="10" name="2380 Norēķini par prasībām pret personālu un īstermiņa aizdevumi personālam"/>
+    <account type="9" name="2390 Pārmaksātie nodokļi"/>
+   </account>
+   <account type="9" name="2.4. Nākamo periodu izmaksas">
+    <account type="9" name="2410 Nākamo periodu izmaksas"/>
+   </account>
+   <account type="9" name="2.6. Naudas līdzekļi">
+    <account type="1" name="2620 Norēķinu konti bankās"/>
+    <account type="9" name="2680 Valūtas konvertācijas konts"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="3.1 Pamatkapitāls vai līdzdalības kapitāls agio, ilgtermiņa ieguldījumu pārvērtēšanas rezerve">
+    <account type="10" name="3110 Pamatkapitāls vai līdzdalības kapitāls"/>
+   </account>
+   <account type="10" name="3.4. Nesadalītā peļņa vai nesegtie zaudējumi">
+    <account type="10" name="3410 Pārskata gada nesadalītā peļņa"/>
+    <account type="10" name="3420 Iepriekšējo gadu nesadalītā peļņa vai nesegtie zaudējumi"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="4.3. Citi uzkrājumi">
+    <account type="10" name="4310 Citi uzkrājumi"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="5.1. Norēķini par aizņēmumiem">
+    <account type="10" name="5140 Citi aizņēmumi"/>
+   </account>
+   <account type="10" name="5.2 Norēķini par saņemtajiem avansiem">
+    <account type="10" name="5210 Norēķini par saņemtajiem avansiem"/>
+   </account>
+   <account type="10" name="5.3. Norēķini ar piegādātājiem un darbuzņēmējiem">
+    <account type="10" name="5310 Norēķini ar piegādātājiem un darbuzņēmējiem"/>
+    <account type="10" name="5311 Norēķini ar piegādātājiem un darbuzņēmējiem Eiro"/>
+    <account type="10" name="5312 Norēķini ar piegādātājiem un darbuzņēmējiem USD"/>
+   </account>
+   <account type="10" name="5.5 Norēķini par parādiem ar personālu">
+    <account type="10" name="5510 Norēķini par parādiem personālam"/>
+   </account>
+   <account type="10" name="5.6. Norēķini par darba samaksu un ieturējumiem (izņemot nodokļus">
+    <account type="10" name="5610 Norēķini par darba algu"/>
+   </account>
+   <account type="10" name="5.7. Norēķini par nodokļiem">
+    <account type="10" name="5710 Norēķini par uzņēmuma ienākuma nodokli"/>
+    <account type="10" name="5720 Norēķini par IIN"/>
+    <account type="10" name="5721 Norēķini par PVN">
+     <account type="10" name="57211 Norēķini par PVN 21%"/>
+     <account type="10" name="57212 Norēkini par PVN 12%"/>
+     <account type="10" name="57213 Norēķini par PVN ar Eiropas Savienību"/>
+     <account type="10" name="57214 PVN uz robežas"/>
+     <account type="10" name="57219 PVN parāda nomaksa valsts budžetā"/>
+    </account>
+    <account type="10" name="5724 Norēķini par VSAOI (darba ņēmēja daļa)"/>
+    <account type="10" name="5725 Norēkini par VSAOI (darba devēja daļa)"/>
+    <account type="10" name="5726 Norēķini par uzņēmējdarbības riska valsts nodevu"/>
+    <account type="10" name="5727 Norēķini par transportlīdzekļa nodokli"/>
+   </account>
+   <account type="10" name="5.9 Nākošo periodu ieņēmumi">
+    <account type="10" name="5910 Nākošo periodu ieņēmumi"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="6.1. Ieņēmumi no pārdošanas, kas apliekami ar nodokļiem vispārējā kārtībā">
+    <account type="12" name="6110 Ieņēmumi no pamatdarbības produkcijas un pakalpojumu pārdošanas"/>
+    <account type="12" name="6111 Projekti ar pašvaldību"/>
+    <account type="12" name="6112 Citi ieņēmumi"/>
+   </account>
+   <account type="12" name="6.5 Dažādi">
+    <account type="12" name="6500 Dažādi - kļūdu novēršana"/>
+    <account type="12" name="6560 Ieņēmumos pātskaitītais uzkrājumu samazinājums"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="7.1. Izdevumi izejvielu, materiālu un preču iepirkšanai">
+    <account type="13" name="7120 Preču piegādes, pakalpojumu sniegšanas  izdevumi"/>
+    <account type="13" name="7170 Samaksa par darbiem un pakalpojumiem no ārienes"/>
+    <account type="13" name="7190 Pirkto materiālu un preču krājumu un vērtības izmaiņas"/>
+   </account>
+   <account type="13" name="7.2. Personāla izmaksas">
+    <account type="13" name="7210 Izpildpersonāla algas"/>
+    <account type="13" name="7220 Pārvaldes personāla un administratīvā personāla algas"/>
+   </account>
+   <account type="13" name="7.3. Sociālās nodevas un izmaksas">
+    <account type="13" name="7310 Sociālais nodoklis"/>
+    <account type="13" name="7320 Pārējās sociālās izmaksa"/>
+   </account>
+   <account type="13" name="7.4. Pamatlīdzekļu nolietojums">
+    <account type="13" name="7420 Pamatlīdzekļu nolietojums"/>
+   </account>
+   <account type="13" name="7.5 Pārējie saimnieciskās darbības izdevumi">
+    <account type="13" name="7540 Apdrošināšanas maksājumi (izņemot darbinieku apdrošināšanu)"/>
+    <account type="13" name="7550 Pārējie saimnieciskās darbības izdevumi"/>
+    <account type="13" name="7560 Darbinieku apmācības un apdrošināšanas izdevumi"/>
+    <account type="13" name="7570 Komandējuma izdevumi"/>
+    <account type="13" name="7590 Transportlīdzekļa nodoklis"/>
+   </account>
+   <account type="13" name="7.6 Pārdošanas izmaksas">
+    <account type="13" name="7610 Pārdošanas izmaksas"/>
+   </account>
+   <account type="13" name="7.7. Administrācijas izdevumi">
+    <account type="13" name="7710 Sakaru izdevumi"/>
+    <account type="13" name="7720 Kantora (biroja) izdevumi"/>
+    <account type="13" name="7750 Naudas apgrozījuma blakus izdevumi"/>
+    <account type="13" name="7760 Transporta izdevumi administrācijas vajadzībām"/>
+    <account type="13" name="7770 Citi vadīšanas un administrācijas izdevumi"/>
+    <account type="13" name="7771 Reprezentācijas izdevumi"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="8.1. Dažādi ieņēmumi">
+    <account type="12" name="8120 Pārējie ieņēmumi no procentiem un tiem pielīdzināmi ieņēmumi"/>
+   </account>
+   <account type="12" name="8.2 Dažādi izdevumi">
+    <account type="12" name="8220 Samaksātie procenti un tiem pielīdzinātie izdevumi"/>
+    <account type="13" name="8250 Samaksātās soda naudas un līgumsodi"/>
+    <account type="13" name="8260 Izdevumi par reprezentācijas materiāliem"/>
+    <account type="13" name="8270 Valūtu konvertēšanas izdevumi"/>
+    <account type="13" name="8290 Nesaimnieciskie izdevumi par auto"/>
+    <account type="13" name="8291 Citi izdevumi"/>
+   </account>
+   <account type="12" name="8.6. Peļņa vai zaudējumi">
+    <account type="12" name="8610 Peļņa vai zaudējumi"/>
+   </account>
+   <account type="12" name="8.8. Nodokļi no peļņas">
+    <account type="12" name="8810 Nodoklis no peļņas (ienākuma nodoklis)"/>
+   </account>
+  </account>
+  <account type="1" name=""/>
+ </accounts>
+</kmymoney-account-template>

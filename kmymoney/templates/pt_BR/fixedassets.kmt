@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/pt_BR/acctchrt_fixedassets.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Ativo Fixo</title>
- <shortdesc>Contas para registrar ativos fixos</shortdesc>
- <longdesc>Deverá selecionar este conjunto de contas se tiver ativos fixos (imóvel, automóvel e outros ativos).</longdesc>
+ <shortdesc>Contas para registar ativos fixos</shortdesc>
+ <longdesc>Deverá selecionar este conjunto de contas se tiver ativos fixos (casa, automóvel, casa de férias, outros ativos).</longdesc>
  <accounts>
   <account type="9" name="">
    <account type="9" name="Ativos Fixos">
     <account type="9" name="Automóvel"/>
+    <account type="9" name="Casa"/>
     <account type="9" name="Outro Ativo"/>
-    <account type="9" name="Imóvel"/>
    </account>
   </account>
  </accounts>

@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/de_CH/acctchrt_chkmu.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
@@ -13,315 +13,221 @@
  <shortdesc>Kontenrahmen fuer Schweizer KMU</shortdesc>
  <longdesc>Kontenrahmen fuer Schweizer KMU gem Walher Sterchi publiziert vom schweizerischen Gewerbeverband</longdesc>
  <accounts>
-  <account type="13" name="">
-   <account type="13" name="Finanzerfolg">
-    <account type="13" name="Finanzertrag">
-     <account type="13" name="Erträge aus F'anlagen bei Konzernges."/>
-     <account type="13" name="Erträge aus fl. Mitteln u. Wertschriften"/>
-     <account type="13" name="Erträge aud F'anlagen bei Aktionären"/>
-     <account type="13" name="Erträge aus Finanzanlagen"/>
-     <account type="13" name="Übriger Finanzertrag"/>
+  <account type="12" name="">
+   <account type="12" name="Ausserordentlicher Erfolg">
+    <account type="12" name="Ausserordentlicher Aufwand"/>
+    <account type="12" name="Ausserordentlicher Ertrag"/>
+   </account>
+   <account type="12" name="Betriebsfremder Erfolg">
+    <account type="12" name="Erfolg betriebsfremde Finanzanlagen">
+     <account type="12" name="Aufwand betriebsfremde Finanzanlagen"/>
+     <account type="12" name="Ertrag betriebsfremde Finanzanlagen"/>
     </account>
-    <account type="13" name="Finanzaufwand">
-     <account type="13" name="Zinsaufw. aus F'verb. ggn. Aktionären"/>
-     <account type="13" name="Zinsaufw. aus F'verb. ggn. Dritten"/>
-     <account type="13" name="Zinsaufw. aus F'verb. ggn. Konzernges."/>
-     <account type="13" name="Übriger Finanzaufwand"/>
-     <account type="13" name="Zinsaufw. F'verb. ggn. Vorsorgeeinr."/>
+    <account type="12" name="Erfolg betriebsfremde Liegenschaften">
+     <account type="12" name="Erfolg betriebsfremde Liegenschaft 1"/>
+     <account type="12" name="Erfolg betriebsfremde Liegenschaft 2"/>
+    </account>
+    <account type="12" name="Erfolg betriebsfremder Unternehmensteil">
+     <account type="12" name="Erfolg betriebsfr. Unternehmensteil 1"/>
+     <account type="12" name="Erfolg betriebsfr. Unternehmensteil 2"/>
+    </account>
+    <account type="12" name="Minderheitsanteile am Ergebnis"/>
+    <account type="12" name="Sonstiger betriebsfremder Erfolg">
+     <account type="12" name="Sonstiger betriebsfremder Aufwand"/>
+     <account type="12" name="Sonstiger betriebsfremder Ertrag"/>
     </account>
    </account>
-   <account type="13" name="Sachvers., Abgaben, Gebühren, Bewillig.">
-    <account type="13" name="Abgaben, Gebühren, Bewilligungen">
-     <account type="13" name="Abgaben und Gebühren"/>
-     <account type="13" name="Bewilligungen und Gewerbepatente"/>
-    </account>
-    <account type="13" name="Sachversicherungen">
-     <account type="13" name="V'präm. f. Betriebsunterbrechung"/>
-     <account type="13" name="V'präm. f. Elementarsch., Glasbr., Einb."/>
-     <account type="13" name="Kreditverischerungsprämien"/>
-     <account type="13" name="V'präm. f. Betriebshaftpf. u. Garantie"/>
-    </account>
+   <account type="12" name="Steuern"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Bilanz">
+    <account type="12" name="Bilanz"/>
    </account>
-   <account type="13" name="Übriger Betriebsaufwand">
-    <account type="13" name="Forschung und Entwicklung"/>
-    <account type="13" name="Wirtschaftsauskünfte, Betreibungen"/>
-    <account type="13" name="Betriebssicherheit und Bewachung"/>
+   <account type="12" name="Erfolgsrechnung">
+    <account type="12" name="Erfolgsrechnung"/>
    </account>
-   <account type="13" name="Verwaltungs- und Informatikaufwand">
-    <account type="13" name="Informatik">
-     <account type="13" name="Lizenzen und Wartung"/>
-     <account type="13" name="Beratung und Entwicklung"/>
-     <account type="13" name="Leasing und Miete Hard- und Software"/>
-    </account>
-    <account type="13" name="Verwaltungsaufwand">
-     <account type="13" name="Beiträge, Spenden, Vergabungen, Trinkgelder"/>
-     <account type="13" name="Buchführungs- und Beratungsaufwand"/>
-     <account type="13" name="Telefon, Telefax, Internet, Porti"/>
-     <account type="13" name="Verwaltungsrat, GV, Revisionsstellen"/>
-     <account type="13" name="Privatanteile Verwaltungsaufwand"/>
-     <account type="13" name="Büromat., Drucksach., Fotokop., Fachlit."/>
-    </account>
+   <account type="12" name="Gewinnverwendung">
+    <account type="12" name="Hilfskonten Gewinnverwendung"/>
    </account>
-   <account type="13" name="Raumaufwand">
-    <account type="13" name="Nebenkosten"/>
-    <account type="13" name="Leasing Immobilien"/>
-    <account type="13" name="Fremdmieten Geschäftslokalitäten"/>
-    <account type="13" name="Reinigung"/>
-    <account type="13" name="Unterhalt Geschäftsräume"/>
-    <account type="13" name="Eigenmiete Geschäftslokalitäten"/>
-    <account type="13" name="Privatanteile Raumaufwand"/>
-   </account>
-   <account type="13" name="Fahrzeug- und Transportaufwand">
-    <account type="13" name="Fahrzeugaufwand">
-     <account type="13" name="Versicherungen"/>
-     <account type="13" name="Reparaturen, Service und Reinigung Fz"/>
-     <account type="13" name="Fahrzeugleasing, Fahrzeugmieten"/>
-     <account type="13" name="Privatanteil Fahrzeugaufwand"/>
-     <account type="13" name="Betriebsstoffe"/>
-     <account type="13" name="Verkehrsabgaben, Beiträge, Gebühren"/>
-    </account>
-    <account type="13" name="Transportaufwand">
-     <account type="13" name="Frachten, Spediteur, Cargo Domizil"/>
-    </account>
-   </account>
-   <account type="13" name="Werbeaufwand">
-    <account type="13" name="Werbeberatung, Marktanalysen"/>
-    <account type="13" name="Werbeinserate, elektronische Medien"/>
-    <account type="13" name="Werbedrucks., -mat., Reklameart., Muster"/>
-    <account type="13" name="Öffentlichkeitsarbeit / Public Relation"/>
-    <account type="13" name="Schaufen., Dekoration, Fachmes., Ausstell."/>
-    <account type="13" name="Reisespesen, Kundenbetreuung"/>
-    <account type="13" name="Werbebeiträge, Sponsoring"/>
-   </account>
-   <account type="13" name="URE / Leasingaufwand mobile Sachanlagen">
-    <account type="13" name="Unterhalt, Reparaturen, Ersatz (URE)">
-     <account type="13" name="URE von Büroeinrichtungen"/>
-     <account type="13" name="URE von Verkaufseinrichtungen"/>
-     <account type="13" name="URE von Produktionsanlagen"/>
-     <account type="13" name="URE von Personaleinrichtungen"/>
-     <account type="13" name="URE von Lagereinrichtungen"/>
-    </account>
-    <account type="13" name="Leasingaufwand mobile Sachanlagen">
-     <account type="13" name="Leasingaufwand mobile Sachanlagen"/>
-    </account>
-   </account>
-   <account type="13" name="Energie- und Entsorgungsaufwand">
-    <account type="13" name="Energieaufwand">
-     <account type="13" name="Wasser"/>
-     <account type="13" name="Gas"/>
-     <account type="13" name="Brennstoffe, Heizmaterial"/>
-     <account type="13" name="Elektrizität"/>
-    </account>
-    <account type="13" name="Entsorgungsaufwand">
-     <account type="13" name="Entsorgungsaufwand"/>
-    </account>
-   </account>
-   <account type="13" name="Abschreibungen">
-    <account type="13" name="Auf Finanzanlagen"/>
-    <account type="13" name="auf aktiviertem Aufwand"/>
-    <account type="13" name="auf immateriellen Anlagen"/>
-    <account type="13" name="auf mobilen Sachanlagen"/>
-    <account type="13" name="auf immobilen Sachanlagen"/>
-    <account type="13" name="auf Beteiligungen an Konzernges."/>
+   <account type="12" name="Sammel- und Fehlbuchungen">
+    <account type="12" name="Fehlbuchungen"/>
+    <account type="12" name="Sammelbuchungen"/>
    </account>
   </account>
-  <account type="13" name="">
-   <account type="13" name="Personalaufwand Verwaltung">
-    <account type="13" name="Lohnaufwand Verwaltung"/>
-    <account type="13" name="Sozialversicherungsaufwand Verwaltung"/>
-    <account type="13" name="Übriger Personalaufwand Verwaltung"/>
-    <account type="13" name="Arbeitsleistung Dritter Verwaltung"/>
+  <account type="9" name="">
+   <account type="9" name="Aktivierter Aufw. &amp; akt. Berichtigung">
+    <account type="9" name="Aktivierter Aufwand &amp; akt. Berichtigung">
+     <account type="9" name="Aktive Berichtigungsposten"/>
+     <account type="9" name="Gründungs-, Kapitalerh'gs- &amp; Org.Aufwand"/>
+    </account>
    </account>
-   <account type="13" name="Personalaufwand Handel">
-    <account type="13" name="Arbeitsleistungen Dritter Handel"/>
-    <account type="13" name="Sozialversicherungsaufwand Handel"/>
-    <account type="13" name="Lohnaufwand Handel Bereich A"/>
-    <account type="13" name="Lohnaufwand Handel Bereich B"/>
-    <account type="13" name="Lohnaufwand Handel Bereich C"/>
-    <account type="13" name="Übriger Personalaufwand Handel"/>
+   <account type="9" name="Anlagevermögen">
+    <account type="9" name="Finanzanlagen">
+     <account type="9" name="Andere Finanzanlagen"/>
+     <account type="9" name="Beteiligungen"/>
+     <account type="9" name="Eigene Aktien"/>
+     <account type="9" name="Langf. F'gen ggn. Aktionären"/>
+     <account type="9" name="Langf. F'gen ggn. Konzernges."/>
+     <account type="9" name="Langfristige Forderungen ggn. Dritten"/>
+     <account type="9" name="Wertpapiere des Anlagevermögens"/>
+    </account>
+    <account type="9" name="Immaterielle Anlagen">
+     <account type="9" name="Goodwill"/>
+     <account type="9" name="Lizenzen, Konzessionen, Nutzungsrechte"/>
+     <account type="9" name="Marken, Muster, Modelle, Pläne"/>
+     <account type="9" name="Patente, Know-How, Rezepte"/>
+     <account type="9" name="Urheber-, Verlags-, Vertragsrechte"/>
+     <account type="9" name="Übrige immaterielle Anlagen"/>
+    </account>
+    <account type="9" name="Immobile Sachanlagen">
+     <account type="9" name="Ausstellungs- und Verkaufsgebäude"/>
+     <account type="9" name="Büro- und Verwaltungsgebäude"/>
+     <account type="9" name="Fabrikgebäude"/>
+     <account type="9" name="Geschäftsliegenschaften"/>
+     <account type="9" name="Lagergebäude"/>
+     <account type="9" name="Unbebaute Grundstücke"/>
+     <account type="9" name="Werkstattgebäude, Atelier"/>
+     <account type="9" name="Wohnhäuser"/>
+    </account>
+    <account type="9" name="Mobile Sachanlagen">
+     <account type="9" name="Büromaschinen, EDV-Anlage, Kommunikation"/>
+     <account type="9" name="Fahrzeuge"/>
+     <account type="9" name="Feste Einrichtungen und Installationen"/>
+     <account type="9" name="Lagereinrichtungen"/>
+     <account type="9" name="Maschinen und Apparate Produktion"/>
+     <account type="9" name="Mobiliar Einrichtungen"/>
+     <account type="9" name="Werkzeuge und Geräte"/>
+     <account type="9" name="Übrige mobile Sachanlagen"/>
+    </account>
    </account>
-   <account type="13" name="Sozialversicherungsaufwand">
-    <account type="13" name="Quellensteuer"/>
-    <account type="13" name="AHV, IV, EO, ALV"/>
-    <account type="13" name="Berufliche Vorsorge"/>
-    <account type="13" name="Unfallversicherung"/>
-    <account type="13" name="FAK"/>
-    <account type="13" name="Krankentaggeldversicherung"/>
+   <account type="9" name="Betriebsfremde Aktiven">
+    <account type="9" name="Betriebsfremde Aktiven">
+     <account type="9" name="Aktive Rechnungsabgrenzung"/>
+     <account type="9" name="Aktivierter Aufwand"/>
+     <account type="9" name="Finanzanlagen"/>
+     <account type="9" name="Flüssige Mittel und Wertschriften"/>
+     <account type="9" name="Immaterielle Anlagen"/>
+     <account type="9" name="Immobile Sachanlagen"/>
+     <account type="9" name="Kurzfristige Forderungen"/>
+     <account type="9" name="Mobile Sachanlagen"/>
+     <account type="9" name="Vorräte und angefangene Arbeiten"/>
+     <account type="9" name="frei Bilanzverlust unter 299"/>
+    </account>
    </account>
-   <account type="13" name="Personalaufwand Produktion">
-    <account type="13" name="Übriger Personalaufwand Produktion"/>
-    <account type="13" name="Lohnaufwand Produktion Bereich C"/>
-    <account type="13" name="Lohnaufwand Produktion Bereich B"/>
-    <account type="13" name="Sozialversicherungsaufwand Produktion"/>
-    <account type="13" name="Lohnaufwand Produktion Bereich A"/>
-    <account type="13" name="Arbeitsleistungen Dritter Produktion"/>
-   </account>
-   <account type="13" name="Personalaufwand Dienstleistungen">
-    <account type="13" name="Arbeitsleistungen Dritter DL"/>
-    <account type="13" name="Lohnaufwand DL Bereich A"/>
-    <account type="13" name="Lohnaufwand DL Bereich B"/>
-    <account type="13" name="Übriger Personalaufwand DL"/>
-    <account type="13" name="Sozialversicherungsaufwand DL"/>
-    <account type="13" name="Lohnaufwand DL Bereich C"/>
-   </account>
-   <account type="13" name="Arbeitsleistungen Dritter">
-    <account type="13" name="Arbeitsleistungen Dritter"/>
-   </account>
-   <account type="13" name="Übriger Personalaufwand">
-    <account type="13" name="Spesenentschädigungen pauschal"/>
-    <account type="13" name="Privatanteile Personalaufwand"/>
-    <account type="13" name="Spesenentschädigungen effektiv"/>
-    <account type="13" name="Sonstiger Personalaufwand"/>
-    <account type="13" name="Personalkantine"/>
-    <account type="13" name="Aus- und Weiterbildung"/>
-    <account type="13" name="Personalbeschaffung"/>
+   <account type="9" name="Umlaufvermögen">
+    <account type="9" name="Aktive Rechnungsabgrenzung">
+     <account type="9" name="Aktive Rechnungsabgr. (Transitorische A)"/>
+    </account>
+    <account type="9" name="Flüssige Mittel und Wertschriften">
+     <account type="9" name="Andere kurzfristige Anlagen"/>
+     <account type="1" name="Bankguthaben"/>
+     <account type="9" name="Checks, Besitzwechsel (diskontfähig)"/>
+     <account type="9" name="Eigene Aktien"/>
+     <account type="3" name="Kasse"/>
+     <account type="9" name="Kurzfristige Geldanlagen"/>
+     <account type="1" name="Postcheckguthaben"/>
+     <account type="9" name="Transferkonto"/>
+     <account type="9" name="Wertschriften kurzfristig realisierbar"/>
+    </account>
+    <account type="9" name="Forderungen">
+     <account type="9" name="Andere kurzf. F'g ggn. Konzerngesellsch."/>
+     <account type="9" name="Andere kurzfristige Forderungen"/>
+     <account type="9" name="aus Lieferungen und Leistungen (Debi)"/>
+    </account>
+    <account type="9" name="Vorräte und angefangene Arbeiten">
+     <account type="9" name="Angefangene Arbeiten"/>
+     <account type="9" name="Fertigfabrikate"/>
+     <account type="9" name="Halbfabrikate"/>
+     <account type="9" name="Pflichtlager"/>
+     <account type="9" name="Vorräte Handelswaren"/>
+     <account type="9" name="Vorräte Hilfs- und Verbrauchsmaterial"/>
+     <account type="9" name="Vorräte Rohstoffe"/>
+     <account type="9" name="Vorräte Werkstoffe"/>
+     <account type="9" name="Waren in Konsignation"/>
+    </account>
    </account>
   </account>
   <account type="12" name="">
-   <account type="12" name="Dienstleistungsertrag">
-    <account type="12" name="Dienstleistungsertrag Bereich A"/>
-    <account type="12" name="Dienstleistungsertrag Bereich B"/>
-    <account type="12" name="D'ertrag aus Leistungen an Konzerngesell."/>
-    <account type="12" name="B'änderungen angefangene und fertige DL"/>
-    <account type="12" name="Dienstleistungsertrag Bereich C"/>
-    <account type="12" name="Ertragsminderungen Dienstleistungen"/>
+   <account type="12" name="Erfolg aus Finanzanlagen">
+    <account type="12" name="Aufwand aus Finanzanlagen"/>
+    <account type="12" name="Ertrag aus Finanzalnlagen"/>
    </account>
-   <account type="12" name="Produktionsertrag">
-    <account type="12" name="Ertragsminderung Produktion"/>
-    <account type="12" name="Produktionsertrag Bereich B"/>
-    <account type="12" name="Produktionsertrag Bereich C"/>
-    <account type="12" name="Produktionsertrag Bereich A"/>
-    <account type="12" name="Aus Leistungen an Konzerngesellschaften"/>
-    <account type="12" name="B'änderung angef./fert. Arb. Produktion"/>
+   <account type="12" name="Erfolg aus Nebenbetrieben">
+    <account type="12" name="Erfolg aus Nebenbetrieben">
+     <account type="12" name="Erfolg aus Nebenbetrieb 1"/>
+     <account type="12" name="Erfolg aus Nebenbetrieb 2"/>
+    </account>
    </account>
+   <account type="12" name="Erfolg betriebliche Liegenschaften">
+    <account type="12" name="Erfolg betriebliche Liegenschaft 1">
+     <account type="12" name="Aufwand betriebliche Liegenschaft 1"/>
+     <account type="12" name="Ertrag betriebliche Liegenschaft 1"/>
+    </account>
+    <account type="12" name="Erfolg betriebliche Liegenschaft 2">
+     <account type="12" name="Aufwand betriebliche Liegenschaft 2"/>
+     <account type="12" name="Etrag betriebliche Liegenschaft 2"/>
+    </account>
+   </account>
+   <account type="12" name="Gew. aus Veräusserung v. betr. Anlagever.">
+    <account type="12" name="Gewinne aus Finanzanlagen"/>
+    <account type="12" name="Gewinne aus immateriellen Anlagen"/>
+    <account type="12" name="Gewinne aus immobilen Sachanlagen"/>
+    <account type="12" name="Gewinne aus mobilen Sachanlagen"/>
+   </account>
+  </account>
+  <account type="12" name="">
    <account type="12" name="B'änderungen angef./fert. Arb. aus P/DL">
     <account type="12" name="B'änderungen angef./fert. Arbeiten DL"/>
     <account type="12" name="B'änderungen angef./fertig. Arbeiten Prod."/>
    </account>
+   <account type="12" name="Dienstleistungsertrag">
+    <account type="12" name="B'änderungen angefangene und fertige DL"/>
+    <account type="12" name="D'ertrag aus Leistungen an Konzerngesell."/>
+    <account type="12" name="Dienstleistungsertrag Bereich A"/>
+    <account type="12" name="Dienstleistungsertrag Bereich B"/>
+    <account type="12" name="Dienstleistungsertrag Bereich C"/>
+    <account type="12" name="Ertragsminderungen Dienstleistungen"/>
+   </account>
+   <account type="12" name="E'minderungen aus P.-, H.- und DL-Ertr.">
+    <account type="12" name="Ertragsminderungen"/>
+   </account>
+   <account type="12" name="Eigenleistungen und Eigenverbrauch">
+    <account type="12" name="E'verbrauch an selbstherges. Produkten"/>
+    <account type="12" name="Eigenleistungen"/>
+    <account type="12" name="Eigenverbrauch an Dienstleistungen"/>
+    <account type="12" name="Eigenverbrauch an Handelswaren"/>
+   </account>
    <account type="12" name="Handelsertrag">
+    <account type="12" name="Ertragsminderungen Handel"/>
     <account type="12" name="H'ertrag aus Leistungen an Konzerngesell."/>
     <account type="12" name="Handelsertrag Bereich A"/>
     <account type="12" name="Handelsertrag Bereich B"/>
-    <account type="12" name="Ertragsminderungen Handel"/>
     <account type="12" name="Handelsertrag Bereich C"/>
    </account>
+   <account type="12" name="Produktionsertrag">
+    <account type="12" name="Aus Leistungen an Konzerngesellschaften"/>
+    <account type="12" name="B'änderung angef./fert. Arb. Produktion"/>
+    <account type="12" name="Ertragsminderung Produktion"/>
+    <account type="12" name="Produktionsertrag Bereich A"/>
+    <account type="12" name="Produktionsertrag Bereich B"/>
+    <account type="12" name="Produktionsertrag Bereich C"/>
+   </account>
    <account type="12" name="Übriger Ertrag">
-    <account type="12" name="Ertragsminderung auf übrigem Ertrag"/>
     <account type="12" name="Ertrag aus Personalausleihung"/>
+    <account type="12" name="Ertragsminderung auf übrigem Ertrag"/>
     <account type="12" name="Erträge aus Lizenzen, Patenten etc."/>
     <account type="12" name="Nebenertrag aus Lieferung und Leistung"/>
     <account type="12" name="Sonstiger Ertrag aus Liefer./Leistungen"/>
     <account type="12" name="Übriger Ertrag aus Leist. an Konzernges."/>
    </account>
-   <account type="12" name="Eigenleistungen und Eigenverbrauch">
-    <account type="12" name="Eigenverbrauch an Handelswaren"/>
-    <account type="12" name="Eigenverbrauch an Dienstleistungen"/>
-    <account type="12" name="E'verbrauch an selbstherges. Produkten"/>
-    <account type="12" name="Eigenleistungen"/>
-   </account>
-   <account type="12" name="E'minderungen aus P.-, H.- und DL-Ertr.">
-    <account type="12" name="Ertragsminderungen"/>
-   </account>
-  </account>
-  <account type="10" name="">
-   <account type="10" name="Betriebsfremde Verbindlichkeiten">
-    <account type="10" name="Betriebsfremde Verbindlichkeiten">
-     <account type="10" name="Andere langfristige Verbindlichkeiten"/>
-     <account type="10" name="Langfristige Finanzverbindlichkeiten"/>
-     <account type="10" name="Kurzfristige Finanzverbindlichkeiten"/>
-     <account type="10" name="Rückstellungen"/>
-     <account type="10" name="Andere kurzfristige Verbindlichkeiten"/>
-     <account type="10" name="Kurzfr. Verbindlichkeiten aus Leistungen"/>
-     <account type="10" name="Passive Rechnungsabgr., kurzfr. Rückstell."/>
-    </account>
-   </account>
-   <account type="10" name="Fremdkapital Langfristig">
-    <account type="10" name="Rückstellungen lanfgristig">
-     <account type="10" name="für betriebliche Umstrukturierung"/>
-     <account type="10" name="für Altersvorsorge"/>
-     <account type="10" name="für Steuern (langfristig)"/>
-     <account type="10" name="für Umweltschutzmassnahmen"/>
-     <account type="10" name="für Reparatur, Sanierung und Erneuerung"/>
-     <account type="10" name="für Forschung und Entwicklung"/>
-     <account type="10" name="aus Lieferung und Leistung (langfristig)"/>
-     <account type="10" name="Übrige Rückstellungen"/>
-    </account>
-    <account type="10" name="Andere langfristige Verbindlichkeiten">
-     <account type="10" name="Langf. Verbindl. ggn. Aktionären"/>
-     <account type="10" name="Langf. Verbindl. ggn. Konzerngesellschaft"/>
-     <account type="10" name="Langf. Verbindl. ggn Vorsorgeeinrichtung"/>
-     <account type="10" name="Langfr. Darlehensverbindl. bei Dritten"/>
-    </account>
-    <account type="10" name="Langfristige Finanzverbindlichkeiten">
-     <account type="10" name="Obligationenanleihen"/>
-     <account type="10" name="Bankverbindlichkeiten langfristig"/>
-     <account type="10" name="Leasingverbindlichkeiten"/>
-     <account type="10" name="Hypothekarverbindlichkeiten"/>
-    </account>
-   </account>
-   <account type="10" name="Eigenkapital">
-    <account type="10" name="Reserven, Bilanzgewinn">
-     <account type="10" name="Reserven"/>
-     <account type="10" name="Bilanzgewinn / Bilanzverlust"/>
-    </account>
-    <account type="10" name="Kapital / Privat">
-     <account type="10" name="Kapital"/>
-     <account type="10" name="Privat für Einzelfirmen und Personenges."/>
-    </account>
-   </account>
-   <account type="10" name="Fremdkapital kurzfristig">
-    <account type="10" name="Passive Rechnungsabgr. kurzfr. Rücktell.">
-     <account type="10" name="Passive Rechnungsabgrenzung"/>
-     <account type="10" name="Kurzfristige Rückstellungen"/>
-    </account>
-    <account type="10" name="Kurzf. Verbindlichkeiten aus Lief/Leist">
-     <account type="10" name="Verbindl. aus L/L ggn. Aktionären"/>
-     <account type="10" name="Verbindlichkeiten aus Lief/Leistungen"/>
-     <account type="10" name="Verbindl. aus L/L ggn. Konzerngesellsch."/>
-     <account type="10" name="Anzahlungen von Kunden"/>
-    </account>
-    <account type="10" name="Kurzfristige Finanzverbindlichkeiten">
-     <account type="10" name="Kurzf. Finanzverb. ggn. Aktionären"/>
-     <account type="10" name="Postscheck- und WIR-Verbindlichkeiten"/>
-     <account type="10" name="Bankverbindlichkeiten kurzfristig"/>
-     <account type="10" name="Kurzf. Finanzverg. ggn. Vorsorgestiftungen"/>
-     <account type="10" name="Kurzf. fälliger Teil v. langf. Fi'zverb."/>
-     <account type="10" name="Wechselverpflichtungen"/>
-     <account type="10" name="Sonstige kurzf. Finanzverb. ggn. Dritten"/>
-     <account type="10" name="Kurzf. Finanzverb. ggn. Konzerngesell."/>
-    </account>
-    <account type="10" name="Andere kurzfristige Verbindlichkeiten">
-     <account type="10" name="Fällige Dividenden u. Obligationenzinsen"/>
-     <account type="10" name="Verbindl. ggn. staatlichen Stellen"/>
-     <account type="10" name="Fällige Obligationenanleihen"/>
-     <account type="10" name="Andere kurzf. Verbindl. ggn. Aktionären"/>
-     <account type="10" name="Andere kurzfr. Verbindl. ggn. Dritten"/>
-     <account type="10" name="Andere kurzf. Verbindl. ggn. Konzerngesell."/>
-     <account type="10" name="Andere kurzf. Verbindl. ggn. Vorsorgeein."/>
-    </account>
-   </account>
   </account>
   <account type="13" name="">
    <account type="13" name="Aufwand für Drittleistungen">
-    <account type="13" name="Aufwand für Drittleistungen Bereich C"/>
-    <account type="13" name="Aufwandminderungen für Drittleistu. (DL)"/>
     <account type="13" name="Aufwand für Drittleistungen Bereich A"/>
     <account type="13" name="Aufwand für Drittleistungen Bereich B"/>
+    <account type="13" name="Aufwand für Drittleistungen Bereich C"/>
+    <account type="13" name="Aufwandminderungen für Drittleistu. (DL)"/>
     <account type="13" name="Direkte Spesen für Drittleistungen"/>
-   </account>
-   <account type="13" name="Übriger Aufwand">
-    <account type="13" name="Übriger Aufwand für Drittleistungen"/>
-    <account type="13" name="Aufwand für Verpackung"/>
-    <account type="13" name="Übriger Materialaufwand Handel"/>
-    <account type="13" name="Übriger Materialaufwand Produktion"/>
-   </account>
-   <account type="13" name="Handelswarenaufwand">
-    <account type="13" name="Handelswarenaufwand Bereich C"/>
-    <account type="13" name="Einkaufspreisminderungen Handel"/>
-    <account type="13" name="B'veränderungen Warenverluste Handelswa."/>
-    <account type="13" name="Handelswarenaufwand Bereich B"/>
-    <account type="13" name="Direkte Einkaufsspesen Handel"/>
-    <account type="13" name="Handelswarenaufwand Bereich A"/>
    </account>
    <account type="13" name="Aufwandminderung">
     <account type="13" name="Aufwandminderungen"/>
@@ -330,182 +236,280 @@
     <account type="13" name="Bestandesveränderungen Handelswaren"/>
     <account type="13" name="Bestandesveränderungen Produktionsmat."/>
    </account>
-   <account type="13" name="Energieaufwand zur Leistungserstellung">
-    <account type="13" name="Brennstoffe"/>
-    <account type="13" name="Gas"/>
-    <account type="13" name="Wasser"/>
-    <account type="13" name="Elektrizität"/>
-    <account type="13" name="Betriebsstoffe"/>
-   </account>
    <account type="13" name="Direkte Einkaufsspesen">
     <account type="13" name="Direkte Einkaufsspesen"/>
+   </account>
+   <account type="13" name="Energieaufwand zur Leistungserstellung">
+    <account type="13" name="Betriebsstoffe"/>
+    <account type="13" name="Brennstoffe"/>
+    <account type="13" name="Elektrizität"/>
+    <account type="13" name="Gas"/>
+    <account type="13" name="Wasser"/>
+   </account>
+   <account type="13" name="Handelswarenaufwand">
+    <account type="13" name="B'veränderungen Warenverluste Handelswa."/>
+    <account type="13" name="Direkte Einkaufsspesen Handel"/>
+    <account type="13" name="Einkaufspreisminderungen Handel"/>
+    <account type="13" name="Handelswarenaufwand Bereich A"/>
+    <account type="13" name="Handelswarenaufwand Bereich B"/>
+    <account type="13" name="Handelswarenaufwand Bereich C"/>
    </account>
    <account type="13" name="Materialaufwand">
     <account type="13" name="Bestandesveränderungen, Materialverluste"/>
     <account type="13" name="Direkte Einkaufsspesen"/>
+    <account type="13" name="Einkaufspreisminderungen Produktion"/>
     <account type="13" name="Fremdarbeiten"/>
-    <account type="13" name="Materialaufwand Bereich C"/>
     <account type="13" name="Materialaufwand Bereich A"/>
     <account type="13" name="Materialaufwand Bereich B"/>
-    <account type="13" name="Einkaufspreisminderungen Produktion"/>
+    <account type="13" name="Materialaufwand Bereich C"/>
+   </account>
+   <account type="13" name="Übriger Aufwand">
+    <account type="13" name="Aufwand für Verpackung"/>
+    <account type="13" name="Übriger Aufwand für Drittleistungen"/>
+    <account type="13" name="Übriger Materialaufwand Handel"/>
+    <account type="13" name="Übriger Materialaufwand Produktion"/>
    </account>
   </account>
-  <account type="12" name="">
-   <account type="12" name="Sammel- und Fehlbuchungen">
-    <account type="12" name="Fehlbuchungen"/>
-    <account type="12" name="Sammelbuchungen"/>
+  <account type="10" name="">
+   <account type="10" name="Betriebsfremde Verbindlichkeiten">
+    <account type="10" name="Betriebsfremde Verbindlichkeiten">
+     <account type="10" name="Andere kurzfristige Verbindlichkeiten"/>
+     <account type="10" name="Andere langfristige Verbindlichkeiten"/>
+     <account type="10" name="Kurzfr. Verbindlichkeiten aus Leistungen"/>
+     <account type="10" name="Kurzfristige Finanzverbindlichkeiten"/>
+     <account type="10" name="Langfristige Finanzverbindlichkeiten"/>
+     <account type="10" name="Passive Rechnungsabgr., kurzfr. Rückstell."/>
+     <account type="10" name="Rückstellungen"/>
+    </account>
    </account>
-   <account type="12" name="Erfolgsrechnung">
-    <account type="12" name="Erfolgsrechnung"/>
+   <account type="10" name="Eigenkapital">
+    <account type="10" name="Kapital / Privat">
+     <account type="10" name="Kapital"/>
+     <account type="10" name="Privat für Einzelfirmen und Personenges."/>
+    </account>
+    <account type="10" name="Reserven, Bilanzgewinn">
+     <account type="10" name="Bilanzgewinn / Bilanzverlust"/>
+     <account type="10" name="Reserven"/>
+    </account>
    </account>
-   <account type="12" name="Bilanz">
-    <account type="12" name="Bilanz"/>
+   <account type="10" name="Fremdkapital Langfristig">
+    <account type="10" name="Andere langfristige Verbindlichkeiten">
+     <account type="10" name="Langf. Verbindl. ggn Vorsorgeeinrichtung"/>
+     <account type="10" name="Langf. Verbindl. ggn. Aktionären"/>
+     <account type="10" name="Langf. Verbindl. ggn. Konzerngesellschaft"/>
+     <account type="10" name="Langfr. Darlehensverbindl. bei Dritten"/>
+    </account>
+    <account type="10" name="Langfristige Finanzverbindlichkeiten">
+     <account type="10" name="Bankverbindlichkeiten langfristig"/>
+     <account type="10" name="Hypothekarverbindlichkeiten"/>
+     <account type="10" name="Leasingverbindlichkeiten"/>
+     <account type="10" name="Obligationenanleihen"/>
+    </account>
+    <account type="10" name="Rückstellungen lanfgristig">
+     <account type="10" name="aus Lieferung und Leistung (langfristig)"/>
+     <account type="10" name="für Altersvorsorge"/>
+     <account type="10" name="für Forschung und Entwicklung"/>
+     <account type="10" name="für Reparatur, Sanierung und Erneuerung"/>
+     <account type="10" name="für Steuern (langfristig)"/>
+     <account type="10" name="für Umweltschutzmassnahmen"/>
+     <account type="10" name="für betriebliche Umstrukturierung"/>
+     <account type="10" name="Übrige Rückstellungen"/>
+    </account>
    </account>
-   <account type="12" name="Gewinnverwendung">
-    <account type="12" name="Hilfskonten Gewinnverwendung"/>
+   <account type="10" name="Fremdkapital kurzfristig">
+    <account type="10" name="Andere kurzfristige Verbindlichkeiten">
+     <account type="10" name="Andere kurzf. Verbindl. ggn. Aktionären"/>
+     <account type="10" name="Andere kurzf. Verbindl. ggn. Konzerngesell."/>
+     <account type="10" name="Andere kurzf. Verbindl. ggn. Vorsorgeein."/>
+     <account type="10" name="Andere kurzfr. Verbindl. ggn. Dritten"/>
+     <account type="10" name="Fällige Dividenden u. Obligationenzinsen"/>
+     <account type="10" name="Fällige Obligationenanleihen"/>
+     <account type="10" name="Verbindl. ggn. staatlichen Stellen"/>
+    </account>
+    <account type="10" name="Kurzf. Verbindlichkeiten aus Lief/Leist">
+     <account type="10" name="Anzahlungen von Kunden"/>
+     <account type="10" name="Verbindl. aus L/L ggn. Aktionären"/>
+     <account type="10" name="Verbindl. aus L/L ggn. Konzerngesellsch."/>
+     <account type="10" name="Verbindlichkeiten aus Lief/Leistungen"/>
+    </account>
+    <account type="10" name="Kurzfristige Finanzverbindlichkeiten">
+     <account type="10" name="Bankverbindlichkeiten kurzfristig"/>
+     <account type="10" name="Kurzf. Finanzverb. ggn. Aktionären"/>
+     <account type="10" name="Kurzf. Finanzverb. ggn. Konzerngesell."/>
+     <account type="10" name="Kurzf. Finanzverg. ggn. Vorsorgestiftungen"/>
+     <account type="10" name="Kurzf. fälliger Teil v. langf. Fi'zverb."/>
+     <account type="10" name="Postscheck- und WIR-Verbindlichkeiten"/>
+     <account type="10" name="Sonstige kurzf. Finanzverb. ggn. Dritten"/>
+     <account type="10" name="Wechselverpflichtungen"/>
+    </account>
+    <account type="10" name="Passive Rechnungsabgr. kurzfr. Rücktell.">
+     <account type="10" name="Kurzfristige Rückstellungen"/>
+     <account type="10" name="Passive Rechnungsabgrenzung"/>
+    </account>
    </account>
   </account>
-  <account type="12" name="">
-   <account type="12" name="Betriebsfremder Erfolg">
-    <account type="12" name="Sonstiger betriebsfremder Erfolg">
-     <account type="12" name="Sonstiger betriebsfremder Aufwand"/>
-     <account type="12" name="Sonstiger betriebsfremder Ertrag"/>
-    </account>
-    <account type="12" name="Minderheitsanteile am Ergebnis"/>
-    <account type="12" name="Erfolg betriebsfremde Finanzanlagen">
-     <account type="12" name="Ertrag betriebsfremde Finanzanlagen"/>
-     <account type="12" name="Aufwand betriebsfremde Finanzanlagen"/>
-    </account>
-    <account type="12" name="Erfolg betriebsfremder Unternehmensteil">
-     <account type="12" name="Erfolg betriebsfr. Unternehmensteil 2"/>
-     <account type="12" name="Erfolg betriebsfr. Unternehmensteil 1"/>
-    </account>
-    <account type="12" name="Erfolg betriebsfremde Liegenschaften">
-     <account type="12" name="Erfolg betriebsfremde Liegenschaft 1"/>
-     <account type="12" name="Erfolg betriebsfremde Liegenschaft 2"/>
-    </account>
+  <account type="13" name="">
+   <account type="13" name="Arbeitsleistungen Dritter">
+    <account type="13" name="Arbeitsleistungen Dritter"/>
    </account>
-   <account type="12" name="Steuern"/>
-   <account type="12" name="Ausserordentlicher Erfolg">
-    <account type="12" name="Ausserordentlicher Ertrag"/>
-    <account type="12" name="Ausserordentlicher Aufwand"/>
+   <account type="13" name="Personalaufwand Dienstleistungen">
+    <account type="13" name="Arbeitsleistungen Dritter DL"/>
+    <account type="13" name="Lohnaufwand DL Bereich A"/>
+    <account type="13" name="Lohnaufwand DL Bereich B"/>
+    <account type="13" name="Lohnaufwand DL Bereich C"/>
+    <account type="13" name="Sozialversicherungsaufwand DL"/>
+    <account type="13" name="Übriger Personalaufwand DL"/>
    </account>
-  </account>
-  <account type="12" name="">
-   <account type="12" name="Erfolg aus Nebenbetrieben">
-    <account type="12" name="Erfolg aus Nebenbetrieben">
-     <account type="12" name="Erfolg aus Nebenbetrieb 1"/>
-     <account type="12" name="Erfolg aus Nebenbetrieb 2"/>
-    </account>
+   <account type="13" name="Personalaufwand Handel">
+    <account type="13" name="Arbeitsleistungen Dritter Handel"/>
+    <account type="13" name="Lohnaufwand Handel Bereich A"/>
+    <account type="13" name="Lohnaufwand Handel Bereich B"/>
+    <account type="13" name="Lohnaufwand Handel Bereich C"/>
+    <account type="13" name="Sozialversicherungsaufwand Handel"/>
+    <account type="13" name="Übriger Personalaufwand Handel"/>
    </account>
-   <account type="12" name="Erfolg aus Finanzanlagen">
-    <account type="12" name="Aufwand aus Finanzanlagen"/>
-    <account type="12" name="Ertrag aus Finanzalnlagen"/>
+   <account type="13" name="Personalaufwand Produktion">
+    <account type="13" name="Arbeitsleistungen Dritter Produktion"/>
+    <account type="13" name="Lohnaufwand Produktion Bereich A"/>
+    <account type="13" name="Lohnaufwand Produktion Bereich B"/>
+    <account type="13" name="Lohnaufwand Produktion Bereich C"/>
+    <account type="13" name="Sozialversicherungsaufwand Produktion"/>
+    <account type="13" name="Übriger Personalaufwand Produktion"/>
    </account>
-   <account type="12" name="Gew. aus Veräusserung v. betr. Anlagever.">
-    <account type="12" name="Gewinne aus Finanzanlagen"/>
-    <account type="12" name="Gewinne aus immobilen Sachanlagen"/>
-    <account type="12" name="Gewinne aus immateriellen Anlagen"/>
-    <account type="12" name="Gewinne aus mobilen Sachanlagen"/>
+   <account type="13" name="Personalaufwand Verwaltung">
+    <account type="13" name="Arbeitsleistung Dritter Verwaltung"/>
+    <account type="13" name="Lohnaufwand Verwaltung"/>
+    <account type="13" name="Sozialversicherungsaufwand Verwaltung"/>
+    <account type="13" name="Übriger Personalaufwand Verwaltung"/>
    </account>
-   <account type="12" name="Erfolg betriebliche Liegenschaften">
-    <account type="12" name="Erfolg betriebliche Liegenschaft 2">
-     <account type="12" name="Etrag betriebliche Liegenschaft 2"/>
-     <account type="12" name="Aufwand betriebliche Liegenschaft 2 "/>
-    </account>
-    <account type="12" name="Erfolg betriebliche Liegenschaft 1">
-     <account type="12" name="Ertrag betriebliche Liegenschaft 1"/>
-     <account type="12" name="Aufwand betriebliche Liegenschaft 1"/>
-    </account>
+   <account type="13" name="Sozialversicherungsaufwand">
+    <account type="13" name="AHV, IV, EO, ALV"/>
+    <account type="13" name="Berufliche Vorsorge"/>
+    <account type="13" name="FAK"/>
+    <account type="13" name="Krankentaggeldversicherung"/>
+    <account type="13" name="Quellensteuer"/>
+    <account type="13" name="Unfallversicherung"/>
+   </account>
+   <account type="13" name="Übriger Personalaufwand">
+    <account type="13" name="Aus- und Weiterbildung"/>
+    <account type="13" name="Personalbeschaffung"/>
+    <account type="13" name="Personalkantine"/>
+    <account type="13" name="Privatanteile Personalaufwand"/>
+    <account type="13" name="Sonstiger Personalaufwand"/>
+    <account type="13" name="Spesenentschädigungen effektiv"/>
+    <account type="13" name="Spesenentschädigungen pauschal"/>
    </account>
   </account>
-  <account type="9" name="">
-   <account type="9" name="Umlaufvermögen">
-    <account type="9" name="Flüssige Mittel und Wertschriften">
-     <account type="9" name="Checks, Besitzwechsel (diskontfähig)"/>
-     <account type="9" name="Andere kurzfristige Anlagen"/>
-     <account type="9" name="Transferkonto"/>
-     <account type="3" name="Kasse"/>
-     <account type="1" name="Bankguthaben"/>
-     <account type="1" name="Postcheckguthaben"/>
-     <account type="9" name="Wertschriften kurzfristig realisierbar"/>
-     <account type="9" name="Eigene Aktien"/>
-     <account type="9" name="Kurzfristige Geldanlagen"/>
+  <account type="13" name="">
+   <account type="13" name="Abschreibungen">
+    <account type="13" name="Auf Finanzanlagen"/>
+    <account type="13" name="auf Beteiligungen an Konzernges."/>
+    <account type="13" name="auf aktiviertem Aufwand"/>
+    <account type="13" name="auf immateriellen Anlagen"/>
+    <account type="13" name="auf immobilen Sachanlagen"/>
+    <account type="13" name="auf mobilen Sachanlagen"/>
+   </account>
+   <account type="13" name="Energie- und Entsorgungsaufwand">
+    <account type="13" name="Energieaufwand">
+     <account type="13" name="Brennstoffe, Heizmaterial"/>
+     <account type="13" name="Elektrizität"/>
+     <account type="13" name="Gas"/>
+     <account type="13" name="Wasser"/>
     </account>
-    <account type="9" name="Forderungen"/>
-    <account type="9" name="Aktive Rechnungsabgrenzung">
-     <account type="9" name="Aktive Rechnungsabgr. (Transitorische A)"/>
-    </account>
-    <account type="9" name="Vorräte und angefangene Arbeiten">
-     <account type="9" name="Halbfabrikate"/>
-     <account type="9" name="Vorräte Werkstoffe"/>
-     <account type="9" name="Pflichtlager"/>
-     <account type="9" name="Vorräte Handelswaren"/>
-     <account type="9" name="Waren in Konsignation"/>
-     <account type="9" name="Fertigfabrikate"/>
-     <account type="9" name="Angefangene Arbeiten"/>
-     <account type="9" name="Vorräte Rohstoffe"/>
-     <account type="9" name="Vorräte Hilfs- und Verbrauchsmaterial"/>
+    <account type="13" name="Entsorgungsaufwand">
+     <account type="13" name="Entsorgungsaufwand"/>
     </account>
    </account>
-   <account type="9" name="Betriebsfremde Aktiven">
-    <account type="9" name="Betriebsfremde Aktiven">
-     <account type="9" name="Finanzanlagen"/>
-     <account type="9" name="Vorräte und angefangene Arbeiten"/>
-     <account type="9" name="frei Bilanzverlust unter 299"/>
-     <account type="9" name="Mobile Sachanlagen"/>
-     <account type="9" name="Immobile Sachanlagen"/>
-     <account type="9" name="Flüssige Mittel und Wertschriften"/>
-     <account type="9" name="Aktivierter Aufwand"/>
-     <account type="9" name="Kurzfristige Forderungen"/>
-     <account type="9" name="Immaterielle Anlagen"/>
-     <account type="9" name="Aktive Rechnungsabgrenzung"/>
+   <account type="13" name="Fahrzeug- und Transportaufwand">
+    <account type="13" name="Fahrzeugaufwand">
+     <account type="13" name="Betriebsstoffe"/>
+     <account type="13" name="Fahrzeugleasing, Fahrzeugmieten"/>
+     <account type="13" name="Privatanteil Fahrzeugaufwand"/>
+     <account type="13" name="Reparaturen, Service und Reinigung Fz"/>
+     <account type="13" name="Verkehrsabgaben, Beiträge, Gebühren"/>
+     <account type="13" name="Versicherungen"/>
+    </account>
+    <account type="13" name="Transportaufwand">
+     <account type="13" name="Frachten, Spediteur, Cargo Domizil"/>
     </account>
    </account>
-   <account type="9" name="Anlagevermögen">
-    <account type="9" name="Finanzanlagen">
-     <account type="9" name="Eigene Aktien"/>
-     <account type="9" name="Langf. F'gen ggn. Konzernges."/>
-     <account type="9" name="Langfristige Forderungen ggn. Dritten"/>
-     <account type="9" name="Andere Finanzanlagen"/>
-     <account type="9" name="Wertpapiere des Anlagevermögens"/>
-     <account type="9" name="Langf. F'gen ggn. Aktionären"/>
-     <account type="9" name="Beteiligungen"/>
+   <account type="13" name="Finanzerfolg">
+    <account type="13" name="Finanzaufwand">
+     <account type="13" name="Zinsaufw. F'verb. ggn. Vorsorgeeinr."/>
+     <account type="13" name="Zinsaufw. aus F'verb. ggn. Aktionären"/>
+     <account type="13" name="Zinsaufw. aus F'verb. ggn. Dritten"/>
+     <account type="13" name="Zinsaufw. aus F'verb. ggn. Konzernges."/>
+     <account type="13" name="Übriger Finanzaufwand"/>
     </account>
-    <account type="9" name="Immaterielle Anlagen">
-     <account type="9" name="Patente, Know-How, Rezepte"/>
-     <account type="9" name="Marken, Muster, Modelle, Pläne"/>
-     <account type="9" name="Goodwill"/>
-     <account type="9" name="Lizenzen, Konzessionen, Nutzungsrechte"/>
-     <account type="9" name="Übrige immaterielle Anlagen"/>
-     <account type="9" name="Urheber-, Verlags-, Vertragsrechte"/>
-    </account>
-    <account type="9" name="Immobile Sachanlagen">
-     <account type="9" name="Fabrikgebäude"/>
-     <account type="9" name="Lagergebäude"/>
-     <account type="9" name="Werkstattgebäude, Atelier"/>
-     <account type="9" name="Ausstellungs- und Verkaufsgebäude"/>
-     <account type="9" name="Unbebaute Grundstücke"/>
-     <account type="9" name="Büro- und Verwaltungsgebäude"/>
-     <account type="9" name="Geschäftsliegenschaften"/>
-     <account type="9" name="Wohnhäuser"/>
-    </account>
-    <account type="9" name="Mobile Sachanlagen">
-     <account type="9" name="Maschinen und Apparate Produktion"/>
-     <account type="9" name="Lagereinrichtungen"/>
-     <account type="9" name="Übrige mobile Sachanlagen"/>
-     <account type="9" name="Büromaschinen, EDV-Anlage, Kommunikation"/>
-     <account type="9" name="Feste Einrichtungen und Installationen"/>
-     <account type="9" name="Mobiliar Einrichtungen"/>
-     <account type="9" name="Werkzeuge und Geräte"/>
-     <account type="9" name="Fahrzeuge"/>
+    <account type="13" name="Finanzertrag">
+     <account type="13" name="Erträge aud F'anlagen bei Aktionären"/>
+     <account type="13" name="Erträge aus F'anlagen bei Konzernges."/>
+     <account type="13" name="Erträge aus Finanzanlagen"/>
+     <account type="13" name="Erträge aus fl. Mitteln u. Wertschriften"/>
+     <account type="13" name="Übriger Finanzertrag"/>
     </account>
    </account>
-   <account type="9" name="Aktivierter Aufw. &amp; akt. Berichtigung">
-    <account type="9" name="Aktivierter Aufwand &amp; akt. Berichtigung">
-     <account type="9" name="Gründungs-, Kapitalerh'gs- &amp; Org.Aufwand"/>
-     <account type="9" name="Aktive Berichtigungsposten"/>
+   <account type="13" name="Raumaufwand">
+    <account type="13" name="Eigenmiete Geschäftslokalitäten"/>
+    <account type="13" name="Fremdmieten Geschäftslokalitäten"/>
+    <account type="13" name="Leasing Immobilien"/>
+    <account type="13" name="Nebenkosten"/>
+    <account type="13" name="Privatanteile Raumaufwand"/>
+    <account type="13" name="Reinigung"/>
+    <account type="13" name="Unterhalt Geschäftsräume"/>
+   </account>
+   <account type="13" name="Sachvers., Abgaben, Gebühren, Bewillig.">
+    <account type="13" name="Abgaben, Gebühren, Bewilligungen">
+     <account type="13" name="Abgaben und Gebühren"/>
+     <account type="13" name="Bewilligungen und Gewerbepatente"/>
     </account>
+    <account type="13" name="Sachversicherungen">
+     <account type="13" name="Kreditverischerungsprämien"/>
+     <account type="13" name="V'präm. f. Betriebshaftpf. u. Garantie"/>
+     <account type="13" name="V'präm. f. Betriebsunterbrechung"/>
+     <account type="13" name="V'präm. f. Elementarsch., Glasbr., Einb."/>
+    </account>
+   </account>
+   <account type="13" name="URE / Leasingaufwand mobile Sachanlagen">
+    <account type="13" name="Leasingaufwand mobile Sachanlagen">
+     <account type="13" name="Leasingaufwand mobile Sachanlagen"/>
+    </account>
+    <account type="13" name="Unterhalt, Reparaturen, Ersatz (URE)">
+     <account type="13" name="URE von Büroeinrichtungen"/>
+     <account type="13" name="URE von Lagereinrichtungen"/>
+     <account type="13" name="URE von Personaleinrichtungen"/>
+     <account type="13" name="URE von Produktionsanlagen"/>
+     <account type="13" name="URE von Verkaufseinrichtungen"/>
+    </account>
+   </account>
+   <account type="13" name="Verwaltungs- und Informatikaufwand">
+    <account type="13" name="Informatik">
+     <account type="13" name="Beratung und Entwicklung"/>
+     <account type="13" name="Leasing und Miete Hard- und Software"/>
+     <account type="13" name="Lizenzen und Wartung"/>
+    </account>
+    <account type="13" name="Verwaltungsaufwand">
+     <account type="13" name="Beiträge, Spenden, Vergabungen, Trinkgelder"/>
+     <account type="13" name="Buchführungs- und Beratungsaufwand"/>
+     <account type="13" name="Büromat., Drucksach., Fotokop., Fachlit."/>
+     <account type="13" name="Privatanteile Verwaltungsaufwand"/>
+     <account type="13" name="Telefon, Telefax, Internet, Porti"/>
+     <account type="13" name="Verwaltungsrat, GV, Revisionsstellen"/>
+    </account>
+   </account>
+   <account type="13" name="Werbeaufwand">
+    <account type="13" name="Reisespesen, Kundenbetreuung"/>
+    <account type="13" name="Schaufen., Dekoration, Fachmes., Ausstell."/>
+    <account type="13" name="Werbebeiträge, Sponsoring"/>
+    <account type="13" name="Werbeberatung, Marktanalysen"/>
+    <account type="13" name="Werbedrucks., -mat., Reklameart., Muster"/>
+    <account type="13" name="Werbeinserate, elektronische Medien"/>
+    <account type="13" name="Öffentlichkeitsarbeit / Public Relation"/>
+   </account>
+   <account type="13" name="Übriger Betriebsaufwand">
+    <account type="13" name="Betriebssicherheit und Bewachung"/>
+    <account type="13" name="Forschung und Entwicklung"/>
+    <account type="13" name="Wirtschaftsauskünfte, Betreibungen"/>
    </account>
   </account>
  </accounts>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/nb/acctchrt_checkbook.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>A Simple Checkbook</title>
+ <shortdesc>Dette er et minimums sett av kontoer for å bruke GnuCash.</shortdesc>
+ <longdesc>Use this if you just want to balance your checkbook. Later on, you can start tracking income and expenses in more detail if you feel the need.</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Nåværende Aktiva">
+    <account type="1" name="Sjekk Konto"/>
+   </account>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Inngående Balanse"/>
+  </account>
+  <account type="12" name=""/>
+  <account type="13" name=""/>
+ </accounts>
+</kmymoney-account-template>

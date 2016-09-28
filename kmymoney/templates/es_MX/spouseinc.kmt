@@ -1,29 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/es_MX/acctchrt_spouseinc.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Ingresos de cónyuge</title>
  <shortdesc>Cuentas para controlar los ingresos del cónyuge de manera separada</shortdesc>
- <longdesc>Deseará seleccionar este juego de cuentas si su cónyuge trabaja (sueldo (cónyuge), impuestos (cónyuge)).</longdesc>
+ <longdesc>Deseará seleccionar este juego de cuentas si su cónyuge trabaja
+   (sueldo (cónyuge), impuestos (cónyuge)).</longdesc>
  <accounts>
-  <account type="12" name="">
-   <account type="12" name="Sueldo (Cónyuge)"/>
-  </account>
   <account type="13" name="">
    <account type="13" name="Impuestos (Cónyuge)">
-    <account type="13" name="Seguridad Social"/>
-    <account type="13" name="Retenciones"/>
-    <account type="13" name="Municipales"/>
     <account type="13" name="IRPF"/>
+    <account type="13" name="Municipales"/>
     <account type="13" name="Otros impuestos"/>
+    <account type="13" name="Retenciones"/>
+    <account type="13" name="Seguridad Social"/>
    </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Sueldo (Cónyuge)"/>
   </account>
  </accounts>
 </kmymoney-account-template>

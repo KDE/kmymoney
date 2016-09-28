@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ko/acctchrt_business.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>사업 계정</title>
+ <shortdesc>사업 계정의 전체 차트.</shortdesc>
+ <longdesc>사업 운영자는 다른 선택 대신 이것을 선택합니다. 여기에는 대부분 사업 운영에 필요한 수취, 지불, 소득, 지출등 전체 계정이 들어있습니다.</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="4" name="신용 카드"/>
+   <account type="10" name="지불 계정"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="기타 소득"/>
+   <account type="12" name="변상 경비"/>
+   <account type="12" name="이자 소득"/>
+   <account type="12" name="판매"/>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="이익 잉여금"/>
+   <account type="16" name="잔액"/>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="수취 계정"/>
+   <account type="9" name="현재 자산">
+    <account type="3" name="용돈"/>
+    <account type="1" name="자유 입출금식 계정"/>
+    <account type="1" name="적금 계정"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Travel and Entertainment">
+    <account type="13" name="식대"/>
+    <account type="13" name="여행"/>
+    <account type="13" name="오락"/>
+   </account>
+   <account type="13" name="감가상각"/>
+   <account type="13" name="교육비"/>
+   <account type="13" name="급여 비용"/>
+   <account type="13" name="기타"/>
+   <account type="13" name="렌트비"/>
+   <account type="13" name="보험">
+    <account type="13" name="고용 배상 보험"/>
+    <account type="13" name="신체 장애 보험"/>
+    <account type="13" name="책임 보험"/>
+   </account>
+   <account type="13" name="사무용품"/>
+   <account type="13" name="상하수도">
+    <account type="13" name="가스"/>
+    <account type="13" name="상수도"/>
+    <account type="13" name="쓰레기 처리비"/>
+    <account type="13" name="인터넷"/>
+    <account type="13" name="전기료"/>
+    <account type="13" name="전화"/>
+    <account type="13" name="케이블"/>
+    <account type="13" name="휴대 전화"/>
+   </account>
+   <account type="13" name="서적"/>
+   <account type="13" name="세금">
+    <account type="13" name="Emp-FICA"/>
+    <account type="13" name="FICA"/>
+    <account type="13" name="FUTA"/>
+    <account type="13" name="Local"/>
+    <account type="13" name="국세"/>
+    <account type="13" name="기타 세금"/>
+    <account type="13" name="동산"/>
+    <account type="13" name="지방세"/>
+   </account>
+   <account type="13" name="수리비">
+    <account type="13" name="관리인 경비"/>
+    <account type="13" name="빌딩 수리비"/>
+    <account type="13" name="장비 수리비"/>
+    <account type="13" name="컴퓨터 수리비"/>
+   </account>
+   <account type="13" name="식대"/>
+   <account type="13" name="외근"/>
+   <account type="13" name="우편 및 배달"/>
+   <account type="13" name="은행 서비스 비용"/>
+   <account type="13" name="자동차">
+    <account type="13" name="가스"/>
+    <account type="13" name="수리비"/>
+    <account type="13" name="요금"/>
+    <account type="13" name="주차"/>
+   </account>
+   <account type="13" name="자선사업"/>
+   <account type="13" name="장비 렌탈"/>
+   <account type="13" name="저작권 및 허가권"/>
+   <account type="13" name="전문가 비용">
+    <account type="13" name="법률 비용"/>
+    <account type="13" name="회계"/>
+   </account>
+   <account type="13" name="정산비"/>
+   <account type="13" name="출력 및 재생"/>
+   <account type="13" name="현금 할인"/>
+   <account type="13" name="회비 및 구독료"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

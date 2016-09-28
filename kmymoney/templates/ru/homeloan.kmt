@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ru/acctchrt_homeloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Ипотечный займ</title>
+ <shortdesc>Счета ипотечного займа и связанных платежей</shortdesc>
+ <longdesc>Вы можете выбрать этот набор счетов, если взяли ссуду на дом (ипотечный займ, ипотечные выплаты)</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Займы">
+    <account type="10" name="Ипотечные займы"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Проценты">
+    <account type="13" name="Ипотечные проценты"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

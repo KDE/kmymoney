@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ja/acctchrt_eduloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>教育ローン</title>
+ <shortdesc>教育ローンと関連する利子の勘定科目</shortdesc>
+ <longdesc>教育ローンがある場合はこの勘定科目集を選ぶと良いでしょう。</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="ローン">
+    <account type="10" name="教育ローン"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="利子">
+    <account type="13" name="教育ローン利子"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

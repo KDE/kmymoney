@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/nb/acctchrt_business.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Nærings Kontoer</title>
+ <shortdesc>Et konto oppsett for næringsvirksomhet.</shortdesc>
+ <longdesc>Brukere som driver egen næring burde velge dette oppsettet. Det inkluderer alle kontoene du trenger for de fleste typer næring, inkludert Payables, Receivables, Inntekter og Utgifter.</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Nåværende Aktiva">
+    <account type="1" name="Sjekkonto"/>
+    <account type="3" name="Småpenger"/>
+    <account type="1" name="Sparekonto"/>
+   </account>
+   <account type="9" name="Utestående Fordringer"/>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Inngående Balanse"/>
+   <account type="16" name="Retained Earnings"/>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Accounts Payable"/>
+   <account type="4" name="Kreditt Kort"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Annen Inntekt"/>
+   <account type="12" name="Refunderte Utgifter"/>
+   <account type="12" name="Renteinntekt"/>
+   <account type="12" name="Salg"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Avskrivning"/>
+   <account type="13" name="Bank Gebyr"/>
+   <account type="13" name="Bil">
+    <account type="13" name="Avgifter"/>
+    <account type="13" name="Drivstoff"/>
+    <account type="13" name="Parkering"/>
+    <account type="13" name="Reperasjoner Og Vedlikehold"/>
+   </account>
+   <account type="13" name="Dining"/>
+   <account type="13" name="Diverse"/>
+   <account type="13" name="Dues and Subscriptions"/>
+   <account type="13" name="Forsikring">
+    <account type="13" name="Gjeldsforsikring"/>
+    <account type="13" name="Uføreforsikring"/>
+    <account type="13" name="Workers Comp"/>
+   </account>
+   <account type="13" name="Justering"/>
+   <account type="13" name="Kontantrabatt"/>
+   <account type="13" name="Kontor Materiell"/>
+   <account type="13" name="Leie"/>
+   <account type="13" name="Licenses and Permits"/>
+   <account type="13" name="Lønnsutifter"/>
+   <account type="13" name="Opplæring"/>
+   <account type="13" name="Outside Services"/>
+   <account type="13" name="Postage and Delivery"/>
+   <account type="13" name="Printing and Reproduction"/>
+   <account type="13" name="Professional Fees">
+    <account type="13" name="Legal Fees"/>
+    <account type="13" name="Regnskapsføring"/>
+   </account>
+   <account type="13" name="Regnskap"/>
+   <account type="13" name="Reperasjoner">
+    <account type="13" name="Bygningsreperasjoner"/>
+    <account type="13" name="EDB Reperasjoner"/>
+    <account type="13" name="Utstyrsreperasjoner"/>
+    <account type="13" name="Vaktmester Utgifter"/>
+   </account>
+   <account type="13" name="Taxes">
+    <account type="13" name="Emp-FICA"/>
+    <account type="13" name="FICA"/>
+    <account type="13" name="FUTA"/>
+    <account type="13" name="Federal"/>
+    <account type="13" name="Local"/>
+    <account type="13" name="Other Tax"/>
+    <account type="13" name="Property"/>
+    <account type="13" name="State/Province"/>
+   </account>
+   <account type="13" name="Travel and Entertainment">
+    <account type="13" name="Entertainment"/>
+    <account type="13" name="Meals"/>
+    <account type="13" name="Reise"/>
+   </account>
+   <account type="13" name="Utilities">
+    <account type="13" name="Cable"/>
+    <account type="13" name="Electric"/>
+    <account type="13" name="Garbage collection"/>
+    <account type="13" name="Gas"/>
+    <account type="13" name="Internet"/>
+    <account type="13" name="Mobiltelefon"/>
+    <account type="13" name="Telefon"/>
+    <account type="13" name="Vann"/>
+   </account>
+   <account type="13" name="Utstyrs Leie"/>
+   <account type="13" name="Veldedighet"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>
