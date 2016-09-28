@@ -1,92 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/tr_TR/acctchrt_common.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Genel</title>
- <shortdesc>Kişisel kullanıma uygun, günlük hayatta sık rastlanan kalemler</shortdesc>
- <longdesc>Pek çok kişinin tercih edeceği, yaygın kullanılan kalemleri takip etmenizi sağlayan hesaplar</longdesc>
+ <title>Genel Plan</title>
+ <shortdesc>En sık kullanılan temel hesaplar</shortdesc>
+ <longdesc>Vadesiz/maaş, vadeli, nakit, kredi kartı, gelir, genel gider hesapları</longdesc>
  <accounts>
+  <account type="10" name="">
+   <account type="4" name="Kredi Kartı"/>
+  </account>
   <account type="12" name="">
-   <account type="12" name="İkramiye"/>
    <account type="12" name="Diğer Gelirler"/>
-   <account type="12" name="Hediye Çekleri"/>
-   <account type="12" name="Maaş"/>
    <account type="12" name="Faiz Geliri">
-    <account type="12" name="Diğer Faizler"/>
+    <account type="12" name="Diğer Faiz"/>
     <account type="12" name="Vadeli Faizi"/>
     <account type="12" name="Vadesiz Faizi"/>
+   </account>
+   <account type="12" name="Gelen Hediye"/>
+   <account type="12" name="Maaş"/>
+   <account type="12" name="İkramiye"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Abonelikler"/>
+   <account type="13" name="Bakkal/Market"/>
+   <account type="13" name="Banka İşlem Ücretleri"/>
+   <account type="13" name="Bağışlar"/>
+   <account type="13" name="Bilişim"/>
+   <account type="13" name="Dışarda Yemek"/>
+   <account type="13" name="Eğitim"/>
+   <account type="13" name="Eğlence">
+    <account type="13" name="Diğer Sosyal Faaliyetler"/>
+    <account type="13" name="Konser/Sinema"/>
+    <account type="13" name="Seyahat"/>
+   </account>
+   <account type="13" name="Fark Hesabı"/>
+   <account type="13" name="Faturalar">
+    <account type="13" name="Apt/Site Aidatı"/>
+    <account type="13" name="Elektrik"/>
+    <account type="13" name="Gaz"/>
+    <account type="13" name="Su"/>
+   </account>
+   <account type="13" name="Harçlar/Vergiler">
+    <account type="13" name="Federal"/>
+    <account type="13" name="Medicare"/>
+    <account type="13" name="Other Tax"/>
+    <account type="13" name="Social Security"/>
+    <account type="13" name="State/Province"/>
+   </account>
+   <account type="13" name="Hobiler"/>
+   <account type="13" name="Internet"/>
+   <account type="13" name="Kablo/Uydu TV"/>
+   <account type="13" name="Kitap"/>
+   <account type="13" name="Kırtasiye"/>
+   <account type="13" name="Kıyafet"/>
+   <account type="13" name="Muhtelif"/>
+   <account type="13" name="Otomobil">
+    <account type="13" name="Akaryakıt"/>
+    <account type="13" name="Bakım Onarım"/>
+    <account type="13" name="Harç/Vergi"/>
+    <account type="13" name="Park"/>
+   </account>
+   <account type="13" name="Sağlık Giderleri"/>
+   <account type="13" name="Sigorta">
+    <account type="13" name="Hayat Sigortası"/>
+    <account type="13" name="Otomobil Sigortası"/>
+    <account type="13" name="Sağlık Sigortası"/>
+   </account>
+   <account type="13" name="Telefon"/>
+   <account type="13" name="Temizlik"/>
+   <account type="13" name="Ulaşım/Servis"/>
+   <account type="13" name="Verilen Hediye"/>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Dönen Varlıklar">
+    <account type="3" name="Nakit (kasa)"/>
+    <account type="1" name="Vadeli"/>
+    <account type="1" name="Vadesiz/maaş"/>
    </account>
   </account>
   <account type="16" name="">
    <account type="16" name="Açılış Bakiyeleri"/>
-  </account>
-  <account type="9" name="">
-   <account type="9" name="Cari Varlıklar">
-    <account type="1" name="Vadesiz/Maaş Hesabı"/>
-    <account type="3" name="Nakit"/>
-    <account type="1" name="Vadeli Hesap"/>
-   </account>
-  </account>
-  <account type="13" name="">
-   <account type="13" name="Eğlence">
-    <account type="13" name="Müzik/Sinema"/>
-    <account type="13" name="Seyahat"/>
-    <account type="13" name="Sosyal Faaliyetler"/>
-   </account>
-   <account type="13" name="Kitap"/>
-   <account type="13" name="Lokanta"/>
-   <account type="13" name="Hediyeler"/>
-   <account type="13" name="Sağlık Harcamaları"/>
-   <account type="13" name="Bağışlar"/>
-   <account type="13" name="Toplu Taşıma"/>
-   <account type="13" name="Taşıt">
-    <account type="13" name="Akaryakıt"/>
-    <account type="13" name="Park"/>
-    <account type="13" name="Bakım ve Onarım"/>
-    <account type="13" name="M.T.V. Taksitleri"/>
-   </account>
-   <account type="13" name="Banka İşlem Masrafları"/>
-   <account type="13" name="Eğitim"/>
-   <account type="13" name="Gayrımenkul Giderleri">
-    <account type="13" name="Su"/>
-    <account type="13" name="D.Gaz"/>
-    <account type="13" name="Kapıcı"/>
-    <account type="13" name="Elektrik"/>
-   </account>
-   <account type="13" name="Kırtasiye"/>
-   <account type="13" name="Giyecek"/>
-   <account type="13" name="Abonelik/Üyelik"/>
-   <account type="13" name="Telefon"/>
-   <account type="13" name="Sigorta">
-    <account type="13" name="Taşıt Sigortası"/>
-    <account type="13" name="Hayat Sigortası"/>
-    <account type="13" name="Sağlık Sigortası"/>
-   </account>
-   <account type="13" name="Internet"/>
-   <account type="13" name="Diğer"/>
-   <account type="13" name="Vergiler">
-    <account type="13" name="Emlak"/>
-    <account type="13" name="Çevre Temizlik"/>
-    <account type="13" name="KDV"/>
-    <account type="13" name="ÖTV/ÖİV"/>
-    <account type="13" name="Diğer Vergiler"/>
-   </account>
-   <account type="13" name="Bilgisayar"/>
-   <account type="13" name="Temizlikçi/Kuru Temizleme"/>
-   <account type="13" name="Çeşitli"/>
-   <account type="13" name="Market/Pazar"/>
-   <account type="13" name="KabloTV/Uydu"/>
-   <account type="13" name="Hobi"/>
-  </account>
-  <account type="10" name="">
-   <account type="4" name="Kredi Kartı"/>
   </account>
  </accounts>
 </kmymoney-account-template>

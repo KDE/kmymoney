@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/es_ES/acctchrt_carloan.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Préstamo de automóvil</title>
  <shortdesc>Cuentas para pago a plazos de automóvil e intereses asociados</shortdesc>
- <longdesc>Debería seleccionar este juego de cuentas si está pagando a plazos su automóvil (plazos de automóvil, intereses por plazos de automóvil).</longdesc>
+ <longdesc>Debería seleccionar este juego de cuentas si está pagando a plazos
+   su automóvil (plazos de automóvil, intereses por plazos de
+   automóvil).</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="Intereses">

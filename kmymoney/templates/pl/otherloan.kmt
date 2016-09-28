@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/pl/acctchrt_otherloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Kredyty inne</title>
+ <shortdesc>Konta przeznaczone dla innych kredytów i związanych z nimi odsetek</shortdesc>
+ <longdesc>Wybierzesz ten zestaw kont, jeśli spłacasz pożyczkę inną niż hipoteczna (pożyczka inna, odsetki od pożyczki innej).</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Kredyty">
+    <account type="10" name="Kredyt inny"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Odsetki">
+    <account type="13" name="Odsetki inne"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

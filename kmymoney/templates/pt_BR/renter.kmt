@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/pt_BR/acctchrt_renter.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Despesas de Aluguel</title>
- <shortdesc>Despesas associadas com um imóvel alugado</shortdesc>
+ <shortdesc>Despesas associadas com uma casa alugada</shortdesc>
  <longdesc>Deverá selecionar este conjunto de contas caso tenha uma casa alugada (renda).</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="Renda"/>
    <account type="13" name="Seguro"/>
-   <account type="13" name="IPTU"/>
   </account>
  </accounts>
 </kmymoney-account-template>

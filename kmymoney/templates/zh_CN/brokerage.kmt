@@ -1,30 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/zh_CN/acctchrt_brokerage.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>投资帐户</title>
- <shortdesc>Brokerage account with related investment accounts (stock, bond, mutual fund, index fund, interest, dividend)</shortdesc>
- <longdesc>You would want to select this set of accounts if you have investments (stock, bond, mutual fund, index fund, interest, dividend).</longdesc>
+ <title>投资科目</title>
+ <shortdesc>关于投资科目(股票，债券，投资基金，指数基金，利息，股息)的经纪科目</shortdesc>
+ <longdesc>如果您有投资(股票，债券，投资基金，指数基金，利息，股息)，您可能想选择这套科目。</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="佣金"/>
   </account>
   <account type="12" name="">
-   <account type="12" name="股利收入"/>
    <account type="12" name="利息收入">
-    <account type="12" name="债券利率"/>
+    <account type="12" name="债券利息"/>
    </account>
+   <account type="12" name="股利收入"/>
   </account>
   <account type="9" name="">
    <account type="9" name="投资">
-    <account type="7" name="经纪帐户"/>
+    <account type="1" name="经纪科目">
+     <account type="9" name="债券"/>
+     <account type="9" name="市场指数"/>
+     <account type="9" name="投资基金"/>
+     <account type="9" name="股票"/>
+    </account>
    </account>
   </account>
  </accounts>

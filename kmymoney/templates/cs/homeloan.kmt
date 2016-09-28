@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/cs/acctchrt_homeloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Hypotéční úvěr</title>
+ <shortdesc>Účty pro hypotéční úvěr a s tím související úrok</shortdesc>
+ <longdesc>Zvolte si tuto sadu účtů, pokud máte úvěr na dům (hypotéku).</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Dluhy">
+    <account type="10" name="Hypotéční úvěr"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Úrok">
+    <account type="13" name="Úrok z hypotéky"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

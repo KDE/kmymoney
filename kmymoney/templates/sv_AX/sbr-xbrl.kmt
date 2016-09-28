@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/sv_AX/acctchrt_sbr-xbrl.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Företag och organisationer</title>
+ <shortdesc>Företag och organisationer</shortdesc>
+ <longdesc>Konton enligt bokföringsförordningen.
+    Ref: http://www.finlex.fi/sv/laki/ajantasa/1997/19971339
+    Kontonummer huvudsakligen enligt TIEKE Utvecklingscentralen för Informationssamhälle rf, Raportointikoodisto-SBR-XBRL-taksonomia_kartoistus2013.xlsx
+    Ref: http://www.tieke.fi/display/XBRL/SBR+Taksonomia
+    Eget kapital använder LIABILITY-typen i stället för EQUITY för att lättare skapa balansräkningar enligt bokföringsförordningen.</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Avskrivningsdifferens"/>
+   <account type="10" name="Skattemässiga reserver"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Avskrivningar enligt plan"/>
+   <account type="13" name="Exceptionella nedskrivningar av rörliga aktiva"/>
+   <account type="13" name="Nedskrivningar av tillgångar bland bestående aktiva"/>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Avsättningar för pensioner"/>
+   <account type="10" name="Skatteavsättningar"/>
+   <account type="10" name="Övriga avsättningar"/>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Immateriella tillgångar">
+    <account type="9" name="Förskottsbetalningar"/>
+    <account type="9" name="Goodwill"/>
+    <account type="9" name="Immateriella rättigheter"/>
+    <account type="9" name="Koncerngoodwill"/>
+    <account type="9" name="Utvecklingsutgifter"/>
+    <account type="9" name="Övriga immateriella tillgångar"/>
+   </account>
+   <account type="9" name="Materiella tillgångar">
+    <account type="9" name="Byggnader och konstruktioner"/>
+    <account type="9" name="Byggnader och konstruktioner (hyrda)"/>
+    <account type="9" name="Förskottsbetalningar och pågående nyanläggningar"/>
+    <account type="9" name="Mark- och vattenområden"/>
+    <account type="9" name="Mark- och vattenområden (hyrda)"/>
+    <account type="9" name="Maskiner och inventarier"/>
+    <account type="9" name="Övriga materiella tillgångar"/>
+   </account>
+   <account type="9" name="Placeringar">
+    <account type="9" name="Andelar i företag inom samma koncern"/>
+    <account type="9" name="Andelar i intresseföretag"/>
+    <account type="9" name="Andelar i ägarintresseföretag"/>
+    <account type="9" name="Fordringar hos företag inom samma koncern"/>
+    <account type="9" name="Fordringar hos intresseföretag"/>
+    <account type="9" name="Fordringar hos ägarintresseföretag"/>
+    <account type="9" name="Uppskrivning av placeringar"/>
+    <account type="9" name="Övriga aktier och andelar"/>
+    <account type="9" name="Övriga fordringar"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Förändring av avskrivningsdifferens"/>
+   <account type="12" name="Förändring av skattemässiga reserver"/>
+   <account type="12" name="Koncernbidrag"/>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Aktie- eller andelskapital eller annat motsvarande kapital"/>
+   <account type="10" name="Balanserad vinst (förlust) från tidigare räkenskapsperioder"/>
+   <account type="10" name="Bolagsinsats"/>
+   <account type="10" name="Räkenskapsperiodens vinst (förlust)"/>
+   <account type="10" name="Räkenskapsperiodens vinst (förlust) (kb, öb, firma)"/>
+   <account type="10" name="Uppskrivningsfond"/>
+   <account type="10" name="Uppskrivningsfond (kb, öb, firma)"/>
+   <account type="10" name="Överkursfond"/>
+   <account type="10" name="Övriga fonder">
+    <account type="10" name="Fond för inbetalt fritt eget kapital"/>
+    <account type="10" name="Fond för verkligt värde"/>
+    <account type="10" name="Fonder enligt bolagsordningen"/>
+    <account type="10" name="Fonder enligt stadgarna"/>
+    <account type="10" name="Reservfond"/>
+    <account type="10" name="Övriga fonder"/>
+   </account>
+  </account>
+  <account type="13" name=""/>
+  <account type="12" name="">
+   <account type="12" name="Intäkter från andelar i företag inom samma koncern"/>
+   <account type="12" name="Intäkter från andelar i ägarintresseföretag"/>
+   <account type="12" name="Intäkter från övriga placeringar bland bestående aktiva"/>
+   <account type="13" name="Nedskrivningar av finansiella värdepapper bland rörliga aktiva"/>
+   <account type="13" name="Nedskrivningar av placeringar bland bestående aktiva"/>
+   <account type="13" name="Räntekostnader och övriga finansiella kostnader"/>
+   <account type="12" name="Övriga ränteintäkter och finansiella intäkter"/>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Erhållna förskott"/>
+   <account type="10" name="Finansieringsväxlar"/>
+   <account type="10" name="Latenta skatteskulder"/>
+   <account type="10" name="Leverantörsskulder"/>
+   <account type="10" name="Lån mot konvertibla skuldebrev"/>
+   <account type="10" name="Masskuldebrevslån"/>
+   <account type="10" name="Resultatregleringar"/>
+   <account type="10" name="Skulder till företag inom samma koncern"/>
+   <account type="10" name="Skulder till kreditinstitut"/>
+   <account type="10" name="Skulder till ägarintresseföretag"/>
+   <account type="10" name="Återlåning från arbetspensionsförsäkringsanstalter"/>
+   <account type="10" name="Övriga skulder"/>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Erhållna förskott"/>
+   <account type="10" name="Finansieringsväxlar"/>
+   <account type="10" name="Kapitallån"/>
+   <account type="10" name="Latenta skatteskulder"/>
+   <account type="10" name="Leverantörsskulder"/>
+   <account type="10" name="Lån mot konvertibla skuldebrev"/>
+   <account type="10" name="Masskuldebrevslån"/>
+   <account type="10" name="Resultatregleringar"/>
+   <account type="10" name="Skulder till företag inom samma koncern"/>
+   <account type="10" name="Skulder till kreditinstitut"/>
+   <account type="10" name="Skulder till ägarintresseföretag"/>
+   <account type="10" name="Återlåning från arbetspensionsförsäkringsanstalter"/>
+   <account type="10" name="Övriga skulder"/>
+  </account>
+  <account type="13" name=""/>
+  <account type="13" name=""/>
+  <account type="10" name=""/>
+  <account type="13" name="">
+   <account type="13" name="Köpta tjänster"/>
+   <account type="13" name="Material, förnödenheter och varor">
+    <account type="13" name="Förändring av lager"/>
+    <account type="13" name="Inköp under räkenskapsperioden"/>
+   </account>
+  </account>
+  <account type="10" name=""/>
+  <account type="13" name=""/>
+  <account type="12" name=""/>
+  <account type="13" name="">
+   <account type="13" name="Lönebikostnader">
+    <account type="13" name="Pensionskostnader"/>
+    <account type="13" name="Övriga lönebikostnader"/>
+   </account>
+   <account type="13" name="Löner och arvoden"/>
+  </account>
+  <account type="13" name=""/>
+  <account type="13" name=""/>
+  <account type="9" name="">
+   <account type="9" name="Finansiella värdepapper">
+    <account type="9" name="Andelar i företag inom samma koncern"/>
+    <account type="9" name="Övriga aktier eller andelar"/>
+    <account type="9" name="Övriga värdepapper"/>
+   </account>
+   <account type="9" name="Fordringar, kortfristiga">
+    <account type="9" name="Fordringar hos företag inom samma koncern"/>
+    <account type="9" name="Fordringar hos ägarintresseföretag"/>
+    <account type="9" name="Kundfordringar"/>
+    <account type="9" name="Lånefordringar"/>
+    <account type="9" name="Resultatregleringar"/>
+    <account type="9" name="Övriga fordringar">
+     <account type="9" name="Obetalda aktier/andelar"/>
+    </account>
+   </account>
+   <account type="9" name="Fordringar, långfristiga">
+    <account type="9" name="Fordringar hos företag inom samma koncern"/>
+    <account type="9" name="Fordringar hos ägarintresseföretag"/>
+    <account type="9" name="Kundfordringar"/>
+    <account type="9" name="Latenta skattefordringar"/>
+    <account type="9" name="Lånefordringar"/>
+    <account type="9" name="Resultatregleringar"/>
+    <account type="9" name="Övriga fordringar">
+     <account type="9" name="Obetalda aktier/andelar"/>
+    </account>
+   </account>
+   <account type="9" name="Kassa och bank">
+    <account type="9" name="Bank"/>
+    <account type="9" name="Kassa"/>
+   </account>
+   <account type="9" name="Omsättningstillgångar">
+    <account type="9" name="Färdiga produkter/varor"/>
+    <account type="9" name="Förskottsbetalningar"/>
+    <account type="9" name="Material och förnödenheter"/>
+    <account type="9" name="Varor under tillverkning"/>
+    <account type="9" name="Övriga omsättningstillgångar"/>
+   </account>
+  </account>
+  <account type="12" name=""/>
+  <account type="13" name=""/>
+  <account type="13" name=""/>
+  <account type="12" name=""/>
+  <account type="13" name=""/>
+ </accounts>
+</kmymoney-account-template>

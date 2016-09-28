@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/fi_FI/acctchrt_sbr-xbrl.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Yritykset ja organisaatiot</title>
+ <shortdesc>Yritykset ja organisaatiot</shortdesc>
+ <longdesc>Tilit mukaan Kirjanpitoasetus.
+    Ref: http://www.finlex.fi/fi/laki/ajantasa/1997/19971339
+    Tilinumerot pääasiassa mukaan TIEKE Tietoyhteiskunnan kehittämiskeskus ry, Raportointikoodisto-SBR-XBRL-taksonomia_kartoistus2013.xlsx
+    Ref: http://www.tieke.fi/display/XBRL/SBR+Taksonomia
+    Vaihtuvat vastaavat käyttää LIABILITY sihasta EQUITY.</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Henkilösivukulut">
+    <account type="13" name="Eläkekulut"/>
+    <account type="13" name="Muut henkilösivukulut"/>
+   </account>
+   <account type="13" name="Palkat ja palkkiot"/>
+  </account>
+  <account type="10" name=""/>
+  <account type="13" name=""/>
+  <account type="12" name=""/>
+  <account type="12" name=""/>
+  <account type="13" name=""/>
+  <account type="10" name="">
+   <account type="10" name="Joukkovelkakirjalainat"/>
+   <account type="10" name="Lainat rahoituslaitoksilta"/>
+   <account type="10" name="Laskennalliset verovela"/>
+   <account type="10" name="Muut velat"/>
+   <account type="10" name="Ostovelat"/>
+   <account type="10" name="Rahoitusvekselit"/>
+   <account type="10" name="Saadut ennakot"/>
+   <account type="10" name="Siirtovelat"/>
+   <account type="10" name="Takaisinlainat työeläkevakuutuslaitoksilta"/>
+   <account type="10" name="Vaihtovelkakirjalainat"/>
+   <account type="10" name="Velat omistusyhteysyrityksille"/>
+   <account type="10" name="Velat saman konsernin yrityksille"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Aineet tarvikkeet ja tavarat">
+    <account type="13" name="Ostot tilikauden aikana"/>
+    <account type="13" name="Varastojen muutos"/>
+   </account>
+   <account type="13" name="Ulkopuoliset palvelut"/>
+  </account>
+  <account type="13" name=""/>
+  <account type="10" name="">
+   <account type="10" name="Arvonkorotusrahasto"/>
+   <account type="10" name="Arvonkorotusrahasto (ay, ky, tmi)"/>
+   <account type="10" name="Edellisten tilikausien voitto (tappio)"/>
+   <account type="10" name="Muut rahastot">
+    <account type="10" name="Käyvän arvon rahasto"/>
+    <account type="10" name="Muut rahastot"/>
+    <account type="10" name="Sijoitetun vapaan oman pääoman rahasto"/>
+    <account type="10" name="Sääntöjen mukaiset rahastot"/>
+    <account type="10" name="Vararahasto"/>
+    <account type="10" name="Yhtiöjärjestyksen mukaiset rahastot"/>
+   </account>
+   <account type="10" name="Osake- osuus- tai muu vastaava pääoma"/>
+   <account type="10" name="Pääomapanokset"/>
+   <account type="10" name="Tilikauden voitto (tappio)"/>
+   <account type="10" name="Tilikauden voitto (tappio) (ay, ky, tmi)"/>
+   <account type="10" name="Ylikurssirahasto"/>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Eläkevaraukset"/>
+   <account type="10" name="Muut pakolliset varaukset"/>
+   <account type="10" name="Verovaraukset"/>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Joukkovelkakirjalainat"/>
+   <account type="10" name="Lainat rahoituslaitoksilta"/>
+   <account type="10" name="Laskennalliset verovela"/>
+   <account type="10" name="Muut velat"/>
+   <account type="10" name="Ostovelat"/>
+   <account type="10" name="Pääomalainat"/>
+   <account type="10" name="Rahoitusvekselit"/>
+   <account type="10" name="Saadut ennakot"/>
+   <account type="10" name="Siirtovelat"/>
+   <account type="10" name="Takaisinlainat työeläkevakuutuslaitoksilta"/>
+   <account type="10" name="Vaihtovelkakirjalainat"/>
+   <account type="10" name="Velat omistusyhteysyrityksille"/>
+   <account type="10" name="Velat saman konsernin yrityksille"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Arvonalentumiset pysyvien vastaavien hyödykkeistä"/>
+   <account type="13" name="Suunnitelman mukaiset poistot"/>
+   <account type="13" name="Vaihtuvien vastaavien poikkeukselliset arvonalentumiset"/>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Aineelliset hyödykkeet">
+    <account type="9" name="Ennakkomaksut ja keskeneräiset hankinnat"/>
+    <account type="9" name="Koneet ja kalusto"/>
+    <account type="9" name="Maa- ja vesialueet"/>
+    <account type="9" name="Maa- ja vesialueet (Vuokraoikeudet)"/>
+    <account type="9" name="Muut aineelliset hyödykkeet"/>
+    <account type="9" name="Rakennukset ja rakennelmat"/>
+    <account type="9" name="Rakennukset ja rakennelmat (Vuokraoikeudet)"/>
+   </account>
+   <account type="9" name="Aineettomat hyödykkeet">
+    <account type="9" name="Aineettomat oikeudet"/>
+    <account type="9" name="Ennakkomaksut"/>
+    <account type="9" name="Kehittämismenot"/>
+    <account type="9" name="Konserniliikearvo"/>
+    <account type="9" name="Liikearvo"/>
+    <account type="9" name="Muut aineettomat hyödykkeet"/>
+   </account>
+   <account type="9" name="Sijoitukset">
+    <account type="9" name="Muut osakkeet ja osuudet"/>
+    <account type="9" name="Muut saamiset"/>
+    <account type="9" name="Osuudet omistusyhteysyrityksissä"/>
+    <account type="9" name="Osuudet osakkuusyrityksissä"/>
+    <account type="9" name="Osuudet saman konsernin yrityksissä"/>
+    <account type="9" name="Saamiset omistusyhteysyrityksiltä"/>
+    <account type="9" name="Saamiset osakkuusyrityksiltä"/>
+    <account type="9" name="Saamiset saman konsernin yrityksiltä"/>
+    <account type="9" name="Sijoitusten arvonkorotukset"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="13" name="Arvonalentumiset pysyvien vastaavien sijoituksista"/>
+   <account type="13" name="Arvonalentumiset vaihtuvien vastaavien rahoitusarvopapereista"/>
+   <account type="13" name="Korkokulut ja muut rahoituskulut"/>
+   <account type="12" name="Muut korko- ja rahoitustuotot"/>
+   <account type="12" name="Tuotot muista pysyvien vastaavien sijoituksista"/>
+   <account type="12" name="Tuotot osuuksista omistusyhteysyrityksissä"/>
+   <account type="12" name="Tuotot osuuksista saman konsernin yrityksissä"/>
+  </account>
+  <account type="13" name=""/>
+  <account type="13" name=""/>
+  <account type="12" name="">
+   <account type="12" name="Konserniavustus"/>
+   <account type="12" name="Poistoeron muutos"/>
+   <account type="12" name="Verotusperusteisten varausten muutos"/>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Poistoero"/>
+   <account type="10" name="Verotusperäiset varaukset"/>
+  </account>
+  <account type="13" name=""/>
+  <account type="9" name="">
+   <account type="9" name="Lyhytaikaiset saamiset">
+    <account type="9" name="Lainasaamiset"/>
+    <account type="9" name="Muut saamiset">
+     <account type="9" name="Maksamattomat osakkeet/osuudet"/>
+    </account>
+    <account type="9" name="Myyntisaamiset"/>
+    <account type="9" name="Saamiset omistusyhteysyrityksiltä"/>
+    <account type="9" name="Saamiset saman konsernin yrityksiltä"/>
+    <account type="9" name="Siirtosaamiset"/>
+   </account>
+   <account type="9" name="Pitkäaikaiset saamiset">
+    <account type="9" name="Lainasaamiset"/>
+    <account type="9" name="Laskennalliset verosaamiset"/>
+    <account type="9" name="Muut saamiset">
+     <account type="9" name="Maksamattomat osakkeet/osuudet"/>
+    </account>
+    <account type="9" name="Myyntisaamiset"/>
+    <account type="9" name="Saamiset omistusyhteysyrityksiltä"/>
+    <account type="9" name="Saamiset saman konsernin yrityksiltä"/>
+    <account type="9" name="Siirtosaamiset"/>
+   </account>
+   <account type="9" name="Rahat ja pankkisaamiset">
+    <account type="9" name="Pankkisaamiset"/>
+    <account type="9" name="Rahat"/>
+   </account>
+   <account type="9" name="Rahoitusarvopaperit">
+    <account type="9" name="Muut arvopaperit"/>
+    <account type="9" name="Muut osakkeet ja osuudet"/>
+    <account type="9" name="Osuudet saman konsernin yrityksissä"/>
+   </account>
+   <account type="9" name="Vaihto-omaisuus">
+    <account type="9" name="Aineet ja tarvikkeet"/>
+    <account type="9" name="Ennakkomaksut"/>
+    <account type="9" name="Keskeneräiset tuotteet"/>
+    <account type="9" name="Muu vaihto-omaisuus"/>
+    <account type="9" name="Valmiit tuotteet/tavarat"/>
+   </account>
+  </account>
+  <account type="13" name=""/>
+  <account type="12" name=""/>
+  <account type="13" name=""/>
+  <account type="13" name=""/>
+  <account type="10" name=""/>
+ </accounts>
+</kmymoney-account-template>

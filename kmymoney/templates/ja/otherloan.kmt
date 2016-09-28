@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ja/acctchrt_otherloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>その他のローン</title>
+ <shortdesc>その他のローンと利子を管理するための勘定科目</shortdesc>
+ <longdesc>住宅以外の何か他のローンがある場合はこの勘定科目集を選ぶとよいでしょう。</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="ローン">
+    <account type="10" name="その他のローン"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="利子">
+    <account type="13" name="その他の利子"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

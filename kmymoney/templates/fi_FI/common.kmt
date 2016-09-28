@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/fi_FI/acctchrt_common.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Henkilökohtainen</title>
+ <shortdesc>Tilirakenne henkilökohtaiseen kirjanpitoon.</shortdesc>
+ <longdesc>Tilirakenne henkilökohtaiseen kirjanpitoon.
+  Most users will want to select this set of accounts. It includes most commonly used accounts (checking, savings, cash, credit card, income, common expenses).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Asuminen">
+    <account type="13" name="Muut"/>
+    <account type="13" name="Sähkö"/>
+    <account type="13" name="Vesi"/>
+   </account>
+   <account type="13" name="Auto">
+    <account type="13" name="Huolto ja korjaukset"/>
+    <account type="13" name="Maksut"/>
+    <account type="13" name="Polttoaine"/>
+    <account type="13" name="Pysäköinti"/>
+   </account>
+   <account type="13" name="Elintarvikkeet"/>
+   <account type="13" name="Harrastukset"/>
+   <account type="13" name="Hyväntekeväisyys"/>
+   <account type="13" name="Internet"/>
+   <account type="13" name="Julkinen liikenne"/>
+   <account type="13" name="Kirjat"/>
+   <account type="13" name="Koulutus"/>
+   <account type="13" name="Lahjoitukset"/>
+   <account type="13" name="Lehdet yms"/>
+   <account type="13" name="Muut kulut"/>
+   <account type="13" name="Muut tavarat"/>
+   <account type="13" name="Pankkikulut"/>
+   <account type="13" name="Puhelin"/>
+   <account type="13" name="Ruoka"/>
+   <account type="13" name="TV"/>
+   <account type="13" name="Terveyskulut"/>
+   <account type="13" name="Tietotekniikka"/>
+   <account type="13" name="Vaatteet"/>
+   <account type="13" name="Vakuutukset">
+    <account type="13" name="Auto vakuutus"/>
+    <account type="13" name="Henkilövakuutukset"/>
+    <account type="13" name="Kotivakuutus"/>
+   </account>
+   <account type="13" name="Verot"/>
+   <account type="13" name="Viihde">
+    <account type="13" name="Matkat"/>
+    <account type="13" name="Musiikki/elokuvat"/>
+    <account type="13" name="Vapaa-aika"/>
+   </account>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Avaustase"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Bonus"/>
+   <account type="12" name="Korkotulot">
+    <account type="12" name="Käyttötilin korko"/>
+    <account type="12" name="Muut korkotulot"/>
+    <account type="12" name="Säästöjen korot"/>
+   </account>
+   <account type="12" name="Lahjoitukset"/>
+   <account type="12" name="Muut tulot"/>
+   <account type="12" name="Palkka"/>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Vaihtuvat vastaavat">
+    <account type="3" name="Käteinen"/>
+    <account type="1" name="Käyttötili"/>
+    <account type="1" name="Säästötili"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="4" name="Luottokortti"/>
+   <account type="13" name="Muut luotot"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

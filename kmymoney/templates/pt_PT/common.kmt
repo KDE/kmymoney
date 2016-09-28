@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/pt_PT/acctchrt_common.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
@@ -13,81 +13,81 @@
  <shortdesc>Um conjunto simples com as contas mais utilizadas</shortdesc>
  <longdesc>A maioria dos utilizadores desejará seleccionar este conjunto de contas. Inclui as contas mais utilizadas (dep. ordem, prazo, dinheiro, cartão crédito, receitas, despesas comuns).</longdesc>
  <accounts>
-  <account type="12" name="">
-   <account type="12" name="Bónus"/>
-   <account type="12" name="Outras Receitas"/>
-   <account type="12" name="Presentes Recebidos"/>
-   <account type="12" name="Salário"/>
-   <account type="12" name="Juros Recebidos">
-    <account type="12" name="Outros Juros"/>
-    <account type="12" name="Juros Conta Prazo"/>
-    <account type="12" name="Juros Conta Ordem"/>
-   </account>
-  </account>
-  <account type="16" name="">
-   <account type="16" name="Saldos Iniciais"/>
-  </account>
   <account type="9" name="">
    <account type="9" name="Activos Actuais">
+    <account type="1" name="Conta a Prazo"/>
     <account type="1" name="Conta à Ordem"/>
     <account type="3" name="Dinheiro na Carteira"/>
-    <account type="1" name="Conta a Prazo"/>
    </account>
   </account>
   <account type="13" name="">
+   <account type="13" name="Ajustamentos"/>
+   <account type="13" name="Assinaturas"/>
+   <account type="13" name="Automóvel">
+    <account type="13" name="Estacionamento"/>
+    <account type="13" name="Gasolina"/>
+    <account type="13" name="Imposto Selo"/>
+    <account type="13" name="Reparações e Manutenção"/>
+   </account>
+   <account type="13" name="Caridade"/>
+   <account type="13" name="Comissões Bancárias"/>
+   <account type="13" name="Computador"/>
+   <account type="13" name="Despesas com Saúde"/>
    <account type="13" name="Divertimento">
     <account type="13" name="Música/Cinema"/>
-    <account type="13" name="Viagens"/>
     <account type="13" name="Passeios"/>
+    <account type="13" name="Viagens"/>
    </account>
-   <account type="13" name="Livros"/>
-   <account type="13" name="Refeições Fora"/>
-   <account type="13" name="Presentes"/>
-   <account type="13" name="Despesas com Saúde"/>
-   <account type="13" name="Caridade"/>
-   <account type="13" name="Transportes Públicos"/>
-   <account type="13" name="Automóvel">
-    <account type="13" name="Gasolina"/>
-    <account type="13" name="Estacionamento"/>
-    <account type="13" name="Reparações e Manutenção"/>
-    <account type="13" name="Imposto Selo"/>
-   </account>
-   <account type="13" name="Comissões Bancárias"/>
    <account type="13" name="Educação"/>
-   <account type="13" name="Serviços">
-    <account type="13" name="Água"/>
-    <account type="13" name="Gás"/>
-    <account type="13" name="Electricidade"/>
+   <account type="13" name="Impostos">
+    <account type="13" name="IRS"/>
+    <account type="13" name="Municipais"/>
+    <account type="13" name="Outros Impostos"/>
+    <account type="13" name="Segurança Social"/>
+    <account type="13" name="Seguro Saúde"/>
    </account>
+   <account type="13" name="Lavandaria"/>
+   <account type="13" name="Livros"/>
    <account type="13" name="Mat. Escritório"/>
+   <account type="13" name="Mercearia"/>
+   <account type="13" name="Outras"/>
+   <account type="13" name="Passatempos"/>
+   <account type="13" name="Presentes"/>
+   <account type="13" name="Refeições Fora"/>
    <account type="13" name="Roupa"/>
-   <account type="13" name="Assinaturas"/>
-   <account type="13" name="Telefone"/>
    <account type="13" name="Seguro">
     <account type="13" name="Seguro Automóvel"/>
-    <account type="13" name="Seguro Vida"/>
     <account type="13" name="Seguro Saúde"/>
+    <account type="13" name="Seguro Vida"/>
+   </account>
+   <account type="13" name="Serviços">
+    <account type="13" name="Electricidade"/>
+    <account type="13" name="Gás"/>
+    <account type="13" name="Água"/>
    </account>
    <account type="13" name="Serviços Internet"/>
-   <account type="13" name="Ajustamentos"/>
-   <account type="13" name="Impostos">
-    <account type="13" name="Segurança Social"/>
-    <account type="13" name="Municipais"/>
-    <account type="13" name="IRS"/>
-    <account type="13" name="Seguro Saúde"/>
-    <account type="13" name="Outros Impostos"/>
-   </account>
-   <account type="13" name="Computador"/>
-   <account type="13" name="Lavandaria"/>
-   <account type="13" name="Outras"/>
-   <account type="13" name="Mercearia"/>
+   <account type="13" name="Telefone"/>
    <account type="13" name="Televisão por Cabo"/>
-   <account type="13" name="Passatempos"/>
+   <account type="13" name="Transportes Públicos"/>
   </account>
   <account type="10" name="">
    <account type="10" name="Contas a Pagar">
     <account type="4" name="Cartão de Crédito"/>
    </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Bónus"/>
+   <account type="12" name="Juros Recebidos">
+    <account type="12" name="Juros Conta Ordem"/>
+    <account type="12" name="Juros Conta Prazo"/>
+    <account type="12" name="Outros Juros"/>
+   </account>
+   <account type="12" name="Outras Receitas"/>
+   <account type="12" name="Presentes Recebidos"/>
+   <account type="12" name="Salário"/>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Saldos Iniciais"/>
   </account>
  </accounts>
 </kmymoney-account-template>

@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/it/acctchrt_spouseinc.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
@@ -18,11 +18,11 @@
   </account>
   <account type="13" name="">
    <account type="13" name="Imposte (coniuge)">
-    <account type="13" name="Pensione"/>
-    <account type="13" name="Spese mediche"/>
-    <account type="13" name="Regionali/provinciali"/>
-    <account type="13" name="Statale"/>
     <account type="13" name="Altre imposte"/>
+    <account type="13" name="Pensione"/>
+    <account type="13" name="Regionali/provinciali"/>
+    <account type="13" name="Spese mediche"/>
+    <account type="13" name="Statale"/>
    </account>
   </account>
  </accounts>

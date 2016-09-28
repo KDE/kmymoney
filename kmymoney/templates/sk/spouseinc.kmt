@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/sk/acctchrt_spouseinc.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
@@ -18,11 +18,11 @@
   </account>
   <account type="13" name="">
    <account type="13" name="Dane a poplatky (Partnerove)">
+    <account type="13" name="Celoštátne dane"/>
+    <account type="13" name="Miestne dane"/>
+    <account type="13" name="Ostatné dane"/>
     <account type="13" name="Sociálne poistenie"/>
     <account type="13" name="Zdravotná starostlivosť"/>
-    <account type="13" name="Miestne dane"/>
-    <account type="13" name="Celoštátne dane"/>
-    <account type="13" name="Ostatné dane"/>
    </account>
   </account>
  </accounts>

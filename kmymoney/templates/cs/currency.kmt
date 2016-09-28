@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/cs/acctchrt_currency.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Účet na obchodování s měnou</title>
+ <shortdesc>Účet na obchodování a konverze zahraničních měn</shortdesc>
+ <longdesc>Tento účet budete potrebovať, pokud budete konvertovať zahraniční měny.
+
+	Poznámka: účet je aktuální v DEM; pokud chcete, můžete to zmeniť.</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Investice">
+    <account type="11" name="Měnové obchody"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

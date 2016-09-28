@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/hu_HU/acctchrt_homeown.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
@@ -14,11 +14,11 @@
  <longdesc>Akkor érdemes ezt választani, ha önnek van saját lakása. Ez a készlet a saját lakás költségeinek nyomonkövetésére való számlákat tartalmaz (biztosítás, adók, javítások).</longdesc>
  <accounts>
   <account type="13" name="">
-   <account type="13" name="Biztosítás">
-    <account type="13" name="Lakásbiztosítás"/>
-   </account>
    <account type="13" name="Adók">
     <account type="13" name="Ingatlanadó"/>
+   </account>
+   <account type="13" name="Biztosítás">
+    <account type="13" name="Lakásbiztosítás"/>
    </account>
    <account type="13" name="Lakásjavítás"/>
   </account>

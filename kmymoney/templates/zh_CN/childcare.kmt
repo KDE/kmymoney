@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/zh_CN/acctchrt_childcare.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Childcare Expenses</title>
- <shortdesc>An account for tracking childcare costs</shortdesc>
- <longdesc>You would want to select this set of accounts if you have childcare expenses.</longdesc>
+ <title>育儿费用</title>
+ <shortdesc>用于跟踪育儿开销的科目</shortdesc>
+ <longdesc>如果您有育儿开销，您可能希望选择这套科目。</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="育儿"/>

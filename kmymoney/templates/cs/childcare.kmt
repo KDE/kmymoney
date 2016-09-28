@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/cs/acctchrt_childcare.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Výdaje na péči o dítě</title>
+ <shortdesc>Účet na zaznamenávání výdajů na péči o dítě</shortdesc>
+ <longdesc>Zvolte si tuto sadu účtů, pokud máte výdaje na péči o dítě.</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Péče o dítě"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/pl/acctchrt_retiremt.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Konta związane z emeryturą</title>
+ <shortdesc>Konta emerytalne i związane z nimi podrzędne konta inwestycyjne</shortdesc>
+ <longdesc>Wybierzesz ten zestaw kont, jeśli gromadzisz fundusze na emeryturę (giełda, obligacje, fundusz wzajemny, indeks rynkowy).</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Inwestycje">
+    <account type="1" name="Emerytura">
+     <account type="15" name="Fundusz wzajemny"/>
+     <account type="15" name="Giełda"/>
+     <account type="15" name="Indeks rynkowy"/>
+     <account type="15" name="Obligacje"/>
+    </account>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

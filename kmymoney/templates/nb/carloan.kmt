@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/nb/acctchrt_carloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Billån</title>
+ <shortdesc>Konto oppsett for billån med dertilhørende renter</shortdesc>
+ <longdesc>Du vil nok velge dette oppsettet dersom du har et billån.</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Lån">
+    <account type="10" name="Billån"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Renter">
+    <account type="13" name="Billån Renter"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

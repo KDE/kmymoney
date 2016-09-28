@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/lt/acctchrt_business.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Verslo sąskaitos</title>
+ <shortdesc>Pilnas sąskaitų planas verslui</shortdesc>
+ <longdesc>Verslo vartotojai turėtų pasirinkti šį sąskaitų planą</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="4" name="Kreditinė kortelė"/>
+   <account type="10" name="Mokėtinos sumos"/>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Kapitalas"/>
+   <account type="16" name="Nepaskirstytasis pelnas (Nuostoliai)"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Kitos pajamos"/>
+   <account type="12" name="Pagautė"/>
+   <account type="12" name="Palūkanų pajamos"/>
+   <account type="12" name="Pardavimo pajamos"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Atlyginimai"/>
+   <account type="13" name="Automobiliai">
+    <account type="13" name="Kuras"/>
+    <account type="13" name="Mokesčiai"/>
+    <account type="13" name="Parkavimas"/>
+    <account type="13" name="Remontas"/>
+   </account>
+   <account type="13" name="Draudimas">
+    <account type="13" name="Automobilių draudimas"/>
+   </account>
+   <account type="13" name="Kanceliarinės prekės"/>
+   <account type="13" name="Knygos"/>
+   <account type="13" name="Komandiruotės išlaidos">
+    <account type="13" name="Apgyvendinimas"/>
+    <account type="13" name="Kelionės išlaidos"/>
+    <account type="13" name="Pietūs"/>
+   </account>
+   <account type="13" name="Komisiniai"/>
+   <account type="13" name="Komunalinės paslaugos">
+    <account type="13" name="Elektra"/>
+    <account type="13" name="Ryšio paslaugos"/>
+    <account type="13" name="Televizija"/>
+    <account type="13" name="Šildymas"/>
+    <account type="13" name="Šiukšlių išvežimas"/>
+   </account>
+   <account type="13" name="Koregavimas"/>
+   <account type="13" name="Labdara"/>
+   <account type="13" name="Mokesčiai">
+    <account type="13" name="Baudos"/>
+    <account type="13" name="Garantinis fondas"/>
+    <account type="13" name="Gyventojų pajamų mokestis"/>
+    <account type="13" name="Kiti mokesčiai"/>
+    <account type="13" name="Mokėtinas PVM"/>
+    <account type="13" name="Pelno mokestis"/>
+    <account type="13" name="Sodra"/>
+    <account type="13" name="Turto mokestis"/>
+   </account>
+   <account type="13" name="Nuolaidos"/>
+   <account type="13" name="Nuoma"/>
+   <account type="13" name="Nusidėvėjimas"/>
+   <account type="13" name="Pašto išlaidos"/>
+   <account type="13" name="Pietūs"/>
+   <account type="13" name="Remontas">
+    <account type="13" name="Kompiuterių remontas"/>
+    <account type="13" name="Pastatų priežiūra"/>
+   </account>
+   <account type="13" name="Įrankių nuoma"/>
+   <account type="13" name="Įvairūs"/>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Gautinos sumos"/>
+   <account type="9" name="Trumpalaikis turtas">
+    <account type="1" name="Banko sąskaita"/>
+    <account type="3" name="Kasa"/>
+    <account type="1" name="Taupomoji sąskaita"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

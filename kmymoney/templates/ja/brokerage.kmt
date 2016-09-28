@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ja/acctchrt_brokerage.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>投資勘定科目集</title>
+ <shortdesc>委託売買口座と関連する投資勘定科目（株式、債券、投資信託、利子、配当）</shortdesc>
+ <longdesc>投資（株式、債券、投資信託、利子、配当）を行っている場合は、この勘定科目集を選ぶとよいでしょう。</longdesc>
+ <accounts>
+  <account type="12" name="">
+   <account type="12" name="利子収入">
+    <account type="12" name="債券利子"/>
+   </account>
+   <account type="12" name="配当収入"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="委託手数料"/>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="投資">
+    <account type="1" name="委託売買口座">
+     <account type="9" name="インデックス型投資"/>
+     <account type="9" name="債券"/>
+     <account type="9" name="投資信託"/>
+     <account type="9" name="株式"/>
+    </account>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

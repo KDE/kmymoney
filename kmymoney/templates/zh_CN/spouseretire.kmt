@@ -1,21 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/zh_CN/acctchrt_spouseretire.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Spouse Retirement Accounts</title>
- <shortdesc>Retirement account with related investment accounts for spouse</shortdesc>
- <longdesc>You would want to select this set of accounts if you have investments in a spouse's name (stock, bond, mutual fund, index fund, interest, dividend).</longdesc>
+ <title>配偶退休科目</title>
+ <shortdesc>配偶的退休科目和相关投资科目</shortdesc>
+ <longdesc>如果您有在配偶名下的投资(股票，债券，投资基金，指数基金，利息，股息)，您可能希望选择这套科目。</longdesc>
  <accounts>
   <account type="9" name="">
-   <account type="7" name="配偶退休"/>
+   <account type="9" name="投资">
+    <account type="1" name="配偶退休">
+     <account type="15" name="债券"/>
+     <account type="15" name="市场指数"/>
+     <account type="15" name="投资基金"/>
+     <account type="15" name="股票"/>
+    </account>
+   </account>
   </account>
-  <account type="9" name=""/>
  </accounts>
 </kmymoney-account-template>

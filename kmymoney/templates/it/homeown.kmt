@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/it/acctchrt_homeown.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
@@ -18,7 +18,7 @@
     <account type="13" name="Assicurazione casa"/>
    </account>
    <account type="13" name="Imposte">
-    <account type="13" name="ICI"/>
+    <account type="13" name="IMU"/>
    </account>
    <account type="13" name="Riparazioni casa"/>
   </account>

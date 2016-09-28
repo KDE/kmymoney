@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/cs/acctchrt_renter.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Výdaje na nájemné</title>
+ <shortdesc>Výdaje spojené s nájemným</shortdesc>
+ <longdesc>Tuto sadu účtů si zvolte, pokud si pronajímáte dům anebo byt (nájemné, pojištění)</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Nájemné"/>
+   <account type="13" name="Pojištění">
+    <account type="13" name="Pojištění nájemného"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

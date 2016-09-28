@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/da/acctchrt_homeown.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Boligejer</title>
+ <shortdesc>Udgifter i forbindelse med at eje en bolig</shortdesc>
+ <longdesc>Du vil have nytte af disse konti, hvis du ejer en bolig. Konti til at holde øje med udgifter til boligen er medtaget (forsikring, skatter, vedligehold)</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Forsikring">
+    <account type="13" name="Husforsikring"/>
+   </account>
+   <account type="13" name="Fællesudgifter"/>
+   <account type="13" name="Skatter/afgifter">
+    <account type="13" name="Ejendomsskat"/>
+   </account>
+   <account type="13" name="Vedligehold af bolig"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

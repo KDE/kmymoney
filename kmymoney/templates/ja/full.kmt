@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ja/acctchrt_full.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>完全勘定科目集</title>
+ <shortdesc>デフォルトの勘定科目すべてを含む勘定科目集です。</shortdesc>
+ <longdesc>デフォルトの勘定科目すべてを含む勘定科目集です。共通勘定科目集より詳しく管理する場合にこの勘定科目集を選ぶと良いでしょう。</longdesc>
+ <accounts>
+  <account type="12" name="">
+   <account type="12" name="その他の収入"/>
+   <account type="12" name="ボーナス"/>
+   <account type="12" name="利子収入">
+    <account type="12" name="MMF利子"/>
+    <account type="12" name="その他の利子"/>
+    <account type="12" name="債券利子"/>
+    <account type="12" name="定期預金利子"/>
+    <account type="12" name="当座預金利子"/>
+    <account type="12" name="普通預金利子"/>
+   </account>
+   <account type="12" name="給与"/>
+   <account type="12" name="給与 (配偶者)"/>
+   <account type="12" name="贈与収入"/>
+   <account type="12" name="配当収入"/>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="開始残高"/>
+  </account>
+  <account type="10" name="">
+   <account type="4" name="クレジットカード"/>
+   <account type="10" name="ローン">
+    <account type="10" name="その他のローン"/>
+    <account type="10" name="住宅ローン"/>
+    <account type="10" name="教育ローン"/>
+    <account type="10" name="自動車ローン"/>
+   </account>
+   <account type="4" name="信用取引"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="その他"/>
+   <account type="13" name="オンラインサービス"/>
+   <account type="13" name="クリーニング"/>
+   <account type="13" name="ケーブルテレビ"/>
+   <account type="13" name="コンピューター"/>
+   <account type="13" name="交通機関"/>
+   <account type="13" name="住宅修繕費"/>
+   <account type="13" name="保険">
+    <account type="13" name="住宅保険"/>
+    <account type="13" name="健康保険"/>
+    <account type="13" name="生命保険"/>
+    <account type="13" name="自動車保険"/>
+    <account type="13" name="賃貸住宅保険"/>
+   </account>
+   <account type="13" name="公共料金">
+    <account type="13" name="ガス"/>
+    <account type="13" name="ゴミ収集"/>
+    <account type="13" name="水道"/>
+    <account type="13" name="電気"/>
+   </account>
+   <account type="13" name="利子">
+    <account type="13" name="その他の利子"/>
+    <account type="13" name="住宅ローン利子"/>
+    <account type="13" name="教育ローン利子"/>
+    <account type="13" name="自動車ローン利子"/>
+   </account>
+   <account type="13" name="医療費"/>
+   <account type="13" name="委託手数料"/>
+   <account type="13" name="娯楽">
+    <account type="13" name="リクリエーション"/>
+    <account type="13" name="旅行"/>
+    <account type="13" name="音楽/映画"/>
+   </account>
+   <account type="13" name="家賃"/>
+   <account type="13" name="教育"/>
+   <account type="13" name="日用品"/>
+   <account type="13" name="書籍"/>
+   <account type="13" name="消耗品"/>
+   <account type="13" name="税金">
+    <account type="13" name="その他の税"/>
+    <account type="13" name="健康保険"/>
+    <account type="13" name="公的年金"/>
+    <account type="13" name="固定資産税"/>
+    <account type="13" name="国税"/>
+    <account type="13" name="地方税"/>
+   </account>
+   <account type="13" name="税金 (配偶者)">
+    <account type="13" name="その他の税"/>
+    <account type="13" name="健康保険"/>
+    <account type="13" name="公的年金"/>
+    <account type="13" name="国税"/>
+    <account type="13" name="地方税"/>
+   </account>
+   <account type="13" name="義捐金"/>
+   <account type="13" name="自動車">
+    <account type="13" name="ガソリン"/>
+    <account type="13" name="修理維持"/>
+    <account type="13" name="通行料"/>
+    <account type="13" name="駐車場"/>
+   </account>
+   <account type="13" name="衣料品"/>
+   <account type="13" name="調整"/>
+   <account type="13" name="購読"/>
+   <account type="13" name="贈答"/>
+   <account type="13" name="趣味"/>
+   <account type="13" name="銀行手数料"/>
+   <account type="13" name="電話"/>
+   <account type="13" name="食費"/>
+   <account type="13" name="養育費"/>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="固定資産">
+    <account type="9" name="その他の資産"/>
+    <account type="9" name="住宅"/>
+    <account type="9" name="自動車"/>
+   </account>
+   <account type="9" name="投資">
+    <account type="1" name="個人年金">
+     <account type="15" name="インデックス型投資"/>
+     <account type="15" name="債券"/>
+     <account type="15" name="投資信託"/>
+     <account type="15" name="株式"/>
+    </account>
+    <account type="1" name="委託売買口座">
+     <account type="15" name="インデックス型投資"/>
+     <account type="15" name="債券"/>
+     <account type="15" name="投資信託"/>
+     <account type="15" name="株式"/>
+    </account>
+    <account type="11" name="通貨取引"/>
+    <account type="1" name="配偶者個人年金">
+     <account type="15" name="インデックス型投資"/>
+     <account type="15" name="債券"/>
+     <account type="15" name="投資信託"/>
+     <account type="15" name="株式"/>
+    </account>
+   </account>
+   <account type="9" name="流動資産">
+    <account type="1" name="MMF"/>
+    <account type="1" name="定期預金"/>
+    <account type="1" name="当座預金"/>
+    <account type="1" name="普通預金"/>
+    <account type="3" name="現金"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

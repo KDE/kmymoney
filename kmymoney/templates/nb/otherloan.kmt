@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/nb/acctchrt_otherloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Andre Lån</title>
+ <shortdesc>Kontoer for oppfølging av andre lån med dertilhørende utgifter</shortdesc>
+ <longdesc>Du vil nok velge dette oppsettet dersom du har et lån som ikke passer i de andre lån oppsettene.</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Lån">
+    <account type="10" name="Andre Lån"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Renter">
+    <account type="13" name="Andre Renter"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

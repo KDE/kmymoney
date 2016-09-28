@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/zh_CN/acctchrt_eduloan.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Education Loan</title>
- <shortdesc>Accounts for school loan and associated interest</shortdesc>
- <longdesc>You would want to select this set of accounts if you have an educational loan (education loan, education loan interest).</longdesc>
+ <title>助学贷款</title>
+ <shortdesc>关于助学贷款和相关利息的科目</shortdesc>
+ <longdesc>如果您有助学贷款(助学贷款、助学贷款利息)，您可能希望选择这套科目。</longdesc>
  <accounts>
   <account type="13" name="">
-   <account type="13" name="兴趣">
+   <account type="13" name="利息">
     <account type="13" name="教育贷款利息"/>
    </account>
   </account>

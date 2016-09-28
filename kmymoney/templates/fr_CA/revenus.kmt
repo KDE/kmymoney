@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/fr_CA/acctchrt_revenus.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
@@ -16,20 +16,20 @@
   <account type="13" name="">
    <account type="13" name="Taxes et impôts">
     <account type="13" name="Emploi">
-     <account type="13" name="RAMQ/Medicare"/>
-     <account type="13" name="Provincial"/>
-     <account type="13" name="RRQ/RPC"/>
-     <account type="13" name="Fédéral"/>
      <account type="13" name="Assurance emploi"/>
+     <account type="13" name="Fédéral"/>
+     <account type="13" name="Provincial"/>
+     <account type="13" name="RAMQ/Medicare"/>
+     <account type="13" name="RRQ/RPC"/>
     </account>
    </account>
   </account>
   <account type="12" name="">
    <account type="12" name="Emploi">
-    <account type="12" name="Frais remboursés"/>
     <account type="12" name="Commisssions"/>
-    <account type="12" name="Salaire"/>
+    <account type="12" name="Frais remboursés"/>
     <account type="12" name="Primes"/>
+    <account type="12" name="Salaire"/>
    </account>
   </account>
  </accounts>

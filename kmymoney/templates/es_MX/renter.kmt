@@ -1,17 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/es_MX/acctchrt_renter.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Gastos de inquilino</title>
  <shortdesc>Gastos asociados a alquilar una casa</shortdesc>
- <longdesc>Deseará escoger este juego de cuentas si alquila una casa o apartamento (alquiler, seguro de inquilino).</longdesc>
+ <longdesc>Deseará escoger este juego de cuentas si alquila una casa o
+   apartamento (alquiler, seguro de inquilino).</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="Alquiler"/>

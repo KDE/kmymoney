@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/de_DE/acctchrt_wohnungsw.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Kontenrahmen für Wohnungswirtschaft</title>
+ <shortdesc>Kontenrahmen für Wohnungswirtschaft</shortdesc>
+ <longdesc>BETA-Version eines allgemeinen Kontenrahmes für Wohnungswirtschaft, bearbeitet von Christoph Franzen. Fehlermeldungen an ChristophFranzen@gmx.net .</longdesc>
+ <accounts>
+  <account type="9" name="0 Anlagevermögen">
+   <account type="9" name="00 Grundstücke mit Wohnbauten">
+    <account type="9" name="000 Grundstückskosten"/>
+    <account type="9" name="001 Gebäudekosten"/>
+    <account type="9" name="002 Betriebsvorrichtungen"/>
+    <account type="9" name="003 Garagen"/>
+    <account type="9" name="004 Außenanlagen"/>
+    <account type="9" name="005 Hof- und Wegbefestigungen"/>
+   </account>
+   <account type="9" name="01 Grundstücke mit Geschäftsbauten">
+    <account type="9" name="010 Grundstückskosten"/>
+    <account type="9" name="011 Gebäudekosten"/>
+    <account type="9" name="012 Betriebsvorrichtungen"/>
+    <account type="9" name="013 Garagen"/>
+    <account type="9" name="014 Außenanlagen"/>
+    <account type="9" name="015 Hof- und Wegbefestigungen"/>
+   </account>
+   <account type="9" name="02 Grundstücke ohne Bauten">
+    <account type="9" name="020 noch nicht erschlossen"/>
+    <account type="9" name="021 im Zustand der Erschließung durch Dritte"/>
+    <account type="9" name="022 durch Dritte erschlossen"/>
+    <account type="9" name="025 im Zustand der eigenen Erschließung"/>
+    <account type="9" name="026 selbst erschlossen"/>
+   </account>
+   <account type="9" name="03 Grundstücke mit Erbbaurechten Dritter sowie Bauten auf fremden Grundstücken">
+    <account type="9" name="030 Grundstücke mit Erbbaurechten Dritter"/>
+    <account type="9" name="031 Bauten auf fremden Grundstücken">
+     <account type="9" name="0311 Gebäudekosten"/>
+     <account type="9" name="0312 Betriebsvorrichtungen"/>
+     <account type="9" name="0313 Garagen"/>
+     <account type="9" name="0314 Außenanlagen"/>
+     <account type="9" name="0315 Hof- und Wegbefestigungen"/>
+    </account>
+   </account>
+   <account type="9" name="04 Technische Anlagen und Maschinen">
+    <account type="9" name="040 geringwertige Wirtschaftsgüter"/>
+    <account type="9" name="041 sonstige Wirtschaftsgüter"/>
+   </account>
+   <account type="9" name="05 Andere Anlagen, Betriebs- und Geschäftsausstattung">
+    <account type="9" name="050 geringwertige Wirtschaftsgüter"/>
+    <account type="9" name="051 sonstige Wirtschaftsgüter"/>
+   </account>
+   <account type="9" name="06 Anlagen im Bau"/>
+   <account type="9" name="07 Bauvorbereitungskosten und geleistete Anzahlungen">
+    <account type="9" name="070 Bauvorbereitungskosten"/>
+    <account type="9" name="077 geleistete Anzahlungen"/>
+   </account>
+   <account type="9" name="08 Finanzanlagen">
+    <account type="9" name="080 Anteile an verbundenen Unternehmen"/>
+    <account type="9" name="081 Ausleihungen an verbundene Unternehmen"/>
+    <account type="9" name="082 Beteiligungen"/>
+    <account type="9" name="083 Ausleihungen an Unternehmen, mit denen ein Beteiligungsverhältnis besteht"/>
+    <account type="9" name="084 Ausleihungen an Gesellschafter"/>
+    <account type="9" name="085 Wertpapiere"/>
+    <account type="9" name="087 sonstige Ausleihungen"/>
+    <account type="9" name="089 andere Finanzanlagen"/>
+   </account>
+   <account type="9" name="09 Ingangsetzung / Erweiterung des Geschäftsbetriebes, Immaterielles">
+    <account type="9" name="090 Aufwendungen für die Ingangsetzung und Erweiterung des Geschäftsbetriebes"/>
+    <account type="9" name="091 Konzessionen, gewerbliche Schutzrechte und ähnliche Rechte"/>
+    <account type="9" name="092 Geschäfts- oder Firmenwert"/>
+    <account type="9" name="093 geleistete Anzahlungen"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

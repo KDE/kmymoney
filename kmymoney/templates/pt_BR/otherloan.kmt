@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/pt_BR/acctchrt_otherloan.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
@@ -14,13 +14,13 @@
  <longdesc>Deverá selecionar este conjunto de contas se tiver empréstimo em geral (outro empréstimo, juros do outro empréstimo).</longdesc>
  <accounts>
   <account type="13" name="">
-   <account type="13" name="Juros">
-    <account type="13" name="Outros Juros"/>
+   <account type="13" name="Juro">
+    <account type="13" name="Outro Juro"/>
    </account>
   </account>
   <account type="10" name="">
    <account type="10" name="Empréstimos">
-    <account type="10" name="Outros Empréstimos"/>
+    <account type="10" name="Outros Empréstimo"/>
    </account>
   </account>
  </accounts>

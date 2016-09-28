@@ -1,227 +1,413 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Converted using xea2kmt by Thomas Baumgart from GnuCash sources
+     Converted using xea2kmt from GnuCash sources
 
         accounts/tr_TR/acctchrt_TEKDUZ.gnucash-xea
 
      Please check the source file for possible copyright
-     and licence information.
+     and license information.
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>TEK DÜZEN</title>
+ <title>Tek Düzen</title>
  <shortdesc>Tek Düzen Hesap Planı</shortdesc>
  <longdesc>Tek Düzen Hesap Planı</longdesc>
  <accounts>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="3" name=""/>
-  <account type="10" name=""/>
-  <account type="10" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="16" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="16" name=""/>
-  <account type="10" name=""/>
-  <account type="9" name=""/>
-  <account type="13" name=""/>
-  <account type="10" name=""/>
-  <account type="16" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="16" name=""/>
-  <account type="10" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="10" name=""/>
-  <account type="10" name=""/>
-  <account type="10" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="13" name=""/>
-  <account type="10" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="10" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="13" name=""/>
-  <account type="9" name=""/>
-  <account type="16" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="16" name="">
-   <account type="16" name="A&#231;&#253;l&#253;&#254; Bakiyeleri"/>
+  <account type="9" name="">
+   <account type="9" name="Diğer Alacaklar">
+    <account type="9" name="Bağlı Ortaklıklardan Alacaklar"/>
+    <account type="9" name="Diğer Alacak Senetleri Reeskontu(-)"/>
+    <account type="9" name="Diğer Çeşitli Alacaklar"/>
+    <account type="9" name="Ortaklardan Alacaklar"/>
+    <account type="9" name="Personelden Alacaklar"/>
+    <account type="9" name="İştiraklerden Alacaklar"/>
+    <account type="9" name="Şüpheli Diğer Alacaklar Karşılığı(-)"/>
+   </account>
+   <account type="9" name="Diğer Duran Varlıklar">
+    <account type="9" name="Birikmiş Amortismanlar(-)"/>
+    <account type="9" name="Diğer Kdv"/>
+    <account type="9" name="Diğer Çeşitli Duran Varlıklar"/>
+    <account type="9" name="Elden Çıkarılacak Stoklar Ve Maddi Duran Varlıklar"/>
+    <account type="9" name="Gelecek Yıllar İhtiyacı Stoklar"/>
+    <account type="9" name="Gelecek Yıllarda İndirilecek Kdv"/>
+    <account type="9" name="Peşin Ödenen Vergi Ve Fonlar"/>
+    <account type="9" name="Stok Değer Düşüklüğü Karşılığı(-)"/>
+   </account>
+   <account type="9" name="Gelecek Yıllara Ait Giderler Ve Gelir Tahakkukları">
+    <account type="9" name="Gelecek Yıllara Ait Giderler"/>
+    <account type="9" name="Gelir Tahakkukları"/>
+   </account>
+   <account type="9" name="Maddi Duran Varlıklar">
+    <account type="9" name="Arazi Ve Arsalar"/>
+    <account type="9" name="Binalar"/>
+    <account type="9" name="Birikmiş Amortismanlar(-)"/>
+    <account type="9" name="Demirbaşlar"/>
+    <account type="9" name="Diğer Maddi Duran Varlıklar"/>
+    <account type="9" name="Taşıtlar"/>
+    <account type="9" name="Tesis, Makine Ve Cihazlar"/>
+    <account type="9" name="Verilen Avanslar"/>
+    <account type="9" name="Yapılmakta Olan Yatırımlar"/>
+    <account type="9" name="Yer Altı Ve Yer Üstü Düzenleri"/>
+   </account>
+   <account type="9" name="Maddi Olmayan Duran Varlıklar">
+    <account type="9" name="Araştırma Ve Geliştirme Giderleri"/>
+    <account type="9" name="Birikmiş Amortismanlar(-)"/>
+    <account type="9" name="Diğer Maddi Olmayan Duran Varlıklar"/>
+    <account type="9" name="Haklar"/>
+    <account type="9" name="Kuruluş Ve Örgütlenme Giderleri"/>
+    <account type="9" name="Verilen Avanslar"/>
+    <account type="9" name="Özel Maliyetler"/>
+    <account type="9" name="Şerefiye"/>
+   </account>
+   <account type="9" name="Mali Duran Varlıklar">
+    <account type="9" name="Bağlı Menkul Kıymetler"/>
+    <account type="9" name="Bağlı Menkul Kıymetler Değer Düşüklüğü Karşılığı(-)"/>
+    <account type="9" name="Bağlı Ortaklıklar"/>
+    <account type="9" name="Bağlı Ortaklıklar Sermaye Payları Değer Düşüklüğü Karşılığı(-)"/>
+    <account type="9" name="Bağlı Ortaklıklara Sermaye Taahhütleri(-)"/>
+    <account type="9" name="Diğer Mali Duran Varlıklar"/>
+    <account type="9" name="Diğer Mali Duran Varlıklar Karşılığı(-)"/>
+    <account type="9" name="İştirakler"/>
+    <account type="9" name="İştirakler Sermaye Payları Değer Düşüklüğü Karşılığı(-)"/>
+    <account type="9" name="İştiraklere Sermaye Taahhütleri(-)"/>
+   </account>
+   <account type="9" name="Ticari Alacaklar">
+    <account type="9" name="Alacak Senetleri"/>
+    <account type="9" name="Alacak Senetleri Reeskontu(-)"/>
+    <account type="9" name="Alıcılar"/>
+    <account type="9" name="Verilen Depozito Ve Teminatlar"/>
+    <account type="9" name="Şüpheli Ticari Alacaklar Karşılığı(-)"/>
+   </account>
+   <account type="9" name="Özel Tükenmeye Tabi Varlıklar">
+    <account type="9" name="Arama Giderleri"/>
+    <account type="9" name="Birikmiş Tükenme Payları(-)"/>
+    <account type="9" name="Diğer Özel Tükenmeye Tabi Varlıklar"/>
+    <account type="9" name="Hazırlık Ve Geliştirme Giderleri"/>
+    <account type="9" name="Verilen Avanslar"/>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Diğer Alacaklar">
+    <account type="9" name="Bağlı Ortaklıklardan Alacaklar"/>
+    <account type="9" name="Diğer Alacak Senetleri Reeskontu(-)"/>
+    <account type="9" name="Diğer Çeşitli Alacaklar"/>
+    <account type="9" name="Ortaklardan Alacaklar"/>
+    <account type="9" name="Personelden Alacaklar"/>
+    <account type="9" name="İştiraklerden Alacaklar"/>
+    <account type="9" name="Şüpheli Diğer Alacaklar"/>
+    <account type="9" name="Şüpheli Diğer Alacaklar Karşılığı(-)"/>
+   </account>
+   <account type="9" name="Diğer Dönen Varlıklar">
+    <account type="9" name="Devreden Kdv"/>
+    <account type="9" name="Diğer Dönen Varlıklar Karşılığı(-)"/>
+    <account type="9" name="Diğer Kdv"/>
+    <account type="9" name="Diğer Çeşitli Dönen Varlıklar"/>
+    <account type="9" name="Personel Avansları"/>
+    <account type="9" name="Peşin Ödenen Vergiler Ve Fonlar"/>
+    <account type="9" name="Sayım Ve Tesellüm Noksanları"/>
+    <account type="9" name="İndirilecek Kdv"/>
+    <account type="9" name="İş Avansları"/>
+   </account>
+   <account type="9" name="Gelecek Aylara Ait Giderler Ve Gelir Tahakkukları">
+    <account type="9" name="Gelecek Aylara Ait Giderler"/>
+    <account type="9" name="Gelir Tahakkukları"/>
+   </account>
+   <account type="9" name="Hazır Değerler">
+    <account type="1" name="Alınan Çekler"/>
+    <account type="1" name="Bankalar"/>
+    <account type="9" name="Diğer Hazır Değerler"/>
+    <account type="3" name="Kasa"/>
+    <account type="9" name="Verilen Çekler Ve Ödeme Emirleri(-)"/>
+   </account>
+   <account type="9" name="Menkul Kıymetler">
+    <account type="15" name="Diğer Menkul Kıymetler"/>
+    <account type="15" name="Hisse Senetleri"/>
+    <account type="15" name="Kamu Kesimi Tahvil, Senet Ve Bonoları"/>
+    <account type="9" name="Menkul Kıymetler Değer Düşüklüğü Karşılığı(-)"/>
+    <account type="15" name="Özel Kesim Tahvil Senet Ve Bonoları"/>
+   </account>
+   <account type="9" name="Stoklar">
+    <account type="9" name="Diğer Stoklar"/>
+    <account type="9" name="Mamuller"/>
+    <account type="9" name="Stok Değer Düşüklüğü Karşılığı(-)"/>
+    <account type="9" name="Ticari Mallar"/>
+    <account type="9" name="Verilen Sipariş Avansları"/>
+    <account type="9" name="Yarı Mamuller"/>
+    <account type="9" name="İlk Madde Malzeme"/>
+   </account>
+   <account type="9" name="Ticari Alacaklar">
+    <account type="9" name="Alacak Senetleri"/>
+    <account type="9" name="Alacak Senetleri Reeskontu(-)"/>
+    <account type="9" name="Alıcılar"/>
+    <account type="9" name="Diğer Ticari Alacaklar"/>
+    <account type="9" name="Verilen Depozito Ve Teminatlar"/>
+    <account type="9" name="Şüpheli Ticari Alacaklar"/>
+    <account type="9" name="Şüpheli Ticari Alacaklar Karşılığı(-)"/>
+   </account>
+   <account type="9" name="Yıllara Yaygın İnşaat Ve Onarım Maliyetleri">
+    <account type="9" name="Taşeronlara Verilen Avanslar"/>
+    <account type="9" name="Yıllara Yaygın İnşaat Ve Onarım Maliyetleri"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Brüt Satışlar">
+    <account type="12" name="Diğer Gelirler"/>
+    <account type="12" name="Yurt Dışı Satışlar"/>
+    <account type="12" name="Yurt İçi Satışlar"/>
+   </account>
+   <account type="12" name="Diğer Faaliyetlerden Olağan Gelir ve Kârlar">
+    <account type="12" name="Bağlı Ortaklıklardan Temettü Gelirleri"/>
+    <account type="12" name="Diğer Olağan Gelir Ve Kârlar"/>
+    <account type="12" name="Enflasyon Düzeltme Kârları"/>
+    <account type="12" name="Faiz Gelirleri"/>
+    <account type="12" name="Kambiyo Kârları"/>
+    <account type="12" name="Komisyon Gelirleri"/>
+    <account type="12" name="Konusu Kalmayan Karşılıklar"/>
+    <account type="12" name="Menkul Kıymet Satış Kârları"/>
+    <account type="12" name="Reeskont Faiz Gelirleri"/>
+    <account type="12" name="İştiraklerden Temettü Gelirleri"/>
+   </account>
+   <account type="12" name="Diğer Faaliyetlerden Olağan Gider ve Zararlar(-)">
+    <account type="12" name="Diğer Olağan Gider Ve Zararlar(-)"/>
+    <account type="12" name="Enflasyon Düzeltmesi Zararları(-)"/>
+    <account type="12" name="Kambiyo Zararları(-)"/>
+    <account type="12" name="Karşılık Giderleri(-)"/>
+    <account type="12" name="Komisyon Giderleri(-)"/>
+    <account type="12" name="Menkul Kıymet Satış Zararları(-)"/>
+    <account type="12" name="Reeskont Faiz Giderleri(-)"/>
+   </account>
+   <account type="12" name="Dönem Net Kârı veya Zararı">
+    <account type="12" name="Dönem Kârı Vergi Ve Diğer Yasal Yükümlülük Karşılıkları(-)"/>
+    <account type="12" name="Dönem Kârı Veya Zararı"/>
+    <account type="12" name="Dönem Net Kârı Veya Zararı"/>
+    <account type="12" name="Enflasyon Düzeltme Hesabı"/>
+    <account type="12" name="Yıllara Yaygın İnşaat Ve Enflasyon Düzeltme Hesabı"/>
+   </account>
+   <account type="12" name="Faaliyet Giderleri(-)">
+    <account type="12" name="Araştırma Ve Geliştirme Giderleri(-)"/>
+    <account type="12" name="Genel Yönetim Giderleri(-)"/>
+    <account type="12" name="Pazarlama Satış Ve Dağıtım Giderleri(-)"/>
+   </account>
+   <account type="12" name="Finansman Giderleri(-)">
+    <account type="12" name="Kısa Vadeli Borçlanma Giderleri(-)"/>
+    <account type="12" name="Uzun Vadeli Borçlanma Giderleri(-)"/>
+   </account>
+   <account type="12" name="Olağan Dışı Gelir ve Kârlar">
+    <account type="12" name="Diğer Olağan Dışı Gelir Ve Kârlar"/>
+    <account type="12" name="Önceki Dönem Gelir Ve Kârları"/>
+   </account>
+   <account type="12" name="Olağan Dışı Gider ve Zararlar(-)">
+    <account type="12" name="Diğer Olağan Dışı Gider Ve Zararlar(-)"/>
+    <account type="12" name="Önceki Dönem Gider Ve Zararları(-)"/>
+   </account>
+   <account type="12" name="Satış İndirimleri(-)">
+    <account type="12" name="Diğer İndirimler(-)"/>
+    <account type="12" name="Satış İndirimleri(-)"/>
+    <account type="12" name="Satıştan İadeler(-)"/>
+   </account>
+   <account type="12" name="Satışların Maliyeti(-)">
+    <account type="12" name="Diğer Satışların Maliyeti(-)"/>
+    <account type="12" name="Satılan Hizmet Maliyeti(-)"/>
+    <account type="12" name="Satılan Mamuller Maliyeti(-)"/>
+    <account type="12" name="Satılan Ticari Mallar Maliyeti(-)"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Alınan Avanslar">
+    <account type="10" name="Alınan Diğer Avanslar"/>
+    <account type="10" name="Alınan Sipariş Avansları"/>
+   </account>
+   <account type="10" name="Borç Ve Gider Karşılıkları">
+    <account type="10" name="Diğer Borç Ve Gider Karşılıkları"/>
+    <account type="10" name="Dönem Kârı Vergi Ve Diğer Yasal Yükümlülük Karşılıkları"/>
+    <account type="10" name="Dönem Kârının Peşin Ödenen Vergi Ve Diğer Yükümlülükleri(-)"/>
+    <account type="10" name="Kıdem Tazminatı Karşılığı"/>
+    <account type="10" name="Maliyet Giderleri Karşılığı"/>
+   </account>
+   <account type="10" name="Diğer Borçlar">
+    <account type="10" name="Bağlı Ortaklıklara Borçlar"/>
+    <account type="10" name="Diğer Borç Senetleri Reeskontu(-)"/>
+    <account type="10" name="Diğer Çeşitli Borçlar"/>
+    <account type="10" name="Ortaklara Borçlar"/>
+    <account type="10" name="Personele Borçlar"/>
+    <account type="10" name="İştiraklere Borçlar"/>
+   </account>
+   <account type="10" name="Diğer Kısa Vadeli Yabancı Kaynaklar">
+    <account type="10" name="Diğer Kdv"/>
+    <account type="10" name="Diğer Çeşitli Yabancı Kaynaklar"/>
+    <account type="10" name="Hesaplanan Kdv"/>
+    <account type="10" name="Merkez Ve Şubeler Cari Hesabı"/>
+    <account type="10" name="Sayım Ve Tesellüm Fazlaları"/>
+   </account>
+   <account type="10" name="Gelecek Aylara Ait Gelirler Ve Gider Tahakkukları">
+    <account type="10" name="Gelecek Aylara Ait Gelirler"/>
+    <account type="10" name="Gider Tahakkukları"/>
+   </account>
+   <account type="10" name="Mali Borçlar">
+    <account type="10" name="Banka Kredileri"/>
+    <account type="10" name="Diğer Mali Borçlar"/>
+    <account type="10" name="Menkul Kıymetler İhraç Farkı(-)"/>
+    <account type="10" name="Tahvil Anapara Borç, Taksit Ve Faizleri"/>
+    <account type="10" name="Uzun Vadeli Kredilerin Anapara Taksitleri Ve Faizleri"/>
+    <account type="10" name="Çıkarılan Bonolar Ve Senetler"/>
+    <account type="10" name="Çıkarılmış Diğer Menkul Kıymetler"/>
+   </account>
+   <account type="10" name="Ticari Borçlar">
+    <account type="10" name="Alınan Depozito Ve Teminatlar"/>
+    <account type="10" name="Borç Senetleri"/>
+    <account type="10" name="Borç Senetleri Reeskontu(-)"/>
+    <account type="10" name="Diğer Ticari Borçlar"/>
+    <account type="10" name="Satıcılar"/>
+   </account>
+   <account type="10" name="Yıllara Yaygın İnşaat Ve Onarım Hakedişleri">
+    <account type="10" name="Yıllara Yaygın İnşaat Enflasyon Düzeltme Hesabı"/>
+    <account type="10" name="Yıllara Yaygın İnşaat Ve Onarım Hakediş Bedelleri"/>
+   </account>
+   <account type="10" name="Ödenecek Vergi Ve Diğer Yükümlülükler">
+    <account type="10" name="Vadesi Geçmiş, Ertelenmiş Veya Taksitlendirilmiş Vergi Ve Diğer Yükümlülükler"/>
+    <account type="10" name="Ödenecek Diğer Yükümlülükler"/>
+    <account type="10" name="Ödenecek Sosyal Güvenlik Kesintileri"/>
+    <account type="10" name="Ödenecek Vergi Ve Fonlar"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Araştırma ve Geliştirme Giderleri">
+    <account type="13" name="Araştırma Ve Geliştirme Gider Farkları"/>
+    <account type="13" name="Araştırma Ve Geliştirme Giderleri"/>
+    <account type="13" name="Araştırma Ve Geliştirme Giderleri Yansıtma Hesabı"/>
+   </account>
+   <account type="13" name="Direkt İlk Madde ve Malzeme Giderleri">
+    <account type="13" name="Direkt İlk Madde Ve Malzeme Fiyat Farkı"/>
+    <account type="13" name="Direkt İlk Madde Ve Malzeme Giderleri Hesabı"/>
+    <account type="13" name="Direkt İlk Madde Ve Malzeme Miktar Farkı"/>
+    <account type="13" name="Direkt İlk Madde Ve Malzeme Yansıtma Hesabı"/>
+   </account>
+   <account type="13" name="Direkt İşçilik Giderleri">
+    <account type="13" name="Direkt İşçilik Giderleri"/>
+    <account type="13" name="Direkt İşçilik Giderleri Yansıtma Hesabı"/>
+    <account type="13" name="Direkt İşçilik Süre Farkları"/>
+    <account type="13" name="Direkt İşçilik Ücret Farkları"/>
+   </account>
+   <account type="13" name="Finansman Giderleri">
+    <account type="13" name="Finansman Giderleri"/>
+    <account type="13" name="Finansman Giderleri Fark Hesabı"/>
+    <account type="13" name="Finansman Giderleri Yansıtma Hesabı"/>
+   </account>
+   <account type="13" name="Genel Yönetim Giderleri">
+    <account type="13" name="Genel Yönetim Gider Farkları Hesabı"/>
+    <account type="13" name="Genel Yönetim Giderleri"/>
+    <account type="13" name="Genel Yönetim Giderleri Yansıtma Hesabı"/>
+   </account>
+   <account type="13" name="Genel Üretim Giderleri">
+    <account type="13" name="Genel Üretim Giderleri"/>
+    <account type="13" name="Genel Üretim Giderleri Bütçe Farkları"/>
+    <account type="13" name="Genel Üretim Giderleri Kapasite Farkları"/>
+    <account type="13" name="Genel Üretim Giderleri Verimlilik Giderleri"/>
+    <account type="13" name="Genel Üretim Giderleri Yansıtma Hesabı"/>
+   </account>
+   <account type="13" name="Hizmet Üretim Maliyeti">
+    <account type="13" name="Hizmet Üretim Maliyeti"/>
+    <account type="13" name="Hizmet Üretim Maliyeti Fark Hesapları"/>
+    <account type="13" name="Hizmet Üretim Maliyeti Yansıtma Hesabı"/>
+   </account>
+   <account type="13" name="Maliyet Muhasebesi Bağlantı Hesapları">
+    <account type="13" name="Maliyet Muhasebesi Bağlantı Hesabı"/>
+    <account type="13" name="Maliyet Muhasebesi Yansıtma Hesabı"/>
+   </account>
+   <account type="13" name="Pazarlama, Satış ve Dağıtım Giderleri">
+    <account type="13" name="Pazarlama Satış Ve Dağıtım Giderleri"/>
+    <account type="13" name="Pazarlama Satış Ve Dağıtım Giderleri Fark Hesabı"/>
+    <account type="13" name="Pazarlama Satış Ve Dağıtım Giderleri Yansıtma Hesabı"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Gider Çeşitleri">
+    <account type="13" name="Amortisman Ve Tükenme Payları"/>
+    <account type="13" name="Dışarıdan Sağlanan Fayda Ve Hizmetler"/>
+    <account type="13" name="Finansman Giderleri"/>
+    <account type="13" name="Gider Çeşitleri Yansıtma Hesabı"/>
+    <account type="13" name="Memur Ücret Ve Giderleri"/>
+    <account type="13" name="Vergi, Resim Ve Harçlar"/>
+    <account type="13" name="Çeşitli Giderler"/>
+    <account type="13" name="Üretim Maliyet Hesabı"/>
+    <account type="13" name="İlk Madde Ve Malzeme Giderleri"/>
+    <account type="13" name="İşçi Ücret Ve Giderleri"/>
+   </account>
   </account>
   <account type="13" name=""/>
-  <account type="10" name=""/>
-  <account type="12" name=""/>
+  <account type="10" name="">
+   <account type="10" name="Alınan Avanslar">
+    <account type="10" name="Alınan Diğer Avanslar"/>
+    <account type="10" name="Alınan Sipariş Avansları"/>
+   </account>
+   <account type="10" name="Borç Ve Gider Karşılıkları">
+    <account type="10" name="Diğer Borç Ve Gider Karşılıkları"/>
+    <account type="10" name="Kıdem Tazminatı Karşılığı"/>
+   </account>
+   <account type="10" name="Diğer Borçlar">
+    <account type="10" name="Bağlı Ortaklıklara Borçlar"/>
+    <account type="10" name="Diğer Borç Senetleri Reeskontu(-)"/>
+    <account type="10" name="Diğer Çeşitli Borçlar"/>
+    <account type="10" name="Kamuya Olan Ertelenmiş Veya Taksitlendirilmiş Borçlar"/>
+    <account type="10" name="Ortaklara Borçlar"/>
+    <account type="10" name="İştiraklere Borçlar"/>
+   </account>
+   <account type="10" name="Diğer Uzun Vadeli Yabancı Kaynaklar">
+    <account type="10" name="Diğer Çeşitli Uzun Vadeli Yabancı Kaynaklar"/>
+    <account type="10" name="Gelecek Yıllara Ertelenmiş Veya Terkin Edilecek Kdv"/>
+    <account type="10" name="Tesise Katılma Payları"/>
+   </account>
+   <account type="10" name="Gelecek Yıllara Ait Gelirler Ve Gider Tahakkukları">
+    <account type="10" name="Gelecek Yıllara Ait Gelirler"/>
+    <account type="10" name="Gider Tahakkukları"/>
+   </account>
+   <account type="10" name="Mali Borçlar">
+    <account type="10" name="Banka Kredileri"/>
+    <account type="10" name="Diğer Mali Borçlar"/>
+    <account type="10" name="Menkul Kıymetler İhraç Farkı(-)"/>
+    <account type="10" name="Çıkarılmış Diğer Menkul Kıymetler"/>
+    <account type="10" name="Çıkarılmış Tahviller"/>
+   </account>
+   <account type="10" name="Ticari Borçlar">
+    <account type="10" name="Alınan Depozito Ve Teminatlar"/>
+    <account type="10" name="Borç Senetleri"/>
+    <account type="10" name="Borç Senetleri Reeskontu(-)"/>
+    <account type="10" name="Diğer Ticari Borçlar"/>
+    <account type="10" name="Satıcılar"/>
+   </account>
+  </account>
   <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="16" name=""/>
-  <account type="13" name=""/>
-  <account type="10" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="16" name=""/>
-  <account type="10" name=""/>
-  <account type="10" name=""/>
-  <account type="10" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="10" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="13" name=""/>
-  <account type="10" name=""/>
-  <account type="16" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="10" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="12" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="1" name=""/>
-  <account type="12" name=""/>
-  <account type="10" name=""/>
-  <account type="16" name=""/>
-  <account type="16" name=""/>
-  <account type="10" name=""/>
-  <account type="16" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="13" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="16" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="16" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="10" name=""/>
-  <account type="16" name=""/>
-  <account type="16" name=""/>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="10" name=""/>
-  <account type="16" name=""/>
-  <account type="10" name=""/>
-  <account type="10" name=""/>
-  <account type="10" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="13" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="10" name=""/>
-  <account type="10" name=""/>
-  <account type="9" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name=""/>
-  <account type="13" name=""/>
-  <account type="9" name=""/>
-  <account type="9" name=""/>
-  <account type="13" name=""/>
-  <account type="10" name=""/>
-  <account type="13" name=""/>
+  <account type="16" name="">
+   <account type="16" name="Dönem Net Kârı (Zararı)">
+    <account type="16" name="Dönem Net Kârı"/>
+    <account type="16" name="Dönem Net Zararı(-)"/>
+   </account>
+   <account type="16" name="Geçmiş Yıllar Kârları">
+    <account type="16" name="Geçmiş Yıllar Kârları"/>
+   </account>
+   <account type="16" name="Geçmiş Yıllar Zararları(-)">
+    <account type="16" name="Geçmiş Yıllar Zararları(-)"/>
+   </account>
+   <account type="16" name="Kâr Yedekleri">
+    <account type="16" name="Diğer Kâr Yedekleri"/>
+    <account type="16" name="Olağanüstü Yedekler"/>
+    <account type="16" name="Statü Yedekleri"/>
+    <account type="16" name="Yasal Yedekler"/>
+    <account type="16" name="Özel Fonlar"/>
+   </account>
+   <account type="16" name="Sermaye Yedekleri">
+    <account type="16" name="Diğer Sermaye Yedekleri"/>
+    <account type="16" name="Hisse Senedi İptal Kârları"/>
+    <account type="16" name="Hisse Senetleri İhraç Primleri"/>
+    <account type="16" name="Maliyet Artışları Fonu"/>
+    <account type="16" name="İştirakler Yeniden Değerleme Artışları"/>
+   </account>
+   <account type="16" name="Ödenmiş Sermaye">
+    <account type="16" name="Sermaye"/>
+    <account type="16" name="Sermaye Düzeltmesi Olumlu Farkları"/>
+    <account type="16" name="Sermaye Düzeltmesi Olumsuz Farkları(-)"/>
+    <account type="16" name="Ödenmemiş Sermaye(-)"/>
+   </account>
+  </account>
  </accounts>
 </kmymoney-account-template>
