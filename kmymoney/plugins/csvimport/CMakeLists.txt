@@ -41,6 +41,16 @@ kcoreaddons_desktop_to_json(kmm_csvimport kmm_csvimport.desktop)
 
 target_link_libraries(kmm_csvimport
     kmm_plugin
+    Qt5::Core
+    Qt5::Widgets
+)
+
+add_library(kmm_csvimport_static STATIC ${kmm_csvimport_PART_SRCS})
+
+target_link_libraries(kmm_csvimport_static
+    kmm_plugin
+    Qt5::Core
+    Qt5::Widgets
 )
 
 ########### install files ###############
