@@ -69,6 +69,7 @@ class PivotCell: public MyMoneyMoney
 public:
   PivotCell() : m_stockSplit(MyMoneyMoney::ONE), m_cellUsed(false) {}
   PivotCell(const MyMoneyMoney& value);
+  virtual ~PivotCell();
   static PivotCell stockSplit(const MyMoneyMoney& factor);
   PivotCell operator += (const PivotCell& right);
   PivotCell operator += (const MyMoneyMoney& value);
