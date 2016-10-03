@@ -259,6 +259,10 @@ add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 # tell the KMyMoney sources that a config.h is present:
 add_definitions( -DHAVE_CONFIG_H )
 
+if(LIBOFX_HAVE_CLIENTUID)
+  add_definitions( -DLIBOFX_HAVE_CLIENTUID )
+endif(LIBOFX_HAVE_CLIENTUID)
+
 # preprocessor definitions in case this is a debug build
 string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
 if(${CMAKE_BUILD_TYPE_TOLOWER} MATCHES "^debug(full)?$|^profile$")
