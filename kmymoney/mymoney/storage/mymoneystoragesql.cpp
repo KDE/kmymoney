@@ -55,7 +55,7 @@
 #include "payeeidentifier/payeeidentifierloader.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 
-#define DBG(a) //qDebug (a)
+#define DBG(a) // qDebug() << a
 
 // subclass QSqlQuery for performance tracing
 MyMoneySqlQuery::MyMoneySqlQuery(MyMoneyStorageSql*  db)

@@ -39,6 +39,10 @@ PivotCell::PivotCell(const MyMoneyMoney& value) :
   m_cellUsed |= !value.isZero();
 }
 
+PivotCell::~PivotCell()
+{
+}
+
 PivotCell PivotCell::operator += (const PivotCell& right)
 {
   const MyMoneyMoney& r = static_cast<const MyMoneyMoney&>(right);

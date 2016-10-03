@@ -76,7 +76,6 @@ if(DOXYGEN_FOUND)
   add_custom_target(apidoc "${DOXYGEN}" "${CMAKE_CURRENT_BINARY_DIR}/kmymoney.doxygen")
 endif(DOXYGEN_FOUND)
 
-
 # check some include files exists
 set(CMAKE_REQUIRED_DEFINITIONS -D_XOPEN_SOURCE=500 -D_BSD_SOURCE)
 include (CheckIncludeFile)
