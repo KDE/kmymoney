@@ -81,6 +81,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
   // in case the installed libofx does not support clientuid
   // we disable the widget
   m_clientUidEdit->setEnabled(false);
+  m_clientUidLabel->setEnabled(false);
 #endif
 
   connect(m_applicationCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(applicationSelectionChanged()));
