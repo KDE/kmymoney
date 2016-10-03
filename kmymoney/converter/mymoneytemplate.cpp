@@ -46,7 +46,7 @@ MyMoneyTemplate::MyMoneyTemplate() :
 {
 }
 
-MyMoneyTemplate::MyMoneyTemplate(const KUrl& url) :
+MyMoneyTemplate::MyMoneyTemplate(const QUrl& url) :
     m_progressCallback(0),
     m_accountsRead(0)
 {
