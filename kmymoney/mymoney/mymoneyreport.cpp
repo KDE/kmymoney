@@ -74,6 +74,7 @@ MyMoneyReport::MyMoneyReport() :
     m_showRowTotals(false),
     m_includeForecast(false),
     m_includeMovingAverage(false),
+    m_movingAverageDays(0),
     m_includePrice(false),
     m_includeAveragePrice(false),
     m_mixedTime(false),
@@ -85,7 +86,8 @@ MyMoneyReport::MyMoneyReport() :
 
 MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& right) :
     MyMoneyObject(id),
-    m_currentDateColumn(0)
+    m_currentDateColumn(0),
+    m_movingAverageDays(0)
 {
   *this = right;
   setId(id);
@@ -116,6 +118,7 @@ MyMoneyReport::MyMoneyReport(ERowType _rt, unsigned _ct, dateOptionE _dl, EDetai
     m_showRowTotals(false),
     m_includeForecast(false),
     m_includeMovingAverage(false),
+    m_movingAverageDays(0),
     m_includePrice(false),
     m_includeAveragePrice(false),
     m_mixedTime(false),

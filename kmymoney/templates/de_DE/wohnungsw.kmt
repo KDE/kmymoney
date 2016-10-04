@@ -13,7 +13,7 @@
  <shortdesc>Kontenrahmen für Wohnungswirtschaft</shortdesc>
  <longdesc>BETA-Version eines allgemeinen Kontenrahmes für Wohnungswirtschaft, bearbeitet von Christoph Franzen. Fehlermeldungen an ChristophFranzen@gmx.net .</longdesc>
  <accounts>
-  <account type="9" name="0 Anlagevermögen">
+  <account type="9" name="">
    <account type="9" name="00 Grundstücke mit Wohnbauten">
     <account type="9" name="000 Grundstückskosten"/>
     <account type="9" name="001 Gebäudekosten"/>

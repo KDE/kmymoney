@@ -430,6 +430,7 @@ int main(int argc, char *argv[])
         qWarning() << "options:";
         qWarning() << "          --debug   - output debug information";
         qWarning() << "          --with-id - write account id attribute";
+        qWarning() << "          --no-level1-names - do not export account names for top level accounts";
         return -1;
     }
 
