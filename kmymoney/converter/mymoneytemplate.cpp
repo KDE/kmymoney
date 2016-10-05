@@ -175,29 +175,21 @@ void MyMoneyTemplate::hierarchy(QMap<QString, QTreeWidgetItem*>& list)
   bool rc = !m_accounts.isNull();
   QDomNode accounts = m_accounts;
   while (rc == true && !accounts.isNull() && accounts.isElement()) {
-    QDomElement childElement = accounts.toElement();
-    if (childElement.tagName() == "account"
-        && childElement.attribute("name").isEmpty()) {
-      switch (childElement.attribute("type").toUInt()) {
+    QDomElement rootNode = accounts.toElement();
+    QString name = rootNode.attribute("name");
+    if (rootNode.tagName() == "account") {
+        rootNode = rootNode.firstChild().toElement();
+        MyMoneyAccount::accountTypeE type = static_cast<MyMoneyAccount::accountTypeE>(accounts.toElement().attribute("type").toUInt());
+        switch (type) {
         case MyMoneyAccount::Asset:
-          list[i18n("Asset")] = 0;
-          rc = hierarchy(list, i18n("Asset"), childElement.firstChild());
-          break;
         case MyMoneyAccount::Liability:
-          list[i18n("Liability")] = 0;
-          rc = hierarchy(list, i18n("Liability"), childElement.firstChild());
-          break;
         case MyMoneyAccount::Income:
-          list[i18n("Income")] = 0;
-          rc = hierarchy(list, i18n("Income"), childElement.firstChild());
-          break;
         case MyMoneyAccount::Expense:
-          list[i18n("Expense")] = 0;
-          rc = hierarchy(list, i18n("Expense"), childElement.firstChild());
-          break;
         case MyMoneyAccount::Equity:
-          list[i18n("Equity")] = 0;
-          rc = hierarchy(list, i18n("Equity"), childElement.firstChild());
+          if (name.isEmpty())
+            name = MyMoneyAccount::accountTypeToString(type);
+          list[name] = 0;
+          rc = hierarchy(list, name, rootNode);
           break;
 
         default:
