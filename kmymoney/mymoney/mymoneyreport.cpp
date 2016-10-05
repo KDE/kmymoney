@@ -86,8 +86,8 @@ MyMoneyReport::MyMoneyReport() :
 
 MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& right) :
     MyMoneyObject(id),
-    m_currentDateColumn(0),
-    m_movingAverageDays(0)
+    m_movingAverageDays(0),
+    m_currentDateColumn(0)
 {
   *this = right;
   setId(id);
