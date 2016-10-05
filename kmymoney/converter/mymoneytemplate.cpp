@@ -213,8 +213,7 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
 
   while (rc == true && !m_accounts.isNull() && m_accounts.isElement()) {
     QDomElement childElement = m_accounts.toElement();
-    if (childElement.tagName() == "account"
-        && childElement.attribute("name").isEmpty()) {
+    if (childElement.tagName() == "account") {
       ++m_accountsRead;
       MyMoneyAccount parent;
       switch (childElement.attribute("type").toUInt()) {
@@ -240,7 +239,10 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
       }
 
       if (rc == true) {
-        rc = createAccounts(parent, childElement.firstChild());
+        if (childElement.attribute("name").isEmpty())
+            rc = createAccounts(parent, childElement.firstChild());
+        else
+            rc = createAccounts(parent, childElement);
       }
     } else {
       rc = false;
