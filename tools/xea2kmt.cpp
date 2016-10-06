@@ -48,6 +48,7 @@ bool debug = false;
 bool withID = false;
 bool noLevel1Names = false;
 bool withTax = false;
+bool prefixNameWithCode = false;
 
 int toKMyMoneyAccountType(const QString &type)
 {
@@ -147,8 +148,11 @@ public:
         while (!xml.atEnd()) {
             xml.readNext();
             QStringRef _name = xml.name();
-            if (xml.isEndElement() && _name == "account")
+            if (xml.isEndElement() && _name == "account") {
+                if (prefixNameWithCode && !code.isEmpty() && !name.startsWith(code))
+                    name = code + " " + name;
                 return true;
+            }
             if (xml.isStartElement())
             {
                 if (_name == "name")
@@ -481,11 +485,12 @@ int main(int argc, char *argv[])
         qWarning() << "xea2kmt: convert gnucash template file to kmymoney template file";
         qWarning() << argv[0] << "<options> <gnucash-template-file> [<kmymoney-template-output-file>]";
         qWarning() << "options:";
-        qWarning() << "          --debug              - output debug information";
-        qWarning() << "          --help               - this page";
-        qWarning() << "          --no-level1-names    - do not export account names for top level accounts";
-        qWarning() << "          --with-id            - write account id attribute";
-        qWarning() << "          --with-tax-related   - parse and export gnucash 'tax-related' flag";
+        qWarning() << "          --debug                   - output debug information";
+        qWarning() << "          --help                    - this page";
+        qWarning() << "          --no-level1-names         - do not export account names for top level accounts";
+        qWarning() << "          --prefix-name-with-code   - prefix account name with account code if present";
+        qWarning() << "          --with-id                 - write account id attribute";
+        qWarning() << "          --with-tax-related        - parse and export gnucash 'tax-related' flag";
         return -1;
     }
 
@@ -502,6 +507,8 @@ int main(int argc, char *argv[])
             noLevel1Names = true;
         else if (arg == "--with-tax-related")
             withTax = true;
+        else if (arg == "--prefix-name-with-code")
+            prefixNameWithCode = true;
         else if (!arg.startsWith(QLatin1String("--")))
         {
             if (inFileName.isEmpty())
