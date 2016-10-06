@@ -18,6 +18,7 @@
 
 #include <QFile>
 #include <QStringList>
+#include <QMap>
 #include <QTextStream>
 #include <QXmlStreamReader>
 #include <QtDebug>
@@ -46,6 +47,8 @@ QDebug operator <<(QDebug out, const QXmlStreamAttribute &a)
 bool debug = false;
 bool withID = false;
 bool noLevel1Names = false;
+bool withTax = false;
+bool prefixNameWithCode = false;
 
 int toKMyMoneyAccountType(const QString &type)
 {
@@ -71,12 +74,14 @@ class TemplateAccount {
 public:
     typedef QList<TemplateAccount> List;
     typedef QList<TemplateAccount*> PointerList;
+    typedef QMap<QString,QString> SlotList;
 
     QString id;
     QString type;
     QString name;
     QString code;
     QString parent;
+    SlotList slotList;
 
     TemplateAccount()
     {
@@ -87,7 +92,8 @@ public:
         type(b.type),
         name(b.name),
         code(b.code),
-        parent(b.parent)
+        parent(b.parent),
+        slotList(b.slotList)
     {
     }
 
@@ -98,6 +104,43 @@ public:
         name = "";
         code = "";
         parent = "";
+        slotList.clear();
+    }
+
+    bool readSlots(QXmlStreamReader &xml)
+    {
+        while (!xml.atEnd()) {
+            QXmlStreamReader::TokenType type = xml.readNext();
+            if (type == QXmlStreamReader::StartElement) {
+                QStringRef _name = xml.name();
+                if (_name == "slot") {
+                    type = xml.readNext();
+                    if (type == QXmlStreamReader::Characters)
+                        type = xml.readNext();
+                    if (type == QXmlStreamReader::StartElement) {
+                        QStringRef name = xml.name();
+                        QString key, value;
+                        if (name == "key")
+                            key = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
+                        type = xml.readNext();
+                        if (type == QXmlStreamReader::Characters)
+                            type = xml.readNext();
+                        if (type == QXmlStreamReader::StartElement) {
+                            name = xml.name();
+                            if (name == "value")
+                                value = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
+                        }
+                        if (!key.isEmpty() && !value.isEmpty())
+                            slotList[key] = value;
+                    }
+                }
+            } else if (type == QXmlStreamReader::EndElement) {
+                QStringRef _name = xml.name();
+                if (_name  == "slots")
+                    return true;
+            }
+        }
+        return true;
     }
 
     bool read(QXmlStreamReader &xml)
@@ -105,23 +148,28 @@ public:
         while (!xml.atEnd()) {
             xml.readNext();
             QStringRef _name = xml.name();
-            if (xml.isEndElement() && _name == "account")
+            if (xml.isEndElement() && _name == "account") {
+                if (prefixNameWithCode && !code.isEmpty() && !name.startsWith(code))
+                    name = code + " " + name;
                 return true;
+            }
             if (xml.isStartElement())
             {
-                QString value = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                 if (_name == "name")
-                    name = value;
+                    name = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                 else if (_name == "id")
-                    id = value;
+                    id = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                 else if (_name == "type")
-                    type = value;
+                    type = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                 else if (_name == "code")
-                    code = value;
+                    code = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                 else if (_name == "parent")
-                    parent = value;
+                    parent = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
+                else if (_name == "slots")
+                    readSlots(xml);
                 else
                 {
+                    xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                     if (debug)
                         qDebug() << "skipping" << _name.toString();
                 }
@@ -139,6 +187,7 @@ QDebug operator <<(QDebug out, const TemplateAccount &a)
         << "type:" << a.type
         << "code:" << a.code
         << "parent:" << a.parent
+        << "slotList:" << a.slotList
         << ")\n";
     return out;
 }
@@ -222,6 +271,14 @@ public:
                 xml.writeAttribute("name", noLevel1Names && index < 2 ? "" : account->name);
                 if (withID)
                     xml.writeAttribute("id", account->id);
+                if (withTax) {
+                    if (account->slotList.contains("tax-related")) {
+                        xml.writeStartElement("flag");
+                        xml.writeAttribute("name","Tax");
+                        xml.writeAttribute("value",account->slotList["tax-related"]);
+                        xml.writeEndElement();
+                    }
+                }
             }
             index++;
             writeAccountsAsXml(xml, account->id, index);
@@ -423,14 +480,17 @@ protected:
 
 int main(int argc, char *argv[])
 {
-    if (argc < 2)
+    if (argc < 2 || (argc == 2 && QLatin1String(argv[1]) == "--help"))
     {
-        qWarning() << "convert gnucash template file to kmymoney template file";
+        qWarning() << "xea2kmt: convert gnucash template file to kmymoney template file";
         qWarning() << argv[0] << "<options> <gnucash-template-file> [<kmymoney-template-output-file>]";
         qWarning() << "options:";
-        qWarning() << "          --debug   - output debug information";
-        qWarning() << "          --with-id - write account id attribute";
-        qWarning() << "          --no-level1-names - do not export account names for top level accounts";
+        qWarning() << "          --debug                   - output debug information";
+        qWarning() << "          --help                    - this page";
+        qWarning() << "          --no-level1-names         - do not export account names for top level accounts";
+        qWarning() << "          --prefix-name-with-code   - prefix account name with account code if present";
+        qWarning() << "          --with-id                 - write account id attribute";
+        qWarning() << "          --with-tax-related        - parse and export gnucash 'tax-related' flag";
         return -1;
     }
 
@@ -445,6 +505,10 @@ int main(int argc, char *argv[])
             withID = true;
         else if (arg == "--no-level1-names")
             noLevel1Names = true;
+        else if (arg == "--with-tax-related")
+            withTax = true;
+        else if (arg == "--prefix-name-with-code")
+            prefixNameWithCode = true;
         else if (!arg.startsWith(QLatin1String("--")))
         {
             if (inFileName.isEmpty())
