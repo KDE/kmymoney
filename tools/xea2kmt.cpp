@@ -476,15 +476,16 @@ protected:
 
 int main(int argc, char *argv[])
 {
-    if (argc < 2)
+    if (argc < 2 || (argc == 2 && QLatin1String(argv[1]) == "--help"))
     {
-        qWarning() << "convert gnucash template file to kmymoney template file";
+        qWarning() << "xea2kmt: convert gnucash template file to kmymoney template file";
         qWarning() << argv[0] << "<options> <gnucash-template-file> [<kmymoney-template-output-file>]";
         qWarning() << "options:";
-        qWarning() << "          --debug   - output debug information";
-        qWarning() << "          --with-id - write account id attribute";
-        qWarning() << "          --no-level1-names - do not export account names for top level accounts";
-        qWarning() << "          --with-tax-related - parse and export gnucash 'tax-related' flag";
+        qWarning() << "          --debug              - output debug information";
+        qWarning() << "          --help               - this page";
+        qWarning() << "          --no-level1-names    - do not export account names for top level accounts";
+        qWarning() << "          --with-id            - write account id attribute";
+        qWarning() << "          --with-tax-related   - parse and export gnucash 'tax-related' flag";
         return -1;
     }
 
