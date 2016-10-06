@@ -2154,7 +2154,9 @@ void KMyMoneyApp::slotSaveAccountTemplates()
 {
   KMSTATUS(i18n("Exporting account templates."));
 
-  QString newName = KFileDialog::getSaveFileName(KGlobalSettings::documentPath(),
+  QString locale = KGlobal::locale()->language() + "_" + KGlobal::locale()->country().toUpper();
+  QString savePath = KGlobal::dirs()->saveLocation("appdata", "templates/" + locale, true);
+  QString newName = KFileDialog::getSaveFileName(savePath,
                     i18n("*.kmt|KMyMoney template files\n"
                          "*|All files"), this, i18n("Save as..."));
   //
