@@ -184,6 +184,8 @@ void KAccountTemplateSelector::slotLoadTemplateList()
         QString country = KGlobal::locale()->countryCodeToName(exp.cap(2));
         if (country.isEmpty())
           country = exp.cap(2);
+        else
+          country.append(" (" + exp.cap(2) + ")");
         QString lang = KGlobal::locale()->languageCodeToName(exp.cap(1));
         if (d->countries.contains(country)) {
           if (d->countries[country] != *it_d) {
@@ -202,6 +204,8 @@ void KAccountTemplateSelector::slotLoadTemplateList()
         QString country = KGlobal::locale()->countryCodeToName((*it_d).toUpper());
         if (country.isEmpty())
           country = *it_d;
+        else
+          country.append(" (" + *it_d + ")");
         d->countries[country] = *it_d;
       } else {
         qDebug("'%s/%s' not scanned", qPrintable(*it), qPrintable(*it_d));
