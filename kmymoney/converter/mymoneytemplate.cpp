@@ -374,6 +374,11 @@ const QString& MyMoneyTemplate::longDescription() const
   return m_longDesc;
 }
 
+static bool nameLessThan(MyMoneyAccount &a1, MyMoneyAccount &a2)
+{
+  return a1.name() < a2.name();
+}
+
 bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAccount& acc)
 {
   QDomElement account = m_doc.createElement("account");
@@ -391,6 +396,7 @@ bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAcco
   if (acc.accountList().count() > 0) {
     QList<MyMoneyAccount> list;
     MyMoneyFile::instance()->accountList(list, acc.accountList(), false);
+    qSort(list.begin(), list.end(), nameLessThan);
     QList<MyMoneyAccount>::Iterator it;
     for (it = list.begin(); it != list.end(); ++it) {
       addAccountStructure(account, *it);
