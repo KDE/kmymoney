@@ -350,11 +350,11 @@ bool MyMoneyTemplate::exportTemplate(void(*callback)(int, int, const QString&))
   QDomElement accounts = m_doc.createElement("accounts");
   mainElement.appendChild(accounts);
 
-  // addAccountStructure(accounts, MyMoneyFile::instance()->asset());
-  // addAccountStructure(accounts, MyMoneyFile::instance()->liability());
-  addAccountStructure(accounts, MyMoneyFile::instance()->income());
+  addAccountStructure(accounts, MyMoneyFile::instance()->asset());
   addAccountStructure(accounts, MyMoneyFile::instance()->expense());
-  // addAccountStructure(accounts, MyMoneyFile::instance()->equity());
+  addAccountStructure(accounts, MyMoneyFile::instance()->income());
+  addAccountStructure(accounts, MyMoneyFile::instance()->liability());
+  addAccountStructure(accounts, MyMoneyFile::instance()->equity());
 
   return true;
 }
