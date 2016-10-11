@@ -2175,8 +2175,13 @@ void KMyMoneyApp::slotSaveAccountTemplates()
 {
   KMSTATUS(i18n("Exporting account templates."));
 
-  QString newName = QFileDialog::getSaveFileName(this, i18n("Save as..."), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
+  QString savePath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/templates/" + QLocale().name();
+  QDir d(savePath);
+  if (!d.exists())
+      d.mkpath(savePath);
+  QString newName = QFileDialog::getSaveFileName(this, i18n("Save as..."), savePath,
                     i18n("KMyMoney template files (*.kmt);;All files (*)"));
+
   //
   // If there is no file extension, then append a .kmt at the end of the file name.
   // If there is a file extension, make sure it is .kmt, delete any others.
