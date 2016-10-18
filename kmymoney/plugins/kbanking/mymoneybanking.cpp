@@ -144,6 +144,8 @@ public:
   }
 
   QTimer *passwordCacheTimer;
+  QMap<QString, QStringList>  jobList;
+  QString                     fileId;
 };
 
 KBankingPlugin::KBankingPlugin(QObject *parent, const QVariantList&) :
@@ -610,15 +612,23 @@ void KBankingPlugin::sendOnlineJob(QList<onlineJob>& jobs)
 
 QStringList KBankingPlugin::availableJobs(QString accountId)
 {
-  QStringList list = QStringList();
-
   try {
     MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
+    QString id = MyMoneyFile::instance()->value("kmm-id");
+    if(id != d->fileId) {
+      d->jobList.clear();
+      d->fileId = id;
+    }
   } catch (const MyMoneyException&) {
     // Exception usually means account was not found
     return QStringList();
   }
 
+  if(d->jobList.contains(accountId)) {
+    return d->jobList[accountId];
+  }
+
+  QStringList list;
   AB_ACCOUNT* abAccount = aqbAccount(accountId);
 
   if (!abAccount) {
@@ -639,6 +649,7 @@ QStringList KBankingPlugin::availableJobs(QString accountId)
     list.append(sepaOnlineTransfer::name());
   AB_Job_free(abJob);
 
+  d->jobList[accountId] = list;
   return list;
 }
 
