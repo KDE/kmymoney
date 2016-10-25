@@ -42,6 +42,9 @@
 #include <kencodingprober.h>
 #include <KSharedConfig>
 #include <KLocalizedString>
+#include <KIO/Scheduler>
+#include <KIO/Job>
+#include <KJobWidgets>
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -131,15 +134,17 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
   if (url.isLocalFile()) {
     emit status(i18nc("The process x is executing", "Executing %1...", url.toLocalFile()));
 
-    // TODO: prot to kf5
-#if 0
-    d->m_filter.clearProgram();
-    d->m_filter << url.toLocalFile().split(' ', QString::SkipEmptyParts);
+    QString program;
+    QStringList arguments = url.toLocalFile().split(' ', QString::SkipEmptyParts);
+    if (!arguments.isEmpty()) {
+        program = arguments.first();
+        arguments.removeFirst();
+    }
     d->m_filter.setSymbol(d->m_symbol);
 
-    d->m_filter.setOutputChannelMode(KProcess::MergedChannels);
-    d->m_filter.start();
-#endif
+    d->m_filter.setProcessChannelMode(QProcess::MergedChannels);
+    d->m_filter.start(program, arguments);
+
     if (!d->m_filter.waitForStarted()) {
       emit error(i18n("Unable to launch: %1", url.toLocalFile()));
       slotParseQuote(QString());
@@ -158,19 +163,16 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
     }
     QFile::remove(tmpFile);
     const QUrl dest = QUrl::fromLocalFile(tmpFile);
-    // TODO: port to kf5
-    //KIO::Scheduler::checkSlaveOnHold(true);
-    //KIO::Job *job = KIO::file_copy(url, dest, -1, KIO::HideProgressInfo);
-    //connect(job, SIGNAL(result(KJob*)),
-    //        this, SLOT(downloadResult(KJob*)));
+    KIO::Scheduler::checkSlaveOnHold(true);
+    KIO::Job *job = KIO::file_copy(url, dest, -1, KIO::HideProgressInfo);
+    connect(job, SIGNAL(result(KJob*)),
+            this, SLOT(downloadResult(KJob*)));
   }
   return true;
 }
 
 void WebPriceQuote::downloadResult(KJob* job)
 {
-  // TODO: port to kf5
-#if 0
   QString tmpFile = dynamic_cast<KIO::FileCopyJob*>(job)->destUrl().toLocalFile();
   QUrl url = dynamic_cast<KIO::FileCopyJob*>(job)->srcUrl();
   if (!job->error())
@@ -197,7 +199,6 @@ void WebPriceQuote::downloadResult(KJob* job)
     emit error(job->errorString());
     slotParseQuote(QString());
   }
-#endif
 }
 
 bool WebPriceQuote::launchFinanceQuote(const QString& _symbol, const QString& _id,
@@ -215,16 +216,14 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _symbol, const QString& _i
 
   //emit status(QString("(Debug) symbol=%1 id=%2...").arg(_symbol,_id));
 
-  // TODO: port to kf5
-#if 0
-  d->m_filter.clearProgram();
-  d->m_filter << "perl" << m_financeQuoteScriptPath << FQSource << KShell::quoteArg(_symbol);
+  QStringList arguments;
+  arguments << m_financeQuoteScriptPath << FQSource << KShell::quoteArg(_symbol);
   d->m_filter.setSymbol(d->m_symbol);
   emit status(i18nc("Executing 'script' 'online source' 'investment symbol' ", "Executing %1 %2 %3...", m_financeQuoteScriptPath, FQSource, _symbol));
 
-  d->m_filter.setOutputChannelMode(KProcess::MergedChannels);
-  d->m_filter.start();
-#endif
+  d->m_filter.setProcessChannelMode(QProcess::MergedChannels);
+  d->m_filter.start(QLatin1Literal("perl"), arguments);
+
   // This seems to work best if we just block until done.
   if (d->m_filter.waitForFinished()) {
     result = true;
@@ -770,16 +769,12 @@ void FinanceQuoteProcess::slotProcessExited()
 
 void FinanceQuoteProcess::launch(const QString& scriptPath)
 {
-  // TODO: port to kf5
-#if 0
-  clearProgram();
-
-  *this << "perl" << scriptPath << "-l";
-  setOutputChannelMode(KProcess::OnlyStdoutChannel);
-  start();
+  QStringList arguments;
+  arguments << scriptPath << QLatin1Literal("-l");
+  setProcessChannelMode(QProcess::ForwardedOutputChannel);
+  start(QLatin1Literal("perl"), arguments);
   if (! waitForStarted()) qWarning("Unable to start FQ script");
   return;
-#endif
 }
 
 const QStringList FinanceQuoteProcess::getSourceList() const
