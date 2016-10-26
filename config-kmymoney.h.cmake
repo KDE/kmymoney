@@ -26,7 +26,7 @@
 
 #cmakedefine KF5Holidays_FOUND 1
 
-#cmakedefine KF5Gpgmepp_FOUND 1
+#cmakedefine Gpgmepp_FOUND 1
 
 #cmakedefine KMM_ADDRESSBOOK_FOUND 1
 

@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
    * construct about data
    */
   QStringList features;
-#ifdef KF5Gpgmepp_FOUND
+#ifdef Gpgmepp_FOUND
   features << i18n("GPG encryption");
 #endif
 #ifdef KMM_ADDRESSBOOK_FOUND

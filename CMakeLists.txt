@@ -40,9 +40,10 @@ include(KMyMoneyMacros)
 
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets Svg Sql Xml Test PrintSupport)
 find_package(KF5 5.2 REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets I18n KHtml Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO
-                          OPTIONAL_COMPONENTS Gpgmepp DocTools Holidays Contacts Akonadi IdentityManagement Activities Kross)
+                          OPTIONAL_COMPONENTS DocTools Holidays Contacts Akonadi IdentityManagement Activities Kross)
 find_package(LibAlkimia 6.0.0 REQUIRED)
 find_package(KChart 2.6.0 REQUIRED)
+find_package(Gpgmepp)
 
 add_definitions("-DQT_USE_QSTRINGBUILDER" "-DQT_NO_CAST_TO_ASCII")
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
@@ -267,7 +268,7 @@ macro(nice_yesno _varname)
 endmacro()
 
 nice_yesno("KF5Holidays_FOUND")
-nice_yesno("KF5Gpgmepp_FOUND")
+nice_yesno("Gpgmepp_FOUND")
 nice_yesno("KMM_ADDRESSBOOK_FOUND")
 nice_yesno("LIBOFX_FOUND")
 nice_yesno("LIBOFX_HAVE_CLIENTUID")
@@ -283,9 +284,9 @@ message("
 
 Configure results (user options):
 --------------------------------------------
-KDE PIM holidays:                        ${nice_KF5Holidays_FOUND}
+GpgME Encryption:                        ${nice_Gpgmepp_FOUND}
 
-KDE PIM encryption:                      ${nice_KF5Gpgmepp_FOUND}
+KDE PIM holidays:                        ${nice_KF5Holidays_FOUND}
 
 KDE PIM addressbook:                     ${nice_KMM_ADDRESSBOOK_FOUND}
 
