@@ -24,8 +24,10 @@
 
 #include <kdeversion.h>
 #include <KStandardDirs>
+#ifdef HAVE_KDEPIMLIBS
 #include <KHolidays/Holidays>
 using namespace KHolidays;
+#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -50,6 +52,7 @@ KSettingsSchedules::KSettingsSchedules(QWidget* parent) :
 void KSettingsSchedules::loadList()
 {
   QStringList regions;
+#ifdef HAVE_KDEPIMLIBS
   QStringList regionCodes = HolidayRegion::regionCodes();
 
   foreach (const QString &regionCode, regionCodes) {
@@ -65,7 +68,7 @@ void KSettingsSchedules::loadList()
     regions << region;
   }
   regions.sort();
-
+#endif
   m_regionMap[m_holidayRegion->itemText(0)] = "";
   m_holidayRegion->insertItems(1, regions);
 }

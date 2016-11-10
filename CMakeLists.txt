@@ -84,7 +84,7 @@ if (NOT Gpgmepp_FOUND)
 else (NOT Gpgmepp_FOUND)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 endif (NOT Gpgmepp_FOUND)
-find_package(KdepimLibs REQUIRED)
+find_package(KdepimLibs)
 find_package(SharedMimeInfo REQUIRED)
 
 # set the configuration switch signaling that KDE PIM libraries were found
@@ -417,6 +417,7 @@ macro(nice_yesno _varname)
   endif(${_varname})
 endmacro(nice_yesno _varname)
 
+nice_yesno("KdepimLibs_FOUND")
 nice_yesno("LIBOFX_FOUND")
 nice_yesno("LIBOFX_HAVE_CLIENTUID")
 nice_yesno("KBANKING_FOUND")
@@ -433,6 +434,8 @@ message("
 
 Configure results (user options):
 --------------------------------------------
+KDE PIM holidays:                        ${nice_KdepimLibs_FOUND}
+
 OFX plugin:                              ${nice_LIBOFX_FOUND}
 OFX clientuid support                    ${nice_LIBOFX_HAVE_CLIENTUID}
 

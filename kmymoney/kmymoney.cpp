@@ -89,7 +89,9 @@
 #include <kinputdialog.h>
 #include <kxmlguifactory.h>
 #include <krecentfilesaction.h>
+#ifdef HAVE_KDEPIMLIBS
 #include <KHolidays/Holidays>
+#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -221,7 +223,9 @@ public:
       m_additionalKeyLabel(0),
       m_additionalKeyButton(0),
       m_recentFiles(0),
+#ifdef HAVE_KDEPIMLIBS
       m_holidayRegion(0),
+#endif
       m_applicationIsReady(true) {
     // since the days of the week are from 1 to 7,
     // and a day of the week is used to index this bit array,
@@ -343,9 +347,10 @@ public:
   KPushButton*          m_additionalKeyButton;
 
   KRecentFilesAction*   m_recentFiles;
-
+#ifdef HAVE_KDEPIMLIBS
   // used by the calendar interface for schedules
   KHolidays::HolidayRegion* m_holidayRegion;
+#endif
   QBitArray             m_processingDays;
   QMap<QDate, bool>     m_holidayMap;
   QStringList           m_consistencyCheckResult;
@@ -455,7 +460,9 @@ KMyMoneyApp::~KMyMoneyApp()
   delete d->m_transactionEditor;
   delete d->m_endingBalanceDlg;
   delete d->m_moveToAccountSelector;
+#ifdef HAVE_KDEPIMLIBS
   delete d->m_holidayRegion;
+#endif
   delete d;
 }
 
@@ -7741,6 +7748,7 @@ void KMyMoneyApp::slotOnlineJobLog(const QStringList& onlineJobIds)
 
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
 {
+#ifdef HAVE_KDEPIMLIBS
   //since the cost of updating the cache is now not negligible
   //check whether the region has been modified
   if (!d->m_holidayRegion || d->m_holidayRegion->regionCode() != holidayRegion) {
@@ -7752,10 +7760,14 @@ void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
     //clear and update the holiday cache
     preloadHolidays();
   }
+#else
+  Q_UNUSED(holidayRegion);
+#endif
 }
 
 bool KMyMoneyApp::isProcessingDate(const QDate& date) const
 {
+#ifdef HAVE_KDEPIMLIBS
   if (!d->m_processingDays.testBit(date.dayOfWeek()))
     return false;
   if (!d->m_holidayRegion || !d->m_holidayRegion->isValid())
@@ -7769,10 +7781,15 @@ bool KMyMoneyApp::isProcessingDate(const QDate& date) const
     d->m_holidayMap.insert(date, processingDay);
     return processingDay;
   }
+#else
+  Q_UNUSED(date);
+  return true;
+#endif
 }
 
 void KMyMoneyApp::preloadHolidays()
 {
+#ifdef HAVE_KDEPIMLIBS
   //clear the cache before loading
   d->m_holidayMap.clear();
   //only do this if it is a valid region
@@ -7801,6 +7818,7 @@ void KMyMoneyApp::preloadHolidays()
       }
     }
   }
+#endif
 }
 
 KMStatus::KMStatus(const QString &text)
