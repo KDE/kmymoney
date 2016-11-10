@@ -7,6 +7,6 @@ set(kgpgfile_STAT_SRCS
    )
 
 kde4_add_library(kgpgfile STATIC ${kgpgfile_STAT_SRCS})
-target_link_libraries(kgpgfile ${QGPGME_LIBRARIES})
+target_link_libraries(kgpgfile ${GPGMEPP_LIBS})
 
 

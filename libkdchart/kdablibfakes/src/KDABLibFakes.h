@@ -59,6 +59,9 @@
 #elif defined (Q_OS_DARWIN) || defined (Q_OS_CYGWIN)
 #define ISNAN(x) std::isnan(x)
 #define ISINF(x) std::isinf(x)
+#elif defined (__GXX_EXPERIMENTAL_CXX0X) || __cplusplus >= 201103L
+#define ISNAN(x) std::isnan(x)
+#define ISINF(x) std::isinf(x)
 #else
 #define ISNAN(x) isnan(x)
 #define ISINF(x) isinf(x)
